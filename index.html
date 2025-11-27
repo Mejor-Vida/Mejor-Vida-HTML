@@ -3,46 +3,43 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Mejor Vida Insurance – Final Expense Insurance</title>
+  <title>Mejor Vida Insurance – Seguro de Gastos Finales</title>
+  <meta name="description" content="Cobertura garantizada desde $29/mes – Aetna & Mutual of Omaha – Sin examen médico"/>
   <link rel="stylesheet" href="styles.css"/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
+  <!-- Flag Toggle – Top Right -->
+  <div class="flag-toggle">
+    <img src="https://flagcdn.com/32x24/es.png" alt="Español" class="flag active" id="flag-es" onclick="setLang('es')">
+    <img src="https://flagcdn.com/32x24/us.png" alt="English" class="flag" id="flag-en" onclick="setLang('en')">
+  </div>
+
   <!-- Header -->
   <header class="header">
     <div class="container header-inner">
       <img src="images/logo.png" alt="Mejor Vida Insurance" class="logo">
-      <div class="header-right">
-        <a
-        <div class="lang-toggle">
-          <span class="lang-es active" onclick="setLang('es')">ESP</span>
-          <div class="switch" onclick="toggleLang()">
-            <div class="switch-ball"></div>
-          </div>
-          <span class="lang-en" onclick="setLang('en')">ENG</span>
-        </div>
-        <a href="tel:5312291712" class="phone-header">531-229-1712</a>
-      </div>
+      <a href="tel:5312291712" class="phone-header">531-229-1712</a>
     </div>
   </header>
 
   <!-- Hero -->
   <section class="hero">
     <div class="container">
-      <h1 data-es="Protege el último adiós de tu familia<br>desde solo $29/mes"
+      <h1 data-es="Protege el último adiós de tu familia<br>desde solo $29 al mes"
           data-en="Protect Your Family’s Final Farewell<br>Starting at Just $29/mo">
-        Protege el último adiós de tu familia<br>desde solo $29/mes
+        Protege el último adiós de tu familia<br>desde solo $29 al mes
       </h1>
-      <p class="subtitle" data-es="Cobertura garantizada · Sin examen médico · Aprobación 100%"
-         data-en="Guaranteed Coverage · No Medical Exam · 100% Approval">
-        Cobertura garantizada · Sin examen médico · Aprobación 100%
+      <p class="subtitle" data-es="Aprobación 100% garantizada – Sin examen médico – Prima fija de por vida"
+         data-en="100% Guaranteed Approval – No Medical Exam – Locked-In Rates for Life">
+        Aprobación 100% garantizada – Sin examen médico – Prima fija de por vida
       </p>
-      <a href="cotizacion.html" class="btn-cta">Cotización Gratis en 2 Minutos →</a>
+      <a href="cotizacion.html" class="btn-cta">Cotización Gratis en 2 Minutos</a>
 
       <div class="carriers">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/9/9f/Aetna_Logo.svg" alt="Aetna">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Mutual_of_Omaha_logo.svg" alt="Mutual of Omaha">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/9/9f/Aetna_Logo.svg" alt="Aetna" height="50">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Mutual_of_Omaha_logo.svg" alt="Mutual of Omaha" height="50">
       </div>
     </div>
   </section>
@@ -69,47 +66,41 @@
           <tr><td>80</td><td>$109</td><td>$148</td></tr>
         </tbody>
       </table>
-      <a href="cotizacion.html" class="btn-secondary">Ver Mi Precio Exacto →</a>
+      <a href="cotizacion.html" class="btn-secondary">Ver Mi Precio Exacto</a>
     </div>
   </section>
 
-  <!-- Trust -->
+  <!-- Trust Badges -->
   <section class="trust">
     <div class="container grid">
-      <div>100% Aprobación Garantizada</div>
-      <div>Sin Examen Médico</div>
-      <div>Prima Fija de Por Vida</div>
-      <div>Licenciados en los 50 Estados</div>
+      <div data-es="Aprobación Garantizada" data-en="Guaranteed Approval">Aprobación Garantizada</div>
+      <div data-es="Sin Examen Médico" data-en="No Medical Exam">Sin Examen Médico</div>
+      <div data-es="Prima Fija de Por Vida" data-en="Rates Never Increase">Prima Fija de Por Vida</div>
+      <div data-es="Licenciados en 50 Estados" data-en="Licensed in All 50 States">Licenciados en 50 Estados</div>
     </div>
   </section>
 
   <!-- Footer -->
   <footer>
     <div class="container">
-      <p>Mejor Vida Insurance · 531-229-1712 · Licensed in all 50 states · © 2025</p>
+      <p>Mejor Vida Insurance • 531-229-1712 • julie@mejorvidainsurance.com • © 2025</p>
     </div>
   </footer>
 
-  <!-- WhatsApp Float -->
+  <!-- WhatsApp -->
   <a href="https://wa.me/15312291712" class="whatsapp-float" target="_blank">
     <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
   </a>
 
+  <!-- Language Script -->
   <script>
-    function toggleLang() {
-      document.querySelectorAll('[data-es]').forEach(el => {
-        const temp = el.innerHTML;
-        el.innerHTML = el.getAttribute(`data-${document.documentElement.lang === 'es' ? 'en' : 'es'}`);
-        el.setAttribute(`data-${document.documentElement.lang === 'es' ? 'en' : 'es'}`, temp);
-      });
-      document.documentElement.lang = document.documentElement.lang === 'es' ? 'en' : 'es';
-      document.querySelector('.lang-es').classList.toggle('active');
-      document.querySelector('.lang-en').classList.toggle('active');
-      document.querySelector('.switch-ball').style.transform = 
-        document.documentElement.lang === 'es' ? 'translateX(0)' : 'translateX(28px)';
-    }
     function setLang(lang) {
-      if (document.documentElement.lang !== lang) toggleLang();
+      document.documentElement.lang = lang;
+      document.querySelectorAll('[data-es]').forEach(el => {
+        el.innerHTML = el.getAttribute('data-' + lang);
+      });
+      document.getElementById('flag-es').classList.toggle('active', lang === 'es');
+      document.getElementById('flag-en').classList.toggle('active', lang === 'en');
     }
   </script>
 </body>
