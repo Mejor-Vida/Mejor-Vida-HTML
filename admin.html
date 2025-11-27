@@ -1,1 +1,59 @@
 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin – Mejor Vida</title>
+  <style>
+    body{font-family:system-ui;background:#0a5d3e;color:white;padding:40px;text-align:center;}
+    input,textarea,button{width:90%;max-width:600px;padding:16px;margin:12px;font-size:18px;border-radius:10px;border:none;}
+    button{background:#ffd700;color:#0a5d3e;font-weight:bold;cursor:pointer;}
+    .hidden{display:none}
+  </style>
+</head>
+<body>
+  <h1>Panel Admin – Mejor Vida Insurance</h1>
+  <input type="password" placeholder="Contraseña" id="pass"><br>
+  <button onclick="login()">Entrar</button>
+
+  <div id="panel" class="hidden">
+    <h2>Edita toda la página aquí</h2>
+    <textarea id="code" rows="28"></textarea><br>
+    <button onclick="save()">Guardar cambios permanentemente</button>
+    <p id="status" style="margin-top:20px;font-size:20px;font-weight:bold;"></p>
+  </div>
+
+  <script>
+    const PASSWORD = "julie2025";
+
+    async function login(){
+      if(document.getElementById('pass').value===PASSWORD){
+        document.getElementById('panel').classList.remove('hidden');
+        const r=await fetch("../index.html");
+        const t=await r.text();
+        document.getElementById("code").value=t;
+      }else alert("Contraseña incorrecta");
+    }
+
+    async function save(){
+      const content=document.getElementById("code").value;
+      const res=await fetch("https://api.github.com/repos/Mejor-Vida/Mejor-Vida-HTML/dispatches",{
+        method:"POST",
+        headers:{
+          "Accept":"application/vnd.github.v3+json",
+          "Authorization":"Bearer ${{ secrets.ADMIN_TOKEN }}",
+          "Content-Type":"application/json"
+        },
+        body:JSON.stringify({
+          event_type:"update_homepage",
+          client_payload:{content:btoa(unescape(encodeURIComponent(content)))}
+        })
+      });
+      document.getElementById("status").innerHTML=res.ok
+        ? "¡Guardado! Refresca la página principal en 15 segundos"
+        : "Error – revisa el secret";
+    }
+  </script>
+</body>
+</html>
