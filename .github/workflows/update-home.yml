@@ -1,11 +1,8 @@
-name: Update homepage from admin panel
+name: Update homepage from AI admin
 
 on:
-  workflow_dispatch:
-    inputs:
-      content:
-        description: 'New index.html content (base64)'
-        required: true
+  repository_dispatch:
+    types: [update_homepage]
 
 jobs:
   update:
@@ -14,11 +11,11 @@ jobs:
       - uses: actions/checkout@v4
       - name: Update index.html
         run: |
-          echo "${{ inputs.content }}" | base64 -d > index.html
-          git config user.name "Admin Panel"
-          git config user.email "admin@mejorvida.com"
+          echo "${{ github.event.client_payload.content }}" | base64 -d > index.html
+          git config user.name "AI Admin"
+          git config user.email "ai@mejorvida.com"
           git add index.html
-          git commit -m "Update from admin panel" || exit 0
+          git commit -m "AI update from admin panel" || exit 0
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.ADMIN_TOKEN }}
