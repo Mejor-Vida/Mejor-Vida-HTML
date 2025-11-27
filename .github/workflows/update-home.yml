@@ -9,9 +9,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - name: Update index.html
         run: |
-          echo "${{ inputs.content }}" | base64 -d > index.html
+          echo "${{ github.event.client_payload.content }}" | base64 -d > index.html
           git config user.name "Admin Panel"
           git config user.email "admin@mejorvida.com"
           git add index.html
