@@ -2,51 +2,75 @@
 <html>
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AI Admin – Mejor Vida</title>
   <style>
-    body{font-family:system-ui;background:#0a5d3e;color:white;padding:40px;text-align:center;}
-    textarea,button{width:90%;max-width:700px;padding:25px;margin:20px auto;font-size:22px;border-radius:15px;border:none;display:block;}
-    button{background:#ffd700;color:#0a5d3e;font-weight:bold;cursor:pointer;height:80px;font-size:26px;}
-    #status{font-size:26px;margin-top:30px;}
+    body {font-family:system-ui;background:#0a5d3e;color:white;padding:40px;text-align:center;}
+    textarea,button {width:90%;max-width:700px;padding:25px;margin:20px auto;font-size:22px;border-radius:15px;border:none;display:block;}
+    button {background:#ffd700;color:#0a5d3e;font-weight:bold;cursor:pointer;height:80px;font-size:26px;}
+    #status {font-size:26px;margin-top:30px;}
+    .error {color:#ff6b6b;}
+    .success {color:#10b981;}
   </style>
 </head>
 <body>
   <h1>AI Admin – Mejor Vida Insurance</h1>
-  <p>Type in English or Spanish what you want changed</p>
-  <textarea id="prompt" rows="6" placeholder="Example: Change headline to ‘Protect Your Family Today – From $29/month’ and make the button red"></textarea>
+  <p>Type what you want changed (English or Spanish)</p>
+  <textarea id="prompt" rows="6" placeholder="Example: Change the headline to 'Protect Your Family Today – From $29/month' and make the button red"></textarea>
   <button onclick="run()">Update Website with AI</button>
-  <div id="status">Ready</div>
+  <div id="status">Ready – type above</div>
 
   <script>
-    const OPENROUTER_KEY = "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"; // ← paste your sk-or-v1-… key here
+    const OPENROUTER_KEY = "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"; // ← paste your new sk-or-v1-… key here
 
     async function run() {
       const prompt = document.getElementById("prompt").value.trim();
       if (!prompt) return alert("Write something first");
-      document.getElementById("status").textContent = "AI is working…";
 
-      const current = await (await fetch("../index.html")).text();
+      const statusEl = document.getElementById("status");
+      statusEl.textContent = "AI is working…";
 
-      const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
-        method: "POST",
-        headers: {
-          "Authorization": `Bearer ${OPENROUTER_KEY}`,
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          model: "openai/gpt-4o-mini",
-          messages: [{ role: "user", content: `Current HTML:\n\n${current}\n\nUser wants: "${prompt}"\n\nReturn ONLY the full updated HTML code. No explanations.` }]
-        })
-      });
+      if (!OPENROUTER_KEY || OPENROUTER_KEY === "PASTE_YOUR_NEW_KEY_HERE") {
+        statusEl.innerHTML = '<span class="error">Error: Paste your OpenRouter key first.</span>';
+        return;
+      }
 
-      const data = await res.json();
-      const newCode = data.choices[0].message.content.replace(/^```html?|^```$/gmi, '').trim();
+      try {
+        const current = await (await fetch("../index.html")).text();
+        statusEl.textContent = "AI generating new code…";
 
-      // This opens GitHub with the AI-generated code already filled in
-      const url = `https://github.com/Mejor-Vida/Mejor-Vida-HTML/edit/main/index.html?message=AI+update&content=${btoa(unescape(encodeURIComponent(newCode)))}`;
-      window.open(url, '_blank');
+        const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+          method: "POST",
+          headers: {
+            "Authorization": `Bearer ${OPENROUTER_KEY}`,
+            "Content-Type": "application/json",
+            "HTTP-Referer": "https://mejor-vida-html.vercel.app",
+            "X-Title": "Mejor Vida Insurance"
+          },
+          body: JSON.stringify({
+            model: "openai/gpt-4o-mini",
+            messages: [{ role: "user", content: `Current HTML:\n\n${current}\n\nUser wants: "${prompt}"\n\nReturn ONLY the full updated HTML code. No explanations.` }]
+          })
+        });
 
-      document.getElementById("status").innerHTML = "AI finished! GitHub opened — just click Commit";
+        if (!res.ok) {
+          const errorText = await res.text();
+          statusEl.innerHTML = `<span class="error">AI error: ${res.status} - ${errorText.slice(0, 100)} (try new key)</span>`;
+          return;
+        }
+
+        const data = await res.json();
+        const newCode = data.choices[0].message.content.replace(/^```html?|^```$/gmi, '').trim();
+
+        statusEl.textContent = "AI done! Opening GitHub editor…";
+
+        const url = `https://github.com/Mejor-Vida/Mejor-Vida-HTML/edit/main/index.html?message=AI+update&content=${btoa(unescape(encodeURIComponent(newCode)))}`;
+        window.open(url, '_blank');
+
+        statusEl.innerHTML = '<span class="success">Success! GitHub opened — just click Commit changes</span>';
+      } catch (error) {
+        statusEl.innerHTML = `<span class="error">Error: ${error.message} (check network/key)</span>`;
+      }
     }
   </script>
 </body>
