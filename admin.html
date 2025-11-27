@@ -5,34 +5,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin – Mejor Vida</title>
   <style>
-    body { font-family: system-ui; background: #0a5d3e; color: white; padding: 40px; text-align: center; }
-    textarea, button { width: 90%; max-width: 600px; padding: 16px; margin: 12px; font-size: 18px; border-radius: 10px; border: none; }
-    button { background: #ffd700; color: #0a5d3e; font-weight: bold; cursor: pointer; }
-    #status { margin-top: 20px; font-size: 20px; font-weight: bold; }
+    body{font-family:system-ui;background:#0a5d3e;color:white;padding:40px;text-align:center;}
+    textarea,button{width:90%;max-width:650px;padding:20px;margin:15px auto;font-size:20px;border-radius:12px;border:none;display:block;}
+    button{background:#ffd700;color:#0a5d3e;font-weight:bold;cursor:pointer;height:65px;}
+    #status{margin-top:20px;font-size:24px;font-weight:bold;}
   </style>
 </head>
 <body>
   <h1>Admin – Mejor Vida Insurance</h1>
-  <p>Type your changes in plain English or Spanish</p>
-  <textarea id="prompt" rows="8" placeholder="Example: Change the main headline to 'Protect Your Family Today – From $29/month' and make the button green"></textarea><br>
-  <button onclick="save()">Open GitHub Editor to Commit</button>
-  <p id="status"></p>
+  <p>Type what you want to change (English or Spanish)</p>
+  <textarea id="prompt" rows="6" placeholder="Example: Change headline to ‘Protect Your Family Today – From $29/month’ and make the button red"></textarea>
+  <button onclick="openEditor()">Open GitHub Editor → Click Commit</button>
+  <div id="status">Ready – type your change above</div>
 
   <script>
-    async function save() {
-      const prompt = document.getElementById("prompt").value.trim();
-      if (!prompt) return alert("Write something first");
-      document.getElementById("status").textContent = "Opening GitHub editor...";
+    async function openEditor() {
+      const note = document.getElementById("prompt").value.trim() || "Quick admin update";
+      document.getElementById("status").textContent = "Opening GitHub editor…";
 
       const currentCode = await (await fetch("../index.html")).text();
-      // Simple replace based on prompt for demo (you can expand this)
-      let newCode = currentCode.replace(/<h1[^>]*>.*?<\/h1>/s, `<h1>${prompt}</h1>`); // Example: replaces headline with your prompt
+      const encoded = btoa(unescape(encodeURIComponent(currentCode)));
 
-      const encoded = btoa(unescape(encodeURIComponent(newCode)));
-      const url = `https://github.com/Mejor-Vida/Mejor-Vida-HTML/edit/main/index.html?message=Admin+update%3A+${encodeURIComponent(prompt)}&content=${encoded}`;
+      const url = `https://github.com/Mejor-Vida/Mejor-Vida-HTML/edit/main/index.html
+        + `?message=${encodeURIComponent("Admin update: " + note)}`
+        + `&description=${encodeURIComponent("Change requested: " + note)}`
+        + `&content=${encoded}`;
 
       window.open(url, '_blank');
-      document.getElementById("status").innerHTML = "GitHub opened with changes pre-filled – just click 'Commit changes'!";
+      document.getElementById("status").innerHTML = "GitHub opened – just click the green Commit button!";
     }
   </script>
 </body>
