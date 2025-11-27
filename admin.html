@@ -5,54 +5,67 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin – Mejor Vida</title>
   <style>
-    body{font-family:system-ui;background:#0a5d3e;color:white;padding:40px;text-align:center;}
-    input,textarea,button{width:90%;max-width:600px;padding:16px;margin:12px;font-size:18px;border-radius:10px;border:none;}
-    button{background:#ffd700;color:#0a5d3e;font-weight:bold;cursor:pointer;}
-    .hidden{display:none}
+    body { font-family: system-ui; background: #0a5d3e; color: white; padding: 40px; text-align: center; }
+    input, textarea, button { width: 90%; max-width: 600px; padding: 16px; margin: 12px; font-size: 18px; border-radius: 10px; border: none; }
+    button { background: #ffd700; color: #0a5d3e; font-weight: bold; cursor: pointer; }
+    .hidden { display: none; }
+    #status { margin-top: 20px; font-size: 20px; font-weight: bold; }
   </style>
 </head>
 <body>
   <h1>Admin – Mejor Vida Insurance</h1>
-  <input type="password" placeholder="Contraseña" id="pass"><br>
-  <button onclick="login()">Entrar</button>
+  <input type="password" placeholder="Password" id="pass"><br>
+  <button onclick="login()">Login</button>
 
   <div id="panel" class="hidden">
-    <h2>Edita toda la página aquí</h2>
+    <h2>Edit the full page here</h2>
     <textarea id="code" rows="28"></textarea><br>
-    <button onclick="save()">Guardar cambios permanentemente</button>
-    <p id="status" style="margin-top:20px;font-size:20px;font-weight:bold;"></p>
+    <button onclick="save()">Save Changes Permanently</button>
+    <p id="status"></p>
   </div>
 
   <script>
-    const PASSWORD = "julie2025";   // Cambia cuando quieras
+    const PASSWORD = "julie2025";
 
-    async function login(){
-      if(document.getElementById('pass').value===PASSWORD){
+    async function login() {
+      if (document.getElementById('pass').value === PASSWORD) {
         document.getElementById('panel').classList.remove('hidden');
-        const r=await fetch("../index.html");
-        const t=await r.text();
-        document.getElementById("code").value=t;
-        document.getElementById("status").textContent = "Listo para editar";
-      }else alert("Contraseña incorrecta");
+        try {
+          const r = await fetch("../index.html");
+          const t = await r.text();
+          document.getElementById("code").value = t;
+          document.getElementById("status").textContent = "Ready to edit – make changes and save";
+        } catch (e) {
+          document.getElementById("status").textContent = "Error loading code: " + e.message;
+        }
+      } else {
+        alert("Wrong password");
+      }
     }
 
-    async function save(){
-      const content=document.getElementById("code").value;
-      const res=await fetch("https://api.github.com/repos/Mejor-Vida/Mejor-Vida-HTML/dispatches",{
-        method:"POST",
-        headers:{
-          "Accept":"application/vnd.github.v3+json",
-          "Authorization":"Bearer ${{ secrets.ADMIN_TOKEN }}",
-          "Content-Type":"application/json"
-        },
-        body:JSON.stringify({
-          event_type:"update_homepage",
-          client_payload:{content:btoa(unescape(encodeURIComponent(content)))}
-        })
-      });
-      document.getElementById("status").innerHTML = res.ok
-        ? "¡Guardado! Refresca la página principal en 15 segundos"
-        : "Error – revisa la contraseña o el secret";
+    async function save() {
+      const content = document.getElementById("code").value;
+      document.getElementById("status").textContent = "Saving...";
+      try {
+        const res = await fetch("https://api.github.com/repos/Mejor-Vida/Mejor-Vida-HTML/dispatches", {
+          method: "POST",
+          headers: {
+            "Accept": "application/vnd.github.v3+json",
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            event_type: "update_homepage",
+            client_payload: { content: btoa(unescape(encodeURIComponent(content))) }
+          })
+        });
+        if (res.ok) {
+          document.getElementById("status").innerHTML = "Saved! Refresh the main site in 15 seconds";
+        } else {
+          document.getElementById("status").innerHTML = "Save failed – check console for details (F12)";
+        }
+      } catch (e) {
+        document.getElementById("status").textContent = "Error saving: " + e.message;
+      }
     }
   </script>
 </body>
