@@ -1,32 +1,38 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin – Mejor Vida</title>
   <style>
-    body{font-family:system-ui;background:#0a5d3e;color:white;padding:40px;text-align:center;}
-    textarea,button{width:90%;max-width:700px;padding:20px;margin:15px;font-size:20px;border-radius:12px;}
-    button{background:#ffd700;color:#0a5d3e;font-weight:bold;cursor:pointer;}
+    body { font-family: system-ui; background: #0a5d3e; color: white; padding: 40px; text-align: center; }
+    textarea, button { width: 90%; max-width: 600px; padding: 16px; margin: 12px; font-size: 18px; border-radius: 10px; border: none; }
+    button { background: #ffd700; color: #0a5d3e; font-weight: bold; cursor: pointer; }
+    #status { margin-top: 20px; font-size: 20px; font-weight: bold; }
   </style>
 </head>
 <body>
   <h1>Admin – Mejor Vida Insurance</h1>
-  <p>Type your changes in plain English</p>
-  <textarea id="prompt" rows="8" placeholder="Example: Change headline to ‘Protect Your Family Today – From $29/month’ and make the button red"></textarea><br>
-  <button onclick="save()">Save Changes</button>
-  <p id="status" style="font-size:22px;margin-top:20px;"></p>
+  <p>Type your changes in plain English or Spanish</p>
+  <textarea id="prompt" rows="8" placeholder="Example: Change the main headline to 'Protect Your Family Today – From $29/month' and make the button green"></textarea><br>
+  <button onclick="save()">Open GitHub Editor to Commit</button>
+  <p id="status"></p>
 
   <script>
     async function save() {
-      const prompt = document.getElementById("prompt").value || "small update";
-      document.getElementById("status").textContent = "Saving…";
+      const prompt = document.getElementById("prompt").value.trim();
+      if (!prompt) return alert("Write something first");
+      document.getElementById("status").textContent = "Opening GitHub editor...";
 
-      // This uses GitHub’s built-in “Edit file” link — 100% safe, no token needed
-      const url = `https://github.com/Mejor-Vida/Mejor-Vida-HTML/edit/main/index.html?message=Admin update: ${encodeURIComponent(prompt)}&description=Quick change from admin panel&content=${btoa(unescape(encodeURIComponent(await (await fetch("../index.html")).text())))}`;
+      const currentCode = await (await fetch("../index.html")).text();
+      // Simple replace based on prompt for demo (you can expand this)
+      let newCode = currentCode.replace(/<h1[^>]*>.*?<\/h1>/s, `<h1>${prompt}</h1>`); // Example: replaces headline with your prompt
 
-      // Opens GitHub editor in a new tab with your changes pre-filled
+      const encoded = btoa(unescape(encodeURIComponent(newCode)));
+      const url = `https://github.com/Mejor-Vida/Mejor-Vida-HTML/edit/main/index.html?message=Admin+update%3A+${encodeURIComponent(prompt)}&content=${encoded}`;
+
       window.open(url, '_blank');
-      document.getElementById("status").innerHTML = "GitHub editor opened – just click Commit!";
+      document.getElementById("status").innerHTML = "GitHub opened with changes pre-filled – just click 'Commit changes'!";
     }
   </script>
 </body>
