@@ -1,57 +1,57 @@
-/* Reset & Font */
 * { margin:0; padding:0; box-sizing:border-box; }
 body { font-family:'Inter', sans-serif; line-height:1.6; color:#1f2937; background:white; }
 .container { max-width:1100px; margin:0 auto; padding:0 20px; }
 img { max-width:100%; height:auto; }
 
 /* Header */
-.header { background:#0f172a; color:white; padding:1rem 0; }
-.header-inner { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:20px; }
-.logo { height:60px; }
-.header-right { display:flex; align-items:center; gap:25px; }
-.phone-header { font-size:1.8rem; font-weight:700; color:#60a5fa; text-decoration:none; }
-.lang-toggle { display:flex; align-items:center; background:#1e293b; padding:6px; border-radius:30px; cursor:pointer; }
-.lang-es, .lang-en { padding:8px 16px; border-radius:20px; font-weight:600; transition:all 0.3s; }
-.lang-es.active, .lang-en.active { background:#60a5fa; color:white; }
-.switch { width:56px; height:28px; background:#475569; border-radius:30px; position:relative; margin:0 10px; }
-.switch-ball { position:absolute; width:24px; height:24px; background:white; border-radius:50%; top:2px; left:2px; transition:0.3s; }
+.header { background:#0f172a; color:white; padding:1.2rem 0; }
+.header-inner { display:flex; justify-content:space-between; align-items:center; }
+.logo { height:62px; }
+.phone-header { font-size:1.9rem; font-weight:700; color:#60a5fa; text-decoration:none; }
+
+/* Flag Toggle – Top Right */
+.flag-toggle {
+  position:fixed; top:18px; right:18px; z-index:1000;
+  background:white; padding:8px 12px; border-radius:30px;
+  box-shadow:0 4px 20px rgba(0,0,0,0.15); display:flex; gap:10px;
+  border:2px solid #e2e8f0;
+}
+.flag { width:36px; border-radius:6px; cursor:pointer; transition:all 0.3s; opacity:0.65; }
+.flag.active { opacity:1; transform:scale(1.12); border:2px solid #3b82f6; }
 
 /* Hero */
-.hero { background:#f8fafc; text-align:center; padding:100px 20px; }
-.hero h1 { font-size:3rem; margin-bottom:1rem; color:#0f172a; }
-.hero .subtitle { font-size:1.4rem; color:#475569; margin:1.5rem 0 2.5rem; }
-.btn-cta { display:inline-block; background:#3b82f6; color:white; padding:18px 40px; font-size:1.4rem; font-weight:600; border-radius:50px; text-decoration:none; box-shadow:0 8px 25px rgba(59,130,246,0.3); transition:0.3s; }
-.btn-cta:hover { background:#2563eb; transform:translateY(-4px); }
-.carriers { margin-top:50px; }
-.carriers img { height:55px; margin:0 25px; }
+.hero { background:#f8fafc; text-align:center; padding:110px 20px; }
+.hero h1 { font-size:3.1rem; margin-bottom:1.2rem; color:#0f172a; }
+.subtitle { font-size:1.45rem; color:#475569; margin:1.8rem 0 2.8rem; }
+.btn-cta { display:inline-block; background:#3b82f6; color:white; padding:19px 42px; font-size:1.5rem; font-weight:600; border-radius:50px; text-decoration:none; box-shadow:0 10px 30px rgba(59,130,246,0.35); transition:0.3s; }
+.btn-cta:hover { background:#2563eb; transform:translateY(-5px); }
+.carriers { margin-top:55px; }
+.carriers img { height:55px; margin:0 30px; }
 
-/* Rates Table */
-.rates { padding:90px 20px; text-align:center; background:white; }
-.rates h2 { font-size:2.3rem; margin-bottom:2rem; color:#0f172a; }
-table { width:100%; max-width:700px; margin:0 auto 40px; border-collapse:collapse; box-shadow:0 10px 30px rgba(0,0,0,0.08); border-radius:12px; overflow:hidden; }
-th, td { padding:20px; text-align:center; font-size:1.3rem; }
+/* Rates */
+.rates { padding:100px 20px; text-align:center; background:white; }
+.rates h2 { font-size:2.4rem; margin-bottom:2.2rem; color:#0f172a; }
+table { width:100%; max-width:720px; margin:0 auto 45px; border-collapse:collapse; border-radius:14px; overflow:hidden; box-shadow:0 12px 35px rgba(0,0,0,0.1); }
+th, td { padding:22px; font-size:1.35rem; text-align:center; }
 th { background:#0f172a; color:white; }
 td { background:#f8fafc; }
 tr:nth-child(even) td { background:#f1f5f9; }
-.btn-secondary { background:#10b981; padding:16px 36px; font-size:1.3rem; border-radius:50px; color:white; text-decoration:none; }
+.btn-secondary { background:#10b981; padding:17px 38px; font-size:1.35rem; border-radius:50px; color:white; text-decoration:none; }
 
-/* Trust Badges */
-.trust { padding:60px 20px; background:#0f172a; color:white; }
-.trust .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:20px; text-align:center; font-size:1.2rem; font-weight:500; }
+/* Trust */
+.trust { padding:70px 20px; background:#0f172a; color:white; }
+.trust .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:25px; text-align:center; font-size:1.25rem; font-weight:500; }
 
 /* Footer */
-footer { background:#1e293b; color:#94a3b8; text-align:center; padding:30px; font-size:0.95rem; }
+footer { background:#1e293b; color:#94a3b8; text-align:center; padding:35px; }
 
-/* WhatsApp Float */
-.whatsapp-float {
-  position:fixed; bottom:30px; right:30px; width:70px; height:70px; background:#25d366; border-radius:50%; box-shadow:0 6px 20px rgba(0,0,0,0.25); display:flex; align-items:center; justify-content:center; z-index:1000;
-}
-.whatsapp-float img { width:40px; }
+/* WhatsApp */
+.whatsapp-float { position:fixed; bottom:30px; right:30px; width:72px; height:72px; background:#25d366; border-radius:50%; box-shadow:0 6px 20px rgba(0,0,0,0.3); display:flex; align-items:center; justify-content:center; z-index:999; }
+.whatsapp-float img { width:42px; }
 
 /* Mobile */
 @media (max-width:768px) {
-  .hero h1 { font-size:2.3rem; }
-  .header-inner { flex-direction:column; text-align:center; }
-  .phone-header { font-size:1.6rem; }
-  table { font-size:1rem; }
+  .hero h1 { font-size:2.4rem; }
+  .header-inner { flex-direction:column; gap:15px; }
+  table { font-size:1.1rem; }
 }
