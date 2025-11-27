@@ -1,1 +1,68 @@
 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cotización Gratis – Mejor Vida Insurance</title>
+  <meta name="description" content="Cotiza tu seguro de vida o salud en menos de 2 minutos"/>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+  <header>
+    <div class="container header">
+      <img src="images/logo.png" alt="Mejor Vida Insurance" class="logo"/>
+      <div class="contact-header">
+        <img src="images/icon-phone.png" alt="Teléfono"/> 
+        <span>Llama gratis: <strong>1-800-MEJOR-VIDA</strong></span>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero" style="padding: 60px 20px;">
+    <div class="container" style="max-width: 800px; margin: 0 auto;">
+      <h1 style="font-size: 2.5rem; margin-bottom: 1rem;">Cotización 100% Gratis</h1>
+      <p class="subtitle">Responde estas preguntas rápidas y te mostraremos las mejores opciones en segundos</p>
+
+      <form id="cotizacion-form" action="https://formsubmit.co/tu-email-aqui@gmail.com" method="POST">
+        <div class="form-grid">
+          <input type="text" name="nombre" placeholder="Nombre completo" required />
+          <input type="tel" name="telefono" placeholder="Teléfono (con código de área)" required />
+          <input type="email" name="email" placeholder="Correo electrónico" required />
+          
+          <select name="tipo_seguro" required>
+            <option value="" disabled selected>Tipo de seguro</option>
+            <option>Vida a término</option>
+            <option>Vida entera</option>
+            <option>Salud individual</option>
+            <option>Salud familiar</option>
+          </select>
+
+          <input type="date" name="fecha_nacimiento" placeholder="Fecha de nacimiento" required />
+          <select name="fumador">
+            <option value="" disabled selected>¿Fumas?</option>
+            <option>No</option>
+            <option>Sí</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn-primary" style="width: 100%; padding: 18px; font-size: 1.4rem; margin-top: 2rem;">
+          Mostrar Mi Cotización Gratis
+        </button>
+      </form>
+
+      <p style="text-align:center; margin-top: 30px; opacity: 0.8;">
+        Sin compromiso • Tus datos están 100% protegidos
+      </p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>© 2025 Mejor Vida Insurance · Todos los derechos reservados</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
