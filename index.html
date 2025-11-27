@@ -1,16 +1,15 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mejor Vida Insurance – Seguro de Gastos Finales</title>
-  <meta name="description" content="Cobertura garantizada desde $29/mes – Aetna & Mutual of Omaha – Sin examen médico"/>
-  <link rel="stylesheet" href="styles.css"/>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <meta name="description" content="Cobertura garantizada desde $29/mes con Aetna y Mutual of Omaha. Sin examen médico.">
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-
-  <!-- Flag Toggle – Top Right -->
+  <!-- Flag Toggle -->
   <div class="flag-toggle">
     <img src="https://flagcdn.com/32x24/es.png" alt="Español" class="flag active" id="flag-es" onclick="setLang('es')">
     <img src="https://flagcdn.com/32x24/us.png" alt="English" class="flag" id="flag-en" onclick="setLang('en')">
@@ -18,76 +17,77 @@
 
   <!-- Header -->
   <header class="header">
-    <div class="container header-inner">
-      <img src="images/logo.png" alt="Mejor Vida Insurance" class="logo">
-      <a href="tel:5312291712" class="phone-header">531-229-1712</a>
+    <div class="container">
+      <div class="header-content">
+        <img src="images/logo.png" alt="Mejor Vida Insurance" class="logo">
+        <div class="header-text">
+          <h4 data-es="Llámanos hoy" data-en="Call Today">Llámanos hoy</h4>
+          <a href="tel:5312291712" class="phone">531-229-1712</a>
+        </div>
+      </div>
     </div>
   </header>
 
-  <!-- Hero -->
+  <!-- Hero Section (Adapted from Insure's carousel-style hero) -->
   <section class="hero">
     <div class="container">
-      <h1 data-es="Protege el último adiós de tu familia<br>desde solo $29 al mes"
-          data-en="Protect Your Family’s Final Farewell<br>Starting at Just $29/mo">
-        Protege el último adiós de tu familia<br>desde solo $29 al mes
-      </h1>
-      <p class="subtitle" data-es="Aprobación 100% garantizada – Sin examen médico – Prima fija de por vida"
-         data-en="100% Guaranteed Approval – No Medical Exam – Locked-In Rates for Life">
-        Aprobación 100% garantizada – Sin examen médico – Prima fija de por vida
-      </p>
-      <a href="cotizacion.html" class="btn-cta">Cotización Gratis en 2 Minutos</a>
-
-      <div class="carriers">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/9/9f/Aetna_Logo.svg" alt="Aetna" height="50">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Mutual_of_Omaha_logo.svg" alt="Mutual of Omaha" height="50">
+      <div class="hero-content">
+        <h1 data-es="Protege el Último Adiós de Tu Familia" data-en="Protect Your Family's Final Farewell">Protege el Último Adiós de Tu Familia</h1>
+        <p class="hero-subtitle" data-es="Cobertura de gastos finales garantizada desde $29/mes. Sin examen médico. Aprobación 100%." data-en="Guaranteed Final Expense Coverage from $29/mo. No Medical Exam. 100% Approval.">Cobertura de gastos finales garantizada desde $29/mes. Sin examen médico. Aprobación 100%.</p>
+        <a href="cotizacion.html" class="btn-primary">Obtener Cotización Gratis</a>
+        <div class="hero-carriers">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/9/9f/Aetna_Logo.svg" alt="Aetna" height="45">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Mutual_of_Omaha_logo.svg" alt="Mutual of Omaha" height="45">
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Rates Table -->
-  <section class="rates">
+  <!-- Rates Table (Adapted from Insure's pricing section) -->
+  <section class="rates-section">
     <div class="container">
-      <h2 data-es="Precios mensuales reales – Cobertura $10,000"
-          data-en="Real Monthly Rates – $10,000 Coverage">
-        Precios mensuales reales – Cobertura $10,000
-      </h2>
-      <table>
-        <thead>
-          <tr>
-            <th data-es="Edad" data-en="Age">Edad</th>
-            <th data-es="Mujer" data-en="Female">Mujer</th>
-            <th data-es="Hombre" data-en="Male">Hombre</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>50</td><td>$29</td><td>$36</td></tr>
-          <tr><td>60</td><td>$39</td><td>$51</td></tr>
-          <tr><td>70</td><td>$59</td><td>$78</td></tr>
-          <tr><td>80</td><td>$109</td><td>$148</td></tr>
-        </tbody>
-      </table>
-      <a href="cotizacion.html" class="btn-secondary">Ver Mi Precio Exacto</a>
+      <h2 data-es="Ejemplos de Precios Mensuales ($10,000 de Cobertura)" data-en="Monthly Rate Examples ($10,000 Coverage)">Ejemplos de Precios Mensuales ($10,000 de Cobertura)</h2>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th data-es="Edad" data-en="Age">Edad</th>
+              <th data-es="Mujer" data-en="Female">Mujer</th>
+              <th data-es="Hombre" data-en="Male">Hombre</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>50</td><td>$29</td><td>$36</td></tr>
+            <tr><td>60</td><td>$39</td><td>$51</td></tr>
+            <tr><td>70</td><td>$59</td><td>$78</td></tr>
+            <tr><td>80</td><td>$109</td><td>$148</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <a href="cotizacion.html" class="btn-secondary">Ver Mi Cotización Personalizada</a>
     </div>
   </section>
 
-  <!-- Trust Badges -->
-  <section class="trust">
-    <div class="container grid">
-      <div data-es="Aprobación Garantizada" data-en="Guaranteed Approval">Aprobación Garantizada</div>
-      <div data-es="Sin Examen Médico" data-en="No Medical Exam">Sin Examen Médico</div>
-      <div data-es="Prima Fija de Por Vida" data-en="Rates Never Increase">Prima Fija de Por Vida</div>
-      <div data-es="Licenciados en 50 Estados" data-en="Licensed in All 50 States">Licenciados en 50 Estados</div>
+  <!-- Benefits (Adapted from Insure's services grid) -->
+  <section class="benefits">
+    <div class="container">
+      <div class="grid">
+        <div class="benefit-card" data-es="Aprobación Garantizada" data-en="Guaranteed Approval">Aprobación Garantizada</div>
+        <div class="benefit-card" data-es="Sin Examen Médico" data-en="No Medical Exam">Sin Examen Médico</div>
+        <div class="benefit-card" data-es="Prima Fija de Por Vida" data-en="Lifetime Locked Rates">Prima Fija de Por Vida</div>
+        <div class="benefit-card" data-es="Pago Libre de Impuestos" data-en="Tax-Free Payout">Pago Libre de Impuestos</div>
+      </div>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer>
+  <footer class="footer">
     <div class="container">
-      <p>Mejor Vida Insurance • 531-229-1712 • julie@mejorvidainsurance.com • © 2025</p>
+      <p data-es="Mejor Vida Insurance | 531-229-1712 | julie@mejorvidainsurance.com | Licenciados en 50 estados" data-en="Mejor Vida Insurance | 531-229-1712 | julie@mejorvidainsurance.com | Licensed in All 50 States">Mejor Vida Insurance | 531-229-1712 | julie@mejorvidainsurance.com | Licenciados en 50 estados</p>
     </div>
   </footer>
 
-  <!-- WhatsApp -->
+  <!-- WhatsApp Float -->
   <a href="https://wa.me/15312291712" class="whatsapp-float" target="_blank">
     <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
   </a>
@@ -99,8 +99,8 @@
       document.querySelectorAll('[data-es]').forEach(el => {
         el.innerHTML = el.getAttribute('data-' + lang);
       });
-      document.getElementById('flag-es').classList.toggle('active', lang === 'es');
-      document.getElementById('flag-en').classList.toggle('active', lang === 'en');
+      document.querySelectorAll('.flag').forEach(f => f.classList.remove('active'));
+      document.getElementById('flag-' + lang).classList.add('active');
     }
   </script>
 </body>
