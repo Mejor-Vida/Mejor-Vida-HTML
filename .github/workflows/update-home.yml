@@ -1,0 +1,21 @@
+name: Update homepage from admin panel
+
+on:
+  repository_dispatch:
+    types: [update_homepage]
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Update index.html
+        run: |
+          echo "${{ inputs.content }}" | base64 -d > index.html
+          git config user.name "Admin Panel"
+          git config user.email "admin@mejorvida.com"
+          git add index.html
+          git commit -m "Update from admin panel" || exit 0
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.ADMIN_TOKEN }}
