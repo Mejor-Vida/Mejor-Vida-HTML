@@ -1,33 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin – Mejor Vida Insurance</title>
+  <title>AI Admin – Mejor Vida</title>
   <style>
-    body {font-family:system-ui;background:#0a5d3e;color:white;padding:60px;text-align:center;line-height:1.8;}
-    h1 {font-size:32px;margin-bottom:40px;}
-    .big-button {
-      display:block;width:90%;max-width:600px;margin:40px auto;padding:30px;
-      background:#ffd700;color:#0a5d3e;font-size:28px;font-weight:bold;border-radius:20px;
-      text-decoration:none;box-shadow:0 10px 30px rgba(0,0,0,0.3);
-    }
-    .big-button:hover {background:#ffed4e;transform:scale(1.03);}
-    p {font-size:20px;}
+    body{font-family:system-ui;background:#0a5d3e;color:white;padding:40px;text-align:center;}
+    textarea,button{width:90%;max-width:700px;padding:25px;margin:20px auto;font-size:22px;border-radius:15px;border:none;display:block;}
+    button{background:#ffd700;color:#0a5d3e;font-weight:bold;cursor:pointer;height:80px;font-size:26px;}
+    #status{font-size:26px;margin-top:30px;}
   </style>
 </head>
 <body>
+  <h1>AI Admin – Mejor Vida Insurance</h1>
+  <p>Type in English or Spanish what you want changed</p>
+  <textarea id="prompt" rows="6" placeholder="Example: Change headline to ‘Protect Your Family Today – From $29/month’ and make the button red"></textarea>
+  <button onclick="run()">Update Website with AI</button>
+  <div id="status">Ready</div>
 
-  <h1>Admin – Mejor Vida Insurance</h1>
-  <p>Click the button below → GitHub editor opens → make any change → click green “Commit changes”</p>
+  <script>
+    const OPENROUTER_KEY = "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"; // ← paste your sk-or-v1-… key here
 
-  <a href="https://github.com/Mejor-Vida/Mejor-Vida-HTML/edit/main/index.html" 
-     target="_blank" 
-     class="big-button">
-    OPEN GITHUB EDITOR NOW
-  </a>
+    async function run() {
+      const prompt = document.getElementById("prompt").value.trim();
+      if (!prompt) return alert("Write something first");
+      document.getElementById("status").textContent = "AI is working…";
 
-  <p>Bookmark this page — you now have full control forever</p>
+      const current = await (await fetch("../index.html")).text();
 
+      const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          "Authorization": `Bearer ${OPENROUTER_KEY}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          model: "openai/gpt-4o-mini",
+          messages: [{ role: "user", content: `Current HTML:\n\n${current}\n\nUser wants: "${prompt}"\n\nReturn ONLY the full updated HTML code. No explanations.` }]
+        })
+      });
+
+      const data = await res.json();
+      const newCode = data.choices[0].message.content.replace(/^```html?|^```$/gmi, '').trim();
+
+      // This opens GitHub with the AI-generated code already filled in
+      const url = `https://github.com/Mejor-Vida/Mejor-Vida-HTML/edit/main/index.html?message=AI+update&content=${btoa(unescape(encodeURIComponent(newCode)))}`;
+      window.open(url, '_blank');
+
+      document.getElementById("status").innerHTML = "AI finished! GitHub opened — just click Commit";
+    }
+  </script>
 </body>
 </html>
