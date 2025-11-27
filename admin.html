@@ -1,37 +1,33 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Admin – Mejor Vida</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin – Mejor Vida Insurance</title>
   <style>
-    body{font-family:system-ui;background:#0a5d3e;color:white;padding:60px;text-align:center;}
-    textarea,button{margin:30px auto;display:block;width:90%;max-width:600px;padding:20px;font-size:20px;border-radius:12px;border:none;}
-    button{background:#ffd700;color:#0a5d3e;font-weight:bold;cursor:pointer;height:70px;font-size:24px;}
-    #status{font-size:26px;margin-top:30px;}
+    body {font-family:system-ui;background:#0a5d3e;color:white;padding:60px;text-align:center;line-height:1.8;}
+    h1 {font-size:32px;margin-bottom:40px;}
+    .big-button {
+      display:block;width:90%;max-width:600px;margin:40px auto;padding:30px;
+      background:#ffd700;color:#0a5d3e;font-size:28px;font-weight:bold;border-radius:20px;
+      text-decoration:none;box-shadow:0 10px 30px rgba(0,0,0,0.3);
+    }
+    .big-button:hover {background:#ffed4e;transform:scale(1.03);}
+    p {font-size:20px;}
   </style>
 </head>
 <body>
+
   <h1>Admin – Mejor Vida Insurance</h1>
-  <textarea id="note" rows="6" placeholder="Type your change here (example: Change headline to “$25/month Coverage!”)</textarea>
-  <button onclick="go()">OPEN GITHUB EDITOR → CLICK COMMIT</button>
-  <div id="status">Ready</div>
+  <p>Click the button below → GitHub editor opens → make any change → click green “Commit changes”</p>
 
-  <script>
-    function go() {
-      const note = document.getElementById("note").value.trim() || "quick update";
-      const url = "https://github.com/Mejor-Vida/Mejor-Vida-HTML/edit/main/index.html?message=" + encodeURIComponent("Admin: " + note);
-      
-      // This FORCES the tab to open — works on every browser
-      const a = document.createElement('a');
-      a.href = url;
-      a.target = "_blank";
-      a.rel = "noopener";
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
+  <a href="https://github.com/Mejor-Vida/Mejor-Vida-HTML/edit/main/index.html" 
+     target="_blank" 
+     class="big-button">
+    OPEN GITHUB EDITOR NOW
+  </a>
 
-      document.getElementById("status").innerHTML = "GitHub opened! Just click the green Commit button";
-    }
-  </script>
+  <p>Bookmark this page — you now have full control forever</p>
+
 </body>
 </html>
