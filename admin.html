@@ -21,7 +21,7 @@
   <div id="status">Ready – type above</div>
 
   <script>
-    const OPENROUTER_KEY = "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"; // ← paste your new sk-or-v1-… key here
+    const OPENROUTER_KEY = "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"; // ← paste your new sk-or-v1-… key here
 
     async function run() {
       const prompt = document.getElementById("prompt").value.trim();
@@ -30,7 +30,7 @@
       const statusEl = document.getElementById("status");
       statusEl.textContent = "AI is working…";
 
-      if (!OPENROUTER_KEY || OPENROUTER_KEY === "PASTE_YOUR_NEW_KEY_HERE") {
+      if (!OPENROUTER_KEY || OPENROUTER_KEY === "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") {
         statusEl.innerHTML = '<span class="error">Error: Paste your OpenRouter key first.</span>';
         return;
       }
