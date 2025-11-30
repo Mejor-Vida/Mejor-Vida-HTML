@@ -37,23 +37,8 @@ function switchLanguage(lang) {
     headerLogo.alt = 'Mejor Vida Insurance LLC Logo';
   }
   
-  // Update carrier sentence
-  updateCarrierSentence(lang);
-  
   // Update form select options
   updateFormOptions(lang);
-}
-
-// Function to update carrier sentence
-function updateCarrierSentence(lang) {
-  const carrierSentenceEs = document.getElementById('carrier-sentence-es');
-  const carrierSentenceEn = document.getElementById('carrier-sentence-en');
-  
-  if (lang === 'es') {
-    carrierSentenceEs.textContent = 'Julie es agente independiente con acceso a Aetna, Mutual of Omaha, y otras aseguradoras de confianza.';
-  } else {
-    carrierSentenceEn.textContent = 'Julie is an independent agent with access to Aetna, Mutual of Omaha, and other trusted carriers.';
-  }
 }
 
 // Function to update form select options
