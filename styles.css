@@ -122,7 +122,33 @@ a:hover {
   background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
   color: white;
   padding: 4rem 0;
-  text-align: center;
+}
+
+/* Two-column parent */
+.hero-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Left column */
+.hero-text {
+  flex: 1;
+  text-align: left;
+}
+
+/* Right column */
+.hero-image {
+  flex: 1;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.hero-image img {
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
 .hero-badge {
@@ -136,19 +162,17 @@ a:hover {
 }
 
 .hero h1 {
-  font-size: 2.5rem;
+  font-size: 2.2rem;
   font-weight: 800;
   margin-bottom: 1rem;
   line-height: 1.2;
 }
 
 .hero-subheading {
-  font-size: 1.25rem;
-  margin-bottom: 2rem;
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
   opacity: 0.95;
-  max-width: 700px;
-  margin-left: auto;
-  margin-right: auto;
+  max-width: 32rem;
 }
 
 .hero-note {
@@ -169,7 +193,8 @@ a:hover {
   color: var(--color-text);
   border-radius: 12px;
   padding: 2rem;
-  margin-top: 3rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
   box-shadow: var(--shadow-lg);
   text-align: left;
 }
@@ -192,24 +217,9 @@ a:hover {
 }
 
 .hero-contact {
-  margin-top: 2rem;
+  margin-top: 1.5rem;
   font-size: 0.95rem;
   opacity: 0.9;
-}
-
-/* Hero image */
-.hero-image {
-  margin-top: 1.5rem;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-}
-
-/* Default (mobile & small screens): full width */
-.hero-image img {
-  width: 100%;
-  height: auto;
-  display: block;
 }
 
 /* Buttons */
@@ -683,8 +693,22 @@ a:hover {
     max-height: 120px;
   }
 
+  .hero-container {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .hero-text {
+    text-align: left;
+  }
+
+  .hero-image {
+    max-width: 420px;
+    margin-left: auto;
+  }
+
   .hero h1 {
-    font-size: 3rem;
+    font-size: 2.8rem;
   }
 
   .about-content {
@@ -693,12 +717,6 @@ a:hover {
 
   .quote-content {
     grid-template-columns: 1fr 1fr;
-  }
-
-  /* Desktop: hero image much smaller and centered */
-  .hero-image {
-    max-width: 320px;
-    margin: 1.5rem auto 0;
   }
 }
 
