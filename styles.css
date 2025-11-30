@@ -622,3 +622,9 @@ section {
 
 .cta-banner .btn-primary {
   background: #ffffff;
+/* === Mobile behavior tweaks (safe) === */
+
+/* Prevent side-to-side scrolling on all devices */
+html, body {
+  overflow-x: hidden;
+}
