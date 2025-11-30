@@ -659,3 +659,21 @@ html, body {
     overflow-x: hidden;
   }
 }
+@media (max-width: 768px) {
+  .nav {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.6rem;
+  }
+
+  /* Make nav links wrap and center on small screens */
+  nav ul {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  /* Ensure the right-side (CTA + language) can wrap too */
+  header .nav > div:last-child {
+    flex-wrap: wrap;
+  }
+}
