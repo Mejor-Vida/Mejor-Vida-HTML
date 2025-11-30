@@ -644,3 +644,18 @@ html, body {
 html, body {
   overflow-x: hidden;
 }
+/* On mobile: make sure main sections don't overflow horizontally */
+@media (max-width: 768px) {
+  body {
+    width: 100%;
+  }
+
+  main,
+  header,
+  footer,
+  section,
+  .container {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+}
