@@ -197,6 +197,21 @@ a:hover {
   opacity: 0.9;
 }
 
+/* Hero image */
+.hero-image {
+  margin-top: 1.5rem;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Default (mobile & small screens): full width */
+.hero-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
 /* Buttons */
 .btn {
   display: inline-block;
@@ -295,6 +310,20 @@ a:hover {
   font-size: 1.25rem;
   margin-bottom: 0.75rem;
   color: var(--color-primary);
+}
+
+/* How it works image */
+.how-image {
+  margin-top: 2.5rem;
+  text-align: center;
+}
+
+.how-image img {
+  max-width: 480px;
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 /* About Section */
@@ -630,35 +659,7 @@ a:hover {
   text-decoration: none;
 }
 
-/* Hero image */
-.hero-image {
-  margin-top: 2rem;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.hero-image img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-/* How it works image */
-.how-image {
-  margin-top: 3rem;
-  text-align: center;
-}
-
-.how-image img {
-  max-width: 600px;
-  width: 100%;
-  height: auto;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-/* Desktop: bigger logo */
+/* Desktop adjustments */
 @media (min-width: 768px) {
   .header-logo-img {
     max-height: 80px;
@@ -675,9 +676,15 @@ a:hover {
   .quote-content {
     grid-template-columns: 1fr 1fr;
   }
+
+  /* Desktop: hero image much smaller and centered */
+  .hero-image {
+    max-width: 320px;
+    margin: 1.5rem auto 0;
+  }
 }
 
-/* Mobile: keep logo as-is */
+/* Mobile adjustments */
 @media (max-width: 767px) {
   .header-logo-img {
     max-height: 50px;
