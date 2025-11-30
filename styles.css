@@ -628,3 +628,10 @@ section {
 html, body {
   overflow-x: hidden;
 }
+/* Slightly wider content on small screens */
+@media (max-width: 768px) {
+  .container {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+}
