@@ -1,4 +1,3 @@
-
 :root {
   --color-bg: #f5f0e8;
   --color-bg-alt: #ffffff;
@@ -72,7 +71,7 @@ header {
 }
 
 .header-logo-img {
-  height: 50px;
+  height: 90px;
   width: auto;
   transition: opacity var(--transition-fast);
 }
@@ -355,6 +354,15 @@ section {
 .about-photo-wrapper {
   border-radius: var(--radius-md);
   overflow: hidden;
+  display: flex;
+  justify-content: center;
+}
+
+.about-photo-wrapper img {
+  width: 100%;
+  max-width: 240px;
+  border-radius: 14px;
+  margin: 0 auto;
 }
 
 .about-caption {
@@ -708,5 +716,8 @@ footer {
   }
   .cta-banner {
     padding: 1.25rem 1.25rem;
+  }
+  .header-logo-img {
+    height: 70px;
   }
 }
