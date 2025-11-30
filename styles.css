@@ -70,8 +70,9 @@ header {
   gap: 0.75rem;
 }
 
+/* MUCH bigger logo */
 .header-logo-img {
-  height: 120px;         /* MUCH bigger logo */
+  height: 240px;
   width: auto;
   transition: opacity var(--transition-fast);
 }
@@ -346,7 +347,7 @@ section {
 .about-photo-card {
   background: var(--color-bg-alt);
   border-radius: var(--radius-lg);
-  padding: 1rem;
+  padding: 0.75rem 0.9rem;  /* tighter so white area is smaller */
   box-shadow: var(--shadow-soft);
   border: 1px solid rgba(15, 76, 129, 0.08);
 }
@@ -360,13 +361,13 @@ section {
 
 .about-photo-wrapper img {
   width: 100%;
-  max-width: 180px;  /* SMALLER Julie photo */
+  max-width: 180px;   /* Julie photo size (same as before) */
   border-radius: 14px;
   margin: 0 auto;
 }
 
 .about-caption {
-  margin-top: 0.7rem;
+  margin-top: 0.55rem;
   font-size: 0.9rem;
   color: var(--color-muted);
 }
@@ -375,8 +376,8 @@ section {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-  margin-top: 0.75rem;
-  margin-bottom: 0.75rem;
+  margin-top: 0.6rem;
+  margin-bottom: 0.6rem;
 }
 
 .chip {
@@ -621,103 +622,3 @@ section {
 
 .cta-banner .btn-primary {
   background: #ffffff;
-  color: var(--color-primary);
-  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.2);
-}
-
-/* Footer */
-footer {
-  border-top: 1px solid rgba(212, 166, 86, 0.2);
-  background: #f9f4ec;
-  padding: 1.8rem 0 1.3rem;
-  font-size: 0.82rem;
-  color: var(--color-muted);
-}
-
-.footer-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 2fr) minmax(0, 2fr);
-  gap: 1.5rem;
-  margin-bottom: 1rem;
-}
-
-.footer-block h4 {
-  font-size: 0.9rem;
-  margin-bottom: 0.4rem;
-  color: var(--color-text);
-}
-
-.footer-block p {
-  margin-bottom: 0.2rem;
-}
-
-.footer-contact a {
-  color: var(--color-primary);
-  font-weight: 600;
-}
-
-.footer-licenses {
-  line-height: 1.6;
-}
-
-.footer-bottom {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 0.75rem;
-  border-top: 1px solid rgba(212, 166, 86, 0.25);
-  padding-top: 0.75rem;
-}
-
-.footer-bottom span {
-  display: block;
-}
-
-/* Responsive */
-@media (max-width: 900px) {
-  .hero-grid {
-    grid-template-columns: 1fr;
-  }
-  .hero {
-    padding-top: 1.4rem;
-  }
-  .how-grid {
-    grid-template-columns: 1fr;
-  }
-  .about-grid {
-    grid-template-columns: 1fr;
-  }
-  .carriers-grid {
-    grid-template-columns: 1fr;
-  }
-  .quote-layout {
-    grid-template-columns: 1fr;
-  }
-  .footer-grid {
-    grid-template-columns: 1fr;
-  }
-  nav ul {
-    display: none;
-  }
-  .nav-cta {
-    display: inline-flex;
-  }
-  .nav {
-    padding: 0.55rem 0;
-  }
-}
-
-@media (max-width: 600px) {
-  section {
-    padding: 2.2rem 0;
-  }
-  .quote-form-card {
-    padding: 1.3rem 1.3rem;
-  }
-  .cta-banner {
-    padding: 1.25rem 1.25rem;
-  }
-  .header-logo-img {
-    height: 90px;   /* large but a bit smaller on mobile */
-  }
-}
