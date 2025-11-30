@@ -71,7 +71,7 @@ header {
 }
 
 .header-logo-img {
-  height: 90px;
+  height: 120px;         /* MUCH bigger logo */
   width: auto;
   transition: opacity var(--transition-fast);
 }
@@ -360,7 +360,7 @@ section {
 
 .about-photo-wrapper img {
   width: 100%;
-  max-width: 240px;
+  max-width: 180px;  /* SMALLER Julie photo */
   border-radius: 14px;
   margin: 0 auto;
 }
@@ -718,6 +718,6 @@ footer {
     padding: 1.25rem 1.25rem;
   }
   .header-logo-img {
-    height: 70px;
+    height: 90px;   /* large but a bit smaller on mobile */
   }
 }
