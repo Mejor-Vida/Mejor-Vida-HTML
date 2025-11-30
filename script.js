@@ -42,14 +42,7 @@ const translations = {
     "about.values.3": "Fe, familia y honestidad como base de cada recomendación.",
     "about.license.title": "Licencias",
     "about.license.body":
-      "<strong>En inglés:</strong><br />" +
-      "Mejor Vida Insurance LLC — Licensed Insurance Agency (License #3003970091)<br />" +
-      "Julie — Licensed Insurance Producer in the State of Nebraska (License #21695431)<br />" +
-      "Lines of Authority: Life, Accident &amp; Health<br /><br />" +
-      "<strong>En español:</strong><br />" +
-      "Mejor Vida Insurance LLC — Agencia de seguros con licencia (Licencia #3003970091)<br />" +
-      "Julie — Productora de seguros con licencia en Nebraska (Licencia #21695431)<br />" +
-      "Ramas de autoridad: Vida, Accidentes y Salud",
+      "Mejor Vida Insurance LLC es una agencia de seguros con licencia en Nebraska. Julie es productora de seguros con licencia en Nebraska.",
 
     "carriers.title": "Compañías con las que trabajamos",
     "carriers.subtitle": "Trabajamos con aseguradoras reconocidas para ofrecerte planes de gastos finales confiables y accesibles.",
@@ -60,10 +53,10 @@ const translations = {
     "carrier.aetna.5": "Focused on affordable plans and simple application processes.",
     "carrier.aetna.6": "Trusted national coverage.",
     "carrier.mutual.1": "Más de un siglo protegiendo a las familias con seguros de vida y salud.",
-    "carrier.mutual.2": "Planes de gastos finales ("Final Expense") confiables y sin examen médico.",
+    "carrier.mutual.2": "Planes de gastos finales (Final Expense) confiables y sin examen médico.",
     "carrier.mutual.3": "Empresa sólida y respetada en todo Estados Unidos.",
     "carrier.mutual.4": "More than a century protecting families with life and health insurance.",
-    "carrier.mutual.5": "Trusted "Final Expense" plans with no medical exam.",
+    "carrier.mutual.5": "Trusted Final Expense plans with no medical exam.",
     "carrier.mutual.6": "A strong, respected company serving the entire U.S.",
     "carriers.note": "Mejor Vida Insurance LLC trabaja con Aetna y Mutual of Omaha para ofrecer seguros de vida confiables y accesibles. / Mejor Vida Insurance LLC proudly partners with Aetna and Mutual of Omaha to provide quality, affordable life insurance coverage.",
 
@@ -108,13 +101,11 @@ const translations = {
       "Email: <a href=\"mailto:julie@mejorvidainsurance.com\">julie@mejorvidainsurance.com</a>",
     "footer.license.title": "Licencias / Licensing",
     "footer.license.en":
-      "Mejor Vida Insurance LLC — Licensed Insurance Agency (License #3003970091)<br />" +
-      "Julie — Licensed Insurance Producer in Nebraska (License #21695431)<br />" +
-      "Lines of Authority: Life, Accident &amp; Health",
+      "Mejor Vida Insurance LLC is a licensed insurance agency in Nebraska.<br />" +
+      "Julie is a licensed insurance producer in Nebraska.",
     "footer.license.es":
-      "Mejor Vida Insurance LLC — Agencia de seguros con licencia (Licencia #3003970091)<br />" +
-      "Julie — Productora de seguros con licencia en Nebraska (Licencia #21695431)<br />" +
-      "Ramos de autoridad: Vida, Accidentes y Salud",
+      "Mejor Vida Insurance LLC es una agencia de seguros con licencia en Nebraska.<br />" +
+      "Julie es productora de seguros con licencia en Nebraska.",
     "footer.copy.es": "© 2025 Mejor Vida Insurance LLC. Todos los derechos reservados.",
     "footer.copy.en": "© 2025 Mejor Vida Insurance LLC. All rights reserved."
   },
@@ -161,14 +152,7 @@ const translations = {
     "about.values.3": "Faith, family, and honesty at the center of every recommendation.",
     "about.license.title": "Licensing",
     "about.license.body":
-      "<strong>In English:</strong><br />" +
-      "Mejor Vida Insurance LLC — Licensed Insurance Agency (License #3003970091)<br />" +
-      "Julie — Licensed Insurance Producer in the State of Nebraska (License #21695431)<br />" +
-      "Lines of Authority: Life, Accident &amp; Health<br /><br />" +
-      "<strong>In Spanish:</strong><br />" +
-      "Mejor Vida Insurance LLC — Agencia de seguros con licencia (Licencia #3003970091)<br />" +
-      "Julie — Productora de seguros con licencia en Nebraska (Licencia #21695431)<br />" +
-      "Ramas de autoridad: Vida, Accidentes y Salud",
+      "Mejor Vida Insurance LLC is a licensed insurance agency in Nebraska. Julie is a licensed insurance producer in Nebraska.",
 
     "carriers.title": "Our Partner Carriers",
     "carriers.subtitle": "We work with trusted insurance carriers to offer reliable, affordable final expense plans.",
@@ -179,10 +163,10 @@ const translations = {
     "carrier.aetna.5": "Enfoque en planes accesibles y procesos simples.",
     "carrier.aetna.6": "Cobertura confiable respaldada por una marca nacional reconocida.",
     "carrier.mutual.1": "More than a century protecting families with life and health insurance.",
-    "carrier.mutual.2": "Trusted "Final Expense" plans with no medical exam.",
+    "carrier.mutual.2": "Trusted Final Expense plans with no medical exam.",
     "carrier.mutual.3": "A strong, respected company serving families across the United States.",
     "carrier.mutual.4": "Más de un siglo protegiendo a las familias con seguros de vida y salud.",
-    "carrier.mutual.5": "Planes de gastos finales ("Final Expense") confiables y sin examen médico.",
+    "carrier.mutual.5": "Planes de gastos finales (Final Expense) confiables y sin examen médico.",
     "carrier.mutual.6": "Empresa sólida y respetada en todo Estados Unidos.",
     "carriers.note": "Mejor Vida Insurance LLC proudly partners with Aetna and Mutual of Omaha to provide quality, affordable life insurance coverage. / Mejor Vida Insurance LLC trabaja con Aetna y Mutual of Omaha para ofrecer seguros de vida confiables y accesibles.",
 
@@ -227,13 +211,11 @@ const translations = {
       "Email: <a href=\"mailto:julie@mejorvidainsurance.com\">julie@mejorvidainsurance.com</a>",
     "footer.license.title": "Licenses / Licencias",
     "footer.license.en":
-      "Mejor Vida Insurance LLC — Licensed Insurance Agency (License #3003970091)<br />" +
-      "Julie — Licensed Insurance Producer in Nebraska (License #21695431)<br />" +
-      "Lines of Authority: Life, Accident &amp; Health",
+      "Mejor Vida Insurance LLC is a licensed insurance agency in Nebraska.<br />" +
+      "Julie is a licensed insurance producer in Nebraska.",
     "footer.license.es":
-      "Mejor Vida Insurance LLC — Agencia de seguros con licencia (Licencia #3003970091)<br />" +
-      "Julie — Productora de seguros con licencia en Nebraska (Licencia #21695431)<br />" +
-      "Ramas de autoridad: Vida, Accidentes y Salud",
+      "Mejor Vida Insurance LLC es una agencia de seguros con licencia en Nebraska.<br />" +
+      "Julie es productora de seguros con licencia en Nebraska.",
     "footer.copy.es": "© 2025 Mejor Vida Insurance LLC. Todos los derechos reservados.",
     "footer.copy.en": "© 2025 Mejor Vida Insurance LLC. All rights reserved."
   }
@@ -243,6 +225,7 @@ function setLanguage(lang) {
   const dict = translations[lang];
   if (!dict) return;
 
+  // Set <html lang="">
   document.documentElement.setAttribute("lang", lang === "en" ? "en" : "es");
 
   // Update all text elements with data-i18n
@@ -254,14 +237,14 @@ function setLanguage(lang) {
     }
   });
 
-  // Swap logo image if it exists
+  // Swap logo image based on language
   const headerLogo = document.getElementById("header-logo");
   if (headerLogo) {
     if (lang === "es") {
-      headerLogo.src = "Logo.png";
+      headerLogo.src = "logo-spanish.png";
       headerLogo.alt = "Mejor Vida Insurance LLC Logo - Seguros para una mejor vida";
     } else {
-      headerLogo.src = "Logo.png";
+      headerLogo.src = "logo-english.png";
       headerLogo.alt = "Mejor Vida Insurance LLC Logo - Insurance for a better life";
     }
   }
@@ -269,7 +252,6 @@ function setLanguage(lang) {
   // Update active state on toggle buttons
   const btnEs = document.getElementById("btn-es");
   const btnEn = document.getElementById("btn-en");
-  
   if (btnEs && btnEn) {
     btnEs.classList.toggle("active", lang === "es");
     btnEn.classList.toggle("active", lang === "en");
@@ -278,7 +260,8 @@ function setLanguage(lang) {
 
 // Initialize on page load
 document.addEventListener("DOMContentLoaded", () => {
-  setLanguage("es"); // Default: Spanish
+  // Default to Spanish
+  setLanguage("es");
 
   const btnEs = document.getElementById("btn-es");
   const btnEn = document.getElementById("btn-en");
