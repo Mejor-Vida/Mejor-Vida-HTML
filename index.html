@@ -1,469 +1,508 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>
-      Mejor Vida Insurance LLC | Seguro de Gastos Finales en Nebraska
-    </title>
-    <meta
-      name="description"
-      content="Agente bilingüe de seguros de vida y gastos finales en Nebraska. Servicio en español e inglés. Final expense insurance with a licensed bilingual agent."
-    />
-    <meta
-      name="keywords"
-      content="seguro de vida, gastos finales, final expense, Nebraska, agente bilingüe, español, life insurance"
-    />
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <!-- Header -->
-    <header class="header">
-      <div class="container header-container">
-        <div class="header-logo">
-          <img
-            id="header-logo"
-            src="img/logo-spanish.png"
-            alt="Mejor Vida Insurance LLC Logo"
-            class="header-logo-img"
-          />
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mejor Vida Insurance LLC - Seguro de Gastos Finales en Nebraska</title>
+  <meta name="description" content="Mejor Vida Insurance LLC ofrece seguros de gastos finales asequibles en Nebraska. Proteja a su familia con cobertura garantizada. Hablamos español. Cotización gratis.">
+  <meta name="keywords" content="seguro de gastos finales, final expense insurance, seguro de vida, Nebraska, español, Mejor Vida Insurance, Julie Braunsroth">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container header-container">
+      <img src="img/logo-spanish.png" alt="Mejor Vida Insurance LLC Logo" class="header-logo-img" id="header-logo">
+      <nav class="nav">
+        <a href="#how" data-lang="es">Cómo Funciona</a>
+        <a href="#how" data-lang="en" style="display:none;">How It Works</a>
+        
+        <a href="#about" data-lang="es">Sobre Julie</a>
+        <a href="#about" data-lang="en" style="display:none;">About Julie</a>
+        
+        <a href="#carriers" data-lang="es">Aseguradoras</a>
+        <a href="#carriers" data-lang="en" style="display:none;">Carriers</a>
+        
+        <a href="#quote" data-lang="es">Cotización</a>
+        <a href="#quote" data-lang="en" style="display:none;">Get a Quote</a>
+      </nav>
+      <div class="lang-toggle">
+        <button class="lang-btn active" data-lang-btn="es">ES</button>
+        <button class="lang-btn" data-lang-btn="en">EN</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-badge" data-lang="es">Servicio en Español</div>
+      <div class="hero-badge" data-lang="en" style="display:none;">Spanish-Speaking Service</div>
+
+      <h1 data-lang="es">Seguro de Gastos Finales Asequible en Nebraska</h1>
+      <h1 data-lang="en" style="display:none;">Affordable Final Expense Insurance in Nebraska</h1>
+
+      <p class="hero-subheading" data-lang="es">
+        Proteja a su familia de gastos inesperados. Cobertura garantizada sin examen médico. Hablamos español.
+      </p>
+      <p class="hero-subheading" data-lang="en" style="display:none;">
+        Protect your family from unexpected expenses. Guaranteed coverage with no medical exam. We speak Spanish.
+      </p>
+
+      <div class="hero-image">
+        <img src="img/hispanic-family.jpg" alt="Happy Hispanic family">
+      </div>
+
+      <div class="hero-card">
+        <div class="hero-trust">
+          <h3 data-lang="es">✓ Cobertura Garantizada</h3>
+          <h3 data-lang="en" style="display:none;">✓ Guaranteed Coverage</h3>
+          <p data-lang="es">Sin examen médico. Aprobación rápida. Beneficios desde el primer día.</p>
+          <p data-lang="en" style="display:none;">No medical exam. Fast approval. Benefits from day one.</p>
         </div>
-        <nav class="nav">
-          <a href="#home" data-i18n="nav.home">Inicio</a>
-          <a href="#about" data-i18n="nav.about">Sobre Nosotros</a>
-          <a href="#carriers" data-i18n="nav.carriers">Compañías</a>
-          <a href="#quote" data-i18n="nav.quote">Cotización Gratis</a>
-        </nav>
-        <div class="lang-toggle">
-          <button id="btn-es" class="lang-btn active">ES</button>
-          <button id="btn-en" class="lang-btn">EN</button>
+
+        <div class="hero-highlight">
+          <h3 data-lang="es">✓ Pagos Mensuales Bajos</h3>
+          <h3 data-lang="en" style="display:none;">✓ Low Monthly Payments</h3>
+          <p data-lang="es">Planes desde $30/mes. Precios fijos que nunca suben.</p>
+          <p data-lang="en" style="display:none;">Plans starting at $30/month. Fixed prices that never increase.</p>
+        </div>
+
+        <div class="hero-trust">
+          <h3 data-lang="es">✓ Servicio Personal en Español</h3>
+          <h3 data-lang="en" style="display:none;">✓ Personal Service in Spanish</h3>
+          <p data-lang="es">Julie Braunsroth, agente licenciada en Nebraska, le ayudará en cada paso.</p>
+          <p data-lang="en" style="display:none;">Julie Braunsroth, licensed agent in Nebraska, will help you every step of the way.</p>
         </div>
       </div>
-    </header>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-      <div class="container">
-        <div class="hero-badge" data-i18n="hero.badge">
-          Agente bilingüe de gastos finales en Nebraska
+      <p class="hero-note" data-lang="es">
+        <span id="carrier-sentence-es">Julie es agente independiente con acceso a Aetna, Mutual of Omaha, y otras aseguradoras de confianza.</span>
+      </p>
+      <p class="hero-note" data-lang="en" style="display:none;">
+        <span id="carrier-sentence-en">Julie is an independent agent with access to Aetna, Mutual of Omaha, and other trusted carriers.</span>
+      </p>
+
+      <p class="hero-contact" data-lang="es">
+        📞 Llame o envíe un mensaje de texto: <strong>(402) 960-3206</strong><br>
+        📧 Email: <strong>Julie@mejorvidainsurance.com</strong>
+      </p>
+      <p class="hero-contact" data-lang="en" style="display:none;">
+        📞 Call or text: <strong>(402) 960-3206</strong><br>
+        📧 Email: <strong>Julie@mejorvidainsurance.com</strong>
+      </p>
+
+      <p class="hero-seo" data-lang="es">
+        Mejor Vida Insurance LLC sirve a familias hispanas en Nebraska con seguros de gastos finales, seguro de vida, y más.
+      </p>
+      <p class="hero-seo" data-lang="en" style="display:none;">
+        Mejor Vida Insurance LLC serves Hispanic families in Nebraska with final expense insurance, life insurance, and more.
+      </p>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section id="how" class="how">
+    <div class="container">
+      <h2 data-lang="es">Cómo Funciona</h2>
+      <h2 data-lang="en" style="display:none;">How It Works</h2>
+
+      <p class="section-subtitle" data-lang="es">
+        Obtener su seguro de gastos finales es fácil y rápido. Siga estos tres pasos simples:
+      </p>
+      <p class="section-subtitle" data-lang="en" style="display:none;">
+        Getting your final expense insurance is easy and fast. Follow these three simple steps:
+      </p>
+
+      <div class="how-grid">
+        <div class="how-step">
+          <div class="how-step-number">1</div>
+          <h3 data-lang="es">Solicite una Cotización</h3>
+          <h3 data-lang="en" style="display:none;">Request a Quote</h3>
+          <p data-lang="es">
+            Llene el formulario en esta página o llámenos. Le haremos algunas preguntas simples sobre su salud y necesidades.
+          </p>
+          <p data-lang="en" style="display:none;">
+            Fill out the form on this page or call us. We'll ask you a few simple questions about your health and needs.
+          </p>
         </div>
-        <h1 data-i18n="hero.heading">Protege a tu familia hoy.</h1>
-        <p class="hero-subheading" data-i18n="hero.subheading">
-          Planes de gastos finales simples y accesibles para ayudarte a cuidar
-          de los que más amas.
-        </p>
-        <a href="#quote" class="btn btn-primary" data-i18n="hero.cta"
-          >Cotización Gratis</a
-        >
-        <p class="hero-note" data-i18n="hero.note">
-          Llama o envía un mensaje de texto al
-          <a
-            href="tel:5312291712"
-            style="color: inherit; font-weight: 700"
-            >531-229-1712</a
-          >
-          para empezar.
-        </p>
-        <p class="hero-seo" data-i18n="hero.seo">
-          Seguro de vida, gastos finales y final expense insurance con una
-          agente bilingüe en Lincoln, Nebraska.
-        </p>
 
+        <div class="how-step">
+          <div class="how-step-number">2</div>
+          <h3 data-lang="es">Compare Opciones</h3>
+          <h3 data-lang="en" style="display:none;">Compare Options</h3>
+          <p data-lang="es">
+            Julie comparará planes de múltiples aseguradoras para encontrar la mejor cobertura al mejor precio para usted.
+          </p>
+          <p data-lang="en" style="display:none;">
+            Julie will compare plans from multiple carriers to find the best coverage at the best price for you.
+          </p>
+        </div>
+
+        <div class="how-step">
+          <div class="how-step-number">3</div>
+          <h3 data-lang="es">Obtenga Cobertura</h3>
+          <h3 data-lang="en" style="display:none;">Get Coverage</h3>
+          <p data-lang="es">
+            Una vez aprobado, su cobertura comienza de inmediato. Su familia estará protegida con tranquilidad garantizada.
+          </p>
+          <p data-lang="en" style="display:none;">
+            Once approved, your coverage starts immediately. Your family will be protected with guaranteed peace of mind.
+          </p>
+        </div>
+      </div>
+
+      <div class="how-image">
+        <img src="img/elderly-hispanic-couple.jpg" alt="Elderly Hispanic couple smiling">
+      </div>
+    </div>
+  </section>
+
+  <!-- About Julie -->
+  <section id="about" class="about">
+    <div class="container">
+      <h2 data-lang="es">Conozca a Julie Braunsroth</h2>
+      <h2 data-lang="en" style="display:none;">Meet Julie Braunsroth</h2>
+
+      <div class="about-content">
+        <div class="about-photo">
+          <img src="img/Julie.png" alt="Julie Braunsroth, Licensed Insurance Agent">
+          <p class="about-photo-caption" data-lang="es">Julie Braunsroth<br>Agente de Seguros Licenciada</p>
+          <p class="about-photo-caption" data-lang="en" style="display:none;">Julie Braunsroth<br>Licensed Insurance Agent</p>
+        </div>
+
+        <div class="about-text">
+          <div class="about-chips">
+            <span class="chip" data-lang="es">Licenciada en Nebraska</span>
+            <span class="chip" data-lang="en" style="display:none;">Licensed in Nebraska</span>
+            
+            <span class="chip" data-lang="es">Hablo Español</span>
+            <span class="chip" data-lang="en" style="display:none;">Spanish Speaker</span>
+            
+            <span class="chip" data-lang="es">Agente Independiente</span>
+            <span class="chip" data-lang="en" style="display:none;">Independent Agent</span>
+          </div>
+
+          <h3 data-lang="es">Su Guía de Confianza para Seguros de Vida</h3>
+          <h3 data-lang="en" style="display:none;">Your Trusted Guide for Life Insurance</h3>
+
+          <p data-lang="es">
+            Hola, soy Julie Braunsroth, fundadora de Mejor Vida Insurance LLC. Como agente de seguros independiente licenciada en Nebraska, me dedico a ayudar a familias hispanas a proteger su futuro financiero con seguros de gastos finales asequibles y confiables.
+          </p>
+          <p data-lang="en" style="display:none;">
+            Hi, I'm Julie Braunsroth, founder of Mejor Vida Insurance LLC. As an independent insurance agent licensed in Nebraska, I'm dedicated to helping Hispanic families protect their financial future with affordable and reliable final expense insurance.
+          </p>
+
+          <p data-lang="es">
+            Entiendo que hablar de seguros puede ser confuso, especialmente si el inglés no es su primer idioma. Por eso ofrezco servicio completamente en español, explicando cada detalle de su póliza en términos claros y sencillos.
+          </p>
+          <p data-lang="en" style="display:none;">
+            I understand that talking about insurance can be confusing, especially if English is not your first language. That's why I offer service completely in Spanish, explaining every detail of your policy in clear and simple terms.
+          </p>
+
+          <ul class="about-values">
+            <li data-lang="es"><strong>Transparencia Total:</strong> Sin sorpresas, sin letra pequeña escondida.</li>
+            <li data-lang="en" style="display:none;"><strong>Total Transparency:</strong> No surprises, no hidden fine print.</li>
+            
+            <li data-lang="es"><strong>Servicio Personalizado:</strong> Cada familia es única, y su plan debe serlo también.</li>
+            <li data-lang="en" style="display:none;"><strong>Personalized Service:</strong> Every family is unique, and your plan should be too.</li>
+            
+            <li data-lang="es"><strong>Acceso a Múltiples Aseguradoras:</strong> Como agente independiente, trabajo para usted, no para una sola compañía.</li>
+            <li data-lang="en" style="display:none;"><strong>Access to Multiple Carriers:</strong> As an independent agent, I work for you, not for a single company.</li>
+          </ul>
+
+          <p data-lang="es">
+            Mi misión es simple: asegurarme de que usted y su familia tengan la tranquilidad de saber que están protegidos, sin importar lo que el futuro traiga.
+          </p>
+          <p data-lang="en" style="display:none;">
+            My mission is simple: to make sure you and your family have the peace of mind of knowing you're protected, no matter what the future brings.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Carriers -->
+  <section id="carriers" class="carriers">
+    <div class="container">
+      <h2 data-lang="es">Aseguradoras de Confianza</h2>
+      <h2 data-lang="en" style="display:none;">Trusted Carriers</h2>
+
+      <p class="section-subtitle" data-lang="es">
+        Como agente independiente, tengo acceso a múltiples aseguradoras líderes. Esto significa que puedo comparar opciones y encontrar el mejor plan para usted.
+      </p>
+      <p class="section-subtitle" data-lang="en" style="display:none;">
+        As an independent agent, I have access to multiple leading carriers. This means I can compare options and find the best plan for you.
+      </p>
+
+      <div class="carriers-grid">
+        <div class="carrier-card">
+          <h3>Aetna</h3>
+          <ul>
+            <li data-lang="es">Cobertura garantizada sin examen médico</li>
+            <li data-lang="en" style="display:none;">Guaranteed coverage with no medical exam</li>
+            
+            <li data-lang="es">Aprobación rápida</li>
+            <li data-lang="en" style="display:none;">Fast approval</li>
+            
+            <li data-lang="es">Beneficios desde el primer día</li>
+            <li data-lang="en" style="display:none;">Benefits from day one</li>
+          </ul>
+        </div>
+
+        <div class="carrier-card">
+          <h3>Mutual of Omaha</h3>
+          <ul>
+            <li data-lang="es">Planes flexibles para todas las edades</li>
+            <li data-lang="en" style="display:none;">Flexible plans for all ages</li>
+            
+            <li data-lang="es">Precios competitivos</li>
+            <li data-lang="en" style="display:none;">Competitive pricing</li>
+            
+            <li data-lang="es">Compañía con más de 100 años de experiencia</li>
+            <li data-lang="en" style="display:none;">Company with over 100 years of experience</li>
+          </ul>
+        </div>
+
+        <div class="carrier-card">
+          <h3 data-lang="es">Y Más</h3>
+          <h3 data-lang="en" style="display:none;">And More</h3>
+          <ul>
+            <li data-lang="es">Acceso a otras aseguradoras de confianza</li>
+            <li data-lang="en" style="display:none;">Access to other trusted carriers</li>
+            
+            <li data-lang="es">Comparación de múltiples opciones</li>
+            <li data-lang="en" style="display:none;">Comparison of multiple options</li>
+            
+            <li data-lang="es">Siempre buscando el mejor precio para usted</li>
+            <li data-lang="en" style="display:none;">Always looking for the best price for you</li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="carriers-note" data-lang="es">
+        Nota: La disponibilidad de aseguradoras puede variar según su ubicación y necesidades específicas.
+      </p>
+      <p class="carriers-note" data-lang="en" style="display:none;">
+        Note: Carrier availability may vary based on your location and specific needs.
+      </p>
+    </div>
+  </section>
+
+  <!-- Quote Form -->
+  <section id="quote" class="quote">
+    <div class="container">
+      <h2 data-lang="es">Solicite su Cotización Gratis</h2>
+      <h2 data-lang="en" style="display:none;">Request Your Free Quote</h2>
+
+      <p class="section-subtitle" data-lang="es">
+        Complete el formulario a continuación y Julie se pondrá en contacto con usted dentro de 24 horas para discutir sus opciones.
+      </p>
+      <p class="section-subtitle" data-lang="en" style="display:none;">
+        Fill out the form below and Julie will contact you within 24 hours to discuss your options.
+      </p>
+
+      <div class="quote-content">
         <div>
-          <div class="hero-image">
-            <img
-              src="img/hispanic-family-laughing.jpg"
-              alt="Happy Hispanic family smiling together"
-            />
-          </div>
+          <h3 data-lang="es">¿Por qué solicitar una cotización?</h3>
+          <h3 data-lang="en" style="display:none;">Why request a quote?</h3>
 
-          <div class="hero-card">
-            <div class="hero-trust">
-              <h3 data-i18n="hero.trust.title">
-                Agente con licencia bilingüe en Nebraska.
-              </h3>
-              <p data-i18n="hero.trust.body">
-                Asesoría en español e inglés para ayudarte a elegir el plan
-                adecuado para tu familia.
-              </p>
-            </div>
-            <div class="hero-highlight">
-              <h3 data-i18n="hero.highlight.title">
-                Final expense / gastos finales sin complicaciones
-              </h3>
-              <p data-i18n="hero.highlight.body">
-                Aplicaciones sencillas, beneficios diseñados para cubrir los
-                gastos del funeral y cuentas finales, y pagos accesibles que se
-                ajustan a tu presupuesto.
-              </p>
-            </div>
-          </div>
+          <ul class="quote-points">
+            <li data-lang="es">Sin compromiso ni obligación de compra</li>
+            <li data-lang="en" style="display:none;">No commitment or obligation to buy</li>
+            
+            <li data-lang="es">Comparación gratuita de múltiples aseguradoras</li>
+            <li data-lang="en" style="display:none;">Free comparison of multiple carriers</li>
+            
+            <li data-lang="es">Asesoría personalizada en español</li>
+            <li data-lang="en" style="display:none;">Personalized advice in Spanish</li>
+            
+            <li data-lang="es">Respuesta rápida en menos de 24 horas</li>
+            <li data-lang="en" style="display:none;">Fast response in less than 24 hours</li>
+          </ul>
 
-          <p class="hero-contact" data-i18n="hero.contact">
-            ¿Prefieres hablar directamente? Llama o envía un mensaje de texto
-            al <a href="tel:5312291712">531-229-1712</a> o escribe a
-            <a href="mailto:julie@mejorvidainsurance.com"
-              >julie@mejorvidainsurance.com</a
-            >.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- How It Works -->
-    <section class="how">
-      <div class="container">
-        <h2 data-i18n="how.title">Cómo Funciona</h2>
-        <p class="section-subtitle" data-i18n="how.subtitle">
-          Un proceso sencillo para obtener la protección que necesitas, sin
-          estrés ni confusión.
-        </p>
-        <div class="how-grid">
-          <div class="how-step">
-            <div class="how-step-number">1</div>
-            <h3 data-i18n="how.step1.title">Habla con Julie</h3>
-            <p data-i18n="how.step1.body">
-              Agenda una llamada o envía un mensaje. Te haré algunas preguntas
-              básicas sobre tu situación y tus metas.
+          <div class="quote-call">
+            <h3 data-lang="es">¿Prefiere hablar por teléfono?</h3>
+            <h3 data-lang="en" style="display:none;">Prefer to talk by phone?</h3>
+            <p data-lang="es">
+              Llame o envíe un mensaje de texto a Julie directamente:<br>
+              <strong>(402) 960-3206</strong>
             </p>
-          </div>
-          <div class="how-step">
-            <div class="how-step-number">2</div>
-            <h3 data-i18n="how.step2.title">Obtén tu cotización</h3>
-            <p data-i18n="how.step2.body">
-              Revisamos diferentes opciones de seguros de vida y gastos finales
-              para encontrar un plan accesible para ti.
-            </p>
-          </div>
-          <div class="how-step">
-            <div class="how-step-number">3</div>
-            <h3 data-i18n="how.step3.title">Elige tu cobertura</h3>
-            <p data-i18n="how.step3.body">
-              Te acompaño paso a paso en la solicitud para que tu familia quede
-              protegida con tranquilidad y confianza.
+            <p data-lang="en" style="display:none;">
+              Call or text Julie directly:<br>
+              <strong>(402) 960-3206</strong>
             </p>
           </div>
         </div>
 
-        <div class="how-image">
-          <img
-            src="img/elderly-hispanic-couple.jpg"
-            alt="Elderly Hispanic couple smiling"
-          />
-        </div>
-      </div>
-    </section>
+        <div class="quote-form-container">
+          <h3 data-lang="es">Formulario de Cotización</h3>
+          <h3 data-lang="en" style="display:none;">Quote Form</h3>
 
-    <!-- About Section -->
-    <section id="about" class="about">
-      <div class="container">
-        <h2 data-i18n="about.title">Sobre Nosotros</h2>
-        <p class="section-subtitle" data-i18n="about.subtitle">
-          Mejor Vida Insurance LLC es una agencia de seguros enfocada en servir
-          a familias, con fe, honestidad y corazón.
-        </p>
+          <form action="https://formsubmit.co/Julie@mejorvidainsurance.com" method="POST">
+            <!-- FormSubmit Configuration -->
+            <input type="hidden" name="_subject" value="Nueva Solicitud de Cotización - Mejor Vida Insurance">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_template" value="table">
 
-        <div class="about-content">
-          <div class="about-photo">
-            <img src="img/Julie.png" alt="Julie - Licensed Insurance Agent" />
-            <p class="about-photo-caption" data-i18n="about.photo.caption">
-              Julie — Agente de seguros con licencia en Nebraska, sirviendo a
-              familias hispanas con amor y dedicación.
-            </p>
-          </div>
-
-          <div class="about-text">
-            <div class="about-chips">
-              <span class="chip" data-i18n="about.chip.bilingual"
-                >Servicio bilingüe (Español / English)</span
-              >
-              <span class="chip" data-i18n="about.chip.family"
-                >Enfoque en familia y comunidad</span
-              >
-              <span class="chip" data-i18n="about.chip.faith"
-                >Fe y valores cristianos</span
-              >
+            <div class="form-group">
+              <label for="name" data-lang="es">Nombre Completo *</label>
+              <label for="name" data-lang="en" style="display:none;">Full Name *</label>
+              <input type="text" id="name" name="name" class="form-input" required>
             </div>
 
-            <h3 data-i18n="about.bio.title">Conoce a Julie</h3>
-            <p data-i18n="about.bio.body">
-              Soy Julie, agente de seguros con licencia en Nebraska. Nací en
-              Colombia y ahora vivo en Nebraska con mi esposo y mis hijos. Me
-              apasiona ayudar a las familias a planificar su futuro con fe,
-              confianza y amor.
-            </p>
-
-            <h3 data-i18n="about.values.title">Nuestros valores</h3>
-            <ul class="about-values">
-              <li data-i18n="about.values.1">
-                Servicio bilingüe (Español / English) para que te sientas
-                cómodo y entendido.
-              </li>
-              <li data-i18n="about.values.2">
-                Atención personalizada para tu situación y tu presupuesto.
-              </li>
-              <li data-i18n="about.values.3">
-                Fe, familia y honestidad como base de cada recomendación.
-              </li>
-            </ul>
-
-            <h3 data-i18n="about.license.title">Licencias</h3>
-            <p data-i18n="about.license.body">
-              Mejor Vida Insurance LLC es una agencia de seguros con licencia
-              en Nebraska. Julie es productora de seguros con licencia en
-              Nebraska.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Carriers Section -->
-    <section id="carriers" class="carriers">
-      <div class="container">
-        <h2 data-i18n="carriers.title">Compañías con las que trabajamos</h2>
-        <p class="section-subtitle" data-i18n="carriers.subtitle">
-          Trabajamos con aseguradoras reconocidas para ofrecerte planes de
-          gastos finales confiables y accesibles.
-        </p>
-
-        <div class="carriers-grid">
-          <div class="carrier-card">
-            <h3>Aetna</h3>
-            <ul>
-              <li data-i18n="carrier.aetna.1">
-                Más de 150 años de experiencia ayudando a familias con seguros
-                de salud y vida.
-              </li>
-              <li data-i18n="carrier.aetna.2">
-                Enfoque en planes accesibles y procesos simples.
-              </li>
-              <li data-i18n="carrier.aetna.3">
-                Cobertura confiable respaldada por una marca nacional
-                reconocida.
-              </li>
-            </ul>
-          </div>
-
-          <div class="carrier-card">
-            <h3>Mutual of Omaha</h3>
-            <ul>
-              <li data-i18n="carrier.mutual.1">
-                Más de un siglo protegiendo a las familias con seguros de vida
-                y salud.
-              </li>
-              <li data-i18n="carrier.mutual.2">
-                Planes de gastos finales (Final Expense) confiables y sin
-                examen médico.
-              </li>
-              <li data-i18n="carrier.mutual.3">
-                Empresa sólida y respetada en todo Estados Unidos.
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <p class="carriers-note" data-i18n="carriers.note">
-          Mejor Vida Insurance LLC trabaja con Aetna y Mutual of Omaha para
-          ofrecer seguros de vida confiables y accesibles.
-        </p>
-      </div>
-    </section>
-
-    <!-- Quote Section -->
-    <section id="quote" class="quote">
-      <div class="container">
-        <h2 data-i18n="quote.title">Cotización Gratis</h2>
-        <p class="section-subtitle" data-i18n="quote.intro">
-          Solicita tu cotización gratis en solo unos minutos. Tu información
-          está segura y nunca será compartida.
-        </p>
-
-        <div class="quote-content">
-          <div class="quote-info">
-            <ul class="quote-points">
-              <li data-i18n="quote.point.1">
-                Tu información se usa solo para ayudarte con opciones de seguro
-                de vida y gastos finales.
-              </li>
-              <li data-i18n="quote.point.2">
-                Puedes comunicarte en español o inglés, por llamada, mensaje de
-                texto o correo electrónico.
-              </li>
-              <li data-i18n="quote.point.3">
-                Planes de final expense insurance adaptados a tu edad, salud y
-                presupuesto.
-              </li>
-            </ul>
-
-            <div class="quote-call">
-              <h3 data-i18n="quote.call.title">
-                ¿Prefieres hablar por teléfono?
-              </h3>
-              <p data-i18n="quote.call.body">
-                Llama o envía un mensaje de texto al
-                <a
-                  href="tel:5312291712"
-                  style="color: var(--color-primary); font-weight: 700"
-                  >531-229-1712</a
-                >
-                y menciona que buscas un plan de gastos finales. También puedes
-                escribir a
-                <a
-                  href="mailto:julie@mejorvidainsurance.com"
-                  style="color: var(--color-primary); font-weight: 700"
-                  >julie@mejorvidainsurance.com</a
-                >.
-              </p>
+            <div class="form-group">
+              <label for="phone" data-lang="es">Teléfono *</label>
+              <label for="phone" data-lang="en" style="display:none;">Phone *</label>
+              <input type="tel" id="phone" name="phone" class="form-input" required>
+              <small data-lang="es">Incluya código de área</small>
+              <small data-lang="en" style="display:none;">Include area code</small>
             </div>
-          </div>
 
-          <div class="quote-form-container">
-            <h3 data-i18n="quote.form.title">Solicita tu cotización</h3>
-            <form
-              action="https://formsubmit.co/julie@mejorvidainsurance.com"
-              method="POST"
-              class="quote-form"
-            >
-              <input
-                type="hidden"
-                name="_subject"
-                value="Nueva solicitud de cotización - Mejor Vida Insurance"
-              />
-              <input type="hidden" name="_captcha" value="false" />
-              <input
-                type="hidden"
-                name="_next"
-                value="https://mejorvidainsurance.com"
-              />
+            <div class="form-group">
+              <label for="email" data-lang="es">Correo Electrónico</label>
+              <label for="email" data-lang="en" style="display:none;">Email</label>
+              <input type="email" id="email" name="email" class="form-input">
+            </div>
 
-              <div class="form-group">
-                <label for="name" data-i18n="quote.form.name.label"
-                  >Nombre completo / Full Name</label
-                >
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  required
-                  class="form-input"
-                />
-              </div>
+            <div class="form-group">
+              <label for="age" data-lang="es">Edad</label>
+              <label for="age" data-lang="en" style="display:none;">Age</label>
+              <input type="number" id="age" name="age" class="form-input" min="18" max="120">
+            </div>
 
-              <div class="form-group">
-                <label for="phone" data-i18n="quote.form.phone.label"
-                  >Teléfono / Phone</label
-                >
-                <input
-                  type="tel"
-                  id="phone"
-                  name="phone"
-                  required
-                  class="form-input"
-                />
-                <small data-i18n="quote.form.phone.helper"
-                  >Puedes recibir llamada o mensaje de texto.</small
-                >
-              </div>
+            <div class="form-group">
+              <label for="coverage" data-lang="es">Cobertura Deseada (Opcional)</label>
+              <label for="coverage" data-lang="en" style="display:none;">Desired Coverage (Optional)</label>
+              <select id="coverage" name="coverage" class="form-input">
+                <option value="" data-lang="es">Seleccione una opción</option>
+                <option value="" data-lang="en" style="display:none;">Select an option</option>
+                
+                <option value="5000" data-lang="es">$5,000</option>
+                <option value="5000" data-lang="en" style="display:none;">$5,000</option>
+                
+                <option value="10000" data-lang="es">$10,000</option>
+                <option value="10000" data-lang="en" style="display:none;">$10,000</option>
+                
+                <option value="15000" data-lang="es">$15,000</option>
+                <option value="15000" data-lang="en" style="display:none;">$15,000</option>
+                
+                <option value="20000" data-lang="es">$20,000</option>
+                <option value="20000" data-lang="en" style="display:none;">$20,000</option>
+                
+                <option value="25000+" data-lang="es">$25,000+</option>
+                <option value="25000+" data-lang="en" style="display:none;">$25,000+</option>
+                
+                <option value="no-se" data-lang="es">No estoy seguro/a</option>
+                <option value="not-sure" data-lang="en" style="display:none;">Not sure</option>
+              </select>
+            </div>
 
-              <div class="form-group">
-                <label for="email" data-i18n="quote.form.email.label"
-                  >Correo electrónico / Email</label
-                >
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  required
-                  class="form-input"
-                />
-              </div>
+            <div class="form-group">
+              <label for="message" data-lang="es">Mensaje o Preguntas (Opcional)</label>
+              <label for="message" data-lang="en" style="display:none;">Message or Questions (Optional)</label>
+              <textarea id="message" name="message" class="form-input" rows="4"></textarea>
+            </div>
 
-              <div class="form-group">
-                <label for="message" data-i18n="quote.form.message.label"
-                  >Mensaje (opcional) / Message (optional)</label
-                >
-                <textarea
-                  id="message"
-                  name="message"
-                  rows="4"
-                  class="form-input"
-                ></textarea>
-              </div>
+            <button type="submit" class="btn btn-primary btn-block" data-lang="es">Solicitar Cotización Gratis</button>
+            <button type="submit" class="btn btn-primary btn-block" data-lang="en" style="display:none;">Request Free Quote</button>
 
-              <button type="submit" class="btn btn-primary btn-block">
-                <span data-i18n="quote.form.submit"
-                  >Enviar cotización gratis</span
-                >
-              </button>
-
-              <p class="form-disclaimer" data-i18n="quote.form.disclaimer">
-                Al enviar este formulario, autorizas a Mejor Vida Insurance LLC
-                a contactarte por teléfono, mensaje de texto o correo
-                electrónico sobre opciones de seguro de vida y gastos finales.
-                Tu información no será vendida ni compartida con terceros ajenos
-                a este propósito.
-              </p>
-            </form>
-          </div>
+            <p class="form-disclaimer" data-lang="es">
+              Al enviar este formulario, usted acepta que Julie Braunsroth de Mejor Vida Insurance LLC se ponga en contacto con usted por teléfono, mensaje de texto o correo electrónico para discutir sus opciones de seguro. Su información nunca será vendida ni compartida con terceros.
+            </p>
+            <p class="form-disclaimer" data-lang="en" style="display:none;">
+              By submitting this form, you agree that Julie Braunsroth of Mejor Vida Insurance LLC may contact you by phone, text message, or email to discuss your insurance options. Your information will never be sold or shared with third parties.
+            </p>
+          </form>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Final CTA -->
-    <section class="cta-final">
-      <div class="container">
-        <h2 data-i18n="cta.final.title">Tu familia merece tranquilidad.</h2>
-        <p data-i18n="cta.final.subtitle">
-          Empieza hoy con un plan de gastos finales diseñado para tus
-          necesidades y valores.
-        </p>
-        <a href="#quote" class="btn btn-secondary" data-i18n="cta.final.button"
-          >Empieza con una Cotización Gratis</a
-        >
-      </div>
-    </section>
+  <!-- Final CTA -->
+  <section class="cta-final">
+    <div class="container">
+      <h2 data-lang="es">¿Listo para Proteger a su Familia?</h2>
+      <h2 data-lang="en" style="display:none;">Ready to Protect Your Family?</h2>
 
-    <!-- Footer -->
-    <footer class="footer">
-      <div class="container footer-container">
+      <p data-lang="es">
+        No espere hasta que sea demasiado tarde. Obtenga su cotización gratis hoy y dé el primer paso hacia la tranquilidad financiera.
+      </p>
+      <p data-lang="en" style="display:none;">
+        Don't wait until it's too late. Get your free quote today and take the first step toward financial peace of mind.
+      </p>
+
+      <a href="#quote" class="btn btn-secondary" data-lang="es">Solicitar Cotización Ahora</a>
+      <a href="#quote" class="btn btn-secondary" data-lang="en" style="display:none;">Request Quote Now</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-container">
         <div class="footer-col">
-          <h4 data-i18n="footer.contact.title">Contacto</h4>
-          <p data-i18n="footer.contact.body">
-            Mejor Vida Insurance LLC<br />
-            P.O. Box 21885, Lincoln, NE 68542<br />
-            Teléfono: <a href="tel:5312291712">531-229-1712</a><br />
-            Correo electrónico:
-            <a href="mailto:julie@mejorvidainsurance.com"
-              >julie@mejorvidainsurance.com</a
-            >
+          <h4 data-lang="es">Contacto</h4>
+          <h4 data-lang="en" style="display:none;">Contact</h4>
+          <p>
+            <strong>Julie Braunsroth</strong><br>
+            Mejor Vida Insurance LLC<br>
+            <span data-lang="es">Licenciada en Nebraska</span>
+            <span data-lang="en" style="display:none;">Licensed in Nebraska</span>
+          </p>
+          <p>
+            📞 (402) 960-3206<br>
+            📧 Julie@mejorvidainsurance.com
           </p>
         </div>
 
         <div class="footer-col">
-          <h4 data-i18n="footer.license.title">Licencias</h4>
-          <p data-i18n="footer.license.body">
-            Mejor Vida Insurance LLC es una agencia de seguros con licencia en
-            Nebraska. Julie es productora de seguros con licencia en Nebraska.
+          <h4 data-lang="es">Síguenos</h4>
+          <h4 data-lang="en" style="display:none;">Follow Us</h4>
+          <div class="social-icons">
+            <a href="https://www.facebook.com/yourpage" target="_blank" rel="noopener" aria-label="Facebook">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://www.instagram.com/yourpage" target="_blank" rel="noopener" aria-label="Instagram">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <!-- Add YouTube later if needed -->
+            <!--
+            <a href="https://www.youtube.com/yourchannel" target="_blank" rel="noopener" aria-label="YouTube">
+              <i class="fab fa-youtube"></i>
+            </a>
+            -->
+          </div>
+          <p style="margin-top: 1rem; font-size: 0.875rem; opacity: 0.8;">
+            <span data-lang="es">Conéctese con nosotros en las redes sociales para consejos, noticias y actualizaciones.</span>
+            <span data-lang="en" style="display:none;">Connect with us on social media for tips, news, and updates.</span>
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4 data-lang="es">Aviso Importante</h4>
+          <h4 data-lang="en" style="display:none;">Important Notice</h4>
+          <p data-lang="es">
+            Mejor Vida Insurance LLC es una agencia de seguros independiente. No estamos afiliados con ninguna aseguradora específica. Los productos y servicios ofrecidos pueden variar según el estado y la elegibilidad.
+          </p>
+          <p data-lang="en" style="display:none;">
+            Mejor Vida Insurance LLC is an independent insurance agency. We are not affiliated with any specific carrier. Products and services offered may vary by state and eligibility.
           </p>
         </div>
       </div>
 
       <div class="footer-bottom">
-        <p>
-          <span data-i18n="footer.copy"
-            >© 2025 Mejor Vida Insurance LLC. Todos los derechos
-            reservados.</span
-          >
-        </p>
+        <p>&copy; 2025 Mejor Vida Insurance LLC. <span data-lang="es">Todos los derechos reservados.</span><span data-lang="en" style="display:none;">All rights reserved.</span></p>
       </div>
-    </footer>
+    </div>
+  </footer>
 
-    <!-- Mobile CTA Button -->
-    <a href="#quote" class="mobile-cta" data-i18n="mobile.cta"
-      >📩 Cotización Gratis</a
-    >
+  <!-- Mobile CTA Button -->
+  <a href="tel:4029603206" class="mobile-cta" data-lang="es">📞 Llamar a Julie</a>
+  <a href="tel:4029603206" class="mobile-cta" data-lang="en" style="display:none;">📞 Call Julie</a>
 
-    <script src="script.js"></script>
-  </body>
+  <script src="script.js"></script>
+</body>
 </html>
