@@ -635,3 +635,12 @@ html, body {
     padding-right: 0.75rem;
   }
 }
+/* Never allow any element to be wider than the screen */
+* {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+  /* Global: no horizontal scroll */
+html, body {
+  overflow-x: hidden;
+}
