@@ -1,4 +1,3 @@
-
 // Bilingual translations
 const translations = {
   es: {
@@ -115,7 +114,7 @@ const translations = {
     "footer.license.es":
       "Mejor Vida Insurance LLC — Agencia de seguros con licencia (Licencia #3003970091)<br />" +
       "Julie — Productora de seguros con licencia en Nebraska (Licencia #21695431)<br />" +
-      "Ramas de autoridad: Vida, Accidentes y Salud",
+      "Ramos de autoridad: Vida, Accidentes y Salud",
     "footer.copy.es": "© 2025 Mejor Vida Insurance LLC. Todos los derechos reservados.",
     "footer.copy.en": "© 2025 Mejor Vida Insurance LLC. All rights reserved."
   },
@@ -246,7 +245,7 @@ function setLanguage(lang) {
 
   document.documentElement.setAttribute("lang", lang === "en" ? "en" : "es");
 
-  // Update all text elements
+  // Update all text elements with data-i18n
   document.querySelectorAll("[data-i18n]").forEach((el) => {
     const key = el.getAttribute("data-i18n");
     const value = dict[key];
@@ -255,27 +254,40 @@ function setLanguage(lang) {
     }
   });
 
-  // Swap logo image
+  // Swap logo image if it exists
   const headerLogo = document.getElementById("header-logo");
   if (headerLogo) {
     if (lang === "es") {
-      headerLogo.src = "img/logo-spanish.png";
+      headerLogo.src = "Logo.png";
       headerLogo.alt = "Mejor Vida Insurance LLC Logo - Seguros para una mejor vida";
     } else {
-      headerLogo.src = "img/logo-english.png";
+      headerLogo.src = "Logo.png";
       headerLogo.alt = "Mejor Vida Insurance LLC Logo - Insurance for a better life";
     }
   }
 
-  // Update active state on toggle
-  document.getElementById("btn-es").classList.toggle("active", lang === "es");
-  document.getElementById("btn-en").classList.toggle("active", lang === "en");
+  // Update active state on toggle buttons
+  const btnEs = document.getElementById("btn-es");
+  const btnEn = document.getElementById("btn-en");
+  
+  if (btnEs && btnEn) {
+    btnEs.classList.toggle("active", lang === "es");
+    btnEn.classList.toggle("active", lang === "en");
+  }
 }
 
 // Initialize on page load
 document.addEventListener("DOMContentLoaded", () => {
   setLanguage("es"); // Default: Spanish
 
-  document.getElementById("btn-es").addEventListener("click", () => setLanguage("es"));
-  document.getElementById("btn-en").addEventListener("click", () => setLanguage("en"));
+  const btnEs = document.getElementById("btn-es");
+  const btnEn = document.getElementById("btn-en");
+
+  if (btnEs) {
+    btnEs.addEventListener("click", () => setLanguage("es"));
+  }
+
+  if (btnEn) {
+    btnEn.addEventListener("click", () => setLanguage("en"));
+  }
 });
