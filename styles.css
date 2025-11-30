@@ -677,3 +677,14 @@ html, body {
     flex-wrap: wrap;
   }
 }
+/* HARD CLAMP FOR HEADER ON MOBILE */
+@media (max-width: 768px) {
+  header,
+  header .container,
+  header .nav,
+  header * {
+    max-width: 100vw !important;
+    box-sizing: border-box;
+    overflow-x: hidden;
+  }
+}
