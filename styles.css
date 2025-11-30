@@ -688,3 +688,15 @@ html, body {
     overflow-x: hidden;
   }
 }
+/* SIMPLER HEADER ON MOBILE */
+@media (max-width: 768px) {
+  /* Hide nav links row on mobile */
+  header nav {
+    display: none;
+  }
+
+  /* Hide the big top "Cotización Gratis" button in header on mobile */
+  .nav-cta {
+    display: none;
+  }
+}
