@@ -58,7 +58,7 @@ ul {
 }
 
 .header-logo-img {
-  height: 50px;
+  height: 150px; /* 3x larger than before (was 50px) */
   width: auto;
 }
 
@@ -102,21 +102,28 @@ ul {
   border-color: #0066cc;
 }
 
-/* Mobile header */
+/* Mobile header - keep horizontal, just smaller */
 @media (max-width: 768px) {
   .header-container {
-    flex-direction: column;
-    gap: 1rem;
+    padding: 0.75rem 1rem;
+  }
+
+  .header-logo-img {
+    height: 60px; /* smaller on mobile but still visible */
   }
 
   .nav {
-    flex-direction: column;
-    gap: 0.5rem;
-    text-align: center;
+    gap: 1rem;
+    font-size: 0.85rem;
   }
 
   .lang-toggle {
-    justify-content: center;
+    gap: 0.25rem;
+  }
+
+  .lang-btn {
+    padding: 0.4rem 0.7rem;
+    font-size: 0.85rem;
   }
 }
 
@@ -226,11 +233,12 @@ ul {
 
 .btn-primary {
   background: #0066cc;
-  color: #fff;
+  color: #fff !important; /* Force white text */
 }
 
 .btn-primary:hover {
   background: #0052a3;
+  color: #fff !important; /* Keep white on hover */
 }
 
 /* Mobile hero */
@@ -653,6 +661,7 @@ ul {
   width: 32px;
   height: 32px;
   transition: opacity 0.3s;
+  filter: brightness(0) invert(1); /* Makes icons white */
 }
 
 .social-icon:hover {
