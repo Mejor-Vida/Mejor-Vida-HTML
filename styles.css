@@ -41,13 +41,13 @@ ul {
 }
 
 /* ========================================
-   HEADER – LIGHT, COMPACT
+   HEADER – LIGHT, COMPACT, STACKED RIGHT SIDE
    ======================================== */
 
 .header {
-  background: #f8fafc;       /* light neutral so logo text is readable */
+  background: #f8fafc;       /* light so logo text is readable */
   color: #1e293b;
-  padding: 0.4rem 0;         /* small vertical padding */
+  padding: 0.4rem 0;         /* compact vertical padding */
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -61,6 +61,7 @@ ul {
   gap: 1rem;
 }
 
+/* Left: Logo */
 .logo {
   flex-shrink: 0;
   display: flex;
@@ -68,38 +69,19 @@ ul {
 }
 
 .header-logo-img {
-  max-width: 210px;          /* good size for readability */
+  max-width: 210px;
   height: auto;
 }
 
-/* right side holds nav + lang toggle */
+/* Right: stacked ES/EN flags over nav links */
 .header-right {
   display: flex;
-  align-items: center;
-  gap: 1rem;
+  flex-direction: column;    /* stack flags on top of nav */
+  align-items: flex-end;
+  gap: 0.25rem;
 }
 
-/* NAV */
-.nav {
-  display: flex;
-  gap: 1rem;
-}
-
-.nav a {
-  color: #0f172a;
-  font-weight: 500;
-  font-size: 0.95rem;
-  padding: 0.35rem 0.5rem;
-  border-radius: 4px;
-  transition: background-color 0.2s ease, color 0.2s ease;
-}
-
-.nav a:hover {
-  background-color: #e5e7eb;
-  color: #111827;
-}
-
-/* LANGUAGE TOGGLE */
+/* FLAGS ROW */
 .lang-toggle {
   display: flex;
   gap: 0.35rem;
@@ -109,22 +91,53 @@ ul {
   background-color: #e5e7eb;
   color: #111827;
   border: 1px solid #cbd5f5;
-  padding: 0.25rem 0.6rem;
-  border-radius: 4px;
+  padding: 0.18rem 0.5rem;
+  border-radius: 999px;
   cursor: pointer;
   font-weight: 600;
   font-size: 0.8rem;
-  transition: background-color 0.2s ease, border-color 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.1s ease;
+}
+
+.lang-btn span.flag {
+  font-size: 1rem;           /* makes the flag emoji visible but not huge */
 }
 
 .lang-btn:hover {
   background-color: #d1d5db;
+  transform: translateY(-1px);
 }
 
 .lang-btn.active {
   background-color: #1d4ed8;
   color: #ffffff;
   border-color: #1d4ed8;
+}
+
+/* NAV ROW UNDER FLAGS */
+.nav {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.nav a {
+  color: #0f172a;
+  font-weight: 500;
+  font-size: 0.9rem;
+  padding: 0.2rem 0.35rem;
+  border-radius: 4px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  white-space: nowrap;
+}
+
+.nav a:hover {
+  background-color: #e5e7eb;
+  color: #111827;
 }
 
 /* ========================================
@@ -640,16 +653,13 @@ ul {
    MOBILE & TABLET
    ======================================== */
 
-/* On mobile: logo LEFT, nav + ES/EN RIGHT in same row */
 @media (max-width: 768px) {
   .header {
     padding: 0.3rem 0;
   }
 
   .header-container {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
+    gap: 0.5rem;
   }
 
   .header-logo-img {
@@ -657,7 +667,7 @@ ul {
   }
 
   .header-right {
-    gap: 0.5rem;
+    align-items: flex-end;
   }
 
   .nav {
@@ -667,12 +677,15 @@ ul {
   .nav a {
     font-size: 0.78rem;
     padding: 0.15rem 0.35rem;
-    white-space: nowrap;
   }
 
   .lang-btn {
-    padding: 0.2rem 0.5rem;
+    padding: 0.15rem 0.45rem;
     font-size: 0.75rem;
+  }
+
+  .lang-btn span.flag {
+    font-size: 0.9rem;
   }
 
   /* Stack hero content */
