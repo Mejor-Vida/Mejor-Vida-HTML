@@ -102,19 +102,25 @@ ul {
   border-color: #0066cc;
 }
 
-/* Mobile header - keep horizontal, just smaller */
+/* Mobile header - logo visible, less cramped text */
 @media (max-width: 768px) {
   .header-container {
-    padding: 0.75rem 1rem;
+    padding: 0.5rem 0.75rem;
+    gap: 0.5rem;
   }
 
+  /* Make sure the logo is actually visible on mobile */
   .header-logo-img {
-    height: 60px; /* smaller on mobile but still visible */
+    height: 70px;
   }
 
   .nav {
-    gap: 1rem;
-    font-size: 0.85rem;
+    gap: 0.6rem;
+    font-size: 0.8rem;
+  }
+
+  .nav a {
+    white-space: nowrap; /* prevent wrapping each nav label */
   }
 
   .lang-toggle {
@@ -122,8 +128,8 @@ ul {
   }
 
   .lang-btn {
-    padding: 0.4rem 0.7rem;
-    font-size: 0.85rem;
+    padding: 0.35rem 0.6rem;
+    font-size: 0.8rem;
   }
 }
 
@@ -685,4 +691,14 @@ ul {
    ======================================== */
 #year::after {
   content: attr(data-year);
+}
+
+/* ========================================
+   FINAL OVERRIDE: HERO BUTTON WHITE TEXT
+   ======================================== */
+.hero .btn-primary,
+.hero .btn-primary:hover,
+.hero .btn-primary:visited,
+.hero .btn-primary:active {
+  color: #ffffff !important;
 }
