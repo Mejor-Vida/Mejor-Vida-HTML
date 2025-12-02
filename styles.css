@@ -59,7 +59,7 @@ img {
 }
 
 .header-logo-img {
-  height: 50px;
+  height: 150px;
   width: auto;
 }
 
@@ -121,6 +121,10 @@ img {
 }
 
 @media (max-width: 768px) {
+  .header-logo-img {
+    height: 120px;
+  }
+
   .header-container {
     flex-direction: row;
     align-items: center;
