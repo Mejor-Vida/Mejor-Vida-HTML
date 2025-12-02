@@ -121,8 +121,8 @@
               <a href="mailto:Julie@mejorvidainsurance.com">Julie@mejorvidainsurance.com</a>
             </p>
             <p>
-              <a href="#contact" class="btn btn-primary" data-lang="es">Agenda una llamada</a>
-              <a href="#contact" class="btn btn-primary" data-lang="en" style="display:none;">Schedule a call</a>
+              <a href="#request-info" class="btn btn-primary" data-lang="es">Quiero más información</a>
+              <a href="#request-info" class="btn btn-primary" data-lang="en" style="display:none;">Request information</a>
             </p>
           </div>
         </div>
@@ -206,7 +206,6 @@
       <h2 data-lang="es">Cómo funciona el seguro de gastos finales</h2>
       <h2 data-lang="en" style="display:none;">How final expense insurance works</h2>
 
-      <!-- text + image in a single flex layout -->
       <div class="how-layout">
         <div class="how-main">
           <p class="section-subtitle" data-lang="es">
@@ -472,7 +471,7 @@
     </div>
   </section>
 
-  <!-- CONTACT -->
+  <!-- CONTACT (simple info, plus button to form) -->
   <section id="contact" class="contact">
     <div class="container">
       <h2 data-lang="es">Ponte en contacto</h2>
@@ -496,7 +495,111 @@
           <a href="tel:5312291712">(531) 229‑1712</a> |
           <a href="mailto:Julie@mejorvidainsurance.com">Julie@mejorvidainsurance.com</a>
         </p>
+        <p style="margin-top: 1rem;">
+          <a href="#request-info" class="btn btn-primary" data-lang="es">Enviar mis datos</a>
+          <a href="#request-info" class="btn btn-primary" data-lang="en" style="display:none;">Send my info</a>
+        </p>
       </div>
+    </div>
+  </section>
+
+  <!-- REQUEST INFO FORM (LEAD FORM TO AGENT CRM) -->
+  <section id="request-info" class="request-info">
+    <div class="container">
+      <h2 data-lang="es">Comparte tu información</h2>
+      <h2 data-lang="en" style="display:none;">Share your information</h2>
+
+      <p data-lang="es" class="request-info-intro">
+        Completa este formulario y Julie se pondrá en contacto contigo para hablar de tus opciones de seguro de gastos finales.
+      </p>
+      <p data-lang="en" class="request-info-intro" style="display:none;">
+        Fill out this form and Julie will contact you to talk about your final expense insurance options.
+      </p>
+
+      <!-- IMPORTANT: Replace the action URL with your Agent CRM form/funnel URL -->
+      <form
+        id="lead-form"
+        class="lead-form"
+        method="POST"
+        action="https://YOUR-AGENT-CRM-FORM-URL-HERE"
+      >
+        <div class="form-row">
+          <div class="form-group">
+            <label for="firstName" data-lang="es">Nombre</label>
+            <label for="firstName" data-lang="en" style="display:none;">First name</label>
+            <input type="text" id="firstName" name="first_name" required />
+          </div>
+
+          <div class="form-group">
+            <label for="lastName" data-lang="es">Apellido</label>
+            <label for="lastName" data-lang="en" style="display:none;">Last name</label>
+            <input type="text" id="lastName" name="last_name" required />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="email" data-lang="es">Correo electrónico</label>
+            <label for="email" data-lang="en" style="display:none;">Email</label>
+            <input type="email" id="email" name="email" required />
+          </div>
+
+          <div class="form-group">
+            <label for="phone" data-lang="es">Teléfono</label>
+            <label for="phone" data-lang="en" style="display:none;">Phone</label>
+            <input type="tel" id="phone" name="phone" required />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="state" data-lang="es">Estado de residencia</label>
+          <label for="state" data-lang="en" style="display:none;">State of residence</label>
+          <input type="text" id="state" name="state" />
+        </div>
+
+        <div class="form-group">
+          <label for="preferredContact" data-lang="es">Cómo prefieres que te contacte</label>
+          <label for="preferredContact" data-lang="en" style="display:none;">How you prefer to be contacted</label>
+          <select id="preferredContact" name="preferred_contact">
+            <option value="" data-lang="es">Selecciona una opción</option>
+            <option value="" data-lang="en" style="display:none;">Select an option</option>
+
+            <option value="phone_es" data-lang="es">Teléfono (español)</option>
+            <option value="phone_en" data-lang="es">Phone (English)</option>
+
+            <option value="phone_es" data-lang="en" style="display:none;">Phone (Spanish)</option>
+            <option value="phone_en" data-lang="en" style="display:none;">Phone (English)</option>
+
+            <option value="email" data-lang="es">Correo electrónico</option>
+            <option value="email" data-lang="en" style="display:none;">Email</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="message" data-lang="es">¿Hay algo más que te gustaría compartir?</label>
+          <label for="message" data-lang="en" style="display:none;">Anything else you’d like to share?</label>
+          <textarea id="message" name="message" rows="4"></textarea>
+        </div>
+
+        <p class="form-disclaimer-small" data-lang="es">
+          Al enviar este formulario, autorizas a Mejor Vida Insurance LLC a contactarte por teléfono, correo electrónico o mensaje
+          de texto sobre opciones de seguro. Puedes cancelar en cualquier momento.
+        </p>
+        <p class="form-disclaimer-small" data-lang="en" style="display:none;">
+          By submitting this form, you authorize Mejor Vida Insurance LLC to contact you by phone, email, or text message
+          about insurance options. You can opt out at any time.
+        </p>
+
+        <button type="submit" class="btn btn-primary" data-lang="es">Enviar</button>
+        <button type="submit" class="btn btn-primary" data-lang="en" style="display:none;">Submit</button>
+
+        <p id="form-success" class="form-success" style="display:none;" data-lang="es">
+          ¡Gracias! Tu información se envió correctamente. Julie se pondrá en contacto contigo pronto.
+        </p>
+        <p id="form-success-en" class="form-success" style="display:none;" data-lang="en">
+          Thank you! Your information has been sent. Julie will reach out to you soon.
+        </p>
+      </form>
     </div>
   </section>
 
@@ -556,5 +659,39 @@
   </footer>
 
   <script src="script.js"></script>
+  <script>
+    // Simple JS to show a success message without leaving the page
+    // Only works well if Agent CRM allows redirect back or if you later swap to AJAX.
+    const leadForm = document.getElementById('lead-form');
+    const successEs = document.getElementById('form-success');
+    const successEn = document.getElementById('form-success-en');
+
+    if (leadForm) {
+      leadForm.addEventListener('submit', function (e) {
+        // If you want a pure redirect to Agent CRM, remove this preventDefault.
+        // e.preventDefault();
+
+        // Basic front-end email/phone check (optional)
+        const email = document.getElementById('email');
+        const phone = document.getElementById('phone');
+
+        if (!email.value && !phone.value) {
+          alert('Please provide at least an email or phone number.');
+          e.preventDefault();
+          return;
+        }
+
+        // Let the normal submit happen to Agent CRM
+        // If you keep preventDefault and post via AJAX, you can then show:
+        // successEs.style.display = 'block'; or successEn.style.display = 'block';
+      });
+    }
+
+    // Set current year in footer
+    const yearSpan = document.getElementById('year');
+    if (yearSpan) {
+      yearSpan.textContent = new Date().getFullYear();
+    }
+  </script>
 </body>
 </html>
