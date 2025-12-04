@@ -20,11 +20,17 @@
   <header class="header">
     <div class="container header-container">
       <div class="logo">
-        <!-- Your logo image -->
+        <!-- Spanish logo -->
         <img
-          src="images/logo-mejor-vida.png"
+          src="/img/logo-spanish.png"
           alt="Mejor Vida Insurance"
-          class="header-logo-img"
+          class="header-logo-img lang-es"
+        />
+        <!-- English logo -->
+        <img
+          src="/img/logo-english.png"
+          alt="Mejor Vida Insurance"
+          class="header-logo-img lang-en"
         />
       </div>
 
@@ -132,9 +138,9 @@
       </div>
 
       <div class="hero-image">
-        <!-- Replace with your real hero image -->
+        <!-- Use one of your family photos here -->
         <img
-          src="images/family-hero.jpg"
+          src="/img/hispanic-family-laughing.jpg"
           alt="Familia protegida con seguro de gastos finales"
         />
       </div>
@@ -150,7 +156,7 @@
       <div class="about-content">
         <div class="about-photo">
           <img
-            src="images/julie-portrait.jpg"
+            src="/img/Julie.png"
             alt="Julie - Mejor Vida Insurance"
           />
           <p class="about-photo-caption lang-es">
@@ -301,8 +307,9 @@
         </div>
 
         <div class="how-image">
+          <!-- You can swap this for any other /img photo you like -->
           <img
-            src="images/julie-client.jpg"
+            src="/img/hispanic-family.jpg"
             alt="Julie helping a client"
           />
         </div>
@@ -846,9 +853,6 @@
     const yearEn = document.getElementById('year-en');
     if (yearEs) yearEs.textContent = year;
     if (yearEn) yearEn.textContent = year;
-
-    // Currently the form just submits normally (or via mailto if you set it).
-    // You can wire this up to Vercel / email later.
   </script>
 </body>
 </html>
