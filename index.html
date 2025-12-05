@@ -1,32 +1,242 @@
-<!-- ... rest of your HTML ... -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mejor Vida Insurance</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- HEADER -->
+  <header class="header">
+    <div class="container header-container">
+      <!-- Clickable logo that scrolls to top -->
+      <a href="#" class="logo-link">
+        <img src="images/logo.png" alt="Mejor Vida Insurance Logo" class="header-logo-img" />
+      </a>
 
-<!-- HEADER -->
-<header class="header">
-  <div class="container header-container">
-    <!-- Clickable logo that scrolls to top -->
-    <a href="#" class="logo-link">
-      <img src="images/logo.png" alt="Mejor Vida Insurance Logo" class="header-logo-img" />
-    </a>
+      <div class="header-right">
+        <div class="lang-toggle">
+          <button class="lang-btn active" onclick="switchLanguage('es')">
+            <span class="flag">🇪🇸</span> ES
+          </button>
+          <button class="lang-btn" onclick="switchLanguage('en')">
+            <span class="flag">🇺🇸</span> EN
+          </button>
+        </div>
 
-    <div class="header-right">
-      <div class="lang-toggle">
-        <button class="lang-btn active" onclick="switchLanguage('es')">
-          <span class="flag">🇪🇸</span> ES
-        </button>
-        <button class="lang-btn" onclick="switchLanguage('en')">
-          <span class="flag">🇺🇸</span> EN
-        </button>
+        <nav class="nav">
+          <a href="#about" data-es="Sobre Julie" data-en="About Julie">Sobre Julie</a>
+          <a href="#how" data-es="Cómo funciona" data-en="How It Works">Cómo funciona</a>
+          <a href="#carriers" data-es="Aseguradoras" data-en="Carriers">Aseguradoras</a>
+          <a href="#contact" data-es="Contacto" data-en="Contact">Contacto</a>
+          <a href="#request-info" data-es="Solicitar información" data-en="Request Info">Solicitar información</a>
+        </nav>
       </div>
-
-      <nav class="nav">
-        <a href="#about" data-es="Sobre Julie" data-en="About Julie">Sobre Julie</a>
-        <a href="#how" data-es="Cómo funciona" data-en="How It Works">Cómo funciona</a>
-        <a href="#carriers" data-es="Aseguradoras" data-en="Carriers">Aseguradoras</a>
-        <a href="#contact" data-es="Contacto" data-en="Contact">Contacto</a>
-        <a href="#request-info" data-es="Solicitar información" data-en="Request Info">Solicitar información</a>
-      </nav>
     </div>
-  </div>
-</header>
+  </header>
 
-<!-- ... rest of your HTML ... -->
+  <!-- HERO -->
+  <section class="hero" id="top">
+    <div class="container hero-container">
+      <div class="hero-text">
+        <span class="hero-badge" data-es="Seguro de gastos finales" data-en="Final Expense Insurance">Seguro de gastos finales</span>
+        <h1 data-es="Protege a tu familia con un plan asequible" data-en="Protect Your Family with an Affordable Plan">Protege a tu familia con un plan asequible</h1>
+        <p class="hero-subheading" data-es="Planes de seguro de gastos finales para personas mayores" data-en="Final expense insurance plans for seniors">Planes de seguro de gastos finales para personas mayores</p>
+        <div class="hero-card">
+          <h3 data-es="Contacta a Julie" data-en="Contact Julie">Contacta a Julie</h3>
+          <p class="hero-contact" data-es="Teléfono: " data-en="Phone: ">
+            <strong><a href="tel:+14084000000">+1 (408) 400-0000</a></strong>
+          </p>
+          <p class="hero-contact" data-es="Correo: " data-en="Email: ">
+            <strong><a href="mailto:julie@mejorvida.com">julie@mejorvida.com</a></strong>
+          </p>
+          <a href="#request-info" class="btn btn-primary" data-es="Quiero más información" data-en="Request More Info">Quiero más información</a>
+        </div>
+      </div>
+      <div class="hero-image">
+        <img src="images/julie-hero.jpg" alt="Julie Mejor Vida Insurance" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT JULIE -->
+  <section class="about" id="about">
+    <div class="container">
+      <h2 data-es="Sobre Julie" data-en="About Julie">Sobre Julie</h2>
+      <div class="about-content">
+        <div class="about-photo">
+          <img src="images/julie.jpg" alt="Julie Mejor Vida Insurance" />
+          <p class="about-photo-caption" data-es="Julie, agente de seguros con experiencia" data-en="Julie, experienced insurance agent">Julie, agente de seguros con experiencia</p>
+        </div>
+        <div class="about-text">
+          <div class="about-chips">
+            <span class="chip" data-es="Licencia de Seguros" data-en="Licensed Agent">Licencia de Seguros</span>
+            <span class="chip" data-es="Especialista en gastos finales" data-en="Final Expense Specialist">Especialista en gastos finales</span>
+            <span class="chip" data-es="Atención personalizada" data-en="Personalized Service">Atención personalizada</span>
+          </div>
+          <h3 data-es="Conoce a Julie" data-en="Meet Julie">Conoce a Julie</h3>
+          <p data-es="Julie tiene más de 10 años ayudando a familias a proteger su futuro con planes de seguro asequibles." data-en="Julie has over 10 years helping families protect their future with affordable insurance plans.">Julie tiene más de 10 años ayudando a familias a proteger su futuro con planes de seguro asequibles.</p>
+          <ul class="about-values">
+            <li data-es="Atención cercana y confiable" data-en="Caring and trustworthy service">Atención cercana y confiable</li>
+            <li data-es="Planes adaptados a tus necesidades" data-en="Plans tailored to your needs">Planes adaptados a tus necesidades</li>
+            <li data-es="Asesoría clara y honesta" data-en="Clear and honest advice">Asesoría clara y honesta</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="how" id="how">
+    <div class="container">
+      <h2 data-es="Cómo funciona" data-en="How It Works">Cómo funciona</h2>
+      <p class="section-subtitle" data-es="Proceso sencillo para obtener tu seguro" data-en="Simple process to get your insurance">Proceso sencillo para obtener tu seguro</p>
+      <div class="how-layout">
+        <div class="how-main">
+          <div class="how-grid">
+            <div class="how-step">
+              <div class="how-step-number">1</div>
+              <h3 data-es="Consulta inicial" data-en="Initial Consultation">Consulta inicial</h3>
+              <p data-es="Hablamos para entender tus necesidades y opciones." data-en="We talk to understand your needs and options.">Hablamos para entender tus necesidades y opciones.</p>
+            </div>
+            <div class="how-step">
+              <div class="how-step-number">2</div>
+              <h3 data-es="Cotización personalizada" data-en="Personalized Quote">Cotización personalizada</h3>
+              <p data-es="Te ofrecemos planes que se ajustan a tu presupuesto." data-en="We offer plans that fit your budget.">Te ofrecemos planes que se ajustan a tu presupuesto.</p>
+            </div>
+            <div class="how-step">
+              <div class="how-step-number">3</div>
+              <h3 data-es="Aprobación rápida" data-en="Quick Approval">Aprobación rápida</h3>
+              <p data-es="Proceso sencillo y sin complicaciones." data-en="Simple and hassle-free process.">Proceso sencillo y sin complicaciones.</p>
+            </div>
+            <div class="how-step">
+              <div class="how-step-number">4</div>
+              <h3 data-es="Protección inmediata" data-en="Immediate Protection">Protección inmediata</h3>
+              <p data-es="Tu familia estará protegida desde el primer día." data-en="Your family is protected from day one.">Tu familia estará protegida desde el primer día.</p>
+            </div>
+          </div>
+        </div>
+        <div class="how-image">
+          <img src="images/how-it-works.jpg" alt="How It Works" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CARRIERS -->
+  <section class="carriers" id="carriers">
+    <div class="container">
+      <h2 data-es="Aseguradoras" data-en="Carriers">Aseguradoras</h2>
+      <div class="carriers-grid">
+        <div class="carrier-card">
+          <h3>Mutual of Omaha</h3>
+          <ul>
+            <li data-es="Planes asequibles" data-en="Affordable plans">Planes asequibles</li>
+            <li data-es="Cobertura amplia" data-en="Wide coverage">Cobertura amplia</li>
+            <li data-es="Proceso rápido" data-en="Fast process">Proceso rápido</li>
+          </ul>
+        </div>
+        <div class="carrier-card">
+          <h3>Foresters Financial</h3>
+          <ul>
+            <li data-es="Beneficios adicionales" data-en="Additional benefits">Beneficios adicionales</li>
+            <li data-es="Planes flexibles" data-en="Flexible plans">Planes flexibles</li>
+            <li data-es="Atención personalizada" data-en="Personalized service">Atención personalizada</li>
+          </ul>
+        </div>
+        <div class="carrier-card">
+          <h3>Royal Neighbors</h3>
+          <ul>
+            <li data-es="Comunidad fuerte" data-en="Strong community">Comunidad fuerte</li>
+            <li data-es="Planes accesibles" data-en="Affordable plans">Planes accesibles</li>
+            <li data-es="Soporte confiable" data-en="Reliable support">Soporte confiable</li>
+          </ul>
+        </div>
+      </div>
+      <p class="carriers-note" data-es="Nota: La disponibilidad puede variar según el estado." data-en="Note: Availability may vary by state.">Nota: La disponibilidad puede variar según el estado.</p>
+    </div>
+  </section>
+
+  <!-- REQUEST INFO FORM -->
+  <section class="request-info" id="request-info">
+    <div class="container">
+      <h2 data-es="Solicitar información" data-en="Request Information">Solicitar información</h2>
+      <p class="request-info-intro" data-es="Complete el formulario y Julie se pondrá en contacto contigo." data-en="Fill out the form and Julie will contact you.">Complete el formulario y Julie se pondrá en contacto contigo.</p>
+      <form class="lead-form" action="https://YOUR-AGENT-CRM-FORM-URL-HERE" method="POST">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="first_name" data-es="Nombre" data-en="First Name">Nombre</label>
+            <input type="text" id="first_name" name="first_name" required />
+          </div>
+          <div class="form-group">
+            <label for="last_name" data-es="Apellido" data-en="Last Name">Apellido</label>
+            <input type="text" id="last_name" name="last_name" required />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="email" data-es="Correo electrónico" data-en="Email">Correo electrónico</label>
+            <input type="email" id="email" name="email" required />
+          </div>
+          <div class="form-group">
+            <label for="phone" data-es="Teléfono" data-en="Phone">Teléfono</label>
+            <input type="tel" id="phone" name="phone" required />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="state" data-es="Estado" data-en="State">Estado</label>
+            <select id="state" name="state" required>
+              <option value="" disabled selected data-es="Seleccione un estado" data-en="Select a state">Seleccione un estado</option>
+              <option value="NE" data-es="Nebraska" data-en="Nebraska">Nebraska</option>
+              <option value="CA" data-es="California" data-en="California">California</option>
+              <!-- Add other states as needed -->
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="contact_method" data-es="Método preferido" data-en="Preferred Contact Method">Método preferido</label>
+            <select id="contact_method" name="contact_method" required>
+              <option value="" disabled selected data-es="Seleccione un método" data-en="Select a method">Seleccione un método</option>
+              <option value="phone" data-es="Teléfono" data-en="Phone">Teléfono</option>
+              <option value="email" data-es="Correo electrónico" data-en="Email">Correo electrónico</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="message" data-es="Mensaje" data-en="Message">Mensaje</label>
+          <textarea id="message" name="message" rows="4"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" data-es="Enviar mis datos" data-en="Submit My Info">Enviar mis datos</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <h2 data-es="Contacto" data-en="Contact">Contacto</h2>
+      <p data-es="¿Tienes preguntas? Llámanos o envíanos un correo." data-en="Have questions? Call or email us.">¿Tienes preguntas? Llámanos o envíanos un correo.</p>
+      <div class="contact-info">
+        <p><strong data-es="Teléfono:" data-en="Phone:">Teléfono:</strong> <a href="tel:+14084000000">+1 (408) 400-0000</a></p>
+        <p><strong data-es="Correo:" data-en="Email:">Correo:</strong> <a href="mailto:julie@mejorvida.com">julie@mejorvida.com</a></p>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Simple language switcher example
+    function switchLanguage(lang) {
+      document.documentElement.lang = lang;
+      const elements = document.querySelectorAll('[data-es][data-en]');
+      elements.forEach(el => {
+        el.textContent = lang === 'es' ? el.getAttribute('data-es') : el.getAttribute('data-en');
+      });
+      // Update active button
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.textContent.trim().startsWith(lang.toUpperCase()));
+      });
+    }
+  </script>
+</body>
+</html>
