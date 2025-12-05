@@ -506,14 +506,14 @@
   <!-- REQUEST INFO FORM (LEAD FORM TO AGENT CRM) -->
   <section id="request-info" class="request-info">
     <div class="container">
-      <h2 data-lang="es">Nuevos planes de gastos finales</h2>
-      <h2 data-lang="en" style="display:none;">New burial plans available</h2>
+      <h2 data-lang="es">Obtenga su cotización gratuita</h2>
+      <h2 data-lang="en" style="display:none;">Get your free quote</h2>
 
       <p data-lang="es" class="request-info-intro">
-        Completa este formulario para ver opciones de planes de gastos finales disponibles en tu estado.
+        Complete este formulario para ver opciones de planes de gastos finales disponibles en su estado.
       </p>
       <p data-lang="en" class="request-info-intro" style="display:none;">
-        Fill out this form to see burial plan options available in your state.
+        Fill out this form to see final expense plan options available in your state.
       </p>
 
       <!-- IMPORTANT: Replace the action URL with your Agent CRM form/funnel URL -->
@@ -525,7 +525,7 @@
       >
         <!-- TOGGLE: Coverage vs Budget -->
         <div class="form-group">
-          <label class="toggle-label" data-lang="es">¿Estás pensando en términos de cobertura o presupuesto mensual?</label>
+          <label class="toggle-label" data-lang="es">¿Está pensando en términos de cobertura o presupuesto mensual?</label>
           <label class="toggle-label" data-lang="en" style="display:none;">Are you thinking in terms of coverage or monthly budget?</label>
           
           <div class="toggle-buttons">
@@ -545,24 +545,24 @@
 
         <!-- COVERAGE DROPDOWN (shown by default) -->
         <div class="form-group" id="coverage-group">
-          <label for="coverageAmount" data-lang="es">Selecciona un monto de cobertura</label>
+          <label for="coverageAmount" data-lang="es">Seleccione un monto de cobertura</label>
           <label for="coverageAmount" data-lang="en" style="display:none;">Select a coverage amount</label>
           <select id="coverageAmount" name="coverage_amount">
-            <option value="" data-lang="es">Selecciona una opción</option>
+            <option value="" data-lang="es">Seleccione una opción</option>
             <option value="" data-lang="en" style="display:none;">Select an option</option>
 
+            <option value="3000" data-lang="es">$3,000</option>
             <option value="5000" data-lang="es">$5,000</option>
-            <option value="10000" data-lang="es">$10,000</option>
+            <option value="7500" data-lang="es">$7,500</option>
+            <option value="12000" data-lang="es">$12,000</option>
             <option value="15000" data-lang="es">$15,000</option>
-            <option value="20000" data-lang="es">$20,000</option>
-            <option value="25000" data-lang="es">$25,000</option>
             <option value="other" data-lang="es">Otro monto</option>
 
+            <option value="3000" data-lang="en" style="display:none;">$3,000</option>
             <option value="5000" data-lang="en" style="display:none;">$5,000</option>
-            <option value="10000" data-lang="en" style="display:none;">$10,000</option>
+            <option value="7500" data-lang="en" style="display:none;">$7,500</option>
+            <option value="12000" data-lang="en" style="display:none;">$12,000</option>
             <option value="15000" data-lang="en" style="display:none;">$15,000</option>
-            <option value="20000" data-lang="en" style="display:none;">$20,000</option>
-            <option value="25000" data-lang="en" style="display:none;">$25,000</option>
             <option value="other" data-lang="en" style="display:none;">Other amount</option>
           </select>
 
@@ -571,7 +571,7 @@
             type="text"
             id="coverageOther"
             name="coverage_other"
-            placeholder="Ingresa otro monto de cobertura"
+            placeholder="Ingrese otro monto de cobertura"
             data-lang="es"
             style="display:none; margin-top: 0.5rem;"
           />
@@ -587,10 +587,10 @@
 
         <!-- BUDGET DROPDOWN (hidden by default) -->
         <div class="form-group" id="budget-group" style="display:none;">
-          <label for="budgetAmount" data-lang="es">Selecciona un presupuesto mensual</label>
+          <label for="budgetAmount" data-lang="es">Seleccione un presupuesto mensual</label>
           <label for="budgetAmount" data-lang="en" style="display:none;">Select a monthly budget</label>
           <select id="budgetAmount" name="budget_amount">
-            <option value="" data-lang="es">Selecciona una opción</option>
+            <option value="" data-lang="es">Seleccione una opción</option>
             <option value="" data-lang="en" style="display:none;">Select an option</option>
 
             <option value="25" data-lang="es">$25 por mes</option>
@@ -613,7 +613,7 @@
             type="text"
             id="budgetOther"
             name="budget_other"
-            placeholder="Ingresa otro presupuesto mensual"
+            placeholder="Ingrese otro presupuesto mensual"
             data-lang="es"
             style="display:none; margin-top: 0.5rem;"
           />
@@ -639,7 +639,7 @@
             <label for="gender" data-lang="es">Género</label>
             <label for="gender" data-lang="en" style="display:none;">Gender</label>
             <select id="gender" name="gender" required>
-              <option value="" data-lang="es">Selecciona</option>
+              <option value="" data-lang="es">Seleccione</option>
               <option value="" data-lang="en" style="display:none;">Select</option>
 
               <option value="female" data-lang="es">Femenino</option>
@@ -659,10 +659,10 @@
           </div>
 
           <div class="form-group">
-            <label for="tobacco" data-lang="es">¿Usas tabaco?</label>
+            <label for="tobacco" data-lang="es">¿Usa tabaco?</label>
             <label for="tobacco" data-lang="en" style="display:none;">Tobacco use</label>
             <select id="tobacco" name="tobacco" required>
-              <option value="" data-lang="es">Selecciona</option>
+              <option value="" data-lang="es">Seleccione</option>
               <option value="" data-lang="en" style="display:none;">Select</option>
 
               <option value="no" data-lang="es">No</option>
