@@ -71,21 +71,15 @@ img {
   z-index: 100;
 }
 
-/* Optional overlay for better text contrast */
-.header::before {
-  content: "";
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background-color: rgba(0, 0, 0, 0.4); /* Dark overlay with 40% opacity */
-  z-index: -1;
-}
+/* Overlay removed as per your request */
 
+/* Content container inside header */
 .header-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1.5rem;
-  position: relative; /* Ensure content is above overlay */
+  position: relative; /* Ensure content is above background */
   z-index: 2;
 }
 
@@ -123,12 +117,12 @@ img {
   cursor: pointer;
   font-size: 0.85rem;
   font-weight: 600;
-  color: #ffffff; /* Changed to white for better contrast on dark background */
+  color: #ffffff; /* White text for contrast */
   transition: all 0.2s;
   display: flex;
   align-items: center;
   gap: 0.25rem;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.5); /* Add text shadow for better readability */
+  text-shadow: 0 1px 2px rgba(0,0,0,0.5); /* Text shadow for readability */
 }
 
 .lang-btn .flag {
@@ -153,9 +147,9 @@ img {
 .nav a {
   font-size: 0.9rem;
   font-weight: 500;
-  color: #ffffff; /* Changed to white for better contrast */
+  color: #ffffff; /* White text for contrast */
   transition: color 0.2s;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.5); /* Add text shadow for better readability */
+  text-shadow: 0 1px 2px rgba(0,0,0,0.5); /* Text shadow for readability */
 }
 
 .nav a:hover {
