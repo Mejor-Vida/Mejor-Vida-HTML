@@ -101,7 +101,7 @@ img {
 }
 
 .header-right {
-  color: #e0e7ff; /* Softer light blue for better contrast */
+  color: #000000; /* Black text */
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -115,18 +115,18 @@ img {
 
 .lang-btn {
   background-color: transparent;
-  border: 1px solid rgba(224, 231, 255, 0.7);
+  border: 1px solid rgba(0, 0, 0, 0.6); /* Darker border for black text */
   padding: 0.25rem 0.6rem;
   border-radius: 4px;
   cursor: pointer;
   font-size: 0.85rem;
   font-weight: 600;
-  color: #e0e7ff; /* Softer light blue */
+  color: #000000; /* Black text */
   transition: all 0.2s;
   display: flex;
   align-items: center;
   gap: 0.25rem;
-  text-shadow: none; /* Remove text shadow for clarity */
+  text-shadow: none; /* Remove text shadow */
 }
 
 .lang-btn .flag {
@@ -134,14 +134,14 @@ img {
 }
 
 .lang-btn:hover {
-  background-color: rgba(224, 231, 255, 0.3);
-  color: #ffffff;
-  border-color: #ffffff;
+  background-color: rgba(0, 0, 0, 0.1); /* Subtle dark hover */
+  color: #000000;
+  border-color: #000000;
 }
 
 .lang-btn.active {
   background-color: #3b82f6;
-  color: #ffffff;
+  color: #ffffff; /* Keep white for active state */
   border-color: #3b82f6;
 }
 
@@ -153,13 +153,13 @@ img {
 .nav a {
   font-size: 0.9rem;
   font-weight: 600;
-  color: #e0e7ff; /* Softer light blue */
+  color: #000000; /* Black text */
   transition: color 0.2s;
   text-shadow: none; /* Remove text shadow */
 }
 
 .nav a:hover {
-  color: #93c5fd; /* Light blue */
+  color: #3b82f6; /* Blue on hover */
 }
 
 @media (max-width: 768px) {
