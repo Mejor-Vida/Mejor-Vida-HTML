@@ -4,8 +4,8 @@
 :target::before {
   content: "";
   display: block;
-  height: 180px; /* Adjust to match your header height */
-  margin-top: -180px;
+  height: 120px; /* Reduced to match thinner header */
+  margin-top: -120px;
   visibility: hidden;
   pointer-events: none;
 }
@@ -56,7 +56,7 @@ img {
    ======================================== */
 .header {
   background-color: #f9fafb;
-  padding: 0.75rem 0;
+  padding: 0.3rem 0; /* Reduced vertical padding for thinner header */
   border-bottom: 1px solid #e5e7eb;
   position: sticky;
   top: 0;
@@ -79,7 +79,7 @@ img {
 }
 
 .header-logo-img {
-  height: 150px; /* Adjust to match your cropped logo height */
+  height: 110px; /* Reduced logo height */
   width: auto;
   cursor: pointer; /* Pointer cursor on hover */
 }
@@ -143,7 +143,7 @@ img {
 
 @media (max-width: 768px) {
   .header-logo-img {
-    height: 120px; /* Slightly smaller on mobile */
+    height: 90px; /* Smaller on mobile */
   }
 
   .header-container {
@@ -763,7 +763,9 @@ input[type="date"]:focus {
   margin-right: auto;
 }
 
+/* Hide success message by default */
 .form-success {
+  display: none;
   font-size: 1rem;
   color: #16a34a;
   margin-top: 1rem;
