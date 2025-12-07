@@ -52,14 +52,14 @@
           <a href="index.html#carriers" data-lang="es">Aseguradoras</a>
           <a href="index.html#carriers" data-lang="en" style="display:none;">Carriers</a>
 
-          <a href="quote.html#contact" data-lang="es">Cotización gratis</a>
-          <a href="quote.html#contact" data-lang="en" style="display:none;">Free quote</a>
+          <a href="quote.html#request-info" data-lang="es">Cotización gratis</a>
+          <a href="quote.html#request-info" data-lang="en" style="display:none;">Free quote</a>
         </nav>
       </div>
     </div>
   </header>
 
-  <!-- REQUEST INFO FORM -->
+  <!-- REQUEST INFO FORM (LEAD FORM TO AGENT CRM) -->
   <section id="request-info" class="request-info">
     <div class="container">
       <h2 data-lang="es">Obtenga su cotización gratuita</h2>
@@ -72,7 +72,7 @@
         Fill out this form to see final expense plan options available in your state.
       </p>
 
-      <!-- Replace the action URL with your Agent CRM form/funnel URL -->
+      <!-- IMPORTANT: Replace the action URL with your Agent CRM form/funnel URL -->
       <form
         id="lead-form"
         class="lead-form"
@@ -107,18 +107,18 @@
             <option value="" data-lang="es">Seleccione una opción</option>
             <option value="" data-lang="en" style="display:none;">Select an option</option>
 
-            <option value="3000" data-lang="es">\$3,000</option>
-            <option value="5000" data-lang="es">\$5,000</option>
-            <option value="7500" data-lang="es">\$7,500</option>
-            <option value="12000" data-lang="es">\$12,000</option>
-            <option value="15000" data-lang="es">\$15,000</option>
+            <option value="3000" data-lang="es">$3,000</option>
+            <option value="5000" data-lang="es">$5,000</option>
+            <option value="7500" data-lang="es">$7,500</option>
+            <option value="12000" data-lang="es">$12,000</option>
+            <option value="15000" data-lang="es">$15,000</option>
             <option value="other" data-lang="es">Otro monto</option>
 
-            <option value="3000" data-lang="en" style="display:none;">\$3,000</option>
-            <option value="5000" data-lang="en" style="display:none;">\$5,000</option>
-            <option value="7500" data-lang="en" style="display:none;">\$7,500</option>
-            <option value="12000" data-lang="en" style="display:none;">\$12,000</option>
-            <option value="15000" data-lang="en" style="display:none;">\$15,000</option>
+            <option value="3000" data-lang="en" style="display:none;">$3,000</option>
+            <option value="5000" data-lang="en" style="display:none;">$5,000</option>
+            <option value="7500" data-lang="en" style="display:none;">$7,500</option>
+            <option value="12000" data-lang="en" style="display:none;">$12,000</option>
+            <option value="15000" data-lang="en" style="display:none;">$15,000</option>
             <option value="other" data-lang="en" style="display:none;">Other amount</option>
           </select>
 
@@ -137,6 +137,7 @@
             name="coverage_other"
             placeholder="Enter another coverage amount"
             data-lang="en"
+            style="display:none;"
             style="display:none; margin-top: 0.5rem;"
           />
         </div>
@@ -149,13 +150,262 @@
             <option value="" data-lang="es">Seleccione una opción</option>
             <option value="" data-lang="en" style="display:none;">Select an option</option>
 
-            <option value="25" data-lang="es">\$25 por mes</option>
-            <option value="35" data-lang="es">\$35 por mes</option>
-            <option value="50" data-lang="es">\$50 por mes</option>
-            <option value="75" data-lang="es">\$75 por mes</option>
-            <option value="100" data-lang="es">\$100 por mes</option>
+            <option value="25" data-lang="es">$25 por mes</option>
+            <option value="35" data-lang="es">$35 por mes</option>
+            <option value="50" data-lang="es">$50 por mes</option>
+            <option value="75" data-lang="es">$75 por mes</option>
+            <option value="100" data-lang="es">$100 por mes</option>
             <option value="other" data-lang="es">Otro monto</option>
 
-            <option value="25" data-lang="en" style="display:none;">\$25 per month</option>
-            <option value="35" data-lang="en" style="display:none;">\$35 per month</option>
-            <option value="50" data-lang="
+            <option value="25" data-lang="en" style="display:none;">$25 per month</option>
+            <option value="35" data-lang="en" style="display:none;">$35 per month</option>
+            <option value="50" data-lang="en" style="display:none;">$50 per month</option>
+            <option value="75" data-lang="en" style="display:none;">$75 per month</option>
+            <option value="100" data-lang="en" style="display:none;">$100 per month</option>
+            <option value="other" data-lang="en" style="display:none;">Other amount</option>
+          </select>
+
+          <!-- Other budget input (hidden by default) -->
+          <input
+            type="text"
+            id="budgetOther"
+            name="budget_other"
+            placeholder="Ingrese otro presupuesto mensual"
+            data-lang="es"
+            style="display:none; margin-top: 0.5rem;"
+          />
+          <input
+            type="text"
+            id="budgetOtherEn"
+            name="budget_other"
+            placeholder="Enter another monthly budget"
+            data-lang="en"
+            style="display:none;"
+            style="display:none; margin-top: 0.5rem;"
+          />
+        </div>
+
+        <!-- TOP: DOB, Gender, ZIP, Tobacco -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="dob" data-lang="es">Fecha de nacimiento</label>
+            <label for="dob" data-lang="en" style="display:none;">Date of Birth</label>
+            <input type="date" id="dob" name="dob" required />
+          </div>
+
+          <div class="form-group">
+            <label for="gender" data-lang="es">Género</label>
+            <label for="gender" data-lang="en" style="display:none;">Gender</label>
+            <select id="gender" name="gender" required>
+              <option value="" data-lang="es">Seleccione</option>
+              <option value="" data-lang="en" style="display:none;">Select</option>
+
+              <option value="female" data-lang="es">Femenino</option>
+              <option value="male" data-lang="es">Masculino</option>
+
+              <option value="female" data-lang="en" style="display:none;">Female</option>
+              <option value="male" data-lang="en" style="display:none;">Male</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="zip" data-lang="es">Código postal</label>
+            <label for="zip" data-lang="en" style="display:none;">Zip Code</label>
+            <input type="text" id="zip" name="zip" required />
+          </div>
+
+          <div class="form-group">
+            <label for="tobacco" data-lang="es">¿Usa tabaco?</label>
+            <label for="tobacco" data-lang="en" style="display:none;">Tobacco use</label>
+            <select id="tobacco" name="tobacco" required>
+              <option value="" data-lang="es">Seleccione</option>
+              <option value="" data-lang="en" style="display:none;">Select</option>
+
+              <option value="no" data-lang="es">No</option>
+              <option value="yes" data-lang="es">Sí</option>
+
+              <option value="no" data-lang="en" style="display:none;">No</option>
+              <option value="yes" data-lang="en" style="display:none;">Yes</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- CONTACT INFO -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="firstName" data-lang="es">Nombre</label>
+            <label for="firstName" data-lang="en" style="display:none;">First Name</label>
+            <input type="text" id="firstName" name="first_name" required />
+          </div>
+
+          <div class="form-group">
+            <label for="lastName" data-lang="es">Apellido</label>
+            <label for="lastName" data-lang="en" style="display:none;">Last Name</label>
+            <input type="text" id="lastName" name="last_name" required />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="phone" data-lang="es">Teléfono</label>
+            <label for="phone" data-lang="en" style="display:none;">Phone</label>
+            <input type="tel" id="phone" name="phone" required />
+          </div>
+
+          <div class="form-group">
+            <label for="email" data-lang="es">Correo electrónico</label>
+            <label for="email" data-lang="en" style="display:none;">Email</label>
+            <input type="email" id="email" name="email" required />
+          </div>
+        </div>
+
+        <p class="form-disclaimer-small" data-lang="es">
+          Al enviar este formulario, autorizas a Mejor Vida Insurance LLC a contactarte por teléfono, correo electrónico o mensaje
+          de texto sobre opciones de seguro. Puedes cancelar en cualquier momento.
+        </p>
+        <p class="form-disclaimer-small" data-lang="en" style="display:none;">
+          By submitting this form, you authorize Mejor Vida Insurance LLC to contact you by phone, email, or text message
+          about insurance options. You can opt out at any time.
+        </p>
+
+        <button type="submit" class="btn btn-primary" data-lang="es">Ver mis opciones</button>
+        <button type="submit" class="btn btn-primary" data-lang="en" style="display:none;">See my options</button>
+
+        <p id="form-success" class="form-success" style="display:none;" data-lang="es">
+          ¡Gracias! Tu información se envió correctamente. Julie se pondrá en contacto contigo pronto.
+        </p>
+        <p id="form-success-en" class="form-success" style="display:none;" data-lang="en">
+          Thank you! Your information has been sent. Julie will reach out to you soon.
+        </p>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-bottom">
+      <div class="footer-left">
+        <p>
+          &copy; <span id="year"></span> Mejor Vida Insurance LLC. All rights reserved.
+        </p>
+        <p>
+          P.O. Box 21885, Lincoln, NE 68542
+        </p>
+        <p data-lang="es">
+          Julie es una productora de seguros autorizada en el estado de Nebraska para Accident and Health or Sickness y Life.
+        </p>
+        <p data-lang="en" style="display:none;">
+          Julie is a licensed insurance producer in the State of Nebraska for Accident and Health or Sickness, and Life.
+        </p>
+        <p>
+          <span data-lang="es">Tel: </span><span data-lang="en" style="display:none;">Phone: </span>
+          <a href="tel:5312291712">(531) 229‑1712</a> |
+          <a href="mailto:Julie@mejorvidainsurance.com">Julie@mejorvidainsurance.com</a>
+        </p>
+      </div>
+      <div class="footer-right">
+        <span data-lang="es">Síguenos:</span>
+        <span data-lang="en" style="display:none;">Follow us:</span>
+
+        <!-- Font Awesome social icons -->
+        <a
+          href="https://www.facebook.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Facebook"
+        >
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <a
+          href="https://www.instagram.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Instagram"
+        >
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a
+          href="https://www.linkedin.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="LinkedIn"
+        >
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    // Toggle between Coverage and Budget
+    const toggleCoverage = document.getElementById('toggle-coverage');
+    const toggleBudget = document.getElementById('toggle-budget');
+    const coverageGroup = document.getElementById('coverage-group');
+    const budgetGroup = document.getElementById('budget-group');
+    const preferenceType = document.getElementById('preference-type');
+
+    toggleCoverage.addEventListener('click', function() {
+      toggleCoverage.classList.add('active');
+      toggleBudget.classList.remove('active');
+      coverageGroup.style.display = 'flex';
+      budgetGroup.style.display = 'none';
+      preferenceType.value = 'coverage';
+    });
+
+    toggleBudget.addEventListener('click', function() {
+      toggleBudget.classList.add('active');
+      toggleCoverage.classList.remove('active');
+      budgetGroup.style.display = 'flex';
+      coverageGroup.style.display = 'none';
+      preferenceType.value = 'budget';
+    });
+
+    // Show/hide \"Other\" input for coverage
+    const coverageAmount = document.getElementById('coverageAmount');
+    const coverageOther = document.getElementById('coverageOther');
+    const coverageOtherEn = document.getElementById('coverageOtherEn');
+
+    coverageAmount.addEventListener('change', function() {
+      if (this.value === 'other') {
+        coverageOther.style.display = 'block';
+        coverageOtherEn.style.display = 'block';
+        coverageOther.required = true;
+      } else {
+        coverageOther.style.display = 'none';
+        coverageOtherEn.style.display = 'none';
+        coverageOther.required = false;
+        coverageOther.value = '';
+        coverageOtherEn.value = '';
+      }
+    });
+
+    // Show/hide \"Other\" input for budget
+    const budgetAmount = document.getElementById('budgetAmount');
+    const budgetOther = document.getElementById('budgetOther');
+    const budgetOtherEn = document.getElementById('budgetOtherEn');
+
+    budgetAmount.addEventListener('change', function() {
+      if (this.value === 'other') {
+        budgetOther.style.display = 'block';
+        budgetOtherEn.style.display = 'block';
+        budgetOther.required = true;
+      } else {
+        budgetOther.style.display = 'none';
+        budgetOtherEn.style.display = 'none';
+        budgetOther.required = false;
+        budgetOther.value = '';
+        budgetOtherEn.value = '';
+      }
+    });
+
+    // Set current year in footer
+    const yearSpan = document.getElementById('year');
+    if (yearSpan) {
+      yearSpan.textContent = new Date().getFullYear();
+    }
+  </script>
+</body>
+</html>
