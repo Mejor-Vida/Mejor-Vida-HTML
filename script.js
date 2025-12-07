@@ -1,81 +1,102 @@
-// Language Toggle Functionality
+// script.js - centralized JavaScript for Mejor Vida Insurance site
+
+// Language toggle
 const langButtons = document.querySelectorAll('.lang-btn');
-const elementsWithLang = document.querySelectorAll('[data-lang]');
-const headerLogo = document.getElementById('header-logo');
+let currentLanguage = 'es';
 
-// Set initial language to Spanish
-let currentLang = 'es';
+function setLanguage(lang) {
+  currentLanguage = lang;
 
-// Function to switch language
-function switchLanguage(lang) {
-  currentLang = lang;
-  
-  // Update active button
+  document.querySelectorAll('[data-lang="es"]').forEach(el => {
+    el.style.display = lang === 'es' ? '' : 'none';
+  });
+  document.querySelectorAll('[data-lang="en"]').forEach(el => {
+    el.style.display = lang === 'en' ? '' : 'none';
+  });
+
   langButtons.forEach(btn => {
-    if (btn.getAttribute('data-lang-btn') === lang) {
+    if (btn.dataset.langBtn === lang) {
       btn.classList.add('active');
     } else {
       btn.classList.remove('active');
     }
   });
-  
-  // Show/hide elements based on language
-  elementsWithLang.forEach(el => {
-    if (el.getAttribute('data-lang') === lang) {
-      el.style.display = '';
-    } else {
-      el.style.display = 'none';
-    }
-  });
-  
-  // Update logo based on language
-  if (lang === 'es') {
-    headerLogo.src = 'img/logo-spanish.png';
-    headerLogo.alt = 'Mejor Vida Insurance LLC Logo';
-  } else {
-    headerLogo.src = 'img/logo-english.png';
-    headerLogo.alt = 'Mejor Vida Insurance LLC Logo';
-  }
-  
-  // Update form select options
-  updateFormOptions(lang);
 }
 
-// Function to update form select options
-function updateFormOptions(lang) {
-  const selectElement = document.getElementById('coverage');
-  const options = selectElement.querySelectorAll('option[data-lang]');
-  
-  options.forEach(option => {
-    if (option.getAttribute('data-lang') === lang) {
-      option.style.display = '';
-    } else {
-      option.style.display = 'none';
-    }
-  });
-}
-
-// Add click event listeners to language buttons
 langButtons.forEach(btn => {
   btn.addEventListener('click', () => {
-    const lang = btn.getAttribute('data-lang-btn');
-    switchLanguage(lang);
+    setLanguage(btn.dataset.langBtn);
   });
 });
 
-// Initialize with Spanish
-switchLanguage('es');
+// Set default language on load
+setLanguage('es');
 
-// Smooth scrolling for anchor links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function (e) {
-    e.preventDefault();
-    const target = document.querySelector(this.getAttribute('href'));
-    if (target) {
-      target.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
-      });
+// Set current year in footer
+const yearSpan = document.getElementById('year');
+if (yearSpan) {
+  yearSpan.textContent = new Date().getFullYear();
+}
+
+// Form toggling logic for quote.html
+const toggleCoverage = document.getElementById('toggle-coverage');
+const toggleBudget = document.getElementById('toggle-budget');
+const coverageGroup = document.getElementById('coverage-group');
+const budgetGroup = document.getElementById('budget-group');
+const preferenceType = document.getElementById('preference-type');
+
+if (toggleCoverage && toggleBudget && coverageGroup && budgetGroup && preferenceType) {
+  toggleCoverage.addEventListener('click', function() {
+    toggleCoverage.classList.add('active');
+    toggleBudget.classList.remove('active');
+    coverageGroup.style.display = 'flex';
+    budgetGroup.style.display = 'none';
+    preferenceType.value = 'coverage';
+  });
+
+  toggleBudget.addEventListener('click', function() {
+    toggleBudget.classList.add('active');
+    toggleCoverage.classList.remove('active');
+    budgetGroup.style.display = 'flex';
+    coverageGroup.style.display = 'none';
+    preferenceType.value = 'budget';
+  });
+
+  // Show/hide "Other" input for coverage
+  const coverageAmount = document.getElementById('coverageAmount');
+  const coverageOther = document.getElementById('coverageOther');
+  const coverageOtherEn = document.getElementById('coverageOtherEn');
+
+  coverageAmount.addEventListener('change', function() {
+    if (this.value === 'other') {
+      coverageOther.style.display = 'block';
+      coverageOtherEn.style.display = 'block';
+      coverageOther.required = true;
+    } else {
+      coverageOther.style.display = 'none';
+      coverageOtherEn.style.display = 'none';
+      coverageOther.required = false;
+      coverageOther.value = '';
+      coverageOtherEn.value = '';
     }
   });
-});
+
+  // Show/hide "Other" input for budget
+  const budgetAmount = document.getElementById('budgetAmount');
+  const budgetOther = document.getElementById('budgetOther');
+  const budgetOtherEn = document.getElementById('budgetOtherEn');
+
+  budgetAmount.addEventListener('change', function() {
+    if (this.value === 'other') {
+      budgetOther.style.display = 'block';
+      budgetOtherEn.style.display = 'block';
+      budgetOther.required = true;
+    } else {
+      budgetOther.style.display = 'none';
+      budgetOtherEn.style.display = 'none';
+      budgetOther.required = false;
+      budgetOther.value = '';
+      budgetOtherEn.value = '';
+    }
+  });
+}
