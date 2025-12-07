@@ -20,7 +20,7 @@
   <header class="header">
     <div class="container header-container">
       <div class="logo">
-        <a href="index.html#home" class="logo-link">
+        <a href="main.html#home" class="logo-link">
           <img
             id="header-logo"
             class="header-logo-img"
@@ -43,14 +43,14 @@
 
         <!-- Nav links below flags -->
         <nav class="nav">
-          <a href="index.html#about" data-lang="es">Sobre Julie</a>
-          <a href="index.html#about" data-lang="en" style="display:none;">About Julie</a>
+          <a href="main.html#about" data-lang="es">Sobre Julie</a>
+          <a href="main.html#about" data-lang="en" style="display:none;">About Julie</a>
 
-          <a href="index.html#how-it-works" data-lang="es">Cómo funciona</a>
-          <a href="index.html#how-it-works" data-lang="en" style="display:none;">How it works</a>
+          <a href="main.html#how-it-works" data-lang="es">Cómo funciona</a>
+          <a href="main.html#how-it-works" data-lang="en" style="display:none;">How it works</a>
 
-          <a href="index.html#carriers" data-lang="es">Aseguradoras</a>
-          <a href="index.html#carriers" data-lang="en" style="display:none;">Carriers</a>
+          <a href="main.html#carriers" data-lang="es">Aseguradoras</a>
+          <a href="main.html#carriers" data-lang="en" style="display:none;">Carriers</a>
 
           <a href="quote.html#contact" data-lang="es">Cotización gratis</a>
           <a href="quote.html#contact" data-lang="en" style="display:none;">Free quote</a>
@@ -58,6 +58,38 @@
       </div>
     </div>
   </header>
+
+  <!-- CONTACT -->
+  <section id="contact" class="contact">
+    <div class="container">
+      <h2 data-lang="es">Ponte en contacto</h2>
+      <h2 data-lang="en" style="display:none;">Get in touch</h2>
+
+      <p data-lang="es">
+        ¿Listo para platicar sobre tus opciones de seguro de gastos finales? Julie puede explicarte los detalles,
+        responder tus preguntas y ayudarte a crear un plan para proteger a tu familia.
+      </p>
+      <p data-lang="en" style="display:none;">
+        Ready to talk about your final expense options? Julie can walk you through the details, answer your questions,
+        and help you create a plan to protect your family.
+      </p>
+
+      <div class="contact-info">
+        <p>
+          <span data-lang="es">Llama o envía un correo:</span>
+          <span data-lang="en" style="display:none;">Call or email:</span>
+        </p>
+        <p>
+          <a href="tel:5312291712">(531) 229‑1712</a> |
+          <a href="mailto:Julie@mejorvidainsurance.com">Julie@mejorvidainsurance.com</a>
+        </p>
+        <p style="margin-top: 1rem;">
+          <a href="quote.html#request-info" class="btn btn-primary" data-lang="es">Enviar mis datos</a>
+          <a href="quote.html#request-info" class="btn btn-primary" data-lang="en" style="display:none;">Send my info</a>
+        </p>
+      </div>
+    </div>
+  </section>
 
   <!-- REQUEST INFO FORM -->
   <section id="request-info" class="request-info">
@@ -336,5 +368,105 @@
   </footer>
 
   <script src="script.js"></script>
+  <script>
+    // Language toggle
+    const langButtons = document.querySelectorAll('.lang-btn');
+    let currentLanguage = 'es';
+
+    function setLanguage(lang) {
+      currentLanguage = lang;
+
+      document.querySelectorAll('[data-lang="es"]').forEach(el => {
+        el.style.display = lang === 'es' ? '' : 'none';
+      });
+      document.querySelectorAll('[data-lang="en"]').forEach(el => {
+        el.style.display = lang === 'en' ? '' : 'none';
+      });
+
+      langButtons.forEach(btn => {
+        if (btn.dataset.langBtn === lang) {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
+      });
+    }
+
+    langButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        setLanguage(btn.dataset.langBtn);
+      });
+    });
+
+    // Set default language on load
+    setLanguage('es');
+
+    // Toggle between Coverage and Budget
+    const toggleCoverage = document.getElementById('toggle-coverage');
+    const toggleBudget = document.getElementById('toggle-budget');
+    const coverageGroup = document.getElementById('coverage-group');
+    const budgetGroup = document.getElementById('budget-group');
+    const preferenceType = document.getElementById('preference-type');
+
+    toggleCoverage.addEventListener('click', function() {
+      toggleCoverage.classList.add('active');
+      toggleBudget.classList.remove('active');
+      coverageGroup.style.display = 'flex';
+      budgetGroup.style.display = 'none';
+      preferenceType.value = 'coverage';
+    });
+
+    toggleBudget.addEventListener('click', function() {
+      toggleBudget.classList.add('active');
+      toggleCoverage.classList.remove('active');
+      budgetGroup.style.display = 'flex';
+      coverageGroup.style.display = 'none';
+      preferenceType.value = 'budget';
+    });
+
+    // Show/hide "Other" input for coverage
+    const coverageAmount = document.getElementById('coverageAmount');
+    const coverageOther = document.getElementById('coverageOther');
+    const coverageOtherEn = document.getElementById('coverageOtherEn');
+
+    coverageAmount.addEventListener('change', function() {
+      if (this.value === 'other') {
+        coverageOther.style.display = 'block';
+        coverageOtherEn.style.display = 'block';
+        coverageOther.required = true;
+      } else {
+        coverageOther.style.display = 'none';
+        coverageOtherEn.style.display = 'none';
+        coverageOther.required = false;
+        coverageOther.value = '';
+        coverageOtherEn.value = '';
+      }
+    });
+
+    // Show/hide "Other" input for budget
+    const budgetAmount = document.getElementById('budgetAmount');
+    const budgetOther = document.getElementById('budgetOther');
+    const budgetOtherEn = document.getElementById('budgetOtherEn');
+
+    budgetAmount.addEventListener('change', function() {
+      if (this.value === 'other') {
+        budgetOther.style.display = 'block';
+        budgetOtherEn.style.display = 'block';
+        budgetOther.required = true;
+      } else {
+        budgetOther.style.display = 'none';
+        budgetOtherEn.style.display = 'none';
+        budgetOther.required = false;
+        budgetOther.value = '';
+        budgetOtherEn.value = '';
+      }
+    });
+
+    // Set current year in footer
+    const yearSpan = document.getElementById('year');
+    if (yearSpan) {
+      yearSpan.textContent = new Date().getFullYear();
+    }
+  </script>
 </body>
 </html>
