@@ -1,855 +1,322 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mejor Vida Insurance - Seguro de Gastos Finales</title>
-  <link rel="stylesheet" href="styles.css" />
-
-  <!-- Font Awesome for social + contact icons -->
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
-    crossorigin="anonymous"
-    referrerpolicy="no-referrer"
-  />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mejor Vida Insurance</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-  <!-- HEADER -->
+  <!-- Header -->
   <header class="header">
     <div class="container header-container">
       <div class="logo">
         <a href="#home" class="logo-link">
-          <img
-            id="header-logo"
-            class="header-logo-img"
-            src="img/logo-spanish.png"
-            alt="Mejor Vida Insurance logo"
-          />
+          <img src="img/logo-english.png" alt="Mejor Vida Insurance Logo" class="header-logo-img" id="logoImage">
         </a>
       </div>
-
+      
       <div class="header-right">
-        <!-- Flag buttons on top -->
         <div class="lang-toggle">
-          <button class="lang-btn active" data-lang-btn="es">
-            <span class="flag">🇪🇸</span> ES
-          </button>
-          <button class="lang-btn" data-lang-btn="en">
+          <button class="lang-btn active" data-lang="en">
             <span class="flag">🇺🇸</span> EN
           </button>
+          <button class="lang-btn" data-lang="es">
+            <span class="flag">🇪🇸</span> ES
+          </button>
         </div>
-
-        <!-- Nav links below flags -->
+        
         <nav class="nav">
-          <a href="#about" data-lang="es">Sobre Julie</a>
-          <a href="#about" data-lang="en" style="display:none;">About Julie</a>
-
-          <a href="#how-it-works" data-lang="es">Cómo funciona</a>
-          <a href="#how-it-works" data-lang="en" style="display:none;">How it works</a>
-
-          <a href="#carriers" data-lang="es">Aseguradoras</a>
-          <a href="#carriers" data-lang="en" style="display:none;">Carriers</a>
-
-          <a href="#contact" data-lang="es">Contacto</a>
-          <a href="#contact" data-lang="en" style="display:none;">Contact</a>
+          <a href="#home">Home</a>
+          <a href="#about">About Julie</a>
+          <a href="#how-it-works">How It Works</a>
+          <a href="#carriers">Carriers</a>
+          <a href="#contact">Contact</a>
+          <a href="#request-info">Request Info</a>
         </nav>
       </div>
     </div>
   </header>
 
-  <!-- HERO -->
-  <section class="hero" id="home">
+  <!-- Hero Section -->
+  <section id="home" class="hero">
     <div class="container hero-container">
       <div class="hero-text">
-        <span class="hero-badge" data-lang="es">
-          Seguro de vida para gastos finales, explicado en un lenguaje sencillo
-        </span>
-        <span class="hero-badge" data-lang="en" style="display:none;">
-          Simple final expense life insurance for your family's peace of mind
-        </span>
-
-        <h1 data-lang="es">Protege a tu familia con un seguro de gastos finales sencillo</h1>
-        <h1 data-lang="en" style="display:none;">Protect your family with simple final expense coverage</h1>
-
-        <p class="hero-subheading" data-lang="es">
-          En Mejor Vida Insurance, te ayudamos a encontrar un seguro de vida para gastos finales que se ajuste a tu
-          presupuesto y a tu situación, trabajando con compañías de confianza como Aetna y Mutual of Omaha.
-        </p>
-        <p class="hero-subheading" data-lang="en" style="display:none;">
-          At Mejor Vida Insurance, we help you find final expense life insurance that fits your budget and situation,
-          working with trusted companies like Aetna and Mutual of Omaha.
-        </p>
-
+        <span class="hero-badge">New Burial Plans</span>
+        <h1>Your Trusted Final Expense Insurance Agent</h1>
+        <p class="hero-subheading">Available in your state. Serving the Hispanic community with personalized plans and bilingual support.</p>
+        
         <div class="hero-card">
-          <div class="hero-trust">
-            <h3 data-lang="es">Orientación personal, sin presión</h3>
-            <h3 data-lang="en" style="display:none;">Personal, no‑pressure guidance</h3>
-            <p data-lang="es">
-              En Mejor Vida Insurance nos tomamos el tiempo para escuchar tu situación, explicarte tus opciones paso a paso
-              y responder tus preguntas con calma, sin compromiso ni presión.
-            </p>
-            <p data-lang="en" style="display:none;">
-              At Mejor Vida Insurance, we take the time to understand your situation, explain your options step by step,
-              and answer your questions calmly, with no obligation or pressure.
-            </p>
-          </div>
-
-          <div class="hero-highlight">
-            <h3 data-lang="es">Pensado para cubrir gastos finales</h3>
-            <h3 data-lang="en" style="display:none;">Designed to help with final expenses</h3>
-            <p data-lang="es">
-              La cobertura puede ayudar a tu familia con los costos de funeral, entierro, facturas médicas y otras deudas,
-              para que tengan un poco más de tranquilidad en un momento difícil.
-            </p>
-            <p data-lang="en" style="display:none;">
-              Coverage can help your family with funeral and burial costs, medical bills, and other debts so they have a bit
-              more peace of mind during a difficult time.
-            </p>
-          </div>
-
-          <div class="hero-contact">
-            <p data-lang="es">
-              Llama o envía un correo hoy mismo para una consulta sin costo.
-            </p>
-            <p data-lang="en" style="display:none;">
-              Call or email today for a no‑cost consultation.
-            </p>
-            <p>
-              <strong data-lang="es">Tel: <a href="tel:5312291712">(531) 229‑1712</a></strong>
-              <strong data-lang="en" style="display:none;">Phone: <a href="tel:5312291712">(531) 229‑1712</a></strong>
-              &nbsp;|&nbsp;
-              <a href="mailto:Julie@mejorvidainsurance.com">Julie@mejorvidainsurance.com</a>
-            </p>
-            <p>
-              <a href="#request-info" class="btn btn-primary" data-lang="es">Quiero más información</a>
-              <a href="#request-info" class="btn btn-primary" data-lang="en" style="display:none;">Request information</a>
-            </p>
-          </div>
+          <h3>Llama o envía un correo hoy mismo para una consulta sin costo.</h3>
+          <p class="hero-contact">
+            Tel: <strong>(531) 229‑1712</strong> | 
+            <strong>Julie@mejorvidainsurance.com</strong>
+          </p>
+          <a href="#request-info" class="btn btn-primary">Quiero más información</a>
         </div>
       </div>
-
+      
       <div class="hero-image">
-        <img
-          src="img/hispanic-family-laughing.jpg"
-          alt="Familia hispana sonriendo y protegida con seguro de vida"
-        />
+        <img src="img/hispanic-family-laughing.jpg" alt="Happy Hispanic Family">
       </div>
     </div>
   </section>
 
-  <!-- ABOUT JULIE -->
+  <!-- About Julie Section -->
   <section id="about" class="about">
     <div class="container">
-      <h2 data-lang="es">Conoce a Julie</h2>
-      <h2 data-lang="en" style="display:none;">Meet Julie</h2>
-
+      <h2>About Julie Rios</h2>
       <div class="about-content">
         <div class="about-photo">
-          <img src="img/Julie.png" alt="Foto de Julie, agente de seguros" />
-          <p class="about-photo-caption" data-lang="es">
-            Julie, fundadora de Mejor Vida Insurance LLC y agente independiente de seguros de vida.
-          </p>
-          <p class="about-photo-caption" data-lang="en" style="display:none;">
-            Julie, founder of Mejor Vida Insurance LLC and independent life insurance agent.
-          </p>
+          <img src="img/Julie.png" alt="Julie Rios">
+          <p class="about-photo-caption">Julie Rios<br>Founder & Licensed Agent</p>
         </div>
-
+        
         <div class="about-text">
           <div class="about-chips">
-            <span class="chip" data-lang="es">Atención en español e inglés</span>
-            <span class="chip" data-lang="en" style="display:none;">Service in English and Spanish</span>
-            <span class="chip" data-lang="es">Enfoque en gastos finales</span>
-            <span class="chip" data-lang="en" style="display:none;">Focused on final expense</span>
+            <span class="chip">Hispanic Community Specialist</span>
+            <span class="chip">Licensed in Multiple States</span>
+            <span class="chip">15+ Years Experience</span>
           </div>
-
-          <h3 data-lang="es">Un enfoque humano para hablar de temas difíciles</h3>
-          <h3 data-lang="en" style="display:none;">A human approach to hard conversations</h3>
-
-          <p data-lang="es">
-            Julie se especializa en seguros de vida para gastos finales. Su meta es hacer estas conversaciones más fáciles:
-            explicarte cómo funciona la cobertura, qué opciones tienes y cómo proteger mejor a tu familia, sin palabras
-            complicadas.
-          </p>
-          <p data-lang="en" style="display:none;">
-            Julie specializes in final expense life insurance. Her goal is to make these conversations easier: explain how
-            coverage works, what your options are, and how to best protect your family—without complicated language.
-          </p>
-
-          <p data-lang="es">
-            Como agente independiente, no trabaja para una sola compañía. Eso significa que puede revisar diferentes
-            aseguradoras, como Aetna y Mutual of Omaha, para encontrar una póliza que se adapte a tu edad, salud y
-            presupuesto.
-          </p>
-          <p data-lang="en" style="display:none;">
-            As an independent agent, she doesn't work for just one company. That means she can look at different insurers,
-            like Aetna and Mutual of Omaha, to find a policy that fits your age, health, and budget.
-          </p>
-
+          
+          <h3>Dedicated to Serving Your Family's Needs</h3>
+          <p>As a licensed insurance agent specializing in the Hispanic community, I understand the unique needs of our families. My mission is to provide affordable, reliable final expense insurance solutions with personalized service in both English and Spanish.</p>
+          
+          <p>With over 15 years of experience and licenses in multiple states, I've helped thousands of families secure peace of mind through comprehensive burial insurance plans tailored to their specific circumstances.</p>
+          
           <ul class="about-values">
-            <li data-lang="es">Explicaciones claras y honestas.</li>
-            <li data-lang="en" style="display:none;">Clear and honest explanations.</li>
-
-            <li data-lang="es">Recomendaciones basadas en tus necesidades, no en la comisión.</li>
-            <li data-lang="en" style="display:none;">Recommendations based on your needs, not commissions.</li>
-
-            <li data-lang="es">Acompañamiento en el proceso de solicitud y después de la aprobación.</li>
-            <li data-lang="en" style="display:none;">Support through the application process and after approval.</li>
+            <li><strong>Bilingual Support:</strong> Full service in both English and Spanish</li>
+            <li><strong>Community Focus:</strong> Specialized expertise in Hispanic family needs</li>
+            <li><strong>Personalized Service:</strong> Custom plans for your unique situation</li>
+            <li><strong>Transparent Process:</strong> Clear explanations and honest guidance</li>
           </ul>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- HOW IT WORKS -->
+  <!-- How It Works Section -->
   <section id="how-it-works" class="how">
     <div class="container">
-      <h2 data-lang="es">Cómo funciona el seguro de gastos finales</h2>
-      <h2 data-lang="en" style="display:none;">How final expense insurance works</h2>
-
+      <h2>How It Works</h2>
+      <p class="section-subtitle">Getting your final expense insurance is simple with our streamlined process designed for the Hispanic community</p>
+      
       <div class="how-layout">
         <div class="how-main">
-          <p class="section-subtitle" data-lang="es">
-            El seguro de vida para gastos finales es un tipo de seguro de vida entera con montos de cobertura más pequeños,
-            pensado específicamente para ayudar a tu familia a cubrir gastos como funeral, entierro, facturas médicas y deudas
-            pequeñas cuando tú faltes. Normalmente las primas se mantienen fijas y la cobertura es permanente mientras sigas
-            pagando, por lo que puedes planear a largo plazo con más tranquilidad.
-          </p>
-          <p class="section-subtitle" data-lang="en" style="display:none;">
-            Final expense life insurance is a type of whole life insurance with smaller coverage amounts, designed specifically
-            to help your family pay for funeral and burial costs, medical bills, and small debts when you pass away. Premiums are
-            typically level and coverage is permanent as long as you keep paying, so you can plan for the long term with more
-            peace of mind.
-          </p>
-
           <div class="how-grid">
             <div class="how-step">
               <div class="how-step-number">1</div>
-              <h3 data-lang="es">Llenas una solicitud sencilla</h3>
-              <h3 data-lang="en" style="display:none;">You complete a simple application</h3>
-              <p data-lang="es">
-                Compartes tu información básica (nombre, dirección, fecha de nacimiento y forma de contacto).
-                En muchos casos no hay examen médico y las preguntas de salud son simples.
-              </p>
-              <p data-lang="en" style="display:none;">
-                You share your basic information (name, address, date of birth, and contact details).
-                In many cases there is no medical exam and health questions are simple.
-              </p>
+              <h3>Free Consultation</h3>
+              <p>Speak with Julie directly to discuss your family's needs and explore available options in your state.</p>
             </div>
-
+            
             <div class="how-step">
               <div class="how-step-number">2</div>
-              <h3 data-lang="es">Eliges a tus beneficiarios</h3>
-              <h3 data-lang="en" style="display:none;">You choose your beneficiaries</h3>
-              <p data-lang="es">
-                La mayoría de las personas nombran a su cónyuge o a sus hijos adultos.
-                Si tu situación cambia, puedes actualizar a quién quieres proteger.
-              </p>
-              <p data-lang="en" style="display:none;">
-                Most people name a spouse or adult children.
-                If your situation changes, you can update who you want to protect.
-              </p>
+              <h3>Custom Plan Selection</h3>
+              <p>We'll match you with the best final expense plans from top-rated carriers based on your specific situation.</p>
             </div>
-
+            
             <div class="how-step">
               <div class="how-step-number">3</div>
-              <h3 data-lang="es">Seleccionas la cobertura y la forma de pago</h3>
-              <h3 data-lang="en" style="display:none;">You pick your coverage and payment</h3>
-              <p data-lang="es">
-                Escoges el monto que mejor se ajusta a tus necesidades y a tu presupuesto mensual.
-                Las primas se mantienen fijas mientras la póliza esté vigente.
-              </p>
-              <p data-lang="en" style="display:none;">
-                You choose the amount that best fits your needs and monthly budget.
-                Premiums stay the same as long as the policy remains in force.
-              </p>
+              <h3>Easy Application</h3>
+              <p>Complete a simple application process with our guidance - available in both English and Spanish.</p>
+            </div>
+            
+            <div class="how-step">
+              <div class="how-step-number">4</div>
+              <h3>Peace of Mind</h3>
+              <p>Receive your policy and enjoy knowing your loved ones are financially protected.</p>
             </div>
           </div>
+          
+          <div class="quote-call">
+            <h3>Llama o envía un correo:</h3>
+            <p class="hero-contact">
+              <strong>(531) 229‑1712</strong> | 
+              <strong>Julie@mejorvidainsurance.com</strong>
+            </p>
+            <a href="#request-info" class="btn btn-primary">Enviar mis datos</a>
+            
+            <ul class="quote-points">
+              <li>No cost consultation</li>
+              <li>Bilingual support throughout the process</li>
+              <li>Multiple payment options available</li>
+              <li>Quick approval for most applicants</li>
+            </ul>
+          </div>
         </div>
-
+        
         <div class="how-image">
-          <img
-            src="img/elderly-hispanic-couple.jpg"
-            alt="Pareja mayor hispana conversando sobre su seguro de gastos finales"
-          />
+          <img src="img/elderly-hispanic-couple.jpg" alt="Elderly Hispanic Couple">
         </div>
-      </div>
-
-      <div class="container quote-call" style="margin-top: 2rem;">
-        <h3 data-lang="es">Beneficios principales</h3>
-        <h3 data-lang="en" style="display:none;">Key benefits</h3>
-        <ul class="quote-points">
-          <li data-lang="es">
-            Aceptación sencilla dentro de los rangos de edad de cada compañía, a menudo sin examen médico.
-          </li>
-          <li data-lang="en" style="display:none;">
-            Simple acceptance within each company's age ranges, often with no medical exam.
-          </li>
-
-          <li data-lang="es">
-            Primas que nunca aumentan: tu pago mensual se mantiene igual con el paso del tiempo.
-          </li>
-          <li data-lang="en" style="display:none;">
-            Premiums that never increase: your monthly payment stays level over time.
-          </li>
-
-          <li data-lang="es">
-            Cobertura permanente: mientras pagues tus primas, la póliza no vence.
-          </li>
-          <li data-lang="en" style="display:none;">
-            Permanent coverage: as long as you pay premiums, the policy does not expire.
-          </li>
-
-          <li data-lang="es">
-            Beneficios pensados para cubrir gastos finales como funeral, entierro, deudas pequeñas y otros costos.
-          </li>
-          <li data-lang="en" style="display:none;">
-            Benefits designed to help cover final expenses such as funeral, burial, small debts, and other costs.
-          </li>
-
-          <li data-lang="es">
-            Muchas reclamaciones se pagan rápidamente una vez recibida la documentación necesaria, ayudando a tu familia
-            a no adelantar todo el dinero.
-          </li>
-          <li data-lang="en" style="display:none;">
-            Many claims are paid quickly after required documents are received, helping your family avoid paying
-            everything out of pocket up front.
-          </li>
-        </ul>
-
-        <p class="form-disclaimer" data-lang="es">
-          Nota sobre el beneficio gradual: Algunas pólizas usan un beneficio por fallecimiento gradual.
-          Durante los primeros años, si el fallecimiento es por causas naturales, el beneficiario suele recibir las primas
-          pagadas más un interés. En caso de muerte por accidente, el beneficio completo normalmente está disponible desde el
-          primer día. Después de ese periodo inicial, el beneficio completo se paga por la mayoría de las causas de muerte.
-        </p>
-        <p class="form-disclaimer" data-lang="en" style="display:none;">
-          Note on graded benefit: Some policies use a graded death benefit.
-          During the first years, if death is from natural causes, the beneficiary usually receives the premiums paid plus interest.
-          For accidental death, the full benefit is often available from day one. After that initial period, the full benefit is paid
-          for most causes of death.
-        </p>
       </div>
     </div>
   </section>
 
-  <!-- CARRIERS -->
+  <!-- Carriers Section -->
   <section id="carriers" class="carriers">
     <div class="container">
-      <h2 data-lang="es">Aseguradoras de confianza</h2>
-      <h2 data-lang="en" style="display:none;">Trusted insurance companies</h2>
-
-      <p class="section-subtitle" data-lang="es">
-        Como agente independiente, Julie trabaja con varias aseguradoras reconocidas. Aquí hay información detallada sobre dos de las compañías con las que puede ayudarte: Aetna y Mutual of Omaha.
-      </p>
-      <p class="section-subtitle" data-lang="en" style="display:none;">
-        As an independent agent, Julie works with several well‑known insurance companies. Here is detailed information about two of the companies she can help you with: Aetna and Mutual of Omaha.
-      </p>
-
+      <h2>Top-Rated Insurance Carriers</h2>
+      <p class="section-subtitle">We work with trusted carriers to bring you the best final expense insurance options</p>
+      
       <div class="carriers-grid">
-        <div class="carrier-card">
-          <h3>Aetna</h3>
-          <ul>
-            <li data-lang="es">
-              Ofrece pólizas de vida entera para gastos finales (conocidas como "final expense"), diseñadas para ayudar a
-              cubrir costos como funeral, entierro, facturas médicas y otras deudas pequeñas al final de la vida.
-            </li>
-            <li data-lang="en" style="display:none;">
-              Offers whole life "final expense" policies designed to help cover costs such as funeral, burial, medical bills,
-              and other small end‑of‑life debts.
-            </li>
-
-            <li data-lang="es">
-              Las sumas aseguradas suelen ser montos modestos, pensados para complementar otros seguros o ahorros que ya
-              puedas tener, de modo que tu familia no tenga que adelantar todo el dinero en un momento difícil.
-            </li>
-            <li data-lang="en" style="display:none;">
-              Coverage amounts are typically modest, intended to complement any existing insurance or savings so your family
-              doesn't have to come up with all of the money at once during a difficult time.
-            </li>
-
-            <li data-lang="es">
-              La prima se mantiene nivelada durante la vida de la póliza: lo que pagas al inicio es lo que sigues pagando en el
-              futuro, mientras la póliza permanezca vigente.
-            </li>
-            <li data-lang="en" style="display:none;">
-              Premiums remain level for the life of the policy: what you pay at the beginning is what you continue to pay in the
-              future as long as the policy stays in force.
-            </li>
-
-            <li data-lang="es">
-              El proceso de solicitud suele ser simplificado: en muchos casos no se requiere examen médico y se usan
-              cuestionarios de salud básicos. Dependiendo de tus respuestas y de tu historial, Aetna puede ofrecer diferentes
-              niveles de aceptación.
-            </li>
-            <li data-lang="en" style="display:none;">
-              The application process is usually simplified: in many cases no medical exam is required, and basic health
-              questionnaires are used instead. Depending on your answers and history, Aetna may offer different levels of
-              acceptance.
-            </li>
-
-            <li data-lang="es">
-              Como póliza de vida entera, está diseñada para ser cobertura permanente: mientras se paguen las primas, la
-              póliza no vence a una edad específica, lo que puede ofrecer estabilidad a largo plazo.
-            </li>
-            <li data-lang="en" style="display:none;">
-              As a whole life policy, it is designed to provide permanent coverage: as long as premiums are paid, the policy
-              does not expire at a specific age, which can provide long‑term stability.
-            </li>
-          </ul>
-        </div>
-
         <div class="carrier-card">
           <h3>Mutual of Omaha</h3>
           <ul>
-            <li data-lang="es">
-              Aseguradora con más de 100 años de historia en el mercado de seguros de vida, conocida por su solidez financiera
-              y por ofrecer productos diseñados específicamente para gastos finales.
-            </li>
-            <li data-lang="en" style="display:none;">
-              An insurer with over 100 years of history in the life insurance market, known for financial strength and for
-              offering products specifically designed for final expenses.
-            </li>
-
-            <li data-lang="es">
-              Sus pólizas de vida entera para gastos finales están pensadas para ayudar a cubrir costos como funeral, entierro,
-              servicios conmemorativos y otras deudas pequeñas, con montos de cobertura que suelen ir desde cantidades
-              relativamente bajas hasta montos suficientes para cubrir la mayoría de los gastos de funeral.
-            </li>
-            <li data-lang="en" style="display:none;">
-              Its whole life final expense policies are designed to help cover costs such as funeral, burial, memorial
-              services, and other small debts, with coverage amounts that typically range from smaller amounts up to levels
-              that can cover most funeral expenses.
-            </li>
-
-            <li data-lang="es">
-              Las primas están diseñadas para mantenerse niveladas: no aumentan simplemente porque envejeces o porque cambie tu
-              estado de salud después de que la póliza haya sido emitida.
-            </li>
-            <li data-lang="en" style="display:none;">
-              Premiums are designed to stay level: they do not increase just because you get older or your health changes after
-              the policy is issued.
-            </li>
-
-            <li data-lang="es">
-              Algunas pólizas usan un beneficio por fallecimiento "gradual" (graded) durante un periodo inicial. Esto
-              generalmente significa que, si el fallecimiento es por causas naturales en esos primeros años, el beneficiario
-              podría recibir las primas pagadas más un interés; si la muerte es por accidente, el beneficio completo suele
-              estar disponible desde el primer día. Después de ese periodo, muchas pólizas pagan el beneficio completo por la
-              mayoría de las causas de muerte, según los términos de la póliza.
-            </li>
-            <li data-lang="en" style="display:none;">
-              Some policies use a "graded" death benefit during an initial period. This typically means that if death is from
-              natural causes during those first years, the beneficiary may receive the premiums paid plus interest; if death is
-              due to an accident, the full benefit is often available from day one. After that period, many policies pay the
-              full benefit for most causes of death, according to the policy terms.
-            </li>
-
-            <li data-lang="es">
-              Mutual of Omaha ofrece diferentes opciones según la edad, el estado de salud y el estado donde vivas. Los
-              requisitos específicos y las cantidades de cobertura disponibles pueden variar, por lo que es importante revisar
-              tu situación personal con un agente autorizado.
-            </li>
-            <li data-lang="en" style="display:none;">
-              Mutual of Omaha offers different options depending on your age, health, and the state you live in. Specific
-              requirements and available coverage amounts can vary, so it is important to review your personal situation with a
-              licensed agent.
-            </li>
+            <li>Strong financial stability ratings</li>
+            <li>Simplified issue policies available</li>
+            <li>Guaranteed acceptance options</li>
+            <li>Competitive pricing for Hispanic families</li>
+          </ul>
+        </div>
+        
+        <div class="carrier-card">
+          <h3>Gerber Life</h3>
+          <ul>
+            <li>Over 50 years of experience</li>
+            <li>No medical exam required</li>
+            <li>Fixed premiums for life</li>
+            <li>Quick and easy application process</li>
           </ul>
         </div>
       </div>
-
-      <p class="carriers-note" data-lang="es">
-        Esta información es un resumen general de productos públicos y no un folleto oficial. Los detalles específicos,
-        montos de cobertura, requisitos de elegibilidad y beneficios dependen de cada compañía, del estado donde viva y de
-        su situación personal. Un agente autorizado puede revisar su caso y explicarle qué opciones aplican para usted.
-      </p>
-      <p class="carriers-note" data-lang="en" style="display:none;">
-        This information is a general summary of public products and not an official brochure. Specific details, coverage
-        amounts, eligibility requirements, and benefits depend on each company, the state you live in, and your personal
-        situation. A licensed agent can review your case and explain which options apply to you.
-      </p>
-    </div>
-  </section>
-
-  <!-- CONTACT (simple info, plus button to form) -->
-  <section id="contact" class="contact">
-    <div class="container">
-      <h2 data-lang="es">Ponte en contacto</h2>
-      <h2 data-lang="en" style="display:none;">Get in touch</h2>
-
-      <p data-lang="es">
-        ¿Listo para platicar sobre tus opciones de seguro de gastos finales? Julie puede explicarte los detalles,
-        responder tus preguntas y ayudarte a crear un plan para proteger a tu familia.
-      </p>
-      <p data-lang="en" style="display:none;">
-        Ready to talk about your final expense options? Julie can walk you through the details, answer your questions,
-        and help you create a plan to protect your family.
-      </p>
-
-      <div class="contact-info">
-        <p>
-          <span data-lang="es">Llama o envía un correo:</span>
-          <span data-lang="en" style="display:none;">Call or email:</span>
-        </p>
-        <p>
-          <a href="tel:5312291712">(531) 229‑1712</a> |
-          <a href="mailto:Julie@mejorvidainsurance.com">Julie@mejorvidainsurance.com</a>
-        </p>
-        <p style="margin-top: 1rem;">
-          <a href="#request-info" class="btn btn-primary" data-lang="es">Enviar mis datos</a>
-          <a href="#request-info" class="btn btn-primary" data-lang="en" style="display:none;">Send my info</a>
-        </p>
+      
+      <div class="carriers-note">
+        <p>All our carrier partners are licensed and regulated. We only work with companies that have proven track records of serving the Hispanic community with integrity and reliability.</p>
       </div>
     </div>
   </section>
 
-  <!-- REQUEST INFO FORM (LEAD FORM TO AGENT CRM) -->
+  <!-- Request Info Form Section -->
   <section id="request-info" class="request-info">
     <div class="container">
-      <h2 data-lang="es">Obtenga su cotización gratuita</h2>
-      <h2 data-lang="en" style="display:none;">Get your free quote</h2>
-
-      <p data-lang="es" class="request-info-intro">
-        Complete este formulario para ver opciones de planes de gastos finales disponibles en su estado.
-      </p>
-      <p data-lang="en" class="request-info-intro" style="display:none;">
-        Fill out this form to see final expense plan options available in your state.
-      </p>
-
-      <!-- IMPORTANT: Replace the action URL with your Agent CRM form/funnel URL -->
-      <form
-        id="lead-form"
-        class="lead-form"
-        method="POST"
-        action="https://YOUR-AGENT-CRM-FORM-URL-HERE"
-      >
-        <!-- TOGGLE: Coverage vs Budget -->
-        <div class="form-group">
-          <label class="toggle-label" data-lang="es">¿Está pensando en términos de cobertura o presupuesto mensual?</label>
-          <label class="toggle-label" data-lang="en" style="display:none;">Are you thinking in terms of coverage or monthly budget?</label>
-          
-          <div class="toggle-buttons">
-            <button type="button" class="toggle-btn active" id="toggle-coverage" data-toggle="coverage">
-              <span data-lang="es">Monto de cobertura</span>
-              <span data-lang="en" style="display:none;">Coverage amount</span>
-            </button>
-            <button type="button" class="toggle-btn" id="toggle-budget" data-toggle="budget">
-              <span data-lang="es">Presupuesto mensual</span>
-              <span data-lang="en" style="display:none;">Monthly budget</span>
-            </button>
-          </div>
-          
-          <!-- Hidden field to store the toggle choice -->
-          <input type="hidden" id="preference-type" name="preference_type" value="coverage" />
-        </div>
-
-        <!-- COVERAGE DROPDOWN (shown by default) -->
-        <div class="form-group" id="coverage-group">
-          <label for="coverageAmount" data-lang="es">Seleccione un monto de cobertura</label>
-          <label for="coverageAmount" data-lang="en" style="display:none;">Select a coverage amount</label>
-          <select id="coverageAmount" name="coverage_amount">
-            <option value="" data-lang="es">Seleccione una opción</option>
-            <option value="" data-lang="en" style="display:none;">Select an option</option>
-
-            <option value="3000" data-lang="es">$3,000</option>
-            <option value="5000" data-lang="es">$5,000</option>
-            <option value="7500" data-lang="es">$7,500</option>
-            <option value="12000" data-lang="es">$12,000</option>
-            <option value="15000" data-lang="es">$15,000</option>
-            <option value="other" data-lang="es">Otro monto</option>
-
-            <option value="3000" data-lang="en" style="display:none;">$3,000</option>
-            <option value="5000" data-lang="en" style="display:none;">$5,000</option>
-            <option value="7500" data-lang="en" style="display:none;">$7,500</option>
-            <option value="12000" data-lang="en" style="display:none;">$12,000</option>
-            <option value="15000" data-lang="en" style="display:none;">$15,000</option>
-            <option value="other" data-lang="en" style="display:none;">Other amount</option>
-          </select>
-
-          <!-- Other coverage input (hidden by default) -->
-          <input
-            type="text"
-            id="coverageOther"
-            name="coverage_other"
-            placeholder="Ingrese otro monto de cobertura"
-            data-lang="es"
-            style="display:none; margin-top: 0.5rem;"
-          />
-          <input
-            type="text"
-            id="coverageOtherEn"
-            name="coverage_other"
-            placeholder="Enter another coverage amount"
-            data-lang="en"
-            style="display:none; margin-top: 0.5rem;"
-          />
-        </div>
-
-        <!-- BUDGET DROPDOWN (hidden by default) -->
-        <div class="form-group" id="budget-group" style="display:none;">
-          <label for="budgetAmount" data-lang="es">Seleccione un presupuesto mensual</label>
-          <label for="budgetAmount" data-lang="en" style="display:none;">Select a monthly budget</label>
-          <select id="budgetAmount" name="budget_amount">
-            <option value="" data-lang="es">Seleccione una opción</option>
-            <option value="" data-lang="en" style="display:none;">Select an option</option>
-
-            <option value="25" data-lang="es">$25 por mes</option>
-            <option value="35" data-lang="es">$35 por mes</option>
-            <option value="50" data-lang="es">$50 por mes</option>
-            <option value="75" data-lang="es">$75 por mes</option>
-            <option value="100" data-lang="es">$100 por mes</option>
-            <option value="other" data-lang="es">Otro monto</option>
-
-            <option value="25" data-lang="en" style="display:none;">$25 per month</option>
-            <option value="35" data-lang="en" style="display:none;">$35 per month</option>
-            <option value="50" data-lang="en" style="display:none;">$50 per month</option>
-            <option value="75" data-lang="en" style="display:none;">$75 per month</option>
-            <option value="100" data-lang="en" style="display:none;">$100 per month</option>
-            <option value="other" data-lang="en" style="display:none;">Other amount</option>
-          </select>
-
-          <!-- Other budget input (hidden by default) -->
-          <input
-            type="text"
-            id="budgetOther"
-            name="budget_other"
-            placeholder="Ingrese otro presupuesto mensual"
-            data-lang="es"
-            style="display:none; margin-top: 0.5rem;"
-          />
-          <input
-            type="text"
-            id="budgetOtherEn"
-            name="budget_other"
-            placeholder="Enter another monthly budget"
-            data-lang="en"
-            style="display:none; margin-top: 0.5rem;"
-          />
-        </div>
-
-        <!-- TOP: DOB, Gender, ZIP, Tobacco -->
+      <h2>Obtenga su cotización gratuita</h2>
+      <p class="request-info-intro">Complete este formulario para ver opciones de planes de gastos finales disponibles en su estado.</p>
+      
+      <form id="quote-form" class="lead-form" novalidate>
         <div class="form-row">
           <div class="form-group">
-            <label for="dob" data-lang="es">Fecha de nacimiento</label>
-            <label for="dob" data-lang="en" style="display:none;">Date of Birth</label>
-            <input type="date" id="dob" name="dob" required />
+            <label class="toggle-label">¿Está pensando en términos de cobertura o presupuesto mensual?</label>
+            <div class="toggle-buttons">
+              <button type="button" class="toggle-btn active" data-type="coverage">Monto de cobertura</button>
+              <button type="button" class="toggle-btn" data-type="budget">Presupuesto mensual</button>
+            </div>
           </div>
-
+        </div>
+        
+        <div class="form-row">
           <div class="form-group">
-            <label for="gender" data-lang="es">Género</label>
-            <label for="gender" data-lang="en" style="display:none;">Gender</label>
+            <label for="amount-select">Seleccione un monto</label>
+            <select id="amount-select" name="amount" required>
+              <option value="">Seleccione una opción</option>
+              <option value="5000">$5,000</option>
+              <option value="10000">$10,000</option>
+              <option value="15000">$15,000</option>
+              <option value="20000">$20,000</option>
+              <option value="25000">$25,000</option>
+              <option value="other">Otro monto</option>
+            </select>
+            <input type="text" id="custom-amount" name="custom_amount" placeholder="Ingrese monto" style="display: none; margin-top: 0.5rem;">
+          </div>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label for="dob">Fecha de nacimiento</label>
+            <input type="date" id="dob" name="dob" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="gender">Género</label>
             <select id="gender" name="gender" required>
-              <option value="" data-lang="es">Seleccione</option>
-              <option value="" data-lang="en" style="display:none;">Select</option>
-
-              <option value="female" data-lang="es">Femenino</option>
-              <option value="male" data-lang="es">Masculino</option>
-
-              <option value="female" data-lang="en" style="display:none;">Female</option>
-              <option value="male" data-lang="en" style="display:none;">Male</option>
+              <option value="">Seleccione</option>
+              <option value="male">Hombre</option>
+              <option value="female">Mujer</option>
             </select>
           </div>
         </div>
-
+        
         <div class="form-row">
           <div class="form-group">
-            <label for="zip" data-lang="es">Código postal</label>
-            <label for="zip" data-lang="en" style="display:none;">Zip Code</label>
-            <input type="text" id="zip" name="zip" required />
+            <label for="zip">Código postal</label>
+            <input type="text" id="zip" name="zip" required>
           </div>
-
+          
           <div class="form-group">
-            <label for="tobacco" data-lang="es">¿Usa tabaco?</label>
-            <label for="tobacco" data-lang="en" style="display:none;">Tobacco use</label>
+            <label for="tobacco">¿Usa tabaco?</label>
             <select id="tobacco" name="tobacco" required>
-              <option value="" data-lang="es">Seleccione</option>
-              <option value="" data-lang="en" style="display:none;">Select</option>
-
-              <option value="no" data-lang="es">No</option>
-              <option value="yes" data-lang="es">Sí</option>
-
-              <option value="no" data-lang="en" style="display:none;">No</option>
-              <option value="yes" data-lang="en" style="display:none;">Yes</option>
+              <option value="">Seleccione</option>
+              <option value="yes">Sí</option>
+              <option value="no">No</option>
             </select>
           </div>
         </div>
-
-        <!-- CONTACT INFO -->
+        
         <div class="form-row">
           <div class="form-group">
-            <label for="firstName" data-lang="es">Nombre</label>
-            <label for="firstName" data-lang="en" style="display:none;">First Name</label>
-            <input type="text" id="firstName" name="first_name" required />
+            <label for="first-name">Nombre</label>
+            <input type="text" id="first-name" name="first_name" required>
           </div>
-
+          
           <div class="form-group">
-            <label for="lastName" data-lang="es">Apellido</label>
-            <label for="lastName" data-lang="en" style="display:none;">Last Name</label>
-            <input type="text" id="lastName" name="last_name" required />
+            <label for="last-name">Apellido</label>
+            <input type="text" id="last-name" name="last_name" required>
           </div>
         </div>
-
+        
         <div class="form-row">
           <div class="form-group">
-            <label for="phone" data-lang="es">Teléfono</label>
-            <label for="phone" data-lang="en" style="display:none;">Phone</label>
-            <input type="tel" id="phone" name="phone" required />
+            <label for="phone">Teléfono</label>
+            <input type="tel" id="phone" name="phone" required>
           </div>
-
+          
           <div class="form-group">
-            <label for="email" data-lang="es">Correo electrónico</label>
-            <label for="email" data-lang="en" style="display:none;">Email</label>
-            <input type="email" id="email" name="email" required />
+            <label for="email">Correo electrónico</label>
+            <input type="email" id="email" name="email" required>
           </div>
         </div>
-
-        <p class="form-disclaimer-small" data-lang="es">
-          Al enviar este formulario, autorizas a Mejor Vida Insurance LLC a contactarte por teléfono, correo electrónico o mensaje
-          de texto sobre opciones de seguro. Puedes cancelar en cualquier momento.
+        
+        <button type="submit" class="btn btn-primary" id="submit-quote">Ver mis opciones</button>
+        <p class="form-disclaimer-small">
+          Al enviar este formulario, autorizas a Mejor Vida Insurance LLC a contactarte por teléfono, correo electrónico o mensaje de texto sobre opciones de seguro. Puedes cancelar en cualquier momento.
         </p>
-        <p class="form-disclaimer-small" data-lang="en" style="display:none;">
-          By submitting this form, you authorize Mejor Vida Insurance LLC to contact you by phone, email, or text message
-          about insurance options. You can opt out at any time.
-        </p>
-
-        <button type="submit" class="btn btn-primary" data-lang="es">Ver mis opciones</button>
-        <button type="submit" class="btn btn-primary" data-lang="en" style="display:none;">See my options</button>
-
-        <p id="form-success" class="form-success" style="display:none;" data-lang="es">
-          ¡Gracias! Tu información se envió correctamente. Julie se pondrá en contacto contigo pronto.
-        </p>
-        <p id="form-success-en" class="form-success" style="display:none;" data-lang="en">
-          Thank you! Your information has been sent. Julie will reach out to you soon.
-        </p>
+        <div id="form-message"></div>
       </form>
     </div>
   </section>
 
-  <!-- FOOTER -->
-  <footer class="footer">
-    <div class="container footer-bottom">
-      <div class="footer-left">
+  <!-- Contact Section -->
+  <section id="contact" class="contact">
+    <div class="container">
+      <h2>Contact Julie Directly</h2>
+      <p>Have questions or ready to get started? Reach out to Julie personally for bilingual support.</p>
+      
+      <div class="contact-info">
+        <p><strong>Llama o envía un correo:</strong></p>
         <p>
-          &copy; <span id="year"></span> Mejor Vida Insurance LLC. All rights reserved.
-        </p>
-        <p>
-          P.O. Box 21885, Lincoln, NE 68542
-        </p>
-        <p data-lang="es">
-          Julie es una productora de seguros autorizada en el estado de Nebraska para Accident and Health or Sickness y Life.
-        </p>
-        <p data-lang="en" style="display:none;">
-          Julie is a licensed insurance producer in the State of Nebraska for Accident and Health or Sickness, and Life.
-        </p>
-        <p>
-          <span data-lang="es">Tel: </span><span data-lang="en" style="display:none;">Phone: </span>
-          <a href="tel:5312291712">(531) 229‑1712</a> |
+          <a href="tel:+15312291712">(531) 229‑1712</a> | 
           <a href="mailto:Julie@mejorvidainsurance.com">Julie@mejorvidainsurance.com</a>
         </p>
       </div>
-      <div class="footer-right">
-        <span data-lang="es">Síguenos:</span>
-        <span data-lang="en" style="display:none;">Follow us:</span>
+    </div>
+  </section>
 
-        <!-- Font Awesome social icons -->
-        <a
-          href="https://www.facebook.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Facebook"
-        >
-          <i class="fab fa-facebook-f"></i>
-        </a>
-        <a
-          href="https://www.instagram.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Instagram"
-        >
-          <i class="fab fa-instagram"></i>
-        </a>
-        <a
-          href="https://www.linkedin.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="LinkedIn"
-        >
-          <i class="fab fa-linkedin-in"></i>
-        </a>
-      </div>
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <p>Contact us: 
+        <a href="tel:+15312291712">(531) 229‑1712</a> | 
+        <a href="mailto:Julie@mejorvidainsurance.com">Julie@mejorvidainsurance.com</a>
+      </p>
+      <p>&copy; 2023 Mejor Vida Insurance LLC. All rights reserved.</p>
     </div>
   </footer>
 
+  <!-- Agent CRM Chat Widget Placeholder -->
+  <!-- Add the actual Agent CRM widget script here before </body> -->
+  <!-- <script src="AGENT_CRM_WIDGET_URL"></script> -->
+
   <script src="script.js"></script>
-  <script>
-    // Toggle between Coverage and Budget
-    const toggleCoverage = document.getElementById('toggle-coverage');
-    const toggleBudget = document.getElementById('toggle-budget');
-    const coverageGroup = document.getElementById('coverage-group');
-    const budgetGroup = document.getElementById('budget-group');
-    const preferenceType = document.getElementById('preference-type');
-
-    toggleCoverage.addEventListener('click', function() {
-      toggleCoverage.classList.add('active');
-      toggleBudget.classList.remove('active');
-      coverageGroup.style.display = 'flex';
-      budgetGroup.style.display = 'none';
-      preferenceType.value = 'coverage';
-    });
-
-    toggleBudget.addEventListener('click', function() {
-      toggleBudget.classList.add('active');
-      toggleCoverage.classList.remove('active');
-      budgetGroup.style.display = 'flex';
-      coverageGroup.style.display = 'none';
-      preferenceType.value = 'budget';
-    });
-
-    // Show/hide "Other" input for coverage
-    const coverageAmount = document.getElementById('coverageAmount');
-    const coverageOther = document.getElementById('coverageOther');
-    const coverageOtherEn = document.getElementById('coverageOtherEn');
-
-    coverageAmount.addEventListener('change', function() {
-      if (this.value === 'other') {
-        coverageOther.style.display = 'block';
-        coverageOtherEn.style.display = 'block';
-        coverageOther.required = true;
-      } else {
-        coverageOther.style.display = 'none';
-        coverageOtherEn.style.display = 'none';
-        coverageOther.required = false;
-        coverageOther.value = '';
-        coverageOtherEn.value = '';
-      }
-    });
-
-    // Show/hide "Other" input for budget
-    const budgetAmount = document.getElementById('budgetAmount');
-    const budgetOther = document.getElementById('budgetOther');
-    const budgetOtherEn = document.getElementById('budgetOtherEn');
-
-    budgetAmount.addEventListener('change', function() {
-      if (this.value === 'other') {
-        budgetOther.style.display = 'block';
-        budgetOtherEn.style.display = 'block';
-        budgetOther.required = true;
-      } else {
-        budgetOther.style.display = 'none';
-        budgetOtherEn.style.display = 'none';
-        budgetOther.required = false;
-        budgetOther.value = '';
-        budgetOtherEn.value = '';
-      }
-    });
-
-    // Set current year in footer
-    const yearSpan = document.getElementById('year');
-    if (yearSpan) {
-      yearSpan.textContent = new Date().getFullYear();
-    }
-  </script>
 </body>
 </html>
