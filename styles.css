@@ -744,13 +744,17 @@ input[type="date"]:focus {
 }
 
 /* ========================================
-   MOBILE HEADER ADJUSTMENTS FOR LANGUAGE FLAGS
+   MOBILE PORTRAIT ONLY: HEADER ADJUSTMENTS
    ======================================== */
-@media (max-width: 768px) {
+@media (max-width: 768px) and (orientation: portrait) {
+  /* Shift logo and flags left */
   .header-container {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
+    gap: 1rem;
+  }
+
+  .logo {
+    margin-right: 1rem;
   }
 
   .header-right {
@@ -760,10 +764,11 @@ input[type="date"]:focus {
     gap: 1rem;
   }
 
+  /* Stack flags vertically on left */
   .lang-toggle {
     flex-direction: column;
     gap: 0.25rem;
-    order: -1; /* Move flags to the left of nav */
+    order: -1; /* place before nav */
   }
 
   .lang-btn {
@@ -771,21 +776,9 @@ input[type="date"]:focus {
     font-size: 0.85rem;
   }
 
-  .nav {
-    flex-direction: column;
-    gap: 0.25rem; /* Tighter spacing between links */
-    align-items: flex-start;
-  }
-
+  /* Prevent nav links from wrapping */
   .nav a {
-    padding: 6px 0; /* Add vertical padding for tap targets */
-    font-size: 0.9rem;
-  }
-
-  /* Fix for English headings being cut off */
-  h2[data-lang="en"] {
-    padding-top: 1.5rem;
-    margin-top: 0;
+    white-space: nowrap;
   }
 }
 
