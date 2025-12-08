@@ -747,7 +747,12 @@ input[type="date"]:focus {
    MOBILE PORTRAIT ONLY: HEADER ADJUSTMENTS
    ======================================== */
 @media (max-width: 768px) and (orientation: portrait) {
-  /* Shift logo and flags left */
+  /* Move logo further left */
+  .logo {
+    margin-left: -1rem; /* Adjust this value to move logo more or less */
+  }
+
+  /* Shift header content left */
   .header-container {
     justify-content: flex-start;
     gap: 1rem;
