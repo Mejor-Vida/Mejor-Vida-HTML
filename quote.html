@@ -100,32 +100,34 @@
         </div>
 
         <!-- COVERAGE DROPDOWN (shown by default) -->
-        <div class="form-group" id="coverage-group">
-          <label for="coverageAmount" data-lang="es">Seleccione un monto de cobertura</label>
-          <label for="coverageAmount" data-lang="en" style="display:none;">Select a coverage amount</label>
-          <select id="coverageAmount" name="coverage_amount">
-            <option value="" data-lang="es">Seleccione una opción</option>
-            <option value="" data-lang="en" style="display:none;">Select an option</option>
+        <div class="form-group" id="coverage-group" style="display:flex;">
+          <label for="coverageAmountEs" data-lang="es">Seleccione un monto de cobertura</label>
+          <label for="coverageAmountEn" data-lang="en" style="display:none;">Select a coverage amount</label>
+          
+          <select id="coverageAmountEs" name="coverage_amount" data-lang="es">
+            <option value="">Seleccione una opción</option>
+            <option value="3000">$3,000</option>
+            <option value="5000">$5,000</option>
+            <option value="7500">$7,500</option>
+            <option value="12000">$12,000</option>
+            <option value="15000">$15,000</option>
+            <option value="other">Otro monto</option>
+          </select>
 
-            <option value="3000" data-lang="es">$3,000</option>
-            <option value="5000" data-lang="es">$5,000</option>
-            <option value="7500" data-lang="es">$7,500</option>
-            <option value="12000" data-lang="es">$12,000</option>
-            <option value="15000" data-lang="es">$15,000</option>
-            <option value="other" data-lang="es">Otro monto</option>
-
-            <option value="3000" data-lang="en" style="display:none;">$3,000</option>
-            <option value="5000" data-lang="en" style="display:none;">$5,000</option>
-            <option value="7500" data-lang="en" style="display:none;">$7,500</option>
-            <option value="12000" data-lang="en" style="display:none;">$12,000</option>
-            <option value="15000" data-lang="en" style="display:none;">$15,000</option>
-            <option value="other" data-lang="en" style="display:none;">Other amount</option>
+          <select id="coverageAmountEn" name="coverage_amount" data-lang="en" style="display:none;">
+            <option value="">Select an option</option>
+            <option value="3000">$3,000</option>
+            <option value="5000">$5,000</option>
+            <option value="7500">$7,500</option>
+            <option value="12000">$12,000</option>
+            <option value="15000">$15,000</option>
+            <option value="other">Other amount</option>
           </select>
 
           <!-- Other coverage input (hidden by default) -->
           <input
             type="text"
-            id="coverageOther"
+            id="coverageOtherEs"
             name="coverage_other"
             placeholder="Ingrese otro monto de cobertura"
             data-lang="es"
@@ -137,38 +139,39 @@
             name="coverage_other"
             placeholder="Enter another coverage amount"
             data-lang="en"
-            style="display:none;"
             style="display:none; margin-top: 0.5rem;"
           />
         </div>
 
         <!-- BUDGET DROPDOWN (hidden by default) -->
         <div class="form-group" id="budget-group" style="display:none;">
-          <label for="budgetAmount" data-lang="es">Seleccione un presupuesto mensual</label>
-          <label for="budgetAmount" data-lang="en" style="display:none;">Select a monthly budget</label>
-          <select id="budgetAmount" name="budget_amount">
-            <option value="" data-lang="es">Seleccione una opción</option>
-            <option value="" data-lang="en" style="display:none;">Select an option</option>
+          <label for="budgetAmountEs" data-lang="es">Seleccione un presupuesto mensual</label>
+          <label for="budgetAmountEn" data-lang="en" style="display:none;">Select a monthly budget</label>
+          
+          <select id="budgetAmountEs" name="budget_amount" data-lang="es">
+            <option value="">Seleccione una opción</option>
+            <option value="25">$25 por mes</option>
+            <option value="35">$35 por mes</option>
+            <option value="50">$50 por mes</option>
+            <option value="75">$75 por mes</option>
+            <option value="100">$100 por mes</option>
+            <option value="other">Otro monto</option>
+          </select>
 
-            <option value="25" data-lang="es">$25 por mes</option>
-            <option value="35" data-lang="es">$35 por mes</option>
-            <option value="50" data-lang="es">$50 por mes</option>
-            <option value="75" data-lang="es">$75 por mes</option>
-            <option value="100" data-lang="es">$100 por mes</option>
-            <option value="other" data-lang="es">Otro monto</option>
-
-            <option value="25" data-lang="en" style="display:none;">$25 per month</option>
-            <option value="35" data-lang="en" style="display:none;">$35 per month</option>
-            <option value="50" data-lang="en" style="display:none;">$50 per month</option>
-            <option value="75" data-lang="en" style="display:none;">$75 per month</option>
-            <option value="100" data-lang="en" style="display:none;">$100 per month</option>
-            <option value="other" data-lang="en" style="display:none;">Other amount</option>
+          <select id="budgetAmountEn" name="budget_amount" data-lang="en" style="display:none;">
+            <option value="">Select an option</option>
+            <option value="25">$25 per month</option>
+            <option value="35">$35 per month</option>
+            <option value="50">$50 per month</option>
+            <option value="75">$75 per month</option>
+            <option value="100">$100 per month</option>
+            <option value="other">Other amount</option>
           </select>
 
           <!-- Other budget input (hidden by default) -->
           <input
             type="text"
-            id="budgetOther"
+            id="budgetOtherEs"
             name="budget_other"
             placeholder="Ingrese otro presupuesto mensual"
             data-lang="es"
@@ -180,7 +183,6 @@
             name="budget_other"
             placeholder="Enter another monthly budget"
             data-lang="en"
-            style="display:none;"
             style="display:none; margin-top: 0.5rem;"
           />
         </div>
@@ -194,17 +196,18 @@
           </div>
 
           <div class="form-group">
-            <label for="gender" data-lang="es">Género</label>
-            <label for="gender" data-lang="en" style="display:none;">Gender</label>
-            <select id="gender" name="gender" required>
-              <option value="" data-lang="es">Seleccione</option>
-              <option value="" data-lang="en" style="display:none;">Select</option>
-
-              <option value="female" data-lang="es">Femenino</option>
-              <option value="male" data-lang="es">Masculino</option>
-
-              <option value="female" data-lang="en" style="display:none;">Female</option>
-              <option value="male" data-lang="en" style="display:none;">Male</option>
+            <label for="genderEs" data-lang="es">Género</label>
+            <label for="genderEn" data-lang="en" style="display:none;">Gender</label>
+            
+            <select id="genderEs" name="gender" data-lang="es" required>
+              <option value="">Seleccione</option>
+              <option value="female">Femenino</option>
+              <option value="male">Masculino</option>
+            </select>
+            <select id="genderEn" name="gender" data-lang="en" style="display:none;" required>
+              <option value="">Select</option>
+              <option value="female">Female</option>
+              <option value="male">Male</option>
             </select>
           </div>
         </div>
@@ -217,17 +220,18 @@
           </div>
 
           <div class="form-group">
-            <label for="tobacco" data-lang="es">¿Usa tabaco?</label>
-            <label for="tobacco" data-lang="en" style="display:none;">Tobacco use</label>
-            <select id="tobacco" name="tobacco" required>
-              <option value="" data-lang="es">Seleccione</option>
-              <option value="" data-lang="en" style="display:none;">Select</option>
-
-              <option value="no" data-lang="es">No</option>
-              <option value="yes" data-lang="es">Sí</option>
-
-              <option value="no" data-lang="en" style="display:none;">No</option>
-              <option value="yes" data-lang="en" style="display:none;">Yes</option>
+            <label for="tobaccoEs" data-lang="es">¿Usa tabaco?</label>
+            <label for="tobaccoEn" data-lang="en" style="display:none;">Tobacco use</label>
+            
+            <select id="tobaccoEs" name="tobacco" data-lang="es" required>
+              <option value="">Seleccione</option>
+              <option value="no">No</option>
+              <option value="yes">Sí</option>
+            </select>
+            <select id="tobaccoEn" name="tobacco" data-lang="en" style="display:none;" required>
+              <option value="">Select</option>
+              <option value="no">No</option>
+              <option value="yes">Yes</option>
             </select>
           </div>
         </div>
@@ -363,42 +367,115 @@
       preferenceType.value = 'budget';
     });
 
-    // Show/hide \"Other\" input for coverage
-    const coverageAmount = document.getElementById('coverageAmount');
-    const coverageOther = document.getElementById('coverageOther');
+    // Show/hide "Other" input for coverage
+    const coverageAmountEs = document.getElementById('coverageAmountEs');
+    const coverageAmountEn = document.getElementById('coverageAmountEn');
+    const coverageOtherEs = document.getElementById('coverageOtherEs');
     const coverageOtherEn = document.getElementById('coverageOtherEn');
 
-    coverageAmount.addEventListener('change', function() {
-      if (this.value === 'other') {
-        coverageOther.style.display = 'block';
-        coverageOtherEn.style.display = 'block';
-        coverageOther.required = true;
+    function handleCoverageOther(selectEl, otherInputEs, otherInputEn) {
+      if (selectEl.value === 'other') {
+        otherInputEs.style.display = 'block';
+        otherInputEn.style.display = 'block';
+        otherInputEs.required = true;
+        otherInputEn.required = true;
       } else {
-        coverageOther.style.display = 'none';
-        coverageOtherEn.style.display = 'none';
-        coverageOther.required = false;
-        coverageOther.value = '';
-        coverageOtherEn.value = '';
+        otherInputEs.style.display = 'none';
+        otherInputEn.style.display = 'none';
+        otherInputEs.required = false;
+        otherInputEn.required = false;
+        otherInputEs.value = '';
+        otherInputEn.value = '';
       }
+    }
+
+    coverageAmountEs.addEventListener('change', () => {
+      handleCoverageOther(coverageAmountEs, coverageOtherEs, coverageOtherEn);
+    });
+    coverageAmountEn.addEventListener('change', () => {
+      handleCoverageOther(coverageAmountEn, coverageOtherEs, coverageOtherEn);
     });
 
-    // Show/hide \"Other\" input for budget
-    const budgetAmount = document.getElementById('budgetAmount');
-    const budgetOther = document.getElementById('budgetOther');
+    // Show/hide "Other" input for budget
+    const budgetAmountEs = document.getElementById('budgetAmountEs');
+    const budgetAmountEn = document.getElementById('budgetAmountEn');
+    const budgetOtherEs = document.getElementById('budgetOtherEs');
     const budgetOtherEn = document.getElementById('budgetOtherEn');
 
-    budgetAmount.addEventListener('change', function() {
-      if (this.value === 'other') {
-        budgetOther.style.display = 'block';
-        budgetOtherEn.style.display = 'block';
-        budgetOther.required = true;
+    function handleBudgetOther(selectEl, otherInputEs, otherInputEn) {
+      if (selectEl.value === 'other') {
+        otherInputEs.style.display = 'block';
+        otherInputEn.style.display = 'block';
+        otherInputEs.required = true;
+        otherInputEn.required = true;
       } else {
-        budgetOther.style.display = 'none';
-        budgetOtherEn.style.display = 'none';
-        budgetOther.required = false;
-        budgetOther.value = '';
-        budgetOtherEn.value = '';
+        otherInputEs.style.display = 'none';
+        otherInputEn.style.display = 'none';
+        otherInputEs.required = false;
+        otherInputEn.required = false;
+        otherInputEs.value = '';
+        otherInputEn.value = '';
       }
+    }
+
+    budgetAmountEs.addEventListener('change', () => {
+      handleBudgetOther(budgetAmountEs, budgetOtherEs, budgetOtherEn);
+    });
+    budgetAmountEn.addEventListener('change', () => {
+      handleBudgetOther(budgetAmountEn, budgetOtherEs, budgetOtherEn);
+    });
+
+    // Language toggle buttons
+    const langButtons = document.querySelectorAll('.lang-btn');
+    const langElements = document.querySelectorAll('[data-lang]');
+    const langSelectsEs = document.querySelectorAll('select[data-lang="es"]');
+    const langSelectsEn = document.querySelectorAll('select[data-lang="en"]');
+    const inputsEs = document.querySelectorAll('input[data-lang="es"]');
+    const inputsEn = document.querySelectorAll('input[data-lang="en"]');
+    const textareasEs = document.querySelectorAll('textarea[data-lang="es"]');
+    const textareasEn = document.querySelectorAll('textarea[data-lang="en"]');
+
+    langButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const selectedLang = button.getAttribute('data-lang-btn');
+
+        // Toggle active button
+        langButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+
+        // Show/hide elements by data-lang attribute
+        langElements.forEach(el => {
+          if (el.getAttribute('data-lang') === selectedLang) {
+            el.style.display = '';
+          } else {
+            el.style.display = 'none';
+          }
+        });
+
+        // Show/hide selects
+        langSelectsEs.forEach(sel => {
+          sel.style.display = selectedLang === 'es' ? '' : 'none';
+        });
+        langSelectsEn.forEach(sel => {
+          sel.style.display = selectedLang === 'en' ? '' : 'none';
+        });
+
+        // Show/hide inputs
+        inputsEs.forEach(inp => {
+          inp.style.display = selectedLang === 'es' ? '' : 'none';
+        });
+        inputsEn.forEach(inp => {
+          inp.style.display = selectedLang === 'en' ? '' : 'none';
+        });
+
+        // Show/hide textareas
+        textareasEs.forEach(ta => {
+          ta.style.display = selectedLang === 'es' ? '' : 'none';
+        });
+        textareasEn.forEach(ta => {
+          ta.style.display = selectedLang === 'en' ? '' : 'none';
+        });
+      });
     });
 
     // Set current year in footer
