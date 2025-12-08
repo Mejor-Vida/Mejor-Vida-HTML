@@ -23,14 +23,22 @@ function setLanguage(lang) {
   });
 }
 
+// On page load, check localStorage for saved language preference
+const savedLang = localStorage.getItem('preferredLang');
+if (savedLang) {
+  setLanguage(savedLang);
+} else {
+  setLanguage('es'); // default language
+}
+
+// Update language and save preference on button click
 langButtons.forEach(btn => {
   btn.addEventListener('click', () => {
-    setLanguage(btn.dataset.langBtn);
+    const selectedLang = btn.dataset.langBtn;
+    setLanguage(selectedLang);
+    localStorage.setItem('preferredLang', selectedLang);
   });
 });
-
-// Set default language on load
-setLanguage('es');
 
 // Set current year in footer
 const yearSpan = document.getElementById('year');
@@ -67,36 +75,40 @@ if (toggleCoverage && toggleBudget && coverageGroup && budgetGroup && preference
   const coverageOther = document.getElementById('coverageOther');
   const coverageOtherEn = document.getElementById('coverageOtherEn');
 
-  coverageAmount.addEventListener('change', function() {
-    if (this.value === 'other') {
-      coverageOther.style.display = 'block';
-      coverageOtherEn.style.display = 'block';
-      coverageOther.required = true;
-    } else {
-      coverageOther.style.display = 'none';
-      coverageOtherEn.style.display = 'none';
-      coverageOther.required = false;
-      coverageOther.value = '';
-      coverageOtherEn.value = '';
-    }
-  });
+  if (coverageAmount) {
+    coverageAmount.addEventListener('change', function() {
+      if (this.value === 'other') {
+        coverageOther.style.display = 'block';
+        coverageOtherEn.style.display = 'block';
+        coverageOther.required = true;
+      } else {
+        coverageOther.style.display = 'none';
+        coverageOtherEn.style.display = 'none';
+        coverageOther.required = false;
+        coverageOther.value = '';
+        coverageOtherEn.value = '';
+      }
+    });
+  }
 
   // Show/hide "Other" input for budget
   const budgetAmount = document.getElementById('budgetAmount');
   const budgetOther = document.getElementById('budgetOther');
   const budgetOtherEn = document.getElementById('budgetOtherEn');
 
-  budgetAmount.addEventListener('change', function() {
-    if (this.value === 'other') {
-      budgetOther.style.display = 'block';
-      budgetOtherEn.style.display = 'block';
-      budgetOther.required = true;
-    } else {
-      budgetOther.style.display = 'none';
-      budgetOtherEn.style.display = 'none';
-      budgetOther.required = false;
-      budgetOther.value = '';
-      budgetOtherEn.value = '';
-    }
-  });
+  if (budgetAmount) {
+    budgetAmount.addEventListener('change', function() {
+      if (this.value === 'other') {
+        budgetOther.style.display = 'block';
+        budgetOtherEn.style.display = 'block';
+        budgetOther.required = true;
+      } else {
+        budgetOther.style.display = 'none';
+        budgetOtherEn.style.display = 'none';
+        budgetOther.required = false;
+        budgetOther.value = '';
+        budgetOtherEn.value = '';
+      }
+    });
+  }
 }
