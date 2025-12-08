@@ -747,29 +747,29 @@ input[type="date"]:focus {
    MOBILE PORTRAIT ONLY: HEADER ADJUSTMENTS
    ======================================== */
 @media (max-width: 768px) and (orientation: portrait) {
-  /* Move logo further left */
-  .logo {
-    margin-left: -1rem; /* Adjust this value to move logo more or less */
-  }
-
-  /* Shift header content left */
   .header-container {
+    position: relative;
     justify-content: flex-start;
     gap: 1rem;
   }
 
   .logo {
-    margin-right: 1rem;
+    position: absolute;
+    left: 0; /* Align to extreme left */
+    top: 50%;
+    transform: translateY(-50%);
+    margin: 0; /* Remove margins */
+    z-index: 10;
   }
 
   .header-right {
+    margin-left: 140px; /* Leave space for the logo */
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: 1rem;
   }
 
-  /* Stack flags vertically on left */
   .lang-toggle {
     flex-direction: column;
     gap: 0.25rem;
@@ -781,14 +781,12 @@ input[type="date"]:focus {
     font-size: 0.85rem;
   }
 
-  /* Nav links stacked vertically */
   .nav {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
   }
 
-  /* Prevent each link from wrapping */
   .nav a {
     white-space: nowrap;
   }
