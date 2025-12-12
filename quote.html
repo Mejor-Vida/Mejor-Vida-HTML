@@ -14,6 +14,44 @@
     crossorigin="anonymous"
     referrerpolicy="no-referrer"
   />
+  <style>
+    /* Footer social icons colored and aligned right */
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .footer-left {
+      flex: 1 1 auto;
+      min-width: 250px;
+    }
+    .footer-right {
+      flex: 0 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .footer-right a {
+      font-size: 1.5rem;
+      color: inherit;
+      transition: transform 0.3s ease;
+    }
+    .footer-right a:hover {
+      transform: scale(1.2);
+    }
+    .footer-right a .fab {
+      /* Colored icons */
+      color: #3b5998; /* Facebook blue */
+    }
+    .footer-right a[aria-label="Instagram"] .fab {
+      color: #e4405f; /* Instagram pink */
+    }
+    .footer-right a[aria-label="LinkedIn"] .fab {
+      color: #0077b5; /* LinkedIn blue */
+    }
+  </style>
 </head>
 <body>
   <!-- HEADER -->
