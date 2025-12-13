@@ -761,8 +761,10 @@
         modal.setAttribute('aria-hidden', 'false');
         document.body.style.overflow = 'hidden';
 
-        // Wait a tick for modal to render, then size iframe
-        setTimeout(sizeIframeToViewport, 50);
+        // Delay sizing to ensure modal is fully visible
+        setTimeout(() => {
+          sizeIframeToViewport();
+        }, 100);  // 100ms delay
 
         // focus for accessibility
         const closeBtn = modal.querySelector('[data-close-modal]');
