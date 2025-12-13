@@ -60,6 +60,64 @@
     .footer-right a[aria-label="LinkedIn"] .fab {
       color: #0077b5; /* LinkedIn blue */
     }
+
+    /* ---------- Modal styles for embedded Agent CRM form ---------- */
+    .quote-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+    }
+    .quote-modal[aria-hidden="false"] {
+      display: flex;
+    }
+    .quote-modal-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+    }
+    .quote-modal-panel {
+      position: relative;
+      background: #fff;
+      width: 92%;
+      max-width: 980px;
+      border-radius: 8px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+      overflow: hidden;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .quote-modal-close {
+      position: absolute;
+      right: 12px;
+      top: 8px;
+      background: transparent;
+      border: 0;
+      font-size: 28px;
+      line-height: 1;
+      cursor: pointer;
+    }
+    .quote-iframe-wrap {
+      width: 100%;
+      height: calc(90vh - 48px); /* leave space for the close button / header if needed */
+    }
+    .quote-iframe-wrap iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+      border-radius: 3px;
+    }
+    @media (max-width:480px) {
+      .quote-modal-panel { width: 98%; border-radius: 6px; }
+      .quote-iframe-wrap { height: calc(80vh - 48px); }
+    }
+
+    /* visually-hidden helper */
+    .sr-only { position:absolute !important; height:1px; width:1px; overflow:hidden; clip:rect(1px,1px,1px,1px); white-space:nowrap; border:0; padding:0; margin:-1px; }
   </style>
 </head>
 <body>
@@ -99,8 +157,9 @@
           <a href="#carriers" data-lang="es">Aseguradoras</a>
           <a href="#carriers" data-lang="en" style="display:none;">Carriers</a>
 
-          <a href="quote.html#contact" data-lang="es">Cotización gratis</a>
-          <a href="quote.html#contact" data-lang="en" style="display:none;">Free quote</a>
+          <!-- UPDATED: buttons now open the Agent CRM modal (no quote.html links) -->
+          <a href="#" class="open-quote-modal" data-lang="es" role="button" aria-pressed="false">Cotización gratis</a>
+          <a href="#" class="open-quote-modal" data-lang="en" style="display:none;" role="button" aria-pressed="false">Free quote</a>
         </nav>
       </div>
     </div>
@@ -158,8 +217,9 @@
 
           <div class="hero-contact">
             <p>
-              <a href="quote.html#contact" class="btn btn-primary" data-lang="es">¡Obtén una cotización gratis!</a>
-              <a href="quote.html#contact" class="btn btn-primary" data-lang="en" style="display:none;">Get a free quote!</a>
+              <!-- UPDATED: buttons now open modal (no quote.html) -->
+              <a href="#" class="btn btn-primary open-quote-modal" data-lang="es" role="button" aria-pressed="false">¡Obtén una cotización gratis!</a>
+              <a href="#" class="btn btn-primary open-quote-modal" data-lang="en" style="display:none;" role="button" aria-pressed="false">Get a free quote!</a>
             </p>
           </div>
         </div>
@@ -502,9 +562,43 @@
     </div>
   </footer>
 
+  <!-- Agent CRM Modal HTML (hidden by default) -->
+  <div id="quoteModal" class="quote-modal" aria-hidden="true" role="dialog" aria-labelledby="quoteModalTitle">
+    <div class="quote-modal-backdrop" data-close-modal></div>
+    <div class="quote-modal-panel" role="document">
+      <button class="quote-modal-close" aria-label="Cerrar" data-close-modal>&times;</button>
+      <h2 id="quoteModalTitle" class="sr-only">Formulario de cotización</h2>
+
+      <div class="quote-iframe-wrap" aria-live="polite">
+        <!-- Agent CRM iframe embed (your exact provided embed URL) -->
+        <iframe
+            id="quoteEmbedIframe"
+            src="https://crm.mejorvidainsurance.com/widget/form/uApX9m6VUhke3XRK4Iov"
+            style="width:100%;height:100%;border:none;border-radius:3px"
+            data-layout="{'id':'INLINE'}"
+            data-trigger-type="alwaysShow"
+            data-trigger-value=""
+            data-activation-type="alwaysActivated"
+            data-activation-value=""
+            data-deactivation-type="neverDeactivate"
+            data-deactivation-value=""
+            data-form-name="MVI-Final Expense – Quote Form (Spanish)"
+            data-height="1694"
+            data-layout-iframe-id="inline-uApX9m6VUhke3XRK4Iov"
+            data-form-id="uApX9m6VUhke3XRK4Iov"
+            title="MVI-Final Expense – Quote Form (Spanish)"
+            frameborder="0"
+        ></iframe>
+
+        <!-- Agent CRM embed script (keeps iframe functionality) -->
+        <script src="https://crm.mejorvidainsurance.com/js/form_embed.js"></script>
+      </div>
+    </div>
+  </div>
+
   <script src="script.js"></script>
   <script>
-    // Language toggle
+    // Language toggle (unchanged)
     const langButtons = document.querySelectorAll('.lang-btn');
     let currentLanguage = 'es';
 
@@ -541,6 +635,119 @@
     if (yearSpan) {
       yearSpan.textContent = new Date().getFullYear();
     }
+  </script>
+
+  <!-- Modal control script: opens/closes modal, prefill support, and chatbot/url trigger -->
+  <script>
+    (function() {
+      const modal = document.getElementById('quoteModal');
+      const iframe = document.getElementById('quoteEmbedIframe');
+      const closeControls = modal.querySelectorAll('[data-close-modal]');
+      const openButtons = document.querySelectorAll('.open-quote-modal');
+
+      // Keep the original iframe base src so we can append prefill params if needed.
+      const iframeBaseSrc = iframe.getAttribute('src');
+
+      function buildIframeSrcWithPrefill(params) {
+        // Only append params that exist (first,last,email,phone)
+        const allowed = ['first','last','email','phone'];
+        const qs = new URLSearchParams();
+        allowed.forEach(k => {
+          if (params[k]) qs.set(k, params[k]);
+        });
+        const qstr = qs.toString();
+        return qstr ? (iframeBaseSrc + (iframeBaseSrc.indexOf('?') === -1 ? '?' : '&') + qstr) : iframeBaseSrc;
+      }
+
+      function openQuoteModal(event, options = {}) {
+        if (event && typeof event.preventDefault === 'function') event.preventDefault();
+
+        // If options.prefill exists, use it to build iframe src
+        let params = {};
+        if (options.prefill && typeof options.prefill === 'object') {
+          params = options.prefill;
+        } else {
+          // attempt to read from current page URL query params
+          const pageParams = new URLSearchParams(window.location.search);
+          ['first','last','email','phone'].forEach(k => {
+            if (pageParams.get(k)) params[k] = pageParams.get(k);
+          });
+        }
+
+        // Update iframe src only when needed (so embed script can initialize)
+        iframe.src = buildIframeSrcWithPrefill(params);
+
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+
+        // put focus on close button for accessibility
+        const closeBtn = modal.querySelector('[data-close-modal]');
+        if (closeBtn) closeBtn.focus();
+      }
+
+      function closeQuoteModal(event) {
+        if (event && typeof event.preventDefault === 'function') event.preventDefault();
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+
+        // Optional: clear iframe to stop any running scripts / audio — comment out if you want it to persist
+        // iframe.src = iframeBaseSrc;
+      }
+
+      // Attach open handlers to buttons
+      openButtons.forEach(btn => {
+        btn.addEventListener('click', openQuoteModal);
+        // ensure keyboard accessibility
+        btn.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            openQuoteModal(e);
+          }
+        });
+      });
+
+      // Attach close handlers
+      closeControls.forEach(el => el.addEventListener('click', closeQuoteModal));
+      // Close on Esc
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && modal.getAttribute('aria-hidden') === 'false') closeQuoteModal();
+      });
+
+      // Close when clicking backdrop
+      modal.querySelector('.quote-modal-backdrop').addEventListener('click', closeQuoteModal);
+
+      // Auto-open if URL has ?openQuote=1
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('openQuote') === '1') {
+        // extract any prefill fields from url (optional)
+        const prefill = {};
+        ['first','last','email','phone'].forEach(k => {
+          if (params.get(k)) prefill[k] = params.get(k);
+        });
+
+        // small delay so page finishes rendering
+        setTimeout(() => openQuoteModal(null, { prefill }), 300);
+
+        // optionally remove query param from history to avoid reopening on refresh
+        if (history.replaceState) {
+          const url = new URL(window.location.href);
+          url.searchParams.delete('openQuote');
+          url.searchParams.delete('first');
+          url.searchParams.delete('last');
+          url.searchParams.delete('email');
+          url.searchParams.delete('phone');
+          history.replaceState({}, '', url.pathname + url.search);
+        }
+      }
+
+      // Expose a global function for the chatbot to call directly
+      window.openQuoteFormModal = function(prefillObj) {
+        // prefillObj should be an object like { first: 'Juan', email: 'juan@example.com' }
+        openQuoteModal(null, { prefill: prefillObj || {} });
+      };
+
+      window.closeQuoteFormModal = closeQuoteModal;
+    })();
   </script>
 
   <script 
