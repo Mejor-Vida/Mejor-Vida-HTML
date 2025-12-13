@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Términos de Servicio - Mejor Vida Insurance</title>
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 20px;
+      background-color: #f4f4f4;
+      color: #333;
+    }
+    .container {
+      max-width: 800px;
+      margin: 20px auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #0056b3;
+    }
+    p, ul {
+      margin-bottom: 1em;
+    }
+    ul {
+      list-style-type: disc;
+      margin-left: 20px;
+    }
+    a {
+      color: #0056b3;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .lang-toggle {
+      text-align: right;
+      margin-bottom: 20px;
+    }
+    .lang-btn {
+      background: #e0e0e0;
+      border: none;
+      padding: 8px 16px;
+      margin-left: 10px;
+      cursor: pointer;
+      border-radius: 4px;
+      font-size: 0.9rem;
+    }
+    .lang-btn.active {
+      background: #0056b3;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Language Toggle -->
+    <div class="lang-toggle">
+      <button class="lang-btn active" data-lang-btn="es">
+        <span class="flag">🇪🇸</span> ES
+      </button>
+      <button class="lang-btn" data-lang-btn="en">
+        <span class="flag">🇺🇸</span> EN
+      </button>
+    </div>
+
+    <h1 data-lang="es">Términos de Servicio</h1>
+    <h1 data-lang="en" style="display:none;">Terms of Service</h1>
+
+    <p data-lang="es">
+      Bienvenido a Mejor Vida Insurance LLC. Al utilizar nuestro sitio web y servicios, usted acepta cumplir con estos términos y condiciones.
+    </p>
+    <p data-lang="en" style="display:none;">
+      Welcome to Mejor Vida Insurance LLC. By using our website and services, you agree to comply with these terms and conditions.
+    </p>
+
+    <h2 data-lang="es">Uso del sitio web</h2>
+    <h2 data-lang="en" style="display:none;">Website Use</h2>
+
+    <p data-lang="es">
+      Usted acepta usar nuestro sitio web solo para fines legales y de acuerdo con todas las leyes aplicables. No debe usar el sitio para actividades fraudulentas o ilegales.
+    </p>
+    <p data-lang="en" style="display:none;">
+      You agree to use our website only for lawful purposes and in accordance with all applicable laws. You must not use the site for fraudulent or illegal activities.
+    </p>
+
+    <h2 data-lang="es">Información proporcionada</h2>
+    <h2 data-lang="en" style="display:none;">Information Provided</h2>
+
+    <p data-lang="es">
+      Usted es responsable de la exactitud y veracidad de la información que proporciona a través de nuestros formularios y servicios.
+    </p>
+    <p data-lang="en" style="display:none;">
+      You are responsible for the accuracy and truthfulness of the information you provide through our forms and services.
+    </p>
+
+    <h2 data-lang="es">Limitación de responsabilidad</h2>
+    <h2 data-lang="en" style="display:none;">Limitation of Liability</h2>
+
+    <p data-lang="es">
+      Mejor Vida Insurance LLC no será responsable por daños directos, indirectos, incidentales o consecuentes que resulten del uso de nuestro sitio o servicios.
+    </p>
+    <p data-lang="en" style="display:none;">
+      Mejor Vida Insurance LLC shall not be liable for any direct, indirect, incidental, or consequential damages resulting from the use of our site or services.
+    </p>
+
+    <h2 data-lang="es">Cambios en los términos</h2>
+    <h2 data-lang="en" style="display:none;">Changes to Terms</h2>
+
+    <p data-lang="es">
+      Podemos actualizar estos términos de servicio en cualquier momento. Publicaremos los cambios en esta página con la fecha de revisión actualizada.
+    </p>
+    <p data-lang="en" style="display:none;">
+      We may update these terms of service at any time. We will post changes on this page with an updated revision date.
+    </p>
+
+    <h2 data-lang="es">Contacto</h2>
+    <h2 data-lang="en" style="display:none;">Contact</h2>
+
+    <p data-lang="es">
+      Si tiene preguntas sobre estos términos, por favor contáctenos en <a href="mailto:Julie@mejorvidainsurance.com">Julie@mejorvidainsurance.com</a>.
+    </p>
+    <p data-lang="en" style="display:none;">
+      If you have questions about these terms, please contact us at <a href="mailto:Julie@mejorvidainsurance.com">Julie@mejorvidainsurance.com</a>.
+    </p>
+
+    <p><strong data-lang="es">Fecha de última actualización:</strong> <strong data-lang="en" style="display:none;">Last Updated:</strong> 13 de diciembre de 2025</p>
+  </div>
+
+  <script>
+    const langButtons = document.querySelectorAll('.lang-btn');
+
+    function setLanguage(lang) {
+      document.querySelectorAll('[data-lang="es"]').forEach(el => {
+        el.style.display = lang === 'es' ? '' : 'none';
+      });
+      document.querySelectorAll('[data-lang="en"]').forEach(el => {
+        el.style.display = lang === 'en' ? '' : 'none';
+      });
+
+      langButtons.forEach(btn => {
+        if (btn.dataset.langBtn === lang) {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
+      });
+    }
+
+    langButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        setLanguage(btn.dataset.langBtn);
+      });
+    });
+
+    // Default language
+    setLanguage('es');
+  </script>
+</body>
+</html>
