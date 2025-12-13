@@ -151,7 +151,7 @@
       z-index: 4;
     }
 
-    /* iframe area fills remaining panel height and is scrollable internally */
+    /* iframe area fills remaining panel height and allows iframe to show scrollbars */
     .quote-iframe-wrap {
       width: 100%;
       flex: 1 1 auto;
@@ -162,18 +162,19 @@
     .quote-iframe-inner {
       flex: 1 1 auto;
       height: 100%;
-      overflow-y: auto;                         /* <-- enables internal scrolling */
+      overflow: hidden;            /* hide extra; iframe will have its own scrollbar */
       -webkit-overflow-scrolling: touch;
-      padding: 20px;                             /* optional: some breathing room */
+      padding: 0;                  /* keep iframe flush */
       box-sizing: border-box;
     }
     .quote-iframe-inner iframe {
       width: 100%;
-      height: 100%;
       border: 0;
       display: block;
-      min-height: 700px;                         /* helps ensure form initially visible */
+      min-height: 700px;           /* baseline */
+      /* We'll set the actual height dynamically via JS to fit the viewport */
     }
+
     @media (max-width: 600px) {
       .quote-modal-panel { width: 98%; max-width: 98%; border-radius: 6px; }
       .quote-modal-header .modal-logo img { height: 110px; }
@@ -630,7 +631,7 @@
   <div id="quoteModal" class="quote-modal" aria-hidden="true" role="dialog" aria-labelledby="quoteModalTitle">
     <div class="quote-modal-backdrop" data-close-modal></div>
     <div class="quote-modal-panel" role="document">
-      <!-- Modal header with logo + centered title (replace previous .quote-modal-header markup) -->
+      <!-- Modal header with logo + centered title -->
       <div class="quote-modal-header" role="banner">
         <div class="modal-logo" aria-hidden="true">
           <img src="img/logo-spanish.png" alt="Mejor Vida Insurance" />
@@ -648,12 +649,14 @@
 
       <div class="quote-iframe-wrap" aria-live="polite">
         <div class="quote-iframe-inner" id="quoteIframeInner">
-          <!-- Agent CRM iframe embed (your exact provided embed URL) -->
+          <!-- Agent CRM iframe embed -->
           <iframe
               id="quoteEmbedIframe"
               src="https://crm.mejorvidainsurance.com/widget/form/uApX9m6VUhke3XRK4Iov"
               title="MVI-Final Expense – Quote Form (Spanish)"
               frameborder="0"
+              scrolling="yes"
+              aria-label="Formulario de cotización"
           ></iframe>
         </div>
 
@@ -704,13 +707,15 @@
     }
   </script>
 
-  <!-- Modal control script: opens/closes modal, prefill support, and chatbot/url trigger -->
+  <!-- Modal control script: opens/closes modal, prefill support, dynamic iframe sizing -->
   <script>
     (function() {
       const modal = document.getElementById('quoteModal');
       const iframe = document.getElementById('quoteEmbedIframe');
       const closeControls = modal.querySelectorAll('[data-close-modal]');
       const openButtons = document.querySelectorAll('.open-quote-modal');
+      const modalPanel = modal.querySelector('.quote-modal-panel');
+      const modalHeader = modal.querySelector('.quote-modal-header');
 
       // Keep the original iframe base src so we can append prefill params if needed.
       const iframeBaseSrc = iframe.getAttribute('src');
@@ -724,6 +729,15 @@
         });
         const qstr = qs.toString();
         return qstr ? (iframeBaseSrc + (iframeBaseSrc.indexOf('?') === -1 ? '?' : '&') + qstr) : iframeBaseSrc;
+      }
+
+      function sizeIframeToViewport() {
+        // Height available inside modal panel = modalPanel.clientHeight - headerHeight
+        const panelHeight = modalPanel.clientHeight;
+        const headerHeight = modalHeader ? modalHeader.offsetHeight : 0;
+        // Keep some breathing room (20px)
+        const available = Math.max(600, panelHeight - headerHeight - 20);
+        iframe.style.height = available + 'px';
       }
 
       function openQuoteModal(event, options = {}) {
@@ -747,7 +761,10 @@
         modal.setAttribute('aria-hidden', 'false');
         document.body.style.overflow = 'hidden';
 
-        // put focus on close button for accessibility
+        // Wait a tick for modal to render, then size iframe
+        setTimeout(sizeIframeToViewport, 50);
+
+        // focus for accessibility
         const closeBtn = modal.querySelector('[data-close-modal]');
         if (closeBtn) closeBtn.focus();
       }
@@ -757,7 +774,7 @@
         modal.setAttribute('aria-hidden', 'true');
         document.body.style.overflow = '';
 
-        // Optional: reset iframe to base src to stop any running scripts — uncomment if desired:
+        // Optionally reset iframe to base src to stop any running scripts — uncomment if desired:
         // iframe.src = iframeBaseSrc;
       }
 
@@ -806,6 +823,15 @@
           history.replaceState({}, '', url.pathname + url.search);
         }
       }
+
+      // Ensure iframe is resized when window changes while modal is open
+      window.addEventListener('resize', function() {
+        if (modal.getAttribute('aria-hidden') === 'false') {
+          // small debounce
+          clearTimeout(window._quoteResizeTimer);
+          window._quoteResizeTimer = setTimeout(sizeIframeToViewport, 80);
+        }
+      });
 
       // Expose a global function for the chatbot to call directly
       window.openQuoteFormModal = function(prefillObj) {
