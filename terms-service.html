@@ -11,15 +11,42 @@
       font-family: Arial, sans-serif;
       line-height: 1.6;
       margin: 0;
-      padding: 20px;
+      padding: 0;
       background-color: #f4f4f4;
       color: #333;
     }
+    .policy-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: #fff;
+      border-bottom: 1px solid #ddd;
+    }
+    .policy-logo img {
+      height: 40px;
+    }
+    .lang-toggle {
+      display: flex;
+      gap: 0.5rem;
+    }
+    .lang-btn {
+      background: #e0e0e0;
+      border: none;
+      padding: 0.4rem 0.8rem;
+      cursor: pointer;
+      border-radius: 4px;
+      font-size: 0.9rem;
+    }
+    .lang-btn.active {
+      background: #0056b3;
+      color: white;
+    }
     .container {
       max-width: 800px;
-      margin: 20px auto;
+      margin: 2rem auto;
       background: #fff;
-      padding: 30px;
+      padding: 2rem;
       border-radius: 8px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
@@ -40,28 +67,16 @@
     a:hover {
       text-decoration: underline;
     }
-    .lang-toggle {
-      text-align: right;
-      margin-bottom: 20px;
-    }
-    .lang-btn {
-      background: #e0e0e0;
-      border: none;
-      padding: 8px 16px;
-      margin-left: 10px;
-      cursor: pointer;
-      border-radius: 4px;
-      font-size: 0.9rem;
-    }
-    .lang-btn.active {
-      background: #0056b3;
-      color: white;
-    }
   </style>
 </head>
 <body>
-  <div class="container">
-    <!-- Language Toggle -->
+  <!-- Policy Page Header -->
+  <header class="policy-header">
+    <div class="policy-logo">
+      <a href="index.html">
+        <img src="img/logo-spanish.png" alt="Mejor Vida Insurance Logo" />
+      </a>
+    </div>
     <div class="lang-toggle">
       <button class="lang-btn active" data-lang-btn="es">
         <span class="flag">🇪🇸</span> ES
@@ -70,7 +85,9 @@
         <span class="flag">🇺🇸</span> EN
       </button>
     </div>
+  </header>
 
+  <div class="container">
     <h1 data-lang="es">Términos de Servicio</h1>
     <h1 data-lang="en" style="display:none;">Terms of Service</h1>
 
