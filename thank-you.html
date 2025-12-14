@@ -1,1 +1,210 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Thank You — Mejor Vida Insurance</title>
+  <style>
+    :root{
+      --brand:#d17e00;
+      --brand-dark:#b36a00;
+      --bg:#f4f7f6;
+      --card:#ffffff;
+      --text:#222;
+      --muted:#555;
+      --max-width:760px;
+    }
+    html,body{height:100%;margin:0;background:var(--bg);font-family:Inter,system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial;}
+    .page-wrap{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:24px;
+      box-sizing:border-box;
+    }
+    .card{
+      width:100%;
+      max-width:var(--max-width);
+      background:var(--card);
+      border-radius:12px;
+      box-shadow:0 8px 20px rgba(0,0,0,0.08);
+      padding:28px;
+      text-align:center;
+      box-sizing:border-box;
+    }
+    h1{
+      margin:0 0 8px 0;
+      color:var(--brand);
+      font-size:26px;
+      font-weight:700;
+    }
+    p.lead{
+      margin:0 0 18px 0;
+      font-size:17px;
+      color:var(--text);
+      line-height:1.4;
+    }
+    p.sub{
+      margin:0 0 18px 0;
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.4;
+    }
+    .cta{
+      display:inline-block;
+      background:var(--brand);
+      color:#fff;
+      text-decoration:none;
+      padding:14px 34px;
+      border-radius:28px;
+      font-weight:700;
+      font-size:18px;
+      box-shadow:0 6px 14px rgba(209,126,0,0.24);
+      transition:transform .12s ease, box-shadow .12s ease, background-color .12s ease;
+      margin-bottom:12px;
+    }
+    .cta:focus{outline:3px solid rgba(209,126,0,0.18); outline-offset:3px}
+    .cta:hover{transform:translateY(-3px); background:var(--brand-dark); box-shadow:0 10px 20px rgba(179,106,0,0.28)}
+    .note{
+      color:var(--muted);
+      font-size:14px;
+      margin-top:8px;
+    }
+    /* iframe area */
+    .iframe-wrap{
+      margin-top:20px;
+      border-radius:10px;
+      overflow:hidden;
+      border:1px solid rgba(0,0,0,0.04);
+    }
+    iframe.booking{
+      width:100%;
+      height:700px;
+      border:0;
+      display:block;
+      min-height:400px;
+    }
+    /* Responsive */
+    @media (max-width:600px){
+      .card{padding:18px;}
+      h1{font-size:22px;}
+      .cta{font-size:16px;padding:12px 22px;}
+      iframe.booking{height:820px;}
+    }
+  </style>
+</head>
+<body>
+  <div class="page-wrap">
+    <div class="card" role="main" aria-labelledby="thankHeading">
+      <h1 id="thankHeading">Thank you! / ¡Gracias!</h1>
+
+      <p class="lead" id="leadMsg">
+        Your quote form has been submitted successfully.<br />
+        Su formulario de cotización ha sido enviado con éxito.
+      </p>
+
+      <p class="sub" id="subMsg">
+        Please schedule your free consultation with Julie — she will call you at the phone number you provided.<br />
+        Por favor programe su consulta gratuita con Julie — ella le llamará al número que proporcionó.
+      </p>
+
+      <!-- Primary button: opens booking in new tab (with optional prefill) -->
+      <a id="bookingBtn" class="cta" href="#" target="_blank" rel="noopener noreferrer" aria-label="Schedule with Julie">
+        Schedule / Programar cita con Julie
+      </a>
+
+      <p class="note" id="noteMsg">
+        The scheduler will open in a new tab. If it doesn't load, use the button above.
+      </p>
+
+      <!-- Optional embedded iframe (some widgets block embedding; keep for convenience) -->
+      <div class="iframe-wrap" id="iframeWrap" aria-hidden="false" style="display:block;">
+        <iframe id="bookingIframe" class="booking" src="" title="Schedule with Julie"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function(){
+      // Booking base URL — update if different
+      const BOOKING_BASE = 'https://crm.mejorvidainsurance.com/widget/bookings/julies-quote-consultation';
+
+      // Helper: read query params from current URL
+      function readQueryParams(){
+        const params = {};
+        const qs = window.location.search.substring(1);
+        if(!qs) return params;
+        qs.split('&').forEach(pair => {
+          const [k,v] = pair.split('=');
+          if(!k) return;
+          try { params[decodeURIComponent(k)] = v ? decodeURIComponent(v.replace(/\+/g,' ')) : ''; }
+          catch(e){ params[k]=v; }
+        });
+        return params;
+      }
+
+      // Build booking URL with prefill params if available
+      function buildBookingUrl(base, params) {
+        // Supported field names: first, last, email, phone
+        const supported = ['first','last','email','phone','phone_number','first_name','last_name'];
+        const out = new URL(base);
+        const used = {};
+        // Map common keys to the ones the widget might expect
+        const map = {
+          first_name: 'first',
+          last_name: 'last',
+          phone_number: 'phone'
+        };
+        Object.keys(params).forEach(k=>{
+          const lower = k.toLowerCase();
+          let useKey = null;
+          if(supported.includes(lower)) useKey = lower;
+          else if(map[lower]) useKey = map[lower];
+          if(useKey && params[k]) {
+            out.searchParams.set(useKey, params[k]);
+            used[useKey] = params[k];
+          }
+        });
+        return { url: out.toString(), used };
+      }
+
+      // Attempt to load iframe; if embedding blocked, show instruction (we can't reliably detect X-Frame-Options due to cross-origin)
+      function tryLoadIframe(iframeEl, url){
+        iframeEl.src = url;
+        // After a short delay, check if the iframe remained blank or failed to load contentHeight
+        setTimeout(()=>{
+          // We cannot access iframe content for cross-origin, so we fallback to showing note only.
+          // Keep iframe visible — if it's blocked, user can click the button above.
+        }, 1200);
+      }
+
+      // Initialize
+      const params = readQueryParams();
+      const { url: bookingUrlWithPrefill, used } = buildBookingUrl(BOOKING_BASE, params);
+      const bookingBtn = document.getElementById('bookingBtn');
+      const iframe = document.getElementById('bookingIframe');
+      const iframeWrap = document.getElementById('iframeWrap');
+      const noteMsg = document.getElementById('noteMsg');
+
+      // Set href: if no prefill params found, use the base booking URL
+      bookingBtn.href = Object.keys(used).length ? bookingUrlWithPrefill : BOOKING_BASE;
+
+      // Also set iframe src (some widgets allow embedding)
+      tryLoadIframe(iframe, bookingBtn.href);
+
+      // Accessibility: focus the button so it's immediately actionable for keyboard users
+      bookingBtn.focus();
+
+      // Small UX improvement: if no iframe embedding desired, you can hide iframeWrap by default.
+      // If you prefer not to embed at all, uncomment the next line:
+      // iframeWrap.style.display = 'none';
+
+      // Optional: If you want to automatically open booking in a new tab after a short delay, uncomment below.
+      // window.open(bookingBtn.href, '_blank', 'noopener');
+
+    })();
+  </script>
+</body>
+</html>
