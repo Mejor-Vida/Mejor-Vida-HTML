@@ -1,45 +1,109 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Get a Free Quote - Mejor Vida Insurance</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Cotización gratuita — Mejor Vida Insurance</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-      background-color: #f4f4f4; /* Light background for contrast */
-      color: #333;
+    :root {
+      --page-bg: #f5f5f5;
+      --container-bg: #ffffff;
+      --accent: #d17e00;
+      --max-width: 960px;
+    }
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: var(--page-bg);
+      color: #222;
+    }
+    header {
+      text-align: center;
+      padding: 28px 16px 8px;
     }
     h1 {
-      text-align: center;
-      color: #0056b3; /* A nice blue for the title */
-      margin-bottom: 30px;
+      margin: 0;
+      font-size: 28px;
+      color: #0f4db6;
     }
-    .form-container {
-      max-width: 700px; /* Adjust width as needed */
-      margin: 0 auto;
+    p.lead {
+      margin: 6px 0 0;
+      color: #444;
+    }
+    .form-shell {
+      max-width: var(--max-width);
+      margin: 28px auto;
       padding: 20px;
-      background-color: #fff;
+      background: var(--container-bg);
       border-radius: 8px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      box-shadow: 0 6px 22px rgba(10,20,40,0.06);
     }
-    /* Basic responsive adjustments for the embedded form */
-    iframe {
+    /* make iframe fill the container and be responsive */
+    .iframe-wrap {
       width: 100%;
-      min-height: 800px; /* Adjust height as needed for your form */
-      border: none;
+      min-height: 70vh; /* good default for most screens */
+      height: auto;
+      overflow: hidden;
+      border-radius: 6px;
+    }
+    .iframe-wrap iframe {
+      display: block;
+      width: 100%;
+      height: 100%;
+      min-height: 700px;
+      border: 0;
+    }
+    /* slim footer for mobile readability */
+    footer {
+      text-align: center;
+      padding: 18px 12px;
+      color: #333;
+      font-size: 14px;
+    }
+    @media (max-width: 520px) {
+      h1 { font-size: 22px; }
+      .form-shell { padding: 12px; margin: 12px; }
+      .iframe-wrap { min-height: 80vh; }
     }
   </style>
 </head>
 <body>
-  <h1>Get a Free Quote</h1>
-  <div class="form-container">
-    <!-- PASTE YOUR AGENT CRM EMBED CODE HERE -->
-    <!-- It will likely start with <iframe ...> or <script ...> -->
-    <!-- Example placeholder: -->
-    <iframe src="YOUR_AGENT_CRM_EMBED_URL_HERE" width="100%" height="800" frameborder="0"></iframe>
-    <!-- END OF AGENT CRM EMBED CODE -->
-  </div>
+  <header>
+    <h1>Get a Free Quote / Cotización gratuita</h1>
+    <p class="lead">Complete the form below and a licensed agent will contact you. / Complete el formulario a continuación y un agente autorizado se comunicará con usted.</p>
+  </header>
+
+  <main>
+    <div class="form-shell" role="main" aria-labelledby="pageTitle">
+      <div class="iframe-wrap" id="form-container">
+        <!-- YOUR AGENT CRM EMBED CODE — pasted exactly as provided -->
+        <iframe
+            src="https://crm.mejorvidainsurance.com/widget/form/uApX9m6VUhke3XRK4Iov"
+            style="width:100%;height:100%;border:none;border-radius:3px"
+            id="inline-uApX9m6VUhke3XRK4Iov"
+            data-layout="{'id':'INLINE'}"
+            data-trigger-type="alwaysShow"
+            data-trigger-value=""
+            data-activation-type="alwaysActivated"
+            data-activation-value=""
+            data-deactivation-type="neverDeactivate"
+            data-deactivation-value=""
+            data-form-name="MVI-Final Expense – Quote Form (Bilingual)"
+            data-height="1486"
+            data-layout-iframe-id="inline-uApX9m6VUhke3XRK4Iov"
+            data-form-id="uApX9m6VUhke3XRK4Iov"
+            title="MVI-Final Expense – Quote Form (Bilingual)"
+        >
+        </iframe>
+        <script src="https://crm.mejorvidainsurance.com/js/form_embed.js"></script>
+        <!-- END EMBED CODE -->
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    Tip: In the chat widget, click the button labelled "<strong>¡Haz clic aquí para una cotización gratis!</strong>" to open this page. / Consejo: En el widget de chat, haga clic en el botón etiquetado "<strong>¡Haz clic aquí para una cotización gratis!</strong>" para abrir esta página.
+  </footer>
 </body>
 </html>
