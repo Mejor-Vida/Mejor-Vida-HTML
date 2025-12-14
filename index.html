@@ -845,6 +845,44 @@
     })();
   </script>
 
+  <!-- Chatbot message listener: listens for the widget sending a postMessage to open the quote modal -->
+  <script>
+    (function() {
+      function isAllowedOrigin(origin) {
+        // Allow LeadConnectorHQ widget origins. Adjust/add more origins if needed.
+        try {
+          return !!origin && (origin.includes('leadconnectorhq.com') || origin.includes('agentcrm') || origin.includes('crm.mejorvidainsurance.com'));
+        } catch (e) {
+          return false;
+        }
+      }
+
+      window.addEventListener('message', function(event) {
+        // Security: only accept messages from known origins
+        if (!isAllowedOrigin(event.origin)) return;
+
+        const data = event.data || {};
+
+        // Accept either { action: 'openQuoteForm', prefill: { ... } } 
+        // or the legacy flag { openQuoteForm: true, prefill: { ... } }
+        const isOpenAction = data.action === 'openQuoteForm' || data.openQuoteForm === true;
+
+        if (isOpenAction) {
+          const prefill = data.prefill && typeof data.prefill === 'object' ? data.prefill : {};
+          if (typeof window.openQuoteFormModal === 'function') {
+            try {
+              window.openQuoteFormModal(prefill);
+            } catch (err) {
+              console.error('Error opening quote modal from chatbot message:', err);
+            }
+          } else {
+            console.warn('openQuoteFormModal is not defined on the page yet.');
+          }
+        }
+      });
+    })();
+  </script>
+
   <script 
     src="https://widgets.leadconnectorhq.com/loader.js"  
     data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" 
