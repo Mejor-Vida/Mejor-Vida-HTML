@@ -44,18 +44,15 @@
     /* make iframe fill the container and be responsive; allow wrapper to scroll */
     .iframe-wrap {
       width: 100%;
-      /* keep the form visible but allow wrapper to scroll if content is taller than viewport */
-      max-height: calc(100vh - 160px); /* adjust 160px if your header/footer size changes */
-      overflow-y: auto; /* ALLOW vertical scrolling */
+      max-height: calc(100vh - 160px);
+      overflow-y: auto;
       border-radius: 6px;
-      -webkit-overflow-scrolling: touch; /* smooth scrolling on iOS */
+      -webkit-overflow-scrolling: touch;
     }
 
     .iframe-wrap iframe {
       display: block;
       width: 100%;
-      /* iframe height will be set via JS using data-height if available.
-         Setting a reasonable minimum helps on small screens: */
       min-height: 700px;
       border: 0;
       border-radius: 3px;
@@ -74,72 +71,41 @@
 <body>
   <header>
     <h1 id="pageTitle">Get a Free Quote / Cotización gratuita</h1>
-    <p class="lead">Complete the form below and a licensed agent will contact you. / Complete el formulario a continuación y un agente autorizado se comunicará con usted.</p>
+    <p class="lead">Schedule your appointment below and complete the quote form afterward. / Programe su cita a continuación y complete el formulario de cotización después.</p>
   </header>
 
   <main>
     <div class="form-shell" role="main" aria-labelledby="pageTitle">
-      <div class="iframe-wrap" id="form-container" aria-live="polite">
-        <!-- YOUR AGENT CRM EMBED CODE — pasted exactly as provided -->
+      <div class="iframe-wrap" id="booking-container" aria-live="polite">
+        <!-- Booking / calendar widget (includes post-booking quote form step) -->
         <iframe
-            src="https://crm.mejorvidainsurance.com/widget/form/uApX9m6VUhke3XRK4Iov"
-            style="width:100%;height:100%;border:none;border-radius:3px"
-            id="inline-uApX9m6VUhke3XRK4Iov"
-            data-layout="{'id':'INLINE'}"
-            data-trigger-type="alwaysShow"
-            data-trigger-value=""
-            data-activation-type="alwaysActivated"
-            data-activation-value=""
-            data-deactivation-type="neverDeactivate"
-            data-deactivation-value=""
-            data-form-name="MVI-Final Expense – Quote Form (Bilingual)"
-            data-height="1486"
-            data-layout-iframe-id="inline-uApX9m6VUhke3XRK4Iov"
-            data-form-id="uApX9m6VUhke3XRK4Iov"
-            title="MVI-Final Expense – Quote Form (Bilingual)"
+            src="https://crm.mejorvidainsurance.com/widget/bookings/julies-quote-consultation"
+            id="booking-widget"
+            title="Schedule with Julie — Mejor Vida Insurance"
+            loading="lazy"
+            sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
         >
         </iframe>
-        <script src="https://crm.mejorvidainsurance.com/js/form_embed.js"></script>
-        <!-- END EMBED CODE -->
       </div>
     </div>
   </main>
 
   <script>
-    // Ensure the iframe has a usable height (reads data-height if available).
-    // Also reapply after a short delay in case the embed script modifies the DOM.
-    (function ensureIframeHeight() {
+    (function ensureBookingIframeHeight() {
+      var iframe = document.getElementById('booking-widget');
+      var wrapper = document.getElementById('booking-container');
+
       function applyHeight() {
-        var iframe = document.getElementById('inline-uApX9m6VUhke3XRK4Iov');
-        var wrapper = document.getElementById('form-container');
         if (!iframe || !wrapper) return;
-
-        // Use the data-height attribute if provided by the embed code
-        var dh = iframe.getAttribute('data-height');
-        if (dh && !isNaN(Number(dh))) {
-          // set iframe height to data-height but clamp to wrapper max height for small viewports
-          var desired = Number(dh);
-          // compute max available height inside viewport based on wrapper max-height CSS
-          var maxAvailable = window.innerHeight - 160; // matches CSS calc(100vh - 160px)
-          var finalHeight = Math.min(desired, Math.max(600, maxAvailable));
-          iframe.style.height = finalHeight + 'px';
-        } else {
-          // fallback: set a reasonable height
-          iframe.style.height = '900px';
-        }
-
-        // Ensure wrapper allows vertical scrolling (defensive)
+        var maxAvailable = window.innerHeight - 160;
+        iframe.style.height = Math.max(700, Math.min(1400, maxAvailable)) + 'px';
         wrapper.style.overflowY = 'auto';
         wrapper.style.webkitOverflowScrolling = 'touch';
       }
 
-      // initial apply
       document.addEventListener('DOMContentLoaded', applyHeight);
-      // apply again after a short delay to handle async embed script
       setTimeout(applyHeight, 600);
       setTimeout(applyHeight, 2000);
-
-      // also adjust on resize
       window.addEventListener('resize', applyHeight);
     })();
   </script>
