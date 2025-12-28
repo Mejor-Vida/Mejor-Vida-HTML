@@ -22,8 +22,6 @@
       --container-bg: #ffffff;
       --accent: #d17e00;
       --max-width: 960px;
-      --header-bg-image: url('img/header-background.jpg'); /* Replace with your actual header background image */
-      --header-bg-color: rgba(15, 77, 182, 0.85);
       --header-text: #fff;
     }
     html, body {
@@ -36,9 +34,10 @@
       flex-direction: column;
     }
 
-    /* HEADER with background image */
+    /* HEADER with background image and overlay */
     header {
-      background: var(--header-bg-color) url('img/header-background.jpg') no-repeat center center/cover;
+      background: linear-gradient(rgba(15, 77, 182, 0.85), rgba(15, 77, 182, 0.85)),
+                  url('img/header.jpg') no-repeat center center/cover;
       color: var(--header-text);
       display: flex;
       align-items: center;
@@ -89,7 +88,7 @@
     header .lang-btn.active,
     header .lang-btn:hover {
       background: var(--header-text);
-      color: var(--header-bg-color);
+      color: rgba(15, 77, 182, 0.85);
     }
 
     main {
