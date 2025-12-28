@@ -32,17 +32,15 @@
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
       color: var(--text);
       background: var(--bg-page);
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
     /* HEADER: use header.jpg (geometric pattern) with light overlay like index */
     header.header {
-      /* overlay + image (image provides the geometric pattern) */
       background:
         linear-gradient(rgba(217,233,249,0.95), rgba(217,233,249,0.95)),
         url('img/header.jpg') no-repeat left center;
-      /* Adjust background-size to match index look - tweak if needed */
       background-size: 520px 160px;
       border-bottom: 1px solid rgba(15,77,182,0.04);
       box-shadow: none;
@@ -61,118 +59,182 @@
       align-items: center;
       justify-content: space-between;
       gap: 12px;
-      min-height: 150px; /* gives vertical alignment similar to index */
+      min-height: 150px;
     }
 
-    .logo { flex: 0 0 auto; }
-    .logo img, #header-logo, .header-logo-img {
+    .logo {
+      flex: 0 0 auto;
+    }
+
+    .logo img,
+    #header-logo,
+    .header-logo-img {
       height: 150px;
       width: auto;
-      display:block;
+      display: block;
     }
 
     .header-right {
       display: flex;
       align-items: center;
-      gap: 18px;
+      gap: 24px;
       flex: 1 1 auto;
       justify-content: flex-end;
     }
 
+    /* Navigation */
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-left: auto;
+    }
+
+    .nav a {
+      color: #111;
+      text-decoration: none;
+      font-weight: 600;
+      padding: 8px 10px;
+      border-radius: 8px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .nav a:hover,
+    .nav a:focus {
+      background: #0d3d8b;
+      color: #fff;
+      outline: none;
+    }
+
     /* Language toggle */
     .lang-toggle {
-      display:flex;
-      gap:8px;
-      align-items:center;
+      display: flex;
+      gap: 8px;
+      align-items: center;
     }
+
     .lang-btn {
       background: transparent;
-      border: 1.5px solid rgba(0,0,0,0.08);
+      border: 1.5px solid rgba(0, 0, 0, 0.08);
       color: #222;
-      padding:6px 10px;
-      border-radius:8px;
-      font-weight:700;
-      cursor:pointer;
-      display:inline-flex;
-      align-items:center;
-      gap:6px;
-      transition: all .12s ease;
+      padding: 6px 10px;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.12s ease;
     }
+
     .lang-btn.active {
       background: var(--brand-blue);
       color: #fff;
       border-color: var(--brand-blue);
     }
 
-    /* Navigation */
-    .nav {
-      display:flex;
-      align-items:center;
-      gap: 14px;
-      margin-left: 8px;
-    }
-    .nav a {
-      color: #111;
-      text-decoration:none;
-      font-weight:600;
-      padding:8px 10px;
-      border-radius:8px;
-    }
-    .nav a.btn-quote {
-      background: var(--brand-blue);
-      color:#fff;
-      box-shadow: 0 2px 8px rgba(15,77,182,0.12);
-    }
-
-    /* Main and scheduler */
+    /* Main content */
     main {
       max-width: var(--container-w);
-      margin: 18px auto;
+      margin: 32px auto 60px;
       padding: 0 20px 40px;
       box-sizing: border-box;
     }
 
+    .page-intro-section {
+      max-width: 900px;
+      margin: 0 auto 40px;
+      text-align: center;
+      padding: 0 20px;
+    }
+
+    .page-intro-section h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: var(--brand-blue);
+      margin-bottom: 12px;
+    }
+
+    .page-intro-section p {
+      font-size: 1.2rem;
+      color: #444;
+      line-height: 1.5;
+      margin: 0;
+    }
+
     .iframe-wrap {
-      width:100%;
-      height: calc(100vh - 240px); /* leave room for header and some spacing */
-      max-height: 1400px;
-      background: #fff;
-      border-radius: 10px;
-      overflow:auto;
-      box-shadow: 0 8px 28px rgba(10,20,40,0.06);
-      border: 1px solid rgba(20,30,40,0.04);
+      max-width: 900px;
+      margin: 0 auto;
+      border-radius: 12px;
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.12);
+      overflow: hidden;
+      background: white;
+      border: 1px solid #ddd;
+      height: 700px;
     }
 
     .iframe-wrap iframe {
-      width:100%;
-      height:100%;
-      border:0;
-      display:block;
-      border-radius: 10px;
-      box-sizing:border-box;
-      min-height:700px;
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+      border-radius: 12px;
+      box-sizing: border-box;
     }
-
-    /* small padding adjust so header pattern lines up similarly to index */
-    header.header .container { padding-top: 18px; padding-bottom: 18px; }
 
     /* Responsive */
     @media (max-width: 980px) {
-      .header-container { flex-direction: column; align-items: center; gap: 8px; min-height: auto; }
-      .header-right { width:100%; justify-content:space-between; }
-      .logo img { height:120px; }
-      .iframe-wrap { height: calc(100vh - 300px); }
+      .header-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        min-height: auto;
+      }
+
+      .header-right {
+        width: 100%;
+        justify-content: space-between;
+      }
+
+      .logo img {
+        height: 120px;
+      }
+
+      main {
+        margin: 24px auto 40px;
+      }
+
+      .page-intro-section h1 {
+        font-size: 2rem;
+      }
+
+      .page-intro-section p {
+        font-size: 1rem;
+      }
     }
-    @media (max-width:520px) {
-      .logo img { height:100px; }
-      .iframe-wrap { height: calc(100vh - 220px); }
-      .nav a { font-size:14px; padding:6px 8px; }
-      .lang-btn { padding:6px 8px; }
+
+    @media (max-width: 520px) {
+      .logo img {
+        height: 100px;
+      }
+
+      .nav a {
+        font-size: 14px;
+        padding: 6px 8px;
+      }
+
+      .lang-btn {
+        padding: 6px 8px;
+      }
+
+      main {
+        margin: 16px 12px 32px;
+      }
     }
   </style>
 </head>
 <body>
-  <!-- Header (uses img/header.jpg as background) -->
+  <!-- Header -->
   <header class="header" role="banner">
     <div class="container header-container">
       <div class="logo">
@@ -182,36 +244,45 @@
       </div>
 
       <div class="header-right" role="navigation" aria-label="Header right">
+        <nav class="nav" aria-label="Primary navigation">
+          <a href="/" data-lang="es">Inicio</a>
+          <a href="/" data-lang="en" style="display:none;">Home</a>
+        </nav>
+
         <div class="lang-toggle" role="group" aria-label="Language toggle">
           <button class="lang-btn active" data-lang-btn="es" aria-pressed="true"><span class="flag">🇪🇸</span> ES</button>
           <button class="lang-btn" data-lang-btn="en" aria-pressed="false"><span class="flag">🇺🇸</span> EN</button>
         </div>
-
-        <nav class="nav" aria-label="Primary navigation">
-          <a href="/" data-lang="es">Inicio</a>
-          <a href="/" data-lang="en" style="display:none;">Home</a>
-
-          <a href="/quote.html" class="btn-quote" data-lang="es" role="button">Cotización gratis</a>
-          <a href="/quote.html" class="btn-quote" data-lang="en" style="display:none;" role="button">Free quote</a>
-        </nav>
       </div>
     </div>
   </header>
 
-  <!-- Main content: booking iframe -->
+  <!-- Main content -->
   <main>
-    <div class="iframe-wrap" id="booking-container" aria-live="polite">
+    <section class="page-intro-section">
+      <h1 data-lang="es">Completa el formulario de cotización gratuita y agenda tu cita con Julie</h1>
+      <h1 data-lang="en" style="display:none;">Complete the free quote form and schedule your appointment with Julie</h1>
+
+      <p data-lang="es">
+        Por favor, elige la fecha y hora que mejor te convenga para una consulta personalizada.
+      </p>
+      <p data-lang="en" style="display:none;">
+        Please select the date and time that works best for your personalized consultation.
+      </p>
+    </section>
+
+    <div class="iframe-wrap" aria-live="polite">
       <iframe
+        src="https://crm.mejorvidainsurance.com/widget/bookings/julies-quote-consultation"
         id="booking-widget"
         title="Schedule with Julie — Mejor Vida Insurance"
-        src="https://crm.mejorvidainsurance.com/widget/bookings/julies-quote-consultation"
         loading="lazy"
         sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
       ></iframe>
     </div>
   </main>
 
-  <!-- Language toggle script (same behavior as index) -->
+  <!-- Language toggle script -->
   <script>
     const langButtons = document.querySelectorAll('.lang-btn');
     function setLanguage(lang) {
@@ -225,27 +296,9 @@
     }
     langButtons.forEach(btn => btn.addEventListener('click', () => setLanguage(btn.dataset.langBtn)));
     setLanguage('es');
-
-    // Ensure iframe fills available area and adjust on resize
-    (function ensureBookingIframeHeight() {
-      var iframe = document.getElementById('booking-widget');
-      var wrapper = document.getElementById('booking-container');
-
-      function applyHeight() {
-        if (!iframe || !wrapper) return;
-        var top = wrapper.getBoundingClientRect().top;
-        var maxAvailable = window.innerHeight - top - 24;
-        iframe.style.height = Math.max(700, Math.min(1400, maxAvailable)) + 'px';
-      }
-
-      document.addEventListener('DOMContentLoaded', applyHeight);
-      setTimeout(applyHeight, 300);
-      setTimeout(applyHeight, 1500);
-      window.addEventListener('resize', applyHeight);
-    })();
   </script>
 
-  <!-- Chat widget loader (same as index) -->
+  <!-- Chat widget loader -->
   <script
     src="https://widgets.leadconnectorhq.com/loader.js"
     data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js"
