@@ -2,12 +2,13 @@
 <html lang="es">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Cotización gratuita — Mejor Vida Insurance</title>
   <meta name="robots" content="noindex, follow" />
   <link rel="icon" href="/favicon.ico" type="image/x-icon" />
 
-  <!-- Font Awesome for icons -->
+  <!-- Font Awesome -->
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
@@ -17,231 +18,212 @@
   />
 
   <style>
-    :root {
+    :root{
       --page-bg: #f5f5f5;
-      --container-bg: #ffffff;
+      --container-w: 1180px;
       --accent: #d17e00;
-      --max-width: 960px;
+      --brand-blue: #0f4db6;
     }
-    html, body {
-      height: 100%;
-      margin: 0;
+    html,body {
+      margin:0;
+      height:100%;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
       background: var(--page-bg);
       color: #222;
-      display: flex;
-      flex-direction: column;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
     }
 
-    header {
+    /* Header matches index structure */
+    header.header {
+      background: white;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .container {
+      max-width: var(--container-w);
+      margin: 0 auto;
+      padding: 12px 20px;
+      box-sizing: border-box;
+    }
+    .header-container {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 32px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-      flex-shrink: 0;
-      min-height: 120px;
-      background: white;
-    }
-
-    .header-logo-bg {
-      background: linear-gradient(rgba(15, 77, 182, 0.85), rgba(15, 77, 182, 0.85)),
-                  url('img/header.jpg') no-repeat center center/cover;
-      height: 120px;
-      width: 180px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 8px 0 0 8px;
-      flex-shrink: 0;
-    }
-
-    .header-logo-bg .logo img {
-      height: 100px;
-      width: auto;
-    }
-
-    nav {
-      display: flex;
-      align-items: center;
-      gap: 24px;
-      flex-grow: 1;
-      margin-left: 24px;
-    }
-
-    nav a {
-      color: #0f4db6;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 1.1rem;
-      transition: color 0.3s ease;
-    }
-
-    nav a:hover,
-    nav a:focus {
-      color: var(--accent);
-      outline: none;
-    }
-
-    .lang-toggle {
-      display: flex;
       gap: 12px;
     }
 
+    .logo { flex: 0 0 auto; }
+    .logo img, #header-logo, .header-logo-img {
+      height: 150px;
+      width: auto;
+      max-width: 100%;
+      display:block;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: flex-start;
+      gap: 18px;
+      flex: 1 1 auto;
+      justify-content: flex-end;
+    }
+
+    .lang-toggle {
+      display:flex;
+      gap:8px;
+      align-items:center;
+    }
     .lang-btn {
       background: transparent;
-      border: 2px solid #0f4db6;
-      color: #0f4db6;
-      padding: 8px 16px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: 700;
-      font-size: 1rem;
-      transition: background 0.3s, color 0.3s;
+      border: 1.5px solid #ccc;
+      color: #333;
+      padding:6px 10px;
+      border-radius:6px;
+      font-weight:600;
+      cursor:pointer;
+    }
+    .lang-btn.active {
+      background: var(--brand-blue);
+      color: #fff;
+      border-color: var(--brand-blue);
     }
 
-    .lang-btn.active,
-    .lang-btn:hover {
-      background: #0f4db6;
-      color: white;
+    .nav {
+      display:flex;
+      align-items:center;
+      gap: 14px;
+      margin-left: 8px;
+    }
+    .nav a {
+      color: #333;
+      text-decoration:none;
+      font-weight:600;
+      padding:8px 10px;
+      border-radius:6px;
+    }
+    .nav a.btn-quote {
+      background: var(--brand-blue);
+      color:#fff;
     }
 
+    /* Scheduler container */
     main {
-      flex-grow: 1;
-      max-width: var(--max-width);
-      margin: 24px auto 40px;
-      width: 100%;
-      padding: 0 16px;
+      max-width: var(--container-w);
+      margin: 18px auto;
+      padding: 0 20px 40px;
       box-sizing: border-box;
     }
 
     .iframe-wrap {
-      width: 100%;
-      height: calc(100vh - 160px);
+      width:100%;
+      height: calc(100vh - 220px); /* leave room for header + margins */
       max-height: 1400px;
+      background: #fff;
       border-radius: 8px;
-      overflow-y: auto;
+      overflow:auto;
       box-shadow: 0 6px 22px rgba(10,20,40,0.06);
-      background: var(--container-bg);
     }
 
     .iframe-wrap iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
+      width:100%;
+      height:100%;
+      border:0;
+      display:block;
       border-radius: 8px;
-      display: block;
-      box-sizing: border-box;
+      box-sizing:border-box;
+      min-height:700px;
     }
 
-    /* Responsive */
-    @media (max-width: 768px) {
-      header {
-        flex-wrap: wrap;
-        min-height: auto;
-        padding: 12px 16px;
-      }
-      .header-logo-bg {
-        width: 140px;
-        height: 100px;
-      }
-      .header-logo-bg .logo img {
-        height: 80px;
-      }
-      nav {
-        margin-left: 0;
-        gap: 16px;
-        flex-wrap: wrap;
-        justify-content: center;
-        width: 100%;
-        margin-top: 8px;
-      }
-      .lang-toggle {
-        margin-top: 8px;
-        justify-content: center;
-        width: 100%;
-      }
-      main {
-        margin: 16px auto 32px;
-      }
-      .iframe-wrap {
-        height: calc(100vh - 140px);
-      }
+    @media (max-width: 980px) {
+      .header-container { flex-direction:column; align-items:center; gap:8px; }
+      .header-right { width:100%; justify-content:space-between; align-items:center; }
+      .logo img { height:120px; }
+      .iframe-wrap { height: calc(100vh - 260px); }
     }
-
-    @media (max-width: 520px) {
-      nav a {
-        font-size: 1rem;
-      }
-      .lang-btn {
-        padding: 6px 12px;
-        font-size: 0.9rem;
-      }
-      .iframe-wrap {
-        height: calc(100vh - 130px);
-      }
+    @media (max-width:520px) {
+      .logo img { height:100px; }
+      .iframe-wrap { height: calc(100vh - 220px); }
+      .nav a { font-size:14px; padding:6px 8px; }
+      .lang-btn { padding:6px 8px; }
     }
   </style>
 </head>
 <body>
-  <header>
-    <div class="header-logo-bg">
-      <a href="/" class="logo" aria-label="Mejor Vida Insurance Home">
-        <img src="img/logo-spanish.png" alt="Mejor Vida Insurance logo" />
-      </a>
-    </div>
-    <nav role="navigation" aria-label="Primary navigation">
-      <a href="/" data-lang="es">Inicio</a>
-      <a href="/" data-lang="en" style="display:none;">Home</a>
-    </nav>
-    <div class="lang-toggle" role="group" aria-label="Language toggle">
-      <button class="lang-btn active" data-lang-btn="es" aria-pressed="true">🇪🇸 ES</button>
-      <button class="lang-btn" data-lang-btn="en" aria-pressed="false">🇺🇸 EN</button>
+  <!-- Header exactly like index structure -->
+  <header class="header">
+    <div class="container header-container">
+      <div class="logo">
+        <a href="/" class="logo-link">
+          <img id="header-logo" class="header-logo-img" src="img/logo-spanish.png" alt="Mejor Vida Insurance logo" />
+        </a>
+      </div>
+
+      <div class="header-right">
+        <div class="lang-toggle" role="group" aria-label="Language toggle">
+          <button class="lang-btn active" data-lang-btn="es"><span class="flag">🇪🇸</span> ES</button>
+          <button class="lang-btn" data-lang-btn="en"><span class="flag">🇺🇸</span> EN</button>
+        </div>
+
+        <nav class="nav" aria-label="Primary navigation">
+          <a href="/" data-lang="es">Inicio</a>
+          <a href="/" data-lang="en" style="display:none;">Home</a>
+
+          <a href="/quote.html" class="btn-quote" data-lang="es" role="button">Cotización gratis</a>
+          <a href="/quote.html" class="btn-quote" data-lang="en" style="display:none;" role="button">Free quote</a>
+        </nav>
+      </div>
     </div>
   </header>
 
+  <!-- Main: scheduler is the main thing and displayed immediately -->
   <main>
-    <div class="iframe-wrap" aria-live="polite">
+    <div class="iframe-wrap" id="booking-container" aria-live="polite">
       <iframe
-        src="https://crm.mejorvidainsurance.com/widget/bookings/julies-quote-consultation"
         id="booking-widget"
         title="Schedule with Julie — Mejor Vida Insurance"
+        src="https://crm.mejorvidainsurance.com/widget/bookings/julies-quote-consultation"
         loading="lazy"
         sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
       ></iframe>
     </div>
   </main>
 
+  <!-- Language toggle + iframe size script (same behavior as index) -->
   <script>
-    // Language toggle
+    // Language toggle (matches index behavior)
     const langButtons = document.querySelectorAll('.lang-btn');
     function setLanguage(lang) {
       document.querySelectorAll('[data-lang="es"]').forEach(el => el.style.display = lang === 'es' ? '' : 'none');
       document.querySelectorAll('[data-lang="en"]').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
-      langButtons.forEach(btn => {
-        btn.classList.toggle('active', btn.dataset.langBtn === lang);
-        btn.setAttribute('aria-pressed', btn.dataset.langBtn === lang);
-      });
+      langButtons.forEach(btn => btn.classList.toggle('active', btn.dataset.langBtn === lang));
     }
     langButtons.forEach(btn => btn.addEventListener('click', () => setLanguage(btn.dataset.langBtn)));
     setLanguage('es');
 
-    // Iframe height adjustment (optional, iframe fills container height)
+    // Ensure iframe fills available area and adjust on resize
     (function ensureBookingIframeHeight() {
       var iframe = document.getElementById('booking-widget');
-      var wrapper = iframe.parentElement;
+      var wrapper = document.getElementById('booking-container');
 
       function applyHeight() {
         if (!iframe || !wrapper) return;
-        var maxAvailable = window.innerHeight - wrapper.getBoundingClientRect().top - 20;
+        // compute available space below top of wrapper
+        var top = wrapper.getBoundingClientRect().top;
+        var maxAvailable = window.innerHeight - top - 24; // keep some breathing room
         iframe.style.height = Math.max(700, Math.min(1400, maxAvailable)) + 'px';
       }
 
-      window.addEventListener('resize', applyHeight);
       document.addEventListener('DOMContentLoaded', applyHeight);
-      setTimeout(applyHeight, 600);
-      setTimeout(applyHeight, 2000);
+      setTimeout(applyHeight, 300);
+      setTimeout(applyHeight, 1500);
+      window.addEventListener('resize', applyHeight);
     })();
   </script>
+
+  <!-- Chat widget loader (same as index) -->
+  <script
+    src="https://widgets.leadconnectorhq.com/loader.js"
+    data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js"
+    data-widget-id="6935d169d355bd236df7342d"></script>
 </body>
 </html>
