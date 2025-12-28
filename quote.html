@@ -19,32 +19,39 @@
 
   <style>
     :root{
-      --page-bg: #f5f5f5;
       --container-w: 1180px;
-      --accent: #d17e00;
       --brand-blue: #0f4db6;
+      --accent: #d17e00;
+      --text: #222;
     }
+
     html,body {
-      margin:0;
-      height:100%;
+      height: 100%;
+      margin: 0;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      background: var(--page-bg);
-      color: #222;
+      color: var(--text);
+      background: #f5f9fd;
       -webkit-font-smoothing:antialiased;
       -moz-osx-font-smoothing:grayscale;
     }
 
-    /* Header matches index structure */
+    /* HEADER: use your header.jpg as background with a light overlay */
     header.header {
-      background: white;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      background:
+        linear-gradient(rgba(217,233,249,0.95), rgba(217,233,249,0.95)),
+        url('img/header.jpg') no-repeat left center;
+      background-size: auto 120%;
+      box-shadow: none;
     }
+
     .container {
       max-width: var(--container-w);
       margin: 0 auto;
       padding: 12px 20px;
       box-sizing: border-box;
+      width: 100%;
     }
+
     .header-container {
       display: flex;
       align-items: center;
@@ -56,18 +63,18 @@
     .logo img, #header-logo, .header-logo-img {
       height: 150px;
       width: auto;
-      max-width: 100%;
       display:block;
     }
 
     .header-right {
       display: flex;
-      align-items: flex-start;
+      align-items: center;
       gap: 18px;
       flex: 1 1 auto;
       justify-content: flex-end;
     }
 
+    /* Language toggle */
     .lang-toggle {
       display:flex;
       gap:8px;
@@ -75,12 +82,15 @@
     }
     .lang-btn {
       background: transparent;
-      border: 1.5px solid #ccc;
-      color: #333;
+      border: 1.5px solid rgba(0,0,0,0.08);
+      color: #222;
       padding:6px 10px;
-      border-radius:6px;
-      font-weight:600;
+      border-radius:8px;
+      font-weight:700;
       cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
     }
     .lang-btn.active {
       background: var(--brand-blue);
@@ -88,6 +98,7 @@
       border-color: var(--brand-blue);
     }
 
+    /* Navigation */
     .nav {
       display:flex;
       align-items:center;
@@ -95,18 +106,18 @@
       margin-left: 8px;
     }
     .nav a {
-      color: #333;
+      color: #111;
       text-decoration:none;
       font-weight:600;
       padding:8px 10px;
-      border-radius:6px;
+      border-radius:8px;
     }
     .nav a.btn-quote {
       background: var(--brand-blue);
       color:#fff;
     }
 
-    /* Scheduler container */
+    /* Main and scheduler */
     main {
       max-width: var(--container-w);
       margin: 18px auto;
@@ -116,12 +127,13 @@
 
     .iframe-wrap {
       width:100%;
-      height: calc(100vh - 220px); /* leave room for header + margins */
+      height: calc(100vh - 220px);
       max-height: 1400px;
       background: #fff;
-      border-radius: 8px;
+      border-radius: 10px;
       overflow:auto;
-      box-shadow: 0 6px 22px rgba(10,20,40,0.06);
+      box-shadow: 0 8px 28px rgba(10,20,40,0.06);
+      border: 1px solid rgba(20,30,40,0.04);
     }
 
     .iframe-wrap iframe {
@@ -129,14 +141,18 @@
       height:100%;
       border:0;
       display:block;
-      border-radius: 8px;
+      border-radius: 10px;
       box-sizing:border-box;
       min-height:700px;
     }
 
+    /* Minor spacing so header image appears consistent with index */
+    header.header .container { padding-top: 18px; padding-bottom: 18px; }
+
+    /* Responsive */
     @media (max-width: 980px) {
-      .header-container { flex-direction:column; align-items:center; gap:8px; }
-      .header-right { width:100%; justify-content:space-between; align-items:center; }
+      .header-container { flex-direction: column; align-items:center; gap:8px; }
+      .header-right { width:100%; justify-content:space-between; }
       .logo img { height:120px; }
       .iframe-wrap { height: calc(100vh - 260px); }
     }
@@ -149,19 +165,19 @@
   </style>
 </head>
 <body>
-  <!-- Header exactly like index structure -->
-  <header class="header">
+  <!-- Header (uses img/header.jpg as background) -->
+  <header class="header" role="banner">
     <div class="container header-container">
       <div class="logo">
-        <a href="/" class="logo-link">
+        <a href="/" class="logo-link" aria-label="Mejor Vida Insurance home">
           <img id="header-logo" class="header-logo-img" src="img/logo-spanish.png" alt="Mejor Vida Insurance logo" />
         </a>
       </div>
 
-      <div class="header-right">
+      <div class="header-right" role="navigation" aria-label="Header right">
         <div class="lang-toggle" role="group" aria-label="Language toggle">
-          <button class="lang-btn active" data-lang-btn="es"><span class="flag">🇪🇸</span> ES</button>
-          <button class="lang-btn" data-lang-btn="en"><span class="flag">🇺🇸</span> EN</button>
+          <button class="lang-btn active" data-lang-btn="es" aria-pressed="true"><span class="flag">🇪🇸</span> ES</button>
+          <button class="lang-btn" data-lang-btn="en" aria-pressed="false"><span class="flag">🇺🇸</span> EN</button>
         </div>
 
         <nav class="nav" aria-label="Primary navigation">
@@ -175,7 +191,7 @@
     </div>
   </header>
 
-  <!-- Main: scheduler is the main thing and displayed immediately -->
+  <!-- Main content: booking iframe -->
   <main>
     <div class="iframe-wrap" id="booking-container" aria-live="polite">
       <iframe
@@ -188,14 +204,17 @@
     </div>
   </main>
 
-  <!-- Language toggle + iframe size script (same behavior as index) -->
+  <!-- Language toggle script (same behavior as index) -->
   <script>
-    // Language toggle (matches index behavior)
     const langButtons = document.querySelectorAll('.lang-btn');
     function setLanguage(lang) {
       document.querySelectorAll('[data-lang="es"]').forEach(el => el.style.display = lang === 'es' ? '' : 'none');
       document.querySelectorAll('[data-lang="en"]').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
-      langButtons.forEach(btn => btn.classList.toggle('active', btn.dataset.langBtn === lang));
+      langButtons.forEach(btn => {
+        const isActive = btn.dataset.langBtn === lang;
+        btn.classList.toggle('active', isActive);
+        btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+      });
     }
     langButtons.forEach(btn => btn.addEventListener('click', () => setLanguage(btn.dataset.langBtn)));
     setLanguage('es');
@@ -207,9 +226,8 @@
 
       function applyHeight() {
         if (!iframe || !wrapper) return;
-        // compute available space below top of wrapper
         var top = wrapper.getBoundingClientRect().top;
-        var maxAvailable = window.innerHeight - top - 24; // keep some breathing room
+        var maxAvailable = window.innerHeight - top - 24;
         iframe.style.height = Math.max(700, Math.min(1400, maxAvailable)) + 'px';
       }
 
