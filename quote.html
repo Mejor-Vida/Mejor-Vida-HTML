@@ -22,7 +22,8 @@
       --container-bg: #ffffff;
       --accent: #d17e00;
       --max-width: 960px;
-      --header-bg: #0f4db6;
+      --header-bg-image: url('img/header-background.jpg'); /* Replace with your actual header background image */
+      --header-bg-color: rgba(15, 77, 182, 0.85);
       --header-text: #fff;
     }
     html, body {
@@ -34,59 +35,75 @@
       display: flex;
       flex-direction: column;
     }
-    /* HEADER */
+
+    /* HEADER with background image */
     header {
-      background: var(--header-bg);
+      background: var(--header-bg-color) url('img/header-background.jpg') no-repeat center center/cover;
       color: var(--header-text);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 12px 24px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      padding: 16px 32px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
       flex-shrink: 0;
+      min-height: 120px;
     }
     header .logo img {
-      height: 60px;
+      height: 100px;
       width: auto;
     }
-    header h1 {
-      font-size: 1.25rem;
-      margin: 0 16px;
+    header nav {
+      display: flex;
+      align-items: center;
+      gap: 24px;
       flex-grow: 1;
+      margin-left: 32px;
+    }
+    header nav a {
+      color: var(--header-text);
+      text-decoration: none;
       font-weight: 600;
+      font-size: 1.1rem;
+      transition: color 0.3s ease;
+    }
+    header nav a:hover,
+    header nav a:focus {
+      color: var(--accent);
+      outline: none;
     }
     header .lang-toggle {
       display: flex;
-      gap: 8px;
+      gap: 12px;
     }
     header .lang-btn {
       background: transparent;
-      border: 1.5px solid var(--header-text);
+      border: 2px solid var(--header-text);
       color: var(--header-text);
-      padding: 6px 12px;
-      border-radius: 4px;
+      padding: 8px 16px;
+      border-radius: 6px;
       cursor: pointer;
-      font-weight: 600;
+      font-weight: 700;
+      font-size: 1rem;
       transition: background 0.3s, color 0.3s;
     }
     header .lang-btn.active,
     header .lang-btn:hover {
       background: var(--header-text);
-      color: var(--header-bg);
+      color: var(--header-bg-color);
     }
 
     main {
       flex-grow: 1;
       max-width: var(--max-width);
-      margin: 20px auto;
+      margin: 24px auto 40px;
       width: 100%;
-      padding: 0 16px 24px;
+      padding: 0 16px;
       box-sizing: border-box;
     }
 
     .iframe-wrap {
       width: 100%;
-      height: calc(100vh - 100px); /* viewport height minus header and margin */
+      height: calc(100vh - 160px); /* Adjust for header height + margin */
       max-height: 1400px;
       border-radius: 8px;
       overflow-y: auto;
@@ -104,13 +121,46 @@
     }
 
     /* Responsive */
-    @media (max-width: 520px) {
-      header h1 {
-        font-size: 1rem;
-        margin: 0 8px;
+    @media (max-width: 768px) {
+      header {
+        flex-wrap: wrap;
+        min-height: auto;
+        padding: 12px 16px;
+      }
+      header .logo img {
+        height: 80px;
+      }
+      header nav {
+        margin-left: 0;
+        gap: 16px;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+        margin-top: 8px;
+      }
+      header .lang-toggle {
+        margin-top: 8px;
+        justify-content: center;
+        width: 100%;
+      }
+      main {
+        margin: 16px auto 32px;
       }
       .iframe-wrap {
-        height: calc(100vh - 90px);
+        height: calc(100vh - 140px);
+      }
+    }
+
+    @media (max-width: 520px) {
+      header nav a {
+        font-size: 1rem;
+      }
+      header .lang-btn {
+        padding: 6px 12px;
+        font-size: 0.9rem;
+      }
+      .iframe-wrap {
+        height: calc(100vh - 130px);
       }
     }
   </style>
@@ -120,7 +170,10 @@
     <a href="/" class="logo" aria-label="Mejor Vida Insurance Home">
       <img src="img/logo-spanish.png" alt="Mejor Vida Insurance logo" />
     </a>
-    <h1>Cotización gratuita / Free Quote</h1>
+    <nav role="navigation" aria-label="Primary navigation">
+      <a href="/" data-lang="es">Inicio</a>
+      <a href="/" data-lang="en" style="display:none;">Home</a>
+    </nav>
     <div class="lang-toggle" role="group" aria-label="Language toggle">
       <button class="lang-btn active" data-lang-btn="es" aria-pressed="true">🇪🇸 ES</button>
       <button class="lang-btn" data-lang-btn="en" aria-pressed="false">🇺🇸 EN</button>
@@ -153,7 +206,7 @@
     langButtons.forEach(btn => btn.addEventListener('click', () => setLanguage(btn.dataset.langBtn)));
     setLanguage('es');
 
-    // Iframe height adjustment (optional, but iframe fills container height)
+    // Iframe height adjustment (optional, iframe fills container height)
     (function ensureBookingIframeHeight() {
       var iframe = document.getElementById('booking-widget');
       var wrapper = iframe.parentElement;
