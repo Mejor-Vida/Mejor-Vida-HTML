@@ -1,72 +1,14 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <title>Mejor Vida Insurance - Seguro de Gastos Finales</title>
-
-  <!-- Favicon -->
+  <title>Cotización gratuita — Mejor Vida Insurance</title>
+  <meta name="robots" content="noindex, follow" />
   <link rel="icon" href="/favicon.ico" type="image/x-icon" />
 
-  <!-- Primary meta tags -->
-  <meta name="description" content="Mejor Vida Insurance ofrece seguros de gastos finales personalizados y asequibles para proteger a tu familia. Contáctanos para una cotización gratis." />
-  <meta name="keywords" content="seguros, seguro de vida, gastos finales, cotización, Mejor Vida Insurance" />
-  <meta name="robots" content="index, follow" />
-  <meta name="author" content="Mejor Vida Insurance LLC" />
-  <link rel="canonical" href="https://www.mejorvidainsurance.com/" />
-
-  <!-- Open Graph / Facebook -->
-  <meta property="og:title" content="Mejor Vida Insurance - Seguro de Gastos Finales" />
-  <meta property="og:description" content="Mejor Vida Insurance ofrece seguros de gastos finales personalizados y asequibles para proteger a tu familia. Contáctanos para una cotización gratis." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://www.mejorvidainsurance.com/" />
-  <meta property="og:image" content="https://www.mejorvidainsurance.com/img/hispanic-family-laughing.jpg" />
-  <meta property="og:locale" content="es_ES" />
-  <meta property="og:locale:alternate" content="en_US" />
-
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Mejor Vida Insurance - Seguro de Gastos Finales" />
-  <meta name="twitter:description" content="Mejor Vida Insurance ofrece seguros de gastos finales personalizados y asequibles para proteger a tu familia. Contáctanos para una cotización gratis." />
-  <meta name="twitter:image" content="https://www.mejorvidainsurance.com/img/hispanic-family-laughing.jpg" />
-
-  <!-- Hreflang (single URL with language toggle) -->
-  <link rel="alternate" hreflang="es" href="https://www.mejorvidainsurance.com/" />
-  <link rel="alternate" hreflang="en" href="https://www.mejorvidainsurance.com/" />
-  <link rel="alternate" hreflang="x-default" href="https://www.mejorvidainsurance.com/" />
-
-  <!-- JSON-LD Structured Data for Local Business -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "InsuranceAgency",
-    "name": "Mejor Vida Insurance LLC",
-    "image": "https://www.mejorvidainsurance.com/img/logo-spanish.png",
-    "url": "https://www.mejorvidainsurance.com/",
-    "telephone": "+1-531-229-1712",
-    "email": "mailto:Julie@mejorvidainsurance.com",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "P.O. Box 21885",
-      "addressLocality": "Lincoln",
-      "addressRegion": "NE",
-      "postalCode": "68542",
-      "addressCountry": "US"
-    },
-    "sameAs": [
-      "https://www.facebook.com/",
-      "https://www.instagram.com/",
-      "https://www.linkedin.com/"
-    ],
-    "description": "Mejor Vida Insurance ofrece seguros de gastos finales personalizados y asequibles para proteger a tu familia."
-  }
-  </script>
-
-  <link rel="stylesheet" href="styles.css" />
-
-  <!-- Font Awesome for social + contact icons -->
+  <!-- Font Awesome -->
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
@@ -74,514 +16,366 @@
     crossorigin="anonymous"
     referrerpolicy="no-referrer"
   />
+
   <style>
-    /* Logo size updated to 150px height */
-    .logo img,
-    #header-logo,
-    .header-logo-img {
-      height: 150px;
-      width: auto;
-      max-width: 100%;
+    :root {
+      --container-w: 1180px;
+      --brand-blue: #0f4db6;
+      --brand-blue-dark: #0d3d8b;
+      --accent: #d17e00;
+      --bg-page: #f5f9fd;
+      --text: #111;
+      --card-bg: #ffffff;
+      --muted: #666;
     }
 
-    /* Footer social icons colored and aligned right */
-    .footer-bottom {
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      color: var(--text);
+      background: var(--bg-page);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    /* Header (uses img/header.jpg) */
+    header.header {
+      background:
+        linear-gradient(rgba(217,233,249,0.95), rgba(217,233,249,0.95)),
+        url('img/header.jpg') no-repeat left center;
+      background-size: 520px 160px;
+      border-bottom: 1px solid rgba(15,77,182,0.04);
+      box-shadow: none;
+    }
+
+    .container {
+      max-width: var(--container-w);
+      margin: 0 auto;
+      padding: 12px 20px;
+      box-sizing: border-box;
+      width: 100%;
+    }
+
+    .header-container {
       display: flex;
+      align-items: center;
       justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 1rem;
+      gap: 12px;
+      min-height: 150px;
     }
-    .footer-left {
-      flex: 1 1 auto;
-      min-width: 250px;
+
+    .logo img {
+      height: 150px;
+      width: auto;
+      display:block;
     }
-    .footer-right {
-      flex: 0 0 auto;
+
+    .header-right {
       display: flex;
       align-items: center;
-      gap: 1rem;
+      gap: 24px;
+      flex: 1 1 auto;
+      justify-content: flex-end;
     }
-    .footer-right a {
-      font-size: 1.5rem;
-      color: inherit;
-      transition: transform 0.3s ease;
+
+    .nav {
+      display:flex;
+      align-items:center;
+      gap:14px;
+      margin-left:auto;
     }
-    .footer-right a:hover {
-      transform: scale(1.2);
+    .nav a {
+      color: #111;
+      text-decoration: none;
+      font-weight: 600;
+      padding: 8px 10px;
+      border-radius: 8px;
+      transition: background-color .18s, color .18s;
     }
+    .nav a:hover,
+    .nav a:focus {
+      background: var(--brand-blue-dark);
+      color: #fff;
+    }
+
+    .lang-toggle { display:flex; gap:8px; align-items:center; }
+    .lang-btn {
+      background: transparent;
+      border: 1.5px solid rgba(0,0,0,0.08);
+      color: #222;
+      padding: 6px 10px;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items:center;
+      gap:6px;
+    }
+    .lang-btn.active { background: var(--brand-blue); color:#fff; border-color:var(--brand-blue); }
+
+    /* Page intro / booking */
+    main { max-width: var(--container-w); margin: 32px auto 60px; padding: 0 20px 40px; box-sizing: border-box; }
+
+    .page-intro-section { max-width: 900px; margin: 0 auto 28px; text-align: center; padding: 0 20px; }
+    .page-intro-section h1 {
+      font-size: 2.4rem;
+      font-weight: 800;
+      color: var(--brand-blue);
+      margin: 4px 0 12px;
+      line-height:1.05;
+    }
+    .page-intro-section p {
+      font-size: 1.05rem;
+      color: var(--muted);
+      margin: 0;
+      line-height:1.6;
+    }
+
+    .iframe-wrap {
+      max-width: 980px;
+      margin: 28px auto 0;
+      border-radius: 12px;
+      box-shadow: 0 12px 36px rgba(0,0,0,0.10);
+      overflow: hidden;
+      background: var(--card-bg);
+      border: 1px solid rgba(20,30,40,0.04);
+      min-height: 560px;
+    }
+    .iframe-wrap iframe { width:100%; height:100%; min-height:700px; border:0; display:block; }
+
+    /* How it works section */
+    .how-section {
+      max-width: 1180px;
+      margin: 48px auto 80px;
+      padding: 0 20px;
+      box-sizing: border-box;
+      text-align: center;
+    }
+    .how-heading {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--brand-blue);
+      margin-bottom: 8px;
+    }
+    .how-sub {
+      color: var(--muted);
+      margin-bottom: 26px;
+      font-size: 1.02rem;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height:1.6;
+    }
+
+    .how-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 22px;
+      margin-top: 18px;
+    }
+
+    .how-card {
+      background: var(--card-bg);
+      border-radius: 10px;
+      padding: 22px;
+      box-shadow: 0 8px 22px rgba(10,20,40,0.06);
+      text-align: left;
+      min-height: 200px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .badge {
+      width: 44px;
+      height: 44px;
+      background: var(--brand-blue);
+      color: white;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items:center;
+      justify-content:center;
+      font-weight: 800;
+      font-size: 1.1rem;
+      margin-bottom: 6px;
+      box-shadow: 0 4px 12px rgba(15,77,182,0.14);
+    }
+
+    .how-card h3 {
+      font-size: 1.05rem;
+      color: var(--brand-blue-dark);
+      margin: 8px 0 6px;
+      font-weight: 700;
+    }
+
+    .how-card p {
+      color: var(--muted);
+      font-size: 0.98rem;
+      margin: 0;
+      line-height:1.5;
+      flex: 1 1 auto;
+    }
+
+    /* subtle "no obligation" note styling */
+    .how-note {
+      margin-top: 10px;
+      font-size: .92rem;
+      color: #7a7a7a;
+    }
+
+    /* Responsive */
+    @media (max-width: 1100px) {
+      .how-grid { grid-template-columns: repeat(2, 1fr); }
+      .iframe-wrap { min-height: 640px; }
+    }
+
+    @media (max-width: 680px) {
+      .how-grid { grid-template-columns: 1fr; }
+      .page-intro-section h1 { font-size: 1.6rem; }
+      .page-intro-section p { font-size: 0.98rem; }
+      .logo img { height: 120px; }
+      .iframe-wrap { min-height: 560px; }
+    }
+
+    /* small visual polish */
+    a { color: inherit; }
   </style>
 </head>
 <body>
-  <!-- HEADER -->
-  <header class="header">
+  <!-- Header -->
+  <header class="header" role="banner">
     <div class="container header-container">
       <div class="logo">
-        <a href="#home" class="logo-link">
-          <img
-            id="header-logo"
-            class="header-logo-img"
-            src="img/logo-spanish.png"
-            alt="Mejor Vida Insurance logo"
-          />
+        <a href="/" class="logo-link" aria-label="Mejor Vida Insurance home">
+          <img id="header-logo" class="header-logo-img" src="img/logo-spanish.png" alt="Mejor Vida Insurance logo" />
         </a>
       </div>
 
-      <div class="header-right">
-        <!-- Flag buttons on top -->
-        <div class="lang-toggle">
-          <button class="lang-btn active" data-lang-btn="es">
-            <span class="flag">🇪🇸</span> ES
-          </button>
-          <button class="lang-btn" data-lang-btn="en">
-            <span class="flag">🇺🇸</span> EN
-          </button>
-        </div>
-
-        <!-- Nav links below flags -->
-        <nav class="nav">
-          <a href="#about" data-lang="es">Sobre Julie</a>
-          <a href="#about" data-lang="en" style="display:none;">About Julie</a>
-
-          <a href="#how-it-works" data-lang="es">Cómo funciona</a>
-          <a href="#how-it-works" data-lang="en" style="display:none;">How it works</a>
-
-          <a href="#carriers" data-lang="es">Aseguradoras</a>
-          <a href="#carriers" data-lang="en" style="display:none;">Carriers</a>
-
-          <!-- Updated: buttons link to quote.html -->
-          <a href="/quote.html" class="btn-quote" data-lang="es" role="button">Cotización gratis</a>
-          <a href="/quote.html" class="btn-quote" data-lang="en" style="display:none;" role="button">Free quote</a>
+      <div class="header-right" role="navigation" aria-label="Header right">
+        <nav class="nav" aria-label="Primary navigation">
+          <a href="/" data-lang="es">Inicio</a>
+          <a href="/" data-lang="en" style="display:none;">Home</a>
         </nav>
+
+        <div class="lang-toggle" role="group" aria-label="Language toggle">
+          <button class="lang-btn active" data-lang-btn="es" aria-pressed="true"><span class="flag">🇪🇸</span> ES</button>
+          <button class="lang-btn" data-lang-btn="en" aria-pressed="false"><span class="flag">🇺🇸</span> EN</button>
+        </div>
       </div>
     </div>
   </header>
 
-  <!-- HERO -->
-  <section class="hero" id="home">
-    <div class="container hero-container">
-      <div class="hero-text">
-        <span class="hero-badge" data-lang="es">
-          Seguro de vida para gastos finales, explicado en un lenguaje sencillo
-        </span>
-        <span class="hero-badge" data-lang="en" style="display:none;">
-          Simple final expense life insurance for your family's peace of mind
-        </span>
+  <!-- Main booking intro + iframe -->
+  <main>
+    <section class="page-intro-section">
+      <h1 data-lang="es">Completa el formulario de cotización gratuita y agenda tu cita con Julie</h1>
+      <h1 data-lang="en" style="display:none;">Complete the free quote form and schedule your appointment with Julie</h1>
 
-        <h1 data-lang="es">Protege a tu familia con un seguro de gastos finales sencillo</h1>
-        <h1 data-lang="en" style="display:none;">Protect your family with simple final expense coverage</h1>
+      <p data-lang="es">
+        Rellena el formulario con tus datos y selecciona la fecha y hora que mejor te convenga. Julie te llamará en el horario elegido para revisar las opciones contigo.
+      </p>
+      <p data-lang="en" style="display:none;">
+        Fill out the form with your details and choose a date and time that works for you. Julie will call you at the scheduled appointment to review options together.
+      </p>
+    </section>
 
-        <p class="hero-subheading" data-lang="es">
-          En Mejor Vida Insurance, te ayudamos a encontrar un seguro de vida para gastos finales que se ajuste a tu
-          presupuesto y a tu situación, trabajando con compañías de confianza como Aetna y Mutual of Omaha.
-        </p>
-        <p class="hero-subheading" data-lang="en" style="display:none;">
-          At Mejor Vida Insurance, we help you find final expense life insurance that fits your budget and situation,
-          working with trusted companies like Aetna and Mutual of Omaha.
-        </p>
+    <div class="iframe-wrap" aria-live="polite">
+      <iframe
+        src="https://crm.mejorvidainsurance.com/widget/bookings/julies-quote-consultation"
+        id="booking-widget"
+        title="Schedule with Julie — Mejor Vida Insurance"
+        loading="lazy"
+        sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+      ></iframe>
+    </div>
+  </main>
 
-        <div class="hero-card">
-          <div class="hero-trust">
-            <h3 data-lang="es">Orientación personal, sin presión</h3>
-            <h3 data-lang="en" style="display:none;">Personal, no‑pressure guidance</h3>
-            <p data-lang="es">
-              En Mejor Vida Insurance nos tomamos el tiempo para escuchar tu situación, explicarte tus opciones paso a paso
-              y responder tus preguntas con calma, sin compromiso ni presión.
-            </p>
-            <p data-lang="en" style="display:none;">
-              At Mejor Vida Insurance, we take the time to understand your situation, explain your options step by step,
-              and answer your questions calmly, with no obligation or pressure.
-            </p>
-          </div>
+  <!-- How it works section (updated copy) -->
+  <section class="how-section" aria-labelledby="how-heading">
+    <h2 id="how-heading" class="how-heading" data-lang="en">How the free quote process works</h2>
+    <h2 id="how-heading-es" class="how-heading" data-lang="es" style="display:none;">Cómo funciona el proceso de cotización gratuita</h2>
 
-          <div class="hero-highlight">
-            <h3 data-lang="es">Pensado para cubrir gastos finales</h3>
-            <h3 data-lang="en" style="display:none;">Designed to help with final expenses</h3>
-            <p data-lang="es">
-              La cobertura puede ayudar a tu familia con los costos de funeral, entierro, facturas médicas y otras deudas,
-              para que tengan un poco más de tranquilidad en un momento difícil.
-            </p>
-            <p data-lang="en" style="display:none;">
-              Coverage can help your family with funeral and burial costs, medical bills, and other debts so they have a bit
-              more peace of mind during a difficult time.
-            </p>
-          </div>
+    <p class="how-sub" data-lang="en">
+      Filling out the free quote form is the first step — Julie will use the information to prepare for your appointment and help you find a suitable solution.
+    </p>
+    <p class="how-sub" data-lang="es" style="display:none;">
+      Completar el formulario de cotización gratuita es el primer paso — Julie usará la información para prepararse para tu cita y ayudarte a encontrar la mejor opción.
+    </p>
 
-          <div class="hero-contact">
-            <p>
-              <!-- Updated: buttons link to quote.html -->
-              <a href="/quote.html" class="btn btn-primary" data-lang="es" role="button">¡Obtén una cotización gratis!</a>
-              <a href="/quote.html" class="btn btn-primary" data-lang="en" style="display:none;" role="button">Get a free quote!</a>
-            </p>
-          </div>
-        </div>
+    <div class="how-grid" role="list">
+      <div class="how-card" role="listitem" aria-labelledby="step1">
+        <div class="badge">1</div>
+        <h3 id="step1" data-lang="es">Completa tus datos y agenda tu cita</h3>
+        <h3 id="step1en" data-lang="en" style="display:none;">Complete your information and schedule an appointment</h3>
+        <p data-lang="es">Rellena el formulario con tus datos básicos y elige la fecha y hora que mejor te convenga para hablar con Julie.</p>
+        <p data-lang="en" style="display:none;">Fill out the free quote form with your details, then select a convenient date and time to meet with Julie.</p>
       </div>
 
-      <div class="hero-image">
-        <img
-          src="img/hispanic-family-laughing.jpg"
-          alt="Familia hispana sonriendo y protegida con seguro de vida"
-        />
+      <div class="how-card" role="listitem" aria-labelledby="step2">
+        <div class="badge">2</div>
+        <h3 id="step2" data-lang="es">Recibe la llamada de Julie en la cita programada</h3>
+        <h3 id="step2en" data-lang="en" style="display:none;">Receive Julie's call at your scheduled appointment</h3>
+        <p data-lang="es">En el horario elegido, Julie te llamará para conversar sobre tu situación, responder preguntas y confirmar los siguientes pasos.</p>
+        <p data-lang="en" style="display:none;">At your scheduled time, Julie will call to discuss your needs, answer questions, and confirm next steps.</p>
+      </div>
+
+      <div class="how-card" role="listitem" aria-labelledby="step3">
+        <div class="badge">3</div>
+        <h3 id="step3" data-lang="es">Trabaja con Julie para encontrar la mejor póliza</h3>
+        <h3 id="step3en" data-lang="en" style="display:none;">Work with Julie to find the best policy for you</h3>
+        <p data-lang="es">Juntos revisarán opciones personalizadas según tu edad, salud y presupuesto para elegir la cobertura adecuada, sin presiones.</p>
+        <p data-lang="en" style="display:none;">Together you'll review options tailored to your age, health, and budget, and pick the coverage that fits—no pressure, no obligation.</p>
+      </div>
+
+      <div class="how-card" role="listitem" aria-labelledby="step4">
+        <div class="badge">4</div>
+        <h3 id="step4" data-lang="es">Disfruta de la tranquilidad</h3>
+        <h3 id="step4en" data-lang="en" style="display:none;">Enjoy peace of mind</h3>
+        <p data-lang="es">Con la póliza en vigor, tendrás la seguridad de que tus seres queridos estarán protegidos cuando más lo necesiten.</p>
+        <p data-lang="en" style="display:none;">With your policy in place, you can feel confident that your loved ones will be cared for when it matters most.</p>
       </div>
     </div>
+
+    <p class="how-note" data-lang="es">Sin compromiso — Julie te orientará con honestidad y calma.</p>
+    <p class="how-note" data-lang="en" style="display:none;">No obligation — Julie will guide you honestly and calmly.</p>
   </section>
 
-  <!-- ABOUT JULIE -->
-  <section id="about" class="about">
-    <div class="container">
-      <h2 data-lang="es">Conoce a Julie</h2>
-      <h2 data-lang="en" style="display:none;">Meet Julie</h2>
-
-      <div class="about-content">
-        <div class="about-photo">
-          <img src="img/Julie.png" alt="Foto de Julie, agente de seguros" />
-          <p class="about-photo-caption" data-lang="es">
-            Julie, fundadora de Mejor Vida Insurance LLC y agente independiente de seguros de vida.
-          </p>
-          <p class="about-photo-caption" data-lang="en" style="display:none;">
-            Julie, founder of Mejor Vida Insurance LLC and independent life insurance agent.
-          </p>
-        </div>
-
-        <div class="about-text">
-          <div class="about-chips">
-            <span class="chip" data-lang="es">Atención en español e inglés</span>
-            <span class="chip" data-lang="en" style="display:none;">Service in English and Spanish</span>
-            <span class="chip" data-lang="es">Enfoque en gastos finales</span>
-            <span class="chip" data-lang="en" style="display:none;">Focused on final expense</span>
-          </div>
-
-          <h3 data-lang="es">Un enfoque humano para hablar de temas difíciles</h3>
-          <h3 data-lang="en" style="display:none;">A human approach to hard conversations</h3>
-
-          <p data-lang="es">
-            Julie se especializa en seguros de vida para gastos finales. Su meta es hacer estas conversaciones más fáciles:
-            explicarte cómo funciona la cobertura, qué opciones tienes y cómo proteger mejor a tu familia, sin palabras
-            complicadas.
-          </p>
-          <p data-lang="en" style="display:none;">
-            Julie specializes in final expense life insurance. Her goal is to make these conversations easier: explain how
-            coverage works, what your options are, and how to best protect your family—without complicated language.
-          </p>
-
-          <p data-lang="es">
-            Como agente independiente, no trabaja para una sola compañía. Eso significa que puede revisar diferentes
-            aseguradoras, como Aetna y Mutual of Omaha, para encontrar una póliza que se adapte a tu edad, salud y
-            presupuesto.
-          </p>
-          <p data-lang="en" style="display:none;">
-            As an independent agent, she doesn't work for just one company. That means she can look at different insurers,
-            like Aetna and Mutual of Omaha, to find a policy that fits your age, health, and budget.
-          </p>
-
-          <ul class="about-values">
-            <li data-lang="es">Explicaciones claras y honestas.</li>
-            <li data-lang="en" style="display:none;">Clear and honest explanations.</li>
-
-            <li data-lang="es">Recomendaciones basadas en tus necesidades, no en la comisión.</li>
-            <li data-lang="en" style="display:none;">Recommendations based on your needs, not commissions.</li>
-
-            <li data-lang="es">Acompañamiento en el proceso de solicitud y después de la aprobación.</li>
-            <li data-lang="en" style="display:none;">Support through the application process and after approval.</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- HOW IT WORKS -->
-  <section id="how-it-works" class="how">
-    <div class="container">
-      <h2 data-lang="es">Cómo funciona el proceso de cotización gratuita</h2>
-      <h2 data-lang="en" style="display:none;">How the free quote process works</h2>
-
-      <p class="section-subtitle" data-lang="es">
-        Completar el formulario de cotización gratuita es el primer paso para proteger a tu familia. Julie se pondrá en contacto contigo para entender tus necesidades y ayudarte a elegir la mejor opción de seguro para ti.
-      </p>
-      <p class="section-subtitle" data-lang="en" style="display:none;">
-        Filling out the free quote form is the first step to protecting your family. Julie will reach out to understand your needs and help you choose the best insurance option for you.
-      </p>
-
-      <div class="how-grid">
-        <div class="how-step">
-          <div class="how-step-number">1</div>
-          <h3 data-lang="es">Envía tu información</h3>
-          <h3 data-lang="en" style="display:none;">Submit your information</h3>
-          <p data-lang="es">
-            Completa el formulario con tus datos básicos y preferencias para que Julie pueda ofrecerte opciones personalizadas.
-          </p>
-          <p data-lang="en" style="display:none;">
-            Fill out the form with your basic information and preferences so Julie can provide personalized options.
-          </p>
-        </div>
-
-        <div class="how-step">
-          <div class="how-step-number">2</div>
-          <h3 data-lang="es">Recibe una llamada o correo de Julie</h3>
-          <h3 data-lang="en" style="display:none;">Receive a call or email from Julie</h3>
-          <p data-lang="es">
-            Julie se comunicará contigo para aclarar dudas, conocer más sobre tu situación y explicarte las opciones disponibles.
-          </p>
-          <p data-lang="en" style="display:none;">
-            Julie will contact you to answer questions, learn more about your situation, and explain available options.
-          </p>
-        </div>
-
-        <div class="how-step">
-          <div class="how-step-number">3</div>
-          <h3 data-lang="es">Trabaja con Julie para elegir la mejor póliza</h3>
-          <h3 data-lang="en" style="display:none;">Work with Julie to choose the best policy</h3>
-          <p data-lang="es">
-            Juntos revisarán las opciones, costos y beneficios para encontrar la cobertura que mejor se adapte a ti y a tu presupuesto.
-          </p>
-          <p data-lang="en" style="display:none;">
-            Together, you'll review options, costs, and benefits to find coverage that fits your needs and budget.
-          </p>
-        </div>
-
-        <div class="how-step">
-          <div class="how-step-number">4</div>
-          <h3 data-lang="es">Disfruta de la tranquilidad</h3>
-          <h3 data-lang="en" style="display:none;">Enjoy peace of mind</h3>
-          <p data-lang="es">
-            Con la póliza en vigor, puedes estar tranquilo sabiendo que tu familia estará protegida cuando más lo necesite.
-          </p>
-          <p data-lang="en" style="display:none;">
-            With your policy in place, you can have peace of mind knowing your family will be protected when they need it most.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CARRIERS -->
-  <section id="carriers" class="carriers">
-    <div class="container">
-      <h2 data-lang="es">Aseguradoras de confianza</h2>
-      <h2 data-lang="en" style="display:none;">Trusted insurance companies</h2>
-
-      <p class="section-subtitle" data-lang="es">
-        Como agente independiente, Julie trabaja con varias aseguradoras reconocidas. Aquí hay información detallada sobre dos de las compañías con las que puede ayudarte: Aetna y Mutual of Omaha.
-      </p>
-      <p class="section-subtitle" data-lang="en" style="display:none;">
-        As an independent agent, Julie works with several well‑known insurance companies. Here is detailed information about two of the companies she can help you with: Aetna and Mutual of Omaha.
-      </p>
-
-      <div class="carriers-grid">
-        <div class="carrier-card">
-          <h3>Aetna</h3>
-          <ul>
-            <li data-lang="es">
-              Ofrece pólizas de vida entera para gastos finales (conocidas como "final expense"), diseñadas para ayudar a
-              cubrir costos como funeral, entierro, facturas médicas y otras deudas pequeñas al final de la vida.
-            </li>
-            <li data-lang="en" style="display:none;">
-              Offers whole life "final expense" policies designed to help cover costs such as funeral, burial, medical bills,
-              and other small end‑of‑life debts.
-            </li>
-
-            <li data-lang="es">
-              Las sumas aseguradas suelen ser montos modestos, pensados para complementar otros seguros o ahorros que ya
-              puedas tener, de modo que tu familia no tenga que adelantar todo el dinero en un momento difícil.
-            </li>
-            <li data-lang="en" style="display:none;">
-              Coverage amounts are typically modest, intended to complement any existing insurance or savings so your family
-              doesn't have to come up with all of the money at once during a difficult time.
-            </li>
-
-            <li data-lang="es">
-              La prima se mantiene nivelada durante la vida de la póliza: lo que pagas al inicio es lo que sigues pagando en el
-              futuro, mientras la póliza permanezca vigente.
-            </li>
-            <li data-lang="en" style="display:none;">
-              Premiums remain level for the life of the policy: what you pay at the beginning is what you continue to pay in the
-              future as long as the policy stays in force.
-            </li>
-
-            <li data-lang="es">
-              El proceso de solicitud suele ser simplificado: en muchos casos no se requiere examen médico y se usan
-              cuestionarios de salud básicos. Dependiendo de tus respuestas y de tu historial, Aetna puede ofrecer diferentes
-              niveles de aceptación.
-            </li>
-            <li data-lang="en" style="display:none;">
-              The application process is usually simplified: in many cases no medical exam is required, and basic health
-              questionnaires are used instead. Depending on your answers and history, Aetna may offer different levels of
-              acceptance.
-            </li>
-
-            <li data-lang="es">
-              Como póliza de vida entera, está diseñada para ser cobertura permanente: mientras se paguen las primas, la
-              póliza no vence a una edad específica, lo que puede ofrecer estabilidad a largo plazo.
-            </li>
-            <li data-lang="en" style="display:none;">
-              As a whole life policy, it is designed to provide permanent coverage: as long as premiums are paid, the policy
-              does not expire at a specific age, which can provide long‑term stability.
-            </li>
-          </ul>
-        </div>
-
-        <div class="carrier-card">
-          <h3>Mutual of Omaha</h3>
-          <ul>
-            <li data-lang="es">
-              Aseguradora con más de 100 años de historia en el mercado de seguros de vida, conocida por su solidez financiera
-              y por ofrecer productos diseñados específicamente para gastos finales.
-            </li>
-            <li data-lang="en" style="display:none;">
-              An insurer with over 100 years of history in the life insurance market, known for financial strength and for
-              offering products specifically designed for final expenses.
-            </li>
-
-            <li data-lang="es">
-              Sus pólizas de vida entera para gastos finales están pensadas para ayudar a cubrir costos como funeral, entierro,
-              servicios conmemorativos y otras deudas pequeñas, con montos de cobertura que suelen ir desde cantidades
-              relativamente bajas hasta montos suficientes para cubrir la mayoría de los gastos de funeral.
-            </li>
-            <li data-lang="en" style="display:none;">
-              Its whole life final expense policies are designed to help cover costs such as funeral, burial, memorial
-              services, and other small debts, with coverage amounts that typically range from smaller amounts up to levels
-              that can cover most funeral expenses.
-            </li>
-
-            <li data-lang="es">
-              Las primas están diseñadas para mantenerse niveladas: no aumentan simplemente porque envejeces o porque cambie tu
-              estado de salud después de que la póliza haya sido emitida.
-            </li>
-            <li data-lang="en" style="display:none;">
-              Premiums are designed to stay level: they do not increase just because you get older or your health changes after
-              the policy is issued.
-            </li>
-
-            <li data-lang="es">
-              Algunas pólizas usan un beneficio por fallecimiento "gradual" (graded) durante un periodo inicial. Esto
-              generalmente significa que, si el fallecimiento es por causas naturales en esos primeros años, el beneficiario
-              podría recibir las primas pagadas más un interés; si la muerte es por accidente, el beneficio completo suele
-              estar disponible desde el primer día. Después de ese periodo, muchas pólizas pagan el beneficio completo por la
-              mayoría de las causas de muerte, según los términos de la póliza.
-            </li>
-            <li data-lang="en" style="display:none;">
-              Some policies use a "graded" death benefit during an initial period. This typically means that if death is from
-              natural causes during those first years, the beneficiary may receive the premiums paid plus interest; if death is
-              due to an accident, the full benefit is often available from day one. After that period, many policies pay the
-              full benefit for most causes of death, according to the policy terms.
-            </li>
-
-            <li data-lang="es">
-              Mutual of Omaha ofrece diferentes opciones según la edad, el estado de salud y el estado donde vivas. Los
-              requisitos específicos y las cantidades de cobertura disponibles pueden variar, por lo que es importante revisar
-              tu situación personal con un agente autorizado.
-            </li>
-            <li data-lang="en" style="display:none;">
-              Mutual of Omaha offers different options depending on your age, health, and the state you live in. Specific
-              requirements and available coverage amounts can vary, so it is important to review your personal situation with a
-              licensed agent.
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      <p class="carriers-note" data-lang="es">
-        Esta información es un resumen general de productos públicos y no un folleto oficial. Los detalles específicos,
-        montos de cobertura, requisitos de elegibilidad y beneficios dependen de cada compañía, del estado donde viva y de
-        su situación personal. Un agente autorizado puede revisar su caso y explicarle qué opciones aplican para usted.
-      </p>
-      <p class="carriers-note" data-lang="en" style="display:none;">
-        This information is a general summary of public products and not an official brochure. Specific details, coverage
-        amounts, eligibility requirements, and benefits depend on each company, the state you live in, and your personal
-        situation. A licensed agent can review your case and explain which options apply to you.
-      </p>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer class="footer">
-    <div class="container footer-bottom">
-      <div class="footer-left">
-        <p>
-          &copy; <span id="year"></span> Mejor Vida Insurance LLC. All rights reserved.
-        </p>
-        <p>
-          P.O. Box 21885, Lincoln, NE 68542
-        </p>
-        <p data-lang="es">
-          Julie es una productora de seguros autorizada en el estado de Nebraska para Accident and Health or Sickness y Life.
-        </p>
-        <p data-lang="en" style="display:none;">
-          Julie is a licensed insurance producer in the State of Nebraska for Accident and Health or Sickness, and Life.
-        </p>
-        <p>
-          <span data-lang="es">Tel: </span><span data-lang="en" style="display:none;">Phone: </span>
-          <a href="tel:5312291712">(531) 229‑1712</a> |
-          <a href="mailto:Julie@mejorvidainsurance.com">Julie@mejorvidainsurance.com</a>
-        </p>
-        <p>
-          <a href="privacy-policy.html" data-lang="es">Política de Privacidad</a> | 
-          <a href="terms-service.html" data-lang="es">Términos de Servicio</a>
-          <a href="privacy-policy.html" data-lang="en" style="display:none;">Privacy Policy</a> | 
-          <a href="terms-service.html" data-lang="en" style="display:none;">Terms of Service</a>
-        </p>
-      </div>
-      <div class="footer-right">
-        <span data-lang="es">Síguenos:</span>
-        <span data-lang="en" style="display:none;">Follow us:</span>
-
-        <!-- Font Awesome social icons -->
-        <a
-          href="https://www.facebook.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Facebook"
-        >
-          <i class="fab fa-facebook-f"></i>
-        </a>
-        <a
-          href="https://www.instagram.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Instagram"
-        >
-          <i class="fab fa-instagram"></i>
-        </a>
-        <a
-          href="https://www.linkedin.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="LinkedIn"
-        >
-          <i class="fab fa-linkedin-in"></i>
-        </a>
-      </div>
-    </div>
-  </footer>
-
-  <!-- Language toggle and quote button script -->
+  <!-- Language toggle script -->
   <script>
     const langButtons = document.querySelectorAll('.lang-btn');
     function setLanguage(lang) {
       document.querySelectorAll('[data-lang="es"]').forEach(el => el.style.display = lang === 'es' ? '' : 'none');
       document.querySelectorAll('[data-lang="en"]').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
-      langButtons.forEach(btn => btn.classList.toggle('active', btn.dataset.langBtn === lang));
+      langButtons.forEach(btn => {
+        const isActive = btn.dataset.langBtn === lang;
+        btn.classList.toggle('active', isActive);
+        btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+      });
     }
     langButtons.forEach(btn => btn.addEventListener('click', () => setLanguage(btn.dataset.langBtn)));
     setLanguage('es');
 
-    // Update all quote buttons to open quote.html in same tab
-    document.querySelectorAll('.btn-quote').forEach(btn => {
-      btn.addEventListener('click', e => {
-        e.preventDefault();
-        window.location.href = '/quote.html';
-      });
-    });
-
-    // Set current year in footer
-    const yearSpan = document.getElementById('year');
-    if (yearSpan) yearSpan.textContent = new Date().getFullYear();
+    // Optional: adjust iframe height to viewport (keeps frame visible)
+    (function ensureBookingIframeHeight() {
+      var iframe = document.getElementById('booking-widget');
+      var wrapper = iframe && iframe.parentElement;
+      function applyHeight() {
+        if (!iframe || !wrapper) return;
+        var top = wrapper.getBoundingClientRect().top;
+        var maxAvailable = window.innerHeight - top - 28;
+        iframe.style.height = Math.max(640, Math.min(1400, maxAvailable)) + 'px';
+      }
+      document.addEventListener('DOMContentLoaded', applyHeight);
+      setTimeout(applyHeight, 300);
+      window.addEventListener('resize', applyHeight);
+    })();
   </script>
 
   <!-- Chat widget loader -->
-  <script 
-    src="https://widgets.leadconnectorhq.com/loader.js"  
-    data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" 
+  <script
+    src="https://widgets.leadconnectorhq.com/loader.js"
+    data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js"
     data-widget-id="6935d169d355bd236df7342d"></script>
 </body>
 </html>
