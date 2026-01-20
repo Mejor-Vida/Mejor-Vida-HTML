@@ -126,260 +126,406 @@
   }
   </script>
 
-  <link rel="stylesheet" href="styles.css" />
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'brand-deep': '#1a365d',
+            'brand-blue': '#2563eb',
+            'brand-light': '#63b3ed',
+            'brand-accent': '#90cdf4',
+            'brand-cream': '#ebf8ff',
+            'brand-warm': '#bee3f8',
+          },
+          fontFamily: {
+            'sans': ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
 
-  <!-- Font Awesome for social + contact icons -->
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
-    crossorigin="anonymous"
-    referrerpolicy="no-referrer"
-  />
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  
+  <!-- Google Fonts - Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
   <style>
-    /* Logo size updated to 150px height */
-    .logo img,
-    #header-logo,
-    .header-logo-img {
-      height: 150px;
-      width: auto;
-      max-width: 100%;
+    /* Smooth scrolling */
+    html { scroll-behavior: smooth; }
+    
+    /* Scroll offset fix */
+    :target::before {
+      content: "";
+      display: block;
+      height: 80px;
+      margin-top: -80px;
+      visibility: hidden;
+      pointer-events: none;
     }
-
-    /* Footer social icons colored and aligned right */
-    .footer-bottom {
+    
+    /* Carousel styles */
+    .carousel-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      border-radius: 12px;
+    }
+    
+    .carousel-slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: opacity 0.8s ease-in-out;
+    }
+    
+    .carousel-slide.active {
+      opacity: 1;
+    }
+    
+    .carousel-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+    
+    /* Geometric background pattern */
+    .hero-bg-pattern {
+      background: 
+        linear-gradient(135deg, rgba(26, 54, 93, 0.97) 0%, rgba(30, 64, 175, 0.95) 50%, rgba(37, 99, 235, 0.93) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero-bg-pattern::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 80%;
+      height: 200%;
+      background: radial-gradient(ellipse at center, rgba(99, 179, 237, 0.3) 0%, transparent 70%);
+      transform: rotate(-15deg);
+    }
+    
+    .hero-bg-pattern::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      left: -10%;
+      width: 60%;
+      height: 100%;
+      background: radial-gradient(ellipse at center, rgba(144, 205, 244, 0.2) 0%, transparent 60%);
+      transform: rotate(20deg);
+    }
+    
+    /* Blob shape decoration */
+    .blob-shape {
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 50%;
+      height: 100%;
+      opacity: 0.15;
+      background: url("data:image/svg+xml,%3Csvg viewBox='0 0 500 500' xmlns='https://i.pinimg.com/736x/92/bf/c7/92bfc7a5e5293c6e1b3a2ff53286e6e2.jpg fill='%2390cdf4' d='M440.5,320.5Q418,391,355.5,442.5Q293,494,226,450.5Q159,407,99,356Q39,305,26.5,244.5Q14,184,62.5,128Q111,72,180,47.5Q249,23,314,54Q379,85,423.5,128Q468,171,456.5,245.5Q445,320,440.5,320.5Z'/%3E%3C/svg%3E") no-repeat center;
+      background-size: contain;
+    }
+    
+    /* Button hover effects */
+    .btn-primary-gold {
+      background-color: #63b3ed;
+      color: #1a365d;
+      border: 2px solid #63b3ed;
+      transition: all 0.2s ease-in-out;
+    }
+    
+    .btn-primary-gold:hover {
+      background-color: #4299e1;
+      border-color: #4299e1;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(99, 179, 237, 0.4);
+    }
+    
+    /* Card hover effects */
+    .feature-card {
+      transition: all 0.3s ease;
+    }
+    
+    .feature-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+    }
+    
+    /* Carousel indicators */
+    .carousel-indicators {
+      position: absolute;
+      bottom: 16px;
+      left: 50%;
+      transform: translateX(-50%);
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 1rem;
+      gap: 8px;
+      z-index: 10;
     }
-    .footer-left {
-      flex: 1 1 auto;
-      min-width: 250px;
+    
+    .carousel-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.5);
+      cursor: pointer;
+      transition: all 0.3s ease;
     }
-    .footer-right {
-      flex: 0 0 auto;
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-    .footer-right a {
-      font-size: 1.5rem;
-      color: inherit;
-      transition: transform 0.3s ease;
-    }
-    .footer-right a:hover {
+    
+    .carousel-dot.active {
+      background-color: #63b3ed;
       transform: scale(1.2);
-    }
-
-    /* FAQ Section Styles */
-    .faq {
-      background: #f9f9f9;
-      padding: 4rem 0;
-    }
-    .faq h2 {
-      text-align: center;
-      margin-bottom: 1rem;
-      font-size: 2.5rem;
-      color: #003366;
-    }
-    .faq .section-subtitle {
-      text-align: center;
-      max-width: 800px;
-      margin: 0 auto 3rem;
-      font-size: 1.1rem;
-      color: #555;
-    }
-    .faq-item {
-      background: white;
-      border-radius: 8px;
-      padding: 1.5rem;
-      margin-bottom: 1.5rem;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-    .faq-item h3 {
-      color: #003366;
-      margin-bottom: 0.75rem;
-      font-size: 1.3rem;
-    }
-    .faq-item p {
-      color: #555;
-      line-height: 1.7;
     }
   </style>
 </head>
-<body>
-  <!-- HEADER -->
-  <header class="header">
-    <div class="container header-container">
-      <div class="logo">
-        <a href="#home" class="logo-link">
-          <img
-            id="header-logo"
-            class="header-logo-img"
-            src="img/logo-spanish.png"
-            alt="Mejor Vida Insurance logo"
-          />
-        </a>
-      </div>
+<body class="font-sans text-gray-800 bg-white">
 
-      <div class="header-right">
-        <!-- Flag buttons on top -->
-        <div class="lang-toggle">
-          <button class="lang-btn active" data-lang-btn="es">
-            <span class="flag">🇪🇸</span> ES
-          </button>
-          <button class="lang-btn" data-lang-btn="en">
-            <span class="flag">🇺🇸</span> EN
-          </button>
+  <!-- HEADER -->
+  <header class="sticky top-0 z-50 bg-white shadow-sm border-b border-gray-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        <!-- Logo -->
+        <div class="flex-shrink-0">
+          <a href="#home" class="block">
+            <img id="header-logo" src="img/logo-spanish.png" alt="Mejor Vida Insurance logo" class="h-16 w-auto" />
+          </a>
         </div>
 
-        <!-- Nav links below flags -->
-        <nav class="nav">
-          <a href="#about" data-lang="es">Sobre Julie</a>
-          <a href="#about" data-lang="en" style="display:none;">About Julie</a>
+        <!-- Navigation & Language Toggle -->
+        <div class="flex items-center gap-6">
+          <nav class="hidden md:flex items-center gap-6">
+            <a href="#about" data-lang="es" class="text-gray-700 font-semibold text-sm hover:text-brand-blue transition-colors">Sobre Julie</a>
+            <a href="#about" data-lang="en" style="display:none;" class="text-gray-700 font-semibold text-sm hover:text-brand-blue transition-colors">About Julie</a>
+            
+            <a href="#how-it-works" data-lang="es" class="text-gray-700 font-semibold text-sm hover:text-brand-blue transition-colors">Cómo funciona</a>
+            <a href="#how-it-works" data-lang="en" style="display:none;" class="text-gray-700 font-semibold text-sm hover:text-brand-blue transition-colors">How it works</a>
+            
+            <a href="#carriers" data-lang="es" class="text-gray-700 font-semibold text-sm hover:text-brand-blue transition-colors">Aseguradoras</a>
+            <a href="#carriers" data-lang="en" style="display:none;" class="text-gray-700 font-semibold text-sm hover:text-brand-blue transition-colors">Carriers</a>
+            
+            <a href="#faq" data-lang="es" class="text-gray-700 font-semibold text-sm hover:text-brand-blue transition-colors">FAQ</a>
+            <a href="#faq" data-lang="en" style="display:none;" class="text-gray-700 font-semibold text-sm hover:text-brand-blue transition-colors">FAQ</a>
+          </nav>
 
-          <a href="#how-it-works" data-lang="es">Cómo funciona</a>
-          <a href="#how-it-works" data-lang="en" style="display:none;">How it works</a>
+          <!-- Language Toggle -->
+          <div class="flex gap-2">
+            <button class="lang-btn active px-3 py-1.5 rounded text-sm font-bold border-2 transition-all" data-lang-btn="es">
+              <span class="mr-1">🇪🇸</span> ES
+            </button>
+            <button class="lang-btn px-3 py-1.5 rounded text-sm font-bold border-2 transition-all" data-lang-btn="en">
+              <span class="mr-1">🇺🇸</span> EN
+            </button>
+          </div>
 
-          <a href="#carriers" data-lang="es">Aseguradoras</a>
-          <a href="#carriers" data-lang="en" style="display:none;">Carriers</a>
-
-          <!-- Updated: buttons link to quote.html -->
-          <a href="/quote.html" class="btn-quote" data-lang="es" role="button">Cotización gratis</a>
-          <a href="/quote.html" class="btn-quote" data-lang="en" style="display:none;" role="button">Free quote</a>
-        </nav>
+          <!-- CTA Button -->
+          <a href="/quote.html" data-lang="es" class="hidden sm:inline-flex btn-primary-gold px-5 py-2.5 rounded font-bold text-sm">
+            Cotización gratis
+          </a>
+          <a href="/quote.html" data-lang="en" style="display:none;" class="hidden sm:inline-flex btn-primary-gold px-5 py-2.5 rounded font-bold text-sm">
+            Free Quote
+          </a>
+        </div>
       </div>
     </div>
   </header>
 
-  <!-- HERO -->
-  <section class="hero" id="home">
-    <div class="container hero-container">
-      <div class="hero-text">
-        <span class="hero-badge" data-lang="es">
-          Seguro de vida para gastos finales, explicado en un lenguaje sencillo
-        </span>
-        <span class="hero-badge" data-lang="en" style="display:none;">
-          Simple final expense life insurance for your family's peace of mind
-        </span>
+  <!-- HERO SECTION -->
+  <section id="home" class="hero-bg-pattern py-16 md:py-24 relative">
+    <div class="blob-shape"></div>
+    
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <!-- Hero Text -->
+        <div class="text-white">
+          <span class="inline-block bg-white/20 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-medium mb-6" data-lang="es">
+            Seguro de vida para gastos finales, explicado en lenguaje sencillo
+          </span>
+          <span class="inline-block bg-white/20 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-medium mb-6" data-lang="en" style="display:none;">
+            Final expense life insurance, explained in simple terms
+          </span>
 
-        <h1 data-lang="es">Protege a tu familia con un seguro de gastos finales sencillo</h1>
-        <h1 data-lang="en" style="display:none;">Protect your family with simple final expense coverage</h1>
+          <h1 class="text-4xl md:text-5xl font-bold leading-tight mb-6" data-lang="es">
+            Protege a tu familia con un seguro de gastos finales <span class="italic">sencillo y accesible</span>
+          </h1>
+          <h1 class="text-4xl md:text-5xl font-bold leading-tight mb-6" data-lang="en" style="display:none;">
+            Protect your family with <span class="italic">simple and affordable</span> final expense coverage
+          </h1>
 
-        <p class="hero-subheading" data-lang="es">
-          En Mejor Vida Insurance, te ayudamos a encontrar un seguro de vida para gastos finales que se ajuste a tu
-          presupuesto y a tu situación, trabajando con compañías de confianza como Aetna y Mutual of Omaha.
-        </p>
-        <p class="hero-subheading" data-lang="en" style="display:none;">
-          At Mejor Vida Insurance, we help you find final expense life insurance that fits your budget and situation,
-          working with trusted companies like Aetna and Mutual of Omaha.
-        </p>
+          <p class="text-lg text-blue-100 mb-8 leading-relaxed" data-lang="es">
+            En Mejor Vida Insurance, te ayudamos a encontrar un seguro de vida para gastos finales que se ajuste a tu presupuesto, trabajando con compañías de confianza como Aetna y Mutual of Omaha.
+          </p>
+          <p class="text-lg text-blue-100 mb-8 leading-relaxed" data-lang="en" style="display:none;">
+            At Mejor Vida Insurance, we help you find final expense life insurance that fits your budget, working with trusted companies like Aetna and Mutual of Omaha.
+          </p>
 
-        <div class="hero-card">
-          <div class="hero-trust">
-            <h3 data-lang="es">Orientación personal, sin presión</h3>
-            <h3 data-lang="en" style="display:none;">Personal, no‑pressure guidance</h3>
-            <p data-lang="es">
-              En Mejor Vida Insurance nos tomamos el tiempo para escuchar tu situación, explicarte tus opciones paso a paso
-              y responder tus preguntas con calma, sin compromiso ni presión.
-            </p>
-            <p data-lang="en" style="display:none;">
-              At Mejor Vida Insurance, we take the time to understand your situation, explain your options step by step,
-              and answer your questions calmly, with no obligation or pressure.
-            </p>
+          <div class="flex flex-col sm:flex-row gap-4 mb-10">
+            <a href="/quote.html" class="btn-primary-gold px-8 py-4 rounded font-bold text-base text-center" data-lang="es">
+              <i class="fas fa-calendar-check mr-2"></i>¡Obtén una cotización gratis!
+            </a>
+            <a href="/quote.html" class="btn-primary-gold px-8 py-4 rounded font-bold text-base text-center" data-lang="en" style="display:none;">
+              <i class="fas fa-calendar-check mr-2"></i>Get a Free Quote!
+            </a>
+            <a href="tel:5312291712" class="border-2 border-white/50 text-white px-6 py-4 rounded font-semibold text-base text-center hover:bg-white/10 transition-all">
+              <i class="fas fa-phone mr-2"></i>(531) 229-1712
+            </a>
           </div>
 
-          <div class="hero-highlight">
-            <h3 data-lang="es">Pensado para cubrir gastos finales</h3>
-            <h3 data-lang="en" style="display:none;">Designed to help with final expenses</h3>
-            <p data-lang="es">
-              La cobertura puede ayudar a tu familia con los costos de funeral, entierro, facturas médicas y otras deudas,
-              para que tengan un poco más de tranquilidad en un momento difícil.
-            </p>
-            <p data-lang="en" style="display:none;">
-              Coverage can help your family with funeral and burial costs, medical bills, and other debts so they have a bit
-              more peace of mind during a difficult time.
-            </p>
-          </div>
-
-          <div class="hero-contact">
-            <p>
-              <!-- Updated: buttons link to quote.html -->
-              <a href="/quote.html" class="btn btn-primary" data-lang="es" role="button">¡Obtén una cotización gratis!</a>
-              <a href="/quote.html" class="btn btn-primary" data-lang="en" style="display:none;" role="button">Get a free quote!</a>
-            </p>
+          <!-- Trust Badges -->
+          <div class="flex flex-wrap gap-6 items-center">
+            <div class="flex items-center gap-2 text-white/90">
+              <i class="fas fa-shield-check text-brand-light text-xl"></i>
+              <span class="text-sm font-medium" data-lang="es">Agente con licencia</span>
+              <span class="text-sm font-medium" data-lang="en" style="display:none;">Licensed Agent</span>
+            </div>
+            <div class="flex items-center gap-2 text-white/90">
+              <i class="fas fa-comments text-brand-light text-xl"></i>
+              <span class="text-sm font-medium" data-lang="es">Español e Inglés</span>
+              <span class="text-sm font-medium" data-lang="en" style="display:none;">English & Spanish</span>
+            </div>
+            <div class="flex items-center gap-2 text-white/90">
+              <i class="fas fa-handshake text-brand-light text-xl"></i>
+              <span class="text-sm font-medium" data-lang="es">Sin presión</span>
+              <span class="text-sm font-medium" data-lang="en" style="display:none;">No pressure</span>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="hero-image">
-        <img
-          src="img/Family-smiling.jpg"
-          alt="Familia hispana sonriendo y protegida con seguro de vida"
-        />
+        <!-- Hero Image Carousel -->
+        <div class="relative">
+          <div class="carousel-container aspect-[4/3] rounded-xl shadow-2xl">
+            <div class="carousel-slide active">
+              <img src="img/Family-smiling.jpg" alt="Familia hispana sonriendo" />
+            </div>
+            <div class="carousel-slide">
+              <img src="img/hispanic-family-laughing.jpg" alt="Familia hispana riendo" />
+            </div>
+            <div class="carousel-slide">
+              <img src="img/elderly-hispanic-couple.jpg" alt="Pareja hispana mayor" />
+            </div>
+            <div class="carousel-slide">
+              <img src="img/hispanic-family.jpg" alt="Familia hispana" />
+            </div>
+            <!-- Carousel indicators -->
+            <div class="carousel-indicators">
+              <button class="carousel-dot active" data-slide="0"></button>
+              <button class="carousel-dot" data-slide="1"></button>
+              <button class="carousel-dot" data-slide="2"></button>
+              <button class="carousel-dot" data-slide="3"></button>
+            </div>
+          </div>
+
+          <!-- Floating Quote Card -->
+          <div class="absolute -bottom-6 -left-6 bg-white rounded-xl shadow-xl p-4 hidden lg:block">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 bg-brand-cream rounded-full flex items-center justify-center">
+                <i class="fas fa-heart-pulse text-brand-blue text-xl"></i>
+              </div>
+              <div>
+                <p class="text-xs text-gray-500" data-lang="es">Cobertura desde</p>
+                <p class="text-xs text-gray-500" data-lang="en" style="display:none;">Coverage from</p>
+                <p class="text-lg font-bold text-brand-deep">$5,000 - $35,000</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- ABOUT JULIE -->
-  <section id="about" class="about">
-    <div class="container">
-      <h2 data-lang="es">Conoce a Julie</h2>
-      <h2 data-lang="en" style="display:none;">Meet Julie</h2>
+  <section id="about" class="py-20 md:py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-brand-deep mb-4" data-lang="es">Conoce a Julie</h2>
+        <h2 class="text-3xl md:text-4xl font-bold text-brand-deep mb-4" data-lang="en" style="display:none;">Meet Julie</h2>
+      </div>
 
-      <div class="about-content">
-        <div class="about-photo">
-          <img src="img/Julie.png" alt="Foto de Julie, agente de seguros" />
-          <p class="about-photo-caption" data-lang="es">
-            Julie, fundadora de Mejor Vida Insurance LLC y agente independiente de seguros de vida.
+      <div class="grid md:grid-cols-3 gap-10 items-start">
+        <!-- Photo -->
+        <div class="text-center">
+          <img src="img/Julie.png" alt="Julie, agente de seguros" class="w-64 h-auto mx-auto rounded-xl shadow-lg mb-4" />
+          <p class="text-sm text-gray-500" data-lang="es">
+            Julie, fundadora de Mejor Vida Insurance LLC
           </p>
-          <p class="about-photo-caption" data-lang="en" style="display:none;">
-            Julie, founder of Mejor Vida Insurance LLC and independent life insurance agent.
+          <p class="text-sm text-gray-500" data-lang="en" style="display:none;">
+            Julie, founder of Mejor Vida Insurance LLC
           </p>
         </div>
 
-        <div class="about-text">
-          <div class="about-chips">
-            <span class="chip" data-lang="es">Atención en español e inglés</span>
-            <span class="chip" data-lang="en" style="display:none;">Service in English and Spanish</span>
-            <span class="chip" data-lang="es">Enfoque en gastos finales</span>
-            <span class="chip" data-lang="en" style="display:none;">Focused on final expense</span>
+        <!-- Text Content -->
+        <div class="md:col-span-2">
+          <div class="flex flex-wrap gap-3 mb-6">
+            <span class="bg-brand-cream text-brand-blue px-4 py-1.5 rounded-full text-sm font-semibold" data-lang="es">
+              <i class="fas fa-globe mr-1"></i> Atención en español e inglés
+            </span>
+            <span class="bg-brand-cream text-brand-blue px-4 py-1.5 rounded-full text-sm font-semibold" data-lang="en" style="display:none;">
+              <i class="fas fa-globe mr-1"></i> Service in English & Spanish
+            </span>
+            <span class="bg-brand-cream text-brand-blue px-4 py-1.5 rounded-full text-sm font-semibold" data-lang="es">
+              <i class="fas fa-heart mr-1"></i> Enfoque en gastos finales
+            </span>
+            <span class="bg-brand-cream text-brand-blue px-4 py-1.5 rounded-full text-sm font-semibold" data-lang="en" style="display:none;">
+              <i class="fas fa-heart mr-1"></i> Focused on final expense
+            </span>
           </div>
 
-          <h3 data-lang="es">Un enfoque humano para hablar de temas difíciles</h3>
-          <h3 data-lang="en" style="display:none;">A human approach to hard conversations</h3>
+          <h3 class="text-2xl font-bold text-brand-deep mb-4" data-lang="es">Un enfoque humano para hablar de temas difíciles</h3>
+          <h3 class="text-2xl font-bold text-brand-deep mb-4" data-lang="en" style="display:none;">A human approach to hard conversations</h3>
 
-          <p data-lang="es">
-            Julie se especializa en seguros de vida para gastos finales. Su meta es hacer estas conversaciones más fáciles:
-            explicarte cómo funciona la cobertura, qué opciones tienes y cómo proteger mejor a tu familia, sin palabras
-            complicadas.
+          <p class="text-gray-600 leading-relaxed mb-4" data-lang="es">
+            Julie se especializa en seguros de vida para gastos finales. Su meta es hacer estas conversaciones más fáciles: explicarte cómo funciona la cobertura, qué opciones tienes y cómo proteger mejor a tu familia, sin palabras complicadas.
           </p>
-          <p data-lang="en" style="display:none;">
-            Julie specializes in final expense life insurance. Her goal is to make these conversations easier: explain how
-            coverage works, what your options are, and how to best protect your family—without complicated language.
+          <p class="text-gray-600 leading-relaxed mb-4" data-lang="en" style="display:none;">
+            Julie specializes in final expense life insurance. Her goal is to make these conversations easier: explain how coverage works, what your options are, and how to best protect your family—without complicated language.
           </p>
 
-          <p data-lang="es">
-            Como agente independiente, no trabaja para una sola compañía. Eso significa que puede revisar diferentes
-            aseguradoras, como Aetna y Mutual of Omaha, para encontrar una póliza que se adapte a tu edad, salud y
-            presupuesto.
+          <p class="text-gray-600 leading-relaxed mb-6" data-lang="es">
+            Como agente independiente, no trabaja para una sola compañía. Eso significa que puede revisar diferentes aseguradoras, como Aetna y Mutual of Omaha, para encontrar una póliza que se adapte a tu edad, salud y presupuesto.
           </p>
-          <p data-lang="en" style="display:none;">
-            As an independent agent, she doesn't work for just one company. That means she can look at different insurers,
-            like Aetna and Mutual of Omaha, to find a policy that fits your age, health, and budget.
+          <p class="text-gray-600 leading-relaxed mb-6" data-lang="en" style="display:none;">
+            As an independent agent, she doesn't work for just one company. That means she can look at different insurers, like Aetna and Mutual of Omaha, to find a policy that fits your age, health, and budget.
           </p>
 
-          <ul class="about-values">
-            <li data-lang="es">Explicaciones claras y honestas.</li>
-            <li data-lang="en" style="display:none;">Clear and honest explanations.</li>
-
-            <li data-lang="es">Recomendaciones basadas en tus necesidades, no en la comisión.</li>
-            <li data-lang="en" style="display:none;">Recommendations based on your needs, not commissions.</li>
-
-            <li data-lang="es">Acompañamiento en el proceso de solicitud y después de la aprobación.</li>
-            <li data-lang="en" style="display:none;">Support through the application process and after approval.</li>
+          <ul class="space-y-3">
+            <li class="flex items-start gap-3" data-lang="es">
+              <i class="fas fa-check-circle text-green-500 mt-1"></i>
+              <span class="text-gray-600">Explicaciones claras y honestas.</span>
+            </li>
+            <li class="flex items-start gap-3" data-lang="en" style="display:none;">
+              <i class="fas fa-check-circle text-green-500 mt-1"></i>
+              <span class="text-gray-600">Clear and honest explanations.</span>
+            </li>
+            <li class="flex items-start gap-3" data-lang="es">
+              <i class="fas fa-check-circle text-green-500 mt-1"></i>
+              <span class="text-gray-600">Recomendaciones basadas en tus necesidades, no en la comisión.</span>
+            </li>
+            <li class="flex items-start gap-3" data-lang="en" style="display:none;">
+              <i class="fas fa-check-circle text-green-500 mt-1"></i>
+              <span class="text-gray-600">Recommendations based on your needs, not commissions.</span>
+            </li>
+            <li class="flex items-start gap-3" data-lang="es">
+              <i class="fas fa-check-circle text-green-500 mt-1"></i>
+              <span class="text-gray-600">Acompañamiento en el proceso de solicitud y después de la aprobación.</span>
+            </li>
+            <li class="flex items-start gap-3" data-lang="en" style="display:none;">
+              <i class="fas fa-check-circle text-green-500 mt-1"></i>
+              <span class="text-gray-600">Support through the application process and after approval.</span>
+            </li>
           </ul>
         </div>
       </div>
@@ -387,375 +533,342 @@
   </section>
 
   <!-- HOW IT WORKS -->
-  <section id="how-it-works" class="how">
-    <div class="container">
-      <h2 data-lang="es">Cómo funciona el proceso de cotización gratuita</h2>
-      <h2 data-lang="en" style="display:none;">How the free quote process works</h2>
+  <section id="how-it-works" class="py-20 md:py-24 bg-brand-cream">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-14">
+        <h2 class="text-3xl md:text-4xl font-bold text-brand-deep mb-4" data-lang="es">Cómo funciona</h2>
+        <h2 class="text-3xl md:text-4xl font-bold text-brand-deep mb-4" data-lang="en" style="display:none;">How It Works</h2>
+        
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto" data-lang="es">
+          Obtener la protección que tu familia necesita es más fácil de lo que piensas. Sigue estos cuatro sencillos pasos.
+        </p>
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto" data-lang="en" style="display:none;">
+          Getting the protection your family needs is easier than you think. Follow these four simple steps.
+        </p>
+      </div>
 
-      <p class="section-subtitle" data-lang="es">
-        Completar el formulario de cotización gratuita es el primer paso para proteger a tu familia. Julie se pondrá en contacto contigo para entender tus necesidades y ayudarte a elegir la mejor opción de seguro para ti.
-      </p>
-      <p class="section-subtitle" data-lang="en" style="display:none;">
-        Filling out the free quote form is the first step to protecting your family. Julie will reach out to understand your needs and help you choose the best insurance option for you.
-      </p>
-
-      <div class="how-grid">
-        <div class="how-step">
-          <div class="how-step-number">1</div>
-          <h3 data-lang="es">Completa el formulario y programa una cita.</h3>
-          <h3 data-lang="en" style="display:none;">Complete the form and schedule an appointment.</h3>
-          <p data-lang="es">
-            Rellena nuestro sencillo formulario en línea para comenzar, y elige un momento conveniente para tu consulta.
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <!-- Step 1 -->
+        <div class="feature-card bg-white rounded-xl p-6 shadow-md">
+          <div class="w-14 h-14 bg-brand-blue rounded-full flex items-center justify-center text-white text-xl font-bold mb-5">1</div>
+          <h3 class="text-lg font-bold text-brand-deep mb-3" data-lang="es">Consulta Inicial</h3>
+          <h3 class="text-lg font-bold text-brand-deep mb-3" data-lang="en" style="display:none;">Initial Consultation</h3>
+          <p class="text-gray-600 text-sm leading-relaxed" data-lang="es">
+            Agenda una llamada breve para entender tus necesidades y presupuesto.
           </p>
-          <p data-lang="en" style="display:none;">
-            Fill out our simple online form to get started, and choose a convenient time for your consultation.
+          <p class="text-gray-600 text-sm leading-relaxed" data-lang="en" style="display:none;">
+            Schedule a brief call to understand your needs and budget.
           </p>
         </div>
 
-        <div class="how-step">
-          <div class="how-step-number">2</div>
-          <h3 data-lang="es">Recibe una llamada de Julie en el momento programado.</h3>
-          <h3 data-lang="en" style="display:none;">Receive a call from Julie at your scheduled time.</h3>
-          <p data-lang="es">
-            Julie se pondrá en contacto contigo en el momento que hayas seleccionado para discutir tus necesidades de seguro en detalle.
+        <!-- Step 2 -->
+        <div class="feature-card bg-white rounded-xl p-6 shadow-md">
+          <div class="w-14 h-14 bg-brand-blue rounded-full flex items-center justify-center text-white text-xl font-bold mb-5">2</div>
+          <h3 class="text-lg font-bold text-brand-deep mb-3" data-lang="es">Comparación de Opciones</h3>
+          <h3 class="text-lg font-bold text-brand-deep mb-3" data-lang="en" style="display:none;">Option Comparison</h3>
+          <p class="text-gray-600 text-sm leading-relaxed" data-lang="es">
+            Revisamos las mejores pólizas de las principales aseguradoras para ti.
           </p>
-          <p data-lang="en" style="display:none;">
-            Julie will contact you at the time you've selected to discuss your insurance needs in detail.
-          </p>
-        </div>
-
-        <div class="how-step">
-          <div class="how-step-number">3</div>
-          <h3 data-lang="es">Trabaja con Julie para encontrar la mejor opción de seguro para ti.</h3>
-          <h3 data-lang="en" style="display:none;">Work with Julie to find the best insurance option for you.</h3>
-          <p data-lang="es">
-            Colabora con Julie para identificar la póliza perfecta que se adapte a tu situación única y presupuesto.
-          </p>
-          <p data-lang="en" style="display:none;">
-            Collaborate with Julie to identify the perfect policy that fits your unique situation and budget.
+          <p class="text-gray-600 text-sm leading-relaxed" data-lang="en" style="display:none;">
+            We review the best policies from top-rated insurers for you.
           </p>
         </div>
 
-        <div class="how-step">
-          <div class="how-step-number">4</div>
-          <h3 data-lang="es">Disfruta de la tranquilidad sabiendo que tu familia está protegida.</h3>
-          <h3 data-lang="en" style="display:none;">Enjoy peace of mind knowing your family is protected.</h3>
-          <p data-lang="es">
-            Descansa tranquilo con la confianza de que tus seres queridos están financieramente seguros.
+        <!-- Step 3 -->
+        <div class="feature-card bg-white rounded-xl p-6 shadow-md">
+          <div class="w-14 h-14 bg-brand-blue rounded-full flex items-center justify-center text-white text-xl font-bold mb-5">3</div>
+          <h3 class="text-lg font-bold text-brand-deep mb-3" data-lang="es">Solicitud Simple</h3>
+          <h3 class="text-lg font-bold text-brand-deep mb-3" data-lang="en" style="display:none;">Simple Application</h3>
+          <p class="text-gray-600 text-sm leading-relaxed" data-lang="es">
+            Te ayudamos con el proceso de solicitud, que suele tomar solo unos minutos.
           </p>
-          <p data-lang="en" style="display:none;">
-            Rest easy with the confidence that your loved ones are financially secure.
+          <p class="text-gray-600 text-sm leading-relaxed" data-lang="en" style="display:none;">
+            We guide you through the application process, which usually takes just minutes.
           </p>
         </div>
+
+        <!-- Step 4 -->
+        <div class="feature-card bg-white rounded-xl p-6 shadow-md">
+          <div class="w-14 h-14 bg-brand-blue rounded-full flex items-center justify-center text-white text-xl font-bold mb-5">4</div>
+          <h3 class="text-lg font-bold text-brand-deep mb-3" data-lang="es">Protección Activa</h3>
+          <h3 class="text-lg font-bold text-brand-deep mb-3" data-lang="en" style="display:none;">Active Protection</h3>
+          <p class="text-gray-600 text-sm leading-relaxed" data-lang="es">
+            Tu cobertura comienza y tu familia queda protegida de inmediato.
+          </p>
+          <p class="text-gray-600 text-sm leading-relaxed" data-lang="en" style="display:none;">
+            Your coverage begins, and your family is protected immediately.
+          </p>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="text-center mt-12">
+        <a href="/quote.html" class="btn-primary-gold px-8 py-4 rounded font-bold text-base inline-flex items-center" data-lang="es">
+          <i class="fas fa-calendar-check mr-2"></i>Agenda tu consulta gratis
+        </a>
+        <a href="/quote.html" class="btn-primary-gold px-8 py-4 rounded font-bold text-base inline-flex items-center" data-lang="en" style="display:none;">
+          <i class="fas fa-calendar-check mr-2"></i>Schedule Your Free Consultation
+        </a>
       </div>
     </div>
   </section>
 
   <!-- CARRIERS -->
-  <section id="carriers" class="carriers">
-    <div class="container">
-      <h2 data-lang="es">Aseguradoras de confianza</h2>
-      <h2 data-lang="en" style="display:none;">Trusted insurance companies</h2>
+  <section id="carriers" class="py-20 md:py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-14">
+        <h2 class="text-3xl md:text-4xl font-bold text-brand-deep mb-4" data-lang="es">Aseguradoras de Confianza</h2>
+        <h2 class="text-3xl md:text-4xl font-bold text-brand-deep mb-4" data-lang="en" style="display:none;">Trusted Insurance Companies</h2>
+        
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto" data-lang="es">
+          Como agente independiente, Julie trabaja con varias aseguradoras reconocidas para ofrecerte las mejores opciones.
+        </p>
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto" data-lang="en" style="display:none;">
+          As an independent agent, Julie works with several well-known insurance companies to offer you the best options.
+        </p>
+      </div>
 
-      <p class="section-subtitle" data-lang="es">
-        Como agente independiente, Julie trabaja con varias aseguradoras reconocidas. Aquí hay información detallada sobre dos de las compañías con las que puede ayudarte: Aetna y Mutual of Omaha.
-      </p>
-      <p class="section-subtitle" data-lang="en" style="display:none;">
-        As an independent agent, Julie works with several well‑known insurance companies. Here is detailed information about two of the companies she can help you with: Aetna and Mutual of Omaha.
-      </p>
-
-      <div class="carriers-grid">
-        <div class="carrier-card">
-          <h3>Aetna</h3>
-          <ul>
-            <li data-lang="es">
-              Ofrece pólizas de vida entera para gastos finales (conocidas como "final expense"), diseñadas para ayudar a
-              cubrir costos como funeral, entierro, facturas médicas y otras deudas pequeñas al final de la vida.
+      <div class="grid md:grid-cols-2 gap-8">
+        <!-- Aetna Card -->
+        <div class="feature-card bg-gray-50 rounded-xl p-8 shadow-md">
+          <h3 class="text-2xl font-bold text-brand-deep mb-6">Aetna</h3>
+          <ul class="space-y-4">
+            <li class="flex items-start gap-3" data-lang="es">
+              <i class="fas fa-check text-green-500 mt-1 flex-shrink-0"></i>
+              <span class="text-gray-600 text-sm">Ofrece pólizas de vida entera para gastos finales, diseñadas para ayudar a cubrir costos de funeral, entierro y facturas médicas.</span>
             </li>
-            <li data-lang="en" style="display:none;">
-              Offers whole life "final expense" policies designed to help cover costs such as funeral, burial, medical bills,
-              and other small end‑of‑life debts.
+            <li class="flex items-start gap-3" data-lang="en" style="display:none;">
+              <i class="fas fa-check text-green-500 mt-1 flex-shrink-0"></i>
+              <span class="text-gray-600 text-sm">Offers whole life final expense policies designed to help cover funeral, burial, and medical bills.</span>
             </li>
-
-            <li data-lang="es">
-              Las sumas aseguradas suelen ser montos modestos, pensados para complementar otros seguros o ahorros que ya
-              puedas tener, de modo que tu familia no tenga que adelantar todo el dinero en un momento difícil.
+            <li class="flex items-start gap-3" data-lang="es">
+              <i class="fas fa-check text-green-500 mt-1 flex-shrink-0"></i>
+              <span class="text-gray-600 text-sm">La prima se mantiene nivelada durante la vida de la póliza.</span>
             </li>
-            <li data-lang="en" style="display:none;">
-              Coverage amounts are typically modest, intended to complement any existing insurance or savings so your family
-              doesn't have to come up with all of the money at once during a difficult time.
+            <li class="flex items-start gap-3" data-lang="en" style="display:none;">
+              <i class="fas fa-check text-green-500 mt-1 flex-shrink-0"></i>
+              <span class="text-gray-600 text-sm">Premiums remain level for the life of the policy.</span>
             </li>
-
-            <li data-lang="es">
-              La prima se mantiene nivelada durante la vida de la póliza: lo que pagas al inicio es lo que sigues pagando en el
-              futuro, mientras la póliza permanezca vigente.
+            <li class="flex items-start gap-3" data-lang="es">
+              <i class="fas fa-check text-green-500 mt-1 flex-shrink-0"></i>
+              <span class="text-gray-600 text-sm">Proceso simplificado: en muchos casos no se requiere examen médico.</span>
             </li>
-            <li data-lang="en" style="display:none;">
-              Premiums remain level for the life of the policy: what you pay at the beginning is what you continue to pay in the
-              future as long as the policy stays in force.
-            </li>
-
-            <li data-lang="es">
-              El proceso de solicitud suele ser simplificado: en muchos casos no se requiere examen médico y se usan
-              cuestionarios de salud básicos. Dependiendo de tus respuestas y de tu historial, Aetna puede ofrecer diferentes
-              niveles de aceptación.
-            </li>
-            <li data-lang="en" style="display:none;">
-              The application process is usually simplified: in many cases no medical exam is required, and basic health
-              questionnaires are used instead. Depending on your answers and history, Aetna may offer different levels of
-              acceptance.
-            </li>
-
-            <li data-lang="es">
-              Como póliza de vida entera, está diseñada para ser cobertura permanente: mientras se paguen las primas, la
-              póliza no vence a una edad específica, lo que puede ofrecer estabilidad a largo plazo.
-            </li>
-            <li data-lang="en" style="display:none;">
-              As a whole life policy, it is designed to provide permanent coverage: as long as premiums are paid, the policy
-              does not expire at a specific age, which can provide long‑term stability.
+            <li class="flex items-start gap-3" data-lang="en" style="display:none;">
+              <i class="fas fa-check text-green-500 mt-1 flex-shrink-0"></i>
+              <span class="text-gray-600 text-sm">Simplified process: in many cases no medical exam is required.</span>
             </li>
           </ul>
         </div>
 
-        <div class="carrier-card">
-          <h3>Mutual of Omaha</h3>
-          <ul>
-            <li data-lang="es">
-              Aseguradora con más de 100 años de historia en el mercado de seguros de vida, conocida por su solidez financiera
-              y por ofrecer productos diseñados específicamente para gastos finales.
+        <!-- Mutual of Omaha Card -->
+        <div class="feature-card bg-gray-50 rounded-xl p-8 shadow-md">
+          <h3 class="text-2xl font-bold text-brand-deep mb-6">Mutual of Omaha</h3>
+          <ul class="space-y-4">
+            <li class="flex items-start gap-3" data-lang="es">
+              <i class="fas fa-check text-green-500 mt-1 flex-shrink-0"></i>
+              <span class="text-gray-600 text-sm">Más de 100 años de historia, conocida por su solidez financiera.</span>
             </li>
-            <li data-lang="en" style="display:none;">
-              An insurer with over 100 years of history in the life insurance market, known for financial strength and for
-              offering products specifically designed for final expenses.
+            <li class="flex items-start gap-3" data-lang="en" style="display:none;">
+              <i class="fas fa-check text-green-500 mt-1 flex-shrink-0"></i>
+              <span class="text-gray-600 text-sm">Over 100 years of history, known for financial strength.</span>
             </li>
-
-            <li data-lang="es">
-              Sus pólizas de vida entera para gastos finales están pensadas para ayudar a cubrir costos como funeral, entierro,
-              servicios conmemorativos y otras deudas pequeñas, con montos de cobertura que suelen ir desde cantidades
-              relativamente bajas hasta montos suficientes para cubrir la mayoría de los gastos de funeral.
+            <li class="flex items-start gap-3" data-lang="es">
+              <i class="fas fa-check text-green-500 mt-1 flex-shrink-0"></i>
+              <span class="text-gray-600 text-sm">Pólizas de vida entera pensadas para cubrir costos de funeral, entierro y servicios conmemorativos.</span>
             </li>
-            <li data-lang="en" style="display:none;">
-              Its whole life final expense policies are designed to help cover costs such as funeral, burial, memorial
-              services, and other small debts, with coverage amounts that typically range from smaller amounts up to levels
-              that can cover most funeral expenses.
+            <li class="flex items-start gap-3" data-lang="en" style="display:none;">
+              <i class="fas fa-check text-green-500 mt-1 flex-shrink-0"></i>
+              <span class="text-gray-600 text-sm">Whole life policies designed to cover funeral, burial, and memorial services.</span>
             </li>
-
-            <li data-lang="es">
-              Las primas están diseñadas para mantenerse niveladas: no aumentan simplemente porque envejeces o porque cambie tu
-              estado de salud después de que la póliza haya sido emitida.
+            <li class="flex items-start gap-3" data-lang="es">
+              <i class="fas fa-check text-green-500 mt-1 flex-shrink-0"></i>
+              <span class="text-gray-600 text-sm">Las primas no aumentan por envejecer o cambios de salud después de emitida la póliza.</span>
             </li>
-            <li data-lang="en" style="display:none;">
-              Premiums are designed to stay level: they do not increase just because you get older or your health changes after
-              the policy is issued.
-            </li>
-
-            <li data-lang="es">
-              Algunas pólizas usan un beneficio por fallecimiento "gradual" (graded) durante un periodo inicial. Esto
-              generalmente significa que, si el fallecimiento es por causas naturales en esos primeros años, el beneficiario
-              podría recibir las primas pagadas más un interés; si la muerte es por accidente, el beneficio completo suele
-              estar disponible desde el primer día. Después de ese periodo, muchas pólizas pagan el beneficio completo por la
-              mayoría de las causas de muerte, según los términos de la póliza.
-            </li>
-            <li data-lang="en" style="display:none;">
-              Some policies use a "graded" death benefit during an initial period. This typically means that if death is from
-              natural causes during those first years, the beneficiary may receive the premiums paid plus interest; if death is
-              due to an accident, the full benefit is often available from day one. After that period, many policies pay the
-              full benefit for most causes of death, according to the policy terms.
-            </li>
-
-            <li data-lang="es">
-              Mutual of Omaha ofrece diferentes opciones según la edad, el estado de salud y el estado donde vivas. Los
-              requisitos específicos y las cantidades de cobertura disponibles pueden variar, por lo que es importante revisar
-              tu situación personal con un agente autorizado.
-            </li>
-            <li data-lang="en" style="display:none;">
-              Mutual of Omaha offers different options depending on your age, health, and the state you live in. Specific
-              requirements and available coverage amounts can vary, so it is important to review your personal situation with a
-              licensed agent.
+            <li class="flex items-start gap-3" data-lang="en" style="display:none;">
+              <i class="fas fa-check text-green-500 mt-1 flex-shrink-0"></i>
+              <span class="text-gray-600 text-sm">Premiums don't increase due to aging or health changes after the policy is issued.</span>
             </li>
           </ul>
         </div>
       </div>
 
-      <p class="carriers-note" data-lang="es">
-        Esta información es un resumen general de productos públicos y no un folleto oficial. Los detalles específicos,
-        montos de cobertura, requisitos de elegibilidad y beneficios dependen de cada compañía, del estado donde viva y de
-        su situación personal. Un agente autorizado puede revisar su caso y explicarle qué opciones aplican para usted.
-      </p>
-      <p class="carriers-note" data-lang="en" style="display:none;">
-        This information is a general summary of public products and not an official brochure. Specific details, coverage
-        amounts, eligibility requirements, and benefits depend on each company, the state you live in, and your personal
-        situation. A licensed agent can review your case and explain which options apply to you.
-      </p>
+      <div class="mt-10 p-6 bg-brand-cream rounded-xl border-l-4 border-brand-blue">
+        <p class="text-sm text-gray-600" data-lang="es">
+          <strong>Nota:</strong> Esta información es un resumen general. Los detalles específicos, montos de cobertura, requisitos de elegibilidad y beneficios dependen de cada compañía, del estado donde viva y de su situación personal. Un agente autorizado puede revisar su caso y explicarle qué opciones aplican para usted.
+        </p>
+        <p class="text-sm text-gray-600" data-lang="en" style="display:none;">
+          <strong>Note:</strong> This information is a general summary. Specific details, coverage amounts, eligibility requirements, and benefits depend on each company, the state you live in, and your personal situation. A licensed agent can review your case and explain which options apply to you.
+        </p>
+      </div>
     </div>
   </section>
 
-  <!-- FAQ SECTION (NEW) -->
-  <section id="faq" class="faq">
-    <div class="container">
-      <h2 data-lang="es">Preguntas Frecuentes</h2>
-      <h2 data-lang="en" style="display:none;">Frequently Asked Questions</h2>
+  <!-- FAQ SECTION -->
+  <section id="faq" class="py-20 md:py-24 bg-gray-50">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-14">
+        <h2 class="text-3xl md:text-4xl font-bold text-brand-deep mb-4" data-lang="es">Preguntas Frecuentes</h2>
+        <h2 class="text-3xl md:text-4xl font-bold text-brand-deep mb-4" data-lang="en" style="display:none;">Frequently Asked Questions</h2>
+        
+        <p class="text-lg text-gray-600" data-lang="es">
+          Encuentra respuestas a las preguntas más comunes sobre seguros de gastos finales.
+        </p>
+        <p class="text-lg text-gray-600" data-lang="en" style="display:none;">
+          Find answers to the most common questions about final expense insurance.
+        </p>
+      </div>
 
-      <p class="section-subtitle" data-lang="es">
-        Encuentra respuestas a las preguntas más comunes sobre seguros de gastos finales.
+      <div class="space-y-4">
+        <!-- FAQ Item 1 -->
+        <div class="bg-white rounded-xl p-6 shadow-sm">
+          <h3 class="text-lg font-bold text-brand-deep mb-2" data-lang="es">¿Qué es un seguro de gastos finales?</h3>
+          <h3 class="text-lg font-bold text-brand-deep mb-2" data-lang="en" style="display:none;">What is final expense insurance?</h3>
+          <p class="text-gray-600 text-sm leading-relaxed" data-lang="es">
+            Un seguro de gastos finales es un tipo de seguro de vida diseñado específicamente para cubrir los costos asociados con el funeral, entierro, facturas médicas y otras deudas pequeñas al final de la vida. Ayuda a aliviar la carga financiera de tu familia durante un momento difícil.
+          </p>
+          <p class="text-gray-600 text-sm leading-relaxed" data-lang="en" style="display:none;">
+            Final expense insurance is a type of life insurance specifically designed to cover costs associated with funeral, burial, medical bills, and other small end-of-life debts. It helps relieve the financial burden on your family during a difficult time.
+          </p>
+        </div>
+
+        <!-- FAQ Item 2 -->
+        <div class="bg-white rounded-xl p-6 shadow-sm">
+          <h3 class="text-lg font-bold text-brand-deep mb-2" data-lang="es">¿Cuánto cuesta un seguro de gastos finales?</h3>
+          <h3 class="text-lg font-bold text-brand-deep mb-2" data-lang="en" style="display:none;">How much does final expense insurance cost?</h3>
+          <p class="text-gray-600 text-sm leading-relaxed" data-lang="es">
+            El costo varía según tu edad, salud y la cantidad de cobertura que elijas. Las primas suelen ser asequibles y se mantienen niveladas durante toda la vida de la póliza. Contáctanos para obtener una cotización personalizada gratuita.
+          </p>
+          <p class="text-gray-600 text-sm leading-relaxed" data-lang="en" style="display:none;">
+            The cost varies based on your age, health, and the amount of coverage you choose. Premiums are typically affordable and remain level for the life of the policy. Contact us for a free personalized quote.
+          </p>
+        </div>
+
+        <!-- FAQ Item 3 -->
+        <div class="bg-white rounded-xl p-6 shadow-sm">
+          <h3 class="text-lg font-bold text-brand-deep mb-2" data-lang="es">¿Necesito un examen médico para calificar?</h3>
+          <h3 class="text-lg font-bold text-brand-deep mb-2" data-lang="en" style="display:none;">Do I need a medical exam to qualify?</h3>
+          <p class="text-gray-600 text-sm leading-relaxed" data-lang="es">
+            En muchos casos, no se requiere un examen médico. Muchas pólizas de gastos finales utilizan cuestionarios de salud simplificados. Dependiendo de tus respuestas y tu historial, las aseguradoras pueden ofrecer diferentes niveles de aceptación.
+          </p>
+          <p class="text-gray-600 text-sm leading-relaxed" data-lang="en" style="display:none;">
+            In many cases, no medical exam is required. Many final expense policies use simplified health questionnaires. Depending on your answers and history, insurers may offer different levels of acceptance.
+          </p>
+        </div>
+
+        <!-- FAQ Item 4 -->
+        <div class="bg-white rounded-xl p-6 shadow-sm">
+          <h3 class="text-lg font-bold text-brand-deep mb-2" data-lang="es">¿Cuánto tiempo toma obtener una póliza?</h3>
+          <h3 class="text-lg font-bold text-brand-deep mb-2" data-lang="en" style="display:none;">How long does it take to get a policy?</h3>
+          <p class="text-gray-600 text-sm leading-relaxed" data-lang="es">
+            El proceso puede ser rápido. Después de completar el formulario de cotización y hablar con Julie, muchas pólizas pueden ser aprobadas en cuestión de días, dependiendo de la aseguradora y tu situación de salud.
+          </p>
+          <p class="text-gray-600 text-sm leading-relaxed" data-lang="en" style="display:none;">
+            The process can be quick. After completing the quote form and speaking with Julie, many policies can be approved within days, depending on the insurer and your health situation.
+          </p>
+        </div>
+
+        <!-- FAQ Item 5 -->
+        <div class="bg-white rounded-xl p-6 shadow-sm">
+          <h3 class="text-lg font-bold text-brand-deep mb-2" data-lang="es">¿Ofrecen servicio en español?</h3>
+          <h3 class="text-lg font-bold text-brand-deep mb-2" data-lang="en" style="display:none;">Do you offer service in Spanish?</h3>
+          <p class="text-gray-600 text-sm leading-relaxed" data-lang="es">
+            Sí, Julie ofrece atención personalizada tanto en español como en inglés. Entendemos la importancia de comunicarnos en tu idioma preferido para que te sientas cómodo y comprendas completamente tus opciones de seguro.
+          </p>
+          <p class="text-gray-600 text-sm leading-relaxed" data-lang="en" style="display:none;">
+            Yes, Julie offers personalized service in both Spanish and English. We understand the importance of communicating in your preferred language so you feel comfortable and fully understand your insurance options.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA SECTION -->
+  <section class="hero-bg-pattern py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+      <h2 class="text-3xl md:text-4xl font-bold text-white mb-4" data-lang="es">¿Listo para proteger a tu familia?</h2>
+      <h2 class="text-3xl md:text-4xl font-bold text-white mb-4" data-lang="en" style="display:none;">Ready to protect your family?</h2>
+      
+      <p class="text-lg text-blue-100 mb-8" data-lang="es">
+        Agenda una consulta gratuita con Julie y descubre tus opciones de seguro de gastos finales.
       </p>
-      <p class="section-subtitle" data-lang="en" style="display:none;">
-        Find answers to the most common questions about final expense insurance.
+      <p class="text-lg text-blue-100 mb-8" data-lang="en" style="display:none;">
+        Schedule a free consultation with Julie and discover your final expense insurance options.
       </p>
-
-      <div class="faq-item">
-        <h3 data-lang="es">¿Qué es un seguro de gastos finales?</h3>
-        <h3 data-lang="en" style="display:none;">What is final expense insurance?</h3>
-        <p data-lang="es">
-          Un seguro de gastos finales es un tipo de seguro de vida diseñado específicamente para cubrir los costos asociados con el funeral, entierro, facturas médicas y otras deudas pequeñas al final de la vida. Ayuda a aliviar la carga financiera de tu familia durante un momento difícil.
-        </p>
-        <p data-lang="en" style="display:none;">
-          Final expense insurance is a type of life insurance specifically designed to cover costs associated with funeral, burial, medical bills, and other small end-of-life debts. It helps relieve the financial burden on your family during a difficult time.
-        </p>
-      </div>
-
-      <div class="faq-item">
-        <h3 data-lang="es">¿Cuánto cuesta un seguro de gastos finales?</h3>
-        <h3 data-lang="en" style="display:none;">How much does final expense insurance cost?</h3>
-        <p data-lang="es">
-          El costo de un seguro de gastos finales varía según tu edad, salud y la cantidad de cobertura que elijas. Las primas suelen ser asequibles y se mantienen niveladas durante toda la vida de la póliza. Contáctanos para obtener una cotización personalizada gratuita.
-        </p>
-        <p data-lang="en" style="display:none;">
-          The cost of final expense insurance varies based on your age, health, and the amount of coverage you choose. Premiums are typically affordable and remain level for the life of the policy. Contact us for a free personalized quote.
-        </p>
-      </div>
-
-      <div class="faq-item">
-        <h3 data-lang="es">¿Necesito un examen médico para calificar?</h3>
-        <h3 data-lang="en" style="display:none;">Do I need a medical exam to qualify?</h3>
-        <p data-lang="es">
-          En muchos casos, no se requiere un examen médico. Muchas pólizas de gastos finales utilizan cuestionarios de salud simplificados. Dependiendo de tus respuestas y tu historial, las aseguradoras pueden ofrecer diferentes niveles de aceptación.
-        </p>
-        <p data-lang="en" style="display:none;">
-          In many cases, no medical exam is required. Many final expense policies use simplified health questionnaires. Depending on your answers and history, insurers may offer different levels of acceptance.
-        </p>
-      </div>
-
-      <div class="faq-item">
-        <h3 data-lang="es">¿Qué compañías de seguros trabajan con Mejor Vida Insurance?</h3>
-        <h3 data-lang="en" style="display:none;">What insurance companies does Mejor Vida Insurance work with?</h3>
-        <p data-lang="es">
-          Como agente independiente, Julie trabaja con varias aseguradoras reconocidas, incluyendo Aetna y Mutual of Omaha. Esto le permite comparar opciones y encontrar la mejor póliza para tu situación específica y presupuesto.
-        </p>
-        <p data-lang="en" style="display:none;">
-          As an independent agent, Julie works with several well-known insurance companies, including Aetna and Mutual of Omaha. This allows her to compare options and find the best policy for your specific situation and budget.
-        </p>
-      </div>
-
-      <div class="faq-item">
-        <h3 data-lang="es">¿Cuánto tiempo toma obtener una póliza?</h3>
-        <h3 data-lang="en" style="display:none;">How long does it take to get a policy?</h3>
-        <p data-lang="es">
-          El proceso puede ser rápido. Después de completar el formulario de cotización y hablar con Julie, muchas pólizas pueden ser aprobadas en cuestión de días, dependiendo de la aseguradora y tu situación de salud.
-        </p>
-        <p data-lang="en" style="display:none;">
-          The process can be quick. After completing the quote form and speaking with Julie, many policies can be approved within days, depending on the insurer and your health situation.
-        </p>
-      </div>
-
-      <div class="faq-item">
-        <h3 data-lang="es">¿Ofrecen servicio en español?</h3>
-        <h3 data-lang="en" style="display:none;">Do you offer service in Spanish?</h3>
-        <p data-lang="es">
-          Sí, Julie ofrece atención personalizada tanto en español como en inglés. Entendemos la importancia de comunicarnos en tu idioma preferido para que te sientas cómodo y comprendas completamente tus opciones de seguro.
-        </p>
-        <p data-lang="en" style="display:none;">
-          Yes, Julie offers personalized service in both Spanish and English. We understand the importance of communicating in your preferred language so you feel comfortable and fully understand your insurance options.
-        </p>
-      </div>
+      
+      <a href="/quote.html" class="btn-primary-gold px-10 py-4 rounded font-bold text-lg inline-flex items-center" data-lang="es">
+        <i class="fas fa-calendar-check mr-2"></i>¡Cotización gratis!
+      </a>
+      <a href="/quote.html" class="btn-primary-gold px-10 py-4 rounded font-bold text-lg inline-flex items-center" data-lang="en" style="display:none;">
+        <i class="fas fa-calendar-check mr-2"></i>Get Free Quote!
+      </a>
     </div>
   </section>
 
   <!-- FOOTER -->
-  <footer class="footer">
-    <div class="container footer-bottom">
-      <div class="footer-left">
-        <p>
-          &copy; <span id="year"></span> Mejor Vida Insurance LLC. All rights reserved.
-        </p>
-        <p>
-          P.O. Box 21885, Lincoln, NE 68542
-        </p>
-        <p data-lang="es">
-          Julie es una productora de seguros autorizada en el estado de Nebraska para Accident and Health or Sickness y Life.
-        </p>
-        <p data-lang="en" style="display:none;">
-          Julie is a licensed insurance producer in the State of Nebraska for Accident and Health or Sickness, and Life.
-        </p>
-        <p>
-          <span data-lang="es">Tel: </span><span data-lang="en" style="display:none;">Phone: </span>
-          <a href="tel:5312291712">(531) 229‑1712</a> |
-          <a href="mailto:Julie@mejorvidainsurance.com">Julie@mejorvidainsurance.com</a>
-        </p>
-        <p>
-          <a href="privacy-policy.html" data-lang="es">Política de Privacidad</a> | 
-          <a href="terms-service.html" data-lang="es">Términos de Servicio</a>
-          <a href="privacy-policy.html" data-lang="en" style="display:none;">Privacy Policy</a> | 
-          <a href="terms-service.html" data-lang="en" style="display:none;">Terms of Service</a>
-        </p>
-      </div>
-      <div class="footer-right">
-        <span data-lang="es">Síguenos:</span>
-        <span data-lang="en" style="display:none;">Follow us:</span>
+  <footer class="bg-brand-deep py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid md:grid-cols-3 gap-8 text-white">
+        <!-- Column 1: Logo & Contact -->
+        <div>
+          <img src="img/logo-english.png" alt="Mejor Vida Insurance" class="h-14 mb-4 brightness-0 invert" />
+          <p class="text-blue-200 text-sm mb-4" data-lang="es">
+            Protegiendo familias con seguros de gastos finales asequibles y personalizados.
+          </p>
+          <p class="text-blue-200 text-sm mb-4" data-lang="en" style="display:none;">
+            Protecting families with affordable and personalized final expense insurance.
+          </p>
+          <div class="space-y-2 text-sm">
+            <p><i class="fas fa-phone mr-2 text-brand-light"></i><a href="tel:5312291712" class="hover:text-brand-light">(531) 229-1712</a></p>
+            <p><i class="fas fa-envelope mr-2 text-brand-light"></i><a href="mailto:Julie@mejorvidainsurance.com" class="hover:text-brand-light">Julie@mejorvidainsurance.com</a></p>
+            <p><i class="fas fa-map-marker-alt mr-2 text-brand-light"></i>P.O. Box 21885, Lincoln, NE 68542</p>
+          </div>
+        </div>
 
-        <!-- Font Awesome social icons -->
-        <a
-          href="https://www.facebook.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Facebook"
-        >
-          <i class="fab fa-facebook-f"></i>
-        </a>
-        <a
-          href="https://www.instagram.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Instagram"
-        >
-          <i class="fab fa-instagram"></i>
-        </a>
-        <a
-          href="https://www.linkedin.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="LinkedIn"
-        >
-          <i class="fab fa-linkedin-in"></i>
-        </a>
+        <!-- Column 2: Quick Links -->
+        <div>
+          <h4 class="font-bold text-lg mb-4" data-lang="es">Enlaces rápidos</h4>
+          <h4 class="font-bold text-lg mb-4" data-lang="en" style="display:none;">Quick Links</h4>
+          <ul class="space-y-2 text-sm text-blue-200">
+            <li><a href="#about" class="hover:text-white" data-lang="es">Sobre Julie</a><a href="#about" class="hover:text-white" data-lang="en" style="display:none;">About Julie</a></li>
+            <li><a href="#how-it-works" class="hover:text-white" data-lang="es">Cómo funciona</a><a href="#how-it-works" class="hover:text-white" data-lang="en" style="display:none;">How It Works</a></li>
+            <li><a href="#carriers" class="hover:text-white" data-lang="es">Aseguradoras</a><a href="#carriers" class="hover:text-white" data-lang="en" style="display:none;">Carriers</a></li>
+            <li><a href="#faq" class="hover:text-white">FAQ</a></li>
+            <li><a href="/quote.html" class="hover:text-white" data-lang="es">Cotización gratis</a><a href="/quote.html" class="hover:text-white" data-lang="en" style="display:none;">Free Quote</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 3: Legal -->
+        <div>
+          <h4 class="font-bold text-lg mb-4">Legal</h4>
+          <ul class="space-y-2 text-sm text-blue-200">
+            <li><a href="privacy-policy.html" class="hover:text-white" data-lang="es">Política de Privacidad</a><a href="privacy-policy.html" class="hover:text-white" data-lang="en" style="display:none;">Privacy Policy</a></li>
+            <li><a href="terms-service.html" class="hover:text-white" data-lang="es">Términos de Servicio</a><a href="terms-service.html" class="hover:text-white" data-lang="en" style="display:none;">Terms of Service</a></li>
+          </ul>
+          <p class="text-xs text-blue-300 mt-4" data-lang="es">
+            Julie es una productora de seguros autorizada en el estado de Nebraska para Accident and Health or Sickness y Life.
+          </p>
+          <p class="text-xs text-blue-300 mt-4" data-lang="en" style="display:none;">
+            Julie is a licensed insurance producer in the State of Nebraska for Accident and Health or Sickness, and Life.
+          </p>
+          
+          <!-- Social Icons -->
+          <div class="flex gap-4 mt-6">
+            <a href="https://www.facebook.com/" target="_blank" class="text-white hover:text-brand-light text-xl"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/" target="_blank" class="text-white hover:text-brand-light text-xl"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.linkedin.com/" target="_blank" class="text-white hover:text-brand-light text-xl"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="border-t border-blue-800 mt-8 pt-8 text-center text-blue-300 text-sm">
+        <p>&copy; <span id="year"></span> Mejor Vida Insurance LLC. All rights reserved.</p>
       </div>
     </div>
   </footer>
 
-  <!-- Language toggle and quote button script -->
-  <script>
-    const langButtons = document.querySelectorAll('.lang-btn');
-    function setLanguage(lang) {
-      document.querySelectorAll('[data-lang="es"]').forEach(el => el.style.display = lang === 'es' ? '' : 'none');
-      document.querySelectorAll('[data-lang="en"]').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
-      langButtons.forEach(btn => btn.classList.toggle('active', btn.dataset.langBtn === lang));
-    }
-    langButtons.forEach(btn => btn.addEventListener('click', () => setLanguage(btn.dataset.langBtn)));
-    setLanguage('es');
-
-    // Update all quote buttons to open quote.html in same tab
-    document.querySelectorAll('.btn-quote').forEach(btn => {
-      btn.addEventListener('click', e => {
-        e.preventDefault();
-        window.location.href = '/quote.html';
-      });
-    });
-
-    // Set current year in footer
-    const yearSpan = document.getElementById('year');
-    if (yearSpan) yearSpan.textContent = new Date().getFullYear();
-  </script>
-
+  <!-- Scripts -->
+  <script src="script.js"></script>
+  
   <!-- Chat widget loader -->
   <script 
     src="https://widgets.leadconnectorhq.com/loader.js"  
