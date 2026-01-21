@@ -139,6 +139,8 @@
             'brand-accent': '#90cdf4',
             'brand-cream': '#ebf8ff',
             'brand-warm': '#bee3f8',
+            'brand-dark-blue': '#0D47A1',
+            'brand-light-blue': '#90CDF4',
           },
           fontFamily: {
             'sans': ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
@@ -200,46 +202,37 @@
       border-radius: 12px;
     }
     
-    /* Geometric background pattern */
-    .hero-bg-pattern {
-      background: 
-        linear-gradient(135deg, rgba(26, 54, 93, 0.97) 0%, rgba(30, 64, 175, 0.95) 50%, rgba(37, 99, 235, 0.93) 100%);
+    /* Two-tone blue hero background */
+    .hero-two-tone {
       position: relative;
+      background: linear-gradient(180deg, #0D47A1 0%, #0D47A1 60%, #90CDF4 60%, #90CDF4 100%);
+    }
+    
+    .hero-wave-container {
+      position: absolute;
+      top: 55%;
+      left: 0;
+      width: 100%;
       overflow: hidden;
+      line-height: 0;
+      z-index: 1;
     }
     
-    .hero-bg-pattern::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      right: -20%;
-      width: 80%;
-      height: 200%;
-      background: radial-gradient(ellipse at center, rgba(99, 179, 237, 0.3) 0%, transparent 70%);
-      transform: rotate(-15deg);
+    .hero-wave-container svg {
+      position: relative;
+      display: block;
+      width: calc(100% + 1.3px);
+      height: 100px;
     }
     
-    .hero-bg-pattern::after {
-      content: '';
-      position: absolute;
-      bottom: -30%;
-      left: -10%;
-      width: 60%;
-      height: 100%;
-      background: radial-gradient(ellipse at center, rgba(144, 205, 244, 0.2) 0%, transparent 60%);
-      transform: rotate(20deg);
+    .hero-wave-container .shape-fill {
+      fill: #90CDF4;
     }
     
-    /* Blob shape decoration */
-    .blob-shape {
-      position: absolute;
-      right: 0;
-      top: 0;
-      width: 50%;
-      height: 100%;
-      opacity: 0.15;
-      background: url("data:image/svg+xml,%3Csvg viewBox='0 0 500 500' xmlns='https://i.pinimg.com/736x/92/bf/c7/92bfc7a5e5293c6e1b3a2ff53286e6e2.jpg fill='%2390cdf4' d='M440.5,320.5Q418,391,355.5,442.5Q293,494,226,450.5Q159,407,99,356Q39,305,26.5,244.5Q14,184,62.5,128Q111,72,180,47.5Q249,23,314,54Q379,85,423.5,128Q468,171,456.5,245.5Q445,320,440.5,320.5Z'/%3E%3C/svg%3E") no-repeat center;
-      background-size: contain;
+    /* Hero content overlay */
+    .hero-content-overlay {
+      position: relative;
+      z-index: 2;
     }
     
     /* Button hover effects */
@@ -255,6 +248,42 @@
       border-color: #4299e1;
       transform: translateY(-2px);
       box-shadow: 0 4px 12px rgba(99, 179, 237, 0.4);
+    }
+    
+    /* Header CTA button */
+    .btn-header-cta {
+      background-color: #63b3ed;
+      color: #1a365d;
+      border-radius: 4px;
+      padding: 8px 16px;
+      font-size: 14px;
+      font-weight: 700;
+      border: none;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      transition: all 0.15s cubic-bezier(0, 0, 0.2, 1);
+    }
+    
+    .btn-header-cta:hover {
+      background-color: #4299e1;
+      box-shadow: 0 4px 8px rgba(99, 179, 237, 0.4);
+      transform: translateY(-1px);
+    }
+    
+    /* Header navigation links - ChoiceMutual style */
+    .nav-link-cm {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      letter-spacing: normal;
+      color: #2563eb;
+      text-decoration: none;
+      padding: 8px 12px;
+      transition: all 0.15s cubic-bezier(0, 0, 0.2, 1);
+    }
+    
+    .nav-link-cm:hover {
+      color: #1e40af;
+      text-decoration: underline;
     }
     
     /* Card hover effects */
@@ -291,6 +320,78 @@
       background-color: #63b3ed;
       transform: scale(1.2);
     }
+    
+    /* Logo sizes */
+    .header-logo {
+      height: 150px;
+      width: auto;
+    }
+    
+    @media (max-width: 1024px) {
+      .header-logo {
+        height: 120px;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .header-logo {
+        height: 80px;
+      }
+    }
+    
+    /* Mobile menu */
+    .mobile-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: white;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      padding: 16px;
+      z-index: 100;
+    }
+    
+    .mobile-menu.active {
+      display: block;
+    }
+    
+    .mobile-menu a {
+      display: block;
+      padding: 12px 16px;
+      color: #1a365d;
+      font-weight: 500;
+      border-bottom: 1px solid #e5e7eb;
+      transition: background-color 0.15s;
+    }
+    
+    .mobile-menu a:hover {
+      background-color: #f3f4f6;
+    }
+    
+    .mobile-menu a:last-child {
+      border-bottom: none;
+    }
+    
+    .hamburger-btn {
+      display: none;
+      padding: 8px;
+      cursor: pointer;
+      font-size: 24px;
+      color: #1a365d;
+    }
+    
+    @media (max-width: 768px) {
+      .hamburger-btn {
+        display: block;
+      }
+      .desktop-nav {
+        display: none !important;
+      }
+      .desktop-cta {
+        display: none !important;
+      }
+    }
   </style>
 </head>
 <body class="font-sans text-gray-800 bg-white">
@@ -298,29 +399,43 @@
   <!-- HEADER -->
   <header class="sticky top-0 z-50 bg-white shadow-sm border-b border-gray-100">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-20">
+      <div class="flex items-center justify-between py-2">
         <!-- Logo -->
         <div class="flex-shrink-0">
           <a href="#home" class="block">
-            <img id="header-logo" src="img/logo-spanish.png" alt="Mejor Vida Insurance logo" class="h-16 w-auto" />
+            <img id="header-logo" src="img/logo-spanish.png" alt="Mejor Vida Insurance logo" class="header-logo" />
           </a>
         </div>
 
-        <!-- Navigation & Language Toggle -->
-        <div class="flex items-center gap-6">
-          <nav class="hidden md:flex items-center gap-6">
-            <a href="#about" data-lang="es" class="text-gray-700 font-semibold text-sm hover:text-brand-blue transition-colors">Sobre Julie</a>
-            <a href="#about" data-lang="en" style="display:none;" class="text-gray-700 font-semibold text-sm hover:text-brand-blue transition-colors">About Julie</a>
-            
-            <a href="#how-it-works" data-lang="es" class="text-gray-700 font-semibold text-sm hover:text-brand-blue transition-colors">Cómo funciona</a>
-            <a href="#how-it-works" data-lang="en" style="display:none;" class="text-gray-700 font-semibold text-sm hover:text-brand-blue transition-colors">How it works</a>
-            
-            <a href="#carriers" data-lang="es" class="text-gray-700 font-semibold text-sm hover:text-brand-blue transition-colors">Aseguradoras</a>
-            <a href="#carriers" data-lang="en" style="display:none;" class="text-gray-700 font-semibold text-sm hover:text-brand-blue transition-colors">Carriers</a>
-            
-            <a href="#faq" data-lang="es" class="text-gray-700 font-semibold text-sm hover:text-brand-blue transition-colors">FAQ</a>
-            <a href="#faq" data-lang="en" style="display:none;" class="text-gray-700 font-semibold text-sm hover:text-brand-blue transition-colors">FAQ</a>
-          </nav>
+        <!-- Navigation - Desktop -->
+        <nav class="desktop-nav hidden md:flex items-center justify-center flex-1 gap-2 lg:gap-4">
+          <a href="#about" data-lang="es" class="nav-link-cm">Sobre Julie</a>
+          <a href="#about" data-lang="en" style="display:none;" class="nav-link-cm">About Julie</a>
+          
+          <a href="#how-it-works" data-lang="es" class="nav-link-cm">Cómo funciona</a>
+          <a href="#how-it-works" data-lang="en" style="display:none;" class="nav-link-cm">How it works</a>
+          
+          <a href="#carriers" data-lang="es" class="nav-link-cm">Aseguradoras</a>
+          <a href="#carriers" data-lang="en" style="display:none;" class="nav-link-cm">Carriers</a>
+          
+          <a href="#faq" data-lang="es" class="nav-link-cm">FAQ</a>
+          <a href="#faq" data-lang="en" style="display:none;" class="nav-link-cm">FAQ</a>
+        </nav>
+
+        <!-- CTA Button & Language Toggle - Desktop -->
+        <div class="flex items-center gap-4">
+          <!-- Header CTA with phone -->
+          <div class="desktop-cta hidden md:flex flex-col items-center">
+            <a href="tel:+15312291712" class="text-xs text-gray-600 hover:text-brand-blue mb-1">
+              <i class="fas fa-phone mr-1"></i>(531) 229-1712
+            </a>
+            <a href="tel:+15312291712" data-lang="es" class="btn-header-cta">
+              Hable con un Agente
+            </a>
+            <a href="tel:+15312291712" data-lang="en" style="display:none;" class="btn-header-cta">
+              Speak to an Agent
+            </a>
+          </div>
 
           <!-- Language Toggle -->
           <div class="flex gap-2">
@@ -332,23 +447,46 @@
             </button>
           </div>
 
-          <!-- CTA Button -->
-          <a href="/quote.html" data-lang="es" class="hidden sm:inline-flex btn-primary-gold px-5 py-2.5 rounded font-bold text-sm">
-            Cotización gratis
-          </a>
-          <a href="/quote.html" data-lang="en" style="display:none;" class="hidden sm:inline-flex btn-primary-gold px-5 py-2.5 rounded font-bold text-sm">
-            Free Quote
-          </a>
+          <!-- Hamburger Menu Button -->
+          <button class="hamburger-btn" id="hamburger-btn" aria-label="Open menu">
+            ☰
+          </button>
         </div>
       </div>
     </div>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobile-menu">
+      <a href="#about" data-lang="es" class="mobile-menu-link">Sobre Julie</a>
+      <a href="#about" data-lang="en" style="display:none;" class="mobile-menu-link">About Julie</a>
+      <a href="#how-it-works" data-lang="es" class="mobile-menu-link">Cómo funciona</a>
+      <a href="#how-it-works" data-lang="en" style="display:none;" class="mobile-menu-link">How it works</a>
+      <a href="#carriers" data-lang="es" class="mobile-menu-link">Aseguradoras</a>
+      <a href="#carriers" data-lang="en" style="display:none;" class="mobile-menu-link">Carriers</a>
+      <a href="#faq" data-lang="es" class="mobile-menu-link">FAQ</a>
+      <a href="#faq" data-lang="en" style="display:none;" class="mobile-menu-link">FAQ</a>
+      <a href="tel:+15312291712" class="mobile-menu-link text-brand-blue font-bold">
+        <i class="fas fa-phone mr-2"></i>(531) 229-1712
+      </a>
+      <a href="/quote.html" data-lang="es" class="mobile-menu-link bg-brand-light text-brand-deep font-bold text-center rounded mt-2">
+        Cotización gratis
+      </a>
+      <a href="/quote.html" data-lang="en" style="display:none;" class="mobile-menu-link bg-brand-light text-brand-deep font-bold text-center rounded mt-2">
+        Free Quote
+      </a>
+    </div>
   </header>
 
-  <!-- HERO SECTION -->
-  <section id="home" class="hero-bg-pattern py-16 md:py-24 relative">
-    <div class="blob-shape"></div>
+  <!-- HERO SECTION - Two-tone blue with wave -->
+  <section id="home" class="hero-two-tone py-16 md:py-24 relative">
+    <!-- SVG Wave Divider -->
+    <div class="hero-wave-container">
+      <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+        <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+      </svg>
+    </div>
     
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 hero-content-overlay">
       <div class="grid lg:grid-cols-2 gap-12 items-center">
         <!-- Hero Text -->
         <div class="text-white">
@@ -379,9 +517,6 @@
             </a>
             <a href="/quote.html" class="btn-primary-gold px-8 py-4 rounded font-bold text-base text-center" data-lang="en" style="display:none;">
               <i class="fas fa-calendar-check mr-2"></i>Get a Free Quote!
-            </a>
-            <a href="tel:5312291712" class="border-2 border-white/50 text-white px-6 py-4 rounded font-semibold text-base text-center hover:bg-white/10 transition-all">
-              <i class="fas fa-phone mr-2"></i>(531) 229-1712
             </a>
           </div>
 
@@ -783,8 +918,13 @@
   </section>
 
   <!-- CTA SECTION -->
-  <section class="hero-bg-pattern py-16">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+  <section class="hero-two-tone py-16 relative">
+    <div class="hero-wave-container" style="top: 45%;">
+      <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+        <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+      </svg>
+    </div>
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center hero-content-overlay">
       <h2 class="text-3xl md:text-4xl font-bold text-white mb-4" data-lang="es">¿Listo para proteger a tu familia?</h2>
       <h2 class="text-3xl md:text-4xl font-bold text-white mb-4" data-lang="en" style="display:none;">Ready to protect your family?</h2>
       
@@ -818,7 +958,7 @@
             Protecting families with affordable and personalized final expense insurance.
           </p>
           <div class="space-y-2 text-sm">
-            <p><i class="fas fa-phone mr-2 text-brand-light"></i><a href="tel:5312291712" class="hover:text-brand-light">(531) 229-1712</a></p>
+            <p><i class="fas fa-phone mr-2 text-brand-light"></i><a href="tel:+15312291712" class="hover:text-brand-light">(531) 229-1712</a></p>
             <p><i class="fas fa-envelope mr-2 text-brand-light"></i><a href="mailto:Julie@mejorvidainsurance.com" class="hover:text-brand-light">Julie@mejorvidainsurance.com</a></p>
             <p><i class="fas fa-map-marker-alt mr-2 text-brand-light"></i>P.O. Box 21885, Lincoln, NE 68542</p>
           </div>
@@ -832,47 +972,79 @@
             <li><a href="#about" class="hover:text-white" data-lang="es">Sobre Julie</a><a href="#about" class="hover:text-white" data-lang="en" style="display:none;">About Julie</a></li>
             <li><a href="#how-it-works" class="hover:text-white" data-lang="es">Cómo funciona</a><a href="#how-it-works" class="hover:text-white" data-lang="en" style="display:none;">How It Works</a></li>
             <li><a href="#carriers" class="hover:text-white" data-lang="es">Aseguradoras</a><a href="#carriers" class="hover:text-white" data-lang="en" style="display:none;">Carriers</a></li>
-            <li><a href="#faq" class="hover:text-white">FAQ</a></li>
+            <li><a href="#faq" class="hover:text-white" data-lang="es">Preguntas frecuentes</a><a href="#faq" class="hover:text-white" data-lang="en" style="display:none;">FAQ</a></li>
             <li><a href="/quote.html" class="hover:text-white" data-lang="es">Cotización gratis</a><a href="/quote.html" class="hover:text-white" data-lang="en" style="display:none;">Free Quote</a></li>
           </ul>
         </div>
 
-        <!-- Column 3: Legal -->
+        <!-- Column 3: Legal & Hours -->
         <div>
-          <h4 class="font-bold text-lg mb-4">Legal</h4>
-          <ul class="space-y-2 text-sm text-blue-200">
-            <li><a href="privacy-policy.html" class="hover:text-white" data-lang="es">Política de Privacidad</a><a href="privacy-policy.html" class="hover:text-white" data-lang="en" style="display:none;">Privacy Policy</a></li>
-            <li><a href="terms-service.html" class="hover:text-white" data-lang="es">Términos de Servicio</a><a href="terms-service.html" class="hover:text-white" data-lang="en" style="display:none;">Terms of Service</a></li>
-          </ul>
-          <p class="text-xs text-blue-300 mt-4" data-lang="es">
-            Julie es una productora de seguros autorizada en el estado de Nebraska para Accident and Health or Sickness y Life.
+          <h4 class="font-bold text-lg mb-4" data-lang="es">Horarios</h4>
+          <h4 class="font-bold text-lg mb-4" data-lang="en" style="display:none;">Hours</h4>
+          <p class="text-sm text-blue-200 mb-4" data-lang="es">
+            Lunes – Viernes: 9am – 5pm<br>
+            Sábado: Con cita previa<br>
+            Domingo: Cerrado
           </p>
-          <p class="text-xs text-blue-300 mt-4" data-lang="en" style="display:none;">
-            Julie is a licensed insurance producer in the State of Nebraska for Accident and Health or Sickness, and Life.
+          <p class="text-sm text-blue-200 mb-4" data-lang="en" style="display:none;">
+            Monday – Friday: 9am – 5pm<br>
+            Saturday: By appointment<br>
+            Sunday: Closed
           </p>
-          
-          <!-- Social Icons -->
-          <div class="flex gap-4 mt-6">
-            <a href="https://www.facebook.com/" target="_blank" class="text-white hover:text-brand-light text-xl"><i class="fab fa-facebook-f"></i></a>
-            <a href="https://www.instagram.com/" target="_blank" class="text-white hover:text-brand-light text-xl"><i class="fab fa-instagram"></i></a>
-            <a href="https://www.linkedin.com/" target="_blank" class="text-white hover:text-brand-light text-xl"><i class="fab fa-linkedin-in"></i></a>
-          </div>
+          <a href="privacy-policy.html" class="text-sm text-blue-200 hover:text-white" data-lang="es">Política de privacidad</a>
+          <a href="privacy-policy.html" class="text-sm text-blue-200 hover:text-white" data-lang="en" style="display:none;">Privacy Policy</a>
         </div>
       </div>
 
-      <div class="border-t border-blue-800 mt-8 pt-8 text-center text-blue-300 text-sm">
-        <p>&copy; <span id="year"></span> Mejor Vida Insurance LLC. All rights reserved.</p>
+      <!-- License Information -->
+      <div class="border-t border-blue-800 mt-8 pt-6">
+        <p class="text-sm text-blue-200 text-center mb-2" data-lang="es">
+          Julie es una agente de seguros licenciada en el estado de Nebraska. Licencia de Productor de Seguros #21695431.
+        </p>
+        <p class="text-sm text-blue-200 text-center mb-2" data-lang="en" style="display:none;">
+          Julie is a licensed insurance agent in the state of Nebraska. Insurance Producer License #21695431.
+        </p>
+        <p class="text-sm text-blue-300 text-center">&copy; <span id="year"></span> Mejor Vida Insurance LLC. All rights reserved.</p>
       </div>
     </div>
   </footer>
 
   <!-- Scripts -->
   <script src="script.js"></script>
-  
+
+  <!-- Mobile menu script -->
+  <script>
+    // Mobile hamburger menu
+    const hamburgerBtn = document.getElementById('hamburger-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    hamburgerBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      mobileMenu.classList.toggle('active');
+      hamburgerBtn.textContent = mobileMenu.classList.contains('active') ? '✕' : '☰';
+    });
+    
+    // Close menu when clicking outside
+    document.addEventListener('click', function(e) {
+      if (!mobileMenu.contains(e.target) && !hamburgerBtn.contains(e.target)) {
+        mobileMenu.classList.remove('active');
+        hamburgerBtn.textContent = '☰';
+      }
+    });
+    
+    // Close menu when clicking a link
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', function() {
+        mobileMenu.classList.remove('active');
+        hamburgerBtn.textContent = '☰';
+      });
+    });
+  </script>
+
   <!-- Chat widget loader -->
-  <script 
-    src="https://widgets.leadconnectorhq.com/loader.js"  
-    data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" 
+  <script
+    src="https://widgets.leadconnectorhq.com/loader.js"
+    data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js"
     data-widget-id="6935d169d355bd236df7342d"></script>
 </body>
 </html>

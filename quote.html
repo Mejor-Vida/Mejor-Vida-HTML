@@ -27,6 +27,8 @@
             'brand-accent': '#90cdf4',
             'brand-cream': '#ebf8ff',
             'brand-warm': '#bee3f8',
+            'brand-dark-blue': '#0D47A1',
+            'brand-light-blue': '#90CDF4',
           },
           fontFamily: {
             'sans': ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
@@ -45,34 +47,37 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
-    /* Geometric background pattern */
-    .hero-bg-pattern {
-      background: 
-        linear-gradient(135deg, rgba(26, 54, 93, 0.97) 0%, rgba(30, 64, 175, 0.95) 50%, rgba(37, 99, 235, 0.93) 100%);
+    /* Two-tone blue hero background */
+    .hero-two-tone {
       position: relative;
+      background: linear-gradient(180deg, #0D47A1 0%, #0D47A1 60%, #90CDF4 60%, #90CDF4 100%);
+    }
+    
+    .hero-wave-container {
+      position: absolute;
+      top: 55%;
+      left: 0;
+      width: 100%;
       overflow: hidden;
+      line-height: 0;
+      z-index: 1;
     }
     
-    .hero-bg-pattern::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      right: -20%;
-      width: 80%;
-      height: 200%;
-      background: radial-gradient(ellipse at center, rgba(99, 179, 237, 0.3) 0%, transparent 70%);
-      transform: rotate(-15deg);
+    .hero-wave-container svg {
+      position: relative;
+      display: block;
+      width: calc(100% + 1.3px);
+      height: 80px;
     }
     
-    .hero-bg-pattern::after {
-      content: '';
-      position: absolute;
-      bottom: -30%;
-      left: -10%;
-      width: 60%;
-      height: 100%;
-      background: radial-gradient(ellipse at center, rgba(144, 205, 244, 0.2) 0%, transparent 60%);
-      transform: rotate(20deg);
+    .hero-wave-container .shape-fill {
+      fill: #90CDF4;
+    }
+    
+    /* Hero content overlay */
+    .hero-content-overlay {
+      position: relative;
+      z-index: 2;
     }
     
     /* Button hover effects */
@@ -88,6 +93,42 @@
       border-color: #4299e1;
       transform: translateY(-2px);
       box-shadow: 0 4px 12px rgba(99, 179, 237, 0.4);
+    }
+    
+    /* Header CTA button */
+    .btn-header-cta {
+      background-color: #63b3ed;
+      color: #1a365d;
+      border-radius: 4px;
+      padding: 8px 16px;
+      font-size: 14px;
+      font-weight: 700;
+      border: none;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      transition: all 0.15s cubic-bezier(0, 0, 0.2, 1);
+    }
+    
+    .btn-header-cta:hover {
+      background-color: #4299e1;
+      box-shadow: 0 4px 8px rgba(99, 179, 237, 0.4);
+      transform: translateY(-1px);
+    }
+    
+    /* Header navigation links - ChoiceMutual style */
+    .nav-link-cm {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      letter-spacing: normal;
+      color: #2563eb;
+      text-decoration: none;
+      padding: 8px 12px;
+      transition: all 0.15s cubic-bezier(0, 0, 0.2, 1);
+    }
+    
+    .nav-link-cm:hover {
+      color: #1e40af;
+      text-decoration: underline;
     }
     
     /* Iframe container */
@@ -110,6 +151,78 @@
         height: 600px;
       }
     }
+    
+    /* Logo sizes */
+    .header-logo {
+      height: 150px;
+      width: auto;
+    }
+    
+    @media (max-width: 1024px) {
+      .header-logo {
+        height: 120px;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .header-logo {
+        height: 80px;
+      }
+    }
+    
+    /* Mobile menu */
+    .mobile-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: white;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      padding: 16px;
+      z-index: 100;
+    }
+    
+    .mobile-menu.active {
+      display: block;
+    }
+    
+    .mobile-menu a {
+      display: block;
+      padding: 12px 16px;
+      color: #1a365d;
+      font-weight: 500;
+      border-bottom: 1px solid #e5e7eb;
+      transition: background-color 0.15s;
+    }
+    
+    .mobile-menu a:hover {
+      background-color: #f3f4f6;
+    }
+    
+    .mobile-menu a:last-child {
+      border-bottom: none;
+    }
+    
+    .hamburger-btn {
+      display: none;
+      padding: 8px;
+      cursor: pointer;
+      font-size: 24px;
+      color: #1a365d;
+    }
+    
+    @media (max-width: 768px) {
+      .hamburger-btn {
+        display: block;
+      }
+      .desktop-nav {
+        display: none !important;
+      }
+      .desktop-cta {
+        display: none !important;
+      }
+    }
   </style>
 </head>
 <body class="font-sans text-gray-800 bg-gray-50 min-h-screen flex flex-col">
@@ -117,24 +230,38 @@
   <!-- HEADER -->
   <header class="sticky top-0 z-50 bg-white shadow-sm border-b border-gray-100">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-20">
+      <div class="flex items-center justify-between py-2">
         <!-- Logo -->
         <div class="flex-shrink-0">
           <a href="/" class="block">
-            <img id="header-logo" src="img/logo-spanish.png" alt="Mejor Vida Insurance logo" class="h-16 w-auto" />
+            <img id="header-logo" src="img/logo-spanish.png" alt="Mejor Vida Insurance logo" class="header-logo" />
           </a>
         </div>
 
-        <!-- Navigation & Language Toggle -->
-        <div class="flex items-center gap-6">
-          <nav class="hidden md:flex items-center gap-4">
-            <a href="/" data-lang="es" class="text-gray-700 font-semibold text-sm hover:text-brand-blue transition-colors">
-              <i class="fas fa-home mr-1"></i>Inicio
+        <!-- Navigation - Desktop -->
+        <nav class="desktop-nav hidden md:flex items-center gap-4">
+          <a href="/" data-lang="es" class="nav-link-cm">
+            <i class="fas fa-home mr-1"></i>Inicio
+          </a>
+          <a href="/" data-lang="en" style="display:none;" class="nav-link-cm">
+            <i class="fas fa-home mr-1"></i>Home
+          </a>
+        </nav>
+
+        <!-- CTA Button & Language Toggle -->
+        <div class="flex items-center gap-4">
+          <!-- Header CTA with phone -->
+          <div class="desktop-cta hidden md:flex flex-col items-center">
+            <a href="tel:+15312291712" class="text-xs text-gray-600 hover:text-brand-blue mb-1">
+              <i class="fas fa-phone mr-1"></i>(531) 229-1712
             </a>
-            <a href="/" data-lang="en" style="display:none;" class="text-gray-700 font-semibold text-sm hover:text-brand-blue transition-colors">
-              <i class="fas fa-home mr-1"></i>Home
+            <a href="tel:+15312291712" data-lang="es" class="btn-header-cta">
+              Hable con un Agente
             </a>
-          </nav>
+            <a href="tel:+15312291712" data-lang="en" style="display:none;" class="btn-header-cta">
+              Speak to an Agent
+            </a>
+          </div>
 
           <!-- Language Toggle -->
           <div class="flex gap-2">
@@ -145,14 +272,35 @@
               <span class="mr-1">🇺🇸</span> EN
             </button>
           </div>
+
+          <!-- Hamburger Menu Button -->
+          <button class="hamburger-btn" id="hamburger-btn" aria-label="Open menu">
+            ☰
+          </button>
         </div>
       </div>
     </div>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobile-menu">
+      <a href="/" data-lang="es" class="mobile-menu-link"><i class="fas fa-home mr-2"></i>Inicio</a>
+      <a href="/" data-lang="en" style="display:none;" class="mobile-menu-link"><i class="fas fa-home mr-2"></i>Home</a>
+      <a href="tel:+15312291712" class="mobile-menu-link text-brand-blue font-bold">
+        <i class="fas fa-phone mr-2"></i>(531) 229-1712
+      </a>
+    </div>
   </header>
 
-  <!-- HERO SECTION -->
-  <section class="hero-bg-pattern py-12 md:py-16 relative">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+  <!-- HERO SECTION - Two-tone blue with wave -->
+  <section class="hero-two-tone py-12 md:py-16 relative">
+    <!-- SVG Wave Divider -->
+    <div class="hero-wave-container">
+      <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+        <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+      </svg>
+    </div>
+    
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center hero-content-overlay">
       <h1 class="text-3xl md:text-4xl font-bold text-white mb-4" data-lang="es">
         Agenda tu Consulta Gratuita
       </h1>
@@ -236,7 +384,7 @@
       <div class="text-center mt-8">
         <p class="text-gray-500 text-sm mb-3" data-lang="es">¿Prefieres llamar directamente?</p>
         <p class="text-gray-500 text-sm mb-3" data-lang="en" style="display:none;">Prefer to call directly?</p>
-        <a href="tel:5312291712" class="inline-flex items-center text-brand-blue font-semibold hover:underline">
+        <a href="tel:+15312291712" class="inline-flex items-center text-brand-blue font-semibold hover:underline">
           <i class="fas fa-phone mr-2"></i>(531) 229-1712
         </a>
       </div>
@@ -257,14 +405,53 @@
           <a href="/" class="hover:text-white" data-lang="en" style="display:none;">Home</a>
           <a href="privacy-policy.html" class="hover:text-white" data-lang="es">Privacidad</a>
           <a href="privacy-policy.html" class="hover:text-white" data-lang="en" style="display:none;">Privacy</a>
-          <a href="tel:5312291712" class="hover:text-white">(531) 229-1712</a>
+          <a href="tel:+15312291712" class="hover:text-white">(531) 229-1712</a>
         </div>
+      </div>
+      
+      <!-- License Information -->
+      <div class="border-t border-blue-800 mt-6 pt-4">
+        <p class="text-xs text-blue-200 text-center" data-lang="es">
+          Julie es una agente de seguros licenciada en el estado de Nebraska. Licencia de Productor de Seguros #21695431.
+        </p>
+        <p class="text-xs text-blue-200 text-center" data-lang="en" style="display:none;">
+          Julie is a licensed insurance agent in the state of Nebraska. Insurance Producer License #21695431.
+        </p>
       </div>
     </div>
   </footer>
 
   <!-- Scripts -->
   <script src="script.js"></script>
+
+  <!-- Mobile menu script -->
+  <script>
+    // Mobile hamburger menu
+    const hamburgerBtn = document.getElementById('hamburger-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    hamburgerBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      mobileMenu.classList.toggle('active');
+      hamburgerBtn.textContent = mobileMenu.classList.contains('active') ? '✕' : '☰';
+    });
+    
+    // Close menu when clicking outside
+    document.addEventListener('click', function(e) {
+      if (!mobileMenu.contains(e.target) && !hamburgerBtn.contains(e.target)) {
+        mobileMenu.classList.remove('active');
+        hamburgerBtn.textContent = '☰';
+      }
+    });
+    
+    // Close menu when clicking a link
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', function() {
+        mobileMenu.classList.remove('active');
+        hamburgerBtn.textContent = '☰';
+      });
+    });
+  </script>
 
   <!-- Chat widget loader -->
   <script
