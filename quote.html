@@ -116,18 +116,59 @@
     
     /* Header navigation links - ChoiceMutual style */
     .nav-link-cm {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      font-size: 16px;
-      font-weight: 400;
-      letter-spacing: normal;
-      color: #2563eb;
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: #1a202c;
       text-decoration: none;
       padding: 8px 12px;
       transition: all 0.15s cubic-bezier(0, 0, 0.2, 1);
     }
     
     .nav-link-cm:hover {
-      color: #1e40af;
+      color: #2563eb;
+    }
+    
+    /* See Prices button - ChoiceMutual yellow/orange style */
+    .btn-see-prices {
+      background-color: #FEC963;
+      color: #1a202c;
+      border-radius: 6px;
+      padding: 10px 20px;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      border: none;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      transition: all 0.15s cubic-bezier(0, 0, 0.2, 1);
+      white-space: nowrap;
+    }
+    
+    .btn-see-prices:hover {
+      background-color: #f5b942;
+      box-shadow: 0 4px 8px rgba(254, 201, 99, 0.4);
+      transform: translateY(-1px);
+    }
+    
+    /* Phone block styles */
+    .phone-block-label {
+      font-size: 12px;
+      color: #6b7280;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+    }
+    
+    .phone-block-number {
+      font-size: 16px;
+      font-weight: 700;
+      color: #0D47A1;
+      letter-spacing: -0.01em;
+      text-decoration: none;
+    }
+    
+    .phone-block-number:hover {
+      color: #1565C0;
       text-decoration: underline;
     }
     
@@ -212,7 +253,7 @@
       color: #1a365d;
     }
     
-    @media (max-width: 768px) {
+    @media (max-width: 1023px) {
       .hamburger-btn {
         display: block;
       }
@@ -239,41 +280,51 @@
         </div>
 
         <!-- Navigation - Desktop -->
-        <nav class="desktop-nav hidden md:flex items-center gap-4">
-          <a href="/" data-lang="es" class="nav-link-cm">
-            <i class="fas fa-home mr-1"></i>Inicio
-          </a>
-          <a href="/" data-lang="en" style="display:none;" class="nav-link-cm">
-            <i class="fas fa-home mr-1"></i>Home
-          </a>
+        <nav class="desktop-nav hidden lg:flex items-center justify-center flex-1 gap-1 xl:gap-3">
+          <a href="/" data-lang="es" class="nav-link-cm">Inicio</a>
+          <a href="/" data-lang="en" style="display:none;" class="nav-link-cm">Home</a>
+          
+          <a href="/#about" data-lang="es" class="nav-link-cm">Sobre Julie</a>
+          <a href="/#about" data-lang="en" style="display:none;" class="nav-link-cm">About</a>
+          
+          <a href="/#how-it-works" data-lang="es" class="nav-link-cm">Cómo funciona</a>
+          <a href="/#how-it-works" data-lang="en" style="display:none;" class="nav-link-cm">How It Works</a>
+          
+          <a href="/#faq" data-lang="es" class="nav-link-cm">FAQ</a>
+          <a href="/#faq" data-lang="en" style="display:none;" class="nav-link-cm">FAQ</a>
+          
+          <a href="/#contact" data-lang="es" class="nav-link-cm">Contacto</a>
+          <a href="/#contact" data-lang="en" style="display:none;" class="nav-link-cm">Contact</a>
         </nav>
 
-        <!-- CTA Button & Language Toggle -->
-        <div class="flex items-center gap-4">
-          <!-- Header CTA with phone -->
-          <div class="desktop-cta hidden md:flex flex-col items-center">
-            <a href="tel:+15312291712" class="text-xs text-gray-600 hover:text-brand-blue mb-1">
-              <i class="fas fa-phone mr-1"></i>(531) 229-1712
-            </a>
-            <a href="tel:+15312291712" data-lang="es" class="btn-header-cta">
-              Hable con un Agente
-            </a>
-            <a href="tel:+15312291712" data-lang="en" style="display:none;" class="btn-header-cta">
-              Speak to an Agent
-            </a>
+        <!-- Right side: See Prices Button + Phone Block + Language Toggle - Desktop -->
+        <div class="flex items-center gap-4 lg:gap-6">
+          <!-- See Prices Button (current page, so styled differently) -->
+          <span data-lang="es" class="desktop-cta hidden lg:block btn-see-prices opacity-70 cursor-default">
+            Ver Precios
+          </span>
+          <span data-lang="en" style="display:none;" class="desktop-cta hidden lg:block btn-see-prices opacity-70 cursor-default">
+            See Prices
+          </span>
+
+          <!-- Phone Block (NO background) -->
+          <div class="desktop-cta hidden lg:flex flex-col items-end">
+            <span class="phone-block-label" data-lang="es">Hable con un agente licenciado:</span>
+            <span class="phone-block-label" data-lang="en" style="display:none;">Speak to a licensed agent:</span>
+            <a href="tel:+15312291712" class="phone-block-number">(531) 229-1712</a>
           </div>
 
           <!-- Language Toggle -->
-          <div class="flex gap-2">
-            <button class="lang-btn active px-3 py-1.5 rounded text-sm font-bold border-2 transition-all" data-lang-btn="es">
-              <span class="mr-1">🇪🇸</span> ES
+          <div class="flex gap-1">
+            <button class="lang-btn active px-2 py-1 rounded text-sm font-bold border-2 transition-all" data-lang-btn="es">
+              ES
             </button>
-            <button class="lang-btn px-3 py-1.5 rounded text-sm font-bold border-2 transition-all" data-lang-btn="en">
-              <span class="mr-1">🇺🇸</span> EN
+            <button class="lang-btn px-2 py-1 rounded text-sm font-bold border-2 transition-all" data-lang-btn="en">
+              EN
             </button>
           </div>
 
-          <!-- Hamburger Menu Button -->
+          <!-- Hamburger Menu Button (mobile only) -->
           <button class="hamburger-btn" id="hamburger-btn" aria-label="Open menu">
             ☰
           </button>
@@ -283,8 +334,16 @@
 
     <!-- Mobile Menu -->
     <div class="mobile-menu" id="mobile-menu">
-      <a href="/" data-lang="es" class="mobile-menu-link"><i class="fas fa-home mr-2"></i>Inicio</a>
-      <a href="/" data-lang="en" style="display:none;" class="mobile-menu-link"><i class="fas fa-home mr-2"></i>Home</a>
+      <a href="/" data-lang="es" class="mobile-menu-link">Inicio</a>
+      <a href="/" data-lang="en" style="display:none;" class="mobile-menu-link">Home</a>
+      <a href="/#about" data-lang="es" class="mobile-menu-link">Sobre Julie</a>
+      <a href="/#about" data-lang="en" style="display:none;" class="mobile-menu-link">About</a>
+      <a href="/#how-it-works" data-lang="es" class="mobile-menu-link">Cómo funciona</a>
+      <a href="/#how-it-works" data-lang="en" style="display:none;" class="mobile-menu-link">How It Works</a>
+      <a href="/#faq" data-lang="es" class="mobile-menu-link">FAQ</a>
+      <a href="/#faq" data-lang="en" style="display:none;" class="mobile-menu-link">FAQ</a>
+      <a href="/#contact" data-lang="es" class="mobile-menu-link">Contacto</a>
+      <a href="/#contact" data-lang="en" style="display:none;" class="mobile-menu-link">Contact</a>
       <a href="tel:+15312291712" class="mobile-menu-link text-brand-blue font-bold">
         <i class="fas fa-phone mr-2"></i>(531) 229-1712
       </a>
