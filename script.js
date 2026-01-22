@@ -40,7 +40,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // Update logo based on language (if logos exist for both languages)
     const headerLogo = document.getElementById('header-logo');
     if (headerLogo) {
-      headerLogo.src = lang === 'es' ? 'img/logo-spanish.png' : 'img/logo-english.png';
+      // Always use English logo for consistency across both languages
+      headerLogo.src = 'img/logo-english.png';
     }
 
     // Save preference to localStorage
