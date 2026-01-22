@@ -208,10 +208,10 @@
       border-radius: 12px;
     }
     
-    /* Two-tone teal hero background - ChoiceMutual style */
+    /* Two-tone BLUE hero background - ChoiceMutual style */
     .hero-two-tone {
       position: relative;
-      background: #3d8b8b; /* Dark teal base */
+      background: #1e3a8a; /* Dark navy blue base */
       overflow: hidden;
     }
     
@@ -387,15 +387,19 @@
       transform: scale(1.2);
     }
     
-    /* Logo sizes - doubled for better visibility */
+    /* Logo sizes - large logo with negative margins to keep header compact */
     .header-logo {
-      height: 100px;
+      height: 130px;
       width: auto;
+      margin-top: -15px;
+      margin-bottom: -15px;
     }
     
     @media (max-width: 768px) {
       .header-logo {
-        height: 80px;
+        height: 95px;
+        margin-top: -12px;
+        margin-bottom: -12px;
       }
     }
     
@@ -528,8 +532,8 @@
 
           <!-- Phone Block (NO background, stacked vertically) -->
           <div class="desktop-cta hidden lg:flex flex-col items-end">
-            <span class="phone-block-label" data-lang="es">Hable con un agente licenciado:</span>
-            <span class="phone-block-label" data-lang="en" style="display:none;">Speak to a licensed agent:</span>
+            <span class="phone-block-label" data-lang="es"><i class="fas fa-phone text-xs mr-1"></i>Hable con un agente licenciado:</span>
+            <span class="phone-block-label" data-lang="en" style="display:none;"><i class="fas fa-phone text-xs mr-1"></i>Speak to a licensed agent:</span>
             <a href="tel:+15312291712" class="phone-block-number">(531) 229-1712</a>
           </div>
 
@@ -580,10 +584,10 @@
     <!-- Smooth SVG Wave Background - curves from bottom-left to top-right -->
     <div class="hero-wave-bg">
       <svg viewBox="0 0 1440 800" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-        <!-- Dark teal top area -->
-        <path d="M0,0 L1440,0 L1440,800 L0,800 Z" fill="#2d7a7a"/>
-        <!-- Light teal/turquoise bottom area with smooth bezier curve -->
-        <path d="M0,800 L0,500 Q200,600 400,480 Q600,360 800,400 Q1000,440 1200,320 Q1350,240 1440,200 L1440,800 Z" fill="#5ba8a8"/>
+        <!-- Dark navy blue top area -->
+        <path d="M0,0 L1440,0 L1440,800 L0,800 Z" fill="#1e3a8a"/>
+        <!-- Light sky blue bottom area with smooth bezier curve -->
+        <path d="M0,800 L0,500 Q200,600 400,480 Q600,360 800,400 Q1000,440 1200,320 Q1350,240 1440,200 L1440,800 Z" fill="#60a5fa"/>
       </svg>
     </div>
     
@@ -1018,11 +1022,15 @@
     </div>
   </section>
 
-  <!-- CTA SECTION -->
+  <!-- CTA SECTION - Blue with same wave as hero -->
   <section class="hero-two-tone py-16 relative">
-    <div class="hero-wave-container" style="top: 45%;">
-      <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-        <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+    <!-- Smooth SVG Wave Background - same style as hero -->
+    <div class="hero-wave-bg">
+      <svg viewBox="0 0 1440 400" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Dark navy blue top area -->
+        <path d="M0,0 L1440,0 L1440,400 L0,400 Z" fill="#1e3a8a"/>
+        <!-- Light sky blue bottom area with smooth bezier curve -->
+        <path d="M0,400 L0,280 Q200,320 400,260 Q600,200 800,220 Q1000,240 1200,180 Q1350,140 1440,100 L1440,400 Z" fill="#60a5fa"/>
       </svg>
     </div>
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center hero-content-overlay">
@@ -1078,22 +1086,12 @@
           </ul>
         </div>
 
-        <!-- Column 3: Legal & Hours -->
+        <!-- Column 3: Legal -->
         <div>
-          <h4 class="font-bold text-lg mb-4" data-lang="es">Horarios</h4>
-          <h4 class="font-bold text-lg mb-4" data-lang="en" style="display:none;">Hours</h4>
-          <p class="text-sm text-blue-200 mb-4" data-lang="es">
-            Lunes – Viernes: 9am – 5pm<br>
-            Sábado: Con cita previa<br>
-            Domingo: Cerrado
-          </p>
-          <p class="text-sm text-blue-200 mb-4" data-lang="en" style="display:none;">
-            Monday – Friday: 9am – 5pm<br>
-            Saturday: By appointment<br>
-            Sunday: Closed
-          </p>
-          <a href="privacy-policy.html" class="text-sm text-blue-200 hover:text-white" data-lang="es">Política de privacidad</a>
-          <a href="privacy-policy.html" class="text-sm text-blue-200 hover:text-white" data-lang="en" style="display:none;">Privacy Policy</a>
+          <h4 class="font-bold text-lg mb-4" data-lang="es">Legal</h4>
+          <h4 class="font-bold text-lg mb-4" data-lang="en" style="display:none;">Legal</h4>
+          <a href="privacy-policy.html" class="text-sm text-blue-200 hover:text-white block mb-2" data-lang="es">Política de privacidad</a>
+          <a href="privacy-policy.html" class="text-sm text-blue-200 hover:text-white block mb-2" data-lang="en" style="display:none;">Privacy Policy</a>
         </div>
       </div>
 

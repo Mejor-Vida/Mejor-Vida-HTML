@@ -53,10 +53,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
 
   <style>
-    /* Two-tone teal hero background - ChoiceMutual style */
+    /* Two-tone BLUE hero background - ChoiceMutual style */
     .hero-two-tone {
       position: relative;
-      background: #3d8b8b; /* Dark teal base */
+      background: #1e3a8a; /* Dark navy blue base */
       overflow: hidden;
     }
     
@@ -216,15 +216,19 @@
       }
     }
     
-    /* Logo sizes - doubled for better visibility */
+    /* Logo sizes - large logo with negative margins to keep header compact */
     .header-logo {
-      height: 100px;
+      height: 130px;
       width: auto;
+      margin-top: -15px;
+      margin-bottom: -15px;
     }
     
     @media (max-width: 768px) {
       .header-logo {
-        height: 80px;
+        height: 95px;
+        margin-top: -12px;
+        margin-bottom: -12px;
       }
     }
     
@@ -357,8 +361,8 @@
 
           <!-- Phone Block (NO background, stacked vertically) -->
           <div class="desktop-cta hidden lg:flex flex-col items-end">
-            <span class="phone-block-label" data-lang="es">Hable con un agente licenciado:</span>
-            <span class="phone-block-label" data-lang="en" style="display:none;">Speak to a licensed agent:</span>
+            <span class="phone-block-label" data-lang="es"><i class="fas fa-phone text-xs mr-1"></i>Hable con un agente licenciado:</span>
+            <span class="phone-block-label" data-lang="en" style="display:none;"><i class="fas fa-phone text-xs mr-1"></i>Speak to a licensed agent:</span>
             <a href="tel:+15312291712" class="phone-block-number">(531) 229-1712</a>
           </div>
 
@@ -403,10 +407,10 @@
     <!-- Smooth SVG Wave Background - curves from bottom-left to top-right -->
     <div class="hero-wave-bg">
       <svg viewBox="0 0 1440 400" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-        <!-- Dark teal top area -->
-        <path d="M0,0 L1440,0 L1440,400 L0,400 Z" fill="#2d7a7a"/>
-        <!-- Light teal/turquoise bottom area with smooth bezier curve -->
-        <path d="M0,400 L0,280 Q200,320 400,260 Q600,200 800,220 Q1000,240 1200,180 Q1350,140 1440,100 L1440,400 Z" fill="#5ba8a8"/>
+        <!-- Dark navy blue top area -->
+        <path d="M0,0 L1440,0 L1440,400 L0,400 Z" fill="#1e3a8a"/>
+        <!-- Light sky blue bottom area with smooth bezier curve -->
+        <path d="M0,400 L0,280 Q200,320 400,260 Q600,200 800,220 Q1000,240 1200,180 Q1350,140 1440,100 L1440,400 Z" fill="#60a5fa"/>
       </svg>
     </div>
     
