@@ -11,36 +11,31 @@ document.addEventListener('DOMContentLoaded', function() {
   function setLanguage(lang) {
     currentLanguage = lang;
 
-    // Update all elements with data-lang attribute
-    document.querySelectorAll('[data-lang="es"]').forEach(el => {
-      el.style.display = lang === 'es' ? '' : 'none';
-    });
-    document.querySelectorAll('[data-lang="en"]').forEach(el => {
-      el.style.display = lang === 'en' ? '' : 'none';
-    });
+    // Toggle language via class on <html>; CSS handles visibility with !important over Bootstrap
+    document.documentElement.className = 'lang-' + lang;
 
-    // Update button states with Tailwind classes
+    // Update button states
     langButtons.forEach(btn => {
       const isActive = btn.dataset.langBtn === lang;
       btn.classList.toggle('active', isActive);
       
-      // Update styling for active/inactive states
+      // Update styling for active/inactive states (Bootstrap)
       if (isActive) {
-        btn.classList.add('bg-blue-600', 'text-white', 'border-blue-600');
-        btn.classList.remove('bg-transparent', 'text-gray-700', 'border-gray-300');
+        btn.classList.add('bg-primary', 'text-white', 'border-primary');
+        btn.classList.remove('bg-light', 'text-body', 'border-secondary');
       } else {
-        btn.classList.remove('bg-blue-600', 'text-white', 'border-blue-600');
-        btn.classList.add('bg-transparent', 'text-gray-700', 'border-gray-300');
+        btn.classList.remove('bg-primary', 'text-white', 'border-primary');
+        btn.classList.add('bg-light', 'text-body', 'border-secondary');
       }
       
       // Update aria-pressed for accessibility
       btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
     });
 
-    // Update logo based on language (if logos exist for both languages)
+    // Use same logo for both languages
     const headerLogo = document.getElementById('header-logo');
     if (headerLogo) {
-      headerLogo.src = lang === 'es' ? 'img/logo-spanish.png' : 'img/logo-english.png';
+      headerLogo.src = 'img/logo-english.png';
     }
 
     // Save preference to localStorage
@@ -142,7 +137,7 @@ document.addEventListener('DOMContentLoaded', function() {
       const target = document.querySelector(targetId);
       if (target) {
         e.preventDefault();
-        const headerHeight = 80; // Height of sticky header
+        const headerHeight = 81; // Header height 81px
         const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerHeight;
         
         window.scrollTo({
