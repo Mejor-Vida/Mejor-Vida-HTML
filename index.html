@@ -47,7 +47,7 @@
     "@context": "https://schema.org",
     "@type": "InsuranceAgency",
     "name": "Mejor Vida Insurance LLC",
-    "image": "https://www.mejorvidainsurance.com/img/logo-english.png",
+    "image": "https://www.mejorvidainsurance.com/img/logo-english2.png",
     "url": "https://www.mejorvidainsurance.com/",
     "telephone": "+1-531-229-1712",
     "email": "mailto:Julie@mejorvidainsurance.com",
@@ -179,6 +179,31 @@
       height: 100%;
       object-fit: cover;
       border-radius: 12px;
+      /* Position images to show heads - shift down 15% so top portion (heads) is visible */
+      object-position: center 15%;
+    }
+    /* Woman with flowers (slide 5): keep cover zoom, shift image up to show head */
+    .carousel-slide:nth-child(5) img {
+      object-fit: cover;
+      object-position: center top;
+      transform: translateY(-8%);
+    }
+    /* Ken Burns–style slow zoom on active slide */
+    @keyframes heroCarouselKenBurns {
+      from { transform: scale(1); }
+      to { transform: scale(1.05); }
+    }
+    .carousel-slide.active img {
+      animation: heroCarouselKenBurns 4s ease-out forwards;
+    }
+    /* Woman with flowers (slide 5): zoom from top so head stays in view, and maintain translateY */
+    @keyframes heroCarouselKenBurnsWoman {
+      from { transform: translateY(-8%) scale(1); }
+      to { transform: translateY(-8%) scale(1.05); }
+    }
+    .carousel-slide:nth-child(5).active img {
+      transform-origin: center top;
+      animation: heroCarouselKenBurnsWoman 4s ease-out forwards;
     }
     
     /* Two-tone blue hero background - smooth curve from bottom-left to top-right */
@@ -473,7 +498,7 @@
         <!-- Logo: max-height 44px, does not affect header height -->
         <div class="flex-shrink-0 header-logo-wrap">
           <a href="#home" class="d-block">
-            <img id="header-logo" src="img/logo-english.png" alt="Mejor Vida Insurance logo" class="header-logo" />
+            <img id="header-logo" src="img/logo-spanish2.png" alt="Mejor Vida Insurance logo" class="header-logo" />
           </a>
         </div>
 
@@ -617,20 +642,23 @@
           </div>
         </div>
 
-        <!-- Hero Image Carousel -->
+        <!-- Hero Image Carousel: 5 people images with Ken Burns effect -->
         <div class="col-lg-6 position-relative">
           <div class="carousel-container rounded-3 shadow-lg">
             <div class="carousel-slide active">
-              <img src="img/Family-smiling.jpg" alt="Familia hispana sonriendo" />
+              <img src="img/business-man.png" alt="Profesional" />
             </div>
             <div class="carousel-slide">
-              <img src="img/hispanic-family-laughing.jpg" alt="Familia hispana riendo" />
+              <img src="img/couple-smiling.png" alt="Pareja sonriendo" />
             </div>
             <div class="carousel-slide">
-              <img src="img/elderly-hispanic-couple.jpg" alt="Pareja hispana mayor" />
+              <img src="img/man-sitting.png" alt="Hombre sentado" />
             </div>
             <div class="carousel-slide">
-              <img src="img/hispanic-family.jpg" alt="Familia hispana" />
+              <img src="img/grandma-grandson.png" alt="Abuela y nieto" />
+            </div>
+            <div class="carousel-slide">
+              <img src="img/woman-flowers.png" alt="Mujer con flores" />
             </div>
             <!-- Carousel indicators -->
             <div class="carousel-indicators">
@@ -638,6 +666,7 @@
               <button class="carousel-dot" data-slide="1"></button>
               <button class="carousel-dot" data-slide="2"></button>
               <button class="carousel-dot" data-slide="3"></button>
+              <button class="carousel-dot" data-slide="4"></button>
             </div>
           </div>
 
@@ -848,7 +877,7 @@
     <div class="container">
       <div class="row g-4 text-white">
         <div class="col-12 col-md-4">
-          <img src="img/logo-english.png" alt="Mejor Vida Insurance" class="mb-3" style="height:56px;filter:brightness(0) invert(1);" />
+          <img id="footer-logo" src="img/logo-spanish2.png" alt="Mejor Vida Insurance" class="mb-3" style="height:56px;filter:brightness(0) invert(1);" />
           <p class="small mb-3 opacity-75" data-lang="es">Protegiendo familias con seguros de gastos finales asequibles y personalizados.</p>
           <p class="small mb-3 opacity-75" data-lang="en">Protecting families with affordable and personalized final expense insurance.</p>
           <p class="small mb-1"><i class="fas fa-phone me-2 opacity-75"></i><a href="tel:+15312291712" class="text-white text-opacity-90 text-decoration-none">(531) 229-1712</a></p>

@@ -32,10 +32,14 @@ document.addEventListener('DOMContentLoaded', function() {
       btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
     });
 
-    // Use same logo for both languages
+    // Spanish: logo-spanish2.png; English: logo-english2.png
     const headerLogo = document.getElementById('header-logo');
     if (headerLogo) {
-      headerLogo.src = 'img/logo-english.png';
+      headerLogo.src = lang === 'es' ? 'img/logo-spanish2.png' : 'img/logo-english2.png';
+    }
+    const footerLogo = document.getElementById('footer-logo');
+    if (footerLogo) {
+      footerLogo.src = lang === 'es' ? 'img/logo-spanish2.png' : 'img/logo-english2.png';
     }
 
     // Save preference to localStorage
@@ -88,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   function startCarousel() {
     if (slides.length > 1) {
-      carouselInterval = setInterval(nextSlide, 4000); // Change slide every 4 seconds
+      carouselInterval = setInterval(nextSlide, 8000); // Change slide every 8 seconds
     }
   }
 
