@@ -7,4 +7,19 @@
     <priority>1.00</priority>
   </url>
 
+  <!-- Blog page (weekly newsletter content) -->
+  <url>
+    <loc>https://www.mejorvidainsurance.com/blog.html</loc>
+    <lastmod>2025-01-22T00:00:00+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+
+  <!-- Future blog post URLs: add one <url> block per post, e.g.:
+  <url>
+    <loc>https://www.mejorvidainsurance.com/blog/post-slug.html</loc>
+    <lastmod>YYYY-MM-DD</lastmod>
+    <priority>0.70</priority>
+  </url>
+  -->
+
 </urlset>

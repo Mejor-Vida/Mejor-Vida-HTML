@@ -372,7 +372,7 @@
       align-items: center !important;
     }
     .navbar-brand { flex: 0 0 auto; display: flex !important; align-items: center !important; padding: 0 !important; margin-right: 20px; }
-    .navbar-brand img { height: 122px !important; width: auto !important; max-height: none !important; object-fit: contain; }
+    .navbar-brand img { height: 244px !important; width: auto !important; max-height: none !important; object-fit: contain; }
     .navbar-nav { flex: 1 1 auto; display: flex !important; align-items: center !important; justify-content: flex-start; margin: 0; padding: 0; list-style: none; }
     .navbar-nav .nav-link { padding-left: 15px; padding-right: 15px; }
 
@@ -385,6 +385,7 @@
       height: 100% !important;
       padding-top: 0 !important;
       padding-bottom: 0 !important;
+      padding-left: 0 !important;
       display: flex !important;
       align-items: center !important;
     }
@@ -392,28 +393,37 @@
       display: flex !important;
       align-items: center !important;
       justify-content: flex-start !important;
-      gap: 1rem;
+      gap: 0;
       width: 100%;
     }
     .header-logo-wrap {
       flex: 0 0 auto;
       display: flex !important;
       align-items: center !important;
+      justify-content: center !important;
+      height: 81px !important;
       padding: 0 !important;
-      margin-right: 20px;
+      margin-left: -120px !important;
+      margin-right: 1rem !important;
     }
     .header-logo {
-      height: 122px !important;
+      height: 244px !important;
       width: auto !important;
       max-height: none !important;
       object-fit: contain;
+      display: block !important;
+      transform: translateY(8px) !important;
     }
-    /* Nav links: pushed to the right (margin-left: auto), evenly spaced (gap: 1rem) */
+    /* Nav links: no wrap, spread evenly across header */
+    .nav-link-cm {
+      white-space: nowrap !important;
+    }
     .header-inner .desktop-nav {
-      flex-grow: 0 !important;
-      margin-left: auto !important;
-      gap: 1rem !important;
-      justify-content: flex-end !important;
+      flex: 1 1 auto !important;
+      margin-left: 0 !important;
+      gap: 0 !important;
+      justify-content: space-evenly !important;
+      max-width: 100%;
     }
     
     /* Header sticks to top when scrolling. */
@@ -516,6 +526,9 @@
           <a href="#faq" data-lang="es" class="nav-link-cm">FAQ</a>
           <a href="#faq" data-lang="en" class="nav-link-cm">FAQ</a>
           
+          <a href="blog.html" data-lang="es" class="nav-link-cm">Blog</a>
+          <a href="blog.html" data-lang="en" class="nav-link-cm">Blog</a>
+          
           <a href="#contact" data-lang="es" class="nav-link-cm">Contacto</a>
           <a href="#contact" data-lang="en" class="nav-link-cm">Contact</a>
         </nav>
@@ -565,6 +578,8 @@
       <a href="#how-it-works" data-lang="en" class="mobile-menu-link">How It Works</a>
       <a href="#faq" data-lang="es" class="mobile-menu-link">FAQ</a>
       <a href="#faq" data-lang="en" class="mobile-menu-link">FAQ</a>
+      <a href="blog.html" data-lang="es" class="mobile-menu-link">Blog</a>
+      <a href="blog.html" data-lang="en" class="mobile-menu-link">Blog</a>
       <a href="#contact" data-lang="es" class="mobile-menu-link">Contacto</a>
       <a href="#contact" data-lang="en" class="mobile-menu-link">Contact</a>
       <a href="tel:+15312291712" class="mobile-menu-link fw-bold" style="color:#0D47A1;">
@@ -892,6 +907,7 @@
             <li class="mb-2"><a href="#how-it-works" class="text-white text-opacity-75 text-decoration-none" data-lang="es">Cómo funciona</a><a href="#how-it-works" class="text-white text-opacity-75 text-decoration-none" data-lang="en">How It Works</a></li>
             <li class="mb-2"><a href="#carriers" class="text-white text-opacity-75 text-decoration-none" data-lang="es">Aseguradoras</a><a href="#carriers" class="text-white text-opacity-75 text-decoration-none" data-lang="en">Carriers</a></li>
             <li class="mb-2"><a href="#faq" class="text-white text-opacity-75 text-decoration-none" data-lang="es">Preguntas frecuentes</a><a href="#faq" class="text-white text-opacity-75 text-decoration-none" data-lang="en">FAQ</a></li>
+            <li class="mb-2"><a href="blog.html" class="text-white text-opacity-75 text-decoration-none">Blog</a></li>
             <li class="mb-2"><a href="/quote.html" class="text-white text-opacity-75 text-decoration-none" data-lang="es">Cotización gratis</a><a href="/quote.html" class="text-white text-opacity-75 text-decoration-none" data-lang="en">Free Quote</a></li>
           </ul>
         </div>
