@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   function startCarousel() {
     if (slides.length > 1) {
-      carouselInterval = setInterval(nextSlide, 8000); // Change slide every 8 seconds
+      carouselInterval = setInterval(nextSlide, 5000); // Change slide every 5 seconds
     }
   }
 

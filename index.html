@@ -151,13 +151,16 @@
       pointer-events: none;
     }
     
-    /* Carousel styles */
+    /* Carousel styles - no box-shadow/border on container or images to avoid ghost box */
     .carousel-container {
       position: relative;
       width: 100%;
       aspect-ratio: 4/3;
       overflow: hidden;
       border-radius: 12px;
+      border: none !important;
+      box-shadow: none !important;
+      filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.08));
     }
     
     .carousel-slide {
@@ -179,31 +182,47 @@
       height: 100%;
       object-fit: cover;
       border-radius: 12px;
+      border: none !important;
+      box-shadow: none !important;
+      outline: none !important;
+      background-color: transparent !important;
       /* Position images to show heads - shift down 15% so top portion (heads) is visible */
       object-position: center 15%;
+    }
+    /* Business man (slide 1): shrink image slightly so full head/hair fits in frame */
+    .carousel-slide:nth-child(1) img {
+      transform: scale(0.94);
     }
     /* Woman with flowers (slide 5): keep cover zoom, shift image up to show head */
     .carousel-slide:nth-child(5) img {
       object-fit: cover;
       object-position: center top;
       transform: translateY(-8%);
+      border: none !important;
+      box-shadow: none !important;
+      outline: none !important;
+      background-color: transparent !important;
     }
-    /* Ken Burns–style slow zoom on active slide */
-    @keyframes heroCarouselKenBurns {
-      from { transform: scale(1); }
-      to { transform: scale(1.05); }
+    /* Expand-in effect: each slide starts small and expands to full size when active */
+    @keyframes heroCarouselExpand {
+      from { transform: scale(0.88); }
+      to { transform: scale(1); }
     }
     .carousel-slide.active img {
-      animation: heroCarouselKenBurns 4s ease-out forwards;
+      animation: heroCarouselExpand 0.7s ease-out forwards;
     }
-    /* Woman with flowers (slide 5): zoom from top so head stays in view, and maintain translateY */
-    @keyframes heroCarouselKenBurnsWoman {
-      from { transform: translateY(-8%) scale(1); }
-      to { transform: translateY(-8%) scale(1.05); }
+    /* Business man (slide 1): same expand from small to full */
+    .carousel-slide:nth-child(1).active img {
+      animation: heroCarouselExpand 0.7s ease-out forwards;
+    }
+    /* Woman with flowers (slide 5): expand while keeping translateY */
+    @keyframes heroCarouselExpandWoman {
+      from { transform: translateY(-8%) scale(0.88); }
+      to { transform: translateY(-8%) scale(1); }
     }
     .carousel-slide:nth-child(5).active img {
       transform-origin: center top;
-      animation: heroCarouselKenBurnsWoman 4s ease-out forwards;
+      animation: heroCarouselExpandWoman 0.7s ease-out forwards;
     }
     
     /* Two-tone blue hero background - smooth curve from bottom-left to top-right */
@@ -652,7 +671,7 @@
 
         <!-- Hero Image Carousel: 5 people images with Ken Burns effect -->
         <div class="col-lg-6 position-relative">
-          <div class="carousel-container rounded-3 shadow-lg">
+          <div class="carousel-container rounded-3">
             <div class="carousel-slide active">
               <img src="img/business-man.png" alt="Profesional" />
             </div>
