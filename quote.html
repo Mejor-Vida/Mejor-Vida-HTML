@@ -149,27 +149,6 @@
       text-decoration: underline;
     }
     
-    /* Iframe container */
-    .iframe-container {
-      background: white;
-      border-radius: 16px;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
-      overflow: hidden;
-    }
-    
-    .iframe-container iframe {
-      width: 100%;
-      height: 700px;
-      border: none;
-      display: block;
-    }
-    
-    @media (max-width: 768px) {
-      .iframe-container iframe {
-        height: 600px;
-      }
-    }
-    
     /* --- Header: 81px, logo 111px, nav pushed right with even spacing --- */
     .navbar { height: 81px !important; padding: 0 !important; display: flex !important; align-items: center !important; }
     .navbar-brand { flex: 0 0 auto; display: flex !important; align-items: center !important; padding: 0 !important; margin-right: 20px; }
@@ -384,17 +363,6 @@
         </div>
       </div>
 
-      <!-- Iframe Container -->
-      <div class="iframe-container">
-        <iframe
-          src="https://crm.mejorvidainsurance.com/widget/bookings/julies-quote-consultation"
-          id="booking-widget"
-          title="Schedule with Julie — Mejor Vida Insurance"
-          loading="lazy"
-          sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-        ></iframe>
-      </div>
-
       <!-- Contact Alternative -->
       <div class="text-center mt-5">
         <p class="text-body-secondary small mb-3" data-lang="es">¿Prefieres llamar directamente?</p>
@@ -460,11 +428,5 @@
       });
     });
   </script>
-
-  <!-- Chat widget loader -->
-  <script
-    src="https://widgets.leadconnectorhq.com/loader.js"
-    data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js"
-    data-widget-id="6935d169d355bd236df7342d"></script>
 </body>
 </html>
