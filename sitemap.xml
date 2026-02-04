@@ -10,16 +10,17 @@
   <!-- Blog page (weekly newsletter content) -->
   <url>
     <loc>https://www.mejorvidainsurance.com/blog.html</loc>
-    <lastmod>2025-01-22T00:00:00+00:00</lastmod>
+    <lastmod>2026-02-01T00:00:00+00:00</lastmod>
     <priority>0.80</priority>
   </url>
 
-  <!-- Future blog post URLs: add one <url> block per post, e.g.:
+  <!-- Blog post: Weekly Insurance Industry Update - February 1, 2026 -->
   <url>
-    <loc>https://www.mejorvidainsurance.com/blog/post-slug.html</loc>
-    <lastmod>YYYY-MM-DD</lastmod>
+    <loc>https://www.mejorvidainsurance.com/blog/weekly-insurance-update-2026-02-01.html</loc>
+    <lastmod>2026-02-01T00:00:00+00:00</lastmod>
     <priority>0.70</priority>
   </url>
-  -->
+
+  <!-- Future blog post URLs: add one <url> block per post -->
 
 </urlset>
