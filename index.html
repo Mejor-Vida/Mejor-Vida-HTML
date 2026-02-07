@@ -26,7 +26,7 @@
   <meta property="og:description" content="Proteja a su familia con el mejor seguro de gastos finales. Cotización gratuita y atención personalizada en español e inglés. ¡Asegure su tranquilidad hoy!" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://www.mejorvidainsurance.com/" />
-  <meta property="og:image" content="https://www.mejorvidainsurance.com/img/Family-smiling.jpg" />
+  <meta property="og:image" content="https://www.mejorvidainsurance.com/img/couple-smiling.png" />
   <meta property="og:locale" content="es_ES" />
   <meta property="og:locale:alternate" content="en_US" />
 
@@ -34,7 +34,7 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Seguro de Gastos Finales | Mejor Vida Insurance" />
   <meta name="twitter:description" content="Proteja a su familia con el mejor seguro de gastos finales. Cotización gratuita y atención personalizada en español e inglés. ¡Asegure su tranquilidad hoy!" />
-  <meta name="twitter:image" content="https://www.mejorvidainsurance.com/img/Family-smiling.jpg" />
+  <meta name="twitter:image" content="https://www.mejorvidainsurance.com/img/couple-smiling.png" />
 
   <!-- Hreflang (single URL with language toggle) -->
   <link rel="alternate" hreflang="es" href="https://www.mejorvidainsurance.com/" />
@@ -59,12 +59,20 @@
       "postalCode": "68542",
       "addressCountry": "US"
     },
-    "sameAs": [
-      "https://www.facebook.com/",
-      "https://www.instagram.com/",
-      "https://www.linkedin.com/"
-    ],
-    "description": "Mejor Vida Insurance ofrece seguros de gastos finales personalizados y asequibles para proteger a tu familia. Servicio en español e inglés."
+    "description": "Mejor Vida Insurance ofrece seguros de gastos finales personalizados y asequibles para proteger a tu familia. Servicio en español e inglés.",
+    "knowsLanguage": ["es", "en"],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Final Expense Insurance",
+      "itemListElement": [{
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Final Expense Life Insurance",
+          "description": "Whole life insurance policies designed to cover funeral, burial, and end-of-life expenses."
+        }
+      }]
+    }
   }
   </script>
 
@@ -885,7 +893,7 @@
   </section>
 
   <!-- CTA SECTION -->
-  <section class="hero-two-tone py-5 relative">
+  <section id="contact" class="hero-two-tone py-5 relative">
     <div class="hero-dark-overlay">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 500" preserveAspectRatio="none" aria-hidden="true"><path d="M 0 0 L 1200 0 C 900 350 300 150 0 500 L 0 0 Z" /></svg>
     </div>
@@ -900,39 +908,48 @@
   </section>
 
   <!-- FOOTER -->
-  <footer class="py-5" style="background:#1a365d;">
+  <footer style="background:#1a365d; padding: 8px 0 24px 0;">
     <div class="container">
-      <div class="row g-4 text-white">
-        <div class="col-12 col-md-4">
-          <img id="footer-logo" src="img/logo-spanish2.png" alt="Mejor Vida Insurance" class="mb-3" style="height:56px;filter:brightness(0) invert(1);" />
-          <p class="small mb-3 opacity-75" data-lang="es">Protegiendo familias con seguros de gastos finales asequibles y personalizados.</p>
-          <p class="small mb-3 opacity-75" data-lang="en">Protecting families with affordable and personalized final expense insurance.</p>
-          <p class="small mb-1"><i class="fas fa-phone me-2 opacity-75"></i><a href="tel:+15312291712" class="text-white text-opacity-90 text-decoration-none">(531) 229-1712</a></p>
-          <p class="small mb-1"><i class="fas fa-envelope me-2 opacity-75"></i><a href="mailto:Julie@mejorvidainsurance.com" class="text-white text-opacity-90 text-decoration-none">Julie@mejorvidainsurance.com</a></p>
-          <p class="small mb-0"><i class="fas fa-map-marker-alt me-2 opacity-75"></i>P.O. Box 21885, Lincoln, NE 68542</p>
+      <div class="d-flex flex-column flex-md-row align-items-center justify-content-between gap-2 text-white" style="margin:0; padding:0;">
+        <img id="footer-logo" src="img/logo-spanish2.png" alt="Mejor Vida Insurance" style="height:130px;filter:brightness(0) invert(1);margin-top:-25px;margin-bottom:-25px;" />
+        <span class="small"><i class="fas fa-phone me-2 opacity-75"></i><a href="tel:+15312291712" class="text-white text-opacity-90 text-decoration-none">(531) 229-1712</a></span>
+        <span class="small"><i class="fas fa-envelope me-2 opacity-75"></i><a href="mailto:Julie@mejorvidainsurance.com" class="text-white text-opacity-90 text-decoration-none">Julie@mejorvidainsurance.com</a></span>
+        <span class="small"><i class="fas fa-map-marker-alt me-2 opacity-75"></i>P.O. Box 21885, Lincoln, NE 68542</span>
+      </div>
+      <div class="row g-2 pt-2 mt-2 border-top border-secondary text-white small">
+        <div class="col-12 col-md-7">
+          <h4 class="h6 fw-bold mb-2" data-lang="es">Enlaces rápidos</h4>
+          <h4 class="h6 fw-bold mb-2" data-lang="en">Quick Links</h4>
+          <div class="d-flex flex-wrap gap-2 gap-md-3">
+            <a href="#home" class="text-white text-opacity-75 text-decoration-none" data-lang="es">Inicio</a><a href="#home" class="text-white text-opacity-75 text-decoration-none" data-lang="en">Home</a>
+            <span class="text-white text-opacity-50">·</span>
+            <a href="#about" class="text-white text-opacity-75 text-decoration-none" data-lang="es">Sobre Julie</a><a href="#about" class="text-white text-opacity-75 text-decoration-none" data-lang="en">About Julie</a>
+            <span class="text-white text-opacity-50">·</span>
+            <a href="#how-it-works" class="text-white text-opacity-75 text-decoration-none" data-lang="es">Cómo funciona</a><a href="#how-it-works" class="text-white text-opacity-75 text-decoration-none" data-lang="en">How It Works</a>
+            <span class="text-white text-opacity-50">·</span>
+            <a href="#carriers" class="text-white text-opacity-75 text-decoration-none" data-lang="es">Aseguradoras</a><a href="#carriers" class="text-white text-opacity-75 text-decoration-none" data-lang="en">Insurers</a>
+            <span class="text-white text-opacity-50">·</span>
+            <a href="#faq" class="text-white text-opacity-75 text-decoration-none">FAQ</a>
+            <span class="text-white text-opacity-50">·</span>
+            <a href="blog.html" class="text-white text-opacity-75 text-decoration-none">Blog</a>
+            <span class="text-white text-opacity-50">·</span>
+            <a href="#contact" class="text-white text-opacity-75 text-decoration-none" data-lang="es">Contacto</a><a href="#contact" class="text-white text-opacity-75 text-decoration-none" data-lang="en">Contact</a>
+            <span class="text-white text-opacity-50">·</span>
+            <a href="/quote.html" class="text-white text-opacity-75 text-decoration-none" data-lang="es">Cotización gratis</a><a href="/quote.html" class="text-white text-opacity-75 text-decoration-none" data-lang="en">Free Quote</a>
+          </div>
         </div>
-        <div class="col-12 col-md-4">
-          <h4 class="h6 fw-bold mb-3" data-lang="es">Enlaces rápidos</h4>
-          <h4 class="h6 fw-bold mb-3" data-lang="en">Quick Links</h4>
-          <ul class="list-unstyled small">
-            <li class="mb-2"><a href="#about" class="text-white text-opacity-75 text-decoration-none" data-lang="es">Sobre Julie</a><a href="#about" class="text-white text-opacity-75 text-decoration-none" data-lang="en">About Julie</a></li>
-            <li class="mb-2"><a href="#how-it-works" class="text-white text-opacity-75 text-decoration-none" data-lang="es">Cómo funciona</a><a href="#how-it-works" class="text-white text-opacity-75 text-decoration-none" data-lang="en">How It Works</a></li>
-            <li class="mb-2"><a href="#carriers" class="text-white text-opacity-75 text-decoration-none" data-lang="es">Aseguradoras</a><a href="#carriers" class="text-white text-opacity-75 text-decoration-none" data-lang="en">Carriers</a></li>
-            <li class="mb-2"><a href="#faq" class="text-white text-opacity-75 text-decoration-none" data-lang="es">Preguntas frecuentes</a><a href="#faq" class="text-white text-opacity-75 text-decoration-none" data-lang="en">FAQ</a></li>
-            <li class="mb-2"><a href="blog.html" class="text-white text-opacity-75 text-decoration-none">Blog</a></li>
-            <li class="mb-2"><a href="/quote.html" class="text-white text-opacity-75 text-decoration-none" data-lang="es">Cotización gratis</a><a href="/quote.html" class="text-white text-opacity-75 text-decoration-none" data-lang="en">Free Quote</a></li>
-          </ul>
-        </div>
-        <div class="col-12 col-md-4">
-          <h4 class="h6 fw-bold mb-3" data-lang="es">Legal</h4>
-          <h4 class="h6 fw-bold mb-3" data-lang="en">Legal</h4>
-          <a href="privacy-policy.html" class="text-white text-opacity-75 text-decoration-none d-block" data-lang="es">Política de privacidad</a>
-          <a href="privacy-policy.html" class="text-white text-opacity-75 text-decoration-none d-block" data-lang="en">Privacy Policy</a>
+        <div class="col-12 col-md-5">
+          <h4 class="h6 fw-bold mb-2">Legal</h4>
+          <div class="d-flex flex-wrap gap-2 gap-md-3">
+            <a href="privacy-policy.html" class="text-white text-opacity-75 text-decoration-none" data-lang="es">Política de privacidad</a><a href="privacy-policy.html" class="text-white text-opacity-75 text-decoration-none" data-lang="en">Privacy Policy</a>
+            <span class="text-white text-opacity-50">·</span>
+            <a href="terms-service.html" class="text-white text-opacity-75 text-decoration-none" data-lang="es">Términos de servicio</a><a href="terms-service.html" class="text-white text-opacity-75 text-decoration-none" data-lang="en">Terms of Service</a>
+          </div>
         </div>
       </div>
-      <div class="border-top border-secondary mt-5 pt-4">
-        <p class="small text-center text-white text-opacity-75 mb-2" data-lang="es">Julie es una agente de seguros licenciada en el estado de Nebraska. Licencia de Productor de Seguros #21695431.</p>
-        <p class="small text-center text-white text-opacity-75 mb-2" data-lang="en">Julie is a licensed insurance agent in the state of Nebraska. Insurance Producer License #21695431.</p>
+      <div class="border-top border-secondary mt-2 pt-2">
+        <p class="small text-center text-white text-opacity-75 mb-1" data-lang="es">Julie es una agente de seguros licenciada. Departamento de Seguros de Nebraska, Licencia de Productor #21695431. <a href="https://doi.nebraska.gov" target="_blank" rel="noopener" class="text-white text-opacity-75">Verificar licencia</a></p>
+        <p class="small text-center text-white text-opacity-75 mb-1" data-lang="en">Julie is a licensed insurance agent. Nebraska Department of Insurance, Producer License #21695431. <a href="https://doi.nebraska.gov" target="_blank" rel="noopener" class="text-white text-opacity-75">Verify license</a></p>
         <p class="small text-center text-white text-opacity-50 mb-0">&copy; <span id="year"></span> Mejor Vida Insurance LLC. All rights reserved.</p>
       </div>
     </div>

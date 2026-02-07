@@ -5,11 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Términos de Servicio - Mejor Vida Insurance</title>
   <meta name="robots" content="noindex, follow" />
-  <link rel="stylesheet" href="styles.css" />
 
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
       line-height: 1.6;
       margin: 0;
       padding: 0;
@@ -40,9 +39,10 @@
       cursor: pointer;
       border-radius: 4px;
       font-size: 0.9rem;
+      font-weight: 600;
     }
     .lang-btn.active {
-      background: #0056b3;
+      background: #3b82f6;
       color: white;
     }
     .container {
@@ -54,7 +54,7 @@
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
     h1, h2 {
-      color: #0056b3;
+      color: #1a365d;
     }
     p, ul {
       margin-bottom: 1em;
@@ -70,100 +70,97 @@
     a:hover {
       text-decoration: underline;
     }
+    /* Language toggle via CSS class on <html> */
+    html.lang-es [data-lang="en"] { display: none !important; }
+    html.lang-en [data-lang="es"] { display: none !important; }
   </style>
+  <script>
+    (function(){ try { var L = localStorage.getItem('preferredLang') || 'es'; document.documentElement.className = 'lang-' + L; } catch(e) {} })();
+  </script>
 </head>
 <body>
   <!-- Policy Page Header -->
   <header class="policy-header">
     <div class="policy-logo">
       <a href="index.html">
-        <img src="img/logo-spanish.png" alt="Mejor Vida Insurance Logo" />
+        <img src="img/logo-spanish2.png" alt="Mejor Vida Insurance Logo" id="header-logo" />
       </a>
     </div>
     <div class="lang-toggle">
-      <button class="lang-btn active" data-lang-btn="es">
-        <span class="flag">🇪🇸</span> ES
-      </button>
-      <button class="lang-btn" data-lang-btn="en">
-        <span class="flag">🇺🇸</span> EN
-      </button>
+      <button class="lang-btn active" data-lang-btn="es">ES</button>
+      <button class="lang-btn" data-lang-btn="en">EN</button>
     </div>
   </header>
 
   <div class="container">
     <h1 data-lang="es">Términos de Servicio</h1>
-    <h1 data-lang="en" style="display:none;">Terms of Service</h1>
+    <h1 data-lang="en">Terms of Service</h1>
 
     <p data-lang="es">
       Bienvenido a Mejor Vida Insurance LLC. Al utilizar nuestro sitio web y servicios, usted acepta cumplir con estos términos y condiciones.
     </p>
-    <p data-lang="en" style="display:none;">
+    <p data-lang="en">
       Welcome to Mejor Vida Insurance LLC. By using our website and services, you agree to comply with these terms and conditions.
     </p>
 
     <h2 data-lang="es">Uso del sitio web</h2>
-    <h2 data-lang="en" style="display:none;">Website Use</h2>
+    <h2 data-lang="en">Website Use</h2>
 
     <p data-lang="es">
       Usted acepta usar nuestro sitio web solo para fines legales y de acuerdo con todas las leyes aplicables. No debe usar el sitio para actividades fraudulentas o ilegales.
     </p>
-    <p data-lang="en" style="display:none;">
+    <p data-lang="en">
       You agree to use our website only for lawful purposes and in accordance with all applicable laws. You must not use the site for fraudulent or illegal activities.
     </p>
 
     <h2 data-lang="es">Información proporcionada</h2>
-    <h2 data-lang="en" style="display:none;">Information Provided</h2>
+    <h2 data-lang="en">Information Provided</h2>
 
     <p data-lang="es">
       Usted es responsable de la exactitud y veracidad de la información que proporciona a través de nuestros formularios y servicios.
     </p>
-    <p data-lang="en" style="display:none;">
+    <p data-lang="en">
       You are responsible for the accuracy and truthfulness of the information you provide through our forms and services.
     </p>
 
     <h2 data-lang="es">Limitación de responsabilidad</h2>
-    <h2 data-lang="en" style="display:none;">Limitation of Liability</h2>
+    <h2 data-lang="en">Limitation of Liability</h2>
 
     <p data-lang="es">
       Mejor Vida Insurance LLC no será responsable por daños directos, indirectos, incidentales o consecuentes que resulten del uso de nuestro sitio o servicios.
     </p>
-    <p data-lang="en" style="display:none;">
+    <p data-lang="en">
       Mejor Vida Insurance LLC shall not be liable for any direct, indirect, incidental, or consequential damages resulting from the use of our site or services.
     </p>
 
     <h2 data-lang="es">Cambios en los términos</h2>
-    <h2 data-lang="en" style="display:none;">Changes to Terms</h2>
+    <h2 data-lang="en">Changes to Terms</h2>
 
     <p data-lang="es">
       Podemos actualizar estos términos de servicio en cualquier momento. Publicaremos los cambios en esta página con la fecha de revisión actualizada.
     </p>
-    <p data-lang="en" style="display:none;">
+    <p data-lang="en">
       We may update these terms of service at any time. We will post changes on this page with an updated revision date.
     </p>
 
     <h2 data-lang="es">Contacto</h2>
-    <h2 data-lang="en" style="display:none;">Contact</h2>
+    <h2 data-lang="en">Contact</h2>
 
     <p data-lang="es">
       Si tiene preguntas sobre estos términos, por favor contáctenos en <a href="mailto:Julie@mejorvidainsurance.com">Julie@mejorvidainsurance.com</a>.
     </p>
-    <p data-lang="en" style="display:none;">
+    <p data-lang="en">
       If you have questions about these terms, please contact us at <a href="mailto:Julie@mejorvidainsurance.com">Julie@mejorvidainsurance.com</a>.
     </p>
 
-    <p><strong data-lang="es">Fecha de última actualización:</strong> <strong data-lang="en" style="display:none;">Last Updated:</strong> 13 de diciembre de 2025</p>
+    <p><strong data-lang="es">Fecha de última actualización:</strong> <strong data-lang="en">Last Updated:</strong> 13 de diciembre de 2025</p>
   </div>
 
   <script>
     const langButtons = document.querySelectorAll('.lang-btn');
 
     function setLanguage(lang) {
-      document.querySelectorAll('[data-lang="es"]').forEach(el => {
-        el.style.display = lang === 'es' ? '' : 'none';
-      });
-      document.querySelectorAll('[data-lang="en"]').forEach(el => {
-        el.style.display = lang === 'en' ? '' : 'none';
-      });
+      document.documentElement.className = 'lang-' + lang;
 
       langButtons.forEach(btn => {
         if (btn.dataset.langBtn === lang) {
@@ -172,16 +169,25 @@
           btn.classList.remove('active');
         }
       });
+
+      // Swap logo
+      const logo = document.getElementById('header-logo');
+      if (logo) {
+        logo.src = lang === 'es' ? 'img/logo-spanish2.png' : 'img/logo-english2.png';
+      }
+
+      localStorage.setItem('preferredLang', lang);
     }
+
+    // Restore saved language
+    const saved = localStorage.getItem('preferredLang') || 'es';
+    setLanguage(saved);
 
     langButtons.forEach(btn => {
       btn.addEventListener('click', () => {
         setLanguage(btn.dataset.langBtn);
       });
     });
-
-    // Default language
-    setLanguage('es');
   </script>
 </body>
 </html>

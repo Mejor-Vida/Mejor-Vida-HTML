@@ -97,6 +97,27 @@
   }
   </script>
 
+  <!-- JSON-LD: Organization (connects blog to licensed business) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "InsuranceAgency",
+    "name": "Mejor Vida Insurance LLC",
+    "url": "https://www.mejorvidainsurance.com/",
+    "telephone": "+1-531-229-1712",
+    "email": "mailto:Julie@mejorvidainsurance.com",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "P.O. Box 21885",
+      "addressLocality": "Lincoln",
+      "addressRegion": "NE",
+      "postalCode": "68542",
+      "addressCountry": "US"
+    },
+    "knowsLanguage": ["es", "en"]
+  }
+  </script>
+
   <style>
     /* Same header/footer styles as index.html */
     body { font-family: 'Inter', system-ui, sans-serif; color: #1f2937; }
@@ -379,8 +400,8 @@
             <p class="small text-body-secondary mb-2">15 enero 2025</p>
             <p class="small text-secondary flex-grow-1" data-lang="es">Te explicamos en términos simples qué cubre y cómo puede aliviar la carga de tu familia.</p>
             <p class="small text-secondary flex-grow-1" data-lang="en">We explain in simple terms what it covers and how it can ease the burden on your family.</p>
-            <a href="#post1" class="small fw-semibold text-primary text-decoration-none mt-2" data-lang="es">Leer más →</a>
-            <a href="#post1" class="small fw-semibold text-primary text-decoration-none mt-2" data-lang="en">Read more →</a>
+            <span class="small fw-semibold text-secondary mt-2" data-lang="es">Próximamente →</span>
+            <span class="small fw-semibold text-secondary mt-2" data-lang="en">Coming soon →</span>
           </article>
         </div>
         <!-- BLOG CARD 2 -->
@@ -391,8 +412,8 @@
             <p class="small text-body-secondary mb-2">8 enero 2025</p>
             <p class="small text-secondary flex-grow-1" data-lang="es">Una guía rápida para comparar opciones y tomar la mejor decisión para tu familia.</p>
             <p class="small text-secondary flex-grow-1" data-lang="en">A quick guide to compare options and make the best decision for your family.</p>
-            <a href="#post2" class="small fw-semibold text-primary text-decoration-none mt-2" data-lang="es">Leer más →</a>
-            <a href="#post2" class="small fw-semibold text-primary text-decoration-none mt-2" data-lang="en">Read more →</a>
+            <span class="small fw-semibold text-secondary mt-2" data-lang="es">Próximamente →</span>
+            <span class="small fw-semibold text-secondary mt-2" data-lang="en">Coming soon →</span>
           </article>
         </div>
         <!-- BLOG CARD 3 -->
@@ -403,8 +424,8 @@
             <p class="small text-body-secondary mb-2">1 enero 2025</p>
             <p class="small text-secondary flex-grow-1" data-lang="es">Consejos para tener la conversación con respeto y claridad.</p>
             <p class="small text-secondary flex-grow-1" data-lang="en">Tips for having the conversation with respect and clarity.</p>
-            <a href="#post3" class="small fw-semibold text-primary text-decoration-none mt-2" data-lang="es">Leer más →</a>
-            <a href="#post3" class="small fw-semibold text-primary text-decoration-none mt-2" data-lang="en">Read more →</a>
+            <span class="small fw-semibold text-secondary mt-2" data-lang="es">Próximamente →</span>
+            <span class="small fw-semibold text-secondary mt-2" data-lang="en">Coming soon →</span>
           </article>
         </div>
         <!-- BLOG CARD 4 -->
@@ -415,8 +436,8 @@
             <p class="small text-body-secondary mb-2">25 diciembre 2024</p>
             <p class="small text-secondary flex-grow-1" data-lang="es">Un vistazo a las compañías con las que trabajamos para encontrar tu mejor opción.</p>
             <p class="small text-secondary flex-grow-1" data-lang="en">A look at the companies we work with to find your best option.</p>
-            <a href="#post4" class="small fw-semibold text-primary text-decoration-none mt-2" data-lang="es">Leer más →</a>
-            <a href="#post4" class="small fw-semibold text-primary text-decoration-none mt-2" data-lang="en">Read more →</a>
+            <span class="small fw-semibold text-secondary mt-2" data-lang="es">Próximamente →</span>
+            <span class="small fw-semibold text-secondary mt-2" data-lang="en">Coming soon →</span>
           </article>
         </div>
         <!-- BLOG CARD 5 -->
@@ -427,8 +448,8 @@
             <p class="small text-body-secondary mb-2">18 diciembre 2024</p>
             <p class="small text-secondary flex-grow-1" data-lang="es">La confianza y claridad que necesitas en tu idioma.</p>
             <p class="small text-secondary flex-grow-1" data-lang="en">The trust and clarity you need in your language.</p>
-            <a href="#post5" class="small fw-semibold text-primary text-decoration-none mt-2" data-lang="es">Leer más →</a>
-            <a href="#post5" class="small fw-semibold text-primary text-decoration-none mt-2" data-lang="en">Read more →</a>
+            <span class="small fw-semibold text-secondary mt-2" data-lang="es">Próximamente →</span>
+            <span class="small fw-semibold text-secondary mt-2" data-lang="en">Coming soon →</span>
           </article>
         </div>
       </div>
@@ -511,39 +532,48 @@
   -->
 
   <!-- FOOTER (same structure as index.html) -->
-  <footer class="py-5" style="background:#1a365d;">
+  <footer style="background:#1a365d; padding: 8px 0 24px 0;">
     <div class="container">
-      <div class="row g-4 text-white">
-        <div class="col-12 col-md-4">
-          <img id="footer-logo" src="img/logo-spanish2.png" alt="Mejor Vida Insurance" class="mb-3" style="height:56px;filter:brightness(0) invert(1);" />
-          <p class="small mb-3 opacity-75" data-lang="es">Protegiendo familias con seguros de gastos finales asequibles y personalizados.</p>
-          <p class="small mb-3 opacity-75" data-lang="en">Protecting families with affordable and personalized final expense insurance.</p>
-          <p class="small mb-1"><i class="fas fa-phone me-2 opacity-75"></i><a href="tel:+15312291712" class="text-white text-opacity-90 text-decoration-none">(531) 229-1712</a></p>
-          <p class="small mb-1"><i class="fas fa-envelope me-2 opacity-75"></i><a href="mailto:Julie@mejorvidainsurance.com" class="text-white text-opacity-90 text-decoration-none">Julie@mejorvidainsurance.com</a></p>
-          <p class="small mb-0"><i class="fas fa-map-marker-alt me-2 opacity-75"></i>P.O. Box 21885, Lincoln, NE 68542</p>
+      <div class="d-flex flex-column flex-md-row align-items-center justify-content-between gap-2 text-white" style="margin:0; padding:0;">
+        <img id="footer-logo" src="img/logo-spanish2.png" alt="Mejor Vida Insurance" style="height:130px;filter:brightness(0) invert(1);margin-top:-25px;margin-bottom:-25px;" />
+        <span class="small"><i class="fas fa-phone me-2 opacity-75"></i><a href="tel:+15312291712" class="text-white text-opacity-90 text-decoration-none">(531) 229-1712</a></span>
+        <span class="small"><i class="fas fa-envelope me-2 opacity-75"></i><a href="mailto:Julie@mejorvidainsurance.com" class="text-white text-opacity-90 text-decoration-none">Julie@mejorvidainsurance.com</a></span>
+        <span class="small"><i class="fas fa-map-marker-alt me-2 opacity-75"></i>P.O. Box 21885, Lincoln, NE 68542</span>
+      </div>
+      <div class="row g-2 pt-2 mt-2 border-top border-secondary text-white small">
+        <div class="col-12 col-md-7">
+          <h4 class="h6 fw-bold mb-2" data-lang="es">Enlaces rápidos</h4>
+          <h4 class="h6 fw-bold mb-2" data-lang="en">Quick Links</h4>
+          <div class="d-flex flex-wrap gap-2 gap-md-3">
+            <a href="index.html" class="text-white text-opacity-75 text-decoration-none" data-lang="es">Inicio</a><a href="index.html" class="text-white text-opacity-75 text-decoration-none" data-lang="en">Home</a>
+            <span class="text-white text-opacity-50">·</span>
+            <a href="index.html#about" class="text-white text-opacity-75 text-decoration-none" data-lang="es">Sobre Julie</a><a href="index.html#about" class="text-white text-opacity-75 text-decoration-none" data-lang="en">About Julie</a>
+            <span class="text-white text-opacity-50">·</span>
+            <a href="index.html#how-it-works" class="text-white text-opacity-75 text-decoration-none" data-lang="es">Cómo funciona</a><a href="index.html#how-it-works" class="text-white text-opacity-75 text-decoration-none" data-lang="en">How It Works</a>
+            <span class="text-white text-opacity-50">·</span>
+            <a href="index.html#carriers" class="text-white text-opacity-75 text-decoration-none" data-lang="es">Aseguradoras</a><a href="index.html#carriers" class="text-white text-opacity-75 text-decoration-none" data-lang="en">Insurers</a>
+            <span class="text-white text-opacity-50">·</span>
+            <a href="index.html#faq" class="text-white text-opacity-75 text-decoration-none">FAQ</a>
+            <span class="text-white text-opacity-50">·</span>
+            <a href="blog.html" class="text-white text-opacity-75 text-decoration-none">Blog</a>
+            <span class="text-white text-opacity-50">·</span>
+            <a href="index.html#contact" class="text-white text-opacity-75 text-decoration-none" data-lang="es">Contacto</a><a href="index.html#contact" class="text-white text-opacity-75 text-decoration-none" data-lang="en">Contact</a>
+            <span class="text-white text-opacity-50">·</span>
+            <a href="quote.html" class="text-white text-opacity-75 text-decoration-none" data-lang="es">Cotización gratis</a><a href="quote.html" class="text-white text-opacity-75 text-decoration-none" data-lang="en">Free Quote</a>
+          </div>
         </div>
-        <div class="col-12 col-md-4">
-          <h4 class="h6 fw-bold mb-3" data-lang="es">Enlaces rápidos</h4>
-          <h4 class="h6 fw-bold mb-3" data-lang="en">Quick Links</h4>
-          <ul class="list-unstyled small">
-            <li class="mb-2"><a href="index.html#about" class="text-white text-opacity-75 text-decoration-none" data-lang="es">Sobre Julie</a><a href="index.html#about" class="text-white text-opacity-75 text-decoration-none" data-lang="en">About Julie</a></li>
-            <li class="mb-2"><a href="index.html#how-it-works" class="text-white text-opacity-75 text-decoration-none" data-lang="es">Cómo funciona</a><a href="index.html#how-it-works" class="text-white text-opacity-75 text-decoration-none" data-lang="en">How It Works</a></li>
-            <li class="mb-2"><a href="index.html#carriers" class="text-white text-opacity-75 text-decoration-none" data-lang="es">Aseguradoras</a><a href="index.html#carriers" class="text-white text-opacity-75 text-decoration-none" data-lang="en">Carriers</a></li>
-            <li class="mb-2"><a href="index.html#faq" class="text-white text-opacity-75 text-decoration-none" data-lang="es">Preguntas frecuentes</a><a href="index.html#faq" class="text-white text-opacity-75 text-decoration-none" data-lang="en">FAQ</a></li>
-            <li class="mb-2"><a href="blog.html" class="text-white text-opacity-75 text-decoration-none">Blog</a></li>
-            <li class="mb-2"><a href="quote.html" class="text-white text-opacity-75 text-decoration-none" data-lang="es">Cotización gratis</a><a href="quote.html" class="text-white text-opacity-75 text-decoration-none" data-lang="en">Free Quote</a></li>
-          </ul>
-        </div>
-        <div class="col-12 col-md-4">
-          <h4 class="h6 fw-bold mb-3" data-lang="es">Legal</h4>
-          <h4 class="h6 fw-bold mb-3" data-lang="en">Legal</h4>
-          <a href="privacy-policy.html" class="text-white text-opacity-75 text-decoration-none d-block" data-lang="es">Política de privacidad</a>
-          <a href="privacy-policy.html" class="text-white text-opacity-75 text-decoration-none d-block" data-lang="en">Privacy Policy</a>
+        <div class="col-12 col-md-5">
+          <h4 class="h6 fw-bold mb-2">Legal</h4>
+          <div class="d-flex flex-wrap gap-2 gap-md-3">
+            <a href="privacy-policy.html" class="text-white text-opacity-75 text-decoration-none" data-lang="es">Política de privacidad</a><a href="privacy-policy.html" class="text-white text-opacity-75 text-decoration-none" data-lang="en">Privacy Policy</a>
+            <span class="text-white text-opacity-50">·</span>
+            <a href="terms-service.html" class="text-white text-opacity-75 text-decoration-none" data-lang="es">Términos de servicio</a><a href="terms-service.html" class="text-white text-opacity-75 text-decoration-none" data-lang="en">Terms of Service</a>
+          </div>
         </div>
       </div>
-      <div class="border-top border-secondary mt-5 pt-4">
-        <p class="small text-center text-white text-opacity-75 mb-2" data-lang="es">Julie es una agente de seguros licenciada en el estado de Nebraska. Licencia de Productor de Seguros #21695431.</p>
-        <p class="small text-center text-white text-opacity-75 mb-2" data-lang="en">Julie is a licensed insurance agent in the state of Nebraska. Insurance Producer License #21695431.</p>
+      <div class="border-top border-secondary mt-2 pt-2">
+        <p class="small text-center text-white text-opacity-75 mb-1" data-lang="es">Julie es una agente de seguros licenciada. Departamento de Seguros de Nebraska, Licencia de Productor #21695431. <a href="https://doi.nebraska.gov" target="_blank" rel="noopener" class="text-white text-opacity-75">Verificar licencia</a></p>
+        <p class="small text-center text-white text-opacity-75 mb-1" data-lang="en">Julie is a licensed insurance agent. Nebraska Department of Insurance, Producer License #21695431. <a href="https://doi.nebraska.gov" target="_blank" rel="noopener" class="text-white text-opacity-75">Verify license</a></p>
         <p class="small text-center text-white text-opacity-50 mb-0">&copy; <span id="year"></span> Mejor Vida Insurance LLC. All rights reserved.</p>
       </div>
     </div>

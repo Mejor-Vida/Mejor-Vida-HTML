@@ -5,11 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Política de Privacidad - Mejor Vida Insurance</title>
   <meta name="robots" content="noindex, follow" />
-  <link rel="stylesheet" href="styles.css" />
 
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
       line-height: 1.6;
       margin: 0;
       padding: 0;
@@ -40,9 +39,10 @@
       cursor: pointer;
       border-radius: 4px;
       font-size: 0.9rem;
+      font-weight: 600;
     }
     .lang-btn.active {
-      background: #0056b3;
+      background: #3b82f6;
       color: white;
     }
     .container {
@@ -54,7 +54,7 @@
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
     h1, h2 {
-      color: #0056b3;
+      color: #1a365d;
     }
     p, ul {
       margin-bottom: 1em;
@@ -70,127 +70,124 @@
     a:hover {
       text-decoration: underline;
     }
+    /* Language toggle via CSS class on <html> */
+    html.lang-es [data-lang="en"] { display: none !important; }
+    html.lang-en [data-lang="es"] { display: none !important; }
   </style>
+  <script>
+    (function(){ try { var L = localStorage.getItem('preferredLang') || 'es'; document.documentElement.className = 'lang-' + L; } catch(e) {} })();
+  </script>
 </head>
 <body>
   <!-- Policy Page Header -->
   <header class="policy-header">
     <div class="policy-logo">
       <a href="index.html">
-        <img src="img/logo-spanish.png" alt="Mejor Vida Insurance Logo" />
+        <img src="img/logo-spanish2.png" alt="Mejor Vida Insurance Logo" id="header-logo" />
       </a>
     </div>
     <div class="lang-toggle">
-      <button class="lang-btn active" data-lang-btn="es">
-        <span class="flag">🇪🇸</span> ES
-      </button>
-      <button class="lang-btn" data-lang-btn="en">
-        <span class="flag">🇺🇸</span> EN
-      </button>
+      <button class="lang-btn active" data-lang-btn="es">ES</button>
+      <button class="lang-btn" data-lang-btn="en">EN</button>
     </div>
   </header>
 
   <div class="container">
     <h1 data-lang="es">Política de Privacidad</h1>
-    <h1 data-lang="en" style="display:none;">Privacy Policy</h1>
+    <h1 data-lang="en">Privacy Policy</h1>
 
     <p data-lang="es">
       En Mejor Vida Insurance LLC, valoramos su privacidad y nos comprometemos a proteger su información personal. Esta política explica cómo recopilamos, usamos y protegemos sus datos cuando utiliza nuestro sitio web y servicios.
     </p>
-    <p data-lang="en" style="display:none;">
+    <p data-lang="en">
       At Mejor Vida Insurance LLC, we value your privacy and are committed to protecting your personal information. This policy explains how we collect, use, and safeguard your data when you use our website and services.
     </p>
 
     <h2 data-lang="es">Información que recopilamos</h2>
-    <h2 data-lang="en" style="display:none;">Information We Collect</h2>
+    <h2 data-lang="en">Information We Collect</h2>
 
     <p data-lang="es">
       Recopilamos información personal que usted nos proporciona voluntariamente, como su nombre, fecha de nacimiento, género, código postal, información de contacto (teléfono y correo electrónico), y datos relacionados con sus preferencias de seguro y salud.
     </p>
-    <p data-lang="en" style="display:none;">
+    <p data-lang="en">
       We collect personal information you voluntarily provide, such as your name, date of birth, gender, zip code, contact information (phone and email), and data related to your insurance preferences and health.
     </p>
 
     <h2 data-lang="es">Uso de la información</h2>
-    <h2 data-lang="en" style="display:none;">Use of Information</h2>
+    <h2 data-lang="en">Use of Information</h2>
 
     <p data-lang="es">Utilizamos su información para:</p>
-    <p data-lang="en" style="display:none;">We use your information to:</p>
+    <p data-lang="en">We use your information to:</p>
 
     <ul data-lang="es">
       <li>Proporcionarle cotizaciones personalizadas de seguros de gastos finales.</li>
       <li>Contactarle por teléfono, correo electrónico o mensaje de texto para ofrecerle opciones de seguro y asistencia personalizada.</li>
       <li>Cumplir con requisitos legales y regulatorios aplicables.</li>
     </ul>
-    <ul data-lang="en" style="display:none;">
+    <ul data-lang="en">
       <li>Provide you with personalized final expense insurance quotes.</li>
       <li>Contact you by phone, email, or text message to offer insurance options and personalized assistance.</li>
       <li>Comply with applicable legal and regulatory requirements.</li>
     </ul>
 
     <h2 data-lang="es">Consentimiento para comunicaciones</h2>
-    <h2 data-lang="en" style="display:none;">Consent for Communications</h2>
+    <h2 data-lang="en">Consent for Communications</h2>
 
     <p data-lang="es">
-      Al enviar este formulario, usted autoriza a Mejor Vida Insurance LLC a contactarle por teléfono, correo electrónico o mensaje de texto sobre opciones de seguro. Puede optar por no recibir estas comunicaciones en cualquier momento respondiendo con “STOP” o contactándonos directamente.
+      Al enviar este formulario, usted autoriza a Mejor Vida Insurance LLC a contactarle por teléfono, correo electrónico o mensaje de texto sobre opciones de seguro. Puede optar por no recibir estas comunicaciones en cualquier momento respondiendo con "STOP" o contactándonos directamente.
     </p>
-    <p data-lang="en" style="display:none;">
-      By submitting this form, you authorize Mejor Vida Insurance LLC to contact you by phone, email, or text message about insurance options. You may opt out of these communications at any time by replying “STOP” or contacting us directly.
+    <p data-lang="en">
+      By submitting this form, you authorize Mejor Vida Insurance LLC to contact you by phone, email, or text message about insurance options. You may opt out of these communications at any time by replying "STOP" or contacting us directly.
     </p>
 
     <h2 data-lang="es">Protección de datos</h2>
-    <h2 data-lang="en" style="display:none;">Data Protection</h2>
+    <h2 data-lang="en">Data Protection</h2>
 
     <p data-lang="es">
       Implementamos medidas de seguridad razonables para proteger su información personal contra acceso no autorizado, alteración, divulgación o destrucción.
     </p>
-    <p data-lang="en" style="display:none;">
+    <p data-lang="en">
       We implement reasonable security measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction.
     </p>
 
     <h2 data-lang="es">Compartir información</h2>
-    <h2 data-lang="en" style="display:none;">Sharing Information</h2>
+    <h2 data-lang="en">Sharing Information</h2>
 
     <p data-lang="es">
       No vendemos ni alquilamos su información personal a terceros. Podemos compartir datos con proveedores de servicios autorizados que nos ayudan a operar nuestro negocio, siempre bajo estrictas obligaciones de confidencialidad.
     </p>
-    <p data-lang="en" style="display:none;">
+    <p data-lang="en">
       We do not sell or rent your personal information to third parties. We may share data with authorized service providers who help us operate our business, always under strict confidentiality obligations.
     </p>
 
     <h2 data-lang="es">Derechos del usuario</h2>
-    <h2 data-lang="en" style="display:none;">User Rights</h2>
+    <h2 data-lang="en">User Rights</h2>
 
     <p data-lang="es">
       Usted tiene derecho a acceder, corregir o eliminar su información personal. Para ejercer estos derechos, por favor contáctenos a través de nuestro correo electrónico: <a href="mailto:Julie@mejorvidainsurance.com">Julie@mejorvidainsurance.com</a>.
     </p>
-    <p data-lang="en" style="display:none;">
+    <p data-lang="en">
       You have the right to access, correct, or delete your personal information. To exercise these rights, please contact us via email at: <a href="mailto:Julie@mejorvidainsurance.com">Julie@mejorvidainsurance.com</a>.
     </p>
 
     <h2 data-lang="es">Cambios en esta política</h2>
-    <h2 data-lang="en" style="display:none;">Changes to This Policy</h2>
+    <h2 data-lang="en">Changes to This Policy</h2>
 
     <p data-lang="es">
       Podemos actualizar esta política de privacidad ocasionalmente. Publicaremos cualquier cambio en esta página con la fecha de revisión actualizada.
     </p>
-    <p data-lang="en" style="display:none;">
+    <p data-lang="en">
       We may update this privacy policy occasionally. We will post any changes on this page with an updated revision date.
     </p>
 
-    <p><strong data-lang="es">Fecha de última actualización:</strong> <strong data-lang="en" style="display:none;">Last Updated:</strong> 13 de diciembre de 2025</p>
+    <p><strong data-lang="es">Fecha de última actualización:</strong> <strong data-lang="en">Last Updated:</strong> 13 de diciembre de 2025</p>
   </div>
 
   <script>
     const langButtons = document.querySelectorAll('.lang-btn');
 
     function setLanguage(lang) {
-      document.querySelectorAll('[data-lang="es"]').forEach(el => {
-        el.style.display = lang === 'es' ? '' : 'none';
-      });
-      document.querySelectorAll('[data-lang="en"]').forEach(el => {
-        el.style.display = lang === 'en' ? '' : 'none';
-      });
+      document.documentElement.className = 'lang-' + lang;
 
       langButtons.forEach(btn => {
         if (btn.dataset.langBtn === lang) {
@@ -199,16 +196,25 @@
           btn.classList.remove('active');
         }
       });
+
+      // Swap logo
+      const logo = document.getElementById('header-logo');
+      if (logo) {
+        logo.src = lang === 'es' ? 'img/logo-spanish2.png' : 'img/logo-english2.png';
+      }
+
+      localStorage.setItem('preferredLang', lang);
     }
+
+    // Restore saved language
+    const saved = localStorage.getItem('preferredLang') || 'es';
+    setLanguage(saved);
 
     langButtons.forEach(btn => {
       btn.addEventListener('click', () => {
         setLanguage(btn.dataset.langBtn);
       });
     });
-
-    // Default language
-    setLanguage('es');
   </script>
 </body>
 </html>
