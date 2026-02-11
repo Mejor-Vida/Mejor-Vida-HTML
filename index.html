@@ -159,16 +159,17 @@
       pointer-events: none;
     }
     
-    /* Carousel styles - no box-shadow/border on container or images to avoid ghost box */
+    /* Carousel styles - transparent container so people float on hero gradient */
     .carousel-container {
       position: relative;
       width: 100%;
       aspect-ratio: 4/3;
-      overflow: hidden;
-      border-radius: 12px;
+      overflow: visible;
+      border-radius: 0;
       border: none !important;
       box-shadow: none !important;
-      filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.08));
+      filter: none;
+      background: transparent !important;
     }
     
     .carousel-slide {
@@ -179,6 +180,7 @@
       height: 100%;
       opacity: 0;
       transition: opacity 0.8s ease-in-out;
+      background: transparent !important;
     }
     
     .carousel-slide.active {
@@ -188,28 +190,18 @@
     .carousel-slide img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
-      border-radius: 12px;
+      object-fit: contain;
+      border-radius: 0;
       border: none !important;
       box-shadow: none !important;
       outline: none !important;
       background-color: transparent !important;
-      /* Position images to show heads - shift down 15% so top portion (heads) is visible */
-      object-position: center 15%;
+      object-position: center bottom;
     }
-    /* Business man (slide 1): shrink image slightly so full head/hair fits in frame */
-    .carousel-slide:nth-child(1) img {
-      transform: scale(0.94);
-    }
-    /* Woman with flowers (slide 5): keep cover zoom, shift image up to show head */
-    .carousel-slide:nth-child(5) img {
-      object-fit: cover;
-      object-position: center top;
-      transform: translateY(-8%);
-      border: none !important;
-      box-shadow: none !important;
-      outline: none !important;
-      background-color: transparent !important;
+    /* Happy family (slide 3): scale up to fill more space */
+    .carousel-slide:nth-child(3) img {
+      transform: scale(1.4);
+      transform-origin: center bottom;
     }
     /* Expand-in effect: each slide starts small and expands to full size when active */
     @keyframes heroCarouselExpand {
@@ -219,18 +211,10 @@
     .carousel-slide.active img {
       animation: heroCarouselExpand 0.7s ease-out forwards;
     }
-    /* Business man (slide 1): same expand from small to full */
-    .carousel-slide:nth-child(1).active img {
-      animation: heroCarouselExpand 0.7s ease-out forwards;
-    }
-    /* Woman with flowers (slide 5): expand while keeping translateY */
-    @keyframes heroCarouselExpandWoman {
-      from { transform: translateY(-8%) scale(0.88); }
-      to { transform: translateY(-8%) scale(1); }
-    }
-    .carousel-slide:nth-child(5).active img {
-      transform-origin: center top;
-      animation: heroCarouselExpandWoman 0.7s ease-out forwards;
+    .carousel-slide:nth-child(3).active img {
+      animation: none;
+      transform: scale(1.4);
+      transform-origin: center bottom;
     }
     
     /* Two-tone blue hero background - smooth curve from bottom-left to top-right */
@@ -690,7 +674,7 @@
               <img src="img/couple-smiling.png" alt="Pareja sonriendo" />
             </div>
             <div class="carousel-slide">
-              <img src="img/man-sitting.png" alt="Hombre sentado" />
+              <img src="img/happy-family.png" alt="Familia feliz" />
             </div>
             <div class="carousel-slide">
               <img src="img/grandma-grandson.png" alt="Abuela y nieto" />
