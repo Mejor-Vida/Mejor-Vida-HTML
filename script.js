@@ -33,13 +33,20 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Spanish: logo-spanish2.png; English: logo-english2.png
+    // Blog post pages live under /blog/, so logos need ../img there.
+    const isBlogPostPage = window.location.pathname.includes('/blog/');
+    const logoBasePath = isBlogPostPage ? '../img/' : 'img/';
     const headerLogo = document.getElementById('header-logo');
     if (headerLogo) {
-      headerLogo.src = lang === 'es' ? 'img/logo-spanish2.png' : 'img/logo-english2.png';
+      headerLogo.src = lang === 'es'
+        ? logoBasePath + 'logo-spanish2.png'
+        : logoBasePath + 'logo-english2.png';
     }
     const footerLogo = document.getElementById('footer-logo');
     if (footerLogo) {
-      footerLogo.src = lang === 'es' ? 'img/logo-spanish2.png' : 'img/logo-english2.png';
+      footerLogo.src = lang === 'es'
+        ? logoBasePath + 'logo-spanish2.png'
+        : logoBasePath + 'logo-english2.png';
     }
 
     // Save preference to localStorage
