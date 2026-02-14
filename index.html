@@ -196,12 +196,38 @@
       box-shadow: none !important;
       outline: none !important;
       background-color: transparent !important;
-      object-position: center bottom;
+      object-position: center 116%;
+      transform: scale(1.38);
+      transform-origin: center bottom;
     }
     /* Happy family (slide 3): scale up to fill more space */
     .carousel-slide:nth-child(3) img {
-      transform: scale(1.4);
+      transform: scale(1.74);
       transform-origin: center bottom;
+    }
+    .carousel-slide:nth-child(4) img {
+      transform: scale(1.3);
+      transform-origin: center bottom;
+    }
+    .carousel-slide:nth-child(5) img {
+      object-position: center 124%;
+      transform: scale(1.46) translateY(8%);
+      transform-origin: center bottom;
+    }
+    /* First two slides: larger and lower to avoid head crop */
+    .carousel-slide:nth-child(1) img,
+    .carousel-slide:nth-child(2) img {
+      object-position: center 130%;
+      transform: scale(1.5) translateY(16%);
+      transform-origin: center bottom;
+    }
+    .carousel-slide:nth-child(1) img {
+      object-position: center 136%;
+      transform: scale(1.5) translateY(20%);
+    }
+    .carousel-slide:nth-child(2) img {
+      object-position: center 133%;
+      transform: scale(1.5) translateY(18%);
     }
     /* Expand-in effect: each slide starts small and expands to full size when active */
     @keyframes heroCarouselExpand {
@@ -209,12 +235,74 @@
       to { transform: scale(1); }
     }
     .carousel-slide.active img {
-      animation: heroCarouselExpand 0.7s ease-out forwards;
+      animation: none;
     }
     .carousel-slide:nth-child(3).active img {
       animation: none;
-      transform: scale(1.4);
+      transform: scale(1.74);
       transform-origin: center bottom;
+    }
+    .carousel-slide:nth-child(4).active img {
+      animation: none;
+      transform: scale(1.3);
+      transform-origin: center bottom;
+    }
+    .carousel-slide:nth-child(5).active img {
+      animation: none;
+      object-position: center 124%;
+      transform: scale(1.46) translateY(8%);
+      transform-origin: center bottom;
+    }
+    .carousel-slide:nth-child(1).active img,
+    .carousel-slide:nth-child(2).active img {
+      animation: none;
+      object-position: center 130%;
+      transform: scale(1.5) translateY(16%);
+      transform-origin: center bottom;
+    }
+    .carousel-slide:nth-child(1).active img {
+      object-position: center 136%;
+      transform: scale(1.5) translateY(20%);
+    }
+    .carousel-slide:nth-child(2).active img {
+      object-position: center 133%;
+      transform: scale(1.5) translateY(18%);
+    }
+    @media (max-width: 991px) {
+      .carousel-slide img {
+        object-position: center 110%;
+        transform: scale(1.24);
+      }
+      .carousel-slide:nth-child(1) img,
+      .carousel-slide:nth-child(2) img,
+      .carousel-slide:nth-child(1).active img,
+      .carousel-slide:nth-child(2).active img {
+        object-position: center 124%;
+        transform: scale(1.34) translateY(12%);
+      }
+      .carousel-slide:nth-child(1) img,
+      .carousel-slide:nth-child(1).active img {
+        object-position: center 128%;
+        transform: scale(1.34) translateY(15%);
+      }
+      .carousel-slide:nth-child(2) img,
+      .carousel-slide:nth-child(2).active img {
+        object-position: center 126%;
+        transform: scale(1.34) translateY(13%);
+      }
+      .carousel-slide:nth-child(3) img,
+      .carousel-slide:nth-child(3).active img {
+        transform: scale(1.54);
+      }
+      .carousel-slide:nth-child(4) img,
+      .carousel-slide:nth-child(4).active img {
+        transform: scale(1.16);
+      }
+      .carousel-slide:nth-child(5) img,
+      .carousel-slide:nth-child(5).active img {
+        object-position: center 120%;
+        transform: scale(1.3) translateY(6%);
+      }
     }
     
     /* Two-tone blue hero background - smooth curve from bottom-left to top-right */
