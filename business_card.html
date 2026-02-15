@@ -41,7 +41,7 @@
 
         .content-side {
             width: 55%;
-            padding: 4px 28px 14px;
+            padding: 6px 10px 14px 20px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -84,7 +84,7 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            font-size: 10px;
+            font-size: 12px;
             color: #334155;
             margin-bottom: 4px;
         }
@@ -92,6 +92,19 @@
         .info-icon {
             color: var(--brand-blue);
             flex-shrink: 0;
+        }
+
+        .company-top-right {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            z-index: 10;
+            font-size: 9px;
+            font-weight: 700;
+            color: #64748b;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            white-space: nowrap;
         }
 
         .img-error {
@@ -129,23 +142,22 @@
             </div>
 
             <div>
-                <h2 style="color: var(--brand-blue);" class="text-[22px] font-extrabold tracking-tight leading-none uppercase">JULIE BRAUNSROTH</h2>
-                <p class="text-[8.5px] font-bold text-slate-600 uppercase tracking-widest mt-1.5 border-l-2 border-yellow-400 pl-2 whitespace-nowrap">Agente de Seguros de Vida y Salud</p>
-                <p class="text-[8px] text-slate-400 font-semibold tracking-tight mt-0.5 ml-3">MEJOR VIDA INSURANCE LLC</p>
+                <h2 style="color: var(--brand-blue);" class="text-[23px] font-extrabold tracking-tight leading-none uppercase whitespace-nowrap">JULIE BRAUNSROTH</h2>
+                <p class="text-[9.8px] font-bold text-slate-600 uppercase tracking-widest mt-1.5 border-l-2 border-yellow-400 pl-2 whitespace-nowrap">Agente de Seguros de Vida y Salud</p>
             </div>
 
-            <div class="mt-1">
+            <div class="mt-1" style="transform: translateX(6px);">
                 <div class="info-item">
                     <svg class="w-3.5 h-3.5 info-icon" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 005.455 5.455l.774-1.548a1 1 0 011.06-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path></svg>
-                    <span class="font-bold text-[11px] text-slate-800">(402) 440-5438</span>
+                    <span class="font-bold text-[13px] text-slate-800">(402) 440-5438</span>
                 </div>
                 <div class="info-item">
                     <svg class="w-3.5 h-3.5 info-icon" fill="currentColor" viewBox="0 0 20 20"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg>
-                    <span class="font-medium text-[10px]">julie@mejorvidainsurance.com</span>
+                    <span class="font-medium text-[11.8px]">julie@mejorvidainsurance.com</span>
                 </div>
                 <div class="info-item">
                     <svg class="w-3.5 h-3.5 info-icon" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM4.332 8.027a6.012 6.012 0 011.912-2.706C6.512 5.73 6.974 6 7.5 6A1.5 1.5 0 019 7.5V8a2 2 0 004 0 2 2 0 011.523-1.943A5.977 5.977 0 0116 10c0 .34-.028.675-.083 1H15a2 2 0 00-2 2v2.197A5.973 5.973 0 0110 16v-2a2 2 0 00-2-2 2 2 0 01-2-2 2 2 0 00-1.668-1.973z" clip-rule="evenodd"></path></svg>
-                    <span class="font-medium text-[10px]">www.mejorvidaseguros.com</span>
+                    <span class="font-medium text-[12px]">www.mejorvidaseguros.com</span>
                 </div>
             </div>
         </div>
@@ -153,35 +165,47 @@
         <div class="photo-side">
             <img src="img/Julie.png" alt="Julie" class="profile-img" onerror="this.outerHTML='<div class=\'img-error\'>Falta:<br>img/Julie.png</div>'">
         </div>
+        <div class="company-top-right">Mejor Vida Insurance LLC</div>
         <svg style="position:absolute; top:0; left:0; width:100%; height:100%; z-index:5; pointer-events:none;" viewBox="0 0 525 300" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0,125 Q90,110 180,120 Q280,135 360,115 Q440,95 490,105 Q515,112 525,110 L525,145 Q510,138 480,130 Q420,115 340,140 Q260,165 160,145 Q80,130 0,150 Z" fill="#3b82f6" opacity="0.20"/>
-            <path d="M0,100 Q80,80 160,95 Q260,115 340,90 Q420,65 480,80 Q510,88 525,85 L525,145 Q510,138 480,130 Q420,115 340,140 Q260,165 160,145 Q80,130 0,150 Z" fill="#1a365d" opacity="0.30"/>
-            <path d="M0,95 Q80,75 160,90 Q260,110 340,85 Q420,60 480,75 Q510,83 525,80" fill="none" stroke="#fbbf24" stroke-width="2" opacity="0.55"/>
+            <path d="M0,122 Q90,112 180,118 Q280,128 360,114 Q440,100 490,106 Q515,111 525,109 L525,132 Q510,128 480,123 Q420,114 340,127 Q260,140 160,133 Q80,126 0,136 Z" fill="#3b82f6" opacity="0.20"/>
+            <path d="M0,102 Q80,88 160,98 Q260,113 340,97 Q420,79 480,88 Q510,94 525,92 L525,132 Q510,128 480,123 Q420,114 340,127 Q260,140 160,133 Q80,126 0,136 Z" fill="#1a365d" opacity="0.30"/>
+            <path d="M0,97 Q80,83 160,93 Q260,108 340,92 Q420,74 480,83 Q510,89 525,87" fill="none" stroke="#fbbf24" stroke-width="2" opacity="0.55"/>
         </svg>
     </div>
 
-    <div style="background-color: var(--brand-blue);" class="card flex-col items-center justify-center p-12 text-center relative">
+    <div style="background-color: var(--brand-blue);" class="card flex-col justify-between p-6 relative">
         <div style="background-color: var(--brand-yellow);" class="absolute top-0 left-0 w-full h-2"></div>
         
-        <div class="mb-8">
-            <h3 class="text-white font-bold text-lg leading-snug mb-4 px-6">
+        <div class="pt-2 text-center">
+            <h3 class="text-white font-bold text-[20px] leading-snug mb-2 px-6">
                 Protección de seguros de vida y salud para ti y tu familia.
             </h3>
-            <div style="background-color: var(--brand-yellow);" class="h-0.5 w-16 mx-auto mb-5"></div>
-            <div class="text-slate-300 text-[10px] leading-relaxed max-w-[360px] mx-auto space-y-1">
+            <div style="background-color: var(--brand-yellow);" class="h-0.5 w-16 mx-auto mb-3"></div>
+            <div class="text-slate-300 text-[10px] leading-relaxed max-w-[360px] mx-auto space-y-0.5">
                 <p>Julie Braunsroth es una agente de seguros licenciada.</p>
                 <p>Departamento de Seguros de Nebraska | Licencia #21695431</p>
                 <p style="color: var(--brand-yellow);" class="font-bold uppercase tracking-tighter">Autorizada en Seguros de Vida y Salud.</p>
             </div>
         </div>
 
-        <div class="flex items-center justify-center gap-8 border-t border-slate-700 pt-6">
-            <div class="bg-white p-2 rounded-lg shadow-xl">
-                <img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://www.mejorvidainsurance.com" alt="QR Code" class="w-16 h-16">
+        <div class="flex items-end justify-between gap-4 border-t border-slate-700 pt-3">
+            <div class="flex items-center gap-3">
+                <div class="bg-white p-2 rounded-lg shadow-xl">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://www.mejorvidainsurance.com" alt="QR Code" class="w-16 h-16">
+                </div>
+                <div class="text-left">
+                    <p class="text-white text-xs font-black tracking-widest uppercase">ESCANÉAME</p>
+                    <p class="text-slate-300 text-[10px] leading-tight mt-1 max-w-[145px]">Para visitar nuestro sitio web y conocer más sobre nosotros.</p>
+                </div>
             </div>
-            <div class="text-left">
-                <p class="text-white text-xs font-black tracking-widest uppercase">ESCANÉAME</p>
-                <p class="text-slate-300 text-[10px] leading-tight mt-1 max-w-[140px]">Para visitar nuestro sitio web y conocer más sobre nosotros.</p>
+
+            <div class="text-slate-200 text-[10px] leading-tight space-y-0.5 pb-1">
+                <p class="font-bold text-white uppercase tracking-wide">Síguenos</p>
+                <div class="grid grid-cols-[72px_1fr] gap-x-2 gap-y-0.5 text-left">
+                    <span class="font-semibold text-white">Facebook:</span><span>Mejor Vida Insurance</span>
+                    <span class="font-semibold text-white">Instagram:</span><span>@mejorvidainsurance</span>
+                    <span class="font-semibold text-white">WhatsApp:</span><span>(402) 440-5438</span>
+                </div>
             </div>
         </div>
     </div>
