@@ -75,7 +75,7 @@
     html.lang-en [data-lang="es"] { display: none !important; }
   </style>
   <script>
-    (function(){ try { var L = localStorage.getItem('preferredLang') || 'es'; document.documentElement.className = 'lang-' + L; } catch(e) {} })();
+    (function(){ try { document.documentElement.className = 'lang-es'; } catch(e) {} })();
   </script>
 </head>
 <body>
@@ -179,9 +179,8 @@
       localStorage.setItem('preferredLang', lang);
     }
 
-    // Restore saved language
-    const saved = localStorage.getItem('preferredLang') || 'es';
-    setLanguage(saved);
+    // Always initialize to Spanish as the primary language.
+    setLanguage('es');
 
     langButtons.forEach(btn => {
       btn.addEventListener('click', () => {

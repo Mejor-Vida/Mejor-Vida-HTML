@@ -53,13 +53,8 @@ document.addEventListener('DOMContentLoaded', function() {
     localStorage.setItem('preferredLang', lang);
   }
 
-  // Check for saved language preference
-  const savedLang = localStorage.getItem('preferredLang');
-  if (savedLang) {
-    setLanguage(savedLang);
-  } else {
-    setLanguage('es'); // Default to Spanish
-  }
+  // Always initialize to Spanish as the primary language on load.
+  setLanguage('es');
 
   // Add click listeners to language buttons
   langButtons.forEach(btn => {
