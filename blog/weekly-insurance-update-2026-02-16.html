@@ -336,36 +336,30 @@
     .mobile-menu.active { display: block; }
     .mobile-menu a {
       display: block;
-      padding: 12px;
-      color: #1a202c;
-      text-decoration: none;
-      font-weight: 600;
+      padding: 12px 16px;
+      color: #1a365d;
+      font-weight: 500;
       border-bottom: 1px solid #e5e7eb;
+      transition: background-color 0.15s;
     }
     .mobile-menu a:hover { background-color: #f3f4f6; }
-    .hamburger {
+    .mobile-menu a:last-child { border-bottom: none; }
+    .hamburger-btn {
       display: none;
-      flex-direction: column;
-      gap: 4px;
-      cursor: pointer;
       padding: 8px;
-    }
-    .hamburger span {
-      width: 24px;
-      height: 3px;
-      background-color: #1a202c;
-      border-radius: 2px;
-      transition: all 0.3s;
+      cursor: pointer;
+      font-size: 24px;
+      color: #1a365d;
     }
     @media (max-width: 991px) {
-      .header-logo-wrap { margin-left: 0 !important; }
-      .header-logo { height: 180px !important; }
+      .hamburger-btn { display: block; }
       .desktop-nav { display: none !important; }
-      .hamburger { display: flex; }
+      .desktop-cta { display: none !important; }
+      .header-inner { justify-content: space-between !important; }
+      .header-logo-wrap { margin-left: -60px !important; }
     }
-    @media (max-width: 576px) {
-      .header-logo { height: 140px !important; }
-    }
+    html.lang-es [data-lang="en"] { display: none !important; }
+    html.lang-en [data-lang="es"] { display: none !important; }
     .blog-hero {
       background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
       color: white;
@@ -546,49 +540,75 @@
       text-decoration: underline;
     }
   </style>
+  <script>
+    (function(){ try { var L = localStorage.getItem('preferredLang') || 'es'; document.documentElement.className = 'lang-' + L; } catch(e) {} })();
+  </script>
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100 bg-light">
 
-<!-- Header -->
-<header class="sticky-top bg-white shadow-sm">
+<!-- HEADER -->
+<header class="sticky-top bg-white shadow-sm border-bottom">
   <div class="container">
-    <div class="header-inner">
-      <div class="header-logo-wrap">
-        <a href="../index.html">
-          <img src="../img/logo-english2.png" alt="Mejor Vida Insurance Logo" class="header-logo" />
+    <div class="d-flex align-items-center justify-content-between header-inner">
+      <div class="flex-shrink-0 header-logo-wrap">
+        <a href="../index.html#home" class="d-block">
+          <img id="header-logo" src="../img/logo-spanish2.png" alt="Mejor Vida Insurance logo" class="header-logo" />
         </a>
       </div>
-      <nav class="desktop-nav d-flex align-items-center">
-        <a href="../index.html" class="nav-link-cm">Home</a>
-        <a href="../final-expense.html" class="nav-link-cm">Final Expense</a>
-        <a href="../life-insurance.html" class="nav-link-cm">Life Insurance</a>
-        <a href="../about.html" class="nav-link-cm">About</a>
-        <a href="../blog.html" class="nav-link-cm">Blog</a>
-        <a href="../contact.html" class="nav-link-cm">Contact</a>
-        <div class="d-flex align-items-center gap-3 ms-3">
-          <div class="phone-block text-end">
-            <div class="phone-block-label">Call Us</div>
-            <a href="tel:+18888888888" class="phone-block-number">(888) 888-8888</a>
-          </div>
-          <a href="../quote.html" class="btn btn-see-prices">See Prices</a>
-        </div>
+
+      <nav class="desktop-nav d-none d-lg-flex align-items-center">
+        <a href="../index.html" data-lang="es" class="nav-link-cm">Inicio</a>
+        <a href="../index.html" data-lang="en" class="nav-link-cm">Home</a>
+        <a href="../index.html#about" data-lang="es" class="nav-link-cm">Sobre Julie</a>
+        <a href="../index.html#about" data-lang="en" class="nav-link-cm">About</a>
+        <a href="../index.html#how-it-works" data-lang="es" class="nav-link-cm">Cómo funciona</a>
+        <a href="../index.html#how-it-works" data-lang="en" class="nav-link-cm">How It Works</a>
+        <a href="../index.html#faq" data-lang="es" class="nav-link-cm">FAQ</a>
+        <a href="../index.html#faq" data-lang="en" class="nav-link-cm">FAQ</a>
+        <a href="../blog.html" data-lang="es" class="nav-link-cm">Blog</a>
+        <a href="../blog.html" data-lang="en" class="nav-link-cm">Blog</a>
+        <a href="../index.html#contact" data-lang="es" class="nav-link-cm">Contacto</a>
+        <a href="../index.html#contact" data-lang="en" class="nav-link-cm">Contact</a>
       </nav>
-      <div class="hamburger" onclick="toggleMobileMenu()">
-        <span></span>
-        <span></span>
-        <span></span>
+
+      <div class="d-flex align-items-center gap-2">
+        <a href="../quote.html" data-lang="es" class="desktop-cta d-none d-lg-inline-block btn-see-prices">Ver Precios</a>
+        <a href="../quote.html" data-lang="en" class="desktop-cta d-none d-lg-inline-block btn-see-prices">See Prices</a>
+
+        <div class="desktop-cta d-none d-lg-flex flex-column align-items-end">
+          <span class="phone-block-label" data-lang="es">Hable con un agente licenciado:</span>
+          <span class="phone-block-label" data-lang="en">Speak to a licensed agent:</span>
+          <a href="tel:+14024405438" class="phone-block-number"><i class="fas fa-phone me-1" aria-hidden="true"></i>1-402-440-5438</a>
+        </div>
+
+        <div class="d-flex gap-1">
+          <button class="lang-btn active px-2 py-1 rounded small fw-bold border-2" data-lang-btn="es">ES</button>
+          <button class="lang-btn px-2 py-1 rounded small fw-bold border-2" data-lang-btn="en">EN</button>
+        </div>
+
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Open menu">☰</button>
       </div>
     </div>
   </div>
-  <div class="mobile-menu" id="mobileMenu">
-    <a href="../index.html">Home</a>
-    <a href="../final-expense.html">Final Expense</a>
-    <a href="../life-insurance.html">Life Insurance</a>
-    <a href="../about.html">About</a>
-    <a href="../blog.html">Blog</a>
-    <a href="../contact.html">Contact</a>
-    <a href="tel:+18888888888">(888) 888-8888</a>
-    <a href="../quote.html" class="btn btn-see-prices mt-2">See Prices</a>
+
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="../index.html#home" data-lang="es" class="mobile-menu-link">Inicio</a>
+    <a href="../index.html#home" data-lang="en" class="mobile-menu-link">Home</a>
+    <a href="../index.html#about" data-lang="es" class="mobile-menu-link">Sobre Julie</a>
+    <a href="../index.html#about" data-lang="en" class="mobile-menu-link">About</a>
+    <a href="../index.html#how-it-works" data-lang="es" class="mobile-menu-link">Cómo funciona</a>
+    <a href="../index.html#how-it-works" data-lang="en" class="mobile-menu-link">How It Works</a>
+    <a href="../index.html#faq" data-lang="es" class="mobile-menu-link">FAQ</a>
+    <a href="../index.html#faq" data-lang="en" class="mobile-menu-link">FAQ</a>
+    <a href="../blog.html" data-lang="es" class="mobile-menu-link">Blog</a>
+    <a href="../blog.html" data-lang="en" class="mobile-menu-link">Blog</a>
+    <a href="../index.html#contact" data-lang="es" class="mobile-menu-link">Contacto</a>
+    <a href="../index.html#contact" data-lang="en" class="mobile-menu-link">Contact</a>
+    <a href="tel:+14024405438" class="mobile-menu-link fw-bold" style="color:#0D47A1;">
+      <i class="fas fa-phone me-2"></i>1-402-440-5438
+    </a>
+    <a href="../quote.html" data-lang="es" class="mobile-menu-link bg-warning text-dark fw-bold text-center rounded mt-2 py-2 d-block">Ver Precios</a>
+    <a href="../quote.html" data-lang="en" class="mobile-menu-link bg-warning text-dark fw-bold text-center rounded mt-2 py-2 d-block">See Prices</a>
   </div>
 </header>
 
@@ -890,46 +910,74 @@
   </div>
 </div>
 
-<!-- Footer -->
-<footer class="bg-dark text-white py-5">
+<!-- FOOTER -->
+<footer style="background:#1a365d; padding: 8px 0 24px 0;">
   <div class="container">
-    <div class="row">
-      <div class="col-md-4 mb-4">
-        <h5>Mejor Vida Insurance</h5>
-        <p>Serving families with compassionate final expense and life insurance solutions since 2020.</p>
-        <p><i class="fas fa-phone me-2"></i>(888) 888-8888</p>
+    <div class="d-flex flex-column flex-md-row align-items-center justify-content-between gap-2 text-white" style="margin:0; padding:0;">
+      <img id="footer-logo" src="../img/logo-spanish2.png" alt="Mejor Vida Insurance" style="height:130px;filter:brightness(0) invert(1);margin-top:-25px;margin-bottom:-25px;" />
+      <span class="small"><i class="fas fa-phone me-2 opacity-75"></i><a href="tel:+14024405438" class="text-white text-opacity-90 text-decoration-none">1-402-440-5438</a></span>
+      <span class="small"><i class="fas fa-envelope me-2 opacity-75"></i><a href="mailto:Julie@mejorvidainsurance.com" class="text-white text-opacity-90 text-decoration-none">Julie@mejorvidainsurance.com</a></span>
+      <span class="small"><i class="fas fa-map-marker-alt me-2 opacity-75"></i>P.O. Box 21885, Lincoln, NE 68542</span>
+    </div>
+    <div class="row g-2 pt-2 mt-2 border-top border-secondary text-white small">
+      <div class="col-12 col-md-7">
+        <h4 class="h6 fw-bold mb-2" data-lang="es">Enlaces rápidos</h4>
+        <h4 class="h6 fw-bold mb-2" data-lang="en">Quick Links</h4>
+        <div class="d-flex flex-wrap gap-2 gap-md-3">
+          <a href="../index.html#home" class="text-white text-opacity-75 text-decoration-none" data-lang="es">Inicio</a><a href="../index.html#home" class="text-white text-opacity-75 text-decoration-none" data-lang="en">Home</a>
+          <span class="text-white text-opacity-50">·</span>
+          <a href="../index.html#about" class="text-white text-opacity-75 text-decoration-none" data-lang="es">Sobre Julie</a><a href="../index.html#about" class="text-white text-opacity-75 text-decoration-none" data-lang="en">About Julie</a>
+          <span class="text-white text-opacity-50">·</span>
+          <a href="../index.html#how-it-works" class="text-white text-opacity-75 text-decoration-none" data-lang="es">Cómo funciona</a><a href="../index.html#how-it-works" class="text-white text-opacity-75 text-decoration-none" data-lang="en">How It Works</a>
+          <span class="text-white text-opacity-50">·</span>
+          <a href="../index.html#carriers" class="text-white text-opacity-75 text-decoration-none" data-lang="es">Aseguradoras</a><a href="../index.html#carriers" class="text-white text-opacity-75 text-decoration-none" data-lang="en">Insurers</a>
+          <span class="text-white text-opacity-50">·</span>
+          <a href="../index.html#faq" class="text-white text-opacity-75 text-decoration-none">FAQ</a>
+          <span class="text-white text-opacity-50">·</span>
+          <a href="../blog.html" class="text-white text-opacity-75 text-decoration-none">Blog</a>
+          <span class="text-white text-opacity-50">·</span>
+          <a href="../index.html#contact" class="text-white text-opacity-75 text-decoration-none" data-lang="es">Contacto</a><a href="../index.html#contact" class="text-white text-opacity-75 text-decoration-none" data-lang="en">Contact</a>
+          <span class="text-white text-opacity-50">·</span>
+          <a href="../quote.html" class="text-white text-opacity-75 text-decoration-none" data-lang="es">Cotización gratis</a><a href="../quote.html" class="text-white text-opacity-75 text-decoration-none" data-lang="en">Free Quote</a>
+        </div>
       </div>
-      <div class="col-md-4 mb-4">
-        <h5>Quick Links</h5>
-        <ul class="list-unstyled">
-          <li><a href="../index.html" class="text-white-50">Home</a></li>
-          <li><a href="../final-expense.html" class="text-white-50">Final Expense</a></li>
-          <li><a href="../life-insurance.html" class="text-white-50">Life Insurance</a></li>
-          <li><a href="../about.html" class="text-white-50">About</a></li>
-          <li><a href="../contact.html" class="text-white-50">Contact</a></li>
-        </ul>
-      </div>
-      <div class="col-md-4 mb-4">
-        <h5>Stay Informed</h5>
-        <p>Subscribe to our blog for weekly insurance industry updates and insights.</p>
-        <a href="../blog.html" class="btn btn-outline-light">View All Posts</a>
+      <div class="col-12 col-md-5">
+        <h4 class="h6 fw-bold mb-2">Legal</h4>
+        <div class="d-flex flex-wrap gap-2 gap-md-3">
+          <a href="../privacy-policy.html" class="text-white text-opacity-75 text-decoration-none" data-lang="es">Política de privacidad</a><a href="../privacy-policy.html" class="text-white text-opacity-75 text-decoration-none" data-lang="en">Privacy Policy</a>
+          <span class="text-white text-opacity-50">·</span>
+          <a href="../terms-service.html" class="text-white text-opacity-75 text-decoration-none" data-lang="es">Términos de servicio</a><a href="../terms-service.html" class="text-white text-opacity-75 text-decoration-none" data-lang="en">Terms of Service</a>
+        </div>
       </div>
     </div>
-    <hr class="bg-white-50">
-    <div class="text-center">
-      <p class="mb-0">&copy; 2026 Mejor Vida Insurance LLC. All rights reserved. | Licensed in multiple states.</p>
-      <p class="small mt-2">This blog post is for informational purposes only and does not constitute legal, financial, or insurance advice.</p>
+    <div class="border-top border-secondary mt-2 pt-2">
+      <p class="small text-center text-white text-opacity-75 mb-1" data-lang="es">Julie es una agente de seguros licenciada. Departamento de Seguros de Nebraska, Licencia de Productor #21695431. <a href="https://doi.nebraska.gov" target="_blank" rel="noopener" class="text-white text-opacity-75">Verificar licencia</a></p>
+      <p class="small text-center text-white text-opacity-75 mb-1" data-lang="en">Julie is a licensed insurance agent. Nebraska Department of Insurance, Producer License #21695431. <a href="https://doi.nebraska.gov" target="_blank" rel="noopener" class="text-white text-opacity-75">Verify license</a></p>
+      <p class="small text-center text-white text-opacity-50 mb-0">&copy; <span id="year"></span> Mejor Vida Insurance LLC. All rights reserved.</p>
     </div>
   </div>
 </footer>
 
-<!-- Bootstrap JS -->
 <script src="../bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="../script.js"></script>
 <script>
-function toggleMobileMenu() {
-  const menu = document.getElementById('mobileMenu');
-  menu.classList.toggle('active');
-}
+  // Mobile menu
+  const hamburgerBtn = document.getElementById('hamburger-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  if (hamburgerBtn && mobileMenu) {
+    hamburgerBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      mobileMenu.classList.toggle('active');
+      hamburgerBtn.textContent = mobileMenu.classList.contains('active') ? '✕' : '☰';
+    });
+    document.addEventListener('click', function(e) {
+      if (!mobileMenu.contains(e.target) && !hamburgerBtn.contains(e.target)) {
+        mobileMenu.classList.remove('active');
+        hamburgerBtn.textContent = '☰';
+      }
+    });
+  }
+  if (document.getElementById('year')) document.getElementById('year').textContent = new Date().getFullYear();
 </script>
 
 </body>
