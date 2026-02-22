@@ -49,12 +49,15 @@ document.addEventListener('DOMContentLoaded', function() {
         : logoBasePath + 'logo-english2.png';
     }
 
-    // Save preference to localStorage
-    localStorage.setItem('preferredLang', lang);
+    // Save preference for same-tab navigation (resets on reload logic below)
+    sessionStorage.setItem('sessionLang', lang);
   }
 
-  // Always initialize to Spanish as the primary language on load.
-  setLanguage('es');
+  // Persist language across page navigation, but reset to Spanish on reload.
+  const navEntry = performance.getEntriesByType('navigation')[0];
+  const isReload = navEntry && navEntry.type === 'reload';
+  if (isReload) sessionStorage.removeItem('sessionLang');
+  setLanguage(sessionStorage.getItem('sessionLang') || 'es');
 
   // Add click listeners to language buttons
   langButtons.forEach(btn => {

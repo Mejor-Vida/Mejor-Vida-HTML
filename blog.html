@@ -262,7 +262,17 @@
     .callout-box { background: #ebf8ff; border-left: 4px solid #0D47A1; padding: 1rem 1.25rem; border-radius: 0 8px 8px 0; margin: 1.5rem 0; }
   </style>
   <script>
-    (function(){ try { document.documentElement.className = 'lang-es'; } catch(e) {} })();
+    (function(){
+      try {
+        var navEntry = performance.getEntriesByType('navigation')[0];
+        var isReload = navEntry && navEntry.type === 'reload';
+        if (isReload) sessionStorage.removeItem('sessionLang');
+        var L = sessionStorage.getItem('sessionLang') || 'es';
+        document.documentElement.className = 'lang-' + L;
+      } catch(e) {
+        document.documentElement.className = 'lang-es';
+      }
+    })();
   </script>
 </head>
 <body class="d-flex flex-column min-vh-100 bg-light">
@@ -378,24 +388,72 @@
       <h2 class="h3 fw-bold mb-4 text-center" style="color:#1a365d;" data-lang="es">Últimas entradas</h2>
       <h2 class="h3 fw-bold mb-4 text-center" style="color:#1a365d;" data-lang="en">Latest posts</h2>
 
-      <div class="row g-4" id="blog-feed">
+      <div class="row g-4 justify-content-center" id="blog-feed">
         <!-- BLOG CARD: Weekly Insurance Update February 16, 2026 -->
-        <div class="col-12 col-md-6 col-lg-4">
-          <a href="blog/weekly-insurance-update-2026-02-16.html" class="d-block">
-            <img src="img/2-16-2026-Blog.png" alt="Weekly Insurance Update February 16, 2026" class="w-100 rounded shadow-sm" style="transition:transform 0.2s ease;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'" />
-          </a>
+        <div class="col-12 col-lg-10">
+          <article class="blog-card h-100">
+            <div class="row g-0 align-items-stretch">
+              <div class="col-12 col-md-5">
+                <a href="blog/weekly-insurance-update-2026-02-16.html" class="d-block h-100">
+                  <img src="img/2-16-2026-Blog.png" alt="Weekly Insurance Update February 16, 2026" class="w-100 h-100 object-fit-cover" style="max-height:280px;" />
+                </a>
+              </div>
+              <div class="col-12 col-md-7 d-flex">
+                <div class="p-3 p-md-4 d-flex flex-column justify-content-center">
+                  <h3 class="h5 fw-bold mb-2" style="color:#1a365d;" data-lang="es">Actualización semanal - 16 de febrero de 2026</h3>
+                  <h3 class="h5 fw-bold mb-2" style="color:#1a365d;" data-lang="en">Weekly update - February 16, 2026</h3>
+                  <p class="small text-muted mb-2" data-lang="es">Solicitudes de seguros en alza, cambios regulatorios y señales clave del mercado para familias y agentes.</p>
+                  <p class="small text-muted mb-2" data-lang="en">Rising application activity, regulatory changes, and key market signals for families and agents.</p>
+                  <a href="blog/weekly-insurance-update-2026-02-16.html" class="btn btn-outline-primary btn-sm align-self-start" data-lang="es">Leer artículo</a>
+                  <a href="blog/weekly-insurance-update-2026-02-16.html" class="btn btn-outline-primary btn-sm align-self-start" data-lang="en">Read article</a>
+                </div>
+              </div>
+            </div>
+          </article>
         </div>
         <!-- BLOG CARD: Weekly Insurance Update February 8, 2026 -->
-        <div class="col-12 col-md-6 col-lg-4">
-          <a href="blog/weekly-insurance-update-2026-02-08.html" class="d-block">
-            <img src="img/2-8-2026-Blog.png" alt="Weekly Insurance Update February 8, 2026" class="w-100 rounded shadow-sm" style="transition:transform 0.2s ease;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'" />
-          </a>
+        <div class="col-12 col-lg-10">
+          <article class="blog-card h-100">
+            <div class="row g-0 align-items-stretch">
+              <div class="col-12 col-md-5">
+                <a href="blog/weekly-insurance-update-2026-02-08.html" class="d-block h-100">
+                  <img src="img/2-8-2026-Blog.png" alt="Weekly Insurance Update February 8, 2026" class="w-100 h-100 object-fit-cover" style="max-height:280px;" />
+                </a>
+              </div>
+              <div class="col-12 col-md-7 d-flex">
+                <div class="p-3 p-md-4 d-flex flex-column justify-content-center">
+                  <h3 class="h5 fw-bold mb-2" style="color:#1a365d;" data-lang="es">Actualización semanal - 8 de febrero de 2026</h3>
+                  <h3 class="h5 fw-bold mb-2" style="color:#1a365d;" data-lang="en">Weekly update - February 8, 2026</h3>
+                  <p class="small text-muted mb-2" data-lang="es">Regulaciones nuevas, uso de IA y tendencias de crecimiento que impactan tus opciones de cobertura.</p>
+                  <p class="small text-muted mb-2" data-lang="en">New regulations, AI adoption, and growth trends that affect your coverage options.</p>
+                  <a href="blog/weekly-insurance-update-2026-02-08.html" class="btn btn-outline-primary btn-sm align-self-start" data-lang="es">Leer artículo</a>
+                  <a href="blog/weekly-insurance-update-2026-02-08.html" class="btn btn-outline-primary btn-sm align-self-start" data-lang="en">Read article</a>
+                </div>
+              </div>
+            </div>
+          </article>
         </div>
         <!-- BLOG CARD: Weekly Insurance Update February 1, 2026 -->
-        <div class="col-12 col-md-6 col-lg-4">
-          <a href="blog/weekly-insurance-update-2026-02-01.html" class="d-block">
-            <img src="img/2-1-2026-Blog.png" alt="Weekly Insurance Update February 1, 2026" class="w-100 rounded shadow-sm" style="transition:transform 0.2s ease;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'" />
-          </a>
+        <div class="col-12 col-lg-10">
+          <article class="blog-card h-100">
+            <div class="row g-0 align-items-stretch">
+              <div class="col-12 col-md-5">
+                <a href="blog/weekly-insurance-update-2026-02-01.html" class="d-block h-100">
+                  <img src="img/2-1-2026-Blog.png" alt="Weekly Insurance Update February 1, 2026" class="w-100 h-100 object-fit-cover" style="max-height:280px;" />
+                </a>
+              </div>
+              <div class="col-12 col-md-7 d-flex">
+                <div class="p-3 p-md-4 d-flex flex-column justify-content-center">
+                  <h3 class="h5 fw-bold mb-2" style="color:#1a365d;" data-lang="es">Actualización semanal - 1 de febrero de 2026</h3>
+                  <h3 class="h5 fw-bold mb-2" style="color:#1a365d;" data-lang="en">Weekly update - February 1, 2026</h3>
+                  <p class="small text-muted mb-2" data-lang="es">Resumen de mercado y puntos clave para ayudarte a comparar seguros de vida y gastos finales.</p>
+                  <p class="small text-muted mb-2" data-lang="en">Market summary and key points to help you compare life and final expense coverage.</p>
+                  <a href="blog/weekly-insurance-update-2026-02-01.html" class="btn btn-outline-primary btn-sm align-self-start" data-lang="es">Leer artículo</a>
+                  <a href="blog/weekly-insurance-update-2026-02-01.html" class="btn btn-outline-primary btn-sm align-self-start" data-lang="en">Read article</a>
+                </div>
+              </div>
+            </div>
+          </article>
         </div>
       </div>
 

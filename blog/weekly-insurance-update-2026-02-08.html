@@ -447,7 +447,17 @@
     .executive-summary { background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); border-radius: 12px; padding: 1.5rem; margin-bottom: 2rem; }
   </style>
   <script>
-    (function(){ try { document.documentElement.className = 'lang-es'; } catch(e) {} })();
+    (function(){
+      try {
+        var navEntry = performance.getEntriesByType('navigation')[0];
+        var isReload = navEntry && navEntry.type === 'reload';
+        if (isReload) sessionStorage.removeItem('sessionLang');
+        var L = sessionStorage.getItem('sessionLang') || 'es';
+        document.documentElement.className = 'lang-' + L;
+      } catch(e) {
+        document.documentElement.className = 'lang-es';
+      }
+    })();
   </script>
 </head>
 <body class="d-flex flex-column min-vh-100 bg-light">

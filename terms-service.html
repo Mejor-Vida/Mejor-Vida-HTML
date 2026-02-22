@@ -75,7 +75,17 @@
     html.lang-en [data-lang="es"] { display: none !important; }
   </style>
   <script>
-    (function(){ try { document.documentElement.className = 'lang-es'; } catch(e) {} })();
+    (function(){
+      try {
+        var navEntry = performance.getEntriesByType('navigation')[0];
+        var isReload = navEntry && navEntry.type === 'reload';
+        if (isReload) sessionStorage.removeItem('sessionLang');
+        var L = sessionStorage.getItem('sessionLang') || 'es';
+        document.documentElement.className = 'lang-' + L;
+      } catch(e) {
+        document.documentElement.className = 'lang-es';
+      }
+    })();
   </script>
 </head>
 <body>
@@ -176,11 +186,13 @@
         logo.src = lang === 'es' ? 'img/logo-spanish2.png' : 'img/logo-english2.png';
       }
 
-      localStorage.setItem('preferredLang', lang);
+      sessionStorage.setItem('sessionLang', lang);
     }
 
-    // Always initialize to Spanish as the primary language.
-    setLanguage('es');
+    const navEntry = performance.getEntriesByType('navigation')[0];
+    const isReload = navEntry && navEntry.type === 'reload';
+    if (isReload) sessionStorage.removeItem('sessionLang');
+    setLanguage(sessionStorage.getItem('sessionLang') || 'es');
 
     langButtons.forEach(btn => {
       btn.addEventListener('click', () => {
