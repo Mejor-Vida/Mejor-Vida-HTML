@@ -43,6 +43,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./blog-template.css" />
 
   <!-- JSON-LD: Article schema for AEO -->
   <script type="application/ld+json">
@@ -530,7 +531,7 @@
 </header>
 
 <!-- Blog Hero -->
-<div class="blog-hero">
+<div class="blog-hero mv-news hero">
   <div class="container">
     <h1 data-lang="en">Weekly Insurance News Digest</h1>
     <h1 data-lang="es">Resumen semanal de noticias de seguros</h1>
@@ -550,9 +551,10 @@
 </div>
 
 <!-- Main Content -->
-<article class="py-5">
-  <div class="container">
-    <div class="blog-content">
+<article class="py-5 mv-news page-wrap">
+  <div class="news-grid">
+    <section class="article-col">
+      <div class="blog-content">
 
       <div class="bg-white border rounded p-4 mb-4">
         <p class="small text-muted mb-1" data-lang="en"><strong>Author:</strong> Mejor Vida Insurance Editorial Team</p>
@@ -744,7 +746,63 @@
         </ul>
       </div>
 
-    </div>
+      </div>
+    </section>
+    <aside class="sidebar" aria-label="Supporting information">
+      <section class="sidebar-card">
+        <span class="eyebrow" data-lang="en">Contact</span>
+        <span class="eyebrow" data-lang="es">Contacto</span>
+        <h3 data-lang="en">Talk With a Licensed Agent</h3>
+        <h3 data-lang="es">Habla con una agente licenciada</h3>
+        <p data-lang="en">Get clear carrier comparisons and policy guidance built around your specific situation.</p>
+        <p data-lang="es">Recibe comparaciones claras de aseguradoras y guía de pólizas para tu situación específica.</p>
+        <p><strong>402-440-5438</strong></p>
+        <a class="btn-primary" href="tel:+14024405438" data-lang="en">Speak With Julie</a>
+        <a class="btn-primary" href="tel:+14024405438" data-lang="es">Hablar con Julie</a>
+      </section>
+
+      <section class="sidebar-card">
+        <span class="eyebrow" data-lang="en">This Week</span>
+        <span class="eyebrow" data-lang="es">Esta semana</span>
+        <h3 data-lang="en">At a Glance</h3>
+        <h3 data-lang="es">Resumen rápido</h3>
+        <ul data-lang="en">
+          <li>Oversight is increasing across capital and AI.</li>
+          <li>Application demand remains strong.</li>
+          <li>Digital underwriting keeps accelerating.</li>
+          <li>Carrier quality and fit remain the key decision factors.</li>
+        </ul>
+        <ul data-lang="es">
+          <li>Aumenta la supervisión sobre capital e IA.</li>
+          <li>La demanda de solicitudes sigue fuerte.</li>
+          <li>La suscripción digital continúa acelerándose.</li>
+          <li>La calidad y el ajuste de la aseguradora siguen siendo clave.</li>
+        </ul>
+      </section>
+
+      <section class="sidebar-card">
+        <span class="eyebrow" data-lang="en">Definitions</span>
+        <span class="eyebrow" data-lang="es">Definiciones</span>
+        <h3 data-lang="en">Key Terms</h3>
+        <h3 data-lang="es">Términos clave</h3>
+        <dl data-lang="en">
+          <dt>Financial Strength</dt>
+          <dd>A carrier's long-term ability to pay claims.</dd>
+          <dt>Complaint Ratio</dt>
+          <dd>Complaint volume relative to market share.</dd>
+          <dt>Accelerated Underwriting</dt>
+          <dd>Faster approval path using digital records and analytics.</dd>
+        </dl>
+        <dl data-lang="es">
+          <dt>Fortaleza financiera</dt>
+          <dd>Capacidad de la aseguradora para pagar reclamos a largo plazo.</dd>
+          <dt>Índice de quejas</dt>
+          <dd>Volumen de quejas en proporción a su participación de mercado.</dd>
+          <dt>Suscripción acelerada</dt>
+          <dd>Vía de aprobación más rápida con registros digitales y análisis.</dd>
+        </dl>
+      </section>
+    </aside>
   </div>
 </article>
 

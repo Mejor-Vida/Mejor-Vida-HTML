@@ -44,6 +44,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./blog-template.css" />
 
   <!-- JSON-LD: Article schema for AEO -->
   <script type="application/ld+json">
@@ -540,7 +541,7 @@
   </nav>
 
   <!-- HERO SECTION -->
-  <section class="hero-post">
+  <section class="hero-post mv-news hero">
     <div class="container">
       <div class="blog-content text-center">
         <p class="small text-white-50 mb-2" data-lang="en"><i class="fas fa-calendar-alt me-2"></i>February 8, 2026</p>
@@ -554,9 +555,10 @@
   </section>
 
   <!-- ARTICLE CONTENT -->
-  <article class="py-5">
-    <div class="container">
-      <div class="blog-content">
+  <article class="py-5 mv-news page-wrap">
+    <div class="news-grid">
+      <section class="article-col">
+        <div class="blog-content">
 
         <!-- Executive Summary -->
         <div class="executive-summary" data-lang="en">
@@ -1243,7 +1245,63 @@
           <p class="small text-muted mb-0" data-lang="es">Este contenido es solo con fines educativos. La disponibilidad de pólizas, beneficios y precios varían por estado y circunstancias personales. Habla con un agente de seguros licenciado para asesoría personalizada.</p>
         </footer>
 
-      </div>
+        </div>
+      </section>
+      <aside class="sidebar" aria-label="Supporting information">
+        <section class="sidebar-card">
+          <span class="eyebrow" data-lang="en">Contact</span>
+          <span class="eyebrow" data-lang="es">Contacto</span>
+          <h3 data-lang="en">Talk With a Licensed Agent</h3>
+          <h3 data-lang="es">Habla con una agente licenciada</h3>
+          <p data-lang="en">Get clear carrier comparisons and policy guidance built around your specific situation.</p>
+          <p data-lang="es">Recibe comparaciones claras de aseguradoras y guía de pólizas para tu situación específica.</p>
+          <p><strong>402-440-5438</strong></p>
+          <a class="btn-primary" href="tel:+14024405438" data-lang="en">Speak With Julie</a>
+          <a class="btn-primary" href="tel:+14024405438" data-lang="es">Hablar con Julie</a>
+        </section>
+
+        <section class="sidebar-card">
+          <span class="eyebrow" data-lang="en">This Week</span>
+          <span class="eyebrow" data-lang="es">Esta semana</span>
+          <h3 data-lang="en">At a Glance</h3>
+          <h3 data-lang="es">Resumen rápido</h3>
+          <ul data-lang="en">
+            <li>State and federal life rules continue tightening.</li>
+            <li>Application activity remains healthy.</li>
+            <li>Technology keeps reducing time to approval.</li>
+            <li>Carrier fit still matters more than headline rankings.</li>
+          </ul>
+          <ul data-lang="es">
+            <li>Las reglas estatales y federales siguen endureciéndose.</li>
+            <li>La actividad de solicitudes sigue saludable.</li>
+            <li>La tecnología sigue reduciendo tiempos de aprobación.</li>
+            <li>El ajuste de la aseguradora importa más que un ranking.</li>
+          </ul>
+        </section>
+
+        <section class="sidebar-card">
+          <span class="eyebrow" data-lang="en">Definitions</span>
+          <span class="eyebrow" data-lang="es">Definiciones</span>
+          <h3 data-lang="en">Key Terms</h3>
+          <h3 data-lang="es">Términos clave</h3>
+          <dl data-lang="en">
+            <dt>Financial Strength</dt>
+            <dd>A carrier's long-term ability to pay claims.</dd>
+            <dt>Complaint Ratio</dt>
+            <dd>Complaint volume relative to market share.</dd>
+            <dt>Accelerated Underwriting</dt>
+            <dd>Faster approval path using digital records and analytics.</dd>
+          </dl>
+          <dl data-lang="es">
+            <dt>Fortaleza financiera</dt>
+            <dd>Capacidad de la aseguradora para pagar reclamos a largo plazo.</dd>
+            <dt>Índice de quejas</dt>
+            <dd>Volumen de quejas en proporción a su participación de mercado.</dd>
+            <dt>Suscripción acelerada</dt>
+            <dd>Vía de aprobación más rápida con registros digitales y análisis.</dd>
+          </dl>
+        </section>
+      </aside>
     </div>
   </article>
 

@@ -1,0 +1,106 @@
+<!--
+  Reusable Blog Template (Mejor Vida Insurance)
+  How to use:
+  1) Duplicate this file for each new post and rename it with the post date slug.
+  2) Replace all {{PLACEHOLDER}} values.
+  3) Duplicate the <section class="story">...</section> block inside {{STORIES}} for each story.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{TITLE}} | Mejor Vida Insurance</title>
+  <link rel="stylesheet" href="./blog-template.css" />
+</head>
+<body>
+  <main class="mv-news">
+    <div class="page-wrap">
+      <header class="hero">
+        <h1>{{TITLE}}</h1>
+        <p class="dek">{{DEK}}</p>
+        <p class="meta-line">{{DATE}} • {{AUTHOR}} • Reviewed by {{REVIEWER}} • {{READ_TIME}}</p>
+      </header>
+
+      <div class="news-grid">
+        <section class="article-col">
+          <article>
+            <section class="quick-overview" aria-label="Quick overview">
+              <span class="eyebrow">Quick Overview</span>
+              <h2>What’s Happening This Week?</h2>
+              <p>{{QUICK_OVERVIEW}}</p>
+            </section>
+
+            <nav class="toc" aria-label="Table of contents">
+              <h2>Table of Contents</h2>
+              <ol>
+                <li><a href="#story-1">{{STORY_HEADLINE}}</a></li>
+                <li><a href="#what-this-means">What This Means for You</a></li>
+                <li><a href="#need-help-comparing-options">Need Help Comparing Options?</a></li>
+              </ol>
+            </nav>
+
+            {{STORIES}}
+            <!--
+            <section class="story" id="story-1">
+              <h2>{{STORY_HEADLINE}}</h2>
+              <p class="source-line">Source: {{SOURCE}} | Published: {{PUBLISHED}}</p>
+              <h3>What Happened</h3>
+              <p>{{WHAT_HAPPENED}}</p>
+              <h3>Why It Matters</h3>
+              <p>{{WHY_IT_MATTERS}}</p>
+              <h3>What It Means for Families</h3>
+              <p>{{FAMILY_IMPACT}}</p>
+            </section>
+            -->
+
+            <section class="what-this-means" id="what-this-means">
+              <h2>What This Means for You</h2>
+              <ul>
+                {{AT_A_GLANCE_BULLETS}}
+              </ul>
+            </section>
+
+            <section class="cta-panel" id="need-help-comparing-options">
+              <h2>Need Help Comparing Options?</h2>
+              <p>Choosing the right life insurance structure is easier with clear guidance from a licensed professional.</p>
+              <p class="cta-meta">
+                Phone: {{CTA_PHONE}}<br />
+                Website: {{CTA_WEBSITE}}
+              </p>
+              <a class="btn-primary" href="tel:{{CTA_PHONE}}">Speak With Julie</a>
+            </section>
+          </article>
+        </section>
+
+        <aside class="sidebar" aria-label="Supporting information">
+          <section class="sidebar-card">
+            <span class="eyebrow">Contact</span>
+            <h3>Need Personalized Guidance?</h3>
+            <p>Get a clear side-by-side comparison based on your age, health profile, and long-term goals.</p>
+            <p><strong>{{CTA_PHONE}}</strong></p>
+            <a class="btn-primary" href="tel:{{CTA_PHONE}}">Speak With Julie</a>
+            <div class="thumb-placeholder">{{JULIE_PHOTO}} (optional)</div>
+          </section>
+
+          <section class="sidebar-card">
+            <span class="eyebrow">This Week</span>
+            <h3>This Week at a Glance</h3>
+            <ul>
+              {{AT_A_GLANCE_BULLETS}}
+            </ul>
+          </section>
+
+          <section class="sidebar-card">
+            <span class="eyebrow">Definitions</span>
+            <h3>Key Terms</h3>
+            <dl>
+              {{DEFINITIONS}}
+            </dl>
+          </section>
+        </aside>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

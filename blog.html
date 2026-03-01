@@ -254,8 +254,140 @@
     html.lang-es [data-lang="en"] { display: none !important; }
     html.lang-en [data-lang="es"] { display: none !important; }
 
+    :root {
+      --brand-blue: #1F4FBF;
+      --ink-dark: #0B1F3A;
+      --bg-soft: #F6F8FB;
+      --accent-gold: #F4C542;
+      --border-light: #E5EAF2;
+      --muted-text: #5F6C80;
+    }
+
     /* Blog-specific */
-    .hero-blog { background: linear-gradient(135deg, #0D47A1 0%, #1565C0 100%); color: white; padding: 3rem 0; }
+    .hero-blog {
+      background: #fff;
+      border-bottom: 1px solid var(--border-light);
+      padding: 1.25rem 0 1.1rem;
+      position: relative;
+    }
+    .hero-blog::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 6px;
+      background: var(--accent-gold);
+    }
+    .hero-blog .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 760px) minmax(0, 320px);
+      gap: 60px;
+      align-items: start;
+      justify-content: space-between;
+      padding-top: 0.55rem;
+    }
+    .hero-main {
+      max-width: 760px;
+    }
+    .hero-eyebrow {
+      display: inline-block;
+      margin: 0 0 0.45rem;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+      color: var(--brand-blue);
+    }
+    .hero-title {
+      margin: 0 0 0.4rem;
+      color: var(--ink-dark);
+      font-size: clamp(2rem, 4.9vw, 3.5rem);
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      font-weight: 700;
+    }
+    .hero-dek {
+      margin: 0 0 0.55rem;
+      color: var(--muted-text);
+      font-size: 1.05rem;
+      line-height: 1.7;
+      max-width: 62ch;
+    }
+    .hero-meta {
+      margin: 0;
+      color: var(--muted-text);
+      font-size: 0.84rem;
+      line-height: 1.5;
+    }
+    .hero-link {
+      display: inline-block;
+      margin-top: 0.65rem;
+      color: var(--brand-blue);
+      font-size: 0.93rem;
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .hero-link:hover { text-decoration: underline; }
+    .hero-quick-card {
+      background: var(--bg-soft);
+      border: 1px solid var(--border-light);
+      border-radius: 9px;
+      padding: 0.8rem 0.95rem;
+      max-width: 320px;
+    }
+    .hero-quick-card h3 {
+      margin: 0 0 0.45rem;
+      font-size: 1rem;
+      color: var(--ink-dark);
+      letter-spacing: -0.01em;
+    }
+    .hero-quick-card ul {
+      margin: 0 0 0.45rem;
+      padding-left: 1.05rem;
+    }
+    .hero-quick-card li {
+      margin-bottom: 0.2rem;
+      color: var(--muted-text);
+      font-size: 0.9rem;
+      line-height: 1.45;
+    }
+    .hero-quick-card li:last-child { margin-bottom: 0; }
+    .hero-quick-phone {
+      margin: 0;
+      font-size: 0.84rem;
+      color: var(--muted-text);
+    }
+    .hero-quick-phone a {
+      color: var(--brand-blue);
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .hero-quick-phone a:hover { text-decoration: underline; }
+
+    @media (max-width: 900px) {
+      .hero-blog {
+        padding: 1rem 0 0.85rem;
+      }
+      .hero-blog .container {
+        padding: 0 16px;
+      }
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+      .hero-quick-card {
+        max-width: 100%;
+      }
+      .hero-dek {
+        font-size: 1rem;
+      }
+    }
     .blog-card { background: #fff; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); overflow: hidden; transition: box-shadow 0.2s; }
     .blog-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
     .blog-content { max-width: 720px; margin-left: auto; margin-right: auto; }
@@ -359,14 +491,38 @@
 
   <!-- HERO SECTION -->
   <section class="hero-blog">
-    <div class="container text-center">
-      <h1 class="display-5 fw-bold mb-3" data-lang="es">Consejos Semanales sobre Seguros y Protección Familiar</h1>
-      <h1 class="display-5 fw-bold mb-3" data-lang="en">Weekly Tips on Insurance and Family Protection</h1>
-      <p class="lead mb-4 opacity-90" data-lang="es">Noticias, educación y orientación clara para proteger a tu familia.</p>
-      <p class="lead mb-4 opacity-90" data-lang="en">News, education, and clear guidance to protect your family.</p>
-      <!-- CTA placeholder: no form yet; links to contact. Abacus AI can replace with signup link or form. -->
-      <a href="index.html#contact" class="btn btn-light btn-lg px-4 rounded-pill fw-semibold" data-lang="es">Suscribirse al boletín semanal</a>
-      <a href="index.html#contact" class="btn btn-light btn-lg px-4 rounded-pill fw-semibold" data-lang="en">Subscribe to weekly newsletter</a>
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-main">
+          <p class="hero-eyebrow mb-0" data-lang="es">Editorial semanal</p>
+          <p class="hero-eyebrow mb-0" data-lang="en">Weekly editorial</p>
+          <h1 class="hero-title" data-lang="es">Consejos Semanales sobre Seguros y Protección Familiar</h1>
+          <h1 class="hero-title" data-lang="en">Weekly Tips on Insurance and Family Protection</h1>
+          <p class="hero-dek" data-lang="es">Noticias y análisis claros para ayudarte a comparar opciones, entender cambios regulatorios y tomar mejores decisiones para tu familia.</p>
+          <p class="hero-dek" data-lang="en">Clear news and analysis to help you compare options, understand regulatory changes, and make better protection decisions for your family.</p>
+          <p class="hero-meta" data-lang="es">Actualizado semanalmente • Equipo editorial de Mejor Vida Insurance • Revisado por Julie Braunsroth</p>
+          <p class="hero-meta" data-lang="en">Updated weekly • Mejor Vida Insurance Editorial Team • Reviewed by Julie Braunsroth</p>
+          <a href="index.html#contact" class="hero-link" data-lang="es">¿Quieres ayuda personalizada? Hablar con una agente licenciada</a>
+          <a href="index.html#contact" class="hero-link" data-lang="en">Want personalized guidance? Speak with a licensed agent</a>
+        </div>
+
+        <aside class="hero-quick-card" aria-label="Quick start">
+          <h3 data-lang="es">Inicio rápido</h3>
+          <h3 data-lang="en">Quick Start</h3>
+          <ul data-lang="es">
+            <li>Revisa las publicaciones más recientes primero.</li>
+            <li>Compara tendencias regulatorias y de mercado.</li>
+            <li>Toma notas para preguntas sobre tu cobertura.</li>
+          </ul>
+          <ul data-lang="en">
+            <li>Start with the most recent updates first.</li>
+            <li>Compare regulatory and market trends.</li>
+            <li>Save questions for your coverage review.</li>
+          </ul>
+          <p class="hero-quick-phone" data-lang="es">Línea directa: <a href="tel:+14024405438">402-440-5438</a></p>
+          <p class="hero-quick-phone" data-lang="en">Direct line: <a href="tel:+14024405438">402-440-5438</a></p>
+        </aside>
+      </div>
     </div>
   </section>
 
@@ -379,16 +535,45 @@
   <section class="py-5">
     <div class="container">
       <div class="newsletter-summary-block border rounded p-3 bg-light mb-4 mx-auto" style="max-width:720px;">
-        <strong class="d-block mb-1" data-lang="es">Resumen de esta semana (22 de febrero, 2026)</strong>
-        <strong class="d-block mb-1" data-lang="en">This week's summary (February 22, 2026)</strong>
-        <p class="mb-0 small text-secondary" data-lang="es">NAIC fija prioridades 2026 para capital, datos, resiliencia e IA. MIB reporta crecimiento récord en solicitudes de vida. También destacan rankings de aseguradoras, transformación digital y mayor interés en pólizas híbridas LTC+vida.</p>
-        <p class="mb-0 small text-secondary" data-lang="en">NAIC sets 2026 priorities for capital, data, resilience, and AI. MIB reports record life application growth. The week also highlights insurer rankings, digital transformation, and rising interest in hybrid LTC life policies.</p>
+        <strong class="d-block mb-1" data-lang="es">Resumen de esta semana (1 de marzo, 2026)</strong>
+        <strong class="d-block mb-1" data-lang="en">This week's summary (March 1, 2026)</strong>
+        <p class="mb-0 small text-secondary" data-lang="es">Esta semana explicamos cómo interpretar reseñas de aseguradoras de vida en 2026: qué sí miden (fortaleza financiera, quejas y experiencia), qué no muestran (aprobación por salud y ajuste real de precio), y por qué la guía de un agente licenciado sigue siendo clave.</p>
+        <p class="mb-0 small text-secondary" data-lang="en">This week we break down how to read life insurance carrier reviews in 2026: what they do measure (financial strength, complaints, and service), what they miss (health-based approval fit and real pricing alignment), and why licensed guidance still matters.</p>
       </div>
 
       <h2 class="h3 fw-bold mb-4 text-center" style="color:#1a365d;" data-lang="es">Últimas entradas</h2>
       <h2 class="h3 fw-bold mb-4 text-center" style="color:#1a365d;" data-lang="en">Latest posts</h2>
 
       <div class="row g-4 justify-content-center" id="blog-feed">
+        <!-- BLOG CARD: Weekly Insurance Update March 1, 2026 -->
+        <div class="col-12 col-lg-10">
+          <article class="blog-card h-100">
+            <div class="row g-0 align-items-stretch">
+              <div class="col-12 col-md-5">
+                <a href="blog/weekly-insurance-update-2026-03-01.html" class="d-block h-100 text-decoration-none">
+                  <div class="w-100 h-100 d-flex align-items-center justify-content-center rounded-start" style="max-height:280px; min-height:220px; background:linear-gradient(135deg,#eaf3ff 0%, #dbeafe 100%);">
+                    <div class="text-center px-3">
+                      <i class="fas fa-newspaper mb-2" style="font-size:40px; color:#1a365d;"></i>
+                      <div class="fw-bold small text-uppercase" style="color:#1a365d;" data-lang="es">Imagen próximamente</div>
+                      <div class="fw-bold small text-uppercase" style="color:#1a365d;" data-lang="en">Image coming soon</div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div class="col-12 col-md-7 d-flex">
+                <div class="p-3 p-md-4 d-flex flex-column justify-content-center">
+                  <h3 class="h5 fw-bold mb-2" style="color:#1a365d;" data-lang="es">Actualización semanal - 1 de marzo de 2026</h3>
+                  <h3 class="h5 fw-bold mb-2" style="color:#1a365d;" data-lang="en">Weekly update - March 1, 2026</h3>
+                  <p class="small text-muted mb-2" data-lang="es">Cómo leer reseñas de aseguradoras en 2026: qué sí importa, qué no muestran los rankings y cómo comparar con más claridad.</p>
+                  <p class="small text-muted mb-2" data-lang="en">How to read carrier reviews in 2026: what matters, what rankings miss, and how to compare with confidence.</p>
+                  <a href="blog/weekly-insurance-update-2026-03-01.html" class="btn btn-outline-primary btn-sm align-self-start" data-lang="es">Leer artículo</a>
+                  <a href="blog/weekly-insurance-update-2026-03-01.html" class="btn btn-outline-primary btn-sm align-self-start" data-lang="en">Read article</a>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+
         <!-- BLOG CARD: Weekly Insurance Update February 22, 2026 -->
         <div class="col-12 col-lg-10">
           <article class="blog-card h-100">
