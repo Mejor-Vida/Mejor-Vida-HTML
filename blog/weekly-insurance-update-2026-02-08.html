@@ -425,8 +425,8 @@
       .hamburger-btn { display: block; margin-right: 0; }
       .desktop-nav { display: none !important; }
       .desktop-cta { display: none !important; }
-      .header-inner { justify-content: space-between !important; padding-right: 36px; }
-      .header-inner > .d-flex.align-items-center.gap-2 { transform: none; margin-left: auto; }
+      .header-inner { justify-content: space-between !important; position: relative; }
+      .header-inner > .d-flex.align-items-center.gap-2 { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); margin-left: 0; z-index: 2; }
       .header-logo-wrap { margin-left: -60px !important; }
     }
     html.lang-es [data-lang="en"] { display: none !important; }

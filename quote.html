@@ -227,11 +227,15 @@
       }
       .header-inner {
         justify-content: space-between !important;
-        padding-right: 36px;
+        position: relative;
       }
       .header-inner > .d-flex.align-items-center.gap-2 {
-        transform: none;
-        margin-left: auto;
+        position: absolute;
+        right: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        margin-left: 0;
+        z-index: 2;
       }
     }
 
