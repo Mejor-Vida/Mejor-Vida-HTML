@@ -2,6 +2,8 @@
 // Language toggle, carousel, and UI functionality
 
 document.addEventListener('DOMContentLoaded', function() {
+  const WHATSAPP_URL = 'https://wa.me/14024405438';
+
   // ========================================
   // LANGUAGE TOGGLE
   // ========================================
@@ -51,6 +53,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Save preference for same-tab navigation (resets on reload logic below)
     sessionStorage.setItem('sessionLang', lang);
+
+    // Keep floating WhatsApp label language-aware.
+    updateFloatingWhatsAppLabel(lang);
   }
 
   // Persist language across page navigation, but reset to Spanish on reload.
@@ -168,6 +173,78 @@ document.addEventListener('DOMContentLoaded', function() {
       mobileMenu.classList.toggle('hidden');
     });
   }
+
+  // ========================================
+  // FLOATING WHATSAPP BUTTON (ALL PAGES)
+  // ========================================
+  function ensureFloatingWhatsAppButton() {
+    if (document.getElementById('floating-whatsapp-btn')) return;
+
+    const styleTag = document.createElement('style');
+    styleTag.textContent = `
+      #floating-whatsapp-btn {
+        position: fixed;
+        right: 16px;
+        bottom: 18px;
+        z-index: 1100;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 12px;
+        border-radius: 999px;
+        background: #25D366;
+        color: #ffffff;
+        font-weight: 700;
+        font-size: 13px;
+        line-height: 1.2;
+        text-decoration: none;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+        max-width: min(86vw, 320px);
+      }
+      #floating-whatsapp-btn:hover {
+        filter: brightness(0.96);
+      }
+      #floating-whatsapp-btn .wa-icon {
+        font-size: 18px;
+      }
+      @media (max-width: 576px) {
+        #floating-whatsapp-btn {
+          right: 12px;
+          bottom: 14px;
+          padding: 9px 11px;
+          font-size: 12px;
+        }
+      }
+    `;
+    document.head.appendChild(styleTag);
+
+    const button = document.createElement('a');
+    button.id = 'floating-whatsapp-btn';
+    button.href = WHATSAPP_URL;
+    button.target = '_blank';
+    button.rel = 'noopener';
+    button.setAttribute('aria-label', 'Message us on WhatsApp');
+    button.innerHTML = '<span class="wa-icon" aria-hidden="true">💬</span><span class="wa-label"></span>';
+    document.body.appendChild(button);
+  }
+
+  function updateFloatingWhatsAppLabel(lang) {
+    const button = document.getElementById('floating-whatsapp-btn');
+    if (!button) return;
+    const label = button.querySelector('.wa-label');
+    if (!label) return;
+
+    if (lang === 'en') {
+      label.textContent = 'Message us on WhatsApp';
+      button.setAttribute('aria-label', 'Message us on WhatsApp');
+    } else {
+      label.textContent = 'Envíanos un mensaje por WhatsApp';
+      button.setAttribute('aria-label', 'Envíanos un mensaje por WhatsApp');
+    }
+  }
+
+  ensureFloatingWhatsAppButton();
+  updateFloatingWhatsAppLabel(currentLanguage);
 });
 
 // ========================================
