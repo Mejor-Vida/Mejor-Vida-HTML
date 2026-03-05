@@ -246,10 +246,11 @@
       color: #1a365d;
     }
     @media (max-width: 991px) {
-      .hamburger-btn { display: block; margin-right: 10px; }
+      .hamburger-btn { display: block; margin-right: 0; }
       .desktop-nav { display: none !important; }
       .desktop-cta { display: none !important; }
       .header-inner { justify-content: space-between !important; }
+      .header-inner > .d-flex.align-items-center.gap-2 { margin-right: 16px; }
     }
     html.lang-es [data-lang="en"] { display: none !important; }
     html.lang-en [data-lang="es"] { display: none !important; }
