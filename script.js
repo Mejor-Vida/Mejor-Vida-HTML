@@ -2,7 +2,7 @@
 // Language toggle, carousel, and UI functionality
 
 document.addEventListener('DOMContentLoaded', function() {
-  const WHATSAPP_URL = 'https://wa.me/14024405438';
+  const WHATSAPP_URL = 'https://wa.me/14024405438?text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20seguro%20de%20gastos%20finales.';
 
   // ========================================
   // LANGUAGE TOGGLE
