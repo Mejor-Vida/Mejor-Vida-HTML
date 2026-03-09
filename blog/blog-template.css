@@ -29,6 +29,13 @@
   padding: 0 24px 56px;
 }
 
+/* Support pages where both classes live on same element. */
+.mv-news.page-wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px 56px;
+}
+
 .mv-news .hero {
   padding: 28px 0 18px;
   border-bottom: 1px solid var(--border-light);

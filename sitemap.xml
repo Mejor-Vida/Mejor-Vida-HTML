@@ -10,8 +10,15 @@
   <!-- Blog page (weekly newsletter content) -->
   <url>
     <loc>https://www.mejorvidainsurance.com/blog.html</loc>
-    <lastmod>2026-03-01T00:00:00+00:00</lastmod>
+    <lastmod>2026-03-08T00:00:00+00:00</lastmod>
     <priority>0.80</priority>
+  </url>
+
+  <!-- Blog post: Weekly Insurance News Digest - March 8, 2026 -->
+  <url>
+    <loc>https://www.mejorvidainsurance.com/blog/weekly-insurance-update-2026-03-08.html</loc>
+    <lastmod>2026-03-08T00:00:00+00:00</lastmod>
+    <priority>0.70</priority>
   </url>
 
   <!-- Blog post: Weekly Insurance News Digest - March 1, 2026 -->
