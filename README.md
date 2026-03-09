@@ -30,7 +30,7 @@ Script: `scripts/generate-image.js`
 
 The script calls your protected endpoint and saves output locally to:
 
-- `public/img/generated/`
+- `img/generated/`
 
 Run example:
 

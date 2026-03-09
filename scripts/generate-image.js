@@ -69,7 +69,7 @@ async function main() {
 
   const ext = data.mimeType && data.mimeType.includes("jpeg") ? "jpg" : "png";
   const safeFilename = data.filename.replace(/\.[a-z0-9]+$/i, "");
-  const outputDir = path.join(process.cwd(), "public", "img", "generated");
+  const outputDir = path.join(process.cwd(), "img", "generated");
   ensureDir(outputDir);
   const outputPath = path.join(outputDir, `${safeFilename}.${ext}`);
 
