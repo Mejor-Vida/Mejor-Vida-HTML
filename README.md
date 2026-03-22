@@ -81,6 +81,53 @@ Output naming pattern:
 4. Commit + push to GitHub.
 5. Vercel deploys from GitHub.
 
+### Blog image generation (Fal.ai) — recommended for weekly posts
+
+Script: `tools/generate_blog_images.py`  
+Rules: `tools/blog-image-rules.md` (Narrative Editorial Image Strategy)
+
+Generates hero + story images for weekly insurance update blog posts. Uses the **Narrative Editorial Image Strategy**: all people Hispanic/Latino, human-centric and narrative-driven. Hero = Hispanic person in dramatic metaphorical setting; one office shot (Golden Hour) per post; rest = narrative events with active metaphors. Cinematic lighting, professional editorial 8k.
+
+**Important:** Run from a **local terminal** (not Cursor's sandbox). The script needs full network access to Fal.ai; sandboxed runs can fail silently or be blocked.
+
+```bash
+# From project root. FAL_KEY is loaded from .env.local automatically.
+python3 tools/generate_blog_images.py \
+  --slug weekly-insurance-update-2026-03-22 \
+  --week-label "March 22, 2026" \
+  --provider fal \
+  --fal-model realistic-vision \
+  --story "Hispanic family reviewing life insurance documents with agent in modern office" \
+  --story "Insurance agent using laptop and digital portal for quotes" \
+  --story "Senior couple planning final expense coverage" \
+  --story "Young couple discussing life insurance with living benefits"
+```
+
+Output: `img/blog-generated/<slug>/hero.png` and `story-1.png`, `story-2.png`, etc. Expect ~30–60 seconds per image (hero + 4 stories ≈ 3–5 minutes).
+
+Then update the blog post HTML to use:
+- `../img/blog-generated/<slug>/hero.png` for the main hero
+- `../img/blog-generated/<slug>/story-N.png` in each story section
+
+### FLUX LoRA training (fal.ai)
+
+Script: `tools/train_flux_lora_fal.py`
+
+Trains a FLUX LoRA on fal.ai using **flux-lora-fast-training** (~10x faster, ~$2/run).
+
+```bash
+pip install fal-client
+export FAL_KEY="your-fal-key"
+
+# Dataset: LoRA Training Folder/LoRA-Training-Individual-clean.zip (default)
+python tools/train_flux_lora_fal.py
+
+# Custom dataset or steps
+python tools/train_flux_lora_fal.py --dataset path/to/dataset.zip --steps 1500 --output my_lora.safetensors
+```
+
+Settings: trigger word `julie_mv`, 1000 steps (default). Use `tools/fetch_fal_lora_result.py` to download results from a completed job.
+
 ### Security notes
 
 - `HF_TOKEN` is used only on server/API routes.
