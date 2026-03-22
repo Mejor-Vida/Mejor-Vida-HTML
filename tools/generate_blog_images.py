@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
 """
-Generate weekly blog images with Hugging Face Inference API.
+Generate weekly blog images with Hugging Face or Fal.ai.
+
+Usage:
+  HF_TOKEN=xxx python generate_blog_images.py --slug ... --provider hf
+  FAL_KEY=xxx  python generate_blog_images.py --slug ... --provider fal
 
 Outputs:
   - Hero image
@@ -21,12 +25,62 @@ import urllib.request
 from pathlib import Path
 from typing import Iterable
 
+# Try loading .env.local from project root
+def _load_env():
+    root = Path(__file__).resolve().parents[1]
+    env_path = root / ".env.local"
+    if env_path.exists():
+        for line in env_path.read_text().splitlines():
+            line = line.strip()
+            if line and not line.startswith("#") and "=" in line:
+                k, _, v = line.partition("=")
+                v = v.strip().strip('"').strip("'")
+                if k and k not in os.environ:
+                    os.environ[k] = v
+
+
+_load_env()
 
 DEFAULT_MODEL = "stabilityai/stable-diffusion-xl-base-1.0"
 DEFAULT_NEGATIVE_PROMPT = (
     "text, logo, watermark, signature, blurry, low quality, disfigured, distorted faces, "
     "brand names, trademark symbols"
 )
+
+
+def call_fal_image(
+    *,
+    prompt: str,
+    width: int,
+    height: int,
+    model: str = "realistic-vision",
+) -> bytes:
+    import requests
+    endpoint = "fal-ai/realistic-vision" if model == "realistic-vision" else "fal-ai/flux/dev"
+    if model == "realistic-vision":
+        payload = {
+            "prompt": prompt,
+            "image_size": {"width": width, "height": height},
+            "num_inference_steps": 35,
+            "guidance_scale": 5,
+            "format": "png",
+        }
+    else:
+        payload = {
+            "prompt": prompt,
+            "image_size": {"width": width, "height": height},
+            "num_inference_steps": 28,
+            "guidance_scale": 3.5,
+            "output_format": "png",
+        }
+    result = __import__("fal_client").subscribe(endpoint, arguments=payload)
+    images = result.get("images", [])
+    if not images:
+        raise RuntimeError("Fal.ai returned no images")
+    url = images[0].get("url") if isinstance(images[0], dict) else images[0]
+    resp = requests.get(url, timeout=120)
+    resp.raise_for_status()
+    return resp.content
 
 
 def call_hf_image(
@@ -77,21 +131,23 @@ def call_hf_image(
         raise RuntimeError(f"HF API error {exc.code}: {detail}") from exc
 
 
+# Realistic stock-photo style suffix for blog images
+REALISTIC_SUFFIX = (
+    "Professional stock photograph, photorealistic, editorial style, natural lighting, "
+    "high resolution, 8k, clean composition, authentic, no text or logos."
+)
+
 def build_hero_prompt(week_label: str, topics: Iterable[str]) -> str:
-    topic_text = ", ".join(topics[:4])
     return (
-        f"Editorial hero image for a Spanish-language insurance weekly digest ({week_label}). "
-        f"Topics: {topic_text}. Professional, trustworthy, optimistic, modern. "
-        "Hispanic family-friendly visual tone, clean composition, natural lighting, no text in image."
+        "Professional photograph of a Hispanic family—father, mother, and two children—with their "
+        "Hispanic female insurance agent in a bright modern office, discussing life insurance. "
+        "Warm trustworthy atmosphere, natural window light, not all looking at papers. "
+        f"{REALISTIC_SUFFIX}"
     )
 
 
 def build_story_prompt(story_title: str) -> str:
-    return (
-        f"Editorial news illustration for insurance article: {story_title}. "
-        "Photorealistic style, professional, U.S. insurance context, clean composition, "
-        "no text or logos in image."
-    )
+    return f"{story_title} {REALISTIC_SUFFIX}"
 
 
 def write_image(path: Path, data: bytes) -> None:
@@ -112,6 +168,10 @@ def parse_args() -> argparse.Namespace:
         help="Story title (repeat for each article).",
     )
     parser.add_argument("--model", default=DEFAULT_MODEL, help=f"HF model id (default: {DEFAULT_MODEL})")
+    parser.add_argument("--provider", choices=["hf", "fal"], default=None,
+                        help="Image provider: hf (Hugging Face) or fal (Fal.ai). Auto-detect if not set.")
+    parser.add_argument("--fal-model", choices=["realistic-vision", "flux"], default="realistic-vision",
+                        help="Fal model: realistic-vision (photorealistic) or flux (default: realistic-vision)")
     parser.add_argument("--hero-width", type=int, default=1536)
     parser.add_argument("--hero-height", type=int, default=864)
     parser.add_argument("--story-width", type=int, default=1280)
@@ -120,11 +180,38 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
+def _gen_image(args, prompt: str, width: int, height: int, provider: str) -> bytes:
+    if provider == "fal":
+        return call_fal_image(prompt=prompt, width=width, height=height, model=getattr(args, "fal_model", "realistic-vision"))
+    return call_hf_image(
+        token=os.getenv("HF_TOKEN"),
+        model=args.model,
+        prompt=prompt,
+        negative_prompt=DEFAULT_NEGATIVE_PROMPT,
+        width=width,
+        height=height,
+    )
+
+
 def main() -> int:
     args = parse_args()
-    token = os.getenv("HF_TOKEN")
-    if not token:
-        print("ERROR: Missing HF_TOKEN environment variable.", file=sys.stderr)
+
+    # Auto-detect provider
+    provider = args.provider
+    if not provider:
+        if os.getenv("FAL_KEY"):
+            provider = "fal"
+        elif os.getenv("HF_TOKEN"):
+            provider = "hf"
+        else:
+            print("ERROR: Set FAL_KEY or HF_TOKEN, or use --provider fal|hf.", file=sys.stderr)
+            return 1
+
+    if provider == "hf" and not os.getenv("HF_TOKEN"):
+        print("ERROR: HF_TOKEN required for --provider hf.", file=sys.stderr)
+        return 1
+    if provider == "fal" and not os.getenv("FAL_KEY"):
+        print("ERROR: FAL_KEY required for --provider fal.", file=sys.stderr)
         return 1
 
     project_root = Path(__file__).resolve().parents[1]
@@ -133,19 +220,12 @@ def main() -> int:
 
     stories = args.story or ["Insurance industry weekly overview"]
 
-    print(f"Generating images with model: {args.model}")
+    print(f"Generating images with provider: {provider}")
     print(f"Output folder: {out_dir}")
 
     # Hero image
     hero_prompt = build_hero_prompt(args.week_label, stories)
-    hero_data = call_hf_image(
-        token=token,
-        model=args.model,
-        prompt=hero_prompt,
-        negative_prompt=DEFAULT_NEGATIVE_PROMPT,
-        width=args.hero_width,
-        height=args.hero_height,
-    )
+    hero_data = _gen_image(args, hero_prompt, args.hero_width, args.hero_height, provider)
     hero_path = out_dir / "hero.png"
     write_image(hero_path, hero_data)
     print(f"Saved hero: {hero_path}")
@@ -154,14 +234,7 @@ def main() -> int:
     # Story images
     for idx, title in enumerate(stories, start=1):
         prompt = build_story_prompt(title)
-        story_data = call_hf_image(
-            token=token,
-            model=args.model,
-            prompt=prompt,
-            negative_prompt=DEFAULT_NEGATIVE_PROMPT,
-            width=args.story_width,
-            height=args.story_height,
-        )
+        story_data = _gen_image(args, prompt, args.story_width, args.story_height, provider)
         story_path = out_dir / f"story-{idx}.png"
         write_image(story_path, story_data)
         print(f"Saved story {idx}: {story_path}")
