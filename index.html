@@ -111,7 +111,7 @@
         "name": "¿Qué compañías de seguros trabajan con Mejor Vida Insurance?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Como agente independiente, Julie trabaja con varias aseguradoras reconocidas, incluyendo Aetna y Mutual of Omaha. Esto le permite comparar opciones y encontrar la mejor póliza para tu situación específica y presupuesto."
+          "text": "Como agente independiente, Julie trabaja con varias aseguradoras reconocidas, incluyendo Assurity, Mutual of Omaha y American Amicable. Esto le permite comparar opciones y encontrar la mejor póliza para tu situación específica y presupuesto."
         }
       },
       {
@@ -489,6 +489,208 @@
       background-color: #63b3ed;
       transform: scale(1.2);
     }
+
+    /* Hero carousel — quote pill: logo | carrier + "$Xk policy" + divider + "$/mo" */
+    .hero-quote-bubble-wrap {
+      position: absolute;
+      z-index: 8;
+      max-width: min(100%, 272px);
+      transition: opacity 0.35s ease, transform 0.35s ease;
+    }
+    .hero-quote-bubble-wrap.is-switching {
+      opacity: 0.65;
+    }
+    @media (min-width: 992px) {
+      .hero-quote-bubble-wrap.is-switching {
+        transform: scale(0.98);
+      }
+    }
+    .hero-quote-bubble-link {
+      color: inherit;
+      display: block;
+      border-radius: 999px;
+      outline: none;
+    }
+    .hero-quote-bubble-link:hover .hero-quote-bubble,
+    .hero-quote-bubble-link:focus-visible .hero-quote-bubble {
+      box-shadow: 0 14px 36px rgba(0, 0, 0, 0.55);
+      border-color: rgba(255, 255, 255, 0.12);
+    }
+    .hero-quote-bubble-link:focus-visible {
+      box-shadow: 0 0 0 3px rgba(254, 201, 99, 0.65);
+    }
+    .hero-quote-bubble {
+      --hq-logo: 58px;
+      --hq-pill: #1a1a1a;
+      display: flex;
+      align-items: center;
+      gap: 0.42rem;
+      /* Tight vertical pad; no left pad so logo disk meets the pill’s left cap */
+      padding: 0.18rem 0.56rem 0.18rem 0;
+      border-radius: 999px;
+      background: var(--hq-pill);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      transition: box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+    .hero-quote-logo-wrap {
+      flex: 0 0 auto;
+      width: var(--hq-logo);
+      height: var(--hq-logo);
+      border-radius: 50%;
+      overflow: hidden;
+      background: #2f2f2f;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero-quote-logo {
+      width: var(--hq-logo);
+      height: var(--hq-logo);
+      object-fit: cover;
+      display: block;
+    }
+    .hero-quote-logo.is-hidden {
+      display: none;
+    }
+    .hero-quote-logo-fallback {
+      display: none;
+      width: var(--hq-logo);
+      height: var(--hq-logo);
+      border-radius: 50%;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: 800;
+      font-size: 0.95rem;
+      background: #3d3d3d;
+    }
+    .hero-quote-logo.is-hidden + .hero-quote-logo-fallback {
+      display: flex;
+    }
+    .hero-quote-text {
+      flex: 1 1 auto;
+      min-width: 0;
+      color: #fff;
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      line-height: 1.15;
+    }
+    .hero-quote-carrier-name {
+      font-size: 0.875rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #fff;
+    }
+    .hero-quote-policy-line {
+      font-size: 0.875rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #fff;
+      margin-top: 0.04rem;
+    }
+    .hero-quote-rate-block {
+      margin-top: 0.05rem;
+    }
+    .hero-quote-rate-block.is-empty {
+      display: none;
+    }
+    .hero-quote-divider {
+      height: 1px;
+      width: 100%;
+      background: #4a9ea8;
+      margin: 0.2rem 0 0.16rem;
+      border: none;
+      opacity: 0.85;
+    }
+    .hero-quote-rate {
+      font-size: 0.875rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #fff;
+    }
+    .hero-quote-logo-wrap[data-carrier="assurity"] {
+      display: grid;
+      place-items: center;
+      width: 92px;
+      height: 92px;
+      margin-left: -5px;
+      background: #ffffff;
+      box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.06);
+    }
+    .hero-quote-logo-wrap[data-carrier="assurity"] .hero-quote-logo {
+      /* Wide wordmark: tie size to circle height so the mark reads larger */
+      display: block;
+      grid-column: 1;
+      grid-row: 1;
+      width: auto;
+      max-width: 118%;
+      height: 100%;
+      max-height: 100%;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      object-fit: contain;
+      object-position: center;
+      justify-self: center;
+    }
+    .hero-quote-logo-wrap[data-carrier="assurity"] .hero-quote-logo-fallback {
+      color: #a42828;
+      background: transparent;
+      margin-left: 0;
+      width: 100%;
+      height: 100%;
+      font-size: 1.72rem;
+      font-weight: 800;
+      letter-spacing: -0.06em;
+      padding: 0 2px;
+      box-sizing: border-box;
+    }
+    .hero-quote-logo-wrap[data-carrier="mutual-of-omaha"] {
+      background: #003b6f;
+    }
+    .hero-quote-logo-wrap[data-carrier="mutual-of-omaha"] .hero-quote-logo {
+      width: 76%;
+      height: 76%;
+      margin-left: 0;
+      object-fit: contain;
+      object-position: center;
+    }
+    .hero-quote-logo-wrap[data-carrier="mutual-of-omaha"] .hero-quote-logo-fallback {
+      background: transparent;
+      margin-left: 0;
+    }
+    @media (max-width: 991px) {
+      .hero-quote-bubble-wrap {
+        left: 50% !important;
+        right: auto !important;
+        transform: translateX(-50%);
+        bottom: 44px !important;
+        max-width: min(94vw, 272px);
+      }
+      .hero-quote-bubble-wrap.is-switching {
+        transform: translateX(-50%) scale(0.98);
+      }
+      /* Couple slide: two smaller bubbles, staggered L/R */
+      .hero-carousel--dual-bubbles .hero-quote-bubble-wrap {
+        max-width: min(46vw, 150px);
+        transform: none !important;
+        bottom: 46px !important;
+      }
+      .hero-carousel--dual-bubbles .hero-quote-bubble-wrap--a {
+        left: 3% !important;
+        right: auto !important;
+      }
+      .hero-carousel--dual-bubbles .hero-quote-bubble-wrap--a.is-switching {
+        transform: scale(0.98) !important;
+      }
+      .hero-carousel--dual-bubbles .hero-quote-bubble-wrap--b {
+        left: auto !important;
+        right: 3% !important;
+      }
+      .hero-carousel--dual-bubbles .hero-quote-bubble-wrap--b.is-switching {
+        transform: scale(0.98) !important;
+      }
+    }
     
     /* --- Header: fixed height, larger logo, nav pushed right with even spacing --- */
     .navbar {
@@ -761,10 +963,10 @@
           </h1>
 
           <p class="fs-5 text-white opacity-90 mb-4 lh-lg" data-lang="es">
-            En Mejor Vida Insurance, te ayudamos a encontrar un seguro de vida para gastos finales que se ajuste a tu presupuesto, trabajando con compañías de confianza como Aetna y Mutual of Omaha.
+            En Mejor Vida Insurance, te ayudamos a encontrar un seguro de vida para gastos finales que se ajuste a tu presupuesto, trabajando con compañías de confianza como Assurity, Mutual of Omaha y American Amicable.
           </p>
           <p class="fs-5 text-white opacity-90 mb-4 lh-lg" data-lang="en">
-            At Mejor Vida Insurance, we help you find final expense life insurance that fits your budget, working with trusted companies like Aetna and Mutual of Omaha.
+            At Mejor Vida Insurance, we help you find final expense life insurance that fits your budget, working with trusted companies like Assurity, Mutual of Omaha, and American Amicable.
           </p>
 
           <div class="d-flex flex-column flex-sm-row gap-2 mb-5">
@@ -802,7 +1004,7 @@
             <div class="carousel-slide active">
               <img src="img/business-man.png" alt="Profesional" />
             </div>
-            <div class="carousel-slide">
+            <div class="carousel-slide" data-hero-couple="true">
               <img src="img/couple-smiling.png" alt="Pareja sonriendo" />
             </div>
             <div class="carousel-slide">
@@ -814,27 +1016,52 @@
             <div class="carousel-slide">
               <img src="img/woman-flowers.png" alt="Mujer con flores" />
             </div>
+
+            <!-- Hero quotes from js/hero-quotes-data.js; couple slide can show two bubbles -->
+            <div id="hero-quote-bubble-wrap-a" class="hero-quote-bubble-wrap hero-quote-bubble-wrap--a" aria-live="polite" aria-atomic="true">
+              <a href="quote.html" class="hero-quote-bubble-link text-decoration-none">
+                <div class="hero-quote-bubble">
+                  <div class="hero-quote-logo-wrap js-hq-logo-wrap">
+                    <img class="hero-quote-logo js-hq-logo" src="" alt="" width="92" height="92" decoding="async" />
+                    <span class="hero-quote-logo-fallback js-hq-fb" aria-hidden="true"></span>
+                  </div>
+                  <div class="hero-quote-text">
+                    <div class="hero-quote-carrier-name js-hq-carrier"></div>
+                    <div class="hero-quote-policy-line js-hq-policy"></div>
+                    <div class="hero-quote-rate-block js-hq-rate-block">
+                      <div class="hero-quote-divider" aria-hidden="true"></div>
+                      <div class="hero-quote-rate js-hq-rate"></div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div id="hero-quote-bubble-wrap-b" class="hero-quote-bubble-wrap hero-quote-bubble-wrap--b" aria-live="polite" aria-atomic="true" hidden>
+              <a href="quote.html" class="hero-quote-bubble-link text-decoration-none">
+                <div class="hero-quote-bubble">
+                  <div class="hero-quote-logo-wrap js-hq-logo-wrap">
+                    <img class="hero-quote-logo js-hq-logo" src="" alt="" width="92" height="92" decoding="async" />
+                    <span class="hero-quote-logo-fallback js-hq-fb" aria-hidden="true"></span>
+                  </div>
+                  <div class="hero-quote-text">
+                    <div class="hero-quote-carrier-name js-hq-carrier"></div>
+                    <div class="hero-quote-policy-line js-hq-policy"></div>
+                    <div class="hero-quote-rate-block js-hq-rate-block">
+                      <div class="hero-quote-divider" aria-hidden="true"></div>
+                      <div class="hero-quote-rate js-hq-rate"></div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+
             <!-- Carousel indicators -->
             <div class="carousel-indicators">
-              <button class="carousel-dot active" data-slide="0"></button>
-              <button class="carousel-dot" data-slide="1"></button>
-              <button class="carousel-dot" data-slide="2"></button>
-              <button class="carousel-dot" data-slide="3"></button>
-              <button class="carousel-dot" data-slide="4"></button>
-            </div>
-          </div>
-
-          <!-- Floating Quote Card -->
-          <div class="position-absolute d-none d-lg-block bg-white rounded-3 shadow p-3" style="bottom: -1rem; left: -1rem;">
-            <div class="d-flex align-items-center gap-2">
-              <div class="rounded-circle d-flex align-items-center justify-content-center" style="width:48px;height:48px;background:#ebf8ff;">
-                <i class="fas fa-heart-pulse text-primary fs-5"></i>
-              </div>
-              <div>
-                <p class="small text-muted mb-0" data-lang="es">Cobertura desde</p>
-                <p class="small text-muted mb-0" data-lang="en">Coverage from</p>
-                <p class="fw-bold mb-0" style="color:#1a365d;">$5,000 - $35,000</p>
-              </div>
+              <button type="button" class="carousel-dot active" data-slide="0" aria-label="Slide 1"></button>
+              <button type="button" class="carousel-dot" data-slide="1" aria-label="Slide 2"></button>
+              <button type="button" class="carousel-dot" data-slide="2" aria-label="Slide 3"></button>
+              <button type="button" class="carousel-dot" data-slide="3" aria-label="Slide 4"></button>
+              <button type="button" class="carousel-dot" data-slide="4" aria-label="Slide 5"></button>
             </div>
           </div>
         </div>
@@ -873,8 +1100,8 @@
           <p class="text-body-secondary lh-lg mb-3" data-lang="es">Julie se especializa en seguros de vida para gastos finales. Su meta es hacer estas conversaciones más fáciles: explicarte cómo funciona la cobertura, qué opciones tienes y cómo proteger mejor a tu familia, sin palabras complicadas.</p>
           <p class="text-body-secondary lh-lg mb-3" data-lang="en">Julie specializes in final expense life insurance. Her goal is to make these conversations easier: explain how coverage works, what your options are, and how to best protect your family—without complicated language.</p>
 
-          <p class="text-body-secondary lh-lg mb-4" data-lang="es">Como agente independiente, no trabaja para una sola compañía. Eso significa que puede revisar diferentes aseguradoras, como Aetna y Mutual of Omaha, para encontrar una póliza que se adapte a tu edad, salud y presupuesto.</p>
-          <p class="text-body-secondary lh-lg mb-4" data-lang="en">As an independent agent, she doesn't work for just one company. That means she can look at different insurers, like Aetna and Mutual of Omaha, to find a policy that fits your age, health, and budget.</p>
+          <p class="text-body-secondary lh-lg mb-4" data-lang="es">Como agente independiente, no trabaja para una sola compañía. Eso significa que puede revisar diferentes aseguradoras, como Assurity, Mutual of Omaha y American Amicable, para encontrar una póliza que se adapte a tu edad, salud y presupuesto.</p>
+          <p class="text-body-secondary lh-lg mb-4" data-lang="en">As an independent agent, she doesn't work for just one company. That means she can look at different insurers, like Assurity, Mutual of Omaha, and American Amicable, to find a policy that fits your age, health, and budget.</p>
 
           <ul class="list-unstyled">
             <li class="d-flex align-items-start gap-2 mb-2" data-lang="es"><i class="fas fa-check-circle text-success mt-1"></i><span class="text-body-secondary">Explicaciones claras y honestas.</span></li>
@@ -956,20 +1183,23 @@
       </div>
 
       <div class="row g-4">
-        <div class="col-12 col-md-6">
+        <div class="col-12 col-md-6 col-lg-4">
           <div class="feature-card bg-light rounded-3 p-4 shadow h-100">
-            <h3 class="h4 fw-bold mb-4" style="color:#1a365d;">Aetna</h3>
+            <h3 class="visually-hidden">Assurity</h3>
+            <div class="mb-4">
+              <img src="img/carriers/assurity-logo.svg" alt="" width="130" height="30" decoding="async" class="d-block" style="height:40px;width:auto;max-width:100%;" />
+            </div>
             <ul class="list-unstyled mb-0">
-              <li class="d-flex align-items-start gap-2 mb-2" data-lang="es"><i class="fas fa-check text-success mt-1 flex-shrink-0"></i><span class="small text-body-secondary">Ofrece pólizas de vida entera para gastos finales, diseñadas para ayudar a cubrir costos de funeral, entierro y facturas médicas.</span></li>
-              <li class="d-flex align-items-start gap-2 mb-2" data-lang="en"><i class="fas fa-check text-success mt-1 flex-shrink-0"></i><span class="small text-body-secondary">Offers whole life final expense policies designed to help cover funeral, burial, and medical bills.</span></li>
-              <li class="d-flex align-items-start gap-2 mb-2" data-lang="es"><i class="fas fa-check text-success mt-1 flex-shrink-0"></i><span class="small text-body-secondary">La prima se mantiene nivelada durante la vida de la póliza.</span></li>
-              <li class="d-flex align-items-start gap-2 mb-2" data-lang="en"><i class="fas fa-check text-success mt-1 flex-shrink-0"></i><span class="small text-body-secondary">Premiums remain level for the life of the policy.</span></li>
-              <li class="d-flex align-items-start gap-2 mb-2" data-lang="es"><i class="fas fa-check text-success mt-1 flex-shrink-0"></i><span class="small text-body-secondary">Proceso simplificado: en muchos casos no se requiere examen médico.</span></li>
-              <li class="d-flex align-items-start gap-2 mb-2" data-lang="en"><i class="fas fa-check text-success mt-1 flex-shrink-0"></i><span class="small text-body-secondary">Simplified process: in many cases no medical exam is required.</span></li>
+              <li class="d-flex align-items-start gap-2 mb-2" data-lang="es"><i class="fas fa-check text-success mt-1 flex-shrink-0"></i><span class="small text-body-secondary">Soluciones de vida entera para gastos finales con primas niveladas, pensadas para ayudar a cubrir funeral, entierro y costos relacionados al final de la vida.</span></li>
+              <li class="d-flex align-items-start gap-2 mb-2" data-lang="en"><i class="fas fa-check text-success mt-1 flex-shrink-0"></i><span class="small text-body-secondary">Whole life final expense solutions with level premiums intended to help cover funeral, burial, and related end-of-life costs.</span></li>
+              <li class="d-flex align-items-start gap-2 mb-2" data-lang="es"><i class="fas fa-check text-success mt-1 flex-shrink-0"></i><span class="small text-body-secondary">Varias clases de salud y suscripción simplificada; muchos solicitantes califican sin examen médico.</span></li>
+              <li class="d-flex align-items-start gap-2 mb-2" data-lang="en"><i class="fas fa-check text-success mt-1 flex-shrink-0"></i><span class="small text-body-secondary">Multiple health classes and simplified underwriting paths—many applicants qualify without a medical exam.</span></li>
+              <li class="d-flex align-items-start gap-2 mb-2" data-lang="es"><i class="fas fa-check text-success mt-1 flex-shrink-0"></i><span class="small text-body-secondary">Montos y estructuras de cobertura que se pueden alinear con objetivos comunes de planificación de gastos finales.</span></li>
+              <li class="d-flex align-items-start gap-2 mb-2" data-lang="en"><i class="fas fa-check text-success mt-1 flex-shrink-0"></i><span class="small text-body-secondary">Coverage amounts and structures that can be matched to common final expense planning goals.</span></li>
             </ul>
           </div>
         </div>
-        <div class="col-12 col-md-6">
+        <div class="col-12 col-md-6 col-lg-4">
           <div class="feature-card bg-light rounded-3 p-4 shadow h-100">
             <h3 class="h4 fw-bold mb-4" style="color:#1a365d;">Mutual of Omaha</h3>
             <ul class="list-unstyled mb-0">
@@ -979,6 +1209,19 @@
               <li class="d-flex align-items-start gap-2 mb-2" data-lang="en"><i class="fas fa-check text-success mt-1 flex-shrink-0"></i><span class="small text-body-secondary">Whole life policies designed to cover funeral, burial, and memorial services.</span></li>
               <li class="d-flex align-items-start gap-2 mb-2" data-lang="es"><i class="fas fa-check text-success mt-1 flex-shrink-0"></i><span class="small text-body-secondary">Las primas no aumentan por envejecer o cambios de salud después de emitida la póliza.</span></li>
               <li class="d-flex align-items-start gap-2 mb-2" data-lang="en"><i class="fas fa-check text-success mt-1 flex-shrink-0"></i><span class="small text-body-secondary">Premiums don't increase due to aging or health changes after the policy is issued.</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-12 col-md-6 col-lg-4 mx-md-auto mx-lg-0">
+          <div class="feature-card bg-light rounded-3 p-4 shadow h-100">
+            <h3 class="h4 fw-bold mb-4" style="color:#1a365d;">American Amicable</h3>
+            <ul class="list-unstyled mb-0">
+              <li class="d-flex align-items-start gap-2 mb-2" data-lang="es"><i class="fas fa-check text-success mt-1 flex-shrink-0"></i><span class="small text-body-secondary">Aseguradora establecida con productos de vida entera que a menudo se usan para gastos finales y planificación funeraria.</span></li>
+              <li class="d-flex align-items-start gap-2 mb-2" data-lang="en"><i class="fas fa-check text-success mt-1 flex-shrink-0"></i><span class="small text-body-secondary">Established carrier offering whole life products often used for final expense and burial planning.</span></li>
+              <li class="d-flex align-items-start gap-2 mb-2" data-lang="es"><i class="fas fa-check text-success mt-1 flex-shrink-0"></i><span class="small text-body-secondary">Suscripción simplificada en muchos productos; quienes califiquen a menudo pueden evitar el examen médico.</span></li>
+              <li class="d-flex align-items-start gap-2 mb-2" data-lang="en"><i class="fas fa-check text-success mt-1 flex-shrink-0"></i><span class="small text-body-secondary">Simplified underwriting on many products—qualifying applicants often avoid a medical exam.</span></li>
+              <li class="d-flex align-items-start gap-2 mb-2" data-lang="es"><i class="fas fa-check text-success mt-1 flex-shrink-0"></i><span class="small text-body-secondary">Vida entera con prima nivelada para un costo mensual predecible una vez emitida la póliza.</span></li>
+              <li class="d-flex align-items-start gap-2 mb-2" data-lang="en"><i class="fas fa-check text-success mt-1 flex-shrink-0"></i><span class="small text-body-secondary">Level premium whole life for predictable monthly cost once the policy is issued.</span></li>
             </ul>
           </div>
         </div>
@@ -1076,7 +1319,8 @@
 
   <!-- Bootstrap JS (local) -->
   <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
-  <!-- Scripts -->
+  <!-- Hero carousel: generated from Google Sheet — python3 integrations/google_sheets/export_hero_carousel_quotes.py -->
+  <script src="js/hero-quotes-data.js"></script>
   <script src="script.js"></script>
 
   <!-- Mobile menu script -->
