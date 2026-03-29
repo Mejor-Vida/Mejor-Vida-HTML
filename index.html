@@ -430,7 +430,7 @@
 
     /* Header: tap-to-call icon only (number in aria-label / title, not shown as text) */
     .header-phone-compact {
-      display: inline-flex;
+      display: none; /* lg+ header bar only; mobile uses hamburger menu */
       align-items: center;
       justify-content: center;
       min-width: 2.5rem;
@@ -448,6 +448,11 @@
     }
     .header-phone-compact:hover {
       color: #1565C0;
+    }
+    @media (min-width: 992px) {
+      .header-phone-compact {
+        display: inline-flex;
+      }
     }
 
     /* Card hover effects */
