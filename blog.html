@@ -104,7 +104,7 @@
     "@type": "InsuranceAgency",
     "name": "Mejor Vida Insurance LLC",
     "url": "https://www.mejorvidainsurance.com/",
-    "telephone": "+1-402-207-8568",
+    "telephone": "+1-402-588-1125",
     "email": "mailto:Julie@mejorvidainsurance.com",
     "address": {
       "@type": "PostalAddress",
@@ -166,6 +166,27 @@
     .phone-block-number:hover {
       color: #1565C0;
       text-decoration: underline;
+    }
+    /* Header: tap-to-call icon only (number in aria-label / title, not shown as text) */
+    .header-phone-compact {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 2.5rem;
+      min-height: 2.5rem;
+      padding: 0.2rem;
+      color: #0D47A1;
+      text-decoration: none !important;
+      border-radius: 8px;
+      line-height: 1;
+      flex-shrink: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .header-phone-compact .fa-phone {
+      font-size: 1.15rem;
+    }
+    .header-phone-compact:hover {
+      color: #1565C0;
     }
     header.sticky-top {
       height: 81px !important;
@@ -411,7 +432,7 @@
 </head>
 <body class="d-flex flex-column min-vh-100 bg-light">
 
-  <!-- HEADER (same structure as index.html) -->
+  <!-- HEADER: icon-only call link (no number in bar); same structure as index -->
   <header class="sticky-top bg-white shadow-sm border-bottom">
     <div class="container">
       <div class="d-flex align-items-center justify-content-between header-inner">
@@ -437,18 +458,13 @@
         </nav>
 
         <div class="d-flex align-items-center gap-2">
+          <a href="tel:+14025881125" class="header-phone-compact flex-shrink-0 align-items-center justify-content-center" aria-label="Call office 402-588-1125" title="402-588-1125"><i class="fas fa-phone" aria-hidden="true"></i></a>
           <a href="quote.html" data-lang="es" class="desktop-cta d-none d-lg-inline-block btn-see-prices">
             Ver Precios
           </a>
           <a href="quote.html" data-lang="en" class="desktop-cta d-none d-lg-inline-block btn-see-prices">
             See Prices
           </a>
-
-          <div class="desktop-cta d-none d-lg-flex flex-column align-items-end">
-            <span class="phone-block-label" data-lang="es">Llama a nuestra linea de oficina</span>
-            <span class="phone-block-label" data-lang="en">Call our office line</span>
-            <a href="tel:+14022078568" class="phone-block-number"><i class="fas fa-phone me-1" aria-hidden="true"></i>402-207-8568</a>
-          </div>
           <a href="https://wa.me/14024405438?text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20seguro%20de%20gastos%20finales." target="_blank" rel="noopener" data-lang="es" class="desktop-cta d-none d-lg-inline-flex btn btn-sm fw-bold align-items-center rounded-pill px-3" style="background:#25D366;border-color:#25D366;color:#fff;"><i class="fab fa-whatsapp me-1" aria-hidden="true"></i>WhatsApp</a>
           <a href="https://wa.me/14024405438?text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20seguro%20de%20gastos%20finales." target="_blank" rel="noopener" data-lang="en" class="desktop-cta d-none d-lg-inline-flex btn btn-sm fw-bold align-items-center rounded-pill px-3" style="background:#25D366;border-color:#25D366;color:#fff;"><i class="fab fa-whatsapp me-1" aria-hidden="true"></i>WhatsApp</a>
 
@@ -481,8 +497,8 @@
       <a href="blog.html" data-lang="en" class="mobile-menu-link">Blog</a>
       <a href="index.html#contact" data-lang="es" class="mobile-menu-link">Contacto</a>
       <a href="index.html#contact" data-lang="en" class="mobile-menu-link">Contact</a>
-      <a href="tel:+14022078568" data-lang="es" class="mobile-menu-link fw-bold" style="color:#0D47A1;"><i class="fas fa-phone me-2"></i>Llama a nuestra línea de oficina - 402-207-8568</a>
-      <a href="tel:+14022078568" data-lang="en" class="mobile-menu-link fw-bold" style="color:#0D47A1;"><i class="fas fa-phone me-2"></i>Call our office line - 402-207-8568</a>
+      <a href="tel:+14025881125" data-lang="es" class="mobile-menu-link fw-bold" style="color:#0D47A1;"><i class="fas fa-phone me-2"></i>Llama a nuestra línea de oficina - 402-588-1125</a>
+      <a href="tel:+14025881125" data-lang="en" class="mobile-menu-link fw-bold" style="color:#0D47A1;"><i class="fas fa-phone me-2"></i>Call our office line - 402-588-1125</a>
       <a href="https://wa.me/14024405438?text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20seguro%20de%20gastos%20finales." target="_blank" rel="noopener" data-lang="es" class="mobile-menu-link fw-bold" style="color:#1D9E53;"><i class="fab fa-whatsapp me-2"></i>Envíanos un mensaje por WhatsApp</a>
       <a href="https://wa.me/14024405438?text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20seguro%20de%20gastos%20finales." target="_blank" rel="noopener" data-lang="en" class="mobile-menu-link fw-bold" style="color:#1D9E53;"><i class="fab fa-whatsapp me-2"></i>Message us on WhatsApp</a>
       <a href="quote.html" data-lang="es" class="mobile-menu-link bg-warning text-dark fw-bold text-center rounded mt-2 py-2 d-block">
@@ -524,8 +540,8 @@
             <li>Compare regulatory and market trends.</li>
             <li>Save questions for your coverage review.</li>
           </ul>
-          <p class="hero-quick-phone" data-lang="es">Llama a nuestra línea de oficina: <a href="tel:+14022078568">402-207-8568</a></p>
-          <p class="hero-quick-phone" data-lang="en">Call our office line: <a href="tel:+14022078568">402-207-8568</a></p>
+          <p class="hero-quick-phone" data-lang="es">Llama a nuestra línea de oficina: <a href="tel:+14025881125">402-588-1125</a></p>
+          <p class="hero-quick-phone" data-lang="en">Call our office line: <a href="tel:+14025881125">402-588-1125</a></p>
           <p class="hero-quick-phone" data-lang="es">Para preguntas rápidas, envíanos un mensaje por WhatsApp.</p>
           <p class="hero-quick-phone" data-lang="en">For quick questions, send us a message on WhatsApp.</p>
         </aside>
@@ -816,8 +832,8 @@
     </div>
 
     <footer class="mt-5 pt-4 border-top">
-      <a href="tel:+14022078568" class="btn btn-primary" data-lang="es">Llama a nuestra línea de oficina</a>
-      <a href="tel:+14022078568" class="btn btn-primary" data-lang="en">Call our office line</a>
+      <a href="tel:+14025881125" class="btn btn-primary" data-lang="es">Llama a nuestra línea de oficina</a>
+      <a href="tel:+14025881125" class="btn btn-primary" data-lang="en">Call our office line</a>
       <p class="small text-muted mt-4 mb-0" data-lang="es">Este contenido es solo para fines educativos y no constituye asesoramiento legal o fiscal.</p>
       <p class="small text-muted mt-4 mb-0" data-lang="en">This content is for educational purposes only and does not constitute legal or tax advice.</p>
     </footer>
@@ -842,7 +858,7 @@
     <div class="container">
       <div class="d-flex flex-column flex-md-row align-items-center justify-content-between gap-2 text-white" style="margin:0; padding:0;">
         <img id="footer-logo" src="img/logo-spanish2.png" alt="Mejor Vida Insurance" style="height:130px;filter:brightness(0) invert(1);margin-top:-25px;margin-bottom:-25px;" />
-        <span class="small"><i class="fas fa-phone me-2 opacity-75"></i><a href="tel:+14022078568" class="text-white text-opacity-90 text-decoration-none">402-207-8568</a></span>
+        <span class="small"><i class="fas fa-phone me-2 opacity-75"></i><a href="tel:+14025881125" class="text-white text-opacity-90 text-decoration-none">402-588-1125</a></span>
         <span class="small"><i class="fas fa-envelope me-2 opacity-75"></i><a href="mailto:Julie@mejorvidainsurance.com" class="text-white text-opacity-90 text-decoration-none">Julie@mejorvidainsurance.com</a></span>
         <span class="small"><i class="fas fa-map-marker-alt me-2 opacity-75"></i>P.O. Box 21885, Lincoln, NE 68542</span>
       </div>
