@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // ========================================
   const langButtons = document.querySelectorAll('.lang-btn');
   let currentLanguage = 'es';
+  let currentSlide = 0;
 
   function setLanguage(lang) {
     currentLanguage = lang;
@@ -56,6 +57,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Keep floating WhatsApp label language-aware.
     updateFloatingWhatsAppLabel(lang);
+
+    document.querySelectorAll('.hero-quote-bubble-link').forEach(function (lnk) {
+      lnk.title = lang === 'es' ? 'Ver cotización personalizada' : 'See your personalized quote';
+    });
+
+    if (typeof updateHeroQuoteBubble === 'function' && typeof currentSlide === 'number') {
+      updateHeroQuoteBubble(currentSlide);
+    }
   }
 
   // Persist language across page navigation, but reset to Spanish on reload.
@@ -76,7 +85,6 @@ document.addEventListener('DOMContentLoaded', function() {
   // ========================================
   const slides = document.querySelectorAll('.carousel-slide');
   const dots = document.querySelectorAll('.carousel-dot');
-  let currentSlide = 0;
   let carouselInterval;
 
   function showSlide(index) {
@@ -94,6 +102,144 @@ document.addEventListener('DOMContentLoaded', function() {
     dots.forEach((dot, i) => {
       dot.classList.toggle('active', i === currentSlide);
     });
+
+    updateHeroQuoteBubble(currentSlide);
+  }
+
+  function heroFormatPolicyLine(coverage, lang) {
+    const policyWord = lang === 'es' ? 'póliza' : 'policy';
+    const raw = String(coverage || '').replace(/[$,\s]/g, '');
+    const n = parseInt(raw, 10);
+    if (!isNaN(n) && n > 0) {
+      if (n >= 1000 && n % 1000 === 0) {
+        return '$' + n / 1000 + 'k ' + policyWord;
+      }
+      return '$' + n.toLocaleString('en-US') + ' ' + policyWord;
+    }
+    const c = (coverage || '').trim();
+    return c ? c + ' ' + policyWord : policyWord;
+  }
+
+  function heroFormatRateMo(rateStr, lang) {
+    const r = String(rateStr || '').trim().replace(/^\$/, '');
+    if (!r || !/^[\d.]+$/.test(r)) return '';
+    const n = parseFloat(r);
+    if (isNaN(n)) return '';
+    const suffix = lang === 'es' ? ' /mes' : ' /mo';
+    return '$' + n.toFixed(2) + suffix;
+  }
+
+  function applyHeroBubblePosition(wrapEl, pos) {
+    if (!wrapEl || !pos) return;
+    wrapEl.style.bottom = pos.bottom != null ? pos.bottom : '18%';
+    wrapEl.style.top = pos.top != null ? pos.top : 'auto';
+    if (pos.left && pos.left !== 'auto') {
+      wrapEl.style.left = pos.left;
+      wrapEl.style.right = 'auto';
+    } else if (pos.right && pos.right !== 'auto') {
+      wrapEl.style.right = pos.right;
+      wrapEl.style.left = 'auto';
+    } else {
+      wrapEl.style.left = '5%';
+      wrapEl.style.right = 'auto';
+    }
+  }
+
+  function applyHeroBubbleContent(wrapRoot, q) {
+    if (!wrapRoot || !q) return;
+    const lang = currentLanguage || 'es';
+    const carrierEl = wrapRoot.querySelector('.js-hq-carrier');
+    const policyLineEl = wrapRoot.querySelector('.js-hq-policy');
+    const rateBlock = wrapRoot.querySelector('.js-hq-rate-block');
+    const rateEl = wrapRoot.querySelector('.js-hq-rate');
+    const img = wrapRoot.querySelector('.js-hq-logo');
+    const fb = wrapRoot.querySelector('.js-hq-fb');
+    const logoWrap = wrapRoot.querySelector('.js-hq-logo-wrap');
+
+    if (logoWrap) {
+      if (q.carrierKey) logoWrap.setAttribute('data-carrier', q.carrierKey);
+      else logoWrap.removeAttribute('data-carrier');
+    }
+
+    const label = q.logoAlt || '';
+    if (carrierEl) carrierEl.textContent = label;
+    if (policyLineEl) policyLineEl.textContent = heroFormatPolicyLine(q.coverage, lang);
+
+    const rateDisplay = heroFormatRateMo(q.rate, lang);
+    if (rateEl && rateBlock) {
+      if (rateDisplay) {
+        rateEl.textContent = rateDisplay;
+        rateBlock.classList.remove('is-empty');
+      } else {
+        rateEl.textContent = '';
+        rateBlock.classList.add('is-empty');
+      }
+    }
+
+    if (img && fb) {
+      fb.textContent = label ? label.charAt(0).toUpperCase() : '?';
+      img.alt = label || 'Carrier';
+      const src = q.logo || '';
+      img.onload = function () {
+        img.classList.remove('is-hidden');
+      };
+      img.onerror = function () {
+        img.classList.add('is-hidden');
+      };
+      img.src = src;
+    }
+  }
+
+  /** One bubble or two (couple slide) — data: js/hero-quotes-data.js */
+  function updateHeroQuoteBubble(index) {
+    const quotes = window.HERO_CAROUSEL_QUOTES;
+    const wrapA = document.getElementById('hero-quote-bubble-wrap-a');
+    const wrapB = document.getElementById('hero-quote-bubble-wrap-b');
+    const carousel = document.querySelector('.carousel-container');
+    if (!wrapA) return;
+    if (!quotes || !quotes.length) {
+      wrapA.setAttribute('hidden', '');
+      wrapA.setAttribute('aria-hidden', 'true');
+      if (wrapB) {
+        wrapB.setAttribute('hidden', '');
+        wrapB.setAttribute('aria-hidden', 'true');
+      }
+      return;
+    }
+
+    wrapA.removeAttribute('hidden');
+    wrapA.setAttribute('aria-hidden', 'false');
+
+    const q = quotes[index];
+    if (!q) return;
+
+    [wrapA, wrapB].forEach(function (w) {
+      if (w) w.classList.add('is-switching');
+    });
+    window.setTimeout(function () {
+      [wrapA, wrapB].forEach(function (w) {
+        if (w) w.classList.remove('is-switching');
+      });
+    }, 220);
+
+    const dual = q.bubbles && q.bubbles.length >= 2;
+    if (carousel) carousel.classList.toggle('hero-carousel--dual-bubbles', dual);
+
+    if (dual && wrapB) {
+      wrapB.removeAttribute('hidden');
+      wrapB.setAttribute('aria-hidden', 'false');
+      applyHeroBubbleContent(wrapA, q.bubbles[0]);
+      applyHeroBubblePosition(wrapA, q.bubbles[0].position);
+      applyHeroBubbleContent(wrapB, q.bubbles[1]);
+      applyHeroBubblePosition(wrapB, q.bubbles[1].position);
+    } else {
+      if (wrapB) {
+        wrapB.setAttribute('hidden', '');
+        wrapB.setAttribute('aria-hidden', 'true');
+      }
+      applyHeroBubbleContent(wrapA, q);
+      applyHeroBubblePosition(wrapA, q.position);
+    }
   }
 
   function nextSlide() {
@@ -130,6 +276,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Start auto-play
     startCarousel();
+
+    updateHeroQuoteBubble(currentSlide);
   }
 
   // ========================================
