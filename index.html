@@ -737,6 +737,16 @@
         transform: scale(0.98) !important;
       }
     }
+
+    /* About section — official portrait (file has top headroom; crop frames face) */
+    .julie-about-img {
+      max-width: 280px;
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      object-fit: cover;
+      object-position: center 30%;
+      display: block;
+    }
     
     /* --- Header: fixed height, larger logo, nav pushed right with even spacing --- */
     .navbar {
@@ -1126,7 +1136,7 @@
       <div class="row g-4 align-items-start">
         <!-- Photo -->
         <div class="col-12 col-md-4 text-center">
-          <img src="img/julie_face_swapped.png" alt="Julie, agente de seguros" class="w-100 mx-auto mb-3" style="max-width:280px;" />
+          <img src="img/julie-about.png" alt="Julie, agente de seguros — Mejor Vida Insurance" class="mx-auto mb-3 rounded-3 shadow-sm julie-about-img" width="682" height="1024" decoding="async" />
           <p class="small text-muted" data-lang="es">Julie, fundadora de Mejor Vida Insurance LLC</p>
           <p class="small text-muted" data-lang="en">Julie, founder of Mejor Vida Insurance LLC</p>
         </div>
