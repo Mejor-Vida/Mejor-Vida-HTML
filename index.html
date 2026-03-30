@@ -660,48 +660,50 @@
       margin-left: 0;
     }
     @media (max-width: 991px) {
-      /* Stack logo above copy so rates stay readable; pill was collapsing to a dark “dot” on narrow widths */
+      /* Horizontal elongated pill (Choice Mutual–style), not a stacked square */
       .hero-quote-bubble-link {
-        border-radius: 14px;
+        border-radius: 999px;
       }
       .hero-quote-bubble {
-        --hq-logo: 44px;
-        flex-direction: column;
-        align-items: stretch;
-        border-radius: 14px;
-        padding: 8px 11px 10px;
-        gap: 6px;
-        text-align: center;
+        --hq-logo: 42px;
+        flex-direction: row;
+        align-items: center;
+        border-radius: 999px;
+        padding: 0.22rem 0.65rem 0.22rem 0;
+        gap: 0.38rem;
+        text-align: left;
       }
       .hero-quote-logo-wrap {
-        align-self: center;
+        align-self: auto;
       }
       .hero-quote-logo-wrap[data-carrier="assurity"] {
-        width: 48px !important;
-        height: 48px !important;
-        margin-left: 0 !important;
+        width: 44px !important;
+        height: 44px !important;
+        margin-left: -4px !important;
       }
       .hero-quote-logo-wrap[data-carrier="assurity"] .hero-quote-logo-fallback {
-        font-size: 0.88rem;
+        font-size: 0.82rem;
       }
       .hero-carousel--dual-bubbles .hero-quote-logo-wrap[data-carrier="assurity"] {
-        width: 40px !important;
-        height: 40px !important;
+        width: 36px !important;
+        height: 36px !important;
+        margin-left: -3px !important;
       }
       .hero-quote-text {
-        flex: none;
-        width: 100%;
-        min-width: 0 !important;
-        text-align: center;
+        flex: 1 1 auto;
+        min-width: 0;
+        text-align: left;
         color: #fff !important;
         -webkit-text-fill-color: #fff;
+        padding-right: 0.15rem;
       }
       .hero-quote-carrier-name,
       .hero-quote-policy-line,
       .hero-quote-rate {
-        font-size: 0.8125rem;
+        font-size: 0.78rem;
         color: #fff !important;
         -webkit-text-fill-color: #fff;
+        letter-spacing: -0.03em;
       }
       .hero-quote-bubble-wrap {
         z-index: 25;
@@ -709,14 +711,14 @@
         right: auto !important;
         transform: translateX(-50%);
         bottom: 44px !important;
-        max-width: min(94vw, 272px);
+        max-width: min(94vw, 288px);
       }
       .hero-quote-bubble-wrap.is-switching {
         transform: translateX(-50%) scale(0.98);
       }
-      /* Couple slide: two stacked pills; a bit wider so copy fits */
+      /* Couple slide: two pills side areas; compact logo so copy stays on one capsule row */
       .hero-carousel--dual-bubbles .hero-quote-bubble-wrap {
-        max-width: min(52vw, 190px);
+        max-width: min(48vw, 178px);
         transform: none !important;
         bottom: 46px !important;
       }
