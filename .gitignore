@@ -17,5 +17,5 @@ integrations/google/client_secret_*.json
 # Exported lead data (PII)
 integrations/google_sheets/ic_import_export.csv
 
-# Playwright Integrity Connect session (login cookies)
+# Playwright / local browser session dirs (if added by automation)
 integrations/.playwright_ic_session/

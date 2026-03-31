@@ -1,0 +1,5 @@
+# Quote API: same Google Sheets stack as integrations/google_sheets/
+gspread>=6.0.0
+google-auth>=2.0.0
+google-auth-oauthlib>=1.0.0
+requests>=2.28.0
