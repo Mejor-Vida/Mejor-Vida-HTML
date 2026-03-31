@@ -738,14 +738,21 @@
       }
     }
 
-    /* About section — official portrait (file has top headroom; crop frames face) */
+    /* About section — portrait; crop empty top in source; no frame (no radius/shadow on img) */
     .julie-about-img {
-      max-width: 280px;
-      width: 100%;
-      aspect-ratio: 3 / 4;
+      width: 196px;
+      height: 234px;
+      max-width: min(196px, 52vw);
       object-fit: cover;
-      object-position: center 30%;
+      object-position: center 20%;
       display: block;
+    }
+    @media (min-width: 768px) {
+      .julie-about-img {
+        width: 212px;
+        height: 252px;
+        max-width: 212px;
+      }
     }
     
     /* --- Header: fixed height, larger logo, nav pushed right with even spacing --- */
@@ -1133,23 +1140,24 @@
         <h2 class="h2 fw-bold mb-4" style="color:#1a365d;" data-lang="en">Meet Julie</h2>
       </div>
 
+      <!-- Pills full-width so photo row lines up with headline, not buried under badges -->
+      <div class="d-flex flex-wrap gap-2 mb-4 justify-content-center justify-content-md-start">
+        <span class="rounded-pill px-3 py-1 small fw-semibold" style="background:#ebf8ff;color:#2563eb;" data-lang="es"><i class="fas fa-globe me-1"></i> Atención en español e inglés</span>
+        <span class="rounded-pill px-3 py-1 small fw-semibold" style="background:#ebf8ff;color:#2563eb;" data-lang="en"><i class="fas fa-globe me-1"></i> Service in English & Spanish</span>
+        <span class="rounded-pill px-3 py-1 small fw-semibold" style="background:#ebf8ff;color:#2563eb;" data-lang="es"><i class="fas fa-heart me-1"></i> Enfoque en gastos finales</span>
+        <span class="rounded-pill px-3 py-1 small fw-semibold" style="background:#ebf8ff;color:#2563eb;" data-lang="en"><i class="fas fa-heart me-1"></i> Focused on final expense</span>
+      </div>
+
       <div class="row g-4 align-items-start">
         <!-- Photo -->
-        <div class="col-12 col-md-4 text-center">
-          <img src="img/julie-about.png" alt="Julie, agente de seguros — Mejor Vida Insurance" class="mx-auto mb-3 rounded-3 shadow-sm julie-about-img" width="682" height="1024" decoding="async" />
-          <p class="small text-muted" data-lang="es">Julie, fundadora de Mejor Vida Insurance LLC</p>
-          <p class="small text-muted" data-lang="en">Julie, founder of Mejor Vida Insurance LLC</p>
+        <div class="col-12 col-md-auto text-center text-md-start julie-about-photo-col">
+          <img src="img/julie-about.png" alt="Julie, agente de seguros — Mejor Vida Insurance" class="mx-auto mx-md-0 mb-3 julie-about-img" width="682" height="1024" decoding="async" />
+          <p class="small text-muted mb-0" data-lang="es">Julie, fundadora de Mejor Vida Insurance LLC</p>
+          <p class="small text-muted mb-0" data-lang="en">Julie, founder of Mejor Vida Insurance LLC</p>
         </div>
 
         <!-- Text Content -->
-        <div class="col-12 col-md-8">
-          <div class="d-flex flex-wrap gap-2 mb-4">
-            <span class="rounded-pill px-3 py-1 small fw-semibold" style="background:#ebf8ff;color:#2563eb;" data-lang="es"><i class="fas fa-globe me-1"></i> Atención en español e inglés</span>
-            <span class="rounded-pill px-3 py-1 small fw-semibold" style="background:#ebf8ff;color:#2563eb;" data-lang="en"><i class="fas fa-globe me-1"></i> Service in English & Spanish</span>
-            <span class="rounded-pill px-3 py-1 small fw-semibold" style="background:#ebf8ff;color:#2563eb;" data-lang="es"><i class="fas fa-heart me-1"></i> Enfoque en gastos finales</span>
-            <span class="rounded-pill px-3 py-1 small fw-semibold" style="background:#ebf8ff;color:#2563eb;" data-lang="en"><i class="fas fa-heart me-1"></i> Focused on final expense</span>
-          </div>
-
+        <div class="col-12 col-md">
           <h3 class="h4 fw-bold mb-3" style="color:#1a365d;" data-lang="es">Un enfoque humano para hablar de temas difíciles</h3>
           <h3 class="h4 fw-bold mb-3" style="color:#1a365d;" data-lang="en">A human approach to hard conversations</h3>
 
