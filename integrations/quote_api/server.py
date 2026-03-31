@@ -91,6 +91,11 @@ HEALTH_LABELS_ES: dict[str, str] = {
     "other": "Otra condición",
 }
 
+# Coverage: fixed menu on website + optional "other" band (quotes still sheet-driven).
+STANDARD_WEB_COVERAGES: frozenset[int] = frozenset({5000, 10000, 15000, 20000, 25000})
+COVERAGE_OTHER_MIN = 2_500
+COVERAGE_OTHER_MAX = 150_000
+
 HEALTH_LABELS_EN: dict[str, str] = {
     "none": "No major conditions declared",
     "diabetes": "Diabetes",
@@ -327,8 +332,11 @@ def validate_body(o: dict[str, Any]) -> tuple[dict[str, Any] | None, str | None]
     lo, hi = allowed_age_range(rows)
     if age < lo or age > hi:
         return None, f"age_out_of_range:{lo}-{hi}"
-    allowed = allowed_coverages(rows)
-    if coverage not in allowed:
+    if coverage in STANDARD_WEB_COVERAGES:
+        pass
+    elif COVERAGE_OTHER_MIN <= coverage <= COVERAGE_OTHER_MAX:
+        pass
+    else:
         return None, "coverage_not_allowed"
 
     em = r"^[^@\s]+@[^@\s]+\.[^@\s]+$"

@@ -33,7 +33,10 @@ On `quote.html`, set the API base **before** `quote-form.js`:
 <script src="js/quote-form.js"></script>
 ```
 
-In production, serve the site over HTTPS and point `MVS_QUOTE_API` at your deployed API URL. Set `QUOTE_CORS_ORIGINS` to your site origin(s), comma-separated.
+In production, either:
+
+- **Same domain (recommended):** Put the Python service behind your main site at **`/api/quote/`** (reverse proxy). `quote.html` already sets `window.MVS_QUOTE_API = location.origin` on `mejorvidainsurance.com` / `www`, so the browser calls `https://yoursite.com/api/quote/submit` etc. No CORS issue.
+- **Separate host:** Set `window.MVS_QUOTE_API = 'https://quote-api.yourdomain.com'` **before** `quote-form.js`, and set `QUOTE_CORS_ORIGINS` on the API to your marketing site origin(s).
 
 ## Environment variables
 
@@ -70,11 +73,12 @@ Custom HubSpot properties `mvs_fe_lead_source` and `mvs_fe_tobacco` are sent whe
   "lang": "es",
   "consentEmail": true,
   "consentCall": true,
-  "consentText": false
+  "consentText": true
 }
 ```
 
 Validation: `consentEmail`, `consentCall`, and `consentText` must all be true.
+`coverage` must be one of **5000, 10000, 15000, 20000, 25000**, or any dollar amount between **2500 and 150000** (custom “other” amounts from the website form).
 `healthCondition` must be one of the server allowlisted slugs (see `server.py`). If `healthCondition` is `other`, `healthConditionOther` must be at least 2 characters.
 
 Optional HubSpot properties: `mvs_fe_health_condition`, `mvs_fe_health_other` (create in HubSpot or the API retries without custom fields that fail).

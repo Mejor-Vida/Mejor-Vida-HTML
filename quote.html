@@ -457,9 +457,22 @@
             <div class="col-md-6">
               <label for="quote-coverage" class="form-label fw-semibold" data-lang="es">Monto de cobertura</label>
               <label for="quote-coverage" class="form-label fw-semibold" data-lang="en">Coverage amount</label>
-              <select class="form-select" id="quote-coverage" name="coverage" required></select>
-              <p class="form-text small mb-0" data-lang="es">Las opciones se cargan desde la hoja de tarifas.</p>
-              <p class="form-text small mb-0" data-lang="en">Options load from the rate sheet.</p>
+              <select class="form-select" id="quote-coverage" name="coverageSelect" required>
+                <option value="">—</option>
+                <option value="5000">$5,000</option>
+                <option value="10000">$10,000</option>
+                <option value="15000">$15,000</option>
+                <option value="20000">$20,000</option>
+                <option value="25000">$25,000</option>
+                <option value="other">Otra cantidad · Other amount</option>
+              </select>
+            </div>
+            <div class="col-md-6" id="quote-coverage-other-wrap">
+              <label for="quote-coverage-other" class="form-label fw-semibold" data-lang="es">Otro monto (USD)</label>
+              <label for="quote-coverage-other" class="form-label fw-semibold" data-lang="en">Other amount (USD)</label>
+              <input type="number" class="form-control" id="quote-coverage-other" name="coverageOther" min="2500" max="150000" step="500" inputmode="numeric" autocomplete="off" placeholder="p. ej. 30000 / e.g. 30000" />
+              <p class="form-text small mb-0" data-lang="es">Solo si eligió «Otra cantidad». La prima en pantalla depende de lo que tengamos en tabla para esa cifra.</p>
+              <p class="form-text small mb-0" data-lang="en">Only if you chose “Other amount.” On-screen premium depends on whether that amount exists in our rate table.</p>
             </div>
             <div class="col-md-3">
               <label for="quote-state" class="form-label fw-semibold" data-lang="es">Estado</label>
@@ -578,9 +591,16 @@
   <script>
   (function () {
     if (window.MVS_QUOTE_API) return;
-    var h = location.hostname || '';
-    if (h === 'localhost' || h === '127.0.0.1' || location.protocol === 'file:')
+    var h = (location.hostname || '').toLowerCase();
+    if (h === 'localhost' || h === '127.0.0.1' || location.protocol === 'file:') {
       window.MVS_QUOTE_API = 'http://127.0.0.1:8765';
+      return;
+    }
+    /* Production: same origin so requests go to https://this-site/api/quote/… (reverse proxy to quote server). */
+    if (h === 'mejorvidainsurance.com' || h === 'www.mejorvidainsurance.com') {
+      window.MVS_QUOTE_API = location.origin;
+      return;
+    }
   })();
   </script>
   <script src="js/quote-form.js"></script>

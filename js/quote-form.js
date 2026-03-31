@@ -1,9 +1,14 @@
 (function () {
   'use strict';
 
+  /** Base URL for quote API, no trailing slash. Empty string = same origin (e.g. /api/quote/…). */
   function apiBase() {
-    var b = (typeof window.MVS_QUOTE_API === 'string' ? window.MVS_QUOTE_API : '').trim();
-    return b.replace(/\/$/, '');
+    if (typeof window.MVS_QUOTE_API !== 'string') return '';
+    return String(window.MVS_QUOTE_API).trim().replace(/\/$/, '');
+  }
+
+  function isQuoteApiConfigured() {
+    return typeof window.MVS_QUOTE_API === 'string';
   }
 
   function currentLang() {
@@ -15,8 +20,8 @@
     var L = currentLang();
     var m = {
       configureApi: {
-        es: 'Configura window.MVS_QUOTE_API con la URL del servidor de cotizaciones.',
-        en: 'Set window.MVS_QUOTE_API to your quote API base URL.',
+        es: 'Falta la URL del servidor de cotizaciones en esta página. En producción debe coincidir con el dominio (p. ej. proxy en /api/quote/) o definirse antes de cargar el formulario.',
+        en: 'This page is missing the quote API base URL. In production use your site origin if the API is proxied at /api/quote/, or set window.MVS_QUOTE_API before this script loads.',
       },
       loadOptionsFail: {
         es: 'No se pudieron cargar las opciones del formulario. Revisa la API o tu conexión.',
@@ -71,6 +76,14 @@
         es: 'Seleccione una condición de salud de la lista.',
         en: 'Please select a health condition from the list.',
       },
+      coverageSelect: {
+        es: 'Seleccione un monto de cobertura.',
+        en: 'Please select a coverage amount.',
+      },
+      coverageOther: {
+        es: 'Si eligió «Otra cantidad», indique un monto entre $2,500 y $150,000.',
+        en: 'If you chose “Other amount,” enter an amount between $2,500 and $150,000.',
+      },
     };
     var bag = m[key];
     return bag ? bag[L] : key;
@@ -91,9 +104,8 @@
   }
 
   async function fetchJson(path) {
-    var base = apiBase();
-    if (!base) throw new Error('no_api');
-    var r = await fetch(base + path, { headers: headersJson() });
+    if (!isQuoteApiConfigured()) throw new Error('no_api');
+    var r = await fetch(apiBase() + path, { headers: headersJson() });
     if (!r.ok) throw new Error(String(r.status));
     return r.json();
   }
@@ -116,15 +128,36 @@
       age.max = String(opts.ageMax);
       age.placeholder = opts.ageMin + '–' + opts.ageMax;
     }
+  }
+
+  var COVERAGE_OTHER_MIN = 2500;
+  var COVERAGE_OTHER_MAX = 150000;
+
+  function parseCoverageOtherInput(raw) {
+    var n = parseInt(String(raw || '').replace(/[^\d]/g, ''), 10);
+    return isNaN(n) ? NaN : n;
+  }
+
+  function resolvedCoverageAmount() {
     var sel = document.getElementById('quote-coverage');
-    if (!sel || !opts.coverages || !opts.coverages.length) return;
-    sel.innerHTML = '';
-    opts.coverages.forEach(function (c) {
-      var o = document.createElement('option');
-      o.value = String(c);
-      o.textContent = '$' + Number(c).toLocaleString();
-      sel.appendChild(o);
-    });
+    var oIn = document.getElementById('quote-coverage-other');
+    var v = sel ? sel.value : '';
+    if (v === 'other') {
+      return oIn ? parseCoverageOtherInput(oIn.value) : NaN;
+    }
+    if (!v) return NaN;
+    return parseInt(v, 10);
+  }
+
+  function syncCoverageOtherField() {
+    var sel = document.getElementById('quote-coverage');
+    var wrap = document.getElementById('quote-coverage-other-wrap');
+    var other = document.getElementById('quote-coverage-other');
+    if (!sel || !other) return;
+    var isOther = sel.value === 'other';
+    if (wrap) wrap.classList.toggle('opacity-50', !isOther);
+    other.disabled = !isOther;
+    other.setAttribute('aria-required', isOther ? 'true' : 'false');
   }
 
   function renderCarriers(carriers, data) {
@@ -211,7 +244,7 @@
       phone: phone,
       age: parseInt((document.getElementById('quote-age') || {}).value, 10),
       gender: (document.getElementById('quote-gender') || {}).value || '',
-      coverage: parseInt((document.getElementById('quote-coverage') || {}).value, 10),
+      coverage: resolvedCoverageAmount(),
       tobacco: (document.getElementById('quote-tobacco') || {}).value || 'no',
       healthCondition: health,
       healthConditionOther: health === 'other' ? other : '',
@@ -236,12 +269,11 @@
   }
 
   document.addEventListener('DOMContentLoaded', function () {
-    var base = apiBase();
     var errEl = document.getElementById('quote-form-error');
     var submitBtn0 = document.getElementById('quote-submit');
     if (submitBtn0) submitBtn0.textContent = t('seeEstimate');
 
-    if (!base) {
+    if (!isQuoteApiConfigured()) {
       if (errEl) {
         errEl.hidden = false;
         errEl.textContent = t('configureApi');
@@ -276,6 +308,18 @@
     }
     syncHealthOtherField();
 
+    var covSel = document.getElementById('quote-coverage');
+    var covOther = document.getElementById('quote-coverage-other');
+    if (covSel) {
+      covSel.addEventListener('change', syncCoverageOtherField);
+    }
+    if (covOther) {
+      covOther.addEventListener('input', function () {
+        if (errEl && errEl.textContent === t('coverageOther')) errEl.hidden = true;
+      });
+    }
+    syncCoverageOtherField();
+
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       var btn = document.getElementById('quote-submit');
@@ -293,6 +337,33 @@
           errEl.textContent = t('healthOther');
         }
         syncHealthOtherField();
+        return;
+      }
+      var covChoice = covSel ? covSel.value : '';
+      if (!covChoice) {
+        if (errEl) {
+          errEl.hidden = false;
+          errEl.textContent = t('coverageSelect');
+        }
+        return;
+      }
+      if (
+        covChoice === 'other' &&
+        (isNaN(payload.coverage) ||
+          payload.coverage < COVERAGE_OTHER_MIN ||
+          payload.coverage > COVERAGE_OTHER_MAX)
+      ) {
+        if (errEl) {
+          errEl.hidden = false;
+          errEl.textContent = t('coverageOther');
+        }
+        return;
+      }
+      if (isNaN(payload.coverage)) {
+        if (errEl) {
+          errEl.hidden = false;
+          errEl.textContent = t('coverageSelect');
+        }
         return;
       }
       if (!payload.consentEmail || !payload.consentCall || !payload.consentText) {
