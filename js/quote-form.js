@@ -33,6 +33,10 @@
       },
       submitting: { es: 'Enviando…', en: 'Submitting…' },
       seeEstimate: { es: 'Ver cotización aproximada', en: 'See approximate quote' },
+      referralAgentHelp: {
+        es: 'Pulse aquí para que Julie le ayude a encontrar un agente en su zona',
+        en: 'Click here for Julie to help you find an agent in your area',
+      },
       monthly: { es: 'al mes (referencia)', en: 'per month (illustrative)' },
       coverage: { es: 'Cobertura', en: 'Coverage' },
       qualified: { es: 'Califica según la herramienta', en: 'Qualified in this tool' },
@@ -236,9 +240,8 @@
   }
 
   var LEVEL_MAX_COVERAGE = 50000;
-  var GRADED_MAX_COVERAGE = 20000;
-  var GRADED_AGE_MIN = 45;
-  var GRADED_AGE_MAX = 80;
+  /** Illustrative MoO rate path for this tool; final Level vs Graded comes from underwriting. */
+  var DEFAULT_BENEFIT_PLAN = 'level';
 
   function formatUsd(n) {
     return new Intl.NumberFormat('en-US', {
@@ -262,11 +265,11 @@
     }
   }
 
-  /** Level: $2k–$50k by $1k. Graded: $2k–$20k by $1k. Optgroups keep long lists scannable. */
+  /** $2k–$50k by $1k. Optgroups keep long lists scannable. */
   function populateCoverageSelect() {
     var sel = document.getElementById('quote-coverage');
     if (!sel) return;
-    var maxAmount = benefitPlanValue() === 'graded' ? GRADED_MAX_COVERAGE : LEVEL_MAX_COVERAGE;
+    var maxAmount = LEVEL_MAX_COVERAGE;
     var lang = currentLang();
     var previous = sel.value;
 
@@ -305,11 +308,6 @@
     var v = sel ? sel.value : '';
     if (!v) return NaN;
     return parseInt(v, 10);
-  }
-
-  function benefitPlanValue() {
-    var el = document.getElementById('quote-benefit-plan');
-    return el && el.value === 'graded' ? 'graded' : 'level';
   }
 
   function collectForm() {
@@ -357,7 +355,7 @@
       consentEmail: !!(document.getElementById('quote-consent-email') || {}).checked,
       consentCall: !!(document.getElementById('quote-consent-call') || {}).checked,
       consentText: !!(document.getElementById('quote-consent-text') || {}).checked,
-      benefitPlan: benefitPlanValue(),
+      benefitPlan: DEFAULT_BENEFIT_PLAN,
     };
   }
 
@@ -388,6 +386,11 @@
     if (code === 'phone_required') {
       return currentLang() === 'es' ? 'El teléfono no es válido.' : 'Phone number is not valid.';
     }
+    if (code === 'invalid_state') {
+      return currentLang() === 'es'
+        ? 'Elija un estado válido de la lista.'
+        : 'Please choose a valid state from the list.';
+    }
     if (code === 'lead_persist_failed' && detail) return String(detail).slice(0, 280);
     if (code === 'graded_coverage_max_20000') return t('gradedCoverage');
     if (code === 'level_coverage_max_50000') return t('levelCoverageMax');
@@ -401,6 +404,51 @@
       return t('gradedAge');
     }
     return null;
+  }
+
+  function populateStateSelect() {
+    var sel = document.getElementById('quote-state');
+    var list = typeof window.MVS_US_STATES !== 'undefined' ? window.MVS_US_STATES : null;
+    if (!sel || !list || !list.length) return;
+    if (sel.getAttribute('data-populated') === '1') return;
+    var sorted = list.slice().sort(function (a, b) {
+      return a.n.localeCompare(b.n);
+    });
+    var neIdx = sorted.findIndex(function (s) {
+      return s.c === 'NE';
+    });
+    if (neIdx >= 0) {
+      sorted.splice(neIdx, 1);
+      sorted.unshift({ c: 'NE', n: 'Nebraska' });
+    }
+    sel.innerHTML = '';
+    sorted.forEach(function (s) {
+      var o = document.createElement('option');
+      o.value = s.c;
+      o.textContent = s.n + ' (' + s.c + ')';
+      if (s.c === 'NE') o.selected = true;
+      sel.appendChild(o);
+    });
+    sel.setAttribute('data-populated', '1');
+  }
+
+  function showStateNonNeModal() {
+    var el = document.getElementById('stateNonNeModal');
+    if (!el || typeof bootstrap === 'undefined') return;
+    bootstrap.Modal.getOrCreateInstance(el).show();
+  }
+
+  /** Submit CTA: illustrative quote (NE) vs referral path (other states). */
+  function submitButtonLabelForState() {
+    var stateSel = document.getElementById('quote-state');
+    var v = stateSel && stateSel.value ? String(stateSel.value).toUpperCase() : '';
+    if (v && v !== 'NE') return t('referralAgentHelp');
+    return t('seeEstimate');
+  }
+
+  function syncSubmitButtonLabel() {
+    var sb = document.getElementById('quote-submit');
+    if (sb && !sb.disabled) sb.textContent = submitButtonLabelForState();
   }
 
   function syncHealthOtherField() {
@@ -417,7 +465,7 @@
   document.addEventListener('DOMContentLoaded', function () {
     var errEl = document.getElementById('quote-form-error');
     var submitBtn0 = document.getElementById('quote-submit');
-    if (submitBtn0) submitBtn0.textContent = t('seeEstimate');
+    if (submitBtn0) submitBtn0.textContent = submitButtonLabelForState();
 
     if (!isQuoteApiConfigured()) {
       if (errEl) {
@@ -464,11 +512,13 @@
 
     var covSel = document.getElementById('quote-coverage');
     populateCoverageSelect();
-
-    var bpEl = document.getElementById('quote-benefit-plan');
-    if (bpEl) {
-      bpEl.addEventListener('change', function () {
-        populateCoverageSelect();
+    populateStateSelect();
+    syncSubmitButtonLabel();
+    var stateSel = document.getElementById('quote-state');
+    if (stateSel) {
+      stateSel.addEventListener('change', function () {
+        syncSubmitButtonLabel();
+        if (stateSel.value && stateSel.value !== 'NE') showStateNonNeModal();
       });
     }
 
@@ -498,22 +548,6 @@
           errEl.textContent = t('coverageSelect');
         }
         return;
-      }
-      if (benefitPlanValue() === 'graded') {
-        if (!isNaN(payload.age) && (payload.age < GRADED_AGE_MIN || payload.age > GRADED_AGE_MAX)) {
-          if (errEl) {
-            errEl.hidden = false;
-            errEl.textContent = t('gradedAge');
-          }
-          return;
-        }
-        if (!isNaN(payload.coverage) && payload.coverage > GRADED_MAX_COVERAGE) {
-          if (errEl) {
-            errEl.hidden = false;
-            errEl.textContent = t('gradedCoverage');
-          }
-          return;
-        }
       }
       if (isNaN(payload.coverage)) {
         if (errEl) {
@@ -606,7 +640,7 @@
         .finally(function () {
           if (btn) {
             btn.disabled = false;
-            btn.textContent = t('seeEstimate');
+            btn.textContent = submitButtonLabelForState();
           }
         });
     });
@@ -614,8 +648,7 @@
     document.querySelectorAll('.lang-btn').forEach(function (btn) {
       btn.addEventListener('click', function () {
         setTimeout(function () {
-          var sb = document.getElementById('quote-submit');
-          if (sb && !sb.disabled) sb.textContent = t('seeEstimate');
+          syncSubmitButtonLabel();
           populateCoverageSelect();
         }, 0);
       });

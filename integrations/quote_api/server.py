@@ -118,6 +118,95 @@ GRADED_MAX_COVERAGE = 20_000
 GRADED_AGE_MIN = 45
 GRADED_AGE_MAX = 80
 
+# Shown on quote-results when API returns dual MoO rows (Level + Graded illustrative).
+# U.S. states + DC — must match website state dropdown values.
+VALID_US_STATE_CODES: frozenset[str] = frozenset(
+    {
+        "AL",
+        "AK",
+        "AZ",
+        "AR",
+        "CA",
+        "CO",
+        "CT",
+        "DE",
+        "DC",
+        "FL",
+        "GA",
+        "HI",
+        "ID",
+        "IL",
+        "IN",
+        "IA",
+        "KS",
+        "KY",
+        "LA",
+        "ME",
+        "MD",
+        "MA",
+        "MI",
+        "MN",
+        "MS",
+        "MO",
+        "MT",
+        "NE",
+        "NV",
+        "NH",
+        "NJ",
+        "NM",
+        "NY",
+        "NC",
+        "ND",
+        "OH",
+        "OK",
+        "OR",
+        "PA",
+        "RI",
+        "SC",
+        "SD",
+        "TN",
+        "TX",
+        "UT",
+        "VT",
+        "VA",
+        "WA",
+        "WV",
+        "WI",
+        "WY",
+    }
+)
+
+# Julie licensed for formal quotes in NE only; other states → referral path.
+REFERRAL_OUT_OF_STATE_NOTE = {
+    "en": (
+        "Julie is licensed to provide formal life insurance quotes in Nebraska only. "
+        "We saved your contact information—Julie will follow up and will do her best to help you find "
+        "a licensed agent in your home state."
+    ),
+    "es": (
+        "Julie está licenciada para ofrecer cotizaciones formales de seguro de vida solo en Nebraska. "
+        "Guardamos su información de contacto—Julie dará seguimiento e intentará ayudarle a encontrar "
+        "un agente licenciado en su estado."
+    ),
+}
+
+MOO_LEVEL_GRADED_NOTE = {
+    "en": (
+        "This quick form cannot tell whether you will qualify for Level or Graded benefit—that is decided by the "
+        "insurer’s application and health questions. Below you’ll see illustrative monthly premiums for both paths. "
+        "Level: typically lower premium when you qualify on underwriting; higher face amounts (up to $50k NE here). "
+        "Graded: simplified path; death benefit may be graded in the first policy years; lower face limits (often up to $20k). "
+        "Julie confirms what you qualify for."
+    ),
+    "es": (
+        "Este formulario no puede decir si calificará a beneficio Nivel o Graduado: lo determina la solicitud y las "
+        "preguntas de salud con la aseguradora. Abajo verá primas mensuales ilustrativas para ambas opciones. "
+        "Nivel: suele ser menor prima si califica en suscripción; montos mayores (hasta $50,000 NE aquí). "
+        "Graduado: vía simplificada; el beneficio por muerte puede ser graduado en los primeros años; límites de monto menores "
+        "(a menudo hasta $20,000). Julie confirma a qué califica."
+    ),
+}
+
 HEALTH_LABELS_EN: dict[str, str] = {
     "none": "No major conditions declared",
     "diabetes": "Diabetes",
@@ -446,6 +535,9 @@ def validate_body(o: dict[str, Any]) -> tuple[dict[str, Any] | None, str | None]
         return None, "invalid_coverage"
     tobacco = str(o.get("tobacco", "no")).strip().lower()
     state = str(o.get("state", "")).strip().upper()[:2] or "NE"
+    if state not in VALID_US_STATE_CODES:
+        return None, "invalid_state"
+    outside_licensed_state = state != "NE"
     lang = str(o.get("lang", "es")).strip().lower()[:2]
     if lang not in ("es", "en"):
         lang = "es"
@@ -518,6 +610,7 @@ def validate_body(o: dict[str, Any]) -> tuple[dict[str, Any] | None, str | None]
         "healthCondition": hc,
         "healthConditionOther": ho,
         "benefitPlan": benefit_plan,
+        "outsideLicensedState": outside_licensed_state,
         "source": "website_quote_form",
         **({"dateOfBirth": date_of_birth} if date_of_birth else {}),
     }, None
@@ -535,12 +628,12 @@ def format_quote_summary_lang(carriers: list[dict], lang: str) -> str:
             lines.append(f"{c['carrierName']}: — ({reason})")
     disclaimer_es = (
         "Cifras aproximadas según tablas internas; no constituyen oferta. "
-        "Nivel vs Graduado son tipos de beneficio distintos; la salud determina la elegibilidad, no un precio distinto por cada condición. "
+        "Nivel vs Graduado lo determina la solicitud y las preguntas de necesidades con la aseguradora, no una elección en esta cotización. "
         "Julie confirma el plan y la prima final."
     )
     disclaimer_en = (
         "Approximate figures from internal charts; not an offer. "
-        "Level vs Graded are different benefit types; health affects eligibility, not a separate price for each condition. "
+        "Level vs graded benefit is determined by the insurer’s application and needs questions—not a choice made in this quote. "
         "Julie confirms the plan and final premium."
     )
     return "\n".join(lines) + "\n\n" + (disclaimer_es if lang == "es" else disclaimer_en)
@@ -569,6 +662,29 @@ def html_email_body(
     sub = "Thank you for using the Mejor Vida Insurance quote tool."
     sched = f'<p><a href="{schedule_url}">Schedule a call with Julie</a></p>' if schedule_url else ""
     return f"<p>{hi}</p><p>{sub}</p>{hl}<p><strong>Your illustrative quote:</strong></p><p>{summary}</p>{sched}"
+
+
+def referral_html_email(
+    first: str,
+    lang: str,
+    schedule_url: str,
+    health_line: str,
+) -> str:
+    """Out-of-state: no rate table email; referral messaging only."""
+    body = REFERRAL_OUT_OF_STATE_NOTE["es"] if lang == "es" else REFERRAL_OUT_OF_STATE_NOTE["en"]
+    hl = ""
+    if health_line:
+        if lang == "es":
+            hl = f"<p><strong>Salud (declarada):</strong> {health_line}</p>"
+        else:
+            hl = f"<p><strong>Health (declared):</strong> {health_line}</p>"
+    if lang == "es":
+        hi = f"<p>Hola {first},</p>"
+        sched = f'<p><a href="{schedule_url}">Agendar una llamada con Julie</a></p>' if schedule_url else ""
+        return f"{hi}<p>{body}</p>{hl}{sched}"
+    hi = f"<p>Hello {first},</p>"
+    sched = f'<p><a href="{schedule_url}">Schedule a call with Julie</a></p>' if schedule_url else ""
+    return f"{hi}<p>{body}</p>{hl}{sched}"
 
 
 def handle_submit(body: bytes, client_headers: dict[str, str]) -> tuple[int, dict[str, Any]]:
@@ -607,23 +723,35 @@ def handle_submit(body: bytes, client_headers: dict[str, str]) -> tuple[int, dic
         f"Salud (declarada): {h_line}" if v["lang"] == "es" else f"Health (declared): {h_line}"
     )
 
-    try:
-        grids_by_carrier, moo_lp, grid_src = get_cached_quote_bundle()
-        carriers = compute_carrier_quotes_from_grids_by_carrier(
-            v["age"],
-            v["gender"],
-            v["coverage"],
-            grids_by_carrier,
-            benefit_plan=v.get("benefitPlan") or "level",
-            tobacco=str(v.get("tobacco") or "no"),
-            moo_lp_rates=moo_lp or None,
+    if v.get("outsideLicensedState"):
+        referral_line = (
+            REFERRAL_OUT_OF_STATE_NOTE["es"]
+            if v["lang"] == "es"
+            else REFERRAL_OUT_OF_STATE_NOTE["en"]
         )
-        q_text = format_quote_summary_lang(carriers, v["lang"])
-        q_full = q_text + "\n\n" + health_summary
-        quote_status = "quote_generated"
-    except Exception as e:
-        quote_err = str(e)[:2000]
-        carriers = []
+        q_full = referral_line + "\n\n" + health_summary
+        q_text = referral_line
+        quote_status = "referral_out_of_state"
+        quote_err = None
+    else:
+        try:
+            grids_by_carrier, moo_lp, grid_src = get_cached_quote_bundle()
+            carriers = compute_carrier_quotes_from_grids_by_carrier(
+                v["age"],
+                v["gender"],
+                v["coverage"],
+                grids_by_carrier,
+                benefit_plan=v.get("benefitPlan") or "level",
+                tobacco=str(v.get("tobacco") or "no"),
+                moo_lp_rates=moo_lp or None,
+                moo_dual_benefits=True,
+            )
+            q_text = format_quote_summary_lang(carriers, v["lang"])
+            q_full = q_text + "\n\n" + health_summary
+            quote_status = "quote_generated"
+        except Exception as e:
+            quote_err = str(e)[:2000]
+            carriers = []
 
     try:
         update_quote_lead_after_quote(
@@ -684,15 +812,23 @@ def handle_submit(body: bytes, client_headers: dict[str, str]) -> tuple[int, dic
     schedule_url = (os.environ.get("MVS_SCHEDULE_CALL_URL") or "").strip()
     emailed = False
     if v["consentEmail"]:
-        subj = (
-            "Tu cotización — Mejor Vida Insurance"
-            if v["lang"] == "es"
-            else "Your quote — Mejor Vida Insurance"
-        )
-        html = html_email_body(v["firstName"], carriers, v["lang"], schedule_url, health_line=h_line)
+        if v.get("outsideLicensedState"):
+            subj = (
+                "Recibimos su solicitud — Mejor Vida Insurance"
+                if v["lang"] == "es"
+                else "We received your request — Mejor Vida Insurance"
+            )
+            html = referral_html_email(v["firstName"], v["lang"], schedule_url, health_line=h_line)
+        else:
+            subj = (
+                "Tu cotización — Mejor Vida Insurance"
+                if v["lang"] == "es"
+                else "Your quote — Mejor Vida Insurance"
+            )
+            html = html_email_body(v["firstName"], carriers, v["lang"], schedule_url, health_line=h_line)
         emailed = send_email_resend(v["email"], subj, html)
 
-    return 200, {
+    out: dict[str, Any] = {
         "ok": True,
         "leadId": lead_id,
         "quoteStatus": quote_status,
@@ -705,6 +841,11 @@ def handle_submit(body: bytes, client_headers: dict[str, str]) -> tuple[int, dic
         "hubspotStatus": hs_status,
         "emailSent": emailed,
     }
+    if quote_status == "quote_generated":
+        out["mooLevelGradedNote"] = MOO_LEVEL_GRADED_NOTE
+    if quote_status == "referral_out_of_state":
+        out["referralOutOfStateNote"] = REFERRAL_OUT_OF_STATE_NOTE
+    return 200, out
 
 
 class Handler:

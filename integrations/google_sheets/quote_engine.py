@@ -31,7 +31,7 @@ def load_rate_chart_rows(tab_name: str = "Carrier Rate Charts") -> list[list[str
 def _carrier_logo_and_name(carrier_key: str) -> tuple[str, str]:
     if carrier_key == "assurity":
         return logo_for("assurity")
-    if carrier_key == "mutual-of-omaha":
+    if carrier_key in ("mutual-of-omaha", "mutual-of-omaha-level", "mutual-of-omaha-graded"):
         return logo_for("mutual-of-omaha")
     if carrier_key == "american-amicable":
         return "", "American Amicable"
@@ -83,16 +83,18 @@ def compute_carrier_quotes_from_grids_by_carrier(
     benefit_plan: str = "level",
     tobacco: str = "no",
     moo_lp_rates: dict[str, dict[tuple[int, str], dict[str, Any]]] | None = None,
+    moo_dual_benefits: bool = False,
 ) -> list[dict[str, Any]]:
     """
     Assurity: multiplier grids. Mutual of Omaha: moo_lp_rates + carrier formula (no multipliers).
+    If moo_dual_benefits, emit separate MoO rows for Level and Graded (website quote results).
     """
     if gender not in ("male", "female"):
         gender = "female"
 
-    bp = (benefit_plan or "level").strip().lower()
-    if bp not in ("level", "graded"):
-        bp = "level"
+    bp_default = (benefit_plan or "level").strip().lower()
+    if bp_default not in ("level", "graded"):
+        bp_default = "level"
 
     carriers: list[dict[str, Any]] = []
 
@@ -148,52 +150,61 @@ def compute_carrier_quotes_from_grids_by_carrier(
             continue
 
         # mutual-of-omaha
-        if bp == "graded":
-            alt = "Mutual of Omaha (Graded benefit)"
-        else:
-            alt = "Mutual of Omaha"
         moo = moo_lp_rates or {}
-        if not moo:
-            carriers.append(
-                {
-                    "carrierKey": carrier_key,
-                    "carrierName": alt,
-                    "logo": logo or None,
-                    "qualified": False,
-                    "reason": "rates_not_configured_in_tool",
-                    "benefitPlan": bp,
-                    "mooProductSlug": moo_resolve_product_slug(bp, tobacco),
-                }
-            )
-            continue
-        mo, reason = moo_monthly_bsp(
-            coverage_amount, age, gender, moo, bp, tobacco
-        )
-        if mo is not None:
-            carriers.append(
-                {
-                    "carrierKey": carrier_key,
-                    "carrierName": alt,
-                    "logo": logo or None,
-                    "qualified": True,
-                    "monthly": mo,
-                    "coverage": coverage_amount,
-                    "benefitPlan": bp,
-                    "mooProductSlug": moo_resolve_product_slug(bp, tobacco),
-                }
+        moo_plans: tuple[tuple[str, str, str], ...]
+        if moo_dual_benefits:
+            moo_plans = (
+                ("mutual-of-omaha-level", "level", "Mutual of Omaha (Level)"),
+                ("mutual-of-omaha-graded", "graded", "Mutual of Omaha (Graded benefit)"),
             )
         else:
-            carriers.append(
-                {
-                    "carrierKey": carrier_key,
-                    "carrierName": alt,
-                    "logo": logo or None,
-                    "qualified": False,
-                    "reason": reason or "age_or_coverage_not_in_table",
-                    "benefitPlan": bp,
-                    "mooProductSlug": moo_resolve_product_slug(bp, tobacco),
-                }
-            )
+            bp = bp_default
+            alt = "Mutual of Omaha (Graded benefit)" if bp == "graded" else "Mutual of Omaha"
+            moo_plans = ((carrier_key, bp, alt),)
+
+        if not moo:
+            for ck, bp, alt in moo_plans:
+                carriers.append(
+                    {
+                        "carrierKey": ck,
+                        "carrierName": alt,
+                        "logo": logo or None,
+                        "qualified": False,
+                        "reason": "rates_not_configured_in_tool",
+                        "benefitPlan": bp,
+                        "mooProductSlug": moo_resolve_product_slug(bp, tobacco),
+                    }
+                )
+            continue
+
+        logo_moo, _ = _carrier_logo_and_name("mutual-of-omaha")
+        for ck, bp, alt in moo_plans:
+            mo, reason = moo_monthly_bsp(coverage_amount, age, gender, moo, bp, tobacco)
+            if mo is not None:
+                carriers.append(
+                    {
+                        "carrierKey": ck,
+                        "carrierName": alt,
+                        "logo": logo_moo or None,
+                        "qualified": True,
+                        "monthly": mo,
+                        "coverage": coverage_amount,
+                        "benefitPlan": bp,
+                        "mooProductSlug": moo_resolve_product_slug(bp, tobacco),
+                    }
+                )
+            else:
+                carriers.append(
+                    {
+                        "carrierKey": ck,
+                        "carrierName": alt,
+                        "logo": logo_moo or None,
+                        "qualified": False,
+                        "reason": reason or "age_or_coverage_not_in_table",
+                        "benefitPlan": bp,
+                        "mooProductSlug": moo_resolve_product_slug(bp, tobacco),
+                    }
+                )
 
     ak, alabel = _carrier_logo_and_name("american-amicable")
     carriers.append(

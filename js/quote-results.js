@@ -91,6 +91,71 @@
     );
   }
 
+  function carrierTitle(c) {
+    var L = currentLang();
+    if (c.carrierKey === 'mutual-of-omaha-level') {
+      return L === 'es'
+        ? 'Mutual of Omaha — Nivel (ilustrativo)'
+        : 'Mutual of Omaha — Level (illustrative)';
+    }
+    if (c.carrierKey === 'mutual-of-omaha-graded') {
+      return L === 'es'
+        ? 'Mutual of Omaha — Graduado (ilustrativo)'
+        : 'Mutual of Omaha — Graded (illustrative)';
+    }
+    return c.carrierName || c.carrierKey || '';
+  }
+
+  function renderReferralOnly(data) {
+    var ref = document.getElementById('quote-referral-panel');
+    var sec = document.getElementById('quote-results-carrier-section');
+    var moo = document.getElementById('quote-moo-explainer');
+    var foot = document.getElementById('quote-results-foot');
+    if (data.quoteStatus !== 'referral_out_of_state') {
+      if (ref) {
+        ref.hidden = true;
+        ref.textContent = '';
+      }
+      if (sec) sec.hidden = false;
+      return false;
+    }
+    var n = data.referralOutOfStateNote;
+    var txt = n && (currentLang() === 'es' ? n.es : n.en);
+    if (ref) {
+      ref.textContent = txt || '';
+      ref.hidden = !txt;
+    }
+    if (sec) sec.hidden = true;
+    if (moo) moo.hidden = true;
+    if (foot) foot.hidden = true;
+    return true;
+  }
+
+  function renderMooExplainer(data) {
+    var el = document.getElementById('quote-moo-explainer');
+    if (!el) return;
+    var n = data && data.mooLevelGradedNote;
+    var ok =
+      data &&
+      data.quoteStatus === 'quote_generated' &&
+      data.carriers &&
+      data.carriers.length &&
+      n &&
+      typeof n === 'object';
+    if (!ok) {
+      el.hidden = true;
+      el.textContent = '';
+      return;
+    }
+    var txt = (currentLang() === 'es' ? n.es : n.en) || '';
+    if (!txt) {
+      el.hidden = true;
+      return;
+    }
+    el.textContent = txt;
+    el.hidden = false;
+  }
+
   function embedUrlForSchedule(scheduleUrl) {
     if (typeof window.MVS_SCHEDULE_EMBED_URL === 'string' && window.MVS_SCHEDULE_EMBED_URL.trim()) {
       return window.MVS_SCHEDULE_EMBED_URL.trim();
@@ -130,7 +195,7 @@
       }
       var ttl = document.createElement('strong');
       ttl.className = 'text-primary';
-      ttl.textContent = c.carrierName || c.carrierKey || '';
+      ttl.textContent = carrierTitle(c);
       top.appendChild(ttl);
       card.appendChild(top);
 
@@ -219,7 +284,29 @@
       return;
     }
 
-    if (!data || !data.carriers) {
+    if (!data) {
+      if (missing) missing.hidden = false;
+      if (main) main.hidden = true;
+      return;
+    }
+
+    if (data.quoteStatus === 'referral_out_of_state') {
+      if (missing) missing.hidden = true;
+      if (main) main.hidden = false;
+      renderReferralOnly(data);
+      wireSchedule(data);
+      document.querySelectorAll('.lang-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          setTimeout(function () {
+            renderReferralOnly(data);
+            wireSchedule(data);
+          }, 0);
+        });
+      });
+      return;
+    }
+
+    if (!data.carriers) {
       if (missing) missing.hidden = false;
       if (main) main.hidden = true;
       return;
@@ -228,14 +315,22 @@
     if (missing) missing.hidden = true;
     if (main) main.hidden = false;
 
+    renderReferralOnly(data);
+    renderMooExplainer(data);
     renderCarriers(data.carriers, data);
     wireSchedule(data);
+    var foot0 = document.getElementById('quote-results-foot');
+    if (foot0) foot0.hidden = false;
 
     document.querySelectorAll('.lang-btn').forEach(function (btn) {
       btn.addEventListener('click', function () {
         setTimeout(function () {
+          renderReferralOnly(data);
+          renderMooExplainer(data);
           renderCarriers(data.carriers, data);
           wireSchedule(data);
+          var foot1 = document.getElementById('quote-results-foot');
+          if (foot1) foot1.hidden = false;
         }, 0);
       });
     });

@@ -376,8 +376,8 @@
     <div class="container text-center hero-content-overlay">
       <h1 class="h2 fw-bold text-white mb-3" data-lang="es">Cotización aproximada de gastos finales</h1>
       <h1 class="h2 fw-bold text-white mb-3" data-lang="en">Approximate final expense quote</h1>
-      <p class="fs-6 text-white opacity-90 mb-0 mx-auto" style="max-width:40rem;" data-lang="es">Completa el formulario para ver primas ilustrativas por aseguradora (cuando la tabla lo permita) y enviaremos el resumen por correo si lo indicas. Las cifras no son una oferta; Julie confirma elegibilidad y precios finales.</p>
-      <p class="fs-6 text-white opacity-90 mb-0 mx-auto" style="max-width:40rem;" data-lang="en">Complete the form for illustrative premiums by carrier (where our tool has rates). We can email a summary if you choose. Figures are not an offer—Julie confirms eligibility and final pricing.</p>
+      <p class="fs-6 text-white opacity-90 mb-0 mx-auto" style="max-width:40rem;" data-lang="es">Empiece por su <strong>estado</strong>: las cotizaciones ilustrativas inmediatas son para residentes de Nebraska. Luego complete el resto del formulario. Las cifras no son una oferta; Julie confirma elegibilidad y precios finales.</p>
+      <p class="fs-6 text-white opacity-90 mb-0 mx-auto" style="max-width:40rem;" data-lang="en">Start with your <strong>state</strong>: immediate illustrative quotes apply to Nebraska residents. Then complete the rest of the form. Figures are not an offer—Julie confirms eligibility and final pricing.</p>
     </div>
   </section>
 
@@ -388,6 +388,25 @@
       <div class="bg-white rounded-3 p-4 shadow-sm quote-form-card mx-auto mb-4">
         <form id="quote-form" class="needs-validation" novalidate>
           <div class="row g-3">
+            <div class="col-12">
+              <p class="small fw-semibold mb-2" style="color:#1a365d;" data-lang="es">Primero: elija su estado</p>
+              <p class="small fw-semibold mb-2" style="color:#1a365d;" data-lang="en">First: choose your state</p>
+              <p class="small text-body-secondary mb-0" data-lang="es">Las cotizaciones ilustrativas inmediatas aplican a residentes de <strong>Nebraska</strong> (donde Julie está licenciada). Si vive en otro estado, verá un aviso y aún puede enviar sus datos para una referencia.</p>
+              <p class="small text-body-secondary mb-0" data-lang="en">Illustrative quotes right away apply to <strong>Nebraska</strong> residents (where Julie is licensed). If you live elsewhere, you’ll see a notice—you can still submit your details for a referral.</p>
+            </div>
+            <div class="col-md-6">
+              <label for="quote-state" class="form-label fw-semibold" data-lang="es">Estado</label>
+              <label for="quote-state" class="form-label fw-semibold" data-lang="en">State</label>
+              <select class="form-select" id="quote-state" name="state" required autocomplete="address-level1" aria-describedby="quote-state-help"></select>
+              <p id="quote-state-help" class="form-text small text-body-secondary mb-0">
+                <span data-lang="es">Julie está licenciada para cotizaciones formales en <strong>Nebraska</strong>. Otros estados: ver aviso.</span>
+                <span data-lang="en">Julie is licensed for formal quotes in <strong>Nebraska</strong> only. Other states: see notice.</span>
+              </p>
+            </div>
+            <div class="col-md-6">
+              <label for="quote-zip" class="form-label fw-semibold">ZIP</label>
+              <input type="text" class="form-control" id="quote-zip" name="zip" autocomplete="postal-code" />
+            </div>
             <div class="col-md-6">
               <label for="quote-first" class="form-label fw-semibold" data-lang="es">Nombre</label>
               <label for="quote-first" class="form-label fw-semibold" data-lang="en">First name</label>
@@ -476,42 +495,16 @@
               <p class="form-text small mb-0" data-lang="es">Si no aplica, puede dejarlo en blanco.</p>
               <p class="form-text small mb-0" data-lang="en">Leave blank if not applicable.</p>
             </div>
-            <div class="col-12">
-              <div class="small border-start border-4 border-primary ps-3 py-2 bg-white rounded-end mb-0" style="color:#374151;">
-                <p class="mb-1 fw-semibold" style="color:#1a365d;" data-lang="es">¿Cómo se relaciona esto con las primas?</p>
-                <p class="mb-1 fw-semibold" style="color:#1a365d;" data-lang="en">How does this relate to the rates?</p>
-                <p class="mb-0" data-lang="es">Para gastos finales, <strong>Living Promise</strong> de Mutual of Omaha se presenta en <strong>dos</strong> diseños de beneficio (no hay un “tercer” plan de gastos finales en esta línea): <strong>Nivel (Level)</strong> cuando se puede calificar con las preguntas de salud de la solicitud (típicamente 45–85 años; hasta $50,000 NE) y primas más bajas; y <strong>Graduado (Graded)</strong> como vía simplificada con beneficio de muerte graduado (pago parcial en los primeros años de la póliza, luego el total), hasta $20,000 y edades típicas 45–80. En el mercado a menudo se habla de este tipo de cobertura como de emisión garantizada o simplificada, aunque la compañía no use siempre ese nombre. Otros productos de MoO (p. ej. Guaranteed ADvantage) son para necesidades distintas. La lista de salud nos ayuda a conocerte; <strong>Julie confirma</strong> qué opción aplica. Elija abajo una estimación de <strong>Nivel</strong> o <strong>Graduado</strong>.</p>
-                <p class="mb-0" data-lang="en">For final expense, Mutual of Omaha <strong>Living Promise</strong> is offered as <strong>two</strong> benefit designs—there isn’t a separate third final-expense tier in this product line: <strong>Level</strong> when you can qualify on the application health questions (typically ages 45–85; up to $50,000 in NE; lower premiums), and <strong>Graded</strong> as the simplified-issue path with a <strong>graded death benefit</strong> (partial payout in the early policy years, then full), up to $20,000 face and typically ages 45–80. Industry conversations often describe this kind of coverage as guaranteed-issue–style final expense even though the carrier may not use that exact label. Other MoO products (e.g. <strong>Guaranteed ADvantage</strong>) target different needs. The health list helps us understand you; <strong>Julie confirms</strong> what applies. Choose a <strong>Level</strong> or <strong>Graded</strong> estimate below.</p>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <label for="quote-benefit-plan" class="form-label fw-semibold" data-lang="es">Tipo de beneficio (cotización Mutual of Omaha)</label>
-              <label for="quote-benefit-plan" class="form-label fw-semibold" data-lang="en">Benefit type (Mutual of Omaha estimate)</label>
-              <select class="form-select" id="quote-benefit-plan" name="benefitPlan" aria-describedby="quote-benefit-plan-help">
-                <option value="level">Level · Nivel — salud favorable (~45–85), hasta $50k NE</option>
-                <option value="graded">Graded · Graduado — vía simplificada (~45–80), máx. $20k</option>
-              </select>
-              <p id="quote-benefit-plan-help" class="form-text small mb-0"><span data-lang="es">La cotización de Mutual of Omaha en esta herramienta corresponde a <strong>Living Promise</strong> (Nivel o Graduado). Assurity y el resto de las primas ilustrativas usan la tabla general.</span><span data-lang="en">The Mutual of Omaha figure here is <strong>Living Promise</strong> (Level or Graded). Assurity and the other illustrative premiums use the general rate table.</span></p>
-            </div>
-            <div class="col-md-6">
+            <div class="col-12 col-md-6">
               <label for="quote-coverage" class="form-label fw-semibold" data-lang="es">Monto de cobertura</label>
               <label for="quote-coverage" class="form-label fw-semibold" data-lang="en">Coverage amount</label>
               <select class="form-select" id="quote-coverage" name="coverageSelect" required aria-describedby="quote-coverage-help">
                 <option value="">—</option>
               </select>
-              <p id="quote-coverage-help" class="form-text small mb-0">
-                <span data-lang="es">Nivel (Level): de $2,000 a $50,000 en incrementos de $1,000. Graduado (Graded): hasta $20,000.</span>
-                <span data-lang="en">Level: $2,000–$50,000 in $1,000 increments. Graded: up to $20,000.</span>
+              <p id="quote-coverage-help" class="form-text small text-body-secondary mb-0">
+                <span data-lang="es">Incrementos de $1,000; hasta $50,000 en esta herramienta.</span>
+                <span data-lang="en">$1,000 increments; up to $50,000 in this tool.</span>
               </p>
-            </div>
-            <div class="col-md-3">
-              <label for="quote-state" class="form-label fw-semibold" data-lang="es">Estado</label>
-              <label for="quote-state" class="form-label fw-semibold" data-lang="en">State</label>
-              <input type="text" class="form-control" id="quote-state" name="state" maxlength="2" value="NE" autocomplete="address-level1" />
-            </div>
-            <div class="col-md-3">
-              <label for="quote-zip" class="form-label fw-semibold">ZIP</label>
-              <input type="text" class="form-control" id="quote-zip" name="zip" autocomplete="postal-code" />
             </div>
           </div>
 
@@ -542,16 +535,37 @@
         </form>
       </div>
 
-      <div class="bg-white rounded-3 p-4 shadow-sm text-center">
-        <h3 class="h6 fw-bold mb-2" style="color:#1a365d;" data-lang="es">¿Prefieres hablar primero?</h3>
-        <h3 class="h6 fw-bold mb-2" style="color:#1a365d;" data-lang="en">Prefer to talk first?</h3>
-        <div class="d-flex flex-wrap justify-content-center gap-2">
-          <a href="tel:+14025881125" class="btn btn-outline-primary btn-sm rounded fw-bold" data-lang="es"><i class="fas fa-phone me-1"></i>402-588-1125</a>
-          <a href="tel:+14025881125" class="btn btn-outline-primary btn-sm rounded fw-bold" data-lang="en"><i class="fas fa-phone me-1"></i>402-588-1125</a>
-          <a href="https://wa.me/14024405438?text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20seguro%20de%20gastos%20finales." target="_blank" rel="noopener" class="btn btn-success btn-sm rounded fw-bold" data-lang="es"><i class="fab fa-whatsapp me-1"></i>WhatsApp</a>
-          <a href="https://wa.me/14024405438?text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20seguro%20de%20gastos%20finales." target="_blank" rel="noopener" class="btn btn-success btn-sm rounded fw-bold" data-lang="en"><i class="fab fa-whatsapp me-1"></i>WhatsApp</a>
+      <!-- Out-of-state: Julie licensed in NE for formal quotes -->
+      <div class="modal fade" id="stateNonNeModal" tabindex="-1" aria-labelledby="stateNonNeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content border-primary border-2">
+            <div class="modal-header">
+              <h2 class="modal-title h5 mb-0" id="stateNonNeModalLabel">
+                <span data-lang="es">Cotización en Nebraska</span>
+                <span data-lang="en">Quoting in Nebraska</span>
+              </h2>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p class="mb-0" data-lang="es">
+                Julie solo puede ofrecer <strong>cotizaciones formales</strong> de seguro de vida a residentes de <strong>Nebraska</strong> (donde está licenciada).
+                Si vive en otro estado, puede enviar su información de contacto y Julie hará lo posible por ayudarle a encontrar un <strong>agente licenciado en su estado</strong>.
+              </p>
+              <p class="mb-0" data-lang="en">
+                Julie can only provide <strong>formal life insurance quotes</strong> for people living in <strong>Nebraska</strong>, where she is licensed.
+                If you live elsewhere, you can still submit your contact information—Julie will do her best to help you find a <strong>licensed agent in your home state</strong>.
+              </p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary rounded fw-bold" data-bs-dismiss="modal">
+                <span data-lang="es">Entendido</span>
+                <span data-lang="en">OK</span>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
+
     </div>
   </section>
 
@@ -620,6 +634,7 @@
     }
   })();
   </script>
+  <script src="js/us-states.js"></script>
   <script src="js/quote-form.js"></script>
 
   <!-- Mobile menu script -->
