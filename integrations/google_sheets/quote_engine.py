@@ -28,6 +28,187 @@ def load_rate_chart_rows(tab_name: str = "Carrier Rate Charts") -> list[list[str
     return ws.get_all_values()
 
 
+def _carrier_logo_and_name(carrier_key: str) -> tuple[str, str]:
+    if carrier_key == "assurity":
+        return logo_for("assurity")
+    if carrier_key == "mutual-of-omaha":
+        return logo_for("mutual-of-omaha")
+    if carrier_key == "american-amicable":
+        return "", "American Amicable"
+    return "", carrier_key
+
+
+def _tobacco_yes(tobacco: str) -> bool:
+    return str(tobacco or "").strip().lower() in ("yes", "y", "true", "1")
+
+
+def moo_resolve_product_slug(benefit_plan: str, tobacco: str) -> str:
+    """Level + tobacco → NT vs T; Graded ignores tobacco."""
+    bp = (benefit_plan or "level").strip().lower()
+    if bp == "graded":
+        return "living_promise_graded"
+    return "living_promise_level_t" if _tobacco_yes(tobacco) else "living_promise_level_nt"
+
+
+def moo_monthly_bsp(
+    face: int,
+    age: int,
+    gender: str,
+    moo_lp_rates: dict[str, dict[tuple[int, str], dict[str, Any]]],
+    benefit_plan: str,
+    tobacco: str,
+) -> tuple[float | None, str | None]:
+    """
+    annual = (face/1000)*base_rate_per_1k + policy_fee_annual; monthly = annual * modal_factor.
+    Returns (monthly, None) or (None, reason_code).
+    """
+    slug = moo_resolve_product_slug(benefit_plan, tobacco)
+    tbl = moo_lp_rates.get(slug) or {}
+    row = tbl.get((age, gender))
+    if not row:
+        return None, "age_or_coverage_not_in_table"
+    if face < int(row["min_face"]) or face > int(row["max_face"]):
+        return None, "age_or_coverage_not_in_table"
+    annual = (face / 1000.0) * float(row["base_rate_per_1k"]) + float(row["policy_fee_annual"])
+    monthly = annual * float(row["modal_factor"])
+    return round(float(monthly), 2), None
+
+
+def compute_carrier_quotes_from_grids_by_carrier(
+    age: int,
+    gender: str,
+    coverage_amount: int,
+    grids_by_carrier: dict[str, tuple[dict[int, tuple[float, float]], dict[int, tuple[float, float]]]],
+    *,
+    benefit_plan: str = "level",
+    tobacco: str = "no",
+    moo_lp_rates: dict[str, dict[tuple[int, str], dict[str, Any]]] | None = None,
+) -> list[dict[str, Any]]:
+    """
+    Assurity: multiplier grids. Mutual of Omaha: moo_lp_rates + carrier formula (no multipliers).
+    """
+    if gender not in ("male", "female"):
+        gender = "female"
+
+    bp = (benefit_plan or "level").strip().lower()
+    if bp not in ("level", "graded"):
+        bp = "level"
+
+    carriers: list[dict[str, Any]] = []
+
+    for carrier_key in ("assurity", "mutual-of-omaha"):
+        logo, alt = _carrier_logo_and_name(carrier_key)
+        if carrier_key == "assurity":
+            if "assurity" not in grids_by_carrier:
+                carriers.append(
+                    {
+                        "carrierKey": carrier_key,
+                        "carrierName": alt,
+                        "logo": logo or None,
+                        "qualified": False,
+                        "reason": "rates_not_configured_in_tool",
+                    }
+                )
+                continue
+            base, mults = grids_by_carrier["assurity"]
+            row_ok = age in base and coverage_amount in mults
+            if row_ok:
+                v = assurity_monthly_for_gender(age, coverage_amount, base, mults, gender)
+                if v is not None:
+                    carriers.append(
+                        {
+                            "carrierKey": carrier_key,
+                            "carrierName": alt,
+                            "logo": logo or None,
+                            "qualified": True,
+                            "monthly": round(float(v), 2),
+                            "coverage": coverage_amount,
+                        }
+                    )
+                else:
+                    carriers.append(
+                        {
+                            "carrierKey": carrier_key,
+                            "carrierName": alt,
+                            "logo": logo or None,
+                            "qualified": False,
+                            "reason": "rate_unavailable",
+                        }
+                    )
+            else:
+                carriers.append(
+                    {
+                        "carrierKey": carrier_key,
+                        "carrierName": alt,
+                        "logo": logo or None,
+                        "qualified": False,
+                        "reason": "age_or_coverage_not_in_table",
+                    }
+                )
+            continue
+
+        # mutual-of-omaha
+        if bp == "graded":
+            alt = "Mutual of Omaha (Graded benefit)"
+        else:
+            alt = "Mutual of Omaha"
+        moo = moo_lp_rates or {}
+        if not moo:
+            carriers.append(
+                {
+                    "carrierKey": carrier_key,
+                    "carrierName": alt,
+                    "logo": logo or None,
+                    "qualified": False,
+                    "reason": "rates_not_configured_in_tool",
+                    "benefitPlan": bp,
+                    "mooProductSlug": moo_resolve_product_slug(bp, tobacco),
+                }
+            )
+            continue
+        mo, reason = moo_monthly_bsp(
+            coverage_amount, age, gender, moo, bp, tobacco
+        )
+        if mo is not None:
+            carriers.append(
+                {
+                    "carrierKey": carrier_key,
+                    "carrierName": alt,
+                    "logo": logo or None,
+                    "qualified": True,
+                    "monthly": mo,
+                    "coverage": coverage_amount,
+                    "benefitPlan": bp,
+                    "mooProductSlug": moo_resolve_product_slug(bp, tobacco),
+                }
+            )
+        else:
+            carriers.append(
+                {
+                    "carrierKey": carrier_key,
+                    "carrierName": alt,
+                    "logo": logo or None,
+                    "qualified": False,
+                    "reason": reason or "age_or_coverage_not_in_table",
+                    "benefitPlan": bp,
+                    "mooProductSlug": moo_resolve_product_slug(bp, tobacco),
+                }
+            )
+
+    ak, alabel = _carrier_logo_and_name("american-amicable")
+    carriers.append(
+        {
+            "carrierKey": "american-amicable",
+            "carrierName": alabel,
+            "logo": ak or None,
+            "qualified": False,
+            "reason": "rates_not_configured_in_tool",
+        }
+    )
+
+    return carriers
+
+
 def compute_carrier_quotes_with_grids(
     age: int,
     gender: str,
@@ -39,61 +220,10 @@ def compute_carrier_quotes_with_grids(
     Same output shape as compute_carrier_quotes, but uses pre-parsed base (age -> male/female $10k mo)
     and mults (face amount -> multiplier male/female). Logic lives in code; data from DB or sheet import.
     """
-    if gender not in ("male", "female"):
-        gender = "female"
-
-    carriers: list[dict[str, Any]] = []
-
-    assurity_ok = age in base and coverage_amount in mults
-    if assurity_ok:
-        v = assurity_monthly_for_gender(age, coverage_amount, base, mults, gender)
-        if v is not None:
-            logo, alt = logo_for("assurity")
-            carriers.append(
-                {
-                    "carrierKey": "assurity",
-                    "carrierName": alt,
-                    "logo": logo,
-                    "qualified": True,
-                    "monthly": round(float(v), 2),
-                    "coverage": coverage_amount,
-                }
-            )
-        else:
-            carriers.append(
-                {
-                    "carrierKey": "assurity",
-                    "carrierName": "Assurity",
-                    "qualified": False,
-                    "reason": "rate_unavailable",
-                }
-            )
-    else:
-        carriers.append(
-            {
-                "carrierKey": "assurity",
-                "carrierName": "Assurity",
-                "qualified": False,
-                "reason": "age_or_coverage_not_in_table",
-            }
-        )
-
-    for key, label in (
-        ("mutual-of-omaha", "Mutual of Omaha"),
-        ("american-amicable", "American Amicable"),
-    ):
-        logo, alt = logo_for(key) if key == "mutual-of-omaha" else ("", label)
-        carriers.append(
-            {
-                "carrierKey": key,
-                "carrierName": label,
-                "logo": logo or None,
-                "qualified": False,
-                "reason": "rates_not_configured_in_tool",
-            }
-        )
-
-    return carriers
+    grids = {"assurity": (base, mults)}
+    return compute_carrier_quotes_from_grids_by_carrier(
+        age, gender, coverage_amount, grids, benefit_plan="level"
+    )
 
 
 def compute_carrier_quotes(
@@ -121,6 +251,70 @@ def allowed_age_range_from_base(base: dict[int, tuple[float, float]]) -> tuple[i
         return (45, 85)
     ages = sorted(base.keys())
     return (ages[0], ages[-1])
+
+
+def allowed_age_range_from_grids_by_carrier(
+    grids_by_carrier: dict[str, tuple[dict[int, tuple[float, float]], dict[int, tuple[float, float]]]],
+) -> tuple[int, int]:
+    """Union of issue-age spans across carriers (website allows submit if any table supports the age)."""
+    lows: list[int] = []
+    highs: list[int] = []
+    for base, _ in grids_by_carrier.values():
+        if not base:
+            continue
+        ages = sorted(base.keys())
+        lows.append(ages[0])
+        highs.append(ages[-1])
+    if not lows:
+        return (45, 85)
+    return (min(lows), max(highs))
+
+
+def allowed_age_range_combined(
+    grids_by_carrier: dict[str, tuple[dict[int, tuple[float, float]], dict[int, tuple[float, float]]]],
+    moo_lp_rates: dict[str, dict[tuple[int, str], dict[str, Any]]] | None,
+) -> tuple[int, int]:
+    """Assurity grids + MoO LP age keys (union)."""
+    lows: list[int] = []
+    highs: list[int] = []
+    for base, _ in grids_by_carrier.values():
+        if not base:
+            continue
+        ages = sorted(base.keys())
+        lows.append(ages[0])
+        highs.append(ages[-1])
+    if moo_lp_rates:
+        for tbl in moo_lp_rates.values():
+            for (a, _) in tbl.keys():
+                lows.append(int(a))
+                highs.append(int(a))
+    if not lows:
+        return (45, 85)
+    return (min(lows), max(highs))
+
+
+def allowed_coverages_from_grids_by_carrier(
+    grids_by_carrier: dict[str, tuple[dict[int, tuple[float, float]], dict[int, tuple[float, float]]]],
+) -> list[int]:
+    """Union of face amounts that appear in any carrier multiplier table."""
+    seen: set[int] = set()
+    for _, mults in grids_by_carrier.values():
+        seen.update(mults.keys())
+    return sorted(seen)
+
+
+def allowed_coverages_combined(
+    grids_by_carrier: dict[str, tuple[dict[int, tuple[float, float]], dict[int, tuple[float, float]]]],
+    moo_lp_rates: dict[str, dict[tuple[int, str], dict[str, Any]]] | None,
+) -> list[int]:
+    """Multiplier faces + common MoO faces when LP data exists."""
+    seen: set[int] = set()
+    for _, mults in grids_by_carrier.values():
+        seen.update(mults.keys())
+    if moo_lp_rates:
+        for extra in (2000, 5000, 10000, 15000, 20000, 25000, 30000, 40000, 50000):
+            seen.add(extra)
+    return sorted(seen)
 
 
 def allowed_coverages(rows: list[list[str]]) -> list[int]:

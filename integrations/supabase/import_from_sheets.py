@@ -34,14 +34,14 @@ except ImportError:
     raise SystemExit(1)
 
 
-def _get_or_create_carrier(cur, slug: str, name: str) -> str:
+def _get_or_create_carrier(cur, slug: str, name: str, logo_path: str | None = None) -> str:
     cur.execute("SELECT id FROM carriers WHERE slug = %s", (slug,))
     r = cur.fetchone()
     if r:
         return str(r[0])
     cur.execute(
         "INSERT INTO carriers (slug, display_name, logo_path) VALUES (%s, %s, %s) RETURNING id",
-        (slug, name, "img/carriers/assurity-wordmark.png"),
+        (slug, name, logo_path),
     )
     return str(cur.fetchone()[0])
 
@@ -122,7 +122,9 @@ def main() -> int:
     with psycopg.connect(dsn) as conn:
         conn.autocommit = False
         with conn.cursor() as cur:
-            cid = _get_or_create_carrier(cur, "assurity", "Assurity")
+            cid = _get_or_create_carrier(
+                cur, "assurity", "Assurity", "img/carriers/assurity-wordmark.png"
+            )
             pid = _get_or_create_product(
                 cur, cid, "whole_life_protect_plus", "Whole Life Protect+"
             )

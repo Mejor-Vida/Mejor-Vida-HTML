@@ -1,6 +1,6 @@
 # Mejor Vida — website quote API
 
-Small HTTP service used by `quote.html`: reads **Carrier Rate Charts** from Google Sheets, appends to **Lead List**, upserts **HubSpot** contacts, and optionally emails the lead via **Resend**.
+Small HTTP service used by `quote.html`: loads **rate grids from Supabase** by default (**`QUOTE_DATA_SOURCE=supabase`**); Google Sheets are **not** read at runtime unless you set **`QUOTE_ALLOW_SHEET_FALLBACK=1`** (with `QUOTE_DATA_SOURCE=auto`) or **`QUOTE_DATA_SOURCE=sheets`**. **Leads** are stored in **`quote_lead_submissions`** in Supabase; optional **`LEAD_LIST_GOOGLE_SHEET_BACKUP=1`** mirrors a row to the Lead List tab. **HubSpot** + optional **Resend**. See `integrations/supabase/README.md`.
 
 ## Run locally
 
@@ -42,7 +42,10 @@ In production, either:
 
 | Variable | Required | Notes |
 |----------|----------|--------|
-| `GOOGLE_SHEETS_CREDENTIALS` | Yes | Path to OAuth or service account JSON |
+| `QUOTE_DATA_SOURCE` | No | Default **`supabase`**. `auto` + `QUOTE_ALLOW_SHEET_FALLBACK=1` for Sheet fallback. `sheets` legacy only. |
+| `DATABASE_URL` | Yes (quotes + leads) | Or `SUPABASE_URL` + `SUPABASE_DB_PASSWORD`; see `integrations/supabase/config.py` |
+| `LEAD_LIST_GOOGLE_SHEET_BACKUP` | No | `1` to also append Lead List in Google Sheets after Supabase insert |
+| `GOOGLE_SHEETS_CREDENTIALS` | Backup lead tab + `import_from_sheets` | Not required for quote *grids* if Supabase is live |
 | `GOOGLE_SHEETS_SPREADSHEET_ID` | Yes | Workbook with rate chart + Lead List |
 | `GOOGLE_SHEETS_TAB` | No | Defaults to `Lead List` for appends |
 | `HUBSPOT_ACCESS_TOKEN` | No | If missing, HubSpot step is skipped |

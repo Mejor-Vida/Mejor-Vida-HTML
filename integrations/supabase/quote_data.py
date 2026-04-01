@@ -112,6 +112,7 @@ def load_grids_for_version(conn: Any, product_version_id: uuid.UUID) -> tuple[di
 
 
 def load_quote_grids_from_supabase() -> tuple[dict[int, tuple[float, float]], dict[int, tuple[float, float]]]:
+    """Active Assurity (or QUOTE_DB_*) product version — single grid (legacy callers)."""
     if psycopg is None:
         raise RuntimeError("psycopg is required: pip install psycopg[binary]")
     dsn = get_database_url()
@@ -124,6 +125,115 @@ def load_quote_grids_from_supabase() -> tuple[dict[int, tuple[float, float]], di
                 "No active product_version in DB. Run import_from_sheets.py or seed_sample.sql."
             )
         return load_grids_for_version(conn, vid)
+
+
+# Assurity only — MoO uses moo_living_promise_rates + formula (see quote_engine).
+QUOTE_GRID_PRODUCTS: tuple[tuple[str, str, str], ...] = (
+    ("assurity", "assurity", "whole_life_protect_plus"),
+)
+
+# Mutual of Omaha Living Promise (NE): three product slugs (tobacco routing in quote_engine).
+MOO_LP_PRODUCT_SLUGS: tuple[str, ...] = (
+    "living_promise_level_nt",
+    "living_promise_level_t",
+    "living_promise_graded",
+)
+
+MooLpRateRow = dict[str, float | int]
+MooLpRatesBySlug = dict[str, dict[tuple[int, str], MooLpRateRow]]
+
+
+def load_moo_lp_rates_from_supabase(conn: Any) -> MooLpRatesBySlug:
+    """
+    Load base_rate_per_1k rows for all MoO LP products. Keys: product_slug -> (age, gender) -> row.
+    """
+    out: MooLpRatesBySlug = {}
+    with conn.cursor() as cur:
+        for slug in MOO_LP_PRODUCT_SLUGS:
+            vid = resolve_active_product_version_id(
+                conn, carrier_slug="mutual-of-omaha", product_slug=slug
+            )
+            if not vid:
+                continue
+            try:
+                cur.execute(
+                    """
+                    SELECT issue_age, gender, base_rate_per_1k::float, policy_fee_annual::float,
+                           modal_factor::float, min_face, max_face
+                    FROM moo_living_promise_rates
+                    WHERE product_version_id = %s::uuid
+                    """,
+                    (str(vid),),
+                )
+            except Exception:
+                continue
+            inner: dict[tuple[int, str], MooLpRateRow] = {}
+            for row in cur.fetchall():
+                age, gender, br, fee, modal, minf, maxf = row
+                inner[(int(age), str(gender))] = {
+                    "base_rate_per_1k": float(br),
+                    "policy_fee_annual": float(fee),
+                    "modal_factor": float(modal),
+                    "min_face": int(minf),
+                    "max_face": int(maxf),
+                }
+            if inner:
+                out[slug] = inner
+    return out
+
+
+def load_quote_grids_by_carrier_from_supabase() -> dict[str, tuple[dict[int, tuple[float, float]], dict[int, tuple[float, float]]]]:
+    """Assurity-style multiplier grids only."""
+    if psycopg is None:
+        raise RuntimeError("psycopg is required: pip install psycopg[binary]")
+    dsn = get_database_url()
+    if not dsn:
+        raise RuntimeError("DATABASE_URL or SUPABASE_URL + SUPABASE_DB_PASSWORD not set")
+    out: dict[str, tuple[dict[int, tuple[float, float]], dict[int, tuple[float, float]]]] = {}
+    with psycopg.connect(dsn) as conn:
+        for grid_key, carrier_slug, product_slug in QUOTE_GRID_PRODUCTS:
+            vid = resolve_active_product_version_id(
+                conn, carrier_slug=carrier_slug, product_slug=product_slug
+            )
+            if not vid:
+                continue
+            base, mults = load_grids_for_version(conn, vid)
+            if base and mults:
+                out[grid_key] = (base, mults)
+    return out
+
+
+def load_quote_bundle_from_supabase() -> tuple[
+    dict[str, tuple[dict[int, tuple[float, float]], dict[int, tuple[float, float]]]],
+    MooLpRatesBySlug,
+]:
+    """
+    Assurity grids + MoO LP base-rate tables. Either may be empty if not imported.
+    Raises if both are empty.
+    """
+    if psycopg is None:
+        raise RuntimeError("psycopg is required: pip install psycopg[binary]")
+    dsn = get_database_url()
+    if not dsn:
+        raise RuntimeError("DATABASE_URL or SUPABASE_URL + SUPABASE_DB_PASSWORD not set")
+    with psycopg.connect(dsn) as conn:
+        grids = {}
+        for grid_key, carrier_slug, product_slug in QUOTE_GRID_PRODUCTS:
+            vid = resolve_active_product_version_id(
+                conn, carrier_slug=carrier_slug, product_slug=product_slug
+            )
+            if not vid:
+                continue
+            base, mults = load_grids_for_version(conn, vid)
+            if base and mults:
+                grids[grid_key] = (base, mults)
+        moo = load_moo_lp_rates_from_supabase(conn)
+    if not grids and not moo:
+        raise RuntimeError(
+            "No quote data in DB. Import Assurity (import_from_sheets.py) and/or "
+            "MoO LP CSVs (import_moo_lp_csv.py after migration 004)."
+        )
+    return grids, moo
 
 
 def quote_backend_label() -> str:

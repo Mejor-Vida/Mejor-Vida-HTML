@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Cotización aproximada — Mejor Vida Insurance</title>
+  <title>Tus cotizaciones — Mejor Vida Insurance</title>
   <meta name="robots" content="noindex, follow" />
   
   <!-- Favicon -->
@@ -280,6 +280,15 @@
   <script>
     (function(){
       try {
+        var raw = sessionStorage.getItem('mvsQuoteResult');
+        if (raw) {
+          var j = JSON.parse(raw);
+          if (j && (j.lang === 'en' || j.lang === 'es')) {
+            sessionStorage.setItem('sessionLang', j.lang);
+            document.documentElement.className = 'lang-' + j.lang;
+            return;
+          }
+        }
         var navEntry = performance.getEntriesByType('navigation')[0];
         var isReload = navEntry && navEntry.type === 'reload';
         if (isReload) sessionStorage.removeItem('sessionLang');
@@ -374,172 +383,50 @@
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 500" preserveAspectRatio="none" aria-hidden="true"><path d="M 0 0 L 1200 0 C 900 350 300 150 0 500 L 0 0 Z" /></svg>
     </div>
     <div class="container text-center hero-content-overlay">
-      <h1 class="h2 fw-bold text-white mb-3" data-lang="es">Cotización aproximada de gastos finales</h1>
-      <h1 class="h2 fw-bold text-white mb-3" data-lang="en">Approximate final expense quote</h1>
-      <p class="fs-6 text-white opacity-90 mb-0 mx-auto" style="max-width:40rem;" data-lang="es">Completa el formulario para ver primas ilustrativas por aseguradora (cuando la tabla lo permita) y enviaremos el resumen por correo si lo indicas. Las cifras no son una oferta; Julie confirma elegibilidad y precios finales.</p>
-      <p class="fs-6 text-white opacity-90 mb-0 mx-auto" style="max-width:40rem;" data-lang="en">Complete the form for illustrative premiums by carrier (where our tool has rates). We can email a summary if you choose. Figures are not an offer—Julie confirms eligibility and final pricing.</p>
+      <h1 class="h2 fw-bold text-white mb-3" data-lang="es">Tus cotizaciones ilustrativas</h1>
+      <h1 class="h2 fw-bold text-white mb-3" data-lang="en">Your illustrative quotes</h1>
+      <p class="fs-6 text-white opacity-90 mb-0 mx-auto" style="max-width:40rem;" data-lang="es">Primas de referencia por aseguradora. Julie confirma elegibilidad y precios finales. Agenda una llamada abajo cuando quieras.</p>
+      <p class="fs-6 text-white opacity-90 mb-0 mx-auto" style="max-width:40rem;" data-lang="en">Reference premiums by carrier. Julie confirms eligibility and final pricing. Schedule a call below when you are ready.</p>
     </div>
   </section>
 
   <section class="flex-grow-1 py-5 bg-light">
     <div class="container" style="max-width:56rem;">
-      <p id="quote-form-error" class="alert alert-warning mb-4" hidden role="alert"></p>
+      <p id="quote-results-missing" class="alert alert-warning" hidden role="alert">
+        <span data-lang="es">No encontramos resultados de cotización. </span><span data-lang="en">We could not find quote results. </span>
+        <a href="quote.html" data-lang="es">Volver al formulario</a><a href="quote.html" data-lang="en">Back to the quote form</a>
+      </p>
 
-      <div class="bg-white rounded-3 p-4 shadow-sm quote-form-card mx-auto mb-4">
-        <form id="quote-form" class="needs-validation" novalidate>
-          <div class="row g-3">
-            <div class="col-md-6">
-              <label for="quote-first" class="form-label fw-semibold" data-lang="es">Nombre</label>
-              <label for="quote-first" class="form-label fw-semibold" data-lang="en">First name</label>
-              <input type="text" class="form-control" id="quote-first" name="firstName" required autocomplete="given-name" />
-            </div>
-            <div class="col-md-6">
-              <label for="quote-last" class="form-label fw-semibold" data-lang="es">Apellido</label>
-              <label for="quote-last" class="form-label fw-semibold" data-lang="en">Last name</label>
-              <input type="text" class="form-control" id="quote-last" name="lastName" required autocomplete="family-name" />
-            </div>
-            <div class="col-md-6">
-              <label for="quote-email" class="form-label fw-semibold">Email</label>
-              <input type="email" class="form-control" id="quote-email" name="email" required autocomplete="email" />
-            </div>
-            <div class="col-md-6">
-              <label for="quote-phone" class="form-label fw-semibold" data-lang="es">Teléfono</label>
-              <label for="quote-phone" class="form-label fw-semibold" data-lang="en">Phone</label>
-              <input type="tel" class="form-control" id="quote-phone" name="phone" required autocomplete="tel" />
-            </div>
-            <div class="col-12">
-              <span class="form-label fw-semibold d-block" data-lang="es">Fecha de nacimiento</span>
-              <span class="form-label fw-semibold d-block" data-lang="en">Date of birth</span>
-              <div class="row g-2">
-                <div class="col-4">
-                  <label for="quote-dob-month" class="form-label small mb-1 text-body-secondary" data-lang="es">Mes</label>
-                  <label for="quote-dob-month" class="form-label small mb-1 text-body-secondary" data-lang="en">Month</label>
-                  <select class="form-select" id="quote-dob-month" name="dobMonth" required autocomplete="bday-month" aria-required="true">
-                    <option value="">—</option>
-                  </select>
-                </div>
-                <div class="col-4">
-                  <label for="quote-dob-day" class="form-label small mb-1 text-body-secondary" data-lang="es">Día</label>
-                  <label for="quote-dob-day" class="form-label small mb-1 text-body-secondary" data-lang="en">Day</label>
-                  <select class="form-select" id="quote-dob-day" name="dobDay" required autocomplete="bday-day" aria-required="true">
-                    <option value="">—</option>
-                  </select>
-                </div>
-                <div class="col-4">
-                  <label for="quote-dob-year" class="form-label small mb-1 text-body-secondary" data-lang="es">Año</label>
-                  <label for="quote-dob-year" class="form-label small mb-1 text-body-secondary" data-lang="en">Year</label>
-                  <select class="form-select" id="quote-dob-year" name="dobYear" required autocomplete="bday-year" aria-required="true">
-                    <option value="">—</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <label for="quote-gender" class="form-label fw-semibold" data-lang="es">Sexo (para tabla)</label>
-              <label for="quote-gender" class="form-label fw-semibold" data-lang="en">Gender (for rate table)</label>
-              <select class="form-select" id="quote-gender" name="gender" required>
-                <option value="">—</option>
-                <option value="female">Femenino · Female</option>
-                <option value="male">Masculino · Male</option>
-              </select>
-            </div>
-            <div class="col-md-6">
-              <label for="quote-tobacco" class="form-label fw-semibold" data-lang="es">¿Tabaco / nicotina?</label>
-              <label for="quote-tobacco" class="form-label fw-semibold" data-lang="en">Tobacco / nicotine?</label>
-              <select class="form-select" id="quote-tobacco" name="tobacco">
-                <option value="no">No</option>
-                <option value="yes">Sí · Yes</option>
-              </select>
-            </div>
-            <div class="col-12">
-              <label for="quote-health" class="form-label fw-semibold" data-lang="es">Condiciones de salud importantes</label>
-              <label for="quote-health" class="form-label fw-semibold" data-lang="en">Major health conditions</label>
-              <select class="form-select" id="quote-health" name="healthCondition" required>
-                <option value="">—</option>
-                <option value="none">Ninguna importante · No major conditions</option>
-                <option value="diabetes">Diabetes</option>
-                <option value="hypertension">Presión alta · High blood pressure</option>
-                <option value="heart_disease">Enfermedad cardíaca · Heart disease</option>
-                <option value="copd_lung">EPOC / pulmón · COPD / lung disease</option>
-                <option value="stroke">Derrame / AIT · Stroke / TIA</option>
-                <option value="cancer">Cáncer · Cancer</option>
-                <option value="kidney_disease">Riñón · Kidney disease</option>
-                <option value="liver_disease">Hígado · Liver disease</option>
-                <option value="mental_health">Depresión / ansiedad (tratada) · Depression / anxiety (treated)</option>
-                <option value="other">Otra — describa abajo · Other — describe below</option>
-              </select>
-            </div>
-            <div class="col-12" id="quote-health-other-wrap">
-              <label for="quote-health-other" class="form-label fw-semibold" data-lang="es">Otra condición (requerida si eligió «Otra»)</label>
-              <label for="quote-health-other" class="form-label fw-semibold" data-lang="en">Other condition (required if you chose «Other»)</label>
-              <input type="text" class="form-control" id="quote-health-other" name="healthConditionOther" maxlength="500" autocomplete="off" />
-              <p class="form-text small mb-0" data-lang="es">Si no aplica, puede dejarlo en blanco.</p>
-              <p class="form-text small mb-0" data-lang="en">Leave blank if not applicable.</p>
-            </div>
-            <div class="col-12">
-              <div class="small border-start border-4 border-primary ps-3 py-2 bg-white rounded-end mb-0" style="color:#374151;">
-                <p class="mb-1 fw-semibold" style="color:#1a365d;" data-lang="es">¿Cómo se relaciona esto con las primas?</p>
-                <p class="mb-1 fw-semibold" style="color:#1a365d;" data-lang="en">How does this relate to the rates?</p>
-                <p class="mb-0" data-lang="es">Para gastos finales, <strong>Living Promise</strong> de Mutual of Omaha se presenta en <strong>dos</strong> diseños de beneficio (no hay un “tercer” plan de gastos finales en esta línea): <strong>Nivel (Level)</strong> cuando se puede calificar con las preguntas de salud de la solicitud (típicamente 45–85 años; hasta $50,000 NE) y primas más bajas; y <strong>Graduado (Graded)</strong> como vía simplificada con beneficio de muerte graduado (pago parcial en los primeros años de la póliza, luego el total), hasta $20,000 y edades típicas 45–80. En el mercado a menudo se habla de este tipo de cobertura como de emisión garantizada o simplificada, aunque la compañía no use siempre ese nombre. Otros productos de MoO (p. ej. Guaranteed ADvantage) son para necesidades distintas. La lista de salud nos ayuda a conocerte; <strong>Julie confirma</strong> qué opción aplica. Elija abajo una estimación de <strong>Nivel</strong> o <strong>Graduado</strong>.</p>
-                <p class="mb-0" data-lang="en">For final expense, Mutual of Omaha <strong>Living Promise</strong> is offered as <strong>two</strong> benefit designs—there isn’t a separate third final-expense tier in this product line: <strong>Level</strong> when you can qualify on the application health questions (typically ages 45–85; up to $50,000 in NE; lower premiums), and <strong>Graded</strong> as the simplified-issue path with a <strong>graded death benefit</strong> (partial payout in the early policy years, then full), up to $20,000 face and typically ages 45–80. Industry conversations often describe this kind of coverage as guaranteed-issue–style final expense even though the carrier may not use that exact label. Other MoO products (e.g. <strong>Guaranteed ADvantage</strong>) target different needs. The health list helps us understand you; <strong>Julie confirms</strong> what applies. Choose a <strong>Level</strong> or <strong>Graded</strong> estimate below.</p>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <label for="quote-benefit-plan" class="form-label fw-semibold" data-lang="es">Tipo de beneficio (cotización Mutual of Omaha)</label>
-              <label for="quote-benefit-plan" class="form-label fw-semibold" data-lang="en">Benefit type (Mutual of Omaha estimate)</label>
-              <select class="form-select" id="quote-benefit-plan" name="benefitPlan" aria-describedby="quote-benefit-plan-help">
-                <option value="level">Level · Nivel — salud favorable (~45–85), hasta $50k NE</option>
-                <option value="graded">Graded · Graduado — vía simplificada (~45–80), máx. $20k</option>
-              </select>
-              <p id="quote-benefit-plan-help" class="form-text small mb-0"><span data-lang="es">La cotización de Mutual of Omaha en esta herramienta corresponde a <strong>Living Promise</strong> (Nivel o Graduado). Assurity y el resto de las primas ilustrativas usan la tabla general.</span><span data-lang="en">The Mutual of Omaha figure here is <strong>Living Promise</strong> (Level or Graded). Assurity and the other illustrative premiums use the general rate table.</span></p>
-            </div>
-            <div class="col-md-6">
-              <label for="quote-coverage" class="form-label fw-semibold" data-lang="es">Monto de cobertura</label>
-              <label for="quote-coverage" class="form-label fw-semibold" data-lang="en">Coverage amount</label>
-              <select class="form-select" id="quote-coverage" name="coverageSelect" required aria-describedby="quote-coverage-help">
-                <option value="">—</option>
-              </select>
-              <p id="quote-coverage-help" class="form-text small mb-0">
-                <span data-lang="es">Nivel (Level): de $2,000 a $50,000 en incrementos de $1,000. Graduado (Graded): hasta $20,000.</span>
-                <span data-lang="en">Level: $2,000–$50,000 in $1,000 increments. Graded: up to $20,000.</span>
-              </p>
-            </div>
-            <div class="col-md-3">
-              <label for="quote-state" class="form-label fw-semibold" data-lang="es">Estado</label>
-              <label for="quote-state" class="form-label fw-semibold" data-lang="en">State</label>
-              <input type="text" class="form-control" id="quote-state" name="state" maxlength="2" value="NE" autocomplete="address-level1" />
-            </div>
-            <div class="col-md-3">
-              <label for="quote-zip" class="form-label fw-semibold">ZIP</label>
-              <input type="text" class="form-control" id="quote-zip" name="zip" autocomplete="postal-code" />
-            </div>
-          </div>
+      <div id="quote-results-main" hidden>
+        <p class="mb-3"><a href="quote.html" class="text-decoration-none fw-semibold" data-lang="es">← Volver al formulario de cotización</a><a href="quote.html" class="text-decoration-none fw-semibold" data-lang="en">← Back to quote form</a></p>
 
-          <hr class="my-4" />
-          <p class="small fw-semibold mb-2" style="color:#1a365d;" data-lang="es">Consentimientos (EE.UU. / marketing)</p>
-          <p class="small fw-semibold mb-2" style="color:#1a365d;" data-lang="en">Consents (U.S. / marketing)</p>
-          <p class="small text-body-secondary mb-3 border-start border-4 border-primary ps-3 py-2 bg-white rounded-end" data-lang="es">Mantenemos tu información confidencial. <strong>No vendemos</strong> tus datos personales ni los transferimos a <strong>otro agente</strong> sin tu consentimiento. Para tramitar una solicitud, podemos compartir solo lo necesario con la(s) aseguradora(s) que elijas. Más detalles en nuestra <a href="privacy-policy.html">política de privacidad</a>.</p>
-          <p class="small text-body-secondary mb-3 border-start border-4 border-primary ps-3 py-2 bg-white rounded-end" data-lang="en">We keep your information private. We <strong>do not sell</strong> your personal information or transfer it to <strong>another agent</strong> without your consent. To apply for coverage, we may share only what is necessary with the insurer(s) you select. More detail in our <a href="privacy-policy.html">privacy policy</a>.</p>
-          <div class="form-check mb-2">
-            <input class="form-check-input" type="checkbox" id="quote-consent-email" name="consentEmail" />
-            <label class="form-check-label small" for="quote-consent-email" data-lang="es">Acepto recibir correos sobre mi solicitud y servicios relacionados al correo indicado.</label>
-            <label class="form-check-label small" for="quote-consent-email" data-lang="en">I agree to receive email about my request and related services at the address above.</label>
-          </div>
-          <div class="form-check mb-2">
-            <input class="form-check-input" type="checkbox" id="quote-consent-call" name="consentCall" />
-            <label class="form-check-label small" for="quote-consent-call" data-lang="es">Acepto que Mejor Vida Insurance o sus representantes me llamen al número proporcionado (incl. automático / grabación según aplique).</label>
-            <label class="form-check-label small" for="quote-consent-call" data-lang="en">I agree Mejor Vida Insurance or its representatives may call me at the number provided (including autodialed / recorded where allowed).</label>
-          </div>
-          <div class="form-check mb-3">
-            <input class="form-check-input" type="checkbox" id="quote-consent-text" name="consentText" />
-            <label class="form-check-label small" for="quote-consent-text" data-lang="es">Acepto mensajes de texto al número proporcionado; pueden aplicar tarifas de mensajes/datos.</label>
-            <label class="form-check-label small" for="quote-consent-text" data-lang="en">I agree to text messages at the number provided; message &amp; data rates may apply.</label>
-          </div>
-          <p class="small text-body-secondary mb-3" data-lang="es">Debes marcar <strong>las tres</strong> casillas para continuar. Puedes retirar el consentimiento según nuestra política de privacidad.</p>
-          <p class="small text-body-secondary mb-3" data-lang="en">You must check <strong>all three</strong> boxes to continue. You may withdraw consent as described in our privacy policy.</p>
+        <h2 class="h5 fw-bold mb-3" style="color:#1a365d;" data-lang="es">Resultados por aseguradora</h2>
+        <h2 class="h5 fw-bold mb-3" style="color:#1a365d;" data-lang="en">Results by carrier</h2>
+        <div id="quote-results-cards" class="row row-cols-1 g-3 mb-4"></div>
 
-          <button type="submit" class="btn btn-primary-gold w-100 py-3 fw-bold rounded" id="quote-submit"></button>
-        </form>
+        <div id="quote-results-foot" class="mt-2 p-3 rounded-3 bg-white border mb-5" hidden>
+          <p class="small fw-semibold mb-1" data-lang="es">Aviso legal</p>
+          <p class="small fw-semibold mb-1" data-lang="en">Disclaimer</p>
+          <p class="small text-body-secondary mb-3" id="quote-disclaimer"></p>
+          <p class="small text-body-secondary mb-0" id="quote-meta"></p>
+        </div>
+
+        <div class="rounded-3 bg-white border p-4 shadow-sm mb-4">
+          <h2 class="h5 fw-bold mb-2" style="color:#1a365d;" data-lang="es">Agenda una llamada con Julie</h2>
+          <h2 class="h5 fw-bold mb-2" style="color:#1a365d;" data-lang="en">Schedule a call with Julie</h2>
+          <p class="small text-body-secondary mb-3" data-lang="es">Elige un horario en el calendario o abre el enlace en una nueva pestaña.</p>
+          <p class="small text-body-secondary mb-3" data-lang="en">Pick a time in the calendar or open the link in a new tab.</p>
+          <div id="schedule-embed-wrap" class="rounded-3 overflow-hidden border bg-light mb-3" style="min-height:700px;" hidden>
+            <iframe id="schedule-iframe" class="w-100 border-0 d-block" style="min-height:700px;" title="Schedule" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+          <a id="schedule-open-tab" href="#" target="_blank" rel="noopener" class="btn btn-primary btn-lg w-100 rounded fw-bold" hidden>
+            <span data-lang="es">Abrir agenda en nueva pestaña</span><span data-lang="en">Open scheduler in new tab</span>
+          </a>
+          <p id="schedule-no-link" class="small text-body-secondary mb-0" hidden>
+            <span data-lang="es">El enlace de agenda no está configurado en el servidor. Usa el teléfono o WhatsApp abajo para contactar a Julie.</span>
+            <span data-lang="en">The scheduling link is not configured on the server. Use the phone or WhatsApp below to reach Julie.</span>
+          </p>
+        </div>
       </div>
 
       <div class="bg-white rounded-3 p-4 shadow-sm text-center">
@@ -605,22 +492,8 @@
   <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
   <!-- Scripts -->
   <script src="script.js"></script>
-  <script>
-  (function () {
-    if (window.MVS_QUOTE_API) return;
-    var h = (location.hostname || '').toLowerCase();
-    if (h === 'localhost' || h === '127.0.0.1' || location.protocol === 'file:') {
-      window.MVS_QUOTE_API = 'http://127.0.0.1:8765';
-      return;
-    }
-    /* Production: same-origin /api/quote/* (Vercel serverless proxies to QUOTE_API_UPSTREAM). */
-    if (h === 'mejorvidainsurance.com' || h === 'www.mejorvidainsurance.com') {
-      window.MVS_QUOTE_API = location.origin;
-      return;
-    }
-  })();
-  </script>
-  <script src="js/quote-form.js"></script>
+  <!-- Optional: window.MVS_SCHEDULE_EMBED_URL = 'https://calendly.com/...?embed=true'; if different from API scheduleUrl -->
+  <script src="js/quote-results.js"></script>
 
   <!-- Mobile menu script -->
   <script>

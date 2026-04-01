@@ -76,24 +76,49 @@
         es: 'Seleccione una condición de salud de la lista.',
         en: 'Please select a health condition from the list.',
       },
+      birthdateRequired: {
+        es: 'Seleccione mes, día y año de nacimiento.',
+        en: 'Select month, day, and year of birth.',
+      },
+      birthdateInvalid: {
+        es: 'La fecha de nacimiento no es válida. Revise mes y día.',
+        en: 'That date of birth is not valid. Check month and day.',
+      },
+      birthdateOutOfRange: {
+        es: 'La edad debe estar entre {min} y {max} años para esta cotización (según la tabla de tarifas).',
+        en: 'Age must be between {min} and {max} for this quote (per our rate table).',
+      },
+      ageOrBirthdateRequired: {
+        es: 'Indique la fecha de nacimiento o la edad.',
+        en: 'Enter your date of birth or age.',
+      },
       coverageSelect: {
         es: 'Seleccione un monto de cobertura.',
         en: 'Please select a coverage amount.',
       },
       coverageOther: {
-        es: 'Si eligió «Otra cantidad», indique un monto entre $2,500 y $150,000.',
-        en: 'If you chose “Other amount,” enter an amount between $2,500 and $150,000.',
+        es: 'Elija un monto de la lista ($2,000 a $50,000 en Nivel; hasta $20,000 en Graduado).',
+        en: 'Choose an amount from the list ($2,000–$50,000 for Level; up to $20,000 for Graded).',
+      },
+      levelCoverageMax: {
+        es: 'Para Nivel (Level), el monto máximo en esta herramienta es $50,000.',
+        en: 'For Level, the maximum face amount in this tool is $50,000.',
+      },
+      gradedCoverage: {
+        es: 'Para estimación Graduado (Graded), el monto máximo es $20,000. Elija otro monto o use Nivel (Level) para cantidades mayores.',
+        en: 'For a Graded estimate, the maximum face amount is $20,000. Choose a lower amount or use Level for higher amounts.',
+      },
+      gradedAge: {
+        es: 'Para estimación Graduado (Graded), la edad debe estar entre 45 y 80 años.',
+        en: 'For a Graded estimate, age must be between 45 and 80.',
+      },
+      coverageOtherGraded: {
+        es: 'Con Graduado (Graded), «Otra cantidad» no puede superar $20,000.',
+        en: 'With Graded, “Other amount” cannot exceed $20,000.',
       },
     };
     var bag = m[key];
     return bag ? bag[L] : key;
-  }
-
-  function reasonLabel(code) {
-    var k = 'reason_' + String(code || '').replace(/[^a-z0-9_]/gi, '_');
-    var msg = t(k);
-    if (msg === k) return t('reason_default');
-    return msg;
   }
 
   function headersJson() {
@@ -110,124 +135,174 @@
     return r.json();
   }
 
-  function money(n) {
-    if (n == null || isNaN(n)) return '—';
-    return (
-      '$' +
-      Number(n).toLocaleString(undefined, {
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2,
-      })
-    );
+  var _ageMin = 45;
+  var _ageMax = 85;
+
+  function pad2(n) {
+    var x = parseInt(n, 10);
+    return x < 10 ? '0' + x : String(x);
   }
 
-  function wireOptions(opts) {
-    var age = document.getElementById('quote-age');
-    if (age && opts.ageMin != null && opts.ageMax != null) {
-      age.min = String(opts.ageMin);
-      age.max = String(opts.ageMax);
-      age.placeholder = opts.ageMin + '–' + opts.ageMax;
+  function daysInMonth(year, month) {
+    var y = parseInt(year, 10);
+    var m = parseInt(month, 10);
+    return new Date(y, m, 0).getDate();
+  }
+
+  function computeAgeFromYmd(y, m, d) {
+    var ty = new Date().getFullYear();
+    var tm = new Date().getMonth() + 1;
+    var td = new Date().getDate();
+    var age = ty - y;
+    if (tm < m || (tm === m && td < d)) age--;
+    return age;
+  }
+
+  function syncDobDays() {
+    var ysel = document.getElementById('quote-dob-year');
+    var msel = document.getElementById('quote-dob-month');
+    var dsel = document.getElementById('quote-dob-day');
+    if (!ysel || !msel || !dsel) return;
+    var y = ysel.value;
+    var m = msel.value;
+    var prev = dsel.value;
+    if (!y || !m) {
+      dsel.innerHTML = '<option value="">—</option>';
+      return;
+    }
+    var dim = daysInMonth(y, m);
+    dsel.innerHTML = '<option value="">—</option>';
+    for (var di = 1; di <= dim; di++) {
+      var op = document.createElement('option');
+      op.value = String(di);
+      op.textContent = String(di);
+      dsel.appendChild(op);
+    }
+    if (prev && parseInt(prev, 10) <= dim) dsel.value = prev;
+  }
+
+  function fillDobMonthOptions() {
+    var msel = document.getElementById('quote-dob-month');
+    if (!msel || msel.querySelector('option[value="1"]')) return;
+    var MONTHS_BI = [
+      'Jan · Ene',
+      'Feb · Feb',
+      'Mar · Mar',
+      'Apr · Abr',
+      'May · May',
+      'Jun · Jun',
+      'Jul · Jul',
+      'Aug · Ago',
+      'Sep · Sep',
+      'Oct · Oct',
+      'Nov · Nov',
+      'Dec · Dic',
+    ];
+    for (var mi = 1; mi <= 12; mi++) {
+      var op = document.createElement('option');
+      op.value = String(mi);
+      op.textContent = pad2(mi) + ' — ' + MONTHS_BI[mi - 1];
+      msel.appendChild(op);
     }
   }
 
-  var COVERAGE_OTHER_MIN = 2500;
-  var COVERAGE_OTHER_MAX = 150000;
+  function fillDobYearOptions() {
+    var ysel = document.getElementById('quote-dob-year');
+    if (!ysel) return;
+    var cur = new Date().getFullYear();
+    var ylo = cur - _ageMax;
+    var yhi = cur - _ageMin;
+    ysel.innerHTML = '<option value="">—</option>';
+    for (var y = yhi; y >= ylo; y--) {
+      var op = document.createElement('option');
+      op.value = String(y);
+      op.textContent = String(y);
+      ysel.appendChild(op);
+    }
+  }
 
-  function parseCoverageOtherInput(raw) {
-    var n = parseInt(String(raw || '').replace(/[^\d]/g, ''), 10);
-    return isNaN(n) ? NaN : n;
+  function wireOptions(opts) {
+    if (opts && opts.ageMin != null) _ageMin = opts.ageMin;
+    if (opts && opts.ageMax != null) _ageMax = opts.ageMax;
+    fillDobYearOptions();
+    syncDobDays();
+  }
+
+  var LEVEL_MAX_COVERAGE = 50000;
+  var GRADED_MAX_COVERAGE = 20000;
+  var GRADED_AGE_MIN = 45;
+  var GRADED_AGE_MAX = 80;
+
+  function formatUsd(n) {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      maximumFractionDigits: 0,
+    }).format(n);
+  }
+
+  function coverageGroupTitle(lo, hi, lang) {
+    if (lang === 'es') return 'De ' + formatUsd(lo) + ' a ' + formatUsd(hi);
+    return formatUsd(lo) + ' – ' + formatUsd(hi);
+  }
+
+  function appendThousandStepRange(parent, from, to) {
+    for (var a = from; a <= to; a += 1000) {
+      var opt = document.createElement('option');
+      opt.value = String(a);
+      opt.textContent = formatUsd(a);
+      parent.appendChild(opt);
+    }
+  }
+
+  /** Level: $2k–$50k by $1k. Graded: $2k–$20k by $1k. Optgroups keep long lists scannable. */
+  function populateCoverageSelect() {
+    var sel = document.getElementById('quote-coverage');
+    if (!sel) return;
+    var maxAmount = benefitPlanValue() === 'graded' ? GRADED_MAX_COVERAGE : LEVEL_MAX_COVERAGE;
+    var lang = currentLang();
+    var previous = sel.value;
+
+    sel.textContent = '';
+    var placeholder = document.createElement('option');
+    placeholder.value = '';
+    placeholder.textContent = lang === 'es' ? '— Elija el monto —' : '— Select amount —';
+    sel.appendChild(placeholder);
+
+    function addGroup(lo, hi) {
+      hi = Math.min(hi, maxAmount);
+      if (lo > hi) return;
+      var og = document.createElement('optgroup');
+      og.label = coverageGroupTitle(lo, hi, lang);
+      appendThousandStepRange(og, lo, hi);
+      sel.appendChild(og);
+    }
+
+    if (maxAmount >= 2000) addGroup(2000, Math.min(9000, maxAmount));
+    if (maxAmount >= 10000) {
+      var midEnd = maxAmount <= 24000 ? maxAmount : 24000;
+      addGroup(10000, midEnd);
+    }
+    if (maxAmount >= 25000) addGroup(25000, maxAmount);
+
+    var want = parseInt(previous, 10);
+    if (!isNaN(want) && want >= 2000 && want <= maxAmount && want % 1000 === 0) {
+      sel.value = String(want);
+    } else if (!isNaN(want) && want > maxAmount) {
+      sel.value = String(maxAmount);
+    }
   }
 
   function resolvedCoverageAmount() {
     var sel = document.getElementById('quote-coverage');
-    var oIn = document.getElementById('quote-coverage-other');
     var v = sel ? sel.value : '';
-    if (v === 'other') {
-      return oIn ? parseCoverageOtherInput(oIn.value) : NaN;
-    }
     if (!v) return NaN;
     return parseInt(v, 10);
   }
 
-  function syncCoverageOtherField() {
-    var sel = document.getElementById('quote-coverage');
-    var wrap = document.getElementById('quote-coverage-other-wrap');
-    var other = document.getElementById('quote-coverage-other');
-    if (!sel || !other) return;
-    var isOther = sel.value === 'other';
-    if (wrap) wrap.classList.toggle('opacity-50', !isOther);
-    other.disabled = !isOther;
-    other.setAttribute('aria-required', isOther ? 'true' : 'false');
-  }
-
-  function renderCarriers(carriers, data) {
-    var wrap = document.getElementById('quote-results-cards');
-    if (!wrap) return;
-    wrap.innerHTML = '';
-    (carriers || []).forEach(function (c) {
-      var card = document.createElement('div');
-      card.className = 'quote-carrier-card border rounded-3 p-3 bg-white shadow-sm';
-      var top = document.createElement('div');
-      top.className = 'd-flex align-items-center gap-3 mb-2';
-      if (c.logo) {
-        var img = document.createElement('img');
-        img.src = c.logo;
-        img.alt = '';
-        img.className = 'quote-carrier-logo';
-        img.width = 120;
-        img.height == null;
-        img.style.maxHeight = '40px';
-        img.style.width = 'auto';
-        img.style.objectFit = 'contain';
-        top.appendChild(img);
-      }
-      var ttl = document.createElement('strong');
-      ttl.className = 'text-primary';
-      ttl.textContent = c.carrierName || c.carrierKey || '';
-      top.appendChild(ttl);
-      card.appendChild(top);
-
-      if (c.qualified && c.monthly != null) {
-        var p = document.createElement('p');
-        p.className = 'mb-1 fw-semibold';
-        p.textContent = money(c.monthly) + ' / ' + t('monthly');
-        var cove = document.createElement('p');
-        cove.className = 'small text-body-secondary mb-0';
-        cove.textContent =
-          t('coverage') + ': $' + Number(c.coverage).toLocaleString();
-        card.appendChild(p);
-        card.appendChild(cove);
-      } else {
-        var r = document.createElement('p');
-        r.className = 'small text-body-secondary mb-1';
-        r.textContent = reasonLabel(c.reason);
-        card.appendChild(r);
-      }
-      wrap.appendChild(card);
-    });
-
-    var foot = document.getElementById('quote-results-foot');
-    if (foot) {
-      foot.hidden = false;
-      var disc = document.getElementById('quote-disclaimer');
-      if (disc && data && data.disclaimer) disc.textContent = data.disclaimer;
-      var sched = document.getElementById('quote-schedule');
-      if (sched && data && data.scheduleUrl) {
-        sched.href = data.scheduleUrl;
-        sched.hidden = false;
-      } else if (sched) {
-        sched.hidden = true;
-      }
-      var meta = document.getElementById('quote-meta');
-      if (meta) {
-        var parts = [];
-        if (data.leadSaved) parts.push(t('savedNote'));
-        else if (data.leadError) parts.push(t('leadWarn'));
-        if (data.emailSent) parts.push(t('emailSent'));
-        else parts.push(t('emailSkipped'));
-        meta.textContent = parts.join(' ');
-      }
-    }
+  function benefitPlanValue() {
+    var el = document.getElementById('quote-benefit-plan');
+    return el && el.value === 'graded' ? 'graded' : 'level';
   }
 
   function collectForm() {
@@ -237,12 +312,33 @@
     var health = healthEl ? healthEl.value.trim() : '';
     var otherEl = document.getElementById('quote-health-other');
     var other = otherEl ? otherEl.value.trim() : '';
+    var y = (document.getElementById('quote-dob-year') || {}).value || '';
+    var m = (document.getElementById('quote-dob-month') || {}).value || '';
+    var d = (document.getElementById('quote-dob-day') || {}).value || '';
+    var dateOfBirth = '';
+    var age = NaN;
+    if (y && m && d) {
+      var yi = parseInt(y, 10);
+      var mi = parseInt(m, 10);
+      var di = parseInt(d, 10);
+      if (di >= 1 && di <= daysInMonth(yi, mi)) {
+        dateOfBirth = y + '-' + pad2(m) + '-' + pad2(d);
+        age = computeAgeFromYmd(yi, mi, di);
+      }
+    } else {
+      var legacyAgeEl = document.getElementById('quote-age');
+      if (legacyAgeEl && legacyAgeEl.value !== '') {
+        var la = parseInt(legacyAgeEl.value, 10);
+        if (!isNaN(la)) age = la;
+      }
+    }
     return {
       firstName: (document.getElementById('quote-first') || {}).value || '',
       lastName: (document.getElementById('quote-last') || {}).value || '',
       email: (document.getElementById('quote-email') || {}).value || '',
       phone: phone,
-      age: parseInt((document.getElementById('quote-age') || {}).value, 10),
+      dateOfBirth: dateOfBirth,
+      age: age,
       gender: (document.getElementById('quote-gender') || {}).value || '',
       coverage: resolvedCoverageAmount(),
       tobacco: (document.getElementById('quote-tobacco') || {}).value || 'no',
@@ -254,7 +350,50 @@
       consentEmail: !!(document.getElementById('quote-consent-email') || {}).checked,
       consentCall: !!(document.getElementById('quote-consent-call') || {}).checked,
       consentText: !!(document.getElementById('quote-consent-text') || {}).checked,
+      benefitPlan: benefitPlanValue(),
     };
+  }
+
+  function birthdateRangeMsg() {
+    return t('birthdateOutOfRange')
+      .replace(/\{min\}/g, String(_ageMin))
+      .replace(/\{max\}/g, String(_ageMax));
+  }
+
+  function mapServerSubmitError(code, detail) {
+    if (code === 'invalid_date_of_birth' || code === 'dob_future') return t('birthdateInvalid');
+    if (code === 'dob_required') return t('ageOrBirthdateRequired');
+    if (code && String(code).indexOf('age_out_of_range') === 0) {
+      var parts = /^age_out_of_range:(\d+)-(\d+)$/.exec(String(code));
+      if (parts)
+        return t('birthdateOutOfRange')
+          .replace(/\{min\}/g, parts[1])
+          .replace(/\{max\}/g, parts[2]);
+      return birthdateRangeMsg();
+    }
+    if (code === 'consent_all_required') return t('validation');
+    if (code === 'invalid_email') {
+      return currentLang() === 'es' ? 'Revise el correo electrónico.' : 'Please check the email address.';
+    }
+    if (code === 'name_required') {
+      return currentLang() === 'es' ? 'Nombre y apellido son obligatorios.' : 'First and last name are required.';
+    }
+    if (code === 'phone_required') {
+      return currentLang() === 'es' ? 'El teléfono no es válido.' : 'Phone number is not valid.';
+    }
+    if (code === 'lead_persist_failed' && detail) return String(detail).slice(0, 280);
+    if (code === 'graded_coverage_max_20000') return t('gradedCoverage');
+    if (code === 'level_coverage_max_50000') return t('levelCoverageMax');
+    if (code && String(code).indexOf('graded_age_out_of_range') === 0) {
+      var gp = /^graded_age_out_of_range:(\d+)-(\d+)$/.exec(String(code));
+      if (gp) {
+        return currentLang() === 'es'
+          ? 'Para estimación Graduado (Graded), la edad debe estar entre ' + gp[1] + ' y ' + gp[2] + ' años.'
+          : 'For a Graded estimate, age must be between ' + gp[1] + ' and ' + gp[2] + '.';
+      }
+      return t('gradedAge');
+    }
+    return null;
   }
 
   function syncHealthOtherField() {
@@ -280,6 +419,12 @@
       }
       return;
     }
+
+    fillDobMonthOptions();
+    var dobYear = document.getElementById('quote-dob-year');
+    var dobMonth = document.getElementById('quote-dob-month');
+    if (dobYear) dobYear.addEventListener('change', syncDobDays);
+    if (dobMonth) dobMonth.addEventListener('change', syncDobDays);
 
     fetchJson('/api/quote/options')
       .then(function (j) {
@@ -309,16 +454,14 @@
     syncHealthOtherField();
 
     var covSel = document.getElementById('quote-coverage');
-    var covOther = document.getElementById('quote-coverage-other');
-    if (covSel) {
-      covSel.addEventListener('change', syncCoverageOtherField);
-    }
-    if (covOther) {
-      covOther.addEventListener('input', function () {
-        if (errEl && errEl.textContent === t('coverageOther')) errEl.hidden = true;
+    populateCoverageSelect();
+
+    var bpEl = document.getElementById('quote-benefit-plan');
+    if (bpEl) {
+      bpEl.addEventListener('change', function () {
+        populateCoverageSelect();
       });
     }
-    syncCoverageOtherField();
 
     form.addEventListener('submit', function (e) {
       e.preventDefault();
@@ -347,17 +490,21 @@
         }
         return;
       }
-      if (
-        covChoice === 'other' &&
-        (isNaN(payload.coverage) ||
-          payload.coverage < COVERAGE_OTHER_MIN ||
-          payload.coverage > COVERAGE_OTHER_MAX)
-      ) {
-        if (errEl) {
-          errEl.hidden = false;
-          errEl.textContent = t('coverageOther');
+      if (benefitPlanValue() === 'graded') {
+        if (!isNaN(payload.age) && (payload.age < GRADED_AGE_MIN || payload.age > GRADED_AGE_MAX)) {
+          if (errEl) {
+            errEl.hidden = false;
+            errEl.textContent = t('gradedAge');
+          }
+          return;
         }
-        return;
+        if (!isNaN(payload.coverage) && payload.coverage > GRADED_MAX_COVERAGE) {
+          if (errEl) {
+            errEl.hidden = false;
+            errEl.textContent = t('gradedCoverage');
+          }
+          return;
+        }
       }
       if (isNaN(payload.coverage)) {
         if (errEl) {
@@ -373,6 +520,25 @@
         }
         return;
       }
+      if (isNaN(payload.age)) {
+        if (errEl) {
+          errEl.hidden = false;
+          errEl.textContent = document.getElementById('quote-age')
+            ? t('ageOrBirthdateRequired')
+            : t('birthdateRequired');
+        }
+        return;
+      }
+      if (payload.age < _ageMin || payload.age > _ageMax) {
+        if (errEl) {
+          errEl.hidden = false;
+          errEl.textContent = birthdateRangeMsg();
+        }
+        return;
+      }
+      var outbound = Object.assign({}, payload);
+      if (outbound.dateOfBirth) delete outbound.age;
+      else delete outbound.dateOfBirth;
       if (errEl) errEl.hidden = true;
       if (btn) {
         btn.disabled = true;
@@ -382,27 +548,50 @@
       fetch(apiBase() + '/api/quote/submit', {
         method: 'POST',
         headers: headersJson(),
-        body: JSON.stringify(payload),
+        body: JSON.stringify(outbound),
       })
         .then(function (r) {
-          return r.json().then(function (j) {
-            return { ok: r.ok, status: r.status, body: j };
+          return r.text().then(function (text) {
+            var j = null;
+            if (text) {
+              try {
+                j = JSON.parse(text);
+              } catch (err) {
+                j = null;
+              }
+            }
+            return { ok: r.ok, status: r.status, body: j, rawText: text };
           });
         })
         .then(function (res) {
           if (!res.ok || !res.body || !res.body.ok) {
-            throw new Error((res.body && res.body.error) || String(res.status));
+            var code = res.body && res.body.error;
+            var detail = res.body && res.body.detail;
+            var mapped = mapServerSubmitError(code, detail);
+            throw new Error(
+              mapped ||
+                (code ? String(code) : null) ||
+                (detail ? String(detail) : null) ||
+                (!res.body && res.status >= 400
+                  ? (currentLang() === 'es'
+                      ? 'Respuesta inválida del servidor (' + res.status + ').'
+                      : 'Invalid server response (' + res.status + ').')
+                  : t('submitFail'))
+            );
           }
-          window.__lastQuoteResponse = res.body;
-          var results = document.getElementById('quote-results');
-          if (results) results.hidden = false;
-          renderCarriers(res.body.carriers, res.body);
-          results && results.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          try {
+            sessionStorage.setItem(
+              'mvsQuoteResult',
+              JSON.stringify(Object.assign({}, res.body, { lang: currentLang() }))
+            );
+          } catch (e) {}
+          window.location.href = 'quote-results.html';
         })
-        .catch(function () {
+        .catch(function (e) {
           if (errEl) {
             errEl.hidden = false;
-            errEl.textContent = t('submitFail');
+            errEl.textContent =
+              e && e.message && e.message !== 'undefined' ? e.message : t('submitFail');
           }
         })
         .finally(function () {
@@ -416,11 +605,9 @@
     document.querySelectorAll('.lang-btn').forEach(function (btn) {
       btn.addEventListener('click', function () {
         setTimeout(function () {
-          if (window.__lastQuoteResponse && window.__lastQuoteResponse.carriers) {
-            renderCarriers(window.__lastQuoteResponse.carriers, window.__lastQuoteResponse);
-          }
           var sb = document.getElementById('quote-submit');
           if (sb && !sb.disabled) sb.textContent = t('seeEstimate');
+          populateCoverageSelect();
         }, 0);
       });
     });

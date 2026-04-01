@@ -42,7 +42,9 @@ def main() -> int:
     with psycopg.connect(dsn) as conn:
         conn.autocommit = False
         with conn.cursor() as cur:
-            cid = _get_or_create_carrier(cur, "assurity", "Assurity")
+            cid = _get_or_create_carrier(
+                cur, "assurity", "Assurity", "img/carriers/assurity-wordmark.png"
+            )
             pid = _get_or_create_product(
                 cur, cid, "whole_life_protect_plus", "Whole Life Protect+"
             )

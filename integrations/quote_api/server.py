@@ -23,6 +23,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+from datetime import date
 import re
 import sys
 import time
@@ -56,9 +57,9 @@ from integrations.google_sheets.export_hero_carousel_quotes import (
     parse_coverage_multiplier_examples,
 )
 from integrations.google_sheets.quote_engine import (
-    allowed_age_range_from_base,
-    allowed_coverages_from_mults,
-    compute_carrier_quotes_with_grids,
+    allowed_age_range_combined,
+    allowed_coverages_combined,
+    compute_carrier_quotes_from_grids_by_carrier,
     load_rate_chart_rows,
 )
 
@@ -66,10 +67,12 @@ _ROWS_CACHE: list[list[str]] | None = None
 _ROWS_AT: float = 0.0
 ROWS_TTL = 60.0
 
-# Quote grids: (base dict, mults dict). Source tag for debugging: "supabase" | "sheets".
-_GRID_CACHE: tuple[dict[int, tuple[float, float]], dict[int, tuple[float, float]]] | None = None
+# Quote grids: carrier_slug -> (base by age, mults by face). Cached with source tag.
+_GridByCarrier = dict[str, tuple[dict[int, tuple[float, float]], dict[int, tuple[float, float]]]]
+_MooLpRates = dict[str, dict[tuple[int, str], dict[str, Any]]]
+# (grids_by_carrier, moo_lp_rates or {}, source_label)
+_GRID_BUNDLE: tuple[_GridByCarrier, _MooLpRates, str] | None = None
 _GRID_AT: float = 0.0
-_GRID_SOURCE: str = ""
 
 # Website quote form: declared health (not used for automated underwriting in this tool).
 HEALTH_CONDITIONS: frozenset[str] = frozenset(
@@ -103,9 +106,17 @@ HEALTH_LABELS_ES: dict[str, str] = {
 }
 
 # Coverage: fixed menu on website + optional "other" band (quotes still sheet-driven).
-STANDARD_WEB_COVERAGES: frozenset[int] = frozenset({5000, 10000, 15000, 20000, 25000})
-COVERAGE_OTHER_MIN = 2_500
+STANDARD_WEB_COVERAGES: frozenset[int] = frozenset(
+    {2000, 5000, 10000, 15000, 20000, 25000, 30000, 40000, 50000}
+)
+COVERAGE_OTHER_MIN = 2_000
 COVERAGE_OTHER_MAX = 150_000
+# MoO Living Promise Level (NE): max face $50k on the quote tool (shared form).
+LEVEL_MAX_COVERAGE = 50_000
+# Living Promise Graded (NE): face cap $20k; issue ages typically 45–80 (confirm with carrier).
+GRADED_MAX_COVERAGE = 20_000
+GRADED_AGE_MIN = 45
+GRADED_AGE_MAX = 80
 
 HEALTH_LABELS_EN: dict[str, str] = {
     "none": "No major conditions declared",
@@ -137,55 +148,69 @@ def _quote_data_source_mode() -> str:
     return (os.environ.get("QUOTE_DATA_SOURCE") or "supabase").strip().lower()
 
 
-def get_cached_quote_grids() -> tuple[dict[int, tuple[float, float]], dict[int, tuple[float, float]], str]:
+def _quote_allow_sheet_fallback() -> bool:
+    v = (os.environ.get("QUOTE_ALLOW_SHEET_FALLBACK") or "").strip().lower()
+    return v in ("1", "true", "yes", "on")
+
+
+def get_cached_quote_bundle() -> tuple[_GridByCarrier, _MooLpRates, str]:
     """
-    Load Assurity-style base + coverage multiplier grids.
-    Returns (base_by_age, mults_by_face, source_label).
+    Load Assurity multiplier grids + optional MoO LP base-rate tables.
+    Sheets mode: Assurity from Carrier Rate Charts; MoO rates empty until imported to DB.
+    Supabase: `load_quote_bundle_from_supabase` (Assurity + moo_living_promise_rates).
     """
-    global _GRID_CACHE, _GRID_AT, _GRID_SOURCE
+    global _GRID_BUNDLE, _GRID_AT
     now = time.time()
-    if _GRID_CACHE is not None and now - _GRID_AT <= ROWS_TTL:
-        return _GRID_CACHE[0], _GRID_CACHE[1], _GRID_SOURCE
+    if _GRID_BUNDLE is not None and now - _GRID_AT <= ROWS_TTL:
+        return _GRID_BUNDLE[0], _GRID_BUNDLE[1], _GRID_BUNDLE[2]
 
     mode = _quote_data_source_mode()
-    base: dict[int, tuple[float, float]] = {}
-    mults: dict[int, tuple[float, float]] = {}
+    grids_by_carrier: _GridByCarrier = {}
+    moo_lp: _MooLpRates = {}
     source = "sheets"
 
     def _from_sheet() -> None:
-        nonlocal base, mults
+        nonlocal grids_by_carrier
         rows = get_cached_rows()
         base = parse_assurity_protect_plus_base(rows)
         mults = parse_coverage_multiplier_examples(rows)
+        if base and mults:
+            grids_by_carrier = {"assurity": (base, mults)}
 
     if mode == "sheets":
         _from_sheet()
     elif mode == "supabase":
-        from integrations.supabase.quote_data import load_quote_grids_from_supabase
+        from integrations.supabase.quote_data import load_quote_bundle_from_supabase
 
-        base, mults = load_quote_grids_from_supabase()
+        grids_by_carrier, moo_lp = load_quote_bundle_from_supabase()
         source = "supabase"
     else:
         try:
-            from integrations.supabase.quote_data import load_quote_grids_from_supabase
+            from integrations.supabase.quote_data import load_quote_bundle_from_supabase
 
-            base, mults = load_quote_grids_from_supabase()
+            grids_by_carrier, moo_lp = load_quote_bundle_from_supabase()
             source = "supabase"
         except Exception as e:
             if _quote_allow_sheet_fallback():
                 print(
-                    f"[quote-api] Supabase grids unavailable ({e!s}); "
-                    "QUOTE_ALLOW_SHEET_FALLBACK=1 → using Google Sheet."
+                    f"[quote-api] Supabase bundle unavailable ({e!s}); "
+                    "QUOTE_ALLOW_SHEET_FALLBACK=1 → using Google Sheet (Assurity only)."
                 )
                 _from_sheet()
+                moo_lp = {}
                 source = "sheets"
             else:
                 raise
 
-    _GRID_CACHE = (base, mults)
+    _GRID_BUNDLE = (grids_by_carrier, moo_lp, source)
     _GRID_AT = now
-    _GRID_SOURCE = source
-    return base, mults, source
+    return grids_by_carrier, moo_lp, source
+
+
+def get_cached_quote_grids() -> tuple[_GridByCarrier, str]:
+    """Backward-compatible: (grids_by_carrier, source) without MoO tables."""
+    g, _m, src = get_cached_quote_bundle()
+    return g, src
 
 
 def cors_headers(origin: str | None) -> dict[str, str]:
@@ -244,6 +269,8 @@ def lead_list_row(headers: list[str], data: dict[str, Any]) -> list[Any]:
             return str(data.get("coverage", ""))
         if hl == "age" or hl.endswith(" age"):
             return str(data.get("age", ""))
+        if "birth" in hl or "dob" in hl or ("fecha" in hl and "nac" in hl):
+            return str(data.get("dateOfBirth", data.get("date_of_birth", "")))
         if "gender" in hl or "sex" in hl:
             return str(data.get("gender", ""))
         if "language" in hl or hl == "lang":
@@ -375,15 +402,37 @@ def format_health_line(v: dict[str, Any], lang: str) -> str:
     return f"{lab}"
 
 
+def _age_from_birth(birth: date, today: date | None = None) -> int:
+    t = today or date.today()
+    return t.year - birth.year - ((t.month, t.day) < (birth.month, birth.day))
+
+
 def validate_body(o: dict[str, Any]) -> tuple[dict[str, Any] | None, str | None]:
     first = str(o.get("firstName", "")).strip()
     last = str(o.get("lastName", "")).strip()
     email = str(o.get("email", "")).strip().lower()
     phone = re.sub(r"[^\d+]", "", str(o.get("phone", "")).strip())[:20]
-    try:
-        age = int(o.get("age"))
-    except (TypeError, ValueError):
-        return None, "invalid_age"
+
+    dob_raw = str(o.get("dateOfBirth", "")).strip()
+    date_of_birth: str | None = None
+    age: int
+    if dob_raw:
+        try:
+            birth = date.fromisoformat(dob_raw)
+        except ValueError:
+            return None, "invalid_date_of_birth"
+        tday = date.today()
+        if birth > tday:
+            return None, "dob_future"
+        if birth.year < tday.year - 120:
+            return None, "invalid_date_of_birth"
+        age = _age_from_birth(birth, tday)
+        date_of_birth = dob_raw
+    else:
+        try:
+            age = int(o.get("age"))
+        except (TypeError, ValueError):
+            return None, "dob_required"
     gender = str(o.get("gender", "")).strip().lower()
     if gender in ("f", "female", "femenino", "mujer"):
         gender = "female"
@@ -406,8 +455,14 @@ def validate_body(o: dict[str, Any]) -> tuple[dict[str, Any] | None, str | None]
     if not (consent_email and consent_call and consent_text):
         return None, "consent_all_required"
 
-    base_g, _, __ = get_cached_quote_grids()
-    lo, hi = allowed_age_range_from_base(base_g)
+    benefit_plan_raw = str(o.get("benefitPlan", "level")).strip().lower()
+    if benefit_plan_raw in ("graded", "level"):
+        benefit_plan = benefit_plan_raw
+    else:
+        benefit_plan = "level"
+
+    grids_g, moo_g, __ = get_cached_quote_bundle()
+    lo, hi = allowed_age_range_combined(grids_g, moo_g)
     if age < lo or age > hi:
         return None, f"age_out_of_range:{lo}-{hi}"
     if coverage in STANDARD_WEB_COVERAGES:
@@ -416,6 +471,15 @@ def validate_body(o: dict[str, Any]) -> tuple[dict[str, Any] | None, str | None]
         pass
     else:
         return None, "coverage_not_allowed"
+
+    if benefit_plan == "level" and coverage > LEVEL_MAX_COVERAGE:
+        return None, "level_coverage_max_50000"
+
+    if benefit_plan == "graded":
+        if coverage > GRADED_MAX_COVERAGE:
+            return None, "graded_coverage_max_20000"
+        if age < GRADED_AGE_MIN or age > GRADED_AGE_MAX:
+            return None, f"graded_age_out_of_range:{GRADED_AGE_MIN}-{GRADED_AGE_MAX}"
 
     em = r"^[^@\s]+@[^@\s]+\.[^@\s]+$"
     if not email or not re.match(em, email):
@@ -453,7 +517,9 @@ def validate_body(o: dict[str, Any]) -> tuple[dict[str, Any] | None, str | None]
         "zip": str(o.get("zip", "")).strip()[:15],
         "healthCondition": hc,
         "healthConditionOther": ho,
+        "benefitPlan": benefit_plan,
         "source": "website_quote_form",
+        **({"dateOfBirth": date_of_birth} if date_of_birth else {}),
     }, None
 
 
@@ -469,11 +535,13 @@ def format_quote_summary_lang(carriers: list[dict], lang: str) -> str:
             lines.append(f"{c['carrierName']}: — ({reason})")
     disclaimer_es = (
         "Cifras aproximadas según tablas internas; no constituyen oferta. "
-        "El tabaco y la salud pueden cambiar la elegibilidad y la prima."
+        "Nivel vs Graduado son tipos de beneficio distintos; la salud determina la elegibilidad, no un precio distinto por cada condición. "
+        "Julie confirma el plan y la prima final."
     )
     disclaimer_en = (
         "Approximate figures from internal charts; not an offer. "
-        "Tobacco and health may change eligibility and premium."
+        "Level vs Graded are different benefit types; health affects eligibility, not a separate price for each condition. "
+        "Julie confirms the plan and final premium."
     )
     return "\n".join(lines) + "\n\n" + (disclaimer_es if lang == "es" else disclaimer_en)
 
@@ -540,9 +608,15 @@ def handle_submit(body: bytes, client_headers: dict[str, str]) -> tuple[int, dic
     )
 
     try:
-        base, mults, grid_src = get_cached_quote_grids()
-        carriers = compute_carrier_quotes_with_grids(
-            v["age"], v["gender"], v["coverage"], base, mults
+        grids_by_carrier, moo_lp, grid_src = get_cached_quote_bundle()
+        carriers = compute_carrier_quotes_from_grids_by_carrier(
+            v["age"],
+            v["gender"],
+            v["coverage"],
+            grids_by_carrier,
+            benefit_plan=v.get("benefitPlan") or "level",
+            tobacco=str(v.get("tobacco") or "no"),
+            moo_lp_rates=moo_lp or None,
         )
         q_text = format_quote_summary_lang(carriers, v["lang"])
         q_full = q_text + "\n\n" + health_summary
@@ -677,9 +751,9 @@ def run_server(port: int) -> None:
                 self.wfile.write(body)
                 return
             if self.path in ("/api/quote/options", "/api/quote/options/"):
-                base, mults, _src = get_cached_quote_grids()
-                lo, hi = allowed_age_range_from_base(base)
-                cov = allowed_coverages_from_mults(mults)
+                grids_by_carrier, moo_lp, _src = get_cached_quote_bundle()
+                lo, hi = allowed_age_range_combined(grids_by_carrier, moo_lp)
+                cov = allowed_coverages_combined(grids_by_carrier, moo_lp)
                 payload = {
                     "ok": True,
                     "ageMin": lo,
