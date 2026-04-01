@@ -632,6 +632,10 @@
       window.MVS_QUOTE_API = location.origin;
       return;
     }
+    /* Preview URLs, staging, or alternate domains: still use same-origin API if proxied. */
+    if (h && h !== 'localhost' && h !== '127.0.0.1') {
+      window.MVS_QUOTE_API = location.origin;
+    }
   })();
   </script>
   <script src="js/us-states.js"></script>

@@ -467,6 +467,17 @@
     var submitBtn0 = document.getElementById('quote-submit');
     if (submitBtn0) submitBtn0.textContent = submitButtonLabelForState();
 
+    /* State list is client-side (MVS_US_STATES); must work even if quote API URL is missing. */
+    populateStateSelect();
+    syncSubmitButtonLabel();
+    var stateSelEarly = document.getElementById('quote-state');
+    if (stateSelEarly) {
+      stateSelEarly.addEventListener('change', function () {
+        syncSubmitButtonLabel();
+        if (stateSelEarly.value && stateSelEarly.value !== 'NE') showStateNonNeModal();
+      });
+    }
+
     if (!isQuoteApiConfigured()) {
       if (errEl) {
         errEl.hidden = false;
@@ -512,15 +523,7 @@
 
     var covSel = document.getElementById('quote-coverage');
     populateCoverageSelect();
-    populateStateSelect();
     syncSubmitButtonLabel();
-    var stateSel = document.getElementById('quote-state');
-    if (stateSel) {
-      stateSel.addEventListener('change', function () {
-        syncSubmitButtonLabel();
-        if (stateSel.value && stateSel.value !== 'NE') showStateNonNeModal();
-      });
-    }
 
     form.addEventListener('submit', function (e) {
       e.preventDefault();
