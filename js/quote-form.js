@@ -158,6 +158,17 @@
     return age;
   }
 
+  /**
+   * Day count for the DOB pickers. Works in any order: year+month gives exact length;
+   * month alone uses a leap year so Feb 29 stays available until a non-leap year is chosen;
+   * year alone or neither uses 1–31 so day can be chosen before month/year.
+   */
+  function daysInMonthForDobPick(y, m) {
+    if (y && m) return daysInMonth(y, m);
+    if (m) return daysInMonth(2000, m);
+    return 31;
+  }
+
   function syncDobDays() {
     var ysel = document.getElementById('quote-dob-year');
     var msel = document.getElementById('quote-dob-month');
@@ -166,11 +177,7 @@
     var y = ysel.value;
     var m = msel.value;
     var prev = dsel.value;
-    if (!y || !m) {
-      dsel.innerHTML = '<option value="">—</option>';
-      return;
-    }
-    var dim = daysInMonth(y, m);
+    var dim = daysInMonthForDobPick(y, m);
     dsel.innerHTML = '<option value="">—</option>';
     for (var di = 1; di <= dim; di++) {
       var op = document.createElement('option');
@@ -421,6 +428,8 @@
     }
 
     fillDobMonthOptions();
+    fillDobYearOptions();
+    syncDobDays();
     var dobYear = document.getElementById('quote-dob-year');
     var dobMonth = document.getElementById('quote-dob-month');
     if (dobYear) dobYear.addEventListener('change', syncDobDays);
