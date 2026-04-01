@@ -198,6 +198,15 @@
       z-index: 1020;
       overflow: visible;
     }
+
+    /*
+      Logo image is ~244px in an 81px-tall bar. Overflow paints above the rest of the page
+      (below the header) because of z-index: 1020, so it intercepts clicks on the quote form.
+    */
+    header.sticky-top .header-logo-wrap {
+      overflow: hidden;
+      max-height: 81px;
+    }
     
     /* Mobile menu */
     .mobile-menu {

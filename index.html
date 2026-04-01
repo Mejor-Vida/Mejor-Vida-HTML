@@ -824,6 +824,12 @@
       z-index: 1020;
       overflow: visible;
     }
+
+    /* Tall logo + sticky z-index would otherwise steal clicks on content below the header. */
+    header.sticky-top .header-logo-wrap {
+      overflow: hidden;
+      max-height: 81px;
+    }
     
     /* Mobile menu */
     .mobile-menu {
