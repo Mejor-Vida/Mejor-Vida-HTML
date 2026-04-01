@@ -1,5 +1,3 @@
-—# Root requirements — tells Nixpacks/Railway this is a Python project
-# Actual quote API deps (mirrored from integrations/quote_api/requirements.txt)
 gspread>=6.0.0
 google-auth>=2.0.0
 google-auth-oauthlib>=1.0.0
