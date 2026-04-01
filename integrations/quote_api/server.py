@@ -1,13 +1,15 @@
 #!/usr/bin/env python3
 """
-Website quote API: sheet-backed premiums, Lead List append, HubSpot contact, optional email.
+Website quote API: Supabase-backed rate grids and lead capture; Google Sheets only for optional backup + manual import (`import_from_sheets.py`). HubSpot + optional email.
 
 Run from repo root:
   pip install -r integrations/quote_api/requirements.txt
   python3 integrations/quote_api/server.py --port 8765
 
 Env (see .env.local or quote_api/README.md):
-  GOOGLE_SHEETS_* , HUBSPOT_ACCESS_TOKEN
+  GOOGLE_SHEETS_* , HUBSPOT_ACCESS_TOKEN, DATABASE_URL (or SUPABASE_URL + SUPABASE_DB_PASSWORD),
+  QUOTE_DATA_SOURCE=supabase|sheets|auto (default supabase; auto + QUOTE_ALLOW_SHEET_FALLBACK=1 for rare sheet fallback)
+  LEAD_LIST_GOOGLE_SHEET_BACKUP — default on; set 0/false/no to skip mirroring Lead List to Sheets after Supabase insert
   Optional: RESEND_API_KEY, RESEND_FROM_EMAIL, MVS_SCHEDULE_CALL_URL,
             QUOTE_CORS_ORIGINS (comma-separated, or *),
             QUOTE_API_SHARED_SECRET (required if set — X-Quote-Secret header)
@@ -49,16 +51,25 @@ if _env.exists():
 import requests
 
 from integrations.google_sheets.client import open_sheet
+from integrations.google_sheets.export_hero_carousel_quotes import (
+    parse_assurity_protect_plus_base,
+    parse_coverage_multiplier_examples,
+)
 from integrations.google_sheets.quote_engine import (
-    allowed_age_range,
-    allowed_coverages,
-    compute_carrier_quotes,
+    allowed_age_range_from_base,
+    allowed_coverages_from_mults,
+    compute_carrier_quotes_with_grids,
     load_rate_chart_rows,
 )
 
 _ROWS_CACHE: list[list[str]] | None = None
 _ROWS_AT: float = 0.0
 ROWS_TTL = 60.0
+
+# Quote grids: (base dict, mults dict). Source tag for debugging: "supabase" | "sheets".
+_GRID_CACHE: tuple[dict[int, tuple[float, float]], dict[int, tuple[float, float]]] | None = None
+_GRID_AT: float = 0.0
+_GRID_SOURCE: str = ""
 
 # Website quote form: declared health (not used for automated underwriting in this tool).
 HEALTH_CONDITIONS: frozenset[str] = frozenset(
@@ -112,12 +123,69 @@ HEALTH_LABELS_EN: dict[str, str] = {
 
 
 def get_cached_rows() -> list[list[str]]:
+    """Sheet rows — only for import scripts or emergency QUOTE_ALLOW_SHEET_FALLBACK / QUOTE_DATA_SOURCE=sheets."""
     global _ROWS_CACHE, _ROWS_AT
     now = time.time()
     if _ROWS_CACHE is None or now - _ROWS_AT > ROWS_TTL:
         _ROWS_CACHE = load_rate_chart_rows()
         _ROWS_AT = now
     return _ROWS_CACHE
+
+
+def _quote_data_source_mode() -> str:
+    """auto | supabase | sheets — default supabase (no Sheet reads); auto + QUOTE_ALLOW_SHEET_FALLBACK for recovery."""
+    return (os.environ.get("QUOTE_DATA_SOURCE") or "supabase").strip().lower()
+
+
+def get_cached_quote_grids() -> tuple[dict[int, tuple[float, float]], dict[int, tuple[float, float]], str]:
+    """
+    Load Assurity-style base + coverage multiplier grids.
+    Returns (base_by_age, mults_by_face, source_label).
+    """
+    global _GRID_CACHE, _GRID_AT, _GRID_SOURCE
+    now = time.time()
+    if _GRID_CACHE is not None and now - _GRID_AT <= ROWS_TTL:
+        return _GRID_CACHE[0], _GRID_CACHE[1], _GRID_SOURCE
+
+    mode = _quote_data_source_mode()
+    base: dict[int, tuple[float, float]] = {}
+    mults: dict[int, tuple[float, float]] = {}
+    source = "sheets"
+
+    def _from_sheet() -> None:
+        nonlocal base, mults
+        rows = get_cached_rows()
+        base = parse_assurity_protect_plus_base(rows)
+        mults = parse_coverage_multiplier_examples(rows)
+
+    if mode == "sheets":
+        _from_sheet()
+    elif mode == "supabase":
+        from integrations.supabase.quote_data import load_quote_grids_from_supabase
+
+        base, mults = load_quote_grids_from_supabase()
+        source = "supabase"
+    else:
+        try:
+            from integrations.supabase.quote_data import load_quote_grids_from_supabase
+
+            base, mults = load_quote_grids_from_supabase()
+            source = "supabase"
+        except Exception as e:
+            if _quote_allow_sheet_fallback():
+                print(
+                    f"[quote-api] Supabase grids unavailable ({e!s}); "
+                    "QUOTE_ALLOW_SHEET_FALLBACK=1 → using Google Sheet."
+                )
+                _from_sheet()
+                source = "sheets"
+            else:
+                raise
+
+    _GRID_CACHE = (base, mults)
+    _GRID_AT = now
+    _GRID_SOURCE = source
+    return base, mults, source
 
 
 def cors_headers(origin: str | None) -> dict[str, str]:
@@ -160,6 +228,8 @@ def lead_list_row(headers: list[str], data: dict[str, Any]) -> list[Any]:
             return str(data.get("phone", ""))
         if hl == "state" or hl.endswith(" state"):
             return str(data.get("state", ""))
+        if ("lead" in hl and "id" in hl) or ("submission" in hl and "id" in hl):
+            return str(data.get("leadId", ""))
         if "city" in hl:
             return str(data.get("city", ""))
         if "zip" in hl or "postal" in hl:
@@ -191,7 +261,15 @@ def lead_list_row(headers: list[str], data: dict[str, Any]) -> list[Any]:
     return [cell_for(h) for h in headers]
 
 
-def append_lead_list(data: dict[str, Any]) -> None:
+def _lead_list_sheet_backup_enabled() -> bool:
+    raw = (os.environ.get("LEAD_LIST_GOOGLE_SHEET_BACKUP") or "").strip().lower()
+    if raw in ("0", "false", "no", "off"):
+        return False
+    return True
+
+
+def append_lead_list_google_sheet_backup(data: dict[str, Any]) -> None:
+    """Append one row to Lead List tab (backup mirror; failures are logged, not raised from persist)."""
     tab = os.environ.get("GOOGLE_SHEETS_TAB") or "Lead List"
     ws = open_sheet(sheet_name=tab)
     headers = ws.row_values(1)
@@ -328,8 +406,8 @@ def validate_body(o: dict[str, Any]) -> tuple[dict[str, Any] | None, str | None]
     if not (consent_email and consent_call and consent_text):
         return None, "consent_all_required"
 
-    rows = get_cached_rows()
-    lo, hi = allowed_age_range(rows)
+    base_g, _, __ = get_cached_quote_grids()
+    lo, hi = allowed_age_range_from_base(base_g)
     if age < lo or age > hi:
         return None, f"age_out_of_range:{lo}-{hi}"
     if coverage in STANDARD_WEB_COVERAGES:
@@ -375,7 +453,7 @@ def validate_body(o: dict[str, Any]) -> tuple[dict[str, Any] | None, str | None]
         "zip": str(o.get("zip", "")).strip()[:15],
         "healthCondition": hc,
         "healthConditionOther": ho,
-        "source": "website_quote_tool",
+        "source": "website_quote_form",
     }, None
 
 
@@ -439,14 +517,72 @@ def handle_submit(body: bytes, client_headers: dict[str, str]) -> tuple[int, dic
         return 400, {"ok": False, "error": err}
 
     assert v is not None
-    rows = get_cached_rows()
-    carriers = compute_carrier_quotes(v["age"], v["gender"], v["coverage"], rows)
-    q_text = format_quote_summary_lang(carriers, v["lang"])
+    from integrations.supabase.lead_submissions import (
+        insert_quote_lead_draft,
+        update_quote_lead_after_quote,
+        update_quote_lead_hubspot_sync,
+    )
+
+    try:
+        lead_id = insert_quote_lead_draft(o, v)
+    except Exception as e:
+        return 503, {"ok": False, "error": "lead_persist_failed", "detail": str(e)[:300]}
+
+    grid_src = ""
+    carriers: list[dict[str, Any]] = []
+    quote_status = "quote_failed"
+    quote_err: str | None = None
+    q_text = ""
+    q_full = ""
     h_line = format_health_line(v, v["lang"])
     health_summary = (
         f"Salud (declarada): {h_line}" if v["lang"] == "es" else f"Health (declared): {h_line}"
     )
-    q_full = q_text + "\n\n" + health_summary
+
+    try:
+        base, mults, grid_src = get_cached_quote_grids()
+        carriers = compute_carrier_quotes_with_grids(
+            v["age"], v["gender"], v["coverage"], base, mults
+        )
+        q_text = format_quote_summary_lang(carriers, v["lang"])
+        q_full = q_text + "\n\n" + health_summary
+        quote_status = "quote_generated"
+    except Exception as e:
+        quote_err = str(e)[:2000]
+        carriers = []
+
+    try:
+        update_quote_lead_after_quote(
+            lead_id,
+            quote_summary=q_full or None,
+            carriers_result=carriers or None,
+            quote_grid_source=grid_src or None,
+            quote_status=quote_status,
+            quote_error=quote_err,
+        )
+    except Exception as e:
+        print(f"[quote-api] update_quote_lead_after_quote failed: {e}", file=sys.stderr)
+
+    hs_id, hs_status = hubspot_upsert_contact(v)
+
+    if hs_id:
+        hss, crm_need, hse = "synced", False, None
+    elif hs_status == "skipped_no_token":
+        hss, crm_need, hse = "skipped", False, None
+    else:
+        hss, crm_need, hse = "failed", True, hs_status[:2000]
+
+    try:
+        update_quote_lead_hubspot_sync(
+            lead_id,
+            hubspot_contact_id=hs_id,
+            hubspot_sync_status=hss,
+            hubspot_sync_error=hse,
+            crm_sync_needed=crm_need,
+        )
+    except Exception as e:
+        print(f"[quote-api] update_quote_lead_hubspot_sync failed: {e}", file=sys.stderr)
+
     consent_blob = json.dumps(
         {
             "email": v["consentEmail"],
@@ -455,22 +591,21 @@ def handle_submit(body: bytes, client_headers: dict[str, str]) -> tuple[int, dic
             "ts": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
         }
     )
-    lead_payload = {
+    lead_mirror = {
         **v,
+        "leadId": lead_id,
         "healthSummary": health_summary,
         "quoteSummary": q_full,
         "consentSummary": consent_blob,
     }
-
-    lead_ok = True
-    lead_err = ""
-    try:
-        append_lead_list(lead_payload)
-    except Exception as e:
-        lead_ok = False
-        lead_err = str(e)[:500]
-
-    hs_id, hs_status = hubspot_upsert_contact(v)
+    if _lead_list_sheet_backup_enabled():
+        try:
+            append_lead_list_google_sheet_backup(lead_mirror)
+        except Exception as e:
+            print(
+                f"[quote-api] Lead List Google Sheet backup failed (Supabase OK): {e}",
+                file=sys.stderr,
+            )
 
     schedule_url = (os.environ.get("MVS_SCHEDULE_CALL_URL") or "").strip()
     emailed = False
@@ -485,11 +620,13 @@ def handle_submit(body: bytes, client_headers: dict[str, str]) -> tuple[int, dic
 
     return 200, {
         "ok": True,
+        "leadId": lead_id,
+        "quoteStatus": quote_status,
         "carriers": carriers,
         "disclaimer": q_text.split("\n\n")[-1] if "\n\n" in q_text else "",
         "scheduleUrl": schedule_url or None,
-        "leadSaved": lead_ok,
-        "leadError": lead_err if not lead_ok else None,
+        "leadSaved": True,
+        "leadError": None,
         "hubspotContactId": hs_id,
         "hubspotStatus": hs_status,
         "emailSent": emailed,
@@ -540,9 +677,9 @@ def run_server(port: int) -> None:
                 self.wfile.write(body)
                 return
             if self.path in ("/api/quote/options", "/api/quote/options/"):
-                rows = get_cached_rows()
-                lo, hi = allowed_age_range(rows)
-                cov = allowed_coverages(rows)
+                base, mults, _src = get_cached_quote_grids()
+                lo, hi = allowed_age_range_from_base(base)
+                cov = allowed_coverages_from_mults(mults)
                 payload = {
                     "ok": True,
                     "ageMin": lo,
