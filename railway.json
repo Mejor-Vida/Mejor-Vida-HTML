@@ -1,0 +1,9 @@
+{
+    "build": {
+          "builder": "NIXPACKS",
+          "buildCommand": "pip install -r integrations/quote_api/requirements.txt"
+    },
+    "deploy": {
+          "startCommand": "python3 integrations/quote_api/server.py --port $PORT"
+    }
+}
