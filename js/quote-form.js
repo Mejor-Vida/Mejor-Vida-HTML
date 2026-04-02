@@ -31,6 +31,14 @@
         es: 'No se pudo enviar. Inténtalo de nuevo o llámanos.',
         en: 'Could not submit. Try again or call us.',
       },
+      serverUnavailable: {
+        es: 'El servidor de cotizaciones no respondió (error del servidor). La cotización no se completó. Si esto continúa, revise Railway/Vercel o llame a la oficina.',
+        en: 'The quote server did not respond. Your quote was not completed. If this keeps happening, check Railway/Vercel or call the office.',
+      },
+      submitTimeout: {
+        es: 'La solicitud tardó demasiado. Inténtelo de nuevo o llame a la oficina.',
+        en: 'The request took too long. Try again or call the office.',
+      },
       submitting: { es: 'Enviando…', en: 'Submitting…' },
       seeEstimate: { es: 'Ver cotización aproximada', en: 'See approximate quote' },
       referralAgentHelp: {
@@ -779,10 +787,16 @@
         btn.textContent = t('submitting');
       }
 
+      var submitAbort = typeof AbortController !== 'undefined' ? new AbortController() : null;
+      var submitTimer = setTimeout(function () {
+        if (submitAbort) submitAbort.abort();
+      }, 60000);
+
       fetch(apiBase() + '/api/quote/submit', {
         method: 'POST',
         headers: headersJson(),
         body: JSON.stringify(outbound),
+        signal: submitAbort ? submitAbort.signal : undefined,
       })
         .then(function (r) {
           return r.text().then(function (text) {
@@ -799,6 +813,9 @@
         })
         .then(function (res) {
           if (!res.ok || !res.body || !res.body.ok) {
+            if (res.status === 502 || res.status === 503 || res.status === 504) {
+              throw new Error(t('serverUnavailable'));
+            }
             var code = res.body && res.body.error;
             var detail = res.body && res.body.detail;
             var mapped = mapServerSubmitError(code, detail);
@@ -824,11 +841,21 @@
         .catch(function (e) {
           if (errEl) {
             errEl.hidden = false;
-            errEl.textContent =
-              e && e.message && e.message !== 'undefined' ? e.message : t('submitFail');
+            if (e && (e.name === 'AbortError' || (e.message && String(e.message).indexOf('aborted') !== -1))) {
+              errEl.textContent = t('submitTimeout');
+            } else {
+              errEl.textContent =
+                e && e.message && e.message !== 'undefined' ? e.message : t('submitFail');
+            }
+            try {
+              errEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            } catch (err2) {
+              errEl.scrollIntoView(true);
+            }
           }
         })
         .finally(function () {
+          clearTimeout(submitTimer);
           if (btn) {
             btn.disabled = false;
             btn.textContent = submitButtonLabelForState();

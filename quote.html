@@ -2,6 +2,14 @@
 <html lang="es">
 <head>
   <meta charset="utf-8" />
+  <!-- Apex → www: Vercel 307s /api/* to www; same-origin fetch+POST can hang or fail. -->
+  <script>
+  (function () {
+    if (location.hostname === 'mejorvidainsurance.com') {
+      location.replace('https://www.mejorvidainsurance.com' + location.pathname + location.search + location.hash);
+    }
+  })();
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Cotización aproximada — Mejor Vida Insurance</title>

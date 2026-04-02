@@ -19,11 +19,19 @@ if _env.exists():
                 os.environ[k] = v
 
 
+def _append_ssl_and_timeout(url: str) -> str:
+    """Supabase expects SSL; avoid hanging TCP connects with connect_timeout."""
+    if re.search(r"sslmode\s*=", url, re.I):
+        return url
+    sep = "&" if "?" in url else "?"
+    return f"{url}{sep}sslmode=require&connect_timeout=15"
+
+
 def get_database_url() -> str | None:
     """Prefer DATABASE_URL; else build from SUPABASE_URL + SUPABASE_DB_PASSWORD."""
     direct = (os.environ.get("DATABASE_URL") or "").strip()
     if direct:
-        return direct
+        return _append_ssl_and_timeout(direct)
     base = (os.environ.get("SUPABASE_URL") or "").strip().rstrip("/")
     pw = (os.environ.get("SUPABASE_DB_PASSWORD") or "").strip()
     if not base or not pw or "supabase.co" not in base:
@@ -33,7 +41,8 @@ def get_database_url() -> str | None:
         return None
     ref = m.group(1)
     enc = quote_plus(pw, safe="")
-    return f"postgresql://postgres:{enc}@db.{ref}.supabase.co:5432/postgres"
+    built = f"postgresql://postgres:{enc}@db.{ref}.supabase.co:5432/postgres"
+    return _append_ssl_and_timeout(built)
 
 
 def get_service_role_key() -> str:

@@ -892,21 +892,40 @@ def run_server(port: int) -> None:
                 self.wfile.write(body)
                 return
             if self.path in ("/api/quote/options", "/api/quote/options/"):
-                grids_by_carrier, moo_lp, _src = get_cached_quote_bundle()
-                lo, hi = allowed_age_range_combined(grids_by_carrier, moo_lp)
-                cov = allowed_coverages_combined(grids_by_carrier, moo_lp)
-                payload = {
-                    "ok": True,
-                    "ageMin": lo,
-                    "ageMax": hi,
-                    "coverages": cov,
-                }
-                self.send_response(200)
-                self.send_header("Content-Type", "application/json; charset=utf-8")
-                for k, v in ch.items():
-                    self.send_header(k, v)
-                self.end_headers()
-                self.wfile.write(json.dumps(payload, ensure_ascii=False).encode("utf-8"))
+                try:
+                    grids_by_carrier, moo_lp, _src = get_cached_quote_bundle()
+                    lo, hi = allowed_age_range_combined(grids_by_carrier, moo_lp)
+                    cov = allowed_coverages_combined(grids_by_carrier, moo_lp)
+                    payload = {
+                        "ok": True,
+                        "ageMin": lo,
+                        "ageMax": hi,
+                        "coverages": cov,
+                    }
+                    self.send_response(200)
+                    self.send_header("Content-Type", "application/json; charset=utf-8")
+                    for k, v in ch.items():
+                        self.send_header(k, v)
+                    self.end_headers()
+                    self.wfile.write(json.dumps(payload, ensure_ascii=False).encode("utf-8"))
+                except Exception as e:
+                    err = str(e)
+                    print(f"[quote-api] GET /api/quote/options failed: {err!s}")
+                    self.send_response(500)
+                    self.send_header("Content-Type", "application/json; charset=utf-8")
+                    for k, v in ch.items():
+                        self.send_header(k, v)
+                    self.end_headers()
+                    self.wfile.write(
+                        json.dumps(
+                            {
+                                "ok": False,
+                                "error": "options_load_failed",
+                                "message": err[:800],
+                            },
+                            ensure_ascii=False,
+                        ).encode("utf-8")
+                    )
                 return
             self.send_error(404)
 
