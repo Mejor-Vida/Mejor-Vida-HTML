@@ -20,11 +20,21 @@ if _env.exists():
 
 
 def _append_ssl_and_timeout(url: str) -> str:
-    """Supabase expects SSL; avoid hanging TCP connects with connect_timeout."""
-    if re.search(r"sslmode\s*=", url, re.I):
-        return url
-    sep = "&" if "?" in url else "?"
-    return f"{url}{sep}sslmode=require&connect_timeout=15"
+    """Supabase expects SSL; avoid hanging TCP connects with connect_timeout.
+
+    gssencmode=disable avoids libpq trying GSSAPI first, which can break TLS to
+    Supavisor pooler (SSL closed unexpectedly) on some hosts (e.g. Railway).
+    """
+    out = url
+    if not re.search(r"sslmode\s*=", out, re.I):
+        sep = "&" if "?" in out else "?"
+        out = f"{out}{sep}sslmode=require&connect_timeout=15"
+    elif not re.search(r"connect_timeout\s*=", out, re.I):
+        out = f"{out}&connect_timeout=15"
+    if not re.search(r"gssencmode\s*=", out, re.I):
+        sep = "&" if "?" in out else "?"
+        out = f"{out}{sep}gssencmode=disable"
+    return out
 
 
 def get_database_url() -> str | None:

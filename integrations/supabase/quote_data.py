@@ -118,7 +118,9 @@ def load_quote_grids_from_supabase() -> tuple[dict[int, tuple[float, float]], di
     dsn = get_database_url()
     if not dsn:
         raise RuntimeError("DATABASE_URL or SUPABASE_URL + SUPABASE_DB_PASSWORD not set")
-    with psycopg.connect(dsn) as conn:
+    with psycopg.connect(
+        dsn, connect_timeout=15, prepare_threshold=0
+    ) as conn:
         vid = resolve_active_product_version_id(conn)
         if not vid:
             raise RuntimeError(
@@ -190,7 +192,9 @@ def load_quote_grids_by_carrier_from_supabase() -> dict[str, tuple[dict[int, tup
     if not dsn:
         raise RuntimeError("DATABASE_URL or SUPABASE_URL + SUPABASE_DB_PASSWORD not set")
     out: dict[str, tuple[dict[int, tuple[float, float]], dict[int, tuple[float, float]]]] = {}
-    with psycopg.connect(dsn) as conn:
+    with psycopg.connect(
+        dsn, connect_timeout=15, prepare_threshold=0
+    ) as conn:
         for grid_key, carrier_slug, product_slug in QUOTE_GRID_PRODUCTS:
             vid = resolve_active_product_version_id(
                 conn, carrier_slug=carrier_slug, product_slug=product_slug
@@ -216,7 +220,9 @@ def load_quote_bundle_from_supabase() -> tuple[
     dsn = get_database_url()
     if not dsn:
         raise RuntimeError("DATABASE_URL or SUPABASE_URL + SUPABASE_DB_PASSWORD not set")
-    with psycopg.connect(dsn) as conn:
+    with psycopg.connect(
+        dsn, connect_timeout=15, prepare_threshold=0
+    ) as conn:
         grids = {}
         for grid_key, carrier_slug, product_slug in QUOTE_GRID_PRODUCTS:
             vid = resolve_active_product_version_id(
