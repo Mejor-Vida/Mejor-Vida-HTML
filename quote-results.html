@@ -286,8 +286,6 @@
     html.lang-en [data-lang="es"] { display: none !important; }
 
     .quote-form-card { max-width: 42rem; }
-    .quote-carrier-card .quote-carrier-logo { max-height: 42px; width: auto; object-fit: contain; }
-    #quote-form-error { font-size: 0.9rem; }
   </style>
   <script>
     (function(){
@@ -395,65 +393,24 @@
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 500" preserveAspectRatio="none" aria-hidden="true"><path d="M 0 0 L 1200 0 C 900 350 300 150 0 500 L 0 0 Z" /></svg>
     </div>
     <div class="container text-center hero-content-overlay">
-      <h1 class="h2 fw-bold text-white mb-3" data-lang="es">Tus cotizaciones ilustrativas</h1>
-      <h1 class="h2 fw-bold text-white mb-3" data-lang="en">Your illustrative quotes</h1>
-      <p class="fs-6 text-white opacity-90 mb-0 mx-auto" style="max-width:40rem;" data-lang="es">Primas de referencia por aseguradora. Julie confirma elegibilidad y precios finales. Agenda una llamada abajo cuando quieras.</p>
-      <p class="fs-6 text-white opacity-90 mb-0 mx-auto" style="max-width:40rem;" data-lang="en">Reference premiums by carrier. Julie confirms eligibility and final pricing. Schedule a call below when you are ready.</p>
+      <h1 class="h2 fw-bold text-white mb-3" data-lang="es">Resultados de cotización</h1>
+      <h1 class="h2 fw-bold text-white mb-3" data-lang="en">Quote results</h1>
+      <p class="fs-6 text-white opacity-90 mb-0 mx-auto" style="max-width:40rem;" data-lang="es">La página de resultados en pantalla se actualizará cuando la nueva herramienta (Compulife) esté conectada.</p>
+      <p class="fs-6 text-white opacity-90 mb-0 mx-auto" style="max-width:40rem;" data-lang="en">This results page will be wired up when the new quoting tool (Compulife) is connected.</p>
     </div>
   </section>
 
   <section class="flex-grow-1 py-5 bg-light">
-    <div class="container" style="max-width:56rem;">
-      <p id="quote-results-missing" class="alert alert-warning" hidden role="alert">
-        <span data-lang="es">No encontramos resultados de cotización. </span><span data-lang="en">We could not find quote results. </span>
-        <a href="quote.html" data-lang="es">Volver al formulario</a><a href="quote.html" data-lang="en">Back to the quote form</a>
-      </p>
-
-      <div id="quote-results-main" hidden>
-        <p class="mb-3"><a href="quote.html" class="text-decoration-none fw-semibold" data-lang="es">← Volver al formulario de cotización</a><a href="quote.html" class="text-decoration-none fw-semibold" data-lang="en">← Back to quote form</a></p>
-
-        <div id="quote-referral-panel" class="alert alert-warning border border-warning mb-4 lh-base" role="status" hidden></div>
-        <div id="quote-moo-explainer" class="alert alert-info small mb-4 lh-base" role="status" hidden></div>
-
-        <div id="quote-results-carrier-section">
-          <h2 class="h5 fw-bold mb-3" style="color:#1a365d;" data-lang="es">Resultados por aseguradora</h2>
-          <h2 class="h5 fw-bold mb-3" style="color:#1a365d;" data-lang="en">Results by carrier</h2>
-          <div id="quote-results-cards" class="row row-cols-1 g-3 mb-4"></div>
-        </div>
-
-        <div id="quote-results-foot" class="mt-2 p-3 rounded-3 bg-white border mb-5" hidden>
-          <p class="small fw-semibold mb-1" data-lang="es">Aviso legal</p>
-          <p class="small fw-semibold mb-1" data-lang="en">Disclaimer</p>
-          <p class="small text-body-secondary mb-3" id="quote-disclaimer"></p>
-          <p class="small text-body-secondary mb-0" id="quote-meta"></p>
-        </div>
-
-        <div class="rounded-3 bg-white border p-4 shadow-sm mb-4">
-          <h2 class="h5 fw-bold mb-2" style="color:#1a365d;" data-lang="es">Agenda una llamada con Julie</h2>
-          <h2 class="h5 fw-bold mb-2" style="color:#1a365d;" data-lang="en">Schedule a call with Julie</h2>
-          <p class="small text-body-secondary mb-3" data-lang="es">Elige un horario en el calendario o abre el enlace en una nueva pestaña.</p>
-          <p class="small text-body-secondary mb-3" data-lang="en">Pick a time in the calendar or open the link in a new tab.</p>
-          <div id="schedule-embed-wrap" class="rounded-3 overflow-hidden border bg-light mb-3" style="min-height:700px;" hidden>
-            <iframe id="schedule-iframe" class="w-100 border-0 d-block" style="min-height:700px;" title="Schedule" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-          </div>
-          <a id="schedule-open-tab" href="#" target="_blank" rel="noopener" class="btn btn-primary btn-lg w-100 rounded fw-bold" hidden>
-            <span data-lang="es">Abrir agenda en nueva pestaña</span><span data-lang="en">Open scheduler in new tab</span>
-          </a>
-          <p id="schedule-no-link" class="small text-body-secondary mb-0" hidden>
-            <span data-lang="es">El enlace de agenda no está configurado en el servidor. Usa el teléfono o WhatsApp abajo para contactar a Julie.</span>
-            <span data-lang="en">The scheduling link is not configured on the server. Use the phone or WhatsApp below to reach Julie.</span>
-          </p>
-        </div>
-      </div>
-
-      <div class="bg-white rounded-3 p-4 shadow-sm text-center">
-        <h3 class="h6 fw-bold mb-2" style="color:#1a365d;" data-lang="es">¿Prefieres hablar primero?</h3>
-        <h3 class="h6 fw-bold mb-2" style="color:#1a365d;" data-lang="en">Prefer to talk first?</h3>
+    <div class="container" style="max-width:42rem;">
+      <div class="bg-white rounded-3 p-4 shadow-sm text-center mb-4">
+        <p class="mb-3" data-lang="es">Mientras tanto, Julie puede ayudarle por teléfono o WhatsApp, o use el contacto en el inicio.</p>
+        <p class="mb-4" data-lang="en">In the meantime, Julie can help by phone or WhatsApp, or use the contact section on the home page.</p>
         <div class="d-flex flex-wrap justify-content-center gap-2">
-          <a href="tel:+14025881125" class="btn btn-outline-primary btn-sm rounded fw-bold" data-lang="es"><i class="fas fa-phone me-1"></i>402-588-1125</a>
-          <a href="tel:+14025881125" class="btn btn-outline-primary btn-sm rounded fw-bold" data-lang="en"><i class="fas fa-phone me-1"></i>402-588-1125</a>
-          <a href="https://wa.me/14024405438?text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20seguro%20de%20gastos%20finales." target="_blank" rel="noopener" class="btn btn-success btn-sm rounded fw-bold" data-lang="es"><i class="fab fa-whatsapp me-1"></i>WhatsApp</a>
-          <a href="https://wa.me/14024405438?text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20seguro%20de%20gastos%20finales." target="_blank" rel="noopener" class="btn btn-success btn-sm rounded fw-bold" data-lang="en"><i class="fab fa-whatsapp me-1"></i>WhatsApp</a>
+          <a href="quote.html" class="btn btn-primary rounded fw-bold px-4" data-lang="es">Cotización</a>
+          <a href="quote.html" class="btn btn-primary rounded fw-bold px-4" data-lang="en">Quote</a>
+          <a href="index.html" class="btn btn-outline-primary rounded fw-bold px-4" data-lang="es">Inicio</a>
+          <a href="index.html" class="btn btn-outline-primary rounded fw-bold px-4" data-lang="en">Home</a>
+          <a href="tel:+14025881125" class="btn btn-outline-secondary rounded fw-bold px-4"><i class="fas fa-phone me-1"></i>402-588-1125</a>
         </div>
       </div>
     </div>
@@ -509,9 +466,6 @@
   <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
   <!-- Scripts -->
   <script src="script.js"></script>
-  <!-- Optional: window.MVS_SCHEDULE_EMBED_URL = 'https://calendly.com/...?embed=true'; if different from API scheduleUrl -->
-  <script src="js/quote-results.js"></script>
-
   <!-- Mobile menu script -->
   <script>
     // Mobile hamburger menu
