@@ -65,7 +65,9 @@ from integrations.google_sheets.quote_engine import (
 
 _ROWS_CACHE: list[list[str]] | None = None
 _ROWS_AT: float = 0.0
-ROWS_TTL = 60.0
+ROWS_TTL = float(os.environ.get("QUOTE_SHEET_CACHE_TTL", "60"))
+# Supabase rate grids change rarely; long TTL reduces DB load (see db_pool + pooler limits).
+GRID_BUNDLE_TTL = float(os.environ.get("QUOTE_GRID_CACHE_TTL", "3600"))
 
 # Quote grids: carrier_slug -> (base by age, mults by face). Cached with source tag.
 _GridByCarrier = dict[str, tuple[dict[int, tuple[float, float]], dict[int, tuple[float, float]]]]
@@ -250,7 +252,7 @@ def get_cached_quote_bundle() -> tuple[_GridByCarrier, _MooLpRates, str]:
     """
     global _GRID_BUNDLE, _GRID_AT
     now = time.time()
-    if _GRID_BUNDLE is not None and now - _GRID_AT <= ROWS_TTL:
+    if _GRID_BUNDLE is not None and now - _GRID_AT <= GRID_BUNDLE_TTL:
         return _GRID_BUNDLE[0], _GRID_BUNDLE[1], _GRID_BUNDLE[2]
 
     mode = _quote_data_source_mode()
@@ -904,6 +906,7 @@ def run_server(port: int) -> None:
                     }
                     self.send_response(200)
                     self.send_header("Content-Type", "application/json; charset=utf-8")
+                    self.send_header("Cache-Control", "public, max-age=120, s-maxage=300")
                     for k, v in ch.items():
                         self.send_header(k, v)
                     self.end_headers()

@@ -12,6 +12,7 @@ _root = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(_root))
 
 from integrations.supabase.config import get_database_url  # noqa: E402
+from integrations.supabase.db_pool import get_pool  # noqa: E402
 
 try:
     import psycopg
@@ -48,7 +49,7 @@ def insert_quote_lead_draft(raw_request: dict[str, Any], v: dict[str, Any]) -> s
     consent = _consent_from_validated(v)
     payload_obj: dict[str, Any] = {k: val for k, val in v.items() if k != "consentSummary"}
 
-    with psycopg.connect(dsn) as conn:
+    with get_pool().connection() as conn:
         with conn.cursor() as cur:
             cur.execute(
                 """
@@ -114,7 +115,7 @@ def update_quote_lead_after_quote(
         datetime.now(timezone.utc) if quote_status == "quote_generated" else None
     )
 
-    with psycopg.connect(dsn) as conn:
+    with get_pool().connection() as conn:
         with conn.cursor() as cur:
             cur.execute(
                 """
@@ -153,7 +154,7 @@ def update_quote_lead_hubspot_sync(
     if not dsn:
         raise RuntimeError("DATABASE_URL or SUPABASE_URL + SUPABASE_DB_PASSWORD not set")
 
-    with psycopg.connect(dsn) as conn:
+    with get_pool().connection() as conn:
         with conn.cursor() as cur:
             cur.execute(
                 """
