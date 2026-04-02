@@ -28,7 +28,15 @@ def _append_ssl_and_timeout(url: str) -> str:
 
 
 def get_database_url() -> str | None:
-    """Prefer DATABASE_URL; else build from SUPABASE_URL + SUPABASE_DB_PASSWORD."""
+    """Prefer DATABASE_URL; else build from SUPABASE_URL + SUPABASE_DB_PASSWORD.
+
+    Default uses the Supabase *session pooler* (aws-0-<region>.pooler.supabase.com:5432,
+    user postgres.<project_ref>) so hosts that cannot reach IPv6 (e.g. some Railway
+    runtimes) can still connect. Direct db.<ref>.supabase.co often resolves to IPv6 first.
+
+    Set SUPABASE_USE_DIRECT_DB=1 to force db.<ref>.supabase.co:5432 (postgres user).
+    Set SUPABASE_POOLER_REGION (or SUPABASE_REGION) if not us-west-2.
+    """
     direct = (os.environ.get("DATABASE_URL") or "").strip()
     if direct:
         return _append_ssl_and_timeout(direct)
@@ -41,7 +49,25 @@ def get_database_url() -> str | None:
         return None
     ref = m.group(1)
     enc = quote_plus(pw, safe="")
-    built = f"postgresql://postgres:{enc}@db.{ref}.supabase.co:5432/postgres"
+    use_direct = os.environ.get("SUPABASE_USE_DIRECT_DB", "").strip().lower() in (
+        "1",
+        "true",
+        "yes",
+        "on",
+    )
+    if use_direct:
+        built = f"postgresql://postgres:{enc}@db.{ref}.supabase.co:5432/postgres"
+    else:
+        region = (
+            os.environ.get("SUPABASE_POOLER_REGION")
+            or os.environ.get("SUPABASE_REGION")
+            or "us-west-2"
+        ).strip()
+        pooler_user = f"postgres.{ref}"
+        host = f"aws-0-{region}.pooler.supabase.com"
+        built = (
+            f"postgresql://{quote_plus(pooler_user, safe='')}:{enc}@{host}:5432/postgres"
+        )
     return _append_ssl_and_timeout(built)
 
 
