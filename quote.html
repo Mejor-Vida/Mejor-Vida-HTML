@@ -285,6 +285,12 @@
     .quote-form-card { max-width: 42rem; }
     .quote-carrier-card .quote-carrier-logo { max-height: 42px; width: auto; object-fit: contain; }
     #quote-form-error { font-size: 0.9rem; }
+    /* Quote form: consent group highlight when validation fails */
+    #quote-consent-group-wrap.quote-consent-invalid {
+      border: 2px solid var(--bs-danger);
+      border-radius: 0.375rem;
+      padding: 0.75rem;
+    }
   </style>
   <script>
     (function(){
@@ -516,6 +522,7 @@
           <p class="small fw-semibold mb-2" style="color:#1a365d;" data-lang="en">Consents (U.S. / marketing)</p>
           <p class="small text-body-secondary mb-3 border-start border-4 border-primary ps-3 py-2 bg-white rounded-end" data-lang="es">Mantenemos tu información confidencial. <strong>No vendemos</strong> tus datos personales ni los transferimos a <strong>otro agente</strong> sin tu consentimiento. Para tramitar una solicitud, podemos compartir solo lo necesario con la(s) aseguradora(s) que elijas. Más detalles en nuestra <a href="privacy-policy.html">política de privacidad</a>.</p>
           <p class="small text-body-secondary mb-3 border-start border-4 border-primary ps-3 py-2 bg-white rounded-end" data-lang="en">We keep your information private. We <strong>do not sell</strong> your personal information or transfer it to <strong>another agent</strong> without your consent. To apply for coverage, we may share only what is necessary with the insurer(s) you select. More detail in our <a href="privacy-policy.html">privacy policy</a>.</p>
+          <div id="quote-consent-group-wrap">
           <div class="form-check mb-2">
             <input class="form-check-input" type="checkbox" id="quote-consent-email" name="consentEmail" />
             <label class="form-check-label small" for="quote-consent-email" data-lang="es">Acepto recibir correos sobre mi solicitud y servicios relacionados al correo indicado.</label>
@@ -530,6 +537,7 @@
             <input class="form-check-input" type="checkbox" id="quote-consent-text" name="consentText" />
             <label class="form-check-label small" for="quote-consent-text" data-lang="es">Acepto mensajes de texto al número proporcionado; pueden aplicar tarifas de mensajes/datos.</label>
             <label class="form-check-label small" for="quote-consent-text" data-lang="en">I agree to text messages at the number provided; message &amp; data rates may apply.</label>
+          </div>
           </div>
           <p class="small text-body-secondary mb-3" data-lang="es">Debes marcar <strong>las tres</strong> casillas para continuar. Puedes retirar el consentimiento según nuestra política de privacidad.</p>
           <p class="small text-body-secondary mb-3" data-lang="en">You must check <strong>all three</strong> boxes to continue. You may withdraw consent as described in our privacy policy.</p>

@@ -120,9 +120,224 @@
         es: 'Con Graduado (Graded), «Otra cantidad» no puede superar $20,000.',
         en: 'With Graded, “Other amount” cannot exceed $20,000.',
       },
+      selectState: {
+        es: 'Seleccione su estado.',
+        en: 'Please select your state.',
+      },
+      firstNameRequired: {
+        es: 'Indique el nombre.',
+        en: 'Please enter your first name.',
+      },
+      lastNameRequired: {
+        es: 'Indique el apellido.',
+        en: 'Please enter your last name.',
+      },
+      emailRequired: {
+        es: 'Indique el correo electrónico.',
+        en: 'Please enter your email address.',
+      },
+      emailFormat: {
+        es: 'El correo electrónico no es válido.',
+        en: 'Please enter a valid email address.',
+      },
+      phoneRequired: {
+        es: 'Indique el número de teléfono.',
+        en: 'Please enter your phone number.',
+      },
+      phoneFormat: {
+        es: 'Use un teléfono válido (al menos 10 dígitos).',
+        en: 'Enter a valid phone number (at least 10 digits).',
+      },
+      genderRequired: {
+        es: 'Seleccione sexo para la tabla de tarifas.',
+        en: 'Please select gender for the rate table.',
+      },
     };
     var bag = m[key];
     return bag ? bag[L] : key;
+  }
+
+  function strTrim(s) {
+    return s == null ? '' : String(s).trim();
+  }
+
+  function emailLooksValid(s) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(strTrim(s));
+  }
+
+  function phoneDigitsLen(s) {
+    return String(s == null ? '' : s).replace(/\D/g, '').length;
+  }
+
+  var QUOTE_INVALID_IDS = [
+    'quote-state',
+    'quote-first',
+    'quote-last',
+    'quote-email',
+    'quote-phone',
+    'quote-dob-month',
+    'quote-dob-day',
+    'quote-dob-year',
+    'quote-gender',
+    'quote-health',
+    'quote-health-other',
+    'quote-coverage',
+    'quote-consent-email',
+    'quote-consent-call',
+    'quote-consent-text',
+  ];
+
+  function clearQuoteInvalidMarks() {
+    QUOTE_INVALID_IDS.forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) el.classList.remove('is-invalid');
+    });
+    var wrap = document.getElementById('quote-consent-group-wrap');
+    if (wrap) wrap.classList.remove('quote-consent-invalid');
+  }
+
+  function markInvalid(id) {
+    var el = document.getElementById(id);
+    if (el) el.classList.add('is-invalid');
+  }
+
+  function scrollToFirstQuoteInvalid() {
+    var form = document.getElementById('quote-form');
+    if (!form) return;
+    var inv = form.querySelector('.is-invalid');
+    if (inv) {
+      try {
+        inv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } catch (e) {
+        inv.scrollIntoView(true);
+      }
+    }
+  }
+
+  function maybeClearConsentWrap() {
+    var e = document.getElementById('quote-consent-email');
+    var c = document.getElementById('quote-consent-call');
+    var x = document.getElementById('quote-consent-text');
+    var wrap = document.getElementById('quote-consent-group-wrap');
+    if (!e || !c || !x || !wrap) return;
+    if (e.checked && c.checked && x.checked) {
+      wrap.classList.remove('quote-consent-invalid');
+      e.classList.remove('is-invalid');
+      c.classList.remove('is-invalid');
+      x.classList.remove('is-invalid');
+    }
+  }
+
+  /**
+   * Client-side validation with Bootstrap is-invalid marks. Returns banner message or null if ok.
+   */
+  function validateQuoteFormUi(payload, covSel) {
+    clearQuoteInvalidMarks();
+    var banner = null;
+    function first(msg) {
+      if (banner == null) banner = msg;
+    }
+
+    var stateEl = document.getElementById('quote-state');
+    if (!stateEl || !stateEl.value) {
+      markInvalid('quote-state');
+      first(t('selectState'));
+    }
+
+    if (!strTrim(payload.firstName)) {
+      markInvalid('quote-first');
+      first(t('firstNameRequired'));
+    }
+    if (!strTrim(payload.lastName)) {
+      markInvalid('quote-last');
+      first(t('lastNameRequired'));
+    }
+
+    var em = strTrim(payload.email);
+    if (!em) {
+      markInvalid('quote-email');
+      first(t('emailRequired'));
+    } else if (!emailLooksValid(em)) {
+      markInvalid('quote-email');
+      first(t('emailFormat'));
+    }
+
+    if (!strTrim(payload.phone)) {
+      markInvalid('quote-phone');
+      first(t('phoneRequired'));
+    } else if (phoneDigitsLen(payload.phone) < 10) {
+      markInvalid('quote-phone');
+      first(t('phoneFormat'));
+    }
+
+    var y = (document.getElementById('quote-dob-year') || {}).value || '';
+    var m = (document.getElementById('quote-dob-month') || {}).value || '';
+    var d = (document.getElementById('quote-dob-day') || {}).value || '';
+    if (!y || !m || !d) {
+      markInvalid('quote-dob-month');
+      markInvalid('quote-dob-day');
+      markInvalid('quote-dob-year');
+      first(t('birthdateRequired'));
+    } else {
+      var yi = parseInt(y, 10);
+      var mi = parseInt(m, 10);
+      var di = parseInt(d, 10);
+      if (!(di >= 1 && di <= daysInMonth(yi, mi))) {
+        markInvalid('quote-dob-month');
+        markInvalid('quote-dob-day');
+        markInvalid('quote-dob-year');
+        first(t('birthdateInvalid'));
+      }
+    }
+
+    if (isNaN(payload.age)) {
+      if (!banner) {
+        markInvalid('quote-dob-month');
+        markInvalid('quote-dob-day');
+        markInvalid('quote-dob-year');
+        first(t('birthdateRequired'));
+      }
+    } else if (payload.age < _ageMin || payload.age > _ageMax) {
+      markInvalid('quote-dob-month');
+      markInvalid('quote-dob-day');
+      markInvalid('quote-dob-year');
+      first(birthdateRangeMsg());
+    }
+
+    if (!strTrim(payload.gender)) {
+      markInvalid('quote-gender');
+      first(t('genderRequired'));
+    }
+
+    if (!payload.healthCondition) {
+      markInvalid('quote-health');
+      first(t('healthSelect'));
+    }
+    if (payload.healthCondition === 'other' && payload.healthConditionOther.length < 2) {
+      markInvalid('quote-health-other');
+      first(t('healthOther'));
+    }
+
+    var covChoice = covSel ? covSel.value : '';
+    if (!covChoice) {
+      markInvalid('quote-coverage');
+      first(t('coverageSelect'));
+    }
+    if (isNaN(payload.coverage)) {
+      markInvalid('quote-coverage');
+      first(t('coverageSelect'));
+    }
+
+    if (!payload.consentEmail || !payload.consentCall || !payload.consentText) {
+      if (!payload.consentEmail) markInvalid('quote-consent-email');
+      if (!payload.consentCall) markInvalid('quote-consent-call');
+      if (!payload.consentText) markInvalid('quote-consent-text');
+      var cwrap = document.getElementById('quote-consent-group-wrap');
+      if (cwrap) cwrap.classList.add('quote-consent-invalid');
+      first(t('validation'));
+    }
+
+    return banner;
   }
 
   function headersJson() {
@@ -525,61 +740,34 @@
     populateCoverageSelect();
     syncSubmitButtonLabel();
 
+    form.addEventListener('input', function (ev) {
+      var el = ev.target;
+      if (el && el.classList && el.classList.contains('is-invalid')) {
+        el.classList.remove('is-invalid');
+      }
+    });
+    form.addEventListener('change', function (ev) {
+      var el = ev.target;
+      if (el && el.classList && el.classList.contains('is-invalid')) {
+        el.classList.remove('is-invalid');
+      }
+      if (el && el.id && el.id.indexOf('quote-consent') === 0) {
+        maybeClearConsentWrap();
+      }
+    });
+
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       var btn = document.getElementById('quote-submit');
       var payload = collectForm();
-      if (!payload.healthCondition) {
+      var uiErr = validateQuoteFormUi(payload, covSel);
+      if (uiErr) {
         if (errEl) {
           errEl.hidden = false;
-          errEl.textContent = t('healthSelect');
-        }
-        return;
-      }
-      if (payload.healthCondition === 'other' && payload.healthConditionOther.length < 2) {
-        if (errEl) {
-          errEl.hidden = false;
-          errEl.textContent = t('healthOther');
+          errEl.textContent = uiErr;
         }
         syncHealthOtherField();
-        return;
-      }
-      var covChoice = covSel ? covSel.value : '';
-      if (!covChoice) {
-        if (errEl) {
-          errEl.hidden = false;
-          errEl.textContent = t('coverageSelect');
-        }
-        return;
-      }
-      if (isNaN(payload.coverage)) {
-        if (errEl) {
-          errEl.hidden = false;
-          errEl.textContent = t('coverageSelect');
-        }
-        return;
-      }
-      if (!payload.consentEmail || !payload.consentCall || !payload.consentText) {
-        if (errEl) {
-          errEl.hidden = false;
-          errEl.textContent = t('validation');
-        }
-        return;
-      }
-      if (isNaN(payload.age)) {
-        if (errEl) {
-          errEl.hidden = false;
-          errEl.textContent = document.getElementById('quote-age')
-            ? t('ageOrBirthdateRequired')
-            : t('birthdateRequired');
-        }
-        return;
-      }
-      if (payload.age < _ageMin || payload.age > _ageMax) {
-        if (errEl) {
-          errEl.hidden = false;
-          errEl.textContent = birthdateRangeMsg();
-        }
+        scrollToFirstQuoteInvalid();
         return;
       }
       var outbound = Object.assign({}, payload);
