@@ -1,0 +1,29 @@
+Beekeeper Studio → Supabase (Postgres)
+========================================
+
+Beekeeper is a desktop app; this file only lists what to paste. Do not commit
+passwords. Your database password is in Supabase (Settings → Database) or in
+repo root .env.local as SUPABASE_DB_PASSWORD.
+
+Connection (Direct)
+-------------------
+Connection type:  Postgres / PostgreSQL
+Authentication:   Username / Password
+Connection mode:  Host and Port
+
+Host:             db.urhdmgzceqkywdjlcdxh.supabase.co
+Port:             5432
+User:             postgres
+Password:         <your database password — not the anon API key>
+Default database: postgres
+Enable SSL:       ON
+
+Optional — Import from URL in Beekeeper (replace YOUR_PASSWORD):
+postgresql://postgres:YOUR_PASSWORD@db.urhdmgzceqkywdjlcdxh.supabase.co:5432/postgres?sslmode=require
+
+After connecting
+----------------
+Left sidebar → your connection → Schemas → public → click a table for a grid view.
+
+If direct connection fails (network / IPv6), use Supabase Dashboard → Connect →
+Session pooler and copy Host, Port, User, and Password from that panel instead.
