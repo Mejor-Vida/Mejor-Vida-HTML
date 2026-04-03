@@ -23,10 +23,21 @@ FEX documents using the **same query string** in your own `<iframe>` or `<object
 
 Other keys in the URL (`id`, `fn`, `cpn`, `style`, `frm`, etc.) come from the **Generate Plugin Code** output in the FEX dashboard—keep those in sync when you regenerate.
 
+### Language (no Spanish quoter from FEX)
+
+- FEX’s web plugin is **English only** (no public Spanish embed or documented URL flag).
+- **`quote.html`** keeps the **rest of the page** bilingual (ES/EN toggle); the iframe stays one **English** URL. A short note on the page explains that Julie can help in **Spanish** by phone or WhatsApp.
+
 ## Dashboard settings (when regenerating)
 
 Regenerate in **FEX → Website Quoter → Enhanced Web Plugin** if you change theme, caption, or rater type; replace the `src` URL in `quote.html` with the new snippet.
 
 ## Supabase → HubSpot
 
-Leads from the widget are handled by **FEX** (Lead Manager / email per your plan). Sync to `quote_lead_submissions` and HubSpot is **not** automatic from this iframe alone—see `workflow.md` when that integration is implemented.
+The iframe **cannot** send data to our server. **`POST /api/quote-lead-sync`** saves leads from the **follow-up form** on `quote.html` to **`quote_lead_submissions`** and syncs contacts to **HubSpot**. See **`workflow.md`** for env vars (`SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `HUBSPOT_ACCESS_TOKEN`).
+
+## HubSpot scheduling (meetings embed)
+
+- **`quote.html`** includes a Bootstrap **modal** with HubSpot meeting iframes: **Spanish** `…/julie-braunsroth`, **English** `…/insurance-consultation-mejor-vida-insurance`. The iframe `src` is set when the modal opens, matching the site language (ES/EN).
+- **Open modal:** buttons on the quote page, **`/quote.html?schedule=1`** or **`#schedule`**, and **automatically ~700ms after a successful** lead form submit (Supabase/CRM sync).
+- **Index** nav links **Agendar / Schedule** point to **`/quote.html?schedule=1`**.

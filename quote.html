@@ -292,14 +292,15 @@
 
     .quote-form-card { max-width: 42rem; }
 
-    /* FEX Quotes iframe — responsive, preserves ~350×525 aspect */
+    /* FEX Quotes iframe — outer frame only (cannot style inside cross-origin iframe) */
     .fex-quotes-wrap {
       width: min(100%, 350px);
       aspect-ratio: 350 / 525;
       margin-inline: auto;
       border-radius: 0.5rem;
       overflow: hidden;
-      box-shadow: 0 8px 24px rgba(13, 71, 161, 0.12);
+      border: 2px solid rgba(13, 71, 161, 0.35);
+      box-shadow: 0 10px 28px rgba(13, 71, 161, 0.14), 0 0 0 1px rgba(254, 201, 99, 0.35);
       background: #fff;
     }
     .fex-quotes-wrap iframe {
@@ -307,6 +308,15 @@
       width: 100%;
       height: 100%;
       border: 0;
+    }
+
+    /* HubSpot meetings embed in modal */
+    .schedule-modal-iframe-wrap iframe {
+      display: block;
+      width: 100%;
+      height: min(70vh, 700px);
+      border: 0;
+      background: #f8fafc;
     }
   </style>
   <script>
@@ -416,15 +426,17 @@
   <section class="flex-grow-1 py-5 bg-light">
     <div class="container" style="max-width:48rem;">
       <div class="bg-white rounded-3 p-4 p-md-5 shadow-sm mx-auto mb-4">
-        <p class="text-center mb-4 small text-body-secondary" data-lang="es">La cotización se procesa en FEX Quotes. Los resultados son aproximados; Julie puede confirmar opciones y precios finales.</p>
-        <p class="text-center mb-4 small text-body-secondary" data-lang="en">Quoting runs on FEX Quotes. Results are estimates; Julie can confirm options and final pricing.</p>
+        <p class="text-center mb-3 small text-body-secondary" data-lang="es">La cotización se procesa en FEX Quotes. Los resultados son aproximados; Julie puede confirmar opciones y precios finales.</p>
+        <p class="text-center mb-3 small text-body-secondary" data-lang="en">Quoting runs on FEX Quotes. Results are estimates; Julie can confirm options and final pricing.</p>
 
-        <!-- Begin FEX Quotes Web Plugin Code — vrt=m (middle align), tgt=2 (results outside iframe); see integrations/fexquotes/README.md -->
+        <p class="text-center mb-4 small fst-italic text-body-secondary" data-lang="es">FEX no ofrece el cotizador en español. La herramienta a continuación está en inglés; Julie puede ayudarle en español por teléfono o WhatsApp.</p>
+        <p class="text-center mb-4 small fst-italic text-body-secondary" data-lang="en">FEX does not provide a Spanish quoter. The tool below is in English; Julie can help in Spanish by phone or WhatsApp.</p>
+
         <div class="fex-quotes-container mb-4">
           <div class="fex-quotes-wrap">
             <iframe
               src="https://fexquotes.com/wqt/v1/webquote.pl?id=55220&amp;fn=1&amp;vrt=m&amp;tgt=2&amp;cpn=6&amp;style=blue&amp;frm=1"
-              title="Final expense quote — FEX Quotes"
+              title="Final expense quote — FEX Quotes (English interface)"
               scrolling="no"
               width="350"
               height="525"
@@ -432,11 +444,83 @@
             ><a href="https://fexquotes.com/">Final Expense Quote Engine</a></iframe>
           </div>
         </div>
-        <!-- End FEX Quotes Web Plugin Code -->
 
-        <p class="text-center mb-3 small text-body-secondary" data-lang="es">¿Prefiere hablar con alguien? Llame o escríbanos.</p>
-        <p class="text-center mb-3 small text-body-secondary" data-lang="en">Prefer to talk to someone? Call or message us.</p>
+        <p class="text-center small text-body-secondary mb-2" data-lang="es">Cuando termine de ver sus opciones, puede agendar una cita con Julie (el cotizador no avisa automáticamente a nuestro sitio).</p>
+        <p class="text-center small text-body-secondary mb-2" data-lang="en">When you’re done reviewing options, book time with Julie—the quote tool doesn’t notify our site automatically.</p>
+        <div class="text-center mb-4">
+          <button type="button" class="btn btn-primary-gold px-4 py-2 fw-bold rounded" data-bs-toggle="modal" data-bs-target="#scheduleModal" id="btn-schedule-after-quote">
+            <i class="fas fa-calendar-check me-2" aria-hidden="true"></i>
+            <span data-lang="es">Agendar con Julie</span>
+            <span data-lang="en">Schedule with Julie</span>
+          </button>
+        </div>
+
+        <div class="border-top pt-4 mt-2">
+          <h2 class="h5 fw-bold text-center mb-2" style="color:#1a365d;" data-lang="es">Guardar su información y resultados</h2>
+          <h2 class="h5 fw-bold text-center mb-2" style="color:#1a365d;" data-lang="en">Save your details &amp; quote notes</h2>
+          <p class="text-center small text-body-secondary mb-3" data-lang="es">El cotizador de arriba no puede enviar datos automáticamente a nuestro sistema. Si desea que Julie le contacte, envíe este formulario: guardamos la información en nuestro sistema seguro y la sincronizamos con el CRM.</p>
+          <p class="text-center small text-body-secondary mb-3" data-lang="en">The tool above cannot send quote data to our site automatically. To have Julie follow up, submit this form—we store it securely and sync your contact to our CRM.</p>
+
+          <form id="quote-lead-form" class="mx-auto" style="max-width: 28rem;" novalidate>
+            <div class="visually-hidden" aria-hidden="true">
+              <label>Leave blank <input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
+            </div>
+            <div class="row g-2 mb-2">
+              <div class="col-md-6">
+                <label for="ql-first" class="form-label small mb-0" data-lang="es">Nombre</label>
+                <label for="ql-first" class="form-label small mb-0" data-lang="en">First name</label>
+                <input type="text" class="form-control form-control-sm" id="ql-first" name="firstName" required maxlength="200" autocomplete="given-name" />
+              </div>
+              <div class="col-md-6">
+                <label for="ql-last" class="form-label small mb-0" data-lang="es">Apellido</label>
+                <label for="ql-last" class="form-label small mb-0" data-lang="en">Last name</label>
+                <input type="text" class="form-control form-control-sm" id="ql-last" name="lastName" required maxlength="200" autocomplete="family-name" />
+              </div>
+            </div>
+            <div class="mb-2">
+              <label for="ql-email" class="form-label small mb-0" data-lang="es">Correo electrónico</label>
+              <label for="ql-email" class="form-label small mb-0" data-lang="en">Email</label>
+              <input type="email" class="form-control form-control-sm" id="ql-email" name="email" required maxlength="320" autocomplete="email" />
+            </div>
+            <div class="row g-2 mb-2">
+              <div class="col-md-6">
+                <label for="ql-phone" class="form-label small mb-0" data-lang="es">Teléfono</label>
+                <label for="ql-phone" class="form-label small mb-0" data-lang="en">Phone</label>
+                <input type="tel" class="form-control form-control-sm" id="ql-phone" name="phone" maxlength="40" autocomplete="tel" />
+              </div>
+              <div class="col-md-6">
+                <label for="ql-state" class="form-label small mb-0" data-lang="es">Estado (2 letras, opcional)</label>
+                <label for="ql-state" class="form-label small mb-0" data-lang="en">State (2 letters, optional)</label>
+                <input type="text" class="form-control form-control-sm" id="ql-state" name="state" maxlength="2" autocomplete="address-level1" />
+              </div>
+            </div>
+            <div class="mb-2">
+              <label for="ql-summary" class="form-label small mb-0" data-lang="es">Resultados o notas (opcional)</label>
+              <label for="ql-summary" class="form-label small mb-0" data-lang="en">Quote results or notes (optional)</label>
+              <textarea class="form-control form-control-sm" id="ql-summary" name="quoteSummary" rows="3" maxlength="20000" placeholder=""></textarea>
+              <span class="form-text small" data-lang="es">Puede pegar aquí lo que vio en el cotizador (aseguradora, prima, etc.).</span>
+              <span class="form-text small" data-lang="en">You can paste what you saw in the quoter (carrier, premium, etc.).</span>
+            </div>
+            <div class="form-check mb-3">
+              <input type="checkbox" class="form-check-input" id="ql-consent" name="consent" value="1" required />
+              <label class="form-check-label small" for="ql-consent" data-lang="es">Acepto que Mejor Vida Insurance me contacte sobre esta cotización.</label>
+              <label class="form-check-label small" for="ql-consent" data-lang="en">I agree that Mejor Vida Insurance may contact me about this quote.</label>
+            </div>
+            <div class="d-grid">
+              <button type="submit" class="btn btn-primary btn-sm fw-bold" id="quote-lead-submit">
+                <span data-lang="es">Enviar información</span>
+                <span data-lang="en">Submit</span>
+              </button>
+            </div>
+          </form>
+          <p id="quote-lead-msg" class="small text-center mt-3 mb-0 d-none" role="status" aria-live="polite"></p>
+        </div>
+
+        <p class="text-center mb-3 mt-4 small text-body-secondary" data-lang="es">¿Prefiere hablar con alguien? Llame o escríbanos.</p>
+        <p class="text-center mb-3 mt-4 small text-body-secondary" data-lang="en">Prefer to talk to someone? Call or message us.</p>
         <div class="d-flex flex-wrap gap-2 justify-content-center">
+          <button type="button" class="btn btn-primary-gold rounded fw-bold px-4" data-bs-toggle="modal" data-bs-target="#scheduleModal" data-lang="es"><i class="fas fa-calendar-alt me-2"></i>Agendar cita</button>
+          <button type="button" class="btn btn-primary-gold rounded fw-bold px-4" data-bs-toggle="modal" data-bs-target="#scheduleModal" data-lang="en"><i class="fas fa-calendar-alt me-2"></i>Book appointment</button>
           <a href="tel:+14025881125" class="btn btn-primary-gold rounded fw-bold px-4" data-lang="es"><i class="fas fa-phone me-2"></i>402-588-1125</a>
           <a href="tel:+14025881125" class="btn btn-primary-gold rounded fw-bold px-4" data-lang="en"><i class="fas fa-phone me-2"></i>402-588-1125</a>
           <a href="https://wa.me/14024405438?text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20seguro%20de%20gastos%20finales." target="_blank" rel="noopener" class="btn btn-success rounded fw-bold px-4" data-lang="es"><i class="fab fa-whatsapp me-2"></i>WhatsApp</a>
@@ -447,6 +531,33 @@
       </div>
     </div>
   </section>
+
+  <!-- HubSpot scheduling (ES/EN URLs; single iframe swaps src by site language) -->
+  <div class="modal fade" id="scheduleModal" tabindex="-1" aria-labelledby="scheduleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header border-bottom-0 pb-0">
+          <h2 class="modal-title h5 fw-bold" id="scheduleModalLabel" style="color:#1a365d;">
+            <span data-lang="es">Agendar cita con Julie</span>
+            <span data-lang="en">Book an appointment with Julie</span>
+          </h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body pt-2 schedule-modal-iframe-wrap">
+          <iframe
+            id="schedule-iframe"
+            data-src-es="https://meetings-na2.hubspot.com/julie-braunsroth"
+            data-src-en="https://meetings-na2.hubspot.com/julie-braunsroth/insurance-consultation-mejor-vida-insurance"
+            title="Schedule with Julie — HubSpot"
+            width="100%"
+            height="700"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- FOOTER -->
   <footer style="background:#1a365d; padding: 8px 0 24px 0;">
@@ -526,6 +637,102 @@
         hamburgerBtn.textContent = '☰';
       });
     });
+  </script>
+  <script>
+    (function () {
+      function setScheduleIframeSrc() {
+        var iframe = document.getElementById('schedule-iframe');
+        if (!iframe) return;
+        var lang = document.documentElement.classList.contains('lang-en') ? 'en' : 'es';
+        var url = lang === 'es' ? iframe.getAttribute('data-src-es') : iframe.getAttribute('data-src-en');
+        if (url) iframe.setAttribute('src', url);
+        iframe.setAttribute('title', lang === 'es' ? 'Agendar cita con Julie' : 'Book an appointment with Julie');
+      }
+      window.openScheduleModalMejorVida = function () {
+        var el = document.getElementById('scheduleModal');
+        if (!el || typeof bootstrap === 'undefined') return;
+        setScheduleIframeSrc();
+        bootstrap.Modal.getOrCreateInstance(el).show();
+      };
+      var modalEl = document.getElementById('scheduleModal');
+      if (modalEl) modalEl.addEventListener('show.bs.modal', setScheduleIframeSrc);
+      document.querySelectorAll('.lang-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          setTimeout(function () {
+            var m = document.getElementById('scheduleModal');
+            if (m && m.classList.contains('show')) setScheduleIframeSrc();
+          }, 60);
+        });
+      });
+      window.addEventListener('load', function () {
+        try {
+          if (new URLSearchParams(location.search).get('schedule') === '1' || location.hash === '#schedule') {
+            setTimeout(function () {
+              if (window.openScheduleModalMejorVida) window.openScheduleModalMejorVida();
+            }, 400);
+          }
+        } catch (e) {}
+      });
+    })();
+  </script>
+  <script>
+    (function () {
+      var form = document.getElementById('quote-lead-form');
+      if (!form) return;
+      var msg = document.getElementById('quote-lead-msg');
+      var btn = document.getElementById('quote-lead-submit');
+      form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        if (msg) {
+          msg.classList.add('d-none');
+          msg.classList.remove('text-danger', 'text-success');
+        }
+        var lang = document.documentElement.classList.contains('lang-en') ? 'en' : 'es';
+        var fd = new FormData(form);
+        if (fd.get('website')) return;
+        var payload = {
+          firstName: (fd.get('firstName') || '').trim(),
+          lastName: (fd.get('lastName') || '').trim(),
+          email: (fd.get('email') || '').trim(),
+          phone: (fd.get('phone') || '').trim(),
+          state: (fd.get('state') || '').trim().toUpperCase(),
+          quoteSummary: (fd.get('quoteSummary') || '').trim(),
+          consent: document.getElementById('ql-consent').checked,
+          lang: lang
+        };
+        if (btn) btn.disabled = true;
+        try {
+          var res = await fetch('/api/quote-lead-sync', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+          var data = await res.json().catch(function () { return {}; });
+          if (!res.ok || !data.ok) {
+            throw new Error(data.error || (lang === 'es' ? 'Error al enviar' : 'Send failed'));
+          }
+          if (msg) {
+            msg.classList.remove('d-none');
+            msg.classList.add('text-success');
+            msg.textContent = lang === 'es'
+              ? '¡Gracias! Recibimos su información.'
+              : 'Thank you—we received your information.';
+          }
+          form.reset();
+          setTimeout(function () {
+            if (window.openScheduleModalMejorVida) window.openScheduleModalMejorVida();
+          }, 700);
+        } catch (err) {
+          if (msg) {
+            msg.classList.remove('d-none');
+            msg.classList.add('text-danger');
+            msg.textContent = err.message || (lang === 'es' ? 'Error al enviar. Intente más tarde.' : 'Could not send. Try again later.');
+          }
+        } finally {
+          if (btn) btn.disabled = false;
+        }
+      });
+    })();
   </script>
 </body>
 </html>
