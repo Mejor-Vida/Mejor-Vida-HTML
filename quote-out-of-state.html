@@ -316,5 +316,54 @@
       });
     }
   </script>
+  
+<script>
+/* ── Out-of-State Referral Form Submission ── */
+(function () {
+  var form = document.getElementById('oos-form');
+  if (!form) return;
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    var btn = form.querySelector('button[type="submit"], input[type="submit"]');
+    if (btn) { btn.disabled = true; btn.textContent = 'Submitting…'; }
+
+    var payload = {
+      firstName: (form.querySelector('[name="firstName"]') || {}).value || '',
+      lastName:  (form.querySelector('[name="lastName"]')  || {}).value || '',
+      email:     (form.querySelector('[name="email"]')     || {}).value || '',
+      phone:     (form.querySelector('[name="phone"]')     || {}).value || '',
+      state:     (form.querySelector('[name="state"]')     || {}).value || '',
+      quoteSummary: (form.querySelector('[name="quoteSummary"]') || {}).value || '',
+      consentLicensedAgentInState: !!(form.querySelector('[name="consentLicensedAgentInState"]') || {}).checked,
+      website:   (form.querySelector('[name="website"]')   || {}).value || ''
+    };
+
+    fetch('/api/out-of-state-referral', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    })
+    .then(function (r) { return r.json(); })
+    .then(function (data) {
+      if (data.ok) {
+        form.innerHTML =
+          '<div style="text-align:center;padding:40px 20px;">' +
+          '<h3 style="color:#2c5282;">Thank You!</h3>' +
+          '<p>Your information has been submitted. A licensed agent in your state will be in touch soon.</p>' +
+          '</div>';
+      } else {
+        alert('Something went wrong: ' + (data.error || 'Please try again.'));
+        if (btn) { btn.disabled = false; btn.textContent = 'Submit'; }
+      }
+    })
+    .catch(function () {
+      alert('Network error — please check your connection and try again.');
+      if (btn) { btn.disabled = false; btn.textContent = 'Submit'; }
+    });
+  });
+})();
+</script>
 </body>
 </html>
