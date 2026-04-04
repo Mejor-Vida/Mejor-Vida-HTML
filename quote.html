@@ -12,7 +12,7 @@
   </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Cotización — Mejor Vida Insurance</title>
+  <title>Free Online Quote — Mejor Vida Insurance</title>
   <meta name="robots" content="noindex, follow" />
   
   <!-- Favicon -->
@@ -63,6 +63,13 @@
     .hero-content-overlay {
       position: relative;
       z-index: 2;
+    }
+
+    .quote-hero-title {
+      color: #fec963 !important;
+      text-shadow: 0 2px 16px rgba(0, 0, 0, 0.4);
+      font-size: clamp(2.25rem, 5.5vw, 3.75rem);
+      line-height: 1.15;
     }
     
     /* Hero CTA button - yellow/orange */
@@ -556,22 +563,20 @@
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 500" preserveAspectRatio="none" aria-hidden="true"><path d="M 0 0 L 1200 0 C 900 350 300 150 0 500 L 0 0 Z" /></svg>
     </div>
     <div class="container text-center hero-content-overlay">
-      <h1 class="h2 fw-bold text-white mb-3" data-lang="es">Cotización en línea</h1>
-      <h1 class="h2 fw-bold text-white mb-3" data-lang="en">Online quote</h1>
-      <p class="fs-6 text-white opacity-90 mb-0 mx-auto" style="max-width:40rem;" data-lang="es">Compare cotizaciones de gastos finales con la herramienta FEX Quotes. Si prefiere hablar con Julie, use el teléfono o WhatsApp más abajo.</p>
-      <p class="fs-6 text-white opacity-90 mb-0 mx-auto" style="max-width:40rem;" data-lang="en">Compare final expense quotes with the FEX Quotes tool. Prefer to speak with Julie? Use phone or WhatsApp below.</p>
+      <h1 class="fw-bold quote-hero-title mb-0" data-lang="es">Cotización gratuita en línea</h1>
+      <h1 class="fw-bold quote-hero-title mb-0" data-lang="en">Free Online Quote</h1>
     </div>
   </section>
 
   <section class="flex-grow-1 py-5 bg-light">
     <div class="container" style="max-width:48rem;">
       <div class="bg-white rounded-3 p-4 p-md-5 shadow-sm mx-auto mb-4">
-        <p class="text-center mb-3 small text-body-secondary" data-lang="es">La cotización se procesa en FEX Quotes. Los resultados son aproximados; Julie puede confirmar opciones y precios finales.</p>
-        <p class="text-center mb-3 small text-body-secondary" data-lang="en">Quoting runs on FEX Quotes. Results are estimates; Julie can confirm options and final pricing.</p>
-
-        <p class="text-center mb-3 small fst-italic text-body-secondary" data-lang="es">El cotizador está en inglés. Las etiquetas y flechas están al lado del formulario (arriba en pantallas pequeñas).</p>
-        <p class="text-center mb-3 small fst-italic text-body-secondary" data-lang="en">The quoter is in English. Labels and arrows sit beside the form (above on small screens).</p>
-
+        <div class="alert alert-light border mb-3 py-3 px-3 rounded-3" role="region" aria-label="Licensing disclosure" style="border-color: rgba(13, 71, 161, 0.4) !important; background: #f1f5f9;">
+          <p class="small mb-2 text-start fw-semibold" style="color:#0D47A1;" data-lang="es">Divulgación — licencia en Nebraska</p>
+          <p class="small mb-2 text-start fw-semibold" style="color:#0D47A1;" data-lang="en">Disclosure — Nebraska license</p>
+          <p class="small mb-0 text-start text-body-secondary" data-lang="es">Julie Braunsroth está autorizada para ofrecer y vender seguros de vida y anualidades <strong>solo en Nebraska</strong>. El cotizador de abajo es para personas que buscan cobertura como residentes de Nebraska. Si usted no es residente de Nebraska, no utilice esta herramienta para cotizar; regrese a la <a href="quote-screen.html">selección de estado</a> para la opción correcta.</p>
+          <p class="small mb-0 text-start text-body-secondary" data-lang="en">Julie Braunsroth is licensed to solicit and sell life insurance and annuities <strong>only in Nebraska</strong>. The quote tool below is for people seeking coverage as Nebraska residents. If you are not a Nebraska resident, do not use this tool to obtain a quote—go back to <a href="quote-screen.html">state selection</a> for the right option.</p>
+        </div>
         <div class="fex-quotes-pair mb-4">
           <div class="fex-guide-col">
             <div class="fex-gl" data-fex-row="0" data-lang="es"><span class="fex-label-txt">Estado</span><span class="fex-arrow-line" aria-hidden="true"><span class="fex-shaft"></span><span class="fex-arrow-tip">▶</span></span></div>

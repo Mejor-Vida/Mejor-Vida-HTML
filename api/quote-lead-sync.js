@@ -172,7 +172,20 @@ module.exports = async function handler(req, res) {
   if (!firstName || !lastName) {
     return json(res, 400, { ok: false, error: "First and last name required" });
   }
-  if (!body.consent) {
+
+  const consentLicensedAgentInState =
+    body.consentLicensedAgentInState === true ||
+    body.consentLicensedAgentInState === "true" ||
+    body.consentLicensedAgentInState === 1;
+
+  if (leadSource === "out_of_state_referral") {
+    if (!consentLicensedAgentInState) {
+      return json(res, 400, {
+        ok: false,
+        error: "Consent to contact by a licensed agent in your state is required",
+      });
+    }
+  } else if (!body.consent) {
     return json(res, 400, { ok: false, error: "Consent required" });
   }
 
@@ -186,6 +199,9 @@ module.exports = async function handler(req, res) {
     lang,
     source: leadSource,
   };
+  if (leadSource === "out_of_state_referral") {
+    payload.consentLicensedAgentInState = true;
+  }
   const requestRaw = {
     ...payload,
     quoteSummary: quoteSummary || undefined,
@@ -208,6 +224,19 @@ module.exports = async function handler(req, res) {
         ? "quote_generated"
         : "quote_requested";
 
+  const consentSummary =
+    leadSource === "out_of_state_referral"
+      ? {
+          licensedAgentInStateContact: true,
+          referralProcessAgreed: true,
+          agreement:
+            "User agreed to be contacted by a licensed insurance agent in their state of residence",
+          agreementVersion: "oos_licensed_agent_v1",
+          at: nowIso,
+          lang,
+        }
+      : { followUp: true, at: nowIso };
+
   const insertRow = {
     source: leadSource,
     first_name: firstName,
@@ -217,7 +246,7 @@ module.exports = async function handler(req, res) {
     state_code: stateCode || null,
     lang,
     quote_summary: summaryForDb,
-    consent_summary: { followUp: true, at: nowIso },
+    consent_summary: consentSummary,
     payload,
     request_raw: requestRaw,
     quote_status: quoteStatus,

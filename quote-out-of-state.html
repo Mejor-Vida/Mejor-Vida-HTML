@@ -21,6 +21,19 @@
   <link href="css/quote-flow-shared.css" rel="stylesheet" />
   <style>
     .oos-card { max-width: 32rem; }
+    .oos-form .form-control.is-invalid,
+    .oos-form .form-check-input.is-invalid {
+      border-color: #dc3545;
+    }
+    .oos-form .form-check-input.is-invalid:focus {
+      box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+    }
+    .oos-form .oos-consent-block.is-invalid-consent {
+      padding: 0.75rem;
+      border-radius: 0.375rem;
+      border: 1px solid #dc3545;
+      background-color: rgba(220, 53, 69, 0.06);
+    }
   </style>
   <script>
     (function(){
@@ -74,25 +87,15 @@
     </div>
   </header>
 
-  <section class="hero-two-tone py-4 relative">
-    <div class="hero-dark-overlay">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 500" preserveAspectRatio="none" aria-hidden="true"><path d="M 0 0 L 1200 0 C 900 350 300 150 0 500 L 0 0 Z" /></svg>
-    </div>
-    <div class="container text-center hero-content-overlay px-3 py-2">
-      <h1 class="fw-bold quote-hero-title mb-0" style="font-size: clamp(1.5rem, 4vw, 2.25rem);" data-lang="es">Licencia en Nebraska únicamente</h1>
-      <h1 class="fw-bold quote-hero-title mb-0" style="font-size: clamp(1.5rem, 4vw, 2.25rem);" data-lang="en">Licensed in Nebraska only</h1>
-    </div>
-  </section>
-
   <section class="flex-grow-1 py-4 py-md-5 bg-light">
     <div class="container" style="max-width:42rem;">
       <div class="bg-white rounded-3 p-4 p-md-5 shadow-sm mx-auto oos-card">
-        <p class="mb-3" data-lang="es">Julie Braunsroth está <strong>licenciada para vender seguros solo en Nebraska</strong>. No podemos cotizar ni vender pólizas para residentes de <strong id="oos-state-label">otro estado</strong> desde este sitio.</p>
-        <p class="mb-3" data-lang="en">Julie Braunsroth is <strong>licensed to sell insurance only in Nebraska</strong>. We cannot quote or sell policies to residents of <strong id="oos-state-label-en">your state</strong> through this site.</p>
-        <p class="small text-body-secondary mb-4" data-lang="es">Si lo desea, puede enviar sus datos y haremos lo posible por conectarlo con un agente autorizado en su área. No hay garantía de referencia; es un servicio de cortesía.</p>
-        <p class="small text-body-secondary mb-4" data-lang="en">If you’d like, share your details and we’ll try to connect you with a licensed agent in your area. Referrals are not guaranteed; this is a courtesy service.</p>
+        <p class="mb-3 lead fs-6" data-lang="es">Lo sentimos: <strong>aún no estamos licenciados en <span id="oos-state-label">su estado</span></strong>, pero <strong>queremos ayudarle a encontrar un agente con licencia en su área</strong>.</p>
+        <p class="mb-3 lead fs-6" data-lang="en">We’re sorry: <strong>we’re not licensed in <span id="oos-state-label-en">your state</span> yet</strong>, but we <strong>still want to help you find a licensed agent in your area</strong>.</p>
+        <p class="small text-body-secondary mb-4" data-lang="es">Complete el formulario a continuación. Las referencias no están garantizadas; es un servicio de cortesía.</p>
+        <p class="small text-body-secondary mb-4" data-lang="en">Fill out the form below. Referrals are not guaranteed; this is a courtesy service.</p>
 
-        <form id="oos-form" novalidate>
+        <form id="oos-form" class="oos-form" novalidate>
           <div class="visually-hidden" aria-hidden="true">
             <label>Leave blank <input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
           </div>
@@ -101,18 +104,24 @@
             <div class="col-md-6">
               <label for="oos-first" class="form-label small mb-0" data-lang="es">Nombre</label>
               <label for="oos-first" class="form-label small mb-0" data-lang="en">First name</label>
-              <input type="text" class="form-control form-control-sm" id="oos-first" name="firstName" required maxlength="200" autocomplete="given-name" />
+              <input type="text" class="form-control form-control-sm" id="oos-first" name="firstName" maxlength="200" autocomplete="given-name" aria-required="true" />
+              <div class="invalid-feedback" data-lang="es">Indique su nombre.</div>
+              <div class="invalid-feedback" data-lang="en">Please enter your first name.</div>
             </div>
             <div class="col-md-6">
               <label for="oos-last" class="form-label small mb-0" data-lang="es">Apellido</label>
               <label for="oos-last" class="form-label small mb-0" data-lang="en">Last name</label>
-              <input type="text" class="form-control form-control-sm" id="oos-last" name="lastName" required maxlength="200" autocomplete="family-name" />
+              <input type="text" class="form-control form-control-sm" id="oos-last" name="lastName" maxlength="200" autocomplete="family-name" aria-required="true" />
+              <div class="invalid-feedback" data-lang="es">Indique su apellido.</div>
+              <div class="invalid-feedback" data-lang="en">Please enter your last name.</div>
             </div>
           </div>
           <div class="mb-2">
             <label for="oos-email" class="form-label small mb-0" data-lang="es">Correo electrónico</label>
             <label for="oos-email" class="form-label small mb-0" data-lang="en">Email</label>
-            <input type="email" class="form-control form-control-sm" id="oos-email" name="email" required maxlength="320" autocomplete="email" />
+            <input type="email" class="form-control form-control-sm" id="oos-email" name="email" maxlength="320" autocomplete="email" inputmode="email" aria-required="true" />
+            <div class="invalid-feedback" data-lang="es">Indique un correo electrónico válido.</div>
+            <div class="invalid-feedback" data-lang="en">Please enter a valid email address.</div>
           </div>
           <div class="mb-2">
             <label for="oos-phone" class="form-label small mb-0" data-lang="es">Teléfono</label>
@@ -124,10 +133,12 @@
             <label for="oos-msg" class="form-label small mb-0" data-lang="en">How can we help? (optional)</label>
             <textarea class="form-control form-control-sm" id="oos-msg" name="quoteSummary" rows="3" maxlength="20000"></textarea>
           </div>
-          <div class="form-check mb-3">
-            <input type="checkbox" class="form-check-input" id="oos-consent" name="consent" value="1" required />
-            <label class="form-check-label small" for="oos-consent" data-lang="es">Acepto que Mejor Vida Insurance me contacte sobre esta solicitud.</label>
-            <label class="form-check-label small" for="oos-consent" data-lang="en">I agree that Mejor Vida Insurance may contact me about this request.</label>
+          <div class="form-check mb-3 oos-consent-block" id="oos-consent-block">
+            <input type="checkbox" class="form-check-input" id="oos-consent-agent" name="consentLicensedAgentInState" value="1" aria-required="true" />
+            <label class="form-check-label small" for="oos-consent-agent" data-lang="es">Doy mi consentimiento para que un <strong>agente de seguros con licencia en mi estado</strong> pueda contactarme.</label>
+            <label class="form-check-label small" for="oos-consent-agent" data-lang="en">I consent to be contacted by a <strong>licensed insurance agent in my state</strong>.</label>
+            <div class="invalid-feedback" data-lang="es">Debe marcar esta casilla para enviar el formulario.</div>
+            <div class="invalid-feedback" data-lang="en">You must check this box to submit the form.</div>
           </div>
           <div class="d-grid">
             <button type="submit" class="btn btn-primary btn-sm fw-bold" id="oos-submit">
@@ -180,12 +191,73 @@
       var form = document.getElementById('oos-form');
       var msgEl = document.getElementById('oos-msg-status');
       var btn = document.getElementById('oos-submit');
+      var firstEl = document.getElementById('oos-first');
+      var lastEl = document.getElementById('oos-last');
+      var emailEl = document.getElementById('oos-email');
+      var consentEl = document.getElementById('oos-consent-agent');
+      var consentBlock = document.getElementById('oos-consent-block');
+
+      function clearFieldInvalid(el) {
+        if (!el) return;
+        el.classList.remove('is-invalid');
+        el.removeAttribute('aria-invalid');
+      }
+      function clearConsentInvalid() {
+        if (consentEl) {
+          consentEl.classList.remove('is-invalid');
+          consentEl.removeAttribute('aria-invalid');
+        }
+        if (consentBlock) consentBlock.classList.remove('is-invalid-consent');
+      }
+      function markInvalid(el) {
+        if (!el) return;
+        el.classList.add('is-invalid');
+        el.setAttribute('aria-invalid', 'true');
+      }
+      function emailOk(s) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(s || '').trim());
+      }
+      function validateForm() {
+        var ok = true;
+        [firstEl, lastEl, emailEl].forEach(clearFieldInvalid);
+        clearConsentInvalid();
+        var fn = (firstEl && firstEl.value || '').trim();
+        var ln = (lastEl && lastEl.value || '').trim();
+        var em = (emailEl && emailEl.value || '').trim();
+        if (!fn) { markInvalid(firstEl); ok = false; }
+        if (!ln) { markInvalid(lastEl); ok = false; }
+        if (!emailOk(em)) { markInvalid(emailEl); ok = false; }
+        if (!consentEl || !consentEl.checked) {
+          if (consentEl) markInvalid(consentEl);
+          if (consentBlock) consentBlock.classList.add('is-invalid-consent');
+          ok = false;
+        }
+        return ok;
+      }
+      if (firstEl) firstEl.addEventListener('input', function () { clearFieldInvalid(firstEl); });
+      if (lastEl) lastEl.addEventListener('input', function () { clearFieldInvalid(lastEl); });
+      if (emailEl) emailEl.addEventListener('input', function () { clearFieldInvalid(emailEl); });
+      if (consentEl) consentEl.addEventListener('change', clearConsentInvalid);
+
       form.addEventListener('submit', async function (e) {
         e.preventDefault();
         if (msgEl) { msgEl.classList.add('d-none'); msgEl.classList.remove('text-danger', 'text-success'); }
         var lang = document.documentElement.classList.contains('lang-en') ? 'en' : 'es';
         var fd = new FormData(form);
         if (fd.get('website')) return;
+        if (!validateForm()) {
+          var bad = null;
+          if (firstEl && firstEl.classList.contains('is-invalid')) bad = firstEl;
+          else if (lastEl && lastEl.classList.contains('is-invalid')) bad = lastEl;
+          else if (emailEl && emailEl.classList.contains('is-invalid')) bad = emailEl;
+          else if (consentEl && consentEl.classList.contains('is-invalid')) bad = consentEl;
+          if (bad) {
+            bad.focus();
+            try { bad.scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch (e2) {}
+          }
+          return;
+        }
+        var agentConsent = consentEl && consentEl.checked;
         var payload = {
           source: 'out_of_state_referral',
           firstName: (fd.get('firstName') || '').trim(),
@@ -194,7 +266,7 @@
           phone: (fd.get('phone') || '').trim(),
           state: code,
           quoteSummary: (fd.get('quoteSummary') || '').trim(),
-          consent: document.getElementById('oos-consent').checked,
+          consentLicensedAgentInState: agentConsent,
           lang: lang
         };
         if (btn) btn.disabled = true;
@@ -213,6 +285,8 @@
           }
           form.reset();
           document.getElementById('oos-state-code').value = code;
+          [firstEl, lastEl, emailEl].forEach(clearFieldInvalid);
+          clearConsentInvalid();
         } catch (err) {
           if (msgEl) {
             msgEl.classList.remove('d-none');
