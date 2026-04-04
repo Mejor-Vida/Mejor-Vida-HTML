@@ -224,9 +224,10 @@ module.exports = async function handler(req, res) {
       ? {
           licensedAgentInStateContact: true,
           referralProcessAgreed: true,
+          contactMethods: ["phone", "email"],
           agreement:
-            "User agreed to be contacted by a licensed insurance agent in their state of residence",
-          agreementVersion: "oos_licensed_agent_v1",
+            "User agreed to be contacted by phone and email by a licensed insurance agent in their state of residence",
+          agreementVersion: "oos_licensed_agent_v2",
           at: nowIso,
           lang,
         }
