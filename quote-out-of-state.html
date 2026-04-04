@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <script>
+  (function () {
+    if (location.hostname === 'mejorvidainsurance.com') {
+      location.replace('https://www.mejorvidainsurance.com' + location.pathname + location.search + location.hash);
+    }
+  })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Outside Nebraska — Mejor Vida Insurance</title>
+  <meta name="robots" content="noindex, follow" />
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="css/quote-flow-shared.css" rel="stylesheet" />
+  <style>
+    .oos-card { max-width: 32rem; }
+  </style>
+  <script>
+    (function(){
+      try {
+        var navEntry = performance.getEntriesByType('navigation')[0];
+        var isReload = navEntry && navEntry.type === 'reload';
+        if (isReload) sessionStorage.removeItem('sessionLang');
+        var L = sessionStorage.getItem('sessionLang') || 'es';
+        document.documentElement.className = 'lang-' + L;
+      } catch(e) {
+        document.documentElement.className = 'lang-es';
+      }
+    })();
+  </script>
+</head>
+<body class="d-flex flex-column min-vh-100 bg-light" style="font-family: 'Inter', system-ui, sans-serif; color: #1f2937;">
+
+  <header class="sticky-top bg-white shadow-sm border-bottom">
+    <div class="container">
+      <div class="d-flex align-items-center justify-content-between header-inner">
+        <div class="flex-shrink-0 header-logo-wrap">
+          <a href="/" class="d-block">
+            <img src="img/logo-spanish2.png" alt="Mejor Vida Insurance logo" class="header-logo" />
+          </a>
+        </div>
+        <nav class="desktop-nav d-none d-lg-flex align-items-center">
+          <a href="/" data-lang="es" class="nav-link-cm">Inicio</a>
+          <a href="/" data-lang="en" class="nav-link-cm">Home</a>
+          <a href="quote-screen.html" data-lang="es" class="nav-link-cm">Cotización</a>
+          <a href="quote-screen.html" data-lang="en" class="nav-link-cm">Quote</a>
+          <a href="blog.html" data-lang="es" class="nav-link-cm">Blog</a>
+          <a href="blog.html" data-lang="en" class="nav-link-cm">Blog</a>
+        </nav>
+        <div class="d-flex align-items-center gap-2">
+          <a href="tel:+14025881125" class="header-phone-compact flex-shrink-0 align-items-center justify-content-center" aria-label="Call office 402-588-1125" title="402-588-1125"><i class="fas fa-phone" aria-hidden="true"></i></a>
+          <div class="d-flex gap-1 ms-2">
+            <button class="lang-btn active px-2 py-1 rounded small fw-bold border-2" data-lang-btn="es">ES</button>
+            <button class="lang-btn px-2 py-1 rounded small fw-bold border-2" data-lang-btn="en">EN</button>
+          </div>
+          <button class="hamburger-btn" id="hamburger-btn" aria-label="Open menu">☰</button>
+        </div>
+      </div>
+    </div>
+    <div class="mobile-menu" id="mobile-menu">
+      <a href="/" data-lang="es" class="mobile-menu-link">Inicio</a>
+      <a href="/" data-lang="en" class="mobile-menu-link">Home</a>
+      <a href="quote-screen.html" data-lang="es" class="mobile-menu-link">Cotización</a>
+      <a href="quote-screen.html" data-lang="en" class="mobile-menu-link">Quote</a>
+      <a href="blog.html" class="mobile-menu-link">Blog</a>
+      <a href="tel:+14025881125" class="mobile-menu-link fw-bold" style="color:#0D47A1;"><i class="fas fa-phone me-2"></i>402-588-1125</a>
+    </div>
+  </header>
+
+  <section class="hero-two-tone py-4 relative">
+    <div class="hero-dark-overlay">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 500" preserveAspectRatio="none" aria-hidden="true"><path d="M 0 0 L 1200 0 C 900 350 300 150 0 500 L 0 0 Z" /></svg>
+    </div>
+    <div class="container text-center hero-content-overlay px-3 py-2">
+      <h1 class="fw-bold quote-hero-title mb-0" style="font-size: clamp(1.5rem, 4vw, 2.25rem);" data-lang="es">Licencia en Nebraska únicamente</h1>
+      <h1 class="fw-bold quote-hero-title mb-0" style="font-size: clamp(1.5rem, 4vw, 2.25rem);" data-lang="en">Licensed in Nebraska only</h1>
+    </div>
+  </section>
+
+  <section class="flex-grow-1 py-4 py-md-5 bg-light">
+    <div class="container" style="max-width:42rem;">
+      <div class="bg-white rounded-3 p-4 p-md-5 shadow-sm mx-auto oos-card">
+        <p class="mb-3" data-lang="es">Julie Braunsroth está <strong>licenciada para vender seguros solo en Nebraska</strong>. No podemos cotizar ni vender pólizas para residentes de <strong id="oos-state-label">otro estado</strong> desde este sitio.</p>
+        <p class="mb-3" data-lang="en">Julie Braunsroth is <strong>licensed to sell insurance only in Nebraska</strong>. We cannot quote or sell policies to residents of <strong id="oos-state-label-en">your state</strong> through this site.</p>
+        <p class="small text-body-secondary mb-4" data-lang="es">Si lo desea, puede enviar sus datos y haremos lo posible por conectarlo con un agente autorizado en su área. No hay garantía de referencia; es un servicio de cortesía.</p>
+        <p class="small text-body-secondary mb-4" data-lang="en">If you’d like, share your details and we’ll try to connect you with a licensed agent in your area. Referrals are not guaranteed; this is a courtesy service.</p>
+
+        <form id="oos-form" novalidate>
+          <div class="visually-hidden" aria-hidden="true">
+            <label>Leave blank <input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
+          </div>
+          <input type="hidden" name="state" id="oos-state-code" value="" />
+          <div class="row g-2 mb-2">
+            <div class="col-md-6">
+              <label for="oos-first" class="form-label small mb-0" data-lang="es">Nombre</label>
+              <label for="oos-first" class="form-label small mb-0" data-lang="en">First name</label>
+              <input type="text" class="form-control form-control-sm" id="oos-first" name="firstName" required maxlength="200" autocomplete="given-name" />
+            </div>
+            <div class="col-md-6">
+              <label for="oos-last" class="form-label small mb-0" data-lang="es">Apellido</label>
+              <label for="oos-last" class="form-label small mb-0" data-lang="en">Last name</label>
+              <input type="text" class="form-control form-control-sm" id="oos-last" name="lastName" required maxlength="200" autocomplete="family-name" />
+            </div>
+          </div>
+          <div class="mb-2">
+            <label for="oos-email" class="form-label small mb-0" data-lang="es">Correo electrónico</label>
+            <label for="oos-email" class="form-label small mb-0" data-lang="en">Email</label>
+            <input type="email" class="form-control form-control-sm" id="oos-email" name="email" required maxlength="320" autocomplete="email" />
+          </div>
+          <div class="mb-2">
+            <label for="oos-phone" class="form-label small mb-0" data-lang="es">Teléfono</label>
+            <label for="oos-phone" class="form-label small mb-0" data-lang="en">Phone</label>
+            <input type="tel" class="form-control form-control-sm" id="oos-phone" name="phone" maxlength="40" autocomplete="tel" />
+          </div>
+          <div class="mb-2">
+            <label for="oos-msg" class="form-label small mb-0" data-lang="es">¿Cómo podemos ayudar? (opcional)</label>
+            <label for="oos-msg" class="form-label small mb-0" data-lang="en">How can we help? (optional)</label>
+            <textarea class="form-control form-control-sm" id="oos-msg" name="quoteSummary" rows="3" maxlength="20000"></textarea>
+          </div>
+          <div class="form-check mb-3">
+            <input type="checkbox" class="form-check-input" id="oos-consent" name="consent" value="1" required />
+            <label class="form-check-label small" for="oos-consent" data-lang="es">Acepto que Mejor Vida Insurance me contacte sobre esta solicitud.</label>
+            <label class="form-check-label small" for="oos-consent" data-lang="en">I agree that Mejor Vida Insurance may contact me about this request.</label>
+          </div>
+          <div class="d-grid">
+            <button type="submit" class="btn btn-primary btn-sm fw-bold" id="oos-submit">
+              <span data-lang="es">Enviar</span>
+              <span data-lang="en">Submit</span>
+            </button>
+          </div>
+        </form>
+        <p id="oos-msg-status" class="small text-center mt-3 mb-0 d-none" role="status" aria-live="polite"></p>
+        <p class="small text-center mt-3 mb-0">
+          <a href="quote-screen.html" data-lang="es">Volver a la selección de estado</a>
+          <a href="quote-screen.html" data-lang="en">Back to state selection</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <footer style="background:#1a365d; padding: 8px 0 24px 0;">
+    <div class="container">
+      <div class="d-flex flex-column flex-md-row align-items-center justify-content-between gap-2 text-white" style="margin:0; padding:0;">
+        <img src="img/logo-spanish2.png" alt="Mejor Vida Insurance" style="height:130px;filter:brightness(0) invert(1);margin-top:-25px;margin-bottom:-25px;" />
+        <span class="small"><i class="fas fa-phone me-2 opacity-75"></i><a href="tel:+14025881125" class="text-white text-opacity-90 text-decoration-none">402-588-1125</a></span>
+      </div>
+      <div class="border-top border-secondary mt-2 pt-2">
+        <p class="small text-center text-white text-opacity-75 mb-1" data-lang="es">Julie es una agente de seguros licenciada en Nebraska. Licencia de productor #21695431.</p>
+        <p class="small text-center text-white text-opacity-75 mb-1" data-lang="en">Julie is a licensed insurance agent in Nebraska. Producer license #21695431.</p>
+        <p class="small text-center text-white text-opacity-50 mb-0">&copy; <span id="year"></span> Mejor Vida Insurance LLC.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="script.js"></script>
+  <script>
+    (function () {
+      var NAMES = { AL:'Alabama', AK:'Alaska', AZ:'Arizona', AR:'Arkansas', CA:'California', CO:'Colorado', CT:'Connecticut', DE:'Delaware', DC:'District of Columbia', FL:'Florida', GA:'Georgia', HI:'Hawaii', ID:'Idaho', IL:'Illinois', IN:'Indiana', IA:'Iowa', KS:'Kansas', KY:'Kentucky', LA:'Louisiana', ME:'Maine', MD:'Maryland', MA:'Massachusetts', MI:'Michigan', MN:'Minnesota', MS:'Mississippi', MO:'Missouri', MT:'Montana', NE:'Nebraska', NV:'Nevada', NH:'New Hampshire', NJ:'New Jersey', NM:'New Mexico', NY:'New York', NC:'North Carolina', ND:'North Dakota', OH:'Ohio', OK:'Oklahoma', OR:'Oregon', PA:'Pennsylvania', RI:'Rhode Island', SC:'South Carolina', SD:'South Dakota', TN:'Tennessee', TX:'Texas', UT:'Utah', VT:'Vermont', VA:'Virginia', WA:'Washington', WV:'West Virginia', WI:'Wisconsin', WY:'Wyoming' };
+      var code = '';
+      try { code = (new URLSearchParams(location.search).get('state') || '').toUpperCase().slice(0, 2); } catch (e) {}
+      if (!code || code === 'NE' || !NAMES[code]) {
+        window.location.replace('quote-screen.html');
+        return;
+      }
+      document.getElementById('oos-state-code').value = code;
+      var label = NAMES[code] + ' (' + code + ')';
+      var el = document.getElementById('oos-state-label');
+      var elEn = document.getElementById('oos-state-label-en');
+      if (el) el.textContent = label;
+      if (elEn) elEn.textContent = label;
+
+      var form = document.getElementById('oos-form');
+      var msgEl = document.getElementById('oos-msg-status');
+      var btn = document.getElementById('oos-submit');
+      form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        if (msgEl) { msgEl.classList.add('d-none'); msgEl.classList.remove('text-danger', 'text-success'); }
+        var lang = document.documentElement.classList.contains('lang-en') ? 'en' : 'es';
+        var fd = new FormData(form);
+        if (fd.get('website')) return;
+        var payload = {
+          source: 'out_of_state_referral',
+          firstName: (fd.get('firstName') || '').trim(),
+          lastName: (fd.get('lastName') || '').trim(),
+          email: (fd.get('email') || '').trim(),
+          phone: (fd.get('phone') || '').trim(),
+          state: code,
+          quoteSummary: (fd.get('quoteSummary') || '').trim(),
+          consent: document.getElementById('oos-consent').checked,
+          lang: lang
+        };
+        if (btn) btn.disabled = true;
+        try {
+          var res = await fetch('/api/quote-lead-sync', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+          var data = await res.json().catch(function () { return {}; });
+          if (!res.ok || !data.ok) throw new Error(data.error || (lang === 'es' ? 'Error al enviar' : 'Send failed'));
+          if (msgEl) {
+            msgEl.classList.remove('d-none');
+            msgEl.classList.add('text-success');
+            msgEl.textContent = lang === 'es' ? '¡Gracias! Nos pondremos en contacto cuando podamos.' : 'Thank you—we’ll be in touch when we can.';
+          }
+          form.reset();
+          document.getElementById('oos-state-code').value = code;
+        } catch (err) {
+          if (msgEl) {
+            msgEl.classList.remove('d-none');
+            msgEl.classList.add('text-danger');
+            msgEl.textContent = err.message || (lang === 'es' ? 'Error al enviar.' : 'Could not send.');
+          }
+        } finally {
+          if (btn) btn.disabled = false;
+        }
+      });
+    })();
+    var y = document.getElementById('year');
+    if (y) y.textContent = new Date().getFullYear();
+    var hamburgerBtn = document.getElementById('hamburger-btn');
+    var mobileMenu = document.getElementById('mobile-menu');
+    if (hamburgerBtn && mobileMenu) {
+      hamburgerBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        mobileMenu.classList.toggle('active');
+        hamburgerBtn.textContent = mobileMenu.classList.contains('active') ? '✕' : '☰';
+      });
+      document.addEventListener('click', function (e) {
+        if (!mobileMenu.contains(e.target) && !hamburgerBtn.contains(e.target)) {
+          mobileMenu.classList.remove('active');
+          hamburgerBtn.textContent = '☰';
+        }
+      });
+    }
+  </script>
+</body>
+</html>

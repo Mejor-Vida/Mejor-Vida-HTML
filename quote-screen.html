@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <script>
+  (function () {
+    if (location.hostname === 'mejorvidainsurance.com') {
+      location.replace('https://www.mejorvidainsurance.com' + location.pathname + location.search + location.hash);
+    }
+  })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>State selection — Mejor Vida Insurance</title>
+  <meta name="robots" content="noindex, follow" />
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="css/quote-flow-shared.css" rel="stylesheet" />
+  <style>
+    .state-screen-lead { max-width: 28rem; }
+  </style>
+  <script>
+    (function(){
+      try {
+        var navEntry = performance.getEntriesByType('navigation')[0];
+        var isReload = navEntry && navEntry.type === 'reload';
+        if (isReload) sessionStorage.removeItem('sessionLang');
+        var L = sessionStorage.getItem('sessionLang') || 'es';
+        document.documentElement.className = 'lang-' + L;
+      } catch(e) {
+        document.documentElement.className = 'lang-es';
+      }
+    })();
+  </script>
+</head>
+<body class="d-flex flex-column min-vh-100 bg-light" style="font-family: 'Inter', system-ui, sans-serif; color: #1f2937;">
+
+  <header class="sticky-top bg-white shadow-sm border-bottom">
+    <div class="container">
+      <div class="d-flex align-items-center justify-content-between header-inner">
+        <div class="flex-shrink-0 header-logo-wrap">
+          <a href="/" class="d-block">
+            <img id="header-logo" src="img/logo-spanish2.png" alt="Mejor Vida Insurance logo" class="header-logo" />
+          </a>
+        </div>
+        <nav class="desktop-nav d-none d-lg-flex align-items-center">
+          <a href="/" data-lang="es" class="nav-link-cm">Inicio</a>
+          <a href="/" data-lang="en" class="nav-link-cm">Home</a>
+          <a href="/#about" data-lang="es" class="nav-link-cm">Sobre Julie</a>
+          <a href="/#about" data-lang="en" class="nav-link-cm">About</a>
+          <a href="/#how-it-works" data-lang="es" class="nav-link-cm">Cómo funciona</a>
+          <a href="/#how-it-works" data-lang="en" class="nav-link-cm">How It Works</a>
+          <a href="/#faq" data-lang="es" class="nav-link-cm">FAQ</a>
+          <a href="/#faq" data-lang="en" class="nav-link-cm">FAQ</a>
+          <a href="blog.html" data-lang="es" class="nav-link-cm">Blog</a>
+          <a href="blog.html" data-lang="en" class="nav-link-cm">Blog</a>
+        </nav>
+        <div class="d-flex align-items-center gap-2">
+          <a href="tel:+14025881125" class="header-phone-compact flex-shrink-0 align-items-center justify-content-center" aria-label="Call office 402-588-1125" title="402-588-1125"><i class="fas fa-phone" aria-hidden="true"></i></a>
+          <a href="/" data-lang="es" class="desktop-cta d-none d-lg-inline-block btn-see-prices text-decoration-none text-dark">Inicio</a>
+          <a href="/" data-lang="en" class="desktop-cta d-none d-lg-inline-block btn-see-prices text-decoration-none text-dark">Home</a>
+          <a href="https://wa.me/14024405438?text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20seguro%20de%20gastos%20finales." target="_blank" rel="noopener" data-lang="es" class="desktop-cta d-none d-lg-inline-flex btn btn-sm fw-bold align-items-center rounded-pill px-3" style="background:#25D366;border-color:#25D366;color:#fff;"><i class="fab fa-whatsapp me-1" aria-hidden="true"></i>WhatsApp</a>
+          <a href="https://wa.me/14024405438?text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20seguro%20de%20gastos%20finales." target="_blank" rel="noopener" data-lang="en" class="desktop-cta d-none d-lg-inline-flex btn btn-sm fw-bold align-items-center rounded-pill px-3" style="background:#25D366;border-color:#25D366;color:#fff;"><i class="fab fa-whatsapp me-1" aria-hidden="true"></i>WhatsApp</a>
+          <div class="d-flex gap-1 ms-2">
+            <button class="lang-btn active px-2 py-1 rounded small fw-bold border-2" data-lang-btn="es">ES</button>
+            <button class="lang-btn px-2 py-1 rounded small fw-bold border-2" data-lang-btn="en">EN</button>
+          </div>
+          <button class="hamburger-btn" id="hamburger-btn" aria-label="Open menu">☰</button>
+        </div>
+      </div>
+    </div>
+    <div class="mobile-menu" id="mobile-menu">
+      <a href="/" data-lang="es" class="mobile-menu-link">Inicio</a>
+      <a href="/" data-lang="en" class="mobile-menu-link">Home</a>
+      <a href="/#about" data-lang="es" class="mobile-menu-link">Sobre Julie</a>
+      <a href="/#about" data-lang="en" class="mobile-menu-link">About</a>
+      <a href="/#how-it-works" data-lang="es" class="mobile-menu-link">Cómo funciona</a>
+      <a href="/#how-it-works" data-lang="en" class="mobile-menu-link">How It Works</a>
+      <a href="/#faq" data-lang="es" class="mobile-menu-link">FAQ</a>
+      <a href="/#faq" data-lang="en" class="mobile-menu-link">FAQ</a>
+      <a href="blog.html" data-lang="es" class="mobile-menu-link">Blog</a>
+      <a href="blog.html" data-lang="en" class="mobile-menu-link">Blog</a>
+      <a href="tel:+14025881125" data-lang="es" class="mobile-menu-link fw-bold" style="color:#0D47A1;"><i class="fas fa-phone me-2"></i>Llama a nuestra línea de oficina - 402-588-1125</a>
+      <a href="tel:+14025881125" data-lang="en" class="mobile-menu-link fw-bold" style="color:#0D47A1;"><i class="fas fa-phone me-2"></i>Call our office line - 402-588-1125</a>
+      <a href="https://wa.me/14024405438?text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20seguro%20de%20gastos%20finales." target="_blank" rel="noopener" data-lang="es" class="mobile-menu-link fw-bold" style="color:#1D9E53;"><i class="fab fa-whatsapp me-2"></i>Envíanos un mensaje por WhatsApp</a>
+      <a href="https://wa.me/14024405438?text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20seguro%20de%20gastos%20finales." target="_blank" rel="noopener" data-lang="en" class="mobile-menu-link fw-bold" style="color:#1D9E53;"><i class="fab fa-whatsapp me-2"></i>Message us on WhatsApp</a>
+    </div>
+  </header>
+
+  <section class="hero-two-tone py-4 py-md-5 relative">
+    <div class="hero-dark-overlay">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 500" preserveAspectRatio="none" aria-hidden="true"><path d="M 0 0 L 1200 0 C 900 350 300 150 0 500 L 0 0 Z" /></svg>
+    </div>
+    <div class="container text-center hero-content-overlay px-3">
+      <h1 class="fw-bold quote-hero-title mb-2" data-lang="es">¿En qué estado vive?</h1>
+      <h1 class="fw-bold quote-hero-title mb-2" data-lang="en">Which state do you live in?</h1>
+      <p class="text-white mb-0 small opacity-90" style="max-width:36rem;margin-left:auto;margin-right:auto;" data-lang="es">Julie está licenciada solo en Nebraska. Elija su estado para continuar.</p>
+      <p class="text-white mb-0 small opacity-90" style="max-width:36rem;margin-left:auto;margin-right:auto;" data-lang="en">Julie is licensed only in Nebraska. Select your state to continue.</p>
+    </div>
+  </section>
+
+  <section class="flex-grow-1 py-4 py-md-5 bg-light">
+    <div class="container" style="max-width:40rem;">
+      <div class="bg-white rounded-3 p-4 p-md-5 shadow-sm mx-auto state-screen-lead">
+        <form id="state-screen-form" novalidate>
+          <label for="state-select" class="form-label fw-semibold" data-lang="es">Estado</label>
+          <label for="state-select" class="form-label fw-semibold" data-lang="en">State</label>
+          <select id="state-select" class="form-select form-select-lg mb-3" required>
+            <option value="">—</option>
+          </select>
+          <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-primary-gold btn-lg fw-bold rounded">
+              <span data-lang="es">Continuar</span>
+              <span data-lang="en">Continue</span>
+            </button>
+          </div>
+        </form>
+        <p class="small text-body-secondary text-center mt-3 mb-0" data-lang="es"><a href="/">Volver al inicio</a></p>
+        <p class="small text-body-secondary text-center mt-3 mb-0" data-lang="en"><a href="/">Back to home</a></p>
+      </div>
+    </div>
+  </section>
+
+  <footer style="background:#1a365d; padding: 8px 0 24px 0;">
+    <div class="container">
+      <div class="d-flex flex-column flex-md-row align-items-center justify-content-between gap-2 text-white" style="margin:0; padding:0;">
+        <img src="img/logo-spanish2.png" alt="Mejor Vida Insurance" style="height:130px;filter:brightness(0) invert(1);margin-top:-25px;margin-bottom:-25px;" />
+        <span class="small"><i class="fas fa-phone me-2 opacity-75"></i><a href="tel:+14025881125" class="text-white text-opacity-90 text-decoration-none">402-588-1125</a></span>
+        <span class="small"><i class="fas fa-envelope me-2 opacity-75"></i><a href="mailto:Julie@mejorvidainsurance.com" class="text-white text-opacity-90 text-decoration-none">Julie@mejorvidainsurance.com</a></span>
+      </div>
+      <div class="border-top border-secondary mt-2 pt-2">
+        <p class="small text-center text-white text-opacity-50 mb-0">&copy; <span id="year"></span> Mejor Vida Insurance LLC.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="script.js"></script>
+  <script>
+    (function () {
+      var US_STATES = [['AL','Alabama'],['AK','Alaska'],['AZ','Arizona'],['AR','Arkansas'],['CA','California'],['CO','Colorado'],['CT','Connecticut'],['DE','Delaware'],['DC','District of Columbia'],['FL','Florida'],['GA','Georgia'],['HI','Hawaii'],['ID','Idaho'],['IL','Illinois'],['IN','Indiana'],['IA','Iowa'],['KS','Kansas'],['KY','Kentucky'],['LA','Louisiana'],['ME','Maine'],['MD','Maryland'],['MA','Massachusetts'],['MI','Michigan'],['MN','Minnesota'],['MS','Mississippi'],['MO','Missouri'],['MT','Montana'],['NE','Nebraska'],['NV','Nevada'],['NH','New Hampshire'],['NJ','New Jersey'],['NM','New Mexico'],['NY','New York'],['NC','North Carolina'],['ND','North Dakota'],['OH','Ohio'],['OK','Oklahoma'],['OR','Oregon'],['PA','Pennsylvania'],['RI','Rhode Island'],['SC','South Carolina'],['SD','South Dakota'],['TN','Tennessee'],['TX','Texas'],['UT','Utah'],['VT','Vermont'],['VA','Virginia'],['WA','Washington'],['WV','West Virginia'],['WI','Wisconsin'],['WY','Wyoming']];
+      US_STATES.sort(function (a, b) { return a[1].localeCompare(b[1]); });
+      var sel = document.getElementById('state-select');
+      if (!sel) return;
+      US_STATES.forEach(function (row) {
+        var o = document.createElement('option');
+        o.value = row[0];
+        o.textContent = row[1] + ' (' + row[0] + ')';
+        sel.appendChild(o);
+      });
+      var form = document.getElementById('state-screen-form');
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var code = (sel.value || '').toUpperCase();
+        if (!code) return;
+        if (code === 'NE') {
+          window.location.href = 'quote.html';
+        } else {
+          window.location.href = 'quote-out-of-state.html?state=' + encodeURIComponent(code);
+        }
+      });
+    })();
+    var y = document.getElementById('year');
+    if (y) y.textContent = new Date().getFullYear();
+    var hamburgerBtn = document.getElementById('hamburger-btn');
+    var mobileMenu = document.getElementById('mobile-menu');
+    if (hamburgerBtn && mobileMenu) {
+      hamburgerBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        mobileMenu.classList.toggle('active');
+        hamburgerBtn.textContent = mobileMenu.classList.contains('active') ? '✕' : '☰';
+      });
+      document.addEventListener('click', function (e) {
+        if (!mobileMenu.contains(e.target) && !hamburgerBtn.contains(e.target)) {
+          mobileMenu.classList.remove('active');
+          hamburgerBtn.textContent = '☰';
+        }
+      });
+      mobileMenu.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', function () {
+          mobileMenu.classList.remove('active');
+          hamburgerBtn.textContent = '☰';
+        });
+      });
+    }
+  </script>
+</body>
+</html>

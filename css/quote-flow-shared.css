@@ -1,0 +1,264 @@
+/* Shared quote flow pages — header + hero (from quote.html) */
+    /* Two-tone blue hero - smooth curve from bottom-left to top-right */
+    .hero-two-tone {
+      position: relative;
+      background: #90CDF4;
+      overflow: hidden;
+    }
+    
+    .hero-dark-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+    
+    .hero-dark-overlay svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .hero-dark-overlay path {
+      fill: #0D47A1;
+    }
+    
+    /* Hero content overlay */
+    .hero-content-overlay {
+      position: relative;
+      z-index: 2;
+    }
+
+    .quote-hero-title {
+      color: #fec963 !important;
+      text-shadow: 0 2px 16px rgba(0, 0, 0, 0.4);
+      font-size: clamp(2.25rem, 5.5vw, 3.75rem);
+      line-height: 1.15;
+    }
+    
+    /* Hero CTA button - yellow/orange */
+    .btn-primary-gold {
+      background-color: #FEC963;
+      color: #1a202c;
+      border: 2px solid #FEC963;
+      transition: all 0.2s ease-in-out;
+    }
+    
+    .btn-primary-gold:hover {
+      background-color: #f5b942;
+      border-color: #f5b942;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(254, 201, 99, 0.4);
+    }
+    
+    /* Header CTA button */
+    .btn-header-cta {
+      background-color: #63b3ed;
+      color: #1a365d;
+      border-radius: 4px;
+      padding: 8px 16px;
+      font-size: 14px;
+      font-weight: 700;
+      border: none;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      transition: all 0.15s cubic-bezier(0, 0, 0.2, 1);
+    }
+    
+    .btn-header-cta:hover {
+      background-color: #4299e1;
+      box-shadow: 0 4px 8px rgba(99, 179, 237, 0.4);
+      transform: translateY(-1px);
+    }
+    
+    /* Header navigation links */
+    .nav-link-cm {
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: #1a202c;
+      text-decoration: none;
+      padding: 4px 10px;
+      transition: all 0.15s cubic-bezier(0, 0, 0.2, 1);
+    }
+    
+    .nav-link-cm:hover {
+      color: #2563eb;
+    }
+    
+    /* See Prices button - yellow/orange */
+    .btn-see-prices {
+      background-color: #FEC963;
+      color: #1a202c;
+      border-radius: 6px;
+      padding: 10px 20px;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      border: none;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      transition: all 0.15s cubic-bezier(0, 0, 0.2, 1);
+      white-space: nowrap;
+    }
+    
+    .btn-see-prices:hover {
+      background-color: #f5b942;
+      box-shadow: 0 4px 8px rgba(254, 201, 99, 0.4);
+      transform: translateY(-1px);
+    }
+    
+    /* Phone block styles */
+    .phone-block-label {
+      font-size: 12px;
+      color: #6b7280;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+    }
+    
+    .phone-block-number {
+      font-size: 16px;
+      font-weight: 700;
+      color: #0D47A1;
+      letter-spacing: -0.01em;
+      text-decoration: none;
+    }
+    
+    .phone-block-number:hover {
+      color: #1565C0;
+      text-decoration: underline;
+    }
+
+    /* Header: tap-to-call icon only (number in aria-label / title, not shown as text) */
+    .header-phone-compact {
+      display: none; /* lg+ header bar only; mobile uses hamburger menu */
+      align-items: center;
+      justify-content: center;
+      min-width: 2.5rem;
+      min-height: 2.5rem;
+      padding: 0.2rem;
+      color: #0D47A1;
+      text-decoration: none !important;
+      border-radius: 8px;
+      line-height: 1;
+      flex-shrink: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .header-phone-compact .fa-phone {
+      font-size: 1.15rem;
+    }
+    .header-phone-compact:hover {
+      color: #1565C0;
+    }
+    @media (min-width: 992px) {
+      .header-phone-compact {
+        display: inline-flex;
+      }
+    }
+
+    /* --- Header: 81px, logo 111px, nav pushed right with even spacing --- */
+    .navbar { height: 81px !important; padding: 0 !important; display: flex !important; align-items: center !important; }
+    .navbar-brand { flex: 0 0 auto; display: flex !important; align-items: center !important; padding: 0 !important; margin-right: 20px; }
+    .navbar-brand img { height: 244px !important; width: auto !important; max-height: none !important; object-fit: contain; }
+    .navbar-nav { flex: 1 1 auto; display: flex !important; align-items: center !important; justify-content: flex-start; margin: 0; padding: 0; list-style: none; }
+    .navbar-nav .nav-link { padding-left: 15px; padding-right: 15px; }
+
+    header.sticky-top { height: 81px !important; padding: 0 !important; }
+    header.sticky-top > .container { height: 100% !important; padding-top: 0 !important; padding-bottom: 0 !important; padding-left: 0 !important; display: flex !important; align-items: center !important; }
+    .header-inner { display: flex !important; align-items: center !important; justify-content: flex-start !important; gap: 0; width: 100%; }
+    .header-logo-wrap { flex: 0 0 auto; display: flex !important; align-items: center !important; justify-content: center !important; height: 81px !important; padding: 0 !important; margin-left: -120px !important; margin-right: 1rem !important; }
+    .header-logo { height: 244px !important; width: auto !important; max-height: none !important; object-fit: contain; display: block !important; transform: translateY(8px) !important; }
+    .nav-link-cm { white-space: nowrap !important; }
+    .header-inner .desktop-nav { flex: 1 1 auto !important; margin-left: 0 !important; gap: 0 !important; justify-content: space-evenly !important; max-width: 100%; }
+    
+    /* Header sticks to top when scrolling. */
+    header.sticky-top {
+      position: sticky !important;
+      top: 0 !important;
+      z-index: 1020;
+      overflow: visible;
+    }
+
+    /*
+      Logo image is ~244px in an 81px-tall bar. Overflow paints above the rest of the page
+      (below the header) because of z-index: 1020, so it intercepts clicks on the quote form.
+    */
+    header.sticky-top .header-logo-wrap {
+      overflow: hidden;
+      max-height: 81px;
+    }
+    
+    /* Mobile menu */
+    .mobile-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: white;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      padding: 16px;
+      z-index: 100;
+    }
+    
+    .mobile-menu.active {
+      display: block;
+    }
+    
+    .mobile-menu a {
+      display: block;
+      padding: 12px 16px;
+      color: #1a365d;
+      font-weight: 500;
+      border-bottom: 1px solid #e5e7eb;
+      transition: background-color 0.15s;
+    }
+    
+    .mobile-menu a:hover {
+      background-color: #f3f4f6;
+    }
+    
+    .mobile-menu a:last-child {
+      border-bottom: none;
+    }
+    
+    .hamburger-btn {
+      display: none;
+      padding: 8px;
+      cursor: pointer;
+      font-size: 24px;
+      color: #1a365d;
+    }
+    
+    @media (max-width: 991px) {
+      .hamburger-btn {
+        display: block;
+        margin-right: 0;
+      }
+      .desktop-nav {
+        display: none !important;
+      }
+      .desktop-cta {
+        display: none !important;
+      }
+      .header-inner {
+        justify-content: space-between !important;
+        position: relative;
+      }
+      .header-inner > .d-flex.align-items-center.gap-2 {
+        position: absolute;
+        right: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        margin-left: 0;
+        z-index: 2;
+      }
+      .header-logo-wrap {
+        margin-left: -60px !important;
+      }
+    }
+
+    /* Language toggle: show only the selected language. Must override Bootstrap's !important. */
+    html.lang-es [data-lang="en"] { display: none !important; }
+    html.lang-en [data-lang="es"] { display: none !important; }
+

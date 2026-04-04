@@ -1,7 +1,8 @@
 /**
  * POST /api/quote-lead-sync
  * Inserts quote_lead_submissions (Supabase) then syncs contact to HubSpot.
- * Used by quote.html — FEX iframe cannot send data cross-origin; the form captures lead + optional pasted quote text.
+ * Used by quote.html and quote-out-of-state.html — FEX iframe cannot send data cross-origin;
+ * out-of-state referrals use source: out_of_state_referral.
  *
  * Vercel env: SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, HUBSPOT_ACCESS_TOKEN
  */
@@ -150,6 +151,20 @@ module.exports = async function handler(req, res) {
     .slice(0, 2)
     .toUpperCase();
   const lang = body.lang === "en" ? "en" : "es";
+  const leadSource =
+    body.source === "out_of_state_referral" ? "out_of_state_referral" : "fexquotes_page";
+
+  if (leadSource === "out_of_state_referral") {
+    if (!stateCode || stateCode.length !== 2) {
+      return json(res, 400, { ok: false, error: "State required (2 letters)" });
+    }
+    if (stateCode === "NE") {
+      return json(res, 400, {
+        ok: false,
+        error: "Use the Nebraska quote flow for NE residents",
+      });
+    }
+  }
 
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return json(res, 400, { ok: false, error: "Valid email required" });
@@ -169,7 +184,7 @@ module.exports = async function handler(req, res) {
     phone,
     state: stateCode,
     lang,
-    source: "fexquotes_page",
+    source: leadSource,
   };
   const requestRaw = {
     ...payload,
@@ -177,20 +192,37 @@ module.exports = async function handler(req, res) {
     submittedAt: nowIso,
   };
 
+  let summaryForDb = quoteSummary || null;
+  if (leadSource === "out_of_state_referral") {
+    const prefix =
+      lang === "es"
+        ? `[Referencia fuera de NE — estado ${stateCode}]\n`
+        : `[Out-of-state referral — state ${stateCode}]\n`;
+    summaryForDb = prefix + (quoteSummary || "(no additional message)");
+  }
+
+  const quoteStatus =
+    leadSource === "out_of_state_referral"
+      ? "referral_requested"
+      : quoteSummary
+        ? "quote_generated"
+        : "quote_requested";
+
   const insertRow = {
-    source: "fexquotes_page",
+    source: leadSource,
     first_name: firstName,
     last_name: lastName,
     email,
     phone: phone || null,
     state_code: stateCode || null,
     lang,
-    quote_summary: quoteSummary || null,
+    quote_summary: summaryForDb,
     consent_summary: { followUp: true, at: nowIso },
     payload,
     request_raw: requestRaw,
-    quote_status: quoteSummary ? "quote_generated" : "quote_requested",
-    quote_generated_at: quoteSummary ? nowIso : null,
+    quote_status: quoteStatus,
+    quote_generated_at:
+      leadSource === "fexquotes_page" && quoteSummary ? nowIso : null,
     crm_sync_needed: true,
   };
 
@@ -216,6 +248,7 @@ module.exports = async function handler(req, res) {
     lastname: lastName,
   };
   if (phone) hsProps.phone = phone;
+  if (stateCode) hsProps.state = stateCode;
 
   let hubspotContactId = null;
   let hubspotErr = null;
