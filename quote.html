@@ -292,8 +292,152 @@
 
     .quote-form-card { max-width: 42rem; }
 
-    /* FEX Quotes iframe — outer frame only (cannot style inside cross-origin iframe) */
+    /* FEX: fixed label column + short shaft; tips overlap iframe (1fr was stretching arrows) */
+    .fex-quotes-pair {
+      display: grid;
+      grid-template-columns: 12rem min(100%, 350px);
+      align-items: stretch;
+      gap: 0;
+      width: fit-content;
+      max-width: 100%;
+      margin-inline: auto;
+      position: relative;
+      overflow: visible;
+    }
+    .fex-guide-col {
+      position: relative;
+      z-index: 2;
+      align-self: stretch;
+      width: 12rem;
+      min-width: 12rem;
+      min-height: 0;
+      height: 100%;
+      padding-right: 0;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: #0D47A1;
+      line-height: 1.15;
+    }
+    .fex-gl {
+      position: absolute;
+      left: 0;
+      right: 0;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 0.2rem;
+      width: 100%;
+      /* Same downward nudge for every row (Estado + rest together) */
+      transform: translateY(calc(-50% + 38px));
+      pointer-events: none;
+    }
+    /* Vertical anchor (% of guide height) — FEX 350×525 */
+    .fex-gl[data-fex-row="0"] { top: 13.5%; }
+    .fex-gl[data-fex-row="1"] { top: 21.9%; }
+    .fex-gl[data-fex-row="2"] { top: 30.5%; }
+    .fex-gl[data-fex-row="3"] { top: 37.4%; }
+    .fex-gl[data-fex-row="4"] { top: 43.4%; }
+    .fex-gl[data-fex-row="5"] { top: 50.4%; }
+    .fex-gl[data-fex-row="6"] { top: 56.9%; }
+    .fex-gl[data-fex-row="7"] { top: 63.85%; }
+    .fex-gl[data-fex-row="8"] { top: 71.5%; }
+    .fex-gl[data-fex-row="9"] { top: 79.8%; }
+    .fex-label-txt {
+      flex: 0 1 auto;
+      max-width: 8.75rem;
+      min-width: 0;
+      text-align: right;
+      word-wrap: break-word;
+      hyphens: auto;
+    }
+    .fex-arrow-line {
+      flex: 0 0 2rem;
+      width: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      min-height: 1.1rem;
+    }
+    .fex-shaft {
+      flex: 1 1 auto;
+      min-width: 0;
+      height: 2px;
+      background: rgba(13, 71, 161, 0.55);
+      border-radius: 1px;
+    }
+    .fex-arrow-tip {
+      flex-shrink: 0;
+      font-size: 0.65rem;
+      line-height: 1;
+      color: #0D47A1;
+      margin-left: -1px;
+      /* Pull past iframe border; guide-col z-index:2 paints above .fex-quotes-wrap */
+      margin-right: -82px;
+      position: relative;
+      z-index: 3;
+      filter: drop-shadow(0 0 0.5px rgba(13, 71, 161, 0.4));
+    }
+    /* Shorter reach than default -82px so tips sit left of English labels */
+    .fex-gl[data-fex-row="0"] .fex-arrow-tip,
+    .fex-gl[data-fex-row="5"] .fex-arrow-tip,
+    .fex-gl[data-fex-row="6"] .fex-arrow-tip,
+    .fex-gl[data-fex-row="7"] .fex-arrow-tip,
+    .fex-gl[data-fex-row="8"] .fex-arrow-tip {
+      margin-right: -38px;
+    }
+    .fex-gl[data-fex-row="9"] .fex-arrow-tip {
+      margin-right: -68px;
+    }
+    .fex-gl[data-fex-row="1"] .fex-arrow-tip {
+      margin-right: -14px;
+    }
+    /* Same horizontal reach as Amount / Gender / Tobacco */
+    .fex-gl[data-fex-row="2"] .fex-arrow-tip,
+    .fex-gl[data-fex-row="3"] .fex-arrow-tip,
+    .fex-gl[data-fex-row="4"] .fex-arrow-tip {
+      margin-right: -26px;
+    }
+    @media (max-width: 639.98px) {
+      .fex-quotes-pair {
+        grid-template-columns: 1fr;
+        width: 100%;
+      }
+      .fex-guide-col {
+        order: 1;
+        position: static;
+        width: 100%;
+        min-width: 0;
+        height: auto !important;
+        margin-bottom: 0.5rem;
+        min-height: auto !important;
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+      }
+      .fex-gl {
+        position: static;
+        transform: none;
+        justify-content: center;
+      }
+      .fex-quotes-wrap {
+        order: 2;
+      }
+      .fex-arrow-line {
+        flex: 0 0 2rem;
+        width: 2rem;
+      }
+      .fex-arrow-tip {
+        margin-right: -20px;
+      }
+      .fex-label-txt {
+        max-width: 6.5rem;
+        font-size: 0.75rem;
+      }
+    }
+
     .fex-quotes-wrap {
+      position: relative;
+      z-index: 1;
       width: min(100%, 350px);
       aspect-ratio: 350 / 525;
       margin-inline: auto;
@@ -363,8 +507,6 @@
           <a href="blog.html" data-lang="es" class="nav-link-cm">Blog</a>
           <a href="blog.html" data-lang="en" class="nav-link-cm">Blog</a>
           
-          <a href="/#contact" data-lang="es" class="nav-link-cm">Contacto</a>
-          <a href="/#contact" data-lang="en" class="nav-link-cm">Contact</a>
         </nav>
 
         <!-- Right side: call icon + CTAs + language + mobile menu -->
@@ -401,8 +543,6 @@
       <a href="/#faq" data-lang="en" class="mobile-menu-link">FAQ</a>
       <a href="blog.html" data-lang="es" class="mobile-menu-link">Blog</a>
       <a href="blog.html" data-lang="en" class="mobile-menu-link">Blog</a>
-      <a href="/#contact" data-lang="es" class="mobile-menu-link">Contacto</a>
-      <a href="/#contact" data-lang="en" class="mobile-menu-link">Contact</a>
       <a href="tel:+14025881125" data-lang="es" class="mobile-menu-link fw-bold" style="color:#0D47A1;"><i class="fas fa-phone me-2"></i>Llama a nuestra línea de oficina - 402-588-1125</a>
       <a href="tel:+14025881125" data-lang="en" class="mobile-menu-link fw-bold" style="color:#0D47A1;"><i class="fas fa-phone me-2"></i>Call our office line - 402-588-1125</a>
       <a href="https://wa.me/14024405438?text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20seguro%20de%20gastos%20finales." target="_blank" rel="noopener" data-lang="es" class="mobile-menu-link fw-bold" style="color:#1D9E53;"><i class="fab fa-whatsapp me-2"></i>Envíanos un mensaje por WhatsApp</a>
@@ -429,10 +569,32 @@
         <p class="text-center mb-3 small text-body-secondary" data-lang="es">La cotización se procesa en FEX Quotes. Los resultados son aproximados; Julie puede confirmar opciones y precios finales.</p>
         <p class="text-center mb-3 small text-body-secondary" data-lang="en">Quoting runs on FEX Quotes. Results are estimates; Julie can confirm options and final pricing.</p>
 
-        <p class="text-center mb-4 small fst-italic text-body-secondary" data-lang="es">FEX no ofrece el cotizador en español. La herramienta a continuación está en inglés; Julie puede ayudarle en español por teléfono o WhatsApp.</p>
-        <p class="text-center mb-4 small fst-italic text-body-secondary" data-lang="en">FEX does not provide a Spanish quoter. The tool below is in English; Julie can help in Spanish by phone or WhatsApp.</p>
+        <p class="text-center mb-3 small fst-italic text-body-secondary" data-lang="es">El cotizador está en inglés. Las etiquetas y flechas están al lado del formulario (arriba en pantallas pequeñas).</p>
+        <p class="text-center mb-3 small fst-italic text-body-secondary" data-lang="en">The quoter is in English. Labels and arrows sit beside the form (above on small screens).</p>
 
-        <div class="fex-quotes-container mb-4">
+        <div class="fex-quotes-pair mb-4">
+          <div class="fex-guide-col">
+            <div class="fex-gl" data-fex-row="0" data-lang="es"><span class="fex-label-txt">Estado</span><span class="fex-arrow-line" aria-hidden="true"><span class="fex-shaft"></span><span class="fex-arrow-tip">▶</span></span></div>
+            <div class="fex-gl" data-fex-row="0" data-lang="en"><span class="fex-label-txt">State</span><span class="fex-arrow-line" aria-hidden="true"><span class="fex-shaft"></span><span class="fex-arrow-tip">▶</span></span></div>
+            <div class="fex-gl" data-fex-row="1" data-lang="es"><span class="fex-label-txt">Fecha de nacimiento</span><span class="fex-arrow-line" aria-hidden="true"><span class="fex-shaft"></span><span class="fex-arrow-tip">▶</span></span></div>
+            <div class="fex-gl" data-fex-row="1" data-lang="en"><span class="fex-label-txt">Birth date</span><span class="fex-arrow-line" aria-hidden="true"><span class="fex-shaft"></span><span class="fex-arrow-tip">▶</span></span></div>
+            <div class="fex-gl" data-fex-row="2" data-lang="es"><span class="fex-label-txt">Monto</span><span class="fex-arrow-line" aria-hidden="true"><span class="fex-shaft"></span><span class="fex-arrow-tip">▶</span></span></div>
+            <div class="fex-gl" data-fex-row="2" data-lang="en"><span class="fex-label-txt">Amount</span><span class="fex-arrow-line" aria-hidden="true"><span class="fex-shaft"></span><span class="fex-arrow-tip">▶</span></span></div>
+            <div class="fex-gl" data-fex-row="3" data-lang="es"><span class="fex-label-txt">Género</span><span class="fex-arrow-line" aria-hidden="true"><span class="fex-shaft"></span><span class="fex-arrow-tip">▶</span></span></div>
+            <div class="fex-gl" data-fex-row="3" data-lang="en"><span class="fex-label-txt">Gender</span><span class="fex-arrow-line" aria-hidden="true"><span class="fex-shaft"></span><span class="fex-arrow-tip">▶</span></span></div>
+            <div class="fex-gl" data-fex-row="4" data-lang="es"><span class="fex-label-txt">Tabaco</span><span class="fex-arrow-line" aria-hidden="true"><span class="fex-shaft"></span><span class="fex-arrow-tip">▶</span></span></div>
+            <div class="fex-gl" data-fex-row="4" data-lang="en"><span class="fex-label-txt">Tobacco</span><span class="fex-arrow-line" aria-hidden="true"><span class="fex-shaft"></span><span class="fex-arrow-tip">▶</span></span></div>
+            <div class="fex-gl" data-fex-row="5" data-lang="es"><span class="fex-label-txt">Nombre</span><span class="fex-arrow-line" aria-hidden="true"><span class="fex-shaft"></span><span class="fex-arrow-tip">▶</span></span></div>
+            <div class="fex-gl" data-fex-row="5" data-lang="en"><span class="fex-label-txt">First name</span><span class="fex-arrow-line" aria-hidden="true"><span class="fex-shaft"></span><span class="fex-arrow-tip">▶</span></span></div>
+            <div class="fex-gl" data-fex-row="6" data-lang="es"><span class="fex-label-txt">Apellido</span><span class="fex-arrow-line" aria-hidden="true"><span class="fex-shaft"></span><span class="fex-arrow-tip">▶</span></span></div>
+            <div class="fex-gl" data-fex-row="6" data-lang="en"><span class="fex-label-txt">Last name</span><span class="fex-arrow-line" aria-hidden="true"><span class="fex-shaft"></span><span class="fex-arrow-tip">▶</span></span></div>
+            <div class="fex-gl" data-fex-row="7" data-lang="es"><span class="fex-label-txt">Teléfono</span><span class="fex-arrow-line" aria-hidden="true"><span class="fex-shaft"></span><span class="fex-arrow-tip">▶</span></span></div>
+            <div class="fex-gl" data-fex-row="7" data-lang="en"><span class="fex-label-txt">Phone</span><span class="fex-arrow-line" aria-hidden="true"><span class="fex-shaft"></span><span class="fex-arrow-tip">▶</span></span></div>
+            <div class="fex-gl" data-fex-row="8" data-lang="es"><span class="fex-label-txt">Correo</span><span class="fex-arrow-line" aria-hidden="true"><span class="fex-shaft"></span><span class="fex-arrow-tip">▶</span></span></div>
+            <div class="fex-gl" data-fex-row="8" data-lang="en"><span class="fex-label-txt">Email</span><span class="fex-arrow-line" aria-hidden="true"><span class="fex-shaft"></span><span class="fex-arrow-tip">▶</span></span></div>
+            <div class="fex-gl" data-fex-row="9" data-lang="es"><span class="fex-label-txt">Cotizar</span><span class="fex-arrow-line" aria-hidden="true"><span class="fex-shaft"></span><span class="fex-arrow-tip">▶</span></span></div>
+            <div class="fex-gl" data-fex-row="9" data-lang="en"><span class="fex-label-txt">Get quotes</span><span class="fex-arrow-line" aria-hidden="true"><span class="fex-shaft"></span><span class="fex-arrow-tip">▶</span></span></div>
+          </div>
           <div class="fex-quotes-wrap">
             <iframe
               src="https://fexquotes.com/wqt/v1/webquote.pl?id=55220&amp;fn=1&amp;vrt=m&amp;tgt=2&amp;cpn=6&amp;style=blue&amp;frm=1"
