@@ -1,4 +1,6 @@
-# FEX Quotes — website embed
+# FEX embed + lead capture (not repo rate tables)
+
+This folder documents the **third-party FEX web quoter** (`fexquotes.com`) embedded in `quote.html`, plus how **follow-up form** leads go to **Supabase** and **HubSpot**. It is **not** where we store carrier rate tables—those are not maintained in this repo.
 
 ## Live embed
 

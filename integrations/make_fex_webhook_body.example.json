@@ -1,0 +1,21 @@
+{
+  "_comment": "In Make.com HTTP module use JSON body and map each field to Gmail module outputs — do not paste this file literally.",
+  "senderEmail": "MAP_FROM_EMAIL_FROM",
+  "senderName": "MAP_FROM_SENDER_NAME",
+  "subject": "MAP_FROM_SUBJECT",
+  "emailMessageId": "MAP_FROM_MESSAGE_ID_IF_AVAILABLE",
+  "bodyPlain": "MAP_FROM_TEXT_BODY",
+  "bodyHtml": "MAP_FROM_HTML_BODY",
+  "receivedAt": "MAP_FROM_DATE_ISO_OR_LEAVE_EMPTY",
+  "parsed": {
+    "firstName": "MAP_OR_PARSE_FROM_BODY",
+    "lastName": "MAP_OR_PARSE_FROM_BODY",
+    "phone": "",
+    "age": null,
+    "gender": "",
+    "tobacco": "",
+    "coverageAmount": null,
+    "state": "NE",
+    "quoteSummary": "MAP_OR_PARSE_CARRIER_LINES"
+  }
+}

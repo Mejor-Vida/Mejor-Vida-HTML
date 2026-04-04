@@ -404,44 +404,49 @@
     .fex-gl[data-fex-row="4"] .fex-arrow-tip {
       margin-right: -26px;
     }
+    /* Mobile: keep same grid + absolute row % as desktop so arrows match the iframe.
+       Previous stacked layout broke alignment. Scale the whole pair to fit narrow viewports. */
+    .fex-quotes-mobile-wrap {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
     @media (max-width: 639.98px) {
+      .fex-quotes-mobile-wrap {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 0.25rem;
+      }
       .fex-quotes-pair {
-        grid-template-columns: 1fr;
-        width: 100%;
+        grid-template-columns: 12rem min(100%, 350px);
+        width: max-content;
+        max-width: none;
+        margin-inline: auto;
+        flex-shrink: 0;
+        /* ~12rem + 350px; scale down so pair fits viewport without changing internal geometry */
+        zoom: min(1, calc((100vw - 1.5rem) / 33.875rem));
       }
       .fex-guide-col {
-        order: 1;
-        position: static;
-        width: 100%;
-        min-width: 0;
-        height: auto !important;
-        margin-bottom: 0.5rem;
-        min-height: auto !important;
-        display: flex;
-        flex-direction: column;
-        gap: 0.4rem;
+        position: relative;
+        width: 12rem;
+        min-width: 12rem;
+        height: auto;
+        align-self: stretch;
+        margin-bottom: 0;
       }
       .fex-gl {
-        position: static;
-        transform: none;
-        justify-content: center;
+        position: absolute;
+        transform: translateY(calc(-50% + 38px));
+        justify-content: flex-end;
       }
       .fex-quotes-wrap {
-        order: 2;
-      }
-      .fex-arrow-line {
-        flex: 0 0 2rem;
-        width: 2rem;
-      }
-      .fex-arrow-tip {
-        margin-right: -20px;
+        width: min(100%, 350px);
       }
       .fex-label-txt {
-        max-width: 6.5rem;
+        max-width: 8.75rem;
         font-size: 0.75rem;
       }
     }
-
     .fex-quotes-wrap {
       position: relative;
       z-index: 1;
@@ -577,6 +582,7 @@
           <p class="small mb-0 text-start text-body-secondary" data-lang="es">Julie Braunsroth está autorizada para ofrecer y vender seguros de vida y anualidades <strong>solo en Nebraska</strong>. El cotizador de abajo es para personas que buscan cobertura como residentes de Nebraska. Si usted no es residente de Nebraska, no utilice esta herramienta para cotizar; regrese a la <a href="quote-screen.html">selección de estado</a> para la opción correcta.</p>
           <p class="small mb-0 text-start text-body-secondary" data-lang="en">Julie Braunsroth is licensed to solicit and sell life insurance and annuities <strong>only in Nebraska</strong>. The quote tool below is for people seeking coverage as Nebraska residents. If you are not a Nebraska resident, do not use this tool to obtain a quote—go back to <a href="quote-screen.html">state selection</a> for the right option.</p>
         </div>
+        <div class="fex-quotes-mobile-wrap">
         <div class="fex-quotes-pair mb-4">
           <div class="fex-guide-col">
             <div class="fex-gl" data-fex-row="0" data-lang="es"><span class="fex-label-txt">Estado</span><span class="fex-arrow-line" aria-hidden="true"><span class="fex-shaft"></span><span class="fex-arrow-tip">▶</span></span></div>
@@ -630,6 +636,7 @@
               el.src = 'https://fexquotes.com/wqt/v1/webquote.pl?' + qs;
             })();
           </script>
+        </div>
         </div>
 
         <p class="text-center small text-body-secondary mb-2" data-lang="es">Cuando termine de ver sus opciones, puede agendar una cita con Julie (el cotizador no avisa automáticamente a nuestro sitio).</p>

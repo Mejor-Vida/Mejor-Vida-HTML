@@ -173,13 +173,8 @@ module.exports = async function handler(req, res) {
     return json(res, 400, { ok: false, error: "First and last name required" });
   }
 
-  const consentLicensedAgentInState =
-    body.consentLicensedAgentInState === true ||
-    body.consentLicensedAgentInState === "true" ||
-    body.consentLicensedAgentInState === 1;
-
   if (leadSource === "out_of_state_referral") {
-    if (!consentLicensedAgentInState) {
+    if (body.consentLicensedAgentInState !== true) {
       return json(res, 400, {
         ok: false,
         error: "Consent to contact by a licensed agent in your state is required",

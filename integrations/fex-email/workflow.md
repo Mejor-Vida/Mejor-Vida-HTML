@@ -1,4 +1,4 @@
-# FEX Quotes → Supabase → HubSpot
+# FEX embed → follow-up leads → Supabase → HubSpot
 
 ## Limitation (iframe)
 

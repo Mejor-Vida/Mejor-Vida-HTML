@@ -69,19 +69,6 @@ def _mark_applied(conn, filename: str) -> None:
         )
 
 
-def _carriers_table_exists(conn) -> bool:
-    with conn.cursor() as cur:
-        cur.execute(
-            """
-            SELECT EXISTS (
-              SELECT 1 FROM information_schema.tables
-              WHERE table_schema = 'public' AND table_name = 'carriers'
-            )
-            """
-        )
-        return bool(cur.fetchone()[0])
-
-
 def main() -> int:
     dsn = get_database_url()
     if not dsn:
@@ -98,13 +85,6 @@ def main() -> int:
             name = path.name
             if _is_applied(conn, name):
                 print(f"Skipping {name} (already applied).")
-                continue
-            if name.startswith("001") and _carriers_table_exists(conn):
-                print(
-                    f"Skipping {name} (public.carriers already exists — recording as applied). "
-                    "Remove row from schema_migrations to force re-run."
-                )
-                _mark_applied(conn, name)
                 continue
             sql = path.read_text(encoding="utf-8")
             print(f"Applying {name} …")

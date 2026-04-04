@@ -10,15 +10,5 @@ __pycache__/
 agent/screenshots/
 agent/logs/
 
-# Google Sheets API (never commit)
-**/credentials.json
-integrations/google_sheets/*.json
-integrations/google_sheets/authorized_user.json
-integrations/google/oauth_client.json
-integrations/google/client_secret_*.json
-
-# Exported lead data (PII)
-integrations/google_sheets/ic_import_export.csv
-
 # Playwright / local browser session dirs (if added by automation)
 integrations/.playwright_ic_session/

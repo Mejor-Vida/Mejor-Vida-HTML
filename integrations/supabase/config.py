@@ -1,4 +1,4 @@
-"""Load DATABASE_URL for Supabase Postgres (migrations + quote data)."""
+"""Load DATABASE_URL for Supabase Postgres (migrations)."""
 
 from __future__ import annotations
 
