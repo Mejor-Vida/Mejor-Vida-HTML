@@ -110,6 +110,7 @@
           <label for="state-select" class="form-label fw-semibold" data-lang="en">State</label>
           <select id="state-select" class="form-select form-select-lg mb-3" required>
             <option value="">—</option>
+            <option value="NE" selected>Nebraska (NE)</option>
           </select>
           <div class="d-grid gap-2">
             <button type="submit" class="btn btn-primary-gold btn-lg fw-bold rounded">
@@ -142,18 +143,17 @@
   <script>
     (function () {
       var US_STATES = [['AL','Alabama'],['AK','Alaska'],['AZ','Arizona'],['AR','Arkansas'],['CA','California'],['CO','Colorado'],['CT','Connecticut'],['DE','Delaware'],['DC','District of Columbia'],['FL','Florida'],['GA','Georgia'],['HI','Hawaii'],['ID','Idaho'],['IL','Illinois'],['IN','Indiana'],['IA','Iowa'],['KS','Kansas'],['KY','Kentucky'],['LA','Louisiana'],['ME','Maine'],['MD','Maryland'],['MA','Massachusetts'],['MI','Michigan'],['MN','Minnesota'],['MS','Mississippi'],['MO','Missouri'],['MT','Montana'],['NE','Nebraska'],['NV','Nevada'],['NH','New Hampshire'],['NJ','New Jersey'],['NM','New Mexico'],['NY','New York'],['NC','North Carolina'],['ND','North Dakota'],['OH','Ohio'],['OK','Oklahoma'],['OR','Oregon'],['PA','Pennsylvania'],['RI','Rhode Island'],['SC','South Carolina'],['SD','South Dakota'],['TN','Tennessee'],['TX','Texas'],['UT','Utah'],['VT','Vermont'],['VA','Virginia'],['WA','Washington'],['WV','West Virginia'],['WI','Wisconsin'],['WY','Wyoming']];
-      var neOnly = US_STATES.filter(function (r) { return r[0] === 'NE'; });
       var otherStates = US_STATES.filter(function (r) { return r[0] !== 'NE'; });
       otherStates.sort(function (a, b) { return a[1].localeCompare(b[1]); });
-      US_STATES = neOnly.concat(otherStates);
       var sel = document.getElementById('state-select');
       if (!sel) return;
-      US_STATES.forEach(function (row) {
+      otherStates.forEach(function (row) {
         var o = document.createElement('option');
         o.value = row[0];
         o.textContent = row[1] + ' (' + row[0] + ')';
         sel.appendChild(o);
       });
+      sel.value = 'NE';
       var form = document.getElementById('state-screen-form');
       form.addEventListener('submit', function (e) {
         e.preventDefault();

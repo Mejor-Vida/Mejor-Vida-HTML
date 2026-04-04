@@ -600,9 +600,10 @@
             <div class="fex-gl" data-fex-row="9" data-lang="es"><span class="fex-label-txt">Cotizar</span><span class="fex-arrow-line" aria-hidden="true"><span class="fex-shaft"></span><span class="fex-arrow-tip">▶</span></span></div>
             <div class="fex-gl" data-fex-row="9" data-lang="en"><span class="fex-label-txt">Get quotes</span><span class="fex-arrow-line" aria-hidden="true"><span class="fex-shaft"></span><span class="fex-arrow-tip">▶</span></span></div>
           </div>
+          <!-- FEX embed: webquote.pl params from FEX → Website Quoter → Enhanced Web Plugin. Bump FEX_EMBED_VER after dashboard changes to bust browser/CDN cache on iframe URL. -->
           <div class="fex-quotes-wrap">
             <iframe
-              src="https://fexquotes.com/wqt/v1/webquote.pl?id=55220&amp;fn=1&amp;vrt=m&amp;tgt=2&amp;cpn=6&amp;style=blue&amp;frm=1&amp;state=NE"
+              id="fex-embed-quote"
               title="Final expense quote — FEX Quotes (English interface)"
               scrolling="no"
               width="350"
@@ -610,6 +611,25 @@
               allowtransparency="true"
             ><a href="https://fexquotes.com/">Final Expense Quote Engine</a></iframe>
           </div>
+          <script>
+            (function () {
+              var el = document.getElementById('fex-embed-quote');
+              if (!el) return;
+              var FEX_EMBED_VER = '1';
+              var qs = [
+                'id=55220',
+                'state=NE',
+                'fn=1',
+                'vrt=m',
+                'tgt=2',
+                'cpn=6',
+                'style=blue',
+                'frm=1',
+                'embed_v=' + encodeURIComponent(FEX_EMBED_VER),
+              ].join('&');
+              el.src = 'https://fexquotes.com/wqt/v1/webquote.pl?' + qs;
+            })();
+          </script>
         </div>
 
         <p class="text-center small text-body-secondary mb-2" data-lang="es">Cuando termine de ver sus opciones, puede agendar una cita con Julie (el cotizador no avisa automáticamente a nuestro sitio).</p>

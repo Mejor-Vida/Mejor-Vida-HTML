@@ -4,8 +4,27 @@
 
 - **Page:** `quote.html` (section `.fex-quotes-container` / `.fex-quotes-wrap`).
 - **Endpoint:** `https://fexquotes.com/wqt/v1/webquote.pl`
-- **Query (current):** `id=55220`, `fn=1`, `vrt=m`, `tgt=2`, `cpn=6`, `style=blue`, `frm=1`
+- **Query (current):** `id=55220`, `state=NE`, `fn=1`, `vrt=m`, `tgt=2`, `cpn=6`, `style=blue`, `frm=1`, plus `embed_v=<n>` (cache-bust; bump `FEX_EMBED_VER` in `quote.html` when you change FEX settings or need a fresh iframe load).
 - **Domains:** `fexquotes.com` (iframe document and assets load from FEX).
+
+### Caching (this repo)
+
+- **No service worker** is registered in this project; there is **no** `sw.js` / Workbox.
+- **`vercel.json`** only sets serverless `maxDuration`; it does **not** add long-lived cache headers for HTML.
+- **Your static `quote.html`** is what sets the iframe `src`; the **quoter UI and carrier logic** load from **FEX’s servers**. Cloudflare (if used in front of `mejorvidainsurance.com`) may cache **HTML** briefly—purge cache or bump `FEX_EMBED_VER` after deploys.
+- **Carrier results** (e.g. Assurity vs Mutual of Omaha) are decided when the user runs a quote on **FEX**; that is **not** cached by your site’s JavaScript.
+
+### If a carrier (e.g. Assurity) is missing from results
+
+1. Confirm in **FEX dashboard** that Assurity is enabled for **this** web quoter / rater and product type (not only “account enabled”).
+2. **Regenerate** the plugin snippet and align `id`, `fn`, `cpn`, `frm`, etc. with `quote.html` (see “Dashboard settings” below).
+3. Try another **age / tobacco / face amount / health class**—carriers often **decline** or hide for certain profiles even when “enabled.”
+4. Open the embed URL **directly** in a new tab (paste the full `webquote.pl?...` URL from DevTools → iframe `src`) and compare; if Assurity is still missing, contact **FEX support** with that URL.
+5. Bump **`FEX_EMBED_VER`** in `quote.html` and redeploy to force browsers to request a new iframe URL.
+
+## Cache-busting the embed
+
+In `quote.html`, increase `FEX_EMBED_VER` (e.g. `'1'` → `'2'`) and deploy. The `embed_v=` query parameter is a harmless extra that changes the iframe URL so caches treat it as a new resource (FEX typically ignores unknown params).
 
 FEX documents using the **same query string** in your own `<iframe>` or `<object>` for layout flexibility, plus a **simple API** to tweak plugin behavior further (see their support/docs for API details).
 
