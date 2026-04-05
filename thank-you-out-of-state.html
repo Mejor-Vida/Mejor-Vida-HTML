@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <script>
+  (function () {
+    if (location.hostname === 'mejorvidainsurance.com') {
+      location.replace('https://www.mejorvidainsurance.com' + location.pathname + location.search + location.hash);
+    }
+  })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Thank you — Mejor Vida Insurance</title>
+  <meta name="robots" content="noindex, follow" />
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="css/quote-flow-shared.css" rel="stylesheet" />
+  <style>
+    .oos-thanks-card { max-width: 28rem; }
+    .oos-thanks-card h1 { color: #0D47A1; font-size: clamp(1.35rem, 4vw, 1.75rem); }
+    .btn-facebook {
+      background: #1877f2;
+      border-color: #1877f2;
+      color: #fff;
+    }
+    .btn-facebook:hover {
+      background: #166fe5;
+      border-color: #166fe5;
+      color: #fff;
+    }
+  </style>
+  <script>
+    (function () {
+      try {
+        var p = new URLSearchParams(location.search);
+        var fromUrl = (p.get('lang') || '').toLowerCase();
+        var L = fromUrl === 'en' ? 'en' : 'es';
+        sessionStorage.setItem('sessionLang', L);
+        document.documentElement.className = 'lang-' + L;
+      } catch (e) {
+        document.documentElement.className = 'lang-es';
+      }
+    })();
+  </script>
+</head>
+<body class="d-flex flex-column min-vh-100 bg-light" style="font-family: 'Inter', system-ui, sans-serif; color: #1f2937;">
+
+  <main class="flex-grow-1 d-flex flex-column align-items-center justify-content-center py-5 px-3">
+    <div class="text-center mb-4">
+      <a href="/" class="d-inline-block">
+        <img id="header-logo" src="img/logo-spanish2.png" alt="Mejor Vida Insurance logo" class="header-logo" style="max-height: 56px; width: auto;" />
+      </a>
+    </div>
+
+    <div class="bg-white rounded-3 shadow-sm p-4 p-md-5 w-100 oos-thanks-card">
+      <h1 class="fw-bold text-center mb-3"><span data-lang="es">¡Gracias!</span><span data-lang="en">Thank you!</span></h1>
+
+      <p class="text-center text-body-secondary mb-4 small" id="oos-thanks-state-line" data-lang="es">Recibimos su solicitud de referencia. Nos pondremos en contacto cuando podamos.</p>
+      <p class="text-center text-body-secondary mb-4 small" id="oos-thanks-state-line-en" data-lang="en">We received your referral request. We’ll be in touch when we can.</p>
+
+      <div class="d-grid gap-2">
+        <a href="/" class="btn btn-primary btn-lg fw-bold" data-lang="es">Volver a la página principal</a>
+        <a href="/" class="btn btn-primary btn-lg fw-bold" data-lang="en">Return to the home page</a>
+
+        <a href="https://www.facebook.com/MejorVidaInsurance" target="_blank" rel="noopener noreferrer" class="btn btn-facebook btn-lg fw-bold">
+          <i class="fab fa-facebook-f me-2" aria-hidden="true"></i><span data-lang="es">Visitar Facebook</span><span data-lang="en">Visit us on Facebook</span>
+        </a>
+      </div>
+
+      <div class="mt-4 p-3 rounded border bg-light text-center">
+        <p class="small fw-semibold text-body-secondary mb-1" data-lang="es">Próximamente</p>
+        <p class="small fw-semibold text-body-secondary mb-1" data-lang="en">Coming soon</p>
+        <p class="small text-muted mb-0" data-lang="es">Aquí enlazaremos una biblioteca de videos educativos en YouTube.</p>
+        <p class="small text-muted mb-0" data-lang="en">We’ll link an educational video library on YouTube here.</p>
+      </div>
+
+      <p class="text-center mt-4 mb-0">
+        <a href="quote-screen.html" class="small" data-lang="es">Volver a la selección de estado</a>
+        <a href="quote-screen.html" class="small" data-lang="en">Back to state selection</a>
+      </p>
+    </div>
+  </main>
+
+  <footer class="py-3 text-center small text-muted border-top bg-white">
+    <span data-lang="es"><a href="/" class="text-decoration-none">Inicio</a> · <a href="tel:+14025881125" class="text-decoration-none">402-588-1125</a></span>
+    <span data-lang="en"><a href="/" class="text-decoration-none">Home</a> · <a href="tel:+14025881125" class="text-decoration-none">402-588-1125</a></span>
+  </footer>
+
+  <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="script.js"></script>
+  <script>
+    (function () {
+      var NAMES = { AL:'Alabama', AK:'Alaska', AZ:'Arizona', AR:'Arkansas', CA:'California', CO:'Colorado', CT:'Connecticut', DE:'Delaware', DC:'District of Columbia', FL:'Florida', GA:'Georgia', HI:'Hawaii', ID:'Idaho', IL:'Illinois', IN:'Indiana', IA:'Iowa', KS:'Kansas', KY:'Kentucky', LA:'Louisiana', ME:'Maine', MD:'Maryland', MA:'Massachusetts', MI:'Michigan', MN:'Minnesota', MS:'Mississippi', MO:'Missouri', MT:'Montana', NE:'Nebraska', NV:'Nevada', NH:'New Hampshire', NJ:'New Jersey', NM:'New Mexico', NY:'New York', NC:'North Carolina', ND:'North Dakota', OH:'Ohio', OK:'Oklahoma', OR:'Oregon', PA:'Pennsylvania', RI:'Rhode Island', SC:'South Carolina', SD:'South Dakota', TN:'Tennessee', TX:'Texas', UT:'Utah', VT:'Vermont', VA:'Virginia', WA:'Washington', WV:'West Virginia', WI:'Wisconsin', WY:'Wyoming' };
+      var code = '';
+      try {
+        code = (new URLSearchParams(location.search).get('state') || '').toUpperCase().slice(0, 2);
+      } catch (e) {}
+      if (code && NAMES[code]) {
+        var label = NAMES[code] + ' (' + code + ')';
+        var es = document.getElementById('oos-thanks-state-line');
+        var en = document.getElementById('oos-thanks-state-line-en');
+        if (es) es.textContent = 'Recibimos su solicitud de referencia para ' + label + '. Nos pondremos en contacto cuando podamos.';
+        if (en) en.textContent = 'We received your referral request for ' + label + '. We’ll be in touch when we can.';
+      }
+    })();
+  </script>
+</body>
+</html>

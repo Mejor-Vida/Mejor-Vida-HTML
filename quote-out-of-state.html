@@ -299,15 +299,9 @@
           });
           var data = await res.json().catch(function () { return {}; });
           if (!res.ok || !data.ok) throw new Error(data.error || (lang === 'es' ? 'Error al enviar' : 'Send failed'));
-          if (msgEl) {
-            msgEl.classList.remove('d-none');
-            msgEl.classList.add('text-success');
-            msgEl.textContent = lang === 'es' ? '¡Gracias! Nos pondremos en contacto cuando podamos.' : 'Thank you—we’ll be in touch when we can.';
-          }
-          form.reset();
-          document.getElementById('oos-state-code').value = code;
-          [firstEl, lastEl, emailEl].forEach(clearFieldInvalid);
-          clearConsentInvalid();
+          var dest = 'thank-you-out-of-state.html?lang=' + encodeURIComponent(lang) + '&state=' + encodeURIComponent(code);
+          window.location.replace(dest);
+          return;
         } catch (err) {
           if (msgEl) {
             msgEl.classList.remove('d-none');
