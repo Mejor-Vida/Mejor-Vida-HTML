@@ -28,7 +28,7 @@ def main() -> int:
     parser.add_argument(
         "--preview",
         action="store_true",
-        help="Write FB/post-preview.html at repo root for browser review (no publish)",
+        help="Same as --dry-run: no publish (FB/post-preview.html is updated on every run)",
     )
     args = parser.parse_args()
     # Featured blog: March 29 – April 4, 2026 weekly update (matches blog.html)
@@ -73,19 +73,19 @@ https://www.mejorvidainsurance.com/blog/weekly-insurance-update-2026-03-29.html
 
     repo_root = _root.parent
     preview_path = repo_root / "FB" / "post-preview.html"
-    if args.preview:
-        write_preview(
-            caption,
-            image_url=blog.get("image_url"),
-            blog_url=blog["url"],
-            out_path=preview_path,
-        )
-        print(f"Preview written: {preview_path}")
-        print("Open that file in your browser (double-click or drag into Chrome/Safari).")
-        return 0
+    write_preview(
+        caption,
+        image_url=blog.get("image_url"),
+        blog_url=blog["url"],
+        out_path=preview_path,
+    )
+    print(f"Preview updated: {preview_path}")
 
-    if args.dry_run:
-        print("Dry run: skipping publish.")
+    if args.preview or args.dry_run:
+        if args.preview:
+            print("Open that file in your browser (double-click or drag into Chrome/Safari).")
+        else:
+            print("Dry run: skipping publish.")
         return 0
 
     # 3. Publish to Facebook

@@ -1,7 +1,11 @@
 # Facebook post preview (local)
 
-After you run `python3 main.py --preview` from `facebook-posting/`, this folder contains:
+**`post-preview.html`** lives here. It is **regenerated automatically** every time you run `main.py` from `facebook-posting/`—including:
 
-**`post-preview.html`** — open it in your browser to review image + caption before publishing to Facebook.
+- `python3 main.py --dry-run`
+- `python3 main.py --preview`
+- `python3 main.py` (publish)
 
-That file is generated and listed in `.gitignore` so it is not committed.
+After you edit the caption in `main.py`, run any of the above once; then open **`post-preview.html`** in your browser (inside **`Mejor-Vida-HTML/FB`**, not a different `FB` folder on your Desktop).
+
+This file is generated and git-ignored so it is not committed.

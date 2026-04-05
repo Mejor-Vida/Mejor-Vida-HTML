@@ -55,13 +55,13 @@ You'll see the generated Facebook post text. Good for testing before you add rea
 
 ### 3b. Preview in the browser (before Facebook)
 
-Writes a **single file** at the repo root: **`FB/post-preview.html`**. Open it in Chrome or Safari to see **image + caption** (nothing is posted to Facebook or your live site).
+**`FB/post-preview.html`** (inside **`Mejor-Vida-HTML/FB`**) is updated **every time** you run `main.py`—dry-run, preview-only, or full publish. After you change the caption in `main.py`, run:
 
 ```bash
-python3 main.py --preview
+python3 main.py --dry-run
 ```
 
-Then open **`Mejor-Vida-HTML/FB/post-preview.html`** (double-click in Finder, or drag into your browser). The hero image loads from your **local repo** when the file exists; otherwise it uses the production image URL.
+Then open **`Mejor-Vida-HTML/FB/post-preview.html`** in Chrome or Safari. The hero image loads from your **local repo** when the file exists; otherwise it uses the production image URL.
 
 `FB/post-preview.html` is git-ignored; see **`FB/README.md`** in the repo.
 
@@ -74,9 +74,10 @@ python3 main.py
 ```
 
 This will:
-1. Generate a caption from the sample blog post (March 22 update)
+1. Generate a caption from the blog post defined in `main.py`
 2. Print the caption
-3. Publish to your Facebook Page (with hero image)
+3. Refresh **`FB/post-preview.html`** for local review
+4. Publish to your Facebook Page (with hero image)
 
 ### 5. Use your own blog post
 
