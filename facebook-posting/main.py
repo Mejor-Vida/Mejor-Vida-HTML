@@ -39,16 +39,19 @@ def main() -> int:
         "image_url": "https://www.mejorvidainsurance.com/img/blog-generated/weekly-insurance-update-2026-03-29/hero.png",
     }
 
-    # Curated caption (template: hook → body → CTA → link → hashtags)
-    facebook_caption = """¿Cómo está cambiando la supervisión de la IA en seguros y qué deben vigilar familias y agentes?
+    # Curated caption (hook → why it matters → CTA → link → 2–4 hashtags)
+    facebook_caption = """¿Alguna vez te preguntaste si la tecnología ya está cambiando cómo te venden y te cuidan el seguro? A muchas familias les pasa lo mismo.
 
-Esta semana te resumimos tres temas: avances de la NAIC en inteligencia artificial, qué dice el estudio LIMRA/NAILBA sobre IA en distribución, y la consulta sobre ilustraciones de anualidades indexadas.
+En este artículo te lo contamos sin tecnicismos: qué están haciendo los reguladores para que la inteligencia artificial se use con más claridad y equidad, cómo eso puede tocar cotizaciones y servicio al cliente, y por qué conviene mirar con ojo los números “bonitos” en una propuesta de retiro o seguro—no siempre significan lo mismo en la vida real.
 
-Lee el artículo en claro y escríbenos si quieres revisar tu cobertura o tienes dudas.
+Tu tranquilidad y la de tu familia empiezan con entender qué estás firmando.
+
+¿Dudas sobre tu cobertura o quieres una segunda opinión? Escríbenos por mensaje y te ayudamos.
 
 https://www.mejorvidainsurance.com/blog/weekly-insurance-update-2026-03-29.html
 
-#MejorVidaInsurance #SeguroDeVida #NAIC #AgentesDeSeguros #GastosFinales"""
+#MejorVidaInsurance #SeguroDeVida #FamiliaHispana"""
+    # Versión corta y comentario fijado: facebook-posting/facebook_post_variants.txt
 
     # Load default language from config
     config_path = _root / "config" / "settings.json"
