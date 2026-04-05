@@ -164,6 +164,8 @@ The script will:
 3. Extract the Page token for your `FACEBOOK_PAGE_ID`
 4. Print the `FACEBOOK_PAGE_ACCESS_TOKEN=…` line — **paste it into `.env`**
 
+Or run **`python3 scripts/apply_page_token.py`** (same exchange, but writes the token into `facebook-posting/.env` and the repo root `.env.local` without printing the full value).
+
 **Step 4 — Verify before publishing**
 
 ```bash
@@ -213,6 +215,7 @@ facebook-posting/
 │   ├── publish_facebook.py         # Meta Graph API publisher
 │   ├── get_page_token.py           # One-time token exchange (short → long-lived Page token)
 │   ├── diagnose_token.py           # Pre-flight token verification
+│   ├── apply_page_token.py         # Run exchange and save token to .env (no echo)
 │   └── ssl_context.py              # HTTPS CA bundle (certifi) for urllib
 └── requirements.txt
 ```
