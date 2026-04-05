@@ -292,7 +292,7 @@
         };
         if (btn) btn.disabled = true;
         try {
-          var res = await fetch('/api/quote-lead-sync', {
+          var res = await fetch('/api/out-of-state-referral', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload)
