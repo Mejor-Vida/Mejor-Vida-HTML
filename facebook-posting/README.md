@@ -53,6 +53,18 @@ python3 main.py --dry-run
 
 You'll see the generated Facebook post text. Good for testing before you add real credentials.
 
+### 3b. Preview in the browser (before Facebook)
+
+Writes **`preview.html`** in this folder so you can open it in Chrome or Safari and see the **image + caption** as a rough layout (nothing is posted, nothing is pushed to your website).
+
+```bash
+python3 main.py --preview
+```
+
+Then open **`facebook-posting/preview.html`** (double-click in Finder, or drag the file into your browser). The hero image loads from your **local repo** (`../img/...`) when the file exists; otherwise it uses the production image URL.
+
+`preview.html` is git-ignored so it is not committed.
+
 ### 4. Publish to Facebook
 
 Once credentials are set:
@@ -216,6 +228,7 @@ facebook-posting/
 │   ├── get_page_token.py           # One-time token exchange (short → long-lived Page token)
 │   ├── diagnose_token.py           # Pre-flight token verification
 │   ├── apply_page_token.py         # Run exchange and save token to .env (no echo)
+│   ├── preview_html.py             # Build preview.html for browser review
 │   └── ssl_context.py              # HTTPS CA bundle (certifi) for urllib
 └── requirements.txt
 ```
