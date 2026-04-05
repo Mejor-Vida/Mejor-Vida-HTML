@@ -4,6 +4,12 @@ Set visible week coverage on weekly blog posts: start = filename date, end = sta
 
 Updates titles, meta, hero calendar lines, JSON-LD headlines/names, conclusions, blog.html cards.
 Does not alter story-level 'Published: March 23' lines (different strings).
+
+Editorial calendar: the filename date is the *start* of the seven-day window in each HTML file.
+On blog.html, **card order is not automatic**: the first card should be the week that is *current*
+for readers (e.g. the week that just completed). A file dated the following Monday may stay second
+with a "Next week" label until you promote it. Re-run this script after adding a post, then adjust
+blog.html order and newsletter summary to match.
 """
 from __future__ import annotations
 
@@ -146,15 +152,7 @@ def apply_blog_html() -> None:
             f"Weekly Insurance Update {en_r}",
         )
 
-    # Newsletter summary line (April 5) — show range for "this week"
-    text = text.replace(
-        "Resumen de esta semana (5 de abril, 2026)",
-        "Resumen de esta semana (5 al 11 de abril de 2026)",
-    )
-    text = text.replace(
-        "This week's summary (April 5, 2026)",
-        "This week's summary (April 5 – April 11, 2026)",
-    )
+    # Newsletter summary + card order: edit blog.html manually to match the editorial calendar.
 
     if text != orig:
         BLOG_HTML.write_text(text, encoding="utf-8")
