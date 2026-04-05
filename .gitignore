@@ -12,3 +12,6 @@ agent/logs/
 
 # Playwright / local browser session dirs (if added by automation)
 integrations/.playwright_ic_session/
+
+# Generated local Facebook preview (open in browser before publishing)
+FB/post-preview.html

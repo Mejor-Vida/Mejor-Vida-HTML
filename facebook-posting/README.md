@@ -55,15 +55,15 @@ You'll see the generated Facebook post text. Good for testing before you add rea
 
 ### 3b. Preview in the browser (before Facebook)
 
-Writes **`preview.html`** in this folder so you can open it in Chrome or Safari and see the **image + caption** as a rough layout (nothing is posted, nothing is pushed to your website).
+Writes a **single file** at the repo root: **`FB/post-preview.html`**. Open it in Chrome or Safari to see **image + caption** (nothing is posted to Facebook or your live site).
 
 ```bash
 python3 main.py --preview
 ```
 
-Then open **`facebook-posting/preview.html`** (double-click in Finder, or drag the file into your browser). The hero image loads from your **local repo** (`../img/...`) when the file exists; otherwise it uses the production image URL.
+Then open **`Mejor-Vida-HTML/FB/post-preview.html`** (double-click in Finder, or drag into your browser). The hero image loads from your **local repo** when the file exists; otherwise it uses the production image URL.
 
-`preview.html` is git-ignored so it is not committed.
+`FB/post-preview.html` is git-ignored; see **`FB/README.md`** in the repo.
 
 ### 4. Publish to Facebook
 

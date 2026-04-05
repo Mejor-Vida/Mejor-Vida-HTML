@@ -1,26 +1,26 @@
 """
 Write a static HTML file to review the Facebook post locally before publishing.
-Open preview.html in your browser (double-click or file:///...).
+Default path: repo_root/FB/post-preview.html — open in the browser (double-click or file:///...).
 """
 from __future__ import annotations
 
 import html
+import os
 import re
 from pathlib import Path
 
 
-def _resolve_image_src(image_url: str | None, fb_root: Path) -> str:
-    """Use repo-relative path for offline preview when the file exists; else production URL."""
+def _resolve_image_src(image_url: str | None, html_dir: Path) -> str:
+    """Path to image relative to html_dir, or production URL if file missing."""
     if not image_url:
         return ""
     m = re.search(r"mejorvidainsurance\.com(/img/.+)$", image_url)
     if not m:
         return image_url
-    rel = ".." + m.group(1).replace("\\", "/")
-    repo_root = fb_root.parent
+    repo_root = html_dir.parent
     abs_img = (repo_root / m.group(1).lstrip("/")).resolve()
     if abs_img.is_file():
-        return rel
+        return os.path.relpath(abs_img, html_dir).replace("\\", "/")
     return image_url
 
 
@@ -30,10 +30,11 @@ def write_preview(
     image_url: str | None,
     blog_url: str,
     out_path: Path,
-    fb_root: Path,
 ) -> None:
-    """Write preview HTML next to main.py."""
-    img_src = _resolve_image_src(image_url, fb_root)
+    """Write preview HTML; out_path e.g. .../Mejor-Vida-HTML/FB/post-preview.html"""
+    html_dir = out_path.parent
+    html_dir.mkdir(parents=True, exist_ok=True)
+    img_src = _resolve_image_src(image_url, html_dir)
     safe_caption = html.escape(caption).replace("\n", "<br>\n")
     safe_blog_url = html.escape(blog_url)
 

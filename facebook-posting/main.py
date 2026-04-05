@@ -28,7 +28,7 @@ def main() -> int:
     parser.add_argument(
         "--preview",
         action="store_true",
-        help="Write preview.html in facebook-posting/ for browser review (no publish)",
+        help="Write FB/post-preview.html at repo root for browser review (no publish)",
     )
     args = parser.parse_args()
     # Featured blog: March 29 – April 4, 2026 weekly update (matches blog.html)
@@ -68,14 +68,14 @@ https://www.mejorvidainsurance.com/blog/weekly-insurance-update-2026-03-29.html
     print(caption)
     print("\n" + "-" * 40 + "\n")
 
-    preview_path = _root / "preview.html"
+    repo_root = _root.parent
+    preview_path = repo_root / "FB" / "post-preview.html"
     if args.preview:
         write_preview(
             caption,
             image_url=blog.get("image_url"),
             blog_url=blog["url"],
             out_path=preview_path,
-            fb_root=_root,
         )
         print(f"Preview written: {preview_path}")
         print("Open that file in your browser (double-click or drag into Chrome/Safari).")

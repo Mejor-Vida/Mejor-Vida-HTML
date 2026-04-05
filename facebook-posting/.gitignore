@@ -3,9 +3,6 @@
 .env.local
 .env.*.local
 
-# Generated local preview (open in browser before publishing)
-preview.html
-
 # Python cache
 __pycache__/
 *.pyc
