@@ -1,0 +1,7 @@
+{
+  "name": "mejor-vida-html",
+  "private": true,
+  "engines": {
+    "node": ">=18"
+  }
+}
