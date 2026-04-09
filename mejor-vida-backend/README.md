@@ -7,6 +7,8 @@ This repo hosts the serverless API in the **project root** (not a separate Git r
 | `api/lead-capture.js` | Full WhatsApp lead → `manychat_leads` + HubSpot |
 | `api/rag-answer.js` | Off-script Q&A via `knowledge_chunks` + OpenAI |
 | `api/quote.js` | WhatsApp quote ranges from `quote_ranges` (ManyChat `set_field_values`) |
+| `api/quote-site.js` | **Website** quote — same `quote_ranges` data; **Origin** allowlist (`WEBSITE_ALLOWED_ORIGINS`) |
+| `api/rag-site.js` | **Website** chatbot RAG — same pipeline as `rag-answer`; Origin allowlist |
 | `api/dropoff-capture.js` | Drop-off partial lead |
 | `lib/` | Supabase, HubSpot, OpenAI, `X-App-Secret` auth |
 

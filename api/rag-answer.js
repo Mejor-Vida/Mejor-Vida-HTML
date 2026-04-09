@@ -5,9 +5,7 @@
  */
 
 const { verifyManychatSecret, logRequest } = require("../lib/manychat-auth");
-const { rpcMatchKnowledgeChunks, insertUnansweredQuestion } = require("../lib/supabase");
-const { generateEmbedding, getRAGAnswer } = require("../lib/openai");
-const { hubspotSearchContact, hubspotAddNote } = require("../lib/hubspot");
+const { runRagPipeline } = require("../lib/rag-pipeline");
 
 function json(res, status, payload) {
   res.status(status).setHeader("Content-Type", "application/json");
@@ -32,17 +30,15 @@ module.exports = async function handler(req, res) {
   }
 
   const supabaseUrl = process.env.SUPABASE_URL;
-  const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-  const openaiKey = process.env.OPENAI_API_KEY;
-  const hubspotToken = process.env.HUBSPOT_ACCESS_TOKEN;
-
+  const supabaseKey =
+    process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_SERVICE_KEY;
   if (!supabaseUrl || !supabaseKey) {
     return json(res, 500, {
       status: "error",
       error: "Server missing SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY",
     });
   }
-  if (!openaiKey) {
+  if (!process.env.OPENAI_API_KEY) {
     return json(res, 500, { status: "error", error: "Server missing OPENAI_API_KEY" });
   }
 
@@ -53,98 +49,17 @@ module.exports = async function handler(req, res) {
     return json(res, 400, { status: "error", error: "Invalid JSON" });
   }
 
-  const question = String(body.question || "").trim();
-  const language = String(body.language || "English").trim();
-  const phone = String(body.phone || "").trim().slice(0, 40);
-  const flowStage = String(body.flow_stage || body.flowStage || "").trim().slice(0, 100) || null;
-
-  if (!question) {
-    return json(res, 400, { status: "error", error: "question required" });
-  }
-
-  let embedding;
   try {
-    embedding = await generateEmbedding(openaiKey, question);
+    const out = await runRagPipeline(body, { hubspotNotePrefix: "WhatsApp RAG" });
+    if (out.error) {
+      return json(res, out.statusCode || 500, { status: "error", error: out.error });
+    }
+    if (out.status === "no_answer" || out.answer == null) {
+      return json(res, 200, { answer: null, status: "no_answer" });
+    }
+    return json(res, 200, { answer: out.answer, status: "answered" });
   } catch (e) {
-    console.error("rag-answer embedding", e.message);
-    return json(res, 500, { status: "error", error: "Embedding failed" });
+    console.error("rag-answer", e);
+    return json(res, 500, { status: "error", error: "Server error" });
   }
-
-  let chunks;
-  try {
-    chunks = await rpcMatchKnowledgeChunks(supabaseUrl, supabaseKey, embedding, 3, 0.7);
-  } catch (e) {
-    console.error("rag-answer rpc", e.message);
-    return json(res, 500, { status: "error", error: "Knowledge search failed" });
-  }
-
-  if (!chunks || !chunks.length) {
-    try {
-      await insertUnansweredQuestion(supabaseUrl, supabaseKey, {
-        lead_id: null,
-        phone: phone || null,
-        question,
-        language,
-        flow_stage: flowStage,
-        resolved: false,
-      });
-    } catch (e) {
-      console.error("rag-answer save unanswered", e.message);
-    }
-    if (hubspotToken && phone) {
-      try {
-        const cid = await hubspotSearchContact(hubspotToken, "phone", phone);
-        if (cid) {
-          await hubspotAddNote(
-            hubspotToken,
-            cid,
-            `WhatsApp RAG — no grounded answer.\nQ: ${question}\nStage: ${flowStage || "n/a"}`,
-          );
-        }
-      } catch (e) {
-        /* optional */
-      }
-    }
-    return json(res, 200, { answer: null, status: "no_answer" });
-  }
-
-  let answerText;
-  try {
-    answerText = await getRAGAnswer(openaiKey, question, chunks, language);
-  } catch (e) {
-    console.error("rag-answer chat", e.message);
-    return json(res, 500, { status: "error", error: "Answer generation failed" });
-  }
-
-  if (!answerText || /^NO_ANSWER$/i.test(answerText.trim())) {
-    try {
-      await insertUnansweredQuestion(supabaseUrl, supabaseKey, {
-        lead_id: null,
-        phone: phone || null,
-        question,
-        language,
-        flow_stage: flowStage,
-        resolved: false,
-      });
-    } catch (e) {
-      console.error("rag-answer save unanswered", e.message);
-    }
-    if (hubspotToken && phone) {
-      try {
-        const cid = await hubspotSearchContact(hubspotToken, "phone", phone);
-        if (cid) {
-          await hubspotAddNote(
-            hubspotToken,
-            cid,
-            `WhatsApp RAG — NO_ANSWER.\nQ: ${question}\nStage: ${flowStage || "n/a"}`,
-          );
-        }
-      } catch (e) {
-        /* optional */
-      }
-    }
-    return json(res, 200, { answer: null, status: "no_answer" });
-  }
-
-  return json(res, 200, { answer: answerText, status: "answered" });
 };

@@ -1,7 +1,7 @@
 /**
  * POST /api/quote-lead-sync
  * Inserts quote_lead_submissions (Supabase) then syncs contact to HubSpot.
- * Used by quote.html and quote-out-of-state.html — FEX iframe cannot send data cross-origin;
+ * Used by quote.html and quote-out-of-state.html — in-browser quote tool posts follow-up here;
  * out-of-state referrals use source: out_of_state_referral.
  *
  * Vercel env: SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, HUBSPOT_ACCESS_TOKEN
@@ -152,7 +152,11 @@ module.exports = async function handler(req, res) {
     .toUpperCase();
   const lang = body.lang === "en" ? "en" : "es";
   const leadSource =
-    body.source === "out_of_state_referral" ? "out_of_state_referral" : "fexquotes_page";
+    body.source === "out_of_state_referral"
+      ? "out_of_state_referral"
+      : body.source === "nebraska_quote_page"
+        ? "nebraska_quote_page"
+        : "fexquotes_page";
 
   if (leadSource === "out_of_state_referral") {
     if (!stateCode || stateCode.length !== 2) {
@@ -247,7 +251,9 @@ module.exports = async function handler(req, res) {
     request_raw: requestRaw,
     quote_status: quoteStatus,
     quote_generated_at:
-      leadSource === "fexquotes_page" && quoteSummary ? nowIso : null,
+      (leadSource === "fexquotes_page" || leadSource === "nebraska_quote_page") && quoteSummary
+        ? nowIso
+        : null,
     crm_sync_needed: true,
   };
 

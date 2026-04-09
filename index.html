@@ -15,7 +15,7 @@
   <link rel="shortcut icon" href="favicon.ico" />
 
   <!-- Primary meta tags -->
-  <meta name="description" content="Proteja a su familia con el mejor seguro de gastos finales. Cotización gratuita y atención personalizada en español e inglés. ¡Asegure su tranquilidad hoy!" />
+  <meta name="description" content="Proteja a su familia con seguro de gastos finales. Empiece con una cotización en línea o WhatsApp; coordinamos una llamada cuando tenga sentido. Español e inglés." />
   <meta name="keywords" content="seguro de gastos finales, seguro de vida, final expense insurance, cotización gratis, Mejor Vida Insurance, seguro funeral, Nebraska" />
   <meta name="robots" content="index, follow" />
   <meta name="author" content="Mejor Vida Insurance LLC" />
@@ -23,7 +23,7 @@
 
   <!-- Open Graph / Facebook -->
   <meta property="og:title" content="Seguro de Gastos Finales | Mejor Vida Insurance" />
-  <meta property="og:description" content="Proteja a su familia con el mejor seguro de gastos finales. Cotización gratuita y atención personalizada en español e inglés. ¡Asegure su tranquilidad hoy!" />
+  <meta property="og:description" content="Proteja a su familia con seguro de gastos finales. Empiece con una cotización en línea o WhatsApp; coordinamos una llamada cuando tenga sentido." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://www.mejorvidainsurance.com/" />
   <meta property="og:image" content="https://www.mejorvidainsurance.com/img/couple-smiling.png" />
@@ -33,7 +33,7 @@
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Seguro de Gastos Finales | Mejor Vida Insurance" />
-  <meta name="twitter:description" content="Proteja a su familia con el mejor seguro de gastos finales. Cotización gratuita y atención personalizada en español e inglés. ¡Asegure su tranquilidad hoy!" />
+  <meta name="twitter:description" content="Proteja a su familia con seguro de gastos finales. Empiece con una cotización en línea o WhatsApp; coordinamos una llamada cuando tenga sentido." />
   <meta name="twitter:image" content="https://www.mejorvidainsurance.com/img/couple-smiling.png" />
 
   <!-- Hreflang (single URL with language toggle) -->
@@ -95,7 +95,7 @@
         "name": "¿Cuánto cuesta un seguro de gastos finales?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "El costo de un seguro de gastos finales varía según tu edad, salud y la cantidad de cobertura que elijas. Las primas suelen ser asequibles y se mantienen niveladas durante toda la vida de la póliza. Contáctanos para obtener una cotización personalizada gratuita."
+          "text": "El costo de un seguro de gastos finales varía según tu edad, salud y la cantidad de cobertura que elijas. Las primas suelen ser asequibles y se mantienen niveladas durante toda la vida de la póliza. Solicita una cotización personalizada gratuita en línea o por WhatsApp."
         }
       },
       {
@@ -119,7 +119,7 @@
         "name": "¿Cuánto tiempo toma obtener una póliza?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "El proceso puede ser rápido. Después de completar el formulario de cotización y hablar con Julie, muchas pólizas pueden ser aprobadas en cuestión de días, dependiendo de la aseguradora y tu situación de salud."
+          "text": "El proceso puede ser rápido. Después de completar el formulario de cotización y revisar tu caso con Julie (por mensaje o llamada cuando ya tengamos tus datos), muchas pólizas pueden ser aprobadas en cuestión de días, dependiendo de la aseguradora y tu situación de salud."
         }
       },
       {
@@ -385,7 +385,7 @@
     .nav-link-cm:hover {
       color: #2563eb;
     }
-    
+
     /* See Prices button - yellow/orange */
     .btn-see-prices {
       background-color: #FEC963;
@@ -809,6 +809,231 @@
     .nav-link-cm {
       white-space: nowrap !important;
     }
+    .nav-link-cm.nav-link-schedule-wrap {
+      white-space: normal !important;
+      max-width: 5.75rem;
+      text-align: center;
+      line-height: 1.25;
+      align-self: center;
+    }
+
+    /* Embedded final-expense chat (see js/website-chatbot.js) */
+    #chatbot-widget-root .fe-chatbot-layout {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      align-items: stretch;
+    }
+    #chatbot-widget-root .fe-chatbot-figure-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 0;
+    }
+    /* Julie + bubble: row on desktop (bubble speaks from her toward the chat); column on mobile */
+    #chatbot-widget-root .fe-chatbot-figure-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      width: 100%;
+    }
+    #chatbot-widget-root .fe-chatbot-figure-bubble {
+      position: relative;
+      order: -1;
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 14px;
+      padding: 0.7rem 1rem;
+      box-shadow: 0 2px 12px rgba(26, 54, 93, 0.1);
+      max-width: 18rem;
+      color: #1a365d;
+      font-size: 0.95rem;
+      line-height: 1.4;
+      text-align: center;
+    }
+    /* Mobile: tail points down toward her face */
+    #chatbot-widget-root .fe-chatbot-figure-bubble::after {
+      content: "";
+      position: absolute;
+      bottom: -9px;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 9px solid transparent;
+      border-top-color: #fff;
+      filter: drop-shadow(0 1px 0 #e2e8f0);
+    }
+    #chatbot-widget-root .fe-chatbot-figure-bubble::before {
+      display: none;
+    }
+    #chatbot-widget-root .fe-chatbot-figure {
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      background: transparent;
+      overflow: visible;
+      width: 100%;
+      max-width: 320px;
+    }
+    #chatbot-widget-root .fe-chatbot-figure-img {
+      width: 100%;
+      height: auto;
+      max-height: 340px;
+      object-fit: contain;
+      object-position: bottom center;
+      display: block;
+    }
+    @keyframes fe-chatbot-speaking {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-1.5%) scale(1.012); }
+    }
+    #chatbot-widget-root .fe-chatbot-figure--speaking .fe-chatbot-figure-img {
+      animation: fe-chatbot-speaking 0.85s ease-in-out infinite;
+      transform-origin: 50% 18%;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      #chatbot-widget-root .fe-chatbot-figure--speaking .fe-chatbot-figure-img {
+        animation: none;
+      }
+    }
+    #chatbot-widget-root .fe-chatbot-col {
+      flex: 1 1 auto;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+    }
+    @media (min-width: 768px) {
+      #chatbot-widget-root .fe-chatbot-layout {
+        flex-direction: row;
+        align-items: stretch;
+        gap: 1.25rem;
+      }
+      #chatbot-widget-root .fe-chatbot-figure-col {
+        flex: 0 0 44%;
+        max-width: 420px;
+        align-self: center;
+      }
+      #chatbot-widget-root .fe-chatbot-figure-wrap {
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: center;
+        gap: 0.5rem;
+      }
+      #chatbot-widget-root .fe-chatbot-figure-bubble {
+        order: 0;
+        align-self: flex-start;
+        margin-top: 0.75rem;
+        max-width: 14rem;
+        text-align: left;
+      }
+      /* Desktop: tail on left of bubble, points at Julie */
+      #chatbot-widget-root .fe-chatbot-figure-bubble::after {
+        display: none;
+      }
+      #chatbot-widget-root .fe-chatbot-figure-bubble::before {
+        display: block;
+        content: "";
+        position: absolute;
+        left: -8px;
+        top: 50%;
+        transform: translateY(-50%);
+        border: 8px solid transparent;
+        border-right-color: #fff;
+        filter: drop-shadow(-1px 0 0 #e2e8f0);
+      }
+      #chatbot-widget-root .fe-chatbot-figure {
+        flex: 0 1 auto;
+        max-width: none;
+        min-width: 0;
+      }
+      #chatbot-widget-root .fe-chatbot-figure-img {
+        max-height: 400px;
+      }
+    }
+    #chatbot-widget-root .fe-chatbot {
+      border-radius: 12px;
+      transition: box-shadow 0.25s ease;
+    }
+    #chatbot-widget-root .fe-chatbot.fe-chatbot--in-view {
+      box-shadow: 0 8px 28px rgba(26, 54, 93, 0.12) !important;
+    }
+    #chatbot-widget-root .fe-chatbot-header {
+      background: linear-gradient(135deg, #1a365d 0%, #2c5282 100%);
+    }
+    #chatbot-widget-root .fe-chatbot-header-bar {
+      min-height: 5rem;
+    }
+    #chatbot-widget-root .fe-chatbot-header-logo-wrap {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      line-height: 0;
+    }
+    #chatbot-widget-root .fe-chatbot-header-img {
+      height: 72px;
+      width: auto;
+      max-width: min(260px, 52vw);
+      object-fit: contain;
+      object-position: left center;
+      display: block;
+    }
+    #chatbot-widget-root .fe-chatbot-messages {
+      min-height: 200px;
+      max-height: min(360px, 48vh);
+      overflow-y: auto;
+      padding: 1rem 1rem 0.75rem;
+      background: #f1f5f9;
+    }
+    #chatbot-widget-root .fe-chatbot-msg {
+      display: flex;
+      margin-bottom: 0.75rem;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+    #chatbot-widget-root .fe-chatbot-msg--bot {
+      justify-content: flex-start;
+    }
+    #chatbot-widget-root .fe-chatbot-msg--user {
+      justify-content: flex-end;
+    }
+    #chatbot-widget-root .fe-chatbot-msg-body {
+      flex: 1;
+      min-width: 0;
+    }
+    #chatbot-widget-root .fe-chatbot-bubble {
+      max-width: 92%;
+      padding: 0.65rem 0.85rem;
+      border-radius: 12px;
+      font-size: 0.9375rem;
+      line-height: 1.45;
+    }
+    #chatbot-widget-root .fe-chatbot-msg--bot .fe-chatbot-bubble {
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      color: #334155;
+      max-width: 100%;
+    }
+    #chatbot-widget-root .fe-chatbot-msg--user .fe-chatbot-bubble {
+      background: #1a365d;
+      color: #fff;
+    }
+    #chatbot-widget-root .fe-chatbot-msg--user .fe-chatbot-bubble-name {
+      display: none;
+    }
+    #chatbot-widget-root .fe-chatbot-textarea {
+      resize: none;
+      min-height: 44px;
+      max-height: 120px;
+    }
+    #chatbot-widget-root .fe-chatbot-send {
+      align-self: stretch;
+      border-radius: 0 0.375rem 0.375rem 0;
+    }
+    #chatbot-widget-root .fe-chatbot-compose .input-group {
+      align-items: stretch;
+    }
+
     .header-inner .desktop-nav {
       flex: 1 1 auto !important;
       margin-left: 0 !important;
@@ -943,28 +1168,30 @@
           <a href="#how-it-works" data-lang="es" class="nav-link-cm">Cómo funciona</a>
           <a href="#how-it-works" data-lang="en" class="nav-link-cm">How It Works</a>
           
-          <a href="#faq" data-lang="es" class="nav-link-cm">FAQ</a>
-          <a href="#faq" data-lang="en" class="nav-link-cm">FAQ</a>
+          <a href="#final-expense-answers" data-lang="es" class="nav-link-cm d-inline-flex align-items-center gap-1 text-nowrap" title="¿Tienes preguntas sobre gastos finales?">
+            <i class="fas fa-robot" style="font-size: 0.95em; opacity: 0.88;" aria-hidden="true"></i><span>¿Tienes preguntas?</span>
+          </a>
+          <a href="#final-expense-answers" data-lang="en" class="nav-link-cm d-inline-flex align-items-center gap-1 text-nowrap" title="Got questions about final expense insurance?">
+            <i class="fas fa-robot" style="font-size: 0.95em; opacity: 0.88;" aria-hidden="true"></i><span>Got questions?</span>
+          </a>
           
           <a href="blog.html" data-lang="es" class="nav-link-cm">Blog</a>
           <a href="blog.html" data-lang="en" class="nav-link-cm">Blog</a>
 
-          <a href="/quote.html?schedule=1" data-lang="es" class="nav-link-cm">Agendar</a>
-          <a href="/quote.html?schedule=1" data-lang="en" class="nav-link-cm">Schedule</a>
+          <a href="/quote.html?schedule=1" data-lang="es" class="nav-link-cm nav-link-schedule-wrap">Agendar con Julie</a>
+          <a href="/quote.html?schedule=1" data-lang="en" class="nav-link-cm nav-link-schedule-wrap">Schedule with Julie</a>
         </nav>
 
-        <!-- Right side: call icon + See Prices + WhatsApp + language + mobile menu -->
+        <!-- Right side: WhatsApp + quote first; phone reserved for footer / existing clients -->
         <div class="d-flex align-items-center gap-2">
-          <a href="tel:+14025881125" class="header-phone-compact flex-shrink-0 align-items-center justify-content-center" aria-label="Call office 402-588-1125" title="402-588-1125"><i class="fas fa-phone" aria-hidden="true"></i></a>
-          <!-- See Prices Button -->
+          <a href="https://wa.me/14024405438?text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20seguro%20de%20gastos%20finales." target="_blank" rel="noopener" data-lang="es" class="desktop-cta d-none d-lg-inline-flex btn btn-sm fw-bold align-items-center rounded-pill px-3" style="background:#25D366;border-color:#25D366;color:#fff;"><i class="fab fa-whatsapp me-1" aria-hidden="true"></i>WhatsApp</a>
+          <a href="https://wa.me/14024405438?text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20seguro%20de%20gastos%20finales." target="_blank" rel="noopener" data-lang="en" class="desktop-cta d-none d-lg-inline-flex btn btn-sm fw-bold align-items-center rounded-pill px-3" style="background:#25D366;border-color:#25D366;color:#fff;"><i class="fab fa-whatsapp me-1" aria-hidden="true"></i>WhatsApp</a>
           <a href="/quote-screen.html" data-lang="es" class="desktop-cta d-none d-lg-inline-block btn-see-prices">
             Ver Precios
           </a>
           <a href="/quote-screen.html" data-lang="en" class="desktop-cta d-none d-lg-inline-block btn-see-prices">
             See Prices
           </a>
-          <a href="https://wa.me/14024405438?text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20seguro%20de%20gastos%20finales." target="_blank" rel="noopener" data-lang="es" class="desktop-cta d-none d-lg-inline-flex btn btn-sm fw-bold align-items-center rounded-pill px-3" style="background:#25D366;border-color:#25D366;color:#fff;"><i class="fab fa-whatsapp me-1" aria-hidden="true"></i>WhatsApp</a>
-          <a href="https://wa.me/14024405438?text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20seguro%20de%20gastos%20finales." target="_blank" rel="noopener" data-lang="en" class="desktop-cta d-none d-lg-inline-flex btn btn-sm fw-bold align-items-center rounded-pill px-3" style="background:#25D366;border-color:#25D366;color:#fff;"><i class="fab fa-whatsapp me-1" aria-hidden="true"></i>WhatsApp</a>
 
           <!-- Language Toggle -->
           <div class="d-flex gap-1 ms-2">
@@ -992,22 +1219,18 @@
       <a href="#about" data-lang="en" class="mobile-menu-link">About</a>
       <a href="#how-it-works" data-lang="es" class="mobile-menu-link">Cómo funciona</a>
       <a href="#how-it-works" data-lang="en" class="mobile-menu-link">How It Works</a>
-      <a href="#faq" data-lang="es" class="mobile-menu-link">FAQ</a>
-      <a href="#faq" data-lang="en" class="mobile-menu-link">FAQ</a>
+      <a href="#final-expense-answers" data-lang="es" class="mobile-menu-link">¿Tienes preguntas?</a>
+      <a href="#final-expense-answers" data-lang="en" class="mobile-menu-link">Got questions?</a>
       <a href="blog.html" data-lang="es" class="mobile-menu-link">Blog</a>
       <a href="blog.html" data-lang="en" class="mobile-menu-link">Blog</a>
-      <a href="/quote.html?schedule=1" data-lang="es" class="mobile-menu-link fw-bold" style="color:#0D47A1;"><i class="fas fa-calendar-alt me-2"></i>Agendar cita</a>
-      <a href="/quote.html?schedule=1" data-lang="en" class="mobile-menu-link fw-bold" style="color:#0D47A1;"><i class="fas fa-calendar-alt me-2"></i>Book appointment</a>
-      <a href="tel:+14025881125" data-lang="es" class="mobile-menu-link fw-bold" style="color:#0D47A1;"><i class="fas fa-phone me-2"></i>Llama a nuestra línea de oficina - 402-588-1125</a>
-      <a href="tel:+14025881125" data-lang="en" class="mobile-menu-link fw-bold" style="color:#0D47A1;"><i class="fas fa-phone me-2"></i>Call our office line - 402-588-1125</a>
-      <a href="https://wa.me/14024405438?text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20seguro%20de%20gastos%20finales." target="_blank" rel="noopener" data-lang="es" class="mobile-menu-link fw-bold" style="color:#1D9E53;"><i class="fab fa-whatsapp me-2"></i>Envíanos un mensaje por WhatsApp</a>
-      <a href="https://wa.me/14024405438?text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20seguro%20de%20gastos%20finales." target="_blank" rel="noopener" data-lang="en" class="mobile-menu-link fw-bold" style="color:#1D9E53;"><i class="fab fa-whatsapp me-2"></i>Message us on WhatsApp</a>
-      <a href="/quote-screen.html" data-lang="es" class="mobile-menu-link bg-warning text-dark fw-bold text-center rounded mt-2 py-2 d-block">
-        Ver Precios
-      </a>
-      <a href="/quote-screen.html" data-lang="en" class="mobile-menu-link bg-warning text-dark fw-bold text-center rounded mt-2 py-2 d-block">
-        See Prices
-      </a>
+      <a href="https://wa.me/14024405438?text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20seguro%20de%20gastos%20finales." target="_blank" rel="noopener" data-lang="es" class="mobile-menu-link fw-bold" style="color:#1D9E53;"><i class="fab fa-whatsapp me-2"></i>WhatsApp (recomendado)</a>
+      <a href="https://wa.me/14024405438?text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20seguro%20de%20gastos%20finales." target="_blank" rel="noopener" data-lang="en" class="mobile-menu-link fw-bold" style="color:#1D9E53;"><i class="fab fa-whatsapp me-2"></i>WhatsApp (recommended)</a>
+      <a href="/quote-screen.html" data-lang="es" class="mobile-menu-link fw-bold" style="color:#0D47A1;"><i class="fas fa-file-invoice-dollar me-2"></i>Cotización gratis en línea</a>
+      <a href="/quote-screen.html" data-lang="en" class="mobile-menu-link fw-bold" style="color:#0D47A1;"><i class="fas fa-file-invoice-dollar me-2"></i>Free online quote</a>
+      <a href="/quote.html?schedule=1" data-lang="es" class="mobile-menu-link fw-bold" style="color:#0D47A1;"><i class="fas fa-calendar-alt me-2"></i>Agendar (después de tu información)</a>
+      <a href="/quote.html?schedule=1" data-lang="en" class="mobile-menu-link fw-bold" style="color:#0D47A1;"><i class="fas fa-calendar-alt me-2"></i>Schedule (after we have your info)</a>
+      <p class="mobile-menu-link small text-muted mb-0 px-2" data-lang="es">¿Cliente actual? Línea de oficina: <a href="tel:+14025881125" class="text-decoration-none">402-588-1125</a></p>
+      <p class="mobile-menu-link small text-muted mb-0 px-2" data-lang="en">Current client? Office line: <a href="tel:+14025881125" class="text-decoration-none">402-588-1125</a></p>
     </div>
   </header>
 
@@ -1202,8 +1425,8 @@
             <div class="rounded-circle d-flex align-items-center justify-content-center text-white fw-bold mb-3" style="width:56px;height:56px;background:#2563eb;">1</div>
             <h3 class="h6 fw-bold mb-2" style="color:#1a365d;" data-lang="es">Consulta Inicial</h3>
             <h3 class="h6 fw-bold mb-2" style="color:#1a365d;" data-lang="en">Initial Consultation</h3>
-            <p class="small text-body-secondary lh-base mb-0" data-lang="es">Agenda una llamada breve para entender tus necesidades y presupuesto.</p>
-            <p class="small text-body-secondary lh-base mb-0" data-lang="en">Schedule a brief call to understand your needs and budget.</p>
+            <p class="small text-body-secondary lh-base mb-0" data-lang="es">Empieza con una cotización en línea o WhatsApp. Con tu información, revisamos tu situación y coordinamos una llamada si encaja.</p>
+            <p class="small text-body-secondary lh-base mb-0" data-lang="en">Start with an online quote or WhatsApp. We review your details and schedule a call when it’s a fit.</p>
           </div>
         </div>
         <div class="col-12 col-md-6 col-lg-3">
@@ -1306,21 +1529,30 @@
     </div>
   </section>
 
-  <!-- FAQ SECTION -->
-  <section id="faq" class="py-5 py-md-5 bg-light">
-    <div class="container" style="max-width:56rem;">
+  <!-- Final expense answers + chatbot widget (legacy #faq anchor kept for old links) -->
+  <section id="final-expense-answers" class="py-5 py-md-5 bg-light">
+    <span id="faq" class="d-block" style="height:0;width:0;overflow:hidden;position:absolute;" aria-hidden="true"></span>
+    <div class="container" style="max-width:64rem;">
       <div class="text-center mb-5">
-        <h2 class="h2 fw-bold mb-3" style="color:#1a365d;" data-lang="es">Preguntas Frecuentes</h2>
-        <h2 class="h2 fw-bold mb-3" style="color:#1a365d;" data-lang="en">Frequently Asked Questions</h2>
-        <p class="fs-5 text-body-secondary" data-lang="es">Encuentra respuestas a las preguntas más comunes sobre seguros de gastos finales.</p>
-        <p class="fs-5 text-body-secondary" data-lang="en">Find answers to the most common questions about final expense insurance.</p>
+        <h2 class="h2 fw-bold mb-3" style="color:#1a365d;" data-lang="es">Respuestas sobre tu seguro de gastos finales</h2>
+        <h2 class="h2 fw-bold mb-3" style="color:#1a365d;" data-lang="en">Get answers to your final expense questions</h2>
+        <p class="fs-5 text-body-secondary" data-lang="es">Información confiable y respuestas sobre gastos finales. El asistente (abajo) te pedirá tu contacto antes de responder dudas.</p>
+        <p class="fs-5 text-body-secondary" data-lang="en">Trusted information and answers about final expense insurance. The assistant below will ask for your contact info before answering questions.</p>
+      </div>
+
+      <!-- Embedded assistant: js/website-chatbot.js (contact first, then Q&A; API optional) -->
+      <div id="chatbot-widget-root" class="mb-5" data-chatbot-mount data-chat-api-url="/api/rag-site" data-avatar-src="img/julie-chatbot-avatar-cutout.png" data-tts-enabled="true" data-tts-url="/api/elevenlabs-tts" aria-label="Final expense assistant — Julie"></div>
+
+      <div class="text-center mb-4">
+        <h3 class="h5 fw-bold mb-0" style="color:#1a365d;" data-lang="es">Preguntas frecuentes</h3>
+        <h3 class="h5 fw-bold mb-0" style="color:#1a365d;" data-lang="en">Common questions</h3>
       </div>
 
       <div class="d-flex flex-column gap-3">
         <div class="bg-white rounded-3 p-4 shadow-sm"><h3 class="h6 fw-bold mb-2" style="color:#1a365d;" data-lang="es">¿Qué es un seguro de gastos finales?</h3><h3 class="h6 fw-bold mb-2" style="color:#1a365d;" data-lang="en">What is final expense insurance?</h3><p class="small text-body-secondary lh-base mb-0" data-lang="es">Un seguro de gastos finales es un tipo de seguro de vida diseñado específicamente para cubrir los costos asociados con el funeral, entierro, facturas médicas y otras deudas pequeñas al final de la vida. Ayuda a aliviar la carga financiera de tu familia durante un momento difícil.</p><p class="small text-body-secondary lh-base mb-0" data-lang="en">Final expense insurance is a type of life insurance specifically designed to cover costs associated with funeral, burial, medical bills, and other small end-of-life debts. It helps relieve the financial burden on your family during a difficult time.</p></div>
-        <div class="bg-white rounded-3 p-4 shadow-sm"><h3 class="h6 fw-bold mb-2" style="color:#1a365d;" data-lang="es">¿Cuánto cuesta un seguro de gastos finales?</h3><h3 class="h6 fw-bold mb-2" style="color:#1a365d;" data-lang="en">How much does final expense insurance cost?</h3><p class="small text-body-secondary lh-base mb-0" data-lang="es">El costo varía según tu edad, salud y la cantidad de cobertura que elijas. Las primas suelen ser asequibles y se mantienen niveladas durante toda la vida de la póliza. Contáctanos para obtener una cotización personalizada gratuita.</p><p class="small text-body-secondary lh-base mb-0" data-lang="en">The cost varies based on your age, health, and the amount of coverage you choose. Premiums are typically affordable and remain level for the life of the policy. Contact us for a free personalized quote.</p></div>
+        <div class="bg-white rounded-3 p-4 shadow-sm"><h3 class="h6 fw-bold mb-2" style="color:#1a365d;" data-lang="es">¿Cuánto cuesta un seguro de gastos finales?</h3><h3 class="h6 fw-bold mb-2" style="color:#1a365d;" data-lang="en">How much does final expense insurance cost?</h3><p class="small text-body-secondary lh-base mb-0" data-lang="es">El costo varía según tu edad, salud y la cantidad de cobertura que elijas. Las primas suelen ser asequibles y se mantienen niveladas durante toda la vida de la póliza. Solicita una cotización personalizada gratuita en línea o por WhatsApp.</p><p class="small text-body-secondary lh-base mb-0" data-lang="en">The cost varies based on your age, health, and the amount of coverage you choose. Premiums are typically affordable and remain level for the life of the policy. Request a free personalized quote online or via WhatsApp.</p></div>
         <div class="bg-white rounded-3 p-4 shadow-sm"><h3 class="h6 fw-bold mb-2" style="color:#1a365d;" data-lang="es">¿Necesito un examen médico para calificar?</h3><h3 class="h6 fw-bold mb-2" style="color:#1a365d;" data-lang="en">Do I need a medical exam to qualify?</h3><p class="small text-body-secondary lh-base mb-0" data-lang="es">En muchos casos, no se requiere un examen médico. Muchas pólizas de gastos finales utilizan cuestionarios de salud simplificados. Dependiendo de tus respuestas y tu historial, las aseguradoras pueden ofrecer diferentes niveles de aceptación.</p><p class="small text-body-secondary lh-base mb-0" data-lang="en">In many cases, no medical exam is required. Many final expense policies use simplified health questionnaires. Depending on your answers and history, insurers may offer different levels of acceptance.</p></div>
-        <div class="bg-white rounded-3 p-4 shadow-sm"><h3 class="h6 fw-bold mb-2" style="color:#1a365d;" data-lang="es">¿Cuánto tiempo toma obtener una póliza?</h3><h3 class="h6 fw-bold mb-2" style="color:#1a365d;" data-lang="en">How long does it take to get a policy?</h3><p class="small text-body-secondary lh-base mb-0" data-lang="es">El proceso puede ser rápido. Después de completar el formulario de cotización y hablar con Julie, muchas pólizas pueden ser aprobadas en cuestión de días, dependiendo de la aseguradora y tu situación de salud.</p><p class="small text-body-secondary lh-base mb-0" data-lang="en">The process can be quick. After completing the quote form and speaking with Julie, many policies can be approved within days, depending on the insurer and your health situation.</p></div>
+        <div class="bg-white rounded-3 p-4 shadow-sm"><h3 class="h6 fw-bold mb-2" style="color:#1a365d;" data-lang="es">¿Cuánto tiempo toma obtener una póliza?</h3><h3 class="h6 fw-bold mb-2" style="color:#1a365d;" data-lang="en">How long does it take to get a policy?</h3><p class="small text-body-secondary lh-base mb-0" data-lang="es">El proceso puede ser rápido. Después del formulario de cotización y de revisar tu caso con Julie (mensaje o llamada cuando ya tengamos tus datos), muchas pólizas pueden aprobarse en días, según la aseguradora y tu salud.</p><p class="small text-body-secondary lh-base mb-0" data-lang="en">The process can be quick. After your quote form and a review with Julie (message or call once we have your details), many policies can be approved within days, depending on the insurer and your health.</p></div>
         <div class="bg-white rounded-3 p-4 shadow-sm"><h3 class="h6 fw-bold mb-2" style="color:#1a365d;" data-lang="es">¿Ofrecen servicio en español?</h3><h3 class="h6 fw-bold mb-2" style="color:#1a365d;" data-lang="en">Do you offer service in Spanish?</h3><p class="small text-body-secondary lh-base mb-0" data-lang="es">Sí, Julie ofrece atención personalizada tanto en español como en inglés. Entendemos la importancia de comunicarnos en tu idioma preferido para que te sientas cómodo y comprendas completamente tus opciones de seguro.</p><p class="small text-body-secondary lh-base mb-0" data-lang="en">Yes, Julie offers personalized service in both Spanish and English. We understand the importance of communicating in your preferred language so you feel comfortable and fully understand your insurance options.</p></div>
       </div>
     </div>
@@ -1334,8 +1566,8 @@
     <div class="container text-center hero-content-overlay">
       <h2 class="h2 fw-bold text-white mb-3" data-lang="es">¿Listo para proteger a tu familia?</h2>
       <h2 class="h2 fw-bold text-white mb-3" data-lang="en">Ready to protect your family?</h2>
-      <p class="fs-5 text-white opacity-90 mb-4" data-lang="es">Agenda una consulta gratuita con Julie y descubre tus opciones de seguro de gastos finales.</p>
-      <p class="fs-5 text-white opacity-90 mb-4" data-lang="en">Schedule a free consultation with Julie and discover your final expense insurance options.</p>
+      <p class="fs-5 text-white opacity-90 mb-4" data-lang="es">Empieza con una cotización gratis o WhatsApp. Con tu información, coordinamos una consulta cuando tenga sentido.</p>
+      <p class="fs-5 text-white opacity-90 mb-4" data-lang="en">Start with a free quote or WhatsApp. With your details, we’ll schedule a consultation when it makes sense.</p>
       <a href="/quote-screen.html" class="btn btn-primary-gold px-4 py-3 rounded fw-bold d-inline-flex align-items-center" data-lang="es"><i class="fas fa-calendar-check me-2"></i>¡Cotización gratis!</a>
       <a href="/quote-screen.html" class="btn btn-primary-gold px-4 py-3 rounded fw-bold d-inline-flex align-items-center" data-lang="en"><i class="fas fa-calendar-check me-2"></i>Get Free Quote!</a>
     </div>
@@ -1346,7 +1578,8 @@
     <div class="container">
       <div class="d-flex flex-column flex-md-row align-items-center justify-content-between gap-2 text-white" style="margin:0; padding:0;">
         <img id="footer-logo" src="img/logo-spanish2.png" alt="Mejor Vida Insurance" style="height:130px;filter:brightness(0) invert(1);margin-top:-25px;margin-bottom:-25px;" />
-        <span class="small"><i class="fas fa-phone me-2 opacity-75"></i><a href="tel:+14025881125" class="text-white text-opacity-90 text-decoration-none">402-588-1125</a></span>
+        <a href="https://wa.me/14024405438?text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20seguro%20de%20gastos%20finales." target="_blank" rel="noopener" class="small text-white text-opacity-90 text-decoration-none"><i class="fab fa-whatsapp me-2 opacity-90"></i>WhatsApp</a>
+        <span class="small"><i class="fas fa-phone me-2 opacity-75"></i><a href="tel:+14025881125" class="text-white text-opacity-90 text-decoration-none" title="Office line">402-588-1125</a></span>
         <span class="small"><i class="fas fa-envelope me-2 opacity-75"></i><a href="mailto:Julie@mejorvidainsurance.com" class="text-white text-opacity-90 text-decoration-none">Julie@mejorvidainsurance.com</a></span>
         <span class="small"><i class="fas fa-map-marker-alt me-2 opacity-75"></i>P.O. Box 21885, Lincoln, NE 68542</span>
       </div>
@@ -1363,7 +1596,7 @@
             <span class="text-white text-opacity-50">·</span>
             <a href="#carriers" class="text-white text-opacity-75 text-decoration-none" data-lang="es">Aseguradoras</a><a href="#carriers" class="text-white text-opacity-75 text-decoration-none" data-lang="en">Insurers</a>
             <span class="text-white text-opacity-50">·</span>
-            <a href="#faq" class="text-white text-opacity-75 text-decoration-none">FAQ</a>
+            <a href="#final-expense-answers" class="text-white text-opacity-75 text-decoration-none" data-lang="es">¿Tienes preguntas?</a><a href="#final-expense-answers" class="text-white text-opacity-75 text-decoration-none" data-lang="en">Got questions?</a>
             <span class="text-white text-opacity-50">·</span>
             <a href="blog.html" class="text-white text-opacity-75 text-decoration-none">Blog</a>
             <span class="text-white text-opacity-50">·</span>
@@ -1394,6 +1627,7 @@
   <!-- Hero carousel: data in js/hero-quotes-data.js -->
   <script src="js/hero-quotes-data.js"></script>
   <script src="script.js"></script>
+  <script src="js/website-chatbot.js" defer></script>
 
   <!-- Mobile menu script -->
   <script>

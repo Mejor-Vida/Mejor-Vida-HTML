@@ -299,172 +299,17 @@
 
     .quote-form-card { max-width: 42rem; }
 
-    /* FEX: fixed label column + short shaft; tips overlap iframe (1fr was stretching arrows) */
-    .fex-quotes-pair {
-      display: grid;
-      grid-template-columns: 12rem min(100%, 350px);
-      align-items: stretch;
-      gap: 0;
-      width: fit-content;
-      max-width: 100%;
+    /* In-house $10K FE range (quote_ranges + /api/quote-site) */
+    .mvi-quote-card {
+      max-width: 28rem;
       margin-inline: auto;
-      position: relative;
-      overflow: visible;
-    }
-    .fex-guide-col {
-      position: relative;
-      z-index: 2;
-      align-self: stretch;
-      width: 12rem;
-      min-width: 12rem;
-      min-height: 0;
-      height: 100%;
-      padding-right: 0;
-      font-size: 0.8125rem;
-      font-weight: 600;
-      color: #0D47A1;
-      line-height: 1.15;
-    }
-    .fex-gl {
-      position: absolute;
-      left: 0;
-      right: 0;
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      gap: 0.2rem;
-      width: 100%;
-      /* Same downward nudge for every row (Estado + rest together) */
-      transform: translateY(calc(-50% + 38px));
-      pointer-events: none;
-    }
-    /* Vertical anchor (% of guide height) — FEX 350×525 */
-    .fex-gl[data-fex-row="0"] { top: 13.5%; }
-    .fex-gl[data-fex-row="1"] { top: 21.9%; }
-    .fex-gl[data-fex-row="2"] { top: 30.5%; }
-    .fex-gl[data-fex-row="3"] { top: 37.4%; }
-    .fex-gl[data-fex-row="4"] { top: 43.4%; }
-    .fex-gl[data-fex-row="5"] { top: 50.4%; }
-    .fex-gl[data-fex-row="6"] { top: 56.9%; }
-    .fex-gl[data-fex-row="7"] { top: 63.85%; }
-    .fex-gl[data-fex-row="8"] { top: 71.5%; }
-    .fex-gl[data-fex-row="9"] { top: 79.8%; }
-    .fex-label-txt {
-      flex: 0 1 auto;
-      max-width: 8.75rem;
-      min-width: 0;
-      text-align: right;
-      word-wrap: break-word;
-      hyphens: auto;
-    }
-    .fex-arrow-line {
-      flex: 0 0 2rem;
-      width: 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      min-height: 1.1rem;
-    }
-    .fex-shaft {
-      flex: 1 1 auto;
-      min-width: 0;
-      height: 2px;
-      background: rgba(13, 71, 161, 0.55);
-      border-radius: 1px;
-    }
-    .fex-arrow-tip {
-      flex-shrink: 0;
-      font-size: 0.65rem;
-      line-height: 1;
-      color: #0D47A1;
-      margin-left: -1px;
-      /* Pull past iframe border; guide-col z-index:2 paints above .fex-quotes-wrap */
-      margin-right: -82px;
-      position: relative;
-      z-index: 3;
-      filter: drop-shadow(0 0 0.5px rgba(13, 71, 161, 0.4));
-    }
-    /* Shorter reach than default -82px so tips sit left of English labels */
-    .fex-gl[data-fex-row="0"] .fex-arrow-tip,
-    .fex-gl[data-fex-row="5"] .fex-arrow-tip,
-    .fex-gl[data-fex-row="6"] .fex-arrow-tip,
-    .fex-gl[data-fex-row="7"] .fex-arrow-tip,
-    .fex-gl[data-fex-row="8"] .fex-arrow-tip {
-      margin-right: -38px;
-    }
-    .fex-gl[data-fex-row="9"] .fex-arrow-tip {
-      margin-right: -68px;
-    }
-    .fex-gl[data-fex-row="1"] .fex-arrow-tip {
-      margin-right: -14px;
-    }
-    /* Same horizontal reach as Amount / Gender / Tobacco */
-    .fex-gl[data-fex-row="2"] .fex-arrow-tip,
-    .fex-gl[data-fex-row="3"] .fex-arrow-tip,
-    .fex-gl[data-fex-row="4"] .fex-arrow-tip {
-      margin-right: -26px;
-    }
-    /* Mobile: keep same grid + absolute row % as desktop so arrows match the iframe.
-       Previous stacked layout broke alignment. Scale the whole pair to fit narrow viewports. */
-    .fex-quotes-mobile-wrap {
-      width: 100%;
-      display: flex;
-      justify-content: center;
-    }
-    @media (max-width: 639.98px) {
-      .fex-quotes-mobile-wrap {
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        padding-bottom: 0.25rem;
-      }
-      .fex-quotes-pair {
-        grid-template-columns: 12rem min(100%, 350px);
-        width: max-content;
-        max-width: none;
-        margin-inline: auto;
-        flex-shrink: 0;
-        /* ~12rem + 350px; scale down so pair fits viewport without changing internal geometry */
-        zoom: min(1, calc((100vw - 1.5rem) / 33.875rem));
-      }
-      .fex-guide-col {
-        position: relative;
-        width: 12rem;
-        min-width: 12rem;
-        height: auto;
-        align-self: stretch;
-        margin-bottom: 0;
-      }
-      .fex-gl {
-        position: absolute;
-        transform: translateY(calc(-50% + 38px));
-        justify-content: flex-end;
-      }
-      .fex-quotes-wrap {
-        width: min(100%, 350px);
-      }
-      .fex-label-txt {
-        max-width: 8.75rem;
-        font-size: 0.75rem;
-      }
-    }
-    .fex-quotes-wrap {
-      position: relative;
-      z-index: 1;
-      width: min(100%, 350px);
-      aspect-ratio: 350 / 525;
-      margin-inline: auto;
-      border-radius: 0.5rem;
-      overflow: hidden;
-      border: 2px solid rgba(13, 71, 161, 0.35);
-      box-shadow: 0 10px 28px rgba(13, 71, 161, 0.14), 0 0 0 1px rgba(254, 201, 99, 0.35);
+      border: 2px solid rgba(13, 71, 161, 0.25);
+      border-radius: 0.75rem;
+      padding: 1.25rem 1.5rem;
       background: #fff;
+      box-shadow: 0 10px 28px rgba(13, 71, 161, 0.1);
     }
-    .fex-quotes-wrap iframe {
-      display: block;
-      width: 100%;
-      height: 100%;
-      border: 0;
-    }
+    .mvi-quote-result { min-height: 4.5rem; }
 
     /* HubSpot meetings embed in modal */
     .schedule-modal-iframe-wrap iframe {
@@ -513,8 +358,8 @@
           <a href="/#how-it-works" data-lang="es" class="nav-link-cm">Cómo funciona</a>
           <a href="/#how-it-works" data-lang="en" class="nav-link-cm">How It Works</a>
           
-          <a href="/#faq" data-lang="es" class="nav-link-cm">FAQ</a>
-          <a href="/#faq" data-lang="en" class="nav-link-cm">FAQ</a>
+          <a href="/#final-expense-answers" data-lang="es" class="nav-link-cm">¿Tienes preguntas?</a>
+          <a href="/#final-expense-answers" data-lang="en" class="nav-link-cm">Got questions?</a>
           
           <a href="blog.html" data-lang="es" class="nav-link-cm">Blog</a>
           <a href="blog.html" data-lang="en" class="nav-link-cm">Blog</a>
@@ -551,8 +396,8 @@
       <a href="/#about" data-lang="en" class="mobile-menu-link">About</a>
       <a href="/#how-it-works" data-lang="es" class="mobile-menu-link">Cómo funciona</a>
       <a href="/#how-it-works" data-lang="en" class="mobile-menu-link">How It Works</a>
-      <a href="/#faq" data-lang="es" class="mobile-menu-link">FAQ</a>
-      <a href="/#faq" data-lang="en" class="mobile-menu-link">FAQ</a>
+      <a href="/#final-expense-answers" data-lang="es" class="mobile-menu-link">¿Tienes preguntas?</a>
+      <a href="/#final-expense-answers" data-lang="en" class="mobile-menu-link">Got questions?</a>
       <a href="blog.html" data-lang="es" class="mobile-menu-link">Blog</a>
       <a href="blog.html" data-lang="en" class="mobile-menu-link">Blog</a>
       <a href="tel:+14025881125" data-lang="es" class="mobile-menu-link fw-bold" style="color:#0D47A1;"><i class="fas fa-phone me-2"></i>Llama a nuestra línea de oficina - 402-588-1125</a>
@@ -582,65 +427,44 @@
           <p class="small mb-0 text-start text-body-secondary" data-lang="es">Julie Braunsroth está autorizada para ofrecer y vender seguros de vida y anualidades <strong>solo en Nebraska</strong>. El cotizador de abajo es para personas que buscan cobertura como residentes de Nebraska. Si usted no es residente de Nebraska, no utilice esta herramienta para cotizar; regrese a la <a href="quote-screen.html">selección de estado</a> para la opción correcta.</p>
           <p class="small mb-0 text-start text-body-secondary" data-lang="en">Julie Braunsroth is licensed to solicit and sell life insurance and annuities <strong>only in Nebraska</strong>. The quote tool below is for people seeking coverage as Nebraska residents. If you are not a Nebraska resident, do not use this tool to obtain a quote—go back to <a href="quote-screen.html">state selection</a> for the right option.</p>
         </div>
-        <div class="fex-quotes-mobile-wrap">
-        <div class="fex-quotes-pair mb-4">
-          <div class="fex-guide-col">
-            <div class="fex-gl" data-fex-row="0" data-lang="es"><span class="fex-label-txt">Estado</span><span class="fex-arrow-line" aria-hidden="true"><span class="fex-shaft"></span><span class="fex-arrow-tip">▶</span></span></div>
-            <div class="fex-gl" data-fex-row="0" data-lang="en"><span class="fex-label-txt">State</span><span class="fex-arrow-line" aria-hidden="true"><span class="fex-shaft"></span><span class="fex-arrow-tip">▶</span></span></div>
-            <div class="fex-gl" data-fex-row="1" data-lang="es"><span class="fex-label-txt">Fecha de nacimiento</span><span class="fex-arrow-line" aria-hidden="true"><span class="fex-shaft"></span><span class="fex-arrow-tip">▶</span></span></div>
-            <div class="fex-gl" data-fex-row="1" data-lang="en"><span class="fex-label-txt">Birth date</span><span class="fex-arrow-line" aria-hidden="true"><span class="fex-shaft"></span><span class="fex-arrow-tip">▶</span></span></div>
-            <div class="fex-gl" data-fex-row="2" data-lang="es"><span class="fex-label-txt">Monto</span><span class="fex-arrow-line" aria-hidden="true"><span class="fex-shaft"></span><span class="fex-arrow-tip">▶</span></span></div>
-            <div class="fex-gl" data-fex-row="2" data-lang="en"><span class="fex-label-txt">Amount</span><span class="fex-arrow-line" aria-hidden="true"><span class="fex-shaft"></span><span class="fex-arrow-tip">▶</span></span></div>
-            <div class="fex-gl" data-fex-row="3" data-lang="es"><span class="fex-label-txt">Género</span><span class="fex-arrow-line" aria-hidden="true"><span class="fex-shaft"></span><span class="fex-arrow-tip">▶</span></span></div>
-            <div class="fex-gl" data-fex-row="3" data-lang="en"><span class="fex-label-txt">Gender</span><span class="fex-arrow-line" aria-hidden="true"><span class="fex-shaft"></span><span class="fex-arrow-tip">▶</span></span></div>
-            <div class="fex-gl" data-fex-row="4" data-lang="es"><span class="fex-label-txt">Tabaco</span><span class="fex-arrow-line" aria-hidden="true"><span class="fex-shaft"></span><span class="fex-arrow-tip">▶</span></span></div>
-            <div class="fex-gl" data-fex-row="4" data-lang="en"><span class="fex-label-txt">Tobacco</span><span class="fex-arrow-line" aria-hidden="true"><span class="fex-shaft"></span><span class="fex-arrow-tip">▶</span></span></div>
-            <div class="fex-gl" data-fex-row="5" data-lang="es"><span class="fex-label-txt">Nombre</span><span class="fex-arrow-line" aria-hidden="true"><span class="fex-shaft"></span><span class="fex-arrow-tip">▶</span></span></div>
-            <div class="fex-gl" data-fex-row="5" data-lang="en"><span class="fex-label-txt">First name</span><span class="fex-arrow-line" aria-hidden="true"><span class="fex-shaft"></span><span class="fex-arrow-tip">▶</span></span></div>
-            <div class="fex-gl" data-fex-row="6" data-lang="es"><span class="fex-label-txt">Apellido</span><span class="fex-arrow-line" aria-hidden="true"><span class="fex-shaft"></span><span class="fex-arrow-tip">▶</span></span></div>
-            <div class="fex-gl" data-fex-row="6" data-lang="en"><span class="fex-label-txt">Last name</span><span class="fex-arrow-line" aria-hidden="true"><span class="fex-shaft"></span><span class="fex-arrow-tip">▶</span></span></div>
-            <div class="fex-gl" data-fex-row="7" data-lang="es"><span class="fex-label-txt">Teléfono</span><span class="fex-arrow-line" aria-hidden="true"><span class="fex-shaft"></span><span class="fex-arrow-tip">▶</span></span></div>
-            <div class="fex-gl" data-fex-row="7" data-lang="en"><span class="fex-label-txt">Phone</span><span class="fex-arrow-line" aria-hidden="true"><span class="fex-shaft"></span><span class="fex-arrow-tip">▶</span></span></div>
-            <div class="fex-gl" data-fex-row="8" data-lang="es"><span class="fex-label-txt">Correo</span><span class="fex-arrow-line" aria-hidden="true"><span class="fex-shaft"></span><span class="fex-arrow-tip">▶</span></span></div>
-            <div class="fex-gl" data-fex-row="8" data-lang="en"><span class="fex-label-txt">Email</span><span class="fex-arrow-line" aria-hidden="true"><span class="fex-shaft"></span><span class="fex-arrow-tip">▶</span></span></div>
-            <div class="fex-gl" data-fex-row="9" data-lang="es"><span class="fex-label-txt">Cotizar</span><span class="fex-arrow-line" aria-hidden="true"><span class="fex-shaft"></span><span class="fex-arrow-tip">▶</span></span></div>
-            <div class="fex-gl" data-fex-row="9" data-lang="en"><span class="fex-label-txt">Get quotes</span><span class="fex-arrow-line" aria-hidden="true"><span class="fex-shaft"></span><span class="fex-arrow-tip">▶</span></span></div>
-          </div>
-          <!-- FEX embed: webquote.pl params from FEX → Website Quoter → Enhanced Web Plugin. Bump FEX_EMBED_VER after dashboard changes to bust browser/CDN cache on iframe URL. -->
-          <div class="fex-quotes-wrap">
-            <iframe
-              id="fex-embed-quote"
-              title="Final expense quote — FEX Quotes (English interface)"
-              scrolling="no"
-              width="350"
-              height="525"
-              allowtransparency="true"
-            ><a href="https://fexquotes.com/">Final Expense Quote Engine</a></iframe>
-          </div>
-          <script>
-            (function () {
-              var el = document.getElementById('fex-embed-quote');
-              if (!el) return;
-              var FEX_EMBED_VER = '1';
-              var qs = [
-                'id=55220',
-                'state=NE',
-                'fn=1',
-                'vrt=m',
-                'tgt=2',
-                'cpn=6',
-                'style=blue',
-                'frm=1',
-                'embed_v=' + encodeURIComponent(FEX_EMBED_VER),
-              ].join('&');
-              el.src = 'https://fexquotes.com/wqt/v1/webquote.pl?' + qs;
-            })();
-          </script>
-        </div>
+        <div class="mvi-quote-card mb-4">
+          <p class="small text-body-secondary mb-3 text-center" data-lang="es">Estimación para <strong>$10,000</strong> de cobertura de gastos finales (Nebraska). Rango mensual típico según edad, género y tabaco — sin nombres de aseguradoras.</p>
+          <p class="small text-body-secondary mb-3 text-center" data-lang="en">Estimate for <strong>$10,000</strong> final-expense coverage (Nebraska). Typical monthly range by age, gender, and tobacco — no carrier names.</p>
+          <form id="mvi-quote-form" class="row g-2 align-items-end justify-content-center" novalidate>
+            <div class="col-6 col-md-3">
+              <label for="mvi-age" class="form-label small mb-0" data-lang="es">Edad (45–85)</label>
+              <label for="mvi-age" class="form-label small mb-0" data-lang="en">Age (45–85)</label>
+              <input type="number" class="form-control form-control-sm" id="mvi-age" name="age" min="45" max="85" required inputmode="numeric" />
+            </div>
+            <div class="col-6 col-md-3">
+              <label for="mvi-sex" class="form-label small mb-0" data-lang="es">Género</label>
+              <label for="mvi-sex" class="form-label small mb-0" data-lang="en">Gender</label>
+              <select class="form-select form-select-sm" id="mvi-sex" name="sex" required>
+                <option value="">—</option>
+                <option value="male">Male / Masculino</option>
+                <option value="female">Female / Femenino</option>
+              </select>
+            </div>
+            <div class="col-12 col-md-4">
+              <label for="mvi-smoker" class="form-label small mb-0" data-lang="es">¿Tabaco?</label>
+              <label for="mvi-smoker" class="form-label small mb-0" data-lang="en">Tobacco?</label>
+              <select class="form-select form-select-sm" id="mvi-smoker" name="smoker" required>
+                <option value="false">No</option>
+                <option value="true">Yes / Sí</option>
+              </select>
+            </div>
+            <div class="col-12 col-md-auto d-grid">
+              <button type="submit" class="btn btn-primary btn-sm fw-bold px-4" id="mvi-quote-submit">
+                <span data-lang="es">Ver rango</span>
+                <span data-lang="en">See range</span>
+              </button>
+            </div>
+          </form>
+          <div id="mvi-quote-result" class="mvi-quote-result mt-3 small text-center text-body-secondary" role="status" aria-live="polite"></div>
         </div>
 
-        <p class="text-center small text-body-secondary mb-2" data-lang="es">Cuando termine de ver sus opciones, puede agendar una cita con Julie (el cotizador no avisa automáticamente a nuestro sitio).</p>
-        <p class="text-center small text-body-secondary mb-2" data-lang="en">When you’re done reviewing options, book time with Julie—the quote tool doesn’t notify our site automatically.</p>
+        <p class="text-center small text-body-secondary mb-2" data-lang="es">Cuando quiera hablar con Julie, use el botón de agendar (abajo puede guardar sus datos).</p>
+        <p class="text-center small text-body-secondary mb-2" data-lang="en">When you want to talk with Julie, use Schedule—you can also save your details below.</p>
         <div class="text-center mb-4">
           <button type="button" class="btn btn-primary-gold px-4 py-2 fw-bold rounded" data-bs-toggle="modal" data-bs-target="#scheduleModal" id="btn-schedule-after-quote">
             <i class="fas fa-calendar-check me-2" aria-hidden="true"></i>
@@ -652,8 +476,8 @@
         <div class="border-top pt-4 mt-2">
           <h2 class="h5 fw-bold text-center mb-2" style="color:#1a365d;" data-lang="es">Guardar su información y resultados</h2>
           <h2 class="h5 fw-bold text-center mb-2" style="color:#1a365d;" data-lang="en">Save your details &amp; quote notes</h2>
-          <p class="text-center small text-body-secondary mb-3" data-lang="es">El cotizador de arriba no puede enviar datos automáticamente a nuestro sistema. Si desea que Julie le contacte, envíe este formulario: guardamos la información en nuestro sistema seguro y la sincronizamos con el CRM.</p>
-          <p class="text-center small text-body-secondary mb-3" data-lang="en">The tool above cannot send quote data to our site automatically. To have Julie follow up, submit this form—we store it securely and sync your contact to our CRM.</p>
+          <p class="text-center small text-body-secondary mb-3" data-lang="es">Si desea que Julie le contacte, envíe este formulario: guardamos la información en nuestro sistema seguro y la sincronizamos con el CRM. Puede pegar el rango del estimador arriba en “notas”.</p>
+          <p class="text-center small text-body-secondary mb-3" data-lang="en">To have Julie follow up, submit this form—we store it securely and sync your contact to our CRM. You can paste the range from the estimator above into “notes.”</p>
 
           <form id="quote-lead-form" class="mx-auto" style="max-width: 28rem;" novalidate>
             <div class="visually-hidden" aria-hidden="true">
@@ -775,7 +599,7 @@
             <span class="text-white text-opacity-50">·</span>
             <a href="index.html#carriers" class="text-white text-opacity-75 text-decoration-none" data-lang="es">Aseguradoras</a><a href="index.html#carriers" class="text-white text-opacity-75 text-decoration-none" data-lang="en">Insurers</a>
             <span class="text-white text-opacity-50">·</span>
-            <a href="index.html#faq" class="text-white text-opacity-75 text-decoration-none">FAQ</a>
+            <a href="index.html#final-expense-answers" class="text-white text-opacity-75 text-decoration-none" data-lang="es">¿Tienes preguntas?</a><a href="index.html#final-expense-answers" class="text-white text-opacity-75 text-decoration-none" data-lang="en">Got questions?</a>
             <span class="text-white text-opacity-50">·</span>
             <a href="blog.html" class="text-white text-opacity-75 text-decoration-none">Blog</a>
             <span class="text-white text-opacity-50">·</span>
@@ -871,6 +695,104 @@
   </script>
   <script>
     (function () {
+      var form = document.getElementById('mvi-quote-form');
+      var out = document.getElementById('mvi-quote-result');
+      var btn = document.getElementById('mvi-quote-submit');
+      var qlSummary = document.getElementById('ql-summary');
+      if (!form || !out) return;
+      form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        var lang = document.documentElement.classList.contains('lang-en') ? 'en' : 'es';
+        var age = parseInt(document.getElementById('mvi-age').value, 10);
+        var sex = String(document.getElementById('mvi-sex').value || '').toLowerCase();
+        var smoker = document.getElementById('mvi-smoker').value === 'true';
+        out.classList.remove('text-danger', 'text-success');
+        out.innerHTML =
+          lang === 'es'
+            ? '<span class="spinner-border spinner-border-sm me-2" role="status"></span>Calculando…'
+            : '<span class="spinner-border spinner-border-sm me-2" role="status"></span>Calculating…';
+        if (btn) btn.disabled = true;
+        try {
+          var res = await fetch('/api/quote-site', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ age: age, sex: sex, smoker: smoker }),
+          });
+          var data = await res.json().catch(function () {
+            return {};
+          });
+          if (!res.ok || data.ok === false) {
+            throw new Error(data.error || (lang === 'es' ? 'Error al calcular' : 'Could not calculate'));
+          }
+          if (data.quote_status === 'ok') {
+            out.classList.add('text-success');
+            out.style.color = '';
+            out.innerHTML =
+              lang === 'es'
+                ? '<strong>Rango mensual estimado ($10K):</strong> ' +
+                  data.quote_low +
+                  ' – ' +
+                  data.quote_high +
+                  ' <span class="text-body-secondary">(punto medio ' +
+                  data.quote_anchor +
+                  ')</span>'
+                : '<strong>Estimated monthly range ($10K):</strong> ' +
+                  data.quote_low +
+                  ' – ' +
+                  data.quote_high +
+                  ' <span class="text-body-secondary">(mid ' +
+                  data.quote_anchor +
+                  ')</span>';
+            if (qlSummary && !String(qlSummary.value || '').trim()) {
+              qlSummary.value =
+                lang === 'es'
+                  ? 'Estimador web: rango $10K ' +
+                    data.quote_low +
+                    ' – ' +
+                    data.quote_high +
+                    ' (medio ' +
+                    data.quote_anchor +
+                    '). Edad ' +
+                    age +
+                    ', ' +
+                    sex +
+                    ', tabaco ' +
+                    (smoker ? 'sí' : 'no') +
+                    '.'
+                  : 'Web estimator: $10K range ' +
+                    data.quote_low +
+                    ' – ' +
+                    data.quote_high +
+                    ' (mid ' +
+                    data.quote_anchor +
+                    '). Age ' +
+                    age +
+                    ', ' +
+                    sex +
+                    ', tobacco ' +
+                    (smoker ? 'yes' : 'no') +
+                    '.';
+            }
+          } else {
+            out.classList.add('text-danger');
+            out.textContent =
+              data.quote_error ||
+              (lang === 'es'
+                ? 'No hay datos para esa combinación.'
+                : 'No data for that combination.');
+          }
+        } catch (err) {
+          out.classList.add('text-danger');
+          out.textContent =
+            err.message || (lang === 'es' ? 'Error de red. Intente más tarde.' : 'Network error. Try again.');
+        } finally {
+          if (btn) btn.disabled = false;
+        }
+      });
+    })();
+  </script>
+  <script>
+    (function () {
       var form = document.getElementById('quote-lead-form');
       if (!form) return;
       var msg = document.getElementById('quote-lead-msg');
@@ -892,7 +814,8 @@
           state: (fd.get('state') || '').trim().toUpperCase(),
           quoteSummary: (fd.get('quoteSummary') || '').trim(),
           consent: document.getElementById('ql-consent').checked,
-          lang: lang
+          lang: lang,
+          source: 'nebraska_quote_page',
         };
         if (btn) btn.disabled = true;
         try {
