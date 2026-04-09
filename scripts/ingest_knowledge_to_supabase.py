@@ -122,6 +122,15 @@ def _fetch_csv_google_api(spreadsheet_id: str, gid_str: str) -> str | None:
     return buf.getvalue()
 
 
+def _cell_str(v: Any) -> str:
+    """DictReader may put overflow columns in key None as a list."""
+    if v is None:
+        return ""
+    if isinstance(v, list):
+        return " ".join(_cell_str(x) for x in v).strip()
+    return str(v).strip()
+
+
 def _parse_csv_text(text: str) -> list[dict[str, str]]:
     f = io.StringIO(text)
     r = csv.DictReader(f)
@@ -129,7 +138,13 @@ def _parse_csv_text(text: str) -> list[dict[str, str]]:
         return []
     out: list[dict[str, str]] = []
     for raw in r:
-        row = {_norm_header(k): (v or "").strip() for k, v in raw.items()}
+        row: dict[str, str] = {}
+        for k, v in raw.items():
+            if k is None:
+                continue
+            nk = _norm_header(k)
+            if nk:
+                row[nk] = _cell_str(v)
         out.append(row)
     return out
 
@@ -188,6 +203,15 @@ def _split_oversized(text: str, max_chars: int = 3500) -> list[str]:
 def _embed_batch(texts: list[str], api_key: str) -> list[list[float]]:
     if not texts:
         return []
+    try:
+        from openai import OpenAI
+
+        client = OpenAI(api_key=api_key, timeout=120.0)
+        r = client.embeddings.create(model="text-embedding-3-small", input=texts)
+        ordered = sorted(r.data, key=lambda x: x.index)
+        return [item.embedding for item in ordered]
+    except ImportError:
+        pass
     payload = json.dumps(
         {"model": "text-embedding-3-small", "input": texts}
     ).encode()
@@ -204,7 +228,6 @@ def _embed_batch(texts: list[str], api_key: str) -> list[list[float]]:
         data = json.loads(resp.read().decode())
     if not data.get("data"):
         raise RuntimeError(f"OpenAI embeddings: bad response {data}")
-    # sort by index
     ordered = sorted(data["data"], key=lambda x: x["index"])
     return [item["embedding"] for item in ordered]
 
