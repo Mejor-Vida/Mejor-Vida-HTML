@@ -321,6 +321,11 @@
     }
 
     /* Embedded final-expense chat (see js/website-chatbot.js) — same as index.html */
+    #chatbot-widget-root {
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+    }
     #chatbot-widget-root .fe-chatbot-layout {
       display: flex;
       flex-direction: column;
@@ -384,40 +389,37 @@
       object-position: bottom center;
       display: block;
     }
-    @keyframes fe-chatbot-speaking {
-      0%, 100% { transform: translateY(0) scale(1); }
-      50% { transform: translateY(-1.5%) scale(1.012); }
-    }
-    #chatbot-widget-root .fe-chatbot-figure--speaking .fe-chatbot-figure-img {
-      animation: fe-chatbot-speaking 0.85s ease-in-out infinite;
-      transform-origin: 50% 18%;
-    }
-    @media (prefers-reduced-motion: reduce) {
-      #chatbot-widget-root .fe-chatbot-figure--speaking .fe-chatbot-figure-img {
-        animation: none;
-      }
-    }
     #chatbot-widget-root .fe-chatbot-col {
       flex: 1 1 auto;
       min-width: 0;
       display: flex;
       flex-direction: column;
     }
-    @media (min-width: 768px) {
+    @media (min-width: 576px) {
       #chatbot-widget-root .fe-chatbot-layout {
         flex-direction: row;
+        flex-wrap: nowrap;
         align-items: stretch;
+        justify-content: flex-start;
         gap: 1.25rem;
       }
       #chatbot-widget-root .fe-chatbot-figure-col {
-        flex: 0 0 44%;
-        max-width: 420px;
-        align-self: center;
+        order: 0;
+        flex: 0 0 40%;
+        max-width: 400px;
+        min-width: 0;
+        align-self: stretch;
+        align-items: flex-end;
+      }
+      #chatbot-widget-root .fe-chatbot-col {
+        order: 1;
+        flex: 1 1 0;
+        min-width: 0;
       }
       #chatbot-widget-root .fe-chatbot-figure-wrap {
         flex-direction: row;
-        align-items: flex-start;
-        justify-content: center;
+        align-items: flex-end;
+        justify-content: flex-end;
         gap: 0.5rem;
       }
       #chatbot-widget-root .fe-chatbot-figure-bubble {
@@ -694,7 +696,7 @@
             <p class="small text-body-secondary mb-0" data-lang="es">Julie puede ayudarte aquí. El asistente pedirá tu contacto antes de responder.</p>
             <p class="small text-body-secondary mb-0" data-lang="en">Julie can help here. The assistant will ask for your contact before answering.</p>
           </div>
-          <div id="chatbot-widget-root" class="mb-2" data-chatbot-mount data-chat-api-url="/api/rag-site" data-avatar-src="img/julie-chatbot-avatar-cutout.png" data-tts-enabled="true" data-tts-url="/api/elevenlabs-tts" aria-label="Final expense assistant — Julie"></div>
+          <div id="chatbot-widget-root" class="mb-2" data-chatbot-mount data-chat-api-url="/api/rag-site" data-avatar-src="img/julie-chatbot-avatar-cutout.png" aria-label="Final expense assistant — Julie"></div>
         </section>
 
         <div class="border-top pt-4 mt-2">

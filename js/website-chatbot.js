@@ -263,11 +263,6 @@
     el.title = root.querySelector('[data-fe-role="title"]');
     el.subtitle = root.querySelector('[data-fe-role="subtitle"]');
     el.inputLabel = root.querySelector('[data-fe-role="input-label"]');
-    el.figure = root.querySelector('.fe-chatbot-figure');
-
-    var ttsEnabled = root.getAttribute('data-tts-enabled') !== 'false';
-    var ttsUrl = (root.getAttribute('data-tts-url') || '/api/elevenlabs-tts').trim();
-    var ttsAudio = null;
 
     function applyStrings() {
       var lang = getLang();
@@ -310,72 +305,8 @@
       scrollMessages();
     }
 
-    function speakBotReply(plainText) {
-      if (!ttsEnabled || !el.figure) return;
-      var clean = String(plainText || '')
-        .replace(/\s+/g, ' ')
-        .trim()
-        .slice(0, 2500);
-      if (!clean) return;
-      if (ttsAudio) {
-        try {
-          ttsAudio.pause();
-        } catch (e) {}
-        ttsAudio = null;
-      }
-      el.figure.classList.add('fe-chatbot-figure--speaking');
-      fetch(ttsUrl, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text: clean, locale: getLang() }),
-      })
-        .then(function (r) {
-          if (r.status === 503) {
-            el.figure.classList.remove('fe-chatbot-figure--speaking');
-            return null;
-          }
-          if (!r.ok) throw new Error('tts failed');
-          return r.blob();
-        })
-        .then(function (blob) {
-          if (!blob) return;
-          var url = URL.createObjectURL(blob);
-          var audio = new Audio(url);
-          ttsAudio = audio;
-          audio.onended = function () {
-            URL.revokeObjectURL(url);
-            el.figure.classList.remove('fe-chatbot-figure--speaking');
-            ttsAudio = null;
-          };
-          audio.onerror = function () {
-            URL.revokeObjectURL(url);
-            el.figure.classList.remove('fe-chatbot-figure--speaking');
-            ttsAudio = null;
-          };
-          return audio.play().catch(function () {
-            URL.revokeObjectURL(url);
-            el.figure.classList.remove('fe-chatbot-figure--speaking');
-            ttsAudio = null;
-          });
-        })
-        .catch(function () {
-          el.figure.classList.remove('fe-chatbot-figure--speaking');
-        });
-    }
-
-    function stopTtsPlayback() {
-      if (ttsAudio) {
-        try {
-          ttsAudio.pause();
-        } catch (e) {}
-        ttsAudio = null;
-      }
-      if (el.figure) el.figure.classList.remove('fe-chatbot-figure--speaking');
-    }
-
     function appendBotAndSpeak(text) {
       appendMessage('bot', text);
-      speakBotReply(text);
     }
 
     function removeThinkingMessage() {
@@ -450,7 +381,6 @@
 
       if (clearBtn) {
         clearBtn.addEventListener('click', function () {
-          stopTtsPlayback();
           clearContact();
           state.contact = null;
           el.messages.innerHTML = '';
@@ -495,7 +425,6 @@
           escapeHtml(t.newChat) +
           '</button></p>';
         el.contactPanel.querySelector('[data-fe-edit]').addEventListener('click', function () {
-          stopTtsPlayback();
           renderContactForm();
         });
 
@@ -522,7 +451,6 @@
           escapeHtml(t.newChat) +
           '</button></p>';
         el.contactPanel.querySelector('[data-fe-edit]').addEventListener('click', function () {
-          stopTtsPlayback();
           clearContact();
           state.contact = null;
           el.messages.innerHTML = '';
