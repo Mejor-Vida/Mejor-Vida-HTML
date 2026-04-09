@@ -19,6 +19,8 @@ This folder holds **SQL migrations** for **Postgres (Supabase)** used by the mar
 | **`011_manychat_leads.sql`** | **`manychat_leads`**, **`unanswered_questions`** — ManyChat WhatsApp flow (separate from website `quote_lead_submissions`) |
 | **`012_match_knowledge_chunks_rpc.sql`** | **`match_knowledge_chunks()`** — vector search over **`knowledge_chunks`** for `/api/rag-answer` |
 | **`013_enable_rls_manychat_tables.sql`** | RLS on `manychat_leads` / `unanswered_questions` (created after `010`) |
+| **`014_quote_ranges.sql`** | **`quote_ranges`** — precomputed $10K FE low/high/anchor for WhatsApp `/api/quote` |
+| **`015_schema_migrations_record_014.sql`** | Inserts `014_quote_ranges.sql` into **`schema_migrations`** if `014` was run manually in SQL editor |
 
 See **`TABLE_GUIDE.md`** for a plain-English map of which tables belong to leads vs chatbot vs knowledge.
 

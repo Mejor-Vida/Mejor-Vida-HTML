@@ -10,6 +10,7 @@ In **Beekeeper**, the left list is **database tables** (and some **functions**),
 | `fex_email_quotes` | **FEX email** pipeline → Make/webhook → `fex-email-quote-webhook` |
 | `whatsapp_leads` | **WhatsApp** leads → Apps Script → `whatsapp-lead-webhook` (if you use that route) |
 | `manychat_leads` | **ManyChat** WhatsApp flow → Vercel `api/lead-capture` / `api/dropoff-capture` (not the website quote form) |
+| `quote_ranges` | **WhatsApp quote engine** — precomputed $10K low/high/anchor → Vercel `api/quote` |
 | `out_of_state_referrals` | **Out-of-state referral** flow (if that table exists in your project) |
 
 ## Website chatbot (RAG + Julie escalation)

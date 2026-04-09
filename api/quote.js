@@ -6,7 +6,7 @@
  * No health questions. No carrier names. Coverage shown for $10K only,
  * with a note that prices scale for other amounts.
  *
- * Env: SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, MANYCHAT_WEBHOOK_SECRET
+ * Env: SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY (or SUPABASE_SERVICE_KEY alias), MANYCHAT_WEBHOOK_SECRET
  *
  * Request body (from ManyChat):
  *   { "age": 65, "sex": "male", "smoker": "no" }
@@ -71,11 +71,12 @@ module.exports = async function handler(req, res) {
 
   const auth = verifyManychatSecret(req);
   if (!auth.ok) {
-    return json(res, 401, { status: "error", error: auth.reason });
+    return json(res, auth.status, { status: "error", error: auth.error });
   }
 
   const SUPABASE_URL = process.env.SUPABASE_URL;
-  const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  const SUPABASE_KEY =
+    process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_SERVICE_KEY;
   if (!SUPABASE_URL || !SUPABASE_KEY) {
     return json(res, 500, { status: "error", error: "Missing Supabase config" });
   }
