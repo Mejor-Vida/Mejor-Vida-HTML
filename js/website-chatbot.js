@@ -15,6 +15,23 @@
     return document.documentElement.classList.contains('lang-en') ? 'en' : 'es';
   }
 
+  /** Detect the language of a typed question (overrides page locale for API calls). */
+  function detectQuestionLang(text) {
+    var s = String(text || '');
+    // Spanish-specific characters are a strong signal
+    if (/[ñáéíóúü¿¡]/i.test(s)) return 'es';
+    var lower = s.toLowerCase();
+    // Common Spanish question words / connectors
+    var esWords = ['qué', 'que', 'cómo', 'como', 'cuánto', 'cuanto', 'cuál', 'cual',
+                   'tengo', 'puedo', 'tiene', 'seguro', 'cuántos', 'cuantos',
+                   'necesito', 'quiero', 'es un', 'hay ', 'cuándo', 'cuando',
+                   'dónde', 'donde', 'por qué', 'para qué'];
+    for (var i = 0; i < esWords.length; i++) {
+      if (lower.indexOf(esWords[i]) !== -1) return 'es';
+    }
+    return 'en';
+  }
+
   function escapeHtml(s) {
     var d = document.createElement('div');
     d.textContent = s;
@@ -472,12 +489,13 @@
 
       if (CHAT_API_URL) {
         appendMessage('bot', t.thinking);
+        var questionLang = detectQuestionLang(text);
         fetch(CHAT_API_URL, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             message: text,
-            locale: lang,
+            locale: questionLang,
             contact: state.contact,
           }),
         })
