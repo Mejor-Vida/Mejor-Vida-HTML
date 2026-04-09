@@ -25,6 +25,7 @@ COMMENT ON COLUMN quote_ranges.anchor IS 'Midpoint of low and high';
 
 -- Enable RLS (service-role key reads; no public writes)
 ALTER TABLE quote_ranges ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "service_role_all" ON quote_ranges;
 CREATE POLICY "service_role_all" ON quote_ranges FOR ALL USING (true) WITH CHECK (true);
 
 -- Seed data: 164 rows covering ages 45-85, male/female, smoker/non-smoker
@@ -192,4 +193,5 @@ INSERT INTO quote_ranges (age, sex, smoker, low, high, anchor) VALUES
   (85, 'male', false, 192.74, 301.53, 247.13),
   (85, 'male', true, 228.74, 301.53, 265.13),
   (85, 'female', false, 135.9, 301.53, 218.71),
-  (85, 'female', true, 192.35, 301.53, 246.94);
+  (85, 'female', true, 192.35, 301.53, 246.94)
+ON CONFLICT (age, sex, smoker) DO NOTHING;
