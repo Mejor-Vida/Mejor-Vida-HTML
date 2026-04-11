@@ -5,7 +5,7 @@
  */
 
 const { verifyManychatSecret, logRequest } = require("../lib/manychat-auth");
-const { insertManychatLead } = require("../lib/supabase");
+const { upsertManychatLeadByPhone } = require("../lib/supabase");
 const { createOrUpdateContact } = require("../lib/hubspot");
 
 function json(res, status, payload) {
@@ -53,10 +53,11 @@ module.exports = async function handler(req, res) {
   const email = String(body.email || "").trim().toLowerCase().slice(0, 500);
   const age = body.age != null && body.age !== "" ? parseInt(body.age, 10) : null;
   const sex = String(body.sex || body.gender || "").trim().slice(0, 50) || null;
+  const tobaccoRaw = typeof body.tobacco === "string" ? body.tobacco.toLowerCase().trim() : body.tobacco;
   const tobacco =
-    body.tobacco === true || body.tobacco === "true" || body.tobacco === "yes"
+    tobaccoRaw === true || tobaccoRaw === "true" || tobaccoRaw === "yes" || tobaccoRaw === "sí" || tobaccoRaw === "si"
       ? true
-      : body.tobacco === false || body.tobacco === "false" || body.tobacco === "no"
+      : tobaccoRaw === false || tobaccoRaw === "false" || tobaccoRaw === "no"
         ? false
         : null;
   const language = String(body.language || "English").trim().slice(0, 50) || "English";
@@ -96,7 +97,7 @@ module.exports = async function handler(req, res) {
   if (language) customProps.preferred_language = language;
 
   const settled = await Promise.allSettled([
-    insertManychatLead(supabaseUrl, supabaseKey, row),
+    upsertManychatLeadByPhone(supabaseUrl, supabaseKey, phone, row),
     hubspotToken
       ? createOrUpdateContact(hubspotToken, baseProps, customProps)
       : Promise.resolve(null),
