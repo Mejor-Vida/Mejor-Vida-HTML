@@ -1,0 +1,326 @@
+/**
+ * Mejor Vida floating assistant — used with js/website-assistant-widget.js
+ * Include Font Awesome on pages that don’t already load it (FAB icon).
+ */
+
+/* Floating website assistant — session-only client state; POST /api/website-chat */
+/* Above #floating-whatsapp-btn (z-index 1040 in script.js); below Bootstrap modal (1050+). */
+#mvi-assistant-root {
+  position: fixed;
+  z-index: 1048;
+  bottom: max(5.75rem, calc(env(safe-area-inset-bottom, 0px) + 4.75rem));
+  right: max(1rem, env(safe-area-inset-right, 0px));
+  font-family: inherit;
+  pointer-events: none;
+}
+@media (max-width: 576px) {
+  #mvi-assistant-root {
+    bottom: max(6.25rem, calc(env(safe-area-inset-bottom, 0px) + 5.25rem));
+  }
+}
+#mvi-assistant-root .mvi-assist-fab-wrap {
+  pointer-events: auto;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.mvi-assist-fab {
+  position: relative;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  border: none;
+  background: linear-gradient(135deg, #1a365d 0%, #2c5282 100%);
+  color: #fff;
+  box-shadow: 0 6px 24px rgba(26, 54, 93, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.mvi-assist-fab:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 28px rgba(26, 54, 93, 0.4);
+}
+.mvi-assist-fab:focus-visible {
+  outline: 3px solid #63b3ed;
+  outline-offset: 3px;
+}
+.mvi-assist-fab-icon {
+  font-size: 1.35rem;
+  line-height: 1;
+}
+.mvi-assist-fab-badge {
+  position: absolute;
+  top: -0.25rem;
+  right: -0.25rem;
+  min-width: 1.25rem;
+  height: 1.25rem;
+  padding: 0 0.35rem;
+  border-radius: 999px;
+  background: #e53e3e;
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+.mvi-assist-panel {
+  position: absolute;
+  bottom: calc(100% + 0.75rem);
+  right: 0;
+  width: 350px;
+  max-width: min(350px, calc(100vw - 2rem));
+  height: min(500px, calc(100vh - 8rem));
+  max-height: 500px;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 16px 48px rgba(26, 54, 93, 0.22), 0 0 0 1px rgba(26, 54, 93, 0.08);
+  overflow: hidden;
+}
+.mvi-assist-header {
+  flex-shrink: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.85rem 1rem;
+  background: linear-gradient(135deg, #1a365d 0%, #2c5282 100%);
+  color: #fff;
+}
+.mvi-assist-title {
+  font-weight: 700;
+  font-size: 0.95rem;
+  line-height: 1.25;
+}
+.mvi-assist-subtitle {
+  opacity: 0.85;
+  margin-top: 0.15rem;
+}
+.mvi-assist-header-actions {
+  display: flex;
+  gap: 0.25rem;
+  flex-shrink: 0;
+}
+.mvi-assist-header-actions .btn {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.1);
+}
+.mvi-assist-header-actions .btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+.mvi-assist-messages {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 0.85rem;
+  background: #f1f5f9;
+  scroll-behavior: smooth;
+}
+.mvi-assist-suggested {
+  flex-shrink: 0;
+  padding: 0 0.85rem 0.5rem;
+  background: #f1f5f9;
+  border-top: 1px solid #e2e8f0;
+}
+.mvi-assist-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.mvi-assist-msg {
+  display: flex;
+  margin-bottom: 0.65rem;
+}
+.mvi-assist-msg--user {
+  justify-content: flex-end;
+}
+.mvi-assist-msg--assistant {
+  justify-content: flex-start;
+}
+.mvi-assist-bubble {
+  max-width: 88%;
+  padding: 0.6rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+.mvi-assist-msg--user .mvi-assist-bubble {
+  background: #e2e8f0;
+  color: #1e293b;
+  border: 1px solid #cbd5e1;
+}
+.mvi-assist-msg--assistant .mvi-assist-bubble {
+  background: #1a365d;
+  color: #f8fafc;
+  border: 1px solid #2c5282;
+}
+.mvi-assist-msg--assistant .mvi-assist-name {
+  color: rgba(248, 250, 252, 0.75);
+  margin-bottom: 0.2rem;
+}
+.mvi-assist-msg--assistant .mvi-assist-more,
+.mvi-assist-msg--assistant .mvi-assist-more:hover {
+  color: #90cdf4;
+}
+.mvi-assist-typing-bubble {
+  background: #fff !important;
+  color: #334155 !important;
+  border: 1px solid #e2e8f0 !important;
+}
+.mvi-assist-dots span {
+  animation: mvi-assist-dot 1.2s infinite ease-in-out;
+}
+.mvi-assist-dots span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.mvi-assist-dots span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+@keyframes mvi-assist-dot {
+  0%, 80%, 100% { opacity: 0.25; }
+  40% { opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mvi-assist-dots span {
+    animation: none;
+    opacity: 0.7;
+  }
+  .mvi-assist-fab {
+    transition: none;
+  }
+}
+.mvi-assist-compose {
+  flex-shrink: 0;
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.65rem;
+  border-top: 1px solid #e2e8f0;
+  background: #fff;
+  align-items: flex-end;
+}
+.mvi-assist-input {
+  flex: 1;
+  resize: none;
+  min-height: 2.5rem;
+  max-height: 6rem;
+  border-radius: 10px;
+  border: 1px solid #cbd5e1;
+  padding: 0.5rem 0.65rem;
+  font-size: 0.9rem;
+}
+.mvi-assist-input:focus {
+  border-color: #2c5282;
+  box-shadow: 0 0 0 3px rgba(44, 82, 130, 0.15);
+  outline: none;
+}
+.mvi-assist-send {
+  white-space: nowrap;
+  border-radius: 10px !important;
+  background: #2c5282;
+  color: #fff;
+  border: 1px solid #2c5282;
+  padding: 0.5rem 0.85rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  line-height: 1.5;
+}
+.mvi-assist-send:hover {
+  background: #1a365d;
+  border-color: #1a365d;
+  color: #fff;
+}
+.mvi-assist-send:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+/* Suggested chips + header controls when Bootstrap isn’t loaded */
+#mvi-assistant-root .mvi-assist-chip.btn {
+  background: #fff;
+  border: 1px solid #cbd5e1;
+  color: #334155;
+  border-radius: 999px;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  line-height: 1.4;
+}
+#mvi-assistant-root .mvi-assist-chip.btn:hover {
+  background: #f1f5f9;
+  border-color: #94a3b8;
+  color: #1e293b;
+}
+#mvi-assistant-root .mvi-assist-lang.btn,
+#mvi-assistant-root .mvi-assist-close.btn {
+  font-size: 0.8125rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  line-height: 1.25;
+}
+#mvi-assistant-root .mvi-assist-close.btn {
+  font-size: 1.125rem;
+  padding: 0.125rem 0.45rem;
+  min-width: 2rem;
+}
+#mvi-assistant-root .mvi-assist-more.btn-link {
+  background: none;
+  border: none;
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: inherit;
+  padding: 0;
+  vertical-align: baseline;
+}
+@media (max-width: 400px) {
+  .mvi-assist-panel {
+    width: calc(100vw - 1.5rem);
+  }
+}
+@media (prefers-color-scheme: dark) {
+  .mvi-assist-panel {
+    background: #1e293b;
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(148, 163, 184, 0.12);
+  }
+  .mvi-assist-messages,
+  .mvi-assist-suggested {
+    background: #0f172a;
+  }
+  .mvi-assist-suggested {
+    border-top-color: #334155;
+  }
+  .mvi-assist-msg--user .mvi-assist-bubble {
+    background: #334155;
+    color: #f1f5f9;
+    border-color: #475569;
+  }
+  .mvi-assist-typing-bubble {
+    background: #334155 !important;
+    color: #e2e8f0 !important;
+    border-color: #475569 !important;
+  }
+  .mvi-assist-compose {
+    background: #1e293b;
+    border-top-color: #334155;
+  }
+  .mvi-assist-input {
+    background: #0f172a;
+    color: #f1f5f9;
+    border-color: #475569;
+  }
+  #mvi-assistant-root .mvi-assist-chip.btn {
+    background: #334155;
+    border-color: #475569;
+    color: #e2e8f0;
+  }
+}

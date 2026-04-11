@@ -23,6 +23,8 @@
 
   <!-- Bootstrap 5 (local) -->
   <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="css/mvi-assistant-widget.css" rel="stylesheet" />
+
 
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -334,8 +336,8 @@
           <a href="/#how-it-works" data-lang="es" class="nav-link-cm">Cómo funciona</a>
           <a href="/#how-it-works" data-lang="en" class="nav-link-cm">How It Works</a>
           
-          <a href="/#faq" data-lang="es" class="nav-link-cm">FAQ</a>
-          <a href="/#faq" data-lang="en" class="nav-link-cm">FAQ</a>
+          <a href="/#final-expense-answers" data-lang="es" class="nav-link-cm">¿Tienes preguntas?</a>
+          <a href="/#final-expense-answers" data-lang="en" class="nav-link-cm">Got questions?</a>
           
           <a href="blog.html" data-lang="es" class="nav-link-cm">Blog</a>
           <a href="blog.html" data-lang="en" class="nav-link-cm">Blog</a>
@@ -372,8 +374,8 @@
       <a href="/#about" data-lang="en" class="mobile-menu-link">About</a>
       <a href="/#how-it-works" data-lang="es" class="mobile-menu-link">Cómo funciona</a>
       <a href="/#how-it-works" data-lang="en" class="mobile-menu-link">How It Works</a>
-      <a href="/#faq" data-lang="es" class="mobile-menu-link">FAQ</a>
-      <a href="/#faq" data-lang="en" class="mobile-menu-link">FAQ</a>
+      <a href="/#final-expense-answers" data-lang="es" class="mobile-menu-link">¿Tienes preguntas?</a>
+      <a href="/#final-expense-answers" data-lang="en" class="mobile-menu-link">Got questions?</a>
       <a href="blog.html" data-lang="es" class="mobile-menu-link">Blog</a>
       <a href="blog.html" data-lang="en" class="mobile-menu-link">Blog</a>
       <a href="tel:+14025881125" data-lang="es" class="mobile-menu-link fw-bold" style="color:#0D47A1;"><i class="fas fa-phone me-2"></i>Llama a nuestra línea de oficina - 402-588-1125</a>
@@ -434,7 +436,7 @@
             <span class="text-white text-opacity-50">·</span>
             <a href="index.html#carriers" class="text-white text-opacity-75 text-decoration-none" data-lang="es">Aseguradoras</a><a href="index.html#carriers" class="text-white text-opacity-75 text-decoration-none" data-lang="en">Insurers</a>
             <span class="text-white text-opacity-50">·</span>
-            <a href="index.html#faq" class="text-white text-opacity-75 text-decoration-none">FAQ</a>
+            <a href="index.html#final-expense-answers" class="text-white text-opacity-75 text-decoration-none" data-lang="es">¿Tienes preguntas?</a><a href="index.html#final-expense-answers" class="text-white text-opacity-75 text-decoration-none" data-lang="en">Got questions?</a>
             <span class="text-white text-opacity-50">·</span>
             <a href="blog.html" class="text-white text-opacity-75 text-decoration-none">Blog</a>
             <span class="text-white text-opacity-50">·</span>
@@ -490,5 +492,8 @@
       });
     });
   </script>
+
+  <div id="mvi-assistant-root" data-api-url="/api/website-chat"></div>
+  <script src="js/website-assistant-widget.js" defer></script>
 </body>
 </html>

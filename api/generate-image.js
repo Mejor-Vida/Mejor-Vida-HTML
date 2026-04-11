@@ -5,7 +5,7 @@ const {
   DEFAULT_NEGATIVE_PROMPT,
   sanitizeFilename,
   clampDimension,
-} = require("./_image-utils");
+} = require("../lib/image-api-utils");
 
 function json(res, status, payload) {
   res.status(status).setHeader("Content-Type", "application/json");

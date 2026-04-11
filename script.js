@@ -334,7 +334,7 @@ document.addEventListener('DOMContentLoaded', function() {
         position: fixed;
         right: 16px;
         bottom: 18px;
-        z-index: 1100;
+        z-index: 1040;
         display: inline-flex;
         align-items: center;
         gap: 8px;

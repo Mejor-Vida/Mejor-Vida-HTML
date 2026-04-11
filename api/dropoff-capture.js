@@ -5,7 +5,7 @@
  */
 
 const { verifyManychatSecret, logRequest } = require("../lib/manychat-auth");
-const { insertManychatLead, findQualifiedLeadByPhone } = require("../lib/supabase");
+const { upsertManychatLeadByPhone, findQualifiedLeadByPhone } = require("../lib/supabase");
 const { createOrUpdateContact } = require("../lib/hubspot");
 
 function json(res, status, payload) {
@@ -83,7 +83,7 @@ module.exports = async function handler(req, res) {
   };
 
   const settled = await Promise.allSettled([
-    insertManychatLead(supabaseUrl, supabaseKey, row),
+    upsertManychatLeadByPhone(supabaseUrl, supabaseKey, phone, row),
     hubspotToken
       ? createOrUpdateContact(
           hubspotToken,

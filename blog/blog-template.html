@@ -4,6 +4,8 @@
   1) Duplicate this file for each new post and rename it with the post date slug.
   2) Replace all {{PLACEHOLDER}} values.
   3) Duplicate the <section class="story">...</section> block inside {{STORIES}} for each story.
+  CTA placeholders: {{CTA_WEBSITE}}, {{CTA_PHONE}}, {{CTA_QUOTE_URL}} (e.g. ../quote-screen.html),
+  {{CTA_WHATSAPP_URL}} (full wa.me link), {{CTA_WHATSAPP_DISPLAY}} (e.g. 402-440-5438).
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -12,6 +14,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{{TITLE}} | Mejor Vida Insurance</title>
   <link rel="stylesheet" href="./blog-template.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="../css/mvi-assistant-widget.css" rel="stylesheet" />
 </head>
 <body>
   <main class="mv-news">
@@ -63,12 +67,15 @@
 
             <section class="cta-panel" id="need-help-comparing-options">
               <h2>Need Help Comparing Options?</h2>
-              <p>Choosing the right life insurance structure is easier with clear guidance from a licensed professional.</p>
+              <p>Start with a free quote or WhatsApp so we have your details. We schedule a call with a licensed agent when it’s a fit.</p>
               <p class="cta-meta">
-                Phone: {{CTA_PHONE}}<br />
-                Website: {{CTA_WEBSITE}}
+                Quote: {{CTA_WEBSITE}}<br />
+                WhatsApp: {{CTA_WHATSAPP_DISPLAY}}<br />
+                Office line (current clients): {{CTA_PHONE}}
               </p>
-              <a class="btn-primary" href="tel:{{CTA_PHONE}}">Speak With Julie</a>
+              <a class="btn-primary" href="{{CTA_QUOTE_URL}}">Get a free quote</a>
+              <a class="btn-primary" href="{{CTA_WHATSAPP_URL}}" target="_blank" rel="noopener">Message us on WhatsApp</a>
+              <p class="small mb-0 mt-2">Prefer the office line? <a href="tel:{{CTA_PHONE}}">{{CTA_PHONE}}</a></p>
             </section>
           </article>
         </section>
@@ -76,10 +83,11 @@
         <aside class="sidebar" aria-label="Supporting information">
           <section class="sidebar-card">
             <span class="eyebrow">Contact</span>
-            <h3>Need Personalized Guidance?</h3>
-            <p>Get a clear side-by-side comparison based on your age, health profile, and long-term goals.</p>
-            <p><strong>{{CTA_PHONE}}</strong></p>
-            <a class="btn-primary" href="tel:{{CTA_PHONE}}">Speak With Julie</a>
+            <h3>Start online first</h3>
+            <p>Request a free quote or message us on WhatsApp. We review your info and schedule a call with a licensed agent when it’s a fit.</p>
+            <a class="btn-primary" href="{{CTA_QUOTE_URL}}">Get a free quote</a>
+            <a class="btn-primary" href="{{CTA_WHATSAPP_URL}}" target="_blank" rel="noopener">Message us on WhatsApp</a>
+            <p class="small mb-0 mt-2">Office line: <a href="tel:{{CTA_PHONE}}">{{CTA_PHONE}}</a></p>
             <div class="thumb-placeholder">{{JULIE_PHOTO}} (optional)</div>
           </section>
 
@@ -102,5 +110,8 @@
       </div>
     </div>
   </main>
+
+  <div id="mvi-assistant-root" data-api-url="/api/website-chat"></div>
+  <script src="../js/website-assistant-widget.js" defer></script>
 </body>
 </html>

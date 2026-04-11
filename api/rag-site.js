@@ -1,11 +1,16 @@
 /**
  * POST /api/rag-site
- * Website chatbot RAG — same pipeline as /api/rag-answer, Origin-guarded (no ManyChat secret).
+ * Website chatbot RAG — Origin-guarded (no ManyChat secret).
  *
- * Body: { "message" | "question", "locale"?: "en"|"es", "contact"?: { phone } }
- * Response: { "reply": string, "status": "answered" | "no_answer" | "error" }
+ * Legacy (embedded widget): { message|question, locale?, contact? }
+ *   → { reply, status }
+ *
+ * Website assistant (floating widget): { session_id, message, language, history? }
+ *   → { status, answer, message_id }
+ *   Same handler is also reached at POST /api/website-chat (vercel.json rewrite).
  */
 
+const crypto = require("crypto");
 const { verifySiteOrigin } = require("../lib/site-origin");
 const { logRequest } = require("../lib/manychat-auth");
 const { runRagPipeline } = require("../lib/rag-pipeline");
@@ -24,6 +29,45 @@ function localeToLanguage(locale) {
   const l = String(locale || "").toLowerCase();
   if (l === "es" || l.startsWith("es")) return "Spanish";
   return "English";
+}
+
+function normalizeAssistantLanguage(raw) {
+  const s = String(raw || "").trim();
+  if (!s) return "English";
+  const low = s.toLowerCase();
+  if (low === "es" || low === "spanish") return "Spanish";
+  if (low === "en" || low === "english") return "English";
+  if (low.startsWith("es")) return "Spanish";
+  return s;
+}
+
+function historyToContext(history) {
+  if (!Array.isArray(history)) return "";
+  return history
+    .slice(-6)
+    .filter((m) => m && (m.role === "user" || m.role === "assistant"))
+    .map((m) => {
+      const label = m.role === "user" ? "User" : "Assistant";
+      return `${label}: ${String(m.content || "").trim()}`.slice(0, 2500);
+    })
+    .join("\n")
+    .slice(0, 8000);
+}
+
+function websiteNoAnswerLine(language) {
+  const l = String(language || "").toLowerCase();
+  if (l.startsWith("spanish") || l.startsWith("es")) {
+    return "Aún no tengo esa información. Julie pronto podrá ayudarte.";
+  }
+  return "I don't have that information yet. Julie will get back to you soon.";
+}
+
+function websiteErrorLine(language) {
+  const l = String(language || "").toLowerCase();
+  if (l.startsWith("spanish") || l.startsWith("es")) {
+    return "No pude conectar con el servidor. Intenta de nuevo en un momento.";
+  }
+  return "Sorry, I couldn't reach the server. Please try again.";
 }
 
 module.exports = async function handler(req, res) {
@@ -45,8 +89,68 @@ module.exports = async function handler(req, res) {
     return json(res, 400, { reply: "", status: "error", error: "Invalid JSON" });
   }
 
+  const sessionId = body.session_id != null ? String(body.session_id).trim() : "";
+  const websiteChat = Boolean(sessionId);
+  const messageId = crypto.randomUUID();
+
+  let pipelineBody;
+  let language;
+
+  if (websiteChat) {
+    const question = String(body.message || "").trim();
+    language = normalizeAssistantLanguage(
+      body.language ? String(body.language).trim() : localeToLanguage(body.locale),
+    );
+    const conversationContext = historyToContext(body.history);
+    pipelineBody = {
+      question,
+      language,
+      phone: "",
+      flow_stage: "website_assistant",
+      conversationContext,
+    };
+
+    if (!question) {
+      return json(res, 400, {
+        status: "error",
+        answer: websiteErrorLine(language),
+        message_id: messageId,
+      });
+    }
+
+    try {
+      const out = await runRagPipeline(pipelineBody, { hubspotNotePrefix: "Website assistant" });
+      if (out.error) {
+        return json(res, out.statusCode || 500, {
+          status: "error",
+          answer: websiteErrorLine(language),
+          message_id: messageId,
+        });
+      }
+      if (out.status === "no_answer" || out.answer == null) {
+        return json(res, 200, {
+          status: "no_answer",
+          answer: websiteNoAnswerLine(language),
+          message_id: messageId,
+        });
+      }
+      return json(res, 200, {
+        status: "answered",
+        answer: out.answer,
+        message_id: messageId,
+      });
+    } catch (e) {
+      console.error("rag-site website", e);
+      return json(res, 500, {
+        status: "error",
+        answer: websiteErrorLine(language),
+        message_id: messageId,
+      });
+    }
+  }
+
   const question = String(body.question || body.message || "").trim();
-  const language = body.language
+  language = body.language
     ? String(body.language).trim()
     : localeToLanguage(body.locale);
   const phone =
@@ -55,7 +159,7 @@ module.exports = async function handler(req, res) {
     "";
   const flowStage = body.flow_stage || "website_chat";
 
-  const pipelineBody = {
+  pipelineBody = {
     question,
     language,
     phone: String(phone).trim(),

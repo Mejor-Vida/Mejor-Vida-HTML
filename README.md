@@ -21,9 +21,6 @@ This project includes a protected Vercel API for AI image generation and a local
   - Returns:
     - `success`, `mimeType`, `base64`, `filename`, `meta`
 
-- `GET /api/test`
-  - Returns `{ "ok": true, "message": "API working" }`
-
 ### Local generation script
 
 Script: `scripts/generate-image.js`
