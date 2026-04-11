@@ -35,10 +35,20 @@ function normalizeAssistantLanguage(raw) {
   const s = String(raw || "").trim();
   if (!s) return "English";
   const low = s.toLowerCase();
-  if (low === "es" || low === "spanish") return "Spanish";
-  if (low === "en" || low === "english") return "English";
-  if (low.startsWith("es")) return "Spanish";
-  return s;
+  if (
+    low === "es" ||
+    low === "spanish" ||
+    low === "español" ||
+    low === "espanol" ||
+    low.startsWith("es-") ||
+    low.startsWith("es_")
+  ) {
+    return "Spanish";
+  }
+  if (low === "en" || low === "english" || low.startsWith("en-") || low.startsWith("en_")) {
+    return "English";
+  }
+  return "English";
 }
 
 function historyToContext(history) {
@@ -118,13 +128,15 @@ module.exports = async function handler(req, res) {
       });
     }
 
-    try {
+       try {
       const out = await runRagPipeline(pipelineBody, { hubspotNotePrefix: "Website assistant" });
+      const includeUsage = process.env.RAG_RETURN_USAGE === "1";
       if (out.error) {
         return json(res, out.statusCode || 500, {
           status: "error",
           answer: websiteErrorLine(language),
           message_id: messageId,
+          ...(includeUsage && out.usage ? { usage: out.usage } : {}),
         });
       }
       if (out.status === "no_answer" || out.answer == null) {
@@ -132,12 +144,14 @@ module.exports = async function handler(req, res) {
           status: "no_answer",
           answer: websiteNoAnswerLine(language),
           message_id: messageId,
+          ...(includeUsage && out.usage ? { usage: out.usage } : {}),
         });
       }
       return json(res, 200, {
         status: "answered",
         answer: out.answer,
         message_id: messageId,
+        ...(includeUsage && out.usage ? { usage: out.usage } : {}),
       });
     } catch (e) {
       console.error("rag-site website", e);
