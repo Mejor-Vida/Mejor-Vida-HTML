@@ -31,6 +31,13 @@ function readJsonBody(req) {
   return req.body && typeof req.body === "object" ? req.body : {};
 }
 
+// ManyChat sends "{{field_name}}" literally when a variable has no value.
+// Strip those so downstream code sees an empty string instead.
+function resolveManyChat(val) {
+  if (typeof val !== "string") return val;
+  return /^\{\{[^}]+\}\}$/.test(val.trim()) ? "" : val;
+}
+
 /* ── Initial contact handler ───────────────────────────────────── */
 async function handleInitialContact(body, supabaseUrl, supabaseKey, hubspotToken, res) {
   const fullName = String(body.name || body.first_name || "").trim().slice(0, 200);
@@ -86,18 +93,19 @@ async function handleInitialContact(body, supabaseUrl, supabaseKey, hubspotToken
 
 /* ── Email + opt-in handler ────────────────────────────────────── */
 async function handleEmailOptin(body, supabaseUrl, supabaseKey, hubspotToken, res) {
-  const firstName = String(body.first_name || body.firstName || "").trim().slice(0, 200);
-  const lastName = String(body.last_name || body.lastName || "").trim().slice(0, 200);
-  const phone = String(body.phone || "").trim().slice(0, 40);
-  const email = String(body.email || "").trim().toLowerCase().slice(0, 500);
+  const firstName = resolveManyChat(String(body.first_name || body.firstName || "").trim()).slice(0, 200);
+  const lastName = resolveManyChat(String(body.last_name || body.lastName || "").trim()).slice(0, 200);
+  const phone = resolveManyChat(String(body.phone || body.whatsapp_phone || "").trim()).slice(0, 40);
+  const rawEmail = resolveManyChat(String(body.email || "").trim().toLowerCase());
+  const email = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(rawEmail) ? rawEmail.slice(0, 500) : null;
   const language = String(body.language || "Spanish").trim().slice(0, 50);
   const leadType = String(body.lead_type || "nebraska").trim().toLowerCase();
 
   if (!phone) {
     return json(res, 400, { success: false, error: "phone required" });
   }
-  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    return json(res, 400, { success: false, error: "Valid email required" });
+  if (!email) {
+    console.warn("contact-capture email_optin: email missing or unresolved for phone", phone);
   }
 
   const now = new Date().toISOString();
@@ -118,7 +126,7 @@ async function handleEmailOptin(body, supabaseUrl, supabaseKey, hubspotToken, re
   };
 
   const baseProps = {
-    email,
+    ...(email ? { email } : {}),
     firstname: firstName || undefined,
     lastname: lastName || undefined,
     phone: phone || undefined,
