@@ -85,7 +85,8 @@ module.exports = async function handler(req, res) {
     const body = readJsonBody(req);
 
     // Parse & validate inputs
-    const age = parseInt(body.age, 10);
+    // Accept "edad" (Spanish ManyChat field) or "age"
+    const age = parseInt(body.edad ?? body.age, 10);
     if (isNaN(age) || age < 45 || age > 85) {
       return json(
         res,
@@ -102,7 +103,10 @@ module.exports = async function handler(req, res) {
       );
     }
 
-    const sex = String(body.sex || "").toLowerCase().trim();
+    // Accept "sexo" (Spanish ManyChat field) or "sex"; normalize Hombre→male, Mujer→female
+    const sexRaw = String(body.sexo || body.sex || "").toLowerCase().trim();
+    const sexMap = { hombre: "male", mujer: "female", male: "male", female: "female" };
+    const sex = sexMap[sexRaw] || sexRaw;
     if (sex !== "male" && sex !== "female") {
       return json(
         res,
@@ -114,14 +118,16 @@ module.exports = async function handler(req, res) {
       );
     }
 
-    // Accept "yes"/"no", true/false, "true"/"false"
-    let smokerRaw = body.smoker;
+    // Accept "tabaco" (Spanish ManyChat field) or "smoker"
+    // Normalize: Sí/Si/yes/true/1 → true, No/no/false → false
+    let smokerRaw = body.tabaco ?? body.smoker;
     let smoker;
     if (typeof smokerRaw === "boolean") {
       smoker = smokerRaw;
     } else {
-      const s = String(smokerRaw || "no").toLowerCase().trim();
-      smoker = s === "yes" || s === "true" || s === "1";
+      const s = String(smokerRaw || "no").toLowerCase().trim()
+        .normalize("NFD").replace(/[\u0300-\u036f]/g, ""); // strip accents: sí→si
+      smoker = s === "yes" || s === "si" || s === "true" || s === "1";
     }
 
     // Lookup from quote_ranges table
