@@ -24,7 +24,10 @@ function json(res, status, payload) {
 }
 
 function readJsonBody(req) {
-  if (typeof req.body === "string") return JSON.parse(req.body || "{}");
+  if (typeof req.body === "string") {
+    const sanitized = (req.body || "").replace(/[\r\n]/g, "");
+    return JSON.parse(sanitized || "{}");
+  }
   return req.body && typeof req.body === "object" ? req.body : {};
 }
 
