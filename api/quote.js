@@ -11,21 +11,19 @@
  * Request body (from ManyChat):
  *   { "age": 65, "sex": "male", "smoker": "no" }
  *   sex: "male" | "female"
- *   smoker: "yes" | "no"  (or boolean true/false)
+ *   Tobacco: smoker | tabaco | tobacco — "yes" | "no" (or boolean true/false)
  *
- * Response (ManyChat-compatible):
+ * Response: ManyChat v2 content.set_field_values PLUS flat top-level keys
+ * (quote_low, quote_high, quote_anchor, quote_status, quote_error) for External
+ * Request JSON mapping that cannot read nested arrays.
  *   {
+ *     "quote_low": "$56.48",
+ *     "quote_high": "$68.44",
+ *     "quote_anchor": "$62.46",
+ *     "quote_status": "ok",
+ *     "quote_error": "",
  *     "version": "v2",
- *     "content": {
- *       "type": "show_dynamic_block",
- *       "messages": [],
- *       "set_field_values": [
- *         { "field_name": "quote_low",    "value": "$56.48" },
- *         { "field_name": "quote_high",   "value": "$68.44" },
- *         { "field_name": "quote_anchor", "value": "$62.46" },
- *         { "field_name": "quote_status", "value": "ok" }
- *       ]
- *     }
+ *     "content": { "type": "show_dynamic_block", "messages": [], "set_field_values": [ ... ] }
  *   }
  */
 
@@ -47,16 +45,26 @@ function dollars(n) {
   return `$${Number(n).toFixed(2)}`;
 }
 
-/** Build a ManyChat "set custom fields" response */
+/** Build a ManyChat "set custom fields" response + flat keys for JSON field mapping */
 function manychatFields(fields) {
+  const quote_low = fields.quote_low ?? "";
+  const quote_high = fields.quote_high ?? "";
+  const quote_anchor = fields.quote_anchor ?? "";
+  const quote_status = fields.quote_status ?? "";
+  const quote_error = fields.quote_error ?? "";
   return {
+    quote_low,
+    quote_high,
+    quote_anchor,
+    quote_status,
+    quote_error,
     version: "v2",
     content: {
       type: "show_dynamic_block",
       messages: [],
       set_field_values: Object.entries(fields).map(([field_name, value]) => ({
         field_name,
-        value,
+        value: value === undefined || value === null ? "" : String(value),
       })),
     },
   };
@@ -113,14 +121,17 @@ module.exports = async function handler(req, res) {
         200,
         manychatFields({
           quote_status: "error",
+          quote_low: "",
+          quote_high: "",
+          quote_anchor: "",
           quote_error: "Please provide sex as male or female.",
         }),
       );
     }
 
-    // Accept "tabaco" (Spanish ManyChat field) or "smoker"
+    // Accept smoker, tabaco (Spanish), or tobacco (ManyChat field name)
     // Normalize: Sí/Si/yes/true/1 → true, No/no/false → false
-    let smokerRaw = body.tabaco ?? body.smoker;
+    let smokerRaw = body.smoker ?? body.tabaco ?? body.tobacco;
     let smoker;
     if (typeof smokerRaw === "boolean") {
       smoker = smokerRaw;
