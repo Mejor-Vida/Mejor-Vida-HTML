@@ -106,6 +106,12 @@ Then update the blog post HTML to use:
 - `../img/blog-generated/<slug>/hero.png` for the main hero
 - `../img/blog-generated/<slug>/story-N.png` in each story section
 
+### Weekly blog HTML (content + bilingual)
+
+Rules: **`tools/blog-build-rules.md`**
+
+Weekly posts must keep **English and Spanish at the same depth** (paired paragraphs, dual-language `<details>` for long newsletter text, full FAQ/conclusion/sidebar in both languages). After publishing a new `blog/weekly-insurance-update-*.html`, update **`blog.html`** (summary + feed card) and **`sitemap.xml`**.
+
 ### FLUX LoRA training (fal.ai)
 
 Script: `tools/train_flux_lora_fal.py`

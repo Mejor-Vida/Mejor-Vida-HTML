@@ -20,6 +20,7 @@ HOW TO RUN (works reliably):
       --story "Life insurance growth forecast" --story "Digital tools for agents" ...
 
   FAL_KEY is loaded from .env.local. Use --office-story 2 to pick which story gets the one office scene.
+  Use --hero-prompt "..." for a custom hero. Use --rewrite-story N with one --story, or --story-prompt-override "..." for a custom scene.
 
 
 Requirements:
@@ -209,10 +210,40 @@ NARRATIVE_MODIFIERS = (
     "8k, high-end magazine aesthetic."
 )
 
+# Used when --hero-prompt supplies a domestic or table scene (skip forced low-angle).
+CINEMATIC_EDITORIAL = (
+    "cinematic rim lighting, soft natural light where appropriate, professional editorial photography, "
+    "8k, high-end magazine aesthetic."
+)
+
+# Desk / computer scenes (avoid low-angle hero framing from NARRATIVE_MODIFIERS).
+STORY_DESK_SUFFIX = (
+    "medium shot, eye-level, soft office lighting, professional editorial photography, "
+    "8k, high-end magazine aesthetic."
+)
+
 
 def _story_to_narrative(story_title: str) -> str:
     """Map story theme to narrative event with Hispanic person in active metaphor."""
     t = story_title.lower()
+    # Application volume / MIB-style data (before generic "growth" / "forecast")
+    if any(w in t for w in ("mib", "life index", "application activity", "application data")):
+        return (
+            "A Hispanic woman confidently navigating a large digital dashboard, fingers tracing data streams, "
+            "interacting with holographic displays, clarity and insight metaphor for application trends."
+        )
+    # Market outlook (before generic growth keywords)
+    if any(w in t for w in ("limra", "premium forecast", "market outlook")):
+        return (
+            "A Hispanic financial analyst studying illuminated trend charts and forward projections on displays, "
+            "strategic planning and outlook metaphor."
+        )
+    # Carrier insolvency / liquidation (before generic "insurance" / protection shield)
+    if any(w in t for w in ("liquidation", "insolvency", "shortfall", "rehabilitation order", "guaranty association")):
+        return (
+            "A Hispanic family reviewing insurance paperwork at a table, worried but dignified, "
+            "metaphor for carrier distress and uncertain recovery of policy values."
+        )
     if any(w in t for w in ("growth", "forecast", "sales", "grow", "increase")):
         return (
             "A Hispanic professional gardener in a futuristic vertical farm, harvesting thriving plants, "
@@ -316,6 +347,23 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="Generate only the hero image (skip story images).",
     )
+    parser.add_argument(
+        "--hero-prompt",
+        default=None,
+        help="Override hero image prompt (Hispanic subjects, editorial). Cinematic suffix appended automatically.",
+    )
+    parser.add_argument(
+        "--rewrite-story",
+        type=int,
+        default=None,
+        metavar="N",
+        help="Regenerate only story-N.png (1-based). Provide one --story unless --story-prompt-override is set.",
+    )
+    parser.add_argument(
+        "--story-prompt-override",
+        default=None,
+        help="With --rewrite-story, use this full scene description instead of auto story prompts; desk suffix appended.",
+    )
     return parser.parse_args()
 
 
@@ -365,11 +413,43 @@ def main() -> int:
 
     stories = args.story or ["Insurance industry weekly overview"]
 
+    if args.rewrite_story is not None and args.hero_only:
+        print("ERROR: Use --rewrite-story or --hero-only, not both.", file=sys.stderr)
+        return 1
+    if args.rewrite_story is not None:
+        if not args.story_prompt_override and (not args.story or len(args.story) != 1):
+            print(
+                "ERROR: --rewrite-story requires exactly one --story, or use --story-prompt-override.",
+                file=sys.stderr,
+            )
+            return 1
+        if args.rewrite_story < 1:
+            print("ERROR: --rewrite-story N must be >= 1.", file=sys.stderr)
+            return 1
+
     print(f"Generating images with provider: {provider}")
     print(f"Output folder: {out_dir}")
 
+    # Single-story regeneration
+    if args.rewrite_story is not None:
+        office_idx = max(1, args.office_story)
+        if args.story_prompt_override:
+            prompt = f"{args.story_prompt_override.strip()} {STORY_DESK_SUFFIX}"
+        else:
+            title = args.story[0]
+            prompt = build_story_prompt(title, args.rewrite_story, office_idx)
+        story_data = _gen_image(args, prompt, args.story_width, args.story_height, provider)
+        story_path = out_dir / f"story-{args.rewrite_story}.png"
+        write_image(story_path, story_data)
+        print(f"Saved story {args.rewrite_story}: {story_path}")
+        print("\nDone (single story rewrite).")
+        return 0
+
     # Hero image
-    hero_prompt = build_hero_prompt(args.week_label, stories)
+    if args.hero_prompt:
+        hero_prompt = f"{args.hero_prompt.strip()} {CINEMATIC_EDITORIAL}"
+    else:
+        hero_prompt = build_hero_prompt(args.week_label, stories)
     hero_data = _gen_image(args, hero_prompt, args.hero_width, args.hero_height, provider)
     hero_path = out_dir / "hero.png"
     write_image(hero_path, hero_data)

@@ -554,25 +554,50 @@
   </section>
 
   <!-- BLOG FEED SECTION
-       Abacus AI: Where weekly content will be injected.
-       - #blog-feed: safe to append or replace with new post cards.
-       - .newsletter-summary-block: safe to overwrite text weekly (email preview).
-       - Each card: title, excerpt, date, "Leer más" href can be overwritten per post. -->
+       Abacus AI / editors: Where weekly content will be injected.
+       - #blog-feed: prepend new post cards (most recent first).
+       - .newsletter-summary-block: overwrite ES+EN weekly (email preview tone).
+       - Each card: title, excerpt, href; keep data-lang on titles/excerpts/buttons.
+       - Bilingual rule: see tools/blog-build-rules.md — Spanish must match English depth
+         on post pages (paired paragraphs, two <details> for long briefings, full FAQ ES). -->
   <!-- WEEKLY NEWSLETTER SUMMARY (Used by Abacus AI): 2-3 sentence summary for email preview; safe to overwrite weekly. -->
   <section class="py-5">
     <div class="container">
       <div class="newsletter-summary-block border rounded p-3 bg-light mb-4 mx-auto" style="max-width:720px;">
-        <strong class="d-block mb-1" data-lang="es">Resumen de esta semana (29 de marzo al 4 de abril de 2026)</strong>
-        <strong class="d-block mb-1" data-lang="en">This week's summary (March 29 – April 4, 2026)</strong>
-        <p class="mb-0 small text-secondary" data-lang="es">Esta semana: supervisión de IA en la NAIC, estudio LIMRA/NAILBA, ilustraciones de anualidades indexadas, además reunión de primavera NAIC (registro de proveedores de IA, pilotos), PYMNTS sobre pagos y persistencia, y ThinkAdvisor sobre Modelo 245 y AG 49-A.</p>
-        <p class="mb-0 small text-secondary" data-lang="en">This week: NAIC AI oversight, LIMRA/NAILBA, indexed annuity illustrations, plus NAIC Spring Meeting (AI vendor registry, pilots), PYMNTS on billing and persistency, and ThinkAdvisor on Model 245 and AG 49-A.</p>
+        <strong class="d-block mb-1" data-lang="es">Resumen de esta semana (5 al 11 de abril de 2026)</strong>
+        <strong class="d-block mb-1" data-lang="en">This week's summary (April 5 – April 11, 2026)</strong>
+        <p class="mb-0 small text-secondary" data-lang="es">Esta semana: MIB Life Index T1 2026 (solicitudes récord), lanzamiento NIPR del formulario uniforme NAIC, cobertura sobre PHL Variable Insurance y pronóstico LIMRA de primas 2026.</p>
+        <p class="mb-0 small text-secondary" data-lang="en">This week: MIB Life Index Q1 2026 record application activity, NIPR launch of the updated NAIC Uniform Licensing Application, PHL Variable Insurance insolvency reporting, and LIMRA’s 2026 premium outlook.</p>
       </div>
 
       <h2 class="h3 fw-bold mb-4 text-center" style="color:#1a365d;" data-lang="es">Últimas entradas</h2>
       <h2 class="h3 fw-bold mb-4 text-center" style="color:#1a365d;" data-lang="en">Latest posts</h2>
 
       <div class="row g-4 justify-content-center" id="blog-feed">
-        <!-- BLOG CARD: Weekly Insurance Update March 29, 2026 – April 4, 2026 (most recent published week) -->
+        <!-- BLOG CARD: Weekly Insurance Update April 12, 2026 (week April 5–11, 2026) -->
+        <div class="col-12 col-lg-10">
+          <article class="blog-card h-100">
+            <div class="row g-0 align-items-stretch">
+              <div class="col-12 col-md-5">
+                <a href="blog/weekly-insurance-update-2026-04-12.html" class="d-block h-100 text-decoration-none">
+                  <img src="img/blog-generated/weekly-insurance-update-2026-04-12/hero.png" alt="Weekly Insurance Update April 12, 2026—April 5–11, 2026 industry briefing" class="w-100 h-100 object-fit-cover" style="max-height:280px;" onerror="this.src='img/3-1-2026-Blog.png'" />
+                </a>
+              </div>
+              <div class="col-12 col-md-7">
+                <div class="p-3 p-md-4 d-flex flex-column justify-content-center">
+                  <h3 class="h5 fw-bold mb-2" style="color:#1a365d;" data-lang="es">Actualización semanal - 12 de abril de 2026 (5–11 de abril)</h3>
+                  <h3 class="h5 fw-bold mb-2" style="color:#1a365d;" data-lang="en">Weekly update - April 12, 2026 (April 5 – April 11, 2026)</h3>
+                  <p class="small text-muted mb-2" data-lang="es">MIB Life Index T1 2026, formulario uniforme NAIC en NIPR, PHL Variable Insurance y perspectiva LIMRA 2026—en un solo artículo.</p>
+                  <p class="small text-muted mb-2" data-lang="en">MIB Q1 applications, NIPR Uniform Licensing Application launch, PHL Variable Insurance reporting, and LIMRA’s 2026 outlook—in one post.</p>
+                  <a href="blog/weekly-insurance-update-2026-04-12.html" class="btn btn-outline-primary btn-sm align-self-start" data-lang="es">Leer artículo</a>
+                  <a href="blog/weekly-insurance-update-2026-04-12.html" class="btn btn-outline-primary btn-sm align-self-start" data-lang="en">Read article</a>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- BLOG CARD: Weekly Insurance Update March 29, 2026 – April 4, 2026 -->
         <div class="col-12 col-lg-10">
           <article class="blog-card h-100">
             <div class="row g-0 align-items-stretch">

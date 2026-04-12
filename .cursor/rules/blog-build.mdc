@@ -1,0 +1,17 @@
+---
+description: Weekly blog HTML authoring — bilingual EN/ES parity and wiring blog.html + sitemap
+globs: blog/weekly-insurance-update-*.html,blog.html,sitemap.xml,tools/blog-build-rules.md
+alwaysApply: false
+---
+
+# Weekly blog build (Mejor Vida)
+
+When creating or editing **weekly insurance update** posts or the blog index:
+
+1. Follow **`tools/blog-build-rules.md`** end-to-end — especially **§1 Bilingual parity** (paired `data-lang` paragraphs, **two** `<details>` blocks per long briefing with `data-lang="en"` and `data-lang="es"`, full FAQ/conclusion/sidebar in Spanish matching English depth).
+
+2. Never ship Spanish as a short summary when English is long-form in the same section.
+
+3. After a new post file: update **`blog.html`** (summary block + new card first in `#blog-feed`) and **`sitemap.xml`** (new URL + `blog.html` lastmod).
+
+Reference post: `blog/weekly-insurance-update-2026-04-12.html`.
