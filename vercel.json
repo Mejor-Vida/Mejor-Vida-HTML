@@ -4,6 +4,21 @@
       "maxDuration": 60
     }
   },
+  "headers": [
+    {
+      "source": "/julie.vcf",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/vcard; charset=utf-8"
+        },
+        {
+          "key": "Content-Disposition",
+          "value": "attachment; filename=\"julie.vcf\""
+        }
+      ]
+    }
+  ],
   "crons": [
     {
       "path": "/api/nurture-cron",
