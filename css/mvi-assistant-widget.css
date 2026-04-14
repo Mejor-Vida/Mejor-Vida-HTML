@@ -27,6 +27,7 @@
 }
 .mvi-assist-fab {
   position: relative;
+  z-index: 3;
   width: 3.5rem;
   height: 3.5rem;
   border-radius: 50%;
@@ -83,6 +84,18 @@
   border-radius: 14px;
   box-shadow: 0 16px 48px rgba(26, 54, 93, 0.22), 0 0 0 1px rgba(26, 54, 93, 0.08);
   overflow: hidden;
+  z-index: 1;
+}
+.mvi-assist-panel.mvi-assist-panel--custom-pos {
+  position: fixed !important;
+  bottom: auto !important;
+  right: auto !important;
+  max-width: min(350px, calc(100vw - 2rem));
+  max-height: min(500px, calc(100vh - 2rem));
+  z-index: 2;
+}
+.mvi-assist-panel.mvi-assist-panel--dragging {
+  box-shadow: 0 20px 56px rgba(26, 54, 93, 0.28), 0 0 0 1px rgba(26, 54, 93, 0.1);
 }
 .mvi-assist-header {
   flex-shrink: 0;
@@ -93,6 +106,35 @@
   padding: 0.85rem 1rem;
   background: linear-gradient(135deg, #1a365d 0%, #2c5282 100%);
   color: #fff;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.mvi-assist-header-start {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
+  min-width: 0;
+}
+.mvi-assist-header-text {
+  flex: 1;
+  min-width: 0;
+}
+.mvi-assist-avatar-host-open:empty {
+  display: none;
+}
+.mvi-assist-header.mvi-assist-header--dragging {
+  cursor: grabbing;
+}
+.mvi-assist-header .mvi-assist-header-actions {
+  cursor: default;
+  touch-action: manipulation;
+}
+.mvi-assist-header button {
+  cursor: pointer;
 }
 .mvi-assist-title {
   font-weight: 700;
@@ -260,18 +302,46 @@
   border-color: #94a3b8;
   color: #1e293b;
 }
-#mvi-assistant-root .mvi-assist-lang.btn,
-#mvi-assistant-root .mvi-assist-close.btn {
-  font-size: 0.8125rem;
+/* Match site header: ES | EN with active highlight (styles.css uses #3b82f6) */
+.mvi-assist-lang-toggle {
+  display: flex;
+  gap: 0.25rem;
+  align-items: center;
+}
+.mvi-assist-lang-btn {
+  margin: 0;
   padding: 0.25rem 0.5rem;
-  border-radius: 6px;
+  border-radius: 4px;
+  font-size: 0.8125rem;
+  font-weight: 700;
   cursor: pointer;
-  line-height: 1.25;
+  line-height: 1.2;
+  border: 2px solid rgba(255, 255, 255, 0.45);
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.92);
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+.mvi-assist-lang-btn:hover {
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.65);
+}
+.mvi-assist-lang-btn.active {
+  background: #3b82f6;
+  border-color: #3b82f6;
+  color: #fff;
+}
+.mvi-assist-lang-btn:focus-visible {
+  outline: 2px solid #93c5fd;
+  outline-offset: 2px;
 }
 #mvi-assistant-root .mvi-assist-close.btn {
   font-size: 1.125rem;
   padding: 0.125rem 0.45rem;
   min-width: 2rem;
+  border-radius: 6px;
+  cursor: pointer;
+  line-height: 1.25;
 }
 #mvi-assistant-root .mvi-assist-more.btn-link {
   background: none;

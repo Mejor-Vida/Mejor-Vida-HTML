@@ -1,0 +1,250 @@
+/**
+ * Mejor Vida — Level 1 chat avatar (image-swap + CSS motion).
+ * Companion to js/mvi-chat-avatar.js and website-assistant-widget.js */
+
+/* Slightly larger than legacy 4.5×6.75; header slot scales too */
+#mvi-assistant-root {
+  --mvi-avatar-w-compact: 5.5rem;
+  --mvi-avatar-h-compact: 8.25rem;
+  --mvi-avatar-w-open: 3.5rem;
+  --mvi-avatar-h-open: 5.25rem;
+}
+
+/* Launcher: avatar stacked above the FAB (bubble), right-aligned; slight overlap reads as “on” the button */
+.mvi-assist-launcher {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-end;
+  gap: 0;
+  pointer-events: auto;
+}
+
+.mvi-assist-launcher .mvi-assist-avatar-open {
+  position: relative;
+  z-index: 4;
+  margin-bottom: -0.65rem;
+  /* Nudge: higher + slightly past the FAB’s right edge */
+  transform: translate(0.6rem, -0.75rem);
+}
+
+.mvi-assist-launcher .mvi-assist-fab {
+  position: relative;
+  z-index: 3;
+}
+
+@media (max-width: 576px) {
+  #mvi-assistant-root {
+    --mvi-avatar-w-compact: 5.25rem;
+    --mvi-avatar-h-compact: 7.875rem;
+  }
+  .mvi-assist-launcher .mvi-assist-avatar-open {
+    margin-bottom: -0.55rem;
+    transform: translate(0.5rem, -0.6rem);
+  }
+}
+
+/* Compact: tap target wraps the avatar shell */
+.mvi-assist-avatar-open {
+  display: block;
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 12px;
+  line-height: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+.mvi-assist-avatar-open:focus-visible {
+  outline: 3px solid #63b3ed;
+  outline-offset: 3px;
+  border-radius: 12px;
+}
+.mvi-assist-avatar-open[hidden] {
+  display: none !important;
+}
+
+.mvi-assist-avatar-shell {
+  display: block;
+  position: relative;
+  width: var(--mvi-avatar-w-compact, 5.5rem);
+  height: var(--mvi-avatar-h-compact, 8.25rem);
+  transform-origin: 50% 92%;
+  transition: transform 0.32s cubic-bezier(0.33, 1, 0.68, 1), width 0.26s ease, height 0.26s ease;
+}
+
+/* Open state: smaller avatar in header */
+.mvi-assist-avatar-host-open .mvi-assist-avatar-shell {
+  width: var(--mvi-avatar-w-open, 3.5rem);
+  height: var(--mvi-avatar-h-open, 5.25rem);
+}
+
+/* Figure: stacked expression layers */
+.mvi-chat-avatar {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.mvi-chat-avatar__layer {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center bottom;
+  opacity: 0;
+  transition: opacity 0.22s ease-out;
+  user-select: none;
+  -webkit-user-drag: none;
+  /* Avoid subpixel shimmer between swaps */
+  backface-visibility: hidden;
+}
+
+.mvi-chat-avatar__layer.is-visible {
+  opacity: 1;
+}
+
+.mvi-chat-avatar--reduce-motion .mvi-chat-avatar__layer {
+  transition: none;
+}
+
+/* Idle: gentle float (subtle, professional) */
+.mvi-chat-avatar--motion-idle .mvi-assist-avatar-shell {
+  animation: mvi-avatar-idle-combined 10s ease-in-out infinite;
+}
+
+@keyframes mvi-avatar-idle-combined {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg) scale(1);
+  }
+  50% {
+    transform: translateY(-2px) rotate(0.35deg) scale(1.006);
+  }
+}
+
+.mvi-assist-avatar-host-open .mvi-chat-avatar--motion-idle .mvi-assist-avatar-shell {
+  animation: mvi-avatar-idle-open-soft 9s ease-in-out infinite;
+}
+
+@keyframes mvi-avatar-idle-open-soft {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-1.5px) scale(1.004);
+  }
+}
+
+/* Hover: pause idle motion and perk up (compact launcher only) */
+.mvi-assist-avatar-open:hover .mvi-assist-avatar-shell,
+.mvi-assist-avatar-open:focus-visible .mvi-assist-avatar-shell {
+  animation-play-state: paused;
+  transform: translateY(-4px) scale(1.04);
+}
+
+/* Attention pulse (occasional) */
+.mvi-chat-avatar--attention .mvi-assist-avatar-shell {
+  animation: mvi-avatar-attention 2.4s ease-out 1;
+}
+
+@keyframes mvi-avatar-attention {
+  0% {
+    transform: translateY(0) scale(1);
+    filter: brightness(1);
+  }
+  40% {
+    transform: translateY(-4px) scale(1.04);
+    filter: brightness(1.04);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+    filter: brightness(1);
+  }
+}
+
+/* Thinking: subtle tilt */
+.mvi-chat-avatar--thinking .mvi-assist-avatar-shell {
+  animation: mvi-avatar-think 2.2s ease-in-out infinite;
+}
+
+@keyframes mvi-avatar-think {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-1.5px) rotate(-1.25deg);
+  }
+}
+
+/* Happy flash */
+.mvi-chat-avatar--happy .mvi-assist-avatar-shell {
+  animation: mvi-avatar-happy-nod 0.65s ease-out 1;
+}
+
+@keyframes mvi-avatar-happy-nod {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+  45% {
+    transform: translateY(-3px) scale(1.035);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Header slot for open avatar */
+.mvi-assist-avatar-host-open {
+  flex-shrink: 0;
+  margin-right: 0;
+  align-self: center;
+  display: flex;
+  align-items: center;
+}
+
+/* Debug readout (enable with data-mvi-avatar-debug="1" on #mvi-assistant-root) */
+#mvi-assistant-root .mvi-chat-avatar-debug {
+  position: fixed;
+  z-index: 100000;
+  left: 8px;
+  bottom: 8px;
+  max-width: min(100vw - 16px, 22rem);
+  padding: 6px 8px;
+  border-radius: 6px;
+  font: 11px/1.35 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  color: #e2e8f0;
+  background: rgba(15, 23, 42, 0.88);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  pointer-events: none;
+  word-break: break-word;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mvi-assist-avatar-shell {
+    transition: none !important;
+  }
+  .mvi-assist-avatar-shell,
+  .mvi-chat-avatar--attention .mvi-assist-avatar-shell,
+  .mvi-chat-avatar--thinking .mvi-assist-avatar-shell,
+  .mvi-chat-avatar--happy .mvi-assist-avatar-shell,
+  .mvi-chat-avatar--motion-idle .mvi-assist-avatar-shell {
+    animation: none !important;
+  }
+  .mvi-chat-avatar__layer {
+    transition: none !important;
+  }
+  .mvi-assist-avatar-open:hover .mvi-assist-avatar-shell,
+  .mvi-assist-avatar-open:focus-visible .mvi-assist-avatar-shell {
+    transform: none;
+  }
+}

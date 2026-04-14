@@ -145,6 +145,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link href="css/mvi-assistant-widget.css" rel="stylesheet" />
+  <link href="css/mvi-chat-avatar.css" rel="stylesheet" />
 
   <style>
     /* Smooth scrolling */
@@ -1403,7 +1404,7 @@
     </div>
   </footer>
 
-  <div id="mvi-assistant-root" data-api-url="/api/website-chat"></div>
+  <div id="mvi-assistant-root" data-api-url="/api/website-chat" data-mvi-avatar-base="img/mvi-chat-avatar"></div>
 
   <!-- Bootstrap JS (local) -->
   <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -1411,6 +1412,7 @@
   <script src="js/hero-quotes-data.js"></script>
   <script src="script.js"></script>
   <script src="js/website-assistant-widget.js" defer></script>
+  <script src="js/mvi-chat-avatar.js" defer></script>
 
   <!-- Mobile menu script -->
   <script>
