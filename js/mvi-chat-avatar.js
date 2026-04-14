@@ -34,11 +34,24 @@
   function init(root) {
     if (!root || root.getAttribute("data-mvi-avatar-disabled") === "1") return;
     if (root.getAttribute("data-mvi-avatar-init") === "1") return;
-    root.setAttribute("data-mvi-avatar-init", "1");
 
     var shell = root.querySelector("[data-mvi-avatar-shell]");
     var openBtn = root.querySelector("[data-mvi-avatar-open]");
-    if (!shell || !openBtn) return;
+    /* Widget mounts innerHTML on DOMContentLoaded; retry briefly if this handler ran first. */
+    if (!shell || !openBtn) {
+      var tries = parseInt(root.getAttribute("data-mvi-avatar-mount-wait") || "0", 10);
+      if (tries < 24) {
+        root.setAttribute("data-mvi-avatar-mount-wait", String(tries + 1));
+        window.requestAnimationFrame(function () {
+          if (root.getAttribute("data-mvi-avatar-init") === "1") return;
+          init(root);
+        });
+      }
+      return;
+    }
+    root.removeAttribute("data-mvi-avatar-mount-wait");
+
+    root.setAttribute("data-mvi-avatar-init", "1");
 
     var debugEnabled = root.getAttribute("data-mvi-avatar-debug") === "1";
     var fallbackUrl = root.getAttribute("data-mvi-avatar-fallback") || "";
@@ -379,6 +392,7 @@
       else if (mq && mq.removeListener) mq.removeListener(mqHandler);
       window.removeEventListener("pagehide", clearAllTimers);
       root.removeAttribute("data-mvi-avatar-init");
+      root.removeAttribute("data-mvi-avatar-mount-wait");
       if (debugEl && debugEl.parentNode) debugEl.parentNode.removeChild(debugEl);
     };
   }

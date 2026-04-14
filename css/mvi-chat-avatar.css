@@ -124,8 +124,9 @@
   transition: none;
 }
 
-/* Idle: gentle float (subtle, professional) */
-.mvi-chat-avatar--motion-idle .mvi-assist-avatar-shell {
+/* Idle: gentle float (subtle, professional)
+ DOM is span.mvi-assist-avatar-shell > figure.mvi-chat-avatar (not the reverse). */
+.mvi-assist-avatar-shell:has(.mvi-chat-avatar--motion-idle) {
   animation: mvi-avatar-idle-combined 10s ease-in-out infinite;
 }
 
@@ -139,8 +140,16 @@
   }
 }
 
-.mvi-assist-avatar-host-open .mvi-chat-avatar--motion-idle .mvi-assist-avatar-shell {
+.mvi-assist-avatar-host-open .mvi-assist-avatar-shell:has(.mvi-chat-avatar--motion-idle) {
   animation: mvi-avatar-idle-open-soft 9s ease-in-out infinite;
+}
+
+.mvi-assist-avatar-host-open .mvi-assist-avatar-shell:has(.mvi-chat-avatar--thinking) {
+  animation: mvi-avatar-think 2.2s ease-in-out infinite;
+}
+
+.mvi-assist-avatar-host-open .mvi-assist-avatar-shell:has(.mvi-chat-avatar--happy) {
+  animation: mvi-avatar-happy-nod 0.65s ease-out 1;
 }
 
 @keyframes mvi-avatar-idle-open-soft {
@@ -161,7 +170,7 @@
 }
 
 /* Attention pulse (occasional) */
-.mvi-chat-avatar--attention .mvi-assist-avatar-shell {
+.mvi-assist-avatar-shell:has(.mvi-chat-avatar--attention) {
   animation: mvi-avatar-attention 2.4s ease-out 1;
 }
 
@@ -181,7 +190,7 @@
 }
 
 /* Thinking: subtle tilt */
-.mvi-chat-avatar--thinking .mvi-assist-avatar-shell {
+.mvi-assist-avatar-shell:has(.mvi-chat-avatar--thinking) {
   animation: mvi-avatar-think 2.2s ease-in-out infinite;
 }
 
@@ -196,7 +205,7 @@
 }
 
 /* Happy flash */
-.mvi-chat-avatar--happy .mvi-assist-avatar-shell {
+.mvi-assist-avatar-shell:has(.mvi-chat-avatar--happy) {
   animation: mvi-avatar-happy-nod 0.65s ease-out 1;
 }
 
@@ -242,11 +251,10 @@
   .mvi-assist-avatar-shell {
     transition: none !important;
   }
-  .mvi-assist-avatar-shell,
-  .mvi-chat-avatar--attention .mvi-assist-avatar-shell,
-  .mvi-chat-avatar--thinking .mvi-assist-avatar-shell,
-  .mvi-chat-avatar--happy .mvi-assist-avatar-shell,
-  .mvi-chat-avatar--motion-idle .mvi-assist-avatar-shell {
+  .mvi-assist-avatar-shell:has(.mvi-chat-avatar--attention),
+  .mvi-assist-avatar-shell:has(.mvi-chat-avatar--thinking),
+  .mvi-assist-avatar-shell:has(.mvi-chat-avatar--happy),
+  .mvi-assist-avatar-shell:has(.mvi-chat-avatar--motion-idle) {
     animation: none !important;
   }
   .mvi-chat-avatar__layer {
