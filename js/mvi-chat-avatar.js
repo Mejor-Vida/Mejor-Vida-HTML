@@ -56,7 +56,8 @@
         img.className = "mvi-chat-avatar__layer";
         img.setAttribute("data-mvi-avatar-layer", name);
         img.alt = "";
-        img.decoding = "async";
+        /* sync: avoid showing a visible layer before pixels are ready (async decode + crossfade looked like a white flash). */
+        img.decoding = "sync";
         img.loading = "eager";
         img.src = assetUrl(root, name);
         bindImageFallback(img, name, idleFallback, fallbackUrl);
@@ -170,13 +171,38 @@
     }
 
     function showLayer(name) {
+      var chosen = name;
+      var target = layers[name];
+      if (
+        target &&
+        name !== "idle" &&
+        (!target.complete || target.naturalWidth === 0)
+      ) {
+        chosen = "idle";
+      }
       LAYERS.forEach(function (n) {
         var el = layers[n];
         if (!el) return;
-        el.classList.toggle("is-visible", n === name);
+        el.classList.toggle("is-visible", n === chosen);
       });
-      avatarState.visibleLayer = name;
+      avatarState.visibleLayer = chosen;
       updateDebug();
+    }
+
+    function whenLayerDrawable(img) {
+      if (!img) return Promise.resolve();
+      function tryDecode() {
+        if (img.decode) return img.decode().catch(function () {});
+        return Promise.resolve();
+      }
+      if (img.complete && img.naturalWidth > 0) return tryDecode();
+      return new Promise(function (resolve) {
+        var fin = function () {
+          tryDecode().then(resolve, resolve);
+        };
+        img.addEventListener("load", fin, { once: true });
+        img.addEventListener("error", fin, { once: true });
+      });
     }
 
     function refreshExpression() {
@@ -330,11 +356,18 @@
     window.addEventListener("pagehide", clearAllTimers);
 
     refreshExpression();
-    if (!prefersReducedMotion()) {
-      scheduleBlink();
-      scheduleAttention();
-    }
     updateDebug();
+
+    Promise.all(LAYERS.map(function (n) {
+      return whenLayerDrawable(layers[n]);
+    })).then(function () {
+      refreshExpression();
+      if (!prefersReducedMotion()) {
+        scheduleBlink();
+        scheduleAttention();
+      }
+      updateDebug();
+    });
 
     window.MviChatAvatar = window.MviChatAvatar || {};
     window.MviChatAvatar.refresh = refreshExpression;

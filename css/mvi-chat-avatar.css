@@ -88,6 +88,14 @@
   margin: 0;
   overflow: hidden;
   pointer-events: none;
+  /* Transparent PNGs + opacity crossfade over a light page read as a white “flash”.
+     Keep an imperceptible cool tint so swaps stay stable if a frame is empty. */
+  background: radial-gradient(
+    ellipse 95% 90% at 50% 100%,
+    rgba(44, 82, 130, 0.14) 0%,
+    rgba(248, 250, 252, 0.06) 45%,
+    transparent 72%
+  );
 }
 
 .mvi-chat-avatar__layer {
@@ -100,7 +108,8 @@
   object-fit: contain;
   object-position: center bottom;
   opacity: 0;
-  transition: opacity 0.22s ease-out;
+  /* Instant swap: crossfading two transparent PNGs blends with page white and looks like a flash. */
+  transition: none;
   user-select: none;
   -webkit-user-drag: none;
   /* Avoid subpixel shimmer between swaps */
