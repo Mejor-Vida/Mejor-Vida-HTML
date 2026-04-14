@@ -125,6 +125,11 @@
     if (!root) return;
 
     var apiUrl = root.getAttribute("data-api-url") || API_URL;
+    var avatarBase = (root.getAttribute("data-mvi-avatar-base") || "img/mvi-chat-avatar").replace(
+      /\/$/,
+      "",
+    );
+    var avatarSrc = root.getAttribute("data-mvi-avatar-src") || avatarBase + "/idle.png";
 
     var state = {
       open: false,
@@ -142,15 +147,15 @@
 
     if (!Array.isArray(state.messages)) state.messages = [];
 
-    function emitAvatarHook(detail) {
-      root.dispatchEvent(new CustomEvent("mvi-assistant-hook", { bubbles: false, detail: detail }));
-    }
-
     root.innerHTML =
       '<div class="mvi-assist-fab-wrap" aria-live="polite">' +
       '  <div class="mvi-assist-launcher" data-mvi-launcher>' +
       '    <button type="button" class="mvi-assist-avatar-open" data-mvi-avatar-open aria-label="Open chat assistant">' +
-      '      <span class="mvi-assist-avatar-shell" data-mvi-avatar-shell></span>' +
+      '      <span class="mvi-assist-avatar-shell" data-mvi-avatar-shell>' +
+      '        <img class="mvi-assist-avatar-img" src="' +
+      avatarSrc +
+      '" alt="" draggable="false" decoding="async" />' +
+      "      </span>" +
       "    </button>" +
       '    <button type="button" class="mvi-assist-fab" aria-expanded="false" aria-controls="mvi-assist-panel">' +
       '      <span class="mvi-assist-fab-icon" aria-hidden="true"><i class="fas fa-comments"></i></span>' +
@@ -399,7 +404,6 @@
       renderSuggested();
       state.loading = true;
       appendTyping();
-      emitAvatarHook({ hook: "thinking" });
 
       var controller = new AbortController();
       var to = window.setTimeout(function () {
@@ -426,7 +430,6 @@
           window.clearTimeout(to);
           removeTyping();
           state.loading = false;
-          emitAvatarHook({ hook: "replied", ok: res.ok });
           var data = res.data || {};
           var answer = typeof data.answer === "string" ? data.answer : "";
           if (!res.ok || data.status === "error") {
@@ -457,7 +460,6 @@
           window.clearTimeout(to);
           removeTyping();
           state.loading = false;
-          emitAvatarHook({ hook: "replied", ok: false });
           var errText = tr().error;
           state.messages.push({ role: "assistant", content: errText, ts: Date.now() });
           persistMessages();
@@ -485,7 +487,6 @@
           avBtn.hidden = false;
         }
       }
-      emitAvatarHook({ hook: "panel", open: open });
       if (!open) {
         snapPanelToDefault();
       } else {
