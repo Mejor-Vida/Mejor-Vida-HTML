@@ -1,6 +1,8 @@
 /**
  * Mejor Vida — Level 1 chat avatar (image-swap + CSS motion).
- * Companion to js/mvi-chat-avatar.js and website-assistant-widget.js */
+ * Companion to js/mvi-chat-avatar.js and website-assistant-widget.js
+ *
+ * Motion runs on figure.mvi-chat-avatar (shell only wraps / sizes). */
 
 /* Slightly larger than legacy 4.5×6.75; header slot scales too */
 #mvi-assistant-root {
@@ -80,7 +82,7 @@
   height: var(--mvi-avatar-h-open, 5.25rem);
 }
 
-/* Figure: stacked expression layers */
+/* Figure: stacked expression layers + motion (transform-origin matches legacy shell bob) */
 .mvi-chat-avatar {
   position: relative;
   width: 100%;
@@ -88,12 +90,11 @@
   margin: 0;
   overflow: hidden;
   pointer-events: none;
-  /* Transparent PNGs + opacity crossfade over a light page read as a white “flash”.
-     Keep an imperceptible cool tint so swaps stay stable if a frame is empty. */
+  transform-origin: 50% 92%;
   background: radial-gradient(
     ellipse 95% 90% at 50% 100%,
-    rgba(44, 82, 130, 0.14) 0%,
-    rgba(248, 250, 252, 0.06) 45%,
+    rgba(44, 82, 130, 0.12) 0%,
+    rgba(248, 250, 252, 0.05) 45%,
     transparent 72%
   );
 }
@@ -108,11 +109,9 @@
   object-fit: contain;
   object-position: center bottom;
   opacity: 0;
-  /* Instant swap: crossfading two transparent PNGs blends with page white and looks like a flash. */
   transition: none;
   user-select: none;
   -webkit-user-drag: none;
-  /* Avoid subpixel shimmer between swaps */
   backface-visibility: hidden;
 }
 
@@ -124,9 +123,8 @@
   transition: none;
 }
 
-/* Idle: gentle float (subtle, professional)
- DOM is span.mvi-assist-avatar-shell > figure.mvi-chat-avatar (not the reverse). */
-.mvi-assist-avatar-shell:has(.mvi-chat-avatar--motion-idle) {
+/* Idle: only when no stronger expression class is active */
+.mvi-chat-avatar.mvi-chat-avatar--motion-idle:not(.mvi-chat-avatar--attention):not(.mvi-chat-avatar--thinking):not(.mvi-chat-avatar--happy) {
   animation: mvi-avatar-idle-combined 10s ease-in-out infinite;
 }
 
@@ -140,16 +138,9 @@
   }
 }
 
-.mvi-assist-avatar-host-open .mvi-assist-avatar-shell:has(.mvi-chat-avatar--motion-idle) {
+.mvi-assist-avatar-host-open
+  .mvi-chat-avatar.mvi-chat-avatar--motion-idle:not(.mvi-chat-avatar--attention):not(.mvi-chat-avatar--thinking):not(.mvi-chat-avatar--happy) {
   animation: mvi-avatar-idle-open-soft 9s ease-in-out infinite;
-}
-
-.mvi-assist-avatar-host-open .mvi-assist-avatar-shell:has(.mvi-chat-avatar--thinking) {
-  animation: mvi-avatar-think 2.2s ease-in-out infinite;
-}
-
-.mvi-assist-avatar-host-open .mvi-assist-avatar-shell:has(.mvi-chat-avatar--happy) {
-  animation: mvi-avatar-happy-nod 0.65s ease-out 1;
 }
 
 @keyframes mvi-avatar-idle-open-soft {
@@ -162,15 +153,16 @@
   }
 }
 
-/* Hover: pause idle motion and perk up (compact launcher only) */
-.mvi-assist-avatar-open:hover .mvi-assist-avatar-shell,
-.mvi-assist-avatar-open:focus-visible .mvi-assist-avatar-shell {
+/* Hover: pause idle bob; perk up figure (compact launcher) */
+.mvi-assist-avatar-open:hover
+  .mvi-chat-avatar.mvi-chat-avatar--motion-idle:not(.mvi-chat-avatar--attention):not(.mvi-chat-avatar--thinking):not(.mvi-chat-avatar--happy),
+.mvi-assist-avatar-open:focus-visible
+  .mvi-chat-avatar.mvi-chat-avatar--motion-idle:not(.mvi-chat-avatar--attention):not(.mvi-chat-avatar--thinking):not(.mvi-chat-avatar--happy) {
   animation-play-state: paused;
   transform: translateY(-4px) scale(1.04);
 }
 
-/* Attention pulse (occasional) */
-.mvi-assist-avatar-shell:has(.mvi-chat-avatar--attention) {
+.mvi-chat-avatar.mvi-chat-avatar--attention {
   animation: mvi-avatar-attention 2.4s ease-out 1;
 }
 
@@ -189,8 +181,7 @@
   }
 }
 
-/* Thinking: subtle tilt */
-.mvi-assist-avatar-shell:has(.mvi-chat-avatar--thinking) {
+.mvi-chat-avatar.mvi-chat-avatar--thinking {
   animation: mvi-avatar-think 2.2s ease-in-out infinite;
 }
 
@@ -204,8 +195,7 @@
   }
 }
 
-/* Happy flash */
-.mvi-assist-avatar-shell:has(.mvi-chat-avatar--happy) {
+.mvi-chat-avatar.mvi-chat-avatar--happy {
   animation: mvi-avatar-happy-nod 0.65s ease-out 1;
 }
 
@@ -230,7 +220,6 @@
   align-items: center;
 }
 
-/* Debug readout (enable with data-mvi-avatar-debug="1" on #mvi-assistant-root) */
 #mvi-assistant-root .mvi-chat-avatar-debug {
   position: fixed;
   z-index: 100000;
@@ -251,17 +240,17 @@
   .mvi-assist-avatar-shell {
     transition: none !important;
   }
-  .mvi-assist-avatar-shell:has(.mvi-chat-avatar--attention),
-  .mvi-assist-avatar-shell:has(.mvi-chat-avatar--thinking),
-  .mvi-assist-avatar-shell:has(.mvi-chat-avatar--happy),
-  .mvi-assist-avatar-shell:has(.mvi-chat-avatar--motion-idle) {
+  .mvi-chat-avatar.mvi-chat-avatar--motion-idle,
+  .mvi-chat-avatar.mvi-chat-avatar--attention,
+  .mvi-chat-avatar.mvi-chat-avatar--thinking,
+  .mvi-chat-avatar.mvi-chat-avatar--happy {
     animation: none !important;
   }
   .mvi-chat-avatar__layer {
     transition: none !important;
   }
-  .mvi-assist-avatar-open:hover .mvi-assist-avatar-shell,
-  .mvi-assist-avatar-open:focus-visible .mvi-assist-avatar-shell {
+  .mvi-assist-avatar-open:hover .mvi-chat-avatar,
+  .mvi-assist-avatar-open:focus-visible .mvi-chat-avatar {
     transform: none;
   }
 }
