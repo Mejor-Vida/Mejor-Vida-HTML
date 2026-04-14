@@ -171,18 +171,18 @@ async function upsertHsDeal(token, hsContactId, pipelineId, { stageId, dealName,
 }
 
 // ─── Stage ID mapping ─────────────────────────────────────────────────────────
-// These are the internal names used when creating pipeline stages.
-// After you create stages in HubSpot, the IDs will be auto-generated slugs
-// matching these names (e.g. "new_contact", "engaged", etc.).
+// Maps Supabase pipeline_stage values → HubSpot deal stage IDs.
+// Pipeline: "Deals pipeline" (pipelineId: "default"), portal 245703627.
+// Stage IDs confirmed via /api/pipelines/v2/pipelines/0-3/default on 2026-04-13.
 const STAGE_MAP = {
-  new_contact: "new_contact",
-  engaged: "engaged",
-  partially_qualified: "partially_qualified",
-  quoted: "quoted",
-  call_scheduled: "call_scheduled",
-  call_completed: "call_completed",
-  policy_issued: "policy_issued",
-  closed_lost: "closedlost",
+  new_contact:        "appointmentscheduled",   // New Contact
+  engaged:            "qualifiedtobuy",          // Engaged
+  partially_qualified:"presentationscheduled",   // Partially Qualified
+  quoted:             "decisionmakerboughtin",   // Quoted
+  call_scheduled:     "contractsent",            // Call Scheduled
+  call_completed:     "3501339381",              // Call Completed (custom stage)
+  policy_issued:      "closedwon",              // Policy Issued (won)
+  closed_lost:        "closedlost",             // Closed Lost
 };
 
 // ─── Handler ──────────────────────────────────────────────────────────────────

@@ -4,6 +4,12 @@
       "maxDuration": 60
     }
   },
+  "crons": [
+    {
+      "path": "/api/nurture-cron",
+      "schedule": "0,30 * * * *"
+    }
+  ],
   "rewrites": [
     {
       "source": "/api/website-chat",
