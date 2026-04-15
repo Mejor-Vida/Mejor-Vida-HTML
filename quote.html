@@ -320,6 +320,12 @@
       border: 0;
       background: #f8fafc;
     }
+
+    /* Floating chat launcher (avatar + FAB) sits fixed above the page; hide it while
+       the schedule modal is open so it doesn’t stack on top of the booking UI. */
+    body.mvi-schedule-modal-open #mvi-assistant-root {
+      display: none !important;
+    }
   </style>
   <script>
     (function(){
@@ -686,7 +692,15 @@
         bootstrap.Modal.getOrCreateInstance(el).show();
       };
       var modalEl = document.getElementById('scheduleModal');
-      if (modalEl) modalEl.addEventListener('show.bs.modal', setScheduleIframeSrc);
+      if (modalEl) {
+        modalEl.addEventListener('show.bs.modal', setScheduleIframeSrc);
+        modalEl.addEventListener('show.bs.modal', function () {
+          document.body.classList.add('mvi-schedule-modal-open');
+        });
+        modalEl.addEventListener('hidden.bs.modal', function () {
+          document.body.classList.remove('mvi-schedule-modal-open');
+        });
+      }
       document.querySelectorAll('.lang-btn').forEach(function (btn) {
         btn.addEventListener('click', function () {
           setTimeout(function () {
