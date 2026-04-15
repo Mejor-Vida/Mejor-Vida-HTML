@@ -146,10 +146,6 @@ module.exports = async function handler(req, res) {
   const lastName = String(body.lastName || "").trim().slice(0, 200);
   const phone = String(body.phone || "").trim().slice(0, 40);
   const quoteSummary = String(body.quoteSummary || "").trim().slice(0, 20000);
-  const stateCode = String(body.state || "")
-    .trim()
-    .slice(0, 2)
-    .toUpperCase();
   const lang = body.lang === "en" ? "en" : "es";
   const leadSource =
     body.source === "out_of_state_referral"
@@ -157,6 +153,11 @@ module.exports = async function handler(req, res) {
       : body.source === "nebraska_quote_page"
         ? "nebraska_quote_page"
         : "fexquotes_page";
+
+  let stateCode = String(body.state || "")
+    .trim()
+    .slice(0, 2)
+    .toUpperCase();
 
   if (leadSource === "out_of_state_referral") {
     if (!stateCode || stateCode.length !== 2) {
@@ -167,6 +168,10 @@ module.exports = async function handler(req, res) {
         ok: false,
         error: "Use the Nebraska quote flow for NE residents",
       });
+    }
+  } else if (leadSource === "nebraska_quote_page") {
+    if (!stateCode || stateCode.length !== 2) {
+      stateCode = "NE";
     }
   }
 
@@ -188,6 +193,32 @@ module.exports = async function handler(req, res) {
     return json(res, 400, { ok: false, error: "Consent required" });
   }
 
+  let nebraskaQuote = null;
+  if (leadSource === "nebraska_quote_page") {
+    const digits = phone.replace(/\D/g, "");
+    if (digits.length < 10) {
+      return json(res, 400, { ok: false, error: "Valid phone number required" });
+    }
+    if (!quoteSummary) {
+      return json(res, 400, { ok: false, error: "Quote summary required" });
+    }
+    const ageN = parseInt(String(body.age ?? ""), 10);
+    if (!Number.isFinite(ageN) || ageN < 45 || ageN > 85) {
+      return json(res, 400, { ok: false, error: "Valid age (45–85) required" });
+    }
+    const sex = String(body.sex || "").toLowerCase();
+    if (sex !== "male" && sex !== "female") {
+      return json(res, 400, { ok: false, error: "Gender required" });
+    }
+    const sm = body.smoker;
+    const isSmoker = sm === true || sm === "true";
+    const isNonSmoker = sm === false || sm === "false";
+    if (!isSmoker && !isNonSmoker) {
+      return json(res, 400, { ok: false, error: "Tobacco status required" });
+    }
+    nebraskaQuote = { ageN, sex, isSmoker };
+  }
+
   const nowIso = new Date().toISOString();
   const payload = {
     firstName,
@@ -200,6 +231,15 @@ module.exports = async function handler(req, res) {
   };
   if (leadSource === "out_of_state_referral") {
     payload.consentLicensedAgentInState = true;
+  }
+  if (nebraskaQuote) {
+    payload.age = nebraskaQuote.ageN;
+    payload.sex = nebraskaQuote.sex;
+    payload.smoker = nebraskaQuote.isSmoker;
+    payload.quoteLow = body.quoteLow;
+    payload.quoteHigh = body.quoteHigh;
+    payload.quoteAnchor = body.quoteAnchor;
+    payload.marketingOptIn = { sms: true, email: true, phoneCalls: true };
   }
   const requestRaw = {
     ...payload,
@@ -235,7 +275,18 @@ module.exports = async function handler(req, res) {
           at: nowIso,
           lang,
         }
-      : { followUp: true, at: nowIso };
+      : {
+          followUp: true,
+          marketingOptIn: {
+            sms: true,
+            email: true,
+            phoneCalls: true,
+            label:
+              "User opted in to SMS, email, and phone calls from Julie / Mejor Vida Insurance about this quote and related follow-up.",
+          },
+          at: nowIso,
+          lang,
+        };
 
   const insertRow = {
     source: leadSource,
@@ -256,6 +307,13 @@ module.exports = async function handler(req, res) {
         : null,
     crm_sync_needed: true,
   };
+
+  if (nebraskaQuote) {
+    insertRow.age = nebraskaQuote.ageN;
+    insertRow.gender = nebraskaQuote.sex;
+    insertRow.tobacco = nebraskaQuote.isSmoker ? "yes" : "no";
+    insertRow.coverage = 10000;
+  }
 
   let leadId;
   try {

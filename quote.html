@@ -435,49 +435,97 @@
           <p class="small mb-0 text-start text-body-secondary" data-lang="en">Julie Braunsroth is licensed to solicit and sell life insurance and annuities <strong>only in Nebraska</strong>. The quote tool below is for people seeking coverage as Nebraska residents. If you are not a Nebraska resident, do not use this tool to obtain a quote—go back to <a href="quote-screen.html">state selection</a> for the right option.</p>
         </div>
         <div class="mvi-quote-card mb-4">
-          <p class="small text-body-secondary mb-3 text-center" data-lang="es">Estimación para <strong>$10,000</strong> de cobertura de gastos finales (Nebraska). Rango mensual típico según edad, género y tabaco — sin nombres de aseguradoras.</p>
-          <p class="small text-body-secondary mb-3 text-center" data-lang="en">Estimate for <strong>$10,000</strong> final-expense coverage (Nebraska). Typical monthly range by age, gender, and tobacco — no carrier names.</p>
-          <form id="mvi-quote-form" class="row g-2 align-items-end justify-content-center" novalidate>
-            <div class="col-6 col-md-3">
-              <label for="mvi-age" class="form-label small mb-0" data-lang="es">Edad (45–85)</label>
-              <label for="mvi-age" class="form-label small mb-0" data-lang="en">Age (45–85)</label>
-              <input type="number" class="form-control form-control-sm" id="mvi-age" name="age" min="45" max="85" required inputmode="numeric" />
+          <p class="small text-body-secondary mb-3 text-center" data-lang="es">Estimación para <strong>$10,000</strong> de cobertura de gastos finales (Nebraska). Rango mensual típico según edad, género y tabaco — sin nombres de aseguradoras. Complete sus datos y la cotización; guardamos su información como lead de forma segura.</p>
+          <p class="small text-body-secondary mb-3 text-center" data-lang="en">Estimate for <strong>$10,000</strong> final-expense coverage (Nebraska). Typical monthly range by age, gender, and tobacco — no carrier names. Complete your details and quote fields; we save your information securely as a lead.</p>
+          <form id="mvi-nebraska-quote-flow" class="mx-auto" style="max-width: 28rem;" novalidate>
+            <div class="visually-hidden" aria-hidden="true">
+              <label>Leave blank <input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
             </div>
-            <div class="col-6 col-md-3">
-              <label for="mvi-sex" class="form-label small mb-0" data-lang="es">Género</label>
-              <label for="mvi-sex" class="form-label small mb-0" data-lang="en">Gender</label>
-              <select class="form-select form-select-sm" id="mvi-sex" name="sex" required>
-                <option value="">—</option>
-                <option value="male">Male / Masculino</option>
-                <option value="female">Female / Femenino</option>
-              </select>
+            <input type="hidden" name="state" value="NE" />
+
+            <div class="mb-3 pb-3 border-bottom border-light">
+              <h2 class="h6 fw-bold mb-3 text-center" style="color:#1a365d;" data-lang="es">Paso 1: Sus datos de contacto</h2>
+              <h2 class="h6 fw-bold mb-3 text-center" style="color:#1a365d;" data-lang="en">Step 1: Your contact information</h2>
+              <div class="row g-2 mb-2">
+                <div class="col-md-6">
+                  <label for="ql-first" class="form-label small mb-0" data-lang="es">Nombre</label>
+                  <label for="ql-first" class="form-label small mb-0" data-lang="en">First name</label>
+                  <input type="text" class="form-control form-control-sm" id="ql-first" name="firstName" required maxlength="200" autocomplete="given-name" />
+                </div>
+                <div class="col-md-6">
+                  <label for="ql-last" class="form-label small mb-0" data-lang="es">Apellido</label>
+                  <label for="ql-last" class="form-label small mb-0" data-lang="en">Last name</label>
+                  <input type="text" class="form-control form-control-sm" id="ql-last" name="lastName" required maxlength="200" autocomplete="family-name" />
+                </div>
+              </div>
+              <div class="mb-2">
+                <label for="ql-phone" class="form-label small mb-0" data-lang="es">Teléfono</label>
+                <label for="ql-phone" class="form-label small mb-0" data-lang="en">Phone</label>
+                <input type="tel" class="form-control form-control-sm" id="ql-phone" name="phone" required maxlength="40" autocomplete="tel" />
+              </div>
+              <div class="mb-2">
+                <label for="ql-email" class="form-label small mb-0" data-lang="es">Correo electrónico</label>
+                <label for="ql-email" class="form-label small mb-0" data-lang="en">Email</label>
+                <input type="email" class="form-control form-control-sm" id="ql-email" name="email" required maxlength="320" autocomplete="email" />
+              </div>
+              <div class="form-check mb-0">
+                <input type="checkbox" class="form-check-input" id="ql-consent" name="consent" value="1" required />
+                <label class="form-check-label small" for="ql-consent">
+                  <span data-lang="es">Acepto recibir mensajes de texto (SMS), correos electrónicos y llamadas de Julie / Mejor Vida Insurance sobre esta cotización y seguimiento relacionado.</span>
+                  <span data-lang="en">I agree to receive SMS, email, and phone calls from Julie / Mejor Vida Insurance about this quote and related follow-up.</span>
+                </label>
+              </div>
             </div>
-            <div class="col-12 col-md-4">
-              <label for="mvi-smoker" class="form-label small mb-0" data-lang="es">¿Tabaco?</label>
-              <label for="mvi-smoker" class="form-label small mb-0" data-lang="en">Tobacco?</label>
-              <select class="form-select form-select-sm" id="mvi-smoker" name="smoker" required>
-                <option value="false">No</option>
-                <option value="true">Yes / Sí</option>
-              </select>
+
+            <div class="mb-3">
+              <h2 class="h6 fw-bold mb-3 text-center" style="color:#1a365d;" data-lang="es">Paso 2: Detalles para la cotización</h2>
+              <h2 class="h6 fw-bold mb-3 text-center" style="color:#1a365d;" data-lang="en">Step 2: Quote details</h2>
+              <div class="row g-2 align-items-end justify-content-center">
+                <div class="col-6 col-md-4">
+                  <label for="mvi-age" class="form-label small mb-0" data-lang="es">Edad (45–85)</label>
+                  <label for="mvi-age" class="form-label small mb-0" data-lang="en">Age (45–85)</label>
+                  <input type="number" class="form-control form-control-sm" id="mvi-age" name="age" min="45" max="85" required inputmode="numeric" />
+                </div>
+                <div class="col-6 col-md-4">
+                  <label for="mvi-sex" class="form-label small mb-0" data-lang="es">Género</label>
+                  <label for="mvi-sex" class="form-label small mb-0" data-lang="en">Gender</label>
+                  <select class="form-select form-select-sm" id="mvi-sex" name="sex" required>
+                    <option value="">—</option>
+                    <option value="male">Male / Masculino</option>
+                    <option value="female">Female / Femenino</option>
+                  </select>
+                </div>
+                <div class="col-12 col-md-4">
+                  <label for="mvi-smoker" class="form-label small mb-0" data-lang="es">¿Tabaco?</label>
+                  <label for="mvi-smoker" class="form-label small mb-0" data-lang="en">Tobacco?</label>
+                  <select class="form-select form-select-sm" id="mvi-smoker" name="smoker" required>
+                    <option value="false">No</option>
+                    <option value="true">Yes / Sí</option>
+                  </select>
+                </div>
+              </div>
             </div>
-            <div class="col-12 col-md-auto d-grid">
-              <button type="submit" class="btn btn-primary btn-sm fw-bold px-4" id="mvi-quote-submit">
-                <span data-lang="es">Ver rango</span>
-                <span data-lang="en">See range</span>
+
+            <div class="d-grid mb-2">
+              <button type="submit" class="btn btn-primary fw-bold px-4" id="mvi-quote-submit">
+                <span data-lang="es">Obtener cotización</span>
+                <span data-lang="en">Get my quote</span>
               </button>
             </div>
           </form>
           <div id="mvi-quote-result" class="mvi-quote-result mt-3 small text-center text-body-secondary" role="status" aria-live="polite"></div>
-        </div>
-
-        <p class="text-center small text-body-secondary mb-2" data-lang="es">Cuando quiera hablar con Julie, use el botón de agendar (abajo puede guardar sus datos).</p>
-        <p class="text-center small text-body-secondary mb-2" data-lang="en">When you want to talk with Julie, use Schedule—you can also save your details below.</p>
-        <div class="text-center mb-4">
-          <button type="button" class="btn btn-primary-gold px-4 py-2 fw-bold rounded" data-bs-toggle="modal" data-bs-target="#scheduleModal" id="btn-schedule-after-quote">
-            <i class="fas fa-calendar-check me-2" aria-hidden="true"></i>
-            <span data-lang="es">Agendar con Julie</span>
-            <span data-lang="en">Schedule with Julie</span>
-          </button>
+          <div id="mvi-after-quote-cta" class="d-none mt-4 p-3 rounded-3 border text-center" style="border-color: rgba(254, 201, 99, 0.55); background: #fffbf0;">
+            <p class="fw-semibold mb-2" style="color:#1a365d;" data-lang="es">¿Quiere revisar esto con Julie?</p>
+            <p class="fw-semibold mb-2" style="color:#1a365d;" data-lang="en">Want to review this with Julie?</p>
+            <p class="small text-body-secondary mb-3" data-lang="es">Reserve una llamada breve en el horario que le convenga.</p>
+            <p class="small text-body-secondary mb-3" data-lang="en">Book a short call at a time that works for you.</p>
+            <button type="button" class="btn btn-primary-gold px-4 py-2 fw-bold rounded" data-bs-toggle="modal" data-bs-target="#scheduleModal" id="btn-schedule-after-quote">
+              <i class="fas fa-calendar-check me-2" aria-hidden="true"></i>
+              <span data-lang="es">Agendar llamada con Julie</span>
+              <span data-lang="en">Schedule a call with Julie</span>
+            </button>
+          </div>
+          <p id="mvi-flow-msg" class="small text-center mt-3 mb-0 d-none" role="status" aria-live="polite"></p>
         </div>
 
         <section id="final-expense-answers" class="border-top border-light pt-4 mt-4" aria-label="Final expense questions">
@@ -488,67 +536,6 @@
             <p class="small text-body-secondary mb-0" data-lang="en">Open the Mejor Vida assistant using the chat icon in the bottom-right corner.</p>
           </div>
         </section>
-
-        <div class="border-top pt-4 mt-2">
-          <h2 class="h5 fw-bold text-center mb-2" style="color:#1a365d;" data-lang="es">Guardar su información y resultados</h2>
-          <h2 class="h5 fw-bold text-center mb-2" style="color:#1a365d;" data-lang="en">Save your details &amp; quote notes</h2>
-          <p class="text-center small text-body-secondary mb-3" data-lang="es">Si desea que Julie le contacte, envíe este formulario: guardamos la información en nuestro sistema seguro y la sincronizamos con el CRM. Puede pegar el rango del estimador arriba en “notas”.</p>
-          <p class="text-center small text-body-secondary mb-3" data-lang="en">To have Julie follow up, submit this form—we store it securely and sync your contact to our CRM. You can paste the range from the estimator above into “notes.”</p>
-
-          <form id="quote-lead-form" class="mx-auto" style="max-width: 28rem;" novalidate>
-            <div class="visually-hidden" aria-hidden="true">
-              <label>Leave blank <input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
-            </div>
-            <div class="row g-2 mb-2">
-              <div class="col-md-6">
-                <label for="ql-first" class="form-label small mb-0" data-lang="es">Nombre</label>
-                <label for="ql-first" class="form-label small mb-0" data-lang="en">First name</label>
-                <input type="text" class="form-control form-control-sm" id="ql-first" name="firstName" required maxlength="200" autocomplete="given-name" />
-              </div>
-              <div class="col-md-6">
-                <label for="ql-last" class="form-label small mb-0" data-lang="es">Apellido</label>
-                <label for="ql-last" class="form-label small mb-0" data-lang="en">Last name</label>
-                <input type="text" class="form-control form-control-sm" id="ql-last" name="lastName" required maxlength="200" autocomplete="family-name" />
-              </div>
-            </div>
-            <div class="mb-2">
-              <label for="ql-email" class="form-label small mb-0" data-lang="es">Correo electrónico</label>
-              <label for="ql-email" class="form-label small mb-0" data-lang="en">Email</label>
-              <input type="email" class="form-control form-control-sm" id="ql-email" name="email" required maxlength="320" autocomplete="email" />
-            </div>
-            <div class="row g-2 mb-2">
-              <div class="col-md-6">
-                <label for="ql-phone" class="form-label small mb-0" data-lang="es">Teléfono</label>
-                <label for="ql-phone" class="form-label small mb-0" data-lang="en">Phone</label>
-                <input type="tel" class="form-control form-control-sm" id="ql-phone" name="phone" maxlength="40" autocomplete="tel" />
-              </div>
-              <div class="col-md-6">
-                <label for="ql-state" class="form-label small mb-0" data-lang="es">Estado (2 letras, opcional)</label>
-                <label for="ql-state" class="form-label small mb-0" data-lang="en">State (2 letters, optional)</label>
-                <input type="text" class="form-control form-control-sm" id="ql-state" name="state" maxlength="2" autocomplete="address-level1" />
-              </div>
-            </div>
-            <div class="mb-2">
-              <label for="ql-summary" class="form-label small mb-0" data-lang="es">Resultados o notas (opcional)</label>
-              <label for="ql-summary" class="form-label small mb-0" data-lang="en">Quote results or notes (optional)</label>
-              <textarea class="form-control form-control-sm" id="ql-summary" name="quoteSummary" rows="3" maxlength="20000" placeholder=""></textarea>
-              <span class="form-text small" data-lang="es">Puede pegar aquí lo que vio en el cotizador (aseguradora, prima, etc.).</span>
-              <span class="form-text small" data-lang="en">You can paste what you saw in the quoter (carrier, premium, etc.).</span>
-            </div>
-            <div class="form-check mb-3">
-              <input type="checkbox" class="form-check-input" id="ql-consent" name="consent" value="1" required />
-              <label class="form-check-label small" for="ql-consent" data-lang="es">Acepto que Mejor Vida Insurance me contacte sobre esta cotización.</label>
-              <label class="form-check-label small" for="ql-consent" data-lang="en">I agree that Mejor Vida Insurance may contact me about this quote.</label>
-            </div>
-            <div class="d-grid">
-              <button type="submit" class="btn btn-primary btn-sm fw-bold" id="quote-lead-submit">
-                <span data-lang="es">Enviar información</span>
-                <span data-lang="en">Submit</span>
-              </button>
-            </div>
-          </form>
-          <p id="quote-lead-msg" class="small text-center mt-3 mb-0 d-none" role="status" aria-live="polite"></p>
-        </div>
 
         <p class="text-center mb-3 mt-4 small text-body-secondary" data-lang="es">¿Prefiere hablar con alguien? Llame o escríbanos.</p>
         <p class="text-center mb-3 mt-4 small text-body-secondary" data-lang="en">Prefer to talk to someone? Call or message us.</p>
@@ -722,23 +709,41 @@
   </script>
   <script>
     (function () {
-      var form = document.getElementById('mvi-quote-form');
+      var form = document.getElementById('mvi-nebraska-quote-flow');
       var out = document.getElementById('mvi-quote-result');
       var btn = document.getElementById('mvi-quote-submit');
-      var qlSummary = document.getElementById('ql-summary');
+      var flowMsg = document.getElementById('mvi-flow-msg');
+      var afterCta = document.getElementById('mvi-after-quote-cta');
       if (!form || !out) return;
+
       form.addEventListener('submit', async function (e) {
         e.preventDefault();
+        if (!form.checkValidity()) {
+          form.reportValidity();
+          return;
+        }
+
         var lang = document.documentElement.classList.contains('lang-en') ? 'en' : 'es';
+        var fd = new FormData(form);
+        if (fd.get('website')) return;
+
         var age = parseInt(document.getElementById('mvi-age').value, 10);
         var sex = String(document.getElementById('mvi-sex').value || '').toLowerCase();
         var smoker = document.getElementById('mvi-smoker').value === 'true';
+
+        if (flowMsg) {
+          flowMsg.classList.add('d-none');
+          flowMsg.classList.remove('text-danger', 'text-success');
+        }
+        if (afterCta) afterCta.classList.add('d-none');
+
         out.classList.remove('text-danger', 'text-success');
         out.innerHTML =
           lang === 'es'
             ? '<span class="spinner-border spinner-border-sm me-2" role="status"></span>Calculando…'
             : '<span class="spinner-border spinner-border-sm me-2" role="status"></span>Calculating…';
         if (btn) btn.disabled = true;
+
         try {
           var res = await fetch('/api/quote-site', {
             method: 'POST',
@@ -751,7 +756,70 @@
           if (!res.ok || data.ok === false) {
             throw new Error(data.error || (lang === 'es' ? 'Error al calcular' : 'Could not calculate'));
           }
-          if (data.quote_status === 'ok') {
+          if (data.quote_status !== 'ok') {
+            out.classList.add('text-danger');
+            out.textContent =
+              data.quote_error ||
+              (lang === 'es'
+                ? 'No hay datos para esa combinación.'
+                : 'No data for that combination.');
+            return;
+          }
+
+          var quoteSummary =
+            lang === 'es'
+              ? 'Estimador web: rango $10K ' +
+                data.quote_low +
+                ' – ' +
+                data.quote_high +
+                ' (medio ' +
+                data.quote_anchor +
+                '). Edad ' +
+                age +
+                ', ' +
+                sex +
+                ', tabaco ' +
+                (smoker ? 'sí' : 'no') +
+                '.'
+              : 'Web estimator: $10K range ' +
+                data.quote_low +
+                ' – ' +
+                data.quote_high +
+                ' (mid ' +
+                data.quote_anchor +
+                '). Age ' +
+                age +
+                ', ' +
+                sex +
+                ', tobacco ' +
+                (smoker ? 'yes' : 'no') +
+                '.';
+
+          var syncRes = await fetch('/api/quote-lead-sync', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              firstName: String(fd.get('firstName') || '').trim(),
+              lastName: String(fd.get('lastName') || '').trim(),
+              email: String(fd.get('email') || '').trim(),
+              phone: String(fd.get('phone') || '').trim(),
+              state: String(fd.get('state') || 'NE').trim().toUpperCase(),
+              quoteSummary: quoteSummary,
+              quoteLow: data.quote_low,
+              quoteHigh: data.quote_high,
+              quoteAnchor: data.quote_anchor,
+              age: age,
+              sex: sex,
+              smoker: smoker,
+              consent: document.getElementById('ql-consent').checked,
+              lang: lang,
+              source: 'nebraska_quote_page',
+            }),
+          });
+          var syncData = await syncRes.json().catch(function () {
+            return {};
+          });
+          if (!syncRes.ok || !syncData.ok) {
             out.classList.add('text-success');
             out.style.color = '';
             out.innerHTML =
@@ -770,108 +838,56 @@
                   ' <span class="text-body-secondary">(mid ' +
                   data.quote_anchor +
                   ')</span>';
-            if (qlSummary && !String(qlSummary.value || '').trim()) {
-              qlSummary.value =
-                lang === 'es'
-                  ? 'Estimador web: rango $10K ' +
-                    data.quote_low +
-                    ' – ' +
-                    data.quote_high +
-                    ' (medio ' +
-                    data.quote_anchor +
-                    '). Edad ' +
-                    age +
-                    ', ' +
-                    sex +
-                    ', tabaco ' +
-                    (smoker ? 'sí' : 'no') +
-                    '.'
-                  : 'Web estimator: $10K range ' +
-                    data.quote_low +
-                    ' – ' +
-                    data.quote_high +
-                    ' (mid ' +
-                    data.quote_anchor +
-                    '). Age ' +
-                    age +
-                    ', ' +
-                    sex +
-                    ', tobacco ' +
-                    (smoker ? 'yes' : 'no') +
-                    '.';
+            if (flowMsg) {
+              flowMsg.classList.remove('d-none');
+              flowMsg.classList.add('text-danger');
+              flowMsg.textContent =
+                syncData.error ||
+                (lang === 'es'
+                  ? 'Su cotización se calculó, pero no pudimos guardar sus datos. Intente de nuevo.'
+                  : 'Your quote was calculated, but we could not save your details. Please try again.');
             }
-          } else {
-            out.classList.add('text-danger');
-            out.textContent =
-              data.quote_error ||
-              (lang === 'es'
-                ? 'No hay datos para esa combinación.'
-                : 'No data for that combination.');
+            if (afterCta) afterCta.classList.remove('d-none');
+            return;
+          }
+
+          out.classList.add('text-success');
+          out.style.color = '';
+          out.innerHTML =
+            lang === 'es'
+              ? '<strong>Rango mensual estimado ($10K):</strong> ' +
+                data.quote_low +
+                ' – ' +
+                data.quote_high +
+                ' <span class="text-body-secondary">(punto medio ' +
+                data.quote_anchor +
+                ')</span>'
+              : '<strong>Estimated monthly range ($10K):</strong> ' +
+                data.quote_low +
+                ' – ' +
+                data.quote_high +
+                ' <span class="text-body-secondary">(mid ' +
+                data.quote_anchor +
+                ')</span>';
+
+          if (flowMsg) {
+            flowMsg.classList.remove('d-none');
+            flowMsg.classList.add('text-success');
+            flowMsg.textContent =
+              lang === 'es'
+                ? '¡Gracias! Guardamos su información de forma segura.'
+                : 'Thank you—we saved your information securely.';
+          }
+          if (afterCta) {
+            afterCta.classList.remove('d-none');
+            try {
+              afterCta.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            } catch (err) {}
           }
         } catch (err) {
           out.classList.add('text-danger');
           out.textContent =
             err.message || (lang === 'es' ? 'Error de red. Intente más tarde.' : 'Network error. Try again.');
-        } finally {
-          if (btn) btn.disabled = false;
-        }
-      });
-    })();
-  </script>
-  <script>
-    (function () {
-      var form = document.getElementById('quote-lead-form');
-      if (!form) return;
-      var msg = document.getElementById('quote-lead-msg');
-      var btn = document.getElementById('quote-lead-submit');
-      form.addEventListener('submit', async function (e) {
-        e.preventDefault();
-        if (msg) {
-          msg.classList.add('d-none');
-          msg.classList.remove('text-danger', 'text-success');
-        }
-        var lang = document.documentElement.classList.contains('lang-en') ? 'en' : 'es';
-        var fd = new FormData(form);
-        if (fd.get('website')) return;
-        var payload = {
-          firstName: (fd.get('firstName') || '').trim(),
-          lastName: (fd.get('lastName') || '').trim(),
-          email: (fd.get('email') || '').trim(),
-          phone: (fd.get('phone') || '').trim(),
-          state: (fd.get('state') || '').trim().toUpperCase(),
-          quoteSummary: (fd.get('quoteSummary') || '').trim(),
-          consent: document.getElementById('ql-consent').checked,
-          lang: lang,
-          source: 'nebraska_quote_page',
-        };
-        if (btn) btn.disabled = true;
-        try {
-          var res = await fetch('/api/quote-lead-sync', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
-          });
-          var data = await res.json().catch(function () { return {}; });
-          if (!res.ok || !data.ok) {
-            throw new Error(data.error || (lang === 'es' ? 'Error al enviar' : 'Send failed'));
-          }
-          if (msg) {
-            msg.classList.remove('d-none');
-            msg.classList.add('text-success');
-            msg.textContent = lang === 'es'
-              ? '¡Gracias! Recibimos su información.'
-              : 'Thank you—we received your information.';
-          }
-          form.reset();
-          setTimeout(function () {
-            if (window.openScheduleModalMejorVida) window.openScheduleModalMejorVida();
-          }, 700);
-        } catch (err) {
-          if (msg) {
-            msg.classList.remove('d-none');
-            msg.classList.add('text-danger');
-            msg.textContent = err.message || (lang === 'es' ? 'Error al enviar. Intente más tarde.' : 'Could not send. Try again later.');
-          }
         } finally {
           if (btn) btn.disabled = false;
         }
