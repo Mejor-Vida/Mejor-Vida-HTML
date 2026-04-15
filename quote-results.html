@@ -11,7 +11,7 @@
   </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Tus cotizaciones — Mejor Vida Insurance</title>
+  <title>Su estimación — Mejor Vida Insurance</title>
   <meta name="robots" content="noindex, follow" />
   
   <!-- Favicon -->
@@ -135,6 +135,20 @@
       background-color: #f5b942;
       box-shadow: 0 4px 8px rgba(254, 201, 99, 0.4);
       transform: translateY(-1px);
+    }
+
+    .btn-primary-gold {
+      background-color: #FEC963;
+      color: #1a202c;
+      border: 2px solid #FEC963;
+      transition: all 0.2s ease-in-out;
+    }
+    .btn-primary-gold:hover {
+      background-color: #f5b942;
+      border-color: #f5b942;
+      color: #1a202c;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(254, 201, 99, 0.4);
     }
     
     /* Phone block styles */
@@ -288,16 +302,62 @@
     html.lang-en [data-lang="es"] { display: none !important; }
 
     .quote-form-card { max-width: 42rem; }
+
+    .quote-hero-title {
+      color: #fec963 !important;
+      text-shadow: 0 2px 16px rgba(0, 0, 0, 0.4);
+      font-size: clamp(1.65rem, 4.2vw, 2.65rem);
+      line-height: 1.15;
+    }
+    .mvi-result-range-card {
+      border-radius: 1rem;
+      padding: 2rem 1.5rem;
+      background: linear-gradient(155deg, #ffffff 0%, #eef6ff 55%, #fff9f0 100%);
+      border: 2px solid rgba(13, 71, 161, 0.22);
+      box-shadow: 0 14px 44px rgba(13, 71, 161, 0.11);
+    }
+    .mvi-result-range-value {
+      font-size: clamp(1.25rem, 3.8vw, 1.75rem);
+      font-weight: 700;
+      color: #0D47A1;
+      letter-spacing: -0.02em;
+      line-height: 1.3;
+    }
+    .mvi-result-section {
+      border-left: 4px solid #fec963;
+      padding-left: 1rem;
+      margin-bottom: 1.35rem;
+    }
+    .mvi-result-section:last-child { margin-bottom: 0; }
+    .schedule-modal-iframe-wrap iframe {
+      display: block;
+      width: 100%;
+      height: min(70vh, 700px);
+      border: 0;
+      background: #f8fafc;
+    }
+    body.mvi-schedule-modal-open #mvi-assistant-root {
+      display: none !important;
+    }
   </style>
   <script>
     (function(){
       try {
-        var raw = sessionStorage.getItem('mvsQuoteResult');
+        var raw = sessionStorage.getItem('mviNebraskaQuoteResult');
         if (raw) {
           var j = JSON.parse(raw);
           if (j && (j.lang === 'en' || j.lang === 'es')) {
             sessionStorage.setItem('sessionLang', j.lang);
             document.documentElement.className = 'lang-' + j.lang;
+            return;
+          }
+        }
+        var rawLegacy = sessionStorage.getItem('mvsQuoteResult');
+        if (rawLegacy) {
+          var j2 = JSON.parse(rawLegacy);
+          if (j2 && (j2.lang === 'en' || j2.lang === 'es')) {
+            sessionStorage.setItem('sessionLang', j2.lang);
+            document.documentElement.className = 'lang-' + j2.lang;
             return;
           }
         }
@@ -386,33 +446,111 @@
   </header>
 
   <!-- HERO -->
-  <section class="hero-two-tone py-5 relative">
+  <section class="hero-two-tone py-4 py-md-5 relative">
     <div class="hero-dark-overlay">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 500" preserveAspectRatio="none" aria-hidden="true"><path d="M 0 0 L 1200 0 C 900 350 300 150 0 500 L 0 0 Z" /></svg>
     </div>
-    <div class="container text-center hero-content-overlay">
-      <h1 class="h2 fw-bold text-white mb-3" data-lang="es">Resultados de cotización</h1>
-      <h1 class="h2 fw-bold text-white mb-3" data-lang="en">Quote results</h1>
-      <p class="fs-6 text-white opacity-90 mb-0 mx-auto" style="max-width:40rem;" data-lang="es">La página de resultados en pantalla se actualizará cuando la nueva herramienta (Compulife) esté conectada.</p>
-      <p class="fs-6 text-white opacity-90 mb-0 mx-auto" style="max-width:40rem;" data-lang="en">This results page will be wired up when the new quoting tool (Compulife) is connected.</p>
+    <div class="container text-center hero-content-overlay px-3">
+      <p class="small text-white text-opacity-90 mb-2 fw-semibold" style="letter-spacing:0.04em;" data-lang="es">NEBRASKA · GASTOS FINALES · $10,000</p>
+      <p class="small text-white text-opacity-90 mb-2 fw-semibold" style="letter-spacing:0.04em;" data-lang="en">NEBRASKA · FINAL EXPENSE · $10,000</p>
+      <h1 class="fw-bold quote-hero-title mb-2">
+        <span data-lang="es">Su estimación mensual</span>
+        <span data-lang="en">Your monthly estimate</span>
+      </h1>
+      <p class="fs-6 text-white mb-0 mx-auto fw-medium" style="max-width:36rem; text-shadow:0 1px 8px rgba(0,0,0,0.25);" id="mvi-results-subhero"></p>
     </div>
   </section>
 
   <section class="flex-grow-1 py-5 bg-light">
-    <div class="container" style="max-width:42rem;">
-      <div class="bg-white rounded-3 p-4 shadow-sm text-center mb-4">
-        <p class="mb-3" data-lang="es">Mientras tanto, Julie puede ayudarle por teléfono o WhatsApp, o use el contacto en el inicio.</p>
-        <p class="mb-4" data-lang="en">In the meantime, Julie can help by phone or WhatsApp, or use the contact section on the home page.</p>
-        <div class="d-flex flex-wrap justify-content-center gap-2">
-          <a href="quote-screen.html" class="btn btn-primary rounded fw-bold px-4" data-lang="es">Cotización</a>
-          <a href="quote-screen.html" class="btn btn-primary rounded fw-bold px-4" data-lang="en">Quote</a>
-          <a href="index.html" class="btn btn-outline-primary rounded fw-bold px-4" data-lang="es">Inicio</a>
-          <a href="index.html" class="btn btn-outline-primary rounded fw-bold px-4" data-lang="en">Home</a>
-          <a href="tel:+14025881125" class="btn btn-outline-secondary rounded fw-bold px-4"><i class="fas fa-phone me-1"></i>402-588-1125</a>
+    <div class="container" style="max-width:44rem;">
+      <div id="mvi-results-missing" class="d-none bg-white rounded-3 p-4 p-md-5 shadow-sm text-center mb-4">
+        <p class="mb-3 text-body-secondary" data-lang="es">No encontramos una cotización reciente en esta sesión. Vuelva al cotizador para obtener un estimado.</p>
+        <p class="mb-4 text-body-secondary" data-lang="en">We could not find a recent quote in this session. Return to the quote tool to get an estimate.</p>
+        <a href="quote.html" class="btn btn-primary fw-bold rounded px-4" data-lang="es">Ir al cotizador</a>
+        <a href="quote.html" class="btn btn-primary fw-bold rounded px-4" data-lang="en">Go to quote tool</a>
+      </div>
+
+      <div id="mvi-results-body" class="d-none">
+        <div class="mvi-result-range-card text-center mb-4">
+          <p class="small text-body-secondary text-uppercase fw-semibold mb-2" style="letter-spacing:0.06em;" data-lang="es">Rango mensual típico</p>
+          <p class="small text-body-secondary text-uppercase fw-semibold mb-2" style="letter-spacing:0.06em;" data-lang="en">Typical monthly range</p>
+          <p class="mvi-result-range-value mb-2" id="mvi-results-range-line" role="status"></p>
+          <p class="small text-body-secondary mb-0" id="mvi-results-anchor-line"></p>
+          <p class="small text-muted mt-3 mb-0" id="mvi-results-recap"></p>
+        </div>
+
+        <div class="bg-white rounded-3 p-4 p-md-5 shadow-sm mb-4">
+          <div class="mvi-result-section">
+            <h2 class="h5 fw-bold mb-2" style="color:#1a365d;" data-lang="es">¿Qué significa este rango?</h2>
+            <h2 class="h5 fw-bold mb-2" style="color:#1a365d;" data-lang="en">What this range means</h2>
+            <p class="mb-0 small text-body-secondary" data-lang="es">Es un <strong>rango orientativo</strong> de primas mensuales para cobertura de gastos finales de <strong>$10,000</strong> en Nebraska. No es un precio cerrado de una aseguradora en particular; refleja lo que es <em>típico</em> para personas con información similar a la suya (edad, género y uso de tabaco tal como lo indicó).</p>
+            <p class="mb-0 small text-body-secondary" data-lang="en">This is an <strong>indicative range</strong> of monthly premiums for <strong>$10,000</strong> final-expense coverage in Nebraska. It is not a locked-in price from one specific carrier; it reflects what is <em>typical</em> for people with similar information to yours (age, gender, and tobacco use as you entered).</p>
+          </div>
+          <div class="mvi-result-section">
+            <h2 class="h5 fw-bold mb-2" style="color:#1a365d;" data-lang="es">Qué puede afectar el precio</h2>
+            <h2 class="h5 fw-bold mb-2" style="color:#1a365d;" data-lang="en">What can affect the price</h2>
+            <ul class="small text-body-secondary ps-3 mb-0" data-lang="es">
+              <li class="mb-1">Edad y sexo biológico (según cómo lo clasifican las aseguradoras).</li>
+              <li class="mb-1">Uso de tabaco o nicotina.</li>
+              <li class="mb-1">Historial de salud y medicamentos (se revisa en la solicitud, no en este estimador).</li>
+              <li class="mb-1">La aseguradora y el producto específico que encaje mejor para usted.</li>
+            </ul>
+            <ul class="small text-body-secondary ps-3 mb-0" data-lang="en">
+              <li class="mb-1">Age and biological sex (as carriers classify for underwriting).</li>
+              <li class="mb-1">Tobacco or nicotine use.</li>
+              <li class="mb-1">Health history and medications (reviewed on the application, not in this estimator).</li>
+              <li class="mb-1">The carrier and specific product that fits you best.</li>
+            </ul>
+          </div>
+          <div class="mvi-result-section">
+            <h2 class="h5 fw-bold mb-2" style="color:#1a365d;" data-lang="es">Siguiente paso: la cotización real con Julie</h2>
+            <h2 class="h5 fw-bold mb-2" style="color:#1a365d;" data-lang="en">Next step: your real quote with Julie</h2>
+            <p class="small text-body-secondary mb-2" data-lang="es">Lo que ve arriba es solo una <strong>estimación en línea</strong>. La cotización definitiva y las opciones reales se revisan en una <strong>llamada breve con Julie</strong>, sin exámenes médicos ni citas en clínica para la mayoría de los casos de gastos finales, y muchas personas reciben una decisión en un <strong>periodo muy corto</strong> una vez presentada la solicitud. Julie le explicará todo en español o inglés, según prefiera.</p>
+            <p class="small text-body-secondary mb-0" data-lang="en">What you see above is only an <strong>online estimate</strong>. Your final quote and real options are reviewed on a <strong>short phone call with Julie</strong>. For most final-expense situations there are <strong>no medical exams</strong> or lab visits, and many people get a decision in a <strong>very short time</strong> once the application is submitted. Julie can walk you through everything in Spanish or English.</p>
+          </div>
+
+          <div class="text-center pt-2 border-top mt-3">
+            <p class="fw-bold mb-3" style="color:#1a365d;" data-lang="es">Reserve su llamada con Julie</p>
+            <p class="fw-bold mb-3" style="color:#1a365d;" data-lang="en">Book your call with Julie</p>
+            <button type="button" class="btn btn-primary-gold btn-lg fw-bold px-5 py-3 rounded shadow-sm" data-bs-toggle="modal" data-bs-target="#scheduleModal" id="mvi-results-schedule-btn">
+              <i class="fas fa-calendar-check me-2" aria-hidden="true"></i>
+              <span data-lang="es">Agendar llamada</span>
+              <span data-lang="en">Schedule a call</span>
+            </button>
+            <p class="small text-muted mt-3 mb-0" data-lang="es">También puede llamarnos al <a href="tel:+14025881125">402-588-1125</a> o volver al <a href="quote.html">cotizador</a> si desea cambiar sus datos.</p>
+            <p class="small text-muted mt-3 mb-0" data-lang="en">You can also call us at <a href="tel:+14025881125">402-588-1125</a> or return to the <a href="quote.html">quote tool</a> if you want to change your details.</p>
+          </div>
         </div>
       </div>
     </div>
   </section>
+
+  <!-- HubSpot scheduling (ES/EN URLs; matches quote.html) -->
+  <div class="modal fade" id="scheduleModal" tabindex="-1" aria-labelledby="scheduleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header border-bottom-0 pb-0">
+          <h2 class="modal-title h5 fw-bold" id="scheduleModalLabel" style="color:#1a365d;">
+            <span data-lang="es">Agendar cita con Julie</span>
+            <span data-lang="en">Book an appointment with Julie</span>
+          </h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body pt-2 schedule-modal-iframe-wrap">
+          <iframe
+            id="schedule-iframe"
+            data-src-es="https://meetings-na2.hubspot.com/julie-braunsroth"
+            data-src-en="https://meetings-na2.hubspot.com/julie-braunsroth/insurance-consultation-mejor-vida-insurance"
+            title="Schedule with Julie — HubSpot"
+            width="100%"
+            height="700"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- FOOTER -->
   <footer style="background:#1a365d; padding: 8px 0 24px 0;">
@@ -464,6 +602,126 @@
   <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
   <!-- Scripts -->
   <script src="script.js"></script>
+  <script>
+    (function () {
+      function setScheduleIframeSrc() {
+        var iframe = document.getElementById('schedule-iframe');
+        if (!iframe) return;
+        var lang = document.documentElement.classList.contains('lang-en') ? 'en' : 'es';
+        var url = lang === 'es' ? iframe.getAttribute('data-src-es') : iframe.getAttribute('data-src-en');
+        if (url) iframe.setAttribute('src', url);
+        iframe.setAttribute('title', lang === 'es' ? 'Agendar cita con Julie' : 'Book an appointment with Julie');
+      }
+      window.openScheduleModalMejorVida = function () {
+        var el = document.getElementById('scheduleModal');
+        if (!el || typeof bootstrap === 'undefined') return;
+        setScheduleIframeSrc();
+        bootstrap.Modal.getOrCreateInstance(el).show();
+      };
+      var modalEl = document.getElementById('scheduleModal');
+      if (modalEl) {
+        modalEl.addEventListener('show.bs.modal', setScheduleIframeSrc);
+        modalEl.addEventListener('show.bs.modal', function () {
+          document.body.classList.add('mvi-schedule-modal-open');
+        });
+        modalEl.addEventListener('hidden.bs.modal', function () {
+          document.body.classList.remove('mvi-schedule-modal-open');
+        });
+      }
+      document.querySelectorAll('.lang-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          setTimeout(function () {
+            var m = document.getElementById('scheduleModal');
+            if (m && m.classList.contains('show')) setScheduleIframeSrc();
+          }, 60);
+        });
+      });
+      window.addEventListener('load', function () {
+        try {
+          if (new URLSearchParams(location.search).get('schedule') === '1' || location.hash === '#schedule') {
+            setTimeout(function () {
+              if (window.openScheduleModalMejorVida) window.openScheduleModalMejorVida();
+            }, 400);
+          }
+        } catch (e) {}
+      });
+    })();
+  </script>
+  <script>
+    (function () {
+      var missing = document.getElementById('mvi-results-missing');
+      var body = document.getElementById('mvi-results-body');
+      var subhero = document.getElementById('mvi-results-subhero');
+      var rangeLine = document.getElementById('mvi-results-range-line');
+      var anchorLine = document.getElementById('mvi-results-anchor-line');
+      var recap = document.getElementById('mvi-results-recap');
+      if (!missing || !body) return;
+
+      var raw;
+      try {
+        raw = sessionStorage.getItem('mviNebraskaQuoteResult');
+      } catch (e) {
+        raw = null;
+      }
+      if (!raw) {
+        missing.classList.remove('d-none');
+        return;
+      }
+
+      var q;
+      try {
+        q = JSON.parse(raw);
+      } catch (e) {
+        missing.classList.remove('d-none');
+        return;
+      }
+      if (!q || !q.quote_low || !q.quote_high || !q.quote_anchor) {
+        missing.classList.remove('d-none');
+        return;
+      }
+
+      body.classList.remove('d-none');
+
+      var lang = q.lang === 'en' ? 'en' : 'es';
+      var fn = String(q.firstName || '').trim();
+      if (subhero) {
+        if (fn) {
+          subhero.textContent =
+            lang === 'es'
+              ? fn + ', aquí tiene un punto de partida para su cobertura de gastos finales.'
+              : fn + ', here’s a starting point for your final-expense coverage.';
+        } else {
+          subhero.textContent =
+            lang === 'es'
+              ? 'Aquí tiene un punto de partida para su cobertura de gastos finales.'
+              : 'Here’s a starting point for your final-expense coverage.';
+        }
+      }
+
+      if (rangeLine) {
+        rangeLine.textContent =
+          lang === 'es'
+            ? q.quote_low + ' – ' + q.quote_high + ' al mes'
+            : q.quote_low + ' – ' + q.quote_high + ' per month';
+      }
+      if (anchorLine) {
+        anchorLine.textContent =
+          lang === 'es' ? 'Punto medio aproximado: ' + q.quote_anchor : 'Approximate mid-point: ' + q.quote_anchor;
+      }
+
+      if (recap) {
+        var age = q.age;
+        var sex = String(q.sex || '').toLowerCase();
+        var smoker = q.smoker === true || q.smoker === 'true';
+        var sexLabelEs = sex === 'female' ? 'mujer' : sex === 'male' ? 'hombre' : sex;
+        var sexLabelEn = sex === 'female' ? 'female' : sex === 'male' ? 'male' : sex;
+        recap.textContent =
+          lang === 'es'
+            ? 'Según lo indicado: edad ' + age + ', ' + sexLabelEs + ', tabaco: ' + (smoker ? 'sí' : 'no') + '.'
+            : 'Based on your entries: age ' + age + ', ' + sexLabelEn + ', tobacco: ' + (smoker ? 'yes' : 'no') + '.';
+      }
+    })();
+  </script>
   <!-- Mobile menu script -->
   <script>
     // Mobile hamburger menu

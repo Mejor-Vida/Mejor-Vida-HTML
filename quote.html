@@ -513,18 +513,7 @@
               </button>
             </div>
           </form>
-          <div id="mvi-quote-result" class="mvi-quote-result mt-3 small text-center text-body-secondary" role="status" aria-live="polite"></div>
-          <div id="mvi-after-quote-cta" class="d-none mt-4 p-3 rounded-3 border text-center" style="border-color: rgba(254, 201, 99, 0.55); background: #fffbf0;">
-            <p class="fw-semibold mb-2" style="color:#1a365d;" data-lang="es">¿Quiere revisar esto con Julie?</p>
-            <p class="fw-semibold mb-2" style="color:#1a365d;" data-lang="en">Want to review this with Julie?</p>
-            <p class="small text-body-secondary mb-3" data-lang="es">Reserve una llamada breve en el horario que le convenga.</p>
-            <p class="small text-body-secondary mb-3" data-lang="en">Book a short call at a time that works for you.</p>
-            <button type="button" class="btn btn-primary-gold px-4 py-2 fw-bold rounded" data-bs-toggle="modal" data-bs-target="#scheduleModal" id="btn-schedule-after-quote">
-              <i class="fas fa-calendar-check me-2" aria-hidden="true"></i>
-              <span data-lang="es">Agendar llamada con Julie</span>
-              <span data-lang="en">Schedule a call with Julie</span>
-            </button>
-          </div>
+          <p id="mvi-quote-result" class="mvi-quote-result mt-3 small text-center text-body-secondary" role="status" aria-live="polite"></p>
           <p id="mvi-flow-msg" class="small text-center mt-3 mb-0 d-none" role="status" aria-live="polite"></p>
         </div>
 
@@ -713,7 +702,6 @@
       var out = document.getElementById('mvi-quote-result');
       var btn = document.getElementById('mvi-quote-submit');
       var flowMsg = document.getElementById('mvi-flow-msg');
-      var afterCta = document.getElementById('mvi-after-quote-cta');
       if (!form || !out) return;
 
       form.addEventListener('submit', async function (e) {
@@ -735,8 +723,6 @@
           flowMsg.classList.add('d-none');
           flowMsg.classList.remove('text-danger', 'text-success');
         }
-        if (afterCta) afterCta.classList.add('d-none');
-
         out.classList.remove('text-danger', 'text-success');
         out.innerHTML =
           lang === 'es'
@@ -844,46 +830,35 @@
               flowMsg.textContent =
                 syncData.error ||
                 (lang === 'es'
-                  ? 'Su cotización se calculó, pero no pudimos guardar sus datos. Intente de nuevo.'
-                  : 'Your quote was calculated, but we could not save your details. Please try again.');
+                  ? 'Su cotización se calculó, pero no pudimos guardar sus datos. Intente de nuevo o use Agendar abajo.'
+                  : 'Your quote was calculated, but we could not save your details. Please try again or use Book below.');
             }
-            if (afterCta) afterCta.classList.remove('d-none');
             return;
           }
 
-          out.classList.add('text-success');
-          out.style.color = '';
+          try {
+            sessionStorage.setItem(
+              'mviNebraskaQuoteResult',
+              JSON.stringify({
+                lang: lang,
+                firstName: String(fd.get('firstName') || '').trim(),
+                quote_low: data.quote_low,
+                quote_high: data.quote_high,
+                quote_anchor: data.quote_anchor,
+                age: age,
+                sex: sex,
+                smoker: smoker,
+                savedAt: new Date().toISOString(),
+              })
+            );
+          } catch (err) {}
+
           out.innerHTML =
             lang === 'es'
-              ? '<strong>Rango mensual estimado ($10K):</strong> ' +
-                data.quote_low +
-                ' – ' +
-                data.quote_high +
-                ' <span class="text-body-secondary">(punto medio ' +
-                data.quote_anchor +
-                ')</span>'
-              : '<strong>Estimated monthly range ($10K):</strong> ' +
-                data.quote_low +
-                ' – ' +
-                data.quote_high +
-                ' <span class="text-body-secondary">(mid ' +
-                data.quote_anchor +
-                ')</span>';
-
-          if (flowMsg) {
-            flowMsg.classList.remove('d-none');
-            flowMsg.classList.add('text-success');
-            flowMsg.textContent =
-              lang === 'es'
-                ? '¡Gracias! Guardamos su información de forma segura.'
-                : 'Thank you—we saved your information securely.';
-          }
-          if (afterCta) {
-            afterCta.classList.remove('d-none');
-            try {
-              afterCta.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-            } catch (err) {}
-          }
+              ? '<span class="spinner-border spinner-border-sm me-2" role="status"></span>Llevándole a sus resultados…'
+              : '<span class="spinner-border spinner-border-sm me-2" role="status"></span>Taking you to your results…';
+          location.replace('quote-results.html');
+          return;
         } catch (err) {
           out.classList.add('text-danger');
           out.textContent =
