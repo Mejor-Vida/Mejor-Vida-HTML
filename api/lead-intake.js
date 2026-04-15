@@ -100,6 +100,34 @@ module.exports = async function handler(req, res) {
       us_state: usState,
     });
 
+    // 4. Enroll new leads in nurture sequence (first WA send at 5 hours — immediate email handles the instant touchpoint)
+    if (created) {
+      const now         = new Date();
+      const firstSendAt = new Date(now.getTime() + 5 * 60 * 60 * 1000);
+      try {
+        await fetch(`${supabaseUrl.replace(/\/$/, "")}/rest/v1/nurture_sequence`, {
+          method: "POST",
+          headers: {
+            apikey:         supabaseKey,
+            Authorization:  `Bearer ${supabaseKey}`,
+            "Content-Type": "application/json",
+            Prefer:         "return=minimal",
+          },
+          body: JSON.stringify({
+            contact_id:             contactId,
+            manychat_subscriber_id: whatsappId,
+            status:                 "active",
+            phase:                  1,
+            step:                   1,
+            enrolled_at:            now.toISOString(),
+            next_send_at:           firstSendAt.toISOString(),
+          }),
+        });
+      } catch (e) {
+        console.error("lead-intake: nurture enroll error:", e.message);
+      }
+    }
+
     return json(res, 200, { success: true, contact_id: contactId, created });
   } catch (e) {
     console.error("lead-intake error:", e.message);
