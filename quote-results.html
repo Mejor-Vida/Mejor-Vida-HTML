@@ -649,6 +649,31 @@
   </script>
   <script>
     (function () {
+      function mviGetSessionClientId() {
+        try {
+          var k = 'mviSessionClientId';
+          var s = sessionStorage.getItem(k);
+          if (s && s.length > 0 && s.length < 200) return s;
+          s =
+            typeof crypto !== 'undefined' && crypto.randomUUID
+              ? crypto.randomUUID()
+              : 's-' + String(Date.now()) + '-' + Math.random().toString(36).slice(2, 10);
+          sessionStorage.setItem(k, s);
+          return s;
+        } catch (e) {
+          return null;
+        }
+      }
+      function mviPostAnalytics(payload) {
+        try {
+          fetch('/api/analytics-event', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
+          }).catch(function () {});
+        } catch (e) {}
+      }
+
       var missing = document.getElementById('mvi-results-missing');
       var body = document.getElementById('mvi-results-body');
       var subhero = document.getElementById('mvi-results-subhero');
@@ -681,6 +706,26 @@
       }
 
       body.classList.remove('d-none');
+
+      if (q.leadId) {
+        mviPostAnalytics({
+          eventType: 'quote_results_viewed',
+          quoteLeadSubmissionId: q.leadId,
+          sessionClientId: q.sessionClientId || mviGetSessionClientId(),
+          data: { path: location.pathname },
+        });
+        var scheduleModalEl = document.getElementById('scheduleModal');
+        if (scheduleModalEl) {
+          scheduleModalEl.addEventListener('show.bs.modal', function () {
+            mviPostAnalytics({
+              eventType: 'schedule_modal_opened',
+              quoteLeadSubmissionId: q.leadId,
+              sessionClientId: q.sessionClientId || mviGetSessionClientId(),
+              data: {},
+            });
+          });
+        }
+      }
 
       var lang = q.lang === 'en' ? 'en' : 'es';
       var fn = String(q.firstName || '').trim();

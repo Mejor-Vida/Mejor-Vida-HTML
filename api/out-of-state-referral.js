@@ -6,15 +6,27 @@
  * Does NOT sync to HubSpot CRM.
  *
  * Vercel env: SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY,
- *             OOS_REFERRAL_SECRET, OOS_EMAIL_NOTIFIER_URL
+ *             OOS_EMAIL_NOTIFIER_URL (Google Apps Script web app URL),
+ *             OOS_EMAIL_NOTIFIER_SECRET (optional; must match Apps Script script property OOS_SECRET)
  */
 
-function json(res, status, payload) {
-  res.status(status).setHeader("Content-Type", "application/json");
-  // Allow CORS from the site
-  res.setHeader("Access-Control-Allow-Origin", "https://www.mejorvidainsurance.com");
+const { verifySiteOrigin } = require("../lib/site-origin");
+
+function applyCors(req, res) {
+  const gate = verifySiteOrigin(req);
+  const origin = String(req.headers.origin || "").trim();
+  if (gate.ok && origin) {
+    res.setHeader("Access-Control-Allow-Origin", origin);
+  } else {
+    res.setHeader("Access-Control-Allow-Origin", "https://www.mejorvidainsurance.com");
+  }
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+}
+
+function json(res, status, payload, req) {
+  applyCors(req, res);
+  res.status(status).setHeader("Content-Type", "application/json");
   res.send(JSON.stringify(payload));
 }
 
@@ -51,11 +63,17 @@ async function supabaseInsert(supabaseUrl, serviceKey, table, row) {
 async function sendEmailNotification(notifierUrl, leadData) {
   if (!notifierUrl) return { skipped: true, reason: "OOS_EMAIL_NOTIFIER_URL not set" };
 
+  const secret = process.env.OOS_EMAIL_NOTIFIER_SECRET;
+  const payload = { ...leadData };
+  if (secret) {
+    payload.notifierSecret = secret;
+  }
+
   try {
     const r = await fetch(notifierUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(leadData),
+      body: JSON.stringify(payload),
       redirect: "follow",
     });
     const text = await r.text();
@@ -70,16 +88,14 @@ async function sendEmailNotification(notifierUrl, leadData) {
 module.exports = async function handler(req, res) {
   /* CORS preflight */
   if (req.method === "OPTIONS") {
-    res.setHeader("Access-Control-Allow-Origin", "https://www.mejorvidainsurance.com");
-    res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
-    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+    applyCors(req, res);
     return res.status(204).end();
   }
 
   /* Method check */
   if (req.method !== "POST") {
     res.setHeader("Allow", "POST, OPTIONS");
-    return json(res, 405, { ok: false, error: "Method Not Allowed" });
+    return json(res, 405, { ok: false, error: "Method Not Allowed" }, req);
   }
 
   /* Env vars */
@@ -91,7 +107,7 @@ module.exports = async function handler(req, res) {
     return json(res, 500, {
       ok: false,
       error: "Server missing SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY",
-    });
+    }, req);
   }
 
   /* Parse body */
@@ -99,13 +115,13 @@ module.exports = async function handler(req, res) {
   try {
     body = readJsonBody(req);
   } catch (e) {
-    return json(res, 400, { ok: false, error: "Invalid JSON" });
+    return json(res, 400, { ok: false, error: "Invalid JSON" }, req);
   }
 
   /* Honeypot check */
   if (body.website) {
     // Bot submission - silently accept but don't store
-    return json(res, 200, { ok: true, id: null });
+    return json(res, 200, { ok: true, id: null }, req);
   }
 
   /* Extract & sanitize fields */
@@ -118,10 +134,10 @@ module.exports = async function handler(req, res) {
   const consent = Boolean(body.consentLicensedAgentInState);
 
   if (!email) {
-    return json(res, 400, { ok: false, error: "Email is required" });
+    return json(res, 400, { ok: false, error: "Email is required" }, req);
   }
   if (!firstName) {
-    return json(res, 400, { ok: false, error: "First name is required" });
+    return json(res, 400, { ok: false, error: "First name is required" }, req);
   }
 
   /* Supabase insert */
@@ -149,7 +165,7 @@ module.exports = async function handler(req, res) {
     );
   } catch (e) {
     console.error("out-of-state-referral supabase insert", e);
-    return json(res, 500, { ok: false, error: "Could not save referral" });
+    return json(res, 500, { ok: false, error: "Could not save referral" }, req);
   }
 
   /* Email notification (best-effort, don't fail the request) */
@@ -169,5 +185,5 @@ module.exports = async function handler(req, res) {
     ok: true,
     id: recordId,
     email: emailResult,
-  });
+  }, req);
 };

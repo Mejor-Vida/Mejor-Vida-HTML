@@ -17,6 +17,42 @@ function readJsonBody(req) {
   return req.body && typeof req.body === "object" ? req.body : {};
 }
 
+/** Normalize UTM/referrer/path from body (quote.html sends originDetail + sessionClientId). */
+function buildOriginDetail(body) {
+  if (body.originDetail && typeof body.originDetail === "object" && !Array.isArray(body.originDetail)) {
+    return body.originDetail;
+  }
+  if (body.analytics && typeof body.analytics === "object" && body.analytics.origin) {
+    return typeof body.analytics.origin === "object" ? body.analytics.origin : {};
+  }
+  const o = {};
+  const keys = [
+    "utm_source",
+    "utm_medium",
+    "utm_campaign",
+    "utm_content",
+    "utm_term",
+    "gclid",
+    "fbclid",
+  ];
+  for (const k of keys) {
+    const v = body[k];
+    if (v != null && String(v).trim()) o[k] = String(v).trim().slice(0, 500);
+  }
+  if (body.referrer != null && String(body.referrer).trim()) {
+    o.referrer = String(body.referrer).trim().slice(0, 2000);
+  }
+  if (body.landingPath != null && String(body.landingPath).trim()) {
+    o.landing_path = String(body.landingPath).trim().slice(0, 2000);
+  } else if (body.page_path != null && String(body.page_path).trim()) {
+    o.landing_path = String(body.page_path).trim().slice(0, 2000);
+  }
+  if (body.entryPage != null && String(body.entryPage).trim()) {
+    o.entry_page = String(body.entryPage).trim().slice(0, 2000);
+  }
+  return o;
+}
+
 async function supabaseInsert(supabaseUrl, serviceKey, row) {
   const url = `${supabaseUrl.replace(/\/$/, "")}/rest/v1/quote_lead_submissions`;
   const r = await fetch(url, {
@@ -241,10 +277,19 @@ module.exports = async function handler(req, res) {
     payload.quoteAnchor = body.quoteAnchor;
     payload.marketingOptIn = { sms: true, email: true, phoneCalls: true };
   }
+  const originDetail = buildOriginDetail(body);
+  const sessionClientId = body.sessionClientId
+    ? String(body.sessionClientId).trim().slice(0, 128)
+    : body.session_client_id
+      ? String(body.session_client_id).trim().slice(0, 128)
+      : null;
+
   const requestRaw = {
     ...payload,
     quoteSummary: quoteSummary || undefined,
     submittedAt: nowIso,
+    originDetail,
+    sessionClientId: sessionClientId || undefined,
   };
 
   let summaryForDb = quoteSummary || null;
@@ -306,6 +351,8 @@ module.exports = async function handler(req, res) {
         ? nowIso
         : null,
     crm_sync_needed: true,
+    origin_detail: originDetail,
+    session_client_id: sessionClientId || null,
   };
 
   if (nebraskaQuote) {
