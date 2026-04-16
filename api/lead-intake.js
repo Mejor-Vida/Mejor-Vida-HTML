@@ -15,6 +15,7 @@
  *   first_name   (optional) subscriber first name        — preferred
  *   last_name    (optional) subscriber last name         — preferred
  *   full_name    (optional) legacy single-field fallback — split on first space
+ *   email        (optional) subscriber email — saved to contacts so post-quote-email can find it
  *   us_state     (optional) defaults to 'NE'
  *
  * Returns:
@@ -94,6 +95,10 @@ module.exports = async function handler(req, res) {
   firstName = firstName || null;
   lastName  = lastName  || null;
 
+  // Email — optional but needed so post-quote-email can find it on the v2 contacts row
+  const rawEmail = String(body.email || "").trim().toLowerCase();
+  const email = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(rawEmail) ? rawEmail.slice(0, 500) : null;
+
   const usState = String(body.us_state || "NE").trim().toUpperCase().slice(0, 5);
 
   // ── Log incoming webhook (fire-and-forget) ───────────────────────────────
@@ -106,6 +111,7 @@ module.exports = async function handler(req, res) {
     const { contactId, created } = await upsertContact(supabaseUrl, supabaseKey, phone, {
       first_name: firstName,
       last_name:  lastName,
+      ...(email ? { email } : {}),
       language,
       whatsapp_id: whatsappId,
       us_state: usState,
