@@ -19,10 +19,19 @@
  */
 
 const { verifyManychatSecret } = require('../lib/manychat-auth');
+const path = require('path');
+const fs = require('fs');
 
 const QUOTE_URL    = 'https://www.mejorvidainsurance.com/quote-screen.html';
 const SCHEDULE_URL = 'https://www.mejorvidainsurance.com/quote.html?schedule=1';
 const VCF_URL      = 'https://www.mejorvidainsurance.com/julie.vcf';
+
+const LOGO_EN = 'https://www.mejorvidainsurance.com/img/logo-english2.png';
+const LOGO_ES = 'https://www.mejorvidainsurance.com/img/logo-spanish2.png';
+
+/** Base64 vCard — same bytes as project root julie.vcf (for Resend attachment). */
+const JULIE_VCF_CONTENT = fs.readFileSync(path.join(__dirname, '..', 'julie.vcf'), 'utf8');
+const JULIE_VCF_BASE64 = Buffer.from(JULIE_VCF_CONTENT, 'utf8').toString('base64');
 
 function json(res, status, payload) {
   res.status(status).setHeader('Content-Type', 'application/json');
@@ -35,15 +44,41 @@ function readBody(req) {
 }
 
 // ─── HTML helpers ─────────────────────────────────────────────────────────────
-function btn(text, url, bg = '#1a56db', color = '#fff') {
+function btn(text, url, bg = '#3b82f6', color = '#fff') {
   return `<a href="${url}" style="display:inline-block;padding:14px 28px;border-radius:6px;font-weight:bold;font-size:15px;text-decoration:none;margin:8px 6px;background:${bg};color:${color};">${text}</a>`;
 }
 
-function wrap(body) {
+function signatureBlockEN() {
+  return `<div style="border-top:1px solid #e0e0e0;margin-top:28px;padding-top:20px;font-size:14px;color:#555;line-height:1.6;">
+  <strong style="font-size:15px;color:#1e3a8a;">Julie Braunsroth</strong><br>
+  Licensed Life &amp; Health Insurance Agent | Nebraska<br>
+  <strong>Mejor Vida Insurance LLC</strong><br>
+  Life Insurance | Final Expense | Family Protection<br>
+  📞 <a href="tel:+14025881125" style="color:#3b82f6;text-decoration:none;">Call Julie: 402-588-1125</a> | 💬 <a href="https://wa.me/14024405438" style="color:#3b82f6;text-decoration:none;">WhatsApp: 402-440-5438</a><br>
+  🌐 <a href="https://www.mejorvidainsurance.com" style="color:#3b82f6;text-decoration:none;">mejorvidainsurance.com</a><br>
+  ✉️ <a href="mailto:julie@mejorvidainsurance.com" style="color:#3b82f6;text-decoration:none;">julie@mejorvidainsurance.com</a><br>
+  <span style="font-size:12px;color:#888;">Se habla español | We speak English</span>
+</div>`;
+}
+
+function signatureBlockES() {
+  return `<div style="border-top:1px solid #e0e0e0;margin-top:28px;padding-top:20px;font-size:14px;color:#555;line-height:1.6;">
+  <strong style="font-size:15px;color:#1e3a8a;">Julie Braunsroth</strong><br>
+  Agente Licenciada en Seguros de Vida y Salud | Nebraska<br>
+  <strong>Mejor Vida Insurance LLC</strong><br>
+  Seguros de Vida | Gastos Finales | Protección Familiar<br>
+  📞 <a href="tel:+14025881125" style="color:#3b82f6;text-decoration:none;">Llama a Julie: 402-588-1125</a> | 💬 <a href="https://wa.me/14024405438" style="color:#3b82f6;text-decoration:none;">WhatsApp: 402-440-5438</a><br>
+  🌐 <a href="https://www.mejorvidainsurance.com" style="color:#3b82f6;text-decoration:none;">mejorvidainsurance.com</a><br>
+  ✉️ <a href="mailto:julie@mejorvidainsurance.com" style="color:#3b82f6;text-decoration:none;">julie@mejorvidainsurance.com</a><br>
+  <span style="font-size:12px;color:#888;">Se habla español | We speak English</span>
+</div>`;
+}
+
+function wrap(body, logoUrl) {
   return `<!DOCTYPE html><html><head><meta charset="UTF-8">
 <style>body{margin:0;padding:0;background:#f4f6f8;font-family:Arial,sans-serif;}
 .c{max-width:600px;margin:32px auto;background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.08);}
-.h{background:#0d2b4e;padding:24px 32px;}.ht{color:#fff;font-size:22px;font-weight:bold;margin:0;}
+.h{background:#1e3a8a;padding:24px 32px;}.ht{color:#fff;font-size:22px;font-weight:bold;margin:0;}
 .hs{color:#a8c4e0;font-size:13px;margin:4px 0 0;}.b{padding:32px;color:#333;font-size:16px;line-height:1.7;}
 .b p{margin:0 0 16px;}.cta{text-align:center;padding:8px 0 24px;}
 .quote-box{background:#e8f5e9;border:2px solid #43a047;border-radius:10px;padding:20px;text-align:center;margin:20px 0;}
@@ -54,7 +89,7 @@ function wrap(body) {
 .check{color:#43a047;margin-right:6px;}
 .f{background:#f4f6f8;padding:20px 32px;font-size:12px;color:#888;text-align:center;border-top:1px solid #e0e0e0;}
 </style></head><body><div class="c">
-<div class="h"><p class="ht">Mejor Vida Insurance</p><p class="hs">Seguros Para Una Vida Mejor</p></div>
+<div class="h"><img src="${logoUrl}" alt="Mejor Vida Insurance" style="max-width:180px;height:auto;margin-bottom:12px;display:block;" /><p class="ht">Mejor Vida Insurance</p><p class="hs">Seguros Para Una Vida Mejor</p></div>
 <div class="b">${body}</div>
 <div class="f"><p>&copy; Mejor Vida Insurance | <a href="https://www.mejorvidainsurance.com" style="color:#888;">mejorvidainsurance.com</a></p>
 <p><a href="https://www.mejorvidainsurance.com/unsubscribe" style="color:#888;">Unsubscribe</a></p></div>
@@ -91,7 +126,7 @@ ${quoteBlock}
 ${apptBlock}
 <p>And save my contact so I'm always just one tap away:</p>
 <div class="cta">${btn('Save Julie\'s Contact Card', VCF_URL, '#43a047')}</div>
-<p>Warmly,<br><strong>Julie</strong><br>Mejor Vida Insurance</p>`),
+${signatureBlockEN()}`, LOGO_EN),
   };
 }
 
@@ -125,7 +160,7 @@ ${quoteBlock}
 ${apptBlock}
 <p>Y guarda mi contacto para tenerme siempre a un toque:</p>
 <div class="cta">${btn('Guardar Contacto de Julie', VCF_URL, '#43a047')}</div>
-<p>Con cariño,<br><strong>Julie</strong><br>Mejor Vida Insurance</p>`),
+${signatureBlockES()}`, LOGO_ES),
   };
 }
 
@@ -199,6 +234,13 @@ module.exports = async function handler(req, res) {
         to:      email,
         subject,
         html,
+        attachments: [
+          {
+            filename: 'Julie-Mejor-Vida-Insurance.vcf',
+            content: JULIE_VCF_BASE64,
+            content_type: 'text/vcard',
+          },
+        ],
       }),
     });
     const result = await r.json();
