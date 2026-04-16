@@ -99,14 +99,15 @@ module.exports = async function handler(req, res) {
   let contacts;
   try {
     contacts = await sbGet(supabaseUrl, supabaseKey,
-      `/contacts?phone=eq.${encodeURIComponent(phone)}&select=id,full_name,vcf_sent_at&limit=1`);
+      `/contacts?phone=eq.${encodeURIComponent(phone)}&select=id,first_name,last_name,full_name,vcf_sent_at&limit=1`);
   } catch (err) {
     console.error('[call-scheduled] contact lookup:', err.message);
     return json(res, 500, { ok: false, error: 'Database error' });
   }
 
   const contact = contacts[0] || null;
-  const name = (contact?.full_name || '').split(' ')[0] || 'there';
+  const name =
+    (contact?.first_name || (contact?.full_name || '').split(' ')[0] || 'there').trim() || 'there';
 
   // Check if VCF already sent
   if (contact?.vcf_sent_at) {

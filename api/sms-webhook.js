@@ -84,7 +84,8 @@ function twimlEmpty() {
 async function sendNurtureEmail(contact, intent) {
   const quoteUrl    = 'https://www.mejorvidainsurance.com/quote-screen.html';
   const scheduleUrl = 'https://www.mejorvidainsurance.com/quote.html?schedule=1';
-  const name        = (contact.full_name || '').split(' ')[0] || 'there';
+  const name =
+    (contact.first_name || (contact.full_name || '').split(' ')[0] || 'there').trim() || 'there';
 
   const btn = (text, url, bg) =>
     `<a href="${url}" style="display:inline-block;padding:14px 28px;border-radius:6px;font-weight:bold;font-size:15px;text-decoration:none;margin:8px 6px;background:${bg};color:#fff;">${text}</a>`;
@@ -172,7 +173,7 @@ module.exports = async function handler(req, res) {
   let contacts;
   try {
     contacts = await sbGet(supabaseUrl, supabaseKey,
-      `/contacts?phone=eq.${encodeURIComponent(fromPhone)}&limit=1`);
+      `/contacts?phone=eq.${encodeURIComponent(fromPhone)}&select=id,first_name,last_name,full_name,email,phone,pending_sms_intent&limit=1`);
   } catch (err) {
     console.error('[sms-webhook] Contact lookup error:', err.message);
     return res.status(200).send(twiml('Sorry, we had a technical issue. Please try again shortly.'));

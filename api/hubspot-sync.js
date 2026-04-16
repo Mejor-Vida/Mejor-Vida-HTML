@@ -78,13 +78,14 @@ async function findHsContactByPhone(token, phone) {
   }
 }
 
-async function upsertHsContact(token, phone, { fullName, email, language, usState, age, gender, isSmoker }) {
+async function upsertHsContact(token, phone, { firstName, lastName, email, language, usState, age, gender, isSmoker }) {
   // Try find by phone
   let existingId = await findHsContactByPhone(token, phone);
 
   const properties = {
     phone,
-    ...(fullName && { firstname: fullName.split(" ")[0], lastname: fullName.split(" ").slice(1).join(" ") || "" }),
+    ...(firstName && { firstname: firstName }),
+    ...(lastName && { lastname: lastName }),
     ...(email && { email }),
     ...(language && { preferred_language: language }),
     ...(usState && { state: usState }),
@@ -236,7 +237,8 @@ module.exports = async function handler(req, res) {
 
     // 2. Upsert HubSpot Contact
     const hsContactId = await upsertHsContact(hubspotToken, phone, {
-      fullName: contact.full_name,
+      firstName: contact.first_name,
+      lastName: contact.last_name,
       email: contact.email,
       language: contact.language,
       usState: contact.us_state,

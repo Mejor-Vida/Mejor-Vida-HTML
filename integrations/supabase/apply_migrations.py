@@ -24,25 +24,6 @@ except ImportError:
     raise SystemExit(1)
 
 
-def _split_sql(sql: str) -> list[str]:
-    """Split on semicolons at end-of-statement (PostgreSQL simple migrations)."""
-    chunks: list[str] = []
-    buf: list[str] = []
-    for line in sql.splitlines():
-        s = line.strip()
-        buf.append(line)
-        if s.endswith(";"):
-            chunk = "\n".join(buf).strip()
-            if chunk:
-                chunks.append(chunk.rstrip(";").strip())
-            buf = []
-    if buf:
-        chunk = "\n".join(buf).strip()
-        if chunk:
-            chunks.append(chunk.rstrip(";").strip())
-    return [c for c in chunks if c]
-
-
 def _ensure_tracker(conn) -> None:
     with conn.cursor() as cur:
         cur.execute(
@@ -89,9 +70,10 @@ def main() -> int:
             sql = path.read_text(encoding="utf-8")
             print(f"Applying {name} …")
             try:
+                # Run the whole file as one script so DO $$ ... $$ blocks and similar stay intact
+                # (line-based _split_sql breaks on semicolons inside dollar-quoted bodies).
                 with conn.cursor() as cur:
-                    for stmt in _split_sql(sql):
-                        cur.execute(stmt + ";")
+                    cur.execute(sql)
             except Exception as e:
                 print(f"Error in {name}: {e}")
                 return 1

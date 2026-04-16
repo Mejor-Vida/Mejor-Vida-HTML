@@ -12,7 +12,9 @@
  *   phone        (required) WhatsApp phone number, E.164 preferred
  *   whatsapp_id  (optional) ManyChat subscriber ID
  *   language     (required) 'english' or 'spanish'
- *   full_name    (optional) subscriber full name
+ *   first_name   (optional) subscriber first name        — preferred
+ *   last_name    (optional) subscriber last name         — preferred
+ *   full_name    (optional) legacy single-field fallback — split on first space
  *   us_state     (optional) defaults to 'NE'
  *
  * Returns:
@@ -72,16 +74,38 @@ module.exports = async function handler(req, res) {
   }
 
   const whatsappId = String(body.whatsapp_id || "").trim() || null;
-  const fullName = String(body.full_name || body.name || "").trim().slice(0, 200) || null;
+
+  // Prefer explicit first_name/last_name from the ManyChat body.
+  // Fall back to splitting a legacy full_name/name payload on the first space.
+  let firstName = String(body.first_name || body.firstName || "").trim().slice(0, 200);
+  let lastName  = String(body.last_name  || body.lastName  || "").trim().slice(0, 200);
+  if (!firstName && !lastName) {
+    const combined = String(body.full_name || body.name || "").trim();
+    if (combined) {
+      const spaceIdx = combined.indexOf(" ");
+      if (spaceIdx === -1) {
+        firstName = combined.slice(0, 200);
+      } else {
+        firstName = combined.slice(0, spaceIdx).slice(0, 200);
+        lastName  = combined.slice(spaceIdx + 1).trim().slice(0, 200);
+      }
+    }
+  }
+  firstName = firstName || null;
+  lastName  = lastName  || null;
+
   const usState = String(body.us_state || "NE").trim().toUpperCase().slice(0, 5);
 
   // ── Log incoming webhook (fire-and-forget) ───────────────────────────────
   logWebhook(supabaseUrl, supabaseKey, "manychat", "/api/lead-intake", { phone, language, whatsapp_id: whatsappId });
 
   try {
-    // 1. Upsert contact — idempotent on phone
+    // 1. Upsert contact — idempotent on phone.
+    //    NOTE: contacts.full_name is a GENERATED column (see migration 020).
+    //    We only write first_name/last_name; full_name auto-computes.
     const { contactId, created } = await upsertContact(supabaseUrl, supabaseKey, phone, {
-      full_name: fullName,
+      first_name: firstName,
+      last_name:  lastName,
       language,
       whatsapp_id: whatsappId,
       us_state: usState,

@@ -163,12 +163,16 @@ module.exports = async function handler(req, res) {
   let email = null;
   try {
     const base = supabaseUrl.replace(/\/$/, '');
-    const r = await fetch(`${base}/rest/v1/contacts?phone=eq.${encodeURIComponent(phone)}&select=id,email,full_name,vcf_sent_at&limit=1`, {
+    const r = await fetch(`${base}/rest/v1/contacts?phone=eq.${encodeURIComponent(phone)}&select=id,email,first_name,last_name,full_name,vcf_sent_at&limit=1`, {
       headers: { apikey: supabaseKey, Authorization: `Bearer ${supabaseKey}` },
     });
     const rows = await r.json();
     if (rows?.[0]?.email) email = rows[0].email;
-    if (!firstName && rows?.[0]?.full_name) firstName = rows[0].full_name.split(' ')[0] || '';
+    if (!firstName) {
+      firstName = rows?.[0]?.first_name
+        || (rows?.[0]?.full_name ? rows[0].full_name.split(' ')[0] : '')
+        || '';
+    }
   } catch (err) {
     console.error('[post-quote-email] Supabase lookup error:', err.message);
   }

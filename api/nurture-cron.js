@@ -61,39 +61,19 @@ async function sbFetch(path, options = {}) {
   return text ? JSON.parse(text) : null;
 }
 
-// ─── Helper: get lead state for smart logic ───────────────────────────────────
-async function getLeadState(contactId) {
-  try {
-    const rows = await sbFetch(`/lead_state?contact_id=eq.${contactId}&limit=1`);
-    return rows?.[0] || {};
-  } catch { return {}; }
-}
+// ─── SMS messages (generic) ──────────────────────────────────────────────────
+function getSmsMessage(step, contact) {
+  const name = (contact.first_name || (contact.full_name || '').split(' ')[0] || 'there').trim() || 'there';
 
-// ─── SMS messages (smart) ─────────────────────────────────────────────────────
-function getSmsMessage(step, contact, leadState) {
-  const name = (contact.full_name || '').split(' ')[0] || 'there';
-  const hasQuote = !!leadState.quote_generated_at;
-  const hasCall  = !!leadState.call_scheduled_at;
-
-  if (hasCall && step === 3) return null; // skip last SMS if call scheduled
-
-  if (step === 1) {
-    if (hasCall) return `Hi ${name}! Julie from Mejor Vida Insurance. Looking forward to your upcoming call! If you have any questions before then, just reply here. Reply STOP to unsubscribe.`;
-    if (hasQuote) return `Hi ${name}! Julie from Mejor Vida Insurance here. I sent your quote to your email — did you get a chance to look it over? Reply CALL to schedule a quick chat, or QUOTE for a new quote. Reply STOP to unsubscribe.`;
-    return `Hi ${name}! This is Julie from Mejor Vida Insurance. You recently asked about final expense coverage — reply QUOTE and I'll send you a free quote link, or reply CALL to schedule a quick chat. Reply STOP to unsubscribe.`;
-  }
-  if (step === 2) {
-    return `Hey ${name}, Julie here from Mejor Vida Insurance! Final expense plans start under $30/month. Save my contact so I'm just a tap away ${VCF_URL} — then reply QUOTE for a free quote or CALL to chat. Reply STOP to unsubscribe.`;
-  }
-  if (step === 3) {
-    return `Hi ${name}, Julie from Mejor Vida Insurance checking in one last time. Reply QUOTE or CALL and I'll take care of the rest. Reply STOP to unsubscribe.`;
-  }
+  if (step === 1) return `Hi ${name}! This is Julie from Mejor Vida Insurance. You recently asked about final expense coverage — reply QUOTE and I'll send you a free quote link, or reply CALL to schedule a quick chat with me. Reply STOP to unsubscribe.`;
+  if (step === 2) return `Hey ${name}, Julie here from Mejor Vida Insurance! Final expense plans start under $30/month — could be a perfect fit. Save my contact so I'm just a tap away 👉 ${VCF_URL} — then reply QUOTE or CALL. Reply STOP to unsubscribe.`;
+  if (step === 3) return `Hi ${name}, Julie from Mejor Vida Insurance checking in one last time. I'd love to help you get covered — just reply QUOTE or CALL and I'll take care of the rest. Reply STOP to unsubscribe.`;
   return null;
 }
 
 // ─── Email HTML templates (smart) ─────────────────────────────────────────────
-function getEmailContent(step, contact, leadState) {
-  const name        = (contact.full_name || '').split(' ')[0] || 'there';
+function getEmailContent(step, contact) {
+  const name        = (contact.first_name || (contact.full_name || '').split(' ')[0] || 'there').trim() || 'there';
   const quoteUrl    = QUOTE_URL;
   const scheduleUrl = SCHEDULE_URL;
 
@@ -169,11 +149,7 @@ ${vcfPs}`),
 }
 
 // ─── Phase 1: WhatsApp via ManyChat ──────────────────────────────────────────
-async function sendWhatsApp(contact, nurtureRow, step, leadState) {
-  // Skip WA step 2 if call already scheduled
-  if (step === 2 && leadState.call_scheduled_at) {
-    return { ok: false, reason: 'call_scheduled_skip' };
-  }
+async function sendWhatsApp(contact, nurtureRow, step) {
 
   const subscriberId = nurtureRow.manychat_subscriber_id || contact.whatsapp_id;
   if (!subscriberId) return { ok: false, reason: 'no_subscriber_id' };
@@ -195,7 +171,7 @@ async function sendWhatsApp(contact, nurtureRow, step, leadState) {
 }
 
 // ─── Phase 2: SMS via Twilio ──────────────────────────────────────────────────
-async function sendSms(contact, nurtureRow, step, leadState) {
+async function sendSms(contact, nurtureRow, step) {
   if (nurtureRow.twilio_opt_out) return { ok: false, reason: 'opted_out' };
   const phone = contact.phone;
   if (!phone) return { ok: false, reason: 'no_phone' };
@@ -205,11 +181,10 @@ async function sendSms(contact, nurtureRow, step, leadState) {
   const from  = process.env.TWILIO_PHONE_NUMBER;
   if (!sid || !token || !from) return { ok: false, reason: 'missing_twilio_env' };
 
-  const msgBody = getSmsMessage(step, contact, leadState);
-  if (!msgBody) return { ok: false, reason: 'smart_skip' }; // null = skip this step
+  const msgBody = getSmsMessage(step, contact);
+  if (!msgBody) return { ok: false, reason: 'no_message' };
 
-  const vcfAlreadySent = !!contact.vcf_sent_at;
-  const includeVcf = step === 2 && !vcfAlreadySent;
+  const includeVcf = step === 2 && !contact.vcf_sent_at;
 
   const params = new URLSearchParams({ Body: msgBody, From: from, To: phone });
   if (includeVcf) params.append('MediaUrl', VCF_URL);
@@ -229,13 +204,13 @@ async function sendSms(contact, nurtureRow, step, leadState) {
 }
 
 // ─── Phase 3: Email via Resend ────────────────────────────────────────────────
-async function sendEmail(contact, nurtureRow, step, leadState) {
+async function sendEmail(contact, nurtureRow, step) {
   if (nurtureRow.email_opt_out) return { ok: false, reason: 'opted_out' };
   const email = contact.email;
   if (!email) return { ok: false, reason: 'no_email' };
   if (!process.env.RESEND_API_KEY) return { ok: false, reason: 'missing_RESEND_API_KEY' };
 
-  const { subject, html } = getEmailContent(step, contact, leadState);
+  const { subject, html } = getEmailContent(step, contact);
   const res = await fetch('https://api.resend.com/emails', {
     method:  'POST',
     headers: {
@@ -284,7 +259,7 @@ module.exports = async function handler(req, res) {
   let dueRows;
   try {
     dueRows = await sbFetch(
-      `/nurture_sequence?select=*,contacts(id,full_name,email,phone,whatsapp_id,vcf_sent_at)` +
+      `/nurture_sequence?select=*,contacts(id,first_name,last_name,full_name,email,phone,whatsapp_id,vcf_sent_at)` +
       `&status=eq.active&next_send_at=lte.${encodeURIComponent(now.toISOString())}&limit=100`
     );
   } catch (err) {
@@ -299,31 +274,13 @@ module.exports = async function handler(req, res) {
     const contact = row.contacts;
     if (!contact) { console.warn(`[nurture] No contact for row ${row.id}`); continue; }
 
-    // Get lead state for smart logic
-    const leadState = await getLeadState(contact.id);
-
-    // If call scheduled → mark as converted and stop
-    if (leadState.call_scheduled_at) {
-      try {
-        await sbFetch(`/nurture_sequence?id=eq.${row.id}`, {
-          method: 'PATCH',
-          headers: { Prefer: 'return=minimal' },
-          body: JSON.stringify({ status: 'converted', converted_at: leadState.call_scheduled_at, updated_at: now.toISOString() }),
-        });
-      } catch (err) {
-        console.error(`[nurture] Convert update failed:`, err.message);
-      }
-      results.push({ nurtureId: row.id, contactId: contact.id, phase: row.phase, step: row.step, sent: false, reason: 'converted' });
-      continue;
-    }
-
     const { phase, step } = row;
     let sendResult = { ok: false, reason: 'unknown_phase' };
 
     try {
-      if (phase === 1)      sendResult = await sendWhatsApp(contact, row, step, leadState);
-      else if (phase === 2) sendResult = await sendSms(contact, row, step, leadState);
-      else if (phase === 3) sendResult = await sendEmail(contact, row, step, leadState);
+      if (phase === 1)      sendResult = await sendWhatsApp(contact, row, step);
+      else if (phase === 2) sendResult = await sendSms(contact, row, step);
+      else if (phase === 3) sendResult = await sendEmail(contact, row, step);
     } catch (err) {
       console.error(`[nurture] Row ${row.id} send error:`, err.message);
       sendResult = { ok: false, reason: err.message };
