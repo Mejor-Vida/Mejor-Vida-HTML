@@ -286,6 +286,30 @@ module.exports = async function handler(req, res) {
       sendResult = { ok: false, reason: err.message };
     }
 
+    // Email phase but no address on file — advance so the row does not stick forever
+    if (!sendResult.ok && sendResult.reason === 'no_email' && phase === 3) {
+      console.warn(`[nurture] Skipping email step ${step} for contact ${contact.id} — no email on file`);
+      const { nextPhase, nextStep, nextSendAt } = computeNextSend(phase, step, row.enrolled_at);
+      const skipUpdate = {
+        phase:        nextPhase ?? phase,
+        step:         nextStep ?? step,
+        next_send_at: nextSendAt?.toISOString() ?? null,
+        status:       nextPhase === null ? 'completed' : 'active',
+        updated_at:   now.toISOString(),
+      };
+      try {
+        await sbFetch(`/nurture_sequence?id=eq.${row.id}`, {
+          method: 'PATCH',
+          headers: { Prefer: 'return=minimal' },
+          body: JSON.stringify(skipUpdate),
+        });
+      } catch (err) {
+        console.error(`[nurture] Row ${row.id} skip update error:`, err.message);
+      }
+      results.push({ nurtureId: row.id, contactId: contact.id, phase, step, sent: false, reason: 'no_email_skipped', nextSendAt: nextSendAt?.toISOString() ?? null });
+      continue;
+    }
+
     // Mark vcf_sent_at on contact if VCF was delivered
     if (sendResult?.ok && sendResult?.vcfSent && contact.id) {
       try {

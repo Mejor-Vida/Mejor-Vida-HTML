@@ -48,6 +48,10 @@
     {
       "path": "/api/nurture-cron",
       "schedule": "0,30 * * * *"
+    },
+    {
+      "path": "/api/nurture-enroll-cron",
+      "schedule": "5,15,25,35,45,55 * * * *"
     }
   ],
   "rewrites": [

@@ -16,6 +16,7 @@
 
 const { verifyManychatSecret, logRequest } = require("../lib/manychat-auth");
 const { upsertManychatLeadByPhone } = require("../lib/supabase");
+const { upsertContact, upsertLeadState, insertEvent } = require("../lib/contacts-db");
 const { createOrUpdateContact, hubspotAddNote } = require("../lib/hubspot");
 
 function json(res, status, payload) {
@@ -86,6 +87,24 @@ async function handleInitialContact(body, supabaseUrl, supabaseKey, hubspotToken
 
   if (settled[1].status === "rejected") {
     console.error("contact-capture hubspot", settled[1].reason);
+  }
+
+  // Also write to v2 contacts table
+  try {
+    const { contactId } = await upsertContact(supabaseUrl, supabaseKey, phone, {
+      first_name: firstName || null,
+      source: "whatsapp",
+    });
+
+    await upsertLeadState(supabaseUrl, supabaseKey, contactId, {
+      pipeline_stage: "new_contact",
+    });
+
+    await insertEvent(supabaseUrl, supabaseKey, contactId, "first_message", {
+      source: "whatsapp",
+    });
+  } catch (e) {
+    console.error("contact-capture v2 upsert error:", e.message);
   }
 
   return json(res, 200, { success: true, lead_id: settled[0].value });
@@ -162,6 +181,25 @@ async function handleEmailOptin(body, supabaseUrl, supabaseKey, hubspotToken, re
 
   if (settled[1].status === "rejected") {
     console.error("email-optin-capture hubspot", settled[1].reason);
+  }
+
+  // Also write to v2 contacts table
+  try {
+    const langLower = String(language || "").toLowerCase();
+    const languageV2 = langLower.includes("spanish") ? "spanish" : "english";
+    const { contactId } = await upsertContact(supabaseUrl, supabaseKey, phone, {
+      first_name: firstName || null,
+      last_name: lastName || null,
+      email: email || null,
+      language: languageV2,
+      source: "whatsapp",
+    });
+
+    await upsertLeadState(supabaseUrl, supabaseKey, contactId, {
+      pipeline_stage: isNebraska ? "engaged" : "referral_requested",
+    });
+  } catch (e) {
+    console.error("contact-capture v2 email_optin upsert error:", e.message);
   }
 
   // Add consent note to HubSpot contact (best-effort)
