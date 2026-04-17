@@ -26,7 +26,9 @@
  * vercel.json: { "path": "/api/nurture-cron", "schedule": "0,30 * * * *" }
  *
  * Env vars: SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY,
- *   TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, TWILIO_PHONE_NUMBER,
+ *   TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN,
+ *   TWILIO_MESSAGING_SERVICE_SID (A2P Messaging Service MG…; preferred for Phase 2 SMS),
+ *   TWILIO_PHONE_NUMBER (E.164 fallback if Messaging Service SID not set),
  *   RESEND_API_KEY, MANYCHAT_FLOW_PHASE1_STEP1/STEP2, CRON_SECRET
  */
 
@@ -176,17 +178,25 @@ async function sendSms(contact, nurtureRow, step) {
   const phone = contact.phone;
   if (!phone) return { ok: false, reason: 'no_phone' };
 
-  const sid   = process.env.TWILIO_ACCOUNT_SID;
-  const token = process.env.TWILIO_AUTH_TOKEN;
-  const from  = process.env.TWILIO_PHONE_NUMBER;
-  if (!sid || !token || !from) return { ok: false, reason: 'missing_twilio_env' };
+  const sid                 = process.env.TWILIO_ACCOUNT_SID;
+  const token               = process.env.TWILIO_AUTH_TOKEN;
+  const messagingServiceSid = (process.env.TWILIO_MESSAGING_SERVICE_SID || '').trim();
+  const fromNumber          = (process.env.TWILIO_PHONE_NUMBER || '').trim();
+
+  if (!sid || !token) return { ok: false, reason: 'missing_twilio_env' };
+  if (!messagingServiceSid && !fromNumber) return { ok: false, reason: 'missing_twilio_env' };
 
   const msgBody = getSmsMessage(step, contact);
   if (!msgBody) return { ok: false, reason: 'no_message' };
 
   const includeVcf = step === 2 && !contact.vcf_sent_at;
 
-  const params = new URLSearchParams({ Body: msgBody, From: from, To: phone });
+  const params = new URLSearchParams({ Body: msgBody, To: phone });
+  if (messagingServiceSid) {
+    params.append('MessagingServiceSid', messagingServiceSid);
+  } else {
+    params.append('From', fromNumber);
+  }
   if (includeVcf) params.append('MediaUrl', VCF_URL);
 
   const res = await fetch(`https://api.twilio.com/2010-04-01/Accounts/${sid}/Messages.json`, {
@@ -199,7 +209,9 @@ async function sendSms(contact, nurtureRow, step) {
   });
   const json = await res.json();
   if (json.error_code) throw new Error(`Twilio: ${JSON.stringify(json)}`);
-  console.log(`[nurture] SMS sent to ${phone}, SID: ${json.sid}${includeVcf ? ' (VCF)' : ''}`);
+  console.log(
+    `[nurture] SMS sent to ${phone}, twilio ${json.sid}${includeVcf ? ' (VCF)' : ''} via ${messagingServiceSid ? 'MessagingServiceSid' : 'From'}`,
+  );
   return { ok: true, sid: json.sid, vcfSent: includeVcf };
 }
 
