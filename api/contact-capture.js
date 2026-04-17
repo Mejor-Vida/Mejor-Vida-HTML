@@ -41,17 +41,18 @@ function resolveManyChat(val) {
 
 /* ── Initial contact handler ───────────────────────────────────── */
 async function handleInitialContact(body, supabaseUrl, supabaseKey, hubspotToken, res) {
-  const fullName = String(body.name || body.first_name || "").trim().slice(0, 200);
+  const firstName = String(body.first_name || body.name || "").trim().split(" ")[0].slice(0, 200) || null;
+  const lastName = String(body.last_name || "").trim().slice(0, 200) || null;
   const phone = String(body.phone || "").trim().slice(0, 40);
+  const whatsappId = String(body.whatsapp_id || "").trim() || null;
 
   if (!phone) {
     return json(res, 400, { success: false, error: "phone required" });
   }
 
-  const firstName = fullName.split(" ")[0] || "WhatsApp";
-
   const row = {
-    first_name: firstName || null,
+    first_name: firstName,
+    last_name: lastName,
     phone,
     email: null,
     age: null,
@@ -70,7 +71,11 @@ async function handleInitialContact(body, supabaseUrl, supabaseKey, hubspotToken
     hubspotToken
       ? createOrUpdateContact(
           hubspotToken,
-          { firstname: firstName, phone },
+          {
+            firstname: firstName || "WhatsApp",
+            ...(lastName ? { lastname: lastName } : {}),
+            phone,
+          },
           {
             lifecyclestage: "lead",
             hs_lead_status: "OPEN",
@@ -92,7 +97,9 @@ async function handleInitialContact(body, supabaseUrl, supabaseKey, hubspotToken
   // Also write to v2 contacts table
   try {
     const { contactId } = await upsertContact(supabaseUrl, supabaseKey, phone, {
-      first_name: firstName || null,
+      first_name: firstName,
+      last_name: lastName,
+      whatsapp_id: whatsappId,
       source: "whatsapp",
     });
 
