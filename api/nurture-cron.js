@@ -12,10 +12,10 @@
  *     Step 1: 5 hours   — value + book call
  *     Step 2: 21 hours  — soft check-in
  *
- *   Phase 2 — SMS/Twilio (3 messages, days 1/3/5)
- *     Step 1: Day 1  — QUOTE/CALL keywords
- *     Step 2: Day 3  — value + VCF (if not sent)
- *     Step 3: Day 5  — last SMS
+ *   Phase 2 — SMS/Twilio (3 messages, days 3/5/7 — 48h / 96h / 144h from enroll)
+ *     Step 1: Day 3  — QUOTE/CALL keywords (avoids same-day overlap with WhatsApp step 2 ~21h)
+ *     Step 2: Day 5  — value + VCF (if not sent)
+ *     Step 3: Day 7  — last SMS
  *
  *   Phase 3 — Email/Resend (4 weekly emails)
  *     Step 1: Week 1  — personal note + VCF
@@ -32,7 +32,7 @@
 
 const SCHEDULE_HOURS = {
   1: { 1: 5,   2: 21  },                   // WA: 5hr, 21hr
-  2: { 1: 24,  2: 72,  3: 120 },           // SMS: day 1, 3, 5
+  2: { 1: 48,  2: 96,  3: 144 },           // SMS: day 3, 5, 7
   3: { 1: 168, 2: 336, 3: 504, 4: 672 },   // Email: weeks 1-4
 };
 const MAX_STEPS = { 1: 2, 2: 3, 3: 4 };
