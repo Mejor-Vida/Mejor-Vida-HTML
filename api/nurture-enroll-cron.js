@@ -2,12 +2,10 @@
  * /api/nurture-enroll-cron.js
  * Vercel Cron Job — runs every 10 minutes.
  *
- * Enrolls contacts whose pipeline stage is before call_scheduled (new_contact, engaged, or
- * quoted) after a 30-minute quiet period, if they are not yet in nurture_sequence. The nurture
- * sequence is aimed at getting leads to schedule a call; anyone who has not reached
- * call_scheduled should remain eligible (via these stages) until enrolled.
- *
- * This avoids double-enrollment when contact-capture and lead-intake fire close together.
+ * Enrolls contacts whose pipeline stage is before call_scheduled (new_contact, engaged, or quoted).
+ * After a 30-minute quiet period, enrolls those not yet in nurture_sequence. The nurture sequence
+ * aims to get leads to schedule a call. This avoids double-enrollment when contact-capture and
+ * lead-intake fire close together.
  *
  * vercel.json: { "path": "/api/nurture-enroll-cron", "schedule": "5,15,25,35,45,55 * * * *" }
  *
