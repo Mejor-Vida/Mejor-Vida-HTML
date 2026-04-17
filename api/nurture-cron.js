@@ -63,13 +63,25 @@ async function sbFetch(path, options = {}) {
   return text ? JSON.parse(text) : null;
 }
 
-// ─── SMS messages (generic) ──────────────────────────────────────────────────
+// ─── SMS messages (bilingual, default Spanish) ───────────────────────────────
+// Uses contact.idioma if set; otherwise v2 contacts.language ('english' | 'spanish').
 function getSmsMessage(step, contact) {
-  const name = (contact.first_name || (contact.full_name || '').split(' ')[0] || 'there').trim() || 'there';
+  const name = (contact.first_name || (contact.full_name || '').split(' ')[0] || '').trim() || null;
+  const lang = String(contact.idioma || contact.language || '').toLowerCase();
+  const isEnglish = lang === 'english';
 
-  if (step === 1) return `Hi ${name}! This is Julie from Mejor Vida Insurance. You recently asked about final expense coverage — reply QUOTE and I'll send you a free quote link, or reply CALL to schedule a quick chat with me. Reply STOP to unsubscribe.`;
-  if (step === 2) return `Hey ${name}, Julie here from Mejor Vida Insurance! Final expense plans start under $30/month — could be a perfect fit. Save my contact so I'm just a tap away 👉 ${VCF_URL} — then reply QUOTE or CALL. Reply STOP to unsubscribe.`;
-  if (step === 3) return `Hi ${name}, Julie from Mejor Vida Insurance checking in one last time. I'd love to help you get covered — just reply QUOTE or CALL and I'll take care of the rest. Reply STOP to unsubscribe.`;
+  if (isEnglish) {
+    const nameEn = name || 'there';
+    if (step === 1) return `Hi ${nameEn}! This is Julie from Mejor Vida Insurance. You recently asked about final expense coverage — reply QUOTE and I'll send you a free quote link, or reply CALL to schedule a quick chat with me. Reply STOP to unsubscribe.`;
+    if (step === 2) return `Hey ${nameEn}, Julie here from Mejor Vida Insurance! Final expense plans start under $30/month — could be a perfect fit. Save my contact so I'm just a tap away 👉 ${VCF_URL} — then reply QUOTE or CALL. Reply STOP to unsubscribe.`;
+    if (step === 3) return `Hi ${nameEn}, Julie from Mejor Vida Insurance checking in one last time. I'd love to help you get covered — just reply QUOTE or CALL and I'll take care of the rest. Reply STOP to unsubscribe.`;
+  } else {
+    // Default: Spanish
+    const nameEs = name || 'amigo/a';
+    if (step === 1) return `¡Hola ${nameEs}! Soy Julie de Mejor Vida Insurance. Hace poco preguntaste sobre cobertura para gastos finales — responde COTIZAR y te envío el enlace, o responde LLAMAR para agendar una llamada rápida conmigo. Responde STOP para cancelar.`;
+    if (step === 2) return `¡Hola ${nameEs}! Julie de Mejor Vida Insurance. Los planes de gastos finales comienzan desde $30/mes — puede ser justo lo que necesitas. Guarda mi contacto para tenerme a la mano 👉 ${VCF_URL} — luego responde COTIZAR o LLAMAR. Responde STOP para cancelar.`;
+    if (step === 3) return `Hola ${nameEs}, soy Julie de Mejor Vida Insurance. Te escribo por última vez — me encantaría ayudarte a obtener cobertura. Solo responde COTIZAR o LLAMAR y yo me encargo del resto. Responde STOP para cancelar.`;
+  }
   return null;
 }
 
@@ -271,7 +283,7 @@ module.exports = async function handler(req, res) {
   let dueRows;
   try {
     dueRows = await sbFetch(
-      `/nurture_sequence?select=*,contacts(id,first_name,last_name,full_name,email,phone,whatsapp_id,vcf_sent_at)` +
+      `/nurture_sequence?select=*,contacts(id,first_name,last_name,full_name,email,phone,whatsapp_id,vcf_sent_at,language)` +
       `&status=eq.active&next_send_at=lte.${encodeURIComponent(now.toISOString())}&limit=100`
     );
   } catch (err) {

@@ -3,8 +3,8 @@
  * Twilio inbound SMS handler — receives replies from leads.
  *
  * Keyword logic:
- *   QUOTE  → send email with quote link (or collect email first)
- *   CALL   → send email with scheduling link (or collect email first)
+ *   QUOTE / COTIZAR  → send email with quote link (or collect email first)
+ *   CALL / LLAMAR    → send email with scheduling link (or collect email first)
  *   STOP   → opt-out of SMS, update Supabase
  *   <email address>  → save email, send the pending intent email
  *   anything else    → send a friendly fallback reply
@@ -158,7 +158,9 @@ module.exports = async function handler(req, res) {
 
   const fromPhone = (body.From || '').trim();
   const msgBody   = (body.Body || '').trim();
-  const keyword   = msgBody.toUpperCase().split(/\s+/)[0];
+  let keyword     = msgBody.toUpperCase().split(/\s+/)[0];
+  if (keyword === 'COTIZAR') keyword = 'QUOTE';
+  if (keyword === 'LLAMAR') keyword = 'CALL';
 
   const supabaseUrl = process.env.SUPABASE_URL;
   const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
