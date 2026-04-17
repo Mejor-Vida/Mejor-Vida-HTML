@@ -2,7 +2,7 @@
 /**
  * Writes static HTML previews of the post-quote email (same markup as production).
  * Logo src uses ../img/... so opening the file via file:// still loads images from the repo
- * (production emails use absolute https:// URLs from lib/post-quote-email-html.js).
+ * (production emails use absolute https:// URLs from lib/resend-email-template.js).
  *
  *   node scripts/preview-post-quote-email.js
  *

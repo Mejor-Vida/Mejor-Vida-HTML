@@ -20,6 +20,8 @@
  * Local preview (open HTML in browser — same layout as sent email):
  *   node scripts/preview-post-quote-email.js
  *   → email-previews/post-quote-email-en.html and ...-es.html
+ *
+ * Shared Resend HTML shell (header, footer, Julie signature): lib/resend-email-template.js
  */
 
 const { verifyManychatSecret } = require('../lib/manychat-auth');
