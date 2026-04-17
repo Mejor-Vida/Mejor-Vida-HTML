@@ -2,10 +2,12 @@
  * /api/nurture-enroll-cron.js
  * Vercel Cron Job — runs every 10 minutes.
  *
- * Finds contacts created more than 30 minutes ago that are not yet enrolled in
- * nurture_sequence, with lead_state still early (new_contact or engaged), and
- * enrolls them. This avoids double-enrollment when contact-capture and lead-intake
- * fire close together.
+ * Enrolls contacts whose pipeline stage is before call_scheduled (new_contact, engaged, or
+ * quoted) after a 30-minute quiet period, if they are not yet in nurture_sequence. The nurture
+ * sequence is aimed at getting leads to schedule a call; anyone who has not reached
+ * call_scheduled should remain eligible (via these stages) until enrolled.
+ *
+ * This avoids double-enrollment when contact-capture and lead-intake fire close together.
  *
  * vercel.json: { "path": "/api/nurture-enroll-cron", "schedule": "5,15,25,35,45,55 * * * *" }
  *
@@ -45,9 +47,9 @@ module.exports = async function handler(req, res) {
   console.log(`[nurture-enroll-cron] Running at ${now.toISOString()}`);
 
   try {
-    // 1) Early-stage lead_state rows
+    // 1) lead_state rows eligible for nurture (pre–call_scheduled stages)
     const lsRes = await fetch(
-      `${base}/lead_state?select=contact_id,pipeline_stage&pipeline_stage=in.(new_contact,engaged)&limit=200`,
+      `${base}/lead_state?select=contact_id,pipeline_stage&pipeline_stage=in.(new_contact,engaged,quoted)&limit=200`,
       { headers: sbHeaders(supabaseKey) },
     );
     const lsText = await lsRes.text();
@@ -55,7 +57,7 @@ module.exports = async function handler(req, res) {
     const leadRows = JSON.parse(lsText);
     const contactIds = [...new Set((leadRows || []).map((r) => r.contact_id).filter(Boolean))];
     if (contactIds.length === 0) {
-      console.log("[nurture-enroll-cron] No early-stage lead_state rows");
+      console.log("[nurture-enroll-cron] No eligible lead_state rows");
       return res.status(200).json({ ran_at: now.toISOString(), enrolled: 0 });
     }
 
