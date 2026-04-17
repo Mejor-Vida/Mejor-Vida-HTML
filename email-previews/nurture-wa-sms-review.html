@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nurture — WhatsApp &amp; SMS copy (review)</title>
+  <style>
+    :root {
+      --bg: #f4f6f8;
+      --card: #fff;
+      --navy: #0d2b4e;
+      --accent: #1a56db;
+      --muted: #64748b;
+      --sms-bubble: #e8f4fc;
+      --wa-bubble: #dcf8c6;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 24px 16px 48px;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: var(--bg);
+      color: #1e293b;
+      line-height: 1.6;
+    }
+    .wrap { max-width: 720px; margin: 0 auto; }
+    h1 { font-size: 1.5rem; margin: 0 0 8px; color: var(--navy); }
+    .sub { color: var(--muted); font-size: 0.95rem; margin-bottom: 24px; }
+    .card {
+      background: var(--card);
+      border-radius: 12px;
+      padding: 20px 22px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.06);
+    }
+    h2 { font-size: 1.1rem; margin: 0 0 12px; color: var(--navy); }
+    h3 { font-size: 0.95rem; margin: 16px 0 8px; color: #334155; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+    th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid #e2e8f0; }
+    th { background: #f1f5f9; font-weight: 600; }
+    .bubble {
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin: 10px 0;
+      white-space: pre-wrap;
+      font-size: 0.95rem;
+    }
+    .bubble.sms { background: var(--sms-bubble); border: 1px solid #bae6fd; }
+    .bubble.wa { background: var(--wa-bubble); border: 1px solid #86efac; }
+    .tag { display: inline-block; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); margin-bottom: 6px; }
+    code { background: #f1f5f9; padding: 2px 6px; border-radius: 4px; font-size: 0.85em; }
+    .note { font-size: 0.88rem; color: var(--muted); border-left: 3px solid var(--accent); padding-left: 12px; margin-top: 12px; }
+    a { color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Nurture flow — WhatsApp &amp; SMS (review)</h1>
+    <p class="sub">
+      Source: <code>api/nurture-cron.js</code> — SMS body text is defined in <code>getSmsMessage()</code>.
+      WhatsApp Phase 1 triggers ManyChat flows via API (message copy lives in ManyChat, not this repo).
+    </p>
+
+    <div class="card">
+      <h2>Schedule (from nurture cron)</h2>
+      <table>
+        <thead>
+          <tr><th>Phase</th><th>Channel</th><th>Timing</th><th>Steps</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>WhatsApp</td>
+            <td>5 hr &amp; 21 hr after enroll</td>
+            <td>2 (ManyChat flows)</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>SMS (Twilio)</td>
+            <td>Day 1, 3, 5 (24h / 72h / 120h from enroll)</td>
+            <td>3 (see below)</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Email (Resend)</td>
+            <td>Weekly × 4</td>
+            <td>Not shown on this page</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2>Phase 1 — WhatsApp</h2>
+      <p class="tag">Implementation</p>
+      <p>
+        The cron calls ManyChat <code>sendFlow</code> with <code>MANYCHAT_FLOW_PHASE1_STEP1</code> and
+        <code>MANYCHAT_FLOW_PHASE1_STEP2</code> (flow namespace per step). The actual user-facing text,
+        buttons, and media are edited <strong>inside ManyChat</strong>, not in Git.
+      </p>
+      <div class="note">
+        To review or change WhatsApp nurture copy: open ManyChat → the flows referenced by those env vars
+        (same names as in <code>.env</code> / Vercel).
+      </div>
+      <h3>Intent (from code comments)</h3>
+      <ul>
+        <li><strong>Step 1 (≈5 hr):</strong> value + book call</li>
+        <li><strong>Step 2 (≈21 hr):</strong> soft check-in</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Phase 2 — SMS (exact strings)</h2>
+      <p class="sub" style="margin-bottom: 16px;">
+        Placeholder name <strong>Maria</strong> — real sends use <code>contact.first_name</code> or first word of <code>full_name</code>, else &quot;there&quot;.
+      </p>
+
+      <p class="tag">Step 1 — Day 1</p>
+      <div class="bubble sms">Hi Maria! This is Julie from Mejor Vida Insurance. You recently asked about final expense coverage — reply QUOTE and I'll send you a free quote link, or reply CALL to schedule a quick chat with me. Reply STOP to unsubscribe.</div>
+
+      <p class="tag">Step 2 — Day 3 (VCF)</p>
+      <div class="bubble sms">Hey Maria, Julie here from Mejor Vida Insurance! Final expense plans start under $30/month — could be a perfect fit. Save my contact so I'm just a tap away 👉 https://www.mejorvidainsurance.com/julie.vcf — then reply QUOTE or CALL. Reply STOP to unsubscribe.</div>
+      <p class="note">
+        If <code>vcf_sent_at</code> is still null, Twilio also sends the vCard as an attachment (<code>MediaUrl</code>) on this step.
+      </p>
+
+      <p class="tag">Step 3 — Day 5 (final SMS)</p>
+      <div class="bubble sms">Hi Maria, Julie from Mejor Vida Insurance checking in one last time. I'd love to help you get covered — just reply QUOTE or CALL and I'll take care of the rest. Reply STOP to unsubscribe.</div>
+    </div>
+
+    <p class="sub" style="margin-top: 24px;">
+      Regenerate or edit this preview by updating <code>email-previews/nurture-wa-sms-review.html</code> when <code>getSmsMessage()</code> changes.
+    </p>
+  </div>
+</body>
+</html>
