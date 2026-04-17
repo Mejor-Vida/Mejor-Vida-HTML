@@ -3,8 +3,8 @@
  * Twilio inbound SMS handler — receives replies from leads.
  *
  * Keyword logic:
- *   QUOTE / COTIZAR  → send email with quote link (or collect email first)
- *   CALL / LLAMAR    → send email with scheduling link (or collect email first)
+ *   QUOTE / COTIZAR  → SMS reply with direct quote link (bilingual)
+ *   CALL / LLAMAR    → SMS reply with HubSpot scheduling link (bilingual)
  *   STOP   → opt-out of SMS, update Supabase
  *   <email address>  → save email, send the pending intent email
  *   anything else    → send a friendly fallback reply
@@ -15,7 +15,7 @@
  * Required env vars:
  *   TWILIO_AUTH_TOKEN, TWILIO_PHONE_NUMBER
  *   SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY
- *   RESEND_API_KEY
+ *   RESEND_API_KEY (still used when lead replies with an email address)
  */
 
 const crypto = require('crypto');
@@ -138,6 +138,10 @@ async function sendNurtureEmail(contact, intent) {
   return json.id;
 }
 
+function isEnglish(contact) {
+  return String(contact?.idioma || contact?.language || '').toLowerCase() === 'english';
+}
+
 // ─── Main handler ─────────────────────────────────────────────────────────────
 module.exports = async function handler(req, res) {
   res.setHeader('Content-Type', 'text/xml');
@@ -175,7 +179,7 @@ module.exports = async function handler(req, res) {
   let contacts;
   try {
     contacts = await sbGet(supabaseUrl, supabaseKey,
-      `/contacts?phone=eq.${encodeURIComponent(fromPhone)}&select=id,first_name,last_name,full_name,email,phone,pending_sms_intent&limit=1`);
+      `/contacts?phone=eq.${encodeURIComponent(fromPhone)}&select=id,first_name,full_name,email,phone,pending_sms_intent,idioma,language&limit=1`);
   } catch (err) {
     console.error('[sms-webhook] Contact lookup error:', err.message);
     return res.status(200).send(twiml('Sorry, we had a technical issue. Please try again shortly.'));
@@ -197,42 +201,26 @@ module.exports = async function handler(req, res) {
     return res.status(200).send(twimlEmpty());
   }
 
-  // ── QUOTE or CALL ─────────────────────────────────────────────────────────
+  // ── QUOTE or CALL — direct SMS links (bilingual) ───────────────────────────
   if (keyword === 'QUOTE' || keyword === 'CALL') {
-    const intent = keyword.toLowerCase(); // 'quote' or 'call'
+    const english    = contact ? isEnglish(contact) : false;
+    const quoteUrl   = 'https://www.mejorvidainsurance.com/quote-screen.html';
+    const scheduleEs = 'https://meetings-na2.hubspot.com/julie-braunsroth';
+    const scheduleEn = 'https://meetings-na2.hubspot.com/julie-braunsroth/insurance-consultation-mejor-vida-insurance';
 
-    if (!contact) {
-      // Unknown number — ask for email to get started
-      return res.status(200).send(twiml(
-        `Hi! I'm Julie from Mejor Vida Insurance. I'd love to help! What's your email address so I can send you the link?`
-      ));
+    if (keyword === 'QUOTE') {
+      const msg = english
+        ? `Here's your free quote link: ${quoteUrl} — it only takes a few minutes!`
+        : `Aquí está tu enlace para obtener una cotización gratis: ${quoteUrl} — ¡solo toma unos minutos!`;
+      return res.status(200).send(twiml(msg));
     }
 
-    if (contact.email) {
-      // We have their email — send the link right now
-      try {
-        await sendNurtureEmail(contact, intent);
-        const msg = intent === 'quote'
-          ? `Great! I just sent your free quote link to ${contact.email}. Let me know if you have any questions!`
-          : `Perfect! I just sent your scheduling link to ${contact.email}. Can't wait to chat!`;
-        return res.status(200).send(twiml(msg));
-      } catch (err) {
-        console.error('[sms-webhook] Email send error:', err.message);
-        return res.status(200).send(twiml(`I had trouble sending the email. Please call me directly at 402-735-5665 and I'll help you right away!`));
-      }
-    } else {
-      // No email — ask for it and store the pending intent
-      try {
-        await sbPatch(supabaseUrl, supabaseKey,
-          `/contacts?id=eq.${contact.id}`,
-          { pending_sms_intent: intent, updated_at: new Date().toISOString() });
-      } catch (err) {
-        console.error('[sms-webhook] Pending intent save error:', err.message);
-      }
-      const ask = intent === 'quote'
-        ? `Great! What's your email address? I'll send you the free quote link right away.`
-        : `Perfect! What's your email address? I'll send you the scheduling link right away.`;
-      return res.status(200).send(twiml(ask));
+    if (keyword === 'CALL') {
+      const link = english ? scheduleEn : scheduleEs;
+      const msg  = english
+        ? `Here's your link to schedule a call with Julie: ${link}`
+        : `Aquí está tu enlace para agendar una llamada con Julie: ${link}`;
+      return res.status(200).send(twiml(msg));
     }
   }
 
@@ -273,6 +261,6 @@ module.exports = async function handler(req, res) {
 
   // ── Fallback ──────────────────────────────────────────────────────────────
   return res.status(200).send(twiml(
-    `Hi! This is Julie from Mejor Vida Insurance. Reply QUOTE for a free quote, CALL to schedule a chat, or STOP to unsubscribe.`
+    `Hola! Soy Julie de Mejor Vida Insurance. Responde COTIZAR para una cotización gratis, LLAMAR para agendar una llamada, o STOP para cancelar. / Hi! Reply QUOTE for a free quote, CALL to schedule a chat, or STOP to unsubscribe.`,
   ));
 };
