@@ -21,11 +21,13 @@
  * Returns:
  *   { success: true, contact_id: "...", created: true|false }
  *
- * Env: SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, MANYCHAT_WEBHOOK_SECRET
+ * Env: SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, MANYCHAT_WEBHOOK_SECRET,
+ *      HUBSPOT_ACCESS_TOKEN, HUBSPOT_PIPELINE_ID (optional HubSpot sync after intake)
  */
 
 const { verifyManychatSecret, logRequest } = require("../lib/manychat-auth");
 const { upsertContact, upsertLeadState, insertEvent, logWebhook } = require("../lib/contacts-db");
+const { syncContactToHubspot } = require("../lib/hubspot-sync-lib");
 
 function json(res, status, payload) {
   res.status(status).setHeader("Content-Type", "application/json");
@@ -132,6 +134,14 @@ module.exports = async function handler(req, res) {
 
     // Nurture enrollment is deferred: /api/nurture-enroll-cron enrolls contacts
     // after a quiet period so contact-capture + lead-intake cannot double-enroll.
+
+    const hubspotToken = process.env.HUBSPOT_ACCESS_TOKEN;
+    const pipelineId = process.env.HUBSPOT_PIPELINE_ID || "default";
+    if (hubspotToken) {
+      syncContactToHubspot(supabaseUrl, supabaseKey, hubspotToken, pipelineId, contactId).catch((e) =>
+        console.error("[lead-intake] hubspot-sync error:", e.message),
+      );
+    }
 
     return json(res, 200, { success: true, contact_id: contactId, created });
   } catch (e) {
