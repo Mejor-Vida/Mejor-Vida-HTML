@@ -29,7 +29,8 @@
  *   TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN,
  *   TWILIO_MESSAGING_SERVICE_SID (A2P Messaging Service MG…; preferred for Phase 2 SMS),
  *   TWILIO_PHONE_NUMBER (E.164 fallback if Messaging Service SID not set),
- *   RESEND_API_KEY, MANYCHAT_FLOW_PHASE1_STEP1/STEP2, CRON_SECRET
+ *   MANYCHAT_API_KEY (Bearer for sendFlow), MANYCHAT_FLOW_PHASE1_STEP1/STEP2,
+ *   RESEND_API_KEY, CRON_SECRET
  */
 
 const SCHEDULE_HOURS = {
@@ -171,10 +172,13 @@ async function sendWhatsApp(contact, nurtureRow, step) {
   const flowNs = process.env[`MANYCHAT_FLOW_PHASE1_STEP${step}`];
   if (!flowNs) return { ok: false, reason: `missing_MANYCHAT_FLOW_PHASE1_STEP${step}` };
 
+  const manychatApiKey = process.env.MANYCHAT_API_KEY;
+  if (!manychatApiKey) return { ok: false, reason: 'missing_MANYCHAT_API_KEY' };
+
   const res = await fetch('https://api.manychat.com/fb/sending/sendFlow', {
     method:  'POST',
     headers: {
-      Authorization:  `Bearer ${process.env.MANYCHAT_WEBHOOK_SECRET}`,
+      Authorization:  `Bearer ${manychatApiKey}`,
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({ subscriber_id: subscriberId, flow_ns: flowNs }),
