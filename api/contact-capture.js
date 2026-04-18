@@ -43,8 +43,10 @@ function resolveManyChat(val) {
 async function handleInitialContact(body, supabaseUrl, supabaseKey, hubspotToken, res) {
   const firstName = String(body.first_name || body.name || "").trim().split(" ")[0].slice(0, 200) || null;
   const lastName = String(body.last_name || "").trim().slice(0, 200) || null;
-  const phone = String(body.phone || "").trim().slice(0, 40);
-  const whatsappId = String(body.whatsapp_id || "").trim() || null;
+  const phone = (
+    resolveManyChat(String(body.phone || "").trim()) || resolveManyChat(String(body.whatsapp_id || "").trim())
+  ).slice(0, 40);
+  const whatsappId = resolveManyChat(String(body.whatsapp_id || "").trim()) || null;
 
   if (!phone) {
     return json(res, 400, { success: false, error: "phone required" });
