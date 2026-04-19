@@ -165,33 +165,6 @@ ${vcfPs}`),
 
 // ─── Phase 1: WhatsApp via ManyChat ──────────────────────────────────────────
 
-/**
- * Look up a ManyChat subscriber ID by WhatsApp phone number.
- * ManyChat stores WhatsApp contacts under the "whatsapp_phone" system field.
- * Returns the subscriber ID string, or null if not found.
- */
-async function findManyChatSubscriberByPhone(apiKey, phone) {
-  const normalizedPhone = /^\+/.test(String(phone)) ? phone : `+${phone}`;
-  try {
-    const res = await fetch(
-      `https://api.manychat.com/fb/subscriber/findBySystemField?field_name=whatsapp_phone&field_value=${encodeURIComponent(normalizedPhone)}`,
-      {
-        headers: {
-          Authorization:  `Bearer ${apiKey}`,
-          'Content-Type': 'application/json',
-        },
-      },
-    );
-    const json = await res.json();
-    if (json.status === 'success' && json.data && json.data.id) {
-      return String(json.data.id);
-    }
-    return null;
-  } catch (_) {
-    return null;
-  }
-}
-
 async function sendWhatsApp(contact, nurtureRow, step) {
   const flowNs = process.env[`MANYCHAT_FLOW_PHASE1_STEP${step}`];
   if (!flowNs) return { ok: false, reason: `missing_MANYCHAT_FLOW_PHASE1_STEP${step}` };
@@ -199,21 +172,14 @@ async function sendWhatsApp(contact, nurtureRow, step) {
   const manychatApiKey = process.env.MANYCHAT_API_KEY;
   if (!manychatApiKey) return { ok: false, reason: 'missing_MANYCHAT_API_KEY' };
 
-  const rawId = nurtureRow.manychat_subscriber_id || contact.whatsapp_id;
-  const phone = contact.phone || rawId;
-
-  // If rawId looks like a phone number (all digits, 10–15 chars) rather than a
-  // real ManyChat subscriber ID, resolve it via ManyChat's subscriber lookup API.
-  let subscriberId = rawId;
-  if (!rawId || /^\d{10,15}$/.test(String(rawId).replace(/\D/g, '')) && String(rawId).replace(/\D/g, '').length >= 10) {
-    if (!phone) return { ok: false, reason: 'no_phone_or_subscriber_id' };
-    console.log(`[nurture] Resolving ManyChat subscriber for phone ${phone}…`);
-    subscriberId = await findManyChatSubscriberByPhone(manychatApiKey, phone);
-    if (!subscriberId) {
-      console.warn(`[nurture] No ManyChat subscriber found for phone ${phone} — skipping WhatsApp send`);
-      return { ok: false, reason: 'subscriber_not_found_in_manychat' };
-    }
-    console.log(`[nurture] Resolved ManyChat subscriber ID: ${subscriberId}`);
+  // Use the real ManyChat subscriber ID stored at capture time (contacts.manychat_subscriber_id).
+  // nurture_sequence.manychat_subscriber_id is populated from that field at enrollment.
+  // Falls back to contact field in case enrollment predated this fix.
+  const subscriberId = nurtureRow.manychat_subscriber_id || contact.manychat_subscriber_id || null;
+  if (!subscriberId) {
+    console.warn(`[nurture] No ManyChat subscriber ID for contact ${contact.id} — WhatsApp send skipped. ` +
+      `Ensure ManyChat flow sends {{id}} in the External Request body.`);
+    return { ok: false, reason: 'no_manychat_subscriber_id' };
   }
 
   const res = await fetch('https://api.manychat.com/fb/sending/sendFlow', {
@@ -329,7 +295,7 @@ module.exports = async function handler(req, res) {
   let dueRows;
   try {
     dueRows = await sbFetch(
-      `/nurture_sequence?select=*,contacts(id,first_name,last_name,full_name,email,phone,whatsapp_id,vcf_sent_at,language)` +
+      `/nurture_sequence?select=*,contacts(id,first_name,last_name,full_name,email,phone,whatsapp_id,manychat_subscriber_id,vcf_sent_at,language)` +
       `&status=eq.active&next_send_at=lte.${encodeURIComponent(now.toISOString())}&limit=100`
     );
   } catch (err) {

@@ -47,6 +47,8 @@ async function handleInitialContact(body, supabaseUrl, supabaseKey, hubspotToken
     resolveManyChat(String(body.phone || "").trim()) || resolveManyChat(String(body.whatsapp_id || "").trim())
   ).slice(0, 40);
   const whatsappId = resolveManyChat(String(body.whatsapp_id || "").trim()) || null;
+  // ManyChat sends {{id}} as the real subscriber ID — capture it if provided
+  const manychatSubscriberId = resolveManyChat(String(body.subscriber_id || body.manychat_id || "").trim()) || null;
 
   if (!phone) {
     return json(res, 400, { success: false, error: "phone required" });
@@ -102,6 +104,7 @@ async function handleInitialContact(body, supabaseUrl, supabaseKey, hubspotToken
       first_name: firstName,
       last_name: lastName,
       whatsapp_id: whatsappId,
+      ...(manychatSubscriberId ? { manychat_subscriber_id: manychatSubscriberId } : {}),
       source: "whatsapp",
     });
 

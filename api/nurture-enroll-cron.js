@@ -64,7 +64,7 @@ module.exports = async function handler(req, res) {
     for (const ids of chunk(contactIds, 40)) {
       const inList = ids.join(",");
       const cRes = await fetch(
-        `${base}/contacts?id=in.(${inList})&created_at=lte.${encodeURIComponent(thirtyMinAgo)}&select=id,phone,whatsapp_id,created_at`,
+        `${base}/contacts?id=in.(${inList})&created_at=lte.${encodeURIComponent(thirtyMinAgo)}&select=id,phone,whatsapp_id,manychat_subscriber_id,created_at`,
         { headers: sbHeaders(supabaseKey) },
       );
       const cText = await cRes.text();
@@ -95,7 +95,8 @@ module.exports = async function handler(req, res) {
 
     const rows = toEnroll.map((c) => ({
       contact_id: c.id,
-      manychat_subscriber_id: c.whatsapp_id || null,
+      // Use the real ManyChat subscriber ID captured at webhook time (not the phone number)
+      manychat_subscriber_id: c.manychat_subscriber_id || null,
       status: "active",
       phase: 1,
       step: 1,
