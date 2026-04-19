@@ -86,8 +86,16 @@
     .nav-link-cm:hover {
       color: #2563eb;
     }
+
+    .nav-link-cm.nav-link-schedule-wrap {
+      white-space: normal !important;
+      max-width: 5.75rem;
+      text-align: center;
+      line-height: 1.25;
+      align-self: center;
+    }
     
-    /* See Prices button - yellow/orange */
+    /* Header free-quote CTA - yellow/orange */
     .btn-see-prices {
       background-color: #FEC963;
       color: #1a202c;

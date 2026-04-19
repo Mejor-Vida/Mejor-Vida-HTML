@@ -14,6 +14,7 @@ const crypto = require("crypto");
 const { verifySiteOrigin } = require("../lib/site-origin");
 const { logRequest } = require("../lib/manychat-auth");
 const { runRagPipeline } = require("../lib/rag-pipeline");
+const { normalizeAssistantLanguage } = require("../lib/assistant-language");
 
 function json(res, status, payload) {
   res.status(status).setHeader("Content-Type", "application/json");
@@ -28,26 +29,6 @@ function readJsonBody(req) {
 function localeToLanguage(locale) {
   const l = String(locale || "").toLowerCase();
   if (l === "es" || l.startsWith("es")) return "Spanish";
-  return "English";
-}
-
-function normalizeAssistantLanguage(raw) {
-  const s = String(raw || "").trim();
-  if (!s) return "English";
-  const low = s.toLowerCase();
-  if (
-    low === "es" ||
-    low === "spanish" ||
-    low === "español" ||
-    low === "espanol" ||
-    low.startsWith("es-") ||
-    low.startsWith("es_")
-  ) {
-    return "Spanish";
-  }
-  if (low === "en" || low === "english" || low.startsWith("en-") || low.startsWith("en_")) {
-    return "English";
-  }
   return "English";
 }
 
@@ -164,9 +145,9 @@ module.exports = async function handler(req, res) {
   }
 
   const question = String(body.question || body.message || "").trim();
-  language = body.language
-    ? String(body.language).trim()
-    : localeToLanguage(body.locale);
+  language = normalizeAssistantLanguage(
+    body.language ? String(body.language).trim() : localeToLanguage(body.locale),
+  );
   const phone =
     body.phone ||
     (body.contact && body.contact.phone) ||

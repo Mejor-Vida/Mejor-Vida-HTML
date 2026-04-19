@@ -1,0 +1,40 @@
+---
+description: MVS agent workflow — Playwright + APIs + screenshots for navigation and task completion
+alwaysApply: true
+---
+
+# MVS Agent — Browser, API & Screenshot Workflow
+
+## Tool selection (use the right tool first)
+
+| Need | Use | Why |
+|------|-----|-----|
+| **CRM / leads** | HubSpot REST API (`HUBSPOT_ACCESS_TOKEN`) or Supabase via Vercel routes | No Google Sheets in this repo |
+| **Data from Make.com / ManyChat** | HTTP API with tokens from `.env.local` | Direct, reliable |
+| **HubSpot CRM data** | HubSpot REST API with `HUBSPOT_ACCESS_TOKEN` | Prefer API over UI when scopes allow |
+| **Create/config Make.com scenario** | Playwright + screenshots | No full API for scenario builder |
+| **Navigate unknown UI** | Screenshots + Playwright | Vision understands layout; click what you see |
+
+## Screenshot → Analyze → Act loop
+
+When using Playwright for UI tasks:
+
+1. **Navigate** — Go to the page (e.g. app.hubspot.com, make.com).
+2. **Screenshot** — Capture the current view. Use it to see buttons, forms, labels.
+3. **Analyze** — Identify the next action from the screenshot (click here, type there).
+4. **Act** — Use Playwright: `page.click()`, `page.fill()`, `setInputFiles()` when a file import UI requires it.
+5. **Repeat** — Screenshot again after each significant action. Don't assume; verify.
+6. **Stop** — When the task is complete (import confirmed, scenario saved, etc.).
+
+## File upload (when the product only offers a web import)
+
+- Prefer **API or native integration** when available.
+- For file-picker UIs: **`page.locator('input[type="file"]').setInputFiles(csv_path)`** (or framework equivalent).
+- If drop zone blocks: try `page.getByLabel(/drop|upload|import|file/i)` or the nearest file input.
+
+## Failure handling
+
+- **Click/selector failed** → Screenshot again; try different selector (role, aria-label, text).
+- **404 or wrong page** → Navigate from current page via UI clicks, not guessed URLs.
+- **Browser slow** → Wait before failing; retry once.
+- **Browser blocked** → Fall back to API or script. See `integrations/AGENT_ACCESS.md`.

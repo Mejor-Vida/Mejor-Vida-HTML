@@ -1,0 +1,24 @@
+Julie Cartoon with Face — Master (v1)
+=====================================
+Preserved: 2026-03-15
+DO NOT OVERWRITE. This is the reference "good" image.
+
+Pipeline:
+  1. Face source: Julie.png (real photo)
+  2. Body reference: julie_cartoon_body_reference.png (heavier set, teal blazer, park)
+  3. Face swap: Easel AI (user_hair=Julie's hair, detailer=true)
+  4. Style transfer: fal-ai/image-apps-v2/style-transfer, target_style: cartoon_3d
+
+Script: tools/julie_cartoon_with_face.py
+  python3 tools/julie_cartoon_with_face.py
+
+Settings for better likeness:
+  --workflow user_hair   (preserve Julie's hair from her photo)
+  --style cartoon_3d    (or cartoon_animation, hand_drawn_animation)
+  Default: Julie.png, user_hair, cartoon_3d
+
+Inputs:
+  - img/Julie.png
+  - img/julie_cartoon_body_reference.png
+
+Output: julie_cartoon_with_face.png (also in lora-generated/)

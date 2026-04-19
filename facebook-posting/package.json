@@ -1,0 +1,16 @@
+{
+  "name": "mejor-vida-facebook-posting",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "generate-canva-bg": "node scripts/generate_fal_canva_backgrounds.mjs",
+    "generate-mom-emotional-01": "node scripts/generate_mom_emotional_01_clean.mjs"
+  },
+  "dependencies": {
+    "@fal-ai/client": "^1.2.0",
+    "dotenv": "^16.4.5"
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "name": "mvi-ad-test-runner",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "db:generate": "prisma generate",
+    "db:migrate": "prisma migrate dev",
+    "db:seed": "tsx prisma/seed.ts",
+    "split-html:backfill": "tsx scripts/backfill-split-html.ts",
+    "setup:local": "prisma migrate deploy && prisma generate && playwright install chromium",
+    "postinstall": "prisma generate",
+    "playwright:install": "playwright install chromium"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.22.0",
+    "dotenv": "^17.4.2",
+    "next": "16.2.4",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "sharp": "^0.34.5",
+    "zod": "^4.3.6"
+  },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@types/sharp": "^0.31.1",
+    "eslint": "^9",
+    "eslint-config-next": "16.2.4",
+    "playwright": "^1.59.1",
+    "prisma": "^5.22.0",
+    "tailwindcss": "^4",
+    "tsx": "^4.21.0",
+    "typescript": "^5"
+  }
+}

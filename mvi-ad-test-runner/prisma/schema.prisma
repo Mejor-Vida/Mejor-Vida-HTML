@@ -1,0 +1,129 @@
+// MVI Ad Test Runner — SQLite (Prisma 5). JSON + enum-like values stored as String for broad compatibility.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Project {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  rounds      Round[]
+  imports     ImportSource[]
+}
+
+model Round {
+  id        String  @id @default(cuid())
+  projectId String
+  project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  /// HOOK_TEST | IMAGE_TEST | TEMPLATE_TEST
+  type         String
+  name         String
+  objective    String?
+  audience     String @default("{}")
+  budget       String @default("{}")
+  schedule     String @default("{}")
+  testVariable String @default("hook")
+
+  /// SIMULTANEOUS | STAGGERED | SEQUENTIAL
+  scheduleMode String @default("SIMULTANEOUS")
+  /// DRAFT | READY | SCHEDULED | RUNNING | COMPLETED | WINNER_SELECTED
+  status       String @default("DRAFT")
+  /// PrimaryMetric union — see README
+  primaryMetric String @default("COST_PER_WHATSAPP")
+  metricWeights String?
+
+  notes String?
+
+  parentRoundId String?
+  parentRound   Round?  @relation("RoundTree", fields: [parentRoundId], references: [id])
+  childRounds   Round[] @relation("RoundTree")
+
+  winnerVariantId String? @unique
+  winnerVariant   Variant? @relation("RoundWinner", fields: [winnerVariantId], references: [id])
+
+  lockedHookText String?
+  lockedImageKey String?
+
+  variants    Variant[]
+  results     RoundResult[]
+  submissions FacebookSubmission[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Variant {
+  id      String @id @default(cuid())
+  roundId String
+  round   Round  @relation(fields: [roundId], references: [id], onDelete: Cascade)
+
+  label        String?
+  hookText     String?
+  bulletText   String?
+  ctaText      String?
+  headlineSize Int?
+
+  imagePath   String?
+  previewPath String?
+  sourcePath  String?
+
+  metadata String @default("{}")
+
+  facebookCreativeId String?
+  facebookAdId       String?
+
+  sortOrder Int @default(0)
+
+  results  RoundResult[]
+  wonRound Round?      @relation("RoundWinner")
+}
+
+model RoundResult {
+  id      String @id @default(cuid())
+  roundId String
+  round   Round  @relation(fields: [roundId], references: [id], onDelete: Cascade)
+
+  variantId String
+  variant   Variant @relation(fields: [variantId], references: [id], onDelete: Cascade)
+
+  metrics       String @default("{}")
+  weightedScore Float?
+  recordedAt    DateTime @default(now())
+
+  @@unique([roundId, variantId])
+}
+
+model FacebookSubmission {
+  id      String @id @default(cuid())
+  roundId String
+  round   Round  @relation(fields: [roundId], references: [id], onDelete: Cascade)
+
+  status  String
+  dryRun  Boolean @default(true)
+  payload String @default("{}")
+
+  fingerprint String?
+  error       String?
+  createdAt   DateTime @default(now())
+}
+
+model ImportSource {
+  id        String  @id @default(cuid())
+  projectId String?
+  project   Project? @relation(fields: [projectId], references: [id], onDelete: SetNull)
+
+  originalName String
+  storedPath   String
+  headlines    String
+
+  createdAt DateTime @default(now())
+}

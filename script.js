@@ -55,6 +55,10 @@ document.addEventListener('DOMContentLoaded', function() {
     // Save preference for same-tab navigation (resets on reload logic below)
     sessionStorage.setItem('sessionLang', lang);
 
+    window.dispatchEvent(
+      new CustomEvent('mvi-site-language', { detail: { code: lang } }),
+    );
+
     // Keep floating WhatsApp label language-aware.
     updateFloatingWhatsAppLabel(lang);
 
@@ -78,6 +82,12 @@ document.addEventListener('DOMContentLoaded', function() {
     btn.addEventListener('click', () => {
       setLanguage(btn.dataset.langBtn);
     });
+  });
+
+  window.addEventListener('mvi-assistant-language', function (e) {
+    const code = e.detail && e.detail.code;
+    if (code !== 'en' && code !== 'es') return;
+    setLanguage(code);
   });
 
   // ========================================

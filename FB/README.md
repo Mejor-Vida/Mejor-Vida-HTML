@@ -8,4 +8,6 @@
 
 After you edit the caption in `main.py`, run any of the above once; then open **`post-preview.html`** in your browser (inside **`Mejor-Vida-HTML/FB`**, not a different `FB` folder on your Desktop).
 
-This file is generated and git-ignored so it is not committed.
+The preview shows a **dated banner** (from `weekly-insurance-update-YYYY-MM-DD` in the blog URL) and also writes **`post-preview-YYYY-MM-DD.html`** with the same content so you can keep older weeks side by side.
+
+These files are generated and git-ignored so they are not committed.

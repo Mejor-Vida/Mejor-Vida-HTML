@@ -1,0 +1,8 @@
+.venv/
+__pycache__/
+*.pyc
+.env
+.env.local
+chromium_profile/
+.pause_browser_use
+.browser_agent_session.json

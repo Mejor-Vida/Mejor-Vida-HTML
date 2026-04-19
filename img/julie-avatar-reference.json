@@ -1,0 +1,13 @@
+{
+  "description": "Julie Avatar - reference for future images and videos. Locked for Kling O1 Elements.",
+  "image": "julie_avatar.jpg",
+  "julie_avatar_lock": "Julie_Avatar.png",
+  "prompt": "(9:16 portrait) A full body **3D Pixar-style character render** of julie_mv. **Body build: A blocky, wide, rectangular upper-torso with very broad shoulders.** Her waist is wide and straight with no curves. **Proportions: Top-heavy build with a thick frame that tapers down to very thin, skinny legs.** She is wearing a navy blue business suit. **Style: Clean 3D cartoon, smooth matte surfaces, simple features, no realism.** Standing in an office, feet visible. (Trigger: julie_mv). **8k, Octane Render.**",
+  "trigger": "julie_mv",
+  "seed": 5508769720964102000,
+  "aspect_ratio": "9:16 portrait",
+  "body_build": "Blocky, wide, rectangular upper-torso, very broad shoulders, wide straight waist, no curves, top-heavy, thick frame, thin skinny legs",
+  "style": "3D Pixar-style, clean cartoon, smooth matte surfaces, simple features, no realism",
+  "original_url": "https://v3b.fal.media/files/b/0a92840b/jk5WOTJLAueKPD-CGfOYV_6ba1f3ed8420444eb3646e64a8188316.jpg",
+  "elevenlabs_voice_id": "FalLEKHJXUP87G7DLPfk"
+}

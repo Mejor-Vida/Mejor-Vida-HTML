@@ -1,0 +1,23 @@
+---
+description: Context window limits and compaction — agent self-awareness for long conversations
+alwaysApply: true
+---
+
+# Context Compaction — MVS Agent
+
+## When context compacts
+
+- **Roughly 150–200 messages** or when total content nears the model's context limit.
+- **Screenshots and tool output** (grep, file reads, terminal) consume much more space than text.
+- Long, screenshot-heavy sessions compact sooner than text-only chats.
+
+## What compaction does
+
+- Older conversation is summarized; recent messages stay full.
+- Work can resume, but fine detail from early in the chat may be lost.
+
+## Agent behavior
+
+1. **If the user refers to something from earlier** and you don't have it in context, explain that it may have been compacted and ask them to re-share or summarize.
+2. **For very long, multi-part tasks** (many screenshots, many steps), consider suggesting a fresh chat if context feels strained.
+3. **Don't assume** you remember everything from the start of the session — re-verify critical details when needed.

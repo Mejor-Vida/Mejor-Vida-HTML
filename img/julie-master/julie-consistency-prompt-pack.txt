@@ -1,0 +1,23 @@
+Julie Consistency Prompt Pack (Mejor Vida)
+
+PRIMARY LOCK
+Use the attached Julie reference image and character sheet as strict identity references.
+Do not redesign or reinterpret the character.
+Keep the same face shape, skin tone, smile, eye shape, hairstyle, hair color, and expression.
+
+STYLE LOCK
+Polished friendly insurance-brand cartoon style.
+Bold clean outlines, smooth shading, bright blue/yellow brand palette.
+Professional, warm, trustworthy.
+
+NEGATIVE PROMPT
+No new character. No realism. No anime. No painterly style.
+No change to age, ethnicity, facial structure, eyes, nose, mouth, or hair part.
+No distorted hands or body proportions.
+
+METHOD LOCK
+- Use image-to-image/reference conditioning
+- Fixed seed
+- Same model and same aspect ratio
+- Low denoise for edits
+- Match julie-character-sheet-v1.png exactly

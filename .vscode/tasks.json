@@ -1,0 +1,67 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Refresh Facebook preview",
+      "type": "shell",
+      "command": "python3 main.py --dry-run",
+      "options": {
+        "cwd": "${workspaceFolder}/facebook-posting",
+        "env": {}
+      },
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "silent",
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "MVI Ad Test Runner: dev server",
+      "type": "shell",
+      "command": "npm run dev",
+      "options": {
+        "cwd": "${workspaceFolder}/mvi-ad-test-runner",
+        "env": {}
+      },
+      "problemMatcher": [],
+      "isBackground": true,
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      }
+    },
+    {
+      "label": "MVI Ad Test Runner: migrate + generate",
+      "type": "shell",
+      "command": "npx prisma migrate deploy && npx prisma generate",
+      "options": {
+        "cwd": "${workspaceFolder}/mvi-ad-test-runner"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "MVI Ad Test Runner: split HTML backfill",
+      "type": "shell",
+      "command": "npm run split-html:backfill",
+      "options": {
+        "cwd": "${workspaceFolder}/mvi-ad-test-runner"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Facebook preview: dev (auto watch + HTTP)",
+      "type": "shell",
+      "command": "python3 dev_preview.py",
+      "options": {
+        "cwd": "${workspaceFolder}/facebook-posting"
+      },
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      }
+    }
+  ]
+}

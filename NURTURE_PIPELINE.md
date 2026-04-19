@@ -5,58 +5,91 @@ This document is the **design source of truth** for the automated nurture system
 
 ---
 
-## Design principles
+## Trigger (post–language opt-in)
 
-1. **Immediate post-quote email** replaces the old **30-minute WhatsApp** touchpoint. As soon as the MVI Chatflow finishes a quote, **`POST /api/post-quote-email`** sends the quote email (with schedule CTA, VCF link, and conditional copy if a call was already booked).
-2. **Phase 1 WhatsApp** has **two steps only**: **5 hours** and **21 hours** after opt-in (enrollment). No 30-minute step, no VCF-only WhatsApp step.
-3. **VCF (Julie’s contact card)** is delivered **via email and SMS only** — not as a dedicated WhatsApp template step. The post-quote email includes the VCF link; SMS phase can attach the VCF; **`/api/call-scheduled-webhook`** sends a **VCF reminder SMS** after scheduling.
-4. **Smart flags** (stored in Supabase, used by cron and templates) align with **`NURTURE_CONTENT.md`**:
-   - **`has_quote`** → `lead_state.quote_generated_at` (set when quote exists in flow)
-   - **`has_scheduled_call`** → `lead_state.call_scheduled_at` (HubSpot / scheduler)
-   - **`vcf_sent_at`** → `contacts.vcf_sent_at` (set when VCF is considered delivered via email/SMS path)
+1. Lead completes the **WhatsApp MVI Chatflow** → quote is generated.
+2. ManyChat immediately fires **`POST /api/post-quote-email`** (already wired in ManyChat).
+3. The **immediate email** (Resend) includes:
+   - Quote range (when provided)
+   - Short explanation of the process
+   - Appointment block **if** a call was already scheduled
+   - **VCF download link** (`julie.vcf`) so the lead can save Julie’s contact
 
----
-
-## Phase 0 — Immediate post-quote email (not WhatsApp)
-
-| Trigger | Route | Notes |
-|--------|--------|--------|
-| Quote generated in MVI Chatflow | **`POST /api/post-quote-email`** | ManyChat External Request; **Resend**; requires `phone`, contact must have **email** in Supabase |
-
-This replaces the **first WhatsApp** touchpoint. Copy and placeholders: **`NURTURE_CONTENT.md` → Immediate Post-Quote Email**.
+This instant email replaces any legacy **30-minute WhatsApp** first touch.
 
 ---
 
-## Phase 1 — WhatsApp (2 steps, first 24 hours)
+## Smart logic flags
 
-All WhatsApp messages use **Meta-approved templates** in ManyChat. The 24-hour session window applies from the first user message / opt-in.
+| Flag | Supabase field | Set when |
+|------|----------------|----------|
+| **has_quote** | `lead_state.quote_generated_at` | Quote generated in the MVI Chatflow |
+| **has_scheduled_call** | `lead_state.call_scheduled_at` | Lead books via HubSpot (or equivalent scheduler) |
+| **vcf_sent_at** | `contacts.vcf_sent_at` | VCF has been delivered through **any** supported channel (email link, SMS/MMS, post-call SMS, etc.) |
 
-| Step | Timing (from enrollment) | Env var | Role |
-|------|--------------------------|---------|------|
-| **WA-1** | **5 hours** | `MANYCHAT_FLOW_PHASE1_STEP1` | Value + book call (replaces legacy “30 min” / “day 1” step) |
-| **WA-2** | **21 hours** | `MANYCHAT_FLOW_PHASE1_STEP2` | Soft check-in before window closes |
-
-**There is no Step 3 or Step 4** for Phase 1 WhatsApp. Do not configure `MANYCHAT_FLOW_PHASE1_STEP3` or `STEP4`.
-
-**Cron:** `api/nurture-cron.js` uses `SCHEDULE_HOURS[1] = { 1: 5, 2: 21 }` and `MAX_STEPS[1] = 2`.  
-**Enrollment:** `api/lead-intake.js` sets `nurture_sequence.next_send_at` to **now + 5 hours** for new contacts (first WA step).
-
-**Template names** in ManyChat (e.g. `nurture_day3`, `nurture_day_5`) are **legacy labels** — they may still be used inside the two flows above; naming does not imply “day 3” calendar timing.
+Cron and templates use these flags for branching (see phases below).
 
 ---
 
-## Phase 2 — SMS (Twilio)
+## Phase 1 — WhatsApp (2 messages only)
 
-**After** the WhatsApp phase completes (or as parallel channel per policy), **three SMS touches** at **24h / 72h / 120h** from enrollment (days 1 / 3 / 5 in hour offsets). Inbound replies: **`QUOTE`**, **`CALL`**, **`STOP`**, free-text **email** for pending intent. Implemented in **`api/sms-webhook.js`**.
+Uses **Meta-approved templates** in ManyChat. Timing is from **`nurture_sequence.enrolled_at`** (set when **`/api/lead-intake`** enrolls the contact; first send at **5 hours**).
 
-Copy and logic: **`NURTURE_CONTENT.md`** — SMS sections; **do not duplicate** long copy in this file.
+| Step | When | ManyChat template (in flow) | Env var |
+|------|------|----------------------------|---------|
+| **1** | **5 hours** | `nurture_day3` | `MANYCHAT_FLOW_PHASE1_STEP1` |
+| **2** | **21 hours** | `nurture_day_5` | `MANYCHAT_FLOW_PHASE1_STEP2` |
+
+**Smart logic**
+
+- If **`lead_state.call_scheduled_at`** is set before Step 2 would send, **do not send Step 2**; the nurture run treats the lead as **converted** and stops the sequence (see `api/nurture-cron.js`).
+- **VCF is not sent via WhatsApp** — WhatsApp cannot reliably save a `.vcf` file in the customer’s contacts; VCF is handled in **email and SMS** only (see [VCF delivery channels](#vcf-delivery-channels-julievcf) below).
+
+**Code reference:** `SCHEDULE_HOURS[1] = { 1: 5, 2: 21 }`, `MAX_STEPS[1] = 2`; `api/lead-intake.js` sets `next_send_at` to **now + 5 hours** for new enrollments.
 
 ---
 
-## Phase 3 — Email (Resend)
+## Phase 2 — SMS via Twilio (days 1, 3, 5)
 
-**Four weekly emails** (hour offsets from enrollment in cron). **Week 1** email may include VCF P.S. when `vcf_sent_at` is null.  
-Implemented in **`api/nurture-cron.js`** (`getEmailContent`). Full HTML/subject copy: **`NURTURE_CONTENT.md`**.
+Hour offsets from **`enrolled_at`**: **24h / 72h / 120h** (calendar days 1, 3, 5). Inbound replies are handled by **`api/sms-webhook.js`** (`QUOTE`, `CALL`, `STOP`, and email collection).
+
+**Smart logic**
+
+| Step | Offset | Behavior |
+|------|--------|----------|
+| **1** | 24h | Message adapts using **`has_quote`** and **`has_scheduled_call`** (via `quote_generated_at` / `call_scheduled_at`). |
+| **2** | 72h | Includes **VCF as MMS** (`MediaUrl` → `julie.vcf` URL) **only if** `contacts.vcf_sent_at` is **null**; otherwise text-only. |
+| **3** | 120h | **Skipped** (no send) if `call_scheduled_at` is set (`getSmsMessage` returns null for step 3 when a call is scheduled). |
+
+Long-form SMS copy: **`NURTURE_CONTENT.md`** (SMS sections).
+
+**Code reference:** `SCHEDULE_HOURS[2] = { 1: 24, 2: 72, 3: 120 }`, `MAX_STEPS[2] = 3`.
+
+---
+
+## Phase 3 — Email via Resend (weeks 1–4)
+
+Hour offsets from **`enrolled_at`**: **168 / 336 / 504 / 672** (weeks 1–4).
+
+**Smart logic**
+
+- If **`lead_state.call_scheduled_at`** is set, **all four** weekly emails are **stopped**: the cron marks the nurture row **converted** and does not send further phase-3 messages.
+- **Email 1 (week 1):** includes a **VCF P.S.** block only when **`vcf_sent_at`** is null.
+- **Email 3 (week 3):** Julie’s **personal story** — exact subject/body must match **`NURTURE_CONTENT.md`** (Week 3 / education story block).
+
+**Code reference:** `SCHEDULE_HOURS[3] = { 1: 168, 2: 336, 3: 504, 4: 672 }`, `MAX_STEPS[3] = 4`; templates in `getEmailContent()` inside `api/nurture-cron.js`.
+
+---
+
+## VCF delivery channels (`julie.vcf`)
+
+| Channel | Mechanism |
+|---------|-----------|
+| ✅ Immediate post-quote email | **`POST /api/post-quote-email`** — link/button to VCF; sets `vcf_sent_at` when sent |
+| ✅ SMS Day 3 (step 2) | **MMS** attachment to VCF URL **if** `vcf_sent_at` is null (`api/nurture-cron.js` → `sendSms`) |
+| ✅ Email week 1 | VCF **P.S.** link **if** `vcf_sent_at` is null (`getEmailContent` step 1) |
+| ✅ After call scheduled | **`POST /api/call-scheduled-webhook`** — VCF reminder SMS (+ updates `vcf_sent_at` when applicable) |
+| ❌ WhatsApp | **Not used** for VCF — platform limitations |
 
 ---
 
@@ -78,25 +111,39 @@ Mark unresponsive leads in CRM / Supabase; pause or complete nurture.
 |--------|--------|
 | Language + opt-in (WhatsApp) | ManyChat → **`POST /api/lead-intake`** → `contacts`, `lead_state`, `nurture_sequence` |
 | Quote + post-quote email | ManyChat → **`POST /api/post-quote-email`** |
-| Scheduled call + VCF SMS | HubSpot / automation → **`POST /api/call-scheduled-webhook`** |
+| Scheduled call + VCF SMS | Automation → **`POST /api/call-scheduled-webhook`** |
 | Nurture progression | Vercel Cron → **`GET /api/nurture-cron`** (Bearer `CRON_SECRET`) |
 | SMS inbound | Twilio → **`POST /api/sms-webhook`** |
 
 ---
 
-## Environment variables (Phase 1 WhatsApp only)
+## Environment variables (Phase 1 WhatsApp)
 
 | Variable | Purpose |
 |----------|---------|
-| `MANYCHAT_FLOW_PHASE1_STEP1` | ManyChat flow namespace — **5-hour** WhatsApp step |
-| `MANYCHAT_FLOW_PHASE1_STEP2` | ManyChat flow namespace — **21-hour** WhatsApp step |
+| `MANYCHAT_FLOW_PHASE1_STEP1` | ManyChat flow namespace — **5-hour** step (`nurture_day3` template in flow) |
+| `MANYCHAT_FLOW_PHASE1_STEP2` | ManyChat flow namespace — **21-hour** step (`nurture_day_5` template in flow) |
 
-Twilio, Resend, Supabase, cron, and ManyChat webhook secret are documented in **`.env.example`**.
+No `STEP3` / `STEP4`. Twilio, Resend, Supabase, and cron vars are in **`.env.example`**.
 
 ---
 
 ## Files not modified by pipeline code
 
-- **`julie.vcf`** — served as a static URL; pipeline only **links** to it.
-- **HTML pages** — marketing pages are not generated by this pipeline.
-- **ManyChat flow JSON exports** — not stored in this repo; flows are configured in ManyChat to call the webhooks above.
+- **`julie.vcf`** — static URL only; pipeline links to it.
+- **HTML pages** — not generated by this pipeline.
+- **ManyChat flow exports** — configured in ManyChat, not stored in this repo.
+
+---
+
+## Verification checklist (code vs v2)
+
+| File | Expected |
+|------|----------|
+| `api/nurture-cron.js` | `SCHEDULE_HOURS`: phase `1` = `{1:5,2:21}`, `2` = `{1:24,2:72,3:120}`, `3` = `{1:168,2:336,3:504,4:672}`; `MAX_STEPS` = `{1:2,2:3,3:4}` |
+| `api/post-quote-email.js` | Present; immediate post-quote email + `vcf_sent_at` update |
+| `api/lead-intake.js` | `firstSendAt` = **5 hours** after enroll |
+| `api/sms-webhook.js` | Present; QUOTE / CALL / STOP / email capture |
+| `api/call-scheduled-webhook.js` | Present; VCF reminder SMS |
+
+If production behavior diverges (e.g. ManyChat API auth), adjust env and ManyChat, not this checklist, unless agreed.

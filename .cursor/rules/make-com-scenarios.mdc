@@ -1,0 +1,24 @@
+---
+description: Make.com scenario creation — correct behavior and limitations
+alwaysApply: true
+---
+
+# Make.com — Agent Instructions
+
+## Critical facts
+
+1. **Prefer real modules** — Suggest only what exists in Make: **Email**, **Slack**, **Webhooks**, **HTTP**, **HubSpot** (if available in their account), etc. Do not invent vendor integrations.
+
+2. **Do NOT navigate to guessed URLs** (e.g. `/scenarios/add`). Make.com uses org-specific routes; guessed URLs cause 404. Always use the UI: click "Create scenario" from the dashboard, or the + button. Stay on the page you're already on.
+
+3. **When creating Make.com scenarios**, see `integrations/AGENT_ACCESS.md` for API tokens and patterns. This repo does not include Google Sheets scripts.
+
+## What you CAN create in Make.com
+
+Examples (modules must exist in the user’s account):
+
+- **Webhook** → receive events → **HTTP** → HubSpot / Supabase / custom URL
+- **HTTP** → poll or call external APIs → **Email** / **Slack** notifications
+- **HubSpot** modules (if connected) → contacts, deals, etc.
+
+Be explicit if a step requires a **paid HubSpot/Make** feature or a **scope** the user has not enabled.

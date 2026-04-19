@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Facebook preview — ir al archivo generado</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 36rem; margin: 2rem auto; padding: 0 1rem; line-height: 1.5; color: #1c1e21; }
+    a { color: #1877f2; }
+    code { background: #f0f2f5; padding: 0.15rem 0.35rem; border-radius: 4px; font-size: 0.9em; }
+    .box { background: #fff3cd; border: 1px solid #ffc107; border-radius: 8px; padding: 1rem; margin: 1rem 0; }
+  </style>
+</head>
+<body>
+  <h1>Vista previa de Facebook</h1>
+  <p>El script <code>main.py</code> <strong>no</strong> guarda la vista previa en esta carpeta. La escribe aquí:</p>
+  <p><strong><code>FB/post-preview.html</code></strong> (carpeta <code>FB</code> en la raíz del proyecto, al mismo nivel que <code>facebook-posting</code>).</p>
+  <p class="box">
+    <a href="../FB/post-preview.html">Abrir <code>FB/post-preview.html</code></a> (última regeneración)<br />
+    <small>También se guarda una copia con fecha: <code>FB/post-preview-YYYY-MM-DD.html</code> para distinguir semanas.</small><br />
+    <small>Si el enlace no abre, en Finder: <code>Mejor-Vida-HTML</code> → <code>FB</code>.</small>
+  </p>
+  <p>Para regenerar el HTML (y <code>FB/post-package.json</code>):</p>
+  <pre style="background:#f0f2f5;padding:1rem;border-radius:8px;overflow:auto;">cd facebook-posting
+python3 main.py --dry-run</pre>
+  <p><small>Nota: <code>post-preview.html</code> suele estar en <code>.gitignore</code>; hace falta ejecutar <code>main.py</code> al menos una vez en esta máquina.</small></p>
+</body>
+</html>

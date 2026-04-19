@@ -1,0 +1,22 @@
+---
+description: Mejor Vida Facebook posts — funnel, structure, no link in main caption; follow facebook-post-rules.md
+globs: facebook-posting/**,facebook-post-rules.md
+alwaysApply: false
+---
+
+# Facebook posts — Mejor Vida Insurance
+
+When **creating**, **previewing**, or **publishing** Facebook posts for this project:
+
+1. **Read and apply** the full standard in **`facebook-post-rules.md`** at the repository root.
+
+2. **Non‑negotiables** (see that file for detail):
+   - **No blog URL in the main caption** — link only in the **first follow-up comment** (and/or automation), not in the primary post text.
+   - **Dual CTA** when possible: **INFO** (article/education) and **REVISAR** (review/help) + option to **DM** instead of commenting.
+   - **Hook** must not read like a newsletter, report title, or “en este artículo…” blog opener.
+   - Tone: human, simple Spanish, families — not agents or regulators.
+   - **Compliance:** no guarantees on coverage, pricing, or outcomes; educational and trust-building only.
+
+3. **Weekly post deliverables** should include: main caption, shorter alternate, first comment with URL, image concept/prompt, ManyChat keywords, optional pinned comment — as specified in `facebook-post-rules.md`.
+
+4. **`facebook-posting/main.py`** builds a **`FacebookPostPackage`**: main caption has **no** blog URL; link is in **`first_comment`**. JSON export: **`FB/post-package.json`**. Publish uses **`publish_post_package`** (optional **`--no-first-comment`**).

@@ -1,0 +1,31 @@
+---
+description: Be smarter and more persistent — verify, iterate, don't guess
+alwaysApply: true
+---
+
+# Smarter & More Persistent — Agent Behavior
+
+## Verify before asserting
+
+1. **Integrations and modules** — Before telling the user to "add X module" or "connect to Y", verify X/Y exists in Make/HubSpot’s module list or docs. If unsure, don't claim it exists.
+
+2. **URLs** — Do not navigate to guessed URLs (e.g. `/scenarios/add`). If you don't know the exact path, use the UI: click buttons, follow links. Guessed URLs cause 404s.
+
+3. **Capabilities** — Before saying "I cannot", check: Do I have a tool for this? Terminal? API? Script? If a script exists in the project, run it.
+
+## Persist on failure
+
+1. **First failure ≠ give up** — When something fails (404, timeout, click didn't work), try 2–3 alternatives before deferring to the user. Examples:
+   - 404 on URL → Try clicking from the current page instead
+   - Click failed → Wait, retry, or try a different selector (e.g. role, aria-label, text)
+   - Timeout → Retry once; if UI is slow, wait longer before failing
+
+2. **Don't defer after one attempt** — "I'm unable to..." after a single failure is not acceptable. Try a different approach. Use the Make.com or HubSpot API if the browser fails.
+
+3. **Escalate tools** — Browser failed? Try API. API failed? Try script. Script failed? Then report the error and ask for help.
+
+## Learn from project context
+
+- Read `integrations/AGENT_ACCESS.md` — it documents data access (HubSpot, Make, ManyChat, Supabase/Vercel).
+- Prefer HubSpot API over brittle UI automation when the API supports the task.
+- Don't suggest steps that contradict project docs.

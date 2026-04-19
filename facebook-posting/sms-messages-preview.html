@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nurture SMS Messages — Mejor Vida Insurance</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #f0f4f8;
+    padding: 40px 20px;
+    color: #1a1a2e;
+  }
+  h1 {
+    text-align: center;
+    font-size: 22px;
+    margin-bottom: 6px;
+    color: #1a1a2e;
+  }
+  .subtitle {
+    text-align: center;
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 10px;
+  }
+  .default-note {
+    text-align: center;
+    font-size: 12px;
+    color: #2d6a4f;
+    font-weight: 600;
+    margin-bottom: 36px;
+    background: #e8f5e9;
+    display: inline-block;
+    padding: 4px 14px;
+    border-radius: 20px;
+    width: 100%;
+  }
+  .lang-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 32px;
+  }
+  .tab {
+    padding: 8px 24px;
+    border-radius: 20px;
+    border: 2px solid #2d6a4f;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .tab.active { background: #2d6a4f; color: white; }
+  .tab:not(.active) { background: white; color: #2d6a4f; }
+  .lang-panel { display: none; }
+  .lang-panel.active { display: block; }
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+  .message-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+  .day-badge {
+    background: #2d6a4f;
+    color: white;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 5px 14px;
+    border-radius: 20px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  .phone-wrap {
+    width: 100%;
+    background: #fff;
+    border-radius: 24px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.10);
+    overflow: hidden;
+  }
+  .phone-header {
+    background: #f7f7f7;
+    border-bottom: 1px solid #e8e8e8;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #2d6a4f, #52b788);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 700;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+  .sender-info { flex: 1; }
+  .sender-name { font-size: 14px; font-weight: 600; color: #1a1a2e; }
+  .sender-number { font-size: 11px; color: #888; }
+  .chat-area {
+    padding: 16px;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+  .bubble {
+    background: #e8f5e9;
+    border-radius: 18px 18px 18px 4px;
+    padding: 12px 16px;
+    font-size: 14px;
+    line-height: 1.55;
+    color: #1a1a2e;
+    max-width: 95%;
+    border: 1px solid #d0ecd8;
+  }
+  .bubble .hl { color: #2d6a4f; font-weight: 600; }
+  .bubble .link { color: #1a73e8; }
+  .meta { font-size: 11px; color: #aaa; margin-left: 4px; }
+  .reply-pills {
+    display: flex;
+    gap: 8px;
+    padding: 12px 16px;
+    border-top: 1px solid #f0f0f0;
+    flex-wrap: wrap;
+  }
+  .pill {
+    background: #f0faf4;
+    border: 1.5px solid #2d6a4f;
+    color: #2d6a4f;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 5px 14px;
+    border-radius: 20px;
+  }
+  .pill.stop { background: #fff5f5; border-color: #e07070; color: #c0392b; }
+  .connector { width: 2px; height: 24px; background: #d0ecd8; margin: 0 auto; }
+</style>
+</head>
+<body>
+
+<h1>Nurture SMS Messages</h1>
+<p class="subtitle">Phase 2 — Mejor Vida Insurance · +1 (402) 735-5665</p>
+<p class="default-note">⚡ Defaults to Spanish if no language detected</p>
+
+<div class="lang-tabs">
+  <div class="tab active" onclick="showLang('es')">🇲🇽 Español (default)</div>
+  <div class="tab" onclick="showLang('en')">🇺🇸 English</div>
+</div>
+
+<!-- SPANISH -->
+<div class="lang-panel active" id="panel-es">
+  <div class="timeline">
+    <div class="message-block">
+      <div class="day-badge">Día 3 · SMS 1</div>
+      <div class="phone-wrap">
+        <div class="phone-header">
+          <div class="avatar">J</div>
+          <div class="sender-info">
+            <div class="sender-name">Julie · Mejor Vida</div>
+            <div class="sender-number">+1 (402) 735-5665</div>
+          </div>
+        </div>
+        <div class="chat-area">
+          <div class="bubble">
+            ¡Hola <span class="hl">Justin</span>! Soy Julie de Mejor Vida Insurance. Hace poco preguntaste sobre cobertura para gastos finales — responde <span class="hl">COTIZAR</span> y te envío el enlace, o responde <span class="hl">LLAMAR</span> para agendar una llamada rápida conmigo. Responde STOP para cancelar.
+          </div>
+          <div class="meta">Entregado</div>
+        </div>
+        <div class="reply-pills">
+          <span class="pill">COTIZAR</span>
+          <span class="pill">LLAMAR</span>
+          <span class="pill stop">STOP</span>
+        </div>
+      </div>
+    </div>
+    <div class="connector"></div>
+    <div class="message-block">
+      <div class="day-badge">Día 5 · SMS 2</div>
+      <div class="phone-wrap">
+        <div class="phone-header">
+          <div class="avatar">J</div>
+          <div class="sender-info">
+            <div class="sender-name">Julie · Mejor Vida</div>
+            <div class="sender-number">+1 (402) 735-5665</div>
+          </div>
+        </div>
+        <div class="chat-area">
+          <div class="bubble">
+            ¡Hola <span class="hl">Justin</span>! Julie de Mejor Vida Insurance. Los planes de gastos finales comienzan desde <span class="hl">$30/mes</span> — puede ser justo lo que necesitas. Guarda mi contacto para tenerme a la mano 👉 <span class="link">mejorvidainsurance.com/julie.vcf</span> — luego responde <span class="hl">COTIZAR</span> o <span class="hl">LLAMAR</span>. Responde STOP para cancelar.
+          </div>
+          <div class="meta">Entregado</div>
+        </div>
+        <div class="reply-pills">
+          <span class="pill">COTIZAR</span>
+          <span class="pill">LLAMAR</span>
+          <span class="pill stop">STOP</span>
+        </div>
+      </div>
+    </div>
+    <div class="connector"></div>
+    <div class="message-block">
+      <div class="day-badge">Día 7 · SMS 3</div>
+      <div class="phone-wrap">
+        <div class="phone-header">
+          <div class="avatar">J</div>
+          <div class="sender-info">
+            <div class="sender-name">Julie · Mejor Vida</div>
+            <div class="sender-number">+1 (402) 735-5665</div>
+          </div>
+        </div>
+        <div class="chat-area">
+          <div class="bubble">
+            Hola <span class="hl">Justin</span>, soy Julie de Mejor Vida Insurance. Te escribo por última vez — me encantaría ayudarte a obtener cobertura. Solo responde <span class="hl">COTIZAR</span> o <span class="hl">LLAMAR</span> y yo me encargo del resto. Responde STOP para cancelar.
+          </div>
+          <div class="meta">Entregado</div>
+        </div>
+        <div class="reply-pills">
+          <span class="pill">COTIZAR</span>
+          <span class="pill">LLAMAR</span>
+          <span class="pill stop">STOP</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ENGLISH -->
+<div class="lang-panel" id="panel-en">
+  <div class="timeline">
+    <div class="message-block">
+      <div class="day-badge">Day 3 · SMS 1</div>
+      <div class="phone-wrap">
+        <div class="phone-header">
+          <div class="avatar">J</div>
+          <div class="sender-info">
+            <div class="sender-name">Julie · Mejor Vida</div>
+            <div class="sender-number">+1 (402) 735-5665</div>
+          </div>
+        </div>
+        <div class="chat-area">
+          <div class="bubble">
+            Hi <span class="hl">Justin</span>! This is Julie from Mejor Vida Insurance. You recently asked about final expense coverage — reply <span class="hl">QUOTE</span> and I'll send you a free quote link, or reply <span class="hl">CALL</span> to schedule a quick chat with me. Reply STOP to unsubscribe.
+          </div>
+          <div class="meta">Delivered</div>
+        </div>
+        <div class="reply-pills">
+          <span class="pill">QUOTE</span>
+          <span class="pill">CALL</span>
+          <span class="pill stop">STOP</span>
+        </div>
+      </div>
+    </div>
+    <div class="connector"></div>
+    <div class="message-block">
+      <div class="day-badge">Day 5 · SMS 2</div>
+      <div class="phone-wrap">
+        <div class="phone-header">
+          <div class="avatar">J</div>
+          <div class="sender-info">
+            <div class="sender-name">Julie · Mejor Vida</div>
+            <div class="sender-number">+1 (402) 735-5665</div>
+          </div>
+        </div>
+        <div class="chat-area">
+          <div class="bubble">
+            Hey <span class="hl">Justin</span>, Julie here from Mejor Vida Insurance! Final expense plans start under <span class="hl">$30/month</span> — could be a perfect fit. Save my contact so I'm just a tap away 👉 <span class="link">mejorvidainsurance.com/julie.vcf</span> — then reply <span class="hl">QUOTE</span> or <span class="hl">CALL</span>. Reply STOP to unsubscribe.
+          </div>
+          <div class="meta">Delivered</div>
+        </div>
+        <div class="reply-pills">
+          <span class="pill">QUOTE</span>
+          <span class="pill">CALL</span>
+          <span class="pill stop">STOP</span>
+        </div>
+      </div>
+    </div>
+    <div class="connector"></div>
+    <div class="message-block">
+      <div class="day-badge">Day 7 · SMS 3</div>
+      <div class="phone-wrap">
+        <div class="phone-header">
+          <div class="avatar">J</div>
+          <div class="sender-info">
+            <div class="sender-name">Julie · Mejor Vida</div>
+            <div class="sender-number">+1 (402) 735-5665</div>
+          </div>
+        </div>
+        <div class="chat-area">
+          <div class="bubble">
+            Hi <span class="hl">Justin</span>, Julie from Mejor Vida Insurance checking in one last time. I'd love to help you get covered — just reply <span class="hl">QUOTE</span> or <span class="hl">CALL</span> and I'll take care of the rest. Reply STOP to unsubscribe.
+          </div>
+          <div class="meta">Delivered</div>
+        </div>
+        <div class="reply-pills">
+          <span class="pill">QUOTE</span>
+          <span class="pill">CALL</span>
+          <span class="pill stop">STOP</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function showLang(lang) {
+    document.querySelectorAll('.lang-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('panel-' + lang).classList.add('active');
+    event.target.classList.add('active');
+  }
+</script>
+
+</body>
+</html>

@@ -24,7 +24,7 @@ from scripts.facebook_post_package import (
     resolve_whatsapp_url,
 )
 from scripts.generate_facebook_post import build_facebook_post_package
-from scripts.preview_html import write_preview_package
+from scripts.preview_html import infer_content_date_iso, write_preview_package
 from scripts.publish_facebook import publish_post_package
 
 
@@ -60,12 +60,13 @@ def main() -> int:
     )
     args = parser.parse_args()
 
-    # Featured blog: March 29 – April 4, 2026 weekly update (matches blog.html)
+    # Featured blog: April 5–11, 2026 weekly update — focus story: PHL Variable Insurance (article 3).
+    # Optional: "post_date_iso": "2026-04-12" overrides the date shown on FB preview (default: parsed from URL).
     blog = {
-        "title": "Actualización semanal - 29 de marzo al 4 de abril de 2026",
-        "summary": "Supervisión de IA en la NAIC, estudio LIMRA/NAILBA sobre adopción de IA en distribución, consulta sobre ilustraciones de anualidades indexadas.",
-        "url": "https://www.mejorvidainsurance.com/blog/weekly-insurance-update-2026-03-29.html",
-        "image_url": "https://www.mejorvidainsurance.com/img/blog-generated/weekly-insurance-update-2026-03-29/hero.png",
+        "title": "PHL Variable Insurance: liquidación y qué importa a familias y asesores",
+        "summary": "Déficit reportado, liquidación, protecciones con límites según el estado; comprar con ojos abiertos; recomendar compañías financieramente sólidas.",
+        "url": "https://www.mejorvidainsurance.com/blog/weekly-insurance-update-2026-04-12.html",
+        "image_url": "https://www.mejorvidainsurance.com/img/blog-generated/weekly-insurance-update-2026-04-12/hero.png",
     }
     blog_url = blog["url"]
 
@@ -76,37 +77,31 @@ def main() -> int:
 
     # Weekly curated package (override). Link only in first_comment — not in main_caption.
     weekly_package = FacebookPostPackage(
-        main_caption="""¿Alguna vez te preguntaste si realmente entiendes el seguro que tienes… o solo confiaste en lo que te dijeron?
+        main_caption="""¿Qué pasa con tu seguro de vida si la compañía entra en un proceso donde ya no tiene suficiente dinero para cumplir con todo lo que debe?
 
-A muchas familias les pasa… hasta que ya es demasiado tarde.
+En la prensa del sector está el caso de PHL Variable Insurance: avanza hacia liquidación y se habla de un déficit reportado muy grande. En palabras simples, a veces una aseguradora llega a un punto en el que los compromisos con los asegurados no cuadran con lo disponible, y el camino puede ser largo y complicado.
 
-Te lo explicamos fácil:
-Qué está cambiando con la inteligencia artificial en los seguros,
-cómo puede afectar lo que pagas y el servicio que recibes,
-y por qué los números “bonitos” no siempre reflejan la realidad.
+Si tú compras seguro para tu familia, esto no es para asustarte: es para que entiendas por qué importa la solidez financiera de la compañía, por qué conviene leer con calma lo que firmas, y por qué, en situaciones extremas, pueden existir redes de respaldo que cambian según el estado y casi siempre tienen límites. Lo que aplica a una persona puede no ser igual que a otra.
 
-Tu tranquilidad y la de tu familia empiezan con entender qué estás firmando.
+Si tú vendes o asesoras sobre seguros, este tipo de noticia también te recuerda algo básico: recomendar productos respaldados por compañías con fuerza financiera clara, y explicar bien los riesgos, es parte de cuidar a la gente que confía en ti.
 
-No estamos aquí para venderte algo que no necesitas — estamos para ayudarte a entender.
+No estamos aquí para venderte algo que no necesitas. Estamos para ayudarte a entender con información clara.
 
-Comenta “INFO” si quieres el desglose del artículo
+Comenta “INFO” si quieres el artículo donde lo desglosamos
 o “REVISAR” si quieres que veamos tu caso contigo.
 
 También puedes mandarnos mensaje directamente.
 
 #SeguroDeVida #GastosFinales #ProtegeATuFamilia #FamiliaHispana #TranquilidadFinanciera""",
-        alternate_caption="""¿Entiendes tu seguro o solo lo que te dijeron?
+        alternate_caption="""PHL Variable Insurance y la liquidación: en simple, por qué importa la solidez de la aseguradora—si compras o si asesoras a alguien.
 
-Te explicamos en simple qué puede cambiar con la IA en seguros y por qué importa a tu familia.
-
-Comenta “INFO” o “REVISAR”, o mándanos mensaje.
+Comenta “INFO” para el artículo o “REVISAR” para tu situación. También por mensaje directo.
 
 #SeguroDeVida #GastosFinales #ProtegeATuFamilia""",
         first_comment=default_first_comment_with_link(blog_url, whatsapp_url=whatsapp_url),
         image_prompt=(
-            "Familia hispana en casa, conversación tranquila mirando pantalla o papeles; tono cálido y humano; "
-            "sugerencia visual de claridad y confianza (no estética corporativa fría); nativo a Facebook; "
-            "colores suaves, luz natural."
+            "Hero del blog (pareja hispana revisando documentos de seguro en casa, expresión de preocupación contenida; "
+            "metáfora de liquidación e incertidumbre sobre recuperar el valor de la póliza; luz natural, editorial humano, sin texto ni logos)."
         ),
         manychat_keywords=("INFO", "REVISAR"),
         pinned_comment=None,
@@ -147,7 +142,11 @@ Comenta “INFO” o “REVISAR”, o mándanos mensaje.
         blog_url=blog_url,
         out_path=preview_path,
         auto_refresh_sec=3 if args.live else None,
+        content_date_iso=(blog.get("post_date_iso") or "").strip() or None,
     )
+    _iso = (blog.get("post_date_iso") or "").strip() or infer_content_date_iso(blog_url)
+    if _iso:
+        print(f"Dated snapshot: {fb_dir / f'post-preview-{_iso}.html'}")
     package_json.write_text(
         json.dumps(
             {

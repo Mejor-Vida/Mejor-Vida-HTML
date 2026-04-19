@@ -1,0 +1,66 @@
+{
+  "project": "Julie Wildfire Insurance Video",
+  "style": "3D Pixar-style animation, Colombian Spanish (Bogotá)",
+  "output": {
+    "format": "16:9",
+    "length_seconds": "25-30",
+    "final_video": "julie_wildfire_final.mp4"
+  },
+  "elevenlabs": {
+    "voice_id": "FalLEKHJXUP87G7DLPfk",
+    "model": "eleven_multilingual_v2",
+    "stability": 0.5,
+    "similarity_boost": 0.8,
+    "style_exaggeration": 0.2
+  },
+  "script": {
+    "full": "Hola, mi nombre es Julie, con Mejor Vida Seguros. Bienvenido a tu actualización semanal de seguros. Hoy quiero compartir contigo algo muy importante… En California, después de los incendios del 2025, el gobierno está haciendo cambios para proteger mejor a las familias. Una nueva ley permite que las aseguradoras paguen hasta el 60% de la cobertura, sin tener que hacer una lista completa de todas las pérdidas de inmediato. Porque cuando ocurre un incendio… Espera… puedo sentir mucho calor… ¡El fuego se está acercando! Y así como en un incendio uno debe actuar rápido… así mismo debe estar preparado. Si hoy quieres proteger a tu familia, contáctame por WhatsApp, por llamada o por correo electrónico para una cotización gratis. ¡Estoy aquí para servirte!",
+    "clips": [
+      {
+        "id": "clip1_intro",
+        "duration_seconds": 6,
+        "text": "Hola, mi nombre es Julie, con Mejor Vida Seguros. Bienvenido a tu actualización semanal de seguros.",
+        "prompt": "a 3D animated pixar-style female firefighter standing in the street facing the camera, holding a fire hose with nozzle and lever, calm expression, speaking to viewer, slight head movement, natural blinking, wildfire softly burning in background, cinematic animated lighting"
+      },
+      {
+        "id": "clip2_news",
+        "duration_seconds": 10,
+        "text": "Hoy quiero compartir contigo algo muy importante… En California, después de los incendios del 2025, el gobierno está haciendo cambios para proteger mejor a las familias. Una nueva ley permite que las aseguradoras paguen hasta el 60% de la cobertura, sin tener que hacer una lista completa de todas las pérdidas de inmediato.",
+        "prompt": "a 3D animated pixar-style firefighter woman speaking to camera, explaining something important, professional tone, subtle hand gestures, fire burning in background, light smoke movement, cinematic animated style"
+      },
+      {
+        "id": "clip3_fire_reaction",
+        "duration_seconds": 5,
+        "text": "Porque cuando ocurre un incendio… Espera… puedo sentir mucho calor… ¡El fuego se está acercando!",
+        "prompt": "a 3D animated firefighter woman speaking to camera, suddenly reacting to heat, slightly surprised expression, turning her head toward the fire, flames appearing closer behind her, subtle urgency, cinematic animated motion"
+      },
+      {
+        "id": "clip4_action_cta",
+        "duration_seconds": 10,
+        "text": "Y así como en un incendio uno debe actuar rápido… así mismo debe estar preparado. Si hoy quieres proteger a tu familia, contáctame por WhatsApp, por llamada o por correo electrónico para una cotización gratis. ¡Estoy aquí para servirte!",
+        "prompt": "a 3D animated firefighter woman holding a fire hose with a nozzle and visible control lever, spraying water toward flames, water visibly reducing the fire, then turning back to the camera smiling, calm and confident, speaking to viewer, cinematic animated lighting"
+      }
+    ]
+  },
+  "character": {
+    "name": "Julie_mv"
+  },
+  "character_lock": {
+    "enabled": true,
+    "julie_avatar_url": "https://v3b.fal.media/files/b/0a92840b/jk5WOTJLAueKPD-CGfOYV_6ba1f3ed8420444eb3646e64a8188316.jpg",
+    "julie_avatar_local": "img/Julie_Avatar.png",
+    "seed": 5508769720964102000
+  },
+  "assets": {
+    "julie_avatar_reference": "img/julie_avatar.jpg",
+    "background_wildfire": "assets/background_wildfire.png",
+    "julie_firefighter_base": "Julie-wildfire.png",
+    "clip1_image": "assets/clip1_intro.png",
+    "clip2_image": "assets/clip2_news.png",
+    "clip3_image": "assets/clip3_fire_reaction.png",
+    "clip4_image": "assets/clip4_action_cta.png"
+  },
+  "transitions": {
+    "crossfade_seconds": 0.4
+  }
+}

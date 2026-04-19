@@ -3,6 +3,9 @@
 .env.local
 .env.*.local
 
+# Machine-local paths (copy from paths.local.json.example)
+config/paths.local.json
+
 # Python cache
 __pycache__/
 *.pyc
@@ -10,3 +13,6 @@ __pycache__/
 
 # OS
 .DS_Store
+
+# Node (fal.ai Canva background generator)
+node_modules/

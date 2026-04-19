@@ -16,3 +16,7 @@ integrations/.playwright_ic_session/
 
 # Generated local Facebook preview (open in browser before publishing)
 FB/post-preview.html
+FB/post-preview-*.html
+
+# Kontext multi-candidate runs (large; keep finals in mvi-chat-avatar/*.png only)
+img/mvi-chat-avatar/_candidates/
