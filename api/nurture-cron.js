@@ -215,7 +215,9 @@ async function sendSms(contact, nurtureRow, step) {
 
   const includeVcf = step === 2 && !contact.vcf_sent_at;
 
-  const params = new URLSearchParams({ Body: msgBody, To: phone });
+  // Ensure E.164 format (Twilio requires leading +)
+  const toPhone = phone.startsWith('+') ? phone : `+${phone}`;
+  const params = new URLSearchParams({ Body: msgBody, To: toPhone });
   if (messagingServiceSid) {
     params.append('MessagingServiceSid', messagingServiceSid);
   } else {
