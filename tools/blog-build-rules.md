@@ -3,6 +3,8 @@
 Rules for authoring **weekly industry update** posts (`blog/weekly-insurance-update-YYYY-MM-DD.html`) and keeping **`blog.html`** + **`sitemap.xml`** in sync.
 (Image prompts: see `tools/blog-image-rules.md` and `HUGGINGFACE_BLOG_IMAGES.md`.)
 
+**Different workflow:** For a **consumer-facing** newsletter rewrite (plain language, hook + sections, middle school reading level—not the paired EN/ES HTML for agents), use **`tools/newsletter-to-consumer-blog-prompt.md`** and the Cursor rule **`newsletter-consumer-blog`**.
+
 ---
 
 ## 1. Bilingual parity (English / Spanish) — **required**

@@ -1,0 +1,15 @@
+---
+description: Convert insurance newsletters into plain-language consumer blog copy (not agent weekly HTML)
+globs: tools/newsletter-to-consumer-blog-prompt.md,blog/**/*.html,index.html
+alwaysApply: false
+---
+
+# Newsletter → consumer blog (Mejor Vida)
+
+When the user asks to **convert a newsletter** into a **public-facing blog** for everyday readers (not the weekly industry update for producers):
+
+1. Open and follow **`tools/newsletter-to-consumer-blog-prompt.md`** — middle-school reading level, hook + 2–4 body sections + conclusion, warm tone, no over-compression, audience is non-expert families (often bilingual context).
+
+2. **Do not** substitute the shorter **agent / industry** weekly template (`tools/blog-build-rules.md`) unless they explicitly want the `weekly-insurance-update-*.html` format with `data-lang` pairs and JSON-LD.
+
+3. If they later want that post **on the static site as HTML**, wire it like other pages (nav, footer, optional ES version per `newsletter-to-consumer-blog-prompt.md` optional section).

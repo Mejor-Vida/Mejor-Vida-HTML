@@ -1,5 +1,13 @@
 # Facebook post preview (local)
 
+**Custom post graphics** (when not using a blog hero) can live in **`assets/`** (for example `FB/assets/iowa-senior-safeguard-fb-2026-04.png`). A copy for local preview resolution may also sit under **`img/facebook/`** with the same filename referenced by `image_url` in `post-package.json`.
+
+**Local review (double-click in Finder):** open **`review-facebook-post.html`** in this folder. It mirrors `post-package.json`. After you change the JSON or run `facebook-posting/main.py`, regenerate the review file with:
+
+`python3 tools/sync_fb_review_html.py`
+
+**Iowa card image (Spanish PNG):** regenerate with `python3 tools/render_iowa_fb_card_es.py` (writes `img/facebook/` and `FB/assets/`). Requires Pillow (`pip install Pillow`).
+
 **`post-preview.html`** lives here. It is **regenerated automatically** every time you run `main.py` from `facebook-posting/`—including:
 
 - `python3 main.py --dry-run`

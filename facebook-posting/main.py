@@ -60,13 +60,14 @@ def main() -> int:
     )
     args = parser.parse_args()
 
-    # Featured blog: April 5–11, 2026 weekly update — focus story: PHL Variable Insurance (article 3).
-    # Optional: "post_date_iso": "2026-04-12" overrides the date shown on FB preview (default: parsed from URL).
+    # Featured blog: April 12–18, 2026 weekly update — focus: Iowa payout pause / senior safeguard (story 4).
+    # Optional: "post_date_iso": "2026-04-19" overrides the date shown on FB preview (default: parsed from URL).
     blog = {
-        "title": "PHL Variable Insurance: liquidación y qué importa a familias y asesores",
-        "summary": "Déficit reportado, liquidación, protecciones con límites según el estado; comprar con ojos abiertos; recomendar compañías financieramente sólidas.",
-        "url": "https://www.mejorvidainsurance.com/blog/weekly-insurance-update-2026-04-12.html",
-        "image_url": "https://www.mejorvidainsurance.com/img/blog-generated/weekly-insurance-update-2026-04-12/hero.png",
+        "title": "Iowa: pausa breve en pagos de seguro de vida para proteger adultos mayores",
+        "summary": "Ley nueva (abr. 2026): la aseguradora puede demorar un pago si hay preocupación razonable de explotación; no es congelación permanente; más de 30 estados con ideas parecidas.",
+        "url": "https://www.mejorvidainsurance.com/blog/weekly-insurance-update-2026-04-19.html#story4",
+        "image_url": "https://www.mejorvidainsurance.com/img/facebook/iowa-senior-safeguard-fb-2026-04.png",
+        "post_date_iso": "2026-04-19",
     }
     blog_url = blog["url"]
 
@@ -77,34 +78,36 @@ def main() -> int:
 
     # Weekly curated package (override). Link only in first_comment — not in main_caption.
     weekly_package = FacebookPostPackage(
-        main_caption="""¿Qué pasa con tu seguro de vida si la compañía entra en un proceso donde ya no tiene suficiente dinero para cumplir con todo lo que debe?
+        main_caption="""¿Sabías que en Iowa una aseguradora de vida puede pausar por poco tiempo el pago del seguro si cree, con fundamento, que un adulto mayor podría estar siendo explotado con dinero?
 
-En la prensa del sector está el caso de PHL Variable Insurance: avanza hacia liquidación y se habla de un déficit reportado muy grande. En palabras simples, a veces una aseguradora llega a un punto en el que los compromisos con los asegurados no cuadran con lo disponible, y el camino puede ser largo y complicado.
+No es para molestar a las familias honestas. Es para frenar a quienes aprovechan el duelo o la confusión para quedarse con lo que no les toca. La compañía debe revisar el caso y, si hace falta, coordinar con Protección para Adultos o las autoridades. La pausa no es para siempre.
 
-Si tú compras seguro para tu familia, esto no es para asustarte: es para que entiendas por qué importa la solidez financiera de la compañía, por qué conviene leer con calma lo que firmas, y por qué, en situaciones extremas, pueden existir redes de respaldo que cambian según el estado y casi siempre tienen límites. Lo que aplica a una persona puede no ser igual que a otra.
+Si algo en tu familia te suena raro—alguien nuevo que “ayuda” demasiado, firmas apuradas, cambios repentinos de beneficiario—vale la pena hablar con alguien de confianza o con el departamento de seguros de tu estado.
 
-Si tú vendes o asesoras sobre seguros, este tipo de noticia también te recuerda algo básico: recomendar productos respaldados por compañías con fuerza financiera clara, y explicar bien los riesgos, es parte de cuidar a la gente que confía en ti.
+En Mejor Vida no estamos para asustarte ni presionarte. Estamos para explicar con claridad y ayudarte a proteger a los tuyos.
 
-No estamos aquí para venderte algo que no necesitas. Estamos para ayudarte a entender con información clara.
+Comenta “INFO” si quieres el desglose completo (con contexto y preguntas frecuentes),
+o “REVISAR” si quieres que revisemos tu situación o tus dudas sobre seguro de vida o gastos finales.
 
-Comenta “INFO” si quieres el artículo donde lo desglosamos
-o “REVISAR” si quieres que veamos tu caso contigo.
+También puedes mandarnos mensaje directamente si prefieres no comentar en público.
 
-También puedes mandarnos mensaje directamente.
+#SeguroDeVida #GastosFinales #ProtegeATuFamilia #FamiliaHispana #AdultosMayores""",
+        alternate_caption="""Iowa permite que una aseguradora pause un pago de vida un tiempo si hay señales de explotación financiera a un adulto mayor. No es contra familias normales; es contra abusos en momentos delicados.
 
-#SeguroDeVida #GastosFinales #ProtegeATuFamilia #FamiliaHispana #TranquilidadFinanciera""",
-        alternate_caption="""PHL Variable Insurance y la liquidación: en simple, por qué importa la solidez de la aseguradora—si compras o si asesoras a alguien.
-
-Comenta “INFO” para el artículo o “REVISAR” para tu situación. También por mensaje directo.
+Comenta “INFO” para el artículo o “REVISAR” para tu caso. También por mensaje directo.
 
 #SeguroDeVida #GastosFinales #ProtegeATuFamilia""",
-        first_comment=default_first_comment_with_link(blog_url, whatsapp_url=whatsapp_url),
+        first_comment=default_first_comment_with_link(blog_url, whatsapp_url=whatsapp_url)
+        + "\n\n(Fuente citada en el blog: Insurance Business Magazine, 16 abr. 2026.)",
         image_prompt=(
-            "Hero del blog (pareja hispana revisando documentos de seguro en casa, expresión de preocupación contenida; "
-            "metáfora de liquidación e incertidumbre sobre recuperar el valor de la póliza; luz natural, editorial humano, sin texto ni logos)."
+            "Gráfico PNG en español (tools/render_iowa_fb_card_es.py): Iowa abr 2026, «Nueva protección para mayores», "
+            "titular «Una pausa breve.», texto sobre retención temporal de pagos sospechosos; fuente Insurance Business Magazine; "
+            "marca Mejor Vida. Archivos: img/facebook/ y FB/assets/ iowa-senior-safeguard-fb-2026-04.png."
         ),
         manychat_keywords=("INFO", "REVISAR"),
-        pinned_comment=None,
+        pinned_comment=(
+            "Si comentas INFO o REVISAR, te respondemos por mensaje. La información es educativa; cada caso y cada estado pueden ser distintos."
+        ),
     )
 
     package = build_facebook_post_package(
@@ -151,6 +154,7 @@ Comenta “INFO” para el artículo o “REVISAR” para tu situación. Tambié
         json.dumps(
             {
                 "blog_url": blog_url,
+                "image_url": blog.get("image_url"),
                 "whatsapp_first_comment_url_used": whatsapp_url,
                 **package_to_dict(package),
             },
