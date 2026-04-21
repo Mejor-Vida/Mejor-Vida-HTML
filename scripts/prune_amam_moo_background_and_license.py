@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Prune American Amicable / Mutual of Omaha background snippets and competing Julie license chunks.
+"""Prune stale FAQ/chunk patterns for carrier background, license collisions, and approval-time cache.
 
 Logs rows removed per DELETE. Requires DATABASE_URL or SUPABASE_URL + SUPABASE_DB_PASSWORD.
 
-After running, re-ingest contact fixes (includes dedicated license rows):
+After running, re-ingest affected CSV sources as needed:
   python3 scripts/ingest_knowledge_to_supabase.py \\
     --csv scripts/knowledge_rag_contact_fixes_2026-04-20.csv \\
     --source-name rag_contact_fixes_2026_04_20 --replace
@@ -110,22 +110,40 @@ def main() -> int:
             ("%Fortune 500%", "%Mutual of Omaha%"),
         ),
         (
-            "knowledge_chunks",
-            "Julie license / 21695431 (OR Producer License + Julie)",
+            "faqs",
+            "stale approval cache (few days to a week + simplified issue)",
             """WITH d AS (
-              DELETE FROM knowledge_chunks
-              WHERE (content ILIKE %s)
-                 OR (content ILIKE %s AND content ILIKE %s)
+              DELETE FROM faqs
+              WHERE answer ILIKE %s AND answer ILIKE %s
               RETURNING id) SELECT count(*)::int FROM d""",
-            ("%21695431%", "%Producer License%", "%Julie%"),
+            ("%few days to a week%", "%simplified issue%"),
         ),
         (
             "faqs",
-            "FAQ answer contains 21695431",
+            "stale approval cache ES (pocos días a una semana)",
             """WITH d AS (
-              DELETE FROM faqs WHERE answer ILIKE %s
+              DELETE FROM faqs
+              WHERE answer ILIKE %s
               RETURNING id) SELECT count(*)::int FROM d""",
-            ("%21695431%",),
+            ("%pocos días a una semana%",),
+        ),
+        (
+            "knowledge_chunks",
+            "MOO carrier-info collision (offers Mutual of Omaha as one of the carriers)",
+            """WITH d AS (
+              DELETE FROM knowledge_chunks
+              WHERE content ILIKE %s AND content ILIKE %s
+              RETURNING id) SELECT count(*)::int FROM d""",
+            ("%Mutual of Omaha%", "%offers Mutual of Omaha as one of the carriers%"),
+        ),
+        (
+            "faqs",
+            "MOO carrier-info collision in FAQ cache",
+            """WITH d AS (
+              DELETE FROM faqs
+              WHERE answer ILIKE %s
+              RETURNING id) SELECT count(*)::int FROM d""",
+            ("%offers Mutual of Omaha as one of the carriers%",),
         ),
     ]
 
