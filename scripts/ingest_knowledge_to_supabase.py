@@ -245,6 +245,12 @@ def main() -> int:
         action="store_true",
         help="Remove previous rows imported with source name google_sheet_ai_knowledge before insert",
     )
+    ap.add_argument(
+        "--source-name",
+        default="google_sheet_ai_knowledge",
+        metavar="NAME",
+        help="knowledge_sources.name for this import (default: google_sheet_ai_knowledge)",
+    )
     ap.add_argument("--dry-run", action="store_true", help="Parse and embed only; no DB writes")
     ap.add_argument(
         "--batch-size",
@@ -340,7 +346,7 @@ def main() -> int:
         print("Set DATABASE_URL or SUPABASE_URL + SUPABASE_DB_PASSWORD in .env.local")
         return 1
 
-    source_name = "google_sheet_ai_knowledge"
+    source_name = (args.source_name or "google_sheet_ai_knowledge").strip()
     external_ref = (os.environ.get("GOOGLE_SHEETS_AI_KNOWLEDGE_SPREADSHEET_ID") or "csv_import").strip()
     doc_title = f"Knowledge import {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M')} UTC"
 
