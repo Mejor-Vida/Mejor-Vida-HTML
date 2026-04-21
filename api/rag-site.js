@@ -14,7 +14,7 @@ const crypto = require("crypto");
 const { verifySiteOrigin } = require("../lib/site-origin");
 const { logRequest } = require("../lib/manychat-auth");
 const { runRagPipeline } = require("../lib/rag-pipeline");
-const { normalizeAssistantLanguage } = require("../lib/assistant-language");
+const { inferAssistantLanguageFromQuestion, noAnswerFallbackLine } = require("../lib/assistant-language");
 
 function json(res, status, payload) {
   res.status(status).setHeader("Content-Type", "application/json");
@@ -43,14 +43,6 @@ function historyToContext(history) {
     })
     .join("\n")
     .slice(0, 8000);
-}
-
-function websiteNoAnswerLine(language) {
-  const l = String(language || "").toLowerCase();
-  if (l.startsWith("spanish") || l.startsWith("es")) {
-    return "Aún no tengo esa información. Julie pronto podrá ayudarte.";
-  }
-  return "I don't have that information yet. Julie will get back to you soon.";
 }
 
 function websiteErrorLine(language) {
@@ -89,7 +81,8 @@ module.exports = async function handler(req, res) {
 
   if (websiteChat) {
     const question = String(body.message || "").trim();
-    language = normalizeAssistantLanguage(
+    language = inferAssistantLanguageFromQuestion(
+      question,
       body.language ? String(body.language).trim() : localeToLanguage(body.locale),
     );
     const conversationContext = historyToContext(body.history);
@@ -123,7 +116,7 @@ module.exports = async function handler(req, res) {
       if (out.status === "no_answer" || out.answer == null) {
         return json(res, 200, {
           status: "no_answer",
-          answer: websiteNoAnswerLine(language),
+          answer: noAnswerFallbackLine(language),
           message_id: messageId,
           ...(includeUsage && out.usage ? { usage: out.usage } : {}),
         });
@@ -145,7 +138,8 @@ module.exports = async function handler(req, res) {
   }
 
   const question = String(body.question || body.message || "").trim();
-  language = normalizeAssistantLanguage(
+  language = inferAssistantLanguageFromQuestion(
+    question,
     body.language ? String(body.language).trim() : localeToLanguage(body.locale),
   );
   const phone =
@@ -172,7 +166,7 @@ module.exports = async function handler(req, res) {
     }
     if (out.status === "no_answer" || out.answer == null) {
       return json(res, 200, {
-        reply: "",
+        reply: noAnswerFallbackLine(language),
         status: "no_answer",
       });
     }

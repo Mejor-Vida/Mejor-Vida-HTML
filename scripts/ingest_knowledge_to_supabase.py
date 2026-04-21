@@ -26,6 +26,9 @@ Usage:
   python3 scripts/ingest_knowledge_to_supabase.py --csv scripts/knowledge_seed.example.csv --replace
 
   python3 scripts/ingest_knowledge_to_supabase.py --replace   # uses env sheet id if set
+
+  python3 scripts/ingest_knowledge_to_supabase.py --csv scripts/knowledge_phase1_2026-04-20.csv \\
+    --source-name rag_phase1_2026_04_20 --dry-run
 """
 
 from __future__ import annotations
@@ -157,6 +160,9 @@ def _row_to_chunk_text(row: dict[str, str]) -> tuple[str, dict[str, Any]]:
     topic = row.get("topic") or row.get("title") or row.get("category") or ""
     if topic:
         meta["topic"] = topic[:200]
+    src = row.get("source") or row.get("reference") or row.get("citation") or ""
+    if src:
+        meta["source"] = src[:500]
 
     q = row.get("question") or row.get("q") or ""
     a = row.get("answer") or row.get("a") or ""
@@ -243,7 +249,18 @@ def main() -> int:
     ap.add_argument(
         "--replace",
         action="store_true",
-        help="Remove previous rows imported with source name google_sheet_ai_knowledge before insert",
+        help="Remove previous rows for --source-name (default: google_sheet_ai_knowledge) before insert",
+    )
+    ap.add_argument(
+        "--source-name",
+        default="google_sheet_ai_knowledge",
+        metavar="NAME",
+        help="knowledge_sources.name for this import (default: google_sheet_ai_knowledge)",
+    )
+    ap.add_argument(
+        "--external-ref",
+        metavar="REF",
+        help="knowledge_sources.external_ref (default: CSV filename or GOOGLE_SHEETS id)",
     )
     ap.add_argument("--dry-run", action="store_true", help="Parse and embed only; no DB writes")
     ap.add_argument(
@@ -340,8 +357,13 @@ def main() -> int:
         print("Set DATABASE_URL or SUPABASE_URL + SUPABASE_DB_PASSWORD in .env.local")
         return 1
 
-    source_name = "google_sheet_ai_knowledge"
-    external_ref = (os.environ.get("GOOGLE_SHEETS_AI_KNOWLEDGE_SPREADSHEET_ID") or "csv_import").strip()
+    source_name = (args.source_name or "google_sheet_ai_knowledge").strip()
+    if args.external_ref:
+        external_ref = args.external_ref.strip()[:500]
+    elif args.csv:
+        external_ref = Path(args.csv).name[:500]
+    else:
+        external_ref = (os.environ.get("GOOGLE_SHEETS_AI_KNOWLEDGE_SPREADSHEET_ID") or "csv_import").strip()
     doc_title = f"Knowledge import {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M')} UTC"
 
     with psycopg.connect(dsn, autocommit=False) as conn:
