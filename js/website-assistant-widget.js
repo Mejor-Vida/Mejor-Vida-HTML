@@ -111,7 +111,8 @@
       readMore: "Leer más",
       readLess: "Mostrar menos",
       error: "No pude conectar con el servidor. Intenta de nuevo.",
-      noAnswer: "Aún no tengo esa información. Julie pronto podrá ayudarte.",
+      noAnswer:
+        "Aún no tengo esa información. Puedes intentar reformular tu pregunta o contactarnos para ayuda.",
       openChat: "Abrir asistente de chat",
       closeChat: "Cerrar",
       minimize: "Minimizar",
