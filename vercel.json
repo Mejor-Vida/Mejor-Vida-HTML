@@ -19,6 +19,19 @@
       ]
     },
     {
+      "source": "/julie-contact.vcf",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/vcard; charset=utf-8"
+        },
+        {
+          "key": "Content-Disposition",
+          "value": "attachment; filename=\"Julie-MejorVida.vcf\""
+        }
+      ]
+    },
+    {
       "source": "/(.*)",
       "headers": [
         {
@@ -55,6 +68,10 @@
     }
   ],
   "rewrites": [
+    {
+      "source": "/julie-contact.vcf",
+      "destination": "/public/julie-contact.vcf"
+    },
     {
       "source": "/api/website-chat",
       "destination": "/api/rag-site"
