@@ -92,7 +92,6 @@
       readMore: "Read more",
       readLess: "Show less",
       error: "Sorry, I couldn't reach the server. Please try again.",
-      noAnswer: "I don't have that information yet. Julie will get back to you soon.",
       openChat: "Open chat assistant",
       closeChat: "Close",
       minimize: "Minimize",
@@ -111,8 +110,6 @@
       readMore: "Leer más",
       readLess: "Mostrar menos",
       error: "No pude conectar con el servidor. Intenta de nuevo.",
-      noAnswer:
-        "Aún no tengo esa información. Puedes intentar reformular tu pregunta o contactarnos para ayuda.",
       openChat: "Abrir asistente de chat",
       closeChat: "Cerrar",
       minimize: "Minimizar",
@@ -438,7 +435,7 @@
           if (!res.ok || data.status === "error") {
             answer = tr().error;
           } else if (data.status === "no_answer" && !answer) {
-            answer = tr().noAnswer;
+            answer = tr().error;
           }
           var meta = {};
           if (answer.length > READ_MORE_AT) {

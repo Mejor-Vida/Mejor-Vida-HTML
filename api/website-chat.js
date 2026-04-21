@@ -9,11 +9,6 @@
 
 const { getOrCreateChatSession, insertChatMessage, getLastChatMessages } = require("../lib/supabase");
 const { runRagPipeline } = require("../lib/rag-pipeline");
-const {
-  normalizeAssistantLanguage,
-  inferAssistantLanguageFromQuestion,
-  noAnswerFallbackLine,
-} = require("../lib/assistant-language");
 
 function json(res, status, payload) {
   res.status(status).setHeader("Content-Type", "application/json");
@@ -53,10 +48,7 @@ module.exports = async function handler(req, res) {
 
   const sessionId = String(body.session_id || "").trim();
   const userMessage = String(body.message || "").trim();
-  const language = inferAssistantLanguageFromQuestion(
-    userMessage,
-    normalizeAssistantLanguage(body.language || "English"),
-  );
+  const language = String(body.language || "English").trim();
 
   if (!sessionId || !userMessage) {
     return json(res, 400, { status: "error", error: "session_id and message required" });
@@ -105,7 +97,7 @@ module.exports = async function handler(req, res) {
 
     const assistantAnswer =
       ragOut.status === "no_answer" || ragOut.answer == null
-        ? noAnswerFallbackLine(language)
+        ? "I don't have that information yet. Please try rephrasing your question or contact us for help."
         : ragOut.answer;
 
     const responseStatus = ragOut.status === "answered" ? "answered" : "no_answer";
