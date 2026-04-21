@@ -69,10 +69,6 @@
   ],
   "rewrites": [
     {
-      "source": "/julie-contact.vcf",
-      "destination": "/public/julie-contact.vcf"
-    },
-    {
       "source": "/api/website-chat",
       "destination": "/api/rag-site"
     }
