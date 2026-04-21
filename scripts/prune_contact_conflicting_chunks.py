@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
-"""Audit + delete knowledge_chunks that steal contact/location retrieval from dedicated rows.
+"""Surgical knowledge_chunks cleanup: remove Julie bio + AmAm/MOO claim-routing snippets.
 
-Logs id, knowledge_sources.name, first 120 chars of content, then deletes matches.
-Run from repo root; uses .env.local for DATABASE_URL (same as ingest).
+Deletes by content patterns (any source). Logs counts per step, then verifies 0 matches remain.
 
-After this, re-ingest contact CSV with --replace:
+After this, re-ingest contact CSV (rows 1–8 only, no bio) with --replace:
   python3 scripts/ingest_knowledge_to_supabase.py \\
     --csv scripts/knowledge_rag_contact_fixes_2026-04-20.csv \\
     --source-name rag_contact_fixes_2026_04_20 --replace
+
+Requires DATABASE_URL or SUPABASE_URL + SUPABASE_DB_PASSWORD in .env.local.
 """
 from __future__ import annotations
 
@@ -40,6 +41,29 @@ def _load_env() -> None:
                 os.environ[k] = v
 
 
+def _delete_where(conn, label: str, where_sql: str, params: tuple) -> int:
+    sql = f"""
+    WITH deleted AS (
+      DELETE FROM knowledge_chunks kc
+      WHERE {where_sql}
+      RETURNING kc.id
+    )
+    SELECT count(*)::int FROM deleted;
+    """
+    with conn.cursor() as cur:
+        cur.execute(sql, params)
+        n = int(cur.fetchone()[0])
+    print(f"step {label}: deleted {n} row(s)")
+    return n
+
+
+def _count_where(conn, label: str, where_sql: str, params: tuple) -> int:
+    sql = f"SELECT count(*)::int FROM knowledge_chunks kc WHERE {where_sql}"
+    with conn.cursor() as cur:
+        cur.execute(sql, params)
+        return int(cur.fetchone()[0])
+
+
 def main() -> int:
     _load_env()
     dsn = get_database_url()
@@ -47,61 +71,72 @@ def main() -> int:
         print("Set DATABASE_URL or SUPABASE_URL + SUPABASE_DB_PASSWORD", file=sys.stderr)
         return 1
 
-    # One SELECT with OR of all patterns; DISTINCT id
-    sql_select = """
-    SELECT DISTINCT kc.id, ks.name AS source_name, left(kc.content, 120) AS preview
-    FROM knowledge_chunks kc
-    JOIN knowledge_documents kd ON kd.id = kc.document_id
-    JOIN knowledge_sources ks ON ks.id = kd.source_id
-    WHERE
+    # --- Step 1: Julie bio (any source) ---
+    julie_bio_where = """(
       kc.content ILIKE %s
       OR kc.content ILIKE %s
       OR kc.content ILIKE %s
       OR kc.content ILIKE %s
-      OR (
-        kc.content ILIKE %s
-        OR (kc.content ILIKE %s AND kc.content ILIKE %s)
-      )
-      OR (kc.content ILIKE %s AND kc.content ILIKE %s)
-    ORDER BY ks.name, kc.id;
-    """
+    )"""
+    julie_bio_params = (
+        "%Julie Braunsroth es la fundadora%",
+        "%Julie Braunsroth is the founder%",
+        "%Julie is the founder%",
+        "%independent insurance agency in Nebraska, run by Julie%",
+    )
 
-    p1 = "%Julie Braunsroth es la fundadora%"
-    p2a = "%Julie is the founder%"
-    p2b = "%Julie Braunsroth is the founder%"
-    p3 = "%To file a life insurance claim with American Amicable%"
-    p_moo_claim = "%To file a life insurance claim with Mutual of Omaha%"
-    p_claims_dept = "%claims department%"
-    p_moo = "%Mutual of Omaha%"
-    p_nat = "%national life insurance company%"
-    p_aa = "%American Amicable%"
+    # --- Step 2a: American Amicable + claim + 800-736-7311 (all required) ---
+    amam_claim_where = """(
+      kc.content ILIKE %s
+      AND kc.content ILIKE %s
+      AND kc.content ILIKE %s
+    )"""
+    amam_claim_params = (
+        "%American Amicable%",
+        "%claim%",
+        "%800-736-7311%",
+    )
 
-    params = (p1, p2a, p2b, p3, p_moo_claim, p_claims_dept, p_moo, p_nat, p_aa)
+    # --- Step 2b: Mutual of Omaha + claim + death certificate ---
+    moo_claim_where = """(
+      kc.content ILIKE %s
+      AND kc.content ILIKE %s
+      AND kc.content ILIKE %s
+    )"""
+    moo_claim_params = (
+        "%Mutual of Omaha%",
+        "%claim%",
+        "%death certificate%",
+    )
 
     with psycopg.connect(dsn, autocommit=False) as conn:
-        with conn.cursor() as cur:
-            cur.execute(sql_select, params)
-            rows = cur.fetchall()
-            print(f"audit: {len(rows)} matching chunk(s)\n")
-            ids: list = []
-            for rid, src, preview in rows:
-                ids.append(rid)
-                pv = (preview or "").replace("\n", " ")
-                print(f"  id={rid}\n  source_name={src}\n  preview={pv!r}\n")
-
-            if not ids:
-                conn.commit()
-                print("delete: 0 rows (nothing matched)")
-                return 0
-
-            cur.execute(
-                "DELETE FROM knowledge_chunks WHERE id = ANY(%s::uuid[]);",
-                (ids,),
-            )
-            deleted = cur.rowcount
+        print("--- deletions ---")
+        _delete_where(conn, "1 Julie bio", julie_bio_where, julie_bio_params)
+        _delete_where(conn, "2a AmAm claim+736", amam_claim_where, amam_claim_params)
+        _delete_where(conn, "2b MOO claim+death cert", moo_claim_where, moo_claim_params)
         conn.commit()
 
-    print(f"delete: removed {deleted} chunk(s).")
+        print("\n--- verification (expect 0) ---")
+        v1 = _count_where(
+            conn,
+            "Julie bio patterns",
+            """(
+      kc.content ILIKE %s OR kc.content ILIKE %s
+      OR kc.content ILIKE %s OR kc.content ILIKE %s
+    )""",
+            julie_bio_params,
+        )
+        v2 = _count_where(conn, "AmAm+claim+736", amam_claim_where, amam_claim_params)
+        v3 = _count_where(conn, "MOO+claim+death cert", moo_claim_where, moo_claim_params)
+        print(f"remaining Julie bio pattern(s): {v1}")
+        print(f"remaining AmAm+claim+800-736-7311: {v2}")
+        print(f"remaining MOO+claim+death certificate: {v3}")
+        ok = v1 == 0 and v2 == 0 and v3 == 0
+        if not ok:
+            print("WARNING: verification counts are not all zero.", file=sys.stderr)
+            return 2
+
+    print("\nOK: verification passed.")
     return 0
 
 
