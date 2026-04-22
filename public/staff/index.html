@@ -183,6 +183,9 @@
         <div style="margin-top:14px">
           <button id="reset-btn" type="submit">Update Password</button>
         </div>
+        <div style="margin-top:8px">
+          <button id="back-to-login-btn" class="link-btn" type="button">Back to sign in</button>
+        </div>
         <div id="reset-error" class="err"></div>
       </form>
     </section>
@@ -250,6 +253,7 @@
       var resetForm = document.getElementById("reset-form");
       var resetErr = document.getElementById("reset-error");
       var resetBtn = document.getElementById("reset-btn");
+      var backToLoginBtn = document.getElementById("back-to-login-btn");
       var newPassEl = document.getElementById("new-password");
       var confirmPassEl = document.getElementById("confirm-password");
       var signoutBtn = document.getElementById("signout-btn");
@@ -571,6 +575,11 @@
         } finally {
           resetBtn.disabled = false;
         }
+      });
+
+      backToLoginBtn.addEventListener("click", function () {
+        window.location.hash = "";
+        setRecoveryMode(false);
       });
 
       signoutBtn.addEventListener("click", signOutNow);
