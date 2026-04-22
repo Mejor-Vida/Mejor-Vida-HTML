@@ -525,7 +525,7 @@
         loginErr.textContent = "";
         loginNote.textContent = "";
         if (!sb) {
-          loginErr.textContent = "Invalid credentials";
+          loginErr.textContent = "Password reset is temporarily unavailable. Please refresh and try again.";
           return;
         }
         var email = String(emailEl.value || "").trim();
@@ -535,13 +535,14 @@
           return;
         }
         forgotBtn.disabled = true;
+        loginNote.textContent = "Sending reset link...";
         try {
           await sb.auth.resetPasswordForEmail(email, {
             redirectTo: window.location.origin + "/staff/",
           });
           loginNote.textContent = "If your account exists, a reset link has been sent to your email.";
         } catch (e) {
-          loginNote.textContent = "If your account exists, a reset link has been sent to your email.";
+          loginErr.textContent = "Couldn't send reset link right now. Please try again.";
         } finally {
           forgotBtn.disabled = false;
         }
