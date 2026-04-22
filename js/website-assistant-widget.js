@@ -20,6 +20,16 @@
     return d.innerHTML;
   }
 
+  function renderMarkdown(text) {
+    return escapeHtml(String(text || ""))
+      .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
+      .replace(
+        /\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g,
+        '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>',
+      )
+      .replace(/\n/g, "<br>");
+  }
+
   function uuid() {
     if (window.crypto && typeof window.crypto.randomUUID === "function") {
       return window.crypto.randomUUID();
@@ -333,14 +343,14 @@
       var isUser = role === "user";
       var wrap = document.createElement("div");
       wrap.className = "mvi-assist-msg mvi-assist-msg--" + (isUser ? "user" : "assistant");
-      var inner = escapeHtml(content).replace(/\n/g, "<br>");
+      var inner = isUser ? escapeHtml(content).replace(/\n/g, "<br>") : renderMarkdown(content);
       if (!isUser && meta.expandable) {
-        var shortHtml = escapeHtml(meta.short).replace(/\n/g, "<br>");
+        var shortHtml = renderMarkdown(meta.short);
         inner =
           '<span data-mvi-short>' +
           shortHtml +
           '</span><span data-mvi-rest class="d-none">' +
-          escapeHtml(meta.rest).replace(/\n/g, "<br>") +
+          renderMarkdown(meta.rest) +
           '</span> <button type="button" class="mvi-assist-more btn btn-link btn-sm p-0">' +
           escapeHtml(tr().readMore) +
           "</button>";
