@@ -56,7 +56,14 @@
   }
 
   function getInitialLanguage() {
-    // Match main site language (script.js sessionLang) so EN page + EN chat API agree.
+    // Prefer current page locale first so an English page does not inherit stale Spanish chat state.
+    var htmlLang = String((document.documentElement && document.documentElement.lang) || "")
+      .toLowerCase()
+      .trim();
+    if (htmlLang.indexOf("en") === 0) return "English";
+    if (htmlLang.indexOf("es") === 0) return "Spanish";
+
+    // Match main site language (script.js sessionLang) when page locale is not explicit.
     var site = sessionStorage.getItem("sessionLang");
     if (site === "en") return "English";
     if (site === "es") return "Spanish";
