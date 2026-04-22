@@ -4,12 +4,9 @@ const { json, readJsonBody, serviceConfig, restSelect, restInsert, restPatch } =
 
 async function reformatForKnowledgeBase(openaiKey, questionText, replyDraft) {
   const systemPrompt =
-    "You are a knowledge base formatter. Given a customer question and an email reply, rewrite them as a clean, concise Q&A pair suitable for a knowledge base. Remove all email pleasantries ('Thank you for reaching out', etc.). Keep only the factual insurance content. Format: Q: [question] A: [answer]";
+    "You are a knowledge base formatter. Given a customer question and an email reply, rewrite them as a clean, concise Q&A pair suitable for a knowledge base. Remove all email pleasantries, greetings, and sign-offs. Keep only the factual insurance content. Format exactly as:\nQ: [question]\nA: [answer]";
 
-  const userPrompt =
-    `Customer question:\n${questionText}\n\n` +
-    `Email reply draft:\n${replyDraft}\n\n` +
-    "Return only the final Q&A in this format:\nQ: ...\nA: ...";
+  const userPrompt = `Question: ${questionText}\n\nEmail reply: ${replyDraft}`;
 
   const r = await fetch("https://api.openai.com/v1/chat/completions", {
     method: "POST",

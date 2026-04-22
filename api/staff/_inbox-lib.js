@@ -1,3 +1,5 @@
+const { requireStaffAuth } = require("../auth-check");
+
 function json(res, status, payload) {
   res.status(status).setHeader("Content-Type", "application/json");
   res.send(JSON.stringify(payload));
@@ -57,6 +59,7 @@ async function restInsert(cfg, table, payload) {
 }
 
 module.exports = {
+  requireStaffAuth,
   json,
   readJsonBody,
   serviceConfig,

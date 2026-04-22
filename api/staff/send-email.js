@@ -1,12 +1,12 @@
 const { google } = require("googleapis");
-const { requireStaffAuth } = require("../auth-check");
-const { json, readJsonBody, serviceConfig, restPatch } = require("./_inbox-lib");
+const { requireStaffAuth, json, readJsonBody, serviceConfig, restPatch } = require("./_inbox-lib");
 
-function buildRawEmail(fromEmail, toEmail, toName, subject, bodyText) {
-  const toHeader = toName ? `${toName} <${toEmail}>` : toEmail;
+const GMAIL_REDIRECT_URI = "https://www.mejorvidainsurance.com/api/staff/gmail-callback";
+
+function buildRawEmail(fromEmail, toEmail, subject, bodyText) {
   const lines = [
-    `From: Mejor Vida Insurance <${fromEmail}>`,
-    `To: ${toHeader}`,
+    `From: ${fromEmail}`,
+    `To: ${toEmail}`,
     `Subject: ${subject}`,
     "MIME-Version: 1.0",
     "Content-Type: text/plain; charset=UTF-8",
@@ -33,13 +33,12 @@ module.exports = async function handler(req, res) {
   try {
     body = readJsonBody(req);
   } catch (e) {
-    return json(res, 400, { error: "Invalid JSON" });
+    return json(res, 400, { success: false, error: "Invalid JSON" });
   }
 
-  const questionId = String((body && (body.questionId || body.id)) || "").trim();
-  const replyDraft = String((body && (body.replyDraft || body.reply_draft)) || "").trim();
-  const toEmail = String((body && body.toEmail) || "").trim();
-  const toName = String((body && body.toName) || "").trim();
+  const questionId = String((body && body.questionId) || "").trim();
+  const toEmail = body && body.toEmail != null ? String(body.toEmail).trim() : "";
+  const replyDraft = String((body && body.replyDraft) || "").trim();
 
   if (!questionId || !replyDraft) {
     return json(res, 400, { success: false, error: "questionId and replyDraft required" });
@@ -51,21 +50,21 @@ module.exports = async function handler(req, res) {
   const clientId = process.env.GMAIL_CLIENT_ID;
   const clientSecret = process.env.GMAIL_CLIENT_SECRET;
   const refreshToken = process.env.GMAIL_REFRESH_TOKEN;
-  const fromEmail = process.env.GMAIL_FROM_EMAIL || "admin@mejorvidainsurance.com";
+  const fromEmail = process.env.GMAIL_FROM_EMAIL || "julie@mejorvidainsurance.com";
   const cfg = serviceConfig();
+
   if (!clientId || !clientSecret || !refreshToken || !fromEmail || !cfg) {
     return json(res, 200, { success: false, error: "Gmail is not configured on the server" });
   }
 
   try {
-    const oauth2Client = new google.auth.OAuth2(clientId, clientSecret);
+    const oauth2Client = new google.auth.OAuth2(clientId, clientSecret, GMAIL_REDIRECT_URI);
     oauth2Client.setCredentials({ refresh_token: refreshToken });
 
     const gmail = google.gmail({ version: "v1", auth: oauth2Client });
     const raw = buildRawEmail(
       fromEmail,
       toEmail,
-      toName,
       "Re: Your Insurance Question — Mejor Vida Insurance",
       replyDraft
     );
@@ -84,6 +83,9 @@ module.exports = async function handler(req, res) {
 
     return json(res, 200, { success: true });
   } catch (e) {
-    return json(res, 200, { success: false, error: String(e && e.message ? e.message : "Failed to send email") });
+    return json(res, 200, {
+      success: false,
+      error: String(e && e.message ? e.message : "Failed to send email"),
+    });
   }
 };
