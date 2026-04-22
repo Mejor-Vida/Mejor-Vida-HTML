@@ -86,7 +86,8 @@
     .portal {
       min-height: 100vh;
       display: grid;
-      grid-template-rows: auto auto 1fr;
+      grid-template-rows: auto 1fr;
+      position: relative;
     }
     .top {
       border-bottom: 1px solid var(--border);
@@ -102,9 +103,15 @@
     .top small { display: block; color: var(--muted); }
     .top .signout { background: #2d3f67; color: #fff; border: 1px solid var(--border); }
     .tabs {
-      display: flex; gap: 10px; padding: 12px 16px;
-      border-bottom: 1px solid var(--border);
-      background: rgba(12, 24, 45, .75);
+      position: absolute;
+      top: 58px;
+      left: 16px;
+      z-index: 5;
+      display: flex;
+      gap: 10px;
+      padding: 8px 0;
+      border-bottom: 0;
+      background: transparent;
     }
     .tab-btn {
       background: #20345d; color: #fff; border: 1px solid var(--border); font-weight: 600;
@@ -113,7 +120,7 @@
     .pane { display: none; height: calc(100vh - 116px); }
     .pane.active { display: block; }
     #pane-inbox { padding: 12px; }
-    #pane-chat { padding: 12px; }
+    #pane-chat { padding: 62px 12px 12px; }
     .inbox-wrap {
       height: 100%;
       display: grid;
@@ -128,6 +135,7 @@
       display: grid;
       grid-template-rows: auto 1fr;
     }
+    .inbox-list { margin-top: 52px; }
     .inbox-head {
       padding: 10px 12px;
       border-bottom: 1px solid var(--border);
@@ -204,7 +212,7 @@
       color: #fff;
     }
     #orig-box, #edit-box {
-      min-height: 90px;
+      min-height: 64px;
       resize: vertical;
       overflow-y: auto;
     }
