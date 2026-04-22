@@ -62,8 +62,20 @@ module.exports = async function handler(req, res) {
   if (PRICING_INTENT.test(userMessage)) {
     const isSpanish = assistantLocale === "Spanish" || String(body.lang || body.language || "").toLowerCase().startsWith("es");
     const answer = isSpanish
-      ? 'Para ver cuanto costaria tu cobertura, usa nuestra **herramienta de cotizacion gratuita** - solo toma un minuto.\n\n👉 [Obtener mi cotizacion gratuita](https://mejor-vida-html.vercel.app/quote.html)\n\nIngresa tu edad, genero y si usas tabaco, y recibiras un rango de precio estimado al instante. Tambien puedes usar el boton **"Cotizacion gratuita"** en la parte superior de esta pagina.\n\nJulie revisara tu informacion y podra hacer seguimiento contigo personalmente.'
-      : 'To see what coverage would cost you, use our **free quote tool** - it only takes a minute.\n\n👉 [Get my free quote](https://mejor-vida-html.vercel.app/quote.html)\n\nEnter your age, gender, and tobacco status and you\\'ll get an estimated price range right away. You can also tap the **"Get a Free Quote"** button at the top of this page.\n\nJulie will see your information and can follow up with you personally.';
+      ? `Para ver cuanto costaria tu cobertura, usa nuestra **herramienta de cotizacion gratuita** - solo toma un minuto.
+
+👉 [Obtener mi cotizacion gratuita](https://mejor-vida-html.vercel.app/quote.html)
+
+Ingresa tu edad, genero y si usas tabaco, y recibiras un rango de precio estimado al instante. Tambien puedes usar el boton **"Cotizacion gratuita"** en la parte superior de esta pagina.
+
+Julie revisara tu informacion y podra hacer seguimiento contigo personalmente.`
+      : `To see what coverage would cost you, use our **free quote tool** - it only takes a minute.
+
+👉 [Get my free quote](https://mejor-vida-html.vercel.app/quote.html)
+
+Enter your age, gender, and tobacco status and you'll get an estimated price range right away. You can also tap the **"Get a Free Quote"** button at the top of this page.
+
+Julie will see your information and can follow up with you personally.`;
     return json(res, 200, { status: "ok", answer, message_id: sessionId });
   }
 
