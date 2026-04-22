@@ -11,8 +11,10 @@ const { getOrCreateChatSession, insertChatMessage, getLastChatMessages } = requi
 const { normalizeAssistantLanguage } = require("../lib/assistant-language");
 const { runRagPipeline } = require("../lib/rag-pipeline");
 
-const PRICING_INTENT =
-  /\b(how much|cost|costs|price|premium|rate|per month|monthly|quote|what.*pay|what.*cost|afford|cu[aá]nto|cuesta|precio|prima|mensual|cotizaci[oó]n|cotizar)\b/i;
+const PRICING_INTENT_EN =
+  /\b(how much|cost|costs|price|premium|rate|per month|monthly|quote|what.*pay|what.*cost|afford)\b/i;
+const PRICING_INTENT_ES =
+  /\b(cu[aá]nto\s+(cuesta|pago|pagar[ií]a|pagaria|saldr[ií]a|saldria)|cu[aá]nto\s+por\s+mes|cu[aá]nto\s+al\s+mes|precio|prima|mensual|cotizaci[oó]n|cotizar|cu[oó]nto\s+me\s+cuesta)\b/i;
 
 function json(res, status, payload) {
   res.status(status).setHeader("Content-Type", "application/json");
@@ -59,7 +61,7 @@ module.exports = async function handler(req, res) {
     return json(res, 400, { status: "error", error: "session_id and message required" });
   }
 
-  if (PRICING_INTENT.test(userMessage)) {
+  if (PRICING_INTENT_EN.test(userMessage) || PRICING_INTENT_ES.test(userMessage)) {
     const isSpanish = assistantLocale === "Spanish" || String(body.lang || body.language || "").toLowerCase().startsWith("es");
     const answer = isSpanish
       ? `Para ver cuanto costaria tu cobertura, usa nuestra **herramienta de cotizacion gratuita** - solo toma un minuto.
