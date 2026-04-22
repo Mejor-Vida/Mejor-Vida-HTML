@@ -206,6 +206,11 @@
       color: #fff;
       border: 1px solid var(--border);
     }
+    .actions button.email {
+      background: #1e5fbf;
+      color: #fff;
+      border: 1px solid var(--border);
+    }
     .actions button.danger {
       background: #7f2e2e;
       color: #fff;
@@ -506,6 +511,7 @@
           '<div class="actions">' +
             '<button id="generate-btn" class="secondary" type="button">Generate Draft</button>' +
             '<button id="save-edit-btn" class="secondary" type="button">Save Edit</button>' +
+            '<button id="send-email-btn" class="email" type="button">Send Email</button>' +
             '<button id="push-rag-btn" class="secondary" type="button">Push to RAG</button>' +
             '<button id="resolve-btn" class="danger" type="button">Resolve</button>' +
           "</div>" +
@@ -513,6 +519,7 @@
 
         document.getElementById("generate-btn").addEventListener("click", onGenerateDraft);
         document.getElementById("save-edit-btn").addEventListener("click", onSaveEdit);
+        document.getElementById("send-email-btn").addEventListener("click", onSendEmail);
         document.getElementById("push-rag-btn").addEventListener("click", onPushToRag);
         document.getElementById("resolve-btn").addEventListener("click", onResolveQuestion);
       }
@@ -585,6 +592,29 @@
           status.textContent = "Pushed to knowledge base.";
         } catch (e) {
           status.textContent = "Failed to push to RAG.";
+        }
+      }
+
+      async function onSendEmail() {
+        var q = getSelectedQuestion();
+        if (!q) return;
+        var reply = document.getElementById("reply-box");
+        var status = document.getElementById("inbox-status");
+        var draft = String(reply.value || "").trim();
+        if (!draft) {
+          status.textContent = "Reply draft is required before sending email.";
+          return;
+        }
+        status.textContent = "Sending email...";
+        try {
+          var data = await authedApi("/api/staff/send-email", { id: q.id, reply_draft: draft });
+          if (data && data.success === false && data.message) {
+            status.textContent = String(data.message);
+          } else {
+            status.textContent = "Email sent.";
+          }
+        } catch (e) {
+          status.textContent = "Failed to send email.";
         }
       }
 

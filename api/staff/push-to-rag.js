@@ -2,6 +2,51 @@ const { requireStaffAuth } = require("../auth-check");
 const { generateEmbedding } = require("../../lib/openai");
 const { json, readJsonBody, serviceConfig, restSelect, restInsert, restPatch } = require("./_inbox-lib");
 
+async function reformatForKnowledgeBase(openaiKey, questionText, replyDraft) {
+  const systemPrompt =
+    "You are a knowledge base formatter. Given a customer question and an email reply, rewrite them as a clean, concise Q&A pair suitable for a knowledge base. Remove all email pleasantries ('Thank you for reaching out', etc.). Keep only the factual insurance content. Format: Q: [question] A: [answer]";
+
+  const userPrompt =
+    `Customer question:\n${questionText}\n\n` +
+    `Email reply draft:\n${replyDraft}\n\n` +
+    "Return only the final Q&A in this format:\nQ: ...\nA: ...";
+
+  const r = await fetch("https://api.openai.com/v1/chat/completions", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${openaiKey}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      model: "gpt-4o-mini",
+      temperature: 0.1,
+      max_tokens: 500,
+      messages: [
+        { role: "system", content: systemPrompt },
+        { role: "user", content: userPrompt },
+      ],
+    }),
+  });
+  const data = await r.json();
+  if (!r.ok) {
+    const msg = (data && data.error && data.error.message) || "OpenAI formatting error";
+    throw new Error(String(msg).slice(0, 200));
+  }
+
+  const text =
+    (data &&
+      data.choices &&
+      data.choices[0] &&
+      data.choices[0].message &&
+      data.choices[0].message.content) ||
+    "";
+  const cleaned = String(text).trim();
+  if (!cleaned) throw new Error("Formatter returned empty content");
+
+  if (/^Q:\s+/im.test(cleaned) && /^A:\s+/im.test(cleaned)) return cleaned;
+  return `Q: ${questionText}\nA: ${cleaned}`;
+}
+
 async function ensureStaffSource(cfg) {
   const existing = await restSelect(
     cfg,
@@ -72,7 +117,7 @@ module.exports = async function handler(req, res) {
     const doc = docs && docs[0];
     if (!doc || !doc.id) throw new Error("Failed creating knowledge document");
 
-    const chunkContent = `Question: ${finalQuestion}\nAnswer: ${answer}`;
+    const chunkContent = await reformatForKnowledgeBase(openaiKey, finalQuestion, answer);
     const emb = await generateEmbedding(openaiKey, chunkContent);
 
     await restInsert(cfg, "knowledge_chunks", [
