@@ -72,6 +72,16 @@
     button[disabled] { opacity: .6; cursor: not-allowed; }
     .err { color: var(--danger); margin-top: 10px; min-height: 1.2rem; font-size: .92rem; }
     .ok { color: var(--ok); }
+    .link-btn {
+      background: transparent;
+      color: #c9d7f4;
+      border: 0;
+      padding: 0;
+      font-weight: 600;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+    .link-btn:hover { color: #fff; }
 
     .portal {
       min-height: 100vh;
@@ -158,7 +168,22 @@
         <div style="margin-top:14px">
           <button id="login-btn" type="submit">Sign In</button>
         </div>
+        <div style="margin-top:8px">
+          <button id="forgot-btn" class="link-btn" type="button">Forgot password?</button>
+        </div>
         <div id="login-error" class="err"></div>
+        <div id="login-note" class="err ok"></div>
+      </form>
+      <form id="reset-form" class="hidden">
+        <p class="sub" style="margin-top:8px">Set your new password</p>
+        <label for="new-password">New password</label>
+        <input id="new-password" type="password" autocomplete="new-password" />
+        <label for="confirm-password">Confirm password</label>
+        <input id="confirm-password" type="password" autocomplete="new-password" />
+        <div style="margin-top:14px">
+          <button id="reset-btn" type="submit">Update Password</button>
+        </div>
+        <div id="reset-error" class="err"></div>
       </form>
     </section>
   </main>
@@ -219,7 +244,14 @@
       var emailEl = document.getElementById("email");
       var passEl = document.getElementById("password");
       var loginBtn = document.getElementById("login-btn");
+      var forgotBtn = document.getElementById("forgot-btn");
       var loginErr = document.getElementById("login-error");
+      var loginNote = document.getElementById("login-note");
+      var resetForm = document.getElementById("reset-form");
+      var resetErr = document.getElementById("reset-error");
+      var resetBtn = document.getElementById("reset-btn");
+      var newPassEl = document.getElementById("new-password");
+      var confirmPassEl = document.getElementById("confirm-password");
       var signoutBtn = document.getElementById("signout-btn");
       var tabInbox = document.getElementById("tab-inbox");
       var tabChat = document.getElementById("tab-chat");
@@ -236,6 +268,7 @@
       var conversation = [];
       var idleTimer = null;
       var thinkingNode = null;
+      var recoveryMode = false;
 
       function setAuthed(on) {
         loginScreen.classList.toggle("hidden", on);
@@ -269,6 +302,29 @@
         emailEl.disabled = false;
         passEl.disabled = false;
         return false;
+      }
+
+      function setRecoveryMode(on) {
+        recoveryMode = !!on;
+        loginForm.classList.toggle("hidden", recoveryMode);
+        resetForm.classList.toggle("hidden", !recoveryMode);
+        loginErr.textContent = "";
+        loginNote.textContent = "";
+        resetErr.textContent = "";
+      }
+
+      function parseHashParams() {
+        var h = String(window.location.hash || "").replace(/^#/, "");
+        if (!h) return {};
+        var out = {};
+        h.split("&").forEach(function (pair) {
+          var i = pair.indexOf("=");
+          if (i < 0) return;
+          var k = decodeURIComponent(pair.slice(0, i));
+          var v = decodeURIComponent(pair.slice(i + 1));
+          out[k] = v;
+        });
+        return out;
       }
 
       function markLoginFailure() {
@@ -461,6 +517,62 @@
         }
       });
 
+      forgotBtn.addEventListener("click", async function () {
+        loginErr.textContent = "";
+        loginNote.textContent = "";
+        if (!sb) {
+          loginErr.textContent = "Invalid credentials";
+          return;
+        }
+        var email = String(emailEl.value || "").trim();
+        if (!email) {
+          loginErr.textContent = "Enter your email first.";
+          emailEl.focus();
+          return;
+        }
+        forgotBtn.disabled = true;
+        try {
+          await sb.auth.resetPasswordForEmail(email, {
+            redirectTo: window.location.origin + "/staff/",
+          });
+          loginNote.textContent = "If your account exists, a reset link has been sent to your email.";
+        } catch (e) {
+          loginNote.textContent = "If your account exists, a reset link has been sent to your email.";
+        } finally {
+          forgotBtn.disabled = false;
+        }
+      });
+
+      resetForm.addEventListener("submit", async function (e) {
+        e.preventDefault();
+        resetErr.textContent = "";
+        if (!sb) return;
+        var p1 = String(newPassEl.value || "");
+        var p2 = String(confirmPassEl.value || "");
+        if (p1.length < 8) {
+          resetErr.textContent = "Password must be at least 8 characters.";
+          return;
+        }
+        if (p1 !== p2) {
+          resetErr.textContent = "Passwords do not match.";
+          return;
+        }
+        resetBtn.disabled = true;
+        try {
+          var out = await sb.auth.updateUser({ password: p1 });
+          if (out.error) throw out.error;
+          window.location.hash = "";
+          setRecoveryMode(false);
+          loginNote.textContent = "Password updated. You can sign in now.";
+          newPassEl.value = "";
+          confirmPassEl.value = "";
+        } catch (e2) {
+          resetErr.textContent = "Failed to update password. Please request a new reset link.";
+        } finally {
+          resetBtn.disabled = false;
+        }
+      });
+
       signoutBtn.addEventListener("click", signOutNow);
       tabInbox.addEventListener("click", function () { showTab("inbox"); });
       tabChat.addEventListener("click", function () { showTab("chat"); });
@@ -490,6 +602,19 @@
           SUPABASE_URL = conf.supabaseUrl;
           SUPABASE_ANON_KEY = conf.supabaseAnonKey;
           sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+          var hp = parseHashParams();
+          if (hp.type === "recovery" && hp.access_token) {
+            if (hp.refresh_token) {
+              await sb.auth.setSession({
+                access_token: hp.access_token,
+                refresh_token: hp.refresh_token,
+              });
+            }
+            setRecoveryMode(true);
+            setAuthed(false);
+            return;
+          }
 
           var out = await sb.auth.getSession();
           var sess = out && out.data && out.data.session;
