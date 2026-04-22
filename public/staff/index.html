@@ -1,0 +1,511 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex,nofollow" />
+  <title>Mejor Vida — Staff Portal</title>
+  <style>
+    :root {
+      --bg: #0b1426;
+      --panel: #10203b;
+      --panel-2: #162b4d;
+      --text: #ecf2ff;
+      --muted: #a7b7d8;
+      --accent: #d7b46a;
+      --danger: #ff7b7b;
+      --ok: #65d19a;
+      --border: rgba(255,255,255,0.12);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: radial-gradient(1100px 700px at 20% 0%, #1a2f56 0%, var(--bg) 55%);
+      color: var(--text);
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      min-height: 100vh;
+    }
+    .hidden { display: none !important; }
+    .login-wrap {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+    }
+    .card {
+      width: 100%;
+      max-width: 420px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 22px;
+      box-shadow: 0 22px 60px rgba(0,0,0,0.35);
+    }
+    h1 { margin: 0 0 8px; font-size: 1.2rem; }
+    .sub { color: var(--muted); margin: 0 0 14px; font-size: .95rem; }
+    label { display: block; margin: 10px 0 6px; font-size: .92rem; }
+    input, textarea, button {
+      font: inherit;
+    }
+    input, textarea {
+      width: 100%;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: #0a1a33;
+      color: var(--text);
+      padding: 10px 12px;
+      outline: none;
+    }
+    input:focus, textarea:focus {
+      border-color: #6f8bc9;
+      box-shadow: 0 0 0 2px rgba(111,139,201,.2);
+    }
+    button {
+      border: 0;
+      border-radius: 10px;
+      padding: 10px 12px;
+      cursor: pointer;
+      font-weight: 700;
+      background: var(--accent);
+      color: #1e1e1e;
+    }
+    button[disabled] { opacity: .6; cursor: not-allowed; }
+    .err { color: var(--danger); margin-top: 10px; min-height: 1.2rem; font-size: .92rem; }
+    .ok { color: var(--ok); }
+
+    .portal {
+      min-height: 100vh;
+      display: grid;
+      grid-template-rows: auto auto 1fr;
+    }
+    .top {
+      border-bottom: 1px solid var(--border);
+      background: rgba(6, 14, 28, .5);
+      backdrop-filter: blur(6px);
+      padding: 12px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+    .top b { color: var(--accent); }
+    .top small { display: block; color: var(--muted); }
+    .top .signout { background: #2d3f67; color: #fff; border: 1px solid var(--border); }
+    .tabs {
+      display: flex; gap: 10px; padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(12, 24, 45, .75);
+    }
+    .tab-btn {
+      background: #20345d; color: #fff; border: 1px solid var(--border); font-weight: 600;
+    }
+    .tab-btn.active { background: #314f8a; }
+    .pane { display: none; height: calc(100vh - 116px); }
+    .pane.active { display: block; }
+    #pane-inbox { padding: 18px; color: var(--muted); }
+    #pane-chat { padding: 12px; }
+
+    .chat-wrap {
+      height: 100%;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      background: var(--panel);
+    }
+    .chat-head {
+      display: flex; justify-content: space-between; align-items: center;
+      background: var(--panel-2);
+      border-bottom: 1px solid var(--border);
+      padding: 10px 12px;
+    }
+    .chat-log {
+      overflow: auto; padding: 14px;
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    .msg { max-width: 82%; padding: 10px 12px; border-radius: 12px; line-height: 1.35; }
+    .msg.user { margin-left: auto; background: #26457e; }
+    .msg.assistant { background: #1c2c4c; border: 1px solid var(--border); }
+    .msg p { margin: 0 0 8px; }
+    .msg p:last-child { margin-bottom: 0; }
+    .msg ul, .msg ol { margin: 6px 0 6px 18px; }
+    .msg table { width: 100%; border-collapse: collapse; margin-top: 6px; font-size: .92rem; }
+    .msg th, .msg td { border: 1px solid rgba(255,255,255,.2); padding: 4px 6px; }
+    .thinking { color: var(--muted); font-size: .92rem; font-style: italic; }
+    .chat-compose {
+      border-top: 1px solid var(--border);
+      padding: 10px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      background: rgba(8, 18, 36, .7);
+    }
+    #staff-input { resize: vertical; min-height: 52px; max-height: 180px; }
+    .small-note { color: var(--muted); font-size: .85rem; margin-top: 6px; }
+  </style>
+</head>
+<body>
+  <main id="login-screen" class="login-wrap">
+    <section class="card">
+      <h1>Mejor Vida Insurance</h1>
+      <p class="sub">Staff Portal — Internal Use Only</p>
+      <form id="login-form">
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" autocomplete="username" required />
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" autocomplete="current-password" required />
+        <div style="margin-top:14px">
+          <button id="login-btn" type="submit">Sign In</button>
+        </div>
+        <div id="login-error" class="err"></div>
+      </form>
+    </section>
+  </main>
+
+  <main id="portal" class="portal hidden" aria-hidden="true">
+    <header class="top">
+      <div>
+        <b>Mejor Vida Insurance — Staff Portal</b>
+        <small>Internal Use Only — Do Not Share This URL</small>
+      </div>
+      <button id="signout-btn" class="signout" type="button">Sign Out</button>
+    </header>
+
+    <nav class="tabs" aria-label="Staff tools">
+      <button id="tab-inbox" class="tab-btn active" type="button">📬 Inbox</button>
+      <button id="tab-chat" class="tab-btn" type="button">🤖 Staff Assistant</button>
+    </nav>
+
+    <section id="pane-inbox" class="pane active">
+      <h2 style="margin-top:0">Inbox</h2>
+      <p>Phase 2 will populate this view with unresolved questions.</p>
+    </section>
+
+    <section id="pane-chat" class="pane">
+      <div class="chat-wrap">
+        <div class="chat-head">
+          <div>
+            <strong>Staff Assistant</strong>
+            <div class="small-note">Private internal AI assistant (full recommendations enabled)</div>
+          </div>
+          <button id="new-convo-btn" type="button">New Conversation</button>
+        </div>
+        <div id="chat-log" class="chat-log"></div>
+        <div class="chat-compose">
+          <div>
+            <textarea id="staff-input" spellcheck="true" placeholder="Ask about products, underwriting, case strategy, rates, compliance, and recommendations..."></textarea>
+            <div id="chat-error" class="err"></div>
+          </div>
+          <button id="send-btn" type="button">Send</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    (function () {
+      "use strict";
+      var SUPABASE_URL = "";
+      var SUPABASE_ANON_KEY = "";
+      var LOCK_KEY = "mvi_staff_lock_until";
+      var FAIL_KEY = "mvi_staff_fail_count";
+      var IDLE_TIMEOUT_MS = 30 * 60 * 1000;
+
+      var loginScreen = document.getElementById("login-screen");
+      var portal = document.getElementById("portal");
+      var loginForm = document.getElementById("login-form");
+      var emailEl = document.getElementById("email");
+      var passEl = document.getElementById("password");
+      var loginBtn = document.getElementById("login-btn");
+      var loginErr = document.getElementById("login-error");
+      var signoutBtn = document.getElementById("signout-btn");
+      var tabInbox = document.getElementById("tab-inbox");
+      var tabChat = document.getElementById("tab-chat");
+      var paneInbox = document.getElementById("pane-inbox");
+      var paneChat = document.getElementById("pane-chat");
+      var chatLog = document.getElementById("chat-log");
+      var chatInput = document.getElementById("staff-input");
+      var sendBtn = document.getElementById("send-btn");
+      var newConvoBtn = document.getElementById("new-convo-btn");
+      var chatErr = document.getElementById("chat-error");
+
+      var sb = null;
+      var accessToken = "";
+      var conversation = [];
+      var idleTimer = null;
+      var thinkingNode = null;
+
+      function setAuthed(on) {
+        loginScreen.classList.toggle("hidden", on);
+        portal.classList.toggle("hidden", !on);
+        portal.setAttribute("aria-hidden", on ? "false" : "true");
+      }
+
+      function showTab(which) {
+        var chatOn = which === "chat";
+        tabChat.classList.toggle("active", chatOn);
+        tabInbox.classList.toggle("active", !chatOn);
+        paneChat.classList.toggle("active", chatOn);
+        paneInbox.classList.toggle("active", !chatOn);
+      }
+
+      function lockoutUntil() {
+        return Number(sessionStorage.getItem(LOCK_KEY) || 0) || 0;
+      }
+
+      function applyLockState() {
+        var until = lockoutUntil();
+        var now = Date.now();
+        if (until > now) {
+          loginBtn.disabled = true;
+          emailEl.disabled = true;
+          passEl.disabled = true;
+          loginErr.textContent = "Too many attempts. Please try again in 10 minutes.";
+          return true;
+        }
+        loginBtn.disabled = false;
+        emailEl.disabled = false;
+        passEl.disabled = false;
+        return false;
+      }
+
+      function markLoginFailure() {
+        var n = Number(sessionStorage.getItem(FAIL_KEY) || 0) + 1;
+        sessionStorage.setItem(FAIL_KEY, String(n));
+        if (n >= 5) {
+          sessionStorage.setItem(LOCK_KEY, String(Date.now() + (10 * 60 * 1000)));
+          applyLockState();
+        }
+      }
+
+      function resetLoginFailures() {
+        sessionStorage.removeItem(FAIL_KEY);
+        sessionStorage.removeItem(LOCK_KEY);
+      }
+
+      async function signOutNow() {
+        try { await sb.auth.signOut(); } catch (e) {}
+        accessToken = "";
+        conversation = [];
+        chatLog.innerHTML = "";
+        chatErr.textContent = "";
+        setAuthed(false);
+      }
+
+      function resetIdleTimer() {
+        if (!accessToken) return;
+        if (idleTimer) clearTimeout(idleTimer);
+        idleTimer = setTimeout(function () {
+          signOutNow();
+        }, IDLE_TIMEOUT_MS);
+      }
+
+      function bindIdleWatch() {
+        ["mousemove", "keydown", "click", "touchstart"].forEach(function (ev) {
+          window.addEventListener(ev, resetIdleTimer, { passive: true });
+        });
+      }
+
+      function esc(s) {
+        var d = document.createElement("div");
+        d.textContent = String(s || "");
+        return d.innerHTML;
+      }
+
+      function renderMarkdown(text) {
+        var lines = String(text || "").replace(/\r/g, "").split("\n");
+        var html = [];
+        var inUl = false, inOl = false, inTable = false;
+
+        function closeLists() {
+          if (inUl) { html.push("</ul>"); inUl = false; }
+          if (inOl) { html.push("</ol>"); inOl = false; }
+        }
+        function closeTable() {
+          if (inTable) { html.push("</tbody></table>"); inTable = false; }
+        }
+        function inline(t) {
+          return esc(t)
+            .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
+            .replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
+        }
+
+        for (var i = 0; i < lines.length; i++) {
+          var line = lines[i];
+          var trim = line.trim();
+          if (!trim) {
+            closeLists();
+            closeTable();
+            continue;
+          }
+          var ul = trim.match(/^-\s+(.+)/);
+          var ol = trim.match(/^\d+\.\s+(.+)/);
+          if (ul) {
+            closeTable();
+            if (!inUl) { closeLists(); html.push("<ul>"); inUl = true; }
+            html.push("<li>" + inline(ul[1]) + "</li>");
+            continue;
+          }
+          if (ol) {
+            closeTable();
+            if (!inOl) { closeLists(); html.push("<ol>"); inOl = true; }
+            html.push("<li>" + inline(ol[1]) + "</li>");
+            continue;
+          }
+          if (trim.indexOf("|") !== -1) {
+            closeLists();
+            var cells = trim.split("|").map(function (c) { return c.trim(); }).filter(Boolean);
+            if (cells.length >= 2) {
+              if (!inTable) { html.push("<table><tbody>"); inTable = true; }
+              html.push("<tr>" + cells.map(function (c) { return "<td>" + inline(c) + "</td>"; }).join("") + "</tr>");
+              continue;
+            }
+          }
+          closeLists();
+          closeTable();
+          html.push("<p>" + inline(trim) + "</p>");
+        }
+        closeLists();
+        closeTable();
+        return html.join("") || "<p></p>";
+      }
+
+      function addMessage(role, content) {
+        var n = document.createElement("div");
+        n.className = "msg " + role;
+        if (role === "assistant") n.innerHTML = renderMarkdown(content);
+        else n.textContent = String(content || "");
+        chatLog.appendChild(n);
+        chatLog.scrollTop = chatLog.scrollHeight;
+      }
+
+      function setThinking(on) {
+        if (on) {
+          if (thinkingNode) return;
+          thinkingNode = document.createElement("div");
+          thinkingNode.className = "thinking";
+          thinkingNode.textContent = "Assistant is thinking...";
+          chatLog.appendChild(thinkingNode);
+          chatLog.scrollTop = chatLog.scrollHeight;
+        } else if (thinkingNode) {
+          thinkingNode.remove();
+          thinkingNode = null;
+        }
+      }
+
+      async function sendChat() {
+        var text = String(chatInput.value || "").trim();
+        if (!text || !accessToken) return;
+        chatErr.textContent = "";
+        chatInput.value = "";
+        addMessage("user", text);
+        conversation.push({ role: "user", content: text });
+        setThinking(true);
+        sendBtn.disabled = true;
+        try {
+          var r = await fetch("/api/staff-chat", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + accessToken,
+            },
+            body: JSON.stringify({ message: text, conversationHistory: conversation }),
+          });
+          if (r.status === 401) {
+            await signOutNow();
+            return;
+          }
+          var data = await r.json();
+          if (!r.ok || !data.answer) throw new Error(data.error || "Failed");
+          conversation.push({ role: "assistant", content: data.answer });
+          addMessage("assistant", data.answer);
+        } catch (e) {
+          chatErr.textContent = "Failed to generate answer. Please try again.";
+        } finally {
+          setThinking(false);
+          sendBtn.disabled = false;
+          chatInput.focus();
+        }
+      }
+
+      loginForm.addEventListener("submit", async function (e) {
+        e.preventDefault();
+        if (!sb) {
+          loginErr.textContent = "Invalid credentials";
+          return;
+        }
+        loginErr.textContent = "";
+        if (applyLockState()) return;
+        loginBtn.disabled = true;
+        try {
+          var out = await sb.auth.signInWithPassword({
+            email: String(emailEl.value || "").trim(),
+            password: String(passEl.value || ""),
+          });
+          if (out.error || !out.data || !out.data.session) throw new Error("invalid");
+          resetLoginFailures();
+          accessToken = out.data.session.access_token;
+          setAuthed(true);
+          showTab("chat");
+          resetIdleTimer();
+          chatInput.focus();
+        } catch (err) {
+          markLoginFailure();
+          loginErr.textContent = applyLockState()
+            ? "Too many attempts. Please try again in 10 minutes."
+            : "Invalid credentials";
+        } finally {
+          if (!accessToken) loginBtn.disabled = false;
+        }
+      });
+
+      signoutBtn.addEventListener("click", signOutNow);
+      tabInbox.addEventListener("click", function () { showTab("inbox"); });
+      tabChat.addEventListener("click", function () { showTab("chat"); });
+      sendBtn.addEventListener("click", sendChat);
+      chatInput.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" && !e.shiftKey) {
+          e.preventDefault();
+          sendChat();
+        }
+      });
+      newConvoBtn.addEventListener("click", function () {
+        conversation = [];
+        chatLog.innerHTML = "";
+        chatErr.textContent = "";
+        chatInput.focus();
+      });
+
+      (async function init() {
+        bindIdleWatch();
+        applyLockState();
+        try {
+          var confRes = await fetch("/api/staff-config");
+          var conf = await confRes.json();
+          if (!confRes.ok || !conf || !conf.supabaseUrl || !conf.supabaseAnonKey) {
+            throw new Error("config");
+          }
+          SUPABASE_URL = conf.supabaseUrl;
+          SUPABASE_ANON_KEY = conf.supabaseAnonKey;
+          sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+          var out = await sb.auth.getSession();
+          var sess = out && out.data && out.data.session;
+          if (sess && sess.access_token) {
+            accessToken = sess.access_token;
+            setAuthed(true);
+            showTab("chat");
+            resetIdleTimer();
+          } else {
+            setAuthed(false);
+          }
+        } catch (e) {
+          setAuthed(false);
+        }
+      })();
+    })();
+  </script>
+</body>
+</html>
