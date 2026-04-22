@@ -3,11 +3,12 @@
  * Website chatbot — off-script questions with conversation history context.
  * Env: SUPABASE_*, OPENAI_API_KEY
  *
- * Request: { session_id, message, language? }
+ * Request: { session_id, message, language? | lang? } (lang: "es"|"en" preferred by some clients)
  * Response: { status: "answered"|"no_answer", answer: "...", message_id?: "..." }
  */
 
 const { getOrCreateChatSession, insertChatMessage, getLastChatMessages } = require("../lib/supabase");
+const { normalizeAssistantLanguage } = require("../lib/assistant-language");
 const { runRagPipeline } = require("../lib/rag-pipeline");
 
 function json(res, status, payload) {
@@ -48,7 +49,8 @@ module.exports = async function handler(req, res) {
 
   const sessionId = String(body.session_id || "").trim();
   const userMessage = String(body.message || "").trim();
-  const language = String(body.language || "English").trim();
+  const language = String(body.lang || body.language || "English").trim();
+  const assistantLocale = normalizeAssistantLanguage(language);
 
   if (!sessionId || !userMessage) {
     return json(res, 400, { status: "error", error: "session_id and message required" });
@@ -97,7 +99,9 @@ module.exports = async function handler(req, res) {
 
     const assistantAnswer =
       ragOut.status === "no_answer" || ragOut.answer == null
-        ? "I don't have that information yet. Please try rephrasing your question or contact us for help."
+        ? assistantLocale === "Spanish"
+          ? "Aún no tengo esa información. Intenta reformular tu pregunta o comunícate con Julie al 402-440-5438."
+          : "I don't have that information yet. Please try rephrasing your question or contact us for help."
         : ragOut.answer;
 
     const responseStatus = ragOut.status === "answered" ? "answered" : "no_answer";
