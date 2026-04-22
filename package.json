@@ -6,5 +6,8 @@
   },
   "scripts": {
     "preview:post-quote-email": "node scripts/preview-post-quote-email.js"
+  },
+  "dependencies": {
+    "googleapis": "^171.4.0"
   }
 }

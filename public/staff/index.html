@@ -600,21 +600,36 @@
         if (!q) return;
         var reply = document.getElementById("reply-box");
         var status = document.getElementById("inbox-status");
+        var sendBtnEl = document.getElementById("send-email-btn");
         var draft = String(reply.value || "").trim();
         if (!draft) {
           status.textContent = "Reply draft is required before sending email.";
           return;
         }
+        if (sendBtnEl) {
+          sendBtnEl.disabled = true;
+          sendBtnEl.textContent = "Sending...";
+        }
         status.textContent = "Sending email...";
         try {
-          var data = await authedApi("/api/staff/send-email", { id: q.id, reply_draft: draft });
-          if (data && data.success === false && data.message) {
-            status.textContent = String(data.message);
+          var data = await authedApi("/api/staff/send-email", {
+            questionId: q.id,
+            replyDraft: draft,
+            toEmail: q.lead && q.lead.email ? q.lead.email : "",
+            toName: q.lead && q.lead.first_name ? q.lead.first_name : "",
+          });
+          if (data && data.success === false && data.error) {
+            status.textContent = String(data.error);
           } else {
             status.textContent = "Email sent.";
           }
         } catch (e) {
           status.textContent = "Failed to send email.";
+        } finally {
+          if (sendBtnEl) {
+            sendBtnEl.disabled = false;
+            sendBtnEl.textContent = "Send Email";
+          }
         }
       }
 
