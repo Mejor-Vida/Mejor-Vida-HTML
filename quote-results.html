@@ -727,7 +727,15 @@
         }
       }
 
-      var lang = q.lang === 'en' ? 'en' : 'es';
+      // Prefer active page language over possibly stale quote payload language.
+      var pageLang = '';
+      if (document.documentElement.classList.contains('lang-en')) pageLang = 'en';
+      else if (document.documentElement.classList.contains('lang-es')) pageLang = 'es';
+      if (!pageLang) {
+        var sl = sessionStorage.getItem('sessionLang');
+        if (sl === 'en' || sl === 'es') pageLang = sl;
+      }
+      var lang = pageLang || (q.lang === 'en' ? 'en' : 'es');
       var fn = String(q.firstName || '').trim();
       if (subhero) {
         if (fn) {
