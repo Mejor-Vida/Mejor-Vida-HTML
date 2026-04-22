@@ -87,7 +87,6 @@
       min-height: 100vh;
       display: grid;
       grid-template-rows: auto 1fr;
-      position: relative;
     }
     .top {
       border-bottom: 1px solid var(--border);
@@ -101,15 +100,16 @@
     }
     .top b { color: var(--accent); }
     .top small { display: block; color: var(--muted); }
+    .top-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
     .top .signout { background: #2d3f67; color: #fff; border: 1px solid var(--border); }
     .tabs {
-      position: absolute;
-      top: 58px;
-      left: 16px;
-      z-index: 5;
       display: flex;
       gap: 10px;
-      padding: 8px 0;
+      padding: 0;
       border-bottom: 0;
       background: transparent;
     }
@@ -117,10 +117,10 @@
       background: #20345d; color: #fff; border: 1px solid var(--border); font-weight: 600;
     }
     .tab-btn.active { background: #314f8a; }
-    .pane { display: none; height: calc(100vh - 116px); }
+    .pane { display: none; height: calc(100vh - 74px); }
     .pane.active { display: block; }
     #pane-inbox { padding: 12px; }
-    #pane-chat { padding: 62px 12px 12px; }
+    #pane-chat { padding: 12px; }
     .inbox-wrap {
       height: 100%;
       display: grid;
@@ -135,7 +135,6 @@
       display: grid;
       grid-template-rows: auto 1fr;
     }
-    .inbox-list { margin-top: 52px; }
     .inbox-head {
       padding: 10px 12px;
       border-bottom: 1px solid var(--border);
@@ -304,13 +303,14 @@
         <b>Mejor Vida Insurance — Staff Portal</b>
         <small>Internal Use Only — Do Not Share This URL</small>
       </div>
-      <button id="signout-btn" class="signout" type="button">Sign Out</button>
+      <div class="top-right">
+        <nav class="tabs" aria-label="Staff tools">
+          <button id="tab-inbox" class="tab-btn active" type="button">📬 Inbox</button>
+          <button id="tab-chat" class="tab-btn" type="button">🤖 Staff Assistant</button>
+        </nav>
+        <button id="signout-btn" class="signout" type="button">Sign Out</button>
+      </div>
     </header>
-
-    <nav class="tabs" aria-label="Staff tools">
-      <button id="tab-inbox" class="tab-btn active" type="button">📬 Inbox</button>
-      <button id="tab-chat" class="tab-btn" type="button">🤖 Staff Assistant</button>
-    </nav>
 
     <section id="pane-inbox" class="pane active">
       <div class="inbox-wrap">
