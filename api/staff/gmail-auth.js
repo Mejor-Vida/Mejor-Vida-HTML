@@ -1,5 +1,4 @@
 const { google } = require("googleapis");
-const { requireStaffAuth } = require("./_inbox-lib");
 
 const GMAIL_REDIRECT_URI = "https://www.mejorvidainsurance.com/api/staff/gmail-callback";
 
@@ -8,9 +7,6 @@ module.exports = async function handler(req, res) {
     res.setHeader("Allow", "GET");
     return res.status(405).send("Method Not Allowed");
   }
-
-  const auth = await requireStaffAuth(req, res);
-  if (!auth.valid) return;
 
   const clientId = process.env.GMAIL_CLIENT_ID;
   const clientSecret = process.env.GMAIL_CLIENT_SECRET;
