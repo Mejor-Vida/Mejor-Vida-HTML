@@ -64,14 +64,14 @@ module.exports = async function handler(req, res) {
     const answer = isSpanish
       ? `Para ver cuanto costaria tu cobertura, usa nuestra **herramienta de cotizacion gratuita** - solo toma un minuto.
 
-👉 [Obtener mi cotizacion gratuita](https://mejor-vida-html.vercel.app/quote.html)
+👉 [Obtener mi cotizacion gratuita](https://www.mejorvidainsurance.com/quote.html)
 
 Ingresa tu edad, genero y si usas tabaco, y recibiras un rango de precio estimado al instante. Tambien puedes usar el boton **"Cotizacion gratuita"** en la parte superior de esta pagina.
 
 Julie revisara tu informacion y podra hacer seguimiento contigo personalmente.`
       : `To see what coverage would cost you, use our **free quote tool** - it only takes a minute.
 
-👉 [Get my free quote](https://mejor-vida-html.vercel.app/quote.html)
+👉 [Get my free quote](https://www.mejorvidainsurance.com/quote.html)
 
 Enter your age, gender, and tobacco status and you'll get an estimated price range right away. You can also tap the **"Get a Free Quote"** button at the top of this page.
 
