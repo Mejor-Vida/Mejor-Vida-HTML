@@ -643,7 +643,7 @@ These are empty until explicitly collected. ManyChat sends the literal `{{field_
 "drop_off_stage":"[stage name]"}
 ```
 
-**Endpoint for all:** `POST https://mejor-vida-html.vercel.app/api/contact-capture`
+**Endpoint for all:** `POST https://www.mejorvidainsurance.com/api/contact-capture`
 **Header:** `X-App-Secret: [MANYCHAT_WEBHOOK_SECRET value]`
 
 ---
