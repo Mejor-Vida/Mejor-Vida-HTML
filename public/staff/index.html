@@ -112,8 +112,88 @@
     .tab-btn.active { background: #314f8a; }
     .pane { display: none; height: calc(100vh - 116px); }
     .pane.active { display: block; }
-    #pane-inbox { padding: 18px; color: var(--muted); }
+    #pane-inbox { padding: 12px; }
     #pane-chat { padding: 12px; }
+    .inbox-wrap {
+      height: 100%;
+      display: grid;
+      grid-template-columns: minmax(320px, 42%) minmax(420px, 1fr);
+      gap: 12px;
+    }
+    .inbox-list, .inbox-detail {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--panel);
+      overflow: hidden;
+      display: grid;
+      grid-template-rows: auto 1fr;
+    }
+    .inbox-head {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--border);
+      background: var(--panel-2);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+    .inbox-items {
+      overflow: auto;
+      padding: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .q-item {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px;
+      background: rgba(15,30,58,.6);
+      cursor: pointer;
+    }
+    .q-item.active { border-color: #6f8bc9; background: rgba(38,69,126,.45); }
+    .q-item .meta { color: var(--muted); font-size: .83rem; margin-top: 6px; }
+    .q-item .title { font-weight: 700; font-size: .92rem; }
+    .q-item .preview { color: #d8e2f7; margin-top: 6px; font-size: .9rem; }
+    .q-empty { color: var(--muted); padding: 12px; }
+    .detail-body {
+      overflow: auto;
+      padding: 12px;
+      display: grid;
+      gap: 10px;
+      align-content: start;
+    }
+    .meta-grid {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .meta-card {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 8px 10px;
+      background: rgba(10,20,39,.55);
+      font-size: .9rem;
+    }
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .actions button.secondary {
+      background: #253f6f;
+      color: #fff;
+      border: 1px solid var(--border);
+    }
+    .actions button.danger {
+      background: #7f2e2e;
+      color: #fff;
+    }
+    #reply-box { min-height: 170px; }
+    @media (max-width: 980px) {
+      .inbox-wrap { grid-template-columns: 1fr; }
+      .inbox-list { min-height: 260px; }
+    }
 
     .chat-wrap {
       height: 100%;
@@ -206,8 +286,29 @@
     </nav>
 
     <section id="pane-inbox" class="pane active">
-      <h2 style="margin-top:0">Inbox</h2>
-      <p>Phase 2 will populate this view with unresolved questions.</p>
+      <div class="inbox-wrap">
+        <div class="inbox-list">
+          <div class="inbox-head">
+            <div>
+              <strong>Unresolved Questions</strong>
+              <div class="small-note" id="inbox-count">Loading...</div>
+            </div>
+            <button id="refresh-inbox-btn" class="secondary" type="button">Refresh</button>
+          </div>
+          <div id="inbox-items" class="inbox-items"></div>
+        </div>
+        <div class="inbox-detail">
+          <div class="inbox-head">
+            <div>
+              <strong>Question Detail</strong>
+              <div class="small-note">Review, draft, edit, push, and resolve.</div>
+            </div>
+          </div>
+          <div id="inbox-detail" class="detail-body">
+            <div class="q-empty">Select a question to start.</div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <section id="pane-chat" class="pane">
@@ -261,6 +362,10 @@
       var tabChat = document.getElementById("tab-chat");
       var paneInbox = document.getElementById("pane-inbox");
       var paneChat = document.getElementById("pane-chat");
+      var inboxCount = document.getElementById("inbox-count");
+      var inboxItems = document.getElementById("inbox-items");
+      var inboxDetail = document.getElementById("inbox-detail");
+      var refreshInboxBtn = document.getElementById("refresh-inbox-btn");
       var chatLog = document.getElementById("chat-log");
       var chatInput = document.getElementById("staff-input");
       var sendBtn = document.getElementById("send-btn");
@@ -273,6 +378,8 @@
       var idleTimer = null;
       var thinkingNode = null;
       var recoveryMode = false;
+      var inboxQuestions = [];
+      var selectedQuestionId = "";
 
       function setAuthed(on) {
         loginScreen.classList.toggle("hidden", on);
@@ -286,6 +393,189 @@
         tabInbox.classList.toggle("active", !chatOn);
         paneChat.classList.toggle("active", chatOn);
         paneInbox.classList.toggle("active", !chatOn);
+      }
+
+      function fmtDate(iso) {
+        if (!iso) return "-";
+        try {
+          var d = new Date(iso);
+          return d.toLocaleString();
+        } catch (e) {
+          return String(iso);
+        }
+      }
+
+      function escHtml(s) {
+        var d = document.createElement("div");
+        d.textContent = String(s || "");
+        return d.innerHTML;
+      }
+
+      async function authedApi(path, body) {
+        var r = await fetch(path, {
+          method: body ? "POST" : "GET",
+          headers: Object.assign(
+            { Authorization: "Bearer " + accessToken },
+            body ? { "Content-Type": "application/json" } : {}
+          ),
+          body: body ? JSON.stringify(body) : undefined,
+        });
+        if (r.status === 401) {
+          await signOutNow();
+          throw new Error("unauthorized");
+        }
+        var data = {};
+        try { data = await r.json(); } catch (e) {}
+        if (!r.ok) throw new Error((data && data.error) || "Request failed");
+        return data;
+      }
+
+      function getSelectedQuestion() {
+        return inboxQuestions.find(function (q) { return q.id === selectedQuestionId; }) || null;
+      }
+
+      function renderInboxList() {
+        inboxItems.innerHTML = "";
+        inboxCount.textContent = inboxQuestions.length + " unresolved";
+        if (!inboxQuestions.length) {
+          inboxItems.innerHTML = '<div class="q-empty">No unresolved questions right now.</div>';
+          return;
+        }
+        inboxQuestions.forEach(function (q) {
+          var card = document.createElement("button");
+          card.type = "button";
+          card.className = "q-item" + (q.id === selectedQuestionId ? " active" : "");
+          card.innerHTML =
+            '<div class="title">' + escHtml(q.lead && q.lead.first_name ? q.lead.first_name : "Unknown lead") + "</div>" +
+            '<div class="preview">' + escHtml(String(q.edited_question || q.question || "").slice(0, 130)) + "</div>" +
+            '<div class="meta">' + escHtml((q.language || "Unknown language") + " • " + fmtDate(q.created_at)) + "</div>";
+          card.addEventListener("click", function () {
+            selectedQuestionId = q.id;
+            renderInboxList();
+            renderInboxDetail();
+          });
+          inboxItems.appendChild(card);
+        });
+      }
+
+      function renderInboxDetail(statusText) {
+        var q = getSelectedQuestion();
+        if (!q) {
+          inboxDetail.innerHTML = '<div class="q-empty">Select a question to start.</div>';
+          return;
+        }
+        inboxDetail.innerHTML =
+          '<div class="meta-grid">' +
+            '<div class="meta-card"><strong>Name:</strong> ' + escHtml((q.lead && q.lead.first_name) || "-") + "</div>" +
+            '<div class="meta-card"><strong>Email:</strong> ' + escHtml((q.lead && q.lead.email) || "-") + "</div>" +
+            '<div class="meta-card"><strong>Phone:</strong> ' + escHtml(q.phone || (q.lead && q.lead.phone) || "-") + "</div>" +
+            '<div class="meta-card"><strong>Language:</strong> ' + escHtml(q.language || "-") + "</div>" +
+          "</div>" +
+          '<label>Original question</label>' +
+          '<textarea id="orig-box" readonly>' + escHtml(q.question || "") + "</textarea>" +
+          '<label>Edited question (optional)</label>' +
+          '<textarea id="edit-box">' + escHtml(q.edited_question || "") + "</textarea>" +
+          '<label>Reply draft</label>' +
+          '<textarea id="reply-box" placeholder="Generate or type a response..."></textarea>' +
+          '<div class="actions">' +
+            '<button id="generate-btn" class="secondary" type="button">Generate Draft</button>' +
+            '<button id="save-edit-btn" class="secondary" type="button">Save Edit</button>' +
+            '<button id="push-rag-btn" class="secondary" type="button">Push to RAG</button>' +
+            '<button id="resolve-btn" class="danger" type="button">Resolve</button>' +
+          "</div>" +
+          '<div id="inbox-status" class="small-note">' + escHtml(statusText || "") + "</div>";
+
+        document.getElementById("generate-btn").addEventListener("click", onGenerateDraft);
+        document.getElementById("save-edit-btn").addEventListener("click", onSaveEdit);
+        document.getElementById("push-rag-btn").addEventListener("click", onPushToRag);
+        document.getElementById("resolve-btn").addEventListener("click", onResolveQuestion);
+      }
+
+      async function loadInbox() {
+        if (!accessToken) return;
+        inboxCount.textContent = "Loading...";
+        try {
+          var data = await authedApi("/api/staff/questions");
+          inboxQuestions = Array.isArray(data.items) ? data.items : [];
+          if (!selectedQuestionId && inboxQuestions.length) selectedQuestionId = inboxQuestions[0].id;
+          if (selectedQuestionId && !inboxQuestions.some(function (q) { return q.id === selectedQuestionId; })) {
+            selectedQuestionId = inboxQuestions.length ? inboxQuestions[0].id : "";
+          }
+          renderInboxList();
+          renderInboxDetail();
+        } catch (e) {
+          inboxCount.textContent = "Failed to load";
+          inboxItems.innerHTML = '<div class="q-empty">Could not load inbox.</div>';
+        }
+      }
+
+      async function onGenerateDraft() {
+        var q = getSelectedQuestion();
+        if (!q) return;
+        var status = document.getElementById("inbox-status");
+        var reply = document.getElementById("reply-box");
+        status.textContent = "Generating draft...";
+        try {
+          var data = await authedApi("/api/staff/generate-answer", { question: q });
+          reply.value = data.answer || "";
+          status.textContent = "Draft generated.";
+        } catch (e) {
+          status.textContent = "Failed to generate draft.";
+        }
+      }
+
+      async function onSaveEdit() {
+        var q = getSelectedQuestion();
+        if (!q) return;
+        var editBox = document.getElementById("edit-box");
+        var status = document.getElementById("inbox-status");
+        status.textContent = "Saving edit...";
+        try {
+          await authedApi("/api/staff/update-question", {
+            id: q.id,
+            edited_question: String(editBox.value || "").trim(),
+          });
+          q.edited_question = String(editBox.value || "").trim();
+          renderInboxList();
+          status.textContent = "Edited question saved.";
+        } catch (e) {
+          status.textContent = "Failed to save edit.";
+        }
+      }
+
+      async function onPushToRag() {
+        var q = getSelectedQuestion();
+        if (!q) return;
+        var reply = document.getElementById("reply-box");
+        var status = document.getElementById("inbox-status");
+        var answer = String(reply.value || "").trim();
+        if (!answer) {
+          status.textContent = "Reply draft is required before pushing to RAG.";
+          return;
+        }
+        status.textContent = "Pushing to knowledge base...";
+        try {
+          await authedApi("/api/staff/push-to-rag", { id: q.id, answer: answer });
+          status.textContent = "Pushed to knowledge base.";
+        } catch (e) {
+          status.textContent = "Failed to push to RAG.";
+        }
+      }
+
+      async function onResolveQuestion() {
+        var q = getSelectedQuestion();
+        if (!q) return;
+        var status = document.getElementById("inbox-status");
+        status.textContent = "Resolving question...";
+        try {
+          await authedApi("/api/staff/resolve", { id: q.id });
+          inboxQuestions = inboxQuestions.filter(function (item) { return item.id !== q.id; });
+          selectedQuestionId = inboxQuestions.length ? inboxQuestions[0].id : "";
+          renderInboxList();
+          renderInboxDetail("Question resolved.");
+        } catch (e) {
+          status.textContent = "Failed to resolve question.";
+        }
       }
 
       function lockoutUntil() {
@@ -349,8 +639,13 @@
         try { await sb.auth.signOut(); } catch (e) {}
         accessToken = "";
         conversation = [];
+        inboxQuestions = [];
+        selectedQuestionId = "";
         chatLog.innerHTML = "";
         chatErr.textContent = "";
+        inboxItems.innerHTML = "";
+        inboxDetail.innerHTML = '<div class="q-empty">Select a question to start.</div>';
+        inboxCount.textContent = "";
         setAuthed(false);
       }
 
@@ -509,6 +804,7 @@
           accessToken = out.data.session.access_token;
           setAuthed(true);
           showTab("chat");
+          await loadInbox();
           resetIdleTimer();
           chatInput.focus();
         } catch (err) {
@@ -599,6 +895,9 @@
         chatErr.textContent = "";
         chatInput.focus();
       });
+      refreshInboxBtn.addEventListener("click", function () {
+        loadInbox();
+      });
 
       (async function init() {
         bindIdleWatch();
@@ -632,6 +931,7 @@
             accessToken = sess.access_token;
             setAuthed(true);
             showTab("chat");
+            await loadInbox();
             resetIdleTimer();
           } else {
             setAuthed(false);
