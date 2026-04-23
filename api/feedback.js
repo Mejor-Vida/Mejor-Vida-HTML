@@ -23,7 +23,8 @@
 const { google } = require("googleapis");
 const { verifyManychatSecret, logRequest } = require("../lib/manychat-auth");
 const { sanitizeManychatTemplateField } = require("../lib/rag-pipeline");
-const { findManychatLeadBySubscriberId } = require("../lib/supabase");
+const { findManychatLeadBySubscriberId, findManychatLeadsByPhone } = require("../lib/supabase");
+const { getContactByManychatSubscriberId, getContactByPhone } = require("../lib/contacts-db");
 
 const GMAIL_REDIRECT_URI = "https://www.mejorvidainsurance.com/api/staff/gmail-callback";
 
@@ -123,14 +124,79 @@ module.exports = async function handler(req, res) {
     sanitizeManychatTemplateField(body.subscriber_id || body.subscriberId || body.user_id || body.userId) || null;
   let phone = sanitizeManychatTemplateField(body.phone) || null;
 
-  if (!phone && subscriberId && supabaseUrl && supabaseKey) {
+  /** ManyChat often sends whatsapp_id / phone-like values in subscriber_id — match v2 contacts + leads. */
+  async function resolvePhoneFromSubscriber() {
+    if (phone || !subscriberId || !supabaseUrl || !supabaseKey) return;
+    const sid = String(subscriberId).trim();
+    const digits = sid.replace(/\D/g, "");
     try {
-      const lead = await findManychatLeadBySubscriberId(supabaseUrl, supabaseKey, subscriberId);
-      phone = sanitizeManychatTemplateField(lead && lead.phone);
+      const lead = await findManychatLeadBySubscriberId(supabaseUrl, supabaseKey, sid);
+      const fromLead = sanitizeManychatTemplateField(lead && lead.phone);
+      if (fromLead) {
+        phone = fromLead.slice(0, 40);
+        return;
+      }
     } catch (e) {
-      console.error("feedback phone lookup error", e.message);
+      console.error("feedback manychat_leads lookup", e.message);
+    }
+    try {
+      const contact = await getContactByManychatSubscriberId(supabaseUrl, supabaseKey, sid);
+      if (contact) {
+        const fromPhone = sanitizeManychatTemplateField(contact.phone);
+        if (fromPhone) {
+          phone = fromPhone.slice(0, 40);
+          return;
+        }
+        const fromWa = sanitizeManychatTemplateField(contact.whatsapp_id);
+        if (fromWa && /^\d/.test(fromWa)) {
+          phone = fromWa.slice(0, 40);
+          return;
+        }
+      }
+    } catch (e) {
+      console.error("feedback contacts subscriber lookup", e.message);
+    }
+    if (digits.length >= 10 && digits.length <= 15) {
+      const phoneTries = [sid, digits];
+      if (digits.length === 10) phoneTries.push(`+1${digits}`, `1${digits}`);
+      if (digits.length === 11 && digits.startsWith("1")) phoneTries.push(`+${digits}`);
+      for (const pTry of phoneTries) {
+        try {
+          const c = await getContactByPhone(supabaseUrl, supabaseKey, pTry);
+          if (c) {
+            const fp = sanitizeManychatTemplateField(c.phone);
+            if (fp) {
+              phone = fp.slice(0, 40);
+              return;
+            }
+            const fw = sanitizeManychatTemplateField(c.whatsapp_id);
+            if (fw && /^\d/.test(fw)) {
+              phone = fw.slice(0, 40);
+              return;
+            }
+          }
+        } catch (e) {
+          console.error("feedback contacts phone lookup", e.message);
+        }
+      }
+      for (const pTry of [...new Set([sid, digits, digits.length === 10 ? `+1${digits}` : null].filter(Boolean))]) {
+        try {
+          const rows = await findManychatLeadsByPhone(supabaseUrl, supabaseKey, pTry);
+          if (rows && rows[0]) {
+            const lp = sanitizeManychatTemplateField(rows[0].phone);
+            if (lp) {
+              phone = lp.slice(0, 40);
+              return;
+            }
+          }
+        } catch (e) {
+          console.error("feedback manychat_leads phone lookup", e.message);
+        }
+      }
     }
   }
+
+  await resolvePhoneFromSubscriber();
 
   const clientId = process.env.GMAIL_CLIENT_ID;
   const clientSecret = process.env.GMAIL_CLIENT_SECRET;
