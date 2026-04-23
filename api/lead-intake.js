@@ -39,6 +39,14 @@ function readJsonBody(req) {
   return req.body && typeof req.body === "object" ? req.body : {};
 }
 
+const UNRESOLVED_TEMPLATE = /^\{\{[\s\S]*\}\}$/;
+
+function cleanManychatValue(v) {
+  const s = String(v == null ? "" : v).trim();
+  if (!s || UNRESOLVED_TEMPLATE.test(s)) return "";
+  return s;
+}
+
 module.exports = async function handler(req, res) {
   logRequest("lead-intake");
 
@@ -66,24 +74,24 @@ module.exports = async function handler(req, res) {
   }
 
   // ── Validate required fields ──────────────────────────────────────────────
-  const phone = String(body.phone || "").trim();
+  const phone = cleanManychatValue(body.phone);
   if (!phone) {
     return json(res, 400, { success: false, error: "phone is required" });
   }
 
-  const language = String(body.language || "english").trim().toLowerCase();
+  const language = cleanManychatValue(body.language || "english").toLowerCase();
   if (!["english", "spanish"].includes(language)) {
     return json(res, 400, { success: false, error: "language must be 'english' or 'spanish'" });
   }
 
-  const whatsappId = String(body.whatsapp_id || "").trim() || null;
+  const whatsappId = cleanManychatValue(body.whatsapp_id || body.manychat_subscriber_id) || null;
 
   // Prefer explicit first_name/last_name from the ManyChat body.
   // Fall back to splitting a legacy full_name/name payload on the first space.
-  let firstName = String(body.first_name || body.firstName || "").trim().slice(0, 200);
-  let lastName  = String(body.last_name  || body.lastName  || "").trim().slice(0, 200);
+  let firstName = cleanManychatValue(body.first_name || body.firstName).slice(0, 200);
+  let lastName  = cleanManychatValue(body.last_name || body.lastName).slice(0, 200);
   if (!firstName && !lastName) {
-    const combined = String(body.full_name || body.name || "").trim();
+    const combined = cleanManychatValue(body.full_name || body.name);
     if (combined) {
       const spaceIdx = combined.indexOf(" ");
       if (spaceIdx === -1) {
@@ -98,7 +106,7 @@ module.exports = async function handler(req, res) {
   lastName  = lastName  || null;
 
   // Email — optional but needed so post-quote-email can find it on the v2 contacts row
-  const rawEmail = String(body.email || "").trim().toLowerCase();
+  const rawEmail = cleanManychatValue(body.email).toLowerCase();
   const email = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(rawEmail) ? rawEmail.slice(0, 500) : null;
 
   const usState = String(body.us_state || "NE").trim().toUpperCase().slice(0, 5);

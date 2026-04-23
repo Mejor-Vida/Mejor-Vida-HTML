@@ -13,6 +13,38 @@ function digitsOnly(v) {
   return String(v || "").replace(/\D+/g, "");
 }
 
+function chooseBestContactForQuestion(q, contacts) {
+  const qPhoneText = cleanText(q && q.phone);
+  const qPhoneDigits = digitsOnly(qPhoneText);
+  if (!contacts || !contacts.length) return null;
+
+  const scored = contacts
+    .map((c) => {
+      const cPhone = cleanText(c.phone);
+      const cWhatsAppId = cleanText(c.whatsapp_id);
+      const cSubscriberId = cleanText(c.manychat_subscriber_id);
+      const cPhoneDigits = digitsOnly(cPhone);
+      const hasEmail = !!cleanText(c.email);
+      let score = 0;
+
+      // Strongest signal: same numeric phone and contact phone itself is not a template.
+      if (qPhoneDigits && cPhoneDigits && qPhoneDigits === cPhoneDigits) score += 100;
+      // Secondary signal: question phone matches whatsapp/subscriber id.
+      if (qPhoneText && qPhoneText === cWhatsAppId) score += 40;
+      if (qPhoneText && qPhoneText === cSubscriberId) score += 35;
+      // Prefer records that can actually receive email and are tied to ManyChat identity.
+      if (hasEmail) score += 10;
+      if (cSubscriberId) score += 8;
+      if (cWhatsAppId) score += 5;
+
+      return { c, score };
+    })
+    .filter((x) => x.score > 0)
+    .sort((a, b) => b.score - a.score);
+
+  return scored.length ? scored[0].c : null;
+}
+
 module.exports = async function handler(req, res) {
   if (req.method !== "GET") {
     res.setHeader("Allow", "GET");
@@ -54,7 +86,7 @@ module.exports = async function handler(req, res) {
       )
     );
 
-    const byPhone = {};
+    const allContacts = [];
     if (phones.length) {
       const values = phones.map((p) => `"${p.replace(/"/g, "")}"`).join(",");
       const contacts = await restSelect(
@@ -62,26 +94,12 @@ module.exports = async function handler(req, res) {
         "contacts",
         `select=id,full_name,email,phone,whatsapp_id,manychat_subscriber_id,created_at&or=(phone.in.(${values}),whatsapp_id.in.(${values}),manychat_subscriber_id.in.(${values}))&order=created_at.desc&limit=400`
       );
-      (contacts || []).forEach((c) => {
-        const keyCandidates = [
-          cleanText(c.phone),
-          cleanText(c.whatsapp_id),
-          cleanText(c.manychat_subscriber_id),
-          digitsOnly(c.phone),
-          digitsOnly(c.whatsapp_id),
-          digitsOnly(c.manychat_subscriber_id),
-        ].filter(Boolean);
-        keyCandidates.forEach((k) => {
-          if (!byPhone[k]) byPhone[k] = c;
-        });
-      });
+      (contacts || []).forEach((c) => allContacts.push(c));
     }
 
     const items = (rows || []).map((q) => {
       const lead = q.lead_id ? byLeadId[q.lead_id] || null : null;
-      const phoneKey = cleanText(q.phone);
-      const phoneDigits = digitsOnly(q.phone);
-      const contact = byPhone[phoneKey] || byPhone[phoneDigits] || null;
+      const contact = chooseBestContactForQuestion(q, allContacts);
       const fallbackLead = contact
         ? {
             id: contact.id || null,

@@ -632,7 +632,9 @@
             replyDraft: draft,
           });
           if (data && data.success === true) {
-            status.textContent = "Email sent.";
+            var target = data.toEmail ? String(data.toEmail) : String(q.email || "");
+            var msgId = data.messageId ? " (id: " + String(data.messageId).slice(0, 10) + "...)" : "";
+            status.textContent = "Email sent to " + target + msgId;
           } else if (data && data.error) {
             status.textContent = String(data.error);
           } else {

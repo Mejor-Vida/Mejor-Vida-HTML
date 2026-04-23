@@ -1,5 +1,5 @@
 const { google } = require("googleapis");
-const { requireStaffAuth, json, readJsonBody, serviceConfig, restPatch } = require("./_inbox-lib");
+const { requireStaffAuth, json, readJsonBody, serviceConfig, restPatch, restInsert } = require("./_inbox-lib");
 
 const GMAIL_REDIRECT_URI = "https://www.mejorvidainsurance.com/api/staff/gmail-callback";
 
@@ -18,6 +18,23 @@ function buildRawEmail(fromEmail, toEmail, subject, bodyText) {
     .replace(/\+/g, "-")
     .replace(/\//g, "_")
     .replace(/=+$/g, "");
+}
+
+function isLikelyEmail(v) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(v || "").trim());
+}
+
+async function logSendAttempt(cfg, payload, status) {
+  try {
+    await restInsert(cfg, "webhook_logs", {
+      source: "staff_portal",
+      endpoint: "/api/staff/send-email",
+      payload,
+      status: status || "received",
+    });
+  } catch (_) {
+    // Logging should never break the endpoint.
+  }
 }
 
 module.exports = async function handler(req, res) {
@@ -46,6 +63,9 @@ module.exports = async function handler(req, res) {
   if (!toEmail) {
     return json(res, 200, { success: false, error: "No email address on file for this lead" });
   }
+  if (!isLikelyEmail(toEmail)) {
+    return json(res, 200, { success: false, error: `Invalid recipient email: ${toEmail}` });
+  }
 
   const clientId = process.env.GMAIL_CLIENT_ID;
   const clientSecret = process.env.GMAIL_CLIENT_SECRET;
@@ -69,10 +89,12 @@ module.exports = async function handler(req, res) {
       replyDraft
     );
 
-    await gmail.users.messages.send({
+    const sendResp = await gmail.users.messages.send({
       userId: "me",
       requestBody: { raw },
     });
+
+    const messageId = sendResp && sendResp.data && sendResp.data.id ? String(sendResp.data.id) : null;
 
     await restPatch(
       cfg,
@@ -81,11 +103,19 @@ module.exports = async function handler(req, res) {
       { email_sent: true }
     );
 
-    return json(res, 200, { success: true });
+    await logSendAttempt(
+      cfg,
+      { questionId, toEmail, fromEmail, messageId, result: "gmail_accept" },
+      "sent"
+    );
+
+    return json(res, 200, { success: true, toEmail, messageId });
   } catch (e) {
+    const err = String(e && e.message ? e.message : "Failed to send email");
+    await logSendAttempt(cfg, { questionId, toEmail, fromEmail, error: err }, "error");
     return json(res, 200, {
       success: false,
-      error: String(e && e.message ? e.message : "Failed to send email"),
+      error: err,
     });
   }
 };
