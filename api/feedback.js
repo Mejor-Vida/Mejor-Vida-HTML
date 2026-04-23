@@ -36,6 +36,11 @@ function readJsonBody(req) {
   return req.body && typeof req.body === "object" ? req.body : {};
 }
 
+const UNRESOLVED_TEMPLATE = /^\{\{[\s\S]*\}\}$/;
+function isTemplateString(v) {
+  return UNRESOLVED_TEMPLATE.test(String(v == null ? "" : v).trim());
+}
+
 async function logWebhook(supabaseUrl, supabaseKey, payload, status) {
   if (!supabaseUrl || !supabaseKey) return;
   try {
@@ -60,10 +65,11 @@ async function logWebhook(supabaseUrl, supabaseKey, payload, status) {
   }
 }
 
-function buildRawEmail(fromEmail, toEmail, subject, bodyText) {
+function buildRawEmail(fromEmail, toEmail, subject, bodyText, bccEmail) {
   const lines = [
     `From: ${fromEmail}`,
     `To: ${toEmail}`,
+    ...(bccEmail ? [`Bcc: ${bccEmail}`] : []),
     `Subject: ${subject}`,
     "MIME-Version: 1.0",
     "Content-Type: text/plain; charset=UTF-8",
@@ -130,6 +136,7 @@ module.exports = async function handler(req, res) {
   const refreshToken = process.env.GMAIL_REFRESH_TOKEN;
   const fromEmail = process.env.GMAIL_FROM_EMAIL || "julie@mejorvidainsurance.com";
   const toEmail = "whatsapp@mejorvidainsurance.com";
+  const bccEmail = "admin@mejorvidainsurance.com";
   if (!clientId || !clientSecret || !refreshToken || !fromEmail) {
     await logWebhook(
       supabaseUrl,
@@ -141,6 +148,11 @@ module.exports = async function handler(req, res) {
   }
 
   const ts = chicagoTimestamp();
+  const unresolvedFields = [];
+  if (isTemplateString(body.firstName || body.first_name)) unresolvedFields.push("firstName");
+  if (isTemplateString(body.phone)) unresolvedFields.push("phone");
+  if (isTemplateString(body.feedback)) unresolvedFields.push("feedback");
+  if (isTemplateString(body.language)) unresolvedFields.push("language");
   const subject = `WhatsApp Feedback from ${firstName}`;
   const bodyText = [
     "New feedback from WhatsApp chatbot:",
@@ -152,6 +164,9 @@ module.exports = async function handler(req, res) {
     "",
     "Feedback:",
     feedback || "(empty)",
+    unresolvedFields.length
+      ? `Unresolved template fields from ManyChat: ${unresolvedFields.join(", ")}`
+      : "Unresolved template fields from ManyChat: none",
     "",
     `Sent: ${ts}`,
   ].join("\n");
@@ -172,13 +187,23 @@ module.exports = async function handler(req, res) {
     const oauth2Client = new google.auth.OAuth2(clientId, clientSecret, GMAIL_REDIRECT_URI);
     oauth2Client.setCredentials({ refresh_token: refreshToken });
     const gmail = google.gmail({ version: "v1", auth: oauth2Client });
-    const raw = buildRawEmail(fromEmail, toEmail, subject, bodyText);
+    const raw = buildRawEmail(fromEmail, toEmail, subject, bodyText, bccEmail);
     const sendResp = await gmail.users.messages.send({ userId: "me", requestBody: { raw } });
     const messageId = sendResp && sendResp.data && sendResp.data.id ? String(sendResp.data.id) : null;
     await logWebhook(
       supabaseUrl,
       supabaseKey,
-      { firstName, subscriberId, phone: phone || null, language, feedback_len: feedback.length, toEmail, messageId },
+      {
+        firstName,
+        subscriberId,
+        phone: phone || null,
+        language,
+        feedback_len: feedback.length,
+        unresolved_fields: unresolvedFields,
+        toEmail,
+        bccEmail,
+        messageId,
+      },
       "sent",
     );
     return json(res, 200, { ok: true, messageId });
@@ -193,7 +218,9 @@ module.exports = async function handler(req, res) {
         phone: phone || null,
         language,
         feedback_len: feedback.length,
+        unresolved_fields: unresolvedFields,
         toEmail,
+        bccEmail,
         error: String(e && e.message ? e.message : "Failed to send feedback email"),
       },
       "error",
