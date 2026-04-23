@@ -2,15 +2,17 @@
  * POST /api/out-of-state-referral
  * Receives out-of-state referral form submissions from quote-out-of-state.html.
  * Inserts into out_of_state_referrals (Supabase).
- * Sends email notification to referrals@mejorvidainsurance.com via Apps Script.
+ * Sends email notification to referrals@mejorvidainsurance.com via Gmail API.
  * Does NOT sync to HubSpot CRM.
  *
  * Vercel env: SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY,
- *             OOS_EMAIL_NOTIFIER_URL (Google Apps Script web app URL),
- *             OOS_EMAIL_NOTIFIER_SECRET (optional; must match Apps Script script property OOS_SECRET)
+ *             GMAIL_CLIENT_ID, GMAIL_CLIENT_SECRET, GMAIL_REFRESH_TOKEN,
+ *             GMAIL_FROM_EMAIL (optional; default julie@mejorvidainsurance.com)
  */
 
+const { google } = require("googleapis");
 const { verifySiteOrigin } = require("../lib/site-origin");
+const GMAIL_REDIRECT_URI = "https://www.mejorvidainsurance.com/api/staff/gmail-callback";
 
 function applyCors(req, res) {
   const gate = verifySiteOrigin(req);
@@ -58,26 +60,67 @@ async function supabaseInsert(supabaseUrl, serviceKey, table, row) {
   return first && first.id ? String(first.id) : null;
 }
 
-/* -- Email notification via Apps Script web app -- */
+/* -- Email notification via Gmail API -- */
 
-async function sendEmailNotification(notifierUrl, leadData) {
-  if (!notifierUrl) return { skipped: true, reason: "OOS_EMAIL_NOTIFIER_URL not set" };
+function chicagoTimestamp() {
+  return new Intl.DateTimeFormat("en-US", {
+    timeZone: "America/Chicago",
+    dateStyle: "medium",
+    timeStyle: "long",
+  }).format(new Date());
+}
 
-  const secret = process.env.OOS_EMAIL_NOTIFIER_SECRET;
-  const payload = { ...leadData };
-  if (secret) {
-    payload.notifierSecret = secret;
+function buildRawEmail(fromEmail, toEmail, subject, bodyText) {
+  const lines = [
+    `From: ${fromEmail}`,
+    `To: ${toEmail}`,
+    `Subject: ${subject}`,
+    "MIME-Version: 1.0",
+    "Content-Type: text/plain; charset=UTF-8",
+    "",
+    bodyText,
+  ];
+  return Buffer.from(lines.join("\r\n"), "utf8")
+    .toString("base64")
+    .replace(/\+/g, "-")
+    .replace(/\//g, "_")
+    .replace(/=+$/g, "");
+}
+
+async function sendEmailNotification(leadData) {
+  const clientId = process.env.GMAIL_CLIENT_ID;
+  const clientSecret = process.env.GMAIL_CLIENT_SECRET;
+  const refreshToken = process.env.GMAIL_REFRESH_TOKEN;
+  const fromEmail = process.env.GMAIL_FROM_EMAIL || "julie@mejorvidainsurance.com";
+  if (!clientId || !clientSecret || !refreshToken || !fromEmail) {
+    return { skipped: true, reason: "Gmail not configured" };
   }
 
+  const fullName = `${leadData.firstName || ""} ${leadData.lastName || ""}`.trim() || "Unknown";
+  const subject = `New Out-of-State Referral: ${fullName} (${leadData.stateCode || "N/A"})`;
+  const sentAt = chicagoTimestamp();
+  const bodyText = [
+    "New out-of-state referral received:",
+    "",
+    `First name: ${leadData.firstName || ""}`,
+    `Last name: ${leadData.lastName || ""}`,
+    `Email: ${leadData.email || ""}`,
+    `Phone: ${leadData.phone || ""}`,
+    `State: ${leadData.stateCode || ""}`,
+    `Message: ${leadData.message || ""}`,
+    `Consent: ${leadData.consent ? "Yes" : "No"}`,
+    `Record ID: ${leadData.recordId || ""}`,
+    `Timestamp (America/Chicago): ${sentAt}`,
+  ].join("\n");
+
   try {
-    const r = await fetch(notifierUrl, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-      redirect: "follow",
-    });
-    const text = await r.text();
-    return { sent: r.ok, status: r.status, response: text.slice(0, 200) };
+    const oauth2Client = new google.auth.OAuth2(clientId, clientSecret, GMAIL_REDIRECT_URI);
+    oauth2Client.setCredentials({ refresh_token: refreshToken });
+    const gmail = google.gmail({ version: "v1", auth: oauth2Client });
+    const raw = buildRawEmail(fromEmail, "referrals@mejorvidainsurance.com", subject, bodyText);
+    const sendResp = await gmail.users.messages.send({ userId: "me", requestBody: { raw } });
+    const messageId = sendResp && sendResp.data && sendResp.data.id ? String(sendResp.data.id) : null;
+    return { sent: true, messageId };
   } catch (e) {
     return { sent: false, error: e.message };
   }
@@ -101,7 +144,6 @@ module.exports = async function handler(req, res) {
   /* Env vars */
   const supabaseUrl = process.env.SUPABASE_URL;
   const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-  const notifierUrl = process.env.OOS_EMAIL_NOTIFIER_URL;
 
   if (!supabaseUrl || !supabaseKey) {
     return json(res, 500, {
@@ -169,7 +211,7 @@ module.exports = async function handler(req, res) {
   }
 
   /* Email notification (best-effort, don't fail the request) */
-  const emailResult = await sendEmailNotification(notifierUrl, {
+  const emailResult = await sendEmailNotification({
     firstName,
     lastName,
     email,
