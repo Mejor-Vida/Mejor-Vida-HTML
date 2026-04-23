@@ -1,4 +1,9 @@
 /**
+ * // DEPRECATED — This endpoint was part of the old Apps Script → Gmail → Vercel pipeline.
+ * // That pipeline has been replaced by direct ManyChat → Vercel API calls (api/lead-intake.js, api/lead-capture.js).
+ * // This file is kept for reference only. Do not route new traffic here.
+ * // Safe to delete after confirming no live traffic — check Vercel logs before removing.
+ *
  * POST /api/whatsapp-lead-webhook
  * Vercel serverless: Apps Script (Gmail whatsapp@) → Supabase whatsapp_leads + HubSpot.
  * Patterns match api/fex-email-quote-webhook.js.
