@@ -1,27 +1,65 @@
 const { google } = require("googleapis");
 const { requireStaffAuth, json, readJsonBody, serviceConfig, restPatch, restInsert } = require("./_inbox-lib");
+const { buildStaffClientReplyHtml } = require("../../lib/staff-reply-email-body");
 
 const GMAIL_REDIRECT_URI = "https://www.mejorvidainsurance.com/api/staff/gmail-callback";
 
-function buildRawEmail(fromEmail, toEmail, subject, bodyText) {
-  const lines = [
+function isLikelyEmail(v) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(v || "").trim());
+}
+
+function encodeSubject(subject) {
+  const s = String(subject || "");
+  if (/^[\x00-\x7F]*$/.test(s)) return s;
+  return `=?UTF-8?B?${Buffer.from(s, "utf8").toString("base64")}?=`;
+}
+
+function mimeBase64Body(s) {
+  return Buffer.from(s, "utf8")
+    .toString("base64")
+    .replace(/.{1,76}/g, "$&\r\n")
+    .trimEnd();
+}
+
+/**
+ * multipart/alternative: plain + HTML (UTF-8), for Gmail users.messages.send raw.
+ */
+function buildMultipartRaw({ fromEmail, toEmail, subject, textBody, htmlBody }) {
+  const boundary = `mvi_alt_${Date.now()}_${Math.random().toString(36).slice(2, 11)}`;
+  const nl = "\r\n";
+  const subj = encodeSubject(subject);
+  const plainB64 = mimeBase64Body(textBody);
+  const htmlB64 = mimeBase64Body(htmlBody);
+  return [
     `From: ${fromEmail}`,
     `To: ${toEmail}`,
-    `Subject: ${subject}`,
+    `Subject: ${subj}`,
     "MIME-Version: 1.0",
-    "Content-Type: text/plain; charset=UTF-8",
+    `Content-Type: multipart/alternative; boundary="${boundary}"`,
     "",
-    bodyText,
-  ];
-  return Buffer.from(lines.join("\r\n"), "utf8")
+    `--${boundary}`,
+    "Content-Type: text/plain; charset=UTF-8",
+    "Content-Transfer-Encoding: base64",
+    "",
+    plainB64,
+    "",
+    `--${boundary}`,
+    "Content-Type: text/html; charset=UTF-8",
+    "Content-Transfer-Encoding: base64",
+    "",
+    htmlB64,
+    "",
+    `--${boundary}--`,
+    "",
+  ].join(nl);
+}
+
+function toGmailRaw(rfc822) {
+  return Buffer.from(rfc822, "utf8")
     .toString("base64")
     .replace(/\+/g, "-")
     .replace(/\//g, "_")
     .replace(/=+$/g, "");
-}
-
-function isLikelyEmail(v) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(v || "").trim());
 }
 
 async function logSendAttempt(cfg, payload, status) {
@@ -56,6 +94,7 @@ module.exports = async function handler(req, res) {
   const questionId = String((body && body.questionId) || "").trim();
   const toEmail = body && body.toEmail != null ? String(body.toEmail).trim() : "";
   const replyDraft = String((body && body.replyDraft) || "").trim();
+  const language = body && body.language != null ? String(body.language).trim() : "";
 
   if (!questionId || !replyDraft) {
     return json(res, 400, { success: false, error: "questionId and replyDraft required" });
@@ -78,17 +117,20 @@ module.exports = async function handler(req, res) {
   }
 
   try {
+    const { html, plainBody } = buildStaffClientReplyHtml(replyDraft, language);
+    const rfc822 = buildMultipartRaw({
+      fromEmail,
+      toEmail,
+      subject: "Re: Your Insurance Question — Mejor Vida Insurance",
+      textBody: plainBody,
+      htmlBody: html,
+    });
+    const raw = toGmailRaw(rfc822);
+
     const oauth2Client = new google.auth.OAuth2(clientId, clientSecret, GMAIL_REDIRECT_URI);
     oauth2Client.setCredentials({ refresh_token: refreshToken });
 
     const gmail = google.gmail({ version: "v1", auth: oauth2Client });
-    const raw = buildRawEmail(
-      fromEmail,
-      toEmail,
-      "Re: Your Insurance Question — Mejor Vida Insurance",
-      replyDraft
-    );
-
     const sendResp = await gmail.users.messages.send({
       userId: "me",
       requestBody: { raw },
@@ -105,7 +147,7 @@ module.exports = async function handler(req, res) {
 
     await logSendAttempt(
       cfg,
-      { questionId, toEmail, fromEmail, messageId, result: "gmail_accept" },
+      { questionId, toEmail, fromEmail, messageId, result: "gmail_accept", htmlTemplate: "resend_shell" },
       "sent"
     );
 

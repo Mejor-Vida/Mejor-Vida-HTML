@@ -799,7 +799,7 @@
           '<div class="actions">' +
             '<button id="generate-btn" class="secondary" type="button" data-help="Uses AI to write a reply from the customer question, lead details, and Notes for AI as last saved (click Save notes first if you just typed). Nothing is sent until Send Email.">Generate Draft</button>' +
             '<button id="save-edit-btn" class="secondary" type="button" data-help="Saves Notes for AI to the server so Generate Draft, Push to RAG, and other staff sessions use this context.">Save notes</button>' +
-            '<button id="send-email-btn" class="email" type="button" data-help="Emails the Reply draft to the lead from the staff mailbox. Requires a valid email on the lead.">Send Email</button>' +
+            '<button id="send-email-btn" class="email" type="button" data-help="Sends your reply as HTML email from Julie\x27s mailbox: Mejor Vida logo header, your message, then Julie\x27s signature block. Requires a valid lead email.">Send Email</button>' +
             '<button id="push-rag-btn" class="secondary" type="button" data-help="Uses the customer question, your Notes for AI (if any), and the Reply draft to build a Q&A snippet, then saves an embedding to the knowledge base. Does not email the lead.">Push to RAG</button>' +
             '<button id="resolve-btn" class="danger" type="button" data-help="Marks this question resolved and removes it from the unresolved list. History stays in the database; this does not delete the thread.">Resolve</button>' +
           "</div>" +
@@ -938,6 +938,7 @@
             questionId: q.id,
             toEmail: q.email || "",
             replyDraft: draft,
+            language: q.language || "",
           });
           if (data && data.success === true) {
             var target = data.toEmail ? String(data.toEmail) : String(q.email || "");
