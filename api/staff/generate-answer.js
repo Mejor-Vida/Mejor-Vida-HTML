@@ -18,8 +18,8 @@ function buildPrompt(questionText, language, lead, staffNotes) {
     `- 80 to 180 words.\n` +
     `- Do not invent exact prices.\n` +
     `- If missing details, ask 1-2 clarifying questions.\n` +
-    `- After the next-step invitation, end with **exactly two lines** and nothing else: (1) a closing such as English **Warm regards,** (capitalization flexible) or Spanish **Un saludo cordial,** / **Atentamente,**; (2) the next line must be **Julie** only (that name only, no last name).\n` +
-    `- Do NOT add a third line. Do NOT add job titles, phone, email, dashes, or placeholders such as [Your Name], Internal Insurance Assistant, or [Your Contact Information]. Julie's full signature is added automatically when the email is sent.\n\n` +
+    `- After the next-step invitation, end with **exactly two lines** and nothing else: (1) English: **Warm regards,** (capitalization flexible) OR Spanish: **Atentamente,** or **Un saludo cordial,**; (2) the next line must be **Julie** only (first name only, same in English and Spanish).\n` +
+    `- Do NOT add a third line. Do NOT add job titles, phone, email, or any placeholder in brackets. Forbidden examples (never output these or anything like them): [Your Name], [Your Contact Information], Internal Insurance Assistant; Spanish: **[Su Nombre]**, **[Tu Nombre]**, **Asistente de Seguros Interno de Julie**, **Asistente de Seguros Interno**, or any "[...Nombre...]" line. Julie's real signature is added when the email is sent.\n\n` +
     `${leadLine}\n` +
     `Client question (verbatim from the channel): ${questionText}` +
     notesBlock
