@@ -1,6 +1,7 @@
 /**
  * POST /api/feedback
  * ManyChat External Request: send WhatsApp feedback emails via Gmail (replaces Apps Script).
+ * Recipients: To julie@ + whatsapp@ (so Julie sees Inbox copies); Cc admin@ for audit.
  *
  * Body fields:
  *  - firstName
@@ -65,11 +66,11 @@ async function logWebhook(supabaseUrl, supabaseKey, payload, status) {
   }
 }
 
-function buildRawEmail(fromEmail, toEmail, subject, bodyText, bccEmail) {
+function buildRawEmail(fromEmail, toLine, ccLine, subject, bodyText) {
   const lines = [
     `From: ${fromEmail}`,
-    `To: ${toEmail}`,
-    ...(bccEmail ? [`Bcc: ${bccEmail}`] : []),
+    `To: ${toLine}`,
+    ...(ccLine ? [`Cc: ${ccLine}`] : []),
     `Subject: ${subject}`,
     "MIME-Version: 1.0",
     "Content-Type: text/plain; charset=UTF-8",
@@ -135,8 +136,12 @@ module.exports = async function handler(req, res) {
   const clientSecret = process.env.GMAIL_CLIENT_SECRET;
   const refreshToken = process.env.GMAIL_REFRESH_TOKEN;
   const fromEmail = process.env.GMAIL_FROM_EMAIL || "julie@mejorvidainsurance.com";
-  const toEmail = "whatsapp@mejorvidainsurance.com";
-  const bccEmail = "admin@mejorvidainsurance.com";
+  // Julie must appear as an explicit recipient: when she is only "From", Gmail shows the message in Sent, not Inbox.
+  const julieInbox = "julie@mejorvidainsurance.com";
+  const whatsappInbox = "whatsapp@mejorvidainsurance.com";
+  const adminCc = "admin@mejorvidainsurance.com";
+  const toLine = `${julieInbox}, ${whatsappInbox}`;
+  const ccLine = adminCc;
   if (!clientId || !clientSecret || !refreshToken || !fromEmail) {
     await logWebhook(
       supabaseUrl,
@@ -187,7 +192,7 @@ module.exports = async function handler(req, res) {
     const oauth2Client = new google.auth.OAuth2(clientId, clientSecret, GMAIL_REDIRECT_URI);
     oauth2Client.setCredentials({ refresh_token: refreshToken });
     const gmail = google.gmail({ version: "v1", auth: oauth2Client });
-    const raw = buildRawEmail(fromEmail, toEmail, subject, bodyText, bccEmail);
+    const raw = buildRawEmail(fromEmail, toLine, ccLine, subject, bodyText);
     const sendResp = await gmail.users.messages.send({ userId: "me", requestBody: { raw } });
     const messageId = sendResp && sendResp.data && sendResp.data.id ? String(sendResp.data.id) : null;
     await logWebhook(
@@ -200,8 +205,8 @@ module.exports = async function handler(req, res) {
         language,
         feedback_len: feedback.length,
         unresolved_fields: unresolvedFields,
-        toEmail,
-        bccEmail,
+        to: toLine,
+        cc: ccLine,
         messageId,
       },
       "sent",
@@ -219,8 +224,8 @@ module.exports = async function handler(req, res) {
         language,
         feedback_len: feedback.length,
         unresolved_fields: unresolvedFields,
-        toEmail,
-        bccEmail,
+        to: toLine,
+        cc: ccLine,
         error: String(e && e.message ? e.message : "Failed to send feedback email"),
       },
       "error",
