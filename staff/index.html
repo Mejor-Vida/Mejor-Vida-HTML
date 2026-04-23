@@ -234,7 +234,7 @@
       background: #7f2e2e;
       color: #fff;
     }
-    #orig-box, #edit-box {
+    #orig-box, #staff-context-box {
       min-height: 90px;
       resize: vertical;
       overflow-y: auto;
@@ -404,7 +404,7 @@
         <div class="inbox-detail">
           <div class="inbox-head">
             <div>
-              <strong>Question Detail — <span class="small-note">Review, draft, edit, push, and resolve.</span></strong>
+              <strong>Question Detail — <span class="small-note">Add facts for the AI, draft, push to RAG, and resolve.</span></strong>
             </div>
           </div>
           <div id="inbox-detail" class="detail-body">
@@ -740,7 +740,7 @@
           card.className = "q-item" + (q.id === selectedQuestionId ? " active" : "");
           card.innerHTML =
             '<div class="title">' + escHtml(q.lead && q.lead.first_name ? q.lead.first_name : "Unknown lead") + "</div>" +
-            '<div class="preview">' + escHtml(String(q.edited_question || q.question || "").slice(0, 130)) + "</div>" +
+            '<div class="preview">' + escHtml(String(q.question || "").slice(0, 130)) + "</div>" +
             '<div class="meta">' +
             escHtml((q.language || "Unknown language") + " • " + fmtDate(q.created_at)) +
             (q.rag_pushed ? ' <span class="rag-pill" title="Saved to RAG knowledge base">· RAG</span>' : "") +
@@ -767,17 +767,19 @@
             '<div class="meta-card"><strong>Phone:</strong> ' + escHtml(q.phone || (q.lead && q.lead.phone) || "-") + "</div>" +
             '<div class="meta-card"><strong>Language:</strong> ' + escHtml(q.language || "-") + "</div>" +
           "</div>" +
-          '<label>Original question</label>' +
+          '<label>Customer question (read-only)</label>' +
           '<textarea id="orig-box" readonly>' + escHtml(q.question || "") + "</textarea>" +
-          '<label>Edited question (optional)</label>' +
-          '<textarea id="edit-box">' + escHtml(q.edited_question || "") + "</textarea>" +
+          '<label>Notes for AI (optional)</label>' +
+          '<textarea id="staff-context-box" placeholder="Facts or context the bot did not have — e.g. Julie\x27s favorite color is green. Used when generating the reply draft and when pushing to RAG.">' +
+            escHtml(q.staff_context || "") +
+          "</textarea>" +
           '<label>Reply draft</label>' +
           '<textarea id="reply-box" placeholder="Generate or type a response..."></textarea>' +
           '<div class="actions">' +
-            '<button id="generate-btn" class="secondary" type="button" data-help="Uses AI to write a reply draft in the Reply box from the customer question and lead details. Nothing is sent to the customer until you use Send Email.">Generate Draft</button>' +
-            '<button id="save-edit-btn" class="secondary" type="button" data-help="Saves your text in Edited question so emails and RAG pushes use the updated wording instead of the original only.">Save Edit</button>' +
+            '<button id="generate-btn" class="secondary" type="button" data-help="Uses AI to write a reply in the Reply box from the customer question, lead details, and anything you saved in Notes for AI. Nothing is sent to the customer until you use Send Email.">Generate Draft</button>' +
+            '<button id="save-edit-btn" class="secondary" type="button" data-help="Saves Notes for AI to the server so Generate Draft, Push to RAG, and other staff sessions use this context.">Save notes</button>' +
             '<button id="send-email-btn" class="email" type="button" data-help="Emails the Reply draft to the lead from the staff mailbox. Requires a valid email on the lead.">Send Email</button>' +
-            '<button id="push-rag-btn" class="secondary" type="button" data-help="Turns the question and your Reply draft into a Q&A snippet, saves an embedding, and adds it to the internal knowledge base so future RAG answers can cite it. Does not email the lead.">Push to RAG</button>' +
+            '<button id="push-rag-btn" class="secondary" type="button" data-help="Uses the customer question, your Notes for AI (if any), and the Reply draft to build a Q&A snippet, then saves an embedding to the knowledge base. Does not email the lead.">Push to RAG</button>' +
             '<button id="resolve-btn" class="danger" type="button" data-help="Marks this question resolved and removes it from the unresolved list. History stays in the database; this does not delete the thread.">Resolve</button>' +
           "</div>" +
           '<div id="rag-verify-box" class="rag-verify-box hidden" aria-live="polite"></div>' +
@@ -831,19 +833,19 @@
       async function onSaveEdit() {
         var q = getSelectedQuestion();
         if (!q) return;
-        var editBox = document.getElementById("edit-box");
+        var notesBox = document.getElementById("staff-context-box");
         var status = document.getElementById("inbox-status");
-        status.textContent = "Saving edit...";
+        status.textContent = "Saving notes...";
         try {
           await authedApi("/api/staff/update-question", {
             id: q.id,
-            edited_question: String(editBox.value || "").trim(),
+            staff_context: String(notesBox.value || "").trim(),
           });
-          q.edited_question = String(editBox.value || "").trim();
+          q.staff_context = String(notesBox.value || "").trim();
           renderInboxList();
-          status.textContent = "Edited question saved.";
+          status.textContent = "Notes for AI saved.";
         } catch (e) {
-          status.textContent = "Failed to save edit.";
+          status.textContent = "Failed to save notes.";
         }
       }
 

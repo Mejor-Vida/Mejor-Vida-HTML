@@ -21,15 +21,20 @@ module.exports = async function handler(req, res) {
   }
 
   const id = String(body.id || "").trim();
-  const edited = String(body.edited_question || "").trim();
+  const staffContext =
+    body.staff_context != null
+      ? String(body.staff_context).trim()
+      : body.edited_question != null
+        ? String(body.edited_question).trim()
+        : "";
   if (!id) return json(res, 400, { error: "id required" });
 
   try {
     const updatedRows = await restPatch(
       cfg,
       "unanswered_questions",
-      `id=eq.${encodeURIComponent(id)}&select=id,edited_question`,
-      { edited_question: edited || null }
+      `id=eq.${encodeURIComponent(id)}&select=id,staff_context`,
+      { staff_context: staffContext || null }
     );
     if (!updatedRows || !updatedRows.length) return json(res, 404, { error: "Question not found" });
     return json(res, 200, { ok: true, item: updatedRows[0] });

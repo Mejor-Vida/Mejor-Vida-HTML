@@ -61,7 +61,7 @@ module.exports = async function handler(req, res) {
     const rows = await restSelect(
       cfg,
       "unanswered_questions",
-      "select=id,lead_id,phone,question,edited_question,language,flow_stage,resolved,created_at,resolved_at,resolved_by,rag_pushed&resolved=eq.false&order=created_at.desc&limit=200"
+      "select=id,lead_id,phone,question,edited_question,staff_context,language,flow_stage,resolved,created_at,resolved_at,resolved_by,rag_pushed&resolved=eq.false&order=created_at.desc&limit=200"
     );
 
     const leadIds = Array.from(new Set(rows.map((r) => r && r.lead_id).filter(Boolean)));
@@ -109,12 +109,13 @@ module.exports = async function handler(req, res) {
           }
         : null;
       const resolvedLead = lead || fallbackLead;
+      const staffCtx = cleanText(q.staff_context) || cleanText(q.edited_question);
       return {
         id: q.id,
         lead_id: q.lead_id || null,
         phone: cleanText(q.phone) || (resolvedLead && resolvedLead.phone) || "",
         question: q.question || "",
-        edited_question: q.edited_question || "",
+        staff_context: staffCtx,
         language: q.language || "",
         flow_stage: q.flow_stage || "",
         created_at: q.created_at || null,

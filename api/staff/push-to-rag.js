@@ -93,12 +93,16 @@ module.exports = async function handler(req, res) {
     const rows = await restSelect(
       cfg,
       "unanswered_questions",
-      `select=id,question,edited_question,language,flow_stage,lead_id,phone,rag_pushed&id=eq.${encodeURIComponent(id)}&limit=1`
+      `select=id,question,edited_question,staff_context,language,flow_stage,lead_id,phone,rag_pushed&id=eq.${encodeURIComponent(id)}&limit=1`
     );
     if (!rows || !rows.length) return json(res, 404, { error: "Question not found" });
     const q = rows[0];
-    const finalQuestion = String(q.edited_question || q.question || "").trim();
-    if (!finalQuestion) return json(res, 400, { error: "Question text is empty" });
+    const baseQ = String(q.question || "").trim();
+    const notes = String(q.staff_context || q.edited_question || "").trim();
+    const finalQuestion = notes
+      ? `Customer question:\n${baseQ || "(not recorded)"}\n\nStaff-provided facts for the knowledge entry:\n${notes}`
+      : baseQ;
+    if (!finalQuestion.trim()) return json(res, 400, { error: "Question text is empty" });
 
     const sourceId = await ensureStaffSource(cfg);
 
