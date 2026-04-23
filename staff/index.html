@@ -171,16 +171,17 @@
       width: fit-content;
       max-width: 100%;
       text-align: left;
+      /* <button> UA style uses dark ButtonText; set light text so children (name) are readable */
+      color: #ffffff;
+      font: inherit;
     }
     .q-item.active { border-color: #6f8bc9; background: rgba(38,69,126,.45); }
-    .q-item.active .title { color: #ffffff; }
     .q-item .meta { color: var(--muted); font-size: .74rem; margin-top: 2px; line-height: 1.1; }
     .q-item .title {
       font-weight: 700;
       font-size: .82rem;
       line-height: 1.1;
-      color: #f4f8ff;
-      letter-spacing: 0.01em;
+      color: #ffffff;
     }
     .q-item .preview {
       color: #d8e2f7;
