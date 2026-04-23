@@ -44,6 +44,24 @@
     h1 { margin: 0 0 8px; font-size: 1.2rem; }
     .sub { color: var(--muted); margin: 0 0 14px; font-size: .95rem; }
     label { display: block; margin: 10px 0 6px; font-size: .92rem; }
+    .label-with-hint {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 10px 16px;
+      flex-wrap: wrap;
+      margin: 10px 0 6px;
+    }
+    .label-with-hint label { margin: 0; display: inline; }
+    .label-with-hint .field-hint {
+      color: var(--muted);
+      font-size: 0.82rem;
+      font-weight: 500;
+      line-height: 1.35;
+      text-align: right;
+      flex: 1;
+      min-width: 12rem;
+    }
     input, textarea, button {
       font: inherit;
     }
@@ -769,14 +787,17 @@
           "</div>" +
           '<label>Customer question (read-only)</label>' +
           '<textarea id="orig-box" readonly>' + escHtml(q.question || "") + "</textarea>" +
-          '<label>Notes for AI (optional)</label>' +
+          '<div class="label-with-hint">' +
+            '<label for="staff-context-box">Notes for AI (optional)</label>' +
+            '<span class="field-hint">Save notes before Generate Draft — the AI only sees text you have saved.</span>' +
+          "</div>" +
           '<textarea id="staff-context-box" placeholder="Facts or context the bot did not have — e.g. Julie\x27s favorite color is green. Used when generating the reply draft and when pushing to RAG.">' +
             escHtml(q.staff_context || "") +
           "</textarea>" +
           '<label>Reply draft</label>' +
           '<textarea id="reply-box" placeholder="Generate or type a response..."></textarea>' +
           '<div class="actions">' +
-            '<button id="generate-btn" class="secondary" type="button" data-help="Uses AI to write a reply in the Reply box from the customer question, lead details, and anything you saved in Notes for AI. Nothing is sent to the customer until you use Send Email.">Generate Draft</button>' +
+            '<button id="generate-btn" class="secondary" type="button" data-help="Uses AI to write a reply from the customer question, lead details, and Notes for AI as last saved (click Save notes first if you just typed). Nothing is sent until Send Email.">Generate Draft</button>' +
             '<button id="save-edit-btn" class="secondary" type="button" data-help="Saves Notes for AI to the server so Generate Draft, Push to RAG, and other staff sessions use this context.">Save notes</button>' +
             '<button id="send-email-btn" class="email" type="button" data-help="Emails the Reply draft to the lead from the staff mailbox. Requires a valid email on the lead.">Send Email</button>' +
             '<button id="push-rag-btn" class="secondary" type="button" data-help="Uses the customer question, your Notes for AI (if any), and the Reply draft to build a Q&A snippet, then saves an embedding to the knowledge base. Does not email the lead.">Push to RAG</button>' +
