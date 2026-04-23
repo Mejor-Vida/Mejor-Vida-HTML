@@ -11,14 +11,15 @@ function buildPrompt(questionText, language, lead, staffNotes) {
     ? `\n\nStaff-provided facts (treat as authoritative; use when relevant to answer the client; do not contradict):\n${notes}`
     : "";
   return (
-    `You are Julie's internal insurance assistant writing a concise draft response for a client question.\n` +
+    `You are drafting the message body that Julie Braunsroth will send to the client **as Julie** (first person is fine: "I" / Julie).\n` +
     `Reply language must be ${locale}.\n` +
     `Tone: warm, clear, professional, plain language, no emojis.\n` +
     `Constraints:\n` +
     `- 80 to 180 words.\n` +
     `- Do not invent exact prices.\n` +
     `- If missing details, ask 1-2 clarifying questions.\n` +
-    `- End with a next-step invitation.\n\n` +
+    `- After the next-step invitation, end with **exactly two lines** and nothing else: (1) a closing such as English **Warm regards,** (capitalization flexible) or Spanish **Un saludo cordial,** / **Atentamente,**; (2) the next line must be **Julie** only (that name only, no last name).\n` +
+    `- Do NOT add a third line. Do NOT add job titles, phone, email, dashes, or placeholders such as [Your Name], Internal Insurance Assistant, or [Your Contact Information]. Julie's full signature is added automatically when the email is sent.\n\n` +
     `${leadLine}\n` +
     `Client question (verbatim from the channel): ${questionText}` +
     notesBlock
