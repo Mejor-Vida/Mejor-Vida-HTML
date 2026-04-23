@@ -48,9 +48,25 @@ module.exports = async function handler(req, res) {
     return json(res, 400, { success: false, error: "Invalid JSON" });
   }
 
-  const firstName = String(body.first_name || body.firstName || "").trim().slice(0, 200);
-  const phone = String(body.phone || "").trim().slice(0, 40);
-  const email = String(body.email || "").trim().toLowerCase().slice(0, 500);
+  function sanitizeManychatTemplate(value) {
+    if (value == null) return "";
+    const s = String(value).trim();
+    if (!s || /^\{\{[\s\S]*\}\}$/.test(s)) return "";
+    return s;
+  }
+
+  const firstName = sanitizeManychatTemplate(body.first_name || body.firstName).slice(0, 200);
+  const phone = sanitizeManychatTemplate(body.phone).slice(0, 40);
+  const email = sanitizeManychatTemplate(body.email).toLowerCase().slice(0, 500);
+  const manychatSubscriberId =
+    sanitizeManychatTemplate(
+      body.manychat_subscriber_id ||
+        body.manychatSubscriberId ||
+        body.whatsapp_id ||
+        body.whatsappId ||
+        body.subscriber_id ||
+        body.subscriberId,
+    ) || null;
   const age = body.age != null && body.age !== "" ? parseInt(body.age, 10) : null;
   const sex = String(body.sex || body.gender || "").trim().slice(0, 50) || null;
   const tobaccoRaw = typeof body.tobacco === "string" ? body.tobacco.toLowerCase().trim() : body.tobacco;
@@ -82,6 +98,7 @@ module.exports = async function handler(req, res) {
     source: "whatsapp",
     drop_off: false,
     drop_off_stage: null,
+    ...(manychatSubscriberId ? { manychat_subscriber_id: manychatSubscriberId } : {}),
   };
 
   const baseProps = {
