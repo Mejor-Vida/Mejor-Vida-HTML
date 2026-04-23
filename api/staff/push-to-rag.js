@@ -117,7 +117,7 @@ module.exports = async function handler(req, res) {
     const chunkContent = await reformatForKnowledgeBase(openaiKey, finalQuestion, answer);
     const emb = await generateEmbedding(openaiKey, chunkContent);
 
-    await restInsert(cfg, "knowledge_chunks", [
+    const insertedChunks = await restInsert(cfg, "knowledge_chunks", [
       {
         document_id: doc.id,
         chunk_index: 0,
@@ -135,6 +135,7 @@ module.exports = async function handler(req, res) {
         reviewed_at: new Date().toISOString(),
       },
     ]);
+    const chunkRow = insertedChunks && insertedChunks[0];
 
     await restPatch(
       cfg,
@@ -143,8 +144,21 @@ module.exports = async function handler(req, res) {
       { rag_pushed: true }
     );
 
-    return json(res, 200, { ok: true });
+    const qaPreview =
+      chunkContent.length > 900 ? `${chunkContent.slice(0, 900)}…` : chunkContent;
+
+    return json(res, 200, {
+      ok: true,
+      document_id: doc.id,
+      knowledge_chunk_id: chunkRow && chunkRow.id != null ? chunkRow.id : null,
+      qa_preview: qaPreview,
+    });
   } catch (e) {
-    return json(res, 500, { error: "Failed to push to knowledge base" });
+    console.error("push-to-rag", e);
+    const detail = e && e.message ? String(e.message).slice(0, 500) : "";
+    return json(res, 500, {
+      error: "Failed to push to knowledge base",
+      ...(detail ? { detail } : {}),
+    });
   }
 };
