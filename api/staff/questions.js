@@ -1,6 +1,18 @@
 const { requireStaffAuth } = require("../auth-check");
 const { json, serviceConfig, restSelect } = require("./_inbox-lib");
 
+const UNRESOLVED_TEMPLATE = /^\{\{[\s\S]*\}\}$/;
+
+function cleanText(v) {
+  const s = String(v || "").trim();
+  if (!s || UNRESOLVED_TEMPLATE.test(s)) return "";
+  return s;
+}
+
+function digitsOnly(v) {
+  return String(v || "").replace(/\D+/g, "");
+}
+
 module.exports = async function handler(req, res) {
   if (req.method !== "GET") {
     res.setHeader("Allow", "GET");
@@ -34,12 +46,55 @@ module.exports = async function handler(req, res) {
       });
     }
 
+    const phones = Array.from(
+      new Set(
+        (rows || [])
+          .map((r) => cleanText(r && r.phone))
+          .filter(Boolean)
+      )
+    );
+
+    const byPhone = {};
+    if (phones.length) {
+      const values = phones.map((p) => `"${p.replace(/"/g, "")}"`).join(",");
+      const contacts = await restSelect(
+        cfg,
+        "contacts",
+        `select=id,full_name,email,phone,whatsapp_id,manychat_subscriber_id,created_at&or=(phone.in.(${values}),whatsapp_id.in.(${values}),manychat_subscriber_id.in.(${values}))&order=created_at.desc&limit=400`
+      );
+      (contacts || []).forEach((c) => {
+        const keyCandidates = [
+          cleanText(c.phone),
+          cleanText(c.whatsapp_id),
+          cleanText(c.manychat_subscriber_id),
+          digitsOnly(c.phone),
+          digitsOnly(c.whatsapp_id),
+          digitsOnly(c.manychat_subscriber_id),
+        ].filter(Boolean);
+        keyCandidates.forEach((k) => {
+          if (!byPhone[k]) byPhone[k] = c;
+        });
+      });
+    }
+
     const items = (rows || []).map((q) => {
       const lead = q.lead_id ? byLeadId[q.lead_id] || null : null;
+      const phoneKey = cleanText(q.phone);
+      const phoneDigits = digitsOnly(q.phone);
+      const contact = byPhone[phoneKey] || byPhone[phoneDigits] || null;
+      const fallbackLead = contact
+        ? {
+            id: contact.id || null,
+            first_name: cleanText(contact.full_name),
+            phone: cleanText(contact.phone) || cleanText(contact.whatsapp_id) || cleanText(q.phone),
+            email: cleanText(contact.email),
+          }
+        : null;
+      const resolvedLead = lead || fallbackLead;
       return {
         id: q.id,
         lead_id: q.lead_id || null,
-        phone: q.phone || (lead && lead.phone) || "",
+        phone: cleanText(q.phone) || (resolvedLead && resolvedLead.phone) || "",
         question: q.question || "",
         edited_question: q.edited_question || "",
         language: q.language || "",
@@ -47,12 +102,12 @@ module.exports = async function handler(req, res) {
         created_at: q.created_at || null,
         resolved: !!q.resolved,
         rag_pushed: !!q.rag_pushed,
-        lead: lead
+        lead: resolvedLead
           ? {
-              id: lead.id,
-              first_name: lead.first_name || "",
-              phone: lead.phone || "",
-              email: lead.email || "",
+              id: resolvedLead.id,
+              first_name: resolvedLead.first_name || "",
+              phone: resolvedLead.phone || "",
+              email: resolvedLead.email || "",
             }
           : null,
       };
