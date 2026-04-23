@@ -36,6 +36,30 @@ function readJsonBody(req) {
   return req.body && typeof req.body === "object" ? req.body : {};
 }
 
+async function logWebhook(supabaseUrl, supabaseKey, payload, status) {
+  if (!supabaseUrl || !supabaseKey) return;
+  try {
+    const url = `${supabaseUrl.replace(/\/$/, "")}/rest/v1/webhook_logs`;
+    await fetch(url, {
+      method: "POST",
+      headers: {
+        apikey: supabaseKey,
+        Authorization: `Bearer ${supabaseKey}`,
+        "Content-Type": "application/json",
+        Prefer: "return=minimal",
+      },
+      body: JSON.stringify({
+        source: "manychat",
+        endpoint: "/api/feedback",
+        payload,
+        status: status || "received",
+      }),
+    });
+  } catch (_) {
+    // Never fail request on logging.
+  }
+}
+
 function buildRawEmail(fromEmail, toEmail, subject, bodyText) {
   const lines = [
     `From: ${fromEmail}`,
@@ -63,6 +87,8 @@ function chicagoTimestamp() {
 
 module.exports = async function handler(req, res) {
   logRequest("feedback");
+  const supabaseUrl = process.env.SUPABASE_URL;
+  const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_SERVICE_KEY;
 
   if (req.method !== "POST") {
     res.setHeader("Allow", "POST");
@@ -71,6 +97,7 @@ module.exports = async function handler(req, res) {
 
   const auth = verifyManychatSecret(req);
   if (!auth.ok) {
+    await logWebhook(supabaseUrl, supabaseKey, { reason: auth.error }, "auth_failed");
     return json(res, auth.status, { ok: false, error: auth.error });
   }
 
@@ -78,6 +105,7 @@ module.exports = async function handler(req, res) {
   try {
     body = readJsonBody(req);
   } catch (e) {
+    await logWebhook(supabaseUrl, supabaseKey, { parseError: true }, "invalid_json");
     return json(res, 400, { ok: false, error: "Invalid JSON" });
   }
 
@@ -88,8 +116,6 @@ module.exports = async function handler(req, res) {
     sanitizeManychatTemplateField(body.subscriber_id || body.subscriberId || body.user_id || body.userId) || null;
   let phone = sanitizeManychatTemplateField(body.phone) || null;
 
-  const supabaseUrl = process.env.SUPABASE_URL;
-  const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_SERVICE_KEY;
   if (!phone && subscriberId && supabaseUrl && supabaseKey) {
     try {
       const lead = await findManychatLeadBySubscriberId(supabaseUrl, supabaseKey, subscriberId);
@@ -105,6 +131,12 @@ module.exports = async function handler(req, res) {
   const fromEmail = process.env.GMAIL_FROM_EMAIL || "julie@mejorvidainsurance.com";
   const toEmail = "whatsapp@mejorvidainsurance.com";
   if (!clientId || !clientSecret || !refreshToken || !fromEmail) {
+    await logWebhook(
+      supabaseUrl,
+      supabaseKey,
+      { firstName, subscriberId, phone, hasGmailEnv: false },
+      "gmail_not_configured",
+    );
     return json(res, 500, { ok: false, error: "Gmail is not configured on the server" });
   }
 
@@ -141,10 +173,31 @@ module.exports = async function handler(req, res) {
     oauth2Client.setCredentials({ refresh_token: refreshToken });
     const gmail = google.gmail({ version: "v1", auth: oauth2Client });
     const raw = buildRawEmail(fromEmail, toEmail, subject, bodyText);
-    await gmail.users.messages.send({ userId: "me", requestBody: { raw } });
-    return json(res, 200, { ok: true });
+    const sendResp = await gmail.users.messages.send({ userId: "me", requestBody: { raw } });
+    const messageId = sendResp && sendResp.data && sendResp.data.id ? String(sendResp.data.id) : null;
+    await logWebhook(
+      supabaseUrl,
+      supabaseKey,
+      { firstName, subscriberId, phone: phone || null, language, feedback_len: feedback.length, toEmail, messageId },
+      "sent",
+    );
+    return json(res, 200, { ok: true, messageId });
   } catch (e) {
     console.error("feedback gmail send error", e);
+    await logWebhook(
+      supabaseUrl,
+      supabaseKey,
+      {
+        firstName,
+        subscriberId,
+        phone: phone || null,
+        language,
+        feedback_len: feedback.length,
+        toEmail,
+        error: String(e && e.message ? e.message : "Failed to send feedback email"),
+      },
+      "error",
+    );
     return json(res, 200, {
       ok: false,
       error: String(e && e.message ? e.message : "Failed to send feedback email"),
