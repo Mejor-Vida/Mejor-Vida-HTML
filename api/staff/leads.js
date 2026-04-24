@@ -45,9 +45,8 @@ function isStaffHiddenColumnError(msg) {
 }
 
 async function selectManychatLeadsForStaff(cfg) {
-  const filtered =
-    "select=id,first_name,last_name,phone,email,language&staff_hidden_at=is.null&limit=5000";
-  const legacy = "select=id,first_name,last_name,phone,email,language&limit=5000";
+  const filtered = "select=id&staff_hidden_at=is.null&limit=1";
+  const legacy = "select=id&limit=1";
   try {
     return await restSelect(cfg, "manychat_leads", filtered);
   } catch (e) {
@@ -56,6 +55,21 @@ async function selectManychatLeadsForStaff(cfg) {
     }
     throw e;
   }
+}
+
+async function selectUnifiedLeadsForStaff(cfg) {
+  const query =
+    "select=id,source_table,source,first_name,last_name,display_name,phone,email,language,created_at,updated_at&limit=5000";
+  return await restSelect(cfg, "unified_leads", query);
+}
+
+async function selectUnifiedLeadById(cfg, id) {
+  const one = await restSelect(
+    cfg,
+    "unified_leads",
+    `select=id,source_table,source&limit=1&id=eq.${encodeURIComponent(id)}`
+  );
+  return Array.isArray(one) && one.length ? one[0] : null;
 }
 
 /** Same scoring idea as staff/questions — match lead phone to contacts.whatsapp_id / phone / subscriber. */
@@ -136,15 +150,20 @@ module.exports = async function handler(req, res) {
 
   if (req.method === "GET") {
     try {
-      const rows = await selectManychatLeadsForStaff(cfg);
+      // Keep old migration check so staff still gets a useful error if manychat schema is stale.
+      await selectManychatLeadsForStaff(cfg);
+      const rows = await selectUnifiedLeadsForStaff(cfg);
       const items = (rows || []).map((r) => ({
         id: r.id,
         first_name: r.first_name || "",
         last_name: r.last_name || "",
-        display_name: displayName(r),
+        display_name: r.display_name || displayName(r),
         phone: r.phone || "",
         email: String(r.email || "").trim(),
         language: r.language || "English",
+        source: r.source || r.source_table || "unknown",
+        source_table: r.source_table || "unknown",
+        created_at: r.created_at || null,
       }));
       await enrichLeadEmailsFromContacts(cfg, items);
       items.sort((x, y) => sortKey(x).localeCompare(sortKey(y)));
@@ -196,6 +215,8 @@ module.exports = async function handler(req, res) {
         phone: row.phone || "",
         email: row.email || "",
         language: row.language || "English",
+        source: row.source || "staff_compose",
+        source_table: "manychat_leads",
       };
       return json(res, 200, { item });
     } catch (e) {
@@ -241,6 +262,13 @@ module.exports = async function handler(req, res) {
     if (hasFirstKey) payload.first_name = firstIn || null;
     if (hasLastKey) payload.last_name = lastIn || null;
     try {
+      const unified = await selectUnifiedLeadById(cfg, id);
+      if (!unified) return json(res, 404, { error: "Lead not found" });
+      if (String(unified.source_table || "") !== "manychat_leads") {
+        return json(res, 400, {
+          error: "This lead is read-only in compose. Only manychat_leads rows can be edited here.",
+        });
+      }
       const patched = await restPatch(cfg, "manychat_leads", `id=eq.${encodeURIComponent(id)}`, payload);
       if (!Array.isArray(patched) || patched.length === 0) {
         return json(res, 404, { error: "Lead not found" });
@@ -254,6 +282,8 @@ module.exports = async function handler(req, res) {
         phone: row.phone || "",
         email: String(row.email || "").trim(),
         language: row.language || "English",
+        source: row.source || "manychat_whatsapp",
+        source_table: "manychat_leads",
       };
       await enrichLeadEmailsFromContacts(cfg, [one]);
       return json(res, 200, { item: one });
@@ -269,6 +299,13 @@ module.exports = async function handler(req, res) {
       return json(res, 400, { error: "Valid lead id required (query: id)" });
     }
     try {
+      const unified = await selectUnifiedLeadById(cfg, id);
+      if (!unified) return json(res, 404, { error: "Lead not found" });
+      if (String(unified.source_table || "") !== "manychat_leads") {
+        return json(res, 400, {
+          error: "This lead cannot be hidden from compose because it is not from manychat_leads.",
+        });
+      }
       const now = new Date().toISOString();
       const patched = await restPatch(cfg, "manychat_leads", `id=eq.${encodeURIComponent(id)}`, {
         staff_hidden_at: now,

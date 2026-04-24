@@ -9,7 +9,7 @@ How the MVS Agent (or any automation) can access your data. **Google Sheets is n
 | Source | How to access |
 |--------|----------------|
 | **HubSpot** | REST API — `HUBSPOT_ACCESS_TOKEN` in `.env.local`. See `integrations/hubspot/setup_hubspot_fe.py` for bootstrap patterns. |
-| **Supabase** | Website quote follow-up and FEX email pipeline — REST from Vercel (`api/quote-lead-sync.js`, `api/fex-email-quote-webhook.js`) or Postgres via `integrations/supabase/` migrations. |
+| **Supabase** | Website quote follow-up + ManyChat/staff data — REST from Vercel (for example `api/quote-lead-sync.js`) or Postgres via `integrations/supabase/` migrations. |
 | **Make.com** | REST API — `MAKE_API_TOKEN`, `MAKE_ORG_ID` in `.env.local`. |
 
 ---

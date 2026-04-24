@@ -2,13 +2,14 @@
 
 In **Beekeeper**, the left list is **database tables** (and some **functions**), not files or folders. Names are fixed so code can query them; use this guide and **table comments** (migration `009`) to remember what each one is for.
 
+Legacy note: the old `fex_email_quotes` table/webhook flow has been retired and removed via `027_drop_fex_email_quotes.sql`.
+
 ## Lead / CRM-style data
 
 | Table | Source |
 |--------|--------|
 | `quote_lead_submissions` | Website **quote** form → Vercel `quote-lead-sync` → Supabase + HubSpot. Columns include **`source`** (flow), **`origin_detail`** (UTMs/referrer/path), lifecycle timestamps (**`quote_results_viewed_at`**, **`schedule_modal_opened_at`**, **`call_scheduled_at`**), optional **`contact_id`** (v2 pipeline). View **`quote_lead_funnel`** summarizes funnel flags. |
 | `analytics_events` | Website **POST** `/api/analytics-event` — granular funnel rows (results page, schedule modal, etc.) keyed by **`quote_lead_submission_id`** / **`session_client_id`**. |
-| `fex_email_quotes` | **FEX email** pipeline → Make/webhook → `fex-email-quote-webhook` |
 | `whatsapp_leads` | **WhatsApp** leads → Apps Script → `whatsapp-lead-webhook` (if you use that route) |
 | `manychat_leads` | **ManyChat** WhatsApp flow → Vercel `api/lead-capture` / `api/dropoff-capture` (not the website quote form) |
 | `quote_ranges` | **WhatsApp quote engine** — precomputed $10K low/high/anchor → Vercel `api/quote` |
