@@ -287,7 +287,7 @@
     .compose-delete-modal {
       position: fixed;
       inset: 0;
-      z-index: 2000;
+      z-index: 12000;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -873,43 +873,44 @@
         </div>
       </div>
     </section>
-
-    <div
-      id="compose-delete-modal"
-      class="compose-delete-modal hidden"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="compose-delete-modal-title"
-    >
-      <div class="compose-delete-modal-panel">
-        <h3 id="compose-delete-modal-title">Remove this lead?</h3>
-        <p id="compose-delete-modal-text" class="small-note"></p>
-        <div class="compose-delete-modal-actions">
-          <button type="button" id="compose-delete-cancel" class="secondary">No, keep</button>
-          <button type="button" id="compose-delete-confirm" class="danger">Yes, remove</button>
-        </div>
-      </div>
-    </div>
-
-    <div
-      id="compose-save-contact-modal"
-      class="compose-delete-modal hidden"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="compose-save-contact-modal-title"
-    >
-      <div class="compose-delete-modal-panel">
-        <h3 id="compose-save-contact-modal-title">Confirm save</h3>
-        <p class="small-note" style="margin: 0 0 18px; line-height: 1.45">
-          Are you sure you want to overwrite your current contact info?
-        </p>
-        <div class="compose-delete-modal-actions">
-          <button type="button" id="compose-save-contact-cancel" class="secondary">No</button>
-          <button type="button" id="compose-save-contact-confirm" class="danger">Yes</button>
-        </div>
-      </div>
-    </div>
   </main>
+
+  <!-- Fixed overlays outside #portal so they are not clipped by layout/stacking contexts -->
+  <div
+    id="compose-delete-modal"
+    class="compose-delete-modal hidden"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="compose-delete-modal-title"
+  >
+    <div class="compose-delete-modal-panel">
+      <h3 id="compose-delete-modal-title">Remove this lead?</h3>
+      <p id="compose-delete-modal-text" class="small-note"></p>
+      <div class="compose-delete-modal-actions">
+        <button type="button" id="compose-delete-cancel" class="secondary">No, keep</button>
+        <button type="button" id="compose-delete-confirm" class="danger">Yes, remove</button>
+      </div>
+    </div>
+  </div>
+
+  <div
+    id="compose-save-contact-modal"
+    class="compose-delete-modal hidden"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="compose-save-contact-modal-title"
+  >
+    <div class="compose-delete-modal-panel">
+      <h3 id="compose-save-contact-modal-title">Confirm save</h3>
+      <p class="small-note" style="margin: 0 0 18px; line-height: 1.45">
+        Are you sure you want to overwrite your current contact info?
+      </p>
+      <div class="compose-delete-modal-actions">
+        <button type="button" id="compose-save-contact-cancel" class="secondary">No</button>
+        <button type="button" id="compose-save-contact-confirm" class="danger">Yes</button>
+      </div>
+    </div>
+  </div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script>
