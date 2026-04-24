@@ -218,12 +218,18 @@ module.exports = async function handler(req, res) {
     const hasEmailKey = Object.prototype.hasOwnProperty.call(body, "email");
     const hasPhoneKey = Object.prototype.hasOwnProperty.call(body, "phone");
     const hasLangKey = Object.prototype.hasOwnProperty.call(body, "language");
-    if (!hasEmailKey && !hasPhoneKey && !hasLangKey) {
-      return json(res, 400, { error: "Provide email, phone, and/or language to update" });
+    const hasFirstKey = Object.prototype.hasOwnProperty.call(body, "first_name");
+    const hasLastKey = Object.prototype.hasOwnProperty.call(body, "last_name");
+    if (!hasEmailKey && !hasPhoneKey && !hasLangKey && !hasFirstKey && !hasLastKey) {
+      return json(res, 400, {
+        error: "Provide email, phone, language, first_name, and/or last_name to update",
+      });
     }
     const emailIn = hasEmailKey ? String(body.email || "").trim().toLowerCase() : null;
     const phoneIn = hasPhoneKey ? String(body.phone || "").trim().slice(0, 40) : null;
     const langIn = hasLangKey ? String(body.language || "English").trim().slice(0, 50) || "English" : null;
+    const firstIn = hasFirstKey ? String(body.first_name || "").trim().slice(0, 200) : null;
+    const lastIn = hasLastKey ? String(body.last_name || "").trim().slice(0, 200) : null;
     if (hasEmailKey && emailIn && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailIn)) {
       return json(res, 400, { error: "Invalid email" });
     }
@@ -232,6 +238,8 @@ module.exports = async function handler(req, res) {
     if (hasEmailKey) payload.email = emailIn || null;
     if (hasPhoneKey) payload.phone = phoneIn || null;
     if (hasLangKey) payload.language = langIn || "English";
+    if (hasFirstKey) payload.first_name = firstIn || null;
+    if (hasLastKey) payload.last_name = lastIn || null;
     try {
       const patched = await restPatch(cfg, "manychat_leads", `id=eq.${encodeURIComponent(id)}`, payload);
       if (!Array.isArray(patched) || patched.length === 0) {

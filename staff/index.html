@@ -456,13 +456,18 @@
       font-size: .9rem;
     }
     .compose-save-contact-wrap {
-      padding: 10px;
+      padding: 8px 10px;
     }
-    .compose-save-contact-btn {
-      width: 100%;
-      font-weight: 700;
+    .compose-save-contact-wrap .compose-save-contact-btn.secondary {
+      width: auto;
+      display: inline-block;
+      background: #253f6f;
+      color: #fff;
+      border: 1px solid var(--border);
+      font-weight: 600;
+      padding: 8px 14px;
     }
-    .compose-save-contact-btn:disabled {
+    .compose-save-contact-wrap .compose-save-contact-btn.secondary:disabled {
       opacity: 0.5;
       cursor: not-allowed;
     }
@@ -735,16 +740,29 @@
                     <input type="password" tabindex="-1" autocomplete="new-password" />
                   </div>
                   <div class="meta-grid">
-                    <div class="meta-card compose-save-contact-wrap" style="grid-column: 1 / -1">
-                      <button
-                        id="compose-save-contact-btn"
-                        type="button"
-                        class="secondary compose-save-contact-btn"
-                        disabled
-                        data-help="Writes the Email and Phone fields (and Language) to this lead in manychat_leads. Select a lead first."
-                      >
-                        Save updated Contact Info
-                      </button>
+                    <div class="meta-card">
+                      <label for="compose-first-name">First name</label>
+                      <input
+                        id="compose-first-name"
+                        type="text"
+                        name="mvi_compose_first_name"
+                        autocomplete="off"
+                        data-lpignore="true"
+                        data-form-type="other"
+                        placeholder="First name"
+                      />
+                    </div>
+                    <div class="meta-card">
+                      <label for="compose-last-name">Last name</label>
+                      <input
+                        id="compose-last-name"
+                        type="text"
+                        name="mvi_compose_last_name"
+                        autocomplete="off"
+                        data-lpignore="true"
+                        data-form-type="other"
+                        placeholder="Last name"
+                      />
                     </div>
                     <div class="meta-card">
                       <label for="compose-email">Email</label>
@@ -753,6 +771,17 @@
                     <div class="meta-card">
                       <label for="compose-phone">Phone</label>
                       <input id="compose-phone" type="text" name="mvi_compose_phone" autocomplete="off" inputmode="tel" placeholder="Optional" />
+                    </div>
+                    <div class="meta-card compose-save-contact-wrap" style="grid-column: 1 / -1">
+                      <button
+                        id="compose-save-contact-btn"
+                        type="button"
+                        class="secondary compose-save-contact-btn"
+                        disabled
+                        data-help="Writes first/last name, email, phone, and language to this lead in manychat_leads. Select a lead first."
+                      >
+                        Save updated Contact Info
+                      </button>
                     </div>
                     <div class="meta-card" style="grid-column: 1 / -1">
                       <div class="compose-lang" role="group" aria-label="Language">
@@ -1694,6 +1723,8 @@
         return {
           leadFilter: document.getElementById("compose-lead-filter"),
           leadList: document.getElementById("compose-lead-list"),
+          firstName: document.getElementById("compose-first-name"),
+          lastName: document.getElementById("compose-last-name"),
           email: document.getElementById("compose-email"),
           phone: document.getElementById("compose-phone"),
           issue: document.getElementById("compose-issue"),
@@ -1704,13 +1735,17 @@
       }
 
       function getComposeRecipientName() {
+        var el = getComposeEls();
+        var fn = el.firstName ? String(el.firstName.value || "").trim() : "";
+        var ln = el.lastName ? String(el.lastName.value || "").trim() : "";
+        var combined = [fn, ln].filter(Boolean).join(" ").trim();
+        if (combined) return combined;
         if (composeSelectedLeadId) {
           var L = composeLeads.find(function (x) {
             return x.id === composeSelectedLeadId;
           });
           if (L) return String(L.display_name || "").trim();
         }
-        var el = getComposeEls();
         return el.leadFilter ? String(el.leadFilter.value || "").trim() : "";
       }
 
@@ -1739,6 +1774,8 @@
       function applyComposeLeadSelection(L) {
         var el = getComposeEls();
         composeSelectedLeadId = L.id;
+        if (el.firstName) el.firstName.value = L.first_name != null ? String(L.first_name) : "";
+        if (el.lastName) el.lastName.value = L.last_name != null ? String(L.last_name) : "";
         el.email.value = L.email || "";
         el.phone.value = L.phone || "";
         if (L.language && /spanish|español|espanol/i.test(L.language)) setComposeLanguage("Spanish");
@@ -1851,10 +1888,12 @@
           el.status.textContent = "Select a lead from the list before saving contact info.";
           return;
         }
+        var fn = el.firstName ? String(el.firstName.value || "").trim() : "";
+        var ln = el.lastName ? String(el.lastName.value || "").trim() : "";
         var email = String(el.email.value || "").trim().toLowerCase();
         var phone = String(el.phone.value || "").trim();
-        if (!email && !phone) {
-          el.status.textContent = "Enter an email and/or phone to save.";
+        if (!email && !phone && !fn && !ln) {
+          el.status.textContent = "Enter a name, email, and/or phone to save.";
           return;
         }
         if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
@@ -1867,7 +1906,14 @@
         try {
           var data = await authedApi(
             "/api/staff/leads",
-            { id: composeSelectedLeadId, email: email || null, phone: phone || null, language: composeLang },
+            {
+              id: composeSelectedLeadId,
+              first_name: fn || null,
+              last_name: ln || null,
+              email: email || null,
+              phone: phone || null,
+              language: composeLang,
+            },
             { method: "PATCH" }
           );
           var item = data && data.item;
@@ -1881,6 +1927,8 @@
               return (a.display_name || "").toLowerCase().localeCompare((b.display_name || "").toLowerCase());
             });
           }
+          if (el.firstName) el.firstName.value = item.first_name != null ? String(item.first_name) : "";
+          if (el.lastName) el.lastName.value = item.last_name != null ? String(item.last_name) : "";
           el.email.value = item.email || "";
           el.phone.value = item.phone || "";
           if (item.language && /spanish|español|espanol/i.test(item.language)) setComposeLanguage("Spanish");
@@ -1911,10 +1959,10 @@
           composeLeads.sort(function (a, b) {
             return (a.display_name || "").toLowerCase().localeCompare((b.display_name || "").toLowerCase());
           });
-          composeSelectedLeadId = item.id;
+          applyComposeLeadSelection(item);
           if (el.leadFilter) el.leadFilter.value = item.display_name || "";
-          status.textContent = "New contact saved to manychat_leads.";
           renderComposeLeadsList();
+          status.textContent = "New contact saved to manychat_leads.";
         } catch (e2) {
           status.textContent = "Could not create lead.";
         }
@@ -1945,10 +1993,12 @@
         }
         el.status.textContent = "Generating…";
         try {
+          var fn = el.firstName ? String(el.firstName.value || "").trim() : "";
+          var ln = el.lastName ? String(el.lastName.value || "").trim() : "";
           var fullName = getComposeRecipientName();
           var lead = {
-            first_name: fullName.split(/\s+/)[0] || "",
-            last_name: fullName.trim().replace(/^\S+\s*/, "") || "",
+            first_name: fn || fullName.split(/\s+/)[0] || "",
+            last_name: ln || fullName.trim().replace(/^\S+\s*/, "") || "",
             phone: el.phone.value || "",
             email: el.email.value || "",
           };
@@ -2064,6 +2114,8 @@
           });
           if (composeSelectedLeadId === L.id) {
             composeSelectedLeadId = null;
+            if (el.firstName) el.firstName.value = "";
+            if (el.lastName) el.lastName.value = "";
             el.email.value = "";
             el.phone.value = "";
           }
