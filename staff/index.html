@@ -1454,7 +1454,6 @@
       });
 
       var composeLeads = [];
-      var composeLeadsLoaded = false;
       var composeSelectedLeadId = null;
       var composeDraftId = null;
       var composeLang = "English";
@@ -1559,11 +1558,10 @@
       }
 
       async function ensureComposeLeadsLoaded() {
-        if (composeLeadsLoaded || !accessToken) return;
+        if (!accessToken) return;
         try {
           var data = await authedApi("/api/staff/leads");
           composeLeads = Array.isArray(data.items) ? data.items : [];
-          composeLeadsLoaded = true;
         } catch (e) {
           getComposeEls().status.textContent = "Could not load leads list.";
         }

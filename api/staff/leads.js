@@ -23,6 +23,87 @@ function sortKey(row) {
   return displayName(row).toLowerCase();
 }
 
+const UNRESOLVED_TEMPLATE = /^\{\{[\s\S]*\}\}$/;
+
+function cleanText(v) {
+  const s = String(v || "").trim();
+  if (!s || UNRESOLVED_TEMPLATE.test(s)) return "";
+  return s;
+}
+
+function digitsOnly(v) {
+  return String(v || "").replace(/\D+/g, "");
+}
+
+/** Same scoring idea as staff/questions — match lead phone to contacts.whatsapp_id / phone / subscriber. */
+function bestContactEmailForPhone(phoneField, contacts) {
+  const qPhoneText = cleanText(phoneField);
+  const qPhoneDigits = digitsOnly(qPhoneText);
+  if (!contacts || !contacts.length || !qPhoneText) return "";
+
+  const scored = contacts
+    .map((c) => {
+      const cPhone = cleanText(c.phone);
+      const cWhatsAppId = cleanText(c.whatsapp_id);
+      const cSubscriberId = cleanText(c.manychat_subscriber_id);
+      const cPhoneDigits = digitsOnly(cPhone);
+      const cEmail = cleanText(c.email);
+      let score = 0;
+      if (qPhoneDigits && cPhoneDigits && qPhoneDigits === cPhoneDigits) score += 100;
+      if (qPhoneText && qPhoneText === cWhatsAppId) score += 40;
+      if (qPhoneText && qPhoneText === cSubscriberId) score += 35;
+      if (cEmail) score += 12;
+      if (cSubscriberId) score += 8;
+      if (cWhatsAppId) score += 5;
+      return { c, score };
+    })
+    .filter((x) => x.score > 0)
+    .sort((a, b) => b.score - a.score);
+
+  const top = scored.length ? scored[0].c : null;
+  return top ? cleanText(top.email) : "";
+}
+
+async function enrichLeadEmailsFromContacts(cfg, items) {
+  const phonesNeedingEmail = Array.from(
+    new Set(
+      items
+        .filter((i) => !cleanText(i.email) && cleanText(i.phone))
+        .map((i) => cleanText(i.phone))
+    )
+  );
+  if (!phonesNeedingEmail.length) return;
+
+  const allContacts = [];
+  const chunkSize = 80;
+  for (let i = 0; i < phonesNeedingEmail.length; i += chunkSize) {
+    const chunk = phonesNeedingEmail.slice(i, i + chunkSize);
+    const values = chunk.map((p) => `"${String(p).replace(/"/g, "")}"`).join(",");
+    if (!values) continue;
+    const contacts = await restSelect(
+      cfg,
+      "contacts",
+      `select=id,email,phone,whatsapp_id,manychat_subscriber_id,created_at&or=(phone.in.(${values}),whatsapp_id.in.(${values}),manychat_subscriber_id.in.(${values}))&order=created_at.desc&limit=400`
+    );
+    (contacts || []).forEach((c) => allContacts.push(c));
+  }
+
+  const seen = new Set();
+  const uniq = [];
+  allContacts.forEach((c) => {
+    const id = c && c.id;
+    if (!id || seen.has(id)) return;
+    seen.add(id);
+    uniq.push(c);
+  });
+
+  items.forEach((row) => {
+    if (cleanText(row.email) || !cleanText(row.phone)) return;
+    const em = bestContactEmailForPhone(row.phone, uniq);
+    if (em) row.email = em;
+  });
+}
+
 module.exports = async function handler(req, res) {
   const auth = await requireStaffAuth(req, res);
   if (!auth.valid) return;
@@ -43,9 +124,10 @@ module.exports = async function handler(req, res) {
         last_name: r.last_name || "",
         display_name: displayName(r),
         phone: r.phone || "",
-        email: r.email || "",
+        email: String(r.email || "").trim(),
         language: r.language || "English",
       }));
+      await enrichLeadEmailsFromContacts(cfg, items);
       items.sort((x, y) => sortKey(x).localeCompare(sortKey(y)));
       return json(res, 200, { items });
     } catch (e) {
