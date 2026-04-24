@@ -39,6 +39,31 @@ function digitsOnly(v) {
   return String(v || "").replace(/\D+/g, "");
 }
 
+function normalizeEmail(v) {
+  const s = cleanText(v).toLowerCase();
+  return s || "";
+}
+
+function normalizePhone(v) {
+  return digitsOnly(v);
+}
+
+function normalizeName(v) {
+  return cleanText(v).toLowerCase();
+}
+
+function dedupeKeyForLead(lead) {
+  const emailKey = normalizeEmail(lead && lead.email);
+  const phoneKey = normalizePhone(lead && lead.phone);
+  const nameKey = normalizeName(lead && lead.display_name);
+  if (emailKey) return emailKey;
+  if (phoneKey) return phoneKey;
+  if (nameKey) return nameKey;
+  const sourceTable = String((lead && lead.source_table) || "unknown");
+  const sourceId = String((lead && lead.id) || "");
+  return `${sourceTable}:${sourceId}`;
+}
+
 /** PostgREST / Postgres when manychat_leads.staff_hidden_at is not migrated yet */
 function isStaffHiddenColumnError(msg) {
   return /staff_hidden_at|42703|PGRST204|column.*does not exist|Could not find/i.test(String(msg || ""));
@@ -67,9 +92,41 @@ async function selectUnifiedLeadById(cfg, id) {
   const one = await restSelect(
     cfg,
     "unified_leads",
-    `select=id,source_table,source&limit=1&id=eq.${encodeURIComponent(id)}`
+    `select=id,source_table,source,display_name,email,phone&limit=1&id=eq.${encodeURIComponent(id)}`
   );
   return Array.isArray(one) && one.length ? one[0] : null;
+}
+
+async function upsertStaffHiddenLead(cfg, lead) {
+  const payload = [
+    {
+      dedupe_key: dedupeKeyForLead(lead),
+      email_key: normalizeEmail(lead.email) || null,
+      phone_key: normalizePhone(lead.phone) || null,
+      name_key: normalizeName(lead.display_name) || null,
+      source_table: String(lead.source_table || "unknown"),
+      source_id: lead.id,
+      hidden_at: new Date().toISOString(),
+    },
+  ];
+  const r = await fetch(
+    `${cfg.supabaseUrl}/rest/v1/staff_hidden_leads?on_conflict=dedupe_key`,
+    {
+      method: "POST",
+      headers: {
+        apikey: cfg.serviceKey,
+        Authorization: `Bearer ${cfg.serviceKey}`,
+        "Content-Type": "application/json",
+        Prefer: "resolution=merge-duplicates,return=representation",
+      },
+      body: JSON.stringify(payload),
+    }
+  );
+  const text = await r.text();
+  if (!r.ok) {
+    throw new Error(`Supabase upsert staff_hidden_leads ${r.status}: ${text.slice(0, 300)}`);
+  }
+  return text ? JSON.parse(text) : [];
 }
 
 /** Same scoring idea as staff/questions — match lead phone to contacts.whatsapp_id / phone / subscriber. */
@@ -301,29 +358,32 @@ module.exports = async function handler(req, res) {
     try {
       const unified = await selectUnifiedLeadById(cfg, id);
       if (!unified) return json(res, 404, { error: "Lead not found" });
-      if (String(unified.source_table || "") !== "manychat_leads") {
-        return json(res, 400, {
-          error: "This lead cannot be hidden from compose because it is not from manychat_leads.",
-        });
+
+      await upsertStaffHiddenLead(cfg, unified);
+
+      if (String(unified.source_table || "") === "manychat_leads") {
+        try {
+          const now = new Date().toISOString();
+          await restPatch(cfg, "manychat_leads", `id=eq.${encodeURIComponent(id)}`, {
+            staff_hidden_at: now,
+            updated_at: now,
+          });
+        } catch (e) {
+          const msg = e && e.message ? String(e.message) : "";
+          if (!(/42703|column/i.test(msg) && /staff_hidden_at/i.test(msg))) throw e;
+        }
       }
-      const now = new Date().toISOString();
-      const patched = await restPatch(cfg, "manychat_leads", `id=eq.${encodeURIComponent(id)}`, {
-        staff_hidden_at: now,
-        updated_at: now,
-      });
-      if (!Array.isArray(patched) || patched.length === 0) {
-        return json(res, 404, { error: "Lead not found" });
-      }
-      return json(res, 200, { ok: true, id });
+      return json(res, 200, { ok: true, id, source_table: unified.source_table });
     } catch (e) {
       console.error("staff/leads DELETE", e);
       const msg = e && e.message ? String(e.message) : "Failed to hide lead";
-      if (/42703|column/i.test(msg) && /staff_hidden_at/i.test(msg)) {
+      if (/staff_hidden_leads|relation .* does not exist|42P01|PGRST/i.test(msg)) {
         return json(res, 503, {
-          error: "Database migration required: run 026_manychat_leads_staff_hidden.sql on Supabase.",
+          error:
+            "Database migration required: run 029_staff_hidden_leads_unified.sql on Supabase.",
         });
       }
-      return json(res, 500, { error: "Failed to hide lead" });
+      return json(res, 500, { error: "Failed to hide lead from compose list" });
     }
   }
 
