@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
   <meta name="robots" content="noindex,nofollow" />
   <title>Mejor Vida — Staff Portal</title>
   <style>
@@ -339,6 +340,42 @@
       padding: 12px;
     }
     #compose-form.compose-form { position: relative; }
+    .compose-contact-heading {
+      margin: 0 0 8px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .compose-contact-names {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 12px;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: rgba(10, 20, 39, 0.45);
+    }
+    .compose-contact-names label {
+      display: block;
+      margin: 0 0 6px;
+      font-size: 0.92rem;
+    }
+    #compose-form .compose-contact-names input {
+      width: 100%;
+      margin-top: 0;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: #0a1a33;
+      color: var(--text);
+      padding: 10px 12px;
+      font: inherit;
+    }
+    @media (max-width: 520px) {
+      .compose-contact-names {
+        grid-template-columns: 1fr;
+      }
+    }
     .compose-autofill-trap {
       position: absolute;
       left: -3000px;
@@ -739,8 +776,9 @@
                     <input type="text" tabindex="-1" autocomplete="username" />
                     <input type="password" tabindex="-1" autocomplete="new-password" />
                   </div>
-                  <div class="meta-grid">
-                    <div class="meta-card">
+                  <div class="compose-contact-heading">Lead name (saved to manychat_leads)</div>
+                  <div class="compose-contact-names">
+                    <div>
                       <label for="compose-first-name">First name</label>
                       <input
                         id="compose-first-name"
@@ -752,7 +790,7 @@
                         placeholder="First name"
                       />
                     </div>
-                    <div class="meta-card">
+                    <div>
                       <label for="compose-last-name">Last name</label>
                       <input
                         id="compose-last-name"
@@ -764,6 +802,8 @@
                         placeholder="Last name"
                       />
                     </div>
+                  </div>
+                  <div class="meta-grid">
                     <div class="meta-card">
                       <label for="compose-email">Email</label>
                       <input id="compose-email" type="email" inputmode="email" name="mvi_compose_email" autocomplete="off" data-lpignore="true" data-1p-ignore="true" placeholder="name@example.com" />
