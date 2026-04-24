@@ -4,7 +4,7 @@ const { json, readJsonBody, serviceConfig, restSelect, restInsert, restPatch } =
 
 async function reformatForKnowledgeBase(openaiKey, questionText, replyDraft) {
   const systemPrompt =
-    "You are a knowledge base formatter. Given a customer question and an email reply, rewrite them as a clean, concise Q&A pair suitable for a knowledge base. Remove all email pleasantries, greetings, and sign-offs. Keep only the factual insurance content. Format exactly as:\nQ: [question]\nA: [answer]";
+    "You are a knowledge base formatter. Given a customer question and an email reply, rewrite only the factual answer as a clean, concise knowledge snippet. Remove greetings, sign-offs, and any conversational filler. Do not include labels such as Q:, A:, Question:, or Answer:. Return plain answer text only.";
 
   const userPrompt = `Question: ${questionText}\n\nEmail reply: ${replyDraft}`;
 
@@ -40,8 +40,7 @@ async function reformatForKnowledgeBase(openaiKey, questionText, replyDraft) {
   const cleaned = String(text).trim();
   if (!cleaned) throw new Error("Formatter returned empty content");
 
-  if (/^Q:\s+/im.test(cleaned) && /^A:\s+/im.test(cleaned)) return cleaned;
-  return `Q: ${questionText}\nA: ${cleaned}`;
+  return cleaned;
 }
 
 async function ensureStaffSource(cfg) {
