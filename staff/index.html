@@ -455,6 +455,17 @@
       background: rgba(10,20,39,.55);
       font-size: .9rem;
     }
+    .compose-save-contact-wrap {
+      padding: 10px;
+    }
+    .compose-save-contact-btn {
+      width: 100%;
+      font-weight: 700;
+    }
+    .compose-save-contact-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
     .actions {
       display: flex;
       flex-wrap: wrap;
@@ -724,6 +735,17 @@
                     <input type="password" tabindex="-1" autocomplete="new-password" />
                   </div>
                   <div class="meta-grid">
+                    <div class="meta-card compose-save-contact-wrap" style="grid-column: 1 / -1">
+                      <button
+                        id="compose-save-contact-btn"
+                        type="button"
+                        class="secondary compose-save-contact-btn"
+                        disabled
+                        data-help="Writes the Email and Phone fields (and Language) to this lead in manychat_leads. Select a lead first."
+                      >
+                        Save updated Contact Info
+                      </button>
+                    </div>
                     <div class="meta-card">
                       <label for="compose-email">Email</label>
                       <input id="compose-email" type="email" inputmode="email" name="mvi_compose_email" autocomplete="off" data-lpignore="true" data-1p-ignore="true" placeholder="name@example.com" />
@@ -1709,6 +1731,11 @@
         }
       }
 
+      function updateComposeSaveContactButtonState() {
+        var btn = document.getElementById("compose-save-contact-btn");
+        if (btn) btn.disabled = !composeSelectedLeadId;
+      }
+
       function applyComposeLeadSelection(L) {
         var el = getComposeEls();
         composeSelectedLeadId = L.id;
@@ -1814,6 +1841,56 @@
             onComposeAddNewLead(typed);
           });
           el.leadList.appendChild(addBtn);
+        }
+        updateComposeSaveContactButtonState();
+      }
+
+      async function onComposeSaveContact() {
+        var el = getComposeEls();
+        if (!composeSelectedLeadId) {
+          el.status.textContent = "Select a lead from the list before saving contact info.";
+          return;
+        }
+        var email = String(el.email.value || "").trim().toLowerCase();
+        var phone = String(el.phone.value || "").trim();
+        if (!email && !phone) {
+          el.status.textContent = "Enter an email and/or phone to save.";
+          return;
+        }
+        if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+          el.status.textContent = "Enter a valid email address.";
+          return;
+        }
+        var btn = document.getElementById("compose-save-contact-btn");
+        if (btn) btn.disabled = true;
+        el.status.textContent = "Saving contact…";
+        try {
+          var data = await authedApi(
+            "/api/staff/leads",
+            { id: composeSelectedLeadId, email: email || null, phone: phone || null, language: composeLang },
+            { method: "PATCH" }
+          );
+          var item = data && data.item;
+          if (!item || !item.id) throw new Error("no item");
+          var idx = composeLeads.findIndex(function (x) {
+            return x.id === item.id;
+          });
+          if (idx >= 0) {
+            composeLeads[idx] = item;
+            composeLeads.sort(function (a, b) {
+              return (a.display_name || "").toLowerCase().localeCompare((b.display_name || "").toLowerCase());
+            });
+          }
+          el.email.value = item.email || "";
+          el.phone.value = item.phone || "";
+          if (item.language && /spanish|español|espanol/i.test(item.language)) setComposeLanguage("Spanish");
+          else setComposeLanguage("English");
+          renderComposeLeadsList();
+          el.status.textContent = "Contact info saved.";
+        } catch (err) {
+          el.status.textContent = (err && err.message) || "Could not save contact.";
+        } finally {
+          updateComposeSaveContactButtonState();
         }
       }
 
@@ -2030,6 +2107,9 @@
         document.getElementById("compose-generate-btn").addEventListener("click", onComposeGenerate);
         document.getElementById("compose-send-btn").addEventListener("click", onComposeSend);
         document.getElementById("compose-save-btn").addEventListener("click", onComposeSave);
+        var saveContactBtn = document.getElementById("compose-save-contact-btn");
+        if (saveContactBtn) saveContactBtn.addEventListener("click", onComposeSaveContact);
+        updateComposeSaveContactButtonState();
       }
 
       wireComposeUi();

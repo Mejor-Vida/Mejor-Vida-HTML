@@ -204,6 +204,57 @@ module.exports = async function handler(req, res) {
     }
   }
 
+  if (req.method === "PATCH") {
+    let body;
+    try {
+      body = typeof req.body === "string" ? JSON.parse(req.body || "{}") : req.body || {};
+    } catch (e) {
+      return json(res, 400, { error: "Invalid JSON" });
+    }
+    const id = String(body.id || "").trim();
+    if (!isUuid(id)) {
+      return json(res, 400, { error: "Valid lead id required" });
+    }
+    const hasEmailKey = Object.prototype.hasOwnProperty.call(body, "email");
+    const hasPhoneKey = Object.prototype.hasOwnProperty.call(body, "phone");
+    const hasLangKey = Object.prototype.hasOwnProperty.call(body, "language");
+    if (!hasEmailKey && !hasPhoneKey && !hasLangKey) {
+      return json(res, 400, { error: "Provide email, phone, and/or language to update" });
+    }
+    const emailIn = hasEmailKey ? String(body.email || "").trim().toLowerCase() : null;
+    const phoneIn = hasPhoneKey ? String(body.phone || "").trim().slice(0, 40) : null;
+    const langIn = hasLangKey ? String(body.language || "English").trim().slice(0, 50) || "English" : null;
+    if (hasEmailKey && emailIn && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailIn)) {
+      return json(res, 400, { error: "Invalid email" });
+    }
+    const now = new Date().toISOString();
+    const payload = { updated_at: now };
+    if (hasEmailKey) payload.email = emailIn || null;
+    if (hasPhoneKey) payload.phone = phoneIn || null;
+    if (hasLangKey) payload.language = langIn || "English";
+    try {
+      const patched = await restPatch(cfg, "manychat_leads", `id=eq.${encodeURIComponent(id)}`, payload);
+      if (!Array.isArray(patched) || patched.length === 0) {
+        return json(res, 404, { error: "Lead not found" });
+      }
+      const row = patched[0];
+      const one = {
+        id: row.id,
+        first_name: row.first_name || "",
+        last_name: row.last_name || "",
+        display_name: displayName(row),
+        phone: row.phone || "",
+        email: String(row.email || "").trim(),
+        language: row.language || "English",
+      };
+      await enrichLeadEmailsFromContacts(cfg, [one]);
+      return json(res, 200, { item: one });
+    } catch (e) {
+      console.error("staff/leads PATCH", e);
+      return json(res, 500, { error: "Failed to update lead" });
+    }
+  }
+
   if (req.method === "DELETE") {
     const id = (req.query && (req.query.id || req.query.lead_id)) || "";
     if (!isUuid(id)) {
@@ -231,6 +282,6 @@ module.exports = async function handler(req, res) {
     }
   }
 
-  res.setHeader("Allow", "GET, POST, DELETE");
+  res.setHeader("Allow", "GET, POST, PATCH, DELETE");
   return json(res, 405, { error: "Method Not Allowed" });
 };
