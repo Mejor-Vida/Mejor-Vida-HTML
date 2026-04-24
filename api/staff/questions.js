@@ -68,11 +68,19 @@ module.exports = async function handler(req, res) {
     const byLeadId = {};
     if (leadIds.length) {
       const ids = leadIds.map((id) => `"${String(id).replace(/"/g, "")}"`).join(",");
-      const leads = await restSelect(
-        cfg,
-        "manychat_leads",
-        `select=id,first_name,phone,email&id=in.(${ids})&staff_hidden_at=is.null`
-      );
+      let leads;
+      const qFiltered = `select=id,first_name,phone,email&id=in.(${ids})&staff_hidden_at=is.null`;
+      const qLegacy = `select=id,first_name,phone,email&id=in.(${ids})`;
+      try {
+        leads = await restSelect(cfg, "manychat_leads", qFiltered);
+      } catch (e) {
+        const msg = String((e && e.message) || e);
+        if (/staff_hidden_at|42703|PGRST204|column.*does not exist|Could not find/i.test(msg)) {
+          leads = await restSelect(cfg, "manychat_leads", qLegacy);
+        } else {
+          throw e;
+        }
+      }
       (leads || []).forEach((l) => {
         byLeadId[l.id] = l;
       });

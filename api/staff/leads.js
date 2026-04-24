@@ -39,6 +39,25 @@ function digitsOnly(v) {
   return String(v || "").replace(/\D+/g, "");
 }
 
+/** PostgREST / Postgres when manychat_leads.staff_hidden_at is not migrated yet */
+function isStaffHiddenColumnError(msg) {
+  return /staff_hidden_at|42703|PGRST204|column.*does not exist|Could not find/i.test(String(msg || ""));
+}
+
+async function selectManychatLeadsForStaff(cfg) {
+  const filtered =
+    "select=id,first_name,last_name,phone,email,language&staff_hidden_at=is.null&limit=5000";
+  const legacy = "select=id,first_name,last_name,phone,email,language&limit=5000";
+  try {
+    return await restSelect(cfg, "manychat_leads", filtered);
+  } catch (e) {
+    if (isStaffHiddenColumnError(e && e.message)) {
+      return await restSelect(cfg, "manychat_leads", legacy);
+    }
+    throw e;
+  }
+}
+
 /** Same scoring idea as staff/questions — match lead phone to contacts.whatsapp_id / phone / subscriber. */
 function bestContactEmailForPhone(phoneField, contacts) {
   const qPhoneText = cleanText(phoneField);
@@ -117,11 +136,7 @@ module.exports = async function handler(req, res) {
 
   if (req.method === "GET") {
     try {
-      const rows = await restSelect(
-        cfg,
-        "manychat_leads",
-        "select=id,first_name,last_name,phone,email,language&staff_hidden_at=is.null&limit=5000"
-      );
+      const rows = await selectManychatLeadsForStaff(cfg);
       const items = (rows || []).map((r) => ({
         id: r.id,
         first_name: r.first_name || "",
