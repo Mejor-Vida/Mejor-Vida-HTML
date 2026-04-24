@@ -43,6 +43,44 @@ async function reformatForKnowledgeBase(openaiKey, questionText, replyDraft) {
   return cleaned;
 }
 
+async function buildBilingualKnowledgeAnswers(openaiKey, questionText, replyDraft) {
+  const english = await reformatForKnowledgeBase(openaiKey, questionText, replyDraft);
+
+  const systemPrompt =
+    "Translate insurance-support answer text into neutral Latin-American Spanish. Keep factual meaning exact, preserve phone numbers/emails/proper nouns, and return plain answer text only with no labels.";
+  const r = await fetch("https://api.openai.com/v1/chat/completions", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${openaiKey}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      model: "gpt-4o-mini",
+      temperature: 0.1,
+      max_tokens: 500,
+      messages: [
+        { role: "system", content: systemPrompt },
+        { role: "user", content: english },
+      ],
+    }),
+  });
+  const data = await r.json();
+  if (!r.ok) {
+    const msg = (data && data.error && data.error.message) || "OpenAI translation error";
+    throw new Error(String(msg).slice(0, 200));
+  }
+  const spanish =
+    (data &&
+      data.choices &&
+      data.choices[0] &&
+      data.choices[0].message &&
+      data.choices[0].message.content &&
+      String(data.choices[0].message.content).trim()) ||
+    "";
+  if (!spanish) throw new Error("Spanish translation returned empty content");
+  return { en: english, es: spanish };
+}
+
 async function ensureStaffSource(cfg) {
   const existing = await restSelect(
     cfg,
@@ -116,23 +154,34 @@ module.exports = async function handler(req, res) {
     const doc = docs && docs[0];
     if (!doc || !doc.id) throw new Error("Failed creating knowledge document");
 
-    const chunkContent = await reformatForKnowledgeBase(openaiKey, finalQuestion, answer);
-    const emb = await generateEmbedding(openaiKey, chunkContent);
+    const bilingual = await buildBilingualKnowledgeAnswers(openaiKey, finalQuestion, answer);
+    const embEn = await generateEmbedding(openaiKey, bilingual.en);
+    const embEs = await generateEmbedding(openaiKey, bilingual.es);
 
+    const baseMeta = {
+      source_name: "staff_inbox_approved",
+      question_id: q.id,
+      lead_id: q.lead_id || null,
+      original_language: q.language || null,
+      flow_stage: q.flow_stage || null,
+      pushed_by: auth.user && auth.user.email ? auth.user.email : null,
+    };
     const insertedChunks = await restInsert(cfg, "knowledge_chunks", [
       {
         document_id: doc.id,
         chunk_index: 0,
-        content: chunkContent,
-        embedding: emb.embedding,
-        metadata: {
-          source_name: "staff_inbox_approved",
-          question_id: q.id,
-          lead_id: q.lead_id || null,
-          language: q.language || null,
-          flow_stage: q.flow_stage || null,
-          pushed_by: auth.user && auth.user.email ? auth.user.email : null,
-        },
+        content: bilingual.en,
+        embedding: embEn.embedding,
+        metadata: Object.assign({}, baseMeta, { language: "en", variant: "staff_answer_en" }),
+        status: "active",
+        reviewed_at: new Date().toISOString(),
+      },
+      {
+        document_id: doc.id,
+        chunk_index: 1,
+        content: bilingual.es,
+        embedding: embEs.embedding,
+        metadata: Object.assign({}, baseMeta, { language: "es", variant: "staff_answer_es" }),
         status: "active",
         reviewed_at: new Date().toISOString(),
       },
@@ -146,13 +195,13 @@ module.exports = async function handler(req, res) {
       { rag_pushed: true }
     );
 
-    const qaPreview =
-      chunkContent.length > 900 ? `${chunkContent.slice(0, 900)}…` : chunkContent;
+    const qaPreview = bilingual.en.length > 900 ? `${bilingual.en.slice(0, 900)}…` : bilingual.en;
 
     return json(res, 200, {
       ok: true,
       document_id: doc.id,
       knowledge_chunk_id: chunkRow && chunkRow.id != null ? chunkRow.id : null,
+      knowledge_chunk_ids: (insertedChunks || []).map((c) => c.id).filter(Boolean),
       qa_preview: qaPreview,
     });
   } catch (e) {
