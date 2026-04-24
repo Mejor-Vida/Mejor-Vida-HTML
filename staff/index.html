@@ -141,8 +141,9 @@
     #pane-compose { padding: 12px; overflow: auto; }
     #pane-chat { padding: 12px; }
     .compose-outer {
-      max-width: 920px;
-      margin: 0 auto;
+      max-width: none;
+      margin: 0;
+      width: 100%;
       height: 100%;
     }
     .compose-panel {
@@ -153,42 +154,108 @@
       display: grid;
       grid-template-rows: auto 1fr;
       min-height: min(100%, 720px);
+      width: 100%;
     }
-    .compose-name-wrap { position: relative; }
-    .compose-name-dd {
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 100%;
-      margin-top: 4px;
-      z-index: 40;
-      max-height: 240px;
+    #compose-body.compose-body {
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+      flex: 1;
+      overflow: hidden;
+      padding: 0;
+    }
+    .compose-work {
+      display: flex;
+      flex: 1;
+      min-height: 0;
+      gap: 0;
+      align-items: stretch;
+    }
+    .compose-leads-col {
+      width: 30%;
+      min-width: 260px;
+      max-width: 380px;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding: 12px;
+      border-right: 1px solid var(--border);
+      background: rgba(8, 16, 32, 0.35);
+      min-height: 0;
+    }
+    .compose-leads-col .compose-leads-label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--muted);
+    }
+    #compose-lead-filter {
+      width: 100%;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: #0a1a33;
+      color: var(--text);
+      padding: 10px 12px;
+      font: inherit;
+    }
+    .compose-lead-list {
+      flex: 1;
+      min-height: 120px;
       overflow: auto;
-      background: var(--panel-2);
       border: 1px solid var(--border);
       border-radius: 10px;
-      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
-      display: none;
+      background: var(--panel-2);
     }
-    .compose-name-dd.open { display: block; }
-    .compose-name-dd button {
+    .compose-lead-list .compose-lead-empty {
+      padding: 12px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+    .compose-lead-row {
       display: block;
       width: 100%;
       text-align: left;
-      padding: 8px 10px;
+      padding: 10px 12px;
       border: 0;
       border-bottom: 1px solid var(--border);
       background: transparent;
       color: var(--text);
       font: inherit;
       cursor: pointer;
-      border-radius: 0;
       font-weight: 500;
+      line-height: 1.3;
     }
-    .compose-name-dd button:hover { background: rgba(255, 255, 255, 0.06); }
-    .compose-name-dd .dd-add {
+    .compose-lead-row:last-child {
+      border-bottom: 0;
+    }
+    .compose-lead-row:hover {
+      background: rgba(255, 255, 255, 0.06);
+    }
+    .compose-lead-row.selected {
+      background: rgba(49, 79, 138, 0.45);
+      border-left: 3px solid var(--accent);
+      padding-left: 9px;
+    }
+    .compose-lead-row.compose-lead-add {
       color: var(--accent);
       font-weight: 700;
+      border-top: 1px solid var(--border);
+    }
+    .compose-main-col {
+      flex: 1;
+      min-width: 0;
+      min-height: 0;
+      overflow: auto;
+      padding: 12px;
+    }
+    #compose-form.compose-form { position: relative; }
+    .compose-autofill-trap {
+      position: absolute;
+      left: -3000px;
+      top: 0;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
     }
     .compose-lang {
       display: flex;
@@ -337,6 +404,14 @@
       .inbox-wrap { flex-direction: column; }
       .inbox-list { width: 100%; max-width: none; min-height: 260px; }
       .inbox-detail { min-height: 0; }
+      .compose-work { flex-direction: column; }
+      .compose-leads-col {
+        width: 100%;
+        max-width: none;
+        min-height: 200px;
+        border-right: 0;
+        border-bottom: 1px solid var(--border);
+      }
     }
 
     .chat-wrap {
@@ -514,65 +589,71 @@
           <div class="inbox-head">
             <div>
               <strong>Compose email</strong>
-              <div class="small-note">Search a lead, describe the issue, draft, send, or save.</div>
+              <div class="small-note">Pick a lead on the left (or filter the list), then draft, send, or save.</div>
             </div>
           </div>
-          <div id="compose-body" class="detail-body">
-            <form id="compose-form" class="compose-form" autocomplete="off" onsubmit="return false;" aria-label="Compose email">
-            <div class="meta-grid">
-              <div class="meta-card" style="grid-column: 1 / -1">
-                <label for="compose-name-input">Lead name</label>
-                <div class="compose-name-wrap">
-                  <input
-                    id="compose-name-input"
-                    type="text"
-                    name="mvi_lead_search"
-                    inputmode="text"
-                    autocomplete="off"
-                    autocorrect="off"
-                    autocapitalize="off"
-                    spellcheck="false"
-                    data-lpignore="true"
-                    data-1p-ignore="true"
-                    data-bwignore="true"
-                    data-form-type="other"
-                    placeholder="Type to search leads…"
-                  />
-                  <div id="compose-name-dd" class="compose-name-dd" role="listbox" aria-label="Matching leads"></div>
-                </div>
-              </div>
-              <div class="meta-card">
-                <label for="compose-email">Email</label>
-                <input id="compose-email" type="email" name="mvi_compose_email" autocomplete="off" data-lpignore="true" data-1p-ignore="true" placeholder="name@example.com" />
-              </div>
-              <div class="meta-card">
-                <label for="compose-phone">Phone</label>
-                <input id="compose-phone" type="text" name="mvi_compose_phone" autocomplete="off" inputmode="tel" placeholder="Optional" />
-              </div>
-              <div class="meta-card" style="grid-column: 1 / -1">
-                <div class="compose-lang" role="group" aria-label="Language">
-                  <span class="small-note" style="margin:0">Language</span>
-                  <button type="button" class="lang-opt active" id="compose-lang-en" data-lang="English">English</button>
-                  <button type="button" class="lang-opt" id="compose-lang-es" data-lang="Spanish">Spanish</button>
-                </div>
+          <div id="compose-body" class="detail-body compose-body">
+            <div class="compose-work">
+              <aside class="compose-leads-col" aria-label="Leads">
+                <label class="compose-leads-label" for="compose-lead-filter">Filter leads</label>
+                <input
+                  id="compose-lead-filter"
+                  type="search"
+                  name="mvi_compose_lead_filter"
+                  autocomplete="off"
+                  autocorrect="off"
+                  autocapitalize="off"
+                  spellcheck="false"
+                  data-lpignore="true"
+                  data-1p-ignore="true"
+                  data-form-type="other"
+                  placeholder="Type to narrow the list…"
+                  aria-describedby="compose-lead-list-hint"
+                />
+                <span id="compose-lead-list-hint" class="small-note" style="margin: 0">A–Z. Click a row to load email and phone.</span>
+                <div id="compose-lead-list" class="compose-lead-list" role="listbox" aria-label="Leads"></div>
+              </aside>
+              <div class="compose-main-col">
+                <form id="compose-form" class="compose-form" autocomplete="off" onsubmit="return false;" aria-label="Compose email">
+                  <div class="compose-autofill-trap" aria-hidden="true">
+                    <input type="text" tabindex="-1" autocomplete="username" />
+                    <input type="password" tabindex="-1" autocomplete="new-password" />
+                  </div>
+                  <div class="meta-grid">
+                    <div class="meta-card">
+                      <label for="compose-email">Email</label>
+                      <input id="compose-email" type="email" inputmode="email" name="mvi_compose_email" autocomplete="off" data-lpignore="true" data-1p-ignore="true" placeholder="name@example.com" />
+                    </div>
+                    <div class="meta-card">
+                      <label for="compose-phone">Phone</label>
+                      <input id="compose-phone" type="text" name="mvi_compose_phone" autocomplete="off" inputmode="tel" placeholder="Optional" />
+                    </div>
+                    <div class="meta-card" style="grid-column: 1 / -1">
+                      <div class="compose-lang" role="group" aria-label="Language">
+                        <span class="small-note" style="margin:0">Language</span>
+                        <button type="button" class="lang-opt active" id="compose-lang-en" data-lang="English">English</button>
+                        <button type="button" class="lang-opt" id="compose-lang-es" data-lang="Spanish">Spanish</button>
+                      </div>
+                    </div>
+                  </div>
+                  <label for="compose-issue">Customer issue</label>
+                  <textarea id="compose-issue" placeholder="What does the client need help with?"></textarea>
+                  <div class="label-with-hint">
+                    <label for="compose-notes">Notes for AI (optional)</label>
+                    <span class="field-hint">Facts the model should treat as true when drafting.</span>
+                  </div>
+                  <textarea id="compose-notes" placeholder="Optional context for the draft…"></textarea>
+                  <label>Reply draft</label>
+                  <textarea id="compose-reply" placeholder="Generate or type the message…"></textarea>
+                  <div class="actions">
+                    <button id="compose-generate-btn" class="secondary" type="button" data-help="Drafts a reply from Customer issue, Notes for AI, lead fields, and Language (English or Spanish).">Generate Draft</button>
+                    <button id="compose-send-btn" class="email" type="button" data-help="Sends the Reply draft as branded HTML from Julie\x27s Gmail. Subject is derived from Customer issue.">Send Email</button>
+                    <button id="compose-save-btn" class="secondary" type="button" data-help="Saves recipient, issue, and notes to compose_drafts (creates or updates the current saved row).">Save</button>
+                  </div>
+                  <div id="compose-status" class="small-note"></div>
+                </form>
               </div>
             </div>
-            <label for="compose-issue">Customer issue</label>
-            <textarea id="compose-issue" placeholder="What does the client need help with?"></textarea>
-            <div class="label-with-hint">
-              <label for="compose-notes">Notes for AI (optional)</label>
-              <span class="field-hint">Facts the model should treat as true when drafting.</span>
-            </div>
-            <textarea id="compose-notes" placeholder="Optional context for the draft…"></textarea>
-            <label>Reply draft</label>
-            <textarea id="compose-reply" placeholder="Generate or type the message…"></textarea>
-            <div class="actions">
-              <button id="compose-generate-btn" class="secondary" type="button" data-help="Drafts a reply from Customer issue, Notes for AI, lead fields, and Language (English or Spanish).">Generate Draft</button>
-              <button id="compose-send-btn" class="email" type="button" data-help="Sends the Reply draft as branded HTML from Julie\x27s Gmail. Subject is derived from Customer issue.">Send Email</button>
-              <button id="compose-save-btn" class="secondary" type="button" data-help="Saves recipient, issue, and notes to compose_drafts (creates or updates the current saved row).">Save</button>
-            </div>
-            <div id="compose-status" class="small-note"></div>
-            </form>
           </div>
         </div>
       </div>
@@ -1460,8 +1541,8 @@
 
       function getComposeEls() {
         return {
-          nameIn: document.getElementById("compose-name-input"),
-          dd: document.getElementById("compose-name-dd"),
+          leadFilter: document.getElementById("compose-lead-filter"),
+          leadList: document.getElementById("compose-lead-list"),
           email: document.getElementById("compose-email"),
           phone: document.getElementById("compose-phone"),
           issue: document.getElementById("compose-issue"),
@@ -1469,6 +1550,44 @@
           reply: document.getElementById("compose-reply"),
           status: document.getElementById("compose-status"),
         };
+      }
+
+      function getComposeRecipientName() {
+        if (composeSelectedLeadId) {
+          var L = composeLeads.find(function (x) {
+            return x.id === composeSelectedLeadId;
+          });
+          if (L) return String(L.display_name || "").trim();
+        }
+        var el = getComposeEls();
+        return el.leadFilter ? String(el.leadFilter.value || "").trim() : "";
+      }
+
+      function syncComposeSelectionFromFilter() {
+        if (!composeSelectedLeadId) return;
+        var el = getComposeEls();
+        if (!el.leadFilter) return;
+        var q = String(el.leadFilter.value || "").trim().toLowerCase();
+        var L = composeLeads.find(function (x) {
+          return x.id === composeSelectedLeadId;
+        });
+        if (!L) {
+          composeSelectedLeadId = null;
+          return;
+        }
+        if (q && !leadMatchesQuery(L, q)) {
+          composeSelectedLeadId = null;
+        }
+      }
+
+      function applyComposeLeadSelection(L) {
+        var el = getComposeEls();
+        composeSelectedLeadId = L.id;
+        el.email.value = L.email || "";
+        el.phone.value = L.phone || "";
+        if (L.language && /spanish|español|espanol/i.test(L.language)) setComposeLanguage("Spanish");
+        else setComposeLanguage("English");
+        renderComposeLeadsList();
       }
 
       function setComposeLanguage(lang) {
@@ -1485,33 +1604,46 @@
         return hay.indexOf(q) !== -1;
       }
 
-      function renderComposeDropdown() {
+      function renderComposeLeadsList() {
         var el = getComposeEls();
-        if (!el.nameIn || !el.dd) return;
-        var q = String(el.nameIn.value || "").trim().toLowerCase();
-        el.dd.innerHTML = "";
-        var matches = q
+        if (!el.leadList || !el.leadFilter) return;
+        var q = String(el.leadFilter.value || "").trim().toLowerCase();
+        var filtered = q
           ? composeLeads.filter(function (L) {
               return leadMatchesQuery(L, q);
-            }).slice(0, 80)
-          : composeLeads.slice(0, 80);
-        matches.forEach(function (L) {
-          var b = document.createElement("button");
-          b.type = "button";
-          b.textContent = L.display_name + (L.email ? " · " + L.email : "");
-          b.addEventListener("mousedown", function (e) {
-            e.preventDefault();
-            composeSelectedLeadId = L.id;
-            el.nameIn.value = L.display_name;
-            el.email.value = L.email || "";
-            el.phone.value = L.phone || "";
-            if (L.language && /spanish|español|espanol/i.test(L.language)) setComposeLanguage("Spanish");
-            else setComposeLanguage("English");
-            el.dd.classList.remove("open");
+            })
+          : composeLeads.slice();
+        el.leadList.innerHTML = "";
+        if (composeLeads.length === 0) {
+          var empty0 = document.createElement("div");
+          empty0.className = "compose-lead-empty";
+          empty0.textContent = "No leads loaded yet.";
+          el.leadList.appendChild(empty0);
+        } else if (filtered.length === 0) {
+          var empty1 = document.createElement("div");
+          empty1.className = "compose-lead-empty";
+          empty1.textContent = "No names match this filter.";
+          el.leadList.appendChild(empty1);
+        } else {
+          filtered.forEach(function (L) {
+            var b = document.createElement("button");
+            b.type = "button";
+            b.className = "compose-lead-row";
+            b.setAttribute("role", "option");
+            var sel = L.id === composeSelectedLeadId;
+            b.setAttribute("aria-selected", sel ? "true" : "false");
+            if (sel) b.classList.add("selected");
+            var line = L.display_name || "(no name)";
+            if (L.email) line += " · " + L.email;
+            b.textContent = line;
+            b.addEventListener("mousedown", function (e) {
+              e.preventDefault();
+              applyComposeLeadSelection(L);
+            });
+            el.leadList.appendChild(b);
           });
-          el.dd.appendChild(b);
-        });
-        var typed = String(el.nameIn.value || "").trim();
+        }
+        var typed = String(el.leadFilter.value || "").trim();
         var typedLower = typed.toLowerCase();
         var hasExact = composeLeads.some(function (L) {
           return (L.display_name || "").trim().toLowerCase() === typedLower;
@@ -1520,15 +1652,16 @@
         if (typed && !hasExact && emailOk) {
           var addBtn = document.createElement("button");
           addBtn.type = "button";
-          addBtn.className = "dd-add";
+          addBtn.className = "compose-lead-row compose-lead-add";
+          addBtn.setAttribute("role", "option");
+          addBtn.setAttribute("aria-selected", "false");
           addBtn.textContent = "Add \"" + typed + "\" as new contact?";
           addBtn.addEventListener("mousedown", function (e) {
             e.preventDefault();
             onComposeAddNewLead(typed);
           });
-          el.dd.appendChild(addBtn);
+          el.leadList.appendChild(addBtn);
         }
-        el.dd.classList.toggle("open", el.dd.childNodes.length > 0);
       }
 
       async function onComposeAddNewLead(displayName) {
@@ -1549,9 +1682,9 @@
             return (a.display_name || "").toLowerCase().localeCompare((b.display_name || "").toLowerCase());
           });
           composeSelectedLeadId = item.id;
-          el.nameIn.value = item.display_name;
+          if (el.leadFilter) el.leadFilter.value = item.display_name || "";
           status.textContent = "New contact saved to manychat_leads.";
-          el.dd.classList.remove("open");
+          renderComposeLeadsList();
         } catch (e2) {
           status.textContent = "Could not create lead.";
         }
@@ -1562,8 +1695,13 @@
         try {
           var data = await authedApi("/api/staff/leads");
           composeLeads = Array.isArray(data.items) ? data.items : [];
+          composeLeads.sort(function (a, b) {
+            return (a.display_name || "").toLowerCase().localeCompare((b.display_name || "").toLowerCase());
+          });
+          renderComposeLeadsList();
         } catch (e) {
           getComposeEls().status.textContent = "Could not load leads list.";
+          renderComposeLeadsList();
         }
       }
 
@@ -1577,9 +1715,10 @@
         }
         el.status.textContent = "Generating…";
         try {
+          var fullName = getComposeRecipientName();
           var lead = {
-            first_name: String(el.nameIn.value || "").split(/\s+/)[0] || "",
-            last_name: String(el.nameIn.value || "").trim().replace(/^\S+\s*/, "") || "",
+            first_name: fullName.split(/\s+/)[0] || "",
+            last_name: fullName.trim().replace(/^\S+\s*/, "") || "",
             phone: el.phone.value || "",
             email: el.email.value || "",
           };
@@ -1642,7 +1781,7 @@
       async function onComposeSave() {
         var el = getComposeEls();
         var payload = {
-          recipient_name: String(el.nameIn.value || "").trim(),
+          recipient_name: getComposeRecipientName(),
           email: String(el.email.value || "").trim(),
           phone: String(el.phone.value || "").trim(),
           language: composeLang,
@@ -1663,29 +1802,13 @@
 
       function wireComposeUi() {
         var el = getComposeEls();
-        if (!el.nameIn) return;
-        /* Stops Chrome/Safari from showing autofill/contact “white bubble” until user focuses to type */
-        el.nameIn.setAttribute("readonly", "readonly");
-        el.nameIn.addEventListener("focus", function onComposeNameFirstFocus() {
-          el.nameIn.removeAttribute("readonly");
-          el.nameIn.removeEventListener("focus", onComposeNameFirstFocus);
+        if (!el.leadFilter || !el.leadList) return;
+        el.leadFilter.addEventListener("input", function () {
+          syncComposeSelectionFromFilter();
+          renderComposeLeadsList();
         });
-        el.nameIn.addEventListener("focus", function () {
-          renderComposeDropdown();
-        });
-        el.nameIn.addEventListener("input", function () {
-          var L = composeLeads.find(function (x) {
-            return x.id === composeSelectedLeadId;
-          });
-          if (!L || (L.display_name || "").trim() !== String(el.nameIn.value || "").trim()) {
-            composeSelectedLeadId = null;
-          }
-          renderComposeDropdown();
-        });
-        el.nameIn.addEventListener("blur", function () {
-          setTimeout(function () {
-            el.dd.classList.remove("open");
-          }, 200);
+        el.email.addEventListener("input", function () {
+          renderComposeLeadsList();
         });
         document.getElementById("compose-lang-en").addEventListener("click", function () {
           setComposeLanguage("English");
@@ -1699,6 +1822,7 @@
       }
 
       wireComposeUi();
+      renderComposeLeadsList();
       wireDelayedHelpOn(document.getElementById("compose-body"));
 
       wireStaticPortalHelpOnce();
