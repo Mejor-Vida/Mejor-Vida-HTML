@@ -392,12 +392,17 @@
     #orig-box, #staff-context-box {
       min-height: 90px;
     }
+    /* Explicit heights: min-height alone does not shrink textareas below the browser default. */
     #compose-issue,
     #compose-notes {
-      min-height: 68px;
+      min-height: 4.5rem;
+      height: 4.5rem;
+      line-height: 1.35;
     }
     #compose-reply {
-      min-height: 134px;
+      min-height: 15rem;
+      height: 15rem;
+      line-height: 1.35;
     }
     #compose-body .meta-card input {
       width: 100%;
@@ -647,14 +652,14 @@
                     </div>
                   </div>
                   <label for="compose-issue">Customer issue</label>
-                  <textarea id="compose-issue" placeholder="What does the client need help with?"></textarea>
+                  <textarea id="compose-issue" rows="2" placeholder="What does the client need help with?"></textarea>
                   <div class="label-with-hint">
                     <label for="compose-notes">Notes for AI (optional)</label>
                     <span class="field-hint">Facts the model should treat as true when drafting.</span>
                   </div>
-                  <textarea id="compose-notes" placeholder="Optional context for the draft…"></textarea>
+                  <textarea id="compose-notes" rows="2" placeholder="Optional context for the draft…"></textarea>
                   <label>Reply draft</label>
-                  <textarea id="compose-reply" placeholder="Generate or type the message…"></textarea>
+                  <textarea id="compose-reply" rows="12" placeholder="Generate or type the message…"></textarea>
                   <div class="actions">
                     <button id="compose-generate-btn" class="secondary" type="button" data-help="Drafts a reply from Customer issue, Notes for AI, lead fields, and Language (English or Spanish).">Generate Draft</button>
                     <button id="compose-send-btn" class="email" type="button" data-help="Sends the Reply draft as branded HTML from Julie\x27s Gmail. Subject is derived from Customer issue.">Send Email</button>
