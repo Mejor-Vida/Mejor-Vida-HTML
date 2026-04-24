@@ -8,6 +8,21 @@ function isLikelyEmail(v) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(v || "").trim());
 }
 
+/** First sentence or up to ~60 chars for compose-mode subject line. */
+function subjectFromCustomerIssue(issue) {
+  const t = String(issue || "")
+    .replace(/\s+/g, " ")
+    .trim();
+  if (!t) return "Message from Mejor Vida Insurance";
+  const cut = t.slice(0, 400);
+  const m = cut.match(/^[\s\S]{1,200}?[.!?](?=\s|$)/);
+  let s = m && m[0] ? m[0].trim() : cut;
+  s = s.replace(/\s+/g, " ").trim();
+  if (s.length > 60) s = s.slice(0, 57).trim() + "…";
+  if (s.length > 120) s = s.slice(0, 117).trim() + "…";
+  return s || "Message from Mejor Vida Insurance";
+}
+
 function encodeSubject(subject) {
   const s = String(subject || "");
   if (/^[\x00-\x7F]*$/.test(s)) return s;
@@ -91,13 +106,19 @@ module.exports = async function handler(req, res) {
     return json(res, 400, { success: false, error: "Invalid JSON" });
   }
 
+  const compose = !!(body && body.compose);
   const questionId = String((body && body.questionId) || "").trim();
   const toEmail = body && body.toEmail != null ? String(body.toEmail).trim() : "";
   const replyDraft = String((body && body.replyDraft) || "").trim();
   const language = body && body.language != null ? String(body.language).trim() : "";
+  const customerIssue = body && body.customerIssue != null ? String(body.customerIssue).trim() : "";
+  const subjectOverride = body && body.subject != null ? String(body.subject).trim() : "";
 
-  if (!questionId || !replyDraft) {
-    return json(res, 400, { success: false, error: "questionId and replyDraft required" });
+  if (!replyDraft) {
+    return json(res, 400, { success: false, error: "replyDraft required" });
+  }
+  if (!compose && !questionId) {
+    return json(res, 400, { success: false, error: "questionId required unless compose is true" });
   }
   if (!toEmail) {
     return json(res, 200, { success: false, error: "No email address on file for this lead" });
@@ -116,12 +137,18 @@ module.exports = async function handler(req, res) {
     return json(res, 200, { success: false, error: "Gmail is not configured on the server" });
   }
 
+  const subjectLine = compose
+    ? subjectOverride
+      ? subjectOverride.slice(0, 200)
+      : subjectFromCustomerIssue(customerIssue)
+    : "Re: Your Insurance Question — Mejor Vida Insurance";
+
   try {
     const { html, plainBody } = buildStaffClientReplyHtml(replyDraft, language);
     const rfc822 = buildMultipartRaw({
       fromEmail,
       toEmail,
-      subject: "Re: Your Insurance Question — Mejor Vida Insurance",
+      subject: subjectLine,
       textBody: plainBody,
       htmlBody: html,
     });
@@ -138,23 +165,38 @@ module.exports = async function handler(req, res) {
 
     const messageId = sendResp && sendResp.data && sendResp.data.id ? String(sendResp.data.id) : null;
 
-    await restPatch(
-      cfg,
-      "unanswered_questions",
-      `id=eq.${encodeURIComponent(questionId)}&select=id`,
-      { email_sent: true }
-    );
+    if (!compose && questionId) {
+      await restPatch(
+        cfg,
+        "unanswered_questions",
+        `id=eq.${encodeURIComponent(questionId)}&select=id`,
+        { email_sent: true }
+      );
+    }
 
     await logSendAttempt(
       cfg,
-      { questionId, toEmail, fromEmail, messageId, result: "gmail_accept", htmlTemplate: "resend_shell" },
+      {
+        questionId: questionId || null,
+        compose,
+        toEmail,
+        fromEmail,
+        messageId,
+        result: "gmail_accept",
+        htmlTemplate: "resend_shell",
+        subject: subjectLine,
+      },
       "sent"
     );
 
-    return json(res, 200, { success: true, toEmail, messageId });
+    return json(res, 200, { success: true, toEmail, messageId, subject: subjectLine });
   } catch (e) {
     const err = String(e && e.message ? e.message : "Failed to send email");
-    await logSendAttempt(cfg, { questionId, toEmail, fromEmail, error: err }, "error");
+    await logSendAttempt(
+      cfg,
+      { questionId: questionId || null, compose, toEmail, fromEmail, error: err },
+      "error"
+    );
     return json(res, 200, {
       success: false,
       error: err,

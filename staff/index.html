@@ -138,7 +138,72 @@
     .pane { display: none; height: calc(100vh - 74px); }
     .pane.active { display: block; }
     #pane-inbox { padding: 12px; }
+    #pane-compose { padding: 12px; overflow: auto; }
     #pane-chat { padding: 12px; }
+    .compose-outer {
+      max-width: 920px;
+      margin: 0 auto;
+      height: 100%;
+    }
+    .compose-panel {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--panel);
+      overflow: hidden;
+      display: grid;
+      grid-template-rows: auto 1fr;
+      min-height: min(100%, 720px);
+    }
+    .compose-name-wrap { position: relative; }
+    .compose-name-dd {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 100%;
+      margin-top: 4px;
+      z-index: 40;
+      max-height: 240px;
+      overflow: auto;
+      background: var(--panel-2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+      display: none;
+    }
+    .compose-name-dd.open { display: block; }
+    .compose-name-dd button {
+      display: block;
+      width: 100%;
+      text-align: left;
+      padding: 8px 10px;
+      border: 0;
+      border-bottom: 1px solid var(--border);
+      background: transparent;
+      color: var(--text);
+      font: inherit;
+      cursor: pointer;
+      border-radius: 0;
+      font-weight: 500;
+    }
+    .compose-name-dd button:hover { background: rgba(255, 255, 255, 0.06); }
+    .compose-name-dd .dd-add {
+      color: var(--accent);
+      font-weight: 700;
+    }
+    .compose-lang {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .compose-lang button.lang-opt {
+      background: #253f6f;
+      color: #fff;
+      border: 1px solid var(--border);
+      font-weight: 600;
+      padding: 8px 14px;
+    }
+    .compose-lang button.lang-opt.active { background: #314f8a; border-color: #6f8bc9; }
     .inbox-wrap {
       height: 100%;
       display: flex;
@@ -252,10 +317,20 @@
       background: #7f2e2e;
       color: #fff;
     }
-    #orig-box, #staff-context-box {
+    #orig-box, #staff-context-box, #compose-issue, #compose-notes, #compose-reply {
       min-height: 90px;
       resize: vertical;
       overflow-y: auto;
+    }
+    #compose-body .meta-card input {
+      width: 100%;
+      margin-top: 6px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: #0a1a33;
+      color: var(--text);
+      padding: 10px 12px;
+      font: inherit;
     }
     #reply-box { min-height: 170px; }
     @media (max-width: 980px) {
@@ -401,6 +476,7 @@
       <div class="top-right">
         <nav class="tabs" aria-label="Staff tools">
           <button id="tab-inbox" class="tab-btn active" type="button" data-help="Open the customer question inbox: review questions, draft replies, email leads, and add answers to the knowledge base.">📬 Inbox</button>
+          <button id="tab-compose" class="tab-btn" type="button" data-help="Compose a new email to a lead: search manychat_leads, draft with AI, send branded HTML from Julie\x27s mailbox, or save a draft.">✉️ Compose</button>
           <button id="tab-chat" class="tab-btn" type="button" data-help="Open the internal staff AI assistant for product and underwriting questions. This is separate from customer WhatsApp or inbox messages.">🤖 Staff Assistant</button>
         </nav>
         <button id="signout-btn" class="signout" type="button" data-help="Signs you out of the staff portal on this browser.">Sign Out</button>
@@ -427,6 +503,60 @@
           </div>
           <div id="inbox-detail" class="detail-body">
             <div class="q-empty">Select a question to start.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="pane-compose" class="pane" aria-hidden="true">
+      <div class="compose-outer">
+        <div class="compose-panel">
+          <div class="inbox-head">
+            <div>
+              <strong>Compose email</strong>
+              <div class="small-note">Search a lead, describe the issue, draft, send, or save.</div>
+            </div>
+          </div>
+          <div id="compose-body" class="detail-body">
+            <div class="meta-grid">
+              <div class="meta-card" style="grid-column: 1 / -1">
+                <label for="compose-name-input">Name</label>
+                <div class="compose-name-wrap">
+                  <input id="compose-name-input" type="text" autocomplete="off" placeholder="Type to search leads…" />
+                  <div id="compose-name-dd" class="compose-name-dd" role="listbox"></div>
+                </div>
+              </div>
+              <div class="meta-card">
+                <label for="compose-email">Email</label>
+                <input id="compose-email" type="email" placeholder="name@example.com" />
+              </div>
+              <div class="meta-card">
+                <label for="compose-phone">Phone</label>
+                <input id="compose-phone" type="text" placeholder="Optional" />
+              </div>
+              <div class="meta-card" style="grid-column: 1 / -1">
+                <div class="compose-lang" role="group" aria-label="Language">
+                  <span class="small-note" style="margin:0">Language</span>
+                  <button type="button" class="lang-opt active" id="compose-lang-en" data-lang="English">English</button>
+                  <button type="button" class="lang-opt" id="compose-lang-es" data-lang="Spanish">Spanish</button>
+                </div>
+              </div>
+            </div>
+            <label for="compose-issue">Customer issue</label>
+            <textarea id="compose-issue" placeholder="What does the client need help with?"></textarea>
+            <div class="label-with-hint">
+              <label for="compose-notes">Notes for AI (optional)</label>
+              <span class="field-hint">Facts the model should treat as true when drafting.</span>
+            </div>
+            <textarea id="compose-notes" placeholder="Optional context for the draft…"></textarea>
+            <label>Reply draft</label>
+            <textarea id="compose-reply" placeholder="Generate or type the message…"></textarea>
+            <div class="actions">
+              <button id="compose-generate-btn" class="secondary" type="button" data-help="Drafts a reply from Customer issue, Notes for AI, lead fields, and Language (English or Spanish).">Generate Draft</button>
+              <button id="compose-send-btn" class="email" type="button" data-help="Sends the Reply draft as branded HTML from Julie\x27s Gmail. Subject is derived from Customer issue.">Send Email</button>
+              <button id="compose-save-btn" class="secondary" type="button" data-help="Saves recipient, issue, and notes to compose_drafts (creates or updates the current saved row).">Save</button>
+            </div>
+            <div id="compose-status" class="small-note"></div>
           </div>
         </div>
       </div>
@@ -480,8 +610,10 @@
       var confirmPassEl = document.getElementById("confirm-password");
       var signoutBtn = document.getElementById("signout-btn");
       var tabInbox = document.getElementById("tab-inbox");
+      var tabCompose = document.getElementById("tab-compose");
       var tabChat = document.getElementById("tab-chat");
       var paneInbox = document.getElementById("pane-inbox");
+      var paneCompose = document.getElementById("pane-compose");
       var paneChat = document.getElementById("pane-chat");
       var inboxCount = document.getElementById("inbox-count");
       var inboxItems = document.getElementById("inbox-items");
@@ -514,11 +646,19 @@
       }
 
       function showTab(which) {
+        var inboxOn = which === "inbox";
+        var composeOn = which === "compose";
         var chatOn = which === "chat";
+        tabInbox.classList.toggle("active", inboxOn);
+        tabCompose.classList.toggle("active", composeOn);
         tabChat.classList.toggle("active", chatOn);
-        tabInbox.classList.toggle("active", !chatOn);
+        paneInbox.classList.toggle("active", inboxOn);
+        paneCompose.classList.toggle("active", composeOn);
         paneChat.classList.toggle("active", chatOn);
-        paneInbox.classList.toggle("active", !chatOn);
+        paneInbox.setAttribute("aria-hidden", inboxOn ? "false" : "true");
+        paneCompose.setAttribute("aria-hidden", composeOn ? "false" : "true");
+        paneChat.setAttribute("aria-hidden", chatOn ? "false" : "true");
+        if (composeOn) ensureComposeLeadsLoaded();
       }
 
       function fmtDate(iso) {
@@ -638,7 +778,7 @@
       }
 
       function wireStaticPortalHelpOnce() {
-        [signoutBtn, tabInbox, tabChat, refreshInboxBtn, sendBtn, newConvoBtn].forEach(function (el) {
+        [signoutBtn, tabInbox, tabCompose, tabChat, refreshInboxBtn, sendBtn, newConvoBtn].forEach(function (el) {
           if (!el || el.getAttribute("data-help-wired")) return;
           el.setAttribute("data-help-wired", "1");
           var showT = null;
@@ -1278,6 +1418,7 @@
 
       signoutBtn.addEventListener("click", signOutNow);
       tabInbox.addEventListener("click", function () { showTab("inbox"); });
+      tabCompose.addEventListener("click", function () { showTab("compose"); });
       tabChat.addEventListener("click", function () { showTab("chat"); });
       sendBtn.addEventListener("click", sendChat);
       chatInput.addEventListener("keydown", function (e) {
@@ -1295,6 +1436,250 @@
       refreshInboxBtn.addEventListener("click", function () {
         loadInbox();
       });
+
+      var composeLeads = [];
+      var composeLeadsLoaded = false;
+      var composeSelectedLeadId = null;
+      var composeDraftId = null;
+      var composeLang = "English";
+
+      function getComposeEls() {
+        return {
+          nameIn: document.getElementById("compose-name-input"),
+          dd: document.getElementById("compose-name-dd"),
+          email: document.getElementById("compose-email"),
+          phone: document.getElementById("compose-phone"),
+          issue: document.getElementById("compose-issue"),
+          notes: document.getElementById("compose-notes"),
+          reply: document.getElementById("compose-reply"),
+          status: document.getElementById("compose-status"),
+        };
+      }
+
+      function setComposeLanguage(lang) {
+        composeLang = lang === "Spanish" ? "Spanish" : "English";
+        var en = document.getElementById("compose-lang-en");
+        var es = document.getElementById("compose-lang-es");
+        if (en) en.classList.toggle("active", composeLang === "English");
+        if (es) es.classList.toggle("active", composeLang === "Spanish");
+      }
+
+      function leadMatchesQuery(lead, q) {
+        if (!q) return true;
+        var hay = (lead.display_name || "").toLowerCase();
+        return hay.indexOf(q) !== -1;
+      }
+
+      function renderComposeDropdown() {
+        var el = getComposeEls();
+        if (!el.nameIn || !el.dd) return;
+        var q = String(el.nameIn.value || "").trim().toLowerCase();
+        el.dd.innerHTML = "";
+        var matches = q
+          ? composeLeads.filter(function (L) {
+              return leadMatchesQuery(L, q);
+            }).slice(0, 80)
+          : composeLeads.slice(0, 80);
+        matches.forEach(function (L) {
+          var b = document.createElement("button");
+          b.type = "button";
+          b.textContent = L.display_name + (L.email ? " · " + L.email : "");
+          b.addEventListener("mousedown", function (e) {
+            e.preventDefault();
+            composeSelectedLeadId = L.id;
+            el.nameIn.value = L.display_name;
+            el.email.value = L.email || "";
+            el.phone.value = L.phone || "";
+            if (L.language && /spanish|español|espanol/i.test(L.language)) setComposeLanguage("Spanish");
+            else setComposeLanguage("English");
+            el.dd.classList.remove("open");
+          });
+          el.dd.appendChild(b);
+        });
+        var typed = String(el.nameIn.value || "").trim();
+        var typedLower = typed.toLowerCase();
+        var hasExact = composeLeads.some(function (L) {
+          return (L.display_name || "").trim().toLowerCase() === typedLower;
+        });
+        var emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(el.email.value || "").trim());
+        if (typed && !hasExact && emailOk) {
+          var addBtn = document.createElement("button");
+          addBtn.type = "button";
+          addBtn.className = "dd-add";
+          addBtn.textContent = "Add \"" + typed + "\" as new contact?";
+          addBtn.addEventListener("mousedown", function (e) {
+            e.preventDefault();
+            onComposeAddNewLead(typed);
+          });
+          el.dd.appendChild(addBtn);
+        }
+        el.dd.classList.toggle("open", el.dd.childNodes.length > 0);
+      }
+
+      async function onComposeAddNewLead(displayName) {
+        var el = getComposeEls();
+        var status = el.status;
+        var email = String(el.email.value || "").trim();
+        if (!email) {
+          status.textContent = "Enter an email before adding a new contact.";
+          return;
+        }
+        status.textContent = "Creating lead…";
+        try {
+          var data = await authedApi("/api/staff/leads", { name: displayName, email: email, phone: el.phone.value, language: composeLang });
+          var item = data.item;
+          if (!item || !item.id) throw new Error("no item");
+          composeLeads.push(item);
+          composeLeads.sort(function (a, b) {
+            return (a.display_name || "").toLowerCase().localeCompare((b.display_name || "").toLowerCase());
+          });
+          composeSelectedLeadId = item.id;
+          el.nameIn.value = item.display_name;
+          status.textContent = "New contact saved to manychat_leads.";
+          el.dd.classList.remove("open");
+        } catch (e2) {
+          status.textContent = "Could not create lead.";
+        }
+      }
+
+      async function ensureComposeLeadsLoaded() {
+        if (composeLeadsLoaded || !accessToken) return;
+        try {
+          var data = await authedApi("/api/staff/leads");
+          composeLeads = Array.isArray(data.items) ? data.items : [];
+          composeLeadsLoaded = true;
+        } catch (e) {
+          getComposeEls().status.textContent = "Could not load leads list.";
+        }
+      }
+
+      async function onComposeGenerate() {
+        var el = getComposeEls();
+        var issue = String(el.issue.value || "").trim();
+        var notes = String(el.notes.value || "").trim();
+        if (!issue && !notes) {
+          el.status.textContent = "Enter a customer issue and/or notes for AI.";
+          return;
+        }
+        el.status.textContent = "Generating…";
+        try {
+          var lead = {
+            first_name: String(el.nameIn.value || "").split(/\s+/)[0] || "",
+            last_name: String(el.nameIn.value || "").trim().replace(/^\S+\s*/, "") || "",
+            phone: el.phone.value || "",
+            email: el.email.value || "",
+          };
+          var data = await authedApi("/api/staff/generate-answer", {
+            compose: true,
+            customerIssue: issue,
+            staffNotes: notes,
+            language: composeLang,
+            lead: lead,
+          });
+          el.reply.value = data.answer || "";
+          el.status.textContent = "Draft generated.";
+        } catch (e) {
+          el.status.textContent = "Failed to generate draft.";
+        }
+      }
+
+      async function onComposeSend() {
+        var el = getComposeEls();
+        var draft = String(el.reply.value || "").trim();
+        var to = String(el.email.value || "").trim();
+        var issue = String(el.issue.value || "").trim();
+        if (!draft) {
+          el.status.textContent = "Reply draft is required.";
+          return;
+        }
+        if (!to) {
+          el.status.textContent = "Recipient email is required.";
+          return;
+        }
+        var sendBtn = document.getElementById("compose-send-btn");
+        if (sendBtn) {
+          sendBtn.disabled = true;
+          sendBtn.textContent = "Sending…";
+        }
+        el.status.textContent = "Sending…";
+        try {
+          var data = await authedApi("/api/staff/send-email", {
+            compose: true,
+            toEmail: to,
+            replyDraft: draft,
+            language: composeLang,
+            customerIssue: issue,
+          });
+          if (data && data.success === true) {
+            el.status.textContent = "Sent to " + to + (data.subject ? " — " + data.subject : "");
+          } else {
+            el.status.textContent = (data && data.error) || "Send failed.";
+          }
+        } catch (e) {
+          el.status.textContent = "Send failed.";
+        } finally {
+          if (sendBtn) {
+            sendBtn.disabled = false;
+            sendBtn.textContent = "Send Email";
+          }
+        }
+      }
+
+      async function onComposeSave() {
+        var el = getComposeEls();
+        var payload = {
+          recipient_name: String(el.nameIn.value || "").trim(),
+          email: String(el.email.value || "").trim(),
+          phone: String(el.phone.value || "").trim(),
+          language: composeLang,
+          customer_issue: String(el.issue.value || "").trim(),
+          staff_notes: String(el.notes.value || "").trim(),
+          lead_id: composeSelectedLeadId || null,
+        };
+        if (composeDraftId) payload.id = composeDraftId;
+        el.status.textContent = "Saving…";
+        try {
+          var data = await authedApi("/api/staff/save-compose-draft", payload);
+          if (data && data.id) composeDraftId = data.id;
+          el.status.textContent = data && data.updated ? "Draft updated." : "Draft saved.";
+        } catch (e) {
+          el.status.textContent = "Save failed.";
+        }
+      }
+
+      function wireComposeUi() {
+        var el = getComposeEls();
+        if (!el.nameIn) return;
+        el.nameIn.addEventListener("focus", function () {
+          renderComposeDropdown();
+        });
+        el.nameIn.addEventListener("input", function () {
+          var L = composeLeads.find(function (x) {
+            return x.id === composeSelectedLeadId;
+          });
+          if (!L || (L.display_name || "").trim() !== String(el.nameIn.value || "").trim()) {
+            composeSelectedLeadId = null;
+          }
+          renderComposeDropdown();
+        });
+        el.nameIn.addEventListener("blur", function () {
+          setTimeout(function () {
+            el.dd.classList.remove("open");
+          }, 200);
+        });
+        document.getElementById("compose-lang-en").addEventListener("click", function () {
+          setComposeLanguage("English");
+        });
+        document.getElementById("compose-lang-es").addEventListener("click", function () {
+          setComposeLanguage("Spanish");
+        });
+        document.getElementById("compose-generate-btn").addEventListener("click", onComposeGenerate);
+        document.getElementById("compose-send-btn").addEventListener("click", onComposeSend);
+        document.getElementById("compose-save-btn").addEventListener("click", onComposeSave);
+      }
+
+      wireComposeUi();
+      wireDelayedHelpOn(document.getElementById("compose-body"));
 
       wireStaticPortalHelpOnce();
 
