@@ -818,7 +818,7 @@
                         type="button"
                         class="secondary compose-save-contact-btn"
                         disabled
-                        data-help="Writes first/last name, email, phone, and language to this lead in manychat_leads. Select a lead first."
+                        data-help="After confirmation, writes first/last name, email, phone, and language to this lead in manychat_leads. Select a lead first."
                       >
                         Save updated Contact Info
                       </button>
@@ -887,6 +887,25 @@
         <div class="compose-delete-modal-actions">
           <button type="button" id="compose-delete-cancel" class="secondary">No, keep</button>
           <button type="button" id="compose-delete-confirm" class="danger">Yes, remove</button>
+        </div>
+      </div>
+    </div>
+
+    <div
+      id="compose-save-contact-modal"
+      class="compose-delete-modal hidden"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="compose-save-contact-modal-title"
+    >
+      <div class="compose-delete-modal-panel">
+        <h3 id="compose-save-contact-modal-title">Confirm save</h3>
+        <p class="small-note" style="margin: 0 0 18px; line-height: 1.45">
+          Are you sure you want to overwrite your current contact info?
+        </p>
+        <div class="compose-delete-modal-actions">
+          <button type="button" id="compose-save-contact-cancel" class="secondary">No</button>
+          <button type="button" id="compose-save-contact-confirm" class="danger">Yes</button>
         </div>
       </div>
     </div>
@@ -1922,7 +1941,19 @@
         updateComposeSaveContactButtonState();
       }
 
-      async function onComposeSaveContact() {
+      function openComposeSaveContactConfirmModal() {
+        var mod = document.getElementById("compose-save-contact-modal");
+        if (mod) mod.classList.remove("hidden");
+        var yes = document.getElementById("compose-save-contact-confirm");
+        if (yes) yes.focus();
+      }
+
+      function closeComposeSaveContactModal() {
+        var mod = document.getElementById("compose-save-contact-modal");
+        if (mod) mod.classList.add("hidden");
+      }
+
+      function onComposeSaveContact() {
         var el = getComposeEls();
         if (!composeSelectedLeadId) {
           el.status.textContent = "Select a lead from the list before saving contact info.";
@@ -1940,6 +1971,17 @@
           el.status.textContent = "Enter a valid email address.";
           return;
         }
+        openComposeSaveContactConfirmModal();
+      }
+
+      async function performComposeSaveContact() {
+        closeComposeSaveContactModal();
+        var el = getComposeEls();
+        if (!composeSelectedLeadId) return;
+        var fn = el.firstName ? String(el.firstName.value || "").trim() : "";
+        var ln = el.lastName ? String(el.lastName.value || "").trim() : "";
+        var email = String(el.email.value || "").trim().toLowerCase();
+        var phone = String(el.phone.value || "").trim();
         var btn = document.getElementById("compose-save-contact-btn");
         if (btn) btn.disabled = true;
         el.status.textContent = "Saving contact…";
@@ -1980,6 +2022,20 @@
         } finally {
           updateComposeSaveContactButtonState();
         }
+      }
+
+      function wireComposeSaveContactModal() {
+        var mod = document.getElementById("compose-save-contact-modal");
+        var cancel = document.getElementById("compose-save-contact-cancel");
+        var confirmBtn = document.getElementById("compose-save-contact-confirm");
+        if (!mod || !cancel || !confirmBtn) return;
+        cancel.addEventListener("click", closeComposeSaveContactModal);
+        confirmBtn.addEventListener("click", function () {
+          performComposeSaveContact();
+        });
+        mod.addEventListener("click", function (e) {
+          if (e.target === mod) closeComposeSaveContactModal();
+        });
       }
 
       async function onComposeAddNewLead(displayName) {
@@ -2206,6 +2262,7 @@
 
       wireComposeUi();
       wireComposeDeleteModal();
+      wireComposeSaveContactModal();
       renderComposeLeadsList();
       wireDelayedHelpOn(document.getElementById("compose-body"));
 
