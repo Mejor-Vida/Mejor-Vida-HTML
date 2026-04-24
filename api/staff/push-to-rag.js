@@ -55,10 +55,9 @@ async function ensureStaffSource(cfg) {
   const inserted = await restInsert(cfg, "knowledge_sources", [
     {
       name: "staff_inbox_approved",
-      description: "Julie approved Q&A pushed from staff inbox",
       source_type: "staff_inbox",
-      status: "active",
-      reviewed_at: new Date().toISOString(),
+      external_ref: "staff_portal",
+      notes: "Julie approved Q&A pushed from staff inbox",
     },
   ]);
   if (!inserted || !inserted.length) throw new Error("Failed creating source");
