@@ -386,9 +386,18 @@
       color: #fff;
     }
     #orig-box, #staff-context-box, #compose-issue, #compose-notes, #compose-reply {
-      min-height: 90px;
       resize: vertical;
       overflow-y: auto;
+    }
+    #orig-box, #staff-context-box {
+      min-height: 90px;
+    }
+    #compose-issue,
+    #compose-notes {
+      min-height: 68px;
+    }
+    #compose-reply {
+      min-height: 134px;
     }
     #compose-body .meta-card input {
       width: 100%;
