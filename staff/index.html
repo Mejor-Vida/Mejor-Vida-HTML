@@ -518,21 +518,36 @@
             </div>
           </div>
           <div id="compose-body" class="detail-body">
+            <form id="compose-form" class="compose-form" autocomplete="off" onsubmit="return false;" aria-label="Compose email">
             <div class="meta-grid">
               <div class="meta-card" style="grid-column: 1 / -1">
-                <label for="compose-name-input">Name</label>
+                <label for="compose-name-input">Lead name</label>
                 <div class="compose-name-wrap">
-                  <input id="compose-name-input" type="text" autocomplete="off" placeholder="Type to search leads…" />
-                  <div id="compose-name-dd" class="compose-name-dd" role="listbox"></div>
+                  <input
+                    id="compose-name-input"
+                    type="text"
+                    name="mvi_lead_search"
+                    inputmode="text"
+                    autocomplete="off"
+                    autocorrect="off"
+                    autocapitalize="off"
+                    spellcheck="false"
+                    data-lpignore="true"
+                    data-1p-ignore="true"
+                    data-bwignore="true"
+                    data-form-type="other"
+                    placeholder="Type to search leads…"
+                  />
+                  <div id="compose-name-dd" class="compose-name-dd" role="listbox" aria-label="Matching leads"></div>
                 </div>
               </div>
               <div class="meta-card">
                 <label for="compose-email">Email</label>
-                <input id="compose-email" type="email" placeholder="name@example.com" />
+                <input id="compose-email" type="email" name="mvi_compose_email" autocomplete="off" data-lpignore="true" data-1p-ignore="true" placeholder="name@example.com" />
               </div>
               <div class="meta-card">
                 <label for="compose-phone">Phone</label>
-                <input id="compose-phone" type="text" placeholder="Optional" />
+                <input id="compose-phone" type="text" name="mvi_compose_phone" autocomplete="off" inputmode="tel" placeholder="Optional" />
               </div>
               <div class="meta-card" style="grid-column: 1 / -1">
                 <div class="compose-lang" role="group" aria-label="Language">
@@ -557,6 +572,7 @@
               <button id="compose-save-btn" class="secondary" type="button" data-help="Saves recipient, issue, and notes to compose_drafts (creates or updates the current saved row).">Save</button>
             </div>
             <div id="compose-status" class="small-note"></div>
+            </form>
           </div>
         </div>
       </div>
@@ -1650,6 +1666,12 @@
       function wireComposeUi() {
         var el = getComposeEls();
         if (!el.nameIn) return;
+        /* Stops Chrome/Safari from showing autofill/contact “white bubble” until user focuses to type */
+        el.nameIn.setAttribute("readonly", "readonly");
+        el.nameIn.addEventListener("focus", function onComposeNameFirstFocus() {
+          el.nameIn.removeAttribute("readonly");
+          el.nameIn.removeEventListener("focus", onComposeNameFirstFocus);
+        });
         el.nameIn.addEventListener("focus", function () {
           renderComposeDropdown();
         });
