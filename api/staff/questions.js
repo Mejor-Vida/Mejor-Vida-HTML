@@ -71,7 +71,7 @@ module.exports = async function handler(req, res) {
       const leads = await restSelect(
         cfg,
         "manychat_leads",
-        `select=id,first_name,phone,email&id=in.(${ids})`
+        `select=id,first_name,phone,email&id=in.(${ids})&staff_hidden_at=is.null`
       );
       (leads || []).forEach((l) => {
         byLeadId[l.id] = l;

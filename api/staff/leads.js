@@ -1,5 +1,9 @@
 const { requireStaffAuth } = require("../auth-check");
-const { json, serviceConfig, restSelect, restInsert } = require("./_inbox-lib");
+const { json, serviceConfig, restSelect, restInsert, restPatch } = require("./_inbox-lib");
+
+function isUuid(s) {
+  return /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(String(s || ""));
+}
 
 function splitDisplayName(name) {
   const t = String(name || "").trim();
@@ -116,7 +120,7 @@ module.exports = async function handler(req, res) {
       const rows = await restSelect(
         cfg,
         "manychat_leads",
-        "select=id,first_name,last_name,phone,email,language&limit=5000"
+        "select=id,first_name,last_name,phone,email,language&staff_hidden_at=is.null&limit=5000"
       );
       const items = (rows || []).map((r) => ({
         id: r.id,
@@ -185,6 +189,33 @@ module.exports = async function handler(req, res) {
     }
   }
 
-  res.setHeader("Allow", "GET, POST");
+  if (req.method === "DELETE") {
+    const id = (req.query && (req.query.id || req.query.lead_id)) || "";
+    if (!isUuid(id)) {
+      return json(res, 400, { error: "Valid lead id required (query: id)" });
+    }
+    try {
+      const now = new Date().toISOString();
+      const patched = await restPatch(cfg, "manychat_leads", `id=eq.${encodeURIComponent(id)}`, {
+        staff_hidden_at: now,
+        updated_at: now,
+      });
+      if (!Array.isArray(patched) || patched.length === 0) {
+        return json(res, 404, { error: "Lead not found" });
+      }
+      return json(res, 200, { ok: true, id });
+    } catch (e) {
+      console.error("staff/leads DELETE", e);
+      const msg = e && e.message ? String(e.message) : "Failed to hide lead";
+      if (/42703|column/i.test(msg) && /staff_hidden_at/i.test(msg)) {
+        return json(res, 503, {
+          error: "Database migration required: run 026_manychat_leads_staff_hidden.sql on Supabase.",
+        });
+      }
+      return json(res, 500, { error: "Failed to hide lead" });
+    }
+  }
+
+  res.setHeader("Allow", "GET, POST, DELETE");
   return json(res, 405, { error: "Method Not Allowed" });
 };
