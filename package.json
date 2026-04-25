@@ -5,7 +5,8 @@
     "node": ">=18"
   },
   "scripts": {
-    "preview:post-quote-email": "node scripts/preview-post-quote-email.js"
+    "preview:post-quote-email": "node scripts/preview-post-quote-email.js",
+    "embed:internal-moo": "node scripts/embed-internal-knowledge.js"
   },
   "dependencies": {
     "googleapis": "^171.4.0"

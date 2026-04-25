@@ -22,6 +22,7 @@ This folder holds **SQL migrations** for **Postgres (Supabase)** used by the mar
 | **`014_quote_ranges.sql`** | **`quote_ranges`** — precomputed $10K FE low/high/anchor for WhatsApp `/api/quote` |
 | **`015_schema_migrations_record_014.sql`** | Inserts `014_quote_ranges.sql` into **`schema_migrations`** if `014` was run manually in SQL editor |
 | **`027_drop_fex_email_quotes.sql`** | Retires legacy `fex_email_quotes` table |
+| **`030_internal_knowledge_chunks.sql`** | `internal_knowledge_chunks` — staff Product Selector RAG only (not `knowledge_chunks`) |
 
 See **`TABLE_GUIDE.md`** for a plain-English map of which tables belong to leads vs chatbot vs knowledge.
 
