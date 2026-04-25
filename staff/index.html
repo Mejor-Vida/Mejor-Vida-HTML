@@ -2654,6 +2654,29 @@
         var flags = risk && Array.isArray(risk.flags) ? risk.flags.join(", ") : "";
         var script = sales && sales.script ? String(sales.script) : "";
         var objections = sales && Array.isArray(sales.objection_handlers) ? sales.objection_handlers : [];
+        var recCarriers =
+          rec && rec.carrier_guidance && Array.isArray(rec.carrier_guidance.recommended)
+            ? rec.carrier_guidance.recommended
+            : [];
+        var altCarrierObj =
+          rec && rec.carrier_guidance && rec.carrier_guidance.alternatives && typeof rec.carrier_guidance.alternatives === "object"
+            ? rec.carrier_guidance.alternatives
+            : {};
+        var carrierRows = [];
+        if (recCarriers.length) {
+          carrierRows.push(
+            "<li><strong>Recommended:</strong> " +
+              escHtml((rec.product_type || "recommended product") + " → " + recCarriers.join(", ")) +
+              "</li>"
+          );
+        }
+        Object.keys(altCarrierObj).forEach(function (k) {
+          var arr = Array.isArray(altCarrierObj[k]) ? altCarrierObj[k] : [];
+          if (!arr.length) return;
+          carrierRows.push(
+            "<li><strong>Alternative:</strong> " + escHtml(String(k)) + " → " + escHtml(arr.join(", ")) + "</li>"
+          );
+        });
         el.output.innerHTML =
           '<div class="meta-card"><label>Recommended product</label><div style="margin-top:6px;font-weight:700">' +
           escHtml(rec.product_type || "-") +
@@ -2675,6 +2698,11 @@
           '<div class="meta-card" style="grid-column:1 / -1"><label>Rationale</label><div style="margin-top:6px;white-space:pre-wrap">' +
           escHtml(rec.rationale || "") +
           "</div></div>" +
+          '<div class="meta-card" style="grid-column:1 / -1"><label>Carrier guidance</label>' +
+          (carrierRows.length
+            ? '<ul style="margin:8px 0 0 18px">' + carrierRows.join("") + "</ul>"
+            : '<div class="small-note" style="margin-top:6px">No clear carrier matches found in current KB chunks for this run.</div>') +
+          "</div>" +
           '<div class="meta-card" style="grid-column:1 / -1"><label>Sales script</label><div style="margin-top:6px;white-space:pre-wrap">' +
           escHtml(script || "") +
           "</div></div>" +

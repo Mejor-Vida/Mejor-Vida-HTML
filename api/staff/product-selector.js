@@ -163,7 +163,7 @@ async function synthesize(openaiKey, query, rows) {
         {
           role: "system",
           content:
-            "You are internal insurance sales support. Use only provided excerpts. Return concise recommendation support bullets and objection handling.",
+            "You are internal insurance sales support. Use only provided excerpts. Return concise recommendation support bullets and objection handling. Explicitly name carriers that support the recommended product and alternatives when excerpts indicate them.",
         },
         { role: "user", content: `Question:\n${query}\n\nExcerpts:\n${ctx}` },
       ],
@@ -172,6 +172,33 @@ async function synthesize(openaiKey, query, rows) {
   const data = await r.json();
   if (!r.ok) throw new Error(`openai synth ${r.status}`);
   return String(data?.choices?.[0]?.message?.content || "").trim();
+}
+
+function categoryForProductType(productType) {
+  const t = String(productType || "").toLowerCase();
+  if (t === "term_life") return "term_life";
+  if (t === "final_expense") return "final_expense";
+  if (t === "universal_life") return "universal_life";
+  if (t === "whole_life") return "life_insurance";
+  return "life_insurance";
+}
+
+function topCarriersForCategory(rows, category) {
+  const map = new Map();
+  (rows || []).forEach((r) => {
+    if (!r || !r.carrier) return;
+    if (category && String(r.category || "") !== String(category)) return;
+    const key = String(r.carrier);
+    const sim = Number(r.similarity || 0);
+    const prev = map.get(key);
+    if (!prev || sim > prev.similarity) {
+      map.set(key, { carrier: key, similarity: sim });
+    }
+  });
+  return Array.from(map.values())
+    .sort((a, b) => b.similarity - a.similarity)
+    .slice(0, 3)
+    .map((x) => x.carrier);
 }
 
 module.exports = async function handler(req, res) {
@@ -234,11 +261,25 @@ module.exports = async function handler(req, res) {
       }, tobacco=${answers.tobacco ? "yes" : "no"}, risk=${risk.level}. Recommend ${recommendation.product_type} alternatives and sales talking points.`;
       const emb = await generateEmbedding(openaiKey, ragQuery);
       const ragRows = await rpcMatchInternal(cfg, emb.embedding, 8, 0.25, recommendation.recommended_category);
+      const recommendedCarriers = topCarriersForCategory(ragRows, recommendation.recommended_category);
+      const alternativeCarriers = {};
+      (recommendation.alternatives || []).forEach((alt) => {
+        const cat = categoryForProductType(alt);
+        alternativeCarriers[alt] = topCarriersForCategory(ragRows, cat);
+      });
+      recommendation.carrier_guidance = {
+        recommended: recommendedCarriers,
+        alternatives: alternativeCarriers,
+      };
       const salesScript =
         (await synthesize(openaiKey, ragQuery, ragRows)) ||
         "Start with needs-based framing, confirm budget and underwriting sensitivity, then present recommendation and one alternative.";
       const salesEnablement = {
         script: salesScript,
+        carrier_talking_points: {
+          recommended: recommendedCarriers,
+          alternatives: alternativeCarriers,
+        },
         objection_handlers: [
           "If price concern: present lower coverage ladder with same product type.",
           "If delay: explain approval risk may worsen with age/health changes.",
