@@ -1,7 +1,8 @@
 /**
  * POST /api/staff/internal-rag
- * Semantic search over internal_knowledge_chunks only (Product Selector / staff KB).
+ * Semantic search over internal_knowledge_chunks only (staff carrier KB — not public RAG).
  * Does not query public knowledge_chunks.
+ * Reserved for the future Product Selector (blueprint: guided qualify + recommend); no staff UI calls this yet.
  *
  * Body: { query, carrier?, category?, match_count?, min_similarity?, synthesize? }
  */
