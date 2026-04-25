@@ -187,7 +187,8 @@
     .staff-lead-summary .q-empty {
       margin-top: 0;
     }
-    #lead-profile-form select {
+    #lead-profile-form select,
+    #product-selector-form select {
       width: 100%;
       border-radius: 10px;
       border: 1px solid var(--border);
@@ -766,7 +767,7 @@
       <div class="top-brand-row">
         <div>
           <b>Mejor Vida Insurance — Staff Portal</b>
-          <small>Staff Access Only — Login Required<span id="staff-build-stamp" class="staff-build-stamp" title="If this number is missing after refresh, the page is cached.">· UI 20260425e</span></small>
+          <small>Staff Access Only — Login Required<span id="staff-build-stamp" class="staff-build-stamp" title="If this number is missing after refresh, the page is cached.">· UI 20260425f</span></small>
         </div>
         <button id="signout-btn" class="signout" type="button" data-help="Signs you out of the staff portal on this browser.">Sign Out</button>
       </div>
@@ -1098,7 +1099,75 @@
               </aside>
               <div class="compose-main-col staff-tool-main">
                 <div id="product-selector-summary" class="staff-lead-summary"></div>
-                <p class="small-note" style="margin-top: 0">Partial data is fine; missing answers can be captured in the selector flow once built.</p>
+                <form id="product-selector-form" class="compose-form" autocomplete="off" onsubmit="return false;" aria-label="Product selector">
+                  <div class="compose-contact-heading">Stage 1 — Intent</div>
+                  <div class="meta-grid">
+                    <div class="meta-card">
+                      <label for="ps-intent">Coverage goal</label>
+                      <select id="ps-intent">
+                        <option value="">Select…</option>
+                        <option value="income_replacement">Income replacement</option>
+                        <option value="final_expenses">Final expenses</option>
+                        <option value="mortgage_protection">Mortgage protection</option>
+                        <option value="wealth_building">Wealth building</option>
+                        <option value="legacy_planning">Legacy planning</option>
+                      </select>
+                    </div>
+                    <div class="meta-card">
+                      <label for="ps-coverage">Coverage amount ($)</label>
+                      <input id="ps-coverage" type="number" inputmode="numeric" min="1000" step="1000" placeholder="e.g. 100000" />
+                    </div>
+                    <div class="meta-card">
+                      <label for="ps-budget">Monthly budget ($)</label>
+                      <input id="ps-budget" type="number" inputmode="decimal" min="0" step="1" placeholder="e.g. 120" />
+                    </div>
+                    <div class="meta-card">
+                      <label for="ps-age">Age</label>
+                      <input id="ps-age" type="number" inputmode="numeric" min="0" max="120" />
+                    </div>
+                  </div>
+
+                  <div class="compose-contact-heading" style="margin-top:16px">Stage 2 — Underwriting signals</div>
+                  <div class="meta-grid">
+                    <div class="meta-card">
+                      <label style="display:flex; gap:10px; align-items:center"><input id="ps-tobacco" type="checkbox" /> Tobacco use</label>
+                    </div>
+                    <div class="meta-card">
+                      <label style="display:flex; gap:10px; align-items:center"><input id="ps-rx" type="checkbox" /> Prescription medications</label>
+                    </div>
+                    <div class="meta-card">
+                      <label style="display:flex; gap:10px; align-items:center"><input id="ps-doc2y" type="checkbox" /> Doctor visits (2y)</label>
+                    </div>
+                    <div class="meta-card">
+                      <label style="display:flex; gap:10px; align-items:center"><input id="ps-hosp5y" type="checkbox" /> Hospitalization (5y)</label>
+                    </div>
+                    <div class="meta-card" style="grid-column:1 / -1">
+                      <label for="ps-conditions">Conditions (comma-separated)</label>
+                      <input id="ps-conditions" type="text" placeholder="e.g. hypertension, diabetes" />
+                    </div>
+                  </div>
+
+                  <div class="compose-contact-heading" style="margin-top:16px">Stage 3 — Dynamic follow-ups</div>
+                  <div class="meta-grid">
+                    <div class="meta-card">
+                      <label for="ps-followups">Follow-up notes</label>
+                      <textarea id="ps-followups" rows="3" placeholder="Insulin use, surgeries, medication type, etc."></textarea>
+                    </div>
+                  </div>
+
+                  <div class="actions" style="margin-top:14px">
+                    <button id="ps-save-btn" type="button" class="secondary">Save Session</button>
+                    <button id="ps-run-btn" type="button">Run Recommendation</button>
+                  </div>
+                  <div id="ps-status" class="small-note"></div>
+                </form>
+
+                <div class="compose-contact-heading" style="margin-top:18px">Recommendation</div>
+                <div id="ps-output" class="meta-grid">
+                  <div class="meta-card" style="grid-column:1 / -1">
+                    <div class="q-empty">Select a lead and run recommendation.</div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -1272,6 +1341,7 @@
         paneChat.setAttribute("aria-hidden", chatOn ? "false" : "true");
         if (composeOn || leadProfileOn || productSelectorOn) ensureComposeLeadsLoaded();
         if (leadProfileOn) void loadLeadProfileDetail();
+        if (productSelectorOn) void loadProductSelectorSession();
       }
 
       function fmtDate(iso) {
@@ -2069,6 +2139,7 @@
       var leadProfileBaselineJson = "";
       var leadProfileReadOnly = false;
       var leadProfileDirtyTimer = null;
+      var productSelectorSession = null;
 
       function getComposeEls() {
         return {
@@ -2152,6 +2223,7 @@
         else setComposeLanguage("English");
         renderStaffLeadLists();
         if (paneLeadProfile && paneLeadProfile.classList.contains("active")) void loadLeadProfileDetail();
+        if (paneProductSelector && paneProductSelector.classList.contains("active")) void loadProductSelectorSession();
       }
 
       function setComposeLanguage(lang) {
@@ -2509,6 +2581,225 @@
         form.addEventListener("input", scheduleLeadProfileDirtyCheck);
         form.addEventListener("change", scheduleLeadProfileDirtyCheck);
         saveBtn.addEventListener("click", onLeadProfileSaveClick);
+      }
+
+      function getProductSelectorEls() {
+        return {
+          intent: document.getElementById("ps-intent"),
+          coverage: document.getElementById("ps-coverage"),
+          budget: document.getElementById("ps-budget"),
+          age: document.getElementById("ps-age"),
+          tobacco: document.getElementById("ps-tobacco"),
+          rx: document.getElementById("ps-rx"),
+          doc2y: document.getElementById("ps-doc2y"),
+          hosp5y: document.getElementById("ps-hosp5y"),
+          conditions: document.getElementById("ps-conditions"),
+          followups: document.getElementById("ps-followups"),
+          status: document.getElementById("ps-status"),
+          output: document.getElementById("ps-output"),
+          saveBtn: document.getElementById("ps-save-btn"),
+          runBtn: document.getElementById("ps-run-btn"),
+        };
+      }
+
+      function productSelectorAnswersFromUi() {
+        var el = getProductSelectorEls();
+        return {
+          intent: el.intent ? String(el.intent.value || "").trim() : "",
+          coverage_amount: el.coverage ? String(el.coverage.value || "").trim() : "",
+          budget_monthly: el.budget ? String(el.budget.value || "").trim() : "",
+          age: el.age ? String(el.age.value || "").trim() : "",
+          tobacco: !!(el.tobacco && el.tobacco.checked),
+          prescription_meds: !!(el.rx && el.rx.checked),
+          doctor_visits_2y: !!(el.doc2y && el.doc2y.checked),
+          hospitalized_5y: !!(el.hosp5y && el.hosp5y.checked),
+          conditions: String((el.conditions && el.conditions.value) || "")
+            .split(",")
+            .map(function (s) {
+              return String(s || "").trim();
+            })
+            .filter(Boolean),
+          followups: String((el.followups && el.followups.value) || "").trim(),
+        };
+      }
+
+      function applyProductSelectorAnswersToUi(a) {
+        var el = getProductSelectorEls();
+        a = a || {};
+        if (el.intent) el.intent.value = a.intent || "";
+        if (el.coverage) el.coverage.value = a.coverage_amount || "";
+        if (el.budget) el.budget.value = a.budget_monthly || "";
+        if (el.age) el.age.value = a.age || "";
+        if (el.tobacco) el.tobacco.checked = !!a.tobacco;
+        if (el.rx) el.rx.checked = !!a.prescription_meds;
+        if (el.doc2y) el.doc2y.checked = !!a.doctor_visits_2y;
+        if (el.hosp5y) el.hosp5y.checked = !!a.hospitalized_5y;
+        if (el.conditions) el.conditions.value = Array.isArray(a.conditions) ? a.conditions.join(", ") : "";
+        if (el.followups) el.followups.value = a.followups || "";
+      }
+
+      function renderProductSelectorOutput(rec, conf, risk, sales) {
+        var el = getProductSelectorEls();
+        if (!el.output) return;
+        if (!rec) {
+          el.output.innerHTML =
+            '<div class="meta-card" style="grid-column:1 / -1"><div class="q-empty">No recommendation yet.</div></div>';
+          return;
+        }
+        var alt = Array.isArray(rec.alternatives) ? rec.alternatives.join(", ") : "";
+        var score = conf && conf.score != null ? String(conf.score) : "-";
+        var label = conf && conf.label ? String(conf.label) : "-";
+        var reason = conf && conf.reason ? String(conf.reason) : "";
+        var riskLevel = risk && risk.level ? String(risk.level) : "-";
+        var flags = risk && Array.isArray(risk.flags) ? risk.flags.join(", ") : "";
+        var script = sales && sales.script ? String(sales.script) : "";
+        var objections = sales && Array.isArray(sales.objection_handlers) ? sales.objection_handlers : [];
+        el.output.innerHTML =
+          '<div class="meta-card"><label>Recommended product</label><div style="margin-top:6px;font-weight:700">' +
+          escHtml(rec.product_type || "-") +
+          "</div></div>" +
+          '<div class="meta-card"><label>Alternatives</label><div style="margin-top:6px">' +
+          escHtml(alt || "-") +
+          "</div></div>" +
+          '<div class="meta-card"><label>Confidence</label><div style="margin-top:6px;font-weight:700">' +
+          escHtml(label) +
+          " (" +
+          escHtml(score) +
+          ")</div><div class=\"small-note\">" +
+          escHtml(reason) +
+          "</div></div>" +
+          '<div class="meta-card"><label>Risk</label><div style="margin-top:6px">' +
+          escHtml(riskLevel) +
+          (flags ? " — " + escHtml(flags) : "") +
+          "</div></div>" +
+          '<div class="meta-card" style="grid-column:1 / -1"><label>Rationale</label><div style="margin-top:6px;white-space:pre-wrap">' +
+          escHtml(rec.rationale || "") +
+          "</div></div>" +
+          '<div class="meta-card" style="grid-column:1 / -1"><label>Sales script</label><div style="margin-top:6px;white-space:pre-wrap">' +
+          escHtml(script || "") +
+          "</div></div>" +
+          (objections.length
+            ? '<div class="meta-card" style="grid-column:1 / -1"><label>Objection handling</label><ul style="margin:8px 0 0 18px">' +
+              objections
+                .map(function (o) {
+                  return "<li>" + escHtml(String(o || "")) + "</li>";
+                })
+                .join("") +
+              "</ul></div>"
+            : "");
+      }
+
+      async function loadProductSelectorSession() {
+        var lead = getSelectedLeadFromList();
+        var el = getProductSelectorEls();
+        productSelectorSession = null;
+        if (!el.output) return;
+        if (!lead) {
+          applyProductSelectorAnswersToUi({});
+          renderProductSelectorOutput(null, null, null, null);
+          if (el.status) el.status.textContent = "Select a lead to start qualification.";
+          return;
+        }
+        if (el.status) el.status.textContent = "Loading session…";
+        try {
+          var data = await authedApi(
+            "/api/staff/product-selector?lead_id=" +
+              encodeURIComponent(lead.id) +
+              "&lead_source_table=" +
+              encodeURIComponent(lead.source_table || "unknown"),
+            null,
+            { method: "GET" }
+          );
+          var s = data && data.session ? data.session : null;
+          productSelectorSession = s;
+          applyProductSelectorAnswersToUi((s && s.qualification_answers) || {});
+          renderProductSelectorOutput(s && s.recommendation, s && s.confidence, s && s.risk_summary, s && s.sales_enablement);
+          if (el.status) el.status.textContent = s ? "Session loaded." : "No session yet. Fill fields and save.";
+        } catch (e) {
+          if (el.status) el.status.textContent = (e && e.message) || "Could not load selector session.";
+        }
+      }
+
+      async function saveProductSelectorSession() {
+        var lead = getSelectedLeadFromList();
+        var el = getProductSelectorEls();
+        if (!lead) {
+          if (el.status) el.status.textContent = "Select a lead first.";
+          return;
+        }
+        if (el.status) el.status.textContent = "Saving session…";
+        try {
+          var data = await authedApi(
+            "/api/staff/product-selector",
+            {
+              lead_id: lead.id,
+              lead_source_table: lead.source_table || "unknown",
+              qualification_answers: productSelectorAnswersFromUi(),
+              risk_summary: (productSelectorSession && productSelectorSession.risk_summary) || {},
+              recommendation: (productSelectorSession && productSelectorSession.recommendation) || {},
+              confidence: (productSelectorSession && productSelectorSession.confidence) || {},
+              sales_enablement: (productSelectorSession && productSelectorSession.sales_enablement) || {},
+              workflow_state: { stage: "in_progress" },
+            },
+            { method: "PUT" }
+          );
+          productSelectorSession = data && data.session ? data.session : productSelectorSession;
+          if (el.status) el.status.textContent = "Session saved.";
+        } catch (e) {
+          if (el.status) el.status.textContent = (e && e.message) || "Could not save session.";
+        }
+      }
+
+      async function runProductSelectorRecommendation() {
+        var lead = getSelectedLeadFromList();
+        var el = getProductSelectorEls();
+        if (!lead) {
+          if (el.status) el.status.textContent = "Select a lead first.";
+          return;
+        }
+        if (el.runBtn) {
+          el.runBtn.disabled = true;
+          el.runBtn.textContent = "Running…";
+        }
+        if (el.status) el.status.textContent = "Running recommendation…";
+        try {
+          var data = await authedApi(
+            "/api/staff/product-selector",
+            {
+              lead_id: lead.id,
+              lead_source_table: lead.source_table || "unknown",
+              qualification_answers: productSelectorAnswersFromUi(),
+              stage: "complete",
+            },
+            { method: "POST" }
+          );
+          productSelectorSession = data && data.session ? data.session : productSelectorSession;
+          renderProductSelectorOutput(data.recommendation, data.confidence, data.risk_summary, data.sales_enablement);
+          if (el.status) el.status.textContent = "Recommendation generated and saved.";
+        } catch (e) {
+          if (el.status) el.status.textContent = (e && e.message) || "Recommendation failed.";
+        } finally {
+          if (el.runBtn) {
+            el.runBtn.disabled = false;
+            el.runBtn.textContent = "Run Recommendation";
+          }
+        }
+      }
+
+      function wireProductSelectorUi() {
+        var el = getProductSelectorEls();
+        if (el.saveBtn && !el.saveBtn.getAttribute("data-wired")) {
+          el.saveBtn.setAttribute("data-wired", "1");
+          el.saveBtn.addEventListener("click", function () {
+            saveProductSelectorSession();
+          });
+        }
+        if (el.runBtn && !el.runBtn.getAttribute("data-wired")) {
+          el.runBtn.setAttribute("data-wired", "1");
+          el.runBtn.addEventListener("click", function () {
+            runProductSelectorRecommendation();
+          });
+        }
       }
 
       function renderStaffLeadLists() {
@@ -2937,6 +3228,7 @@
       wireComposeSaveContactModal();
       wireLeadProfileSaveModal();
       wireLeadProfileForm();
+      wireProductSelectorUi();
       renderStaffLeadLists();
       wireDelayedHelpOn(document.getElementById("compose-body"));
 
