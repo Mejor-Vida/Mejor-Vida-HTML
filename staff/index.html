@@ -2190,6 +2190,15 @@
         if (boxS) boxS.innerHTML = fmt(L);
       }
 
+      function getSelectedLeadFromList() {
+        if (!composeSelectedLeadId) return null;
+        return (
+          composeLeads.find(function (x) {
+            return x.id === composeSelectedLeadId;
+          }) || null
+        );
+      }
+
       function applyLeadProfileDetailToForm(d) {
         function setv(id, v) {
           var el = document.getElementById(id);
@@ -2344,12 +2353,40 @@
           updateLeadProfileSaveButton();
           return;
         }
+        // Show immediately from the selected lead row so profile never looks blank.
+        var quick = getSelectedLeadFromList();
+        if (quick) {
+          applyLeadProfileDetailToForm({
+            id: quick.id || "",
+            first_name: quick.first_name || "",
+            last_name: quick.last_name || "",
+            email: quick.email || "",
+            phone: quick.phone || "",
+            language: quick.language || "English",
+            age: null,
+            sex: "",
+            tobacco: null,
+            tag: "",
+            pipeline_stage: "",
+            source: quick.source || "",
+            drop_off: false,
+            drop_off_stage: "",
+            opt_in: false,
+            manychat_subscriber_id: "",
+            opt_in_at: null,
+            created_at: quick.created_at || null,
+            updated_at: quick.updated_at || null,
+            staff_hidden_at: null,
+          });
+          form.classList.remove("hidden");
+          leadProfileBaselineJson = JSON.stringify(serializeLeadProfileFromForm());
+          updateLeadProfileSaveButton();
+        }
         empty.classList.add("hidden");
-        form.classList.add("hidden");
         banner.classList.add("hidden");
         roBlock.classList.add("hidden");
         roBlock.innerHTML = "";
-        if (status) status.textContent = "Loading…";
+        if (status) status.textContent = quick ? "Loading additional fields…" : "Loading…";
         try {
           var data = await authedApi("/api/staff/leads?id=" + encodeURIComponent(composeSelectedLeadId), null, {
             method: "GET",
@@ -2376,8 +2413,10 @@
           updateLeadProfileSaveButton();
         } catch (e) {
           if (status) status.textContent = (e && e.message) || "Could not load lead.";
-          empty.classList.remove("hidden");
-          empty.textContent = "Could not load this lead. Try again or pick another row.";
+          if (!quick) {
+            empty.classList.remove("hidden");
+            empty.textContent = "Could not load this lead. Try again or pick another row.";
+          }
         }
       }
 
