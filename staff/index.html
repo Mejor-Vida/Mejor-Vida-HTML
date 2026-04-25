@@ -187,6 +187,19 @@
     .staff-lead-summary .q-empty {
       margin-top: 0;
     }
+    #lead-profile-form select {
+      width: 100%;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: #0a1a33;
+      color: var(--text);
+      padding: 10px 12px;
+      font: inherit;
+    }
+    #lead-profile-form input.lp-ro {
+      opacity: 0.88;
+      cursor: default;
+    }
     .compose-outer {
       max-width: none;
       margin: 0;
@@ -753,7 +766,7 @@
       <div class="top-brand-row">
         <div>
           <b>Mejor Vida Insurance — Staff Portal</b>
-          <small>Staff Access Only — Login Required<span id="staff-build-stamp" class="staff-build-stamp" title="If this number is missing after refresh, the page is cached.">· UI 20260425d</span></small>
+          <small>Staff Access Only — Login Required<span id="staff-build-stamp" class="staff-build-stamp" title="If this number is missing after refresh, the page is cached.">· UI 20260425e</span></small>
         </div>
         <button id="signout-btn" class="signout" type="button" data-help="Signs you out of the staff portal on this browser.">Sign Out</button>
       </div>
@@ -935,8 +948,118 @@
                 <div id="lead-profile-lead-list" class="compose-lead-list" role="listbox" aria-label="Leads"></div>
               </aside>
               <div class="compose-main-col staff-tool-main">
-                <div id="lead-profile-summary" class="staff-lead-summary"></div>
-                <p class="small-note" style="margin-top: 0">Full field review, edits, and change confirmations will live here.</p>
+                <div id="lead-profile-readonly-banner" class="hidden" style="margin-bottom: 12px; padding: 10px 12px; border-radius: 10px; border: 1px solid rgba(255, 200, 120, 0.45); background: rgba(80, 60, 20, 0.35); font-size: 0.9rem; line-height: 1.4"></div>
+                <div id="lead-profile-readonly-block" class="hidden"></div>
+                <div id="lead-profile-empty" class="q-empty">Select a lead from the list on the left.</div>
+                <form id="lead-profile-form" class="compose-form hidden" autocomplete="off" onsubmit="return false;" aria-label="Lead profile">
+                  <div class="compose-contact-heading">Contact</div>
+                  <div class="meta-grid">
+                    <div class="meta-card" style="grid-column: 1 / -1">
+                      <label for="lp-id">Lead ID (read-only)</label>
+                      <input id="lp-id" type="text" readonly class="lp-ro" tabindex="-1" />
+                    </div>
+                    <div class="meta-card">
+                      <label for="lp-first-name">First name</label>
+                      <input id="lp-first-name" type="text" autocomplete="off" data-lpignore="true" />
+                    </div>
+                    <div class="meta-card">
+                      <label for="lp-last-name">Last name</label>
+                      <input id="lp-last-name" type="text" autocomplete="off" data-lpignore="true" />
+                    </div>
+                    <div class="meta-card">
+                      <label for="lp-email">Email</label>
+                      <input id="lp-email" type="email" inputmode="email" autocomplete="off" data-lpignore="true" />
+                    </div>
+                    <div class="meta-card">
+                      <label for="lp-phone">Phone</label>
+                      <input id="lp-phone" type="text" inputmode="tel" autocomplete="off" />
+                    </div>
+                    <div class="meta-card">
+                      <label for="lp-language">Language</label>
+                      <input id="lp-language" type="text" placeholder="e.g. English" autocomplete="off" />
+                    </div>
+                  </div>
+                  <div class="compose-contact-heading" style="margin-top: 16px">Health &amp; underwriting hints</div>
+                  <div class="meta-grid">
+                    <div class="meta-card">
+                      <label for="lp-age">Age</label>
+                      <input id="lp-age" type="number" inputmode="numeric" min="0" max="130" placeholder="—" />
+                    </div>
+                    <div class="meta-card">
+                      <label for="lp-sex">Sex</label>
+                      <input id="lp-sex" type="text" placeholder="As captured" autocomplete="off" />
+                    </div>
+                    <div class="meta-card">
+                      <label for="lp-tobacco">Tobacco</label>
+                      <select id="lp-tobacco">
+                        <option value="">Unknown</option>
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="compose-contact-heading" style="margin-top: 16px">Pipeline &amp; source</div>
+                  <div class="meta-grid">
+                    <div class="meta-card">
+                      <label for="lp-tag">Tag</label>
+                      <input id="lp-tag" type="text" autocomplete="off" />
+                    </div>
+                    <div class="meta-card">
+                      <label for="lp-pipeline-stage">Pipeline stage</label>
+                      <input id="lp-pipeline-stage" type="text" autocomplete="off" />
+                    </div>
+                    <div class="meta-card">
+                      <label for="lp-source">Source</label>
+                      <input id="lp-source" type="text" autocomplete="off" />
+                    </div>
+                    <div class="meta-card" style="grid-column: 1 / -1">
+                      <label style="display: flex; align-items: center; gap: 10px; cursor: pointer">
+                        <input id="lp-drop-off" type="checkbox" />
+                        Drop-off
+                      </label>
+                    </div>
+                    <div class="meta-card" style="grid-column: 1 / -1">
+                      <label for="lp-drop-off-stage">Drop-off stage</label>
+                      <input id="lp-drop-off-stage" type="text" autocomplete="off" />
+                    </div>
+                  </div>
+                  <div class="compose-contact-heading" style="margin-top: 16px">Integrations &amp; consent</div>
+                  <div class="meta-grid">
+                    <div class="meta-card" style="grid-column: 1 / -1">
+                      <label for="lp-subscriber-id">ManyChat subscriber ID</label>
+                      <input id="lp-subscriber-id" type="text" autocomplete="off" />
+                    </div>
+                    <div class="meta-card" style="grid-column: 1 / -1">
+                      <label style="display: flex; align-items: center; gap: 10px; cursor: pointer">
+                        <input id="lp-opt-in" type="checkbox" />
+                        Opt-in (contact consent)
+                      </label>
+                    </div>
+                    <div class="meta-card">
+                      <label for="lp-opt-in-at">Opt-in at (read-only)</label>
+                      <input id="lp-opt-in-at" type="text" readonly class="lp-ro" tabindex="-1" />
+                    </div>
+                  </div>
+                  <div class="compose-contact-heading" style="margin-top: 16px">System</div>
+                  <div class="meta-grid">
+                    <div class="meta-card">
+                      <label for="lp-created-at">Created</label>
+                      <input id="lp-created-at" type="text" readonly class="lp-ro" tabindex="-1" />
+                    </div>
+                    <div class="meta-card">
+                      <label for="lp-updated-at">Updated</label>
+                      <input id="lp-updated-at" type="text" readonly class="lp-ro" tabindex="-1" />
+                    </div>
+                    <div class="meta-card" style="grid-column: 1 / -1">
+                      <label for="lp-staff-hidden">Staff hidden at (read-only)</label>
+                      <input id="lp-staff-hidden" type="text" readonly class="lp-ro" tabindex="-1" />
+                    </div>
+                  </div>
+                  <div class="actions" style="margin-top: 16px">
+                    <button id="lead-profile-save-btn" type="button" class="secondary" disabled data-help="Writes all profile fields to manychat_leads after you confirm.">Save changes</button>
+                  </div>
+                  <div id="lead-profile-status" class="small-note"></div>
+                </form>
               </div>
             </div>
           </div>
@@ -1041,6 +1164,25 @@
     </div>
   </div>
 
+  <div
+    id="lead-profile-save-modal"
+    class="compose-delete-modal hidden"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="lead-profile-save-modal-title"
+  >
+    <div class="compose-delete-modal-panel">
+      <h3 id="lead-profile-save-modal-title">Save lead profile?</h3>
+      <p class="small-note" style="margin: 0 0 18px; line-height: 1.45">
+        This overwrites the lead row in the database with the values in the form.
+      </p>
+      <div class="compose-delete-modal-actions">
+        <button type="button" id="lead-profile-save-cancel" class="secondary">Cancel</button>
+        <button type="button" id="lead-profile-save-confirm" class="danger">Save</button>
+      </div>
+    </div>
+  </div>
+
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script>
     (function () {
@@ -1129,6 +1271,7 @@
         if (paneProductSelector) paneProductSelector.setAttribute("aria-hidden", productSelectorOn ? "false" : "true");
         paneChat.setAttribute("aria-hidden", chatOn ? "false" : "true");
         if (composeOn || leadProfileOn || productSelectorOn) ensureComposeLeadsLoaded();
+        if (leadProfileOn) void loadLeadProfileDetail();
       }
 
       function fmtDate(iso) {
@@ -1923,6 +2066,9 @@
       var composeDraftId = null;
       var composeLang = "English";
       var composeDeletePending = null;
+      var leadProfileBaselineJson = "";
+      var leadProfileReadOnly = false;
+      var leadProfileDirtyTimer = null;
 
       function getComposeEls() {
         return {
@@ -2005,6 +2151,7 @@
         if (L.language && /spanish|español|espanol/i.test(L.language)) setComposeLanguage("Spanish");
         else setComposeLanguage("English");
         renderStaffLeadLists();
+        if (paneLeadProfile && paneLeadProfile.classList.contains("active")) void loadLeadProfileDetail();
       }
 
       function setComposeLanguage(lang) {
@@ -2029,7 +2176,6 @@
               return x.id === composeSelectedLeadId;
             }) || null;
         }
-        var boxP = document.getElementById("lead-profile-summary");
         var boxS = document.getElementById("product-selector-summary");
         function fmt(lead) {
           if (!lead) {
@@ -2041,9 +2187,289 @@
             : "";
           return "<div><strong>" + nm + "</strong></div>" + em;
         }
-        var html = fmt(L);
-        if (boxP) boxP.innerHTML = html;
-        if (boxS) boxS.innerHTML = html;
+        if (boxS) boxS.innerHTML = fmt(L);
+      }
+
+      function applyLeadProfileDetailToForm(d) {
+        function setv(id, v) {
+          var el = document.getElementById(id);
+          if (!el) return;
+          el.value = v != null && v !== undefined ? String(v) : "";
+        }
+        setv("lp-id", d.id);
+        setv("lp-first-name", d.first_name);
+        setv("lp-last-name", d.last_name);
+        setv("lp-email", d.email);
+        setv("lp-phone", d.phone);
+        setv("lp-language", d.language);
+        setv("lp-age", d.age != null && d.age !== "" ? String(d.age) : "");
+        setv("lp-sex", d.sex);
+        var tob = document.getElementById("lp-tobacco");
+        if (tob) {
+          if (d.tobacco === true) tob.value = "true";
+          else if (d.tobacco === false) tob.value = "false";
+          else tob.value = "";
+        }
+        setv("lp-tag", d.tag);
+        setv("lp-pipeline-stage", d.pipeline_stage);
+        setv("lp-source", d.source);
+        var doff = document.getElementById("lp-drop-off");
+        if (doff) doff.checked = !!d.drop_off;
+        setv("lp-drop-off-stage", d.drop_off_stage);
+        var oi = document.getElementById("lp-opt-in");
+        if (oi) oi.checked = !!d.opt_in;
+        setv("lp-subscriber-id", d.manychat_subscriber_id);
+        setv("lp-opt-in-at", d.opt_in_at ? fmtDate(d.opt_in_at) : "");
+        setv("lp-created-at", d.created_at ? fmtDate(d.created_at) : "");
+        setv("lp-updated-at", d.updated_at ? fmtDate(d.updated_at) : "");
+        var sh = document.getElementById("lp-staff-hidden");
+        if (sh) sh.value = d.staff_hidden_at ? fmtDate(d.staff_hidden_at) : "";
+      }
+
+      function serializeLeadProfileFromForm() {
+        var tob = document.getElementById("lp-tobacco");
+        var tv = tob ? tob.value : "";
+        var tobacco = tv === "true" ? true : tv === "false" ? false : null;
+        return {
+          id: String((document.getElementById("lp-id") && document.getElementById("lp-id").value) || ""),
+          first_name: String(document.getElementById("lp-first-name").value || "").trim(),
+          last_name: String(document.getElementById("lp-last-name").value || "").trim(),
+          email: String(document.getElementById("lp-email").value || "").trim().toLowerCase(),
+          phone: String(document.getElementById("lp-phone").value || "").trim(),
+          language: String(document.getElementById("lp-language").value || "").trim(),
+          age: String(document.getElementById("lp-age").value || "").trim(),
+          sex: String(document.getElementById("lp-sex").value || "").trim(),
+          tobacco: tobacco,
+          tag: String(document.getElementById("lp-tag").value || "").trim(),
+          pipeline_stage: String(document.getElementById("lp-pipeline-stage").value || "").trim(),
+          source: String(document.getElementById("lp-source").value || "").trim(),
+          drop_off: !!document.getElementById("lp-drop-off").checked,
+          drop_off_stage: String(document.getElementById("lp-drop-off-stage").value || "").trim(),
+          opt_in: !!document.getElementById("lp-opt-in").checked,
+          manychat_subscriber_id: String(document.getElementById("lp-subscriber-id").value || "").trim(),
+        };
+      }
+
+      function buildLeadProfilePatchBody() {
+        var s = serializeLeadProfileFromForm();
+        var ageStr = s.age;
+        var ageOut = null;
+        if (ageStr !== "") {
+          var n = parseInt(ageStr, 10);
+          if (Number.isFinite(n) && n >= 0 && n <= 130) ageOut = n;
+        }
+        return {
+          id: composeSelectedLeadId,
+          first_name: s.first_name || null,
+          last_name: s.last_name || null,
+          email: s.email || null,
+          phone: s.phone || null,
+          language: s.language || "English",
+          age: ageOut,
+          sex: s.sex || null,
+          tobacco: s.tobacco,
+          tag: s.tag || null,
+          pipeline_stage: s.pipeline_stage || null,
+          source: s.source || null,
+          drop_off: s.drop_off,
+          drop_off_stage: s.drop_off_stage || null,
+          opt_in: s.opt_in,
+          manychat_subscriber_id: s.manychat_subscriber_id || null,
+        };
+      }
+
+      function updateLeadProfileSaveButton() {
+        var btn = document.getElementById("lead-profile-save-btn");
+        if (!btn) return;
+        var form = document.getElementById("lead-profile-form");
+        if (!form || form.classList.contains("hidden") || leadProfileReadOnly) {
+          btn.disabled = true;
+          return;
+        }
+        var cur = JSON.stringify(serializeLeadProfileFromForm());
+        btn.disabled = cur === leadProfileBaselineJson;
+      }
+
+      function scheduleLeadProfileDirtyCheck() {
+        clearTimeout(leadProfileDirtyTimer);
+        leadProfileDirtyTimer = setTimeout(updateLeadProfileSaveButton, 60);
+      }
+
+      function renderLeadProfileReadonly(d) {
+        var block = document.getElementById("lead-profile-readonly-block");
+        if (!block) return;
+        var rows = [
+          ["Source table", d.source_table],
+          ["Display name", d.display_name],
+          ["First name", d.first_name],
+          ["Last name", d.last_name],
+          ["Email", d.email],
+          ["Phone", d.phone],
+          ["Language", d.language],
+          ["Source", d.source],
+          ["Created", d.created_at ? fmtDate(d.created_at) : ""],
+          ["Updated", d.updated_at ? fmtDate(d.updated_at) : ""],
+        ];
+        var parts = ['<div class="meta-grid">'];
+        rows.forEach(function (pair) {
+          parts.push(
+            '<div class="meta-card"><label>' +
+              escHtml(pair[0]) +
+              '</label><div style="margin-top:6px;font-weight:600">' +
+              escHtml(pair[1] != null ? String(pair[1]) : "") +
+              "</div></div>"
+          );
+        });
+        parts.push("</div>");
+        block.innerHTML = parts.join("");
+      }
+
+      async function loadLeadProfileDetail() {
+        var empty = document.getElementById("lead-profile-empty");
+        var form = document.getElementById("lead-profile-form");
+        var banner = document.getElementById("lead-profile-readonly-banner");
+        var roBlock = document.getElementById("lead-profile-readonly-block");
+        var status = document.getElementById("lead-profile-status");
+        if (!empty || !form || !banner || !roBlock) return;
+        leadProfileReadOnly = false;
+        if (!composeSelectedLeadId || !accessToken) {
+          leadProfileBaselineJson = "";
+          empty.classList.remove("hidden");
+          empty.textContent = "Select a lead from the list on the left.";
+          form.classList.add("hidden");
+          banner.classList.add("hidden");
+          roBlock.classList.add("hidden");
+          roBlock.innerHTML = "";
+          if (status) status.textContent = "";
+          updateLeadProfileSaveButton();
+          return;
+        }
+        empty.classList.add("hidden");
+        form.classList.add("hidden");
+        banner.classList.add("hidden");
+        roBlock.classList.add("hidden");
+        roBlock.innerHTML = "";
+        if (status) status.textContent = "Loading…";
+        try {
+          var data = await authedApi("/api/staff/leads?id=" + encodeURIComponent(composeSelectedLeadId), null, {
+            method: "GET",
+          });
+          var d = data && data.detail;
+          if (!d) throw new Error("No detail returned");
+          leadProfileReadOnly = !!d.read_only;
+          if (leadProfileReadOnly) {
+            banner.classList.remove("hidden");
+            banner.textContent =
+              "This lead lives in \"" +
+              String(d.source_table || "unknown") +
+              "\". Only manychat_leads rows can be edited here; values below are read-only.";
+            renderLeadProfileReadonly(d);
+            roBlock.classList.remove("hidden");
+            leadProfileBaselineJson = "";
+            if (status) status.textContent = "";
+          } else {
+            applyLeadProfileDetailToForm(d);
+            form.classList.remove("hidden");
+            leadProfileBaselineJson = JSON.stringify(serializeLeadProfileFromForm());
+            if (status) status.textContent = "";
+          }
+          updateLeadProfileSaveButton();
+        } catch (e) {
+          if (status) status.textContent = (e && e.message) || "Could not load lead.";
+          empty.classList.remove("hidden");
+          empty.textContent = "Could not load this lead. Try again or pick another row.";
+        }
+      }
+
+      function openLeadProfileSaveModal() {
+        var mod = document.getElementById("lead-profile-save-modal");
+        if (mod) mod.classList.remove("hidden");
+        var yes = document.getElementById("lead-profile-save-confirm");
+        if (yes) yes.focus();
+      }
+
+      function closeLeadProfileSaveModal() {
+        var mod = document.getElementById("lead-profile-save-modal");
+        if (mod) mod.classList.add("hidden");
+      }
+
+      function onLeadProfileSaveClick() {
+        if (leadProfileReadOnly) return;
+        var cur = JSON.stringify(serializeLeadProfileFromForm());
+        if (cur === leadProfileBaselineJson) return;
+        openLeadProfileSaveModal();
+      }
+
+      async function performLeadProfileSave() {
+        closeLeadProfileSaveModal();
+        var status = document.getElementById("lead-profile-status");
+        if (status) status.textContent = "Saving…";
+        try {
+          var body = buildLeadProfilePatchBody();
+          var data = await authedApi("/api/staff/leads", body, { method: "PATCH" });
+          var item = data && data.item;
+          if (item && item.id) {
+            var ix = composeLeads.findIndex(function (x) {
+              return x.id === item.id;
+            });
+            if (ix >= 0) {
+              composeLeads[ix] = Object.assign({}, composeLeads[ix], item);
+              if (!composeLeads[ix].source_table) composeLeads[ix].source_table = "manychat_leads";
+            }
+            composeLeads.sort(function (a, b) {
+              return (a.display_name || "").toLowerCase().localeCompare((b.display_name || "").toLowerCase());
+            });
+            var picked = composeLeads.find(function (x) {
+              return x.id === item.id;
+            });
+            if (picked) {
+              composeSelectedLeadId = picked.id;
+              var el = getComposeEls();
+              if (el.firstName) el.firstName.value = picked.first_name != null ? String(picked.first_name) : "";
+              if (el.lastName) el.lastName.value = picked.last_name != null ? String(picked.last_name) : "";
+              el.email.value = picked.email || "";
+              el.phone.value = picked.phone || "";
+              if (picked.language && /spanish|español|espanol/i.test(picked.language)) setComposeLanguage("Spanish");
+              else setComposeLanguage("English");
+            }
+          }
+          renderStaffLeadLists();
+          if (data && data.detail) {
+            applyLeadProfileDetailToForm(data.detail);
+            leadProfileBaselineJson = JSON.stringify(serializeLeadProfileFromForm());
+          } else {
+            await loadLeadProfileDetail();
+          }
+          if (status) status.textContent = "Saved.";
+          updateLeadProfileSaveButton();
+        } catch (e) {
+          if (status) status.textContent = (e && e.message) || "Save failed.";
+        }
+      }
+
+      function wireLeadProfileSaveModal() {
+        var mod = document.getElementById("lead-profile-save-modal");
+        var cancel = document.getElementById("lead-profile-save-cancel");
+        var confirmBtn = document.getElementById("lead-profile-save-confirm");
+        if (!mod || !cancel || !confirmBtn || mod.getAttribute("data-lp-modal-wired")) return;
+        mod.setAttribute("data-lp-modal-wired", "1");
+        cancel.addEventListener("click", closeLeadProfileSaveModal);
+        confirmBtn.addEventListener("click", function () {
+          void performLeadProfileSave();
+        });
+        mod.addEventListener("click", function (e) {
+          if (e.target === mod) closeLeadProfileSaveModal();
+        });
+      }
+
+      function wireLeadProfileForm() {
+        var form = document.getElementById("lead-profile-form");
+        var saveBtn = document.getElementById("lead-profile-save-btn");
+        if (!form || !saveBtn || form.getAttribute("data-lp-form-wired")) return;
+        form.setAttribute("data-lp-form-wired", "1");
+        form.addEventListener("input", scheduleLeadProfileDirtyCheck);
+        form.addEventListener("change", scheduleLeadProfileDirtyCheck);
+        saveBtn.addEventListener("click", onLeadProfileSaveClick);
       }
 
       function renderStaffLeadLists() {
@@ -2470,6 +2896,8 @@
       wireComposeUi();
       wireComposeDeleteModal();
       wireComposeSaveContactModal();
+      wireLeadProfileSaveModal();
+      wireLeadProfileForm();
       renderStaffLeadLists();
       wireDelayedHelpOn(document.getElementById("compose-body"));
 

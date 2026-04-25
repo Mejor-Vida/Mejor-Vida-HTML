@@ -92,9 +92,28 @@ async function selectUnifiedLeadById(cfg, id) {
   const one = await restSelect(
     cfg,
     "unified_leads",
-    `select=id,source_table,source,display_name,email,phone&limit=1&id=eq.${encodeURIComponent(id)}`
+    `select=id,source_table,source,display_name,email,phone,language,first_name,last_name,created_at,updated_at&limit=1&id=eq.${encodeURIComponent(id)}`
   );
   return Array.isArray(one) && one.length ? one[0] : null;
+}
+
+const MANYCHAT_DETAIL_COLUMNS =
+  "id,first_name,last_name,phone,email,age,sex,tobacco,language,tag,pipeline_stage,source,drop_off,drop_off_stage,opt_in,opt_in_at,manychat_subscriber_id,created_at,updated_at";
+
+async function selectManychatLeadDetailById(cfg, id) {
+  const eq = `limit=1&id=eq.${encodeURIComponent(id)}`;
+  const qWithHidden = `select=${MANYCHAT_DETAIL_COLUMNS},staff_hidden_at&${eq}`;
+  const qBase = `select=${MANYCHAT_DETAIL_COLUMNS}&${eq}`;
+  try {
+    const rows = await restSelect(cfg, "manychat_leads", qWithHidden);
+    return Array.isArray(rows) && rows[0] ? rows[0] : null;
+  } catch (e) {
+    if (isStaffHiddenColumnError(e && e.message)) {
+      const rows = await restSelect(cfg, "manychat_leads", qBase);
+      return Array.isArray(rows) && rows[0] ? rows[0] : null;
+    }
+    throw e;
+  }
 }
 
 async function upsertStaffHiddenLead(cfg, lead) {
@@ -206,6 +225,38 @@ module.exports = async function handler(req, res) {
   if (!cfg) return json(res, 500, { error: "Server missing required configuration" });
 
   if (req.method === "GET") {
+    const detailId = String((req.query && req.query.id) || "").trim();
+    if (detailId && isUuid(detailId)) {
+      try {
+        const unified = await selectUnifiedLeadById(cfg, detailId);
+        if (!unified) return json(res, 404, { error: "Lead not found" });
+        if (String(unified.source_table || "") !== "manychat_leads") {
+          return json(res, 200, {
+            detail: {
+              read_only: true,
+              source_table: unified.source_table,
+              id: unified.id,
+              first_name: unified.first_name || "",
+              last_name: unified.last_name || "",
+              display_name: unified.display_name || displayName(unified),
+              phone: unified.phone || "",
+              email: String(unified.email || "").trim(),
+              language: unified.language || "English",
+              source: unified.source || unified.source_table || "unknown",
+              created_at: unified.created_at || null,
+              updated_at: unified.updated_at || null,
+            },
+          });
+        }
+        const row = await selectManychatLeadDetailById(cfg, detailId);
+        if (!row) return json(res, 404, { error: "Lead not found" });
+        return json(res, 200, { detail: Object.assign({ read_only: false }, row) });
+      } catch (e) {
+        console.error("staff/leads GET id", e);
+        return json(res, 500, { error: "Failed to load lead" });
+      }
+    }
+
     try {
       // Keep old migration check so staff still gets a useful error if manychat schema is stale.
       await selectManychatLeadsForStaff(cfg);
@@ -221,6 +272,7 @@ module.exports = async function handler(req, res) {
         source: r.source || r.source_table || "unknown",
         source_table: r.source_table || "unknown",
         created_at: r.created_at || null,
+        updated_at: r.updated_at || null,
       }));
       await enrichLeadEmailsFromContacts(cfg, items);
       items.sort((x, y) => sortKey(x).localeCompare(sortKey(y)));
@@ -293,31 +345,96 @@ module.exports = async function handler(req, res) {
     if (!isUuid(id)) {
       return json(res, 400, { error: "Valid lead id required" });
     }
-    const hasEmailKey = Object.prototype.hasOwnProperty.call(body, "email");
-    const hasPhoneKey = Object.prototype.hasOwnProperty.call(body, "phone");
-    const hasLangKey = Object.prototype.hasOwnProperty.call(body, "language");
-    const hasFirstKey = Object.prototype.hasOwnProperty.call(body, "first_name");
-    const hasLastKey = Object.prototype.hasOwnProperty.call(body, "last_name");
-    if (!hasEmailKey && !hasPhoneKey && !hasLangKey && !hasFirstKey && !hasLastKey) {
-      return json(res, 400, {
-        error: "Provide email, phone, language, first_name, and/or last_name to update",
-      });
+    const patchKeys = [
+      "email",
+      "phone",
+      "language",
+      "first_name",
+      "last_name",
+      "age",
+      "sex",
+      "tobacco",
+      "tag",
+      "pipeline_stage",
+      "source",
+      "drop_off",
+      "drop_off_stage",
+      "opt_in",
+      "manychat_subscriber_id",
+    ];
+    const touched = patchKeys.filter((k) => Object.prototype.hasOwnProperty.call(body, k));
+    if (!touched.length) {
+      return json(res, 400, { error: "Provide at least one field to update" });
     }
+
+    const hasEmailKey = Object.prototype.hasOwnProperty.call(body, "email");
     const emailIn = hasEmailKey ? String(body.email || "").trim().toLowerCase() : null;
-    const phoneIn = hasPhoneKey ? String(body.phone || "").trim().slice(0, 40) : null;
-    const langIn = hasLangKey ? String(body.language || "English").trim().slice(0, 50) || "English" : null;
-    const firstIn = hasFirstKey ? String(body.first_name || "").trim().slice(0, 200) : null;
-    const lastIn = hasLastKey ? String(body.last_name || "").trim().slice(0, 200) : null;
     if (hasEmailKey && emailIn && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailIn)) {
       return json(res, 400, { error: "Invalid email" });
     }
+
     const now = new Date().toISOString();
     const payload = { updated_at: now };
-    if (hasEmailKey) payload.email = emailIn || null;
-    if (hasPhoneKey) payload.phone = phoneIn || null;
-    if (hasLangKey) payload.language = langIn || "English";
-    if (hasFirstKey) payload.first_name = firstIn || null;
-    if (hasLastKey) payload.last_name = lastIn || null;
+
+    if (Object.prototype.hasOwnProperty.call(body, "email")) payload.email = emailIn || null;
+    if (Object.prototype.hasOwnProperty.call(body, "phone")) {
+      payload.phone = String(body.phone || "").trim().slice(0, 40) || null;
+    }
+    if (Object.prototype.hasOwnProperty.call(body, "language")) {
+      payload.language = String(body.language || "English").trim().slice(0, 50) || "English";
+    }
+    if (Object.prototype.hasOwnProperty.call(body, "first_name")) {
+      payload.first_name = String(body.first_name || "").trim().slice(0, 200) || null;
+    }
+    if (Object.prototype.hasOwnProperty.call(body, "last_name")) {
+      payload.last_name = String(body.last_name || "").trim().slice(0, 200) || null;
+    }
+    if (Object.prototype.hasOwnProperty.call(body, "age")) {
+      const v = body.age;
+      if (v === "" || v === null || v === undefined) {
+        payload.age = null;
+      } else {
+        const n = parseInt(String(v), 10);
+        if (!Number.isFinite(n) || n < 0 || n > 130) {
+          return json(res, 400, { error: "Invalid age" });
+        }
+        payload.age = n;
+      }
+    }
+    if (Object.prototype.hasOwnProperty.call(body, "sex")) {
+      const s = String(body.sex ?? "").trim();
+      payload.sex = s ? s.slice(0, 50) : null;
+    }
+    if (Object.prototype.hasOwnProperty.call(body, "tobacco")) {
+      if (body.tobacco === null || body.tobacco === "") payload.tobacco = null;
+      else payload.tobacco = !!body.tobacco;
+    }
+    if (Object.prototype.hasOwnProperty.call(body, "tag")) {
+      const s = String(body.tag ?? "").trim();
+      payload.tag = s ? s.slice(0, 120) : null;
+    }
+    if (Object.prototype.hasOwnProperty.call(body, "pipeline_stage")) {
+      const s = String(body.pipeline_stage ?? "").trim();
+      payload.pipeline_stage = s ? s.slice(0, 120) : null;
+    }
+    if (Object.prototype.hasOwnProperty.call(body, "source")) {
+      const s = String(body.source ?? "").trim();
+      payload.source = s ? s.slice(0, 120) : null;
+    }
+    if (Object.prototype.hasOwnProperty.call(body, "drop_off")) {
+      payload.drop_off = !!body.drop_off;
+    }
+    if (Object.prototype.hasOwnProperty.call(body, "drop_off_stage")) {
+      const s = String(body.drop_off_stage ?? "").trim();
+      payload.drop_off_stage = s ? s.slice(0, 200) : null;
+    }
+    if (Object.prototype.hasOwnProperty.call(body, "opt_in")) {
+      payload.opt_in = !!body.opt_in;
+    }
+    if (Object.prototype.hasOwnProperty.call(body, "manychat_subscriber_id")) {
+      const s = String(body.manychat_subscriber_id ?? "").trim();
+      payload.manychat_subscriber_id = s ? s.slice(0, 120) : null;
+    }
     try {
       const unified = await selectUnifiedLeadById(cfg, id);
       if (!unified) return json(res, 404, { error: "Lead not found" });
@@ -343,7 +460,16 @@ module.exports = async function handler(req, res) {
         source_table: "manychat_leads",
       };
       await enrichLeadEmailsFromContacts(cfg, [one]);
-      return json(res, 200, { item: one });
+      let detail = null;
+      try {
+        detail = await selectManychatLeadDetailById(cfg, id);
+      } catch (e2) {
+        detail = null;
+      }
+      return json(res, 200, {
+        item: one,
+        detail: detail ? Object.assign({ read_only: false }, detail) : undefined,
+      });
     } catch (e) {
       console.error("staff/leads PATCH", e);
       return json(res, 500, { error: "Failed to update lead" });
