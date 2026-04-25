@@ -161,8 +161,8 @@
     .pane.active { display: block; }
     #pane-inbox { padding: 12px; }
     #pane-compose { padding: 12px; overflow: auto; }
-    #pane-lead-profile { padding: 12px; overflow: hidden; }
-    #pane-product-selector { padding: 12px; overflow: hidden; }
+    #pane-lead-profile { padding: 12px; overflow: auto; }
+    #pane-product-selector { padding: 12px; overflow: auto; }
     #pane-chat { padding: 12px; }
     .staff-tool-pane-wrap {
       height: 100%;
@@ -177,6 +177,15 @@
       overflow: auto;
       padding: 14px;
       min-height: 0;
+    }
+    .staff-lead-summary {
+      padding: 4px 0 12px;
+      min-height: 2.5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      margin-bottom: 8px;
+    }
+    .staff-lead-summary .q-empty {
+      margin-top: 0;
     }
     .compose-outer {
       max-width: none;
@@ -741,7 +750,7 @@
       <div class="top-brand-row">
         <div>
           <b>Mejor Vida Insurance — Staff Portal</b>
-          <small>Staff Access Only — Login Required<span id="staff-build-stamp" class="staff-build-stamp" title="If this number is missing after refresh, the page is cached.">· UI 20260425b</span></small>
+          <small>Staff Access Only — Login Required<span id="staff-build-stamp" class="staff-build-stamp" title="If this number is missing after refresh, the page is cached.">· UI 20260425c</span></small>
         </div>
         <button id="signout-btn" class="signout" type="button" data-help="Signs you out of the staff portal on this browser.">Sign Out</button>
       </div>
@@ -894,39 +903,79 @@
     </section>
 
     <section id="pane-lead-profile" class="pane" aria-hidden="true">
-      <div class="staff-tool-pane-wrap">
-        <div class="chat-head">
-          <div>
-            <strong>Lead Profile</strong>
-            <div class="small-note" style="margin-top: 4px">
-              Full data view and edits (with confirmation on change). The same lead list as Compose will appear in a left column here.
+      <div class="compose-outer">
+        <div class="compose-panel">
+          <div class="inbox-head">
+            <div>
+              <strong>Lead Profile</strong>
+              <div class="small-note">Same lead list as Compose (left). Selection is shared across staff tools.</div>
             </div>
           </div>
-        </div>
-        <div id="lead-profile-body" class="staff-tool-pane-body">
-          <p class="small-note" style="margin-top: 0">
-            Pick a lead from the shared list to set session context. The list UI will match Compose.
-          </p>
-          <div class="q-empty" style="margin-top: 16px">Profile fields and shared lead column — next.</div>
+          <div id="lead-profile-body" class="compose-body">
+            <div class="compose-work">
+              <aside class="compose-leads-col" aria-label="Leads">
+                <label class="compose-leads-label" for="lead-profile-lead-filter">Filter leads</label>
+                <input
+                  id="lead-profile-lead-filter"
+                  type="search"
+                  autocomplete="off"
+                  autocorrect="off"
+                  autocapitalize="off"
+                  spellcheck="false"
+                  data-lpignore="true"
+                  data-1p-ignore="true"
+                  data-form-type="other"
+                  placeholder="Type to narrow the list…"
+                  aria-describedby="lead-profile-lead-list-hint"
+                />
+                <span id="lead-profile-lead-list-hint" class="small-note" style="margin: 0">A–Z. Click a row to set the active lead.</span>
+                <div id="lead-profile-lead-list" class="compose-lead-list" role="listbox" aria-label="Leads"></div>
+              </aside>
+              <div class="compose-main-col staff-tool-main">
+                <div id="lead-profile-summary" class="staff-lead-summary"></div>
+                <p class="small-note" style="margin-top: 0">Full field review, edits, and change confirmations will live here.</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
     <section id="pane-product-selector" class="pane" aria-hidden="true">
-      <div class="staff-tool-pane-wrap">
-        <div class="chat-head">
-          <div>
-            <strong>Product Selector</strong>
-            <div class="small-note" style="margin-top: 4px">
-              Guided qualification and product recommendation. No need for a complete profile first — capture gaps in the flow.
+      <div class="compose-outer">
+        <div class="compose-panel">
+          <div class="inbox-head">
+            <div>
+              <strong>Product Selector</strong>
+              <div class="small-note">Choose a lead on the left first. Guided qualification flow coming next.</div>
             </div>
           </div>
-        </div>
-        <div id="product-selector-body" class="staff-tool-pane-body">
-          <p class="small-note" style="margin-top: 0">
-            Select a lead from the shared left list (same as Compose); that lead becomes active context. Selected product will be stored on the lead when the flow is implemented.
-          </p>
-          <div class="q-empty" style="margin-top: 16px">Guided selector and recommendation save — next.</div>
+          <div id="product-selector-body" class="compose-body">
+            <div class="compose-work">
+              <aside class="compose-leads-col" aria-label="Leads">
+                <label class="compose-leads-label" for="product-selector-lead-filter">Filter leads</label>
+                <input
+                  id="product-selector-lead-filter"
+                  type="search"
+                  autocomplete="off"
+                  autocorrect="off"
+                  autocapitalize="off"
+                  spellcheck="false"
+                  data-lpignore="true"
+                  data-1p-ignore="true"
+                  data-form-type="other"
+                  placeholder="Type to narrow the list…"
+                  aria-describedby="product-selector-lead-list-hint"
+                />
+                <span id="product-selector-lead-list-hint" class="small-note" style="margin: 0">A–Z. Click a row to set the active lead.</span>
+                <div id="product-selector-lead-list" class="compose-lead-list" role="listbox" aria-label="Leads"></div>
+              </aside>
+              <div class="compose-main-col staff-tool-main">
+                <div id="product-selector-summary" class="staff-lead-summary"></div>
+                <p class="small-note" style="margin-top: 0">Partial data is fine; missing answers can be captured in the selector flow once built.</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -1076,7 +1125,7 @@
         if (paneLeadProfile) paneLeadProfile.setAttribute("aria-hidden", leadProfileOn ? "false" : "true");
         if (paneProductSelector) paneProductSelector.setAttribute("aria-hidden", productSelectorOn ? "false" : "true");
         paneChat.setAttribute("aria-hidden", chatOn ? "false" : "true");
-        if (composeOn) ensureComposeLeadsLoaded();
+        if (composeOn || leadProfileOn || productSelectorOn) ensureComposeLeadsLoaded();
       }
 
       function fmtDate(iso) {
@@ -1866,6 +1915,8 @@
 
       var composeLeads = [];
       var composeSelectedLeadId = null;
+      /** Shared filter text for all staff lead list columns (Compose, Lead Profile, Product Selector). */
+      var staffLeadListQuery = "";
       var composeDraftId = null;
       var composeLang = "English";
       var composeDeletePending = null;
@@ -1897,14 +1948,33 @@
           });
           if (L) return String(L.display_name || "").trim();
         }
-        return el.leadFilter ? String(el.leadFilter.value || "").trim() : "";
+        return String(staffLeadListQuery || "").trim();
+      }
+
+      function syncStaffLeadFilterInputs(exceptEl) {
+        ["compose-lead-filter", "lead-profile-lead-filter", "product-selector-lead-filter"].forEach(function (id) {
+          var f = document.getElementById(id);
+          if (f && f !== exceptEl) f.value = staffLeadListQuery;
+        });
+      }
+
+      function wireStaffLeadFilterInputs() {
+        ["compose-lead-filter", "lead-profile-lead-filter", "product-selector-lead-filter"].forEach(function (id) {
+          var inp = document.getElementById(id);
+          if (!inp || inp.getAttribute("data-staff-lead-filter-wired")) return;
+          inp.setAttribute("data-staff-lead-filter-wired", "1");
+          inp.addEventListener("input", function (e) {
+            staffLeadListQuery = String((e.target && e.target.value) || "");
+            syncStaffLeadFilterInputs(e.target);
+            syncComposeSelectionFromFilter();
+            renderStaffLeadLists();
+          });
+        });
       }
 
       function syncComposeSelectionFromFilter() {
         if (!composeSelectedLeadId) return;
-        var el = getComposeEls();
-        if (!el.leadFilter) return;
-        var q = String(el.leadFilter.value || "").trim().toLowerCase();
+        var q = String(staffLeadListQuery || "").trim().toLowerCase();
         var L = composeLeads.find(function (x) {
           return x.id === composeSelectedLeadId;
         });
@@ -1931,7 +2001,7 @@
         el.phone.value = L.phone || "";
         if (L.language && /spanish|español|espanol/i.test(L.language)) setComposeLanguage("Spanish");
         else setComposeLanguage("English");
-        renderComposeLeadsList();
+        renderStaffLeadLists();
       }
 
       function setComposeLanguage(lang) {
@@ -1948,27 +2018,57 @@
         return hay.indexOf(q) !== -1;
       }
 
-      function renderComposeLeadsList() {
+      function updateStaffLeadContextPanes() {
+        var L = null;
+        if (composeSelectedLeadId) {
+          L =
+            composeLeads.find(function (x) {
+              return x.id === composeSelectedLeadId;
+            }) || null;
+        }
+        var boxP = document.getElementById("lead-profile-summary");
+        var boxS = document.getElementById("product-selector-summary");
+        function fmt(lead) {
+          if (!lead) {
+            return '<div class="q-empty">No lead selected. Pick a name from the list on the left.</div>';
+          }
+          var nm = escHtml(lead.display_name || "(no name)");
+          var em = lead.email
+            ? '<div class="small-note" style="margin-top:6px">' + escHtml(String(lead.email)) + "</div>"
+            : "";
+          return "<div><strong>" + nm + "</strong></div>" + em;
+        }
+        var html = fmt(L);
+        if (boxP) boxP.innerHTML = html;
+        if (boxS) boxS.innerHTML = html;
+      }
+
+      function renderStaffLeadLists() {
         var el = getComposeEls();
-        if (!el.leadList || !el.leadFilter) return;
-        var q = String(el.leadFilter.value || "").trim().toLowerCase();
+        var q = String(staffLeadListQuery || "").trim().toLowerCase();
         var filtered = q
           ? composeLeads.filter(function (L) {
               return leadMatchesQuery(L, q);
             })
           : composeLeads.slice();
-        el.leadList.innerHTML = "";
-        if (composeLeads.length === 0) {
-          var empty0 = document.createElement("div");
-          empty0.className = "compose-lead-empty";
-          empty0.textContent = "No leads loaded yet.";
-          el.leadList.appendChild(empty0);
-        } else if (filtered.length === 0) {
-          var empty1 = document.createElement("div");
-          empty1.className = "compose-lead-empty";
-          empty1.textContent = "No names match this filter.";
-          el.leadList.appendChild(empty1);
-        } else {
+
+        function appendRowsTo(leadListEl, includeAddContactRow) {
+          if (!leadListEl) return;
+          leadListEl.innerHTML = "";
+          if (composeLeads.length === 0) {
+            var empty0 = document.createElement("div");
+            empty0.className = "compose-lead-empty";
+            empty0.textContent = "No leads loaded yet.";
+            leadListEl.appendChild(empty0);
+            return;
+          }
+          if (filtered.length === 0) {
+            var empty1 = document.createElement("div");
+            empty1.className = "compose-lead-empty";
+            empty1.textContent = "No names match this filter.";
+            leadListEl.appendChild(empty1);
+            return;
+          }
           filtered.forEach(function (L) {
             var wrap = document.createElement("div");
             wrap.className = "compose-lead-row-wrap";
@@ -2008,29 +2108,36 @@
             });
             wrap.appendChild(b);
             wrap.appendChild(del);
-            el.leadList.appendChild(wrap);
+            leadListEl.appendChild(wrap);
           });
+          if (includeAddContactRow && el.email) {
+            var typed = String(staffLeadListQuery || "").trim();
+            var typedLower = typed.toLowerCase();
+            var hasExact = composeLeads.some(function (L2) {
+              return (L2.display_name || "").trim().toLowerCase() === typedLower;
+            });
+            var emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(el.email.value || "").trim());
+            if (typed && !hasExact && emailOk) {
+              var addBtn = document.createElement("button");
+              addBtn.type = "button";
+              addBtn.className = "compose-lead-row compose-lead-add";
+              addBtn.setAttribute("role", "option");
+              addBtn.setAttribute("aria-selected", "false");
+              addBtn.textContent = "Add \"" + typed + "\" as new contact?";
+              addBtn.addEventListener("mousedown", function (e) {
+                e.preventDefault();
+                onComposeAddNewLead(typed);
+              });
+              leadListEl.appendChild(addBtn);
+            }
+          }
         }
-        var typed = String(el.leadFilter.value || "").trim();
-        var typedLower = typed.toLowerCase();
-        var hasExact = composeLeads.some(function (L) {
-          return (L.display_name || "").trim().toLowerCase() === typedLower;
-        });
-        var emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(el.email.value || "").trim());
-        if (typed && !hasExact && emailOk) {
-          var addBtn = document.createElement("button");
-          addBtn.type = "button";
-          addBtn.className = "compose-lead-row compose-lead-add";
-          addBtn.setAttribute("role", "option");
-          addBtn.setAttribute("aria-selected", "false");
-          addBtn.textContent = "Add \"" + typed + "\" as new contact?";
-          addBtn.addEventListener("mousedown", function (e) {
-            e.preventDefault();
-            onComposeAddNewLead(typed);
-          });
-          el.leadList.appendChild(addBtn);
-        }
+
+        appendRowsTo(document.getElementById("compose-lead-list"), true);
+        appendRowsTo(document.getElementById("lead-profile-lead-list"), false);
+        appendRowsTo(document.getElementById("product-selector-lead-list"), false);
         updateComposeSaveContactButtonState();
+        updateStaffLeadContextPanes();
       }
 
       function openComposeSaveContactConfirmModal() {
@@ -2107,7 +2214,7 @@
           el.phone.value = item.phone || "";
           if (item.language && /spanish|español|espanol/i.test(item.language)) setComposeLanguage("Spanish");
           else setComposeLanguage("English");
-          renderComposeLeadsList();
+          renderStaffLeadLists();
           el.status.textContent = "Contact info saved.";
         } catch (err) {
           el.status.textContent = (err && err.message) || "Could not save contact.";
@@ -2148,8 +2255,9 @@
             return (a.display_name || "").toLowerCase().localeCompare((b.display_name || "").toLowerCase());
           });
           applyComposeLeadSelection(item);
-          if (el.leadFilter) el.leadFilter.value = item.display_name || "";
-          renderComposeLeadsList();
+          staffLeadListQuery = item.display_name || "";
+          syncStaffLeadFilterInputs(null);
+          renderStaffLeadLists();
           status.textContent = "New contact saved to manychat_leads.";
         } catch (e2) {
           status.textContent = "Could not create lead.";
@@ -2164,10 +2272,10 @@
           composeLeads.sort(function (a, b) {
             return (a.display_name || "").toLowerCase().localeCompare((b.display_name || "").toLowerCase());
           });
-          renderComposeLeadsList();
+          renderStaffLeadLists();
         } catch (e) {
           getComposeEls().status.textContent = "Could not load leads list.";
-          renderComposeLeadsList();
+          renderStaffLeadLists();
         }
       }
 
@@ -2308,7 +2416,7 @@
             el.phone.value = "";
           }
           el.status.textContent = "Lead removed from list.";
-          renderComposeLeadsList();
+          renderStaffLeadLists();
         } catch (err) {
           el.status.textContent = (err && err.message) || "Could not remove lead.";
         }
@@ -2335,14 +2443,14 @@
           saveContactBtn.addEventListener("click", onComposeSaveContact);
           updateComposeSaveContactButtonState();
         }
-        if (!el.leadFilter || !el.leadList) return;
-        el.leadFilter.addEventListener("input", function () {
-          syncComposeSelectionFromFilter();
-          renderComposeLeadsList();
-        });
+        wireStaffLeadFilterInputs();
+        if (el.leadFilter && String(el.leadFilter.value || "").trim()) {
+          staffLeadListQuery = String(el.leadFilter.value || "");
+          syncStaffLeadFilterInputs(null);
+        }
         if (el.email) {
           el.email.addEventListener("input", function () {
-            renderComposeLeadsList();
+            renderStaffLeadLists();
           });
         }
         document.getElementById("compose-lang-en").addEventListener("click", function () {
@@ -2359,7 +2467,7 @@
       wireComposeUi();
       wireComposeDeleteModal();
       wireComposeSaveContactModal();
-      renderComposeLeadsList();
+      renderStaffLeadLists();
       wireDelayedHelpOn(document.getElementById("compose-body"));
 
       wireStaticPortalHelpOnce();
