@@ -197,57 +197,43 @@
       padding: 10px 12px;
       font: inherit;
     }
-    #product-selector-form .meta-grid {
-      gap: 4px;
-    }
+    #product-selector-form .meta-grid { gap: 8px; }
     #product-selector-form .meta-card {
-      padding: 3px 5px;
-      border-radius: 7px;
-      font-size: 0.78rem;
+      padding: 8px 10px;
+      border-radius: 10px;
+      font-size: 0.88rem;
     }
     #product-selector-form input,
     #product-selector-form select {
-      margin-top: 2px;
-      min-height: 18px;
-      height: 18px;
-      padding: 1px 5px;
-      border-radius: 6px;
-      font-size: 0.76rem;
+      margin-top: 4px;
+      min-height: 34px;
+      height: 34px;
+      padding: 6px 10px;
+      border-radius: 10px;
+      font-size: 0.9rem;
       line-height: 1.1;
     }
     #product-selector-form textarea {
-      margin-top: 2px;
-      min-height: 36px;
-      padding: 3px 5px;
-      border-radius: 6px;
-      font-size: 0.76rem;
+      margin-top: 4px;
+      min-height: 72px;
+      padding: 7px 10px;
+      border-radius: 10px;
+      font-size: 0.9rem;
       line-height: 1.2;
       resize: vertical;
     }
     #product-selector-form .ps-grid-2 {
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 4px 6px;
-    }
-    #product-selector-form .ps-stage-desc {
-      margin: -4px 0 4px;
-      color: var(--muted);
-      font-size: 0.68rem;
-      line-height: 1.2;
-    }
-    #product-selector-form .ps-help {
-      margin-top: 2px;
-      color: var(--muted);
-      font-size: 0.64rem;
-      line-height: 1.15;
+      gap: 8px 10px;
     }
     #product-selector-form .ps-inline-check {
       display: inline-flex;
       align-items: center;
-      gap: 5px;
+      gap: 8px;
       font-weight: 600;
       cursor: pointer;
       margin: 0;
-      font-size: 0.74rem;
+      font-size: 0.88rem;
     }
     #product-selector-form .ps-inline-check input[type="checkbox"] {
       margin: 0;
@@ -256,14 +242,8 @@
       height: auto;
       padding: 0;
     }
-    #product-selector-form .compose-contact-heading {
-      margin: 6px 0 2px;
-      font-size: 0.84rem;
-    }
-    #product-selector-form label {
-      margin: 0 0 2px;
-      font-size: 0.7rem;
-    }
+    #product-selector-form .compose-contact-heading { margin: 8px 0 4px; font-size: 0.96rem; }
+    #product-selector-form label { margin: 0 0 4px; font-size: 0.86rem; }
     @media (max-width: 1200px) {
       #product-selector-form .ps-grid-2 {
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -839,7 +819,7 @@
       <div class="top-brand-row">
         <div>
           <b>Mejor Vida Insurance — Staff Portal</b>
-          <small>Staff Access Only — Login Required<span id="staff-build-stamp" class="staff-build-stamp" title="If this number is missing after refresh, the page is cached.">· UI 20260425h</span></small>
+          <small>Staff Access Only — Login Required<span id="staff-build-stamp" class="staff-build-stamp" title="If this number is missing after refresh, the page is cached.">· UI 20260425i</span></small>
         </div>
         <button id="signout-btn" class="signout" type="button" data-help="Signs you out of the staff portal on this browser.">Sign Out</button>
       </div>
@@ -1173,11 +1153,10 @@
                 <div id="product-selector-summary" class="staff-lead-summary"></div>
                 <form id="product-selector-form" class="compose-form" autocomplete="off" onsubmit="return false;" aria-label="Product selector">
                   <div class="compose-contact-heading">Stage 1 — Intent</div>
-                  <div class="ps-stage-desc">Goal + budget snapshot</div>
                   <div class="meta-grid ps-grid-2">
                     <div class="meta-card">
                       <label for="ps-intent">Coverage goal</label>
-                      <select id="ps-intent">
+                      <select id="ps-intent" data-help="What is the primary reason the client needs coverage?">
                         <option value="">Select…</option>
                         <option value="income_replacement">Income replacement</option>
                         <option value="final_expenses">Final expenses</option>
@@ -1185,53 +1164,42 @@
                         <option value="wealth_building">Wealth building</option>
                         <option value="legacy_planning">Legacy planning</option>
                       </select>
-                      <div class="ps-help">Primary need</div>
                     </div>
                     <div class="meta-card">
                       <label for="ps-coverage">Coverage amount ($)</label>
-                      <input id="ps-coverage" type="number" inputmode="numeric" min="1000" step="1000" placeholder="e.g. 100000" />
-                      <div class="ps-help">Target death benefit</div>
+                      <input id="ps-coverage" type="number" inputmode="numeric" min="1000" step="1000" placeholder="e.g. 100000" data-help="How much death benefit are they looking for? (e.g. $50,000 for final expense, $500,000 for income replacement)" />
                     </div>
                     <div class="meta-card">
                       <label for="ps-budget">Monthly budget ($)</label>
-                      <input id="ps-budget" type="number" inputmode="decimal" min="0" step="1" placeholder="e.g. 120" />
-                      <div class="ps-help">Affordable monthly premium</div>
+                      <input id="ps-budget" type="number" inputmode="decimal" min="0" step="1" placeholder="e.g. 120" data-help="What can the client afford per month in premiums?" />
                     </div>
                     <div class="meta-card">
                       <label for="ps-age">Age</label>
-                      <input id="ps-age" type="number" inputmode="numeric" min="0" max="120" />
-                      <div class="ps-help">Drives eligibility/rates</div>
+                      <input id="ps-age" type="number" inputmode="numeric" min="0" max="120" data-help="Client's current age — affects product eligibility and rates" />
                     </div>
                   </div>
 
                   <div class="compose-contact-heading" style="margin-top:16px">Stage 2 — Underwriting signals</div>
-                  <div class="ps-stage-desc">Quick underwriting signals</div>
                   <div class="meta-grid ps-grid-2">
                     <div class="meta-card">
-                      <label class="ps-inline-check"><input id="ps-tobacco" type="checkbox" /> Tobacco use</label>
-                      <div class="ps-help">Nicotine in last 12 months</div>
+                      <label class="ps-inline-check"><input id="ps-tobacco" type="checkbox" data-help="Any tobacco or nicotine use in the last 12 months" /> Tobacco use</label>
                     </div>
                     <div class="meta-card">
-                      <label class="ps-inline-check"><input id="ps-rx" type="checkbox" /> Prescription medications</label>
-                      <div class="ps-help">Any current prescriptions</div>
+                      <label class="ps-inline-check"><input id="ps-rx" type="checkbox" data-help="Currently taking any prescription drugs?" /> Prescription medications</label>
                     </div>
                     <div class="meta-card">
-                      <label class="ps-inline-check"><input id="ps-doc2y" type="checkbox" /> Doctor visits (2y)</label>
-                      <div class="ps-help">Visited doctor in last 2 years</div>
+                      <label class="ps-inline-check"><input id="ps-doc2y" type="checkbox" data-help="Any doctor visits in the last 2 years?" /> Doctor visits (2y)</label>
                     </div>
                     <div class="meta-card">
-                      <label class="ps-inline-check"><input id="ps-hosp5y" type="checkbox" /> Hospitalization (5y)</label>
-                      <div class="ps-help">Hospital stay in last 5 years</div>
+                      <label class="ps-inline-check"><input id="ps-hosp5y" type="checkbox" data-help="Any hospitalizations in the last 5 years?" /> Hospitalization (5y)</label>
                     </div>
                     <div class="meta-card" style="grid-column:1 / -1">
                       <label for="ps-conditions">Conditions (comma-separated)</label>
-                      <input id="ps-conditions" type="text" placeholder="e.g. hypertension, diabetes" />
-                      <div class="ps-help">Known diagnoses</div>
+                      <input id="ps-conditions" type="text" placeholder="e.g. hypertension, diabetes" data-help="List any diagnosed conditions (e.g. diabetes, hypertension, heart disease)" />
                     </div>
                   </div>
 
                   <div class="compose-contact-heading" style="margin-top:16px">Stage 3 — Dynamic follow-ups</div>
-                  <div class="ps-stage-desc">Only if Stage 2 triggers</div>
                   <div class="meta-grid">
                     <div class="meta-card">
                       <label for="ps-followups">Follow-up notes</label>
@@ -3343,6 +3311,7 @@
       wireProductSelectorUi();
       renderStaffLeadLists();
       wireDelayedHelpOn(document.getElementById("compose-body"));
+      wireDelayedHelpOn(document.getElementById("product-selector-body"));
 
       wireStaticPortalHelpOnce();
 
