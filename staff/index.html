@@ -819,7 +819,7 @@
       <div class="top-brand-row">
         <div>
           <b>Mejor Vida Insurance — Staff Portal</b>
-          <small>Staff Access Only — Login Required<span id="staff-build-stamp" class="staff-build-stamp" title="If this number is missing after refresh, the page is cached.">· UI 20260425j</span></small>
+          <small>Staff Access Only — Login Required<span id="staff-build-stamp" class="staff-build-stamp" title="If this number is missing after refresh, the page is cached.">· UI 20260425k</span></small>
         </div>
         <button id="signout-btn" class="signout" type="button" data-help="Signs you out of the staff portal on this browser.">Sign Out</button>
       </div>
@@ -1176,6 +1176,96 @@
                     <div class="meta-card">
                       <label for="ps-age">Age</label>
                       <input id="ps-age" type="number" inputmode="numeric" min="0" max="120" data-help="Client's current age — affects product eligibility and rates" />
+                    </div>
+                    <div class="meta-card">
+                      <label for="ps-protected-who">Who is being protected?</label>
+                      <select id="ps-protected-who" data-help="Who is the coverage mainly for?">
+                        <option value="">Select…</option>
+                        <option value="self">Self</option>
+                        <option value="spouse">Spouse</option>
+                        <option value="children">Children</option>
+                        <option value="family">Family / multiple dependents</option>
+                        <option value="business_partner">Business partner / key person</option>
+                      </select>
+                    </div>
+                    <div class="meta-card">
+                      <label for="ps-duration-need">Coverage duration</label>
+                      <select id="ps-duration-need" data-help="Do they need temporary or lifetime coverage?">
+                        <option value="">Select…</option>
+                        <option value="temporary">Temporary (10–30 years)</option>
+                        <option value="lifetime">Lifetime / permanent</option>
+                        <option value="unsure">Unsure</option>
+                      </select>
+                    </div>
+                    <div class="meta-card">
+                      <label for="ps-must-have">Must-have outcome</label>
+                      <select id="ps-must-have" data-help="What must this policy do first?">
+                        <option value="">Select…</option>
+                        <option value="lowest_cost">Lowest monthly premium</option>
+                        <option value="permanent_coverage">Permanent coverage</option>
+                        <option value="cash_value_growth">Cash value growth</option>
+                        <option value="fast_approval">Fast/simple approval</option>
+                      </select>
+                    </div>
+                    <div class="meta-card ps-intent-detail" id="ps-card-income-need">
+                      <label for="ps-income-need">Monthly income to replace ($)</label>
+                      <input id="ps-income-need" type="number" inputmode="numeric" min="0" step="100" data-help="If income replacement, how much monthly income should coverage replace?" />
+                    </div>
+                    <div class="meta-card ps-intent-detail" id="ps-card-mortgage-balance">
+                      <label for="ps-mortgage-balance">Mortgage balance ($)</label>
+                      <input id="ps-mortgage-balance" type="number" inputmode="numeric" min="0" step="1000" data-help="If mortgage protection, how much mortgage balance remains?" />
+                    </div>
+                    <div class="meta-card ps-intent-detail" id="ps-card-final-expense-target">
+                      <label for="ps-final-expense-target">Final expense target ($)</label>
+                      <input id="ps-final-expense-target" type="number" inputmode="numeric" min="0" step="1000" data-help="If final expense, what target amount is needed?" />
+                    </div>
+                    <div class="meta-card">
+                      <label for="ps-current-coverage">Current coverage status</label>
+                      <select id="ps-current-coverage" data-help="Is this net new coverage or replacing existing coverage?">
+                        <option value="">Select…</option>
+                        <option value="none">No existing life insurance</option>
+                        <option value="some_keep">Some coverage, keeping existing</option>
+                        <option value="replace">Replacing existing policy</option>
+                      </select>
+                    </div>
+                    <div class="meta-card">
+                      <label for="ps-priority-1">Priority #1</label>
+                      <select id="ps-priority-1" data-help="Top priority for recommendation logic.">
+                        <option value="">Select…</option>
+                        <option value="cost">Cost</option>
+                        <option value="approval_likelihood">Approval likelihood</option>
+                        <option value="permanence">Permanent coverage</option>
+                        <option value="cash_value">Cash value</option>
+                        <option value="speed">Speed to issue</option>
+                      </select>
+                    </div>
+                    <div class="meta-card">
+                      <label for="ps-priority-2">Priority #2</label>
+                      <select id="ps-priority-2" data-help="Second priority (different from #1).">
+                        <option value="">Select…</option>
+                        <option value="cost">Cost</option>
+                        <option value="approval_likelihood">Approval likelihood</option>
+                        <option value="permanence">Permanent coverage</option>
+                        <option value="cash_value">Cash value</option>
+                        <option value="speed">Speed to issue</option>
+                      </select>
+                    </div>
+                    <div class="meta-card">
+                      <label for="ps-budget-flex">Budget flexibility</label>
+                      <select id="ps-budget-flex" data-help="Can they move above stated budget for stronger fit?">
+                        <option value="">Select…</option>
+                        <option value="strict">Strict cap</option>
+                        <option value="some_flex">Some flexibility</option>
+                        <option value="very_flexible">Very flexible</option>
+                      </select>
+                    </div>
+                    <div class="meta-card">
+                      <label for="ps-policy-owner">Policy owner</label>
+                      <input id="ps-policy-owner" type="text" data-help="Who will own the policy? (client, spouse, trust, business)" />
+                    </div>
+                    <div class="meta-card">
+                      <label for="ps-beneficiary-plan">Beneficiary plan</label>
+                      <input id="ps-beneficiary-plan" type="text" data-help="Who should receive the benefit?" />
                     </div>
                   </div>
 
@@ -2641,6 +2731,18 @@
           coverage: document.getElementById("ps-coverage"),
           budget: document.getElementById("ps-budget"),
           age: document.getElementById("ps-age"),
+          protectedWho: document.getElementById("ps-protected-who"),
+          durationNeed: document.getElementById("ps-duration-need"),
+          mustHave: document.getElementById("ps-must-have"),
+          incomeNeed: document.getElementById("ps-income-need"),
+          mortgageBalance: document.getElementById("ps-mortgage-balance"),
+          finalExpenseTarget: document.getElementById("ps-final-expense-target"),
+          currentCoverage: document.getElementById("ps-current-coverage"),
+          priority1: document.getElementById("ps-priority-1"),
+          priority2: document.getElementById("ps-priority-2"),
+          budgetFlex: document.getElementById("ps-budget-flex"),
+          policyOwner: document.getElementById("ps-policy-owner"),
+          beneficiaryPlan: document.getElementById("ps-beneficiary-plan"),
           tobacco: document.getElementById("ps-tobacco"),
           rx: document.getElementById("ps-rx"),
           doc2y: document.getElementById("ps-doc2y"),
@@ -2661,6 +2763,18 @@
           coverage_amount: el.coverage ? String(el.coverage.value || "").trim() : "",
           budget_monthly: el.budget ? String(el.budget.value || "").trim() : "",
           age: el.age ? String(el.age.value || "").trim() : "",
+          protected_who: el.protectedWho ? String(el.protectedWho.value || "").trim() : "",
+          duration_need: el.durationNeed ? String(el.durationNeed.value || "").trim() : "",
+          must_have: el.mustHave ? String(el.mustHave.value || "").trim() : "",
+          income_need_monthly: el.incomeNeed ? String(el.incomeNeed.value || "").trim() : "",
+          mortgage_balance: el.mortgageBalance ? String(el.mortgageBalance.value || "").trim() : "",
+          final_expense_target: el.finalExpenseTarget ? String(el.finalExpenseTarget.value || "").trim() : "",
+          current_coverage: el.currentCoverage ? String(el.currentCoverage.value || "").trim() : "",
+          priority_1: el.priority1 ? String(el.priority1.value || "").trim() : "",
+          priority_2: el.priority2 ? String(el.priority2.value || "").trim() : "",
+          budget_flex: el.budgetFlex ? String(el.budgetFlex.value || "").trim() : "",
+          policy_owner: el.policyOwner ? String(el.policyOwner.value || "").trim() : "",
+          beneficiary_plan: el.beneficiaryPlan ? String(el.beneficiaryPlan.value || "").trim() : "",
           tobacco: !!(el.tobacco && el.tobacco.checked),
           prescription_meds: !!(el.rx && el.rx.checked),
           doctor_visits_2y: !!(el.doc2y && el.doc2y.checked),
@@ -2682,12 +2796,66 @@
         if (el.coverage) el.coverage.value = a.coverage_amount || "";
         if (el.budget) el.budget.value = a.budget_monthly || "";
         if (el.age) el.age.value = a.age || "";
+        if (el.protectedWho) el.protectedWho.value = a.protected_who || "";
+        if (el.durationNeed) el.durationNeed.value = a.duration_need || "";
+        if (el.mustHave) el.mustHave.value = a.must_have || "";
+        if (el.incomeNeed) el.incomeNeed.value = a.income_need_monthly || "";
+        if (el.mortgageBalance) el.mortgageBalance.value = a.mortgage_balance || "";
+        if (el.finalExpenseTarget) el.finalExpenseTarget.value = a.final_expense_target || "";
+        if (el.currentCoverage) el.currentCoverage.value = a.current_coverage || "";
+        if (el.priority1) el.priority1.value = a.priority_1 || "";
+        if (el.priority2) el.priority2.value = a.priority_2 || "";
+        if (el.budgetFlex) el.budgetFlex.value = a.budget_flex || "";
+        if (el.policyOwner) el.policyOwner.value = a.policy_owner || "";
+        if (el.beneficiaryPlan) el.beneficiaryPlan.value = a.beneficiary_plan || "";
         if (el.tobacco) el.tobacco.checked = !!a.tobacco;
         if (el.rx) el.rx.checked = !!a.prescription_meds;
         if (el.doc2y) el.doc2y.checked = !!a.doctor_visits_2y;
         if (el.hosp5y) el.hosp5y.checked = !!a.hospitalized_5y;
         if (el.conditions) el.conditions.value = Array.isArray(a.conditions) ? a.conditions.join(", ") : "";
         if (el.followups) el.followups.value = a.followups || "";
+        syncProductSelectorIntentDetails();
+      }
+
+      function syncProductSelectorIntentDetails() {
+        var intent = String((document.getElementById("ps-intent") && document.getElementById("ps-intent").value) || "");
+        var incomeCard = document.getElementById("ps-card-income-need");
+        var mortCard = document.getElementById("ps-card-mortgage-balance");
+        var finalCard = document.getElementById("ps-card-final-expense-target");
+        if (incomeCard) incomeCard.style.display = intent === "income_replacement" ? "" : "none";
+        if (mortCard) mortCard.style.display = intent === "mortgage_protection" ? "" : "none";
+        if (finalCard) finalCard.style.display = intent === "final_expenses" ? "" : "none";
+      }
+
+      function validateStage1Answers(answers) {
+        var required = [
+          ["intent", "Coverage goal"],
+          ["coverage_amount", "Coverage amount"],
+          ["budget_monthly", "Monthly budget"],
+          ["age", "Age"],
+          ["protected_who", "Who is being protected"],
+          ["duration_need", "Coverage duration"],
+          ["must_have", "Must-have outcome"],
+          ["current_coverage", "Current coverage status"],
+          ["priority_1", "Priority #1"],
+        ];
+        for (var i = 0; i < required.length; i++) {
+          var k = required[i][0];
+          if (!String(answers[k] || "").trim()) return "Stage 1 missing: " + required[i][1];
+        }
+        if (answers.priority_2 && answers.priority_1 && answers.priority_2 === answers.priority_1) {
+          return "Priority #2 must be different from Priority #1.";
+        }
+        if (answers.intent === "income_replacement" && !String(answers.income_need_monthly || "").trim()) {
+          return "Stage 1 missing: Monthly income to replace.";
+        }
+        if (answers.intent === "mortgage_protection" && !String(answers.mortgage_balance || "").trim()) {
+          return "Stage 1 missing: Mortgage balance.";
+        }
+        if (answers.intent === "final_expenses" && !String(answers.final_expense_target || "").trim()) {
+          return "Stage 1 missing: Final expense target.";
+        }
+        return "";
       }
 
       function renderProductSelectorOutput(rec, conf, risk, sales) {
@@ -2843,12 +3011,18 @@
         }
         if (el.status) el.status.textContent = "Running recommendation…";
         try {
+          var answers = productSelectorAnswersFromUi();
+          var stage1Err = validateStage1Answers(answers);
+          if (stage1Err) {
+            if (el.status) el.status.textContent = stage1Err;
+            return;
+          }
           var data = await authedApi(
             "/api/staff/product-selector",
             {
               lead_id: lead.id,
               lead_source_table: lead.source_table || "unknown",
-              qualification_answers: productSelectorAnswersFromUi(),
+              qualification_answers: answers,
               stage: "complete",
             },
             { method: "POST" }
@@ -2868,6 +3042,10 @@
 
       function wireProductSelectorUi() {
         var el = getProductSelectorEls();
+        if (el.intent && !el.intent.getAttribute("data-wired")) {
+          el.intent.setAttribute("data-wired", "1");
+          el.intent.addEventListener("change", syncProductSelectorIntentDetails);
+        }
         if (el.saveBtn && !el.saveBtn.getAttribute("data-wired")) {
           el.saveBtn.setAttribute("data-wired", "1");
           el.saveBtn.addEventListener("click", function () {

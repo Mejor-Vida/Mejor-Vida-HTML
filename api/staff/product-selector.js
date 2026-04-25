@@ -66,6 +66,11 @@ function deriveRisk(answers) {
 
 function recommendByRules(answers, risk) {
   const intent = String(answers.intent || "").toLowerCase();
+  const duration = String(answers.duration_need || "").toLowerCase();
+  const mustHave = String(answers.must_have || "").toLowerCase();
+  const coverageStatus = String(answers.current_coverage || "").toLowerCase();
+  const p1 = String(answers.priority_1 || "").toLowerCase();
+  const p2 = String(answers.priority_2 || "").toLowerCase();
   const age = Number.isFinite(parseInt(String(answers.age || ""), 10))
     ? parseInt(String(answers.age || ""), 10)
     : null;
@@ -88,9 +93,25 @@ function recommendByRules(answers, risk) {
     recommended_category = "final_expense";
     product_type = "final_expense";
   }
+  if (duration === "lifetime" && product_type === "term_life") {
+    recommended_category = "life_insurance";
+    product_type = "whole_life";
+  }
+  if (mustHave === "cash_value_growth") {
+    recommended_category = "universal_life";
+    product_type = "universal_life";
+  }
+  if (mustHave === "lowest_cost" && duration !== "lifetime" && risk.level !== "high") {
+    recommended_category = "term_life";
+    product_type = "term_life";
+  }
   if (risk.level === "high" && product_type === "term_life") {
     recommended_category = "final_expense";
     product_type = "final_expense";
+  }
+  if (coverageStatus === "replace" && product_type === "term_life" && (p1 === "permanence" || p2 === "permanence")) {
+    recommended_category = "life_insurance";
+    product_type = "whole_life";
   }
   const alternatives = [];
   if (product_type !== "term_life") alternatives.push("term_life");
@@ -102,14 +123,14 @@ function recommendByRules(answers, risk) {
     product_type,
     recommended_category,
     alternatives: alternatives.slice(0, 3),
-    rationale: `Intent=${intent || "unknown"}, risk=${risk.level}, age=${age == null ? "unknown" : age}, tobacco=${
+    rationale: `Intent=${intent || "unknown"}, duration=${duration || "unknown"}, must_have=${mustHave || "unknown"}, risk=${risk.level}, age=${age == null ? "unknown" : age}, tobacco=${
       tobacco ? "yes" : "no"
     }`,
   };
 }
 
 function confidenceFrom(answers, risk, recommendation) {
-  const required = ["intent", "coverage_amount", "budget_monthly", "age"];
+  const required = ["intent", "coverage_amount", "budget_monthly", "age", "protected_who", "duration_need", "must_have", "current_coverage", "priority_1"];
   const present = required.filter((k) => {
     const v = answers[k];
     return !(v == null || v === "");
@@ -256,9 +277,7 @@ module.exports = async function handler(req, res) {
       const risk = deriveRisk(answers);
       const recommendation = recommendByRules(answers, risk);
       const confidence = confidenceFrom(answers, risk, recommendation);
-      const ragQuery = `Lead intent=${answers.intent || ""}, age=${answers.age || ""}, coverage=${answers.coverage_amount || ""}, budget=${
-        answers.budget_monthly || ""
-      }, tobacco=${answers.tobacco ? "yes" : "no"}, risk=${risk.level}. Recommend ${recommendation.product_type} alternatives and sales talking points.`;
+      const ragQuery = `Lead intent=${answers.intent || ""}, protected=${answers.protected_who || ""}, duration=${answers.duration_need || ""}, must_have=${answers.must_have || ""}, age=${answers.age || ""}, coverage=${answers.coverage_amount || ""}, budget=${answers.budget_monthly || ""}, current_coverage=${answers.current_coverage || ""}, priorities=${answers.priority_1 || ""}/${answers.priority_2 || ""}, tobacco=${answers.tobacco ? "yes" : "no"}, risk=${risk.level}. Recommend ${recommendation.product_type} alternatives and sales talking points.`;
       const emb = await generateEmbedding(openaiKey, ragQuery);
       const ragRows = await rpcMatchInternal(cfg, emb.embedding, 8, 0.25, recommendation.recommended_category);
       const recommendedCarriers = topCarriersForCategory(ragRows, recommendation.recommended_category);
