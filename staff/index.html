@@ -203,7 +203,8 @@
       min-height: min(100%, 720px);
       width: 100%;
     }
-    #compose-body.compose-body {
+    /* Any compose-style tool body (Compose, Lead Profile, Product Selector) */
+    .compose-panel > .compose-body {
       display: flex;
       flex-direction: column;
       min-height: 0;
@@ -237,7 +238,9 @@
       font-weight: 600;
       color: var(--muted);
     }
-    #compose-lead-filter {
+    #compose-lead-filter,
+    #lead-profile-lead-filter,
+    #product-selector-lead-filter {
       width: 100%;
       border-radius: 10px;
       border: 1px solid var(--border);
@@ -750,7 +753,7 @@
       <div class="top-brand-row">
         <div>
           <b>Mejor Vida Insurance — Staff Portal</b>
-          <small>Staff Access Only — Login Required<span id="staff-build-stamp" class="staff-build-stamp" title="If this number is missing after refresh, the page is cached.">· UI 20260425c</span></small>
+          <small>Staff Access Only — Login Required<span id="staff-build-stamp" class="staff-build-stamp" title="If this number is missing after refresh, the page is cached.">· UI 20260425d</span></small>
         </div>
         <button id="signout-btn" class="signout" type="button" data-help="Signs you out of the staff portal on this browser.">Sign Out</button>
       </div>
