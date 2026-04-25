@@ -119,29 +119,38 @@
     }
     .top b { color: var(--accent); }
     .top small { display: block; color: var(--muted); }
-    .top-right {
+    .top-brand-row {
       display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 10px;
-      width: 100%;
       justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      width: 100%;
     }
-    .top .signout {
+    .top-brand-row .signout {
       background: #2d3f67;
       color: #fff;
       border: 1px solid var(--border);
       flex-shrink: 0;
+      align-self: center;
+    }
+    .staff-build-stamp {
+      display: inline-block;
+      margin-left: 8px;
+      font-size: 0.78rem;
+      color: var(--muted);
+      font-weight: 600;
+      letter-spacing: 0.02em;
     }
     .tabs {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
-      padding: 0;
+      padding: 10px 0 0;
+      margin: 0;
+      width: 100%;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
       border-bottom: 0;
       background: transparent;
-      flex: 1 1 auto;
-      min-width: 0;
       align-items: center;
     }
     .tab-btn {
@@ -729,20 +738,20 @@
 
   <main id="portal" class="portal hidden" aria-hidden="true">
     <header class="top">
-      <div>
-        <b>Mejor Vida Insurance — Staff Portal</b>
-        <small>Staff Access Only — Login Required</small>
-      </div>
-      <div class="top-right">
-        <nav class="tabs" aria-label="Staff tools">
-          <button id="tab-inbox" class="tab-btn active" type="button" data-help="Open the customer question inbox: review questions, draft replies, email leads, and add answers to the knowledge base.">📬 Inbox</button>
-          <button id="tab-compose" class="tab-btn" type="button" data-help="Compose a new email to a lead: search manychat_leads, draft with AI, send branded HTML from Julie\x27s mailbox, or save a draft.">✉️ Compose</button>
-          <button id="tab-lead-profile" class="tab-btn" type="button" data-help="Lead profile: review and edit all collected fields for the active lead. Uses the same lead list as Compose (left column once wired).">👤 Lead Profile</button>
-          <button id="tab-product-selector" class="tab-btn" type="button" data-help="Product selector: guided qualification and recommendations for the lead you select. Works with partial lead data; missing fields can be filled in the flow.">📋 Product Selector</button>
-          <button id="tab-chat" class="tab-btn" type="button" data-help="Open the internal staff AI assistant for product and underwriting questions. This is separate from customer WhatsApp or inbox messages.">🤖 Staff Assistant</button>
-        </nav>
+      <div class="top-brand-row">
+        <div>
+          <b>Mejor Vida Insurance — Staff Portal</b>
+          <small>Staff Access Only — Login Required<span id="staff-build-stamp" class="staff-build-stamp" title="If this number is missing after refresh, the page is cached.">· UI 20260425b</span></small>
+        </div>
         <button id="signout-btn" class="signout" type="button" data-help="Signs you out of the staff portal on this browser.">Sign Out</button>
       </div>
+      <nav class="tabs" aria-label="Staff tools">
+        <button id="tab-inbox" class="tab-btn active" type="button" data-help="Open the customer question inbox: review questions, draft replies, email leads, and add answers to the knowledge base.">📬 Inbox</button>
+        <button id="tab-compose" class="tab-btn" type="button" data-help="Compose a new email to a lead: search manychat_leads, draft with AI, send branded HTML from Julie\x27s mailbox, or save a draft.">✉️ Compose</button>
+        <button id="tab-lead-profile" class="tab-btn" type="button" data-help="Lead profile: review and edit all collected fields for the active lead. Uses the same lead list as Compose (left column once wired).">👤 Lead Profile</button>
+        <button id="tab-product-selector" class="tab-btn" type="button" data-help="Product selector: guided qualification and recommendations for the lead you select. Works with partial lead data; missing fields can be filled in the flow.">📋 Product Selector</button>
+        <button id="tab-chat" class="tab-btn" type="button" data-help="Open the internal staff AI assistant for product and underwriting questions. This is separate from customer WhatsApp or inbox messages.">🤖 Staff Assistant</button>
+      </nav>
     </header>
 
     <section id="pane-inbox" class="pane active">
@@ -1054,18 +1063,18 @@
         var chatOn = which === "chat";
         tabInbox.classList.toggle("active", inboxOn);
         tabCompose.classList.toggle("active", composeOn);
-        tabLeadProfile.classList.toggle("active", leadProfileOn);
-        tabProductSelector.classList.toggle("active", productSelectorOn);
+        if (tabLeadProfile) tabLeadProfile.classList.toggle("active", leadProfileOn);
+        if (tabProductSelector) tabProductSelector.classList.toggle("active", productSelectorOn);
         tabChat.classList.toggle("active", chatOn);
         paneInbox.classList.toggle("active", inboxOn);
         paneCompose.classList.toggle("active", composeOn);
-        paneLeadProfile.classList.toggle("active", leadProfileOn);
-        paneProductSelector.classList.toggle("active", productSelectorOn);
+        if (paneLeadProfile) paneLeadProfile.classList.toggle("active", leadProfileOn);
+        if (paneProductSelector) paneProductSelector.classList.toggle("active", productSelectorOn);
         paneChat.classList.toggle("active", chatOn);
         paneInbox.setAttribute("aria-hidden", inboxOn ? "false" : "true");
         paneCompose.setAttribute("aria-hidden", composeOn ? "false" : "true");
-        paneLeadProfile.setAttribute("aria-hidden", leadProfileOn ? "false" : "true");
-        paneProductSelector.setAttribute("aria-hidden", productSelectorOn ? "false" : "true");
+        if (paneLeadProfile) paneLeadProfile.setAttribute("aria-hidden", leadProfileOn ? "false" : "true");
+        if (paneProductSelector) paneProductSelector.setAttribute("aria-hidden", productSelectorOn ? "false" : "true");
         paneChat.setAttribute("aria-hidden", chatOn ? "false" : "true");
         if (composeOn) ensureComposeLeadsLoaded();
       }
@@ -1835,8 +1844,8 @@
       signoutBtn.addEventListener("click", signOutNow);
       tabInbox.addEventListener("click", function () { showTab("inbox"); });
       tabCompose.addEventListener("click", function () { showTab("compose"); });
-      tabLeadProfile.addEventListener("click", function () { showTab("lead-profile"); });
-      tabProductSelector.addEventListener("click", function () { showTab("product-selector"); });
+      if (tabLeadProfile) tabLeadProfile.addEventListener("click", function () { showTab("lead-profile"); });
+      if (tabProductSelector) tabProductSelector.addEventListener("click", function () { showTab("product-selector"); });
       tabChat.addEventListener("click", function () { showTab("chat"); });
       sendBtn.addEventListener("click", sendChat);
       chatInput.addEventListener("keydown", function (e) {
