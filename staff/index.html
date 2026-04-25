@@ -819,7 +819,7 @@
       <div class="top-brand-row">
         <div>
           <b>Mejor Vida Insurance — Staff Portal</b>
-          <small>Staff Access Only — Login Required<span id="staff-build-stamp" class="staff-build-stamp" title="If this number is missing after refresh, the page is cached.">· UI 20260425k</span></small>
+          <small>Staff Access Only — Login Required<span id="staff-build-stamp" class="staff-build-stamp" title="If this number is missing after refresh, the page is cached.">· UI 20260425l</span></small>
         </div>
         <button id="signout-btn" class="signout" type="button" data-help="Signs you out of the staff portal on this browser.">Sign Out</button>
       </div>
@@ -1291,9 +1291,20 @@
 
                   <div class="compose-contact-heading" style="margin-top:16px">Stage 3 — Dynamic follow-ups</div>
                   <div class="meta-grid">
-                    <div class="meta-card">
-                      <label for="ps-followups">Follow-up notes</label>
+                    <div class="meta-card" style="grid-column:1 / -1">
+                      <label class="ps-inline-check"><input id="ps-stage2-complete" type="checkbox" /> Stage 2 completed with client</label>
+                    </div>
+                    <div class="meta-card" style="grid-column:1 / -1">
+                      <label for="ps-followups">Structured follow-up notes</label>
                       <textarea id="ps-followups" rows="3" placeholder="Insulin use, surgeries, medication type, etc."></textarea>
+                    </div>
+                    <div class="meta-card" style="grid-column:1 / -1">
+                      <label>Stage 3 guided chat (Julie + AI)</label>
+                      <div id="ps-chat-log" class="chat-log" style="max-height:220px; border:1px solid var(--border); border-radius:10px; padding:8px; margin-top:6px; background:rgba(10,20,39,.45)"></div>
+                      <div style="display:grid; grid-template-columns:1fr auto; gap:8px; margin-top:8px">
+                        <input id="ps-chat-input" type="text" placeholder="Type what the client said or ask the AI how to guide next…" />
+                        <button id="ps-chat-send-btn" type="button" class="secondary">Send</button>
+                      </div>
                     </div>
                   </div>
 
@@ -2747,8 +2758,12 @@
           rx: document.getElementById("ps-rx"),
           doc2y: document.getElementById("ps-doc2y"),
           hosp5y: document.getElementById("ps-hosp5y"),
+          stage2Complete: document.getElementById("ps-stage2-complete"),
           conditions: document.getElementById("ps-conditions"),
           followups: document.getElementById("ps-followups"),
+          chatLog: document.getElementById("ps-chat-log"),
+          chatInput: document.getElementById("ps-chat-input"),
+          chatSendBtn: document.getElementById("ps-chat-send-btn"),
           status: document.getElementById("ps-status"),
           output: document.getElementById("ps-output"),
           saveBtn: document.getElementById("ps-save-btn"),
@@ -2779,6 +2794,7 @@
           prescription_meds: !!(el.rx && el.rx.checked),
           doctor_visits_2y: !!(el.doc2y && el.doc2y.checked),
           hospitalized_5y: !!(el.hosp5y && el.hosp5y.checked),
+          stage2_complete: !!(el.stage2Complete && el.stage2Complete.checked),
           conditions: String((el.conditions && el.conditions.value) || "")
             .split(",")
             .map(function (s) {
@@ -2812,6 +2828,7 @@
         if (el.rx) el.rx.checked = !!a.prescription_meds;
         if (el.doc2y) el.doc2y.checked = !!a.doctor_visits_2y;
         if (el.hosp5y) el.hosp5y.checked = !!a.hospitalized_5y;
+        if (el.stage2Complete) el.stage2Complete.checked = !!a.stage2_complete;
         if (el.conditions) el.conditions.value = Array.isArray(a.conditions) ? a.conditions.join(", ") : "";
         if (el.followups) el.followups.value = a.followups || "";
         syncProductSelectorIntentDetails();
@@ -2856,6 +2873,31 @@
           return "Stage 1 missing: Final expense target.";
         }
         return "";
+      }
+
+      function validateStage2Answers(answers) {
+        if (!answers.stage2_complete) return "Complete Stage 2 before moving to Stage 3.";
+        return "";
+      }
+
+      function renderProductSelectorChat(transcript) {
+        var el = getProductSelectorEls();
+        if (!el.chatLog) return;
+        var items = Array.isArray(transcript) ? transcript : [];
+        if (!items.length) {
+          el.chatLog.innerHTML = '<div class="q-empty">Stage 3 chat will appear here after Stage 1/2 are complete.</div>';
+          return;
+        }
+        el.chatLog.innerHTML = "";
+        items.forEach(function (m) {
+          var n = document.createElement("div");
+          n.className = "msg " + (m.role === "assistant" ? "assistant" : "user");
+          n.style.maxWidth = "100%";
+          n.style.marginBottom = "6px";
+          n.textContent = String(m.content || "");
+          el.chatLog.appendChild(n);
+        });
+        el.chatLog.scrollTop = el.chatLog.scrollHeight;
       }
 
       function renderProductSelectorOutput(rec, conf, risk, sales) {
@@ -2962,6 +3004,7 @@
           productSelectorSession = s;
           applyProductSelectorAnswersToUi((s && s.qualification_answers) || {});
           renderProductSelectorOutput(s && s.recommendation, s && s.confidence, s && s.risk_summary, s && s.sales_enablement);
+          renderProductSelectorChat(s && s.workflow_state && s.workflow_state.stage3_chat);
           if (el.status) el.status.textContent = s ? "Session loaded." : "No session yet. Fill fields and save.";
         } catch (e) {
           if (el.status) el.status.textContent = (e && e.message) || "Could not load selector session.";
@@ -3017,6 +3060,11 @@
             if (el.status) el.status.textContent = stage1Err;
             return;
           }
+          var stage2Err = validateStage2Answers(answers);
+          if (stage2Err) {
+            if (el.status) el.status.textContent = stage2Err;
+            return;
+          }
           var data = await authedApi(
             "/api/staff/product-selector",
             {
@@ -3029,6 +3077,7 @@
           );
           productSelectorSession = data && data.session ? data.session : productSelectorSession;
           renderProductSelectorOutput(data.recommendation, data.confidence, data.risk_summary, data.sales_enablement);
+          renderProductSelectorChat((data.session && data.session.workflow_state && data.session.workflow_state.stage3_chat) || []);
           if (el.status) el.status.textContent = "Recommendation generated and saved.";
         } catch (e) {
           if (el.status) el.status.textContent = (e && e.message) || "Recommendation failed.";
@@ -3057,6 +3106,77 @@
           el.runBtn.addEventListener("click", function () {
             runProductSelectorRecommendation();
           });
+        }
+        if (el.chatSendBtn && !el.chatSendBtn.getAttribute("data-wired")) {
+          el.chatSendBtn.setAttribute("data-wired", "1");
+          el.chatSendBtn.addEventListener("click", function () {
+            sendProductSelectorChat();
+          });
+        }
+        if (el.chatInput && !el.chatInput.getAttribute("data-wired")) {
+          el.chatInput.setAttribute("data-wired", "1");
+          el.chatInput.addEventListener("keydown", function (e) {
+            if (e.key === "Enter") {
+              e.preventDefault();
+              sendProductSelectorChat();
+            }
+          });
+        }
+      }
+
+      async function sendProductSelectorChat() {
+        var el = getProductSelectorEls();
+        var lead = getSelectedLeadFromList();
+        if (!lead) {
+          if (el.status) el.status.textContent = "Select a lead first.";
+          return;
+        }
+        var answers = productSelectorAnswersFromUi();
+        var stage1Err = validateStage1Answers(answers);
+        if (stage1Err) {
+          if (el.status) el.status.textContent = stage1Err;
+          return;
+        }
+        var stage2Err = validateStage2Answers(answers);
+        if (stage2Err) {
+          if (el.status) el.status.textContent = stage2Err;
+          return;
+        }
+        var msg = String((el.chatInput && el.chatInput.value) || "").trim();
+        if (!msg) return;
+        if (el.chatSendBtn) {
+          el.chatSendBtn.disabled = true;
+          el.chatSendBtn.textContent = "Sending…";
+        }
+        if (el.status) el.status.textContent = "Stage 3 AI is guiding next step…";
+        try {
+          var data = await authedApi(
+            "/api/staff/product-selector",
+            {
+              lead_id: lead.id,
+              lead_source_table: lead.source_table || "unknown",
+              qualification_answers: answers,
+              message: msg,
+            },
+            { method: "PATCH" }
+          );
+          if (el.chatInput) el.chatInput.value = "";
+          productSelectorSession = data && data.session ? data.session : productSelectorSession;
+          renderProductSelectorOutput(
+            data.recommendation,
+            data.confidence,
+            (productSelectorSession && productSelectorSession.risk_summary) || null,
+            data.sales_enablement
+          );
+          renderProductSelectorChat((data.workflow_state && data.workflow_state.stage3_chat) || []);
+          if (el.status) el.status.textContent = "Stage 3 updated. Confidence adjusted.";
+        } catch (e) {
+          if (el.status) el.status.textContent = (e && e.message) || "Stage 3 chat failed.";
+        } finally {
+          if (el.chatSendBtn) {
+            el.chatSendBtn.disabled = false;
+            el.chatSendBtn.textContent = "Send";
+          }
         }
       }
 

@@ -195,6 +195,39 @@ async function synthesize(openaiKey, query, rows) {
   return String(data?.choices?.[0]?.message?.content || "").trim();
 }
 
+async function runStage3ChatTurn(openaiKey, context) {
+  const r = await fetch("https://api.openai.com/v1/chat/completions", {
+    method: "POST",
+    headers: { Authorization: `Bearer ${openaiKey}`, "Content-Type": "application/json" },
+    body: JSON.stringify({
+      model: "gpt-4o-mini",
+      temperature: 0.2,
+      max_tokens: 700,
+      messages: [
+        {
+          role: "system",
+          content:
+            "You are an internal Product Selector coach helping an agent (Julie) talk with a client. Return STRICT JSON with keys: assistant_reply (string), recommended_product (string), confidence_score (number 0-1), confidence_label (string), confidence_reason (string), next_question (string), sales_script (string). Maintain a single recommendation and try to improve confidence when evidence is clearer. Do not include markdown fences.",
+        },
+        {
+          role: "user",
+          content: JSON.stringify(context),
+        },
+      ],
+      response_format: { type: "json_object" },
+    }),
+  });
+  const data = await r.json();
+  if (!r.ok) throw new Error(`stage3 chat failed ${r.status}`);
+  let parsed = {};
+  try {
+    parsed = JSON.parse(String(data?.choices?.[0]?.message?.content || "{}"));
+  } catch (e) {
+    parsed = {};
+  }
+  return parsed;
+}
+
 function categoryForProductType(productType) {
   const t = String(productType || "").toLowerCase();
   if (t === "term_life") return "term_life";
@@ -339,6 +372,91 @@ module.exports = async function handler(req, res) {
     }
   }
 
-  res.setHeader("Allow", "GET, PUT, POST");
+  if (req.method === "PATCH") {
+    let body;
+    try {
+      body = readJsonBody(req);
+    } catch (e) {
+      return json(res, 400, { error: "Invalid JSON" });
+    }
+    const leadId = String(body.lead_id || "").trim();
+    const leadSourceTable = String(body.lead_source_table || "").trim();
+    const userMessage = String(body.message || "").trim();
+    const incomingAnswers =
+      body.qualification_answers && typeof body.qualification_answers === "object" ? body.qualification_answers : null;
+    if (!isUuid(leadId) || !leadSourceTable) return json(res, 400, { error: "lead_id and lead_source_table required" });
+    if (!userMessage) return json(res, 400, { error: "message required" });
+    if (!openaiKey) return json(res, 500, { error: "OPENAI_API_KEY missing" });
+
+    try {
+      const session =
+        (await loadSession(cfg, leadId, leadSourceTable)) || {
+          qualification_answers: {},
+          risk_summary: {},
+          recommendation: {},
+          confidence: {},
+          sales_enablement: {},
+          workflow_state: {},
+        };
+      const mergedAnswers = Object.assign({}, session.qualification_answers || {}, incomingAnswers || {});
+      const workflowState = Object.assign({}, session.workflow_state || {});
+      const transcript = Array.isArray(workflowState.stage3_chat) ? workflowState.stage3_chat.slice() : [];
+      transcript.push({ role: "agent", content: userMessage, ts: new Date().toISOString() });
+
+      const stage3 = await runStage3ChatTurn(openaiKey, {
+        lead_id: leadId,
+        lead_source_table: leadSourceTable,
+        qualification_answers: mergedAnswers,
+        risk_summary: session.risk_summary || {},
+        current_recommendation: session.recommendation || {},
+        current_confidence: session.confidence || {},
+        transcript,
+      });
+
+      const assistantReply = String(stage3.assistant_reply || "").trim() || "Based on what we have, I recommend we confirm a few more underwriting details.";
+      transcript.push({ role: "assistant", content: assistantReply, ts: new Date().toISOString() });
+
+      const nextRecommendation = Object.assign({}, session.recommendation || {});
+      if (stage3.recommended_product) nextRecommendation.product_type = String(stage3.recommended_product).trim();
+      if (stage3.next_question) nextRecommendation.next_question = String(stage3.next_question).trim();
+
+      const nextConfidence = {
+        score: Math.max(0.05, Math.min(0.98, Number(stage3.confidence_score || session.confidence?.score || 0.55))),
+        label: String(stage3.confidence_label || session.confidence?.label || "Medium Confidence"),
+        reason: String(stage3.confidence_reason || session.confidence?.reason || "Based on available Stage 1/2 and Stage 3 evidence."),
+      };
+
+      const nextSales = Object.assign({}, session.sales_enablement || {});
+      if (stage3.sales_script) nextSales.script = String(stage3.sales_script).trim();
+
+      workflowState.stage = "stage3_chat";
+      workflowState.stage3_chat = transcript;
+      workflowState.stage3_last_message_at = new Date().toISOString();
+
+      const saved = await saveSession(cfg, leadId, leadSourceTable, {
+        qualification_answers: mergedAnswers,
+        risk_summary: session.risk_summary || {},
+        recommendation: nextRecommendation,
+        confidence: nextConfidence,
+        sales_enablement: nextSales,
+        workflow_state: workflowState,
+      });
+
+      return json(res, 200, {
+        ok: true,
+        assistant_reply: assistantReply,
+        recommendation: nextRecommendation,
+        confidence: nextConfidence,
+        sales_enablement: nextSales,
+        workflow_state: workflowState,
+        session: saved,
+      });
+    } catch (e) {
+      console.error("product-selector PATCH", e);
+      return json(res, 500, { error: "Stage 3 chat failed" });
+    }
+  }
+
+  res.setHeader("Allow", "GET, PUT, POST, PATCH");
   return json(res, 405, { error: "Method Not Allowed" });
 };
