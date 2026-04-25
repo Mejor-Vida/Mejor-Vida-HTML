@@ -37,6 +37,7 @@ Legacy note: the old `fex_email_quotes` table/webhook flow has been retired and 
 | `marketing_notes` | Marketing copy (separate from “hard facts”) |
 | `knowledge_documents` | Long documents |
 | `knowledge_chunks` | **Chunks + embeddings** for search |
+| `internal_knowledge_chunks` | **Staff-only** carrier/product KB (Product Selector). Populated via `scripts/embed-internal-knowledge.js`. Not queried by public chatbot or WhatsApp RAG. |
 
 ## Internal
 

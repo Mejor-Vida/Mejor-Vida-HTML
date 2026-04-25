@@ -63,10 +63,10 @@
       flex: 1;
       min-width: 12rem;
     }
-    input, textarea, button {
+    input, textarea, select, button {
       font: inherit;
     }
-    input, textarea {
+    input, textarea, select {
       width: 100%;
       border-radius: 10px;
       border: 1px solid var(--border);
@@ -75,7 +75,7 @@
       padding: 10px 12px;
       outline: none;
     }
-    input:focus, textarea:focus {
+    input:focus, textarea:focus, select:focus {
       border-color: #6f8bc9;
       box-shadow: 0 0 0 2px rgba(111,139,201,.2);
     }
@@ -141,6 +141,45 @@
     #pane-inbox { padding: 12px; }
     #pane-compose { padding: 12px; overflow: auto; }
     #pane-chat { padding: 12px; }
+    #pane-selector { padding: 12px; overflow: auto; }
+    .selector-grid {
+      display: grid;
+      grid-template-columns: minmax(280px, 1fr) minmax(320px, 1.25fr);
+      gap: 16px;
+      max-width: 1400px;
+      margin: 0 auto;
+      align-items: start;
+    }
+    @media (max-width: 960px) {
+      .selector-grid { grid-template-columns: 1fr; }
+    }
+    .selector-panel {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--panel);
+      padding: 14px 16px;
+    }
+    .selector-panel h2 { margin: 0 0 10px; font-size: 1.05rem; }
+    .ps-chunk-list { display: flex; flex-direction: column; gap: 12px; max-height: calc(100vh - 220px); overflow: auto; }
+    .ps-chunk {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 12px;
+      background: rgba(8, 16, 32, 0.45);
+      font-size: 0.88rem;
+      line-height: 1.4;
+    }
+    .ps-chunk-meta { color: var(--muted); font-size: 0.82rem; margin-bottom: 6px; }
+    .ps-chunk pre {
+      margin: 0;
+      white-space: pre-wrap;
+      word-break: break-word;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.82rem;
+      color: var(--text);
+    }
+    #ps-synth-wrap { margin-bottom: 12px; }
+    #ps-synth-wrap .msg.assistant { max-width: none; }
     .compose-outer {
       max-width: none;
       margin: 0;
@@ -709,6 +748,7 @@
         <nav class="tabs" aria-label="Staff tools">
           <button id="tab-inbox" class="tab-btn active" type="button" data-help="Open the customer question inbox: review questions, draft replies, email leads, and add answers to the knowledge base.">📬 Inbox</button>
           <button id="tab-compose" class="tab-btn" type="button" data-help="Compose a new email to a lead: search manychat_leads, draft with AI, send branded HTML from Julie\x27s mailbox, or save a draft.">✉️ Compose</button>
+          <button id="tab-selector" class="tab-btn" type="button" data-help="Search the internal carrier knowledge base (Mutual of Omaha first; more carriers as data is added). Uses embeddings only against internal_knowledge_chunks — not the public website chatbot.">📊 Product Selector</button>
           <button id="tab-chat" class="tab-btn" type="button" data-help="Open the internal staff AI assistant for product and underwriting questions. This is separate from customer WhatsApp or inbox messages.">🤖 Staff Assistant</button>
         </nav>
         <button id="signout-btn" class="signout" type="button" data-help="Signs you out of the staff portal on this browser.">Sign Out</button>
@@ -854,6 +894,57 @@
       </div>
     </section>
 
+    <section id="pane-selector" class="pane" aria-hidden="true">
+      <div class="selector-grid">
+        <div class="selector-panel">
+          <h2>Product Selector — internal KB</h2>
+          <p class="small-note" style="margin: 0 0 14px">
+            Search embeddings in <code>internal_knowledge_chunks</code> only. Public <code>knowledge_chunks</code> / website bot are unchanged.
+          </p>
+          <label for="ps-query">Question</label>
+          <textarea id="ps-query" rows="5" placeholder="e.g. Living Promise graded benefit rules in Nebraska…"></textarea>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px">
+            <div>
+              <label for="ps-carrier">Carrier</label>
+              <select id="ps-carrier">
+                <option value="any">Any carrier in KB</option>
+                <option value="mutual_of_omaha" selected>Mutual of Omaha</option>
+                <option value="american_amicable">American Amicable (when populated)</option>
+                <option value="assurity">Assurity (when populated)</option>
+              </select>
+            </div>
+            <div>
+              <label for="ps-category">Category</label>
+              <select id="ps-category">
+                <option value="any" selected>Any category</option>
+                <option value="life_insurance">life_insurance</option>
+                <option value="underwriting">underwriting</option>
+                <option value="ltc">ltc</option>
+                <option value="critical_illness">critical_illness</option>
+                <option value="annuities">annuities</option>
+                <option value="riders">riders</option>
+                <option value="rates">rates</option>
+                <option value="general">general</option>
+              </select>
+            </div>
+          </div>
+          <div style="margin-top: 10px">
+            <button id="ps-search" type="button" class="secondary" data-help="Runs embedding search against internal_knowledge_chunks and optionally synthesizes a short staff answer from the top excerpts.">Search internal KB</button>
+          </div>
+          <div id="ps-err" class="err" style="margin-top: 10px"></div>
+        </div>
+        <div class="selector-panel">
+          <h2>Results</h2>
+          <div id="ps-synth-wrap" class="hidden">
+            <div class="small-note" style="margin: 0 0 6px">Synthesized (from excerpts only)</div>
+            <div id="ps-synth" class="msg assistant"></div>
+          </div>
+          <div id="ps-meta" class="small-note" style="margin: 0 0 8px"></div>
+          <div id="ps-chunks" class="ps-chunk-list"></div>
+        </div>
+      </div>
+    </section>
+
     <section id="pane-chat" class="pane">
       <div class="chat-wrap">
         <div class="chat-head">
@@ -940,9 +1031,11 @@
       var signoutBtn = document.getElementById("signout-btn");
       var tabInbox = document.getElementById("tab-inbox");
       var tabCompose = document.getElementById("tab-compose");
+      var tabSelector = document.getElementById("tab-selector");
       var tabChat = document.getElementById("tab-chat");
       var paneInbox = document.getElementById("pane-inbox");
       var paneCompose = document.getElementById("pane-compose");
+      var paneSelector = document.getElementById("pane-selector");
       var paneChat = document.getElementById("pane-chat");
       var inboxCount = document.getElementById("inbox-count");
       var inboxItems = document.getElementById("inbox-items");
@@ -977,15 +1070,19 @@
       function showTab(which) {
         var inboxOn = which === "inbox";
         var composeOn = which === "compose";
+        var selectorOn = which === "selector";
         var chatOn = which === "chat";
         tabInbox.classList.toggle("active", inboxOn);
         tabCompose.classList.toggle("active", composeOn);
+        tabSelector.classList.toggle("active", selectorOn);
         tabChat.classList.toggle("active", chatOn);
         paneInbox.classList.toggle("active", inboxOn);
         paneCompose.classList.toggle("active", composeOn);
+        paneSelector.classList.toggle("active", selectorOn);
         paneChat.classList.toggle("active", chatOn);
         paneInbox.setAttribute("aria-hidden", inboxOn ? "false" : "true");
         paneCompose.setAttribute("aria-hidden", composeOn ? "false" : "true");
+        paneSelector.setAttribute("aria-hidden", selectorOn ? "false" : "true");
         paneChat.setAttribute("aria-hidden", chatOn ? "false" : "true");
         if (composeOn) ensureComposeLeadsLoaded();
       }
@@ -1755,7 +1852,82 @@
       signoutBtn.addEventListener("click", signOutNow);
       tabInbox.addEventListener("click", function () { showTab("inbox"); });
       tabCompose.addEventListener("click", function () { showTab("compose"); });
+      tabSelector.addEventListener("click", function () { showTab("selector"); });
       tabChat.addEventListener("click", function () { showTab("chat"); });
+
+      var psSearch = document.getElementById("ps-search");
+      var psQuery = document.getElementById("ps-query");
+      var psCarrier = document.getElementById("ps-carrier");
+      var psCategory = document.getElementById("ps-category");
+      var psErr = document.getElementById("ps-err");
+      var psSynthWrap = document.getElementById("ps-synth-wrap");
+      var psSynth = document.getElementById("ps-synth");
+      var psMeta = document.getElementById("ps-meta");
+      var psChunks = document.getElementById("ps-chunks");
+
+      async function runProductSelectorSearch() {
+        psErr.textContent = "";
+        psMeta.textContent = "";
+        psChunks.innerHTML = "";
+        psSynth.textContent = "";
+        psSynthWrap.classList.add("hidden");
+        var q = String(psQuery.value || "").trim();
+        if (!q) {
+          psErr.textContent = "Enter a question.";
+          return;
+        }
+        psSearch.disabled = true;
+        try {
+          var data = await authedApi("/api/staff/internal-rag", {
+            query: q,
+            carrier: psCarrier.value,
+            category: psCategory.value,
+            synthesize: true,
+          });
+          var chunks = (data && data.chunks) || [];
+          psMeta.textContent =
+            chunks.length +
+            " excerpt(s) · min_similarity=" +
+            String(data.min_similarity) +
+            " · match_count=" +
+            String(data.match_count);
+          if (data.synthesis) {
+            psSynth.textContent = data.synthesis;
+            psSynthWrap.classList.remove("hidden");
+          }
+          if (!chunks.length) {
+            psChunks.innerHTML =
+              '<div class="small-note">No chunks above the similarity threshold. Try a broader question, set carrier to Any, or lower threshold later in the API.</div>';
+            return;
+          }
+          psChunks.innerHTML = chunks
+            .map(function (c, i) {
+              return (
+                '<div class="ps-chunk">' +
+                '<div class="ps-chunk-meta">#' +
+                (i + 1) +
+                " · sim " +
+                (c.similarity != null ? Number(c.similarity).toFixed(3) : "?") +
+                " · " +
+                escHtml(c.carrier || "") +
+                " · " +
+                escHtml(c.category || "") +
+                " · " +
+                escHtml(c.product || "") +
+                "</div><pre>" +
+                escHtml(String(c.content || "").slice(0, 10000)) +
+                "</pre></div>"
+              );
+            })
+            .join("");
+        } catch (e) {
+          psErr.textContent = (e && e.message) || String(e);
+        } finally {
+          psSearch.disabled = false;
+        }
+      }
+
+      psSearch.addEventListener("click", runProductSelectorSearch);
       sendBtn.addEventListener("click", sendChat);
       chatInput.addEventListener("keydown", function (e) {
         if (e.key === "Enter" && !e.shiftKey) {
@@ -2270,6 +2442,7 @@
       wireComposeSaveContactModal();
       renderComposeLeadsList();
       wireDelayedHelpOn(document.getElementById("compose-body"));
+      wireDelayedHelpOn(document.getElementById("pane-selector"));
 
       wireStaticPortalHelpOnce();
 
