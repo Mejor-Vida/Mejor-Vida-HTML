@@ -116,6 +116,86 @@ async function selectManychatLeadDetailById(cfg, id) {
   }
 }
 
+function toBoolOrNullFromText(v) {
+  const t = String(v == null ? "" : v).trim().toLowerCase();
+  if (!t) return null;
+  if (["true", "yes", "y", "1", "smoker", "tobacco", "si", "sí"].includes(t)) return true;
+  if (["false", "no", "n", "0", "non-smoker", "nonsmoker"].includes(t)) return false;
+  return null;
+}
+
+async function selectContactsLeadDetailById(cfg, id) {
+  const rows = await restSelect(
+    cfg,
+    "contacts",
+    `select=id,first_name,last_name,email,phone,language,idioma,source,whatsapp_id,manychat_subscriber_id,created_at,updated_at&limit=1&id=eq.${encodeURIComponent(id)}`
+  );
+  const row = Array.isArray(rows) && rows[0] ? rows[0] : null;
+  if (!row) return null;
+  const lang = String(row.idioma || row.language || "english").trim();
+  return {
+    read_only: false,
+    source_table: "contacts",
+    id: row.id,
+    first_name: row.first_name || "",
+    last_name: row.last_name || "",
+    display_name: displayName(row),
+    phone: row.phone || "",
+    email: String(row.email || "").trim(),
+    language: lang || "english",
+    source: row.source || "contacts",
+    age: null,
+    sex: null,
+    tobacco: null,
+    tag: null,
+    pipeline_stage: null,
+    drop_off: false,
+    drop_off_stage: null,
+    opt_in: false,
+    opt_in_at: null,
+    manychat_subscriber_id: row.manychat_subscriber_id || row.whatsapp_id || null,
+    created_at: row.created_at || null,
+    updated_at: row.updated_at || null,
+    staff_hidden_at: null,
+  };
+}
+
+async function selectQuoteLeadDetailById(cfg, id) {
+  const rows = await restSelect(
+    cfg,
+    "quote_lead_submissions",
+    `select=id,first_name,last_name,email,phone,age,gender,tobacco,lang,source,created_at,quote_status&limit=1&id=eq.${encodeURIComponent(id)}`
+  );
+  const row = Array.isArray(rows) && rows[0] ? rows[0] : null;
+  if (!row) return null;
+  const nAge = row.age == null ? null : parseInt(String(row.age), 10);
+  return {
+    read_only: false,
+    source_table: "quote_lead_submissions",
+    id: row.id,
+    first_name: row.first_name || "",
+    last_name: row.last_name || "",
+    display_name: displayName(row),
+    phone: row.phone || "",
+    email: String(row.email || "").trim(),
+    language: row.lang || "English",
+    source: row.source || "website_quote_tool",
+    age: Number.isFinite(nAge) ? nAge : null,
+    sex: row.gender || null,
+    tobacco: toBoolOrNullFromText(row.tobacco),
+    tag: null,
+    pipeline_stage: row.quote_status || null,
+    drop_off: false,
+    drop_off_stage: null,
+    opt_in: false,
+    opt_in_at: null,
+    manychat_subscriber_id: null,
+    created_at: row.created_at || null,
+    updated_at: row.created_at || null,
+    staff_hidden_at: null,
+  };
+}
+
 async function upsertStaffHiddenLead(cfg, lead) {
   const payload = [
     {
@@ -230,27 +310,38 @@ module.exports = async function handler(req, res) {
       try {
         const unified = await selectUnifiedLeadById(cfg, detailId);
         if (!unified) return json(res, 404, { error: "Lead not found" });
-        if (String(unified.source_table || "") !== "manychat_leads") {
-          return json(res, 200, {
-            detail: {
-              read_only: true,
-              source_table: unified.source_table,
-              id: unified.id,
-              first_name: unified.first_name || "",
-              last_name: unified.last_name || "",
-              display_name: unified.display_name || displayName(unified),
-              phone: unified.phone || "",
-              email: String(unified.email || "").trim(),
-              language: unified.language || "English",
-              source: unified.source || unified.source_table || "unknown",
-              created_at: unified.created_at || null,
-              updated_at: unified.updated_at || null,
-            },
-          });
+        const src = String(unified.source_table || "");
+        if (src === "manychat_leads") {
+          const row = await selectManychatLeadDetailById(cfg, detailId);
+          if (!row) return json(res, 404, { error: "Lead not found" });
+          return json(res, 200, { detail: Object.assign({ read_only: false }, row) });
         }
-        const row = await selectManychatLeadDetailById(cfg, detailId);
-        if (!row) return json(res, 404, { error: "Lead not found" });
-        return json(res, 200, { detail: Object.assign({ read_only: false }, row) });
+        if (src === "contacts") {
+          const detail = await selectContactsLeadDetailById(cfg, detailId);
+          if (!detail) return json(res, 404, { error: "Lead not found" });
+          return json(res, 200, { detail });
+        }
+        if (src === "quote_lead_submissions") {
+          const detail = await selectQuoteLeadDetailById(cfg, detailId);
+          if (!detail) return json(res, 404, { error: "Lead not found" });
+          return json(res, 200, { detail });
+        }
+        return json(res, 200, {
+          detail: {
+            read_only: true,
+            source_table: unified.source_table,
+            id: unified.id,
+            first_name: unified.first_name || "",
+            last_name: unified.last_name || "",
+            display_name: unified.display_name || displayName(unified),
+            phone: unified.phone || "",
+            email: String(unified.email || "").trim(),
+            language: unified.language || "English",
+            source: unified.source || unified.source_table || "unknown",
+            created_at: unified.created_at || null,
+            updated_at: unified.updated_at || null,
+          },
+        });
       } catch (e) {
         console.error("staff/leads GET id", e);
         return json(res, 500, { error: "Failed to load lead" });
@@ -438,37 +529,128 @@ module.exports = async function handler(req, res) {
     try {
       const unified = await selectUnifiedLeadById(cfg, id);
       if (!unified) return json(res, 404, { error: "Lead not found" });
-      if (String(unified.source_table || "") !== "manychat_leads") {
-        return json(res, 400, {
-          error: "This lead is read-only in compose. Only manychat_leads rows can be edited here.",
+      const src = String(unified.source_table || "");
+
+      if (src === "manychat_leads") {
+        const patched = await restPatch(cfg, "manychat_leads", `id=eq.${encodeURIComponent(id)}`, payload);
+        if (!Array.isArray(patched) || patched.length === 0) {
+          return json(res, 404, { error: "Lead not found" });
+        }
+        const row = patched[0];
+        const one = {
+          id: row.id,
+          first_name: row.first_name || "",
+          last_name: row.last_name || "",
+          display_name: displayName(row),
+          phone: row.phone || "",
+          email: String(row.email || "").trim(),
+          language: row.language || "English",
+          source: row.source || "manychat_whatsapp",
+          source_table: "manychat_leads",
+        };
+        await enrichLeadEmailsFromContacts(cfg, [one]);
+        let detail = null;
+        try {
+          detail = await selectManychatLeadDetailById(cfg, id);
+        } catch (e2) {
+          detail = null;
+        }
+        return json(res, 200, {
+          item: one,
+          detail: detail ? Object.assign({ read_only: false }, detail) : undefined,
         });
       }
-      const patched = await restPatch(cfg, "manychat_leads", `id=eq.${encodeURIComponent(id)}`, payload);
-      if (!Array.isArray(patched) || patched.length === 0) {
-        return json(res, 404, { error: "Lead not found" });
+
+      if (src === "contacts") {
+        const langRaw = String(body.language || unified.language || "english").trim().toLowerCase();
+        const lang = langRaw.startsWith("es") ? "spanish" : "english";
+        const contactsPayload = {
+          updated_at: now,
+          first_name: String(body.first_name || "").trim().slice(0, 200) || null,
+          last_name: String(body.last_name || "").trim().slice(0, 200) || null,
+          email: hasEmailKey ? emailIn || null : String(unified.email || "").trim() || null,
+          phone: String(body.phone || unified.phone || "").trim().slice(0, 60) || null,
+          language: lang,
+          idioma: lang,
+          source: String(body.source || unified.source || "contacts").trim().slice(0, 120) || "contacts",
+        };
+        if (Object.prototype.hasOwnProperty.call(body, "manychat_subscriber_id")) {
+          contactsPayload.manychat_subscriber_id = payload.manychat_subscriber_id || null;
+        }
+        const patched = await restPatch(cfg, "contacts", `id=eq.${encodeURIComponent(id)}`, contactsPayload);
+        if (!Array.isArray(patched) || patched.length === 0) return json(res, 404, { error: "Lead not found" });
+        const row = patched[0];
+        const one = {
+          id: row.id,
+          first_name: row.first_name || "",
+          last_name: row.last_name || "",
+          display_name: displayName(row),
+          phone: row.phone || "",
+          email: String(row.email || "").trim(),
+          language: row.idioma || row.language || "english",
+          source: row.source || "contacts",
+          source_table: "contacts",
+        };
+        return json(res, 200, { item: one, detail: await selectContactsLeadDetailById(cfg, id) });
       }
-      const row = patched[0];
-      const one = {
-        id: row.id,
-        first_name: row.first_name || "",
-        last_name: row.last_name || "",
-        display_name: displayName(row),
-        phone: row.phone || "",
-        email: String(row.email || "").trim(),
-        language: row.language || "English",
-        source: row.source || "manychat_whatsapp",
-        source_table: "manychat_leads",
-      };
-      await enrichLeadEmailsFromContacts(cfg, [one]);
-      let detail = null;
-      try {
-        detail = await selectManychatLeadDetailById(cfg, id);
-      } catch (e2) {
-        detail = null;
+
+      if (src === "quote_lead_submissions") {
+        const quotePayload = {};
+        if (Object.prototype.hasOwnProperty.call(body, "first_name")) {
+          quotePayload.first_name = payload.first_name || null;
+        }
+        if (Object.prototype.hasOwnProperty.call(body, "last_name")) {
+          quotePayload.last_name = payload.last_name || null;
+        }
+        if (Object.prototype.hasOwnProperty.call(body, "email")) {
+          quotePayload.email = payload.email || null;
+        }
+        if (Object.prototype.hasOwnProperty.call(body, "phone")) {
+          quotePayload.phone = payload.phone || null;
+        }
+        if (Object.prototype.hasOwnProperty.call(body, "language")) {
+          quotePayload.lang = payload.language || "English";
+        }
+        if (Object.prototype.hasOwnProperty.call(body, "age")) {
+          quotePayload.age = payload.age == null ? null : payload.age;
+        }
+        if (Object.prototype.hasOwnProperty.call(body, "sex")) {
+          quotePayload.gender = payload.sex || null;
+        }
+        if (Object.prototype.hasOwnProperty.call(body, "tobacco")) {
+          if (payload.tobacco == null) quotePayload.tobacco = null;
+          else quotePayload.tobacco = payload.tobacco ? "yes" : "no";
+        }
+        if (Object.prototype.hasOwnProperty.call(body, "source")) {
+          quotePayload.source = payload.source || null;
+        }
+        if (Object.prototype.hasOwnProperty.call(body, "pipeline_stage")) {
+          quotePayload.quote_status = payload.pipeline_stage || null;
+        }
+        const patched = await restPatch(
+          cfg,
+          "quote_lead_submissions",
+          `id=eq.${encodeURIComponent(id)}`,
+          quotePayload
+        );
+        if (!Array.isArray(patched) || patched.length === 0) return json(res, 404, { error: "Lead not found" });
+        const row = patched[0];
+        const one = {
+          id: row.id,
+          first_name: row.first_name || "",
+          last_name: row.last_name || "",
+          display_name: displayName(row),
+          phone: row.phone || "",
+          email: String(row.email || "").trim(),
+          language: row.lang || "English",
+          source: row.source || "website_quote_tool",
+          source_table: "quote_lead_submissions",
+        };
+        return json(res, 200, { item: one, detail: await selectQuoteLeadDetailById(cfg, id) });
       }
-      return json(res, 200, {
-        item: one,
-        detail: detail ? Object.assign({ read_only: false }, detail) : undefined,
+
+      return json(res, 400, {
+        error: `This lead source is read-only (${src || "unknown"}).`,
       });
     } catch (e) {
       console.error("staff/leads PATCH", e);
