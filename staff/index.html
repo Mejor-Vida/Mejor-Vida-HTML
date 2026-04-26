@@ -1259,7 +1259,11 @@
                     </div>
                     <div class="meta-card">
                       <label for="lp-sex">Sex</label>
-                      <input id="lp-sex" type="text" placeholder="As captured" autocomplete="off" />
+                      <select id="lp-sex">
+                        <option value="">Select...</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                      </select>
                     </div>
                     <div class="meta-card">
                       <label for="lp-tobacco">Tobacco</label>
@@ -1314,16 +1318,18 @@
                       <label for="lp-desired-coverage">Desired Coverage Amount ($)</label>
                       <select id="lp-desired-coverage">
                         <option value="">Select amount...</option>
+                        <option value="1000">1,000</option>
                         <option value="25000">25,000</option>
                         <option value="50000">50,000</option>
-                        <option value="75000">75,000</option>
                         <option value="100000">100,000</option>
-                        <option value="150000">150,000</option>
                         <option value="250000">250,000</option>
                         <option value="500000">500,000</option>
-                        <option value="750000">750,000</option>
                         <option value="1000000">1,000,000</option>
+                        <option value="1500000">1,500,000</option>
+                        <option value="2000000">2,000,000</option>
+                        <option value="custom">Custom</option>
                       </select>
+                      <input id="lp-desired-coverage-custom" type="number" inputmode="numeric" min="1000" max="2000000" step="1000" placeholder="Enter custom amount" style="display:none; margin-top:6px" />
                     </div>
                     <div class="meta-card">
                       <label for="lp-monthly-budget">Monthly Budget ($)</label>
@@ -1369,10 +1375,6 @@
                       <label for="lp-policy-owner">Policy Owner (optional)</label>
                       <input id="lp-policy-owner" type="text" autocomplete="off" />
                     </div>
-                    <div class="meta-card" style="grid-column: 1 / -1">
-                      <label>Selector sync</label>
-                      <button id="lp-sync-coverage-btn" type="button" class="secondary">Fill Coverage &amp; Intent from Product Selector</button>
-                    </div>
                   </div>
                   </section>
                   <section class="lp-section">
@@ -1380,25 +1382,25 @@
                   <div class="meta-grid">
                     <div class="meta-card">
                       <label for="lp-tag">Tag</label>
-                      <input id="lp-tag" type="text" autocomplete="off" />
+                      <input id="lp-tag" type="text" autocomplete="off" readonly class="lp-ro" tabindex="-1" />
                     </div>
                     <div class="meta-card">
                       <label for="lp-pipeline-stage">Pipeline stage</label>
-                      <input id="lp-pipeline-stage" type="text" autocomplete="off" />
+                      <input id="lp-pipeline-stage" type="text" autocomplete="off" readonly class="lp-ro" tabindex="-1" />
                     </div>
                     <div class="meta-card">
                       <label for="lp-source">Source</label>
-                      <input id="lp-source" type="text" autocomplete="off" />
+                      <input id="lp-source" type="text" autocomplete="off" readonly class="lp-ro" tabindex="-1" />
                     </div>
-                    <div class="meta-card" style="grid-column: 1 / -1">
+                    <div class="meta-card">
                       <label style="display: flex; align-items: center; gap: 10px; cursor: pointer">
-                        <input id="lp-drop-off" type="checkbox" />
+                        <input id="lp-drop-off" type="checkbox" disabled />
                         Drop-off
                       </label>
                     </div>
-                    <div class="meta-card" style="grid-column: 1 / -1">
+                    <div class="meta-card">
                       <label for="lp-drop-off-stage">Drop-off stage</label>
-                      <input id="lp-drop-off-stage" type="text" autocomplete="off" />
+                      <input id="lp-drop-off-stage" type="text" autocomplete="off" readonly class="lp-ro" tabindex="-1" />
                     </div>
                     <div class="meta-card" style="grid-column: 1 / -1">
                       <label for="lp-notes">Notes</label>
@@ -1409,13 +1411,13 @@
                   <section class="lp-section">
                   <div class="lp-section-bar">6. Internal / System</div>
                   <div class="meta-grid">
-                    <div class="meta-card" style="grid-column: 1 / -1">
+                    <div class="meta-card">
                       <label for="lp-subscriber-id">ManyChat subscriber ID</label>
-                      <input id="lp-subscriber-id" type="text" autocomplete="off" />
+                      <input id="lp-subscriber-id" type="text" autocomplete="off" readonly class="lp-ro" tabindex="-1" />
                     </div>
-                    <div class="meta-card" style="grid-column: 1 / -1">
+                    <div class="meta-card">
                       <label style="display: flex; align-items: center; gap: 10px; cursor: pointer">
-                        <input id="lp-opt-in" type="checkbox" />
+                        <input id="lp-opt-in" type="checkbox" disabled />
                         Opt-in (contact consent)
                       </label>
                     </div>
@@ -1440,7 +1442,7 @@
                       <label for="lp-risk-level">Risk Level (auto)</label>
                       <input id="lp-risk-level" type="text" readonly class="lp-ro" tabindex="-1" />
                     </div>
-                    <div class="meta-card" style="grid-column: 1 / -1">
+                    <div class="meta-card">
                       <label for="lp-risk-flags">Risk Flags (auto)</label>
                       <input id="lp-risk-flags" type="text" readonly class="lp-ro" tabindex="-1" />
                     </div>
@@ -1465,7 +1467,7 @@
                       <label for="lp-updated-at">Updated</label>
                       <input id="lp-updated-at" type="text" readonly class="lp-ro" tabindex="-1" />
                     </div>
-                    <div class="meta-card" style="grid-column: 1 / -1">
+                    <div class="meta-card">
                       <label for="lp-staff-hidden">Staff hidden at (read-only)</label>
                       <input id="lp-staff-hidden" type="text" readonly class="lp-ro" tabindex="-1" />
                     </div>
@@ -1671,6 +1673,7 @@
                   <div class="actions" style="margin-top:14px">
                     <button id="ps-save-btn" type="button" class="secondary">Save Session</button>
                     <button id="ps-run-btn" type="button">Refresh Recommendation</button>
+                    <button id="ps-sync-to-profile-btn" type="button" class="secondary">Push Coverage &amp; Intent to Lead Profile</button>
                   </div>
                   <div id="ps-status" class="small-note"></div>
                 </form>
@@ -2969,6 +2972,14 @@
         if (es) es.classList.toggle("active", lang === "Spanish");
       }
 
+      function syncLeadProfileDesiredCoverageCustom() {
+        var sel = document.getElementById("lp-desired-coverage");
+        var custom = document.getElementById("lp-desired-coverage-custom");
+        if (!sel || !custom) return;
+        var isCustom = String(sel.value || "") === "custom";
+        custom.style.display = isCustom ? "" : "none";
+      }
+
       function applyLeadProfileDetailToForm(d) {
         function setv(id, v) {
           var el = document.getElementById(id);
@@ -3002,6 +3013,19 @@
         setv("lp-subscriber-id", d.manychat_subscriber_id);
         setv("lp-coverage-goal", d.profile_ext && d.profile_ext.coverage_goal);
         setv("lp-desired-coverage", d.profile_ext && d.profile_ext.desired_coverage_amount);
+        var covSel = document.getElementById("lp-desired-coverage");
+        var covCustom = document.getElementById("lp-desired-coverage-custom");
+        if (covSel && covCustom) {
+          var cv = String((d.profile_ext && d.profile_ext.desired_coverage_amount) || "").trim();
+          var known = ["1000", "25000", "50000", "100000", "250000", "500000", "1000000", "1500000", "2000000"];
+          if (cv && known.indexOf(cv) === -1) {
+            covSel.value = "custom";
+            covCustom.value = cv;
+          } else {
+            covCustom.value = "";
+          }
+          syncLeadProfileDesiredCoverageCustom();
+        }
         setv("lp-monthly-budget", d.profile_ext && d.profile_ext.monthly_budget);
         setv("lp-priority", d.profile_ext && d.profile_ext.priority);
         setv("lp-product-type", d.profile_ext && d.profile_ext.product_type);
@@ -3067,7 +3091,13 @@
           opt_in: !!document.getElementById("lp-opt-in").checked,
           manychat_subscriber_id: String(document.getElementById("lp-subscriber-id").value || "").trim(),
           coverage_goal: String((document.getElementById("lp-coverage-goal") && document.getElementById("lp-coverage-goal").value) || "").trim(),
-          desired_coverage_amount: String((document.getElementById("lp-desired-coverage") && document.getElementById("lp-desired-coverage").value) || "").trim(),
+          desired_coverage_amount: (function () {
+            var sel = document.getElementById("lp-desired-coverage");
+            var custom = document.getElementById("lp-desired-coverage-custom");
+            var sv = String((sel && sel.value) || "").trim();
+            if (sv === "custom") return String((custom && custom.value) || "").trim();
+            return sv;
+          })(),
           monthly_budget: String((document.getElementById("lp-monthly-budget") && document.getElementById("lp-monthly-budget").value) || "").trim(),
           priority: String((document.getElementById("lp-priority") && document.getElementById("lp-priority").value) || "").trim(),
           product_type: String((document.getElementById("lp-product-type") && document.getElementById("lp-product-type").value) || "").trim(),
@@ -3173,9 +3203,9 @@
         return "";
       }
 
-      async function syncCoverageIntentFromSelector() {
+      async function syncCoverageIntentFromSelector(targetStatusElId) {
         var lead = getSelectedLeadFromList();
-        var status = document.getElementById("lead-profile-status");
+        var status = document.getElementById(targetStatusElId || "lead-profile-status");
         if (!lead) {
           if (status) status.textContent = "Select a lead first.";
           return;
@@ -3462,9 +3492,13 @@
             scheduleLeadProfileDirtyCheck();
           });
         }
-        var syncBtn = document.getElementById("lp-sync-coverage-btn");
-        if (syncBtn) syncBtn.addEventListener("click", function () { void syncCoverageIntentFromSelector(); });
+        var desiredCoverageSel = document.getElementById("lp-desired-coverage");
+        if (desiredCoverageSel) desiredCoverageSel.addEventListener("change", function () {
+          syncLeadProfileDesiredCoverageCustom();
+          scheduleLeadProfileDirtyCheck();
+        });
         setLeadProfileLanguageToggle("English");
+        syncLeadProfileDesiredCoverageCustom();
         syncLeadProfilePhiExpand();
         saveBtn.addEventListener("click", onLeadProfileSaveClick);
       }
@@ -3499,6 +3533,7 @@
           chatSendBtn: document.getElementById("ps-chat-send-btn"),
           status: document.getElementById("ps-status"),
           output: document.getElementById("ps-output"),
+          syncToProfileBtn: document.getElementById("ps-sync-to-profile-btn"),
           saveBtn: document.getElementById("ps-save-btn"),
           runBtn: document.getElementById("ps-run-btn"),
           legacyFields: document.querySelector("#product-selector-form .ps-legacy-fields"),
@@ -3859,6 +3894,12 @@
           el.runBtn.setAttribute("data-wired", "1");
           el.runBtn.addEventListener("click", function () {
             runProductSelectorRecommendation();
+          });
+        }
+        if (el.syncToProfileBtn && !el.syncToProfileBtn.getAttribute("data-wired")) {
+          el.syncToProfileBtn.setAttribute("data-wired", "1");
+          el.syncToProfileBtn.addEventListener("click", function () {
+            syncCoverageIntentFromSelector("ps-status");
           });
         }
         if (el.chatSendBtn && !el.chatSendBtn.getAttribute("data-wired")) {
