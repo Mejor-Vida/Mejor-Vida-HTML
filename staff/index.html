@@ -1065,7 +1065,7 @@
                 <div id="lead-profile-readonly-block" class="hidden"></div>
                 <div id="lead-profile-empty" class="q-empty">Select a lead from the list on the left.</div>
                 <form id="lead-profile-form" class="compose-form hidden" autocomplete="off" onsubmit="return false;" aria-label="Lead profile">
-                  <div class="compose-contact-heading">Qualification-critical (top priority)</div>
+                  <div class="compose-contact-heading">Core Identity</div>
                   <div class="meta-grid">
                     <div class="meta-card" style="grid-column: 1 / -1">
                       <label for="lp-id">Lead ID (read-only)</label>
@@ -1091,12 +1091,24 @@
                       <label for="lp-language">Language</label>
                       <input id="lp-language" type="text" placeholder="e.g. English" autocomplete="off" />
                     </div>
+                    <div class="meta-card">
+                      <label for="lp-state">State</label>
+                      <input id="lp-state" type="text" placeholder="e.g. NE" autocomplete="off" />
+                    </div>
+                    <div class="meta-card">
+                      <label for="lp-city">City (optional)</label>
+                      <input id="lp-city" type="text" autocomplete="off" />
+                    </div>
                   </div>
-                  <div class="compose-contact-heading" style="margin-top: 16px">Medical &amp; underwriting (PHI, secure staff-only)</div>
+                  <div class="compose-contact-heading" style="margin-top: 16px">Qualification Essentials</div>
                   <div class="meta-grid">
                     <div class="meta-card">
                       <label for="lp-age">Age</label>
                       <input id="lp-age" type="number" inputmode="numeric" min="0" max="130" placeholder="—" />
+                    </div>
+                    <div class="meta-card">
+                      <label for="lp-dob">Date of Birth (optional)</label>
+                      <input id="lp-dob" type="date" />
                     </div>
                     <div class="meta-card">
                       <label for="lp-sex">Sex</label>
@@ -1108,19 +1120,59 @@
                         <option value="">Unknown</option>
                         <option value="true">Yes</option>
                         <option value="false">No</option>
+                        <option value="former">Former</option>
                       </select>
                     </div>
+                  </div>
+                  <div class="compose-contact-heading" style="margin-top: 16px">Health / Underwriting (PHI — secure)</div>
+                  <div class="meta-grid">
                     <div id="lp-phi-block" class="meta-card" style="grid-column: 1 / -1">
                       <div class="small-note" id="lp-phi-note" style="margin-bottom:8px">PHI fields load only for authorized staff and are stored in a separate encrypted table.</div>
+                      <label style="display:flex; align-items:center; gap:10px; cursor:pointer"><input id="lp-phi-major" type="checkbox" /> Has major conditions?</label>
+                      <label style="display:flex; align-items:center; gap:10px; cursor:pointer"><input id="lp-phi-rx-flag" type="checkbox" /> Takes prescription medications?</label>
+                      <label style="display:flex; align-items:center; gap:10px; cursor:pointer"><input id="lp-phi-hosp-flag" type="checkbox" /> Recent hospitalizations (2-5 years)?</label>
+                      <label for="lp-phi-condition-catalog" style="margin-top:10px">Condition checklist</label>
+                      <input id="lp-phi-condition-catalog" type="text" placeholder="diabetes, heart_disease, cancer_history, stroke, copd, kidney_disease, dementia" autocomplete="off" />
                       <label for="lp-phi-rx">Prescription medications</label>
                       <input id="lp-phi-rx" type="text" placeholder="e.g. metformin, lisinopril" autocomplete="off" />
                       <label for="lp-phi-conditions" style="margin-top:10px">Conditions (comma-separated)</label>
                       <input id="lp-phi-conditions" type="text" placeholder="e.g. hypertension, diabetes" autocomplete="off" />
+                      <label for="lp-phi-hosp-when" style="margin-top:10px">Last hospitalization (approximate date)</label>
+                      <input id="lp-phi-hosp-when" type="text" placeholder="e.g. 2023-11" autocomplete="off" />
+                      <label for="lp-phi-hosp-reason" style="margin-top:10px">Hospitalization reason (short)</label>
+                      <input id="lp-phi-hosp-reason" type="text" autocomplete="off" />
                       <label for="lp-phi-followups" style="margin-top:10px">Underwriting notes</label>
                       <textarea id="lp-phi-followups" rows="3" placeholder="Hospitalizations, surgeries, specialty notes"></textarea>
                     </div>
                   </div>
-                  <div class="compose-contact-heading" style="margin-top: 16px">Internal/system fields</div>
+                  <div class="compose-contact-heading" style="margin-top: 16px">Coverage &amp; Intent</div>
+                  <div class="meta-grid">
+                    <div class="meta-card">
+                      <label for="lp-coverage-goal">Coverage Goal</label>
+                      <input id="lp-coverage-goal" type="text" placeholder="Funeral / Income replacement / Final expenses / Other" autocomplete="off" />
+                    </div>
+                    <div class="meta-card">
+                      <label for="lp-desired-coverage">Desired Coverage Amount ($)</label>
+                      <input id="lp-desired-coverage" type="number" inputmode="numeric" min="0" step="1000" />
+                    </div>
+                    <div class="meta-card">
+                      <label for="lp-monthly-budget">Monthly Budget ($)</label>
+                      <input id="lp-monthly-budget" type="number" inputmode="numeric" min="0" step="1" />
+                    </div>
+                    <div class="meta-card">
+                      <label for="lp-priority">Priority</label>
+                      <input id="lp-priority" type="text" placeholder="Lowest cost / Immediate coverage / Approval certainty" autocomplete="off" />
+                    </div>
+                    <div class="meta-card">
+                      <label for="lp-beneficiary-plan">Beneficiary Plan (optional)</label>
+                      <input id="lp-beneficiary-plan" type="text" autocomplete="off" />
+                    </div>
+                    <div class="meta-card">
+                      <label for="lp-policy-owner">Policy Owner (optional)</label>
+                      <input id="lp-policy-owner" type="text" autocomplete="off" />
+                    </div>
+                  </div>
+                  <div class="compose-contact-heading" style="margin-top: 16px">Sales / Pipeline</div>
                   <div class="meta-grid">
                     <div class="meta-card">
                       <label for="lp-tag">Tag</label>
@@ -1144,8 +1196,12 @@
                       <label for="lp-drop-off-stage">Drop-off stage</label>
                       <input id="lp-drop-off-stage" type="text" autocomplete="off" />
                     </div>
+                    <div class="meta-card" style="grid-column: 1 / -1">
+                      <label for="lp-notes">Notes</label>
+                      <textarea id="lp-notes" rows="3" placeholder="Sales context notes"></textarea>
+                    </div>
                   </div>
-                  <div class="compose-contact-heading" style="margin-top: 16px">Integrations &amp; consent</div>
+                  <div class="compose-contact-heading" style="margin-top: 16px">Internal / System</div>
                   <div class="meta-grid">
                     <div class="meta-card" style="grid-column: 1 / -1">
                       <label for="lp-subscriber-id">ManyChat subscriber ID</label>
@@ -1161,8 +1217,35 @@
                       <label for="lp-opt-in-at">Opt-in at (read-only)</label>
                       <input id="lp-opt-in-at" type="text" readonly class="lp-ro" tabindex="-1" />
                     </div>
+                    <div class="meta-card">
+                      <label for="lp-last-contacted">Last Contacted</label>
+                      <input id="lp-last-contacted" type="text" autocomplete="off" />
+                    </div>
+                    <div class="meta-card">
+                      <label for="lp-assigned-agent">Assigned Agent (optional)</label>
+                      <input id="lp-assigned-agent" type="text" autocomplete="off" />
+                    </div>
                   </div>
-                  <div class="compose-contact-heading" style="margin-top: 16px">System</div>
+                  <div class="compose-contact-heading" style="margin-top: 16px">Auto-derived</div>
+                  <div class="meta-grid">
+                    <div class="meta-card">
+                      <label for="lp-risk-level">Risk Level (auto)</label>
+                      <input id="lp-risk-level" type="text" readonly class="lp-ro" tabindex="-1" />
+                    </div>
+                    <div class="meta-card" style="grid-column: 1 / -1">
+                      <label for="lp-risk-flags">Risk Flags (auto)</label>
+                      <input id="lp-risk-flags" type="text" readonly class="lp-ro" tabindex="-1" />
+                    </div>
+                    <div class="meta-card">
+                      <label for="lp-last-reco">Last Recommendation (auto)</label>
+                      <input id="lp-last-reco" type="text" readonly class="lp-ro" tabindex="-1" />
+                    </div>
+                    <div class="meta-card">
+                      <label for="lp-reco-ts">Recommendation Timestamp (auto)</label>
+                      <input id="lp-reco-ts" type="text" readonly class="lp-ro" tabindex="-1" />
+                    </div>
+                  </div>
+                  <div class="compose-contact-heading" style="margin-top: 16px">System Read-only</div>
                   <div class="meta-grid">
                     <div class="meta-card">
                       <label for="lp-created-at">Created</label>
@@ -2684,11 +2767,16 @@
         setv("lp-email", d.email);
         setv("lp-phone", d.phone);
         setv("lp-language", d.language);
+        setv("lp-state", d.profile_ext && d.profile_ext.state);
+        setv("lp-city", d.profile_ext && d.profile_ext.city);
         setv("lp-age", d.age != null && d.age !== "" ? String(d.age) : "");
+        setv("lp-dob", d.profile_ext && d.profile_ext.date_of_birth);
         setv("lp-sex", d.sex);
         var tob = document.getElementById("lp-tobacco");
+        var tobStatus = d.profile_ext && d.profile_ext.tobacco_status ? String(d.profile_ext.tobacco_status).toLowerCase() : "";
         if (tob) {
-          if (d.tobacco === true) tob.value = "true";
+          if (tobStatus === "former") tob.value = "former";
+          else if (d.tobacco === true) tob.value = "true";
           else if (d.tobacco === false) tob.value = "false";
           else tob.value = "";
         }
@@ -2701,6 +2789,19 @@
         var oi = document.getElementById("lp-opt-in");
         if (oi) oi.checked = !!d.opt_in;
         setv("lp-subscriber-id", d.manychat_subscriber_id);
+        setv("lp-coverage-goal", d.profile_ext && d.profile_ext.coverage_goal);
+        setv("lp-desired-coverage", d.profile_ext && d.profile_ext.desired_coverage_amount);
+        setv("lp-monthly-budget", d.profile_ext && d.profile_ext.monthly_budget);
+        setv("lp-priority", d.profile_ext && d.profile_ext.priority);
+        setv("lp-beneficiary-plan", d.profile_ext && d.profile_ext.beneficiary_plan);
+        setv("lp-policy-owner", d.profile_ext && d.profile_ext.policy_owner);
+        setv("lp-notes", d.profile_ext && d.profile_ext.notes);
+        setv("lp-last-contacted", d.profile_ext && d.profile_ext.last_contacted);
+        setv("lp-assigned-agent", d.profile_ext && d.profile_ext.assigned_agent);
+        setv("lp-risk-level", d.profile_ext && d.profile_ext.risk_level);
+        setv("lp-risk-flags", d.profile_ext && Array.isArray(d.profile_ext.risk_flags) ? d.profile_ext.risk_flags.join(", ") : "");
+        setv("lp-last-reco", d.profile_ext && d.profile_ext.last_recommendation);
+        setv("lp-reco-ts", d.profile_ext && d.profile_ext.recommendation_timestamp ? fmtDate(d.profile_ext.recommendation_timestamp) : "");
         setv("lp-opt-in-at", d.opt_in_at ? fmtDate(d.opt_in_at) : "");
         setv("lp-created-at", d.created_at ? fmtDate(d.created_at) : "");
         setv("lp-updated-at", d.updated_at ? fmtDate(d.updated_at) : "");
@@ -2708,7 +2809,16 @@
         if (sh) sh.value = d.staff_hidden_at ? fmtDate(d.staff_hidden_at) : "";
         var phi = d && d.phi && typeof d.phi === "object" ? d.phi : {};
         setv("lp-phi-rx", phi.prescription_meds_text || "");
+        var phiMajor = document.getElementById("lp-phi-major");
+        if (phiMajor) phiMajor.checked = !!phi.has_major_conditions;
+        var phiRxFlag = document.getElementById("lp-phi-rx-flag");
+        if (phiRxFlag) phiRxFlag.checked = !!phi.takes_prescription_medications;
+        var phiHospFlag = document.getElementById("lp-phi-hosp-flag");
+        if (phiHospFlag) phiHospFlag.checked = !!phi.recent_hospitalizations;
+        setv("lp-phi-condition-catalog", Array.isArray(phi.condition_catalog) ? phi.condition_catalog.join(", ") : "");
         setv("lp-phi-conditions", Array.isArray(phi.conditions) ? phi.conditions.join(", ") : "");
+        setv("lp-phi-hosp-when", phi.hospitalization_when || "");
+        setv("lp-phi-hosp-reason", phi.hospitalization_reason || "");
         setv("lp-phi-followups", phi.followups || "");
         var phiBlock = document.getElementById("lp-phi-block");
         if (phiBlock) phiBlock.style.display = leadProfileCanAccessPhi ? "" : "none";
@@ -2717,7 +2827,7 @@
       function serializeLeadProfileFromForm() {
         var tob = document.getElementById("lp-tobacco");
         var tv = tob ? tob.value : "";
-        var tobacco = tv === "true" ? true : tv === "false" ? false : null;
+        var tobacco = tv === "true" ? true : tv === "false" ? false : tv === "former" ? "former" : null;
         return {
           id: String((document.getElementById("lp-id") && document.getElementById("lp-id").value) || ""),
           first_name: String(document.getElementById("lp-first-name").value || "").trim(),
@@ -2725,7 +2835,10 @@
           email: String(document.getElementById("lp-email").value || "").trim().toLowerCase(),
           phone: String(document.getElementById("lp-phone").value || "").trim(),
           language: String(document.getElementById("lp-language").value || "").trim(),
+          state: String((document.getElementById("lp-state") && document.getElementById("lp-state").value) || "").trim(),
+          city: String((document.getElementById("lp-city") && document.getElementById("lp-city").value) || "").trim(),
           age: String(document.getElementById("lp-age").value || "").trim(),
+          date_of_birth: String((document.getElementById("lp-dob") && document.getElementById("lp-dob").value) || "").trim(),
           sex: String(document.getElementById("lp-sex").value || "").trim(),
           tobacco: tobacco,
           tag: String(document.getElementById("lp-tag").value || "").trim(),
@@ -2735,12 +2848,30 @@
           drop_off_stage: String(document.getElementById("lp-drop-off-stage").value || "").trim(),
           opt_in: !!document.getElementById("lp-opt-in").checked,
           manychat_subscriber_id: String(document.getElementById("lp-subscriber-id").value || "").trim(),
+          coverage_goal: String((document.getElementById("lp-coverage-goal") && document.getElementById("lp-coverage-goal").value) || "").trim(),
+          desired_coverage_amount: String((document.getElementById("lp-desired-coverage") && document.getElementById("lp-desired-coverage").value) || "").trim(),
+          monthly_budget: String((document.getElementById("lp-monthly-budget") && document.getElementById("lp-monthly-budget").value) || "").trim(),
+          priority: String((document.getElementById("lp-priority") && document.getElementById("lp-priority").value) || "").trim(),
+          beneficiary_plan: String((document.getElementById("lp-beneficiary-plan") && document.getElementById("lp-beneficiary-plan").value) || "").trim(),
+          policy_owner: String((document.getElementById("lp-policy-owner") && document.getElementById("lp-policy-owner").value) || "").trim(),
+          notes: String((document.getElementById("lp-notes") && document.getElementById("lp-notes").value) || "").trim(),
+          last_contacted: String((document.getElementById("lp-last-contacted") && document.getElementById("lp-last-contacted").value) || "").trim(),
+          assigned_agent: String((document.getElementById("lp-assigned-agent") && document.getElementById("lp-assigned-agent").value) || "").trim(),
           phi: {
+            has_major_conditions: !!(document.getElementById("lp-phi-major") && document.getElementById("lp-phi-major").checked),
+            takes_prescription_medications: !!(document.getElementById("lp-phi-rx-flag") && document.getElementById("lp-phi-rx-flag").checked),
+            recent_hospitalizations: !!(document.getElementById("lp-phi-hosp-flag") && document.getElementById("lp-phi-hosp-flag").checked),
+            condition_catalog: String((document.getElementById("lp-phi-condition-catalog") && document.getElementById("lp-phi-condition-catalog").value) || "")
+              .split(",")
+              .map(function (x) { return String(x || "").trim(); })
+              .filter(Boolean),
             prescription_meds_text: String((document.getElementById("lp-phi-rx") && document.getElementById("lp-phi-rx").value) || "").trim(),
             conditions: String((document.getElementById("lp-phi-conditions") && document.getElementById("lp-phi-conditions").value) || "")
               .split(",")
               .map(function (x) { return String(x || "").trim(); })
               .filter(Boolean),
+            hospitalization_when: String((document.getElementById("lp-phi-hosp-when") && document.getElementById("lp-phi-hosp-when").value) || "").trim(),
+            hospitalization_reason: String((document.getElementById("lp-phi-hosp-reason") && document.getElementById("lp-phi-hosp-reason").value) || "").trim(),
             followups: String((document.getElementById("lp-phi-followups") && document.getElementById("lp-phi-followups").value) || "").trim(),
           },
         };
@@ -2763,7 +2894,7 @@
           language: s.language || "English",
           age: ageOut,
           sex: s.sex || null,
-          tobacco: s.tobacco,
+          tobacco: s.tobacco === "former" ? null : s.tobacco,
           tag: s.tag || null,
           pipeline_stage: s.pipeline_stage || null,
           source: s.source || null,
@@ -2771,7 +2902,39 @@
           drop_off_stage: s.drop_off_stage || null,
           opt_in: s.opt_in,
           manychat_subscriber_id: s.manychat_subscriber_id || null,
+          profile_ext: {
+            state: s.state || null,
+            city: s.city || null,
+            date_of_birth: s.date_of_birth || null,
+            coverage_goal: s.coverage_goal || null,
+            desired_coverage_amount: s.desired_coverage_amount || null,
+            monthly_budget: s.monthly_budget || null,
+            priority: s.priority || null,
+            beneficiary_plan: s.beneficiary_plan || null,
+            policy_owner: s.policy_owner || null,
+            notes: s.notes || null,
+            last_contacted: s.last_contacted || null,
+            assigned_agent: s.assigned_agent || null,
+            tobacco_status: s.tobacco === "former" ? "former" : (s.tobacco === true ? "yes" : s.tobacco === false ? "no" : null),
+          },
           phi: leadProfileCanAccessPhi ? s.phi : undefined,
+        };
+      }
+
+      function buildProfileSnapshotForSelector() {
+        var s = serializeLeadProfileFromForm();
+        return {
+          age: s.age || "",
+          tobacco: s.tobacco,
+          coverage_goal: s.coverage_goal || "",
+          desired_coverage_amount: s.desired_coverage_amount || "",
+          monthly_budget: s.monthly_budget || "",
+          priority: s.priority || "",
+          policy_owner: s.policy_owner || "",
+          beneficiary_plan: s.beneficiary_plan || "",
+          state: s.state || "",
+          city: s.city || "",
+          date_of_birth: s.date_of_birth || "",
         };
       }
 
@@ -3297,6 +3460,7 @@
               lead_id: lead.id,
               lead_source_table: lead.source_table || "unknown",
               qualification_answers: productSelectorAnswersFromUi(),
+              profile_snapshot: buildProfileSnapshotForSelector(),
               risk_summary: (productSelectorSession && productSelectorSession.risk_summary) || {},
               recommendation: (productSelectorSession && productSelectorSession.recommendation) || {},
               confidence: (productSelectorSession && productSelectorSession.confidence) || {},
@@ -3332,6 +3496,7 @@
               lead_id: lead.id,
               lead_source_table: lead.source_table || "unknown",
               qualification_answers: answers,
+              profile_snapshot: buildProfileSnapshotForSelector(),
               stage: "complete",
             },
             { method: "POST" }
@@ -3413,6 +3578,7 @@
               lead_id: lead.id,
               lead_source_table: lead.source_table || "unknown",
               qualification_answers: answers,
+              profile_snapshot: buildProfileSnapshotForSelector(),
               message: msg,
             },
             { method: "PATCH" }

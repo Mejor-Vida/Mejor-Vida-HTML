@@ -48,21 +48,28 @@ function bool(v) {
 }
 
 const QUESTION_FLOW = [
-  { key: "intent", prompt: "What is the client's primary coverage goal?", type: "choice", options: ["income_replacement", "final_expenses", "mortgage_protection", "wealth_building", "legacy_planning"], phi: false },
-  { key: "coverage_amount", prompt: "How much coverage amount are they targeting?", type: "number", phi: false },
-  { key: "budget_monthly", prompt: "What monthly premium budget is comfortable?", type: "number", phi: false },
-  { key: "age", prompt: "What is the client's current age?", type: "number", phi: false },
-  { key: "protected_who", prompt: "Who is being protected (self, spouse, children, family, business partner)?", type: "text", phi: false },
-  { key: "duration_need", prompt: "Do they need temporary coverage, lifetime coverage, or are they unsure?", type: "choice", options: ["temporary", "lifetime", "unsure"], phi: false },
-  { key: "must_have", prompt: "What is the must-have outcome: lowest cost, permanent coverage, cash value growth, or fast approval?", type: "choice", options: ["lowest_cost", "permanent_coverage", "cash_value_growth", "fast_approval"], phi: false },
-  { key: "current_coverage", prompt: "Do they currently have coverage (none, some keep, replace)?", type: "choice", options: ["none", "some_keep", "replace"], phi: false },
-  { key: "priority_1", prompt: "What is priority #1: cost, approval likelihood, permanence, cash value, or speed?", type: "choice", options: ["cost", "approval_likelihood", "permanence", "cash_value", "speed"], phi: false },
-  { key: "priority_2", prompt: "What is priority #2 (must be different from priority #1)?", type: "choice", options: ["cost", "approval_likelihood", "permanence", "cash_value", "speed"], phi: false },
-  { key: "tobacco", prompt: "Any tobacco or nicotine use in the last 12 months? (yes/no)", type: "boolean", phi: true },
-  { key: "prescription_meds", prompt: "Is the client currently taking prescription medications? (yes/no)", type: "boolean", phi: true },
-  { key: "doctor_visits_2y", prompt: "Any doctor visits in the last 2 years? (yes/no)", type: "boolean", phi: true },
-  { key: "hospitalized_5y", prompt: "Any hospitalization in the last 5 years? (yes/no)", type: "boolean", phi: true },
-  { key: "conditions", prompt: "List diagnosed conditions separated by commas, or type none.", type: "list", phi: true },
+  {
+    key: "strategy_priority",
+    prompt:
+      "For this case, should we prioritize lowest monthly cost, immediate coverage, or approval certainty?",
+    type: "choice",
+    options: ["lowest_cost", "immediate_coverage", "approval_certainty"],
+    phi: false,
+  },
+  {
+    key: "graded_benefit_ok",
+    prompt:
+      "If eligibility is limited, is the client comfortable with a graded benefit option? (yes/no)",
+    type: "boolean",
+    phi: false,
+  },
+  {
+    key: "carrier_preference",
+    prompt:
+      "Any carrier preference or constraints we should apply before final recommendation? (type none if no preference)",
+    type: "text",
+    phi: false,
+  },
 ];
 
 function parseAnswerByType(q, raw) {
@@ -109,8 +116,8 @@ function questionByKey(key) {
   return QUESTION_FLOW.find((q) => q.key === key) || null;
 }
 
-function deriveRisk(answers, phiAnswers) {
-  const merged = Object.assign({}, answers || {}, phiAnswers || {});
+function deriveRisk(context, phiAnswers) {
+  const merged = Object.assign({}, context || {}, phiAnswers || {});
   const cond = Array.isArray(merged.conditions) ? merged.conditions : [];
   const hasMajorCondition = cond.some((c) => /heart|cancer|stroke|copd|kidney|cirrhosis|insulin/i.test(String(c || "")));
   const meds = bool(merged.prescription_meds);
@@ -129,17 +136,17 @@ function deriveRisk(answers, phiAnswers) {
   return { level, flags };
 }
 
-function recommendByRules(answers, risk) {
-  const intent = String(answers.intent || "").toLowerCase();
-  const duration = String(answers.duration_need || "").toLowerCase();
-  const mustHave = String(answers.must_have || "").toLowerCase();
-  const coverageStatus = String(answers.current_coverage || "").toLowerCase();
-  const p1 = String(answers.priority_1 || "").toLowerCase();
-  const p2 = String(answers.priority_2 || "").toLowerCase();
-  const age = Number.isFinite(parseInt(String(answers.age || ""), 10))
-    ? parseInt(String(answers.age || ""), 10)
+function recommendByRules(context, risk) {
+  const intent = String(context.intent || context.coverage_goal || "").toLowerCase();
+  const duration = String(context.duration_need || "").toLowerCase();
+  const mustHave = String(context.must_have || context.strategy_priority || "").toLowerCase();
+  const coverageStatus = String(context.current_coverage || "").toLowerCase();
+  const p1 = String(context.priority_1 || context.strategy_priority || "").toLowerCase();
+  const p2 = String(context.priority_2 || "").toLowerCase();
+  const age = Number.isFinite(parseInt(String(context.age || ""), 10))
+    ? parseInt(String(context.age || ""), 10)
     : null;
-  const tobacco = bool(answers.tobacco);
+  const tobacco = bool(context.tobacco);
   let recommended_category = "life_insurance";
   let product_type = "whole_life";
 
@@ -194,10 +201,10 @@ function recommendByRules(answers, risk) {
   };
 }
 
-function confidenceFrom(answers, risk, recommendation) {
-  const required = ["intent", "coverage_amount", "budget_monthly", "age", "protected_who", "duration_need", "must_have", "current_coverage", "priority_1"];
+function confidenceFrom(context, strategyAnswers, risk, recommendation) {
+  const required = ["intent", "coverage_amount", "budget_monthly", "age", "strategy_priority"];
   const present = required.filter((k) => {
-    const v = answers[k];
+    const v = k === "strategy_priority" ? strategyAnswers[k] : context[k];
     return !(v == null || v === "");
   }).length;
   const completeness = present / required.length;
@@ -209,6 +216,28 @@ function confidenceFrom(answers, risk, recommendation) {
   score = Math.max(0.05, Math.min(0.98, score));
   const label = score >= 0.8 ? "High Confidence" : score >= 0.6 ? "Medium Confidence" : "Low Confidence";
   return { score: Number(score.toFixed(2)), label, reason: `Completeness ${Math.round(completeness * 100)}%, risk ${risk.level}` };
+}
+
+function normalizedContextFromProfile(profileSnapshot, nonPhiAnswers, phiAnswers) {
+  const p = profileSnapshot && typeof profileSnapshot === "object" ? profileSnapshot : {};
+  const q = nonPhiAnswers && typeof nonPhiAnswers === "object" ? nonPhiAnswers : {};
+  const phi = phiAnswers && typeof phiAnswers === "object" ? phiAnswers : {};
+  const age = p.age != null && p.age !== "" ? p.age : q.age;
+  return {
+    intent: p.coverage_goal || q.intent || "",
+    coverage_amount: p.desired_coverage_amount || q.coverage_amount || "",
+    budget_monthly: p.monthly_budget || q.budget_monthly || "",
+    age: age != null ? String(age) : "",
+    protected_who: p.protected_who || q.protected_who || "",
+    duration_need: p.duration_need || q.duration_need || "",
+    must_have: q.strategy_priority || p.priority || q.must_have || "",
+    current_coverage: p.current_coverage || q.current_coverage || "",
+    priority_1: q.strategy_priority || p.priority || q.priority_1 || "",
+    priority_2: q.priority_2 || "",
+    tobacco: p.tobacco === true || p.tobacco === "true" || p.tobacco === "yes" || phi.tobacco === true,
+    coverage_goal: p.coverage_goal || "",
+    strategy_priority: q.strategy_priority || "",
+  };
 }
 
 async function rpcMatchInternal(cfg, embedding, matchCount, minSimilarity, categoryFilter) {
@@ -389,6 +418,7 @@ module.exports = async function handler(req, res) {
     const leadId = String(body.lead_id || "").trim();
     const leadSourceTable = String(body.lead_source_table || "").trim();
     const answers = body.qualification_answers && typeof body.qualification_answers === "object" ? body.qualification_answers : {};
+    const profileSnapshot = body.profile_snapshot && typeof body.profile_snapshot === "object" ? body.profile_snapshot : {};
     if (!isUuid(leadId) || !leadSourceTable) return json(res, 400, { error: "lead_id and lead_source_table required" });
     if (!openaiKey) return json(res, 500, { error: "OPENAI_API_KEY missing" });
 
@@ -399,10 +429,11 @@ module.exports = async function handler(req, res) {
       QUESTION_FLOW.forEach((q) => {
         if (q.phi) delete sanitizedNonPhi[q.key];
       });
-      const risk = deriveRisk(sanitizedNonPhi, phiData);
-      const recommendation = recommendByRules(Object.assign({}, sanitizedNonPhi, phiData), risk);
-      const confidence = confidenceFrom(sanitizedNonPhi, risk, recommendation);
-      const ragQuery = `Lead intent=${sanitizedNonPhi.intent || ""}, protected=${sanitizedNonPhi.protected_who || ""}, duration=${sanitizedNonPhi.duration_need || ""}, must_have=${sanitizedNonPhi.must_have || ""}, age=${sanitizedNonPhi.age || ""}, coverage=${sanitizedNonPhi.coverage_amount || ""}, budget=${sanitizedNonPhi.budget_monthly || ""}, current_coverage=${sanitizedNonPhi.current_coverage || ""}, priorities=${sanitizedNonPhi.priority_1 || ""}/${sanitizedNonPhi.priority_2 || ""}, risk=${risk.level}. Recommend ${recommendation.product_type} alternatives and sales talking points.`;
+      const context = normalizedContextFromProfile(profileSnapshot, sanitizedNonPhi, phiData);
+      const risk = deriveRisk(context, phiData);
+      const recommendation = recommendByRules(Object.assign({}, context, sanitizedNonPhi), risk);
+      const confidence = confidenceFrom(context, sanitizedNonPhi, risk, recommendation);
+      const ragQuery = `Lead intent=${context.intent || ""}, protected=${context.protected_who || ""}, duration=${context.duration_need || ""}, must_have=${context.must_have || ""}, age=${context.age || ""}, coverage=${context.coverage_amount || ""}, budget=${context.budget_monthly || ""}, current_coverage=${context.current_coverage || ""}, priorities=${context.priority_1 || ""}/${context.priority_2 || ""}, risk=${risk.level}. Recommend ${recommendation.product_type} alternatives and sales talking points.`;
       const emb = await generateEmbedding(openaiKey, ragQuery);
       const ragRows = await rpcMatchInternal(cfg, emb.embedding, 8, 0.25, recommendation.recommended_category);
       const recommendedCarriers = topCarriersForCategory(ragRows, recommendation.recommended_category);
@@ -443,6 +474,10 @@ module.exports = async function handler(req, res) {
         sales_enablement: salesEnablement,
         workflow_state: { stage: body.stage || "complete", saved_at: new Date().toISOString() },
       });
+      if (session && session.id) {
+        const wf = Object.assign({}, session.workflow_state || {}, { profile_snapshot: profileSnapshot || {} });
+        await saveSession(cfg, leadId, leadSourceTable, Object.assign({}, session, { workflow_state: wf }));
+      }
 
       return json(res, 200, {
         ok: true,
@@ -477,6 +512,7 @@ module.exports = async function handler(req, res) {
     const userMessage = String(body.message || "").trim();
     const incomingAnswers =
       body.qualification_answers && typeof body.qualification_answers === "object" ? body.qualification_answers : {};
+    const profileSnapshot = body.profile_snapshot && typeof body.profile_snapshot === "object" ? body.profile_snapshot : {};
     if (!isUuid(leadId) || !leadSourceTable) return json(res, 400, { error: "lead_id and lead_source_table required" });
     if (!userMessage) return json(res, 400, { error: "message required" });
     if (!openaiKey) return json(res, 500, { error: "OPENAI_API_KEY missing" });
@@ -499,6 +535,9 @@ module.exports = async function handler(req, res) {
         if (q.phi) delete mergedAnswers[q.key];
       });
       const workflowState = Object.assign({}, session.workflow_state || {});
+      if (profileSnapshot && Object.keys(profileSnapshot).length) {
+        workflowState.profile_snapshot = Object.assign({}, workflowState.profile_snapshot || {}, profileSnapshot);
+      }
       const transcript = Array.isArray(workflowState.stage3_chat) ? workflowState.stage3_chat.slice() : [];
       const isStartSignal = /^(start|begin|go)$/i.test(userMessage);
       const currentKey = String(workflowState.current_question_key || "") || nextQuestionKey(mergedAnswers, existingPhi, canPhi);
@@ -537,12 +576,13 @@ module.exports = async function handler(req, res) {
           assistantReply = `Let's begin qualification. ${nextQuestionText}`;
         }
       }
-      const risk = deriveRisk(nextNonPhi, nextPhi);
-      const nextRecommendation = recommendByRules(Object.assign({}, nextNonPhi, nextPhi), risk);
+      const context = normalizedContextFromProfile(workflowState.profile_snapshot || {}, nextNonPhi, nextPhi);
+      const risk = deriveRisk(context, nextPhi);
+      const nextRecommendation = recommendByRules(Object.assign({}, context, nextNonPhi, nextPhi), risk);
       if (nextQuestionText) nextRecommendation.next_question = nextQuestionText;
-      const nextConfidence = confidenceFrom(nextNonPhi, risk, nextRecommendation);
+      const nextConfidence = confidenceFrom(context, nextNonPhi, risk, nextRecommendation);
 
-      const ragQuery = `Lead intent=${nextNonPhi.intent || ""}, protected=${nextNonPhi.protected_who || ""}, duration=${nextNonPhi.duration_need || ""}, must_have=${nextNonPhi.must_have || ""}, age=${nextNonPhi.age || ""}, coverage=${nextNonPhi.coverage_amount || ""}, budget=${nextNonPhi.budget_monthly || ""}, current_coverage=${nextNonPhi.current_coverage || ""}, priorities=${nextNonPhi.priority_1 || ""}/${nextNonPhi.priority_2 || ""}, risk=${risk.level}. Recommend ${nextRecommendation.product_type} alternatives and sales talking points.`;
+      const ragQuery = `Lead intent=${context.intent || ""}, protected=${context.protected_who || ""}, duration=${context.duration_need || ""}, must_have=${context.must_have || ""}, age=${context.age || ""}, coverage=${context.coverage_amount || ""}, budget=${context.budget_monthly || ""}, current_coverage=${context.current_coverage || ""}, priorities=${context.priority_1 || ""}/${context.priority_2 || ""}, risk=${risk.level}. Recommend ${nextRecommendation.product_type} alternatives and sales talking points.`;
       const emb = await generateEmbedding(openaiKey, ragQuery);
       const ragRows = await rpcMatchInternal(cfg, emb.embedding, 8, 0.25, nextRecommendation.recommended_category);
       const nextSales = Object.assign({}, session.sales_enablement || {});
