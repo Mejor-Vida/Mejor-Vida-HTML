@@ -99,7 +99,20 @@ async function selectUnifiedLeadById(cfg, id) {
   return Array.isArray(one) && one.length ? one[0] : null;
 }
 
-async function loadLeadProfileExt(cfg, leadId, leadSourceTable) {
+function isBlankValue(v) {
+  return v == null || v === "" || (Array.isArray(v) && v.length === 0);
+}
+
+function mergePreferSource(base, canonicalPatch) {
+  const out = Object.assign({}, base || {});
+  const patch = canonicalPatch && typeof canonicalPatch === "object" ? canonicalPatch : {};
+  Object.keys(patch).forEach((k) => {
+    if (isBlankValue(out[k])) out[k] = patch[k];
+  });
+  return out;
+}
+
+async function loadSelectorDerivedProfileExt(cfg, leadId, leadSourceTable) {
   if (!leadId || !leadSourceTable) return {};
   const rows = await restSelect(
     cfg,
@@ -109,55 +122,62 @@ async function loadLeadProfileExt(cfg, leadId, leadSourceTable) {
     )}&lead_source_table=eq.${encodeURIComponent(leadSourceTable)}&limit=1`
   );
   const row = Array.isArray(rows) && rows[0] ? rows[0] : null;
-  const wf = row && row.workflow_state && typeof row.workflow_state === "object" ? row.workflow_state : {};
-  const ext = wf.lead_profile_ext && typeof wf.lead_profile_ext === "object" ? wf.lead_profile_ext : {};
   const risk = row && row.risk_summary && typeof row.risk_summary === "object" ? row.risk_summary : {};
   const rec = row && row.recommendation && typeof row.recommendation === "object" ? row.recommendation : {};
-  return Object.assign({}, ext, {
+  return {
     risk_level: risk.level || "",
     risk_flags: Array.isArray(risk.flags) ? risk.flags : [],
     last_recommendation: rec.product_type || "",
     recommendation_timestamp: row && row.updated_at ? row.updated_at : "",
-  });
+  };
 }
 
-async function saveLeadProfileExt(cfg, leadId, leadSourceTable, extPatch) {
+async function loadCanonicalLeadProfile(cfg, leadId, leadSourceTable) {
+  if (!leadId || !leadSourceTable) return {};
+  const rows = await restSelect(
+    cfg,
+    "staff_lead_profiles",
+    `select=profile_data&lead_id=eq.${encodeURIComponent(leadId)}&lead_source_table=eq.${encodeURIComponent(
+      leadSourceTable
+    )}&limit=1`
+  );
+  const row = Array.isArray(rows) && rows[0] ? rows[0] : null;
+  return row && row.profile_data && typeof row.profile_data === "object" ? row.profile_data : {};
+}
+
+async function saveCanonicalLeadProfile(cfg, leadId, leadSourceTable, patch, updatedBy) {
   if (!leadId || !leadSourceTable) return null;
   const rows = await restSelect(
     cfg,
-    "product_selector_sessions",
-    `select=id,lead_id,lead_source_table,qualification_answers,risk_summary,recommendation,confidence,sales_enablement,workflow_state&lead_id=eq.${encodeURIComponent(
+    "staff_lead_profiles",
+    `select=id,profile_data&lead_id=eq.${encodeURIComponent(
       leadId
     )}&lead_source_table=eq.${encodeURIComponent(leadSourceTable)}&limit=1`
   );
   const row = Array.isArray(rows) && rows[0] ? rows[0] : null;
   const now = new Date().toISOString();
-  const existingWf = row && row.workflow_state && typeof row.workflow_state === "object" ? row.workflow_state : {};
-  const existingExt = existingWf.lead_profile_ext && typeof existingWf.lead_profile_ext === "object" ? existingWf.lead_profile_ext : {};
-  const nextWf = Object.assign({}, existingWf, { lead_profile_ext: Object.assign({}, existingExt, extPatch || {}) });
+  const existingProfile = row && row.profile_data && typeof row.profile_data === "object" ? row.profile_data : {};
+  const nextProfile = Object.assign({}, existingProfile, patch || {});
   if (!row) {
-    const inserted = await restInsert(cfg, "product_selector_sessions", [
+    const inserted = await restInsert(cfg, "staff_lead_profiles", [
       {
         lead_id: leadId,
         lead_source_table: leadSourceTable,
-        qualification_answers: {},
-        risk_summary: {},
-        recommendation: {},
-        confidence: {},
-        sales_enablement: {},
-        workflow_state: nextWf,
+        profile_data: nextProfile,
         updated_at: now,
+        updated_by: updatedBy || null,
       },
     ]);
     return Array.isArray(inserted) && inserted[0] ? inserted[0] : null;
   }
   const patched = await restPatch(
     cfg,
-    "product_selector_sessions",
+    "staff_lead_profiles",
     `id=eq.${encodeURIComponent(row.id)}`,
     {
-      workflow_state: nextWf,
+      profile_data: nextProfile,
       updated_at: now,
+      updated_by: updatedBy || null,
     }
   );
   return Array.isArray(patched) && patched[0] ? patched[0] : null;
@@ -260,6 +280,29 @@ async function selectQuoteLeadDetailById(cfg, id) {
     updated_at: row.created_at || null,
     staff_hidden_at: null,
   };
+}
+
+async function composeMergedLeadDetail(cfg, detail) {
+  if (!detail || !detail.id || !detail.source_table) return detail;
+  const canonical = await loadCanonicalLeadProfile(cfg, detail.id, detail.source_table);
+  const selectorExt = await loadSelectorDerivedProfileExt(cfg, detail.id, detail.source_table);
+  const canonicalExt = canonical.profile_ext && typeof canonical.profile_ext === "object" ? canonical.profile_ext : {};
+
+  const merged = Object.assign({}, detail);
+  const topLevelPatch = Object.assign({}, canonical);
+  delete topLevelPatch.profile_ext;
+  merged.first_name = !isBlankValue(detail.first_name) ? detail.first_name : topLevelPatch.first_name || detail.first_name;
+  merged.last_name = !isBlankValue(detail.last_name) ? detail.last_name : topLevelPatch.last_name || detail.last_name;
+  merged.email = !isBlankValue(detail.email) ? detail.email : topLevelPatch.email || detail.email;
+  merged.phone = !isBlankValue(detail.phone) ? detail.phone : topLevelPatch.phone || detail.phone;
+  merged.language = !isBlankValue(detail.language) ? detail.language : topLevelPatch.language || detail.language;
+  merged.age = !isBlankValue(detail.age) ? detail.age : topLevelPatch.age || detail.age;
+  merged.sex = !isBlankValue(detail.sex) ? detail.sex : topLevelPatch.sex || detail.sex;
+  merged.tobacco = detail.tobacco != null ? detail.tobacco : topLevelPatch.tobacco;
+
+  const baseExt = mergePreferSource(selectorExt, canonicalExt);
+  merged.profile_ext = mergePreferSource(baseExt, canonicalExt);
+  return merged;
 }
 
 async function upsertStaffHiddenLead(cfg, lead) {
@@ -381,8 +424,7 @@ module.exports = async function handler(req, res) {
         if (src === "manychat_leads") {
           const row = await selectManychatLeadDetailById(cfg, detailId);
           if (!row) return json(res, 404, { error: "Lead not found" });
-          const detail = Object.assign({ read_only: false }, row);
-          detail.profile_ext = await loadLeadProfileExt(cfg, detailId, src);
+          const detail = await composeMergedLeadDetail(cfg, Object.assign({ read_only: false }, row));
           if (canPhi) {
             const phi = await readPhiByLead(cfg, detailId, src);
             detail.phi = phi.payload || {};
@@ -390,9 +432,9 @@ module.exports = async function handler(req, res) {
           return json(res, 200, { detail, can_access_phi: canPhi });
         }
         if (src === "contacts") {
-          const detail = await selectContactsLeadDetailById(cfg, detailId);
+          const sourceDetail = await selectContactsLeadDetailById(cfg, detailId);
+          const detail = await composeMergedLeadDetail(cfg, sourceDetail);
           if (!detail) return json(res, 404, { error: "Lead not found" });
-          detail.profile_ext = await loadLeadProfileExt(cfg, detailId, src);
           if (canPhi) {
             const phi = await readPhiByLead(cfg, detailId, src);
             detail.phi = phi.payload || {};
@@ -400,9 +442,9 @@ module.exports = async function handler(req, res) {
           return json(res, 200, { detail, can_access_phi: canPhi });
         }
         if (src === "quote_lead_submissions") {
-          const detail = await selectQuoteLeadDetailById(cfg, detailId);
+          const sourceDetail = await selectQuoteLeadDetailById(cfg, detailId);
+          const detail = await composeMergedLeadDetail(cfg, sourceDetail);
           if (!detail) return json(res, 404, { error: "Lead not found" });
-          detail.profile_ext = await loadLeadProfileExt(cfg, detailId, src);
           if (canPhi) {
             const phi = await readPhiByLead(cfg, detailId, src);
             detail.phi = phi.payload || {};
@@ -427,11 +469,9 @@ module.exports = async function handler(req, res) {
           const phi = await readPhiByLead(cfg, detailId, String(unified.source_table || "unknown"));
           detail.phi = phi.payload || {};
         }
-        detail.profile_ext = await loadLeadProfileExt(cfg, detailId, String(unified.source_table || "unknown"));
+        const merged = await composeMergedLeadDetail(cfg, detail);
         return json(res, 200, {
-          detail: {
-            ...detail,
-          },
+          detail: merged,
           can_access_phi: canPhi,
         });
       } catch (e) {
@@ -635,131 +675,81 @@ module.exports = async function handler(req, res) {
           auth.user && auth.user.email ? auth.user.email : null
         );
       }
-      if (Object.prototype.hasOwnProperty.call(body, "profile_ext") && body.profile_ext && typeof body.profile_ext === "object") {
-        await saveLeadProfileExt(cfg, id, src || "unknown", body.profile_ext);
-      }
-
-      if (src === "manychat_leads") {
-        const patched = await restPatch(cfg, "manychat_leads", `id=eq.${encodeURIComponent(id)}`, payload);
-        if (!Array.isArray(patched) || patched.length === 0) {
-          return json(res, 404, { error: "Lead not found" });
+      const canonicalPatch = {};
+      [
+        "email",
+        "phone",
+        "language",
+        "first_name",
+        "last_name",
+        "age",
+        "sex",
+        "tobacco",
+        "tag",
+        "pipeline_stage",
+        "source",
+        "drop_off",
+        "drop_off_stage",
+        "opt_in",
+        "manychat_subscriber_id",
+      ].forEach((k) => {
+        if (Object.prototype.hasOwnProperty.call(body, k) && Object.prototype.hasOwnProperty.call(payload, k)) {
+          canonicalPatch[k] = payload[k];
         }
-        const row = patched[0];
-        const one = {
-          id: row.id,
-          first_name: row.first_name || "",
-          last_name: row.last_name || "",
-          display_name: displayName(row),
-          phone: row.phone || "",
-          email: String(row.email || "").trim(),
-          language: row.language || "English",
-          source: row.source || "manychat_whatsapp",
-          source_table: "manychat_leads",
-        };
-        await enrichLeadEmailsFromContacts(cfg, [one]);
-        let detail = null;
-        try {
-          detail = await selectManychatLeadDetailById(cfg, id);
-        } catch (e2) {
-          detail = null;
-        }
-        return json(res, 200, {
-          item: one,
-          detail: detail ? Object.assign({ read_only: false }, detail) : undefined,
-        });
-      }
-
-      if (src === "contacts") {
-        const langRaw = String(body.language || unified.language || "english").trim().toLowerCase();
-        const lang = langRaw.startsWith("es") ? "spanish" : "english";
-        const contactsPayload = {
-          updated_at: now,
-          first_name: String(body.first_name || "").trim().slice(0, 200) || null,
-          last_name: String(body.last_name || "").trim().slice(0, 200) || null,
-          email: hasEmailKey ? emailIn || null : String(unified.email || "").trim() || null,
-          phone: String(body.phone || unified.phone || "").trim().slice(0, 60) || null,
-          language: lang,
-          idioma: lang,
-          source: String(body.source || unified.source || "contacts").trim().slice(0, 120) || "contacts",
-        };
-        if (Object.prototype.hasOwnProperty.call(body, "manychat_subscriber_id")) {
-          contactsPayload.manychat_subscriber_id = payload.manychat_subscriber_id || null;
-        }
-        const patched = await restPatch(cfg, "contacts", `id=eq.${encodeURIComponent(id)}`, contactsPayload);
-        if (!Array.isArray(patched) || patched.length === 0) return json(res, 404, { error: "Lead not found" });
-        const row = patched[0];
-        const one = {
-          id: row.id,
-          first_name: row.first_name || "",
-          last_name: row.last_name || "",
-          display_name: displayName(row),
-          phone: row.phone || "",
-          email: String(row.email || "").trim(),
-          language: row.idioma || row.language || "english",
-          source: row.source || "contacts",
-          source_table: "contacts",
-        };
-        return json(res, 200, { item: one, detail: await selectContactsLeadDetailById(cfg, id) });
-      }
-
-      if (src === "quote_lead_submissions") {
-        const quotePayload = {};
-        if (Object.prototype.hasOwnProperty.call(body, "first_name")) {
-          quotePayload.first_name = payload.first_name || null;
-        }
-        if (Object.prototype.hasOwnProperty.call(body, "last_name")) {
-          quotePayload.last_name = payload.last_name || null;
-        }
-        if (Object.prototype.hasOwnProperty.call(body, "email")) {
-          quotePayload.email = payload.email || null;
-        }
-        if (Object.prototype.hasOwnProperty.call(body, "phone")) {
-          quotePayload.phone = payload.phone || null;
-        }
-        if (Object.prototype.hasOwnProperty.call(body, "language")) {
-          quotePayload.lang = payload.language || "English";
-        }
-        if (Object.prototype.hasOwnProperty.call(body, "age")) {
-          quotePayload.age = payload.age == null ? null : payload.age;
-        }
-        if (Object.prototype.hasOwnProperty.call(body, "sex")) {
-          quotePayload.gender = payload.sex || null;
-        }
-        if (Object.prototype.hasOwnProperty.call(body, "tobacco")) {
-          if (payload.tobacco == null) quotePayload.tobacco = null;
-          else quotePayload.tobacco = payload.tobacco ? "yes" : "no";
-        }
-        if (Object.prototype.hasOwnProperty.call(body, "source")) {
-          quotePayload.source = payload.source || null;
-        }
-        if (Object.prototype.hasOwnProperty.call(body, "pipeline_stage")) {
-          quotePayload.quote_status = payload.pipeline_stage || null;
-        }
-        const patched = await restPatch(
-          cfg,
-          "quote_lead_submissions",
-          `id=eq.${encodeURIComponent(id)}`,
-          quotePayload
-        );
-        if (!Array.isArray(patched) || patched.length === 0) return json(res, 404, { error: "Lead not found" });
-        const row = patched[0];
-        const one = {
-          id: row.id,
-          first_name: row.first_name || "",
-          last_name: row.last_name || "",
-          display_name: displayName(row),
-          phone: row.phone || "",
-          email: String(row.email || "").trim(),
-          language: row.lang || "English",
-          source: row.source || "website_quote_tool",
-          source_table: "quote_lead_submissions",
-        };
-        return json(res, 200, { item: one, detail: await selectQuoteLeadDetailById(cfg, id) });
-      }
-
-      return json(res, 400, {
-        error: `This lead source is read-only (${src || "unknown"}).`,
       });
+      if (Object.prototype.hasOwnProperty.call(body, "profile_ext") && body.profile_ext && typeof body.profile_ext === "object") {
+        canonicalPatch.profile_ext = body.profile_ext;
+      }
+      await saveCanonicalLeadProfile(
+        cfg,
+        id,
+        src || "unknown",
+        canonicalPatch,
+        auth.user && auth.user.email ? auth.user.email : null
+      );
+
+      const one = {
+        id: unified.id,
+        first_name: unified.first_name || "",
+        last_name: unified.last_name || "",
+        display_name: unified.display_name || displayName(unified),
+        phone: unified.phone || "",
+        email: String(unified.email || "").trim(),
+        language: unified.language || "English",
+        source: unified.source || unified.source_table || "unknown",
+        source_table: unified.source_table || "unknown",
+      };
+      await enrichLeadEmailsFromContacts(cfg, [one]);
+      let detail = null;
+      if (src === "manychat_leads") {
+        const row = await selectManychatLeadDetailById(cfg, id);
+        detail = row ? Object.assign({ read_only: false }, row) : null;
+      } else if (src === "contacts") {
+        detail = await selectContactsLeadDetailById(cfg, id);
+      } else if (src === "quote_lead_submissions") {
+        detail = await selectQuoteLeadDetailById(cfg, id);
+      } else {
+        detail = {
+          read_only: true,
+          source_table: src || "unknown",
+          id: unified.id,
+          first_name: unified.first_name || "",
+          last_name: unified.last_name || "",
+          display_name: unified.display_name || displayName(unified),
+          phone: unified.phone || "",
+          email: String(unified.email || "").trim(),
+          language: unified.language || "English",
+          source: unified.source || src || "unknown",
+          created_at: unified.created_at || null,
+          updated_at: unified.updated_at || null,
+        };
+      }
+      const mergedDetail = detail ? await composeMergedLeadDetail(cfg, detail) : null;
+      if (mergedDetail && canPhi) {
+        const phi = await readPhiByLead(cfg, id, src || "unknown");
+        mergedDetail.phi = phi.payload || {};
+      }
+      return json(res, 200, { item: one, detail: mergedDetail, can_access_phi: canPhi });
     } catch (e) {
       console.error("staff/leads PATCH", e);
       return json(res, 500, { error: "Failed to update lead" });

@@ -364,6 +364,31 @@
       background: #254989;
       border-color: #7fa1df;
     }
+    #lead-profile-form .lp-sticky-bar {
+      position: sticky;
+      top: 0;
+      z-index: 12;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border: 1px solid rgba(111, 139, 201, 0.45);
+      border-radius: 10px;
+      background: rgba(13, 27, 52, 0.96);
+      backdrop-filter: blur(4px);
+    }
+    #lead-profile-form .lp-sticky-help {
+      font-size: 0.8rem;
+      color: #cfe0ff;
+      line-height: 1.3;
+    }
+    #lead-profile-form #lead-profile-status {
+      margin: 0;
+      font-size: 0.82rem;
+      color: #dce7ff;
+      text-align: right;
+    }
     @media (max-width: 1300px) {
       #lead-profile-form .lp-section .meta-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1213,6 +1238,13 @@
                 <div id="lead-profile-readonly-block" class="hidden"></div>
                 <div id="lead-profile-empty" class="q-empty">Select a lead from the list on the left.</div>
                 <form id="lead-profile-form" class="compose-form hidden" autocomplete="off" onsubmit="return false;" aria-label="Lead profile">
+                  <div class="lp-sticky-bar">
+                    <div class="lp-sticky-help">Canonical profile save. Source systems can overwrite matching source fields on refresh.</div>
+                    <div class="actions">
+                      <button id="lead-profile-save-btn" type="button" class="secondary" disabled data-help="Saves to canonical staff lead profile only; does not backfill source systems.">Save updates</button>
+                    </div>
+                    <div id="lead-profile-status" class="small-note"></div>
+                  </div>
                   <section class="lp-section">
                   <div class="lp-section-bar">1. Identity (required to contact + identify)</div>
                   <div class="meta-grid">
@@ -1473,10 +1505,6 @@
                     </div>
                   </div>
                   </section>
-                  <div class="actions" style="margin-top: 16px">
-                    <button id="lead-profile-save-btn" type="button" class="secondary" disabled data-help="Writes all profile fields to manychat_leads after you confirm.">Save changes</button>
-                  </div>
-                  <div id="lead-profile-status" class="small-note"></div>
                 </form>
               </div>
             </div>
@@ -1759,7 +1787,7 @@
     <div class="compose-delete-modal-panel">
       <h3 id="lead-profile-save-modal-title">Save lead profile?</h3>
       <p class="small-note" style="margin: 0 0 18px; line-height: 1.45">
-        This overwrites the lead row in the database with the values in the form.
+        This saves edits to the canonical staff lead profile store only and does not backfill source tables.
       </p>
       <div class="compose-delete-modal-actions">
         <button type="button" id="lead-profile-save-cancel" class="secondary">Cancel</button>
