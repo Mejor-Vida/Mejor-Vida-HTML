@@ -117,6 +117,108 @@ const LEGACY_PHI_ALIASES = {
   alzheimers_dementia_memory_condition: "dementia_cognitive",
 };
 
+const COVERAGE_GOAL_QUESTION =
+  "Why are they looking into life insurance or final expense coverage right now?";
+const COVERAGE_GOAL_LABELS = {
+  final_expenses: "Final expenses",
+  income_replacement: "Income replacement",
+  mortgage_protection: "Mortgage protection",
+  debt_protection: "Debt protection",
+  legacy_planning: "Legacy planning",
+  business_continuity: "Business continuity",
+  not_sure: "Not sure",
+};
+const COVERAGE_GOAL_DEFINITIONS = {
+  final_expenses: [
+    "funeral",
+    "burial",
+    "cremation",
+    "final bills",
+    "end-of-life costs",
+    "end of life costs",
+    "family not paying",
+  ],
+  income_replacement: [
+    "replace income",
+    "protect spouse",
+    "protect kids",
+    "living expenses",
+    "paycheck replacement",
+  ],
+  mortgage_protection: ["mortgage", "house payment", "pay off home loan"],
+  debt_protection: ["credit cards", "loans", "medical bills", "debts"],
+  legacy_planning: ["leave money", "inheritance", "gift to family", "legacy"],
+  business_continuity: ["business partner", "key person", "business loan", "buy-sell", "buy sell"],
+  not_sure: ["unsure", "confused", "wants guidance", "does not know what they need", "not sure"],
+};
+
+function normalizeSimpleText(raw) {
+  return String(raw || "")
+    .toLowerCase()
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9\s-]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function classifyCoverageGoal(rawText) {
+  const text = normalizeSimpleText(rawText);
+  if (!text) return { goal: "not_sure", confidence: 0.2, reason: "empty" };
+  const scores = {};
+  Object.keys(COVERAGE_GOAL_DEFINITIONS).forEach((goal) => {
+    const phrases = COVERAGE_GOAL_DEFINITIONS[goal] || [];
+    let score = 0;
+    phrases.forEach((p) => {
+      const phrase = normalizeSimpleText(p);
+      if (!phrase) return;
+      if (text.includes(phrase)) {
+        score += phrase.includes(" ") ? 3 : 2;
+        return;
+      }
+      const tokens = phrase.split(" ").filter(Boolean);
+      const matched = tokens.filter((t) => t.length >= 3 && text.includes(t)).length;
+      if (matched) score += matched;
+    });
+    scores[goal] = score;
+  });
+  const ranked = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+  const topGoal = ranked[0] ? ranked[0][0] : "not_sure";
+  const topScore = ranked[0] ? ranked[0][1] : 0;
+  const secondScore = ranked[1] ? ranked[1][1] : 0;
+  if (!topScore) return { goal: "not_sure", confidence: 0.25, reason: "no_match" };
+  const confidence = Math.max(0.2, Math.min(0.97, topScore / (topScore + secondScore + 1)));
+  return { goal: topGoal, confidence: Number(confidence.toFixed(2)), reason: `top=${topScore},second=${secondScore}` };
+}
+
+function isGoalConfidenceLow(result) {
+  const r = result || {};
+  if (!r.goal || r.goal === "not_sure") return true;
+  return Number(r.confidence || 0) < 0.6;
+}
+
+function goalLabel(goalKey) {
+  return COVERAGE_GOAL_LABELS[String(goalKey || "")] || "Not sure";
+}
+
+function isAffirmative(raw) {
+  return /^(yes|y|yeah|yep|correct|that'?s right|right|si|sí)$/i.test(String(raw || "").trim());
+}
+
+function extractCoverageGoalOverride(raw) {
+  const text = normalizeSimpleText(raw);
+  if (!text) return "";
+  const byKey = Object.keys(COVERAGE_GOAL_LABELS).find((k) => text === k || text.includes(k.replace(/_/g, " ")));
+  if (byKey) return byKey;
+  const byLabel = Object.keys(COVERAGE_GOAL_LABELS).find((k) => text.includes(normalizeSimpleText(COVERAGE_GOAL_LABELS[k])));
+  if (byLabel) return byLabel;
+  return "";
+}
+
+function defaultGoalQuestionPrompt() {
+  return `Let's start with the goal. ${COVERAGE_GOAL_QUESTION}`;
+}
+
 function anyTrue(obj, keys) {
   const src = obj || {};
   return keys.some((k) => !!src[k]);
@@ -657,7 +759,7 @@ function normalizedContextFromProfile(profileSnapshot, nonPhiAnswers, phiAnswers
   const phi = phiAnswers && typeof phiAnswers === "object" ? phiAnswers : {};
   const age = p.age != null && p.age !== "" ? p.age : q.age;
   return {
-    intent: p.coverage_goal || q.intent || "",
+    intent: p.coverage_goal || q.coverage_goal || q.intent || "",
     coverage_amount: p.desired_coverage_amount || q.coverage_amount || "",
     budget_monthly: p.monthly_budget || q.budget_monthly || "",
     age: age != null ? String(age) : "",
@@ -849,7 +951,8 @@ module.exports = async function handler(req, res) {
     try {
       const canPhi = canAccessPhi(auth);
       const split = splitIncomingAnswers(body.qualification_answers, canPhi);
-      const sanitizedNonPhi = split.nonPhi;
+      const existingSession = await loadSession(cfg, leadId, leadSourceTable);
+      const sanitizedNonPhi = Object.assign({}, (existingSession && existingSession.qualification_answers) || {}, split.nonPhi);
       const phiFromAnswers = split.phi;
       const phiPayload = body.phi_answers && typeof body.phi_answers === "object" ? body.phi_answers : {};
       const session = await saveSession(cfg, leadId, leadSourceTable, Object.assign({}, body, { qualification_answers: sanitizedNonPhi }));
@@ -888,9 +991,14 @@ module.exports = async function handler(req, res) {
     try {
       const canPhi = canAccessPhi(auth);
       const split = splitIncomingAnswers(answers, canPhi);
+      const existingSession = await loadSession(cfg, leadId, leadSourceTable);
       const phiExisting = canPhi ? (await readPhiByLead(cfg, leadId, leadSourceTable)).payload || {} : {};
       const phiData = canPhi ? normalizePhiPayload(mergePhi(phiExisting, split.phi)) : {};
-      const sanitizedNonPhi = split.nonPhi;
+      const sanitizedNonPhi = Object.assign({}, (existingSession && existingSession.qualification_answers) || {}, split.nonPhi);
+      if (!sanitizedNonPhi.coverage_goal && profileSnapshot && profileSnapshot.coverage_goal) {
+        sanitizedNonPhi.coverage_goal = String(profileSnapshot.coverage_goal || "").trim();
+      }
+      if (sanitizedNonPhi.coverage_goal && !sanitizedNonPhi.intent) sanitizedNonPhi.intent = sanitizedNonPhi.coverage_goal;
       const context = normalizedContextFromProfile(profileSnapshot, sanitizedNonPhi, phiData);
       const risk = deriveRisk(context, phiData);
       const ragQuery = `Lead intent=${context.intent || ""}, protected=${context.protected_who || ""}, duration=${context.duration_need || ""}, must_have=${context.must_have || ""}, age=${context.age || ""}, coverage=${context.coverage_amount || ""}, budget=${context.budget_monthly || ""}, current_coverage=${context.current_coverage || ""}, priorities=${context.priority_1 || ""}/${context.priority_2 || ""}, risk=${risk.level}. Determine best-fit product type and alternatives from internal product knowledge only, then provide sales talking points.`;
@@ -1009,15 +1117,73 @@ module.exports = async function handler(req, res) {
       }
       const transcript = Array.isArray(workflowState.stage3_chat) ? workflowState.stage3_chat.slice() : [];
       const isStartSignal = /^(start|begin|go)$/i.test(userMessage);
+      const profileGoal = String((workflowState.profile_snapshot && workflowState.profile_snapshot.coverage_goal) || "").trim();
+      const knownGoal = String(mergedAnswers.coverage_goal || profileGoal || "").trim();
+      const nextNonPhi = Object.assign({}, mergedAnswers);
+      const nextPhi = normalizePhiPayload(mergePhi(existingPhi, split.phi || {}));
+      if (!workflowState.goal_phase) workflowState.goal_phase = knownGoal ? "done" : "ask_why";
+      if (knownGoal) {
+        nextNonPhi.coverage_goal = knownGoal;
+        nextNonPhi.intent = knownGoal;
+        workflowState.goal_phase = "done";
+      }
       const currentKey = String(workflowState.current_question_key || "") || nextQuestionKey(mergedAnswers, existingPhi, canPhi);
       const currentQuestion = questionByKey(currentKey);
       transcript.push({ role: "agent", content: userMessage, ts: new Date().toISOString(), key: currentKey || null });
 
       let assistantReply = "";
       let nextQuestionText = "";
-      const nextNonPhi = Object.assign({}, mergedAnswers);
-      const nextPhi = normalizePhiPayload(mergePhi(existingPhi, split.phi || {}));
-      if (isStartSignal && currentQuestion) {
+      if (workflowState.goal_phase !== "done") {
+        if (isStartSignal) {
+          assistantReply = defaultGoalQuestionPrompt();
+          nextQuestionText = COVERAGE_GOAL_QUESTION;
+        } else if (workflowState.goal_phase === "ask_why") {
+          const priorRaw = String(workflowState.goal_raw_draft || "").trim();
+          const rawGoalInput = priorRaw ? `${priorRaw}. ${userMessage}` : userMessage;
+          const inferred = classifyCoverageGoal(rawGoalInput);
+          if (isGoalConfidenceLow(inferred)) {
+            workflowState.goal_raw_draft = rawGoalInput;
+            assistantReply =
+              "I want to make sure I classify this correctly. Is the main goal covering final/funeral costs, replacing income for family living expenses, paying off debt/mortgage, or leaving a legacy?";
+            nextQuestionText = COVERAGE_GOAL_QUESTION;
+          } else {
+            workflowState.goal_phase = "await_confirm";
+            workflowState.goal_candidate = inferred.goal;
+            workflowState.goal_confidence = inferred.confidence;
+            workflowState.goal_notes = rawGoalInput;
+            workflowState.goal_raw_draft = "";
+            assistantReply = `I think the goal is ${goalLabel(inferred.goal)}. Is that correct?`;
+            nextQuestionText = assistantReply;
+          }
+        } else if (workflowState.goal_phase === "await_confirm") {
+          const candidate = String(workflowState.goal_candidate || "").trim();
+          const override = extractCoverageGoalOverride(userMessage);
+          const isConfirm = isAffirmative(userMessage);
+          const confirmedGoal = override || (isConfirm ? candidate : "");
+          if (!confirmedGoal) {
+            assistantReply =
+              `Please confirm "${goalLabel(candidate)}" or tell me the goal: final_expenses, income_replacement, mortgage_protection, debt_protection, legacy_planning, business_continuity, or not_sure.`;
+            nextQuestionText = assistantReply;
+          } else {
+            nextNonPhi.coverage_goal = confirmedGoal;
+            nextNonPhi.intent = confirmedGoal;
+            nextNonPhi.goal_notes = String(workflowState.goal_notes || workflowState.goal_raw_draft || "").trim();
+            workflowState.goal_phase = "done";
+            workflowState.goal_confirmed_at = new Date().toISOString();
+            workflowState.goal_candidate = "";
+            workflowState.goal_confidence = null;
+            workflowState.goal_raw_draft = "";
+            const nkGoal = nextQuestionKey(nextNonPhi, nextPhi, canPhi);
+            if (nkGoal) {
+              const nqGoal = questionByKey(nkGoal);
+              nextQuestionText = nqGoal ? nqGoal.prompt : "";
+              assistantReply = `Saved goal as ${goalLabel(confirmedGoal)}. Next: ${nextQuestionText}`;
+            } else {
+              assistantReply = `Saved goal as ${goalLabel(confirmedGoal)}. We have enough qualification data. I am generating recommendation details now.`;
+            }
+          }
+        }
+      } else if (isStartSignal && currentQuestion) {
         assistantReply = `Let's begin qualification. ${currentQuestion.prompt}`;
         nextQuestionText = currentQuestion.prompt;
       } else if (currentQuestion) {
