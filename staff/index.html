@@ -264,6 +264,100 @@
       opacity: 0.88;
       cursor: default;
     }
+    #lead-profile-form {
+      display: grid;
+      gap: 12px;
+    }
+    #lead-profile-form .lp-section {
+      border: 1px solid rgba(111, 139, 201, 0.38);
+      border-radius: 12px;
+      overflow: hidden;
+      background: rgba(7, 16, 31, 0.72);
+      counter-reset: lp-field;
+    }
+    #lead-profile-form .lp-section-bar {
+      margin: 0;
+      padding: 8px 12px;
+      border-bottom: 1px solid rgba(111, 139, 201, 0.38);
+      background: rgba(41, 73, 133, 0.88);
+      color: #e9f0ff;
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+    }
+    #lead-profile-form .lp-section .meta-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+      padding: 10px;
+    }
+    #lead-profile-form .lp-section .meta-card {
+      position: relative;
+      padding: 26px 8px 8px;
+      border: 1px solid rgba(155, 178, 230, 0.45);
+      border-radius: 10px;
+      background: rgba(18, 34, 63, 0.9);
+      box-shadow: inset 0 0 0 1px rgba(11, 24, 46, 0.5);
+      font-size: 0.85rem;
+    }
+    #lead-profile-form .lp-section .meta-card::before {
+      counter-increment: lp-field;
+      content: counter(lp-field);
+      position: absolute;
+      top: 6px;
+      right: 8px;
+      min-width: 20px;
+      height: 20px;
+      padding: 0 6px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #dbe8ff;
+      background: rgba(13, 24, 45, 0.96);
+      border: 1px solid rgba(155, 178, 230, 0.5);
+    }
+    #lead-profile-form .lp-section .meta-card label {
+      display: block;
+      margin: 0 0 4px;
+      padding: 4px 6px;
+      border: 1px solid rgba(116, 148, 217, 0.38);
+      border-radius: 8px;
+      background: rgba(8, 20, 39, 0.95);
+      color: #e6eeff;
+      font-size: 0.78rem;
+      font-weight: 600;
+      line-height: 1.2;
+    }
+    #lead-profile-form .lp-section .meta-card input,
+    #lead-profile-form .lp-section .meta-card select,
+    #lead-profile-form .lp-section .meta-card textarea {
+      margin-top: 4px;
+      min-height: 34px;
+      padding: 7px 9px;
+      font-size: 0.86rem;
+      border-radius: 8px;
+      background: #0b1a33;
+    }
+    #lead-profile-form .lp-section .meta-card textarea {
+      min-height: 72px;
+    }
+    #lead-profile-form .lp-section .meta-card .small-note {
+      margin-top: 0;
+      margin-bottom: 8px;
+      font-size: 0.78rem;
+    }
+    @media (max-width: 1300px) {
+      #lead-profile-form .lp-section .meta-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+    @media (max-width: 760px) {
+      #lead-profile-form .lp-section .meta-grid {
+        grid-template-columns: 1fr;
+      }
+    }
     .compose-outer {
       max-width: none;
       margin: 0;
@@ -1103,7 +1197,8 @@
                 <div id="lead-profile-readonly-block" class="hidden"></div>
                 <div id="lead-profile-empty" class="q-empty">Select a lead from the list on the left.</div>
                 <form id="lead-profile-form" class="compose-form hidden" autocomplete="off" onsubmit="return false;" aria-label="Lead profile">
-                  <div class="compose-contact-heading">Identity (required to contact + identify)</div>
+                  <section class="lp-section">
+                  <div class="lp-section-bar">1. Identity (required to contact + identify)</div>
                   <div class="meta-grid">
                     <div class="meta-card" style="grid-column: 1 / -1">
                       <label for="lp-id">Lead ID (read-only)</label>
@@ -1138,7 +1233,9 @@
                       <input id="lp-city" type="text" autocomplete="off" />
                     </div>
                   </div>
-                  <div class="compose-contact-heading" style="margin-top: 16px">Qualification Essentials (required)</div>
+                  </section>
+                  <section class="lp-section">
+                  <div class="lp-section-bar">2. Qualification Essentials (required)</div>
                   <div class="meta-grid">
                     <div class="meta-card">
                       <label for="lp-age">Age</label>
@@ -1157,7 +1254,9 @@
                       </select>
                     </div>
                   </div>
-                  <div class="compose-contact-heading" style="margin-top: 16px">Health Qualification (required for underwriting, secure)</div>
+                  </section>
+                  <section class="lp-section">
+                  <div class="lp-section-bar">3. Health Qualification (required for underwriting, secure)</div>
                   <div class="meta-grid">
                     <div id="lp-phi-block" class="meta-card" style="grid-column: 1 / -1">
                       <div class="small-note" id="lp-phi-note" style="margin-bottom:8px">Stored in encrypted PHI table only. Not used for RAG indexing.</div>
@@ -1174,7 +1273,9 @@
                       </div>
                     </div>
                   </div>
-                  <div class="compose-contact-heading" style="margin-top: 16px">Coverage &amp; Intent</div>
+                  </section>
+                  <section class="lp-section">
+                  <div class="lp-section-bar">4. Coverage &amp; Intent</div>
                   <div class="meta-grid">
                     <div class="meta-card">
                       <label for="lp-coverage-goal">Coverage Goal</label>
@@ -1201,7 +1302,9 @@
                       <input id="lp-policy-owner" type="text" autocomplete="off" />
                     </div>
                   </div>
-                  <div class="compose-contact-heading" style="margin-top: 16px">Sales / Pipeline</div>
+                  </section>
+                  <section class="lp-section">
+                  <div class="lp-section-bar">5. Sales / Pipeline</div>
                   <div class="meta-grid">
                     <div class="meta-card">
                       <label for="lp-tag">Tag</label>
@@ -1230,7 +1333,9 @@
                       <textarea id="lp-notes" rows="3" placeholder="Sales context notes"></textarea>
                     </div>
                   </div>
-                  <div class="compose-contact-heading" style="margin-top: 16px">Internal / System</div>
+                  </section>
+                  <section class="lp-section">
+                  <div class="lp-section-bar">6. Internal / System</div>
                   <div class="meta-grid">
                     <div class="meta-card" style="grid-column: 1 / -1">
                       <label for="lp-subscriber-id">ManyChat subscriber ID</label>
@@ -1255,7 +1360,9 @@
                       <input id="lp-assigned-agent" type="text" autocomplete="off" />
                     </div>
                   </div>
-                  <div class="compose-contact-heading" style="margin-top: 16px">Auto-derived</div>
+                  </section>
+                  <section class="lp-section">
+                  <div class="lp-section-bar">7. Auto-derived</div>
                   <div class="meta-grid">
                     <div class="meta-card">
                       <label for="lp-risk-level">Risk Level (auto)</label>
@@ -1274,7 +1381,9 @@
                       <input id="lp-reco-ts" type="text" readonly class="lp-ro" tabindex="-1" />
                     </div>
                   </div>
-                  <div class="compose-contact-heading" style="margin-top: 16px">System Read-only</div>
+                  </section>
+                  <section class="lp-section">
+                  <div class="lp-section-bar">8. System Read-only</div>
                   <div class="meta-grid">
                     <div class="meta-card">
                       <label for="lp-created-at">Created</label>
@@ -1289,6 +1398,7 @@
                       <input id="lp-staff-hidden" type="text" readonly class="lp-ro" tabindex="-1" />
                     </div>
                   </div>
+                  </section>
                   <div class="actions" style="margin-top: 16px">
                     <button id="lead-profile-save-btn" type="button" class="secondary" disabled data-help="Writes all profile fields to manychat_leads after you confirm.">Save changes</button>
                   </div>
