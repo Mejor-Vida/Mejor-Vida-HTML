@@ -3653,8 +3653,13 @@
           diabetes: !!(document.getElementById("lp-phi-diabetes") && document.getElementById("lp-phi-diabetes").checked),
           neurological_condition: !!(document.getElementById("lp-phi-neurological-condition") && document.getElementById("lp-phi-neurological-condition").checked),
           hospitalized_recent: !!(document.getElementById("lp-phi-hospitalized-recent") && document.getElementById("lp-phi-hospitalized-recent").checked),
+          atrial_fibrillation: !!(document.getElementById("lp-phi-atrial-fibrillation") && document.getElementById("lp-phi-atrial-fibrillation").checked),
+          stents_placed: !!(document.getElementById("lp-phi-stents-placed") && document.getElementById("lp-phi-stents-placed").checked),
           high_blood_pressure: !!(document.getElementById("lp-phi-high-blood-pressure") && document.getElementById("lp-phi-high-blood-pressure").checked),
+          cholesterol_high: !!(document.getElementById("lp-phi-cholesterol-high") && document.getElementById("lp-phi-cholesterol-high").checked),
           sleep_apnea: !!(document.getElementById("lp-phi-sleep-apnea") && document.getElementById("lp-phi-sleep-apnea").checked),
+          depression: !!(document.getElementById("lp-phi-depression") && document.getElementById("lp-phi-depression").checked),
+          anxiety: !!(document.getElementById("lp-phi-anxiety") && document.getElementById("lp-phi-anxiety").checked),
         };
         var nodes = document.querySelectorAll("#lp-phi-block [data-visible-when]");
         Array.prototype.forEach.call(nodes, function (node) {
