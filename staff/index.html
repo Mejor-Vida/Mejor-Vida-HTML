@@ -284,35 +284,65 @@
       position: sticky;
       top: 0;
       z-index: 30;
+      padding: 8px 10px;
       background: rgba(19, 39, 78, 0.98);
       backdrop-filter: blur(2px);
     }
-    #pane-product-selector .inbox-head > div:first-child {
+    #pane-product-selector .inbox-head .ps-head-copy {
       display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
+      flex-direction: column;
+      gap: 3px;
+      min-width: 0;
+      max-width: 58%;
     }
     #pane-product-selector .inbox-head .small-note {
       margin: 0;
+      white-space: normal;
+      line-height: 1.25;
     }
     .ps-head-actions {
       display: flex;
       align-items: center;
       gap: 8px;
       margin-left: auto;
-      flex-wrap: wrap;
+      flex-wrap: nowrap;
       justify-content: flex-end;
     }
     .ps-head-actions .actions {
       margin: 0;
       gap: 8px;
-      flex-wrap: wrap;
+      flex-wrap: nowrap;
       justify-content: flex-end;
+    }
+    .ps-head-actions .actions button {
+      padding: 7px 10px;
+      font-size: 0.86rem;
+      line-height: 1.1;
+      white-space: nowrap;
     }
     .ps-head-actions #ps-status {
       margin: 0;
       white-space: nowrap;
+    }
+    #ps-chat-log {
+      min-height: 50vh;
+      max-height: 65vh;
+      font-size: 0.97rem;
+      line-height: 1.45;
+      color: #eef4ff;
+    }
+    #ps-chat-log .ps-ai-line {
+      margin: 0 0 10px;
+      color: #eef4ff;
+      white-space: pre-wrap;
+    }
+    #ps-chat-log .ps-ai-label {
+      margin: 0 0 4px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #9db6ea;
     }
     @media (max-width: 1200px) {
       #product-selector-form .ps-grid-2 {
@@ -2026,7 +2056,7 @@
       <div class="compose-outer">
         <div class="compose-panel">
           <div class="inbox-head">
-            <div>
+            <div class="ps-head-copy">
               <strong>Product Selector</strong>
               <div class="small-note">Uses the active lead selected in Lead Profile. Product selection runs as a strategy-only chat using Lead Profile + internal RAG.</div>
             </div>
@@ -2185,7 +2215,7 @@
                   <div class="meta-grid">
                     <div class="meta-card" style="grid-column:1 / -1">
                       <label>Selector chat (strategy questions only)</label>
-                      <div id="ps-chat-log" class="chat-log" style="max-height:220px; border:1px solid var(--border); border-radius:10px; padding:8px; margin-top:6px; background:rgba(10,20,39,.45)"></div>
+                      <div id="ps-chat-log" class="chat-log" style="border:1px solid var(--border); border-radius:10px; padding:8px; margin-top:6px; background:rgba(10,20,39,.45)"></div>
                       <div style="display:grid; grid-template-columns:1fr auto; gap:8px; margin-top:8px">
                         <input id="ps-chat-input" type="text" placeholder="Type what the client said or ask the AI how to guide next…" />
                         <button id="ps-chat-send-btn" type="button" class="secondary">Send</button>
@@ -4691,19 +4721,16 @@
         el.chatLog.innerHTML = "";
         items.forEach(function (m) {
           if (m.role === "assistant") {
-            var qWrap = document.createElement("div");
-            qWrap.className = "ps-question-wrap";
             var qNum = questionOrder[String(m.key || "")] || null;
+            var qWrap = document.createElement("div");
+            qWrap.className = "ps-ai-line";
             var qLabel = document.createElement("div");
-            qLabel.className = "ps-question-label";
+            qLabel.className = "ps-ai-label";
             qLabel.textContent = qNum ? "Question " + qNum : "System";
-            var qBubble = document.createElement("div");
-            qBubble.className = "msg assistant";
-            qBubble.style.maxWidth = "100%";
-            qBubble.style.marginBottom = "0";
-            qBubble.textContent = String(m.content || "");
+            var qText = document.createElement("div");
+            qText.textContent = String(m.content || "");
             qWrap.appendChild(qLabel);
-            qWrap.appendChild(qBubble);
+            qWrap.appendChild(qText);
             el.chatLog.appendChild(qWrap);
             return;
           }
