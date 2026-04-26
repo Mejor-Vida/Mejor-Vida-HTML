@@ -1659,26 +1659,52 @@
                           <details class="lp-health-accordion">
                             <summary>Stage 3 — Dynamic Follow-ups</summary>
                             <div class="lp-health-accordion-body">
-                              <label class="lp-health-check"><input id="lp-phi-atrial-fibrillation" type="checkbox" /> Atrial fibrillation</label>
+                              <div class="lp-followup-row">
+                                <label class="lp-health-check"><input id="lp-phi-atrial-fibrillation" type="checkbox" /> Atrial fibrillation</label>
+                                <div class="lp-health-field" data-visible-when="atrial_fibrillation">
+                                  <label class="lp-health-check"><input id="lp-phi-afib-controlled" type="checkbox" /> Rate/rhythm controlled</label>
+                                </div>
+                              </div>
                               <label class="lp-health-check"><input id="lp-phi-pacemaker" type="checkbox" /> Pacemaker / defibrillator</label>
                               <label class="lp-health-check"><input id="lp-phi-blood-thinner-use" type="checkbox" /> Blood thinner use</label>
                               <label class="lp-health-check"><input id="lp-phi-coronary-artery-disease" type="checkbox" /> Coronary artery disease</label>
-                              <label class="lp-health-check"><input id="lp-phi-stents-placed" type="checkbox" /> Stents placed</label>
+                              <div class="lp-followup-row">
+                                <label class="lp-health-check"><input id="lp-phi-stents-placed" type="checkbox" /> Stents placed</label>
+                                <div class="lp-health-field" data-visible-when="stents_placed">
+                                  <label class="lp-health-check"><input id="lp-phi-stents-recent" type="checkbox" /> Stent placed in last 2 years</label>
+                                </div>
+                              </div>
                               <div class="lp-followup-row">
                                 <label class="lp-health-check"><input id="lp-phi-high-blood-pressure" type="checkbox" /> High blood pressure</label>
                                 <div class="lp-health-field" data-visible-when="high_blood_pressure">
                                   <label class="lp-health-check"><input id="lp-phi-bp-controlled" type="checkbox" /> BP controlled</label>
                                 </div>
                               </div>
-                              <label class="lp-health-check"><input id="lp-phi-cholesterol-high" type="checkbox" /> High cholesterol</label>
+                              <div class="lp-followup-row">
+                                <label class="lp-health-check"><input id="lp-phi-cholesterol-high" type="checkbox" /> High cholesterol</label>
+                                <div class="lp-health-field" data-visible-when="cholesterol_high">
+                                  <label class="lp-health-check"><input id="lp-phi-cholesterol-medication" type="checkbox" /> On cholesterol medication</label>
+                                  <label class="lp-health-check"><input id="lp-phi-cholesterol-controlled" type="checkbox" /> Cholesterol controlled</label>
+                                </div>
+                              </div>
                               <div class="lp-followup-row">
                                 <label class="lp-health-check"><input id="lp-phi-sleep-apnea" type="checkbox" /> Sleep apnea</label>
                                 <div class="lp-health-field" data-visible-when="sleep_apnea">
                                   <label class="lp-health-check"><input id="lp-phi-cpap-use" type="checkbox" /> CPAP use</label>
                                 </div>
                               </div>
-                              <label class="lp-health-check"><input id="lp-phi-depression" type="checkbox" /> Depression</label>
-                              <label class="lp-health-check"><input id="lp-phi-anxiety" type="checkbox" /> Anxiety</label>
+                              <div class="lp-followup-row">
+                                <label class="lp-health-check"><input id="lp-phi-depression" type="checkbox" /> Depression</label>
+                                <div class="lp-health-field" data-visible-when="depression">
+                                  <label class="lp-health-check"><input id="lp-phi-depression-treated" type="checkbox" /> Stable on treatment</label>
+                                </div>
+                              </div>
+                              <div class="lp-followup-row">
+                                <label class="lp-health-check"><input id="lp-phi-anxiety" type="checkbox" /> Anxiety</label>
+                                <div class="lp-health-field" data-visible-when="anxiety">
+                                  <label class="lp-health-check"><input id="lp-phi-anxiety-treated" type="checkbox" /> Stable on treatment</label>
+                                </div>
+                              </div>
                               <div class="lp-health-field">
                                 <label for="lp-phi-medication-select" class="lp-health-note">Current medications</label>
                               <div id="lp-phi-medication-search-wrap" class="lp-med-search-wrap">
@@ -3436,17 +3462,23 @@
         ["lp-phi-awaiting-surgery", "awaiting_surgery"],
         ["lp-phi-undiagnosed-symptoms", "undiagnosed_symptoms"],
         ["lp-phi-atrial-fibrillation", "atrial_fibrillation"],
+        ["lp-phi-afib-controlled", "afib_controlled"],
         ["lp-phi-pacemaker", "pacemaker"],
         ["lp-phi-blood-thinner-use", "blood_thinner_use"],
         ["lp-phi-coronary-artery-disease", "coronary_artery_disease"],
         ["lp-phi-stents-placed", "stents_placed"],
+        ["lp-phi-stents-recent", "stents_recent"],
         ["lp-phi-high-blood-pressure", "high_blood_pressure"],
         ["lp-phi-bp-controlled", "bp_controlled"],
         ["lp-phi-cholesterol-high", "cholesterol_high"],
+        ["lp-phi-cholesterol-medication", "cholesterol_medication"],
+        ["lp-phi-cholesterol-controlled", "cholesterol_controlled"],
         ["lp-phi-sleep-apnea", "sleep_apnea"],
         ["lp-phi-cpap-use", "cpap_use"],
         ["lp-phi-depression", "depression"],
+        ["lp-phi-depression-treated", "depression_treated"],
         ["lp-phi-anxiety", "anxiety"],
+        ["lp-phi-anxiety-treated", "anxiety_treated"],
       ];
       var LP_PHI_TEXT_MAP = [
         ["lp-phi-heart-event-date", "heart_event_date"],

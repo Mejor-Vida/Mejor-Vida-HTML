@@ -85,17 +85,23 @@ const PHI_FIELD_KEYS = [
   "awaiting_surgery",
   "undiagnosed_symptoms",
   "atrial_fibrillation",
+  "afib_controlled",
   "pacemaker",
   "blood_thinner_use",
   "coronary_artery_disease",
   "stents_placed",
+  "stents_recent",
   "high_blood_pressure",
   "bp_controlled",
   "cholesterol_high",
+  "cholesterol_medication",
+  "cholesterol_controlled",
   "sleep_apnea",
   "cpap_use",
   "depression",
+  "depression_treated",
   "anxiety",
+  "anxiety_treated",
   "doctor_visits_2y",
   "current_medications",
   "medication_count",
@@ -318,6 +324,15 @@ const QUESTION_FLOW = [
     },
   },
   {
+    key: "afib_controlled",
+    prompt: "If atrial fibrillation, is it currently controlled? (yes/no)",
+    type: "boolean",
+    phi: true,
+    askIf: function (nonPhiAnswers, phiAnswers) {
+      return !!(phiAnswers && phiAnswers.atrial_fibrillation);
+    },
+  },
+  {
     key: "pacemaker",
     prompt: "Any pacemaker or defibrillator? (yes/no)",
     type: "boolean",
@@ -336,6 +351,33 @@ const QUESTION_FLOW = [
     },
   },
   {
+    key: "coronary_artery_disease",
+    prompt: "Any coronary artery disease diagnosis? (yes/no)",
+    type: "boolean",
+    phi: true,
+    askIf: function (nonPhiAnswers, phiAnswers) {
+      return anyTrue(phiAnswers, ["heart_event_recent", "heart_attack_history", "congestive_heart_failure"]);
+    },
+  },
+  {
+    key: "stents_placed",
+    prompt: "Any stents placed? (yes/no)",
+    type: "boolean",
+    phi: true,
+    askIf: function (nonPhiAnswers, phiAnswers) {
+      return anyTrue(phiAnswers, ["heart_event_recent", "heart_attack_history", "coronary_artery_disease"]);
+    },
+  },
+  {
+    key: "stents_recent",
+    prompt: "If stents were placed, was that in the last 2 years? (yes/no)",
+    type: "boolean",
+    phi: true,
+    askIf: function (nonPhiAnswers, phiAnswers) {
+      return !!(phiAnswers && phiAnswers.stents_placed);
+    },
+  },
+  {
     key: "high_blood_pressure",
     prompt: "Any high blood pressure diagnosis? (yes/no)",
     type: "boolean",
@@ -351,6 +393,30 @@ const QUESTION_FLOW = [
     },
   },
   {
+    key: "cholesterol_high",
+    prompt: "Any high cholesterol diagnosis? (yes/no)",
+    type: "boolean",
+    phi: true,
+  },
+  {
+    key: "cholesterol_medication",
+    prompt: "If high cholesterol, currently taking cholesterol medication? (yes/no)",
+    type: "boolean",
+    phi: true,
+    askIf: function (nonPhiAnswers, phiAnswers) {
+      return !!(phiAnswers && phiAnswers.cholesterol_high);
+    },
+  },
+  {
+    key: "cholesterol_controlled",
+    prompt: "If high cholesterol, is it currently controlled? (yes/no)",
+    type: "boolean",
+    phi: true,
+    askIf: function (nonPhiAnswers, phiAnswers) {
+      return !!(phiAnswers && phiAnswers.cholesterol_high);
+    },
+  },
+  {
     key: "sleep_apnea",
     prompt: "Any sleep apnea diagnosis? (yes/no)",
     type: "boolean",
@@ -363,6 +429,36 @@ const QUESTION_FLOW = [
     phi: true,
     askIf: function (nonPhiAnswers, phiAnswers) {
       return !!(phiAnswers && phiAnswers.sleep_apnea);
+    },
+  },
+  {
+    key: "depression",
+    prompt: "Any depression diagnosis? (yes/no)",
+    type: "boolean",
+    phi: true,
+  },
+  {
+    key: "depression_treated",
+    prompt: "If depression, is it stable on treatment? (yes/no)",
+    type: "boolean",
+    phi: true,
+    askIf: function (nonPhiAnswers, phiAnswers) {
+      return !!(phiAnswers && phiAnswers.depression);
+    },
+  },
+  {
+    key: "anxiety",
+    prompt: "Any anxiety diagnosis? (yes/no)",
+    type: "boolean",
+    phi: true,
+  },
+  {
+    key: "anxiety_treated",
+    prompt: "If anxiety, is it stable on treatment? (yes/no)",
+    type: "boolean",
+    phi: true,
+    askIf: function (nonPhiAnswers, phiAnswers) {
+      return !!(phiAnswers && phiAnswers.anxiety);
     },
   },
   {
