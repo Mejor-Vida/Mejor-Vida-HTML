@@ -1753,16 +1753,18 @@
                       <label for="lp-desired-coverage">Desired Coverage Amount ($)</label>
                       <select id="lp-desired-coverage">
                         <option value="">Select amount...</option>
-                        <option value="1000">1,000</option>
-                        <option value="25000">25,000</option>
-                        <option value="50000">50,000</option>
+                        <option value="5000">5,000</option>
+                        <option value="10000">10,000</option>
+                        <option value="15000">15,000</option>
+                        <option value="20000">20,000</option>
                         <option value="100000">100,000</option>
-                        <option value="250000">250,000</option>
+                        <option value="200000">200,000</option>
                         <option value="500000">500,000</option>
+                        <option value="750000">750,000</option>
                         <option value="1000000">1,000,000</option>
                         <option value="1500000">1,500,000</option>
                         <option value="2000000">2,000,000</option>
-                        <option value="custom">Custom</option>
+                        <option value="custom">Other</option>
                       </select>
                       <input id="lp-desired-coverage-custom" type="number" inputmode="numeric" min="1000" max="2000000" step="1000" placeholder="Enter custom amount" style="display:none; margin-top:6px" />
                     </div>
@@ -1770,14 +1772,17 @@
                       <label for="lp-monthly-budget">Monthly Budget ($)</label>
                       <select id="lp-monthly-budget">
                         <option value="">Select budget...</option>
-                        <option value="50">Up to $50</option>
-                        <option value="100">Up to $100</option>
-                        <option value="150">Up to $150</option>
-                        <option value="200">Up to $200</option>
-                        <option value="300">Up to $300</option>
-                        <option value="500">Up to $500</option>
-                        <option value="750">Up to $750</option>
-                        <option value="1000">Up to $1,000</option>
+                        <option value="30">$30</option>
+                        <option value="60">$60</option>
+                        <option value="100">$100</option>
+                        <option value="150">$150</option>
+                        <option value="200">$200</option>
+                        <option value="300">$300</option>
+                        <option value="400">$400</option>
+                        <option value="500">$500</option>
+                        <option value="600">$600</option>
+                        <option value="1000">$1,000</option>
+                        <option value="custom">Other</option>
                       </select>
                     </div>
                     <div class="meta-card">
@@ -3926,7 +3931,7 @@
         var covCustom = document.getElementById("lp-desired-coverage-custom");
         if (covSel && covCustom) {
           var cv = String((d.profile_ext && d.profile_ext.desired_coverage_amount) || "").trim();
-          var known = ["1000", "25000", "50000", "100000", "250000", "500000", "1000000", "1500000", "2000000"];
+          var known = ["5000", "10000", "15000", "20000", "100000", "200000", "500000", "750000", "1000000", "1500000", "2000000"];
           if (cv && known.indexOf(cv) === -1) {
             covSel.value = "custom";
             covCustom.value = cv;
