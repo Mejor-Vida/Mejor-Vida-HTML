@@ -1631,6 +1631,7 @@
                               <label class="lp-health-check"><input id="lp-phi-anxiety" type="checkbox" /> Anxiety</label>
                               <div class="lp-health-field">
                                 <label for="lp-phi-medication-select" class="lp-health-note">Current medications</label>
+                              <input id="lp-phi-medication-search" type="text" placeholder="Type to narrow medications alphabetically..." autocomplete="off" />
                                 <div class="lp-med-picker-row">
                                   <select id="lp-phi-medication-select">
                                     <option value="">Select medication...</option>
@@ -3390,7 +3391,9 @@
         "Insulin glargine","Insulin lispro","Jardiance","Farxiga","Ozempic","Trulicity","Levothyroxine",
         "Omeprazole","Pantoprazole","Albuterol","Advair","Spiriva","Gabapentin","Sertraline","Escitalopram",
         "Fluoxetine","Bupropion","Tamsulosin","Furosemide","Prednisone","Montelukast","CPAP therapy"
-      ];
+      ].slice().sort(function (a, b) {
+        return String(a || "").toLowerCase().localeCompare(String(b || "").toLowerCase());
+      });
       var leadProfileMedicationList = [];
 
       function parseMedicationList(raw) {
@@ -3444,19 +3447,38 @@
         renderMedicationListUi();
       }
 
+      function renderMedicationOptions(filterText) {
+        var sel = document.getElementById("lp-phi-medication-select");
+        if (!sel) return;
+        var q = String(filterText || "").trim().toLowerCase();
+        var before = sel.value;
+        sel.innerHTML = '<option value="">Select medication...</option>';
+        LP_COMMON_MEDICATIONS.forEach(function (m) {
+          var name = String(m || "");
+          if (q && name.toLowerCase().indexOf(q) === -1) return;
+          var opt = document.createElement("option");
+          opt.value = name;
+          opt.textContent = name;
+          sel.appendChild(opt);
+        });
+        if (before) sel.value = before;
+      }
+
       function wireMedicationPicker() {
         var sel = document.getElementById("lp-phi-medication-select");
+        var search = document.getElementById("lp-phi-medication-search");
         var addBtn = document.getElementById("lp-phi-medication-add");
         var custom = document.getElementById("lp-phi-medication-custom");
         var customBtn = document.getElementById("lp-phi-medication-custom-add");
         var list = document.getElementById("lp-phi-medication-list");
         if (sel && !sel.getAttribute("data-med-loaded")) {
           sel.setAttribute("data-med-loaded", "1");
-          LP_COMMON_MEDICATIONS.forEach(function (m) {
-            var opt = document.createElement("option");
-            opt.value = m;
-            opt.textContent = m;
-            sel.appendChild(opt);
+          renderMedicationOptions("");
+        }
+        if (search && !search.getAttribute("data-med-wired")) {
+          search.setAttribute("data-med-wired", "1");
+          search.addEventListener("input", function () {
+            renderMedicationOptions(search.value || "");
           });
         }
         if (addBtn && !addBtn.getAttribute("data-med-wired")) {
