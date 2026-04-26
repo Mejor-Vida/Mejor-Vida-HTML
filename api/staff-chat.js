@@ -7,7 +7,6 @@
 
 const { requireStaffAuth } = require("./auth-check");
 const { generateEmbedding } = require("../lib/openai");
-const { rpcMatchKnowledgeChunks } = require("../lib/supabase");
 
 function json(res, status, payload) {
   res.status(status).setHeader("Content-Type", "application/json");
@@ -50,6 +49,64 @@ function staffSystemPrompt() {
 Current date: ${today}`;
 }
 
+async function rpcMatchInternalKnowledgeChunks(supabaseUrl, serviceKey, embedding, matchCount, minSimilarity) {
+  const r = await fetch(`${supabaseUrl.replace(/\/$/, "")}/rest/v1/rpc/match_internal_knowledge_chunks`, {
+    method: "POST",
+    headers: {
+      apikey: serviceKey,
+      Authorization: `Bearer ${serviceKey}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      query_embedding: embedding,
+      match_count: matchCount,
+      min_similarity: minSimilarity,
+      carrier_filter: null,
+      category_filter: null,
+    }),
+  });
+  const text = await r.text();
+  if (!r.ok) throw new Error(`internal rag rpc ${r.status}: ${text.slice(0, 300)}`);
+  return JSON.parse(text || "[]");
+}
+
+function buildGroundedPrompt(message, ctx) {
+  return (
+    `Internal KB excerpts:\n${ctx || "[none found]"}\n\n` +
+    `User question:\n${message}\n\n` +
+    `Instruction: Answer ONLY from internal KB excerpts. If a detail is missing, say it is not in internal KB.`
+  );
+}
+
+async function complete(openaiKey, model, temperature, maxTokens, messages) {
+  const r = await fetch("https://api.openai.com/v1/chat/completions", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${openaiKey}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      model,
+      temperature,
+      max_tokens: maxTokens,
+      messages,
+    }),
+  });
+  const data = await r.json();
+  if (!r.ok) {
+    const err = data && data.error && data.error.message ? data.error.message : JSON.stringify(data || {});
+    throw new Error(`OpenAI error: ${String(err).slice(0, 200)}`);
+  }
+  return (
+    (data &&
+      data.choices &&
+      data.choices[0] &&
+      data.choices[0].message &&
+      data.choices[0].message.content) ||
+    ""
+  );
+}
+
 module.exports = async function handler(req, res) {
   if (req.method !== "POST") {
     res.setHeader("Allow", "POST");
@@ -79,50 +136,43 @@ module.exports = async function handler(req, res) {
 
   try {
     const emb = await generateEmbedding(openaiKey, message);
-    const chunks = await rpcMatchKnowledgeChunks(supabaseUrl, serviceKey, emb.embedding, 5, 0.35);
+    const chunks = await rpcMatchInternalKnowledgeChunks(supabaseUrl, serviceKey, emb.embedding, 8, 0.25);
     const ctx = (chunks || [])
       .map((c, i) => `[${i + 1}] ${String((c && c.content) || "").slice(0, 2400)}`)
       .join("\n\n");
+    const internalStrong = Array.isArray(chunks) && chunks.length >= 2;
+    if (internalStrong) {
+      const groundedMessages = [
+        {
+          role: "system",
+          content:
+            staffSystemPrompt() +
+            "\n\nResponse policy: You are in INTERNAL-KB mode. Use only provided internal excerpts. Start with: Source: Internal Knowledge Base (RAG).",
+        },
+        ...conversationHistory,
+        { role: "user", content: buildGroundedPrompt(message, ctx) },
+      ];
+      const text = await complete(openaiKey, "gpt-4o", 0.15, 1200, groundedMessages);
+      return json(res, 200, { answer: String(text).trim(), source: "internal_rag" });
+    }
 
-    const messages = [
-      { role: "system", content: staffSystemPrompt() },
+    const fallbackMessages = [
+      {
+        role: "system",
+        content:
+          staffSystemPrompt() +
+          "\n\nResponse policy: Internal KB retrieval was insufficient. Answer from general insurance knowledge and clearly mark uncertainty. Start with: Source: General Industry Knowledge (RAG insufficient).",
+      },
       ...conversationHistory,
       {
         role: "user",
         content:
-          `Knowledge base context (may be incomplete):\n${ctx || "[none found]"}\n\n` +
           `User question:\n${message}\n\n` +
-          `Instruction: Use KB context when available; clearly label assumptions and confidence.`,
+          `Internal retrieval status: insufficient chunks (${Array.isArray(chunks) ? chunks.length : 0}).`,
       },
     ];
-
-    const r = await fetch("https://api.openai.com/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${openaiKey}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        model: "gpt-4o",
-        temperature: 0.2,
-        max_tokens: 1200,
-        messages,
-      }),
-    });
-    const data = await r.json();
-    if (!r.ok) {
-      const err = data && data.error && data.error.message ? data.error.message : JSON.stringify(data || {});
-      return json(res, 500, { error: `OpenAI error: ${String(err).slice(0, 200)}` });
-    }
-
-    const text =
-      (data &&
-        data.choices &&
-        data.choices[0] &&
-        data.choices[0].message &&
-        data.choices[0].message.content) ||
-      "";
-    return json(res, 200, { answer: String(text).trim() });
+    const text = await complete(openaiKey, "gpt-4o", 0.2, 1200, fallbackMessages);
+    return json(res, 200, { answer: String(text).trim(), source: "general_fallback" });
   } catch (e) {
     console.error("staff-chat", e);
     return json(res, 500, { error: "Failed to generate staff answer" });
