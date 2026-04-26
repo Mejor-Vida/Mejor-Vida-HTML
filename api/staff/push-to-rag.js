@@ -2,6 +2,16 @@ const { requireStaffAuth } = require("../auth-check");
 const { generateEmbedding } = require("../../lib/openai");
 const { json, readJsonBody, serviceConfig, restSelect, restInsert, restPatch } = require("./_inbox-lib");
 
+function sanitizeForRag(text) {
+  const t = String(text || "");
+  const lines = t.split(/\r?\n/);
+  const blocked = /(diagnos|condition|medication|prescription|hospital|surgery|insulin|cancer|stroke|copd|kidney|heart|phi|underwriting notes)/i;
+  return lines
+    .filter((ln) => !blocked.test(ln))
+    .join("\n")
+    .trim();
+}
+
 async function reformatForKnowledgeBase(openaiKey, questionText, replyDraft) {
   const systemPrompt =
     "You are a knowledge base formatter. Given a customer question and an email reply, rewrite only the factual answer as a clean, concise knowledge snippet. Remove greetings, sign-offs, and any conversational filler. Do not include labels such as Q:, A:, Question:, or Answer:. Return plain answer text only.";
@@ -134,7 +144,7 @@ module.exports = async function handler(req, res) {
     if (!rows || !rows.length) return json(res, 404, { error: "Question not found" });
     const q = rows[0];
     const baseQ = String(q.question || "").trim();
-    const notes = String(q.staff_context || q.edited_question || "").trim();
+    const notes = sanitizeForRag(String(q.staff_context || q.edited_question || "").trim());
     const finalQuestion = notes
       ? `Customer question:\n${baseQ || "(not recorded)"}\n\nStaff-provided facts for the knowledge entry:\n${notes}`
       : baseQ;

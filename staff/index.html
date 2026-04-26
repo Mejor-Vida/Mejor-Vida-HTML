@@ -1065,7 +1065,7 @@
                 <div id="lead-profile-readonly-block" class="hidden"></div>
                 <div id="lead-profile-empty" class="q-empty">Select a lead from the list on the left.</div>
                 <form id="lead-profile-form" class="compose-form hidden" autocomplete="off" onsubmit="return false;" aria-label="Lead profile">
-                  <div class="compose-contact-heading">Contact</div>
+                  <div class="compose-contact-heading">Qualification-critical (top priority)</div>
                   <div class="meta-grid">
                     <div class="meta-card" style="grid-column: 1 / -1">
                       <label for="lp-id">Lead ID (read-only)</label>
@@ -1092,7 +1092,7 @@
                       <input id="lp-language" type="text" placeholder="e.g. English" autocomplete="off" />
                     </div>
                   </div>
-                  <div class="compose-contact-heading" style="margin-top: 16px">Health &amp; underwriting hints</div>
+                  <div class="compose-contact-heading" style="margin-top: 16px">Medical &amp; underwriting (PHI, secure staff-only)</div>
                   <div class="meta-grid">
                     <div class="meta-card">
                       <label for="lp-age">Age</label>
@@ -1110,8 +1110,17 @@
                         <option value="false">No</option>
                       </select>
                     </div>
+                    <div id="lp-phi-block" class="meta-card" style="grid-column: 1 / -1">
+                      <div class="small-note" id="lp-phi-note" style="margin-bottom:8px">PHI fields load only for authorized staff and are stored in a separate encrypted table.</div>
+                      <label for="lp-phi-rx">Prescription medications</label>
+                      <input id="lp-phi-rx" type="text" placeholder="e.g. metformin, lisinopril" autocomplete="off" />
+                      <label for="lp-phi-conditions" style="margin-top:10px">Conditions (comma-separated)</label>
+                      <input id="lp-phi-conditions" type="text" placeholder="e.g. hypertension, diabetes" autocomplete="off" />
+                      <label for="lp-phi-followups" style="margin-top:10px">Underwriting notes</label>
+                      <textarea id="lp-phi-followups" rows="3" placeholder="Hospitalizations, surgeries, specialty notes"></textarea>
+                    </div>
                   </div>
-                  <div class="compose-contact-heading" style="margin-top: 16px">Pipeline &amp; source</div>
+                  <div class="compose-contact-heading" style="margin-top: 16px">Internal/system fields</div>
                   <div class="meta-grid">
                     <div class="meta-card">
                       <label for="lp-tag">Tag</label>
@@ -1212,6 +1221,9 @@
               <div class="compose-main-col staff-tool-main">
                 <div id="product-selector-summary" class="staff-lead-summary"></div>
                 <form id="product-selector-form" class="compose-form" autocomplete="off" onsubmit="return false;" aria-label="Product selector">
+                  <div class="compose-contact-heading">Guided qualification chat (system asks one question at a time)</div>
+                  <div class="small-note" style="margin-bottom:8px">The system drives the sequence. Agent enters each client answer; next question is selected automatically.</div>
+                  <div class="ps-legacy-fields" style="display:none">
                   <div class="compose-contact-heading">Stage 1 — Intent</div>
                   <div class="meta-grid ps-grid-2">
                     <div class="meta-card">
@@ -1349,7 +1361,8 @@
                     </div>
                   </div>
 
-                  <div class="compose-contact-heading" style="margin-top:16px">Stage 3 — Dynamic follow-ups</div>
+                  </div>
+                  <div class="compose-contact-heading" style="margin-top:16px">Guided chat</div>
                   <div class="meta-grid">
                     <div class="meta-card" style="grid-column:1 / -1">
                       <label class="ps-inline-check"><input id="ps-stage2-complete" type="checkbox" /> Stage 2 completed with client</label>
@@ -1370,7 +1383,7 @@
 
                   <div class="actions" style="margin-top:14px">
                     <button id="ps-save-btn" type="button" class="secondary">Save Session</button>
-                    <button id="ps-run-btn" type="button">Run Recommendation</button>
+                    <button id="ps-run-btn" type="button">Refresh Recommendation</button>
                   </div>
                   <div id="ps-status" class="small-note"></div>
                 </form>
@@ -2525,6 +2538,7 @@
       var composeDeletePending = null;
       var leadProfileBaselineJson = "";
       var leadProfileReadOnly = false;
+      var leadProfileCanAccessPhi = false;
       var leadProfileDirtyTimer = null;
       var productSelectorSession = null;
 
@@ -2692,6 +2706,12 @@
         setv("lp-updated-at", d.updated_at ? fmtDate(d.updated_at) : "");
         var sh = document.getElementById("lp-staff-hidden");
         if (sh) sh.value = d.staff_hidden_at ? fmtDate(d.staff_hidden_at) : "";
+        var phi = d && d.phi && typeof d.phi === "object" ? d.phi : {};
+        setv("lp-phi-rx", phi.prescription_meds_text || "");
+        setv("lp-phi-conditions", Array.isArray(phi.conditions) ? phi.conditions.join(", ") : "");
+        setv("lp-phi-followups", phi.followups || "");
+        var phiBlock = document.getElementById("lp-phi-block");
+        if (phiBlock) phiBlock.style.display = leadProfileCanAccessPhi ? "" : "none";
       }
 
       function serializeLeadProfileFromForm() {
@@ -2715,6 +2735,14 @@
           drop_off_stage: String(document.getElementById("lp-drop-off-stage").value || "").trim(),
           opt_in: !!document.getElementById("lp-opt-in").checked,
           manychat_subscriber_id: String(document.getElementById("lp-subscriber-id").value || "").trim(),
+          phi: {
+            prescription_meds_text: String((document.getElementById("lp-phi-rx") && document.getElementById("lp-phi-rx").value) || "").trim(),
+            conditions: String((document.getElementById("lp-phi-conditions") && document.getElementById("lp-phi-conditions").value) || "")
+              .split(",")
+              .map(function (x) { return String(x || "").trim(); })
+              .filter(Boolean),
+            followups: String((document.getElementById("lp-phi-followups") && document.getElementById("lp-phi-followups").value) || "").trim(),
+          },
         };
       }
 
@@ -2743,6 +2771,7 @@
           drop_off_stage: s.drop_off_stage || null,
           opt_in: s.opt_in,
           manychat_subscriber_id: s.manychat_subscriber_id || null,
+          phi: leadProfileCanAccessPhi ? s.phi : undefined,
         };
       }
 
@@ -2801,6 +2830,7 @@
         if (!empty || !form || !banner || !roBlock) return;
         leadProfileReadOnly = false;
         if (!composeSelectedLeadId || !accessToken) {
+          leadProfileCanAccessPhi = false;
           leadProfileBaselineJson = "";
           empty.classList.remove("hidden");
           empty.textContent = "Select a lead from the list on the left.";
@@ -2852,13 +2882,14 @@
           });
           var d = data && data.detail;
           if (!d) throw new Error("No detail returned");
+          leadProfileCanAccessPhi = !!(data && data.can_access_phi);
           leadProfileReadOnly = !!d.read_only;
           if (leadProfileReadOnly) {
             banner.classList.remove("hidden");
             banner.textContent =
               "This lead lives in \"" +
               String(d.source_table || "unknown") +
-              "\". Only manychat_leads rows can be edited here; values below are read-only.";
+              "\" and is read-only in this profile view.";
             renderLeadProfileReadonly(d);
             roBlock.classList.remove("hidden");
             leadProfileBaselineJson = "";
@@ -3002,6 +3033,7 @@
           output: document.getElementById("ps-output"),
           saveBtn: document.getElementById("ps-save-btn"),
           runBtn: document.getElementById("ps-run-btn"),
+          legacyFields: document.querySelector("#product-selector-form .ps-legacy-fields"),
         };
       }
 
@@ -3119,7 +3151,7 @@
         if (!el.chatLog) return;
         var items = Array.isArray(transcript) ? transcript : [];
         if (!items.length) {
-          el.chatLog.innerHTML = '<div class="q-empty">Stage 3 chat will appear here after Stage 1/2 are complete.</div>';
+          el.chatLog.innerHTML = '<div class="q-empty">Guided chat will appear here. The system asks one question at a time.</div>';
           return;
         }
         el.chatLog.innerHTML = "";
@@ -3239,7 +3271,12 @@
           applyProductSelectorAnswersToUi((s && s.qualification_answers) || {});
           renderProductSelectorOutput(s && s.recommendation, s && s.confidence, s && s.risk_summary, s && s.sales_enablement);
           renderProductSelectorChat(s && s.workflow_state && s.workflow_state.stage3_chat);
-          if (el.status) el.status.textContent = s ? "Session loaded." : "No session yet. Fill fields and save.";
+          if (el.status) el.status.textContent = s ? "Session loaded." : "No session yet. Guided flow will start with the first question.";
+          var hasChat = !!(s && s.workflow_state && Array.isArray(s.workflow_state.stage3_chat) && s.workflow_state.stage3_chat.length);
+          if (!hasChat) {
+            if (el.chatInput) el.chatInput.value = "start";
+            await sendProductSelectorChatCore(true);
+          }
         } catch (e) {
           if (el.status) el.status.textContent = (e && e.message) || "Could not load selector session.";
         }
@@ -3289,16 +3326,6 @@
         if (el.status) el.status.textContent = "Running recommendation…";
         try {
           var answers = productSelectorAnswersFromUi();
-          var stage1Err = validateStage1Answers(answers);
-          if (stage1Err) {
-            if (el.status) el.status.textContent = stage1Err;
-            return;
-          }
-          var stage2Err = validateStage2Answers(answers);
-          if (stage2Err) {
-            if (el.status) el.status.textContent = stage2Err;
-            return;
-          }
           var data = await authedApi(
             "/api/staff/product-selector",
             {
@@ -3325,6 +3352,7 @@
 
       function wireProductSelectorUi() {
         var el = getProductSelectorEls();
+        if (el.legacyFields) el.legacyFields.style.display = "none";
         if (el.intent && !el.intent.getAttribute("data-wired")) {
           el.intent.setAttribute("data-wired", "1");
           el.intent.addEventListener("change", syncProductSelectorIntentDetails);
@@ -3359,30 +3387,24 @@
       }
 
       async function sendProductSelectorChat() {
+        return sendProductSelectorChatCore(false);
+      }
+
+      async function sendProductSelectorChatCore(isAutoStart) {
         var el = getProductSelectorEls();
         var lead = getSelectedLeadFromList();
         if (!lead) {
           if (el.status) el.status.textContent = "Select a lead first.";
           return;
         }
-        var answers = productSelectorAnswersFromUi();
-        var stage1Err = validateStage1Answers(answers);
-        if (stage1Err) {
-          if (el.status) el.status.textContent = stage1Err;
-          return;
-        }
-        var stage2Err = validateStage2Answers(answers);
-        if (stage2Err) {
-          if (el.status) el.status.textContent = stage2Err;
-          return;
-        }
         var msg = String((el.chatInput && el.chatInput.value) || "").trim();
-        if (!msg) return;
+        if (!msg && !isAutoStart) return;
+        if (!msg && isAutoStart) msg = "start";
         if (el.chatSendBtn) {
           el.chatSendBtn.disabled = true;
           el.chatSendBtn.textContent = "Sending…";
         }
-        if (el.status) el.status.textContent = "Stage 3 AI is guiding next step…";
+        if (el.status) el.status.textContent = "Guided flow is determining next question…";
         try {
           var data = await authedApi(
             "/api/staff/product-selector",
@@ -3396,16 +3418,19 @@
           );
           if (el.chatInput) el.chatInput.value = "";
           productSelectorSession = data && data.session ? data.session : productSelectorSession;
+          if (data && data.qualification_answers) {
+            applyProductSelectorAnswersToUi(data.qualification_answers);
+          }
           renderProductSelectorOutput(
             data.recommendation,
             data.confidence,
-            (productSelectorSession && productSelectorSession.risk_summary) || null,
+            data.risk_summary || (productSelectorSession && productSelectorSession.risk_summary) || null,
             data.sales_enablement
           );
           renderProductSelectorChat((data.workflow_state && data.workflow_state.stage3_chat) || []);
-          if (el.status) el.status.textContent = "Stage 3 updated. Confidence adjusted.";
+          if (el.status) el.status.textContent = data.next_question ? "Next question ready." : "Guided qualification complete. Recommendation refreshed.";
         } catch (e) {
-          if (el.status) el.status.textContent = (e && e.message) || "Stage 3 chat failed.";
+          if (el.status) el.status.textContent = (e && e.message) || "Guided chat failed.";
         } finally {
           if (el.chatSendBtn) {
             el.chatSendBtn.disabled = false;

@@ -1,5 +1,7 @@
 const { requireStaffAuth } = require("../auth-check");
 const { json, serviceConfig, restSelect, restInsert, restPatch } = require("./_inbox-lib");
+const { canAccessPhi } = require("../../lib/staff-permissions");
+const { readPhiByLead, writePhiByLead } = require("../../lib/phi-store");
 
 function isUuid(s) {
   return /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(String(s || ""));
@@ -300,6 +302,7 @@ async function enrichLeadEmailsFromContacts(cfg, items) {
 module.exports = async function handler(req, res) {
   const auth = await requireStaffAuth(req, res);
   if (!auth.valid) return;
+  const canPhi = canAccessPhi(auth);
 
   const cfg = serviceConfig();
   if (!cfg) return json(res, 500, { error: "Server missing required configuration" });
@@ -314,33 +317,54 @@ module.exports = async function handler(req, res) {
         if (src === "manychat_leads") {
           const row = await selectManychatLeadDetailById(cfg, detailId);
           if (!row) return json(res, 404, { error: "Lead not found" });
-          return json(res, 200, { detail: Object.assign({ read_only: false }, row) });
+          const detail = Object.assign({ read_only: false }, row);
+          if (canPhi) {
+            const phi = await readPhiByLead(cfg, detailId, src);
+            detail.phi = phi.payload || {};
+          }
+          return json(res, 200, { detail, can_access_phi: canPhi });
         }
         if (src === "contacts") {
           const detail = await selectContactsLeadDetailById(cfg, detailId);
           if (!detail) return json(res, 404, { error: "Lead not found" });
-          return json(res, 200, { detail });
+          if (canPhi) {
+            const phi = await readPhiByLead(cfg, detailId, src);
+            detail.phi = phi.payload || {};
+          }
+          return json(res, 200, { detail, can_access_phi: canPhi });
         }
         if (src === "quote_lead_submissions") {
           const detail = await selectQuoteLeadDetailById(cfg, detailId);
           if (!detail) return json(res, 404, { error: "Lead not found" });
-          return json(res, 200, { detail });
+          if (canPhi) {
+            const phi = await readPhiByLead(cfg, detailId, src);
+            detail.phi = phi.payload || {};
+          }
+          return json(res, 200, { detail, can_access_phi: canPhi });
+        }
+        const detail = {
+          read_only: true,
+          source_table: unified.source_table,
+          id: unified.id,
+          first_name: unified.first_name || "",
+          last_name: unified.last_name || "",
+          display_name: unified.display_name || displayName(unified),
+          phone: unified.phone || "",
+          email: String(unified.email || "").trim(),
+          language: unified.language || "English",
+          source: unified.source || unified.source_table || "unknown",
+          created_at: unified.created_at || null,
+          updated_at: unified.updated_at || null,
+        };
+        if (canPhi) {
+          const phi = await readPhiByLead(cfg, detailId, String(unified.source_table || "unknown"));
+          detail.phi = phi.payload || {};
         }
         return json(res, 200, {
           detail: {
-            read_only: true,
-            source_table: unified.source_table,
-            id: unified.id,
-            first_name: unified.first_name || "",
-            last_name: unified.last_name || "",
-            display_name: unified.display_name || displayName(unified),
-            phone: unified.phone || "",
-            email: String(unified.email || "").trim(),
-            language: unified.language || "English",
-            source: unified.source || unified.source_table || "unknown",
-            created_at: unified.created_at || null,
-            updated_at: unified.updated_at || null,
+            ...detail,
           },
+          can_access_phi: canPhi,
         });
       } catch (e) {
         console.error("staff/leads GET id", e);
@@ -452,6 +476,7 @@ module.exports = async function handler(req, res) {
       "drop_off_stage",
       "opt_in",
       "manychat_subscriber_id",
+      "phi",
     ];
     const touched = patchKeys.filter((k) => Object.prototype.hasOwnProperty.call(body, k));
     if (!touched.length) {
@@ -530,6 +555,17 @@ module.exports = async function handler(req, res) {
       const unified = await selectUnifiedLeadById(cfg, id);
       if (!unified) return json(res, 404, { error: "Lead not found" });
       const src = String(unified.source_table || "");
+      if (Object.prototype.hasOwnProperty.call(body, "phi")) {
+        if (!canPhi) return json(res, 403, { error: "Not authorized to edit PHI fields" });
+        const phiPayload = body.phi && typeof body.phi === "object" ? body.phi : {};
+        await writePhiByLead(
+          cfg,
+          id,
+          src || "unknown",
+          phiPayload,
+          auth.user && auth.user.email ? auth.user.email : null
+        );
+      }
 
       if (src === "manychat_leads") {
         const patched = await restPatch(cfg, "manychat_leads", `id=eq.${encodeURIComponent(id)}`, payload);

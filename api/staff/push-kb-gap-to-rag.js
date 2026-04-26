@@ -8,6 +8,15 @@ function hashChunk(carrier, product, category, content) {
   return createHash("sha256").update(canonical).digest("hex");
 }
 
+function sanitizeForRag(text) {
+  const lines = String(text || "").split(/\r?\n/);
+  const blocked = /(diagnos|condition|medication|prescription|hospital|surgery|insulin|cancer|stroke|copd|kidney|heart|phi|underwriting notes)/i;
+  return lines
+    .filter((ln) => !blocked.test(ln))
+    .join("\n")
+    .trim();
+}
+
 module.exports = async function handler(req, res) {
   if (req.method !== "POST") {
     res.setHeader("Allow", "POST");
@@ -41,8 +50,8 @@ module.exports = async function handler(req, res) {
     const gap = rows[0];
     if (gap.resolved) return json(res, 400, { error: "KB gap already resolved" });
 
-    const question = String(gap.question || "").trim();
-    const answer = String(gap.assistant_answer || "").trim();
+    const question = sanitizeForRag(String(gap.question || "").trim());
+    const answer = sanitizeForRag(String(gap.assistant_answer || "").trim());
     if (!question || !answer) return json(res, 400, { error: "KB gap question/answer is empty" });
 
     const content = `Question:\n${question}\n\nAnswer:\n${answer}`;

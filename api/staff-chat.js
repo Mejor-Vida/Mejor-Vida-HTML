@@ -114,6 +114,16 @@ function withTrustedSourceHeader(text, sourceLabel) {
   return `Source: ${sourceLabel}\n\n${body}`.trim();
 }
 
+function sanitizeForGapQueue(text) {
+  const s = String(text || "");
+  const lines = s.split(/\r?\n/);
+  const blocked = /(diagnos|condition|medication|prescription|hospital|surgery|insulin|cancer|stroke|copd|kidney|heart|phi|underwriting)/i;
+  return lines
+    .filter((ln) => !blocked.test(ln))
+    .join("\n")
+    .trim();
+}
+
 function stableQuestionHash(message) {
   const normalized = String(message || "").trim().toLowerCase().replace(/\s+/g, " ");
   return createHash("sha256").update(normalized).digest("hex");
@@ -243,9 +253,9 @@ module.exports = async function handler(req, res) {
       const answer = withTrustedSourceHeader(answerBody, "General Industry Knowledge (RAG insufficient)");
       try {
         await upsertStaffKbGap(supabaseUrl, serviceKey, {
-          question: message,
+          question: sanitizeForGapQueue(message),
           question_hash: stableQuestionHash(message),
-          assistant_answer: answerBody,
+          assistant_answer: sanitizeForGapQueue(answerBody),
           source: "general_fallback",
           retrieval_count: Array.isArray(chunks) ? chunks.length : 0,
           max_similarity: maxSimilarity(chunks),
@@ -284,9 +294,9 @@ module.exports = async function handler(req, res) {
     const fallbackBody = stripSourceHeader(String(text).trim());
     try {
       await upsertStaffKbGap(supabaseUrl, serviceKey, {
-        question: message,
+        question: sanitizeForGapQueue(message),
         question_hash: stableQuestionHash(message),
-        assistant_answer: fallbackBody,
+        assistant_answer: sanitizeForGapQueue(fallbackBody),
         source: "general_fallback",
         retrieval_count: Array.isArray(chunks) ? chunks.length : 0,
         max_similarity: maxSimilarity(chunks),
