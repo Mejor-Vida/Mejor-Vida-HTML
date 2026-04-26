@@ -1347,6 +1347,7 @@
                       <label style="display:flex; align-items:center; gap:10px; cursor:pointer"><input id="lp-phi-rx-flag" type="checkbox" /> Takes prescription medications? (Yes/No)</label>
                       <label style="display:flex; align-items:center; gap:10px; cursor:pointer"><input id="lp-phi-major" type="checkbox" /> Any major health conditions? (Yes/No)</label>
                       <label style="display:flex; align-items:center; gap:10px; cursor:pointer"><input id="lp-phi-hosp-flag" type="checkbox" /> Any hospitalizations in last 2-5 years? (Yes/No)</label>
+                      <label style="display:flex; align-items:center; gap:10px; cursor:pointer"><input id="lp-phi-doc2y-flag" type="checkbox" /> Any doctor visits in last 2 years? (Yes/No)</label>
                       <div id="lp-phi-expand" style="display:none; margin-top:10px">
                         <label for="lp-phi-conditions">Conditions (short list/text)</label>
                         <input id="lp-phi-conditions" type="text" placeholder="e.g. diabetes, hypertension" autocomplete="off" />
@@ -3118,6 +3119,8 @@
         if (phiRxFlag) phiRxFlag.checked = !!phi.takes_prescription_medications;
         var phiHospFlag = document.getElementById("lp-phi-hosp-flag");
         if (phiHospFlag) phiHospFlag.checked = !!phi.recent_hospitalizations;
+        var phiDoc2yFlag = document.getElementById("lp-phi-doc2y-flag");
+        if (phiDoc2yFlag) phiDoc2yFlag.checked = !!phi.doctor_visits_2y;
         setv("lp-phi-conditions", Array.isArray(phi.conditions) ? phi.conditions.join(", ") : "");
         setv("lp-phi-hosp-reason", phi.hospitalization_reason || "");
         var phiBlock = document.getElementById("lp-phi-block");
@@ -3131,7 +3134,8 @@
         var major = !!(document.getElementById("lp-phi-major") && document.getElementById("lp-phi-major").checked);
         var rx = !!(document.getElementById("lp-phi-rx-flag") && document.getElementById("lp-phi-rx-flag").checked);
         var hosp = !!(document.getElementById("lp-phi-hosp-flag") && document.getElementById("lp-phi-hosp-flag").checked);
-        box.style.display = major || rx || hosp ? "" : "none";
+        var doc2y = !!(document.getElementById("lp-phi-doc2y-flag") && document.getElementById("lp-phi-doc2y-flag").checked);
+        box.style.display = major || rx || hosp || doc2y ? "" : "none";
       }
 
       function serializeLeadProfileFromForm() {
@@ -3182,6 +3186,7 @@
             has_major_conditions: !!(document.getElementById("lp-phi-major") && document.getElementById("lp-phi-major").checked),
             takes_prescription_medications: !!(document.getElementById("lp-phi-rx-flag") && document.getElementById("lp-phi-rx-flag").checked),
             recent_hospitalizations: !!(document.getElementById("lp-phi-hosp-flag") && document.getElementById("lp-phi-hosp-flag").checked),
+            doctor_visits_2y: !!(document.getElementById("lp-phi-doc2y-flag") && document.getElementById("lp-phi-doc2y-flag").checked),
             prescription_meds_text: String((document.getElementById("lp-phi-rx") && document.getElementById("lp-phi-rx").value) || "").trim(),
             conditions: String((document.getElementById("lp-phi-conditions") && document.getElementById("lp-phi-conditions").value) || "")
               .split(",")
@@ -3561,7 +3566,7 @@
         form.setAttribute("data-lp-form-wired", "1");
         form.addEventListener("input", scheduleLeadProfileDirtyCheck);
         form.addEventListener("change", scheduleLeadProfileDirtyCheck);
-        ["lp-phi-major", "lp-phi-rx-flag", "lp-phi-hosp-flag"].forEach(function (id) {
+        ["lp-phi-major", "lp-phi-rx-flag", "lp-phi-hosp-flag", "lp-phi-doc2y-flag"].forEach(function (id) {
           var el = document.getElementById(id);
           if (el) el.addEventListener("change", syncLeadProfilePhiExpand);
         });
@@ -3646,18 +3651,6 @@
           budget_flex: el.budgetFlex ? String(el.budgetFlex.value || "").trim() : "",
           policy_owner: el.policyOwner ? String(el.policyOwner.value || "").trim() : "",
           beneficiary_plan: el.beneficiaryPlan ? String(el.beneficiaryPlan.value || "").trim() : "",
-          tobacco: !!(el.tobacco && el.tobacco.checked),
-          prescription_meds: !!(el.rx && el.rx.checked),
-          doctor_visits_2y: !!(el.doc2y && el.doc2y.checked),
-          hospitalized_5y: !!(el.hosp5y && el.hosp5y.checked),
-          stage2_complete: !!(el.stage2Complete && el.stage2Complete.checked),
-          conditions: String((el.conditions && el.conditions.value) || "")
-            .split(",")
-            .map(function (s) {
-              return String(s || "").trim();
-            })
-            .filter(Boolean),
-          followups: String((el.followups && el.followups.value) || "").trim(),
         };
       }
 
@@ -3680,13 +3673,6 @@
         if (el.budgetFlex) el.budgetFlex.value = a.budget_flex || "";
         if (el.policyOwner) el.policyOwner.value = a.policy_owner || "";
         if (el.beneficiaryPlan) el.beneficiaryPlan.value = a.beneficiary_plan || "";
-        if (el.tobacco) el.tobacco.checked = !!a.tobacco;
-        if (el.rx) el.rx.checked = !!a.prescription_meds;
-        if (el.doc2y) el.doc2y.checked = !!a.doctor_visits_2y;
-        if (el.hosp5y) el.hosp5y.checked = !!a.hospitalized_5y;
-        if (el.stage2Complete) el.stage2Complete.checked = !!a.stage2_complete;
-        if (el.conditions) el.conditions.value = Array.isArray(a.conditions) ? a.conditions.join(", ") : "";
-        if (el.followups) el.followups.value = a.followups || "";
         syncProductSelectorIntentDetails();
       }
 
@@ -3739,11 +3725,20 @@
       function renderProductSelectorChat(transcript) {
         var el = getProductSelectorEls();
         if (!el.chatLog) return;
-        var questionOrder = {
-          strategy_priority: 1,
-          graded_benefit_ok: 2,
-          carrier_preference: 3,
-        };
+        var questionOrder = {};
+        [
+          "takes_prescription_medications",
+          "has_major_conditions",
+          "conditions",
+          "recent_hospitalizations",
+          "hospitalization_reason",
+          "doctor_visits_2y",
+          "strategy_priority",
+          "graded_benefit_ok",
+          "carrier_preference",
+        ].forEach(function (k, i) {
+          questionOrder[k] = i + 1;
+        });
         var items = Array.isArray(transcript) ? transcript : [];
         if (!items.length) {
           el.chatLog.innerHTML = '<div class="q-empty">Guided chat will appear here. The system asks one question at a time.</div>';

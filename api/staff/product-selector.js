@@ -47,7 +47,85 @@ function bool(v) {
   return !!v;
 }
 
+const PHI_FIELD_KEYS = [
+  "takes_prescription_medications",
+  "has_major_conditions",
+  "recent_hospitalizations",
+  "doctor_visits_2y",
+  "conditions",
+  "prescription_meds_text",
+  "hospitalization_reason",
+];
+
+const LEGACY_PHI_ALIASES = {
+  prescription_meds: "takes_prescription_medications",
+  hospitalized_5y: "recent_hospitalizations",
+};
+
+function splitIncomingAnswers(answers, canPhi) {
+  const incoming = answers && typeof answers === "object" ? answers : {};
+  const nonPhi = {};
+  const phi = {};
+  Object.keys(incoming).forEach((k) => {
+    const mapped = LEGACY_PHI_ALIASES[k] || k;
+    if (PHI_FIELD_KEYS.includes(mapped)) {
+      if (canPhi) phi[mapped] = incoming[k];
+      return;
+    }
+    nonPhi[mapped] = incoming[k];
+  });
+  return { nonPhi, phi };
+}
+
+function mergePhi(existingPhi, patchPhi) {
+  return Object.assign({}, existingPhi || {}, patchPhi || {});
+}
+
 const QUESTION_FLOW = [
+  {
+    key: "takes_prescription_medications",
+    prompt: "Is the client currently taking prescription medications? (yes/no)",
+    type: "boolean",
+    phi: true,
+  },
+  {
+    key: "has_major_conditions",
+    prompt: "Any major health conditions diagnosed? (yes/no)",
+    type: "boolean",
+    phi: true,
+  },
+  {
+    key: "conditions",
+    prompt: "Please list known conditions (comma-separated), or type none.",
+    type: "list",
+    phi: true,
+    askIf: function (nonPhiAnswers, phiAnswers) {
+      const phi = phiAnswers || {};
+      return phi.has_major_conditions === true;
+    },
+  },
+  {
+    key: "recent_hospitalizations",
+    prompt: "Any hospitalizations in the last 2-5 years? (yes/no)",
+    type: "boolean",
+    phi: true,
+  },
+  {
+    key: "hospitalization_reason",
+    prompt: "What was the hospitalization reason? (short text; type none if unknown)",
+    type: "text",
+    phi: true,
+    askIf: function (nonPhiAnswers, phiAnswers) {
+      const phi = phiAnswers || {};
+      return phi.recent_hospitalizations === true;
+    },
+  },
+  {
+    key: "doctor_visits_2y",
+    prompt: "Any doctor visits in the last 2 years? (yes/no)",
+    type: "boolean",
+    phi: true,
+  },
   {
     key: "strategy_priority",
     prompt:
@@ -101,6 +179,7 @@ function parseAnswerByType(q, raw) {
 function nextQuestionKey(nonPhiAnswers, phiAnswers, allowPhi) {
   for (const q of QUESTION_FLOW) {
     if (q.phi && !allowPhi) continue;
+    if (typeof q.askIf === "function" && !q.askIf(nonPhiAnswers, phiAnswers)) continue;
     const source = q.phi ? (phiAnswers || {}) : (nonPhiAnswers || {});
     const v = source[q.key];
     const missing =
@@ -120,8 +199,8 @@ function deriveRisk(context, phiAnswers) {
   const merged = Object.assign({}, context || {}, phiAnswers || {});
   const cond = Array.isArray(merged.conditions) ? merged.conditions : [];
   const hasMajorCondition = cond.some((c) => /heart|cancer|stroke|copd|kidney|cirrhosis|insulin/i.test(String(c || "")));
-  const meds = bool(merged.prescription_meds);
-  const hosp = bool(merged.hospitalized_5y);
+  const meds = bool(merged.takes_prescription_medications || merged.prescription_meds);
+  const hosp = bool(merged.recent_hospitalizations || merged.hospitalized_5y);
   const doc = bool(merged.doctor_visits_2y);
   const tobacco = bool(merged.tobacco);
   let level = "low";
@@ -217,7 +296,13 @@ function normalizedContextFromProfile(profileSnapshot, nonPhiAnswers, phiAnswers
     current_coverage: p.current_coverage || q.current_coverage || "",
     priority_1: q.strategy_priority || p.priority || q.priority_1 || "",
     priority_2: q.priority_2 || "",
-    tobacco: p.tobacco === true || p.tobacco === "true" || p.tobacco === "yes" || phi.tobacco === true,
+    tobacco:
+      p.tobacco === true ||
+      p.tobacco === "true" ||
+      p.tobacco === "yes" ||
+      phi.tobacco === true ||
+      phi.tobacco === "true" ||
+      phi.tobacco === "yes",
     coverage_goal: p.coverage_goal || "",
     strategy_priority: q.strategy_priority || "",
   };
@@ -392,19 +477,19 @@ module.exports = async function handler(req, res) {
     if (!isUuid(leadId) || !leadSourceTable) return json(res, 400, { error: "lead_id and lead_source_table required" });
     try {
       const canPhi = canAccessPhi(auth);
-      const incoming = body.qualification_answers && typeof body.qualification_answers === "object" ? body.qualification_answers : {};
+      const split = splitIncomingAnswers(body.qualification_answers, canPhi);
+      const sanitizedNonPhi = split.nonPhi;
+      const phiFromAnswers = split.phi;
       const phiPayload = body.phi_answers && typeof body.phi_answers === "object" ? body.phi_answers : {};
-      const sanitizedNonPhi = Object.assign({}, incoming);
-      QUESTION_FLOW.forEach((q) => {
-        if (q.phi) delete sanitizedNonPhi[q.key];
-      });
       const session = await saveSession(cfg, leadId, leadSourceTable, Object.assign({}, body, { qualification_answers: sanitizedNonPhi }));
-      if (canPhi && Object.keys(phiPayload).length) {
+      if (canPhi && (Object.keys(phiPayload).length || Object.keys(phiFromAnswers).length)) {
+        const existing = (await readPhiByLead(cfg, leadId, leadSourceTable)).payload || {};
+        const mergedPhi = mergePhi(existing, Object.assign({}, phiFromAnswers, phiPayload));
         await writePhiByLead(
           cfg,
           leadId,
           leadSourceTable,
-          phiPayload,
+          mergedPhi,
           auth.user && auth.user.email ? auth.user.email : null
         );
       }
@@ -431,11 +516,10 @@ module.exports = async function handler(req, res) {
 
     try {
       const canPhi = canAccessPhi(auth);
-      const phiData = canPhi ? (await readPhiByLead(cfg, leadId, leadSourceTable)).payload || {} : {};
-      const sanitizedNonPhi = Object.assign({}, answers);
-      QUESTION_FLOW.forEach((q) => {
-        if (q.phi) delete sanitizedNonPhi[q.key];
-      });
+      const split = splitIncomingAnswers(answers, canPhi);
+      const phiExisting = canPhi ? (await readPhiByLead(cfg, leadId, leadSourceTable)).payload || {} : {};
+      const phiData = canPhi ? mergePhi(phiExisting, split.phi) : {};
+      const sanitizedNonPhi = split.nonPhi;
       const context = normalizedContextFromProfile(profileSnapshot, sanitizedNonPhi, phiData);
       const risk = deriveRisk(context, phiData);
       const ragQuery = `Lead intent=${context.intent || ""}, protected=${context.protected_who || ""}, duration=${context.duration_need || ""}, must_have=${context.must_have || ""}, age=${context.age || ""}, coverage=${context.coverage_amount || ""}, budget=${context.budget_monthly || ""}, current_coverage=${context.current_coverage || ""}, priorities=${context.priority_1 || ""}/${context.priority_2 || ""}, risk=${risk.level}. Determine best-fit product type and alternatives from internal product knowledge only, then provide sales talking points.`;
@@ -484,6 +568,15 @@ module.exports = async function handler(req, res) {
       if (session && session.id) {
         const wf = Object.assign({}, session.workflow_state || {}, { profile_snapshot: profileSnapshot || {} });
         await saveSession(cfg, leadId, leadSourceTable, Object.assign({}, session, { workflow_state: wf }));
+      }
+      if (canPhi && Object.keys(split.phi).length) {
+        await writePhiByLead(
+          cfg,
+          leadId,
+          leadSourceTable,
+          phiData,
+          auth.user && auth.user.email ? auth.user.email : null
+        );
       }
 
       return json(res, 200, {
@@ -537,10 +630,8 @@ module.exports = async function handler(req, res) {
         };
       const phiStore = canPhi ? await readPhiByLead(cfg, leadId, leadSourceTable) : { payload: {} };
       const existingPhi = phiStore.payload || {};
-      const mergedAnswers = Object.assign({}, session.qualification_answers || {}, incomingAnswers || {});
-      QUESTION_FLOW.forEach((q) => {
-        if (q.phi) delete mergedAnswers[q.key];
-      });
+      const split = splitIncomingAnswers(incomingAnswers, canPhi);
+      const mergedAnswers = Object.assign({}, session.qualification_answers || {}, split.nonPhi || {});
       const workflowState = Object.assign({}, session.workflow_state || {});
       if (profileSnapshot && Object.keys(profileSnapshot).length) {
         workflowState.profile_snapshot = Object.assign({}, workflowState.profile_snapshot || {}, profileSnapshot);
@@ -554,7 +645,7 @@ module.exports = async function handler(req, res) {
       let assistantReply = "";
       let nextQuestionText = "";
       const nextNonPhi = Object.assign({}, mergedAnswers);
-      const nextPhi = Object.assign({}, existingPhi);
+      const nextPhi = mergePhi(existingPhi, split.phi || {});
       if (isStartSignal && currentQuestion) {
         assistantReply = `Let's begin qualification. ${currentQuestion.prompt}`;
         nextQuestionText = currentQuestion.prompt;
@@ -607,6 +698,7 @@ module.exports = async function handler(req, res) {
         .filter((k) => {
           const q = questionByKey(k);
           if (q && q.phi && !canPhi) return false;
+          if (q && typeof q.askIf === "function" && !q.askIf(nextNonPhi, nextPhi)) return false;
           const src = q && q.phi ? nextPhi : nextNonPhi;
           const v = src[k];
           return v == null || v === "" || (Array.isArray(v) && !v.length && k !== "conditions");
