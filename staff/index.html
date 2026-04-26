@@ -126,6 +126,31 @@
       gap: 12px;
       width: 100%;
     }
+    .top-active-lead {
+      margin-left: auto;
+      margin-right: auto;
+      align-self: center;
+      min-width: 220px;
+      max-width: 50vw;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(116, 145, 204, 0.55);
+      background: rgba(17, 37, 72, 0.85);
+      color: #eaf2ff;
+      font-size: 0.82rem;
+      font-weight: 700;
+      line-height: 1.2;
+      text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .top-active-lead.empty {
+      color: var(--muted);
+      border-color: rgba(116, 145, 204, 0.3);
+      background: rgba(12, 24, 44, 0.6);
+      font-weight: 600;
+    }
     .top-brand-row .signout {
       background: #2d3f67;
       color: #fff;
@@ -433,6 +458,16 @@
     #lead-profile-form .lp-health-field[data-visible="false"] {
       display: none;
     }
+    #lead-profile-form .lp-followup-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 8px;
+      align-items: center;
+    }
+    #lead-profile-form .lp-followup-row .lp-health-field,
+    #lead-profile-form .lp-followup-row .lp-health-check {
+      margin: 0;
+    }
     #lead-profile-form .lp-health-columns {
       display: grid;
       grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
@@ -446,6 +481,13 @@
       grid-template-columns: 1fr auto;
       gap: 6px;
       align-items: center;
+    }
+    #lead-profile-form .lp-med-search-wrap {
+      display: none;
+      margin-bottom: 6px;
+    }
+    #lead-profile-form .lp-med-search-wrap.show {
+      display: block;
     }
     #lead-profile-form .lp-med-list {
       margin-top: 6px;
@@ -527,6 +569,9 @@
         grid-template-columns: 1fr;
       }
       #lead-profile-form .lp-health-columns {
+        grid-template-columns: 1fr;
+      }
+      #lead-profile-form .lp-followup-row {
         grid-template-columns: 1fr;
       }
     }
@@ -1182,6 +1227,7 @@
           <b>Mejor Vida Insurance — Staff Portal</b>
           <small>Staff Access Only — Login Required<span id="staff-build-stamp" class="staff-build-stamp" title="If this number is missing after refresh, the page is cached.">· UI 20260426r</span></small>
         </div>
+        <div id="top-active-lead" class="top-active-lead empty" title="Lead selected across staff tools">No lead selected</div>
         <button id="signout-btn" class="signout" type="button" data-help="Signs you out of the staff portal on this browser.">Sign Out</button>
       </div>
       <nav class="tabs" aria-label="Staff tools">
@@ -1618,20 +1664,26 @@
                               <label class="lp-health-check"><input id="lp-phi-blood-thinner-use" type="checkbox" /> Blood thinner use</label>
                               <label class="lp-health-check"><input id="lp-phi-coronary-artery-disease" type="checkbox" /> Coronary artery disease</label>
                               <label class="lp-health-check"><input id="lp-phi-stents-placed" type="checkbox" /> Stents placed</label>
-                              <label class="lp-health-check"><input id="lp-phi-high-blood-pressure" type="checkbox" /> High blood pressure</label>
-                              <div class="lp-health-field" data-visible-when="high_blood_pressure">
-                                <label class="lp-health-check"><input id="lp-phi-bp-controlled" type="checkbox" /> BP controlled</label>
+                              <div class="lp-followup-row">
+                                <label class="lp-health-check"><input id="lp-phi-high-blood-pressure" type="checkbox" /> High blood pressure</label>
+                                <div class="lp-health-field" data-visible-when="high_blood_pressure">
+                                  <label class="lp-health-check"><input id="lp-phi-bp-controlled" type="checkbox" /> BP controlled</label>
+                                </div>
                               </div>
                               <label class="lp-health-check"><input id="lp-phi-cholesterol-high" type="checkbox" /> High cholesterol</label>
-                              <label class="lp-health-check"><input id="lp-phi-sleep-apnea" type="checkbox" /> Sleep apnea</label>
-                              <div class="lp-health-field" data-visible-when="sleep_apnea">
-                                <label class="lp-health-check"><input id="lp-phi-cpap-use" type="checkbox" /> CPAP use</label>
+                              <div class="lp-followup-row">
+                                <label class="lp-health-check"><input id="lp-phi-sleep-apnea" type="checkbox" /> Sleep apnea</label>
+                                <div class="lp-health-field" data-visible-when="sleep_apnea">
+                                  <label class="lp-health-check"><input id="lp-phi-cpap-use" type="checkbox" /> CPAP use</label>
+                                </div>
                               </div>
                               <label class="lp-health-check"><input id="lp-phi-depression" type="checkbox" /> Depression</label>
                               <label class="lp-health-check"><input id="lp-phi-anxiety" type="checkbox" /> Anxiety</label>
                               <div class="lp-health-field">
                                 <label for="lp-phi-medication-select" class="lp-health-note">Current medications</label>
-                              <input id="lp-phi-medication-search" type="text" placeholder="Type to narrow medications alphabetically..." autocomplete="off" />
+                              <div id="lp-phi-medication-search-wrap" class="lp-med-search-wrap">
+                                <input id="lp-phi-medication-search" type="text" placeholder="Type to narrow medications alphabetically..." autocomplete="off" />
+                              </div>
                                 <div class="lp-med-picker-row">
                                   <select id="lp-phi-medication-select">
                                     <option value="">Select medication...</option>
@@ -3246,16 +3298,36 @@
         });
         if (!L) {
           composeSelectedLeadId = null;
+          updateTopActiveLeadDisplay();
           return;
         }
         if (q && !leadMatchesQuery(L, q)) {
           composeSelectedLeadId = null;
+          updateTopActiveLeadDisplay();
         }
       }
 
       function updateComposeSaveContactButtonState() {
         var btn = document.getElementById("compose-save-contact-btn");
         if (btn) btn.disabled = !composeSelectedLeadId;
+      }
+
+      function updateTopActiveLeadDisplay() {
+        var badge = document.getElementById("top-active-lead");
+        if (!badge) return;
+        var L = getSelectedLeadFromList();
+        if (!L) {
+          badge.textContent = "No lead selected";
+          badge.classList.add("empty");
+          badge.setAttribute("title", "No lead selected");
+          return;
+        }
+        var nm = String(L.display_name || "").trim() || "(no name)";
+        var em = String(L.email || "").trim();
+        var line = em ? nm + " · " + em : nm;
+        badge.textContent = line;
+        badge.classList.remove("empty");
+        badge.setAttribute("title", line);
       }
 
       function applyComposeLeadSelection(L) {
@@ -3268,6 +3340,7 @@
         if (L.language && /spanish|español|espanol/i.test(L.language)) setComposeLanguage("Spanish");
         else setComposeLanguage("English");
         renderStaffLeadLists();
+        updateTopActiveLeadDisplay();
         if (paneLeadProfile && paneLeadProfile.classList.contains("active")) void loadLeadProfileDetail();
         if (paneProductSelector && paneProductSelector.classList.contains("active")) void loadProductSelectorSession();
       }
@@ -3467,6 +3540,7 @@
       function wireMedicationPicker() {
         var sel = document.getElementById("lp-phi-medication-select");
         var search = document.getElementById("lp-phi-medication-search");
+        var searchWrap = document.getElementById("lp-phi-medication-search-wrap");
         var addBtn = document.getElementById("lp-phi-medication-add");
         var custom = document.getElementById("lp-phi-medication-custom");
         var customBtn = document.getElementById("lp-phi-medication-custom-add");
@@ -3479,6 +3553,36 @@
           search.setAttribute("data-med-wired", "1");
           search.addEventListener("input", function () {
             renderMedicationOptions(search.value || "");
+          });
+        }
+        if (sel && !sel.getAttribute("data-med-open-wired")) {
+          sel.setAttribute("data-med-open-wired", "1");
+          sel.addEventListener("focus", function () {
+            if (searchWrap) searchWrap.classList.add("show");
+            if (search) search.focus();
+          });
+          sel.addEventListener("click", function () {
+            if (searchWrap) searchWrap.classList.add("show");
+            if (search) search.focus();
+          });
+        }
+        if (search && !search.getAttribute("data-med-blur-wired")) {
+          search.setAttribute("data-med-blur-wired", "1");
+          search.addEventListener("blur", function () {
+            setTimeout(function () {
+              var active = document.activeElement;
+              var inPicker =
+                active === sel ||
+                active === search ||
+                active === addBtn ||
+                active === custom ||
+                active === customBtn;
+              if (!inPicker) {
+                if (searchWrap) searchWrap.classList.remove("show");
+                if (search) search.value = "";
+                renderMedicationOptions("");
+              }
+            }, 80);
           });
         }
         if (addBtn && !addBtn.getAttribute("data-med-wired")) {
@@ -4719,6 +4823,7 @@
         appendRowsTo(document.getElementById("product-selector-lead-list"), false);
         updateComposeSaveContactButtonState();
         updateStaffLeadContextPanes();
+        updateTopActiveLeadDisplay();
       }
 
       function openComposeSaveContactConfirmModal() {
@@ -4995,6 +5100,7 @@
             if (el.lastName) el.lastName.value = "";
             el.email.value = "";
             el.phone.value = "";
+            updateTopActiveLeadDisplay();
           }
           el.status.textContent = "Lead removed from list.";
           renderStaffLeadLists();
