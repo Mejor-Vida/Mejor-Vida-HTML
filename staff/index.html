@@ -705,9 +705,43 @@
       overflow: auto; padding: 14px;
       display: flex; flex-direction: column; gap: 10px;
     }
-    .msg { max-width: 82%; padding: 10px 12px; border-radius: 12px; line-height: 1.35; }
+    .msg-row { display: flex; align-items: flex-start; gap: 10px; }
+    .msg-row.user { justify-content: flex-end; }
+    .msg-row.assistant { justify-content: flex-start; }
+    .msg {
+      max-width: 82%;
+      padding: 10px 12px;
+      border-radius: 12px;
+      line-height: 1.35;
+      overflow-wrap: anywhere;
+    }
     .msg.user { margin-left: auto; background: #26457e; }
     .msg.assistant { background: #1c2c4c; border: 1px solid var(--border); }
+    .msg-source-badge {
+      flex: 0 0 auto;
+      margin-top: 2px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .03em;
+      text-transform: uppercase;
+      border: 1px solid rgba(255,255,255,.18);
+      color: #dce8ff;
+      background: rgba(20, 36, 66, .9);
+      white-space: nowrap;
+      user-select: none;
+    }
+    .msg-source-badge.rag {
+      border-color: rgba(111, 214, 160, .55);
+      color: #b8f1d2;
+      background: rgba(25, 84, 58, .35);
+    }
+    .msg-source-badge.general {
+      border-color: rgba(255, 200, 111, .55);
+      color: #ffe0a8;
+      background: rgba(114, 77, 17, .35);
+    }
     .msg p { margin: 0 0 8px; }
     .msg p:last-child { margin-bottom: 0; }
     .msg ul, .msg ol { margin: 6px 0 6px 18px; }
@@ -2107,12 +2141,39 @@
         return html.join("") || "<p></p>";
       }
 
-      function addMessage(role, content) {
+      function normalizeSourceLabel(source) {
+        if (source === "internal_rag") return { text: "RAG", cls: "rag" };
+        if (source === "general_fallback") return { text: "General AI", cls: "general" };
+        return { text: "Unknown", cls: "" };
+      }
+
+      function stripSourceHeader(content) {
+        var raw = String(content || "");
+        return raw.replace(/^source:\s.*(?:\r?\n)+/i, "").trim();
+      }
+
+      function addMessage(role, content, source) {
+        var row = document.createElement("div");
+        row.className = "msg-row " + role;
         var n = document.createElement("div");
         n.className = "msg " + role;
-        if (role === "assistant") n.innerHTML = renderMarkdown(content);
+        if (role === "assistant") n.innerHTML = renderMarkdown(stripSourceHeader(content));
         else n.textContent = String(content || "");
-        chatLog.appendChild(n);
+        row.appendChild(n);
+        if (role === "assistant") {
+          var marker = document.createElement("div");
+          var sourceUi = normalizeSourceLabel(source);
+          marker.className = "msg-source-badge " + sourceUi.cls;
+          marker.textContent = sourceUi.text;
+          marker.title =
+            source === "internal_rag"
+              ? "Answer grounded in internal knowledge base retrieval."
+              : source === "general_fallback"
+                ? "Answer used general model knowledge because internal retrieval was insufficient."
+                : "Source status unavailable for this response.";
+          row.appendChild(marker);
+        }
+        chatLog.appendChild(row);
         chatLog.scrollTop = chatLog.scrollHeight;
       }
 
@@ -2155,7 +2216,7 @@
           var data = await r.json();
           if (!r.ok || !data.answer) throw new Error(data.error || "Failed");
           conversation.push({ role: "assistant", content: data.answer });
-          addMessage("assistant", data.answer);
+          addMessage("assistant", data.answer, data.source || "");
         } catch (e) {
           chatErr.textContent = "Failed to generate answer. Please try again.";
         } finally {
