@@ -345,6 +345,25 @@
       font-size: 0.78rem;
       color: rgba(17, 24, 39, 0.84);
     }
+    #lead-profile-form .lp-lang-toggle {
+      display: inline-flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    #lead-profile-form .lp-lang-toggle .lang-opt {
+      background: #1a335f;
+      color: #f0f5ff;
+      border: 1px solid rgba(89, 123, 194, 0.55);
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    #lead-profile-form .lp-lang-toggle .lang-opt.active {
+      background: #254989;
+      border-color: #7fa1df;
+    }
     @media (max-width: 1300px) {
       #lead-profile-form .lp-section .meta-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1210,8 +1229,8 @@
                       <input id="lp-last-name" type="text" autocomplete="off" data-lpignore="true" />
                     </div>
                     <div class="meta-card">
-                      <label for="lp-email">Email (optional)</label>
-                      <input id="lp-email" type="email" inputmode="email" autocomplete="off" data-lpignore="true" placeholder="Optional" />
+                      <label for="lp-email">Email</label>
+                      <input id="lp-email" type="email" inputmode="email" autocomplete="off" data-lpignore="true" required />
                     </div>
                     <div class="meta-card">
                       <label for="lp-phone">Phone</label>
@@ -1219,15 +1238,15 @@
                     </div>
                     <div class="meta-card">
                       <label for="lp-language">Language</label>
-                      <input id="lp-language" type="text" placeholder="e.g. English" autocomplete="off" />
+                      <input id="lp-language" type="hidden" />
+                      <div class="lp-lang-toggle" role="group" aria-label="Preferred language">
+                        <button id="lp-language-en" type="button" class="lang-opt active">English</button>
+                        <button id="lp-language-es" type="button" class="lang-opt">Español</button>
+                      </div>
                     </div>
                     <div class="meta-card">
                       <label for="lp-state">State</label>
                       <input id="lp-state" type="text" placeholder="e.g. NE" autocomplete="off" />
-                    </div>
-                    <div class="meta-card">
-                      <label for="lp-city">City (optional)</label>
-                      <input id="lp-city" type="text" autocomplete="off" />
                     </div>
                   </div>
                   </section>
@@ -1249,6 +1268,10 @@
                         <option value="true">Yes</option>
                         <option value="false">No</option>
                       </select>
+                    </div>
+                    <div class="meta-card">
+                      <label for="lp-dob">Birthdate</label>
+                      <input id="lp-dob" type="date" />
                     </div>
                   </div>
                   </section>
@@ -1276,19 +1299,67 @@
                   <div class="meta-grid">
                     <div class="meta-card">
                       <label for="lp-coverage-goal">Coverage Goal</label>
-                      <input id="lp-coverage-goal" type="text" placeholder="Funeral / Income replacement / Final expenses / Other" autocomplete="off" />
+                      <select id="lp-coverage-goal">
+                        <option value="">Select goal...</option>
+                        <option value="income_replacement">Income replacement</option>
+                        <option value="final_expenses">Final expenses</option>
+                        <option value="mortgage_protection">Mortgage protection</option>
+                        <option value="wealth_building">Wealth building</option>
+                        <option value="legacy_planning">Legacy planning</option>
+                        <option value="debt_protection">Debt protection</option>
+                        <option value="business_continuity">Business continuity</option>
+                      </select>
                     </div>
                     <div class="meta-card">
                       <label for="lp-desired-coverage">Desired Coverage Amount ($)</label>
-                      <input id="lp-desired-coverage" type="number" inputmode="numeric" min="0" step="1000" />
+                      <select id="lp-desired-coverage">
+                        <option value="">Select amount...</option>
+                        <option value="25000">25,000</option>
+                        <option value="50000">50,000</option>
+                        <option value="75000">75,000</option>
+                        <option value="100000">100,000</option>
+                        <option value="150000">150,000</option>
+                        <option value="250000">250,000</option>
+                        <option value="500000">500,000</option>
+                        <option value="750000">750,000</option>
+                        <option value="1000000">1,000,000</option>
+                      </select>
                     </div>
                     <div class="meta-card">
                       <label for="lp-monthly-budget">Monthly Budget ($)</label>
-                      <input id="lp-monthly-budget" type="number" inputmode="numeric" min="0" step="1" />
+                      <select id="lp-monthly-budget">
+                        <option value="">Select budget...</option>
+                        <option value="50">Up to $50</option>
+                        <option value="100">Up to $100</option>
+                        <option value="150">Up to $150</option>
+                        <option value="200">Up to $200</option>
+                        <option value="300">Up to $300</option>
+                        <option value="500">Up to $500</option>
+                        <option value="750">Up to $750</option>
+                        <option value="1000">Up to $1,000</option>
+                      </select>
                     </div>
                     <div class="meta-card">
                       <label for="lp-priority">Priority</label>
-                      <input id="lp-priority" type="text" placeholder="Lowest cost / Immediate coverage / Approval certainty" autocomplete="off" />
+                      <select id="lp-priority">
+                        <option value="">Select priority...</option>
+                        <option value="lowest_cost">Lowest cost</option>
+                        <option value="immediate_coverage">Immediate coverage</option>
+                        <option value="approval_certainty">Approval certainty</option>
+                        <option value="permanent_coverage">Permanent coverage</option>
+                        <option value="cash_value_growth">Cash value growth</option>
+                      </select>
+                    </div>
+                    <div class="meta-card">
+                      <label for="lp-product-type">Product Type</label>
+                      <select id="lp-product-type">
+                        <option value="">Select product...</option>
+                        <option value="term_life">Term Life</option>
+                        <option value="whole_life">Whole Life</option>
+                        <option value="universal_life">Universal Life</option>
+                        <option value="final_expense">Final Expense</option>
+                        <option value="guaranteed_issue">Guaranteed Issue</option>
+                      </select>
                     </div>
                     <div class="meta-card">
                       <label for="lp-beneficiary-plan">Beneficiary Plan (optional)</label>
@@ -1297,6 +1368,10 @@
                     <div class="meta-card">
                       <label for="lp-policy-owner">Policy Owner (optional)</label>
                       <input id="lp-policy-owner" type="text" autocomplete="off" />
+                    </div>
+                    <div class="meta-card" style="grid-column: 1 / -1">
+                      <label>Selector sync</label>
+                      <button id="lp-sync-coverage-btn" type="button" class="secondary">Fill Coverage &amp; Intent from Product Selector</button>
                     </div>
                   </div>
                   </section>
@@ -2884,6 +2959,16 @@
         );
       }
 
+      function setLeadProfileLanguageToggle(rawLang) {
+        var lang = /^(es|espanol|español|spanish)$/i.test(String(rawLang || "").trim()) ? "Spanish" : "English";
+        var hidden = document.getElementById("lp-language");
+        if (hidden) hidden.value = lang;
+        var en = document.getElementById("lp-language-en");
+        var es = document.getElementById("lp-language-es");
+        if (en) en.classList.toggle("active", lang === "English");
+        if (es) es.classList.toggle("active", lang === "Spanish");
+      }
+
       function applyLeadProfileDetailToForm(d) {
         function setv(id, v) {
           var el = document.getElementById(id);
@@ -2895,10 +2980,10 @@
         setv("lp-last-name", d.last_name);
         setv("lp-email", d.email);
         setv("lp-phone", d.phone);
-        setv("lp-language", d.language);
+        setLeadProfileLanguageToggle(d.language);
         setv("lp-state", d.profile_ext && d.profile_ext.state);
-        setv("lp-city", d.profile_ext && d.profile_ext.city);
         setv("lp-age", d.age != null && d.age !== "" ? String(d.age) : "");
+        setv("lp-dob", d.profile_ext && d.profile_ext.date_of_birth);
         setv("lp-sex", d.sex);
         var tob = document.getElementById("lp-tobacco");
         if (tob) {
@@ -2919,6 +3004,7 @@
         setv("lp-desired-coverage", d.profile_ext && d.profile_ext.desired_coverage_amount);
         setv("lp-monthly-budget", d.profile_ext && d.profile_ext.monthly_budget);
         setv("lp-priority", d.profile_ext && d.profile_ext.priority);
+        setv("lp-product-type", d.profile_ext && d.profile_ext.product_type);
         setv("lp-beneficiary-plan", d.profile_ext && d.profile_ext.beneficiary_plan);
         setv("lp-policy-owner", d.profile_ext && d.profile_ext.policy_owner);
         setv("lp-notes", d.profile_ext && d.profile_ext.notes);
@@ -2967,10 +3053,10 @@
           last_name: String(document.getElementById("lp-last-name").value || "").trim(),
           email: String(document.getElementById("lp-email").value || "").trim().toLowerCase(),
           phone: String(document.getElementById("lp-phone").value || "").trim(),
-          language: String(document.getElementById("lp-language").value || "").trim(),
+          language: String((document.getElementById("lp-language") && document.getElementById("lp-language").value) || "English").trim(),
           state: String((document.getElementById("lp-state") && document.getElementById("lp-state").value) || "").trim(),
-          city: String((document.getElementById("lp-city") && document.getElementById("lp-city").value) || "").trim(),
           age: String(document.getElementById("lp-age").value || "").trim(),
+          date_of_birth: String((document.getElementById("lp-dob") && document.getElementById("lp-dob").value) || "").trim(),
           sex: String(document.getElementById("lp-sex").value || "").trim(),
           tobacco: tobacco,
           tag: String(document.getElementById("lp-tag").value || "").trim(),
@@ -2984,6 +3070,7 @@
           desired_coverage_amount: String((document.getElementById("lp-desired-coverage") && document.getElementById("lp-desired-coverage").value) || "").trim(),
           monthly_budget: String((document.getElementById("lp-monthly-budget") && document.getElementById("lp-monthly-budget").value) || "").trim(),
           priority: String((document.getElementById("lp-priority") && document.getElementById("lp-priority").value) || "").trim(),
+          product_type: String((document.getElementById("lp-product-type") && document.getElementById("lp-product-type").value) || "").trim(),
           beneficiary_plan: String((document.getElementById("lp-beneficiary-plan") && document.getElementById("lp-beneficiary-plan").value) || "").trim(),
           policy_owner: String((document.getElementById("lp-policy-owner") && document.getElementById("lp-policy-owner").value) || "").trim(),
           notes: String((document.getElementById("lp-notes") && document.getElementById("lp-notes").value) || "").trim(),
@@ -3030,12 +3117,12 @@
           manychat_subscriber_id: s.manychat_subscriber_id || null,
           profile_ext: {
             state: s.state || null,
-            city: s.city || null,
             date_of_birth: s.date_of_birth || null,
             coverage_goal: s.coverage_goal || null,
             desired_coverage_amount: s.desired_coverage_amount || null,
             monthly_budget: s.monthly_budget || null,
             priority: s.priority || null,
+            product_type: s.product_type || null,
             beneficiary_plan: s.beneficiary_plan || null,
             policy_owner: s.policy_owner || null,
             notes: s.notes || null,
@@ -3058,10 +3145,75 @@
           priority: s.priority || "",
           policy_owner: s.policy_owner || "",
           beneficiary_plan: s.beneficiary_plan || "",
+          product_type: s.product_type || "",
           state: s.state || "",
-          city: s.city || "",
-          date_of_birth: "",
+          date_of_birth: s.date_of_birth || "",
         };
+      }
+
+      function mapSelectorIntentToCoverageGoal(v) {
+        var t = String(v || "").trim().toLowerCase();
+        if (!t) return "";
+        if (t === "income_replacement") return "income_replacement";
+        if (t === "final_expenses") return "final_expenses";
+        if (t === "mortgage_protection") return "mortgage_protection";
+        if (t === "wealth_building") return "wealth_building";
+        if (t === "legacy_planning") return "legacy_planning";
+        return "";
+      }
+
+      function mapSelectorPriority(v) {
+        var t = String(v || "").trim().toLowerCase();
+        if (!t) return "";
+        if (t === "lowest_cost" || t === "cost") return "lowest_cost";
+        if (t === "immediate_coverage" || t === "speed" || t === "fast_approval") return "immediate_coverage";
+        if (t === "approval_certainty" || t === "approval_likelihood") return "approval_certainty";
+        if (t === "permanence" || t === "permanent_coverage") return "permanent_coverage";
+        if (t === "cash_value" || t === "cash_value_growth") return "cash_value_growth";
+        return "";
+      }
+
+      async function syncCoverageIntentFromSelector() {
+        var lead = getSelectedLeadFromList();
+        var status = document.getElementById("lead-profile-status");
+        if (!lead) {
+          if (status) status.textContent = "Select a lead first.";
+          return;
+        }
+        if (status) status.textContent = "Pulling Coverage & Intent from Product Selector…";
+        try {
+          var data = await authedApi(
+            "/api/staff/product-selector?lead_id=" +
+              encodeURIComponent(lead.id) +
+              "&lead_source_table=" +
+              encodeURIComponent(lead.source_table || "unknown"),
+            null,
+            { method: "GET" }
+          );
+          var s = data && data.session ? data.session : null;
+          if (!s) throw new Error("No selector session found for this lead.");
+          var qa = s.qualification_answers && typeof s.qualification_answers === "object" ? s.qualification_answers : {};
+          var rec = s.recommendation && typeof s.recommendation === "object" ? s.recommendation : {};
+          var snap = s.workflow_state && s.workflow_state.profile_snapshot && typeof s.workflow_state.profile_snapshot === "object"
+            ? s.workflow_state.profile_snapshot
+            : {};
+          var cg = mapSelectorIntentToCoverageGoal(qa.intent || snap.coverage_goal);
+          var cov = String(qa.coverage_amount || snap.desired_coverage_amount || "").trim();
+          var bud = String(qa.budget_monthly || snap.monthly_budget || "").trim();
+          var pr = mapSelectorPriority(qa.strategy_priority || qa.priority_1 || snap.priority);
+          var pt = String(rec.product_type || snap.product_type || "").trim();
+
+          if (cg) document.getElementById("lp-coverage-goal").value = cg;
+          if (cov) document.getElementById("lp-desired-coverage").value = cov;
+          if (bud) document.getElementById("lp-monthly-budget").value = bud;
+          if (pr) document.getElementById("lp-priority").value = pr;
+          if (pt) document.getElementById("lp-product-type").value = pt;
+
+          scheduleLeadProfileDirtyCheck();
+          if (status) status.textContent = "Coverage & Intent updated from Product Selector.";
+        } catch (e) {
+          if (status) status.textContent = (e && e.message) || "Could not pull from Product Selector.";
+        }
       }
 
       function updateLeadProfileSaveButton() {
@@ -3221,6 +3373,11 @@
       async function performLeadProfileSave() {
         closeLeadProfileSaveModal();
         var status = document.getElementById("lead-profile-status");
+        var s = serializeLeadProfileFromForm();
+        if (!s.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s.email)) {
+          if (status) status.textContent = "Email is required and must be valid.";
+          return;
+        }
         if (status) status.textContent = "Saving…";
         try {
           var body = buildLeadProfilePatchBody();
@@ -3291,6 +3448,23 @@
           var el = document.getElementById(id);
           if (el) el.addEventListener("change", syncLeadProfilePhiExpand);
         });
+        var langEn = document.getElementById("lp-language-en");
+        var langEs = document.getElementById("lp-language-es");
+        if (langEn) {
+          langEn.addEventListener("click", function () {
+            setLeadProfileLanguageToggle("English");
+            scheduleLeadProfileDirtyCheck();
+          });
+        }
+        if (langEs) {
+          langEs.addEventListener("click", function () {
+            setLeadProfileLanguageToggle("Spanish");
+            scheduleLeadProfileDirtyCheck();
+          });
+        }
+        var syncBtn = document.getElementById("lp-sync-coverage-btn");
+        if (syncBtn) syncBtn.addEventListener("click", function () { void syncCoverageIntentFromSelector(); });
+        setLeadProfileLanguageToggle("English");
         syncLeadProfilePhiExpand();
         saveBtn.addEventListener("click", onLeadProfileSaveClick);
       }
