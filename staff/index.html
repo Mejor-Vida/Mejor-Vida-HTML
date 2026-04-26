@@ -3400,6 +3400,7 @@
         var msg = String((el.chatInput && el.chatInput.value) || "").trim();
         if (!msg && !isAutoStart) return;
         if (!msg && isAutoStart) msg = "start";
+        var answers = productSelectorAnswersFromUi();
         if (el.chatSendBtn) {
           el.chatSendBtn.disabled = true;
           el.chatSendBtn.textContent = "Sending…";

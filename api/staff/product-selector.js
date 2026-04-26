@@ -500,6 +500,7 @@ module.exports = async function handler(req, res) {
       });
       const workflowState = Object.assign({}, session.workflow_state || {});
       const transcript = Array.isArray(workflowState.stage3_chat) ? workflowState.stage3_chat.slice() : [];
+      const isStartSignal = /^(start|begin|go)$/i.test(userMessage);
       const currentKey = String(workflowState.current_question_key || "") || nextQuestionKey(mergedAnswers, existingPhi, canPhi);
       const currentQuestion = questionByKey(currentKey);
       transcript.push({ role: "agent", content: userMessage, ts: new Date().toISOString(), key: currentKey || null });
@@ -508,7 +509,10 @@ module.exports = async function handler(req, res) {
       let nextQuestionText = "";
       const nextNonPhi = Object.assign({}, mergedAnswers);
       const nextPhi = Object.assign({}, existingPhi);
-      if (currentQuestion) {
+      if (isStartSignal && currentQuestion) {
+        assistantReply = `Let's begin qualification. ${currentQuestion.prompt}`;
+        nextQuestionText = currentQuestion.prompt;
+      } else if (currentQuestion) {
         const parsed = parseAnswerByType(currentQuestion, userMessage);
         if (parsed == null) {
           assistantReply = `I couldn't map that answer for "${currentQuestion.prompt}". Please reply in a clearer format.`;
