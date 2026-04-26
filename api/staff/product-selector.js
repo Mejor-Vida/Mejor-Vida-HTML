@@ -55,11 +55,37 @@ const PHI_FIELD_KEYS = [
   "conditions",
   "prescription_meds_text",
   "hospitalization_reason",
+  "heart_attack",
+  "stroke_tia",
+  "heart_disease",
+  "heart_surgery_stents",
+  "congestive_heart_failure",
+  "diabetes",
+  "insulin_use",
+  "cancer_history",
+  "current_cancer_treatment",
+  "copd_emphysema",
+  "chronic_lung_disease",
+  "oxygen_use",
+  "kidney_disease",
+  "dialysis",
+  "liver_disease_cirrhosis_hepatitis",
+  "alzheimers_dementia_memory_condition",
+  "hospice_care",
+  "bedridden",
+  "needs_help_daily_activities",
+  "home_health_care",
+  "hospitalization_last_2y",
+  "surgery_last_2y",
+  "upcoming_procedure_scheduled",
+  "other_major_condition",
+  "other_condition_notes",
 ];
 
 const LEGACY_PHI_ALIASES = {
   prescription_meds: "takes_prescription_medications",
   hospitalized_5y: "recent_hospitalizations",
+  cognitive_impairment: "alzheimers_dementia_memory_condition",
 };
 
 function splitIncomingAnswers(answers, canPhi) {
@@ -101,12 +127,12 @@ const QUESTION_FLOW = [
     phi: true,
     askIf: function (nonPhiAnswers, phiAnswers) {
       const phi = phiAnswers || {};
-      return phi.has_major_conditions === true;
+      return phi.has_major_conditions === true || phi.other_major_condition === true;
     },
   },
   {
-    key: "recent_hospitalizations",
-    prompt: "Any hospitalizations in the last 2-5 years? (yes/no)",
+    key: "hospitalization_last_2y",
+    prompt: "Any hospitalization in the last 2 years? (yes/no)",
     type: "boolean",
     phi: true,
   },
@@ -117,8 +143,14 @@ const QUESTION_FLOW = [
     phi: true,
     askIf: function (nonPhiAnswers, phiAnswers) {
       const phi = phiAnswers || {};
-      return phi.recent_hospitalizations === true;
+      return phi.hospitalization_last_2y === true || phi.recent_hospitalizations === true;
     },
+  },
+  {
+    key: "alzheimers_dementia_memory_condition",
+    prompt: "Any Alzheimer's, dementia, or memory-related condition? (yes/no)",
+    type: "boolean",
+    phi: true,
   },
   {
     key: "doctor_visits_2y",
@@ -200,17 +232,21 @@ function deriveRisk(context, phiAnswers) {
   const cond = Array.isArray(merged.conditions) ? merged.conditions : [];
   const hasMajorCondition = cond.some((c) => /heart|cancer|stroke|copd|kidney|cirrhosis|insulin/i.test(String(c || "")));
   const meds = bool(merged.takes_prescription_medications || merged.prescription_meds);
-  const hosp = bool(merged.recent_hospitalizations || merged.hospitalized_5y);
+  const hosp = bool(merged.hospitalization_last_2y || merged.recent_hospitalizations || merged.hospitalized_5y);
   const doc = bool(merged.doctor_visits_2y);
+  const cognitive = bool(merged.alzheimers_dementia_memory_condition);
+  const careNeeds = bool(merged.hospice_care) || bool(merged.bedridden) || bool(merged.needs_help_daily_activities);
   const tobacco = bool(merged.tobacco);
   let level = "low";
-  if (hasMajorCondition || hosp || (meds && cond.length >= 2)) level = "high";
+  if (cognitive || careNeeds || hasMajorCondition || hosp || (meds && cond.length >= 2)) level = "high";
   else if (meds || doc || tobacco || cond.length) level = "moderate";
   const flags = [];
   if (hasMajorCondition) flags.push("major_condition");
   if (hosp) flags.push("recent_hospitalization");
   if (meds) flags.push("rx_meds");
   if (doc) flags.push("recent_doctor_visits");
+  if (cognitive) flags.push("cognitive_condition");
+  if (careNeeds) flags.push("care_status");
   if (tobacco) flags.push("tobacco");
   return { level, flags };
 }
