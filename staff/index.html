@@ -3577,9 +3577,22 @@
         var custom = document.getElementById("lp-phi-medication-custom");
         var customBtn = document.getElementById("lp-phi-medication-custom-add");
         var list = document.getElementById("lp-phi-medication-list");
+        var pickerRoot = sel ? sel.closest(".lp-health-field") : null;
+        function showSearchBox() {
+          if (searchWrap) searchWrap.classList.add("show");
+        }
+        function hideSearchBoxAndReset() {
+          if (searchWrap) searchWrap.classList.remove("show");
+          if (search) search.value = "";
+          renderMedicationOptions("");
+        }
         if (sel && !sel.getAttribute("data-med-loaded")) {
           sel.setAttribute("data-med-loaded", "1");
           renderMedicationOptions("");
+        }
+        if (searchWrap && !searchWrap.getAttribute("data-med-init")) {
+          searchWrap.setAttribute("data-med-init", "1");
+          searchWrap.classList.remove("show");
         }
         if (search && !search.getAttribute("data-med-wired")) {
           search.setAttribute("data-med-wired", "1");
@@ -3590,12 +3603,10 @@
         if (sel && !sel.getAttribute("data-med-open-wired")) {
           sel.setAttribute("data-med-open-wired", "1");
           sel.addEventListener("focus", function () {
-            if (searchWrap) searchWrap.classList.add("show");
-            if (search) search.focus();
+            showSearchBox();
           });
-          sel.addEventListener("click", function () {
-            if (searchWrap) searchWrap.classList.add("show");
-            if (search) search.focus();
+          sel.addEventListener("mousedown", function () {
+            showSearchBox();
           });
         }
         if (search && !search.getAttribute("data-med-blur-wired")) {
@@ -3610,11 +3621,18 @@
                 active === custom ||
                 active === customBtn;
               if (!inPicker) {
-                if (searchWrap) searchWrap.classList.remove("show");
-                if (search) search.value = "";
-                renderMedicationOptions("");
+                hideSearchBoxAndReset();
               }
             }, 80);
+          });
+        }
+        if (pickerRoot && !pickerRoot.getAttribute("data-med-doc-wired")) {
+          pickerRoot.setAttribute("data-med-doc-wired", "1");
+          document.addEventListener("click", function (e) {
+            var t = e && e.target ? e.target : null;
+            if (!t) return;
+            if (pickerRoot.contains(t)) return;
+            hideSearchBoxAndReset();
           });
         }
         if (addBtn && !addBtn.getAttribute("data-med-wired")) {
