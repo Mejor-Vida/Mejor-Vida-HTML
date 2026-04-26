@@ -280,30 +280,39 @@
     }
     #product-selector-form .compose-contact-heading { margin: 8px 0 4px; font-size: 0.98rem; }
     #product-selector-form label { margin: 0 0 4px; font-size: 0.88rem; }
-    #product-selector-form .ps-summary-row {
-      margin: 0 0 8px;
-      font-size: 0.9rem;
-      color: #c8d8ff;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    #product-selector-form .ps-sticky-actions {
+    #pane-product-selector .inbox-head {
       position: sticky;
       top: 0;
-      z-index: 20;
-      margin: 0 0 10px;
-      padding: 8px 10px;
-      border: 1px solid rgba(111, 139, 201, 0.35);
-      border-radius: 10px;
-      background: rgba(8, 18, 36, 0.96);
+      z-index: 30;
+      background: rgba(19, 39, 78, 0.98);
       backdrop-filter: blur(2px);
     }
-    #product-selector-form .ps-sticky-actions .actions {
+    #pane-product-selector .inbox-head > div:first-child {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    #pane-product-selector .inbox-head .small-note {
       margin: 0;
     }
-    #product-selector-form .ps-sticky-actions #ps-status {
-      margin-top: 6px;
+    .ps-head-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-left: auto;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    .ps-head-actions .actions {
+      margin: 0;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    .ps-head-actions #ps-status {
+      margin: 0;
+      white-space: nowrap;
     }
     @media (max-width: 1200px) {
       #product-selector-form .ps-grid-2 {
@@ -2021,20 +2030,19 @@
               <strong>Product Selector</strong>
               <div class="small-note">Uses the active lead selected in Lead Profile. Product selection runs as a strategy-only chat using Lead Profile + internal RAG.</div>
             </div>
+            <div class="ps-head-actions">
+              <div class="actions">
+                <button id="ps-save-btn" type="button" class="secondary">Save Session</button>
+                <button id="ps-run-btn" type="button">Refresh Recommendation</button>
+                <button id="ps-sync-to-profile-btn" type="button" class="secondary">Push Coverage &amp; Intent to Lead Profile</button>
+              </div>
+              <div id="ps-status" class="small-note"></div>
+            </div>
           </div>
           <div id="product-selector-body" class="compose-body">
             <div class="compose-work">
               <div class="compose-main-col staff-tool-main">
                 <form id="product-selector-form" class="compose-form" autocomplete="off" onsubmit="return false;" aria-label="Product selector">
-                  <div class="ps-summary-row">Guided qualification chat: system asks one question at a time, and the next question is selected automatically from each answer.</div>
-                  <div class="ps-sticky-actions">
-                    <div class="actions">
-                      <button id="ps-save-btn" type="button" class="secondary">Save Session</button>
-                      <button id="ps-run-btn" type="button">Refresh Recommendation</button>
-                      <button id="ps-sync-to-profile-btn" type="button" class="secondary">Push Coverage &amp; Intent to Lead Profile</button>
-                    </div>
-                    <div id="ps-status" class="small-note"></div>
-                  </div>
                   <div class="ps-legacy-fields" style="display:none">
                   <div class="compose-contact-heading">Stage 1 — Intent</div>
                   <div class="meta-grid ps-grid-2">
