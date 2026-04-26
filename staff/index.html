@@ -1817,29 +1817,96 @@
                   <div class="meta-grid">
                     <div class="meta-card">
                       <label for="lp-tag">Tag</label>
-                      <input id="lp-tag" type="text" autocomplete="off" readonly class="lp-ro" tabindex="-1" />
+                      <div class="small-note">Quick category for lead status/type.</div>
+                      <select id="lp-tag">
+                        <option value="">Select tag...</option>
+                        <option value="new">New</option>
+                        <option value="warm">Warm</option>
+                        <option value="hot">Hot</option>
+                        <option value="call_back">Call back</option>
+                        <option value="not_interested">Not interested</option>
+                        <option value="do_not_contact">Do not contact</option>
+                        <option value="follow_up_needed">Follow-up needed</option>
+                        <option value="appointment_set">Appointment set</option>
+                        <option value="quote_sent">Quote sent</option>
+                        <option value="application_started">Application started</option>
+                      </select>
                     </div>
                     <div class="meta-card">
                       <label for="lp-pipeline-stage">Pipeline stage</label>
-                      <input id="lp-pipeline-stage" type="text" autocomplete="off" readonly class="lp-ro" tabindex="-1" />
+                      <div class="small-note">Current step in the sales journey (ordered).</div>
+                      <select id="lp-pipeline-stage">
+                        <option value="">Select stage...</option>
+                        <option value="new_lead">1. New lead</option>
+                        <option value="attempting_contact">2. Attempting contact</option>
+                        <option value="connected">3. Connected</option>
+                        <option value="qualified">4. Qualified</option>
+                        <option value="needs_analysis_complete">5. Needs analysis complete</option>
+                        <option value="quote_preparing">6. Quote preparing</option>
+                        <option value="quote_presented">7. Quote presented</option>
+                        <option value="objection_handling">8. Objection handling</option>
+                        <option value="application_started">9. Application started</option>
+                        <option value="underwriting">10. Underwriting</option>
+                        <option value="approved_pending_payment">11. Approved - pending payment</option>
+                        <option value="policy_issued">12. Policy issued</option>
+                        <option value="closed_won">13. Closed won</option>
+                        <option value="closed_lost">14. Closed lost</option>
+                      </select>
                     </div>
                     <div class="meta-card">
                       <label for="lp-source">Source</label>
-                      <input id="lp-source" type="text" autocomplete="off" readonly class="lp-ro" tabindex="-1" />
+                      <div class="small-note">Where the lead actually came from.</div>
+                      <select id="lp-source">
+                        <option value="">Select source...</option>
+                        <option value="facebook_ad">Facebook ad</option>
+                        <option value="instagram_ad">Instagram ad</option>
+                        <option value="google_search">Google search</option>
+                        <option value="google_ad">Google ad</option>
+                        <option value="website_quote_tool">Website quote tool</option>
+                        <option value="website_contact_form">Website contact form</option>
+                        <option value="manychat">ManyChat bot</option>
+                        <option value="whatsapp_inbound">WhatsApp inbound</option>
+                        <option value="sms_inbound">SMS inbound</option>
+                        <option value="inbound_call">Inbound call</option>
+                        <option value="referral">Referral</option>
+                        <option value="partner_referral">Partner referral</option>
+                        <option value="existing_client">Existing client</option>
+                        <option value="staff_compose">Staff manual entry</option>
+                        <option value="other">Other</option>
+                      </select>
                     </div>
                     <div class="meta-card">
                       <label style="display: flex; align-items: center; gap: 10px; cursor: pointer">
-                        <input id="lp-drop-off" type="checkbox" disabled />
-                        Drop-off
+                        <input id="lp-drop-off" type="checkbox" />
+                        Mark as drop-off
                       </label>
+                      <div class="small-note">Use when the lead stops progressing after a completed stage.</div>
                     </div>
                     <div class="meta-card">
                       <label for="lp-drop-off-stage">Drop-off stage</label>
-                      <input id="lp-drop-off-stage" type="text" autocomplete="off" readonly class="lp-ro" tabindex="-1" />
+                      <div class="small-note">Stage where momentum was lost.</div>
+                      <select id="lp-drop-off-stage">
+                        <option value="">Select drop-off stage...</option>
+                        <option value="new_lead">New lead</option>
+                        <option value="attempting_contact">Attempting contact</option>
+                        <option value="connected">Connected</option>
+                        <option value="qualified">Qualified</option>
+                        <option value="needs_analysis_complete">Needs analysis complete</option>
+                        <option value="quote_preparing">Quote preparing</option>
+                        <option value="quote_presented">Quote presented</option>
+                        <option value="objection_handling">Objection handling</option>
+                        <option value="application_started">Application started</option>
+                        <option value="underwriting">Underwriting</option>
+                        <option value="approved_pending_payment">Approved - pending payment</option>
+                        <option value="policy_issued">Policy issued</option>
+                        <option value="closed_won">Closed won</option>
+                        <option value="closed_lost">Closed lost</option>
+                      </select>
                     </div>
                     <div class="meta-card" style="grid-column: 1 / -1">
                       <label for="lp-notes">Notes</label>
-                      <textarea id="lp-notes" rows="3" placeholder="Sales context notes"></textarea>
+                      <div class="small-note">Add concise call notes: objections, timeline, decision maker, and agreed next step.</div>
+                      <textarea id="lp-notes" rows="3" placeholder="Example: Spoke with spouse too; budget max $150/mo; call back Tuesday 4:30pm to review quote options."></textarea>
                     </div>
                   </div>
                   </section>
@@ -3797,6 +3864,27 @@
         });
       }
 
+      function setSelectOrCustom(id, rawValue) {
+        var el = document.getElementById(id);
+        if (!el) return;
+        var v = rawValue != null ? String(rawValue).trim() : "";
+        if (!v) {
+          el.value = "";
+          return;
+        }
+        var has = Array.prototype.some.call(el.options || [], function (opt) {
+          return String(opt.value || "") === v;
+        });
+        if (!has) {
+          var opt = document.createElement("option");
+          opt.value = v;
+          opt.textContent = v;
+          opt.setAttribute("data-custom", "1");
+          el.appendChild(opt);
+        }
+        el.value = v;
+      }
+
       function applyLeadProfileDetailToForm(d) {
         function setv(id, v) {
           var el = document.getElementById(id);
@@ -3823,12 +3911,12 @@
         setv("lp-citizenship-status", d.profile_ext && d.profile_ext.citizenship_status);
         setv("lp-height", d.profile_ext && d.profile_ext.height);
         setv("lp-weight", d.profile_ext && d.profile_ext.weight);
-        setv("lp-tag", d.tag);
-        setv("lp-pipeline-stage", d.pipeline_stage);
-        setv("lp-source", d.source);
+        setSelectOrCustom("lp-tag", d.tag);
+        setSelectOrCustom("lp-pipeline-stage", d.pipeline_stage);
+        setSelectOrCustom("lp-source", d.source);
         var doff = document.getElementById("lp-drop-off");
         if (doff) doff.checked = !!d.drop_off;
-        setv("lp-drop-off-stage", d.drop_off_stage);
+        setSelectOrCustom("lp-drop-off-stage", d.drop_off_stage);
         var oi = document.getElementById("lp-opt-in");
         if (oi) oi.checked = !!d.opt_in;
         setv("lp-subscriber-id", d.manychat_subscriber_id);
