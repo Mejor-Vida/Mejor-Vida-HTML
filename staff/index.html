@@ -3275,7 +3275,18 @@
         setv("lp-phi-hosp-reason", phi.hospitalization_reason || "");
         setv("lp-phi-other-condition-notes", phi.other_condition_notes || "");
         var phiBlock = document.getElementById("lp-phi-block");
-        if (phiBlock) phiBlock.style.display = leadProfileCanAccessPhi ? "" : "none";
+        var phiNote = document.getElementById("lp-phi-note");
+        if (phiBlock) phiBlock.style.display = "";
+        if (phiNote) {
+          phiNote.textContent = leadProfileCanAccessPhi
+            ? "Stored in encrypted PHI table only. Not used for RAG indexing."
+            : "PHI access is restricted for this account. Health fields are visible but read-only.";
+        }
+        var phiInputs = phiBlock ? phiBlock.querySelectorAll("input, select, textarea, button") : [];
+        Array.prototype.forEach.call(phiInputs, function (node) {
+          if (leadProfileCanAccessPhi) node.removeAttribute("disabled");
+          else node.setAttribute("disabled", "disabled");
+        });
         syncLeadProfilePhiExpand();
       }
 
