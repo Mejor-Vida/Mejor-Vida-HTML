@@ -280,6 +280,31 @@
     }
     #product-selector-form .compose-contact-heading { margin: 8px 0 4px; font-size: 0.98rem; }
     #product-selector-form label { margin: 0 0 4px; font-size: 0.88rem; }
+    #product-selector-form .ps-summary-row {
+      margin: 0 0 8px;
+      font-size: 0.9rem;
+      color: #c8d8ff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    #product-selector-form .ps-sticky-actions {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      margin: 0 0 10px;
+      padding: 8px 10px;
+      border: 1px solid rgba(111, 139, 201, 0.35);
+      border-radius: 10px;
+      background: rgba(8, 18, 36, 0.96);
+      backdrop-filter: blur(2px);
+    }
+    #product-selector-form .ps-sticky-actions .actions {
+      margin: 0;
+    }
+    #product-selector-form .ps-sticky-actions #ps-status {
+      margin-top: 6px;
+    }
     @media (max-width: 1200px) {
       #product-selector-form .ps-grid-2 {
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -2001,8 +2026,15 @@
             <div class="compose-work">
               <div class="compose-main-col staff-tool-main">
                 <form id="product-selector-form" class="compose-form" autocomplete="off" onsubmit="return false;" aria-label="Product selector">
-                  <div class="compose-contact-heading">Guided qualification chat (system asks one question at a time)</div>
-                  <div class="small-note" style="margin-bottom:8px">The system drives the sequence. Agent enters each client answer; next question is selected automatically.</div>
+                  <div class="ps-summary-row">Guided qualification chat: system asks one question at a time, and the next question is selected automatically from each answer.</div>
+                  <div class="ps-sticky-actions">
+                    <div class="actions">
+                      <button id="ps-save-btn" type="button" class="secondary">Save Session</button>
+                      <button id="ps-run-btn" type="button">Refresh Recommendation</button>
+                      <button id="ps-sync-to-profile-btn" type="button" class="secondary">Push Coverage &amp; Intent to Lead Profile</button>
+                    </div>
+                    <div id="ps-status" class="small-note"></div>
+                  </div>
                   <div class="ps-legacy-fields" style="display:none">
                   <div class="compose-contact-heading">Stage 1 — Intent</div>
                   <div class="meta-grid ps-grid-2">
@@ -2142,7 +2174,6 @@
                   </div>
 
                   </div>
-                  <div class="compose-contact-heading" style="margin-top:16px">Guided decision chat</div>
                   <div class="meta-grid">
                     <div class="meta-card" style="grid-column:1 / -1">
                       <label>Selector chat (strategy questions only)</label>
@@ -2154,12 +2185,6 @@
                     </div>
                   </div>
 
-                  <div class="actions" style="margin-top:14px">
-                    <button id="ps-save-btn" type="button" class="secondary">Save Session</button>
-                    <button id="ps-run-btn" type="button">Refresh Recommendation</button>
-                    <button id="ps-sync-to-profile-btn" type="button" class="secondary">Push Coverage &amp; Intent to Lead Profile</button>
-                  </div>
-                  <div id="ps-status" class="small-note"></div>
                 </form>
 
                 <div class="compose-contact-heading" style="margin-top:18px">Recommendation</div>
@@ -3349,14 +3374,14 @@
       }
 
       function syncStaffLeadFilterInputs(exceptEl) {
-        ["compose-lead-filter", "lead-profile-lead-filter", "product-selector-lead-filter"].forEach(function (id) {
+        ["compose-lead-filter", "lead-profile-lead-filter"].forEach(function (id) {
           var f = document.getElementById(id);
           if (f && f !== exceptEl) f.value = staffLeadListQuery;
         });
       }
 
       function wireStaffLeadFilterInputs() {
-        ["compose-lead-filter", "lead-profile-lead-filter", "product-selector-lead-filter"].forEach(function (id) {
+        ["compose-lead-filter", "lead-profile-lead-filter"].forEach(function (id) {
           var inp = document.getElementById(id);
           if (!inp || inp.getAttribute("data-staff-lead-filter-wired")) return;
           inp.setAttribute("data-staff-lead-filter-wired", "1");
@@ -5059,7 +5084,6 @@
 
         appendRowsTo(document.getElementById("compose-lead-list"), true);
         appendRowsTo(document.getElementById("lead-profile-lead-list"), false);
-        appendRowsTo(document.getElementById("product-selector-lead-list"), false);
         updateComposeSaveContactButtonState();
         updateStaffLeadContextPanes();
         updateTopActiveLeadDisplay();
