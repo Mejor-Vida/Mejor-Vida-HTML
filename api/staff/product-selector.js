@@ -48,45 +48,73 @@ function bool(v) {
 }
 
 const PHI_FIELD_KEYS = [
+  "terminal_illness",
+  "aids_hiv",
+  "organ_transplant",
+  "heart_event_recent",
+  "heart_event_date",
+  "heart_event_type",
+  "heart_attack_history",
+  "congestive_heart_failure",
+  "cancer_active",
+  "cancer_type",
+  "cancer_treatment_status",
+  "cancer_history",
+  "cancer_history_type",
+  "copd_diagnosed",
+  "oxygen_use",
+  "dementia_cognitive",
   "takes_prescription_medications",
   "has_major_conditions",
-  "recent_hospitalizations",
-  "doctor_visits_2y",
-  "conditions",
-  "prescription_meds_text",
-  "hospitalization_reason",
-  "heart_attack",
-  "stroke_tia",
-  "heart_disease",
-  "heart_surgery_stents",
-  "congestive_heart_failure",
   "diabetes",
-  "insulin_use",
-  "cancer_history",
-  "current_cancer_treatment",
-  "copd_emphysema",
-  "chronic_lung_disease",
-  "oxygen_use",
+  "diabetes_type",
+  "diabetes_insulin",
+  "diabetes_complications",
   "kidney_disease",
   "dialysis",
-  "liver_disease_cirrhosis_hepatitis",
-  "alzheimers_dementia_memory_condition",
-  "hospice_care",
-  "bedridden",
-  "needs_help_daily_activities",
-  "home_health_care",
-  "hospitalization_last_2y",
-  "surgery_last_2y",
-  "upcoming_procedure_scheduled",
-  "other_major_condition",
-  "other_condition_notes",
+  "liver_disease",
+  "neurological_condition",
+  "neurological_type",
+  "mental_health_hospitalized",
+  "drug_alcohol_treatment",
+  "nursing_home_resident",
+  "wheelchair_bedridden",
+  "adl_assistance",
+  "hospitalized_recent",
+  "hospitalization_reason",
+  "awaiting_surgery",
+  "undiagnosed_symptoms",
+  "atrial_fibrillation",
+  "pacemaker",
+  "blood_thinner_use",
+  "coronary_artery_disease",
+  "stents_placed",
+  "high_blood_pressure",
+  "bp_controlled",
+  "cholesterol_high",
+  "sleep_apnea",
+  "cpap_use",
+  "depression",
+  "anxiety",
+  "doctor_visits_2y",
+  "current_medications",
+  "medication_count",
+  "height_inches",
+  "weight_lbs",
+  "bmi",
 ];
 
 const LEGACY_PHI_ALIASES = {
   prescription_meds: "takes_prescription_medications",
-  hospitalized_5y: "recent_hospitalizations",
-  cognitive_impairment: "alzheimers_dementia_memory_condition",
+  hospitalized_5y: "hospitalized_recent",
+  cognitive_impairment: "dementia_cognitive",
+  alzheimers_dementia_memory_condition: "dementia_cognitive",
 };
+
+function anyTrue(obj, keys) {
+  const src = obj || {};
+  return keys.some((k) => !!src[k]);
+}
 
 function splitIncomingAnswers(answers, canPhi) {
   const incoming = answers && typeof answers === "object" ? answers : {};
@@ -109,6 +137,213 @@ function mergePhi(existingPhi, patchPhi) {
 
 const QUESTION_FLOW = [
   {
+    key: "terminal_illness",
+    prompt: "Any terminal illness diagnosis? (yes/no)",
+    type: "boolean",
+    phi: true,
+  },
+  {
+    key: "aids_hiv",
+    prompt: "Any HIV/AIDS diagnosis? (yes/no)",
+    type: "boolean",
+    phi: true,
+  },
+  {
+    key: "organ_transplant",
+    prompt: "Any history of organ transplant? (yes/no)",
+    type: "boolean",
+    phi: true,
+  },
+  {
+    key: "heart_event_recent",
+    prompt: "Any heart attack, stroke, or TIA in the last 2 years? (yes/no)",
+    type: "boolean",
+    phi: true,
+  },
+  {
+    key: "heart_event_date",
+    prompt: "What was the date of the heart event?",
+    type: "text",
+    phi: true,
+    askIf: function (nonPhiAnswers, phiAnswers) {
+      return !!(phiAnswers && phiAnswers.heart_event_recent);
+    },
+  },
+  {
+    key: "heart_event_type",
+    prompt: "What type of event was it: heart_attack, stroke, or tia?",
+    type: "choice",
+    options: ["heart_attack", "stroke", "tia"],
+    phi: true,
+    askIf: function (nonPhiAnswers, phiAnswers) {
+      return !!(phiAnswers && phiAnswers.heart_event_recent);
+    },
+  },
+  {
+    key: "cancer_active",
+    prompt: "Any active cancer diagnosis or treatment in the last 2 years? (yes/no)",
+    type: "boolean",
+    phi: true,
+  },
+  {
+    key: "cancer_type",
+    prompt: "What type of cancer?",
+    type: "text",
+    phi: true,
+    askIf: function (nonPhiAnswers, phiAnswers) {
+      return !!(phiAnswers && phiAnswers.cancer_active);
+    },
+  },
+  {
+    key: "cancer_treatment_status",
+    prompt: "Cancer treatment status: ongoing, completed, or in_remission?",
+    type: "choice",
+    options: ["ongoing", "completed", "in_remission"],
+    phi: true,
+    askIf: function (nonPhiAnswers, phiAnswers) {
+      return !!(phiAnswers && phiAnswers.cancer_active);
+    },
+  },
+  {
+    key: "dementia_cognitive",
+    prompt: "Any Alzheimer's, dementia, or memory-related diagnosis? (yes/no)",
+    type: "boolean",
+    phi: true,
+  },
+  {
+    key: "diabetes",
+    prompt: "Any diabetes diagnosis? (yes/no)",
+    type: "boolean",
+    phi: true,
+  },
+  {
+    key: "diabetes_type",
+    prompt: "Diabetes type: type1 or type2?",
+    type: "choice",
+    options: ["type1", "type2"],
+    phi: true,
+    askIf: function (nonPhiAnswers, phiAnswers) {
+      return !!(phiAnswers && phiAnswers.diabetes);
+    },
+  },
+  {
+    key: "diabetes_insulin",
+    prompt: "Currently using insulin? (yes/no)",
+    type: "boolean",
+    phi: true,
+    askIf: function (nonPhiAnswers, phiAnswers) {
+      return !!(phiAnswers && phiAnswers.diabetes);
+    },
+  },
+  {
+    key: "dialysis",
+    prompt: "Currently on dialysis? (yes/no)",
+    type: "boolean",
+    phi: true,
+  },
+  {
+    key: "nursing_home_resident",
+    prompt: "Is the client currently in a nursing home? (yes/no)",
+    type: "boolean",
+    phi: true,
+  },
+  {
+    key: "adl_assistance",
+    prompt: "Does the client need help with daily activities like bathing, dressing, or eating? (yes/no)",
+    type: "boolean",
+    phi: true,
+  },
+  {
+    key: "hospitalized_recent",
+    prompt: "Any hospitalization in the last 90 days? (yes/no)",
+    type: "boolean",
+    phi: true,
+  },
+  {
+    key: "hospitalization_reason",
+    prompt: "What was the hospitalization reason?",
+    type: "text",
+    phi: true,
+    askIf: function (nonPhiAnswers, phiAnswers) {
+      return !!(phiAnswers && phiAnswers.hospitalized_recent);
+    },
+  },
+  {
+    key: "awaiting_surgery",
+    prompt: "Any doctor-recommended surgery currently pending? (yes/no)",
+    type: "boolean",
+    phi: true,
+  },
+  {
+    key: "undiagnosed_symptoms",
+    prompt: "Any undiagnosed symptoms with tests or follow-up pending? (yes/no)",
+    type: "boolean",
+    phi: true,
+  },
+  {
+    key: "atrial_fibrillation",
+    prompt: "Any atrial fibrillation diagnosis? (yes/no)",
+    type: "boolean",
+    phi: true,
+    askIf: function (nonPhiAnswers, phiAnswers) {
+      return anyTrue(phiAnswers, ["heart_event_recent", "heart_attack_history", "congestive_heart_failure"]);
+    },
+  },
+  {
+    key: "pacemaker",
+    prompt: "Any pacemaker or defibrillator? (yes/no)",
+    type: "boolean",
+    phi: true,
+    askIf: function (nonPhiAnswers, phiAnswers) {
+      return anyTrue(phiAnswers, ["heart_event_recent", "heart_attack_history", "congestive_heart_failure"]);
+    },
+  },
+  {
+    key: "blood_thinner_use",
+    prompt: "Currently taking blood thinners? (yes/no)",
+    type: "boolean",
+    phi: true,
+    askIf: function (nonPhiAnswers, phiAnswers) {
+      return anyTrue(phiAnswers, ["heart_event_recent", "heart_attack_history", "atrial_fibrillation"]);
+    },
+  },
+  {
+    key: "high_blood_pressure",
+    prompt: "Any high blood pressure diagnosis? (yes/no)",
+    type: "boolean",
+    phi: true,
+  },
+  {
+    key: "bp_controlled",
+    prompt: "If high blood pressure, is it controlled with medication? (yes/no)",
+    type: "boolean",
+    phi: true,
+    askIf: function (nonPhiAnswers, phiAnswers) {
+      return !!(phiAnswers && phiAnswers.high_blood_pressure);
+    },
+  },
+  {
+    key: "sleep_apnea",
+    prompt: "Any sleep apnea diagnosis? (yes/no)",
+    type: "boolean",
+    phi: true,
+  },
+  {
+    key: "cpap_use",
+    prompt: "If sleep apnea, currently using CPAP? (yes/no)",
+    type: "boolean",
+    phi: true,
+    askIf: function (nonPhiAnswers, phiAnswers) {
+      return !!(phiAnswers && phiAnswers.sleep_apnea);
+    },
+  },
+  {
+    key: "current_medications",
+    prompt: "Please list current medications (or type none).",
+    type: "text",
+    phi: true,
+  },
+  {
     key: "takes_prescription_medications",
     prompt: "Is the client currently taking prescription medications? (yes/no)",
     type: "boolean",
@@ -117,44 +352,6 @@ const QUESTION_FLOW = [
   {
     key: "has_major_conditions",
     prompt: "Any major health conditions diagnosed? (yes/no)",
-    type: "boolean",
-    phi: true,
-  },
-  {
-    key: "conditions",
-    prompt: "Please list known conditions (comma-separated), or type none.",
-    type: "list",
-    phi: true,
-    askIf: function (nonPhiAnswers, phiAnswers) {
-      const phi = phiAnswers || {};
-      return phi.has_major_conditions === true || phi.other_major_condition === true;
-    },
-  },
-  {
-    key: "hospitalization_last_2y",
-    prompt: "Any hospitalization in the last 2 years? (yes/no)",
-    type: "boolean",
-    phi: true,
-  },
-  {
-    key: "hospitalization_reason",
-    prompt: "What was the hospitalization reason? (short text; type none if unknown)",
-    type: "text",
-    phi: true,
-    askIf: function (nonPhiAnswers, phiAnswers) {
-      const phi = phiAnswers || {};
-      return phi.hospitalization_last_2y === true || phi.recent_hospitalizations === true;
-    },
-  },
-  {
-    key: "alzheimers_dementia_memory_condition",
-    prompt: "Any Alzheimer's, dementia, or memory-related condition? (yes/no)",
-    type: "boolean",
-    phi: true,
-  },
-  {
-    key: "doctor_visits_2y",
-    prompt: "Any doctor visits in the last 2 years? (yes/no)",
     type: "boolean",
     phi: true,
   },
@@ -229,18 +426,31 @@ function questionByKey(key) {
 
 function deriveRisk(context, phiAnswers) {
   const merged = Object.assign({}, context || {}, phiAnswers || {});
-  const cond = Array.isArray(merged.conditions) ? merged.conditions : [];
-  const hasMajorCondition = cond.some((c) => /heart|cancer|stroke|copd|kidney|cirrhosis|insulin/i.test(String(c || "")));
+  const hasMajorCondition =
+    anyTrue(merged, [
+      "has_major_conditions",
+      "heart_event_recent",
+      "congestive_heart_failure",
+      "cancer_active",
+      "copd_diagnosed",
+      "kidney_disease",
+      "liver_disease",
+      "neurological_condition",
+      "diabetes_complications",
+    ]) || /heart|cancer|stroke|copd|kidney|cirrhosis|insulin/i.test(String(merged.current_medications || ""));
   const meds = bool(merged.takes_prescription_medications || merged.prescription_meds);
-  const hosp = bool(merged.hospitalization_last_2y || merged.recent_hospitalizations || merged.hospitalized_5y);
+  const hosp = bool(merged.hospitalized_recent || merged.recent_hospitalizations || merged.hospitalized_5y);
   const doc = bool(merged.doctor_visits_2y);
-  const cognitive = bool(merged.alzheimers_dementia_memory_condition);
-  const careNeeds = bool(merged.hospice_care) || bool(merged.bedridden) || bool(merged.needs_help_daily_activities);
+  const cognitive = bool(merged.dementia_cognitive);
+  const careNeeds = bool(merged.nursing_home_resident) || bool(merged.wheelchair_bedridden) || bool(merged.adl_assistance);
   const tobacco = bool(merged.tobacco);
   let level = "low";
-  if (cognitive || careNeeds || hasMajorCondition || hosp || (meds && cond.length >= 2)) level = "high";
-  else if (meds || doc || tobacco || cond.length) level = "moderate";
+  if (bool(merged.terminal_illness) || bool(merged.organ_transplant) || bool(merged.dialysis) || cognitive || careNeeds || hasMajorCondition || hosp) level = "high";
+  else if (meds || doc || tobacco || bool(merged.diabetes) || bool(merged.high_blood_pressure)) level = "moderate";
   const flags = [];
+  if (bool(merged.terminal_illness)) flags.push("terminal_illness");
+  if (bool(merged.organ_transplant)) flags.push("organ_transplant");
+  if (bool(merged.dialysis)) flags.push("dialysis");
   if (hasMajorCondition) flags.push("major_condition");
   if (hosp) flags.push("recent_hospitalization");
   if (meds) flags.push("rx_meds");

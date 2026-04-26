@@ -401,6 +401,38 @@
       color: #111827;
       font-weight: 700;
     }
+    #lead-profile-form .lp-health-accordion {
+      margin-top: 8px;
+      border-radius: 9px;
+      border: 1px solid rgba(131, 99, 29, 0.45);
+      background: rgba(247, 219, 145, 0.56);
+      overflow: hidden;
+    }
+    #lead-profile-form .lp-health-accordion > summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 8px 10px;
+      color: #111827;
+      font-size: 0.8rem;
+      font-weight: 800;
+      background: rgba(205, 166, 67, 0.42);
+      border-bottom: 1px solid rgba(131, 99, 29, 0.35);
+    }
+    #lead-profile-form .lp-health-accordion > summary::-webkit-details-marker {
+      display: none;
+    }
+    #lead-profile-form .lp-health-accordion-body {
+      padding: 8px 10px;
+      display: grid;
+      gap: 8px;
+    }
+    #lead-profile-form .lp-health-field {
+      display: grid;
+      gap: 4px;
+    }
+    #lead-profile-form .lp-health-field[data-visible="false"] {
+      display: none;
+    }
     #lp-tooltip {
       position: fixed;
       z-index: 70;
@@ -1416,73 +1448,141 @@
                   <div class="meta-grid lp-health-grid">
                     <div id="lp-phi-block" class="meta-card" style="grid-column: 1 / -1">
                       <div class="small-note" id="lp-phi-note" style="margin-bottom:8px">Stored in encrypted PHI table only. Not used for RAG indexing.</div>
-                      <div class="lp-health-group">
-                        <div class="lp-health-group-title">Cardiovascular</div>
-                        <label class="lp-health-check"><input id="lp-phi-heart-attack" type="checkbox" /> Heart attack <span class="lp-tip-trigger" data-tip="May affect level vs graded eligibility, especially if recent.">i</span></label>
-                        <label class="lp-health-check"><input id="lp-phi-stroke-tia" type="checkbox" /> Stroke / TIA <span class="lp-tip-trigger" data-tip="Neurological and recovery history can limit product options.">i</span></label>
-                        <label class="lp-health-check"><input id="lp-phi-heart-disease" type="checkbox" /> Heart disease <span class="lp-tip-trigger" data-tip="Signals elevated underwriting review and possible rate impact.">i</span></label>
-                        <label class="lp-health-check"><input id="lp-phi-heart-surgery-stents" type="checkbox" /> Heart surgery / stents <span class="lp-tip-trigger" data-tip="Procedure timing and follow-up status often drive eligibility.">i</span></label>
-                        <label class="lp-health-check"><input id="lp-phi-congestive-heart-failure" type="checkbox" /> Congestive heart failure <span class="lp-tip-trigger" data-tip="Often routes toward simplified or guaranteed options.">i</span></label>
-                      </div>
-                      <div class="lp-health-group">
-                        <div class="lp-health-group-title">Metabolic</div>
-                        <label class="lp-health-check"><input id="lp-phi-diabetes" type="checkbox" /> Diabetes <span class="lp-tip-trigger" data-tip="Diabetes control and complications affect underwriting class.">i</span></label>
-                        <label class="lp-health-check"><input id="lp-phi-insulin-use" type="checkbox" /> Insulin use <span class="lp-tip-trigger" data-tip="Insulin use can narrow carrier and product fit.">i</span></label>
-                      </div>
-                      <div class="lp-health-group">
-                        <div class="lp-health-group-title">Cancer</div>
-                        <label class="lp-health-check"><input id="lp-phi-cancer-history" type="checkbox" /> Cancer history <span class="lp-tip-trigger" data-tip="Type and remission period strongly affect approval path.">i</span></label>
-                        <label class="lp-health-check"><input id="lp-phi-current-cancer-treatment" type="checkbox" /> Current cancer treatment <span class="lp-tip-trigger" data-tip="Active treatment may limit immediate fully-underwritten options.">i</span></label>
-                      </div>
-                      <div class="lp-health-group">
-                        <div class="lp-health-group-title">Respiratory</div>
-                        <label class="lp-health-check"><input id="lp-phi-copd-emphysema" type="checkbox" /> COPD / emphysema <span class="lp-tip-trigger" data-tip="Can impact approval tier and premium range.">i</span></label>
-                        <label class="lp-health-check"><input id="lp-phi-chronic-lung-disease" type="checkbox" /> Chronic lung disease <span class="lp-tip-trigger" data-tip="Chronic respiratory diagnosis may require alternate product paths.">i</span></label>
-                        <label class="lp-health-check"><input id="lp-phi-oxygen-use" type="checkbox" /> Oxygen use <span class="lp-tip-trigger" data-tip="Usually indicates higher underwriting risk or restricted carrier set.">i</span></label>
-                      </div>
-                      <div class="lp-health-group">
-                        <div class="lp-health-group-title">Kidney / Liver</div>
-                        <label class="lp-health-check"><input id="lp-phi-kidney-disease" type="checkbox" /> Kidney disease <span class="lp-tip-trigger" data-tip="Severity/stability often changes available product classes.">i</span></label>
-                        <label class="lp-health-check"><input id="lp-phi-dialysis" type="checkbox" /> Dialysis <span class="lp-tip-trigger" data-tip="Dialysis generally narrows to limited underwriting options.">i</span></label>
-                        <label class="lp-health-check"><input id="lp-phi-liver-disease-cirrhosis-hepatitis" type="checkbox" /> Liver disease / cirrhosis / hepatitis <span class="lp-tip-trigger" data-tip="Condition type and activity can shift carrier suitability.">i</span></label>
-                      </div>
-                      <div class="lp-health-group">
-                        <div class="lp-health-group-title">Cognitive</div>
-                        <label class="lp-health-check"><input id="lp-phi-alzheimers-dementia-memory" type="checkbox" /> Alzheimer&rsquo;s / dementia / memory condition <span class="lp-tip-trigger" data-tip="Cognitive impairment often routes to guaranteed issue or decline lanes.">i</span></label>
-                      </div>
-                      <div class="lp-health-group">
-                        <div class="lp-health-group-title">Care / Functional Status</div>
-                        <label class="lp-health-check"><input id="lp-phi-hospice-care" type="checkbox" /> Hospice care <span class="lp-tip-trigger" data-tip="Usually routes to guaranteed issue or decline depending on carrier.">i</span></label>
-                        <label class="lp-health-check"><input id="lp-phi-bedridden" type="checkbox" /> Bedridden <span class="lp-tip-trigger" data-tip="Functional limits can significantly restrict underwriting eligibility.">i</span></label>
-                        <label class="lp-health-check"><input id="lp-phi-needs-help-daily-activities" type="checkbox" /> Needs help with daily activities <span class="lp-tip-trigger" data-tip="ADL support needs are a major underwriting signal.">i</span></label>
-                        <label class="lp-health-check"><input id="lp-phi-home-health-care" type="checkbox" /> Home health care <span class="lp-tip-trigger" data-tip="Home care involvement can impact product approval route.">i</span></label>
-                      </div>
-                      <div class="lp-health-group">
-                        <div class="lp-health-group-title">Recent Medical Activity</div>
-                        <label class="lp-health-check"><input id="lp-phi-hospitalization-last-2y" type="checkbox" /> Hospitalization in last 2 years <span class="lp-tip-trigger" data-tip="Recent hospitalization can change approval class.">i</span></label>
-                        <label class="lp-health-check"><input id="lp-phi-surgery-last-2y" type="checkbox" /> Surgery in last 2 years <span class="lp-tip-trigger" data-tip="Procedure type and recovery timing affect carrier fit.">i</span></label>
-                        <label class="lp-health-check"><input id="lp-phi-upcoming-procedure-scheduled" type="checkbox" /> Upcoming procedure scheduled <span class="lp-tip-trigger" data-tip="Pending procedures can postpone or alter underwriting decisions.">i</span></label>
-                      </div>
-                      <div class="lp-health-group">
-                        <div class="lp-health-group-title">Medications</div>
-                        <label class="lp-health-check"><input id="lp-phi-rx-flag" type="checkbox" /> Takes prescription medications <span class="lp-tip-trigger" data-tip="Medication profile helps estimate risk class and carrier fit.">i</span></label>
-                        <label for="lp-phi-rx" class="lp-health-note">Medication notes / what they are for <span class="lp-tip-trigger" data-tip="Capture medication names or purpose for cleaner underwriting guidance.">i</span></label>
-                        <input id="lp-phi-rx" type="text" placeholder="e.g. metformin for diabetes, lisinopril for blood pressure" autocomplete="off" />
-                      </div>
-                      <div class="lp-health-group">
-                        <div class="lp-health-group-title">Other</div>
-                        <label class="lp-health-check"><input id="lp-phi-other-major-condition" type="checkbox" /> Other major condition <span class="lp-tip-trigger" data-tip="Flags important diagnoses not captured in preset checkboxes.">i</span></label>
-                        <label for="lp-phi-other-condition-notes" class="lp-health-note">Other condition notes <span class="lp-tip-trigger" data-tip="Short notes help Product Selector ask fewer follow-up questions.">i</span></label>
-                        <input id="lp-phi-other-condition-notes" type="text" placeholder="Short details" autocomplete="off" />
-                        <label class="lp-health-check"><input id="lp-phi-doc2y-flag" type="checkbox" /> Doctor visits in last 2 years <span class="lp-tip-trigger" data-tip="Frequent recent visits may signal active conditions.">i</span></label>
-                      </div>
-                      <div class="lp-health-group" style="grid-column: 1 / -1;">
-                        <div class="lp-health-group-title">Additional Notes</div>
-                        <label for="lp-phi-conditions" class="lp-health-note">Condition notes / list <span class="lp-tip-trigger" data-tip="Use brief phrases for major diagnoses or underwriting-relevant details.">i</span></label>
-                        <input id="lp-phi-conditions" type="text" placeholder="e.g. diabetes, hypertension" autocomplete="off" />
-                        <label for="lp-phi-hosp-reason" class="lp-health-note">Hospitalization / surgery reason notes <span class="lp-tip-trigger" data-tip="Short reason + timing helps with underwriting route decisions.">i</span></label>
-                        <input id="lp-phi-hosp-reason" type="text" autocomplete="off" />
-                      </div>
+
+                      <details class="lp-health-accordion" open>
+                        <summary>Block A — Instant Disqualifiers</summary>
+                        <div class="lp-health-accordion-body">
+                          <label class="lp-health-check"><input id="lp-phi-terminal-illness" type="checkbox" /> Terminal illness <span class="lp-tip-trigger" data-tip="Often routes directly to guaranteed issue options.">i</span></label>
+                          <label class="lp-health-check"><input id="lp-phi-aids-hiv" type="checkbox" /> AIDS / HIV <span class="lp-tip-trigger" data-tip="Carrier eligibility varies and often needs specialized routing.">i</span></label>
+                          <label class="lp-health-check"><input id="lp-phi-organ-transplant" type="checkbox" /> Organ transplant <span class="lp-tip-trigger" data-tip="Usually requires restricted underwriting pathways.">i</span></label>
+                        </div>
+                      </details>
+
+                      <details class="lp-health-accordion">
+                        <summary>Block B — Major Health Events</summary>
+                        <div class="lp-health-accordion-body">
+                          <label class="lp-health-check"><input id="lp-phi-heart-event-recent" type="checkbox" /> Heart event in last 2 years <span class="lp-tip-trigger" data-tip="Recent major cardiac/neuro events can change approval class.">i</span></label>
+                          <div class="lp-health-field" data-visible-when="heart_event_recent">
+                            <label for="lp-phi-heart-event-date" class="lp-health-note">Heart event date</label>
+                            <input id="lp-phi-heart-event-date" type="date" />
+                          </div>
+                          <div class="lp-health-field" data-visible-when="heart_event_recent">
+                            <label for="lp-phi-heart-event-type" class="lp-health-note">Heart event type</label>
+                            <select id="lp-phi-heart-event-type">
+                              <option value="">Select...</option>
+                              <option value="heart_attack">Heart attack</option>
+                              <option value="stroke">Stroke</option>
+                              <option value="tia">TIA</option>
+                            </select>
+                          </div>
+                          <label class="lp-health-check"><input id="lp-phi-heart-attack-history" type="checkbox" /> Heart attack history (>2 years) <span class="lp-tip-trigger" data-tip="Past events still influence underwriting tiering.">i</span></label>
+                          <label class="lp-health-check"><input id="lp-phi-congestive-heart-failure" type="checkbox" /> Congestive heart failure <span class="lp-tip-trigger" data-tip="CHF often narrows available products and carriers.">i</span></label>
+                          <label class="lp-health-check"><input id="lp-phi-cancer-active" type="checkbox" /> Active/recent cancer (<2 years) <span class="lp-tip-trigger" data-tip="Active treatment commonly changes immediate product fit.">i</span></label>
+                          <div class="lp-health-field" data-visible-when="cancer_active">
+                            <label for="lp-phi-cancer-type" class="lp-health-note">Cancer type</label>
+                            <input id="lp-phi-cancer-type" type="text" autocomplete="off" />
+                          </div>
+                          <div class="lp-health-field" data-visible-when="cancer_active">
+                            <label for="lp-phi-cancer-treatment-status" class="lp-health-note">Cancer treatment status</label>
+                            <select id="lp-phi-cancer-treatment-status">
+                              <option value="">Select...</option>
+                              <option value="ongoing">Ongoing</option>
+                              <option value="completed">Completed</option>
+                              <option value="in_remission">In remission</option>
+                            </select>
+                          </div>
+                          <label class="lp-health-check"><input id="lp-phi-cancer-history" type="checkbox" /> Cancer history (in remission, >2 years) <span class="lp-tip-trigger" data-tip="Remission duration helps route carrier fit.">i</span></label>
+                          <div class="lp-health-field" data-visible-when="cancer_history">
+                            <label for="lp-phi-cancer-history-type" class="lp-health-note">Cancer history type</label>
+                            <input id="lp-phi-cancer-history-type" type="text" autocomplete="off" />
+                          </div>
+                          <label class="lp-health-check"><input id="lp-phi-copd-diagnosed" type="checkbox" /> COPD / emphysema / chronic bronchitis <span class="lp-tip-trigger" data-tip="Respiratory diagnoses can affect pricing and approval class.">i</span></label>
+                          <label class="lp-health-check"><input id="lp-phi-oxygen-use" type="checkbox" /> Oxygen use <span class="lp-tip-trigger" data-tip="Usually indicates a more limited underwriting path.">i</span></label>
+                          <label class="lp-health-check"><input id="lp-phi-dementia-cognitive" type="checkbox" /> Alzheimer’s / dementia / memory condition <span class="lp-tip-trigger" data-tip="Cognitive decline often routes to GI or decline lanes by carrier.">i</span></label>
+                        </div>
+                      </details>
+
+                      <details class="lp-health-accordion">
+                        <summary>Block C — Chronic Conditions</summary>
+                        <div class="lp-health-accordion-body">
+                          <label class="lp-health-check"><input id="lp-phi-diabetes" type="checkbox" /> Diabetes <span class="lp-tip-trigger" data-tip="Control and complications impact underwriting class.">i</span></label>
+                          <div class="lp-health-field" data-visible-when="diabetes">
+                            <label for="lp-phi-diabetes-type" class="lp-health-note">Diabetes type</label>
+                            <select id="lp-phi-diabetes-type">
+                              <option value="">Select...</option>
+                              <option value="type1">Type 1</option>
+                              <option value="type2">Type 2</option>
+                            </select>
+                          </div>
+                          <label class="lp-health-check"><input id="lp-phi-diabetes-insulin" type="checkbox" /> Insulin use <span class="lp-tip-trigger" data-tip="Insulin use can reduce standard underwriting options.">i</span></label>
+                          <label class="lp-health-check"><input id="lp-phi-diabetes-complications" type="checkbox" /> Diabetes complications <span class="lp-tip-trigger" data-tip="Complications can trigger more conservative product routing.">i</span></label>
+                          <label class="lp-health-check"><input id="lp-phi-kidney-disease" type="checkbox" /> Kidney disease <span class="lp-tip-trigger" data-tip="Stage/severity impacts carrier eligibility.">i</span></label>
+                          <label class="lp-health-check"><input id="lp-phi-dialysis" type="checkbox" /> Dialysis <span class="lp-tip-trigger" data-tip="Dialysis frequently routes to guaranteed issue only.">i</span></label>
+                          <label class="lp-health-check"><input id="lp-phi-liver-disease" type="checkbox" /> Liver disease / cirrhosis / hepatitis <span class="lp-tip-trigger" data-tip="Active liver disease can constrain underwriting class.">i</span></label>
+                          <label class="lp-health-check"><input id="lp-phi-neurological-condition" type="checkbox" /> Neurological condition <span class="lp-tip-trigger" data-tip="Neurological diagnoses may require specific underwriting lanes.">i</span></label>
+                          <div class="lp-health-field" data-visible-when="neurological_condition">
+                            <label for="lp-phi-neurological-type" class="lp-health-note">Neurological type</label>
+                            <select id="lp-phi-neurological-type">
+                              <option value="">Select...</option>
+                              <option value="parkinsons">Parkinson's</option>
+                              <option value="als">ALS</option>
+                              <option value="ms">MS</option>
+                              <option value="muscular_dystrophy">Muscular dystrophy</option>
+                              <option value="other">Other</option>
+                            </select>
+                          </div>
+                          <label class="lp-health-check"><input id="lp-phi-mental-health-hospitalized" type="checkbox" /> Psychiatric hospitalization (last 2 years) <span class="lp-tip-trigger" data-tip="Recent psych hospitalization can change approval pathway.">i</span></label>
+                          <label class="lp-health-check"><input id="lp-phi-drug-alcohol-treatment" type="checkbox" /> Drug/alcohol treatment (last 2 years) <span class="lp-tip-trigger" data-tip="Recent substance treatment often requires specialized underwriting.">i</span></label>
+                        </div>
+                      </details>
+
+                      <details class="lp-health-accordion">
+                        <summary>Block D — Functional Status</summary>
+                        <div class="lp-health-accordion-body">
+                          <label class="lp-health-check"><input id="lp-phi-nursing-home-resident" type="checkbox" /> Nursing home resident <span class="lp-tip-trigger" data-tip="Typically routes to guaranteed issue lanes.">i</span></label>
+                          <label class="lp-health-check"><input id="lp-phi-wheelchair-bedridden" type="checkbox" /> Wheelchair / bedridden <span class="lp-tip-trigger" data-tip="Functional limits are major underwriting signals.">i</span></label>
+                          <label class="lp-health-check"><input id="lp-phi-adl-assistance" type="checkbox" /> Needs help with daily activities (ADLs) <span class="lp-tip-trigger" data-tip="ADL dependence strongly affects carrier/product fit.">i</span></label>
+                        </div>
+                      </details>
+
+                      <details class="lp-health-accordion">
+                        <summary>Block E — Recent Medical Activity</summary>
+                        <div class="lp-health-accordion-body">
+                          <label class="lp-health-check"><input id="lp-phi-hospitalized-recent" type="checkbox" /> Hospitalized in last 90 days <span class="lp-tip-trigger" data-tip="Very recent hospitalization can cause temporary hold or tier downgrade.">i</span></label>
+                          <div class="lp-health-field" data-visible-when="hospitalized_recent">
+                            <label for="lp-phi-hospitalization-reason" class="lp-health-note">Hospitalization reason</label>
+                            <input id="lp-phi-hospitalization-reason" type="text" autocomplete="off" />
+                          </div>
+                          <label class="lp-health-check"><input id="lp-phi-awaiting-surgery" type="checkbox" /> Awaiting surgery <span class="lp-tip-trigger" data-tip="Pending procedures may delay underwriting decisions.">i</span></label>
+                          <label class="lp-health-check"><input id="lp-phi-undiagnosed-symptoms" type="checkbox" /> Undiagnosed symptoms / pending tests <span class="lp-tip-trigger" data-tip="Open workups often create temporary underwriting uncertainty.">i</span></label>
+                        </div>
+                      </details>
+
+                      <details class="lp-health-accordion">
+                        <summary>Stage 3 — Dynamic Follow-ups</summary>
+                        <div class="lp-health-accordion-body">
+                          <label class="lp-health-check"><input id="lp-phi-atrial-fibrillation" type="checkbox" /> Atrial fibrillation</label>
+                          <label class="lp-health-check"><input id="lp-phi-pacemaker" type="checkbox" /> Pacemaker / defibrillator</label>
+                          <label class="lp-health-check"><input id="lp-phi-blood-thinner-use" type="checkbox" /> Blood thinner use</label>
+                          <label class="lp-health-check"><input id="lp-phi-coronary-artery-disease" type="checkbox" /> Coronary artery disease</label>
+                          <label class="lp-health-check"><input id="lp-phi-stents-placed" type="checkbox" /> Stents placed</label>
+                          <label class="lp-health-check"><input id="lp-phi-high-blood-pressure" type="checkbox" /> High blood pressure</label>
+                          <label class="lp-health-check"><input id="lp-phi-bp-controlled" type="checkbox" /> BP controlled</label>
+                          <label class="lp-health-check"><input id="lp-phi-cholesterol-high" type="checkbox" /> High cholesterol</label>
+                          <label class="lp-health-check"><input id="lp-phi-sleep-apnea" type="checkbox" /> Sleep apnea</label>
+                          <label class="lp-health-check"><input id="lp-phi-cpap-use" type="checkbox" /> CPAP use</label>
+                          <label class="lp-health-check"><input id="lp-phi-depression" type="checkbox" /> Depression</label>
+                          <label class="lp-health-check"><input id="lp-phi-anxiety" type="checkbox" /> Anxiety</label>
+                          <div class="lp-health-field">
+                            <label for="lp-phi-current-medications" class="lp-health-note">Current medications</label>
+                            <input id="lp-phi-current-medications" type="text" autocomplete="off" />
+                          </div>
+                          <div class="lp-health-field">
+                            <label for="lp-phi-medication-count" class="lp-health-note">Medication count</label>
+                            <input id="lp-phi-medication-count" type="number" min="0" step="1" inputmode="numeric" />
+                          </div>
+                        </div>
+                      </details>
                     </div>
                   </div>
                   </section>
@@ -3166,6 +3266,76 @@
         custom.style.display = isCustom ? "" : "none";
       }
 
+      var LP_PHI_CHECKBOX_MAP = [
+        ["lp-phi-terminal-illness", "terminal_illness"],
+        ["lp-phi-aids-hiv", "aids_hiv"],
+        ["lp-phi-organ-transplant", "organ_transplant"],
+        ["lp-phi-heart-event-recent", "heart_event_recent"],
+        ["lp-phi-heart-attack-history", "heart_attack_history"],
+        ["lp-phi-congestive-heart-failure", "congestive_heart_failure"],
+        ["lp-phi-cancer-active", "cancer_active"],
+        ["lp-phi-cancer-history", "cancer_history"],
+        ["lp-phi-copd-diagnosed", "copd_diagnosed"],
+        ["lp-phi-oxygen-use", "oxygen_use"],
+        ["lp-phi-dementia-cognitive", "dementia_cognitive"],
+        ["lp-phi-diabetes", "diabetes"],
+        ["lp-phi-diabetes-insulin", "diabetes_insulin"],
+        ["lp-phi-diabetes-complications", "diabetes_complications"],
+        ["lp-phi-kidney-disease", "kidney_disease"],
+        ["lp-phi-dialysis", "dialysis"],
+        ["lp-phi-liver-disease", "liver_disease"],
+        ["lp-phi-neurological-condition", "neurological_condition"],
+        ["lp-phi-mental-health-hospitalized", "mental_health_hospitalized"],
+        ["lp-phi-drug-alcohol-treatment", "drug_alcohol_treatment"],
+        ["lp-phi-nursing-home-resident", "nursing_home_resident"],
+        ["lp-phi-wheelchair-bedridden", "wheelchair_bedridden"],
+        ["lp-phi-adl-assistance", "adl_assistance"],
+        ["lp-phi-hospitalized-recent", "hospitalized_recent"],
+        ["lp-phi-awaiting-surgery", "awaiting_surgery"],
+        ["lp-phi-undiagnosed-symptoms", "undiagnosed_symptoms"],
+        ["lp-phi-atrial-fibrillation", "atrial_fibrillation"],
+        ["lp-phi-pacemaker", "pacemaker"],
+        ["lp-phi-blood-thinner-use", "blood_thinner_use"],
+        ["lp-phi-coronary-artery-disease", "coronary_artery_disease"],
+        ["lp-phi-stents-placed", "stents_placed"],
+        ["lp-phi-high-blood-pressure", "high_blood_pressure"],
+        ["lp-phi-bp-controlled", "bp_controlled"],
+        ["lp-phi-cholesterol-high", "cholesterol_high"],
+        ["lp-phi-sleep-apnea", "sleep_apnea"],
+        ["lp-phi-cpap-use", "cpap_use"],
+        ["lp-phi-depression", "depression"],
+        ["lp-phi-anxiety", "anxiety"],
+      ];
+      var LP_PHI_TEXT_MAP = [
+        ["lp-phi-heart-event-date", "heart_event_date"],
+        ["lp-phi-heart-event-type", "heart_event_type"],
+        ["lp-phi-cancer-type", "cancer_type"],
+        ["lp-phi-cancer-treatment-status", "cancer_treatment_status"],
+        ["lp-phi-cancer-history-type", "cancer_history_type"],
+        ["lp-phi-diabetes-type", "diabetes_type"],
+        ["lp-phi-neurological-type", "neurological_type"],
+        ["lp-phi-hospitalization-reason", "hospitalization_reason"],
+        ["lp-phi-current-medications", "current_medications"],
+        ["lp-phi-medication-count", "medication_count"],
+      ];
+
+      function syncLeadProfileHealthConditionalFields() {
+        var flagMap = {
+          heart_event_recent: !!(document.getElementById("lp-phi-heart-event-recent") && document.getElementById("lp-phi-heart-event-recent").checked),
+          cancer_active: !!(document.getElementById("lp-phi-cancer-active") && document.getElementById("lp-phi-cancer-active").checked),
+          cancer_history: !!(document.getElementById("lp-phi-cancer-history") && document.getElementById("lp-phi-cancer-history").checked),
+          diabetes: !!(document.getElementById("lp-phi-diabetes") && document.getElementById("lp-phi-diabetes").checked),
+          neurological_condition: !!(document.getElementById("lp-phi-neurological-condition") && document.getElementById("lp-phi-neurological-condition").checked),
+          hospitalized_recent: !!(document.getElementById("lp-phi-hospitalized-recent") && document.getElementById("lp-phi-hospitalized-recent").checked),
+        };
+        var nodes = document.querySelectorAll("#lp-phi-block [data-visible-when]");
+        Array.prototype.forEach.call(nodes, function (node) {
+          var key = String(node.getAttribute("data-visible-when") || "").trim();
+          var show = !!flagMap[key];
+          node.setAttribute("data-visible", show ? "true" : "false");
+        });
+      }
+
       function applyLeadProfileDetailToForm(d) {
         function setv(id, v) {
           var el = document.getElementById(id);
@@ -3234,46 +3404,13 @@
         var sh = document.getElementById("lp-staff-hidden");
         if (sh) sh.value = d.staff_hidden_at ? fmtDate(d.staff_hidden_at) : "";
         var phi = d && d.phi && typeof d.phi === "object" ? d.phi : {};
-        setv("lp-phi-rx", phi.prescription_meds_text || "");
-        var phiRxFlag = document.getElementById("lp-phi-rx-flag");
-        if (phiRxFlag) phiRxFlag.checked = !!phi.takes_prescription_medications;
-        var phiDoc2yFlag = document.getElementById("lp-phi-doc2y-flag");
-        if (phiDoc2yFlag) phiDoc2yFlag.checked = !!phi.doctor_visits_2y;
-        [
-          ["lp-phi-heart-attack", "heart_attack"],
-          ["lp-phi-stroke-tia", "stroke_tia"],
-          ["lp-phi-heart-disease", "heart_disease"],
-          ["lp-phi-heart-surgery-stents", "heart_surgery_stents"],
-          ["lp-phi-congestive-heart-failure", "congestive_heart_failure"],
-          ["lp-phi-diabetes", "diabetes"],
-          ["lp-phi-insulin-use", "insulin_use"],
-          ["lp-phi-cancer-history", "cancer_history"],
-          ["lp-phi-current-cancer-treatment", "current_cancer_treatment"],
-          ["lp-phi-copd-emphysema", "copd_emphysema"],
-          ["lp-phi-chronic-lung-disease", "chronic_lung_disease"],
-          ["lp-phi-oxygen-use", "oxygen_use"],
-          ["lp-phi-kidney-disease", "kidney_disease"],
-          ["lp-phi-dialysis", "dialysis"],
-          ["lp-phi-liver-disease-cirrhosis-hepatitis", "liver_disease_cirrhosis_hepatitis"],
-          ["lp-phi-alzheimers-dementia-memory", "alzheimers_dementia_memory_condition"],
-          ["lp-phi-hospice-care", "hospice_care"],
-          ["lp-phi-bedridden", "bedridden"],
-          ["lp-phi-needs-help-daily-activities", "needs_help_daily_activities"],
-          ["lp-phi-home-health-care", "home_health_care"],
-          ["lp-phi-hospitalization-last-2y", "hospitalization_last_2y"],
-          ["lp-phi-surgery-last-2y", "surgery_last_2y"],
-          ["lp-phi-upcoming-procedure-scheduled", "upcoming_procedure_scheduled"],
-          ["lp-phi-other-major-condition", "other_major_condition"],
-        ].forEach(function (entry) {
+        LP_PHI_CHECKBOX_MAP.forEach(function (entry) {
           var box = document.getElementById(entry[0]);
-          if (!box) return;
-          if (entry[1] === "hospitalization_last_2y") box.checked = !!(phi.hospitalization_last_2y || phi.recent_hospitalizations);
-          else if (entry[1] === "other_major_condition") box.checked = !!(phi.other_major_condition || phi.has_major_conditions);
-          else box.checked = !!phi[entry[1]];
+          if (box) box.checked = !!phi[entry[1]];
         });
-        setv("lp-phi-conditions", Array.isArray(phi.conditions) ? phi.conditions.join(", ") : "");
-        setv("lp-phi-hosp-reason", phi.hospitalization_reason || "");
-        setv("lp-phi-other-condition-notes", phi.other_condition_notes || "");
+        LP_PHI_TEXT_MAP.forEach(function (entry) {
+          setv(entry[0], phi[entry[1]]);
+        });
         var phiBlock = document.getElementById("lp-phi-block");
         var phiNote = document.getElementById("lp-phi-note");
         if (phiBlock) phiBlock.style.display = "";
@@ -3287,7 +3424,7 @@
           if (leadProfileCanAccessPhi) node.removeAttribute("disabled");
           else node.setAttribute("disabled", "disabled");
         });
-        syncLeadProfilePhiExpand();
+        syncLeadProfileHealthConditionalFields();
       }
 
       function syncLeadProfilePhiExpand() {
@@ -3390,44 +3527,23 @@
           notes: String((document.getElementById("lp-notes") && document.getElementById("lp-notes").value) || "").trim(),
           last_contacted: String((document.getElementById("lp-last-contacted") && document.getElementById("lp-last-contacted").value) || "").trim(),
           assigned_agent: String((document.getElementById("lp-assigned-agent") && document.getElementById("lp-assigned-agent").value) || "").trim(),
-          phi: {
-            has_major_conditions:
-              !!(document.getElementById("lp-phi-other-major-condition") && document.getElementById("lp-phi-other-major-condition").checked),
-            takes_prescription_medications: !!(document.getElementById("lp-phi-rx-flag") && document.getElementById("lp-phi-rx-flag").checked),
-            recent_hospitalizations: !!(document.getElementById("lp-phi-hospitalization-last-2y") && document.getElementById("lp-phi-hospitalization-last-2y").checked),
-            doctor_visits_2y: !!(document.getElementById("lp-phi-doc2y-flag") && document.getElementById("lp-phi-doc2y-flag").checked),
-            heart_attack: !!(document.getElementById("lp-phi-heart-attack") && document.getElementById("lp-phi-heart-attack").checked),
-            stroke_tia: !!(document.getElementById("lp-phi-stroke-tia") && document.getElementById("lp-phi-stroke-tia").checked),
-            heart_disease: !!(document.getElementById("lp-phi-heart-disease") && document.getElementById("lp-phi-heart-disease").checked),
-            heart_surgery_stents: !!(document.getElementById("lp-phi-heart-surgery-stents") && document.getElementById("lp-phi-heart-surgery-stents").checked),
-            congestive_heart_failure: !!(document.getElementById("lp-phi-congestive-heart-failure") && document.getElementById("lp-phi-congestive-heart-failure").checked),
-            diabetes: !!(document.getElementById("lp-phi-diabetes") && document.getElementById("lp-phi-diabetes").checked),
-            insulin_use: !!(document.getElementById("lp-phi-insulin-use") && document.getElementById("lp-phi-insulin-use").checked),
-            cancer_history: !!(document.getElementById("lp-phi-cancer-history") && document.getElementById("lp-phi-cancer-history").checked),
-            current_cancer_treatment: !!(document.getElementById("lp-phi-current-cancer-treatment") && document.getElementById("lp-phi-current-cancer-treatment").checked),
-            copd_emphysema: !!(document.getElementById("lp-phi-copd-emphysema") && document.getElementById("lp-phi-copd-emphysema").checked),
-            chronic_lung_disease: !!(document.getElementById("lp-phi-chronic-lung-disease") && document.getElementById("lp-phi-chronic-lung-disease").checked),
-            oxygen_use: !!(document.getElementById("lp-phi-oxygen-use") && document.getElementById("lp-phi-oxygen-use").checked),
-            kidney_disease: !!(document.getElementById("lp-phi-kidney-disease") && document.getElementById("lp-phi-kidney-disease").checked),
-            dialysis: !!(document.getElementById("lp-phi-dialysis") && document.getElementById("lp-phi-dialysis").checked),
-            liver_disease_cirrhosis_hepatitis: !!(document.getElementById("lp-phi-liver-disease-cirrhosis-hepatitis") && document.getElementById("lp-phi-liver-disease-cirrhosis-hepatitis").checked),
-            alzheimers_dementia_memory_condition: !!(document.getElementById("lp-phi-alzheimers-dementia-memory") && document.getElementById("lp-phi-alzheimers-dementia-memory").checked),
-            hospice_care: !!(document.getElementById("lp-phi-hospice-care") && document.getElementById("lp-phi-hospice-care").checked),
-            bedridden: !!(document.getElementById("lp-phi-bedridden") && document.getElementById("lp-phi-bedridden").checked),
-            needs_help_daily_activities: !!(document.getElementById("lp-phi-needs-help-daily-activities") && document.getElementById("lp-phi-needs-help-daily-activities").checked),
-            home_health_care: !!(document.getElementById("lp-phi-home-health-care") && document.getElementById("lp-phi-home-health-care").checked),
-            hospitalization_last_2y: !!(document.getElementById("lp-phi-hospitalization-last-2y") && document.getElementById("lp-phi-hospitalization-last-2y").checked),
-            surgery_last_2y: !!(document.getElementById("lp-phi-surgery-last-2y") && document.getElementById("lp-phi-surgery-last-2y").checked),
-            upcoming_procedure_scheduled: !!(document.getElementById("lp-phi-upcoming-procedure-scheduled") && document.getElementById("lp-phi-upcoming-procedure-scheduled").checked),
-            other_major_condition: !!(document.getElementById("lp-phi-other-major-condition") && document.getElementById("lp-phi-other-major-condition").checked),
-            prescription_meds_text: String((document.getElementById("lp-phi-rx") && document.getElementById("lp-phi-rx").value) || "").trim(),
-            conditions: String((document.getElementById("lp-phi-conditions") && document.getElementById("lp-phi-conditions").value) || "")
-              .split(",")
-              .map(function (x) { return String(x || "").trim(); })
-              .filter(Boolean),
-            hospitalization_reason: String((document.getElementById("lp-phi-hosp-reason") && document.getElementById("lp-phi-hosp-reason").value) || "").trim(),
-            other_condition_notes: String((document.getElementById("lp-phi-other-condition-notes") && document.getElementById("lp-phi-other-condition-notes").value) || "").trim(),
-          },
+          phi: (function () {
+            var out = {};
+            LP_PHI_CHECKBOX_MAP.forEach(function (entry) {
+              out[entry[1]] = !!(document.getElementById(entry[0]) && document.getElementById(entry[0]).checked);
+            });
+            LP_PHI_TEXT_MAP.forEach(function (entry) {
+              var node = document.getElementById(entry[0]);
+              var raw = node ? node.value : "";
+              if (entry[1] === "medication_count") {
+                var n = parseInt(String(raw || "").trim(), 10);
+                out[entry[1]] = Number.isFinite(n) ? n : null;
+              } else {
+                out[entry[1]] = String(raw || "").trim();
+              }
+            });
+            return out;
+          })(),
         };
       }
 
@@ -3817,9 +3933,17 @@
           syncLeadProfileDesiredCoverageCustom();
           scheduleLeadProfileDirtyCheck();
         });
+        LP_PHI_CHECKBOX_MAP.forEach(function (entry) {
+          var node = document.getElementById(entry[0]);
+          if (!node) return;
+          node.addEventListener("change", function () {
+            syncLeadProfileHealthConditionalFields();
+            scheduleLeadProfileDirtyCheck();
+          });
+        });
         setLeadProfileLanguageToggle("English");
         syncLeadProfileDesiredCoverageCustom();
-        syncLeadProfilePhiExpand();
+        syncLeadProfileHealthConditionalFields();
         wireLeadProfileHealthTooltips();
         saveBtn.addEventListener("click", onLeadProfileSaveClick);
       }
@@ -3956,13 +4080,36 @@
         if (!el.chatLog) return;
         var questionOrder = {};
         [
+          "terminal_illness",
+          "aids_hiv",
+          "organ_transplant",
+          "heart_event_recent",
+          "heart_event_date",
+          "heart_event_type",
+          "cancer_active",
+          "cancer_type",
+          "cancer_treatment_status",
+          "dementia_cognitive",
+          "diabetes",
+          "diabetes_type",
+          "diabetes_insulin",
+          "dialysis",
+          "nursing_home_resident",
+          "adl_assistance",
+          "hospitalized_recent",
+          "hospitalization_reason",
+          "awaiting_surgery",
+          "undiagnosed_symptoms",
+          "atrial_fibrillation",
+          "pacemaker",
+          "blood_thinner_use",
+          "high_blood_pressure",
+          "bp_controlled",
+          "sleep_apnea",
+          "cpap_use",
+          "current_medications",
           "takes_prescription_medications",
           "has_major_conditions",
-          "conditions",
-          "hospitalization_last_2y",
-          "hospitalization_reason",
-          "alzheimers_dementia_memory_condition",
-          "doctor_visits_2y",
           "strategy_priority",
           "graded_benefit_ok",
           "carrier_preference",
