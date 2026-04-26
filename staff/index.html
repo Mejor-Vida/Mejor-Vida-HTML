@@ -390,6 +390,10 @@
       min-height: min(100%, 720px);
       width: 100%;
     }
+    /* Lead Profile needs visible overflow so sticky header can pin while pane scrolls. */
+    #pane-lead-profile .compose-panel {
+      overflow: visible;
+    }
     /* Any compose-style tool body (Compose, Lead Profile, Product Selector) */
     .compose-panel > .compose-body {
       display: flex;
