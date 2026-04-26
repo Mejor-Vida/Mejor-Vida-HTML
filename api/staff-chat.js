@@ -74,7 +74,32 @@ function buildGroundedPrompt(message, ctx) {
   return (
     `Internal KB excerpts:\n${ctx || "[none found]"}\n\n` +
     `User question:\n${message}\n\n` +
-    `Instruction: Answer ONLY from internal KB excerpts. If a detail is missing, say it is not in internal KB.`
+    `Instruction: Answer ONLY from internal KB excerpts. If a detail is missing, say it is not in internal KB.\n` +
+    `You MUST include at least one citation tag like [1] or [2] for any concrete claim.`
+  );
+}
+
+function maxSimilarity(chunks) {
+  if (!Array.isArray(chunks) || !chunks.length) return 0;
+  let best = 0;
+  for (const c of chunks) {
+    const s = Number(c && c.similarity);
+    if (Number.isFinite(s) && s > best) best = s;
+  }
+  return best;
+}
+
+function hasCitationMarkers(text) {
+  return /\[\d+\]/.test(String(text || ""));
+}
+
+function admitsGeneralKnowledge(text) {
+  const t = String(text || "").toLowerCase();
+  return (
+    t.includes("general industry knowledge") ||
+    t.includes("not directly from the internal kb") ||
+    t.includes("not in the internal kb excerpts") ||
+    t.includes("no internal kb")
   );
 }
 
@@ -140,8 +165,8 @@ module.exports = async function handler(req, res) {
     const ctx = (chunks || [])
       .map((c, i) => `[${i + 1}] ${String((c && c.content) || "").slice(0, 2400)}`)
       .join("\n\n");
-    const internalStrong = Array.isArray(chunks) && chunks.length >= 2;
-    if (internalStrong) {
+    const internalStrongRetrieval = Array.isArray(chunks) && chunks.length >= 2 && maxSimilarity(chunks) >= 0.45;
+    if (internalStrongRetrieval) {
       const groundedMessages = [
         {
           role: "system",
@@ -153,7 +178,11 @@ module.exports = async function handler(req, res) {
         { role: "user", content: buildGroundedPrompt(message, ctx) },
       ];
       const text = await complete(openaiKey, "gpt-4o", 0.15, 1200, groundedMessages);
-      return json(res, 200, { answer: String(text).trim(), source: "internal_rag" });
+      const groundedText = String(text).trim();
+      const groundedEnough = hasCitationMarkers(groundedText) && !admitsGeneralKnowledge(groundedText);
+      if (groundedEnough) {
+        return json(res, 200, { answer: groundedText, source: "internal_rag" });
+      }
     }
 
     const fallbackMessages = [
