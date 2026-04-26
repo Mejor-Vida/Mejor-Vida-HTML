@@ -1290,6 +1290,10 @@
                       <input id="lp-age" type="number" inputmode="numeric" min="0" max="130" placeholder="—" />
                     </div>
                     <div class="meta-card">
+                      <label for="lp-dob">Birthdate</label>
+                      <input id="lp-dob" type="date" />
+                    </div>
+                    <div class="meta-card">
                       <label for="lp-sex">Sex</label>
                       <select id="lp-sex">
                         <option value="">Select...</option>
@@ -1306,8 +1310,38 @@
                       </select>
                     </div>
                     <div class="meta-card">
-                      <label for="lp-dob">Birthdate</label>
-                      <input id="lp-dob" type="date" />
+                      <label for="lp-living-situation">Living Situation</label>
+                      <select id="lp-living-situation">
+                        <option value="">Select...</option>
+                        <option value="independent">Independent (own home / apartment)</option>
+                        <option value="assisted_living">Assisted Living</option>
+                        <option value="nursing_home">Nursing Home</option>
+                      </select>
+                    </div>
+                    <div class="meta-card">
+                      <label for="lp-citizenship-status">Citizenship / Residency</label>
+                      <select id="lp-citizenship-status">
+                        <option value="">Select...</option>
+                        <option value="us_citizen">US Citizen</option>
+                        <option value="permanent_resident">Permanent Resident (Green Card)</option>
+                        <option value="other_or_not_sure">Other / Not sure</option>
+                      </select>
+                    </div>
+                    <div class="meta-card">
+                      <label for="lp-height">Height</label>
+                      <input id="lp-height" type="text" placeholder="e.g. 5'10&quot;" autocomplete="off" />
+                    </div>
+                    <div class="meta-card">
+                      <label for="lp-weight">Weight</label>
+                      <input id="lp-weight" type="number" inputmode="decimal" min="1" max="999" step="0.1" placeholder="lbs" />
+                    </div>
+                    <div class="meta-card">
+                      <label for="lp-cognitive-impairment">Any diagnosis of Alzheimer&rsquo;s, dementia, or memory-related condition?</label>
+                      <select id="lp-cognitive-impairment">
+                        <option value="">Select...</option>
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                      </select>
                     </div>
                   </div>
                   </section>
@@ -3030,6 +3064,17 @@
           else if (d.tobacco === false) tob.value = "false";
           else tob.value = "";
         }
+        setv("lp-living-situation", d.profile_ext && d.profile_ext.living_situation);
+        setv("lp-citizenship-status", d.profile_ext && d.profile_ext.citizenship_status);
+        setv("lp-height", d.profile_ext && d.profile_ext.height);
+        setv("lp-weight", d.profile_ext && d.profile_ext.weight);
+        var cog = document.getElementById("lp-cognitive-impairment");
+        if (cog) {
+          var cogRaw = String((d.profile_ext && d.profile_ext.cognitive_impairment) || "").trim().toLowerCase();
+          if (cogRaw === "yes" || cogRaw === "true") cog.value = "yes";
+          else if (cogRaw === "no" || cogRaw === "false") cog.value = "no";
+          else cog.value = "";
+        }
         setv("lp-tag", d.tag);
         setv("lp-pipeline-stage", d.pipeline_stage);
         setv("lp-source", d.source);
@@ -3111,6 +3156,11 @@
           date_of_birth: String((document.getElementById("lp-dob") && document.getElementById("lp-dob").value) || "").trim(),
           sex: String(document.getElementById("lp-sex").value || "").trim(),
           tobacco: tobacco,
+          living_situation: String((document.getElementById("lp-living-situation") && document.getElementById("lp-living-situation").value) || "").trim(),
+          citizenship_status: String((document.getElementById("lp-citizenship-status") && document.getElementById("lp-citizenship-status").value) || "").trim(),
+          height: String((document.getElementById("lp-height") && document.getElementById("lp-height").value) || "").trim(),
+          weight: String((document.getElementById("lp-weight") && document.getElementById("lp-weight").value) || "").trim(),
+          cognitive_impairment: String((document.getElementById("lp-cognitive-impairment") && document.getElementById("lp-cognitive-impairment").value) || "").trim(),
           tag: String(document.getElementById("lp-tag").value || "").trim(),
           pipeline_stage: String(document.getElementById("lp-pipeline-stage").value || "").trim(),
           source: String(document.getElementById("lp-source").value || "").trim(),
@@ -3156,6 +3206,11 @@
           var n = parseInt(ageStr, 10);
           if (Number.isFinite(n) && n >= 0 && n <= 130) ageOut = n;
         }
+        var weightOut = null;
+        if (s.weight !== "") {
+          var w = parseFloat(s.weight);
+          if (Number.isFinite(w) && w > 0 && w <= 999) weightOut = w;
+        }
         return {
           id: composeSelectedLeadId,
           first_name: s.first_name || null,
@@ -3176,6 +3231,11 @@
           profile_ext: {
             state: s.state || null,
             date_of_birth: s.date_of_birth || null,
+            living_situation: s.living_situation || null,
+            citizenship_status: s.citizenship_status || null,
+            height: s.height || null,
+            weight: weightOut,
+            cognitive_impairment: s.cognitive_impairment || null,
             coverage_goal: s.coverage_goal || null,
             desired_coverage_amount: s.desired_coverage_amount || null,
             monthly_budget: s.monthly_budget || null,
@@ -3197,6 +3257,11 @@
         return {
           age: s.age || "",
           tobacco: s.tobacco,
+          living_situation: s.living_situation || "",
+          citizenship_status: s.citizenship_status || "",
+          height: s.height || "",
+          weight: s.weight || "",
+          cognitive_impairment: s.cognitive_impairment || "",
           coverage_goal: s.coverage_goal || "",
           desired_coverage_amount: s.desired_coverage_amount || "",
           monthly_budget: s.monthly_budget || "",
