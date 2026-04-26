@@ -2075,14 +2075,16 @@
             '<div class="meta-card"><strong>Last asked:</strong> ' + escHtml(fmtDate(q.last_asked_at || q.created_at)) + "</div>" +
           "</div>" +
           '<label>Question that needs KB coverage</label>' +
-          '<textarea readonly>' + escHtml(q.question || "") + "</textarea>" +
+          '<textarea readonly rows="4">' + escHtml(q.question || "") + "</textarea>" +
           '<label>Fallback answer that was shown</label>' +
-          '<textarea readonly>' + escHtml(q.assistant_answer || "") + "</textarea>" +
+          '<textarea id="kb-gap-answer-box" readonly rows="12" style="min-height:260px">' + escHtml(q.assistant_answer || "") + "</textarea>" +
           '<div class="actions">' +
-            '<button id="resolve-kb-gap-btn" class="danger" type="button" data-help="Marks this gap resolved after you update and re-embed the missing KB content.">Resolve Gap</button>' +
+            '<button id="push-kb-gap-rag-btn" class="secondary" type="button" data-help="Saves this Q&A as an internal knowledge chunk so future Staff Assistant RAG can retrieve it.">Push to RAG</button>' +
+            '<button id="delete-kb-gap-btn" class="danger" type="button" data-help="Permanently deletes this unresolved KB gap from the queue.">Delete Gap</button>' +
           "</div>" +
           '<div id="kb-gap-status" class="small-note">' + escHtml(statusText || "") + "</div>";
-        document.getElementById("resolve-kb-gap-btn").addEventListener("click", onResolveKbGap);
+        document.getElementById("push-kb-gap-rag-btn").addEventListener("click", onPushKbGapToRag);
+        document.getElementById("delete-kb-gap-btn").addEventListener("click", onDeleteKbGap);
         wireDelayedHelpOn(kbGapDetail);
       }
 
@@ -2104,19 +2106,55 @@
         }
       }
 
-      async function onResolveKbGap() {
+      async function onPushKbGapToRag() {
         var q = getSelectedKbGap();
         if (!q) return;
         var status = document.getElementById("kb-gap-status");
-        status.textContent = "Resolving gap...";
+        var pushBtn = document.getElementById("push-kb-gap-rag-btn");
+        status.textContent = "Pushing to RAG...";
+        if (pushBtn) {
+          pushBtn.disabled = true;
+          pushBtn.textContent = "Pushing...";
+        }
         try {
-          await authedApi("/api/staff/resolve-kb-gap", { id: q.id });
+          var data = await authedApi("/api/staff/push-kb-gap-to-rag", { id: q.id });
           kbGapItemsState = kbGapItemsState.filter(function (item) { return item.id !== q.id; });
           selectedKbGapId = kbGapItemsState.length ? kbGapItemsState[0].id : "";
           renderKbGapList();
-          renderKbGapDetail("Gap resolved.");
+          renderKbGapDetail(data && data.deduped ? "Already existed in RAG. Gap removed." : "Pushed to RAG and removed from queue.");
         } catch (e) {
-          status.textContent = "Failed to resolve gap.";
+          status.textContent = "Failed to push to RAG.";
+        } finally {
+          if (pushBtn) {
+            pushBtn.disabled = false;
+            pushBtn.textContent = "Push to RAG";
+          }
+        }
+      }
+
+      async function onDeleteKbGap() {
+        var q = getSelectedKbGap();
+        if (!q) return;
+        var status = document.getElementById("kb-gap-status");
+        var delBtn = document.getElementById("delete-kb-gap-btn");
+        status.textContent = "Deleting gap...";
+        if (delBtn) {
+          delBtn.disabled = true;
+          delBtn.textContent = "Deleting...";
+        }
+        try {
+          await authedApi("/api/staff/delete-kb-gap", { id: q.id });
+          kbGapItemsState = kbGapItemsState.filter(function (item) { return item.id !== q.id; });
+          selectedKbGapId = kbGapItemsState.length ? kbGapItemsState[0].id : "";
+          renderKbGapList();
+          renderKbGapDetail("Gap deleted.");
+        } catch (e) {
+          status.textContent = "Failed to delete gap.";
+        } finally {
+          if (delBtn) {
+            delBtn.disabled = false;
+            delBtn.textContent = "Delete Gap";
+          }
         }
       }
 
