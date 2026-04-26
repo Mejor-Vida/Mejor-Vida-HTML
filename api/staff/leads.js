@@ -112,6 +112,10 @@ function mergePreferSource(base, canonicalPatch) {
   return out;
 }
 
+function mergePreferCanonical(sourceValue, canonicalValue) {
+  return isBlankValue(canonicalValue) ? sourceValue : canonicalValue;
+}
+
 async function loadSelectorDerivedProfileExt(cfg, leadId, leadSourceTable) {
   if (!leadId || !leadSourceTable) return {};
   const rows = await restSelect(
@@ -291,14 +295,14 @@ async function composeMergedLeadDetail(cfg, detail) {
   const merged = Object.assign({}, detail);
   const topLevelPatch = Object.assign({}, canonical);
   delete topLevelPatch.profile_ext;
-  merged.first_name = !isBlankValue(detail.first_name) ? detail.first_name : topLevelPatch.first_name || detail.first_name;
-  merged.last_name = !isBlankValue(detail.last_name) ? detail.last_name : topLevelPatch.last_name || detail.last_name;
-  merged.email = !isBlankValue(detail.email) ? detail.email : topLevelPatch.email || detail.email;
-  merged.phone = !isBlankValue(detail.phone) ? detail.phone : topLevelPatch.phone || detail.phone;
-  merged.language = !isBlankValue(detail.language) ? detail.language : topLevelPatch.language || detail.language;
-  merged.age = !isBlankValue(detail.age) ? detail.age : topLevelPatch.age || detail.age;
-  merged.sex = !isBlankValue(detail.sex) ? detail.sex : topLevelPatch.sex || detail.sex;
-  merged.tobacco = detail.tobacco != null ? detail.tobacco : topLevelPatch.tobacco;
+  merged.first_name = mergePreferCanonical(detail.first_name, topLevelPatch.first_name);
+  merged.last_name = mergePreferCanonical(detail.last_name, topLevelPatch.last_name);
+  merged.email = mergePreferCanonical(detail.email, topLevelPatch.email);
+  merged.phone = mergePreferCanonical(detail.phone, topLevelPatch.phone);
+  merged.language = mergePreferCanonical(detail.language, topLevelPatch.language);
+  merged.age = mergePreferCanonical(detail.age, topLevelPatch.age);
+  merged.sex = mergePreferCanonical(detail.sex, topLevelPatch.sex);
+  merged.tobacco = topLevelPatch.tobacco != null ? topLevelPatch.tobacco : detail.tobacco;
 
   const baseExt = mergePreferSource(selectorExt, canonicalExt);
   merged.profile_ext = mergePreferSource(baseExt, canonicalExt);
