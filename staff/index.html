@@ -318,7 +318,10 @@
       padding: 7px 10px;
       font-size: 0.86rem;
       line-height: 1.1;
-      white-space: nowrap;
+      white-space: normal;
+      min-width: 92px;
+      max-width: 138px;
+      text-align: center;
     }
     .ps-head-actions #ps-status {
       margin: 0;
@@ -2062,9 +2065,10 @@
             </div>
             <div class="ps-head-actions">
               <div class="actions">
-                <button id="ps-save-btn" type="button" class="secondary">Save Session</button>
-                <button id="ps-run-btn" type="button">Refresh Recommendation</button>
-                <button id="ps-sync-to-profile-btn" type="button" class="secondary">Push Coverage &amp; Intent to Lead Profile</button>
+                <button id="ps-new-btn" type="button" class="secondary" data-help="Clears selector chat/session answers for this lead and starts over from question one.">New Chat</button>
+                <button id="ps-save-btn" type="button" class="secondary" data-help="Saves the current Product Selector session for this lead.">Save</button>
+                <button id="ps-run-btn" type="button" data-help="Rebuilds recommendation from current session data.">Recommend</button>
+                <button id="ps-sync-to-profile-btn" type="button" class="secondary" data-help="Pushes selected coverage/intent fields to Lead Profile.">Push to Profile</button>
               </div>
               <div id="ps-status" class="small-note"></div>
             </div>
@@ -4576,6 +4580,7 @@
           status: document.getElementById("ps-status"),
           output: document.getElementById("ps-output"),
           syncToProfileBtn: document.getElementById("ps-sync-to-profile-btn"),
+          newBtn: document.getElementById("ps-new-btn"),
           saveBtn: document.getElementById("ps-save-btn"),
           runBtn: document.getElementById("ps-run-btn"),
           legacyFields: document.querySelector("#product-selector-form .ps-legacy-fields"),
@@ -4891,6 +4896,42 @@
         }
       }
 
+      async function resetProductSelectorSession() {
+        var lead = getSelectedLeadFromList();
+        var el = getProductSelectorEls();
+        if (!lead) {
+          if (el.status) el.status.textContent = "Select a lead first.";
+          return;
+        }
+        if (el.status) el.status.textContent = "Resetting chat session…";
+        try {
+          var data = await authedApi(
+            "/api/staff/product-selector",
+            {
+              lead_id: lead.id,
+              lead_source_table: lead.source_table || "unknown",
+              qualification_answers: {},
+              profile_snapshot: buildProfileSnapshotForSelector(),
+              risk_summary: {},
+              recommendation: {},
+              confidence: {},
+              sales_enablement: {},
+              workflow_state: {},
+            },
+            { method: "PUT" }
+          );
+          productSelectorSession = data && data.session ? data.session : null;
+          applyProductSelectorAnswersToUi({});
+          renderProductSelectorChat([]);
+          renderProductSelectorOutput(null, null, null, null);
+          if (el.chatInput) el.chatInput.value = "start";
+          await sendProductSelectorChatCore(true);
+          if (el.status) el.status.textContent = "New chat started.";
+        } catch (e) {
+          if (el.status) el.status.textContent = (e && e.message) || "Could not reset chat session.";
+        }
+      }
+
       async function runProductSelectorRecommendation() {
         var lead = getSelectedLeadFromList();
         var el = getProductSelectorEls();
@@ -4941,6 +4982,12 @@
           el.saveBtn.setAttribute("data-wired", "1");
           el.saveBtn.addEventListener("click", function () {
             saveProductSelectorSession();
+          });
+        }
+        if (el.newBtn && !el.newBtn.getAttribute("data-wired")) {
+          el.newBtn.setAttribute("data-wired", "1");
+          el.newBtn.addEventListener("click", function () {
+            resetProductSelectorSession();
           });
         }
         if (el.runBtn && !el.runBtn.getAttribute("data-wired")) {
