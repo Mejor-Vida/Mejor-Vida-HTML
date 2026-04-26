@@ -364,31 +364,6 @@
       background: #254989;
       border-color: #7fa1df;
     }
-    #lead-profile-form .lp-sticky-bar {
-      position: sticky;
-      top: 0;
-      z-index: 12;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
-      padding: 10px 12px;
-      border: 1px solid rgba(111, 139, 201, 0.45);
-      border-radius: 10px;
-      background: rgba(13, 27, 52, 0.96);
-      backdrop-filter: blur(4px);
-    }
-    #lead-profile-form .lp-sticky-help {
-      font-size: 0.8rem;
-      color: #cfe0ff;
-      line-height: 1.3;
-    }
-    #lead-profile-form #lead-profile-status {
-      margin: 0;
-      font-size: 0.82rem;
-      color: #dce7ff;
-      text-align: right;
-    }
     @media (max-width: 1300px) {
       #lead-profile-form .lp-section .meta-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -691,6 +666,24 @@
       justify-content: space-between;
       align-items: center;
       gap: 8px;
+    }
+    #pane-lead-profile .inbox-head {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+    #pane-lead-profile .lp-head-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-left: auto;
+    }
+    #pane-lead-profile #lead-profile-status {
+      margin: 0;
+      font-size: 0.82rem;
+      color: #dce7ff;
+      text-align: right;
+      white-space: nowrap;
     }
     .inbox-items {
       overflow: auto;
@@ -1210,7 +1203,11 @@
           <div class="inbox-head">
             <div>
               <strong>Lead Profile</strong>
-              <div class="small-note">Same lead list as Compose (left). Selection is shared across staff tools.</div>
+              <div class="small-note">Same lead list as Compose (left). Selection is shared across staff tools. Canonical profile save only.</div>
+            </div>
+            <div class="lp-head-actions">
+              <button id="lead-profile-save-btn" type="button" class="secondary" disabled data-help="Saves to canonical staff lead profile only; does not backfill source systems.">Save updates</button>
+              <div id="lead-profile-status" class="small-note"></div>
             </div>
           </div>
           <div id="lead-profile-body" class="compose-body">
@@ -1238,13 +1235,6 @@
                 <div id="lead-profile-readonly-block" class="hidden"></div>
                 <div id="lead-profile-empty" class="q-empty">Select a lead from the list on the left.</div>
                 <form id="lead-profile-form" class="compose-form hidden" autocomplete="off" onsubmit="return false;" aria-label="Lead profile">
-                  <div class="lp-sticky-bar">
-                    <div class="lp-sticky-help">Canonical profile save. Source systems can overwrite matching source fields on refresh.</div>
-                    <div class="actions">
-                      <button id="lead-profile-save-btn" type="button" class="secondary" disabled data-help="Saves to canonical staff lead profile only; does not backfill source systems.">Save updates</button>
-                    </div>
-                    <div id="lead-profile-status" class="small-note"></div>
-                  </div>
                   <section class="lp-section">
                   <div class="lp-section-bar">1. Identity (required to contact + identify)</div>
                   <div class="meta-grid">
