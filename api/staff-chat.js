@@ -103,6 +103,16 @@ function admitsGeneralKnowledge(text) {
   );
 }
 
+function stripSourceHeader(text) {
+  const raw = String(text || "").trim();
+  return raw.replace(/^source:\s.*(?:\r?\n)+/i, "").trim();
+}
+
+function withTrustedSourceHeader(text, sourceLabel) {
+  const body = stripSourceHeader(text);
+  return `Source: ${sourceLabel}\n\n${body}`.trim();
+}
+
 async function complete(openaiKey, model, temperature, maxTokens, messages) {
   const r = await fetch("https://api.openai.com/v1/chat/completions", {
     method: "POST",
@@ -181,7 +191,10 @@ module.exports = async function handler(req, res) {
       const groundedText = String(text).trim();
       const groundedEnough = hasCitationMarkers(groundedText) && !admitsGeneralKnowledge(groundedText);
       if (groundedEnough) {
-        return json(res, 200, { answer: groundedText, source: "internal_rag" });
+        return json(res, 200, {
+          answer: withTrustedSourceHeader(groundedText, "Internal Knowledge Base (RAG)"),
+          source: "internal_rag",
+        });
       }
     }
 
@@ -201,7 +214,10 @@ module.exports = async function handler(req, res) {
       },
     ];
     const text = await complete(openaiKey, "gpt-4o", 0.2, 1200, fallbackMessages);
-    return json(res, 200, { answer: String(text).trim(), source: "general_fallback" });
+    return json(res, 200, {
+      answer: withTrustedSourceHeader(String(text).trim(), "General Industry Knowledge (RAG insufficient)"),
+      source: "general_fallback",
+    });
   } catch (e) {
     console.error("staff-chat", e);
     return json(res, 500, { error: "Failed to generate staff answer" });
