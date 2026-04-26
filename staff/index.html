@@ -853,13 +853,14 @@
       <div class="top-brand-row">
         <div>
           <b>Mejor Vida Insurance — Staff Portal</b>
-          <small>Staff Access Only — Login Required<span id="staff-build-stamp" class="staff-build-stamp" title="If this number is missing after refresh, the page is cached.">· UI 20260425l</span></small>
+          <small>Staff Access Only — Login Required<span id="staff-build-stamp" class="staff-build-stamp" title="If this number is missing after refresh, the page is cached.">· UI 20260425m</span></small>
         </div>
         <button id="signout-btn" class="signout" type="button" data-help="Signs you out of the staff portal on this browser.">Sign Out</button>
       </div>
       <nav class="tabs" aria-label="Staff tools">
         <button id="tab-inbox" class="tab-btn active" type="button" data-help="Open the customer question inbox: review questions, draft replies, email leads, and add answers to the knowledge base.">📬 Inbox</button>
         <button id="tab-compose" class="tab-btn" type="button" data-help="Compose a new email to a lead: search manychat_leads, draft with AI, send branded HTML from Julie\x27s mailbox, or save a draft.">✉️ Compose</button>
+        <button id="tab-kb-gaps" class="tab-btn" type="button" data-help="Review internal knowledge gaps detected when Staff Assistant had to fall back to general AI knowledge.">🧠 KB Gaps</button>
         <button id="tab-lead-profile" class="tab-btn" type="button" data-help="Lead profile: review and edit all collected fields for the active lead. Uses the same lead list as Compose (left column once wired).">👤 Lead Profile</button>
         <button id="tab-product-selector" class="tab-btn" type="button" data-help="Product selector: guided qualification and recommendations for the lead you select. Works with partial lead data; missing fields can be filled in the flow.">📋 Product Selector</button>
         <button id="tab-chat" class="tab-btn" type="button" data-help="Open the internal staff AI assistant for product and underwriting questions. This is separate from customer WhatsApp or inbox messages.">🤖 Staff Assistant</button>
@@ -886,6 +887,31 @@
           </div>
           <div id="inbox-detail" class="detail-body">
             <div class="q-empty">Select a question to start.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="pane-kb-gaps" class="pane" aria-hidden="true">
+      <div class="inbox-wrap">
+        <div class="inbox-list">
+          <div class="inbox-head">
+            <div>
+              <strong>Unresolved KB Gaps</strong>
+              <div class="small-note" id="kb-gap-count">Loading...</div>
+            </div>
+            <button id="refresh-kb-gaps-btn" class="secondary" type="button" data-help="Reload unresolved Staff Assistant knowledge gaps.">Refresh</button>
+          </div>
+          <div id="kb-gap-items" class="inbox-items"></div>
+        </div>
+        <div class="inbox-detail">
+          <div class="inbox-head">
+            <div>
+              <strong>Gap Detail — <span class="small-note">Review missing knowledge and resolve after retraining.</span></strong>
+            </div>
+          </div>
+          <div id="kb-gap-detail" class="detail-body">
+            <div class="q-empty">Select a gap to review.</div>
           </div>
         </div>
       </div>
@@ -1467,11 +1493,13 @@
       var signoutBtn = document.getElementById("signout-btn");
       var tabInbox = document.getElementById("tab-inbox");
       var tabCompose = document.getElementById("tab-compose");
+      var tabKbGaps = document.getElementById("tab-kb-gaps");
       var tabLeadProfile = document.getElementById("tab-lead-profile");
       var tabProductSelector = document.getElementById("tab-product-selector");
       var tabChat = document.getElementById("tab-chat");
       var paneInbox = document.getElementById("pane-inbox");
       var paneCompose = document.getElementById("pane-compose");
+      var paneKbGaps = document.getElementById("pane-kb-gaps");
       var paneLeadProfile = document.getElementById("pane-lead-profile");
       var paneProductSelector = document.getElementById("pane-product-selector");
       var paneChat = document.getElementById("pane-chat");
@@ -1479,6 +1507,10 @@
       var inboxItems = document.getElementById("inbox-items");
       var inboxDetail = document.getElementById("inbox-detail");
       var refreshInboxBtn = document.getElementById("refresh-inbox-btn");
+      var kbGapCount = document.getElementById("kb-gap-count");
+      var kbGapItems = document.getElementById("kb-gap-items");
+      var kbGapDetail = document.getElementById("kb-gap-detail");
+      var refreshKbGapsBtn = document.getElementById("refresh-kb-gaps-btn");
       var chatLog = document.getElementById("chat-log");
       var chatInput = document.getElementById("staff-input");
       var sendBtn = document.getElementById("send-btn");
@@ -1493,6 +1525,8 @@
       var recoveryMode = false;
       var inboxQuestions = [];
       var selectedQuestionId = "";
+      var kbGapItemsState = [];
+      var selectedKbGapId = "";
       /** One-shot UI after push to RAG: { kind, questionId, ... } */
       var pendingRagVerify = null;
       var helpTipEl = null;
@@ -1508,24 +1542,29 @@
       function showTab(which) {
         var inboxOn = which === "inbox";
         var composeOn = which === "compose";
+        var kbGapsOn = which === "kb-gaps";
         var leadProfileOn = which === "lead-profile";
         var productSelectorOn = which === "product-selector";
         var chatOn = which === "chat";
         tabInbox.classList.toggle("active", inboxOn);
         tabCompose.classList.toggle("active", composeOn);
+        if (tabKbGaps) tabKbGaps.classList.toggle("active", kbGapsOn);
         if (tabLeadProfile) tabLeadProfile.classList.toggle("active", leadProfileOn);
         if (tabProductSelector) tabProductSelector.classList.toggle("active", productSelectorOn);
         tabChat.classList.toggle("active", chatOn);
         paneInbox.classList.toggle("active", inboxOn);
         paneCompose.classList.toggle("active", composeOn);
+        if (paneKbGaps) paneKbGaps.classList.toggle("active", kbGapsOn);
         if (paneLeadProfile) paneLeadProfile.classList.toggle("active", leadProfileOn);
         if (paneProductSelector) paneProductSelector.classList.toggle("active", productSelectorOn);
         paneChat.classList.toggle("active", chatOn);
         paneInbox.setAttribute("aria-hidden", inboxOn ? "false" : "true");
         paneCompose.setAttribute("aria-hidden", composeOn ? "false" : "true");
+        if (paneKbGaps) paneKbGaps.setAttribute("aria-hidden", kbGapsOn ? "false" : "true");
         if (paneLeadProfile) paneLeadProfile.setAttribute("aria-hidden", leadProfileOn ? "false" : "true");
         if (paneProductSelector) paneProductSelector.setAttribute("aria-hidden", productSelectorOn ? "false" : "true");
         paneChat.setAttribute("aria-hidden", chatOn ? "false" : "true");
+        if (kbGapsOn) void loadKbGaps();
         if (composeOn || leadProfileOn || productSelectorOn) ensureComposeLeadsLoaded();
         if (leadProfileOn) void loadLeadProfileDetail();
         if (productSelectorOn) void loadProductSelectorSession();
@@ -1655,7 +1694,7 @@
       }
 
       function wireStaticPortalHelpOnce() {
-        [signoutBtn, tabInbox, tabCompose, tabLeadProfile, tabProductSelector, tabChat, refreshInboxBtn, sendBtn, newConvoBtn].forEach(function (el) {
+        [signoutBtn, tabInbox, tabCompose, tabKbGaps, tabLeadProfile, tabProductSelector, tabChat, refreshInboxBtn, refreshKbGapsBtn, sendBtn, newConvoBtn].forEach(function (el) {
           if (!el || el.getAttribute("data-help-wired")) return;
           el.setAttribute("data-help-wired", "1");
           var showT = null;
@@ -1992,6 +2031,95 @@
         }
       }
 
+      function getSelectedKbGap() {
+        return kbGapItemsState.find(function (q) { return q.id === selectedKbGapId; }) || null;
+      }
+
+      function renderKbGapList() {
+        kbGapItems.innerHTML = "";
+        kbGapCount.textContent = kbGapItemsState.length + " unresolved";
+        if (!kbGapItemsState.length) {
+          kbGapItems.innerHTML = '<div class="q-empty">No unresolved KB gaps right now.</div>';
+          return;
+        }
+        kbGapItemsState.forEach(function (q) {
+          var card = document.createElement("button");
+          card.type = "button";
+          card.className = "q-item" + (q.id === selectedKbGapId ? " active" : "");
+          card.innerHTML =
+            '<div class="title">' + escHtml(q.source === "general_fallback" ? "General fallback" : (q.source || "Unknown source")) + "</div>" +
+            '<div class="preview">' + escHtml(String(q.question || "").slice(0, 130)) + "</div>" +
+            '<div class="meta">' +
+            escHtml("retrieval=" + String(q.retrieval_count || 0) + " • sim=" + (q.max_similarity == null ? "-" : String(Number(q.max_similarity).toFixed(3))) + " • " + fmtDate(q.last_asked_at || q.created_at)) +
+            "</div>";
+          card.addEventListener("click", function () {
+            selectedKbGapId = q.id;
+            renderKbGapList();
+            renderKbGapDetail();
+          });
+          kbGapItems.appendChild(card);
+        });
+      }
+
+      function renderKbGapDetail(statusText) {
+        var q = getSelectedKbGap();
+        if (!q) {
+          kbGapDetail.innerHTML = '<div class="q-empty">Select a gap to review.</div>';
+          return;
+        }
+        kbGapDetail.innerHTML =
+          '<div class="meta-grid">' +
+            '<div class="meta-card"><strong>Source:</strong> ' + escHtml(q.source || "-") + "</div>" +
+            '<div class="meta-card"><strong>Retrieval count:</strong> ' + escHtml(String(q.retrieval_count || 0)) + "</div>" +
+            '<div class="meta-card"><strong>Max similarity:</strong> ' + escHtml(q.max_similarity == null ? "-" : Number(q.max_similarity).toFixed(3)) + "</div>" +
+            '<div class="meta-card"><strong>Last asked:</strong> ' + escHtml(fmtDate(q.last_asked_at || q.created_at)) + "</div>" +
+          "</div>" +
+          '<label>Question that needs KB coverage</label>' +
+          '<textarea readonly>' + escHtml(q.question || "") + "</textarea>" +
+          '<label>Fallback answer that was shown</label>' +
+          '<textarea readonly>' + escHtml(q.assistant_answer || "") + "</textarea>" +
+          '<div class="actions">' +
+            '<button id="resolve-kb-gap-btn" class="danger" type="button" data-help="Marks this gap resolved after you update and re-embed the missing KB content.">Resolve Gap</button>' +
+          "</div>" +
+          '<div id="kb-gap-status" class="small-note">' + escHtml(statusText || "") + "</div>";
+        document.getElementById("resolve-kb-gap-btn").addEventListener("click", onResolveKbGap);
+        wireDelayedHelpOn(kbGapDetail);
+      }
+
+      async function loadKbGaps() {
+        if (!accessToken) return;
+        kbGapCount.textContent = "Loading...";
+        try {
+          var data = await authedApi("/api/staff/kb-gaps");
+          kbGapItemsState = Array.isArray(data.items) ? data.items : [];
+          if (!selectedKbGapId && kbGapItemsState.length) selectedKbGapId = kbGapItemsState[0].id;
+          if (selectedKbGapId && !kbGapItemsState.some(function (q) { return q.id === selectedKbGapId; })) {
+            selectedKbGapId = kbGapItemsState.length ? kbGapItemsState[0].id : "";
+          }
+          renderKbGapList();
+          renderKbGapDetail();
+        } catch (e) {
+          kbGapCount.textContent = "Failed to load";
+          kbGapItems.innerHTML = '<div class="q-empty">Could not load KB gaps.</div>';
+        }
+      }
+
+      async function onResolveKbGap() {
+        var q = getSelectedKbGap();
+        if (!q) return;
+        var status = document.getElementById("kb-gap-status");
+        status.textContent = "Resolving gap...";
+        try {
+          await authedApi("/api/staff/resolve-kb-gap", { id: q.id });
+          kbGapItemsState = kbGapItemsState.filter(function (item) { return item.id !== q.id; });
+          selectedKbGapId = kbGapItemsState.length ? kbGapItemsState[0].id : "";
+          renderKbGapList();
+          renderKbGapDetail("Gap resolved.");
+        } catch (e) {
+          status.textContent = "Failed to resolve gap.";
+        }
+      }
+
       function lockoutUntil() {
         return Number(sessionStorage.getItem(LOCK_KEY) || 0) || 0;
       }
@@ -2055,6 +2183,8 @@
         conversation = [];
         inboxQuestions = [];
         selectedQuestionId = "";
+        kbGapItemsState = [];
+        selectedKbGapId = "";
         chatLog.innerHTML = "";
         chatErr.textContent = "";
         inboxItems.innerHTML = "";
@@ -2246,6 +2376,7 @@
           setAuthed(true);
           showTab("chat");
           await loadInbox();
+          await loadKbGaps();
           resetIdleTimer();
           chatInput.focus();
         } catch (err) {
@@ -2323,6 +2454,7 @@
       signoutBtn.addEventListener("click", signOutNow);
       tabInbox.addEventListener("click", function () { showTab("inbox"); });
       tabCompose.addEventListener("click", function () { showTab("compose"); });
+      if (tabKbGaps) tabKbGaps.addEventListener("click", function () { showTab("kb-gaps"); });
       if (tabLeadProfile) tabLeadProfile.addEventListener("click", function () { showTab("lead-profile"); });
       if (tabProductSelector) tabProductSelector.addEventListener("click", function () { showTab("product-selector"); });
       tabChat.addEventListener("click", function () { showTab("chat"); });
@@ -2341,6 +2473,9 @@
       });
       refreshInboxBtn.addEventListener("click", function () {
         loadInbox();
+      });
+      if (refreshKbGapsBtn) refreshKbGapsBtn.addEventListener("click", function () {
+        loadKbGaps();
       });
 
       var composeLeads = [];
@@ -3707,6 +3842,7 @@
             setAuthed(true);
             showTab("chat");
             await loadInbox();
+            await loadKbGaps();
             resetIdleTimer();
           } else {
             setAuthed(false);

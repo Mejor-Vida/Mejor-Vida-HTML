@@ -7,6 +7,7 @@
 
 const { requireStaffAuth } = require("./auth-check");
 const { generateEmbedding } = require("../lib/openai");
+const { createHash } = require("crypto");
 
 function json(res, status, payload) {
   res.status(status).setHeader("Content-Type", "application/json");
@@ -113,6 +114,44 @@ function withTrustedSourceHeader(text, sourceLabel) {
   return `Source: ${sourceLabel}\n\n${body}`.trim();
 }
 
+function stableQuestionHash(message) {
+  const normalized = String(message || "").trim().toLowerCase().replace(/\s+/g, " ");
+  return createHash("sha256").update(normalized).digest("hex");
+}
+
+async function upsertStaffKbGap(supabaseUrl, serviceKey, row) {
+  const r = await fetch(`${supabaseUrl.replace(/\/$/, "")}/rest/v1/staff_kb_gaps?on_conflict=question_hash`, {
+    method: "POST",
+    headers: {
+      apikey: serviceKey,
+      Authorization: `Bearer ${serviceKey}`,
+      "Content-Type": "application/json",
+      Prefer: "resolution=merge-duplicates,return=minimal",
+    },
+    body: JSON.stringify(row),
+  });
+  if (!r.ok) {
+    const t = await r.text();
+    throw new Error(`kb-gap upsert ${r.status}: ${String(t || "").slice(0, 240)}`);
+  }
+}
+
+function isCarrierSpecificEligibilityQuery(message) {
+  const t = String(message || "").toLowerCase();
+  const asksCarrier = /(american amicable|assurity|mutual of omaha|moo|carrier)/.test(t);
+  const asksEligibility =
+    /(non[\s-]?citizen|undocumented|immigration|visa|green card|itin|resident|citizen|eligib|qualif|sell to)/.test(t);
+  return asksCarrier && asksEligibility;
+}
+
+function buildNoKbCarrierEligibilityAnswer() {
+  return (
+    "I do not have enough verified carrier-specific eligibility detail in the internal KB excerpts for this question.\n\n" +
+    "I can only confirm carrier rules when the internal knowledge retrieval includes those exact rules. " +
+    "If you want, I can provide a checklist of what to verify (visa type, residency duration, ITIN acceptance, state restrictions) and then we can match each carrier once the KB excerpts include that section."
+  );
+}
+
 async function complete(openaiKey, model, temperature, maxTokens, messages) {
   const r = await fetch("https://api.openai.com/v1/chat/completions", {
     method: "POST",
@@ -198,6 +237,33 @@ module.exports = async function handler(req, res) {
       }
     }
 
+    if (isCarrierSpecificEligibilityQuery(message)) {
+      const nowIso = new Date().toISOString();
+      const answerBody = buildNoKbCarrierEligibilityAnswer();
+      const answer = withTrustedSourceHeader(answerBody, "General Industry Knowledge (RAG insufficient)");
+      try {
+        await upsertStaffKbGap(supabaseUrl, serviceKey, {
+          question: message,
+          question_hash: stableQuestionHash(message),
+          assistant_answer: answerBody,
+          source: "general_fallback",
+          retrieval_count: Array.isArray(chunks) ? chunks.length : 0,
+          max_similarity: maxSimilarity(chunks),
+          resolved: false,
+          resolved_at: null,
+          resolved_by: null,
+          last_asked_at: nowIso,
+          updated_at: nowIso,
+        });
+      } catch (logErr) {
+        console.warn("staff-chat kb-gap log skipped:", logErr && logErr.message ? logErr.message : logErr);
+      }
+      return json(res, 200, {
+        answer,
+        source: "general_fallback",
+      });
+    }
+
     const fallbackMessages = [
       {
         role: "system",
@@ -214,8 +280,27 @@ module.exports = async function handler(req, res) {
       },
     ];
     const text = await complete(openaiKey, "gpt-4o", 0.2, 1200, fallbackMessages);
+    const nowIso = new Date().toISOString();
+    const fallbackBody = stripSourceHeader(String(text).trim());
+    try {
+      await upsertStaffKbGap(supabaseUrl, serviceKey, {
+        question: message,
+        question_hash: stableQuestionHash(message),
+        assistant_answer: fallbackBody,
+        source: "general_fallback",
+        retrieval_count: Array.isArray(chunks) ? chunks.length : 0,
+        max_similarity: maxSimilarity(chunks),
+        resolved: false,
+        resolved_at: null,
+        resolved_by: null,
+        last_asked_at: nowIso,
+        updated_at: nowIso,
+      });
+    } catch (logErr) {
+      console.warn("staff-chat kb-gap log skipped:", logErr && logErr.message ? logErr.message : logErr);
+    }
     return json(res, 200, {
-      answer: withTrustedSourceHeader(String(text).trim(), "General Industry Knowledge (RAG insufficient)"),
+      answer: withTrustedSourceHeader(fallbackBody, "General Industry Knowledge (RAG insufficient)"),
       source: "general_fallback",
     });
   } catch (e) {
