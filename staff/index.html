@@ -377,6 +377,28 @@
       font-weight: 700;
       letter-spacing: 0.01em;
     }
+    #lead-profile-form .lp-section-bar.lp-with-right {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    #lead-profile-form .lp-section-bar .lp-bar-right {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      white-space: nowrap;
+      color: #e9f0ff;
+    }
+    #lead-profile-form .lp-section-bar .lp-bar-right input[type="checkbox"] {
+      margin: 0;
+      width: auto;
+      min-height: 0;
+      height: auto;
+      padding: 0;
+    }
     #lead-profile-form .lp-section .meta-grid {
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 8px;
@@ -1606,7 +1628,13 @@
                   </div>
                   </section>
                   <section class="lp-section">
-                  <div class="lp-section-bar">3. Health Qualification (required for underwriting, secure)</div>
+                  <div class="lp-section-bar lp-with-right">
+                    <span>3. Health Qualification (required for underwriting, secure)</span>
+                    <label class="lp-bar-right" title="Check only when all health items in this section are confirmed as none.">
+                      <input id="lp-phi-none-reported" type="checkbox" />
+                      None in this section
+                    </label>
+                  </div>
                   <div class="meta-grid lp-health-grid">
                     <div id="lp-phi-block" class="meta-card" style="grid-column: 1 / -1">
                       <div class="small-note" id="lp-phi-note" style="margin-bottom:8px">Stored in encrypted PHI table only. Not used for RAG indexing.</div>
@@ -3555,6 +3583,7 @@
       }
 
       var LP_PHI_CHECKBOX_MAP = [
+        ["lp-phi-none-reported", "health_none_reported"],
         ["lp-phi-terminal-illness", "terminal_illness"],
         ["lp-phi-aids-hiv", "aids_hiv"],
         ["lp-phi-organ-transplant", "organ_transplant"],
@@ -4087,6 +4116,38 @@
         document.addEventListener("scroll", hideLeadProfileTooltip, true);
       }
 
+      function wireLeadProfileHealthNoneToggle() {
+        var noneBox = document.getElementById("lp-phi-none-reported");
+        var phiBlock = document.getElementById("lp-phi-block");
+        if (!noneBox || !phiBlock || noneBox.getAttribute("data-none-wired")) return;
+        noneBox.setAttribute("data-none-wired", "1");
+        noneBox.addEventListener("change", function () {
+          if (!noneBox.checked) {
+            scheduleLeadProfileDirtyCheck();
+            return;
+          }
+          var nodes = phiBlock.querySelectorAll("input, select, textarea");
+          Array.prototype.forEach.call(nodes, function (node) {
+            if (!node || node === noneBox) return;
+            if (node.type === "checkbox") node.checked = false;
+            else if (node.tagName === "SELECT" || node.tagName === "TEXTAREA" || node.tagName === "INPUT") node.value = "";
+          });
+          setMedicationList([]);
+          syncLeadProfileHealthConditionalFields();
+          scheduleLeadProfileDirtyCheck();
+        });
+        var clearNoneIfAnyChecked = function (e) {
+          var t = e && e.target ? e.target : null;
+          if (!t || t === noneBox) return;
+          if (!noneBox.checked) return;
+          if (t.type === "checkbox" && t.checked) {
+            noneBox.checked = false;
+            scheduleLeadProfileDirtyCheck();
+          }
+        };
+        phiBlock.addEventListener("change", clearNoneIfAnyChecked);
+      }
+
       function serializeLeadProfileFromForm() {
         var tob = document.getElementById("lp-tobacco");
         var tv = tob ? tob.value : "";
@@ -4546,6 +4607,7 @@
         syncLeadProfileDesiredCoverageCustom();
         syncLeadProfileHealthConditionalFields();
         wireLeadProfileHealthTooltips();
+      wireLeadProfileHealthNoneToggle();
         saveBtn.addEventListener("click", onLeadProfileSaveClick);
       }
 

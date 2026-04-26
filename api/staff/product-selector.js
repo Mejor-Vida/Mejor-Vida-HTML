@@ -48,6 +48,7 @@ function bool(v) {
 }
 
 const PHI_FIELD_KEYS = [
+  "health_none_reported",
   "terminal_illness",
   "aids_hiv",
   "organ_transplant",
@@ -652,8 +653,11 @@ function parseAnswerByType(q, raw) {
 }
 
 function nextQuestionKey(nonPhiAnswers, phiAnswers, allowPhi) {
+  const phiSrc = phiAnswers || {};
+  const healthNoneReported = !!phiSrc.health_none_reported;
   for (const q of QUESTION_FLOW) {
     if (q.phi && !allowPhi) continue;
+    if (q.phi && healthNoneReported) continue;
     if (typeof q.askIf === "function" && !q.askIf(nonPhiAnswers, phiAnswers)) continue;
     const source = q.phi ? (phiAnswers || {}) : (nonPhiAnswers || {});
     const v = source[q.key];
