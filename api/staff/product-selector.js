@@ -135,6 +135,34 @@ function mergePhi(existingPhi, patchPhi) {
   return Object.assign({}, existingPhi || {}, patchPhi || {});
 }
 
+function normalizeMedicationList(raw) {
+  if (Array.isArray(raw)) {
+    return raw
+      .map((x) => String(x || "").trim())
+      .filter(Boolean)
+      .filter((v, i, arr) => arr.findIndex((a) => a.toLowerCase() === v.toLowerCase()) === i);
+  }
+  const t = String(raw || "").trim();
+  if (!t) return [];
+  try {
+    const parsed = JSON.parse(t);
+    if (Array.isArray(parsed)) return normalizeMedicationList(parsed);
+  } catch (_e) {}
+  return t
+    .split(",")
+    .map((x) => String(x || "").trim())
+    .filter(Boolean)
+    .filter((v, i, arr) => arr.findIndex((a) => a.toLowerCase() === v.toLowerCase()) === i);
+}
+
+function normalizePhiPayload(phi) {
+  const out = Object.assign({}, phi || {});
+  const meds = normalizeMedicationList(out.current_medications);
+  out.current_medications = meds;
+  out.medication_count = meds.length;
+  return out;
+}
+
 const QUESTION_FLOW = [
   {
     key: "terminal_illness",
@@ -382,6 +410,7 @@ const QUESTION_FLOW = [
 function parseAnswerByType(q, raw) {
   const t = String(raw || "").trim();
   if (!t) return null;
+  if (q && q.key === "current_medications" && /^none$/i.test(t)) return [];
   if (q.type === "number") {
     const n = Number(t.replace(/[^0-9.]/g, ""));
     return Number.isFinite(n) ? String(Math.round(n)) : null;
@@ -730,7 +759,7 @@ module.exports = async function handler(req, res) {
       const session = await saveSession(cfg, leadId, leadSourceTable, Object.assign({}, body, { qualification_answers: sanitizedNonPhi }));
       if (canPhi && (Object.keys(phiPayload).length || Object.keys(phiFromAnswers).length)) {
         const existing = (await readPhiByLead(cfg, leadId, leadSourceTable)).payload || {};
-        const mergedPhi = mergePhi(existing, Object.assign({}, phiFromAnswers, phiPayload));
+        const mergedPhi = normalizePhiPayload(mergePhi(existing, Object.assign({}, phiFromAnswers, phiPayload)));
         await writePhiByLead(
           cfg,
           leadId,
@@ -764,7 +793,7 @@ module.exports = async function handler(req, res) {
       const canPhi = canAccessPhi(auth);
       const split = splitIncomingAnswers(answers, canPhi);
       const phiExisting = canPhi ? (await readPhiByLead(cfg, leadId, leadSourceTable)).payload || {} : {};
-      const phiData = canPhi ? mergePhi(phiExisting, split.phi) : {};
+      const phiData = canPhi ? normalizePhiPayload(mergePhi(phiExisting, split.phi)) : {};
       const sanitizedNonPhi = split.nonPhi;
       const context = normalizedContextFromProfile(profileSnapshot, sanitizedNonPhi, phiData);
       const risk = deriveRisk(context, phiData);
@@ -891,7 +920,7 @@ module.exports = async function handler(req, res) {
       let assistantReply = "";
       let nextQuestionText = "";
       const nextNonPhi = Object.assign({}, mergedAnswers);
-      const nextPhi = mergePhi(existingPhi, split.phi || {});
+      const nextPhi = normalizePhiPayload(mergePhi(existingPhi, split.phi || {}));
       if (isStartSignal && currentQuestion) {
         assistantReply = `Let's begin qualification. ${currentQuestion.prompt}`;
         nextQuestionText = currentQuestion.prompt;
@@ -902,6 +931,10 @@ module.exports = async function handler(req, res) {
           nextQuestionText = currentQuestion.prompt;
         } else {
           if (currentQuestion.phi) nextPhi[currentQuestion.key] = parsed;
+          if (currentQuestion.key === "current_medications") {
+            nextPhi.current_medications = normalizeMedicationList(parsed);
+            nextPhi.medication_count = nextPhi.current_medications.length;
+          }
           else nextNonPhi[currentQuestion.key] = parsed;
           const nk = nextQuestionKey(nextNonPhi, nextPhi, canPhi);
           if (nk) {
