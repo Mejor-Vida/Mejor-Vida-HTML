@@ -140,6 +140,16 @@ const COVERAGE_GOAL_DEFINITIONS = {
   ],
   income_replacement: [
     "replace income",
+    "income",
+    "without my income",
+    "survive without my income",
+    "wife",
+    "husband",
+    "spouse",
+    "kids",
+    "children",
+    "family",
+    "survive",
     "protect spouse",
     "protect kids",
     "living expenses",
@@ -188,13 +198,22 @@ function classifyCoverageGoal(rawText) {
   const secondScore = ranked[1] ? ranked[1][1] : 0;
   if (!topScore) return { goal: "not_sure", confidence: 0.25, reason: "no_match" };
   const confidence = Math.max(0.2, Math.min(0.97, topScore / (topScore + secondScore + 1)));
-  return { goal: topGoal, confidence: Number(confidence.toFixed(2)), reason: `top=${topScore},second=${secondScore}` };
+  return {
+    goal: topGoal,
+    confidence: Number(confidence.toFixed(2)),
+    topScore,
+    secondScore,
+    reason: `top=${topScore},second=${secondScore}`,
+  };
 }
 
 function isGoalConfidenceLow(result) {
   const r = result || {};
   if (!r.goal || r.goal === "not_sure") return true;
-  return Number(r.confidence || 0) < 0.6;
+  const top = Number(r.topScore || 0);
+  const second = Number(r.secondScore || 0);
+  if (top >= 2 && top > second) return false;
+  return Number(r.confidence || 0) < 0.5;
 }
 
 function goalLabel(goalKey) {
