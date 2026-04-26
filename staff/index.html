@@ -1994,31 +1994,12 @@
           <div class="inbox-head">
             <div>
               <strong>Product Selector</strong>
-              <div class="small-note">Choose a lead on the left first. Product selection runs as a strategy-only chat using Lead Profile + internal RAG.</div>
+              <div class="small-note">Uses the active lead selected in Lead Profile. Product selection runs as a strategy-only chat using Lead Profile + internal RAG.</div>
             </div>
           </div>
           <div id="product-selector-body" class="compose-body">
             <div class="compose-work">
-              <aside class="compose-leads-col" aria-label="Leads">
-                <label class="compose-leads-label" for="product-selector-lead-filter">Filter leads</label>
-                <input
-                  id="product-selector-lead-filter"
-                  type="search"
-                  autocomplete="off"
-                  autocorrect="off"
-                  autocapitalize="off"
-                  spellcheck="false"
-                  data-lpignore="true"
-                  data-1p-ignore="true"
-                  data-form-type="other"
-                  placeholder="Type to narrow the list…"
-                  aria-describedby="product-selector-lead-list-hint"
-                />
-                <span id="product-selector-lead-list-hint" class="small-note" style="margin: 0">A–Z. Click a row to set the active lead.</span>
-                <div id="product-selector-lead-list" class="compose-lead-list" role="listbox" aria-label="Leads"></div>
-              </aside>
               <div class="compose-main-col staff-tool-main">
-                <div id="product-selector-summary" class="staff-lead-summary"></div>
                 <form id="product-selector-form" class="compose-form" autocomplete="off" onsubmit="return false;" aria-label="Product selector">
                   <div class="compose-contact-heading">Guided qualification chat (system asks one question at a time)</div>
                   <div class="small-note" style="margin-bottom:8px">The system drives the sequence. Agent enters each client answer; next question is selected automatically.</div>
