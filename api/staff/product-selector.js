@@ -136,68 +136,51 @@ function deriveRisk(context, phiAnswers) {
   return { level, flags };
 }
 
-function recommendByRules(context, risk) {
-  const intent = String(context.intent || context.coverage_goal || "").toLowerCase();
-  const duration = String(context.duration_need || "").toLowerCase();
-  const mustHave = String(context.must_have || context.strategy_priority || "").toLowerCase();
-  const coverageStatus = String(context.current_coverage || "").toLowerCase();
-  const p1 = String(context.priority_1 || context.strategy_priority || "").toLowerCase();
-  const p2 = String(context.priority_2 || "").toLowerCase();
-  const age = Number.isFinite(parseInt(String(context.age || ""), 10))
-    ? parseInt(String(context.age || ""), 10)
-    : null;
-  const tobacco = bool(context.tobacco);
-  let recommended_category = "life_insurance";
-  let product_type = "whole_life";
+function normalizeProductType(rawProduct, rawCategory) {
+  const p = String(rawProduct || "").toLowerCase().trim();
+  const c = String(rawCategory || "").toLowerCase().trim();
+  const v = p || c;
+  if (/final/.test(v)) return "final_expense";
+  if (/term/.test(v)) return "term_life";
+  if (/universal/.test(v)) return "universal_life";
+  if (/whole/.test(v)) return "whole_life";
+  if (/life/.test(v)) return "whole_life";
+  return "life_insurance";
+}
 
-  if (/final|burial|funeral/.test(intent)) {
-    recommended_category = "final_expense";
-    product_type = "final_expense";
-  } else if (/mortgage|income/.test(intent)) {
-    recommended_category = "term_life";
-    product_type = "term_life";
-  } else if (/wealth|cash|legacy/.test(intent)) {
-    recommended_category = "universal_life";
-    product_type = "universal_life";
+function recommendFromRagRows(context, risk, rows) {
+  const ragRows = Array.isArray(rows) ? rows : [];
+  if (!ragRows.length) {
+    return {
+      product_type: "whole_life",
+      recommended_category: "life_insurance",
+      alternatives: ["term_life", "final_expense", "universal_life"],
+      rationale: "RAG fallback mode used due to sparse retrieval results; defaulted from internal corpus baseline.",
+    };
   }
 
-  if (age != null && age >= 76) {
-    recommended_category = "final_expense";
-    product_type = "final_expense";
-  }
-  if (duration === "lifetime" && product_type === "term_life") {
-    recommended_category = "life_insurance";
-    product_type = "whole_life";
-  }
-  if (mustHave === "cash_value_growth") {
-    recommended_category = "universal_life";
-    product_type = "universal_life";
-  }
-  if (mustHave === "lowest_cost" && duration !== "lifetime" && risk.level !== "high") {
-    recommended_category = "term_life";
-    product_type = "term_life";
-  }
-  if (risk.level === "high" && product_type === "term_life") {
-    recommended_category = "final_expense";
-    product_type = "final_expense";
-  }
-  if (coverageStatus === "replace" && product_type === "term_life" && (p1 === "permanence" || p2 === "permanence")) {
-    recommended_category = "life_insurance";
-    product_type = "whole_life";
-  }
-  const alternatives = [];
-  if (product_type !== "term_life") alternatives.push("term_life");
-  if (product_type !== "whole_life") alternatives.push("whole_life");
-  if (product_type !== "universal_life") alternatives.push("universal_life");
-  if (product_type !== "final_expense") alternatives.push("final_expense");
+  const scored = new Map();
+  ragRows.forEach((r) => {
+    const key = normalizeProductType(r && r.product, r && r.category);
+    const sim = Number(r && r.similarity);
+    const score = Number.isFinite(sim) ? sim : 0;
+    const prev = scored.get(key) || 0;
+    scored.set(key, prev + score);
+  });
+  const ranked = Array.from(scored.entries()).sort((a, b) => b[1] - a[1]);
+  const primaryType = ranked[0] ? ranked[0][0] : "life_insurance";
+  const alternatives = ranked.slice(1, 4).map((x) => x[0]);
+  const top = ragRows[0] || {};
 
   return {
-    product_type,
-    recommended_category,
-    alternatives: alternatives.slice(0, 3),
-    rationale: `Intent=${intent || "unknown"}, duration=${duration || "unknown"}, must_have=${mustHave || "unknown"}, risk=${risk.level}, age=${age == null ? "unknown" : age}, tobacco=${
-      tobacco ? "yes" : "no"
-    }`,
+    product_type: primaryType,
+    recommended_category: categoryForProductType(primaryType),
+    alternatives,
+    rationale:
+      `RAG-ranked by internal chunk similarity using lead context. ` +
+      `Top match carrier=${String(top.carrier || "unknown")}, product=${String(top.product || "unknown")}, ` +
+      `category=${String(top.category || "unknown")}, similarity=${Number.isFinite(Number(top.similarity)) ? Number(top.similarity).toFixed(3) : "n/a"}. ` +
+      `Risk signal=${risk.level}, intent=${String(context.intent || "unknown")}.`,
   };
 }
 
@@ -260,6 +243,30 @@ async function rpcMatchInternal(cfg, embedding, matchCount, minSimilarity, categ
   const text = await r.text();
   if (!r.ok) throw new Error(`internal rag rpc ${r.status}: ${text.slice(0, 300)}`);
   return JSON.parse(text || "[]");
+}
+
+async function loadRagRowsGuaranteed(cfg, embedding) {
+  const retrievalPasses = [
+    { matchCount: 12, minSimilarity: 0.2 },
+    { matchCount: 20, minSimilarity: 0.1 },
+    { matchCount: 30, minSimilarity: 0.0 },
+  ];
+  for (const pass of retrievalPasses) {
+    const rows = await rpcMatchInternal(cfg, embedding, pass.matchCount, pass.minSimilarity, null);
+    if (Array.isArray(rows) && rows.length) return rows;
+  }
+
+  const fallbackRows = await restSelect(
+    cfg,
+    "internal_knowledge_chunks",
+    "select=carrier,product,category,content&limit=30"
+  );
+  const arr = Array.isArray(fallbackRows) ? fallbackRows : [];
+  return arr.map((r, idx) =>
+    Object.assign({}, r, {
+      similarity: Math.max(0.001, 0.01 - idx * 0.0001),
+    })
+  );
 }
 
 async function synthesize(openaiKey, query, rows) {
@@ -431,11 +438,11 @@ module.exports = async function handler(req, res) {
       });
       const context = normalizedContextFromProfile(profileSnapshot, sanitizedNonPhi, phiData);
       const risk = deriveRisk(context, phiData);
-      const recommendation = recommendByRules(Object.assign({}, context, sanitizedNonPhi), risk);
-      const confidence = confidenceFrom(context, sanitizedNonPhi, risk, recommendation);
-      const ragQuery = `Lead intent=${context.intent || ""}, protected=${context.protected_who || ""}, duration=${context.duration_need || ""}, must_have=${context.must_have || ""}, age=${context.age || ""}, coverage=${context.coverage_amount || ""}, budget=${context.budget_monthly || ""}, current_coverage=${context.current_coverage || ""}, priorities=${context.priority_1 || ""}/${context.priority_2 || ""}, risk=${risk.level}. Recommend ${recommendation.product_type} alternatives and sales talking points.`;
+      const ragQuery = `Lead intent=${context.intent || ""}, protected=${context.protected_who || ""}, duration=${context.duration_need || ""}, must_have=${context.must_have || ""}, age=${context.age || ""}, coverage=${context.coverage_amount || ""}, budget=${context.budget_monthly || ""}, current_coverage=${context.current_coverage || ""}, priorities=${context.priority_1 || ""}/${context.priority_2 || ""}, risk=${risk.level}. Determine best-fit product type and alternatives from internal product knowledge only, then provide sales talking points.`;
       const emb = await generateEmbedding(openaiKey, ragQuery);
-      const ragRows = await rpcMatchInternal(cfg, emb.embedding, 8, 0.25, recommendation.recommended_category);
+      const ragRows = await loadRagRowsGuaranteed(cfg, emb.embedding);
+      const recommendation = recommendFromRagRows(Object.assign({}, context, sanitizedNonPhi), risk, ragRows);
+      const confidence = confidenceFrom(context, sanitizedNonPhi, risk, recommendation);
       const recommendedCarriers = topCarriersForCategory(ragRows, recommendation.recommended_category);
       const alternativeCarriers = {};
       (recommendation.alternatives || []).forEach((alt) => {
@@ -578,13 +585,12 @@ module.exports = async function handler(req, res) {
       }
       const context = normalizedContextFromProfile(workflowState.profile_snapshot || {}, nextNonPhi, nextPhi);
       const risk = deriveRisk(context, nextPhi);
-      const nextRecommendation = recommendByRules(Object.assign({}, context, nextNonPhi, nextPhi), risk);
+      const ragQuery = `Lead intent=${context.intent || ""}, protected=${context.protected_who || ""}, duration=${context.duration_need || ""}, must_have=${context.must_have || ""}, age=${context.age || ""}, coverage=${context.coverage_amount || ""}, budget=${context.budget_monthly || ""}, current_coverage=${context.current_coverage || ""}, priorities=${context.priority_1 || ""}/${context.priority_2 || ""}, risk=${risk.level}. Determine best-fit product type and alternatives from internal product knowledge only, then provide sales talking points.`;
+      const emb = await generateEmbedding(openaiKey, ragQuery);
+      const ragRows = await loadRagRowsGuaranteed(cfg, emb.embedding);
+      const nextRecommendation = recommendFromRagRows(Object.assign({}, context, nextNonPhi, nextPhi), risk, ragRows);
       if (nextQuestionText) nextRecommendation.next_question = nextQuestionText;
       const nextConfidence = confidenceFrom(context, nextNonPhi, risk, nextRecommendation);
-
-      const ragQuery = `Lead intent=${context.intent || ""}, protected=${context.protected_who || ""}, duration=${context.duration_need || ""}, must_have=${context.must_have || ""}, age=${context.age || ""}, coverage=${context.coverage_amount || ""}, budget=${context.budget_monthly || ""}, current_coverage=${context.current_coverage || ""}, priorities=${context.priority_1 || ""}/${context.priority_2 || ""}, risk=${risk.level}. Recommend ${nextRecommendation.product_type} alternatives and sales talking points.`;
-      const emb = await generateEmbedding(openaiKey, ragQuery);
-      const ragRows = await rpcMatchInternal(cfg, emb.embedding, 8, 0.25, nextRecommendation.recommended_category);
       const nextSales = Object.assign({}, session.sales_enablement || {});
       nextSales.script =
         (await synthesize(openaiKey, ragQuery, ragRows)) ||

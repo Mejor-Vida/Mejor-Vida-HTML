@@ -143,8 +143,8 @@
     }
     .tabs {
       display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
+      flex-wrap: nowrap;
+      gap: 12px;
       padding: 10px 0 0;
       margin: 0;
       width: 100%;
@@ -152,6 +152,17 @@
       border-bottom: 0;
       background: transparent;
       align-items: center;
+      justify-content: space-between;
+    }
+    .tabs-left,
+    .tabs-right {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+    .tabs-right {
+      margin-left: auto;
     }
     .tab-btn {
       background: #20345d; color: #fff; border: 1px solid var(--border); font-weight: 600;
@@ -717,6 +728,29 @@
     }
     .msg.user { margin-left: auto; background: #26457e; }
     .msg.assistant { background: #1c2c4c; border: 1px solid var(--border); }
+    .ps-question-wrap {
+      width: 100%;
+      max-width: 100%;
+      background: rgba(75, 85, 99, 0.35);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      border-radius: 12px;
+      padding: 8px;
+      margin-bottom: 6px;
+    }
+    .ps-question-label {
+      display: inline-flex;
+      align-items: center;
+      margin-bottom: 6px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #dbeafe;
+      background: rgba(17, 24, 39, 0.75);
+      border: 1px solid rgba(148, 163, 184, 0.45);
+    }
     .msg-source-badge {
       flex: 0 0 auto;
       margin-top: 2px;
@@ -858,12 +892,16 @@
         <button id="signout-btn" class="signout" type="button" data-help="Signs you out of the staff portal on this browser.">Sign Out</button>
       </div>
       <nav class="tabs" aria-label="Staff tools">
-        <button id="tab-inbox" class="tab-btn active" type="button" data-help="Open the customer question inbox: review questions, draft replies, email leads, and add answers to the knowledge base.">📬 Inbox</button>
-        <button id="tab-compose" class="tab-btn" type="button" data-help="Compose a new email to a lead: search manychat_leads, draft with AI, send branded HTML from Julie\x27s mailbox, or save a draft.">✉️ Compose</button>
-        <button id="tab-kb-gaps" class="tab-btn" type="button" data-help="Review internal knowledge gaps detected when Staff Assistant had to fall back to general AI knowledge.">🧠 KB Gaps</button>
-        <button id="tab-lead-profile" class="tab-btn" type="button" data-help="Lead profile: review and edit all collected fields for the active lead. Uses the same lead list as Compose (left column once wired).">👤 Lead Profile</button>
-        <button id="tab-product-selector" class="tab-btn" type="button" data-help="Product selector: guided qualification and recommendations for the lead you select. Works with partial lead data; missing fields can be filled in the flow.">📋 Product Selector</button>
-        <button id="tab-chat" class="tab-btn" type="button" data-help="Open the internal staff AI assistant for product and underwriting questions. This is separate from customer WhatsApp or inbox messages.">🤖 Staff Assistant</button>
+        <div class="tabs-left">
+          <button id="tab-lead-profile" class="tab-btn" type="button" data-help="Lead profile: review and edit all collected fields for the active lead. Uses the same lead list as Compose (left column once wired).">👤 Lead Profile</button>
+          <button id="tab-product-selector" class="tab-btn" type="button" data-help="Product selector: guided qualification and recommendations for the lead you select. Works with partial lead data; missing fields can be filled in the flow.">📋 Product Selector</button>
+          <button id="tab-chat" class="tab-btn" type="button" data-help="Open the internal staff AI assistant for product and underwriting questions. This is separate from customer WhatsApp or inbox messages.">🤖 Staff Assistant</button>
+          <button id="tab-compose" class="tab-btn" type="button" data-help="Compose a new email to a lead: search manychat_leads, draft with AI, send branded HTML from Julie\x27s mailbox, or save a draft.">✉️ Compose</button>
+        </div>
+        <div class="tabs-right">
+          <button id="tab-inbox" class="tab-btn active" type="button" data-help="Open the customer question inbox: review questions, draft replies, email leads, and add answers to the knowledge base.">📬 Inbox</button>
+          <button id="tab-kb-gaps" class="tab-btn" type="button" data-help="Review internal knowledge gaps detected when Staff Assistant had to fall back to general AI knowledge.">🧠 KB Gaps</button>
+        </div>
       </nav>
     </header>
 
@@ -1065,7 +1103,7 @@
                 <div id="lead-profile-readonly-block" class="hidden"></div>
                 <div id="lead-profile-empty" class="q-empty">Select a lead from the list on the left.</div>
                 <form id="lead-profile-form" class="compose-form hidden" autocomplete="off" onsubmit="return false;" aria-label="Lead profile">
-                  <div class="compose-contact-heading">Core Identity</div>
+                  <div class="compose-contact-heading">Identity (required to contact + identify)</div>
                   <div class="meta-grid">
                     <div class="meta-card" style="grid-column: 1 / -1">
                       <label for="lp-id">Lead ID (read-only)</label>
@@ -1080,8 +1118,8 @@
                       <input id="lp-last-name" type="text" autocomplete="off" data-lpignore="true" />
                     </div>
                     <div class="meta-card">
-                      <label for="lp-email">Email</label>
-                      <input id="lp-email" type="email" inputmode="email" autocomplete="off" data-lpignore="true" />
+                      <label for="lp-email">Email (optional)</label>
+                      <input id="lp-email" type="email" inputmode="email" autocomplete="off" data-lpignore="true" placeholder="Optional" />
                     </div>
                     <div class="meta-card">
                       <label for="lp-phone">Phone</label>
@@ -1100,15 +1138,11 @@
                       <input id="lp-city" type="text" autocomplete="off" />
                     </div>
                   </div>
-                  <div class="compose-contact-heading" style="margin-top: 16px">Qualification Essentials</div>
+                  <div class="compose-contact-heading" style="margin-top: 16px">Qualification Essentials (required)</div>
                   <div class="meta-grid">
                     <div class="meta-card">
                       <label for="lp-age">Age</label>
                       <input id="lp-age" type="number" inputmode="numeric" min="0" max="130" placeholder="—" />
-                    </div>
-                    <div class="meta-card">
-                      <label for="lp-dob">Date of Birth (optional)</label>
-                      <input id="lp-dob" type="date" />
                     </div>
                     <div class="meta-card">
                       <label for="lp-sex">Sex</label>
@@ -1120,29 +1154,24 @@
                         <option value="">Unknown</option>
                         <option value="true">Yes</option>
                         <option value="false">No</option>
-                        <option value="former">Former</option>
                       </select>
                     </div>
                   </div>
-                  <div class="compose-contact-heading" style="margin-top: 16px">Health / Underwriting (PHI — secure)</div>
+                  <div class="compose-contact-heading" style="margin-top: 16px">Health Qualification (required for underwriting, secure)</div>
                   <div class="meta-grid">
                     <div id="lp-phi-block" class="meta-card" style="grid-column: 1 / -1">
-                      <div class="small-note" id="lp-phi-note" style="margin-bottom:8px">PHI fields load only for authorized staff and are stored in a separate encrypted table.</div>
-                      <label style="display:flex; align-items:center; gap:10px; cursor:pointer"><input id="lp-phi-major" type="checkbox" /> Has major conditions?</label>
-                      <label style="display:flex; align-items:center; gap:10px; cursor:pointer"><input id="lp-phi-rx-flag" type="checkbox" /> Takes prescription medications?</label>
-                      <label style="display:flex; align-items:center; gap:10px; cursor:pointer"><input id="lp-phi-hosp-flag" type="checkbox" /> Recent hospitalizations (2-5 years)?</label>
-                      <label for="lp-phi-condition-catalog" style="margin-top:10px">Condition checklist</label>
-                      <input id="lp-phi-condition-catalog" type="text" placeholder="diabetes, heart_disease, cancer_history, stroke, copd, kidney_disease, dementia" autocomplete="off" />
-                      <label for="lp-phi-rx">Prescription medications</label>
-                      <input id="lp-phi-rx" type="text" placeholder="e.g. metformin, lisinopril" autocomplete="off" />
-                      <label for="lp-phi-conditions" style="margin-top:10px">Conditions (comma-separated)</label>
-                      <input id="lp-phi-conditions" type="text" placeholder="e.g. hypertension, diabetes" autocomplete="off" />
-                      <label for="lp-phi-hosp-when" style="margin-top:10px">Last hospitalization (approximate date)</label>
-                      <input id="lp-phi-hosp-when" type="text" placeholder="e.g. 2023-11" autocomplete="off" />
-                      <label for="lp-phi-hosp-reason" style="margin-top:10px">Hospitalization reason (short)</label>
-                      <input id="lp-phi-hosp-reason" type="text" autocomplete="off" />
-                      <label for="lp-phi-followups" style="margin-top:10px">Underwriting notes</label>
-                      <textarea id="lp-phi-followups" rows="3" placeholder="Hospitalizations, surgeries, specialty notes"></textarea>
+                      <div class="small-note" id="lp-phi-note" style="margin-bottom:8px">Stored in encrypted PHI table only. Not used for RAG indexing.</div>
+                      <label style="display:flex; align-items:center; gap:10px; cursor:pointer"><input id="lp-phi-rx-flag" type="checkbox" /> Takes prescription medications? (Yes/No)</label>
+                      <label style="display:flex; align-items:center; gap:10px; cursor:pointer"><input id="lp-phi-major" type="checkbox" /> Any major health conditions? (Yes/No)</label>
+                      <label style="display:flex; align-items:center; gap:10px; cursor:pointer"><input id="lp-phi-hosp-flag" type="checkbox" /> Any hospitalizations in last 2-5 years? (Yes/No)</label>
+                      <div id="lp-phi-expand" style="display:none; margin-top:10px">
+                        <label for="lp-phi-conditions">Conditions (short list/text)</label>
+                        <input id="lp-phi-conditions" type="text" placeholder="e.g. diabetes, hypertension" autocomplete="off" />
+                        <label for="lp-phi-rx" style="margin-top:10px">Medications (text)</label>
+                        <input id="lp-phi-rx" type="text" placeholder="e.g. metformin, lisinopril" autocomplete="off" />
+                        <label for="lp-phi-hosp-reason" style="margin-top:10px">Hospitalization reason (short text)</label>
+                        <input id="lp-phi-hosp-reason" type="text" autocomplete="off" />
+                      </div>
                     </div>
                   </div>
                   <div class="compose-contact-heading" style="margin-top: 16px">Coverage &amp; Intent</div>
@@ -2770,13 +2799,10 @@
         setv("lp-state", d.profile_ext && d.profile_ext.state);
         setv("lp-city", d.profile_ext && d.profile_ext.city);
         setv("lp-age", d.age != null && d.age !== "" ? String(d.age) : "");
-        setv("lp-dob", d.profile_ext && d.profile_ext.date_of_birth);
         setv("lp-sex", d.sex);
         var tob = document.getElementById("lp-tobacco");
-        var tobStatus = d.profile_ext && d.profile_ext.tobacco_status ? String(d.profile_ext.tobacco_status).toLowerCase() : "";
         if (tob) {
-          if (tobStatus === "former") tob.value = "former";
-          else if (d.tobacco === true) tob.value = "true";
+          if (d.tobacco === true) tob.value = "true";
           else if (d.tobacco === false) tob.value = "false";
           else tob.value = "";
         }
@@ -2815,19 +2841,26 @@
         if (phiRxFlag) phiRxFlag.checked = !!phi.takes_prescription_medications;
         var phiHospFlag = document.getElementById("lp-phi-hosp-flag");
         if (phiHospFlag) phiHospFlag.checked = !!phi.recent_hospitalizations;
-        setv("lp-phi-condition-catalog", Array.isArray(phi.condition_catalog) ? phi.condition_catalog.join(", ") : "");
         setv("lp-phi-conditions", Array.isArray(phi.conditions) ? phi.conditions.join(", ") : "");
-        setv("lp-phi-hosp-when", phi.hospitalization_when || "");
         setv("lp-phi-hosp-reason", phi.hospitalization_reason || "");
-        setv("lp-phi-followups", phi.followups || "");
         var phiBlock = document.getElementById("lp-phi-block");
         if (phiBlock) phiBlock.style.display = leadProfileCanAccessPhi ? "" : "none";
+        syncLeadProfilePhiExpand();
+      }
+
+      function syncLeadProfilePhiExpand() {
+        var box = document.getElementById("lp-phi-expand");
+        if (!box) return;
+        var major = !!(document.getElementById("lp-phi-major") && document.getElementById("lp-phi-major").checked);
+        var rx = !!(document.getElementById("lp-phi-rx-flag") && document.getElementById("lp-phi-rx-flag").checked);
+        var hosp = !!(document.getElementById("lp-phi-hosp-flag") && document.getElementById("lp-phi-hosp-flag").checked);
+        box.style.display = major || rx || hosp ? "" : "none";
       }
 
       function serializeLeadProfileFromForm() {
         var tob = document.getElementById("lp-tobacco");
         var tv = tob ? tob.value : "";
-        var tobacco = tv === "true" ? true : tv === "false" ? false : tv === "former" ? "former" : null;
+        var tobacco = tv === "true" ? true : tv === "false" ? false : null;
         return {
           id: String((document.getElementById("lp-id") && document.getElementById("lp-id").value) || ""),
           first_name: String(document.getElementById("lp-first-name").value || "").trim(),
@@ -2838,7 +2871,6 @@
           state: String((document.getElementById("lp-state") && document.getElementById("lp-state").value) || "").trim(),
           city: String((document.getElementById("lp-city") && document.getElementById("lp-city").value) || "").trim(),
           age: String(document.getElementById("lp-age").value || "").trim(),
-          date_of_birth: String((document.getElementById("lp-dob") && document.getElementById("lp-dob").value) || "").trim(),
           sex: String(document.getElementById("lp-sex").value || "").trim(),
           tobacco: tobacco,
           tag: String(document.getElementById("lp-tag").value || "").trim(),
@@ -2861,18 +2893,12 @@
             has_major_conditions: !!(document.getElementById("lp-phi-major") && document.getElementById("lp-phi-major").checked),
             takes_prescription_medications: !!(document.getElementById("lp-phi-rx-flag") && document.getElementById("lp-phi-rx-flag").checked),
             recent_hospitalizations: !!(document.getElementById("lp-phi-hosp-flag") && document.getElementById("lp-phi-hosp-flag").checked),
-            condition_catalog: String((document.getElementById("lp-phi-condition-catalog") && document.getElementById("lp-phi-condition-catalog").value) || "")
-              .split(",")
-              .map(function (x) { return String(x || "").trim(); })
-              .filter(Boolean),
             prescription_meds_text: String((document.getElementById("lp-phi-rx") && document.getElementById("lp-phi-rx").value) || "").trim(),
             conditions: String((document.getElementById("lp-phi-conditions") && document.getElementById("lp-phi-conditions").value) || "")
               .split(",")
               .map(function (x) { return String(x || "").trim(); })
               .filter(Boolean),
-            hospitalization_when: String((document.getElementById("lp-phi-hosp-when") && document.getElementById("lp-phi-hosp-when").value) || "").trim(),
             hospitalization_reason: String((document.getElementById("lp-phi-hosp-reason") && document.getElementById("lp-phi-hosp-reason").value) || "").trim(),
-            followups: String((document.getElementById("lp-phi-followups") && document.getElementById("lp-phi-followups").value) || "").trim(),
           },
         };
       }
@@ -2894,7 +2920,7 @@
           language: s.language || "English",
           age: ageOut,
           sex: s.sex || null,
-          tobacco: s.tobacco === "former" ? null : s.tobacco,
+          tobacco: s.tobacco,
           tag: s.tag || null,
           pipeline_stage: s.pipeline_stage || null,
           source: s.source || null,
@@ -2915,7 +2941,7 @@
             notes: s.notes || null,
             last_contacted: s.last_contacted || null,
             assigned_agent: s.assigned_agent || null,
-            tobacco_status: s.tobacco === "former" ? "former" : (s.tobacco === true ? "yes" : s.tobacco === false ? "no" : null),
+          tobacco_status: s.tobacco === true ? "yes" : s.tobacco === false ? "no" : null,
           },
           phi: leadProfileCanAccessPhi ? s.phi : undefined,
         };
@@ -2934,7 +2960,7 @@
           beneficiary_plan: s.beneficiary_plan || "",
           state: s.state || "",
           city: s.city || "",
-          date_of_birth: s.date_of_birth || "",
+          date_of_birth: "",
         };
       }
 
@@ -3161,6 +3187,11 @@
         form.setAttribute("data-lp-form-wired", "1");
         form.addEventListener("input", scheduleLeadProfileDirtyCheck);
         form.addEventListener("change", scheduleLeadProfileDirtyCheck);
+        ["lp-phi-major", "lp-phi-rx-flag", "lp-phi-hosp-flag"].forEach(function (id) {
+          var el = document.getElementById(id);
+          if (el) el.addEventListener("change", syncLeadProfilePhiExpand);
+        });
+        syncLeadProfilePhiExpand();
         saveBtn.addEventListener("click", onLeadProfileSaveClick);
       }
 
@@ -3312,6 +3343,11 @@
       function renderProductSelectorChat(transcript) {
         var el = getProductSelectorEls();
         if (!el.chatLog) return;
+        var questionOrder = {
+          strategy_priority: 1,
+          graded_benefit_ok: 2,
+          carrier_preference: 3,
+        };
         var items = Array.isArray(transcript) ? transcript : [];
         if (!items.length) {
           el.chatLog.innerHTML = '<div class="q-empty">Guided chat will appear here. The system asks one question at a time.</div>';
@@ -3319,8 +3355,25 @@
         }
         el.chatLog.innerHTML = "";
         items.forEach(function (m) {
+          if (m.role === "assistant") {
+            var qWrap = document.createElement("div");
+            qWrap.className = "ps-question-wrap";
+            var qNum = questionOrder[String(m.key || "")] || null;
+            var qLabel = document.createElement("div");
+            qLabel.className = "ps-question-label";
+            qLabel.textContent = qNum ? "Question " + qNum : "System";
+            var qBubble = document.createElement("div");
+            qBubble.className = "msg assistant";
+            qBubble.style.maxWidth = "100%";
+            qBubble.style.marginBottom = "0";
+            qBubble.textContent = String(m.content || "");
+            qWrap.appendChild(qLabel);
+            qWrap.appendChild(qBubble);
+            el.chatLog.appendChild(qWrap);
+            return;
+          }
           var n = document.createElement("div");
-          n.className = "msg " + (m.role === "assistant" ? "assistant" : "user");
+          n.className = "msg user";
           n.style.maxWidth = "100%";
           n.style.marginBottom = "6px";
           n.textContent = String(m.content || "");
