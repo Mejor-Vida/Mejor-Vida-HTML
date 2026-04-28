@@ -1607,10 +1607,34 @@ function shouldStopQualification(nonPhiAnswers, phiAnswers, allowPhi) {
 
 function nextQuestionKey(nonPhiAnswers, phiAnswers, allowPhi) {
   const phiSrc = phiAnswers || {};
+  const hasMedList = Array.isArray(phiSrc.current_medications) && phiSrc.current_medications.length > 0;
+  const legacyHealthStarted =
+    hasMedList ||
+    anyTrue(phiSrc, [
+      "has_major_conditions",
+      "terminal_illness",
+      "aids_hiv",
+      "organ_transplant",
+      "dialysis",
+      "nursing_home_resident",
+      "wheelchair_bedridden",
+      "adl_assistance",
+      "hospitalized_recent",
+      "awaiting_surgery",
+      "undiagnosed_symptoms",
+      "heart_event_recent",
+      "cancer_active",
+      "dementia_cognitive",
+      "high_blood_pressure",
+      "cholesterol_high",
+      "sleep_apnea",
+      "depression",
+      "atrial_fibrillation",
+    ]);
   if (shouldStopQualification(nonPhiAnswers, phiAnswers, allowPhi)) return "";
   // Hard-priority follow-ups: never skip these when parent condition is present.
   if (allowPhi) {
-    if (phiSrc.takes_prescription_medications === true) {
+    if (phiSrc.takes_prescription_medications === true || hasMedList) {
       const meds = Array.isArray(phiSrc.current_medications) ? phiSrc.current_medications : null;
       if (!meds || meds.length === 0) return "current_medications";
     }
@@ -1731,6 +1755,8 @@ function nextQuestionKey(nonPhiAnswers, phiAnswers, allowPhi) {
   for (const q of orderedQuestions) {
     if (q.phi && !allowPhi) continue;
     if (q.phi && healthNoneReported) continue;
+    if (q.key === "health_prescreen_overall" && legacyHealthStarted) continue;
+    if (q.key === "takes_prescription_medications" && hasMedList) continue;
     if (q.phi) {
       const blockNoneKey = blockByKey[q.key];
       if (blockNoneKey && blockCompleted[blockNoneKey]) continue;
