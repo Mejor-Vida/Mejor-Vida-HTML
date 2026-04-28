@@ -2131,6 +2131,39 @@
                       </select>
                     </div>
                     <div class="meta-card">
+                      <label for="lp-product-line">Approved Product Line</label>
+                      <select id="lp-product-line">
+                        <option value="">Select product line...</option>
+                        <option value="Mutual of Omaha — Living Promise Whole Life">Mutual of Omaha — Living Promise Whole Life</option>
+                        <option value="Mutual of Omaha — Term Life Answers (TLA)">Mutual of Omaha — Term Life Answers (TLA)</option>
+                        <option value="Mutual of Omaha — Term Life Express (TLE)">Mutual of Omaha — Term Life Express (TLE)</option>
+                        <option value="Mutual of Omaha — Income Advantage IUL">Mutual of Omaha — Income Advantage IUL</option>
+                        <option value="Mutual of Omaha — Life Protection Advantage IUL">Mutual of Omaha — Life Protection Advantage IUL</option>
+                        <option value="Mutual of Omaha — Indexed Universal Life Express">Mutual of Omaha — Indexed Universal Life Express</option>
+                        <option value="Mutual of Omaha — AccumUL Answers">Mutual of Omaha — AccumUL Answers</option>
+                        <option value="Mutual of Omaha — Children's Whole Life">Mutual of Omaha — Children's Whole Life</option>
+                        <option value="American Amicable — Easy Term">American Amicable — Easy Term</option>
+                        <option value="American Amicable — Express UL">American Amicable — Express UL</option>
+                        <option value="American Amicable — Financial Lifeline">American Amicable — Financial Lifeline</option>
+                        <option value="American Amicable — Golden Solution">American Amicable — Golden Solution</option>
+                        <option value="American Amicable — Family Solution">American Amicable — Family Solution</option>
+                        <option value="American Amicable — Senior Choice">American Amicable — Senior Choice</option>
+                        <option value="American Amicable — Family Choice">American Amicable — Family Choice</option>
+                        <option value="American Amicable — Guaranteed Guardian">American Amicable — Guaranteed Guardian</option>
+                        <option value="American Amicable — Home Protector">American Amicable — Home Protector</option>
+                        <option value="American Amicable — OBA (Order of Benefits Alliance)">American Amicable — OBA (Order of Benefits Alliance)</option>
+                        <option value="American Amicable — Security Protector">American Amicable — Security Protector</option>
+                        <option value="American Amicable — Survivor Protector">American Amicable — Survivor Protector</option>
+                        <option value="American Amicable — Term Made Simple">American Amicable — Term Made Simple</option>
+                        <option value="American Amicable — Val-U-Plus">American Amicable — Val-U-Plus</option>
+                        <option value="Assurity — Term Life">Assurity — Term Life</option>
+                        <option value="Assurity — Whole Life Protect+">Assurity — Whole Life Protect+</option>
+                        <option value="Assurity — Whole Life Perform+">Assurity — Whole Life Perform+</option>
+                        <option value="Assurity — Single Premium Whole Life">Assurity — Single Premium Whole Life</option>
+                        <option value="Assurity — Universal Life">Assurity — Universal Life</option>
+                      </select>
+                    </div>
+                    <div class="meta-card">
                       <label for="lp-beneficiary-plan">Beneficiary Plan (optional)</label>
                       <input id="lp-beneficiary-plan" type="text" autocomplete="off" />
                     </div>
@@ -4333,6 +4366,7 @@
         setv("lp-monthly-budget", d.profile_ext && d.profile_ext.monthly_budget);
         setv("lp-priority", d.profile_ext && d.profile_ext.priority);
         setv("lp-product-type", d.profile_ext && d.profile_ext.product_type);
+        setSelectOrCustom("lp-product-line", d.profile_ext && d.profile_ext.product_line);
         setv("lp-beneficiary-plan", d.profile_ext && d.profile_ext.beneficiary_plan);
         setv("lp-policy-owner", d.profile_ext && d.profile_ext.policy_owner);
         setv("lp-notes", d.profile_ext && d.profile_ext.notes);
@@ -4523,6 +4557,7 @@
           monthly_budget: String((document.getElementById("lp-monthly-budget") && document.getElementById("lp-monthly-budget").value) || "").trim(),
           priority: String((document.getElementById("lp-priority") && document.getElementById("lp-priority").value) || "").trim(),
           product_type: String((document.getElementById("lp-product-type") && document.getElementById("lp-product-type").value) || "").trim(),
+          product_line: String((document.getElementById("lp-product-line") && document.getElementById("lp-product-line").value) || "").trim(),
           beneficiary_plan: String((document.getElementById("lp-beneficiary-plan") && document.getElementById("lp-beneficiary-plan").value) || "").trim(),
           policy_owner: String((document.getElementById("lp-policy-owner") && document.getElementById("lp-policy-owner").value) || "").trim(),
           notes: String((document.getElementById("lp-notes") && document.getElementById("lp-notes").value) || "").trim(),
@@ -4605,6 +4640,7 @@
             monthly_budget: s.monthly_budget || null,
             priority: s.priority || null,
             product_type: s.product_type || null,
+            product_line: s.product_line || null,
             beneficiary_plan: s.beneficiary_plan || null,
             policy_owner: s.policy_owner || null,
             notes: s.notes || null,
@@ -4632,6 +4668,7 @@
           policy_owner: s.policy_owner || "",
           beneficiary_plan: s.beneficiary_plan || "",
           product_type: s.product_type || "",
+          product_line: s.product_line || "",
           state: s.state || "",
           date_of_birth: s.date_of_birth || "",
         };
@@ -4688,15 +4725,45 @@
           var bud = String(qa.budget_monthly || snap.monthly_budget || "").trim();
           var pr = mapSelectorPriority(qa.strategy_priority || qa.priority_1 || snap.priority);
           var pt = String(rec.product_type || snap.product_type || "").trim();
+          var pl = String(rec.recommended_product || snap.product_line || "").trim();
+          var profileExtPatch = {};
 
           if (cg) document.getElementById("lp-coverage-goal").value = cg;
           if (cov) document.getElementById("lp-desired-coverage").value = cov;
           if (bud) document.getElementById("lp-monthly-budget").value = bud;
           if (pr) document.getElementById("lp-priority").value = pr;
           if (pt) document.getElementById("lp-product-type").value = pt;
+          if (pl) setSelectOrCustom("lp-product-line", pl);
+
+          if (cg) profileExtPatch.coverage_goal = cg;
+          if (cov) profileExtPatch.desired_coverage_amount = cov;
+          if (bud) profileExtPatch.monthly_budget = bud;
+          if (pr) profileExtPatch.priority = pr;
+          if (pt) profileExtPatch.product_type = pt;
+          if (pl) profileExtPatch.product_line = pl;
 
           scheduleLeadProfileDirtyCheck();
-          if (status) status.textContent = "Coverage & Intent updated from Product Selector.";
+          if (Object.keys(profileExtPatch).length) {
+            if (status) status.textContent = "Pushing Coverage & Intent to profile…";
+            var saved = await authedApi(
+              "/api/staff/leads",
+              {
+                id: lead.id,
+                profile_ext: profileExtPatch,
+              },
+              { method: "PATCH" }
+            );
+            if (saved && saved.detail) {
+              applyLeadProfileDetailToForm(saved.detail);
+              leadProfileBaselineJson = JSON.stringify(serializeLeadProfileFromForm());
+              updateLeadProfileSaveButton();
+            } else {
+              await loadLeadProfileDetail();
+            }
+            if (status) status.textContent = "Coverage & Intent pushed to profile and saved.";
+          } else {
+            if (status) status.textContent = "No selector fields were available to push.";
+          }
         } catch (e) {
           if (status) status.textContent = (e && e.message) || "Could not pull from Product Selector.";
         }
