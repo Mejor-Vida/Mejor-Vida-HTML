@@ -733,6 +733,34 @@ function applyMajorConditionsNumberPicks(phi, pickSet) {
   MAJOR_CONDITION_NUMBER_KEYS.forEach((k, idx) => {
     if (pick.has(idx + 1)) phi[k] = true;
   });
+  // Force fresh follow-up capture when a numbered major condition is selected.
+  if (pick.has(1)) delete phi.bp_controlled;
+  if (pick.has(2)) {
+    delete phi.cholesterol_medication;
+    delete phi.cholesterol_controlled;
+  }
+  if (pick.has(3)) delete phi.cpap_use;
+  if (pick.has(4)) {
+    delete phi.diabetes_type;
+    delete phi.diabetes_insulin;
+    delete phi.diabetes_complications;
+  }
+  if (pick.has(5)) delete phi.depression_treated;
+  if (pick.has(6)) delete phi.afib_controlled;
+  // Clear follow-ups when a condition is not selected in this pass.
+  if (!pick.has(1)) delete phi.bp_controlled;
+  if (!pick.has(2)) {
+    delete phi.cholesterol_medication;
+    delete phi.cholesterol_controlled;
+  }
+  if (!pick.has(3)) delete phi.cpap_use;
+  if (!pick.has(4)) {
+    delete phi.diabetes_type;
+    delete phi.diabetes_insulin;
+    delete phi.diabetes_complications;
+  }
+  if (!pick.has(5)) delete phi.depression_treated;
+  if (!pick.has(6)) delete phi.afib_controlled;
   phi.has_major_conditions = pick.size > 0;
 }
 
@@ -770,6 +798,24 @@ function applyFinalHealthNumberPicks(phi, pickSet) {
   FINAL_HEALTH_NUMBER_KEYS.forEach((k, idx) => {
     if (pick.has(idx + 1)) phi[k] = true;
   });
+  // Force the detail follow-ups when conditions are selected.
+  if (pick.has(1)) {
+    delete phi.heart_event_date;
+    delete phi.heart_event_type;
+  }
+  if (pick.has(2)) {
+    delete phi.cancer_type;
+    delete phi.cancer_treatment_status;
+  }
+  // Clear detail follow-ups when deselected.
+  if (!pick.has(1)) {
+    delete phi.heart_event_date;
+    delete phi.heart_event_type;
+  }
+  if (!pick.has(2)) {
+    delete phi.cancer_type;
+    delete phi.cancer_treatment_status;
+  }
 }
 
 function parseFinalHealthSelection(raw) {
@@ -3072,14 +3118,23 @@ module.exports = async function handler(req, res) {
               nextPhi.copd_diagnosed = false;
               nextPhi.dementia_cognitive = false;
               nextPhi.diabetes = false;
+              delete nextPhi.diabetes_type;
+              delete nextPhi.diabetes_insulin;
+              delete nextPhi.diabetes_complications;
               nextPhi.kidney_disease = false;
               nextPhi.liver_disease = false;
               nextPhi.neurological_condition = false;
               nextPhi.high_blood_pressure = false;
+              delete nextPhi.bp_controlled;
               nextPhi.cholesterol_high = false;
+              delete nextPhi.cholesterol_medication;
+              delete nextPhi.cholesterol_controlled;
               nextPhi.sleep_apnea = false;
+              delete nextPhi.cpap_use;
               nextPhi.depression = false;
+              delete nextPhi.depression_treated;
               nextPhi.atrial_fibrillation = false;
+              delete nextPhi.afib_controlled;
             } else {
               applyMajorConditionsNumberPicks(nextPhi, mr.pickSet);
             }
@@ -3097,7 +3152,11 @@ module.exports = async function handler(req, res) {
             if (fr.mode === "no") {
               nextPhi.final_health_conditions = false;
               nextPhi.heart_event_recent = false;
+              delete nextPhi.heart_event_date;
+              delete nextPhi.heart_event_type;
               nextPhi.cancer_active = false;
+              delete nextPhi.cancer_type;
+              delete nextPhi.cancer_treatment_status;
               nextPhi.dementia_cognitive = false;
             } else {
               nextPhi.final_health_conditions = true;
@@ -3121,6 +3180,36 @@ module.exports = async function handler(req, res) {
         } else {
           advanceQualification = true;
           if (currentQuestion.phi) nextPhi[currentQuestion.key] = parsed;
+          if (currentQuestion.key === "high_blood_pressure" && parsed === true) {
+            // Always collect current control status after a fresh HBP "yes" answer.
+            delete nextPhi.bp_controlled;
+          }
+          if (currentQuestion.key === "cholesterol_high" && parsed === true) {
+            delete nextPhi.cholesterol_medication;
+            delete nextPhi.cholesterol_controlled;
+          }
+          if (currentQuestion.key === "sleep_apnea" && parsed === true) {
+            delete nextPhi.cpap_use;
+          }
+          if (currentQuestion.key === "depression" && parsed === true) {
+            delete nextPhi.depression_treated;
+          }
+          if (currentQuestion.key === "diabetes" && parsed === true) {
+            delete nextPhi.diabetes_type;
+            delete nextPhi.diabetes_insulin;
+            delete nextPhi.diabetes_complications;
+          }
+          if (currentQuestion.key === "atrial_fibrillation" && parsed === true) {
+            delete nextPhi.afib_controlled;
+          }
+          if (currentQuestion.key === "heart_event_recent" && parsed === true) {
+            delete nextPhi.heart_event_date;
+            delete nextPhi.heart_event_type;
+          }
+          if (currentQuestion.key === "cancer_active" && parsed === true) {
+            delete nextPhi.cancer_type;
+            delete nextPhi.cancer_treatment_status;
+          }
           if (currentQuestion.key === "cholesterol_controlled" && parsed === true) {
             // If cholesterol is controlled, assume medication is present unless already answered otherwise.
             if (nextPhi.cholesterol_medication !== false) nextPhi.cholesterol_medication = true;
