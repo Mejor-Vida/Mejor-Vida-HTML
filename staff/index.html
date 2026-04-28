@@ -4788,6 +4788,16 @@
         return out;
       }
 
+      function buildSelectorSeedPhiFromLeadProfile() {
+        if (!leadProfileCanAccessPhi) return {};
+        try {
+          var s = serializeLeadProfileFromForm();
+          return s && s.phi && typeof s.phi === "object" ? s.phi : {};
+        } catch (_e) {
+          return {};
+        }
+      }
+
       function deriveBlockNoneFromPhi(phi, block) {
         var src = phi && typeof phi === "object" ? phi : {};
         var hasAnyChecked = (block.checkboxKeys || []).some(function (k) {
@@ -5995,13 +6005,14 @@
         if (el.status) el.status.textContent = "Resetting chat session…";
         try {
           var seededAnswers = buildSelectorSeedAnswersFromProfile();
+          var seededPhi = buildSelectorSeedPhiFromLeadProfile();
           var data = await authedApi(
             "/api/staff/product-selector",
             {
               lead_id: lead.id,
               lead_source_table: lead.source_table || "unknown",
               qualification_answers: seededAnswers,
-              phi_answers: {},
+              phi_answers: seededPhi,
               reset_phi: true,
               reset_session: true,
               profile_snapshot: buildProfileSnapshotForSelector(),

@@ -1582,11 +1582,11 @@ function shouldStopQualification(nonPhiAnswers, phiAnswers, allowPhi) {
   if (phi.has_major_conditions !== true && phi.has_major_conditions !== false) return false;
   if (rx === true && !Object.prototype.hasOwnProperty.call(phi, "current_medications")) return false;
   // Do not stop while condition follow-ups that drive risk are still unanswered.
-  if (phi.high_blood_pressure === true && (phi.bp_controlled !== true && phi.bp_controlled !== false)) return false;
-  if (phi.cholesterol_high === true && (phi.cholesterol_medication !== true && phi.cholesterol_medication !== false)) return false;
-  if (phi.cholesterol_high === true && (phi.cholesterol_controlled !== true && phi.cholesterol_controlled !== false)) return false;
-  if (phi.sleep_apnea === true && (phi.cpap_use !== true && phi.cpap_use !== false)) return false;
-  if (phi.depression === true && (phi.depression_treated !== true && phi.depression_treated !== false)) return false;
+  if (bool(phi.high_blood_pressure) && (phi.bp_controlled !== true && phi.bp_controlled !== false)) return false;
+  if (bool(phi.cholesterol_high) && (phi.cholesterol_medication !== true && phi.cholesterol_medication !== false)) return false;
+  if (bool(phi.cholesterol_high) && (phi.cholesterol_controlled !== true && phi.cholesterol_controlled !== false)) return false;
+  if (bool(phi.sleep_apnea) && (phi.cpap_use !== true && phi.cpap_use !== false)) return false;
+  if (bool(phi.depression) && (phi.depression_treated !== true && phi.depression_treated !== false)) return false;
   const healthAnchors = [
     "has_major_conditions",
     "takes_prescription_medications",
