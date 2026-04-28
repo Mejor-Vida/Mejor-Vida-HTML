@@ -1608,6 +1608,29 @@ function shouldStopQualification(nonPhiAnswers, phiAnswers, allowPhi) {
 function nextQuestionKey(nonPhiAnswers, phiAnswers, allowPhi) {
   const phiSrc = phiAnswers || {};
   if (shouldStopQualification(nonPhiAnswers, phiAnswers, allowPhi)) return "";
+  // Hard-priority follow-ups: never skip these when parent condition is present.
+  if (allowPhi) {
+    if (phiSrc.takes_prescription_medications === true) {
+      const meds = Array.isArray(phiSrc.current_medications) ? phiSrc.current_medications : null;
+      if (!meds || meds.length === 0) return "current_medications";
+    }
+    if (bool(phiSrc.high_blood_pressure) && (phiSrc.bp_controlled !== true && phiSrc.bp_controlled !== false)) return "bp_controlled";
+    if (bool(phiSrc.cholesterol_high) && (phiSrc.cholesterol_medication !== true && phiSrc.cholesterol_medication !== false))
+      return "cholesterol_medication";
+    if (bool(phiSrc.cholesterol_high) && (phiSrc.cholesterol_controlled !== true && phiSrc.cholesterol_controlled !== false))
+      return "cholesterol_controlled";
+    if (bool(phiSrc.sleep_apnea) && (phiSrc.cpap_use !== true && phiSrc.cpap_use !== false)) return "cpap_use";
+    if (bool(phiSrc.depression) && (phiSrc.depression_treated !== true && phiSrc.depression_treated !== false)) return "depression_treated";
+    if (bool(phiSrc.diabetes) && !String(phiSrc.diabetes_type || "").trim()) return "diabetes_type";
+    if (bool(phiSrc.diabetes) && (phiSrc.diabetes_insulin !== true && phiSrc.diabetes_insulin !== false)) return "diabetes_insulin";
+    if (bool(phiSrc.diabetes) && (phiSrc.diabetes_complications !== true && phiSrc.diabetes_complications !== false))
+      return "diabetes_complications";
+    if (bool(phiSrc.atrial_fibrillation) && (phiSrc.afib_controlled !== true && phiSrc.afib_controlled !== false)) return "afib_controlled";
+    if (bool(phiSrc.heart_event_recent) && !String(phiSrc.heart_event_date || "").trim()) return "heart_event_date";
+    if (bool(phiSrc.heart_event_recent) && !String(phiSrc.heart_event_type || "").trim()) return "heart_event_type";
+    if (bool(phiSrc.cancer_active) && !String(phiSrc.cancer_type || "").trim()) return "cancer_type";
+    if (bool(phiSrc.cancer_active) && !String(phiSrc.cancer_treatment_status || "").trim()) return "cancer_treatment_status";
+  }
   const healthNoneReported = !!phiSrc.health_none_reported;
   const blockGroups = [
     {
