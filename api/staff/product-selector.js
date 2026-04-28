@@ -85,6 +85,14 @@ async function saveSessionWithTranscriptFallback(cfg, leadId, leadSourceTable, p
 }
 
 function bool(v) {
+  if (v === true || v === 1) return true;
+  if (v === false || v === 0 || v == null) return false;
+  if (typeof v === "string") {
+    const t = v.trim().toLowerCase();
+    if (!t) return false;
+    if (["true", "yes", "y", "1", "si", "sí"].includes(t)) return true;
+    if (["false", "no", "n", "0", "none", "null", "undefined"].includes(t)) return false;
+  }
   return !!v;
 }
 
@@ -841,6 +849,24 @@ function parseFinalHealthSelection(raw) {
     return { mode: "numbers", pickSet };
   }
   return { mode: "invalid" };
+}
+
+function normalizeCombinedFinalHealthSection(phi) {
+  if (!phi || typeof phi !== "object") return;
+  const keys = ["heart_event_recent", "cancer_active", "dementia_cognitive"];
+  const values = keys.map((k) => phi[k]);
+  const hasAnyTrue = values.some((v) => v === true);
+  if (hasAnyTrue) {
+    // Business rule: if one field in this combined section is positive, treat unfilled siblings as negative.
+    keys.forEach((k) => {
+      const v = phi[k];
+      if (!(v === true || v === false)) phi[k] = false;
+    });
+  }
+  const allAnswered = keys.every((k) => phi[k] === true || phi[k] === false);
+  if (allAnswered) {
+    phi.final_health_conditions = keys.some((k) => phi[k] === true);
+  }
 }
 
 /** Rewind: remove compound answer and any imputed or answered gate PHI from the prescreen branch. */
@@ -1607,6 +1633,11 @@ function shouldStopQualification(nonPhiAnswers, phiAnswers, allowPhi) {
 
 function nextQuestionKey(nonPhiAnswers, phiAnswers, allowPhi) {
   const phiSrc = phiAnswers || {};
+  const finalHealthKeys = ["heart_event_recent", "cancer_active", "dementia_cognitive"];
+  const finalHealthAnswered = finalHealthKeys.filter((k) => phiSrc[k] === true || phiSrc[k] === false).length;
+  const finalHealthAllAnswered = finalHealthAnswered === finalHealthKeys.length;
+  const finalHealthAnyAnswered = finalHealthAnswered > 0;
+  const finalHealthAnyPositive = finalHealthKeys.some((k) => phiSrc[k] === true);
   const hasMedList = Array.isArray(phiSrc.current_medications) && phiSrc.current_medications.length > 0;
   const legacyHealthStarted =
     hasMedList ||
@@ -1654,6 +1685,7 @@ function nextQuestionKey(nonPhiAnswers, phiAnswers, allowPhi) {
     if (bool(phiSrc.heart_event_recent) && !String(phiSrc.heart_event_type || "").trim()) return "heart_event_type";
     if (bool(phiSrc.cancer_active) && !String(phiSrc.cancer_type || "").trim()) return "cancer_type";
     if (bool(phiSrc.cancer_active) && !String(phiSrc.cancer_treatment_status || "").trim()) return "cancer_treatment_status";
+    if (!finalHealthAllAnswered && finalHealthAnyAnswered && !finalHealthAnyPositive) return "final_health_conditions";
   }
   const healthNoneReported = !!phiSrc.health_none_reported;
   const blockGroups = [
@@ -1755,6 +1787,7 @@ function nextQuestionKey(nonPhiAnswers, phiAnswers, allowPhi) {
   for (const q of orderedQuestions) {
     if (q.phi && !allowPhi) continue;
     if (q.phi && healthNoneReported) continue;
+    if (q.key === "heart_event_recent" || q.key === "cancer_active" || q.key === "dementia_cognitive") continue;
     if (q.key === "health_prescreen_overall" && legacyHealthStarted) continue;
     if (q.key === "takes_prescription_medications" && hasMedList) continue;
     if (q.phi) {
@@ -3431,6 +3464,7 @@ module.exports = async function handler(req, res) {
           delete nextPhi.medication_uw_classification;
         }
       }
+      normalizeCombinedFinalHealthSection(nextPhi);
       const context = normalizedContextFromProfile(workflowState.profile_snapshot || {}, nextNonPhi, nextPhi);
       const risk = deriveRisk(context, nextPhi);
       const ragQuery = `Lead intent=${context.intent || ""}, protected=${context.protected_who || ""}, duration=${context.duration_need || ""}, must_have=${context.must_have || ""}, age=${context.age || ""}, coverage=${context.coverage_amount || ""}, budget=${context.budget_monthly || ""}, current_coverage=${context.current_coverage || ""}, priorities=${context.priority_1 || ""}/${context.priority_2 || ""}, risk=${risk.level}, risk_flags=${(risk.flags || []).join(",")}. Determine best-fit product type and alternatives from internal product knowledge only, then provide sales talking points.`;
