@@ -4762,6 +4762,32 @@
         return "";
       }
 
+      function buildSelectorSeedAnswersFromProfile() {
+        var snap = buildProfileSnapshotForSelector();
+        var out = {};
+        var goal = String(snap.coverage_goal || "").trim();
+        var coverage = String(snap.desired_coverage_amount || "").trim();
+        var budget = String(snap.monthly_budget || "").trim();
+        var priority = String(snap.priority || "").trim();
+        if (goal) {
+          out.coverage_goal = goal;
+          out.intent = goal;
+        }
+        if (coverage) {
+          out.normalized_coverage_target = coverage;
+          out.coverage_amount = coverage;
+        }
+        if (budget) {
+          out.budget_monthly = budget;
+          out.budget_class = budget;
+        }
+        if (priority) {
+          out.priority_type = priority;
+          if (!out.strategy_priority) out.strategy_priority = priority;
+        }
+        return out;
+      }
+
       function deriveBlockNoneFromPhi(phi, block) {
         var src = phi && typeof phi === "object" ? phi : {};
         var hasAnyChecked = (block.checkboxKeys || []).some(function (k) {
@@ -5968,12 +5994,13 @@
         }
         if (el.status) el.status.textContent = "Resetting chat session…";
         try {
+          var seededAnswers = buildSelectorSeedAnswersFromProfile();
           var data = await authedApi(
             "/api/staff/product-selector",
             {
               lead_id: lead.id,
               lead_source_table: lead.source_table || "unknown",
-              qualification_answers: {},
+              qualification_answers: seededAnswers,
               phi_answers: {},
               reset_phi: true,
               reset_session: true,
@@ -5987,7 +6014,7 @@
             { method: "PUT" }
           );
           productSelectorSession = data && data.session ? data.session : null;
-          applyProductSelectorAnswersToUi({});
+          applyProductSelectorAnswersToUi(seededAnswers);
           renderProductSelectorChat([]);
           renderProductSelectorOutput(null, null, null, null);
           if (el.chatInput) el.chatInput.value = "start";
