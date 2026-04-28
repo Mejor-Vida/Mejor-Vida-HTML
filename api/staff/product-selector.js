@@ -1768,6 +1768,90 @@ function matchAllowedCatalogEntry(row) {
   );
 }
 
+function productTypeLabel(type) {
+  const t = String(type || "").toLowerCase();
+  if (t === "final_expense") return "Final Expense Whole Life";
+  if (t === "term_life") return "Term Life";
+  if (t === "universal_life") return "Universal Life";
+  if (t === "whole_life") return "Whole Life";
+  return "Life Insurance";
+}
+
+function tradeoffForType(type, priority) {
+  const t = String(type || "").toLowerCase();
+  const p = String(priority || "").toLowerCase();
+  if (t === "final_expense") {
+    return {
+      pros: [
+        "Simplified underwriting with easier approval for many health profiles.",
+        "Lifetime coverage designed around funeral and final-bill needs.",
+      ],
+      cons: [
+        "Lower face amounts than traditional term products.",
+        "Monthly cost per $1,000 of coverage is usually higher than term life.",
+      ],
+    };
+  }
+  if (t === "term_life") {
+    return {
+      pros: [
+        "Higher death benefit per dollar of premium.",
+        p === "lowest_monthly_cost" ? "Typically best fit for lowest monthly cost goals." : "Strong fit for income/mortgage protection goals.",
+      ],
+      cons: [
+        "Coverage expires at end of term unless converted/renewed.",
+        "Underwriting can be stricter than final expense in some cases.",
+      ],
+    };
+  }
+  if (t === "universal_life") {
+    return {
+      pros: [
+        "Flexible premium and long-term coverage design options.",
+        "Can support legacy-focused planning better than short-term products.",
+      ],
+      cons: [
+        "More complex product structure to explain and maintain.",
+        "Premium adequacy is important to keep coverage in force long term.",
+      ],
+    };
+  }
+  return {
+    pros: ["Permanent protection option when approved.", "Can align with long-term protection goals."],
+    cons: ["May be more expensive than term options.", "Product fit depends on underwriting details and budget."],
+  };
+}
+
+function buildAlternativeTradeoffs(alternativeProducts, alternativeTypes, priority) {
+  const prods = Array.isArray(alternativeProducts) ? alternativeProducts : [];
+  const types = Array.isArray(alternativeTypes) ? alternativeTypes : [];
+  const out = [];
+  for (let i = 0; i < prods.length || i < types.length; i++) {
+    const name = String(prods[i] || types[i] || "").trim();
+    const type = String(types[i] || "").trim();
+    if (!name) continue;
+    const t = tradeoffForType(type, priority);
+    out.push({
+      option: name,
+      pros: t.pros,
+      cons: t.cons,
+    });
+  }
+  return out;
+}
+
+function buildBestFitExplanation(context, risk, primaryProduct, primaryType, sourceMode) {
+  const ctx = context && typeof context === "object" ? context : {};
+  const goal = String(ctx.coverage_goal || ctx.intent || "this client goal");
+  const priority = String(ctx.priority_type || ctx.strategy_priority || "approval certainty");
+  const riskLevel = String((risk && risk.level) || "unknown");
+  const sourceText = sourceMode === "rag" ? "internal carrier knowledge matches" : "goal and risk fallback rules";
+  return (
+    `${primaryProduct} is the best fit because it aligns with the client's goal (${goal}) and priority (${priority}), ` +
+    `while staying consistent with a ${riskLevel} risk profile. This recommendation is based on ${sourceText}.`
+  );
+}
+
 function recommendFromRagRows(context, risk, rows) {
   const ragRows = Array.isArray(rows) ? rows : [];
   const matchedRows = ragRows
@@ -1824,14 +1908,19 @@ function recommendFromRagRows(context, risk, rows) {
       ];
     }
 
+    const recommendedProduct = `${primary.carrierLabel} — ${primary.productName}`;
+    const altProducts = alternatives.map((a) => `${a.carrierLabel} — ${a.productName}`);
+    const altTypes = alternatives.map((a) => a.productType);
     return {
       product_type: primary.productType,
-      recommended_product: `${primary.carrierLabel} — ${primary.productName}`,
+      recommended_product: recommendedProduct,
       recommended_category: categoryForProductType(primary.productType),
-      alternatives: alternatives.map((a) => a.productType),
-      alternative_products: alternatives.map((a) => `${a.carrierLabel} — ${a.productName}`),
+      alternatives: altTypes,
+      alternative_products: altProducts,
       rationale:
         "RAG fallback mode used due to sparse retrieval results; selected the closest allowed catalog product using goal + risk defaults.",
+      best_fit_explanation: buildBestFitExplanation(context, risk, recommendedProduct, primary.productType, "fallback"),
+      alternative_tradeoffs: buildAlternativeTradeoffs(altProducts, altTypes, context && context.priority_type),
     };
   }
 
@@ -1848,18 +1937,23 @@ function recommendFromRagRows(context, risk, rows) {
   const alternativesRanked = ranked.slice(1, 4);
   const top = matchedRows[0] ? matchedRows[0].row : {};
   const primaryType = primary ? primary.entry.productType : "life_insurance";
+  const recommendedProduct = primary ? `${primary.entry.carrierLabel} — ${primary.entry.productName}` : "";
+  const altTypes = alternativesRanked.map((x) => x.entry.productType);
+  const altProducts = alternativesRanked.map((x) => `${x.entry.carrierLabel} — ${x.entry.productName}`);
 
   return {
     product_type: primaryType,
-    recommended_product: primary ? `${primary.entry.carrierLabel} — ${primary.entry.productName}` : "",
+    recommended_product: recommendedProduct,
     recommended_category: categoryForProductType(primaryType),
-    alternatives: alternativesRanked.map((x) => x.entry.productType),
-    alternative_products: alternativesRanked.map((x) => `${x.entry.carrierLabel} — ${x.entry.productName}`),
+    alternatives: altTypes,
+    alternative_products: altProducts,
     rationale:
       `RAG-ranked by internal chunk similarity using lead context. ` +
       `Top match carrier=${String(top.carrier || "unknown")}, product=${String(top.product || "unknown")}, ` +
       `category=${String(top.category || "unknown")}, similarity=${Number.isFinite(Number(top.similarity)) ? Number(top.similarity).toFixed(3) : "n/a"}. ` +
       `Risk signal=${risk.level}, intent=${String(context.intent || "unknown")}.`,
+    best_fit_explanation: buildBestFitExplanation(context, risk, recommendedProduct, primaryType, "rag"),
+    alternative_tradeoffs: buildAlternativeTradeoffs(altProducts, altTypes, context && context.priority_type),
   };
 }
 

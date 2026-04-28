@@ -5440,6 +5440,27 @@
         var flags = risk && Array.isArray(risk.flags) ? risk.flags.join(", ") : "";
         var script = sales && sales.script ? String(sales.script) : "";
         var objections = sales && Array.isArray(sales.objection_handlers) ? sales.objection_handlers : [];
+        var bestFitExplanation = rec && rec.best_fit_explanation ? String(rec.best_fit_explanation) : "";
+        var altTradeoffs = rec && Array.isArray(rec.alternative_tradeoffs) ? rec.alternative_tradeoffs : [];
+        var altTradeoffRows = [];
+        altTradeoffs.forEach(function (row) {
+          if (!row || typeof row !== "object") return;
+          var opt = String(row.option || "").trim();
+          if (!opt) return;
+          var pros = Array.isArray(row.pros) ? row.pros.map(function (x) { return String(x || "").trim(); }).filter(Boolean) : [];
+          var cons = Array.isArray(row.cons) ? row.cons.map(function (x) { return String(x || "").trim(); }).filter(Boolean) : [];
+          altTradeoffRows.push(
+            '<li><strong>' +
+              escHtml(opt) +
+              ":</strong> " +
+              '<span style="color:#b7e4c7">Pros</span> ' +
+              escHtml(pros.join(" | ") || "N/A") +
+              " · " +
+              '<span style="color:#ffb3b3">Cons</span> ' +
+              escHtml(cons.join(" | ") || "N/A") +
+              "</li>"
+          );
+        });
         var recCarriers =
           rec && rec.carrier_guidance && Array.isArray(rec.carrier_guidance.recommended)
             ? rec.carrier_guidance.recommended
@@ -5523,6 +5544,14 @@
           escHtml(riskLevel) +
           (flags ? " — " + escHtml(flags) : "") +
           "</div></div>" +
+          '<div class="meta-card" style="grid-column:1 / -1"><label>Why this is the best fit</label><div style="margin-top:6px;white-space:pre-wrap">' +
+          escHtml(bestFitExplanation || rec.rationale || "") +
+          "</div></div>" +
+          '<div class="meta-card" style="grid-column:1 / -1"><label>Alternative options: pros and cons</label>' +
+          (altTradeoffRows.length
+            ? '<ul style="margin:8px 0 0 18px">' + altTradeoffRows.join("") + "</ul>"
+            : '<div class="small-note" style="margin-top:6px">Alternatives will include tradeoffs as they become available.</div>') +
+          "</div>" +
           '<div class="meta-card" style="grid-column:1 / -1"><label>Rationale</label><div style="margin-top:6px;white-space:pre-wrap">' +
           escHtml(rec.rationale || "") +
           "</div></div>" +
