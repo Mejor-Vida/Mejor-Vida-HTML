@@ -323,6 +323,10 @@
       max-width: 138px;
       text-align: center;
     }
+    #ps-run-btn {
+      font-size: 0.74rem;
+      line-height: 1.1;
+    }
     .ps-head-actions #ps-status {
       margin: 0;
       white-space: nowrap;
@@ -330,22 +334,221 @@
     #ps-chat-log {
       min-height: 50vh;
       max-height: 65vh;
-      font-size: 0.97rem;
-      line-height: 1.45;
+      font-size: 1.14rem;
+      line-height: 1.5;
       color: #eef4ff;
     }
     #ps-chat-log .ps-ai-line {
-      margin: 0 0 10px;
+      margin: 0 0 14px;
       color: #eef4ff;
-      white-space: pre-wrap;
+      white-space: normal;
+    }
+    #ps-chat-log .ps-ai-line .ps-chat-text {
+      white-space: normal;
+      font-size: 1.14rem;
+    }
+    #ps-chat-log .ps-chat-prose {
+      color: #eef4ff;
+      margin: 0 0 8px;
+      line-height: 1.55;
+      font-size: 1.14rem;
+    }
+    #ps-chat-log ol.ps-chat-examples {
+      list-style: decimal;
+      list-style-position: outside;
+      margin: 10px 0 12px;
+      padding: 0 0 0 1.65em;
+      background: none;
+      border: none;
+      border-radius: 0;
+      box-shadow: none;
+      font-size: 0.95rem;
+    }
+    #ps-chat-log ol.ps-chat-examples li {
+      color: #f5e08a;
+      font-weight: 500;
+      font-size: 0.95rem;
+      padding: 5px 0 5px 0.35em;
+      margin: 0;
+      border: none;
+      line-height: 1.4;
+    }
+    #ps-chat-log ol.ps-chat-examples li::marker {
+      color: #ffd54f;
+      font-weight: 600;
     }
     #ps-chat-log .ps-ai-label {
-      margin: 0 0 4px;
-      font-size: 0.75rem;
+      margin: 0 0 6px;
+      font-size: 0.82rem;
       font-weight: 700;
       letter-spacing: 0.04em;
       text-transform: uppercase;
       color: #9db6ea;
+    }
+    #ps-chat-log .msg.user {
+      font-size: 1.14rem;
+      line-height: 1.5;
+    }
+    #ps-chat-input {
+      font-size: 1.08rem;
+    }
+    #pane-product-selector .ps-chat-compose-row {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      gap: 10px;
+      align-items: center;
+      margin-top: 8px;
+    }
+    #pane-product-selector #ps-chat-back-btn {
+      font-size: 0.92rem;
+      white-space: nowrap;
+    }
+    #ps-chat-log .ps-coverage-chart,
+    #ps-chat-log .ps-budget-chart {
+      margin: 12px 0 14px;
+      padding: 10px 10px 12px;
+      border: 1px solid rgba(110, 168, 255, 0.35);
+      border-radius: 8px;
+      background: rgba(10, 22, 44, 0.92);
+      overflow-x: auto;
+    }
+    #ps-chat-log .ps-coverage-chart-grid {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(52px, 1fr));
+      gap: 4px 3px;
+      min-width: min(100%, 720px);
+    }
+    #ps-chat-log .ps-budget-chart-grid {
+      display: grid;
+      grid-template-columns: repeat(11, minmax(48px, 1fr));
+      gap: 4px 3px;
+      min-width: min(100%, 640px);
+    }
+    #ps-chat-log .ps-cov-lane {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      color: #9db6ea;
+      text-align: center;
+      padding: 6px 2px 8px;
+      line-height: 1.25;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    #ps-chat-log .ps-cov-amt {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: #f5e08a;
+      text-align: center;
+      padding: 8px 2px 6px;
+      line-height: 1.2;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 5px;
+      background: rgba(6, 14, 30, 0.55);
+      word-break: break-word;
+    }
+    #ps-chat-log .ps-cov-amt-label {
+      display: block;
+    }
+    #ps-chat-log .ps-cov-amt-idx {
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: #c8dcff;
+      letter-spacing: 0.06em;
+      line-height: 1.2;
+    }
+    #ps-chat-log .ps-budget-chart .ps-cov-amt-idx {
+      font-size: 1.05rem;
+      padding-top: 2px;
+    }
+    #ps-chat-log .ps-goal-chart {
+      margin: 12px 0 14px;
+      padding: 10px 10px 12px;
+      border: 1px solid rgba(110, 168, 255, 0.35);
+      border-radius: 8px;
+      background: rgba(10, 22, 44, 0.92);
+      overflow-x: auto;
+    }
+    #ps-chat-log .ps-goal-chart-row {
+      display: flex;
+      flex-direction: row;
+      align-items: stretch;
+      gap: 8px 6px;
+      min-width: min(100%, 920px);
+    }
+    #ps-chat-log .ps-goal-col {
+      flex: 1 1 0;
+      min-width: 118px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    #ps-chat-log .ps-goal-product {
+      font-size: 0.86rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      color: #9db6ea;
+      text-align: center;
+      padding: 9px 6px 11px;
+      line-height: 1.28;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 6px 6px 0 0;
+      background: rgba(20, 40, 72, 0.72);
+    }
+    #ps-chat-log .ps-goal-col-body {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      flex: 1;
+    }
+    #ps-chat-log .ps-goal-chart .ps-goal-col-body .ps-cov-amt {
+      padding: 10px 6px 8px;
+      font-size: 0.86rem;
+      font-weight: 600;
+      line-height: 1.28;
+      gap: 5px;
+    }
+    #ps-chat-log .ps-goal-chart .ps-cov-amt-label {
+      font-size: 0.88rem;
+      font-weight: 600;
+    }
+    #ps-chat-log .ps-goal-chart .ps-cov-amt-idx {
+      font-size: 1rem;
+      font-weight: 800;
+    }
+    #ps-chat-log .ps-major-conditions-chart {
+      margin: 10px 0 14px;
+      padding: 10px 10px 12px;
+      border: 1px solid rgba(255, 213, 79, 0.38);
+      border-radius: 8px;
+      background: rgba(33, 27, 0, 0.28);
+    }
+    #ps-chat-log .ps-major-conditions-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(140px, 1fr));
+      gap: 8px;
+    }
+    #ps-chat-log .ps-major-conditions-item {
+      color: #ffd54f;
+      font-size: 0.88rem;
+      font-weight: 700;
+      padding: 2px 4px;
+      line-height: 1.25;
+      text-align: center;
+    }
+    @media (max-width: 900px) {
+      #ps-chat-log .ps-major-conditions-grid {
+        grid-template-columns: repeat(2, minmax(130px, 1fr));
+      }
+    }
+    @media (max-width: 560px) {
+      #ps-chat-log .ps-major-conditions-grid {
+        grid-template-columns: 1fr;
+      }
     }
     @media (max-width: 1200px) {
       #product-selector-form .ps-grid-2 {
@@ -531,6 +734,32 @@
       font-weight: 800;
       background: rgba(205, 166, 67, 0.42);
       border-bottom: 1px solid rgba(131, 99, 29, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    #lead-profile-form .lp-health-accordion > summary .lp-block-none {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 2px 7px;
+      border-radius: 999px;
+      border: 1px solid rgba(23, 40, 69, 0.45);
+      background: rgba(16, 38, 72, 0.08);
+      font-size: 0.74rem;
+      font-weight: 700;
+      color: #111827;
+      user-select: none;
+      white-space: nowrap;
+    }
+    #lead-profile-form .lp-health-accordion > summary .lp-block-none input[type="checkbox"] {
+      width: 13px;
+      height: 13px;
+      min-width: 13px;
+      min-height: 13px;
+      margin: 0;
+      accent-color: #224b8f;
     }
     #lead-profile-form .lp-health-accordion > summary::-webkit-details-marker {
       display: none;
@@ -685,8 +914,11 @@
       min-height: min(100%, 720px);
       width: 100%;
     }
-    /* Lead Profile needs visible overflow so sticky header can pin while pane scrolls. */
+    /* Lead Profile/Product Selector need visible overflow so sticky headers can pin while pane scrolls. */
     #pane-lead-profile .compose-panel {
+      overflow: visible;
+    }
+    #pane-product-selector .compose-panel {
       overflow: visible;
     }
     /* Any compose-style tool body (Compose, Lead Profile, Product Selector) */
@@ -1630,10 +1862,6 @@
                   <section class="lp-section">
                   <div class="lp-section-bar lp-with-right">
                     <span>3. Health Qualification (required for underwriting, secure)</span>
-                    <label class="lp-bar-right" title="Check only when all health items in this section are confirmed as none.">
-                      <input id="lp-phi-none-reported" type="checkbox" />
-                      None in this section
-                    </label>
                   </div>
                   <div class="meta-grid lp-health-grid">
                     <div id="lp-phi-block" class="meta-card" style="grid-column: 1 / -1">
@@ -1641,7 +1869,7 @@
                       <div class="lp-health-columns">
                         <div class="lp-health-col">
                           <details class="lp-health-accordion" open>
-                            <summary>Block A — Instant Disqualifiers</summary>
+                            <summary><span>Block A — Instant Disqualifiers</span><label class="lp-bar-right lp-block-none" title="Check only when all items in this block are confirmed none."><input id="lp-phi-block-a-none" type="checkbox" />None</label></summary>
                             <div class="lp-health-accordion-body">
                               <label class="lp-health-check"><input id="lp-phi-terminal-illness" type="checkbox" /> Terminal illness <span class="lp-tip-trigger" data-tip="Often routes directly to guaranteed issue options.">i</span></label>
                               <label class="lp-health-check"><input id="lp-phi-aids-hiv" type="checkbox" /> AIDS / HIV <span class="lp-tip-trigger" data-tip="Carrier eligibility varies and often needs specialized routing.">i</span></label>
@@ -1650,7 +1878,7 @@
                           </details>
 
                           <details class="lp-health-accordion">
-                            <summary>Block B — Major Health Events</summary>
+                            <summary><span>Block B — Major Health Events</span><label class="lp-bar-right lp-block-none" title="Check only when all items in this block are confirmed none."><input id="lp-phi-block-b-none" type="checkbox" />None</label></summary>
                             <div class="lp-health-accordion-body">
                               <label class="lp-health-check"><input id="lp-phi-heart-event-recent" type="checkbox" /> Heart event in last 2 years <span class="lp-tip-trigger" data-tip="Recent major cardiac/neuro events can change approval class.">i</span></label>
                               <div class="lp-health-field" data-visible-when="heart_event_recent">
@@ -1694,7 +1922,7 @@
                           </details>
 
                           <details class="lp-health-accordion">
-                            <summary>Block C — Chronic Conditions</summary>
+                            <summary><span>Block C — Chronic Conditions</span><label class="lp-bar-right lp-block-none" title="Check only when all items in this block are confirmed none."><input id="lp-phi-block-c-none" type="checkbox" />None</label></summary>
                             <div class="lp-health-accordion-body">
                               <label class="lp-health-check"><input id="lp-phi-diabetes" type="checkbox" /> Diabetes <span class="lp-tip-trigger" data-tip="Control and complications impact underwriting class.">i</span></label>
                               <div class="lp-health-field" data-visible-when="diabetes">
@@ -1728,7 +1956,7 @@
                           </details>
 
                           <details class="lp-health-accordion">
-                            <summary>Block D — Functional Status</summary>
+                            <summary><span>Block D — Functional Status</span><label class="lp-bar-right lp-block-none" title="Check only when all items in this block are confirmed none."><input id="lp-phi-block-d-none" type="checkbox" />None</label></summary>
                             <div class="lp-health-accordion-body">
                               <label class="lp-health-check"><input id="lp-phi-nursing-home-resident" type="checkbox" /> Nursing home resident <span class="lp-tip-trigger" data-tip="Typically routes to guaranteed issue lanes.">i</span></label>
                               <label class="lp-health-check"><input id="lp-phi-wheelchair-bedridden" type="checkbox" /> Wheelchair / bedridden <span class="lp-tip-trigger" data-tip="Functional limits are major underwriting signals.">i</span></label>
@@ -1737,7 +1965,7 @@
                           </details>
 
                           <details class="lp-health-accordion">
-                            <summary>Block E — Recent Medical Activity</summary>
+                            <summary><span>Block E — Recent Medical Activity</span><label class="lp-bar-right lp-block-none" title="Check only when all items in this block are confirmed none."><input id="lp-phi-block-e-none" type="checkbox" />None</label></summary>
                             <div class="lp-health-accordion-body">
                               <label class="lp-health-check"><input id="lp-phi-hospitalized-recent" type="checkbox" /> Hospitalized in last 90 days <span class="lp-tip-trigger" data-tip="Very recent hospitalization can cause temporary hold or tier downgrade.">i</span></label>
                               <div class="lp-health-field" data-visible-when="hospitalized_recent">
@@ -1752,7 +1980,7 @@
 
                         <div class="lp-health-col">
                           <details class="lp-health-accordion">
-                            <summary>Stage 3 — Dynamic Follow-ups</summary>
+                            <summary><span>Stage 3 — Dynamic Follow-ups</span><label class="lp-bar-right lp-block-none" title="Check only when all items in this block are confirmed none."><input id="lp-phi-block-stage3-none" type="checkbox" />None</label></summary>
                             <div class="lp-health-accordion-body">
                               <div class="lp-followup-row">
                                 <label class="lp-health-check"><input id="lp-phi-atrial-fibrillation" type="checkbox" /> Atrial fibrillation</label>
@@ -2095,7 +2323,7 @@
               <div class="actions">
                 <button id="ps-new-btn" type="button" class="secondary" data-help="Clears selector chat/session answers for this lead and starts over from question one.">New Chat</button>
                 <button id="ps-save-btn" type="button" class="secondary" data-help="Saves the current Product Selector session for this lead.">Save</button>
-                <button id="ps-run-btn" type="button" data-help="Rebuilds recommendation from current session data.">Recommend</button>
+                <button id="ps-run-btn" type="button" data-help="Rebuilds recommendation from current session data.">Product Recommendation</button>
                 <button id="ps-sync-to-profile-btn" type="button" class="secondary" data-help="Pushes selected coverage/intent fields to Lead Profile.">Push to Profile</button>
               </div>
               <div id="ps-status" class="small-note"></div>
@@ -2247,8 +2475,16 @@
                   <div class="meta-grid">
                     <div class="meta-card" style="grid-column:1 / -1">
                       <label>Selector chat (strategy questions only)</label>
-                      <div id="ps-chat-log" class="chat-log" style="border:1px solid var(--border); border-radius:10px; padding:8px; margin-top:6px; background:rgba(10,20,39,.45)"></div>
-                      <div style="display:grid; grid-template-columns:1fr auto; gap:8px; margin-top:8px">
+                      <div id="ps-chat-log" class="chat-log" style="border:1px solid var(--border); border-radius:8px; padding:12px 14px; margin-top:6px; background:rgba(10,20,39,.35)"></div>
+                      <div class="ps-chat-compose-row">
+                        <button
+                          id="ps-chat-back-btn"
+                          type="button"
+                          class="secondary"
+                          data-help="Undo your last answer in the guided flow and return to the previous question (after the goal step)."
+                        >
+                          ← Back
+                        </button>
                         <input id="ps-chat-input" type="text" placeholder="Type what the client said or ask the AI how to guide next…" />
                         <button id="ps-chat-send-btn" type="button" class="secondary">Send</button>
                       </div>
@@ -3583,7 +3819,6 @@
       }
 
       var LP_PHI_CHECKBOX_MAP = [
-        ["lp-phi-none-reported", "health_none_reported"],
         ["lp-phi-terminal-illness", "terminal_illness"],
         ["lp-phi-aids-hiv", "aids_hiv"],
         ["lp-phi-organ-transplant", "organ_transplant"],
@@ -3629,6 +3864,84 @@
         ["lp-phi-anxiety", "anxiety"],
         ["lp-phi-anxiety-treated", "anxiety_treated"],
       ];
+      var LP_PHI_BLOCK_NONE_MAP = [
+        { noneId: "lp-phi-block-a-none", phiKey: "health_block_a_none", checkboxKeys: ["terminal_illness", "aids_hiv", "organ_transplant"], textKeys: [] },
+        {
+          noneId: "lp-phi-block-b-none",
+          phiKey: "health_block_b_none",
+          checkboxKeys: [
+            "heart_event_recent",
+            "heart_attack_history",
+            "congestive_heart_failure",
+            "cancer_active",
+            "cancer_history",
+            "copd_diagnosed",
+            "oxygen_use",
+            "dementia_cognitive",
+          ],
+          textKeys: ["heart_event_date", "heart_event_type", "cancer_type", "cancer_treatment_status", "cancer_history_type"],
+        },
+        {
+          noneId: "lp-phi-block-c-none",
+          phiKey: "health_block_c_none",
+          checkboxKeys: [
+            "diabetes",
+            "diabetes_insulin",
+            "diabetes_complications",
+            "kidney_disease",
+            "dialysis",
+            "liver_disease",
+            "neurological_condition",
+            "mental_health_hospitalized",
+            "drug_alcohol_treatment",
+          ],
+          textKeys: ["diabetes_type", "neurological_type"],
+        },
+        { noneId: "lp-phi-block-d-none", phiKey: "health_block_d_none", checkboxKeys: ["nursing_home_resident", "wheelchair_bedridden", "adl_assistance"], textKeys: [] },
+        {
+          noneId: "lp-phi-block-e-none",
+          phiKey: "health_block_e_none",
+          checkboxKeys: ["hospitalized_recent", "awaiting_surgery", "undiagnosed_symptoms"],
+          textKeys: ["hospitalization_reason"],
+        },
+        {
+          noneId: "lp-phi-block-stage3-none",
+          phiKey: "health_block_stage3_none",
+          checkboxKeys: [
+            "atrial_fibrillation",
+            "afib_controlled",
+            "pacemaker",
+            "blood_thinner_use",
+            "coronary_artery_disease",
+            "stents_placed",
+            "stents_recent",
+            "high_blood_pressure",
+            "bp_controlled",
+            "cholesterol_high",
+            "cholesterol_medication",
+            "cholesterol_controlled",
+            "sleep_apnea",
+            "cpap_use",
+            "depression",
+            "depression_treated",
+            "anxiety",
+            "anxiety_treated",
+          ],
+          textKeys: [],
+        },
+      ];
+      var LP_PHI_KEY_TO_BLOCK_NONE = (function () {
+        var out = {};
+        LP_PHI_BLOCK_NONE_MAP.forEach(function (block) {
+          (block.checkboxKeys || []).forEach(function (k) {
+            out[k] = block.noneId;
+          });
+          (block.textKeys || []).forEach(function (k) {
+            out[k] = block.noneId;
+          });
+        });
+        return out;
+      })();
       var LP_PHI_TEXT_MAP = [
         ["lp-phi-heart-event-date", "heart_event_date"],
         ["lp-phi-heart-event-type", "heart_event_type"],
@@ -4039,6 +4352,10 @@
           var box = document.getElementById(entry[0]);
           if (box) box.checked = !!phi[entry[1]];
         });
+        LP_PHI_BLOCK_NONE_MAP.forEach(function (block) {
+          var noneBox = document.getElementById(block.noneId);
+          if (noneBox) noneBox.checked = !!phi[block.phiKey];
+        });
         LP_PHI_TEXT_MAP.forEach(function (entry) {
           setv(entry[0], phi[entry[1]]);
         });
@@ -4117,35 +4434,55 @@
       }
 
       function wireLeadProfileHealthNoneToggle() {
-        var noneBox = document.getElementById("lp-phi-none-reported");
-        var phiBlock = document.getElementById("lp-phi-block");
-        if (!noneBox || !phiBlock || noneBox.getAttribute("data-none-wired")) return;
-        noneBox.setAttribute("data-none-wired", "1");
-        noneBox.addEventListener("change", function () {
-          if (!noneBox.checked) {
-            scheduleLeadProfileDirtyCheck();
-            return;
+        LP_PHI_BLOCK_NONE_MAP.forEach(function (block) {
+          var noneBox = document.getElementById(block.noneId);
+          if (!noneBox || noneBox.getAttribute("data-none-wired")) return;
+          noneBox.setAttribute("data-none-wired", "1");
+          var acc = noneBox.closest(".lp-health-accordion");
+          var body = acc ? acc.querySelector(".lp-health-accordion-body") : null;
+          if (!body) return;
+
+          var stopSummaryToggle = function (e) {
+            e.stopPropagation();
+          };
+          noneBox.addEventListener("click", stopSummaryToggle);
+          noneBox.addEventListener("mousedown", stopSummaryToggle);
+          var noneLabel = noneBox.closest("label");
+          if (noneLabel) {
+            noneLabel.addEventListener("click", stopSummaryToggle);
+            noneLabel.addEventListener("mousedown", stopSummaryToggle);
           }
-          var nodes = phiBlock.querySelectorAll("input, select, textarea");
-          Array.prototype.forEach.call(nodes, function (node) {
-            if (!node || node === noneBox) return;
-            if (node.type === "checkbox") node.checked = false;
-            else if (node.tagName === "SELECT" || node.tagName === "TEXTAREA" || node.tagName === "INPUT") node.value = "";
+
+          noneBox.addEventListener("change", function () {
+            if (!noneBox.checked) {
+              scheduleLeadProfileDirtyCheck();
+              return;
+            }
+            var nodes = body.querySelectorAll("input, select, textarea");
+            Array.prototype.forEach.call(nodes, function (node) {
+              if (!node || node === noneBox) return;
+              if (node.type === "checkbox") node.checked = false;
+              else if (node.tagName === "SELECT" || node.tagName === "TEXTAREA" || node.tagName === "INPUT") node.value = "";
+            });
+            if (block.noneId === "lp-phi-block-stage3-none") setMedicationList([]);
+            syncLeadProfileHealthConditionalFields();
+            scheduleLeadProfileDirtyCheck();
           });
-          setMedicationList([]);
-          syncLeadProfileHealthConditionalFields();
-          scheduleLeadProfileDirtyCheck();
+
+          body.addEventListener("change", function (e) {
+            var t = e && e.target ? e.target : null;
+            if (!t || t === noneBox || !noneBox.checked) return;
+            if (t.type === "checkbox" && t.checked) {
+              noneBox.checked = false;
+              scheduleLeadProfileDirtyCheck();
+              return;
+            }
+            if (t.type !== "checkbox" && String(t.value || "").trim()) {
+              noneBox.checked = false;
+              scheduleLeadProfileDirtyCheck();
+            }
+          });
         });
-        var clearNoneIfAnyChecked = function (e) {
-          var t = e && e.target ? e.target : null;
-          if (!t || t === noneBox) return;
-          if (!noneBox.checked) return;
-          if (t.type === "checkbox" && t.checked) {
-            noneBox.checked = false;
-            scheduleLeadProfileDirtyCheck();
-          }
-        };
-        phiBlock.addEventListener("change", clearNoneIfAnyChecked);
       }
 
       function serializeLeadProfileFromForm() {
@@ -4193,13 +4530,31 @@
           assigned_agent: String((document.getElementById("lp-assigned-agent") && document.getElementById("lp-assigned-agent").value) || "").trim(),
           phi: (function () {
             var out = {};
+            var noneByBlockId = {};
+            LP_PHI_BLOCK_NONE_MAP.forEach(function (block) {
+              var node = document.getElementById(block.noneId);
+              var checked = !!(node && node.checked);
+              noneByBlockId[block.noneId] = checked;
+              out[block.phiKey] = checked;
+            });
             LP_PHI_CHECKBOX_MAP.forEach(function (entry) {
-              out[entry[1]] = !!(document.getElementById(entry[0]) && document.getElementById(entry[0]).checked);
+              var key = entry[1];
+              var box = document.getElementById(entry[0]);
+              var isChecked = !!(box && box.checked);
+              var noneId = LP_PHI_KEY_TO_BLOCK_NONE[key];
+              var noneChecked = noneId ? !!noneByBlockId[noneId] : false;
+              out[key] = noneChecked ? false : isChecked ? true : null;
             });
             LP_PHI_TEXT_MAP.forEach(function (entry) {
               var node = document.getElementById(entry[0]);
               var raw = node ? node.value : "";
-              out[entry[1]] = String(raw || "").trim();
+              var textKey = entry[1];
+              var noneId = LP_PHI_KEY_TO_BLOCK_NONE[textKey];
+              var noneChecked = noneId ? !!noneByBlockId[noneId] : false;
+              out[textKey] = noneChecked ? "" : String(raw || "").trim();
+            });
+            out.health_none_reported = LP_PHI_BLOCK_NONE_MAP.every(function (block) {
+              return !!noneByBlockId[block.noneId];
             });
             out.current_medications = leadProfileMedicationList.slice();
             out.medication_count = leadProfileMedicationList.length;
@@ -4639,6 +4994,7 @@
           chatLog: document.getElementById("ps-chat-log"),
           chatInput: document.getElementById("ps-chat-input"),
           chatSendBtn: document.getElementById("ps-chat-send-btn"),
+          chatBackBtn: document.getElementById("ps-chat-back-btn"),
           status: document.getElementById("ps-status"),
           output: document.getElementById("ps-output"),
           syncToProfileBtn: document.getElementById("ps-sync-to-profile-btn"),
@@ -4739,63 +5095,311 @@
         return "";
       }
 
+      function escapeHtmlPsChat(s) {
+        return String(s || "")
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;");
+      }
+
+      /** True if line is a dash-bullet or numbered list item (1. text). */
+      function isPsChatListItemLine(trimmed) {
+        return /^-\s/.test(trimmed) || /^\d+\.\s/.test(trimmed);
+      }
+
+      function psChatListItemBody(trimmed) {
+        if (/^-\s/.test(trimmed)) return trimmed.replace(/^-\s+/, "");
+        return trimmed.replace(/^\d+\.\s+/, "");
+      }
+
+      var PS_COVERAGE_CHART_SENTINEL = "<<<PS_COVERAGE_AMOUNT_ROW>>>";
+      var PS_BUDGET_CHART_SENTINEL = "<<<PS_BUDGET_AMOUNT_ROW>>>";
+      var PS_GOAL_TABLE_SENTINEL = "<<<PS_COVERAGE_GOAL_TABLE>>>";
+      var PS_MAJOR_CONDITIONS_TABLE_SENTINEL = "<<<PS_MAJOR_CONDITIONS_TABLE>>>";
+
+      /** Product column headers; pick numbers match API coverageGoalOrderedKeys() (1–8). */
+      function renderCoverageGoalTableHtml() {
+        var columns = [
+          { product: "Final expense", goals: [{ desc: "Funeral and burial costs", n: 1 }] },
+          { product: "Term life", goals: [{ desc: "Replace lost income", n: 2 }, { desc: "Pay off debts", n: 4 }] },
+          { product: "Mortgage term life", goals: [{ desc: "Pay off mortgage", n: 3 }] },
+          { product: "Permanent life", goals: [{ desc: "Leave inheritance behind", n: 5 }] },
+          { product: "Business life", goals: [{ desc: "Protect the business", n: 6 }] },
+          { product: "Juvenile life", goals: [{ desc: "Coverage for children", n: 7 }] },
+          { product: "Type TBD", goals: [{ desc: "Still figuring it out", n: 8 }] },
+        ];
+        var h =
+          '<div class="ps-goal-chart" role="region" aria-label="Coverage goals by typical product type">';
+        h += '<div class="ps-goal-chart-row">';
+        for (var ci = 0; ci < columns.length; ci++) {
+          var col = columns[ci];
+          h += '<div class="ps-goal-col">';
+          h += '<div class="ps-goal-product">' + escapeHtmlPsChat(col.product) + "</div>";
+          h += '<div class="ps-goal-col-body">';
+          for (var gi = 0; gi < col.goals.length; gi++) {
+            var g = col.goals[gi];
+            h +=
+              '<div class="ps-cov-amt">' +
+              '<span class="ps-cov-amt-label">' +
+              escapeHtmlPsChat(g.desc) +
+              "</span>" +
+              '<span class="ps-cov-amt-idx" aria-hidden="true">' +
+              g.n +
+              "</span></div>";
+          }
+          h += "</div></div>";
+        }
+        h += "</div></div>";
+        return h;
+      }
+
+      /** Same order as API BUDGET_MONTHLY_MENU / Lead Profile #lp-monthly-budget amounts + Not sure. */
+      function renderBudgetAmountChartHtml() {
+        var amounts = [
+          { label: "$30" },
+          { label: "$60" },
+          { label: "$100" },
+          { label: "$150" },
+          { label: "$200" },
+          { label: "$300" },
+          { label: "$400" },
+          { label: "$500" },
+          { label: "$600" },
+          { label: "$1,000" },
+          { label: "Not sure" },
+        ];
+        var h =
+          '<div class="ps-budget-chart" role="region" aria-label="Typical monthly budget amounts">';
+        h += '<div class="ps-budget-chart-grid">';
+        for (var ai = 0; ai < amounts.length; ai++) {
+          var pickNum = ai + 1;
+          h +=
+            '<div class="ps-cov-amt" style="grid-column: span 1">' +
+            '<span class="ps-cov-amt-label">' +
+            escapeHtmlPsChat(amounts[ai].label) +
+            "</span>" +
+            '<span class="ps-cov-amt-idx" aria-hidden="true">' +
+            pickNum +
+            "</span></div>";
+        }
+        h += "</div></div>";
+        return h;
+      }
+
+      /** Same order/labels as Lead Profile #lp-desired-coverage (values + Other). */
+      function renderCoverageAmountChartHtml() {
+        var amounts = [
+          { label: "5,000" },
+          { label: "10,000" },
+          { label: "15,000" },
+          { label: "20,000" },
+          { label: "100,000" },
+          { label: "200,000" },
+          { label: "500,000" },
+          { label: "750,000" },
+          { label: "1,000,000" },
+          { label: "1,500,000" },
+          { label: "2,000,000" },
+          { label: "Other" },
+        ];
+        var h =
+          '<div class="ps-coverage-chart" role="region" aria-label="Typical coverage face amounts">';
+        h += '<div class="ps-coverage-chart-grid">';
+        for (var ai = 0; ai < amounts.length; ai++) {
+          var pickNum = ai + 1;
+          h +=
+            '<div class="ps-cov-amt" style="grid-column: span 1">' +
+            '<span class="ps-cov-amt-label">' +
+            escapeHtmlPsChat(amounts[ai].label) +
+            "</span>" +
+            '<span class="ps-cov-amt-idx" aria-hidden="true">' +
+            pickNum +
+            "</span></div>";
+        }
+        h += "</div></div>";
+        return h;
+      }
+
+      function renderMajorConditionsTableHtml() {
+        var examples = [
+          "High blood pressure",
+          "High cholesterol",
+          "Sleep apnea",
+          "Diabetes",
+          "Depression",
+          "Anxiety",
+          "Heart rhythm issues",
+          "Kidney/liver disease",
+          "COPD",
+          "Neurological conditions",
+        ];
+        var h =
+          '<div class="ps-major-conditions-chart" role="region" aria-label="Examples of medical conditions">';
+        h += '<div class="ps-major-conditions-grid">';
+        for (var i = 0; i < examples.length; i++) {
+          h += '<div class="ps-major-conditions-item">' + escapeHtmlPsChat(examples[i]) + "</div>";
+        }
+        h += "</div></div>";
+        return h;
+      }
+
+      /** Turn assistant plain text into HTML: prose + plain <ol> for list lines (dash or 1. style). */
+      function formatProductSelectorAssistantHtml(raw) {
+        var lines = String(raw || "").split("\n");
+        var segments = [];
+        var i = 0;
+        var n = lines.length;
+        while (i < n) {
+          var t = lines[i].trim();
+          if (isPsChatListItemLine(t)) {
+            var items = [];
+            while (i < n) {
+              var L = lines[i];
+              var T = L.trim();
+              if (isPsChatListItemLine(T)) {
+                items.push(psChatListItemBody(T));
+                i++;
+                continue;
+              }
+              if (T === "") {
+                var j = i + 1;
+                while (j < n && lines[j].trim() === "") {
+                  j++;
+                }
+                if (j < n && isPsChatListItemLine(lines[j].trim())) {
+                  i++;
+                  continue;
+                }
+              }
+              break;
+            }
+            if (items.length) {
+              segments.push({ type: "ol", items: items });
+            }
+            continue;
+          }
+          var start = i;
+          while (i < n && !isPsChatListItemLine(lines[i].trim())) {
+            i++;
+          }
+          var block = lines.slice(start, i).join("\n");
+          if (block.trim()) {
+            segments.push({ type: "p", text: block });
+          }
+        }
+        if (!segments.length) {
+          return escapeHtmlPsChat(raw).replace(/\n/g, "<br>");
+        }
+        var html = "";
+        function appendProseWithBudgetOnly(chunk) {
+          var c = String(chunk || "");
+          if (c.indexOf(PS_BUDGET_CHART_SENTINEL) === -1) {
+            if (c.trim()) {
+              html += '<div class="ps-chat-prose">' + escapeHtmlPsChat(c).replace(/\n/g, "<br>") + "</div>";
+            }
+            return;
+          }
+          var budBits = c.split(PS_BUDGET_CHART_SENTINEL);
+          for (var bj = 0; bj < budBits.length; bj++) {
+            if (String(budBits[bj] || "").trim()) {
+              html += '<div class="ps-chat-prose">' + escapeHtmlPsChat(budBits[bj]).replace(/\n/g, "<br>") + "</div>";
+            }
+            if (bj < budBits.length - 1) {
+              html += renderBudgetAmountChartHtml();
+            }
+          }
+        }
+        function appendProseWithGoalThenBudget(chunk) {
+          var c = String(chunk || "");
+          if (c.indexOf(PS_GOAL_TABLE_SENTINEL) === -1) {
+            appendProseWithBudgetOnly(c);
+            return;
+          }
+          var goalBits = c.split(PS_GOAL_TABLE_SENTINEL);
+          for (var gj = 0; gj < goalBits.length; gj++) {
+            appendProseWithBudgetOnly(goalBits[gj]);
+            if (gj < goalBits.length - 1) {
+              html += renderCoverageGoalTableHtml();
+            }
+          }
+        }
+        function appendProseWithMajorThenGoalThenBudget(chunk) {
+          var c = String(chunk || "");
+          if (c.indexOf(PS_MAJOR_CONDITIONS_TABLE_SENTINEL) === -1) {
+            appendProseWithGoalThenBudget(c);
+            return;
+          }
+          var majorBits = c.split(PS_MAJOR_CONDITIONS_TABLE_SENTINEL);
+          for (var mj = 0; mj < majorBits.length; mj++) {
+            appendProseWithGoalThenBudget(majorBits[mj]);
+            if (mj < majorBits.length - 1) {
+              html += renderMajorConditionsTableHtml();
+            }
+          }
+        }
+        segments.forEach(function (seg) {
+          if (seg.type === "p") {
+            var st = String(seg.text || "");
+            if (st.indexOf(PS_COVERAGE_CHART_SENTINEL) === -1) {
+              appendProseWithMajorThenGoalThenBudget(st);
+            } else {
+              var covBits = st.split(PS_COVERAGE_CHART_SENTINEL);
+              for (var ci = 0; ci < covBits.length; ci++) {
+                appendProseWithMajorThenGoalThenBudget(covBits[ci]);
+                if (ci < covBits.length - 1) {
+                  html += renderCoverageAmountChartHtml();
+                }
+              }
+            }
+          } else {
+            html += '<ol class="ps-chat-examples" aria-label="Quick examples">';
+            seg.items.forEach(function (item) {
+              html += "<li>" + escapeHtmlPsChat(item) + "</li>";
+            });
+            html += "</ol>";
+          }
+        });
+        return html;
+      }
+
       function renderProductSelectorChat(transcript) {
         var el = getProductSelectorEls();
         if (!el.chatLog) return;
-        var questionOrder = {};
-        [
-          "terminal_illness",
-          "aids_hiv",
-          "organ_transplant",
-          "heart_event_recent",
-          "heart_event_date",
-          "heart_event_type",
-          "cancer_active",
-          "cancer_type",
-          "cancer_treatment_status",
-          "dementia_cognitive",
-          "diabetes",
-          "diabetes_type",
-          "diabetes_insulin",
-          "dialysis",
-          "nursing_home_resident",
-          "adl_assistance",
-          "hospitalized_recent",
-          "hospitalization_reason",
-          "awaiting_surgery",
-          "undiagnosed_symptoms",
-          "atrial_fibrillation",
-          "pacemaker",
-          "blood_thinner_use",
-          "high_blood_pressure",
-          "bp_controlled",
-          "sleep_apnea",
-          "cpap_use",
-          "current_medications",
-          "takes_prescription_medications",
-          "has_major_conditions",
-          "strategy_priority",
-          "graded_benefit_ok",
-          "carrier_preference",
-        ].forEach(function (k, i) {
-          questionOrder[k] = i + 1;
-        });
+        function isQuestionLikeAssistantMessage(text) {
+          var t = String(text || "").trim();
+          if (!t) return false;
+          if (/\?\s*$/.test(t)) return true;
+          if (/about how much coverage are they thinking/i.test(t)) return true;
+          if (/what monthly budget feels comfortable/i.test(t)) return true;
+          if (/what matters most/i.test(t)) return true;
+          if (/is the goal to fully pay off the mortgage/i.test(t)) return true;
+          if (/quick health check/i.test(t)) return true;
+          if (/^saved\.\s*next:/i.test(t)) return true;
+          if (/^let'?s start with the goal\./i.test(t)) return true;
+          if (/^let'?s begin qualification\./i.test(t)) return true;
+          if (/please answer yes or no\./i.test(t)) return true;
+          return false;
+        }
         var items = Array.isArray(transcript) ? transcript : [];
         if (!items.length) {
           el.chatLog.innerHTML = '<div class="q-empty">Guided chat will appear here. The system asks one question at a time.</div>';
           return;
         }
         el.chatLog.innerHTML = "";
+        var questionNumber = 0;
         items.forEach(function (m) {
           if (m.role === "assistant") {
-            var qNum = questionOrder[String(m.key || "")] || null;
+            var isQuestion = isQuestionLikeAssistantMessage(m.content);
+            if (isQuestion) questionNumber += 1;
             var qWrap = document.createElement("div");
             qWrap.className = "ps-ai-line";
             var qLabel = document.createElement("div");
             qLabel.className = "ps-ai-label";
-            qLabel.textContent = qNum ? "Question " + qNum : "System";
+            qLabel.textContent = isQuestion ? "Question " + questionNumber : "System";
             var qText = document.createElement("div");
-            qText.textContent = String(m.content || "");
+            qText.className = "ps-chat-text";
+            qText.innerHTML = formatProductSelectorAssistantHtml(String(m.content || ""));
             qWrap.appendChild(qLabel);
             qWrap.appendChild(qText);
             el.chatLog.appendChild(qWrap);
@@ -4820,6 +5424,15 @@
           return;
         }
         var alt = Array.isArray(rec.alternatives) ? rec.alternatives.join(", ") : "";
+        var altProducts = Array.isArray(rec.alternative_products) ? rec.alternative_products : [];
+        var recName = String(rec.recommended_product || rec.product_type || "-");
+        var isManualReview = /manual review/i.test(recName);
+        var recommendationHeadline = isManualReview
+          ? "Manual review needed before quoting"
+          : "Recommend: " + recName;
+        var recommendationAction = isManualReview
+          ? "No approved catalog match was found. Confirm health details and use carrier underwriting guides before presenting a product."
+          : "Lead with this recommendation, then offer one alternative if needed.";
         var score = conf && conf.score != null ? String(conf.score) : "-";
         var label = conf && conf.label ? String(conf.label) : "-";
         var reason = conf && conf.reason ? String(conf.reason) : "";
@@ -4834,6 +5447,14 @@
         var altCarrierObj =
           rec && rec.carrier_guidance && rec.carrier_guidance.alternatives && typeof rec.carrier_guidance.alternatives === "object"
             ? rec.carrier_guidance.alternatives
+            : {};
+        var carrierProductsRecommended =
+          rec && rec.carrier_products && rec.carrier_products.recommended && typeof rec.carrier_products.recommended === "object"
+            ? rec.carrier_products.recommended
+            : {};
+        var carrierProductsAlternatives =
+          rec && rec.carrier_products && rec.carrier_products.alternatives && typeof rec.carrier_products.alternatives === "object"
+            ? rec.carrier_products.alternatives
             : {};
         var carrierRows = [];
         if (recCarriers.length) {
@@ -4850,12 +5471,46 @@
             "<li><strong>Alternative:</strong> " + escHtml(String(k)) + " → " + escHtml(arr.join(", ")) + "</li>"
           );
         });
+        var productRows = [];
+        Object.keys(carrierProductsRecommended).forEach(function (carrier) {
+          var products = Array.isArray(carrierProductsRecommended[carrier]) ? carrierProductsRecommended[carrier] : [];
+          if (!products.length) return;
+          productRows.push(
+            "<li><strong>Recommended " +
+              escHtml(carrier) +
+              ":</strong> " +
+              escHtml(products.join(", ")) +
+              "</li>"
+          );
+        });
+        Object.keys(carrierProductsAlternatives).forEach(function (altType) {
+          var byCarrier = carrierProductsAlternatives[altType];
+          if (!byCarrier || typeof byCarrier !== "object") return;
+          Object.keys(byCarrier).forEach(function (carrier) {
+            var products = Array.isArray(byCarrier[carrier]) ? byCarrier[carrier] : [];
+            if (!products.length) return;
+            productRows.push(
+              "<li><strong>Alternative " +
+                escHtml(String(altType)) +
+                " · " +
+                escHtml(carrier) +
+                ":</strong> " +
+                escHtml(products.join(", ")) +
+                "</li>"
+            );
+          });
+        });
         el.output.innerHTML =
-          '<div class="meta-card"><label>Recommended product</label><div style="margin-top:6px;font-weight:700">' +
-          escHtml(rec.product_type || "-") +
+          '<div class="meta-card" style="grid-column:1 / -1"><label>Recommendation</label><div style="margin-top:6px;font-weight:700">' +
+          escHtml(recommendationHeadline) +
+          '</div><div class="small-note" style="margin-top:6px">' +
+          escHtml(recommendationAction) +
+          "</div></div>" +
+          '<div class="meta-card"><label>Recommended product line</label><div style="margin-top:6px;font-weight:700">' +
+          escHtml(recName) +
           "</div></div>" +
           '<div class="meta-card"><label>Alternatives</label><div style="margin-top:6px">' +
-          escHtml(alt || "-") +
+          escHtml(altProducts.length ? altProducts.join(", ") : alt || "-") +
           "</div></div>" +
           '<div class="meta-card"><label>Confidence</label><div style="margin-top:6px;font-weight:700">' +
           escHtml(label) +
@@ -4875,6 +5530,11 @@
           (carrierRows.length
             ? '<ul style="margin:8px 0 0 18px">' + carrierRows.join("") + "</ul>"
             : '<div class="small-note" style="margin-top:6px">No clear carrier matches found in current KB chunks for this run.</div>') +
+          "</div>" +
+          '<div class="meta-card" style="grid-column:1 / -1"><label>Carrier products (Mutual of Omaha, American Amicable, Assurity)</label>' +
+          (productRows.length
+            ? '<ul style="margin:8px 0 0 18px">' + productRows.join("") + "</ul>"
+            : '<div class="small-note" style="margin-top:6px">No specific products found for those carriers in the current matched chunks.</div>') +
           "</div>" +
           '<div class="meta-card" style="grid-column:1 / -1"><label>Sales script</label><div style="margin-top:6px;white-space:pre-wrap">' +
           escHtml(script || "") +
@@ -4973,6 +5633,9 @@
               lead_id: lead.id,
               lead_source_table: lead.source_table || "unknown",
               qualification_answers: {},
+              phi_answers: {},
+              reset_phi: true,
+              reset_session: true,
               profile_snapshot: buildProfileSnapshotForSelector(),
               risk_summary: {},
               recommendation: {},
@@ -5070,6 +5733,12 @@
             sendProductSelectorChat();
           });
         }
+        if (el.chatBackBtn && !el.chatBackBtn.getAttribute("data-wired")) {
+          el.chatBackBtn.setAttribute("data-wired", "1");
+          el.chatBackBtn.addEventListener("click", function () {
+            sendProductSelectorGoBack();
+          });
+        }
         if (el.chatInput && !el.chatInput.getAttribute("data-wired")) {
           el.chatInput.setAttribute("data-wired", "1");
           el.chatInput.addEventListener("keydown", function (e) {
@@ -5083,6 +5752,50 @@
 
       async function sendProductSelectorChat() {
         return sendProductSelectorChatCore(false);
+      }
+
+      async function sendProductSelectorGoBack() {
+        var el = getProductSelectorEls();
+        var lead = getSelectedLeadFromList();
+        if (!lead) {
+          if (el.status) el.status.textContent = "Select a lead first.";
+          return;
+        }
+        var answers = productSelectorAnswersFromUi();
+        if (el.chatBackBtn) el.chatBackBtn.disabled = true;
+        if (el.chatSendBtn) el.chatSendBtn.disabled = true;
+        if (el.status) el.status.textContent = "Going back one step…";
+        try {
+          var data = await authedApi(
+            "/api/staff/product-selector",
+            {
+              lead_id: lead.id,
+              lead_source_table: lead.source_table || "unknown",
+              qualification_answers: answers,
+              profile_snapshot: buildProfileSnapshotForSelector(),
+              message: "",
+              go_back: true,
+            },
+            { method: "PATCH" }
+          );
+          productSelectorSession = data && data.session ? data.session : productSelectorSession;
+          if (data && data.qualification_answers) {
+            applyProductSelectorAnswersToUi(data.qualification_answers);
+          }
+          renderProductSelectorOutput(
+            data.recommendation,
+            data.confidence,
+            data.risk_summary || (productSelectorSession && productSelectorSession.risk_summary) || null,
+            data.sales_enablement
+          );
+          renderProductSelectorChat((data.workflow_state && data.workflow_state.stage3_chat) || []);
+          if (el.status) el.status.textContent = "Returned to the previous question.";
+        } catch (e) {
+          if (el.status) el.status.textContent = (e && e.message) || "Could not go back.";
+        } finally {
+          if (el.chatBackBtn) el.chatBackBtn.disabled = false;
+          if (el.chatSendBtn) el.chatSendBtn.disabled = false;
+        }
       }
 
       async function sendProductSelectorChatCore(isAutoStart) {
@@ -5100,6 +5813,7 @@
           el.chatSendBtn.disabled = true;
           el.chatSendBtn.textContent = "Sending…";
         }
+        if (el.chatBackBtn) el.chatBackBtn.disabled = true;
         if (el.status) el.status.textContent = "Guided flow is determining next question…";
         try {
           var data = await authedApi(
@@ -5133,6 +5847,7 @@
             el.chatSendBtn.disabled = false;
             el.chatSendBtn.textContent = "Send";
           }
+          if (el.chatBackBtn) el.chatBackBtn.disabled = false;
         }
       }
 
