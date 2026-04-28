@@ -711,6 +711,92 @@ function parseHealthPrescreenOverall(raw) {
   return { mode: "invalid" };
 }
 
+const MAJOR_CONDITION_NUMBER_KEYS = [
+  "high_blood_pressure",
+  "cholesterol_high",
+  "sleep_apnea",
+  "diabetes",
+  "depression",
+  "atrial_fibrillation",
+  "kidney_disease",
+  "liver_disease",
+  "copd_diagnosed",
+  "neurological_condition",
+];
+
+function applyMajorConditionsNumberPicks(phi, pickSet) {
+  if (!phi || typeof phi !== "object") return;
+  const pick = pickSet instanceof Set ? pickSet : new Set(pickSet || []);
+  MAJOR_CONDITION_NUMBER_KEYS.forEach((k) => {
+    phi[k] = false;
+  });
+  MAJOR_CONDITION_NUMBER_KEYS.forEach((k, idx) => {
+    if (pick.has(idx + 1)) phi[k] = true;
+  });
+  phi.has_major_conditions = pick.size > 0;
+}
+
+function parseMajorConditionsSelection(raw) {
+  const t = String(raw || "")
+    .trim()
+    .replace(/[.!?,;:]+$/g, "")
+    .trim();
+  if (!t) return { mode: "invalid" };
+  const norm = normalizeSimpleText(t);
+  if (/^(no|n|none|false|0)$/i.test(norm)) return { mode: "no" };
+  const onlyNums = t.replace(/,/g, " ").replace(/\s+/g, " ").trim();
+  if (/^(\d+(\s+\d+)*)$/.test(onlyNums)) {
+    const parts = onlyNums.split(" ").filter(Boolean);
+    const pickSet = new Set();
+    for (const p of parts) {
+      const n = parseInt(p, 10);
+      if (!Number.isFinite(n) || n < 1 || n > MAJOR_CONDITION_NUMBER_KEYS.length) return { mode: "invalid" };
+      pickSet.add(n);
+    }
+    return { mode: "numbers", pickSet, anyPositive: pickSet.size > 0 };
+  }
+  if (/^(yes|y|true|si|sí)$/i.test(norm)) return { mode: "yes_word" };
+  return { mode: "invalid" };
+}
+
+const FINAL_HEALTH_NUMBER_KEYS = ["heart_event_recent", "cancer_active", "dementia_cognitive"];
+
+function applyFinalHealthNumberPicks(phi, pickSet) {
+  if (!phi || typeof phi !== "object") return;
+  const pick = pickSet instanceof Set ? pickSet : new Set(pickSet || []);
+  FINAL_HEALTH_NUMBER_KEYS.forEach((k) => {
+    phi[k] = false;
+  });
+  FINAL_HEALTH_NUMBER_KEYS.forEach((k, idx) => {
+    if (pick.has(idx + 1)) phi[k] = true;
+  });
+}
+
+function parseFinalHealthSelection(raw) {
+  const t = String(raw || "")
+    .trim()
+    .replace(/[.!?,;:]+$/g, "")
+    .trim();
+  if (!t) return { mode: "invalid" };
+  const norm = normalizeSimpleText(t);
+  if (/^(no|n|none|false|0)$/i.test(norm)) return { mode: "no" };
+  const onlyNums = t
+    .replace(/[,*#]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+  if (/^(\d+(\s+\d+)*)$/.test(onlyNums)) {
+    const parts = onlyNums.split(" ").filter(Boolean);
+    const pickSet = new Set();
+    for (const p of parts) {
+      const n = parseInt(p, 10);
+      if (!Number.isFinite(n) || n < 1 || n > FINAL_HEALTH_NUMBER_KEYS.length) return { mode: "invalid" };
+      pickSet.add(n);
+    }
+    return { mode: "numbers", pickSet };
+  }
+  return { mode: "invalid" };
+}
+
 /** Rewind: remove compound answer and any imputed or answered gate PHI from the prescreen branch. */
 function clearHealthPrescreenBranchPhi(phi) {
   if (!phi || typeof phi !== "object") return;
@@ -1085,7 +1171,8 @@ const QUESTION_FLOW = [
   {
     key: "has_major_conditions",
     prompt:
-      "Aside from what we already covered, do they have any other doctor-diagnosed medical conditions or major health issues in the past few years? (yes/no)\n\n" +
+      "Aside from what we already covered, do they have any other doctor-diagnosed medical conditions or major health issues in the past few years?\n\n" +
+      "Reply **no**, or list the condition numbers that apply (example: **2, 6**).\n\n" +
       PS_MAJOR_CONDITIONS_TABLE_SENTINEL,
     type: "boolean",
     phi: true,
@@ -1103,6 +1190,31 @@ const QUESTION_FLOW = [
       "Do they live in a nursing home, use a wheelchair or stay bedridden, or need help with daily activities like bathing, dressing, eating, or walking? (yes/no)",
     type: "boolean",
     phi: true,
+  },
+  {
+    key: "final_health_conditions",
+    prompt:
+      "Final health check: do any of these apply?\n\n" +
+      "1. Heart attack, stroke, or TIA in the last 2 years\n" +
+      "2. Active cancer diagnosis or treatment in the last 2 years\n" +
+      "3. Alzheimer's, dementia, or memory-related diagnosis\n\n" +
+      "Reply **no**, or list the condition numbers that apply (example: **1, 3**).",
+    type: "boolean",
+    phi: true,
+    askIf: function (nonPhiAnswers, phiAnswers) {
+      const phi = phiAnswers || {};
+      const answeredHeart = phi.heart_event_recent === true || phi.heart_event_recent === false;
+      const answeredCancer = phi.cancer_active === true || phi.cancer_active === false;
+      const answeredCognitive = phi.dementia_cognitive === true || phi.dementia_cognitive === false;
+      if (answeredHeart && answeredCancer && answeredCognitive) return false;
+      return !!(
+        phi.has_major_conditions ||
+        phi.takes_prescription_medications ||
+        phi.hospitalized_recent ||
+        phi.awaiting_surgery ||
+        phi.undiagnosed_symptoms
+      );
+    },
   },
   {
     key: "strategy_priority",
@@ -1315,20 +1427,10 @@ function containsPrompt(text, prompt) {
 function adaptiveQuestionOrder(nonPhiAnswers, phiAnswers) {
   const phi = phiAnswers || {};
   const nonPhi = nonPhiAnswers || {};
-  const severeSignals = anyTrue(phi, [
-    "terminal_illness",
-    "organ_transplant",
-    "dialysis",
-    "nursing_home_resident",
-    "wheelchair_bedridden",
-    "adl_assistance",
-  ]);
   const coreNonPhi = ["normalized_coverage_target", "budget_class", "priority_type"];
   const hs = phi.health_prescreen_overall;
   let healthAfterPriority = [];
-  if (severeSignals) {
-    healthAfterPriority = POST_PRIORITY_HEALTH_GATE_KEYS;
-  } else if (hs === true) {
+  if (hs === true) {
     healthAfterPriority = [
       "health_prescreen_overall",
       "takes_prescription_medications",
@@ -1347,24 +1449,19 @@ function adaptiveQuestionOrder(nonPhiAnswers, phiAnswers) {
       "functional_status_any",
     ];
   } else {
-    const legacyHealthStarted =
-      (hs === undefined || hs === null || hs === "") &&
-      POST_PRIORITY_HEALTH_GATE_KEYS.some((k) => Object.prototype.hasOwnProperty.call(phi, k));
-    healthAfterPriority = legacyHealthStarted ? POST_PRIORITY_HEALTH_GATE_KEYS : ["health_prescreen_overall"];
+    // Always begin with the 1-8 prescreen table to avoid regressing into the old per-condition flow.
+    healthAfterPriority = ["health_prescreen_overall"];
   }
   const broadFirst = [...coreNonPhi, ...healthAfterPriority, "strategy_priority"];
-  if (severeSignals) return broadFirst;
 
   const targeted = [];
   if (phi.has_major_conditions || phi.takes_prescription_medications || phi.hospitalized_recent || phi.awaiting_surgery || phi.undiagnosed_symptoms) {
     targeted.push(
-      "heart_event_recent",
-      "cancer_active",
+      "final_health_conditions",
       "diabetes",
       "kidney_disease",
       "liver_disease",
       "neurological_condition",
-      "dementia_cognitive",
       "copd_diagnosed",
       "high_blood_pressure"
     );
@@ -1561,14 +1658,10 @@ function nextQuestionKey(nonPhiAnswers, phiAnswers, allowPhi) {
     group.keys.forEach((k) => {
       blockByKey[k] = group.noneKey;
     });
-    const hasAnySelected = group.keys.some((k) => {
-      const v = phiSrc[k];
-      if (v === true) return true;
-      if (typeof v === "string" && v.trim()) return true;
-      if (Array.isArray(v) && v.length > 0) return true;
-      return false;
-    });
-    blockCompleted[group.noneKey] = !!phiSrc[group.noneKey] || hasAnySelected;
+    // Only skip a block when the explicit "none" marker is set.
+    // Do not treat "any selected answer" as completion, otherwise required follow-ups
+    // (e.g., high_blood_pressure -> bp_controlled) get skipped.
+    blockCompleted[group.noneKey] = !!phiSrc[group.noneKey];
   });
   const orderedKeys = adaptiveQuestionOrder(nonPhiAnswers, phiAnswers);
   const orderedQuestions = orderedKeys.map((k) => questionByKey(k)).filter(Boolean);
@@ -1759,6 +1852,50 @@ const ALLOWED_PRODUCT_CATALOG = [
   { carrierLabel: "Assurity", carrierMatch: /\bassurity\b/i, productMatch: /universal\s+life/i, productName: "Universal Life", productType: "universal_life" },
 ];
 
+const ITIN_HOLDER_APPROVED_PRODUCTS = new Set([
+  "American Amicable — Senior Choice",
+  "American Amicable — Guaranteed Guardian",
+  "American Amicable — Easy Term",
+  "American Amicable — Home Protector",
+  "American Amicable — Security Protector",
+  "American Amicable — Survivor Protector",
+  "American Amicable — Term Made Simple",
+]);
+
+function catalogDisplayName(entry) {
+  if (!entry) return "";
+  return `${String(entry.carrierLabel || "").trim()} — ${String(entry.productName || "").trim()}`;
+}
+
+function isItinHolderCase(context) {
+  const raw = String((context && context.citizenship_status) || "").trim().toLowerCase();
+  return (
+    raw === "itin_holder" ||
+    raw === "undocumented_immigrant" ||
+    raw === "other_or_not_sure" ||
+    /itin|undocumented|illegal immigrant|no\s*green\s*card|no\s*citizenship/.test(raw)
+  );
+}
+
+function preferredProductTypeForGoal(goalRaw) {
+  const goal = String(goalRaw || "").trim().toLowerCase();
+  if (goal === "final_expenses") return "final_expense";
+  if (goal === "children_coverage" || goal === "legacy_planning") return "whole_life";
+  if (goal === "income_replacement" || goal === "mortgage_protection" || goal === "debt_protection" || goal === "business_continuity") {
+    return "term_life";
+  }
+  return "";
+}
+
+function approvedCatalogObjectsForItinHolder(preferredType) {
+  const all = ALLOWED_PRODUCT_CATALOG.map((e) => ({ name: catalogDisplayName(e), type: e.productType }))
+    .filter((x) => ITIN_HOLDER_APPROVED_PRODUCTS.has(x.name));
+  const type = String(preferredType || "").trim().toLowerCase();
+  if (!type) return all;
+  const typed = all.filter((x) => String(x.type || "").toLowerCase() === type);
+  return typed.length ? typed : all;
+}
+
 function matchAllowedCatalogEntry(row) {
   const carrier = String((row && row.carrier) || "");
   const product = String((row && row.product) || "");
@@ -1781,6 +1918,67 @@ function tradeoffForChoice(optionName, type, priority) {
   const option = String(optionName || "").toLowerCase();
   const t = String(type || "").toLowerCase();
   const p = String(priority || "").toLowerCase();
+  const productSpecific = [
+    {
+      match: /american amicable\s+—\s+senior choice/i,
+      pros: [
+        "Final-expense oriented design with straightforward positioning for burial and small legacy needs.",
+        "Often easier to explain to families that want predictable permanent coverage.",
+      ],
+      cons: [
+        "Face amounts are usually lower than income-replacement term strategies.",
+        "Monthly premium can be higher per $1,000 of coverage than term options.",
+      ],
+    },
+    {
+      match: /american amicable\s+—\s+guaranteed guardian/i,
+      pros: [
+        "Useful fallback when approval pathway is the top priority for tougher health cases.",
+        "Permanent policy style supports clients focused on guaranteed lifetime final-expense intent.",
+      ],
+      cons: [
+        "Typically less price-efficient than fully underwritten products for clean-health profiles.",
+        "Benefit structure may be more conservative than simplified term alternatives.",
+      ],
+    },
+    {
+      match: /american amicable\s+—\s+home protector/i,
+      pros: [
+        "Mortgage-protection style term structure aligns well with debt payoff timelines.",
+        "Can provide larger temporary death benefit than final-expense plans at similar budgets.",
+      ],
+      cons: [
+        "Not a permanent final-expense design, so it may mismatch pure burial-only goals.",
+        "Coverage period and underwriting outcomes can vary by age/health profile.",
+      ],
+    },
+    {
+      match: /american amicable\s+—\s+easy term/i,
+      pros: [
+        "Strong fit for cost-conscious temporary protection and replacement-income needs.",
+        p === "lowest_monthly_cost"
+          ? "Often aligns with lowest-monthly-cost priority when term qualification is available."
+          : "Simple term positioning for clients who want larger benefit during key earning years.",
+      ],
+      cons: [
+        "Term coverage is temporary and may not satisfy permanent final-expense objectives.",
+        "Conversion/renewal outcomes depend on product rules and future insurability context.",
+      ],
+    },
+    {
+      match: /american amicable\s+—\s+term made simple/i,
+      pros: [
+        "Term-focused option for straightforward temporary protection conversations.",
+        "Can align well with debt/income protection scenarios requiring higher face amounts.",
+      ],
+      cons: [
+        "Not built as a permanent burial/final-expense solution.",
+        "Underwriting tolerance and pricing still vary by risk profile and state form.",
+      ],
+    },
+  ];
+  const exact = productSpecific.find((r) => r.match.test(option));
+  if (exact) return { pros: exact.pros, cons: exact.cons };
   if (/mutual of omaha/.test(option)) {
     return {
       pros: [
@@ -1992,8 +2190,11 @@ function buildBestFitExplanation(context, risk, primaryProduct, primaryType, sou
 }
 
 function recommendFromRagRows(context, risk, rows) {
+  const itinHolderCase = isItinHolderCase(context);
+  const goalKeyForItin = String((context && (context.coverage_goal || context.intent)) || "").toLowerCase();
+  const preferredTypeForGoal = preferredProductTypeForGoal(goalKeyForItin);
   const ragRows = Array.isArray(rows) ? rows : [];
-  const matchedRows = ragRows
+  let matchedRows = ragRows
     .map((r) => {
       const entry = matchAllowedCatalogEntry(r);
       if (!entry) return null;
@@ -2001,10 +2202,18 @@ function recommendFromRagRows(context, risk, rows) {
         row: r,
         entry,
         key: `${entry.carrierLabel}::${entry.productName}`,
+        display_name: catalogDisplayName(entry),
         score: Number.isFinite(Number(r && r.similarity)) ? Number(r.similarity) : 0,
       };
     })
     .filter(Boolean);
+  if (itinHolderCase) {
+    matchedRows = matchedRows.filter((m) => ITIN_HOLDER_APPROVED_PRODUCTS.has(m.display_name));
+    if (preferredTypeForGoal) {
+      const typed = matchedRows.filter((m) => String(m.entry && m.entry.productType) === preferredTypeForGoal);
+      if (typed.length) matchedRows = typed;
+    }
+  }
 
   if (!matchedRows.length) {
     const ctx = context && typeof context === "object" ? context : {};
@@ -2047,9 +2256,20 @@ function recommendFromRagRows(context, risk, rows) {
       ];
     }
 
-    const recommendedProduct = `${primary.carrierLabel} — ${primary.productName}`;
-    const altProducts = alternatives.map((a) => `${a.carrierLabel} — ${a.productName}`);
-    const altTypes = alternatives.map((a) => a.productType);
+    let recommendedProduct = `${primary.carrierLabel} — ${primary.productName}`;
+    let altProducts = alternatives.map((a) => `${a.carrierLabel} — ${a.productName}`);
+    let altTypes = alternatives.map((a) => a.productType);
+    if (itinHolderCase) {
+      const approved = approvedCatalogObjectsForItinHolder(preferredTypeForGoal);
+      if (approved.length) {
+        const p = approved[0];
+        recommendedProduct = p.name;
+        primary.productType = p.type;
+        const alts = approved.slice(1, 4);
+        altProducts = alts.map((a) => a.name);
+        altTypes = alts.map((a) => a.type);
+      }
+    }
     return {
       product_type: primary.productType,
       recommended_product: recommendedProduct,
@@ -2057,7 +2277,9 @@ function recommendFromRagRows(context, risk, rows) {
       alternatives: altTypes,
       alternative_products: altProducts,
       rationale:
-        "RAG fallback mode used due to sparse retrieval results; selected the closest allowed catalog product using goal + risk defaults.",
+        itinHolderCase
+          ? "RAG fallback mode used with citizenship guardrail: selected from American Amicable products approved for ITIN-holder scenarios."
+          : "RAG fallback mode used due to sparse retrieval results; selected the closest allowed catalog product using goal + risk defaults.",
       best_fit_explanation: buildBestFitExplanation(context, risk, recommendedProduct, primary.productType, "fallback"),
       alternative_tradeoffs: buildAlternativeTradeoffs(altProducts, altTypes, context && context.priority_type),
     };
@@ -2092,6 +2314,12 @@ function recommendFromRagRows(context, risk, rows) {
     const termCatalogAlts = approvedAlternativesFromCatalog(recommendedProduct, "term_life", 3);
     if (termCatalogAlts.length >= 2) finalAltObjs = termCatalogAlts;
   }
+  if (itinHolderCase) {
+    const approvedAlts = approvedCatalogObjectsForItinHolder(preferredTypeForGoal)
+      .filter((a) => String(a.name || "").toLowerCase() !== String(recommendedProduct || "").toLowerCase())
+      .slice(0, 3);
+    if (approvedAlts.length) finalAltObjs = approvedAlts;
+  }
   const altTypes = finalAltObjs.map((x) => x.type);
   const altProducts = finalAltObjs.map((x) => x.name);
   const rateExample = extractRateExample(
@@ -2108,7 +2336,8 @@ function recommendFromRagRows(context, risk, rows) {
       `RAG-ranked by internal chunk similarity using lead context. ` +
       `Top match carrier=${String(top.carrier || "unknown")}, product=${String(top.product || "unknown")}, ` +
       `category=${String(top.category || "unknown")}, similarity=${Number.isFinite(Number(top.similarity)) ? Number(top.similarity).toFixed(3) : "n/a"}. ` +
-      `Risk signal=${risk.level}, intent=${String(context.intent || "unknown")}.`,
+      `Risk signal=${risk.level}, intent=${String(context.intent || "unknown")}.` +
+      (itinHolderCase ? " Citizenship guardrail applied: ITIN-holder flow restricted to American Amicable approved products." : ""),
     best_fit_explanation: buildBestFitExplanation(context, risk, recommendedProduct, primaryType, "rag", rateExample),
     rate_example: rateExample || null,
     alternative_tradeoffs: buildAlternativeTradeoffs(altProducts, altTypes, context && context.priority_type),
@@ -2160,6 +2389,7 @@ function normalizedContextFromProfile(profileSnapshot, nonPhiAnswers, phiAnswers
     normalized_coverage_target: q.normalized_coverage_target || "",
     budget_class: q.budget_class || "",
     priority_type: q.priority_type || "",
+    citizenship_status: p.citizenship_status || q.citizenship_status || "",
   };
 }
 
@@ -2817,6 +3047,8 @@ module.exports = async function handler(req, res) {
         } else {
         let advanceQualification = false;
         let healthPrescreenHandled = false;
+        let majorConditionsHandled = false;
+        let finalHealthHandled = false;
 
         if (currentQuestion.key === "health_prescreen_overall") {
           healthPrescreenHandled = true;
@@ -2839,7 +3071,57 @@ module.exports = async function handler(req, res) {
           }
         }
 
-        if (!healthPrescreenHandled) {
+        if (currentQuestion.key === "has_major_conditions") {
+          majorConditionsHandled = true;
+          const mr = parseMajorConditionsSelection(userMessage);
+          if (mr.mode === "invalid" || mr.mode === "yes_word") {
+            assistantReply = "Reply **no**, or list the condition numbers that apply (example: **2, 6**).";
+            nextQuestionText = curPrompt;
+          } else {
+            advanceQualification = true;
+            if (mr.mode === "no") {
+              nextPhi.has_major_conditions = false;
+              nextPhi.heart_event_recent = false;
+              nextPhi.cancer_active = false;
+              nextPhi.copd_diagnosed = false;
+              nextPhi.dementia_cognitive = false;
+              nextPhi.diabetes = false;
+              nextPhi.kidney_disease = false;
+              nextPhi.liver_disease = false;
+              nextPhi.neurological_condition = false;
+              nextPhi.high_blood_pressure = false;
+              nextPhi.cholesterol_high = false;
+              nextPhi.sleep_apnea = false;
+              nextPhi.depression = false;
+              nextPhi.anxiety = false;
+              nextPhi.atrial_fibrillation = false;
+            } else {
+              applyMajorConditionsNumberPicks(nextPhi, mr.pickSet);
+            }
+          }
+        }
+
+        if (currentQuestion.key === "final_health_conditions") {
+          finalHealthHandled = true;
+          const fr = parseFinalHealthSelection(userMessage);
+          if (fr.mode === "invalid") {
+            assistantReply = "Reply **no**, or list the condition numbers that apply (example: **1, 3**).";
+            nextQuestionText = curPrompt;
+          } else {
+            advanceQualification = true;
+            if (fr.mode === "no") {
+              nextPhi.final_health_conditions = false;
+              nextPhi.heart_event_recent = false;
+              nextPhi.cancer_active = false;
+              nextPhi.dementia_cognitive = false;
+            } else {
+              nextPhi.final_health_conditions = true;
+              applyFinalHealthNumberPicks(nextPhi, fr.pickSet);
+            }
+          }
+        }
+
+        if (!healthPrescreenHandled && !majorConditionsHandled && !finalHealthHandled) {
         const parsed = parseAnswerByType(currentQuestion, userMessage);
         if (parsed == null) {
           if (currentQuestion.type === "boolean") {

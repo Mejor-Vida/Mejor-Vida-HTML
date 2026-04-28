@@ -583,6 +583,37 @@
       color: #9eb9e6;
       font-size: 0.9rem;
     }
+    #pane-product-selector .ps-alt-tradeoffs {
+      list-style: none;
+      margin: 8px 0 0;
+      padding: 0;
+      display: grid;
+      gap: 10px;
+    }
+    #pane-product-selector .ps-alt-tradeoffs li {
+      border: 1px solid rgba(137, 170, 227, 0.28);
+      border-radius: 8px;
+      background: rgba(11, 26, 51, 0.5);
+      padding: 10px 12px;
+      line-height: 1.4;
+    }
+    #pane-product-selector .ps-alt-tradeoffs .ps-alt-name {
+      font-weight: 700;
+      color: #eaf2ff;
+      margin-bottom: 6px;
+    }
+    #pane-product-selector .ps-alt-tradeoffs .ps-alt-line {
+      margin-top: 4px;
+      color: #d7e7ff;
+    }
+    #pane-product-selector .ps-alt-tradeoffs .ps-alt-pros {
+      color: #b7e4c7;
+      font-weight: 700;
+    }
+    #pane-product-selector .ps-alt-tradeoffs .ps-alt-cons {
+      color: #ffb3b3;
+      font-weight: 700;
+    }
     @media (max-width: 900px) {
       #ps-chat-log .ps-major-conditions-grid {
         grid-template-columns: repeat(2, minmax(130px, 1fr));
@@ -1889,7 +1920,7 @@
                         <option value="">Select...</option>
                         <option value="us_citizen">US Citizen</option>
                         <option value="permanent_resident">Permanent Resident (Green Card)</option>
-                        <option value="other_or_not_sure">Other / Not sure</option>
+                        <option value="itin_holder">ITIN holder</option>
                       </select>
                     </div>
                     <div class="meta-card">
@@ -2217,7 +2248,7 @@
                   </div>
                   </section>
                   <section class="lp-section">
-                  <div class="lp-section-bar">5. Sales / Pipeline</div>
+                  <div class="lp-section-bar lp-with-right">5. Sales / Pipeline <span class="lp-bar-right">For Justin's use only</span></div>
                   <div class="meta-grid">
                     <div class="meta-card">
                       <label for="lp-tag">Tag</label>
@@ -2315,7 +2346,7 @@
                   </div>
                   </section>
                   <section class="lp-section">
-                  <div class="lp-section-bar">6. Internal / System</div>
+                  <div class="lp-section-bar lp-with-right">6. Internal / System <span class="lp-bar-right">For Justin's use only</span></div>
                   <div class="meta-grid">
                     <div class="meta-card">
                       <label for="lp-subscriber-id">ManyChat subscriber ID</label>
@@ -2342,7 +2373,7 @@
                   </div>
                   </section>
                   <section class="lp-section">
-                  <div class="lp-section-bar">7. Auto-derived</div>
+                  <div class="lp-section-bar lp-with-right">7. Auto-derived <span class="lp-bar-right">For Justin's use only</span></div>
                   <div class="meta-grid">
                     <div class="meta-card">
                       <label for="lp-risk-level">Risk Level (auto)</label>
@@ -2363,7 +2394,7 @@
                   </div>
                   </section>
                   <section class="lp-section">
-                  <div class="lp-section-bar">8. System Read-only</div>
+                  <div class="lp-section-bar lp-with-right">8. System Read-only <span class="lp-bar-right">For Justin's use only</span></div>
                   <div class="meta-grid">
                     <div class="meta-card">
                       <label for="lp-created-at">Created</label>
@@ -4379,7 +4410,10 @@
           else tob.value = "";
         }
         setv("lp-living-situation", d.profile_ext && d.profile_ext.living_situation);
-        setv("lp-citizenship-status", d.profile_ext && d.profile_ext.citizenship_status);
+        var citizenshipStatus = d.profile_ext && d.profile_ext.citizenship_status;
+        if (String(citizenshipStatus || "") === "other_or_not_sure") citizenshipStatus = "itin_holder";
+        if (String(citizenshipStatus || "") === "undocumented_immigrant") citizenshipStatus = "itin_holder";
+        setv("lp-citizenship-status", citizenshipStatus);
         setv("lp-height", d.profile_ext && d.profile_ext.height);
         setv("lp-weight", d.profile_ext && d.profile_ext.weight);
         setSelectOrCustom("lp-tag", d.tag);
@@ -5362,15 +5396,16 @@
 
       function renderMajorConditionsTableHtml() {
         var examples = [
-          "High blood pressure",
-          "High cholesterol",
-          "Sleep apnea",
-          "Diabetes",
-          "Depression",
-          "Heart rhythm issues",
-          "Kidney/liver disease",
-          "COPD",
-          "Neurological conditions",
+          "1. High blood pressure",
+          "2. High cholesterol",
+          "3. Sleep apnea",
+          "4. Diabetes",
+          "5. Depression",
+          "6. Heart rhythm issues",
+          "7. Kidney disease",
+          "8. Liver disease",
+          "9. COPD",
+          "10. Neurological conditions",
         ];
         var h =
           '<div class="ps-major-conditions-chart" role="region" aria-label="Examples of medical conditions">';
@@ -5652,14 +5687,15 @@
           var pros = Array.isArray(row.pros) ? row.pros.map(function (x) { return String(x || "").trim(); }).filter(Boolean) : [];
           var cons = Array.isArray(row.cons) ? row.cons.map(function (x) { return String(x || "").trim(); }).filter(Boolean) : [];
           altTradeoffRows.push(
-            '<li><strong>' +
+            '<li><div class="ps-alt-name">' +
               escHtml(opt) +
-              ":</strong> " +
-              '<span style="color:#b7e4c7">Pros</span> ' +
+              "</div>" +
+              '<div class="ps-alt-line"><span class="ps-alt-pros">Pros:</span> ' +
               escHtml(pros.join(" | ") || "N/A") +
-              " · " +
-              '<span style="color:#ffb3b3">Cons</span> ' +
+              "</div>" +
+              '<div class="ps-alt-line"><span class="ps-alt-cons">Cons:</span> ' +
               escHtml(cons.join(" | ") || "N/A") +
+              "</div>" +
               "</li>"
           );
         });
@@ -5751,7 +5787,7 @@
           "</div></div>" +
           '<div class="meta-card" style="grid-column:1 / -1"><label>Alternative options: pros and cons</label>' +
           (altTradeoffRows.length
-            ? '<ul style="margin:8px 0 0 18px">' + altTradeoffRows.join("") + "</ul>"
+            ? '<ul class="ps-alt-tradeoffs">' + altTradeoffRows.join("") + "</ul>"
             : '<div class="small-note" style="margin-top:6px">Alternatives will include tradeoffs as they become available.</div>') +
           "</div>" +
           '<div class="meta-card" style="grid-column:1 / -1"><label>Rationale</label><div style="margin-top:6px;white-space:pre-wrap">' +

@@ -116,6 +116,14 @@ function mergePreferCanonical(sourceValue, canonicalValue) {
   return isBlankValue(canonicalValue) ? sourceValue : canonicalValue;
 }
 
+function normalizeCitizenshipStatus(v) {
+  const raw = String(v == null ? "" : v).trim();
+  if (!raw) return "";
+  const t = raw.toLowerCase();
+  if (t === "other_or_not_sure" || t === "undocumented_immigrant") return "itin_holder";
+  return raw;
+}
+
 async function loadSelectorDerivedProfileExt(cfg, leadId, leadSourceTable) {
   if (!leadId || !leadSourceTable) return {};
   const rows = await restSelect(
@@ -306,6 +314,9 @@ async function composeMergedLeadDetail(cfg, detail) {
 
   const baseExt = mergePreferSource(selectorExt, canonicalExt);
   merged.profile_ext = mergePreferSource(baseExt, canonicalExt);
+  if (merged.profile_ext && typeof merged.profile_ext === "object") {
+    merged.profile_ext.citizenship_status = normalizeCitizenshipStatus(merged.profile_ext.citizenship_status) || null;
+  }
   return merged;
 }
 
@@ -702,7 +713,9 @@ module.exports = async function handler(req, res) {
         }
       });
       if (Object.prototype.hasOwnProperty.call(body, "profile_ext") && body.profile_ext && typeof body.profile_ext === "object") {
-        canonicalPatch.profile_ext = body.profile_ext;
+        canonicalPatch.profile_ext = Object.assign({}, body.profile_ext, {
+          citizenship_status: normalizeCitizenshipStatus(body.profile_ext.citizenship_status) || null,
+        });
       }
       await saveCanonicalLeadProfile(
         cfg,

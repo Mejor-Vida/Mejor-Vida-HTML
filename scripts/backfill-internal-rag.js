@@ -238,6 +238,16 @@ function buildApprovalLineChunks() {
         "Prefer this line when risk is low/moderate and client prioritizes approval simplicity.",
     },
     {
+      carrier: "american_amicable",
+      product: "ITIN Holder Eligibility Rule",
+      category: "underwriting",
+      content:
+        "## Eligibility Rule — ITIN Holder (American Amicable)\n\n" +
+        "When citizenship/residency is marked as ITIN holder, route recommendations to American Amicable only. " +
+        "Use approved American Amicable product lines and require Non-U.S. Citizen documentation workflows " +
+        "(including questionnaire/forms and identity/residency support) before final submission.",
+    },
+    {
       carrier: "assurity",
       product: "Term Life",
       category: "underwriting",
