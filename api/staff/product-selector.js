@@ -1984,6 +1984,7 @@ function tradeoffForChoice(optionName, type, priority) {
         "Face amounts are usually lower than income-replacement term strategies.",
         "Monthly premium can be higher per $1,000 of coverage than term options.",
       ],
+      better_when: "Best when the client wants permanent final-expense coverage, modest face amount, and simpler approval expectations.",
     },
     {
       match: /american amicable\s+—\s+guaranteed guardian/i,
@@ -1995,6 +1996,7 @@ function tradeoffForChoice(optionName, type, priority) {
         "Typically less price-efficient than fully underwritten products for clean-health profiles.",
         "Benefit structure may be more conservative than simplified term alternatives.",
       ],
+      better_when: "Best when health profile is tougher and approval certainty is more important than maximizing benefit per premium dollar.",
     },
     {
       match: /american amicable\s+—\s+home protector/i,
@@ -2006,6 +2008,7 @@ function tradeoffForChoice(optionName, type, priority) {
         "Not a permanent final-expense design, so it may mismatch pure burial-only goals.",
         "Coverage period and underwriting outcomes can vary by age/health profile.",
       ],
+      better_when: "Best when the need is mortgage/debt timeline protection and a larger temporary death benefit is the priority.",
     },
     {
       match: /american amicable\s+—\s+easy term/i,
@@ -2019,6 +2022,7 @@ function tradeoffForChoice(optionName, type, priority) {
         "Term coverage is temporary and may not satisfy permanent final-expense objectives.",
         "Conversion/renewal outcomes depend on product rules and future insurability context.",
       ],
+      better_when: "Best when client is lower risk, budget-sensitive, and focused on maximum temporary coverage for the premium.",
     },
     {
       match: /american amicable\s+—\s+term made simple/i,
@@ -2030,10 +2034,11 @@ function tradeoffForChoice(optionName, type, priority) {
         "Not built as a permanent burial/final-expense solution.",
         "Underwriting tolerance and pricing still vary by risk profile and state form.",
       ],
+      better_when: "Best when the client wants straightforward term protection and qualifies cleanly for temporary coverage.",
     },
   ];
   const exact = productSpecific.find((r) => r.match.test(option));
-  if (exact) return { pros: exact.pros, cons: exact.cons };
+  if (exact) return { pros: exact.pros, cons: exact.cons, better_when: exact.better_when };
   if (/mutual of omaha/.test(option)) {
     return {
       pros: [
@@ -2046,6 +2051,7 @@ function tradeoffForChoice(optionName, type, priority) {
         "Can be less price-flexible than some alternatives in certain age/health bands.",
         "Some products may require tighter fit to underwriting rules for best pricing tier.",
       ],
+      better_when: "Best when client values carrier breadth/brand and can fit underwriting for preferred pricing tiers.",
     };
   }
   if (/american amicable/.test(option)) {
@@ -2060,6 +2066,7 @@ function tradeoffForChoice(optionName, type, priority) {
         "May not always be the absolute lowest premium for very clean preferred-health profiles.",
         "Product/rider structure can vary more by specific form and state.",
       ],
+      better_when: "Best when approval practicality is weighted above pure lowest-price optimization.",
     };
   }
   if (/\bassurity\b/.test(option)) {
@@ -2072,6 +2079,7 @@ function tradeoffForChoice(optionName, type, priority) {
         "May offer fewer niche product variations than larger multi-line carrier menus.",
         "Final-premium competitiveness still depends on age, state, and underwriting class.",
       ],
+      better_when: "Best when client profile is clean/moderate and cost-focused term or simple product positioning is preferred.",
     };
   }
   if (t === "final_expense") {
@@ -2084,6 +2092,7 @@ function tradeoffForChoice(optionName, type, priority) {
         "Lower face amounts than traditional term products.",
         "Monthly cost per $1,000 of coverage is usually higher than term life.",
       ],
+      better_when: "Best when the goal is guaranteed lifetime burial/final-bill coverage over larger temporary face amounts.",
     };
   }
   if (t === "term_life") {
@@ -2096,6 +2105,7 @@ function tradeoffForChoice(optionName, type, priority) {
         "Coverage expires at end of term unless converted/renewed.",
         "Underwriting can be stricter than final expense in some cases.",
       ],
+      better_when: "Best when client needs high face amount now and qualifies for cost-efficient temporary protection.",
     };
   }
   if (t === "universal_life") {
@@ -2108,11 +2118,13 @@ function tradeoffForChoice(optionName, type, priority) {
         "More complex product structure to explain and maintain.",
         "Premium adequacy is important to keep coverage in force long term.",
       ],
+      better_when: "Best when client wants long-term flexibility and can support ongoing premium management.",
     };
   }
   return {
     pros: ["Permanent protection option when approved.", "Can align with long-term protection goals."],
     cons: ["May be more expensive than term options.", "Product fit depends on underwriting details and budget."],
+    better_when: "Best when permanent protection is prioritized and underwriting supports this product path.",
   };
 }
 
@@ -2129,6 +2141,7 @@ function buildAlternativeTradeoffs(alternativeProducts, alternativeTypes, priori
       option: name,
       pros: t.pros,
       cons: t.cons,
+      better_when: t.better_when || "",
     });
   }
   return out;
@@ -2230,17 +2243,38 @@ function buildBestFitExplanation(context, risk, primaryProduct, primaryType, sou
   const goal = String(ctx.coverage_goal || ctx.intent || "this client goal");
   const priority = String(ctx.priority_type || ctx.strategy_priority || "approval certainty");
   const riskLevel = String((risk && risk.level) || "unknown");
+  const riskFlags = Array.isArray(risk && risk.flags) ? risk.flags : [];
   const coverage = String(ctx.coverage_amount || "").trim();
   const budget = String(ctx.budget_monthly || "").trim();
   const sourceText = sourceMode === "rag" ? "internal carrier knowledge matches" : "goal and risk fallback rules";
-  let msg = (
-    `${primaryProduct} is the best fit because it aligns with the client's goal (${goal}) and priority (${priority}), ` +
-    `while staying consistent with a ${riskLevel} risk profile. This recommendation is based on ${sourceText}.`
-  );
+  const isCostPriority = /lowest|cost/.test(priority);
+  const isApprovalPriority = /approval/.test(priority);
+  const costLine =
+    primaryType === "term_life"
+      ? "Term products typically provide the most death benefit per premium dollar, which improves cost efficiency when medically eligible."
+      : primaryType === "final_expense"
+        ? "Final-expense designs trade larger face amounts for simpler permanent coverage and often more predictable approval pathways."
+        : "This product type is positioned for long-term coverage fit rather than only lowest short-term premium.";
+  const approvalLine = riskLevel === "high"
+    ? "Because the risk profile is elevated, this recommendation favors a lane with more realistic approval potential rather than a lowest-price-only lane."
+    : "Risk profile appears manageable, so this recommendation balances approval confidence with value and product-fit goals.";
+  const riskFitLine =
+    riskFlags.length
+      ? `Risk signals considered: ${riskFlags.join(", ")}.`
+      : `Risk profile considered: ${riskLevel}.`;
+  let msg =
+    `${primaryProduct} is recommended because it best matches the client goal (${goal}) and decision priority (${priority}) using ${sourceText}.\n\n` +
+    `Why this wins now:\n` +
+    `- Cost position: ${isCostPriority ? costLine : "Price is considered, but not at the expense of approval probability and product-goal fit."}\n` +
+    `- Approval likelihood: ${isApprovalPriority ? approvalLine : "Approval viability is still screened so the recommendation is practical, not just theoretical."}\n` +
+    `- Risk/profile fit: ${riskFitLine}`;
   if (coverage || budget) {
-    msg += ` Reviewed case targets: coverage ${coverage || "not specified"} and budget ${budget ? `$${budget}/month` : "not specified"}.`;
+    msg += `\n- Case targets used: coverage ${coverage || "not specified"} and budget ${budget ? `$${budget}/month` : "not specified"}.`;
   }
-  if (rateExample) msg += ` ${rateExample}`;
+  if (rateExample) msg += `\n- Rate context: ${rateExample}`;
+  msg +=
+    `\n\nWhen another product would be better:\n` +
+    `If health improves, budget changes, or goals shift (for example from approval certainty to lowest monthly cost, or from final expense to larger temporary income protection), a different product line may become the stronger recommendation.`;
   return msg;
 }
 

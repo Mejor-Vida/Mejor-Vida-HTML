@@ -5796,6 +5796,7 @@
           if (!opt) return;
           var pros = Array.isArray(row.pros) ? row.pros.map(function (x) { return String(x || "").trim(); }).filter(Boolean) : [];
           var cons = Array.isArray(row.cons) ? row.cons.map(function (x) { return String(x || "").trim(); }).filter(Boolean) : [];
+          var bestWhen = String(row.better_when || "").trim();
           altTradeoffRows.push(
             '<li><div class="ps-alt-name">' +
               escHtml(opt) +
@@ -5805,6 +5806,9 @@
               "</div>" +
               '<div class="ps-alt-line"><span class="ps-alt-cons">Cons:</span> ' +
               escHtml(cons.join(" | ") || "N/A") +
+              "</div>" +
+              '<div class="ps-alt-line"><span class="ps-alt-pros">Best when:</span> ' +
+              escHtml(bestWhen || "Choose this option when its pricing/approval/goal fit is stronger than the primary recommendation for this client.") +
               "</div>" +
               "</li>"
           );
