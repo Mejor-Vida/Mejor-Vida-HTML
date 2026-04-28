@@ -1085,7 +1085,7 @@ const QUESTION_FLOW = [
   {
     key: "has_major_conditions",
     prompt:
-      "Aside from what we already covered, do they have any other medical conditions or major health issues in the past few years? (yes/no)\n\n" +
+      "Aside from what we already covered, do they have any other doctor-diagnosed medical conditions or major health issues in the past few years? (yes/no)\n\n" +
       PS_MAJOR_CONDITIONS_TABLE_SENTINEL,
     type: "boolean",
     phi: true,
@@ -1777,9 +1777,50 @@ function productTypeLabel(type) {
   return "Life Insurance";
 }
 
-function tradeoffForType(type, priority) {
+function tradeoffForChoice(optionName, type, priority) {
+  const option = String(optionName || "").toLowerCase();
   const t = String(type || "").toLowerCase();
   const p = String(priority || "").toLowerCase();
+  if (/mutual of omaha/.test(option)) {
+    return {
+      pros: [
+        "Strong brand familiarity and broad product lineup for future cross-sell options.",
+        t === "term_life"
+          ? "Term portfolio is often competitive for straightforward low-risk cases."
+          : "Commonly used carrier for simplified and permanent-life scenarios.",
+      ],
+      cons: [
+        "Can be less price-flexible than some alternatives in certain age/health bands.",
+        "Some products may require tighter fit to underwriting rules for best pricing tier.",
+      ],
+    };
+  }
+  if (/american amicable/.test(option)) {
+    return {
+      pros: [
+        "Often useful for approval-focused cases with practical underwriting pathways.",
+        t === "term_life"
+          ? "Term options are usually straightforward for replacement-income style needs."
+          : "Strong final-expense and whole-life style alternatives.",
+      ],
+      cons: [
+        "May not always be the absolute lowest premium for very clean preferred-health profiles.",
+        "Product/rider structure can vary more by specific form and state.",
+      ],
+    };
+  }
+  if (/\bassurity\b/.test(option)) {
+    return {
+      pros: [
+        "Often strong fit when cost-conscious term recommendations are needed.",
+        "Can provide clean product positioning for simple income-replacement conversations.",
+      ],
+      cons: [
+        "May offer fewer niche product variations than larger multi-line carrier menus.",
+        "Final-premium competitiveness still depends on age, state, and underwriting class.",
+      ],
+    };
+  }
   if (t === "final_expense") {
     return {
       pros: [
@@ -1830,7 +1871,7 @@ function buildAlternativeTradeoffs(alternativeProducts, alternativeTypes, priori
     const name = String(prods[i] || types[i] || "").trim();
     const type = String(types[i] || "").trim();
     if (!name) continue;
-    const t = tradeoffForType(type, priority);
+    const t = tradeoffForChoice(name, type, priority);
     out.push({
       option: name,
       pros: t.pros,
@@ -1840,16 +1881,114 @@ function buildAlternativeTradeoffs(alternativeProducts, alternativeTypes, priori
   return out;
 }
 
-function buildBestFitExplanation(context, risk, primaryProduct, primaryType, sourceMode) {
+function uniqueAlternativeObjects(primaryProduct, alternatives) {
+  const p = String(primaryProduct || "").trim();
+  const seen = new Set([p.toLowerCase()]);
+  const out = [];
+  (alternatives || []).forEach((a) => {
+    const name = String(a && a.name ? a.name : "").trim();
+    const type = String(a && a.type ? a.type : "").trim();
+    if (!name) return;
+    const key = name.toLowerCase();
+    if (seen.has(key)) return;
+    seen.add(key);
+    out.push({ name, type });
+  });
+  return out;
+}
+
+function fallbackAlternativesForContext(primaryProduct, context) {
+  const ctx = context && typeof context === "object" ? context : {};
+  const goal = String(ctx.coverage_goal || ctx.intent || "").toLowerCase();
+  let options = [
+    { name: "American Amicable — Senior Choice", type: "final_expense" },
+    { name: "American Amicable — Easy Term", type: "term_life" },
+    { name: "Assurity — Universal Life", type: "universal_life" },
+  ];
+  if (/income|mortgage|debt|business/.test(goal)) {
+    options = [
+      { name: "American Amicable — Easy Term", type: "term_life" },
+      { name: "Assurity — Term Life", type: "term_life" },
+      { name: "Mutual of Omaha — Living Promise Whole Life", type: "final_expense" },
+    ];
+  } else if (/legacy/.test(goal)) {
+    options = [
+      { name: "Assurity — Whole Life Protect+", type: "whole_life" },
+      { name: "American Amicable — Family Solution", type: "whole_life" },
+      { name: "Mutual of Omaha — Income Advantage IUL", type: "universal_life" },
+    ];
+  }
+  return uniqueAlternativeObjects(primaryProduct, options);
+}
+
+function approvedAlternativesFromCatalog(primaryProduct, preferredType, limit) {
+  const lp = String(primaryProduct || "").trim().toLowerCase();
+  const seen = new Set([lp]);
+  const max = Number.isFinite(Number(limit)) ? Math.max(1, Number(limit)) : 3;
+  const byType = ALLOWED_PRODUCT_CATALOG.filter((e) => String(e.productType || "") === String(preferredType || ""));
+  const ranked = byType
+    .map((e) => ({ name: `${e.carrierLabel} — ${e.productName}`, type: e.productType }))
+    .filter((x) => {
+      const key = String(x.name || "").toLowerCase();
+      if (!key || seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
+  return ranked.slice(0, max);
+}
+
+function onePerCarrierAlternatives(primaryProduct, preferredType) {
+  const primaryKey = String(primaryProduct || "").trim().toLowerCase();
+  const carriers = ["Mutual of Omaha", "American Amicable", "Assurity"];
+  const out = [];
+  carriers.forEach((carrierLabel) => {
+    const sameType = ALLOWED_PRODUCT_CATALOG.find((e) => {
+      if (String(e.carrierLabel || "") !== carrierLabel) return false;
+      if (String(e.productType || "") !== String(preferredType || "")) return false;
+      const name = `${e.carrierLabel} — ${e.productName}`.toLowerCase();
+      return name !== primaryKey;
+    });
+    const fallbackAny = ALLOWED_PRODUCT_CATALOG.find((e) => {
+      if (String(e.carrierLabel || "") !== carrierLabel) return false;
+      const name = `${e.carrierLabel} — ${e.productName}`.toLowerCase();
+      return name !== primaryKey;
+    });
+    const picked = sameType || fallbackAny;
+    if (!picked) return;
+    out.push({ name: `${picked.carrierLabel} — ${picked.productName}`, type: picked.productType });
+  });
+  return uniqueAlternativeObjects(primaryProduct, out);
+}
+
+function extractRateExample(rows) {
+  const text = (rows || []).map((r) => String((r && r.content) || "")).join("\n");
+  if (!text) return "";
+  const money = Array.from(text.matchAll(/\$ ?(\d{1,4}(?:\.\d{1,2})?)/g))
+    .map((m) => Number(m[1]))
+    .filter((n) => Number.isFinite(n) && n >= 15 && n <= 1200);
+  const uniq = [...new Set(money)].sort((a, b) => a - b);
+  if (!uniq.length) return "";
+  if (uniq.length === 1) return `Internal rate example found: about $${uniq[0].toFixed(2)}/month (illustrative, not a quoted rate).`;
+  return `Internal rate examples found: about $${uniq[0].toFixed(2)}-$${uniq[Math.min(uniq.length - 1, 2)].toFixed(2)}/month (illustrative, not a quoted rate).`;
+}
+
+function buildBestFitExplanation(context, risk, primaryProduct, primaryType, sourceMode, rateExample) {
   const ctx = context && typeof context === "object" ? context : {};
   const goal = String(ctx.coverage_goal || ctx.intent || "this client goal");
   const priority = String(ctx.priority_type || ctx.strategy_priority || "approval certainty");
   const riskLevel = String((risk && risk.level) || "unknown");
+  const coverage = String(ctx.coverage_amount || "").trim();
+  const budget = String(ctx.budget_monthly || "").trim();
   const sourceText = sourceMode === "rag" ? "internal carrier knowledge matches" : "goal and risk fallback rules";
-  return (
+  let msg = (
     `${primaryProduct} is the best fit because it aligns with the client's goal (${goal}) and priority (${priority}), ` +
     `while staying consistent with a ${riskLevel} risk profile. This recommendation is based on ${sourceText}.`
   );
+  if (coverage || budget) {
+    msg += ` Reviewed case targets: coverage ${coverage || "not specified"} and budget ${budget ? `$${budget}/month` : "not specified"}.`;
+  }
+  if (rateExample) msg += ` ${rateExample}`;
+  return msg;
 }
 
 function recommendFromRagRows(context, risk, rows) {
@@ -1938,8 +2077,26 @@ function recommendFromRagRows(context, risk, rows) {
   const top = matchedRows[0] ? matchedRows[0].row : {};
   const primaryType = primary ? primary.entry.productType : "life_insurance";
   const recommendedProduct = primary ? `${primary.entry.carrierLabel} — ${primary.entry.productName}` : "";
-  const altTypes = alternativesRanked.map((x) => x.entry.productType);
-  const altProducts = alternativesRanked.map((x) => `${x.entry.carrierLabel} — ${x.entry.productName}`);
+  const goalKey = String((context && (context.coverage_goal || context.intent)) || "").toLowerCase();
+  const riskLevel = String((risk && risk.level) || "").toLowerCase();
+  const altObjs = alternativesRanked.map((x) => ({
+    name: `${x.entry.carrierLabel} — ${x.entry.productName}`,
+    type: x.entry.productType,
+  }));
+  let finalAltObjs =
+    altObjs.length >= 2 ? uniqueAlternativeObjects(recommendedProduct, altObjs) : fallbackAlternativesForContext(recommendedProduct, context);
+  const termFocusedGoal = /income_replacement|mortgage_protection|debt_protection|business_continuity/.test(goalKey);
+  const carrierSpreadAlts = onePerCarrierAlternatives(recommendedProduct, primaryType);
+  if (carrierSpreadAlts.length >= 2) finalAltObjs = carrierSpreadAlts;
+  if (termFocusedGoal && primaryType === "term_life" && (riskLevel === "low" || riskLevel === "moderate")) {
+    const termCatalogAlts = approvedAlternativesFromCatalog(recommendedProduct, "term_life", 3);
+    if (termCatalogAlts.length >= 2) finalAltObjs = termCatalogAlts;
+  }
+  const altTypes = finalAltObjs.map((x) => x.type);
+  const altProducts = finalAltObjs.map((x) => x.name);
+  const rateExample = extractRateExample(
+    matchedRows.filter((m) => `${m.entry.carrierLabel} — ${m.entry.productName}` === recommendedProduct).map((m) => m.row)
+  );
 
   return {
     product_type: primaryType,
@@ -1952,7 +2109,8 @@ function recommendFromRagRows(context, risk, rows) {
       `Top match carrier=${String(top.carrier || "unknown")}, product=${String(top.product || "unknown")}, ` +
       `category=${String(top.category || "unknown")}, similarity=${Number.isFinite(Number(top.similarity)) ? Number(top.similarity).toFixed(3) : "n/a"}. ` +
       `Risk signal=${risk.level}, intent=${String(context.intent || "unknown")}.`,
-    best_fit_explanation: buildBestFitExplanation(context, risk, recommendedProduct, primaryType, "rag"),
+    best_fit_explanation: buildBestFitExplanation(context, risk, recommendedProduct, primaryType, "rag", rateExample),
+    rate_example: rateExample || null,
     alternative_tradeoffs: buildAlternativeTradeoffs(altProducts, altTypes, context && context.priority_type),
   };
 }

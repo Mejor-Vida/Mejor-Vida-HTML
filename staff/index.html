@@ -540,6 +540,49 @@
       line-height: 1.25;
       text-align: center;
     }
+    #pane-product-selector .ps-script {
+      display: grid;
+      gap: 10px;
+      margin-top: 6px;
+    }
+    #pane-product-selector .ps-script-section {
+      border: 1px solid rgba(137, 170, 227, 0.28);
+      border-radius: 8px;
+      background: rgba(11, 26, 51, 0.5);
+      padding: 10px 12px;
+    }
+    #pane-product-selector .ps-script-title {
+      font-size: 0.84rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: #aecaef;
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+    #pane-product-selector .ps-script-list {
+      margin: 0;
+      padding: 0 0 0 16px;
+      display: grid;
+      gap: 6px;
+    }
+    #pane-product-selector .ps-script-list li {
+      line-height: 1.4;
+      color: #eaf2ff;
+    }
+    #pane-product-selector .ps-script-label {
+      color: #d8e8ff;
+      font-weight: 700;
+    }
+    #pane-product-selector .ps-script-sub {
+      margin: 6px 0 0 14px;
+      border-left: 2px solid rgba(145, 179, 238, 0.4);
+      padding-left: 10px;
+      color: #d7e7ff;
+    }
+    #pane-product-selector .ps-script-empty {
+      color: #9eb9e6;
+      font-size: 0.9rem;
+    }
     @media (max-width: 900px) {
       #ps-chat-log .ps-major-conditions-grid {
         grid-template-columns: repeat(2, minmax(130px, 1fr));
@@ -4717,6 +4760,8 @@
           if (!s) throw new Error("No selector session found for this lead.");
           var qa = s.qualification_answers && typeof s.qualification_answers === "object" ? s.qualification_answers : {};
           var rec = s.recommendation && typeof s.recommendation === "object" ? s.recommendation : {};
+          var selectorPhi = data && data.phi_answers && typeof data.phi_answers === "object" ? data.phi_answers : null;
+          var canSyncPhi = !!(data && data.can_access_phi && selectorPhi);
           var snap = s.workflow_state && s.workflow_state.profile_snapshot && typeof s.workflow_state.profile_snapshot === "object"
             ? s.workflow_state.profile_snapshot
             : {};
@@ -4741,16 +4786,39 @@
           if (pr) profileExtPatch.priority = pr;
           if (pt) profileExtPatch.product_type = pt;
           if (pl) profileExtPatch.product_line = pl;
+          if (canSyncPhi) {
+            LP_PHI_CHECKBOX_MAP.forEach(function (entry) {
+              var box = document.getElementById(entry[0]);
+              if (!box) return;
+              var key = entry[1];
+              box.checked = !!selectorPhi[key];
+            });
+            LP_PHI_BLOCK_NONE_MAP.forEach(function (block) {
+              var noneBox = document.getElementById(block.noneId);
+              if (!noneBox) return;
+              noneBox.checked = !!selectorPhi[block.phiKey];
+            });
+            LP_PHI_TEXT_MAP.forEach(function (entry) {
+              var node = document.getElementById(entry[0]);
+              if (!node) return;
+              var key = entry[1];
+              node.value = selectorPhi[key] != null ? String(selectorPhi[key]) : "";
+            });
+            setMedicationList(selectorPhi.current_medications);
+            syncLeadProfileHealthConditionalFields();
+          }
 
           scheduleLeadProfileDirtyCheck();
           if (Object.keys(profileExtPatch).length) {
             if (status) status.textContent = "Pushing Coverage & Intent to profile…";
+            var patchBody = {
+              id: lead.id,
+              profile_ext: profileExtPatch,
+            };
+            if (canSyncPhi) patchBody.phi = selectorPhi;
             var saved = await authedApi(
               "/api/staff/leads",
-              {
-                id: lead.id,
-                profile_ext: profileExtPatch,
-              },
+              patchBody,
               { method: "PATCH" }
             );
             if (saved && saved.detail) {
@@ -4760,7 +4828,11 @@
             } else {
               await loadLeadProfileDetail();
             }
-            if (status) status.textContent = "Coverage & Intent pushed to profile and saved.";
+            if (status) {
+              status.textContent = canSyncPhi
+                ? "Coverage, intent, and health qualification pushed to profile and saved."
+                : "Coverage & Intent pushed to profile and saved.";
+            }
           } else {
             if (status) status.textContent = "No selector fields were available to push.";
           }
@@ -5295,7 +5367,6 @@
           "Sleep apnea",
           "Diabetes",
           "Depression",
-          "Anxiety",
           "Heart rhythm issues",
           "Kidney/liver disease",
           "COPD",
@@ -5482,6 +5553,70 @@
         el.chatLog.scrollTop = el.chatLog.scrollHeight;
       }
 
+      function renderSalesScriptHtml(raw) {
+        var text = String(raw || "").trim();
+        if (!text) return '<div class="ps-script-empty">No sales script generated yet.</div>';
+        var lines = text.split("\n");
+        var sections = [];
+        var current = { title: "Sales Script", items: [] };
+        function pushCurrent() {
+          if (current.items.length) sections.push(current);
+        }
+        function parseLabeledBullet(line) {
+          var m = line.match(/^\s*-\s+\*\*(.+?)\*\*:\s*(.*)$/);
+          if (!m) return null;
+          return { label: String(m[1] || "").trim(), body: String(m[2] || "").trim() };
+        }
+        for (var i = 0; i < lines.length; i++) {
+          var ln = String(lines[i] || "");
+          var t = ln.trim();
+          if (!t) continue;
+          if (/^###\s+/.test(t)) {
+            pushCurrent();
+            current = { title: t.replace(/^###\s+/, "").trim(), items: [] };
+            continue;
+          }
+          var labeled = parseLabeledBullet(ln);
+          if (labeled) {
+            current.items.push({ type: "bullet", label: labeled.label, body: labeled.body });
+            continue;
+          }
+          var nested = ln.match(/^\s*-\s+\*\*(Response|Reply|Answer)\*\*:\s*(.*)$/i);
+          if (nested && current.items.length) {
+            current.items[current.items.length - 1].sub = String(nested[2] || "").trim();
+            continue;
+          }
+          if (/^\s*-\s+/.test(ln)) {
+            current.items.push({ type: "bullet", label: "", body: t.replace(/^\-\s+/, "") });
+            continue;
+          }
+          current.items.push({ type: "text", body: t });
+        }
+        pushCurrent();
+        if (!sections.length) return '<div class="ps-script-empty">' + escHtml(text) + "</div>";
+
+        var out = '<div class="ps-script">';
+        sections.forEach(function (sec) {
+          out += '<div class="ps-script-section">';
+          out += '<div class="ps-script-title">' + escHtml(sec.title) + "</div>";
+          out += '<ul class="ps-script-list">';
+          sec.items.forEach(function (it) {
+            if (it.type === "text") {
+              out += "<li>" + escHtml(it.body || "") + "</li>";
+              return;
+            }
+            out += "<li>";
+            if (it.label) out += '<span class="ps-script-label">' + escHtml(it.label) + ":</span> ";
+            out += escHtml(it.body || "");
+            if (it.sub) out += '<div class="ps-script-sub">' + escHtml(it.sub) + "</div>";
+            out += "</li>";
+          });
+          out += "</ul></div>";
+        });
+        out += "</div>";
+        return out;
+      }
+
       function renderProductSelectorOutput(rec, conf, risk, sales) {
         var el = getProductSelectorEls();
         if (!el.output) return;
@@ -5632,8 +5767,8 @@
             ? '<ul style="margin:8px 0 0 18px">' + productRows.join("") + "</ul>"
             : '<div class="small-note" style="margin-top:6px">No specific products found for those carriers in the current matched chunks.</div>') +
           "</div>" +
-          '<div class="meta-card" style="grid-column:1 / -1"><label>Sales script</label><div style="margin-top:6px;white-space:pre-wrap">' +
-          escHtml(script || "") +
+          '<div class="meta-card" style="grid-column:1 / -1"><label>Sales script</label><div style="margin-top:6px">' +
+          renderSalesScriptHtml(script || "") +
           "</div></div>" +
           (objections.length
             ? '<div class="meta-card" style="grid-column:1 / -1"><label>Objection handling</label><ul style="margin:8px 0 0 18px">' +
