@@ -2096,12 +2096,6 @@
                                   <label class="lp-health-check"><input id="lp-phi-depression-treated" type="checkbox" /> Stable on treatment</label>
                                 </div>
                               </div>
-                              <div class="lp-followup-row">
-                                <label class="lp-health-check"><input id="lp-phi-anxiety" type="checkbox" /> Anxiety</label>
-                                <div class="lp-health-field" data-visible-when="anxiety">
-                                  <label class="lp-health-check"><input id="lp-phi-anxiety-treated" type="checkbox" /> Stable on treatment</label>
-                                </div>
-                              </div>
                               <div class="lp-health-field">
                                 <label for="lp-phi-medication-select" class="lp-health-note">Current medications</label>
                               <div id="lp-phi-medication-search-wrap" class="lp-med-search-wrap">
@@ -2131,7 +2125,7 @@
                   </div>
                   </section>
                   <section class="lp-section">
-                  <div class="lp-section-bar">4. Coverage &amp; Intent</div>
+                  <div class="lp-section-bar lp-with-right">4. Coverage &amp; Intent <span class="lp-bar-right"><button id="lp-reset-coverage-intent-btn" type="button" class="secondary">Reset fields</button></span></div>
                   <div class="meta-grid">
                     <div class="meta-card">
                       <label for="lp-coverage-goal">Coverage Goal</label>
@@ -3968,8 +3962,6 @@
         ["lp-phi-cpap-use", "cpap_use"],
         ["lp-phi-depression", "depression"],
         ["lp-phi-depression-treated", "depression_treated"],
-        ["lp-phi-anxiety", "anxiety"],
-        ["lp-phi-anxiety-treated", "anxiety_treated"],
       ];
       var LP_PHI_BLOCK_NONE_MAP = [
         { noneId: "lp-phi-block-a-none", phiKey: "health_block_a_none", checkboxKeys: ["terminal_illness", "aids_hiv", "organ_transplant"], textKeys: [] },
@@ -4031,8 +4023,6 @@
             "cpap_use",
             "depression",
             "depression_treated",
-            "anxiety",
-            "anxiety_treated",
           ],
           textKeys: [],
         },
@@ -4356,7 +4346,6 @@
           cholesterol_high: !!(document.getElementById("lp-phi-cholesterol-high") && document.getElementById("lp-phi-cholesterol-high").checked),
           sleep_apnea: !!(document.getElementById("lp-phi-sleep-apnea") && document.getElementById("lp-phi-sleep-apnea").checked),
           depression: !!(document.getElementById("lp-phi-depression") && document.getElementById("lp-phi-depression").checked),
-          anxiety: !!(document.getElementById("lp-phi-anxiety") && document.getElementById("lp-phi-anxiety").checked),
         };
         var nodes = document.querySelectorAll("#lp-phi-block [data-visible-when]");
         Array.prototype.forEach.call(nodes, function (node) {
@@ -4773,6 +4762,32 @@
         return "";
       }
 
+      function deriveBlockNoneFromPhi(phi, block) {
+        var src = phi && typeof phi === "object" ? phi : {};
+        var hasAnyChecked = (block.checkboxKeys || []).some(function (k) {
+          return src[k] === true;
+        });
+        var hasAnyText = (block.textKeys || []).some(function (k) {
+          return String(src[k] == null ? "" : src[k]).trim() !== "";
+        });
+        if (block.noneId === "lp-phi-block-stage3-none") {
+          var meds = Array.isArray(src.current_medications) ? src.current_medications : [];
+          if (meds.length) return false;
+        }
+        return !(hasAnyChecked || hasAnyText);
+      }
+
+      function withDerivedHealthBlockNone(phiRaw) {
+        var out = Object.assign({}, phiRaw && typeof phiRaw === "object" ? phiRaw : {});
+        LP_PHI_BLOCK_NONE_MAP.forEach(function (block) {
+          out[block.phiKey] = deriveBlockNoneFromPhi(out, block);
+        });
+        out.health_none_reported = LP_PHI_BLOCK_NONE_MAP.every(function (block) {
+          return !!out[block.phiKey];
+        });
+        return out;
+      }
+
       async function syncCoverageIntentFromSelector(targetStatusElId) {
         var lead = getSelectedLeadFromList();
         var status = document.getElementById(targetStatusElId || "lead-profile-status");
@@ -4794,7 +4809,8 @@
           if (!s) throw new Error("No selector session found for this lead.");
           var qa = s.qualification_answers && typeof s.qualification_answers === "object" ? s.qualification_answers : {};
           var rec = s.recommendation && typeof s.recommendation === "object" ? s.recommendation : {};
-          var selectorPhi = data && data.phi_answers && typeof data.phi_answers === "object" ? data.phi_answers : null;
+          var selectorPhiRaw = data && data.phi_answers && typeof data.phi_answers === "object" ? data.phi_answers : null;
+          var selectorPhi = selectorPhiRaw ? withDerivedHealthBlockNone(selectorPhiRaw) : null;
           var canSyncPhi = !!(data && data.can_access_phi && selectorPhi);
           var snap = s.workflow_state && s.workflow_state.profile_snapshot && typeof s.workflow_state.profile_snapshot === "object"
             ? s.workflow_state.profile_snapshot
@@ -5029,6 +5045,60 @@
         openLeadProfileSaveModal();
       }
 
+      async function resetCoverageIntentFields() {
+        if (leadProfileReadOnly) return;
+        if (!composeSelectedLeadId) return;
+        var status = document.getElementById("lead-profile-status");
+        var ok = window.confirm("Reset Coverage & Intent fields and save this reset?");
+        if (!ok) return;
+        if (status) status.textContent = "Resetting Coverage & Intent…";
+        try {
+          var ids = [
+            "lp-coverage-goal",
+            "lp-desired-coverage",
+            "lp-monthly-budget",
+            "lp-priority",
+            "lp-product-type",
+            "lp-product-line",
+            "lp-beneficiary-plan",
+            "lp-policy-owner",
+          ];
+          ids.forEach(function (id) {
+            var el = document.getElementById(id);
+            if (!el) return;
+            el.value = "";
+          });
+          var covCustom = document.getElementById("lp-desired-coverage-custom");
+          if (covCustom) covCustom.value = "";
+          syncLeadProfileDesiredCoverageCustom();
+
+          var patchBody = {
+            id: composeSelectedLeadId,
+            profile_ext: {
+              coverage_goal: null,
+              desired_coverage_amount: null,
+              monthly_budget: null,
+              priority: null,
+              product_type: null,
+              product_line: null,
+              beneficiary_plan: null,
+              policy_owner: null,
+            },
+          };
+          var data = await authedApi("/api/staff/leads", patchBody, { method: "PATCH" });
+          if (data && data.detail) {
+            applyLeadProfileDetailToForm(data.detail);
+            leadProfileBaselineJson = JSON.stringify(serializeLeadProfileFromForm());
+            updateLeadProfileSaveButton();
+          } else {
+            await loadLeadProfileDetail();
+          }
+          if (status) status.textContent = "Coverage & Intent fields reset and saved.";
+        } catch (e) {
+          if (status) status.textContent = (e && e.message) || "Could not reset Coverage & Intent fields.";
+        }
+      }
+
       async function performLeadProfileSave() {
         closeLeadProfileSaveModal();
         var status = document.getElementById("lead-profile-status");
@@ -5137,6 +5207,10 @@
         wireLeadProfileHealthTooltips();
       wireLeadProfileHealthNoneToggle();
         saveBtn.addEventListener("click", onLeadProfileSaveClick);
+        var resetCoverageBtn = document.getElementById("lp-reset-coverage-intent-btn");
+        if (resetCoverageBtn) resetCoverageBtn.addEventListener("click", function () {
+          void resetCoverageIntentFields();
+        });
       }
 
       function getProductSelectorEls() {

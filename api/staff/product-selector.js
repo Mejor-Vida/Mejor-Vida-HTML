@@ -1115,21 +1115,6 @@ const QUESTION_FLOW = [
     },
   },
   {
-    key: "anxiety",
-    prompt: "Any anxiety diagnosis? (yes/no)",
-    type: "boolean",
-    phi: true,
-  },
-  {
-    key: "anxiety_treated",
-    prompt: "If anxiety, is it stable on treatment? (yes/no)",
-    type: "boolean",
-    phi: true,
-    askIf: function (nonPhiAnswers, phiAnswers) {
-      return !!(phiAnswers && phiAnswers.anxiety);
-    },
-  },
-  {
     key: "current_medications",
     prompt: "Please list current medications (or type none).",
     type: "text",
@@ -1491,8 +1476,6 @@ function adaptiveQuestionOrder(nonPhiAnswers, phiAnswers) {
     "cpap_use",
     "depression",
     "depression_treated",
-    "anxiety",
-    "anxiety_treated",
     "hospitalization_reason",
     "current_medications",
   ];
@@ -1558,7 +1541,6 @@ function shouldStopQualification(nonPhiAnswers, phiAnswers, allowPhi) {
   if (phi.cholesterol_high === true && (phi.cholesterol_controlled !== true && phi.cholesterol_controlled !== false)) return false;
   if (phi.sleep_apnea === true && (phi.cpap_use !== true && phi.cpap_use !== false)) return false;
   if (phi.depression === true && (phi.depression_treated !== true && phi.depression_treated !== false)) return false;
-  if (phi.anxiety === true && (phi.anxiety_treated !== true && phi.anxiety_treated !== false)) return false;
   const healthAnchors = [
     "has_major_conditions",
     "takes_prescription_medications",
@@ -1647,8 +1629,6 @@ function nextQuestionKey(nonPhiAnswers, phiAnswers, allowPhi) {
         "cpap_use",
         "depression",
         "depression_treated",
-        "anxiety",
-        "anxiety_treated",
       ],
     },
   ];
@@ -1663,6 +1643,20 @@ function nextQuestionKey(nonPhiAnswers, phiAnswers, allowPhi) {
     // (e.g., high_blood_pressure -> bp_controlled) get skipped.
     blockCompleted[group.noneKey] = !!phiSrc[group.noneKey];
   });
+  // Defensive guard: if any Stage 3 condition is already selected, treat Stage 3 "none"
+  // as not completed so required control follow-ups are still asked.
+  if (
+    anyTrue(phiSrc, [
+      "atrial_fibrillation",
+      "stents_placed",
+      "high_blood_pressure",
+      "cholesterol_high",
+      "sleep_apnea",
+      "depression",
+    ])
+  ) {
+    blockCompleted.health_block_stage3_none = false;
+  }
   const orderedKeys = adaptiveQuestionOrder(nonPhiAnswers, phiAnswers);
   const orderedQuestions = orderedKeys.map((k) => questionByKey(k)).filter(Boolean);
   for (const q of orderedQuestions) {
@@ -1698,7 +1692,6 @@ function deriveRisk(context, phiAnswers) {
   const merged = Object.assign({}, context || {}, phiAnswers || {});
   const hasMajorCondition =
     anyTrue(merged, [
-      "has_major_conditions",
       "heart_event_recent",
       "congestive_heart_failure",
       "cancer_active",
@@ -1720,7 +1713,6 @@ function deriveRisk(context, phiAnswers) {
   const cholesterolModerate = bool(merged.cholesterol_high) && merged.cholesterol_controlled === false;
   const sleepApneaModerate = bool(merged.sleep_apnea) && merged.cpap_use === false;
   const depressionModerate = bool(merged.depression) && merged.depression_treated === false;
-  const anxietyModerate = bool(merged.anxiety) && merged.anxiety_treated === false;
   const afibModerate = bool(merged.atrial_fibrillation) && merged.afib_controlled === false;
   const stentsModerate = bool(merged.stents_placed) && merged.stents_recent === true;
   const diabetesType = String(merged.diabetes_type || "").toLowerCase();
@@ -1740,7 +1732,6 @@ function deriveRisk(context, phiAnswers) {
     cholesterolModerate ||
     sleepApneaModerate ||
     depressionModerate ||
-    anxietyModerate ||
     afibModerate ||
     stentsModerate
   ) {
@@ -1773,11 +1764,6 @@ function deriveRisk(context, phiAnswers) {
     if (merged.depression_treated === true) flags.push("depression_stable_on_treatment");
     else if (merged.depression_treated === false) flags.push("depression_not_stable_on_treatment");
     else flags.push("depression_treatment_status_unknown");
-  }
-  if (bool(merged.anxiety)) {
-    if (merged.anxiety_treated === true) flags.push("anxiety_stable_on_treatment");
-    else if (merged.anxiety_treated === false) flags.push("anxiety_not_stable_on_treatment");
-    else flags.push("anxiety_treatment_status_unknown");
   }
   if (bool(merged.diabetes)) {
     if (merged.diabetes_complications === true) flags.push("diabetes_complications_yes");
@@ -3093,7 +3079,6 @@ module.exports = async function handler(req, res) {
               nextPhi.cholesterol_high = false;
               nextPhi.sleep_apnea = false;
               nextPhi.depression = false;
-              nextPhi.anxiety = false;
               nextPhi.atrial_fibrillation = false;
             } else {
               applyMajorConditionsNumberPicks(nextPhi, mr.pickSet);
