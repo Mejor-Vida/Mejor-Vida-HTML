@@ -169,7 +169,7 @@ async function handleEmailOptin(body, supabaseUrl, supabaseKey, hubspotToken, re
     hs_lead_status: "OPEN",
   };
   if (!isNebraska) {
-    customProps.mvs_fe_lead_source = "referral";
+    customProps.lead_source = "Referral";
   }
 
   const consentNote =
