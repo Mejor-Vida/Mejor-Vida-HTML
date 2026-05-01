@@ -109,6 +109,27 @@ async function selectUnifiedLeadById(cfg, id) {
   return Array.isArray(one) && one.length ? one[0] : null;
 }
 
+/** When the view omits a row (dedupe edge case), resolve source table by id for DELETE. */
+async function resolveLeadRowForDelete(cfg, id) {
+  const fromView = await selectUnifiedLeadById(cfg, id);
+  if (fromView && String(fromView.source_table || "").trim()) return fromView;
+  const enc = encodeURIComponent(id);
+  const q = `id=eq.${enc}&select=id`;
+  const tables = ["quote_lead_submissions", "manychat_leads", "contacts", "whatsapp_leads", "fex_email_quotes"];
+  for (const table of tables) {
+    try {
+      const rows = await restSelect(cfg, table, q);
+      if (Array.isArray(rows) && rows[0] && rows[0].id) {
+        return { id, source_table: table };
+      }
+    } catch (e) {
+      if (isMissingTableDeleteMsg(e && e.message)) continue;
+      throw e;
+    }
+  }
+  return null;
+}
+
 function isBlankValue(v) {
   return v == null || v === "" || (Array.isArray(v) && v.length === 0);
 }
@@ -1046,7 +1067,7 @@ module.exports = async function handler(req, res) {
       return json(res, 400, { error: "Valid lead id required (query: id)" });
     }
     try {
-      const unified = await selectUnifiedLeadById(cfg, id);
+      const unified = await resolveLeadRowForDelete(cfg, id);
       if (!unified) return json(res, 404, { error: "Lead not found" });
       const src = String(unified.source_table || "");
       await hardDeleteUnifiedSourceRow(cfg, unified);
@@ -1069,7 +1090,10 @@ module.exports = async function handler(req, res) {
             "Cannot delete this lead while other database rows still reference it. Remove dependents or delete from Supabase SQL.",
         });
       }
-      return json(res, 500, { error: "Failed to delete lead" });
+      return json(res, 500, {
+        error: "Failed to delete lead",
+        detail: msg.length > 400 ? `${msg.slice(0, 400)}…` : msg,
+      });
     }
   }
 

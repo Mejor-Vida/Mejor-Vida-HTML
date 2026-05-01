@@ -1620,7 +1620,7 @@
       <div class="top-brand-row">
         <div>
           <b>Mejor Vida Insurance — Staff Portal</b>
-          <small>Staff Access Only — Login Required<span id="staff-build-stamp" class="staff-build-stamp" title="If this number is missing after refresh, the page is cached.">· UI 20260501b</span></small>
+          <small>Staff Access Only — Login Required<span id="staff-build-stamp" class="staff-build-stamp" title="If this number is missing after refresh, the page is cached.">· UI 20260501c</span></small>
         </div>
         <div id="top-active-lead" class="top-active-lead empty" title="Lead selected across staff tools">No lead selected</div>
         <button id="signout-btn" class="signout" type="button" data-help="Signs you out of the staff portal on this browser.">Sign Out</button>
@@ -3820,6 +3820,14 @@
           reply: document.getElementById("compose-reply"),
           status: document.getElementById("compose-status"),
         };
+      }
+
+      /** Lead Profile tab hides the compose pane; still show delete/load feedback here. */
+      function setStaffLeadListFeedback(text) {
+        var co = document.getElementById("compose-status");
+        var lp = document.getElementById("lead-profile-status");
+        if (co) co.textContent = text;
+        if (lp) lp.textContent = text;
       }
 
       function getComposeRecipientName() {
@@ -6661,8 +6669,8 @@
         var L = composeDeletePending;
         closeComposeDeleteModal();
         if (!L || !L.id) return;
+        setStaffLeadListFeedback("Deleting…");
         var el = getComposeEls();
-        el.status.textContent = "Removing…";
         try {
           await authedApi("/api/staff/leads?id=" + encodeURIComponent(L.id), null, { method: "DELETE" });
           if (composeSelectedLeadId === L.id) {
@@ -6672,12 +6680,13 @@
             el.email.value = "";
             el.phone.value = "";
             updateTopActiveLeadDisplay();
+            void loadLeadProfileDetail();
           }
-          el.status.textContent = "Refreshing list…";
+          setStaffLeadListFeedback("Refreshing list…");
           await ensureComposeLeadsLoaded();
-          el.status.textContent = "Lead deleted from database.";
+          setStaffLeadListFeedback("Lead deleted from database.");
         } catch (err) {
-          el.status.textContent = (err && err.message) || "Could not remove lead.";
+          setStaffLeadListFeedback((err && err.message) || "Could not delete lead.");
         }
       }
 
