@@ -6465,8 +6465,17 @@
           });
           renderStaffLeadLists();
         } catch (e) {
-          getComposeEls().status.textContent = "Could not load leads list.";
-          renderStaffLeadLists();
+          var errMsg = (e && e.message) || "Could not load leads list.";
+          getComposeEls().status.textContent = errMsg;
+          composeLeads = [];
+          var errDiv =
+            '<div class="compose-lead-empty" style="padding:10px;max-width:320px">' +
+            escHtml(errMsg) +
+            "</div>";
+          var lpList = document.getElementById("lead-profile-lead-list");
+          var coList = document.getElementById("compose-lead-list");
+          if (lpList) lpList.innerHTML = errDiv;
+          if (coList) coList.innerHTML = errDiv;
         }
       }
 

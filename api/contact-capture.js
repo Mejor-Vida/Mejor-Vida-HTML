@@ -17,7 +17,7 @@
 const { verifyManychatSecret, logRequest } = require("../lib/manychat-auth");
 const { upsertManychatLeadByPhone } = require("../lib/supabase");
 const { upsertContact, upsertLeadState, insertEvent } = require("../lib/contacts-db");
-const { createOrUpdateContact, hubspotAddNote } = require("../lib/hubspot");
+const { hubspotAddNote } = require("../lib/hubspot");
 const { syncContactToHubspot } = require("../lib/hubspot-sync-lib");
 
 function hubspotPipelineId() {
@@ -96,32 +96,11 @@ async function handleInitialContact(body, supabaseUrl, supabaseKey, hubspotToken
     drop_off_stage: null,
   };
 
-  const settled = await Promise.allSettled([
-    upsertManychatLeadByPhone(supabaseUrl, supabaseKey, phone, row),
-    hubspotToken
-      ? createOrUpdateContact(
-          hubspotToken,
-          {
-            firstname: firstName || "WhatsApp",
-            ...(lastName ? { lastname: lastName } : {}),
-            phone,
-          },
-          {
-            lifecyclestage: "lead",
-            hs_lead_status: "OPEN",
-            preferred_language: "Spanish",
-          },
-        )
-      : Promise.resolve(null),
-  ]);
+  const settled = await Promise.allSettled([upsertManychatLeadByPhone(supabaseUrl, supabaseKey, phone, row)]);
 
   if (settled[0].status === "rejected") {
     console.error("contact-capture supabase", settled[0].reason);
     return json(res, 500, { success: false, error: "Could not save contact" });
-  }
-
-  if (settled[1].status === "rejected") {
-    console.error("contact-capture hubspot", settled[1].reason);
   }
 
   // Also write to v2 contacts table — then sync HubSpot from Supabase (full first/last/email when present).
@@ -192,33 +171,12 @@ async function handleEmailOptin(body, supabaseUrl, supabaseKey, hubspotToken, re
     drop_off_stage: null,
   };
 
-  const baseProps = {
-    ...(email ? { email } : {}),
-    firstname: firstName || undefined,
-    lastname: lastName || undefined,
-    phone: phone || undefined,
-  };
-
-  const customProps = {
-    preferred_language: language,
-    lifecyclestage: "lead",
-    hs_lead_status: "OPEN",
-  };
-  if (!isNebraska) {
-    customProps.lead_source = "Referral";
-  }
-
   const consentNote =
     `Opt-in consent recorded via WhatsApp chatbot on ${now}. ` +
     `Contact agreed to be contacted by a licensed insurance agent via phone, email, or text message. ` +
     `Lead type: ${isNebraska ? "Nebraska (direct)" : "Out-of-state (referral)"}.`;
 
-  const settled = await Promise.allSettled([
-    upsertManychatLeadByPhone(supabaseUrl, supabaseKey, phone, row),
-    hubspotToken
-      ? createOrUpdateContact(hubspotToken, baseProps, customProps)
-      : Promise.resolve(null),
-  ]);
+  const settled = await Promise.allSettled([upsertManychatLeadByPhone(supabaseUrl, supabaseKey, phone, row)]);
 
   if (settled[0].status === "rejected") {
     console.error("email-optin-capture supabase", settled[0].reason);
@@ -226,10 +184,6 @@ async function handleEmailOptin(body, supabaseUrl, supabaseKey, hubspotToken, re
   }
 
   const leadId = settled[0].value;
-
-  if (settled[1].status === "rejected") {
-    console.error("email-optin-capture hubspot", settled[1].reason);
-  }
 
   // Also write to v2 contacts table — then sync HubSpot from Supabase (email + names + deal stage).
   let v2ContactId = null;
@@ -252,23 +206,21 @@ async function handleEmailOptin(body, supabaseUrl, supabaseKey, hubspotToken, re
     console.error("contact-capture v2 email_optin upsert error:", e.message);
   }
 
+  let hsContactIdForNote = null;
   if (hubspotToken && v2ContactId) {
     try {
-      await syncContactToHubspot(supabaseUrl, supabaseKey, hubspotToken, hubspotPipelineId(), v2ContactId);
+      const hsOut = await syncContactToHubspot(supabaseUrl, supabaseKey, hubspotToken, hubspotPipelineId(), v2ContactId);
+      if (hsOut && hsOut.hubspot_contact_id) hsContactIdForNote = hsOut.hubspot_contact_id;
     } catch (e) {
       console.error("[contact-capture email_optin] hubspot-sync:", e.message);
     }
   }
 
-  // Add consent note to HubSpot contact (best-effort)
-  if (hubspotToken && settled[1].status === "fulfilled" && settled[1].value) {
-    const contactId = settled[1].value.contactId;
-    if (contactId) {
-      try {
-        await hubspotAddNote(hubspotToken, contactId, consentNote);
-      } catch (e) {
-        console.error("email-optin-capture hubspot note", e);
-      }
+  if (hubspotToken && hsContactIdForNote) {
+    try {
+      await hubspotAddNote(hubspotToken, hsContactIdForNote, consentNote);
+    } catch (e) {
+      console.error("email-optin-capture hubspot note", e);
     }
   }
 

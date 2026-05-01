@@ -496,8 +496,12 @@ module.exports = async function handler(req, res) {
     }
 
     try {
-      // Keep old migration check so staff still gets a useful error if manychat schema is stale.
-      await selectManychatLeadsForStaff(cfg);
+      // Schema probe: must not block unified_leads if manychat_leads errors for unrelated reasons.
+      try {
+        await selectManychatLeadsForStaff(cfg);
+      } catch (probeErr) {
+        console.error("staff/leads GET manychat probe", probeErr && probeErr.message);
+      }
       const rows = await selectUnifiedLeadsForStaff(cfg);
       const items = (rows || []).map((r) => ({
         id: r.id,
