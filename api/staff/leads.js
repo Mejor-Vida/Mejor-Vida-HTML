@@ -66,58 +66,6 @@ function dedupeKeyForLead(lead) {
   return `${sourceTable}:${sourceId}`;
 }
 
-/** Pipeline / E2E rows that should not appear in the staff lead picker. */
-function emailLooksLikeInternalTest(emailNorm) {
-  const em = String(emailNorm || "").trim().toLowerCase();
-  if (!em) return false;
-  if (em.endsWith("@example.com")) return true;
-  if (em.includes("mv-referral-") || em.includes("mv-whatsapp")) return true;
-  return false;
-}
-
-function hasUnresolvedTemplateToken(item) {
-  const blob = `${String((item && item.first_name) || "")} ${String((item && item.last_name) || "")} ${String(
-    (item && item.display_name) || ""
-  )}`;
-  return /\{\{|\}\}/.test(blob);
-}
-
-/**
- * Staff portal lead list: only real team members (Julie, Justin, Nancy) and not
- * placeholder or automated test rows. Override with STAFF_PORTAL_LEAD_EMAIL_ALLOWLIST
- * (comma-separated emails) to pin an exact allowlist.
- */
-function visibleInStaffLeadList(item) {
-  const rawAllow = String(process.env.STAFF_PORTAL_LEAD_EMAIL_ALLOWLIST || "").trim();
-  const em = normalizeEmail(item && item.email);
-  const fn = String((item && item.first_name) || "")
-    .trim()
-    .toLowerCase();
-
-  if (rawAllow) {
-    const set = new Set(
-      rawAllow
-        .split(",")
-        .map((s) => normalizeEmail(s))
-        .filter(Boolean)
-    );
-    return !!(em && set.has(em));
-  }
-
-  if (emailLooksLikeInternalTest(em)) return false;
-  if (hasUnresolvedTemplateToken(item)) return false;
-
-  if (em === "julie@mejorvidainsurance.com") return true;
-  if (em === "admin@mejorvidainsurance.com") return true;
-  if (fn === "nancy") return true;
-  const dn = String((item && item.display_name) || "")
-    .trim()
-    .toLowerCase();
-  if (dn.startsWith("nancy")) return true;
-
-  return false;
-}
-
 /** PostgREST / Postgres when manychat_leads.staff_hidden_at is not migrated yet */
 function isStaffHiddenColumnError(msg) {
   return /staff_hidden_at|42703|PGRST204|column.*does not exist|Could not find/i.test(String(msg || ""));
@@ -565,9 +513,8 @@ module.exports = async function handler(req, res) {
         updated_at: r.updated_at || null,
       }));
       await enrichLeadEmailsFromContacts(cfg, items);
-      const visible = items.filter(visibleInStaffLeadList);
-      visible.sort((x, y) => sortKey(x).localeCompare(sortKey(y)));
-      return json(res, 200, { items: visible });
+      items.sort((x, y) => sortKey(x).localeCompare(sortKey(y)));
+      return json(res, 200, { items });
     } catch (e) {
       console.error("staff/leads GET", e);
       return json(res, 500, { error: "Failed to load leads" });
