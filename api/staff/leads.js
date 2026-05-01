@@ -512,7 +512,11 @@ module.exports = async function handler(req, res) {
         created_at: r.created_at || null,
         updated_at: r.updated_at || null,
       }));
-      await enrichLeadEmailsFromContacts(cfg, items);
+      try {
+        await enrichLeadEmailsFromContacts(cfg, items);
+      } catch (e) {
+        console.error("staff/leads GET enrichLeadEmailsFromContacts", e);
+      }
       items.sort((x, y) => sortKey(x).localeCompare(sortKey(y)));
       return json(res, 200, { items });
     } catch (e) {
@@ -736,7 +740,11 @@ module.exports = async function handler(req, res) {
         source: unified.source || unified.source_table || "unknown",
         source_table: unified.source_table || "unknown",
       };
-      await enrichLeadEmailsFromContacts(cfg, [one]);
+      try {
+        await enrichLeadEmailsFromContacts(cfg, [one]);
+      } catch (e) {
+        console.error("staff/leads PATCH enrichLeadEmailsFromContacts", e);
+      }
       let detail = null;
       if (src === "manychat_leads") {
         const row = await selectManychatLeadDetailById(cfg, id);
