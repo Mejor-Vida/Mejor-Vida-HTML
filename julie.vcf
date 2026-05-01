@@ -1,13 +1,14 @@
 BEGIN:VCARD
 VERSION:3.0
-FN:Mejor Vida Insurance
+FN:Julie – Mejor Vida Insurance
 N:Braunsroth;Julie;;;
-ORG:Mejor Vida Insurance
-TITLE:Julie Braunsroth
-TEL;TYPE=WORK,VOICE,PREF:+14025881125
-TEL;TYPE=WORK,MSG:+14027355665
-EMAIL;TYPE=WORK:julie@mejorvidainsurance.com
+ORG:Mejor Vida Insurance LLC
+TITLE:Licensed Life & Health Insurance Agent
+TEL;TYPE=WORK,VOICE,PREF:+14024405438
+TEL;TYPE=WORK,VOICE:+14025881125
+TEL;TYPE=MSG:+14027355665
+EMAIL;TYPE=WORK:Julie@mejorvidainsurance.com
 URL:https://www.mejorvidainsurance.com
-ADR;TYPE=WORK:;;Nebraska;;;US
-NOTE:Licensed Insurance Agent — Nebraska Producer License #21695431. Final expense coverage starting under $30/month. Text or WhatsApp anytime!
+ADR;TYPE=WORK:;;1201 O St Ste 309 Unit #597;Lincoln;NE;68508;US
+NOTE:Nebraska Producer License #21695431. Office +1-402-440-5438. Julie may return your call from +1-402-588-1125. SMS reminders from +1-402-735-5665. Final expense coverage — ask for a quote.
 END:VCARD
