@@ -36,13 +36,34 @@ function readJsonBody(req) {
 // Strip those so downstream code sees an empty string instead.
 function resolveManyChat(val) {
   if (typeof val !== "string") return val;
-  return /^\{\{[^}]+\}\}$/.test(val.trim()) ? "" : val;
+  const t = val.trim();
+  if (!t) return "";
+  if (/^\{\{[\s\S]*\}\}$/.test(t)) return "";
+  return t;
+}
+
+/** Names: unresolved whole-token + embedded {{...}} (wrong External Request mapping). Do not use on phone/ids. */
+function cleanManychatNameField(val) {
+  const s = resolveManyChat(String(val == null ? "" : val).trim());
+  if (!s) return "";
+  return s
+    .replace(/\{\{[^}]+\}\}/g, "")
+    .trim()
+    .replace(/\s{2,}/g, " ");
 }
 
 /* ── Initial contact handler ───────────────────────────────────── */
 async function handleInitialContact(body, supabaseUrl, supabaseKey, hubspotToken, res) {
-  const firstName = String(body.first_name || body.name || "").trim().split(" ")[0].slice(0, 200) || null;
-  const lastName = String(body.last_name || "").trim().slice(0, 200) || null;
+  const fromFirst = cleanManychatNameField(body.first_name || body.firstName || "");
+  const fromLast = cleanManychatNameField(body.last_name || body.lastName || "");
+  const fromFull = cleanManychatNameField(body.name || "");
+  let firstName = fromFirst.slice(0, 200) || null;
+  let lastName = fromLast.slice(0, 200) || null;
+  if (fromFull) {
+    const parts = fromFull.split(/\s+/).filter(Boolean);
+    if (!firstName) firstName = (parts[0] || "").slice(0, 200) || null;
+    if (!lastName) lastName = (parts.slice(1).join(" ") || "").slice(0, 200) || null;
+  }
   const phone = (
     resolveManyChat(String(body.phone || "").trim()) || resolveManyChat(String(body.whatsapp_id || "").trim())
   ).slice(0, 40);
@@ -124,8 +145,8 @@ async function handleInitialContact(body, supabaseUrl, supabaseKey, hubspotToken
 
 /* ── Email + opt-in handler ────────────────────────────────────── */
 async function handleEmailOptin(body, supabaseUrl, supabaseKey, hubspotToken, res) {
-  const firstName = resolveManyChat(String(body.first_name || body.firstName || "").trim()).slice(0, 200);
-  const lastName = resolveManyChat(String(body.last_name || body.lastName || "").trim()).slice(0, 200);
+  const firstName = cleanManychatNameField(body.first_name || body.firstName || "").slice(0, 200);
+  const lastName = cleanManychatNameField(body.last_name || body.lastName || "").slice(0, 200);
   const phone = resolveManyChat(String(body.phone || body.whatsapp_phone || "").trim()).slice(0, 40);
   const rawEmail = resolveManyChat(String(body.email || "").trim().toLowerCase());
   const email = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(rawEmail) ? rawEmail.slice(0, 500) : null;
