@@ -58,6 +58,15 @@ async function restInsert(cfg, table, payload) {
   return text ? JSON.parse(text) : [];
 }
 
+async function restDelete(cfg, table, query) {
+  const r = await fetch(`${cfg.supabaseUrl}/rest/v1/${table}?${query}`, {
+    method: "DELETE",
+    headers: restHeaders(cfg.serviceKey, false),
+  });
+  const text = await r.text();
+  if (!r.ok) throw new Error(`Supabase delete ${table} ${r.status}: ${text.slice(0, 300)}`);
+}
+
 module.exports = {
   requireStaffAuth,
   json,
@@ -66,4 +75,5 @@ module.exports = {
   restSelect,
   restPatch,
   restInsert,
+  restDelete,
 };

@@ -1,6 +1,6 @@
 const { requireStaffAuth } = require("../auth-check");
 const { logIntegrationAudit } = require("../../lib/integration-audit");
-const { json, serviceConfig, restSelect, restInsert, restPatch } = require("./_inbox-lib");
+const { json, serviceConfig, restSelect, restInsert, restPatch, restDelete } = require("./_inbox-lib");
 const { canAccessPhi } = require("../../lib/staff-permissions");
 const { readPhiByLead, writePhiByLead } = require("../../lib/phi-store");
 const { hubspotPhoneSearchVariants } = require("../../lib/hubspot-phone-variants");
@@ -368,36 +368,60 @@ async function readPhiMergedForLead(cfg, leadId, leadSourceTable, alternateLeadK
   return phiPayload;
 }
 
-async function upsertStaffHiddenLead(cfg, lead) {
-  const payload = [
-    {
-      dedupe_key: staffHiddenDedupeKey(lead),
-      email_key: normalizeEmail(lead.email) || null,
-      phone_key: normalizePhone(lead.phone) || null,
-      name_key: normalizeName(lead.display_name) || null,
-      source_table: String(lead.source_table || "unknown"),
-      source_id: lead.id,
-      hidden_at: new Date().toISOString(),
-    },
-  ];
-  const r = await fetch(
-    `${cfg.supabaseUrl}/rest/v1/staff_hidden_leads?on_conflict=dedupe_key`,
-    {
-      method: "POST",
-      headers: {
-        apikey: cfg.serviceKey,
-        Authorization: `Bearer ${cfg.serviceKey}`,
-        "Content-Type": "application/json",
-        Prefer: "resolution=merge-duplicates,return=representation",
-      },
-      body: JSON.stringify(payload),
-    }
-  );
-  const text = await r.text();
-  if (!r.ok) {
-    throw new Error(`Supabase upsert staff_hidden_leads ${r.status}: ${text.slice(0, 300)}`);
+function isMissingTableDeleteMsg(msg) {
+  return /42P01|does not exist|PGRST205|Could not find|schema cache/i.test(String(msg || ""));
+}
+
+async function safeRestDelete(cfg, table, query) {
+  try {
+    await restDelete(cfg, table, query);
+  } catch (e) {
+    if (isMissingTableDeleteMsg(e && e.message)) return;
+    throw e;
   }
-  return text ? JSON.parse(text) : [];
+}
+
+/** Staff-only satellite rows keyed by (lead_id, lead_source_table), plus hide-table cleanup. */
+async function deleteStaffLinkedRows(cfg, leadId, leadSourceTable) {
+  const encId = encodeURIComponent(leadId);
+  const encSt = encodeURIComponent(leadSourceTable);
+  const pair = `lead_id=eq.${encId}&lead_source_table=eq.${encSt}`;
+  await safeRestDelete(cfg, "product_selector_sessions", pair);
+  await safeRestDelete(cfg, "lead_underwriting_phi", pair);
+  await safeRestDelete(cfg, "staff_lead_profiles", pair);
+  const dedupeKey = staffHiddenDedupeKey({ id: leadId, source_table: leadSourceTable });
+  await safeRestDelete(cfg, "staff_hidden_leads", `source_id=eq.${encId}&source_table=eq.${encSt}`);
+  await safeRestDelete(cfg, "staff_hidden_leads", `dedupe_key=eq.${encodeURIComponent(dedupeKey)}`);
+}
+
+/** Permanently remove the unified directory row and staff-linked data (not a soft-hide). */
+async function hardDeleteUnifiedSourceRow(cfg, unified) {
+  const id = String(unified.id || "").trim();
+  const st = String(unified.source_table || "").trim();
+  if (!isUuid(id) || !st) throw new Error("invalid lead");
+  await deleteStaffLinkedRows(cfg, id, st);
+  const q = `id=eq.${encodeURIComponent(id)}`;
+  if (st === "manychat_leads") {
+    await restDelete(cfg, "manychat_leads", q);
+    return;
+  }
+  if (st === "contacts") {
+    await restDelete(cfg, "contacts", q);
+    return;
+  }
+  if (st === "quote_lead_submissions") {
+    await restDelete(cfg, "quote_lead_submissions", q);
+    return;
+  }
+  if (st === "whatsapp_leads") {
+    await restDelete(cfg, "whatsapp_leads", q);
+    return;
+  }
+  if (st === "fex_email_quotes") {
+    await restDelete(cfg, "fex_email_quotes", q);
+    return;
+  }
+  throw new Error(`Hard delete is not implemented for source table: ${st}`);
 }
 
 /** Same scoring idea as staff/questions — match lead phone to contacts.whatsapp_id / phone / subscriber. */
@@ -1024,32 +1048,28 @@ module.exports = async function handler(req, res) {
     try {
       const unified = await selectUnifiedLeadById(cfg, id);
       if (!unified) return json(res, 404, { error: "Lead not found" });
-
-      await upsertStaffHiddenLead(cfg, unified);
-
-      if (String(unified.source_table || "") === "manychat_leads") {
-        try {
-          const now = new Date().toISOString();
-          await restPatch(cfg, "manychat_leads", `id=eq.${encodeURIComponent(id)}`, {
-            staff_hidden_at: now,
-            updated_at: now,
-          });
-        } catch (e) {
-          const msg = e && e.message ? String(e.message) : "";
-          if (!(/42703|column/i.test(msg) && /staff_hidden_at/i.test(msg))) throw e;
-        }
-      }
-      return json(res, 200, { ok: true, id, source_table: unified.source_table });
+      const src = String(unified.source_table || "");
+      await hardDeleteUnifiedSourceRow(cfg, unified);
+      await logIntegrationAudit(cfg.supabaseUrl, cfg.serviceKey, {
+        stage: "staff_lead_hard_delete",
+        endpoint: "/api/staff/leads",
+        outcome: "ok",
+        detail: { source_table: src, deleted_id: id },
+      });
+      return json(res, 200, { ok: true, id, source_table: src, deleted: true });
     } catch (e) {
       console.error("staff/leads DELETE", e);
-      const msg = e && e.message ? String(e.message) : "Failed to hide lead";
-      if (/staff_hidden_leads|relation .* does not exist|42P01|PGRST/i.test(msg)) {
-        return json(res, 503, {
+      const msg = e && e.message ? String(e.message) : "Failed to delete lead";
+      if (/not implemented for source table/i.test(msg)) {
+        return json(res, 400, { error: msg });
+      }
+      if (/23503|foreign key|violates/i.test(msg)) {
+        return json(res, 409, {
           error:
-            "Database migration required: run 029_staff_hidden_leads_unified.sql on Supabase.",
+            "Cannot delete this lead while other database rows still reference it. Remove dependents or delete from Supabase SQL.",
         });
       }
-      return json(res, 500, { error: "Failed to hide lead from compose list" });
+      return json(res, 500, { error: "Failed to delete lead" });
     }
   }
 
