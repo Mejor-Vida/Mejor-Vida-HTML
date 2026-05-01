@@ -1620,7 +1620,7 @@
       <div class="top-brand-row">
         <div>
           <b>Mejor Vida Insurance — Staff Portal</b>
-          <small>Staff Access Only — Login Required<span id="staff-build-stamp" class="staff-build-stamp" title="If this number is missing after refresh, the page is cached.">· UI 20260426s</span></small>
+          <small>Staff Access Only — Login Required<span id="staff-build-stamp" class="staff-build-stamp" title="If this number is missing after refresh, the page is cached.">· UI 20260501a</span></small>
         </div>
         <div id="top-active-lead" class="top-active-lead empty" title="Lead selected across staff tools">No lead selected</div>
         <button id="signout-btn" class="signout" type="button" data-help="Signs you out of the staff portal on this browser.">Sign Out</button>
@@ -2817,7 +2817,7 @@
         paneChat.setAttribute("aria-hidden", chatOn ? "false" : "true");
         if (kbGapsOn) void loadKbGaps();
         if (pipelineAuditOn) void loadPipelineAudit();
-        if (composeOn || leadProfileOn || productSelectorOn) ensureComposeLeadsLoaded();
+        if (composeOn || leadProfileOn || productSelectorOn) void ensureComposeLeadsLoaded();
         if (leadProfileOn) void loadLeadProfileDetail();
         if (productSelectorOn) void loadProductSelectorSession();
       }
@@ -3793,6 +3793,8 @@
       }
 
       var composeLeads = [];
+      /** Bumps on each ensureComposeLeadsLoaded start so stale in-flight GETs cannot overwrite after DELETE/tab races. */
+      var composeLeadsFetchGeneration = 0;
       var composeSelectedLeadId = null;
       /** Shared filter text for all staff lead list columns (Compose, Lead Profile, Product Selector). */
       var staffLeadListQuery = "";
@@ -6512,14 +6514,17 @@
 
       async function ensureComposeLeadsLoaded() {
         if (!accessToken) return;
+        var gen = ++composeLeadsFetchGeneration;
         try {
           var data = await authedApi("/api/staff/leads");
+          if (gen !== composeLeadsFetchGeneration) return;
           composeLeads = Array.isArray(data.items) ? data.items : [];
           composeLeads.sort(function (a, b) {
             return (a.display_name || "").toLowerCase().localeCompare((b.display_name || "").toLowerCase());
           });
           renderStaffLeadLists();
         } catch (e) {
+          if (gen !== composeLeadsFetchGeneration) return;
           var errMsg = (e && e.message) || "Could not load leads list.";
           getComposeEls().status.textContent = errMsg;
           composeLeads = [];
@@ -6660,9 +6665,6 @@
         el.status.textContent = "Removing…";
         try {
           await authedApi("/api/staff/leads?id=" + encodeURIComponent(L.id), null, { method: "DELETE" });
-          composeLeads = composeLeads.filter(function (x) {
-            return x.id !== L.id;
-          });
           if (composeSelectedLeadId === L.id) {
             composeSelectedLeadId = null;
             if (el.firstName) el.firstName.value = "";
@@ -6671,8 +6673,9 @@
             el.phone.value = "";
             updateTopActiveLeadDisplay();
           }
+          el.status.textContent = "Refreshing list…";
+          await ensureComposeLeadsLoaded();
           el.status.textContent = "Lead removed from list.";
-          renderStaffLeadLists();
         } catch (err) {
           el.status.textContent = (err && err.message) || "Could not remove lead.";
         }
