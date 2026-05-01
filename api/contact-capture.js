@@ -148,9 +148,11 @@ async function handleInitialContact(body, supabaseUrl, supabaseKey, hubspotToken
   }
 
   if (hubspotToken && v2ContactId) {
-    syncContactToHubspot(supabaseUrl, supabaseKey, hubspotToken, hubspotPipelineId(), v2ContactId).catch((e) =>
-      console.error("[contact-capture initial] hubspot-sync:", e.message),
-    );
+    try {
+      await syncContactToHubspot(supabaseUrl, supabaseKey, hubspotToken, hubspotPipelineId(), v2ContactId);
+    } catch (e) {
+      console.error("[contact-capture initial] hubspot-sync:", e.message);
+    }
   }
 
   return json(res, 200, { success: true, lead_id: settled[0].value });
@@ -251,9 +253,11 @@ async function handleEmailOptin(body, supabaseUrl, supabaseKey, hubspotToken, re
   }
 
   if (hubspotToken && v2ContactId) {
-    syncContactToHubspot(supabaseUrl, supabaseKey, hubspotToken, hubspotPipelineId(), v2ContactId).catch((e) =>
-      console.error("[contact-capture email_optin] hubspot-sync:", e.message),
-    );
+    try {
+      await syncContactToHubspot(supabaseUrl, supabaseKey, hubspotToken, hubspotPipelineId(), v2ContactId);
+    } catch (e) {
+      console.error("[contact-capture email_optin] hubspot-sync:", e.message);
+    }
   }
 
   // Add consent note to HubSpot contact (best-effort)
