@@ -67,6 +67,14 @@ function dedupeKeyForLead(lead) {
   return `${sourceTable}:${sourceId}`;
 }
 
+/** Stable key for staff_hidden_leads — one suppressed compose row, not whole phone/email partition. */
+function staffHiddenDedupeKey(lead) {
+  const id = lead && lead.id;
+  const st = String((lead && lead.source_table) || "unknown").trim() || "unknown";
+  if (id) return `${st}:${String(id)}`;
+  return dedupeKeyForLead(lead);
+}
+
 /** PostgREST / Postgres when manychat_leads.staff_hidden_at is not migrated yet */
 function isStaffHiddenColumnError(msg) {
   return /staff_hidden_at|42703|PGRST204|column.*does not exist|Could not find/i.test(String(msg || ""));
@@ -324,7 +332,7 @@ async function composeMergedLeadDetail(cfg, detail) {
 async function upsertStaffHiddenLead(cfg, lead) {
   const payload = [
     {
-      dedupe_key: dedupeKeyForLead(lead),
+      dedupe_key: staffHiddenDedupeKey(lead),
       email_key: normalizeEmail(lead.email) || null,
       phone_key: normalizePhone(lead.phone) || null,
       name_key: normalizeName(lead.display_name) || null,

@@ -203,13 +203,27 @@ async function handleInitialContact(body, supabaseUrl, supabaseKey, hubspotToken
 async function handleEmailOptin(body, supabaseUrl, supabaseKey, hubspotToken, res) {
   const firstName = cleanManychatNameField(body.first_name || body.firstName || "").slice(0, 200);
   const lastName = cleanManychatNameField(body.last_name || body.lastName || "").slice(0, 200);
-  const phone = resolveManyChat(String(body.phone || body.whatsapp_phone || "").trim()).slice(0, 40);
+  const phone = (
+    resolveManyChat(String(body.phone || "").trim()) ||
+    resolveManyChat(String(body.whatsapp_phone || "").trim()) ||
+    resolveManyChat(String(body.whatsapp_id || "").trim())
+  ).slice(0, 40);
   const rawEmail = resolveManyChat(String(body.email || "").trim().toLowerCase());
   const email = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(rawEmail) ? rawEmail.slice(0, 500) : null;
   const language = String(body.language || "Spanish").trim().slice(0, 50);
   const leadType = String(body.lead_type || "nebraska").trim().toLowerCase();
 
   if (!phone) {
+    await logIntegrationAudit(supabaseUrl, supabaseKey, {
+      stage: "contact_capture_email_optin_validation",
+      endpoint: "/api/contact-capture",
+      outcome: "error",
+      message: "phone required",
+      detail: {
+        had_whatsapp_phone: !!resolveManyChat(String(body.whatsapp_phone || "").trim()),
+        had_whatsapp_id: !!resolveManyChat(String(body.whatsapp_id || "").trim()),
+      },
+    });
     return json(res, 400, { success: false, error: "phone required" });
   }
   if (!email) {
@@ -381,7 +395,9 @@ module.exports = async function handler(req, res) {
 
   const action = String(body.action || "initial").trim().toLowerCase();
   const probePhone =
-    resolveManyChat(String(body.phone || body.whatsapp_phone || body.whatsapp_id || "").trim()).slice(0, 40) || null;
+    resolveManyChat(
+      String(body.phone || body.whatsapp_phone || body.whatsapp_id || "").trim()
+    ).slice(0, 40) || null;
   await logIntegrationAudit(supabaseUrl, supabaseKey, {
     stage: "contact_capture_request",
     endpoint: "/api/contact-capture",
