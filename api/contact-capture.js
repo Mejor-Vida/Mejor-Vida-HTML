@@ -19,6 +19,7 @@ const { upsertManychatLeadByPhone } = require("../lib/supabase");
 const { upsertContact, upsertLeadState, insertEvent } = require("../lib/contacts-db");
 const { hubspotAddNote } = require("../lib/hubspot");
 const { syncContactToHubspot } = require("../lib/hubspot-sync-lib");
+const { logIntegrationAudit } = require("../lib/integration-audit");
 
 function hubspotPipelineId() {
   return process.env.HUBSPOT_PIPELINE_ID || "default";
@@ -96,15 +97,38 @@ async function handleInitialContact(body, supabaseUrl, supabaseKey, hubspotToken
     drop_off_stage: null,
   };
 
+  await logIntegrationAudit(supabaseUrl, supabaseKey, {
+    stage: "contact_capture_initial_begin",
+    endpoint: "/api/contact-capture",
+    outcome: "ok",
+    phone,
+    detail: {
+      has_first_name: !!firstName,
+      has_last_name: !!lastName,
+      has_subscriber_id: !!manychatSubscriberId,
+    },
+  });
+
   const settled = await Promise.allSettled([upsertManychatLeadByPhone(supabaseUrl, supabaseKey, phone, row)]);
 
   if (settled[0].status === "rejected") {
+    const msg = settled[0].reason && settled[0].reason.message ? settled[0].reason.message : String(settled[0].reason);
     console.error("contact-capture supabase", settled[0].reason);
+    await logIntegrationAudit(supabaseUrl, supabaseKey, {
+      stage: "contact_capture_initial_manychat_leads",
+      endpoint: "/api/contact-capture",
+      outcome: "error",
+      phone,
+      message: msg,
+    });
     return json(res, 500, { success: false, error: "Could not save contact" });
   }
 
+  const manychatLeadId = settled[0].value;
+
   // Also write to v2 contacts table — then sync HubSpot from Supabase (full first/last/email when present).
   let v2ContactId = null;
+  let v2Err = null;
   try {
     const { contactId } = await upsertContact(supabaseUrl, supabaseKey, phone, {
       first_name: firstName,
@@ -123,18 +147,56 @@ async function handleInitialContact(body, supabaseUrl, supabaseKey, hubspotToken
       source: "whatsapp",
     });
   } catch (e) {
+    v2Err = e && e.message ? e.message : String(e);
     console.error("contact-capture v2 upsert error:", e.message);
+    await logIntegrationAudit(supabaseUrl, supabaseKey, {
+      stage: "contact_capture_initial_contacts_v2",
+      endpoint: "/api/contact-capture",
+      outcome: "error",
+      phone,
+      message: v2Err,
+      manychatLeadId,
+    });
   }
 
+  let hubspotSynced = false;
+  let hubspotErr = null;
   if (hubspotToken && v2ContactId) {
     try {
       await syncContactToHubspot(supabaseUrl, supabaseKey, hubspotToken, hubspotPipelineId(), v2ContactId);
+      hubspotSynced = true;
     } catch (e) {
+      hubspotErr = e && e.message ? e.message : String(e);
       console.error("[contact-capture initial] hubspot-sync:", e.message);
+      await logIntegrationAudit(supabaseUrl, supabaseKey, {
+        stage: "contact_capture_initial_hubspot_sync",
+        endpoint: "/api/contact-capture",
+        outcome: "error",
+        phone,
+        message: hubspotErr,
+        manychatLeadId,
+        contactId: v2ContactId,
+      });
     }
   }
 
-  return json(res, 200, { success: true, lead_id: settled[0].value });
+  await logIntegrationAudit(supabaseUrl, supabaseKey, {
+    stage: "contact_capture_initial_complete",
+    endpoint: "/api/contact-capture",
+    outcome: v2Err ? "error" : "ok",
+    phone,
+    message: v2Err || (hubspotErr && `hubspot: ${hubspotErr}`) || null,
+    detail: {
+      manychat_lead_id: manychatLeadId,
+      contact_id: v2ContactId,
+      hubspot_synced: hubspotSynced,
+      v2_error: v2Err || null,
+    },
+    manychatLeadId,
+    contactId: v2ContactId,
+  });
+
+  return json(res, 200, { success: true, lead_id: manychatLeadId });
 }
 
 /* ── Email + opt-in handler ────────────────────────────────────── */
@@ -176,10 +238,31 @@ async function handleEmailOptin(body, supabaseUrl, supabaseKey, hubspotToken, re
     `Contact agreed to be contacted by a licensed insurance agent via phone, email, or text message. ` +
     `Lead type: ${isNebraska ? "Nebraska (direct)" : "Out-of-state (referral)"}.`;
 
+  await logIntegrationAudit(supabaseUrl, supabaseKey, {
+    stage: "contact_capture_email_optin_begin",
+    endpoint: "/api/contact-capture",
+    outcome: "ok",
+    phone,
+    detail: {
+      lead_type: leadType,
+      has_email: !!email,
+      has_first_name: !!firstName,
+      has_last_name: !!lastName,
+    },
+  });
+
   const settled = await Promise.allSettled([upsertManychatLeadByPhone(supabaseUrl, supabaseKey, phone, row)]);
 
   if (settled[0].status === "rejected") {
+    const msg = settled[0].reason && settled[0].reason.message ? settled[0].reason.message : String(settled[0].reason);
     console.error("email-optin-capture supabase", settled[0].reason);
+    await logIntegrationAudit(supabaseUrl, supabaseKey, {
+      stage: "contact_capture_email_optin_manychat_leads",
+      endpoint: "/api/contact-capture",
+      outcome: "error",
+      phone,
+      message: msg,
+    });
     return json(res, 500, { success: false, error: "Could not save lead" });
   }
 
@@ -187,6 +270,7 @@ async function handleEmailOptin(body, supabaseUrl, supabaseKey, hubspotToken, re
 
   // Also write to v2 contacts table — then sync HubSpot from Supabase (email + names + deal stage).
   let v2ContactId = null;
+  let v2Err = null;
   try {
     const langLower = String(language || "").toLowerCase();
     const languageV2 = langLower.includes("spanish") ? "spanish" : "english";
@@ -203,16 +287,36 @@ async function handleEmailOptin(body, supabaseUrl, supabaseKey, hubspotToken, re
       pipeline_stage: isNebraska ? "engaged" : "referral_requested",
     });
   } catch (e) {
+    v2Err = e && e.message ? e.message : String(e);
     console.error("contact-capture v2 email_optin upsert error:", e.message);
+    await logIntegrationAudit(supabaseUrl, supabaseKey, {
+      stage: "contact_capture_email_optin_contacts_v2",
+      endpoint: "/api/contact-capture",
+      outcome: "error",
+      phone,
+      message: v2Err,
+      manychatLeadId: leadId,
+    });
   }
 
   let hsContactIdForNote = null;
+  let hubspotErr = null;
   if (hubspotToken && v2ContactId) {
     try {
       const hsOut = await syncContactToHubspot(supabaseUrl, supabaseKey, hubspotToken, hubspotPipelineId(), v2ContactId);
       if (hsOut && hsOut.hubspot_contact_id) hsContactIdForNote = hsOut.hubspot_contact_id;
     } catch (e) {
+      hubspotErr = e && e.message ? e.message : String(e);
       console.error("[contact-capture email_optin] hubspot-sync:", e.message);
+      await logIntegrationAudit(supabaseUrl, supabaseKey, {
+        stage: "contact_capture_email_optin_hubspot_sync",
+        endpoint: "/api/contact-capture",
+        outcome: "error",
+        phone,
+        message: hubspotErr,
+        manychatLeadId: leadId,
+        contactId: v2ContactId,
+      });
     }
   }
 
@@ -223,6 +327,22 @@ async function handleEmailOptin(body, supabaseUrl, supabaseKey, hubspotToken, re
       console.error("email-optin-capture hubspot note", e);
     }
   }
+
+  await logIntegrationAudit(supabaseUrl, supabaseKey, {
+    stage: "contact_capture_email_optin_complete",
+    endpoint: "/api/contact-capture",
+    outcome: v2Err ? "error" : "ok",
+    phone,
+    message: v2Err || (hubspotErr && `hubspot: ${hubspotErr}`) || null,
+    detail: {
+      manychat_lead_id: leadId,
+      contact_id: v2ContactId,
+      hubspot_note_contact_id: hsContactIdForNote,
+      lead_type: isNebraska ? "nebraska" : "referral",
+    },
+    manychatLeadId: leadId,
+    contactId: v2ContactId,
+  });
 
   return json(res, 200, {
     success: true,
@@ -260,6 +380,15 @@ module.exports = async function handler(req, res) {
   }
 
   const action = String(body.action || "initial").trim().toLowerCase();
+  const probePhone =
+    resolveManyChat(String(body.phone || body.whatsapp_phone || body.whatsapp_id || "").trim()).slice(0, 40) || null;
+  await logIntegrationAudit(supabaseUrl, supabaseKey, {
+    stage: "contact_capture_request",
+    endpoint: "/api/contact-capture",
+    outcome: "ok",
+    phone: probePhone || undefined,
+    detail: { action },
+  });
 
   if (action === "email_optin") {
     return handleEmailOptin(body, supabaseUrl, supabaseKey, hubspotToken, res);

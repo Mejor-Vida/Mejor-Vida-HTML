@@ -1635,6 +1635,7 @@
         <div class="tabs-right">
           <button id="tab-inbox" class="tab-btn active" type="button" data-help="Open the customer question inbox: review questions, draft replies, email leads, and add answers to the knowledge base.">📬 Inbox</button>
           <button id="tab-kb-gaps" class="tab-btn" type="button" data-help="Review internal knowledge gaps detected when Staff Assistant had to fall back to general AI knowledge.">🧠 KB Gaps</button>
+          <button id="tab-pipeline-audit" class="tab-btn" type="button" data-help="Audit ManyChat → Supabase → HubSpot pipeline: recent events, staff list errors, and live table samples.">🔎 Pipeline audit</button>
         </div>
       </nav>
     </header>
@@ -1685,6 +1686,28 @@
           <div id="kb-gap-detail" class="detail-body">
             <div class="q-empty">Select a gap to review.</div>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="pane-pipeline-audit" class="pane" aria-hidden="true">
+      <div class="inbox-wrap">
+        <div class="inbox-list" style="flex:1;max-width:100%">
+          <div class="inbox-head">
+            <div>
+              <strong>Pipeline audit</strong>
+              <div class="small-note">
+                Recent webhook stages, staff list failures, and raw samples from <code>manychat_leads</code> + <code>unified_leads</code>.
+                If “audit_table_missing” is true, apply Supabase migration <code>036_integration_audit_events.sql</code>.
+              </div>
+            </div>
+            <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+              <label class="small-note" for="pipeline-audit-last4">Phone last 4</label>
+              <input id="pipeline-audit-last4" type="text" maxlength="4" inputmode="numeric" style="width:72px;padding:6px 8px;border-radius:6px;border:1px solid rgba(255,255,255,0.25);background:rgba(0,0,0,0.2);color:inherit" placeholder="6495" />
+              <button id="refresh-pipeline-audit-btn" class="secondary" type="button">Refresh</button>
+            </div>
+          </div>
+          <pre id="pipeline-audit-json" class="detail-body" style="margin-top:12px;white-space:pre-wrap;font-size:12px;line-height:1.45;max-height:calc(100vh - 220px);overflow:auto;padding:12px;border-radius:8px;background:rgba(0,0,0,0.25);border:1px solid rgba(255,255,255,0.12)">Loading…</pre>
         </div>
       </div>
     </section>
@@ -2715,12 +2738,14 @@
       var tabInbox = document.getElementById("tab-inbox");
       var tabCompose = document.getElementById("tab-compose");
       var tabKbGaps = document.getElementById("tab-kb-gaps");
+      var tabPipelineAudit = document.getElementById("tab-pipeline-audit");
       var tabLeadProfile = document.getElementById("tab-lead-profile");
       var tabProductSelector = document.getElementById("tab-product-selector");
       var tabChat = document.getElementById("tab-chat");
       var paneInbox = document.getElementById("pane-inbox");
       var paneCompose = document.getElementById("pane-compose");
       var paneKbGaps = document.getElementById("pane-kb-gaps");
+      var panePipelineAudit = document.getElementById("pane-pipeline-audit");
       var paneLeadProfile = document.getElementById("pane-lead-profile");
       var paneProductSelector = document.getElementById("pane-product-selector");
       var paneChat = document.getElementById("pane-chat");
@@ -2732,6 +2757,7 @@
       var kbGapItems = document.getElementById("kb-gap-items");
       var kbGapDetail = document.getElementById("kb-gap-detail");
       var refreshKbGapsBtn = document.getElementById("refresh-kb-gaps-btn");
+      var refreshPipelineAuditBtn = document.getElementById("refresh-pipeline-audit-btn");
       var chatLog = document.getElementById("chat-log");
       var chatInput = document.getElementById("staff-input");
       var sendBtn = document.getElementById("send-btn");
@@ -2764,28 +2790,33 @@
         var inboxOn = which === "inbox";
         var composeOn = which === "compose";
         var kbGapsOn = which === "kb-gaps";
+        var pipelineAuditOn = which === "pipeline-audit";
         var leadProfileOn = which === "lead-profile";
         var productSelectorOn = which === "product-selector";
         var chatOn = which === "chat";
         tabInbox.classList.toggle("active", inboxOn);
         tabCompose.classList.toggle("active", composeOn);
         if (tabKbGaps) tabKbGaps.classList.toggle("active", kbGapsOn);
+        if (tabPipelineAudit) tabPipelineAudit.classList.toggle("active", pipelineAuditOn);
         if (tabLeadProfile) tabLeadProfile.classList.toggle("active", leadProfileOn);
         if (tabProductSelector) tabProductSelector.classList.toggle("active", productSelectorOn);
         tabChat.classList.toggle("active", chatOn);
         paneInbox.classList.toggle("active", inboxOn);
         paneCompose.classList.toggle("active", composeOn);
         if (paneKbGaps) paneKbGaps.classList.toggle("active", kbGapsOn);
+        if (panePipelineAudit) panePipelineAudit.classList.toggle("active", pipelineAuditOn);
         if (paneLeadProfile) paneLeadProfile.classList.toggle("active", leadProfileOn);
         if (paneProductSelector) paneProductSelector.classList.toggle("active", productSelectorOn);
         paneChat.classList.toggle("active", chatOn);
         paneInbox.setAttribute("aria-hidden", inboxOn ? "false" : "true");
         paneCompose.setAttribute("aria-hidden", composeOn ? "false" : "true");
         if (paneKbGaps) paneKbGaps.setAttribute("aria-hidden", kbGapsOn ? "false" : "true");
+        if (panePipelineAudit) panePipelineAudit.setAttribute("aria-hidden", pipelineAuditOn ? "false" : "true");
         if (paneLeadProfile) paneLeadProfile.setAttribute("aria-hidden", leadProfileOn ? "false" : "true");
         if (paneProductSelector) paneProductSelector.setAttribute("aria-hidden", productSelectorOn ? "false" : "true");
         paneChat.setAttribute("aria-hidden", chatOn ? "false" : "true");
         if (kbGapsOn) void loadKbGaps();
+        if (pipelineAuditOn) void loadPipelineAudit();
         if (composeOn || leadProfileOn || productSelectorOn) ensureComposeLeadsLoaded();
         if (leadProfileOn) void loadLeadProfileDetail();
         if (productSelectorOn) void loadProductSelectorSession();
@@ -2915,7 +2946,7 @@
       }
 
       function wireStaticPortalHelpOnce() {
-        [signoutBtn, tabInbox, tabCompose, tabKbGaps, tabLeadProfile, tabProductSelector, tabChat, refreshInboxBtn, refreshKbGapsBtn, sendBtn, newConvoBtn].forEach(function (el) {
+        [signoutBtn, tabInbox, tabCompose, tabKbGaps, tabPipelineAudit, tabLeadProfile, tabProductSelector, tabChat, refreshInboxBtn, refreshKbGapsBtn, refreshPipelineAuditBtn, sendBtn, newConvoBtn].forEach(function (el) {
           if (!el || el.getAttribute("data-help-wired")) return;
           el.setAttribute("data-help-wired", "1");
           var showT = null;
@@ -3714,6 +3745,7 @@
       tabInbox.addEventListener("click", function () { showTab("inbox"); });
       tabCompose.addEventListener("click", function () { showTab("compose"); });
       if (tabKbGaps) tabKbGaps.addEventListener("click", function () { showTab("kb-gaps"); });
+      if (tabPipelineAudit) tabPipelineAudit.addEventListener("click", function () { showTab("pipeline-audit"); });
       if (tabLeadProfile) tabLeadProfile.addEventListener("click", function () { showTab("lead-profile"); });
       if (tabProductSelector) tabProductSelector.addEventListener("click", function () { showTab("product-selector"); });
       tabChat.addEventListener("click", function () { showTab("chat"); });
@@ -3736,6 +3768,29 @@
       if (refreshKbGapsBtn) refreshKbGapsBtn.addEventListener("click", function () {
         loadKbGaps();
       });
+      if (refreshPipelineAuditBtn) refreshPipelineAuditBtn.addEventListener("click", function () {
+        loadPipelineAudit();
+      });
+
+      async function loadPipelineAudit() {
+        var pre = document.getElementById("pipeline-audit-json");
+        var last4el = document.getElementById("pipeline-audit-last4");
+        if (!pre) return;
+        if (!accessToken) {
+          pre.textContent = "Sign in to load audit.";
+          return;
+        }
+        pre.textContent = "Loading…";
+        try {
+          var q = last4el && last4el.value ? String(last4el.value).replace(/\D/g, "").slice(-4) : "";
+          var url = "/api/staff/integration-audit?limit=120";
+          if (q.length === 4) url += "&phone_last4=" + encodeURIComponent(q);
+          var data = await authedApi(url, null, { method: "GET" });
+          pre.textContent = JSON.stringify(data, null, 2);
+        } catch (e) {
+          pre.textContent = (e && e.message) || String(e);
+        }
+      }
 
       var composeLeads = [];
       var composeSelectedLeadId = null;

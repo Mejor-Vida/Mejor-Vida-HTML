@@ -28,6 +28,7 @@
 const { verifyManychatSecret, logRequest } = require("../lib/manychat-auth");
 const { upsertContact, upsertLeadState, insertEvent, logWebhook } = require("../lib/contacts-db");
 const { syncContactToHubspot } = require("../lib/hubspot-sync-lib");
+const { logIntegrationAudit } = require("../lib/integration-audit");
 
 function json(res, status, payload) {
   res.status(status).setHeader("Content-Type", "application/json");
@@ -114,6 +115,14 @@ module.exports = async function handler(req, res) {
   // ── Log incoming webhook (fire-and-forget) ───────────────────────────────
   logWebhook(supabaseUrl, supabaseKey, "manychat", "/api/lead-intake", { phone, language, whatsapp_id: whatsappId });
 
+  await logIntegrationAudit(supabaseUrl, supabaseKey, {
+    stage: "lead_intake_begin",
+    endpoint: "/api/lead-intake",
+    outcome: "ok",
+    phone,
+    detail: { language, has_email: !!email, has_whatsapp_id: !!whatsappId },
+  });
+
   try {
     // 1. Upsert contact — idempotent on phone.
     //    NOTE: contacts.full_name is a GENERATED column (see migration 020).
@@ -151,9 +160,24 @@ module.exports = async function handler(req, res) {
       );
     }
 
+    await logIntegrationAudit(supabaseUrl, supabaseKey, {
+      stage: "lead_intake_complete",
+      endpoint: "/api/lead-intake",
+      outcome: "ok",
+      phone,
+      detail: { contact_id: contactId, created },
+      contactId,
+    });
     return json(res, 200, { success: true, contact_id: contactId, created });
   } catch (e) {
     console.error("lead-intake error:", e.message);
+    await logIntegrationAudit(supabaseUrl, supabaseKey, {
+      stage: "lead_intake_error",
+      endpoint: "/api/lead-intake",
+      outcome: "error",
+      phone,
+      message: e && e.message ? e.message : String(e),
+    });
     return json(res, 500, { success: false, error: "Server error saving lead" });
   }
 };

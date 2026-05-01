@@ -1,4 +1,5 @@
 const { requireStaffAuth } = require("../auth-check");
+const { logIntegrationAudit } = require("../../lib/integration-audit");
 const { json, serviceConfig, restSelect, restInsert, restPatch } = require("./_inbox-lib");
 const { canAccessPhi } = require("../../lib/staff-permissions");
 const { readPhiByLead, writePhiByLead } = require("../../lib/phi-store");
@@ -525,6 +526,14 @@ module.exports = async function handler(req, res) {
       return json(res, 200, { items });
     } catch (e) {
       console.error("staff/leads GET", e);
+      const msg = (e && e.message) || String(e);
+      await logIntegrationAudit(cfg.supabaseUrl, cfg.serviceKey, {
+        stage: "staff_leads_list_error",
+        endpoint: "/api/staff/leads",
+        outcome: "error",
+        message: msg,
+        detail: { where: "GET_list" },
+      });
       return json(res, 500, { error: "Failed to load leads" });
     }
   }
