@@ -3,6 +3,7 @@ const { logIntegrationAudit } = require("../../lib/integration-audit");
 const { json, serviceConfig, restSelect, restInsert, restPatch } = require("./_inbox-lib");
 const { canAccessPhi } = require("../../lib/staff-permissions");
 const { readPhiByLead, writePhiByLead } = require("../../lib/phi-store");
+const { hubspotPhoneSearchVariants } = require("../../lib/hubspot-phone-variants");
 
 function isUuid(s) {
   return /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(String(s || ""));
@@ -118,6 +119,15 @@ function mergePreferSource(base, canonicalPatch) {
   Object.keys(patch).forEach((k) => {
     if (isBlankValue(out[k])) out[k] = patch[k];
   });
+  return out;
+}
+
+/** Merge staff profile_data blobs: fill blanks in `a` from `b` (shallow + profile_ext). */
+function mergeStaffProfileData(a, b) {
+  const out = mergePreferSource(a || {}, b || {});
+  const ae = out && out.profile_ext && typeof out.profile_ext === "object" ? out.profile_ext : {};
+  const be = b && b.profile_ext && typeof b.profile_ext === "object" ? b.profile_ext : {};
+  if (Object.keys(be).length || Object.keys(ae).length) out.profile_ext = mergePreferSource(ae, be);
   return out;
 }
 
@@ -303,10 +313,27 @@ async function selectQuoteLeadDetailById(cfg, id) {
   };
 }
 
-async function composeMergedLeadDetail(cfg, detail) {
+async function composeMergedLeadDetail(cfg, detail, options) {
   if (!detail || !detail.id || !detail.source_table) return detail;
-  const canonical = await loadCanonicalLeadProfile(cfg, detail.id, detail.source_table);
-  const selectorExt = await loadSelectorDerivedProfileExt(cfg, detail.id, detail.source_table);
+  options = options || {};
+  const alternateLeadKeys = options.alternateLeadKeys || [];
+
+  let canonical = await loadCanonicalLeadProfile(cfg, detail.id, detail.source_table);
+  for (const alt of alternateLeadKeys) {
+    if (!alt || !alt.lead_id || !alt.lead_source_table) continue;
+    if (String(alt.lead_id) === String(detail.id) && alt.lead_source_table === detail.source_table) continue;
+    const ext = await loadCanonicalLeadProfile(cfg, alt.lead_id, alt.lead_source_table);
+    canonical = mergeStaffProfileData(canonical, ext);
+  }
+
+  let selectorExt = await loadSelectorDerivedProfileExt(cfg, detail.id, detail.source_table);
+  for (const alt of alternateLeadKeys) {
+    if (!alt || !alt.lead_id || !alt.lead_source_table) continue;
+    if (String(alt.lead_id) === String(detail.id) && alt.lead_source_table === detail.source_table) continue;
+    const s = await loadSelectorDerivedProfileExt(cfg, alt.lead_id, alt.lead_source_table);
+    selectorExt = mergePreferSource(selectorExt, s);
+  }
+
   const canonicalExt = canonical.profile_ext && typeof canonical.profile_ext === "object" ? canonical.profile_ext : {};
 
   const merged = Object.assign({}, detail);
@@ -326,7 +353,19 @@ async function composeMergedLeadDetail(cfg, detail) {
   if (merged.profile_ext && typeof merged.profile_ext === "object") {
     merged.profile_ext.citizenship_status = normalizeCitizenshipStatus(merged.profile_ext.citizenship_status) || null;
   }
+  merged.display_name = displayName(merged);
   return merged;
+}
+
+async function readPhiMergedForLead(cfg, leadId, leadSourceTable, alternateLeadKeys) {
+  let phiPayload = (await readPhiByLead(cfg, leadId, leadSourceTable)).payload || {};
+  for (const alt of alternateLeadKeys || []) {
+    if (!alt || !alt.lead_id || !alt.lead_source_table) continue;
+    if (String(alt.lead_id) === String(leadId) && alt.lead_source_table === leadSourceTable) continue;
+    const p2 = (await readPhiByLead(cfg, alt.lead_id, alt.lead_source_table)).payload || {};
+    phiPayload = mergePreferSource(phiPayload, p2);
+  }
+  return phiPayload;
 }
 
 async function upsertStaffHiddenLead(cfg, lead) {
@@ -390,6 +429,162 @@ function bestContactEmailForPhone(phoneField, contacts) {
   return top ? cleanText(top.email) : "";
 }
 
+function bestContactRowForPhone(phoneField, contacts) {
+  const qPhoneText = cleanText(phoneField);
+  const qPhoneDigits = digitsOnly(qPhoneText);
+  if (!contacts || !contacts.length || !qPhoneText) return null;
+  const scored = contacts
+    .map((c) => {
+      const cPhone = cleanText(c.phone);
+      const cWhatsAppId = cleanText(c.whatsapp_id);
+      const cSubscriberId = cleanText(c.manychat_subscriber_id);
+      const cPhoneDigits = digitsOnly(cPhone);
+      let score = 0;
+      if (qPhoneDigits && cPhoneDigits && qPhoneDigits === cPhoneDigits) score += 100;
+      if (qPhoneText && qPhoneText === cWhatsAppId) score += 40;
+      if (qPhoneText && qPhoneText === cSubscriberId) score += 35;
+      if (cleanText(c.email)) score += 12;
+      if (cSubscriberId) score += 8;
+      if (cWhatsAppId) score += 5;
+      return { c, score };
+    })
+    .filter((x) => x.score > 0)
+    .sort((a, b) => b.score - a.score);
+  const top = scored.length ? scored[0].c : null;
+  return top || null;
+}
+
+function pgInListQuoted(values) {
+  return values.map((v) => `"${String(v).replace(/"/g, "")}"`).join(",");
+}
+
+async function selectContactsRowsByPhone(cfg, phoneRaw) {
+  const variants = hubspotPhoneSearchVariants(phoneRaw);
+  if (!variants.length) return [];
+  const values = pgInListQuoted(variants);
+  const q = `select=id,email,phone,whatsapp_id,manychat_subscriber_id,first_name,last_name,language,idioma,created_at&or=(phone.in.(${values}),whatsapp_id.in.(${values}),manychat_subscriber_id.in.(${values}))&order=created_at.desc&limit=80`;
+  return await restSelect(cfg, "contacts", q);
+}
+
+function hasManychatMergeToken(s) {
+  return /\{\{/.test(String(s || ""));
+}
+
+function manychatRowRichnessScore(m) {
+  if (!m) return -1;
+  if (hasManychatMergeToken(m.first_name) || hasManychatMergeToken(m.last_name) || hasManychatMergeToken(m.email)) return -1;
+  let s = 0;
+  if (cleanText(m.email)) s += 8;
+  if (cleanText(m.last_name)) s += 4;
+  if (cleanText(m.first_name)) s += 1;
+  if (m.age != null && String(m.age).trim() !== "") s += 2;
+  if (cleanText(m.sex)) s += 2;
+  if (m.tobacco != null && String(m.tobacco).trim() !== "") s += 2;
+  return s;
+}
+
+function pickBestManychatRow(rows) {
+  const list = (rows || []).filter(Boolean);
+  if (!list.length) return null;
+  return list
+    .map((m) => ({ m, score: manychatRowRichnessScore(m) }))
+    .filter((x) => x.score >= 0)
+    .sort((a, b) => {
+      if (b.score !== a.score) return b.score - a.score;
+      const ua = String(a.m.updated_at || a.m.created_at || "");
+      const ub = String(b.m.updated_at || b.m.created_at || "");
+      return ub.localeCompare(ua);
+    })[0]?.m || null;
+}
+
+async function selectManychatRowsByPhone(cfg, phoneRaw) {
+  const variants = hubspotPhoneSearchVariants(phoneRaw);
+  if (!variants.length) return [];
+  const values = pgInListQuoted(variants);
+  const baseQ = `select=${MANYCHAT_DETAIL_COLUMNS}&phone=in.(${values})&order=updated_at.desc&limit=80`;
+  try {
+    return await restSelect(cfg, "manychat_leads", `staff_hidden_at=is.null&${baseQ}`);
+  } catch (e) {
+    if (isStaffHiddenColumnError(e && e.message)) {
+      return await restSelect(cfg, "manychat_leads", baseQ);
+    }
+    throw e;
+  }
+}
+
+/**
+ * Unified list can show contacts id while ManyChat holds names/age/PHI; list also enriches email from contacts only.
+ * Merge sibling row by phone so Lead Profile matches what staff expect from WhatsApp.
+ * @returns {{ detail: object, alternateLeadKeys: { lead_id: string, lead_source_table: string }[] }}
+ */
+async function mergeCrossSourceByPhone(cfg, detail) {
+  if (!detail || !detail.source_table) return { detail, alternateLeadKeys: [] };
+  const phone = cleanText(detail.phone);
+  if (!phone) return { detail, alternateLeadKeys: [] };
+  const src = String(detail.source_table || "");
+  const alternates = [];
+
+  try {
+    if (src === "manychat_leads") {
+      const contacts = await selectContactsRowsByPhone(cfg, phone);
+      const c = bestContactRowForPhone(phone, contacts);
+      if (c && c.id && String(c.id) !== String(detail.id)) {
+        const patch = {};
+        const em = cleanText(c.email);
+        if (em) patch.email = em;
+        const fn = cleanText(c.first_name);
+        if (fn) patch.first_name = fn;
+        const ln = cleanText(c.last_name);
+        if (ln) patch.last_name = ln;
+        const lang = cleanText(c.idioma || c.language);
+        if (lang) patch.language = lang;
+        alternates.push({ lead_id: String(c.id), lead_source_table: "contacts" });
+        return { detail: mergePreferSource(detail, patch), alternateLeadKeys: alternates };
+      }
+    }
+    if (src === "contacts") {
+      const rows = await selectManychatRowsByPhone(cfg, phone);
+      const m = pickBestManychatRow(rows);
+      if (m && m.id) {
+        const patch = {};
+        const em = cleanText(m.email);
+        if (em) patch.email = em;
+        const fn = cleanText(m.first_name);
+        if (fn) patch.first_name = fn;
+        const ln = cleanText(m.last_name);
+        if (ln) patch.last_name = ln;
+        if (m.age != null && String(m.age).trim() !== "") patch.age = m.age;
+        const sx = cleanText(m.sex);
+        if (sx) patch.sex = sx;
+        if (m.tobacco != null && String(m.tobacco).trim() !== "") patch.tobacco = toBoolOrNullFromText(m.tobacco);
+        const tg = cleanText(m.tag);
+        if (tg) patch.tag = tg;
+        const ps = cleanText(m.pipeline_stage);
+        if (ps) patch.pipeline_stage = ps;
+        if (m.drop_off === true || m.drop_off === false) patch.drop_off = !!m.drop_off;
+        const ds = cleanText(m.drop_off_stage);
+        if (ds) patch.drop_off_stage = ds;
+        if (m.opt_in === true || m.opt_in === false) patch.opt_in = !!m.opt_in;
+        if (m.opt_in_at) patch.opt_in_at = m.opt_in_at;
+        const sub = cleanText(detail.manychat_subscriber_id) || cleanText(m.manychat_subscriber_id);
+        if (sub) patch.manychat_subscriber_id = sub;
+        alternates.push({ lead_id: String(m.id), lead_source_table: "manychat_leads" });
+        return { detail: mergePreferSource(detail, patch), alternateLeadKeys: alternates };
+      }
+    }
+  } catch (e) {
+    console.error("staff/leads mergeCrossSourceByPhone", e && e.message);
+  }
+  return { detail, alternateLeadKeys: alternates };
+}
+
+function ensureManychatLeadDetail(row) {
+  if (!row) return null;
+  const o = Object.assign({ read_only: false, source_table: "manychat_leads" }, row);
+  o.display_name = displayName(o);
+  return o;
+}
+
 async function enrichLeadEmailsFromContacts(cfg, items) {
   const phonesNeedingEmail = Array.from(
     new Set(
@@ -447,21 +642,26 @@ module.exports = async function handler(req, res) {
         const src = String(unified.source_table || "");
         if (src === "manychat_leads") {
           const row = await selectManychatLeadDetailById(cfg, detailId);
-          if (!row) return json(res, 404, { error: "Lead not found" });
-          const detail = await composeMergedLeadDetail(cfg, Object.assign({ read_only: false }, row));
+          const base = ensureManychatLeadDetail(row);
+          if (!base) return json(res, 404, { error: "Lead not found" });
+          const cross = await mergeCrossSourceByPhone(cfg, base);
+          const detail = await composeMergedLeadDetail(cfg, cross.detail, {
+            alternateLeadKeys: cross.alternateLeadKeys,
+          });
           if (canPhi) {
-            const phi = await readPhiByLead(cfg, detailId, src);
-            detail.phi = phi.payload || {};
+            detail.phi = await readPhiMergedForLead(cfg, detailId, src, cross.alternateLeadKeys);
           }
           return json(res, 200, { detail, can_access_phi: canPhi });
         }
         if (src === "contacts") {
           const sourceDetail = await selectContactsLeadDetailById(cfg, detailId);
-          const detail = await composeMergedLeadDetail(cfg, sourceDetail);
-          if (!detail) return json(res, 404, { error: "Lead not found" });
+          if (!sourceDetail) return json(res, 404, { error: "Lead not found" });
+          const cross = await mergeCrossSourceByPhone(cfg, sourceDetail);
+          const detail = await composeMergedLeadDetail(cfg, cross.detail, {
+            alternateLeadKeys: cross.alternateLeadKeys,
+          });
           if (canPhi) {
-            const phi = await readPhiByLead(cfg, detailId, src);
-            detail.phi = phi.payload || {};
+            detail.phi = await readPhiMergedForLead(cfg, detailId, src, cross.alternateLeadKeys);
           }
           return json(res, 200, { detail, can_access_phi: canPhi });
         }
@@ -767,11 +967,24 @@ module.exports = async function handler(req, res) {
         console.error("staff/leads PATCH enrichLeadEmailsFromContacts", e);
       }
       let detail = null;
+      let cross = { detail: null, alternateLeadKeys: [] };
       if (src === "manychat_leads") {
         const row = await selectManychatLeadDetailById(cfg, id);
-        detail = row ? Object.assign({ read_only: false }, row) : null;
+        const base = ensureManychatLeadDetail(row);
+        if (base) {
+          cross = await mergeCrossSourceByPhone(cfg, base);
+          detail = cross.detail;
+        } else {
+          detail = null;
+        }
       } else if (src === "contacts") {
-        detail = await selectContactsLeadDetailById(cfg, id);
+        const base = await selectContactsLeadDetailById(cfg, id);
+        if (base) {
+          cross = await mergeCrossSourceByPhone(cfg, base);
+          detail = cross.detail;
+        } else {
+          detail = null;
+        }
       } else if (src === "quote_lead_submissions") {
         detail = await selectQuoteLeadDetailById(cfg, id);
       } else {
@@ -790,10 +1003,11 @@ module.exports = async function handler(req, res) {
           updated_at: unified.updated_at || null,
         };
       }
-      const mergedDetail = detail ? await composeMergedLeadDetail(cfg, detail) : null;
+      const mergedDetail = detail
+        ? await composeMergedLeadDetail(cfg, detail, { alternateLeadKeys: cross.alternateLeadKeys || [] })
+        : null;
       if (mergedDetail && canPhi) {
-        const phi = await readPhiByLead(cfg, id, src || "unknown");
-        mergedDetail.phi = phi.payload || {};
+        mergedDetail.phi = await readPhiMergedForLead(cfg, id, src || "unknown", cross.alternateLeadKeys || []);
       }
       return json(res, 200, { item: one, detail: mergedDetail, can_access_phi: canPhi });
     } catch (e) {
