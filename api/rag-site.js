@@ -48,9 +48,17 @@ function historyToContext(history) {
 function websiteNoAnswerLine(language) {
   const l = String(language || "").toLowerCase();
   if (l.startsWith("spanish") || l.startsWith("es")) {
-    return "Aún no tengo esa información. Julie pronto podrá ayudarte.";
+    return (
+      "Aún no tengo esa información, pero Julie con gusto te ayuda. Escríbele a " +
+      "[Julie@mejorvidainsurance.com](mailto:Julie@mejorvidainsurance.com) o " +
+      "[agenda una cita con ella aquí](https://meetings-na2.hubspot.com/julie-braunsroth)."
+    );
   }
-  return "I don't have that information yet. Julie will get back to you soon.";
+  return (
+    "I don't have that information yet, but Julie would be happy to help. Email her at " +
+    "[Julie@mejorvidainsurance.com](mailto:Julie@mejorvidainsurance.com) or " +
+    "[schedule an appointment with her here](https://meetings-na2.hubspot.com/julie-braunsroth/insurance-consultation-mejor-vida-insurance)."
+  );
 }
 
 function websiteErrorLine(language) {

@@ -3471,6 +3471,7 @@
         try { await sb.auth.signOut(); } catch (e) {}
         accessToken = "";
         conversation = [];
+        staffChatUserId = "";
         inboxQuestions = [];
         selectedQuestionId = "";
         kbGapItemsState = [];
@@ -3572,6 +3573,63 @@
         return raw.replace(/^source:\s.*(?:\r?\n)+/i, "").trim();
       }
 
+      var STAFF_CHAT_VERSION = 1;
+      var MAX_CHAT_MESSAGES = 100;
+      var staffChatUserId = "";
+      function staffChatKey() {
+        return "mvi.staff.assistant.chat.v" + STAFF_CHAT_VERSION + "." + (staffChatUserId || "anon");
+      }
+      function trimChat(msgs) {
+        if (!Array.isArray(msgs)) return [];
+        if (msgs.length <= MAX_CHAT_MESSAGES) return msgs;
+        return msgs.slice(msgs.length - MAX_CHAT_MESSAGES);
+      }
+      function loadStoredChat() {
+        try {
+          var raw = localStorage.getItem(staffChatKey());
+          if (!raw) return [];
+          var obj = JSON.parse(raw);
+          if (!obj || !Array.isArray(obj.msgs)) return [];
+          var clean = obj.msgs.filter(function (m) {
+            return m && (m.role === "user" || m.role === "assistant") && typeof m.content === "string";
+          });
+          return trimChat(clean);
+        } catch (e) {
+          return [];
+        }
+      }
+      function saveStoredChat(msgs) {
+        try {
+          var payload = { v: STAFF_CHAT_VERSION, msgs: trimChat(msgs || []) };
+          localStorage.setItem(staffChatKey(), JSON.stringify(payload));
+        } catch (e) {
+          /* private mode / quota — ignore */
+        }
+      }
+      function clearStoredChat() {
+        try { localStorage.removeItem(staffChatKey()); } catch (e) {}
+      }
+
+      async function hydrateStaffChat() {
+        try {
+          if (!sb || !sb.auth || !sb.auth.getUser) return;
+          var u = await sb.auth.getUser();
+          var uid = u && u.data && u.data.user && u.data.user.id;
+          staffChatUserId = uid || "";
+        } catch (e) {
+          staffChatUserId = "";
+        }
+        if (!staffChatUserId) return;
+        var stored = loadStoredChat();
+        chatLog.innerHTML = "";
+        conversation = stored.map(function (m) {
+          return { role: m.role, content: m.content };
+        });
+        stored.forEach(function (m) {
+          addMessage(m.role, m.content, m.source || "");
+        });
+      }
+
       function addMessage(role, content, source) {
         var row = document.createElement("div");
         row.className = "msg-row " + role;
@@ -3617,7 +3675,9 @@
         chatErr.textContent = "";
         chatInput.value = "";
         addMessage("user", text);
-        conversation.push({ role: "user", content: text });
+        conversation.push({ role: "user", content: text, ts: Date.now() });
+        conversation = trimChat(conversation);
+        saveStoredChat(conversation);
         setThinking(true);
         sendBtn.disabled = true;
         try {
@@ -3635,8 +3695,11 @@
           }
           var data = await r.json();
           if (!r.ok || !data.answer) throw new Error(data.error || "Failed");
-          conversation.push({ role: "assistant", content: data.answer });
-          addMessage("assistant", data.answer, data.source || "");
+          var src = data.source || "";
+          conversation.push({ role: "assistant", content: data.answer, source: src, ts: Date.now() });
+          conversation = trimChat(conversation);
+          saveStoredChat(conversation);
+          addMessage("assistant", data.answer, src);
         } catch (e) {
           chatErr.textContent = "Failed to generate answer. Please try again.";
         } finally {
@@ -3664,6 +3727,7 @@
           resetLoginFailures();
           accessToken = out.data.session.access_token;
           setAuthed(true);
+          await hydrateStaffChat();
           showTab("chat");
           await loadInbox();
           await loadKbGaps();
@@ -3760,6 +3824,7 @@
         conversation = [];
         chatLog.innerHTML = "";
         chatErr.textContent = "";
+        clearStoredChat();
         chatInput.focus();
       });
       refreshInboxBtn.addEventListener("click", function () {
@@ -6788,6 +6853,7 @@
           if (sess && sess.access_token) {
             accessToken = sess.access_token;
             setAuthed(true);
+            await hydrateStaffChat();
             showTab("chat");
             await loadInbox();
             await loadKbGaps();

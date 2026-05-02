@@ -9,14 +9,17 @@
  * into the v2 pipeline — Supabase becomes the source of truth from here.
  *
  * ManyChat sends:
- *   phone        (required) WhatsApp phone number, E.164 preferred
- *   whatsapp_id  (optional) ManyChat subscriber ID
- *   language     (required) 'english' or 'spanish'
- *   first_name   (optional) subscriber first name        — preferred
- *   last_name    (optional) subscriber last name         — preferred
- *   full_name    (optional) legacy single-field fallback — split on first space
- *   email        (optional) subscriber email — saved to contacts so post-quote-email can find it
- *   us_state     (optional) defaults to 'NE'
+ *   phone            WhatsApp phone, E.164 preferred (required unless an existing row is found by whatsapp_id)
+ *   whatsapp_id      ManyChat / WhatsApp subscriber id (optional; used to match existing contact)
+ *   first_name, last_name, full_name, email (optional)
+ *   language         english | spanish (required)
+ *   edad             age (optional; alias: age)
+ *   sexo             Hombre | Mujer (optional; stored as gender male | female; alias: gender)
+ *   tabaco           Sí | No (optional; alias: is_smoker)
+ *   quote_low, quote_high  (optional; display strings from quote tool)
+ *   us_state         (optional) defaults to 'NE'
+ *
+ * Upsert: matches contacts by phone first, then by whatsapp_id / manychat_subscriber_id — updates in place.
  *
  * Returns:
  *   { success: true, contact_id: "...", created: true|false }
@@ -26,7 +29,14 @@
  */
 
 const { verifyManychatSecret, logRequest } = require("../lib/manychat-auth");
-const { upsertContact, upsertLeadState, insertEvent, logWebhook } = require("../lib/contacts-db");
+const {
+  upsertContact,
+  upsertLeadState,
+  insertEvent,
+  logWebhook,
+  getContactsByManychatSubscriberId,
+  getLeadState,
+} = require("../lib/contacts-db");
 const { syncContactToHubspot } = require("../lib/hubspot-sync-lib");
 const { logIntegrationAudit } = require("../lib/integration-audit");
 
@@ -46,6 +56,58 @@ function cleanManychatValue(v) {
   const s = String(v == null ? "" : v).trim();
   if (!s || UNRESOLVED_TEMPLATE.test(s)) return "";
   return s;
+}
+
+function parseBool(val) {
+  if (val === true || val === "true" || val === "yes" || val === "sí" || val === "si" || val === "Sí" || val === "Si") {
+    return true;
+  }
+  if (val === false || val === "false" || val === "no" || val === "No") return false;
+  return null;
+}
+
+/** Normalize Spanish / English gender labels to lead_state values (male | female). */
+function parseGender(val) {
+  const s = String(val == null ? "" : val).trim().toLowerCase();
+  if (!s || UNRESOLVED_TEMPLATE.test(s)) return null;
+  if (["hombre", "m", "male", "masculino", "masculine"].includes(s)) return "male";
+  if (["mujer", "f", "female", "femenino", "feminine"].includes(s)) return "female";
+  return null;
+}
+
+const STAGE_ORDER = [
+  "new_contact",
+  "engaged",
+  "referral_requested",
+  "nebraska_lead",
+  "initiated",
+  "partially_qualified",
+  "quoted",
+  "call_scheduled",
+  "call_completed",
+  "policy_issued",
+  "closed_lost",
+  "dropped",
+];
+
+function stageRank(stage) {
+  const i = STAGE_ORDER.indexOf(stage || "new_contact");
+  if (i === -1) return 50;
+  return i;
+}
+
+function maxPipelineStage(a, b) {
+  return stageRank(b) > stageRank(a) ? b : a;
+}
+
+/** Infer minimum stage from qualification + quote data (does not downgrade). */
+function inferStageFromIntakePayload({ age, gender, isSmoker, quoteLow, quoteHigh }) {
+  const hasQuote = !!(quoteLow && quoteHigh);
+  const partial =
+    age != null && Number.isFinite(age) && gender && isSmoker !== null && isSmoker !== undefined;
+  if (hasQuote) return "quoted";
+  if (partial) return "partially_qualified";
+  return "engaged";
 }
 
 module.exports = async function handler(req, res) {
@@ -74,10 +136,36 @@ module.exports = async function handler(req, res) {
     return json(res, 400, { success: false, error: "Invalid JSON" });
   }
 
-  // ── Validate required fields ──────────────────────────────────────────────
-  const phone = cleanManychatValue(body.phone);
+  // ── Resolve phone (E.164) — may be filled from whatsapp_id → existing contact ──
+  let phone = cleanManychatValue(body.phone);
+  const whatsappPhone = cleanManychatValue(body.whatsapp_phone);
+  if (!phone && whatsappPhone) phone = whatsappPhone;
+
+  const whatsappId =
+    cleanManychatValue(body.whatsapp_id || body.manychat_subscriber_id || body.subscriber_id || body.manychat_id) ||
+    null;
+  const manychatSubscriberId = cleanManychatValue(body.subscriber_id || body.manychat_id) || null;
+
+  if (!phone && whatsappId) {
+    try {
+      const rows = await getContactsByManychatSubscriberId(supabaseUrl, supabaseKey, whatsappId);
+      const match = rows.find((c) => cleanManychatValue(c.phone)) || rows[0];
+      if (match && match.phone) phone = String(match.phone).trim();
+    } catch (_) {
+      /* ignore */
+    }
+  }
+
+  const widDigits = whatsappId ? whatsappId.replace(/\D/g, "") : "";
+  if (!phone && widDigits.length >= 10 && widDigits.length <= 15) {
+    phone = (whatsappId && String(whatsappId).trim().startsWith("+") ? "+" : "") + widDigits;
+  }
+
   if (!phone) {
-    return json(res, 400, { success: false, error: "phone is required" });
+    return json(res, 400, {
+      success: false,
+      error: "phone is required (or whatsapp_id must match an existing contact)",
+    });
   }
 
   const language = cleanManychatValue(body.language || "english").toLowerCase();
@@ -85,12 +173,9 @@ module.exports = async function handler(req, res) {
     return json(res, 400, { success: false, error: "language must be 'english' or 'spanish'" });
   }
 
-  const whatsappId = cleanManychatValue(body.whatsapp_id || body.manychat_subscriber_id) || null;
-
   // Prefer explicit first_name/last_name from the ManyChat body.
-  // Fall back to splitting a legacy full_name/name payload on the first space.
   let firstName = cleanManychatValue(body.first_name || body.firstName).slice(0, 200);
-  let lastName  = cleanManychatValue(body.last_name || body.lastName).slice(0, 200);
+  let lastName = cleanManychatValue(body.last_name || body.lastName).slice(0, 200);
   if (!firstName && !lastName) {
     const combined = cleanManychatValue(body.full_name || body.name);
     if (combined) {
@@ -99,58 +184,107 @@ module.exports = async function handler(req, res) {
         firstName = combined.slice(0, 200);
       } else {
         firstName = combined.slice(0, spaceIdx).slice(0, 200);
-        lastName  = combined.slice(spaceIdx + 1).trim().slice(0, 200);
+        lastName = combined.slice(spaceIdx + 1).trim().slice(0, 200);
       }
     }
   }
   firstName = firstName || null;
-  lastName  = lastName  || null;
+  lastName = lastName || null;
 
-  // Email — optional but needed so post-quote-email can find it on the v2 contacts row
   const rawEmail = cleanManychatValue(body.email).toLowerCase();
   const email = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(rawEmail) ? rawEmail.slice(0, 500) : null;
 
   const usState = String(body.us_state || "NE").trim().toUpperCase().slice(0, 5);
 
+  let age = null;
+  const ageRaw = body.edad !== undefined && body.edad !== "" ? body.edad : body.age;
+  if (ageRaw !== undefined && ageRaw !== null && ageRaw !== "") {
+    const n = parseInt(String(ageRaw).replace(/[^\d]/g, ""), 10);
+    if (Number.isFinite(n) && n > 0 && n < 130) age = n;
+  }
+
+  const gender = parseGender(body.sexo) || parseGender(body.gender);
+
+  let isSmoker = null;
+  if (body.tabaco !== undefined && body.tabaco !== null && body.tabaco !== "") {
+    isSmoker = parseBool(body.tabaco);
+  } else if (body.is_smoker !== undefined && body.is_smoker !== null && body.is_smoker !== "") {
+    isSmoker = parseBool(body.is_smoker);
+  }
+
+  const quoteLow = cleanManychatValue(body.quote_low).slice(0, 200) || null;
+  const quoteHigh = cleanManychatValue(body.quote_high).slice(0, 200) || null;
+
   // ── Log incoming webhook (fire-and-forget) ───────────────────────────────
-  logWebhook(supabaseUrl, supabaseKey, "manychat", "/api/lead-intake", { phone, language, whatsapp_id: whatsappId });
+  logWebhook(supabaseUrl, supabaseKey, "manychat", "/api/lead-intake", {
+    phone,
+    language,
+    whatsapp_id: whatsappId,
+    has_quotes: !!(quoteLow || quoteHigh),
+  });
 
   await logIntegrationAudit(supabaseUrl, supabaseKey, {
     stage: "lead_intake_begin",
     endpoint: "/api/lead-intake",
     outcome: "ok",
     phone,
-    detail: { language, has_email: !!email, has_whatsapp_id: !!whatsappId },
+    detail: {
+      language,
+      has_email: !!email,
+      has_whatsapp_id: !!whatsappId,
+      has_age: age != null,
+      has_gender: !!gender,
+      has_smoker: isSmoker !== null,
+      has_quotes: !!(quoteLow && quoteHigh),
+    },
   });
 
   try {
-    // 1. Upsert contact — idempotent on phone.
-    //    NOTE: contacts.full_name is a GENERATED column (see migration 020).
-    //    We only write first_name/last_name; full_name auto-computes.
-    const { contactId, created } = await upsertContact(supabaseUrl, supabaseKey, phone, {
+    const contactPatch = {
       first_name: firstName,
-      last_name:  lastName,
+      last_name: lastName,
       ...(email ? { email } : {}),
       language,
       whatsapp_id: whatsappId,
+      ...(manychatSubscriberId ? { manychat_subscriber_id: manychatSubscriberId } : {}),
       us_state: usState,
       source: "whatsapp",
-    });
+    };
 
-    // 2. Upsert lead_state — set stage to 'engaged', record language_picked_at
-    await upsertLeadState(supabaseUrl, supabaseKey, contactId, {
-      pipeline_stage: "engaged",
-      language_picked_at: new Date().toISOString(),
-    });
+    const { contactId, created } = await upsertContact(supabaseUrl, supabaseKey, phone, contactPatch);
 
-    // 3. Append event to audit trail
+    const existingState = await getLeadState(supabaseUrl, supabaseKey, contactId);
+    const inferred = inferStageFromIntakePayload({ age, gender, isSmoker, quoteLow, quoteHigh });
+    const fromPayload = maxPipelineStage("engaged", inferred);
+    const existingStage = existingState && existingState.pipeline_stage ? existingState.pipeline_stage : "new_contact";
+    const finalStage = maxPipelineStage(existingStage, fromPayload);
+
+    const nowIso = new Date().toISOString();
+    const leadPatch = {
+      pipeline_stage: finalStage,
+      language_picked_at: (existingState && existingState.language_picked_at) || nowIso,
+    };
+    if (age != null) leadPatch.age = age;
+    if (gender) leadPatch.gender = gender;
+    if (isSmoker !== null) leadPatch.is_smoker = isSmoker;
+    if (quoteLow) leadPatch.quote_low = quoteLow;
+    if (quoteHigh) leadPatch.quote_high = quoteHigh;
+    if (quoteLow && quoteHigh) {
+      leadPatch.quote_generated_at = (existingState && existingState.quote_generated_at) || nowIso;
+    }
+
+    await upsertLeadState(supabaseUrl, supabaseKey, contactId, leadPatch);
+
     await insertEvent(supabaseUrl, supabaseKey, contactId, "language_picked", {
       language,
       us_state: usState,
+      ...(age != null ? { age } : {}),
+      ...(gender ? { gender } : {}),
+      ...(isSmoker !== null ? { is_smoker: isSmoker } : {}),
+      ...(quoteLow ? { quote_low: quoteLow } : {}),
+      ...(quoteHigh ? { quote_high: quoteHigh } : {}),
+      pipeline_stage: finalStage,
     });
-
-    // Nurture enrollment is deferred: /api/nurture-enroll-cron enrolls contacts
-    // after a quiet period so contact-capture + lead-intake cannot double-enroll.
 
     const hubspotToken = process.env.HUBSPOT_ACCESS_TOKEN;
     const pipelineId = process.env.HUBSPOT_PIPELINE_ID || "default";
@@ -165,7 +299,7 @@ module.exports = async function handler(req, res) {
       endpoint: "/api/lead-intake",
       outcome: "ok",
       phone,
-      detail: { contact_id: contactId, created },
+      detail: { contact_id: contactId, created, pipeline_stage: finalStage },
       contactId,
     });
     return json(res, 200, { success: true, contact_id: contactId, created });

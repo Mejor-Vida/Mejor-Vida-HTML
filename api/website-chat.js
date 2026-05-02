@@ -125,8 +125,8 @@ Julie will see your information and can follow up with you personally.`;
     const assistantAnswer =
       ragOut.status === "no_answer" || ragOut.answer == null
         ? assistantLocale === "Spanish"
-          ? "Aún no tengo esa información. Intenta reformular tu pregunta o comunícate con Julie al 402-440-5438."
-          : "I don't have that information yet. Please try rephrasing your question or contact us for help."
+          ? "Aún no tengo esa información, pero Julie con gusto te ayuda. Escríbele a [Julie@mejorvidainsurance.com](mailto:Julie@mejorvidainsurance.com) o [agenda una cita con ella aquí](https://meetings-na2.hubspot.com/julie-braunsroth)."
+          : "I don't have that information yet, but Julie would be happy to help. Email her at [Julie@mejorvidainsurance.com](mailto:Julie@mejorvidainsurance.com) or [schedule an appointment with her here](https://meetings-na2.hubspot.com/julie-braunsroth/insurance-consultation-mejor-vida-insurance)."
         : ragOut.answer;
 
     const responseStatus = ragOut.status === "answered" ? "answered" : "no_answer";
