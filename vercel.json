@@ -121,6 +121,26 @@
     {
       "source": "/api/website-chat",
       "destination": "/api/rag-site"
+    },
+    {
+      "source": "/privacy-policy",
+      "destination": "/privacy-policy.html"
+    },
+    {
+      "source": "/privacy",
+      "destination": "/privacy-policy.html"
+    },
+    {
+      "source": "/terms-service",
+      "destination": "/terms-service.html"
+    },
+    {
+      "source": "/terms",
+      "destination": "/terms-service.html"
+    },
+    {
+      "source": "/terms-of-service",
+      "destination": "/terms-service.html"
     }
   ]
 }

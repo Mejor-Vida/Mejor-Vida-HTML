@@ -5,6 +5,7 @@
     "node": ">=18"
   },
   "scripts": {
+    "dev": "vercel dev",
     "preview:post-quote-email": "node scripts/preview-post-quote-email.js",
     "embed:internal-moo": "node scripts/embed-internal-knowledge.js"
   },

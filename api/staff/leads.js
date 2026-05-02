@@ -164,24 +164,31 @@ function normalizeCitizenshipStatus(v) {
   return raw;
 }
 
-async function loadSelectorDerivedProfileExt(cfg, leadId, leadSourceTable) {
-  if (!leadId || !leadSourceTable) return {};
+async function loadSelectorDerivedLayers(cfg, leadId, leadSourceTable) {
+  if (!leadId || !leadSourceTable) {
+    return {
+      selectorExt: {},
+      psAugment: { age: null, sex: null, tobacco: null, state: null },
+    };
+  }
   const rows = await restSelect(
     cfg,
     "product_selector_sessions",
-    `select=workflow_state,risk_summary,recommendation,updated_at&lead_id=eq.${encodeURIComponent(
+    `select=workflow_state,risk_summary,recommendation,updated_at,qualification_answers&lead_id=eq.${encodeURIComponent(
       leadId
     )}&lead_source_table=eq.${encodeURIComponent(leadSourceTable)}&limit=1`
   );
   const row = Array.isArray(rows) && rows[0] ? rows[0] : null;
   const risk = row && row.risk_summary && typeof row.risk_summary === "object" ? row.risk_summary : {};
   const rec = row && row.recommendation && typeof row.recommendation === "object" ? row.recommendation : {};
-  return {
+  const selectorExt = {
     risk_level: risk.level || "",
     risk_flags: Array.isArray(risk.flags) ? risk.flags : [],
     last_recommendation: rec.product_type || "",
     recommendation_timestamp: row && row.updated_at ? row.updated_at : "",
   };
+  const psAugment = augmentFromProductSelectorRow(row);
+  return { selectorExt, psAugment };
 }
 
 async function loadCanonicalLeadProfile(cfg, leadId, leadSourceTable) {
@@ -255,6 +262,8 @@ async function selectManychatLeadDetailById(cfg, id) {
 }
 
 function toBoolOrNullFromText(v) {
+  if (v === true) return true;
+  if (v === false) return false;
   const t = String(v == null ? "" : v).trim().toLowerCase();
   if (!t) return null;
   if (["true", "yes", "y", "1", "smoker", "tobacco", "si", "sí"].includes(t)) return true;
@@ -262,15 +271,77 @@ function toBoolOrNullFromText(v) {
   return null;
 }
 
+/** Merge product-selector-derived scalars (later rows fill blanks in `a`). */
+function mergePsAugment(a, b) {
+  const out = Object.assign({}, a || {});
+  const p = b || {};
+  if (isBlankValue(out.age) && p.age != null) out.age = p.age;
+  if (isBlankValue(out.sex) && !isBlankValue(p.sex)) out.sex = p.sex;
+  if (out.tobacco == null && p.tobacco != null) out.tobacco = p.tobacco;
+  if (isBlankValue(out.state) && !isBlankValue(p.state)) out.state = p.state;
+  return out;
+}
+
+function augmentFromProductSelectorRow(row) {
+  if (!row) return { age: null, sex: null, tobacco: null, state: null };
+  const qa = row.qualification_answers && typeof row.qualification_answers === "object" ? row.qualification_answers : {};
+  const ws = row.workflow_state && typeof row.workflow_state === "object" ? row.workflow_state : {};
+  const snap = ws.profile_snapshot && typeof ws.profile_snapshot === "object" ? ws.profile_snapshot : {};
+  const ageRaw = qa.age != null && String(qa.age).trim() !== "" ? qa.age : snap.age;
+  let age = null;
+  if (ageRaw != null && String(ageRaw).trim() !== "") {
+    const n = parseInt(String(ageRaw), 10);
+    if (Number.isFinite(n) && n >= 0 && n <= 130) age = n;
+  }
+  const sex = cleanText(qa.sex || qa.gender || snap.sex || snap.gender) || null;
+  let tobacco = null;
+  if (Object.prototype.hasOwnProperty.call(qa, "tobacco")) {
+    if (typeof qa.tobacco === "boolean") tobacco = qa.tobacco;
+    else tobacco = toBoolOrNullFromText(qa.tobacco);
+  } else if (snap.tobacco === true || snap.tobacco === false) {
+    tobacco = snap.tobacco;
+  } else {
+    tobacco = toBoolOrNullFromText(snap.tobacco);
+  }
+  const st = cleanText(qa.state || snap.state || "").toUpperCase().slice(0, 2);
+  const state = st.length === 2 ? st : null;
+  return { age, sex, tobacco, state };
+}
+
 async function selectContactsLeadDetailById(cfg, id) {
   const rows = await restSelect(
     cfg,
     "contacts",
-    `select=id,first_name,last_name,email,phone,language,idioma,source,whatsapp_id,manychat_subscriber_id,created_at,updated_at&limit=1&id=eq.${encodeURIComponent(id)}`
+    `select=id,first_name,last_name,email,phone,language,idioma,source,whatsapp_id,manychat_subscriber_id,us_state,created_at,updated_at&limit=1&id=eq.${encodeURIComponent(id)}`
   );
   const row = Array.isArray(rows) && rows[0] ? rows[0] : null;
   if (!row) return null;
   const lang = String(row.idioma || row.language || "english").trim();
+  let age = null;
+  let sex = null;
+  let tobacco = null;
+  try {
+    const lsRows = await restSelect(
+      cfg,
+      "lead_state",
+      `select=age,gender,is_smoker&contact_id=eq.${encodeURIComponent(id)}&limit=1`
+    );
+    const ls = Array.isArray(lsRows) && lsRows[0] ? lsRows[0] : null;
+    if (ls) {
+      if (ls.age != null && String(ls.age).trim() !== "") {
+        const n = parseInt(String(ls.age), 10);
+        if (Number.isFinite(n) && n >= 0 && n <= 130) age = n;
+      }
+      sex = cleanText(ls.gender) || null;
+      if (ls.is_smoker === true) tobacco = true;
+      else if (ls.is_smoker === false) tobacco = false;
+    }
+  } catch (_e) {
+    /* lead_state table optional in some environments */
+  }
+  const us = cleanText(row.us_state || "").toUpperCase().slice(0, 2);
+  const profile_ext = {};
+  if (us.length === 2) profile_ext.state = us;
   return {
     read_only: false,
     source_table: "contacts",
@@ -282,9 +353,9 @@ async function selectContactsLeadDetailById(cfg, id) {
     email: String(row.email || "").trim(),
     language: lang || "english",
     source: row.source || "contacts",
-    age: null,
-    sex: null,
-    tobacco: null,
+    age,
+    sex,
+    tobacco,
     tag: null,
     pipeline_stage: null,
     drop_off: false,
@@ -295,6 +366,7 @@ async function selectContactsLeadDetailById(cfg, id) {
     created_at: row.created_at || null,
     updated_at: row.updated_at || null,
     staff_hidden_at: null,
+    profile_ext: Object.keys(profile_ext).length ? profile_ext : undefined,
   };
 }
 
@@ -302,11 +374,27 @@ async function selectQuoteLeadDetailById(cfg, id) {
   const rows = await restSelect(
     cfg,
     "quote_lead_submissions",
-    `select=id,first_name,last_name,email,phone,age,gender,tobacco,lang,source,created_at,quote_status&limit=1&id=eq.${encodeURIComponent(id)}`
+    `select=id,first_name,last_name,email,phone,age,gender,tobacco,lang,source,created_at,quote_status,state_code,payload&limit=1&id=eq.${encodeURIComponent(id)}`
   );
   const row = Array.isArray(rows) && rows[0] ? rows[0] : null;
   if (!row) return null;
-  const nAge = row.age == null ? null : parseInt(String(row.age), 10);
+  const p = row.payload && typeof row.payload === "object" ? row.payload : {};
+  let nAge =
+    row.age == null || String(row.age).trim() === ""
+      ? p.age != null
+        ? parseInt(String(p.age), 10)
+        : null
+      : parseInt(String(row.age), 10);
+  if (!Number.isFinite(nAge)) nAge = null;
+  const sex = cleanText(row.gender || p.sex || p.gender) || null;
+  let tobacco = toBoolOrNullFromText(row.tobacco);
+  if (tobacco == null) {
+    if (p.smoker === true || p.smoker === "true") tobacco = true;
+    else if (p.smoker === false || p.smoker === "false") tobacco = false;
+    else tobacco = toBoolOrNullFromText(p.tobacco);
+  }
+  const st = cleanText(row.state_code || p.state || "").toUpperCase().slice(0, 2);
+  const profile_ext = st.length === 2 ? { state: st } : undefined;
   return {
     read_only: false,
     source_table: "quote_lead_submissions",
@@ -318,9 +406,9 @@ async function selectQuoteLeadDetailById(cfg, id) {
     email: String(row.email || "").trim(),
     language: row.lang || "English",
     source: row.source || "website_quote_tool",
-    age: Number.isFinite(nAge) ? nAge : null,
-    sex: row.gender || null,
-    tobacco: toBoolOrNullFromText(row.tobacco),
+    age: nAge,
+    sex,
+    tobacco,
     tag: null,
     pipeline_stage: row.quote_status || null,
     drop_off: false,
@@ -331,6 +419,7 @@ async function selectQuoteLeadDetailById(cfg, id) {
     created_at: row.created_at || null,
     updated_at: row.created_at || null,
     staff_hidden_at: null,
+    profile_ext,
   };
 }
 
@@ -347,15 +436,19 @@ async function composeMergedLeadDetail(cfg, detail, options) {
     canonical = mergeStaffProfileData(canonical, ext);
   }
 
-  let selectorExt = await loadSelectorDerivedProfileExt(cfg, detail.id, detail.source_table);
+  let selLayers = await loadSelectorDerivedLayers(cfg, detail.id, detail.source_table);
+  let selectorExt = selLayers.selectorExt || {};
+  let psAugment = selLayers.psAugment || { age: null, sex: null, tobacco: null, state: null };
   for (const alt of alternateLeadKeys) {
     if (!alt || !alt.lead_id || !alt.lead_source_table) continue;
     if (String(alt.lead_id) === String(detail.id) && alt.lead_source_table === detail.source_table) continue;
-    const s = await loadSelectorDerivedProfileExt(cfg, alt.lead_id, alt.lead_source_table);
-    selectorExt = mergePreferSource(selectorExt, s);
+    const s = await loadSelectorDerivedLayers(cfg, alt.lead_id, alt.lead_source_table);
+    selectorExt = mergePreferSource(selectorExt, s.selectorExt || {});
+    psAugment = mergePsAugment(psAugment, s.psAugment || {});
   }
 
   const canonicalExt = canonical.profile_ext && typeof canonical.profile_ext === "object" ? canonical.profile_ext : {};
+  const detailExt = detail.profile_ext && typeof detail.profile_ext === "object" ? detail.profile_ext : {};
 
   const merged = Object.assign({}, detail);
   const topLevelPatch = Object.assign({}, canonical);
@@ -369,8 +462,15 @@ async function composeMergedLeadDetail(cfg, detail, options) {
   merged.sex = mergePreferCanonical(detail.sex, topLevelPatch.sex);
   merged.tobacco = topLevelPatch.tobacco != null ? topLevelPatch.tobacco : detail.tobacco;
 
-  const baseExt = mergePreferSource(selectorExt, canonicalExt);
-  merged.profile_ext = mergePreferSource(baseExt, canonicalExt);
+  if (isBlankValue(merged.age) && psAugment.age != null) merged.age = psAugment.age;
+  if (isBlankValue(merged.sex) && !isBlankValue(psAugment.sex)) merged.sex = psAugment.sex;
+  if (merged.tobacco == null && psAugment.tobacco != null) merged.tobacco = psAugment.tobacco;
+
+  const baseExt = mergePreferSource(mergePreferSource(selectorExt, detailExt), canonicalExt);
+  merged.profile_ext = Object.assign({}, baseExt, canonicalExt);
+  if (!isBlankValue(psAugment.state) && isBlankValue(merged.profile_ext.state)) {
+    merged.profile_ext.state = psAugment.state;
+  }
   if (merged.profile_ext && typeof merged.profile_ext === "object") {
     merged.profile_ext.citizenship_status = normalizeCitizenshipStatus(merged.profile_ext.citizenship_status) || null;
   }
@@ -387,6 +487,28 @@ async function readPhiMergedForLead(cfg, leadId, leadSourceTable, alternateLeadK
     phiPayload = mergePreferSource(phiPayload, p2);
   }
   return phiPayload;
+}
+
+/** Fill top-level Lead Profile fields from merged PHI when source tables did not carry them. */
+function enrichDetailTopLevelFromPhi(detail) {
+  if (!detail || !detail.phi || typeof detail.phi !== "object") return;
+  if (detail.tobacco == null) {
+    const t = toBoolOrNullFromText(detail.phi.tobacco);
+    if (t != null) detail.tobacco = t;
+  }
+  if (isBlankValue(detail.sex)) {
+    const sx = cleanText(detail.phi.sex || detail.phi.gender);
+    if (sx) detail.sex = sx;
+  }
+  if (isBlankValue(detail.age) && detail.phi.age != null && String(detail.phi.age).trim() !== "") {
+    const n = parseInt(String(detail.phi.age), 10);
+    if (Number.isFinite(n) && n >= 0 && n <= 130) detail.age = n;
+  }
+  if (!detail.profile_ext || typeof detail.profile_ext !== "object") detail.profile_ext = {};
+  if (isBlankValue(detail.profile_ext.state)) {
+    const st = cleanText(detail.phi.state || detail.phi.us_state || "").toUpperCase().slice(0, 2);
+    if (st.length === 2) detail.profile_ext.state = st;
+  }
 }
 
 function isMissingTableDeleteMsg(msg) {
@@ -679,6 +801,8 @@ module.exports = async function handler(req, res) {
   if (!cfg) return json(res, 500, { error: "Server missing required configuration" });
 
   if (req.method === "GET") {
+    res.setHeader("Cache-Control", "private, no-store, max-age=0, must-revalidate");
+    res.setHeader("Pragma", "no-cache");
     const detailId = String((req.query && req.query.id) || "").trim();
     if (detailId && isUuid(detailId)) {
       try {
@@ -696,6 +820,7 @@ module.exports = async function handler(req, res) {
           if (canPhi) {
             detail.phi = await readPhiMergedForLead(cfg, detailId, src, cross.alternateLeadKeys);
           }
+          enrichDetailTopLevelFromPhi(detail);
           return json(res, 200, { detail, can_access_phi: canPhi });
         }
         if (src === "contacts") {
@@ -708,6 +833,7 @@ module.exports = async function handler(req, res) {
           if (canPhi) {
             detail.phi = await readPhiMergedForLead(cfg, detailId, src, cross.alternateLeadKeys);
           }
+          enrichDetailTopLevelFromPhi(detail);
           return json(res, 200, { detail, can_access_phi: canPhi });
         }
         if (src === "quote_lead_submissions") {
@@ -718,6 +844,7 @@ module.exports = async function handler(req, res) {
             const phi = await readPhiByLead(cfg, detailId, src);
             detail.phi = phi.payload || {};
           }
+          enrichDetailTopLevelFromPhi(detail);
           return json(res, 200, { detail, can_access_phi: canPhi });
         }
         const detail = {
@@ -739,6 +866,7 @@ module.exports = async function handler(req, res) {
           detail.phi = phi.payload || {};
         }
         const merged = await composeMergedLeadDetail(cfg, detail);
+        enrichDetailTopLevelFromPhi(merged);
         return json(res, 200, {
           detail: merged,
           can_access_phi: canPhi,
@@ -1054,6 +1182,7 @@ module.exports = async function handler(req, res) {
       if (mergedDetail && canPhi) {
         mergedDetail.phi = await readPhiMergedForLead(cfg, id, src || "unknown", cross.alternateLeadKeys || []);
       }
+      if (mergedDetail) enrichDetailTopLevelFromPhi(mergedDetail);
       return json(res, 200, { item: one, detail: mergedDetail, can_access_phi: canPhi });
     } catch (e) {
       console.error("staff/leads PATCH", e);
