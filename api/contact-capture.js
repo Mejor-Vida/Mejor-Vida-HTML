@@ -373,11 +373,6 @@ module.exports = async function handler(req, res) {
     return json(res, 405, { success: false, error: "Method Not Allowed" });
   }
 
-  const auth = verifyManychatSecret(req);
-  if (!auth.ok) {
-    return json(res, auth.status, { success: false, error: auth.error });
-  }
-
   const supabaseUrl = process.env.SUPABASE_URL;
   const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
   const hubspotToken = process.env.HUBSPOT_ACCESS_TOKEN;
@@ -386,10 +381,28 @@ module.exports = async function handler(req, res) {
     return json(res, 500, { success: false, error: "Missing Supabase env vars" });
   }
 
+  const auth = verifyManychatSecret(req);
+  if (!auth.ok) {
+    await logIntegrationAudit(supabaseUrl, supabaseKey, {
+      stage: "contact_capture_auth_failed",
+      endpoint: "/api/contact-capture",
+      outcome: "error",
+      message: auth.error || "Unauthorized",
+      detail: { hint: "External Request must include X-App-Secret matching MANYCHAT_WEBHOOK_SECRET" },
+    });
+    return json(res, auth.status, { success: false, error: auth.error });
+  }
+
   let body;
   try {
     body = readJsonBody(req);
   } catch (e) {
+    await logIntegrationAudit(supabaseUrl, supabaseKey, {
+      stage: "contact_capture_invalid_json",
+      endpoint: "/api/contact-capture",
+      outcome: "error",
+      message: "Invalid JSON",
+    });
     return json(res, 400, { success: false, error: "Invalid JSON" });
   }
 

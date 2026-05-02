@@ -118,13 +118,23 @@ module.exports = async function handler(req, res) {
     return json(res, 405, { success: false, error: "Method Not Allowed" });
   }
 
+  const supabaseUrl = process.env.SUPABASE_URL;
+  const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
   const auth = verifyManychatSecret(req);
   if (!auth.ok) {
+    if (supabaseUrl && supabaseKey) {
+      await logIntegrationAudit(supabaseUrl, supabaseKey, {
+        stage: "lead_intake_auth_failed",
+        endpoint: "/api/lead-intake",
+        outcome: "error",
+        message: auth.error || "Unauthorized",
+        detail: { hint: "ManyChat External Request must send header X-App-Secret matching MANYCHAT_WEBHOOK_SECRET" },
+      });
+    }
     return json(res, auth.status, { success: false, error: auth.error });
   }
 
-  const supabaseUrl = process.env.SUPABASE_URL;
-  const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
   if (!supabaseUrl || !supabaseKey) {
     return json(res, 500, { success: false, error: "Server missing SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY" });
   }
@@ -133,8 +143,18 @@ module.exports = async function handler(req, res) {
   try {
     body = readJsonBody(req);
   } catch (e) {
+    await logIntegrationAudit(supabaseUrl, supabaseKey, {
+      stage: "lead_intake_invalid_json",
+      endpoint: "/api/lead-intake",
+      outcome: "error",
+      message: "Invalid JSON",
+    });
     return json(res, 400, { success: false, error: "Invalid JSON" });
   }
+
+  const bodyKeys = Object.keys(body || {})
+    .sort()
+    .slice(0, 50);
 
   // ── Resolve phone (E.164) — may be filled from whatsapp_id → existing contact ──
   let phone = cleanManychatValue(body.phone);
@@ -162,6 +182,17 @@ module.exports = async function handler(req, res) {
   }
 
   if (!phone) {
+    await logIntegrationAudit(supabaseUrl, supabaseKey, {
+      stage: "lead_intake_validation_failed",
+      endpoint: "/api/lead-intake",
+      outcome: "error",
+      message: "phone is required (or whatsapp_id must match an existing contact)",
+      detail: {
+        body_keys: bodyKeys,
+        had_whatsapp_id: !!whatsappId,
+        hint: "Map ManyChat phone field to JSON key phone (E.164) or ensure contact-capture ran first with same subscriber id",
+      },
+    });
     return json(res, 400, {
       success: false,
       error: "phone is required (or whatsapp_id must match an existing contact)",
@@ -170,6 +201,17 @@ module.exports = async function handler(req, res) {
 
   const language = cleanManychatValue(body.language || "english").toLowerCase();
   if (!["english", "spanish"].includes(language)) {
+    await logIntegrationAudit(supabaseUrl, supabaseKey, {
+      stage: "lead_intake_validation_failed",
+      endpoint: "/api/lead-intake",
+      outcome: "error",
+      phone,
+      message: "language must be 'english' or 'spanish'",
+      detail: {
+        body_keys: bodyKeys,
+        language_received: String(body.language != null ? body.language : "").slice(0, 80),
+      },
+    });
     return json(res, 400, { success: false, error: "language must be 'english' or 'spanish'" });
   }
 
@@ -289,9 +331,18 @@ module.exports = async function handler(req, res) {
     const hubspotToken = process.env.HUBSPOT_ACCESS_TOKEN;
     const pipelineId = process.env.HUBSPOT_PIPELINE_ID || "default";
     if (hubspotToken) {
-      syncContactToHubspot(supabaseUrl, supabaseKey, hubspotToken, pipelineId, contactId).catch((e) =>
-        console.error("[lead-intake] hubspot-sync error:", e.message),
-      );
+      syncContactToHubspot(supabaseUrl, supabaseKey, hubspotToken, pipelineId, contactId).catch((e) => {
+        console.error("[lead-intake] hubspot-sync error:", e.message);
+        logIntegrationAudit(supabaseUrl, supabaseKey, {
+          stage: "lead_intake_hubspot_failed",
+          endpoint: "/api/lead-intake",
+          outcome: "error",
+          phone,
+          message: (e && e.message) || String(e),
+          contactId,
+          detail: { hint: "Check Vercel logs; verify HUBSPOT_ACCESS_TOKEN and custom properties (e.g. mvi_quote_low) exist" },
+        }).catch(() => {});
+      });
     }
 
     await logIntegrationAudit(supabaseUrl, supabaseKey, {
