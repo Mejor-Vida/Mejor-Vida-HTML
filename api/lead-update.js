@@ -9,9 +9,10 @@
  *
  * ManyChat sends one or more of:
  *   phone           (required) WhatsApp phone number
- *   age             (optional) integer
- *   is_smoker       (optional) 'yes'/'no'/true/false
- *   gender          (optional) 'male'/'female'
+ *   age | edad      (optional) integer
+ *   gender | sexo | sex   (optional) male/female or Hombre/Mujer
+ *   is_smoker | tabaco | tobacco | smoker  (optional)
+ *   quote_low, quote_high  (optional) display strings (same as lead-intake)
  *   coverage_amount (optional) integer (dollar amount)
  *   monthly_premium (optional) decimal (computed quote)
  *   pipeline_stage  (optional) force a specific stage
@@ -45,10 +46,37 @@ function readJsonBody(req) {
   return req.body && typeof req.body === "object" ? req.body : {};
 }
 
+const UNRESOLVED_MC = /^\{\{[\s\S]*\}\}$/;
+
 function parseBool(val) {
-  if (val === true || val === "true" || val === "yes" || val === "sí" || val === "si") return true;
-  if (val === false || val === "false" || val === "no") return false;
+  if (val === true || val === "true" || val === "yes" || val === "sí" || val === "si" || val === "Sí" || val === "Si") {
+    return true;
+  }
+  if (val === false || val === "false" || val === "no" || val === "No") return false;
   return null;
+}
+
+function cleanMcField(v) {
+  const s = String(v == null ? "" : v).trim();
+  if (!s || UNRESOLVED_MC.test(s)) return "";
+  return s;
+}
+
+function parseGenderMc(val) {
+  const s = String(val == null ? "" : val).trim().toLowerCase();
+  if (!s || UNRESOLVED_MC.test(s)) return null;
+  if (["hombre", "m", "male", "masculino", "masculine"].includes(s)) return "male";
+  if (["mujer", "f", "female", "femenino", "feminine"].includes(s)) return "female";
+  return null;
+}
+
+function firstNonEmpty(body, keys) {
+  for (let i = 0; i < keys.length; i++) {
+    const k = keys[i];
+    const v = body[k];
+    if (v !== undefined && v !== null && v !== "") return v;
+  }
+  return undefined;
 }
 
 /**
@@ -80,6 +108,7 @@ function computeStage(current, updates) {
   if (merged.call_completed_at) return "call_completed";
   if (merged.call_scheduled_at) return "call_scheduled";
   if (merged.monthly_premium != null) return "quoted";
+  if (merged.quote_low && merged.quote_high) return "quoted";
   if (merged.age != null && merged.gender && merged.is_smoker != null) return "partially_qualified";
 
   // Don't downgrade from current
@@ -135,23 +164,44 @@ module.exports = async function handler(req, res) {
     const updates = {};
     const eventData = {};
 
-    if (body.age !== undefined && body.age !== "") {
-      const age = parseInt(body.age, 10);
-      if (Number.isFinite(age)) {
+    const ageRaw = firstNonEmpty(body, ["edad", "age"]);
+    if (ageRaw !== undefined) {
+      const age = parseInt(String(ageRaw).replace(/[^\d]/g, ""), 10);
+      if (Number.isFinite(age) && age > 0 && age < 130) {
         updates.age = age;
         eventData.age = age;
       }
     }
 
-    const isSmoker = parseBool(body.is_smoker);
+    const smokerRaw = firstNonEmpty(body, ["tabaco", "is_smoker", "tobacco", "smoker"]);
+    const isSmoker = smokerRaw !== undefined ? parseBool(smokerRaw) : null;
     if (isSmoker !== null) {
       updates.is_smoker = isSmoker;
       eventData.is_smoker = isSmoker;
     }
 
-    if (body.gender) {
+    const gMc =
+      parseGenderMc(body.sexo) || parseGenderMc(body.gender) || parseGenderMc(body.sex);
+    if (gMc) {
+      updates.gender = gMc;
+      eventData.gender = gMc;
+    } else if (body.gender) {
       updates.gender = String(body.gender).trim().toLowerCase();
       eventData.gender = updates.gender;
+    }
+
+    const qLow = cleanMcField(body.quote_low || body.quoteLow).slice(0, 200);
+    const qHigh = cleanMcField(body.quote_high || body.quoteHigh).slice(0, 200);
+    if (qLow) {
+      updates.quote_low = qLow;
+      eventData.quote_low = qLow;
+    }
+    if (qHigh) {
+      updates.quote_high = qHigh;
+      eventData.quote_high = qHigh;
+    }
+    if (qLow && qHigh) {
+      updates.quote_generated_at = updates.quote_generated_at || new Date().toISOString();
     }
 
     if (body.coverage_amount !== undefined && body.coverage_amount !== "") {
@@ -197,7 +247,9 @@ module.exports = async function handler(req, res) {
     if (updates.policy_issued_at) eventType = "policy_issued";
     else if (updates.call_completed_at) eventType = "call_completed";
     else if (updates.call_scheduled_at) eventType = "call_scheduled";
-    else if (updates.monthly_premium != null) eventType = "quote_generated";
+    else if (updates.monthly_premium != null || (updates.quote_low && updates.quote_high)) {
+      eventType = "quote_generated";
+    }
     else if (updates.gender && updates.age != null && updates.is_smoker != null) eventType = "questionnaire_completed";
     else if (updates.gender) eventType = "gender_answered";
     else if (updates.is_smoker != null) eventType = "smoker_answered";

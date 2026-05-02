@@ -15,8 +15,9 @@
  *   language         english | spanish (required)
  *   edad             age (optional; alias: age)
  *   sexo             Hombre | Mujer (optional; stored as gender male | female; alias: gender)
- *   tabaco           Sí | No (optional; alias: is_smoker)
- *   quote_low, quote_high  (optional; display strings from quote tool)
+ *   tabaco | tobacco | smoker | is_smoker   (optional; yes/no, Sí/No, etc.)
+ *   quote_low | quoteLow, quote_high | quoteHigh  (optional; from quote tool)
+ *   sex              (optional; alias for gender — male/female, from quote API)
  *   us_state         (optional) defaults to 'NE'
  *
  * Upsert: matches contacts by phone first, then by whatsapp_id / manychat_subscriber_id — updates in place.
@@ -101,6 +102,15 @@ function maxPipelineStage(a, b) {
 }
 
 /** Infer minimum stage from qualification + quote data (does not downgrade). */
+function firstNonEmptyBodyField(body, keys) {
+  for (let i = 0; i < keys.length; i++) {
+    const k = keys[i];
+    const v = body[k];
+    if (v !== undefined && v !== null && v !== "") return v;
+  }
+  return undefined;
+}
+
 function inferStageFromIntakePayload({ age, gender, isSmoker, quoteLow, quoteHigh }) {
   const hasQuote = !!(quoteLow && quoteHigh);
   const partial =
@@ -245,17 +255,17 @@ module.exports = async function handler(req, res) {
     if (Number.isFinite(n) && n > 0 && n < 130) age = n;
   }
 
-  const gender = parseGender(body.sexo) || parseGender(body.gender);
+  const gender =
+    parseGender(body.sexo) || parseGender(body.gender) || parseGender(body.sex);
 
   let isSmoker = null;
-  if (body.tabaco !== undefined && body.tabaco !== null && body.tabaco !== "") {
-    isSmoker = parseBool(body.tabaco);
-  } else if (body.is_smoker !== undefined && body.is_smoker !== null && body.is_smoker !== "") {
-    isSmoker = parseBool(body.is_smoker);
-  }
+  const smokerVal = firstNonEmptyBodyField(body, ["tabaco", "is_smoker", "tobacco", "smoker"]);
+  if (smokerVal !== undefined) isSmoker = parseBool(smokerVal);
 
-  const quoteLow = cleanManychatValue(body.quote_low).slice(0, 200) || null;
-  const quoteHigh = cleanManychatValue(body.quote_high).slice(0, 200) || null;
+  const quoteLow =
+    cleanManychatValue(body.quote_low || body.quoteLow).slice(0, 200) || null;
+  const quoteHigh =
+    cleanManychatValue(body.quote_high || body.quoteHigh).slice(0, 200) || null;
 
   // ── Log incoming webhook (fire-and-forget) ───────────────────────────────
   logWebhook(supabaseUrl, supabaseKey, "manychat", "/api/lead-intake", {
