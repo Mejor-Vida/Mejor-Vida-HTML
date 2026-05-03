@@ -461,6 +461,14 @@ async function composeMergedLeadDetail(cfg, detail, options) {
   merged.age = mergePreferCanonical(detail.age, topLevelPatch.age);
   merged.sex = mergePreferCanonical(detail.sex, topLevelPatch.sex);
   merged.tobacco = topLevelPatch.tobacco != null ? topLevelPatch.tobacco : detail.tobacco;
+  merged.pipeline_stage = mergePreferCanonical(detail.pipeline_stage, topLevelPatch.pipeline_stage);
+  merged.quote_low = mergePreferCanonical(detail.quote_low, topLevelPatch.quote_low);
+  merged.quote_high = mergePreferCanonical(detail.quote_high, topLevelPatch.quote_high);
+  merged.quote_generated_at = mergePreferCanonical(detail.quote_generated_at, topLevelPatch.quote_generated_at);
+  merged.monthly_premium = mergePreferCanonical(detail.monthly_premium, topLevelPatch.monthly_premium);
+  merged.coverage_amount = mergePreferCanonical(detail.coverage_amount, topLevelPatch.coverage_amount);
+  merged.contacts_contact_id = mergePreferCanonical(detail.contacts_contact_id, topLevelPatch.contacts_contact_id);
+  merged.contact_id = mergePreferCanonical(detail.contact_id, topLevelPatch.contact_id);
 
   if (isBlankValue(merged.age) && psAugment.age != null) merged.age = psAugment.age;
   if (isBlankValue(merged.sex) && !isBlankValue(psAugment.sex)) merged.sex = psAugment.sex;
@@ -629,8 +637,125 @@ async function selectContactsRowsByPhone(cfg, phoneRaw) {
   const variants = hubspotPhoneSearchVariants(phoneRaw);
   if (!variants.length) return [];
   const values = pgInListQuoted(variants);
-  const q = `select=id,email,phone,whatsapp_id,manychat_subscriber_id,first_name,last_name,language,idioma,created_at&or=(phone.in.(${values}),whatsapp_id.in.(${values}),manychat_subscriber_id.in.(${values}))&order=created_at.desc&limit=80`;
+  const q = `select=id,email,phone,whatsapp_id,manychat_subscriber_id,first_name,last_name,language,idioma,us_state,created_at&or=(phone.in.(${values}),whatsapp_id.in.(${values}),manychat_subscriber_id.in.(${values}))&order=created_at.desc&limit=80`;
   return await restSelect(cfg, "contacts", q);
+}
+
+/** Match v2 `contacts` row by ManyChat subscriber id (whatsapp_id / manychat_subscriber_id). */
+async function selectContactsRowsBySubscriberId(cfg, subscriberIdRaw) {
+  const sid = cleanText(subscriberIdRaw);
+  if (!sid) return [];
+  const enc = encodeURIComponent(sid);
+  const q = `select=id,email,phone,whatsapp_id,manychat_subscriber_id,first_name,last_name,language,idioma,us_state,created_at&or=(whatsapp_id.eq.${enc},manychat_subscriber_id.eq.${enc})&order=created_at.desc&limit=20`;
+  return await restSelect(cfg, "contacts", q);
+}
+
+/** Exact email match on `contacts` (lowercased). */
+async function selectContactsRowByEmail(cfg, emailRaw) {
+  const em = normalizeEmail(emailRaw);
+  if (!em) return null;
+  const rows = await restSelect(
+    cfg,
+    "contacts",
+    `select=id,email,phone,whatsapp_id,manychat_subscriber_id,first_name,last_name,language,idioma,us_state,created_at&email=eq.${encodeURIComponent(em)}&limit=5`
+  );
+  return Array.isArray(rows) && rows[0] ? rows[0] : null;
+}
+
+/** Score how well a `contacts` row matches a `manychat_leads` detail row (higher = stronger). */
+function scoreContactForManychatLead(detail, c) {
+  if (!detail || !c) return 0;
+  let s = 0;
+  const sub = cleanText(detail.manychat_subscriber_id);
+  const ws = cleanText(c.whatsapp_id);
+  const ms = cleanText(c.manychat_subscriber_id);
+  if (sub && (sub === ws || sub === ms)) s += 1000;
+  const pDigits = digitsOnly(detail.phone);
+  const cDigits = digitsOnly(c.phone);
+  if (pDigits && cDigits && pDigits === cDigits) s += 100;
+  const em = normalizeEmail(detail.email);
+  const ce = normalizeEmail(c.email);
+  if (em && ce && em === ce) s += 80;
+  return s;
+}
+
+function dedupeContactsById(rows) {
+  const map = new Map();
+  (rows || []).forEach((c) => {
+    if (c && c.id && !map.has(String(c.id))) map.set(String(c.id), c);
+  });
+  return Array.from(map.values());
+}
+
+/** Pick best `contacts` row for a ManyChat-sourced lead (subscriber id > phone > email). */
+function pickBestContactForManychatLead(detail, contactCandidates) {
+  const uniq = dedupeContactsById(contactCandidates);
+  let best = null;
+  let bestScore = -1;
+  for (const c of uniq) {
+    const sc = scoreContactForManychatLead(detail, c);
+    if (sc > bestScore) {
+      bestScore = sc;
+      best = c;
+    }
+  }
+  return bestScore > 0 ? best : null;
+}
+
+/** Load `lead_state` pipeline fields for overlay onto staff Lead Profile (ManyChat source). */
+async function selectLeadStatePipelineOverlay(cfg, contactId) {
+  if (!contactId) return null;
+  const enc = encodeURIComponent(String(contactId).trim());
+  const full =
+    "age,gender,is_smoker,pipeline_stage,quote_low,quote_high,quote_generated_at,monthly_premium,coverage_amount,us_state";
+  try {
+    const rows = await restSelect(cfg, "lead_state", `select=${full}&contact_id=eq.${enc}&limit=1`);
+    return Array.isArray(rows) && rows[0] ? rows[0] : null;
+  } catch (_e) {
+    try {
+      const reduced = "age,gender,is_smoker,pipeline_stage,monthly_premium,coverage_amount,us_state";
+      const rows = await restSelect(cfg, "lead_state", `select=${reduced}&contact_id=eq.${enc}&limit=1`);
+      return Array.isArray(rows) && rows[0] ? rows[0] : null;
+    } catch (_e2) {
+      return null;
+    }
+  }
+}
+
+/**
+ * Build top-level + profile_ext patch from v2 `contacts` + `lead_state` for merging onto a
+ * `manychat_leads` detail. Only non-blank pipeline values (caller uses mergePreferSource).
+ */
+function buildManychatToContactsPipelinePatch(contactRow, ls) {
+  const patch = {};
+  if (contactRow && contactRow.id) {
+    const cid = String(contactRow.id);
+    patch.contacts_contact_id = cid;
+    patch.contact_id = cid;
+  }
+  if (contactRow) {
+    const lang = cleanText(contactRow.idioma || contactRow.language);
+    if (lang) patch.language = lang;
+  }
+  if (!ls || typeof ls !== "object") return patch;
+  if (ls.age != null && String(ls.age).trim() !== "") {
+    const n = parseInt(String(ls.age), 10);
+    if (Number.isFinite(n) && n >= 0 && n <= 130) patch.age = n;
+  }
+  const sx = cleanText(ls.gender);
+  if (sx) patch.sex = sx;
+  if (ls.is_smoker === true || ls.is_smoker === false) patch.tobacco = ls.is_smoker;
+  const ps = cleanText(ls.pipeline_stage);
+  if (ps) patch.pipeline_stage = ps;
+  if (ls.quote_low != null && String(ls.quote_low).trim() !== "") patch.quote_low = String(ls.quote_low).trim().slice(0, 200);
+  if (ls.quote_high != null && String(ls.quote_high).trim() !== "") patch.quote_high = String(ls.quote_high).trim().slice(0, 200);
+  if (ls.quote_generated_at) patch.quote_generated_at = ls.quote_generated_at;
+  if (ls.monthly_premium != null && String(ls.monthly_premium).trim() !== "") patch.monthly_premium = ls.monthly_premium;
+  if (ls.coverage_amount != null && String(ls.coverage_amount).trim() !== "") patch.coverage_amount = ls.coverage_amount;
+  const us = cleanText((contactRow && contactRow.us_state) || ls.us_state || "");
+  const st = us.toUpperCase().slice(0, 2);
+  if (st.length === 2) patch.profile_ext = { state: st };
+  return patch;
 }
 
 function hasManychatMergeToken(s) {
@@ -693,9 +818,22 @@ async function mergeCrossSourceByPhone(cfg, detail) {
 
   try {
     if (src === "manychat_leads") {
-      const contacts = await selectContactsRowsByPhone(cfg, phone);
-      const c = bestContactRowForPhone(phone, contacts);
+      const candidates = [];
+      const sub = cleanText(detail.manychat_subscriber_id);
+      if (sub) {
+        const bySub = await selectContactsRowsBySubscriberId(cfg, sub);
+        (bySub || []).forEach((x) => candidates.push(x));
+      }
+      if (phone) {
+        const byPhone = await selectContactsRowsByPhone(cfg, phone);
+        (byPhone || []).forEach((x) => candidates.push(x));
+      }
+      const byEmail = await selectContactsRowByEmail(cfg, detail.email);
+      if (byEmail) candidates.push(byEmail);
+      const c = pickBestContactForManychatLead(detail, candidates);
       if (c && c.id && String(c.id) !== String(detail.id)) {
+        const ls = await selectLeadStatePipelineOverlay(cfg, c.id);
+        const pipeline = buildManychatToContactsPipelinePatch(c, ls);
         const patch = {};
         const em = cleanText(c.email);
         if (em) patch.email = em;
@@ -703,10 +841,18 @@ async function mergeCrossSourceByPhone(cfg, detail) {
         if (fn) patch.first_name = fn;
         const ln = cleanText(c.last_name);
         if (ln) patch.last_name = ln;
-        const lang = cleanText(c.idioma || c.language);
-        if (lang) patch.language = lang;
+        Object.assign(patch, pipeline);
+        let merged = mergePreferSource(detail, patch);
+        if (patch.profile_ext && patch.profile_ext.state) {
+          const ext = merged.profile_ext && typeof merged.profile_ext === "object" ? merged.profile_ext : {};
+          if (isBlankValue(ext.state)) {
+            merged = Object.assign({}, merged, {
+              profile_ext: Object.assign({}, ext, { state: patch.profile_ext.state }),
+            });
+          }
+        }
         alternates.push({ lead_id: String(c.id), lead_source_table: "contacts" });
-        return { detail: mergePreferSource(detail, patch), alternateLeadKeys: alternates };
+        return { detail: merged, alternateLeadKeys: alternates };
       }
     }
     if (src === "contacts") {
