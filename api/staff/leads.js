@@ -3,7 +3,7 @@ const { logIntegrationAudit } = require("../../lib/integration-audit");
 const { json, serviceConfig, restSelect, restInsert, restPatch, restDelete } = require("./_inbox-lib");
 const { canAccessPhi } = require("../../lib/staff-permissions");
 const { readPhiByLead, writePhiByLead } = require("../../lib/phi-store");
-const { hubspotPhoneSearchVariants } = require("../../lib/hubspot-phone-variants");
+const { hubspotPhoneSearchVariants, phoneLast10Digits } = require("../../lib/hubspot-phone-variants");
 
 function isUuid(s) {
   return /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(String(s || ""));
@@ -579,6 +579,7 @@ async function hardDeleteUnifiedSourceRow(cfg, unified) {
 function bestContactEmailForPhone(phoneField, contacts) {
   const qPhoneText = cleanText(phoneField);
   const qPhoneDigits = digitsOnly(qPhoneText);
+  const qLast10 = phoneLast10Digits(qPhoneText);
   if (!contacts || !contacts.length || !qPhoneText) return "";
 
   const scored = contacts
@@ -587,9 +588,11 @@ function bestContactEmailForPhone(phoneField, contacts) {
       const cWhatsAppId = cleanText(c.whatsapp_id);
       const cSubscriberId = cleanText(c.manychat_subscriber_id);
       const cPhoneDigits = digitsOnly(cPhone);
+      const cLast10 = phoneLast10Digits(cPhone);
       const cEmail = cleanText(c.email);
       let score = 0;
-      if (qPhoneDigits && cPhoneDigits && qPhoneDigits === cPhoneDigits) score += 100;
+      if (qLast10 && cLast10 && qLast10 === cLast10) score += 100;
+      else if (qPhoneDigits && cPhoneDigits && qPhoneDigits === cPhoneDigits) score += 100;
       if (qPhoneText && qPhoneText === cWhatsAppId) score += 40;
       if (qPhoneText && qPhoneText === cSubscriberId) score += 35;
       if (cEmail) score += 12;
@@ -607,6 +610,7 @@ function bestContactEmailForPhone(phoneField, contacts) {
 function bestContactRowForPhone(phoneField, contacts) {
   const qPhoneText = cleanText(phoneField);
   const qPhoneDigits = digitsOnly(qPhoneText);
+  const qLast10 = phoneLast10Digits(qPhoneText);
   if (!contacts || !contacts.length || !qPhoneText) return null;
   const scored = contacts
     .map((c) => {
@@ -614,8 +618,10 @@ function bestContactRowForPhone(phoneField, contacts) {
       const cWhatsAppId = cleanText(c.whatsapp_id);
       const cSubscriberId = cleanText(c.manychat_subscriber_id);
       const cPhoneDigits = digitsOnly(cPhone);
+      const cLast10 = phoneLast10Digits(cPhone);
       let score = 0;
-      if (qPhoneDigits && cPhoneDigits && qPhoneDigits === cPhoneDigits) score += 100;
+      if (qLast10 && cLast10 && qLast10 === cLast10) score += 100;
+      else if (qPhoneDigits && cPhoneDigits && qPhoneDigits === cPhoneDigits) score += 100;
       if (qPhoneText && qPhoneText === cWhatsAppId) score += 40;
       if (qPhoneText && qPhoneText === cSubscriberId) score += 35;
       if (cleanText(c.email)) score += 12;
@@ -634,10 +640,19 @@ function pgInListQuoted(values) {
 }
 
 async function selectContactsRowsByPhone(cfg, phoneRaw) {
+  const last10 = phoneLast10Digits(phoneRaw);
   const variants = hubspotPhoneSearchVariants(phoneRaw);
-  if (!variants.length) return [];
-  const values = pgInListQuoted(variants);
-  const q = `select=id,email,phone,whatsapp_id,manychat_subscriber_id,first_name,last_name,language,idioma,us_state,created_at&or=(phone.in.(${values}),whatsapp_id.in.(${values}),manychat_subscriber_id.in.(${values}))&order=created_at.desc&limit=80`;
+  const idValues = variants.length ? pgInListQuoted(variants) : "";
+  const orParts = [];
+  if (last10) orParts.push(`phone_last_10.eq.${encodeURIComponent(last10)}`);
+  if (idValues) {
+    orParts.push(`whatsapp_id.in.(${idValues})`);
+    orParts.push(`manychat_subscriber_id.in.(${idValues})`);
+  }
+  if (!orParts.length) return [];
+  const q = `select=id,email,phone,whatsapp_id,manychat_subscriber_id,first_name,last_name,language,idioma,us_state,created_at&or=(${orParts.join(
+    ","
+  )})&order=created_at.desc&limit=80`;
   return await restSelect(cfg, "contacts", q);
 }
 
@@ -670,9 +685,14 @@ function scoreContactForManychatLead(detail, c) {
   const ws = cleanText(c.whatsapp_id);
   const ms = cleanText(c.manychat_subscriber_id);
   if (sub && (sub === ws || sub === ms)) s += 1000;
-  const pDigits = digitsOnly(detail.phone);
-  const cDigits = digitsOnly(c.phone);
-  if (pDigits && cDigits && pDigits === cDigits) s += 100;
+  const p10 = phoneLast10Digits(detail.phone);
+  const c10 = phoneLast10Digits(c.phone);
+  if (p10 && c10 && p10 === c10) s += 100;
+  else {
+    const pDigits = digitsOnly(detail.phone);
+    const cDigits = digitsOnly(c.phone);
+    if (pDigits && cDigits && pDigits === cDigits) s += 100;
+  }
   const em = normalizeEmail(detail.email);
   const ce = normalizeEmail(c.email);
   if (em && ce && em === ce) s += 80;
@@ -912,12 +932,29 @@ async function enrichLeadEmailsFromContacts(cfg, items) {
   const chunkSize = 80;
   for (let i = 0; i < phonesNeedingEmail.length; i += chunkSize) {
     const chunk = phonesNeedingEmail.slice(i, i + chunkSize);
-    const values = chunk.map((p) => `"${String(p).replace(/"/g, "")}"`).join(",");
-    if (!values) continue;
+    const last10Set = new Set();
+    const variantSet = new Set();
+    chunk.forEach((p) => {
+      const t = phoneLast10Digits(p);
+      if (t) last10Set.add(t);
+      hubspotPhoneSearchVariants(p).forEach((v) => variantSet.add(v));
+    });
+    const last10In = last10Set.size ? pgInListQuoted(Array.from(last10Set)) : "";
+    const idValues = variantSet.size ? pgInListQuoted(Array.from(variantSet)) : "";
+    const orParts = [];
+    if (last10In) orParts.push(`phone_last_10.in.(${last10In})`);
+    if (idValues) {
+      orParts.push(`phone.in.(${idValues})`);
+      orParts.push(`whatsapp_id.in.(${idValues})`);
+      orParts.push(`manychat_subscriber_id.in.(${idValues})`);
+    }
+    if (!orParts.length) continue;
     const contacts = await restSelect(
       cfg,
       "contacts",
-      `select=id,email,phone,whatsapp_id,manychat_subscriber_id,created_at&or=(phone.in.(${values}),whatsapp_id.in.(${values}),manychat_subscriber_id.in.(${values}))&order=created_at.desc&limit=400`
+      `select=id,email,phone,whatsapp_id,manychat_subscriber_id,created_at&or=(${orParts.join(
+        ","
+      )})&order=created_at.desc&limit=400`
     );
     (contacts || []).forEach((c) => allContacts.push(c));
   }
