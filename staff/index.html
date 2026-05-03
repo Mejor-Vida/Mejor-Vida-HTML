@@ -108,6 +108,9 @@
       grid-template-rows: auto 1fr;
     }
     .top {
+      position: relative;
+      /* Stack above pane content (e.g. sticky Lead Profile / Product Selector bars) so nav dropdowns paint on top. */
+      z-index: 100;
       border-bottom: 1px solid var(--border);
       background: rgba(6, 14, 28, .5);
       backdrop-filter: blur(6px);
@@ -189,6 +192,67 @@
     .tabs-right {
       margin-left: auto;
     }
+    .staff-nav-groups {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+    .nav-dropdown {
+      position: relative;
+    }
+    .nav-dropdown-btn {
+      background: #20345d;
+      color: #fff;
+      border: 1px solid var(--border);
+      font-weight: 600;
+      padding: 8px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      font: inherit;
+      white-space: nowrap;
+    }
+    .nav-dropdown-btn:hover {
+      background: #2a4275;
+    }
+    .nav-dropdown-btn.active {
+      background: #314f8a;
+    }
+    .nav-dropdown-panel {
+      position: absolute;
+      top: calc(100% + 4px);
+      left: 0;
+      min-width: 220px;
+      z-index: 200;
+      background: #152a4d;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+      padding: 6px;
+    }
+    .nav-dropdown-panel.hidden {
+      display: none !important;
+    }
+    .nav-dropdown-item {
+      display: block;
+      width: 100%;
+      text-align: left;
+      padding: 10px 12px;
+      margin: 0;
+      border: 0;
+      border-radius: 8px;
+      background: transparent;
+      color: var(--text);
+      font: inherit;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .nav-dropdown-item:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+    .nav-dropdown-item.active {
+      background: rgba(49, 79, 138, 0.55);
+    }
     .tab-btn {
       background: #20345d; color: #fff; border: 1px solid var(--border); font-weight: 600;
     }
@@ -197,6 +261,9 @@
     .pane.active { display: block; }
     #pane-inbox { padding: 12px; }
     #pane-compose { padding: 12px; overflow: auto; }
+    #pane-oos-referrals { padding: 12px; overflow: auto; }
+    #pane-oos-agents { padding: 12px; overflow: auto; }
+    #pane-oos-archive { padding: 12px; overflow: auto; }
     #pane-lead-profile { padding: 12px; overflow: auto; }
     #pane-product-selector { padding: 12px; overflow: auto; }
     #pane-chat { padding: 12px; }
@@ -1089,6 +1156,68 @@
     .compose-lead-row:hover {
       background: rgba(255, 255, 255, 0.06);
     }
+    .compose-lead-list > .compose-lead-row.active {
+      background: rgba(49, 79, 138, 0.45);
+      box-shadow: inset 3px 0 0 0 var(--accent);
+    }
+    .compose-lead-row.oos-list-row {
+      white-space: normal;
+      overflow: visible;
+      text-overflow: unset;
+    }
+    .compose-lead-name {
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+    .oos-ref-row-wrap {
+      position: relative;
+      display: flex;
+      align-items: stretch;
+      gap: 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .oos-ref-row-wrap:last-child {
+      border-bottom: 0;
+    }
+    .oos-ref-row-wrap .oos-ref-row-main {
+      flex: 1;
+      min-width: 0;
+    }
+    .oos-ref-delete {
+      width: 40px;
+      flex-shrink: 0;
+      padding: 0;
+      margin: 0;
+      border: 0;
+      border-left: 1px solid var(--border);
+      border-radius: 0;
+      background: rgba(12, 24, 48, 0.92);
+      cursor: pointer;
+      font-size: 1rem;
+      line-height: 1;
+      color: #c9d7f4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .oos-ref-delete:hover {
+      background: rgba(90, 30, 30, 0.55);
+      color: #ffb4b4;
+    }
+    .oos-bucket-bar {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+    .oos-bucket-bar button {
+      flex: 1;
+      min-width: 120px;
+    }
+    .oos-bucket-bar button.active {
+      background: #314f8a;
+      font-weight: 700;
+    }
     .compose-lead-delete {
       position: absolute;
       right: 0;
@@ -1620,22 +1749,39 @@
       <div class="top-brand-row">
         <div>
           <b>Mejor Vida Insurance — Staff Portal</b>
-          <small>Staff Access Only — Login Required<span id="staff-build-stamp" class="staff-build-stamp" title="If this number is missing after refresh, the page is cached.">· UI 20260501e</span></small>
+          <small>Staff Access Only — Login Required<span id="staff-build-stamp" class="staff-build-stamp" title="If this number is missing after refresh, the page is cached.">· UI 20260503b</span></small>
         </div>
         <div id="top-active-lead" class="top-active-lead empty" title="Lead selected across staff tools">No lead selected</div>
         <button id="signout-btn" class="signout" type="button" data-help="Signs you out of the staff portal on this browser.">Sign Out</button>
       </div>
-      <nav class="tabs" aria-label="Staff tools">
-        <div class="tabs-left">
-          <button id="tab-lead-profile" class="tab-btn" type="button" data-help="Lead profile: review and edit all collected fields for the active lead. Uses the same lead list as Compose (left column once wired).">👤 Lead Profile</button>
-          <button id="tab-product-selector" class="tab-btn" type="button" data-help="Product selector: guided qualification and recommendations for the lead you select. Works with partial lead data; missing fields can be filled in the flow.">📋 Product Selector</button>
-          <button id="tab-chat" class="tab-btn" type="button" data-help="Open the internal staff AI assistant for product and underwriting questions. This is separate from customer WhatsApp or inbox messages.">🤖 Staff Assistant</button>
-          <button id="tab-compose" class="tab-btn" type="button" data-help="Compose a new email to a lead: search manychat_leads, draft with AI, send branded HTML from Julie\x27s mailbox, or save a draft.">✉️ Compose</button>
+      <nav class="tabs staff-nav-bar" aria-label="Staff tools">
+        <div class="tabs-left staff-nav-groups">
+          <div class="nav-dropdown" id="nav-dd-leads">
+            <button type="button" class="nav-dropdown-btn" id="nav-btn-leads" aria-haspopup="true" aria-expanded="false" data-help="Lead tools: profile, product selector, staff assistant, compose.">Leads ▾</button>
+            <div class="nav-dropdown-panel hidden" role="menu" aria-label="Leads menu">
+              <button type="button" class="nav-dropdown-item" data-tab="lead-profile" data-help="Lead profile: review and edit all collected fields for the active lead.">👤 Lead Profile</button>
+              <button type="button" class="nav-dropdown-item" data-tab="product-selector" data-help="Product selector: guided qualification and recommendations for the lead you select.">📋 Product Selector</button>
+              <button type="button" class="nav-dropdown-item" data-tab="chat" data-help="Internal staff AI assistant for product and underwriting questions.">🤖 Staff Assistant</button>
+              <button type="button" class="nav-dropdown-item" data-tab="compose" data-help="Compose email to a lead: draft with AI, send from Julie\x27s mailbox, or save a draft.">✉️ Compose</button>
+            </div>
+          </div>
+          <div class="nav-dropdown" id="nav-dd-oos">
+            <button type="button" class="nav-dropdown-btn" id="nav-btn-oos" aria-haspopup="true" aria-expanded="false" data-help="Out-of-state referrals, partner agents, and compensation archive.">OOS ▾</button>
+            <div class="nav-dropdown-panel hidden" role="menu" aria-label="OOS menu">
+              <button type="button" class="nav-dropdown-item" data-tab="oos-referrals" data-help="Active website OOS referrals: match agents, generate intro email, send.">🌎 OOS Referrals</button>
+              <button type="button" class="nav-dropdown-item" data-tab="oos-agents" data-help="Partner agents by state for OOS matching.">🤝 OOS Agents</button>
+              <button type="button" class="nav-dropdown-item" data-tab="oos-archive" data-help="Completed referrals — track compensation from referred agents.">📁 OOS Archive</button>
+            </div>
+          </div>
         </div>
-        <div class="tabs-right">
-          <button id="tab-inbox" class="tab-btn active" type="button" data-help="Open the customer question inbox: review questions, draft replies, email leads, and add answers to the knowledge base.">📬 Inbox</button>
-          <button id="tab-kb-gaps" class="tab-btn" type="button" data-help="Review internal knowledge gaps detected when Staff Assistant had to fall back to general AI knowledge.">🧠 KB Gaps</button>
-          <button id="tab-pipeline-audit" class="tab-btn" type="button" data-help="Audit ManyChat → Supabase → HubSpot pipeline: recent events, staff list errors, and live table samples.">🔎 Pipeline audit</button>
+        <div class="tabs-right staff-nav-groups">
+          <div class="nav-dropdown" id="nav-dd-kb">
+            <button type="button" class="nav-dropdown-btn active" id="nav-btn-kb" aria-haspopup="true" aria-expanded="false" data-help="Public customer KB (inbox) and internal staff KB gaps.">Knowledge Base ▾</button>
+            <div class="nav-dropdown-panel hidden" role="menu" aria-label="Knowledge base menu">
+              <button type="button" class="nav-dropdown-item active" data-tab="inbox" data-help="Customer questions for the public knowledge base: draft, email, push to RAG.">📚 Public KB</button>
+              <button type="button" class="nav-dropdown-item" data-tab="kb-gaps" data-help="Staff Assistant knowledge gaps to resolve after retraining.">🧠 Staff KB</button>
+            </div>
+          </div>
         </div>
       </nav>
     </header>
@@ -1645,8 +1791,8 @@
         <div class="inbox-list">
           <div class="inbox-head">
             <div>
-              <strong>Unresolved Questions</strong>
-              <div class="small-note" id="inbox-count">Loading...</div>
+              <strong>Public KB</strong>
+              <div class="small-note" id="inbox-count">Loading unresolved questions…</div>
             </div>
             <button id="refresh-inbox-btn" class="secondary" type="button" data-help="Reloads the unresolved questions list from the server.">Refresh</button>
           </div>
@@ -1670,8 +1816,8 @@
         <div class="inbox-list">
           <div class="inbox-head">
             <div>
-              <strong>Unresolved KB Gaps</strong>
-              <div class="small-note" id="kb-gap-count">Loading...</div>
+              <strong>Staff KB</strong>
+              <div class="small-note" id="kb-gap-count">Loading gaps…</div>
             </div>
             <button id="refresh-kb-gaps-btn" class="secondary" type="button" data-help="Reload unresolved Staff Assistant knowledge gaps.">Refresh</button>
           </div>
@@ -1686,28 +1832,6 @@
           <div id="kb-gap-detail" class="detail-body">
             <div class="q-empty">Select a gap to review.</div>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="pane-pipeline-audit" class="pane" aria-hidden="true">
-      <div class="inbox-wrap">
-        <div class="inbox-list" style="flex:1;max-width:100%">
-          <div class="inbox-head">
-            <div>
-              <strong>Pipeline audit</strong>
-              <div class="small-note">
-                Recent webhook stages, staff list failures, and raw samples from <code>manychat_leads</code> + <code>unified_leads</code>.
-                If “audit_table_missing” is true, apply Supabase migration <code>036_integration_audit_events.sql</code>.
-              </div>
-            </div>
-            <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
-              <label class="small-note" for="pipeline-audit-last4">Phone last 4</label>
-              <input id="pipeline-audit-last4" type="text" maxlength="4" inputmode="numeric" style="width:72px;padding:6px 8px;border-radius:6px;border:1px solid rgba(255,255,255,0.25);background:rgba(0,0,0,0.2);color:inherit" placeholder="6495" />
-              <button id="refresh-pipeline-audit-btn" class="secondary" type="button">Refresh</button>
-            </div>
-          </div>
-          <pre id="pipeline-audit-json" class="detail-body" style="margin-top:12px;white-space:pre-wrap;font-size:12px;line-height:1.45;max-height:calc(100vh - 220px);overflow:auto;padding:12px;border-radius:8px;background:rgba(0,0,0,0.25);border:1px solid rgba(255,255,255,0.12)">Loading…</pre>
         </div>
       </div>
     </section>
@@ -1819,6 +1943,233 @@
                   </div>
                   <div id="compose-status" class="small-note"></div>
                 </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="pane-oos-referrals" class="pane" aria-hidden="true">
+      <div class="compose-outer">
+        <div class="compose-panel">
+          <div class="inbox-head">
+            <div>
+              <strong>Out-of-state referrals</strong>
+              <div class="small-note">Active website submissions (<code>out_of_state_referrals</code>). Match an agent, choose email language, generate and send the intro. Use <strong>Save &amp; move to Archive</strong> when the handoff is done — compensation is tracked under <strong>OOS → OOS Archive</strong>.</div>
+            </div>
+            <button id="oos-ref-refresh-btn" class="secondary" type="button">Refresh list</button>
+          </div>
+          <div id="oos-ref-body" class="compose-body">
+            <div class="compose-work">
+              <aside class="compose-leads-col" aria-label="Referrals">
+                <label class="compose-leads-label" for="oos-ref-filter">Filter</label>
+                <input id="oos-ref-filter" type="search" autocomplete="off" placeholder="Name, email, state…" />
+                <span id="oos-ref-list-hint" class="small-note" style="margin:0">Newest first. Click a row to edit. Trash deletes permanently.</span>
+                <div id="oos-ref-list" class="compose-lead-list" role="listbox"></div>
+              </aside>
+              <div class="compose-main-col">
+                <form id="oos-ref-form" class="compose-form hidden" autocomplete="off" onsubmit="return false;" aria-label="OOS referral">
+                  <div class="compose-contact-heading">Referral contact</div>
+                  <div class="compose-contact-names">
+                    <div>
+                      <label for="oos-ref-first-name">First name</label>
+                      <input id="oos-ref-first-name" type="text" autocomplete="off" data-lpignore="true" />
+                    </div>
+                    <div>
+                      <label for="oos-ref-last-name">Last name</label>
+                      <input id="oos-ref-last-name" type="text" autocomplete="off" data-lpignore="true" />
+                    </div>
+                  </div>
+                  <div class="meta-grid">
+                    <div class="meta-card">
+                      <label for="oos-ref-state">State</label>
+                      <input id="oos-ref-state" type="text" maxlength="2" placeholder="TX" autocomplete="off" style="text-transform:uppercase" />
+                    </div>
+                    <div class="meta-card">
+                      <label for="oos-ref-email">Email</label>
+                      <input id="oos-ref-email" type="email" inputmode="email" autocomplete="off" data-lpignore="true" />
+                    </div>
+                    <div class="meta-card">
+                      <label for="oos-ref-phone">Phone</label>
+                      <input id="oos-ref-phone" type="text" inputmode="tel" autocomplete="off" />
+                    </div>
+                    <div class="meta-card">
+                      <label for="oos-ref-status-field">Status</label>
+                      <input id="oos-ref-status-field" type="text" placeholder="new, intro_sent…" autocomplete="off" />
+                    </div>
+                  </div>
+                  <label for="oos-ref-form-msg">Original form message</label>
+                  <textarea id="oos-ref-form-msg" rows="3" readonly class="lp-ro" tabindex="-1" style="opacity:0.92"></textarea>
+                  <label for="oos-ref-context">What the lead is looking for (staff summary)</label>
+                  <textarea id="oos-ref-context" rows="4" placeholder="Goals, timeline, product interest — used for AI and the agent intro."></textarea>
+                  <div class="meta-grid">
+                    <div class="meta-card" style="grid-column: 1 / -1">
+                      <label for="oos-ref-agent-select">Matched OOS agent</label>
+                      <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:6px">
+                        <select id="oos-ref-agent-select" style="flex:1;min-width:200px;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.25);background:rgba(0,0,0,0.2);color:inherit">
+                          <option value="">— Select agent —</option>
+                        </select>
+                        <button id="oos-ref-match-state-btn" class="secondary" type="button" data-help="Sets the dropdown to the first active agent whose state matches the referral state.">Match by state</button>
+                      </div>
+                      <span id="oos-ref-agent-hint" class="small-note" style="display:block;margin-top:6px"></span>
+                    </div>
+                  </div>
+                  <div class="meta-card" style="grid-column: 1 / -1">
+                    <div class="compose-lang" role="group" aria-label="Intro email language">
+                      <span class="small-note" style="margin:0">Email language (generate + send)</span>
+                      <button type="button" class="lang-opt active" id="oos-ref-lang-en" data-lang="English">English</button>
+                      <button type="button" class="lang-opt" id="oos-ref-lang-es" data-lang="Spanish">Spanish</button>
+                    </div>
+                  </div>
+                  <label for="oos-ref-ai-email">AI intro email (to agent; lead will be CC’d)</label>
+                  <textarea id="oos-ref-ai-email" rows="12" placeholder="Generate or edit the message…"></textarea>
+                  <div class="actions">
+                    <button id="oos-ref-generate-btn" class="secondary" type="button" data-help="Uses OpenAI from lead fields, summary, and selected agent.">Generate email</button>
+                    <button id="oos-ref-send-btn" class="email" type="button" data-help="Sends from Julie’s mailbox to the agent with the lead on Cc.">Send to agent (Cc lead)</button>
+                    <button id="oos-ref-save-btn" class="secondary" type="button" data-help="Saves fields and draft without moving to Archive.">Save referral</button>
+                    <button id="oos-ref-save-archive-btn" class="secondary" type="button" data-help="Saves then sets status to completed and opens OOS Archive for compensation tracking.">Save &amp; move to Archive</button>
+                  </div>
+                  <div id="oos-ref-foot-status" class="small-note"></div>
+                </form>
+                <div id="oos-ref-empty" class="q-empty">Select a referral from the list.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="pane-oos-agents" class="pane" aria-hidden="true">
+      <div class="compose-outer">
+        <div class="compose-panel">
+          <div class="inbox-head">
+            <div>
+              <strong>OOS agents</strong>
+              <div class="small-note">Partner agents by state. Used when matching out-of-state referrals. Add rows here (Julie workflows can populate later).</div>
+            </div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+              <button id="oos-ag-refresh-btn" class="secondary" type="button">Refresh</button>
+              <button id="oos-ag-new-btn" class="secondary" type="button">New agent</button>
+            </div>
+          </div>
+          <div class="compose-body">
+            <div class="compose-work">
+              <aside class="compose-leads-col" aria-label="Agents">
+                <label class="compose-leads-label" for="oos-ag-filter">Filter</label>
+                <input id="oos-ag-filter" type="search" autocomplete="off" placeholder="Name, state, email…" />
+                <div id="oos-ag-list" class="compose-lead-list" role="listbox"></div>
+              </aside>
+              <div class="compose-main-col">
+                <form id="oos-ag-form" class="compose-form" autocomplete="off" onsubmit="return false;" aria-label="OOS agent">
+                  <input type="hidden" id="oos-ag-id" value="" />
+                  <div class="meta-grid">
+                    <div class="meta-card">
+                      <label for="oos-ag-state">State (2 letters)</label>
+                      <input id="oos-ag-state" type="text" maxlength="2" required autocomplete="off" style="text-transform:uppercase" />
+                    </div>
+                    <div class="meta-card">
+                      <label for="oos-ag-active">Active</label>
+                      <select id="oos-ag-active" style="width:100%;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.25);background:rgba(0,0,0,0.2);color:inherit">
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                      </select>
+                    </div>
+                    <div class="meta-card" style="grid-column: 1 / -1">
+                      <label for="oos-ag-name">Agent name</label>
+                      <input id="oos-ag-name" type="text" required autocomplete="off" />
+                    </div>
+                    <div class="meta-card" style="grid-column: 1 / -1">
+                      <label for="oos-ag-company">Company</label>
+                      <input id="oos-ag-company" type="text" autocomplete="off" />
+                    </div>
+                    <div class="meta-card">
+                      <label for="oos-ag-email">Email</label>
+                      <input id="oos-ag-email" type="email" required inputmode="email" autocomplete="off" />
+                    </div>
+                    <div class="meta-card">
+                      <label for="oos-ag-phone">Phone</label>
+                      <input id="oos-ag-phone" type="text" inputmode="tel" autocomplete="off" />
+                    </div>
+                    <div class="meta-card" style="grid-column: 1 / -1">
+                      <label for="oos-ag-address">Business address</label>
+                      <input id="oos-ag-address" type="text" autocomplete="off" />
+                    </div>
+                    <div class="meta-card" style="grid-column: 1 / -1">
+                      <label for="oos-ag-notes">Notes</label>
+                      <textarea id="oos-ag-notes" rows="3" autocomplete="off"></textarea>
+                    </div>
+                  </div>
+                  <div class="actions">
+                    <button id="oos-ag-save-btn" class="email" type="button">Save agent</button>
+                  </div>
+                  <div id="oos-ag-foot-status" class="small-note"></div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="pane-oos-archive" class="pane" aria-hidden="true">
+      <div class="compose-outer">
+        <div class="compose-panel">
+          <div class="inbox-head">
+            <div>
+              <strong>OOS Archive</strong>
+              <div class="small-note">Completed / compensated referrals. Log compensation from referred agents; trash permanently deletes the row in Supabase.</div>
+            </div>
+            <button id="oos-arch-refresh-btn" class="secondary" type="button">Refresh</button>
+          </div>
+          <div class="compose-body">
+            <div class="compose-work">
+              <aside class="compose-leads-col" aria-label="Archived referrals">
+                <label class="compose-leads-label" for="oos-arch-filter">Filter</label>
+                <input id="oos-arch-filter" type="search" autocomplete="off" placeholder="Name, email, state…" />
+                <span class="small-note" style="margin:0">Newest first.</span>
+                <div id="oos-arch-list" class="compose-lead-list" role="listbox"></div>
+              </aside>
+              <div class="compose-main-col">
+                <form id="oos-arch-form" class="compose-form hidden" autocomplete="off" onsubmit="return false;" aria-label="OOS archive">
+                  <div class="compose-contact-heading">Referral (read-only)</div>
+                  <div class="meta-grid">
+                    <div class="meta-card">
+                      <label for="oos-arch-name">Name</label>
+                      <input id="oos-arch-name" type="text" readonly class="lp-ro" tabindex="-1" />
+                    </div>
+                    <div class="meta-card">
+                      <label for="oos-arch-state">State</label>
+                      <input id="oos-arch-state" type="text" readonly class="lp-ro" tabindex="-1" />
+                    </div>
+                    <div class="meta-card">
+                      <label for="oos-arch-email">Email</label>
+                      <input id="oos-arch-email" type="email" readonly class="lp-ro" tabindex="-1" />
+                    </div>
+                    <div class="meta-card">
+                      <label for="oos-arch-phone">Phone</label>
+                      <input id="oos-arch-phone" type="text" readonly class="lp-ro" tabindex="-1" />
+                    </div>
+                    <div class="meta-card">
+                      <label for="oos-arch-status-ro">Status</label>
+                      <input id="oos-arch-status-ro" type="text" readonly class="lp-ro" tabindex="-1" />
+                    </div>
+                  </div>
+                  <label for="oos-arch-context-ro">Staff summary / need</label>
+                  <textarea id="oos-arch-context-ro" rows="2" readonly class="lp-ro" tabindex="-1"></textarea>
+                  <div class="compose-contact-heading">Compensation tracking</div>
+                  <label for="oos-arch-status-field">Status (workflow)</label>
+                  <input id="oos-arch-status-field" type="text" placeholder="completed, compensated…" autocomplete="off" />
+                  <label for="oos-arch-comp-notes">Compensation notes</label>
+                  <textarea id="oos-arch-comp-notes" rows="3" placeholder="Referral fee, agreement, paid date reference…"></textarea>
+                  <label for="oos-arch-compensated-at">Compensated date</label>
+                  <input id="oos-arch-compensated-at" type="datetime-local" autocomplete="off" style="max-width:280px;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.25);background:rgba(0,0,0,0.2);color:inherit" />
+                  <div class="actions">
+                    <button id="oos-arch-save-btn" class="email" type="button">Save archive</button>
+                  </div>
+                  <div id="oos-arch-foot-status" class="small-note"></div>
+                </form>
+                <div id="oos-arch-empty" class="q-empty">Select an archived referral.</div>
               </div>
             </div>
           </div>
@@ -2735,20 +3086,18 @@
       var newPassEl = document.getElementById("new-password");
       var confirmPassEl = document.getElementById("confirm-password");
       var signoutBtn = document.getElementById("signout-btn");
-      var tabInbox = document.getElementById("tab-inbox");
-      var tabCompose = document.getElementById("tab-compose");
-      var tabKbGaps = document.getElementById("tab-kb-gaps");
-      var tabPipelineAudit = document.getElementById("tab-pipeline-audit");
-      var tabLeadProfile = document.getElementById("tab-lead-profile");
-      var tabProductSelector = document.getElementById("tab-product-selector");
-      var tabChat = document.getElementById("tab-chat");
       var paneInbox = document.getElementById("pane-inbox");
       var paneCompose = document.getElementById("pane-compose");
       var paneKbGaps = document.getElementById("pane-kb-gaps");
-      var panePipelineAudit = document.getElementById("pane-pipeline-audit");
       var paneLeadProfile = document.getElementById("pane-lead-profile");
       var paneProductSelector = document.getElementById("pane-product-selector");
       var paneChat = document.getElementById("pane-chat");
+      var paneOosReferrals = document.getElementById("pane-oos-referrals");
+      var paneOosAgents = document.getElementById("pane-oos-agents");
+      var paneOosArchive = document.getElementById("pane-oos-archive");
+      var navBtnLeads = document.getElementById("nav-btn-leads");
+      var navBtnOos = document.getElementById("nav-btn-oos");
+      var navBtnKb = document.getElementById("nav-btn-kb");
       var inboxCount = document.getElementById("inbox-count");
       var inboxItems = document.getElementById("inbox-items");
       var inboxDetail = document.getElementById("inbox-detail");
@@ -2757,7 +3106,6 @@
       var kbGapItems = document.getElementById("kb-gap-items");
       var kbGapDetail = document.getElementById("kb-gap-detail");
       var refreshKbGapsBtn = document.getElementById("refresh-kb-gaps-btn");
-      var refreshPipelineAuditBtn = document.getElementById("refresh-pipeline-audit-btn");
       var chatLog = document.getElementById("chat-log");
       var chatInput = document.getElementById("staff-input");
       var sendBtn = document.getElementById("send-btn");
@@ -2774,6 +3122,11 @@
       var selectedQuestionId = "";
       var kbGapItemsState = [];
       var selectedKbGapId = "";
+      var oosReferralsList = [];
+      var oosAgentsCache = [];
+      var selectedOosReferralId = "";
+      var oosArchiveList = [];
+      var selectedOosArchiveId = "";
       /** One-shot UI after push to RAG: { kind, questionId, ... } */
       var pendingRagVerify = null;
       var helpTipEl = null;
@@ -2786,40 +3139,101 @@
         portal.setAttribute("aria-hidden", on ? "false" : "true");
       }
 
+      function closeAllNavDropdowns() {
+        document.querySelectorAll(".nav-dropdown").forEach(function (dd) {
+          dd.classList.remove("open");
+          var p = dd.querySelector(".nav-dropdown-panel");
+          if (p) p.classList.add("hidden");
+          var b = dd.querySelector(".nav-dropdown-btn");
+          if (b) b.setAttribute("aria-expanded", "false");
+        });
+      }
+
+      function syncNavForTab(which) {
+        document.querySelectorAll(".nav-dropdown-btn").forEach(function (b) {
+          b.classList.remove("active");
+        });
+        document.querySelectorAll(".nav-dropdown-item").forEach(function (item) {
+          item.classList.toggle("active", item.getAttribute("data-tab") === which);
+        });
+        var groupId =
+          { "lead-profile": "nav-dd-leads", "product-selector": "nav-dd-leads", chat: "nav-dd-leads", compose: "nav-dd-leads",
+            "oos-referrals": "nav-dd-oos", "oos-agents": "nav-dd-oos", "oos-archive": "nav-dd-oos",
+            inbox: "nav-dd-kb", "kb-gaps": "nav-dd-kb" }[which];
+        if (groupId) {
+          var dd = document.getElementById(groupId);
+          var btn = dd && dd.querySelector(".nav-dropdown-btn");
+          if (btn) btn.classList.add("active");
+        }
+      }
+
+      function wireNavDropdownsOnce() {
+        if (document.body.getAttribute("data-nav-dd-wired")) return;
+        document.body.setAttribute("data-nav-dd-wired", "1");
+        document.querySelectorAll(".nav-dropdown").forEach(function (dd) {
+          var btn = dd.querySelector(".nav-dropdown-btn");
+          var panel = dd.querySelector(".nav-dropdown-panel");
+          if (!btn || !panel) return;
+          btn.addEventListener("click", function (e) {
+            e.stopPropagation();
+            var wasOpen = dd.classList.contains("open");
+            closeAllNavDropdowns();
+            if (!wasOpen) {
+              dd.classList.add("open");
+              panel.classList.remove("hidden");
+              btn.setAttribute("aria-expanded", "true");
+            }
+          });
+          panel.querySelectorAll(".nav-dropdown-item").forEach(function (item) {
+            item.addEventListener("click", function (e) {
+              e.stopPropagation();
+              var tab = item.getAttribute("data-tab");
+              if (tab) showTab(tab);
+            });
+          });
+        });
+        document.addEventListener("click", function () {
+          closeAllNavDropdowns();
+        });
+      }
+
       function showTab(which) {
         var inboxOn = which === "inbox";
         var composeOn = which === "compose";
         var kbGapsOn = which === "kb-gaps";
-        var pipelineAuditOn = which === "pipeline-audit";
         var leadProfileOn = which === "lead-profile";
         var productSelectorOn = which === "product-selector";
         var chatOn = which === "chat";
-        tabInbox.classList.toggle("active", inboxOn);
-        tabCompose.classList.toggle("active", composeOn);
-        if (tabKbGaps) tabKbGaps.classList.toggle("active", kbGapsOn);
-        if (tabPipelineAudit) tabPipelineAudit.classList.toggle("active", pipelineAuditOn);
-        if (tabLeadProfile) tabLeadProfile.classList.toggle("active", leadProfileOn);
-        if (tabProductSelector) tabProductSelector.classList.toggle("active", productSelectorOn);
-        tabChat.classList.toggle("active", chatOn);
+        var oosRefOn = which === "oos-referrals";
+        var oosAgentsOn = which === "oos-agents";
+        var oosArchiveOn = which === "oos-archive";
+        closeAllNavDropdowns();
+        syncNavForTab(which);
         paneInbox.classList.toggle("active", inboxOn);
         paneCompose.classList.toggle("active", composeOn);
         if (paneKbGaps) paneKbGaps.classList.toggle("active", kbGapsOn);
-        if (panePipelineAudit) panePipelineAudit.classList.toggle("active", pipelineAuditOn);
         if (paneLeadProfile) paneLeadProfile.classList.toggle("active", leadProfileOn);
         if (paneProductSelector) paneProductSelector.classList.toggle("active", productSelectorOn);
         paneChat.classList.toggle("active", chatOn);
+        if (paneOosReferrals) paneOosReferrals.classList.toggle("active", oosRefOn);
+        if (paneOosAgents) paneOosAgents.classList.toggle("active", oosAgentsOn);
+        if (paneOosArchive) paneOosArchive.classList.toggle("active", oosArchiveOn);
         paneInbox.setAttribute("aria-hidden", inboxOn ? "false" : "true");
         paneCompose.setAttribute("aria-hidden", composeOn ? "false" : "true");
         if (paneKbGaps) paneKbGaps.setAttribute("aria-hidden", kbGapsOn ? "false" : "true");
-        if (panePipelineAudit) panePipelineAudit.setAttribute("aria-hidden", pipelineAuditOn ? "false" : "true");
         if (paneLeadProfile) paneLeadProfile.setAttribute("aria-hidden", leadProfileOn ? "false" : "true");
         if (paneProductSelector) paneProductSelector.setAttribute("aria-hidden", productSelectorOn ? "false" : "true");
         paneChat.setAttribute("aria-hidden", chatOn ? "false" : "true");
+        if (paneOosReferrals) paneOosReferrals.setAttribute("aria-hidden", oosRefOn ? "false" : "true");
+        if (paneOosAgents) paneOosAgents.setAttribute("aria-hidden", oosAgentsOn ? "false" : "true");
+        if (paneOosArchive) paneOosArchive.setAttribute("aria-hidden", oosArchiveOn ? "false" : "true");
         if (kbGapsOn) void loadKbGaps();
-        if (pipelineAuditOn) void loadPipelineAudit();
         if (composeOn || leadProfileOn || productSelectorOn) void ensureComposeLeadsLoaded();
         if (leadProfileOn) void loadLeadProfileDetail();
         if (productSelectorOn) void loadProductSelectorSession();
+        if (oosRefOn) void loadOosReferralsUi();
+        if (oosAgentsOn) void loadOosAgentsUi();
+        if (oosArchiveOn) void loadOosArchiveUi();
       }
 
       function fmtDate(iso) {
@@ -2946,7 +3360,10 @@
       }
 
       function wireStaticPortalHelpOnce() {
-        [signoutBtn, tabInbox, tabCompose, tabKbGaps, tabPipelineAudit, tabLeadProfile, tabProductSelector, tabChat, refreshInboxBtn, refreshKbGapsBtn, refreshPipelineAuditBtn, sendBtn, newConvoBtn].forEach(function (el) {
+        var navHelpEls = [signoutBtn, navBtnLeads, navBtnOos, navBtnKb, refreshInboxBtn, refreshKbGapsBtn, sendBtn, newConvoBtn].concat(
+          Array.prototype.slice.call(document.querySelectorAll(".nav-dropdown-item"))
+        );
+        navHelpEls.forEach(function (el) {
           if (!el || el.getAttribute("data-help-wired")) return;
           el.setAttribute("data-help-wired", "1");
           var showT = null;
@@ -3806,13 +4223,6 @@
       });
 
       signoutBtn.addEventListener("click", signOutNow);
-      tabInbox.addEventListener("click", function () { showTab("inbox"); });
-      tabCompose.addEventListener("click", function () { showTab("compose"); });
-      if (tabKbGaps) tabKbGaps.addEventListener("click", function () { showTab("kb-gaps"); });
-      if (tabPipelineAudit) tabPipelineAudit.addEventListener("click", function () { showTab("pipeline-audit"); });
-      if (tabLeadProfile) tabLeadProfile.addEventListener("click", function () { showTab("lead-profile"); });
-      if (tabProductSelector) tabProductSelector.addEventListener("click", function () { showTab("product-selector"); });
-      tabChat.addEventListener("click", function () { showTab("chat"); });
       sendBtn.addEventListener("click", sendChat);
       chatInput.addEventListener("keydown", function (e) {
         if (e.key === "Enter" && !e.shiftKey) {
@@ -3833,28 +4243,614 @@
       if (refreshKbGapsBtn) refreshKbGapsBtn.addEventListener("click", function () {
         loadKbGaps();
       });
-      if (refreshPipelineAuditBtn) refreshPipelineAuditBtn.addEventListener("click", function () {
-        loadPipelineAudit();
-      });
 
-      async function loadPipelineAudit() {
-        var pre = document.getElementById("pipeline-audit-json");
-        var last4el = document.getElementById("pipeline-audit-last4");
-        if (!pre) return;
-        if (!accessToken) {
-          pre.textContent = "Sign in to load audit.";
-          return;
-        }
-        pre.textContent = "Loading…";
+      function oosNormState(s) {
+        var t = String(s || "").replace(/[^a-zA-Z]/g, "").toUpperCase();
+        return t.length >= 2 ? t.slice(0, 2) : t;
+      }
+
+      async function fetchOosAgentsCache() {
+        if (!accessToken) return;
         try {
-          var q = last4el && last4el.value ? String(last4el.value).replace(/\D/g, "").slice(-4) : "";
-          var url = "/api/staff/integration-audit?limit=120";
-          if (q.length === 4) url += "&phone_last4=" + encodeURIComponent(q);
-          var data = await authedApi(url, null, { method: "GET" });
-          pre.textContent = JSON.stringify(data, null, 2);
+          var data = await authedApi("/api/staff/oos-agents", null, { method: "GET" });
+          oosAgentsCache = Array.isArray(data.agents) ? data.agents : [];
         } catch (e) {
-          pre.textContent = (e && e.message) || String(e);
+          oosAgentsCache = [];
+          throw e;
         }
+      }
+
+      function fillOosAgentSelect(selectedId) {
+        var sel = document.getElementById("oos-ref-agent-select");
+        if (!sel) return;
+        var cur = selectedId != null ? String(selectedId) : String(sel.value || "");
+        sel.innerHTML = '<option value="">— Select agent —</option>';
+        var agents = oosAgentsCache.filter(function (a) {
+          return a && (a.active === undefined || a.active === true);
+        });
+        agents.sort(function (a, b) {
+          var sa = String(a.state_code || "");
+          var sb = String(b.state_code || "");
+          if (sa !== sb) return sa.localeCompare(sb);
+          return String(a.display_name || "").localeCompare(String(b.display_name || ""));
+        });
+        agents.forEach(function (a) {
+          var opt = document.createElement("option");
+          opt.value = a.id;
+          opt.textContent = String(a.state_code || "") + " — " + String(a.display_name || "") +
+            (a.company_name ? " (" + String(a.company_name) + ")" : "");
+          sel.appendChild(opt);
+        });
+        if (cur && Array.prototype.some.call(sel.options, function (o) { return o.value === cur; })) {
+          sel.value = cur;
+        }
+      }
+
+      function getSelectedOosAgentRow() {
+        var sel = document.getElementById("oos-ref-agent-select");
+        if (!sel || !sel.value) return null;
+        var id = sel.value;
+        for (var i = 0; i < oosAgentsCache.length; i++) {
+          if (oosAgentsCache[i] && String(oosAgentsCache[i].id) === id) return oosAgentsCache[i];
+        }
+        return null;
+      }
+
+      function getOosRefLang() {
+        var es = document.getElementById("oos-ref-lang-es");
+        return es && es.classList.contains("active") ? "Spanish" : "English";
+      }
+
+      function setOosRefLang(which) {
+        var en = document.getElementById("oos-ref-lang-en");
+        var es = document.getElementById("oos-ref-lang-es");
+        if (en) en.classList.toggle("active", which === "English");
+        if (es) es.classList.toggle("active", which === "Spanish");
+      }
+
+      async function deleteOosReferralRow(id) {
+        var stRef = document.getElementById("oos-ref-foot-status");
+        var stArch = document.getElementById("oos-arch-foot-status");
+        if (!window.confirm("Permanently delete this referral from the database? This cannot be undone.")) return;
+        try {
+          await authedApi("/api/staff/oos-referrals?id=" + encodeURIComponent(id), null, { method: "DELETE" });
+          if (String(selectedOosReferralId) === String(id)) selectedOosReferralId = "";
+          if (String(selectedOosArchiveId) === String(id)) selectedOosArchiveId = "";
+          if (stRef) stRef.textContent = "Deleted.";
+          if (stArch) stArch.textContent = "Deleted.";
+          await loadOosReferralsUi();
+          if (paneOosArchive && paneOosArchive.classList.contains("active")) await loadOosArchiveUi();
+        } catch (e) {
+          var err = e.message || String(e);
+          if (stRef) stRef.textContent = err;
+          if (stArch) stArch.textContent = err;
+        }
+      }
+
+      function renderOosArchiveList(filterText) {
+        var box = document.getElementById("oos-arch-list");
+        if (!box) return;
+        var q = String(filterText || "").trim().toLowerCase();
+        box.innerHTML = "";
+        oosArchiveList.forEach(function (r) {
+          var name = [r.first_name, r.last_name].filter(Boolean).join(" ").trim() || "(no name)";
+          var line = (name + " " + (r.email || "") + " " + (r.state_code || "")).toLowerCase();
+          if (q && line.indexOf(q) === -1) return;
+          var wrap = document.createElement("div");
+          wrap.className = "oos-ref-row-wrap";
+          var main = document.createElement("div");
+          main.className =
+            "compose-lead-row oos-list-row oos-ref-row-main" + (String(r.id) === selectedOosArchiveId ? " active" : "");
+          main.setAttribute("role", "option");
+          main.dataset.id = r.id;
+          main.innerHTML =
+            '<div class="compose-lead-name">' + escHtml(name) + "</div>" +
+            '<div class="small-note">' + escHtml(r.state_code || "—") + " · " + escHtml(fmtDate(r.created_at)) + "</div>";
+          main.addEventListener("click", function () {
+            selectedOosArchiveId = String(r.id);
+            renderOosArchiveList(document.getElementById("oos-arch-filter") && document.getElementById("oos-arch-filter").value);
+            showOosArchiveDetail(r);
+          });
+          var del = document.createElement("button");
+          del.type = "button";
+          del.className = "oos-ref-delete";
+          del.setAttribute("aria-label", "Delete archived referral permanently");
+          del.title = "Delete permanently";
+          del.innerHTML = "&#128465;";
+          del.addEventListener("click", function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            void deleteOosReferralRow(String(r.id));
+          });
+          wrap.appendChild(main);
+          wrap.appendChild(del);
+          box.appendChild(wrap);
+        });
+      }
+
+      function showOosArchiveDetail(r) {
+        var form = document.getElementById("oos-arch-form");
+        var empty = document.getElementById("oos-arch-empty");
+        if (empty) empty.classList.add("hidden");
+        if (form) form.classList.remove("hidden");
+        var name = [r.first_name, r.last_name].filter(Boolean).join(" ").trim() || "—";
+        document.getElementById("oos-arch-name").value = name;
+        document.getElementById("oos-arch-state").value = r.state_code || "";
+        document.getElementById("oos-arch-email").value = r.email || "";
+        document.getElementById("oos-arch-phone").value = r.phone || "";
+        document.getElementById("oos-arch-status-ro").value = r.status || "";
+        var ctx = r.referral_context != null && String(r.referral_context).trim()
+          ? String(r.referral_context)
+          : (r.message || "");
+        document.getElementById("oos-arch-context-ro").value = ctx;
+        document.getElementById("oos-arch-status-field").value = r.status || "";
+        document.getElementById("oos-arch-comp-notes").value = r.compensation_notes != null ? String(r.compensation_notes) : "";
+        var cat = document.getElementById("oos-arch-compensated-at");
+        if (cat) {
+          if (r.compensated_at) {
+            try {
+              var d = new Date(r.compensated_at);
+              cat.value = !isNaN(d.getTime()) ? d.toISOString().slice(0, 16) : "";
+            } catch (e) {
+              cat.value = "";
+            }
+          } else cat.value = "";
+        }
+        var stFoot = document.getElementById("oos-arch-foot-status");
+        if (stFoot) stFoot.textContent = "";
+      }
+
+      async function loadOosArchiveUi() {
+        var st = document.getElementById("oos-arch-foot-status");
+        try {
+          var data = await authedApi("/api/staff/oos-referrals?bucket=completed", null, { method: "GET" });
+          oosArchiveList = Array.isArray(data.referrals) ? data.referrals : [];
+          var preserve = selectedOosArchiveId && oosArchiveList.some(function (x) { return String(x.id) === String(selectedOosArchiveId); });
+          if (!preserve) {
+            selectedOosArchiveId = oosArchiveList.length ? String(oosArchiveList[0].id) : "";
+          }
+          renderOosArchiveList(document.getElementById("oos-arch-filter") && document.getElementById("oos-arch-filter").value);
+          var cur = oosArchiveList.filter(function (x) { return String(x.id) === selectedOosArchiveId; })[0];
+          if (cur) showOosArchiveDetail(cur);
+          else {
+            selectedOosArchiveId = "";
+            if (document.getElementById("oos-arch-form")) document.getElementById("oos-arch-form").classList.add("hidden");
+            if (document.getElementById("oos-arch-empty")) document.getElementById("oos-arch-empty").classList.remove("hidden");
+          }
+        } catch (e) {
+          if (st) st.textContent = "Could not load archive: " + (e.message || e);
+        }
+      }
+
+      function renderOosReferralList(filterText) {
+        var box = document.getElementById("oos-ref-list");
+        if (!box) return;
+        var q = String(filterText || "").trim().toLowerCase();
+        box.innerHTML = "";
+        oosReferralsList.forEach(function (r) {
+          var name = [r.first_name, r.last_name].filter(Boolean).join(" ").trim() || "(no name)";
+          var line = (name + " " + (r.email || "") + " " + (r.state_code || "")).toLowerCase();
+          if (q && line.indexOf(q) === -1) return;
+          var wrap = document.createElement("div");
+          wrap.className = "oos-ref-row-wrap";
+          var main = document.createElement("div");
+          main.className =
+            "compose-lead-row oos-list-row oos-ref-row-main" + (String(r.id) === selectedOosReferralId ? " active" : "");
+          main.setAttribute("role", "option");
+          main.dataset.id = r.id;
+          main.innerHTML =
+            '<div class="compose-lead-name">' + escHtml(name) + "</div>" +
+            '<div class="small-note">' + escHtml(r.state_code || "—") + " · " + escHtml(fmtDate(r.created_at)) + "</div>";
+          main.addEventListener("click", function () {
+            selectedOosReferralId = String(r.id);
+            renderOosReferralList(document.getElementById("oos-ref-filter") && document.getElementById("oos-ref-filter").value);
+            showOosReferralDetail(r);
+          });
+          var del = document.createElement("button");
+          del.type = "button";
+          del.className = "oos-ref-delete";
+          del.setAttribute("aria-label", "Delete referral permanently");
+          del.title = "Delete permanently";
+          del.innerHTML = "&#128465;";
+          del.addEventListener("click", function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            void deleteOosReferralRow(String(r.id));
+          });
+          wrap.appendChild(main);
+          wrap.appendChild(del);
+          box.appendChild(wrap);
+        });
+      }
+
+      function showOosReferralDetail(r) {
+        var form = document.getElementById("oos-ref-form");
+        var empty = document.getElementById("oos-ref-empty");
+        if (empty) empty.classList.add("hidden");
+        if (form) form.classList.remove("hidden");
+        document.getElementById("oos-ref-first-name").value = r.first_name || "";
+        document.getElementById("oos-ref-last-name").value = r.last_name || "";
+        document.getElementById("oos-ref-state").value = r.state_code || "";
+        document.getElementById("oos-ref-email").value = r.email || "";
+        document.getElementById("oos-ref-phone").value = r.phone || "";
+        document.getElementById("oos-ref-status-field").value = r.status || "";
+        document.getElementById("oos-ref-form-msg").value = r.message || "";
+        var ctx = r.referral_context != null && String(r.referral_context).trim()
+          ? String(r.referral_context)
+          : (r.message || "");
+        document.getElementById("oos-ref-context").value = ctx;
+        document.getElementById("oos-ref-ai-email").value = r.ai_connection_email || "";
+        fillOosAgentSelect(r.matched_oos_agent_id || "");
+        var hint = document.getElementById("oos-ref-agent-hint");
+        if (hint) {
+          var st = oosNormState(r.state_code);
+          var matches = oosAgentsCache.filter(function (a) {
+            return a && a.active !== false && oosNormState(a.state_code) === st;
+          });
+          if (!st) hint.textContent = "Enter a state to enable matching.";
+          else if (!matches.length) hint.textContent = "No active OOS agent for " + st + " — add one under OOS Agents.";
+          else hint.textContent = matches.length + " active agent(s) in " + st + ".";
+        }
+        var stFoot = document.getElementById("oos-ref-foot-status");
+        if (stFoot) stFoot.textContent = "";
+      }
+
+      async function loadOosReferralsUi() {
+        var st = document.getElementById("oos-ref-foot-status");
+        var hintList = document.getElementById("oos-ref-list-hint");
+        if (hintList) {
+          hintList.textContent = "Newest first. Open referrals only — completed rows appear under OOS Archive. Trash deletes permanently.";
+        }
+        try {
+          await fetchOosAgentsCache();
+        } catch (e) {
+          if (st) st.textContent = "Could not load OOS agents: " + (e.message || e);
+        }
+        try {
+          var data = await authedApi("/api/staff/oos-referrals?bucket=open", null, { method: "GET" });
+          oosReferralsList = Array.isArray(data.referrals) ? data.referrals : [];
+          if (!selectedOosReferralId && oosReferralsList.length) {
+            selectedOosReferralId = String(oosReferralsList[0].id);
+          }
+          renderOosReferralList(document.getElementById("oos-ref-filter") && document.getElementById("oos-ref-filter").value);
+          var cur = oosReferralsList.filter(function (x) { return String(x.id) === selectedOosReferralId; })[0];
+          if (cur) showOosReferralDetail(cur);
+          else {
+            selectedOosReferralId = "";
+            if (document.getElementById("oos-ref-form")) document.getElementById("oos-ref-form").classList.add("hidden");
+            if (document.getElementById("oos-ref-empty")) document.getElementById("oos-ref-empty").classList.remove("hidden");
+          }
+        } catch (e) {
+          if (st) st.textContent = "Could not load referrals: " + (e.message || e);
+        }
+      }
+
+      function renderOosAgentAdminList(filterText) {
+        var box = document.getElementById("oos-ag-list");
+        if (!box) return;
+        var q = String(filterText || "").trim().toLowerCase();
+        box.innerHTML = "";
+        oosAgentsCache.forEach(function (a) {
+          var line = (
+            String(a.display_name || "") + " " + String(a.state_code || "") + " " +
+            String(a.email || "") + " " + String(a.company_name || "")
+          ).toLowerCase();
+          if (q && line.indexOf(q) === -1) return;
+          var row = document.createElement("div");
+          row.className = "compose-lead-row oos-list-row";
+          row.dataset.id = a.id;
+          row.innerHTML =
+            '<div class="compose-lead-name">' + escHtml(a.display_name || "") +
+            (a.active === false ? ' <span class="small-note">(inactive)</span>' : "") + "</div>" +
+            '<div class="small-note">' + escHtml(a.state_code || "") + " · " + escHtml(a.email || "") + "</div>";
+          row.addEventListener("click", function () {
+            document.getElementById("oos-ag-id").value = a.id || "";
+            document.getElementById("oos-ag-state").value = a.state_code || "";
+            document.getElementById("oos-ag-name").value = a.display_name || "";
+            document.getElementById("oos-ag-company").value = a.company_name || "";
+            document.getElementById("oos-ag-email").value = a.email || "";
+            document.getElementById("oos-ag-phone").value = a.phone || "";
+            document.getElementById("oos-ag-address").value = a.business_address || "";
+            document.getElementById("oos-ag-notes").value = a.notes || "";
+            document.getElementById("oos-ag-active").value = a.active === false ? "false" : "true";
+            var sf = document.getElementById("oos-ag-foot-status");
+            if (sf) sf.textContent = "";
+          });
+          box.appendChild(row);
+        });
+      }
+
+      async function loadOosAgentsUi() {
+        var sf = document.getElementById("oos-ag-foot-status");
+        try {
+          await fetchOosAgentsCache();
+          renderOosAgentAdminList(document.getElementById("oos-ag-filter") && document.getElementById("oos-ag-filter").value);
+          if (sf) sf.textContent = oosAgentsCache.length + " agent(s) loaded.";
+        } catch (e) {
+          if (sf) sf.textContent = "Could not load agents: " + (e.message || e);
+        }
+      }
+
+      var oosRefFilterEl = document.getElementById("oos-ref-filter");
+      if (oosRefFilterEl) {
+        oosRefFilterEl.addEventListener("input", function () {
+          renderOosReferralList(oosRefFilterEl.value);
+        });
+      }
+      var oosArchFilterEl = document.getElementById("oos-arch-filter");
+      if (oosArchFilterEl) {
+        oosArchFilterEl.addEventListener("input", function () {
+          renderOosArchiveList(oosArchFilterEl.value);
+        });
+      }
+      var oosArchRefresh = document.getElementById("oos-arch-refresh-btn");
+      if (oosArchRefresh) oosArchRefresh.addEventListener("click", function () { void loadOosArchiveUi(); });
+      var oosLangEn = document.getElementById("oos-ref-lang-en");
+      var oosLangEs = document.getElementById("oos-ref-lang-es");
+      if (oosLangEn) oosLangEn.addEventListener("click", function () { setOosRefLang("English"); });
+      if (oosLangEs) oosLangEs.addEventListener("click", function () { setOosRefLang("Spanish"); });
+      var oosRefRefresh = document.getElementById("oos-ref-refresh-btn");
+      if (oosRefRefresh) oosRefRefresh.addEventListener("click", function () { void loadOosReferralsUi(); });
+      var oosAgFilterEl = document.getElementById("oos-ag-filter");
+      if (oosAgFilterEl) {
+        oosAgFilterEl.addEventListener("input", function () {
+          renderOosAgentAdminList(oosAgFilterEl.value);
+        });
+      }
+      var oosAgRefresh = document.getElementById("oos-ag-refresh-btn");
+      if (oosAgRefresh) oosAgRefresh.addEventListener("click", function () { void loadOosAgentsUi(); });
+      var oosAgNew = document.getElementById("oos-ag-new-btn");
+      if (oosAgNew) {
+        oosAgNew.addEventListener("click", function () {
+          document.getElementById("oos-ag-id").value = "";
+          document.getElementById("oos-ag-state").value = "";
+          document.getElementById("oos-ag-name").value = "";
+          document.getElementById("oos-ag-company").value = "";
+          document.getElementById("oos-ag-email").value = "";
+          document.getElementById("oos-ag-phone").value = "";
+          document.getElementById("oos-ag-address").value = "";
+          document.getElementById("oos-ag-notes").value = "";
+          document.getElementById("oos-ag-active").value = "true";
+          document.getElementById("oos-ag-foot-status").textContent = "New agent — fill fields and save.";
+        });
+      }
+      var oosAgSave = document.getElementById("oos-ag-save-btn");
+      if (oosAgSave) {
+        oosAgSave.addEventListener("click", async function () {
+          var sf = document.getElementById("oos-ag-foot-status");
+          var id = String(document.getElementById("oos-ag-id").value || "").trim();
+          var body = {
+            state_code: document.getElementById("oos-ag-state").value,
+            display_name: document.getElementById("oos-ag-name").value,
+            company_name: document.getElementById("oos-ag-company").value,
+            email: document.getElementById("oos-ag-email").value,
+            phone: document.getElementById("oos-ag-phone").value,
+            business_address: document.getElementById("oos-ag-address").value,
+            notes: document.getElementById("oos-ag-notes").value,
+            active: document.getElementById("oos-ag-active").value === "true",
+          };
+          try {
+            if (id) {
+              await authedApi("/api/staff/oos-agents?id=" + encodeURIComponent(id), body, { method: "PATCH" });
+              if (sf) sf.textContent = "Saved.";
+            } else {
+              var cr = await authedApi("/api/staff/oos-agents", body, { method: "POST" });
+              if (cr.agent && cr.agent.id) document.getElementById("oos-ag-id").value = cr.agent.id;
+              if (sf) sf.textContent = "Created.";
+            }
+            await loadOosAgentsUi();
+            if (paneOosReferrals && paneOosReferrals.classList.contains("active")) {
+              try {
+                await fetchOosAgentsCache();
+                fillOosAgentSelect(document.getElementById("oos-ref-agent-select") && document.getElementById("oos-ref-agent-select").value);
+              } catch (_) {}
+            }
+          } catch (e) {
+            if (sf) sf.textContent = e.message || String(e);
+          }
+        });
+      }
+
+      var oosMatchBtn = document.getElementById("oos-ref-match-state-btn");
+      if (oosMatchBtn) {
+        oosMatchBtn.addEventListener("click", function () {
+          var st = oosNormState(document.getElementById("oos-ref-state").value);
+          if (!st) {
+            document.getElementById("oos-ref-foot-status").textContent = "Set state first.";
+            return;
+          }
+          var pick = oosAgentsCache.filter(function (a) {
+            return a && a.active !== false && oosNormState(a.state_code) === st;
+          })[0];
+          var sel = document.getElementById("oos-ref-agent-select");
+          if (pick && sel) {
+            sel.value = pick.id;
+            document.getElementById("oos-ref-foot-status").textContent = "Matched " + (pick.display_name || "") + " in " + st + ".";
+          } else {
+            document.getElementById("oos-ref-foot-status").textContent = "No active agent for " + st + ".";
+          }
+        });
+      }
+
+      var oosGenBtn = document.getElementById("oos-ref-generate-btn");
+      if (oosGenBtn) {
+        oosGenBtn.addEventListener("click", async function () {
+          var st = document.getElementById("oos-ref-foot-status");
+          var ag = getSelectedOosAgentRow();
+          if (!ag) {
+            if (st) st.textContent = "Select an OOS agent first.";
+            return;
+          }
+          var referralContext = String(document.getElementById("oos-ref-context").value || "").trim();
+          if (referralContext.length < 8) {
+            if (st) st.textContent = "Add a short summary of what the lead needs (8+ characters).";
+            return;
+          }
+          if (st) st.textContent = "Generating…";
+          try {
+            var data = await authedApi("/api/staff/oos-intro-email", {
+              leadFirstName: document.getElementById("oos-ref-first-name").value,
+              leadLastName: document.getElementById("oos-ref-last-name").value,
+              leadEmail: document.getElementById("oos-ref-email").value,
+              leadPhone: document.getElementById("oos-ref-phone").value,
+              leadState: document.getElementById("oos-ref-state").value,
+              agentDisplayName: ag.display_name,
+              agentCompany: ag.company_name,
+              agentEmail: ag.email,
+              referralContext: referralContext,
+              language: getOosRefLang(),
+            });
+            document.getElementById("oos-ref-ai-email").value = data.email || "";
+            if (st) st.textContent = "Draft ready — review before sending.";
+          } catch (e) {
+            if (st) st.textContent = e.message || String(e);
+          }
+        });
+      }
+
+      var oosSaveRefBtn = document.getElementById("oos-ref-save-btn");
+      if (oosSaveRefBtn) {
+        oosSaveRefBtn.addEventListener("click", async function () {
+          var st = document.getElementById("oos-ref-foot-status");
+          if (!selectedOosReferralId) {
+            if (st) st.textContent = "Select a referral.";
+            return;
+          }
+          var sel = document.getElementById("oos-ref-agent-select");
+          var matchId = sel && sel.value ? sel.value : null;
+          var body = {
+            first_name: document.getElementById("oos-ref-first-name").value,
+            last_name: document.getElementById("oos-ref-last-name").value,
+            email: document.getElementById("oos-ref-email").value,
+            phone: document.getElementById("oos-ref-phone").value,
+            state_code: document.getElementById("oos-ref-state").value,
+            status: String(document.getElementById("oos-ref-status-field").value || "").trim(),
+            referral_context: document.getElementById("oos-ref-context").value,
+            ai_connection_email: document.getElementById("oos-ref-ai-email").value,
+            matched_oos_agent_id: matchId,
+          };
+          try {
+            await authedApi("/api/staff/oos-referrals?id=" + encodeURIComponent(selectedOosReferralId), body, { method: "PATCH" });
+            if (st) st.textContent = "Saved.";
+            await loadOosReferralsUi();
+          } catch (e) {
+            if (st) st.textContent = e.message || String(e);
+          }
+        });
+      }
+
+      var oosSaveArchiveMoveBtn = document.getElementById("oos-ref-save-archive-btn");
+      if (oosSaveArchiveMoveBtn) {
+        oosSaveArchiveMoveBtn.addEventListener("click", async function () {
+          var st = document.getElementById("oos-ref-foot-status");
+          if (!selectedOosReferralId) {
+            if (st) st.textContent = "Select a referral.";
+            return;
+          }
+          var sel = document.getElementById("oos-ref-agent-select");
+          var matchId = sel && sel.value ? sel.value : null;
+          var body = {
+            first_name: document.getElementById("oos-ref-first-name").value,
+            last_name: document.getElementById("oos-ref-last-name").value,
+            email: document.getElementById("oos-ref-email").value,
+            phone: document.getElementById("oos-ref-phone").value,
+            state_code: document.getElementById("oos-ref-state").value,
+            status: "completed",
+            referral_context: document.getElementById("oos-ref-context").value,
+            ai_connection_email: document.getElementById("oos-ref-ai-email").value,
+            matched_oos_agent_id: matchId,
+          };
+          try {
+            await authedApi("/api/staff/oos-referrals?id=" + encodeURIComponent(selectedOosReferralId), body, { method: "PATCH" });
+            if (st) st.textContent = "Moved to OOS Archive.";
+            selectedOosArchiveId = String(selectedOosReferralId);
+            selectedOosReferralId = "";
+            await loadOosReferralsUi();
+            showTab("oos-archive");
+          } catch (e) {
+            if (st) st.textContent = e.message || String(e);
+          }
+        });
+      }
+
+      var oosArchSaveBtn = document.getElementById("oos-arch-save-btn");
+      if (oosArchSaveBtn) {
+        oosArchSaveBtn.addEventListener("click", async function () {
+          var st = document.getElementById("oos-arch-foot-status");
+          if (!selectedOosArchiveId) {
+            if (st) st.textContent = "Select an archived referral.";
+            return;
+          }
+          var catEl = document.getElementById("oos-arch-compensated-at");
+          var body = {
+            status: String(document.getElementById("oos-arch-status-field").value || "").trim(),
+            compensation_notes: document.getElementById("oos-arch-comp-notes").value,
+            compensated_at: catEl && catEl.value ? catEl.value : null,
+          };
+          try {
+            await authedApi("/api/staff/oos-referrals?id=" + encodeURIComponent(selectedOosArchiveId), body, { method: "PATCH" });
+            if (st) st.textContent = "Saved.";
+            await loadOosArchiveUi();
+          } catch (e) {
+            if (st) st.textContent = e.message || String(e);
+          }
+        });
+      }
+
+      var oosSendBtn = document.getElementById("oos-ref-send-btn");
+      if (oosSendBtn) {
+        oosSendBtn.addEventListener("click", async function () {
+          var st = document.getElementById("oos-ref-foot-status");
+          var ag = getSelectedOosAgentRow();
+          var leadEmail = String(document.getElementById("oos-ref-email").value || "").trim();
+          var draft = String(document.getElementById("oos-ref-ai-email").value || "").trim();
+          if (!ag || !ag.email) {
+            if (st) st.textContent = "Select an agent with a valid email.";
+            return;
+          }
+          if (!leadEmail) {
+            if (st) st.textContent = "Lead email required for Cc.";
+            return;
+          }
+          if (!draft) {
+            if (st) st.textContent = "Generate or paste the intro email first.";
+            return;
+          }
+          var leadName = [document.getElementById("oos-ref-first-name").value, document.getElementById("oos-ref-last-name").value]
+            .filter(Boolean).join(" ").trim() || "referral";
+          var subj = "Introduction: " + leadName + " — " + (oosNormState(document.getElementById("oos-ref-state").value) || "OOS") + " referral";
+          if (!selectedOosReferralId) {
+            if (st) st.textContent = "Select a referral row first.";
+            return;
+          }
+          if (st) st.textContent = "Sending…";
+          try {
+            var sendRes = await authedApi("/api/staff/send-email", {
+              compose: true,
+              toEmail: ag.email,
+              ccEmail: leadEmail,
+              replyDraft: draft,
+              language: getOosRefLang(),
+              customerIssue: subj,
+              subject: subj,
+            });
+            if (!sendRes.success) {
+              if (st) st.textContent = sendRes.error || "Send failed.";
+              return;
+            }
+            if (st) st.textContent = "Sent to " + ag.email + " (Cc " + leadEmail + ").";
+            try {
+              await authedApi("/api/staff/oos-referrals?id=" + encodeURIComponent(selectedOosReferralId), {
+                status: "intro_sent",
+                ai_connection_email: draft,
+                matched_oos_agent_id: ag.id,
+              }, { method: "PATCH" });
+            } catch (_) {}
+            await loadOosReferralsUi();
+          } catch (e) {
+            if (st) st.textContent = e.message || String(e);
+          }
+        });
       }
 
       var composeLeads = [];
@@ -6820,6 +7816,7 @@
       wireDelayedHelpOn(document.getElementById("compose-body"));
       wireDelayedHelpOn(document.getElementById("product-selector-body"));
 
+      wireNavDropdownsOnce();
       wireStaticPortalHelpOnce();
 
       (async function init() {

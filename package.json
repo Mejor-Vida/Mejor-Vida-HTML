@@ -6,6 +6,7 @@
   },
   "scripts": {
     "dev": "vercel dev",
+    "dev:local": "node scripts/local-api-dev.cjs",
     "preview:post-quote-email": "node scripts/preview-post-quote-email.js",
     "embed:internal-moo": "node scripts/embed-internal-knowledge.js"
   },

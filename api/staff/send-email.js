@@ -39,15 +39,16 @@ function mimeBase64Body(s) {
 /**
  * multipart/alternative: plain + HTML (UTF-8), for Gmail users.messages.send raw.
  */
-function buildMultipartRaw({ fromEmail, toEmail, subject, textBody, htmlBody }) {
+function buildMultipartRaw({ fromEmail, toEmail, ccEmail, subject, textBody, htmlBody }) {
   const boundary = `mvi_alt_${Date.now()}_${Math.random().toString(36).slice(2, 11)}`;
   const nl = "\r\n";
   const subj = encodeSubject(subject);
   const plainB64 = mimeBase64Body(textBody);
   const htmlB64 = mimeBase64Body(htmlBody);
-  return [
-    `From: ${fromEmail}`,
-    `To: ${toEmail}`,
+  const cc = ccEmail && String(ccEmail).trim() ? String(ccEmail).trim() : "";
+  const lines = [`From: ${fromEmail}`, `To: ${toEmail}`];
+  if (cc) lines.push(`Cc: ${cc}`);
+  lines.push(
     `Subject: ${subj}`,
     "MIME-Version: 1.0",
     `Content-Type: multipart/alternative; boundary="${boundary}"`,
@@ -66,7 +67,8 @@ function buildMultipartRaw({ fromEmail, toEmail, subject, textBody, htmlBody }) 
     "",
     `--${boundary}--`,
     "",
-  ].join(nl);
+  );
+  return lines.join(nl);
 }
 
 function toGmailRaw(rfc822) {
@@ -113,6 +115,7 @@ module.exports = async function handler(req, res) {
   const language = body && body.language != null ? String(body.language).trim() : "";
   const customerIssue = body && body.customerIssue != null ? String(body.customerIssue).trim() : "";
   const subjectOverride = body && body.subject != null ? String(body.subject).trim() : "";
+  const ccEmail = body && body.ccEmail != null ? String(body.ccEmail).trim() : "";
 
   if (!replyDraft) {
     return json(res, 400, { success: false, error: "replyDraft required" });
@@ -125,6 +128,9 @@ module.exports = async function handler(req, res) {
   }
   if (!isLikelyEmail(toEmail)) {
     return json(res, 200, { success: false, error: `Invalid recipient email: ${toEmail}` });
+  }
+  if (ccEmail && !isLikelyEmail(ccEmail)) {
+    return json(res, 200, { success: false, error: `Invalid Cc email: ${ccEmail}` });
   }
 
   const clientId = process.env.GMAIL_CLIENT_ID;
@@ -148,6 +154,7 @@ module.exports = async function handler(req, res) {
     const rfc822 = buildMultipartRaw({
       fromEmail,
       toEmail,
+      ccEmail: ccEmail || undefined,
       subject: subjectLine,
       textBody: plainBody,
       htmlBody: html,
@@ -180,6 +187,7 @@ module.exports = async function handler(req, res) {
         questionId: questionId || null,
         compose,
         toEmail,
+        ccEmail: ccEmail || null,
         fromEmail,
         messageId,
         result: "gmail_accept",
@@ -194,7 +202,7 @@ module.exports = async function handler(req, res) {
     const err = String(e && e.message ? e.message : "Failed to send email");
     await logSendAttempt(
       cfg,
-      { questionId: questionId || null, compose, toEmail, fromEmail, error: err },
+      { questionId: questionId || null, compose, toEmail, ccEmail: ccEmail || null, fromEmail, error: err },
       "error"
     );
     return json(res, 200, {

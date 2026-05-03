@@ -726,14 +726,15 @@ function pickBestContactForManychatLead(detail, contactCandidates) {
 async function selectLeadStatePipelineOverlay(cfg, contactId) {
   if (!contactId) return null;
   const enc = encodeURIComponent(String(contactId).trim());
+  /* State lives on `contacts.us_state` in prod; `lead_state.us_state` is not always migrated. */
   const full =
-    "age,gender,is_smoker,pipeline_stage,quote_low,quote_high,quote_generated_at,monthly_premium,coverage_amount,us_state";
+    "age,gender,is_smoker,pipeline_stage,quote_low,quote_high,quote_generated_at,monthly_premium,coverage_amount";
   try {
     const rows = await restSelect(cfg, "lead_state", `select=${full}&contact_id=eq.${enc}&limit=1`);
     return Array.isArray(rows) && rows[0] ? rows[0] : null;
   } catch (_e) {
     try {
-      const reduced = "age,gender,is_smoker,pipeline_stage,monthly_premium,coverage_amount,us_state";
+      const reduced = "age,gender,is_smoker,pipeline_stage,monthly_premium,coverage_amount";
       const rows = await restSelect(cfg, "lead_state", `select=${reduced}&contact_id=eq.${enc}&limit=1`);
       return Array.isArray(rows) && rows[0] ? rows[0] : null;
     } catch (_e2) {
