@@ -2,6 +2,10 @@
 
 **Custom post graphics** (when not using a blog hero) can live in **`assets/`** (for example `FB/assets/iowa-senior-safeguard-fb-2026-04.png`). A copy for local preview resolution may also sit under **`img/facebook/`** with the same filename referenced by `image_url` in `post-package.json`.
 
+**One-off packages:** `post-package-story1-weekly-2026-05-03.json` — Story 1 (May 3 weekly) + creative `story1-carriers-not-same-fb-2026-05.png` in `img/facebook/` and `FB/assets/`. Publish by pointing your script at that JSON or copying fields into `post-package.json` before `main.py`.
+
+**First comment (link + WhatsApp):** Mejor Vida publishes that follow-up via **Make.com**, not the Graph API. When you run `facebook-posting/main.py` for the live post, use **`--no-first-comment`** so the main post (and optional image) go up only; Make then adds the first comment using the `first_comment` text from `post-package.json` (or your scenario mapping). The JSON field stays the single source of truth for copy.
+
 **Local review (double-click in Finder):** open **`review-facebook-post.html`** in this folder. It mirrors `post-package.json`. After you change the JSON or run `facebook-posting/main.py`, regenerate the review file with:
 
 `python3 tools/sync_fb_review_html.py`

@@ -79,6 +79,12 @@ This will:
 3. Refresh **`FB/post-preview.html`** for local review
 4. Publish to your Facebook Page (with hero image)
 
+**First comment via Make.com:** If the follow-up comment (blog link + WhatsApp) is added by a **Make.com** scenario—not the Graph API—run publish with **`--no-first-comment`** so only the main post is created. Use the `first_comment` field in **`FB/post-package.json`** as the text Make posts. Example:
+
+```bash
+python3 main.py --from-json FB/post-package-story1-weekly-2026-05-03.json --no-first-comment
+```
+
 ### 5. Use your own blog post
 
 Edit `main.py` and change the `blog` dict:

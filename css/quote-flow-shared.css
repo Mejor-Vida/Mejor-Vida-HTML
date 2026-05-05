@@ -195,6 +195,26 @@
       overflow: hidden;
       max-height: 81px;
     }
+
+    /* Carrier pages (/carriers/*.html): reset negative logo offset so MVI mark stays in view */
+    body.carriers-subpage header.sticky-top .header-logo-wrap {
+      margin-left: 0 !important;
+      overflow: visible !important;
+      max-height: none !important;
+    }
+    /* Global header uses a 244px-tall logo inside an 81px clip — on carrier pages the mark was cut off. */
+    body.carriers-subpage .header-logo {
+      height: 70px !important;
+      max-height: 70px !important;
+      width: auto !important;
+      transform: none !important;
+      object-fit: contain !important;
+    }
+    @media (max-width: 991px) {
+      body.carriers-subpage header.sticky-top .header-logo-wrap {
+        margin-left: 0 !important;
+      }
+    }
     
     /* Mobile menu */
     .mobile-menu {

@@ -52,13 +52,28 @@ def _load_config() -> dict:
     return config
 
 
-def publish_post(message: str, image_url: Optional[str] = None) -> dict:
+def _mime_for_path(path: Path) -> str:
+    suf = path.suffix.lower()
+    if suf in (".jpg", ".jpeg"):
+        return "image/jpeg"
+    if suf == ".webp":
+        return "image/webp"
+    return "image/png"
+
+
+def publish_post(
+    message: str,
+    image_url: Optional[str] = None,
+    *,
+    image_path: Optional[Path] = None,
+) -> dict:
     """
     Publish a post to the Facebook Page.
 
     Args:
         message: The post caption/text
-        image_url: Optional URL of image to attach. If provided, uses /photos endpoint.
+        image_url: Optional public URL of image to attach (Graph fetches it).
+        image_path: Optional local image file; uploaded as multipart ``source`` (no public URL needed).
 
     Returns:
         API response dict with post id, etc.
@@ -70,6 +85,21 @@ def publish_post(message: str, image_url: Optional[str] = None) -> dict:
     page_id = config["page_id"]
     token = config["page_access_token"]
     base = "https://graph.facebook.com/v21.0"
+
+    if image_path is not None:
+        path = Path(image_path)
+        if not path.is_file():
+            raise FileNotFoundError(f"Image file not found: {path}")
+        url = f"{base}/{page_id}/photos"
+        mime = _mime_for_path(path)
+        with path.open("rb") as fp:
+            files = {"source": (path.name, fp, mime)}
+            data = {"message": message, "access_token": token}
+            resp = requests.post(url, data=data, files=files, timeout=120, verify=certifi.where())
+        if not resp.ok:
+            snippet = (resp.text or "")[:800]
+            raise requests.HTTPError(f"{resp.status_code} {resp.reason} — {snippet}", response=resp)
+        return resp.json()
 
     if image_url:
         # Post as photo with caption
@@ -113,6 +143,7 @@ def publish_post_package(
     package: FacebookPostPackage,
     image_url: Optional[str] = None,
     *,
+    image_path: Optional[Path] = None,
     post_first_comment: bool = True,
     first_comment_delay_sec: int = 600,
 ) -> dict[str, Any]:
@@ -125,7 +156,9 @@ def publish_post_package(
 
     Aligns with facebook-post-rules.md (link in comment, not main caption).
     """
-    result: dict[str, Any] = dict(publish_post(package.main_caption, image_url=image_url))
+    result: dict[str, Any] = dict(
+        publish_post(package.main_caption, image_url=image_url, image_path=image_path)
+    )
     pid = _graph_post_id(result)
     if not (post_first_comment and pid and package.first_comment.strip()):
         return result
