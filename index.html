@@ -913,6 +913,17 @@
     /* Language toggle: show only the selected language. Must override Bootstrap's !important. */
     html.lang-es [data-lang="en"] { display: none !important; }
     html.lang-en [data-lang="es"] { display: none !important; }
+
+    /* How it works: stage illustrations */
+    #how-it-works .how-it-works-step-img {
+      width: 100%;
+      height: 148px;
+      object-fit: cover;
+      display: block;
+    }
+    @media (min-width: 992px) {
+      #how-it-works .how-it-works-step-img { height: 132px; }
+    }
   </style>
   <script>
     (function(){
@@ -1219,39 +1230,51 @@
 
       <div class="row g-4">
         <div class="col-12 col-md-6 col-lg-3">
-          <div class="feature-card bg-white rounded-3 p-4 shadow h-100">
-            <div class="rounded-circle d-flex align-items-center justify-content-center text-white fw-bold mb-3" style="width:56px;height:56px;background:#2563eb;">1</div>
-            <h3 class="h6 fw-bold mb-2" style="color:#1a365d;" data-lang="es">Consulta Inicial</h3>
-            <h3 class="h6 fw-bold mb-2" style="color:#1a365d;" data-lang="en">Initial Consultation</h3>
-            <p class="small text-body-secondary lh-base mb-0" data-lang="es">Empieza con una cotización en línea o WhatsApp. Con tu información, revisamos tu situación y coordinamos una llamada si encaja.</p>
-            <p class="small text-body-secondary lh-base mb-0" data-lang="en">Start with an online quote or WhatsApp. We review your details and schedule a call when it’s a fit.</p>
+          <div class="feature-card bg-white rounded-3 shadow h-100 overflow-hidden d-flex flex-column">
+            <img class="how-it-works-step-img flex-shrink-0" src="img/how-it-works/step-1.jpg" alt="" width="640" height="400" decoding="async" loading="lazy" />
+            <div class="p-4 flex-grow-1 d-flex flex-column">
+              <div class="rounded-circle d-flex align-items-center justify-content-center text-white fw-bold mb-3" style="width:56px;height:56px;background:#2563eb;">1</div>
+              <h3 class="h6 fw-bold mb-2" style="color:#1a365d;" data-lang="es">Consulta Inicial</h3>
+              <h3 class="h6 fw-bold mb-2" style="color:#1a365d;" data-lang="en">Initial Consultation</h3>
+              <p class="small text-body-secondary lh-base mb-0" data-lang="es">Empieza con una cotización en línea o WhatsApp. Con tu información, revisamos tu situación y coordinamos una llamada si encaja.</p>
+              <p class="small text-body-secondary lh-base mb-0" data-lang="en">Start with an online quote or WhatsApp. We review your details and schedule a call when it’s a fit.</p>
+            </div>
           </div>
         </div>
         <div class="col-12 col-md-6 col-lg-3">
-          <div class="feature-card bg-white rounded-3 p-4 shadow h-100">
-            <div class="rounded-circle d-flex align-items-center justify-content-center text-white fw-bold mb-3" style="width:56px;height:56px;background:#2563eb;">2</div>
-            <h3 class="h6 fw-bold mb-2" style="color:#1a365d;" data-lang="es">Comparación de Opciones</h3>
-            <h3 class="h6 fw-bold mb-2" style="color:#1a365d;" data-lang="en">Option Comparison</h3>
-            <p class="small text-body-secondary lh-base mb-0" data-lang="es">Revisamos las mejores pólizas de las principales aseguradoras para ti.</p>
-            <p class="small text-body-secondary lh-base mb-0" data-lang="en">We review the best policies from top-rated insurers for you.</p>
+          <div class="feature-card bg-white rounded-3 shadow h-100 overflow-hidden d-flex flex-column">
+            <img class="how-it-works-step-img flex-shrink-0" src="img/how-it-works/step-2.jpg" alt="" width="640" height="400" decoding="async" loading="lazy" />
+            <div class="p-4 flex-grow-1 d-flex flex-column">
+              <div class="rounded-circle d-flex align-items-center justify-content-center text-white fw-bold mb-3" style="width:56px;height:56px;background:#2563eb;">2</div>
+              <h3 class="h6 fw-bold mb-2" style="color:#1a365d;" data-lang="es">Comparación de Opciones</h3>
+              <h3 class="h6 fw-bold mb-2" style="color:#1a365d;" data-lang="en">Option Comparison</h3>
+              <p class="small text-body-secondary lh-base mb-0" data-lang="es">Revisamos las mejores pólizas de las principales aseguradoras para ti.</p>
+              <p class="small text-body-secondary lh-base mb-0" data-lang="en">We review the best policies from top-rated insurers for you.</p>
+            </div>
           </div>
         </div>
         <div class="col-12 col-md-6 col-lg-3">
-          <div class="feature-card bg-white rounded-3 p-4 shadow h-100">
-            <div class="rounded-circle d-flex align-items-center justify-content-center text-white fw-bold mb-3" style="width:56px;height:56px;background:#2563eb;">3</div>
-            <h3 class="h6 fw-bold mb-2" style="color:#1a365d;" data-lang="es">Solicitud Simple</h3>
-            <h3 class="h6 fw-bold mb-2" style="color:#1a365d;" data-lang="en">Simple Application</h3>
-            <p class="small text-body-secondary lh-base mb-0" data-lang="es">Te ayudamos con el proceso de solicitud, que suele tomar solo unos minutos.</p>
-            <p class="small text-body-secondary lh-base mb-0" data-lang="en">We guide you through the application process, which usually takes just minutes.</p>
+          <div class="feature-card bg-white rounded-3 shadow h-100 overflow-hidden d-flex flex-column">
+            <img class="how-it-works-step-img flex-shrink-0" src="img/how-it-works/step-3.jpg" alt="" width="640" height="400" decoding="async" loading="lazy" />
+            <div class="p-4 flex-grow-1 d-flex flex-column">
+              <div class="rounded-circle d-flex align-items-center justify-content-center text-white fw-bold mb-3" style="width:56px;height:56px;background:#2563eb;">3</div>
+              <h3 class="h6 fw-bold mb-2" style="color:#1a365d;" data-lang="es">Solicitud Simple</h3>
+              <h3 class="h6 fw-bold mb-2" style="color:#1a365d;" data-lang="en">Simple Application</h3>
+              <p class="small text-body-secondary lh-base mb-0" data-lang="es">Te ayudamos con el proceso de solicitud, que suele tomar solo unos minutos.</p>
+              <p class="small text-body-secondary lh-base mb-0" data-lang="en">We guide you through the application process, which usually takes just minutes.</p>
+            </div>
           </div>
         </div>
         <div class="col-12 col-md-6 col-lg-3">
-          <div class="feature-card bg-white rounded-3 p-4 shadow h-100">
-            <div class="rounded-circle d-flex align-items-center justify-content-center text-white fw-bold mb-3" style="width:56px;height:56px;background:#2563eb;">4</div>
-            <h3 class="h6 fw-bold mb-2" style="color:#1a365d;" data-lang="es">Protección Activa</h3>
-            <h3 class="h6 fw-bold mb-2" style="color:#1a365d;" data-lang="en">Active Protection</h3>
-            <p class="small text-body-secondary lh-base mb-0" data-lang="es">Tu cobertura comienza y tu familia queda protegida de inmediato.</p>
-            <p class="small text-body-secondary lh-base mb-0" data-lang="en">Your coverage begins, and your family is protected immediately.</p>
+          <div class="feature-card bg-white rounded-3 shadow h-100 overflow-hidden d-flex flex-column">
+            <img class="how-it-works-step-img flex-shrink-0" src="img/how-it-works/step-4.jpg" alt="" width="640" height="400" decoding="async" loading="lazy" />
+            <div class="p-4 flex-grow-1 d-flex flex-column">
+              <div class="rounded-circle d-flex align-items-center justify-content-center text-white fw-bold mb-3" style="width:56px;height:56px;background:#2563eb;">4</div>
+              <h3 class="h6 fw-bold mb-2" style="color:#1a365d;" data-lang="es">Protección Activa</h3>
+              <h3 class="h6 fw-bold mb-2" style="color:#1a365d;" data-lang="en">Active Protection</h3>
+              <p class="small text-body-secondary lh-base mb-0" data-lang="es">Tu cobertura comienza y tu familia queda protegida de inmediato.</p>
+              <p class="small text-body-secondary lh-base mb-0" data-lang="en">Your coverage begins, and your family is protected immediately.</p>
+            </div>
           </div>
         </div>
       </div>
