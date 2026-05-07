@@ -36,9 +36,9 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Spanish: logo-spanish2.png; English: logo-english2.png
-    // Blog post pages live under /blog/, so logos need ../img there.
-    const isBlogPostPage = window.location.pathname.includes('/blog/');
-    const logoBasePath = isBlogPostPage ? '../img/' : 'img/';
+    // Nested pages (blog + carriers) need ../img.
+    const isNestedPage = window.location.pathname.includes('/blog/') || window.location.pathname.includes('/carriers/');
+    const logoBasePath = isNestedPage ? '../img/' : 'img/';
     const headerLogo = document.getElementById('header-logo');
     if (headerLogo) {
       headerLogo.src = lang === 'es'
