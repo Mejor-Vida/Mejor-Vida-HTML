@@ -490,13 +490,6 @@
                 <label for="ql-email" class="form-label small mb-0" data-lang="en">Email</label>
                 <input type="email" class="form-control form-control-sm" id="ql-email" name="email" required maxlength="320" autocomplete="email" />
               </div>
-              <div class="form-check mb-0">
-                <input type="checkbox" class="form-check-input" id="ql-consent" name="consent" value="1" required />
-                <label class="form-check-label small" for="ql-consent">
-                  <span data-lang="es">Al enviar este formulario, acepto recibir mensajes SMS de <strong>Mejor Vida Insurance</strong> sobre esta cotización y el seguimiento relacionado. Pueden aplicar tarifas de mensaje y datos. Responda <strong>STOP</strong> para cancelar en cualquier momento. También acepto correo electrónico y llamadas para esta solicitud. Ver <a href="/privacy-policy" class="text-decoration-underline">Política de privacidad</a>.</span>
-                  <span data-lang="en">By submitting this form, I consent to receive <strong>SMS messages from Mejor Vida Insurance</strong> about this quote and related follow-up. <strong>Msg &amp; data rates may apply.</strong> Reply <strong>STOP</strong> to opt out. I also consent to email and phone contact for this request. See <a href="/privacy-policy" class="text-decoration-underline">Privacy Policy</a>.</span>
-                </label>
-              </div>
             </div>
 
             <div class="mb-3">
@@ -526,6 +519,14 @@
                   </select>
                 </div>
               </div>
+            </div>
+
+            <div class="form-check mb-3 p-3 rounded-3 border" style="border-color: rgba(13, 71, 161, 0.35) !important; background: #f8fafc;">
+              <input type="checkbox" class="form-check-input mt-1" id="ql-consent" name="consent" value="1" required aria-required="true" />
+              <label class="form-check-label small" for="ql-consent">
+                <span data-lang="es">Al enviar este formulario, autorizo a <strong>Mejor Vida Insurance LLC</strong> a contactarme por mensajes de texto (SMS), WhatsApp, correo electrónico y llamadas telefónicas sobre opciones de seguro. <strong>Frecuencia SMS: 1–5 mensajes por semana.</strong> Pueden aplicar tarifas de mensajes y datos. <strong>Responda STOP para cancelar los SMS.</strong> Ver <a href="/privacy-policy" class="text-decoration-underline">Política de Privacidad</a>.</span>
+                <span data-lang="en">By submitting this form, I authorize <strong>Mejor Vida Insurance LLC</strong> to contact me by text message (SMS), WhatsApp, email, and phone calls about insurance options. <strong>SMS frequency: 1–5 messages per week.</strong> Message and data rates may apply. <strong>Reply STOP to opt out of SMS.</strong> See <a href="/privacy-policy" class="text-decoration-underline">Privacy Policy</a>.</span>
+              </label>
             </div>
 
             <div class="d-grid mb-2">

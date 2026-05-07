@@ -1653,6 +1653,14 @@
       background: rgba(8, 18, 36, .7);
     }
     #staff-input { resize: vertical; min-height: 52px; max-height: 180px; }
+    .kb-gap-answer-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    @media (max-width: 980px) {
+      .kb-gap-answer-grid { grid-template-columns: 1fr; }
+    }
     .small-note { color: var(--muted); font-size: .85rem; margin-top: 6px; }
     .rag-verify-box {
       border-radius: 10px;
@@ -3730,12 +3738,34 @@
         });
       }
 
+      function parseKbGapAnswers(raw) {
+        var text = String(raw || "").trim();
+        if (!text) return { english: "", spanish: "" };
+        var enMatch = text.match(/English:\s*([\s\S]*?)(?:\n\s*Spanish:|$)/i);
+        var esMatch = text.match(/Spanish:\s*([\s\S]*)$/i);
+        if (enMatch || esMatch) {
+          return {
+            english: enMatch ? String(enMatch[1] || "").trim() : "",
+            spanish: esMatch ? String(esMatch[1] || "").trim() : ""
+          };
+        }
+        return { english: text, spanish: "" };
+      }
+
+      function combineKbGapAnswers(english, spanish) {
+        var en = String(english || "").trim();
+        var es = String(spanish || "").trim();
+        if (en && es) return "English:\n" + en + "\n\nSpanish:\n" + es;
+        return en || es;
+      }
+
       function renderKbGapDetail(statusText) {
         var q = getSelectedKbGap();
         if (!q) {
           kbGapDetail.innerHTML = '<div class="q-empty">Select a gap to review.</div>';
           return;
         }
+        var parsedAnswers = parseKbGapAnswers(q.assistant_answer || "");
         kbGapDetail.innerHTML =
           '<div class="meta-grid">' +
             '<div class="meta-card"><strong>Source:</strong> ' + escHtml(q.source || "-") + "</div>" +
@@ -3744,14 +3774,29 @@
             '<div class="meta-card"><strong>Last asked:</strong> ' + escHtml(fmtDate(q.last_asked_at || q.created_at)) + "</div>" +
           "</div>" +
           '<label>Question that needs KB coverage</label>' +
-          '<textarea readonly rows="4">' + escHtml(q.question || "") + "</textarea>" +
-          '<label>Fallback answer that was shown</label>' +
-          '<textarea id="kb-gap-answer-box" readonly rows="12" style="min-height:260px">' + escHtml(q.assistant_answer || "") + "</textarea>" +
+          '<textarea id="kb-gap-question-box" readonly rows="4" style="min-height:96px">' + escHtml(q.question || "") + "</textarea>" +
+          '<label>Julie input for AI (optional)</label>' +
+          '<textarea id="kb-gap-julie-input-box" rows="4" style="min-height:96px" placeholder="Add context Julie wants the model to consider (state, carrier/product constraints, tone, caveats, etc.)."></textarea>' +
+          '<label>Recommended answer (LLM draft)</label>' +
+          '<div class="kb-gap-answer-grid">' +
+            '<div>' +
+              '<label for="kb-gap-answer-en-box" class="small-note">English</label>' +
+              '<textarea id="kb-gap-answer-en-box" rows="14" style="min-height:320px">' + escHtml(parsedAnswers.english) + "</textarea>" +
+            "</div>" +
+            '<div>' +
+              '<label for="kb-gap-answer-es-box" class="small-note">Spanish</label>' +
+              '<textarea id="kb-gap-answer-es-box" rows="14" style="min-height:320px">' + escHtml(parsedAnswers.spanish) + "</textarea>" +
+            "</div>" +
+          "</div>" +
           '<div class="actions">' +
+            '<button id="save-kb-gap-btn" class="secondary" type="button" data-help="Save the current recommended answer draft to this KB gap.">Save</button>' +
+            '<button id="generate-kb-gap-btn" class="secondary" type="button" data-help="Generate a recommended answer from the question plus Julie input.">Generate response</button>' +
             '<button id="push-kb-gap-rag-btn" class="secondary" type="button" data-help="Saves this Q&A as an internal knowledge chunk so future Staff Assistant RAG can retrieve it.">Push to RAG</button>' +
-            '<button id="delete-kb-gap-btn" class="danger" type="button" data-help="Permanently deletes this unresolved KB gap from the queue.">Delete Gap</button>' +
+            '<button id="delete-kb-gap-btn" class="danger" type="button" data-help="Permanently deletes this unresolved KB gap from the queue.">Delete</button>' +
           "</div>" +
           '<div id="kb-gap-status" class="small-note">' + escHtml(statusText || "") + "</div>";
+        document.getElementById("save-kb-gap-btn").addEventListener("click", onSaveKbGap);
+        document.getElementById("generate-kb-gap-btn").addEventListener("click", onGenerateKbGapResponse);
         document.getElementById("push-kb-gap-rag-btn").addEventListener("click", onPushKbGapToRag);
         document.getElementById("delete-kb-gap-btn").addEventListener("click", onDeleteKbGap);
         wireDelayedHelpOn(kbGapDetail);
@@ -3780,13 +3825,25 @@
         if (!q) return;
         var status = document.getElementById("kb-gap-status");
         var pushBtn = document.getElementById("push-kb-gap-rag-btn");
+        var answerEnBox = document.getElementById("kb-gap-answer-en-box");
+        var answerEsBox = document.getElementById("kb-gap-answer-es-box");
+        var answerEnglish = answerEnBox ? String(answerEnBox.value || "").trim() : "";
+        var answerSpanish = answerEsBox ? String(answerEsBox.value || "").trim() : "";
+        if (!answerEnglish && !answerSpanish) {
+          status.textContent = "Add or generate a recommended answer first.";
+          return;
+        }
         status.textContent = "Pushing to RAG...";
         if (pushBtn) {
           pushBtn.disabled = true;
           pushBtn.textContent = "Pushing...";
         }
         try {
-          var data = await authedApi("/api/staff/push-kb-gap-to-rag", { id: q.id });
+          var data = await authedApi("/api/staff/push-kb-gap-to-rag", {
+            id: q.id,
+            answerEnglish: answerEnglish,
+            answerSpanish: answerSpanish
+          });
           kbGapItemsState = kbGapItemsState.filter(function (item) { return item.id !== q.id; });
           selectedKbGapId = kbGapItemsState.length ? kbGapItemsState[0].id : "";
           renderKbGapList();
@@ -3797,6 +3854,81 @@
           if (pushBtn) {
             pushBtn.disabled = false;
             pushBtn.textContent = "Push to RAG";
+          }
+        }
+      }
+
+      async function onGenerateKbGapResponse() {
+        var q = getSelectedKbGap();
+        if (!q) return;
+        var status = document.getElementById("kb-gap-status");
+        var generateBtn = document.getElementById("generate-kb-gap-btn");
+        var questionBox = document.getElementById("kb-gap-question-box");
+        var julieInputBox = document.getElementById("kb-gap-julie-input-box");
+        var answerEnBox = document.getElementById("kb-gap-answer-en-box");
+        var answerEsBox = document.getElementById("kb-gap-answer-es-box");
+        var question = questionBox ? String(questionBox.value || "").trim() : "";
+        var julieInput = julieInputBox ? String(julieInputBox.value || "").trim() : "";
+        if (!question) {
+          status.textContent = "Missing question text.";
+          return;
+        }
+        status.textContent = "Generating recommended answer...";
+        if (generateBtn) {
+          generateBtn.disabled = true;
+          generateBtn.textContent = "Generating...";
+        }
+        try {
+          var data = await authedApi("/api/staff/generate-kb-gap-response", {
+            id: q.id,
+            question: question,
+            julieInput: julieInput
+          });
+          if (answerEnBox) answerEnBox.value = String((data && data.english_answer) || "");
+          if (answerEsBox) answerEsBox.value = String((data && data.spanish_answer) || "");
+          status.textContent = "Recommended English + Spanish answers generated. Review, then Save or Push to RAG.";
+        } catch (e) {
+          status.textContent = "Failed to generate response.";
+        } finally {
+          if (generateBtn) {
+            generateBtn.disabled = false;
+            generateBtn.textContent = "Generate response";
+          }
+        }
+      }
+
+      async function onSaveKbGap() {
+        var q = getSelectedKbGap();
+        if (!q) return;
+        var status = document.getElementById("kb-gap-status");
+        var saveBtn = document.getElementById("save-kb-gap-btn");
+        var answerEnBox = document.getElementById("kb-gap-answer-en-box");
+        var answerEsBox = document.getElementById("kb-gap-answer-es-box");
+        var answerEnglish = answerEnBox ? String(answerEnBox.value || "").trim() : "";
+        var answerSpanish = answerEsBox ? String(answerEsBox.value || "").trim() : "";
+        if (!answerEnglish && !answerSpanish) {
+          status.textContent = "Recommended answer is empty.";
+          return;
+        }
+        status.textContent = "Saving draft...";
+        if (saveBtn) {
+          saveBtn.disabled = true;
+          saveBtn.textContent = "Saving...";
+        }
+        try {
+          await authedApi("/api/staff/save-kb-gap", {
+            id: q.id,
+            answerEnglish: answerEnglish,
+            answerSpanish: answerSpanish
+          });
+          q.assistant_answer = combineKbGapAnswers(answerEnglish, answerSpanish);
+          status.textContent = "Draft saved.";
+        } catch (e) {
+          status.textContent = "Failed to save draft.";
+        } finally {
+          if (saveBtn) {
+            saveBtn.disabled = false;
+            saveBtn.textContent = "Save";
           }
         }
       }

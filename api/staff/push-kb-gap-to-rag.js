@@ -17,6 +17,14 @@ function sanitizeForRag(text) {
     .trim();
 }
 
+function combineAnswer(english, spanish) {
+  const en = String(english || "").trim();
+  const es = String(spanish || "").trim();
+  if (!en && !es) return "";
+  if (en && es) return `English:\n${en}\n\nSpanish:\n${es}`;
+  return en || es;
+}
+
 module.exports = async function handler(req, res) {
   if (req.method !== "POST") {
     res.setHeader("Allow", "POST");
@@ -38,6 +46,7 @@ module.exports = async function handler(req, res) {
   }
 
   const id = String(body.id || "").trim();
+  const overrideAnswer = combineAnswer(body.answerEnglish, body.answerSpanish) || String(body.answer || "").trim();
   if (!id) return json(res, 400, { error: "id required" });
 
   try {
@@ -51,7 +60,7 @@ module.exports = async function handler(req, res) {
     if (gap.resolved) return json(res, 400, { error: "KB gap already resolved" });
 
     const question = sanitizeForRag(String(gap.question || "").trim());
-    const answer = sanitizeForRag(String(gap.assistant_answer || "").trim());
+    const answer = sanitizeForRag(overrideAnswer || String(gap.assistant_answer || "").trim());
     if (!question || !answer) return json(res, 400, { error: "KB gap question/answer is empty" });
 
     const content = `Question:\n${question}\n\nAnswer:\n${answer}`;

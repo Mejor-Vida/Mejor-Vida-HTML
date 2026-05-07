@@ -86,6 +86,28 @@ async function runApi(absHandler, req, res, query) {
     return;
   }
   req.query = query;
+  // Minimal Vercel-like response helpers for API handlers.
+  res.status = function status(code) {
+    res.statusCode = Number(code) || 200;
+    return res;
+  };
+  res.send = function send(payload) {
+    if (payload === undefined || payload === null) return res.end("");
+    if (Buffer.isBuffer(payload)) return res.end(payload);
+    if (typeof payload === "object") {
+      if (!res.getHeader("Content-Type")) {
+        res.setHeader("Content-Type", "application/json");
+      }
+      return res.end(JSON.stringify(payload));
+    }
+    return res.end(String(payload));
+  };
+  res.json = function json(payload) {
+    if (!res.getHeader("Content-Type")) {
+      res.setHeader("Content-Type", "application/json");
+    }
+    return res.end(JSON.stringify(payload));
+  };
   const ct = String(req.headers["content-type"] || "").toLowerCase();
   if (req.method !== "GET" && req.method !== "HEAD" && ct.includes("application/json")) {
     try {
