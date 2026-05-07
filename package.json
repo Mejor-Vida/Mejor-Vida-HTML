@@ -5,6 +5,7 @@
     "node": ">=18"
   },
   "scripts": {
+    "preview": "python3 -m http.server 4173 --bind 127.0.0.1",
     "dev": "vercel dev",
     "dev:local": "node scripts/local-api-dev.cjs",
     "preview:post-quote-email": "node scripts/preview-post-quote-email.js",

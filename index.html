@@ -914,17 +914,43 @@
     html.lang-es [data-lang="en"] { display: none !important; }
     html.lang-en [data-lang="es"] { display: none !important; }
 
-    /* How it works: stage illustrations */
+    /* How it works: compact icons, full artwork visible (no crop) */
+    #how-it-works .how-it-works-step-figure {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem 1rem 0.5rem;
+      background: #f8fafc;
+      border-bottom: 1px solid #e2e8f0;
+    }
     #how-it-works .how-it-works-step-img {
-      width: 100%;
-      height: 148px;
-      object-fit: cover;
+      width: auto;
+      max-width: 100%;
+      height: 56px;
+      object-fit: contain;
       object-position: center;
       display: block;
-      background: #dbeafe;
+    }
+    @media (min-width: 768px) {
+      #how-it-works .how-it-works-step-img { height: 60px; }
     }
     @media (min-width: 992px) {
-      #how-it-works .how-it-works-step-img { height: 132px; }
+      #how-it-works .how-it-works-step-img { height: 64px; }
+    }
+
+    /* Carriers: whole card is one link */
+    #carriers .carrier-card-link { color: inherit; }
+    #carriers .carrier-card-link .feature-card {
+      transition: box-shadow 0.2s ease, transform 0.15s ease;
+    }
+    #carriers .carrier-card-link:hover .feature-card {
+      box-shadow: 0 0.5rem 1.25rem rgba(26, 54, 93, 0.14) !important;
+      transform: translateY(-2px);
+    }
+    #carriers .carrier-card-link:focus-visible { outline: none; }
+    #carriers .carrier-card-link:focus-visible .feature-card {
+      outline: 2px solid #2563eb;
+      outline-offset: 3px;
     }
   </style>
   <script>
@@ -1233,9 +1259,10 @@
       <div class="row g-4">
         <div class="col-12 col-md-6 col-lg-3">
           <div class="feature-card bg-white rounded-3 shadow h-100 overflow-hidden d-flex flex-column">
-            <img class="how-it-works-step-img flex-shrink-0" src="/img/how-it-works/step-1.jpg?v=3" alt="" width="640" height="400" decoding="async" loading="eager" fetchpriority="high" />
+            <div class="how-it-works-step-figure flex-shrink-0">
+              <img class="how-it-works-step-img" src="img/how-it-works/step-1.jpg?v=4" alt="" width="640" height="400" decoding="async" loading="eager" fetchpriority="high" />
+            </div>
             <div class="p-4 flex-grow-1 d-flex flex-column">
-              <div class="rounded-circle d-flex align-items-center justify-content-center text-white fw-bold mb-3" style="width:56px;height:56px;background:#2563eb;">1</div>
               <h3 class="h6 fw-bold mb-2" style="color:#1a365d;" data-lang="es">Consulta Inicial</h3>
               <h3 class="h6 fw-bold mb-2" style="color:#1a365d;" data-lang="en">Initial Consultation</h3>
               <p class="small text-body-secondary lh-base mb-0" data-lang="es">Empieza con una cotización en línea o WhatsApp. Con tu información, revisamos tu situación y coordinamos una llamada si encaja.</p>
@@ -1245,9 +1272,10 @@
         </div>
         <div class="col-12 col-md-6 col-lg-3">
           <div class="feature-card bg-white rounded-3 shadow h-100 overflow-hidden d-flex flex-column">
-            <img class="how-it-works-step-img flex-shrink-0" src="/img/how-it-works/step-2.jpg?v=3" alt="" width="640" height="400" decoding="async" loading="eager" />
+            <div class="how-it-works-step-figure flex-shrink-0">
+              <img class="how-it-works-step-img" src="img/how-it-works/step-2.jpg?v=4" alt="" width="640" height="400" decoding="async" loading="eager" />
+            </div>
             <div class="p-4 flex-grow-1 d-flex flex-column">
-              <div class="rounded-circle d-flex align-items-center justify-content-center text-white fw-bold mb-3" style="width:56px;height:56px;background:#2563eb;">2</div>
               <h3 class="h6 fw-bold mb-2" style="color:#1a365d;" data-lang="es">Comparación de Opciones</h3>
               <h3 class="h6 fw-bold mb-2" style="color:#1a365d;" data-lang="en">Option Comparison</h3>
               <p class="small text-body-secondary lh-base mb-0" data-lang="es">Revisamos las mejores pólizas de las principales aseguradoras para ti.</p>
@@ -1257,9 +1285,10 @@
         </div>
         <div class="col-12 col-md-6 col-lg-3">
           <div class="feature-card bg-white rounded-3 shadow h-100 overflow-hidden d-flex flex-column">
-            <img class="how-it-works-step-img flex-shrink-0" src="/img/how-it-works/step-3.jpg?v=3" alt="" width="640" height="400" decoding="async" loading="eager" />
+            <div class="how-it-works-step-figure flex-shrink-0">
+              <img class="how-it-works-step-img" src="img/how-it-works/step-3.jpg?v=4" alt="" width="640" height="400" decoding="async" loading="eager" />
+            </div>
             <div class="p-4 flex-grow-1 d-flex flex-column">
-              <div class="rounded-circle d-flex align-items-center justify-content-center text-white fw-bold mb-3" style="width:56px;height:56px;background:#2563eb;">3</div>
               <h3 class="h6 fw-bold mb-2" style="color:#1a365d;" data-lang="es">Solicitud Simple</h3>
               <h3 class="h6 fw-bold mb-2" style="color:#1a365d;" data-lang="en">Simple Application</h3>
               <p class="small text-body-secondary lh-base mb-0" data-lang="es">Te ayudamos con el proceso de solicitud, que suele tomar solo unos minutos.</p>
@@ -1269,9 +1298,10 @@
         </div>
         <div class="col-12 col-md-6 col-lg-3">
           <div class="feature-card bg-white rounded-3 shadow h-100 overflow-hidden d-flex flex-column">
-            <img class="how-it-works-step-img flex-shrink-0" src="/img/how-it-works/step-4.jpg?v=3" alt="" width="640" height="400" decoding="async" loading="eager" />
+            <div class="how-it-works-step-figure flex-shrink-0">
+              <img class="how-it-works-step-img" src="img/how-it-works/step-4.jpg?v=4" alt="" width="640" height="400" decoding="async" loading="eager" />
+            </div>
             <div class="p-4 flex-grow-1 d-flex flex-column">
-              <div class="rounded-circle d-flex align-items-center justify-content-center text-white fw-bold mb-3" style="width:56px;height:56px;background:#2563eb;">4</div>
               <h3 class="h6 fw-bold mb-2" style="color:#1a365d;" data-lang="es">Protección Activa</h3>
               <h3 class="h6 fw-bold mb-2" style="color:#1a365d;" data-lang="en">Active Protection</h3>
               <p class="small text-body-secondary lh-base mb-0" data-lang="es">Tu cobertura comienza y tu familia queda protegida de inmediato.</p>
@@ -1369,48 +1399,54 @@
 
       <div class="row g-4">
         <div class="col-12 col-md-6 col-lg-4">
-          <div class="feature-card bg-light rounded-3 p-4 shadow h-100">
-            <h3 class="visually-hidden">Assurity</h3>
-            <div class="mb-4">
-              <img src="img/carriers/assurity-logo.svg" alt="" width="130" height="30" decoding="async" class="d-block" style="height:40px;width:auto;max-width:100%;" />
+          <a href="/carriers/assurity.html" class="carrier-card-link d-block h-100 text-decoration-none text-reset rounded-3" aria-label="Assurity — carrier overview">
+            <div class="feature-card bg-light rounded-3 p-4 shadow h-100">
+              <h3 class="visually-hidden">Assurity</h3>
+              <div class="mb-4">
+                <img src="img/carriers/assurity-logo.svg" alt="" width="130" height="30" decoding="async" class="d-block" style="height:40px;width:auto;max-width:100%;" />
+              </div>
+              <ul class="list-unstyled mb-0">
+                <li class="d-flex align-items-start gap-2 mb-2" data-lang="es"><i class="fas fa-check text-success mt-1 flex-shrink-0"></i><span class="small text-body-secondary">Soluciones de vida entera para gastos finales con primas niveladas, pensadas para ayudar a cubrir funeral, entierro y costos relacionados al final de la vida.</span></li>
+                <li class="d-flex align-items-start gap-2 mb-2" data-lang="en"><i class="fas fa-check text-success mt-1 flex-shrink-0"></i><span class="small text-body-secondary">Whole life final expense solutions with level premiums intended to help cover funeral, burial, and related end-of-life costs.</span></li>
+                <li class="d-flex align-items-start gap-2 mb-2" data-lang="es"><i class="fas fa-check text-success mt-1 flex-shrink-0"></i><span class="small text-body-secondary">Varias clases de salud y suscripción simplificada; muchos solicitantes califican sin examen médico.</span></li>
+                <li class="d-flex align-items-start gap-2 mb-2" data-lang="en"><i class="fas fa-check text-success mt-1 flex-shrink-0"></i><span class="small text-body-secondary">Multiple health classes and simplified underwriting paths—many applicants qualify without a medical exam.</span></li>
+                <li class="d-flex align-items-start gap-2 mb-2" data-lang="es"><i class="fas fa-check text-success mt-1 flex-shrink-0"></i><span class="small text-body-secondary">Montos y estructuras de cobertura que se pueden alinear con objetivos comunes de planificación de gastos finales.</span></li>
+                <li class="d-flex align-items-start gap-2 mb-2" data-lang="en"><i class="fas fa-check text-success mt-1 flex-shrink-0"></i><span class="small text-body-secondary">Coverage amounts and structures that can be matched to common final expense planning goals.</span></li>
+              </ul>
             </div>
-            <ul class="list-unstyled mb-0">
-              <li class="d-flex align-items-start gap-2 mb-2" data-lang="es"><i class="fas fa-check text-success mt-1 flex-shrink-0"></i><span class="small text-body-secondary">Soluciones de vida entera para gastos finales con primas niveladas, pensadas para ayudar a cubrir funeral, entierro y costos relacionados al final de la vida.</span></li>
-              <li class="d-flex align-items-start gap-2 mb-2" data-lang="en"><i class="fas fa-check text-success mt-1 flex-shrink-0"></i><span class="small text-body-secondary">Whole life final expense solutions with level premiums intended to help cover funeral, burial, and related end-of-life costs.</span></li>
-              <li class="d-flex align-items-start gap-2 mb-2" data-lang="es"><i class="fas fa-check text-success mt-1 flex-shrink-0"></i><span class="small text-body-secondary">Varias clases de salud y suscripción simplificada; muchos solicitantes califican sin examen médico.</span></li>
-              <li class="d-flex align-items-start gap-2 mb-2" data-lang="en"><i class="fas fa-check text-success mt-1 flex-shrink-0"></i><span class="small text-body-secondary">Multiple health classes and simplified underwriting paths—many applicants qualify without a medical exam.</span></li>
-              <li class="d-flex align-items-start gap-2 mb-2" data-lang="es"><i class="fas fa-check text-success mt-1 flex-shrink-0"></i><span class="small text-body-secondary">Montos y estructuras de cobertura que se pueden alinear con objetivos comunes de planificación de gastos finales.</span></li>
-              <li class="d-flex align-items-start gap-2 mb-2" data-lang="en"><i class="fas fa-check text-success mt-1 flex-shrink-0"></i><span class="small text-body-secondary">Coverage amounts and structures that can be matched to common final expense planning goals.</span></li>
-            </ul>
-          </div>
+          </a>
         </div>
         <div class="col-12 col-md-6 col-lg-4">
-          <div class="feature-card bg-light rounded-3 p-4 shadow h-100">
-            <h3 class="h4 fw-bold mb-4" style="color:#1a365d;">Mutual of Omaha</h3>
-            <ul class="list-unstyled mb-0">
-              <li class="d-flex align-items-start gap-2 mb-2" data-lang="es"><i class="fas fa-check text-success mt-1 flex-shrink-0"></i><span class="small text-body-secondary">Más de 100 años de historia, conocida por su solidez financiera.</span></li>
-              <li class="d-flex align-items-start gap-2 mb-2" data-lang="en"><i class="fas fa-check text-success mt-1 flex-shrink-0"></i><span class="small text-body-secondary">Over 100 years of history, known for financial strength.</span></li>
-              <li class="d-flex align-items-start gap-2 mb-2" data-lang="es"><i class="fas fa-check text-success mt-1 flex-shrink-0"></i><span class="small text-body-secondary">Pólizas de vida entera pensadas para cubrir costos de funeral, entierro y servicios conmemorativos.</span></li>
-              <li class="d-flex align-items-start gap-2 mb-2" data-lang="en"><i class="fas fa-check text-success mt-1 flex-shrink-0"></i><span class="small text-body-secondary">Whole life policies designed to cover funeral, burial, and memorial services.</span></li>
-              <li class="d-flex align-items-start gap-2 mb-2" data-lang="es"><i class="fas fa-check text-success mt-1 flex-shrink-0"></i><span class="small text-body-secondary">Las primas no aumentan por envejecer o cambios de salud después de emitida la póliza.</span></li>
-              <li class="d-flex align-items-start gap-2 mb-2" data-lang="en"><i class="fas fa-check text-success mt-1 flex-shrink-0"></i><span class="small text-body-secondary">Premiums don't increase due to aging or health changes after the policy is issued.</span></li>
-              <li class="d-flex align-items-start gap-2 mb-2" data-lang="es"><i class="fas fa-check text-success mt-1 flex-shrink-0"></i><span class="small text-body-secondary"><strong>Living Promise</strong> puede emitirse como beneficio Nivel o Graduado según las <strong>preguntas de la solicitud</strong>—no es algo que el cliente elija por adelantado; otros productos MoO cubren necesidades distintas.</span></li>
-              <li class="d-flex align-items-start gap-2 mb-2" data-lang="en"><i class="fas fa-check text-success mt-1 flex-shrink-0"></i><span class="small text-body-secondary"><strong>Living Promise</strong> may be issued as Level or Graded benefit based on the <strong>application needs questions</strong>—not something the client selects up front; other MoO products address different needs.</span></li>
-            </ul>
-          </div>
+          <a href="/carriers/mutual-of-omaha.html" class="carrier-card-link d-block h-100 text-decoration-none text-reset rounded-3" aria-label="Mutual of Omaha — carrier overview">
+            <div class="feature-card bg-light rounded-3 p-4 shadow h-100">
+              <h3 class="h4 fw-bold mb-4" style="color:#1a365d;">Mutual of Omaha</h3>
+              <ul class="list-unstyled mb-0">
+                <li class="d-flex align-items-start gap-2 mb-2" data-lang="es"><i class="fas fa-check text-success mt-1 flex-shrink-0"></i><span class="small text-body-secondary">Más de 100 años de historia, conocida por su solidez financiera.</span></li>
+                <li class="d-flex align-items-start gap-2 mb-2" data-lang="en"><i class="fas fa-check text-success mt-1 flex-shrink-0"></i><span class="small text-body-secondary">Over 100 years of history, known for financial strength.</span></li>
+                <li class="d-flex align-items-start gap-2 mb-2" data-lang="es"><i class="fas fa-check text-success mt-1 flex-shrink-0"></i><span class="small text-body-secondary">Pólizas de vida entera pensadas para cubrir costos de funeral, entierro y servicios conmemorativos.</span></li>
+                <li class="d-flex align-items-start gap-2 mb-2" data-lang="en"><i class="fas fa-check text-success mt-1 flex-shrink-0"></i><span class="small text-body-secondary">Whole life policies designed to cover funeral, burial, and memorial services.</span></li>
+                <li class="d-flex align-items-start gap-2 mb-2" data-lang="es"><i class="fas fa-check text-success mt-1 flex-shrink-0"></i><span class="small text-body-secondary">Las primas no aumentan por envejecer o cambios de salud después de emitida la póliza.</span></li>
+                <li class="d-flex align-items-start gap-2 mb-2" data-lang="en"><i class="fas fa-check text-success mt-1 flex-shrink-0"></i><span class="small text-body-secondary">Premiums don't increase due to aging or health changes after the policy is issued.</span></li>
+                <li class="d-flex align-items-start gap-2 mb-2" data-lang="es"><i class="fas fa-check text-success mt-1 flex-shrink-0"></i><span class="small text-body-secondary"><strong>Living Promise</strong> puede emitirse como beneficio Nivel o Graduado según las <strong>preguntas de la solicitud</strong>—no es algo que el cliente elija por adelantado; otros productos MoO cubren necesidades distintas.</span></li>
+                <li class="d-flex align-items-start gap-2 mb-2" data-lang="en"><i class="fas fa-check text-success mt-1 flex-shrink-0"></i><span class="small text-body-secondary"><strong>Living Promise</strong> may be issued as Level or Graded benefit based on the <strong>application needs questions</strong>—not something the client selects up front; other MoO products address different needs.</span></li>
+              </ul>
+            </div>
+          </a>
         </div>
         <div class="col-12 col-md-6 col-lg-4 mx-md-auto mx-lg-0">
-          <div class="feature-card bg-light rounded-3 p-4 shadow h-100">
-            <h3 class="h4 fw-bold mb-4" style="color:#1a365d;">American Amicable</h3>
-            <ul class="list-unstyled mb-0">
-              <li class="d-flex align-items-start gap-2 mb-2" data-lang="es"><i class="fas fa-check text-success mt-1 flex-shrink-0"></i><span class="small text-body-secondary">Aseguradora establecida con productos de vida entera que a menudo se usan para gastos finales y planificación funeraria.</span></li>
-              <li class="d-flex align-items-start gap-2 mb-2" data-lang="en"><i class="fas fa-check text-success mt-1 flex-shrink-0"></i><span class="small text-body-secondary">Established carrier offering whole life products often used for final expense and burial planning.</span></li>
-              <li class="d-flex align-items-start gap-2 mb-2" data-lang="es"><i class="fas fa-check text-success mt-1 flex-shrink-0"></i><span class="small text-body-secondary">Suscripción simplificada en muchos productos; quienes califiquen a menudo pueden evitar el examen médico.</span></li>
-              <li class="d-flex align-items-start gap-2 mb-2" data-lang="en"><i class="fas fa-check text-success mt-1 flex-shrink-0"></i><span class="small text-body-secondary">Simplified underwriting on many products—qualifying applicants often avoid a medical exam.</span></li>
-              <li class="d-flex align-items-start gap-2 mb-2" data-lang="es"><i class="fas fa-check text-success mt-1 flex-shrink-0"></i><span class="small text-body-secondary">Vida entera con prima nivelada para un costo mensual predecible una vez emitida la póliza.</span></li>
-              <li class="d-flex align-items-start gap-2 mb-2" data-lang="en"><i class="fas fa-check text-success mt-1 flex-shrink-0"></i><span class="small text-body-secondary">Level premium whole life for predictable monthly cost once the policy is issued.</span></li>
-            </ul>
-          </div>
+          <a href="/carriers/american-amicable.html" class="carrier-card-link d-block h-100 text-decoration-none text-reset rounded-3" aria-label="American Amicable — carrier overview">
+            <div class="feature-card bg-light rounded-3 p-4 shadow h-100">
+              <h3 class="h4 fw-bold mb-4" style="color:#1a365d;">American Amicable</h3>
+              <ul class="list-unstyled mb-0">
+                <li class="d-flex align-items-start gap-2 mb-2" data-lang="es"><i class="fas fa-check text-success mt-1 flex-shrink-0"></i><span class="small text-body-secondary">Aseguradora establecida con productos de vida entera que a menudo se usan para gastos finales y planificación funeraria.</span></li>
+                <li class="d-flex align-items-start gap-2 mb-2" data-lang="en"><i class="fas fa-check text-success mt-1 flex-shrink-0"></i><span class="small text-body-secondary">Established carrier offering whole life products often used for final expense and burial planning.</span></li>
+                <li class="d-flex align-items-start gap-2 mb-2" data-lang="es"><i class="fas fa-check text-success mt-1 flex-shrink-0"></i><span class="small text-body-secondary">Suscripción simplificada en muchos productos; quienes califiquen a menudo pueden evitar el examen médico.</span></li>
+                <li class="d-flex align-items-start gap-2 mb-2" data-lang="en"><i class="fas fa-check text-success mt-1 flex-shrink-0"></i><span class="small text-body-secondary">Simplified underwriting on many products—qualifying applicants often avoid a medical exam.</span></li>
+                <li class="d-flex align-items-start gap-2 mb-2" data-lang="es"><i class="fas fa-check text-success mt-1 flex-shrink-0"></i><span class="small text-body-secondary">Vida entera con prima nivelada para un costo mensual predecible una vez emitida la póliza.</span></li>
+                <li class="d-flex align-items-start gap-2 mb-2" data-lang="en"><i class="fas fa-check text-success mt-1 flex-shrink-0"></i><span class="small text-body-secondary">Level premium whole life for predictable monthly cost once the policy is issued.</span></li>
+              </ul>
+            </div>
+          </a>
         </div>
       </div>
 
