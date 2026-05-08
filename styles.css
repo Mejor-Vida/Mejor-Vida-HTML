@@ -25,6 +25,7 @@
 
 html {
   scroll-behavior: smooth; /* Enable smooth scrolling for anchor links */
+  font-size: 106.25%; /* ~17px from default 16 — improves readability for older readers */
 }
 
 body {
@@ -32,6 +33,12 @@ body {
   line-height: 1.6;
   color: #333;
   background-color: #ffffff;
+}
+
+/* Never render helper/disclaimer text smaller than ~15px */
+small,
+.small {
+  font-size: max(0.9375rem, 15px);
 }
 
 .container {
@@ -119,7 +126,7 @@ img {
   padding: 0.25rem 0.6rem;
   border-radius: 4px;
   cursor: pointer;
-  font-size: 0.85rem;
+  font-size: max(0.92rem, 15px);
   font-weight: 600;
   color: #000000; /* Black text */
   transition: all 0.2s;
@@ -187,7 +194,7 @@ img {
   color: #ffffff;            /* white text for visibility */
   padding: 0.4rem 0.9rem;
   border-radius: 20px;
-  font-size: 0.85rem;
+  font-size: max(0.92rem, 15px);
   font-weight: 600;
   margin-bottom: 1rem;
 }
@@ -320,7 +327,7 @@ a.btn-primary:focus {
 }
 
 .about-photo-caption {
-  font-size: 0.85rem;
+  font-size: max(0.92rem, 15px);
   color: #6b7280;
   line-height: 1.5;
 }
@@ -341,7 +348,7 @@ a.btn-primary:focus {
   color: #1e40af;
   padding: 0.35rem 0.85rem;
   border-radius: 16px;
-  font-size: 0.8rem;
+  font-size: max(0.9rem, 15px);
   font-weight: 600;
 }
 
@@ -485,7 +492,7 @@ a.btn-primary:focus {
 }
 
 .form-disclaimer {
-  font-size: 0.85rem;
+  font-size: max(0.92rem, 15px);
   line-height: 1.6;
   color: #6b7280;
   margin-top: 1.5rem;
@@ -545,7 +552,7 @@ a.btn-primary:focus {
 }
 
 .carriers-note {
-  font-size: 0.85rem;
+  font-size: max(0.92rem, 15px);
   line-height: 1.6;
   color: #6b7280;
   margin-top: 2rem;
@@ -714,8 +721,8 @@ input[type="date"]:focus {
 }
 
 .form-disclaimer-small {
-  font-size: 0.8rem;
-  line-height: 1.4;
+  font-size: max(0.95rem, 15px);
+  line-height: 1.45;
   color: #6b7280;
   margin-top: 1rem;
   max-width: 600px;
@@ -778,7 +785,7 @@ input[type="date"]:focus {
 
   .lang-btn {
     padding: 0.3rem 0.6rem;
-    font-size: 0.85rem;
+    font-size: max(0.92rem, 15px);
   }
 
   .nav {

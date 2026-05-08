@@ -340,37 +340,43 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const styleTag = document.createElement('style');
     styleTag.textContent = `
+      /* Sit above #mvi-assistant-root (bottom ~5.75–6.25rem + 3.5rem FAB) so the pill is not covered */
       #floating-whatsapp-btn {
         position: fixed;
         right: 16px;
-        bottom: 18px;
-        z-index: 1040;
+        left: auto;
+        bottom: calc(max(5.75rem, env(safe-area-inset-bottom, 0px) + 4.75rem) + 3.5rem + 2.75rem);
+        z-index: 1049;
         display: inline-flex;
         align-items: center;
         gap: 8px;
-        padding: 10px 12px;
+        padding: 11px 14px;
         border-radius: 999px;
         background: #25D366;
         color: #ffffff;
         font-weight: 700;
-        font-size: 13px;
-        line-height: 1.2;
+        font-size: 15px;
+        line-height: 1.25;
         text-decoration: none;
         box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
         max-width: min(86vw, 320px);
+        visibility: visible;
+        opacity: 1;
+        pointer-events: auto;
       }
       #floating-whatsapp-btn:hover {
         filter: brightness(0.96);
       }
       #floating-whatsapp-btn .wa-icon {
-        font-size: 18px;
+        font-size: 20px;
+        line-height: 1;
       }
       @media (max-width: 576px) {
         #floating-whatsapp-btn {
           right: 12px;
-          bottom: 14px;
-          padding: 9px 11px;
-          font-size: 12px;
+          bottom: calc(max(6.25rem, env(safe-area-inset-bottom, 0px) + 5.25rem) + 3.5rem + 2.5rem);
+          padding: 10px 13px;
+          font-size: 14px;
         }
       }
     `;

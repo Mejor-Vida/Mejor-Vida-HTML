@@ -3,8 +3,20 @@
  * Include Font Awesome on pages that don’t already load it (FAB icon).
  */
 
+/* Loaded on most public pages — modest rem scale + floor for tiny helper copy */
+html {
+  font-size: 106.25%;
+}
+small,
+.small {
+  font-size: max(0.9375rem, 15px);
+}
+.form-text {
+  font-size: max(0.9375rem, 15px);
+}
+
 /* Floating website assistant — session-only client state; POST /api/website-chat */
-/* Above #floating-whatsapp-btn (z-index 1040 in script.js); below Bootstrap modal (1050+). */
+/* Below Bootstrap modal/backdrop (~1050–1055); #floating-whatsapp-btn uses z-index 1049 in script.js. */
 #mvi-assistant-root {
   /* Launcher avatar dimensions (used by .mvi-assist-avatar-shell / header slot) */
   --mvi-avatar-w-compact: 5.5rem;
@@ -70,7 +82,7 @@
   border-radius: 999px;
   background: #e53e3e;
   color: #fff;
-  font-size: 0.7rem;
+  font-size: max(0.8125rem, 13px);
   font-weight: 700;
   display: flex;
   align-items: center;
@@ -299,7 +311,7 @@
   color: #334155;
   border-radius: 999px;
   padding: 0.35rem 0.75rem;
-  font-size: 0.8rem;
+  font-size: max(0.9rem, 15px);
   font-weight: 500;
   cursor: pointer;
   line-height: 1.4;
@@ -319,7 +331,7 @@
   margin: 0;
   padding: 0.25rem 0.5rem;
   border-radius: 4px;
-  font-size: 0.8125rem;
+  font-size: max(0.875rem, 15px);
   font-weight: 700;
   cursor: pointer;
   line-height: 1.2;
