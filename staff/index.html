@@ -261,10 +261,111 @@
     .pane.active { display: block; }
     #pane-inbox { padding: 12px; }
     #pane-compose { padding: 12px; overflow: auto; }
+    #pane-kb-gaps { padding: 12px; overflow: auto; }
     #pane-oos-referrals { padding: 12px; overflow: auto; }
     #pane-oos-agents { padding: 12px; overflow: auto; }
     #pane-oos-archive { padding: 12px; overflow: auto; }
     #pane-lead-profile { padding: 12px; overflow: auto; }
+    #pane-pipeline-tracker { padding: 12px; overflow: auto; }
+    #pane-pipeline-tracker .pt-work { align-items: stretch; }
+    #pane-pipeline-tracker .pt-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+    #pane-pipeline-tracker .pt-table th,
+    #pane-pipeline-tracker .pt-table td {
+      border-bottom: 1px solid var(--border);
+      padding: 8px 6px;
+      text-align: left;
+      vertical-align: top;
+    }
+    #pane-pipeline-tracker .pt-table tbody tr.pt-step-row {
+      cursor: pointer;
+    }
+    #pane-pipeline-tracker .pt-table tbody tr.pt-step-row:hover {
+      background: rgba(255, 255, 255, 0.04);
+    }
+    #pane-pipeline-tracker .pt-table tbody tr.pt-step-row.pt-row-active {
+      background: rgba(215, 180, 106, 0.12);
+    }
+    #pane-pipeline-tracker .pt-table tbody tr.pt-step-row.pt-row-next td:first-child {
+      box-shadow: inset 3px 0 0 var(--accent);
+    }
+    #pane-pipeline-tracker .pt-badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 0.76rem;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+    }
+    #pane-pipeline-tracker .pt-badge.active {
+      background: rgba(101, 209, 154, 0.2);
+      color: #9eebc4;
+    }
+    #pane-pipeline-tracker .pt-badge.paused {
+      background: rgba(255, 200, 120, 0.2);
+      color: #ffd59a;
+    }
+    #pane-pipeline-tracker .pt-badge.completed {
+      background: rgba(167, 183, 216, 0.15);
+      color: var(--muted);
+    }
+    #pane-pipeline-tracker .pt-badge.converted {
+      background: rgba(101, 209, 154, 0.25);
+      color: #b8f0d4;
+    }
+    #pane-pipeline-tracker .pt-badge.opted_out {
+      background: rgba(255, 123, 123, 0.2);
+      color: #ffb8b8;
+    }
+    #pane-pipeline-tracker .ch-pill {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 0.74rem;
+      font-weight: 800;
+    }
+    #pane-pipeline-tracker .ch-pill.ch-wa {
+      background: rgba(18, 140, 126, 0.28);
+      color: #9cf5e8;
+    }
+    #pane-pipeline-tracker .ch-pill.ch-sms {
+      background: rgba(91, 127, 209, 0.28);
+      color: #cfe0ff;
+    }
+    #pane-pipeline-tracker .ch-pill.ch-em {
+      background: rgba(122, 91, 184, 0.28);
+      color: #e8deff;
+    }
+    #pane-pipeline-tracker .pt-preview-box {
+      padding: 12px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: rgba(10, 26, 51, 0.55);
+    }
+    #pane-pipeline-tracker .pt-preview-box textarea {
+      min-height: 220px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.82rem;
+    }
+    #pane-pipeline-tracker #pt-lead-list .compose-lead-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      white-space: normal;
+    }
+    #pane-pipeline-tracker #pt-btn-delete {
+      background: #7f2e2e;
+      color: #fff;
+      border: 1px solid rgba(255, 123, 123, 0.45);
+      font-weight: 800;
+    }
+    #pane-pipeline-tracker #pt-btn-delete:hover:not([disabled]) {
+      filter: brightness(1.08);
+    }
     #pane-product-selector { padding: 12px; overflow: auto; }
     #pane-chat { padding: 12px; }
     .staff-tool-pane-wrap {
@@ -1767,6 +1868,7 @@
           <div class="nav-dropdown" id="nav-dd-leads">
             <button type="button" class="nav-dropdown-btn" id="nav-btn-leads" aria-haspopup="true" aria-expanded="false" data-help="Lead tools: profile, product selector, staff assistant, compose.">Leads ▾</button>
             <div class="nav-dropdown-panel hidden" role="menu" aria-label="Leads menu">
+              <button type="button" class="nav-dropdown-item" data-tab="pipeline-tracker" data-help="Pipeline tracker: nurture sequence status, delivery history, and manual pause or stop per lead.">📍 Pipeline Tracker</button>
               <button type="button" class="nav-dropdown-item" data-tab="lead-profile" data-help="Lead profile: review and edit all collected fields for the active lead.">👤 Lead Profile</button>
               <button type="button" class="nav-dropdown-item" data-tab="product-selector" data-help="Product selector: guided qualification and recommendations for the lead you select.">📋 Product Selector</button>
               <button type="button" class="nav-dropdown-item" data-tab="chat" data-help="Internal staff AI assistant for product and underwriting questions.">🤖 Staff Assistant</button>
@@ -2178,6 +2280,78 @@
                   <div id="oos-arch-foot-status" class="small-note"></div>
                 </form>
                 <div id="oos-arch-empty" class="q-empty">Select an archived referral.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="pane-pipeline-tracker" class="pane" aria-hidden="true">
+      <div class="compose-outer">
+        <div class="compose-panel">
+          <div class="inbox-head">
+            <div>
+              <strong>Pipeline Tracker</strong>
+              <div class="small-note">Nurture sequence state, delivery log, and per-lead controls (pause, sold, opt-out).</div>
+            </div>
+            <button type="button" id="pt-refresh-btn" class="secondary" data-help="Reload pipeline data from the server.">Refresh</button>
+          </div>
+          <div class="compose-body">
+            <div class="compose-work pt-work">
+              <aside class="compose-leads-col" aria-label="Enrolled leads">
+                <label class="compose-leads-label" for="pt-lead-filter">Filter leads</label>
+                <input
+                  id="pt-lead-filter"
+                  type="search"
+                  autocomplete="off"
+                  placeholder="Name or phone…"
+                  aria-describedby="pt-lead-list-hint"
+                />
+                <span id="pt-lead-list-hint" class="small-note" style="margin: 0">Oldest enrolled first. Click a row.</span>
+                <div id="pt-lead-list" class="compose-lead-list" role="listbox" aria-label="Enrolled leads"></div>
+              </aside>
+              <div class="compose-main-col staff-tool-main">
+                <div id="pt-empty" class="q-empty">Select a lead with nurture enrollment.</div>
+                <div id="pt-detail" class="hidden">
+                  <div class="inbox-head" style="flex-wrap: wrap; gap: 10px; align-items: flex-start">
+                    <div style="min-width: 200px">
+                      <strong id="pt-detail-name"></strong>
+                      <span id="pt-detail-stage" class="small-note" style="display: block; margin-top: 4px"></span>
+                    </div>
+                    <div style="margin-left: auto; display: flex; flex-wrap: wrap; gap: 8px">
+                      <button type="button" id="pt-btn-pause" class="secondary">Pause</button>
+                      <button type="button" id="pt-btn-resume" class="secondary">Resume</button>
+                      <button type="button" id="pt-btn-sold" class="secondary">Clear — Sold</button>
+                      <button type="button" id="pt-btn-optout" class="secondary" style="border-color: rgba(255,123,123,0.45); color: #ffb8b8">
+                        Clear — Opt-out
+                      </button>
+                      <button type="button" id="pt-btn-delete" data-help="Permanently deletes this contact and related pipeline rows (same as removing the contact).">
+                        Delete lead…
+                      </button>
+                    </div>
+                  </div>
+                  <div style="overflow: auto; margin-top: 12px">
+                    <table class="pt-table" aria-label="Nurture steps">
+                      <thead>
+                        <tr>
+                          <th>#</th>
+                          <th>Stage</th>
+                          <th>Channel</th>
+                          <th>Scheduled</th>
+                          <th>Sent</th>
+                          <th>Status</th>
+                        </tr>
+                      </thead>
+                      <tbody id="pt-steps-body"></tbody>
+                    </table>
+                  </div>
+                  <div id="pt-preview" class="pt-preview-box" style="margin-top: 16px">
+                    <div class="small-note" style="margin-bottom: 8px">Message preview / override</div>
+                    <div id="pt-preview-inner"></div>
+                  </div>
+                  <div id="pt-action-status" class="small-note" style="margin-top: 10px"></div>
+                </div>
               </div>
             </div>
           </div>
@@ -3103,6 +3277,7 @@
       var paneOosReferrals = document.getElementById("pane-oos-referrals");
       var paneOosAgents = document.getElementById("pane-oos-agents");
       var paneOosArchive = document.getElementById("pane-oos-archive");
+      var panePipelineTracker = document.getElementById("pane-pipeline-tracker");
       var navBtnLeads = document.getElementById("nav-btn-leads");
       var navBtnOos = document.getElementById("nav-btn-oos");
       var navBtnKb = document.getElementById("nav-btn-kb");
@@ -3135,6 +3310,9 @@
       var selectedOosReferralId = "";
       var oosArchiveList = [];
       var selectedOosArchiveId = "";
+      var ptLeads = [];
+      var ptSelectedContactId = "";
+      var ptSelectedStepIndex = 0;
       /** One-shot UI after push to RAG: { kind, questionId, ... } */
       var pendingRagVerify = null;
       var helpTipEl = null;
@@ -3165,7 +3343,7 @@
           item.classList.toggle("active", item.getAttribute("data-tab") === which);
         });
         var groupId =
-          { "lead-profile": "nav-dd-leads", "product-selector": "nav-dd-leads", chat: "nav-dd-leads", compose: "nav-dd-leads",
+          { "pipeline-tracker": "nav-dd-leads", "lead-profile": "nav-dd-leads", "product-selector": "nav-dd-leads", chat: "nav-dd-leads", compose: "nav-dd-leads",
             "oos-referrals": "nav-dd-oos", "oos-agents": "nav-dd-oos", "oos-archive": "nav-dd-oos",
             inbox: "nav-dd-kb", "kb-gaps": "nav-dd-kb" }[which];
         if (groupId) {
@@ -3215,6 +3393,7 @@
         var oosRefOn = which === "oos-referrals";
         var oosAgentsOn = which === "oos-agents";
         var oosArchiveOn = which === "oos-archive";
+        var pipelineTrackerOn = which === "pipeline-tracker";
         closeAllNavDropdowns();
         syncNavForTab(which);
         paneInbox.classList.toggle("active", inboxOn);
@@ -3226,6 +3405,7 @@
         if (paneOosReferrals) paneOosReferrals.classList.toggle("active", oosRefOn);
         if (paneOosAgents) paneOosAgents.classList.toggle("active", oosAgentsOn);
         if (paneOosArchive) paneOosArchive.classList.toggle("active", oosArchiveOn);
+        if (panePipelineTracker) panePipelineTracker.classList.toggle("active", pipelineTrackerOn);
         paneInbox.setAttribute("aria-hidden", inboxOn ? "false" : "true");
         paneCompose.setAttribute("aria-hidden", composeOn ? "false" : "true");
         if (paneKbGaps) paneKbGaps.setAttribute("aria-hidden", kbGapsOn ? "false" : "true");
@@ -3235,6 +3415,7 @@
         if (paneOosReferrals) paneOosReferrals.setAttribute("aria-hidden", oosRefOn ? "false" : "true");
         if (paneOosAgents) paneOosAgents.setAttribute("aria-hidden", oosAgentsOn ? "false" : "true");
         if (paneOosArchive) paneOosArchive.setAttribute("aria-hidden", oosArchiveOn ? "false" : "true");
+        if (panePipelineTracker) panePipelineTracker.setAttribute("aria-hidden", pipelineTrackerOn ? "false" : "true");
         if (kbGapsOn) void loadKbGaps();
         if (composeOn || leadProfileOn || productSelectorOn) void ensureComposeLeadsLoaded();
         if (leadProfileOn) void loadLeadProfileDetail();
@@ -3242,6 +3423,7 @@
         if (oosRefOn) void loadOosReferralsUi();
         if (oosAgentsOn) void loadOosAgentsUi();
         if (oosArchiveOn) void loadOosArchiveUi();
+        if (pipelineTrackerOn) void loadPipelineTracker();
       }
 
       function fmtDate(iso) {
@@ -3288,6 +3470,364 @@
           throw new Error(msg);
         }
         return data;
+      }
+
+      function ptBadgeClass(status) {
+        var s = String(status || "").toLowerCase();
+        if (s === "active") return "active";
+        if (s === "paused") return "paused";
+        if (s === "completed") return "completed";
+        if (s === "converted") return "converted";
+        if (s === "opted_out") return "opted_out";
+        return "completed";
+      }
+
+      function ptFindLead(contactId) {
+        if (!contactId) return null;
+        for (var i = 0; i < ptLeads.length; i++) {
+          if (ptLeads[i].contact && ptLeads[i].contact.id === contactId) return ptLeads[i];
+        }
+        return null;
+      }
+
+      function ptRenderPreview(entry) {
+        var wrap = document.getElementById("pt-preview-inner");
+        if (!wrap || !entry || !entry.steps || !entry.steps.length) return;
+        if (ptSelectedStepIndex < 0 || ptSelectedStepIndex >= entry.steps.length) ptSelectedStepIndex = 0;
+        var st = entry.steps[ptSelectedStepIndex];
+        if (!st || !st.preview) {
+          wrap.innerHTML = "<div class=\"small-note\">No preview.</div>";
+          return;
+        }
+        var p = st.preview;
+        wrap.innerHTML = "";
+        if (p.kind === "whatsapp") {
+          var d1 = document.createElement("p");
+          d1.className = "small-note";
+          d1.textContent = p.note || "";
+          var d2 = document.createElement("p");
+          d2.className = "small-note";
+          d2.textContent = "Subscriber ID on file: " + (p.subscriber_ready ? "yes" : "no");
+          wrap.appendChild(d1);
+          wrap.appendChild(d2);
+          return;
+        }
+        if (p.kind === "sms") {
+          var lab = document.createElement("label");
+          lab.className = "small-note";
+          lab.textContent = "SMS body (read-only)";
+          var ta = document.createElement("textarea");
+          ta.readOnly = true;
+          ta.className = "lp-ro";
+          ta.rows = 8;
+          ta.value = p.text || "";
+          wrap.appendChild(lab);
+          wrap.appendChild(ta);
+          return;
+        }
+        if (p.kind === "email") {
+          if (!p.editable && p.note && !((p.subject || "").trim() || (p.body || "").trim())) {
+            var nb = document.createElement("p");
+            nb.className = "small-note";
+            nb.style.lineHeight = "1.45";
+            nb.textContent = p.note;
+            wrap.appendChild(nb);
+            return;
+          }
+          var labS = document.createElement("label");
+          labS.textContent = "Subject";
+          var inp = document.createElement("input");
+          inp.type = "text";
+          inp.id = "pt-email-subj";
+          inp.value = p.subject || "";
+          if (!p.editable) inp.readOnly = true;
+          inp.className = p.editable ? "" : "lp-ro";
+          var labB = document.createElement("label");
+          labB.style.marginTop = "10px";
+          labB.style.display = "block";
+          labB.textContent = "Body (HTML)";
+          var tb = document.createElement("textarea");
+          tb.id = "pt-email-body";
+          tb.rows = 14;
+          tb.value = p.body || "";
+          if (!p.editable) tb.readOnly = true;
+          tb.className = p.editable ? "" : "lp-ro";
+          wrap.appendChild(labS);
+          wrap.appendChild(inp);
+          wrap.appendChild(labB);
+          wrap.appendChild(tb);
+          if (p.editable) {
+            var row = document.createElement("div");
+            row.style.marginTop = "10px";
+            var btn = document.createElement("button");
+            btn.type = "button";
+            btn.id = "pt-save-override";
+            btn.className = "secondary";
+            btn.textContent = "Save override for this step";
+            var hint = document.createElement("span");
+            hint.className = "small-note";
+            hint.style.marginLeft = "10px";
+            hint.textContent = p.is_override ? "Using custom copy for this lead." : "Default template until you save.";
+            row.appendChild(btn);
+            row.appendChild(hint);
+            wrap.appendChild(row);
+            btn.addEventListener("click", async function () {
+              var sj = document.getElementById("pt-email-subj");
+              var bj = document.getElementById("pt-email-body");
+              if (!sj || !bj) return;
+              var keepPh = st.phase;
+              var keepSt = st.step;
+              var cid = entry.contact.id;
+              try {
+                await authedApi(
+                  "/api/staff/nurture-override?contactId=" +
+                    encodeURIComponent(cid) +
+                    "&phase=3&step=" +
+                    encodeURIComponent(String(keepSt)),
+                  { subject: sj.value, body: bj.value },
+                  { method: "POST" }
+                );
+                var stat = document.getElementById("pt-action-status");
+                if (stat) stat.textContent = "Saved email override.";
+                await loadPipelineTracker();
+                ptSelectedContactId = cid;
+                for (var j = 0; j < ptLeads.length; j++) {
+                  var E = ptLeads[j];
+                  if (E.contact && E.contact.id === cid) {
+                    var steps = E.steps || [];
+                    for (var k = 0; k < steps.length; k++) {
+                      if (steps[k].phase === keepPh && steps[k].step === keepSt) {
+                        ptSelectedStepIndex = k;
+                        break;
+                      }
+                    }
+                    ptRenderDetail(E);
+                    break;
+                  }
+                }
+              } catch (err) {
+                alert(String((err && err.message) || err));
+              }
+            });
+          }
+        }
+      }
+
+      function ptRenderDetail(entry) {
+        var empty = document.getElementById("pt-empty");
+        var detail = document.getElementById("pt-detail");
+        if (!entry || !entry.contact) {
+          if (empty) empty.classList.remove("hidden");
+          if (detail) detail.classList.add("hidden");
+          return;
+        }
+        if (empty) empty.classList.add("hidden");
+        if (detail) detail.classList.remove("hidden");
+
+        var ns = entry.nurture_sequence || {};
+        var ls = entry.lead_state || {};
+        document.getElementById("pt-detail-name").textContent = entry.contact.name || "Lead";
+        document.getElementById("pt-detail-stage").textContent =
+          "Pipeline: " +
+          (ls.pipeline_stage || "—") +
+          " · Nurture: " +
+          String(ns.status || "") +
+          (ns.next_send_at ? " · Next send: " + fmtDate(ns.next_send_at) : "");
+
+        var steps = entry.steps || [];
+        if (ptSelectedStepIndex >= steps.length) ptSelectedStepIndex = 0;
+
+        var tbody = document.getElementById("pt-steps-body");
+        tbody.innerHTML = "";
+        for (var i = 0; i < steps.length; i++) {
+          (function (idx) {
+            var row = steps[idx];
+            var tr = document.createElement("tr");
+            tr.className = "pt-step-row";
+            if (idx === ptSelectedStepIndex) tr.classList.add("pt-row-active");
+            if (row.is_next) tr.classList.add("pt-row-next");
+            var ch = row.channel === "whatsapp" ? "ch-wa" : row.channel === "sms" ? "ch-sms" : "ch-em";
+            var chLab = row.channelUi || row.channel;
+            tr.innerHTML =
+              "<td>" +
+              escHtml(String(row.stageNumber)) +
+              "</td><td>" +
+              escHtml(row.name || "") +
+              "</td><td><span class=\"ch-pill " +
+              ch +
+              "\">" +
+              escHtml(chLab) +
+              "</span></td><td>" +
+              fmtDate(row.scheduled_at) +
+              "</td><td>" +
+              fmtDate(row.actual_sent_at) +
+              "</td><td>" +
+              escHtml(row.status || "") +
+              (row.detail_reason
+                ? " <span class=\"small-note\">(" + escHtml(row.detail_reason) + ")</span>"
+                : "") +
+              "</td>";
+            tr.addEventListener("click", function () {
+              ptSelectedStepIndex = idx;
+              var all = tbody.querySelectorAll(".pt-step-row");
+              for (var a = 0; a < all.length; a++) all[a].classList.remove("pt-row-active");
+              tr.classList.add("pt-row-active");
+              ptRenderPreview(entry);
+            });
+            tbody.appendChild(tr);
+          })(i);
+        }
+
+        var stopped = ns.status === "converted" || ns.status === "opted_out" || ns.status === "completed";
+        var pauseBtn = document.getElementById("pt-btn-pause");
+        var resumeBtn = document.getElementById("pt-btn-resume");
+        if (pauseBtn) {
+          pauseBtn.style.display = ns.status === "active" ? "inline-block" : "none";
+          pauseBtn.disabled = stopped;
+        }
+        if (resumeBtn) {
+          resumeBtn.style.display = ns.status === "paused" ? "inline-block" : "none";
+          resumeBtn.disabled = stopped;
+        }
+        var soldBtn = document.getElementById("pt-btn-sold");
+        var optBtn = document.getElementById("pt-btn-optout");
+        if (soldBtn) soldBtn.disabled = stopped;
+        if (optBtn) optBtn.disabled = stopped;
+
+        ptRenderPreview(entry);
+      }
+
+      function ptRenderList(filterText) {
+        var list = document.getElementById("pt-lead-list");
+        if (!list) return;
+        var ft = String(filterText || "").toLowerCase().trim();
+        list.innerHTML = "";
+        for (var i = 0; i < ptLeads.length; i++) {
+          (function (lead) {
+            var c = lead.contact;
+            if (!c) return;
+            var label = (c.name || "") + " " + (c.phone || "");
+            if (ft && label.toLowerCase().indexOf(ft) === -1) return;
+            var row = document.createElement("div");
+            row.className = "compose-lead-row";
+            row.setAttribute("role", "option");
+            if (c.id === ptSelectedContactId) row.classList.add("active");
+            var ns = lead.nurture_sequence || {};
+            var badge = ptBadgeClass(ns.status);
+            row.innerHTML =
+              "<div><strong>" +
+              escHtml(c.name || "—") +
+              "</strong><div class=\"small-note\">" +
+              escHtml(c.phone || "") +
+              "</div></div>" +
+              "<span class=\"pt-badge " +
+              badge +
+              "\">" +
+              escHtml(String(ns.status || "")) +
+              "</span>";
+            row.addEventListener("click", function () {
+              ptSelectedContactId = c.id;
+              ptSelectedStepIndex = 0;
+              var all = list.querySelectorAll(".compose-lead-row");
+              for (var a = 0; a < all.length; a++) all[a].classList.remove("active");
+              row.classList.add("active");
+              ptRenderDetail(lead);
+            });
+            list.appendChild(row);
+          })(ptLeads[i]);
+        }
+      }
+
+      async function loadPipelineTracker() {
+        var stat = document.getElementById("pt-action-status");
+        try {
+          var data = await authedApi("/api/staff/pipeline");
+          ptLeads = data.leads || [];
+          var flt = document.getElementById("pt-lead-filter");
+          var fv = flt ? flt.value : "";
+          if (!ptSelectedContactId && ptLeads.length && ptLeads[0].contact) {
+            ptSelectedContactId = ptLeads[0].contact.id;
+          }
+          ptRenderList(fv);
+          var sel = ptFindLead(ptSelectedContactId);
+          if (sel) {
+            ptRenderDetail(sel);
+          } else if (ptLeads.length && ptLeads[0].contact) {
+            ptSelectedContactId = ptLeads[0].contact.id;
+            ptRenderList(fv);
+            ptRenderDetail(ptLeads[0]);
+          } else {
+            ptSelectedContactId = "";
+            var pe = document.getElementById("pt-empty");
+            var pd = document.getElementById("pt-detail");
+            if (pe) pe.classList.remove("hidden");
+            if (pd) pd.classList.add("hidden");
+          }
+          if (stat) stat.textContent = "";
+        } catch (e) {
+          if (stat) stat.textContent = String((e && e.message) || e);
+        }
+      }
+
+      function wirePipelineTrackerOnce() {
+        if (document.body.getAttribute("data-pt-wired")) return;
+        document.body.setAttribute("data-pt-wired", "1");
+        var rf = document.getElementById("pt-refresh-btn");
+        if (rf)
+          rf.addEventListener("click", function () {
+            void loadPipelineTracker();
+          });
+        var fl = document.getElementById("pt-lead-filter");
+        if (fl)
+          fl.addEventListener("input", function () {
+            ptRenderList(fl.value);
+          });
+
+        function bindPatch(btnId, url) {
+          var b = document.getElementById(btnId);
+          if (!b) return;
+          b.addEventListener("click", async function () {
+            if (!ptSelectedContactId) return;
+            try {
+              await authedApi(url + "?contactId=" + encodeURIComponent(ptSelectedContactId), null, {
+                method: "PATCH",
+              });
+              var st = document.getElementById("pt-action-status");
+              if (st) st.textContent = "Updated.";
+              await loadPipelineTracker();
+            } catch (e) {
+              alert(String((e && e.message) || e));
+            }
+          });
+        }
+        bindPatch("pt-btn-pause", "/api/staff/nurture-pause");
+        bindPatch("pt-btn-resume", "/api/staff/nurture-resume");
+        bindPatch("pt-btn-sold", "/api/staff/nurture-clear-sold");
+        bindPatch("pt-btn-optout", "/api/staff/nurture-clear-opt-out");
+
+        var delBtn = document.getElementById("pt-btn-delete");
+        if (delBtn)
+          delBtn.addEventListener("click", async function () {
+            if (!ptSelectedContactId) return;
+            var ok = window.confirm(
+              "Are you sure? This will permanently delete this lead and all associated data."
+            );
+            if (!ok) return;
+            try {
+              await authedApi(
+                "/api/staff/nurture-delete?contactId=" + encodeURIComponent(ptSelectedContactId),
+                null,
+                { method: "DELETE" }
+              );
+              var st = document.getElementById("pt-action-status");
+              if (st) st.textContent = "Lead deleted.";
+              ptSelectedContactId = "";
+              ptSelectedStepIndex = 0;
+              await loadPipelineTracker();
+            } catch (e) {
+              alert(String((e && e.message) || e));
+            }
+          });
       }
 
       function getHelpTipEl() {
@@ -7949,6 +8489,7 @@
       wireDelayedHelpOn(document.getElementById("product-selector-body"));
 
       wireNavDropdownsOnce();
+      wirePipelineTrackerOnce();
       wireStaticPortalHelpOnce();
 
       (async function init() {
