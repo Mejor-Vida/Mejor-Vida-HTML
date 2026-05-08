@@ -2,7 +2,6 @@
 // Language toggle, carousel, and UI functionality
 
 document.addEventListener('DOMContentLoaded', function() {
-  const WHATSAPP_URL = 'https://wa.me/14024405438?text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20seguro%20de%20gastos%20finales.';
 
   // ========================================
   // LANGUAGE TOGGLE
@@ -58,9 +57,6 @@ document.addEventListener('DOMContentLoaded', function() {
     window.dispatchEvent(
       new CustomEvent('mvi-site-language', { detail: { code: lang } }),
     );
-
-    // Keep floating WhatsApp label language-aware.
-    updateFloatingWhatsAppLabel(lang);
 
     document.querySelectorAll('.hero-quote-bubble-link').forEach(function (lnk) {
       lnk.title = lang === 'es' ? 'Ver cotización personalizada' : 'See your personalized quote';
@@ -331,84 +327,6 @@ document.addEventListener('DOMContentLoaded', function() {
       mobileMenu.classList.toggle('hidden');
     });
   }
-
-  // ========================================
-  // FLOATING WHATSAPP BUTTON (ALL PAGES)
-  // ========================================
-  function ensureFloatingWhatsAppButton() {
-    if (document.getElementById('floating-whatsapp-btn')) return;
-
-    const styleTag = document.createElement('style');
-    styleTag.textContent = `
-      /* Sit above #mvi-assistant-root (bottom ~5.75–6.25rem + 3.5rem FAB) so the pill is not covered */
-      #floating-whatsapp-btn {
-        position: fixed;
-        right: 16px;
-        left: auto;
-        bottom: calc(max(5.75rem, env(safe-area-inset-bottom, 0px) + 4.75rem) + 3.5rem + 2.75rem);
-        z-index: 1049;
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        padding: 11px 14px;
-        border-radius: 999px;
-        background: #25D366;
-        color: #ffffff;
-        font-weight: 700;
-        font-size: 15px;
-        line-height: 1.25;
-        text-decoration: none;
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
-        max-width: min(86vw, 320px);
-        visibility: visible;
-        opacity: 1;
-        pointer-events: auto;
-      }
-      #floating-whatsapp-btn:hover {
-        filter: brightness(0.96);
-      }
-      #floating-whatsapp-btn .wa-icon {
-        font-size: 20px;
-        line-height: 1;
-      }
-      @media (max-width: 576px) {
-        #floating-whatsapp-btn {
-          right: 12px;
-          bottom: calc(max(6.25rem, env(safe-area-inset-bottom, 0px) + 5.25rem) + 3.5rem + 2.5rem);
-          padding: 10px 13px;
-          font-size: 14px;
-        }
-      }
-    `;
-    document.head.appendChild(styleTag);
-
-    const button = document.createElement('a');
-    button.id = 'floating-whatsapp-btn';
-    button.href = WHATSAPP_URL;
-    button.target = '_blank';
-    button.rel = 'noopener';
-    button.setAttribute('aria-label', 'Message us on WhatsApp');
-    button.innerHTML = '<span class="wa-icon" aria-hidden="true">💬</span><span class="wa-label"></span>';
-    document.body.appendChild(button);
-  }
-
-  function updateFloatingWhatsAppLabel(lang) {
-    const button = document.getElementById('floating-whatsapp-btn');
-    if (!button) return;
-    const label = button.querySelector('.wa-label');
-    if (!label) return;
-
-    if (lang === 'en') {
-      label.textContent = 'Message us on WhatsApp';
-      button.setAttribute('aria-label', 'Message us on WhatsApp');
-    } else {
-      label.textContent = 'Envíanos un mensaje por WhatsApp';
-      button.setAttribute('aria-label', 'Envíanos un mensaje por WhatsApp');
-    }
-  }
-
-  ensureFloatingWhatsAppButton();
-  updateFloatingWhatsAppLabel(currentLanguage);
 });
 
 // ========================================
