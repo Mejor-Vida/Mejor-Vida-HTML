@@ -112,7 +112,7 @@ def main() -> int:
             "summary": "Por qué no todas las aseguradoras son iguales; contexto de mercado y fortaleza financiera.",
             "url": blog_url,
             "image_url": data.get("image_url"),
-            "post_date_iso": "2026-05-03",
+            "post_date_iso": (data.get("post_date_iso") or "").strip() or "2026-05-03",
         }
         mkw = data.get("manychat_keywords") or ["INFO", "REVISAR"]
         weekly_package = FacebookPostPackage(

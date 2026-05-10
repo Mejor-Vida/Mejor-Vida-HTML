@@ -1,0 +1,11 @@
+Imagen del post: img/blog-generated/weekly-insurance-update-2026-05-10/fb-post-hero.png (sube esta al crear el post en Facebook).
+
+Copia y pega esto en la barra de direcciones de Chrome o Safari (vista previa del post de Facebook, mayo 2026):
+
+file:///Users/mejorvidainsurance/Desktop/mejor-vida-html%20/Mejor-Vida-HTML/facebook-posting/fb-preview-2026-05-10-final-expense-story4.html
+
+Alternativa más corta (mismo contenido; abre el archivo largo):
+
+file:///Users/mejorvidainsurance/Desktop/mejor-vida-html%20/Mejor-Vida-HTML/review-fb-may10.html
+
+Si el navegador bloquea file://, abre en Finder: Mejor-Vida-HTML → review-fb-may10.html (doble clic).
