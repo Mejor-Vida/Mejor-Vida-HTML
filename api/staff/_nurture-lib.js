@@ -13,7 +13,7 @@ function channelForPhase(phase) {
 }
 
 function stepDisplayName(phase, step) {
-  if (phase === 0 && step === 1) return "Post-quote email";
+  if (phase === 0 && step === 1) return "WA-Quote email";
   if (phase === 1) return step === 1 ? "WA — Value + book call" : "WA — Check-in";
   if (phase === 2)
     return ["SMS — Day 3", "SMS — Day 5 + VCF", "SMS — Day 7"][step - 1] || `SMS step ${step}`;
@@ -45,27 +45,25 @@ function buildPipelineSteps(nurtureRow, deliveryLogs) {
 
   const postQuoteLogs = logsByKey['0:1'] || [];
   const lastPostQuote = pickLatestLog(postQuoteLogs);
-  const postQuoteRow =
-    lastPostQuote != null
-      ? {
-          stageNumber: 1,
-          phase: 0,
-          step: 1,
-          channel: 'email',
-          channelUi: 'Email',
-          name: stepDisplayName(0, 1),
-          scheduled_at: null,
-          actual_sent_at: lastPostQuote.sent_at,
-          status:
-            lastPostQuote.status === 'sent'
-              ? 'sent'
-              : lastPostQuote.status === 'failed'
-                ? 'failed'
-                : 'skipped',
-          is_next: false,
-          detail_reason: lastPostQuote.reason || lastPostQuote.error || null,
-        }
-      : null;
+  const postQuoteRow = {
+    stageNumber: 1,
+    phase: 0,
+    step: 1,
+    channel: 'email',
+    channelUi: 'Email',
+    name: stepDisplayName(0, 1),
+    scheduled_at: enrolled,
+    actual_sent_at: lastPostQuote ? lastPostQuote.sent_at : null,
+    status: lastPostQuote
+      ? lastPostQuote.status === 'sent'
+        ? 'sent'
+        : lastPostQuote.status === 'failed'
+          ? 'failed'
+          : 'skipped'
+      : 'pending',
+    is_next: false,
+    detail_reason: lastPostQuote ? lastPostQuote.reason || lastPostQuote.error || null : null,
+  };
 
   const mainSteps = ordered.map((stDef, idx) => {
     const k = `${stDef.phase}:${stDef.step}`;
@@ -97,7 +95,7 @@ function buildPipelineSteps(nurtureRow, deliveryLogs) {
     const isNext = idx === curIdx && (st === 'active' || st === 'paused');
 
     return {
-      stageNumber: idx + 1 + (postQuoteRow ? 1 : 0),
+      stageNumber: idx + 2,
       phase: stDef.phase,
       step: stDef.step,
       channel: channelForPhase(stDef.phase),
@@ -111,7 +109,7 @@ function buildPipelineSteps(nurtureRow, deliveryLogs) {
     };
   });
 
-  return postQuoteRow ? [postQuoteRow, ...mainSteps] : mainSteps;
+  return [postQuoteRow, ...mainSteps];
 }
 
 async function fetchNurtureRow(cfg, contactId) {

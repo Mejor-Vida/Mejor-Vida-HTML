@@ -18,7 +18,7 @@ function stepPreview(contact, phase, step, overrideByStep) {
       kind: "email",
       editable: false,
       note:
-        "Immediate post-quote email after quote completes (lib/post-quote-email-html.js). Recipient is always contacts.email.",
+        "WA-Quote email: immediate post-quote email after quote completes (lib/post-quote-email-html.js). Recipient is always contacts.email.",
       subject: "",
       body: "",
     };
