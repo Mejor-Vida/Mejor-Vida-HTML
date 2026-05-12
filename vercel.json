@@ -137,6 +137,14 @@
     {
       "source": "/terms-of-service",
       "destination": "/terms-service.html"
+    },
+    {
+      "source": "/privacy-policy-en",
+      "destination": "/privacy-policy-en.html"
+    },
+    {
+      "source": "/terms-service-en",
+      "destination": "/terms-service-en.html"
     }
   ]
 }
