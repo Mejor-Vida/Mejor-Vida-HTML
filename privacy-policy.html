@@ -57,10 +57,16 @@
         var navEntry = performance.getEntriesByType('navigation')[0];
         var isReload = navEntry && navEntry.type === 'reload';
         if (isReload) sessionStorage.removeItem('sessionLang');
+        var qLang = (new URLSearchParams(window.location.search).get('lang') || '').toLowerCase();
+        if (qLang === 'en' || qLang === 'es') {
+          sessionStorage.setItem('sessionLang', qLang === 'en' ? 'en' : 'es');
+        }
         var L = sessionStorage.getItem('sessionLang') || 'es';
         document.documentElement.className = 'lang-' + L;
+        document.documentElement.setAttribute('lang', L === 'en' ? 'en' : 'es');
       } catch(e) {
         document.documentElement.className = 'lang-es';
+        document.documentElement.setAttribute('lang', 'es');
       }
     })();
   </script>
@@ -315,9 +321,9 @@
         <div class="col-12 col-md-5">
           <h4 class="h6 fw-bold mb-2">Legal</h4>
           <div class="d-flex flex-wrap gap-2 gap-md-3">
-            <a href="privacy-policy.html" class="text-white text-opacity-75 text-decoration-none" data-lang="es">Política de privacidad</a><a href="privacy-policy.html" class="text-white text-opacity-75 text-decoration-none" data-lang="en">Privacy Policy</a>
+            <a href="privacy-policy.html" class="text-white text-opacity-75 text-decoration-none" data-lang="es">Política de privacidad</a><a href="privacy-policy-en.html" class="text-white text-opacity-75 text-decoration-none" data-lang="en">Privacy Policy</a>
             <span class="text-white text-opacity-50">·</span>
-            <a href="terms-service.html" class="text-white text-opacity-75 text-decoration-none" data-lang="es">Términos de servicio</a><a href="terms-service.html" class="text-white text-opacity-75 text-decoration-none" data-lang="en">Terms of Service</a>
+            <a href="terms-service.html" class="text-white text-opacity-75 text-decoration-none" data-lang="es">Términos de servicio</a><a href="terms-service-en.html" class="text-white text-opacity-75 text-decoration-none" data-lang="en">Terms of Service</a>
           </div>
         </div>
       </div>
