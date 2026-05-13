@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contáctenos - Mejor Vida Insurance | Contact Us - Mejor Vida Insurance</title>
+  <title>Sobre Julie — Mejor Vida Insurance | About Julie — Mejor Vida Insurance</title>
+  <meta name="description" content="Historia de Julie, agente de seguros de gastos finales en Nebraska: servicio a la comunidad hispana, experiencia personal y misión de Mejor Vida Insurance." />
   <link rel="icon" type="image/x-icon" href="favicon.ico" />
   <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
   <link href="css/quote-flow-shared.css" rel="stylesheet" />
@@ -13,6 +14,9 @@
     body { font-family: Inter, system-ui, -apple-system, sans-serif; }
     html.lang-es [data-lang="en"] { display: none !important; }
     html.lang-en [data-lang="es"] { display: none !important; }
+    .julie-bio-prose { max-width: 42rem; }
+    .julie-bio-prose h2 { color: #1a365d; font-size: 1.25rem; margin-top: 2rem; margin-bottom: 0.75rem; }
+    .julie-gallery-img { width: 100%; height: 280px; object-fit: cover; border-radius: 0.5rem; }
   </style>
 </head>
 <body class="bg-light">
@@ -27,8 +31,8 @@
         <nav class="desktop-nav d-none d-lg-flex align-items-center">
           <a href="index.html#home" data-lang="es" class="nav-link-cm">Inicio</a>
           <a href="index.html#home" data-lang="en" class="nav-link-cm">Home</a>
-          <a href="about-julie.html" data-lang="es" class="nav-link-cm">Sobre Julie</a>
-          <a href="about-julie.html" data-lang="en" class="nav-link-cm">About Julie</a>
+          <a href="about-julie.html" data-lang="es" class="nav-link-cm" aria-current="page">Sobre Julie</a>
+          <a href="about-julie.html" data-lang="en" class="nav-link-cm" aria-current="page">About Julie</a>
           <a href="index.html#how-it-works" data-lang="es" class="nav-link-cm">Cómo funciona</a>
           <a href="index.html#how-it-works" data-lang="en" class="nav-link-cm">How It Works</a>
           <a href="index.html#final-expense-answers" data-lang="es" class="nav-link-cm">¿Tienes preguntas?</a>
@@ -42,14 +46,14 @@
         </nav>
         <div class="d-flex align-items-center gap-2">
           <a href="https://wa.me/14024405438?text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20seguro%20de%20gastos%20finales." target="_blank" rel="noopener" data-lang="es" class="desktop-cta d-none d-lg-inline-flex btn btn-sm fw-bold align-items-center rounded-pill px-3" style="background:#25D366;border-color:#25D366;color:#fff;"><i class="fab fa-whatsapp me-1" aria-hidden="true"></i>WhatsApp</a>
-          <a href="https://wa.me/14024405438?text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20seguro%20de%20gastos%20finales." target="_blank" rel="noopener" data-lang="en" class="desktop-cta d-none d-lg-inline-flex btn btn-sm fw-bold align-items-center rounded-pill px-3" style="background:#25D366;border-color:#25D366;color:#fff;"><i class="fab fa-whatsapp me-1" aria-hidden="true"></i>WhatsApp</a>
+          <a href="https://wa.me/14024405438?text=Hi%2C%20I%20would%20like%20information%20about%20final%20expense%20insurance." target="_blank" rel="noopener" data-lang="en" class="desktop-cta d-none d-lg-inline-flex btn btn-sm fw-bold align-items-center rounded-pill px-3" style="background:#25D366;border-color:#25D366;color:#fff;"><i class="fab fa-whatsapp me-1" aria-hidden="true"></i>WhatsApp</a>
           <a href="quote-screen.html" data-lang="es" class="desktop-cta d-none d-lg-inline-block btn-see-prices">Cotización gratuita</a>
           <a href="quote-screen.html" data-lang="en" class="desktop-cta d-none d-lg-inline-block btn-see-prices">Get a Free Quote</a>
           <div class="d-flex gap-1 ms-2">
-            <button class="lang-btn active px-2 py-1 rounded small fw-bold border-2" data-lang-btn="es">ES</button>
-            <button class="lang-btn px-2 py-1 rounded small fw-bold border-2" data-lang-btn="en">EN</button>
+            <button type="button" class="lang-btn active px-2 py-1 rounded small fw-bold border-2" data-lang-btn="es">ES</button>
+            <button type="button" class="lang-btn px-2 py-1 rounded small fw-bold border-2" data-lang-btn="en">EN</button>
           </div>
-          <button class="hamburger-btn" id="hamburger-btn" aria-label="Open menu">☰</button>
+          <button type="button" class="hamburger-btn" id="hamburger-btn" aria-label="Open menu">☰</button>
         </div>
       </div>
     </div>
@@ -67,11 +71,9 @@
       <a href="contact.html" data-lang="es" class="mobile-menu-link">Contacto</a>
       <a href="contact.html" data-lang="en" class="mobile-menu-link">Contact</a>
       <a href="https://wa.me/14024405438?text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20seguro%20de%20gastos%20finales." target="_blank" rel="noopener" data-lang="es" class="mobile-menu-link fw-bold" style="color:#1D9E53;"><i class="fab fa-whatsapp me-2"></i>WhatsApp (recomendado)</a>
-      <a href="https://wa.me/14024405438?text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20seguro%20de%20gastos%20finales." target="_blank" rel="noopener" data-lang="en" class="mobile-menu-link fw-bold" style="color:#1D9E53;"><i class="fab fa-whatsapp me-2"></i>WhatsApp (recommended)</a>
+      <a href="https://wa.me/14024405438?text=Hi%2C%20I%20would%20like%20information%20about%20final%20expense%20insurance." target="_blank" rel="noopener" data-lang="en" class="mobile-menu-link fw-bold" style="color:#1D9E53;"><i class="fab fa-whatsapp me-2"></i>WhatsApp (recommended)</a>
       <a href="quote-screen.html" data-lang="es" class="mobile-menu-link fw-bold" style="color:#0D47A1;"><i class="fas fa-file-invoice-dollar me-2"></i>Cotización gratis en línea</a>
       <a href="quote-screen.html" data-lang="en" class="mobile-menu-link fw-bold" style="color:#0D47A1;"><i class="fas fa-file-invoice-dollar me-2"></i>Free online quote</a>
-      <a href="/quote.html?schedule=1" data-lang="es" class="mobile-menu-link fw-bold" style="color:#0D47A1;"><i class="fas fa-calendar-alt me-2"></i>Agendar (después de tu información)</a>
-      <a href="/quote.html?schedule=1" data-lang="en" class="mobile-menu-link fw-bold" style="color:#0D47A1;"><i class="fas fa-calendar-alt me-2"></i>Schedule (after we have your info)</a>
       <p class="mobile-menu-link small text-muted mb-0 px-2" data-lang="es">¿Cliente actual? Línea de oficina: <a href="tel:+14024405438" class="text-decoration-none">402-440-5438</a></p>
       <p class="mobile-menu-link small text-muted mb-0 px-2" data-lang="en">Current client? Office line: <a href="tel:+14024405438" class="text-decoration-none">402-440-5438</a></p>
       <p class="mobile-menu-link small text-muted mb-0 px-2" data-lang="es">SMS/Texto: <a href="tel:+14027355665" class="text-decoration-none">402-735-5665</a></p>
@@ -82,54 +84,96 @@
   <main>
     <section class="py-5 text-center text-white" style="background:#1a365d;">
       <div class="container">
-        <h1 class="fw-bold mb-2" data-lang="es">Contáctenos</h1>
-        <h1 class="fw-bold mb-2" data-lang="en">Get in Touch</h1>
-        <p class="mb-0" data-lang="es">Estamos aquí para ayudarle con su seguro de gastos finales.</p>
-        <p class="mb-0" data-lang="en">We are here to help with your final expense coverage.</p>
+        <h1 class="fw-bold mb-2" data-lang="es">Conozca a Julie</h1>
+        <h1 class="fw-bold mb-2" data-lang="en">Meet Julie</h1>
+        <p class="mb-0 mx-auto" style="max-width:36rem;" data-lang="es">Fundadora de Mejor Vida Insurance LLC · Agente de seguros con licencia en Nebraska (#21695431)</p>
+        <p class="mb-0 mx-auto" style="max-width:36rem;" data-lang="en">Founder of Mejor Vida Insurance LLC · Licensed insurance agent in Nebraska (#21695431)</p>
       </div>
     </section>
 
     <section class="py-5">
       <div class="container">
-        <div class="row g-4">
-          <div class="col-12 col-lg-4">
-            <div class="card h-100 shadow-sm">
-              <div class="card-body">
-                <h2 class="h5">PHONE</h2>
-                <p class="mb-1">Office: <a href="tel:+14024405438">402-440-5438</a></p>
-                <p class="mb-3">SMS: <a href="tel:+14027355665">402-735-5665</a></p>
-                <h3 class="h6 mb-1">Hours / Horario</h3>
-                <p class="small mb-1">Mon–Fri: 4:00 PM – 8:00 PM CST</p>
-                <p class="small mb-0">Saturday: 8:00 AM – 12:00 PM CST</p>
-              </div>
-            </div>
+        <div class="row g-5">
+          <div class="col-lg-4 text-center text-lg-start">
+            <img src="img/julie-about.png" alt="Julie — Mejor Vida Insurance" class="img-fluid rounded-3 shadow mb-3 w-100" width="682" height="1024" decoding="async" />
+            <p class="small text-muted mb-0" data-lang="es">Julie, fundadora de Mejor Vida Insurance LLC</p>
+            <p class="small text-muted mb-0" data-lang="en">Julie, founder of Mejor Vida Insurance LLC</p>
           </div>
-          <div class="col-12 col-lg-4">
-            <div class="card h-100 shadow-sm">
-              <div class="card-body">
-                <h2 class="h5">EMAIL & ADDRESS</h2>
-                <p class="mb-1"><a href="mailto:Julie@mejorvidainsurance.com">Julie@mejorvidainsurance.com</a></p>
-                <p class="mb-2">1201 O St Ste 309 Unit #597 Lincoln, NE 68508</p>
-                <a href="https://doi.nebraska.gov" target="_blank" rel="noopener">Verify Nebraska license #21695431</a>
+          <div class="col-lg-8">
+            <article class="julie-bio-prose mx-auto mx-lg-0 text-body-secondary lh-lg">
+              <div data-lang="es">
+                <p>Nacida y criada en Bogotá, Julie siempre ha tenido una profunda pasión por servir y apoyar a la comunidad hispana. Después de conocer a su esposo en Colombia, ambos se mudaron a Nebraska para comenzar una nueva vida juntos.</p>
+                <p>Julie llegó a este país sin hablar inglés, sin saber manejar y sin tener familia cerca — solamente con su esposo, una nueva cultura por descubrir y nuevos comienzos por enfrentar. Como muchas familias inmigrantes, tuvo que aprender a adaptarse, crecer y salir adelante paso a paso. Esa experiencia le permitió entender profundamente los desafíos, los temores y las esperanzas que viven muchas familias hispanas al construir una vida en Estados Unidos.</p>
+                <p>Fue precisamente esa experiencia la que hizo crecer aún más su deseo de servir y apoyar a la comunidad hispana.</p>
+                <h2>Su trayectoria de servicio</h2>
+                <p>Su trayectoria de servicio comenzó trabajando con madres hispanas a través de MilkWorks, donde educaba, guiaba y apoyaba a las familias en temas de lactancia materna y maternidad temprana. Más adelante, colaboró con bibliotecas locales promoviendo la alfabetización dentro de la comunidad hispana mediante programas bilingües de lectura y cuentos familiares, creando espacios donde padres e hijos podían aprender y crecer juntos.</p>
+                <p>Con el tiempo, su impacto siguió creciendo y Julie asumió una misión aún más grande: ayudar a lanzar y liderar una estación de radio cristiana en español en Nebraska junto a MyBridge Radio. A través de la radio, pudo llevar mensajes de esperanza, fe y una conexión más profunda con Dios a muchas familias hispanas en su vida diaria.</p>
+                <h2>Su misión hoy</h2>
+                <p>Hoy, Julie continúa esa misma misión de servicio de una manera nueva y profundamente significativa: ayudando a las familias hispanas a entender la importancia de proteger a sus seres queridos mediante el seguro de vida y la planificación de gastos finales.</p>
+                <h2>Algo muy personal</h2>
+                <p>Para Julie, este trabajo es algo muy personal.</p>
+                <p>Cuando falleció el padre de Julie, sí contaba con una póliza de gastos finales. Sin embargo, esa cobertura no fue suficiente para cubrir todos los gastos que la familia enfrentó. Mientras sufrían el dolor de perder a alguien tan amado, también tuvieron que enfrentar el estrés y la carga financiera que afectó a la familia durante años.</p>
+                <p>Pero Julie también vivió el otro lado de la preparación.</p>
+                <p>Después de la muerte de su esposo, la mamá de Julie continuó pagando fielmente su propia protección de gastos finales durante muchos años. Cuando llegó el momento, esa planificación se convirtió en un último acto de amor y cuidado hacia su familia. En lugar de preocuparse por el aspecto financiero en medio del dolor, la familia pudo enfocarse en llorar su pérdida, apoyarse mutuamente y honrar su vida sin la presión adicional de las deudas y los gastos.</p>
+                <p>Esa experiencia dejó una huella profunda en el corazón de Julie.</p>
+                <h2>Educar y guiar</h2>
+                <p>Ahora, su pasión es educar y guiar a las familias hispanas en Nebraska y en todo Estados Unidos que quizás no entienden completamente cómo funciona el seguro de vida o por qué es tan importante. Su meta es simple: ayudar a las familias a encontrar tranquilidad, proteger a las personas que más aman y dejar un legado de cuidado, dignidad y amor.</p>
+                <p>Julie cree que cada familia merece estar informada, preparada y protegida — con compasión, honestidad y una guía en la que puedan confiar.</p>
+                <p>Hoy, Julie está lista y honrada de servir a las familias con el mismo cuidado, comprensión y corazón que inspiraron su propia historia.</p>
               </div>
-            </div>
-          </div>
-          <div class="col-12 col-lg-4">
-            <div class="card h-100 shadow-sm">
-              <div class="card-body">
-                <h2 class="h5">QUICK CONTACT</h2>
-                <div class="d-grid gap-2">
-                  <a class="btn btn-success" href="https://wa.me/14024405438" target="_blank" rel="noopener">WhatsApp</a>
-                  <a class="btn btn-outline-primary" href="quote-screen.html">Cotización</a>
-                  <a class="btn btn-outline-primary" href="https://meetings-na2.hubspot.com/julie-braunsroth/insurance-consultation-mejor-vida-insurance" target="_blank" rel="noopener" data-lang="es">Agendar con Julie</a>
-                  <a class="btn btn-outline-primary" href="https://meetings-na2.hubspot.com/julie-braunsroth/insurance-consultation-mejor-vida-insurance" target="_blank" rel="noopener" data-lang="en">Schedule with Julie</a>
-                  <a class="btn btn-outline-secondary" href="mailto:Julie@mejorvidainsurance.com">Email</a>
-                </div>
+              <div data-lang="en">
+                <p>Born and raised in Bogotá, Julie has always had a deep passion for serving and supporting the Hispanic community. After meeting her husband in Colombia, they moved to Nebraska to build a new life together.</p>
+                <p>She arrived in the United States without speaking English, without knowing how to drive, and without extended family nearby—only her husband, a new culture to discover, and new beginnings to face. Like many immigrant families, she had to learn to adapt, grow, and move forward one step at a time. That experience gave her a profound understanding of the challenges, fears, and hopes many Hispanic families carry while building a life here.</p>
+                <p>That same experience deepened her desire to serve and stand alongside the Hispanic community.</p>
+                <h2>A path of service</h2>
+                <p>Her service journey began with Hispanic mothers through MilkWorks, where she educated, guided, and supported families on breastfeeding and early motherhood. Later, she worked with local libraries to promote literacy in the Hispanic community through bilingual reading programs and family story times—creating spaces where parents and children could learn and grow together.</p>
+                <p>As her impact grew, Julie took on an even larger mission: helping launch and lead a Spanish-language Christian radio station in Nebraska with MyBridge Radio. Through radio, she brought messages of hope, faith, and a deeper connection with God into the daily lives of many Hispanic families.</p>
+                <h2>Her mission today</h2>
+                <p>Today, Julie continues that same spirit of service in a new and deeply meaningful way: helping Hispanic families understand why life insurance and final expense planning matter—and how to protect the people they love most.</p>
+                <h2>Why this work is personal</h2>
+                <p>For Julie, this work is deeply personal.</p>
+                <p>When Julie’s father passed away, he did have a final expense policy. Still, the coverage was not enough to meet all the costs the family faced. While grieving someone they loved, they also had to carry the stress and financial weight for years.</p>
+                <p>But Julie also saw the other side of being prepared.</p>
+                <p>After her husband’s death, Julie’s mother faithfully kept her own final expense protection in place for many years. When the time came, that planning became a final act of love and care for the family. Instead of worrying about money in the middle of grief, the family could focus on mourning, supporting one another, and honoring her life—without the added pressure of debt and bills.</p>
+                <p>That experience left a lasting mark on Julie’s heart.</p>
+                <h2>Educating and guiding families</h2>
+                <p>Now, her passion is to educate and guide Hispanic families across Nebraska and the United States who may not fully understand how life insurance works—or why it matters. Her goal is simple: help families find peace of mind, protect the people they love most, and leave a legacy of care, dignity, and love.</p>
+                <p>Julie believes every family deserves to be informed, prepared, and protected—with compassion, honesty, and guidance they can trust.</p>
+                <p>Today, Julie is ready and honored to serve families with the same care, understanding, and heart that shaped her own story.</p>
               </div>
-            </div>
+            </article>
+            <p class="mt-4 mb-0">
+              <a href="quote-screen.html" class="btn btn-primary fw-bold me-2" data-lang="es">Cotización gratuita</a>
+              <a href="quote-screen.html" class="btn btn-primary fw-bold me-2" data-lang="en">Get a free quote</a>
+              <a href="index.html#about" class="btn btn-outline-primary fw-bold" data-lang="es">Volver al resumen en inicio</a>
+              <a href="index.html#about" class="btn btn-outline-primary fw-bold" data-lang="en">Back to the short bio on the home page</a>
+            </p>
           </div>
         </div>
+      </div>
+    </section>
 
+    <section class="py-5 border-top bg-white">
+      <div class="container">
+        <h2 class="h3 fw-bold text-center mb-4" style="color:#1a365d;" data-lang="es">Retratos</h2>
+        <h2 class="h3 fw-bold text-center mb-4" style="color:#1a365d;" data-lang="en">Portraits</h2>
+        <div class="row g-4 justify-content-center">
+          <div class="col-12 col-sm-6 col-lg-4">
+            <img src="img/julie-about.png" alt="" class="julie-gallery-img shadow-sm" width="682" height="1024" decoding="async" loading="lazy" />
+            <p class="small text-muted mt-2 mb-0 text-center" data-lang="es">Julie en el estudio — imagen promocional</p>
+            <p class="small text-muted mt-2 mb-0 text-center" data-lang="en">Julie — promotional portrait</p>
+          </div>
+          <div class="col-12 col-sm-6 col-lg-4">
+            <img src="img/Julie_Avatar.png" alt="" class="julie-gallery-img shadow-sm" width="512" height="512" decoding="async" loading="lazy" />
+            <p class="small text-muted mt-2 mb-0 text-center" data-lang="es">Avatar y presencia digital</p>
+            <p class="small text-muted mt-2 mb-0 text-center" data-lang="en">Digital presence / avatar</p>
+          </div>
+          <div class="col-12 col-sm-6 col-lg-4">
+            <img src="img/julie_cartoon_refined.png" alt="" class="julie-gallery-img shadow-sm" width="600" height="600" decoding="async" loading="lazy" />
+            <p class="small text-muted mt-2 mb-0 text-center" data-lang="es">Ilustración de Julie</p>
+            <p class="small text-muted mt-2 mb-0 text-center" data-lang="en">Illustration of Julie</p>
+          </div>
+        </div>
       </div>
     </section>
   </main>
@@ -215,11 +259,16 @@
         sessionStorage.setItem("sessionLang", lang);
         var logo = document.getElementById("header-logo");
         if (logo) logo.src = lang === "es" ? "img/logo-spanish2.png" : "img/logo-english2.png";
+        var flo = document.getElementById("footer-logo");
+        if (flo) flo.src = lang === "es" ? "img/logo-spanish2.png" : "img/logo-english2.png";
       }
       var current = sessionStorage.getItem("sessionLang") || "es";
       setLanguage(current);
       document.querySelectorAll("[data-lang-btn]").forEach(function (btn) {
         btn.addEventListener("click", function () { setLanguage(btn.getAttribute("data-lang-btn")); });
+      });
+      document.querySelectorAll("[data-lang-btn]").forEach(function (btn) {
+        btn.classList.toggle("active", btn.getAttribute("data-lang-btn") === current);
       });
       var y = document.getElementById('year');
       if (y) y.textContent = new Date().getFullYear();
