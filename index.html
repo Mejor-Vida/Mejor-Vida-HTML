@@ -26,7 +26,7 @@
   <meta property="og:description" content="Proteja a su familia con seguro de gastos finales. Empiece con una cotización en línea o WhatsApp; coordinamos una llamada cuando tenga sentido." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://www.mejorvidainsurance.com/" />
-  <meta property="og:image" content="https://www.mejorvidainsurance.com/img/couple-smiling.png" />
+  <meta property="og:image" content="https://www.mejorvidainsurance.com/img/hero-couple-embrace.png" />
   <meta property="og:locale" content="es_ES" />
   <meta property="og:locale:alternate" content="en_US" />
 
@@ -34,7 +34,7 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Seguro de Gastos Finales | Mejor Vida Insurance" />
   <meta name="twitter:description" content="Proteja a su familia con seguro de gastos finales. Empiece con una cotización en línea o WhatsApp; coordinamos una llamada cuando tenga sentido." />
-  <meta name="twitter:image" content="https://www.mejorvidainsurance.com/img/couple-smiling.png" />
+  <meta name="twitter:image" content="https://www.mejorvidainsurance.com/img/hero-couple-embrace.png" />
 
   <!-- Hreflang (single URL with language toggle) -->
   <link rel="alternate" hreflang="es" href="https://www.mejorvidainsurance.com/" />
@@ -216,19 +216,21 @@
       transform-origin: center bottom;
     }
     /* First two slides: larger and lower to avoid head crop */
-    .carousel-slide:nth-child(1) img,
-    .carousel-slide:nth-child(2) img {
-      object-position: center 130%;
-      transform: scale(1.5) translateY(16%);
-      transform-origin: center bottom;
-    }
     .carousel-slide:nth-child(1) img {
       object-position: center 136%;
       transform: scale(1.5) translateY(20%);
+      transform-origin: center bottom;
     }
-    .carousel-slide:nth-child(2) img {
-      object-position: center 133%;
+    .carousel-slide:nth-child(2) .hero-couple-slide-frame {
+      position: absolute;
+      inset: 0;
+      overflow: visible;
       transform: scale(1.5) translateY(18%);
+      transform-origin: center bottom;
+    }
+    .carousel-slide:nth-child(2) .hero-couple-slide-frame img {
+      object-position: center 133%;
+      transform: none;
     }
     /* Expand-in effect: each slide starts small and expands to full size when active */
     @keyframes heroCarouselExpand {
@@ -254,20 +256,20 @@
       transform: scale(1.46) translateY(8%);
       transform-origin: center bottom;
     }
-    .carousel-slide:nth-child(1).active img,
-    .carousel-slide:nth-child(2).active img {
-      animation: none;
-      object-position: center 130%;
-      transform: scale(1.5) translateY(16%);
-      transform-origin: center bottom;
-    }
     .carousel-slide:nth-child(1).active img {
+      animation: none;
       object-position: center 136%;
       transform: scale(1.5) translateY(20%);
+      transform-origin: center bottom;
     }
-    .carousel-slide:nth-child(2).active img {
-      object-position: center 133%;
+    .carousel-slide:nth-child(2).active .hero-couple-slide-frame {
+      animation: none;
       transform: scale(1.5) translateY(18%);
+      transform-origin: center bottom;
+    }
+    .carousel-slide:nth-child(2).active .hero-couple-slide-frame img {
+      object-position: center 133%;
+      transform: none;
     }
     @media (max-width: 991px) {
       .carousel-slide img {
@@ -275,21 +277,19 @@
         transform: scale(1.24);
       }
       .carousel-slide:nth-child(1) img,
-      .carousel-slide:nth-child(2) img,
-      .carousel-slide:nth-child(1).active img,
-      .carousel-slide:nth-child(2).active img {
-        object-position: center 124%;
-        transform: scale(1.34) translateY(12%);
-      }
-      .carousel-slide:nth-child(1) img,
       .carousel-slide:nth-child(1).active img {
         object-position: center 128%;
         transform: scale(1.34) translateY(15%);
       }
-      .carousel-slide:nth-child(2) img,
-      .carousel-slide:nth-child(2).active img {
-        object-position: center 126%;
+      .carousel-slide:nth-child(2) .hero-couple-slide-frame,
+      .carousel-slide:nth-child(2).active .hero-couple-slide-frame {
         transform: scale(1.34) translateY(13%);
+        transform-origin: center bottom;
+      }
+      .carousel-slide:nth-child(2) .hero-couple-slide-frame img,
+      .carousel-slide:nth-child(2).active .hero-couple-slide-frame img {
+        object-position: center 126%;
+        transform: none;
       }
       .carousel-slide:nth-child(3) img,
       .carousel-slide:nth-child(3).active img {
@@ -303,6 +303,53 @@
       .carousel-slide:nth-child(5).active img {
         object-position: center 120%;
         transform: scale(1.3) translateY(6%);
+      }
+    }
+
+    /* Julie's parents — small heart + name (slide 2); frame shares zoom with img */
+    .hero-couple-slide-frame {
+      pointer-events: none;
+    }
+    .hero-couple-slide-frame img {
+      pointer-events: none;
+    }
+    .hero-couple-name-tag {
+      position: absolute;
+      z-index: 6;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.28rem;
+      font-size: clamp(0.62rem, 1.85vw, 0.8rem);
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      padding: 0.2rem 0.48rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.94);
+      color: #1a365d;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.28);
+      line-height: 1;
+      white-space: nowrap;
+    }
+    .hero-couple-name-tag .fa-heart {
+      color: #e11d48;
+      font-size: 0.72em;
+    }
+    .hero-couple-name-tag--dad {
+      left: 17%;
+      top: 28%;
+    }
+    .hero-couple-name-tag--mom {
+      right: 17%;
+      top: 28%;
+    }
+    @media (max-width: 991px) {
+      .hero-couple-name-tag--dad {
+        left: 11%;
+        top: 26%;
+      }
+      .hero-couple-name-tag--mom {
+        right: 11%;
+        top: 26%;
       }
     }
     
@@ -1134,7 +1181,19 @@
               <img src="img/business-man.png" alt="Profesional" />
             </div>
             <div class="carousel-slide" data-hero-couple="true">
-              <img src="img/couple-smiling.png" alt="Pareja sonriendo" />
+              <div class="hero-couple-slide-frame">
+                <img src="img/hero-couple-embrace.png" alt="Los padres de Julie, abrazados" />
+                <span class="hero-couple-name-tag hero-couple-name-tag--dad">
+                  <i class="fas fa-heart" aria-hidden="true"></i>
+                  <span data-lang="es">Papa</span>
+                  <span data-lang="en">dad</span>
+                </span>
+                <span class="hero-couple-name-tag hero-couple-name-tag--mom">
+                  <i class="fas fa-heart" aria-hidden="true"></i>
+                  <span data-lang="es">Mama</span>
+                  <span data-lang="en">Mom</span>
+                </span>
+              </div>
             </div>
             <div class="carousel-slide">
               <img src="img/happy-family.png" alt="Familia feliz" />
