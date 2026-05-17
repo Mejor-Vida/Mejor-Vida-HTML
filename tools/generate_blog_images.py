@@ -110,7 +110,7 @@ def call_fal_image(
     last_error = None
     for attempt in range(1, max_retries + 1):
         try:
-            resp = requests.post(endpoint, json=payload, headers=headers, timeout=60)
+            resp = requests.post(endpoint, json=payload, headers=headers, timeout=180)
             resp.raise_for_status()
             result = resp.json()
             images = result.get("images", [])
@@ -434,7 +434,7 @@ def main() -> int:
     if args.rewrite_story is not None:
         office_idx = max(1, args.office_story)
         if args.story_prompt_override:
-            prompt = f"{args.story_prompt_override.strip()} {STORY_DESK_SUFFIX}"
+            prompt = f"{args.story_prompt_override.strip()} {NARRATIVE_MODIFIERS}"
         else:
             title = args.story[0]
             prompt = build_story_prompt(title, args.rewrite_story, office_idx)
