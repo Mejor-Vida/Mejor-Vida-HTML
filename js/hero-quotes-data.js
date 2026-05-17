@@ -1,11 +1,11 @@
 /** Homepage hero carousel — illustrative monthly amounts; edit here when marketing copy changes. */
 window.HERO_CAROUSEL_QUOTES = [
   {
-    "carrierKey": "assurity",
-    "logo": "img/carriers/assurity-wordmark.png",
-    "logoAlt": "Assurity",
+    "carrierKey": "mutual-of-omaha",
+    "logo": "img/carriers/mutual-of-omaha-emblem.png",
+    "logoAlt": "Mutual of Omaha",
     "coverage": "$10,000",
-    "rate": "33.41",
+    "rate": "35.20",
     "gender": "male",
     "position": {
       "bottom": "20%",
@@ -29,11 +29,11 @@ window.HERO_CAROUSEL_QUOTES = [
         }
       },
       {
-        "carrierKey": "assurity",
-        "logo": "img/carriers/assurity-wordmark.png",
-        "logoAlt": "Assurity",
+        "carrierKey": "mutual-of-omaha",
+        "logo": "img/carriers/mutual-of-omaha-emblem.png",
+        "logoAlt": "Mutual of Omaha",
         "coverage": "$15,000",
-        "rate": "46.77",
+        "rate": "48.25",
         "gender": "male",
         "position": {
           "bottom": "20%",
@@ -57,11 +57,11 @@ window.HERO_CAROUSEL_QUOTES = [
     }
   },
   {
-    "carrierKey": "assurity",
-    "logo": "img/carriers/assurity-wordmark.png",
-    "logoAlt": "Assurity",
+    "carrierKey": "mutual-of-omaha",
+    "logo": "img/carriers/mutual-of-omaha-emblem.png",
+    "logoAlt": "Mutual of Omaha",
     "coverage": "$15,000",
-    "rate": "40.92",
+    "rate": "42.15",
     "gender": "female",
     "position": {
       "bottom": "24%",
