@@ -145,6 +145,14 @@
     {
       "source": "/about-julie",
       "destination": "/about-julie.html"
+    },
+    {
+      "source": "/terms-service-en",
+      "destination": "/terms-service-en.html"
+    },
+    {
+      "source": "/sms-optin",
+      "destination": "/sms-optin.html"
     }
   ]
 }
