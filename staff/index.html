@@ -2295,7 +2295,13 @@
               <strong>Pipeline Tracker</strong>
               <div class="small-note">Nurture sequence state, delivery log, and per-lead controls (pause, sold, opt-out).</div>
             </div>
-            <button type="button" id="pt-refresh-btn" class="secondary" data-help="Reload pipeline data from the server.">Refresh</button>
+            <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px">
+              <label class="small-note" style="display: flex; align-items: center; gap: 6px; margin: 0; cursor: pointer; user-select: none">
+                <input type="checkbox" id="pt-show-stopped" />
+                Show sold / opt-out / completed
+              </label>
+              <button type="button" id="pt-refresh-btn" class="secondary" data-help="Reload pipeline data from the server.">Refresh</button>
+            </div>
           </div>
           <div class="compose-body">
             <div class="compose-work pt-work">
@@ -2308,7 +2314,7 @@
                   placeholder="Name or phone…"
                   aria-describedby="pt-lead-list-hint"
                 />
-                <span id="pt-lead-list-hint" class="small-note" style="margin: 0">Oldest enrolled first. Click a row.</span>
+                <span id="pt-lead-list-hint" class="small-note" style="margin: 0">Active nurture only (sold/opt-out/completed hidden). Use the checkbox above to show them.</span>
                 <div id="pt-lead-list" class="compose-lead-list" role="listbox" aria-label="Enrolled leads"></div>
               </aside>
               <div class="compose-main-col staff-tool-main">
@@ -3741,7 +3747,10 @@
       async function loadPipelineTracker() {
         var stat = document.getElementById("pt-action-status");
         try {
-          var data = await authedApi("/api/staff/pipeline");
+          var showStopped = document.getElementById("pt-show-stopped");
+          var pipelineQs =
+            showStopped && showStopped.checked ? "?includeStopped=1" : "";
+          var data = await authedApi("/api/staff/pipeline" + pipelineQs);
           ptLeads = data.leads || [];
           var flt = document.getElementById("pt-lead-filter");
           var fv = flt ? flt.value : "";
@@ -3775,6 +3784,11 @@
         var rf = document.getElementById("pt-refresh-btn");
         if (rf)
           rf.addEventListener("click", function () {
+            void loadPipelineTracker();
+          });
+        var ptShowStopped = document.getElementById("pt-show-stopped");
+        if (ptShowStopped)
+          ptShowStopped.addEventListener("change", function () {
             void loadPipelineTracker();
           });
         var fl = document.getElementById("pt-lead-filter");

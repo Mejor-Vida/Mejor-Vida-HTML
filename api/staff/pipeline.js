@@ -70,12 +70,20 @@ module.exports = async function handler(req, res) {
   if (!cfg) return json(res, 500, { error: "Server misconfigured" });
 
   try {
-    const nsRows = await restSelect(
+    let nsRows = await restSelect(
       cfg,
       "nurture_sequence",
       "select=*,contacts(id,first_name,last_name,full_name,phone,email,language,idioma,manychat_subscriber_id,vcf_sent_at)" +
         "&order=enrolled_at.asc.nullslast&limit=500"
     );
+
+    const includeStopped = ["1", "true", "yes", "on"].includes(
+      String((req.query && req.query.includeStopped) || "").toLowerCase()
+    );
+    if (!includeStopped) {
+      const terminal = new Set(["converted", "opted_out", "completed"]);
+      nsRows = nsRows.filter((r) => !terminal.has(String((r && r.status) || "").toLowerCase()));
+    }
 
     const contactIds = nsRows.map((r) => r.contact_id).filter(Boolean);
     if (!contactIds.length) {
