@@ -1,4 +1,12 @@
 {
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "mejorvidainsurance.com" }],
+      "destination": "https://www.mejorvidainsurance.com/:path*",
+      "permanent": true
+    }
+  ],
   "functions": {
     "api/**/*.js": {
       "maxDuration": 60

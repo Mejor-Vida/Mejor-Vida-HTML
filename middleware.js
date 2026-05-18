@@ -30,7 +30,7 @@ function buildContentSecurityPolicy(nonce) {
     `style-src 'self' ${n} ${styleHosts} 'unsafe-inline'`,
     "font-src 'self' data: https://fonts.gstatic.com https://cdnjs.cloudflare.com",
     "img-src 'self' data: https: blob:",
-    "connect-src 'self' https://*.supabase.co wss://*.supabase.co https://www.facebook.com https://connect.facebook.net",
+    "connect-src 'self' https://*.supabase.co wss://*.supabase.co https://www.facebook.com https://facebook.com https://connect.facebook.net https://*.facebook.com https://*.facebook.net",
     "media-src 'self' https:",
     "frame-src 'self' https://meetings-na2.hubspot.com https://*.hubspot.com https://*.hsforms.com",
     "form-action 'self' https://meetings-na2.hubspot.com https://*.hubspot.com",
