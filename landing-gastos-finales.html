@@ -2719,14 +2719,18 @@
               throw new Error(data.error || data.quote_error || 'No hay datos para esa combinación.');
             }
             var quoteSummary = 'Landing FB: rango $10K ' + data.quote_low + ' – ' + data.quote_high + ' (medio ' + data.quote_anchor + '). Edad ' + age + ', ' + sex + ', tabaco ' + (smoker ? 'sí' : 'no') + '.';
+            var firstName = String(fd.get('firstName') || '').trim();
+            var lastName = String(fd.get('lastName') || '').trim();
+            var email = String(fd.get('email') || '').trim();
+            var phone = String(fd.get('phone') || '').trim();
             var syncRes = await fetch('/api/quote-lead-sync', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({
-                firstName: String(fd.get('firstName') || '').trim(),
-                lastName: String(fd.get('lastName') || '').trim(),
-                email: String(fd.get('email') || '').trim(),
-                phone: String(fd.get('phone') || '').trim(),
+                firstName: firstName,
+                lastName: lastName,
+                email: email,
+                phone: phone,
                 state: 'NE',
                 quoteSummary: quoteSummary,
                 quoteLow: data.quote_low,
@@ -2743,6 +2747,15 @@
               }),
             });
             var syncData = await syncRes.json().catch(function () { return {}; });
+            if (syncRes.ok && syncData.ok && typeof fbq === 'function') {
+              fbq('track', 'Lead', {}, {
+                em: email,
+                ph: phone,
+                fn: firstName,
+                ln: lastName,
+                ge: sex === 'male' ? 'm' : 'f',
+              });
+            }
             var resultHtml =
               '<span class="lp-quote-results-range">Rango mensual estimado ($10,000): ' + data.quote_low + ' – ' + data.quote_high + '</span>' +
               '<span class="lp-quote-results-note">Punto medio: ' + data.quote_anchor + ' · No es precio final; Julie confirma opciones reales.</span>';

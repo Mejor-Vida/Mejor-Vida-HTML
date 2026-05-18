@@ -188,7 +188,9 @@ module.exports = async function handler(req, res) {
       ? "out_of_state_referral"
       : body.source === "nebraska_quote_page"
         ? "nebraska_quote_page"
-        : "fexquotes_page";
+        : body.source === "facebook_landing_gastos_finales"
+          ? "facebook_landing_gastos_finales"
+          : "fexquotes_page";
 
   let stateCode = String(body.state || "")
     .trim()
