@@ -4,10 +4,16 @@
  * Used by quote.html and quote-out-of-state.html — in-browser quote tool posts follow-up here;
  * out-of-state referrals use source: out_of_state_referral.
  *
- * Vercel env: SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, HUBSPOT_ACCESS_TOKEN
+ * Vercel env: SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, HUBSPOT_ACCESS_TOKEN,
+ *             GMAIL_CLIENT_ID, GMAIL_CLIENT_SECRET, GMAIL_REFRESH_TOKEN, GMAIL_FROM_EMAIL
  */
 
 const crypto = require("crypto");
+const { google } = require("googleapis");
+
+const GMAIL_REDIRECT_URI = "https://www.mejorvidainsurance.com/api/staff/gmail-callback";
+const FB_LANDING_NOTIFY_TO =
+  "admin@mejorvidainsurance.com, julie@mejorvidainsurance.com";
 
 function json(res, status, payload) {
   res.status(status).setHeader("Content-Type", "application/json");
@@ -157,6 +163,97 @@ function capiNormalizePhone(phone) {
   let digits = String(phone || "").replace(/\D/g, "");
   if (digits.length === 10) digits = "1" + digits;
   return digits || null;
+}
+
+function buildGmailRawEmail(fromEmail, toEmail, subject, bodyText) {
+  const lines = [
+    `From: ${fromEmail}`,
+    `To: ${toEmail}`,
+    `Subject: ${subject}`,
+    "MIME-Version: 1.0",
+    "Content-Type: text/plain; charset=UTF-8",
+    "",
+    bodyText,
+  ];
+  return Buffer.from(lines.join("\r\n"), "utf8")
+    .toString("base64")
+    .replace(/\+/g, "-")
+    .replace(/\//g, "_")
+    .replace(/=+$/g, "");
+}
+
+function notifyGenderLabel(sex) {
+  const s = String(sex || "").toLowerCase();
+  if (s === "male") return "Male";
+  if (s === "female") return "Female";
+  return sex ? String(sex) : "N/A";
+}
+
+function notifyTobaccoLabel(smoker) {
+  if (smoker === true || smoker === "true") return "Yes";
+  if (smoker === false || smoker === "false") return "No";
+  return "N/A";
+}
+
+function notifyQuoteRange(quoteLow, quoteHigh) {
+  const low = String(quoteLow ?? "").trim();
+  const high = String(quoteHigh ?? "").trim();
+  if (low && high) return `${low} - ${high}`;
+  if (low) return low;
+  if (high) return high;
+  return "N/A";
+}
+
+async function sendFacebookLandingLeadNotification({
+  leadSource,
+  firstName,
+  lastName,
+  email,
+  phone,
+  age,
+  sex,
+  smoker,
+  quoteLow,
+  quoteHigh,
+}) {
+  try {
+    if (leadSource !== "facebook_landing_gastos_finales") return;
+
+    const clientId = process.env.GMAIL_CLIENT_ID;
+    const clientSecret = process.env.GMAIL_CLIENT_SECRET;
+    const refreshToken = process.env.GMAIL_REFRESH_TOKEN;
+    const fromEmail = process.env.GMAIL_FROM_EMAIL || "julie@mejorvidainsurance.com";
+    if (!clientId || !clientSecret || !refreshToken) {
+      console.log("[NOTIFY] skipped — Gmail not configured");
+      return;
+    }
+
+    const fullName = `${firstName || ""} ${lastName || ""}`.trim() || "Unknown";
+    const subject = `🔔 New Lead: ${fullName}`;
+    const bodyText = [
+      "New lead from Facebook landing page:",
+      "",
+      `Full name: ${fullName}`,
+      `Phone number: ${phone || "N/A"}`,
+      `Email address: ${email || "N/A"}`,
+      `Age: ${age != null && String(age).trim() !== "" ? String(age).trim() : "N/A"}`,
+      `Gender: ${notifyGenderLabel(sex)}`,
+      `Tobacco status: ${notifyTobaccoLabel(smoker)}`,
+      `Quote range: ${notifyQuoteRange(quoteLow, quoteHigh)}`,
+      "Source: facebook_landing_gastos_finales",
+    ].join("\n");
+
+    const raw = buildGmailRawEmail(fromEmail, FB_LANDING_NOTIFY_TO, subject, bodyText);
+    const oauth2Client = new google.auth.OAuth2(clientId, clientSecret, GMAIL_REDIRECT_URI);
+    oauth2Client.setCredentials({ refresh_token: refreshToken });
+    const gmail = google.gmail({ version: "v1", auth: oauth2Client });
+    const sendResp = await gmail.users.messages.send({ userId: "me", requestBody: { raw } });
+    const messageId =
+      sendResp && sendResp.data && sendResp.data.id ? String(sendResp.data.id) : null;
+    console.log("[NOTIFY] success", messageId || "sent");
+  } catch (e) {
+    console.log("[NOTIFY] failure", e.message || String(e));
+  }
 }
 
 async function sendMetaCAPIEvent({ leadSource, email, phone, firstName, lastName, sex }) {
@@ -444,6 +541,18 @@ module.exports = async function handler(req, res) {
   }
 
   if (!hubspotToken) {
+    await sendFacebookLandingLeadNotification({
+      leadSource,
+      firstName,
+      lastName,
+      email,
+      phone,
+      age: body.age,
+      sex: body.sex,
+      smoker: body.smoker,
+      quoteLow: body.quoteLow,
+      quoteHigh: body.quoteHigh,
+    });
     return json(res, 200, {
       ok: true,
       id: leadId,
@@ -493,6 +602,19 @@ module.exports = async function handler(req, res) {
     firstName,
     lastName,
     sex: body.sex,
+  });
+
+  await sendFacebookLandingLeadNotification({
+    leadSource,
+    firstName,
+    lastName,
+    email,
+    phone,
+    age: body.age,
+    sex: body.sex,
+    smoker: body.smoker,
+    quoteLow: body.quoteLow,
+    quoteHigh: body.quoteHigh,
   });
 
   return json(res, 200, {
