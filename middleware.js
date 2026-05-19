@@ -24,6 +24,19 @@ function buildContentSecurityPolicy(nonce) {
     "base-uri 'self'",
     "frame-ancestors 'self'",
     "object-src 'none'",
+    /*
+     * IMPORTANT — DO NOT MODIFY WITHOUT READING THIS:
+     * The following CSP directives are required for the Meta Pixel to work:
+     *
+     * form-action: must include https://www.facebook.com
+     * frame-src: must include https://www.facebook.com
+     * connect-src: must include https://www.facebook.com and https://connect.facebook.net
+     * script-src: must include https://connect.facebook.net (fbevents.js)
+     *
+     * Removing these will silently break the Meta Pixel Lead event and
+     * Advanced Matching — ads will stop optimizing without any visible error.
+     * Last confirmed working: May 2026.
+     */
     `script-src 'self' ${n} https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://cdn.tailwindcss.com https://connect.facebook.net`,
     `style-src-elem 'self' ${n} ${styleHosts}`,
     "style-src-attr 'unsafe-inline'",
