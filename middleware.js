@@ -32,8 +32,8 @@ function buildContentSecurityPolicy(nonce) {
     "img-src 'self' data: https: blob:",
     "connect-src 'self' https://*.supabase.co wss://*.supabase.co https://www.facebook.com https://facebook.com https://connect.facebook.net https://*.facebook.com https://*.facebook.net",
     "media-src 'self' https:",
-    "frame-src 'self' https://meetings-na2.hubspot.com https://*.hubspot.com https://*.hsforms.com",
-    "form-action 'self' https://meetings-na2.hubspot.com https://*.hubspot.com",
+    "frame-src 'self' https://www.facebook.com https://meetings-na2.hubspot.com https://*.hubspot.com https://*.hsforms.com",
+    "form-action 'self' https://www.facebook.com https://meetings-na2.hubspot.com https://*.hubspot.com",
     "upgrade-insecure-requests",
   ].join("; ");
 }
