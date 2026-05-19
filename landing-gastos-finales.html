@@ -2747,9 +2747,7 @@
               }),
             });
             var syncData = await syncRes.json().catch(function () { return {}; });
-            console.log('syncRes.ok:', syncRes.ok, 'syncRes.status:', syncRes.status, 'syncData:', syncData, 'fbq:', typeof fbq);
             if (syncRes.ok && syncData.ok && typeof fbq === 'function') {
-              console.log('Firing Lead event');
               fbq('track', 'Lead', {}, {
                 em: email,
                 ph: phone,
@@ -2757,8 +2755,6 @@
                 ln: lastName,
                 ge: sex === 'male' ? 'm' : 'f',
               });
-            } else {
-              console.log('Lead event skipped — syncRes.ok:', syncRes.ok, 'syncData.ok:', syncData && syncData.ok, 'fbq:', typeof fbq);
             }
             var resultHtml =
               '<span class="lp-quote-results-range">Rango mensual estimado ($10,000): ' + data.quote_low + ' – ' + data.quote_high + '</span>' +
