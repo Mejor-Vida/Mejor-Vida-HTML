@@ -9,16 +9,7 @@
  */
 
 const crypto = require("crypto");
-const { google } = require("googleapis");
-
-const GMAIL_REDIRECT_URI = "https://www.mejorvidainsurance.com/api/staff/gmail-callback";
-const QUOTE_LEAD_NOTIFY_TO =
-  "admin@mejorvidainsurance.com, julie@mejorvidainsurance.com";
-
-const QUOTE_LEAD_NOTIFY_SOURCES = new Set([
-  "facebook_landing_gastos_finales",
-  "nebraska_quote_page",
-]);
+const { sendQuoteLeadNotification } = require("../lib/ic-lead-notify");
 
 function json(res, status, payload) {
   res.status(status).setHeader("Content-Type", "application/json");
@@ -168,107 +159,6 @@ function capiNormalizePhone(phone) {
   let digits = String(phone || "").replace(/\D/g, "");
   if (digits.length === 10) digits = "1" + digits;
   return digits || null;
-}
-
-function buildGmailRawEmail(fromEmail, toEmail, subject, bodyText) {
-  const lines = [
-    `From: ${fromEmail}`,
-    `To: ${toEmail}`,
-    `Subject: ${subject}`,
-    "MIME-Version: 1.0",
-    "Content-Type: text/plain; charset=UTF-8",
-    "",
-    bodyText,
-  ];
-  return Buffer.from(lines.join("\r\n"), "utf8")
-    .toString("base64")
-    .replace(/\+/g, "-")
-    .replace(/\//g, "_")
-    .replace(/=+$/g, "");
-}
-
-function notifyGenderLabel(sex) {
-  const s = String(sex || "").toLowerCase();
-  if (s === "male") return "Male";
-  if (s === "female") return "Female";
-  return sex ? String(sex) : "N/A";
-}
-
-function notifyTobaccoLabel(smoker) {
-  if (smoker === true || smoker === "true") return "Yes";
-  if (smoker === false || smoker === "false") return "No";
-  return "N/A";
-}
-
-function notifyQuoteRange(quoteLow, quoteHigh) {
-  const low = String(quoteLow ?? "").trim();
-  const high = String(quoteHigh ?? "").trim();
-  if (low && high) return `${low} - ${high}`;
-  if (low) return low;
-  if (high) return high;
-  return "N/A";
-}
-
-function notifySourceIntro(leadSource) {
-  if (leadSource === "facebook_landing_gastos_finales") {
-    return "New lead from Facebook landing page:";
-  }
-  if (leadSource === "nebraska_quote_page") {
-    return "New lead from website quote tool (quote.html):";
-  }
-  return "New quote lead:";
-}
-
-async function sendQuoteLeadNotification({
-  leadSource,
-  firstName,
-  lastName,
-  email,
-  phone,
-  age,
-  sex,
-  smoker,
-  quoteLow,
-  quoteHigh,
-}) {
-  try {
-    if (!QUOTE_LEAD_NOTIFY_SOURCES.has(leadSource)) return;
-
-    const clientId = process.env.GMAIL_CLIENT_ID;
-    const clientSecret = process.env.GMAIL_CLIENT_SECRET;
-    const refreshToken = process.env.GMAIL_REFRESH_TOKEN;
-    const fromEmail = process.env.GMAIL_FROM_EMAIL || "julie@mejorvidainsurance.com";
-    if (!clientId || !clientSecret || !refreshToken) {
-      console.log("[NOTIFY] skipped — Gmail not configured");
-      return;
-    }
-
-    const fullName = `${firstName || ""} ${lastName || ""}`.trim() || "Unknown";
-    const subject = `🔔 New Lead: ${fullName}`;
-    const bodyText = [
-      notifySourceIntro(leadSource),
-      "",
-      `Full name: ${fullName}`,
-      `Phone number: ${phone || "N/A"}`,
-      `Email address: ${email || "N/A"}`,
-      `Age: ${age != null && String(age).trim() !== "" ? String(age).trim() : "N/A"}`,
-      `Gender: ${notifyGenderLabel(sex)}`,
-      `Tobacco status: ${notifyTobaccoLabel(smoker)}`,
-      `Quote range: ${notifyQuoteRange(quoteLow, quoteHigh)}`,
-      `Source: ${leadSource}`,
-    ].join("\n");
-
-    const raw = buildGmailRawEmail(fromEmail, QUOTE_LEAD_NOTIFY_TO, subject, bodyText);
-    const oauth2Client = new google.auth.OAuth2(clientId, clientSecret, GMAIL_REDIRECT_URI);
-    oauth2Client.setCredentials({ refresh_token: refreshToken });
-    const gmail = google.gmail({ version: "v1", auth: oauth2Client });
-    const sendResp = await gmail.users.messages.send({ userId: "me", requestBody: { raw } });
-    const messageId =
-      sendResp && sendResp.data && sendResp.data.id ? String(sendResp.data.id) : null;
-    console.log("[NOTIFY] success", messageId || "sent");
-  } catch (e) {
-    console.log("[NOTIFY] failure", e.message || String(e));
-  }
 }
 
 async function sendMetaCAPIEvent({ leadSource, email, phone, firstName, lastName, sex }) {
@@ -567,6 +457,21 @@ module.exports = async function handler(req, res) {
       smoker: body.smoker,
       quoteLow: body.quoteLow,
       quoteHigh: body.quoteHigh,
+      quoteAnchor: body.quoteAnchor,
+      quoteSummary,
+      state: stateCode,
+      address: body.address,
+      addressLine1: body.addressLine1,
+      addressLine2: body.addressLine2,
+      city: body.city,
+      zip: body.zip,
+      county: body.county,
+      dob: body.dob || body.dateOfBirth,
+      lang,
+      leadId,
+      submittedAt: nowIso,
+      originDetail,
+      sessionClientId,
     });
     return json(res, 200, {
       ok: true,
@@ -630,6 +535,21 @@ module.exports = async function handler(req, res) {
     smoker: body.smoker,
     quoteLow: body.quoteLow,
     quoteHigh: body.quoteHigh,
+    quoteAnchor: body.quoteAnchor,
+    quoteSummary,
+    state: stateCode,
+    address: body.address,
+    addressLine1: body.addressLine1,
+    addressLine2: body.addressLine2,
+    city: body.city,
+    zip: body.zip,
+    county: body.county,
+    dob: body.dob || body.dateOfBirth,
+    lang,
+    leadId,
+    submittedAt: nowIso,
+    originDetail,
+    sessionClientId,
   });
 
   return json(res, 200, {
