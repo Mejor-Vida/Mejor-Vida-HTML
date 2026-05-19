@@ -12,8 +12,13 @@ const crypto = require("crypto");
 const { google } = require("googleapis");
 
 const GMAIL_REDIRECT_URI = "https://www.mejorvidainsurance.com/api/staff/gmail-callback";
-const FB_LANDING_NOTIFY_TO =
+const QUOTE_LEAD_NOTIFY_TO =
   "admin@mejorvidainsurance.com, julie@mejorvidainsurance.com";
+
+const QUOTE_LEAD_NOTIFY_SOURCES = new Set([
+  "facebook_landing_gastos_finales",
+  "nebraska_quote_page",
+]);
 
 function json(res, status, payload) {
   res.status(status).setHeader("Content-Type", "application/json");
@@ -204,7 +209,17 @@ function notifyQuoteRange(quoteLow, quoteHigh) {
   return "N/A";
 }
 
-async function sendFacebookLandingLeadNotification({
+function notifySourceIntro(leadSource) {
+  if (leadSource === "facebook_landing_gastos_finales") {
+    return "New lead from Facebook landing page:";
+  }
+  if (leadSource === "nebraska_quote_page") {
+    return "New lead from website quote tool (quote.html):";
+  }
+  return "New quote lead:";
+}
+
+async function sendQuoteLeadNotification({
   leadSource,
   firstName,
   lastName,
@@ -217,7 +232,7 @@ async function sendFacebookLandingLeadNotification({
   quoteHigh,
 }) {
   try {
-    if (leadSource !== "facebook_landing_gastos_finales") return;
+    if (!QUOTE_LEAD_NOTIFY_SOURCES.has(leadSource)) return;
 
     const clientId = process.env.GMAIL_CLIENT_ID;
     const clientSecret = process.env.GMAIL_CLIENT_SECRET;
@@ -231,7 +246,7 @@ async function sendFacebookLandingLeadNotification({
     const fullName = `${firstName || ""} ${lastName || ""}`.trim() || "Unknown";
     const subject = `🔔 New Lead: ${fullName}`;
     const bodyText = [
-      "New lead from Facebook landing page:",
+      notifySourceIntro(leadSource),
       "",
       `Full name: ${fullName}`,
       `Phone number: ${phone || "N/A"}`,
@@ -240,10 +255,10 @@ async function sendFacebookLandingLeadNotification({
       `Gender: ${notifyGenderLabel(sex)}`,
       `Tobacco status: ${notifyTobaccoLabel(smoker)}`,
       `Quote range: ${notifyQuoteRange(quoteLow, quoteHigh)}`,
-      "Source: facebook_landing_gastos_finales",
+      `Source: ${leadSource}`,
     ].join("\n");
 
-    const raw = buildGmailRawEmail(fromEmail, FB_LANDING_NOTIFY_TO, subject, bodyText);
+    const raw = buildGmailRawEmail(fromEmail, QUOTE_LEAD_NOTIFY_TO, subject, bodyText);
     const oauth2Client = new google.auth.OAuth2(clientId, clientSecret, GMAIL_REDIRECT_URI);
     oauth2Client.setCredentials({ refresh_token: refreshToken });
     const gmail = google.gmail({ version: "v1", auth: oauth2Client });
@@ -541,7 +556,7 @@ module.exports = async function handler(req, res) {
   }
 
   if (!hubspotToken) {
-    await sendFacebookLandingLeadNotification({
+    await sendQuoteLeadNotification({
       leadSource,
       firstName,
       lastName,
@@ -604,7 +619,7 @@ module.exports = async function handler(req, res) {
     sex: body.sex,
   });
 
-  await sendFacebookLandingLeadNotification({
+  await sendQuoteLeadNotification({
     leadSource,
     firstName,
     lastName,
