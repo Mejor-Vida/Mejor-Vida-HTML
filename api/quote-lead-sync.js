@@ -167,7 +167,7 @@ async function sendMetaCAPIEvent({ leadSource, email, phone, firstName, lastName
     if (!accessToken) return;
 
     const userData = {
-      ge: sex === "male" ? "m" : "f",
+      ge: capiSha256(sex === "male" ? "m" : "f"),
     };
     const emNorm = String(email || "")
       .trim()
