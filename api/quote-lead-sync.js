@@ -7,6 +7,8 @@
  * Vercel env: SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, HUBSPOT_ACCESS_TOKEN
  */
 
+const crypto = require("crypto");
+
 function json(res, status, payload) {
   res.status(status).setHeader("Content-Type", "application/json");
   res.send(JSON.stringify(payload));
@@ -144,6 +146,75 @@ async function hubspotUpdateContact(token, id, properties) {
   if (!r.ok) {
     const t = await r.text();
     throw new Error(`HubSpot patch ${r.status}: ${t.slice(0, 400)}`);
+  }
+}
+
+function capiSha256(value) {
+  return crypto.createHash("sha256").update(value).digest("hex");
+}
+
+function capiNormalizePhone(phone) {
+  let digits = String(phone || "").replace(/\D/g, "");
+  if (digits.length === 10) digits = "1" + digits;
+  return digits || null;
+}
+
+async function sendMetaCAPIEvent({ leadSource, email, phone, firstName, lastName, sex }) {
+  try {
+    if (leadSource !== "facebook_landing_gastos_finales") return;
+
+    const accessToken = process.env.META_CAPI_ACCESS_TOKEN;
+    if (!accessToken) return;
+
+    const userData = {
+      ge: sex === "male" ? "m" : "f",
+    };
+    const emNorm = String(email || "")
+      .trim()
+      .toLowerCase();
+    if (emNorm) userData.em = [capiSha256(emNorm)];
+
+    const phNorm = capiNormalizePhone(phone);
+    if (phNorm) userData.ph = [capiSha256(phNorm)];
+
+    const fnNorm = String(firstName || "")
+      .trim()
+      .toLowerCase();
+    if (fnNorm) userData.fn = [capiSha256(fnNorm)];
+
+    const lnNorm = String(lastName || "")
+      .trim()
+      .toLowerCase();
+    if (lnNorm) userData.ln = [capiSha256(lnNorm)];
+
+    const payload = {
+      data: [
+        {
+          event_name: "Lead",
+          event_time: Math.floor(Date.now() / 1000),
+          action_source: "website",
+          event_source_url:
+            "https://www.mejorvidainsurance.com/landing-gastos-finales.html",
+          user_data: userData,
+          custom_data: { currency: "USD", value: 0 },
+        },
+      ],
+    };
+
+    const url = `https://graph.facebook.com/v19.0/873141755808233/events?access_token=${encodeURIComponent(accessToken)}`;
+    const r = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+    const text = await r.text();
+    if (!r.ok) {
+      console.log("[CAPI] failure", r.status, text.slice(0, 400));
+      return;
+    }
+    console.log("[CAPI] success", text.slice(0, 400));
+  } catch (e) {
+    console.log("[CAPI] failure", e.message || String(e));
   }
 }
 
@@ -414,6 +485,15 @@ module.exports = async function handler(req, res) {
   } catch (e) {
     console.error("quote-lead-sync supabase patch", e);
   }
+
+  await sendMetaCAPIEvent({
+    leadSource,
+    email,
+    phone,
+    firstName,
+    lastName,
+    sex: body.sex,
+  });
 
   return json(res, 200, {
     ok: true,
