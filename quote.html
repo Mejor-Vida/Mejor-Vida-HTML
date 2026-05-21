@@ -306,14 +306,6 @@
     html.lang-es [data-lang="en"] { display: none !important; }
     html.lang-en [data-lang="es"] { display: none !important; }
 
-    /* Consent copy: block-level lang spans (avoids inline overlap inside form-check labels) */
-    #ql-consent-block [data-lang="es"],
-    #ql-consent-block [data-lang="en"] {
-      display: block;
-    }
-    html.lang-es #ql-consent-block [data-lang="en"] { display: none !important; }
-    html.lang-en #ql-consent-block [data-lang="es"] { display: none !important; }
-
     .quote-form-card { max-width: 42rem; }
 
     /* In-house $10K FE range (quote_ranges + /api/quote-site) */
@@ -529,16 +521,10 @@
               </div>
             </div>
 
-            <div id="ql-consent-block" class="mb-3 p-3 rounded-3 border" style="border-color: rgba(13, 71, 161, 0.35) !important; background: #f8fafc;">
-              <p class="small fw-semibold mb-2" data-lang="en">By submitting this form:</p>
-              <div class="form-check mb-0">
-                <input type="checkbox" class="form-check-input mt-1" id="ql-consent" name="consent" value="1" required aria-required="true" />
-                <label class="form-check-label small" for="ql-consent">
-                  <span data-lang="es">Al enviar este formulario, autorizo a Mejor Vida Insurance LLC a contactarme por mensajes de texto (SMS), WhatsApp, correo electrónico y llamadas telefónicas sobre opciones de seguro. Frecuencia SMS: 1–5 mensajes por semana. Pueden aplicar tarifas de mensajes y datos. Responda STOP para cancelar los SMS. Ver <a href="/privacy-policy.html" class="text-decoration-underline">Política de Privacidad</a>.</span>
-                  <span data-lang="en">By submitting this form, I authorize Mejor Vida Insurance LLC to contact me via SMS text messages, WhatsApp, email, and phone calls about insurance options. Frequency: 1–5 messages per week. Message and data rates may apply. Reply STOP to cancel SMS. See <a href="/privacy-policy.html" class="text-decoration-underline">Privacy Policy</a>.</span>
-                </label>
-              </div>
-            </div>
+            <p id="ql-sms-consent-disclosure" class="small text-muted mb-2">
+              <span data-lang="es">Al enviar este formulario, usted acepta recibir mensajes de texto (SMS) de Mejor Vida Insurance LLC sobre opciones de seguro. Frecuencia: 1–5 mensajes por semana. Pueden aplicar tarifas de mensajes y datos. Responda STOP para cancelar. El consentimiento no es condición para obtener una cotización ni para contratar un seguro. Política de Privacidad: <a href="/privacy-policy-en.html" class="text-decoration-underline">Política de Privacidad</a>.</span>
+              <span data-lang="en">By submitting this form, you consent to receive SMS text messages from Mejor Vida Insurance LLC about insurance options. Frequency: 1–5 messages per week. Msg &amp; data rates may apply. Reply STOP to cancel. Consent is not a condition of receiving a quote or purchasing insurance. Privacy Policy: <a href="/privacy-policy-en.html" class="text-decoration-underline">Privacy Policy</a>.</span>
+            </p>
 
             <div class="d-grid mb-2">
               <button type="submit" class="btn btn-primary fw-bold px-4" id="mvi-quote-submit">
@@ -890,7 +876,7 @@
               age: age,
               sex: sex,
               smoker: smoker,
-              consent: document.getElementById('ql-consent').checked,
+              consent: true,
               lang: lang,
               source: 'nebraska_quote_page',
               sessionClientId: sessionClientId,
