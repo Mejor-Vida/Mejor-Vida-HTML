@@ -300,9 +300,9 @@ module.exports = async function handler(req, res) {
         error: "Consent to contact by a licensed agent in your state is required",
       });
     }
-  } else if (!body.consent) {
-    return json(res, 400, { ok: false, error: "Consent required" });
   }
+
+  const smsConsentOptIn = body.consent === true || body.consent === "true";
 
   let nebraskaQuote = null;
   if (leadSource === "nebraska_quote_page") {
@@ -397,12 +397,14 @@ module.exports = async function handler(req, res) {
         }
       : {
           followUp: true,
+          smsOptIn: smsConsentOptIn,
           marketingOptIn: {
-            sms: true,
+            sms: smsConsentOptIn,
             email: true,
             phoneCalls: true,
-            label:
-              "User opted in to SMS, email, and phone calls from Julie / Mejor Vida Insurance about this quote and related follow-up.",
+            label: smsConsentOptIn
+              ? "User opted in to SMS via optional checkbox on quote form."
+              : "User submitted quote without SMS opt-in (optional checkbox unchecked).",
           },
           at: nowIso,
           lang,

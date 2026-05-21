@@ -521,10 +521,13 @@
               </div>
             </div>
 
-            <p id="ql-sms-consent-disclosure" class="small text-muted mb-2">
-              <span data-lang="es">Al enviar este formulario, usted acepta recibir mensajes de texto (SMS) de Mejor Vida Insurance LLC sobre opciones de seguro. Frecuencia: 1–5 mensajes por semana. Pueden aplicar tarifas de mensajes y datos. Responda STOP para cancelar. El consentimiento no es condición para obtener una cotización ni para contratar un seguro. Política de Privacidad: <a href="/privacy-policy-en.html" class="text-decoration-underline">Política de Privacidad</a>.</span>
-              <span data-lang="en">By submitting this form, you consent to receive SMS text messages from Mejor Vida Insurance LLC about insurance options. Frequency: 1–5 messages per week. Msg &amp; data rates may apply. Reply STOP to cancel. Consent is not a condition of receiving a quote or purchasing insurance. Privacy Policy: <a href="/privacy-policy-en.html" class="text-decoration-underline">Privacy Policy</a>.</span>
-            </p>
+            <div class="form-check mb-2">
+              <input type="checkbox" class="form-check-input mt-1" id="ql-sms-consent" name="consent" value="1" />
+              <label class="form-check-label small text-muted" for="ql-sms-consent">
+                <span data-lang="es">Sí, acepto recibir mensajes de texto (SMS) de Mejor Vida Insurance LLC sobre opciones de seguro. Frecuencia: 1–5 mensajes por semana. Pueden aplicar tarifas de mensajes y datos. Responda STOP para cancelar. El consentimiento no es obligatorio para obtener una cotización ni para contratar un seguro. Política de Privacidad: <a href="/privacy-policy-en.html" class="text-decoration-underline">Política de Privacidad</a>.</span>
+                <span data-lang="en">Yes, I agree to receive SMS text messages from Mejor Vida Insurance LLC about insurance options. Frequency: 1–5 messages per week. Msg &amp; data rates may apply. Reply STOP to cancel. Consent is not required to get a quote or purchase insurance. <a href="/privacy-policy-en.html" class="text-decoration-underline">Privacy Policy</a>.</span>
+              </label>
+            </div>
 
             <div class="d-grid mb-2">
               <button type="submit" class="btn btn-primary fw-bold px-4" id="mvi-quote-submit">
@@ -876,7 +879,7 @@
               age: age,
               sex: sex,
               smoker: smoker,
-              consent: true,
+              consent: !!document.getElementById('ql-sms-consent')?.checked,
               lang: lang,
               source: 'nebraska_quote_page',
               sessionClientId: sessionClientId,
