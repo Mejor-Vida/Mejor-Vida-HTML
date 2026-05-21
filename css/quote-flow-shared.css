@@ -320,6 +320,25 @@
       }
     }
 
+    /* ES/EN toggle — active state (shared by quote flow + final expense estimator) */
+    .lang-btn {
+      background-color: #fff;
+      color: #1a365d;
+      cursor: pointer;
+      transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+    }
+
+    .lang-btn:hover {
+      background-color: #f1f5f9;
+      color: #1a365d;
+    }
+
+    .lang-btn.active {
+      background-color: #0d47a1 !important;
+      border-color: #0d47a1 !important;
+      color: #fff !important;
+    }
+
     /* Language toggle: show only the selected language. Must override Bootstrap's !important. */
     html.lang-es [data-lang="en"] { display: none !important; }
     html.lang-en [data-lang="es"] { display: none !important; }
