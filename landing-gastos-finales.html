@@ -2671,6 +2671,10 @@
 
       setQuoteResultsIdle();
 
+      function mviPhoneHasMinDigits(phone) {
+        return String(phone || '').replace(/\D/g, '').length >= 10;
+      }
+
       function setSpanishQuoteValidity(form) {
         form.querySelectorAll('input, select, textarea').forEach(function (el) {
           el.setCustomValidity('');
@@ -2701,6 +2705,12 @@
             setSpanishQuoteValidity(form);
             var firstInvalid = form.querySelector(':invalid');
             if (firstInvalid) firstInvalid.reportValidity();
+            return;
+          }
+          var phoneInput = form.querySelector('[name="phone"]');
+          if (phoneInput && !mviPhoneHasMinDigits(phoneInput.value)) {
+            phoneInput.setCustomValidity('Ingresa un número de teléfono válido (mínimo 10 dígitos).');
+            phoneInput.reportValidity();
             return;
           }
           var fd = new FormData(form);
@@ -2759,12 +2769,14 @@
                 ge: sex === 'male' ? 'm' : 'f',
               });
             }
+            if (!syncRes.ok || !syncData.ok) {
+              throw new Error(
+                syncData.error || 'No pudimos guardar tus datos. Revisa el teléfono y los demás campos e intenta de nuevo.'
+              );
+            }
             var resultHtml =
               '<span class="lp-quote-results-range">Rango mensual estimado ($10,000): ' + data.quote_low + ' – ' + data.quote_high + '</span>' +
               '<span class="lp-quote-results-note">Punto medio: ' + data.quote_anchor + ' · No es precio final; Julie confirma opciones reales.</span>';
-            if (!syncRes.ok || !syncData.ok) {
-              resultHtml += '<span class="lp-quote-results-note text-danger d-block mt-2">No pudimos guardar tus datos. Intenta de nuevo o agenda abajo.</span>';
-            }
             showQuoteResults(resultHtml, 'success');
             if (syncRes.ok && syncData.ok && quoteScheduleHint) {
               quoteScheduleHint.classList.remove('d-none');

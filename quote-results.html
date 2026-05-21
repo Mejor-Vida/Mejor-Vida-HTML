@@ -471,6 +471,7 @@
       </div>
 
       <div id="mvi-results-body" class="d-none">
+        <div id="mvi-results-lead-warning" class="d-none alert alert-warning small mb-4" role="alert"></div>
         <div class="mvi-result-range-card text-center mb-4">
           <p class="small text-body-secondary text-uppercase fw-semibold mb-2" style="letter-spacing:0.06em;" data-lang="es">Rango mensual típico</p>
           <p class="small text-body-secondary text-uppercase fw-semibold mb-2" style="letter-spacing:0.06em;" data-lang="en">Typical monthly range</p>
@@ -719,6 +720,18 @@
       }
 
       body.classList.remove('d-none');
+
+      var leadWarn = document.getElementById('mvi-results-lead-warning');
+      if (leadWarn && q.leadSaved === false) {
+        var warnLang = document.documentElement.classList.contains('lang-en') ? 'en' : 'es';
+        leadWarn.classList.remove('d-none');
+        leadWarn.textContent =
+          warnLang === 'es'
+            ? (q.syncError || 'No pudimos guardar sus datos') +
+              '. Su estimación aparece abajo. Vuelva al cotizador para corregir su teléfono o correo, o llame al 402-440-5438.'
+            : (q.syncError || 'We could not save your details') +
+              '. Your estimate is below. Return to the quote tool to fix your phone or email, or call 402-440-5438.';
+      }
 
       if (q.leadId) {
         mviPostAnalytics({

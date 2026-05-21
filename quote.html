@@ -783,16 +783,40 @@
       var out = document.getElementById('mvi-quote-result');
       var btn = document.getElementById('mvi-quote-submit');
       var flowMsg = document.getElementById('mvi-flow-msg');
+      var phoneEl = document.getElementById('ql-phone');
       if (!form || !out) return;
+
+      function mviPhoneHasMinDigits(phone) {
+        return String(phone || '').replace(/\D/g, '').length >= 10;
+      }
+
+      function validateQuotePhone(lang) {
+        if (!phoneEl) return true;
+        phoneEl.setCustomValidity('');
+        if (mviPhoneHasMinDigits(phoneEl.value)) return true;
+        phoneEl.setCustomValidity(
+          lang === 'es'
+            ? 'Ingresa un número de teléfono válido (mínimo 10 dígitos).'
+            : 'Enter a valid phone number (at least 10 digits).'
+        );
+        phoneEl.reportValidity();
+        return false;
+      }
+
+      if (phoneEl) {
+        phoneEl.addEventListener('input', function () {
+          phoneEl.setCustomValidity('');
+        });
+      }
 
       form.addEventListener('submit', async function (e) {
         e.preventDefault();
+        var lang = document.documentElement.classList.contains('lang-en') ? 'en' : 'es';
         if (!form.checkValidity()) {
           form.reportValidity();
           return;
         }
-
-        var lang = document.documentElement.classList.contains('lang-en') ? 'en' : 'es';
+        if (!validateQuotePhone(lang)) return;
         var fd = new FormData(form);
         if (fd.get('website')) return;
 
@@ -889,36 +913,7 @@
           var syncData = await syncRes.json().catch(function () {
             return {};
           });
-          if (!syncRes.ok || !syncData.ok) {
-            out.classList.add('text-success');
-            out.style.color = '';
-            out.innerHTML =
-              lang === 'es'
-                ? '<strong>Rango mensual estimado ($10K):</strong> ' +
-                  data.quote_low +
-                  ' – ' +
-                  data.quote_high +
-                  ' <span class="text-body-secondary">(punto medio ' +
-                  data.quote_anchor +
-                  ')</span>'
-                : '<strong>Estimated monthly range ($10K):</strong> ' +
-                  data.quote_low +
-                  ' – ' +
-                  data.quote_high +
-                  ' <span class="text-body-secondary">(mid ' +
-                  data.quote_anchor +
-                  ')</span>';
-            if (flowMsg) {
-              flowMsg.classList.remove('d-none');
-              flowMsg.classList.add('text-danger');
-              flowMsg.textContent =
-                syncData.error ||
-                (lang === 'es'
-                  ? 'Su cotización se calculó, pero no pudimos guardar sus datos. Intente de nuevo o use Agendar abajo.'
-                  : 'Your quote was calculated, but we could not save your details. Please try again or use Book below.');
-            }
-            return;
-          }
+          var leadSaved = syncRes.ok && syncData.ok;
 
           try {
             sessionStorage.setItem(
@@ -933,7 +928,14 @@
                 sex: sex,
                 smoker: smoker,
                 savedAt: new Date().toISOString(),
-                leadId: syncData.id || null,
+                leadId: leadSaved ? syncData.id || null : null,
+                leadSaved: leadSaved,
+                syncError: leadSaved
+                  ? null
+                  : syncData.error ||
+                    (lang === 'es'
+                      ? 'No pudimos guardar sus datos.'
+                      : 'We could not save your details.'),
                 sessionClientId: sessionClientId,
               })
             );
