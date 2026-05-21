@@ -949,13 +949,56 @@
       line-height: 1.25;
       align-self: center;
     }
+    .nav-link-cm.nav-link-fe-calc-wrap {
+      white-space: normal !important;
+      max-width: 5.5rem;
+      text-align: center;
+      line-height: 1.2;
+      align-self: center;
+      display: inline-block;
+      font-size: 13px;
+    }
 
     .header-inner .desktop-nav {
-      flex: 1 1 auto !important;
+      flex: 1 1 0 !important;
+      min-width: 0 !important;
       margin-left: 0 !important;
-      gap: 0 !important;
-      justify-content: space-evenly !important;
-      max-width: 100%;
+      gap: 0.2rem 0.45rem !important;
+      justify-content: flex-start !important;
+      padding-right: 0.35rem;
+    }
+    .header-inner > .d-flex.align-items-center.gap-2,
+    .header-inner > .header-actions {
+      flex-shrink: 0 !important;
+      margin-left: auto !important;
+    }
+    @media (min-width: 992px) {
+      .header-inner .desktop-nav .nav-link-cm {
+        padding: 4px 6px !important;
+        font-size: 14px;
+      }
+      .header-inner .desktop-nav .nav-link-cm.nav-link-schedule-wrap {
+        max-width: 5.25rem;
+        font-size: 13px;
+      }
+    }
+
+    .header-whatsapp-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      background: #25d366;
+      color: #fff !important;
+      font-weight: 700;
+      font-size: 0.875rem;
+      padding: 0.35rem 0.85rem;
+      border-radius: 999px;
+      white-space: nowrap;
+      transition: background 0.15s ease;
+    }
+    .header-whatsapp-btn:hover {
+      background: #1da851;
+      color: #fff !important;
     }
     
     /* Header sticks to top when scrolling. */
@@ -1221,6 +1264,8 @@
           
           <a href="blog.html" data-lang="es" class="nav-link-cm">Blog</a>
           <a href="blog.html" data-lang="en" class="nav-link-cm">Blog</a>
+          <a href="final-expense-estimator.html" data-lang="es" class="nav-link-cm nav-link-fe-calc-wrap">Calculadora de gastos finales</a>
+          <a href="final-expense-estimator.html" data-lang="en" class="nav-link-cm nav-link-fe-calc-wrap">Final Expense Calculator</a>
           <a href="contact.html" data-lang="es" class="nav-link-cm">Contacto</a>
           <a href="contact.html" data-lang="en" class="nav-link-cm">Contact</a>
 
@@ -1228,10 +1273,8 @@
           <a href="/quote.html?schedule=1" data-lang="en" class="nav-link-cm nav-link-schedule-wrap">Schedule with Julie</a>
         </nav>
 
-        <!-- Right side: WhatsApp + quote first; phone reserved for footer / existing clients -->
-        <div class="d-flex align-items-center gap-2">
-          <a href="https://wa.me/14024405438?text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20seguro%20de%20gastos%20finales." target="_blank" rel="noopener" data-lang="es" class="desktop-cta d-none d-lg-inline-flex btn btn-sm fw-bold align-items-center rounded-pill px-3" style="background:#25D366;border-color:#25D366;color:#fff;"><i class="fab fa-whatsapp me-1" aria-hidden="true"></i>WhatsApp</a>
-          <a href="https://wa.me/14024405438?text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20seguro%20de%20gastos%20finales." target="_blank" rel="noopener" data-lang="en" class="desktop-cta d-none d-lg-inline-flex btn btn-sm fw-bold align-items-center rounded-pill px-3" style="background:#25D366;border-color:#25D366;color:#fff;"><i class="fab fa-whatsapp me-1" aria-hidden="true"></i>WhatsApp</a>
+        <!-- Right side: quote + language (WhatsApp on office bar below) -->
+        <div class="d-flex align-items-center gap-2 header-actions">
           <a href="/quote-screen.html" data-lang="es" class="desktop-cta d-none d-lg-inline-block btn-see-prices">
             Cotización gratuita
           </a>
@@ -1256,8 +1299,10 @@
         </div>
       </div>
     </div>
-    <div class="border-top py-2 d-none d-lg-block" style="background:#f8fbff;">
-      <div class="container d-flex flex-wrap gap-3 justify-content-end small">
+    <div class="border-top py-2 d-none d-lg-block header-office-bar" style="background:#f8fbff;">
+      <div class="container d-flex flex-wrap gap-3 align-items-center justify-content-end small">
+        <a href="https://wa.me/14024405438?text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20seguro%20de%20gastos%20finales." target="_blank" rel="noopener" data-lang="es" class="header-whatsapp-btn text-decoration-none"><i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp</a>
+        <a href="https://wa.me/14024405438?text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20seguro%20de%20gastos%20finales." target="_blank" rel="noopener" data-lang="en" class="header-whatsapp-btn text-decoration-none"><i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp</a>
         <span data-lang="es"><strong>Oficina:</strong> <a href="tel:+14024405438" class="text-decoration-none">402-440-5438</a></span>
         <span data-lang="en"><strong>Office:</strong> <a href="tel:+14024405438" class="text-decoration-none">402-440-5438</a></span>
         <span data-lang="es"><strong>SMS/Texto:</strong> <a href="tel:+14027355665" class="text-decoration-none">402-735-5665</a></span>
@@ -1277,6 +1322,8 @@
       <a href="#final-expense-answers" data-lang="en" class="mobile-menu-link">Got questions?</a>
       <a href="blog.html" data-lang="es" class="mobile-menu-link">Blog</a>
       <a href="blog.html" data-lang="en" class="mobile-menu-link">Blog</a>
+      <a href="final-expense-estimator.html" data-lang="es" class="mobile-menu-link fw-bold" style="color:#0D47A1;">Calculadora de gastos finales</a>
+      <a href="final-expense-estimator.html" data-lang="en" class="mobile-menu-link fw-bold" style="color:#0D47A1;">Final Expense Calculator</a>
       <a href="contact.html" data-lang="es" class="mobile-menu-link">Contacto</a>
       <a href="contact.html" data-lang="en" class="mobile-menu-link">Contact</a>
       <a href="https://wa.me/14024405438?text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20seguro%20de%20gastos%20finales." target="_blank" rel="noopener" data-lang="es" class="mobile-menu-link fw-bold" style="color:#1D9E53;"><i class="fab fa-whatsapp me-2"></i>WhatsApp (recomendado)</a>

@@ -94,6 +94,16 @@
       line-height: 1.25;
       align-self: center;
     }
+
+    .nav-link-cm.nav-link-fe-calc-wrap {
+      white-space: normal !important;
+      max-width: 5.5rem;
+      text-align: center;
+      line-height: 1.2;
+      align-self: center;
+      display: inline-block;
+      font-size: 13px;
+    }
     
     /* Header free-quote CTA - yellow/orange */
     .btn-see-prices {
@@ -177,7 +187,51 @@
     .header-logo-wrap { flex: 0 0 auto; display: flex !important; align-items: center !important; justify-content: center !important; height: 81px !important; padding: 0 !important; margin-left: -120px !important; margin-right: 1rem !important; }
     .header-logo { height: 244px !important; width: auto !important; max-height: none !important; object-fit: contain; display: block !important; transform: translateY(8px) !important; }
     .nav-link-cm { white-space: nowrap !important; }
-    .header-inner .desktop-nav { flex: 1 1 auto !important; margin-left: 0 !important; gap: 0 !important; justify-content: space-evenly !important; max-width: 100%; }
+    .nav-link-cm.nav-link-schedule-wrap,
+    .nav-link-cm.nav-link-fe-calc-wrap {
+      white-space: normal !important;
+    }
+    .header-inner .desktop-nav {
+      flex: 1 1 0 !important;
+      min-width: 0 !important;
+      margin-left: 0 !important;
+      gap: 0.2rem 0.45rem !important;
+      justify-content: flex-start !important;
+      padding-right: 0.35rem;
+    }
+    .header-inner > .d-flex.align-items-center.gap-2,
+    .header-inner > .header-actions {
+      flex-shrink: 0 !important;
+      margin-left: auto !important;
+    }
+    @media (min-width: 992px) {
+      .header-inner .desktop-nav .nav-link-cm {
+        padding: 4px 6px !important;
+        font-size: 14px;
+      }
+      .header-inner .desktop-nav .nav-link-cm.nav-link-schedule-wrap {
+        max-width: 5.25rem;
+        font-size: 13px;
+      }
+    }
+
+    .header-whatsapp-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      background: #25d366;
+      color: #fff !important;
+      font-weight: 700;
+      font-size: 0.875rem;
+      padding: 0.35rem 0.85rem;
+      border-radius: 999px;
+      white-space: nowrap;
+      transition: background 0.15s ease;
+    }
+    .header-whatsapp-btn:hover {
+      background: #1da851;
+      color: #fff !important;
+    }
     
     /* Header sticks to top when scrolling. */
     header.sticky-top {
