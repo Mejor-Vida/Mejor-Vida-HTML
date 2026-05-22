@@ -40,7 +40,7 @@
 
 - **Site:** mejorvidainsurance.com — bilingual (English/Spanish) final expense insurance site
 - **Stack:** Static HTML/CSS/JS + Vercel serverless API routes (`/api/`) + Supabase (pgvector RAG) + OpenAI
-- **Chatbot:** Julie chatbot on `/quote-screen.html` — uses RAG pipeline (`lib/rag-pipeline.js`) with `knowledge_chunks` table in Supabase
+- **Chatbot:** Julie chatbot on `/quote.html` — uses RAG pipeline (`lib/rag-pipeline.js`) with `knowledge_chunks` table in Supabase
 - **Supabase project ref:** `urhdmgzceqkywdjlcdxh`
 - **Vercel team slug:** `justins-projects-dd0ab4d0`, project: `mejor-vida-html`
 - **Key env vars (names only):** `OPENAI_API_KEY`, `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `MANYCHAT_WEBHOOK_SECRET`, `WHATSAPP_WEBHOOK_SECRET`, `HUBSPOT_ACCESS_TOKEN`

@@ -801,7 +801,7 @@
       '</span><span class="fe-amount" id="fe-total-grand">' +
       money(grandTotal()) +
       "</span></div>" +
-      '<a href="quote-screen.html" class="fe-btn-primary mt-3 d-inline-block text-center text-decoration-none">' +
+      '<a href="quote.html" class="fe-btn-primary mt-3 d-inline-block text-center text-decoration-none">' +
       t("Get a free insurance quote", "Obtener cotización de seguro gratis") +
       "</a>" +
       '<button type="button" class="fe-btn-link" id="fe-btn-start-over-5">' +

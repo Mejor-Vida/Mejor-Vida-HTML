@@ -5,6 +5,16 @@
       "has": [{ "type": "host", "value": "mejorvidainsurance.com" }],
       "destination": "https://www.mejorvidainsurance.com/:path*",
       "permanent": true
+    },
+    {
+      "source": "/quote-screen",
+      "destination": "/quote.html",
+      "permanent": true
+    },
+    {
+      "source": "/quote-screen.html",
+      "destination": "/quote.html",
+      "permanent": true
     }
   ],
   "functions": {

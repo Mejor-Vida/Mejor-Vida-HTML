@@ -75,7 +75,7 @@ When the post includes the full newsletter or long source text:
 - [ ] Count intro paragraph **pairs** per story; spot-check that ES is not shorter than EN.
 - [ ] Open both `<details>` (in each language mode) and confirm the long briefing exists only in the active language and reads complete.
 - [ ] FAQ: four question pairs with substantial ES answers.
-- [ ] Valid relative links (`../quote-screen.html`, `../blog.html`).
+- [ ] Valid relative links (`../quote.html`, `../blog.html`).
 
 ---
 

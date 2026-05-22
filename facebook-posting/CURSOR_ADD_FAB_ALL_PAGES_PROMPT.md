@@ -330,7 +330,7 @@ Find and update **all public HTML files** in the repo. This likely includes:
 
 - ✅ `index.html` (already done)
 - ✅ `quote.html` (already done)
-- [ ] `quote-screen.html`
+- [ ] `quote.html`
 - [ ] `blog.html` (if exists)
 - [ ] `faq.html` (if exists)
 - [ ] `about.html` (if exists)

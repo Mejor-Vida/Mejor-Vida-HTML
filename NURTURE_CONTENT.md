@@ -7,7 +7,7 @@ All messages across every channel use these placeholders. The table shows what e
 | Placeholder | Supabase Field | Code Variable | Notes |
 |---|---|---|---|
 | `[First Name]` / `[Nombre]` | `contacts.full_name` | `(contact.full_name \|\| '').split(' ')[0]` | First word of full_name |
-| `[Quote Link]` | — | `https://www.mejorvidainsurance.com/quote-screen.html` | Online quote tool |
+| `[Quote Link]` | — | `https://www.mejorvidainsurance.com/quote.html` | Online quote tool |
 | `[Schedule Link]` | — | `https://www.mejorvidainsurance.com/quote.html?schedule=1` | HubSpot meeting scheduler |
 | `[VCF Link]` | — | `https://www.mejorvidainsurance.com/julie.vcf` | Julie's contact card download |
 | `[Email]` | `contacts.email` | `contact.email` | Lead's email address |
@@ -39,7 +39,7 @@ const name = (contact.full_name || '').split(' ')[0] || 'there';
 ### Resend Email (nurture-cron.js)
 Placeholders are inserted in HTML template functions:
 ```javascript
-const quoteUrl = 'https://www.mejorvidainsurance.com/quote-screen.html';
+const quoteUrl = 'https://www.mejorvidainsurance.com/quote.html';
 const scheduleUrl = 'https://www.mejorvidainsurance.com/quote.html?schedule=1';
 const VCF_URL = 'https://www.mejorvidainsurance.com/julie.vcf';
 ```

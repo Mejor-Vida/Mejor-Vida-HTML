@@ -82,7 +82,7 @@ function twimlEmpty() {
 
 // ─── Send email via Resend ────────────────────────────────────────────────────
 async function sendNurtureEmail(contact, intent) {
-  const quoteUrl    = 'https://www.mejorvidainsurance.com/quote-screen.html';
+  const quoteUrl    = 'https://www.mejorvidainsurance.com/quote.html';
   const scheduleUrl = 'https://www.mejorvidainsurance.com/quote.html?schedule=1';
   const name =
     (contact.first_name || (contact.full_name || '').split(' ')[0] || 'there').trim() || 'there';
@@ -204,7 +204,7 @@ module.exports = async function handler(req, res) {
   // ── QUOTE or CALL — direct SMS links (bilingual) ───────────────────────────
   if (keyword === 'QUOTE' || keyword === 'CALL') {
     const english    = contact ? isEnglish(contact) : false;
-    const quoteUrl   = 'https://www.mejorvidainsurance.com/quote-screen.html';
+    const quoteUrl   = 'https://www.mejorvidainsurance.com/quote.html';
     const scheduleEs = 'https://meetings-na2.hubspot.com/julie-braunsroth';
     const scheduleEn = 'https://meetings-na2.hubspot.com/julie-braunsroth/insurance-consultation-mejor-vida-insurance';
 
