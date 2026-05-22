@@ -19,17 +19,64 @@
     html.lang-en [data-lang="es"] { display: none !important; }
     .nav-link-cm.nav-link-schedule-wrap { color: #0d47a1; font-weight: 700; }
     body { font-family: Inter, system-ui, sans-serif; background: #cfe6f7; color: #1f2937; }
-    .julie-schedule-section { position: relative; z-index: 1; }
+    .julie-schedule-section {
+      position: relative;
+      background: #cfe6f7;
+      overflow: visible;
+    }
+    .julie-schedule-section .container {
+      position: relative;
+      z-index: 1;
+    }
     .julie-schedule-share {
       max-width: 40rem;
-      margin: 0 auto 1.25rem;
+      margin-left: auto;
+      margin-right: auto;
       padding: 1rem 1.15rem;
-      background: rgba(255, 255, 255, 0.92);
-      border: 1px solid rgba(255, 255, 255, 0.95);
+      background: #fff;
+      border: 1px solid #e2e8f0;
       border-radius: 0.65rem;
       box-shadow: 0 4px 16px rgba(13, 71, 161, 0.08);
     }
-    .julie-schedule-share label { font-weight: 600; font-size: 0.9rem; color: #334155; }
+    .julie-schedule-share summary {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: #0d47a1;
+      cursor: pointer;
+      list-style: none;
+    }
+    .julie-schedule-share summary::-webkit-details-marker {
+      display: none;
+    }
+    .julie-schedule-share label {
+      display: block;
+      font-weight: 600;
+      font-size: 0.85rem;
+      color: #334155;
+      margin-bottom: 0.35rem;
+    }
+    .julie-schedule-share .input-group {
+      flex-wrap: nowrap;
+    }
+    .julie-schedule-share .form-control {
+      font-size: 0.85rem;
+      min-width: 0;
+    }
+    @media (max-width: 576px) {
+      .julie-schedule-share .input-group {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .julie-schedule-share .form-control {
+        border-radius: 0.375rem !important;
+        margin-bottom: 0.5rem;
+        font-size: 0.8rem;
+      }
+      .julie-schedule-share #julie-schedule-copy-btn {
+        width: 100%;
+        border-radius: 0.375rem !important;
+      }
+    }
     .julie-schedule-title {
       font-family: Georgia, "Times New Roman", serif;
       font-size: clamp(1.45rem, 4vw, 2rem);
@@ -46,6 +93,8 @@
       margin: 0 0 1.25rem;
     }
     .julie-schedule-embed {
+      position: relative;
+      z-index: 2;
       max-width: 52rem;
       margin: 0 auto;
       background: #fff;
@@ -148,29 +197,28 @@
   </header>
 
   <section class="flex-grow-1 julie-schedule-section py-4 py-md-5">
-    <div class="mvi-quote-wizard-wave" aria-hidden="true">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 500" preserveAspectRatio="none">
-        <path d="M 0 0 L 1200 0 L 1200 250 C 900 420 300 175 0 250 L 0 0 Z" />
-      </svg>
-    </div>
     <div class="container px-3">
       <h1 class="julie-schedule-title" data-lang="es">Agendar una llamada con Julie</h1>
       <h1 class="julie-schedule-title" data-lang="en">Schedule a call with Julie</h1>
       <p class="julie-schedule-lead" data-lang="es">Elige fecha y hora abajo. Sin obligación de comprar.</p>
       <p class="julie-schedule-lead" data-lang="en">Pick a date and time below. No obligation to buy.</p>
 
-      <div class="julie-schedule-share">
-        <label for="julie-schedule-share-url" data-lang="es">Enlace para compartir (correo, texto o WhatsApp)</label>
-        <label for="julie-schedule-share-url" data-lang="en">Link to share (email, text, or WhatsApp)</label>
+      <details class="julie-schedule-share mb-3">
+        <summary>
+          <span data-lang="es">¿Necesitas el enlace para compartir?</span>
+          <span data-lang="en">Need the link to share with someone?</span>
+        </summary>
+        <label class="mt-2" for="julie-schedule-share-url" data-lang="es">Copia este enlace en un correo o mensaje de texto</label>
+        <label class="mt-2" for="julie-schedule-share-url" data-lang="en">Copy this link into an email or text message</label>
         <div class="input-group mt-2">
           <input type="text" class="form-control" id="julie-schedule-share-url" readonly aria-label="Scheduling link" />
           <button type="button" class="btn btn-primary" id="julie-schedule-copy-btn">
-            <span data-lang="es">Copiar</span>
-            <span data-lang="en">Copy</span>
+            <span data-lang="es">Copiar enlace</span>
+            <span data-lang="en">Copy link</span>
           </button>
         </div>
-        <p class="small mb-0 mt-2" id="julie-schedule-copy-status" aria-live="polite"></p>
-      </div>
+        <p class="small mb-0 mt-2 text-muted" id="julie-schedule-copy-status" aria-live="polite"></p>
+      </details>
 
       <div class="julie-schedule-embed">
         <iframe
