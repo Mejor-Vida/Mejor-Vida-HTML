@@ -132,13 +132,27 @@
     return tiers[0] || { id: "basic", optionIndex: 0, labelEn: "Basic", labelEs: "Básico" };
   }
 
+  function burialFuneralHomeTotal(st) {
+    if (!st || !st.burial) return 0;
+    var sum = st.burial.funeralHome || 0;
+    (DATA.burialStateKeys || []).forEach(function (key) {
+      sum += st.burial[key] || 0;
+    });
+    return sum;
+  }
+
+  function cremationFuneralHomeTotal(st) {
+    if (!st) return 0;
+    if (st.funeralHome && st.funeralHome.cremation) return st.funeralHome.cremation;
+    var c = st.cremation || {};
+    return (c.cremationPrice || 0) + (c.memorialService || 0);
+  }
+
   function ceremonyConfig() {
     var st = stateConfig();
     if (!st || !ceremony) return null;
-    var funeralHome = 0;
-    if (ceremony === "burial" && st.burial) {
-      funeralHome = st.burial.funeralHome || st.funeralHome.burial || 0;
-    }
+    var funeralHome =
+      ceremony === "burial" ? burialFuneralHomeTotal(st) : cremationFuneralHomeTotal(st);
     return {
       funeralHome: funeralHome,
       lines: ceremonyLines(),
@@ -153,41 +167,46 @@
     return bucket[line.stateKey] || 0;
   }
 
-  function cemeteryOptionsForState() {
-    var st = stateConfig();
-    var floors = DATA.cemeteryTierAmounts || [1500, 2500, 3500];
-    var stateAvg = (st && st.burial && st.burial.cemetery) || 0;
-    var basic = Math.max(stateAvg, floors[0]);
+  function tierAmountOptions(amounts) {
     var notDesired = DATA.notDesiredOption || { labelEn: "Not Desired", labelEs: "No deseado", amount: 0 };
     return [
       {
-        labelEn: "$" + basic.toLocaleString("en-US") + " (Basic)",
-        labelEs: "$" + basic.toLocaleString("en-US") + " (Básico)",
-        amount: basic,
+        labelEn: "$" + amounts[0].toLocaleString("en-US"),
+        labelEs: "$" + amounts[0].toLocaleString("en-US"),
+        amount: amounts[0],
       },
       {
-        labelEn: "$" + floors[1].toLocaleString("en-US") + " (Standard)",
-        labelEs: "$" + floors[1].toLocaleString("en-US") + " (Estándar)",
-        amount: floors[1],
+        labelEn: "$" + amounts[1].toLocaleString("en-US"),
+        labelEs: "$" + amounts[1].toLocaleString("en-US"),
+        amount: amounts[1],
       },
       {
-        labelEn: "$" + floors[2].toLocaleString("en-US") + " (Premium)",
-        labelEs: "$" + floors[2].toLocaleString("en-US") + " (Premium)",
-        amount: floors[2],
+        labelEn: "$" + amounts[2].toLocaleString("en-US"),
+        labelEs: "$" + amounts[2].toLocaleString("en-US"),
+        amount: amounts[2],
       },
       notDesired,
     ];
   }
 
+  function cemeteryOptionsForState() {
+    return tierAmountOptions(DATA.cemeteryTierAmounts || [1500, 2500, 3500]);
+  }
+
+  function openingOptionsForState() {
+    return tierAmountOptions(DATA.openingTierAmounts || [1500, 2500, 3500]);
+  }
+
   function lineOptions(line) {
     if (line.type === "cemeteryTier") return cemeteryOptionsForState();
+    if (line.type === "openingTier") return openingOptionsForState();
     return line.options || [];
   }
 
   function lineAmount(line) {
     if (line.type === "fixed") return line.amount || 0;
     if (line.type === "stateAmount") return stateLineAmount(line);
-    if (line.type === "select" || line.type === "cemeteryTier") {
+    if (line.type === "select" || line.type === "cemeteryTier" || line.type === "openingTier") {
       var opts = lineOptions(line);
       var idx = lineSelections[line.id];
       if (idx == null) idx = tierConfig().optionIndex;
@@ -203,7 +222,7 @@
     var sel = {};
     lines.forEach(function (line) {
       if (
-        (line.type === "select" || line.type === "cemeteryTier") &&
+        (line.type === "select" || line.type === "cemeteryTier" || line.type === "openingTier") &&
         tierIds.indexOf(line.id) >= 0
       ) {
         sel[line.id] = idx;
@@ -226,7 +245,13 @@
     cfg.lines.forEach(function (line) {
       if (line.type === "fixed") sum += line.amount;
       else if (line.type === "stateAmount") sum += stateLineAmount(line);
-      else if (line.type === "select" || line.type === "cemeteryTier") sum += lineAmount(line);
+      else if (
+        line.type === "select" ||
+        line.type === "cemeteryTier" ||
+        line.type === "openingTier"
+      ) {
+        sum += lineAmount(line);
+      }
     });
     return sum;
   }
@@ -631,11 +656,11 @@
     var cfg = ceremonyConfig();
     if (!cfg) return "";
     var rows = "";
-    if (ceremony === "burial" && cfg.funeralHome) {
+    if (cfg.funeralHome) {
       var fhPopId = nextPopoverId("fe-pop-fh");
       rows +=
         "<tr><td>" +
-        t("Funeral Home Expense", "Gasto de funeraria") +
+        t("Funeral Home Expenses", "Gastos de funeraria") +
         " " +
         renderInfoPopover(infoPopoverHtmlFuneralHome(cfg.funeralHome), fhPopId) +
         '</td><td><span class="fe-fixed-amount">' +
@@ -651,7 +676,11 @@
       if (line.type === "fixed" || line.type === "stateAmount") {
         var amt = line.type === "stateAmount" ? stateLineAmount(line) : line.amount;
         rows += '<span class="fe-fixed-amount">' + money(amt) + "</span>";
-      } else if (line.type === "select" || line.type === "cemeteryTier") {
+      } else if (
+        line.type === "select" ||
+        line.type === "cemeteryTier" ||
+        line.type === "openingTier"
+      ) {
         var idx = lineSelections[line.id];
         if (idx == null) idx = tierConfig().optionIndex;
         var opts = lineOptions(line);

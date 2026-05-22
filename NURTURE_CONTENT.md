@@ -8,7 +8,7 @@ All messages across every channel use these placeholders. The table shows what e
 |---|---|---|---|
 | `[First Name]` / `[Nombre]` | `contacts.full_name` | `(contact.full_name \|\| '').split(' ')[0]` | First word of full_name |
 | `[Quote Link]` | — | `https://www.mejorvidainsurance.com/quote.html` | Online quote tool |
-| `[Schedule Link]` | — | `https://www.mejorvidainsurance.com/quote.html?schedule=1` | HubSpot meeting scheduler |
+| `[Schedule Link]` | — | `https://www.mejorvidainsurance.com/schedule-julie.html` | Julie-only HubSpot scheduler (shareable) |
 | `[VCF Link]` | — | `https://www.mejorvidainsurance.com/julie.vcf` | Julie's contact card download |
 | `[Email]` | `contacts.email` | `contact.email` | Lead's email address |
 | `[Phone]` | `contacts.phone` | `contact.phone` | Lead's phone (E.164) |
@@ -40,7 +40,7 @@ const name = (contact.full_name || '').split(' ')[0] || 'there';
 Placeholders are inserted in HTML template functions:
 ```javascript
 const quoteUrl = 'https://www.mejorvidainsurance.com/quote.html';
-const scheduleUrl = 'https://www.mejorvidainsurance.com/quote.html?schedule=1';
+const scheduleUrl = 'https://www.mejorvidainsurance.com/schedule-julie.html';
 const VCF_URL = 'https://www.mejorvidainsurance.com/julie.vcf';
 ```
 

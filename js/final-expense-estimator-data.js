@@ -27,7 +27,7 @@ function buildFeEstimatorStates() {
 }
 
 window.MVI_FE_ESTIMATOR_DATA = {
-  storageKey: "mviFeEstimatorV5",
+  storageKey: "mviFeEstimatorV6",
   notDesiredOption: MVI_FE_NOT_DESIRED,
   defaultState: "NE",
   states: buildFeEstimatorStates(),
@@ -41,13 +41,15 @@ window.MVI_FE_ESTIMATOR_DATA = {
     "stationery",
   ],
   cremationStateKeys: ["cremationPrice", "memorialService"],
-  /** Cemetery tier floors (Legacy-style); basic uses max(state avg, floor[0]). */
+  /** Cemetery & opening/closing — Legacy Safeguard fixed tier amounts (all states). */
   cemeteryTierAmounts: [1500, 2500, 3500],
+  openingTierAmounts: [1500, 2500, 3500],
   tierLineIds: {
     burial: [
       "casket",
       "vault",
       "cemetery",
+      "opening",
       "flowers",
       "deathCerts",
       "stationery",
@@ -98,8 +100,7 @@ window.MVI_FE_ESTIMATOR_DATA = {
       id: "opening",
       labelEn: "Opening/Closing Grave",
       labelEs: "Apertura/cierre de tumba",
-      type: "stateAmount",
-      stateKey: "opening",
+      type: "openingTier",
     },
     {
       id: "flowers",
@@ -115,8 +116,8 @@ window.MVI_FE_ESTIMATOR_DATA = {
     },
     {
       id: "deathCerts",
-      labelEn: "Death Certificates & Obituary",
-      labelEs: "Certificados de defunción y obituario",
+      labelEn: "Death Certificates",
+      labelEs: "Certificados de defunción",
       type: "select",
       options: [
         { labelEn: "$500", labelEs: "$500", amount: 500 },
@@ -174,22 +175,8 @@ window.MVI_FE_ESTIMATOR_DATA = {
       ],
     },
   ],
-  /** Cremation: state averages for cremation + memorial; optional tier add-ons. */
+  /** Cremation: funeral home total (state) + Legacy-style merchandise tiers. */
   cremationLines: [
-    {
-      id: "cremationPrice",
-      labelEn: "Cremation Price",
-      labelEs: "Precio de cremación",
-      type: "stateAmount",
-      stateKey: "cremationPrice",
-    },
-    {
-      id: "memorialService",
-      labelEn: "Memorial Service",
-      labelEs: "Servicio conmemorativo",
-      type: "stateAmount",
-      stateKey: "memorialService",
-    },
     {
       id: "urn",
       labelEn: "Cremation Urn",

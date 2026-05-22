@@ -15,6 +15,21 @@
       "source": "/quote-screen.html",
       "destination": "/quote.html",
       "permanent": true
+    },
+    {
+      "source": "/agendar-julie",
+      "destination": "/schedule-julie.html",
+      "permanent": true
+    },
+    {
+      "source": "/agendar-julie.html",
+      "destination": "/schedule-julie.html",
+      "permanent": true
+    },
+    {
+      "source": "/schedule",
+      "destination": "/schedule-julie.html",
+      "permanent": false
     }
   ],
   "functions": {

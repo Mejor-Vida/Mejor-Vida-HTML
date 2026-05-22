@@ -83,7 +83,7 @@ function twimlEmpty() {
 // ─── Send email via Resend ────────────────────────────────────────────────────
 async function sendNurtureEmail(contact, intent) {
   const quoteUrl    = 'https://www.mejorvidainsurance.com/quote.html';
-  const scheduleUrl = 'https://www.mejorvidainsurance.com/quote.html?schedule=1';
+  const scheduleUrl = 'https://www.mejorvidainsurance.com/schedule-julie.html';
   const name =
     (contact.first_name || (contact.full_name || '').split(' ')[0] || 'there').trim() || 'there';
 
@@ -205,8 +205,7 @@ module.exports = async function handler(req, res) {
   if (keyword === 'QUOTE' || keyword === 'CALL') {
     const english    = contact ? isEnglish(contact) : false;
     const quoteUrl   = 'https://www.mejorvidainsurance.com/quote.html';
-    const scheduleEs = 'https://meetings-na2.hubspot.com/julie-braunsroth';
-    const scheduleEn = 'https://meetings-na2.hubspot.com/julie-braunsroth/insurance-consultation-mejor-vida-insurance';
+    const scheduleUrl = 'https://www.mejorvidainsurance.com/schedule-julie.html';
 
     if (keyword === 'QUOTE') {
       const msg = english
@@ -216,10 +215,9 @@ module.exports = async function handler(req, res) {
     }
 
     if (keyword === 'CALL') {
-      const link = english ? scheduleEn : scheduleEs;
       const msg  = english
-        ? `Here's your link to schedule a call with Julie: ${link}`
-        : `Aquí está tu enlace para agendar una llamada con Julie: ${link}`;
+        ? `Here's your link to schedule a call with Julie: ${scheduleUrl}`
+        : `Aquí está tu enlace para agendar una llamada con Julie: ${scheduleUrl}`;
       return res.status(200).send(twiml(msg));
     }
   }
