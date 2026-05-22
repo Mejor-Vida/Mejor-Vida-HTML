@@ -21,6 +21,22 @@ function readJsonBody(req) {
   return req.body && typeof req.body === "object" ? req.body : {};
 }
 
+/** ISO YYYY-MM-DD → age in full years (45–85 validated separately). */
+function ageFromIsoDob(iso) {
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(iso || "").trim());
+  if (!m) return null;
+  const y = parseInt(m[1], 10);
+  const mo = parseInt(m[2], 10) - 1;
+  const d = parseInt(m[3], 10);
+  const birth = new Date(y, mo, d);
+  if (Number.isNaN(birth.getTime())) return null;
+  const today = new Date();
+  let age = today.getFullYear() - birth.getFullYear();
+  const md = today.getMonth() - birth.getMonth();
+  if (md < 0 || (md === 0 && today.getDate() < birth.getDate())) age -= 1;
+  return age;
+}
+
 /** Normalize UTM/referrer/path from body (quote.html sends originDetail + sessionClientId). */
 function buildOriginDetail(body) {
   if (body.originDetail && typeof body.originDetail === "object" && !Array.isArray(body.originDetail)) {
@@ -313,9 +329,20 @@ module.exports = async function handler(req, res) {
     if (!quoteSummary) {
       return json(res, 400, { ok: false, error: "Quote summary required" });
     }
-    const ageN = parseInt(String(body.age ?? ""), 10);
+    let ageN = parseInt(String(body.age ?? ""), 10);
+    const dobIso = String(body.dob || body.dateOfBirth || "").trim();
+    if (dobIso) {
+      const fromDob = ageFromIsoDob(dobIso);
+      if (fromDob == null) {
+        return json(res, 400, { ok: false, error: "Valid date of birth required" });
+      }
+      ageN = fromDob;
+    }
     if (!Number.isFinite(ageN) || ageN < 45 || ageN > 85) {
-      return json(res, 400, { ok: false, error: "Valid age (45–85) required" });
+      return json(res, 400, {
+        ok: false,
+        error: "Final expense quotes are for ages 45–85.",
+      });
     }
     const sex = String(body.sex || "").toLowerCase();
     if (sex !== "male" && sex !== "female") {
@@ -350,7 +377,11 @@ module.exports = async function handler(req, res) {
     payload.quoteLow = body.quoteLow;
     payload.quoteHigh = body.quoteHigh;
     payload.quoteAnchor = body.quoteAnchor;
-    payload.marketingOptIn = { sms: true, email: true, phoneCalls: true };
+    const cov = parseInt(String(body.coverageAmount || body.coverage || ""), 10);
+    if (Number.isFinite(cov) && cov > 0) payload.coverageAmount = cov;
+    const dobIso = String(body.dob || body.dateOfBirth || "").trim();
+    if (dobIso) payload.dob = dobIso.slice(0, 10);
+    payload.marketingOptIn = { sms: smsConsentOptIn, email: true, phoneCalls: true };
   }
   const originDetail = buildOriginDetail(body);
   const sessionClientId = body.sessionClientId
@@ -436,7 +467,9 @@ module.exports = async function handler(req, res) {
     insertRow.age = nebraskaQuote.ageN;
     insertRow.gender = nebraskaQuote.sex;
     insertRow.tobacco = nebraskaQuote.isSmoker ? "yes" : "no";
-    insertRow.coverage = 10000;
+    const cov = parseInt(String(body.coverageAmount || body.coverage || 10000), 10);
+    insertRow.coverage =
+      Number.isFinite(cov) && cov >= 2000 && cov <= 50000 ? cov : 10000;
   }
 
   let leadId;

@@ -559,9 +559,14 @@
       border-radius: 999px;
       outline: none;
     }
-    .hero-quote-bubble-link:hover .hero-quote-bubble,
-    .hero-quote-bubble-link:focus-visible .hero-quote-bubble {
+    .hero-quote-bubble-link:hover .hero-quote-text,
+    .hero-quote-bubble-link:hover .hero-quote-logo-wrap,
+    .hero-quote-bubble-link:focus-visible .hero-quote-text,
+    .hero-quote-bubble-link:focus-visible .hero-quote-logo-wrap {
       box-shadow: 0 14px 36px rgba(0, 0, 0, 0.55);
+    }
+    .hero-quote-bubble-link:hover .hero-quote-text,
+    .hero-quote-bubble-link:focus-visible .hero-quote-text {
       border-color: rgba(255, 255, 255, 0.12);
     }
     .hero-quote-bubble-link:focus-visible {
@@ -572,14 +577,12 @@
       --hq-pill: #1a1a1a;
       display: flex;
       align-items: center;
-      gap: 0.42rem;
-      /* Tight vertical pad; no left pad so logo disk meets the pill’s left cap */
-      padding: 0.18rem 0.56rem 0.18rem 0;
-      border-radius: 999px;
-      background: var(--hq-pill);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
-      border: 1px solid rgba(255, 255, 255, 0.07);
-      transition: box-shadow 0.2s ease, border-color 0.2s ease;
+      gap: 0;
+      padding: 0;
+      border-radius: 0;
+      background: transparent;
+      box-shadow: none;
+      border: none;
     }
     .hero-quote-logo-wrap {
       flex: 0 0 auto;
@@ -587,10 +590,15 @@
       height: var(--hq-logo);
       border-radius: 50%;
       overflow: hidden;
-      background: #2f2f2f;
+      background: #fff;
       display: flex;
       align-items: center;
       justify-content: center;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+      position: relative;
+      z-index: 2;
+      margin-right: 0;
+      transition: box-shadow 0.2s ease;
     }
     .hero-quote-logo {
       width: var(--hq-logo);
@@ -619,15 +627,33 @@
     .hero-quote-text {
       flex: 1 1 auto;
       min-width: 0;
+      align-self: center;
+      position: relative;
+      z-index: 1;
       color: #fff;
       font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      line-height: 1.15;
+      line-height: 1.14;
+      background: var(--hq-pill);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 999px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+      margin-left: calc(var(--hq-logo) * -0.52);
+      padding: 0.22rem 0.56rem 0.22rem calc(var(--hq-logo) * 0.48 + 0.4rem);
+      transition: box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+    @media (min-width: 992px) {
+      .hero-quote-bubble:has(.hero-quote-logo-wrap[data-carrier="assurity"]),
+      .hero-quote-bubble:has(.hero-quote-logo-wrap[data-carrier="mutual-of-omaha"]),
+      .hero-quote-bubble:has(.hero-quote-logo-wrap[data-carrier="american-amicable"]) {
+        --hq-logo: 92px;
+      }
     }
     .hero-quote-carrier-name {
       font-size: 0.875rem;
       font-weight: 700;
       letter-spacing: -0.02em;
       color: #fff;
+      line-height: 1.12;
     }
     .hero-quote-policy-line {
       font-size: 0.875rem;
@@ -635,6 +661,7 @@
       letter-spacing: -0.02em;
       color: #fff;
       margin-top: 0.04rem;
+      line-height: 1.12;
     }
     .hero-quote-rate-block {
       margin-top: 0.05rem;
@@ -646,7 +673,7 @@
       height: 1px;
       width: 100%;
       background: #4a9ea8;
-      margin: 0.2rem 0 0.16rem;
+      margin: 0.16rem 0 0.12rem;
       border: none;
       opacity: 0.85;
     }
@@ -655,6 +682,7 @@
       font-weight: 700;
       letter-spacing: -0.02em;
       color: #fff;
+      line-height: 1.12;
     }
     .hero-quote-logo-wrap[data-carrier="assurity"] {
       display: grid;
@@ -771,13 +799,17 @@
         --hq-logo: 42px;
         flex-direction: row;
         align-items: center;
-        border-radius: 999px;
-        padding: 0.22rem 0.65rem 0.22rem 0;
-        gap: 0.38rem;
+        padding: 0;
+        gap: 0;
         text-align: left;
       }
       .hero-quote-logo-wrap {
-        align-self: auto;
+        align-self: center;
+        margin-right: 0;
+      }
+      .hero-quote-text {
+        margin-left: calc(var(--hq-logo) * -0.52);
+        padding: 0.18rem 0.65rem 0.18rem calc(var(--hq-logo) * 0.48 + 0.35rem);
       }
       .hero-quote-logo-wrap[data-carrier="assurity"] {
         width: 44px !important;
@@ -942,30 +974,54 @@
     .nav-link-cm {
       white-space: nowrap !important;
     }
+    .nav-link-cm.nav-link-stack {
+      white-space: normal !important;
+      max-width: 5.1rem;
+      text-align: center;
+      line-height: 1.22;
+      align-self: center;
+      display: inline-block;
+    }
+    .nav-link-cm.nav-link-questions-wrap {
+      display: inline-flex !important;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.12rem;
+      max-width: 5.6rem;
+      white-space: normal !important;
+    }
+    .nav-link-cm.nav-link-questions-wrap span {
+      display: inline-block;
+      max-width: 5.6rem;
+      text-align: center;
+      line-height: 1.18;
+    }
     .nav-link-cm.nav-link-schedule-wrap {
       white-space: normal !important;
-      max-width: 5.75rem;
+      max-width: 6rem;
       text-align: center;
       line-height: 1.25;
       align-self: center;
+      display: inline-block;
     }
     .nav-link-cm.nav-link-fe-calc-wrap {
       white-space: normal !important;
-      max-width: 5.5rem;
+      max-width: 5.85rem;
       text-align: center;
-      line-height: 1.2;
+      line-height: 1.22;
       align-self: center;
       display: inline-block;
-      font-size: 13px;
+      font-size: 14px;
     }
 
     .header-inner .desktop-nav {
       flex: 1 1 0 !important;
       min-width: 0 !important;
       margin-left: 0 !important;
-      gap: 0.2rem 0.45rem !important;
+      gap: 0.35rem 0.72rem !important;
       justify-content: flex-start !important;
-      padding-right: 0.35rem;
+      padding-right: 0.5rem;
     }
     .header-inner > .d-flex.align-items-center.gap-2,
     .header-inner > .header-actions {
@@ -974,12 +1030,23 @@
     }
     @media (min-width: 992px) {
       .header-inner .desktop-nav .nav-link-cm {
-        padding: 4px 6px !important;
+        padding: 5px 9px !important;
+        font-size: 15px;
+      }
+      .header-inner .desktop-nav .nav-link-cm.nav-link-stack {
+        max-width: 5rem;
+        font-size: 14px;
+      }
+      .header-inner .desktop-nav .nav-link-cm.nav-link-questions-wrap {
+        max-width: 5.45rem;
         font-size: 14px;
       }
       .header-inner .desktop-nav .nav-link-cm.nav-link-schedule-wrap {
-        max-width: 5.25rem;
-        font-size: 13px;
+        max-width: 5.85rem;
+        font-size: 14px;
+      }
+      .header-inner .desktop-nav .nav-link-cm.nav-link-fe-calc-wrap {
+        font-size: 13.5px;
       }
     }
 
@@ -1249,16 +1316,16 @@
           <a href="#home" data-lang="es" class="nav-link-cm">Inicio</a>
           <a href="#home" data-lang="en" class="nav-link-cm">Home</a>
           
-          <a href="about-julie.html" data-lang="es" class="nav-link-cm">Sobre Julie</a>
-          <a href="about-julie.html" data-lang="en" class="nav-link-cm">About Julie</a>
+          <a href="about-julie.html" data-lang="es" class="nav-link-cm nav-link-stack">Sobre Julie</a>
+          <a href="about-julie.html" data-lang="en" class="nav-link-cm nav-link-stack">About Julie</a>
           
-          <a href="#how-it-works" data-lang="es" class="nav-link-cm">Cómo funciona</a>
-          <a href="#how-it-works" data-lang="en" class="nav-link-cm">How It Works</a>
+          <a href="#how-it-works" data-lang="es" class="nav-link-cm nav-link-stack">Cómo funciona</a>
+          <a href="#how-it-works" data-lang="en" class="nav-link-cm nav-link-stack">How It Works</a>
           
-          <a href="#final-expense-answers" data-lang="es" class="nav-link-cm d-inline-flex align-items-center gap-1 text-nowrap" title="¿Tienes preguntas sobre gastos finales?">
+          <a href="#final-expense-answers" data-lang="es" class="nav-link-cm nav-link-stack nav-link-questions-wrap" title="¿Tienes preguntas sobre gastos finales?">
             <i class="fas fa-robot" style="font-size: 0.95em; opacity: 0.88;" aria-hidden="true"></i><span>¿Tienes preguntas?</span>
           </a>
-          <a href="#final-expense-answers" data-lang="en" class="nav-link-cm d-inline-flex align-items-center gap-1 text-nowrap" title="Got questions about final expense insurance?">
+          <a href="#final-expense-answers" data-lang="en" class="nav-link-cm nav-link-stack nav-link-questions-wrap" title="Got questions about final expense insurance?">
             <i class="fas fa-robot" style="font-size: 0.95em; opacity: 0.88;" aria-hidden="true"></i><span>Got questions?</span>
           </a>
           

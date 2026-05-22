@@ -9,6 +9,7 @@
 const { verifySiteOrigin } = require("../lib/site-origin");
 const { logRequest } = require("../lib/manychat-auth");
 const { fetchQuoteRange } = require("../lib/supabase");
+const { scaledRangeResponse } = require("../lib/quote-range-scale");
 
 function json(res, status, payload) {
   res.status(status).setHeader("Content-Type", "application/json");
@@ -18,10 +19,6 @@ function json(res, status, payload) {
 function readJsonBody(req) {
   if (typeof req.body === "string") return JSON.parse(req.body || "{}");
   return req.body && typeof req.body === "object" ? req.body : {};
-}
-
-function dollars(n) {
-  return `$${Number(n).toFixed(2)}`;
 }
 
 module.exports = async function handler(req, res) {
@@ -91,13 +88,25 @@ module.exports = async function handler(req, res) {
       });
     }
 
+    const coverageAmount = parseInt(
+      body.coverageAmount || body.coverage || 10000,
+      10
+    );
+    const scaled = scaledRangeResponse(
+      range,
+      Number.isFinite(coverageAmount) && coverageAmount > 0
+        ? coverageAmount
+        : 10000
+    );
+
     return json(res, 200, {
       ok: true,
       quote_status: "ok",
-      quote_low: dollars(range.low),
-      quote_high: dollars(range.high),
-      quote_anchor: dollars(range.anchor),
+      quote_low: scaled.low,
+      quote_high: scaled.high,
+      quote_anchor: scaled.anchor,
       quote_error: "",
+      coverage_amount: Number.isFinite(coverageAmount) ? coverageAmount : 10000,
     });
   } catch (err) {
     console.error("quote-site error:", err);

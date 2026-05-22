@@ -24,6 +24,7 @@
 
   <!-- Bootstrap 5 (local) -->
   <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="css/quote-flow-shared.css" rel="stylesheet" />
 
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -34,341 +35,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link href="css/mvi-assistant-widget.css" rel="stylesheet" />
 
-  <style>
-    /* Two-tone blue hero - smooth curve from bottom-left to top-right */
-    .hero-two-tone {
-      position: relative;
-      background: #90CDF4;
-      overflow: hidden;
-    }
-    
-    .hero-dark-overlay {
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-    }
-    
-    .hero-dark-overlay svg {
-      display: block;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-    
-    .hero-dark-overlay path {
-      fill: #0D47A1;
-    }
-    
-    /* Hero content overlay */
-    .hero-content-overlay {
-      position: relative;
-      z-index: 2;
-    }
-
-    .quote-hero-title {
-      color: #fec963 !important;
-      text-shadow: 0 2px 16px rgba(0, 0, 0, 0.4);
-      font-size: clamp(2.25rem, 5.5vw, 3.75rem);
-      line-height: 1.15;
-    }
-    
-    /* Hero CTA button - yellow/orange */
-    .btn-primary-gold {
-      background-color: #FEC963;
-      color: #1a202c;
-      border: 2px solid #FEC963;
-      transition: all 0.2s ease-in-out;
-    }
-    
-    .btn-primary-gold:hover {
-      background-color: #f5b942;
-      border-color: #f5b942;
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(254, 201, 99, 0.4);
-    }
-    
-    /* Header CTA button */
-    .btn-header-cta {
-      background-color: #63b3ed;
-      color: #1a365d;
-      border-radius: 4px;
-      padding: 8px 16px;
-      font-size: 14px;
-      font-weight: 700;
-      border: none;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      transition: all 0.15s cubic-bezier(0, 0, 0.2, 1);
-    }
-    
-    .btn-header-cta:hover {
-      background-color: #4299e1;
-      box-shadow: 0 4px 8px rgba(99, 179, 237, 0.4);
-      transform: translateY(-1px);
-    }
-    
-    /* Header navigation links */
-    .nav-link-cm {
-      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      font-size: 15px;
-      font-weight: 600;
-      letter-spacing: -0.01em;
-      color: #1a202c;
-      text-decoration: none;
-      padding: 4px 10px;
-      transition: all 0.15s cubic-bezier(0, 0, 0.2, 1);
-    }
-    
-    .nav-link-cm:hover {
-      color: #2563eb;
-    }
-
-    .nav-link-cm.nav-link-schedule-wrap {
-      white-space: normal !important;
-      max-width: 5.75rem;
-      text-align: center;
-      line-height: 1.25;
-      align-self: center;
-    }
-    .nav-link-cm.nav-link-fe-calc-wrap {
-      white-space: normal !important;
-      max-width: 5.5rem;
-      text-align: center;
-      line-height: 1.2;
-      align-self: center;
-      display: inline-block;
-      font-size: 13px;
-    }
-    
-    /* Header free-quote CTA - yellow/orange */
-    .btn-see-prices {
-      background-color: #FEC963;
-      color: #1a202c;
-      border-radius: 6px;
-      padding: 10px 20px;
-      font-size: 15px;
-      font-weight: 700;
-      letter-spacing: -0.01em;
-      border: none;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      transition: all 0.15s cubic-bezier(0, 0, 0.2, 1);
-      white-space: nowrap;
-    }
-    
-    .btn-see-prices:hover {
-      background-color: #f5b942;
-      box-shadow: 0 4px 8px rgba(254, 201, 99, 0.4);
-      transform: translateY(-1px);
-    }
-    
-    /* Phone block styles */
-    .phone-block-label {
-      font-size: 12px;
-      color: #6b7280;
-      font-weight: 500;
-      letter-spacing: -0.01em;
-    }
-    
-    .phone-block-number {
-      font-size: 16px;
-      font-weight: 700;
-      color: #0D47A1;
-      letter-spacing: -0.01em;
-      text-decoration: none;
-    }
-    
-    .phone-block-number:hover {
-      color: #1565C0;
-      text-decoration: underline;
-    }
-
-    /* Header: tap-to-call icon only (number in aria-label / title, not shown as text) */
-    .header-phone-compact {
-      display: none; /* lg+ header bar only; mobile uses hamburger menu */
-      align-items: center;
-      justify-content: center;
-      min-width: 2.5rem;
-      min-height: 2.5rem;
-      padding: 0.2rem;
-      color: #0D47A1;
-      text-decoration: none !important;
-      border-radius: 8px;
-      line-height: 1;
-      flex-shrink: 0;
-      -webkit-tap-highlight-color: transparent;
-    }
-    .header-phone-compact .fa-phone {
-      font-size: 1.15rem;
-    }
-    .header-phone-compact:hover {
-      color: #1565C0;
-    }
-    @media (min-width: 992px) {
-      .header-phone-compact {
-        display: inline-flex;
-      }
-    }
-
-    /* --- Header: 81px, logo 111px, nav pushed right with even spacing --- */
-    .navbar { height: 81px !important; padding: 0 !important; display: flex !important; align-items: center !important; }
-    .navbar-brand { flex: 0 0 auto; display: flex !important; align-items: center !important; padding: 0 !important; margin-right: 20px; }
-    .navbar-brand img { height: 244px !important; width: auto !important; max-height: none !important; object-fit: contain; }
-    .navbar-nav { flex: 1 1 auto; display: flex !important; align-items: center !important; justify-content: flex-start; margin: 0; padding: 0; list-style: none; }
-    .navbar-nav .nav-link { padding-left: 15px; padding-right: 15px; }
-
-    header.sticky-top { height: 81px !important; padding: 0 !important; }
-    header.sticky-top > .container { height: 100% !important; padding-top: 0 !important; padding-bottom: 0 !important; padding-left: 0 !important; display: flex !important; align-items: center !important; }
-    .header-inner { display: flex !important; align-items: center !important; justify-content: flex-start !important; gap: 0; width: 100%; }
-    .header-logo-wrap { flex: 0 0 auto; display: flex !important; align-items: center !important; justify-content: center !important; height: 81px !important; padding: 0 !important; margin-left: -120px !important; margin-right: 1rem !important; }
-    .header-logo { height: 244px !important; width: auto !important; max-height: none !important; object-fit: contain; display: block !important; transform: translateY(8px) !important; }
-    .nav-link-cm { white-space: nowrap !important; }
-    .nav-link-cm.nav-link-schedule-wrap,
-    .nav-link-cm.nav-link-fe-calc-wrap {
-      white-space: normal !important;
-    }
-    .header-inner .desktop-nav {
-      flex: 1 1 0 !important;
-      min-width: 0 !important;
-      margin-left: 0 !important;
-      gap: 0.2rem 0.45rem !important;
-      justify-content: flex-start !important;
-      padding-right: 0.35rem;
-    }
-    .header-inner > .d-flex.align-items-center.gap-2 {
-      flex-shrink: 0 !important;
-      margin-left: auto !important;
-    }
-    @media (min-width: 992px) {
-      .header-inner .desktop-nav .nav-link-cm {
-        padding: 4px 6px !important;
-        font-size: 14px;
-      }
-      .header-inner .desktop-nav .nav-link-cm.nav-link-schedule-wrap {
-        max-width: 5.25rem;
-        font-size: 13px;
-      }
-    }
-    
-    /* Header sticks to top when scrolling. */
-    header.sticky-top {
-      position: sticky !important;
-      top: 0 !important;
-      z-index: 1020;
-      overflow: visible;
-    }
-
-    /*
-      Logo image is ~244px in an 81px-tall bar. Overflow paints above the rest of the page
-      (below the header) because of z-index: 1020, so it intercepts clicks on the quote form.
-    */
-    header.sticky-top .header-logo-wrap {
-      overflow: hidden;
-      max-height: 81px;
-    }
-    
-    /* Mobile menu */
-    .mobile-menu {
-      display: none;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      right: 0;
-      background: white;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-      padding: 16px;
-      z-index: 100;
-    }
-    
-    .mobile-menu.active {
-      display: block;
-    }
-    
-    .mobile-menu a {
-      display: block;
-      padding: 12px 16px;
-      color: #1a365d;
-      font-weight: 500;
-      border-bottom: 1px solid #e5e7eb;
-      transition: background-color 0.15s;
-    }
-    
-    .mobile-menu a:hover {
-      background-color: #f3f4f6;
-    }
-    
-    .mobile-menu a:last-child {
-      border-bottom: none;
-    }
-    
-    .hamburger-btn {
-      display: none;
-      padding: 8px;
-      cursor: pointer;
-      font-size: 24px;
-      color: #1a365d;
-    }
-    
-    @media (max-width: 991px) {
-      .hamburger-btn {
-        display: block;
-        margin-right: 0;
-      }
-      .desktop-nav {
-        display: none !important;
-      }
-      .desktop-cta {
-        display: none !important;
-      }
-      .header-inner {
-        justify-content: space-between !important;
-        position: relative;
-      }
-      .header-inner > .d-flex.align-items-center.gap-2 {
-        position: absolute;
-        right: 12px;
-        top: 50%;
-        transform: translateY(-50%);
-        margin-left: 0;
-        z-index: 2;
-      }
-      .header-logo-wrap {
-        margin-left: -60px !important;
-      }
-    }
-
-    /* Language toggle: show only the selected language. Must override Bootstrap's !important. */
-    html.lang-es [data-lang="en"] { display: none !important; }
-    html.lang-en [data-lang="es"] { display: none !important; }
-
-    .quote-form-card { max-width: 42rem; }
-
-    /* In-house $10K FE range (quote_ranges + /api/quote-site) */
-    .mvi-quote-card {
-      max-width: 28rem;
-      margin-inline: auto;
-      border: 2px solid rgba(13, 71, 161, 0.25);
-      border-radius: 0.75rem;
-      padding: 1.25rem 1.5rem;
-      background: #fff;
-      box-shadow: 0 10px 28px rgba(13, 71, 161, 0.1);
-    }
-    .mvi-quote-result { min-height: 4.5rem; }
-
-    /* HubSpot meetings embed in modal */
-    .schedule-modal-iframe-wrap iframe {
-      display: block;
-      width: 100%;
-      height: min(70vh, 700px);
-      border: 0;
-      background: #f8fafc;
-    }
-
-    /* Floating chat launcher (avatar + FAB) sits fixed above the page; hide it while
-       the schedule modal is open so it doesn’t stack on top of the booking UI. */
-    body.mvi-schedule-modal-open #mvi-assistant-root {
-      display: none !important;
-    }
-  </style>
   <script>
     (function(){
       try {
@@ -383,31 +49,29 @@
     })();
   </script>
 </head>
-<body class="d-flex flex-column min-vh-100 bg-light" style="font-family: 'Inter', system-ui, sans-serif; color: #1f2937;">
+<body class="d-flex flex-column min-vh-100 bg-light mvi-quote-wizard-page" style="font-family: 'Inter', system-ui, sans-serif; color: #1f2937;">
 
   <!-- HEADER -->
   <header class="sticky-top bg-white shadow-sm border-bottom">
     <div class="container">
       <div class="d-flex align-items-center justify-content-between header-inner">
-        <!-- Logo: max-height 44px, does not affect header height -->
         <div class="flex-shrink-0 header-logo-wrap">
-          <a href="/" class="d-block">
+          <a href="index.html#home" class="d-block">
             <img id="header-logo" src="img/logo-spanish2.png" alt="Mejor Vida Insurance logo" class="header-logo" />
           </a>
         </div>
 
-        <!-- Navigation - Desktop: pushed right, evenly spaced (overridden in CSS) -->
         <nav class="desktop-nav d-none d-lg-flex align-items-center">
           <a href="index.html#home" data-lang="es" class="nav-link-cm">Inicio</a>
           <a href="index.html#home" data-lang="en" class="nav-link-cm">Home</a>
-          <a href="about-julie.html" data-lang="es" class="nav-link-cm">Sobre Julie</a>
-          <a href="about-julie.html" data-lang="en" class="nav-link-cm">About Julie</a>
-          <a href="index.html#how-it-works" data-lang="es" class="nav-link-cm">Cómo funciona</a>
-          <a href="index.html#how-it-works" data-lang="en" class="nav-link-cm">How It Works</a>
-          <a href="index.html#final-expense-answers" data-lang="es" class="nav-link-cm d-inline-flex align-items-center gap-1 text-nowrap" title="¿Tienes preguntas sobre gastos finales?">
+          <a href="about-julie.html" data-lang="es" class="nav-link-cm nav-link-stack">Sobre Julie</a>
+          <a href="about-julie.html" data-lang="en" class="nav-link-cm nav-link-stack">About Julie</a>
+          <a href="index.html#how-it-works" data-lang="es" class="nav-link-cm nav-link-stack">Cómo funciona</a>
+          <a href="index.html#how-it-works" data-lang="en" class="nav-link-cm nav-link-stack">How It Works</a>
+          <a href="index.html#final-expense-answers" data-lang="es" class="nav-link-cm nav-link-stack nav-link-questions-wrap" title="¿Tienes preguntas sobre gastos finales?">
             <i class="fas fa-robot" style="font-size: 0.95em; opacity: 0.88;" aria-hidden="true"></i><span>¿Tienes preguntas?</span>
           </a>
-          <a href="index.html#final-expense-answers" data-lang="en" class="nav-link-cm d-inline-flex align-items-center gap-1 text-nowrap" title="Got questions about final expense insurance?">
+          <a href="index.html#final-expense-answers" data-lang="en" class="nav-link-cm nav-link-stack nav-link-questions-wrap" title="Got questions about final expense insurance?">
             <i class="fas fa-robot" style="font-size: 0.95em; opacity: 0.88;" aria-hidden="true"></i><span>Got questions?</span>
           </a>
           <a href="blog.html" data-lang="es" class="nav-link-cm">Blog</a>
@@ -420,32 +84,28 @@
           <a href="/quote.html?schedule=1" data-lang="en" class="nav-link-cm nav-link-schedule-wrap">Schedule with Julie</a>
         </nav>
 
-        <!-- Right side: same order as index (WhatsApp, free quote, language, menu) -->
-        <div class="d-flex align-items-center gap-2">
-          <a href="https://wa.me/14024405438?text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20seguro%20de%20gastos%20finales." target="_blank" rel="noopener" data-lang="es" class="desktop-cta d-none d-lg-inline-flex btn btn-sm fw-bold align-items-center rounded-pill px-3" style="background:#25D366;border-color:#25D366;color:#fff;"><i class="fab fa-whatsapp me-1" aria-hidden="true"></i>WhatsApp</a>
-          <a href="https://wa.me/14024405438?text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20seguro%20de%20gastos%20finales." target="_blank" rel="noopener" data-lang="en" class="desktop-cta d-none d-lg-inline-flex btn btn-sm fw-bold align-items-center rounded-pill px-3" style="background:#25D366;border-color:#25D366;color:#fff;"><i class="fab fa-whatsapp me-1" aria-hidden="true"></i>WhatsApp</a>
-          <a href="quote-screen.html" data-lang="es" class="desktop-cta d-none d-lg-inline-block btn-see-prices">
-            Cotización gratuita
-          </a>
-          <a href="quote-screen.html" data-lang="en" class="desktop-cta d-none d-lg-inline-block btn-see-prices">
-            Get a Free Quote
-          </a>
-
-          <!-- Language Toggle -->
+        <div class="d-flex align-items-center gap-2 header-actions">
+          <a href="/quote-screen.html" data-lang="es" class="desktop-cta d-none d-lg-inline-block btn-see-prices">Cotización gratuita</a>
+          <a href="/quote-screen.html" data-lang="en" class="desktop-cta d-none d-lg-inline-block btn-see-prices">Get a Free Quote</a>
           <div class="d-flex gap-1 ms-2">
-            <button class="lang-btn active px-2 py-1 rounded small fw-bold border-2" data-lang-btn="es">ES</button>
-            <button class="lang-btn px-2 py-1 rounded small fw-bold border-2" data-lang-btn="en">EN</button>
+            <button class="lang-btn active px-2 py-1 rounded small fw-bold border-2" data-lang-btn="es" type="button">ES</button>
+            <button class="lang-btn px-2 py-1 rounded small fw-bold border-2" data-lang-btn="en" type="button">EN</button>
           </div>
-
-          <!-- Hamburger Menu Button (mobile only) -->
-          <button class="hamburger-btn" id="hamburger-btn" aria-label="Open menu">
-            ☰
-          </button>
+          <button class="hamburger-btn" id="hamburger-btn" type="button" aria-label="Open menu">☰</button>
         </div>
       </div>
     </div>
+    <div class="border-top py-2 d-none d-lg-block header-office-bar" style="background:#f8fbff;">
+      <div class="container d-flex flex-wrap gap-3 align-items-center justify-content-end small">
+        <a href="https://wa.me/14024405438?text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20seguro%20de%20gastos%20finales." target="_blank" rel="noopener" data-lang="es" class="header-whatsapp-btn text-decoration-none"><i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp</a>
+        <a href="https://wa.me/14024405438?text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20seguro%20de%20gastos%20finales." target="_blank" rel="noopener" data-lang="en" class="header-whatsapp-btn text-decoration-none"><i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp</a>
+        <span data-lang="es"><strong>Oficina:</strong> <a href="tel:+14024405438" class="text-decoration-none">402-440-5438</a></span>
+        <span data-lang="en"><strong>Office:</strong> <a href="tel:+14024405438" class="text-decoration-none">402-440-5438</a></span>
+        <span data-lang="es"><strong>SMS/Texto:</strong> <a href="tel:+14027355665" class="text-decoration-none">402-735-5665</a></span>
+        <span data-lang="en"><strong>SMS/Text:</strong> <a href="tel:+14027355665" class="text-decoration-none">402-735-5665</a></span>
+      </div>
+    </div>
 
-    <!-- Mobile Menu -->
     <div class="mobile-menu" id="mobile-menu">
       <a href="index.html#home" data-lang="es" class="mobile-menu-link">Inicio</a>
       <a href="index.html#home" data-lang="en" class="mobile-menu-link">Home</a>
@@ -463,8 +123,8 @@
       <a href="contact.html" data-lang="en" class="mobile-menu-link">Contact</a>
       <a href="https://wa.me/14024405438?text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20seguro%20de%20gastos%20finales." target="_blank" rel="noopener" data-lang="es" class="mobile-menu-link fw-bold" style="color:#1D9E53;"><i class="fab fa-whatsapp me-2"></i>WhatsApp (recomendado)</a>
       <a href="https://wa.me/14024405438?text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20seguro%20de%20gastos%20finales." target="_blank" rel="noopener" data-lang="en" class="mobile-menu-link fw-bold" style="color:#1D9E53;"><i class="fab fa-whatsapp me-2"></i>WhatsApp (recommended)</a>
-      <a href="quote-screen.html" data-lang="es" class="mobile-menu-link fw-bold" style="color:#0D47A1;"><i class="fas fa-file-invoice-dollar me-2"></i>Cotización gratis en línea</a>
-      <a href="quote-screen.html" data-lang="en" class="mobile-menu-link fw-bold" style="color:#0D47A1;"><i class="fas fa-file-invoice-dollar me-2"></i>Free online quote</a>
+      <a href="/quote-screen.html" data-lang="es" class="mobile-menu-link fw-bold" style="color:#0D47A1;"><i class="fas fa-file-invoice-dollar me-2"></i>Cotización gratis en línea</a>
+      <a href="/quote-screen.html" data-lang="en" class="mobile-menu-link fw-bold" style="color:#0D47A1;"><i class="fas fa-file-invoice-dollar me-2"></i>Free online quote</a>
       <a href="/quote.html?schedule=1" data-lang="es" class="mobile-menu-link fw-bold" style="color:#0D47A1;"><i class="fas fa-calendar-alt me-2"></i>Agendar (después de tu información)</a>
       <a href="/quote.html?schedule=1" data-lang="en" class="mobile-menu-link fw-bold" style="color:#0D47A1;"><i class="fas fa-calendar-alt me-2"></i>Schedule (after we have your info)</a>
       <p class="mobile-menu-link small text-muted mb-0 px-2" data-lang="es">¿Cliente actual? Línea de oficina: <a href="tel:+14024405438" class="text-decoration-none">402-440-5438</a></p>
@@ -474,163 +134,161 @@
     </div>
   </header>
 
-  <!-- HERO -->
-  <section class="hero-two-tone py-5 relative">
-    <div class="hero-dark-overlay">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 500" preserveAspectRatio="none" aria-hidden="true"><path d="M 0 0 L 1200 0 C 900 350 300 150 0 500 L 0 0 Z" /></svg>
+  <section class="flex-grow-1 mvi-quote-wizard-section py-4 py-md-5">
+    <div class="mvi-quote-wizard-wave" aria-hidden="true">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 500" preserveAspectRatio="none">
+        <path d="M 0 0 L 1200 0 L 1200 250 C 900 420 300 175 0 250 L 0 0 Z" />
+      </svg>
     </div>
-    <div class="container text-center hero-content-overlay">
-      <h1 class="fw-bold quote-hero-title mb-0" data-lang="es">Cotización gratuita en línea</h1>
-      <h1 class="fw-bold quote-hero-title mb-0" data-lang="en">Free Online Quote</h1>
-    </div>
-  </section>
+    <div class="container mvi-quote-wizard-wrap px-3">
+      <nav class="mvi-quote-macro-stepper mvi-quote-macro-stepper--light" aria-label="Quote progress">
+        <ol>
+          <li class="is-active">
+            <span class="mvi-quote-macro-num">1</span>
+            <span class="mvi-quote-macro-label" data-lang="es">Información</span>
+            <span class="mvi-quote-macro-label" data-lang="en">Information</span>
+          </li>
+          <li>
+            <span class="mvi-quote-macro-num">2</span>
+            <span class="mvi-quote-macro-label" data-lang="es">Su estimación</span>
+            <span class="mvi-quote-macro-label" data-lang="en">Your estimate</span>
+          </li>
+          <li>
+            <span class="mvi-quote-macro-num">3</span>
+            <span class="mvi-quote-macro-label" data-lang="es">Agendar con Julie</span>
+            <span class="mvi-quote-macro-label" data-lang="en">Schedule with Julie</span>
+          </li>
+        </ol>
+      </nav>
+      <h1 class="mvi-quote-wizard-title" data-lang="es">Cotizador de seguro de gastos finales</h1>
+      <h1 class="mvi-quote-wizard-title" data-lang="en">Final Expense Insurance Quotes Calculator</h1>
 
-  <section class="flex-grow-1 py-5 bg-light">
-    <div class="container" style="max-width:48rem;">
-      <div class="bg-white rounded-3 p-4 p-md-5 shadow-sm mx-auto mb-4">
-        <div class="alert alert-light border mb-3 py-3 px-3 rounded-3" role="region" aria-label="Licensing disclosure" style="border-color: rgba(13, 71, 161, 0.4) !important; background: #f1f5f9;">
-          <p class="small mb-2 text-start fw-semibold" style="color:#0D47A1;" data-lang="es">Divulgación — licencia en Nebraska</p>
-          <p class="small mb-2 text-start fw-semibold" style="color:#0D47A1;" data-lang="en">Disclosure — Nebraska license</p>
-          <p class="small mb-0 text-start text-body-secondary" data-lang="es">Julie Braunsroth está autorizada para ofrecer y vender seguros de vida y anualidades <strong>solo en Nebraska</strong>. El cotizador de abajo es para personas que buscan cobertura como residentes de Nebraska. Si usted no es residente de Nebraska, no utilice esta herramienta para cotizar; regrese a la <a href="quote-screen.html">selección de estado</a> para la opción correcta.</p>
-          <p class="small mb-0 text-start text-body-secondary" data-lang="en">Julie Braunsroth is licensed to solicit and sell life insurance and annuities <strong>only in Nebraska</strong>. The quote tool below is for people seeking coverage as Nebraska residents. If you are not a Nebraska resident, do not use this tool to obtain a quote—go back to <a href="quote-screen.html">state selection</a> for the right option.</p>
+      <form id="mvi-nebraska-quote-flow" novalidate>
+        <div class="visually-hidden" aria-hidden="true">
+          <label>Leave blank <input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
         </div>
-        <div class="mvi-quote-card mb-4">
-          <p class="small text-body-secondary mb-3 text-center" data-lang="es">Estimación para <strong>$10,000</strong> de cobertura de gastos finales (Nebraska). Rango mensual típico según edad, género y tabaco — sin nombres de aseguradoras. Complete sus datos y la cotización; guardamos su información como lead de forma segura.</p>
-          <p class="small text-body-secondary mb-3 text-center" data-lang="en">Estimate for <strong>$10,000</strong> final-expense coverage (Nebraska). Typical monthly range by age, gender, and tobacco — no carrier names. Complete your details and quote fields; we save your information securely as a lead.</p>
-          <form id="mvi-nebraska-quote-flow" class="mx-auto" style="max-width: 28rem;" novalidate>
-            <div class="visually-hidden" aria-hidden="true">
-              <label>Leave blank <input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
-            </div>
-            <input type="hidden" name="state" value="NE" />
 
-            <div class="mb-3 pb-3 border-bottom border-light">
-              <h2 class="h6 fw-bold mb-3 text-center" style="color:#1a365d;" data-lang="es">Paso 1: Sus datos de contacto</h2>
-              <h2 class="h6 fw-bold mb-3 text-center" style="color:#1a365d;" data-lang="en">Step 1: Your contact information</h2>
-              <div class="row g-2 mb-2">
-                <div class="col-md-6">
-                  <label for="ql-first" class="form-label small mb-0" data-lang="es">Nombre</label>
-                  <label for="ql-first" class="form-label small mb-0" data-lang="en">First name</label>
-                  <input type="text" class="form-control form-control-sm" id="ql-first" name="firstName" required maxlength="200" autocomplete="given-name" />
-                </div>
-                <div class="col-md-6">
-                  <label for="ql-last" class="form-label small mb-0" data-lang="es">Apellido</label>
-                  <label for="ql-last" class="form-label small mb-0" data-lang="en">Last name</label>
-                  <input type="text" class="form-control form-control-sm" id="ql-last" name="lastName" required maxlength="200" autocomplete="family-name" />
-                </div>
-              </div>
-              <div class="mb-2">
-                <label for="ql-phone" class="form-label small mb-0" data-lang="es">Teléfono</label>
-                <label for="ql-phone" class="form-label small mb-0" data-lang="en">Phone</label>
-                <input type="tel" class="form-control form-control-sm" id="ql-phone" name="phone" required maxlength="40" autocomplete="tel" />
-              </div>
-              <div class="mb-2">
-                <label for="ql-email" class="form-label small mb-0" data-lang="es">Correo electrónico</label>
-                <label for="ql-email" class="form-label small mb-0" data-lang="en">Email</label>
-                <input type="email" class="form-control form-control-sm" id="ql-email" name="email" required maxlength="320" autocomplete="email" />
-              </div>
-            </div>
+        <div class="mvi-quote-progress-strip" aria-hidden="false">
+          <div class="mvi-quote-summary-bar">
+          <div class="mvi-quote-summary-seg" data-summary-seg="gender">
+            <span data-lang="es">GÉNERO</span><span data-lang="en">GENDER</span>
+            <div class="mvi-quote-summary-val"></div>
+          </div>
+          <div class="mvi-quote-summary-seg" data-summary-seg="dob">
+            <span data-lang="es">FECHA DE NACIMIENTO</span><span data-lang="en">DATE OF BIRTH</span>
+            <div class="mvi-quote-summary-val"></div>
+          </div>
+          <div class="mvi-quote-summary-seg" data-summary-seg="state">
+            <span data-lang="es">ESTADO DE RESIDENCIA</span><span data-lang="en">STATE</span>
+            <div class="mvi-quote-summary-val"></div>
+          </div>
+          <div class="mvi-quote-summary-seg" data-summary-seg="tobacco">
+            <span data-lang="es">TABACO</span><span data-lang="en">TOBACCO</span>
+            <div class="mvi-quote-summary-val"></div>
+          </div>
+          <div class="mvi-quote-summary-seg" data-summary-seg="coverage">
+            <span data-lang="es">COBERTURA</span><span data-lang="en">COVERAGE</span>
+            <div class="mvi-quote-summary-val"></div>
+          </div>
+          </div>
+        </div>
 
-            <div class="mb-3">
-              <h2 class="h6 fw-bold mb-3 text-center" style="color:#1a365d;" data-lang="es">Paso 2: Detalles para la cotización</h2>
-              <h2 class="h6 fw-bold mb-3 text-center" style="color:#1a365d;" data-lang="en">Step 2: Quote details</h2>
-              <div class="row g-2 align-items-end justify-content-center">
-                <div class="col-6 col-md-4">
-                  <label for="mvi-age" class="form-label small mb-0" data-lang="es">Edad (45–85)</label>
-                  <label for="mvi-age" class="form-label small mb-0" data-lang="en">Age (45–85)</label>
-                  <input type="number" class="form-control form-control-sm" id="mvi-age" name="age" min="45" max="85" required inputmode="numeric" />
-                </div>
-                <div class="col-6 col-md-4">
-                  <label for="mvi-sex" class="form-label small mb-0" data-lang="es">Género</label>
-                  <label for="mvi-sex" class="form-label small mb-0" data-lang="en">Gender</label>
-                  <select class="form-select form-select-sm" id="mvi-sex" name="sex" required>
-                    <option value="">—</option>
-                    <option value="male">Male / Masculino</option>
-                    <option value="female">Female / Femenino</option>
-                  </select>
-                </div>
-                <div class="col-12 col-md-4">
-                  <label for="mvi-smoker" class="form-label small mb-0" data-lang="es">¿Tabaco?</label>
-                  <label for="mvi-smoker" class="form-label small mb-0" data-lang="en">Tobacco?</label>
-                  <select class="form-select form-select-sm" id="mvi-smoker" name="smoker" required>
-                    <option value="false">No</option>
-                    <option value="true">Yes / Sí</option>
-                  </select>
-                </div>
-              </div>
-            </div>
+        <div id="mvi-step-gender" class="mvi-quote-step-card">
+          <p class="mvi-quote-question" data-lang="es">¿Cuál es su género?</p>
+          <p class="mvi-quote-question" data-lang="en">What is your gender?</p>
+          <div class="mvi-quote-choice-row">
+            <button type="button" class="mvi-quote-choice-btn" data-choice-field="gender" data-choice-value="male" data-lang="es">Masculino</button>
+            <button type="button" class="mvi-quote-choice-btn" data-choice-field="gender" data-choice-value="male" data-lang="en">Male</button>
+            <button type="button" class="mvi-quote-choice-btn" data-choice-field="gender" data-choice-value="female" data-lang="es">Femenino</button>
+            <button type="button" class="mvi-quote-choice-btn" data-choice-field="gender" data-choice-value="female" data-lang="en">Female</button>
+          </div>
+        </div>
 
-            <div class="form-check mb-2">
-              <input type="checkbox" class="form-check-input mt-1" id="ql-sms-consent" name="consent" value="1" />
+        <div id="mvi-step-dob" class="mvi-quote-step-card" hidden>
+          <p class="mvi-quote-question" data-lang="es">¿Cuál es su fecha de nacimiento?</p>
+          <p class="mvi-quote-question" data-lang="en">What is your date of birth?</p>
+          <div class="mvi-quote-dob-row">
+            <div class="mvi-dob-picker" id="mvi-dob-month-wrap" data-dob-part="month"></div>
+            <div class="mvi-dob-picker" id="mvi-dob-day-wrap" data-dob-part="day"></div>
+            <div class="mvi-dob-picker" id="mvi-dob-year-wrap" data-dob-part="year"></div>
+          </div>
+        </div>
+
+        <div id="mvi-step-state" class="mvi-quote-step-card" hidden>
+          <p class="mvi-quote-question" data-lang="es">¿En qué estado reside?</p>
+          <p class="mvi-quote-question" data-lang="en">What is your state of residence?</p>
+          <select id="mvi-state" class="form-select form-select-lg mx-auto" style="max-width:20rem;display:block;" required aria-label="State">
+            <option value="">—</option>
+          </select>
+          <p class="small text-body-secondary text-center mt-3 mb-0" data-lang="es">Julie cotiza en Nebraska. Si vive en otro estado, le conectamos con un agente licenciado allí.</p>
+          <p class="small text-body-secondary text-center mt-3 mb-0" data-lang="en">Julie quotes in Nebraska. If you live elsewhere, we’ll connect you with a licensed agent in your state.</p>
+        </div>
+
+        <div id="mvi-step-tobacco" class="mvi-quote-step-card" hidden>
+          <p class="mvi-quote-question" data-lang="es">¿Ha fumado o usado tabaco en los últimos 12 meses?</p>
+          <p class="mvi-quote-question" data-lang="en">Have you smoked or used tobacco in the last 12 months?</p>
+          <div class="mvi-quote-choice-row">
+            <button type="button" class="mvi-quote-choice-btn" data-choice-field="tobacco" data-choice-value="yes" data-lang="es">Sí</button>
+            <button type="button" class="mvi-quote-choice-btn" data-choice-field="tobacco" data-choice-value="yes" data-lang="en">Yes</button>
+            <button type="button" class="mvi-quote-choice-btn" data-choice-field="tobacco" data-choice-value="no" data-lang="es">No</button>
+            <button type="button" class="mvi-quote-choice-btn" data-choice-field="tobacco" data-choice-value="no" data-lang="en">No</button>
+          </div>
+        </div>
+
+        <div id="mvi-step-coverage" class="mvi-quote-step-card" hidden>
+          <p class="mvi-quote-question" data-lang="es">¿Cuánta cobertura le interesa?</p>
+          <p class="mvi-quote-question" data-lang="en">How much coverage are you interested in?</p>
+          <select id="mvi-coverage" class="form-select form-select-lg mx-auto" style="max-width:14rem;display:block;" required aria-label="Coverage">
+            <option value="">—</option>
+          </select>
+        </div>
+
+        <div id="mvi-step-contact" class="mvi-quote-step-card" hidden>
+          <p class="mvi-quote-question" data-lang="es">Ingrese su información de contacto</p>
+          <p class="mvi-quote-question" data-lang="en">Please enter your contact information</p>
+          <div class="mx-auto" style="max-width:22rem;">
+            <label for="ql-fullname" class="form-label small mb-1" data-lang="es">Su nombre</label>
+            <label for="ql-fullname" class="form-label small mb-1" data-lang="en">Your name</label>
+            <input type="text" class="form-control mb-2" id="ql-fullname" autocomplete="name" required maxlength="200" />
+            <label for="ql-email" class="form-label small mb-1">Email</label>
+            <input type="email" class="form-control mb-2" id="ql-email" autocomplete="email" required maxlength="320" />
+            <label for="ql-phone" class="form-label small mb-1" data-lang="es">Teléfono</label>
+            <label for="ql-phone" class="form-label small mb-1" data-lang="en">Phone number</label>
+            <input type="tel" class="form-control mb-2" id="ql-phone" autocomplete="tel" required maxlength="40" />
+            <p class="mvi-quote-guarantee text-center mb-3" data-lang="es">Nuestra promesa: sin correo basura. Sin llamadas spam.</p>
+            <p class="mvi-quote-guarantee text-center mb-3" data-lang="en">Our guarantee: No junk mail. No spam calls.</p>
+            <div class="form-check mb-3">
+              <input type="checkbox" class="form-check-input" id="ql-sms-consent" />
               <label class="form-check-label small text-muted" for="ql-sms-consent">
-                <span data-lang="es">Sí, acepto recibir mensajes de texto (SMS) de Mejor Vida Insurance LLC sobre opciones de seguro. Frecuencia: 1–5 mensajes por semana. Pueden aplicar tarifas de mensajes y datos. Responda STOP para cancelar. El consentimiento no es obligatorio para obtener una cotización ni para contratar un seguro. Política de Privacidad: <a href="/privacy-policy-en.html" class="text-decoration-underline">Política de Privacidad</a>.</span>
-                <span data-lang="en">Yes, I agree to receive SMS text messages from Mejor Vida Insurance LLC about insurance options. Frequency: 1–5 messages per week. Msg &amp; data rates may apply. Reply STOP to cancel. Consent is not required to get a quote or purchase insurance. <a href="/privacy-policy-en.html" class="text-decoration-underline">Privacy Policy</a>.</span>
+                <span data-lang="es">Sí, acepto recibir mensajes de texto (SMS) de Mejor Vida Insurance LLC sobre opciones de seguro. Frecuencia: 1–5 mensajes por semana. Pueden aplicar tarifas de mensajes y datos. Responda STOP para cancelar. El consentimiento no es obligatorio para obtener una cotización ni para contratar un seguro. <a href="/privacy-policy-en.html">Política de Privacidad</a>.</span>
+                <span data-lang="en">Yes, I agree to receive SMS text messages from Mejor Vida Insurance LLC about insurance options. Frequency: 1–5 messages per week. Msg &amp; data rates may apply. Reply STOP to cancel. Consent is not required to get a quote or purchase insurance. <a href="/privacy-policy-en.html">Privacy Policy</a>.</span>
               </label>
             </div>
-
-            <div class="d-grid mb-2">
-              <button type="submit" class="btn btn-primary fw-bold px-4" id="mvi-quote-submit">
-                <span data-lang="es">Obtener cotización</span>
-                <span data-lang="en">Get my quote</span>
-              </button>
-            </div>
-          </form>
-          <p id="mvi-quote-result" class="mvi-quote-result mt-3 small text-center text-body-secondary" role="status" aria-live="polite"></p>
-          <p id="mvi-flow-msg" class="small text-center mt-3 mb-0 d-none" role="status" aria-live="polite"></p>
+            <button type="submit" class="mvi-quote-submit-cta" id="mvi-quote-submit">
+              <span data-lang="es">Ver mi estimación</span>
+              <span data-lang="en">See my estimate</span>
+            </button>
+          </div>
         </div>
 
-        <section id="final-expense-answers" class="border-top border-light pt-4 mt-4" aria-label="Final expense questions">
-          <div class="text-center mb-3">
-            <h2 class="h5 fw-bold mb-2" style="color:#1a365d;" data-lang="es">¿Tienes preguntas sobre gastos finales?</h2>
-            <h2 class="h5 fw-bold mb-2" style="color:#1a365d;" data-lang="en">Questions about final expense coverage?</h2>
-            <p class="small text-body-secondary mb-0" data-lang="es">Abre el asistente de Mejor Vida con el ícono de chat en la esquina inferior derecha.</p>
-            <p class="small text-body-secondary mb-0" data-lang="en">Open the Mejor Vida assistant using the chat icon in the bottom-right corner.</p>
-          </div>
-        </section>
+        <div class="mvi-quote-wizard-nav" id="mvi-wizard-nav">
+          <button type="button" id="mvi-wizard-prev" hidden>← <span data-lang="es">Pregunta anterior</span><span data-lang="en">Previous question</span></button>
+          <button type="button" id="mvi-wizard-next"><span data-lang="es">Continuar</span><span data-lang="en">Continue</span> →</button>
+        </div>
+        <p id="mvi-quote-status" class="small text-center mt-2 mb-0" role="status" aria-live="polite"></p>
+      </form>
 
-        <p class="text-center mb-3 mt-4 small text-body-secondary" data-lang="es">¿Prefiere hablar con alguien? Llame o escríbanos.</p>
-        <p class="text-center mb-3 mt-4 small text-body-secondary" data-lang="en">Prefer to talk to someone? Call or message us.</p>
-        <p class="text-center mb-3 small text-body-secondary" data-lang="es">¿Necesita ayuda? SMS: <a href="tel:+14027355665">402-735-5665</a> | Llamadas: <a href="tel:+14024405438">402-440-5438</a></p>
-        <p class="text-center mb-3 small text-body-secondary" data-lang="en">Need assistance? SMS: <a href="tel:+14027355665">402-735-5665</a> | Call: <a href="tel:+14024405438">402-440-5438</a></p>
-        <div class="d-flex flex-wrap gap-2 justify-content-center">
-          <button type="button" class="btn btn-primary-gold rounded fw-bold px-4" data-bs-toggle="modal" data-bs-target="#scheduleModal" data-lang="es"><i class="fas fa-calendar-alt me-2"></i>Agendar cita</button>
-          <button type="button" class="btn btn-primary-gold rounded fw-bold px-4" data-bs-toggle="modal" data-bs-target="#scheduleModal" data-lang="en"><i class="fas fa-calendar-alt me-2"></i>Book appointment</button>
-          <a href="tel:+14024405438" class="btn btn-primary-gold rounded fw-bold px-4" data-lang="es"><i class="fas fa-phone me-2"></i>402-440-5438</a>
-          <a href="tel:+14024405438" class="btn btn-primary-gold rounded fw-bold px-4" data-lang="en"><i class="fas fa-phone me-2"></i>402-440-5438</a>
-          <a href="https://wa.me/14024405438?text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20seguro%20de%20gastos%20finales." target="_blank" rel="noopener" class="btn btn-success rounded fw-bold px-4" data-lang="es"><i class="fab fa-whatsapp me-2"></i>WhatsApp</a>
-          <a href="https://wa.me/14024405438?text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20seguro%20de%20gastos%20finales." target="_blank" rel="noopener" class="btn btn-success rounded fw-bold px-4" data-lang="en"><i class="fab fa-whatsapp me-2"></i>WhatsApp</a>
-          <a href="index.html#contact" class="btn btn-outline-primary rounded fw-bold px-4" data-lang="es">Contacto</a>
-          <a href="index.html#contact" class="btn btn-outline-primary rounded fw-bold px-4" data-lang="en">Contact</a>
+      <div class="mvi-quote-trust-strip">
+        <p data-lang="es">Trabajamos con aseguradoras de confianza. Julie le ayudará a comparar opciones reales según su perfil.</p>
+        <p data-lang="en">We work with trusted insurers. Julie will help you compare real options for your situation.</p>
+        <div class="mvi-quote-carrier-logos" aria-hidden="true">
+          <div class="mvi-quote-carrier-logo--omaha"><img src="img/carriers/mutual-of-omaha-logo.png" alt="" decoding="async" /></div>
+          <div class="mvi-quote-carrier-logo--assurity"><img src="img/carriers/assurity-logo.svg" alt="" decoding="async" /></div>
+          <div class="mvi-quote-carrier-logo--amicable"><img src="img/carriers/american-amicable-logo.png" alt="" decoding="async" /></div>
         </div>
       </div>
     </div>
   </section>
-
-  <!-- HubSpot scheduling (ES/EN URLs; single iframe swaps src by site language) -->
-  <div class="modal fade" id="scheduleModal" tabindex="-1" aria-labelledby="scheduleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
-      <div class="modal-content">
-        <div class="modal-header border-bottom-0 pb-0">
-          <h2 class="modal-title h5 fw-bold" id="scheduleModalLabel" style="color:#1a365d;">
-            <span data-lang="es">Agendar cita con Julie</span>
-            <span data-lang="en">Book an appointment with Julie</span>
-          </h2>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body pt-2 schedule-modal-iframe-wrap">
-          <iframe
-            id="schedule-iframe"
-            data-src-es="https://meetings-na2.hubspot.com/julie-braunsroth"
-            data-src-en="https://meetings-na2.hubspot.com/julie-braunsroth/insurance-consultation-mejor-vida-insurance"
-            title="Schedule with Julie — HubSpot"
-            width="100%"
-            height="700"
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-          ></iframe>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <!-- FOOTER -->
   <footer style="background:#1a365d; padding: 8px 0 24px 0;">
@@ -703,13 +361,12 @@
     </div>
   </footer>
 
-  <div id="mvi-assistant-root" data-api-url="/api/website-chat"></div>
-
   <!-- Bootstrap JS (local) -->
   <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
-  <!-- Scripts -->
   <script src="script.js"></script>
-  <script src="js/website-assistant-widget.js" defer></script>
+  <script src="js/us-states.js"></script>
+  <script src="js/mvi-quote-coverage-amounts.js"></script>
+  <script src="js/mvi-quote-wizard.js"></script>
 
   <!-- Mobile menu script -->
   <script>
@@ -740,260 +397,14 @@
     });
   </script>
   <script>
-    (function () {
-      function setScheduleIframeSrc() {
-        var iframe = document.getElementById('schedule-iframe');
-        if (!iframe) return;
-        var lang = document.documentElement.classList.contains('lang-en') ? 'en' : 'es';
-        var url = lang === 'es' ? iframe.getAttribute('data-src-es') : iframe.getAttribute('data-src-en');
-        if (url) iframe.setAttribute('src', url);
-        iframe.setAttribute('title', lang === 'es' ? 'Agendar cita con Julie' : 'Book an appointment with Julie');
-      }
-      window.openScheduleModalMejorVida = function () {
-        var el = document.getElementById('scheduleModal');
-        if (!el || typeof bootstrap === 'undefined') return;
-        setScheduleIframeSrc();
-        bootstrap.Modal.getOrCreateInstance(el).show();
-      };
-      var modalEl = document.getElementById('scheduleModal');
-      if (modalEl) {
-        modalEl.addEventListener('show.bs.modal', setScheduleIframeSrc);
-        modalEl.addEventListener('show.bs.modal', function () {
-          document.body.classList.add('mvi-schedule-modal-open');
-        });
-        modalEl.addEventListener('hidden.bs.modal', function () {
-          document.body.classList.remove('mvi-schedule-modal-open');
-        });
-      }
-      document.querySelectorAll('.lang-btn').forEach(function (btn) {
-        btn.addEventListener('click', function () {
-          setTimeout(function () {
-            var m = document.getElementById('scheduleModal');
-            if (m && m.classList.contains('show')) setScheduleIframeSrc();
-          }, 60);
-        });
-      });
-      window.addEventListener('load', function () {
-        try {
-          if (new URLSearchParams(location.search).get('schedule') === '1' || location.hash === '#schedule') {
-            setTimeout(function () {
-              if (window.openScheduleModalMejorVida) window.openScheduleModalMejorVida();
-            }, 400);
-          }
-        } catch (e) {}
-      });
-    })();
-  </script>
-  <script>
-    (function () {
-      function mviGetSessionClientId() {
-        try {
-          var k = 'mviSessionClientId';
-          var s = sessionStorage.getItem(k);
-          if (s && s.length > 0 && s.length < 200) return s;
-          s =
-            typeof crypto !== 'undefined' && crypto.randomUUID
-              ? crypto.randomUUID()
-              : 's-' + String(Date.now()) + '-' + Math.random().toString(36).slice(2, 10);
-          sessionStorage.setItem(k, s);
-          return s;
-        } catch (e) {
-          return null;
+    window.addEventListener('load', function () {
+      try {
+        if (new URLSearchParams(location.search).get('schedule') === '1') {
+          var raw = sessionStorage.getItem('mviNebraskaQuoteResult');
+          if (raw) location.replace('quote-results.html?schedule=1');
         }
-      }
-      function mviCollectOriginDetail() {
-        var o = {};
-        try {
-          var p = new URLSearchParams(location.search);
-          ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'gclid', 'fbclid'].forEach(
-            function (key) {
-              var v = p.get(key);
-              if (v) o[key] = v.slice(0, 500);
-            }
-          );
-          o.page_path = (location.pathname + location.search).slice(0, 2000);
-          if (document.referrer) o.referrer = document.referrer.slice(0, 2000);
-        } catch (e2) {}
-        return o;
-      }
-
-      var form = document.getElementById('mvi-nebraska-quote-flow');
-      var out = document.getElementById('mvi-quote-result');
-      var btn = document.getElementById('mvi-quote-submit');
-      var flowMsg = document.getElementById('mvi-flow-msg');
-      var phoneEl = document.getElementById('ql-phone');
-      if (!form || !out) return;
-
-      function mviPhoneHasMinDigits(phone) {
-        return String(phone || '').replace(/\D/g, '').length >= 10;
-      }
-
-      function validateQuotePhone(lang) {
-        if (!phoneEl) return true;
-        phoneEl.setCustomValidity('');
-        if (mviPhoneHasMinDigits(phoneEl.value)) return true;
-        phoneEl.setCustomValidity(
-          lang === 'es'
-            ? 'Ingresa un número de teléfono válido (mínimo 10 dígitos).'
-            : 'Enter a valid phone number (at least 10 digits).'
-        );
-        phoneEl.reportValidity();
-        return false;
-      }
-
-      if (phoneEl) {
-        phoneEl.addEventListener('input', function () {
-          phoneEl.setCustomValidity('');
-        });
-      }
-
-      form.addEventListener('submit', async function (e) {
-        e.preventDefault();
-        var lang = document.documentElement.classList.contains('lang-en') ? 'en' : 'es';
-        if (!form.checkValidity()) {
-          form.reportValidity();
-          return;
-        }
-        if (!validateQuotePhone(lang)) return;
-        var fd = new FormData(form);
-        if (fd.get('website')) return;
-
-        var age = parseInt(document.getElementById('mvi-age').value, 10);
-        var sex = String(document.getElementById('mvi-sex').value || '').toLowerCase();
-        var smoker = document.getElementById('mvi-smoker').value === 'true';
-
-        if (flowMsg) {
-          flowMsg.classList.add('d-none');
-          flowMsg.classList.remove('text-danger', 'text-success');
-        }
-        out.classList.remove('text-danger', 'text-success');
-        out.innerHTML =
-          lang === 'es'
-            ? '<span class="spinner-border spinner-border-sm me-2" role="status"></span>Calculando…'
-            : '<span class="spinner-border spinner-border-sm me-2" role="status"></span>Calculating…';
-        if (btn) btn.disabled = true;
-
-        try {
-          var res = await fetch('/api/quote-site', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ age: age, sex: sex, smoker: smoker }),
-          });
-          var data = await res.json().catch(function () {
-            return {};
-          });
-          if (!res.ok || data.ok === false) {
-            throw new Error(data.error || (lang === 'es' ? 'Error al calcular' : 'Could not calculate'));
-          }
-          if (data.quote_status !== 'ok') {
-            out.classList.add('text-danger');
-            out.textContent =
-              data.quote_error ||
-              (lang === 'es'
-                ? 'No hay datos para esa combinación.'
-                : 'No data for that combination.');
-            return;
-          }
-
-          var quoteSummary =
-            lang === 'es'
-              ? 'Estimador web: rango $10K ' +
-                data.quote_low +
-                ' – ' +
-                data.quote_high +
-                ' (medio ' +
-                data.quote_anchor +
-                '). Edad ' +
-                age +
-                ', ' +
-                sex +
-                ', tabaco ' +
-                (smoker ? 'sí' : 'no') +
-                '.'
-              : 'Web estimator: $10K range ' +
-                data.quote_low +
-                ' – ' +
-                data.quote_high +
-                ' (mid ' +
-                data.quote_anchor +
-                '). Age ' +
-                age +
-                ', ' +
-                sex +
-                ', tobacco ' +
-                (smoker ? 'yes' : 'no') +
-                '.';
-
-          var sessionClientId = mviGetSessionClientId();
-          var syncRes = await fetch('/api/quote-lead-sync', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              firstName: String(fd.get('firstName') || '').trim(),
-              lastName: String(fd.get('lastName') || '').trim(),
-              email: String(fd.get('email') || '').trim(),
-              phone: String(fd.get('phone') || '').trim(),
-              state: String(fd.get('state') || 'NE').trim().toUpperCase(),
-              quoteSummary: quoteSummary,
-              quoteLow: data.quote_low,
-              quoteHigh: data.quote_high,
-              quoteAnchor: data.quote_anchor,
-              age: age,
-              sex: sex,
-              smoker: smoker,
-              consent: !!document.getElementById('ql-sms-consent')?.checked,
-              lang: lang,
-              source: 'nebraska_quote_page',
-              sessionClientId: sessionClientId,
-              originDetail: mviCollectOriginDetail(),
-            }),
-          });
-          var syncData = await syncRes.json().catch(function () {
-            return {};
-          });
-          var leadSaved = syncRes.ok && syncData.ok;
-
-          try {
-            sessionStorage.setItem(
-              'mviNebraskaQuoteResult',
-              JSON.stringify({
-                lang: lang,
-                firstName: String(fd.get('firstName') || '').trim(),
-                quote_low: data.quote_low,
-                quote_high: data.quote_high,
-                quote_anchor: data.quote_anchor,
-                age: age,
-                sex: sex,
-                smoker: smoker,
-                savedAt: new Date().toISOString(),
-                leadId: leadSaved ? syncData.id || null : null,
-                leadSaved: leadSaved,
-                syncError: leadSaved
-                  ? null
-                  : syncData.error ||
-                    (lang === 'es'
-                      ? 'No pudimos guardar sus datos.'
-                      : 'We could not save your details.'),
-                sessionClientId: sessionClientId,
-              })
-            );
-          } catch (err) {}
-
-          out.innerHTML =
-            lang === 'es'
-              ? '<span class="spinner-border spinner-border-sm me-2" role="status"></span>Llevándole a sus resultados…'
-              : '<span class="spinner-border spinner-border-sm me-2" role="status"></span>Taking you to your results…';
-          location.replace('quote-results.html');
-          return;
-        } catch (err) {
-          out.classList.add('text-danger');
-          out.textContent =
-            err.message || (lang === 'es' ? 'Error de red. Intente más tarde.' : 'Network error. Try again.');
-        } finally {
-          if (btn) btn.disabled = false;
-        }
-      });
-    })();
+      } catch (e) {}
+    });
   </script>
 </body>
 </html>
