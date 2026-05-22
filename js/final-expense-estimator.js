@@ -135,24 +135,88 @@
   function ceremonyConfig() {
     var st = stateConfig();
     if (!st || !ceremony) return null;
+    var funeralHome = 0;
+    if (ceremony === "burial" && st.burial) {
+      funeralHome = st.burial.funeralHome || st.funeralHome.burial || 0;
+    }
     return {
-      funeralHome: st.funeralHome[ceremony] || 0,
+      funeralHome: funeralHome,
       lines: ceremonyLines(),
     };
+  }
+
+  function stateLineAmount(line) {
+    var st = stateConfig();
+    if (!st || line.type !== "stateAmount" || !line.stateKey) return 0;
+    var bucket = ceremony === "burial" ? st.burial : st.cremation;
+    if (!bucket) return 0;
+    return bucket[line.stateKey] || 0;
+  }
+
+  function cemeteryOptionsForState() {
+    var st = stateConfig();
+    var floors = DATA.cemeteryTierAmounts || [1500, 2500, 3500];
+    var stateAvg = (st && st.burial && st.burial.cemetery) || 0;
+    var basic = Math.max(stateAvg, floors[0]);
+    var notDesired = DATA.notDesiredOption || { labelEn: "Not Desired", labelEs: "No deseado", amount: 0 };
+    return [
+      {
+        labelEn: "$" + basic.toLocaleString("en-US") + " (Basic)",
+        labelEs: "$" + basic.toLocaleString("en-US") + " (Básico)",
+        amount: basic,
+      },
+      {
+        labelEn: "$" + floors[1].toLocaleString("en-US") + " (Standard)",
+        labelEs: "$" + floors[1].toLocaleString("en-US") + " (Estándar)",
+        amount: floors[1],
+      },
+      {
+        labelEn: "$" + floors[2].toLocaleString("en-US") + " (Premium)",
+        labelEs: "$" + floors[2].toLocaleString("en-US") + " (Premium)",
+        amount: floors[2],
+      },
+      notDesired,
+    ];
+  }
+
+  function lineOptions(line) {
+    if (line.type === "cemeteryTier") return cemeteryOptionsForState();
+    return line.options || [];
+  }
+
+  function lineAmount(line) {
+    if (line.type === "fixed") return line.amount || 0;
+    if (line.type === "stateAmount") return stateLineAmount(line);
+    if (line.type === "select" || line.type === "cemeteryTier") {
+      var opts = lineOptions(line);
+      var idx = lineSelections[line.id];
+      if (idx == null) idx = tierConfig().optionIndex;
+      return (opts[idx] && opts[idx].amount) || 0;
+    }
+    return 0;
   }
 
   function defaultLineSelections(type, optionIndex) {
     var lines = type === "cremation" ? DATA.cremationLines : DATA.burialLines;
     var idx = optionIndex != null ? optionIndex : tierConfig().optionIndex;
+    var tierIds = (DATA.tierLineIds && DATA.tierLineIds[type]) || [];
     var sel = {};
     lines.forEach(function (line) {
-      if (line.type === "select") sel[line.id] = idx;
+      if (
+        (line.type === "select" || line.type === "cemeteryTier") &&
+        tierIds.indexOf(line.id) >= 0
+      ) {
+        sel[line.id] = idx;
+      }
     });
     return sel;
   }
 
   function applyTier(optionIndex) {
-    lineSelections = defaultLineSelections(ceremony, optionIndex);
+    var next = defaultLineSelections(ceremony, optionIndex);
+    Object.keys(next).forEach(function (id) {
+      lineSelections[id] = next[id];
+    });
   }
 
   function funeralSubtotal() {
@@ -161,12 +225,8 @@
     var sum = cfg.funeralHome || 0;
     cfg.lines.forEach(function (line) {
       if (line.type === "fixed") sum += line.amount;
-      else if (line.type === "select") {
-        var idx = lineSelections[line.id];
-        if (idx == null) idx = tierConfig().optionIndex;
-        var opt = line.options[idx];
-        if (opt) sum += opt.amount;
-      }
+      else if (line.type === "stateAmount") sum += stateLineAmount(line);
+      else if (line.type === "select" || line.type === "cemeteryTier") sum += lineAmount(line);
     });
     return sum;
   }
@@ -243,8 +303,8 @@
 
   function scrollStepIntoView() {
     var target =
-      document.getElementById("fe-estimator-intro-section") ||
-      document.getElementById("fe-estimator-app-wrap");
+      document.getElementById("fe-estimator-app-wrap") ||
+      document.querySelector(".mvi-quote-wizard-wrap");
     if (!target) return;
     var headerOffset = window.matchMedia("(min-width: 992px)").matches ? 148 : 96;
     var top = target.getBoundingClientRect().top + window.pageYOffset - headerOffset;
@@ -260,90 +320,43 @@
     });
   }
 
-  function renderIntroContextHtml() {
+  function renderIntroWelcomeHtml() {
+    if (step === 1) {
+      return (
+        '<p class="fe-intro-hook" data-lang="es">¿Cuánto podrían costarle tus gastos finales a tu familia?</p>' +
+        '<p class="fe-intro-hook-sub" data-lang="es">Descúbrelo en menos de 60 segundos.</p>' +
+        '<p class="fe-intro-hook" data-lang="en">How much could your final expenses cost your family?</p>' +
+        '<p class="fe-intro-hook-sub" data-lang="en">Find out in less than 60 seconds.</p>'
+      );
+    }
     if (step === 2) {
       return (
-        "<h1>" +
-        escapeHtml(t("Ceremony type", "Tipo de ceremonia")) +
-        "</h1>" +
-        "<p>" +
-        t(
-          "Burial and cremation plans use different line items—caskets, vaults, and cemetery costs versus urns and memorial gatherings. Choose the option that best matches what you and your family are planning for. You can change it later and your estimate will update.",
-          "Los planes de entierro y cremación usan partidas distintas—ataúd, bóveda y cementerio frente a urna y reunión conmemorativa. Elija la opción que mejor refleje lo que usted y su familia planean. Puede cambiarla después y la estimación se actualizará."
-        ) +
-        "</p>"
+        '<p class="fe-intro-hook" data-lang="es">¿Qué tipo de ceremonia prefieres?</p>' +
+        '<p class="fe-intro-hook-sub" data-lang="es">Esto nos ayuda a estimar costos aproximados.</p>' +
+        '<p class="fe-intro-hook" data-lang="en">What type of ceremony do you prefer?</p>' +
+        '<p class="fe-intro-hook-sub" data-lang="en">This helps us estimate approximate costs.</p>'
       );
     }
     if (step === 3) {
-      var introLead;
-      if (ceremony === "cremation") {
-        introLead = t(
-          "Build your cremation estimate from typical service and merchandise costs in your state. Use Basic, Standard, or Premium as a starting preset, then adjust any line—or mark items as not desired.",
-          "Arme su estimación de cremación con costos habituales de servicios y mercancía en su estado. Use Básico, Estándar o Premium como punto de partida y luego ajuste cada rubro, o marque lo que no desea incluir."
-        );
-      } else if (ceremony === "burial") {
-        introLead = t(
-          "Build your burial estimate from typical service and merchandise costs in your state. Use Basic, Standard, or Premium as a starting preset, then adjust any line—or mark items as not desired.",
-          "Arme su estimación de entierro con costos habituales de servicios y mercancía en su estado. Use Básico, Estándar o Premium como punto de partida y luego ajuste cada rubro, o marque lo que no desea incluir."
-        );
-      } else {
-        introLead = t(
-          "Build your funeral or cremation estimate from typical service and merchandise costs in your state. Use Basic, Standard, or Premium as a starting preset, then adjust any line—or mark items as not desired.",
-          "Arme su estimación funeraria o de cremación con costos habituales de servicios y mercancía en su estado. Use Básico, Estándar o Premium como punto de partida y luego ajuste cada rubro, o marque lo que no desea incluir."
-        );
-      }
       return (
-        "<h1>" +
-        escapeHtml(t("Estimate funeral expenses", "Estimar gastos funerarios")) +
-        "</h1>" +
-        "<p>" +
-        introLead +
-        "</p>" +
-        "<p>" +
-        "<p>" +
-        t(
-          "Click the information icon next to a line for a short explanation. Amounts are regional planning averages, not a price from a funeral home.",
-          "Haga clic en el icono de información junto a cada partida para una breve explicación. Los montos son promedios de planificación regional, no un precio de funeraria."
-        ) +
-        "</p>"
+        '<p class="fe-intro-hook" data-lang="es">¿Cuánto podrían costar tus gastos funerarios?</p>' +
+        '<p class="fe-intro-hook-sub" data-lang="es">Elige un nivel y ajusta las partidas abajo.</p>' +
+        '<p class="fe-intro-hook" data-lang="en">How much could your funeral expenses cost?</p>' +
+        '<p class="fe-intro-hook-sub" data-lang="en">Pick a tier and adjust the line items below.</p>'
       );
     }
     if (step === 4) {
       return (
-        "<h1>" +
-        escapeHtml(t("Estimate family expenses", "Estimar gastos familiares")) +
-        "</h1>" +
-        "<p>" +
-        t(
-          "Family expenses are everyday costs that often continue after a death—rent or mortgage, utilities, car payments, credit card balances, medical bills, and similar obligations. Many families plan for at least <strong>90 days</strong> of household costs so loved ones have breathing room while handling arrangements and paperwork.",
-          "Los gastos familiares son costos del día a día que muchas veces siguen después de un fallecimiento—renta o hipoteca, servicios, pagos del auto, tarjetas de crédito, facturas médicas y obligaciones similares. Muchas familias planean al menos <strong>90 días</strong> de gastos del hogar para que sus seres queridos tengan margen mientras atienden trámites y arreglos."
-        ) +
-        "</p>" +
-        "<p>" +
-        t(
-          "Think about which bills would still need to be paid while your family adjusts. You can also add other one-time needs, such as travel or childcare, in the line below.",
-          "Piense en qué facturas seguirían pagándose mientras su familia se adapta. También puede sumar otras necesidades puntuales, como viajes o cuidado de niños, en la partida de abajo."
-        ) +
-        "</p>"
+        '<p class="fe-intro-hook" data-lang="es">¿Qué gastos del hogar seguirían para tu familia?</p>' +
+        '<p class="fe-intro-hook-sub" data-lang="es">Muchas familias planean al menos 90 días de margen.</p>' +
+        '<p class="fe-intro-hook" data-lang="en">What household costs would your family still face?</p>' +
+        '<p class="fe-intro-hook-sub" data-lang="en">Many families plan for at least 90 days of breathing room.</p>'
       );
     }
     if (step === 5) {
       return (
-        "<h1>" +
-        escapeHtml(t("Total final expense estimate", "Estimación total de gastos finales")) +
-        "</h1>" +
-        "<p>" +
-        t(
-          "Below is your combined picture: funeral or cremation costs plus the family expense cushion you entered. Use this total as a starting point when you talk with Julie about final expense insurance—many policies are designed to help with both the funeral bill and several months of household bills.",
-          "Abajo verá el panorama combinado: gastos funerarios o de cremación más el colchón de gastos familiares que indicó. Use este total como punto de partida al hablar con Julie sobre seguro de gastos finales—muchas pólizas ayudan tanto con la factura funeraria como con varios meses de gastos del hogar."
-        ) +
-        "</p>" +
-        '<p class="text-muted mb-0">' +
-        t(
-          "This is for educational planning only—not a funeral home quote or insurance offer.",
-          "Solo para planificación educativa—no es cotización de funeraria ni oferta de seguro."
-        ) +
-        "</p>"
+        '<p class="fe-intro-hook" data-lang="es">Estimación total de gastos finales</p>' +
+        '<p class="fe-intro-hook" data-lang="en">Total final expense estimate</p>'
       );
     }
     return "";
@@ -351,56 +364,122 @@
 
   function updateIntroPanel() {
     if (!introWelcome || !introContext) return;
-    if (step === 1) {
-      introWelcome.hidden = false;
-      introContext.hidden = true;
-      introContext.innerHTML = "";
-      if (introSection) introSection.classList.remove("fe-intro-has-context");
-      return;
+    var welcomeHtml = renderIntroWelcomeHtml();
+    introWelcome.innerHTML = welcomeHtml;
+    introWelcome.hidden = !welcomeHtml;
+    introContext.hidden = true;
+    introContext.innerHTML = "";
+    if (introSection) {
+      introSection.hidden = !welcomeHtml;
+      introSection.classList.remove("fe-intro-has-context");
     }
-    introWelcome.hidden = true;
-    introContext.hidden = false;
-    introContext.innerHTML = renderIntroContextHtml();
-    if (introSection) introSection.classList.add("fe-intro-has-context");
+  }
+
+  function renderFeWizardNav() {
+    return (
+      '<div class="mvi-quote-wizard-nav fe-wizard-nav" id="fe-wizard-nav">' +
+      '<button type="button" id="fe-wizard-prev" hidden>← ' +
+      escapeHtml(t("Previous question", "Pregunta anterior")) +
+      "</button>" +
+      '<button type="button" id="fe-wizard-next">' +
+      escapeHtml(t("Continue", "Continuar")) +
+      " →</button>" +
+      "</div>"
+    );
+  }
+
+  function renderFeWizardExtras() {
+    return (
+      '<p class="fe-wizard-start-over text-center mb-0 mt-2" id="fe-wizard-start-over-wrap" hidden>' +
+      '<button type="button" id="fe-btn-start-over">' +
+      escapeHtml(t("Start Over", "Empezar de nuevo")) +
+      "</button></p>"
+    );
+  }
+
+  function updateFeWizardNav() {
+    var prev = document.getElementById("fe-wizard-prev");
+    var next = document.getElementById("fe-wizard-next");
+    var startWrap = document.getElementById("fe-wizard-start-over-wrap");
+    if (prev) prev.hidden = step <= 1;
+    if (next) {
+      next.hidden = step >= 5;
+      next.disabled = step === 2 && !ceremony;
+    }
+    if (startWrap) startWrap.hidden = step <= 1;
+    var nav = document.getElementById("fe-wizard-nav");
+    if (nav) nav.style.maxWidth = step >= 3 ? "38rem" : "32rem";
+  }
+
+  function handleFeWizardNext() {
+    if (step === 1) goToStep(2);
+    else if (step === 2) {
+      if (!ceremony) return;
+      if (!Object.keys(lineSelections).length) {
+        lineSelections = defaultLineSelections(ceremony);
+      }
+      goToStep(3);
+    } else if (step === 3) goToStep(4);
+    else if (step === 4) goToStep(5);
+  }
+
+  function handleFeWizardPrev() {
+    if (step > 1) goToStep(step - 1);
   }
 
   function renderProgressBar() {
     var labels = [
-      t("Select Your State", "Seleccione su estado"),
-      t("Ceremony Type", "Tipo de ceremonia"),
-      t("Estimate Funeral Expenses", "Estimar gastos funerarios"),
-      t("Estimate Family Expenses", "Estimar gastos familiares"),
-      t("Total Estimate", "Estimación total"),
+      { en: "State", es: "Estado" },
+      { en: "Ceremony", es: "Ceremonia" },
+      { en: "Funeral", es: "Funerario" },
+      { en: "Family", es: "Familiar" },
+      { en: "Total", es: "Total" },
     ];
+    var fillPct = Math.min(100, (step / labels.length) * 100);
     var html =
-      '<nav class="fe-progress-segments" aria-label="' +
+      '<div class="mvi-quote-progress-strip fe-estimator-progress" aria-label="' +
       escapeHtml(t("Estimator progress", "Progreso de la calculadora")) +
       '">';
-    labels.forEach(function (label, i) {
+    html +=
+      '<div class="mvi-quote-summary-bar fe-estimator-step-bar" style="--fill-pct:' +
+      fillPct +
+      '%" role="progressbar" aria-valuenow="' +
+      step +
+      '" aria-valuemin="1" aria-valuemax="' +
+      labels.length +
+      '">';
+    labels.forEach(function (row, i) {
       var n = i + 1;
-      var cls = "fe-progress-segment";
-      if (n < step) cls += " is-done";
-      else if (n === step) cls += " is-current";
-      else cls += " is-pending";
+      var cls = "mvi-quote-summary-seg";
+      if (n <= step) cls += " is-filled";
+      if (n === step) cls += " is-current";
       html +=
         '<div class="' +
         cls +
-        '" data-step="' +
-        n +
         '"' +
         (n === step ? ' aria-current="step"' : "") +
-        ">" +
-        '<span class="fe-progress-segment-label">' +
-        escapeHtml(label) +
+        "><span>" +
+        escapeHtml(lang === "en" ? row.en : row.es) +
         "</span></div>";
     });
-    html += "</nav>";
-    return '<div class="fe-progress-wrap">' + html + "</div>";
+    html += "</div></div>";
+    return html;
+  }
+
+  function orderedStateCodes() {
+    var codes = Object.keys(DATA.states);
+    var ordered = [];
+    if (DATA.states.NE) ordered.push("NE");
+    codes.sort();
+    codes.forEach(function (code) {
+      if (code !== "NE") ordered.push(code);
+    });
+    return ordered;
   }
 
   function renderStateOptions() {
     var html = "";
-    Object.keys(DATA.states).forEach(function (code) {
+    orderedStateCodes().forEach(function (code) {
       var st = DATA.states[code];
       var label = (lang === "en" ? st.nameEn : st.nameEs) + " (" + code + ")";
       html +=
@@ -417,40 +496,27 @@
 
   function renderStep1() {
     return (
-      '<div class="fe-step-panel is-active" data-step="1">' +
-      '<div class="fe-step-form">' +
-      "<p class=\"fe-step-lead\">" +
+      '<div class="fe-step-panel mvi-quote-step-card is-active" data-step="1">' +
+      '<p class="mvi-quote-question">' +
+      t("What is your state?", "¿Cuál es tu estado?") +
+      "</p>" +
+      "<p class=\"fe-step-lead text-center text-body-secondary\">" +
       t(
-        "When you select your state, you will see average funeral and cremation planning amounts for that state. Funeral home costs vary by state; merchandise tiers are the same nationwide.",
-        "Al seleccionar su estado, verá montos de referencia para funerales y cremación en ese estado. Los honorarios de la funeraria varían por estado; los niveles de mercancía son los mismos en todo el país."
+        "You will see average burial and cremation amounts for that state. Nebraska is pre-selected; choose another state if you are planning elsewhere.",
+        "Verás promedios de entierro y cremación para ese estado. Nebraska viene preseleccionado; elige otro estado si planeas fuera de Nebraska."
       ) +
       "</p>" +
-      '<label class="form-label fw-semibold fe-step-label" for="fe-state-select">' +
+      '<div id="fe-state-picker" class="mvi-dob-picker fe-state-picker mx-auto" role="group" aria-label="' +
       t("State", "Estado") +
-      "</label>" +
-      '<select class="form-select fe-step-control" id="fe-state-select" aria-label="' +
-      t("State", "Estado") +
-      '">' +
-      renderStateOptions() +
-      "</select>" +
-      '<p class="fe-step-note">' +
-      t(
-        "Mejor Vida primarily serves Nebraska. California and Texas are included for comparison.",
-        "Mejor Vida atiende principalmente Nebraska. California y Texas están incluidos para comparación."
-      ) +
-      "</p>" +
-      '<div class="fe-step-actions">' +
-      '<button type="button" class="fe-btn-primary" id="fe-btn-next-1">' +
-      t("Next", "Siguiente") +
-      "</button>" +
-      "</div></div></div>"
+      '"></div>' +
+      "</div>"
     );
   }
 
   function renderStep2() {
     return (
-      '<div class="fe-step-panel is-active" data-step="2">' +
-      '<div class="fe-summary-chips mb-2">' +
+      '<div class="fe-step-panel mvi-quote-step-card is-active" data-step="2">' +
+      '<div class="fe-summary-chips mb-3">' +
       "<span><strong>" +
       t("State", "Estado") +
       ":</strong> " +
@@ -459,40 +525,21 @@
       t("Change", "Cambiar") +
       "</a></span>" +
       "</div>" +
-      '<div class="fe-step-form">' +
-      "<p class=\"fe-step-lead\">" +
-      t(
-        "Build a custom funeral expense estimate. Select which type of ceremony you prefer.",
-        "Arme una estimación personalizada. Seleccione el tipo de ceremonia que prefiere."
-      ) +
-      "</p>" +
-      '<p class="fe-step-label fw-bold">' +
-      t("Select A Type", "Seleccione un tipo") +
-      "</p>" +
-      '<div class="fe-ceremony-grid" role="group" aria-label="' +
+      '<div class="mvi-quote-choice-row" role="group" aria-label="' +
       t("Ceremony type", "Tipo de ceremonia") +
       '">' +
-      '<button type="button" class="fe-ceremony-option' +
+      '<button type="button" class="mvi-quote-choice-btn fe-ceremony-option' +
       (ceremony === "burial" ? " is-selected" : "") +
       '" data-ceremony="burial">' +
       t("Burial", "Entierro") +
       "</button>" +
-      '<button type="button" class="fe-ceremony-option' +
+      '<button type="button" class="mvi-quote-choice-btn fe-ceremony-option' +
       (ceremony === "cremation" ? " is-selected" : "") +
       '" data-ceremony="cremation">' +
       t("Cremation", "Cremación") +
       "</button>" +
       "</div>" +
-      '<div class="fe-step-actions">' +
-      '<button type="button" class="fe-btn-primary" id="fe-btn-next-2" ' +
-      (ceremony ? "" : "disabled") +
-      ">" +
-      t("Next", "Siguiente") +
-      "</button>" +
-      '<button type="button" class="fe-btn-link" id="fe-btn-start-over">' +
-      t("Start Over", "Empezar de nuevo") +
-      "</button>" +
-      "</div></div></div>"
+      "</div>"
     );
   }
 
@@ -517,12 +564,6 @@
     if (ceremony === "cremation") {
       return (
         '<div class="fe-tier-examples">' +
-        "<p class=\"fe-tier-examples-intro\">" +
-        t(
-          "This sets starting prices for the urn, flowers, reception, and similar items. You can change any line below.",
-          "Esto define precios iniciales para la urna, flores, recepción y partidas similares. Puede cambiar cualquier rubro abajo."
-        ) +
-        "</p>" +
         "<ul class=\"fe-tier-examples-list\">" +
         "<li><strong>" +
         t("Basic", "Básico") +
@@ -550,23 +591,11 @@
           "Urna de mayor calidad, arreglos florales más grandes y una recepción más amplia."
         ) +
         "</li>" +
-        "</ul>" +
-        "<p class=\"fe-tier-examples-note\">" +
-        t(
-          "Most families choose Standard for planning. Pick Premium if you want a larger memorial, upgraded urn, or have already talked with family about a fuller service.",
-          "La mayoría elige Estándar para planificar. Elija Premium si desea un memorial más grande, una urna mejor o ya habló con su familia sobre un servicio más completo."
-        ) +
-        "</p></div>"
+        "</ul></div>"
       );
     }
     return (
       '<div class="fe-tier-examples">' +
-      "<p class=\"fe-tier-examples-intro\">" +
-      t(
-        "This sets starting prices for the casket, vault, cemetery, flowers, and similar items. You can change any line below.",
-        "Esto define precios iniciales para el ataúd, bóveda, cementerio, flores y partidas similares. Puede cambiar cualquier rubro abajo."
-      ) +
-      "</p>" +
       "<ul class=\"fe-tier-examples-list\">" +
       "<li><strong>" +
       t("Basic", "Básico") +
@@ -589,18 +618,12 @@
       "<li><strong>" +
       t("Premium", "Premium") +
       ":</strong> " +
-      t(
-        "Higher-end casket and vault, nicer cemetery property, larger flowers, and catering for more guests.",
-        "Ataúd y bóveda de mayor nivel, mejor lote en cementerio, flores más grandes y catering para más invitados."
-      ) +
-      "</li>" +
-      "</ul>" +
-      "<p class=\"fe-tier-examples-note\">" +
-      t(
-        "Most families choose Standard for planning. Pick Premium if you want a traditional full-service funeral, upgraded merchandise, or have already shared wishes for a larger ceremony with family.",
-        "La mayoría elige Estándar para planificar. Elija Premium si desea un funeral más tradicional y completo, mercancía de mayor nivel o ya compartió con su familia el deseo de una ceremonia más amplia."
-      ) +
-      "</p></div>"
+        t(
+          "Higher-end casket and vault, nicer cemetery property, larger flowers, and catering for more guests.",
+          "Ataúd y bóveda de mayor nivel, mejor lote en cementerio, flores más grandes y catering para más invitados."
+        ) +
+        "</li>" +
+        "</ul></div>"
     );
   }
 
@@ -608,28 +631,32 @@
     var cfg = ceremonyConfig();
     if (!cfg) return "";
     var rows = "";
-    var fhPopId = nextPopoverId("fe-pop-fh");
-    rows +=
-      "<tr><td>" +
-      t("Funeral Home Expenses", "Gastos de funeraria") +
-      " " +
-      renderInfoPopover(infoPopoverHtmlFuneralHome(cfg.funeralHome), fhPopId) +
-      '</td><td><span class="fe-fixed-amount">' +
-      money(cfg.funeralHome) +
-      "</span></td></tr>";
+    if (ceremony === "burial" && cfg.funeralHome) {
+      var fhPopId = nextPopoverId("fe-pop-fh");
+      rows +=
+        "<tr><td>" +
+        t("Funeral Home Expense", "Gasto de funeraria") +
+        " " +
+        renderInfoPopover(infoPopoverHtmlFuneralHome(cfg.funeralHome), fhPopId) +
+        '</td><td><span class="fe-fixed-amount">' +
+        money(cfg.funeralHome) +
+        "</span></td></tr>";
+    }
 
     cfg.lines.forEach(function (line) {
       var label = lang === "en" ? line.labelEn : line.labelEs;
       var popId = nextPopoverId("fe-pop");
       var popHtml = infoPopoverHtmlForLine(line.id);
       rows += "<tr><td>" + label + (popHtml ? " " + renderInfoPopover(popHtml, popId) : "") + "</td><td>";
-      if (line.type === "fixed") {
-        rows += '<span class="fe-fixed-amount">' + money(line.amount) + "</span>";
-      } else {
+      if (line.type === "fixed" || line.type === "stateAmount") {
+        var amt = line.type === "stateAmount" ? stateLineAmount(line) : line.amount;
+        rows += '<span class="fe-fixed-amount">' + money(amt) + "</span>";
+      } else if (line.type === "select" || line.type === "cemeteryTier") {
         var idx = lineSelections[line.id];
         if (idx == null) idx = tierConfig().optionIndex;
+        var opts = lineOptions(line);
         rows += '<select class="form-select form-select fe-line-select" data-line-id="' + line.id + '">';
-        line.options.forEach(function (opt, oi) {
+        opts.forEach(function (opt, oi) {
           var ol = lang === "en" ? opt.labelEn : opt.labelEs;
           rows +=
             '<option value="' + oi + '"' + (oi === idx ? " selected" : "") + ">" + ol + "</option>";
@@ -651,7 +678,7 @@
   function renderStep3() {
     var typeLabel = ceremony === "cremation" ? t("Cremation", "Cremación") : t("Burial", "Entierro");
     return (
-      '<div class="fe-step-panel is-active" data-step="3">' +
+      '<div class="fe-step-panel mvi-quote-step-card is-active" data-step="3">' +
       '<div class="fe-summary-chips">' +
       "<span><strong>" +
       t("State", "Estado") +
@@ -669,7 +696,7 @@
       "</a></span>" +
       "</div>" +
       '<div class="fe-tier-row mb-3">' +
-      '<label class="form-label fw-semibold small mb-1" for="fe-tier-select">' +
+      '<label class="form-label fw-semibold mb-1" for="fe-tier-select">' +
       t("Planning tier", "Nivel de planificación") +
       "</label>" +
       '<select class="form-select" id="fe-tier-select" style="max-width:14rem;">' +
@@ -677,29 +704,10 @@
       "</select>" +
       renderTierGuide() +
       "</div>" +
-      "<p class=\"fe-help-text text-body-secondary mb-2\">" +
-      t(
-        "Please complete the items you would like to include in your funeral expense estimate. Click the information icon next to any line for a short description of that expense.",
-        "Complete los rubros que desea incluir en su estimación. Haga clic en el icono de información junto a cada partida para ver una breve descripción."
-      ) +
-      "</p>" +
-      "<p class=\"fe-help-text text-body-secondary mb-2\">" +
-      t(
-        "Adjust merchandise and services to fit your needs. Amounts are planning averages for your selected state, not a final price.",
-        "Ajuste mercancía y servicios según sus necesidades. Los montos son promedios de planificación para su estado, no un precio final."
-      ) +
-      "</p>" +
       '<table class="fe-line-table"><tbody id="fe-funeral-lines">' +
       renderFuneralLines() +
       "</tbody></table>" +
-      '<div class="fe-step-nav">' +
-      '<button type="button" class="fe-btn-primary" id="fe-btn-next-3">' +
-      t("Next", "Siguiente") +
-      "</button>" +
-      '<button type="button" class="fe-btn-link" id="fe-btn-back-3">' +
-      t("Go Back", "Regresar") +
-      "</button>" +
-      "</div></div>"
+      "</div>"
     );
   }
 
@@ -719,7 +727,7 @@
       .join("");
 
     return (
-      '<div class="fe-step-panel is-active" data-step="4">' +
+      '<div class="fe-step-panel mvi-quote-step-card is-active" data-step="4">' +
       '<table class="fe-line-table"><tbody>' +
       "<tr><td>" +
       t("Monthly Expenses", "Gastos mensuales") +
@@ -746,20 +754,13 @@
       money(familySubtotal()) +
       "</td></tr>" +
       "</tbody></table>" +
-      '<div class="fe-step-nav">' +
-      '<button type="button" class="fe-btn-primary" id="fe-btn-next-4">' +
-      t("Next", "Siguiente") +
-      "</button>" +
-      '<button type="button" class="fe-btn-link" id="fe-btn-back-4">' +
-      t("Go Back", "Regresar") +
-      "</button>" +
-      "</div></div>"
+      "</div>"
     );
   }
 
   function renderStep5() {
     return (
-      '<div class="fe-step-panel is-active" data-step="5">' +
+      '<div class="fe-step-panel mvi-quote-step-card is-active" data-step="5">' +
       '<div class="fe-summary-chips mb-2">' +
       "<span><strong>" +
       t("State", "Estado") +
@@ -783,7 +784,7 @@
       "<p class=\"fe-help-text text-body-secondary mb-3\">" +
       t(
         "Based on your selections, here is your estimated total final expenses. This is a planning tool — Julie can help you match insurance coverage to your goals.",
-        "Según sus selecciones, aquí está su estimación total de gastos finales. Esta herramienta es para planificación — Julie puede ayudarle a elegir cobertura de seguro según sus metas."
+        "Según tus selecciones, aquí está tu estimación total de gastos finales. Esta herramienta es para planificación — Julie puede ayudarte a elegir cobertura de seguro según tus metas."
       ) +
       "</p>" +
       '<div class="fe-total-line"><span>' +
@@ -801,12 +802,13 @@
       '</span><span class="fe-amount" id="fe-total-grand">' +
       money(grandTotal()) +
       "</span></div>" +
-      '<a href="quote.html" class="fe-btn-primary mt-3 d-inline-block text-center text-decoration-none">' +
-      t("Get a free insurance quote", "Obtener cotización de seguro gratis") +
+      '<div class="fe-quote-cta-wrap mt-3">' +
+      '<a href="quote.html" class="fe-quote-cta-btn">' +
+      escapeHtml(t("See my free quote →", "Ver mi cotización gratis →")) +
       "</a>" +
-      '<button type="button" class="fe-btn-link" id="fe-btn-start-over-5">' +
-      t("Start Over", "Empezar de nuevo") +
-      "</button>" +
+      '<p class="fe-quote-cta-sub">' +
+      escapeHtml(t("Fast • Free • No obligation", "Rápido • Gratis • Sin compromiso")) +
+      "</p></div>" +
       '<p class="fe-disclaimer">' +
       t(
         "Estimates are for educational planning only and are not a contract or guaranteed price. Nebraska Department of Insurance producer license #21695431.",
@@ -832,8 +834,11 @@
       renderProgressBar() +
       '<div id="fe-panels">' +
       renderPanels() +
-      "</div>";
+      "</div>" +
+      renderFeWizardNav() +
+      renderFeWizardExtras();
     bindEvents();
+    updateFeWizardNav();
   }
 
   function refreshFuneralTable() {
@@ -897,17 +902,116 @@
     saveProgress();
   }
 
-  function bindEvents() {
-    var stateSel = document.getElementById("fe-state-select");
-    if (stateSel) {
-      stateSel.addEventListener("change", function () {
-        stateCode = stateSel.value;
-        saveProgress();
+  var feStatePickerDocBound = false;
+
+  function closeFeStatePickerMenu() {
+    var wrap = document.getElementById("fe-state-picker");
+    if (!wrap) return;
+    wrap.classList.remove("is-open");
+    var menu = wrap.querySelector(".mvi-dob-picker-menu");
+    var btn = wrap.querySelector(".mvi-dob-picker-btn");
+    if (menu) menu.hidden = true;
+    if (btn) btn.setAttribute("aria-expanded", "false");
+  }
+
+  function initFeStatePicker() {
+    var wrap = document.getElementById("fe-state-picker");
+    if (!wrap || wrap.dataset.ready === "1") return;
+
+    var options = [];
+    orderedStateCodes().forEach(function (code) {
+      var st = DATA.states[code];
+      options.push({
+        value: code,
+        label: (lang === "en" ? st.nameEn : st.nameEs) + " (" + code + ")",
+      });
+    });
+
+    var hidden = document.createElement("input");
+    hidden.type = "hidden";
+    hidden.id = "fe-state-select";
+    hidden.value = stateCode;
+
+    var btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "mvi-dob-picker-btn form-select form-select-lg";
+    btn.setAttribute("aria-haspopup", "listbox");
+    btn.setAttribute("aria-expanded", "false");
+
+    var labelSpan = document.createElement("span");
+    labelSpan.className = "mvi-dob-picker-label";
+    btn.appendChild(labelSpan);
+
+    var menu = document.createElement("ul");
+    menu.className = "mvi-dob-picker-menu";
+    menu.setAttribute("role", "listbox");
+    menu.hidden = true;
+
+    options.forEach(function (opt) {
+      var li = document.createElement("li");
+      li.setAttribute("role", "option");
+      li.setAttribute("data-value", opt.value);
+      li.textContent = opt.label;
+      menu.appendChild(li);
+    });
+
+    function syncLabel() {
+      var match = options.find(function (o) {
+        return o.value === hidden.value;
+      });
+      labelSpan.textContent = match ? match.label : options[0].label;
+      menu.querySelectorAll('[role="option"]').forEach(function (li) {
+        var selected = li.getAttribute("data-value") === hidden.value;
+        li.classList.toggle("is-selected", selected);
+        li.setAttribute("aria-selected", selected ? "true" : "false");
       });
     }
 
-    var next1 = document.getElementById("fe-btn-next-1");
-    if (next1) next1.addEventListener("click", function () { goToStep(2); });
+    syncLabel();
+
+    btn.addEventListener("click", function (e) {
+      e.stopPropagation();
+      var willOpen = menu.hidden;
+      closeFeStatePickerMenu();
+      if (willOpen) {
+        menu.hidden = false;
+        wrap.classList.add("is-open");
+        btn.setAttribute("aria-expanded", "true");
+      }
+    });
+
+    menu.addEventListener("click", function (e) {
+      var li = e.target.closest('[role="option"]');
+      if (!li) return;
+      hidden.value = li.getAttribute("data-value") || stateCode;
+      stateCode = hidden.value;
+      syncLabel();
+      closeFeStatePickerMenu();
+      if (step === 3 && ceremony) refreshFuneralTable();
+      saveProgress();
+    });
+
+    wrap.appendChild(btn);
+    wrap.appendChild(menu);
+    wrap.appendChild(hidden);
+    wrap.dataset.ready = "1";
+
+    if (!feStatePickerDocBound) {
+      feStatePickerDocBound = true;
+      document.addEventListener("click", closeFeStatePickerMenu);
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") closeFeStatePickerMenu();
+      });
+    }
+  }
+
+  function bindEvents() {
+    initFeStatePicker();
+
+    var prevBtn = document.getElementById("fe-wizard-prev");
+    var nextBtn = document.getElementById("fe-wizard-next");
+    if (prevBtn) prevBtn.addEventListener("click", handleFeWizardPrev);
+    if (nextBtn) nextBtn.addEventListener("click", handleFeWizardNext);
 
     root.querySelectorAll(".fe-ceremony-option").forEach(function (btn) {
       btn.addEventListener("click", function () {
@@ -916,22 +1020,10 @@
         root.querySelectorAll(".fe-ceremony-option").forEach(function (b) {
           b.classList.toggle("is-selected", b === btn);
         });
-        var n2 = document.getElementById("fe-btn-next-2");
-        if (n2) n2.disabled = !ceremony;
+        updateFeWizardNav();
         saveProgress();
       });
     });
-
-    var next2 = document.getElementById("fe-btn-next-2");
-    if (next2) {
-      next2.addEventListener("click", function () {
-        if (!ceremony) return;
-        if (!Object.keys(lineSelections).length) {
-          lineSelections = defaultLineSelections(ceremony);
-        }
-        goToStep(3);
-      });
-    }
 
     var tierSel = document.getElementById("fe-tier-select");
     if (tierSel) {
@@ -948,11 +1040,6 @@
       sel.addEventListener("change", onLineSelectChange);
     });
 
-    var next3 = document.getElementById("fe-btn-next-3");
-    if (next3) next3.addEventListener("click", function () { goToStep(4); });
-    var back3 = document.getElementById("fe-btn-back-3");
-    if (back3) back3.addEventListener("click", function () { goToStep(2); });
-
     var monthly = document.getElementById("fe-family-monthly");
     var months = document.getElementById("fe-family-months");
     var other = document.getElementById("fe-family-other");
@@ -967,11 +1054,6 @@
     if (months) months.addEventListener("change", syncFamily);
     if (other) other.addEventListener("input", syncFamily);
 
-    var next4 = document.getElementById("fe-btn-next-4");
-    if (next4) next4.addEventListener("click", function () { goToStep(5); });
-    var back4 = document.getElementById("fe-btn-back-4");
-    if (back4) back4.addEventListener("click", function () { goToStep(3); });
-
     root.querySelectorAll(".fe-jump").forEach(function (a) {
       a.addEventListener("click", function (e) {
         e.preventDefault();
@@ -979,17 +1061,18 @@
       });
     });
 
-    root.querySelectorAll("#fe-btn-start-over, #fe-btn-start-over-5").forEach(function (btn) {
-      btn.addEventListener("click", function () {
+    var startOver = document.getElementById("fe-btn-start-over");
+    if (startOver) {
+      startOver.addEventListener("click", function () {
         if (
           confirm(
-            t("Start over and clear your saved estimate?", "¿Empezar de nuevo y borrar su estimación guardada?")
+            t("Start over and clear your saved estimate?", "¿Empezar de nuevo y borrar tu estimación guardada?")
           )
         ) {
           clearProgress();
         }
       });
-    });
+    }
 
     bindInfoPopovers();
 
@@ -1007,6 +1090,8 @@
 
   document.addEventListener("language-changed", function () {
     lang = document.documentElement.classList.contains("lang-en") ? "en" : "es";
+    var picker = document.getElementById("fe-state-picker");
+    if (picker) picker.dataset.ready = "";
     render();
   });
 

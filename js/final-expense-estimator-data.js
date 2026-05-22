@@ -1,7 +1,6 @@
 /**
- * Final expense funeral cost estimator — state-specific funeral home bases
- * (NE, CA, TX) with shared Basic / Standard / Premium merchandise tiers.
- * Itemized add-ons match Legacy Safeguard–style planning scenarios (May 2026).
+ * Final expense funeral cost estimator — per-state burial & cremation averages
+ * (Legacy Safeguard Expense Estimator, May 2026) plus optional tier add-ons.
  */
 /** $0 option — matches Legacy “Not Desired” on merchandise line items */
 var MVI_FE_NOT_DESIRED = {
@@ -10,36 +9,60 @@ var MVI_FE_NOT_DESIRED = {
   amount: 0,
 };
 
+function buildFeEstimatorStates() {
+  var costs = window.MVI_FE_STATE_COSTS || {};
+  var out = {};
+  Object.keys(costs).forEach(function (code) {
+    var row = costs[code];
+    out[code] = {
+      code: row.code,
+      nameEn: row.nameEn,
+      nameEs: row.nameEs,
+      burial: row.burial,
+      cremation: row.cremation,
+      funeralHome: row.funeralHome,
+    };
+  });
+  return out;
+}
+
 window.MVI_FE_ESTIMATOR_DATA = {
-  storageKey: "mviFeEstimatorV3",
+  storageKey: "mviFeEstimatorV5",
   notDesiredOption: MVI_FE_NOT_DESIRED,
   defaultState: "NE",
-  states: {
-    NE: {
-      code: "NE",
-      nameEn: "Nebraska",
-      nameEs: "Nebraska",
-      funeralHome: { burial: 3804, cremation: 5088 },
-    },
-    CA: {
-      code: "CA",
-      nameEn: "California",
-      nameEs: "California",
-      funeralHome: { burial: 4014, cremation: 5186 },
-    },
-    TX: {
-      code: "TX",
-      nameEn: "Texas",
-      nameEs: "Texas",
-      funeralHome: { burial: 4447, cremation: 4059 },
-    },
+  states: buildFeEstimatorStates(),
+  burialStateKeys: [
+    "casket",
+    "vault",
+    "cemetery",
+    "opening",
+    "flowers",
+    "deathCerts",
+    "stationery",
+  ],
+  cremationStateKeys: ["cremationPrice", "memorialService"],
+  /** Cemetery tier floors (Legacy-style); basic uses max(state avg, floor[0]). */
+  cemeteryTierAmounts: [1500, 2500, 3500],
+  tierLineIds: {
+    burial: [
+      "casket",
+      "vault",
+      "cemetery",
+      "flowers",
+      "deathCerts",
+      "stationery",
+      "honorarium",
+      "catering",
+      "misc",
+    ],
+    cremation: ["urn", "flowers", "deathCerts", "stationery", "honorarium", "catering", "misc"],
   },
   tiers: [
     { id: "basic", labelEn: "Basic", labelEs: "Básico", optionIndex: 0 },
     { id: "standard", labelEn: "Standard", labelEs: "Estándar", optionIndex: 1 },
     { id: "premium", labelEn: "Premium", labelEs: "Premium", optionIndex: 2 },
   ],
-  /** Burial merchandise & services (same $ across states; funeral home base varies). */
+  /** Burial: funeral home (state) + tiered merchandise; opening uses state average. */
   burialLines: [
     {
       id: "casket",
@@ -59,9 +82,9 @@ window.MVI_FE_ESTIMATOR_DATA = {
       labelEs: "Bóveda",
       type: "select",
       options: [
-        { labelEn: "$995 (Basic — Concrete)", labelEs: "$995 (Básica — concreto)", amount: 995 },
+        { labelEn: "$995 (Basic)", labelEs: "$995 (Básica — concreto)", amount: 995 },
         { labelEn: "$1,495 (Standard)", labelEs: "$1,495 (Estándar)", amount: 1495 },
-        { labelEn: "$3,495 (Premium)", labelEs: "$3,495 (Premium)", amount: 3495 },
+        { labelEn: "$2,495 (Premium)", labelEs: "$2,495 (Premium)", amount: 2495 },
         MVI_FE_NOT_DESIRED,
       ],
     },
@@ -69,25 +92,14 @@ window.MVI_FE_ESTIMATOR_DATA = {
       id: "cemetery",
       labelEn: "Cemetery Property",
       labelEs: "Propiedad en cementerio",
-      type: "select",
-      options: [
-        { labelEn: "$1,500 (Basic)", labelEs: "$1,500 (Básico)", amount: 1500 },
-        { labelEn: "$2,500 (Standard)", labelEs: "$2,500 (Estándar)", amount: 2500 },
-        { labelEn: "$3,500 (Premium)", labelEs: "$3,500 (Premium)", amount: 3500 },
-        MVI_FE_NOT_DESIRED,
-      ],
+      type: "cemeteryTier",
     },
     {
       id: "opening",
       labelEn: "Opening/Closing Grave",
       labelEs: "Apertura/cierre de tumba",
-      type: "select",
-      options: [
-        { labelEn: "$1,500", labelEs: "$1,500", amount: 1500 },
-        { labelEn: "$1,500", labelEs: "$1,500", amount: 1500 },
-        { labelEn: "$1,500", labelEs: "$1,500", amount: 1500 },
-        MVI_FE_NOT_DESIRED,
-      ],
+      type: "stateAmount",
+      stateKey: "opening",
     },
     {
       id: "flowers",
@@ -103,8 +115,8 @@ window.MVI_FE_ESTIMATOR_DATA = {
     },
     {
       id: "deathCerts",
-      labelEn: "Death Certificates",
-      labelEs: "Certificados de defunción",
+      labelEn: "Death Certificates & Obituary",
+      labelEs: "Certificados de defunción y obituario",
       type: "select",
       options: [
         { labelEn: "$500", labelEs: "$500", amount: 500 },
@@ -162,8 +174,22 @@ window.MVI_FE_ESTIMATOR_DATA = {
       ],
     },
   ],
-  /** Cremation merchandise & services (same $ across states). */
+  /** Cremation: state averages for cremation + memorial; optional tier add-ons. */
   cremationLines: [
+    {
+      id: "cremationPrice",
+      labelEn: "Cremation Price",
+      labelEs: "Precio de cremación",
+      type: "stateAmount",
+      stateKey: "cremationPrice",
+    },
+    {
+      id: "memorialService",
+      labelEn: "Memorial Service",
+      labelEs: "Servicio conmemorativo",
+      type: "stateAmount",
+      stateKey: "memorialService",
+    },
     {
       id: "urn",
       labelEn: "Cremation Urn",
@@ -295,7 +321,7 @@ window.MVI_FE_ESTIMATOR_DATA = {
       infoEn:
         "If you do not currently have cemetery property you might consider setting aside funds to pay for this expense.",
       infoEs:
-        "Si aún no tiene propiedad en un cementerio, considere reservar fondos para cubrir este gasto.",
+        "Si aún no tienes propiedad en un cementerio, considera reservar fondos para cubrir este gasto.",
     },
     opening: {
       infoEn:
@@ -307,13 +333,13 @@ window.MVI_FE_ESTIMATOR_DATA = {
       infoEn:
         "It's traditional to have flower arrangements at funeral ceremonies. You may choose to set aside funds to help provide this expense for your family.",
       infoEs:
-        "Es tradicional tener arreglos florales en ceremonias funerarias. Puede reservar fondos para ayudar a su familia con este gasto.",
+        "Es tradicional tener arreglos florales en ceremonias funerarias. Puedes reservar fondos para ayudar a tu familia con este gasto.",
     },
     deathCerts: {
       infoEn:
         "Death certificates and obituary expense also need to be accounted for. The price for obituaries varies depending on the number of newspapers and which newspapers you choose to include an obituary.",
       infoEs:
-        "Los certificados de defunción y el costo del obituario también deben contemplarse. El precio del obituario varía según la cantidad de periódicos y cuáles elija.",
+        "Los certificados de defunción y el costo del obituario también deben contemplarse. El precio del obituario varía según la cantidad de periódicos y cuáles elijas.",
     },
     stationery: {
       infoEn:
@@ -331,7 +357,7 @@ window.MVI_FE_ESTIMATOR_DATA = {
       infoEn:
         "A common tradition is for families to gather for a meal after the service; you may want to set aside money to help pay for this event.",
       infoEs:
-        "Es tradición que las familias se reúnan para comer después del servicio; puede reservar dinero para ayudar a cubrir este evento.",
+        "Es tradición que las familias se reúnan para comer después del servicio; puedes reservar dinero para ayudar a cubrir este evento.",
     },
     misc: {
       infoEn:
@@ -349,13 +375,13 @@ window.MVI_FE_ESTIMATOR_DATA = {
       infoEn:
         "Monthly household costs your family may need to cover after a loss — such as rent, mortgage, utilities, or car payments.",
       infoEs:
-        "Gastos mensuales del hogar que su familia podría necesitar cubrir tras una pérdida, como renta, hipoteca, servicios o pagos del auto.",
+        "Gastos mensuales del hogar que tu familia podría necesitar cubrir tras una pérdida, como renta, hipoteca, servicios o pagos del auto.",
     },
     familyOther: {
       infoEn:
         "One-time family expenses such as medical bills, legal fees, or other debts you want your plan to address.",
       infoEs:
-        "Gastos familiares únicos como facturas médicas, honorarios legales u otras deudas que desee incluir en su plan.",
+        "Gastos familiares únicos como facturas médicas, honorarios legales u otras deudas que quieras incluir en tu plan.",
     },
   },
 };

@@ -32,7 +32,7 @@
     })();
   </script>
 </head>
-<body class="bg-light fe-estimator-page d-flex flex-column min-vh-100" style="font-family: 'Inter', system-ui, sans-serif; color: #1f2937;">
+<body class="fe-estimator-page d-flex flex-column min-vh-100" style="font-family: 'Inter', system-ui, sans-serif; color: #1f2937;">
   <header class="sticky-top bg-white shadow-sm border-bottom">
     <div class="container">
       <div class="d-flex align-items-center justify-content-between header-inner">
@@ -115,45 +115,21 @@
     </div>
   </header>
 
-  <main class="flex-grow-1 fe-estimator-main">
-    <section id="fe-estimator-intro-section" class="fe-estimator-intro-section container-fluid px-3 px-md-4 px-xl-5">
-      <div class="fe-estimator-intro">
-        <div id="fe-intro-welcome" class="fe-intro-panel">
-        <h1 data-lang="es">Calculadora de gastos finales</h1>
-        <h1 data-lang="en">Final Expense Estimator</h1>
-        <p class="mb-2" data-lang="es">Use esta herramienta gratuita de Mejor Vida Insurance para armar un panorama aproximado de lo que podrían costar los <strong>gastos finales</strong> de su familia: servicios funerarios o de cremación, más los gastos del hogar que muchas personas desean cubrir. Las cifras son promedios regionales de referencia; Nebraska es nuestro enfoque principal, con California y Texas disponibles para comparar.</p>
-        <p class="mb-2" data-lang="en">Use this free Mejor Vida Insurance planner to build a ballpark picture of what <strong>final expenses</strong> could look like for your family—funeral or cremation services, plus household costs many people want covered. Figures are regional planning references; we focus on Nebraska, with California and Texas available for comparison.</p>
-        <p class="fw-semibold mb-1" data-lang="es">Puede incluir en su estimación:</p>
-        <p class="fw-semibold mb-1" data-lang="en">Your estimate can include:</p>
-        <ul class="fe-estimator-intro-list">
-          <li data-lang="es">Costos de entierro o cremación</li>
-          <li data-lang="en">Burial or cremation costs</li>
-          <li data-lang="es">Gastos del hogar por un período que usted elija</li>
-          <li data-lang="en">Household expenses for a period you choose</li>
-          <li data-lang="es">Un total combinado para planificar con claridad</li>
-          <li data-lang="en">A combined total for clearer planning</li>
-        </ul>
-        <p class="mb-2" data-lang="es">Muchas familias también reservan fondos para varios meses de gastos corrientes—renta o hipoteca, servicios, pagos del auto o facturas médicas pendientes—para que sus seres queridos tengan un margen después de una pérdida.</p>
-        <p class="mb-2" data-lang="en">Many families also set aside funds for a few months of everyday bills—rent or mortgage, utilities, car payments, or outstanding medical costs—so loved ones have breathing room after a loss.</p>
-        <p class="text-muted mb-0" data-lang="es">Esta herramienta es solo para planificación educativa; no es un precio de funeraria ni una oferta de seguro. Cuando lo desee, Julie puede ayudarle a revisar opciones de cobertura que se ajusten a su presupuesto.</p>
-        <p class="text-muted mb-0" data-lang="en">This tool is for educational planning only—it is not a funeral home price or an insurance offer. When you are ready, Julie can help you review coverage options that fit your budget.</p>
-        </div>
+  <section class="flex-grow-1 mvi-quote-wizard-section py-4 py-md-5">
+    <div class="mvi-quote-wizard-wave" aria-hidden="true">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 500" preserveAspectRatio="none">
+        <path d="M 0 0 L 1200 0 L 1200 250 C 900 420 300 175 0 250 L 0 0 Z" />
+      </svg>
+    </div>
+    <div class="container mvi-quote-wizard-wrap px-3" id="fe-estimator-app-wrap">
+      <div id="fe-estimator-intro-section" class="fe-estimator-intro-head">
+        <div id="fe-intro-welcome" class="fe-intro-panel"></div>
         <div id="fe-intro-context" class="fe-intro-panel fe-intro-context" hidden></div>
       </div>
-    </section>
 
-    <div class="container fe-estimator-tool-wrap">
-      <div class="fe-estimator-card" id="fe-estimator-app-wrap">
-        <div class="fe-estimator-card-header">
-          <span data-lang="es">Comenzar</span>
-          <span data-lang="en">Get Started</span>
-        </div>
-        <div class="fe-estimator-card-body">
-          <div id="fe-estimator-app" aria-live="polite"></div>
-        </div>
-      </div>
+      <div id="fe-estimator-app" aria-live="polite"></div>
     </div>
-  </main>
+  </section>
 
   <footer style="background:#1a365d; padding: 8px 0 24px 0;">
     <div class="container">
@@ -226,6 +202,7 @@
   </footer>
 
   <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="js/final-expense-state-costs.js"></script>
   <script src="js/final-expense-estimator-data.js"></script>
   <script src="js/final-expense-estimator.js"></script>
   <div id="mvi-assistant-root" data-api-url="/api/website-chat" data-mvi-avatar-base="img/mvi-chat-avatar"></div>
