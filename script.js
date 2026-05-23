@@ -7,7 +7,8 @@ document.addEventListener('DOMContentLoaded', function() {
   // LANGUAGE TOGGLE
   // ========================================
   const langButtons = document.querySelectorAll('.lang-btn');
-  let currentLanguage = 'es';
+  const isEnglishSite = /^\/en(\/|$)/.test(window.location.pathname);
+  let currentLanguage = isEnglishSite ? 'en' : 'es';
   let currentSlide = 0;
 
   function setLanguage(lang) {
@@ -36,8 +37,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Spanish: logo-spanish2.png; English: logo-english2.png
     // Nested pages (blog + carriers) need ../img.
-    const isNestedPage = window.location.pathname.includes('/blog/') || window.location.pathname.includes('/carriers/');
-    const logoBasePath = isNestedPage ? '../img/' : 'img/';
+    const path = window.location.pathname;
+    const isNestedPage = path.includes('/blog/') || path.includes('/carriers/');
+    const logoBasePath = isNestedPage ? '../img/' : '/img/';
     const headerLogo = document.getElementById('header-logo');
     if (headerLogo) {
       headerLogo.src = lang === 'es'
@@ -67,11 +69,12 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
-  // Persist language across page navigation, but reset to Spanish on reload.
+  // Persist language across page navigation, but reset to site default on reload.
   const navEntry = performance.getEntriesByType('navigation')[0];
   const isReload = navEntry && navEntry.type === 'reload';
   if (isReload) sessionStorage.removeItem('sessionLang');
-  setLanguage(sessionStorage.getItem('sessionLang') || 'es');
+  const defaultLang = isEnglishSite ? 'en' : 'es';
+  setLanguage(sessionStorage.getItem('sessionLang') || defaultLang);
 
   // Add click listeners to language buttons
   langButtons.forEach(btn => {

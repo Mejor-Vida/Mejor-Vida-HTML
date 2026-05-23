@@ -122,6 +122,1142 @@
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
 <link href="/css/mvi-assistant-widget.css" rel="stylesheet"/>
+<style>
+    /* Smooth scrolling */
+    html { scroll-behavior: smooth; }
+    
+    /* Scroll offset fix (81px = header height) */
+    :target::before {
+      content: "";
+      display: block;
+      height: 81px;
+      margin-top: -81px;
+      visibility: hidden;
+      pointer-events: none;
+    }
+    
+    /* Carousel styles - transparent container so people float on hero gradient */
+    .carousel-container {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4/3;
+      overflow: visible;
+      border-radius: 0;
+      border: none !important;
+      box-shadow: none !important;
+      filter: none;
+      background: transparent !important;
+    }
+    
+    .carousel-slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: opacity 0.8s ease-in-out;
+      background: transparent !important;
+    }
+    
+    .carousel-slide.active {
+      opacity: 1;
+    }
+    
+    .carousel-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 0;
+      border: none !important;
+      box-shadow: none !important;
+      outline: none !important;
+      background-color: transparent !important;
+      object-position: center 116%;
+      transform: scale(1.38);
+      transform-origin: center bottom;
+    }
+    /* Happy family (slide 3): scale up to fill more space */
+    .carousel-slide:nth-child(3) img {
+      transform: scale(1.74);
+      transform-origin: center bottom;
+    }
+    .carousel-slide:nth-child(4) img {
+      transform: scale(1.3);
+      transform-origin: center bottom;
+    }
+    .carousel-slide:nth-child(5) img {
+      object-position: center 124%;
+      transform: scale(1.46) translateY(8%);
+      transform-origin: center bottom;
+    }
+    /* First two slides: larger and lower to avoid head crop */
+    .carousel-slide:nth-child(1) img {
+      object-position: center 136%;
+      transform: scale(1.5) translateY(20%);
+      transform-origin: center bottom;
+    }
+    .carousel-slide:nth-child(2) .hero-couple-slide-frame {
+      position: absolute;
+      inset: 0;
+      overflow: visible;
+      transform: scale(1.5) translateY(18%);
+      transform-origin: center bottom;
+    }
+    .carousel-slide:nth-child(2) .hero-couple-slide-frame img {
+      object-position: center 133%;
+      transform: none;
+    }
+    /* Expand-in effect: each slide starts small and expands to full size when active */
+    @keyframes heroCarouselExpand {
+      from { transform: scale(0.88); }
+      to { transform: scale(1); }
+    }
+    .carousel-slide.active img {
+      animation: none;
+    }
+    .carousel-slide:nth-child(3).active img {
+      animation: none;
+      transform: scale(1.74);
+      transform-origin: center bottom;
+    }
+    .carousel-slide:nth-child(4).active img {
+      animation: none;
+      transform: scale(1.3);
+      transform-origin: center bottom;
+    }
+    .carousel-slide:nth-child(5).active img {
+      animation: none;
+      object-position: center 124%;
+      transform: scale(1.46) translateY(8%);
+      transform-origin: center bottom;
+    }
+    .carousel-slide:nth-child(1).active img {
+      animation: none;
+      object-position: center 136%;
+      transform: scale(1.5) translateY(20%);
+      transform-origin: center bottom;
+    }
+    .carousel-slide:nth-child(2).active .hero-couple-slide-frame {
+      animation: none;
+      transform: scale(1.5) translateY(18%);
+      transform-origin: center bottom;
+    }
+    .carousel-slide:nth-child(2).active .hero-couple-slide-frame img {
+      object-position: center 133%;
+      transform: none;
+    }
+    @media (max-width: 991px) {
+      .carousel-slide img {
+        object-position: center 110%;
+        transform: scale(1.24);
+      }
+      .carousel-slide:nth-child(1) img,
+      .carousel-slide:nth-child(1).active img {
+        object-position: center 128%;
+        transform: scale(1.34) translateY(15%);
+      }
+      .carousel-slide:nth-child(2) .hero-couple-slide-frame,
+      .carousel-slide:nth-child(2).active .hero-couple-slide-frame {
+        transform: scale(1.34) translateY(13%);
+        transform-origin: center bottom;
+      }
+      .carousel-slide:nth-child(2) .hero-couple-slide-frame img,
+      .carousel-slide:nth-child(2).active .hero-couple-slide-frame img {
+        object-position: center 126%;
+        transform: none;
+      }
+      .carousel-slide:nth-child(3) img,
+      .carousel-slide:nth-child(3).active img {
+        transform: scale(1.54);
+      }
+      .carousel-slide:nth-child(4) img,
+      .carousel-slide:nth-child(4).active img {
+        transform: scale(1.16);
+      }
+      .carousel-slide:nth-child(5) img,
+      .carousel-slide:nth-child(5).active img {
+        object-position: center 120%;
+        transform: scale(1.3) translateY(6%);
+      }
+    }
+
+    /* Julie's parents — small heart + name (slide 2); frame shares zoom with img */
+    .hero-couple-slide-frame {
+      pointer-events: none;
+    }
+    .hero-couple-slide-frame img {
+      pointer-events: none;
+    }
+    .hero-couple-name-tag {
+      position: absolute;
+      z-index: 6;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.28rem;
+      font-size: clamp(0.62rem, 1.85vw, 0.8rem);
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      padding: 0.2rem 0.48rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.94);
+      color: #1a365d;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.28);
+      line-height: 1;
+      white-space: nowrap;
+    }
+    .hero-couple-name-tag .fa-heart {
+      color: #e11d48;
+      font-size: 0.72em;
+    }
+    .hero-couple-name-tag--dad {
+      left: 17%;
+      top: 28%;
+    }
+    .hero-couple-name-tag--mom {
+      right: 17%;
+      top: 28%;
+    }
+    @media (max-width: 991px) {
+      .hero-couple-name-tag--dad {
+        left: 11%;
+        top: 26%;
+      }
+      .hero-couple-name-tag--mom {
+        right: 11%;
+        top: 26%;
+      }
+    }
+    
+    /* Two-tone blue hero background - smooth curve from bottom-left to top-right */
+    .hero-two-tone {
+      position: relative;
+      background: #90CDF4;
+      overflow: hidden;
+    }
+    
+    .hero-dark-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+    
+    .hero-dark-overlay svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .hero-dark-overlay path {
+      fill: #0D47A1;
+    }
+    
+    /* Hero content overlay */
+    .hero-content-overlay {
+      position: relative;
+      z-index: 2;
+    }
+    
+    /* Hero CTA button - yellow/orange */
+    .btn-primary-gold {
+      background-color: #FEC963;
+      color: #1a202c;
+      border: 2px solid #FEC963;
+      transition: all 0.2s ease-in-out;
+    }
+    
+    .btn-primary-gold:hover {
+      background-color: #f5b942;
+      border-color: #f5b942;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(254, 201, 99, 0.4);
+    }
+    
+    /* Header CTA button */
+    .btn-header-cta {
+      background-color: #63b3ed;
+      color: #1a365d;
+      border-radius: 4px;
+      padding: 8px 16px;
+      font-size: 14px;
+      font-weight: 700;
+      border: none;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      transition: all 0.15s cubic-bezier(0, 0, 0.2, 1);
+    }
+    
+    .btn-header-cta:hover {
+      background-color: #4299e1;
+      box-shadow: 0 4px 8px rgba(99, 179, 237, 0.4);
+      transform: translateY(-1px);
+    }
+    
+    /* Header navigation links */
+    .nav-link-cm {
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: #1a202c;
+      text-decoration: none;
+      padding: 4px 10px;
+      transition: all 0.15s cubic-bezier(0, 0, 0.2, 1);
+    }
+    
+    .nav-link-cm:hover {
+      color: #2563eb;
+    }
+
+    /* Header free-quote CTA - yellow/orange */
+    .btn-see-prices {
+      background-color: #FEC963;
+      color: #1a202c;
+      border-radius: 6px;
+      padding: 10px 20px;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      border: none;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      transition: all 0.15s cubic-bezier(0, 0, 0.2, 1);
+      white-space: nowrap;
+    }
+    
+    .btn-see-prices:hover {
+      background-color: #f5b942;
+      box-shadow: 0 4px 8px rgba(254, 201, 99, 0.4);
+      transform: translateY(-1px);
+    }
+    
+    /* Phone block styles */
+    .phone-block-label {
+      font-size: 12px;
+      color: #6b7280;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+    }
+    
+    .phone-block-number {
+      font-size: 16px;
+      font-weight: 700;
+      color: #0D47A1;
+      letter-spacing: -0.01em;
+      text-decoration: none;
+    }
+    
+    .phone-block-number:hover {
+      color: #1565C0;
+      text-decoration: underline;
+    }
+
+    /* Header: tap-to-call icon only (number in aria-label / title, not shown as text) */
+    .header-phone-compact {
+      display: none; /* lg+ header bar only; mobile uses hamburger menu */
+      align-items: center;
+      justify-content: center;
+      min-width: 2.5rem;
+      min-height: 2.5rem;
+      padding: 0.2rem;
+      color: #0D47A1;
+      text-decoration: none !important;
+      border-radius: 8px;
+      line-height: 1;
+      flex-shrink: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .header-phone-compact .fa-phone {
+      font-size: 1.15rem;
+    }
+    .header-phone-compact:hover {
+      color: #1565C0;
+    }
+    @media (min-width: 992px) {
+      .header-phone-compact {
+        display: inline-flex;
+      }
+    }
+
+    /* Card hover effects */
+    .feature-card {
+      transition: all 0.3s ease;
+    }
+    
+    .feature-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+    }
+    
+    /* Carousel indicators */
+    .carousel-indicators {
+      position: absolute;
+      bottom: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 8px;
+      z-index: 10;
+    }
+    
+    .carousel-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.5);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .carousel-dot.active {
+      background-color: #63b3ed;
+      transform: scale(1.2);
+    }
+
+    /* Hero carousel — quote pill: logo | carrier + "$Xk policy" + divider + "$/mo" */
+    .hero-quote-bubble-wrap {
+      position: absolute;
+      z-index: 8;
+      max-width: min(100%, 272px);
+      transition: opacity 0.35s ease, transform 0.35s ease;
+    }
+    .hero-quote-bubble-wrap.is-switching {
+      opacity: 0.65;
+    }
+    @media (min-width: 992px) {
+      .hero-quote-bubble-wrap.is-switching {
+        transform: scale(0.98);
+      }
+    }
+    .hero-quote-bubble-link {
+      color: inherit;
+      display: block;
+      border-radius: 999px;
+      outline: none;
+    }
+    .hero-quote-bubble-link:hover .hero-quote-text,
+    .hero-quote-bubble-link:hover .hero-quote-logo-wrap,
+    .hero-quote-bubble-link:focus-visible .hero-quote-text,
+    .hero-quote-bubble-link:focus-visible .hero-quote-logo-wrap {
+      box-shadow: 0 14px 36px rgba(0, 0, 0, 0.55);
+    }
+    .hero-quote-bubble-link:hover .hero-quote-text,
+    .hero-quote-bubble-link:focus-visible .hero-quote-text {
+      border-color: rgba(255, 255, 255, 0.12);
+    }
+    .hero-quote-bubble-link:focus-visible {
+      box-shadow: 0 0 0 3px rgba(254, 201, 99, 0.65);
+    }
+    .hero-quote-bubble {
+      --hq-logo: 58px;
+      --hq-pill: #1a1a1a;
+      display: flex;
+      align-items: center;
+      gap: 0;
+      padding: 0;
+      border-radius: 0;
+      background: transparent;
+      box-shadow: none;
+      border: none;
+    }
+    .hero-quote-logo-wrap {
+      flex: 0 0 auto;
+      width: var(--hq-logo);
+      height: var(--hq-logo);
+      border-radius: 50%;
+      overflow: hidden;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+      position: relative;
+      z-index: 2;
+      margin-right: 0;
+      transition: box-shadow 0.2s ease;
+    }
+    .hero-quote-logo {
+      width: var(--hq-logo);
+      height: var(--hq-logo);
+      object-fit: cover;
+      display: block;
+    }
+    .hero-quote-logo.is-hidden {
+      display: none;
+    }
+    .hero-quote-logo-fallback {
+      display: none;
+      width: var(--hq-logo);
+      height: var(--hq-logo);
+      border-radius: 50%;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: 800;
+      font-size: 0.95rem;
+      background: #3d3d3d;
+    }
+    .hero-quote-logo.is-hidden + .hero-quote-logo-fallback {
+      display: flex;
+    }
+    .hero-quote-text {
+      flex: 1 1 auto;
+      min-width: 0;
+      align-self: center;
+      position: relative;
+      z-index: 1;
+      color: #fff;
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      line-height: 1.14;
+      background: var(--hq-pill);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 999px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+      margin-left: calc(var(--hq-logo) * -0.52);
+      padding: 0.22rem 0.56rem 0.22rem calc(var(--hq-logo) * 0.48 + 0.4rem);
+      transition: box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+    @media (min-width: 992px) {
+      .hero-quote-bubble:has(.hero-quote-logo-wrap[data-carrier="assurity"]),
+      .hero-quote-bubble:has(.hero-quote-logo-wrap[data-carrier="mutual-of-omaha"]),
+      .hero-quote-bubble:has(.hero-quote-logo-wrap[data-carrier="american-amicable"]) {
+        --hq-logo: 92px;
+      }
+    }
+    .hero-quote-carrier-name {
+      font-size: 0.875rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #fff;
+      line-height: 1.12;
+    }
+    .hero-quote-policy-line {
+      font-size: 0.875rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #fff;
+      margin-top: 0.04rem;
+      line-height: 1.12;
+    }
+    .hero-quote-rate-block {
+      margin-top: 0.05rem;
+    }
+    .hero-quote-rate-block.is-empty {
+      display: none;
+    }
+    .hero-quote-divider {
+      height: 1px;
+      width: 100%;
+      background: #4a9ea8;
+      margin: 0.16rem 0 0.12rem;
+      border: none;
+      opacity: 0.85;
+    }
+    .hero-quote-rate {
+      font-size: 0.875rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #fff;
+      line-height: 1.12;
+    }
+    .hero-quote-logo-wrap[data-carrier="assurity"] {
+      display: grid;
+      place-items: center;
+      width: 92px;
+      height: 92px;
+      margin-left: -5px;
+      background: #ffffff;
+      box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.06);
+    }
+    .hero-quote-logo-wrap[data-carrier="assurity"] .hero-quote-logo {
+      /* Wide wordmark: tie size to circle height so the mark reads larger */
+      display: block;
+      grid-column: 1;
+      grid-row: 1;
+      width: auto;
+      max-width: 118%;
+      height: 100%;
+      max-height: 100%;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      object-fit: contain;
+      object-position: center;
+      justify-self: center;
+    }
+    .hero-quote-logo-wrap[data-carrier="assurity"] .hero-quote-logo-fallback {
+      color: #a42828;
+      background: transparent;
+      margin-left: 0;
+      width: 100%;
+      height: 100%;
+      font-size: 1.72rem;
+      font-weight: 800;
+      letter-spacing: -0.06em;
+      padding: 0 2px;
+      box-sizing: border-box;
+    }
+    .hero-quote-logo-wrap[data-carrier="mutual-of-omaha"] {
+      display: grid;
+      place-items: center;
+      width: 92px;
+      height: 92px;
+      margin-left: -5px;
+      background: #ffffff;
+      box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.06);
+    }
+    .hero-quote-logo-wrap[data-carrier="mutual-of-omaha"] .hero-quote-logo {
+      display: block;
+      grid-column: 1;
+      grid-row: 1;
+      width: 78%;
+      height: 78%;
+      max-width: 78%;
+      max-height: 78%;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      object-fit: contain;
+      object-position: center;
+      justify-self: center;
+    }
+    .hero-quote-logo-wrap[data-carrier="mutual-of-omaha"] .hero-quote-logo-fallback {
+      color: #003b6f;
+      background: transparent;
+      margin-left: 0;
+      width: 100%;
+      height: 100%;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1.05;
+      text-align: center;
+      padding: 0 4px;
+    }
+    .hero-quote-logo-wrap[data-carrier="american-amicable"] {
+      display: grid;
+      place-items: center;
+      width: 92px;
+      height: 92px;
+      margin-left: -5px;
+      background: #ffffff;
+      box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.06);
+    }
+    .hero-quote-logo-wrap[data-carrier="american-amicable"] .hero-quote-logo {
+      display: block;
+      grid-column: 1;
+      grid-row: 1;
+      width: 72%;
+      height: 72%;
+      max-width: 72%;
+      max-height: 72%;
+      margin: 0;
+      object-fit: contain;
+      object-position: center;
+      justify-self: center;
+    }
+    .hero-quote-logo-wrap[data-carrier="american-amicable"] .hero-quote-logo-fallback {
+      color: #1a365d;
+      background: transparent;
+      margin-left: 0;
+      width: 100%;
+      height: 100%;
+      font-size: 1.1rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+    }
+    @media (max-width: 991px) {
+      /* Horizontal elongated pill (Choice Mutual–style), not a stacked square */
+      .hero-quote-bubble-link {
+        border-radius: 999px;
+      }
+      .hero-quote-bubble {
+        --hq-logo: 42px;
+        flex-direction: row;
+        align-items: center;
+        padding: 0;
+        gap: 0;
+        text-align: left;
+      }
+      .hero-quote-logo-wrap {
+        align-self: center;
+        margin-right: 0;
+      }
+      .hero-quote-text {
+        margin-left: calc(var(--hq-logo) * -0.52);
+        padding: 0.18rem 0.65rem 0.18rem calc(var(--hq-logo) * 0.48 + 0.35rem);
+      }
+      .hero-quote-logo-wrap[data-carrier="assurity"] {
+        width: 44px !important;
+        height: 44px !important;
+        margin-left: -4px !important;
+      }
+      .hero-quote-logo-wrap[data-carrier="assurity"] .hero-quote-logo-fallback {
+        font-size: 0.82rem;
+      }
+      .hero-quote-logo-wrap[data-carrier="mutual-of-omaha"] {
+        width: 44px !important;
+        height: 44px !important;
+        margin-left: -4px !important;
+      }
+      .hero-quote-logo-wrap[data-carrier="mutual-of-omaha"] .hero-quote-logo {
+        width: 76%;
+        height: 76%;
+        max-width: 76%;
+        max-height: 76%;
+      }
+      .hero-carousel--dual-bubbles .hero-quote-logo-wrap[data-carrier="assurity"] {
+        width: 36px !important;
+        height: 36px !important;
+        margin-left: -3px !important;
+      }
+      .hero-carousel--dual-bubbles .hero-quote-logo-wrap[data-carrier="mutual-of-omaha"] {
+        width: 36px !important;
+        height: 36px !important;
+        margin-left: 0 !important;
+      }
+      .hero-quote-logo-wrap[data-carrier="american-amicable"] {
+        width: 44px !important;
+        height: 44px !important;
+        margin-left: -4px !important;
+      }
+      .hero-quote-logo-wrap[data-carrier="american-amicable"] .hero-quote-logo {
+        width: 70%;
+        height: 70%;
+      }
+      .hero-carousel--dual-bubbles .hero-quote-logo-wrap[data-carrier="american-amicable"] {
+        width: 36px !important;
+        height: 36px !important;
+        margin-left: -3px !important;
+      }
+      .hero-quote-text {
+        flex: 1 1 auto;
+        min-width: 0;
+        text-align: left;
+        color: #fff !important;
+        -webkit-text-fill-color: #fff;
+        padding-right: 0.15rem;
+      }
+      .hero-quote-carrier-name,
+      .hero-quote-policy-line,
+      .hero-quote-rate {
+        font-size: 0.78rem;
+        color: #fff !important;
+        -webkit-text-fill-color: #fff;
+        letter-spacing: -0.03em;
+      }
+      .hero-quote-bubble-wrap {
+        z-index: 25;
+        left: 50% !important;
+        right: auto !important;
+        transform: translateX(-50%);
+        bottom: 44px !important;
+        max-width: min(94vw, 288px);
+      }
+      .hero-quote-bubble-wrap.is-switching {
+        transform: translateX(-50%) scale(0.98);
+      }
+      /* Couple slide: two pills side areas; compact logo so copy stays on one capsule row */
+      .hero-carousel--dual-bubbles .hero-quote-bubble-wrap {
+        max-width: min(48vw, 178px);
+        transform: none !important;
+        bottom: 46px !important;
+      }
+      .hero-carousel--dual-bubbles .hero-quote-bubble-wrap--a {
+        left: 3% !important;
+        right: auto !important;
+      }
+      .hero-carousel--dual-bubbles .hero-quote-bubble-wrap--a.is-switching {
+        transform: scale(0.98) !important;
+      }
+      .hero-carousel--dual-bubbles .hero-quote-bubble-wrap--b {
+        left: auto !important;
+        right: 3% !important;
+      }
+      .hero-carousel--dual-bubbles .hero-quote-bubble-wrap--b.is-switching {
+        transform: scale(0.98) !important;
+      }
+    }
+
+    /* About section — portrait; crop empty top in source; no frame (no radius/shadow on img) */
+    .julie-about-img {
+      width: 245px;
+      height: 293px;
+      max-width: min(245px, 65vw);
+      object-fit: cover;
+      object-position: center 20%;
+      display: block;
+    }
+    @media (min-width: 768px) {
+      .julie-about-img {
+        width: 265px;
+        height: 315px;
+        max-width: 265px;
+      }
+    }
+    
+    /* --- Header: fixed height, larger logo, nav pushed right with even spacing --- */
+    .navbar {
+      height: 81px !important;
+      padding: 0 !important;
+      display: flex !important;
+      align-items: center !important;
+    }
+    .navbar-brand { flex: 0 0 auto; display: flex !important; align-items: center !important; padding: 0 !important; margin-right: 20px; }
+    .navbar-brand img { height: 244px !important; width: auto !important; max-height: none !important; object-fit: contain; }
+    .navbar-nav { flex: 1 1 auto; display: flex !important; align-items: center !important; justify-content: flex-start; margin: 0; padding: 0; list-style: none; }
+    .navbar-nav .nav-link { padding-left: 15px; padding-right: 15px; }
+
+    /* Custom header: 81px, logo 111px; nav links right-aligned with even gap */
+    header.sticky-top {
+      height: 81px !important;
+      padding: 0 !important;
+    }
+    header.sticky-top > .container {
+      height: 100% !important;
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+      padding-left: 0 !important;
+      display: flex !important;
+      align-items: center !important;
+    }
+    .header-inner {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: flex-start !important;
+      gap: 0;
+      width: 100%;
+    }
+    .header-logo-wrap {
+      flex: 0 0 auto;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      height: 81px !important;
+      padding: 0 !important;
+      margin-left: -120px !important;
+      margin-right: 1rem !important;
+    }
+    .header-logo {
+      height: 244px !important;
+      width: auto !important;
+      max-height: none !important;
+      object-fit: contain;
+      display: block !important;
+      transform: translateY(8px) !important;
+    }
+    /* Nav links: no wrap, spread evenly across header */
+    .nav-link-cm {
+      white-space: nowrap !important;
+    }
+    .nav-link-cm.nav-link-stack {
+      white-space: normal !important;
+      max-width: 5.1rem;
+      text-align: center;
+      line-height: 1.22;
+      align-self: center;
+      display: inline-block;
+    }
+    .nav-link-cm.nav-link-questions-wrap {
+      display: inline-flex !important;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.12rem;
+      max-width: 5.6rem;
+      white-space: normal !important;
+    }
+    .nav-link-cm.nav-link-questions-wrap span {
+      display: inline-block;
+      max-width: 5.6rem;
+      text-align: center;
+      line-height: 1.18;
+    }
+    .nav-link-cm.nav-link-schedule-wrap {
+      white-space: normal !important;
+      max-width: 6rem;
+      text-align: center;
+      line-height: 1.25;
+      align-self: center;
+      display: inline-block;
+    }
+    .nav-link-cm.nav-link-fe-calc-wrap {
+      white-space: normal !important;
+      max-width: 5.85rem;
+      text-align: center;
+      line-height: 1.22;
+      align-self: center;
+      display: inline-block;
+      font-size: 14px;
+    }
+
+    .header-inner .desktop-nav {
+      flex: 1 1 0 !important;
+      min-width: 0 !important;
+      margin-left: 0 !important;
+      gap: 0.35rem 0.72rem !important;
+      justify-content: flex-start !important;
+      padding-right: 0.5rem;
+    }
+    .header-inner > .d-flex.align-items-center.gap-2,
+    .header-inner > .header-actions {
+      flex-shrink: 0 !important;
+      margin-left: auto !important;
+    }
+    @media (min-width: 992px) {
+      .header-inner .desktop-nav .nav-link-cm {
+        padding: 5px 9px !important;
+        font-size: 15px;
+      }
+      .header-inner .desktop-nav .nav-link-cm.nav-link-stack {
+        max-width: 5rem;
+        font-size: 14px;
+      }
+      .header-inner .desktop-nav .nav-link-cm.nav-link-questions-wrap {
+        max-width: 5.45rem;
+        font-size: 14px;
+      }
+      .header-inner .desktop-nav .nav-link-cm.nav-link-schedule-wrap {
+        max-width: 5.85rem;
+        font-size: 14px;
+      }
+      .header-inner .desktop-nav .nav-link-cm.nav-link-fe-calc-wrap {
+        font-size: 13.5px;
+      }
+    }
+
+    .header-whatsapp-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      background: #25d366;
+      color: #fff !important;
+      font-weight: 700;
+      font-size: 0.875rem;
+      padding: 0.35rem 0.85rem;
+      border-radius: 999px;
+      white-space: nowrap;
+      transition: background 0.15s ease;
+    }
+    .header-whatsapp-btn:hover {
+      background: #1da851;
+      color: #fff !important;
+    }
+    
+    /* Header sticks to top when scrolling. */
+    header.sticky-top {
+      position: sticky !important;
+      top: 0 !important;
+      z-index: 1020;
+      overflow: visible;
+    }
+
+    /* Tall logo + sticky z-index would otherwise steal clicks on content below the header. */
+    header.sticky-top .header-logo-wrap {
+      overflow: hidden;
+      max-height: 81px;
+    }
+    
+    /* Mobile menu */
+    .mobile-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: white;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      padding: 16px;
+      z-index: 100;
+    }
+    
+    .mobile-menu.active {
+      display: block;
+    }
+    
+    .mobile-menu a {
+      display: block;
+      padding: 12px 16px;
+      color: #1a365d;
+      font-weight: 500;
+      border-bottom: 1px solid #e5e7eb;
+      transition: background-color 0.15s;
+    }
+    
+    .mobile-menu a:hover {
+      background-color: #f3f4f6;
+    }
+    
+    .mobile-menu a:last-child {
+      border-bottom: none;
+    }
+    
+    .hamburger-btn {
+      display: none;
+      padding: 8px;
+      cursor: pointer;
+      font-size: 24px;
+      color: #1a365d;
+    }
+    
+    @media (max-width: 991px) {
+      .hamburger-btn {
+        display: block;
+        margin-right: 0;
+      }
+      .desktop-nav {
+        display: none !important;
+      }
+      .desktop-cta {
+        display: none !important;
+      }
+      .header-inner {
+        justify-content: space-between !important;
+        position: relative;
+      }
+      .header-inner > .d-flex.align-items-center.gap-2 {
+        position: absolute;
+        right: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        margin-left: 0;
+        z-index: 2;
+      }
+      .header-logo-wrap {
+        margin-left: -60px !important;
+      }
+    }
+
+    /* Language toggle: show only the selected language. Must override Bootstrap's !important. */
+
+    /* How it works: photo cards (matches landing-gastos-finales) */
+    #how-it-works .hiw-steps-wrap {
+      max-width: 76rem;
+      margin: 0 auto;
+    }
+    #how-it-works .hiw-steps-header {
+      text-align: center;
+      margin-bottom: clamp(1.25rem, 3vw, 2rem);
+    }
+    #how-it-works .hiw-steps-header h2 {
+      font-size: clamp(1.85rem, 4.5vw, 2.5rem);
+      margin: 0;
+      line-height: 1.2;
+    }
+    #how-it-works .hiw-steps {
+      display: grid;
+      gap: clamp(0.85rem, 2vw, 1.25rem);
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+    @media (max-width: 960px) {
+      #how-it-works .hiw-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 520px) {
+      #how-it-works .hiw-steps { grid-template-columns: 1fr; max-width: 22rem; margin: 0 auto; }
+    }
+    #how-it-works .hiw-step {
+      display: flex;
+      flex-direction: column;
+      aspect-ratio: 1 / 1;
+      border: 1px solid #e2e8f0;
+      border-radius: 0.75rem;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: 0 8px 24px rgba(26, 54, 93, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    #how-it-works .hiw-step:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px rgba(26, 54, 93, 0.14);
+    }
+    #how-it-works .hiw-step-photo {
+      flex: 0 0 52%;
+      min-height: 0;
+      background-image: var(--hiw-step-bg);
+      background-size: cover;
+      background-position: center top;
+    }
+    #how-it-works .hiw-step-content {
+      flex: 1 1 auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 0;
+      padding: clamp(0.65rem, 1.8vw, 0.9rem) clamp(0.75rem, 2vw, 1rem);
+      background: #fff;
+      border-top: 3px solid #FEC963;
+    }
+    #how-it-works .hiw-step-head {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      margin-bottom: 0.35rem;
+    }
+    #how-it-works .hiw-step-num {
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.65rem;
+      height: 1.65rem;
+      border-radius: 50%;
+      background: #FEC963;
+      color: #1a202c;
+      font-weight: 800;
+      font-size: 0.8rem;
+      line-height: 1;
+    }
+    #how-it-works .hiw-step h3 {
+      font-size: clamp(0.92rem, 1.5vw, 1.05rem);
+      font-weight: 700;
+      color: #1a365d;
+      margin: 0;
+      line-height: 1.25;
+    }
+    #how-it-works .hiw-step p {
+      font-size: clamp(0.8rem, 1.35vw, 0.92rem);
+      line-height: 1.45;
+      color: #475569;
+      margin: 0;
+    }
+
+    /* Carriers: whole card is one link */
+    #carriers .carrier-card-link { color: inherit; }
+    #carriers .carrier-card-link .feature-card {
+      transition: box-shadow 0.2s ease, transform 0.15s ease;
+    }
+    #carriers .carrier-card-link:hover .feature-card {
+      box-shadow: 0 0.5rem 1.25rem rgba(26, 54, 93, 0.14) !important;
+      transform: translateY(-2px);
+    }
+    #carriers .carrier-card-link:focus-visible { outline: none; }
+    #carriers .carrier-card-link:focus-visible .feature-card {
+      outline: 2px solid #2563eb;
+      outline-offset: 3px;
+    }
+    #carriers .carrier-card-logo-wrap {
+      display: flex;
+      align-items: center;
+      min-height: 3.25rem;
+      margin-bottom: 1rem;
+    }
+    #carriers .carrier-card-logo-wrap img {
+      display: block;
+      width: auto;
+      max-width: 100%;
+      object-fit: contain;
+    }
+    #carriers .carrier-card-logo-wrap--omaha img {
+      height: clamp(2.75rem, 6vw, 3.5rem);
+    }
+    #carriers .carrier-card-logo-wrap--amicable {
+      min-height: 4rem;
+    }
+    #carriers .carrier-card-logo-wrap--amicable img {
+      height: clamp(3.75rem, 9vw, 5rem);
+      max-width: min(100%, 20rem);
+    }
+  </style>
 <link href="https://www.mejorvidainsurance.com/" hreflang="es" rel="alternate"/><link href="https://www.mejorvidainsurance.com/en/" hreflang="en" rel="alternate"/><link href="https://www.mejorvidainsurance.com/" hreflang="x-default" rel="alternate"/></head>
 <body class="bg-white" style="font-family: 'Inter', system-ui, sans-serif; color: #1f2937;">
 <header class="sticky-top bg-white shadow-sm border-bottom">

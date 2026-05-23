@@ -11,6 +11,171 @@
 <link href="/css/quote-flow-shared.css" rel="stylesheet"/>
 <link href="/css/mvi-assistant-widget.css" rel="stylesheet"/>
 <link crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" referrerpolicy="no-referrer" rel="stylesheet"/>
+<style>
+    body { font-family: Inter, system-ui, -apple-system, sans-serif; }
+    .julie-bio-layout {
+      --julie-bio-inline-pad: clamp(0.75rem, 2.5vw, 1.5rem);
+    }
+    .julie-bio-layout .julie-bio-column {
+      max-width: 42rem;
+      width: 100%;
+    }
+    .julie-bio-row {
+      display: flex;
+      flex-direction: column;
+    }
+    .julie-bio-text-col {
+      padding-left: var(--julie-bio-inline-pad);
+      padding-right: var(--julie-bio-inline-pad);
+    }
+    .julie-bio-text-col article h2 {
+      color: #1a365d;
+      font-size: 1.25rem;
+      margin-top: 2rem;
+      margin-bottom: 0.75rem;
+    }
+    .about-julie-inline-photo {
+      max-width: min(36rem, 100%);
+      margin: 1.75rem auto 1.25rem;
+    }
+    .about-julie-inline-photo img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 0.35rem;
+      box-shadow: 0 4px 18px rgba(26, 54, 93, 0.14);
+    }
+    .about-julie-inline-photo--portrait {
+      max-width: min(17rem, 82vw);
+    }
+    .about-julie-promo .about-julie-promo-link {
+      display: block;
+      max-width: min(36rem, 100%);
+      margin-inline: auto;
+      border-radius: 0.5rem;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .about-julie-promo .about-julie-promo-link:hover {
+      transform: translateY(-2px);
+    }
+    .about-julie-promo .about-julie-promo-link:focus-visible {
+      outline: 3px solid #0d6efd;
+      outline-offset: 4px;
+    }
+    .about-julie-promo .about-julie-promo-img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 0.5rem;
+      box-shadow: 0 6px 24px rgba(26, 54, 93, 0.15);
+    }
+    .about-nebraska-map-col {
+      padding-left: var(--julie-bio-inline-pad);
+      padding-right: var(--julie-bio-inline-pad);
+    }
+    @media (min-width: 992px) {
+      .julie-bio-row {
+        display: grid;
+        grid-template-columns: 1fr minmax(0, min(42rem, 92vw)) minmax(0, auto);
+        align-items: start;
+        column-gap: 0;
+      }
+      .julie-bio-text-col {
+        grid-column: 2;
+        grid-row: 1;
+        justify-self: stretch;
+        width: 100%;
+        max-width: min(42rem, 100%);
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: clamp(0.5rem, 1.5vw, 1rem);
+        padding-right: clamp(0.5rem, 1.5vw, 1rem);
+      }
+      .about-nebraska-map-col {
+        grid-column: 3;
+        grid-row: 1;
+        justify-self: start;
+        align-self: start;
+        padding-left: clamp(0.5rem, 1.75vw, 1.25rem);
+        padding-right: clamp(1rem, 3vw, 2.75rem);
+        display: flex;
+        justify-content: flex-start;
+      }
+      .about-nebraska-map-col .about-nebraska-map-aside {
+        width: auto;
+        max-width: 100%;
+        margin-left: 0;
+      }
+      .about-julie-side-sticky {
+        position: sticky;
+        top: 1rem;
+      }
+    }
+    .about-nebraska-map-aside {
+      width: 100%;
+    }
+    .about-nebraska-map-figure {
+      max-width: min(14rem, 88vw);
+      margin-left: auto;
+      margin-right: auto;
+    }
+    @media (min-width: 992px) {
+      .about-nebraska-map-figure {
+        max-width: clamp(9.5rem, 16vw, 12.5rem);
+        margin-left: 0;
+        margin-right: 0;
+      }
+    }
+    .about-nebraska-map-img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 0.35rem 0 0 0.35rem;
+      box-shadow: 0 4px 18px rgba(26, 54, 93, 0.12);
+    }
+    @media (max-width: 991.98px) {
+      .about-nebraska-map-img {
+        border-radius: 0.35rem;
+      }
+    }
+    .about-julie-hero { overflow: hidden; }
+    .about-julie-hero-deco {
+      z-index: 0;
+      pointer-events: none;
+      line-height: 0;
+    }
+    .about-julie-hero-map {
+      width: clamp(76px, 20vw, 156px);
+      height: auto;
+      display: block;
+      opacity: 0.96;
+      filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.4));
+    }
+    .about-julie-hero-flag {
+      width: clamp(52px, 8.5vw, 88px);
+      height: auto;
+      display: block;
+      border-radius: 5px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+    }
+    .about-julie-hero-flag-wrap {
+      margin-inline-end: clamp(0.4rem, 1.25vw, 0.85rem);
+      padding-right: max(0.25rem, env(safe-area-inset-right, 0px));
+      padding-top: 0.35rem;
+      padding-bottom: 0.35rem;
+    }
+    .about-julie-hero .about-julie-hero-inner {
+      position: relative;
+      z-index: 1;
+    }
+    .about-julie-hero-inner-head {
+      min-width: 0;
+      max-width: 40rem;
+      margin-inline: auto;
+      width: 100%;
+      text-align: center;
+    }
+  </style>
 <link href="https://www.mejorvidainsurance.com/en/about-julie.html" rel="canonical"/><link href="https://www.mejorvidainsurance.com/about-julie.html" hreflang="es" rel="alternate"/><link href="https://www.mejorvidainsurance.com/en/about-julie.html" hreflang="en" rel="alternate"/><link href="https://www.mejorvidainsurance.com/about-julie.html" hreflang="x-default" rel="alternate"/><meta content="About Julie | Mejor Vida Insurance" property="og:title"/><meta content="Meet Julie, a licensed final expense insurance agent in Nebraska serving the Hispanic community and English-speaking families across the state." property="og:description"/><meta content="https://www.mejorvidainsurance.com/en/about-julie.html" property="og:url"/><meta content="website" property="og:type"/><meta content="https://www.mejorvidainsurance.com/img/julie-headshot.png" property="og:image"/></head>
 <body class="bg-light">
 <header class="sticky-top bg-white shadow-sm border-bottom">

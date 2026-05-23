@@ -238,6 +238,21 @@ def strip_bilingual(soup: BeautifulSoup) -> None:
     remove_lang_toggle_ui(soup)
 
 
+def strip_bilingual_css_rules(css: str) -> str:
+    """Remove language-toggle rules only; keep the rest of a shared stylesheet."""
+    css = re.sub(
+        r'\s*html\.lang-es\s+\[data-lang="en"\]\s*\{[^}]*\}',
+        "",
+        css,
+    )
+    css = re.sub(
+        r'\s*html\.lang-en\s+\[data-lang="es"\]\s*\{[^}]*\}',
+        "",
+        css,
+    )
+    return css
+
+
 def remove_lang_scripts(soup: BeautifulSoup) -> None:
     for script in soup.find_all("script"):
         txt = script.string or ""
@@ -247,7 +262,7 @@ def remove_lang_scripts(soup: BeautifulSoup) -> None:
     for style in soup.find_all("style"):
         txt = style.string or ""
         if "html.lang-es" in txt or "html.lang-en" in txt:
-            style.decompose()
+            style.string = strip_bilingual_css_rules(txt)
 
 
 def absolutize_assets(html: str) -> str:
