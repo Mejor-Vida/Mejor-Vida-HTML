@@ -124,6 +124,103 @@
     <priority>0.80</priority>
   </url>
 
+  <url>
+    <loc>https://www.mejorvidainsurance.com/contact.html</loc>
+    <lastmod>2026-05-19T12:00:00+00:00</lastmod>
+    <priority>0.75</priority>
+  </url>
+
+  <url>
+    <loc>https://www.mejorvidainsurance.com/final-expense-estimator.html</loc>
+    <lastmod>2026-05-19T12:00:00+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://www.mejorvidainsurance.com/landing-gastos-finales.html</loc>
+    <lastmod>2026-05-19T12:00:00+00:00</lastmod>
+    <priority>0.75</priority>
+  </url>
+
+  <url>
+    <loc>https://www.mejorvidainsurance.com/privacy-policy.html</loc>
+    <lastmod>2026-05-19T12:00:00+00:00</lastmod>
+    <priority>0.50</priority>
+  </url>
+
+  <url>
+    <loc>https://www.mejorvidainsurance.com/terms-service.html</loc>
+    <lastmod>2026-05-19T12:00:00+00:00</lastmod>
+    <priority>0.50</priority>
+  </url>
+
+  <url>
+    <loc>https://www.mejorvidainsurance.com/sms-optin.html</loc>
+    <lastmod>2026-05-19T12:00:00+00:00</lastmod>
+    <priority>0.50</priority>
+  </url>
+
+  <!-- English site (/en/) -->
+  <url>
+    <loc>https://www.mejorvidainsurance.com/en/</loc>
+    <lastmod>2026-05-19T12:00:00+00:00</lastmod>
+    <priority>0.95</priority>
+  </url>
+
+  <url>
+    <loc>https://www.mejorvidainsurance.com/en/quote.html</loc>
+    <lastmod>2026-05-19T12:00:00+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://www.mejorvidainsurance.com/en/about-julie.html</loc>
+    <lastmod>2026-05-19T12:00:00+00:00</lastmod>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://www.mejorvidainsurance.com/en/contact.html</loc>
+    <lastmod>2026-05-19T12:00:00+00:00</lastmod>
+    <priority>0.75</priority>
+  </url>
+
+  <url>
+    <loc>https://www.mejorvidainsurance.com/en/blog.html</loc>
+    <lastmod>2026-05-19T12:00:00+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://www.mejorvidainsurance.com/en/final-expense-estimator.html</loc>
+    <lastmod>2026-05-19T12:00:00+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://www.mejorvidainsurance.com/en/landing-final-expense.html</loc>
+    <lastmod>2026-05-19T12:00:00+00:00</lastmod>
+    <priority>0.75</priority>
+  </url>
+
+  <url>
+    <loc>https://www.mejorvidainsurance.com/en/privacy-policy.html</loc>
+    <lastmod>2026-05-19T12:00:00+00:00</lastmod>
+    <priority>0.50</priority>
+  </url>
+
+  <url>
+    <loc>https://www.mejorvidainsurance.com/en/terms-service.html</loc>
+    <lastmod>2026-05-19T12:00:00+00:00</lastmod>
+    <priority>0.50</priority>
+  </url>
+
+  <url>
+    <loc>https://www.mejorvidainsurance.com/en/sms-optin.html</loc>
+    <lastmod>2026-05-19T12:00:00+00:00</lastmod>
+    <priority>0.50</priority>
+  </url>
+
   <!-- Future blog post URLs: add one <url> block per post -->
 
 </urlset>

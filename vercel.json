@@ -192,6 +192,46 @@
     {
       "source": "/sms-optin",
       "destination": "/sms-optin.html"
+    },
+    {
+      "source": "/en",
+      "destination": "/en/index.html"
+    },
+    {
+      "source": "/en/quote",
+      "destination": "/en/quote.html"
+    },
+    {
+      "source": "/en/about-julie",
+      "destination": "/en/about-julie.html"
+    },
+    {
+      "source": "/en/contact",
+      "destination": "/en/contact.html"
+    },
+    {
+      "source": "/en/blog",
+      "destination": "/en/blog.html"
+    },
+    {
+      "source": "/en/final-expense-estimator",
+      "destination": "/en/final-expense-estimator.html"
+    },
+    {
+      "source": "/en/landing-final-expense",
+      "destination": "/en/landing-final-expense.html"
+    },
+    {
+      "source": "/en/privacy-policy",
+      "destination": "/en/privacy-policy.html"
+    },
+    {
+      "source": "/en/terms-service",
+      "destination": "/en/terms-service.html"
+    },
+    {
+      "source": "/en/sms-optin",
+      "destination": "/en/sms-optin.html"
     }
   ]
 }
