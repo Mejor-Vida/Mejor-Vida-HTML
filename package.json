@@ -6,6 +6,7 @@
   },
   "scripts": {
     "preview": "python3 -m http.server 4173 --bind 127.0.0.1",
+    "build:en": "python3 tools/build_en_site.py",
     "dev": "vercel dev",
     "dev:local": "node scripts/local-api-dev.cjs",
     "preview:post-quote-email": "node scripts/preview-post-quote-email.js",

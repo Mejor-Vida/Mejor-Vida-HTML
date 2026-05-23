@@ -1,22 +1,21 @@
 <!DOCTYPE html>
-<html lang="es">
+
+<html class="lang-es" lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Agendar con Julie — Mejor Vida Insurance</title>
-  <meta name="description" content="Agenda una llamada gratuita con Julie de Mejor Vida Insurance. Elige fecha y hora en el calendario — sin obligación de comprar." />
-  <link rel="canonical" href="https://www.mejorvidainsurance.com/schedule-julie.html" />
-  <link rel="icon" type="image/x-icon" href="favicon.ico" />
-  <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-  <link href="css/quote-flow-shared.css" rel="stylesheet" />
-  <link href="css/mvi-assistant-widget.css" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <style>
-    html.lang-es [data-lang="en"] { display: none !important; }
-    html.lang-en [data-lang="es"] { display: none !important; }
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Agendar con Julie — Mejor Vida Insurance</title>
+<meta content="Agenda una llamada gratuita con Julie de Mejor Vida Insurance. Elige fecha y hora en el calendario — sin obligación de comprar." name="description"/>
+<link href="https://www.mejorvidainsurance.com/schedule-julie.html" rel="canonical"/>
+<link href="favicon.ico" rel="icon" type="image/x-icon"/>
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="css/quote-flow-shared.css" rel="stylesheet"/>
+<link href="css/mvi-assistant-widget.css" rel="stylesheet"/>
+<link crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" referrerpolicy="no-referrer" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<style>
     .nav-link-cm.nav-link-schedule-wrap { color: #0d47a1; font-weight: 700; }
     body { font-family: Inter, system-ui, sans-serif; background: #cfe6f7; color: #1f2937; }
     .julie-schedule-section {
@@ -113,180 +112,116 @@
       .julie-schedule-embed iframe { min-height: 620px; }
     }
   </style>
-  <script>
-    (function () {
-      try {
-        var L = sessionStorage.getItem("sessionLang") || "es";
-        document.documentElement.className = "lang-" + L;
-      } catch (e) {
-        document.documentElement.className = "lang-es";
-      }
-    })();
-  </script>
-</head>
+
+<script>(function(){document.documentElement.lang="es";document.documentElement.className="lang-es";})();</script></head>
 <body class="d-flex flex-column min-vh-100">
-  <header class="sticky-top bg-white shadow-sm border-bottom">
-    <div class="container">
-      <div class="d-flex align-items-center justify-content-between header-inner">
-        <div class="flex-shrink-0 header-logo-wrap">
-          <a href="index.html#home" class="d-block">
-            <img id="header-logo" src="img/logo-spanish2.png" alt="Mejor Vida Insurance logo" class="header-logo" />
-          </a>
-        </div>
-        <nav class="desktop-nav d-none d-lg-flex align-items-center">
-          <a href="index.html#home" data-lang="es" class="nav-link-cm">Inicio</a>
-          <a href="index.html#home" data-lang="en" class="nav-link-cm">Home</a>
-          <a href="about-julie.html" data-lang="es" class="nav-link-cm nav-link-stack">Sobre Julie</a>
-          <a href="about-julie.html" data-lang="en" class="nav-link-cm nav-link-stack">About Julie</a>
-          <a href="index.html#how-it-works" data-lang="es" class="nav-link-cm nav-link-stack">Cómo funciona</a>
-          <a href="index.html#how-it-works" data-lang="en" class="nav-link-cm nav-link-stack">How It Works</a>
-          <a href="index.html#final-expense-answers" data-lang="es" class="nav-link-cm nav-link-stack nav-link-questions-wrap"><i class="fas fa-robot" style="font-size: 0.95em; opacity: 0.88;" aria-hidden="true"></i><span>¿Tienes preguntas?</span></a>
-          <a href="index.html#final-expense-answers" data-lang="en" class="nav-link-cm nav-link-stack nav-link-questions-wrap"><i class="fas fa-robot" style="font-size: 0.95em; opacity: 0.88;" aria-hidden="true"></i><span>Got questions?</span></a>
-          <a href="blog.html" data-lang="es" class="nav-link-cm">Blog</a>
-          <a href="blog.html" data-lang="en" class="nav-link-cm">Blog</a>
-          <a href="final-expense-estimator.html" data-lang="es" class="nav-link-cm nav-link-fe-calc-wrap">Calculadora de gastos finales</a>
-          <a href="final-expense-estimator.html" data-lang="en" class="nav-link-cm nav-link-fe-calc-wrap">Final Expense Calculator</a>
-          <a href="contact.html" data-lang="es" class="nav-link-cm">Contacto</a>
-          <a href="contact.html" data-lang="en" class="nav-link-cm">Contact</a>
-          <a href="/schedule-julie.html" data-lang="es" class="nav-link-cm nav-link-schedule-wrap">Agendar con Julie</a>
-          <a href="/schedule-julie.html" data-lang="en" class="nav-link-cm nav-link-schedule-wrap">Schedule with Julie</a>
-        </nav>
-        <div class="d-flex align-items-center gap-2 header-actions">
-          <a href="/quote.html" data-lang="es" class="desktop-cta d-none d-lg-inline-block btn-see-prices">Cotización gratuita</a>
-          <a href="/quote.html" data-lang="en" class="desktop-cta d-none d-lg-inline-block btn-see-prices">Get a Free Quote</a>
-          <div class="d-flex gap-1 ms-2">
-            <button class="lang-btn active px-2 py-1 rounded small fw-bold border-2" data-lang-btn="es" type="button">ES</button>
-            <button class="lang-btn px-2 py-1 rounded small fw-bold border-2" data-lang-btn="en" type="button">EN</button>
-          </div>
-          <button class="hamburger-btn" id="hamburger-btn" type="button" aria-label="Open menu">☰</button>
-        </div>
-      </div>
-    </div>
-    <div class="border-top py-2 d-none d-lg-block header-office-bar" style="background:#f8fbff;">
-      <div class="container d-flex flex-wrap gap-3 align-items-center justify-content-end small">
-        <a href="https://wa.me/14024405438?text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20seguro%20de%20gastos%20finales." target="_blank" rel="noopener" data-lang="es" class="header-whatsapp-btn text-decoration-none"><i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp</a>
-        <a href="https://wa.me/14024405438?text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20seguro%20de%20gastos%20finales." target="_blank" rel="noopener" data-lang="en" class="header-whatsapp-btn text-decoration-none"><i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp</a>
-        <span data-lang="es"><strong>Oficina:</strong> <a href="tel:+14024405438" class="text-decoration-none">402-440-5438</a></span>
-        <span data-lang="en"><strong>Office:</strong> <a href="tel:+14024405438" class="text-decoration-none">402-440-5438</a></span>
-        <span data-lang="es"><strong>SMS/Texto:</strong> <a href="tel:+14027355665" class="text-decoration-none">402-735-5665</a></span>
-        <span data-lang="en"><strong>SMS/Text:</strong> <a href="tel:+14027355665" class="text-decoration-none">402-735-5665</a></span>
-      </div>
-    </div>
-    <div class="mobile-menu" id="mobile-menu">
-      <a href="index.html#home" data-lang="es" class="mobile-menu-link">Inicio</a>
-      <a href="index.html#home" data-lang="en" class="mobile-menu-link">Home</a>
-      <a href="about-julie.html" data-lang="es" class="mobile-menu-link">Sobre Julie</a>
-      <a href="about-julie.html" data-lang="en" class="mobile-menu-link">About Julie</a>
-      <a href="index.html#how-it-works" data-lang="es" class="mobile-menu-link">Cómo funciona</a>
-      <a href="index.html#how-it-works" data-lang="en" class="mobile-menu-link">How It Works</a>
-      <a href="index.html#final-expense-answers" data-lang="es" class="mobile-menu-link">¿Tienes preguntas?</a>
-      <a href="index.html#final-expense-answers" data-lang="en" class="mobile-menu-link">Got questions?</a>
-      <a href="blog.html" data-lang="es" class="mobile-menu-link">Blog</a>
-      <a href="blog.html" data-lang="en" class="mobile-menu-link">Blog</a>
-      <a href="final-expense-estimator.html" data-lang="es" class="mobile-menu-link fw-bold" style="color:#0D47A1;">Calculadora de gastos finales</a>
-      <a href="final-expense-estimator.html" data-lang="en" class="mobile-menu-link fw-bold" style="color:#0D47A1;">Final Expense Calculator</a>
-      <a href="contact.html" data-lang="es" class="mobile-menu-link">Contacto</a>
-      <a href="contact.html" data-lang="en" class="mobile-menu-link">Contact</a>
-      <a href="https://wa.me/14024405438?text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20seguro%20de%20gastos%20finales." target="_blank" rel="noopener" data-lang="es" class="mobile-menu-link fw-bold" style="color:#1D9E53;"><i class="fab fa-whatsapp me-2"></i>WhatsApp (recomendado)</a>
-      <a href="https://wa.me/14024405438?text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20seguro%20de%20gastos%20finales." target="_blank" rel="noopener" data-lang="en" class="mobile-menu-link fw-bold" style="color:#1D9E53;"><i class="fab fa-whatsapp me-2"></i>WhatsApp (recommended)</a>
-      <a href="/quote.html" data-lang="es" class="mobile-menu-link fw-bold" style="color:#0D47A1;"><i class="fas fa-file-invoice-dollar me-2"></i>Cotización gratis en línea</a>
-      <a href="/quote.html" data-lang="en" class="mobile-menu-link fw-bold" style="color:#0D47A1;"><i class="fas fa-file-invoice-dollar me-2"></i>Free online quote</a>
-      <a href="/schedule-julie.html" data-lang="es" class="mobile-menu-link fw-bold" style="color:#0D47A1;"><i class="fas fa-calendar-alt me-2"></i>Agendar con Julie</a>
-      <a href="/schedule-julie.html" data-lang="en" class="mobile-menu-link fw-bold" style="color:#0D47A1;"><i class="fas fa-calendar-alt me-2"></i>Schedule with Julie</a>
-    </div>
-  </header>
+<header class="sticky-top bg-white shadow-sm border-bottom">
+<div class="container">
+<div class="d-flex align-items-center justify-content-between header-inner">
+<div class="flex-shrink-0 header-logo-wrap">
+<a class="d-block" href="index.html#home">
+<img alt="Mejor Vida Insurance logo" class="header-logo" id="header-logo" src="img/logo-spanish2.png"/>
+</a>
+</div>
+<nav class="desktop-nav d-none d-lg-flex align-items-center">
+<a class="nav-link-cm" href="index.html#home">Inicio</a>
 
-  <section class="flex-grow-1 julie-schedule-section py-4 py-md-5">
-    <div class="container px-3">
-      <h1 class="julie-schedule-title" data-lang="es">Agendar una llamada con Julie</h1>
-      <h1 class="julie-schedule-title" data-lang="en">Schedule a call with Julie</h1>
-      <p class="julie-schedule-lead" data-lang="es">Elige fecha y hora abajo. Sin obligación de comprar.</p>
-      <p class="julie-schedule-lead" data-lang="en">Pick a date and time below. No obligation to buy.</p>
+<a class="nav-link-cm nav-link-stack" href="about-julie.html">Sobre Julie</a>
 
-      <details class="julie-schedule-share mb-3">
-        <summary>
-          <span data-lang="es">¿Necesitas el enlace para compartir?</span>
-          <span data-lang="en">Need the link to share with someone?</span>
-        </summary>
-        <label class="mt-2" for="julie-schedule-share-url" data-lang="es">Copia este enlace en un correo o mensaje de texto</label>
-        <label class="mt-2" for="julie-schedule-share-url" data-lang="en">Copy this link into an email or text message</label>
-        <div class="input-group mt-2">
-          <input type="text" class="form-control" id="julie-schedule-share-url" readonly aria-label="Scheduling link" />
-          <button type="button" class="btn btn-primary" id="julie-schedule-copy-btn">
-            <span data-lang="es">Copiar enlace</span>
-            <span data-lang="en">Copy link</span>
-          </button>
-        </div>
-        <p class="small mb-0 mt-2 text-muted" id="julie-schedule-copy-status" aria-live="polite"></p>
-      </details>
+<a class="nav-link-cm nav-link-stack" href="index.html#how-it-works">Cómo funciona</a>
 
-      <div class="julie-schedule-embed">
-        <iframe
-          id="julie-schedule-iframe"
-          src="https://meetings-na2.hubspot.com/julie-braunsroth"
-          title="Agendar con Julie — Mejor Vida Insurance"
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
-        ></iframe>
-      </div>
-    </div>
-  </section>
+<a class="nav-link-cm nav-link-stack nav-link-questions-wrap" href="index.html#final-expense-answers"><i aria-hidden="true" class="fas fa-robot" style="font-size: 0.95em; opacity: 0.88;"></i><span>¿Tienes preguntas?</span></a>
 
-  <footer style="background:#1a365d; padding: 8px 0 24px 0;">
-    <div class="container">
-      <div class="d-flex flex-wrap align-items-center justify-content-center gap-3 small text-white">
-        <img id="footer-logo" src="img/logo-spanish2.png" alt="Mejor Vida Insurance" style="height:130px;filter:brightness(0) invert(1);margin-top:-25px;margin-bottom:-25px;" />
-        <a href="https://wa.me/14024405438" target="_blank" rel="noopener" class="text-white text-opacity-90 text-decoration-none">WhatsApp</a>
-        <a href="mailto:Julie@mejorvidainsurance.com" class="text-white text-opacity-90 text-decoration-none">Julie@mejorvidainsurance.com</a>
-      </div>
-    </div>
-  </footer>
+<a class="nav-link-cm" href="blog.html">Blog</a>
 
-  <div id="mvi-assistant-root" data-api-url="/api/website-chat" data-mvi-avatar-base="img/mvi-chat-avatar"></div>
-  <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="js/mvi-schedule-julie.js"></script>
-  <script src="js/website-assistant-widget.js" defer></script>
-  <script>
-    (function () {
-      function syncLangButtons(lang) {
-        document.querySelectorAll("[data-lang-btn]").forEach(function (b) {
-          b.classList.toggle("active", b.getAttribute("data-lang-btn") === lang);
-        });
-      }
-      function setLanguage(lang) {
-        document.documentElement.className = "lang-" + lang;
-        sessionStorage.setItem("sessionLang", lang);
-        var src = lang === "es" ? "img/logo-spanish2.png" : "img/logo-english2.png";
-        var logo = document.getElementById("header-logo");
-        var flogo = document.getElementById("footer-logo");
-        if (logo) logo.src = src;
-        if (flogo) flogo.src = src;
-        syncLangButtons(lang);
-        document.dispatchEvent(new CustomEvent("language-changed", { detail: { lang: lang } }));
-      }
-      var current = sessionStorage.getItem("sessionLang") || "es";
-      setLanguage(current);
-      document.querySelectorAll("[data-lang-btn]").forEach(function (btn) {
-        btn.addEventListener("click", function () {
-          setLanguage(btn.getAttribute("data-lang-btn"));
-        });
-      });
-      var hamburgerBtn = document.getElementById("hamburger-btn");
-      var mobileMenu = document.getElementById("mobile-menu");
-      if (hamburgerBtn && mobileMenu) {
-        hamburgerBtn.addEventListener("click", function (e) {
-          e.stopPropagation();
-          mobileMenu.classList.toggle("active");
-          hamburgerBtn.textContent = mobileMenu.classList.contains("active") ? "✕" : "☰";
-        });
-        document.addEventListener("click", function (e) {
-          if (!mobileMenu.contains(e.target) && !hamburgerBtn.contains(e.target)) {
-            mobileMenu.classList.remove("active");
-            hamburgerBtn.textContent = "☰";
-          }
-        });
-      }
-    })();
-  </script>
+<a class="nav-link-cm nav-link-fe-calc-wrap" href="final-expense-estimator.html">Calculadora de gastos finales</a>
+
+<a class="nav-link-cm" href="contact.html">Contacto</a>
+
+<a class="nav-link-cm nav-link-schedule-wrap" href="../schedule-julie.html">Agendar con Julie</a>
+
+</nav>
+<div class="d-flex align-items-center gap-2 header-actions">
+<a class="desktop-cta d-none d-lg-inline-block btn-see-prices" href="quote.html">Cotización gratuita</a>
+
+
+<a class="d-none d-lg-inline-block nav-link-cm small text-muted text-decoration-none ms-1" href="/en/schedule-julie.html" title="View this page in English">English</a><button aria-label="Open menu" class="hamburger-btn" id="hamburger-btn" type="button">☰</button>
+</div>
+</div>
+</div>
+<div class="border-top py-2 d-none d-lg-block header-office-bar" style="background:#f8fbff;">
+<div class="container d-flex flex-wrap gap-3 align-items-center justify-content-end small">
+<a class="header-whatsapp-btn text-decoration-none" href="https://wa.me/14024405438?text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20seguro%20de%20gastos%20finales." rel="noopener" target="_blank"><i aria-hidden="true" class="fab fa-whatsapp"></i> WhatsApp</a>
+
+<span><strong>Oficina:</strong> <a class="text-decoration-none" href="tel:+14024405438">402-440-5438</a></span>
+
+<span><strong>SMS/Texto:</strong> <a class="text-decoration-none" href="tel:+14027355665">402-735-5665</a></span>
+
+</div>
+</div>
+<div class="mobile-menu" id="mobile-menu">
+<a class="mobile-menu-link" href="index.html#home">Inicio</a>
+
+<a class="mobile-menu-link" href="about-julie.html">Sobre Julie</a>
+
+<a class="mobile-menu-link" href="index.html#how-it-works">Cómo funciona</a>
+
+<a class="mobile-menu-link" href="index.html#final-expense-answers">¿Tienes preguntas?</a>
+
+<a class="mobile-menu-link" href="blog.html">Blog</a>
+
+<a class="mobile-menu-link fw-bold" href="final-expense-estimator.html" style="color:#0D47A1;">Calculadora de gastos finales</a>
+
+<a class="mobile-menu-link" href="contact.html">Contacto</a>
+
+<a class="mobile-menu-link fw-bold" href="https://wa.me/14024405438?text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20seguro%20de%20gastos%20finales." rel="noopener" style="color:#1D9E53;" target="_blank"><i class="fab fa-whatsapp me-2"></i>WhatsApp (recomendado)</a>
+
+<a class="mobile-menu-link fw-bold" href="quote.html" style="color:#0D47A1;"><i class="fas fa-file-invoice-dollar me-2"></i>Cotización gratis en línea</a>
+
+<a class="mobile-menu-link fw-bold" href="../schedule-julie.html" style="color:#0D47A1;"><i class="fas fa-calendar-alt me-2"></i>Agendar con Julie</a>
+
+</div>
+</header>
+<section class="flex-grow-1 julie-schedule-section py-4 py-md-5">
+<div class="container px-3">
+<h1 class="julie-schedule-title">Agendar una llamada con Julie</h1>
+
+<p class="julie-schedule-lead">Elige fecha y hora abajo. Sin obligación de comprar.</p>
+
+<details class="julie-schedule-share mb-3">
+<summary>
+<span>¿Necesitas el enlace para compartir?</span>
+
+</summary>
+<label class="mt-2" for="julie-schedule-share-url">Copia este enlace en un correo o mensaje de texto</label>
+
+<div class="input-group mt-2">
+<input aria-label="Scheduling link" class="form-control" id="julie-schedule-share-url" readonly="" type="text"/>
+<button class="btn btn-primary" id="julie-schedule-copy-btn" type="button">
+<span>Copiar enlace</span>
+
+</button>
+</div>
+<p aria-live="polite" class="small mb-0 mt-2 text-muted" id="julie-schedule-copy-status"></p>
+</details>
+<div class="julie-schedule-embed">
+<iframe id="julie-schedule-iframe" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://meetings-na2.hubspot.com/julie-braunsroth" title="Agendar con Julie — Mejor Vida Insurance"></iframe>
+</div>
+</div>
+</section>
+<footer style="background:#1a365d; padding: 8px 0 24px 0;">
+<div class="container">
+<div class="d-flex flex-wrap align-items-center justify-content-center gap-3 small text-white">
+<img alt="Mejor Vida Insurance" id="footer-logo" src="img/logo-spanish2.png" style="height:130px;filter:brightness(0) invert(1);margin-top:-25px;margin-bottom:-25px;"/>
+<a class="text-white text-opacity-90 text-decoration-none" href="https://wa.me/14024405438" rel="noopener" target="_blank">WhatsApp</a>
+<a class="text-white text-opacity-90 text-decoration-none" href="mailto:Julie@mejorvidainsurance.com">Julie@mejorvidainsurance.com</a>
+</div>
+</div>
+</footer>
+<div data-api-url="/api/website-chat" data-mvi-avatar-base="img/mvi-chat-avatar" id="mvi-assistant-root"></div>
+<script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="js/mvi-schedule-julie.js"></script>
+<script defer="" src="js/website-assistant-widget.js"></script>
+
 </body>
 </html>

@@ -17,6 +17,26 @@
       "permanent": true
     },
     {
+      "source": "/privacy-policy-en.html",
+      "destination": "/en/privacy-policy.html",
+      "permanent": true
+    },
+    {
+      "source": "/privacy-policy-en",
+      "destination": "/en/privacy-policy.html",
+      "permanent": true
+    },
+    {
+      "source": "/terms-service-en.html",
+      "destination": "/en/terms-service.html",
+      "permanent": true
+    },
+    {
+      "source": "/terms-service-en",
+      "destination": "/en/terms-service.html",
+      "permanent": true
+    },
+    {
       "source": "/agendar-julie",
       "destination": "/schedule-julie.html",
       "permanent": true
@@ -206,6 +226,10 @@
       "destination": "/en/quote.html"
     },
     {
+      "source": "/en/quote-results",
+      "destination": "/en/quote-results.html"
+    },
+    {
       "source": "/en/about-julie",
       "destination": "/en/about-julie.html"
     },
@@ -236,6 +260,26 @@
     {
       "source": "/en/sms-optin",
       "destination": "/en/sms-optin.html"
+    },
+    {
+      "source": "/en/schedule-julie",
+      "destination": "/en/schedule-julie.html"
+    },
+    {
+      "source": "/en/quote-out-of-state",
+      "destination": "/en/quote-out-of-state.html"
+    },
+    {
+      "source": "/en/thank-you-out-of-state",
+      "destination": "/en/thank-you-out-of-state.html"
+    },
+    {
+      "source": "/en/blog/:slug",
+      "destination": "/en/blog/:slug.html"
+    },
+    {
+      "source": "/en/carriers/:slug",
+      "destination": "/en/carriers/:slug.html"
     }
   ]
 }

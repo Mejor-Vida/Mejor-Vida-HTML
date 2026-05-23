@@ -1,17 +1,17 @@
 <!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Política de Privacidad - Mejor Vida Insurance</title>
-  <meta name="robots" content="noindex, follow" />
 
-  <link rel="icon" type="image/x-icon" href="favicon.ico" />
-  <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-  <link href="css/quote-flow-shared.css" rel="stylesheet" />
-  <link href="css/mvi-assistant-widget.css" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <style>
+<html class="lang-es" lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Política de Privacidad - Mejor Vida Insurance</title>
+<meta content="noindex, follow" name="robots"/>
+<link href="favicon.ico" rel="icon" type="image/x-icon"/>
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="css/quote-flow-shared.css" rel="stylesheet"/>
+<link href="css/mvi-assistant-widget.css" rel="stylesheet"/>
+<link crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" referrerpolicy="no-referrer" rel="stylesheet"/>
+<style>
     body {
       font-family: 'Inter', system-ui, -apple-system, sans-serif;
       line-height: 1.6;
@@ -46,342 +46,266 @@
       text-decoration: underline;
     }
     /* Language toggle via CSS class on <html> */
-    html.lang-es [data-lang="en"] { display: none !important; }
-    html.lang-en [data-lang="es"] { display: none !important; }
     /* Full SMS disclosure in English always visible (A2P 10DLC / TCR review when default language is Spanish) */
     .sms-policy-english-always { display: block !important; }
   </style>
-  <script>
-    (function(){
-      try {
-        var navEntry = performance.getEntriesByType('navigation')[0];
-        var isReload = navEntry && navEntry.type === 'reload';
-        if (isReload) sessionStorage.removeItem('sessionLang');
-        var qLang = (new URLSearchParams(window.location.search).get('lang') || '').toLowerCase();
-        if (qLang === 'en' || qLang === 'es') {
-          sessionStorage.setItem('sessionLang', qLang === 'en' ? 'en' : 'es');
-        }
-        var L = sessionStorage.getItem('sessionLang') || 'es';
-        document.documentElement.className = 'lang-' + L;
-        document.documentElement.setAttribute('lang', L === 'en' ? 'en' : 'es');
-      } catch(e) {
-        document.documentElement.className = 'lang-es';
-        document.documentElement.setAttribute('lang', 'es');
-      }
-    })();
-  </script>
 
-
-
-  <link rel="alternate" hreflang="es" href="https://www.mejorvidainsurance.com/privacy-policy.html" />
-  <link rel="alternate" hreflang="en" href="https://www.mejorvidainsurance.com/en/privacy-policy.html" />
-  <link rel="alternate" hreflang="x-default" href="https://www.mejorvidainsurance.com/privacy-policy.html" />
-</head>
+<link href="https://www.mejorvidainsurance.com/privacy-policy.html" hreflang="es" rel="alternate"/>
+<link href="https://www.mejorvidainsurance.com/en/privacy-policy.html" hreflang="en" rel="alternate"/>
+<link href="https://www.mejorvidainsurance.com/privacy-policy.html" hreflang="x-default" rel="alternate"/>
+<script>(function(){document.documentElement.lang="es";document.documentElement.className="lang-es";})();</script></head>
 <body>
-  <header class="sticky-top bg-white shadow-sm border-bottom">
-    <div class="container">
-      <div class="d-flex align-items-center justify-content-between header-inner">
-        <div class="flex-shrink-0 header-logo-wrap">
-          <a href="index.html#home" class="d-block">
-            <img id="header-logo" src="img/logo-spanish2.png" alt="Mejor Vida Insurance logo" class="header-logo" />
-          </a>
-        </div>
+<header class="sticky-top bg-white shadow-sm border-bottom">
+<div class="container">
+<div class="d-flex align-items-center justify-content-between header-inner">
+<div class="flex-shrink-0 header-logo-wrap">
+<a class="d-block" href="index.html#home">
+<img alt="Mejor Vida Insurance logo" class="header-logo" id="header-logo" src="img/logo-spanish2.png"/>
+</a>
+</div>
+<nav class="desktop-nav d-none d-lg-flex align-items-center">
+<a class="nav-link-cm" href="index.html#home">Inicio</a>
 
-        <nav class="desktop-nav d-none d-lg-flex align-items-center">
-          <a href="index.html#home" data-lang="es" class="nav-link-cm">Inicio</a>
-          <a href="index.html#home" data-lang="en" class="nav-link-cm">Home</a>
-          <a href="about-julie.html" data-lang="es" class="nav-link-cm nav-link-stack">Sobre Julie</a>
-          <a href="about-julie.html" data-lang="en" class="nav-link-cm nav-link-stack">About Julie</a>
-          <a href="index.html#how-it-works" data-lang="es" class="nav-link-cm nav-link-stack">Cómo funciona</a>
-          <a href="index.html#how-it-works" data-lang="en" class="nav-link-cm nav-link-stack">How It Works</a>
-          <a href="index.html#final-expense-answers" data-lang="es" class="nav-link-cm nav-link-stack nav-link-questions-wrap" title="¿Tienes preguntas sobre gastos finales?">
-            <i class="fas fa-robot" style="font-size: 0.95em; opacity: 0.88;" aria-hidden="true"></i><span>¿Tienes preguntas?</span>
-          </a>
-          <a href="index.html#final-expense-answers" data-lang="en" class="nav-link-cm nav-link-stack nav-link-questions-wrap" title="Got questions about final expense insurance?">
-            <i class="fas fa-robot" style="font-size: 0.95em; opacity: 0.88;" aria-hidden="true"></i><span>Got questions?</span>
-          </a>
-          <a href="blog.html" data-lang="es" class="nav-link-cm">Blog</a>
-          <a href="blog.html" data-lang="en" class="nav-link-cm">Blog</a>
-          <a href="final-expense-estimator.html" data-lang="es" class="nav-link-cm nav-link-fe-calc-wrap">Calculadora de gastos finales</a>
-          <a href="final-expense-estimator.html" data-lang="en" class="nav-link-cm nav-link-fe-calc-wrap">Final Expense Calculator</a>
-          <a href="contact.html" data-lang="es" class="nav-link-cm">Contacto</a>
-          <a href="contact.html" data-lang="en" class="nav-link-cm">Contact</a>
-          <a href="/schedule-julie.html" data-lang="es" class="nav-link-cm nav-link-schedule-wrap">Agendar con Julie</a>
-          <a href="/schedule-julie.html" data-lang="en" class="nav-link-cm nav-link-schedule-wrap">Schedule with Julie</a>
-        </nav>
+<a class="nav-link-cm nav-link-stack" href="about-julie.html">Sobre Julie</a>
 
-        <div class="d-flex align-items-center gap-2 header-actions">
-          <a href="/quote.html" data-lang="es" class="desktop-cta d-none d-lg-inline-block btn-see-prices">Cotización gratuita</a>
-          <a href="/quote.html" data-lang="en" class="desktop-cta d-none d-lg-inline-block btn-see-prices">Get a Free Quote</a>
-          <a href="/en/" class="d-none d-lg-inline-block nav-link-cm small text-muted text-decoration-none ms-1" title="View site in English">English</a>
-          <div class="d-flex gap-1 ms-2">
-            <button class="lang-btn active px-2 py-1 rounded small fw-bold border-2" data-lang-btn="es" type="button">ES</button>
-            <button class="lang-btn px-2 py-1 rounded small fw-bold border-2" data-lang-btn="en" type="button">EN</button>
-          </div>
-          <button class="hamburger-btn" id="hamburger-btn" type="button" aria-label="Open menu">☰</button>
-        </div>
-      </div>
-    </div>
-    <div class="border-top py-2 d-none d-lg-block header-office-bar" style="background:#f8fbff;">
-      <div class="container d-flex flex-wrap gap-3 align-items-center justify-content-end small">
-        <a href="https://wa.me/14024405438?text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20seguro%20de%20gastos%20finales." target="_blank" rel="noopener" data-lang="es" class="header-whatsapp-btn text-decoration-none"><i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp</a>
-        <a href="https://wa.me/14024405438?text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20seguro%20de%20gastos%20finales." target="_blank" rel="noopener" data-lang="en" class="header-whatsapp-btn text-decoration-none"><i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp</a>
-        <span data-lang="es"><strong>Oficina:</strong> <a href="tel:+14024405438" class="text-decoration-none">402-440-5438</a></span>
-        <span data-lang="en"><strong>Office:</strong> <a href="tel:+14024405438" class="text-decoration-none">402-440-5438</a></span>
-        <span data-lang="es"><strong>SMS/Texto:</strong> <a href="tel:+14027355665" class="text-decoration-none">402-735-5665</a></span>
-        <span data-lang="en"><strong>SMS/Text:</strong> <a href="tel:+14027355665" class="text-decoration-none">402-735-5665</a></span>
-      </div>
-    </div>
+<a class="nav-link-cm nav-link-stack" href="index.html#how-it-works">Cómo funciona</a>
 
-    <div class="mobile-menu" id="mobile-menu">
-      <a href="index.html#home" data-lang="es" class="mobile-menu-link">Inicio</a>
-      <a href="index.html#home" data-lang="en" class="mobile-menu-link">Home</a>
-      <a href="about-julie.html" data-lang="es" class="mobile-menu-link">Sobre Julie</a>
-      <a href="about-julie.html" data-lang="en" class="mobile-menu-link">About Julie</a>
-      <a href="index.html#how-it-works" data-lang="es" class="mobile-menu-link">Cómo funciona</a>
-      <a href="index.html#how-it-works" data-lang="en" class="mobile-menu-link">How It Works</a>
-      <a href="index.html#final-expense-answers" data-lang="es" class="mobile-menu-link">¿Tienes preguntas?</a>
-      <a href="index.html#final-expense-answers" data-lang="en" class="mobile-menu-link">Got questions?</a>
-      <a href="blog.html" data-lang="es" class="mobile-menu-link">Blog</a>
-      <a href="blog.html" data-lang="en" class="mobile-menu-link">Blog</a>
-      <a href="final-expense-estimator.html" data-lang="es" class="mobile-menu-link fw-bold" style="color:#0D47A1;">Calculadora de gastos finales</a>
-      <a href="final-expense-estimator.html" data-lang="en" class="mobile-menu-link fw-bold" style="color:#0D47A1;">Final Expense Calculator</a>
-      <a href="contact.html" data-lang="es" class="mobile-menu-link">Contacto</a>
-      <a href="contact.html" data-lang="en" class="mobile-menu-link">Contact</a>
-      <a href="https://wa.me/14024405438?text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20seguro%20de%20gastos%20finales." target="_blank" rel="noopener" data-lang="es" class="mobile-menu-link fw-bold" style="color:#1D9E53;"><i class="fab fa-whatsapp me-2"></i>WhatsApp (recomendado)</a>
-      <a href="https://wa.me/14024405438?text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20seguro%20de%20gastos%20finales." target="_blank" rel="noopener" data-lang="en" class="mobile-menu-link fw-bold" style="color:#1D9E53;"><i class="fab fa-whatsapp me-2"></i>WhatsApp (recommended)</a>
-      <a href="/quote.html" data-lang="es" class="mobile-menu-link fw-bold" style="color:#0D47A1;"><i class="fas fa-file-invoice-dollar me-2"></i>Cotización gratis en línea</a>
-      <a href="/quote.html" data-lang="en" class="mobile-menu-link fw-bold" style="color:#0D47A1;"><i class="fas fa-file-invoice-dollar me-2"></i>Free online quote</a>
-      <a href="/schedule-julie.html" data-lang="es" class="mobile-menu-link fw-bold" style="color:#0D47A1;"><i class="fas fa-calendar-alt me-2"></i>Agendar con Julie</a>
-      <a href="/schedule-julie.html" data-lang="en" class="mobile-menu-link fw-bold" style="color:#0D47A1;"><i class="fas fa-calendar-alt me-2"></i>Schedule with Julie</a>
-      <p class="mobile-menu-link small text-muted mb-0 px-2" data-lang="es">¿Cliente actual? Línea de oficina: <a href="tel:+14024405438" class="text-decoration-none">402-440-5438</a></p>
-      <p class="mobile-menu-link small text-muted mb-0 px-2" data-lang="en">Current client? Office line: <a href="tel:+14024405438" class="text-decoration-none">402-440-5438</a></p>
-      <p class="mobile-menu-link small text-muted mb-0 px-2" data-lang="es">SMS/Texto: <a href="tel:+14027355665" class="text-decoration-none">402-735-5665</a></p>
-      <p class="mobile-menu-link small text-muted mb-0 px-2" data-lang="en">SMS/Text: <a href="tel:+14027355665" class="text-decoration-none">402-735-5665</a></p>
-    </div>
-  </header>
+<a class="nav-link-cm nav-link-stack nav-link-questions-wrap" href="index.html#final-expense-answers" title="¿Tienes preguntas sobre gastos finales?">
+<i aria-hidden="true" class="fas fa-robot" style="font-size: 0.95em; opacity: 0.88;"></i><span>¿Tienes preguntas?</span>
+</a>
 
-  <div class="policy-container">
-    <h1 data-lang="es">Política de Privacidad</h1>
-    <h1 data-lang="en">Privacy Policy</h1>
+<a class="nav-link-cm" href="blog.html">Blog</a>
 
-    <p data-lang="es">
+<a class="nav-link-cm nav-link-fe-calc-wrap" href="final-expense-estimator.html">Calculadora de gastos finales</a>
+
+<a class="nav-link-cm" href="contact.html">Contacto</a>
+
+<a class="nav-link-cm nav-link-schedule-wrap" href="../schedule-julie.html">Agendar con Julie</a>
+
+</nav>
+<div class="d-flex align-items-center gap-2 header-actions">
+<a class="desktop-cta d-none d-lg-inline-block btn-see-prices" href="quote.html">Cotización gratuita</a>
+
+<a class="d-none d-lg-inline-block nav-link-cm small text-muted text-decoration-none ms-1" href="/en/" title="View site in English">English</a>
+
+<a class="d-none d-lg-inline-block nav-link-cm small text-muted text-decoration-none ms-1" href="/en/privacy-policy.html" title="View this page in English">English</a><button aria-label="Open menu" class="hamburger-btn" id="hamburger-btn" type="button">☰</button>
+</div>
+</div>
+</div>
+<div class="border-top py-2 d-none d-lg-block header-office-bar" style="background:#f8fbff;">
+<div class="container d-flex flex-wrap gap-3 align-items-center justify-content-end small">
+<a class="header-whatsapp-btn text-decoration-none" href="https://wa.me/14024405438?text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20seguro%20de%20gastos%20finales." rel="noopener" target="_blank"><i aria-hidden="true" class="fab fa-whatsapp"></i> WhatsApp</a>
+
+<span><strong>Oficina:</strong> <a class="text-decoration-none" href="tel:+14024405438">402-440-5438</a></span>
+
+<span><strong>SMS/Texto:</strong> <a class="text-decoration-none" href="tel:+14027355665">402-735-5665</a></span>
+
+</div>
+</div>
+<div class="mobile-menu" id="mobile-menu">
+<a class="mobile-menu-link" href="index.html#home">Inicio</a>
+
+<a class="mobile-menu-link" href="about-julie.html">Sobre Julie</a>
+
+<a class="mobile-menu-link" href="index.html#how-it-works">Cómo funciona</a>
+
+<a class="mobile-menu-link" href="index.html#final-expense-answers">¿Tienes preguntas?</a>
+
+<a class="mobile-menu-link" href="blog.html">Blog</a>
+
+<a class="mobile-menu-link fw-bold" href="final-expense-estimator.html" style="color:#0D47A1;">Calculadora de gastos finales</a>
+
+<a class="mobile-menu-link" href="contact.html">Contacto</a>
+
+<a class="mobile-menu-link fw-bold" href="https://wa.me/14024405438?text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20seguro%20de%20gastos%20finales." rel="noopener" style="color:#1D9E53;" target="_blank"><i class="fab fa-whatsapp me-2"></i>WhatsApp (recomendado)</a>
+
+<a class="mobile-menu-link fw-bold" href="quote.html" style="color:#0D47A1;"><i class="fas fa-file-invoice-dollar me-2"></i>Cotización gratis en línea</a>
+
+<a class="mobile-menu-link fw-bold" href="../schedule-julie.html" style="color:#0D47A1;"><i class="fas fa-calendar-alt me-2"></i>Agendar con Julie</a>
+
+<p class="mobile-menu-link small text-muted mb-0 px-2">¿Cliente actual? Línea de oficina: <a class="text-decoration-none" href="tel:+14024405438">402-440-5438</a></p>
+
+<p class="mobile-menu-link small text-muted mb-0 px-2">SMS/Texto: <a class="text-decoration-none" href="tel:+14027355665">402-735-5665</a></p>
+
+</div>
+</header>
+<div class="policy-container">
+<h1>Política de Privacidad</h1>
+
+<p>
       En Mejor Vida Insurance LLC, valoramos su privacidad y nos comprometemos a proteger su información personal. Esta política explica cómo recopilamos, usamos y protegemos sus datos cuando utiliza nuestro sitio web y servicios.
     </p>
-    <p data-lang="en">
-      At Mejor Vida Insurance LLC, we value your privacy and are committed to protecting your personal information. This policy explains how we collect, use, and safeguard your data when you use our website and services.
-    </p>
 
-    <h2 data-lang="es">Información que recopilamos</h2>
-    <h2 data-lang="en">Information We Collect</h2>
+<h2>Información que recopilamos</h2>
 
-    <p data-lang="es">
+<p>
       Recopilamos información personal que usted nos proporciona voluntariamente, como su nombre, fecha de nacimiento, género, código postal, información de contacto (teléfono y correo electrónico), y datos relacionados con sus preferencias de seguro y salud.
     </p>
-    <p data-lang="en">
-      We collect personal information you voluntarily provide, such as your name, date of birth, gender, zip code, contact information (phone and email), and data related to your insurance preferences and health.
-    </p>
 
-    <h2 data-lang="es">Uso de la información</h2>
-    <h2 data-lang="en">Use of Information</h2>
+<h2>Uso de la información</h2>
 
-    <p data-lang="es">Utilizamos su información para:</p>
-    <p data-lang="en">We use your information to:</p>
+<p>Utilizamos su información para:</p>
 
-    <ul data-lang="es">
-      <li>Proporcionarle cotizaciones personalizadas de seguros de gastos finales.</li>
-      <li>Contactarle por teléfono, correo electrónico, SMS o WhatsApp para ofrecerle opciones de seguro y asistencia personalizada.</li>
-      <li>Cumplir con requisitos legales y regulatorios aplicables.</li>
-    </ul>
-    <ul data-lang="en">
-      <li>Provide you with personalized final expense insurance quotes.</li>
-      <li>Contact you by phone, email, SMS, or WhatsApp to offer insurance options and personalized assistance.</li>
-      <li>Comply with applicable legal and regulatory requirements.</li>
-    </ul>
+<ul>
+<li>Proporcionarle cotizaciones personalizadas de seguros de gastos finales.</li>
+<li>Contactarle por teléfono, correo electrónico, SMS o WhatsApp para ofrecerle opciones de seguro y asistencia personalizada.</li>
+<li>Cumplir con requisitos legales y regulatorios aplicables.</li>
+</ul>
 
-    <h2 data-lang="es">Consentimiento para comunicaciones</h2>
-    <h2 data-lang="en">Consent for Communications</h2>
+<h2>Consentimiento para comunicaciones</h2>
 
-    <p data-lang="es">
+<p>
       Al enviar formularios en este sitio, usted autoriza a Mejor Vida Insurance LLC a contactarle por teléfono, correo electrónico, <strong>mensajes de texto (SMS)</strong> y <strong>WhatsApp</strong> sobre opciones de seguro. Para SMS, puede optar por no recibir mensajes respondiendo <strong>STOP</strong>. Para dejar de recibir WhatsApp, puede escribirnos o dejar de responder por ese canal según se indica más abajo.
     </p>
-    <p data-lang="en">
-      By submitting forms on this site, you authorize Mejor Vida Insurance LLC to contact you by phone, email, <strong>SMS text messages</strong>, and <strong>WhatsApp</strong> about insurance options. For SMS, you may opt out by replying <strong>STOP</strong>. To stop WhatsApp messages, you may contact us or cease using that channel as described below.
-    </p>
 
-    <h2 data-lang="es">Protección de datos</h2>
-    <h2 data-lang="en">Data Protection</h2>
+<h2>Protección de datos</h2>
 
-    <p data-lang="es">
+<p>
       Implementamos medidas de seguridad razonables para proteger su información personal contra acceso no autorizado, alteración, divulgación o destrucción.
     </p>
-    <p data-lang="en">
-      We implement reasonable security measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction.
-    </p>
 
-    <h2 data-lang="es">Compartir información</h2>
-    <h2 data-lang="en">Sharing Information</h2>
+<h2>Compartir información</h2>
 
-    <p data-lang="es">
+<p>
       No vendemos ni alquilamos su información personal a terceros. Podemos compartir datos con proveedores de servicios autorizados que nos ayudan a operar nuestro negocio, siempre bajo estrictas obligaciones de confidencialidad.
     </p>
-    <p data-lang="en">
-      We do not sell or rent your personal information to third parties. We may share data with authorized service providers who help us operate our business, always under strict confidentiality obligations.
-    </p>
 
-    <h2 data-lang="es">Derechos del usuario</h2>
-    <h2 data-lang="en">User Rights</h2>
+<h2>Derechos del usuario</h2>
 
-    <p data-lang="es">
+<p>
       Usted tiene derecho a acceder, corregir o eliminar su información personal. Para ejercer estos derechos, por favor contáctenos a través de nuestro correo electrónico: <a href="mailto:Julie@mejorvidainsurance.com">Julie@mejorvidainsurance.com</a>.
     </p>
-    <p data-lang="en">
-      You have the right to access, correct, or delete your personal information. To exercise these rights, please contact us via email at: <a href="mailto:Julie@mejorvidainsurance.com">Julie@mejorvidainsurance.com</a>.
-    </p>
 
-    <h2 data-lang="es">Comunicaciones por SMS, WhatsApp y mensaje de texto</h2>
-    <h2 data-lang="en">SMS, WhatsApp, and Text Message Communications</h2>
-    <p data-lang="es">Mejor Vida Insurance LLC utiliza <strong>mensajes de texto (SMS)</strong> y <strong>WhatsApp</strong> (además de correo y llamadas) para comunicarse con clientes sobre cotizaciones personalizadas, recordatorios de citas, actualizaciones de póliza e información importante de cobertura.</p>
-    <p data-lang="en">Mejor Vida Insurance LLC uses <strong>SMS text messaging</strong> and <strong>WhatsApp</strong> (along with email and calls) to communicate with clients about personalized quotes, appointment reminders, policy updates, and important coverage information.</p>
-    <h2 data-lang="es">Proveedores (SMS y WhatsApp)</h2>
-    <h2 data-lang="en">Service Providers (SMS and WhatsApp)</h2>
-    <p data-lang="es">Utilizamos <strong>Twilio</strong> u otros proveedores para SMS según corresponda. Los mensajes de <strong>WhatsApp</strong> se envían a través de la plataforma de WhatsApp (Meta) / WhatsApp Business según nuestra configuración y las políticas de WhatsApp.</p>
-    <p data-lang="en">We use <strong>Twilio</strong> or other providers for SMS as applicable. <strong>WhatsApp</strong> messages are sent through WhatsApp (Meta) / WhatsApp Business according to our setup and WhatsApp’s terms and policies.</p>
-    <h2 data-lang="es">Opt-In y Autorizacion</h2>
-    <h2 data-lang="en">Opt-In and Authorization</h2>
-    <p data-lang="es">Al enviar un formulario de cotización o contacto en este sitio y marcar la casilla de consentimiento cuando se le muestre, usted autoriza a <strong>Mejor Vida Insurance LLC</strong> a contactarle por <strong>SMS, WhatsApp, correo electrónico y llamadas</strong> relacionados con su solicitud. La frecuencia de <strong>SMS</strong> es típicamente de <strong>1 a 5 mensajes por semana</strong> durante el proceso de cotización y seguimiento; la frecuencia en <strong>WhatsApp</strong> depende de su conversación y de nuestras comunicaciones de servicio. Para SMS, puede darse de baja respondiendo <strong>STOP</strong>. Para WhatsApp, puede solicitar que dejemos de escribirle por ese canal contactándonos (correo o teléfono indicados abajo) o dejando de usar el chat.</p>
-    <p data-lang="en">By submitting a quote or contact form on this website and checking the consent box when presented, you authorize <strong>Mejor Vida Insurance LLC</strong> to contact you via <strong>SMS, WhatsApp, email, and phone calls</strong> related to your request. <strong>SMS</strong> frequency is typically <strong>1–5 messages per week</strong> during quoting and follow-up; <strong>WhatsApp</strong> frequency depends on your conversation and service messages. For SMS, opt out by replying <strong>STOP</strong>. For WhatsApp, you may ask us to stop messaging you on that channel by contacting us (email or phone below) or by discontinuing the chat.</p>
-    <h2 data-lang="es">Frecuencia de Mensajes</h2>
-    <h2 data-lang="en">Message Frequency</h2>
-    <p data-lang="es">Los mensajes <strong>SMS</strong> suelen enviarse con una frecuencia de <strong>1 a 5 por semana</strong> durante la cotización y el seguimiento, según sea necesario. Los mensajes por <strong>WhatsApp</strong> varían según el hilo de conversación y las actualizaciones del caso.</p>
-    <p data-lang="en"><strong>SMS</strong> is typically sent <strong>1–5 times per week</strong> during quoting and follow-up, as needed. <strong>WhatsApp</strong> message frequency varies based on the conversation thread and case updates.</p>
-    <h2 data-lang="es">Como dejar de recibir mensajes (Opt-Out)</h2>
-    <h2 data-lang="en">How to Opt Out</h2>
-    <ul data-lang="es">
-      <li><strong>SMS:</strong> Responda <strong>STOP</strong> a cualquier mensaje de texto.</li>
-      <li><strong>WhatsApp:</strong> Puede pedirnos por el mismo chat que dejemos de contactarle por WhatsApp, o escribir a <a href="mailto:Julie@mejorvidainsurance.com">Julie@mejorvidainsurance.com</a> o llamar al <a href="tel:+14024405438">402-440-5438</a>.</li>
-      <li><strong>Todas las vías:</strong> <a href="mailto:Julie@mejorvidainsurance.com">Julie@mejorvidainsurance.com</a> · <a href="tel:+14024405438">402-440-5438</a>.</li>
-    </ul>
-    <ul data-lang="en">
-      <li><strong>SMS:</strong> Reply <strong>STOP</strong> to any text message.</li>
-      <li><strong>WhatsApp:</strong> Ask us in the same chat to stop WhatsApp messages, or email <a href="mailto:Julie@mejorvidainsurance.com">Julie@mejorvidainsurance.com</a> or call <a href="tel:+14024405438">402-440-5438</a>.</li>
-      <li><strong>All channels:</strong> <a href="mailto:Julie@mejorvidainsurance.com">Julie@mejorvidainsurance.com</a> · <a href="tel:+14024405438">402-440-5438</a>.</li>
-    </ul>
-    <h2 data-lang="es">Tarifas de Mensajes</h2>
-    <h2 data-lang="en">Message Rates</h2>
-    <p data-lang="es">Pueden aplicar tarifas estándar de mensajes y datos de su operador móvil para <strong>SMS</strong>. El uso de <strong>WhatsApp</strong> puede implicar el uso de datos móviles o Wi‑Fi según su plan y las políticas de WhatsApp/Meta. Mejor Vida Insurance LLC no cobra por mensajes SMS como cargo separado.</p>
-    <p data-lang="en">Standard message and data rates may apply from your mobile carrier for <strong>SMS</strong>. <strong>WhatsApp</strong> use may involve mobile data or Wi‑Fi according to your plan and WhatsApp/Meta policies. Mejor Vida Insurance LLC does not charge a separate fee for SMS.</p>
-    <h2 data-lang="es">Privacidad y Seguridad de SMS y WhatsApp</h2>
-    <h2 data-lang="en">SMS and WhatsApp Privacy and Security</h2>
-    <p data-lang="es">Sus comunicaciones por SMS y WhatsApp se manejan con controles acordes a su información personal. <strong>No vendemos su número de teléfono</strong> ni lo compartimos con terceros para marketing ajeno a su relación con Mejor Vida Insurance LLC. WhatsApp también opera bajo las políticas de privacidad de WhatsApp/Meta.</p>
-    <p data-lang="en">SMS and WhatsApp communications are handled with safeguards consistent with your personal information. We <strong>do not sell</strong> your phone number and <strong>do not share</strong> it with unrelated third parties for their own marketing. WhatsApp is also subject to WhatsApp/Meta privacy policies.</p>
-    <h2 data-lang="es">Cumplimiento TCPA y Regulacion</h2>
-    <h2 data-lang="en">TCPA and Regulatory Compliance</h2>
-    <p data-lang="es">Mejor Vida Insurance LLC cumple con la Ley de Protección al Consumidor Telefónico (TCPA) y regulaciones de Nebraska para comunicaciones de texto (<strong>SMS</strong>), en la medida aplicable. Las comunicaciones por <strong>WhatsApp</strong> también están sujetas a los términos y políticas de WhatsApp/Meta además de nuestras prácticas aquí descritas.</p>
-    <p data-lang="en">Mejor Vida Insurance LLC complies with the Telephone Consumer Protection Act (TCPA) and applicable Nebraska regulations for <strong>SMS</strong> text messaging where applicable. <strong>WhatsApp</strong> communications are also subject to WhatsApp/Meta terms and policies in addition to our practices described here.</p>
-    <p data-lang="es"><strong>Mejor Vida Insurance LLC esta registrada como compania de seguros con el Nebraska Department of Insurance (Licencia #21695431) y cumple con las regulaciones TCPA y estatales aplicables para SMS y comunicaciones relacionadas.</strong></p>
-    <p data-lang="en"><strong>Mejor Vida Insurance LLC is registered as an insurance company with the Nebraska Department of Insurance (License #21695431) and complies with all applicable TCPA and Nebraska regulations regarding SMS and related communications.</strong></p>
+<h2>Comunicaciones por SMS, WhatsApp y mensaje de texto</h2>
 
-    <div class="sms-policy-english-always border rounded-3 p-3 p-md-4 my-4" style="background:#f8fafc;border-color:#dee2e6!important;" lang="en">
-      <h2 class="h5 text-primary">SMS and WhatsApp — full disclosure (English)</h2>
-      <p><strong>Use of SMS and WhatsApp.</strong> Mejor Vida Insurance LLC may contact you by <strong>SMS/text messaging</strong> and <strong>WhatsApp</strong>, as well as email and phone, about final-expense and life insurance, including personalized quotes, appointment scheduling and reminders, application and policy follow-ups, and service updates.</p>
-      <p><strong>How you opt in.</strong> You agree to SMS and WhatsApp communications when you provide your mobile number and submit a <strong>quote form</strong>, <strong>contact form</strong>, or equivalent lead form on our website (or other express consent we document), including checking the consent box when shown. Consent is not a condition of purchasing insurance where prohibited by law.</p>
-      <p><strong>How to opt out.</strong> For <strong>SMS</strong>, reply <strong>STOP</strong> to opt out of SMS. For <strong>WhatsApp</strong>, ask us in chat to stop, or email <a href="mailto:Julie@mejorvidainsurance.com">Julie@mejorvidainsurance.com</a> or call <a href="tel:+14024405438">402-440-5438</a>.</p>
-      <p><strong>Message frequency.</strong> <strong>SMS:</strong> typically <strong>1–5 messages per week</strong> while actively considering coverage or completing steps with us. <strong>WhatsApp:</strong> frequency varies with your conversation and service messages.</p>
-      <p><strong>Costs.</strong> Carrier message and data rates may apply for SMS; WhatsApp may use data/Wi‑Fi per your plan and WhatsApp/Meta. <strong>Mejor Vida Insurance LLC does not charge a separate fee</strong> for SMS.</p>
-      <p><strong>Privacy.</strong> Mobile numbers are used for the communications described. We <strong>do not sell</strong> your phone number and <strong>do not share</strong> it with unrelated third parties for their own marketing.</p>
-      <p><strong>Compliance.</strong> We comply with the TCPA and Nebraska law for SMS where applicable; WhatsApp is also governed by WhatsApp/Meta terms.</p>
-    </div>
+<p>Mejor Vida Insurance LLC utiliza <strong>mensajes de texto (SMS)</strong> y <strong>WhatsApp</strong> (además de correo y llamadas) para comunicarse con clientes sobre cotizaciones personalizadas, recordatorios de citas, actualizaciones de póliza e información importante de cobertura.</p>
 
-    <h2 data-lang="es">Cambios en esta política</h2>
-    <h2 data-lang="en">Changes to This Policy</h2>
+<h2>Proveedores (SMS y WhatsApp)</h2>
 
-    <p data-lang="es">
+<p>Utilizamos <strong>Twilio</strong> u otros proveedores para SMS según corresponda. Los mensajes de <strong>WhatsApp</strong> se envían a través de la plataforma de WhatsApp (Meta) / WhatsApp Business según nuestra configuración y las políticas de WhatsApp.</p>
+
+<h2>Opt-In y Autorizacion</h2>
+
+<p>Al enviar un formulario de cotización o contacto en este sitio y marcar la casilla de consentimiento cuando se le muestre, usted autoriza a <strong>Mejor Vida Insurance LLC</strong> a contactarle por <strong>SMS, WhatsApp, correo electrónico y llamadas</strong> relacionados con su solicitud. La frecuencia de <strong>SMS</strong> es típicamente de <strong>1 a 5 mensajes por semana</strong> durante el proceso de cotización y seguimiento; la frecuencia en <strong>WhatsApp</strong> depende de su conversación y de nuestras comunicaciones de servicio. Para SMS, puede darse de baja respondiendo <strong>STOP</strong>. Para WhatsApp, puede solicitar que dejemos de escribirle por ese canal contactándonos (correo o teléfono indicados abajo) o dejando de usar el chat.</p>
+
+<h2>Frecuencia de Mensajes</h2>
+
+<p>Los mensajes <strong>SMS</strong> suelen enviarse con una frecuencia de <strong>1 a 5 por semana</strong> durante la cotización y el seguimiento, según sea necesario. Los mensajes por <strong>WhatsApp</strong> varían según el hilo de conversación y las actualizaciones del caso.</p>
+
+<h2>Como dejar de recibir mensajes (Opt-Out)</h2>
+
+<ul>
+<li><strong>SMS:</strong> Responda <strong>STOP</strong> a cualquier mensaje de texto.</li>
+<li><strong>WhatsApp:</strong> Puede pedirnos por el mismo chat que dejemos de contactarle por WhatsApp, o escribir a <a href="mailto:Julie@mejorvidainsurance.com">Julie@mejorvidainsurance.com</a> o llamar al <a href="tel:+14024405438">402-440-5438</a>.</li>
+<li><strong>Todas las vías:</strong> <a href="mailto:Julie@mejorvidainsurance.com">Julie@mejorvidainsurance.com</a> · <a href="tel:+14024405438">402-440-5438</a>.</li>
+</ul>
+
+<h2>Tarifas de Mensajes</h2>
+
+<p>Pueden aplicar tarifas estándar de mensajes y datos de su operador móvil para <strong>SMS</strong>. El uso de <strong>WhatsApp</strong> puede implicar el uso de datos móviles o Wi‑Fi según su plan y las políticas de WhatsApp/Meta. Mejor Vida Insurance LLC no cobra por mensajes SMS como cargo separado.</p>
+
+<h2>Privacidad y Seguridad de SMS y WhatsApp</h2>
+
+<p>Sus comunicaciones por SMS y WhatsApp se manejan con controles acordes a su información personal. <strong>No vendemos su número de teléfono</strong> ni lo compartimos con terceros para marketing ajeno a su relación con Mejor Vida Insurance LLC. WhatsApp también opera bajo las políticas de privacidad de WhatsApp/Meta.</p>
+
+<h2>Cumplimiento TCPA y Regulacion</h2>
+
+<p>Mejor Vida Insurance LLC cumple con la Ley de Protección al Consumidor Telefónico (TCPA) y regulaciones de Nebraska para comunicaciones de texto (<strong>SMS</strong>), en la medida aplicable. Las comunicaciones por <strong>WhatsApp</strong> también están sujetas a los términos y políticas de WhatsApp/Meta además de nuestras prácticas aquí descritas.</p>
+
+<p><strong>Mejor Vida Insurance LLC esta registrada como compania de seguros con el Nebraska Department of Insurance (Licencia #21695431) y cumple con las regulaciones TCPA y estatales aplicables para SMS y comunicaciones relacionadas.</strong></p>
+
+<div class="sms-policy-english-always border rounded-3 p-3 p-md-4 my-4" lang="en" style="background:#f8fafc;border-color:#dee2e6!important;">
+<h2 class="h5 text-primary">SMS and WhatsApp — full disclosure (English)</h2>
+<p><strong>Use of SMS and WhatsApp.</strong> Mejor Vida Insurance LLC may contact you by <strong>SMS/text messaging</strong> and <strong>WhatsApp</strong>, as well as email and phone, about final-expense and life insurance, including personalized quotes, appointment scheduling and reminders, application and policy follow-ups, and service updates.</p>
+<p><strong>How you opt in.</strong> You agree to SMS and WhatsApp communications when you provide your mobile number and submit a <strong>quote form</strong>, <strong>contact form</strong>, or equivalent lead form on our website (or other express consent we document), including checking the consent box when shown. Consent is not a condition of purchasing insurance where prohibited by law.</p>
+<p><strong>How to opt out.</strong> For <strong>SMS</strong>, reply <strong>STOP</strong> to opt out of SMS. For <strong>WhatsApp</strong>, ask us in chat to stop, or email <a href="mailto:Julie@mejorvidainsurance.com">Julie@mejorvidainsurance.com</a> or call <a href="tel:+14024405438">402-440-5438</a>.</p>
+<p><strong>Message frequency.</strong> <strong>SMS:</strong> typically <strong>1–5 messages per week</strong> while actively considering coverage or completing steps with us. <strong>WhatsApp:</strong> frequency varies with your conversation and service messages.</p>
+<p><strong>Costs.</strong> Carrier message and data rates may apply for SMS; WhatsApp may use data/Wi‑Fi per your plan and WhatsApp/Meta. <strong>Mejor Vida Insurance LLC does not charge a separate fee</strong> for SMS.</p>
+<p><strong>Privacy.</strong> Mobile numbers are used for the communications described. We <strong>do not sell</strong> your phone number and <strong>do not share</strong> it with unrelated third parties for their own marketing.</p>
+<p><strong>Compliance.</strong> We comply with the TCPA and Nebraska law for SMS where applicable; WhatsApp is also governed by WhatsApp/Meta terms.</p>
+</div>
+<h2>Cambios en esta política</h2>
+
+<p>
       Podemos actualizar esta política de privacidad ocasionalmente. Publicaremos cualquier cambio en esta página con la fecha de revisión actualizada.
     </p>
-    <p data-lang="en">
-      We may update this privacy policy occasionally. We will post any changes on this page with an updated revision date.
-    </p>
 
-    <p><strong data-lang="es">Fecha de última actualización:</strong> <strong data-lang="en">Last Updated:</strong> <time datetime="2026-05-07"><span data-lang="es">7 de mayo de 2026</span><span data-lang="en">May 7, 2026</span></time></p>
-  </div>
+<p><strong>Fecha de última actualización:</strong>  <time datetime="2026-05-07"><span>7 de mayo de 2026</span></time></p>
+</div>
+<footer style="background:#1a365d; padding: 8px 0 24px 0;">
+<div class="container">
+<div class="text-white" style="margin:0; padding:0;">
+<div class="d-flex flex-wrap align-items-center justify-content-center gap-3 small">
+<img alt="Mejor Vida Insurance" id="footer-logo" src="img/logo-spanish2.png" style="height:130px;filter:brightness(0) invert(1);margin-top:-25px;margin-bottom:-25px;"/>
+<a class="text-white text-opacity-90 text-decoration-none text-nowrap" href="https://wa.me/14024405438?text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20seguro%20de%20gastos%20finales." rel="noopener" target="_blank"><i class="fab fa-whatsapp me-2 opacity-90"></i>WhatsApp</a>
+<span class="text-nowrap"><i class="fas fa-envelope me-2 opacity-75"></i><a class="text-white text-opacity-90 text-decoration-none" href="mailto:Julie@mejorvidainsurance.com">Julie@mejorvidainsurance.com</a></span>
+<span class="text-nowrap"><i class="fas fa-map-marker-alt me-2 opacity-75"></i>1201 O St Ste 309 Unit #597 Lincoln, NE 68508</span>
+</div>
+<div class="d-flex flex-wrap align-items-center justify-content-center gap-3 small mt-1">
+<span class="text-nowrap"><i class="fas fa-phone me-2 opacity-75"></i>Oficina: <a class="text-white text-opacity-90 text-decoration-none" href="tel:+14024405438" title="Office line">402-440-5438</a></span>
 
-  <footer style="background:#1a365d; padding: 8px 0 24px 0;">
-    <div class="container">
-      <div class="text-white" style="margin:0; padding:0;">
-      <div class="d-flex flex-wrap align-items-center justify-content-center gap-3 small">
-        <img id="footer-logo" src="img/logo-spanish2.png" alt="Mejor Vida Insurance" style="height:130px;filter:brightness(0) invert(1);margin-top:-25px;margin-bottom:-25px;" />
-        <a href="https://wa.me/14024405438?text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20seguro%20de%20gastos%20finales." target="_blank" rel="noopener" class="text-white text-opacity-90 text-decoration-none text-nowrap"><i class="fab fa-whatsapp me-2 opacity-90"></i>WhatsApp</a>
-        <span class="text-nowrap"><i class="fas fa-envelope me-2 opacity-75"></i><a href="mailto:Julie@mejorvidainsurance.com" class="text-white text-opacity-90 text-decoration-none">Julie@mejorvidainsurance.com</a></span>
-        <span class="text-nowrap"><i class="fas fa-map-marker-alt me-2 opacity-75"></i>1201 O St Ste 309 Unit #597 Lincoln, NE 68508</span>
-      </div>
-      <div class="d-flex flex-wrap align-items-center justify-content-center gap-3 small mt-1">
-        <span class="text-nowrap" data-lang="es"><i class="fas fa-phone me-2 opacity-75"></i>Oficina: <a href="tel:+14024405438" class="text-white text-opacity-90 text-decoration-none" title="Office line">402-440-5438</a></span>
-        <span class="text-nowrap" data-lang="en"><i class="fas fa-phone me-2 opacity-75"></i>Office: <a href="tel:+14024405438" class="text-white text-opacity-90 text-decoration-none" title="Office line">402-440-5438</a></span>
-        <span class="text-nowrap" data-lang="es"><i class="fas fa-phone-volume me-2 opacity-75"></i>Llamadas de Julie: <a href="tel:+14025881125" class="text-white text-opacity-90 text-decoration-none" title="Julie callback line">402-588-1125</a></span>
-        <span class="text-nowrap" data-lang="en"><i class="fas fa-phone-volume me-2 opacity-75"></i>Julie callback: <a href="tel:+14025881125" class="text-white text-opacity-90 text-decoration-none" title="Julie callback line">402-588-1125</a></span>
-        <span class="text-nowrap" data-lang="es"><i class="fas fa-comment-dots me-2 opacity-75"></i>SMS/Texto: <a href="tel:+14027355665" class="text-white text-opacity-90 text-decoration-none">402-735-5665</a></span>
-        <span class="text-nowrap" data-lang="en"><i class="fas fa-comment-dots me-2 opacity-75"></i>SMS/Text: <a href="tel:+14027355665" class="text-white text-opacity-90 text-decoration-none">402-735-5665</a></span>
-      </div>
-    </div>
-      <div class="row g-2 pt-2 mt-2 border-top border-secondary text-white small">
-        <div class="col-12 col-md-7">
-          <h4 class="h6 fw-bold mb-2" data-lang="es">Enlaces rápidos</h4>
-          <h4 class="h6 fw-bold mb-2" data-lang="en">Quick Links</h4>
-          <div class="d-flex flex-wrap gap-2 gap-md-3">
-            <a href="index.html#home" class="text-white text-opacity-75 text-decoration-none" data-lang="es">Inicio</a><a href="index.html#home" class="text-white text-opacity-75 text-decoration-none" data-lang="en">Home</a>
-            <span class="text-white text-opacity-50">·</span>
-            <a href="about-julie.html" class="text-white text-opacity-75 text-decoration-none" data-lang="es">Sobre Julie</a><a href="about-julie.html" class="text-white text-opacity-75 text-decoration-none" data-lang="en">About Julie</a>
-            <span class="text-white text-opacity-50">·</span>
-            <a href="index.html#how-it-works" class="text-white text-opacity-75 text-decoration-none" data-lang="es">Cómo funciona</a><a href="index.html#how-it-works" class="text-white text-opacity-75 text-decoration-none" data-lang="en">How It Works</a>
-            <span class="text-white text-opacity-50">·</span>
-            <a href="index.html#carriers" class="text-white text-opacity-75 text-decoration-none" data-lang="es">Aseguradoras</a><a href="index.html#carriers" class="text-white text-opacity-75 text-decoration-none" data-lang="en">Insurers</a>
-            <span class="text-white text-opacity-50">·</span>
-            <a href="index.html#final-expense-answers" class="text-white text-opacity-75 text-decoration-none" data-lang="es">¿Tienes preguntas?</a><a href="index.html#final-expense-answers" class="text-white text-opacity-75 text-decoration-none" data-lang="en">Got questions?</a>
-            <span class="text-white text-opacity-50">·</span>
-            <a href="blog.html" class="text-white text-opacity-75 text-decoration-none">Blog</a>
-            <span class="text-white text-opacity-50">·</span>
-            <a href="contact.html" class="text-white text-opacity-75 text-decoration-none" data-lang="es">Contacto</a><a href="contact.html" class="text-white text-opacity-75 text-decoration-none" data-lang="en">Contact</a>
-            <span class="text-white text-opacity-50">·</span>
-            <a href="quote.html" class="text-white text-opacity-75 text-decoration-none" data-lang="es">Cotización gratuita</a><a href="quote.html" class="text-white text-opacity-75 text-decoration-none" data-lang="en">Get a Free Quote</a>
-          </div>
-        </div>
-        <div class="col-12 col-md-5">
-          <h4 class="h6 fw-bold mb-2">Legal</h4>
-          <div class="d-flex flex-column gap-2 small">
-            <div>
-              <span class="text-white text-opacity-50 text-uppercase d-block mb-1" style="font-size:0.65rem;letter-spacing:0.04em;">English</span>
-              <div class="d-flex flex-wrap gap-2 gap-md-3">
-                <a href="privacy-policy-en.html" class="text-white text-opacity-75 text-decoration-none">Privacy Policy</a>
-                <span class="text-white text-opacity-50">·</span>
-                <a href="terms-service-en.html" class="text-white text-opacity-75 text-decoration-none">Terms of Service</a>
-              </div>
-            </div>
-            <div>
-              <span class="text-white text-opacity-50 text-uppercase d-block mb-1" style="font-size:0.65rem;letter-spacing:0.04em;">Español</span>
-              <div class="d-flex flex-wrap gap-2 gap-md-3">
-                <a href="privacy-policy.html" class="text-white text-opacity-75 text-decoration-none">Política de privacidad</a>
-                <span class="text-white text-opacity-50">·</span>
-                <a href="terms-service.html" class="text-white text-opacity-75 text-decoration-none">Términos de servicio</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="border-top border-secondary mt-2 pt-2">
-        <p class="small text-center text-white text-opacity-75 mb-1" data-lang="es">Julie es una agente de seguros licenciada. Departamento de Seguros de Nebraska, Licencia de Productor #21695431. <a href="https://doi.nebraska.gov" target="_blank" rel="noopener" class="text-white text-opacity-75">Verificar licencia</a></p>
-        <p class="small text-center text-white text-opacity-75 mb-1" data-lang="en">Julie is a licensed insurance agent. Nebraska Department of Insurance, Producer License #21695431. <a href="https://doi.nebraska.gov" target="_blank" rel="noopener" class="text-white text-opacity-75">Verify license</a></p>
-        <p class="small text-center text-white text-opacity-50 mb-0">&copy; <span id="year"></span> Mejor Vida Insurance LLC. All rights reserved.</p>
-      </div>
-    </div>
-  </footer>
+<span class="text-nowrap"><i class="fas fa-phone-volume me-2 opacity-75"></i>Llamadas de Julie: <a class="text-white text-opacity-90 text-decoration-none" href="tel:+14025881125" title="Julie callback line">402-588-1125</a></span>
 
-  <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="script.js"></script>
+<span class="text-nowrap"><i class="fas fa-comment-dots me-2 opacity-75"></i>SMS/Texto: <a class="text-white text-opacity-90 text-decoration-none" href="tel:+14027355665">402-735-5665</a></span>
 
-  <div id="mvi-assistant-root" data-api-url="/api/website-chat"></div>
-  <script src="js/website-assistant-widget.js" defer></script>
-  <script>
+</div>
+</div>
+<div class="row g-2 pt-2 mt-2 border-top border-secondary text-white small">
+<div class="col-12 col-md-7">
+<h4 class="h6 fw-bold mb-2">Enlaces rápidos</h4>
+
+<div class="d-flex flex-wrap gap-2 gap-md-3">
+<a class="text-white text-opacity-75 text-decoration-none" href="index.html#home">Inicio</a>
+<span class="text-white text-opacity-50">·</span>
+<a class="text-white text-opacity-75 text-decoration-none" href="about-julie.html">Sobre Julie</a>
+<span class="text-white text-opacity-50">·</span>
+<a class="text-white text-opacity-75 text-decoration-none" href="index.html#how-it-works">Cómo funciona</a>
+<span class="text-white text-opacity-50">·</span>
+<a class="text-white text-opacity-75 text-decoration-none" href="index.html#carriers">Aseguradoras</a>
+<span class="text-white text-opacity-50">·</span>
+<a class="text-white text-opacity-75 text-decoration-none" href="index.html#final-expense-answers">¿Tienes preguntas?</a>
+<span class="text-white text-opacity-50">·</span>
+<a class="text-white text-opacity-75 text-decoration-none" href="blog.html">Blog</a>
+<span class="text-white text-opacity-50">·</span>
+<a class="text-white text-opacity-75 text-decoration-none" href="contact.html">Contacto</a>
+<span class="text-white text-opacity-50">·</span>
+<a class="text-white text-opacity-75 text-decoration-none" href="quote.html">Cotización gratuita</a>
+</div>
+</div>
+<div class="col-12 col-md-5">
+<h4 class="h6 fw-bold mb-2">Legal</h4>
+<div class="d-flex flex-column gap-2 small">
+<div>
+<span class="text-white text-opacity-50 text-uppercase d-block mb-1" style="font-size:0.65rem;letter-spacing:0.04em;">English</span>
+<div class="d-flex flex-wrap gap-2 gap-md-3">
+<a class="text-white text-opacity-75 text-decoration-none" href="privacy-policy.html">Privacy Policy</a>
+<span class="text-white text-opacity-50">·</span>
+<a class="text-white text-opacity-75 text-decoration-none" href="terms-service.html">Terms of Service</a>
+</div>
+</div>
+<div>
+<span class="text-white text-opacity-50 text-uppercase d-block mb-1" style="font-size:0.65rem;letter-spacing:0.04em;">Español</span>
+<div class="d-flex flex-wrap gap-2 gap-md-3">
+<a class="text-white text-opacity-75 text-decoration-none" href="privacy-policy.html">Política de privacidad</a>
+<span class="text-white text-opacity-50">·</span>
+<a class="text-white text-opacity-75 text-decoration-none" href="terms-service.html">Términos de servicio</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="border-top border-secondary mt-2 pt-2">
+<p class="small text-center text-white text-opacity-75 mb-1">Julie es una agente de seguros licenciada. Departamento de Seguros de Nebraska, Licencia de Productor #21695431. <a class="text-white text-opacity-75" href="https://doi.nebraska.gov" rel="noopener" target="_blank">Verificar licencia</a></p>
+
+<p class="small text-center text-white text-opacity-50 mb-0">© <span id="year"></span> Mejor Vida Insurance LLC. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="script.js"></script>
+<div data-api-url="/api/website-chat" id="mvi-assistant-root"></div>
+<script defer="" src="js/website-assistant-widget.js"></script>
+<script>
     (function () {
       var y = document.getElementById('year');
       if (y) y.textContent = new Date().getFullYear();

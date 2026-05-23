@@ -32,6 +32,8 @@
   if (!formEl) return;
 
   function lang() {
+    var path = window.location.pathname.replace(/\\/g, "/");
+    if (/\/en(\/|$)/.test(path)) return "en";
     return document.documentElement.classList.contains("lang-en") ? "en" : "es";
   }
 

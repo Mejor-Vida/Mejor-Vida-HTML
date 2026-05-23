@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // LANGUAGE TOGGLE
   // ========================================
   const langButtons = document.querySelectorAll('.lang-btn');
-  const isEnglishSite = /^\/en(\/|$)/.test(window.location.pathname);
+  const isEnglishSite = /(?:^|\/)en(?:\/|$)/.test(window.location.pathname.replace(/\\/g, '/'));
   let currentLanguage = isEnglishSite ? 'en' : 'es';
   let currentSlide = 0;
 
@@ -37,9 +37,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Spanish: logo-spanish2.png; English: logo-english2.png
     // Nested pages (blog + carriers) need ../img.
-    const path = window.location.pathname;
+    const path = window.location.pathname.replace(/\\/g, '/');
     const isNestedPage = path.includes('/blog/') || path.includes('/carriers/');
-    const logoBasePath = isNestedPage ? '../img/' : '/img/';
+    let logoBasePath = 'img/';
+    if (isEnglishSite || isNestedPage) logoBasePath = '../img/';
+    else if (window.location.protocol !== 'file:') logoBasePath = '/img/';
     const headerLogo = document.getElementById('header-logo');
     if (headerLogo) {
       headerLogo.src = lang === 'es'

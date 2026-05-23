@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <script>
+  (function () {
+    if (location.hostname === 'mejorvidainsurance.com') {
+      location.replace('https://www.mejorvidainsurance.com' + location.pathname + location.search + location.hash);
+    }
+  })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Outside Nebraska — Mejor Vida Insurance</title>
+  <meta name="robots" content="noindex, follow" />
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon.ico" />
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon.ico" />
+  <link rel="shortcut icon" href="favicon.ico" />
+  <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="css/mvi-assistant-widget.css" rel="stylesheet" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="css/quote-flow-shared.css" rel="stylesheet" />
+  <style>
+    .oos-card { max-width: 32rem; }
+    .oos-form .form-control.is-invalid,
+    .oos-form .form-check-input.is-invalid {
+      border-color: #dc3545;
+    }
+    .oos-form .form-check-input.is-invalid:focus {
+      box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+    }
+    .oos-form .oos-consent-block.is-invalid-consent {
+      padding: 0.75rem;
+      border-radius: 0.375rem;
+      border: 1px solid #dc3545;
+      background-color: rgba(220, 53, 69, 0.06);
+    }
+  </style>
+  <script>
+    (function(){
+      try {
+        var navEntry = performance.getEntriesByType('navigation')[0];
+        var isReload = navEntry && navEntry.type === 'reload';
+        if (isReload) sessionStorage.removeItem('sessionLang');
+        var L = sessionStorage.getItem('sessionLang') || 'es';
+        document.documentElement.className = 'lang-' + L;
+      } catch(e) {
+        document.documentElement.className = 'lang-es';
+      }
+    })();
+  </script>
+</head>
+<body class="d-flex flex-column min-vh-100 bg-light" style="font-family: 'Inter', system-ui, sans-serif; color: #1f2937;">
+
+  <!-- HEADER (aligned with quote.html) -->
+  <header class="sticky-top bg-white shadow-sm border-bottom">
+    <div class="container">
+      <div class="d-flex align-items-center justify-content-between header-inner">
+        <div class="flex-shrink-0 header-logo-wrap">
+          <a href="index.html#home" class="d-block">
+            <img id="header-logo" src="img/logo-spanish2.png" alt="Mejor Vida Insurance logo" class="header-logo" />
+          </a>
+        </div>
+
+        <nav class="desktop-nav d-none d-lg-flex align-items-center">
+          <a href="index.html#home" data-lang="es" class="nav-link-cm">Inicio</a>
+          <a href="index.html#home" data-lang="en" class="nav-link-cm">Home</a>
+          <a href="about-julie.html" data-lang="es" class="nav-link-cm nav-link-stack">Sobre Julie</a>
+          <a href="about-julie.html" data-lang="en" class="nav-link-cm nav-link-stack">About Julie</a>
+          <a href="index.html#how-it-works" data-lang="es" class="nav-link-cm nav-link-stack">Cómo funciona</a>
+          <a href="index.html#how-it-works" data-lang="en" class="nav-link-cm nav-link-stack">How It Works</a>
+          <a href="index.html#final-expense-answers" data-lang="es" class="nav-link-cm nav-link-stack nav-link-questions-wrap" title="¿Tienes preguntas sobre gastos finales?">
+            <i class="fas fa-robot" style="font-size: 0.95em; opacity: 0.88;" aria-hidden="true"></i><span>¿Tienes preguntas?</span>
+          </a>
+          <a href="index.html#final-expense-answers" data-lang="en" class="nav-link-cm nav-link-stack nav-link-questions-wrap" title="Got questions about final expense insurance?">
+            <i class="fas fa-robot" style="font-size: 0.95em; opacity: 0.88;" aria-hidden="true"></i><span>Got questions?</span>
+          </a>
+          <a href="blog.html" data-lang="es" class="nav-link-cm">Blog</a>
+          <a href="blog.html" data-lang="en" class="nav-link-cm">Blog</a>
+          <a href="final-expense-estimator.html" data-lang="es" class="nav-link-cm nav-link-fe-calc-wrap">Calculadora de gastos finales</a>
+          <a href="final-expense-estimator.html" data-lang="en" class="nav-link-cm nav-link-fe-calc-wrap">Final Expense Calculator</a>
+          <a href="contact.html" data-lang="es" class="nav-link-cm">Contacto</a>
+          <a href="contact.html" data-lang="en" class="nav-link-cm">Contact</a>
+          <a href="/schedule-julie.html" data-lang="es" class="nav-link-cm nav-link-schedule-wrap">Agendar con Julie</a>
+          <a href="/schedule-julie.html" data-lang="en" class="nav-link-cm nav-link-schedule-wrap">Schedule with Julie</a>
+        </nav>
+
+        <div class="d-flex align-items-center gap-2 header-actions">
+          <a href="/quote.html" data-lang="es" class="desktop-cta d-none d-lg-inline-block btn-see-prices">Cotización gratuita</a>
+          <a href="/quote.html" data-lang="en" class="desktop-cta d-none d-lg-inline-block btn-see-prices">Get a Free Quote</a>
+          <div class="d-flex gap-1 ms-2">
+            <button class="lang-btn active px-2 py-1 rounded small fw-bold border-2" data-lang-btn="es" type="button">ES</button>
+            <button class="lang-btn px-2 py-1 rounded small fw-bold border-2" data-lang-btn="en" type="button">EN</button>
+          </div>
+          <button class="hamburger-btn" id="hamburger-btn" type="button" aria-label="Open menu">☰</button>
+        </div>
+      </div>
+    </div>
+    <div class="border-top py-2 d-none d-lg-block header-office-bar" style="background:#f8fbff;">
+      <div class="container d-flex flex-wrap gap-3 align-items-center justify-content-end small">
+        <a href="https://wa.me/14024405438?text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20seguro%20de%20gastos%20finales." target="_blank" rel="noopener" data-lang="es" class="header-whatsapp-btn text-decoration-none"><i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp</a>
+        <a href="https://wa.me/14024405438?text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20seguro%20de%20gastos%20finales." target="_blank" rel="noopener" data-lang="en" class="header-whatsapp-btn text-decoration-none"><i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp</a>
+        <span data-lang="es"><strong>Oficina:</strong> <a href="tel:+14024405438" class="text-decoration-none">402-440-5438</a></span>
+        <span data-lang="en"><strong>Office:</strong> <a href="tel:+14024405438" class="text-decoration-none">402-440-5438</a></span>
+        <span data-lang="es"><strong>SMS/Texto:</strong> <a href="tel:+14027355665" class="text-decoration-none">402-735-5665</a></span>
+        <span data-lang="en"><strong>SMS/Text:</strong> <a href="tel:+14027355665" class="text-decoration-none">402-735-5665</a></span>
+      </div>
+    </div>
+
+    <div class="mobile-menu" id="mobile-menu">
+      <a href="index.html#home" data-lang="es" class="mobile-menu-link">Inicio</a>
+      <a href="index.html#home" data-lang="en" class="mobile-menu-link">Home</a>
+      <a href="about-julie.html" data-lang="es" class="mobile-menu-link">Sobre Julie</a>
+      <a href="about-julie.html" data-lang="en" class="mobile-menu-link">About Julie</a>
+      <a href="index.html#how-it-works" data-lang="es" class="mobile-menu-link">Cómo funciona</a>
+      <a href="index.html#how-it-works" data-lang="en" class="mobile-menu-link">How It Works</a>
+      <a href="index.html#final-expense-answers" data-lang="es" class="mobile-menu-link">¿Tienes preguntas?</a>
+      <a href="index.html#final-expense-answers" data-lang="en" class="mobile-menu-link">Got questions?</a>
+      <a href="blog.html" data-lang="es" class="mobile-menu-link">Blog</a>
+      <a href="blog.html" data-lang="en" class="mobile-menu-link">Blog</a>
+      <a href="final-expense-estimator.html" data-lang="es" class="mobile-menu-link fw-bold" style="color:#0D47A1;">Calculadora de gastos finales</a>
+      <a href="final-expense-estimator.html" data-lang="en" class="mobile-menu-link fw-bold" style="color:#0D47A1;">Final Expense Calculator</a>
+      <a href="contact.html" data-lang="es" class="mobile-menu-link">Contacto</a>
+      <a href="contact.html" data-lang="en" class="mobile-menu-link">Contact</a>
+      <a href="https://wa.me/14024405438?text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20seguro%20de%20gastos%20finales." target="_blank" rel="noopener" data-lang="es" class="mobile-menu-link fw-bold" style="color:#1D9E53;"><i class="fab fa-whatsapp me-2"></i>WhatsApp (recomendado)</a>
+      <a href="https://wa.me/14024405438?text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20seguro%20de%20gastos%20finales." target="_blank" rel="noopener" data-lang="en" class="mobile-menu-link fw-bold" style="color:#1D9E53;"><i class="fab fa-whatsapp me-2"></i>WhatsApp (recommended)</a>
+      <a href="/quote.html" data-lang="es" class="mobile-menu-link fw-bold" style="color:#0D47A1;"><i class="fas fa-file-invoice-dollar me-2"></i>Cotización gratis en línea</a>
+      <a href="/quote.html" data-lang="en" class="mobile-menu-link fw-bold" style="color:#0D47A1;"><i class="fas fa-file-invoice-dollar me-2"></i>Free online quote</a>
+      <a href="/schedule-julie.html" data-lang="es" class="mobile-menu-link fw-bold" style="color:#0D47A1;"><i class="fas fa-calendar-alt me-2"></i>Agendar con Julie</a>
+      <a href="/schedule-julie.html" data-lang="en" class="mobile-menu-link fw-bold" style="color:#0D47A1;"><i class="fas fa-calendar-alt me-2"></i>Schedule with Julie</a>
+      <p class="mobile-menu-link small text-muted mb-0 px-2" data-lang="es">¿Cliente actual? Línea de oficina: <a href="tel:+14024405438" class="text-decoration-none">402-440-5438</a></p>
+      <p class="mobile-menu-link small text-muted mb-0 px-2" data-lang="en">Current client? Office line: <a href="tel:+14024405438" class="text-decoration-none">402-440-5438</a></p>
+      <p class="mobile-menu-link small text-muted mb-0 px-2" data-lang="es">SMS/Texto: <a href="tel:+14027355665" class="text-decoration-none">402-735-5665</a></p>
+      <p class="mobile-menu-link small text-muted mb-0 px-2" data-lang="en">SMS/Text: <a href="tel:+14027355665" class="text-decoration-none">402-735-5665</a></p>
+    </div>
+  </header>
+
+  <section class="flex-grow-1 py-4 py-md-5 bg-light">
+    <div class="container" style="max-width:42rem;">
+      <div class="bg-white rounded-3 p-4 p-md-5 shadow-sm mx-auto oos-card">
+        <p class="mb-3 lead fs-6" data-lang="es">Lo sentimos: <strong>aún no estamos licenciados en <span id="oos-state-label">su estado</span></strong>, pero <strong>queremos ayudarle a encontrar un agente con licencia en su área</strong>.</p>
+        <p class="mb-3 lead fs-6" data-lang="en">We’re sorry: <strong>we’re not licensed in <span id="oos-state-label-en">your state</span> yet</strong>, but we <strong>still want to help you find a licensed agent in your area</strong>.</p>
+        <p class="small text-body-secondary mb-4" data-lang="es">Complete el formulario a continuación. Las referencias no están garantizadas; es un servicio de cortesía.</p>
+        <p class="small text-body-secondary mb-4" data-lang="en">Fill out the form below. Referrals are not guaranteed; this is a courtesy service.</p>
+
+        <form id="oos-form" class="oos-form">
+          <div class="visually-hidden" aria-hidden="true">
+            <label>Leave blank <input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
+          </div>
+          <input type="hidden" name="state" id="oos-state-code" value="" />
+          <div class="row g-2 mb-2">
+            <div class="col-md-6">
+              <label for="oos-first" class="form-label small mb-0" data-lang="es">Nombre</label>
+              <label for="oos-first" class="form-label small mb-0" data-lang="en">First name</label>
+              <input type="text" class="form-control form-control-sm" id="oos-first" name="firstName" maxlength="200" autocomplete="given-name" required aria-required="true" />
+              <div class="invalid-feedback" data-lang="es">Indique su nombre.</div>
+              <div class="invalid-feedback" data-lang="en">Please enter your first name.</div>
+            </div>
+            <div class="col-md-6">
+              <label for="oos-last" class="form-label small mb-0" data-lang="es">Apellido</label>
+              <label for="oos-last" class="form-label small mb-0" data-lang="en">Last name</label>
+              <input type="text" class="form-control form-control-sm" id="oos-last" name="lastName" maxlength="200" autocomplete="family-name" required aria-required="true" />
+              <div class="invalid-feedback" data-lang="es">Indique su apellido.</div>
+              <div class="invalid-feedback" data-lang="en">Please enter your last name.</div>
+            </div>
+          </div>
+          <div class="mb-2">
+            <label for="oos-email" class="form-label small mb-0" data-lang="es">Correo electrónico</label>
+            <label for="oos-email" class="form-label small mb-0" data-lang="en">Email</label>
+            <input type="email" class="form-control form-control-sm" id="oos-email" name="email" maxlength="320" autocomplete="email" inputmode="email" required aria-required="true" />
+            <div class="invalid-feedback" data-lang="es">Indique un correo electrónico válido.</div>
+            <div class="invalid-feedback" data-lang="en">Please enter a valid email address.</div>
+          </div>
+          <div class="mb-2">
+            <label for="oos-phone" class="form-label small mb-0" data-lang="es">Teléfono</label>
+            <label for="oos-phone" class="form-label small mb-0" data-lang="en">Phone</label>
+            <input type="tel" class="form-control form-control-sm" id="oos-phone" name="phone" maxlength="40" autocomplete="tel" />
+          </div>
+          <div class="mb-2">
+            <label for="oos-msg" class="form-label small mb-0" data-lang="es">¿Cómo podemos ayudar? (opcional)</label>
+            <label for="oos-msg" class="form-label small mb-0" data-lang="en">How can we help? (optional)</label>
+            <textarea class="form-control form-control-sm" id="oos-msg" name="quoteSummary" rows="3" maxlength="20000"></textarea>
+          </div>
+          <div class="form-check mb-3 oos-consent-block" id="oos-consent-block">
+            <input type="checkbox" class="form-check-input" id="oos-consent-agent" name="consentLicensedAgentInState" value="1" required aria-required="true" />
+            <label class="form-check-label small" for="oos-consent-agent" data-lang="es">Al enviar este formulario, autorizo a un <strong>agente de seguros con licencia en mi estado</strong> y a <strong>Mejor Vida Insurance LLC</strong> a contactarme por mensajes de texto (SMS), WhatsApp, correo electrónico y llamadas telefónicas sobre opciones de seguro. <strong>Frecuencia SMS: 1–5 mensajes por semana.</strong> Pueden aplicar tarifas de mensajes y datos. <strong>Responda STOP para cancelar los SMS.</strong> Ver <a href="/privacy-policy" class="text-decoration-underline">Política de Privacidad</a>.</label>
+            <label class="form-check-label small" for="oos-consent-agent" data-lang="en">By submitting this form, I authorize a <strong>licensed insurance agent in my state</strong> and <strong>Mejor Vida Insurance LLC</strong> to contact me by text message (SMS), WhatsApp, email, and phone calls about insurance options. <strong>SMS frequency: 1–5 messages per week.</strong> Message and data rates may apply. <strong>Reply STOP to opt out of SMS.</strong> See <a href="/privacy-policy" class="text-decoration-underline">Privacy Policy</a>.</label>
+            <div class="invalid-feedback" data-lang="es">Debe marcar esta casilla para enviar el formulario.</div>
+            <div class="invalid-feedback" data-lang="en">You must check this box to submit the form.</div>
+          </div>
+          <div class="d-grid">
+            <button type="submit" class="btn btn-primary btn-sm fw-bold" id="oos-submit">
+              <span data-lang="es">Enviar</span>
+              <span data-lang="en">Submit</span>
+            </button>
+          </div>
+        </form>
+        <p id="oos-msg-status" class="small text-center mt-3 mb-0 d-none" role="status" aria-live="polite"></p>
+        <p class="small text-center mt-3 mb-0">
+          <a href="quote.html" data-lang="es">Volver al cotizador</a>
+          <a href="quote.html" data-lang="en">Back to quote</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER (aligned with quote.html) -->
+  <footer style="background:#1a365d; padding: 8px 0 24px 0;">
+    <div class="container">
+      <div class="d-flex flex-column flex-md-row align-items-center justify-content-between gap-2 text-white" style="margin:0; padding:0;">
+        <img id="footer-logo" src="img/logo-spanish2.png" alt="Mejor Vida Insurance" style="height:130px;filter:brightness(0) invert(1);margin-top:-25px;margin-bottom:-25px;" />
+        <span class="small"><i class="fas fa-phone me-2 opacity-75"></i><a href="tel:+14024405438" class="text-white text-opacity-90 text-decoration-none">402-440-5438</a></span>
+        <span class="small"><i class="fas fa-envelope me-2 opacity-75"></i><a href="mailto:Julie@mejorvidainsurance.com" class="text-white text-opacity-90 text-decoration-none">Julie@mejorvidainsurance.com</a></span>
+        <span class="small"><i class="fas fa-map-marker-alt me-2 opacity-75"></i>1201 O St Ste 309 Unit #597 Lincoln, NE 68508</span>
+      </div>
+      <div class="row g-2 pt-2 mt-2 border-top border-secondary text-white small">
+        <div class="col-12 col-md-7">
+          <h4 class="h6 fw-bold mb-2" data-lang="es">Enlaces rápidos</h4>
+          <h4 class="h6 fw-bold mb-2" data-lang="en">Quick Links</h4>
+          <div class="d-flex flex-wrap gap-2 gap-md-3">
+            <a href="index.html" class="text-white text-opacity-75 text-decoration-none" data-lang="es">Inicio</a><a href="index.html" class="text-white text-opacity-75 text-decoration-none" data-lang="en">Home</a>
+            <span class="text-white text-opacity-50">·</span>
+            <a href="about-julie.html" class="text-white text-opacity-75 text-decoration-none" data-lang="es">Sobre Julie</a><a href="about-julie.html" class="text-white text-opacity-75 text-decoration-none" data-lang="en">About Julie</a>
+            <span class="text-white text-opacity-50">·</span>
+            <a href="index.html#how-it-works" class="text-white text-opacity-75 text-decoration-none" data-lang="es">Cómo funciona</a><a href="index.html#how-it-works" class="text-white text-opacity-75 text-decoration-none" data-lang="en">How It Works</a>
+            <span class="text-white text-opacity-50">·</span>
+            <a href="index.html#carriers" class="text-white text-opacity-75 text-decoration-none" data-lang="es">Aseguradoras</a><a href="index.html#carriers" class="text-white text-opacity-75 text-decoration-none" data-lang="en">Insurers</a>
+            <span class="text-white text-opacity-50">·</span>
+            <a href="index.html#final-expense-answers" class="text-white text-opacity-75 text-decoration-none" data-lang="es">¿Tienes preguntas?</a><a href="index.html#final-expense-answers" class="text-white text-opacity-75 text-decoration-none" data-lang="en">Got questions?</a>
+            <span class="text-white text-opacity-50">·</span>
+            <a href="blog.html" class="text-white text-opacity-75 text-decoration-none">Blog</a>
+            <span class="text-white text-opacity-50">·</span>
+            <a href="index.html#contact" class="text-white text-opacity-75 text-decoration-none" data-lang="es">Contacto</a><a href="index.html#contact" class="text-white text-opacity-75 text-decoration-none" data-lang="en">Contact</a>
+          </div>
+        </div>
+        <div class="col-12 col-md-5">
+          <h4 class="h6 fw-bold mb-2">Legal</h4>
+          <div class="d-flex flex-column gap-2 small">
+            <div>
+              <span class="text-white text-opacity-50 text-uppercase d-block mb-1" style="font-size:0.65rem;letter-spacing:0.04em;">English</span>
+              <div class="d-flex flex-wrap gap-2 gap-md-3">
+                <a href="privacy-policy-en.html" class="text-white text-opacity-75 text-decoration-none">Privacy Policy</a>
+                <span class="text-white text-opacity-50">·</span>
+                <a href="terms-service-en.html" class="text-white text-opacity-75 text-decoration-none">Terms of Service</a>
+              </div>
+            </div>
+            <div>
+              <span class="text-white text-opacity-50 text-uppercase d-block mb-1" style="font-size:0.65rem;letter-spacing:0.04em;">Español</span>
+              <div class="d-flex flex-wrap gap-2 gap-md-3">
+                <a href="privacy-policy.html" class="text-white text-opacity-75 text-decoration-none">Política de privacidad</a>
+                <span class="text-white text-opacity-50">·</span>
+                <a href="terms-service.html" class="text-white text-opacity-75 text-decoration-none">Términos de servicio</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="border-top border-secondary mt-2 pt-2">
+        <p class="small text-center text-white text-opacity-75 mb-1" data-lang="es">Julie es una agente de seguros licenciada. Departamento de Seguros de Nebraska, Licencia de Productor #21695431. <a href="https://doi.nebraska.gov" target="_blank" rel="noopener" class="text-white text-opacity-75">Verificar licencia</a></p>
+        <p class="small text-center text-white text-opacity-75 mb-1" data-lang="en">Julie is a licensed insurance agent. Nebraska Department of Insurance, Producer License #21695431. <a href="https://doi.nebraska.gov" target="_blank" rel="noopener" class="text-white text-opacity-75">Verify license</a></p>
+        <p class="small text-center text-white text-opacity-50 mb-0">&copy; <span id="year"></span> Mejor Vida Insurance LLC. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="script.js"></script>
+  <script>
+    (function () {
+      var NAMES = { AL:'Alabama', AK:'Alaska', AZ:'Arizona', AR:'Arkansas', CA:'California', CO:'Colorado', CT:'Connecticut', DE:'Delaware', DC:'District of Columbia', FL:'Florida', GA:'Georgia', HI:'Hawaii', ID:'Idaho', IL:'Illinois', IN:'Indiana', IA:'Iowa', KS:'Kansas', KY:'Kentucky', LA:'Louisiana', ME:'Maine', MD:'Maryland', MA:'Massachusetts', MI:'Michigan', MN:'Minnesota', MS:'Mississippi', MO:'Missouri', MT:'Montana', NE:'Nebraska', NV:'Nevada', NH:'New Hampshire', NJ:'New Jersey', NM:'New Mexico', NY:'New York', NC:'North Carolina', ND:'North Dakota', OH:'Ohio', OK:'Oklahoma', OR:'Oregon', PA:'Pennsylvania', RI:'Rhode Island', SC:'South Carolina', SD:'South Dakota', TN:'Tennessee', TX:'Texas', UT:'Utah', VT:'Vermont', VA:'Virginia', WA:'Washington', WV:'West Virginia', WI:'Wisconsin', WY:'Wyoming' };
+      var code = '';
+      try { code = (new URLSearchParams(location.search).get('state') || '').toUpperCase().slice(0, 2); } catch (e) {}
+      if (!code || code === 'NE' || !NAMES[code]) {
+        window.location.replace('quote.html');
+        return;
+      }
+      document.getElementById('oos-state-code').value = code;
+      var label = NAMES[code] + ' (' + code + ')';
+      var el = document.getElementById('oos-state-label');
+      var elEn = document.getElementById('oos-state-label-en');
+      if (el) el.textContent = label;
+      if (elEn) elEn.textContent = label;
+
+      var form = document.getElementById('oos-form');
+      var msgEl = document.getElementById('oos-msg-status');
+      var btn = document.getElementById('oos-submit');
+      var firstEl = document.getElementById('oos-first');
+      var lastEl = document.getElementById('oos-last');
+      var emailEl = document.getElementById('oos-email');
+      var consentEl = document.getElementById('oos-consent-agent');
+      var consentBlock = document.getElementById('oos-consent-block');
+
+      function clearFieldInvalid(el) {
+        if (!el) return;
+        el.classList.remove('is-invalid');
+        el.removeAttribute('aria-invalid');
+      }
+      function clearConsentInvalid() {
+        if (consentEl) {
+          consentEl.classList.remove('is-invalid');
+          consentEl.removeAttribute('aria-invalid');
+        }
+        if (consentBlock) consentBlock.classList.remove('is-invalid-consent');
+      }
+      form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        if (msgEl) { msgEl.classList.add('d-none'); msgEl.classList.remove('text-danger', 'text-success'); }
+        var lang = document.documentElement.classList.contains('lang-en') ? 'en' : 'es';
+        var fd = new FormData(form);
+        if (fd.get('website')) return;
+        if (!form.checkValidity()) {
+          form.reportValidity();
+          return;
+        }
+        var agentConsent = consentEl && consentEl.checked;
+        var payload = {
+          source: 'out_of_state_referral',
+          firstName: (fd.get('firstName') || '').trim(),
+          lastName: (fd.get('lastName') || '').trim(),
+          email: (fd.get('email') || '').trim(),
+          phone: (fd.get('phone') || '').trim(),
+          state: code,
+          quoteSummary: (fd.get('quoteSummary') || '').trim(),
+          consentLicensedAgentInState: agentConsent,
+          lang: lang
+        };
+        if (btn) btn.disabled = true;
+        try {
+          var res = await fetch('/api/out-of-state-referral', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+          var data = await res.json().catch(function () { return {}; });
+          if (!res.ok || !data.ok) throw new Error(data.error || (lang === 'es' ? 'Error al enviar' : 'Send failed'));
+          var dest = 'thank-you-out-of-state.html?lang=' + encodeURIComponent(lang) + '&state=' + encodeURIComponent(code);
+          window.location.replace(dest);
+          return;
+        } catch (err) {
+          if (msgEl) {
+            msgEl.classList.remove('d-none');
+            msgEl.classList.add('text-danger');
+            msgEl.textContent = err.message || (lang === 'es' ? 'Error al enviar.' : 'Could not send.');
+          }
+        } finally {
+          if (btn) btn.disabled = false;
+        }
+      });
+    })();
+    var y = document.getElementById('year');
+    if (y) y.textContent = new Date().getFullYear();
+    var hamburgerBtn = document.getElementById('hamburger-btn');
+    var mobileMenu = document.getElementById('mobile-menu');
+    if (hamburgerBtn && mobileMenu) {
+      hamburgerBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        mobileMenu.classList.toggle('active');
+        hamburgerBtn.textContent = mobileMenu.classList.contains('active') ? '✕' : '☰';
+      });
+      document.addEventListener('click', function (e) {
+        if (!mobileMenu.contains(e.target) && !hamburgerBtn.contains(e.target)) {
+          mobileMenu.classList.remove('active');
+          hamburgerBtn.textContent = '☰';
+        }
+      });
+    }
+  </script>
+
+  <div id="mvi-assistant-root" data-api-url="/api/website-chat"></div>
+  <script src="js/website-assistant-widget.js" defer></script>
+</body>
+</html>

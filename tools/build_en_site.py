@@ -5,12 +5,14 @@ from __future__ import annotations
 
 import copy
 import re
+import shutil
 from pathlib import Path
 
 from bs4 import BeautifulSoup, Comment, NavigableString, Tag
 
 ROOT = Path(__file__).resolve().parents[1]
 EN_DIR = ROOT / "en"
+SOURCES = ROOT / "sources"
 INCLUDES = ROOT / "includes"
 BASE = "https://www.mejorvidainsurance.com"
 
@@ -58,11 +60,45 @@ PAGE_MAP = {
     "landing-gastos-finales.html": "landing-final-expense.html",
 }
 
-COPY_PAGES = {
-    "privacy-policy-en.html": "privacy-policy.html",
-    "terms-service-en.html": "terms-service.html",
-    "sms-optin.html": "sms-optin.html",
-}
+# Extra bilingual pages (sources/{path} → Spanish root + en/{path})
+EXTRA_BILINGUAL_PAGES = [
+    "schedule-julie.html",
+    "quote-out-of-state.html",
+    "thank-you-out-of-state.html",
+    "privacy-policy.html",
+    "terms-service.html",
+    "sms-optin.html",
+]
+
+EXCLUDE_SOURCE_PREFIXES = (
+    "staff/",
+    "preview/",
+    "en/",
+    "sources/",  # templates dir — never treat as public pages
+    "email-previews/",
+    "facebook-posting/",
+    "integrations/",
+    "website-avatar/",
+    "FB/",
+    "blog/_fragments/",
+    "includes/",
+)
+
+# Built by dedicated handlers (skip in site-wide loop)
+SKIP_SITE_WIDE = frozenset(
+    {
+        "index.html",
+        "quote.html",
+        "about-julie.html",
+        "contact.html",
+        "blog.html",
+        "final-expense-estimator.html",
+        "landing-gastos-finales.html",
+        "quote-results.html",
+        "privacy-policy-en.html",
+        "terms-service-en.html",
+    }
+)
 
 PAGE_SEO = {
     "index.html": {
@@ -115,6 +151,11 @@ PAGE_SEO = {
         "description": "SMS and text message opt-in disclosure for Mejor Vida Insurance LLC: how to subscribe, message frequency, opt-out (STOP), rates, and privacy.",
         "og_image": "/img/logo-english2.png",
     },
+    "quote-results.html": {
+        "title": "Your Lowest Rate Opportunities May Not Last Forever | Mejor Vida Insurance",
+        "description": "See your final expense estimate and schedule with Julie today. Age and health changes can affect future options.",
+        "og_image": "/img/logo-english2.png",
+    },
 }
 
 # Spanish public path (for hreflang) -> en filename
@@ -129,34 +170,46 @@ HREFLANG_ES = {
     "privacy-policy.html": "/privacy-policy.html",
     "terms-service.html": "/terms-service.html",
     "sms-optin.html": "/sms-optin.html",
+    "quote-results.html": "/quote-results.html",
+    "schedule-julie.html": "/schedule-julie.html",
+    "quote-out-of-state.html": "/quote-out-of-state.html",
+    "thank-you-out-of-state.html": "/thank-you-out-of-state.html",
 }
 
 INTERNAL_LINKS = {
-    "index.html": "/en/index.html",
-    "/index.html": "/en/index.html",
-    "quote.html": "/en/quote.html",
-    "/quote.html": "/en/quote.html",
-    "about-julie.html": "/en/about-julie.html",
-    "/about-julie.html": "/en/about-julie.html",
-    "contact.html": "/en/contact.html",
-    "/contact.html": "/en/contact.html",
-    "blog.html": "/en/blog.html",
-    "/blog.html": "/en/blog.html",
-    "final-expense-estimator.html": "/en/final-expense-estimator.html",
-    "/final-expense-estimator.html": "/en/final-expense-estimator.html",
-    "landing-gastos-finales.html": "/en/landing-final-expense.html",
-    "/landing-gastos-finales.html": "/en/landing-final-expense.html",
-    "landing-final-expense.html": "/en/landing-final-expense.html",
-    "privacy-policy.html": "/en/privacy-policy.html",
-    "/privacy-policy.html": "/en/privacy-policy.html",
-    "privacy-policy-en.html": "/en/privacy-policy.html",
-    "/privacy-policy-en.html": "/en/privacy-policy.html",
-    "terms-service.html": "/en/terms-service.html",
-    "/terms-service.html": "/en/terms-service.html",
-    "terms-service-en.html": "/en/terms-service.html",
-    "/terms-service-en.html": "/en/terms-service.html",
-    "sms-optin.html": "/en/sms-optin.html",
-    "/sms-optin.html": "/en/sms-optin.html",
+    "index.html": "index.html",
+    "/index.html": "index.html",
+    "quote.html": "quote.html",
+    "/quote.html": "quote.html",
+    "about-julie.html": "about-julie.html",
+    "/about-julie.html": "about-julie.html",
+    "contact.html": "contact.html",
+    "/contact.html": "contact.html",
+    "blog.html": "blog.html",
+    "/blog.html": "blog.html",
+    "final-expense-estimator.html": "final-expense-estimator.html",
+    "/final-expense-estimator.html": "final-expense-estimator.html",
+    "landing-gastos-finales.html": "landing-final-expense.html",
+    "/landing-gastos-finales.html": "landing-final-expense.html",
+    "landing-final-expense.html": "landing-final-expense.html",
+    "privacy-policy.html": "privacy-policy.html",
+    "/privacy-policy.html": "privacy-policy.html",
+    "privacy-policy-en.html": "privacy-policy.html",
+    "/privacy-policy-en.html": "privacy-policy.html",
+    "terms-service.html": "terms-service.html",
+    "/terms-service.html": "terms-service.html",
+    "terms-service-en.html": "terms-service.html",
+    "/terms-service-en.html": "terms-service.html",
+    "sms-optin.html": "sms-optin.html",
+    "/sms-optin.html": "sms-optin.html",
+    "schedule-julie.html": "../schedule-julie.html",
+    "/schedule-julie.html": "../schedule-julie.html",
+    "quote-out-of-state.html": "quote-out-of-state.html",
+    "/quote-out-of-state.html": "quote-out-of-state.html",
+    "thank-you-out-of-state.html": "thank-you-out-of-state.html",
+    "/thank-you-out-of-state.html": "thank-you-out-of-state.html",
+    "quote-results.html": "quote-results.html",
+    "/quote-results.html": "quote-results.html",
 }
 
 
@@ -221,6 +274,145 @@ def remove_comments(soup: BeautifulSoup) -> None:
         node.extract()
 
 
+def bilingual_source_path(rel: str) -> Path:
+    """Bilingual template used to generate Spanish root + English /en/ outputs."""
+    path = SOURCES / rel
+    if path.is_file():
+        return path
+    fallback = ROOT / rel
+    if fallback.is_file():
+        return fallback
+    raise FileNotFoundError(f"No source for {rel} (expected sources/ or root)")
+
+
+def en_asset_prefix(en_rel: str) -> str:
+    """Prefix from en/{en_rel} up to site root (for bootstrap/, img/, etc.)."""
+    return "../" * len(Path(en_rel).parts)
+
+
+def en_nav_prefix(en_rel: str) -> str:
+    """Prefix from en/{en_rel} up to en/ (for index.html, blog.html within /en/)."""
+    parts = Path(en_rel).parts
+    if len(parts) <= 1:
+        return ""
+    return "../" * (len(parts) - 1)
+
+
+def en_public_path(rel: str) -> str:
+    mapped = PAGE_MAP.get(rel, rel)
+    if mapped == "index.html":
+        return "/en/"
+    return f"/en/{mapped}"
+
+
+def es_public_path(rel: str) -> str:
+    mapped = {v: k for k, v in PAGE_MAP.items()}.get(rel, rel)
+    if mapped == "index.html":
+        return "/"
+    return f"/{mapped}"
+
+
+def discover_bilingual_html() -> list[str]:
+    found: list[str] = []
+    for path in ROOT.rglob("*.html"):
+        rel = path.relative_to(ROOT).as_posix()
+        if rel.startswith("en/") or any(rel.startswith(p) for p in EXCLUDE_SOURCE_PREFIXES):
+            continue
+        try:
+            text = path.read_text(encoding="utf-8")
+        except OSError:
+            continue
+        if "data-lang=" in text:
+            found.append(rel)
+    return sorted(set(found))
+
+
+def bootstrap_bilingual_sources() -> None:
+    """Keep sources/ as bilingual master; refresh from root if root still has data-lang."""
+    SOURCES.mkdir(exist_ok=True)
+    candidates = sorted(
+        set(discover_bilingual_html())
+        | {p.relative_to(SOURCES).as_posix() for p in SOURCES.rglob("*.html")}
+    )
+    for rel in candidates:
+        src = ROOT / rel
+        dst = SOURCES / rel
+        if not src.is_file() and not dst.is_file():
+            continue
+        if not src.is_file():
+            continue
+        if src.resolve() == dst.resolve():
+            continue
+        if "data-lang=" in src.read_text(encoding="utf-8"):
+            dst.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(src, dst)
+            print(f"  refreshed sources/{rel} (from bilingual root)")
+        elif not dst.is_file():
+            dst.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(src, dst)
+            print(f"  bootstrapped sources/{rel}")
+
+
+def adapt_en_chrome(html: str, en_rel: str) -> str:
+    """Adjust shared en header/footer paths for en/blog/... and en/carriers/... depth."""
+    assets = en_asset_prefix(en_rel)
+    nav = en_nav_prefix(en_rel)
+    if assets == "../" and not nav:
+        return html
+    html = html.replace('src="../img/', f'src="{assets}img/')
+    html = html.replace('href="../schedule-julie.html', f'href="{assets}schedule-julie.html')
+    html = html.replace('href="../index.html"', f'href="{assets}index.html"')
+    if nav:
+        for page in (
+            "index.html",
+            "about-julie.html",
+            "blog.html",
+            "contact.html",
+            "quote.html",
+            "final-expense-estimator.html",
+            "privacy-policy.html",
+            "terms-service.html",
+            "sms-optin.html",
+        ):
+            html = html.replace(f'href="{page}', f'href="{nav}{page}')
+    return html
+
+
+def strip_spanish_only(soup: BeautifulSoup) -> None:
+    for el in list(soup.find_all(attrs={"data-lang": "en"})):
+        el.decompose()
+    for el in soup.find_all(attrs={"data-lang": "es"}):
+        if "data-lang" in el.attrs:
+            del el.attrs["data-lang"]
+    remove_lang_toggle_ui(soup)
+    remove_lang_scripts(soup)
+    inject_single_lang_head(soup, "es")
+    if soup.html:
+        soup.html["lang"] = "es"
+        soup.html["class"] = "lang-es"
+
+
+def inject_en_urls_basic(soup: BeautifulSoup, en_rel: str, es_rel: str) -> None:
+    head = soup.find("head")
+    if not head:
+        return
+    en_url = f"{BASE}{en_public_path(en_rel)}"
+    es_url = f"{BASE}{es_public_path(es_rel)}"
+    canonical = head.find("link", rel="canonical")
+    if canonical:
+        canonical["href"] = en_url
+    for meta in head.find_all("meta"):
+        if meta.get("property") == "og:url":
+            meta["content"] = en_url
+        if meta.get("property") == "og:locale":
+            meta["content"] = "en_US"
+    for link in head.find_all("link", rel="alternate"):
+        link.decompose()
+    head.append(soup.new_tag("link", rel="alternate", hreflang="es", href=es_url))
+    head.append(soup.new_tag("link", rel="alternate", hreflang="en", href=en_url))
+    head.append(soup.new_tag("link", rel="alternate", hreflang="x-default", href=es_url))
+
+
 def remove_lang_toggle_ui(soup: BeautifulSoup) -> None:
     for el in soup.find_all(attrs={"data-lang-btn": True}):
         el.decompose()
@@ -253,9 +445,20 @@ def strip_bilingual_css_rules(css: str) -> str:
     return css
 
 
+def is_protected_runtime_script(txt: str) -> bool:
+    """Quote-results schedule + estimate loaders must survive lang-toggle cleanup."""
+    return (
+        "mvi-results-body" in txt
+        or "mvi-results-missing" in txt
+        or ("openScheduleModalMejorVida" in txt and "schedule-iframe" in txt)
+    )
+
+
 def remove_lang_scripts(soup: BeautifulSoup) -> None:
     for script in soup.find_all("script"):
         txt = script.string or ""
+        if is_protected_runtime_script(txt):
+            continue
         if "sessionLang" in txt or "data-lang-btn" in txt or "setLanguage" in txt:
             if "hamburger-btn" not in txt or "sessionLang" in txt:
                 script.decompose()
@@ -263,6 +466,274 @@ def remove_lang_scripts(soup: BeautifulSoup) -> None:
         txt = style.string or ""
         if "html.lang-es" in txt or "html.lang-en" in txt:
             style.string = strip_bilingual_css_rules(txt)
+
+
+def relativize_en_assets(html: str, *, asset_prefix: str | None = None) -> str:
+    """Use ../ paths so /en/ pages work locally (file://) and on Vercel."""
+    prefix = asset_prefix or "../"
+    asset_roots = ("bootstrap", "css", "js", "img", "video")
+    for root in asset_roots:
+        html = re.sub(
+            rf'((?:href|src)=["\'])/{root}/',
+            rf"\1{prefix}{root}/",
+            html,
+        )
+    for stem in ("bootstrap/", "css/", "js/", "img/", "video/", "favicon.ico", "script.js"):
+        html = re.sub(
+            rf'((?:href|src)=["\'])(?!https?:|/|#|mailto:|tel:|data:|\\.\\./)({re.escape(stem)})',
+            rf"\1{prefix}\2",
+            html,
+        )
+    html = re.sub(r"url\(\s*['\"]/img/", f"url('{prefix}img/", html)
+    html = re.sub(r"url\(\s*['\"]img/", f"url('{prefix}img/", html)
+    html = re.sub(
+        r'data-mvi-avatar-base=(["\'])img/',
+        rf"data-mvi-avatar-base=\1{prefix}img/",
+        html,
+    )
+    return html
+
+
+def normalize_en_prefixed_links(html: str) -> str:
+    """Convert /en/foo.html → foo.html for same-folder navigation."""
+    html = re.sub(r'(href=["\'])/en/([^"\']+)(["\'])', r"\1\2\3", html)
+    return html
+
+
+def inject_en_bootstrap_script(soup: BeautifulSoup) -> None:
+    head = soup.find("head")
+    if not head:
+        return
+    for script in list(head.find_all("script")):
+        if script.get("type") == "application/ld+json":
+            continue
+        txt = script.string or script.get_text() or ""
+        if "sessionLang" in txt or "data-lang-btn" in txt:
+            script.decompose()
+    boot = BeautifulSoup(
+        '<script>(function(){document.documentElement.className="lang-en";document.documentElement.lang="en";})();</script>',
+        "html.parser",
+    )
+    head.append(boot)
+
+
+def inject_single_lang_head(soup: BeautifulSoup, lang: str) -> None:
+    head = soup.find("head")
+    if not head:
+        return
+    for script in list(head.find_all("script")):
+        if script.get("type") == "application/ld+json":
+            continue
+        txt = script.string or script.get_text() or ""
+        if "sessionLang" in txt or "mviNebraskaQuoteResult" in txt or "mvsQuoteResult" in txt:
+            script.decompose()
+    boot = BeautifulSoup(
+        f'<script>(function(){{document.documentElement.lang="{lang}";document.documentElement.className="lang-{lang}";}})();</script>',
+        "html.parser",
+    )
+    head.append(boot)
+
+
+def add_cross_language_link(soup: BeautifulSoup, *, href: str, label: str, title: str) -> None:
+    actions = soup.select_one(".header-actions")
+    if not actions:
+        return
+    if actions.find("a", href=href):
+        return
+    link = soup.new_tag("a", href=href)
+    link["class"] = "d-none d-lg-inline-block nav-link-cm small text-muted text-decoration-none ms-1"
+    link["title"] = title
+    link.string = label
+    hamburger = actions.find(class_="hamburger-btn")
+    if hamburger:
+        hamburger.insert_before(link)
+    else:
+        actions.append(link)
+
+
+def fix_quote_results_scripts(html: str, lang: str) -> str:
+    html = html.replace(
+        "var lang = document.documentElement.classList.contains('lang-en') ? 'en' : 'es';",
+        f"var lang = '{lang}';",
+    )
+    html = html.replace(
+        "var warnLang = document.documentElement.classList.contains('lang-en') ? 'en' : 'es';",
+        f"var warnLang = '{lang}';",
+    )
+    html = re.sub(
+        r"document\.querySelectorAll\('\.lang-btn'\)\.forEach\(function \(btn\) \{[\s\S]*?\}\);\s*",
+        "",
+        html,
+        count=1,
+    )
+    html = re.sub(
+        r"// Prefer active page language over possibly stale quote payload language\.[\s\S]*?var lang = pageLang \|\| \(q\.lang === 'en' \? 'en' : 'es'\);",
+        f"var lang = '{lang}';",
+        html,
+        count=1,
+    )
+    html = re.sub(r'<script src="\.\./script\.js"></script>\s*', "", html)
+    html = re.sub(r'<script src="script\.js"></script>\s*', "", html)
+    return html
+
+
+def build_quote_results_split() -> None:
+    """Spanish quote-results.html + dedicated en/quote-results.html (no shared data-lang page)."""
+    source_path = SOURCES / "quote-results.html"
+    if not source_path.is_file():
+        raise SystemExit(
+            f"Missing bilingual source: {source_path.relative_to(ROOT)} "
+            "(required to rebuild Spanish and English quote-results pages)."
+        )
+    raw = source_path.read_text(encoding="utf-8")
+    es_dest = ROOT / "quote-results.html"
+
+    # --- Spanish (root) ---
+    es_soup = BeautifulSoup(raw, "html.parser")
+    for el in list(es_soup.find_all(attrs={"data-lang": "en"})):
+        el.decompose()
+    for el in es_soup.find_all(attrs={"data-lang": "es"}):
+        del el.attrs["data-lang"]
+    remove_lang_toggle_ui(es_soup)
+    inject_single_lang_head(es_soup, "es")
+    if es_soup.html:
+        es_soup.html["lang"] = "es"
+    add_cross_language_link(
+        es_soup,
+        href="/en/quote.html",
+        label="English",
+        title="View quote tool in English",
+    )
+    es_out = str(es_soup)
+    es_out = fix_quote_results_scripts(es_out, "es")
+    es_out = rewrite_internal_links(es_out)
+    es_dest.write_text(es_out, encoding="utf-8")
+    print("  wrote quote-results.html (Spanish only)")
+
+    # --- English (/en/) ---
+    en_soup = BeautifulSoup(raw, "html.parser")
+    strip_bilingual(en_soup)
+    remove_lang_scripts(en_soup)
+    inject_single_lang_head(en_soup, "en")
+    replace_header_footer(en_soup)
+    set_lang_en_html(en_soup)
+    inject_seo(en_soup, "quote-results.html", "quote-results.html")
+    en_out = str(en_soup)
+    en_out = relativize_en_assets(en_out)
+    en_out = rewrite_internal_links(en_out)
+    en_out = normalize_en_prefixed_links(en_out)
+    en_out = fix_quote_results_scripts(en_out, "en")
+    if EN_MOBILE_MENU_JS.strip() not in en_out:
+        en_out = en_out.replace("</body>", EN_MOBILE_MENU_JS + "\n</body>", 1)
+    dest = EN_DIR / "quote-results.html"
+    final = en_out if en_out.lstrip().startswith("<!DOCTYPE") else "<!DOCTYPE html>\n" + en_out
+    dest.write_text(final, encoding="utf-8")
+    print("  wrote en/quote-results.html (English only)")
+
+
+def write_spanish_only_page(rel: str, *, cross_en_href: str | None = None) -> None:
+    """Published root page: Spanish only (no data-lang toggle)."""
+    raw = bilingual_source_path(rel).read_text(encoding="utf-8")
+    soup = BeautifulSoup(raw, "html.parser")
+    strip_spanish_only(soup)
+    if cross_en_href:
+        add_cross_language_link(
+            soup,
+            href=cross_en_href,
+            label="English",
+            title="View this page in English",
+        )
+    out = str(soup)
+    out = rewrite_internal_links(out)
+    dest = ROOT / rel
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    dest.write_text(out, encoding="utf-8")
+    print(f"  wrote {rel} (Spanish only)")
+
+
+def build_english_from_bilingual(
+    rel: str,
+    en_rel: str | None = None,
+    *,
+    seo_key: str | None = None,
+    use_en_header: bool = True,
+    post_name: str | None = None,
+    html_post=None,
+) -> None:
+    en_rel = en_rel or rel
+    post_name = post_name or Path(en_rel).name
+    soup = BeautifulSoup(bilingual_source_path(rel).read_text(encoding="utf-8"), "html.parser")
+    strip_bilingual(soup)
+    remove_lang_scripts(soup)
+    inject_single_lang_head(soup, "en")
+    if use_en_header:
+        replace_header_footer(soup)
+    set_lang_en_html(soup)
+    seo_file = seo_key or Path(en_rel).name
+    if seo_file in PAGE_SEO:
+        inject_seo(soup, seo_file, rel)
+    else:
+        inject_en_urls_basic(soup, en_rel, rel)
+    out = str(soup)
+    assets = en_asset_prefix(en_rel)
+    out = relativize_en_assets(out, asset_prefix=assets)
+    out = adapt_en_chrome(out, en_rel)
+    out = rewrite_internal_links(out)
+    out = normalize_en_prefixed_links(out)
+    if post_name == "sms-optin.html":
+        out = fix_sms_optin(out)
+    out = post_process_html(out, post_name)
+    if html_post:
+        out = html_post(out)
+    if "</body>" in out and "hamburger-btn" in out and EN_MOBILE_MENU_JS.strip() not in out:
+        out = out.replace("</body>", EN_MOBILE_MENU_JS + "\n</body>", 1)
+    dest = EN_DIR / en_rel
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    final = out if out.lstrip().startswith("<!DOCTYPE") else "<!DOCTYPE html>\n" + out
+    dest.write_text(final, encoding="utf-8")
+    print(f"  wrote en/{en_rel}")
+
+
+def build_site_wide_splits() -> None:
+    """Split every bilingual template under sources/ into Spanish root + /en/ mirror."""
+    for rel in discover_bilingual_html():
+        if rel in SKIP_SITE_WIDE:
+            continue
+        cross = en_public_path(rel)
+        write_spanish_only_page(rel, cross_en_href=cross)
+        build_english_from_bilingual(rel, rel, use_en_header=True)
+
+
+def build_index_from_spanish() -> None:
+    """Copy Spanish index.html, keep English text blocks, same layout/CSS/JS."""
+    soup = BeautifulSoup(bilingual_source_path("index.html").read_text(encoding="utf-8"), "html.parser")
+    strip_bilingual(soup)
+    remove_lang_scripts(soup)
+    inject_en_bootstrap_script(soup)
+    replace_header_footer(soup)
+    set_lang_en_html(soup)
+    inject_seo(soup, "index.html", "index.html")
+
+    assistant = soup.find(id="mvi-assistant-root")
+    if assistant:
+        assistant["data-mvi-avatar-base"] = "../img/mvi-chat-avatar"
+
+    out = str(soup)
+    out = relativize_en_assets(out)
+    out = rewrite_internal_links(out)
+    out = normalize_en_prefixed_links(out)
+    out = post_process_html(out, "index.html")
+
+    if "website-assistant-widget.js" not in out:
+        out = out.replace(
+            '<script src="../script.js"></script>',
+            '<script src="../script.js"></script>\n  <script src="../js/website-assistant-widget.js" defer></script>',
+        )
+
+    dest = EN_DIR / "index.html"
+    final = out if out.lstrip().startswith("<!DOCTYPE") else "<!DOCTYPE html>\n" + out
+    dest.write_text(final, encoding="utf-8")
+    print("  wrote en/index.html (copied from index.html, English only)")
 
 
 def absolutize_assets(html: str) -> str:
@@ -498,12 +969,13 @@ def post_process_html(html: str, dest_name: str) -> str:
             '"headline": "Weekly Tips on Insurance and Family Protection"',
         )
 
+    html = re.sub(r'<script src="\.\./script\.js"></script>', "", html)
     html = re.sub(r'<script src="script\.js"></script>', "", html)
     if dest_name == "index.html":
-        if '<script src="/script.js"></script>' not in html:
+        if "../script.js" not in html:
             html = html.replace(
-                '<script src="/js/hero-quotes-data.js"></script>',
-                '<script src="/js/hero-quotes-data.js"></script>\n<script src="/script.js"></script>',
+                '<script src="../js/hero-quotes-data.js"></script>',
+                '<script src="../js/hero-quotes-data.js"></script>\n  <script src="../script.js"></script>',
             )
 
     if dest_name == "final-expense-estimator.html":
@@ -542,7 +1014,7 @@ def inject_english_bio_landing(soup: BeautifulSoup) -> None:
 
 
 def build_landing() -> None:
-    src = ROOT / "landing-gastos-finales.html"
+    src = bilingual_source_path("landing-gastos-finales.html")
     soup = BeautifulSoup(src.read_text(encoding="utf-8"), "html.parser")
     strip_bilingual(soup)
     remove_lang_scripts(soup)
@@ -578,8 +1050,9 @@ def build_landing() -> None:
 
     out = str(soup)
     out = apply_landing_translations(out)
-    out = absolutize_assets(out)
+    out = relativize_en_assets(out)
     out = rewrite_internal_links(out)
+    out = normalize_en_prefixed_links(out)
     out = fix_sms_optin(out)
     out = post_process_html(out, "landing-final-expense.html")
 
@@ -590,8 +1063,7 @@ def build_landing() -> None:
 
 
 def build_page(source_name: str, dest_name: str, *, bilingual: bool = True) -> None:
-    src = ROOT / source_name
-    text = src.read_text(encoding="utf-8")
+    text = bilingual_source_path(source_name).read_text(encoding="utf-8")
     soup = BeautifulSoup(text, "html.parser")
 
     if bilingual:
@@ -609,8 +1081,9 @@ def build_page(source_name: str, dest_name: str, *, bilingual: bool = True) -> N
         fix_contact_page(soup)
 
     out = str(soup)
-    out = absolutize_assets(out)
+    out = relativize_en_assets(out)
     out = rewrite_internal_links(out)
+    out = normalize_en_prefixed_links(out)
 
     if dest_name == "sms-optin.html":
         out = fix_sms_optin(out)
@@ -629,18 +1102,33 @@ def build_page(source_name: str, dest_name: str, *, bilingual: bool = True) -> N
 
 def main() -> None:
     EN_DIR.mkdir(exist_ok=True)
-    print("Building bilingual mirrors...")
+    print("Bootstrapping bilingual sources/ (first run copies from site)...")
+    bootstrap_bilingual_sources()
+
+    print("Building English /en/ mirrors (PAGE_MAP)...")
     for src, dest in PAGE_MAP.items():
         if src == "landing-gastos-finales.html":
+            continue
+        if src == "index.html":
+            build_index_from_spanish()
             continue
         build_page(src, dest, bilingual=True)
 
     print("Building English landing page...")
     build_landing()
 
-    print("Building copy-based pages...")
-    for src, dest in COPY_PAGES.items():
-        build_page(src, dest, bilingual=(src == "sms-optin.html"))
+    print("Splitting quote results...")
+    build_quote_results_split()
+
+    print("Writing Spanish-only root pages (PAGE_MAP)...")
+    for src in PAGE_MAP:
+        if src == "landing-gastos-finales.html":
+            write_spanish_only_page(src, cross_en_href=en_public_path(src))
+            continue
+        write_spanish_only_page(src, cross_en_href=en_public_path(src))
+
+    print("Splitting remaining bilingual pages (blog, carriers, legal, quote flow)...")
+    build_site_wide_splits()
 
     print("Done.")
 
