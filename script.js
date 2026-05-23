@@ -156,12 +156,24 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
-  /** Root-absolute paths so /en/ pages do not resolve img/ under /en/img/. */
+  /**
+   * Hero bubble logos: relative img/ works on file:// at site root and on http(s) /en/ needs ../.
+   * Root-absolute /img/ breaks under file:// (resolves to filesystem root).
+   */
   function resolveSiteAssetPath(path) {
     if (!path) return '';
     if (/^https?:\/\//i.test(path)) return path;
-    if (path.charAt(0) === '/') return path;
-    return '/' + String(path).replace(/^\.\//, '');
+    var clean = String(path).replace(/^\//, '').replace(/^\.\//, '');
+    var pathPart = (window.location.pathname || '').replace(/\\/g, '/');
+    var isEnPage =
+      /\/en(\/|$)/.test(pathPart) ||
+      document.documentElement.classList.contains('lang-en');
+
+    if (window.location.protocol === 'file:') {
+      return isEnPage ? '../' + clean : clean;
+    }
+    if (isEnPage) return '../' + clean;
+    return '/' + clean;
   }
 
   function applyHeroBubbleContent(wrapRoot, q) {

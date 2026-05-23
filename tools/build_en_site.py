@@ -491,6 +491,16 @@ def relativize_en_assets(html: str, *, asset_prefix: str | None = None) -> str:
         rf"data-mvi-avatar-base=\1{prefix}img/",
         html,
     )
+    html = re.sub(
+        rf'(srcset=["\'])/({ "|".join(asset_roots) })/',
+        rf"\1{prefix}\2/",
+        html,
+    )
+    html = re.sub(
+        rf'(srcset=["\'])(?!https?:|/|#|data:|\\.\\./)(img/)',
+        rf"\1{prefix}\2",
+        html,
+    )
     return html
 
 
