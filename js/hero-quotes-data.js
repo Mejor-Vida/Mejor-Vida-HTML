@@ -2,7 +2,7 @@
 window.HERO_CAROUSEL_QUOTES = [
   {
     "carrierKey": "mutual-of-omaha",
-    "logo": "img/carriers/mutual-of-omaha-emblem.png",
+    "logo": "/img/carriers/mutual-of-omaha-emblem.png",
     "logoAlt": "Mutual of Omaha",
     "coverage": "$10,000",
     "rate": "35.20",
@@ -17,7 +17,7 @@ window.HERO_CAROUSEL_QUOTES = [
     "bubbles": [
       {
         "carrierKey": "assurity",
-        "logo": "img/carriers/assurity-wordmark.png",
+        "logo": "/img/carriers/assurity-wordmark.png",
         "logoAlt": "Assurity",
         "coverage": "$10,000",
         "rate": "29.23",
@@ -30,7 +30,7 @@ window.HERO_CAROUSEL_QUOTES = [
       },
       {
         "carrierKey": "mutual-of-omaha",
-        "logo": "img/carriers/mutual-of-omaha-emblem.png",
+        "logo": "/img/carriers/mutual-of-omaha-emblem.png",
         "logoAlt": "Mutual of Omaha",
         "coverage": "$15,000",
         "rate": "48.25",
@@ -45,7 +45,7 @@ window.HERO_CAROUSEL_QUOTES = [
   },
   {
     "carrierKey": "assurity",
-    "logo": "img/carriers/assurity-wordmark.png",
+    "logo": "/img/carriers/assurity-wordmark.png",
     "logoAlt": "Assurity",
     "coverage": "$20,000",
     "rate": "59.78",
@@ -58,7 +58,7 @@ window.HERO_CAROUSEL_QUOTES = [
   },
   {
     "carrierKey": "mutual-of-omaha",
-    "logo": "img/carriers/mutual-of-omaha-emblem.png",
+    "logo": "/img/carriers/mutual-of-omaha-emblem.png",
     "logoAlt": "Mutual of Omaha",
     "coverage": "$15,000",
     "rate": "42.15",
@@ -71,7 +71,7 @@ window.HERO_CAROUSEL_QUOTES = [
   },
   {
     "carrierKey": "assurity",
-    "logo": "img/carriers/assurity-wordmark.png",
+    "logo": "/img/carriers/assurity-wordmark.png",
     "logoAlt": "Assurity",
     "coverage": "$20,000",
     "rate": "52.32",

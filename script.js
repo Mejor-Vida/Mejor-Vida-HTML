@@ -156,6 +156,14 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
+  /** Root-absolute paths so /en/ pages do not resolve img/ under /en/img/. */
+  function resolveSiteAssetPath(path) {
+    if (!path) return '';
+    if (/^https?:\/\//i.test(path)) return path;
+    if (path.charAt(0) === '/') return path;
+    return '/' + String(path).replace(/^\.\//, '');
+  }
+
   function applyHeroBubbleContent(wrapRoot, q) {
     if (!wrapRoot || !q) return;
     const lang = currentLanguage || 'es';
@@ -197,7 +205,7 @@ document.addEventListener('DOMContentLoaded', function() {
       img.onerror = function () {
         img.classList.add('is-hidden');
       };
-      img.src = src;
+      img.src = resolveSiteAssetPath(src);
     }
   }
 
