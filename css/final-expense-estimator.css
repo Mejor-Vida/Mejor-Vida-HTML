@@ -553,63 +553,8 @@
   font-weight: 600;
 }
 
-/* Trust strip + carrier logos (desktop: row; mobile: staggered stack) */
+/* Trust strip below wizard */
 .fe-estimator-page .fe-estimator-trust-strip {
   margin-top: 1.75rem;
-}
-
-@media (max-width: 767.98px) {
-  .fe-estimator-page .fe-estimator-carrier-logos {
-    flex-direction: column;
-    flex-wrap: nowrap;
-    align-items: flex-start;
-    gap: 0;
-    width: min(100%, 13rem);
-    max-width: 13rem;
-    margin-inline: auto;
-    padding-bottom: 0.35rem;
-  }
-
-  .fe-estimator-page .fe-estimator-carrier-logos > div {
-    flex: none;
-    width: 100%;
-    min-width: 0;
-    justify-content: flex-start;
-    position: relative;
-  }
-
-  .fe-estimator-page .fe-estimator-carrier-logos > div:not(:first-child) {
-    margin-top: -2.1rem;
-  }
-
-  .fe-estimator-page .fe-estimator-carrier-logos > div:nth-child(1) {
-    z-index: 3;
-    margin-left: 0;
-  }
-
-  .fe-estimator-page .fe-estimator-carrier-logos > div:nth-child(2) {
-    z-index: 2;
-    margin-left: 25%;
-  }
-
-  .fe-estimator-page .fe-estimator-carrier-logos > div:nth-child(3) {
-    z-index: 1;
-    margin-left: 50%;
-  }
-
-  .fe-estimator-page .fe-estimator-carrier-logos .mvi-quote-carrier-logo--omaha img {
-    height: 2.35rem;
-    max-width: 100%;
-  }
-
-  .fe-estimator-page .fe-estimator-carrier-logos .mvi-quote-carrier-logo--assurity img {
-    height: 2rem;
-    max-width: 100%;
-  }
-
-  .fe-estimator-page .fe-estimator-carrier-logos .mvi-quote-carrier-logo--amicable img {
-    height: 2.5rem;
-    max-width: 100%;
-  }
 }
 
