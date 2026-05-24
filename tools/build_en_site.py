@@ -507,6 +507,13 @@ def relativize_en_assets(html: str, *, asset_prefix: str | None = None) -> str:
 def normalize_en_prefixed_links(html: str) -> str:
     """Convert /en/foo.html → foo.html for same-folder navigation."""
     html = re.sub(r'(href=["\'])/en/([^"\']+)(["\'])', r"\1\2\3", html)
+    html = html.replace('href="../../schedule-julie.html"', 'href="/en/schedule-julie.html"')
+    html = html.replace('href="../schedule-julie.html"', 'href="/en/schedule-julie.html"')
+    html = html.replace('href="schedule-julie.html"', 'href="/en/schedule-julie.html"')
+    html = html.replace("href='../../schedule-julie.html'", "href='/en/schedule-julie.html'")
+    html = html.replace("href='../schedule-julie.html'", "href='/en/schedule-julie.html'")
+    html = html.replace("href='schedule-julie.html'", "href='/en/schedule-julie.html'")
+    html = html.replace('href="/schedule-julie.html"', 'href="/en/schedule-julie.html"')
     return html
 
 
@@ -547,6 +554,15 @@ def inject_single_lang_head(soup: BeautifulSoup, lang: str) -> None:
 def add_cross_language_link(soup: BeautifulSoup, *, href: str, label: str, title: str) -> None:
     actions = soup.select_one(".header-actions")
     if not actions:
+        return
+    existing_lang_links = actions.select("a.nav-link-cm.small.text-muted")
+    if existing_lang_links:
+        primary = existing_lang_links[0]
+        for extra in existing_lang_links[1:]:
+            extra.decompose()
+        primary["href"] = href
+        primary["title"] = title
+        primary.string = label
         return
     if actions.find("a", href=href):
         return
