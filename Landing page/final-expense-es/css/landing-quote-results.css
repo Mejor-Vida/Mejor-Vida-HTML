@@ -2,8 +2,13 @@
 body.lf-landing--results .lf-footer-note,
 body.lf-landing--results #lf-next-default-anchor,
 body.lf-landing--results #lf-julie-after-next,
-body.lf-landing--results #lf-btn-back {
+body.lf-landing--results #lf-btn-back,
+body.lf-landing--results .lf-logo {
   display: none !important;
+}
+
+body.lf-landing--results .lf-header-row {
+  justify-content: flex-end;
 }
 
 body.lf-landing--results .lf-main {
