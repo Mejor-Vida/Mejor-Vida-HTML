@@ -230,6 +230,15 @@
             }),
           }).then(function (syncRes) {
             return syncRes.json().then(function (syncData) {
+              if (syncRes.ok && syncData && syncData.ok && typeof fbq === "function") {
+                fbq("track", "Lead", {}, {
+                  em: email,
+                  ph: phone,
+                  fn: firstName,
+                  ln: lastName,
+                  ge: sex === "male" ? "m" : "f",
+                });
+              }
               return {
                 quote: data,
                 leadSaved: syncRes.ok && syncData && syncData.ok,
