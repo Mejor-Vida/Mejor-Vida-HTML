@@ -129,10 +129,20 @@
 
     if (lowLine) lowLine.textContent = q.quote_low;
     if (rangeHint) {
-      rangeHint.textContent =
-        lang === "es"
-          ? "Rango típico hasta " + q.quote_high + "/mes según aseguradora y salud."
-          : "Typical range up to " + q.quote_high + "/mo depending on carrier and health.";
+      var lowNum = parseDollar(q.quote_low);
+      var highNum = parseDollar(q.quote_high);
+      var singleRate = lowNum > 0 && highNum > 0 && lowNum === highNum;
+      if (singleRate) {
+        rangeHint.textContent =
+          lang === "es"
+            ? "Estimado de referencia con la tarifa Assurity que tenemos en archivo. Julie confirma el precio final según salud y aseguradora."
+            : "Reference estimate from our on-file Assurity rate. Julie confirms your final price based on health and carrier.";
+      } else {
+        rangeHint.textContent =
+          lang === "es"
+            ? "Rango típico de " + q.quote_low + " a " + q.quote_high + "/mes según aseguradora y salud."
+            : "Typical range " + q.quote_low + " to " + q.quote_high + "/mo depending on carrier and health.";
+      }
     }
 
     var coverage = parseInt(String(q.coverage || 10000), 10);
@@ -166,10 +176,18 @@
       var highStr = formatDollarAmount(high);
       if (lowLine) lowLine.textContent = lowStr;
       if (rangeHint) {
-        rangeHint.textContent =
-          lang === "es"
-            ? "Rango típico hasta " + highStr + "/mes según aseguradora y salud."
-            : "Typical range up to " + highStr + "/mo depending on carrier and health.";
+        var singleRateNow = low > 0 && high > 0 && low === high;
+        if (singleRateNow) {
+          rangeHint.textContent =
+            lang === "es"
+              ? "Estimado de referencia con la tarifa Assurity que tenemos en archivo. Julie confirma el precio final según salud y aseguradora."
+              : "Reference estimate from our on-file Assurity rate. Julie confirms your final price based on health and carrier.";
+        } else {
+          rangeHint.textContent =
+            lang === "es"
+              ? "Rango típico de " + lowStr + " a " + highStr + "/mes según aseguradora y salud."
+              : "Typical range " + lowStr + " to " + highStr + "/mo depending on carrier and health.";
+        }
       }
       if (coverageValue) coverageValue.textContent = formatMoney(newCoverage);
       if (quoteCoverage) quoteCoverage.textContent = formatMoney(newCoverage);

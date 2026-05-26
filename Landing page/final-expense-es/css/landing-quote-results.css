@@ -2,17 +2,22 @@
 body.lf-landing--results .lf-footer-note,
 body.lf-landing--results #lf-next-default-anchor,
 body.lf-landing--results #lf-julie-after-next,
-body.lf-landing--results #lf-btn-back,
-body.lf-landing--results .lf-logo {
+body.lf-landing--results #lf-btn-back {
   display: none !important;
 }
 
-body.lf-landing--results .lf-header-row {
-  justify-content: flex-end;
+body.lf-landing--results .lf-progress-wrap {
+  margin-top: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+body.lf-landing--results .lf-header-actions {
+  padding-top: 2.75rem;
 }
 
 body.lf-landing--results .lf-main {
   max-width: 72rem;
+  padding-top: 0.75rem;
   padding-bottom: 2.5rem;
 }
 
@@ -24,9 +29,9 @@ body.lf-landing--results .lf-main {
   background: #0d47a1;
   color: #fff;
   text-align: center;
-  margin: 0 -1rem 1.25rem;
-  padding: 1.1rem 1rem 1.25rem;
-  border-radius: 0 0 0.75rem 0.75rem;
+  margin: 0.75rem -1rem 1.25rem;
+  padding: 1.25rem 1rem 1.35rem;
+  border-radius: 0.75rem;
 }
 
 .lf-results-hero h2 {
