@@ -6,7 +6,7 @@
     options = options || {};
     var rawItems = options.items || [];
     var allowEmpty = !!options.allowEmpty;
-    var placeholder = options.placeholder || "Seleccione...";
+    var placeholder = options.placeholder || "Selecciona...";
     var inputId = options.inputId || "lf-search-combobox-input";
     var listboxId = options.listboxId || "lf-search-combobox-listbox";
     var labelId = options.labelId || null;

@@ -758,7 +758,7 @@
     if (!window.MVILandingQuoteSubmit || !window.MVILandingQuoteSubmit.submit) {
       if (document.body.getAttribute("data-inline-quote-results") === "1") return;
       window.location.replace(
-        document.body.getAttribute("data-quote-results-href") || "../../quote-results.html"
+        document.body.getAttribute("data-quote-results-href") || "../quote-results.html"
       );
       return;
     }
@@ -807,7 +807,7 @@
       }
       if (currentStep === 2 && selections.state && selections.state !== "NE") {
         window.location.href =
-          "../../quote-out-of-state.html?state=" + encodeURIComponent(selections.state);
+          "../quote-out-of-state.html?state=" + encodeURIComponent(selections.state);
         return;
       }
       if (currentStep === 11 && nameStepPhase === "fields") {
@@ -878,7 +878,7 @@
       items: getStateListItems(),
       showCode: true,
       allowEmpty: true,
-      placeholder: "Seleccione su estado",
+      placeholder: "Selecciona tu estado",
       inputId: "lf-state-combobox-input",
       listboxId: "lf-state-combobox-listbox",
       skipLabel: true,

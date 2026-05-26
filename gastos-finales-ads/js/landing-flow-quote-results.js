@@ -86,8 +86,8 @@
       if (q.leadSaved === false) {
         leadWarn.hidden = false;
         leadWarn.textContent =
-          (q.syncError || "No pudimos guardar sus datos") +
-          ". Su estimación aparece abajo. Revise su teléfono o correo, o llame al 402-440-5438.";
+          (q.syncError || "No pudimos guardar tus datos") +
+          ". Tu estimación aparece abajo. Revisa tu teléfono o correo, o llama al 402-440-5438.";
       } else {
         leadWarn.hidden = true;
         leadWarn.textContent = "";
@@ -209,7 +209,7 @@
     if (greeting && q.firstName) {
       greeting.textContent =
         lang === "es"
-          ? "Gracias, " + q.firstName + ". Este es su estimado personalizado."
+          ? "Gracias, " + q.firstName + ". Este es tu estimado personalizado."
           : "Thank you, " + q.firstName + ". Here is your personalized estimate.";
       greeting.hidden = false;
     }

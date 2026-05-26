@@ -878,7 +878,7 @@
       items: getStateListItems(),
       showCode: true,
       allowEmpty: true,
-      placeholder: "Seleccione su estado",
+      placeholder: "Selecciona tu estado",
       inputId: "lf-state-combobox-input",
       listboxId: "lf-state-combobox-listbox",
       skipLabel: true,

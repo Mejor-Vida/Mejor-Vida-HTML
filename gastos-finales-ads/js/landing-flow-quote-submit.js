@@ -100,13 +100,13 @@
 
       var parsed = parseBirthdate ? parseBirthdate(selections.birthdate) : null;
       if (!isValidBirthdate || !isValidBirthdate(selections.birthdate)) {
-        setQuoteStatus("Ingrese una fecha de nacimiento válida.", true);
+        setQuoteStatus("Ingresa una fecha de nacimiento válida.", true);
         return Promise.resolve();
       }
 
       var age = ageFromParsedDob(parsed);
       if (age == null) {
-        setQuoteStatus("Ingrese una fecha de nacimiento válida.", true);
+        setQuoteStatus("Ingresa una fecha de nacimiento válida.", true);
         return Promise.resolve();
       }
       if (age < 18) {
@@ -120,12 +120,12 @@
 
       var sex = String(selections.sex || "").toLowerCase();
       if (sex !== "male" && sex !== "female") {
-        setQuoteStatus("Complete todos los pasos anteriores.", true);
+        setQuoteStatus("Completa todos los pasos anteriores.", true);
         return Promise.resolve();
       }
 
       if (selections.tobacco !== "yes" && selections.tobacco !== "no") {
-        setQuoteStatus("Complete todos los pasos anteriores.", true);
+        setQuoteStatus("Completa todos los pasos anteriores.", true);
         return Promise.resolve();
       }
 
@@ -140,7 +140,7 @@
       var phone = String(selections.phone || "").trim();
 
       if (ctx.setSubmitting) ctx.setSubmitting(true);
-      setQuoteStatus("Calculando su estimado…", false);
+      setQuoteStatus("Calculando tu estimado…", false);
       if (nextBtn) {
         nextBtn.disabled = true;
         nextBtn.textContent = "Calculando…";
@@ -167,7 +167,7 @@
           var res = out.res;
           var data = out.data || {};
           if (!res.ok || data.ok === false) {
-            throw new Error(data.error || data.quote_error || "No pudimos calcular su estimado.");
+            throw new Error(data.error || data.quote_error || "No pudimos calcular tu estimado.");
           }
           if (data.quote_status !== "ok") {
             throw new Error(
@@ -202,7 +202,7 @@
             (smoker ? "yes" : "no") +
             ".";
 
-          setQuoteStatus("Guardando su estimado…", false);
+          setQuoteStatus("Guardando tu estimado…", false);
 
           return fetch(siteApiUrl("/api/quote-lead-sync"), {
             method: "POST",
@@ -237,7 +237,7 @@
                 syncError:
                   syncRes.ok && syncData && syncData.ok
                     ? null
-                    : (syncData && syncData.error) || "No pudimos guardar sus datos.",
+                    : (syncData && syncData.error) || "No pudimos guardar tus datos.",
               };
             });
           });
@@ -298,7 +298,7 @@
             return;
           }
 
-          setQuoteStatus("Llevándole a sus resultados…", false);
+          setQuoteStatus("Llevándote a tus resultados…", false);
           window.location.replace(resultsHref);
         })
         .catch(function (err) {
