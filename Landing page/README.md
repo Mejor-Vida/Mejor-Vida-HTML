@@ -74,7 +74,7 @@ Each `index.html` sets on `<body>`:
 
 **Ad URL (after deploy):** `https://www.mejorvidainsurance.com/gastos-finales-ads/`
 
-- Results redirect: Spanish `quote-results.html` (not `/en/quote-results.html`).
+- Results show **inline** on the last wizard step (landing header only; no site footer or redirect).
 - Leads sync with `lang: "es"`.
 - English dev preview: `Landing page/final-expense/index.html` (or `final-expense-en-backup/`).
 - Spanish dev preview: `http://127.0.0.1:4174/Landing%20page/final-expense-es/index.html`

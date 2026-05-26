@@ -1,5 +1,5 @@
 /**
- * Final expense landing — fetch quote, sync lead, redirect to quote-results.html.
+ * Final expense landing — fetch quote, sync lead, inline results or redirect.
  */
 (function () {
   "use strict";
@@ -90,6 +90,9 @@
       var parseBirthdate = ctx.parseBirthdate;
       var isValidBirthdate = ctx.isValidBirthdate;
       var nextBtn = ctx.nextBtn;
+      var inlineResults =
+        document.body.getAttribute("data-inline-quote-results") === "1" ||
+        typeof ctx.onQuoteComplete === "function";
       var resultsHref =
         document.body.getAttribute("data-quote-results-href") || "../quote-results.html";
 
@@ -266,6 +269,34 @@
               })
             );
           } catch (storageErr) {}
+
+          var quotePayload = {
+            lang: "es",
+            firstName: firstName,
+            quote_low: data.quote_low,
+            quote_high: data.quote_high,
+            quote_anchor: data.quote_anchor,
+            age: age,
+            sex: sex,
+            smoker: smoker,
+            dob: dobIso,
+            dobDisplay: dobDisplay,
+            state: stateCode,
+            coverage: coverage,
+            savedAt: new Date().toISOString(),
+            leadId: result.leadId,
+            leadSaved: result.leadSaved,
+            syncError: result.syncError,
+            sessionClientId: sessionClientId,
+            quote_carrier: data.quote_carrier || (age < 45 ? "assurity" : "moo_amam"),
+          };
+
+          if (inlineResults && ctx.onQuoteComplete) {
+            setQuoteStatus("", false);
+            ctx.onQuoteComplete(quotePayload);
+            if (ctx.setSubmitting) ctx.setSubmitting(false);
+            return;
+          }
 
           setQuoteStatus("Llevándole a sus resultados…", false);
           window.location.replace(resultsHref);

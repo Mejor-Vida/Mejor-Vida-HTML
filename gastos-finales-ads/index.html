@@ -12,9 +12,12 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="../css/quote-flow-shared.css" />
   <link rel="stylesheet" href="css/landing-flow.css" />
+  <link rel="stylesheet" href="css/landing-quote-results.css" />
 </head>
-<body class="lf-landing" data-total-steps="13" data-product-line="final-expense" data-quote-results-href="../quote-results.html">
+<body class="lf-landing" data-total-steps="13" data-product-line="final-expense" data-inline-quote-results="1">
   <header class="lf-header">
     <div class="lf-header-row">
       <a class="lf-logo" href="../index.html" aria-label="Inicio Mejor Vida Insurance">
@@ -251,6 +254,116 @@
       <p class="lf-quote-status" id="lf-quote-status" role="status" aria-live="polite" hidden></p>
     </section>
 
+    <section class="lf-step lf-step--results" data-step="14" data-lf-results-only hidden aria-labelledby="lf-results-hero-title">
+      <div class="lf-results-hero">
+        <h2 id="lf-results-hero-title">Sus mejores tarifas podrían no durar para siempre</h2>
+        <p>La edad y los cambios de salud pueden afectar las opciones futuras.</p>
+      </div>
+      <div class="lf-results-panel" id="lf-results-panel">
+        <p class="lf-results-greeting" id="lf-results-greeting" hidden></p>
+        <nav aria-label="Progreso de cotización" class="mvi-quote-macro-stepper mvi-quote-macro-stepper--light">
+          <ol>
+            <li class="is-done"><span class="mvi-quote-macro-num">1</span><span class="mvi-quote-macro-label">Información</span></li>
+            <li class="is-active"><span class="mvi-quote-macro-num">2</span><span class="mvi-quote-macro-label">Su estimación</span></li>
+            <li><span class="mvi-quote-macro-num">3</span><span class="mvi-quote-macro-label">Agendar con Julie</span></li>
+          </ol>
+        </nav>
+        <p class="lf-results-lead-warning" id="lf-results-lead-warning" role="alert" hidden></p>
+        <div aria-label="Aseguradoras" class="mvi-results-carriers-strip">
+          <div aria-hidden="true" class="mvi-quote-carrier-logos mvi-quote-carrier-logos--row d-flex">
+            <div class="mvi-results-moo-banner">
+              <img alt="Mutual of Omaha" class="mvi-results-moo-logo" decoding="async" src="../img/carriers/mutual-of-omaha-logo.png" />
+              <div class="mvi-results-moo-banner-text">
+                <p class="mvi-results-moo-banner-rating"><span class="mvi-results-carrier-grade">A+</span> Calificación A.M. Best</p>
+                <p class="mvi-results-moo-banner-coverage">Rango de cobertura: $2,000 - $50,000</p>
+              </div>
+            </div>
+            <div class="mvi-results-assurity-banner">
+              <img alt="Assurity" class="mvi-results-assurity-logo" decoding="async" src="../img/carriers/assurity-logo.svg" />
+              <div class="mvi-results-assurity-banner-text">
+                <p class="mvi-results-assurity-banner-rating"><span class="mvi-results-carrier-grade">A-</span> Calificación A.M. Best</p>
+                <p class="mvi-results-assurity-banner-coverage">Cobertura: desde $10,000</p>
+              </div>
+            </div>
+            <div class="mvi-results-amam-banner">
+              <img alt="American Amicable" class="mvi-results-amam-logo" decoding="async" src="../img/carriers/american-amicable-logo.png" />
+              <div class="mvi-results-amam-banner-text">
+                <p class="mvi-results-amam-banner-rating"><span class="mvi-results-carrier-grade">A</span> Calificación A.M. Best</p>
+                <p class="mvi-results-amam-banner-coverage">Rango de cobertura: $2,500 - $50,000</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mvi-results-layout">
+          <aside class="mvi-results-policy-aside" aria-labelledby="lf-results-policy-heading">
+            <h3 id="lf-results-policy-heading">Detalles</h3>
+            <p class="mvi-results-policy-intro">Las pólizas de vida entera de gastos finales que comparamos ofrecen estos beneficios:</p>
+            <ul class="mvi-results-policy-benefits">
+              <li><i class="fas fa-check" aria-hidden="true"></i><span>Las primas no aumentan</span></li>
+              <li><i class="fas fa-check" aria-hidden="true"></i><span>La cobertura no disminuye</span></li>
+              <li><i class="fas fa-check" aria-hidden="true"></i><span>La póliza no vence</span></li>
+              <li><i class="fas fa-check" aria-hidden="true"></i><span>Sin examen médico para calificar (en la mayoría de los casos)</span></li>
+              <li><i class="fas fa-check" aria-hidden="true"></i><span>Sin dinero por adelantado</span></li>
+            </ul>
+            <button type="button" class="mvi-results-policy-more" data-bs-toggle="modal" data-bs-target="#lf-policy-modal">Ver más <i class="fas fa-external-link-alt" aria-hidden="true" style="font-size:0.65rem;"></i></button>
+          </aside>
+          <div class="mvi-results-main-col">
+            <div class="mvi-result-action-card">
+              <div class="mvi-result-action-main">
+                <p class="small text-body-secondary text-uppercase fw-semibold mb-2" style="letter-spacing:0.06em;">Mejor precio estimado para usted</p>
+                <div class="mvi-result-price-row">
+                  <div>
+                    <span class="mvi-result-low-value" id="lf-results-low-line" role="status"></span>
+                    <p class="mvi-result-per-month mb-0">al mes</p>
+                  </div>
+                  <span class="mvi-result-price-for" style="font-size:1rem;font-weight:600;color:#64748b;">por</span>
+                  <div>
+                    <p class="mvi-result-quote-coverage-value mb-0" id="lf-results-quote-coverage" aria-live="polite">—</p>
+                    <p class="mvi-result-quote-coverage-label mb-0">de cobertura</p>
+                  </div>
+                </div>
+                <p class="small text-body-secondary mb-0" id="lf-results-range-hint"></p>
+                <div class="mvi-result-action-cta">
+                  <p class="mvi-result-urgency mb-0">Reserve su mejor precio <strong>hoy</strong>. La edad y los cambios de salud pueden limitar las opciones disponibles mañana.</p>
+                  <button type="button" class="btn btn-primary-gold btn-lg fw-bold rounded shadow-sm mvi-results-schedule-btn" id="lf-results-schedule-btn" data-bs-toggle="modal" data-bs-target="#lf-schedule-modal">
+                    <i class="fas fa-calendar-check me-2" aria-hidden="true"></i>Agendar con Julie ahora
+                  </button>
+                </div>
+                <div class="mvi-result-alt-contact">
+                  <h4>Otras formas de hablar con Julie</h4>
+                  <ul class="mvi-result-contact-options">
+                    <li><a class="mvi-result-contact-btn" href="tel:+14024405438"><i class="fas fa-phone" aria-hidden="true"></i> Llamar</a></li>
+                    <li><a class="lf-results-wa-btn mvi-result-contact-btn" href="https://wa.me/14024405438?text=Hola%20Julie%2C%20tengo%20preguntas%20sobre%20mi%20cotizaci%C3%B3n%20de%20gastos%20finales." rel="noopener noreferrer" target="_blank"><i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp</a></li>
+                    <li><a class="mvi-result-contact-btn" href="sms:+14027355665?body=Hola%20Julie%2C%20tengo%20preguntas%20sobre%20mi%20cotizaci%C3%B3n."><i class="fas fa-comment-dots" aria-hidden="true"></i> Texto</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <aside class="mvi-results-details-aside" aria-labelledby="lf-results-details-heading">
+            <div class="mvi-results-details-card">
+              <h3 id="lf-results-details-heading">Su tarifa según estos datos</h3>
+              <table class="mvi-results-details-table">
+                <tbody>
+                  <tr><th scope="row">Nacimiento</th><td id="lf-results-detail-dob">—</td></tr>
+                  <tr><th scope="row">Edad</th><td id="lf-results-detail-age">—</td></tr>
+                  <tr><th scope="row">Sexo</th><td id="lf-results-detail-sex">—</td></tr>
+                  <tr><th scope="row">Estado</th><td id="lf-results-detail-state">—</td></tr>
+                  <tr><th scope="row">Tabaco</th><td id="lf-results-detail-tobacco">—</td></tr>
+                </tbody>
+              </table>
+              <div class="mvi-results-coverage-slider">
+                <label for="lf-results-coverage-range">Cobertura deseada</label>
+                <p class="mvi-results-coverage-value mb-0" id="lf-results-coverage-value" aria-live="polite">—</p>
+                <input type="range" class="mvi-results-coverage-range" id="lf-results-coverage-range" min="2000" max="50000" step="1000" value="10000" aria-describedby="lf-results-coverage-value" />
+                <div class="d-flex justify-content-between small text-muted mt-1" aria-hidden="true"><span>$2k</span><span>$50k</span></div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
     <div class="lf-info-backdrop" id="lf-legacy-info-backdrop" hidden></div>
     <div class="lf-info-popover" id="lf-legacy-info-tip" role="dialog" aria-labelledby="lf-legacy-info-title" hidden>
       <p class="lf-info-tip-lead">Legacy Safeguard<sup>®</sup> ayuda a los miembros con:</p>
@@ -303,14 +416,49 @@
       </div>
     </div>
 
-    <p class="lf-footer-note">
-      Licenciada en Nebraska · <a href="../privacy-policy.html">Política de privacidad</a>
-    </p>
   </main>
 
+  <div class="modal fade" id="lf-policy-modal" tabindex="-1" aria-labelledby="lf-policy-modal-title" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header border-bottom-0 pb-0">
+          <h2 class="modal-title h5 fw-bold" id="lf-policy-modal-title" style="color:#1a365d;">Seguro de vida entera</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body pt-2">
+          <ul class="mvi-results-policy-benefits mb-3">
+            <li><i class="fas fa-check" aria-hidden="true"></i><span>Las primas no aumentan</span></li>
+            <li><i class="fas fa-check" aria-hidden="true"></i><span>La cobertura no disminuye</span></li>
+            <li><i class="fas fa-check" aria-hidden="true"></i><span>La póliza no vence</span></li>
+            <li><i class="fas fa-check" aria-hidden="true"></i><span>Sin examen médico para calificar (en la mayoría de los casos)</span></li>
+            <li><i class="fas fa-check" aria-hidden="true"></i><span>Sin dinero por adelantado</span></li>
+          </ul>
+          <p class="small text-body-secondary mb-2">Las pólizas de emisión garantizada pueden requerir un período de espera de 2 años para que se pague el beneficio completo.</p>
+          <p class="small text-body-secondary mb-0">Las pólizas de cobertura inmediata no tienen período de espera para que comience la cobertura.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="lf-schedule-modal" tabindex="-1" aria-labelledby="lf-schedule-modal-title" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header border-bottom-0 pb-0">
+          <h2 class="modal-title h5 fw-bold" id="lf-schedule-modal-title" style="color:#1a365d;">Agendar cita con Julie</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body pt-2 lf-schedule-modal-iframe-wrap">
+          <iframe id="lf-schedule-iframe" data-src-es="https://meetings-na2.hubspot.com/julie-braunsroth" title="Agendar con Julie" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script src="../js/us-states.js"></script>
+  <script src="../bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="js/landing-flow-search-combobox.js"></script>
   <script src="js/landing-flow-date-mask.js"></script>
+  <script src="js/landing-flow-quote-results.js"></script>
   <script src="js/landing-flow-quote-submit.js"></script>
   <script src="js/landing-flow.js"></script>
 </body>

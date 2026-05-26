@@ -99,7 +99,10 @@
 
   function getVisibleStepNumbers() {
     return steps
-      .filter(shouldShowStep)
+      .filter(function (el) {
+        if (el.hasAttribute("data-lf-results-only")) return false;
+        return shouldShowStep(el);
+      })
       .map(function (el) {
         return Number(el.getAttribute("data-step"));
       })
@@ -261,6 +264,11 @@
 
   function updateProgress() {
     if (!progressBar) return;
+    if (currentStep === 14) {
+      progressBar.style.width = "100%";
+      if (progressRoot) progressRoot.setAttribute("aria-valuenow", "100");
+      return;
+    }
     var nums = getVisibleStepNumbers();
     var idx = nums.indexOf(currentStep);
     var progressStep = idx >= 0 ? idx + 1 : currentStep;
@@ -273,6 +281,10 @@
   function updateNextButton() {
     if (!nextBtn) return;
     var step = getActiveStepEl();
+    if (currentStep === 14) {
+      nextBtn.hidden = true;
+      return;
+    }
     if (stepAutoAdvances(step)) {
       nextBtn.hidden = true;
       return;
@@ -645,18 +657,27 @@
     currentStep = step;
     closeInfoTip();
     if (step !== 11 && !selections.applicantConsent) nameStepPhase = "fields";
+    var isResults = step === 14;
+    document.body.classList.toggle("lf-landing--results", isResults);
     steps.forEach(function (el) {
       var n = Number(el.getAttribute("data-step"));
       el.hidden = n !== step;
     });
-    if (backBtn) backBtn.hidden = step <= 1;
-    if (julieAfterNext) julieAfterNext.hidden = step !== 1;
-    if (headerTagline) headerTagline.hidden = step !== 1;
+    if (backBtn) backBtn.hidden = step <= 1 || isResults;
+    if (julieAfterNext) julieAfterNext.hidden = step !== 1 || isResults;
+    if (headerTagline) headerTagline.hidden = step !== 1 || isResults;
     syncNameStepPhase();
     placeNextButton();
     refreshStepUI();
     updateProgress();
     window.scrollTo(0, 0);
+  }
+
+  function showQuoteResultsStep(quotePayload) {
+    if (window.MVILandingQuoteResults && window.MVILandingQuoteResults.render) {
+      window.MVILandingQuoteResults.render(quotePayload);
+    }
+    showStep(14);
   }
 
   function moveChoiceFocus(delta) {
@@ -735,6 +756,7 @@
 
   function submitLandingQuote() {
     if (!window.MVILandingQuoteSubmit || !window.MVILandingQuoteSubmit.submit) {
+      if (document.body.getAttribute("data-inline-quote-results") === "1") return;
       window.location.replace(
         document.body.getAttribute("data-quote-results-href") || "../../quote-results.html"
       );
@@ -751,6 +773,9 @@
       setSubmitting: function (v) {
         quoteSubmitting = !!v;
         updateNextButton();
+      },
+      onQuoteComplete: function (quotePayload) {
+        showQuoteResultsStep(quotePayload);
       },
     });
   }
