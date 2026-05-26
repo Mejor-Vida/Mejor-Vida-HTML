@@ -19,7 +19,9 @@ This folder holds **SQL migrations** for **Postgres (Supabase)** used by the mar
 | **`011_manychat_leads.sql`** | **`manychat_leads`**, **`unanswered_questions`** — ManyChat WhatsApp flow (separate from website `quote_lead_submissions`) |
 | **`012_match_knowledge_chunks_rpc.sql`** | **`match_knowledge_chunks()`** — vector search over **`knowledge_chunks`** for `/api/rag-answer` |
 | **`013_enable_rls_manychat_tables.sql`** | RLS on `manychat_leads` / `unanswered_questions` (created after `010`) |
-| **`014_quote_ranges.sql`** | **`quote_ranges`** — precomputed $10K FE low/high/anchor for WhatsApp `/api/quote` |
+| **`014_quote_ranges.sql`** | **`quote_ranges`** — precomputed $10K FE low/high/anchor (MOO + AmAm, ages 45–85) |
+| **`050_quote_ranges_assurity.sql`** | **`quote_ranges_assurity`** — table created (superseded by 051 seed) |
+| **`051_quote_ranges_assurity_assurity_only.sql`** | Reseed from `integrations/knowledge/Assurity_Knowledge/assurity_protect_plus_premiums_10k.csv` (Assurity-only; no MOO) |
 | **`015_schema_migrations_record_014.sql`** | Inserts `014_quote_ranges.sql` into **`schema_migrations`** if `014` was run manually in SQL editor |
 | **`027_drop_fex_email_quotes.sql`** | Retires legacy `fex_email_quotes` table |
 | **`030_internal_knowledge_chunks.sql`** | `internal_knowledge_chunks` — staff Product Selector RAG only (not `knowledge_chunks`) |

@@ -1,0 +1,9 @@
+age,sex,uw_class,monthly,source
+5,male,preferred_plus_nt,8.92,flyer_rates_compare_rev_10_25
+25,male,preferred_plus_nt,10.92,flyer_rates_compare_rev_10_25
+35,male,preferred_plus_nt,13.41,flyer_rates_compare_rev_10_25
+45,male,preferred_plus_nt,17.60,flyer_rates_compare_rev_10_25
+5,female,preferred_plus_nt,8.44,flyer_rates_compare_rev_10_25
+25,female,preferred_plus_nt,10.22,flyer_rates_compare_rev_10_25
+35,female,preferred_plus_nt,12.50,flyer_rates_compare_rev_10_25
+45,female,preferred_plus_nt,16.32,flyer_rates_compare_rev_10_25

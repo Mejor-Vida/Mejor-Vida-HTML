@@ -11,6 +11,15 @@
 const crypto = require("crypto");
 const { sendQuoteLeadNotification } = require("../lib/ic-lead-notify");
 
+function applyCors(req, res) {
+  const origin = String(req.headers.origin || "").trim();
+  if (!origin) return;
+  res.setHeader("Access-Control-Allow-Origin", origin);
+  res.setHeader("Vary", "Origin");
+  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+}
+
 function json(res, status, payload) {
   res.status(status).setHeader("Content-Type", "application/json");
   res.send(JSON.stringify(payload));
@@ -21,7 +30,7 @@ function readJsonBody(req) {
   return req.body && typeof req.body === "object" ? req.body : {};
 }
 
-/** ISO YYYY-MM-DD → age in full years (45–85 validated separately). */
+/** ISO YYYY-MM-DD → age in full years (18–85 validated separately). */
 function ageFromIsoDob(iso) {
   const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(iso || "").trim());
   if (!m) return null;
@@ -237,6 +246,10 @@ async function sendMetaCAPIEvent({ leadSource, email, phone, firstName, lastName
 }
 
 module.exports = async function handler(req, res) {
+  applyCors(req, res);
+  if (req.method === "OPTIONS") {
+    return res.status(204).send("");
+  }
   if (req.method !== "POST") {
     res.setHeader("Allow", "POST");
     return json(res, 405, { ok: false, error: "Method Not Allowed" });
@@ -338,10 +351,10 @@ module.exports = async function handler(req, res) {
       }
       ageN = fromDob;
     }
-    if (!Number.isFinite(ageN) || ageN < 45 || ageN > 85) {
+    if (!Number.isFinite(ageN) || ageN < 18 || ageN > 85) {
       return json(res, 400, {
         ok: false,
-        error: "Final expense quotes are for ages 45–85.",
+        error: "Quotes are available for ages 18–85.",
       });
     }
     const sex = String(body.sex || "").toLowerCase();

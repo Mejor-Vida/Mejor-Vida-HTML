@@ -12,7 +12,8 @@ Legacy note: the old `fex_email_quotes` table/webhook flow has been retired and 
 | `analytics_events` | Website **POST** `/api/analytics-event` — granular funnel rows (results page, schedule modal, etc.) keyed by **`quote_lead_submission_id`** / **`session_client_id`**. |
 | `whatsapp_leads` | **WhatsApp** leads → Apps Script → `whatsapp-lead-webhook` (if you use that route) |
 | `manychat_leads` | **ManyChat** WhatsApp flow → Vercel `api/lead-capture` / `api/dropoff-capture` (not the website quote form) |
-| `quote_ranges` | **WhatsApp quote engine** — precomputed $10K low/high/anchor → Vercel `api/quote` |
+| `quote_ranges` | **WhatsApp / site quote (45–85)** — MOO + AmAm $10K low/high/anchor → `api/quote`, `api/quote-site` |
+| `quote_ranges_assurity` | **Site quote (18–44)** — Assurity Protect+ $10K ranges when age &lt; 45 |
 | `out_of_state_referrals` | **`quote-out-of-state.html`** → **`api/out-of-state-referral`** → Supabase + email via **Google Apps Script** (`integrations/google-apps-script/out-of-state-referral-email.gs`). Migration **`019_out_of_state_referrals.sql`**. |
 
 ## Website chatbot (RAG + Julie escalation)

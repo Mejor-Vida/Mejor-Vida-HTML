@@ -8,8 +8,21 @@
 
 const { verifySiteOrigin } = require("../lib/site-origin");
 const { logRequest } = require("../lib/manychat-auth");
-const { fetchQuoteRange } = require("../lib/supabase");
+const {
+  isQuoteAgeInRange,
+  quoteAgeOutOfRangeMessage,
+  fetchQuoteRangeForAge,
+} = require("../lib/quote-range-router");
 const { scaledRangeResponse } = require("../lib/quote-range-scale");
+
+function applyCors(req, res) {
+  const origin = String(req.headers.origin || "").trim();
+  if (!origin) return;
+  res.setHeader("Access-Control-Allow-Origin", origin);
+  res.setHeader("Vary", "Origin");
+  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+}
 
 function json(res, status, payload) {
   res.status(status).setHeader("Content-Type", "application/json");
@@ -23,6 +36,12 @@ function readJsonBody(req) {
 
 module.exports = async function handler(req, res) {
   logRequest("quote-site");
+  // For local dev pages calling production, reflect CORS once origin is verified.
+  applyCors(req, res);
+
+  if (req.method === "OPTIONS") {
+    return res.status(204).send("");
+  }
   if (req.method !== "POST") {
     res.setHeader("Allow", "POST");
     return json(res, 405, { ok: false, error: "Method Not Allowed" });
@@ -43,17 +62,14 @@ module.exports = async function handler(req, res) {
   try {
     const body = readJsonBody(req);
     const age = parseInt(body.age, 10);
-    if (isNaN(age) || age < 45 || age > 85) {
+    if (isNaN(age) || !isQuoteAgeInRange(age)) {
       return json(res, 200, {
         ok: true,
         quote_status: "out_of_range",
         quote_low: "",
         quote_high: "",
         quote_anchor: "",
-        quote_error:
-          age < 45
-            ? "Our final expense products start at age 45."
-            : "Our final expense products are available up to age 85.",
+        quote_error: quoteAgeOutOfRangeMessage(age),
       });
     }
 
@@ -75,16 +91,26 @@ module.exports = async function handler(req, res) {
       smoker = s === "yes" || s === "true" || s === "1";
     }
 
-    const range = await fetchQuoteRange(SUPABASE_URL, SUPABASE_KEY, age, sex, smoker);
+    const { range, carrier } = await fetchQuoteRangeForAge(
+      SUPABASE_URL,
+      SUPABASE_KEY,
+      age,
+      sex,
+      smoker
+    );
 
     if (!range) {
+      const tobaccoMsg =
+        age <= 44 && smoker
+          ? "We do not have Assurity tobacco premiums on file yet. Julie can quote you from Agent Center."
+          : "We don't have rate data for that combination yet.";
       return json(res, 200, {
         ok: true,
         quote_status: "no_data",
         quote_low: "",
         quote_high: "",
         quote_anchor: "",
-        quote_error: "We don't have rate data for that combination yet.",
+        quote_error: tobaccoMsg,
       });
     }
 
@@ -106,6 +132,7 @@ module.exports = async function handler(req, res) {
       quote_high: scaled.high,
       quote_anchor: scaled.anchor,
       quote_error: "",
+      quote_carrier: carrier || "",
       coverage_amount: Number.isFinite(coverageAmount) ? coverageAmount : 10000,
     });
   } catch (err) {

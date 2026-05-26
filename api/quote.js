@@ -28,7 +28,11 @@
  */
 
 const { verifyManychatSecret, logRequest } = require("../lib/manychat-auth");
-const { fetchQuoteRange } = require("../lib/supabase");
+const {
+  isQuoteAgeInRange,
+  quoteAgeOutOfRangeMessage,
+  fetchQuoteRangeForAge,
+} = require("../lib/quote-range-router");
 
 function json(res, status, payload) {
   res.status(status).setHeader("Content-Type", "application/json");
@@ -95,7 +99,7 @@ module.exports = async function handler(req, res) {
     // Parse & validate inputs
     // Accept "edad" (Spanish ManyChat field) or "age"
     const age = parseInt(body.edad ?? body.age, 10);
-    if (isNaN(age) || age < 45 || age > 85) {
+    if (isNaN(age) || !isQuoteAgeInRange(age)) {
       return json(
         res,
         200,
@@ -104,9 +108,7 @@ module.exports = async function handler(req, res) {
           quote_low: "",
           quote_high: "",
           quote_anchor: "",
-          quote_error: age < 45
-            ? "Our final expense products start at age 45."
-            : "Our final expense products are available up to age 85.",
+          quote_error: quoteAgeOutOfRangeMessage(age),
         }),
       );
     }
@@ -141,10 +143,19 @@ module.exports = async function handler(req, res) {
       smoker = s === "yes" || s === "si" || s === "true" || s === "1";
     }
 
-    // Lookup from quote_ranges table
-    const range = await fetchQuoteRange(SUPABASE_URL, SUPABASE_KEY, age, sex, smoker);
+    const { range } = await fetchQuoteRangeForAge(
+      SUPABASE_URL,
+      SUPABASE_KEY,
+      age,
+      sex,
+      smoker
+    );
 
     if (!range) {
+      const tobaccoMsg =
+        age <= 44 && smoker
+          ? "We do not have Assurity tobacco premiums on file yet. Julie can quote you from Agent Center."
+          : "We don't have rate data for that combination yet.";
       return json(
         res,
         200,
@@ -153,7 +164,7 @@ module.exports = async function handler(req, res) {
           quote_low: "",
           quote_high: "",
           quote_anchor: "",
-          quote_error: "We don't have rate data for that combination yet.",
+          quote_error: tobaccoMsg,
         }),
       );
     }

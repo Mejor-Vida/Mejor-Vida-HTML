@@ -187,16 +187,16 @@
         parseInt(state.dobDay, 10)
       );
       if (age == null) return t("Fecha no válida.", "Invalid date.");
-      if (age < 45) {
+      if (age < 18) {
         return t(
-          "Nuestros productos de gastos finales comienzan a los 45 años.",
-          "Our final expense products start at age 45."
+          "Las cotizaciones están disponibles desde los 18 años.",
+          "Quotes are available starting at age 18."
         );
       }
       if (age > 85) {
         return t(
-          "Nuestros productos están disponibles hasta los 85 años.",
-          "Our final expense products are available up to age 85."
+          "Las cotizaciones están disponibles hasta los 85 años.",
+          "Quotes are available up to age 85."
         );
       }
       return null;
@@ -734,6 +734,83 @@
     }
   }
 
+  function applyTobaccoChoice(val) {
+    if (val !== "yes" && val !== "no") return;
+    state.tobacco = val;
+    answered.tobacco = true;
+    document.querySelectorAll('[data-choice-field="tobacco"]').forEach(function (btn) {
+      btn.classList.toggle("is-selected", btn.getAttribute("data-choice-value") === val);
+    });
+    updateSummaryBar();
+  }
+
+  function firstIncompleteStepIndex() {
+    if (!state.gender) return 0;
+    if (!state.dobMonth || !state.dobDay || !state.dobYear) return 1;
+    if (!state.state) return 2;
+    if (!state.tobacco) return 3;
+    if (!state.coverage) return 4;
+    return 5;
+  }
+
+  function applyLandingQueryParams() {
+    try {
+      var p = new URLSearchParams(location.search);
+      if (p.get("from") !== "landing") return;
+      var nm = document.getElementById("ql-fullname");
+      var em = document.getElementById("ql-email");
+      var name =
+        p.get("name") ||
+        [p.get("firstName"), p.get("lastName")].filter(Boolean).join(" ").trim();
+      var email = (p.get("email") || "").trim();
+      if (nm && name) {
+        nm.value = name;
+        state.fullName = name;
+      }
+      if (em && email) {
+        em.value = email;
+        state.email = email;
+      }
+      var st = document.getElementById("mvi-state");
+      var stateCode = (p.get("state") || "").trim().toUpperCase();
+      if (st && stateCode && stateCode.length === 2) {
+        st.value = stateCode;
+        state.state = stateCode;
+        answered.state = true;
+      }
+      var ph = document.getElementById("ql-phone");
+      var phone = (p.get("phone") || "").trim();
+      if (!phone) {
+        try {
+          phone = sessionStorage.getItem("mviLandingPhone") || "";
+        } catch (ePhone) {}
+      }
+      if (ph && phone) {
+        ph.value = phone;
+        state.phone = phone;
+      }
+      var sms = document.getElementById("ql-sms-consent");
+      var consent = (p.get("consent") || "").toLowerCase();
+      if (consent !== "1" && consent !== "true") {
+        try {
+          if (sessionStorage.getItem("mviLandingSmsConsent") === "1") consent = "1";
+        } catch (eConsent) {}
+      }
+      if (sms && (consent === "1" || consent === "true")) {
+        sms.checked = true;
+        state.smsConsent = true;
+      }
+      var tobacco = (p.get("tobacco") || "").toLowerCase();
+      if (tobacco !== "yes" && tobacco !== "no") {
+        try {
+          var saved = sessionStorage.getItem("mviLandingTobacco");
+          if (saved === "yes" || saved === "no") tobacco = saved;
+        } catch (e2) {}
+      }
+      applyTobaccoChoice(tobacco);
+    } catch (e) {}
+  }
+
   function init() {
     document.body.classList.add("mvi-quote-wizard-page");
     populateDobSelects();
@@ -741,6 +818,7 @@
     populateCoverageSelect();
     bindChoiceButtons();
     bindInputs();
+    applyLandingQueryParams();
 
     var prev = document.getElementById("mvi-wizard-prev");
     var next = document.getElementById("mvi-wizard-next");
@@ -752,7 +830,7 @@
       submitQuote();
     });
 
-    showStep(0);
+    showStep(firstIncompleteStepIndex());
 
     window.addEventListener("mvi-site-language", function () {
       refreshMonthPicker();
