@@ -901,10 +901,13 @@
         if (stateCombobox) stateCombobox.open();
       });
       stateInput.addEventListener("blur", function () {
-        var invalid = !!(selections.state && !isValidStateCode(selections.state));
-        stateInput.classList.toggle("is-invalid", invalid);
-        var hint = document.getElementById("lf-state-hint");
-        if (hint) hint.hidden = !invalid;
+        window.setTimeout(function () {
+          if (stateCombobox) stateCombobox.close();
+          var invalid = !!(selections.state && !isValidStateCode(selections.state));
+          stateInput.classList.toggle("is-invalid", invalid);
+          var hint = document.getElementById("lf-state-hint");
+          if (hint) hint.hidden = !invalid;
+        }, 180);
       });
     }
   }

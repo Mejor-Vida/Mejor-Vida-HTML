@@ -179,7 +179,12 @@
         opt.addEventListener("mousedown", function (ev) {
           ev.preventDefault();
         });
-        opt.addEventListener("click", function () {
+        opt.addEventListener("pointerdown", function (ev) {
+          ev.preventDefault();
+          selectItem(item.value);
+        });
+        opt.addEventListener("click", function (ev) {
+          ev.preventDefault();
           selectItem(item.value);
         });
 
@@ -259,9 +264,16 @@
       scrollHighlightedIntoView();
     }
 
-    function onDocMouseDown(ev) {
+    function onDocPointerDown(ev) {
       if (!container.contains(ev.target)) closeDropdown(true);
     }
+
+    triggerWrap.addEventListener("pointerdown", function (ev) {
+      if (state.open) return;
+      ev.preventDefault();
+      input.focus({ preventScroll: true });
+      openDropdown();
+    });
 
     input.addEventListener("click", function () {
       if (!state.open) openDropdown();
@@ -304,7 +316,7 @@
       }
     });
 
-    document.addEventListener("mousedown", onDocMouseDown);
+    document.addEventListener("pointerdown", onDocPointerDown);
 
     function setValue(name) {
       if (!name && allowEmpty) {
@@ -322,7 +334,7 @@
     }
 
     function destroy() {
-      document.removeEventListener("mousedown", onDocMouseDown);
+      document.removeEventListener("pointerdown", onDocPointerDown);
     }
 
     setValue(state.value);

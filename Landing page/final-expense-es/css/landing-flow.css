@@ -1981,3 +1981,62 @@ body.lf-landing {
 .lf-main:has(.lf-step--phone:not([hidden])) > #lf-next-default-anchor .lf-btn-next:not(:disabled):hover {
   background: #cf6d17;
 }
+
+/* Mobile: center wizard steps; compact header; fix state dropdown */
+@media (max-width: 767.98px) {
+  .lf-logo {
+    margin-top: -1rem;
+    margin-left: -0.65rem;
+  }
+
+  .lf-logo img {
+    height: clamp(4.75rem, 16vw, 6rem);
+    max-width: min(320px, 72vw);
+    transform: none;
+  }
+
+  .lf-header-actions {
+    padding-top: 1rem;
+    padding-right: 1rem;
+  }
+
+  .lf-progress-wrap {
+    margin-top: -0.75rem;
+  }
+
+  body.lf-landing:not(.lf-landing--results) .lf-main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: calc(100dvh - 7.25rem);
+    padding-top: 0.75rem;
+    padding-bottom: 1.75rem;
+    overflow: visible;
+  }
+
+  body.lf-landing:not(.lf-landing--results) .lf-step:not([hidden]) {
+    overflow: visible;
+  }
+
+  .lf-step--select:not([hidden]) {
+    overflow: visible;
+  }
+
+  .lf-state-combobox__panel,
+  .lf-search-combobox__panel,
+  .lf-country-combobox__panel {
+    z-index: 200;
+  }
+
+  .lf-state-combobox__option,
+  .lf-search-combobox__option,
+  .lf-country-combobox__option {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .lf-state-combobox__trigger-wrap,
+  .lf-search-combobox__trigger-wrap {
+    touch-action: manipulation;
+  }
+}
