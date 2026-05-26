@@ -284,6 +284,10 @@
       "destination": "/en/sms-optin.html"
     },
     {
+      "source": "/en/e-sign-consent",
+      "destination": "/en/e-sign-consent.html"
+    },
+    {
       "source": "/en/schedule-julie",
       "destination": "/en/schedule-julie.html"
     },
