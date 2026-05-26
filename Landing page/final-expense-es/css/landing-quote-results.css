@@ -400,3 +400,21 @@ body.lf-landing--results .lf-main {
 body.lf-schedule-modal-open .lf-header {
   z-index: 1040;
 }
+
+.lf-results-disclaimer {
+  margin: 2rem auto 0;
+  max-width: 42rem;
+  padding: 1rem 1.15rem;
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: #475569;
+  text-align: center;
+  background: #f8fafc;
+  border: 1px solid rgba(13, 71, 161, 0.12);
+  border-radius: 0.65rem;
+}
+
+.lf-results-disclaimer strong {
+  color: #1a365d;
+  font-weight: 600;
+}
