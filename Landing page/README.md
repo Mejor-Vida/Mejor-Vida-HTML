@@ -78,3 +78,17 @@ Each `index.html` sets on `<body>`:
 - Leads sync with `lang: "es"`.
 - English dev preview: `Landing page/final-expense/index.html` (or `final-expense-en-backup/`).
 - Spanish dev preview: `http://127.0.0.1:4174/Landing%20page/final-expense-es/index.html`
+
+### Mobile dev preview (phone frame)
+
+From the project root:
+
+```bash
+npm run preview:gastos-finales-ads-mobile
+```
+
+Opens **http://127.0.0.1:8766/preview/landing-gastos-finales-ads-mobile.html** — iframe inside a phone mockup with width/height presets and reload. Edit `gastos-finales-ads/` CSS/JS, save, click **Recargar**.
+
+- Switch source in the toolbar: **gastos-finales-ads/** (deploy path) or **Landing page/final-expense-es/** (working copy).
+- Full page without frame: `npm run preview:landing` → http://127.0.0.1:4174/gastos-finales-ads/
+- Legacy long-form landing header preview: `python3 preview/serve-landing-mobile.py --page legacy`

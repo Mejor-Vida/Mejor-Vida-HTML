@@ -12,6 +12,17 @@ body.lf-landing--results .lf-progress-wrap {
   margin-bottom: 0.75rem;
 }
 
+@media (max-width: 767.98px) {
+  body.lf-landing--results .lf-progress-wrap {
+    margin-top: -0.5rem;
+    margin-bottom: 0.65rem;
+  }
+
+  body.lf-landing--results .lf-header-actions {
+    padding-top: 1rem;
+  }
+}
+
 body.lf-landing--results .lf-header-actions {
   padding-top: 2.75rem;
 }
