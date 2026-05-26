@@ -2039,4 +2039,42 @@ body.lf-landing {
   .lf-search-combobox__trigger-wrap {
     touch-action: manipulation;
   }
+
+  /* Floating green WhatsApp bubble (mobile) */
+  .lf-header-whatsapp-btn {
+    position: fixed;
+    right: max(1rem, env(safe-area-inset-right, 0px));
+    bottom: max(1.15rem, env(safe-area-inset-bottom, 0px));
+    z-index: 300;
+    width: 3.5rem;
+    height: 3.5rem;
+    padding: 0;
+    border-radius: 50%;
+    justify-content: center;
+    gap: 0;
+    font-size: 0;
+    background: linear-gradient(180deg, #3ee576 0%, #25d366 45%, #1ebe5b 100%);
+    border: none;
+    box-shadow:
+      0 4px 16px rgba(37, 211, 102, 0.5),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  }
+
+  .lf-header-whatsapp-btn:active {
+    transform: scale(0.96);
+  }
+
+  .lf-header-whatsapp-btn .lf-wa-label {
+    display: none;
+  }
+
+  .lf-header-whatsapp-btn i {
+    font-size: 1.75rem;
+    line-height: 1;
+    filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.15));
+  }
+
+  body.lf-landing .lf-main {
+    padding-bottom: 5.5rem;
+  }
 }
