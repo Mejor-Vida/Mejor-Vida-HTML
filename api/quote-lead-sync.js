@@ -186,9 +186,41 @@ function capiNormalizePhone(phone) {
   return digits || null;
 }
 
-async function sendMetaCAPIEvent({ leadSource, email, phone, firstName, lastName, sex }) {
+function capiEventSourceUrl(originDetail) {
+  const path = String(
+    (originDetail && (originDetail.page_path || originDetail.landing_path)) || ""
+  ).trim();
+  if (path.startsWith("http://") || path.startsWith("https://")) {
+    return path.split("?")[0];
+  }
+  if (path.startsWith("/")) {
+    return `https://www.mejorvidainsurance.com${path.split("?")[0]}`;
+  }
+  return "https://www.mejorvidainsurance.com/gastos-finales-ads/";
+}
+
+function shouldSendMetaCAPI(leadSource, originDetail) {
+  if (leadSource === "facebook_landing_gastos_finales") return true;
+  if (leadSource === "nebraska_quote_page") {
+    const path = String(
+      (originDetail && (originDetail.page_path || originDetail.landing_path)) || ""
+    );
+    return path.includes("gastos-finales-ads");
+  }
+  return false;
+}
+
+async function sendMetaCAPIEvent({
+  leadSource,
+  email,
+  phone,
+  firstName,
+  lastName,
+  sex,
+  originDetail,
+}) {
   try {
-    if (leadSource !== "facebook_landing_gastos_finales") return;
+    if (!shouldSendMetaCAPI(leadSource, originDetail)) return;
 
     const accessToken = process.env.META_CAPI_ACCESS_TOKEN;
     if (!accessToken) return;
@@ -220,8 +252,7 @@ async function sendMetaCAPIEvent({ leadSource, email, phone, firstName, lastName
           event_name: "Lead",
           event_time: Math.floor(Date.now() / 1000),
           action_source: "website",
-          event_source_url:
-            "https://www.mejorvidainsurance.com/landing-gastos-finales.html",
+          event_source_url: capiEventSourceUrl(originDetail),
           user_data: userData,
           custom_data: { currency: "USD", value: 0 },
         },
@@ -570,6 +601,7 @@ module.exports = async function handler(req, res) {
     firstName,
     lastName,
     sex: body.sex,
+    originDetail,
   });
 
   await sendQuoteLeadNotification({

@@ -224,7 +224,7 @@
               coverageAmount: coverage,
               consent: !!selections.smsConsent,
               lang: "es",
-              source: "nebraska_quote_page",
+              source: "facebook_landing_gastos_finales",
               sessionClientId: sessionClientId,
               originDetail: collectOriginDetail(),
             }),
