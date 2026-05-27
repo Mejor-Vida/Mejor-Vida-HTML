@@ -314,3 +314,15 @@
     font-size: clamp(30px, 8vw, 42px);
   }
 }
+
+/* Office bar (WhatsApp / phone) must expand sticky header — not clip to 81px */
+@media (min-width: 992px) {
+  body header.sticky-top:has(.header-office-bar) {
+    height: auto !important;
+  }
+
+  body header.sticky-top:has(.header-office-bar) > .container {
+    height: auto !important;
+    min-height: 81px;
+  }
+}

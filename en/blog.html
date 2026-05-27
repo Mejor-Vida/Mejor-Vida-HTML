@@ -273,7 +273,7 @@
     .hero-blog {
       background: #fff;
       border-bottom: 1px solid var(--border-light);
-      padding: 1.25rem 0 1.1rem;
+      padding: 2.5rem 0 3.75rem;
       position: relative;
     }
     .hero-blog::before {
@@ -291,15 +291,10 @@
       padding: 0 24px;
     }
     .hero-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 760px) minmax(0, 320px);
-      gap: 60px;
-      align-items: start;
-      justify-content: space-between;
-      padding-top: 0.55rem;
+      padding-top: 0.35rem;
     }
     .hero-main {
-      max-width: 760px;
+      max-width: none;
     }
     .hero-eyebrow {
       display: inline-block;
@@ -311,12 +306,24 @@
       color: var(--brand-blue);
     }
     .hero-title {
-      margin: 0 0 0.4rem;
+      margin: 0;
       color: var(--ink-dark);
-      font-size: clamp(2rem, 4.9vw, 3.5rem);
-      line-height: 1.08;
+      font-size: clamp(1.5rem, 2.85vw, 2.5rem);
+      line-height: 1.15;
       letter-spacing: -0.02em;
       font-weight: 700;
+    }
+    @media (min-width: 1100px) {
+      .hero-title {
+        white-space: nowrap;
+      }
+    }
+    .blog-index-feed {
+      padding-top: 3.25rem;
+      padding-bottom: 4rem;
+    }
+    .blog-index-feed > .container > h2 {
+      margin-bottom: 2.5rem;
     }
     .hero-dek {
       margin: 0 0 0.55rem;
@@ -378,7 +385,7 @@
 
     @media (max-width: 900px) {
       .hero-blog {
-        padding: 1rem 0 0.85rem;
+        padding: 1.75rem 0 2.5rem;
       }
       .hero-blog .container {
         padding: 0 16px;
@@ -396,6 +403,50 @@
     }
     .blog-card { background: #fff; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); overflow: hidden; transition: box-shadow 0.2s; }
     .blog-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
+    .blog-card-thumb-link--contain {
+      background: #eef3f8;
+      min-height: 280px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px;
+    }
+    .blog-card-thumb--contain {
+      width: 100%;
+      height: auto;
+      max-height: 380px;
+      object-fit: contain;
+      object-position: center;
+    }
+    @media (min-width: 768px) {
+      .blog-card:has(.blog-card-thumb-link--contain) .blog-card-body {
+        min-height: 380px;
+        padding: 1.5rem 1.75rem !important;
+        justify-content: space-between !important;
+      }
+      .blog-card:has(.blog-card-thumb-link--contain) .blog-card-title {
+        font-size: 1.35rem;
+        line-height: 1.38;
+        margin-bottom: 0 !important;
+      }
+      .blog-card:has(.blog-card-thumb-link--contain) .blog-card-hook {
+        font-size: 1.0625rem;
+        line-height: 1.7;
+        color: #4b5563 !important;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin: 1rem 0 1.25rem !important;
+        padding-left: 1.35rem !important;
+      }
+      .blog-card:has(.blog-card-thumb-link--contain) .blog-card-hook li {
+        margin-bottom: 0.75rem;
+      }
+      .blog-card:has(.blog-card-thumb-link--contain) .blog-card-hook li:last-child {
+        margin-bottom: 0;
+      }
+    }
     .blog-content { max-width: 720px; margin-left: auto; margin-right: auto; }
     .callout-box { background: #ebf8ff; border-left: 4px solid #0D47A1; padding: 1rem 1.25rem; border-radius: 0 8px 8px 0; margin: 1.5rem 0; }
   </style>
@@ -455,33 +506,41 @@
 <div class="container">
 <div class="hero-grid">
 <div class="hero-main">
-<p class="hero-eyebrow mb-0">Editorial semanal</p>
-<h1 class="hero-title">Consejos Semanales sobre Seguros y Protección Familiar</h1>
-<p class="hero-dek">Noticias y análisis claros para ayudarte a comparar opciones, entender cambios regulatorios y tomar mejores decisiones para tu familia.</p>
-<p class="hero-meta">Actualizado semanalmente • Equipo editorial de Mejor Vida Insurance • Revisado por Julie Braunsroth</p>
-<a class="hero-link" href="quote.html">¿Ayuda personalizada? Empieza con una cotización o WhatsApp</a>
+<p class="hero-eyebrow mb-0">Weekly editorial</p>
+<h1 class="hero-title">Weekly Tips on Insurance and Family Protection</h1>
 </div>
-<aside aria-label="Quick start" class="hero-quick-card">
-<h3>Inicio rápido</h3>
-<ul>
-<li>Revisa las publicaciones más recientes primero.</li>
-<li>Compara tendencias regulatorias y de mercado.</li>
-<li>Toma notas para preguntas sobre tu cobertura.</li>
-</ul>
-<p class="hero-quick-phone"><a href="quote.html">Cotización gratis en línea</a> · <a href="https://wa.me/14024405438?text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20seguro%20de%20gastos%20finales." rel="noopener" target="_blank">WhatsApp</a> — primero tu información; luego coordinamos una llamada si encaja.</p>
-<p class="hero-quick-phone small text-muted mb-0">Cliente actual: <a href="tel:+14024405438">402-440-5438</a></p>
-</aside>
 </div>
 </div>
 </section>
-<section class="py-5">
+<section class="blog-index-feed">
 <div class="container">
-<div class="newsletter-summary-block border rounded p-3 bg-light mb-4 mx-auto" style="max-width:720px;">
-<strong class="d-block mb-1">Resumen de esta semana (10 al 16 de mayo de 2026)</strong>
-<p class="mb-0 small text-secondary">Boletín del 17 de mayo (tres historias en el blog): transición del sector ALIRT + Insurance Business (combinadas), prospectos de gastos finales con IA y el informe del NAIC sobre 9,6 billones de dólares en inversiones de aseguradoras.</p>
-</div>
-<h2 class="h3 fw-bold mb-4 text-center" style="color:#1a365d;">Últimas entradas</h2>
+<h2 class="h3 fw-bold mb-4 text-center" style="color:#1a365d;">Latest posts</h2>
 <div class="row g-4 justify-content-center" id="blog-feed">
+<!-- BLOG CARD: Weekly Insurance Update May 24, 2026 (week May 17–May 23, 2026) -->
+<div class="col-12 col-lg-10">
+<article class="blog-card h-100">
+<div class="row g-0 align-items-stretch">
+<div class="col-12 col-md-5">
+<a class="d-block h-100 text-decoration-none blog-card-thumb-link blog-card-thumb-link--contain" href="blog/weekly-insurance-update-2026-05-24.html">
+<img alt="Insurance protection pyramid infographic — Mejor Vida (families, policies, reinsurance, carriers, regulation)" class="blog-card-thumb blog-card-thumb--contain" onerror="this.src='../img/3-1-2026-Blog.png'" src="../img/blog-generated/weekly-insurance-update-2026-05-24/hero-en.png"/>
+</a>
+</div>
+<div class="col-12 col-md-7">
+<div class="p-3 p-md-4 d-flex flex-column justify-content-center blog-card-body">
+<h3 class="h5 fw-bold mb-2 blog-card-title" style="color:#1a365d;">Weekly U.S. Life &amp; Final Expense Insurance Update — May 24, 2026</h3>
+<ul class="small text-muted mb-2 ps-3 blog-card-hook">
+<li>AI changing insurance pricing</li>
+<li>$1.9 billion life insurance expansion</li>
+<li>New final expense insurance options</li>
+<li>Major health insurance rule changes</li>
+</ul>
+<a class="btn btn-outline-primary btn-sm align-self-start mt-auto" href="blog/weekly-insurance-update-2026-05-24.html">Read article</a>
+</div>
+</div>
+</div>
+</article>
+</div>
+<!-- BLOG CARD: Weekly Insurance Update May 17, 2026 (week May 10–May 16, 2026) -->
 <div class="col-12 col-lg-10">
 <article class="blog-card h-100">
 <div class="row g-0 align-items-stretch">
@@ -492,9 +551,9 @@
 </div>
 <div class="col-12 col-md-7">
 <div class="p-3 p-md-4 d-flex flex-column justify-content-center">
-<h3 class="h5 fw-bold mb-2" style="color:#1a365d;">Actualización semanal de vida y gastos finales — 17 de mayo de 2026</h3>
-<p class="small text-muted mb-2">ALIRT + Insurance Business (transición del sector), prospectos FE con IA y el informe NAIC de 9,6 billones USD en inversiones — semana del 10 al 16 de mayo.</p>
-<a class="btn btn-outline-primary btn-sm align-self-start" href="blog/weekly-insurance-update-2026-05-17.html">Leer artículo</a>
+<h3 class="h5 fw-bold mb-2" style="color:#1a365d;">Weekly U.S. Life &amp; Final Expense Insurance Update — May 17, 2026</h3>
+<p class="small text-muted mb-2">ALIRT industry transition, AI final expense leads, and the NAIC’s $9.6 trillion investment report — week of May 10–16.</p>
+<a class="btn btn-outline-primary btn-sm align-self-start" href="blog/weekly-insurance-update-2026-05-17.html">Read article</a>
 </div>
 </div>
 </div>

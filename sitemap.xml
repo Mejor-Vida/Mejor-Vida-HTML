@@ -16,8 +16,34 @@
   <!-- Blog page (weekly newsletter content) -->
   <url>
     <loc>https://www.mejorvidainsurance.com/blog.html</loc>
-    <lastmod>2026-05-10T12:00:00+00:00</lastmod>
+    <lastmod>2026-05-24T12:00:00+00:00</lastmod>
     <priority>0.80</priority>
+  </url>
+
+  <!-- Blog post: Weekly Life and Final Expense Insurance Update - May 24, 2026 -->
+  <url>
+    <loc>https://www.mejorvidainsurance.com/blog/weekly-insurance-update-2026-05-24.html</loc>
+    <lastmod>2026-05-24T12:00:00+00:00</lastmod>
+    <priority>0.70</priority>
+  </url>
+
+  <url>
+    <loc>https://www.mejorvidainsurance.com/en/blog/weekly-insurance-update-2026-05-24.html</loc>
+    <lastmod>2026-05-24T12:00:00+00:00</lastmod>
+    <priority>0.70</priority>
+  </url>
+
+  <!-- Blog post: Weekly Life and Final Expense Insurance Update - May 17, 2026 -->
+  <url>
+    <loc>https://www.mejorvidainsurance.com/blog/weekly-insurance-update-2026-05-17.html</loc>
+    <lastmod>2026-05-17T12:00:00+00:00</lastmod>
+    <priority>0.70</priority>
+  </url>
+
+  <url>
+    <loc>https://www.mejorvidainsurance.com/en/blog/weekly-insurance-update-2026-05-17.html</loc>
+    <lastmod>2026-05-17T12:00:00+00:00</lastmod>
+    <priority>0.70</priority>
   </url>
 
   <!-- Blog post: Weekly Life and Final Expense Insurance Update - May 10, 2026 -->
