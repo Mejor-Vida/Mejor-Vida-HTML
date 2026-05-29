@@ -1,0 +1,74 @@
+{
+  "version": 1,
+  "source": "Integrity Connect Medical Profile extraction + live public API proxy",
+  "search_mode": "live_api_proxy",
+  "search_notes": "Browser calls /api/medical-intake/search only. Server proxies RxNorm, NPI, ICD-10 — no local directory download.",
+  "sections": [
+    {
+      "id": "health_info",
+      "label": "Health Info",
+      "fields": [
+        { "field_id": "gender", "input_type": "toggle", "options": ["Male", "Female"], "required": true, "phi_classification": "phi" },
+        { "field_id": "birthdate", "input_type": "date", "required": true, "phi_classification": "phi" },
+        { "field_id": "age", "input_type": "readonly_derived", "derived_from": "birthdate", "phi_classification": "phi" },
+        { "field_id": "heightFt", "input_type": "number", "required": false, "phi_classification": "phi" },
+        { "field_id": "heightIn", "input_type": "number", "required": false, "phi_classification": "phi" },
+        { "field_id": "weightLbs", "input_type": "number", "required": false, "phi_classification": "phi" },
+        { "field_id": "tobaccoUse", "input_type": "toggle", "options": ["Yes", "No"], "required": false, "phi_classification": "phi" }
+      ]
+    },
+    {
+      "id": "prescriptions",
+      "label": "Prescriptions",
+      "ui_behavior": "collapsible_count_badge_two_step_modal",
+      "live_api": "rxnorm",
+      "fields": [
+        { "field_id": "drugName", "input_type": "search", "search_api": "/api/medical-intake/search?type=drugs" },
+        { "field_id": "dosage", "input_type": "dropdown", "search_api": "/api/medical-intake/search?type=drug-dosages" },
+        { "field_id": "quantity", "input_type": "number", "default": 30 },
+        {
+          "field_id": "frequency",
+          "input_type": "dropdown",
+          "options": ["per month", "per two months", "per three months", "per six months", "per year"]
+        }
+      ]
+    },
+    {
+      "id": "providers",
+      "label": "Providers",
+      "live_api": "npi_npi1",
+      "fields": [
+        { "field_id": "zipCode", "validation": "5_digits" },
+        { "field_id": "radius", "options": [10, 20, 30, 40, 50, 60, 70, 80, 90, 100] },
+        { "field_id": "searchTerm", "input_type": "search", "search_api": "/api/medical-intake/search?type=providers" }
+      ]
+    },
+    {
+      "id": "pharmacy",
+      "label": "Pharmacy",
+      "live_api": "npi_npi2",
+      "fields": [
+        { "field_id": "zipCode", "validation": "5_digits" },
+        { "field_id": "radius", "options": [10, 20, 30, 40, 50, 60, 70, 80, 90, 100] },
+        { "field_id": "pharmacyName", "input_type": "search", "search_api": "/api/medical-intake/search?type=pharmacies" },
+        { "field_id": "pharmacyType", "options": ["physical", "online"] }
+      ]
+    },
+    {
+      "id": "conditions",
+      "label": "Conditions",
+      "ui_behavior": "search_radio_auto_save_on_next",
+      "live_api": "icd10_clinical_tables",
+      "fields": [
+        { "field_id": "name", "input_type": "search", "search_api": "/api/medical-intake/search?type=conditions" },
+        { "field_id": "icd10_code", "input_type": "readonly" }
+      ]
+    }
+  ],
+  "storage": {
+    "phi_table": "lead_underwriting_phi",
+    "phi_source_table": "medical_intake",
+    "metadata_table": "medical_intake_submissions",
+    "token_table": "medical_intake_access_tokens"
+  }
+}

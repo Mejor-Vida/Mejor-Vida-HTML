@@ -2036,6 +2036,13 @@
                         <button type="button" class="lang-opt" id="compose-lang-es" data-lang="Spanish">Spanish</button>
                       </div>
                     </div>
+                    <div class="meta-card" style="grid-column: 1 / -1">
+                      <label for="compose-email-type">Email type</label>
+                      <select id="compose-email-type" data-help="General Issue uses your draft as-is. Medical Information Request sends a secure one-time link to the client medical intake form.">
+                        <option value="general">General Issue</option>
+                        <option value="medical_information_request">Medical Information Request</option>
+                      </select>
+                    </div>
                   </div>
                   <label for="compose-issue">Customer issue</label>
                   <textarea id="compose-issue" rows="2" placeholder="What does the client need help with?"></textarea>
@@ -2683,6 +2690,19 @@
                           </details>
                         </div>
                       </div>
+                    </div>
+                  </div>
+                  </section>
+                  <section class="lp-section" id="lp-medical-intake-section">
+                  <div class="lp-section-bar">3b. Client Medical Intake (encrypted, submitted via secure link)</div>
+                  <div class="meta-grid">
+                    <div class="meta-card" style="grid-column: 1 / -1">
+                      <div id="lp-medical-intake-status" class="small-note" style="margin-bottom:8px">Select a lead to view client-submitted medical profile.</div>
+                      <div id="lp-medical-intake-summary"></div>
+                      <details id="lp-medical-intake-details" class="hidden" style="margin-top:12px">
+                        <summary style="cursor:pointer;font-weight:600">Full medical intake responses</summary>
+                        <pre id="lp-medical-intake-full" style="white-space:pre-wrap;font-size:0.82rem;max-height:420px;overflow:auto;background:#0d1520;padding:12px;border-radius:8px;margin-top:8px"></pre>
+                      </details>
                     </div>
                   </div>
                   </section>
@@ -5547,6 +5567,7 @@
       var staffLeadListQuery = "";
       var composeDraftId = null;
       var composeLang = "English";
+      var composeEmailType = "general";
       var composeDeletePending = null;
       var leadProfileBaselineJson = "";
       var leadProfileReadOnly = false;
@@ -5565,8 +5586,27 @@
           issue: document.getElementById("compose-issue"),
           notes: document.getElementById("compose-notes"),
           reply: document.getElementById("compose-reply"),
+          emailType: document.getElementById("compose-email-type"),
           status: document.getElementById("compose-status"),
         };
+      }
+
+      function setComposeEmailType(type) {
+        composeEmailType = type === "medical_information_request" ? "medical_information_request" : "general";
+        var el = getComposeEls();
+        if (el.emailType) el.emailType.value = composeEmailType;
+        if (composeEmailType === "medical_information_request") {
+          if (el.issue && !String(el.issue.value || "").trim()) {
+            el.issue.value = "Medical information request before scheduled call";
+          }
+          if (el.reply) {
+            el.reply.value =
+              composeLang === "Spanish"
+                ? "[El correo se generará automáticamente con enlace seguro al enviar — Medical Information Request]"
+                : "[Email body will be generated with secure link when you send — Medical Information Request]";
+          }
+          if (el.status) el.status.textContent = "Medical request: select a lead, then Send Email (link is created on send).";
+        }
       }
 
       /** Lead Profile tab hides the compose pane; still show delete/load feedback here. */
@@ -6785,6 +6825,69 @@
         block.innerHTML = parts.join("");
       }
 
+      async function loadMedicalIntakeForLeadProfile() {
+        var statusEl = document.getElementById("lp-medical-intake-status");
+        var summaryEl = document.getElementById("lp-medical-intake-summary");
+        var detailsEl = document.getElementById("lp-medical-intake-details");
+        var fullEl = document.getElementById("lp-medical-intake-full");
+        if (!statusEl || !summaryEl) return;
+        if (!composeSelectedLeadId || !accessToken) {
+          statusEl.textContent = "Select a lead to view client-submitted medical profile.";
+          summaryEl.innerHTML = "";
+          if (detailsEl) detailsEl.classList.add("hidden");
+          return;
+        }
+        var lead = getSelectedLeadFromList();
+        statusEl.textContent = "Loading medical intake…";
+        summaryEl.innerHTML = "";
+        try {
+          var data = await authedApi(
+            "/api/staff/medical-intake?lead_id=" +
+              encodeURIComponent(composeSelectedLeadId) +
+              "&lead_source_table=" +
+              encodeURIComponent((lead && lead.source_table) || "manychat_leads"),
+            null,
+            { method: "GET" }
+          );
+          if (!data.can_access_phi) {
+            statusEl.textContent = "Medical intake exists but PHI access is restricted for your account.";
+            return;
+          }
+          if (!data.intake) {
+            statusEl.textContent = "No client medical intake submitted yet.";
+            if (detailsEl) detailsEl.classList.add("hidden");
+            return;
+          }
+          var sub = data.submissions && data.submissions[0];
+          statusEl.textContent = sub
+            ? "Submitted " + new Date(sub.submitted_at).toLocaleString()
+            : "Client medical intake on file.";
+          var hi = data.intake.healthInfo || {};
+          var parts = [
+            "<ul style=\"margin:0;padding-left:1.2rem;font-size:0.9rem\">",
+            "<li><strong>Gender:</strong> " + escHtml(hi.gender || "—") + "</li>",
+            "<li><strong>DOB:</strong> " + escHtml(hi.birthdate || "—") + "</li>",
+            "<li><strong>Height:</strong> " +
+              escHtml(String(hi.heightFt || "—") + " ft " + String(hi.heightIn != null ? hi.heightIn : "—") + " in") +
+              "</li>",
+            "<li><strong>Weight:</strong> " + escHtml(String(hi.weightLbs != null ? hi.weightLbs : "—") + " lbs") + "</li>",
+            "<li><strong>Tobacco:</strong> " + escHtml(hi.tobaccoUse ? "Yes" : "No") + "</li>",
+            "<li><strong>Prescriptions:</strong> " + escHtml(String((data.intake.prescriptions || []).length)) + "</li>",
+            "<li><strong>Conditions:</strong> " + escHtml(String((data.intake.conditions || []).length)) + "</li>",
+            "<li><strong>Providers:</strong> " + escHtml(String((data.intake.providers || []).length)) + "</li>",
+            "<li><strong>Pharmacies:</strong> " + escHtml(String((data.intake.pharmacies || []).length)) + "</li>",
+            "</ul>",
+          ];
+          summaryEl.innerHTML = parts.join("");
+          if (detailsEl && fullEl) {
+            detailsEl.classList.remove("hidden");
+            fullEl.textContent = JSON.stringify(data.intake, null, 2);
+          }
+        } catch (e) {
+          statusEl.textContent = (e && e.message) || "Could not load medical intake.";
+        }
+      }
+
       async function loadLeadProfileDetail() {
         var empty = document.getElementById("lead-profile-empty");
         var form = document.getElementById("lead-profile-form");
@@ -6865,6 +6968,7 @@
             if (status) status.textContent = "";
           }
           updateLeadProfileSaveButton();
+          void loadMedicalIntakeForLeadProfile();
         } catch (e) {
           if (status) status.textContent = (e && e.message) || "Could not load lead.";
           if (!quick) {
@@ -8343,8 +8447,12 @@
         var draft = String(el.reply.value || "").trim();
         var to = String(el.email.value || "").trim();
         var issue = String(el.issue.value || "").trim();
-        if (!draft) {
+        if (!draft && composeEmailType !== "medical_information_request") {
           el.status.textContent = "Reply draft is required.";
+          return;
+        }
+        if (composeEmailType === "medical_information_request" && !composeSelectedLeadId) {
+          el.status.textContent = "Select a lead from the list before sending Medical Information Request.";
           return;
         }
         if (!to) {
@@ -8358,15 +8466,25 @@
         }
         el.status.textContent = "Sending…";
         try {
+          var lead = getSelectedLeadFromList();
+          var fn = el.firstName ? String(el.firstName.value || "").trim() : "";
           var data = await authedApi("/api/staff/send-email", {
             compose: true,
             toEmail: to,
             replyDraft: draft,
             language: composeLang,
             customerIssue: issue,
+            emailType: composeEmailType,
+            leadId: composeSelectedLeadId || (lead && lead.id) || "",
+            leadSourceTable: (lead && lead.source_table) || "manychat_leads",
+            leadFirstName: fn || (lead && lead.first_name) || "",
           });
           if (data && data.success === true) {
-            el.status.textContent = "Sent to " + to + (data.subject ? " — " + data.subject : "");
+            el.status.textContent =
+              "Sent to " +
+              to +
+              (data.subject ? " — " + data.subject : "") +
+              (data.intakeUrl ? " · Secure link issued." : "");
           } else {
             el.status.textContent = (data && data.error) || "Send failed.";
           }
@@ -8490,6 +8608,12 @@
         document.getElementById("compose-generate-btn").addEventListener("click", onComposeGenerate);
         document.getElementById("compose-send-btn").addEventListener("click", onComposeSend);
         document.getElementById("compose-save-btn").addEventListener("click", onComposeSave);
+        var emailTypeSel = document.getElementById("compose-email-type");
+        if (emailTypeSel) {
+          emailTypeSel.addEventListener("change", function () {
+            setComposeEmailType(emailTypeSel.value);
+          });
+        }
       }
 
       wireComposeUi();

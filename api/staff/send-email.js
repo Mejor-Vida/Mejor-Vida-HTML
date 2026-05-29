@@ -1,6 +1,13 @@
 const { google } = require("googleapis");
 const { requireStaffAuth, json, readJsonBody, serviceConfig, restPatch, restInsert } = require("./_inbox-lib");
 const { buildStaffClientReplyHtml } = require("../../lib/staff-reply-email-body");
+const { issueToken } = require("../../lib/medical-intake-token");
+const {
+  buildMedicalIntakePlainText,
+  buildMedicalIntakeSubject,
+  buildMedicalIntakeCtaHtml,
+  firstNameFromLead,
+} = require("../../lib/medical-intake-email-template");
 
 const GMAIL_REDIRECT_URI = "https://www.mejorvidainsurance.com/api/staff/gmail-callback";
 
@@ -116,6 +123,11 @@ module.exports = async function handler(req, res) {
   const customerIssue = body && body.customerIssue != null ? String(body.customerIssue).trim() : "";
   const subjectOverride = body && body.subject != null ? String(body.subject).trim() : "";
   const ccEmail = body && body.ccEmail != null ? String(body.ccEmail).trim() : "";
+  const emailType = body && body.emailType != null ? String(body.emailType).trim() : "general";
+  const leadId = body && body.leadId != null ? String(body.leadId).trim() : "";
+  const leadSourceTable =
+    body && body.leadSourceTable != null ? String(body.leadSourceTable).trim() : "manychat_leads";
+  const leadFirstName = body && body.leadFirstName != null ? String(body.leadFirstName).trim() : "";
 
   if (!replyDraft) {
     return json(res, 400, { success: false, error: "replyDraft required" });
@@ -144,20 +156,45 @@ module.exports = async function handler(req, res) {
   }
 
   const subjectLine = compose
-    ? subjectOverride
-      ? subjectOverride.slice(0, 200)
-      : subjectFromCustomerIssue(customerIssue)
+    ? emailType === "medical_information_request"
+      ? buildMedicalIntakeSubject({ language })
+      : subjectOverride
+        ? subjectOverride.slice(0, 200)
+        : subjectFromCustomerIssue(customerIssue)
     : "Re: Your Insurance Question — Mejor Vida Insurance";
 
   try {
-    const { html, plainBody } = buildStaffClientReplyHtml(replyDraft, language);
+    let draftForSend = replyDraft;
+    let intakeUrl = null;
+
+    if (compose && emailType === "medical_information_request") {
+      if (!leadId) {
+        return json(res, 400, { success: false, error: "Select a lead before sending Medical Information Request." });
+      }
+      const issued = await issueToken(cfg, {
+        leadId,
+        leadSourceTable,
+        recipientEmail: toEmail,
+        issuedBy: auth.user && auth.user.email ? auth.user.email : null,
+      });
+      intakeUrl = issued.url;
+      const fn = leadFirstName || "there";
+      draftForSend = buildMedicalIntakePlainText({ language, firstName: fn, intakeUrl });
+    }
+
+    const { html, plainBody } = buildStaffClientReplyHtml(draftForSend, language);
+    let htmlOut = html;
+    if (intakeUrl) {
+      const cta = buildMedicalIntakeCtaHtml({ language, intakeUrl });
+      htmlOut = html.replace("</body>", `${cta}</body>`);
+    }
     const rfc822 = buildMultipartRaw({
       fromEmail,
       toEmail,
       ccEmail: ccEmail || undefined,
       subject: subjectLine,
       textBody: plainBody,
-      htmlBody: html,
+      htmlBody: htmlOut,
     });
     const raw = toGmailRaw(rfc822);
 
@@ -191,13 +228,15 @@ module.exports = async function handler(req, res) {
         fromEmail,
         messageId,
         result: "gmail_accept",
-        htmlTemplate: "resend_shell",
+        emailType: emailType || null,
+        intakeUrl: intakeUrl || null,
+        leadId: leadId || null,
         subject: subjectLine,
       },
       "sent"
     );
 
-    return json(res, 200, { success: true, toEmail, messageId, subject: subjectLine });
+    return json(res, 200, { success: true, toEmail, messageId, subject: subjectLine, intakeUrl });
   } catch (e) {
     const err = String(e && e.message ? e.message : "Failed to send email");
     await logSendAttempt(

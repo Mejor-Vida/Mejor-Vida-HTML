@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Medical Profile — Mejor Vida Insurance</title>
+  <link rel="stylesheet" href="/css/medical-intake.css" />
+</head>
+<body>
+  <header class="mi-header">
+    <img src="/img/logo.png" alt="Mejor Vida Insurance" width="120" height="48" />
+    <h1>Medical Profile — secure pre-call intake</h1>
+  </header>
+
+  <div class="mi-wrap">
+    <div id="mi-gate" class="mi-gate">
+      <p>Validating your secure link…</p>
+    </div>
+
+    <div id="mi-app" class="mi-hidden">
+      <form id="mi-form">
+        <div class="mi-grid">
+          <div class="mi-card">
+            <h2>Health Info</h2>
+            <div class="mi-row">
+              <label>Gender</label>
+              <div class="mi-toggle">
+                <button type="button" data-gender="Male">Male</button>
+                <button type="button" data-gender="Female">Female</button>
+              </div>
+            </div>
+            <div class="mi-row">
+              <label for="mi-birthdate">Birthdate</label>
+              <input id="mi-birthdate" type="date" />
+            </div>
+            <div class="mi-row">
+              <label>Age</label>
+              <span id="mi-age-display" class="mi-readonly">—</span>
+            </div>
+            <div class="mi-row">
+              <label>Height</label>
+              <div class="mi-inline">
+                <input id="mi-height-ft" type="number" min="3" max="8" placeholder="ft" aria-label="Feet" />
+                <span>ft</span>
+                <input id="mi-height-in" type="number" min="0" max="11" placeholder="in" aria-label="Inches" />
+                <span>in</span>
+              </div>
+            </div>
+            <div class="mi-row">
+              <label for="mi-weight">Weight (lbs)</label>
+              <input id="mi-weight" type="number" min="50" max="600" />
+            </div>
+            <div class="mi-row">
+              <label>Tobacco use</label>
+              <div class="mi-toggle">
+                <button type="button" data-tobacco="yes">Yes</button>
+                <button type="button" data-tobacco="no">No</button>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="mi-section open">
+              <div class="mi-section-head">
+                <span>Providers <span id="mi-count-providers" class="mi-count">(0)</span></span>
+                <button type="button" class="mi-add-btn" data-modal="mi-modal-provider">Add New +</button>
+              </div>
+              <div class="mi-section-body">
+                <p id="mi-empty-providers" class="mi-empty">This contact has no providers.</p>
+                <div id="mi-list-providers"></div>
+              </div>
+            </div>
+
+            <div class="mi-section open">
+              <div class="mi-section-head">
+                <span>Prescriptions <span id="mi-count-prescriptions" class="mi-count">(0)</span></span>
+                <button type="button" class="mi-add-btn" data-modal="mi-modal-drug">Add New +</button>
+              </div>
+              <div class="mi-section-body">
+                <p id="mi-empty-prescriptions" class="mi-empty">This contact has no prescriptions.</p>
+                <div id="mi-list-prescriptions"></div>
+              </div>
+            </div>
+
+            <div class="mi-section open">
+              <div class="mi-section-head">
+                <span>Pharmacy <span id="mi-count-pharmacies" class="mi-count">(0)</span></span>
+                <button type="button" class="mi-add-btn" data-modal="mi-modal-pharmacy">Add New +</button>
+              </div>
+              <div class="mi-section-body">
+                <p id="mi-empty-pharmacies" class="mi-empty">This contact has no pharmacy.</p>
+                <div id="mi-list-pharmacies"></div>
+              </div>
+            </div>
+
+            <div class="mi-section open">
+              <div class="mi-section-head">
+                <span>Conditions <span id="mi-count-conditions" class="mi-count">(0)</span></span>
+                <button type="button" class="mi-add-btn" data-modal="mi-modal-condition">Add New +</button>
+              </div>
+              <div class="mi-section-body">
+                <p id="mi-empty-conditions" class="mi-empty">This contact has no conditions.</p>
+                <div id="mi-list-conditions"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mi-submit-bar">
+          <label>
+            <input id="mi-consent" type="checkbox" required />
+            <span>I understand this information is collected securely, encrypted, and used only to prepare my insurance quote. It will not be shared outside what is needed for underwriting.</span>
+          </label>
+          <button id="mi-submit-btn" type="submit">Submit Medical Profile</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Provider modal -->
+  <div id="mi-modal-provider" class="mi-modal-backdrop" role="dialog" aria-modal="true">
+    <div class="mi-modal">
+      <button type="button" class="mi-modal-close" data-close="mi-modal-provider" aria-label="Close">&times;</button>
+      <h3>Search for a Provider</h3>
+      <div class="mi-row">
+        <label for="mi-provider-zip">Zip code</label>
+        <input id="mi-provider-zip" type="text" inputmode="numeric" maxlength="5" placeholder="5 digits" />
+        <p id="mi-provider-zip-err" class="mi-error"></p>
+      </div>
+      <div class="mi-row">
+        <label for="mi-provider-distance">Distance</label>
+        <select id="mi-provider-distance"></select>
+      </div>
+      <div class="mi-row">
+        <label for="mi-provider-search">Search</label>
+        <input id="mi-provider-search" type="text" placeholder="Provider name" />
+      </div>
+      <div id="mi-provider-results" class="mi-search-results"></div>
+      <div class="mi-modal-actions">
+        <button type="button" class="mi-modal-cancel" data-close="mi-modal-provider">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Drug modal -->
+  <div id="mi-modal-drug" class="mi-modal-backdrop" role="dialog" aria-modal="true">
+    <div class="mi-modal">
+      <button type="button" class="mi-modal-close" data-close="mi-modal-drug" aria-label="Close">&times;</button>
+      <h3>Add Prescription</h3>
+      <div id="mi-drug-step1">
+        <div class="mi-row">
+          <label for="mi-drug-search">Search for a prescription</label>
+          <input id="mi-drug-search" type="text" autocomplete="off" />
+        </div>
+        <div id="mi-drug-results" class="mi-search-results"></div>
+      </div>
+      <div id="mi-drug-step2" class="mi-hidden">
+        <p><strong id="mi-drug-selected-label"></strong></p>
+        <div class="mi-row">
+          <label for="mi-drug-dosage">Dosage</label>
+          <select id="mi-drug-dosage"></select>
+        </div>
+        <div class="mi-row">
+          <label for="mi-drug-qty">Quantity</label>
+          <input id="mi-drug-qty" type="number" min="1" value="30" />
+        </div>
+        <div class="mi-row">
+          <label for="mi-drug-frequency">Frequency</label>
+          <select id="mi-drug-frequency"></select>
+        </div>
+        <div class="mi-modal-actions">
+          <button type="button" class="mi-modal-cancel" data-close="mi-modal-drug">Cancel</button>
+          <button type="button" id="mi-drug-add" class="primary">Add Prescription</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pharmacy modal -->
+  <div id="mi-modal-pharmacy" class="mi-modal-backdrop" role="dialog" aria-modal="true">
+    <div class="mi-modal">
+      <button type="button" class="mi-modal-close" data-close="mi-modal-pharmacy" aria-label="Close">&times;</button>
+      <h3>Search for a Pharmacy</h3>
+      <div class="mi-toggle" style="margin-bottom:12px">
+        <button type="button" id="mi-pharm-tab-physical" class="active">Physical</button>
+        <button type="button" id="mi-pharm-tab-online">Online</button>
+      </div>
+      <div class="mi-row">
+        <label for="mi-pharmacy-zip">Zip code</label>
+        <input id="mi-pharmacy-zip" type="text" inputmode="numeric" maxlength="5" />
+        <p id="mi-pharmacy-zip-err" class="mi-error"></p>
+      </div>
+      <div class="mi-row">
+        <label for="mi-pharmacy-distance">Distance</label>
+        <select id="mi-pharmacy-distance"></select>
+      </div>
+      <div class="mi-row">
+        <label for="mi-pharmacy-name">Pharmacy name</label>
+        <input id="mi-pharmacy-name" type="text" />
+      </div>
+      <div id="mi-pharmacy-results" class="mi-search-results"></div>
+      <div class="mi-modal-actions">
+        <button type="button" class="mi-modal-cancel" data-close="mi-modal-pharmacy">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Condition modal -->
+  <div id="mi-modal-condition" class="mi-modal-backdrop" role="dialog" aria-modal="true">
+    <div class="mi-modal">
+      <button type="button" class="mi-modal-close" data-close="mi-modal-condition" aria-label="Close">&times;</button>
+      <h3>Add a Condition</h3>
+      <div class="mi-row">
+        <label for="mi-condition-search">Search for a condition</label>
+        <input id="mi-condition-search" type="text" autocomplete="off" />
+      </div>
+      <p id="mi-condition-count" class="mi-readonly"></p>
+      <div id="mi-condition-results"></div>
+      <div class="mi-modal-actions">
+        <button type="button" class="mi-modal-cancel" data-close="mi-modal-condition">Cancel</button>
+        <button type="button" id="mi-condition-next" class="primary">Next</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/medical-intake.js" defer></script>
+</body>
+</html>
