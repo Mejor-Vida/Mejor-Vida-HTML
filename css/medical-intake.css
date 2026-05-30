@@ -10,8 +10,8 @@
   --mi-gold-hover: #f0b040;
 }
 * { box-sizing: border-box; }
-html.lang-es [data-lang="en"] { display: none !important; }
-html.lang-en [data-lang="es"] { display: none !important; }
+html.lang-es .mvi-medical-intake-page [data-lang="en"] { display: none !important; }
+html.lang-en .mvi-medical-intake-page [data-lang="es"] { display: none !important; }
 body.mvi-medical-intake-page {
   margin: 0;
   font-family: "Inter", system-ui, -apple-system, sans-serif;

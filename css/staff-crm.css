@@ -244,6 +244,11 @@ body.crm-body {
   color: var(--crm-header-bg);
 }
 
+/* medical-intake.css also hides [data-lang]; keep CRM toggle buttons visible */
+.crm-lang-toggle .lang-opt[data-lang] {
+  display: inline-block !important;
+}
+
 .crm-header-actions {
   display: flex;
   align-items: center;
