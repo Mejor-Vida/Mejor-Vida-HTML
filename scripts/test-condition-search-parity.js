@@ -95,6 +95,40 @@ const SEMANTIC_FALLBACK_CASES = [
   },
 ];
 
+/** Spanish queries resolve to English search terms */
+const SPANISH_CASES = [
+  {
+    query: "hueso",
+    countMin: 2,
+    mustIncludeTop5: ["bone", "fracture"],
+  },
+  {
+    query: "diabetes",
+    countMin: 5,
+    mustIncludeTop5: ["diabetes"],
+  },
+  {
+    query: "presión alta",
+    countMin: 3,
+    mustIncludeTop5: ["blood pressure", "hypertension"],
+  },
+  {
+    query: "corazón",
+    countMin: 3,
+    mustIncludeTop5: ["heart"],
+  },
+  {
+    query: "asma",
+    countMin: 3,
+    mustIncludeTop5: ["asthma"],
+  },
+  {
+    query: "hueso roto",
+    countMin: 2,
+    mustIncludeTop5: ["bone", "fracture"],
+  },
+];
+
 /** Common underwriting terms — quality heuristics */
 const QUALITY_CASES = [
   { query: "afib", countMin: 5, mustIncludeTop5: ["atrial fibrillation", "afib"], mustExcludeTop5: ["afibrinogenemia"] },
@@ -210,6 +244,20 @@ async function main() {
 
   console.log("=== Quality heuristics ===\n");
   for (const c of QUALITY_CASES) {
+    const r = await runCase(c);
+    const status = r.ok ? "PASS" : "FAIL";
+    if (r.ok) passed++;
+    else failed++;
+    console.log(`[${status}] "${r.query}" count=${r.result_count}`);
+    console.log(`  top5: ${r.top.join(" | ")}`);
+    r.failures.forEach(function (f) {
+      console.log(`  ✗ ${f}`);
+    });
+    console.log("");
+  }
+
+  console.log("=== Spanish query cases ===\n");
+  for (const c of SPANISH_CASES) {
     const r = await runCase(c);
     const status = r.ok ? "PASS" : "FAIL";
     if (r.ok) passed++;

@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="robots" content="noindex, nofollow" />
-  <title>Medical Questionnaire — Mejor Vida Insurance</title>
+  <title>Medical Intake — Builder Preview (local dev)</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -97,7 +97,7 @@
 
   <div class="mi-wrap">
     <div id="mi-gate" class="mi-gate">
-      <p>Validating your secure link…</p>
+      <p>Loading preview…</p>
     </div>
 
     <div id="mi-landing" class="mi-landing mi-hidden">
@@ -193,7 +193,6 @@
             <button type="button" class="mi-add-btn mi-add-btn--block" data-modal="mi-modal-provider">Add New +</button>
             <p id="mi-empty-providers" class="mi-empty">This contact has no providers.</p>
             <div id="mi-list-providers"></div>
-            <p id="mi-step-err-providers" class="mi-step-error mi-hidden" role="alert"></p>
           </div>
 
           <div class="mi-step mvi-quote-step-card mi-hidden" data-mi-step="prescriptions">
@@ -241,7 +240,6 @@
     </div>
   </div>
 
-  <!-- Provider modal -->
   <div id="mi-modal-provider" class="mi-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="mi-provider-modal-title">
     <div class="mi-modal mi-modal--provider">
       <div class="mi-modal-header">
@@ -284,7 +282,6 @@
     </div>
   </div>
 
-  <!-- Drug modal -->
   <div id="mi-modal-drug" class="mi-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="mi-drug-modal-title">
     <div class="mi-modal mi-modal--drug">
       <div class="mi-modal-header">
@@ -335,7 +332,6 @@
     </div>
   </div>
 
-  <!-- Pharmacy modal -->
   <div id="mi-modal-pharmacy" class="mi-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="mi-pharmacy-modal-title">
     <div class="mi-modal mi-modal--pharmacy">
       <div class="mi-modal-header">
@@ -389,7 +385,6 @@
     </div>
   </div>
 
-  <!-- Condition modal -->
   <div id="mi-modal-condition" class="mi-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="mi-condition-modal-title">
     <div class="mi-modal mi-modal--condition">
       <div class="mi-modal-header">
@@ -429,6 +424,7 @@
     </div>
   </div>
 
+  <script>window.MI_BUILD_PREVIEW = true;</script>
   <script src="/js/condition-search-es.js?v=20260603g" defer></script>
   <script src="/js/medical-intake.js?v=20260603g" defer></script>
 </body>

@@ -50,6 +50,78 @@
       place-items: center;
       padding: 24px;
     }
+    .login-layout {
+      width: 100%;
+      max-width: 980px;
+      display: grid;
+      grid-template-columns: minmax(280px, 420px) 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+    @media (max-width: 820px) {
+      .login-layout { grid-template-columns: 1fr; max-width: 420px; }
+    }
+    .staff-link-directory {
+      max-width: none;
+    }
+    .staff-link-directory h2 {
+      margin: 0 0 4px;
+      font-size: 1.05rem;
+    }
+    .staff-link-directory .sub {
+      margin-bottom: 16px;
+    }
+    .staff-link-group {
+      margin-bottom: 18px;
+    }
+    .staff-link-group:last-child {
+      margin-bottom: 0;
+    }
+    .staff-link-group-title {
+      margin: 0 0 8px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .staff-page-links {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .staff-page-links li {
+      padding: 10px 0;
+      border-top: 1px solid var(--border);
+    }
+    .staff-page-links li:first-child {
+      border-top: 0;
+      padding-top: 0;
+    }
+    .staff-page-links a {
+      color: #9ec4ff;
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .staff-page-links a:hover {
+      color: #fff;
+      text-decoration: underline;
+    }
+    .staff-page-links .link-desc {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 0.84rem;
+      line-height: 1.4;
+      font-weight: 400;
+    }
+    .staff-page-links code {
+      font-size: 0.78rem;
+      color: #c9d7f4;
+      background: rgba(255,255,255,0.06);
+      padding: 1px 5px;
+      border-radius: 4px;
+    }
     .card {
       width: 100%;
       max-width: 420px;
@@ -1853,6 +1925,7 @@
 </head>
 <body>
   <main id="login-screen" class="login-wrap">
+    <div class="login-layout">
     <section class="card">
       <h1>Mejor Vida Insurance</h1>
       <p class="sub">Staff Portal — Internal Use Only</p>
@@ -1885,6 +1958,120 @@
         <div id="reset-error" class="err"></div>
       </form>
     </section>
+
+    <section class="card staff-link-directory" aria-label="Internal page directory">
+      <h2>Internal pages</h2>
+      <p class="sub">Links not on the public site — for staff review and QA.</p>
+
+      <div class="staff-link-group">
+        <p class="staff-link-group-title">Staff portals</p>
+        <ul class="staff-page-links">
+          <li>
+            <a href="/staff/crm.html">New CRM (beta)</a>
+            <span class="link-desc">Client records, pipeline, Connect, and Medical tab with IC-style condition/drug search.</span>
+          </li>
+          <li>
+            <a href="/staff/">Classic staff portal</a>
+            <span class="link-desc">Inbox, compose, OOS referrals, knowledge gaps, and lead tools — sign in above.</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="staff-link-group">
+        <p class="staff-link-group-title">Client flows</p>
+        <ul class="staff-page-links">
+          <li>
+            <a href="/medical-intake-preview.html">Medical intake — builder preview</a>
+            <span class="link-desc"><strong>Start here for local dev.</strong> Full landing + questionnaire flow with no email token. Search works; submit is disabled. Requires <code>npm run dev:local</code>.</span>
+          </li>
+          <li>
+            <a href="/medical-intake.html">Medical intake — production page</a>
+            <span class="link-desc">What clients see from the email link. Requires a valid <code>?t=</code> token on live; on localhost also opens without a token.</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="staff-link-group">
+        <p class="staff-link-group-title">Email &amp; message previews</p>
+        <ul class="staff-page-links">
+          <li>
+            <a href="/email-previews/post-quote-email-en.html">Post-quote email (English)</a>
+            <span class="link-desc">Static preview of the quote follow-up email layout.</span>
+          </li>
+          <li>
+            <a href="/email-previews/post-quote-email-es.html">Post-quote email (Spanish)</a>
+            <span class="link-desc">Spanish version of the post-quote email preview.</span>
+          </li>
+          <li>
+            <a href="/email-previews/nurture-wa-sms-review.html">Nurture WhatsApp / SMS review</a>
+            <span class="link-desc">Review nurture sequence message copy and formatting.</span>
+          </li>
+          <li>
+            <a href="/facebook-posting/sms-messages-preview.html">SMS messages preview</a>
+            <span class="link-desc">Preview SMS copy used in social / nurture workflows.</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="staff-link-group">
+        <p class="staff-link-group-title">Landing &amp; ad pages</p>
+        <ul class="staff-page-links">
+          <li>
+            <a href="/gastos-finales-ads/">Gastos finales ads landing</a>
+            <span class="link-desc">Paid-ad landing page (not linked from public homepage).</span>
+          </li>
+          <li>
+            <a href="/preview/quote-results-preview.html">Quote results preview</a>
+            <span class="link-desc">Design preview for quote results UI.</span>
+          </li>
+          <li>
+            <a href="/preview/landing-gastos-finales-ads-mobile.html">Gastos finales ads — mobile preview</a>
+            <span class="link-desc">Mobile layout check for the ads landing page.</span>
+          </li>
+          <li>
+            <a href="/preview/landing-flow-goals.html">Landing flow goals</a>
+            <span class="link-desc">Internal notes and goals for landing-page experiments.</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="staff-link-group">
+        <p class="staff-link-group-title">Social &amp; content QA</p>
+        <ul class="staff-page-links">
+          <li>
+            <a href="/FB/review-facebook-post.html">Facebook post review</a>
+            <span class="link-desc">Review weekly Facebook post package before publishing.</span>
+          </li>
+          <li>
+            <a href="/facebook-posting/fb-preview-2026-05-24-weekly.html">FB preview — weekly May 24</a>
+            <span class="link-desc">Latest weekly insurance update Facebook creative preview.</span>
+          </li>
+          <li>
+            <a href="/facebook-posting/fb-preview-2026-05-17-annuities.html">FB preview — annuities May 17</a>
+            <span class="link-desc">Facebook post preview for annuities content.</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="staff-link-group">
+        <p class="staff-link-group-title">Assets &amp; tools</p>
+        <ul class="staff-page-links">
+          <li>
+            <a href="/website-avatar/asset-qa.html">Julie chat avatar — asset QA</a>
+            <span class="link-desc">Verify chatbot avatar sprites and animation frames.</span>
+          </li>
+          <li>
+            <a href="/business_card.html">Julie business card</a>
+            <span class="link-desc">Printable / shareable digital business card.</span>
+          </li>
+          <li>
+            <a href="/window_flyer.html">Window flyer</a>
+            <span class="link-desc">Office window flyer layout for Mejor Vida.</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+    </div>
   </main>
 
   <main id="portal" class="portal hidden" aria-hidden="true">

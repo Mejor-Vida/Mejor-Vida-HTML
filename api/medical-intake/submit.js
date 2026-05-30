@@ -44,6 +44,9 @@ module.exports = async function handler(req, res) {
   try {
     const gate = await requireValidIntakeToken(req);
     if (!gate.ok) return json(res, gate.status, { ok: false, error: gate.error });
+    if (gate.devPreview) {
+      return json(res, 403, { ok: false, error: "dev_preview_submit_disabled" });
+    }
 
     const { cfg, tokenRow } = gate;
     const intakePayload = {

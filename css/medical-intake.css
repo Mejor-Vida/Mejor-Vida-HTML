@@ -1,31 +1,422 @@
-/* Private medical intake — Integrity-style layout */
+/* Medical intake — aligned with MVI quote wizard UX */
 :root {
-  --mi-blue: #1a4d8c;
-  --mi-blue-light: #e8f0fa;
+  --mi-blue: #0d47a1;
+  --mi-blue-light: #eff7fc;
   --mi-border: #d0dae8;
-  --mi-text: #1a2332;
+  --mi-text: #1f2937;
   --mi-muted: #5a6578;
-  --mi-radius: 10px;
+  --mi-radius: 12px;
+  --mi-gold: #fec963;
+  --mi-gold-hover: #f0b040;
 }
 * { box-sizing: border-box; }
-body {
+html.lang-es [data-lang="en"] { display: none !important; }
+html.lang-en [data-lang="es"] { display: none !important; }
+body.mvi-medical-intake-page {
   margin: 0;
-  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
-  background: #f4f7fb;
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  background: linear-gradient(180deg, #eff7fc 0%, #cfe6f7 100%);
   color: var(--mi-text);
   line-height: 1.45;
+  min-height: 100vh;
+}
+.mi-header-sticky {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: #fff;
+  border-bottom: 1px solid var(--mi-border);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+}
+.mi-top-border {
+  height: 4px;
+  background: var(--mi-gold);
 }
 .mi-header {
   background: #fff;
-  border-bottom: 1px solid var(--mi-border);
-  padding: 16px 24px;
+  padding: 10px 20px 10px 6px;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
+  justify-content: space-between;
   gap: 16px;
 }
-.mi-header img { height: 48px; width: auto; }
-.mi-header h1 { margin: 0; font-size: 1.15rem; font-weight: 600; }
-.mi-wrap { max-width: 1100px; margin: 0 auto; padding: 24px 16px 48px; }
+.mi-header-logo-link {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 96px;
+  overflow: hidden;
+  flex-shrink: 0;
+  line-height: 0;
+  margin-left: -2px;
+}
+.mi-header-logo-link img {
+  height: 208px;
+  width: auto;
+  max-width: none;
+  object-fit: contain;
+  object-position: left center;
+  display: block;
+  transform: translate(-6px, 8px);
+}
+.mi-header-center {
+  flex: 1;
+  min-width: 0;
+  text-align: center;
+  align-self: center;
+  padding: 0 0.75rem;
+}
+.mi-header-title {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.45rem, 3.2vw, 2rem);
+  font-weight: 700;
+  line-height: 1.15;
+  color: #0d47a1;
+}
+.mi-header-subtitle {
+  margin: 0.3rem 0 0;
+  font-size: clamp(0.88rem, 1.9vw, 1rem);
+  font-weight: 500;
+  line-height: 1.35;
+  color: var(--mi-muted);
+}
+.mi-header-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.5rem;
+  margin-left: auto;
+  flex-shrink: 0;
+  padding-top: 0.75rem;
+}
+.mi-help {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #1e3329;
+  text-decoration: none;
+  white-space: nowrap;
+  text-align: right;
+}
+.mi-help:hover {
+  color: var(--mi-blue);
+}
+.mi-help-phone {
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  text-transform: none;
+}
+.mi-header-wa {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: #25d366;
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.875rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  white-space: nowrap;
+  text-decoration: none;
+  transition: background 0.15s ease;
+}
+.mi-header-wa:hover {
+  background: #1da851;
+  color: #fff;
+}
+@media (max-width: 720px) {
+  .mi-header {
+    flex-wrap: wrap;
+    padding: 8px 12px 8px 4px;
+    gap: 10px;
+  }
+  .mi-header-center {
+    order: 3;
+    flex: 1 1 100%;
+    padding: 0.15rem 0 0;
+  }
+  .mi-header-logo-link {
+    height: 72px;
+    margin-left: 0;
+  }
+  .mi-header-logo-link img {
+    height: 156px;
+    transform: translate(-4px, 6px);
+  }
+  .mi-header-actions {
+    padding-top: 0.35rem;
+    gap: 0.4rem;
+  }
+  .mi-help {
+    font-size: 0.65rem;
+  }
+}
+.mi-lang-toggle {
+  display: inline-flex;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #f8fafc;
+}
+.mi-lang-toggle .mi-lang-btn {
+  border: none;
+  background: transparent;
+  color: #1a365d;
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 8px 14px;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+.mi-lang-toggle .mi-lang-btn.active {
+  background: #0d47a1 !important;
+  color: #fff !important;
+}
+.mi-progress-wrap {
+  max-width: 52rem;
+  margin: 0 auto;
+  padding: 12px 16px 0;
+}
+.mi-progress-wrap .mvi-quote-macro-stepper { margin-bottom: 0.65rem; }
+.mi-progress-wrap .mvi-quote-progress-strip { margin-bottom: 0.35rem; }
+#mi-progress-strip.is-empty { display: none; }
+.mvi-medical-intake-page .mvi-quote-summary-seg {
+  display: none !important;
+}
+.mvi-medical-intake-page #mi-summary-bar.mvi-quote-summary-bar {
+  min-height: 0.75rem;
+  font-size: 0;
+}
+.mi-wrap { max-width: 46rem; margin: 0 auto; padding: 12px 16px 40px; }
+.mi-wizard-wrap {
+  max-width: 46rem;
+  margin: 0 auto;
+}
+.mi-step.mvi-quote-step-card {
+  margin-bottom: 0;
+}
+.mi-step.mi-hidden {
+  display: none !important;
+}
+.mi-step-field {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+.mi-step-hint {
+  margin: 0;
+  text-align: center;
+  font-size: 0.95rem;
+  color: var(--mi-muted);
+}
+.mi-step-error {
+  margin: 1rem 0 0;
+  text-align: center;
+  font-size: 0.88rem;
+  color: #b42318;
+  font-weight: 500;
+}
+.mvi-quote-step-card .mi-step-input {
+  font-size: clamp(1.05rem, 2.4vw, 1.2rem);
+  padding: 0.65rem 0.75rem;
+  border: 1px solid var(--mi-border);
+  border-radius: 8px;
+  background: #fff;
+}
+.mvi-quote-step-card .mi-step-input--date {
+  max-width: 16rem;
+  width: 100%;
+}
+.mvi-quote-step-card .mi-step-input--short {
+  max-width: 6rem;
+  text-align: center;
+}
+.mvi-quote-step-card .mi-inline--center {
+  gap: 0.75rem 1.25rem;
+  width: 100%;
+  max-width: 24rem;
+}
+.mvi-quote-step-card .mi-inline--center #mi-height-ft,
+.mvi-quote-step-card .mi-inline--center #mi-height-in {
+  flex: 1 1 7rem;
+  width: 7rem;
+  min-width: 7rem;
+  max-width: none;
+  padding: 0.9rem 1rem;
+  font-size: clamp(1.35rem, 3.5vw, 1.65rem);
+  font-weight: 600;
+  text-align: center;
+  box-sizing: border-box;
+  line-height: 1.2;
+}
+.mvi-quote-step-card #mi-weight {
+  width: 7rem;
+  min-width: 7rem;
+  max-width: none;
+  padding: 0.9rem 1rem;
+  font-size: clamp(1.35rem, 3.5vw, 1.65rem);
+  font-weight: 600;
+  text-align: center;
+  box-sizing: border-box;
+  line-height: 1.2;
+  flex: none;
+}
+.mvi-quote-step-card .mi-inline--center > span {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--mi-muted);
+  flex-shrink: 0;
+}
+.mvi-quote-step-card .mi-count {
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--mi-muted);
+}
+.mi-consent-label {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  font-size: 0.92rem;
+  line-height: 1.45;
+  color: var(--mi-text);
+  cursor: pointer;
+  margin-bottom: 0.5rem;
+}
+.mi-consent-label input { margin-top: 3px; flex-shrink: 0; }
+.mi-consent-label a {
+  color: var(--mi-blue);
+  font-weight: 600;
+  text-decoration: underline;
+}
+.mi-consent-note {
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: var(--mi-muted);
+  margin: 0 0 1.25rem;
+}
+.mi-review-summary {
+  margin: 0 0 1.5rem;
+}
+.mi-review-section-title {
+  margin: 1.25rem 0 0.75rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--mi-muted);
+}
+.mi-review-section-title:first-child {
+  margin-top: 0;
+}
+.mi-review-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--mi-border);
+}
+.mi-review-row:last-child {
+  border-bottom: none;
+}
+.mi-review-row-main {
+  flex: 1;
+  min-width: 0;
+}
+.mi-review-label {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--mi-muted);
+  margin-bottom: 4px;
+}
+.mi-review-value {
+  display: block;
+  font-size: 0.98rem;
+  font-weight: 500;
+  color: var(--mi-text);
+  line-height: 1.45;
+  word-break: break-word;
+}
+.mi-review-value-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.mi-review-value-list li {
+  font-size: 0.98rem;
+  font-weight: 500;
+  color: var(--mi-text);
+  line-height: 1.45;
+  padding: 2px 0;
+  word-break: break-word;
+}
+.mi-review-edit {
+  flex-shrink: 0;
+  background: none;
+  border: none;
+  color: var(--mi-blue);
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 2px 4px;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.mi-review-edit:hover {
+  color: #0a3d8f;
+}
+.mi-review-row--block .mi-review-edit {
+  margin-top: 2px;
+}
+.mvi-quote-step-card .mvi-quote-submit-cta {
+  width: 100%;
+}
+.mi-add-btn.mi-add-btn--block {
+  display: block;
+  width: fit-content;
+  margin: 0 auto 0.75rem;
+  padding: 0;
+  min-height: 0;
+  border: none;
+  border-radius: 0;
+  background: none;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--mi-blue);
+  cursor: pointer;
+  line-height: 1.3;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.mi-add-btn.mi-add-btn--block:hover {
+  background: none;
+  color: #1565c0;
+}
+.mi-inline--center { justify-content: center; }
+.mi-wizard-wrap #mi-wizard-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 0.75rem;
+  padding: 0 0.25rem;
+  min-height: 2rem;
+}
+.mi-wizard-wrap #mi-wizard-back {
+  flex: 0 0 auto;
+}
+.mi-wizard-wrap #mi-wizard-next {
+  flex: 0 0 auto;
+  margin-left: auto;
+}
+.mi-wizard-wrap #mi-wizard-back[hidden] + #mi-wizard-next {
+  margin-left: auto;
+}
 .mi-grid {
   display: grid;
   grid-template-columns: 320px 1fr;
@@ -91,7 +482,7 @@ body {
 .mi-section-body { padding: 12px 16px 16px; display: none; }
 .mi-section.open .mi-section-body { display: block; }
 .mi-empty { color: var(--mi-muted); font-size: 0.9rem; margin: 0 0 8px; }
-.mi-add-btn {
+.mi-add-btn:not(.mi-add-btn--block) {
   background: none;
   border: none;
   color: var(--mi-blue);
@@ -104,10 +495,39 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  gap: 8px;
-  padding: 10px 0;
+  gap: 12px;
+  padding: 12px 0;
   border-bottom: 1px solid #eef2f7;
   font-size: 0.9rem;
+}
+.mvi-quote-step-card .mi-list-item {
+  font-size: 1.08rem;
+  line-height: 1.45;
+  padding: 14px 0;
+  align-items: center;
+}
+.mvi-quote-step-card .mi-list-item-label {
+  flex: 1 1 auto;
+  min-width: 0;
+  white-space: nowrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+}
+.mvi-quote-step-card .mi-remove {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+  border-radius: 8px;
+  font-size: 1.05rem;
+  line-height: 1;
+}
+.mvi-quote-step-card .mi-remove:hover {
+  background: rgba(180, 35, 24, 0.08);
 }
 .mi-list-item:last-child { border-bottom: none; }
 .mi-remove {
@@ -116,6 +536,10 @@ body {
   color: #b42318;
   cursor: pointer;
   font-size: 0.8rem;
+}
+.mi-remove:focus-visible {
+  outline: 2px solid #b42318;
+  outline-offset: 2px;
 }
 .mi-modal-backdrop {
   position: fixed;
@@ -187,8 +611,223 @@ body {
 }
 .mi-search-results button:hover { background: var(--mi-blue-light); }
 
-/* Provider search — IC-style result cards */
-#mi-modal-provider .mi-modal { max-width: 640px; }
+/* Provider + prescription search — IC-style modals */
+#mi-modal-provider .mi-modal--provider,
+#mi-modal-drug .mi-modal--drug,
+#mi-modal-pharmacy .mi-modal--pharmacy,
+#mi-modal-condition .mi-modal--condition {
+  max-width: 640px;
+  width: 100%;
+  max-height: min(calc(90vh - 32px), 820px);
+  padding: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+#mi-modal-provider .mi-modal-header,
+#mi-modal-drug .mi-modal-header,
+#mi-modal-pharmacy .mi-modal-header,
+#mi-modal-condition .mi-modal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 24px 26px 0;
+  flex-shrink: 0;
+}
+#mi-modal-provider .mi-modal-header h3,
+#mi-modal-drug .mi-modal-header h3,
+#mi-modal-pharmacy .mi-modal-header h3,
+#mi-modal-condition .mi-modal-header h3 {
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #1a3d6e;
+  line-height: 1.25;
+}
+#mi-modal-provider .mi-modal-close,
+#mi-modal-drug .mi-modal-close,
+#mi-modal-pharmacy .mi-modal-close,
+#mi-modal-condition .mi-modal-close {
+  position: static;
+  flex-shrink: 0;
+  width: 2rem;
+  height: 2rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--mi-border);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--mi-muted);
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+#mi-modal-provider .mi-modal-body,
+#mi-modal-drug .mi-modal-body,
+#mi-modal-pharmacy .mi-modal-body,
+#mi-modal-condition .mi-modal-body {
+  padding: 10px 26px 18px;
+  background: #f4f6f9;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+#mi-modal-provider .mi-modal-subtitle,
+#mi-modal-drug .mi-modal-subtitle,
+#mi-modal-pharmacy .mi-modal-subtitle {
+  margin: 0 0 14px;
+  font-size: 0.98rem;
+  font-weight: 600;
+  color: #1a3d6e;
+}
+#mi-modal-provider .mi-provider-filters {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+#mi-modal-provider .mi-row,
+#mi-modal-drug .mi-row,
+#mi-modal-pharmacy .mi-row,
+#mi-modal-condition .mi-row {
+  margin: 0;
+}
+#mi-modal-provider .mi-row label,
+#mi-modal-drug .mi-row label,
+#mi-modal-pharmacy .mi-row label,
+#mi-modal-condition .mi-row label {
+  display: block;
+  font-size: 0.92rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--mi-text);
+}
+#mi-modal-provider input[type="text"],
+#mi-modal-provider input[type="search"],
+#mi-modal-provider select,
+#mi-modal-drug input[type="text"],
+#mi-modal-drug input[type="search"],
+#mi-modal-drug input[type="number"],
+#mi-modal-drug select,
+#mi-modal-pharmacy input[type="text"],
+#mi-modal-pharmacy input[type="search"],
+#mi-modal-pharmacy select,
+#mi-modal-condition input[type="text"],
+#mi-modal-condition input[type="search"],
+#mi-modal-condition select {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px 14px;
+  font-size: 1.05rem;
+  line-height: 1.35;
+  border: 1px solid var(--mi-border);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--mi-text);
+  min-height: 48px;
+}
+#mi-modal-provider input:focus,
+#mi-modal-provider select:focus,
+#mi-modal-drug input:focus,
+#mi-modal-drug select:focus,
+#mi-modal-pharmacy input:focus,
+#mi-modal-pharmacy select:focus,
+#mi-modal-condition input:focus,
+#mi-modal-condition select:focus {
+  outline: none;
+  border-color: var(--mi-blue);
+  box-shadow: 0 0 0 3px rgba(13, 71, 161, 0.12);
+}
+#mi-modal-provider .mi-provider-search-row,
+#mi-modal-drug .mi-drug-search-row {
+  margin-bottom: 12px;
+}
+#mi-modal-provider .mi-provider-search-wrap,
+#mi-modal-drug .mi-drug-search-wrap {
+  position: relative;
+}
+#mi-modal-provider .mi-provider-search-icon,
+#mi-modal-drug .mi-drug-search-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--mi-muted);
+  font-size: 0.95rem;
+  pointer-events: none;
+}
+#mi-modal-provider .mi-provider-search-wrap input,
+#mi-modal-drug .mi-drug-search-wrap input {
+  padding-left: 2.5rem;
+}
+#mi-modal-provider .mi-sr-only,
+#mi-modal-drug .mi-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+#mi-modal-provider .mi-modal-footer,
+#mi-modal-drug .mi-modal-footer,
+#mi-modal-pharmacy .mi-modal-footer,
+#mi-modal-condition .mi-modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 26px 24px;
+  background: #fff;
+  flex-shrink: 0;
+  margin-top: 0;
+  border-top: 1px solid var(--mi-border);
+  box-shadow: 0 -4px 16px rgba(15, 23, 42, 0.06);
+}
+#mi-modal-pharmacy .mi-modal-footer .primary,
+#mi-modal-drug .mi-modal-footer .primary {
+  margin-left: auto;
+  min-width: 180px;
+}
+#mi-modal-provider .mi-modal-cancel,
+#mi-modal-drug .mi-modal-cancel,
+#mi-modal-pharmacy .mi-modal-cancel,
+#mi-modal-condition .mi-modal-cancel {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--mi-blue);
+  font-size: 0.98rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+#mi-modal-provider .mi-modal-footer .primary,
+#mi-modal-drug .mi-modal-footer .primary,
+#mi-modal-pharmacy .mi-modal-footer .primary,
+#mi-modal-condition .mi-modal-footer .primary {
+  border-radius: 999px;
+  padding: 12px 22px;
+  font-size: 1rem;
+  font-weight: 600;
+  min-height: 44px;
+  background: var(--mi-blue);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+#mi-modal-provider .mi-modal-footer .primary[disabled],
+#mi-modal-drug .mi-modal-footer .primary[disabled],
+#mi-modal-pharmacy .mi-modal-footer .primary[disabled],
+#mi-modal-condition .mi-modal-footer .primary[disabled] {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
 .mi-provider-count {
   font-size: 0.92rem;
   font-weight: 600;
@@ -196,12 +835,370 @@ body {
   min-height: 1.2rem;
 }
 .mi-provider-results {
+  min-height: 220px;
   max-height: 340px;
   overflow: auto;
   border: 1px solid var(--mi-border);
   border-radius: 8px;
-  background: #fafbfc;
+  background: #eef1f5;
   padding: 8px;
+}
+.mi-provider-results-hint {
+  min-height: 204px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 24px 16px;
+  text-align: center;
+  font-size: 0.98rem;
+  color: var(--mi-muted);
+  line-height: 1.45;
+}
+.mi-drug-count {
+  font-size: 0.92rem;
+  font-weight: 600;
+  margin: 4px 0 10px;
+  min-height: 1.2rem;
+  color: var(--mi-text);
+}
+.mi-drug-results {
+  min-height: 220px;
+  max-height: 340px;
+  overflow: auto;
+  border: 1px solid var(--mi-border);
+  border-radius: 8px;
+  background: #eef1f5;
+  padding: 8px;
+}
+.mi-drug-results-hint {
+  min-height: 204px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 24px 16px;
+  text-align: center;
+  font-size: 0.98rem;
+  color: var(--mi-muted);
+  line-height: 1.45;
+}
+.mi-drug-option {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 12px 14px;
+  margin-bottom: 8px;
+  border: 1px solid var(--mi-border);
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+}
+.mi-drug-option:last-child { margin-bottom: 0; }
+.mi-drug-option:hover { background: var(--mi-blue-light); }
+.mi-drug-option-name {
+  display: block;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1a3d6e;
+  line-height: 1.35;
+}
+.mi-drug-option-type {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.82rem;
+  color: var(--mi-muted);
+  line-height: 1.35;
+}
+#mi-modal-pharmacy .mi-pharmacy-filters {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.4fr);
+  gap: 14px;
+  margin-bottom: 14px;
+}
+#mi-modal-pharmacy .mi-pharmacy-search-row {
+  margin-bottom: 12px;
+}
+#mi-modal-pharmacy .mi-pharmacy-search-row > label {
+  display: block;
+  font-size: 0.92rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--mi-text);
+}
+#mi-modal-pharmacy .mi-pharmacy-search-wrap {
+  position: relative;
+}
+#mi-modal-pharmacy .mi-pharmacy-search-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--mi-muted);
+  font-size: 0.95rem;
+  pointer-events: none;
+}
+#mi-modal-pharmacy .mi-pharmacy-search-wrap input {
+  padding-left: 2.5rem;
+}
+#mi-modal-pharmacy .mi-pharmacy-tabs {
+  margin: 4px 0 8px;
+}
+.mi-pharmacy-count {
+  font-size: 0.92rem;
+  font-weight: 600;
+  margin: 4px 0 10px;
+  min-height: 1.2rem;
+  color: var(--mi-text);
+}
+.mi-pharmacy-results {
+  min-height: 140px;
+  max-height: 260px;
+  overflow: auto;
+  border: 1px solid var(--mi-border);
+  border-radius: 8px;
+  background: #eef1f5;
+  padding: 8px;
+}
+.mi-pharmacy-results-hint {
+  min-height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 24px 16px;
+  text-align: center;
+  font-size: 0.98rem;
+  color: var(--mi-muted);
+  line-height: 1.45;
+}
+.mi-pharmacy-option {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 12px 14px;
+  margin-bottom: 8px;
+  border: 1px solid var(--mi-border);
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+  font: inherit;
+}
+.mi-pharmacy-option:last-child { margin-bottom: 0; }
+.mi-pharmacy-option:hover { background: var(--mi-blue-light); }
+.mi-pharmacy-option.is-selected {
+  background: #eef3fa;
+  border-color: #c5d4ea;
+  box-shadow: inset 0 0 0 1px #c5d4ea;
+}
+.mi-pharmacy-option-name {
+  display: block;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1a3d6e;
+  line-height: 1.35;
+}
+.mi-pharmacy-option-addr {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.85rem;
+  color: var(--mi-muted);
+  line-height: 1.35;
+}
+.mi-pharmacy-selected {
+  margin-top: 14px;
+  padding: 12px 14px;
+  border: 1px solid var(--mi-border);
+  border-radius: 8px;
+  background: #fff;
+  font-size: 1rem;
+  color: #1a3d6e;
+  line-height: 1.4;
+}
+.mi-pharmacy-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 12px 0 4px;
+  font-size: 0.88rem;
+}
+@media (max-width: 620px) {
+  #mi-modal-pharmacy .mi-pharmacy-filters {
+    grid-template-columns: 1fr;
+  }
+}
+#mi-modal-condition .mi-condition-search-row {
+  margin-bottom: 12px;
+}
+#mi-modal-condition .mi-condition-search-bar {
+  display: flex;
+  align-items: stretch;
+  gap: 10px;
+}
+#mi-modal-condition .mi-condition-search-row > label {
+  display: block;
+  font-size: 0.92rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--mi-text);
+}
+#mi-modal-condition .mi-condition-search-wrap {
+  position: relative;
+  min-width: 0;
+}
+#mi-modal-condition .mi-condition-search-wrap--compact {
+  flex: 1 1 auto;
+  max-width: none;
+  min-width: 0;
+}
+#mi-modal-condition .mi-condition-search-wrap--full {
+  flex: 1 1 auto;
+  max-width: none;
+}
+.mi-condition-translate-btn {
+  flex: 0 0 auto;
+  align-self: center;
+  min-height: 48px;
+  padding: 0 12px;
+  border: 1px solid var(--mi-blue);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--mi-blue);
+  font-size: 0.78rem;
+  font-weight: 600;
+  line-height: 1.2;
+  cursor: pointer;
+  text-align: center;
+  white-space: nowrap;
+}
+.mi-condition-translate-btn:hover {
+  background: var(--mi-blue-light);
+}
+.mi-condition-translated {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 6px 10px;
+  margin-top: 10px;
+  padding: 10px 14px;
+  border: 1px solid #c5d4ea;
+  border-radius: 8px;
+  background: #eef3fa;
+}
+.mi-condition-translated-label {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--mi-muted);
+}
+.mi-condition-translate {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1a3d6e;
+  line-height: 1.3;
+  word-break: break-word;
+}
+@media (max-width: 520px) {
+  #mi-modal-condition .mi-condition-search-bar {
+    flex-direction: column;
+  }
+  #mi-modal-condition .mi-condition-search-wrap--compact {
+    flex: 1 1 auto;
+    max-width: none;
+    width: 100%;
+  }
+  .mi-condition-translate-btn {
+    align-self: stretch;
+  }
+}
+#mi-modal-condition .mi-condition-search-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--mi-muted);
+  font-size: 0.95rem;
+  pointer-events: none;
+}
+#mi-modal-condition .mi-condition-search-wrap input {
+  padding-left: 2.5rem;
+}
+.mi-condition-count {
+  font-size: 0.92rem;
+  font-weight: 600;
+  margin: 4px 0 10px;
+  min-height: 1.2rem;
+  color: var(--mi-text);
+}
+.mi-condition-results {
+  min-height: 220px;
+  max-height: 340px;
+  overflow: auto;
+  border: 1px solid var(--mi-border);
+  border-radius: 8px;
+  background: #eef1f5;
+  padding: 8px;
+}
+.mi-condition-results-hint {
+  min-height: 204px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 24px 16px;
+  text-align: center;
+  font-size: 0.98rem;
+  font-style: italic;
+  color: var(--mi-muted);
+  line-height: 1.45;
+}
+.mi-condition-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px 14px;
+  margin-bottom: 8px;
+  border: 1px solid var(--mi-border);
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+.mi-condition-option:last-child { margin-bottom: 0; }
+.mi-condition-option.is-selected {
+  background: #eef3fa;
+  border-color: #c5d4ea;
+}
+.mi-condition-option input {
+  margin-top: 3px;
+  width: 16px;
+  height: 16px;
+  min-height: 0;
+  flex-shrink: 0;
+}
+.mi-condition-option-name {
+  display: block;
+  font-weight: 700;
+  color: #1a3d6e;
+}
+.mi-condition-option-code {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.85rem;
+  color: var(--mi-muted);
+}
+#mi-modal-drug #mi-drug-step2 .mi-row {
+  margin-top: 14px;
+}
+#mi-modal-drug .mi-drug-selected-card {
+  padding: 12px 14px;
+  border: 1px solid var(--mi-border);
+  border-radius: 8px;
+  background: #fff;
+  font-size: 1rem;
+  color: #1a3d6e;
+  line-height: 1.4;
 }
 .mi-provider-card {
   background: #fff;
@@ -282,6 +1279,14 @@ body {
   cursor: pointer;
 }
 .mi-submit-bar button[type="submit"]:disabled { opacity: 0.5; cursor: not-allowed; }
+.mi-dev-banner {
+  background: #fff8e6;
+  border-bottom: 1px solid #e6c200;
+  color: #5c4a00;
+  font-size: 0.88rem;
+  padding: 10px 24px;
+  text-align: center;
+}
 .mi-gate {
   text-align: center;
   padding: 48px 24px;
@@ -289,12 +1294,12 @@ body {
   border-radius: var(--mi-radius);
   border: 1px solid var(--mi-border);
 }
-.mi-landing { max-width: 640px; margin: 0 auto; }
+.mi-landing { max-width: 820px; margin: 0 auto; }
 .mi-landing-card {
   background: #fff;
   border: 1px solid var(--mi-border);
   border-radius: var(--mi-radius);
-  padding: 32px 28px 28px;
+  padding: 22px 32px 24px;
   box-shadow: 0 4px 24px rgba(26, 77, 140, 0.08);
 }
 .mi-landing-eyebrow {
@@ -306,48 +1311,148 @@ body {
   color: var(--mi-blue);
 }
 .mi-landing-card h2 {
-  margin: 0 0 12px;
-  font-size: 1.65rem;
+  margin: 0 0 10px;
+  font-size: 1.5rem;
   line-height: 1.25;
-  color: var(--mi-text);
+  font-family: Georgia, "Times New Roman", serif;
+  color: #0d47a1;
 }
 .mi-landing-lead {
-  margin: 0 0 20px;
-  font-size: 1.05rem;
-  color: var(--mi-muted);
-  line-height: 1.55;
-}
-.mi-landing-list {
-  margin: 0 0 24px;
-  padding-left: 1.2rem;
-  color: var(--mi-text);
-  line-height: 1.6;
-}
-.mi-landing-list li { margin-bottom: 8px; }
-.mi-landing-meta {
-  background: var(--mi-blue-light);
-  border-radius: 8px;
-  padding: 14px 16px;
-  margin-bottom: 24px;
-  font-size: 0.9rem;
+  margin: 0 0 14px;
+  font-size: 1rem;
   color: var(--mi-muted);
   line-height: 1.5;
 }
+.mi-landing-list {
+  margin: 0 0 16px;
+  padding-left: 1.2rem;
+  color: var(--mi-text);
+  line-height: 1.5;
+}
+.mi-landing-list li { margin-bottom: 6px; }
+.mi-landing-meta {
+  background: var(--mi-blue-light);
+  border-radius: 8px;
+  padding: 12px 14px;
+  margin-bottom: 18px;
+  font-size: 0.88rem;
+  color: var(--mi-muted);
+  line-height: 1.45;
+}
 .mi-landing-meta p { margin: 0 0 8px; }
 .mi-landing-meta p:last-child { margin-bottom: 0; }
+.mi-landing-privacy {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 0 0 8px;
+}
+.mi-landing-privacy p { margin: 0; flex: 1; }
+.mi-privacy-lock {
+  color: #0d47a1;
+  font-size: 1.05rem;
+  line-height: 1.45;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
 .mi-landing-cta {
   display: block;
   width: 100%;
   padding: 14px 20px;
-  border: none;
+  border: 2px solid var(--mi-gold);
   border-radius: 8px;
-  background: var(--mi-blue);
-  color: #fff;
+  background: var(--mi-gold);
+  color: #1a202c;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+.mi-landing-cta:hover {
+  background: var(--mi-gold-hover);
+  border-color: var(--mi-gold-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(254, 201, 99, 0.4);
+}
+.mi-julie-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.25rem;
+  padding: 1rem 1.1rem;
+  border-radius: 4px;
+  background: var(--mi-blue-light);
+  text-align: left;
+}
+.mi-julie-stars {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.85rem;
+  display: flex;
+  gap: 0.1rem;
+  line-height: 1;
+  color: #d4a017;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+}
+.mi-julie-stars span {
+  display: inline-block;
+}
+.mi-julie-photo {
+  flex: 0 0 auto;
+  width: 4.5rem;
+  height: 4.5rem;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center 15%;
+  border: 2px solid #fff;
+  box-shadow: 0 1px 4px rgba(26, 54, 93, 0.12);
+}
+.mi-julie-info {
+  flex: 1;
+  min-width: 0;
+  padding-right: 5.25rem;
+}
+.mi-julie-name {
+  margin: 0 0 0.2rem;
   font-size: 1rem;
   font-weight: 600;
-  cursor: pointer;
+  color: #1a365d;
+  line-height: 1.25;
 }
-.mi-landing-cta:hover { filter: brightness(1.05); }
+.mi-julie-title {
+  margin: 0 0 0.25rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--mi-text);
+  line-height: 1.3;
+}
+.mi-julie-npn {
+  margin: 0 0 0.35rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--mi-blue);
+  line-height: 1.3;
+}
+.mi-julie-langs {
+  margin: 0;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--mi-muted);
+  line-height: 1.3;
+}
+.mi-card h2,
+.mi-section-head {
+  color: #0d47a1;
+}
+.mi-toggle button.active,
+.mi-modal-actions .primary,
+.mi-submit-bar button[type="submit"] {
+  background: #0d47a1;
+  border-color: #0d47a1;
+}
+.mi-add-btn { color: #0d47a1; }
 .mi-hidden { display: none !important; }
 .mi-badge {
   display: inline-block;

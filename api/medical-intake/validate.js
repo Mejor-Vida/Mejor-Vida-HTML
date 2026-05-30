@@ -21,7 +21,7 @@ async function fetchLeadGreeting(cfg, leadId, leadSourceTable) {
     const row = Array.isArray(rows) && rows[0] ? rows[0] : null;
     return {
       first_name: row && row.first_name ? String(row.first_name).trim() : "",
-      language: row && row.lang ? String(row.lang).trim() : "English",
+      language: row && row.lang ? String(row.lang).trim() : "Spanish",
     };
   }
   const nameField = table === "contacts" || table === "manychat_leads" ? "first_name,language,idioma" : "first_name,language";
@@ -29,7 +29,7 @@ async function fetchLeadGreeting(cfg, leadId, leadSourceTable) {
   const row = Array.isArray(rows) && rows[0] ? rows[0] : null;
   return {
     first_name: row && row.first_name ? String(row.first_name).trim() : "",
-    language: row && (row.idioma || row.language) ? String(row.idioma || row.language).trim() : "English",
+    language: row && (row.idioma || row.language) ? String(row.idioma || row.language).trim() : "Spanish",
   };
 }
 
@@ -41,8 +41,18 @@ module.exports = async function handler(req, res) {
   try {
     const gate = await requireValidIntakeToken(req);
     if (!gate.ok) return json(res, gate.status, { ok: false, error: gate.error });
+    if (gate.devPreview) {
+      return json(res, 200, {
+        ok: true,
+        dev_preview: true,
+        lead_id: null,
+        expires_at: null,
+        first_name: "Preview",
+        language: "Spanish",
+      });
+    }
     const cfg = serviceConfig();
-    let greeting = { first_name: "", language: "English" };
+    let greeting = { first_name: "", language: "Spanish" };
     if (cfg) {
       try {
         greeting = await fetchLeadGreeting(cfg, gate.tokenRow.lead_id, gate.tokenRow.lead_source_table);

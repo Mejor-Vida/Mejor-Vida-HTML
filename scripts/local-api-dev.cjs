@@ -204,6 +204,7 @@ server.listen(PORT, () => {
   console.log("────────────────────────────────────────");
   console.log(`Staff portal:     ${base}/staff/`);
   console.log(`Medical intake:   ${base}/medical-intake.html?t=YOUR_TOKEN`);
+  console.log(`Intake builder:   ${base}/medical-intake-preview.html`);
   console.log(`Medical API test: ${base}/api/medical-intake/validate?t=YOUR_TOKEN`);
   console.log(`Site home:        ${base}/`);
   console.log("────────────────────────────────────────");
