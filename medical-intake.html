@@ -4,18 +4,33 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="robots" content="noindex, nofollow" />
-  <title>Medical Profile — Mejor Vida Insurance</title>
+  <title>Medical Questionnaire — Mejor Vida Insurance</title>
   <link rel="stylesheet" href="/css/medical-intake.css" />
 </head>
 <body>
   <header class="mi-header">
     <img src="/img/logo.png" alt="Mejor Vida Insurance" width="120" height="48" />
-    <h1>Medical Profile — secure pre-call intake</h1>
+    <h1 id="mi-header-title">Secure Medical Questionnaire</h1>
   </header>
 
   <div class="mi-wrap">
     <div id="mi-gate" class="mi-gate">
       <p>Validating your secure link…</p>
+    </div>
+
+    <div id="mi-landing" class="mi-landing mi-hidden">
+      <div class="mi-landing-card">
+        <p class="mi-landing-eyebrow" id="mi-landing-eyebrow">Mejor Vida Insurance</p>
+        <h2 id="mi-landing-greeting">Hi there,</h2>
+        <p class="mi-landing-lead" id="mi-landing-lead"></p>
+        <ul class="mi-landing-list" id="mi-landing-list"></ul>
+        <div class="mi-landing-meta">
+          <p id="mi-landing-time"></p>
+          <p id="mi-landing-privacy"></p>
+          <p id="mi-landing-expiry"></p>
+        </div>
+        <button type="button" id="mi-landing-start" class="mi-landing-cta">Begin Medical Questionnaire →</button>
+      </div>
     </div>
 
     <div id="mi-app" class="mi-hidden">
@@ -136,9 +151,12 @@
         <label for="mi-provider-search">Search</label>
         <input id="mi-provider-search" type="text" placeholder="Provider name" />
       </div>
-      <div id="mi-provider-results" class="mi-search-results"></div>
+      <p id="mi-provider-count" class="mi-provider-count"></p>
+      <div id="mi-provider-results" class="mi-provider-results"></div>
+      <div id="mi-provider-pagination" class="mi-provider-pagination"></div>
       <div class="mi-modal-actions">
         <button type="button" class="mi-modal-cancel" data-close="mi-modal-provider">Cancel</button>
+        <button type="button" id="mi-provider-add" class="primary" disabled>Add Provider →</button>
       </div>
     </div>
   </div>

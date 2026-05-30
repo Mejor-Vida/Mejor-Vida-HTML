@@ -17,6 +17,23 @@
       --danger: #ff7b7b;
       --ok: #65d19a;
       --border: rgba(255,255,255,0.12);
+      --staff-select-ring: #f5c542;
+      --staff-select-ring-glow: rgba(245, 197, 66, 0.45);
+    }
+    /* Yellow ring — selected toggle / option buttons across staff portal */
+    .nav-dropdown-btn.active,
+    .nav-dropdown-item.active,
+    .tab-btn.active,
+    .compose-lang button.lang-opt.active,
+    .compose-email-type button.email-type-opt.active,
+    #lead-profile-form .lp-lang-toggle .lang-opt.active,
+    .oos-bucket-bar button.active,
+    .compose-lead-row-wrap.selected .compose-lead-row,
+    .compose-lead-list > .compose-lead-row.active,
+    .q-item.active {
+      outline: 2px solid var(--staff-select-ring);
+      outline-offset: 2px;
+      box-shadow: 0 0 0 1px var(--staff-select-ring-glow);
     }
     * { box-sizing: border-box; }
     body {
@@ -1468,7 +1485,24 @@
       font-weight: 600;
       padding: 8px 14px;
     }
-    .compose-lang button.lang-opt.active { background: #314f8a; border-color: #6f8bc9; }
+    .compose-lang button.lang-opt.active,
+    .compose-email-type button.email-type-opt.active {
+      background: #314f8a;
+      border-color: #6f8bc9;
+    }
+    .compose-email-type button.email-type-opt {
+      background: #253f6f;
+      color: #fff;
+      border: 1px solid var(--border);
+      font-weight: 600;
+      padding: 8px 14px;
+    }
+    .compose-email-type {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
     .inbox-wrap {
       height: 100%;
       display: flex;
@@ -1858,7 +1892,8 @@
       <div class="top-brand-row">
         <div>
           <b>Mejor Vida Insurance — Staff Portal</b>
-          <small>Staff Access Only — Login Required<span id="staff-build-stamp" class="staff-build-stamp" title="If this number is missing after refresh, the page is cached.">· UI 20260503b</span></small>
+          <small>Staff Access Only — Login Required<span id="staff-build-stamp" class="staff-build-stamp" title="If this number is missing after refresh, the page is cached.">· UI 20260503b</span>
+            · <a href="/staff/crm.html" style="color:#9ec4ff;font-weight:600">New CRM (beta)</a></small>
         </div>
         <div id="top-active-lead" class="top-active-lead empty" title="Lead selected across staff tools">No lead selected</div>
         <button id="signout-btn" class="signout" type="button" data-help="Signs you out of the staff portal on this browser.">Sign Out</button>
@@ -2037,11 +2072,27 @@
                       </div>
                     </div>
                     <div class="meta-card" style="grid-column: 1 / -1">
-                      <label for="compose-email-type">Email type</label>
-                      <select id="compose-email-type" data-help="General Issue uses your draft as-is. Medical Information Request sends a secure one-time link to the client medical intake form.">
-                        <option value="general">General Issue</option>
-                        <option value="medical_information_request">Medical Information Request</option>
-                      </select>
+                      <div class="compose-lang compose-email-type" role="group" aria-label="Email type">
+                        <span class="small-note" style="margin:0">Email type</span>
+                        <button
+                          type="button"
+                          class="email-type-opt active"
+                          id="compose-email-type-general"
+                          data-email-type="general"
+                          data-help="Uses your draft as-is for a general client email."
+                        >
+                          General Issue
+                        </button>
+                        <button
+                          type="button"
+                          class="email-type-opt"
+                          id="compose-email-type-medical"
+                          data-email-type="medical_information_request"
+                          data-help="Sends a secure one-time link to the client medical intake form."
+                        >
+                          Medical Information Request
+                        </button>
+                      </div>
                     </div>
                   </div>
                   <label for="compose-issue">Customer issue</label>
@@ -2051,7 +2102,7 @@
                     <span class="field-hint">Facts the model should treat as true when drafting.</span>
                   </div>
                   <textarea id="compose-notes" rows="2" placeholder="Optional context for the draft…"></textarea>
-                  <label>Reply draft</label>
+                  <label id="compose-reply-label" for="compose-reply">Reply draft</label>
                   <textarea id="compose-reply" rows="12" placeholder="Generate or type the message…"></textarea>
                   <div class="actions">
                     <button id="compose-generate-btn" class="secondary" type="button" data-help="Drafts a reply from Customer issue, Notes for AI, lead fields, and Language (English or Spanish).">Generate Draft</button>
@@ -5586,26 +5637,77 @@
           issue: document.getElementById("compose-issue"),
           notes: document.getElementById("compose-notes"),
           reply: document.getElementById("compose-reply"),
-          emailType: document.getElementById("compose-email-type"),
           status: document.getElementById("compose-status"),
         };
       }
 
       function setComposeEmailType(type) {
         composeEmailType = type === "medical_information_request" ? "medical_information_request" : "general";
-        var el = getComposeEls();
-        if (el.emailType) el.emailType.value = composeEmailType;
+        var generalBtn = document.getElementById("compose-email-type-general");
+        var medicalBtn = document.getElementById("compose-email-type-medical");
+        if (generalBtn) generalBtn.classList.toggle("active", composeEmailType === "general");
+        if (medicalBtn) medicalBtn.classList.toggle("active", composeEmailType === "medical_information_request");
+        updateComposeMedicalModeUi();
         if (composeEmailType === "medical_information_request") {
-          if (el.issue && !String(el.issue.value || "").trim()) {
-            el.issue.value = "Medical information request before scheduled call";
-          }
-          if (el.reply) {
-            el.reply.value =
-              composeLang === "Spanish"
-                ? "[El correo se generará automáticamente con enlace seguro al enviar — Medical Information Request]"
-                : "[Email body will be generated with secure link when you send — Medical Information Request]";
-          }
-          if (el.status) el.status.textContent = "Medical request: select a lead, then Send Email (link is created on send).";
+          void refreshMedicalIntakePreview();
+        }
+      }
+
+      function updateComposeMedicalModeUi() {
+        var isMedical = composeEmailType === "medical_information_request";
+        var el = getComposeEls();
+        var genBtn = document.getElementById("compose-generate-btn");
+        var replyLabel = document.getElementById("compose-reply-label");
+        var issueLabel = document.querySelector('label[for="compose-issue"]');
+        var notesWrap = document.querySelector('label[for="compose-notes"]');
+        if (notesWrap && notesWrap.closest(".label-with-hint")) notesWrap = notesWrap.closest(".label-with-hint");
+        if (genBtn) genBtn.style.display = isMedical ? "none" : "";
+        if (el.reply) {
+          el.reply.readOnly = isMedical;
+          el.reply.placeholder = isMedical
+            ? "Loading medical questionnaire email preview…"
+            : "Generate or type the message…";
+        }
+        if (replyLabel) {
+          replyLabel.textContent = isMedical ? "Email preview (fixed template — secure link added on send)" : "Reply draft";
+        }
+        if (issueLabel) issueLabel.style.display = isMedical ? "none" : "";
+        if (el.issue) {
+          el.issue.style.display = isMedical ? "none" : "";
+          if (isMedical) el.issue.value = "";
+        }
+        if (notesWrap) notesWrap.style.display = isMedical ? "none" : "";
+        if (el.notes) {
+          el.notes.style.display = isMedical ? "none" : "";
+          if (isMedical) el.notes.value = "";
+        }
+        if (!isMedical && el.status && /^Ready to send\. Subject:/.test(String(el.status.textContent || ""))) {
+          el.status.textContent = "";
+        }
+      }
+
+      async function refreshMedicalIntakePreview() {
+        if (composeEmailType !== "medical_information_request") return;
+        var el = getComposeEls();
+        if (!el.reply) return;
+        var fn = el.firstName ? String(el.firstName.value || "").trim() : "";
+        if (!fn) {
+          var lead = getSelectedLeadFromList();
+          if (lead && lead.first_name) fn = String(lead.first_name).trim();
+          else if (lead && lead.display_name) fn = String(lead.display_name).split(/\s+/)[0] || "";
+        }
+        el.status.textContent = "Loading email preview…";
+        el.reply.value = "";
+        try {
+          var data = await authedApi("/api/staff/medical-intake-email-preview", {
+            language: composeLang,
+            firstName: fn || "there",
+          });
+          el.reply.value = (data && data.body) || "";
+          el.status.textContent =
+            "Medical request ready — click Send Email. Subject: " + ((data && data.subject) || "(preview)");
+        } catch (e) {
+          el.status.textContent = "Could not load medical email preview.";
         }
       }
 
@@ -5706,6 +5808,7 @@
         updateTopActiveLeadDisplay();
         if (paneLeadProfile && paneLeadProfile.classList.contains("active")) void loadLeadProfileDetail();
         if (paneProductSelector && paneProductSelector.classList.contains("active")) void loadProductSelectorSession();
+        if (composeEmailType === "medical_information_request") void refreshMedicalIntakePreview();
       }
 
       function setComposeLanguage(lang) {
@@ -5714,6 +5817,7 @@
         var es = document.getElementById("compose-lang-es");
         if (en) en.classList.toggle("active", composeLang === "English");
         if (es) es.classList.toggle("active", composeLang === "Spanish");
+        if (composeEmailType === "medical_information_request") void refreshMedicalIntakePreview();
       }
 
       function leadMatchesQuery(lead, q) {
@@ -8410,6 +8514,10 @@
       }
 
       async function onComposeGenerate() {
+        if (composeEmailType === "medical_information_request") {
+          await refreshMedicalIntakePreview();
+          return;
+        }
         var el = getComposeEls();
         var issue = String(el.issue.value || "").trim();
         var notes = String(el.notes.value || "").trim();
@@ -8608,10 +8716,16 @@
         document.getElementById("compose-generate-btn").addEventListener("click", onComposeGenerate);
         document.getElementById("compose-send-btn").addEventListener("click", onComposeSend);
         document.getElementById("compose-save-btn").addEventListener("click", onComposeSave);
-        var emailTypeSel = document.getElementById("compose-email-type");
-        if (emailTypeSel) {
-          emailTypeSel.addEventListener("change", function () {
-            setComposeEmailType(emailTypeSel.value);
+        var emailTypeGeneral = document.getElementById("compose-email-type-general");
+        var emailTypeMedical = document.getElementById("compose-email-type-medical");
+        if (emailTypeGeneral) {
+          emailTypeGeneral.addEventListener("click", function () {
+            setComposeEmailType("general");
+          });
+        }
+        if (emailTypeMedical) {
+          emailTypeMedical.addEventListener("click", function () {
+            setComposeEmailType("medical_information_request");
           });
         }
       }

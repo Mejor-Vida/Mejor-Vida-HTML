@@ -127,6 +127,103 @@
       .replace(/"/g, "&quot;");
   }
 
+  function isSpanishLang(lang) {
+    return /spanish|español|espanol|^es$/i.test(String(lang || ""));
+  }
+
+  function landingCopy(lang) {
+    var es = isSpanishLang(lang);
+    if (es) {
+      return {
+        headerTitle: "Cuestionario médico seguro",
+        greeting: function (name) {
+          return "Hola " + (name || "there") + ",";
+        },
+        lead:
+          "Gracias por programar su llamada con Julie. Este cuestionario es el mismo tipo de información que los carriers de gastos finales usan para evaluar elegibilidad — completarlo antes de su llamada nos ayuda a preparar opciones reales para usted.",
+        bullets: [
+          "Julie revisará su perfil médico antes de la llamada",
+          "Identificaremos qué productos califican según su historial",
+          "Su tiempo en la llamada se enfocará en beneficios y próximos pasos, no en recopilar historial en vivo",
+        ],
+        time: "La mayoría de clientes completan el formulario en unos 10–15 minutos.",
+        privacy:
+          "Su información se transmite y almacena con cifrado. Solo se usa para evaluar opciones de gastos finales para usted.",
+        expiry: "Este enlace es personal, de un solo uso y vence en 7 días.",
+        cta: "Comenzar cuestionario médico →",
+      };
+    }
+    return {
+      headerTitle: "Secure Medical Questionnaire",
+      greeting: function (name) {
+        return "Hi " + (name || "there") + ",";
+      },
+      lead:
+        "Thank you for scheduling your call with Julie. This questionnaire collects the same type of information final expense carriers use to review eligibility — completing it before your call helps us prepare real options for you.",
+      bullets: [
+        "Julie will review your medical profile before your call",
+        "We'll identify which products you qualify for based on your history",
+        "Your call time focuses on benefits and next steps, not collecting history live on the phone",
+      ],
+      time: "Most clients finish the form in about 10–15 minutes.",
+      privacy:
+        "Your information is transmitted and stored with encryption. It is used only to evaluate final expense options for you.",
+      expiry: "This link is personal, single-use, and expires in 7 days.",
+      cta: "Begin Medical Questionnaire →",
+    };
+  }
+
+  function showLanding(meta) {
+    var lang = meta && meta.language ? meta.language : "English";
+    var firstName = meta && meta.first_name ? meta.first_name : "";
+    var copy = landingCopy(lang);
+    var headerTitle = $("mi-header-title");
+    if (headerTitle) headerTitle.textContent = copy.headerTitle;
+    var greeting = $("mi-landing-greeting");
+    if (greeting) greeting.textContent = copy.greeting(firstName || "there");
+    var lead = $("mi-landing-lead");
+    if (lead) lead.textContent = copy.lead;
+    var list = $("mi-landing-list");
+    if (list) {
+      list.innerHTML = copy.bullets.map(function (b) {
+        return "<li>" + escapeHtml(b) + "</li>";
+      }).join("");
+    }
+    var timeEl = $("mi-landing-time");
+    if (timeEl) timeEl.textContent = copy.time;
+    var privacyEl = $("mi-landing-privacy");
+    if (privacyEl) privacyEl.textContent = copy.privacy;
+    var expiryEl = $("mi-landing-expiry");
+    if (expiryEl) expiryEl.textContent = copy.expiry;
+    var cta = $("mi-landing-start");
+    if (cta) cta.textContent = copy.cta;
+    $("mi-gate").classList.add("mi-hidden");
+    $("mi-landing").classList.remove("mi-hidden");
+    $("mi-app").classList.add("mi-hidden");
+  }
+
+  function showForm() {
+    $("mi-landing").classList.add("mi-hidden");
+    $("mi-app").classList.remove("mi-hidden");
+    document.querySelectorAll(".mi-section").forEach(function (s) {
+      s.classList.add("open");
+    });
+    wireSections();
+    wireHealthInfo();
+    wireDrugModal();
+    wireProviderModal();
+    wirePharmacyModal();
+    wireConditionModal();
+    wireSubmit();
+    renderLists();
+  }
+
+  function wireLandingStart() {
+    var btn = $("mi-landing-start");
+    if (!btn) return;
+    btn.addEventListener("click", showForm);
+  }
+
   function openModal(id) {
     var m = $(id);
     if (m) m.classList.add("show");
@@ -312,56 +409,225 @@
     var zipIn = $("mi-provider-zip");
     var searchIn = $("mi-provider-search");
     var results = $("mi-provider-results");
+    var countEl = $("mi-provider-count");
+    var pagination = $("mi-provider-pagination");
+    var addBtn = $("mi-provider-add");
     var err = $("mi-provider-zip-err");
+    var ctx = { items: [], page: 1, total: 0, perPage: 20, pick: null };
 
-    var doSearch = debounce(function () {
+    function setAddEnabled() {
+      if (addBtn) addBtn.disabled = !(ctx.pick && ctx.items[ctx.pick.p]);
+    }
+
+    function renderProviderCards() {
+      if (!results) return;
+      if (!ctx.items.length) {
+        results.innerHTML = '<p class="mi-readonly">No providers found.</p>';
+        if (countEl) countEl.textContent = "";
+        if (pagination) pagination.innerHTML = "";
+        setAddEnabled();
+        return;
+      }
+      if (countEl) {
+        countEl.textContent =
+          ctx.total + " Provider" + (ctx.total === 1 ? "" : "s") + " found";
+      }
+      results.innerHTML = ctx.items
+        .map(function (p, pi) {
+          var locs = p.locations || [
+            { address_line: p.address_line, city: p.city, state: p.state, zip: p.zip },
+          ];
+          var primary = locs[0];
+          var extra = locs.slice(1);
+          var primaryAddr = [primary.address_line, primary.city, primary.state, primary.zip]
+            .filter(Boolean)
+            .join(", ");
+          var spec = p.specialty
+            ? '<div class="mi-provider-spec">' + escapeHtml(p.specialty) + "</div>"
+            : "";
+          var extraHtml = "";
+          if (extra.length) {
+            extraHtml =
+              '<details class="mi-provider-more"><summary>Additional Locations (' +
+              extra.length +
+              ")</summary>" +
+              extra
+                .map(function (loc, li) {
+                  var addr = [loc.address_line, loc.city, loc.state, loc.zip].filter(Boolean).join(", ");
+                  var checked =
+                    ctx.pick && ctx.pick.p === pi && ctx.pick.l === li + 1 ? " checked" : "";
+                  return (
+                    '<label class="mi-provider-loc">' +
+                    '<input type="radio" name="mi-provider-pick" data-p="' +
+                    pi +
+                    '" data-l="' +
+                    (li + 1) +
+                    '"' +
+                    checked +
+                    " /> " +
+                    escapeHtml(addr) +
+                    "</label>"
+                  );
+                })
+                .join("") +
+              "</details>";
+          }
+          var checked0 = ctx.pick && ctx.pick.p === pi && ctx.pick.l === 0 ? " checked" : "";
+          return (
+            '<div class="mi-provider-card">' +
+            spec +
+            '<div class="mi-provider-name">' +
+            escapeHtml(p.name) +
+            "</div>" +
+            '<div class="mi-provider-npi">' +
+            escapeHtml(p.npi || "") +
+            "</div>" +
+            '<label class="mi-provider-loc mi-provider-loc-primary">' +
+            '<input type="radio" name="mi-provider-pick" data-p="' +
+            pi +
+            '" data-l="0"' +
+            checked0 +
+            " /> " +
+            escapeHtml(primaryAddr) +
+            "</label>" +
+            extraHtml +
+            "</div>"
+          );
+        })
+        .join("");
+
+      results.querySelectorAll('input[name="mi-provider-pick"]').forEach(function (inp) {
+        inp.addEventListener("change", function () {
+          ctx.pick = {
+            p: parseInt(inp.getAttribute("data-p"), 10),
+            l: parseInt(inp.getAttribute("data-l"), 10),
+          };
+          setAddEnabled();
+        });
+      });
+
+      if (pagination) {
+        var pages = Math.max(1, Math.ceil(ctx.total / ctx.perPage));
+        if (pages <= 1) {
+          pagination.innerHTML = "";
+        } else {
+          pagination.innerHTML =
+            '<button type="button" class="mi-btn secondary" id="mi-provider-prev"' +
+            (ctx.page <= 1 ? " disabled" : "") +
+            ">Prev</button>" +
+            "<span>Page " +
+            ctx.page +
+            " of " +
+            pages +
+            "</span>" +
+            '<button type="button" class="mi-btn secondary" id="mi-provider-next"' +
+            (ctx.page >= pages ? " disabled" : "") +
+            ">Next</button>";
+          var prev = $("mi-provider-prev");
+          var next = $("mi-provider-next");
+          if (prev)
+            prev.addEventListener("click", function () {
+              if (ctx.page > 1) {
+                ctx.page--;
+                doSearch();
+              }
+            });
+          if (next)
+            next.addEventListener("click", function () {
+              if (ctx.page < pages) {
+                ctx.page++;
+                doSearch();
+              }
+            });
+        }
+      }
+      setAddEnabled();
+    }
+
+    function doSearch() {
       var zip = (zipIn && zipIn.value.replace(/\D/g, "").slice(0, 5)) || "";
+      var term = (searchIn && searchIn.value.trim()) || "";
       if (zip.length !== 5) {
         if (err) err.textContent = "Zip code must be 5 digits";
         return;
       }
+      if (!term) {
+        if (err) err.textContent = "Enter a provider name to search";
+        if (results) results.innerHTML = "";
+        if (countEl) countEl.textContent = "";
+        return;
+      }
       if (err) err.textContent = "";
+      if (results) results.innerHTML = '<p class="mi-readonly">Searching…</p>';
       api(
         "/api/medical-intake/search?type=providers&zipCode=" +
           encodeURIComponent(zip) +
           "&searchTerm=" +
-          encodeURIComponent((searchIn && searchIn.value) || "") +
+          encodeURIComponent(term) +
           "&radius=" +
-          encodeURIComponent(($("mi-provider-distance") && $("mi-provider-distance").value) || "25")
+          encodeURIComponent(($("mi-provider-distance") && $("mi-provider-distance").value) || "25") +
+          "&page=" +
+          encodeURIComponent(ctx.page) +
+          "&perPage=" +
+          encodeURIComponent(ctx.perPage)
       )
         .then(function (data) {
-          if (!results) return;
-          results.innerHTML = (data.items || [])
-            .map(function (p, i) {
-              return (
-                '<button type="button" data-idx="' +
-                i +
-                '">' +
-                escapeHtml(p.name) +
-                "<br><small>" +
-                escapeHtml(p.specialty || "") +
-                " · NPI " +
-                escapeHtml(p.npi || "") +
-                "</small></button>"
-              );
-            })
-            .join("");
-          var items = data.items || [];
-          results.querySelectorAll("button").forEach(function (btn) {
-            btn.addEventListener("click", function () {
-              var p = items[parseInt(btn.getAttribute("data-idx"), 10)];
-              if (p) state.providers.push(p);
-              renderLists();
-              closeModal("mi-modal-provider");
-            });
-          });
+          ctx.items = data.items || [];
+          ctx.total = data.total != null ? data.total : ctx.items.length;
+          ctx.pick = null;
+          renderProviderCards();
         })
         .catch(function () {
           if (results) results.innerHTML = '<p class="mi-error">Search failed.</p>';
         });
-    }, 400);
-    if (searchIn) searchIn.addEventListener("input", doSearch);
-    if (zipIn) zipIn.addEventListener("input", doSearch);
+    }
+
+    var debouncedSearch = debounce(doSearch, 400);
+    if (searchIn)
+      searchIn.addEventListener("input", function () {
+        ctx.page = 1;
+        debouncedSearch();
+      });
+    if (zipIn)
+      zipIn.addEventListener("input", function () {
+        ctx.page = 1;
+        debouncedSearch();
+      });
+    var dist = $("mi-provider-distance");
+    if (dist)
+      dist.addEventListener("change", function () {
+        ctx.page = 1;
+        doSearch();
+      });
+    if (addBtn) {
+      addBtn.addEventListener("click", function () {
+        if (!ctx.pick) return;
+        var p = ctx.items[ctx.pick.p];
+        if (!p) return;
+        var locs = p.locations || [
+          {
+            address_line: p.address_line,
+            city: p.city,
+            state: p.state,
+            zip: p.zip,
+            phone: p.phone,
+          },
+        ];
+        var loc = locs[ctx.pick.l] || locs[0];
+        state.providers.push({
+          npi: p.npi,
+          name: p.name,
+          specialty: p.specialty,
+          address_line: loc.address_line,
+          city: loc.city,
+          state: loc.state,
+          zip: loc.zip,
+          phone: loc.phone || p.phone || "",
+        });
+        renderLists();
+        closeModal("mi-modal-provider");
+      });
+    }
   }
 
   function wirePharmacyModal() {
@@ -543,20 +809,9 @@
       return;
     }
     api("/api/medical-intake/validate")
-      .then(function () {
-        $("mi-gate").classList.add("mi-hidden");
-        $("mi-app").classList.remove("mi-hidden");
-        document.querySelectorAll(".mi-section").forEach(function (s) {
-          s.classList.add("open");
-        });
-        wireSections();
-        wireHealthInfo();
-        wireDrugModal();
-        wireProviderModal();
-        wirePharmacyModal();
-        wireConditionModal();
-        wireSubmit();
-        renderLists();
+      .then(function (meta) {
+        wireLandingStart();
+        showLanding(meta);
       })
       .catch(function (err) {
         var msg =

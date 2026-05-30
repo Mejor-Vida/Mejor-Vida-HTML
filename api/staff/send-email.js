@@ -129,7 +129,7 @@ module.exports = async function handler(req, res) {
     body && body.leadSourceTable != null ? String(body.leadSourceTable).trim() : "manychat_leads";
   const leadFirstName = body && body.leadFirstName != null ? String(body.leadFirstName).trim() : "";
 
-  if (!replyDraft) {
+  if (!replyDraft && emailType !== "medical_information_request") {
     return json(res, 400, { success: false, error: "replyDraft required" });
   }
   if (!compose && !questionId) {

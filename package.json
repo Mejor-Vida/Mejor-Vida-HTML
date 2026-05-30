@@ -11,6 +11,8 @@
     "build:en": "python3 tools/build_en_site.py",
     "dev": "vercel dev",
     "dev:local": "node scripts/local-api-dev.cjs",
+    "dev:review": "node scripts/local-api-dev.cjs",
+    "mint:intake-link": "node scripts/mint-medical-intake-dev-link.js",
     "preview:post-quote-email": "node scripts/preview-post-quote-email.js",
     "embed:internal-moo": "node scripts/embed-internal-knowledge.js"
   },

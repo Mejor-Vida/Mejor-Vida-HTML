@@ -1,4 +1,6 @@
-const { json, requireValidIntakeToken } = require("./_lib");
+const { requireStaffAuth } = require("../auth-check");
+const { json, readJsonBody, serviceConfig } = require("./_inbox-lib");
+const { canAccessPhi } = require("../../lib/staff-permissions");
 const {
   searchDrugs,
   searchDrugDosages,
@@ -8,13 +10,15 @@ const {
 } = require("../../lib/medical-lookup-sync");
 
 module.exports = async function handler(req, res) {
+  const auth = await requireStaffAuth(req, res);
+  if (!auth.valid) return;
+
   if (req.method !== "GET") {
     res.setHeader("Allow", "GET");
     return json(res, 405, { ok: false, error: "method_not_allowed" });
   }
+
   try {
-    const gate = await requireValidIntakeToken(req);
-    if (!gate.ok) return json(res, gate.status, { ok: false, error: gate.error });
     const type = String((req.query && req.query.type) || "").toLowerCase();
     const q = req.query || {};
 
@@ -54,7 +58,7 @@ module.exports = async function handler(req, res) {
         pharmacyName: q.pharmacyName || q.q || "",
         zipCode: q.zipCode || q.zip || "",
         address: q.address || "",
-        radius: parseInt(q.radius || "25", 10),
+        radius: parseInt(q.radius || q.distance || "25", 10),
         pharmacyType: q.pharmacyType || "physical",
         page: parseInt(q.page || "1", 10),
         perPage: parseInt(q.perPage || "10", 10),
@@ -87,7 +91,10 @@ module.exports = async function handler(req, res) {
         count: result.result_count,
       });
     }
-    return json(res, 400, { ok: false, error: "type required (drugs|drug-dosages|providers|pharmacies|conditions)" });
+    return json(res, 400, {
+      ok: false,
+      error: "type required (drugs|drug-dosages|providers|pharmacies|conditions)",
+    });
   } catch (e) {
     return json(res, 500, { ok: false, error: String(e.message || "search_failed") });
   }

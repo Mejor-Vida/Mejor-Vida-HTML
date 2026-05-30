@@ -78,6 +78,11 @@ function apiHandlerPath(pathname) {
 
 async function runApi(absHandler, req, res, query) {
   delete require.cache[require.resolve(absHandler)];
+  // API handlers import lib/* — bust that cache too so search fixes apply without restart.
+  const libRoot = path.join(ROOT, "lib") + path.sep;
+  for (const key of Object.keys(require.cache)) {
+    if (key.startsWith(libRoot)) delete require.cache[key];
+  }
   const mod = require(absHandler);
   const handler = typeof mod === "function" ? mod : mod.default;
   if (typeof handler !== "function") {
@@ -193,7 +198,16 @@ server.on("error", (err) => {
 });
 
 server.listen(PORT, () => {
-  console.log(`Local dev: http://localhost:${PORT}/staff/`);
-  console.log(`API:       http://localhost:${PORT}/api/...`);
-  console.log("(Loads .env.local; use same Supabase project as production for real data.)");
+  const base = `http://localhost:${PORT}`;
+  console.log("");
+  console.log("Local dev server running");
+  console.log("────────────────────────────────────────");
+  console.log(`Staff portal:     ${base}/staff/`);
+  console.log(`Medical intake:   ${base}/medical-intake.html?t=YOUR_TOKEN`);
+  console.log(`Medical API test: ${base}/api/medical-intake/validate?t=YOUR_TOKEN`);
+  console.log(`Site home:        ${base}/`);
+  console.log("────────────────────────────────────────");
+  console.log("Loads .env.local — uses your Supabase project for tokens/PHI.");
+  console.log("Preview link:     npm run mint:intake-link");
+  console.log("");
 });

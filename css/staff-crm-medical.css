@@ -1,0 +1,595 @@
+/* CRM Medical Profile tab — Integrity Connect layout */
+
+.crm-med-wrap {
+  margin-top: 4px;
+}
+
+.crm-med-banner {
+  background: #fff8e6;
+  border: 1px solid #f0d78c;
+  border-radius: 10px;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  font-size: 0.9rem;
+  color: #5c4a12;
+}
+
+.crm-med-banner a {
+  color: var(--crm-accent);
+  font-weight: 600;
+}
+
+.crm-med-grid {
+  display: grid;
+  grid-template-columns: minmax(340px, 400px) 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+@media (max-width: 960px) {
+  .crm-med-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.crm-med-card {
+  background: #fff;
+  border: 1px solid var(--crm-border);
+  border-radius: 10px;
+  padding: 16px 18px;
+  box-shadow: var(--crm-shadow);
+}
+
+.crm-med-card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.crm-med-card-head h2 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.crm-med-edit-link {
+  background: none;
+  border: none;
+  color: var(--crm-accent);
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.88rem;
+  padding: 4px 8px;
+}
+
+.crm-med-hi-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.crm-med-hi-cell {
+  border: 1px solid var(--crm-border);
+  border-radius: 8px;
+  padding: 12px 14px;
+  background: #fafbfc;
+}
+
+.crm-med-hi-cell dt {
+  margin: 0 0 4px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--crm-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.crm-med-hi-cell dd {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.crm-med-save-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--crm-border);
+}
+
+.crm-med-status {
+  font-size: 0.88rem;
+  color: var(--crm-muted);
+  margin-top: 8px;
+}
+
+.crm-med-status.err {
+  color: var(--crm-danger);
+}
+
+.crm-med-status.ok {
+  color: var(--crm-ok);
+}
+
+.crm-med-wrap .mi-section {
+  margin-bottom: 12px;
+}
+
+.crm-med-wrap .mi-modal-backdrop {
+  z-index: 2000;
+}
+
+/* Edit Health Info — larger inputs (toggle buttons unchanged) */
+.crm-med-wrap .crm-med-card .mi-row label {
+  font-size: 0.92rem;
+  margin-bottom: 8px;
+}
+
+.crm-med-wrap .crm-med-card input#crm-mi-birthdate,
+.crm-med-wrap .crm-med-card input#crm-mi-weight {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 12px 14px;
+  font-size: 1.05rem;
+  line-height: 1.35;
+  border: 1px solid var(--crm-border);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--crm-text);
+}
+
+.crm-med-wrap .crm-med-card input#crm-mi-birthdate:focus,
+.crm-med-wrap .crm-med-card input#crm-mi-weight:focus {
+  outline: none;
+  border-color: var(--crm-accent);
+  box-shadow: 0 0 0 3px rgba(26, 77, 140, 0.12);
+}
+
+.crm-med-wrap .crm-med-card #crm-mi-age-display {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px 14px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--crm-text);
+  background: #f7f9fc;
+  border: 1px solid var(--crm-border);
+  border-radius: 8px;
+  min-height: 48px;
+}
+
+.crm-med-wrap .crm-med-card .mi-inline {
+  width: 100%;
+  gap: 10px;
+}
+
+.crm-med-wrap .crm-med-card .mi-inline input#crm-mi-height-ft,
+.crm-med-wrap .crm-med-card .mi-inline input#crm-mi-height-in {
+  flex: 1 1 0;
+  min-width: 0;
+  width: auto;
+  max-width: none;
+  padding: 12px 14px;
+  font-size: 1.05rem;
+  line-height: 1.35;
+  border: 1px solid var(--crm-border);
+  border-radius: 8px;
+  background: #fff;
+  text-align: center;
+}
+
+.crm-med-wrap .crm-med-card .mi-inline input#crm-mi-height-ft:focus,
+.crm-med-wrap .crm-med-card .mi-inline input#crm-mi-height-in:focus {
+  outline: none;
+  border-color: var(--crm-accent);
+  box-shadow: 0 0 0 3px rgba(26, 77, 140, 0.12);
+}
+
+.crm-med-wrap .crm-med-card .mi-inline > span {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--crm-muted);
+  flex-shrink: 0;
+}
+
+/* Add New + modals — larger fields (Physical/Online toggles unchanged) */
+.crm-med-wrap .mi-modal {
+  max-width: 580px;
+  padding: 24px 26px;
+}
+
+.crm-med-wrap .mi-modal h3 {
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+}
+
+.crm-med-wrap .mi-modal .mi-readonly {
+  font-size: 0.95rem;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.crm-med-wrap .mi-modal .mi-row {
+  margin-bottom: 16px;
+}
+
+.crm-med-wrap .mi-modal .mi-row label {
+  display: block;
+  font-size: 0.92rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--crm-text);
+}
+
+.crm-med-wrap .mi-modal input[type="text"],
+.crm-med-wrap .mi-modal input[type="number"],
+.crm-med-wrap .mi-modal input[type="search"],
+.crm-med-wrap .mi-modal select {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px 14px;
+  font-size: 1.05rem;
+  line-height: 1.35;
+  border: 1px solid var(--crm-border);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--crm-text);
+  min-height: 48px;
+}
+
+.crm-med-wrap .mi-modal input[type="text"]:focus,
+.crm-med-wrap .mi-modal input[type="number"]:focus,
+.crm-med-wrap .mi-modal input[type="search"]:focus,
+.crm-med-wrap .mi-modal select:focus {
+  outline: none;
+  border-color: var(--crm-accent);
+  box-shadow: 0 0 0 3px rgba(26, 77, 140, 0.12);
+}
+
+.crm-med-wrap .mi-modal .mi-search-results {
+  max-height: 280px;
+  margin-top: 12px;
+}
+
+.crm-med-wrap .mi-modal .mi-search-results button {
+  padding: 14px 16px;
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+
+.crm-med-wrap .mi-modal .mi-search-results button strong {
+  font-size: 1rem;
+}
+
+.crm-med-wrap .mi-modal #crm-mi-condition-results label {
+  padding: 12px 4px !important;
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+
+.crm-med-wrap .mi-modal #crm-mi-condition-results input[type="radio"] {
+  width: 18px;
+  height: 18px;
+  min-height: 0;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+.crm-med-wrap .mi-modal .mi-modal-actions {
+  margin-top: 24px;
+  padding-top: 4px;
+}
+
+.crm-med-wrap .mi-modal .mi-modal-actions button {
+  padding: 12px 20px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  min-height: 44px;
+}
+
+.crm-med-wrap .mi-modal .mi-modal-actions .primary {
+  padding: 12px 22px;
+  font-size: 1rem;
+}
+
+.crm-med-wrap .mi-modal .mi-error {
+  font-size: 0.9rem;
+  margin-top: 6px;
+}
+
+.crm-med-wrap .mi-modal #crm-mi-condition-count {
+  font-size: 0.92rem;
+  margin: 8px 0 4px;
+}
+
+/* Provider search — IC-style result cards */
+.crm-med-wrap #crm-mi-modal-provider .mi-modal {
+  max-width: 640px;
+}
+
+.crm-provider-count {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--crm-text);
+  margin: 4px 0 10px;
+  min-height: 1.2rem;
+}
+
+.crm-provider-results {
+  max-height: 340px;
+  overflow: auto;
+  border: 1px solid var(--crm-border);
+  border-radius: 8px;
+  background: #fafbfc;
+  padding: 8px;
+}
+
+.crm-provider-card {
+  background: #fff;
+  border: 1px solid var(--crm-border);
+  border-radius: 8px;
+  padding: 12px 14px;
+  margin-bottom: 10px;
+}
+
+.crm-provider-card:last-child {
+  margin-bottom: 0;
+}
+
+.crm-provider-spec {
+  font-size: 0.78rem;
+  color: var(--crm-muted);
+  margin-bottom: 6px;
+  line-height: 1.35;
+}
+
+.crm-provider-name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--crm-accent);
+  margin-bottom: 2px;
+}
+
+.crm-provider-npi {
+  font-size: 0.82rem;
+  color: var(--crm-accent);
+  margin-bottom: 10px;
+}
+
+.crm-provider-loc {
+  display: block;
+  padding: 10px 12px;
+  border: 1px solid var(--crm-border);
+  border-radius: 8px;
+  background: #f7f9fc;
+  font-size: 0.92rem;
+  line-height: 1.4;
+  margin-bottom: 8px;
+  cursor: pointer;
+}
+
+.crm-provider-loc-primary {
+  background: #eef3fa;
+}
+
+.crm-provider-loc input {
+  margin-right: 8px;
+  width: 16px;
+  height: 16px;
+  min-height: 0;
+}
+
+.crm-provider-more {
+  margin-top: 4px;
+  font-size: 0.88rem;
+}
+
+.crm-provider-more summary {
+  cursor: pointer;
+  color: var(--crm-accent);
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.crm-provider-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 12px 0 4px;
+  font-size: 0.88rem;
+}
+
+.crm-med-wrap #crm-mi-provider-add[disabled],
+.crm-med-wrap #crm-mi-drug-add[disabled],
+.crm-med-wrap #crm-mi-pharmacy-add[disabled] {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* Prescription + pharmacy modals — IC-style shared results */
+.crm-med-wrap #crm-mi-modal-drug .mi-modal,
+.crm-med-wrap #crm-mi-modal-pharmacy .mi-modal {
+  max-width: 640px;
+}
+
+.crm-ic-count {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--crm-text);
+  margin: 10px 0 8px;
+  min-height: 1.2rem;
+}
+
+.crm-ic-results {
+  max-height: 320px;
+  overflow: auto;
+  border: 1px solid var(--crm-border);
+  border-radius: 8px;
+  background: #fafbfc;
+  padding: 8px;
+}
+
+.crm-ic-selected-wrap {
+  max-height: none;
+  margin-bottom: 16px;
+  padding: 4px 8px;
+}
+
+.crm-ic-empty {
+  padding: 28px 16px;
+  text-align: center;
+  color: var(--crm-muted);
+  font-size: 0.95rem;
+  background: #f3f5f8;
+  border-radius: 8px;
+}
+
+.crm-ic-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px 14px;
+  margin-bottom: 8px;
+  border: 1px solid var(--crm-border);
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.crm-ic-option:last-child {
+  margin-bottom: 0;
+}
+
+.crm-ic-option-selected {
+  background: #eef3fa;
+  border-color: #c5d4ea;
+}
+
+.crm-ic-option input {
+  margin-top: 3px;
+  width: 16px;
+  height: 16px;
+  min-height: 0;
+  flex-shrink: 0;
+}
+
+.crm-ic-option-body strong {
+  font-weight: 700;
+  color: var(--crm-accent);
+}
+
+.crm-ic-option-sub {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--crm-muted);
+  font-weight: 500;
+  margin-top: 3px;
+}
+
+.crm-ic-option-body small {
+  color: var(--crm-muted);
+  font-size: 0.88rem;
+}
+
+.crm-med-wrap .mi-modal-drug #crm-mi-drug-search,
+.crm-med-wrap .mi-modal-pharmacy #crm-mi-pharmacy-name,
+.crm-med-wrap .mi-modal-condition #crm-mi-condition-search {
+  margin-top: 4px;
+}
+
+.crm-ic-results-condition {
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+.crm-pharm-filter-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 16px;
+  margin-bottom: 4px;
+}
+
+.crm-pharm-filter-grid .mi-row {
+  margin-bottom: 0;
+}
+
+.crm-pharm-tabs {
+  margin: 16px 0 4px;
+}
+
+@media (max-width: 520px) {
+  .crm-pharm-filter-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.crm-ic-entity-card {
+  border: 1px solid var(--crm-border);
+  border-radius: 8px;
+  padding: 12px 14px;
+  margin-bottom: 10px;
+  background: #fff;
+}
+
+.crm-ic-entity-card strong {
+  display: block;
+  font-size: 0.95rem;
+  margin-bottom: 4px;
+}
+
+.crm-ic-card-meta {
+  color: var(--crm-muted);
+  font-size: 0.88rem;
+  line-height: 1.45;
+  margin-top: 2px;
+}
+
+.crm-pharm-card-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 2px;
+}
+
+.crm-pharm-primary-badge {
+  display: inline-block;
+  background: #e8f0fe;
+  color: #1a56db;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 999px;
+}
+
+.crm-ic-card-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+
+.crm-ic-card-action {
+  background: none;
+  border: none;
+  color: var(--crm-accent);
+  font-size: 0.84rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+}
+
+.crm-ic-card-delete {
+  color: #c0392b;
+}
