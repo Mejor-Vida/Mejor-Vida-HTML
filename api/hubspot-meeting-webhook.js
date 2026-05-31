@@ -10,18 +10,21 @@
  *     (or Authorization: Bearer <MANYCHAT_WEBHOOK_SECRET>)
  *
  * GET — HubSpot meeting confirmation redirect (free plan; no native webhook):
- *   Set each scheduling page “Redirect URL” / confirmation redirect to e.g.:
- *   https://www.mejorvidainsurance.com/api/hubspot-meeting-webhook?email={{contact.email}}&firstName={{contact.firstname}}&lastName={{contact.lastname}}&phone={{contact.phone}}&appointmentStart={{meeting.start_time}}
- *   (Use the personalization tokens HubSpot shows for your account; aliases
- *   firstname/lastname/dateOfBirth/etc. are also accepted.)
- *   After processing, redirects to /thank-you.html?booked=1 (override with
- *   &redirect=https://www.mejorvidainsurance.com/your-page.html).
+ *   Prefer /confirmacion.html for CRM sync + user-facing confirmation, or this route for IC email only:
+ *   https://www.mejorvidainsurance.com/confirmacion.html?email={{contact.email}}&firstName={{contact.firstname}}&lastName={{contact.lastname}}&phone={{contact.phone}}&startTime={{meeting.start_time}}&meetingTime={{meeting.start_time}}
+ *   Legacy IC-only redirect:
+ *   https://www.mejorvidainsurance.com/api/hubspot-meeting-webhook?email=...&appointmentStart={{meeting.start_time}}
  *
  * Env: SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, MANYCHAT_WEBHOOK_SECRET (POST),
  *      GMAIL_*, HUBSPOT_ACCESS_TOKEN (optional enrich)
  */
 
 const { sendAppointmentLeadNotification } = require("../lib/ic-lead-notify");
+const {
+  parseAppointmentPayload,
+  normalizeInputRecord,
+  enrichLeadFromHubspot,
+} = require("../lib/appointment-webhook-lib");
 
 const DEFAULT_REDIRECT = "https://www.mejorvidainsurance.com/thank-you.html?booked=1";
 
@@ -64,31 +67,6 @@ function pickString(...values) {
   return "";
 }
 
-function pickFromProps(props, keys) {
-  if (!props || typeof props !== "object") return "";
-  for (const k of keys) {
-    const v = props[k];
-    if (v != null && String(v).trim()) return String(v).trim();
-  }
-  return "";
-}
-
-function normalizeInputRecord(raw) {
-  if (!raw || typeof raw !== "object") return {};
-  const out = {};
-  for (const [k, v] of Object.entries(raw)) {
-    if (v == null) continue;
-    if (Array.isArray(v)) {
-      out[k] = v.length ? String(v[0]) : "";
-    } else if (typeof v === "object") {
-      out[k] = v;
-    } else {
-      out[k] = String(v);
-    }
-  }
-  return out;
-}
-
 function readQueryInput(req) {
   const q = normalizeInputRecord(req.query);
   if (Object.keys(q).length > 0) return q;
@@ -118,164 +96,6 @@ function safeRedirectUrl(candidate) {
     /* ignore */
   }
   return DEFAULT_REDIRECT;
-}
-
-async function hubspotGetContact(token, contactId) {
-  const props = [
-    "email",
-    "firstname",
-    "lastname",
-    "phone",
-    "mobilephone",
-    "date_of_birth",
-    "state",
-    "city",
-    "zip",
-    "address",
-  ].join(",");
-  const r = await fetch(
-    `https://api.hubapi.com/crm/v3/objects/contacts/${encodeURIComponent(contactId)}?properties=${props}`,
-    { headers: { Authorization: `Bearer ${token}` } }
-  );
-  if (!r.ok) return null;
-  const data = await r.json();
-  return data && data.properties ? data.properties : null;
-}
-
-async function hubspotGetMeeting(token, meetingId) {
-  const props = ["hs_meeting_title", "hs_meeting_start_time", "hs_meeting_end_time"].join(",");
-  const r = await fetch(
-    `https://api.hubapi.com/crm/v3/objects/meetings/${encodeURIComponent(meetingId)}?properties=${props}`,
-    { headers: { Authorization: `Bearer ${token}` } }
-  );
-  if (!r.ok) return null;
-  const data = await r.json();
-  return data && data.properties ? data.properties : null;
-}
-
-function parseAppointmentPayload(body) {
-  const contact = body.contact && typeof body.contact === "object" ? body.contact : {};
-  const properties =
-    body.properties && typeof body.properties === "object"
-      ? body.properties
-      : contact.properties && typeof contact.properties === "object"
-        ? contact.properties
-        : {};
-  const meeting = body.meeting && typeof body.meeting === "object" ? body.meeting : {};
-
-  return {
-    firstName: pickString(
-      body.firstName,
-      body.firstname,
-      body.first_name,
-      contact.firstname,
-      contact.firstName,
-      properties.firstname
-    ),
-    lastName: pickString(
-      body.lastName,
-      body.lastname,
-      body.last_name,
-      contact.lastname,
-      contact.lastName,
-      properties.lastname
-    ),
-    email: pickString(body.email, contact.email, properties.email).toLowerCase(),
-    phone: pickString(
-      body.phone,
-      body.mobilephone,
-      body.mobilePhone,
-      contact.phone,
-      contact.mobilephone,
-      properties.phone,
-      properties.mobilephone
-    ),
-    dob: pickString(
-      body.dateOfBirth,
-      body.date_of_birth,
-      body.dob,
-      contact.date_of_birth,
-      properties.date_of_birth
-    ),
-    state: pickString(body.state, contact.state, properties.state),
-    city: pickString(body.city, contact.city, properties.city),
-    zip: pickString(body.zip, contact.zip, properties.zip),
-    address: pickString(body.address, contact.address, properties.address),
-    appointmentAt: pickString(
-      body.appointmentStart,
-      body.appointment_start,
-      body.scheduled_at,
-      body.meeting_start,
-      body.start_time,
-      body.startTime,
-      body.hs_meeting_start_time,
-      meeting.hs_meeting_start_time,
-      meeting.start_time,
-      properties.hs_meeting_start_time
-    ),
-    meetingTitle: pickString(
-      body.meetingTitle,
-      body.meeting_title,
-      meeting.hs_meeting_title,
-      meeting.title,
-      properties.hs_meeting_title
-    ),
-    hubspotContactId: pickString(
-      body.hubspotContactId,
-      body.hubspot_contact_id,
-      body.contactId,
-      body.contact_id,
-      contact.id,
-      contact.hs_object_id,
-      properties.hs_object_id
-    ),
-    hubspotMeetingId: pickString(
-      body.hubspotMeetingId,
-      body.hubspot_meeting_id,
-      body.meetingId,
-      body.meeting_id,
-      meeting.id,
-      meeting.hs_object_id
-    ),
-  };
-}
-
-async function enrichLeadFromHubspot(lead, hubspotToken) {
-  if (!hubspotToken) return lead;
-
-  let next = { ...lead };
-  try {
-    if (next.hubspotContactId && (!next.email || !next.phone)) {
-      const cp = await hubspotGetContact(hubspotToken, next.hubspotContactId);
-      if (cp) {
-        next = {
-          ...next,
-          firstName: next.firstName || pickFromProps(cp, ["firstname"]),
-          lastName: next.lastName || pickFromProps(cp, ["lastname"]),
-          email: next.email || pickFromProps(cp, ["email"]).toLowerCase(),
-          phone: next.phone || pickFromProps(cp, ["phone", "mobilephone"]),
-          dob: next.dob || pickFromProps(cp, ["date_of_birth"]),
-          state: next.state || pickFromProps(cp, ["state"]),
-          city: next.city || pickFromProps(cp, ["city"]),
-          zip: next.zip || pickFromProps(cp, ["zip"]),
-          address: next.address || pickFromProps(cp, ["address"]),
-        };
-      }
-    }
-    if (next.hubspotMeetingId && !next.appointmentAt) {
-      const mp = await hubspotGetMeeting(hubspotToken, next.hubspotMeetingId);
-      if (mp) {
-        next = {
-          ...next,
-          appointmentAt: next.appointmentAt || pickFromProps(mp, ["hs_meeting_start_time"]),
-          meetingTitle: next.meetingTitle || pickFromProps(mp, ["hs_meeting_title"]),
-        };
-      }
-    }
-  } catch (e) {
-    console.error("[hubspot-meeting-webhook] HubSpot enrich", e.message || e);
-  }
-  return next;
 }
 
 async function processAppointmentBooking(input, { supabaseUrl, supabaseKey, hubspotToken }) {
