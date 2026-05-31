@@ -413,9 +413,30 @@ def patch_file(lang: str):
     print(f"Patched {m['path']}")
 
 
+def fix_en_asset_paths(path: Path):
+    """EN posts live under en/blog/ — one level deeper than Spanish blog/."""
+    text = path.read_text(encoding="utf-8")
+    text = text.replace('href="../favicon.ico"', 'href="../../favicon.ico"')
+    text = text.replace('href="../bootstrap/', 'href="../../bootstrap/')
+    text = text.replace('href="../css/', 'href="../../css/')
+    text = text.replace('href="./blog-template.css"', 'href="../../blog/blog-template.css"')
+    text = text.replace('src="../bootstrap/', 'src="../../bootstrap/')
+    text = text.replace(
+        'src="../js/website-assistant-widget.js"',
+        'src="../../js/website-assistant-widget.js"',
+    )
+    text = text.replace(
+        '<div data-api-url="/api/website-chat" id="mvi-assistant-root"></div>',
+        '<div data-api-url="/api/website-chat" data-mvi-avatar-base="/img/mvi-chat-avatar" id="mvi-assistant-root"></div>',
+    )
+    path.write_text(text, encoding="utf-8")
+    print(f"Fixed EN asset paths: {path}")
+
+
 def main():
     for lang in ("en", "es"):
         patch_file(lang)
+    fix_en_asset_paths(ROOT / "en/blog" / f"{SLUG}.html")
     src = ROOT / "sources/blog" / f"{SLUG}.html"
     shutil.copy2(ROOT / "blog" / f"{SLUG}.html", src)
     print(f"Copied to {src}")

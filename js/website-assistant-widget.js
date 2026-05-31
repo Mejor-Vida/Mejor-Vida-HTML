@@ -142,7 +142,7 @@
     if (!root) return;
 
     var apiUrl = root.getAttribute("data-api-url") || API_URL;
-    var avatarBase = (root.getAttribute("data-mvi-avatar-base") || "img/mvi-chat-avatar").replace(
+    var avatarBase = (root.getAttribute("data-mvi-avatar-base") || "/img/mvi-chat-avatar").replace(
       /\/$/,
       "",
     );
