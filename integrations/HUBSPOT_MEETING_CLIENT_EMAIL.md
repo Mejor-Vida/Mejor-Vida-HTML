@@ -39,10 +39,14 @@ If the client still gets julie@ after deploy, it is usually:
 
 Disable those in HubSpot; keep the **admin@** workflow email.
 
-## Redirect URL (confirmacion.html)
+## Redirect URL (HubSpot — required)
+
+Without this, HubSpot confirms the booking but **no IC email is sent** (nothing hits our API).
+
+**Recommended** (server-side):
 
 ```
-https://www.mejorvidainsurance.com/confirmacion.html?email={{contact.email}}&firstName={{contact.firstname}}&lastName={{contact.lastname}}&phone={{contact.phone}}&startTime={{meeting.start_time}}&meetingTime={{meeting.start_time}}&hubspotContactId={{contact.hs_object_id}}&hubspotMeetingId={{meeting.hs_object_id}}
+https://www.mejorvidainsurance.com/api/hubspot-meeting-webhook?email={{contact.email}}&firstName={{contact.firstname}}&lastName={{contact.lastname}}&phone={{contact.phone}}&startTime={{meeting.start_time}}&meetingTime={{meeting.start_time}}&hubspotContactId={{contact.hs_object_id}}&hubspotMeetingId={{meeting.hs_object_id}}
 ```
 
-This syncs CRM + sends the **staff** IC CSV email. It does not email the client.
+Then the booker is redirected to `/confirmacion.html?processed=1&…` for the thank-you screen.

@@ -67,15 +67,17 @@ See `integrations/HUBSPOT_MEETING_CLIENT_EMAIL.md` if the client still receives 
 | `hubspotMeetingId` | `meetingId`, `meeting_id` |
 | `source` | constant `hubspot_scheduler` |
 
-## HubSpot redirect URL (confirmacion page)
+## HubSpot redirect URL (required)
 
-Set each HubSpot scheduling page **confirmation redirect** to:
+Set each HubSpot scheduling page **confirmation redirect** to this **server-side** URL (recommended):
 
 ```
-https://www.mejorvidainsurance.com/confirmacion.html?email={{contact.email}}&firstName={{contact.firstname}}&lastName={{contact.lastname}}&phone={{contact.phone}}&startTime={{meeting.start_time}}&meetingTime={{meeting.start_time}}&hubspotContactId={{contact.hs_object_id}}&hubspotMeetingId={{meeting.hs_object_id}}
+https://www.mejorvidainsurance.com/api/hubspot-meeting-webhook?email={{contact.email}}&firstName={{contact.firstname}}&lastName={{contact.lastname}}&phone={{contact.phone}}&startTime={{meeting.start_time}}&meetingTime={{meeting.start_time}}&hubspotContactId={{contact.hs_object_id}}&hubspotMeetingId={{meeting.hs_object_id}}
 ```
 
-Use the personalization tokens HubSpot shows for your account. `confirmacion.html` posts `startTime` and `meetingTime` to Make (if configured) and to `/api/webhooks/appointment`.
+HubSpot redirects here after booking → CRM upsert + IC CSV email to admin+julie → booker sees `/confirmacion.html`.
+
+Alternative (browser POST only): `/confirmacion.html?email=…` (same query params). Requires JavaScript; less reliable than the API redirect above.
 
 ## Direct Supabase (legacy — not recommended)
 

@@ -98,6 +98,11 @@
       return;
     }
 
+    // Server already synced via /api/hubspot-meeting-webhook redirect (?processed=1).
+    if (pickParam(params, ["processed", "synced"]) === "1") {
+      return;
+    }
+
     postJson(API_URL, payload);
     if (MAKE_WEBHOOK_URL) {
       postJson(MAKE_WEBHOOK_URL, payload);

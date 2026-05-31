@@ -1,32 +1,28 @@
 /**
  * GET|POST /api/hubspot-meeting-webhook
  *
- * Sends IntegrityCONNECT CSV email to admin + Julie when a HubSpot meeting is
- * booked (every booking — including contacts who previously submitted a quote).
+ * HubSpot meeting booking — CRM upsert + IC CSV email to admin + Julie.
  *
  * POST — Make.com, HubSpot workflow, or server-to-server:
  *   URL: https://www.mejorvidainsurance.com/api/hubspot-meeting-webhook
  *   Header: X-App-Secret: <MANYCHAT_WEBHOOK_SECRET>
- *     (or Authorization: Bearer <MANYCHAT_WEBHOOK_SECRET>)
  *
- * GET — HubSpot meeting confirmation redirect (free plan; no native webhook):
- *   Prefer /confirmacion.html for CRM sync + user-facing confirmation, or this route for IC email only:
- *   https://www.mejorvidainsurance.com/confirmacion.html?email={{contact.email}}&firstName={{contact.firstname}}&lastName={{contact.lastname}}&phone={{contact.phone}}&startTime={{meeting.start_time}}&meetingTime={{meeting.start_time}}
- *   Legacy IC-only redirect:
- *   https://www.mejorvidainsurance.com/api/hubspot-meeting-webhook?email=...&appointmentStart={{meeting.start_time}}
+ * GET — HubSpot confirmation redirect (recommended; runs server-side, no browser JS):
+ *   https://www.mejorvidainsurance.com/api/hubspot-meeting-webhook?email={{contact.email}}&firstName={{contact.firstname}}&lastName={{contact.lastname}}&phone={{contact.phone}}&startTime={{meeting.start_time}}&meetingTime={{meeting.start_time}}&hubspotContactId={{contact.hs_object_id}}&hubspotMeetingId={{meeting.hs_object_id}}
+ *
+ * After processing, redirects to /confirmacion.html (display only) unless `redirect=` is set.
  *
  * Env: SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, MANYCHAT_WEBHOOK_SECRET (POST),
  *      GMAIL_*, HUBSPOT_ACCESS_TOKEN (optional enrich)
  */
 
-const { sendAppointmentLeadNotification } = require("../lib/ic-lead-notify");
 const {
-  parseAppointmentPayload,
   normalizeInputRecord,
-  enrichLeadFromHubspot,
+  processAppointmentWebhook,
 } = require("../lib/appointment-webhook-lib");
+const { logWebhook } = require("../lib/contacts-db");
 
-const DEFAULT_REDIRECT = "https://www.mejorvidainsurance.com/thank-you.html?booked=1";
+const DEFAULT_REDIRECT = "https://www.mejorvidainsurance.com/confirmacion.html";
 
 function json(res, status, payload) {
   res.status(status).setHeader("Content-Type", "application/json");
@@ -98,25 +94,72 @@ function safeRedirectUrl(candidate) {
   return DEFAULT_REDIRECT;
 }
 
-async function processAppointmentBooking(input, { supabaseUrl, supabaseKey, hubspotToken }) {
-  let lead = parseAppointmentPayload(input);
-  lead = await enrichLeadFromHubspot(lead, hubspotToken);
+/** After server-side sync, send booker to confirmacion for display (skip duplicate POST). */
+function buildConfirmacionRedirect(query, explicitRedirect) {
+  if (explicitRedirect) return safeRedirectUrl(explicitRedirect);
 
-  const notifyResult = await sendAppointmentLeadNotification(
-    {
-      ...lead,
-      dateOfBirth: lead.dob,
-      submittedAt: new Date().toISOString(),
-    },
-    { supabaseUrl, serviceKey: supabaseKey }
-  );
-
-  return { lead, notifyResult };
+  const params = new URLSearchParams();
+  const normalized = normalizeInputRecord(query);
+  const passthrough = [
+    "email",
+    "firstName",
+    "firstname",
+    "first_name",
+    "lastName",
+    "lastname",
+    "last_name",
+    "phone",
+    "startTime",
+    "start_time",
+    "meetingTime",
+    "meeting_time",
+    "meetingTitle",
+    "meeting_title",
+  ];
+  for (const key of passthrough) {
+    const val = normalized[key];
+    if (val) params.set(key, String(val));
+  }
+  params.set("processed", "1");
+  return `${DEFAULT_REDIRECT}?${params.toString()}`;
 }
 
-function redirectHtml(targetUrl, title, message) {
-  const safeUrl = targetUrl.replace(/"/g, "&quot;");
-  return `<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta http-equiv="refresh" content="0;url=${safeUrl}"><title>${title}</title></head><body><p>${message}</p><p><a href="${safeUrl}">Continue</a></p></body></html>`;
+async function handleBooking(input, { supabaseUrl, supabaseKey, hubspotToken, channel }) {
+  const normalizedInput = normalizeInputRecord(input);
+  await logWebhook(
+    supabaseUrl,
+    supabaseKey,
+    "appointment",
+    "/api/hubspot-meeting-webhook",
+    normalizedInput,
+    "received"
+  );
+
+  const result = await processAppointmentWebhook(normalizedInput, {
+    supabaseUrl,
+    serviceKey: supabaseKey,
+    hubspotToken,
+    channel,
+  });
+
+  await logWebhook(
+    supabaseUrl,
+    supabaseKey,
+    "appointment",
+    "/api/hubspot-meeting-webhook",
+    {
+      contact_id: result.contactId,
+      deduped: result.deduped,
+      reason: result.reason,
+      notified: result.notifyResult ? result.notifyResult.sent === true : false,
+      notify_skipped: result.notifyResult ? result.notifyResult.skipped === true : false,
+      notify_reason: result.notifyResult ? result.notifyResult.reason : null,
+      error: result.error || null,
+    },
+    result.ok ? "processed" : "error"
+  );
+
+  return result;
 }
 
 module.exports = async function handler(req, res) {
@@ -136,6 +179,10 @@ module.exports = async function handler(req, res) {
   const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
   const hubspotToken = process.env.HUBSPOT_ACCESS_TOKEN;
 
+  if (!supabaseUrl || !supabaseKey) {
+    return json(res, 500, { ok: false, error: "Supabase not configured" });
+  }
+
   if (method === "POST") {
     const auth = verifyWebhookSecret(req);
     if (!auth.ok) {
@@ -149,39 +196,39 @@ module.exports = async function handler(req, res) {
       return json(res, 400, { ok: false, error: "Invalid JSON" });
     }
 
-    const { notifyResult } = await processAppointmentBooking(body, {
-      supabaseUrl,
-      supabaseKey,
-      hubspotToken,
-    });
+    try {
+      const result = await handleBooking(body, {
+        supabaseUrl,
+        supabaseKey,
+        hubspotToken,
+        channel: "hubspot_meeting_webhook_post",
+      });
 
-    if (notifyResult && notifyResult.skipped) {
+      if (!result.ok) {
+        return json(res, 400, { ok: false, error: result.error, lead: result.lead || null });
+      }
+
+      const notifyResult = result.notifyResult || {};
       return json(res, 200, {
         ok: true,
-        notified: false,
-        reason: notifyResult.reason,
+        deduped: result.deduped === true,
+        reason: result.reason || null,
+        contact_id: result.contactId,
+        notified: notifyResult.sent === true,
+        notify_skipped: notifyResult.skipped === true,
+        notify_reason: notifyResult.reason || null,
+        messageId: notifyResult.messageId || null,
+        csvFilename: notifyResult.csvFilename || null,
       });
+    } catch (e) {
+      console.error("[hubspot-meeting-webhook] POST", e.message || e);
+      return json(res, 500, { ok: false, error: "processing_failed" });
     }
-
-    if (notifyResult && notifyResult.sent) {
-      return json(res, 200, {
-        ok: true,
-        notified: true,
-        messageId: notifyResult.messageId,
-        csvFilename: notifyResult.csvFilename,
-      });
-    }
-
-    return json(res, 200, {
-      ok: true,
-      notified: false,
-      reason: (notifyResult && notifyResult.reason) || "not_sent",
-    });
   }
 
-  /* GET — HubSpot confirmation redirect */
+  /* GET — HubSpot confirmation redirect (server-side; reliable IC + CRM) */
   const query = readQueryInput(req);
-  const redirectTarget = safeRedirectUrl(query.redirect);
+  const redirectTarget = buildConfirmacionRedirect(query, query.redirect);
 
   if (!pickString(query.email, query.phone, query.firstName, query.lastName)) {
     res.status(302).setHeader("Location", redirectTarget);
@@ -189,10 +236,11 @@ module.exports = async function handler(req, res) {
   }
 
   try {
-    await processAppointmentBooking(query, {
+    await handleBooking(query, {
       supabaseUrl,
       supabaseKey,
       hubspotToken,
+      channel: "hubspot_meeting_redirect",
     });
   } catch (e) {
     console.error("[hubspot-meeting-webhook] GET process", e.message || e);
