@@ -14,6 +14,7 @@
  *   quote_low        Lower bound of quote range (e.g. "28")
  *   quote_high       Upper bound of quote range (e.g. "45")
  *   call_scheduled   'true' | 'false' — did they book a call?
+ *                      When true, send is skipped (HubSpot admin@ sends confirmation).
  *   call_datetime    ISO datetime of scheduled call (optional)
  *
  * Never uses an email address from the webhook body — only contacts.email after DB lookup.
@@ -142,6 +143,22 @@ async function resolveContact(base, key, body, phone) {
   return { contact: null, reason: 'contact_not_found' };
 }
 
+async function leadStateHasScheduledCall(base, key, contactId) {
+  if (!contactId) return false;
+  try {
+    const r = await fetch(
+      `${base}/rest/v1/lead_state?contact_id=eq.${encodeURIComponent(contactId)}&select=call_scheduled_at&limit=1`,
+      { headers: { apikey: key, Authorization: `Bearer ${key}` } },
+    );
+    if (!r.ok) return false;
+    const rows = await r.json();
+    const at = rows && rows[0] && rows[0].call_scheduled_at;
+    return Boolean(at && String(at).trim());
+  } catch {
+    return false;
+  }
+}
+
 async function insertPostQuoteDeliveryLog(base, key, contactId, status, opts = {}) {
   const payload = {
     contact_id: contactId,
@@ -206,6 +223,16 @@ module.exports = async function handler(req, res) {
   const callScheduled = body.call_scheduled === 'true' || body.call_scheduled === true;
   const callDatetime = String(body.call_datetime || '').trim() || null;
 
+  // HubSpot sends the client confirmation (admin@). Skip duplicate julie@ Resend when a call is booked.
+  if (callScheduled) {
+    console.log('[post-quote-email] skipped — call scheduled; HubSpot sends client confirmation');
+    return json(res, 200, {
+      ok: true,
+      skipped: true,
+      reason: 'call_scheduled_hubspot_confirmation',
+    });
+  }
+
   const hasContactKey =
     isUuid(String(body.contact_id || body.contactId || '').trim())
     || String(
@@ -241,6 +268,19 @@ module.exports = async function handler(req, res) {
 
   const contactId = contactRow.id;
   const email = emailFromContactRow(contactRow);
+
+  // HubSpot admin@ sends client confirmation after booking. Never duplicate with julie@ Resend.
+  if (await leadStateHasScheduledCall(base, supabaseKey, contactId)) {
+    console.log(
+      `[post-quote-email] skipped — contact ${contactId} already has call_scheduled_at`,
+    );
+    return json(res, 200, {
+      ok: true,
+      skipped: true,
+      reason: 'call_already_scheduled_hubspot_confirmation',
+      contact_id: contactId,
+    });
+  }
 
   if (!firstName) {
     firstName =

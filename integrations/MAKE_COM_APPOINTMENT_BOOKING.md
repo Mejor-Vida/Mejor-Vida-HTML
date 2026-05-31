@@ -28,7 +28,11 @@ HubSpot workflow / Make custom webhook
      - `X-App-Secret: {{MANYCHAT_WEBHOOK_SECRET}}` (store in Make connection / data store)
    - **Body:** JSON (normalized object below)
 
-Optional step 4: Slack/email notification on HTTP error ≠ 200.
+Optional step 4: Slack notification on HTTP error ≠ 200.
+
+**Do not** add a Make **Email** or **Gmail** module that sends to the booker — HubSpot sends the client confirmation from **admin@**. The Vercel webhook sends the **staff-only** IC CSV email (julie@ → admin+julie).
+
+See `integrations/HUBSPOT_MEETING_CLIENT_EMAIL.md` if the client still receives a duplicate julie@ email (usually HubSpot meeting-owner confirmation or Google Calendar).
 
 ## Normalized JSON body (send to Vercel)
 
