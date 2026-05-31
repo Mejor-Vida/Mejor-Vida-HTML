@@ -152,8 +152,12 @@ module.exports = async function handler(req, res) {
     await logWebhook(supabaseUrl, serviceKey, "appointment", "/api/webhooks/appointment", {
       contact_id: result.contactId,
       deduped: result.deduped,
+      reason: result.reason || null,
       call_scheduled_at: result.call_scheduled_at,
       pipeline_stage: result.pipeline_stage,
+      notified: result.notifyResult ? result.notifyResult.sent === true : false,
+      notify_skipped: result.notifyResult ? result.notifyResult.skipped === true : false,
+      notify_reason: result.notifyResult ? result.notifyResult.reason || null : null,
     }, "processed");
 
     return json(res, 200, {

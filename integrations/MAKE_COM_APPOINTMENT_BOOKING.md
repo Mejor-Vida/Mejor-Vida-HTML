@@ -67,6 +67,16 @@ See `integrations/HUBSPOT_MEETING_CLIENT_EMAIL.md` if the client still receives 
 | `hubspotMeetingId` | `meetingId`, `meeting_id` |
 | `source` | constant `hubspot_scheduler` |
 
+## Make.com test vs real HubSpot booking
+
+| | Make “Run once” / webhook test | Real schedule on site |
+|---|-------------------------------|------------------------|
+| Triggers | You manually in Make | HubSpot iframe or redirect |
+| Hits our API? | Yes, if HTTP module POSTs with `X-App-Secret` | **Only if** redirect URL is set **or** site runs `js/mvi-hubspot-meeting-sync.js` (iframe postMessage) |
+| IC email | Yes | Often **no** until redirect or iframe sync is wired |
+
+Pasting the Make hook URL into HubSpot does **not** auto-fire on every booking unless HubSpot redirects the browser to that URL after book (unreliable inside iframes). Prefer **confirmation redirect** to `/api/hubspot-meeting-webhook?…` **and** iframe sync on quote/landing pages.
+
 ## HubSpot redirect URL (required)
 
 Set each HubSpot scheduling page **confirmation redirect** to this **server-side** URL (recommended):
