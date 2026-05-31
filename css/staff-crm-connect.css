@@ -1,0 +1,180 @@
+/* CRM Connect tab — compose email */
+
+.crm-connect-wrap {
+  background: var(--crm-card-bg);
+  border: 1px solid var(--crm-border);
+  border-radius: var(--crm-radius);
+  padding: 20px 22px 24px;
+  box-shadow: var(--crm-shadow);
+}
+
+.crm-connect-heading {
+  margin: 0 0 14px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--crm-muted);
+}
+
+.crm-connect-form label {
+  display: block;
+  margin: 0 0 6px;
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.crm-connect-form input,
+.crm-connect-form textarea {
+  width: 100%;
+  border: 1px solid var(--crm-border);
+  border-radius: 8px;
+  padding: 10px 12px;
+  font: inherit;
+  color: var(--crm-text);
+  background: #fff;
+}
+
+.crm-connect-form input:focus,
+.crm-connect-form textarea:focus {
+  outline: none;
+  border-color: var(--crm-accent);
+  box-shadow: 0 0 0 3px rgba(26, 77, 140, 0.12);
+}
+
+.crm-connect-form textarea {
+  resize: vertical;
+  min-height: 72px;
+}
+
+.crm-connect-row {
+  margin-bottom: 14px;
+}
+
+.crm-connect-row-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+@media (max-width: 640px) {
+  .crm-connect-row-2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+.crm-connect-save-contact {
+  margin-bottom: 18px;
+}
+
+.crm-connect-toggles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px 24px;
+  margin-bottom: 18px;
+  padding: 14px;
+  background: #f7f9fc;
+  border: 1px solid var(--crm-border);
+  border-radius: 8px;
+}
+
+.crm-connect-toggle-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.crm-connect-toggle-label {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--crm-muted);
+  margin-right: 4px;
+}
+
+.crm-connect-opt {
+  border: 1px solid var(--crm-border);
+  background: #fff;
+  color: var(--crm-text);
+  border-radius: 8px;
+  padding: 7px 12px;
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.crm-connect-opt.active {
+  border-color: var(--crm-accent);
+  background: var(--crm-accent-soft);
+  color: var(--crm-accent);
+  box-shadow: 0 0 0 2px var(--crm-select-ring);
+}
+
+.crm-connect-hint {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: var(--crm-muted);
+  margin-top: 2px;
+}
+
+.crm-connect-notes-wrap {
+  margin-top: 14px;
+}
+
+.crm-connect-form #crm-conn-reply {
+  min-height: 220px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.88rem;
+  line-height: 1.45;
+}
+
+.crm-connect-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.crm-connect-status {
+  margin: 14px 0 0;
+  font-size: 0.88rem;
+  color: var(--crm-muted);
+  min-height: 1.2em;
+}
+
+.crm-connect-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: rgba(15, 23, 42, 0.45);
+  display: grid;
+  place-items: center;
+  padding: 20px;
+}
+
+.crm-connect-modal-panel {
+  width: 100%;
+  max-width: 420px;
+  background: #fff;
+  border-radius: 12px;
+  padding: 22px;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.18);
+}
+
+.crm-connect-modal-panel h3 {
+  margin: 0 0 10px;
+  font-size: 1.05rem;
+}
+
+.crm-connect-modal-panel p {
+  margin: 0 0 18px;
+  color: var(--crm-muted);
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+.crm-connect-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}

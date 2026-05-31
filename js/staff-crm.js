@@ -265,6 +265,17 @@
     return currentDetail;
   }
 
+  async function reloadLeadDetail(id) {
+    var detail = await loadLeadDetail(id);
+    var idx = leadsCache.findIndex(function (x) {
+      return x.id === id;
+    });
+    if (detail && idx >= 0) {
+      leadsCache[idx] = Object.assign({}, leadsCache[idx], detail);
+    }
+    return detail;
+  }
+
   function renderDashboard(main) {
     var total = leadsCache.length;
     main.innerHTML =
@@ -532,7 +543,9 @@
         ? renderOverviewTab(d)
         : route.tab === "medical"
           ? '<div id="crm-medical-root"></div>'
-          : tabPlaceholder(route.tab);
+          : route.tab === "connect"
+            ? '<div id="crm-connect-root"></div>'
+            : tabPlaceholder(route.tab);
 
     main.innerHTML =
       '<button type="button" class="crm-client-back" id="crm-back-clients">' +
@@ -580,6 +593,10 @@
     if (route.tab === "medical" && window.StaffCrmMedical) {
       var medRoot = document.getElementById("crm-medical-root");
       if (medRoot) await window.StaffCrmMedical.mount(medRoot, { leadId: route.id, detail: d });
+    }
+    if (route.tab === "connect" && window.StaffCrmConnect) {
+      var connRoot = document.getElementById("crm-connect-root");
+      if (connRoot) await window.StaffCrmConnect.mount(connRoot, { leadId: route.id, detail: d });
     }
   }
 
@@ -740,6 +757,7 @@
     navigate: navigate,
     calcAge: calcAge,
     t: t,
+    reloadLeadDetail: reloadLeadDetail,
     getLang: function () {
       return window.StaffCrmI18n ? window.StaffCrmI18n.getLang() : "en";
     },
