@@ -25,8 +25,8 @@ The client should **not** receive a second email from julie@ after booking.
 | Route | Client julie@? | Fix |
 |-------|----------------|-----|
 | **`POST /api/post-quote-email`** | Yes — Resend to `contacts.email` | Skipped when `call_scheduled=true` **or** when `lead_state.call_scheduled_at` is already set |
-| **`POST /api/webhooks/appointment`** IC notify | No — staff only | Unchanged |
-| **`/api/hubspot-meeting-webhook`** IC notify | No — staff only | Unchanged |
+| **`POST /api/webhooks/appointment`** IC notify | No — staff only | Sent on every new booking (even if contact quoted before) |
+| **`/api/hubspot-meeting-webhook`** IC notify | No — staff only | Same — always sends IC CSV to admin+julie |
 
 `post-quote-email` is the only server route that sends **julie@ → client**. ManyChat may fire it after quote; if the lead already booked (or `call_scheduled=true`), we skip.
 

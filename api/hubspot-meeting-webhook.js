@@ -2,7 +2,7 @@
  * GET|POST /api/hubspot-meeting-webhook
  *
  * Sends IntegrityCONNECT CSV email to admin + Julie when a HubSpot meeting is
- * booked, unless the contact already submitted a quote (dedup by email/phone).
+ * booked (every booking — including contacts who previously submitted a quote).
  *
  * POST — Make.com, HubSpot workflow, or server-to-server:
  *   URL: https://www.mejorvidainsurance.com/api/hubspot-meeting-webhook
