@@ -204,6 +204,66 @@ async function loadCanonicalLeadProfile(cfg, leadId, leadSourceTable) {
   return row && row.profile_data && typeof row.profile_data === "object" ? row.profile_data : {};
 }
 
+function buildListItemFromRow(r, canonical) {
+  const item = {
+    id: r.id,
+    first_name: r.first_name || "",
+    last_name: r.last_name || "",
+    phone: r.phone || "",
+    email: String(r.email || "").trim(),
+    language: r.language || "English",
+    source: r.source || r.source_table || "unknown",
+    source_table: r.source_table || "unknown",
+    pipeline_stage: "",
+    tag: "",
+    created_at: r.created_at || null,
+    updated_at: r.updated_at || null,
+  };
+  if (canonical && typeof canonical === "object") {
+    item.first_name = mergePreferCanonical(item.first_name, canonical.first_name);
+    item.last_name = mergePreferCanonical(item.last_name, canonical.last_name);
+    item.email = mergePreferCanonical(item.email, canonical.email);
+    item.phone = mergePreferCanonical(item.phone, canonical.phone);
+    item.language = mergePreferCanonical(item.language, canonical.language);
+    item.pipeline_stage = mergePreferCanonical(item.pipeline_stage, canonical.pipeline_stage);
+    item.tag = mergePreferCanonical(item.tag, canonical.tag);
+  }
+  item.display_name = displayName(item);
+  return item;
+}
+
+async function loadStaffProfileMap(cfg) {
+  const rows = await restSelect(
+    cfg,
+    "staff_lead_profiles",
+    "select=lead_id,lead_source_table,profile_data&limit=5000"
+  );
+  const map = new Map();
+  (rows || []).forEach((row) => {
+    if (!row || !row.lead_id || !row.lead_source_table) return;
+    const key = `${row.lead_id}|${row.lead_source_table}`;
+    const pd = row.profile_data && typeof row.profile_data === "object" ? row.profile_data : {};
+    map.set(key, pd);
+  });
+  return map;
+}
+
+async function enrichListItemsWithStaffProfiles(cfg, items) {
+  let profileMap;
+  try {
+    profileMap = await loadStaffProfileMap(cfg);
+  } catch (e) {
+    console.error("staff/leads enrichListItemsWithStaffProfiles", e);
+    return items;
+  }
+  return items.map((item) => {
+    const key = `${item.id}|${item.source_table}`;
+    const canonical = profileMap.get(key);
+    if (!canonical) return item;
+    return buildListItemFromRow(item, canonical);
+  });
+}
+
 async function saveCanonicalLeadProfile(cfg, leadId, leadSourceTable, patch, updatedBy) {
   if (!leadId || !leadSourceTable) return null;
   const rows = await restSelect(
@@ -1069,19 +1129,12 @@ module.exports = async function handler(req, res) {
         console.error("staff/leads GET manychat probe", probeErr && probeErr.message);
       }
       const rows = await selectUnifiedLeadsForStaff(cfg);
-      const items = (rows || []).map((r) => ({
-        id: r.id,
-        first_name: r.first_name || "",
-        last_name: r.last_name || "",
-        display_name: r.display_name || displayName(r),
-        phone: r.phone || "",
-        email: String(r.email || "").trim(),
-        language: r.language || "English",
-        source: r.source || r.source_table || "unknown",
-        source_table: r.source_table || "unknown",
-        created_at: r.created_at || null,
-        updated_at: r.updated_at || null,
-      }));
+      let items = (rows || []).map((r) => buildListItemFromRow(r));
+      try {
+        items = await enrichListItemsWithStaffProfiles(cfg, items);
+      } catch (e) {
+        console.error("staff/leads GET enrichListItemsWithStaffProfiles", e);
+      }
       try {
         await enrichLeadEmailsFromContacts(cfg, items);
       } catch (e) {
@@ -1307,22 +1360,6 @@ module.exports = async function handler(req, res) {
         auth.user && auth.user.email ? auth.user.email : null
       );
 
-      const one = {
-        id: unified.id,
-        first_name: unified.first_name || "",
-        last_name: unified.last_name || "",
-        display_name: unified.display_name || displayName(unified),
-        phone: unified.phone || "",
-        email: String(unified.email || "").trim(),
-        language: unified.language || "English",
-        source: unified.source || unified.source_table || "unknown",
-        source_table: unified.source_table || "unknown",
-      };
-      try {
-        await enrichLeadEmailsFromContacts(cfg, [one]);
-      } catch (e) {
-        console.error("staff/leads PATCH enrichLeadEmailsFromContacts", e);
-      }
       let detail = null;
       let cross = { detail: null, alternateLeadKeys: [] };
       if (src === "manychat_leads") {
@@ -1367,6 +1404,14 @@ module.exports = async function handler(req, res) {
         mergedDetail.phi = await readPhiMergedForLead(cfg, id, src || "unknown", cross.alternateLeadKeys || []);
       }
       if (mergedDetail) enrichDetailTopLevelFromPhi(mergedDetail);
+
+      const canonicalAfterSave = await loadCanonicalLeadProfile(cfg, id, src || "unknown");
+      const one = buildListItemFromRow(unified, canonicalAfterSave);
+      try {
+        await enrichLeadEmailsFromContacts(cfg, [one]);
+      } catch (e) {
+        console.error("staff/leads PATCH enrichLeadEmailsFromContacts", e);
+      }
       return json(res, 200, { item: one, detail: mergedDetail, can_access_phi: canPhi });
     } catch (e) {
       console.error("staff/leads PATCH", e);

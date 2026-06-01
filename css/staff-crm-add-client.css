@@ -1,0 +1,169 @@
+/* CRM Add New Client — Integrity Connect–style full-page form */
+
+.crm-add-page {
+  max-width: 980px;
+}
+
+.crm-add-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.crm-add-topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.crm-add-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 0;
+  background: none;
+  padding: 6px 0;
+  font: inherit;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--crm-accent);
+  cursor: pointer;
+}
+
+.crm-add-back:hover {
+  color: var(--crm-accent-hover);
+}
+
+.crm-add-title {
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
+.crm-add-topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
+}
+
+.crm-add-card {
+  background: var(--crm-card-bg);
+  border: 1px solid var(--crm-border);
+  border-radius: var(--crm-radius);
+  box-shadow: var(--crm-shadow);
+  padding: 22px 24px 26px;
+  margin-bottom: 18px;
+}
+
+.crm-add-section-title {
+  margin: 0 0 18px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--crm-text);
+}
+
+.crm-add-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px 18px;
+}
+
+.crm-add-grid-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.crm-add-grid-4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.crm-add-field--full {
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 860px) {
+  .crm-add-grid,
+  .crm-add-grid-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .crm-add-grid,
+  .crm-add-grid-2,
+  .crm-add-grid-4 {
+    grid-template-columns: 1fr;
+  }
+}
+
+.crm-add-field label {
+  display: block;
+  margin: 0 0 6px;
+  font-size: 0.86rem;
+  font-weight: 600;
+}
+
+.crm-add-field label .req {
+  color: var(--crm-danger);
+}
+
+.crm-add-field input,
+.crm-add-field select {
+  width: 100%;
+  border: 1px solid var(--crm-border);
+  border-radius: 8px;
+  padding: 10px 12px;
+  font: inherit;
+  color: var(--crm-text);
+  background: #fff;
+}
+
+.crm-add-field input:focus,
+.crm-add-field select:focus {
+  outline: none;
+  border-color: var(--crm-accent);
+  box-shadow: 0 0 0 3px rgba(26, 77, 140, 0.12);
+}
+
+.crm-add-field input.crm-add-ro {
+  background: #f7f9fc;
+  color: var(--crm-muted);
+}
+
+.crm-add-segment {
+  display: inline-flex;
+  border: 1px solid var(--crm-border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.crm-add-segment button {
+  border: none;
+  background: #fff;
+  padding: 10px 18px;
+  font: inherit;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--crm-muted);
+  cursor: pointer;
+}
+
+.crm-add-segment button.active {
+  background: var(--crm-accent-soft);
+  color: var(--crm-accent);
+}
+
+.crm-add-status {
+  min-height: 1.2em;
+  margin-top: 8px;
+  font-size: 0.88rem;
+  color: var(--crm-muted);
+}
+
+.crm-add-status.is-error {
+  color: var(--crm-danger);
+}

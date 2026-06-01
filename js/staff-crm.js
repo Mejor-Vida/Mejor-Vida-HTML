@@ -12,6 +12,8 @@
 
   var leadsCache = [];
   var currentDetail = null;
+  var clientsRowMenuCloser = null;
+  var clientsListGlobalWired = false;
 
   var CLIENT_TABS = [
     { id: "overview", labelKey: "tab_overview" },
@@ -95,6 +97,7 @@
     }
     if (parts[0] === "clients") {
       if (parts.length === 1) return { view: "clients" };
+      if (parts[1] === "new") return { view: "clientNew" };
       var id = parts[1];
       var tab = parts[2] || "overview";
       var validTab = CLIENT_TABS.some(function (t) {
@@ -242,7 +245,7 @@
 
   function syncSidebar(route) {
     var active =
-      route.view === "client"
+      route.view === "client" || route.view === "clientNew"
         ? "clients"
         : route.view === "dashboard"
           ? "dashboard"
@@ -252,11 +255,15 @@
     });
   }
 
-  async function ensureLeads() {
-    if (leadsCache.length) return leadsCache;
+  async function ensureLeads(force) {
+    if (!force && leadsCache.length) return leadsCache;
     var data = await authedApi("/api/staff/leads", null, { method: "GET" });
     leadsCache = Array.isArray(data.items) ? data.items : [];
     return leadsCache;
+  }
+
+  async function refreshLeads() {
+    return ensureLeads(true);
   }
 
   async function loadLeadDetail(id) {
@@ -267,13 +274,37 @@
 
   async function reloadLeadDetail(id) {
     var detail = await loadLeadDetail(id);
-    var idx = leadsCache.findIndex(function (x) {
-      return x.id === id;
-    });
-    if (detail && idx >= 0) {
-      leadsCache[idx] = Object.assign({}, leadsCache[idx], detail);
-    }
+    if (detail) upsertLeadListItem(listItemFromDetail(detail));
     return detail;
+  }
+
+  function listItemFromDetail(detail) {
+    if (!detail || !detail.id) return null;
+    return {
+      id: detail.id,
+      first_name: detail.first_name || "",
+      last_name: detail.last_name || "",
+      display_name: detail.display_name || displayName(detail),
+      phone: detail.phone || "",
+      email: String(detail.email || "").trim(),
+      language: detail.language || "English",
+      source: detail.source || detail.source_table || "unknown",
+      source_table: detail.source_table || "unknown",
+      created_at: detail.created_at || null,
+      updated_at: detail.updated_at || null,
+    };
+  }
+
+  function upsertLeadListItem(item) {
+    if (!item || !item.id) return;
+    var idx = leadsCache.findIndex(function (x) {
+      return x.id === item.id;
+    });
+    if (idx >= 0) leadsCache[idx] = Object.assign({}, leadsCache[idx], item);
+    else leadsCache.push(item);
+    leadsCache.sort(function (a, b) {
+      return displayName(a).toLowerCase().localeCompare(displayName(b).toLowerCase());
+    });
   }
 
   function renderDashboard(main) {
@@ -334,52 +365,170 @@
 
   function renderClientsList(main) {
     main.innerHTML =
+      '<div class="crm-clients-head">' +
+      '<div class="crm-clients-head-left">' +
       '<h1 class="crm-page-title">' +
       esc(t("clients_title")) +
       "</h1>" +
-      '<div class="crm-toolbar">' +
-      '<input type="search" id="crm-client-search" class="crm-search" placeholder="' +
+      '<button type="button" id="crm-clients-delete" class="crm-icon-btn is-danger" disabled title="' +
+      esc(t("clients_delete")) +
+      '" aria-label="' +
+      esc(t("clients_delete")) +
+      '">🗑</button>' +
+      "</div>" +
+      '<div class="crm-clients-head-actions">' +
+      '<button type="button" id="crm-add-client-btn" class="crm-btn crm-btn-pill">' +
+      '<span class="crm-btn-icon" aria-hidden="true">+</span>' +
+      esc(t("add_new")) +
+      "</button>" +
+      "</div></div>" +
+      '<div class="crm-table-wrap">' +
+      '<div class="crm-clients-search-row">' +
+      '<span class="crm-col-check-spacer" aria-hidden="true"></span>' +
+      '<div class="crm-col-name-field">' +
+      '<input type="search" id="crm-client-search" class="crm-search crm-search-name-col" placeholder="' +
       esc(t("search_placeholder")) +
       '" autocomplete="off" />' +
-      '<a href="/staff/index.html" class="crm-btn secondary">' +
-      esc(t("classic_portal")) +
-      "</a>" +
-      "</div>" +
-      '<div class="crm-table-wrap"><table class="crm-table"><thead><tr>' +
-      "<th>" +
+      "</div></div>" +
+      '<table class="crm-table crm-table-clients"><thead><tr>' +
+      '<th class="crm-col-check"><input type="checkbox" id="crm-clients-select-all" aria-label="' +
+      esc(t("clients_select_all")) +
+      '" /></th>' +
+      '<th class="crm-col-name">' +
       esc(t("col_name")) +
-      "</th><th>" +
+      '</th><th class="crm-col-email">' +
       esc(t("col_email")) +
-      "</th><th>" +
+      '</th><th class="crm-col-phone">' +
       esc(t("col_phone")) +
-      "</th><th>" +
+      '</th><th class="crm-col-language">' +
       esc(t("col_language")) +
-      '</th></tr></thead><tbody id="crm-clients-tbody"></tbody></table></div>' +
-      '<p id="crm-clients-status" class="crm-empty-state"></p>';
+      '</th><th class="crm-col-menu"><span class="hidden">' +
+      esc(t("clients_row_actions")) +
+      "</span></th></tr></thead><tbody id=\"crm-clients-tbody\"></tbody></table></div>" +
+      '<p id="crm-clients-status" class="crm-empty-state"></p>' +
+      '<div id="crm-row-menu" class="crm-row-menu hidden" role="menu"></div>' +
+      '<div id="crm-clients-delete-modal" class="crm-modal-backdrop hidden" role="dialog" aria-modal="true">' +
+      '<div class="crm-modal">' +
+      "<h2 id=\"crm-clients-delete-title\">" +
+      esc(t("clients_delete_confirm_title")) +
+      "</h2>" +
+      '<p id="crm-clients-delete-body"></p>' +
+      '<div class="crm-modal-actions">' +
+      '<button type="button" id="crm-clients-delete-cancel" class="crm-btn secondary">' +
+      esc(t("conn_no")) +
+      "</button>" +
+      '<button type="button" id="crm-clients-delete-confirm" class="crm-btn">' +
+      esc(t("clients_delete")) +
+      "</button></div></div></div>";
 
     var q = "";
-    function draw() {
-      var tbody = $("crm-clients-tbody");
-      var status = $("crm-clients-status");
-      if (!tbody) return;
+    var selectedIds = new Set();
+    var rowMenuLeadId = null;
+
+    function visibleRows() {
       var ql = q.trim().toLowerCase();
-      var rows = leadsCache.filter(function (L) {
+      return leadsCache.filter(function (L) {
         if (!ql) return true;
         var hay = (displayName(L) + " " + (L.email || "") + " " + (L.phone || "")).toLowerCase();
         return hay.indexOf(ql) !== -1;
       });
+    }
+
+    function updateBulkBar() {
+      var delBtn = $("crm-clients-delete");
+      if (delBtn) delBtn.disabled = selectedIds.size === 0;
+      var selAll = $("crm-clients-select-all");
+      var rows = visibleRows();
+      if (!selAll) return;
+      var n = rows.filter(function (L) {
+        return selectedIds.has(L.id);
+      }).length;
+      selAll.checked = rows.length > 0 && n === rows.length;
+      selAll.indeterminate = n > 0 && n < rows.length;
+    }
+
+    function closeRowMenu() {
+      var menu = $("crm-row-menu");
+      if (!menu) return;
+      menu.classList.add("hidden");
+      menu.innerHTML = "";
+      rowMenuLeadId = null;
+      document.querySelectorAll(".crm-row-menu-btn[aria-expanded=true]").forEach(function (btn) {
+        btn.setAttribute("aria-expanded", "false");
+      });
+    }
+
+    function openRowMenu(leadId, anchorBtn) {
+      closeRowMenu();
+      rowMenuLeadId = leadId;
+      var menu = $("crm-row-menu");
+      if (!menu || !anchorBtn) return;
+      menu.innerHTML =
+        '<button type="button" data-action="view">' +
+        esc(t("menu_view_client")) +
+        "</button>" +
+        '<button type="button" data-action="quote">' +
+        esc(t("menu_start_quote")) +
+        "</button>" +
+        '<button type="button" data-action="contact">' +
+        esc(t("menu_contact")) +
+        "</button>" +
+        '<button type="button" data-action="reminder" class="is-muted">' +
+        esc(t("menu_add_reminder")) +
+        "</button>";
+      menu.classList.remove("hidden");
+      anchorBtn.setAttribute("aria-expanded", "true");
+      var rect = anchorBtn.getBoundingClientRect();
+      menu.style.top = rect.bottom + 6 + "px";
+      menu.style.left = Math.max(8, rect.right - 190) + "px";
+      menu.querySelectorAll("button[data-action]").forEach(function (btn) {
+        btn.addEventListener("click", function (e) {
+          e.stopPropagation();
+          var action = btn.getAttribute("data-action");
+          var id = rowMenuLeadId;
+          closeRowMenu();
+          if (!id) return;
+          if (action === "view") navigate("#/clients/" + encodeURIComponent(id) + "/overview");
+          else if (action === "quote") navigate("#/clients/" + encodeURIComponent(id) + "/products");
+          else if (action === "contact") navigate("#/clients/" + encodeURIComponent(id) + "/connect");
+          else if (action === "reminder") {
+            var status = $("crm-clients-status");
+            if (status) status.textContent = t("menu_reminder_soon");
+          }
+        });
+      });
+    }
+
+    function draw() {
+      var tbody = $("crm-clients-tbody");
+      var status = $("crm-clients-status");
+      if (!tbody) return;
+      closeRowMenu();
+      var rows = visibleRows();
       if (!rows.length) {
         tbody.innerHTML = "";
-        if (status) status.textContent = ql ? t("no_matches") : t("no_clients");
+        if (status) status.textContent = q.trim() ? t("no_matches") : t("no_clients");
+        updateBulkBar();
         return;
       }
-      if (status) status.textContent = t("showing_clients", { shown: rows.length, total: leadsCache.length });
+      if (status && !status.textContent) {
+        status.textContent = t("showing_clients", { shown: rows.length, total: leadsCache.length });
+      } else if (status) {
+        status.textContent = t("showing_clients", { shown: rows.length, total: leadsCache.length });
+      }
       tbody.innerHTML = rows
         .map(function (L) {
+          var checked = selectedIds.has(L.id) ? " checked" : "";
           return (
             "<tr data-id=\"" +
             esc(L.id) +
-            "\"><td><span class=\"name-link\">" +
+            "\"><td class=\"crm-col-check\"><input type=\"checkbox\" class=\"crm-client-check\" data-id=\"" +
+            esc(L.id) +
+            "\" aria-label=\"" +
+            esc(displayName(L)) +
+            "\"" +
+            checked +
+            " /></td><td><span class=\"name-link\" role=\"link\" tabindex=\"0\">" +
             esc(displayName(L)) +
             "</span></td><td>" +
             esc(L.email || "—") +
@@ -387,15 +536,99 @@
             esc(L.phone || "—") +
             "</td><td>" +
             esc(L.language || "—") +
-            "</td></tr>"
+            '</td><td class="crm-col-menu"><button type="button" class="crm-row-menu-btn" data-id="' +
+            esc(L.id) +
+            '" aria-label="' +
+            esc(t("clients_row_actions")) +
+            '" aria-haspopup="true" aria-expanded="false">&#8942;</button></td></tr>'
           );
         })
         .join("");
-      tbody.querySelectorAll("tr").forEach(function (tr) {
-        tr.addEventListener("click", function () {
+
+      tbody.querySelectorAll(".name-link").forEach(function (link) {
+        link.addEventListener("click", function (e) {
+          e.stopPropagation();
+          var tr = link.closest("tr");
+          if (!tr) return;
           navigate("#/clients/" + encodeURIComponent(tr.getAttribute("data-id")) + "/overview");
         });
+        link.addEventListener("keydown", function (e) {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            link.click();
+          }
+        });
       });
+
+      tbody.querySelectorAll(".crm-client-check").forEach(function (box) {
+        box.addEventListener("click", function (e) {
+          e.stopPropagation();
+        });
+        box.addEventListener("change", function () {
+          var id = box.getAttribute("data-id");
+          if (!id) return;
+          if (box.checked) selectedIds.add(id);
+          else selectedIds.delete(id);
+          updateBulkBar();
+        });
+      });
+
+      tbody.querySelectorAll(".crm-row-menu-btn").forEach(function (btn) {
+        btn.addEventListener("click", function (e) {
+          e.stopPropagation();
+          var id = btn.getAttribute("data-id");
+          if (!id) return;
+          if (rowMenuLeadId === id && !$("crm-row-menu").classList.contains("hidden")) {
+            closeRowMenu();
+            return;
+          }
+          openRowMenu(id, btn);
+        });
+      });
+
+      updateBulkBar();
+    }
+
+    function openDeleteModal() {
+      if (!selectedIds.size) return;
+      var mod = $("crm-clients-delete-modal");
+      var body = $("crm-clients-delete-body");
+      if (body) body.textContent = t("clients_delete_confirm_body", { count: selectedIds.size });
+      if (mod) mod.classList.remove("hidden");
+    }
+
+    function closeDeleteModal() {
+      var mod = $("crm-clients-delete-modal");
+      if (mod) mod.classList.add("hidden");
+    }
+
+    async function deleteSelected() {
+      closeDeleteModal();
+      var ids = Array.from(selectedIds);
+      if (!ids.length) return;
+      var status = $("crm-clients-status");
+      var delBtn = $("crm-clients-delete");
+      if (status) status.textContent = t("clients_deleting");
+      if (delBtn) delBtn.disabled = true;
+      var ok = 0;
+      var fail = 0;
+      for (var i = 0; i < ids.length; i++) {
+        try {
+          await authedApi("/api/staff/leads?id=" + encodeURIComponent(ids[i]), null, { method: "DELETE" });
+          selectedIds.delete(ids[i]);
+          ok++;
+        } catch (e) {
+          fail++;
+        }
+      }
+      await refreshLeads();
+      draw();
+      if (status) {
+        status.textContent = fail
+          ? t("clients_delete_failed") + (ok ? " " + t("clients_deleted", { count: ok }) : "")
+          : t("clients_deleted", { count: ok });
+      }
+      updateBulkBar();
     }
 
     var search = $("crm-client-search");
@@ -405,6 +638,64 @@
         draw();
       });
     }
+
+    var selAll = $("crm-clients-select-all");
+    if (selAll) {
+      selAll.addEventListener("change", function () {
+        var rows = visibleRows();
+        if (selAll.checked) {
+          rows.forEach(function (L) {
+            selectedIds.add(L.id);
+          });
+        } else {
+          rows.forEach(function (L) {
+            selectedIds.delete(L.id);
+          });
+        }
+        draw();
+      });
+    }
+
+    var delBtn = $("crm-clients-delete");
+    if (delBtn) delBtn.addEventListener("click", openDeleteModal);
+    var delCancel = $("crm-clients-delete-cancel");
+    if (delCancel) delCancel.addEventListener("click", closeDeleteModal);
+    var delConfirm = $("crm-clients-delete-confirm");
+    if (delConfirm) {
+      delConfirm.addEventListener("click", function () {
+        void deleteSelected();
+      });
+    }
+    var delMod = $("crm-clients-delete-modal");
+    if (delMod) {
+      delMod.addEventListener("click", function (e) {
+        if (e.target === delMod) closeDeleteModal();
+      });
+    }
+
+    clientsRowMenuCloser = closeRowMenu;
+    if (!clientsListGlobalWired) {
+      clientsListGlobalWired = true;
+      document.addEventListener("click", function (e) {
+        if (e.target.closest("#crm-row-menu") || e.target.closest(".crm-row-menu-btn")) return;
+        if (clientsRowMenuCloser) clientsRowMenuCloser();
+      });
+      window.addEventListener(
+        "scroll",
+        function () {
+          if (clientsRowMenuCloser) clientsRowMenuCloser();
+        },
+        true
+      );
+    }
+
+    var addBtn = $("crm-add-client-btn");
+    if (addBtn) {
+      addBtn.addEventListener("click", function () {
+        navigate("#/clients/new");
+      });
+    }
+
     draw();
   }
 
@@ -443,63 +734,8 @@
     );
   }
 
-  function renderOverviewTab(detail) {
-    var pe = (detail && detail.profile_ext) || {};
-    var dob = pe.date_of_birth || detail.date_of_birth || "";
-    var age = calcAge(dob);
-    var gender = pe.gender || detail.gender || "—";
-    return (
-      '<div class="crm-card">' +
-      "<h2>" +
-      esc(t("contact_details")) +
-      "</h2>" +
-      '<dl class="crm-dl-grid">' +
-      "<div class=\"crm-dl-item\"><dt>" +
-      esc(t("full_name")) +
-      "</dt><dd>" +
-      esc(detail.display_name || displayName(detail)) +
-      "</dd></div>" +
-      "<div class=\"crm-dl-item\"><dt>" +
-      esc(t("col_email")) +
-      "</dt><dd>" +
-      esc(detail.email || "—") +
-      "</dd></div>" +
-      "<div class=\"crm-dl-item\"><dt>" +
-      esc(t("col_phone")) +
-      "</dt><dd>" +
-      esc(detail.phone || "—") +
-      "</dd></div>" +
-      "<div class=\"crm-dl-item\"><dt>" +
-      esc(t("col_language")) +
-      "</dt><dd>" +
-      esc(detail.language || "—") +
-      "</dd></div>" +
-      "<div class=\"crm-dl-item\"><dt>" +
-      esc(t("birthdate")) +
-      "</dt><dd>" +
-      esc(dob || "—") +
-      "</dd></div>" +
-      "<div class=\"crm-dl-item\"><dt>" +
-      esc(t("med_age")) +
-      "</dt><dd>" +
-      esc(age != null ? String(age) : "—") +
-      "</dd></div>" +
-      "<div class=\"crm-dl-item\"><dt>" +
-      esc(t("med_gender")) +
-      "</dt><dd>" +
-      esc(gender) +
-      "</dd></div>" +
-      "<div class=\"crm-dl-item\"><dt>" +
-      esc(t("source")) +
-      "</dt><dd>" +
-      esc(detail.source || detail.source_table || "—") +
-      "</dd></div>" +
-      "</dl>" +
-      '<p style="margin-top:16px;color:var(--crm-muted);font-size:0.88rem">' +
-      esc(t("overview_note")) +
-      "</p>" +
-      "</div>"
-    );
+  function renderOverviewTab() {
+    return '<div id="crm-overview-root"></div>';
   }
 
   async function renderClientDetail(main, route) {
@@ -540,7 +776,7 @@
 
     var panel =
       route.tab === "overview"
-        ? renderOverviewTab(d)
+        ? renderOverviewTab()
         : route.tab === "medical"
           ? '<div id="crm-medical-root"></div>'
           : route.tab === "connect"
@@ -590,6 +826,10 @@
       });
     });
 
+    if (route.tab === "overview" && window.StaffCrmOverview) {
+      var ovRoot = document.getElementById("crm-overview-root");
+      if (ovRoot) await window.StaffCrmOverview.mount(ovRoot, { leadId: route.id, detail: d });
+    }
     if (route.tab === "medical" && window.StaffCrmMedical) {
       var medRoot = document.getElementById("crm-medical-root");
       if (medRoot) await window.StaffCrmMedical.mount(medRoot, { leadId: route.id, detail: d });
@@ -630,12 +870,25 @@
         return;
       }
       if (route.view === "clients") {
-        await ensureLeads();
+        await refreshLeads();
         renderClientsList(main);
         resetIdleTimer();
         return;
       }
+      if (route.view === "clientNew") {
+        if (window.StaffCrmAddClient) {
+          window.StaffCrmAddClient.render(main);
+        } else {
+          main.innerHTML =
+            '<div class="crm-placeholder"><strong>' +
+            esc(t("load_error")) +
+            "</strong></div>";
+        }
+        resetIdleTimer();
+        return;
+      }
       if (route.view === "client") {
+        await ensureLeads();
         await loadLeadDetail(route.id);
         await renderClientDetail(main, route);
         resetIdleTimer();
@@ -758,6 +1011,8 @@
     calcAge: calcAge,
     t: t,
     reloadLeadDetail: reloadLeadDetail,
+    refreshLeads: refreshLeads,
+    upsertLeadListItem: upsertLeadListItem,
     getLang: function () {
       return window.StaffCrmI18n ? window.StaffCrmI18n.getLang() : "en";
     },
