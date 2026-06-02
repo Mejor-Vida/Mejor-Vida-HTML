@@ -4,6 +4,7 @@ const { json, serviceConfig, restSelect, restInsert, restPatch, restDelete } = r
 const { canAccessPhi } = require("../../lib/staff-permissions");
 const { readPhiByLead, writePhiByLead } = require("../../lib/phi-store");
 const { hubspotPhoneSearchVariants, phoneLast10Digits } = require("../../lib/hubspot-phone-variants");
+const { linkLeadToContacts } = require("./_contact-link");
 
 function isUuid(s) {
   return /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(String(s || ""));
@@ -1200,7 +1201,28 @@ module.exports = async function handler(req, res) {
         source: row.source || "staff_compose",
         source_table: "manychat_leads",
       };
-      return json(res, 200, { item });
+      let contactLink = null;
+      try {
+        contactLink = await linkLeadToContacts(cfg, {
+          leadId: row.id,
+          leadSourceTable: "manychat_leads",
+          first_name,
+          last_name,
+          email,
+          phone: phone || "",
+          language,
+          pipeline_stage: "new",
+          source: "staff_compose",
+          updatedBy: auth.user && auth.user.email ? auth.user.email : null,
+        });
+      } catch (linkErr) {
+        console.error("staff/leads POST contact-link", linkErr);
+      }
+      if (contactLink && contactLink.contactId) {
+        item.contacts_contact_id = contactLink.contactId;
+        item.contact_id = contactLink.contactId;
+      }
+      return json(res, 200, { item, contact_link: contactLink });
     } catch (e) {
       console.error("staff/leads POST", e);
       return json(res, 500, { error: "Failed to create lead" });
@@ -1360,6 +1382,39 @@ module.exports = async function handler(req, res) {
         auth.user && auth.user.email ? auth.user.email : null
       );
 
+      const canonicalAfterSave = await loadCanonicalLeadProfile(cfg, id, src || "unknown");
+      const linkFieldTouched = ["email", "phone", "manychat_subscriber_id", "first_name", "last_name"].some((k) =>
+        touched.includes(k)
+      );
+      const needsContactLink =
+        linkFieldTouched || !cleanText(canonicalAfterSave.contacts_contact_id || canonicalAfterSave.contact_id);
+      if (needsContactLink) {
+        try {
+          await linkLeadToContacts(cfg, {
+            leadId: id,
+            leadSourceTable: src || "unknown",
+            phone: mergePreferCanonical(unified.phone, canonicalAfterSave.phone),
+            email: mergePreferCanonical(String(unified.email || "").trim(), canonicalAfterSave.email),
+            first_name: mergePreferCanonical(unified.first_name, canonicalAfterSave.first_name),
+            last_name: mergePreferCanonical(unified.last_name, canonicalAfterSave.last_name),
+            language: mergePreferCanonical(unified.language, canonicalAfterSave.language),
+            manychat_subscriber_id: mergePreferCanonical(
+              unified.manychat_subscriber_id,
+              canonicalAfterSave.manychat_subscriber_id
+            ),
+            pipeline_stage: mergePreferCanonical(unified.pipeline_stage, canonicalAfterSave.pipeline_stage),
+            profile_ext:
+              canonicalAfterSave.profile_ext && typeof canonicalAfterSave.profile_ext === "object"
+                ? canonicalAfterSave.profile_ext
+                : {},
+            source: unified.source || canonicalAfterSave.source || "staff_compose",
+            updatedBy: auth.user && auth.user.email ? auth.user.email : null,
+          });
+        } catch (linkErr) {
+          console.error("staff/leads PATCH contact-link", linkErr);
+        }
+      }
+
       let detail = null;
       let cross = { detail: null, alternateLeadKeys: [] };
       if (src === "manychat_leads") {
@@ -1405,8 +1460,8 @@ module.exports = async function handler(req, res) {
       }
       if (mergedDetail) enrichDetailTopLevelFromPhi(mergedDetail);
 
-      const canonicalAfterSave = await loadCanonicalLeadProfile(cfg, id, src || "unknown");
-      const one = buildListItemFromRow(unified, canonicalAfterSave);
+      const canonicalForList = await loadCanonicalLeadProfile(cfg, id, src || "unknown");
+      const one = buildListItemFromRow(unified, canonicalForList);
       try {
         await enrichLeadEmailsFromContacts(cfg, [one]);
       } catch (e) {

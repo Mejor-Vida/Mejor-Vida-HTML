@@ -47,6 +47,41 @@
     return String(state.displayName || "").trim();
   }
 
+  function smsPlaceholderHtml() {
+    return (
+      '<div class="crm-connect-sms-placeholder">' +
+      "<strong>" +
+      esc(t("conn_sms_placeholder_title")) +
+      "</strong>" +
+      "<p>" +
+      esc(t("conn_sms_placeholder_body")) +
+      "</p>" +
+      "</div>"
+    );
+  }
+
+  function shellHtml() {
+    return (
+      '<div class="crm-connect-shell">' +
+      '<div class="crm-connect-subtabs" role="tablist" aria-label="' +
+      esc(t("conn_subtabs_label")) +
+      '">' +
+      '<button type="button" class="crm-connect-subtab active" id="crm-conn-subtab-email" role="tab" aria-selected="true" aria-controls="crm-connect-panel-email" data-subtab="email">' +
+      esc(t("conn_subtab_email")) +
+      "</button>" +
+      '<button type="button" class="crm-connect-subtab" id="crm-conn-subtab-sms" role="tab" aria-selected="false" aria-controls="crm-connect-panel-sms" data-subtab="sms">' +
+      esc(t("conn_subtab_sms")) +
+      "</button>" +
+      "</div>" +
+      '<div id="crm-connect-panel-email" class="crm-connect-subpanel" role="tabpanel">' +
+      formHtml() +
+      "</div>" +
+      '<div id="crm-connect-panel-sms" class="crm-connect-subpanel hidden" role="tabpanel" hidden>' +
+      smsPlaceholderHtml() +
+      "</div></div>"
+    );
+  }
+
   function formHtml() {
     return (
       '<div class="crm-connect-wrap">' +
@@ -395,6 +430,48 @@
     }
   }
 
+  function wireSubtabs(state) {
+    var emailBtn = $("crm-conn-subtab-email", state.root);
+    var smsBtn = $("crm-conn-subtab-sms", state.root);
+    if (emailBtn) {
+      emailBtn.addEventListener("click", function () {
+        setSubtab(state, "email");
+      });
+    }
+    if (smsBtn) {
+      smsBtn.addEventListener("click", function () {
+        setSubtab(state, "sms");
+      });
+    }
+  }
+
+  function setSubtab(state, subtab) {
+    state.subtab = subtab === "sms" ? "sms" : "email";
+    var isEmail = state.subtab === "email";
+    var emailBtn = $("crm-conn-subtab-email", state.root);
+    var smsBtn = $("crm-conn-subtab-sms", state.root);
+    var emailPanel = $("crm-connect-panel-email", state.root);
+    var smsPanel = $("crm-connect-panel-sms", state.root);
+    if (emailBtn) {
+      emailBtn.classList.toggle("active", isEmail);
+      emailBtn.setAttribute("aria-selected", isEmail ? "true" : "false");
+    }
+    if (smsBtn) {
+      smsBtn.classList.toggle("active", !isEmail);
+      smsBtn.setAttribute("aria-selected", isEmail ? "false" : "true");
+    }
+    if (emailPanel) {
+      emailPanel.classList.toggle("hidden", !isEmail);
+      if (isEmail) emailPanel.removeAttribute("hidden");
+      else emailPanel.setAttribute("hidden", "");
+    }
+    if (smsPanel) {
+      smsPanel.classList.toggle("hidden", isEmail);
+      if (isEmail) smsPanel.setAttribute("hidden", "");
+      else smsPanel.removeAttribute("hidden");
+    }
+  }
+
   function wire(state) {
     $("crm-conn-lang-en", state.root).addEventListener("click", function () {
       setLanguage(state, "English");
@@ -466,16 +543,19 @@
       leadSourceTable: detail.source_table || "manychat_leads",
       composeLang: detailLangToCompose(detail.language),
       emailType: "general",
+      subtab: "email",
       draftId: null,
       firstName: "",
       lastName: "",
       displayName: detail.display_name || "",
     };
 
-    rootEl.innerHTML = formHtml();
+    rootEl.innerHTML = shellHtml();
     state.root = rootEl;
+    wireSubtabs(state);
     fillForm(state, detail);
     wire(state);
+    setSubtab(state, "email");
   }
 
   window.StaffCrmConnect = { mount: mount };

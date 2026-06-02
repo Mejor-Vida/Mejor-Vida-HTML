@@ -112,6 +112,50 @@ function buildPipelineSteps(nurtureRow, deliveryLogs) {
   return [postQuoteRow, ...mainSteps];
 }
 
+/** All nurture stages for a contact not yet enrolled (CRM preview). */
+function buildTemplatePipelineSteps() {
+  const ordered = allStepsOrdered();
+  const postQuoteRow = {
+    stageNumber: 1,
+    phase: 0,
+    step: 1,
+    channel: "email",
+    channelUi: "Email",
+    name: stepDisplayName(0, 1),
+    scheduled_at: null,
+    actual_sent_at: null,
+    status: "not_enrolled",
+    is_next: true,
+    detail_reason: null,
+  };
+
+  const mainSteps = ordered.map((stDef, idx) => ({
+    stageNumber: idx + 2,
+    phase: stDef.phase,
+    step: stDef.step,
+    channel: channelForPhase(stDef.phase),
+    channelUi: stDef.phase === 1 ? "WhatsApp" : stDef.phase === 2 ? "SMS" : "Email",
+    name: stepDisplayName(stDef.phase, stDef.step),
+    scheduled_at: null,
+    actual_sent_at: null,
+    status: "not_enrolled",
+    is_next: false,
+    detail_reason: null,
+  }));
+
+  return [postQuoteRow, ...mainSteps];
+}
+
+async function fetchNurtureRowWithContact(cfg, contactId) {
+  const rows = await restSelect(
+    cfg,
+    "nurture_sequence",
+    `select=*,contacts(id,first_name,last_name,full_name,phone,email,language,idioma,manychat_subscriber_id,vcf_sent_at)` +
+      `&contact_id=eq.${encodeURIComponent(contactId)}&limit=1`
+  );
+  return rows && rows[0] ? rows[0] : null;
+}
+
 async function fetchNurtureRow(cfg, contactId) {
   const rows = await restSelect(
     cfg,
@@ -139,7 +183,9 @@ module.exports = {
   channelForPhase,
   computeNextSend,
   buildPipelineSteps,
+  buildTemplatePipelineSteps,
   fetchNurtureRow,
+  fetchNurtureRowWithContact,
   insertSkippedDelivery,
   restPatch,
   restSelect,

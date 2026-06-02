@@ -222,6 +222,15 @@
     );
   }
 
+  function formatDateAdded(iso) {
+    if (!iso) return "—";
+    var d = new Date(iso);
+    if (isNaN(d.getTime())) return "—";
+    var lang = window.StaffCrmI18n ? window.StaffCrmI18n.getLang() : "en";
+    var locale = lang === "es" ? "es-US" : "en-US";
+    return d.toLocaleDateString(locale, { year: "numeric", month: "short", day: "numeric" });
+  }
+
   function initials(name) {
     var parts = String(name || "")
       .trim()
@@ -395,13 +404,19 @@
       esc(t("clients_select_all")) +
       '" /></th>' +
       '<th class="crm-col-name">' +
+      '<button type="button" class="crm-sort-th-btn is-active" id="crm-sort-name" aria-sort="ascending">' +
       esc(t("col_name")) +
+      ' <span class="crm-sort-icon" aria-hidden="true">↑</span></button>' +
       '</th><th class="crm-col-email">' +
       esc(t("col_email")) +
       '</th><th class="crm-col-phone">' +
       esc(t("col_phone")) +
       '</th><th class="crm-col-language">' +
       esc(t("col_language")) +
+      '</th><th class="crm-col-date">' +
+      '<button type="button" class="crm-sort-th-btn" id="crm-sort-date" aria-sort="none">' +
+      esc(t("col_date_added")) +
+      ' <span class="crm-sort-icon" aria-hidden="true">↕</span></button>' +
       '</th><th class="crm-col-menu"><span class="hidden">' +
       esc(t("clients_row_actions")) +
       "</span></th></tr></thead><tbody id=\"crm-clients-tbody\"></tbody></table></div>" +
@@ -424,6 +439,7 @@
     var q = "";
     var selectedIds = new Set();
     var rowMenuLeadId = null;
+    var sortState = { column: "name", dir: "asc" };
 
     function visibleRows() {
       var ql = q.trim().toLowerCase();
@@ -432,6 +448,66 @@
         var hay = (displayName(L) + " " + (L.email || "") + " " + (L.phone || "")).toLowerCase();
         return hay.indexOf(ql) !== -1;
       });
+    }
+
+    function sortedRows() {
+      var rows = visibleRows().slice();
+      if (sortState.column === "name") {
+        rows.sort(function (a, b) {
+          var cmp = displayName(a).toLowerCase().localeCompare(displayName(b).toLowerCase());
+          return sortState.dir === "asc" ? cmp : -cmp;
+        });
+        return rows;
+      }
+      rows.sort(function (a, b) {
+        var ta = a.created_at ? new Date(a.created_at).getTime() : 0;
+        var tb = b.created_at ? new Date(b.created_at).getTime() : 0;
+        if (!ta && !tb) return 0;
+        if (!ta) return 1;
+        if (!tb) return -1;
+        var cmp = ta - tb;
+        return sortState.dir === "desc" ? -cmp : cmp;
+      });
+      return rows;
+    }
+
+    function updateSortHeaders() {
+      var nameBtn = $("crm-sort-name");
+      var dateBtn = $("crm-sort-date");
+      [nameBtn, dateBtn].forEach(function (btn) {
+        if (!btn) return;
+        var col = btn.id === "crm-sort-name" ? "name" : "date";
+        var active = sortState.column === col;
+        btn.classList.toggle("is-active", active);
+        var icon = btn.querySelector(".crm-sort-icon");
+        if (!icon) return;
+        if (!active) {
+          icon.textContent = "↕";
+          btn.setAttribute("aria-sort", "none");
+          btn.title = col === "name" ? t("sort_name_hint") : t("sort_date_hint");
+          return;
+        }
+        if (col === "name") {
+          icon.textContent = sortState.dir === "asc" ? "↑" : "↓";
+          btn.setAttribute("aria-sort", sortState.dir === "asc" ? "ascending" : "descending");
+          btn.title = sortState.dir === "asc" ? t("sort_name_az") : t("sort_name_za");
+        } else {
+          icon.textContent = sortState.dir === "desc" ? "↓" : "↑";
+          btn.setAttribute("aria-sort", sortState.dir === "desc" ? "descending" : "ascending");
+          btn.title = sortState.dir === "desc" ? t("sort_date_newest") : t("sort_date_oldest");
+        }
+      });
+    }
+
+    function toggleSort(column) {
+      if (sortState.column === column) {
+        sortState.dir = sortState.dir === "asc" ? "desc" : "asc";
+      } else {
+        sortState.column = column;
+        sortState.dir = column === "name" ? "asc" : "desc";
+      }
+      updateSortHeaders();
+      draw();
     }
 
     function updateBulkBar() {
@@ -504,7 +580,7 @@
       var status = $("crm-clients-status");
       if (!tbody) return;
       closeRowMenu();
-      var rows = visibleRows();
+      var rows = sortedRows();
       if (!rows.length) {
         tbody.innerHTML = "";
         if (status) status.textContent = q.trim() ? t("no_matches") : t("no_clients");
@@ -536,6 +612,8 @@
             esc(L.phone || "—") +
             "</td><td>" +
             esc(L.language || "—") +
+            "</td><td>" +
+            esc(formatDateAdded(L.created_at)) +
             '</td><td class="crm-col-menu"><button type="button" class="crm-row-menu-btn" data-id="' +
             esc(L.id) +
             '" aria-label="' +
@@ -630,6 +708,20 @@
       }
       updateBulkBar();
     }
+
+    var sortNameBtn = $("crm-sort-name");
+    if (sortNameBtn) {
+      sortNameBtn.addEventListener("click", function () {
+        toggleSort("name");
+      });
+    }
+    var sortDateBtn = $("crm-sort-date");
+    if (sortDateBtn) {
+      sortDateBtn.addEventListener("click", function () {
+        toggleSort("date");
+      });
+    }
+    updateSortHeaders();
 
     var search = $("crm-client-search");
     if (search) {
@@ -781,7 +873,9 @@
           ? '<div id="crm-medical-root"></div>'
           : route.tab === "connect"
             ? '<div id="crm-connect-root"></div>'
-            : tabPlaceholder(route.tab);
+            : route.tab === "pipeline"
+              ? '<div id="crm-pipeline-root"></div>'
+              : tabPlaceholder(route.tab);
 
     main.innerHTML =
       '<button type="button" class="crm-client-back" id="crm-back-clients">' +
@@ -837,6 +931,10 @@
     if (route.tab === "connect" && window.StaffCrmConnect) {
       var connRoot = document.getElementById("crm-connect-root");
       if (connRoot) await window.StaffCrmConnect.mount(connRoot, { leadId: route.id, detail: d });
+    }
+    if (route.tab === "pipeline" && window.StaffCrmPipeline) {
+      var pipeRoot = document.getElementById("crm-pipeline-root");
+      if (pipeRoot) await window.StaffCrmPipeline.mount(pipeRoot, { leadId: route.id, detail: d });
     }
   }
 

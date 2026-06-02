@@ -1,5 +1,70 @@
 /* CRM Connect tab — compose email */
 
+.crm-connect-shell {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.crm-connect-subtabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  border-bottom: 2px solid var(--crm-border);
+  margin: 0 0 16px;
+}
+
+.crm-connect-subtab {
+  border: 0;
+  background: transparent;
+  padding: 10px 16px;
+  font: inherit;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--crm-muted);
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+}
+
+.crm-connect-subtab:hover {
+  color: var(--crm-accent);
+  background: rgba(232, 240, 254, 0.5);
+}
+
+.crm-connect-subtab.active {
+  color: var(--crm-accent);
+  border-bottom-color: var(--crm-accent);
+}
+
+.crm-connect-subpanel.hidden {
+  display: none;
+}
+
+.crm-connect-sms-placeholder {
+  background: var(--crm-card-bg);
+  border: 1px dashed var(--crm-border);
+  border-radius: var(--crm-radius);
+  padding: 48px 28px;
+  text-align: center;
+  color: var(--crm-muted);
+  box-shadow: var(--crm-shadow);
+}
+
+.crm-connect-sms-placeholder strong {
+  display: block;
+  font-size: 1rem;
+  color: var(--crm-text);
+  margin-bottom: 10px;
+}
+
+.crm-connect-sms-placeholder p {
+  margin: 0 auto;
+  max-width: 420px;
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
 .crm-connect-wrap {
   background: var(--crm-card-bg);
   border: 1px solid var(--crm-border);

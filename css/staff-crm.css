@@ -620,28 +620,68 @@ body.crm-body {
 }
 
 .crm-table-clients .crm-col-name {
-  width: 22%;
+  width: 18%;
 }
 
 .crm-table-clients .crm-col-email {
-  width: 28%;
+  width: 24%;
 }
 
 .crm-table-clients .crm-col-phone {
-  width: 20%;
+  width: 16%;
 }
 
 .crm-table-clients .crm-col-language {
-  width: 15%;
+  width: 10%;
+}
+
+.crm-table-clients .crm-col-date {
+  width: 14%;
+  white-space: nowrap;
 }
 
 .crm-table-clients .crm-col-menu {
   width: 52px;
 }
 
+.crm-sort-th-btn {
+  appearance: none;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-weight: 700;
+  color: inherit;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  max-width: 100%;
+}
+
+.crm-sort-th-btn:hover {
+  color: var(--crm-text, #1a365d);
+}
+
+.crm-sort-th-btn.is-active {
+  color: var(--crm-accent, #1f4fbf);
+}
+
+.crm-sort-icon {
+  font-size: 0.85rem;
+  line-height: 1;
+  opacity: 0.45;
+}
+
+.crm-sort-th-btn.is-active .crm-sort-icon {
+  opacity: 1;
+}
+
 .crm-clients-search-row {
   display: grid;
-  grid-template-columns: 44px 22% 28% 20% 15% 52px;
+  grid-template-columns: 44px 18% 24% 16% 10% 14% 52px;
   align-items: center;
   padding: 12px 0 10px;
   border-bottom: 1px solid var(--crm-border);
