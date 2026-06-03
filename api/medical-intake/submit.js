@@ -1,6 +1,8 @@
 const { json, readJsonBody, requireValidIntakeToken } = require("./_lib");
 const { consumeToken, PHI_SOURCE } = require("../../lib/medical-intake-token");
 const { writePhiByLead } = require("../../lib/phi-store");
+const { sendMedicalIntakeSubmittedNotification } = require("../../lib/ic-lead-notify");
+const { normalizeFirstName } = require("../../lib/medical-intake-lead-greeting");
 
 async function restInsert(cfg, table, row) {
   const r = await fetch(`${cfg.supabaseUrl}/rest/v1/${table}`, {
@@ -69,6 +71,14 @@ module.exports = async function handler(req, res) {
       phi_source_table: PHI_SOURCE,
     });
     await consumeToken(cfg, tokenRow);
+
+    void sendMedicalIntakeSubmittedNotification({
+      leadId: tokenRow.lead_id,
+      leadSourceTable: tokenRow.lead_source_table,
+      recipientEmail: tokenRow.recipient_email,
+      recipientFirstName: normalizeFirstName(tokenRow.recipient_first_name),
+      intakeBody: body,
+    });
 
     return json(res, 200, { ok: true, message: "submitted" });
   } catch (e) {
