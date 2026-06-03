@@ -1316,7 +1316,9 @@
       return {
         headerTitle: "Cuestionario médico seguro",
         greeting: function (name) {
-          return "Hola " + (name || "there") + ",";
+          var n = String(name || "").trim();
+          if (!n || /^there$/i.test(n)) return "Hola,";
+          return "Hola " + n + ",";
         },
         lead:
           "Gracias por programar su llamada con Julie. Este cuestionario incluye las mismas preguntas de salud que utilizan las compañías de seguros de gastos finales para determinar elegibilidad. Completarlo antes de su llamada nos ayuda a preparar opciones reales para usted.",
@@ -1334,7 +1336,9 @@
     return {
       headerTitle: "Secure Medical Questionnaire",
       greeting: function (name) {
-        return "Hi " + (name || "there") + ",";
+        var n = String(name || "").trim();
+        if (!n || /^there$/i.test(n)) return "Hi,";
+        return "Hi " + n + ",";
       },
       lead:
         "Thank you for scheduling your call with Julie. This questionnaire includes the same health questions that final expense insurance companies use to determine eligibility. Completing it before your call helps us prepare real options for you.",
@@ -1351,7 +1355,8 @@
   }
 
   function paintLandingCopy() {
-    var firstName = landingMeta.first_name || "there";
+    var firstName = String(landingMeta.first_name || "").trim();
+    if (/^there$/i.test(firstName)) firstName = "";
     var copy = landingCopy();
     var greeting = $("mi-landing-greeting");
     if (greeting) greeting.textContent = copy.greeting(firstName);

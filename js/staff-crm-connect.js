@@ -237,7 +237,8 @@
     var reply = $("crm-conn-reply", state.root);
     if (!reply) return;
     var fn = String(($("crm-conn-first", state.root) && $("crm-conn-first", state.root).value) || "").trim();
-    if (!fn) fn = state.firstName || "there";
+    if (!fn) fn = state.firstName || "";
+    if (/^there$/i.test(fn)) fn = "";
     setStatus(state, t("conn_status_preview_loading"));
     reply.value = "";
     try {

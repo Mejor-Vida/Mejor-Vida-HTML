@@ -4,6 +4,7 @@ const {
   buildMedicalIntakePlainText,
   buildMedicalIntakeSubject,
 } = require("../../lib/medical-intake-email-template");
+const { normalizeFirstName } = require("../../lib/medical-intake-lead-greeting");
 
 const PREVIEW_LINK =
   "https://www.mejorvidainsurance.com/medical-intake.html?t=[secure link created when you send]";
@@ -25,12 +26,12 @@ module.exports = async function handler(req, res) {
   }
 
   const language = body && body.language != null ? String(body.language).trim() : "English";
-  const firstName = body && body.firstName != null ? String(body.firstName).trim() : "there";
+  const firstName = normalizeFirstName(body && body.firstName != null ? body.firstName : "");
 
   const subject = buildMedicalIntakeSubject({ language });
   const bodyText = buildMedicalIntakePlainText({
     language,
-    firstName: firstName || "there",
+    firstName,
     intakeUrl: PREVIEW_LINK,
   });
 

@@ -6,8 +6,11 @@ const {
   buildMedicalIntakePlainText,
   buildMedicalIntakeSubject,
   buildMedicalIntakeCtaHtml,
-  firstNameFromLead,
 } = require("../../lib/medical-intake-email-template");
+const {
+  normalizeFirstName,
+  fetchLeadGreetingFromDb,
+} = require("../../lib/medical-intake-lead-greeting");
 
 const GMAIL_REDIRECT_URI = "https://www.mejorvidainsurance.com/api/staff/gmail-callback";
 
@@ -171,14 +174,23 @@ module.exports = async function handler(req, res) {
       if (!leadId) {
         return json(res, 400, { success: false, error: "Select a lead before sending Medical Information Request." });
       }
+      let fn = normalizeFirstName(leadFirstName);
+      if (!fn) {
+        try {
+          const g = await fetchLeadGreetingFromDb(cfg, leadId, leadSourceTable);
+          fn = g.first_name;
+        } catch (_) {
+          /* use salutation without name */
+        }
+      }
       const issued = await issueToken(cfg, {
         leadId,
         leadSourceTable,
         recipientEmail: toEmail,
         issuedBy: auth.user && auth.user.email ? auth.user.email : null,
+        recipientFirstName: fn,
       });
       intakeUrl = issued.url;
-      const fn = leadFirstName || "there";
       draftForSend = buildMedicalIntakePlainText({ language, firstName: fn, intakeUrl });
     }
 
