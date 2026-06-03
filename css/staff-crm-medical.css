@@ -19,6 +19,18 @@
   font-weight: 600;
 }
 
+.crm-med-banner--awaiting {
+  background: #eef4fc;
+  border-color: #b8d4f0;
+  color: #1a3d5c;
+}
+
+.crm-med-banner--submitted {
+  background: #eef8f0;
+  border-color: #b8e6c8;
+  color: #1a5c32;
+}
+
 .crm-med-grid {
   display: grid;
   grid-template-columns: minmax(340px, 400px) 1fr;

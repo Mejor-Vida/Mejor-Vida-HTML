@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Publish May 31 weekly FB post — ILIT castle image + Spanish caption; first comment via Make.com.
+# Publish May 31 weekly FB post — ILIT castle image (hero-es) + Spanish caption; first comment via Make.com.
 set -euo pipefail
 cd "$(dirname "$0")"
 exec python3 main.py \

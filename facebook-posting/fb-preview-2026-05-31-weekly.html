@@ -3,154 +3,113 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FACEBOOK — Vista previa 31 may 2026 · Fideicomiso ILIT</title>
+  <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <title>Facebook preview · semana 2026-05-31 · 2026-05-31 23:49:13 UTC</title>
   <style>
-    :root {
-      --fb-bg: #f0f2f5;
-      --fb-card: #fff;
-      --fb-text: #050505;
-      --fb-secondary: #65676b;
-      --border: #e4e6eb;
-      --banner: #fff8e6;
-      --banner-border: #f5a623;
-    }
-    * { box-sizing: border-box; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background: var(--fb-bg);
-      color: var(--fb-text);
-      margin: 0;
-      padding: 1.5rem 1rem 3rem;
-      line-height: 1.45;
-    }
-    .banner {
-      max-width: 680px;
-      margin: 0 auto 1rem;
-      padding: 1rem 1.15rem;
-      background: var(--banner);
-      border: 2px solid var(--banner-border);
-      border-radius: 8px;
-      font-size: 0.92rem;
-    }
-    .banner strong { color: #b45309; }
-    h1.page-h1 {
-      max-width: 680px;
-      margin: 0 auto 0.5rem;
-      font-size: 1.35rem;
-      color: #1a365d;
-    }
-    .page-title {
-      max-width: 680px;
-      margin: 0 auto 1.25rem;
-      font-size: 1rem;
-      color: var(--fb-secondary);
-      font-weight: 600;
-    }
-    .mock {
-      max-width: 680px;
-      margin: 0 auto;
-      background: var(--fb-card);
-      border-radius: 8px;
-      box-shadow: 0 1px 2px rgba(0,0,0,.08);
-      overflow: hidden;
-      border: 2px solid #1877f2;
-    }
-    .mock img.hero { width: 100%; display: block; }
-    .img-fallback {
-      display: none;
-      padding: 1rem;
-      background: #fee;
-      font-size: 0.88rem;
-      border-bottom: 1px solid var(--border);
-    }
-    .mock-body { padding: 0.85rem 1rem 1.1rem; }
-    .page-name { font-weight: 600; font-size: 0.95rem; margin-bottom: 0.35rem; }
-    .caption { font-size: 0.95rem; white-space: pre-wrap; margin: 0 0 0.75rem; }
-    .meta { font-size: 0.8rem; color: var(--fb-secondary); }
-    .section {
-      max-width: 680px;
-      margin: 1.25rem auto 0;
-      background: var(--fb-card);
-      border-radius: 8px;
-      padding: 1rem 1.15rem;
-      box-shadow: 0 1px 2px rgba(0,0,0,.06);
-    }
-    .section h2 { font-size: 1rem; margin: 0 0 0.65rem; color: #1a365d; }
-    .first-comment { font-size: 0.9rem; white-space: pre-wrap; }
-    .checklist { margin: 0; padding-left: 1.2rem; font-size: 0.9rem; }
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; background: #f0f2f5; margin: 0; padding: 24px; color: #1c1e21; }
+    .wrap { max-width: 520px; margin: 0 auto; }
+    h1 { font-size: 1rem; font-weight: 600; color: #65676b; margin: 0 0 8px 0; }
+    h2 { font-size: 0.85rem; font-weight: 600; color: #65676b; margin: 0 0 8px 0; padding: 12px 16px 0 16px; }
+    .content-date { background: #e7f3ff; border: 1px solid #1877f2; border-radius: 8px; padding: 12px 14px; margin-bottom: 14px; font-size: 14px; line-height: 1.45; }
+    .content-date .iso { color: #65676b; font-weight: 500; }
+    .content-date .sub { display: block; font-size: 12px; color: #65676b; margin-top: 6px; }
+    .card { background: #fff; border-radius: 8px; box-shadow: 0 1px 2px rgba(0,0,0,.1); overflow: hidden; margin-bottom: 16px; }
+    .card img { width: 100%; height: auto; display: block; vertical-align: middle; background: #e4e6eb; }
+    .caption { padding: 12px 16px 16px; font-size: 15px; line-height: 1.4; white-space: normal; }
+    .meta { padding: 12px 16px; font-size: 12px; color: #65676b; border-top: 1px solid #e4e6eb; }
+    .meta a { color: #1877f2; }
+    .note { font-size: 13px; color: #65676b; margin-top: 8px; padding: 12px; background: #fff3cd; border-radius: 8px; border: 1px solid #ffc107; }
+    .stamp { font-size: 11px; color: #8a8d91; margin-top: 8px; }
+    .rule { font-size: 12px; color: #65676b; margin-bottom: 12px; }
   </style>
 </head>
 <body>
+  <div class="wrap">
+    <h1>Vista previa — post principal (sin enlace al blog)</h1>
 
-  <h1 class="page-h1">Vista previa — publicación Facebook (Mejor Vida)</h1>
-  <p class="page-title">31 de mayo de 2026 · Imagen: castillo ILIT (<code>hero-es.png</code>) · Enfoque: fideicomisos de seguro de vida / reforma fiscal</p>
-
-  <div class="banner">
-    <strong>Publicar:</strong> desde <code>facebook-posting/</code> ejecute
-    <code>./publish-weekly-may31.sh</code>
-  </div>
-
-  <div class="mock" aria-label="Simulación de publicación en Facebook">
-    <div id="img-fallback" class="img-fallback" hidden>
-      No se cargó la imagen. Ruta: <code>../img/blog-generated/weekly-insurance-update-2026-05-31/hero-es.png</code>
+    <div class="content-date">
+      <strong>Post / boletín:</strong> 31 de mayo de 2026 <span class="iso">(2026-05-31)</span><br />
+      <span class="sub">Misma vista guardada como <code>post-preview-2026-05-31.html</code> para no confundirla con otras semanas.</span>
     </div>
-    <img
-      class="hero"
-      src="../img/blog-generated/weekly-insurance-update-2026-05-31/hero-es.png"
-      alt="Castillo con banner Fideicomiso de seguro de vida irrevocable — metáfora editorial ILIT"
-      onerror="document.getElementById('img-fallback').hidden=false;this.style.display='none'"
-    />
-    <div class="mock-body">
-      <div class="page-name">Mejor Vida Insurance</div>
-      <p class="caption">🏛️ ¿Qué es un FIDEICOMISO DE SEGURO DE VIDA IRREVOCABLE (ILIT) — y por qué está en las noticias esta semana?
-
-Un ILIT es una estructura legal donde una póliza de seguro de vida se mantiene dentro de un fideicomiso irrevocable, a menudo como parte de un plan patrimonial más amplio.
-
-En palabras sencillas:
-👉 la póliza no está a su nombre directamente
-👉 un fiduciario administra el fideicomiso
-👉 el beneficio por fallecimiento puede usarse para proteger a la familia o cubrir obligaciones fiscales
-
-Esta semana, legisladores demócratas impulsaron propuestas para limitar ciertos beneficios fiscales de fideicomisos de alto patrimonio — incluidos algunos que contienen seguros de vida.
-
-¿Por qué importa?
-
-✔ La exención federal del impuesto sobre sucesiones volvió a niveles más bajos en 2026
-✔ Más patrimonios podrían quedar sujetos al impuesto del 40%
-✔ Algunos clientes están revisando planificación patrimonial con más urgencia
-✔ La legislación AÚN NO se ha aprobado — pero la conversación ya cambió
-
-Para la mayoría de familias en el mercado de gastos finales, el impacto directo es limitado: estas propuestas apuntan principalmente a estructuras complejas de alto valor.
-
-Pero sí es un buen momento para recordar:
-💙 El seguro de vida como protección familiar es distinto de estrategias fiscales complejas
-💙 La educación clara genera confianza
-
-#SeguroDeVida #GastosFinales #PlanificacionPatrimonial #EducacionEnSeguros #MejorVidaInsurance</p>
-      <p class="meta">Sin enlaces en el cuerpo principal</p>
+    <p class="stamp">Archivo generado: 2026-05-31 23:49:13 UTC</p>
+    <p class="rule">Regla: el enlace del artículo va en el <strong>primer comentario</strong>, no en el texto principal (ver <code>facebook-post-rules.md</code>).</p>
+    <div class="card">
+      <img src="../img/blog-generated/weekly-insurance-update-2026-05-31/hero-en.png" alt="Post image" />
+      <div class="caption">🚨 Why are lawmakers talking about changing how wealthy families use life insurance?<br>
+<br>
+Because many of the wealthiest families in America don&#x27;t just use life insurance as a death benefit.<br>
+<br>
+They use it as a wealth-transfer tool.<br>
+<br>
+Here&#x27;s a simplified example:<br>
+<br>
+Let&#x27;s say a family owns a farm, a business, real estate, and other assets worth millions of dollars.<br>
+<br>
+When the parents pass away, their children may inherit those assets—but they could also face a large estate tax bill.<br>
+<br>
+The problem?<br>
+<br>
+The family&#x27;s wealth may be tied up in land, buildings, or a business, not cash.<br>
+<br>
+Without planning, the heirs may be forced to sell part of the family farm, business, or other assets just to pay taxes.<br>
+<br>
+This is one reason wealthy families have often used special trusts that own life insurance policies.<br>
+<br>
+When someone passes away, the life insurance provides cash that can help pay taxes and preserve family assets for the next generation.<br>
+<br>
+That&#x27;s why life insurance has been used for decades by business owners, farmers, and wealthy families as part of their financial strategy.<br>
+<br>
+Now some lawmakers are proposing changes that could limit certain trust strategies involving life insurance and estate planning.<br>
+<br>
+Whether those changes happen or not, there&#x27;s an important lesson here:<br>
+<br>
+The wealthy don&#x27;t view life insurance as just a way to pay for a funeral.<br>
+<br>
+They view it as a tool to protect what they&#x27;ve built and help create a legacy for the people they love.<br>
+<br>
+Most families don&#x27;t need complicated trusts.<br>
+<br>
+But every family can ask:<br>
+<br>
+👉 If wealthy families use life insurance to protect their future, should I learn how it could help protect mine?<br>
+<br>
+If you&#x27;d like to learn more about how life insurance can protect your family, send me a message. I&#x27;d be happy to help.</div>
+      <div class="meta">Referencia del artículo (solo para ti): <a href="https://www.mejorvidainsurance.com/en/blog/weekly-insurance-update-2026-05-31.html#story1">https://www.mejorvidainsurance.com/en/blog/weekly-insurance-update-2026-05-31.html#story1</a></div>
     </div>
+
+    <div class="card section">
+      <h2>Primer comentario (publicar después del post; incluye el enlace)</h2>
+      <div class="caption">If you want to read the full article (Story 1 — lawmakers and life insurance trusts):<br>
+https://www.mejorvidainsurance.com/en/blog/weekly-insurance-update-2026-05-31.html#story1<br>
+<br>
+Full weekly update (May 31):<br>
+https://www.mejorvidainsurance.com/en/blog/weekly-insurance-update-2026-05-31.html<br>
+<br>
+If you&#x27;d rather message us directly:<br>
+https://wa.me/14024405438?text=Hello%2C%20I%20saw%20your%20post%20about%20life%20insurance%20trusts%20and%20would%20like%20to%20learn%20more.</div>
+    </div>
+
+    <div class="card section">
+      <h2>Texto alternativo (más corto)</h2>
+      <div class="caption">¿Por qué legisladores hablan de cambiar cómo las familias adineradas usan el seguro de vida? Esta semana propusieron límites a ciertos fideicomisos con pólizas (ILIT). Comenta INFO para el artículo del 31 de mayo o REVISAR para orientación. Solo educativo.</div>
+    </div>
+
+    <div class="card section">
+      <h2>Prompt de imagen</h2>
+      <div class="caption">Medieval castle with Irrevocable Life Insurance Trust banner — editorial metaphor on estate tax legislation targeting ILITs. hero-en.png from May 31 2026 blog.</div>
+    </div>
+
+    <div class="card section">
+      <h2>Keywords ManyChat</h2>
+      <div class="caption">INFO, REVISAR</div>
+    </div>
+
+  <div class="card section">
+    <h2>Comentario fijado (opcional)</h2>
+    <div class="caption">If you comment INFO or REVISAR, we&#x27;ll reply by message. This is educational information; every situation and product can differ.</div>
   </div>
-
-  <div class="section">
-    <h2>Primer comentario</h2>
-    <p class="first-comment">Aquí está el artículo de esta semana (historia 1 — reforma fiscal sobre fideicomisos de seguro de vida):
-https://www.mejorvidainsurance.com/blog/weekly-insurance-update-2026-05-31.html#story1
-
-Artículo completo de la semana del 31 de mayo:
-https://www.mejorvidainsurance.com/blog/weekly-insurance-update-2026-05-31.html
-
-Si prefieres platicarlo por WhatsApp:
-https://wa.me/14024405438?text=Hola%2C%20vi%20su%20publicaci%C3%B3n%20sobre%20fideicomisos%20de%20seguro%20de%20vida%20y%20quiero%20orientaci%C3%B3n.</p>
+    <p class="note">Solo en tu equipo. Publicar: <code>python3 main.py</code> (sin <code>--dry-run</code>). Opcional: <code>--no-first-comment</code> si el primer comentario lo publica Make.com o a mano.</p>
   </div>
-
-  <div class="section">
-    <h2>Lista de verificación</h2>
-    <ul class="checklist">
-      <li>Imagen: <code>img/blog-generated/weekly-insurance-update-2026-05-31/hero-es.png</code></li>
-      <li>Paquete JSON: <code>FB/post-package-weekly-2026-05-31.json</code></li>
-      <li>Misma imagen en blog, tarjeta del índice y FB</li>
-    </ul>
-  </div>
-
 </body>
 </html>

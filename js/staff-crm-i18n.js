@@ -398,6 +398,9 @@
       med_banner_pending: "Client has not submitted the secure medical questionnaire yet.",
       med_banner_send: "Send from Connect tab",
       med_banner_when_ready: "when ready.",
+      med_banner_awaiting:
+        "Secure medical questionnaire was sent, but the client's responses have not been received yet.",
+      med_banner_awaiting_sent: "Sent",
       med_banner_submitted: "Client submitted medical intake",
       med_loading: "Loading medical profile…",
       med_phi_restricted: "PHI access restricted",
@@ -852,6 +855,9 @@
       med_banner_pending: "El cliente aún no ha enviado el cuestionario médico seguro.",
       med_banner_send: "Enviar desde la pestaña Conectar",
       med_banner_when_ready: "cuando esté listo.",
+      med_banner_awaiting:
+        "El cuestionario médico seguro fue enviado, pero aún no hemos recibido la respuesta del cliente.",
+      med_banner_awaiting_sent: "Enviado",
       med_banner_submitted: "El cliente envió el cuestionario médico",
       med_loading: "Cargando perfil médico…",
       med_phi_restricted: "Acceso a PHI restringido",

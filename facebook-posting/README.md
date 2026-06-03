@@ -138,10 +138,12 @@ Your app must have these permissions granted:
 | `pages_read_engagement` | Required for most Page read operations |
 | `pages_show_list` | Required to list pages via `/me/accounts` |
 
-> **App Review note:** In **Development mode**, only app Admins/Developers/Testers can use
-> the app. To post on behalf of a real Page visible to the public, your app must pass
-> Meta's App Review for `pages_manage_posts`. For your own Page where you are admin,
-> Development mode is fine.
+> **App Review / Live mode (critical):** Posts created through the Graph API while your app is in
+> **Development** mode often **do not appear on the public Page timeline** — only posts made in the
+> Facebook/Meta UI (no `application` on the post) show for everyone. Switch the app to **Live**
+> in [developers.facebook.com](https://developers.facebook.com) → your app → top toggle. You may need
+> App Review for `pages_manage_posts` before Live mode allows that permission. After going Live,
+> older API posts may become visible; if not, republish or boost from Business Suite.
 
 ### One-time token setup (step by step)
 

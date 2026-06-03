@@ -311,9 +311,6 @@
     });
     if (idx >= 0) leadsCache[idx] = Object.assign({}, leadsCache[idx], item);
     else leadsCache.push(item);
-    leadsCache.sort(function (a, b) {
-      return displayName(a).toLowerCase().localeCompare(displayName(b).toLowerCase());
-    });
   }
 
   function renderDashboard(main) {
@@ -404,9 +401,9 @@
       esc(t("clients_select_all")) +
       '" /></th>' +
       '<th class="crm-col-name">' +
-      '<button type="button" class="crm-sort-th-btn is-active" id="crm-sort-name" aria-sort="ascending">' +
+      '<button type="button" class="crm-sort-th-btn" id="crm-sort-name" aria-sort="none">' +
       esc(t("col_name")) +
-      ' <span class="crm-sort-icon" aria-hidden="true">↑</span></button>' +
+      ' <span class="crm-sort-icon" aria-hidden="true">↕</span></button>' +
       '</th><th class="crm-col-email">' +
       esc(t("col_email")) +
       '</th><th class="crm-col-phone">' +
@@ -414,9 +411,9 @@
       '</th><th class="crm-col-language">' +
       esc(t("col_language")) +
       '</th><th class="crm-col-date">' +
-      '<button type="button" class="crm-sort-th-btn" id="crm-sort-date" aria-sort="none">' +
+      '<button type="button" class="crm-sort-th-btn is-active" id="crm-sort-date" aria-sort="descending">' +
       esc(t("col_date_added")) +
-      ' <span class="crm-sort-icon" aria-hidden="true">↕</span></button>' +
+      ' <span class="crm-sort-icon" aria-hidden="true">↓</span></button>' +
       '</th><th class="crm-col-menu"><span class="hidden">' +
       esc(t("clients_row_actions")) +
       "</span></th></tr></thead><tbody id=\"crm-clients-tbody\"></tbody></table></div>" +
@@ -439,7 +436,7 @@
     var q = "";
     var selectedIds = new Set();
     var rowMenuLeadId = null;
-    var sortState = { column: "name", dir: "asc" };
+    var sortState = { column: "date", dir: "desc" };
 
     function visibleRows() {
       var ql = q.trim().toLowerCase();

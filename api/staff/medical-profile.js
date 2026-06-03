@@ -25,6 +25,32 @@ function emptyIntake() {
   };
 }
 
+function questionnaireStatus(submissions, pendingToken) {
+  const latestSub = Array.isArray(submissions) && submissions[0] ? submissions[0] : null;
+  if (pendingToken) {
+    if (!latestSub || !latestSub.submitted_at) return "awaiting";
+    const sentAt = new Date(pendingToken.created_at).getTime();
+    const subAt = new Date(latestSub.submitted_at).getTime();
+    if (Number.isFinite(sentAt) && Number.isFinite(subAt) && sentAt > subAt) return "awaiting";
+  }
+  if (latestSub) return "submitted";
+  return "not_sent";
+}
+
+async function fetchPendingQuestionnaireToken(cfg, leadId, leadSourceTable) {
+  const now = new Date().toISOString();
+  try {
+    const rows = await restSelect(
+      cfg,
+      "medical_intake_access_tokens",
+      `select=id,created_at,expires_at,recipient_email,status&lead_id=eq.${encodeURIComponent(leadId)}&lead_source_table=eq.${encodeURIComponent(leadSourceTable)}&status=eq.active&expires_at=gt.${encodeURIComponent(now)}&order=created_at.desc&limit=1`
+    );
+    return Array.isArray(rows) && rows[0] ? rows[0] : null;
+  } catch (_) {
+    return null;
+  }
+}
+
 function normalizeIntake(payload) {
   const p = payload && typeof payload === "object" ? payload : {};
   const hi = p.healthInfo && typeof p.healthInfo === "object" ? p.healthInfo : {};
@@ -73,11 +99,18 @@ module.exports = async function handler(req, res) {
       submissions = [];
     }
 
+    const pendingToken = await fetchPendingQuestionnaireToken(cfg, leadId, leadSourceTable);
+    const questionnaire_status = questionnaireStatus(submissions, pendingToken);
+    const questionnaire_sent_at =
+      pendingToken && pendingToken.created_at ? pendingToken.created_at : null;
+
     if (!canPhi) {
       return json(res, 200, {
         ok: true,
         can_access_phi: false,
         intake: null,
+        questionnaire_status,
+        questionnaire_sent_at,
         submissions: submissions.map((s) => ({
           id: s.id,
           status: s.status,
@@ -93,6 +126,8 @@ module.exports = async function handler(req, res) {
       can_access_phi: true,
       intake: hasData ? normalizeIntake(payload) : emptyIntake(),
       has_saved_profile: hasData,
+      questionnaire_status,
+      questionnaire_sent_at,
       submissions,
     });
   }

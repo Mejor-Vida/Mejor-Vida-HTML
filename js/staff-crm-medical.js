@@ -1729,6 +1729,8 @@
         editing: !data.has_saved_profile,
         hasSavedProfile: !!data.has_saved_profile,
         clientSubmitted: !!(data.submissions && data.submissions.length),
+        questionnaireStatus: data.questionnaire_status || "not_sent",
+        questionnaireSentAt: data.questionnaire_sent_at || null,
         state: {
           healthInfo: Object.assign(emptyState().healthInfo, intake.healthInfo || {}),
           providers: intake.providers || [],
@@ -1752,7 +1754,27 @@
 
       ms.savedSnapshot = cloneState(ms.state);
 
-      if (!ms.clientSubmitted) {
+      if (ms.questionnaireStatus === "submitted") {
+        var sub = data.submissions[0];
+        ms.bannerHtml =
+          '<div class="crm-med-banner crm-med-banner--submitted">' +
+          esc(t("med_banner_submitted")) +
+          (sub && sub.submitted_at
+            ? " · " + new Date(sub.submitted_at).toLocaleString()
+            : "") +
+          ".</div>";
+      } else if (ms.questionnaireStatus === "awaiting") {
+        var sentLabel = ms.questionnaireSentAt
+          ? t("med_banner_awaiting_sent") +
+            " " +
+            new Date(ms.questionnaireSentAt).toLocaleString()
+          : "";
+        ms.bannerHtml =
+          '<div class="crm-med-banner crm-med-banner--awaiting">' +
+          esc(t("med_banner_awaiting")) +
+          (sentLabel ? " · " + esc(sentLabel) : "") +
+          "</div>";
+      } else {
         ms.bannerHtml =
           '<div class="crm-med-banner">' +
           esc(t("med_banner_pending")) +
@@ -1762,15 +1784,6 @@
           "</a> " +
           esc(t("med_banner_when_ready")) +
           "</div>";
-      } else {
-        var sub = data.submissions[0];
-        ms.bannerHtml =
-          '<div class="crm-med-banner" style="background:#eef8f0;border-color:#b8e6c8;color:#1a5c32">' +
-          esc(t("med_banner_submitted")) +
-          (sub && sub.submitted_at
-            ? " · " + new Date(sub.submitted_at).toLocaleString()
-            : "") +
-          ".</div>";
       }
 
       rootEl.innerHTML = '<div class="crm-med-wrap"><div id="crm-med-inner"></div></div>';
