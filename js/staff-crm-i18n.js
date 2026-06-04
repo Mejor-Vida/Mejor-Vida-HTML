@@ -259,6 +259,20 @@
       conn_sms_placeholder_title: "SMS messaging",
       conn_sms_placeholder_body:
         "Two-way SMS from the CRM is coming soon. We're waiting for 10DLC registration approval before this channel goes live.",
+      conn_sms_status_opted_in: "SMS opt-in: Yes",
+      conn_sms_status_not_opted_in: "SMS opt-in: No",
+      conn_sms_status_unknown: "SMS opt-in: Not recorded",
+      conn_sms_status_opted_in_body:
+        "This client checked the optional SMS consent box on the quote form. You may contact them by text when SMS is enabled.",
+      conn_sms_status_not_opted_in_body:
+        "This client did not opt in to SMS on the quote form. Do not send marketing or follow-up text messages.",
+      conn_sms_status_unknown_body:
+        "No SMS consent was recorded for this lead. Use email or phone until consent is documented.",
+      conn_sms_recorded_at: "Recorded {when}",
+      conn_sms_blocked_title: "SMS not available for this client",
+      conn_sms_blocked_body:
+        "Text messaging is disabled without SMS opt-in. Use email or call instead.",
+      conn_sms_subtab_blocked_hint: "SMS blocked — client did not opt in",
       conn_first_name: "First name",
       conn_last_name: "Last name",
       conn_email: "Email",
@@ -716,6 +730,20 @@
       conn_sms_placeholder_title: "Mensajes SMS",
       conn_sms_placeholder_body:
         "El SMS bidireccional desde el CRM estará disponible pronto. Estamos esperando la aprobación del registro 10DLC antes de activar este canal.",
+      conn_sms_status_opted_in: "Consentimiento SMS: Sí",
+      conn_sms_status_not_opted_in: "Consentimiento SMS: No",
+      conn_sms_status_unknown: "Consentimiento SMS: Sin registro",
+      conn_sms_status_opted_in_body:
+        "Este cliente marcó la casilla opcional de consentimiento SMS en el formulario de cotización. Puede contactarlo por texto cuando SMS esté activo.",
+      conn_sms_status_not_opted_in_body:
+        "Este cliente no optó por SMS en el formulario de cotización. No envíe mensajes de texto de marketing o seguimiento.",
+      conn_sms_status_unknown_body:
+        "No hay consentimiento SMS registrado para este cliente. Use correo o teléfono hasta documentar el consentimiento.",
+      conn_sms_recorded_at: "Registrado {when}",
+      conn_sms_blocked_title: "SMS no disponible para este cliente",
+      conn_sms_blocked_body:
+        "Los mensajes de texto están desactivados sin consentimiento SMS. Use correo o llamada.",
+      conn_sms_subtab_blocked_hint: "SMS bloqueado — el cliente no optó por SMS",
       conn_first_name: "Nombre",
       conn_last_name: "Apellido",
       conn_email: "Correo",

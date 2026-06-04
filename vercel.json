@@ -163,6 +163,28 @@
       ]
     },
     {
+      "source": "/gastos-finales-ads-v2",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-cache, must-revalidate"
+        },
+        {
+          "key": "CDN-Cache-Control",
+          "value": "no-cache"
+        }
+      ]
+    },
+    {
+      "source": "/gastos-finales-ads-v2/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    },
+    {
       "source": "/(.*)",
       "headers": [
         {

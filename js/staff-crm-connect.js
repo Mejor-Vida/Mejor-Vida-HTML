@@ -60,6 +60,84 @@
     );
   }
 
+  function formatSmsOptInDate(iso) {
+    if (!iso) return "";
+    try {
+      var d = new Date(iso);
+      if (Number.isNaN(d.getTime())) return "";
+      return d.toLocaleString(undefined, { dateStyle: "medium", timeStyle: "short" });
+    } catch (e) {
+      return "";
+    }
+  }
+
+  function buildSmsPanelHtml(state) {
+    var optedIn = state.smsOptIn === true;
+    var optedOut = state.smsOptIn === false;
+    var when = formatSmsOptInDate(state.smsOptInAt);
+    var note = String(state.smsOptInNote || "").trim();
+    var statusClass = optedIn
+      ? "crm-connect-sms-consent--opted-in"
+      : optedOut
+        ? "crm-connect-sms-consent--declined"
+        : "crm-connect-sms-consent--unknown";
+    var statusTitle = optedIn
+      ? t("conn_sms_status_opted_in")
+      : optedOut
+        ? t("conn_sms_status_not_opted_in")
+        : t("conn_sms_status_unknown");
+    var statusBody = optedIn
+      ? t("conn_sms_status_opted_in_body")
+      : optedOut
+        ? t("conn_sms_status_not_opted_in_body")
+        : t("conn_sms_status_unknown_body");
+    var html =
+      '<div class="crm-connect-sms-panel">' +
+      '<div class="crm-connect-sms-consent ' +
+      statusClass +
+      '" role="status">' +
+      "<strong>" +
+      esc(statusTitle) +
+      "</strong>";
+    if (when) {
+      html += '<p class="crm-connect-sms-consent-when">' + esc(t("conn_sms_recorded_at", { when: when })) + "</p>";
+    }
+    html += "<p>" + esc(statusBody) + "</p>";
+    if (note) {
+      html += '<p class="crm-connect-sms-consent-note">' + esc(note) + "</p>";
+    }
+    html += "</div>";
+    if (optedIn) {
+      html += smsPlaceholderHtml();
+    } else {
+      html +=
+        '<div class="crm-connect-sms-blocked">' +
+        "<strong>" +
+        esc(t("conn_sms_blocked_title")) +
+        "</strong>" +
+        "<p>" +
+        esc(t("conn_sms_blocked_body")) +
+        "</p>" +
+        "</div>";
+    }
+    html += "</div>";
+    return html;
+  }
+
+  function renderSmsPanel(state) {
+    var panel = $("crm-connect-panel-sms", state.root);
+    if (!panel) return;
+    panel.innerHTML = buildSmsPanelHtml(state);
+    var smsBtn = $("crm-conn-subtab-sms", state.root);
+    if (smsBtn) {
+      smsBtn.classList.toggle("crm-connect-subtab--sms-blocked", state.smsOptIn !== true);
+      smsBtn.setAttribute(
+        "title",
+        state.smsOptIn === true ? "" : t("conn_sms_subtab_blocked_hint")
+      );
+    }
+  }
+
   function shellHtml() {
     return (
       '<div class="crm-connect-shell">' +
@@ -77,7 +155,6 @@
       formHtml() +
       "</div>" +
       '<div id="crm-connect-panel-sms" class="crm-connect-subpanel hidden" role="tabpanel" hidden>' +
-      smsPlaceholderHtml() +
       "</div></div>"
     );
   }
@@ -549,12 +626,16 @@
       firstName: "",
       lastName: "",
       displayName: detail.display_name || "",
+      smsOptIn: detail.sms_opt_in === true ? true : detail.sms_opt_in === false ? false : null,
+      smsOptInAt: detail.sms_opt_in_at || detail.opt_in_at || null,
+      smsOptInNote: detail.sms_opt_in_note || null,
     };
 
     rootEl.innerHTML = shellHtml();
     state.root = rootEl;
     wireSubtabs(state);
     fillForm(state, detail);
+    renderSmsPanel(state);
     wire(state);
     setSubtab(state, "email");
   }

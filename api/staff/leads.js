@@ -332,6 +332,40 @@ function toBoolOrNullFromText(v) {
   return null;
 }
 
+/** SMS TCPA opt-in from quote_lead_submissions.consent_summary / payload. */
+function parseSmsOptInFromQuoteLead(consentSummary, payload) {
+  const cs = consentSummary && typeof consentSummary === "object" ? consentSummary : {};
+  const pl = payload && typeof payload === "object" ? payload : {};
+  if (cs.smsOptIn === true || cs.smsOptIn === false) {
+    return {
+      sms_opt_in: !!cs.smsOptIn,
+      sms_opt_in_at: cs.at || null,
+      sms_opt_in_note:
+        (cs.marketingOptIn && cs.marketingOptIn.label) ||
+        (cs.smsOptIn
+          ? "Opted in to SMS on quote form."
+          : "Did not opt in to SMS on quote form."),
+    };
+  }
+  const mo =
+    (pl.marketingOptIn && typeof pl.marketingOptIn === "object" ? pl.marketingOptIn : null) ||
+    (cs.marketingOptIn && typeof cs.marketingOptIn === "object" ? cs.marketingOptIn : null);
+  if (mo && (mo.sms === true || mo.sms === false)) {
+    return {
+      sms_opt_in: !!mo.sms,
+      sms_opt_in_at: cs.at || null,
+      sms_opt_in_note: mo.label || null,
+    };
+  }
+  return { sms_opt_in: null, sms_opt_in_at: null, sms_opt_in_note: null };
+}
+
+function mergeSmsOptIn(a, b) {
+  if (a === true || b === true) return true;
+  if (a === false || b === false) return false;
+  return null;
+}
+
 /** Merge product-selector-derived scalars (later rows fill blanks in `a`). */
 function mergePsAugment(a, b) {
   const out = Object.assign({}, a || {});
@@ -435,11 +469,12 @@ async function selectQuoteLeadDetailById(cfg, id) {
   const rows = await restSelect(
     cfg,
     "quote_lead_submissions",
-    `select=id,first_name,last_name,email,phone,age,gender,tobacco,lang,source,created_at,quote_status,state_code,payload&limit=1&id=eq.${encodeURIComponent(id)}`
+    `select=id,first_name,last_name,email,phone,age,gender,tobacco,lang,source,created_at,quote_status,state_code,payload,consent_summary&limit=1&id=eq.${encodeURIComponent(id)}`
   );
   const row = Array.isArray(rows) && rows[0] ? rows[0] : null;
   if (!row) return null;
   const p = row.payload && typeof row.payload === "object" ? row.payload : {};
+  const smsMeta = parseSmsOptInFromQuoteLead(row.consent_summary, p);
   let nAge =
     row.age == null || String(row.age).trim() === ""
       ? p.age != null
@@ -474,8 +509,11 @@ async function selectQuoteLeadDetailById(cfg, id) {
     pipeline_stage: row.quote_status || null,
     drop_off: false,
     drop_off_stage: null,
-    opt_in: false,
-    opt_in_at: null,
+    opt_in: smsMeta.sms_opt_in === true,
+    opt_in_at: smsMeta.sms_opt_in_at || null,
+    sms_opt_in: smsMeta.sms_opt_in,
+    sms_opt_in_at: smsMeta.sms_opt_in_at,
+    sms_opt_in_note: smsMeta.sms_opt_in_note,
     manychat_subscriber_id: null,
     created_at: row.created_at || null,
     updated_at: row.created_at || null,
@@ -530,6 +568,13 @@ async function composeMergedLeadDetail(cfg, detail, options) {
   merged.coverage_amount = mergePreferCanonical(detail.coverage_amount, topLevelPatch.coverage_amount);
   merged.contacts_contact_id = mergePreferCanonical(detail.contacts_contact_id, topLevelPatch.contacts_contact_id);
   merged.contact_id = mergePreferCanonical(detail.contact_id, topLevelPatch.contact_id);
+  merged.sms_opt_in = mergeSmsOptIn(detail.sms_opt_in, topLevelPatch.sms_opt_in);
+  if (merged.sms_opt_in_at == null && topLevelPatch.sms_opt_in_at) {
+    merged.sms_opt_in_at = topLevelPatch.sms_opt_in_at;
+  } else if (merged.sms_opt_in_at == null && detail.sms_opt_in_at) {
+    merged.sms_opt_in_at = detail.sms_opt_in_at;
+  }
+  merged.sms_opt_in_note = mergePreferCanonical(detail.sms_opt_in_note, topLevelPatch.sms_opt_in_note);
 
   if (isBlankValue(merged.age) && psAugment.age != null) merged.age = psAugment.age;
   if (isBlankValue(merged.sex) && !isBlankValue(psAugment.sex)) merged.sex = psAugment.sex;
@@ -959,8 +1004,14 @@ async function mergeCrossSourceByPhone(cfg, detail) {
         if (m.drop_off === true || m.drop_off === false) patch.drop_off = !!m.drop_off;
         const ds = cleanText(m.drop_off_stage);
         if (ds) patch.drop_off_stage = ds;
-        if (m.opt_in === true || m.opt_in === false) patch.opt_in = !!m.opt_in;
-        if (m.opt_in_at) patch.opt_in_at = m.opt_in_at;
+        if (m.opt_in === true || m.opt_in === false) {
+          patch.opt_in = !!m.opt_in;
+          patch.sms_opt_in = !!m.opt_in;
+        }
+        if (m.opt_in_at) {
+          patch.opt_in_at = m.opt_in_at;
+          patch.sms_opt_in_at = m.opt_in_at;
+        }
         const sub = cleanText(detail.manychat_subscriber_id) || cleanText(m.manychat_subscriber_id);
         if (sub) patch.manychat_subscriber_id = sub;
         alternates.push({ lead_id: String(m.id), lead_source_table: "manychat_leads" });
@@ -977,6 +1028,10 @@ function ensureManychatLeadDetail(row) {
   if (!row) return null;
   const o = Object.assign({ read_only: false, source_table: "manychat_leads" }, row);
   o.display_name = displayName(o);
+  if (o.sms_opt_in == null && (o.opt_in === true || o.opt_in === false)) {
+    o.sms_opt_in = !!o.opt_in;
+    o.sms_opt_in_at = o.opt_in_at || null;
+  }
   return o;
 }
 

@@ -425,6 +425,8 @@ module.exports = async function handler(req, res) {
     if (Number.isFinite(cov) && cov > 0) payload.coverageAmount = cov;
     const dobIso = String(body.dob || body.dateOfBirth || "").trim();
     if (dobIso) payload.dob = dobIso.slice(0, 10);
+  }
+  if (leadSource !== "out_of_state_referral") {
     payload.marketingOptIn = { sms: smsConsentOptIn, email: true, phoneCalls: true };
   }
   const originDetail = buildOriginDetail(body);
