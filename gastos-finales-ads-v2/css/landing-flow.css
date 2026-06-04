@@ -2250,39 +2250,143 @@ button.lf-julie-card--clickable:focus-visible {
 
 /* Mobile: center wizard steps; compact header; fix state dropdown */
 @media (max-width: 767.98px) {
+  .lf-header-row {
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.35rem;
+    padding: 0 0.75rem 0 0.65rem;
+    overflow: visible;
+  }
+
   .lf-logo {
-    margin-top: -1.65rem;
-    margin-left: -1.1rem;
+    flex: 0 1 auto;
+    min-width: 0;
+    max-width: 58%;
+    margin-top: -1.35rem;
+    margin-left: 0;
   }
 
   .lf-logo img {
-    height: clamp(9.25rem, 36vw, 12.75rem);
-    max-width: min(520px, 94vw);
+    height: clamp(7.25rem, 30vw, 9.25rem);
+    max-width: 100%;
+    width: auto;
     transform: none;
+    object-position: left top;
   }
 
   .lf-header-actions {
-    padding-top: 1.85rem;
-    padding-right: 1rem;
+    flex: 0 0 auto;
+    flex-shrink: 0;
+    min-width: 8.75rem;
+    max-width: 42%;
+    margin-left: 0;
+    padding-top: 1.15rem;
+    padding-right: 0;
+    align-items: flex-end;
+  }
+
+  /* Home + results: full-width stacked objective cards (not squares) */
+  .lf-objective-grid,
+  .lf-objective-grid--calc-results,
+  .lf-results-panel .lf-objective-grid--results {
+    --obj-cols: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+    width: 100%;
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    padding: 0;
+  }
+
+  .lf-objective-card {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    min-height: 5.75rem;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.85rem 1rem;
+    padding: 0.95rem 1.1rem;
+    text-align: left;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    cursor: pointer;
+  }
+
+  .lf-objective-icon--image {
+    width: clamp(4.75rem, 24vw, 6rem);
+    height: clamp(4.75rem, 24vw, 6rem);
+    flex: 0 0 auto;
+  }
+
+  .lf-objective-copy {
+    align-items: flex-start;
+    justify-content: center;
+    text-align: left;
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .lf-objective-title {
+    font-size: clamp(1rem, 4.2vw, 1.2rem);
+    min-height: 0;
+    justify-content: flex-start;
+    text-align: left;
+  }
+
+  .lf-objective-desc {
+    font-size: clamp(0.82rem, 3.5vw, 0.95rem);
+    text-align: left;
+  }
+
+  .lf-objective-chevron {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    color: var(--lf-accent);
+    font-size: 1.15rem;
+    opacity: 0.85;
+  }
+
+  body.lf-landing:has(.lf-step--objectives:not([hidden])) .lf-main {
+    justify-content: flex-start;
+    min-height: auto;
+    padding-top: 0.5rem;
+  }
+
+  .lf-step--objectives:not([hidden]) {
+    width: 100%;
   }
 
   .lf-help {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
+    width: 100%;
+    max-width: 100%;
     white-space: normal;
-    line-height: 1.3;
-    gap: 0.15rem;
+    line-height: 1.25;
+    gap: 0.12rem;
+    font-size: clamp(0.58rem, 2.8vw, 0.68rem);
+    text-align: right;
   }
 
   .lf-help-label {
     display: block;
+    word-break: normal;
+    overflow-wrap: anywhere;
   }
 
   .lf-help-phone {
     display: block;
-    font-size: 0.8rem;
-    letter-spacing: 0.03em;
+    font-size: clamp(0.72rem, 3.4vw, 0.82rem);
+    letter-spacing: 0.02em;
+    white-space: nowrap;
   }
 
   .lf-progress-wrap {
