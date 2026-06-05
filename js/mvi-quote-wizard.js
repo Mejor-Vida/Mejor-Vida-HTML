@@ -201,8 +201,15 @@
       }
       return null;
     }
-    if (step === "state" && !state.state) {
-      return t("Seleccione su estado.", "Please select your state.");
+    if (step === "state") {
+      if (!state.state) {
+        return t("Seleccione su estado.", "Please select your state.");
+      }
+      if (lang() === "en" && state.state !== "NE") {
+        return (
+          "We're sorry — Julie is licensed in Nebraska only. We cannot provide an online quote for residents of other states at this time."
+        );
+      }
     }
     if (step === "tobacco" && !state.tobacco) {
       return t("Indique si usa tabaco.", "Please answer the tobacco question.");
@@ -241,7 +248,7 @@
       }
       return;
     }
-    if (STEPS[stepIndex] === "state" && state.state !== "NE") {
+    if (lang() !== "en" && STEPS[stepIndex] === "state" && state.state !== "NE") {
       answered.state = true;
       updateSummaryBar();
       window.location.href =
@@ -507,6 +514,21 @@
       st.addEventListener("change", function () {
         state.state = st.value;
         updateSummaryBar();
+        var status = document.getElementById("mvi-quote-status");
+        var notEligible = document.getElementById("mvi-state-not-eligible");
+        var ineligible =
+          lang() === "en" && state.state && state.state !== "NE";
+        var msg =
+          "We're sorry — Julie is licensed in Nebraska only. We cannot provide an online quote for residents of other states at this time.";
+        if (notEligible) notEligible.hidden = !ineligible;
+        if (status) {
+          if (ineligible) {
+            status.className = "small text-center text-danger mt-2";
+            status.textContent = msg;
+          } else {
+            status.textContent = "";
+          }
+        }
       });
     }
     var cov = document.getElementById("mvi-coverage");

@@ -399,6 +399,9 @@
     }
     var field = getActiveField();
     nextBtn.disabled = !fieldHasValue(step, field);
+    if (currentStep === 2 && isEnQuoteStateIneligible()) {
+      nextBtn.disabled = true;
+    }
     updateProgress();
   }
 
@@ -565,6 +568,16 @@
     updateNextButton();
   }
 
+  function isEnQuoteStateIneligible() {
+    return IS_EN && selections.state && selections.state !== "NE";
+  }
+
+  function syncQuoteStateEligibilityUI() {
+    var block = document.getElementById("lf-state-not-eligible");
+    if (block) block.hidden = !isEnQuoteStateIneligible();
+    updateNextButton();
+  }
+
   function getStateListItems() {
     var list = window.MVS_US_STATES || [];
     return list
@@ -610,6 +623,7 @@
     var invalid = !!(selections.state && !isValidStateCode(selections.state));
     input.classList.toggle("is-invalid", invalid);
     if (hint) hint.hidden = !invalid;
+    if (currentStep === 2) syncQuoteStateEligibilityUI();
   }
 
   function refreshNameStep(step) {
@@ -970,7 +984,16 @@
         var field = getActiveField();
         if (!fieldHasValue(step, field)) return;
       }
-      if (currentStep === 2 && selections.state && selections.state !== "NE") {
+      if (IS_EN && currentStep === 2 && isEnQuoteStateIneligible()) {
+        syncQuoteStateEligibilityUI();
+        return;
+      }
+      if (
+        !IS_EN &&
+        currentStep === 2 &&
+        selections.state &&
+        selections.state !== "NE"
+      ) {
         window.location.href =
           "../quote-out-of-state.html?state=" + encodeURIComponent(selections.state);
         return;
@@ -1056,6 +1079,7 @@
         var hint = document.getElementById("lf-state-hint");
         if (input) input.classList.remove("is-invalid");
         if (hint) hint.hidden = true;
+        syncQuoteStateEligibilityUI();
       },
     });
 

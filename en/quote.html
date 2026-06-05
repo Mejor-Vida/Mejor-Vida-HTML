@@ -150,7 +150,8 @@
 <select aria-label="State" class="form-select form-select-lg mx-auto" id="mvi-state" required="" style="max-width:20rem;display:block;">
 <option value="">—</option>
 </select>
-<p class="small text-body-secondary text-center mt-3 mb-0">Julie quotes in Nebraska. If you live elsewhere, we’ll connect you with a licensed agent in your state.</p>
+<p class="small text-body-secondary text-center mt-3 mb-0">Julie is licensed in Nebraska. Online quotes on this page are available for Nebraska residents.</p>
+<p class="small text-danger text-center mt-3 mb-0" hidden="" id="mvi-state-not-eligible" role="alert">We're sorry — Julie is licensed in Nebraska only. We cannot provide an online quote for residents of other states at this time.</p>
 </div>
 <div class="mvi-quote-step-card" hidden="" id="mvi-step-tobacco">
 <p class="mvi-quote-question">Have you smoked or used tobacco in the last 12 months?</p>
@@ -256,7 +257,7 @@
 
 <script src="../js/us-states.js"></script>
 <script src="../js/mvi-quote-coverage-amounts.js"></script>
-<script src="../js/mvi-quote-wizard.js"></script>
+<script src="../js/mvi-quote-wizard.js?v=20260531a"></script>
 <script>
     // Mobile hamburger menu
     const hamburgerBtn = document.getElementById('hamburger-btn');
