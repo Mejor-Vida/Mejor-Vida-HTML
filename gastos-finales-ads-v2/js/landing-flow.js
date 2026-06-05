@@ -1332,7 +1332,9 @@
 
     function setScheduleIframeSrc() {
       if (!iframe) return;
-      var url = iframe.getAttribute("data-src-es");
+      var url = IS_EN
+        ? iframe.getAttribute("data-src-en") || iframe.getAttribute("data-src-es")
+        : iframe.getAttribute("data-src-es") || iframe.getAttribute("data-src-en");
       if (url) iframe.setAttribute("src", url);
       iframe.setAttribute("title", ui("Schedule a call with Julie", "Agendar cita con Julie"));
     }

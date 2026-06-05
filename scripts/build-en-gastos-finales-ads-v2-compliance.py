@@ -64,6 +64,12 @@ STRUCTURAL_REPLACEMENTS = [
     ('href="../terms-service.html"', 'href="../terms-service.html"'),
     ('href="../privacy-policy.html"', 'href="../privacy-policy.html"'),
     ('<body class="lf-landing"', '<body class="lf-landing" data-lf-lang="en"'),
+    (
+        'data-src-es="https://meetings-na2.hubspot.com/julie-braunsroth" title="Agendar con Julie"',
+        'data-src-es="https://meetings-na2.hubspot.com/julie-braunsroth" '
+        'data-src-en="https://meetings-na2.hubspot.com/julie-braunsroth/insurance-consultation-mejor-vida-insurance" '
+        'title="Schedule with Julie"',
+    ),
 ]
 
 # Spanish → English (order: longer phrases first where helpful)
