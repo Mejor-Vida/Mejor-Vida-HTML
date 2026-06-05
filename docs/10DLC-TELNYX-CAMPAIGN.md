@@ -44,6 +44,7 @@ At low volume (dozens of texts per day, not thousands), MPS limits rarely matter
 ```
 Consumers opt in on our English website by submitting a quote request at
 https://www.mejorvidainsurance.com/en/quote.html
+or https://www.mejorvidainsurance.com/en/gastos-finales-ads-v2/ (optional ?compliance-preview=phone for step 13)
 with their mobile phone number and checking an OPTIONAL, UNCHECKED SMS consent
 checkbox (express written consent). The checkbox is not required to submit
 the form or receive a quote.
@@ -102,7 +103,8 @@ If Telnyx marks **Embedded phone number**, include **402-735-5665** in samples. 
 | Page | SMS opt-in |
 |------|------------|
 | `en/quote.html` | Optional unchecked checkbox (primary campaign path) |
-| `en/landing-final-expense.html` | Optional unchecked checkbox |
+| `en/gastos-finales-ads-v2/` | Optional unchecked checkbox (v2 landing; use `?compliance-preview=phone` for reviewers) |
+| `en/landing-final-expense.html` | Legacy; Telnyx line added — prefer v2 URL for new registrations |
 | `en/quote-out-of-state.html` | Required general contact consent (includes SMS) — separate from optional quote path |
 
 ## After approval

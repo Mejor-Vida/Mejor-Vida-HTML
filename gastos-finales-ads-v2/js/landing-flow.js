@@ -45,8 +45,12 @@
 
   var nameStepPhase = "fields";
 
+  var IS_EN =
+    document.documentElement.lang === "en" ||
+    document.body.getAttribute("data-lf-lang") === "en";
+
   var NEXT_LABELS = {
-    default: "Siguiente",
+    default: IS_EN ? "Next" : "Siguiente",
   };
 
   var CHOICE_SELECTOR = ".lf-option-btn";
@@ -1349,6 +1353,14 @@
   })();
 
   showStep(1);
+
+  try {
+    if (new URLSearchParams(window.location.search).get("compliance-preview") === "phone") {
+      activeFlow = "quote";
+      currentStep = 13;
+      showStep(13);
+    }
+  } catch (previewErr) {}
 
   (function bindLogoReset() {
     var logo = document.getElementById("lf-logo-reset");
