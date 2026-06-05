@@ -1,5 +1,7 @@
 # Twilio A2P 10DLC — status, rules, and English compliance URLs
 
+> **Active provider:** SMS registration is now via **Telnyx** (brand verified). Use **[docs/10DLC-TELNYX-CAMPAIGN.md](../docs/10DLC-TELNYX-CAMPAIGN.md)** for new campaign submission. This file is kept for Twilio history and URL patterns.
+
 Use this doc when re-registering the campaign or debugging **Error 30034** (unregistered number).
 
 ---
