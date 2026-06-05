@@ -4,6 +4,15 @@
 (function () {
   "use strict";
 
+  var IS_EN =
+    document.documentElement.lang === "en" ||
+    document.body.getAttribute("data-lf-lang") === "en";
+  var LANG = IS_EN ? "en" : "es";
+
+  function msg(en, es) {
+    return IS_EN ? en : es;
+  }
+
   var DEFAULT_COVERAGE = 10000;
 
   function siteApiUrl(path) {
@@ -100,32 +109,32 @@
 
       var parsed = parseBirthdate ? parseBirthdate(selections.birthdate) : null;
       if (!isValidBirthdate || !isValidBirthdate(selections.birthdate)) {
-        setQuoteStatus("Ingresa una fecha de nacimiento válida.", true);
+        setQuoteStatus(msg("Enter a valid date of birth.", "Ingresa una fecha de nacimiento válida."), true);
         return Promise.resolve();
       }
 
       var age = ageFromParsedDob(parsed);
       if (age == null) {
-        setQuoteStatus("Ingresa una fecha de nacimiento válida.", true);
+        setQuoteStatus(msg("Enter a valid date of birth.", "Ingresa una fecha de nacimiento válida."), true);
         return Promise.resolve();
       }
       if (age < 18) {
-        setQuoteStatus("Las cotizaciones están disponibles desde los 18 años.", true);
+        setQuoteStatus(msg("Quotes are available starting at age 18.", "Las cotizaciones están disponibles desde los 18 años."), true);
         return Promise.resolve();
       }
       if (age > 85) {
-        setQuoteStatus("Las cotizaciones están disponibles hasta los 85 años.", true);
+        setQuoteStatus(msg("Quotes are available up to age 85.", "Las cotizaciones están disponibles hasta los 85 años."), true);
         return Promise.resolve();
       }
 
       var sex = String(selections.sex || "").toLowerCase();
       if (sex !== "male" && sex !== "female") {
-        setQuoteStatus("Completa todos los pasos anteriores.", true);
+        setQuoteStatus(msg("Complete all previous steps.", "Completa todos los pasos anteriores."), true);
         return Promise.resolve();
       }
 
       if (selections.tobacco !== "yes" && selections.tobacco !== "no") {
-        setQuoteStatus("Completa todos los pasos anteriores.", true);
+        setQuoteStatus(msg("Complete all previous steps.", "Completa todos los pasos anteriores."), true);
         return Promise.resolve();
       }
 
@@ -140,10 +149,10 @@
       var phone = String(selections.phone || "").trim();
 
       if (ctx.setSubmitting) ctx.setSubmitting(true);
-      setQuoteStatus("Calculando tu estimado…", false);
+      setQuoteStatus(msg("Calculating your estimate…", "Calculando tu estimado…"), false);
       if (nextBtn) {
         nextBtn.disabled = true;
-        nextBtn.textContent = "Calculando…";
+        nextBtn.textContent = msg("Calculating…", "Calculando…");
       }
 
       var sessionClientId = getSessionClientId();
@@ -167,11 +176,13 @@
           var res = out.res;
           var data = out.data || {};
           if (!res.ok || data.ok === false) {
-            throw new Error(data.error || data.quote_error || "No pudimos calcular tu estimado.");
+            throw new Error(
+              data.error || data.quote_error || msg("We could not calculate your estimate.", "No pudimos calcular tu estimado.")
+            );
           }
           if (data.quote_status !== "ok") {
             throw new Error(
-              data.quote_error || "Aún no tenemos tarifas para esa combinación."
+              data.quote_error || msg("We do not have rates for that combination yet.", "Aún no tenemos tarifas para esa combinación.")
             );
           }
 
@@ -202,7 +213,7 @@
             (smoker ? "yes" : "no") +
             ".";
 
-          setQuoteStatus("Guardando tu estimado…", false);
+          setQuoteStatus(msg("Saving your estimate…", "Guardando tu estimado…"), false);
 
           return fetch(siteApiUrl("/api/quote-lead-sync"), {
             method: "POST",
@@ -223,8 +234,8 @@
               dob: dobIso,
               coverageAmount: coverage,
               consent: !!selections.smsConsent,
-              lang: "es",
-              source: "facebook_landing_gastos_finales",
+              lang: LANG,
+              source: IS_EN ? "english_landing_gastos_finales" : "facebook_landing_gastos_finales",
               sessionClientId: sessionClientId,
               originDetail: collectOriginDetail(),
             }),
@@ -246,7 +257,7 @@
                 syncError:
                   syncRes.ok && syncData && syncData.ok
                     ? null
-                    : (syncData && syncData.error) || "No pudimos guardar tus datos.",
+                    : (syncData && syncData.error) || msg("We could not save your information.", "No pudimos guardar tus datos."),
               };
             });
           });
@@ -257,7 +268,7 @@
             sessionStorage.setItem(
               "mviNebraskaQuoteResult",
               JSON.stringify({
-                lang: "es",
+                lang: LANG,
                 firstName: firstName,
                 quote_low: data.quote_low,
                 quote_high: data.quote_high,
@@ -280,7 +291,7 @@
           } catch (storageErr) {}
 
           var quotePayload = {
-            lang: "es",
+            lang: LANG,
             firstName: firstName,
             quote_low: data.quote_low,
             quote_high: data.quote_high,
@@ -307,15 +318,15 @@
             return;
           }
 
-          setQuoteStatus("Llevándote a tus resultados…", false);
+          setQuoteStatus(msg("Taking you to your results…", "Llevándote a tus resultados…"), false);
           window.location.replace(resultsHref);
         })
         .catch(function (err) {
-          setQuoteStatus(err.message || "Algo salió mal. Inténtelo de nuevo.", true);
+          setQuoteStatus(err.message || msg("Something went wrong. Please try again.", "Algo salió mal. Inténtelo de nuevo."), true);
           if (ctx.setSubmitting) ctx.setSubmitting(false);
           if (nextBtn) {
             nextBtn.disabled = false;
-            nextBtn.textContent = "Ver mi estimado";
+            nextBtn.textContent = msg("See my estimate", "Ver mi estimado");
           }
         });
     },

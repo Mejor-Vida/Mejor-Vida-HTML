@@ -6,7 +6,11 @@
   "use strict";
 
   var DATA = window.MVI_FE_ESTIMATOR_DATA;
-  var LANG = "es";
+  var LANG =
+    document.documentElement.lang === "en" ||
+    document.body.getAttribute("data-lf-lang") === "en"
+      ? "en"
+      : "es";
   var STORAGE_KEY = "mviLandingFeCalcV1";
 
   var state = {

@@ -49,6 +49,10 @@
     document.documentElement.lang === "en" ||
     document.body.getAttribute("data-lf-lang") === "en";
 
+  function ui(en, es) {
+    return IS_EN ? en : es;
+  }
+
   var NEXT_LABELS = {
     default: IS_EN ? "Next" : "Siguiente",
   };
@@ -361,7 +365,7 @@
     }
     if (isCalculatorStep(currentStep)) {
       nextBtn.hidden = false;
-      nextBtn.textContent = "Siguiente";
+      nextBtn.textContent = ui("Next", "Siguiente");
       var canProceed =
         window.MVILandingCalculator && window.MVILandingCalculator.canProceed
           ? window.MVILandingCalculator.canProceed(currentStep)
@@ -382,9 +386,9 @@
       return;
     }
     if (currentStep === 11) {
-      nextBtn.textContent = nameStepPhase === "consent" ? "Continuar" : (NEXT_LABELS[currentStep] || NEXT_LABELS.default);
+      nextBtn.textContent = nameStepPhase === "consent" ? ui("Continue", "Continuar") : (NEXT_LABELS[currentStep] || NEXT_LABELS.default);
     } else if (currentStep === 13 && !quoteSubmitting) {
-      nextBtn.textContent = "Ver mi estimado";
+      nextBtn.textContent = ui("See my estimate", "Ver mi estimado");
     } else {
       nextBtn.textContent = NEXT_LABELS[currentStep] || NEXT_LABELS.default;
     }
@@ -766,10 +770,13 @@
     if (headerTagline) {
       headerTagline.hidden = step !== 1 || isResults || isCalcResults;
       if (step === 1) {
-        headerTagline.textContent = "¿Listo para aprender más de gastos finales?";
+        headerTagline.textContent = ui(
+          "Ready to learn more about final expense insurance?",
+          "¿Listo para aprender más de gastos finales?"
+        );
       } else if (isCalculatorStep(step) && !isCalcResults) {
         headerTagline.hidden = false;
-        headerTagline.textContent = "Calculadora de gastos finales";
+        headerTagline.textContent = ui("Final expense calculator", "Calculadora de gastos finales");
       }
     }
     syncNameStepPhase();
@@ -1036,7 +1043,7 @@
       items: getStateListItems(),
       showCode: true,
       allowEmpty: true,
-      placeholder: "Selecciona tu estado",
+      placeholder: ui("Select your state", "Selecciona tu estado"),
       inputId: "lf-state-combobox-input",
       listboxId: "lf-state-combobox-listbox",
       skipLabel: true,
@@ -1327,7 +1334,7 @@
       if (!iframe) return;
       var url = iframe.getAttribute("data-src-es");
       if (url) iframe.setAttribute("src", url);
-      iframe.setAttribute("title", "Agendar cita con Julie");
+      iframe.setAttribute("title", ui("Schedule a call with Julie", "Agendar cita con Julie"));
     }
 
     modalEl.addEventListener("show.bs.modal", setScheduleIframeSrc);

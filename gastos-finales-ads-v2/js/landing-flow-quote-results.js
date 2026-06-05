@@ -4,6 +4,19 @@
 (function () {
   "use strict";
 
+  var IS_EN =
+    document.documentElement.lang === "en" ||
+    document.body.getAttribute("data-lf-lang") === "en";
+
+  function ui(en, es) {
+    return IS_EN ? en : es;
+  }
+
+  function pageLang(fallback) {
+    if (fallback === "en" || fallback === "es") return fallback;
+    return IS_EN ? "en" : "es";
+  }
+
   function siteApiUrl(path) {
     var origin = window.location.origin || "";
     if (/^https?:\/\/(127\.0\.0\.1|localhost)(:\d+)?$/i.test(origin)) {
@@ -61,7 +74,7 @@
       if (!iframe) return;
       var url = iframe.getAttribute("data-src-es");
       if (url) iframe.setAttribute("src", url);
-      iframe.setAttribute("title", "Agendar cita con Julie");
+      iframe.setAttribute("title", ui("Schedule a call with Julie", "Agendar cita con Julie"));
     }
 
     modalEl.addEventListener("show.bs.modal", setScheduleIframeSrc);
@@ -86,8 +99,11 @@
       if (q.leadSaved === false) {
         leadWarn.hidden = false;
         leadWarn.textContent =
-          (q.syncError || "No pudimos guardar tus datos") +
-          ". Tu estimación aparece abajo. Revisa tu teléfono o correo, o llama al 402-440-5438.";
+          (q.syncError || ui("We could not save your information", "No pudimos guardar tus datos")) +
+          ui(
+            ". Your estimate is shown below. Check your phone or email, or call 402-440-5438.",
+            ". Tu estimación aparece abajo. Revisa tu teléfono o correo, o llama al 402-440-5438."
+          );
       } else {
         leadWarn.hidden = true;
         leadWarn.textContent = "";
@@ -115,7 +131,7 @@
       }
     }
 
-    var lang = q.lang === "en" ? "en" : "es";
+    var lang = pageLang(q.lang);
     var lowLine = document.getElementById("lf-results-low-line");
     var rangeHint = document.getElementById("lf-results-range-hint");
     var detailDob = document.getElementById("lf-results-detail-dob");
