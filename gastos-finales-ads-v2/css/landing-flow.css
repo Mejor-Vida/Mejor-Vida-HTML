@@ -2192,6 +2192,11 @@ button.lf-julie-card--clickable:focus-visible {
   line-height: 1.35;
 }
 
+.lf-step--phone .lf-phone-otp-consent {
+  margin: 0.75rem 0 0;
+  line-height: 1.45;
+}
+
 .lf-sms-optin {
   display: flex;
   align-items: flex-start;

@@ -26,7 +26,10 @@
   <header class="lf-header">
     <div class="lf-header-row">
       <a class="lf-logo" href="./" id="lf-logo-reset" aria-label="Return to start of this page">
-        <img src="../../img/logo-english2.png" alt="Mejor Vida Insurance" decoding="async" />
+        <picture>
+<source type="image/webp" srcset="../../img/opt/logo-english2.webp"/>
+<img alt="Mejor Vida Insurance" src="../../img/opt/logo-english2.png" width="800" height="533" loading="lazy" decoding="async"/>
+</picture>
       </a>
       <div class="lf-header-actions">
         <a class="lf-help" href="tel:+14024405438"><span class="lf-help-label">Need help?</span><span class="lf-help-phone">402-440-5438</span></a>
@@ -55,7 +58,10 @@
       <div class="lf-objective-grid" id="lf-objective-grid" role="group" aria-label="Choose how to continue">
         <button type="button" class="lf-objective-card" data-lf-objective="quote">
           <span class="lf-objective-icon lf-objective-icon--image" aria-hidden="true">
-            <img src="../../gastos-finales-ads-v2/img/objective-quote.png?v=6" alt="" width="160" height="160" decoding="async" />
+            <picture>
+<source type="image/webp" srcset="../../img/opt/objective-quote.webp"/>
+<img alt="" src="../../img/opt/objective-quote.png" width="320" height="320" decoding="async"/>
+</picture>
           </span>
           <span class="lf-objective-copy">
             <span class="lf-objective-title">Get a free quote</span>
@@ -65,7 +71,10 @@
         </button>
         <button type="button" class="lf-objective-card" data-lf-objective="calculator">
           <span class="lf-objective-icon lf-objective-icon--image" aria-hidden="true">
-            <img src="../../gastos-finales-ads-v2/img/objective-calculator.png?v=2" alt="" width="160" height="160" decoding="async" />
+            <picture>
+<source type="image/webp" srcset="../../img/opt/objective-calculator.webp"/>
+<img alt="" src="../../img/opt/objective-calculator.png" width="320" height="320" decoding="async"/>
+</picture>
           </span>
           <span class="lf-objective-copy">
             <span class="lf-objective-title">Final expense calculator</span>
@@ -75,7 +84,10 @@
         </button>
         <button type="button" class="lf-objective-card" data-lf-objective="schedule" data-bs-toggle="modal" data-bs-target="#lf-schedule-modal">
           <span class="lf-objective-icon lf-objective-icon--image" aria-hidden="true">
-            <img src="../../gastos-finales-ads-v2/img/objective-schedule.png?v=2" alt="" width="160" height="160" decoding="async" />
+            <picture>
+<source type="image/webp" srcset="../../img/opt/objective-schedule.webp"/>
+<img alt="" src="../../img/opt/objective-schedule.png" width="296" height="296" decoding="async"/>
+</picture>
           </span>
           <span class="lf-objective-copy">
             <span class="lf-objective-title">Schedule a call</span>
@@ -186,7 +198,10 @@
       <div class="lf-objective-grid lf-objective-grid--calc-results" role="group" aria-label="Next step">
         <button type="button" class="lf-objective-card" id="lf-calc-start-quote">
           <span class="lf-objective-icon lf-objective-icon--image" aria-hidden="true">
-            <img src="../../gastos-finales-ads-v2/img/objective-quote.png?v=6" alt="" width="160" height="160" decoding="async" />
+            <picture>
+<source type="image/webp" srcset="../../img/opt/objective-quote.webp"/>
+<img alt="" src="../../img/opt/objective-quote.png" width="320" height="320" decoding="async"/>
+</picture>
           </span>
           <span class="lf-objective-copy">
             <span class="lf-objective-title">Get a free quote</span>
@@ -196,7 +211,10 @@
         </button>
         <button type="button" class="lf-objective-card" id="lf-calc-schedule-call" data-bs-toggle="modal" data-bs-target="#lf-schedule-modal">
           <span class="lf-objective-icon lf-objective-icon--image" aria-hidden="true">
-            <img src="../../gastos-finales-ads-v2/img/objective-schedule.png?v=2" alt="" width="160" height="160" decoding="async" />
+            <picture>
+<source type="image/webp" srcset="../../img/opt/objective-schedule.webp"/>
+<img alt="" src="../../img/opt/objective-schedule.png" width="296" height="296" decoding="async"/>
+</picture>
           </span>
           <span class="lf-objective-copy">
             <span class="lf-objective-title">Schedule a call</span>
@@ -299,21 +317,45 @@
       <p class="lf-encrypt-note"><i class="fa-solid fa-lock" aria-hidden="true"></i> We use secure encryption to protect your data.</p>
     </section>
 
-    <section class="lf-step lf-step--list lf-step--phone" data-step="13" data-field="phone" data-field-type="phone" aria-labelledby="lf-step13-title" hidden>
+    <section class="lf-step lf-step--list lf-step--phone" data-step="13" data-field="phone" data-field-type="phone" data-phone-otp="1" aria-labelledby="lf-step13-title" hidden>
       <h1 class="lf-title" id="lf-step13-title">What is your phone number?</h1>
-      <p class="lf-lead lf-lead--list">Julie will use this number to follow up on your quote.</p>
+      <p class="lf-lead lf-lead--list">Julie will use this number to follow up on your quote. We send a one-time verification code to confirm your number before you continue.</p>
 
-      <div class="lf-text-field">
-        <label class="lf-select-label" for="lf-phone-input">Phone number</label>
-        <input type="tel" class="lf-text-input" id="lf-phone-input" inputmode="tel" autocomplete="tel" placeholder="(402) 555-1234" maxlength="16" aria-describedby="lf-phone-hint" />
+      <div class="lf-phone-step">
+        <div id="lf-phone-enter-panel">
+          <div class="lf-text-field">
+            <label class="lf-select-label" for="lf-phone-input">Phone number</label>
+            <input type="tel" class="lf-text-input" id="lf-phone-input" inputmode="tel" autocomplete="tel" placeholder="(402) 555-1234" maxlength="16" aria-describedby="lf-phone-hint" />
+          </div>
+          <p class="lf-text-hint" id="lf-phone-hint" hidden>Please enter a valid 10-digit U.S. phone number.</p>
+
+          <p class="lf-phone-guarantee">Our guarantee: No junk mail. No spam calls.</p>
+
+          <button type="button" class="lf-phone-action-btn" id="lf-phone-send-btn">Send verification code</button>
+          <p class="lf-phone-hint" id="lf-phone-send-hint" hidden></p>
+          <p class="lf-phone-otp-consent small text-muted">By clicking Send verification code, you agree to receive a one-time SMS with a verification code from Mejor Vida Insurance LLC. Msg &amp; data rates may apply. Reply STOP to cancel. Reply HELP for help.</p>
+        </div>
+
+        <div id="lf-phone-verify-panel" hidden>
+          <p class="lf-phone-code-lead">Enter the 6-digit code sent to <strong id="lf-phone-display"></strong></p>
+          <div class="lf-text-field">
+            <label class="lf-select-label" for="lf-phone-code-input">Verification code</label>
+            <input type="text" class="lf-text-input lf-phone-code-input" id="lf-phone-code-input" inputmode="numeric" maxlength="6" autocomplete="one-time-code" aria-describedby="lf-phone-verify-hint" />
+          </div>
+          <button type="button" class="lf-phone-action-btn" id="lf-phone-verify-btn">Verify code</button>
+          <button type="button" class="lf-phone-action-btn lf-phone-action-btn--secondary" id="lf-phone-resend-btn">Resend code</button>
+          <button type="button" class="lf-phone-action-btn lf-phone-action-btn--secondary" id="lf-phone-change-btn">Change phone number</button>
+          <p class="lf-phone-hint" id="lf-phone-verify-hint" hidden></p>
+        </div>
+
+        <div id="lf-phone-verified-panel" hidden>
+          <p class="lf-phone-verified-msg"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Phone verified: <span id="lf-phone-verified-display"></span></p>
+        </div>
       </div>
-      <p class="lf-text-hint" id="lf-phone-hint" hidden>Please enter a valid 10-digit U.S. phone number.</p>
-
-      <p class="lf-phone-guarantee">Our guarantee: No junk mail. No spam calls.</p>
 
       <div class="lf-sms-optin">
         <input type="checkbox" class="lf-sms-optin-check" id="lf-sms-consent" name="sms-consent" value="1" />
-        <label class="lf-sms-optin-text" for="lf-sms-consent">Yes, I agree to receive SMS text messages from Mejor Vida Insurance LLC about insurance options. Frequency: 1–5 messages per week. Msg &amp; data rates may apply. Reply STOP to cancel. Consent is not required to get a quote or purchase insurance. SMS is delivered via authorized providers including Telnyx. <a href="../privacy-policy.html" target="_blank" rel="noopener noreferrer">Privacy Policy</a> · <a href="../terms-service.html" target="_blank" rel="noopener noreferrer">Terms of Service</a>.</label>
+        <label class="lf-sms-optin-text" for="lf-sms-consent">Yes, I agree to receive SMS text messages from Mejor Vida Insurance LLC about insurance options, including one-time verification codes to confirm my phone number. Frequency: 1–5 messages per week (excluding verification codes). Msg &amp; data rates may apply. Reply STOP to cancel. Reply HELP for help. Consent is not required to get a quote or purchase insurance. SMS is delivered via authorized providers including Telnyx. <a href="../privacy-policy.html" target="_blank" rel="noopener noreferrer">Privacy Policy</a> · <a href="../terms-service.html" target="_blank" rel="noopener noreferrer">Terms of Service</a>.</label>
       </div>
       <p class="lf-quote-status" id="lf-quote-status" role="status" aria-live="polite" hidden></p>
     </section>
@@ -367,7 +409,10 @@
                   <div class="lf-objective-grid lf-objective-grid--calc-results lf-objective-grid--results" role="group" aria-label="More options">
                     <button type="button" class="lf-objective-card" id="lf-results-start-calc">
                       <span class="lf-objective-icon lf-objective-icon--image" aria-hidden="true">
-                        <img src="../../gastos-finales-ads-v2/img/objective-calculator.png?v=2" alt="" width="160" height="160" decoding="async" />
+                        <picture>
+<source type="image/webp" srcset="../../img/opt/objective-calculator.webp"/>
+<img alt="" src="../../img/opt/objective-calculator.png" width="320" height="320" decoding="async"/>
+</picture>
                       </span>
                       <span class="lf-objective-copy">
                         <span class="lf-objective-title">Final expense calculator</span>
@@ -377,7 +422,10 @@
                     </button>
                     <button type="button" class="lf-objective-card" id="lf-results-schedule-call" data-bs-toggle="modal" data-bs-target="#lf-schedule-modal">
                       <span class="lf-objective-icon lf-objective-icon--image" aria-hidden="true">
-                        <img src="../../gastos-finales-ads-v2/img/objective-schedule.png?v=2" alt="" width="160" height="160" decoding="async" />
+                        <picture>
+<source type="image/webp" srcset="../../img/opt/objective-schedule.webp"/>
+<img alt="" src="../../img/opt/objective-schedule.png" width="296" height="296" decoding="async"/>
+</picture>
                       </span>
                       <span class="lf-objective-copy">
                         <span class="lf-objective-title">Schedule a call</span>
@@ -437,7 +485,10 @@
         <span aria-hidden="true">★</span>
         <span aria-hidden="true">★</span>
       </div>
-      <img class="lf-julie-photo" src="../../img/julie-headshot.png" alt="" width="80" height="80" decoding="async" />
+      <picture>
+<source type="image/webp" srcset="../../img/opt/julie-headshot.webp"/>
+<img class="lf-julie-photo" alt="" src="../../img/opt/julie-headshot.png" width="153" height="160" loading="lazy" decoding="async"/>
+</picture>
       <div class="lf-julie-info">
         <p class="lf-julie-name">Julie Braunsroth</p>
         <p class="lf-julie-title">Licensed Nebraska insurance agent</p>
@@ -464,7 +515,10 @@
           <p>Her service journey began with Hispanic mothers through MilkWorks, where she educated, guided, and supported families on breastfeeding and early motherhood. Later, she worked with local libraries to promote literacy in the Hispanic community through bilingual reading programs and family story times—creating spaces where parents and children could learn and grow together.</p>
           <p>As her impact grew, Julie took on an even larger mission: helping launch and lead MyBridge Radio Español, a Christian radio station in Nebraska. Through MyBridge Radio Español, she brought messages of hope, faith, and a deeper connection with God into the daily lives of many Hispanic families.</p>
           <figure class="lf-julie-bio-modal-photo">
-            <img src="../../img/julie-community-mothers-children.png" alt="Julie smiling with a group of mothers and their young children in a community setting." width="1024" height="572" loading="lazy" decoding="async" />
+            <picture>
+<source type="image/webp" srcset="../../img/opt/julie-community-mothers-children.webp"/>
+<img alt="Julie smiling with a group of mothers and their young children in a community setting." src="../../img/opt/julie-community-mothers-children.png" width="1024" height="572" />
+</picture>
           </figure>
           <h3 class="lf-julie-bio-modal-heading">Her mission today</h3>
           <p>Today, Julie continues that same spirit of service in a new and deeply meaningful way: helping Hispanic families understand why life insurance and final expense planning matter—and how to protect the people they love most.</p>
@@ -475,7 +529,10 @@
           <p>After her dad's death, Julie's mother faithfully kept her own final expense protection in place for many years. When the time came, that planning became a final act of love and care for the family. Instead of worrying about money in the middle of grief, the family could focus on mourning, supporting one another, and honoring her life—without the added pressure of debt and bills.</p>
           <p>That experience left a lasting mark on Julie's heart.</p>
           <figure class="lf-julie-bio-modal-photo lf-julie-bio-modal-photo--portrait">
-            <img src="../../img/julie-parents-embrace.png" alt="Julie's parents smiling and embracing warmly." width="681" height="1024" loading="lazy" decoding="async" />
+            <picture>
+<source type="image/webp" srcset="../../img/opt/julie-parents-embrace.webp"/>
+<img alt="Julie's parents smiling and embracing warmly." src="../../img/opt/julie-parents-embrace.png" width="681" height="1024" />
+</picture>
           </figure>
           <h3 class="lf-julie-bio-modal-heading">Education and guidance</h3>
           <p>Now, her passion is to educate and guide Hispanic families across Nebraska and the United States who may not fully understand how life insurance works—or why it matters. Her goal is simple: help families find peace of mind, protect the people they love most, and leave a legacy of care, dignity, and love.</p>
@@ -536,6 +593,8 @@
   <script src="../../gastos-finales-ads-v2/js/landing-flow-calculator.js?v=20260529a"></script>
   <script src="../../gastos-finales-ads-v2/js/landing-flow-quote-results.js?v=20260530a"></script>
   <script src="../../gastos-finales-ads-v2/js/landing-flow-quote-submit.js?v=20260529a"></script>
-  <script src="../../gastos-finales-ads-v2/js/landing-flow.js?v=20260531a"></script>
+  <script>window.MVI_LANDING_PHONE_OTP_ENABLED = true;</script>
+  <script src="../../gastos-finales-ads-v2/js/landing-flow-phone-verify.js?v=20260605a"></script>
+  <script src="../../gastos-finales-ads-v2/js/landing-flow.js?v=20260605a"></script>
 </body>
 </html>

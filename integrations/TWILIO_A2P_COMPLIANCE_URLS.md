@@ -49,7 +49,8 @@ Do **not** submit `/privacy-policy`, `/terms-service`, or `/sms-optin` (those ar
 | **Privacy policy** | `https://www.mejorvidainsurance.com/en/privacy-policy` |
 | **Terms of service** | `https://www.mejorvidainsurance.com/en/terms-service` |
 | **SMS opt-in disclosure** | `https://www.mejorvidainsurance.com/en/sms-optin` |
-| **Quote form (opt-in sample)** | `https://www.mejorvidainsurance.com/en/quote` |
+| **Quote landing (10DLC primary)** | `https://www.mejorvidainsurance.com/en/gastos-finales-ads-v2/` |
+| **Quote wizard (opt-in sample)** | `https://www.mejorvidainsurance.com/en/quote` |
 | **E-sign consent** (optional field) | `https://www.mejorvidainsurance.com/en/e-sign-consent` |
 
 **Strongest page for reviewers:** `/en/sms-optin` — dedicated SMS disclosure, STOP/HELP, frequency, link to quote form.

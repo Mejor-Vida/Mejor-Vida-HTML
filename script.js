@@ -42,17 +42,18 @@ document.addEventListener('DOMContentLoaded', function() {
     let logoBasePath = 'img/';
     if (isEnglishSite || isNestedPage) logoBasePath = '../img/';
     else if (window.location.protocol !== 'file:') logoBasePath = '/img/';
+    const logoStem = lang === 'es' ? 'logo-spanish2' : 'logo-english2';
     const headerLogo = document.getElementById('header-logo');
+    const headerLogoWebp = document.getElementById('header-logo-webp');
     if (headerLogo) {
-      headerLogo.src = lang === 'es'
-        ? logoBasePath + 'logo-spanish2.png'
-        : logoBasePath + 'logo-english2.png';
+      headerLogo.src = logoBasePath + 'opt/' + logoStem + '.png';
+      if (headerLogoWebp) headerLogoWebp.srcset = logoBasePath + 'opt/' + logoStem + '.webp';
     }
     const footerLogo = document.getElementById('footer-logo');
+    const footerLogoWebp = document.getElementById('footer-logo-webp');
     if (footerLogo) {
-      footerLogo.src = lang === 'es'
-        ? logoBasePath + 'logo-spanish2.png'
-        : logoBasePath + 'logo-english2.png';
+      footerLogo.src = logoBasePath + 'opt/' + logoStem + '.png';
+      if (footerLogoWebp) footerLogoWebp.srcset = logoBasePath + 'opt/' + logoStem + '.webp';
     }
 
     // Save preference for same-tab navigation (resets on reload logic below)

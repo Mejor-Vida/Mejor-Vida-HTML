@@ -3,12 +3,14 @@
       <div class="d-flex align-items-center justify-content-between header-inner">
         <div class="flex-shrink-0 header-logo-wrap">
           <a href="__PREFIX__index.html#home" class="d-block">
-            <img id="header-logo" src="__PREFIX__img/logo-spanish2.png" alt="Mejor Vida Insurance logo" class="header-logo" />
+            <picture>
+              <source id="header-logo-webp" type="image/webp" srcset="__PREFIX__img/opt/logo-spanish2.webp" />
+              <img id="header-logo" src="__PREFIX__img/opt/logo-spanish2.png" alt="Mejor Vida Insurance logo" class="header-logo" width="800" height="533" fetchpriority="high" decoding="async" />
+            </picture>
           </a>
         </div>
 
         <nav class="desktop-nav d-none d-lg-flex align-items-center">
-          <a href="__PREFIX__index.html#home" class="nav-link-cm">Inicio</a>
           <a href="__PREFIX__about-julie.html" class="nav-link-cm nav-link-stack">Sobre Julie</a>
           <a href="__PREFIX__index.html#how-it-works" class="nav-link-cm nav-link-stack">Cómo funciona</a>
           <a href="__PREFIX__index.html#final-expense-answers" class="nav-link-cm nav-link-stack nav-link-questions-wrap" title="¿Tienes preguntas sobre gastos finales?">
@@ -36,7 +38,6 @@
     </div>
 
     <div class="mobile-menu" id="mobile-menu">
-      <a href="__PREFIX__index.html#home" class="mobile-menu-link">Inicio</a>
       <a href="__PREFIX__about-julie.html" class="mobile-menu-link">Sobre Julie</a>
       <a href="__PREFIX__index.html#how-it-works" class="mobile-menu-link">Cómo funciona</a>
       <a href="__PREFIX__index.html#final-expense-answers" class="mobile-menu-link">¿Tienes preguntas?</a>

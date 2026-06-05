@@ -17,6 +17,7 @@
     applicantConsent: false,
     email: null,
     phone: null,
+    phoneVerified: false,
     smsConsent: false,
   };
 
@@ -29,6 +30,7 @@
   var headerTagline = document.getElementById("lf-header-tagline");
   var stateCombobox = null;
   var quoteSubmitting = false;
+  var phoneStepBinder = null;
 
   var STORAGE_KEYS = {
     sex: "mviLandingSex",
@@ -40,6 +42,7 @@
     applicantConsent: "mviLandingApplicantConsent",
     email: "mviLandingEmail",
     phone: "mviLandingPhone",
+    phoneVerified: "mviLandingPhoneVerified",
     smsConsent: "mviLandingSmsConsent",
   };
 
@@ -285,6 +288,9 @@
       return isValidEmail(value);
     }
     if (getStepFieldType(stepEl) === "phone") {
+      if (window.MVI_LANDING_PHONE_OTP_ENABLED) {
+        return selections.phoneVerified && isValidPhone(selections.phone);
+      }
       return isValidPhone(selections.phone);
     }
     return !!value;
@@ -663,6 +669,9 @@
     input.setAttribute("aria-invalid", invalid ? "true" : "false");
     if (hint) hint.hidden = !invalid;
     if (smsCheck) smsCheck.checked = !!selections.smsConsent;
+    if (window.MVI_LANDING_PHONE_OTP_ENABLED && phoneStepBinder && phoneStepBinder.refresh) {
+      phoneStepBinder.refresh();
+    }
   }
 
   function refreshStepUI() {
@@ -1179,6 +1188,15 @@
 
   bindPhoneInput();
 
+  if (window.MVI_LANDING_PHONE_OTP_ENABLED && window.MVILandingPhoneStep) {
+    phoneStepBinder = window.MVILandingPhoneStep.bind({
+      selections: selections,
+      onUpdate: updateNextButton,
+      storageKeyPhone: STORAGE_KEYS.phone,
+      storageKeyVerified: STORAGE_KEYS.phoneVerified,
+    });
+  }
+
   function closeInfoTip() {
     document.querySelectorAll(".lf-info-popover").forEach(function (tip) {
       tip.hidden = true;
@@ -1280,6 +1298,7 @@
     var savedApplicantConsent = sessionStorage.getItem(STORAGE_KEYS.applicantConsent);
     var savedEmail = sessionStorage.getItem(STORAGE_KEYS.email);
     var savedPhone = sessionStorage.getItem(STORAGE_KEYS.phone);
+    var savedPhoneVerified = sessionStorage.getItem(STORAGE_KEYS.phoneVerified);
     var savedSmsConsent = sessionStorage.getItem(STORAGE_KEYS.smsConsent);
     if (savedSex) selections.sex = savedSex;
     if (savedBirthdate) selections.birthdate = savedBirthdate;
@@ -1294,6 +1313,7 @@
     }
     if (savedEmail) selections.email = savedEmail;
     if (savedPhone) selections.phone = savedPhone;
+    if (savedPhoneVerified === "1") selections.phoneVerified = true;
     if (savedSmsConsent === "1") selections.smsConsent = true;
   } catch (e) {}
 

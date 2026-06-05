@@ -41,7 +41,8 @@
     }
   </style>
 
-</link><script>(function(){document.documentElement.lang="es";document.documentElement.className="lang-es";})();</script></head>
+</link><script>(function(){document.documentElement.lang="es";document.documentElement.className="lang-es";})();</script><link rel="preload" as="image" href="img/opt/logo-spanish2.webp" type="image/webp" fetchpriority="high"/>
+</head>
 <body class="d-flex flex-column min-vh-100 bg-light" style="font-family: 'Inter', system-ui, sans-serif; color: #1f2937;">
 <!-- HEADER (aligned with quote-out-of-state.html) -->
 <header class="sticky-top bg-white shadow-sm border-bottom">
@@ -49,12 +50,13 @@
 <div class="d-flex align-items-center justify-content-between header-inner">
 <div class="flex-shrink-0 header-logo-wrap">
 <a class="d-block" href="index.html#home">
-<img alt="Mejor Vida Insurance logo" class="header-logo" id="header-logo" src="img/logo-spanish2.png"/>
+<picture>
+<source id="header-logo-webp" type="image/webp" srcset="img/opt/logo-spanish2.webp"/>
+<img alt="Mejor Vida Insurance logo" class="header-logo" id="header-logo" src="img/opt/logo-spanish2.png" width="800" height="533" fetchpriority="high" decoding="async"/>
+</picture>
 </a>
 </div>
 <nav class="desktop-nav d-none d-lg-flex align-items-center">
-<a class="nav-link-cm" href="index.html#home">Inicio</a>
-
 <a class="nav-link-cm nav-link-stack" href="about-julie.html">Sobre Julie</a>
 
 <a class="nav-link-cm nav-link-stack" href="index.html#how-it-works">Cómo funciona</a>
@@ -91,8 +93,6 @@
 </div>
 </div>
 <div class="mobile-menu" id="mobile-menu">
-<a class="mobile-menu-link" href="index.html#home">Inicio</a>
-
 <a class="mobile-menu-link" href="about-julie.html">Sobre Julie</a>
 
 <a class="mobile-menu-link" href="index.html#how-it-works">Cómo funciona</a>
@@ -143,7 +143,10 @@
 <footer style="background:#1a365d; padding: 8px 0 24px 0;">
 <div class="container">
 <div class="d-flex flex-column flex-md-row align-items-center justify-content-between gap-2 text-white" style="margin:0; padding:0;">
-<img alt="Mejor Vida Insurance" id="footer-logo" src="img/logo-spanish2.png" style="height:130px;filter:brightness(0) invert(1);margin-top:-25px;margin-bottom:-25px;"/>
+<picture>
+<source id="footer-logo-webp" type="image/webp" srcset="img/opt/logo-spanish2.webp"/>
+<img alt="Mejor Vida Insurance" id="footer-logo" style="height:130px;filter:brightness(0) invert(1);margin-top:-25px;margin-bottom:-25px;" src="img/opt/logo-spanish2.png" width="800" height="533" loading="lazy" decoding="async"/>
+</picture>
 <span class="small"><i class="fas fa-phone me-2 opacity-75"></i><a class="text-white text-opacity-90 text-decoration-none" href="tel:+14024405438">402-440-5438</a></span>
 <span class="small"><i class="fas fa-envelope me-2 opacity-75"></i><a class="text-white text-opacity-90 text-decoration-none" href="mailto:Julie@mejorvidainsurance.com">Julie@mejorvidainsurance.com</a></span>
 <span class="small"><i class="fas fa-map-marker-alt me-2 opacity-75"></i>1201 O St Ste 309 Unit #597 Lincoln, NE 68508</span>

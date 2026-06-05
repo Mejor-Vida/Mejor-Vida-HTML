@@ -6,8 +6,11 @@ Serve the repo over HTTP for landing mobile previews (phone frame + iframe).
   python3 preview/serve-landing-mobile.py --page ads
   python3 preview/serve-landing-mobile.py --page legacy
 
+  python3 preview/serve-landing-mobile.py --page ads-v2
+
 Open:
-  http://127.0.0.1:8766/preview/landing-gastos-finales-ads-mobile.html  (default)
+  http://127.0.0.1:8766/preview/landing-gastos-finales-ads-mobile.html  (--page ads)
+  http://127.0.0.1:8766/preview/landing-gastos-finales-ads-v2-mobile.html (--page ads-v2)
   http://127.0.0.1:8766/preview/landing-mobile-header.html             (--page legacy)
 """
 from __future__ import annotations
@@ -23,6 +26,7 @@ REPO = Path(__file__).resolve().parents[1]
 
 PAGES = {
     "ads": "preview/landing-gastos-finales-ads-mobile.html",
+    "ads-v2": "preview/landing-gastos-finales-ads-v2-mobile.html",
     "legacy": "preview/landing-mobile-header.html",
 }
 
@@ -53,6 +57,8 @@ def main() -> None:
         print(f"Preview: {url}")
         if args.page == "ads":
             print("Also: http://127.0.0.1:8766/gastos-finales-ads/ (full page, no frame)")
+        if args.page == "ads-v2":
+            print("Also: http://127.0.0.1:8766/gastos-finales-ads-v2/ (full page, no frame)")
         print("Ctrl+C to stop")
         try:
             webbrowser.open(url)

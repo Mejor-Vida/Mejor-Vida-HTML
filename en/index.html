@@ -18,6 +18,7 @@
 <meta content="index, follow" name="robots"/>
 <meta content="Mejor Vida Insurance LLC" name="author"/>
 <link href="https://www.mejorvidainsurance.com/en/" rel="canonical"/>
+<link as="image" fetchpriority="high" href="../img/opt/business-man.webp" rel="preload" type="image/webp"/>
 
 <meta content="Final Expense Insurance | Mejor Vida Insurance" property="og:title"/>
 <meta content="Protect your family with final expense life insurance. Start with a free online quote or WhatsApp. Licensed Nebraska agent Julie serves English and Spanish speakers." property="og:description"/>
@@ -174,6 +175,11 @@
       opacity: 1;
     }
     
+    .carousel-slide picture {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
     .carousel-slide img {
       width: 100%;
       height: 100%;
@@ -298,45 +304,6 @@
     }
     .hero-couple-slide-frame img {
       pointer-events: none;
-    }
-    .hero-couple-name-tag {
-      position: absolute;
-      z-index: 6;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.28rem;
-      font-size: clamp(0.62rem, 1.85vw, 0.8rem);
-      font-weight: 800;
-      letter-spacing: 0.02em;
-      padding: 0.2rem 0.48rem;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.94);
-      color: #1a365d;
-      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.28);
-      line-height: 1;
-      white-space: nowrap;
-    }
-    .hero-couple-name-tag .fa-heart {
-      color: #e11d48;
-      font-size: 0.72em;
-    }
-    .hero-couple-name-tag--dad {
-      left: 17%;
-      top: 28%;
-    }
-    .hero-couple-name-tag--mom {
-      right: 17%;
-      top: 28%;
-    }
-    @media (max-width: 991px) {
-      .hero-couple-name-tag--dad {
-        left: 11%;
-        top: 26%;
-      }
-      .hero-couple-name-tag--mom {
-        right: 11%;
-        top: 26%;
-      }
     }
     
     /* Two-tone blue hero background - smooth curve from bottom-left to top-right */
@@ -560,9 +527,9 @@
     }
     .hero-quote-bubble {
       --hq-logo: 58px;
-      --hq-pill: #1a1a1a;
+      --hq-pill: rgba(26, 26, 26, 0.82);
       display: flex;
-      align-items: center;
+      align-items: stretch;
       gap: 0;
       padding: 0;
       border-radius: 0;
@@ -613,7 +580,11 @@
     .hero-quote-text {
       flex: 1 1 auto;
       min-width: 0;
-      align-self: center;
+      align-self: stretch;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: var(--hq-logo);
       position: relative;
       z-index: 1;
       color: #fff;
@@ -624,14 +595,14 @@
       border-radius: 999px;
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
       margin-left: calc(var(--hq-logo) * -0.52);
-      padding: 0.22rem 0.56rem 0.22rem calc(var(--hq-logo) * 0.48 + 0.4rem);
+      padding: 0 0.56rem 0 calc(var(--hq-logo) * 0.48 + 0.4rem);
       transition: box-shadow 0.2s ease, border-color 0.2s ease;
     }
     @media (min-width: 992px) {
       .hero-quote-bubble:has(.hero-quote-logo-wrap[data-carrier="assurity"]),
       .hero-quote-bubble:has(.hero-quote-logo-wrap[data-carrier="mutual-of-omaha"]),
       .hero-quote-bubble:has(.hero-quote-logo-wrap[data-carrier="american-amicable"]) {
-        --hq-logo: 92px;
+        --hq-logo: 78px;
       }
     }
     .hero-quote-carrier-name {
@@ -673,8 +644,8 @@
     .hero-quote-logo-wrap[data-carrier="assurity"] {
       display: grid;
       place-items: center;
-      width: 92px;
-      height: 92px;
+      width: var(--hq-logo);
+      height: var(--hq-logo);
       margin-left: -5px;
       background: #ffffff;
       box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.06);
@@ -685,9 +656,9 @@
       grid-column: 1;
       grid-row: 1;
       width: auto;
-      max-width: 118%;
-      height: 100%;
-      max-height: 100%;
+      max-width: 132%;
+      height: 108%;
+      max-height: 108%;
       margin: 0;
       padding: 0;
       box-sizing: border-box;
@@ -710,24 +681,25 @@
     .hero-quote-logo-wrap[data-carrier="mutual-of-omaha"] {
       display: grid;
       place-items: center;
-      width: 92px;
-      height: 92px;
+      width: var(--hq-logo);
+      height: var(--hq-logo);
       margin-left: -5px;
       background: #ffffff;
       box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.06);
+      padding: 0;
     }
     .hero-quote-logo-wrap[data-carrier="mutual-of-omaha"] .hero-quote-logo {
       display: block;
       grid-column: 1;
       grid-row: 1;
-      width: 78%;
-      height: 78%;
-      max-width: 78%;
-      max-height: 78%;
+      width: 100%;
+      height: 100%;
+      max-width: 100%;
+      max-height: 100%;
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      object-fit: contain;
+      object-fit: cover;
       object-position: center;
       justify-self: center;
     }
@@ -747,8 +719,8 @@
     .hero-quote-logo-wrap[data-carrier="american-amicable"] {
       display: grid;
       place-items: center;
-      width: 92px;
-      height: 92px;
+      width: var(--hq-logo);
+      height: var(--hq-logo);
       margin-left: -5px;
       background: #ffffff;
       box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.06);
@@ -795,7 +767,7 @@
       }
       .hero-quote-text {
         margin-left: calc(var(--hq-logo) * -0.52);
-        padding: 0.18rem 0.65rem 0.18rem calc(var(--hq-logo) * 0.48 + 0.35rem);
+        padding: 0 0.65rem 0 calc(var(--hq-logo) * 0.48 + 0.35rem);
       }
       .hero-quote-logo-wrap[data-carrier="assurity"] {
         width: 44px !important;
@@ -811,10 +783,11 @@
         margin-left: -4px !important;
       }
       .hero-quote-logo-wrap[data-carrier="mutual-of-omaha"] .hero-quote-logo {
-        width: 76%;
-        height: 76%;
-        max-width: 76%;
-        max-height: 76%;
+        width: 100%;
+        height: 100%;
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: cover;
       }
       .hero-carousel--dual-bubbles .hero-quote-logo-wrap[data-carrier="assurity"] {
         width: 36px !important;
@@ -1183,9 +1156,15 @@
     #how-it-works .hiw-step-photo {
       flex: 0 0 52%;
       min-height: 0;
-      background-image: var(--hiw-step-bg);
-      background-size: cover;
-      background-position: center top;
+      position: relative;
+      overflow: hidden;
+    }
+    #how-it-works .hiw-step-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
     }
     #how-it-works .hiw-step-content {
       flex: 1 1 auto;
@@ -1268,7 +1247,8 @@
       max-width: min(100%, 20rem);
     }
   </style>
-<script>(function(){document.documentElement.className="lang-en";document.documentElement.lang="en";})();</script><link href="https://www.mejorvidainsurance.com/" hreflang="es" rel="alternate"/><link href="https://www.mejorvidainsurance.com/en/" hreflang="en" rel="alternate"/><link href="https://www.mejorvidainsurance.com/" hreflang="x-default" rel="alternate"/></head>
+<script>(function(){document.documentElement.className="lang-en";document.documentElement.lang="en";})();</script><link href="https://www.mejorvidainsurance.com/" hreflang="es" rel="alternate"/><link href="https://www.mejorvidainsurance.com/en/" hreflang="en" rel="alternate"/><link href="https://www.mejorvidainsurance.com/" hreflang="x-default" rel="alternate"/><link rel="preload" as="image" href="../img/opt/business-man.webp" type="image/webp" fetchpriority="high"/>
+</head>
 <body class="bg-white" style="font-family: 'Inter', system-ui, sans-serif; color: #1f2937;">
 
 <header class="sticky-top bg-white shadow-sm border-bottom">
@@ -1276,11 +1256,13 @@
 <div class="d-flex align-items-center justify-content-between header-inner">
 <div class="flex-shrink-0 header-logo-wrap">
 <a class="d-block" href="index.html#home">
-<img alt="Mejor Vida Insurance logo" class="header-logo" id="header-logo" src="../img/logo-english2.png"/>
+<picture>
+<source id="header-logo-webp" srcset="../img/opt/logo-english2.webp" type="image/webp"/>
+<img alt="Mejor Vida Insurance logo" class="header-logo" decoding="async" fetchpriority="high" height="533" id="header-logo" src="../img/opt/logo-english2.png" width="800"/>
+</picture>
 </a>
 </div>
 <nav class="desktop-nav d-none d-lg-flex align-items-center">
-<a class="nav-link-cm" href="index.html#home">Home</a>
 <a class="nav-link-cm nav-link-stack" href="about-julie.html">About Julie</a>
 <a class="nav-link-cm nav-link-stack" href="index.html#how-it-works">How It Works</a>
 <a class="nav-link-cm nav-link-stack nav-link-questions-wrap" href="index.html#final-expense-answers" title="Got questions about final expense insurance?">
@@ -1306,7 +1288,6 @@
 </div>
 </div>
 <div class="mobile-menu" id="mobile-menu">
-<a class="mobile-menu-link" href="index.html#home">Home</a>
 <a class="mobile-menu-link" href="about-julie.html">About Julie</a>
 <a class="mobile-menu-link" href="index.html#how-it-works">How It Works</a>
 <a class="mobile-menu-link" href="index.html#final-expense-answers">Got questions?</a>
@@ -1364,29 +1345,36 @@
 <div class="col-lg-6 position-relative">
 <div class="carousel-container rounded-3">
 <div class="carousel-slide active">
-<img alt="Profesional" src="../img/business-man.png"/>
+<picture>
+<source srcset="../img/opt/business-man.webp" type="image/webp"/>
+<img alt="Profesional" decoding="async" fetchpriority="high" height="1024" loading="eager" src="../img/opt/business-man.jpg" width="1024"/>
+</picture>
 </div>
 <div class="carousel-slide" data-hero-couple="true">
 <div class="hero-couple-slide-frame">
-<img alt="Los padres de Julie, abrazados" src="../img/hero-couple-embrace.png"/>
-<span class="hero-couple-name-tag hero-couple-name-tag--dad">
-<i aria-hidden="true" class="fas fa-heart"></i>
-<span>Dad</span>
-</span>
-<span class="hero-couple-name-tag hero-couple-name-tag--mom">
-<i aria-hidden="true" class="fas fa-heart"></i>
-<span>Mom</span>
-</span>
+<picture>
+<source srcset="../img/opt/hero-couple-embrace.webp" type="image/webp"/>
+<img alt="Los padres de Julie, abrazados" decoding="async" height="1024" loading="lazy" src="../img/opt/hero-couple-embrace.jpg" width="681"/>
+</picture>
 </div>
 </div>
 <div class="carousel-slide">
-<img alt="Familia feliz" src="../img/happy-family.png"/>
+<picture>
+<source srcset="../img/opt/happy-family.webp" type="image/webp"/>
+<img alt="Familia feliz" decoding="async" height="764" loading="lazy" src="../img/opt/happy-family.jpg" width="1400"/>
+</picture>
 </div>
 <div class="carousel-slide">
-<img alt="Abuela y nieto" src="../img/grandma-grandson.png"/>
+<picture>
+<source srcset="../img/opt/grandma-grandson.webp" type="image/webp"/>
+<img alt="Abuela y nieto" decoding="async" height="800" loading="lazy" src="../img/opt/grandma-grandson.jpg" width="1200"/>
+</picture>
 </div>
 <div class="carousel-slide">
-<img alt="Mujer con flores" src="../img/woman-flowers.png"/>
+<picture>
+<source srcset="../img/opt/woman-flowers.webp" type="image/webp"/>
+<img alt="Mujer con flores" decoding="async" height="682" loading="lazy" src="../img/opt/woman-flowers.jpg" width="1024"/>
+</picture>
 </div>
 
 <div aria-atomic="true" aria-live="polite" class="hero-quote-bubble-wrap hero-quote-bubble-wrap--a" id="hero-quote-bubble-wrap-a">
@@ -1452,7 +1440,10 @@
 <div class="row g-4 align-items-start">
 
 <div class="col-12 col-md-auto text-center text-md-start julie-about-photo-col">
-<img alt="Julie, agente de seguros — Mejor Vida Insurance" class="mx-auto mx-md-0 mb-3 julie-about-img" decoding="async" height="1024" src="../img/julie-about.png" width="682"/>
+<picture>
+<source srcset="../img/opt/julie-about.webp" type="image/webp"/>
+<img alt="Julie, agente de seguros — Mejor Vida Insurance" class="mx-auto mx-md-0 mb-3 julie-about-img" decoding="async" height="795" loading="lazy" src="../img/opt/julie-about.jpg" width="529"/>
+</picture>
 <p class="small text-muted mb-0">Julie, founder of Mejor Vida Insurance LLC</p>
 </div>
 
@@ -1477,8 +1468,13 @@
 <h2 class="fw-bold" style="color:#1a365d;">How It Works</h2>
 </header>
 <div class="hiw-steps">
-<article class="hiw-step" style="--hiw-step-bg: url('../img/landing/como-funciona/lp-step-1-mira-aprende.jpg')">
-<div aria-label="Persona mirando información en una tablet" class="hiw-step-photo" role="img"></div>
+<article class="hiw-step">
+<div class="hiw-step-photo">
+<picture>
+<source srcset="../img/opt/lp-step-1-mira-aprende.webp" type="image/webp"/>
+<img alt="Persona mirando información en una tablet" decoding="async" height="427" loading="lazy" src="../img/opt/lp-step-1-mira-aprende.jpg" width="640"/>
+</picture>
+</div>
 <div class="hiw-step-content">
 <div class="hiw-step-head">
 <span aria-hidden="true" class="hiw-step-num">1</span>
@@ -1487,8 +1483,13 @@
 <p>Learn about final expense insurance and explore the information at your own pace.</p>
 </div>
 </article>
-<article class="hiw-step" style="--hiw-step-bg: url('../img/landing/como-funciona/lp-step-2-cotizacion.jpg')">
-<div aria-label="Pareja revisando una cotización en casa" class="hiw-step-photo" role="img"></div>
+<article class="hiw-step">
+<div class="hiw-step-photo">
+<picture>
+<source srcset="../img/opt/lp-step-2-cotizacion.webp" type="image/webp"/>
+<img alt="Pareja revisando una cotización en casa" decoding="async" height="427" loading="lazy" src="../img/opt/lp-step-2-cotizacion.jpg" width="640"/>
+</picture>
+</div>
 <div class="hiw-step-content">
 <div class="hiw-step-head">
 <span aria-hidden="true" class="hiw-step-num">2</span>
@@ -1497,8 +1498,13 @@
 <p>Indicative monthly range for $10,000 in coverage (Nebraska).</p>
 </div>
 </article>
-<article class="hiw-step" style="--hiw-step-bg: url('../img/landing/como-funciona/lp-step-3-agenda-julie.jpg')">
-<div aria-label="Julie en videollamada con un cliente" class="hiw-step-photo" role="img"></div>
+<article class="hiw-step">
+<div class="hiw-step-photo">
+<picture>
+<source srcset="../img/opt/lp-step-3-agenda-julie.webp" type="image/webp"/>
+<img alt="Julie en videollamada con un cliente" decoding="async" height="427" loading="lazy" src="../img/opt/lp-step-3-agenda-julie.jpg" width="640"/>
+</picture>
+</div>
 <div class="hiw-step-content">
 <div class="hiw-step-head">
 <span aria-hidden="true" class="hiw-step-num">3</span>
@@ -1507,8 +1513,13 @@
 <p>Pick a time on the calendar. Clear conversation in Spanish or English.</p>
 </div>
 </article>
-<article class="hiw-step" style="--hiw-step-bg: url('../img/landing/como-funciona/lp-step-4-proteccion.jpg')">
-<div aria-label="Familia abrazándose con tranquilidad" class="hiw-step-photo" role="img"></div>
+<article class="hiw-step">
+<div class="hiw-step-photo">
+<picture>
+<source srcset="../img/opt/lp-step-4-proteccion.webp" type="image/webp"/>
+<img alt="Familia abrazándose con tranquilidad" decoding="async" height="427" loading="lazy" src="../img/opt/lp-step-4-proteccion.jpg" width="640"/>
+</picture>
+</div>
 <div class="hiw-step-content">
 <div class="hiw-step-head">
 <span aria-hidden="true" class="hiw-step-num">4</span>
@@ -1572,7 +1583,7 @@
 <div class="feature-card bg-light rounded-3 p-4 shadow h-100">
 <h3 class="visually-hidden">Assurity</h3>
 <div class="carrier-card-logo-wrap">
-<img alt="" class="d-block" decoding="async" height="30" src="../img/carriers/assurity-logo.svg" style="height:40px;width:auto;max-width:100%;" width="130"/>
+<img alt="" class="d-block" decoding="async" height="30" src="../img/carriers/assurity-logo.svg" style="height:40px;width:auto;max-width:100%;" width="130" loading="lazy"/>
 </div>
 <ul class="list-unstyled mb-0">
 <li class="d-flex align-items-start gap-2 mb-2"><i class="fas fa-check text-success mt-1 flex-shrink-0"></i><span class="small text-body-secondary">Whole life final expense solutions with level premiums intended to help cover funeral, burial, and related end-of-life costs.</span></li>
@@ -1587,7 +1598,10 @@
 <div class="feature-card bg-light rounded-3 p-4 shadow h-100">
 <h3 class="visually-hidden">Mutual of Omaha</h3>
 <div class="carrier-card-logo-wrap carrier-card-logo-wrap--omaha">
-<img alt="" decoding="async" height="88" src="../img/carriers/mutual-of-omaha-logo.png" width="400"/>
+<picture>
+<source type="image/webp" srcset="../img/opt/mutual-of-omaha-logo.webp"/>
+<img alt="" src="../img/opt/mutual-of-omaha-logo.png" width="400" height="94" />
+</picture>
 </div>
 <ul class="list-unstyled mb-0">
 <li class="d-flex align-items-start gap-2 mb-2"><i class="fas fa-check text-success mt-1 flex-shrink-0"></i><span class="small text-body-secondary">Over 100 years of history, known for financial strength.</span></li>
@@ -1603,7 +1617,10 @@
 <div class="feature-card bg-light rounded-3 p-4 shadow h-100">
 <h3 class="visually-hidden">American Amicable</h3>
 <div class="carrier-card-logo-wrap carrier-card-logo-wrap--amicable">
-<img alt="" decoding="async" height="90" src="../img/carriers/american-amicable-logo.png" width="520"/>
+<picture>
+<source type="image/webp" srcset="../img/opt/american-amicable-logo.webp"/>
+<img alt="" src="../img/opt/american-amicable-logo.png" width="520" height="109" />
+</picture>
 </div>
 <ul class="list-unstyled mb-0">
 <li class="d-flex align-items-start gap-2 mb-2"><i class="fas fa-check text-success mt-1 flex-shrink-0"></i><span class="small text-body-secondary">Established carrier offering whole life products often used for final expense and burial planning.</span></li>
@@ -1670,7 +1687,10 @@
 <div class="container">
 <div class="text-white" style="margin:0; padding:0;">
 <div class="d-flex flex-wrap align-items-center justify-content-center gap-3 small">
-<img alt="Mejor Vida Insurance" id="footer-logo" src="../img/logo-english2.png" style="height:130px;filter:brightness(0) invert(1);margin-top:-25px;margin-bottom:-25px;"/>
+<picture>
+<source id="footer-logo-webp" srcset="../img/opt/logo-english2.webp" type="image/webp"/>
+<img alt="Mejor Vida Insurance" decoding="async" height="533" id="footer-logo" loading="lazy" src="../img/opt/logo-english2.png" style="height:130px;filter:brightness(0) invert(1);margin-top:-25px;margin-bottom:-25px;" width="800"/>
+</picture>
 <a class="text-white text-opacity-90 text-decoration-none text-nowrap" href="https://wa.me/14024405438?text=Hello%2C%20I%20am%20interested%20in%20learning%20about%20final%20expense%20insurance." rel="noopener" target="_blank"><i class="fab fa-whatsapp me-2 opacity-90"></i>WhatsApp</a>
 <span class="text-nowrap"><i class="fas fa-envelope me-2 opacity-75"></i><a class="text-white text-opacity-90 text-decoration-none" href="mailto:Julie@mejorvidainsurance.com">Julie@mejorvidainsurance.com</a></span>
 <span class="text-nowrap"><i class="fas fa-map-marker-alt me-2 opacity-75"></i>1201 O St Ste 309 Unit #597 Lincoln, NE 68508</span>

@@ -1025,9 +1025,15 @@
     .lp-step-photo {
       flex: 0 0 52%;
       min-height: 0;
-      background-image: var(--lp-step-bg);
-      background-size: cover;
-      background-position: center top;
+      position: relative;
+      overflow: hidden;
+    }
+    .lp-step-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
     }
     .lp-step-content {
       flex: 1 1 auto;
@@ -1813,7 +1819,10 @@
 </div>
 <header class="lp-header">
 <a aria-label="Ir al inicio de la página" class="lp-logo js-scroll-top" href="#top">
-<img alt="Mejor Vida Insurance logo" src="img/logo-spanish2.png"/>
+<picture>
+<source type="image/webp" srcset="img/opt/logo-spanish2.webp"/>
+<img alt="Mejor Vida Insurance logo" src="img/opt/logo-spanish2.png" width="800" height="533" loading="lazy" decoding="async"/>
+</picture>
 </a>
 <div class="lp-header-actions">
 <button aria-label="Agenda con Julie" class="lp-btn lp-btn-schedule js-scroll-schedule" type="button">
@@ -1866,13 +1875,16 @@
 <aside aria-labelledby="hero-carriers-title" class="lp-video-hero-carriers">
 <h2 class="visually-hidden" id="hero-carriers-title">Aseguradoras con contrato</h2>
 <a class="lp-carrier-logo-link lp-carrier-logo-link--assurity" href="#carrier-assurity" title="Assurity — ver sección abajo">
-<img alt="Assurity" decoding="async" height="97" src="img/carriers/assurity-logo.svg" width="420"/>
+<img alt="Assurity" decoding="async" height="97" src="img/carriers/assurity-logo.svg" width="420" loading="lazy"/>
 </a>
 <a class="lp-carrier-logo-link lp-carrier-logo-link--omaha" href="#carrier-mutual-of-omaha" title="Mutual of Omaha — ver sección abajo">
-<img alt="Mutual of Omaha" decoding="async" height="52" src="img/carriers/mutual-of-omaha-logo.svg" width="288"/>
+<img alt="Mutual of Omaha" decoding="async" height="52" src="img/carriers/mutual-of-omaha-logo.svg" width="288" loading="lazy"/>
 </a>
 <a class="lp-carrier-logo-link lp-carrier-logo-link--amicable" href="#carrier-american-amicable" title="American Amicable — ver sección abajo">
-<img alt="American Amicable" decoding="async" height="52" src="img/carriers/american-amicable-logo.png" width="200"/>
+<picture>
+<source type="image/webp" srcset="img/opt/american-amicable-logo.webp"/>
+<img alt="American Amicable" src="img/opt/american-amicable-logo.png" width="520" height="109" loading="lazy" decoding="async"/>
+</picture>
 </a>
 </aside>
 </div>
@@ -1885,21 +1897,30 @@
 <h2 class="lp-soft-cta-title" id="soft-cta-title">¿Cómo te gustaría comenzar?</h2>
 <nav aria-label="Opciones para comenzar" class="lp-soft-cta-bars">
 <a class="lp-soft-cta-bar lp-soft-cta-bar--learn js-scroll-edu" href="#edu-problema">
-<img alt="" class="lp-soft-cta-bar-bg" decoding="async" height="800" src="img/soft-cta-bar-learn.jpg" width="800"/>
+<picture>
+<source type="image/webp" srcset="img/opt/soft-cta-bar-learn.webp"/>
+<img alt="" class="lp-soft-cta-bar-bg" src="img/opt/soft-cta-bar-learn.jpg" width="800" height="800" decoding="async"/>
+</picture>
 <span class="lp-soft-cta-bar-content">
 <span class="lp-soft-cta-bar-label">Aprender más</span>
 <span aria-hidden="true" class="lp-soft-cta-bar-chevron"><i class="fas fa-chevron-down"></i></span>
 </span>
 </a>
 <button class="lp-soft-cta-bar lp-soft-cta-bar--quote js-scroll-quote" type="button">
-<img alt="" class="lp-soft-cta-bar-bg" decoding="async" height="800" src="img/soft-cta-bar-quote.jpg" width="800"/>
+<picture>
+<source type="image/webp" srcset="img/opt/soft-cta-bar-quote.webp"/>
+<img alt="" class="lp-soft-cta-bar-bg" src="img/opt/soft-cta-bar-quote.jpg" width="800" height="800" decoding="async"/>
+</picture>
 <span class="lp-soft-cta-bar-content">
 <span class="lp-soft-cta-bar-label">Cotización</span>
 <span aria-hidden="true" class="lp-soft-cta-bar-chevron"><i class="fas fa-chevron-right"></i></span>
 </span>
 </button>
 <button class="lp-soft-cta-bar lp-soft-cta-bar--schedule js-scroll-schedule" type="button">
-<img alt="" class="lp-soft-cta-bar-bg" decoding="async" height="800" src="img/soft-cta-bar-schedule.jpg" width="800"/>
+<picture>
+<source type="image/webp" srcset="img/opt/soft-cta-bar-schedule.webp"/>
+<img alt="" class="lp-soft-cta-bar-bg" src="img/opt/soft-cta-bar-schedule.jpg" width="800" height="800" decoding="async"/>
+</picture>
 <span class="lp-soft-cta-bar-content">
 <span class="lp-soft-cta-bar-label">Hablar con Julie</span>
 <span aria-hidden="true" class="lp-soft-cta-bar-chevron"><i class="fas fa-chevron-right"></i></span>
@@ -2040,7 +2061,10 @@
 <p class="lp-carriers-lead">Julie trabaja como agente independiente con compañías sólidas. Aquí tienes un resumen de cada una.</p>
 <article class="lp-carrier-block lp-carrier-block--omaha" id="carrier-mutual-of-omaha">
 <div class="lp-carrier-logo-wrap">
-<img alt="Mutual of Omaha" decoding="async" height="88" src="img/carriers/mutual-of-omaha-logo.png" width="400"/>
+<picture>
+<source type="image/webp" srcset="img/opt/mutual-of-omaha-logo.webp"/>
+<img alt="Mutual of Omaha" src="img/opt/mutual-of-omaha-logo.png" width="400" height="94" loading="lazy" decoding="async"/>
+</picture>
 </div>
 <div class="lp-carrier-content">
 <p class="lp-carrier-tagline">Protect Your Kingdom</p>
@@ -2105,7 +2129,7 @@
 </article>
 <article class="lp-carrier-block lp-carrier-block--assurity" id="carrier-assurity">
 <div class="lp-carrier-logo-wrap">
-<img alt="Assurity" decoding="async" height="52" src="img/carriers/assurity-logo.svg" width="220"/>
+<img alt="Assurity" decoding="async" height="52" src="img/carriers/assurity-logo.svg" width="220" loading="lazy"/>
 </div>
 <div class="lp-carrier-content">
 <h3>Whole Life Protect+ y Perform+</h3>
@@ -2149,7 +2173,10 @@
 </article>
 <article class="lp-carrier-block lp-carrier-block--amicable" id="carrier-american-amicable">
 <div class="lp-carrier-logo-wrap">
-<img alt="American Amicable" decoding="async" height="90" src="img/carriers/american-amicable-logo.png" width="520"/>
+<picture>
+<source type="image/webp" srcset="img/opt/american-amicable-logo.webp"/>
+<img alt="American Amicable" src="img/opt/american-amicable-logo.png" width="520" height="109" loading="lazy" decoding="async"/>
+</picture>
 </div>
 <div class="lp-carrier-content">
 <h3>Golden Solution y Senior Choice</h3>
@@ -2218,8 +2245,13 @@
 <h2 id="como-title">Cómo funciona</h2>
 </header>
 <div class="lp-steps">
-<article class="lp-step" style="--lp-step-bg: url('img/landing/como-funciona/lp-step-1-mira-aprende.jpg')">
-<div aria-label="Persona mirando información en una tablet" class="lp-step-photo" role="img"></div>
+<article class="lp-step">
+<div class="lp-step-photo">
+<picture>
+<source type="image/webp" srcset="img/opt/lp-step-1-mira-aprende.webp"/>
+<img src="img/opt/lp-step-1-mira-aprende.jpg" alt="Persona mirando información en una tablet" width="640" height="427" loading="lazy" decoding="async"/>
+</picture>
+</div>
 <div class="lp-step-content">
 <div class="lp-step-head">
 <span class="lp-step-num">1</span>
@@ -2228,8 +2260,13 @@
 <p>Infórmate sobre el seguro de gastos finales y revisa esta página a tu ritmo.</p>
 </div>
 </article>
-<article class="lp-step" style="--lp-step-bg: url('img/landing/como-funciona/lp-step-2-cotizacion.jpg')">
-<div aria-label="Pareja revisando una cotización en casa" class="lp-step-photo" role="img"></div>
+<article class="lp-step">
+<div class="lp-step-photo">
+<picture>
+<source type="image/webp" srcset="img/opt/lp-step-2-cotizacion.webp"/>
+<img src="img/opt/lp-step-2-cotizacion.jpg" alt="Pareja revisando una cotización en casa" width="640" height="427" loading="lazy" decoding="async"/>
+</picture>
+</div>
 <div class="lp-step-content">
 <div class="lp-step-head">
 <span class="lp-step-num">2</span>
@@ -2238,8 +2275,13 @@
 <p>Rango mensual orientativo para $10,000 de cobertura (Nebraska).</p>
 </div>
 </article>
-<article class="lp-step" style="--lp-step-bg: url('img/landing/como-funciona/lp-step-3-agenda-julie.jpg')">
-<div aria-label="Julie en videollamada con un cliente" class="lp-step-photo" role="img"></div>
+<article class="lp-step">
+<div class="lp-step-photo">
+<picture>
+<source type="image/webp" srcset="img/opt/lp-step-3-agenda-julie.webp"/>
+<img src="img/opt/lp-step-3-agenda-julie.jpg" alt="Julie en videollamada con un cliente" width="640" height="427" loading="lazy" decoding="async"/>
+</picture>
+</div>
 <div class="lp-step-content">
 <div class="lp-step-head">
 <span class="lp-step-num">3</span>
@@ -2248,8 +2290,13 @@
 <p>Elige horario en el calendario. Conversación clara en español o inglés.</p>
 </div>
 </article>
-<article class="lp-step" style="--lp-step-bg: url('img/landing/como-funciona/lp-step-4-proteccion.jpg')">
-<div aria-label="Familia abrazándose con tranquilidad" class="lp-step-photo" role="img"></div>
+<article class="lp-step">
+<div class="lp-step-photo">
+<picture>
+<source type="image/webp" srcset="img/opt/lp-step-4-proteccion.webp"/>
+<img src="img/opt/lp-step-4-proteccion.jpg" alt="Familia abrazándose con tranquilidad" width="640" height="427" loading="lazy" decoding="async"/>
+</picture>
+</div>
 <div class="lp-step-content">
 <div class="lp-step-head">
 <span class="lp-step-num">4</span>
@@ -2300,7 +2347,10 @@
 <p>Su trayectoria de servicio comenzó trabajando con madres hispanas a través de MilkWorks, donde educaba, guiaba y apoyaba a las familias en temas de lactancia materna y maternidad temprana. Más adelante, colaboró con bibliotecas locales promoviendo la alfabetización dentro de la comunidad hispana mediante programas bilingües de lectura y cuentos familiares, creando espacios donde padres e hijos podían aprender y crecer juntos.</p>
 <p>Con el tiempo, su impacto siguió creciendo y Julie asumió una misión aún más grande: ayudar a lanzar y liderar MyBridge Radio Español, una estación de radio cristiana en Nebraska. A través de MyBridge Radio Español, pudo llevar mensajes de esperanza, fe y una conexión más profunda con Dios a muchas familias hispanas en su vida diaria.</p>
 <figure class="lp-bio-figure lp-bio-figure--community">
-<img alt="Julie sonriendo con un grupo de madres y niños pequeños en un ambiente comunitario." decoding="async" height="572" loading="lazy" src="img/julie-community-mothers-children.png" width="1024"/>
+<picture>
+<source type="image/webp" srcset="img/opt/julie-community-mothers-children.webp"/>
+<img alt="Julie sonriendo con un grupo de madres y niños pequeños en un ambiente comunitario." src="img/opt/julie-community-mothers-children.png" width="1024" height="572" />
+</picture>
 </figure>
 <h3>Su misión hoy</h3>
 <p>Hoy, Julie continúa esa misma misión de servicio de una manera nueva y profundamente significativa: ayudando a las familias hispanas a entender la importancia de proteger a sus seres queridos mediante el seguro de vida y la planificación de gastos finales.</p>
@@ -2310,7 +2360,10 @@
 <p>Pero Julie también vivió el otro lado de la preparación.</p>
 <p>Después de la muerte del padre de Julie, su mamá continuó pagando fielmente su propia protección de gastos finales durante muchos años. Cuando llegó el momento, esa planificación se convirtió en un último acto de amor y cuidado hacia su familia. En lugar de preocuparse por el aspecto financiero en medio del dolor, la familia pudo enfocarse en llorar su pérdida, apoyarse mutuamente y honrar su vida sin la presión adicional de las deudas y los gastos.</p>
 <figure class="lp-bio-figure lp-bio-figure--portrait">
-<img alt="Pareja mayor sonriendo y abrazándose con cariño." decoding="async" height="1024" loading="lazy" src="img/julie-parents-embrace.png" width="681"/>
+<picture>
+<source type="image/webp" srcset="img/opt/julie-parents-embrace.webp"/>
+<img alt="Pareja mayor sonriendo y abrazándose con cariño." src="img/opt/julie-parents-embrace.png" width="681" height="1024" />
+</picture>
 </figure>
 <p>Esa experiencia dejó una huella profunda en el corazón de Julie.</p>
 <h3>Educar y guiar</h3>
@@ -2339,7 +2392,10 @@
 <div class="container">
 <div class="text-white" style="margin:0; padding:0;">
 <div class="d-flex flex-wrap align-items-center justify-content-center gap-3 small">
-<img alt="Mejor Vida Insurance" id="footer-logo" src="img/logo-spanish2.png" style="height:130px;filter:brightness(0) invert(1);margin-top:-25px;margin-bottom:-25px;"/>
+<picture>
+<source id="footer-logo-webp" type="image/webp" srcset="img/opt/logo-spanish2.webp"/>
+<img alt="Mejor Vida Insurance" id="footer-logo" style="height:130px;filter:brightness(0) invert(1);margin-top:-25px;margin-bottom:-25px;" src="img/opt/logo-spanish2.png" width="800" height="533" loading="lazy" decoding="async"/>
+</picture>
 <a class="lp-btn lp-btn-wa text-nowrap" href="https://wa.me/14024405438?text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20seguro%20de%20gastos%20finales." rel="noopener" target="_blank"><i aria-hidden="true" class="fab fa-whatsapp"></i> WhatsApp</a>
 <span class="text-nowrap"><i class="fas fa-envelope me-2 opacity-75"></i><a class="text-white text-opacity-90 text-decoration-none" href="mailto:Julie@mejorvidainsurance.com">Julie@mejorvidainsurance.com</a></span>
 <span class="text-nowrap"><i class="fas fa-map-marker-alt me-2 opacity-75"></i>1201 O St Ste 309 Unit #597 Lincoln, NE 68508</span>
