@@ -62,6 +62,117 @@
 
   var CHOICE_SELECTOR = ".lf-option-btn";
 
+  var stepNameMap = {
+    1: "objective_picker",
+    2: "state",
+    3: "sex",
+    4: "date_of_birth",
+    5: "tobacco",
+    11: "name",
+    12: "email",
+    13: "phone",
+    14: "results",
+    21: "calc_state",
+    22: "calc_ceremony",
+    23: "calc_funeral_costs",
+    24: "calc_household",
+    25: "calc_results",
+  };
+
+  function trackGaEvent(eventName, params) {
+    if (typeof gtag !== "function") return;
+    gtag("event", eventName, params || {});
+  }
+
+  function getAgeRangeBucket(birthdateStr) {
+    var parsed = parseBirthdate(birthdateStr);
+    if (!parsed) return null;
+    var today = new Date();
+    var age = today.getFullYear() - parsed.year;
+    var monthDiff = today.getMonth() - (parsed.month - 1);
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < parsed.day)) age -= 1;
+    if (age >= 80) return "80+";
+    if (age >= 70) return "70-79";
+    if (age >= 60) return "60-69";
+    if (age >= 50) return "50-59";
+    return "under-50";
+  }
+
+  function getCalcCeremonyAnswer() {
+    var selected = document.querySelector('.lf-step[data-step="22"] .lf-option-btn.is-selected');
+    return selected ? selected.getAttribute("data-value") : null;
+  }
+
+  function getStepAnswer(stepNum) {
+    if (stepNum === 2) return selections.state;
+    if (stepNum === 3) return selections.sex;
+    if (stepNum === 4) return getAgeRangeBucket(selections.birthdate);
+    if (stepNum === 5) return selections.tobacco;
+    if (stepNum === 11) {
+      if (nameStepPhase === "consent") {
+        return selections.applicantConsent ? "consent_given" : null;
+      }
+      return selections.firstName && selections.lastName ? "name_entered" : null;
+    }
+    if (stepNum === 12) return selections.email ? "email_entered" : null;
+    if (stepNum === 13) return selections.smsConsent ? "sms_opt_in" : "sms_opt_out";
+    if (stepNum === 21) {
+      return window.MVILandingCalculator && window.MVILandingCalculator.getPrefillStateCode
+        ? window.MVILandingCalculator.getPrefillStateCode()
+        : selections.state;
+    }
+    if (stepNum === 22) return getCalcCeremonyAnswer();
+    if (stepNum === 23) {
+      var tier = document.getElementById("lf-calc-tier-select");
+      return tier ? tier.value : null;
+    }
+    if (stepNum === 24) {
+      var monthly = document.getElementById("lf-calc-family-monthly");
+      var months = document.getElementById("lf-calc-family-months");
+      var other = document.getElementById("lf-calc-family-other");
+      return JSON.stringify({
+        monthly: monthly ? monthly.value : "0",
+        months: months ? months.value : "3",
+        other: other ? other.value : "0",
+      });
+    }
+    if (stepNum === 25) {
+      var grand = document.getElementById("lf-calc-total-grand");
+      return grand ? grand.textContent.trim() : null;
+    }
+    return null;
+  }
+
+  function trackStepViewed(stepNum) {
+    if (!stepNameMap[stepNum]) return;
+    trackGaEvent("step_viewed", {
+      step_id: stepNum,
+      step_name: stepNameMap[stepNum],
+    });
+  }
+
+  function trackStepCompleted(stepNum, answer) {
+    if (!stepNameMap[stepNum]) return;
+    var payload = {
+      step_id: stepNum,
+      step_name: stepNameMap[stepNum],
+    };
+    var answerValue = answer !== undefined ? answer : getStepAnswer(stepNum);
+    if (answerValue !== null && answerValue !== undefined && answerValue !== "") {
+      payload.answer = answerValue;
+    }
+    trackGaEvent("step_completed", payload);
+  }
+
+  function trackQuoteSubmitted() {
+    trackGaEvent("quote_submitted", {
+      state: selections.state,
+      sex: selections.sex,
+      tobacco: selections.tobacco,
+      age_range: getAgeRangeBucket(selections.birthdate),
+    });
+  }
+
   var MULTI_FIELD_ORDER = {};
 
   function parseMultiValue(raw) {
@@ -491,8 +602,12 @@
       if (stepAutoAdvances(step) && value) {
         window.setTimeout(function () {
           var next = getNextStepNumber(currentStep);
-          if (next !== null) showStep(next);
-          else submitLandingQuote();
+          if (next !== null) {
+            trackStepCompleted(currentStep, value);
+            showStep(next);
+          } else {
+            submitLandingQuote();
+          }
         }, 180);
       }
     }
@@ -809,6 +924,7 @@
     }
     refreshStepUI();
     updateNextButton();
+    trackStepViewed(step);
     window.scrollTo(0, 0);
   }
 
@@ -818,7 +934,10 @@
     if (!step || !stepAutoAdvances(step)) return;
     window.setTimeout(function () {
       var next = getNextStepNumber(currentStep);
-      if (next !== null) showStep(next);
+      if (next !== null) {
+        trackStepCompleted(currentStep, getStepAnswer(currentStep));
+        showStep(next);
+      }
     }, 180);
   }
 
@@ -941,6 +1060,7 @@
         updateNextButton();
       },
       onQuoteComplete: function (quotePayload) {
+        trackQuoteSubmitted();
         showQuoteResultsStep(quotePayload);
       },
     });
@@ -956,12 +1076,16 @@
         var calcFirst =
           (window.MVILandingCalculator && window.MVILandingCalculator.FIRST_STEP) || 21;
         if (currentStep <= calcFirst) {
+          trackGaEvent("step_back", { from_step: currentStep });
           showStep(1);
           return;
         }
       }
       var prev = getPrevStepNumber(currentStep);
-      if (prev !== null) showStep(prev);
+      if (prev !== null) {
+        trackGaEvent("step_back", { from_step: currentStep });
+        showStep(prev);
+      }
     });
   }
 
@@ -977,6 +1101,7 @@
         }
         var calcNext = getNextStepNumber(currentStep);
         if (calcNext !== null) {
+          trackStepCompleted(currentStep, getStepAnswer(currentStep));
           showStep(calcNext);
         }
         return;
@@ -1003,11 +1128,13 @@
         selections.state &&
         selections.state !== "NE"
       ) {
+        trackStepCompleted(currentStep, selections.state);
         window.location.href =
           "../quote-out-of-state.html?state=" + encodeURIComponent(selections.state);
         return;
       }
       if (currentStep === 11 && nameStepPhase === "fields") {
+        trackStepCompleted(currentStep, "name_entered");
         showNameConsentPhase();
         return;
       }
@@ -1016,9 +1143,11 @@
       }
       var next = getNextStepNumber(currentStep);
       if (next !== null) {
+        trackStepCompleted(currentStep, getStepAnswer(currentStep));
         showStep(next);
         return;
       }
+      trackStepCompleted(currentStep, getStepAnswer(currentStep));
       submitLandingQuote();
     });
   }
@@ -1341,6 +1470,8 @@
       var quoteCard = ev.target.closest('[data-lf-objective="quote"]');
       if (quoteCard) {
         ev.preventDefault();
+        trackGaEvent("objective_selected", { objective: "quote" });
+        trackStepCompleted(1, "quote");
         activeFlow = "quote";
         var next = getNextStepNumber(1);
         if (next !== null) showStep(next);
@@ -1349,11 +1480,41 @@
       var calcCard = ev.target.closest('[data-lf-objective="calculator"]');
       if (calcCard) {
         ev.preventDefault();
+        trackGaEvent("objective_selected", { objective: "calculator" });
+        trackStepCompleted(1, "calculator");
         activeFlow = "calculator";
         var calcFirst =
           (window.MVILandingCalculator && window.MVILandingCalculator.FIRST_STEP) || 21;
         showStep(calcFirst);
       }
+    });
+  })();
+
+  (function bindScheduleObjectiveCards() {
+    document.querySelectorAll('[data-lf-objective="schedule"]').forEach(function (btn) {
+      if (btn.getAttribute("data-lf-ga-bound") === "1") return;
+      btn.setAttribute("data-lf-ga-bound", "1");
+      btn.addEventListener("click", function () {
+        trackGaEvent("objective_selected", { objective: "schedule" });
+        trackStepCompleted(1, "schedule");
+      });
+    });
+  })();
+
+  (function bindContactTracking() {
+    document.querySelectorAll('a.lf-header-whatsapp-btn, a[href*="wa.me"]').forEach(function (link) {
+      if (link.getAttribute("data-lf-ga-bound") === "1") return;
+      link.setAttribute("data-lf-ga-bound", "1");
+      link.addEventListener("click", function () {
+        trackGaEvent("whatsapp_clicked", { location: "landing_flow" });
+      });
+    });
+    document.querySelectorAll('a[href^="tel:"]').forEach(function (link) {
+      if (link.getAttribute("data-lf-ga-bound") === "1") return;
+      link.setAttribute("data-lf-ga-bound", "1");
+      link.addEventListener("click", function () {
+        trackGaEvent("phone_clicked", { location: "landing_flow" });
+      });
     });
   })();
 
