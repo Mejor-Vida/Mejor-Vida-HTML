@@ -28,6 +28,7 @@ const { hubspotPhoneSearchVariants, phoneLast10Digits } = require('../lib/hubspo
 const path = require('path');
 const fs = require('fs');
 const { buildEmailEN, buildEmailES } = require('../lib/post-quote-email-html');
+const { logContactCommunication, htmlToPlain } = require('../lib/contact-communications');
 
 /** Base64 vCard — same bytes as project root julie.vcf (for Resend attachment). */
 const JULIE_VCF_CONTENT = fs.readFileSync(path.join(__dirname, '..', 'julie.vcf'), 'utf8');
@@ -334,6 +335,18 @@ module.exports = async function handler(req, res) {
     console.log(`[post-quote-email] Sent to ${email} (contact ${contactId}), id: ${emailId}`);
     await insertPostQuoteDeliveryLog(base, supabaseKey, contactId, 'sent', {
       provider_id: emailId || null,
+    });
+    await logContactCommunication(supabaseUrl, supabaseKey, {
+      contactId,
+      direction: 'outbound',
+      channel: 'email',
+      subject,
+      summary: subject,
+      body: htmlToPlain(html),
+      meta: {
+        source: 'post_quote_email',
+        provider_id: emailId || null,
+      },
     });
   } catch (err) {
     const detail = err.message || String(err);

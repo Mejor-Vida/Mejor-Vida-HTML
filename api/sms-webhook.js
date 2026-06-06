@@ -19,6 +19,7 @@
  */
 
 const crypto = require('crypto');
+const { logContactCommunication } = require('../lib/contact-communications');
 
 // ─── Twilio signature validation ─────────────────────────────────────────────
 function validateTwilioSignature(req) {
@@ -78,6 +79,18 @@ function twiml(message) {
 
 function twimlEmpty() {
   return `<?xml version="1.0" encoding="UTF-8"?><Response></Response>`;
+}
+
+async function logSmsCommunication(supabaseUrl, supabaseKey, contactId, direction, bodyText, meta) {
+  if (!contactId || !bodyText) return;
+  await logContactCommunication(supabaseUrl, supabaseKey, {
+    contactId,
+    direction,
+    channel: 'sms',
+    summary: bodyText,
+    body: bodyText,
+    meta: meta || {},
+  });
 }
 
 // ─── Send email via Resend ────────────────────────────────────────────────────
@@ -185,6 +198,13 @@ module.exports = async function handler(req, res) {
     return res.status(200).send(twiml('Sorry, we had a technical issue. Please try again shortly.'));
   }
   const contact = contacts[0] || null;
+
+  if (contact && msgBody) {
+    await logSmsCommunication(supabaseUrl, supabaseKey, contact.id, 'inbound', msgBody, {
+      source: 'twilio_inbound',
+      from: fromPhone,
+    });
+  }
 
   // ── STOP ─────────────────────────────────────────────────────────────────
   if (keyword === 'STOP') {

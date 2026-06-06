@@ -620,23 +620,625 @@ body.crm-body {
 }
 
 .crm-table-clients .crm-col-name {
-  width: 18%;
-}
-
-.crm-table-clients .crm-col-email {
-  width: 24%;
-}
-
-.crm-table-clients .crm-col-phone {
   width: 16%;
 }
 
-.crm-table-clients .crm-col-language {
-  width: 10%;
+.crm-table-clients .crm-col-email {
+  width: 21%;
+}
+
+.crm-table-clients .crm-col-phone {
+  width: 14%;
+}
+
+.crm-table-clients .crm-col-stage {
+  width: 15%;
+  min-width: 130px;
+}
+
+.crm-table-clients th.crm-col-calendar,
+.crm-table-clients td.crm-col-calendar {
+  width: 72px;
+  min-width: 72px;
+  max-width: 72px;
+  text-align: center;
+  padding-left: 6px;
+  padding-right: 6px;
+}
+
+.crm-table-clients th.crm-col-calendar {
+  font-size: 0.68rem;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.crm-table-clients th.crm-col-date,
+.crm-table-clients td.crm-col-date {
+  width: 112px;
+  min-width: 112px;
+  max-width: 112px;
+  white-space: nowrap;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.crm-stage-picker {
+  position: relative;
+  min-width: 0;
+}
+
+.crm-stage-trigger {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  min-width: 0;
+  padding: 4px 8px;
+  border: 1px solid var(--crm-border);
+  border-radius: 6px;
+  background: #fff;
+  font-size: 0.82rem;
+  cursor: pointer;
+  text-align: left;
+}
+
+.crm-stage-trigger:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
+
+.crm-stage-label {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.crm-stage-caret {
+  flex-shrink: 0;
+  color: var(--crm-muted);
+  font-size: 0.75rem;
+}
+
+.crm-stage-menu {
+  position: absolute;
+  z-index: 130;
+  top: calc(100% + 4px);
+  left: 0;
+  min-width: 180px;
+  margin: 0;
+  padding: 4px 0;
+  list-style: none;
+  background: #fff;
+  border: 1px solid var(--crm-border);
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.crm-stage-menu.hidden {
+  display: none;
+}
+
+.crm-stage-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 8px 12px;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: 0.88rem;
+  text-align: left;
+  cursor: pointer;
+}
+
+.crm-stage-option:hover,
+.crm-stage-option.is-selected {
+  background: rgba(41, 128, 185, 0.08);
+}
+
+.crm-stage-option .crm-stage-dot {
+  flex-shrink: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.crm-stage-dot-empty {
+  background: #dfe6ee;
+}
+
+.crm-stage-wrap {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.crm-stage-dot {
+  flex-shrink: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.crm-stage-select {
+  display: none;
+}
+
+.crm-calendar-bell {
+  appearance: none;
+  border: 0;
+  background: none;
+  padding: 4px;
+  cursor: pointer;
+  color: #b8c5d6;
+  line-height: 0;
+  border-radius: 6px;
+}
+
+.crm-calendar-bell.is-scheduled {
+  color: #2980b9;
+}
+
+.crm-calendar-bell:hover {
+  background: rgba(41, 128, 185, 0.08);
+}
+
+.crm-appointment-popover {
+  position: fixed;
+  z-index: 120;
+  min-width: 200px;
+  max-width: 280px;
+  padding: 12px 14px;
+  background: #fff;
+  border: 1px solid var(--crm-border);
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  font-size: 0.88rem;
+}
+
+.crm-appointment-popover.hidden {
+  display: none;
+}
+
+.crm-appointment-popover-close {
+  position: absolute;
+  top: 4px;
+  right: 8px;
+  border: 0;
+  background: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: var(--crm-muted);
+}
+
+.crm-dot.engaged {
+  background: #5dade2;
+}
+.crm-dot.client {
+  background: #1a5276;
+}
+.crm-dot.retained {
+  background: #5b2c6f;
+}
+.crm-dot.loyal {
+  background: #c9a227;
+}
+.crm-dot.lost {
+  background: #95a5a6;
+}
+
+/* Communication & Notes tab */
+.crm-comm-notes-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.crm-cn-scheduler {
+  background: #fff;
+  border: 1px solid var(--crm-border);
+  border-radius: 10px;
+  padding: 18px 20px;
+}
+
+.crm-cn-scheduler-compact {
+  padding: 12px 16px;
+}
+
+.crm-cn-scheduler-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 4px;
+}
+
+.crm-cn-scheduler-compact h2 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.crm-cn-all-reminders-btn {
+  padding: 6px 12px;
+  font-size: 0.82rem;
+  white-space: nowrap;
+}
+
+.crm-cn-scheduler-compact .crm-cn-hint {
+  margin: 0 0 8px;
+  font-size: 0.85rem;
+}
+
+.crm-cn-scheduler-inline {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.crm-cn-reminder-input {
+  flex: 1 1 200px;
+  min-width: 0;
+  padding: 8px 10px;
+  border: 1px solid var(--crm-border);
+  border-radius: 8px;
+  font: inherit;
+  font-size: 0.88rem;
+}
+
+.crm-cn-reminder-at {
+  flex: 0 0 auto;
+  padding: 8px 10px;
+  border: 1px solid var(--crm-border);
+  border-radius: 8px;
+  font: inherit;
+  font-size: 0.85rem;
+}
+
+.crm-cn-schedule-btn {
+  flex: 0 0 auto;
+  padding: 8px 14px;
+  font-size: 0.85rem;
+}
+
+.crm-cn-reminder-line {
+  margin-top: 6px;
+  min-height: 0;
+}
+
+.crm-cn-reminder-oneline {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: nowrap;
+  font-size: 0.85rem;
+  color: #334155;
+  line-height: 1.35;
+  overflow: hidden;
+}
+
+.crm-cn-reminder-oneline-date {
+  flex-shrink: 0;
+  color: var(--crm-muted);
+  white-space: nowrap;
+}
+
+.crm-cn-reminder-overdue {
+  color: #b45309;
+}
+
+.crm-cn-reminder-due-tag {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: #b45309;
+}
+
+.crm-cn-reminder-oneline-msg {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.crm-cn-reminder-oneline-cancel {
+  flex-shrink: 0;
+  appearance: none;
+  border: 0;
+  background: none;
+  padding: 0;
+  font: inherit;
+  font-size: 0.82rem;
+  color: var(--crm-accent);
+  cursor: pointer;
+  text-decoration: underline;
+  white-space: nowrap;
+}
+
+.crm-cn-reminder-oneline-cancel:hover {
+  color: #1a5276;
+}
+
+.crm-cn-reminder-line:empty {
+  display: none;
+}
+
+.crm-cn-line-flash {
+  font-size: 0.82rem;
+  color: var(--crm-muted);
+}
+
+.crm-cn-client-reminders {
+  margin-top: -8px;
+}
+
+.crm-cn-client-reminders h3 {
+  display: none;
+}
+
+.crm-cn-client-rem-empty {
+  display: none;
+}
+
+.crm-cn-reminder-list-compact li {
+  padding: 8px 10px;
+  border: 1px solid var(--crm-border);
+  border-radius: 8px;
+  margin-bottom: 6px;
+  background: #f8fafc;
+}
+
+.crm-cn-reminder-list-compact li.is-current-client {
+  border-color: rgba(41, 128, 185, 0.35);
+  background: rgba(41, 128, 185, 0.06);
+}
+
+.crm-cn-reminder-client {
+  font-weight: 600;
+  font-size: 0.88rem;
+  margin-bottom: 2px;
+}
+
+.crm-cn-reminder-you {
+  font-weight: 500;
+  font-size: 0.78rem;
+  color: var(--crm-accent);
+}
+
+.crm-cn-reminder-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.crm-cn-reminder-actions .crm-btn {
+  padding: 4px 10px;
+  font-size: 0.78rem;
+}
+
+.crm-cn-all-reminders-modal {
+  max-width: 520px;
+  width: calc(100% - 32px);
+  max-height: min(80vh, 640px);
+  display: flex;
+  flex-direction: column;
+}
+
+.crm-cn-all-reminders-body {
+  overflow-y: auto;
+  max-height: min(60vh, 480px);
+  margin: 8px 0 0;
+}
+
+.crm-cn-reminder-list-modal li {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--crm-border);
+}
+
+.crm-cn-reminder-list-modal li.is-current-client {
+  background: rgba(41, 128, 185, 0.04);
+  margin: 0 -12px;
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+.crm-cn-scheduler h2,
+.crm-cn-col h2 {
+  margin: 0 0 8px;
+  font-size: 1rem;
+}
+
+.crm-cn-hint,
+.crm-cn-muted {
+  color: var(--crm-muted);
+  font-size: 0.88rem;
+  margin: 0 0 12px;
+}
+
+.crm-cn-scheduler textarea,
+.crm-cn-notes-panel textarea {
+  width: 100%;
+  box-sizing: border-box;
+  margin: 6px 0 10px;
+  padding: 10px;
+  border: 1px solid var(--crm-border);
+  border-radius: 8px;
+  font: inherit;
+  resize: vertical;
+}
+
+.crm-cn-scheduler-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+.crm-cn-scheduler-row input[type="datetime-local"] {
+  padding: 8px 10px;
+  border: 1px solid var(--crm-border);
+  border-radius: 8px;
+  font: inherit;
+}
+
+.crm-cn-status {
+  min-height: 1.2em;
+  font-size: 0.85rem;
+  color: var(--crm-muted);
+  margin: 8px 0 0;
+}
+
+.crm-cn-reminder-list {
+  list-style: none;
+  margin: 12px 0 0;
+  padding: 0;
+}
+
+.crm-cn-reminder-list li {
+  padding: 10px 0;
+  border-top: 1px solid var(--crm-border);
+}
+
+.crm-cn-reminder-meta {
+  font-size: 0.82rem;
+  color: var(--crm-muted);
+}
+
+.crm-cn-reminder-msg {
+  margin: 4px 0 8px;
+  font-size: 0.9rem;
+}
+
+.crm-cn-columns {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 16px;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .crm-cn-columns {
+    grid-template-columns: 1fr;
+  }
+}
+
+.crm-cn-col {
+  background: #fff;
+  border: 1px solid var(--crm-border);
+  border-radius: 10px;
+  padding: 16px 18px;
+  min-height: 320px;
+  min-width: 0;
+}
+
+.crm-cn-scroll {
+  max-height: 420px;
+  overflow-y: auto;
+  margin-top: 8px;
+}
+
+.crm-cn-timeline,
+.crm-cn-notes-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.crm-cn-timeline li,
+.crm-cn-notes-list li {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--crm-border);
+}
+
+.crm-cn-timeline-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 10px;
+  font-size: 0.86rem;
+}
+
+.crm-cn-timeline-meta {
+  color: var(--crm-muted);
+  font-size: 0.78rem;
+  white-space: nowrap;
+}
+
+.crm-cn-timeline-summary {
+  flex: 1 1 180px;
+  min-width: 0;
+  color: #334155;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.crm-cn-view-msg {
+  flex-shrink: 0;
+  padding: 2px 8px;
+  font-size: 0.78rem;
+}
+
+.crm-cn-msg-modal {
+  max-width: 640px;
+  width: min(96vw, 640px);
+}
+
+.crm-cn-msg-modal-meta {
+  font-size: 0.82rem;
+  color: var(--crm-muted);
+  margin-bottom: 10px;
+}
+
+.crm-cn-msg-modal-body {
+  max-height: 50vh;
+  overflow: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-family: inherit;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  margin: 0;
+  padding: 12px;
+  background: #f8fafc;
+  border: 1px solid var(--crm-border);
+  border-radius: 6px;
+}
+
+.crm-cn-timeline-date,
+.crm-cn-note-date {
+  font-size: 0.8rem;
+  color: var(--crm-muted);
+}
+
+.crm-cn-timeline-title {
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-top: 2px;
+}
+
+.crm-cn-timeline-detail,
+.crm-cn-note-body {
+  font-size: 0.86rem;
+  margin-top: 4px;
+  color: #334155;
+  white-space: pre-wrap;
+}
+
+.crm-cn-empty {
+  color: var(--crm-muted);
+  font-size: 0.88rem;
+  margin: 12px 0;
 }
 
 .crm-table-clients .crm-col-date {
-  width: 14%;
   white-space: nowrap;
 }
 
@@ -900,6 +1502,66 @@ body.crm-body {
 }
 
 /* Client detail */
+.crm-main:has(.crm-client-detail) {
+  padding-top: 12px;
+}
+
+.crm-client-detail .crm-tab-panel {
+  margin-top: 0;
+}
+
+.crm-client-topbar {
+  display: flex;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  margin-bottom: 10px;
+  border-bottom: 2px solid var(--crm-border);
+}
+
+.crm-client-topbar .crm-client-back {
+  margin-bottom: 10px;
+  flex-shrink: 0;
+}
+
+.crm-client-topbar .crm-tabs {
+  flex: 1 1 320px;
+  margin: 0;
+  border-bottom: none;
+  min-width: 0;
+}
+
+.crm-client-name-right {
+  margin-left: auto;
+  text-align: right;
+  flex-shrink: 0;
+  padding-bottom: 8px;
+  max-width: min(320px, 40vw);
+}
+
+.crm-client-name-right h1 {
+  margin: 0;
+  font-size: 1.12rem;
+  font-weight: 700;
+  line-height: 1.25;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.crm-client-name-right p {
+  margin: 2px 0 0;
+  font-size: 0.78rem;
+  color: var(--crm-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.crm-client-detail .crm-comm-notes-wrap {
+  gap: 12px;
+}
+
 .crm-client-back {
   display: inline-flex;
   align-items: center;
@@ -914,6 +1576,25 @@ body.crm-body {
   cursor: pointer;
   padding: 0;
   font: inherit;
+}
+
+@media (max-width: 900px) {
+  .crm-client-topbar {
+    align-items: stretch;
+  }
+
+  .crm-client-name-right {
+    order: -1;
+    width: 100%;
+    max-width: none;
+    text-align: left;
+    padding-bottom: 4px;
+  }
+
+  .crm-client-topbar .crm-tabs {
+    flex-basis: 100%;
+    order: 1;
+  }
 }
 
 .crm-client-header {

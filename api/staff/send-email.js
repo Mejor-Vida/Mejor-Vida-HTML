@@ -11,6 +11,9 @@ const {
   normalizeFirstName,
   fetchLeadGreetingFromDb,
 } = require("../../lib/medical-intake-lead-greeting");
+const { insertEvent } = require("../../lib/contacts-db");
+const { logContactCommunication } = require("../../lib/contact-communications");
+const { resolveContactForStaffLead, isUuid } = require("./_lead-contact");
 
 const GMAIL_REDIRECT_URI = "https://www.mejorvidainsurance.com/api/staff/gmail-callback";
 
@@ -247,6 +250,45 @@ module.exports = async function handler(req, res) {
       },
       "sent"
     );
+
+    if (leadId && isUuid(leadId)) {
+      try {
+        const resolved = await resolveContactForStaffLead(cfg, leadId);
+        if (resolved.contactId) {
+          await insertEvent(
+            cfg.supabaseUrl,
+            cfg.serviceKey,
+            resolved.contactId,
+            "staff_email_sent",
+            {
+              subject: subjectLine,
+              to_email: toEmail,
+              message_id: messageId,
+              email_type: emailType || "general",
+              sent_by: auth.user && auth.user.email ? auth.user.email : null,
+              preview: draftForSend.slice(0, 400),
+            },
+            "email"
+          );
+          await logContactCommunication(cfg.supabaseUrl, cfg.serviceKey, {
+            contactId: resolved.contactId,
+            direction: "outbound",
+            channel: "email",
+            subject: subjectLine,
+            summary: subjectLine,
+            body: plainBody,
+            meta: {
+              source: "staff_send_email",
+              message_id: messageId,
+              email_type: emailType || "general",
+              to_email: toEmail,
+            },
+          });
+        }
+      } catch (logErr) {
+        console.error("staff/send-email insertEvent", logErr && logErr.message ? logErr.message : logErr);
+      }
+    }
 
     return json(res, 200, { success: true, toEmail, messageId, subject: subjectLine, intakeUrl });
   } catch (e) {

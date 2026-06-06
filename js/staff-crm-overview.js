@@ -20,20 +20,14 @@
 
   var PIPELINE_OPTIONS = [
     "",
-    "new_lead",
-    "attempting_contact",
-    "connected",
-    "qualified",
-    "needs_analysis_complete",
-    "quote_preparing",
-    "quote_presented",
-    "objection_handling",
-    "application_started",
-    "underwriting",
-    "approved_pending_payment",
-    "policy_issued",
-    "closed_won",
-    "closed_lost",
+    "new",
+    "contacted",
+    "engaged",
+    "client",
+    "retained",
+    "loyal",
+    "lost",
+    "enrolled",
   ];
 
   var SOURCE_OPTIONS = [
@@ -184,7 +178,7 @@
     setv("crm-ov-height", pe.height);
     setv("crm-ov-weight", pe.weight != null && pe.weight !== "" ? String(pe.weight) : "");
     setSelectOrCustom(state.root, "crm-ov-tag", detail.tag);
-    setSelectOrCustom(state.root, "crm-ov-pipeline-stage", detail.pipeline_stage);
+    setSelectOrCustom(state.root, "crm-ov-pipeline-stage", window.StaffCrmStages ? window.StaffCrmStages.normalizeStage(detail.pipeline_stage) : detail.pipeline_stage);
     setSelectOrCustom(state.root, "crm-ov-source", detail.source);
     var doff = $("crm-ov-drop-off", state.root);
     if (doff) doff.checked = !!detail.drop_off;
@@ -444,7 +438,7 @@
       selectField(
         "crm-ov-pipeline-stage",
         t("ov_pipeline_stage"),
-        buildSelectOptions("ov_pipeline", PIPELINE_OPTIONS, ""),
+        buildSelectOptions("ov_stage", PIPELINE_OPTIONS, ""),
         t("ov_pipeline_hint")
       ) +
       selectField(
@@ -457,7 +451,7 @@
       selectField(
         "crm-ov-drop-off-stage",
         t("ov_drop_off_stage"),
-        buildSelectOptions("ov_pipeline", PIPELINE_OPTIONS, ""),
+        buildSelectOptions("ov_stage", PIPELINE_OPTIONS, ""),
         t("ov_drop_off_stage_hint")
       ) +
       textareaField("crm-ov-notes", t("ov_notes"), t("ov_notes_hint"), t("ov_notes_ph")) +

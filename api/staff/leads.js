@@ -205,6 +205,42 @@ async function loadCanonicalLeadProfile(cfg, leadId, leadSourceTable) {
   return row && row.profile_data && typeof row.profile_data === "object" ? row.profile_data : {};
 }
 
+const IC_CLIENT_STAGES = new Set([
+  "",
+  "new",
+  "contacted",
+  "engaged",
+  "client",
+  "retained",
+  "loyal",
+  "lost",
+  "enrolled",
+]);
+
+function normalizeIcPipelineStage(raw) {
+  const s = String(raw ?? "").trim().toLowerCase();
+  if (!s) return "";
+  if (IC_CLIENT_STAGES.has(s)) return s;
+  const legacy = {
+    new_lead: "new",
+    attempting_contact: "contacted",
+    call_scheduled: "contacted",
+    connected: "engaged",
+    qualified: "engaged",
+    needs_analysis_complete: "client",
+    quote_preparing: "client",
+    quote_presented: "client",
+    objection_handling: "client",
+    application_started: "client",
+    underwriting: "client",
+    approved_pending_payment: "client",
+    policy_issued: "enrolled",
+    closed_won: "enrolled",
+    closed_lost: "lost",
+  };
+  return legacy[s] || "";
+}
+
 function buildListItemFromRow(r, canonical) {
   const item = {
     id: r.id,
@@ -217,6 +253,9 @@ function buildListItemFromRow(r, canonical) {
     source_table: r.source_table || "unknown",
     pipeline_stage: "",
     tag: "",
+    contact_id: "",
+    contacts_contact_id: "",
+    call_scheduled_at: null,
     created_at: r.created_at || null,
     updated_at: r.updated_at || null,
   };
@@ -228,7 +267,14 @@ function buildListItemFromRow(r, canonical) {
     item.language = mergePreferCanonical(item.language, canonical.language);
     item.pipeline_stage = mergePreferCanonical(item.pipeline_stage, canonical.pipeline_stage);
     item.tag = mergePreferCanonical(item.tag, canonical.tag);
+    item.contact_id = mergePreferCanonical(item.contact_id, canonical.contact_id);
+    item.contacts_contact_id = mergePreferCanonical(item.contacts_contact_id, canonical.contacts_contact_id);
   }
+  if (String(item.source_table || "") === "contacts" && item.id && !cleanText(item.contact_id)) {
+    item.contact_id = String(item.id);
+    item.contacts_contact_id = String(item.id);
+  }
+  item.pipeline_stage = normalizeIcPipelineStage(item.pipeline_stage) || item.pipeline_stage || "";
   item.display_name = displayName(item);
   return item;
 }
@@ -263,6 +309,56 @@ async function enrichListItemsWithStaffProfiles(cfg, items) {
     if (!canonical) return item;
     return buildListItemFromRow(item, canonical);
   });
+}
+
+async function enrichListItemsWithAppointments(cfg, items) {
+  if (!Array.isArray(items) || !items.length) return items;
+
+  const contactIdByItem = new Map();
+  const contactIds = new Set();
+
+  items.forEach((item, idx) => {
+    let cid = cleanText(item.contact_id || item.contacts_contact_id);
+    if (!cid && String(item.source_table || "") === "contacts" && item.id) {
+      cid = String(item.id);
+      item.contact_id = cid;
+      item.contacts_contact_id = cid;
+    }
+    if (cid) {
+      contactIds.add(cid);
+      contactIdByItem.set(idx, cid);
+    }
+  });
+
+  if (!contactIds.size) return items;
+
+  const idList = pgInListQuoted(Array.from(contactIds));
+  let stateRows = [];
+  try {
+    stateRows = await restSelect(
+      cfg,
+      "lead_state",
+      `select=contact_id,call_scheduled_at&contact_id=in.(${idList})`
+    );
+  } catch (e) {
+    console.error("staff/leads enrichListItemsWithAppointments", e);
+    return items;
+  }
+
+  const apptByContact = new Map();
+  (stateRows || []).forEach((row) => {
+    if (!row || !row.contact_id) return;
+    const at = row.call_scheduled_at || null;
+    if (at) apptByContact.set(String(row.contact_id), at);
+  });
+
+  items.forEach((item, idx) => {
+    const cid = contactIdByItem.get(idx);
+    if (!cid) return;
+    item.call_scheduled_at = apptByContact.get(cid) || null;
+  });
+
+  return items;
 }
 
 async function saveCanonicalLeadProfile(cfg, leadId, leadSourceTable, patch, updatedBy) {
@@ -1196,6 +1292,11 @@ module.exports = async function handler(req, res) {
       } catch (e) {
         console.error("staff/leads GET enrichLeadEmailsFromContacts", e);
       }
+      try {
+        items = await enrichListItemsWithAppointments(cfg, items);
+      } catch (e) {
+        console.error("staff/leads GET enrichListItemsWithAppointments", e);
+      }
       items.sort((x, y) => sortKey(x).localeCompare(sortKey(y)));
       return json(res, 200, { items });
     } catch (e) {
@@ -1366,7 +1467,10 @@ module.exports = async function handler(req, res) {
       payload.tag = s ? s.slice(0, 120) : null;
     }
     if (Object.prototype.hasOwnProperty.call(body, "pipeline_stage")) {
-      const s = String(body.pipeline_stage ?? "").trim();
+      const s = String(body.pipeline_stage ?? "").trim().toLowerCase();
+      if (s && !IC_CLIENT_STAGES.has(s)) {
+        return json(res, 400, { error: "Invalid pipeline stage" });
+      }
       payload.pipeline_stage = s ? s.slice(0, 120) : null;
     }
     if (Object.prototype.hasOwnProperty.call(body, "source")) {
@@ -1521,6 +1625,11 @@ module.exports = async function handler(req, res) {
         await enrichLeadEmailsFromContacts(cfg, [one]);
       } catch (e) {
         console.error("staff/leads PATCH enrichLeadEmailsFromContacts", e);
+      }
+      try {
+        await enrichListItemsWithAppointments(cfg, [one]);
+      } catch (e) {
+        console.error("staff/leads PATCH enrichListItemsWithAppointments", e);
       }
       return json(res, 200, { item: one, detail: mergedDetail, can_access_phi: canPhi });
     } catch (e) {

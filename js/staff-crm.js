@@ -14,9 +14,12 @@
   var currentDetail = null;
   var clientsRowMenuCloser = null;
   var clientsListGlobalWired = false;
+  var reminderPollTimer = null;
+  var reminderPollInFlight = false;
 
   var CLIENT_TABS = [
     { id: "overview", labelKey: "tab_overview" },
+    { id: "comm-notes", labelKey: "tab_comm_notes" },
     { id: "connect", labelKey: "tab_connect" },
     { id: "pipeline", labelKey: "tab_pipeline" },
     { id: "products", labelKey: "tab_products" },
@@ -121,6 +124,8 @@
     $("crm-login").classList.toggle("hidden", on);
     $("crm-app").classList.toggle("hidden", !on);
     $("crm-app").setAttribute("aria-hidden", on ? "false" : "true");
+    if (on) startReminderPoller();
+    else stopReminderPoller();
   }
 
   function applyLockState() {
@@ -150,6 +155,7 @@
   }
 
   async function signOutNow() {
+    stopReminderPoller();
     try {
       if (sb) await sb.auth.signOut();
     } catch (e) {}
@@ -157,6 +163,40 @@
     leadsCache = [];
     currentDetail = null;
     setAuthed(false);
+  }
+
+  async function processDueRemindersQuietly() {
+    if (!accessToken || reminderPollInFlight) return;
+    reminderPollInFlight = true;
+    try {
+      var result = await authedApi(
+        "/api/staff/reminders",
+        { action: "process_due" },
+        { method: "POST" }
+      );
+      if (result && result.sent > 0) {
+        window.dispatchEvent(
+          new CustomEvent("staffcrm-reminders-sent", { detail: result })
+        );
+      }
+    } catch (e) {
+      /* polling should not interrupt CRM use */
+    } finally {
+      reminderPollInFlight = false;
+    }
+  }
+
+  function startReminderPoller() {
+    stopReminderPoller();
+    void processDueRemindersQuietly();
+    reminderPollTimer = setInterval(processDueRemindersQuietly, 30000);
+  }
+
+  function stopReminderPoller() {
+    if (reminderPollTimer) {
+      clearInterval(reminderPollTimer);
+      reminderPollTimer = null;
+    }
   }
 
   function resetIdleTimer() {
@@ -299,9 +339,55 @@
       language: detail.language || "English",
       source: detail.source || detail.source_table || "unknown",
       source_table: detail.source_table || "unknown",
+      pipeline_stage: detail.pipeline_stage || "",
+      contact_id: detail.contact_id || detail.contacts_contact_id || "",
+      contacts_contact_id: detail.contacts_contact_id || detail.contact_id || "",
+      call_scheduled_at: detail.call_scheduled_at || null,
       created_at: detail.created_at || null,
       updated_at: detail.updated_at || null,
     };
+  }
+
+  function fmtAppointment(iso) {
+    if (!iso) return "";
+    try {
+      return new Date(iso).toLocaleString(undefined, {
+        weekday: "short",
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+        hour: "numeric",
+        minute: "2-digit",
+      });
+    } catch (e) {
+      return String(iso);
+    }
+  }
+
+  function renderStageCell(L) {
+    var stages = window.StaffCrmStages;
+    if (!stages || !stages.renderStagePicker) return "—";
+    return stages.renderStagePicker(L.id, L.pipeline_stage, esc, t("col_stage"));
+  }
+
+  function renderCalendarCell(L) {
+    var scheduled = !!(L.call_scheduled_at);
+    var cls = scheduled ? " crm-calendar-bell is-scheduled" : " crm-calendar-bell is-empty";
+    var label = scheduled ? t("calendar_scheduled_title") : t("calendar_no_appointment");
+    return (
+      '<button type="button" class="' +
+      cls.trim() +
+      '" data-id="' +
+      esc(L.id) +
+      '" data-at="' +
+      esc(L.call_scheduled_at || "") +
+      '" aria-label="' +
+      esc(label) +
+      '">' +
+      '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false">' +
+      '<path fill="currentColor" d="M12 22a2.5 2.5 0 0 0 2.45-2h-4.9A2.5 2.5 0 0 0 12 22Zm7-6V11a7 7 0 1 0-14 0v5l-2 2v1h18v-1l-2-2Z"/>' +
+      "</svg></button>"
+    );
   }
 
   function upsertLeadListItem(item) {
@@ -408,8 +494,10 @@
       esc(t("col_email")) +
       '</th><th class="crm-col-phone">' +
       esc(t("col_phone")) +
-      '</th><th class="crm-col-language">' +
-      esc(t("col_language")) +
+      '</th><th class="crm-col-stage">' +
+      esc(t("col_stage")) +
+      '</th><th class="crm-col-calendar">' +
+      esc(t("col_calendar")) +
       '</th><th class="crm-col-date">' +
       '<button type="button" class="crm-sort-th-btn is-active" id="crm-sort-date" aria-sort="descending">' +
       esc(t("col_date_added")) +
@@ -417,6 +505,7 @@
       '</th><th class="crm-col-menu"><span class="hidden">' +
       esc(t("clients_row_actions")) +
       "</span></th></tr></thead><tbody id=\"crm-clients-tbody\"></tbody></table></div>" +
+      '<div id="crm-appointment-popover" class="crm-appointment-popover hidden" role="dialog" aria-modal="false"></div>' +
       '<p id="crm-clients-status" class="crm-empty-state"></p>' +
       '<div id="crm-row-menu" class="crm-row-menu hidden" role="menu"></div>' +
       '<div id="crm-clients-delete-modal" class="crm-modal-backdrop hidden" role="dialog" aria-modal="true">' +
@@ -437,6 +526,95 @@
     var selectedIds = new Set();
     var rowMenuLeadId = null;
     var sortState = { column: "date", dir: "desc" };
+    var apptPopoverCloser = null;
+
+    function closeApptPopover() {
+      var pop = $("crm-appointment-popover");
+      if (pop) {
+        pop.classList.add("hidden");
+        pop.innerHTML = "";
+      }
+      if (apptPopoverCloser) {
+        document.removeEventListener("click", apptPopoverCloser);
+        apptPopoverCloser = null;
+      }
+    }
+
+    function openApptPopover(btn, atIso) {
+      closeApptPopover();
+      var pop = $("crm-appointment-popover");
+      if (!pop || !btn) return;
+      var body = atIso
+        ? "<strong>" +
+          esc(t("calendar_scheduled_title")) +
+          "</strong><p>" +
+          esc(t("calendar_scheduled_at", { datetime: fmtAppointment(atIso) })) +
+          "</p>"
+        : "<p>" + esc(t("calendar_no_appointment")) + "</p>";
+      pop.innerHTML =
+        '<button type="button" class="crm-appointment-popover-close" aria-label="' +
+        esc(t("close")) +
+        '">&times;</button>' +
+        body;
+      pop.classList.remove("hidden");
+      var rect = btn.getBoundingClientRect();
+      pop.style.position = "fixed";
+      pop.style.top = rect.bottom + 6 + "px";
+      pop.style.left = Math.max(8, rect.left - 40) + "px";
+      var closeBtn = pop.querySelector(".crm-appointment-popover-close");
+      if (closeBtn) closeBtn.addEventListener("click", closeApptPopover);
+      apptPopoverCloser = function (e) {
+        if (pop.contains(e.target) || btn.contains(e.target)) return;
+        closeApptPopover();
+      };
+      setTimeout(function () {
+        document.addEventListener("click", apptPopoverCloser);
+      }, 0);
+    }
+
+    function closeAllStageMenus(exceptPicker) {
+      document.querySelectorAll(".crm-stage-picker .crm-stage-menu").forEach(function (menu) {
+        if (exceptPicker && exceptPicker.contains(menu)) return;
+        menu.classList.add("hidden");
+      });
+      document.querySelectorAll(".crm-stage-picker .crm-stage-trigger").forEach(function (btn) {
+        if (exceptPicker && exceptPicker.contains(btn)) return;
+        btn.setAttribute("aria-expanded", "false");
+      });
+    }
+
+    function updateStagePickerUI(picker, stage) {
+      if (!picker || !window.StaffCrmStages) return;
+      var norm = window.StaffCrmStages.normalizeStage(stage);
+      picker.setAttribute("data-stage", norm);
+      var trigger = picker.querySelector(".crm-stage-trigger");
+      var dot = picker.querySelector(".crm-stage-trigger .crm-stage-dot");
+      var label = picker.querySelector(".crm-stage-label");
+      if (dot) dot.style.background = window.StaffCrmStages.stageColor(norm);
+      if (label) label.textContent = norm ? window.StaffCrmStages.stageLabel(norm) : t("ov_stage_select");
+      picker.querySelectorAll(".crm-stage-option").forEach(function (opt) {
+        opt.classList.toggle("is-selected", (opt.getAttribute("data-value") || "") === norm);
+      });
+    }
+
+    async function saveStage(leadId, stage, picker) {
+      var prev = picker.getAttribute("data-stage") || "";
+      var status = $("crm-clients-status");
+      var trigger = picker.querySelector(".crm-stage-trigger");
+      if (trigger) trigger.disabled = true;
+      try {
+        var data = await authedApi("/api/staff/leads", { id: leadId, pipeline_stage: stage || "" }, { method: "PATCH" });
+        if (data && data.item) upsertLeadListItem(data.item);
+        updateStagePickerUI(picker, stage || "");
+        if (status) status.textContent = t("stage_saved");
+      } catch (e) {
+        updateStagePickerUI(picker, prev);
+        if (status) status.textContent = (e && e.message) || t("stage_save_failed");
+      } finally {
+        if (trigger) trigger.disabled = false;
+        closeAllStageMenus();
+      }
+    }
 
     function visibleRows() {
       var ql = q.trim().toLowerCase();
@@ -546,7 +724,7 @@
         '<button type="button" data-action="contact">' +
         esc(t("menu_contact")) +
         "</button>" +
-        '<button type="button" data-action="reminder" class="is-muted">' +
+        '<button type="button" data-action="reminder">' +
         esc(t("menu_add_reminder")) +
         "</button>";
       menu.classList.remove("hidden");
@@ -564,10 +742,7 @@
           if (action === "view") navigate("#/clients/" + encodeURIComponent(id) + "/overview");
           else if (action === "quote") navigate("#/clients/" + encodeURIComponent(id) + "/products");
           else if (action === "contact") navigate("#/clients/" + encodeURIComponent(id) + "/connect");
-          else if (action === "reminder") {
-            var status = $("crm-clients-status");
-            if (status) status.textContent = t("menu_reminder_soon");
-          }
+          else if (action === "reminder") navigate("#/clients/" + encodeURIComponent(id) + "/comm-notes");
         });
       });
     }
@@ -577,6 +752,8 @@
       var status = $("crm-clients-status");
       if (!tbody) return;
       closeRowMenu();
+      closeApptPopover();
+      closeAllStageMenus();
       var rows = sortedRows();
       if (!rows.length) {
         tbody.innerHTML = "";
@@ -607,9 +784,11 @@
             esc(L.email || "—") +
             "</td><td>" +
             esc(L.phone || "—") +
-            "</td><td>" +
-            esc(L.language || "—") +
-            "</td><td>" +
+            "</td><td class=\"crm-col-stage\">" +
+            renderStageCell(L) +
+            '</td><td class="crm-col-calendar">' +
+            renderCalendarCell(L) +
+            '</td><td class="crm-col-date">' +
             esc(formatDateAdded(L.created_at)) +
             '</td><td class="crm-col-menu"><button type="button" class="crm-row-menu-btn" data-id="' +
             esc(L.id) +
@@ -658,6 +837,46 @@
             return;
           }
           openRowMenu(id, btn);
+        });
+      });
+
+      tbody.querySelectorAll(".crm-stage-picker").forEach(function (picker) {
+        var trigger = picker.querySelector(".crm-stage-trigger");
+        var menu = picker.querySelector(".crm-stage-menu");
+        if (!trigger || !menu) return;
+        trigger.addEventListener("click", function (e) {
+          e.stopPropagation();
+          var open = !menu.classList.contains("hidden");
+          closeAllStageMenus();
+          closeRowMenu();
+          closeApptPopover();
+          if (open) {
+            menu.classList.add("hidden");
+            trigger.setAttribute("aria-expanded", "false");
+            return;
+          }
+          menu.classList.remove("hidden");
+          trigger.setAttribute("aria-expanded", "true");
+        });
+        menu.querySelectorAll(".crm-stage-option").forEach(function (opt) {
+          opt.addEventListener("click", function (e) {
+            e.stopPropagation();
+            var id = picker.getAttribute("data-id");
+            if (!id) return;
+            var value = opt.getAttribute("data-value") || "";
+            if (value === (picker.getAttribute("data-stage") || "")) {
+              closeAllStageMenus();
+              return;
+            }
+            saveStage(id, value, picker);
+          });
+        });
+      });
+
+      tbody.querySelectorAll(".crm-calendar-bell").forEach(function (btn) {
+        btn.addEventListener("click", function (e) {
+          e.stopPropagation();
+          openApptPopover(btn, btn.getAttribute("data-at") || "");
         });
       });
 
@@ -768,6 +987,13 @@
       document.addEventListener("click", function (e) {
         if (e.target.closest("#crm-row-menu") || e.target.closest(".crm-row-menu-btn")) return;
         if (clientsRowMenuCloser) clientsRowMenuCloser();
+        if (e.target.closest(".crm-stage-picker")) return;
+        document.querySelectorAll(".crm-stage-picker .crm-stage-menu").forEach(function (menu) {
+          menu.classList.add("hidden");
+        });
+        document.querySelectorAll(".crm-stage-picker .crm-stage-trigger").forEach(function (btn) {
+          btn.setAttribute("aria-expanded", "false");
+        });
       });
       window.addEventListener(
         "scroll",
@@ -872,44 +1098,31 @@
             ? '<div id="crm-connect-root"></div>'
             : route.tab === "pipeline"
               ? '<div id="crm-pipeline-root"></div>'
-              : tabPlaceholder(route.tab);
+              : route.tab === "comm-notes"
+                ? '<div id="crm-comm-notes-root"></div>'
+                : tabPlaceholder(route.tab);
 
     main.innerHTML =
+      '<div class="crm-client-detail">' +
+      '<div class="crm-client-topbar">' +
       '<button type="button" class="crm-client-back" id="crm-back-clients">' +
       esc(t("back")) +
       "</button>" +
-      '<div class="crm-client-header">' +
-      '<div class="crm-avatar">' +
-      esc(initials(name)) +
-      "</div>" +
-      '<div class="crm-client-meta"><h1>' +
-      esc(name) +
-      "</h1><p>" +
-      esc(meta.join(" | ") || t("client_record")) +
-      "</p></div>" +
-      '<div class="crm-client-actions">' +
-      '<button type="button" class="crm-btn" id="crm-go-products">' +
-      esc(t("start_quote")) +
-      '</button>' +
-      '<button type="button" class="crm-btn secondary" id="crm-go-connect">' +
-      esc(t("contact")) +
-      "</button>" +
-      "</div></div>" +
       '<nav class="crm-tabs" aria-label="Client sections">' +
       tabsHtml +
       "</nav>" +
+      '<div class="crm-client-name-right">' +
+      "<h1>" +
+      esc(name) +
+      "</h1>" +
+      (meta.length ? "<p>" + esc(meta.join(" | ")) + "</p>" : "") +
+      "</div></div>" +
       '<div class="crm-tab-panel">' +
       panel +
-      "</div>";
+      "</div></div>";
 
     $("crm-back-clients").addEventListener("click", function () {
       navigate("#/clients");
-    });
-    $("crm-go-products").addEventListener("click", function () {
-      navigate("#/clients/" + encodeURIComponent(route.id) + "/products");
-    });
-    $("crm-go-connect").addEventListener("click", function () {
-      navigate("#/clients/" + encodeURIComponent(route.id) + "/connect");
     });
     main.querySelectorAll(".crm-tab").forEach(function (btn) {
       btn.addEventListener("click", function () {
@@ -932,6 +1145,10 @@
     if (route.tab === "pipeline" && window.StaffCrmPipeline) {
       var pipeRoot = document.getElementById("crm-pipeline-root");
       if (pipeRoot) await window.StaffCrmPipeline.mount(pipeRoot, { leadId: route.id, detail: d });
+    }
+    if (route.tab === "comm-notes" && window.StaffCrmCommNotes) {
+      var cnRoot = document.getElementById("crm-comm-notes-root");
+      if (cnRoot) await window.StaffCrmCommNotes.mount(cnRoot, { leadId: route.id, detail: d });
     }
   }
 

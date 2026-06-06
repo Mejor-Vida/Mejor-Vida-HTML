@@ -36,6 +36,7 @@
 const { wrapResendEmailHtml, LOGO_EN, LOGO_ES } = require('../lib/resend-email-template');
 const { computeNextSend } = require('../lib/nurture-schedule');
 const { VCF_URL, getSmsMessage, getEmailContent } = require('../lib/nurture-templates');
+const { logContactCommunication, htmlToPlain } = require('../lib/contact-communications');
 
 // ─── Supabase helpers ─────────────────────────────────────────────────────────
 function sbHeaders() {
@@ -248,9 +249,9 @@ module.exports = async function handler(req, res) {
 
     const { phase, step } = row;
     let sendResult = { ok: false, reason: 'unknown_phase' };
+    let overrideRow = null;
 
     try {
-      let overrideRow = null;
       if (phase === 3) {
         overrideRow = await fetchEmailOverride(contact.id, phase, step);
       }
@@ -290,7 +291,47 @@ module.exports = async function handler(req, res) {
     const ch = channelForPhase(phase);
     if (sendResult.ok) {
       const pid = sendResult.providerId || sendResult.sid || sendResult.emailId || null;
-      await insertDeliveryLog(contact.id, ch, phase, step, 'sent', { provider_id: pid });
+      const sentAt = new Date().toISOString();
+      await insertDeliveryLog(contact.id, ch, phase, step, 'sent', { provider_id: pid, sent_at: sentAt });
+
+      let logSubject = null;
+      let logBody = null;
+      let logSummary = null;
+      if (phase === 2) {
+        logBody = getSmsMessage(step, contact);
+        logSummary = logBody;
+      } else if (phase === 3) {
+        if (overrideRow && overrideRow.subject && overrideRow.body) {
+          logSubject = String(overrideRow.subject);
+          const rawBody = String(overrideRow.body);
+          logBody = rawBody.includes('<') ? htmlToPlain(rawBody) : rawBody;
+        } else {
+          const c = getEmailContent(step, contact);
+          logSubject = c.subject;
+          logBody = htmlToPlain(c.html);
+        }
+        logSummary = logSubject;
+      } else if (phase === 1) {
+        logSummary = `WhatsApp nurture — step ${step}`;
+        logBody =
+          `Automated WhatsApp message sent via ManyChat (nurture step ${step}). ` +
+          'Full message content is managed in the ManyChat flow.';
+      }
+      await logContactCommunication(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY, {
+        contactId: contact.id,
+        direction: 'outbound',
+        channel: ch,
+        subject: logSubject,
+        summary: logSummary,
+        body: logBody,
+        meta: {
+          source: 'nurture',
+          phase,
+          step,
+          provider_id: pid,
+          sent_at: sentAt,
+        },
+      });
     } else if (
       sendResult.reason === 'no_manychat_subscriber_id' ||
       sendResult.reason === 'opted_out' ||
