@@ -1,0 +1,19 @@
+/* Footer logo — preserve aspect ratio inside flex rows (Spanish + English site footers) */
+footer picture:has(#footer-logo) {
+  display: block;
+  flex: 0 0 auto;
+  width: auto;
+  max-width: min(220px, 52vw);
+  line-height: 0;
+}
+
+#footer-logo {
+  display: block;
+  height: 130px;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  margin-top: -25px;
+  margin-bottom: -25px;
+}
