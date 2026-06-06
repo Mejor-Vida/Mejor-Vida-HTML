@@ -376,6 +376,37 @@
     }
   }
 
+  function clearReminderTimers(state) {
+    (state._reminderTimers || []).forEach(function (tid) {
+      clearTimeout(tid);
+    });
+    state._reminderTimers = [];
+  }
+
+  async function triggerReminderSend(state) {
+    if (window.StaffCrm && window.StaffCrm.processDueReminders) {
+      await window.StaffCrm.processDueReminders();
+    }
+    await loadClientReminders(state);
+  }
+
+  function scheduleReminderTimers(state) {
+    clearReminderTimers(state);
+    if (!state._reminderTimers) state._reminderTimers = [];
+    pendingReminders(state.reminders).forEach(function (r) {
+      var ms = new Date(r.scheduled_at).getTime() - Date.now();
+      if (ms <= 0) {
+        void triggerReminderSend(state);
+        return;
+      }
+      if (ms > 7 * 24 * 60 * 60 * 1000) return;
+      var tid = setTimeout(function () {
+        void triggerReminderSend(state);
+      }, ms + 800);
+      state._reminderTimers.push(tid);
+    });
+  }
+
   async function loadClientReminders(state) {
     var lineEl = $("crm-cn-reminder-line", state.root);
     if (!lineEl) return;
@@ -384,8 +415,10 @@
       state.reminders = rem.items || [];
       lineEl.innerHTML = renderClientReminderLine(state.reminders);
       wireCancelButtons(state, lineEl);
+      scheduleReminderTimers(state);
     } catch (e) {
       lineEl.innerHTML = "";
+      clearReminderTimers(state);
     }
   }
 
@@ -526,6 +559,9 @@
           if (msgEl) msgEl.value = "";
           if (atEl) atEl.value = defaultDatetimeLocal();
           await loadClientReminders(state);
+          if (window.StaffCrm && window.StaffCrm.processDueReminders) {
+            await window.StaffCrm.processDueReminders();
+          }
         } catch (e) {
           flashReminderLine(state, '<span class="crm-cn-line-flash">' + esc((e && e.message) || t("cn_reminder_failed")) + "</span>");
         } finally {
@@ -572,6 +608,7 @@
       void loadClientReminders(state);
     }
     window.addEventListener("staffcrm-reminders-sent", onRemindersSent);
+    state._onRemindersSent = onRemindersSent;
     root.innerHTML = formHtml();
     wireForm(state);
     await loadAll(state);

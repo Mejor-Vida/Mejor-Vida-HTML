@@ -166,7 +166,7 @@
   }
 
   async function processDueRemindersQuietly() {
-    if (!accessToken || reminderPollInFlight) return;
+    if (!accessToken || reminderPollInFlight) return null;
     reminderPollInFlight = true;
     try {
       var result = await authedApi(
@@ -179,8 +179,10 @@
           new CustomEvent("staffcrm-reminders-sent", { detail: result })
         );
       }
+      return result;
     } catch (e) {
-      /* polling should not interrupt CRM use */
+      console.warn("[StaffCrm] reminder process_due failed:", (e && e.message) || e);
+      return null;
     } finally {
       reminderPollInFlight = false;
     }
@@ -189,7 +191,7 @@
   function startReminderPoller() {
     stopReminderPoller();
     void processDueRemindersQuietly();
-    reminderPollTimer = setInterval(processDueRemindersQuietly, 30000);
+    reminderPollTimer = setInterval(processDueRemindersQuietly, 10000);
   }
 
   function stopReminderPoller() {
@@ -1325,6 +1327,7 @@
     reloadLeadDetail: reloadLeadDetail,
     refreshLeads: refreshLeads,
     upsertLeadListItem: upsertLeadListItem,
+    processDueReminders: processDueRemindersQuietly,
     getLang: function () {
       return window.StaffCrmI18n ? window.StaffCrmI18n.getLang() : "en";
     },
