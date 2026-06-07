@@ -458,6 +458,14 @@
   }
 
   function renderClientsList(main) {
+    var stageFilter = "";
+
+    function renderStageFilterHeaderCell() {
+      var stages = window.StaffCrmStages;
+      if (!stages || !stages.renderStageFilterHeader) return esc(t("col_stage"));
+      return stages.renderStageFilterHeader(stageFilter, esc);
+    }
+
     main.innerHTML =
       '<div class="crm-clients-head">' +
       '<div class="crm-clients-head-left">' +
@@ -497,7 +505,7 @@
       '</th><th class="crm-col-phone">' +
       esc(t("col_phone")) +
       '</th><th class="crm-col-stage">' +
-      esc(t("col_stage")) +
+      renderStageFilterHeaderCell() +
       '</th><th class="crm-col-calendar">' +
       esc(t("col_calendar")) +
       '</th><th class="crm-col-date">' +
@@ -574,10 +582,49 @@
       }, 0);
     }
 
+    function resetStageMenuPosition(menu) {
+      if (!menu) return;
+      menu.classList.remove("crm-stage-menu-up");
+      menu.style.position = "";
+      menu.style.top = "";
+      menu.style.bottom = "";
+      menu.style.left = "";
+      menu.style.minWidth = "";
+      menu.style.maxHeight = "";
+    }
+
+    function positionStageMenu(trigger, menu) {
+      if (!trigger || !menu) return;
+      var rect = trigger.getBoundingClientRect();
+      var gap = 4;
+      var minWidth = Math.max(rect.width, 180);
+      var maxHeight = Math.max(120, window.innerHeight - 16);
+      menu.style.position = "fixed";
+      menu.style.minWidth = minWidth + "px";
+      menu.style.maxHeight = maxHeight + "px";
+      menu.style.zIndex = "130";
+      menu.style.left = Math.max(8, Math.min(rect.left, window.innerWidth - minWidth - 8)) + "px";
+
+      var menuHeight = menu.scrollHeight;
+      var spaceBelow = window.innerHeight - rect.bottom - gap;
+      var spaceAbove = rect.top - gap;
+      var openUp = menuHeight > spaceBelow && spaceAbove >= spaceBelow;
+
+      menu.classList.toggle("crm-stage-menu-up", openUp);
+      if (openUp) {
+        menu.style.top = "auto";
+        menu.style.bottom = window.innerHeight - rect.top + gap + "px";
+      } else {
+        menu.style.bottom = "auto";
+        menu.style.top = rect.bottom + gap + "px";
+      }
+    }
+
     function closeAllStageMenus(exceptPicker) {
       document.querySelectorAll(".crm-stage-picker .crm-stage-menu").forEach(function (menu) {
         if (exceptPicker && exceptPicker.contains(menu)) return;
         menu.classList.add("hidden");
+        resetStageMenuPosition(menu);
       });
       document.querySelectorAll(".crm-stage-picker .crm-stage-trigger").forEach(function (btn) {
         if (exceptPicker && exceptPicker.contains(btn)) return;
@@ -609,6 +656,7 @@
         if (data && data.item) upsertLeadListItem(data.item);
         updateStagePickerUI(picker, stage || "");
         if (status) status.textContent = t("stage_saved");
+        draw();
       } catch (e) {
         updateStagePickerUI(picker, prev);
         if (status) status.textContent = (e && e.message) || t("stage_save_failed");
@@ -629,23 +677,64 @@
 
     function sortedRows() {
       var rows = visibleRows().slice();
-      if (sortState.column === "name") {
-        rows.sort(function (a, b) {
+
+      function compareRows(a, b) {
+        if (sortState.column === "name") {
           var cmp = displayName(a).toLowerCase().localeCompare(displayName(b).toLowerCase());
           return sortState.dir === "asc" ? cmp : -cmp;
-        });
-        return rows;
-      }
-      rows.sort(function (a, b) {
+        }
         var ta = a.created_at ? new Date(a.created_at).getTime() : 0;
         var tb = b.created_at ? new Date(b.created_at).getTime() : 0;
         if (!ta && !tb) return 0;
         if (!ta) return 1;
         if (!tb) return -1;
-        var cmp = ta - tb;
-        return sortState.dir === "desc" ? -cmp : cmp;
-      });
+        var cmpDate = ta - tb;
+        return sortState.dir === "desc" ? -cmpDate : cmpDate;
+      }
+
+      if (stageFilter && window.StaffCrmStages) {
+        rows.sort(function (a, b) {
+          var am =
+            window.StaffCrmStages.normalizeStage(a.pipeline_stage) === stageFilter ? 0 : 1;
+          var bm =
+            window.StaffCrmStages.normalizeStage(b.pipeline_stage) === stageFilter ? 0 : 1;
+          if (am !== bm) return am - bm;
+          return compareRows(a, b);
+        });
+        return rows;
+      }
+
+      rows.sort(compareRows);
       return rows;
+    }
+
+    function updateStageFilterUI() {
+      var picker = $("crm-stage-filter-picker");
+      if (!picker || !window.StaffCrmStages) return;
+      var filter = stageFilter || "";
+      picker.setAttribute("data-stage", filter);
+      picker.classList.toggle("is-active", !!filter);
+      var trigger = picker.querySelector(".crm-stage-trigger");
+      var labelEl = picker.querySelector(".crm-stage-label");
+      var dot = picker.querySelector(".crm-stage-trigger > .crm-stage-dot");
+      if (labelEl) {
+        labelEl.textContent = filter
+          ? window.StaffCrmStages.stageLabel(filter)
+          : t("col_stage_all");
+      }
+      if (filter) {
+        if (!dot && trigger && labelEl) {
+          dot = document.createElement("span");
+          dot.className = "crm-stage-dot";
+          trigger.insertBefore(dot, labelEl);
+        }
+        if (dot) dot.style.background = window.StaffCrmStages.stageColor(filter);
+      } else if (dot) {
+        dot.remove();
+      }
+      picker.querySelectorAll(".crm-stage-option").forEach(function (opt) {
+        opt.classList.toggle("is-selected", (opt.getAttribute("data-value") || "") === filter);
+      });
     }
 
     function updateSortHeaders() {
@@ -766,7 +855,14 @@
       if (status && !status.textContent) {
         status.textContent = t("showing_clients", { shown: rows.length, total: leadsCache.length });
       } else if (status) {
-        status.textContent = t("showing_clients", { shown: rows.length, total: leadsCache.length });
+        if (stageFilter && window.StaffCrmStages) {
+          status.textContent =
+            t("stage_sorted_first", { stage: window.StaffCrmStages.stageLabel(stageFilter) }) +
+            " · " +
+            t("showing_clients", { shown: rows.length, total: leadsCache.length });
+        } else {
+          status.textContent = t("showing_clients", { shown: rows.length, total: leadsCache.length });
+        }
       }
       tbody.innerHTML = rows
         .map(function (L) {
@@ -854,11 +950,13 @@
           closeApptPopover();
           if (open) {
             menu.classList.add("hidden");
+            resetStageMenuPosition(menu);
             trigger.setAttribute("aria-expanded", "false");
             return;
           }
           menu.classList.remove("hidden");
           trigger.setAttribute("aria-expanded", "true");
+          positionStageMenu(trigger, menu);
         });
         menu.querySelectorAll(".crm-stage-option").forEach(function (opt) {
           opt.addEventListener("click", function (e) {
@@ -990,17 +1088,13 @@
         if (e.target.closest("#crm-row-menu") || e.target.closest(".crm-row-menu-btn")) return;
         if (clientsRowMenuCloser) clientsRowMenuCloser();
         if (e.target.closest(".crm-stage-picker")) return;
-        document.querySelectorAll(".crm-stage-picker .crm-stage-menu").forEach(function (menu) {
-          menu.classList.add("hidden");
-        });
-        document.querySelectorAll(".crm-stage-picker .crm-stage-trigger").forEach(function (btn) {
-          btn.setAttribute("aria-expanded", "false");
-        });
+        closeAllStageMenus();
       });
       window.addEventListener(
         "scroll",
         function () {
           if (clientsRowMenuCloser) clientsRowMenuCloser();
+          closeAllStageMenus();
         },
         true
       );
@@ -1012,6 +1106,44 @@
         navigate("#/clients/new");
       });
     }
+
+    (function wireStageFilterHeader() {
+      var picker = $("crm-stage-filter-picker");
+      if (!picker) return;
+      var trigger = picker.querySelector(".crm-stage-trigger");
+      var menu = picker.querySelector(".crm-stage-menu");
+      if (!trigger || !menu) return;
+      trigger.addEventListener("click", function (e) {
+        e.stopPropagation();
+        var open = !menu.classList.contains("hidden");
+        closeAllStageMenus();
+        closeRowMenu();
+        closeApptPopover();
+        if (open) {
+          menu.classList.add("hidden");
+          resetStageMenuPosition(menu);
+          trigger.setAttribute("aria-expanded", "false");
+          return;
+        }
+        menu.classList.remove("hidden");
+        trigger.setAttribute("aria-expanded", "true");
+        positionStageMenu(trigger, menu);
+      });
+      menu.querySelectorAll(".crm-stage-option").forEach(function (opt) {
+        opt.addEventListener("click", function (e) {
+          e.stopPropagation();
+          var value = opt.getAttribute("data-value") || "";
+          if (value === stageFilter) {
+            closeAllStageMenus();
+            return;
+          }
+          stageFilter = value;
+          updateStageFilterUI();
+          closeAllStageMenus();
+          draw();
+        });
+      });
+    })();
 
     draw();
   }

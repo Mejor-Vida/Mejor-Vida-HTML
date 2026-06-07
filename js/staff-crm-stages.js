@@ -163,6 +163,59 @@
     );
   }
 
+  function renderStageFilterHeader(currentFilter, escFn) {
+    var escF =
+      escFn ||
+      function (x) {
+        return String(x == null ? "" : x);
+      };
+    var filter = normalizeStage(currentFilter);
+    var label = filter ? stageLabel(filter) : t("col_stage_all");
+    var color = filter ? stageColor(filter) : "#bdc3c7";
+    var items = CLIENT_STAGES.map(function (s) {
+      var sel = filter === s.key ? " is-selected" : "";
+      return (
+        '<li><button type="button" class="crm-stage-option' +
+        sel +
+        '" data-value="' +
+        escF(s.key) +
+        '">' +
+        '<span class="crm-stage-dot" style="background:' +
+        escF(s.color) +
+        '"></span>' +
+        escF(stageLabel(s.key)) +
+        "</button></li>"
+      );
+    }).join("");
+    return (
+      '<div class="crm-stage-picker crm-stage-filter-header' +
+      (filter ? " is-active" : "") +
+      '" id="crm-stage-filter-picker" data-stage="' +
+      escF(filter) +
+      '">' +
+      '<button type="button" class="crm-stage-trigger crm-stage-filter-trigger" aria-haspopup="listbox" aria-expanded="false" aria-label="' +
+      escF(t("col_stage_filter")) +
+      '">' +
+      (filter
+        ? '<span class="crm-stage-dot" style="background:' + escF(color) + '"></span>'
+        : "") +
+      '<span class="crm-stage-label">' +
+      escF(label) +
+      "</span>" +
+      '<span class="crm-stage-caret" aria-hidden="true">▾</span>' +
+      "</button>" +
+      '<ul class="crm-stage-menu hidden" role="listbox">' +
+      '<li><button type="button" class="crm-stage-option' +
+      (!filter ? " is-selected" : "") +
+      '" data-value="">' +
+      '<span class="crm-stage-dot crm-stage-dot-empty"></span>' +
+      escF(t("col_stage_all")) +
+      "</button></li>" +
+      items +
+      "</ul></div>"
+    );
+  }
+
   window.StaffCrmStages = {
     CLIENT_STAGES: CLIENT_STAGES,
     VALID_KEYS: VALID_KEYS,
@@ -172,5 +225,6 @@
     isValidStage: isValidStage,
     buildStageOptions: buildStageOptions,
     renderStagePicker: renderStagePicker,
+    renderStageFilterHeader: renderStageFilterHeader,
   };
 })();
