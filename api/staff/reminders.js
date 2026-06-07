@@ -112,7 +112,12 @@ module.exports = async function handler(req, res) {
         return json(res, 200, { ok: true, ...result });
       } catch (e) {
         console.error("staff/reminders process_due", e);
-        return json(res, 500, { error: e.message || "Failed to process due reminders" });
+        return json(res, 200, {
+          ok: false,
+          processed: 0,
+          sent: 0,
+          error: e.message || "Failed to process due reminders",
+        });
       }
     }
 

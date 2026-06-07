@@ -191,7 +191,7 @@
   function startReminderPoller() {
     stopReminderPoller();
     void processDueRemindersQuietly();
-    reminderPollTimer = setInterval(processDueRemindersQuietly, 10000);
+    reminderPollTimer = setInterval(processDueRemindersQuietly, 60000);
   }
 
   function stopReminderPoller() {

@@ -80,9 +80,6 @@ export default async function middleware(request) {
   const url = new URL(request.url);
   const { pathname } = url;
 
-  if (pathname.startsWith("/api/")) {
-    return fetch(request);
-  }
   if (isStaticAssetPath(pathname)) {
     return fetch(request);
   }
@@ -115,5 +112,6 @@ export default async function middleware(request) {
 }
 
 export const config = {
-  matcher: "/:path*",
+  // Skip /api/* — proxying API through fetch() caused 5xx during deploys and polling.
+  matcher: ["/((?!api/).*)"],
 };
