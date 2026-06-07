@@ -8,9 +8,12 @@ Serve the repo over HTTP for landing mobile previews (phone frame + iframe).
 
   python3 preview/serve-landing-mobile.py --page ads-v2
 
+  python3 preview/serve-landing-mobile.py --page mobile
+
 Open:
   http://127.0.0.1:8766/preview/landing-gastos-finales-ads-mobile.html  (--page ads)
   http://127.0.0.1:8766/preview/landing-gastos-finales-ads-v2-mobile.html (--page ads-v2)
+  http://127.0.0.1:8766/preview/mobile-layout-viewer.html              (--page mobile)
   http://127.0.0.1:8766/preview/landing-mobile-header.html             (--page legacy)
 """
 from __future__ import annotations
@@ -28,6 +31,7 @@ PAGES = {
     "ads": "preview/landing-gastos-finales-ads-mobile.html",
     "ads-v2": "preview/landing-gastos-finales-ads-v2-mobile.html",
     "legacy": "preview/landing-mobile-header.html",
+    "mobile": "preview/mobile-layout-viewer.html",
 }
 
 
@@ -59,6 +63,9 @@ def main() -> None:
             print("Also: http://127.0.0.1:8766/gastos-finales-ads/ (full page, no frame)")
         if args.page == "ads-v2":
             print("Also: http://127.0.0.1:8766/gastos-finales-ads-v2/ (full page, no frame)")
+        if args.page == "mobile":
+            print("Also: http://127.0.0.1:8766/preview/mobile-layout-viewer.html?target=landing")
+            print("Medical intake APIs: run npm run dev:local in another terminal")
         print("Ctrl+C to stop")
         try:
             webbrowser.open(url)

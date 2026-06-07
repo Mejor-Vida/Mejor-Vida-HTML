@@ -9,6 +9,7 @@
     "preview:landing": "python3 -m http.server 4174 --bind 127.0.0.1",
     "preview:gastos-finales-ads-mobile": "python3 preview/serve-landing-mobile.py --page ads",
     "preview:gastos-finales-ads-v2-mobile": "python3 preview/serve-landing-mobile.py --page ads-v2",
+    "preview:mobile-layout": "python3 preview/serve-landing-mobile.py --page mobile",
     "build:en": "python3 tools/build_en_site.py",
     "dev": "vercel dev",
     "dev:local": "node scripts/local-api-dev.cjs",
