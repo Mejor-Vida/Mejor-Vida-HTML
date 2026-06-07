@@ -7,6 +7,7 @@
   "use strict";
 
   var API_URL = "/api/webhooks/appointment";
+  var ANALYTICS_URL = "/api/analytics-event";
   var ORIGIN_RE = /^https:\/\/meetings(?:-[a-z0-9]+)?\.hubspot\.com$/i;
 
   function pickString() {
@@ -73,10 +74,74 @@
     }
   }
 
+  function isUuid(s) {
+    return /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(
+      String(s || "")
+    );
+  }
+
+  function siteApiUrl(path) {
+    var origin = window.location.origin || "";
+    if (/^https?:\/\/(127\.0\.0\.1|localhost)(:\d+)?$/i.test(origin)) {
+      return "https://www.mejorvidainsurance.com" + path;
+    }
+    return path;
+  }
+
+  function getSessionClientId() {
+    try {
+      var k = "mviSessionClientId";
+      var s = sessionStorage.getItem(k);
+      if (s && s.length > 0 && s.length < 200) return s;
+      return null;
+    } catch (_e) {
+      return null;
+    }
+  }
+
+  function getSessionLeadContext() {
+    try {
+      var raw = sessionStorage.getItem("mviNebraskaQuoteResult");
+      if (!raw) return null;
+      var q = JSON.parse(raw);
+      if (!q || !q.leadId || !isUuid(q.leadId)) return null;
+      return {
+        leadId: q.leadId,
+        sessionClientId: q.sessionClientId || getSessionClientId(),
+      };
+    } catch (_e) {
+      return null;
+    }
+  }
+
+  function trackGaEvent(eventName, params) {
+    if (typeof gtag !== "function") return;
+    gtag("event", eventName, params || {});
+  }
+
+  function postCallScheduledIndicated(payload, leadCtx) {
+    if (!leadCtx || !isUuid(leadCtx.leadId)) return;
+
+    fetch(siteApiUrl(ANALYTICS_URL), {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        eventType: "call_scheduled_indicated",
+        quoteLeadSubmissionId: leadCtx.leadId,
+        sessionClientId: leadCtx.sessionClientId || getSessionClientId(),
+        data: {
+          path: location.pathname,
+          source: payload.source || "hubspot_scheduler",
+        },
+      }),
+      keepalive: true,
+    }).catch(function () {});
+  }
+
   function postBooking(payload) {
-    if (!payload.email && !payload.phone) return;
+    if (!payload.email && !payload.phone) return false;
     var key = dedupeKey(payload);
-    if (alreadySent(key)) return;
+    if (alreadySent(key)) return false;
     markSent(key);
 
     fetch(API_URL, {
@@ -92,6 +157,22 @@
         /* ignore */
       }
     });
+
+    return true;
+  }
+
+  function handleMeetingBookSucceeded(data) {
+    var payload = buildPayload(data);
+    if (!postBooking(payload)) return;
+
+    trackGaEvent("appointment_booked", {
+      location: "hubspot_scheduler",
+      page_path: location.pathname,
+      source: payload.source || "hubspot_scheduler",
+    });
+
+    var leadCtx = getSessionLeadContext();
+    postCallScheduledIndicated(payload, leadCtx);
   }
 
   window.addEventListener("message", function (event) {
@@ -100,7 +181,7 @@
     if (!ORIGIN_RE.test(String(event.origin || ""))) return;
 
     try {
-      postBooking(buildPayload(data));
+      handleMeetingBookSucceeded(data);
     } catch (_e) {
       /* ignore malformed payloads */
     }

@@ -1518,6 +1518,20 @@
     });
   })();
 
+  (function bindJulieCardTracking() {
+    document.querySelectorAll("button.lf-julie-card--clickable").forEach(function (btn) {
+      if (btn.getAttribute("data-lf-ga-bound") === "1") return;
+      btn.setAttribute("data-lf-ga-bound", "1");
+      btn.addEventListener("click", function () {
+        trackGaEvent("agent_card_clicked", {
+          location: "landing_flow",
+          step_id: currentStep,
+          step_name: stepNameMap[currentStep] || null,
+        });
+      });
+    });
+  })();
+
   if (window.MVILandingCalculator && window.MVILandingCalculator.init) {
     window.MVILandingCalculator.init();
   }
@@ -1547,6 +1561,11 @@
     modalEl.addEventListener("show.bs.modal", setScheduleIframeSrc);
     modalEl.addEventListener("show.bs.modal", function () {
       document.body.classList.add("lf-schedule-modal-open");
+      trackGaEvent("schedule_modal_opened", {
+        location: "landing_flow",
+        step_id: currentStep,
+        step_name: stepNameMap[currentStep] || null,
+      });
     });
     modalEl.addEventListener("hidden.bs.modal", function () {
       document.body.classList.remove("lf-schedule-modal-open");
