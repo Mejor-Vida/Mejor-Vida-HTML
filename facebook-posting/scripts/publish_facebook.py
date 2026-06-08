@@ -160,7 +160,11 @@ def schedule_first_comment_via_make(
     """
     Tell Make.com to post ``comment`` on ``post_id`` after its built-in delay (~10 minutes).
 
-    Payload: ``{"post_id": "...", "comment": "..."}``
+    Payload sent to Make (both names so mapping is easy in the scenario):
+
+    ``{"post_id": "...", "id": "...", "comment": "...", "message": "..."}``
+
+    ``id`` / ``message`` match Facebook Pages module field names; ``post_id`` / ``comment`` are aliases.
     """
     url = resolve_make_first_comment_webhook_url(webhook_url=webhook_url)
     if not url:
@@ -168,7 +172,12 @@ def schedule_first_comment_via_make(
             "Make first-comment webhook URL not configured "
             "(settings.json make_first_comment_webhook_url or MAKE_FB_FIRST_COMMENT_WEBHOOK_URL)"
         )
-    payload = {"post_id": post_id, "comment": comment}
+    payload = {
+        "post_id": post_id,
+        "id": post_id,
+        "comment": comment,
+        "message": comment,
+    }
     resp = requests.post(
         url,
         json=payload,

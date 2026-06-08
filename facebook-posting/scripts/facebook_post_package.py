@@ -84,13 +84,13 @@ def warm_first_comment(
     phone_display: str = "(402) 440-5438",
 ) -> str:
     """
-    Warm, on-brand first comment: thanks + post-specific hook + optional highlight + website link + contact.
+    Warm, on-brand first comment (~8 lines): thanks + hook + website + optional highlight + services + contact.
 
-    ``highlight_paragraph``: one or two sentences unique to this post (NAIC tool, state law, etc.).
-    ``post_hook``: short phrase tying the comment to the main post topic.
+    ``highlight_paragraph``: one sentence unique to this post (NAIC tool, state law, etc.).
+    Phone/WhatsApp number only — no separate wa.me block (keeps comment readable on mobile).
     """
     u = (website_url or MVI_WEBSITE_URL).strip()
-    w = (whatsapp_url or "").strip()
+    _ = whatsapp_url  # reserved for ManyChat INFO path; first comment uses phone display only
     if language == "en":
         lines = [
             "Thanks for your interest!",
@@ -104,18 +104,17 @@ def warm_first_comment(
             [
                 "",
                 "At Mejor Vida Insurance we specialize in final expense insurance, and we can also "
-                "help you with term and whole life insurance. Questions or a free quote? Call, text, "
-                f"or WhatsApp us at {phone_display}. We're here to help.",
+                "help you with term and whole life insurance.",
+                "",
+                f"Questions or a free quote? Call, text, or WhatsApp us at {phone_display}.",
             ]
         )
-        if w:
-            lines.extend(["", "WhatsApp:", w])
         return "\n".join(lines)
 
     lines = [
         "¡Gracias por tu interés!",
         "",
-        f"{post_hook}, conoce más en nuestro sitio web:",
+        f"{post_hook}, visita nuestro sitio web:",
         u,
     ]
     if (highlight_paragraph or "").strip():
@@ -123,14 +122,12 @@ def warm_first_comment(
     lines.extend(
         [
             "",
-            "En Mejor Vida Insurance nos especializamos en seguros de gastos finales, pero también "
-            "podemos ayudarte con seguro de vida a término y seguro de vida entera. ¿Tienes preguntas "
-            f"o quieres una cotización sin costo? Llámanos, envíanos un mensaje de texto o escríbenos por WhatsApp al {phone_display}. "
-            "Estamos aquí para ayudarte.",
+            "En Mejor Vida Insurance nos especializamos en seguros de gastos finales, y también "
+            "podemos ayudarte con seguro de vida a término y seguro de vida entera.",
+            "",
+            f"¿Preguntas o cotización sin costo? Llámanos o escríbenos por WhatsApp al {phone_display}.",
         ]
     )
-    if w:
-        lines.extend(["", "WhatsApp:", w])
     return "\n".join(lines)
 
 

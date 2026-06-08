@@ -4,7 +4,9 @@
 
 **One-off packages:** `post-package-story1-weekly-2026-05-03.json` — Story 1 (May 3 weekly) + creative `story1-carriers-not-same-fb-2026-05.png` in `img/facebook/` and `FB/assets/`. **`post-package-story4-weekly-2026-05-10.json`** — Story 4 / final expense (May 10) + `fb-post-hero.png`; run `facebook-posting/publish-story4-may10.sh`.
 
-**First comment (link + WhatsApp):** After publish, `facebook-posting/main.py` calls the **Make.com webhook** with `post_id` + `first_comment` from `post-package.json`. Make waits ~10 minutes, then posts the comment. The JSON `first_comment` field is the single source of truth for copy.
+**First comment (link + WhatsApp):** After publish, `facebook-posting/main.py` calls the **Make.com webhook** with `post_id` + `first_comment` from `post-package.json`. Make waits ~10 minutes, then posts **one** comment. Target **~8 lines**; phone number only (no long `wa.me` in the comment). The JSON `first_comment` field is the single source of truth for copy.
+
+**Make.com — one comment only:** See **`integrations/MAKE_COM_FB_FIRST_COMMENT.md`**. Map webhook **`id`** → Facebook module **id**, **`message`** → **message**. Remove hardcoded comment text and any second “Create comment” module. Reactivate the scenario after errors (Make turns it off automatically).
 
 **Local review (double-click in Finder):** open **`review-facebook-post.html`** in this folder. It mirrors `post-package.json`. After you change the JSON or run `facebook-posting/main.py`, regenerate the review file with:
 

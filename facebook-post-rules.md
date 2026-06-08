@@ -138,23 +138,26 @@ Every post must include a **separate first comment** to be posted **after** the 
 
 - Warm, human tone (similar spirit to our standard Make follow-up — thanks, helpful, not pushy)
 - **Adaptable** to the post: one short paragraph about the topic or tool (e.g. NAIC locator for lost policies)
+- **~8 lines** total (short paragraphs; blank line between blocks is OK)
 - Include the **Mejor Vida website link** (not the blog article URL)
-- Close with contact options (phone / WhatsApp); use a clickable `wa.me` URL in comments
+- Close with phone / WhatsApp number — **no** long `wa.me` URL in the first comment (INFO/REVISAR handles deep links)
 
 **Example style (June 7 — lost life insurance / NAIC locator):**
 
 > ¡Gracias por tu interés!
 >
-> Si comentaste INFO o quieres profundizar en el tema de pólizas que muchas familias no reclaman, conoce más en nuestro sitio web:  
+> Si comentaste INFO o quieres profundizar en pólizas que muchas familias no reclaman, visita nuestro sitio web:  
 > https://www.mejorvidainsurance.com/
 >
-> Afortunadamente, existe una herramienta gratuita llamada Life Insurance Policy Locator Service ([URL NAIC](https://eapps.naic.org/life-policy-locator/#/welcome)) creada por la Asociación Nacional de Comisionados de Seguros (NAIC).
+> Afortunadamente, existe una herramienta gratuita llamada Life Insurance Policy Locator Service (https://eapps.naic.org/life-policy-locator/#/welcome) creada por la NAIC.
 >
-> En Mejor Vida Insurance… ¿preguntas o cotización sin costo? Llámanos o WhatsApp al (402) 440-5438.
+> En Mejor Vida nos especializamos en gastos finales, y también en seguro de vida a término y vida entera.
+>
+> ¿Preguntas o cotización sin costo? Llámanos o WhatsApp al (402) 440-5438.
 
 Configured in `facebook-posting/scripts/facebook_post_package.py` (`warm_first_comment`). WhatsApp: `whatsapp_first_comment_url` in `config/settings.json` or env `MVS_WHATSAPP_FIRST_COMMENT_URL`.
 
-**Publishing automation:** After the main post goes live, `facebook-posting/main.py` POSTs to the Make.com webhook (`make_first_comment_webhook_url` / `MAKE_FB_FIRST_COMMENT_WEBHOOK_URL`) with `{"post_id": "...", "comment": "..."}`. Make waits ~10 minutes, then posts the comment on Facebook.
+**Publishing automation:** After the main post goes live, `facebook-posting/main.py` POSTs to the Make.com webhook with `id`, `post_id`, `message`, and `comment`. Make waits ~10 minutes, then posts the comment. Setup and troubleshooting: **`integrations/MAKE_COM_FB_FIRST_COMMENT.md`**.
 
 ---
 
