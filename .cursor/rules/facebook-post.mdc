@@ -19,4 +19,4 @@ When **creating**, **previewing**, or **publishing** Facebook posts for this pro
 
 3. **Weekly post deliverables** should include: main caption, shorter alternate, first comment with URL, image concept/prompt, ManyChat keywords, optional pinned comment — as specified in `facebook-post-rules.md`.
 
-4. **`facebook-posting/main.py`** builds a **`FacebookPostPackage`**: main caption has **no** blog URL; link is in **`first_comment`**. JSON export: **`FB/post-package.json`**. Publish uses **`publish_post_package`** (optional **`--no-first-comment`**).
+4. **`facebook-posting/main.py`** builds a **`FacebookPostPackage`**: main caption has **no** URL; **`first_comment`** links to **mejorvidainsurance.com** (not the blog — articles via INFO/REVISAR). JSON export: **`FB/post-package.json`**. After publish, **`publish_post_package`** POSTs `post_id` + `first_comment` to the Make.com webhook (10 min delay in Make). Use **`--no-first-comment`** to skip.

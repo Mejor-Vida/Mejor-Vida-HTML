@@ -2,9 +2,9 @@
 
 **Custom post graphics** (when not using a blog hero) can live in **`assets/`** (for example `FB/assets/iowa-senior-safeguard-fb-2026-04.png`). A copy for local preview resolution may also sit under **`img/facebook/`** with the same filename referenced by `image_url` in `post-package.json`.
 
-**One-off packages:** `post-package-story1-weekly-2026-05-03.json` — Story 1 (May 3 weekly) + creative `story1-carriers-not-same-fb-2026-05.png` in `img/facebook/` and `FB/assets/`. **`post-package-story4-weekly-2026-05-10.json`** — Story 4 / final expense (May 10) + `fb-post-hero.png`; run `facebook-posting/publish-story4-may10.sh` (uses `--no-first-comment`; Make posts `first_comment`).
+**One-off packages:** `post-package-story1-weekly-2026-05-03.json` — Story 1 (May 3 weekly) + creative `story1-carriers-not-same-fb-2026-05.png` in `img/facebook/` and `FB/assets/`. **`post-package-story4-weekly-2026-05-10.json`** — Story 4 / final expense (May 10) + `fb-post-hero.png`; run `facebook-posting/publish-story4-may10.sh`.
 
-**First comment (link + WhatsApp):** Mejor Vida publishes that follow-up via **Make.com**, not the Graph API. When you run `facebook-posting/main.py` for the live post, use **`--no-first-comment`** so the main post (and optional image) go up only; Make then adds the first comment using the `first_comment` text from `post-package.json` (or your scenario mapping). The JSON field stays the single source of truth for copy.
+**First comment (link + WhatsApp):** After publish, `facebook-posting/main.py` calls the **Make.com webhook** with `post_id` + `first_comment` from `post-package.json`. Make waits ~10 minutes, then posts the comment. The JSON `first_comment` field is the single source of truth for copy.
 
 **Local review (double-click in Finder):** open **`review-facebook-post.html`** in this folder. It mirrors `post-package.json`. After you change the JSON or run `facebook-posting/main.py`, regenerate the review file with:
 

@@ -239,7 +239,7 @@ def write_preview_package(
       <div class="caption">{safe_kw}</div>
     </div>
 {pinned_block}
-    <p class="note">Solo en tu equipo. Publicar: <code>python3 main.py</code> (sin <code>--dry-run</code>). Opcional: <code>--no-first-comment</code> si el primer comentario lo publica Make.com o a mano.</p>
+    <p class="note">Solo en tu equipo. Publicar: <code>python3 main.py</code> (sin <code>--dry-run</code>). Tras publicar, el script llama al webhook de Make.com para programar el primer comentario (~10 min). Usa <code>--no-first-comment</code> solo si quieres omitirlo.</p>
   </div>
 </body>
 </html>

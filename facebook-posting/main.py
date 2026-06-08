@@ -4,7 +4,8 @@ Mejor Vida Insurance — Facebook posting system.
 
 Follows facebook-post-rules.md (repo root): main caption has no blog link; link in first comment;
 INFO / REVISAR + DM; full package written to preview + FB/post-package.json.
-Use --no-first-comment when Make.com (or manual) publishes the follow-up instead of Graph API.
+After publish, schedules the first comment via Make.com webhook (10 min delay in Make).
+Use --no-first-comment to skip; --first-comment-graph-api for legacy Graph API posting.
 """
 
 from __future__ import annotations
@@ -46,19 +47,24 @@ def main() -> int:
     parser.add_argument(
         "--no-first-comment",
         action="store_true",
-        help="On publish: post main only; do not post the follow-up comment via API (paste manually if you want)",
+        help="On publish: post main only; skip Make.com webhook and Graph API comment",
+    )
+    parser.add_argument(
+        "--first-comment-graph-api",
+        action="store_true",
+        help="Post first comment via Graph API instead of Make.com webhook (legacy)",
     )
     parser.add_argument(
         "--first-comment-delay-seconds",
         type=int,
         default=600,
         metavar="N",
-        help="Wait N seconds after the main post before posting the first comment (default: 600 = 10 minutes)",
+        help="Graph API mode only: wait N seconds before first comment (default: 600)",
     )
     parser.add_argument(
         "--first-comment-now",
         action="store_true",
-        help="Post the first comment immediately (same as --first-comment-delay-seconds 0)",
+        help="Graph API mode only: post first comment immediately",
     )
     parser.add_argument(
         "--from-json",
@@ -231,6 +237,13 @@ Comenta “INFO” para el artículo o “REVISAR” para tu caso. También por 
             print("Dry run: skipping publish.")
         return 0
 
+    if args.no_first_comment:
+        first_comment_mode = "none"
+    elif args.first_comment_graph_api:
+        first_comment_mode = "graph"
+    else:
+        first_comment_mode = "make"
+
     delay_sec = 0 if args.first_comment_now else args.first_comment_delay_seconds
 
     image_path_publish: Path | None = None
@@ -256,11 +269,23 @@ Comenta “INFO” para el artículo o “REVISAR” para tu caso. También por 
             package,
             image_url=publish_image_url,
             image_path=image_path_publish,
-            post_first_comment=not args.no_first_comment,
-            first_comment_delay_sec=0 if args.no_first_comment else delay_sec,
+            first_comment_mode=first_comment_mode,
+            first_comment_delay_sec=delay_sec,
         )
         print(f"Published successfully: {result}")
-        if not args.no_first_comment and delay_sec > 0:
+        if first_comment_mode == "make" and result.get("make_first_comment_scheduled"):
+            print(
+                "\nFirst comment scheduled via Make.com (~10 min delay in Make).",
+                flush=True,
+            )
+        elif first_comment_mode == "make" and result.get("make_first_comment_error"):
+            print(
+                f"\nWarning: Make.com first-comment webhook failed: {result['make_first_comment_error']}",
+                file=sys.stderr,
+                flush=True,
+            )
+            return 1
+        elif first_comment_mode == "graph" and delay_sec > 0:
             print(
                 f"\nFirst comment is scheduled in {delay_sec}s (~{delay_sec // 60} min). "
                 "Keep this terminal open until you see “First comment posted…” or the process will exit early.",

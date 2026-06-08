@@ -18,7 +18,7 @@ Authoring guide. **Canonical rules:** `facebook-post-rules.md` at the repository
 
 - **Do not** put the blog URL in the **main post text** (mejor alcance orgánico; evita “salida” inmediata).
 - The **blog link** va en el **primer comentario**, junto con un **enlace de WhatsApp** opcional (texto + URL clicable; no hay botones HTML en comentarios de Facebook).
-- Plantilla: `default_first_comment_with_link` en `scripts/facebook_post_package.py`. WhatsApp: `whatsapp_first_comment_url` en `config/settings.json` o `MVS_WHATSAPP_FIRST_COMMENT_URL`.
+- Plantilla: `warm_first_comment` en `scripts/facebook_post_package.py` (tono cálido + párrafo adaptable al post + enlace al sitio web). WhatsApp: `whatsapp_first_comment_url` en `config/settings.json` o `MVS_WHATSAPP_FIRST_COMMENT_URL`.
 
 ---
 
@@ -52,4 +52,4 @@ Salida en disco: `FB/post-package.json` junto a la vista previa HTML.
 
 - Lógica por defecto: `facebook-posting/scripts/generate_facebook_post.py` (`build_facebook_post_package`).
 - Vista previa: `FB/post-preview.html` (incluye post principal + primer comentario + alternativas).
-- Publicación: `publish_post_package()` publica el post principal y, por defecto, el **primer comentario** con el enlace (opción `--no-first-comment` si lo publicas a mano).
+- Publicación: `publish_post_package()` publica el post principal y, por defecto, llama al webhook de Make.com con `post_id` + `first_comment` (Make espera ~10 min). Opción `--no-first-comment` para omitir; `--first-comment-graph-api` para publicar el comentario vía Graph API.

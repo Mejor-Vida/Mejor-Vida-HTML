@@ -130,26 +130,31 @@ Every post must include a **separate first comment** to be posted **after** the 
 
 **Purpose:**
 
-- Capture people who want the link directly
-- Add the blog URL **after** the post has had time to gain organic reach
+- Capture people who want to learn more or contact you
+- Add the **website URL** (`https://www.mejorvidainsurance.com/`) **after** the post has had time to gain organic reach
+- Full weekly articles go through **INFO / REVISAR** (ManyChat), not the first comment link
 
 **Format:**
 
-- Short
-- Friendly
-- Low-pressure
-- Include the **direct blog link**
-- Optionally add a **WhatsApp link** (`wa.me` / `api.whatsapp.com`) on a second block so people can start a direct chat (comments are plain text—use a clickable URL, not an HTML button)
+- Warm, human tone (similar spirit to our standard Make follow-up — thanks, helpful, not pushy)
+- **Adaptable** to the post: one short paragraph about the topic or tool (e.g. NAIC locator for lost policies)
+- Include the **Mejor Vida website link** (not the blog article URL)
+- Close with contact options (phone / WhatsApp); use a clickable `wa.me` URL in comments
 
-**Example style:**
+**Example style (June 7 — lost life insurance / NAIC locator):**
 
-> Si quieres leer el artículo completo, aquí te lo dejo:  
-> [URL del blog]
+> ¡Gracias por tu interés!
 >
-> Si prefieres que lo veamos contigo directamente, mándanos mensaje aquí:  
-> [URL de WhatsApp]
+> Si comentaste INFO o quieres profundizar en el tema de pólizas que muchas familias no reclaman, conoce más en nuestro sitio web:  
+> https://www.mejorvidainsurance.com/
+>
+> Afortunadamente, existe una herramienta gratuita llamada Life Insurance Policy Locator Service ([URL NAIC](https://eapps.naic.org/life-policy-locator/#/welcome)) creada por la Asociación Nacional de Comisionados de Seguros (NAIC).
+>
+> En Mejor Vida Insurance… ¿preguntas o cotización sin costo? Llámanos o WhatsApp al (402) 440-5438.
 
-Configured in `facebook-posting/config/settings.json` (`whatsapp_first_comment_url`) or env `MVS_WHATSAPP_FIRST_COMMENT_URL`.
+Configured in `facebook-posting/scripts/facebook_post_package.py` (`warm_first_comment`). WhatsApp: `whatsapp_first_comment_url` in `config/settings.json` or env `MVS_WHATSAPP_FIRST_COMMENT_URL`.
+
+**Publishing automation:** After the main post goes live, `facebook-posting/main.py` POSTs to the Make.com webhook (`make_first_comment_webhook_url` / `MAKE_FB_FIRST_COMMENT_WEBHOOK_URL`) with `{"post_id": "...", "comment": "..."}`. Make waits ~10 minutes, then posts the comment on Facebook.
 
 ---
 

@@ -1,0 +1,42 @@
+---
+description: Keep Spanish and English site pages in sync when editing Mejor Vida HTML
+globs: "{index.html,en/**/*.html,sources/**/*.html,includes/*.html,quote*.html,*-julie.html,contact.html,about-julie.html,carriers/**/*.html,blog*.html,blog/**/*.html,landing*.html}"
+alwaysApply: true
+---
+
+# Bilingual ES / EN parity
+
+Mejor Vida is a bilingual site. **Every user-facing change on the Spanish site must have a matching change on the English site** (and vice versa when editing EN first).
+
+## Page pairs
+
+| Spanish (root) | English (`en/`) |
+|----------------|-----------------|
+| `index.html` | `en/index.html` |
+| `quote.html`, `quote-results.html`, etc. | `en/quote.html`, `en/quote-results.html`, etc. |
+| `about-julie.html`, `contact.html`, `schedule-julie.html` | `en/about-julie.html`, `en/contact.html`, `en/schedule-julie.html` |
+| `blog.html`, `blog/*.html` | `en/blog.html`, `en/blog/*.html` |
+| `carriers/*.html` | `en/carriers/*.html` |
+| `privacy-policy.html`, `terms-service.html`, `sms-optin.html` | `en/privacy-policy.html`, `en/terms-service.html`, `en/sms-optin.html` |
+| `landing-gastos-finales.html` | `en/landing-final-expense.html` |
+
+Also update **`sources/`** mirrors and **`includes/site-header-inner.html`** + **`includes/en-site-header.html`** when header/footer/nav changes.
+
+## What to mirror
+
+- Layout, CSS, components, image optimization (`img/opt/`, `<picture>`, lazy load)
+- Nav structure (link targets differ by language; **structure** must match)
+- Hero/carousel/quote-bubble behavior
+- Do **not** copy Spanish copy into English pages — keep each language’s text
+
+## Path differences
+
+- Spanish root pages: `img/...`, `quote.html`, `#home` on homepage
+- English pages: `../img/...`, `en/quote.html`, `index.html#home` or `/en/`
+
+## Checklist before finishing
+
+1. Edited Spanish? → Apply the same structural change under `en/`.
+2. Edited English? → Apply the same under root Spanish (if a paired page exists).
+3. Header/nav/footer? → Update both `includes/` fragments.
+4. Shared `script.js` / `css/`? → One file usually covers both; verify language branches still work.

@@ -1,0 +1,32 @@
+---
+description: Optimize all new website images before adding them to HTML
+globs: "{img/**/*,scripts/optimize-images.js,scripts/apply-image-opt-html.js,**/*.html}"
+alwaysApply: true
+---
+
+# Image optimization — required before publish
+
+When the user provides **new image files** for the website (photos, logos, landing art, blog heroes, etc.), **always optimize before adding to pages**. Do not wire raw multi‑MB PNG/JPG files directly into HTML.
+
+## Do not touch
+
+- `img/mvi-chat-avatar/` — chat widget handles those separately.
+
+## Workflow
+
+1. **Add source file** to the appropriate `img/` path (or tell the script the path).
+2. **Register the job** in `scripts/optimize-images.js` (`JOBS` array: `src`, `maxWidth`, `maxHeight`, `keepPng` for logos/transparency).
+3. **Run** `npm run optimize:images` — outputs WebP + fallback to `img/opt/`.
+4. **Wire HTML** with `<picture>` (WebP `<source>` + fallback `img`), `width`/`height`, and:
+   - `fetchpriority="high"` + preload for LCP / above-fold
+   - `loading="lazy"` for below-fold
+5. **Run** `npm run apply:image-opt-html` when batch-updating many pages, or hand-edit paired ES + EN pages.
+6. **Mirror ES/EN** — same optimization on both language pages (see `bilingual-es-en-parity.mdc`).
+
+## Sizing guidance
+
+Resize to the **maximum display size** (×2 for retina), not original camera resolution. Prefer WebP at quality ~86. Keep PNG fallback only when transparency is required.
+
+## Visual parity
+
+Optimization must **not** change layout, colors, or styling — only format, dimensions, and load behavior.

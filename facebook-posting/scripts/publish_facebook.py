@@ -139,20 +139,68 @@ def post_comment(post_id: str, message: str) -> dict:
     return resp.json()
 
 
+def resolve_make_first_comment_webhook_url(*, webhook_url: Optional[str] = None) -> str:
+    """Make.com webhook that schedules the delayed first comment (~10 min)."""
+    if webhook_url and webhook_url.strip():
+        return webhook_url.strip()
+    _load_dotenv_files()
+    env_url = os.environ.get("MAKE_FB_FIRST_COMMENT_WEBHOOK_URL", "").strip()
+    if env_url:
+        return env_url
+    config = _load_config()
+    return str(config.get("make_first_comment_webhook_url") or "").strip()
+
+
+def schedule_first_comment_via_make(
+    post_id: str,
+    comment: str,
+    *,
+    webhook_url: Optional[str] = None,
+) -> dict[str, Any]:
+    """
+    Tell Make.com to post ``comment`` on ``post_id`` after its built-in delay (~10 minutes).
+
+    Payload: ``{"post_id": "...", "comment": "..."}``
+    """
+    url = resolve_make_first_comment_webhook_url(webhook_url=webhook_url)
+    if not url:
+        raise ValueError(
+            "Make first-comment webhook URL not configured "
+            "(settings.json make_first_comment_webhook_url or MAKE_FB_FIRST_COMMENT_WEBHOOK_URL)"
+        )
+    payload = {"post_id": post_id, "comment": comment}
+    resp = requests.post(
+        url,
+        json=payload,
+        headers={"Content-Type": "application/json"},
+        timeout=30,
+        verify=certifi.where(),
+    )
+    if not resp.ok:
+        snippet = (resp.text or "")[:800]
+        raise requests.HTTPError(f"{resp.status_code} {resp.reason} — {snippet}", response=resp)
+    try:
+        body: dict[str, Any] = resp.json()
+    except ValueError:
+        body = {"status_code": resp.status_code, "text": (resp.text or "")[:500]}
+    return body
+
+
 def publish_post_package(
     package: FacebookPostPackage,
     image_url: Optional[str] = None,
     *,
     image_path: Optional[Path] = None,
-    post_first_comment: bool = True,
+    first_comment_mode: str = "make",
     first_comment_delay_sec: int = 600,
 ) -> dict[str, Any]:
     """
-    Publish main_caption (+ optional image), then optionally the first follow-up comment with link.
+    Publish main_caption (+ optional image), then schedule/post the first follow-up comment.
 
-    By default the first comment waits **first_comment_delay_sec** (600 = 10 minutes) so the main
-    post can gain reach before the link appears. Uses a background thread; keep the process running
-    until the delay elapses (non-daemon thread).
+    ``first_comment_mode``:
+    - ``make`` (default): POST to Make.com webhook immediately; Make waits ~10 min then comments.
+    - ``graph``: post comment via Graph API (optional delay via background thread).
+    - ``none``: main post only.
 
     Aligns with facebook-post-rules.md (link in comment, not main caption).
     """
@@ -160,12 +208,25 @@ def publish_post_package(
         publish_post(package.main_caption, image_url=image_url, image_path=image_path)
     )
     pid = _graph_post_id(result)
-    if not (post_first_comment and pid and package.first_comment.strip()):
+    comment = package.first_comment.strip()
+    if first_comment_mode == "none" or not pid or not comment:
         return result
+
+    if first_comment_mode == "make":
+        try:
+            result["make_first_comment_response"] = schedule_first_comment_via_make(pid, comment)
+            result["make_first_comment_scheduled"] = True
+            result["make_first_comment_post_id"] = pid
+        except Exception as e:
+            result["make_first_comment_error"] = str(e)
+        return result
+
+    if first_comment_mode != "graph":
+        raise ValueError(f"Unknown first_comment_mode: {first_comment_mode!r}")
 
     if first_comment_delay_sec <= 0:
         try:
-            result["first_comment_response"] = post_comment(pid, package.first_comment)
+            result["first_comment_response"] = post_comment(pid, comment)
         except Exception as e:
             result["first_comment_error"] = str(e)
         return result
@@ -173,7 +234,7 @@ def publish_post_package(
     def _delayed() -> None:
         try:
             time.sleep(first_comment_delay_sec)
-            post_comment(pid, package.first_comment)
+            post_comment(pid, comment)
             print(
                 f"First comment posted (after {first_comment_delay_sec}s delay).",
                 flush=True,

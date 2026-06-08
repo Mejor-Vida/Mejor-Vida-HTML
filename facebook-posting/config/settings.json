@@ -2,5 +2,6 @@
   "page_id": "YOUR_PAGE_ID",
   "page_access_token": "YOUR_ACCESS_TOKEN",
   "default_language": "es",
-  "whatsapp_first_comment_url": ""
+  "whatsapp_first_comment_url": "",
+  "make_first_comment_webhook_url": "https://hook.us2.make.com/ytukuvzqkvjjz33ief8hi17ruo2df3vi"
 }
