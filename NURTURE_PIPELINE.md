@@ -20,6 +20,7 @@ This document is the **design source of truth** for the automated nurture system
      "quote_low": "{{quote_low}}",
      "quote_high": "{{quote_high}}",
      "quote_status": "{{quote_status}}",
+     "quote_error": "{{quote_error}}",
      "call_scheduled": "false"
    }
    ```
@@ -27,7 +28,7 @@ This document is the **design source of truth** for the automated nurture system
 
    The API **prefers `contacts.language` / `contacts.idioma` in Supabase** over webhook `language` (avoids English emails when the contact chose Spanish).
 
-   When **`age` > 85** (webhook or `lead_state.age`), the API sends the **over-age follow-up email** instead of a quote email — no dollar range, Julie offers a personal call.
+   When **`age` > 85** (webhook, `lead_state.age`, or ManyChat API pull), **`quote_status` = `out_of_range`**, or quote fields are empty after `/api/quote` out-of-range, the API sends the **over-age follow-up email** instead of a quote email — no dollar range, Julie offers a personal call.
 
 3. The **immediate email** (Resend) includes:
    - Quote range (when age ≤ 85 and quote values exist), **or** over-age personal follow-up copy (when age > 85)

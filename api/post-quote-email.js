@@ -13,8 +13,9 @@
  *   first_name       Display only — recipient email always comes from Supabase contacts.email
  *   quote_low        Lower bound of quote range (e.g. "28")
  *   quote_high       Upper bound of quote range (e.g. "45")
- *   quote_status     'ok' | 'out_of_range' (optional; used with age)
- *   age | edad       Lead age (optional; falls back to lead_state.age)
+ *   quote_status     'ok' | 'out_of_range' (optional; from ManyChat after /api/quote)
+ *   quote_error      Error text from /api/quote when out_of_range (optional)
+ *   age | edad       Lead age (optional; falls back to lead_state.age, then ManyChat pull)
  *   call_scheduled   'true' | 'false' — did they book a call?
  *                      When true, send is skipped (HubSpot admin@ sends confirmation).
  *   call_datetime    ISO datetime of scheduled call (optional)
@@ -22,7 +23,7 @@
  * Never uses an email address from the webhook body — only contacts.email after DB lookup.
  *
  * Env: SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY,
- *      RESEND_API_KEY, MANYCHAT_WEBHOOK_SECRET
+ *      RESEND_API_KEY, MANYCHAT_WEBHOOK_SECRET, MANYCHAT_API_KEY (optional pull fallback)
  */
 
 const { verifyManychatSecret } = require('../lib/manychat-auth');
@@ -35,9 +36,9 @@ const {
   buildOverAgeEmailEN,
   buildOverAgeEmailES,
 } = require('../lib/post-quote-email-html');
-const { MAX_QUOTE_AGE } = require('../lib/quote-range-router');
+const { MIN_QUOTE_AGE, MAX_QUOTE_AGE } = require('../lib/quote-range-router');
 const { logContactCommunication, htmlToPlain } = require('../lib/contact-communications');
-const { _internal: manychatInternal } = require('../lib/manychat-pull');
+const { fetchManychatSubscriber, _internal: manychatInternal } = require('../lib/manychat-pull');
 
 const { parseLanguage } = manychatInternal;
 
@@ -58,6 +59,36 @@ function parseAge(val) {
 
 function isOverMaxQuoteAge(age) {
   return age != null && age > MAX_QUOTE_AGE;
+}
+
+function quoteErrorIndicatesOverMaxAge(quoteError) {
+  const err = cleanWebhookField(quoteError).toLowerCase();
+  if (!err) return false;
+  return /up to age 85|through age 85|available up to age 85|hasta los 85|hasta la edad de 85|m[aá]ximo.*85/.test(err);
+}
+
+function quoteErrorIndicatesUnderMinAge(quoteError) {
+  const err = cleanWebhookField(quoteError).toLowerCase();
+  if (!err) return false;
+  return /starting at age 18|from age 18|desde los 18|m[ií]nimo.*18/.test(err);
+}
+
+/** True when the lead is over our automated quote max (85) — not merely missing quote fields. */
+function shouldUseOverAgeEmail({ age, quoteStatus, quoteError, quoteLow, quoteHigh }) {
+  if (isOverMaxQuoteAge(age)) return true;
+
+  if (age != null && age < MIN_QUOTE_AGE) return false;
+  if (quoteErrorIndicatesUnderMinAge(quoteError)) return false;
+
+  const status = cleanWebhookField(quoteStatus).toLowerCase();
+  if (status === 'out_of_range') {
+    if (isOverMaxQuoteAge(age)) return true;
+    if (quoteErrorIndicatesOverMaxAge(quoteError)) return true;
+    // Quote API returned out_of_range with empty dollars — typical for age 86+ in WhatsApp flow.
+    if (!quoteLow && !quoteHigh && !quoteErrorIndicatesUnderMinAge(quoteError)) return true;
+  }
+
+  return false;
 }
 
 function resolveEmailLanguage(body, contactRow) {
@@ -218,6 +249,63 @@ async function fetchLeadStateFields(base, key, contactId) {
   }
 }
 
+async function pullManychatQuoteSignals(body, contactRow) {
+  const apiKey = process.env.MANYCHAT_API_KEY;
+  if (!apiKey) return null;
+
+  const subId = String(
+    body.manychat_subscriber_id
+      || body.subscriber_id
+      || body.subscriberId
+      || (contactRow && contactRow.manychat_subscriber_id)
+      || (contactRow && contactRow.whatsapp_id)
+      || '',
+  ).trim();
+  if (!subId) return null;
+
+  try {
+    const pulled = await fetchManychatSubscriber(subId, { apiKey });
+    if (!pulled.ok || !pulled.normalized) {
+      console.warn('[post-quote-email] ManyChat pull skipped:', pulled.error || 'no data');
+      return null;
+    }
+    return pulled.normalized;
+  } catch (err) {
+    console.warn('[post-quote-email] ManyChat pull failed:', (err && err.message) || err);
+    return null;
+  }
+}
+
+async function resolveQuoteSignals(body, contactRow, leadStateFields) {
+  let age = parseAge(body.age || body.edad);
+  let quoteStatus = cleanWebhookField(body.quote_status || body.quoteStatus);
+  let quoteError = cleanWebhookField(body.quote_error || body.quoteError);
+  let quoteLow = cleanWebhookField(body.quote_low || body.quoteLow);
+  let quoteHigh = cleanWebhookField(body.quote_high || body.quoteHigh);
+
+  if (age == null) age = leadStateFields.age;
+  if (!quoteLow) quoteLow = leadStateFields.quoteLow;
+  if (!quoteHigh) quoteHigh = leadStateFields.quoteHigh;
+
+  const needsPull =
+    age == null
+    || !quoteStatus
+    || (!quoteLow && !quoteHigh && !quoteError);
+
+  if (needsPull) {
+    const pulled = await pullManychatQuoteSignals(body, contactRow);
+    if (pulled) {
+      if (age == null && pulled.age != null) age = pulled.age;
+      if (!quoteStatus && pulled.quote_status) quoteStatus = cleanWebhookField(pulled.quote_status);
+      if (!quoteError && pulled.quote_error) quoteError = cleanWebhookField(pulled.quote_error);
+      if (!quoteLow && pulled.quote_low) quoteLow = cleanWebhookField(pulled.quote_low);
+      if (!quoteHigh && pulled.quote_high) quoteHigh = cleanWebhookField(pulled.quote_high);
+    }
+  }
+
+  return { age, quoteStatus, quoteError, quoteLow, quoteHigh };
+}
+
 async function insertPostQuoteDeliveryLog(base, key, contactId, status, opts = {}) {
   const payload = {
     contact_id: contactId,
@@ -280,8 +368,6 @@ module.exports = async function handler(req, res) {
   let quoteHigh = cleanWebhookField(body.quote_high || body.quoteHigh);
   const callScheduled = body.call_scheduled === 'true' || body.call_scheduled === true;
   const callDatetime = String(body.call_datetime || '').trim() || null;
-
-  // HubSpot sends the client confirmation (admin@). Skip duplicate julie@ Resend when a call is booked.
   if (callScheduled) {
     console.log('[post-quote-email] skipped — call scheduled; HubSpot sends client confirmation');
     return json(res, 200, {
@@ -350,17 +436,17 @@ module.exports = async function handler(req, res) {
 
   const language = resolveEmailLanguage(body, contactRow);
 
-  let age = parseAge(body.age || body.edad);
   const leadStateFields = await fetchLeadStateFields(base, supabaseKey, contactId);
-  if (age == null) age = leadStateFields.age;
+  const quoteSignals = await resolveQuoteSignals(body, contactRow, leadStateFields);
+  quoteLow = quoteSignals.quoteLow;
+  quoteHigh = quoteSignals.quoteHigh;
 
-  if (!quoteLow || !quoteHigh) {
-    if (!quoteLow) quoteLow = leadStateFields.quoteLow;
-    if (!quoteHigh) quoteHigh = leadStateFields.quoteHigh;
-  }
+  const useOverAgeEmail = shouldUseOverAgeEmail(quoteSignals);
+  const emailVariant = useOverAgeEmail ? 'over_age' : 'post_quote';
 
-  const overMaxQuoteAge = isOverMaxQuoteAge(age);
-  const emailVariant = overMaxQuoteAge ? 'over_age' : 'post_quote';
+  console.log(
+    `[post-quote-email] quote signals contact=${contactId} age=${quoteSignals.age ?? 'null'} status=${quoteSignals.quoteStatus || '(none)'} variant=${emailVariant}`,
+  );
 
   if (!email) {
     console.warn(`[post-quote-email] contacts.email missing for contact ${contactId} — not sending`);
@@ -378,7 +464,7 @@ module.exports = async function handler(req, res) {
 
   let subject;
   let html;
-  if (overMaxQuoteAge) {
+  if (useOverAgeEmail) {
     const built =
       language === 'spanish'
         ? buildOverAgeEmailES(firstName, callScheduled, callDatetime)
