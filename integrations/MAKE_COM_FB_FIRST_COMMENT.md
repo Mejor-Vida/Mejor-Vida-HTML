@@ -9,8 +9,6 @@
 
 Webhook URL (Cursor scenario): `https://hook.us2.make.com/ytukuvzqkvjjz33ief8hi17ruo2df3vi`
 
-**June 7 duplicate comments:** Auto-Comment posted the static first comment (~10:49 PM); Cursor webhook posted the long custom comment. Auto-Comment was disabled; only the webhook path runs now.
-
 After `facebook-posting/main.py` publishes to Facebook, it POSTs JSON so Make waits ~10 minutes, then posts **one** follow-up comment.
 
 ---
@@ -31,7 +29,37 @@ After `facebook-posting/main.py` publishes to Facebook, it POSTs JSON so Make wa
 | `id` or `post_id` | Facebook Pages → **Create a Comment** → **id** (required — the post to comment on) |
 | `message` or `comment` | Facebook Pages → **Create a Comment** → **message** (comment text) |
 
-**Error you saw:** `Missing value of required parameter 'id'` — the Facebook module’s **id** field was empty. Map **`{{1.id}}`** or **`{{1.post_id}}`** from the webhook module (step 1).
+---
+
+## Error: `Missing value of required parameter 'id'`
+
+**Symptom:** Facebook Pages – Create a Comment fails with `BundleValidationError`; module mapped to `{{1.id}}` but value is empty.
+
+**Root cause (common):** Webhooks module shows **“No data detected”** — Make never saved the payload structure after the scenario was edited. At runtime bundle `1` is an empty collection, so `{{1.id}}` is null even though the HTTP request included JSON.
+
+### Fix (in Make.com)
+
+1. **Clear the queue** — Scenario → queue / incomplete executions → delete stale runs (empty payloads retry forever).
+2. **Re-detect webhook structure**
+   - Open **Webhooks** (module 1) → **Edit**
+   - Click **Redetermine data structure** / **Detect new values**
+   - In another terminal, fire a real sample payload:
+     ```bash
+     cd facebook-posting
+     python3 scripts/test_make_first_comment_webhook.py --send
+     ```
+   - Make should capture: `id`, `post_id`, `message`, `comment`
+   - **Save** the webhook module
+3. **Remap Facebook module (module 6)**
+   - **id** → `{{1.id}}` (or `{{1.post_id}}` if `id` is missing in picker)
+   - **message** → `{{1.message}}` (or `{{1.comment}}`)
+4. **Save scenario** → turn **ON** → run one test with `--send` and confirm history shows **Success** after the sleep.
+
+### If bundle is still empty
+
+- Confirm the webhook URL in `facebook-posting/config/settings.json` matches module 1 (not an old hook URL).
+- Confirm publish script sends `Content-Type: application/json` (it does).
+- Do **not** map from a Router or Sleep module — always map from **module 1 Webhooks** (`{{1.*}}`).
 
 ---
 
@@ -40,36 +68,30 @@ After `facebook-posting/main.py` publishes to Facebook, it POSTs JSON so Make wa
 ```
 [1] Webhooks – Custom webhook
       ↓
-[2] Tools – Sleep 600 seconds (10 min)   ← one sleep is enough; remove duplicate 300+300 if redundant
+[2] Tools – Sleep 600 seconds (10 min)
       ↓
 [3] Facebook Pages – Create a Comment
-      id      → {{1.id}}      (or {{1.post_id}})
-      message → {{1.message}}  (or {{1.comment}})
+      id      → {{1.id}}
+      message → {{1.message}}
 ```
 
 ### Do not
 
-- Hardcode “¡Gracias por tu interés!…” in the Facebook module — use **`{{1.message}}`** only.
-- Add a **second** Facebook “Create comment” module (causes two comments on the post).
-- Leave **id** unmapped — scenario will fail and Make will **deactivate** the scenario.
-
-### After fixing
-
-1. Save the scenario.
-2. Turn the scenario **ON** again (Make turns it off after errors).
-3. Optional test: run webhook manually with sample JSON (use a real recent `post_id` from a test post).
+- Hardcode comment text in the Facebook module.
+- Add a second “Create comment” module.
+- Leave **id** unmapped — Make will deactivate the scenario after errors.
 
 ---
 
-## History log (June 7, 2026)
+## Test webhook without publishing to Facebook
 
-| Time | Result | Likely cause |
-|------|--------|----------------|
-| 10:43–10:49 PM | Success (Auto-Comment) | **Facebook Auto-Comment on New Posts** — static hardcoded comment |
-| 11:14 PM | Error (Cursor webhook) | **Cursor FB Custom Comment** — module **id** empty before mapping fix |
-| 11:24 PM | Deactivated | Make auto-stopped Cursor scenario after error |
+```bash
+cd facebook-posting
+python3 scripts/test_make_first_comment_webhook.py --dry-run   # print payload only
+python3 scripts/test_make_first_comment_webhook.py --send        # POST to Make for structure detect
+```
 
-**Current (fixed):** Auto-Comment **inactive**; Cursor scenario **active** with `id` → `{{1.id}}`, `message` → `{{1.message}}`.
+Use `--post-id YOUR_REAL_POST_ID` only when you intend Make to comment on that post after the sleep.
 
 ---
 
@@ -80,4 +102,4 @@ cd facebook-posting
 ./publish-weekly-june07.sh   # or main.py --from-json FB/post-package-….json
 ```
 
-Copy for `first_comment` lives in `FB/post-package-weekly-YYYY-MM-DD.json` → field `first_comment` (~8 lines, website + post-specific highlight).
+Copy for `first_comment` lives in `FB/post-package-weekly-YYYY-MM-DD.json` → field `first_comment` (~8 lines).

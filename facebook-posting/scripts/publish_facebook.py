@@ -172,9 +172,13 @@ def schedule_first_comment_via_make(
             "Make first-comment webhook URL not configured "
             "(settings.json make_first_comment_webhook_url or MAKE_FB_FIRST_COMMENT_WEBHOOK_URL)"
         )
+    if not (post_id or "").strip():
+        raise ValueError("Cannot schedule Make first comment: Facebook post_id is empty")
+    if not (comment or "").strip():
+        raise ValueError("Cannot schedule Make first comment: comment text is empty")
     payload = {
-        "post_id": post_id,
-        "id": post_id,
+        "post_id": post_id.strip(),
+        "id": post_id.strip(),
         "comment": comment,
         "message": comment,
     }
