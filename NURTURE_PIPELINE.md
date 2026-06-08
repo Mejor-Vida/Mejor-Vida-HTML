@@ -9,8 +9,28 @@ This document is the **design source of truth** for the automated nurture system
 
 1. Lead completes the **WhatsApp MVI Chatflow** → quote is generated.
 2. ManyChat immediately fires **`POST /api/post-quote-email`** (already wired in ManyChat).
+
+   **ManyChat External Request body** — use custom-field pills (`{{quote_low}}`, `{{idioma}}`), **not** raw `cuf_` IDs:
+   ```json
+   {
+     "phone": "{{phone}}",
+     "first_name": "{{first_name}}",
+     "language": "{{idioma}}",
+     "age": "{{edad}}",
+     "quote_low": "{{quote_low}}",
+     "quote_high": "{{quote_high}}",
+     "quote_status": "{{quote_status}}",
+     "call_scheduled": "false"
+   }
+   ```
+   Header: `X-App-Secret: [MANYCHAT_WEBHOOK_SECRET]`
+
+   The API **prefers `contacts.language` / `contacts.idioma` in Supabase** over webhook `language` (avoids English emails when the contact chose Spanish).
+
+   When **`age` > 85** (webhook or `lead_state.age`), the API sends the **over-age follow-up email** instead of a quote email — no dollar range, Julie offers a personal call.
+
 3. The **immediate email** (Resend) includes:
-   - Quote range (when provided)
+   - Quote range (when age ≤ 85 and quote values exist), **or** over-age personal follow-up copy (when age > 85)
    - Short explanation of the process
    - Appointment block **if** a call was already scheduled
    - **VCF download link** (`julie.vcf`) so the lead can save Julie’s contact

@@ -8,6 +8,8 @@
  *
  * Output: email-previews/post-quote-email-en.html
  *         email-previews/post-quote-email-es.html
+ *         email-previews/post-quote-over-age-en.html
+ *         email-previews/post-quote-over-age-es.html
  */
 
 const fs = require('fs');
@@ -15,6 +17,8 @@ const path = require('path');
 const {
   buildEmailEN,
   buildEmailES,
+  buildOverAgeEmailEN,
+  buildOverAgeEmailES,
   LOGO_EN,
   LOGO_ES,
 } = require('../lib/post-quote-email-html');
@@ -40,12 +44,20 @@ const sample = {
 
 const en = buildEmailEN(sample.name, sample.quoteLow, sample.quoteHigh, sample.callScheduled, sample.callDatetime);
 const es = buildEmailES(sample.name, sample.quoteLow, sample.quoteHigh, sample.callScheduled, sample.callDatetime);
+const overEn = buildOverAgeEmailEN('Asdrubal', false, null);
+const overEs = buildOverAgeEmailES('Asdrubal', false, null);
 
-const enPath = path.join(outDir, 'post-quote-email-en.html');
-const esPath = path.join(outDir, 'post-quote-email-es.html');
-fs.writeFileSync(enPath, withLocalLogoUrls(en.html), 'utf8');
-fs.writeFileSync(esPath, withLocalLogoUrls(es.html), 'utf8');
+const files = [
+  ['post-quote-email-en.html', en.html],
+  ['post-quote-email-es.html', es.html],
+  ['post-quote-over-age-en.html', overEn.html],
+  ['post-quote-over-age-es.html', overEs.html],
+];
+
+for (const [name, html] of files) {
+  const filePath = path.join(outDir, name);
+  fs.writeFileSync(filePath, withLocalLogoUrls(html), 'utf8');
+  console.log(' ', filePath);
+}
 
 console.log('Wrote email previews (open in browser):');
-console.log(' ', enPath);
-console.log(' ', esPath);

@@ -13,6 +13,8 @@
  *   first_name       Display only — recipient email always comes from Supabase contacts.email
  *   quote_low        Lower bound of quote range (e.g. "28")
  *   quote_high       Upper bound of quote range (e.g. "45")
+ *   quote_status     'ok' | 'out_of_range' (optional; used with age)
+ *   age | edad       Lead age (optional; falls back to lead_state.age)
  *   call_scheduled   'true' | 'false' — did they book a call?
  *                      When true, send is skipped (HubSpot admin@ sends confirmation).
  *   call_datetime    ISO datetime of scheduled call (optional)
@@ -27,15 +29,51 @@ const { verifyManychatSecret } = require('../lib/manychat-auth');
 const { hubspotPhoneSearchVariants, phoneLast10Digits } = require('../lib/hubspot-phone-variants');
 const path = require('path');
 const fs = require('fs');
-const { buildEmailEN, buildEmailES } = require('../lib/post-quote-email-html');
+const {
+  buildEmailEN,
+  buildEmailES,
+  buildOverAgeEmailEN,
+  buildOverAgeEmailES,
+} = require('../lib/post-quote-email-html');
+const { MAX_QUOTE_AGE } = require('../lib/quote-range-router');
 const { logContactCommunication, htmlToPlain } = require('../lib/contact-communications');
+const { _internal: manychatInternal } = require('../lib/manychat-pull');
+
+const { parseLanguage } = manychatInternal;
+
+/** ManyChat sends "{{field}}" or "${{cuf_…}}" literally when mapping is wrong. */
+function cleanWebhookField(val) {
+  const t = String(val ?? '').trim();
+  if (!t) return '';
+  if (/^\{\{[\s\S]*\}\}$/.test(t)) return '';
+  if (/^\$\{\{[\s\S]*\}\}$/.test(t)) return '';
+  return t;
+}
+
+function parseAge(val) {
+  if (val == null || val === '') return null;
+  const n = parseInt(String(val).replace(/[^\d]/g, ''), 10);
+  return Number.isFinite(n) && n > 0 && n < 130 ? n : null;
+}
+
+function isOverMaxQuoteAge(age) {
+  return age != null && age > MAX_QUOTE_AGE;
+}
+
+function resolveEmailLanguage(body, contactRow) {
+  const fromContact = parseLanguage(
+    (contactRow && (contactRow.idioma || contactRow.language)) || '',
+  );
+  if (fromContact) return fromContact;
+  return parseLanguage(body.language) || 'spanish';
+}
 
 /** Base64 vCard — same bytes as project root julie.vcf (for Resend attachment). */
 const JULIE_VCF_CONTENT = fs.readFileSync(path.join(__dirname, '..', 'julie.vcf'), 'utf8');
 const JULIE_VCF_BASE64 = Buffer.from(JULIE_VCF_CONTENT, 'utf8').toString('base64');
 
 const CONTACT_SELECT =
-  'id,email,phone,first_name,last_name,full_name,vcf_sent_at,manychat_subscriber_id,whatsapp_id';
+  'id,email,phone,first_name,last_name,full_name,language,idioma,vcf_sent_at,manychat_subscriber_id,whatsapp_id';
 
 const POST_QUOTE_PHASE = 0;
 const POST_QUOTE_STEP = 1;
@@ -160,6 +198,26 @@ async function leadStateHasScheduledCall(base, key, contactId) {
   }
 }
 
+async function fetchLeadStateFields(base, key, contactId) {
+  if (!contactId) return { quoteLow: '', quoteHigh: '', age: null };
+  try {
+    const r = await fetch(
+      `${base}/rest/v1/lead_state?contact_id=eq.${encodeURIComponent(contactId)}&select=quote_low,quote_high,age&limit=1`,
+      { headers: { apikey: key, Authorization: `Bearer ${key}` } },
+    );
+    if (!r.ok) return { quoteLow: '', quoteHigh: '', age: null };
+    const rows = await r.json();
+    const row = rows && rows[0];
+    return {
+      quoteLow: cleanWebhookField(row && row.quote_low),
+      quoteHigh: cleanWebhookField(row && row.quote_high),
+      age: parseAge(row && row.age),
+    };
+  } catch {
+    return { quoteLow: '', quoteHigh: '', age: null };
+  }
+}
+
 async function insertPostQuoteDeliveryLog(base, key, contactId, status, opts = {}) {
   const payload = {
     contact_id: contactId,
@@ -217,10 +275,9 @@ module.exports = async function handler(req, res) {
   }
 
   const phone = String(body.phone || '').trim();
-  const language = String(body.language || 'spanish').trim().toLowerCase();
   let firstName = String(body.first_name || body.firstName || '').trim();
-  const quoteLow = String(body.quote_low || '').trim();
-  const quoteHigh = String(body.quote_high || '').trim();
+  let quoteLow = cleanWebhookField(body.quote_low || body.quoteLow);
+  let quoteHigh = cleanWebhookField(body.quote_high || body.quoteHigh);
   const callScheduled = body.call_scheduled === 'true' || body.call_scheduled === true;
   const callDatetime = String(body.call_datetime || '').trim() || null;
 
@@ -291,6 +348,20 @@ module.exports = async function handler(req, res) {
   }
   if (!firstName) firstName = 'there';
 
+  const language = resolveEmailLanguage(body, contactRow);
+
+  let age = parseAge(body.age || body.edad);
+  const leadStateFields = await fetchLeadStateFields(base, supabaseKey, contactId);
+  if (age == null) age = leadStateFields.age;
+
+  if (!quoteLow || !quoteHigh) {
+    if (!quoteLow) quoteLow = leadStateFields.quoteLow;
+    if (!quoteHigh) quoteHigh = leadStateFields.quoteHigh;
+  }
+
+  const overMaxQuoteAge = isOverMaxQuoteAge(age);
+  const emailVariant = overMaxQuoteAge ? 'over_age' : 'post_quote';
+
   if (!email) {
     console.warn(`[post-quote-email] contacts.email missing for contact ${contactId} — not sending`);
     await insertPostQuoteDeliveryLog(base, supabaseKey, contactId, 'failed', {
@@ -305,10 +376,23 @@ module.exports = async function handler(req, res) {
     });
   }
 
-  const { subject, html } =
-    language === 'spanish'
-      ? buildEmailES(firstName, quoteLow, quoteHigh, callScheduled, callDatetime)
-      : buildEmailEN(firstName, quoteLow, quoteHigh, callScheduled, callDatetime);
+  let subject;
+  let html;
+  if (overMaxQuoteAge) {
+    const built =
+      language === 'spanish'
+        ? buildOverAgeEmailES(firstName, callScheduled, callDatetime)
+        : buildOverAgeEmailEN(firstName, callScheduled, callDatetime);
+    subject = built.subject;
+    html = built.html;
+  } else {
+    const built =
+      language === 'spanish'
+        ? buildEmailES(firstName, quoteLow, quoteHigh, callScheduled, callDatetime)
+        : buildEmailEN(firstName, quoteLow, quoteHigh, callScheduled, callDatetime);
+    subject = built.subject;
+    html = built.html;
+  }
 
   let emailId;
   try {
@@ -332,7 +416,9 @@ module.exports = async function handler(req, res) {
     const result = await r.json();
     if (!r.ok) throw new Error(JSON.stringify(result));
     emailId = result.id;
-    console.log(`[post-quote-email] Sent to ${email} (contact ${contactId}), id: ${emailId}`);
+    console.log(
+      `[post-quote-email] Sent to ${email} (contact ${contactId}, lang=${language}, variant=${emailVariant}), id: ${emailId}`,
+    );
     await insertPostQuoteDeliveryLog(base, supabaseKey, contactId, 'sent', {
       provider_id: emailId || null,
     });
@@ -345,6 +431,7 @@ module.exports = async function handler(req, res) {
       body: htmlToPlain(html),
       meta: {
         source: 'post_quote_email',
+        email_variant: emailVariant,
         provider_id: emailId || null,
       },
     });
@@ -373,5 +460,11 @@ module.exports = async function handler(req, res) {
     console.error('[post-quote-email] vcf_sent_at update error:', err.message);
   }
 
-  return json(res, 200, { ok: true, email_id: emailId, to: email, contact_id: contactId });
+  return json(res, 200, {
+    ok: true,
+    email_id: emailId,
+    to: email,
+    contact_id: contactId,
+    email_variant: emailVariant,
+  });
 };

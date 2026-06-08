@@ -136,6 +136,67 @@ Mejor Vida Insurance
 
 ---
 
+## Immediate Post-Quote Email — Over Age 85 (no automated quote)
+
+**Trigger:** Same `/api/post-quote-email` route when lead age is **over 85** (from webhook `age`/`edad` or `lead_state.age`).
+**From:** Julie from Mejor Vida Insurance <julie@mejorvidainsurance.com>
+
+Do **not** send quote dollar amounts. Julie offers a personal follow-up call and VCF.
+
+### English
+
+**Subject:** Thank you, [First Name] — Julie will follow up personally
+
+**Body:**
+Hi [First Name],
+
+Thank you for sharing your information with me.
+
+Based on your age, I wasn't able to generate an automated quote through our standard final expense carriers — the products I work with most commonly issue new coverage through age 85.
+
+That doesn't mean you're out of options. I'd like to speak with you personally to understand your situation and walk through what may still be available — whether that's exploring other paths to help with funeral costs or simply answering your questions with no pressure.
+
+[IF NOT has_scheduled_call]
+If you'd like to talk, schedule a brief call at a time that works for you — I'm happy to help in English or Spanish.
+
+[Button: Schedule a Call with Julie] → [Schedule Link]
+[END IF]
+
+**Save my contact** so you can reach me anytime:
+[Button: Save Julie's Contact Card] → [VCF Link]
+
+Warmly,
+Julie
+
+---
+
+### Spanish
+
+**Subject:** Gracias, [Nombre] — Julie te contactará personalmente
+
+**Body:**
+Hola [Nombre],
+
+Gracias por compartir tu información conmigo.
+
+Según tu edad, no pude generar una cotización automática con nuestras compañías habituales de gastos finales — los productos con los que trabajo normalmente emiten cobertura nueva hasta los 85 años.
+
+Eso no significa que no haya alternativas. Me gustaría hablar contigo personalmente para entender tu situación y revisar qué opciones pueden existir — ya sea explorar otras formas de ayudar con los gastos funerarios o simplemente responder tus preguntas, sin presión.
+
+[IF NOT has_scheduled_call]
+Si te gustaría platicar, agenda una llamada breve cuando te convenga — con gusto te atiendo en español o inglés.
+
+[Button: Agenda una Llamada con Julie] → [Schedule Link]
+[END IF]
+
+**Guarda mi contacto** para tenerme siempre a un toque:
+[Button: Guardar Contacto de Julie] → [VCF Link]
+
+Con cariño,
+Julie
+
+---
+
 ## WhatsApp Templates (Phase 1 — 2 messages)
 
 ### WA Step 1 — 5 hours after opt-in
