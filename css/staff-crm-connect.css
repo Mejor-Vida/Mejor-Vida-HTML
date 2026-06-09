@@ -246,6 +246,37 @@
   margin-right: 4px;
 }
 
+.crm-connect-email-type {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: min(100%, 280px);
+}
+
+.crm-connect-email-type label {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--crm-muted);
+}
+
+.crm-connect-email-type select {
+  border: 1px solid var(--crm-border);
+  background: #fff;
+  color: var(--crm-text);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  max-width: 100%;
+}
+
+.crm-connect-email-type select:focus {
+  outline: none;
+  border-color: var(--crm-accent);
+  box-shadow: 0 0 0 2px var(--crm-select-ring);
+}
+
 .crm-connect-opt {
   border: 1px solid var(--crm-border);
   background: #fff;

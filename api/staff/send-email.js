@@ -1,5 +1,6 @@
 const { google } = require("googleapis");
 const { requireStaffAuth, json, readJsonBody, serviceConfig, restPatch, restInsert } = require("./_inbox-lib");
+const { saveCanonicalLeadProfile } = require("./_lead-profile");
 const { buildStaffClientReplyHtml } = require("../../lib/staff-reply-email-body");
 const { issueToken } = require("../../lib/medical-intake-token");
 const {
@@ -7,6 +8,12 @@ const {
   buildMedicalIntakeSubject,
   buildMedicalIntakeCtaHtml,
 } = require("../../lib/medical-intake-email-template");
+const {
+  buildReviewRequestPlainText,
+  buildReviewRequestSubject,
+  buildReviewRequestCtaHtml,
+  reviewUrl,
+} = require("../../lib/review-request-email-template");
 const {
   normalizeFirstName,
   fetchLeadGreetingFromDb,
@@ -135,7 +142,9 @@ module.exports = async function handler(req, res) {
     body && body.leadSourceTable != null ? String(body.leadSourceTable).trim() : "manychat_leads";
   const leadFirstName = body && body.leadFirstName != null ? String(body.leadFirstName).trim() : "";
 
-  if (!replyDraft && emailType !== "medical_information_request") {
+  const isTemplateEmail =
+    emailType === "medical_information_request" || emailType === "review_request";
+  if (!replyDraft && !isTemplateEmail) {
     return json(res, 400, { success: false, error: "replyDraft required" });
   }
   if (!compose && !questionId) {
@@ -164,14 +173,19 @@ module.exports = async function handler(req, res) {
   const subjectLine = compose
     ? emailType === "medical_information_request"
       ? buildMedicalIntakeSubject({ language })
-      : subjectOverride
-        ? subjectOverride.slice(0, 200)
-        : subjectFromCustomerIssue(customerIssue)
+      : emailType === "review_request"
+        ? buildReviewRequestSubject({ language, firstName: leadFirstName })
+        : subjectOverride
+          ? subjectOverride.slice(0, 200)
+          : subjectFromCustomerIssue(customerIssue)
     : "Re: Your Insurance Question — Mejor Vida Insurance";
 
   try {
     let draftForSend = replyDraft;
     let intakeUrl = null;
+    let reviewLink = null;
+    let reviewSentAt = null;
+    let subjectForSend = subjectLine;
 
     if (compose && emailType === "medical_information_request") {
       if (!leadId) {
@@ -197,17 +211,43 @@ module.exports = async function handler(req, res) {
       draftForSend = buildMedicalIntakePlainText({ language, firstName: fn, intakeUrl });
     }
 
+    if (compose && emailType === "review_request") {
+      if (!leadId) {
+        return json(res, 400, { success: false, error: "Select a lead before sending a review request." });
+      }
+      let fn = normalizeFirstName(leadFirstName);
+      if (!fn) {
+        try {
+          const g = await fetchLeadGreetingFromDb(cfg, leadId, leadSourceTable);
+          fn = g.first_name;
+        } catch (_) {
+          /* use salutation without name */
+        }
+      }
+      reviewLink = reviewUrl();
+      draftForSend = buildReviewRequestPlainText({
+        language,
+        firstName: fn,
+        reviewLink,
+      });
+      subjectForSend = buildReviewRequestSubject({ language, firstName: fn });
+    }
+
     const { html, plainBody } = buildStaffClientReplyHtml(draftForSend, language);
     let htmlOut = html;
     if (intakeUrl) {
       const cta = buildMedicalIntakeCtaHtml({ language, intakeUrl });
-      htmlOut = html.replace("</body>", `${cta}</body>`);
+      htmlOut = htmlOut.replace("</body>", `${cta}</body>`);
+    }
+    if (reviewLink) {
+      const cta = buildReviewRequestCtaHtml({ language, reviewLink });
+      htmlOut = htmlOut.replace("</body>", `${cta}</body>`);
     }
     const rfc822 = buildMultipartRaw({
       fromEmail,
       toEmail,
       ccEmail: ccEmail || undefined,
-      subject: subjectLine,
+      subject: subjectForSend,
       textBody: plainBody,
       htmlBody: htmlOut,
     });
@@ -246,13 +286,23 @@ module.exports = async function handler(req, res) {
         emailType: emailType || null,
         intakeUrl: intakeUrl || null,
         leadId: leadId || null,
-        subject: subjectLine,
+        subject: subjectForSend,
       },
       "sent"
     );
 
     if (leadId && isUuid(leadId)) {
       try {
+        if (emailType === "review_request") {
+          reviewSentAt = new Date().toISOString();
+          await saveCanonicalLeadProfile(
+            cfg,
+            leadId,
+            leadSourceTable,
+            { review_request_sent_at: reviewSentAt },
+            auth.user && auth.user.email ? auth.user.email : null
+          );
+        }
         const resolved = await resolveContactForStaffLead(cfg, leadId);
         if (resolved.contactId) {
           await insertEvent(
@@ -261,7 +311,7 @@ module.exports = async function handler(req, res) {
             resolved.contactId,
             "staff_email_sent",
             {
-              subject: subjectLine,
+              subject: subjectForSend,
               to_email: toEmail,
               message_id: messageId,
               email_type: emailType || "general",
@@ -274,8 +324,8 @@ module.exports = async function handler(req, res) {
             contactId: resolved.contactId,
             direction: "outbound",
             channel: "email",
-            subject: subjectLine,
-            summary: subjectLine,
+            subject: subjectForSend,
+            summary: subjectForSend,
             body: plainBody,
             meta: {
               source: "staff_send_email",
@@ -290,7 +340,15 @@ module.exports = async function handler(req, res) {
       }
     }
 
-    return json(res, 200, { success: true, toEmail, messageId, subject: subjectLine, intakeUrl });
+    return json(res, 200, {
+      success: true,
+      toEmail,
+      messageId,
+      subject: subjectForSend,
+      intakeUrl,
+      reviewLink: reviewLink || null,
+      reviewRequestSentAt: reviewSentAt,
+    });
   } catch (e) {
     const err = String(e && e.message ? e.message : "Failed to send email");
     await logSendAttempt(

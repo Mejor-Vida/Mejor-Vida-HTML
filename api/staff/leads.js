@@ -5,6 +5,7 @@ const { canAccessPhi } = require("../../lib/staff-permissions");
 const { readPhiByLead, writePhiByLead } = require("../../lib/phi-store");
 const { hubspotPhoneSearchVariants, phoneLast10Digits } = require("../../lib/hubspot-phone-variants");
 const { linkLeadToContacts } = require("./_contact-link");
+const { saveCanonicalLeadProfile } = require("./_lead-profile");
 
 function isUuid(s) {
   return /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(String(s || ""));
@@ -256,6 +257,7 @@ function buildListItemFromRow(r, canonical) {
     contact_id: "",
     contacts_contact_id: "",
     call_scheduled_at: null,
+    review_request_sent_at: null,
     created_at: r.created_at || null,
     updated_at: r.updated_at || null,
   };
@@ -269,6 +271,9 @@ function buildListItemFromRow(r, canonical) {
     item.tag = mergePreferCanonical(item.tag, canonical.tag);
     item.contact_id = mergePreferCanonical(item.contact_id, canonical.contact_id);
     item.contacts_contact_id = mergePreferCanonical(item.contacts_contact_id, canonical.contacts_contact_id);
+    if (canonical.review_request_sent_at) {
+      item.review_request_sent_at = String(canonical.review_request_sent_at).trim() || null;
+    }
   }
   if (String(item.source_table || "") === "contacts" && item.id && !cleanText(item.contact_id)) {
     item.contact_id = String(item.id);
@@ -359,44 +364,6 @@ async function enrichListItemsWithAppointments(cfg, items) {
   });
 
   return items;
-}
-
-async function saveCanonicalLeadProfile(cfg, leadId, leadSourceTable, patch, updatedBy) {
-  if (!leadId || !leadSourceTable) return null;
-  const rows = await restSelect(
-    cfg,
-    "staff_lead_profiles",
-    `select=id,profile_data&lead_id=eq.${encodeURIComponent(
-      leadId
-    )}&lead_source_table=eq.${encodeURIComponent(leadSourceTable)}&limit=1`
-  );
-  const row = Array.isArray(rows) && rows[0] ? rows[0] : null;
-  const now = new Date().toISOString();
-  const existingProfile = row && row.profile_data && typeof row.profile_data === "object" ? row.profile_data : {};
-  const nextProfile = Object.assign({}, existingProfile, patch || {});
-  if (!row) {
-    const inserted = await restInsert(cfg, "staff_lead_profiles", [
-      {
-        lead_id: leadId,
-        lead_source_table: leadSourceTable,
-        profile_data: nextProfile,
-        updated_at: now,
-        updated_by: updatedBy || null,
-      },
-    ]);
-    return Array.isArray(inserted) && inserted[0] ? inserted[0] : null;
-  }
-  const patched = await restPatch(
-    cfg,
-    "staff_lead_profiles",
-    `id=eq.${encodeURIComponent(row.id)}`,
-    {
-      profile_data: nextProfile,
-      updated_at: now,
-      updated_by: updatedBy || null,
-    }
-  );
-  return Array.isArray(patched) && patched[0] ? patched[0] : null;
 }
 
 const MANYCHAT_DETAIL_COLUMNS =

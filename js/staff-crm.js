@@ -372,6 +372,96 @@
     return stages.renderStagePicker(L.id, L.pipeline_stage, esc, t("col_stage"));
   }
 
+  function hasValidEmail(L) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String((L && L.email) || "").trim());
+  }
+
+  function hasValidPhone(L) {
+    return String((L && L.phone) || "").replace(/\D/g, "").length >= 10;
+  }
+
+  function indicatorIconSvg(kind) {
+    var size = kind === "phone" ? 22 : 18;
+    if (kind === "email") {
+      return (
+        '<svg viewBox="0 0 24 24" width="' +
+        size +
+        '" height="' +
+        size +
+        '" aria-hidden="true" focusable="false">' +
+        '<path fill="currentColor" d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 4-8 5L4 8V6l8 5 8-5v2Z"/>' +
+        "</svg>"
+      );
+    }
+    if (kind === "phone") {
+      return (
+        '<svg viewBox="0 0 24 24" width="' +
+        size +
+        '" height="' +
+        size +
+        '" aria-hidden="true" focusable="false">' +
+        '<path fill="currentColor" d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.25 1.01l-2.2 2.2Z"/>' +
+        "</svg>"
+      );
+    }
+    return (
+      '<svg viewBox="0 0 24 24" width="' +
+      size +
+      '" height="' +
+      size +
+      '" aria-hidden="true" focusable="false">' +
+      '<path fill="currentColor" d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>' +
+      "</svg>"
+    );
+  }
+
+  function formatIndicatorWhen(iso) {
+    if (!iso) return "";
+    try {
+      var d = new Date(iso);
+      if (Number.isNaN(d.getTime())) return "";
+      return d.toLocaleString(undefined, { dateStyle: "medium", timeStyle: "short" });
+    } catch (e) {
+      return "";
+    }
+  }
+
+  function renderIndicatorCell(kind, active, label) {
+    var cls = "crm-indicator" + (active ? " is-on" : " is-off");
+    if (kind === "phone") cls += " crm-indicator--phone";
+    return (
+      '<span class="' +
+      cls +
+      '" role="img" aria-label="' +
+      esc(label) +
+      '" title="' +
+      esc(label) +
+      '">' +
+      indicatorIconSvg(kind) +
+      "</span>"
+    );
+  }
+
+  function renderEmailIndicator(L) {
+    var on = hasValidEmail(L);
+    return renderIndicatorCell("email", on, on ? t("indicator_email_on") : t("indicator_email_off"));
+  }
+
+  function renderPhoneIndicator(L) {
+    var on = hasValidPhone(L);
+    return renderIndicatorCell("phone", on, on ? t("indicator_phone_on") : t("indicator_phone_off"));
+  }
+
+  function renderReviewIndicator(L) {
+    var sentAt = L && L.review_request_sent_at ? String(L.review_request_sent_at).trim() : "";
+    var on = !!sentAt;
+    var when = formatIndicatorWhen(sentAt);
+    var label = on
+      ? t("indicator_review_sent", { when: when || sentAt })
+      : t("indicator_review_not_sent");
+    return renderIndicatorCell("review", on, label);
+  }
+
   function renderCalendarCell(L) {
     var scheduled = !!(L.call_scheduled_at);
     var cls = scheduled ? " crm-calendar-bell is-scheduled" : " crm-calendar-bell is-empty";
@@ -392,6 +482,22 @@
     );
   }
 
+  function patchClientsListIndicators(leadId) {
+    if (!leadId) return;
+    var L = leadsCache.find(function (x) {
+      return x.id === leadId;
+    });
+    if (!L) return;
+    var tr = document.querySelector('#crm-clients-tbody tr[data-id="' + leadId + '"]');
+    if (!tr) return;
+    var emailCell = tr.querySelector(".crm-col-email");
+    var phoneCell = tr.querySelector(".crm-col-phone");
+    var reviewCell = tr.querySelector(".crm-col-review");
+    if (emailCell) emailCell.innerHTML = renderEmailIndicator(L);
+    if (phoneCell) phoneCell.innerHTML = renderPhoneIndicator(L);
+    if (reviewCell) reviewCell.innerHTML = renderReviewIndicator(L);
+  }
+
   function upsertLeadListItem(item) {
     if (!item || !item.id) return;
     var idx = leadsCache.findIndex(function (x) {
@@ -399,6 +505,7 @@
     });
     if (idx >= 0) leadsCache[idx] = Object.assign({}, leadsCache[idx], item);
     else leadsCache.push(item);
+    patchClientsListIndicators(item.id);
   }
 
   function renderDashboard(main) {
@@ -500,10 +607,12 @@
       '<button type="button" class="crm-sort-th-btn" id="crm-sort-name" aria-sort="none">' +
       esc(t("col_name")) +
       ' <span class="crm-sort-icon" aria-hidden="true">↕</span></button>' +
-      '</th><th class="crm-col-email">' +
+      '</th><th class="crm-col-indicator crm-col-email" scope="col">' +
       esc(t("col_email")) +
-      '</th><th class="crm-col-phone">' +
+      '</th><th class="crm-col-indicator crm-col-phone" scope="col">' +
       esc(t("col_phone")) +
+      '</th><th class="crm-col-indicator crm-col-review" scope="col">' +
+      esc(t("col_review_sent")) +
       '</th><th class="crm-col-stage">' +
       renderStageFilterHeaderCell() +
       '</th><th class="crm-col-calendar">' +
@@ -878,11 +987,13 @@
             checked +
             " /></td><td><span class=\"name-link\" role=\"link\" tabindex=\"0\">" +
             esc(displayName(L)) +
-            "</span></td><td>" +
-            esc(L.email || "—") +
-            "</td><td>" +
-            esc(L.phone || "—") +
-            "</td><td class=\"crm-col-stage\">" +
+            '</span></td><td class="crm-col-indicator crm-col-email">' +
+            renderEmailIndicator(L) +
+            '</td><td class="crm-col-indicator crm-col-phone">' +
+            renderPhoneIndicator(L) +
+            '</td><td class="crm-col-indicator crm-col-review">' +
+            renderReviewIndicator(L) +
+            '</td><td class="crm-col-stage">' +
             renderStageCell(L) +
             '</td><td class="crm-col-calendar">' +
             renderCalendarCell(L) +

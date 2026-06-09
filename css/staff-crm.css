@@ -623,12 +623,53 @@ body.crm-body {
   width: 16%;
 }
 
-.crm-table-clients .crm-col-email {
-  width: 21%;
+.crm-table-clients .crm-col-email,
+.crm-table-clients .crm-col-phone {
+  width: 64px;
+  min-width: 64px;
+  max-width: 72px;
+  text-align: center;
+  padding-left: 6px;
+  padding-right: 6px;
 }
 
-.crm-table-clients .crm-col-phone {
-  width: 14%;
+.crm-table-clients .crm-col-review {
+  width: 96px;
+  min-width: 96px;
+  max-width: 110px;
+  text-align: center;
+  padding-left: 6px;
+  padding-right: 6px;
+  white-space: nowrap;
+}
+
+.crm-table-clients th.crm-col-indicator {
+  text-align: center;
+  font-size: 0.72rem;
+  letter-spacing: 0.03em;
+  padding-left: 6px;
+  padding-right: 6px;
+}
+
+.crm-indicator {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 0;
+  vertical-align: middle;
+}
+
+.crm-indicator--phone svg {
+  width: 22px;
+  height: 22px;
+}
+
+.crm-indicator.is-off {
+  color: #b8c5d6;
+}
+
+.crm-indicator.is-on {
+  color: var(--crm-select-ring, #f5c542);
 }
 
 .crm-table-clients .crm-col-stage {

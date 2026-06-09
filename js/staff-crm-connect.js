@@ -195,19 +195,23 @@
       '<button type="button" class="crm-connect-opt" id="crm-conn-lang-en" data-lang="English">English</button>' +
       '<button type="button" class="crm-connect-opt" id="crm-conn-lang-es" data-lang="Spanish">Spanish</button>' +
       "</div>" +
-      '<div class="crm-connect-toggle-group" role="group" aria-label="' +
+      '<div class="crm-connect-email-type">' +
+      '<label for="crm-conn-email-type">' +
       esc(t("conn_email_type")) +
+      "</label>" +
+      '<select id="crm-conn-email-type" aria-label="' +
+      esc(t("conn_email_type_select")) +
       '">' +
-      '<span class="crm-connect-toggle-label">' +
-      esc(t("conn_email_type")) +
-      "</span>" +
-      '<button type="button" class="crm-connect-opt active" id="crm-conn-type-general" data-type="general">' +
+      '<option value="general">' +
       esc(t("conn_type_general")) +
-      "</button>" +
-      '<button type="button" class="crm-connect-opt" id="crm-conn-type-medical" data-type="medical_information_request">' +
+      "</option>" +
+      '<option value="medical_information_request">' +
       esc(t("conn_type_medical")) +
-      "</button>" +
-      "</div></div>" +
+      "</option>" +
+      '<option value="review_request">' +
+      esc(t("conn_type_review")) +
+      "</option>" +
+      "</select></div></div>" +
       '<label for="crm-conn-issue" id="crm-conn-issue-label">' +
       esc(t("conn_customer_issue")) +
       '</label><textarea id="crm-conn-issue" rows="2" placeholder="' +
@@ -261,6 +265,16 @@
     if (el) el.textContent = msg || "";
   }
 
+  function normalizeEmailType(type) {
+    if (type === "medical_information_request") return "medical_information_request";
+    if (type === "review_request") return "review_request";
+    return "general";
+  }
+
+  function isTemplateEmailType(type) {
+    return type === "medical_information_request" || type === "review_request";
+  }
+
   function setLanguage(state, lang) {
     state.composeLang = lang === "Spanish" ? "Spanish" : "English";
     var en = $("crm-conn-lang-en", state.root);
@@ -268,20 +282,22 @@
     if (en) en.classList.toggle("active", state.composeLang === "English");
     if (es) es.classList.toggle("active", state.composeLang === "Spanish");
     if (state.emailType === "medical_information_request") void refreshMedicalPreview(state);
+    else if (state.emailType === "review_request") void refreshReviewPreview(state);
   }
 
   function setEmailType(state, type) {
-    state.emailType = type === "medical_information_request" ? "medical_information_request" : "general";
-    var g = $("crm-conn-type-general", state.root);
-    var m = $("crm-conn-type-medical", state.root);
-    if (g) g.classList.toggle("active", state.emailType === "general");
-    if (m) m.classList.toggle("active", state.emailType === "medical_information_request");
-    updateMedicalModeUi(state);
+    state.emailType = normalizeEmailType(type);
+    var sel = $("crm-conn-email-type", state.root);
+    if (sel && sel.value !== state.emailType) sel.value = state.emailType;
+    updateEmailTypeUi(state);
     if (state.emailType === "medical_information_request") void refreshMedicalPreview(state);
+    else if (state.emailType === "review_request") void refreshReviewPreview(state);
   }
 
-  function updateMedicalModeUi(state) {
+  function updateEmailTypeUi(state) {
+    var isTemplate = isTemplateEmailType(state.emailType);
     var isMedical = state.emailType === "medical_information_request";
+    var isReview = state.emailType === "review_request";
     var genBtn = $("crm-conn-generate", state.root);
     var reply = $("crm-conn-reply", state.root);
     var replyLabel = $("crm-conn-reply-label", state.root);
@@ -289,39 +305,66 @@
     var issue = $("crm-conn-issue", state.root);
     var notesWrap = state.root.querySelector(".crm-connect-notes-wrap");
     var notes = $("crm-conn-notes", state.root);
-    if (genBtn) genBtn.classList.toggle("hidden", isMedical);
+    if (genBtn) genBtn.classList.toggle("hidden", isTemplate);
     if (reply) {
-      reply.readOnly = isMedical;
-      reply.placeholder = isMedical ? t("conn_reply_ph_medical") : t("conn_reply_ph");
+      reply.readOnly = isTemplate;
+      if (isMedical) reply.placeholder = t("conn_reply_ph_medical");
+      else if (isReview) reply.placeholder = t("conn_reply_ph_review");
+      else reply.placeholder = t("conn_reply_ph");
     }
     if (replyLabel) {
-      replyLabel.textContent = isMedical ? t("conn_reply_preview") : t("conn_reply_draft");
+      replyLabel.textContent = isTemplate ? t("conn_reply_preview") : t("conn_reply_draft");
     }
-    if (issueLabel) issueLabel.classList.toggle("hidden", isMedical);
+    if (issueLabel) issueLabel.classList.toggle("hidden", isTemplate);
     if (issue) {
-      issue.classList.toggle("hidden", isMedical);
-      if (isMedical) issue.value = "";
+      issue.classList.toggle("hidden", isTemplate);
+      if (isTemplate) issue.value = "";
     }
-    if (notesWrap) notesWrap.classList.toggle("hidden", isMedical);
+    if (notesWrap) notesWrap.classList.toggle("hidden", isTemplate);
     if (notes) {
-      notes.classList.toggle("hidden", isMedical);
-      if (isMedical) notes.value = "";
+      notes.classList.toggle("hidden", isTemplate);
+      if (isTemplate) notes.value = "";
     }
+  }
+
+  function previewFirstName(state) {
+    var fn = String(($("crm-conn-first", state.root) && $("crm-conn-first", state.root).value) || "").trim();
+    if (!fn) fn = state.firstName || "";
+    if (/^there$/i.test(fn)) fn = "";
+    return fn;
   }
 
   async function refreshMedicalPreview(state) {
     if (state.emailType !== "medical_information_request") return;
     var reply = $("crm-conn-reply", state.root);
     if (!reply) return;
-    var fn = String(($("crm-conn-first", state.root) && $("crm-conn-first", state.root).value) || "").trim();
-    if (!fn) fn = state.firstName || "";
-    if (/^there$/i.test(fn)) fn = "";
     setStatus(state, t("conn_status_preview_loading"));
     reply.value = "";
     try {
       var data = await api("/api/staff/medical-intake-email-preview", {
         language: state.composeLang,
-        firstName: fn,
+        firstName: previewFirstName(state),
+      });
+      reply.value = (data && data.body) || "";
+      setStatus(
+        state,
+        t("conn_status_preview_ready", { subject: (data && data.subject) || "(preview)" })
+      );
+    } catch (e) {
+      setStatus(state, t("conn_status_preview_failed"));
+    }
+  }
+
+  async function refreshReviewPreview(state) {
+    if (state.emailType !== "review_request") return;
+    var reply = $("crm-conn-reply", state.root);
+    if (!reply) return;
+    setStatus(state, t("conn_status_preview_loading"));
+    reply.value = "";
+    try {
+      var data = await api("/api/staff/review-request-email-preview", {
+        language: state.composeLang,
+        firstName: previewFirstName(state),
       });
       reply.value = (data && data.body) || "";
       setStatus(
@@ -348,6 +391,10 @@
   async function onGenerate(state) {
     if (state.emailType === "medical_information_request") {
       await refreshMedicalPreview(state);
+      return;
+    }
+    if (state.emailType === "review_request") {
+      await refreshReviewPreview(state);
       return;
     }
     var f = readForm(state);
@@ -380,7 +427,7 @@
 
   async function onSend(state) {
     var f = readForm(state);
-    if (!f.reply && state.emailType !== "medical_information_request") {
+    if (!f.reply && !isTemplateEmailType(state.emailType)) {
       setStatus(state, t("conn_status_need_draft"));
       return;
     }
@@ -407,14 +454,25 @@
         leadFirstName: f.firstName || state.firstName || "",
       });
       if (data && data.success === true) {
-        setStatus(
-          state,
-          t("conn_status_sent", {
-            email: f.email,
-            subject: data.subject ? " — " + data.subject : "",
-            link: data.intakeUrl ? " · Secure link issued." : "",
-          })
-        );
+        if (state.emailType === "review_request" && data.reviewRequestSentAt) {
+          state.reviewRequestSentAt = data.reviewRequestSentAt;
+          if (window.StaffCrm && window.StaffCrm.upsertLeadListItem) {
+            window.StaffCrm.upsertLeadListItem({
+              id: state.leadId,
+              review_request_sent_at: data.reviewRequestSentAt,
+            });
+          }
+          setStatus(state, t("conn_status_review_sent", { email: f.email }));
+        } else {
+          setStatus(
+            state,
+            t("conn_status_sent", {
+              email: f.email,
+              subject: data.subject ? " — " + data.subject : "",
+              link: data.intakeUrl ? " · Secure link issued." : "",
+            })
+          );
+        }
       } else {
         setStatus(state, (data && data.error) || t("conn_status_send_failed"));
       }
@@ -557,12 +615,12 @@
     $("crm-conn-lang-es", state.root).addEventListener("click", function () {
       setLanguage(state, "Spanish");
     });
-    $("crm-conn-type-general", state.root).addEventListener("click", function () {
-      setEmailType(state, "general");
-    });
-    $("crm-conn-type-medical", state.root).addEventListener("click", function () {
-      setEmailType(state, "medical_information_request");
-    });
+    var emailTypeSel = $("crm-conn-email-type", state.root);
+    if (emailTypeSel) {
+      emailTypeSel.addEventListener("change", function () {
+        setEmailType(state, emailTypeSel.value);
+      });
+    }
     $("crm-conn-generate", state.root).addEventListener("click", function () {
       void onGenerate(state);
     });
