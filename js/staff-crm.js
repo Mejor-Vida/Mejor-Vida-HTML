@@ -331,6 +331,45 @@
     document.querySelectorAll(".crm-nav-item").forEach(function (btn) {
       btn.classList.toggle("active", btn.getAttribute("data-nav") === active);
     });
+    document.querySelectorAll(".crm-bottom-nav-btn[data-nav]").forEach(function (btn) {
+      var nav = btn.getAttribute("data-nav");
+      if (nav === "more") {
+        btn.classList.remove("active");
+        return;
+      }
+      btn.classList.toggle("active", nav === active);
+    });
+  }
+
+  function isMobileNavLayout() {
+    return window.matchMedia("(max-width: 900px)").matches;
+  }
+
+  function setMobileNavOpen(open) {
+    document.body.classList.toggle("crm-mobile-nav-open", !!open);
+    var toggle = $("crm-nav-toggle");
+    var backdrop = $("crm-sidebar-backdrop");
+    if (toggle) toggle.setAttribute("aria-expanded", open ? "true" : "false");
+    if (backdrop) backdrop.setAttribute("aria-hidden", open ? "false" : "true");
+  }
+
+  function closeMobileNav() {
+    setMobileNavOpen(false);
+  }
+
+  function openMobileNav() {
+    if (!isMobileNavLayout()) return;
+    setMobileNavOpen(true);
+  }
+
+  function navigateByNav(nav) {
+    if (nav === "dashboard") navigate("#/dashboard");
+    else if (nav === "clients") navigate("#/clients");
+    else if (nav === "inbox") navigate("#/inbox");
+    else if (nav === "assistant") navigate("#/assistant");
+    else if (nav === "oos") navigate("#/oos");
+    else if (nav === "knowledge") navigate("#/knowledge");
+    else if (nav === "todo") navigate("#/todo");
   }
 
   async function ensureLeads(force) {
@@ -1540,18 +1579,44 @@
   function wireNav() {
     document.querySelectorAll(".crm-nav-item").forEach(function (btn) {
       btn.addEventListener("click", function () {
-        var nav = btn.getAttribute("data-nav");
-        if (nav === "dashboard") navigate("#/dashboard");
-        else if (nav === "clients") navigate("#/clients");
-        else if (nav === "inbox") navigate("#/inbox");
-        else if (nav === "assistant") navigate("#/assistant");
-        else if (nav === "oos") navigate("#/oos");
-        else if (nav === "knowledge") navigate("#/knowledge");
-        else if (nav === "todo") navigate("#/todo");
+        navigateByNav(btn.getAttribute("data-nav"));
+        closeMobileNav();
       });
     });
+    document.querySelectorAll(".crm-bottom-nav-btn[data-nav]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var nav = btn.getAttribute("data-nav");
+        if (nav === "more") {
+          openMobileNav();
+          return;
+        }
+        navigateByNav(nav);
+        closeMobileNav();
+      });
+    });
+    var navToggle = $("crm-nav-toggle");
+    if (navToggle) {
+      navToggle.addEventListener("click", function () {
+        if (document.body.classList.contains("crm-mobile-nav-open")) closeMobileNav();
+        else openMobileNav();
+      });
+    }
+    var backdrop = $("crm-sidebar-backdrop");
+    if (backdrop) {
+      backdrop.addEventListener("click", closeMobileNav);
+    }
+    window.addEventListener(
+      "resize",
+      function () {
+        if (!isMobileNavLayout()) closeMobileNav();
+      },
+      { passive: true }
+    );
     $("crm-signout").addEventListener("click", signOutNow);
-    window.addEventListener("hashchange", renderRoute);
+    window.addEventListener("hashchange", function () {
+      closeMobileNav();
+      renderRoute();
+    });
   }
 
   function wireLogin() {

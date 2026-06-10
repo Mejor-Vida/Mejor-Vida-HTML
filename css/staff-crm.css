@@ -277,6 +277,12 @@ body.crm-body {
   accent-color: #6eb5ff;
 }
 
+.crm-nav-toggle,
+.crm-sidebar-backdrop,
+.crm-bottom-nav {
+  display: none;
+}
+
 .crm-shell {
   display: grid;
   grid-template-columns: var(--crm-sidebar-w) 1fr;

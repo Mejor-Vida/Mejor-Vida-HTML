@@ -17,6 +17,7 @@
   <link rel="stylesheet" href="/css/staff-crm-assistant.css?v=20260609a" />
   <link rel="stylesheet" href="/css/staff-crm-knowledge.css?v=20260609a" />
   <link rel="stylesheet" href="/css/staff-crm-todo.css?v=20260610a" />
+  <link rel="stylesheet" href="/css/staff-crm-mobile.css?v=20260610b" />
 </head>
 <body class="crm-body">
   <main id="crm-login" class="crm-login-wrap">
@@ -50,6 +51,10 @@
 
   <div id="crm-app" class="crm-app hidden" aria-hidden="true">
     <header class="crm-header">
+      <button type="button" id="crm-nav-toggle" class="crm-nav-toggle" aria-expanded="false" aria-controls="crm-sidebar">
+        <span class="crm-nav-toggle-icon" aria-hidden="true"></span>
+        <span class="visually-hidden" data-i18n="nav_menu">Menu</span>
+      </button>
       <a href="#/dashboard" class="crm-header-brand" id="crm-header-home">
         <picture>
 <source type="image/webp" srcset="/img/opt/logo-english2.webp"/>
@@ -72,7 +77,8 @@
     </header>
 
     <div class="crm-shell">
-      <aside class="crm-sidebar" aria-label="Main navigation">
+      <div id="crm-sidebar-backdrop" class="crm-sidebar-backdrop" aria-hidden="true"></div>
+      <aside id="crm-sidebar" class="crm-sidebar" aria-label="Main navigation">
         <button type="button" class="crm-nav-item" data-nav="dashboard">
           <span class="crm-nav-icon" aria-hidden="true">▦</span>
           <span data-i18n="nav_dashboard">Dashboard</span>
@@ -109,10 +115,33 @@
 
       <main id="crm-main" class="crm-main" aria-live="polite"></main>
     </div>
+
+    <nav class="crm-bottom-nav" aria-label="Quick navigation" id="crm-bottom-nav">
+      <button type="button" class="crm-bottom-nav-btn" data-nav="dashboard">
+        <span class="crm-bottom-nav-icon" aria-hidden="true">▦</span>
+        <span data-i18n="nav_dashboard">Dashboard</span>
+      </button>
+      <button type="button" class="crm-bottom-nav-btn" data-nav="clients">
+        <span class="crm-bottom-nav-icon" aria-hidden="true">👤</span>
+        <span data-i18n="nav_clients">Clients</span>
+      </button>
+      <button type="button" class="crm-bottom-nav-btn" data-nav="assistant">
+        <span class="crm-bottom-nav-icon" aria-hidden="true">🤖</span>
+        <span data-i18n="nav_assistant_short">Assistant</span>
+      </button>
+      <button type="button" class="crm-bottom-nav-btn" data-nav="todo">
+        <span class="crm-bottom-nav-icon" aria-hidden="true">✓</span>
+        <span data-i18n="nav_todo">To-Do</span>
+      </button>
+      <button type="button" class="crm-bottom-nav-btn" id="crm-bottom-nav-more" data-nav="more">
+        <span class="crm-bottom-nav-icon" aria-hidden="true">☰</span>
+        <span data-i18n="nav_more">More</span>
+      </button>
+    </nav>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="/js/staff-crm-i18n.js?v=20260610a"></script>
+  <script src="/js/staff-crm-i18n.js?v=20260610b"></script>
   <script src="/js/staff-crm-stages.js?v=20260606d"></script>
   <script src="/js/staff-crm-medical.js?v=20260529a"></script>
   <script src="/js/staff-crm-connect.js?v=20260609a"></script>
@@ -125,6 +154,6 @@
   <script src="/js/staff-crm-assistant.js?v=20260609a"></script>
   <script src="/js/staff-crm-knowledge.js?v=20260609a"></script>
   <script src="/js/staff-crm-todo.js?v=20260610a"></script>
-  <script src="/js/staff-crm.js?v=20260610a"></script>
+  <script src="/js/staff-crm.js?v=20260610b"></script>
 </body>
 </html>
