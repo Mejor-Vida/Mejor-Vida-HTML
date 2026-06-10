@@ -1,0 +1,212 @@
+/* CRM Staff To-Do — Julie / Justin personal lists */
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.crm-todo-shell {
+  max-width: 720px;
+}
+
+.crm-todo-page-title {
+  margin: 0 0 8px;
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
+.crm-todo-subtitle {
+  margin: 0 0 20px;
+  font-size: 0.92rem;
+  color: var(--crm-muted);
+}
+
+.crm-todo-picker {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+@media (max-width: 520px) {
+  .crm-todo-picker {
+    grid-template-columns: 1fr;
+  }
+}
+
+.crm-todo-person-btn {
+  border: 1px solid var(--crm-border);
+  border-radius: var(--crm-radius);
+  background: var(--crm-card-bg);
+  box-shadow: var(--crm-shadow);
+  padding: 28px 20px;
+  font: inherit;
+  cursor: pointer;
+  text-align: center;
+  transition: border-color 0.12s ease, background 0.12s ease;
+}
+
+.crm-todo-person-btn:hover {
+  border-color: var(--crm-accent);
+  background: rgba(232, 240, 254, 0.55);
+}
+
+.crm-todo-person-btn strong {
+  display: block;
+  font-size: 1.15rem;
+  color: var(--crm-text);
+  margin-bottom: 6px;
+}
+
+.crm-todo-person-btn span {
+  font-size: 0.85rem;
+  color: var(--crm-muted);
+}
+
+.crm-todo-topbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.crm-todo-back {
+  border: 0;
+  background: none;
+  padding: 6px 0;
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--crm-accent);
+  cursor: pointer;
+}
+
+.crm-todo-back:hover {
+  color: var(--crm-accent-hover, #1a3d6e);
+}
+
+.crm-todo-owner-title {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.crm-todo-card {
+  background: var(--crm-card-bg);
+  border: 1px solid var(--crm-border);
+  border-radius: var(--crm-radius);
+  box-shadow: var(--crm-shadow);
+  overflow: hidden;
+}
+
+.crm-todo-compose {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  align-items: end;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--crm-border);
+  background: #f8fafc;
+}
+
+.crm-todo-compose textarea {
+  width: 100%;
+  min-height: 52px;
+  max-height: 140px;
+  resize: vertical;
+  padding: 10px 12px;
+  border: 1px solid var(--crm-border);
+  border-radius: 10px;
+  font: inherit;
+  font-size: 0.92rem;
+  background: #fff;
+}
+
+.crm-todo-compose textarea:focus {
+  outline: 2px solid rgba(49, 79, 138, 0.25);
+  border-color: var(--crm-accent);
+}
+
+.crm-todo-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.crm-todo-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--crm-border);
+}
+
+.crm-todo-item:last-child {
+  border-bottom: 0;
+}
+
+.crm-todo-item-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.crm-todo-item-text {
+  font-size: 0.94rem;
+  line-height: 1.45;
+  color: var(--crm-text);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.crm-todo-item-when {
+  margin-top: 4px;
+  font-size: 0.78rem;
+  color: var(--crm-muted);
+}
+
+.crm-todo-delete {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--crm-border);
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+  font-size: 1rem;
+  line-height: 1;
+  color: var(--crm-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.crm-todo-delete:hover {
+  background: #fdeaea;
+  border-color: #f5c2c2;
+  color: #b42318;
+}
+
+.crm-todo-empty {
+  padding: 40px 20px;
+  text-align: center;
+  color: var(--crm-muted);
+  font-size: 0.92rem;
+}
+
+.crm-todo-status {
+  padding: 10px 16px;
+  font-size: 0.82rem;
+  color: var(--crm-muted);
+  min-height: 1.2em;
+}
+
+.crm-todo-status.is-error {
+  color: #b42318;
+}

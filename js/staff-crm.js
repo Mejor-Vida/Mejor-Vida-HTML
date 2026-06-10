@@ -110,8 +110,19 @@
     }
     if (parts[0] === "inbox") return { view: "inbox" };
     if (parts[0] === "assistant") return { view: "assistant" };
-    if (parts[0] === "oos") return { view: "oos" };
+    if (parts[0] === "oos") {
+      var oosTab = parts[1] || "referrals";
+      var validOos = { referrals: true, agents: true, archive: true };
+      return { view: "oos", oosTab: validOos[oosTab] ? oosTab : "referrals" };
+    }
     if (parts[0] === "knowledge") return { view: "knowledge" };
+    if (parts[0] === "todo") {
+      var todoOwner = parts[1] || "";
+      if (todoOwner === "julie" || todoOwner === "justin") {
+        return { view: "todo", todoOwner: todoOwner };
+      }
+      return { view: "todo" };
+    }
     return { view: "dashboard" };
   }
 
@@ -262,6 +273,22 @@
       [lead && lead.first_name, lead && lead.last_name].filter(Boolean).join(" ").trim() ||
       "Unknown"
     );
+  }
+
+  function sortLocale() {
+    return window.StaffCrmI18n && window.StaffCrmI18n.getLang() === "es" ? "es" : "en";
+  }
+
+  /** Sort key: last name first when available, else display name. */
+  function sortNameKey(lead) {
+    var ln = String((lead && lead.last_name) || "").trim();
+    var fn = String((lead && lead.first_name) || "").trim();
+    if (ln || fn) return (ln + "\0" + fn).toLowerCase();
+    return displayName(lead).toLowerCase();
+  }
+
+  function compareNameKeys(a, b) {
+    return sortNameKey(a).localeCompare(sortNameKey(b), sortLocale(), { sensitivity: "base" });
   }
 
   function formatDateAdded(iso) {
@@ -778,6 +805,9 @@
     function visibleRows() {
       var ql = q.trim().toLowerCase();
       return leadsCache.filter(function (L) {
+        if (stageFilter && window.StaffCrmStages) {
+          if (window.StaffCrmStages.normalizeStage(L.pipeline_stage) !== stageFilter) return false;
+        }
         if (!ql) return true;
         var hay = (displayName(L) + " " + (L.email || "") + " " + (L.phone || "")).toLowerCase();
         return hay.indexOf(ql) !== -1;
@@ -789,28 +819,21 @@
 
       function compareRows(a, b) {
         if (sortState.column === "name") {
-          var cmp = displayName(a).toLowerCase().localeCompare(displayName(b).toLowerCase());
-          return sortState.dir === "asc" ? cmp : -cmp;
+          var cmpName = compareNameKeys(a, b);
+          if (cmpName !== 0) return sortState.dir === "asc" ? cmpName : -cmpName;
+          return String(a.id || "").localeCompare(String(b.id || ""));
         }
         var ta = a.created_at ? new Date(a.created_at).getTime() : 0;
         var tb = b.created_at ? new Date(b.created_at).getTime() : 0;
-        if (!ta && !tb) return 0;
-        if (!ta) return 1;
-        if (!tb) return -1;
-        var cmpDate = ta - tb;
-        return sortState.dir === "desc" ? -cmpDate : cmpDate;
-      }
-
-      if (stageFilter && window.StaffCrmStages) {
-        rows.sort(function (a, b) {
-          var am =
-            window.StaffCrmStages.normalizeStage(a.pipeline_stage) === stageFilter ? 0 : 1;
-          var bm =
-            window.StaffCrmStages.normalizeStage(b.pipeline_stage) === stageFilter ? 0 : 1;
-          if (am !== bm) return am - bm;
-          return compareRows(a, b);
-        });
-        return rows;
+        var cmpDate = 0;
+        if (!ta && !tb) cmpDate = 0;
+        else if (!ta) cmpDate = 1;
+        else if (!tb) cmpDate = -1;
+        else cmpDate = ta - tb;
+        if (cmpDate !== 0) return sortState.dir === "desc" ? -cmpDate : cmpDate;
+        var tieName = compareNameKeys(a, b);
+        if (tieName !== 0) return tieName;
+        return String(a.id || "").localeCompare(String(b.id || ""));
       }
 
       rows.sort(compareRows);
@@ -966,7 +989,7 @@
       } else if (status) {
         if (stageFilter && window.StaffCrmStages) {
           status.textContent =
-            t("stage_sorted_first", { stage: window.StaffCrmStages.stageLabel(stageFilter) }) +
+            t("stage_filtered", { stage: window.StaffCrmStages.stageLabel(stageFilter) }) +
             " · " +
             t("showing_clients", { shown: rows.length, total: leadsCache.length });
         } else {
@@ -1456,15 +1479,51 @@
         return;
       }
       if (route.view === "assistant") {
-        renderGlobalPlaceholder(main, "assistant_title", "assistant_blurb");
+        if (window.StaffCrmAssistant) {
+          await window.StaffCrmAssistant.mount(main);
+        } else {
+          main.innerHTML =
+            '<div class="crm-placeholder"><strong>' +
+            esc(t("load_error")) +
+            "</strong><p>Staff Assistant module failed to load.</p></div>";
+        }
+        resetIdleTimer();
         return;
       }
       if (route.view === "oos") {
-        renderGlobalPlaceholder(main, "oos_title", "oos_blurb");
+        if (window.StaffCrmOos) {
+          await window.StaffCrmOos.mount(main, { tab: route.oosTab || "referrals" });
+        } else {
+          main.innerHTML =
+            '<div class="crm-placeholder"><strong>' +
+            esc(t("load_error")) +
+            "</strong><p>OOS module failed to load.</p></div>";
+        }
+        resetIdleTimer();
         return;
       }
       if (route.view === "knowledge") {
-        renderGlobalPlaceholder(main, "knowledge_title", "knowledge_blurb");
+        if (window.StaffCrmKnowledge) {
+          await window.StaffCrmKnowledge.mount(main);
+        } else {
+          main.innerHTML =
+            '<div class="crm-placeholder"><strong>' +
+            esc(t("load_error")) +
+            "</strong><p>Knowledge module failed to load.</p></div>";
+        }
+        resetIdleTimer();
+        return;
+      }
+      if (route.view === "todo") {
+        if (window.StaffCrmTodo) {
+          await window.StaffCrmTodo.mount(main, { owner: route.todoOwner || "" });
+        } else {
+          main.innerHTML =
+            '<div class="crm-placeholder"><strong>' +
+            esc(t("load_error")) +
+            "</strong><p>To-Do module failed to load.</p></div>";
+        }
+        resetIdleTimer();
         return;
       }
       renderDashboard(main);
@@ -1488,6 +1547,7 @@
         else if (nav === "assistant") navigate("#/assistant");
         else if (nav === "oos") navigate("#/oos");
         else if (nav === "knowledge") navigate("#/knowledge");
+        else if (nav === "todo") navigate("#/todo");
       });
     });
     $("crm-signout").addEventListener("click", signOutNow);
@@ -1571,6 +1631,9 @@
     refreshLeads: refreshLeads,
     upsertLeadListItem: upsertLeadListItem,
     processDueReminders: processDueRemindersQuietly,
+    getSupabase: function () {
+      return sb;
+    },
     getLang: function () {
       return window.StaffCrmI18n ? window.StaffCrmI18n.getLang() : "en";
     },

@@ -1,0 +1,243 @@
+/* CRM Knowledge — Staff KB gaps queue */
+
+.crm-kb-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 120px);
+  max-height: calc(100vh - 88px);
+}
+
+.crm-kb-page-title {
+  margin: 0 0 12px;
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
+.crm-kb-wrap {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(260px, 320px) minmax(0, 1fr);
+  gap: 0;
+  border: 1px solid var(--crm-border);
+  border-radius: var(--crm-radius);
+  overflow: hidden;
+  background: var(--crm-card-bg);
+  box-shadow: var(--crm-shadow);
+}
+
+@media (max-width: 900px) {
+  .crm-kb-wrap {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+  }
+}
+
+.crm-kb-list-col {
+  border-right: 1px solid var(--crm-border);
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  background: #f8fafc;
+}
+
+@media (max-width: 900px) {
+  .crm-kb-list-col {
+    border-right: 0;
+    border-bottom: 1px solid var(--crm-border);
+    max-height: 280px;
+  }
+}
+
+.crm-kb-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--crm-border);
+  flex-wrap: wrap;
+}
+
+.crm-kb-head strong {
+  display: block;
+  font-size: 0.95rem;
+}
+
+.crm-kb-count {
+  font-size: 0.8rem;
+  color: var(--crm-muted);
+  margin-top: 2px;
+}
+
+.crm-kb-items {
+  flex: 1;
+  overflow: auto;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.crm-kb-item {
+  width: 100%;
+  text-align: left;
+  border: 1px solid var(--crm-border);
+  border-radius: 10px;
+  background: #fff;
+  padding: 10px 12px;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+  transition: background 0.12s ease, border-color 0.12s ease;
+}
+
+.crm-kb-item:hover {
+  background: rgba(232, 240, 254, 0.65);
+  border-color: #c5d4f0;
+}
+
+.crm-kb-item.active {
+  background: rgba(49, 79, 138, 0.1);
+  border-color: var(--crm-accent);
+  box-shadow: inset 3px 0 0 0 var(--crm-accent);
+}
+
+.crm-kb-item-title {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--crm-muted);
+  margin-bottom: 4px;
+}
+
+.crm-kb-item-preview {
+  font-size: 0.88rem;
+  line-height: 1.35;
+  color: var(--crm-text);
+  margin-bottom: 4px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.crm-kb-item-meta {
+  font-size: 0.75rem;
+  color: var(--crm-muted);
+}
+
+.crm-kb-detail-col {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.crm-kb-detail-body {
+  flex: 1;
+  overflow: auto;
+  padding: 16px 18px 20px;
+}
+
+.crm-kb-empty {
+  padding: 48px 20px;
+  text-align: center;
+  color: var(--crm-muted);
+  font-size: 0.92rem;
+}
+
+.crm-kb-meta-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+@media (min-width: 720px) {
+  .crm-kb-meta-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.crm-kb-meta-card {
+  border: 1px solid var(--crm-border);
+  border-radius: 8px;
+  padding: 8px 10px;
+  font-size: 0.82rem;
+  background: #f8fafc;
+}
+
+.crm-kb-meta-card strong {
+  display: block;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--crm-muted);
+  margin-bottom: 2px;
+}
+
+.crm-kb-field {
+  margin-bottom: 12px;
+}
+
+.crm-kb-field label {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: var(--crm-muted);
+}
+
+.crm-kb-field textarea {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid var(--crm-border);
+  border-radius: 8px;
+  font: inherit;
+  font-size: 0.9rem;
+  resize: vertical;
+  background: #fff;
+}
+
+.crm-kb-field textarea[readonly] {
+  background: #f4f6fa;
+  color: var(--crm-text);
+}
+
+.crm-kb-answer-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+@media (max-width: 720px) {
+  .crm-kb-answer-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.crm-kb-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.crm-kb-status {
+  font-size: 0.82rem;
+  color: var(--crm-muted);
+  margin-top: 10px;
+  min-height: 1.2em;
+}
+
+.crm-kb-actions .crm-btn.is-danger {
+  background: #b42318;
+  color: #fff;
+  border-color: #b42318;
+}
+
+.crm-kb-actions .crm-btn.is-danger:hover:not([disabled]) {
+  background: #912018;
+}

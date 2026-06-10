@@ -21,7 +21,8 @@
     "optimize:images": "node scripts/optimize-images.js",
     "apply:image-opt-html": "node scripts/apply-image-opt-html.js",
     "build:fa-subset": "node scripts/build-fa-subset.js",
-    "apply:seo-performance": "node scripts/apply-seo-performance.js"
+    "apply:seo-performance": "node scripts/apply-seo-performance.js",
+    "generate:favicon": "node scripts/generate-favicon-sun.js"
   },
   "dependencies": {
     "googleapis": "^171.4.0"

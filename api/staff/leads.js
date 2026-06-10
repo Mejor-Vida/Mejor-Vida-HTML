@@ -279,8 +279,12 @@ function buildListItemFromRow(r, canonical) {
     item.contact_id = String(item.id);
     item.contacts_contact_id = String(item.id);
   }
-  item.pipeline_stage = normalizeIcPipelineStage(item.pipeline_stage) || item.pipeline_stage || "";
-  item.display_name = displayName(item);
+  item.pipeline_stage = normalizeIcPipelineStage(item.pipeline_stage) || "new";
+  item.display_name = displayName({
+    display_name: mergePreferCanonical(r.display_name, canonical && canonical.display_name),
+    first_name: item.first_name,
+    last_name: item.last_name,
+  });
   return item;
 }
 
@@ -311,9 +315,36 @@ async function enrichListItemsWithStaffProfiles(cfg, items) {
   return items.map((item) => {
     const key = `${item.id}|${item.source_table}`;
     const canonical = profileMap.get(key);
-    if (!canonical) return item;
     return buildListItemFromRow(item, canonical);
   });
+}
+
+/** Backfill stage from manychat_leads when staff profile has none. */
+async function enrichListItemsWithManychatPipeline(cfg, items) {
+  if (!Array.isArray(items) || !items.length) return items;
+  const needIds = items
+    .filter((item) => item.source_table === "manychat_leads" && !normalizeIcPipelineStage(item.pipeline_stage))
+    .map((item) => item.id);
+  if (!needIds.length) return items;
+  let rows = [];
+  try {
+    rows = await restSelect(
+      cfg,
+      "manychat_leads",
+      `select=id,pipeline_stage&id=in.(${pgInListQuoted(needIds)})`
+    );
+  } catch (e) {
+    console.error("staff/leads enrichListItemsWithManychatPipeline", e);
+    return items;
+  }
+  const byId = new Map((rows || []).map((r) => [String(r.id), r.pipeline_stage]));
+  items.forEach((item) => {
+    if (item.source_table !== "manychat_leads") return;
+    if (normalizeIcPipelineStage(item.pipeline_stage)) return;
+    const raw = byId.get(String(item.id));
+    item.pipeline_stage = normalizeIcPipelineStage(raw) || "new";
+  });
+  return items;
 }
 
 async function enrichListItemsWithAppointments(cfg, items) {
@@ -651,6 +682,7 @@ async function composeMergedLeadDetail(cfg, detail, options) {
   if (merged.profile_ext && typeof merged.profile_ext === "object") {
     merged.profile_ext.citizenship_status = normalizeCitizenshipStatus(merged.profile_ext.citizenship_status) || null;
   }
+  merged.pipeline_stage = normalizeIcPipelineStage(merged.pipeline_stage) || "new";
   merged.display_name = displayName(merged);
   return merged;
 }
@@ -1248,11 +1280,16 @@ module.exports = async function handler(req, res) {
         console.error("staff/leads GET manychat probe", probeErr && probeErr.message);
       }
       const rows = await selectUnifiedLeadsForStaff(cfg);
-      let items = (rows || []).map((r) => buildListItemFromRow(r));
+      let items = rows || [];
       try {
         items = await enrichListItemsWithStaffProfiles(cfg, items);
       } catch (e) {
         console.error("staff/leads GET enrichListItemsWithStaffProfiles", e);
+      }
+      try {
+        items = await enrichListItemsWithManychatPipeline(cfg, items);
+      } catch (e) {
+        console.error("staff/leads GET enrichListItemsWithManychatPipeline", e);
       }
       try {
         await enrichLeadEmailsFromContacts(cfg, items);
@@ -1313,17 +1350,33 @@ module.exports = async function handler(req, res) {
       ]);
       const row = inserted && inserted[0];
       if (!row || !row.id) return json(res, 500, { error: "Failed to create lead" });
-      const item = {
-        id: row.id,
-        first_name: row.first_name || "",
-        last_name: row.last_name || "",
-        display_name: displayName(row),
-        phone: row.phone || "",
-        email: row.email || "",
-        language: row.language || "English",
-        source: row.source || "staff_compose",
-        source_table: "manychat_leads",
-      };
+      const updatedBy = auth.user && auth.user.email ? auth.user.email : null;
+      try {
+        await saveCanonicalLeadProfile(
+          cfg,
+          row.id,
+          "manychat_leads",
+          { pipeline_stage: "new" },
+          updatedBy
+        );
+      } catch (profileErr) {
+        console.error("staff/leads POST save profile stage", profileErr);
+      }
+      const item = buildListItemFromRow(
+        {
+          id: row.id,
+          first_name: row.first_name || "",
+          last_name: row.last_name || "",
+          phone: row.phone || "",
+          email: row.email || "",
+          language: row.language || "English",
+          source: row.source || "staff_compose",
+          source_table: "manychat_leads",
+          created_at: row.created_at || null,
+          updated_at: row.updated_at || null,
+        },
+        { pipeline_stage: "new" }
+      );
       let contactLink = null;
       try {
         contactLink = await linkLeadToContacts(cfg, {
@@ -1336,7 +1389,7 @@ module.exports = async function handler(req, res) {
           language,
           pipeline_stage: "new",
           source: "staff_compose",
-          updatedBy: auth.user && auth.user.email ? auth.user.email : null,
+          updatedBy,
         });
       } catch (linkErr) {
         console.error("staff/leads POST contact-link", linkErr);

@@ -32,6 +32,15 @@ function mapStaffLanguage(raw) {
   return "english";
 }
 
+/** CRM Integrity Connect stage keys — default new clients to `new`. */
+function crmPipelineStage(raw) {
+  const s = String(raw || "").trim().toLowerCase();
+  if (!s || s === "new" || s === "new_lead" || s === "new_contact") return "new";
+  const valid = ["contacted", "engaged", "client", "retained", "loyal", "lost", "enrolled"];
+  if (valid.includes(s)) return s;
+  return "new";
+}
+
 function phonePlaceholderFromEmail(email) {
   const h = crypto.createHash("sha256").update(String(email || "").toLowerCase()).digest("hex");
   const suffix = String(parseInt(h.slice(0, 8), 16) % 10000000).padStart(7, "0");
@@ -51,8 +60,9 @@ async function getContactByEmail(cfg, emailRaw) {
   return Array.isArray(rows) && rows[0] ? rows[0] : null;
 }
 
-async function saveContactIdsOnStaffProfile(cfg, leadId, leadSourceTable, contactId, updatedBy) {
+async function saveContactIdsOnStaffProfile(cfg, leadId, leadSourceTable, contactId, updatedBy, hints) {
   if (!leadId || !leadSourceTable || !contactId) return null;
+  hints = hints || {};
   const rows = await restSelect(
     cfg,
     "staff_lead_profiles",
@@ -67,6 +77,9 @@ async function saveContactIdsOnStaffProfile(cfg, leadId, leadSourceTable, contac
     contacts_contact_id: String(contactId),
     contact_id: String(contactId),
   });
+  if (!cleanText(existingProfile.pipeline_stage)) {
+    nextProfile.pipeline_stage = crmPipelineStage(hints.pipeline_stage);
+  }
   if (!row) {
     const inserted = await restInsert(cfg, "staff_lead_profiles", [
       {
@@ -203,7 +216,8 @@ async function linkLeadToContacts(cfg, opts) {
       opts.leadId,
       opts.leadSourceTable,
       result.contactId,
-      opts.updatedBy || null
+      opts.updatedBy || null,
+      opts
     );
   }
 

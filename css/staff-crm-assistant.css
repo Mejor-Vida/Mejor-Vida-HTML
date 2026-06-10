@@ -1,0 +1,193 @@
+/* CRM Staff Assistant — internal AI chat */
+
+.crm-assistant-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 120px);
+  max-height: calc(100vh - 88px);
+}
+
+.crm-assistant-page-title {
+  margin: 0 0 12px;
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
+.crm-assistant-wrap {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  border: 1px solid var(--crm-border);
+  border-radius: var(--crm-radius);
+  overflow: hidden;
+  background: var(--crm-card-bg);
+  box-shadow: var(--crm-shadow);
+}
+
+.crm-assistant-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--crm-border);
+  background: #f8fafc;
+  flex-wrap: wrap;
+}
+
+.crm-assistant-head strong {
+  display: block;
+  font-size: 1rem;
+}
+
+.crm-assistant-note {
+  font-size: 0.82rem;
+  color: var(--crm-muted);
+  margin-top: 2px;
+}
+
+.crm-assistant-log {
+  overflow: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 280px;
+  background: #fff;
+}
+
+.crm-assistant-msg-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.crm-assistant-msg-row.user {
+  justify-content: flex-end;
+}
+
+.crm-assistant-msg-row.assistant {
+  justify-content: flex-start;
+}
+
+.crm-assistant-msg {
+  max-width: 82%;
+  padding: 10px 14px;
+  border-radius: 12px;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+  font-size: 0.92rem;
+}
+
+.crm-assistant-msg.user {
+  margin-left: auto;
+  background: var(--crm-accent);
+  color: #fff;
+}
+
+.crm-assistant-msg.assistant {
+  background: #f4f7fc;
+  border: 1px solid var(--crm-border);
+  color: var(--crm-text);
+}
+
+.crm-assistant-msg p {
+  margin: 0 0 8px;
+}
+
+.crm-assistant-msg p:last-child {
+  margin-bottom: 0;
+}
+
+.crm-assistant-msg ul,
+.crm-assistant-msg ol {
+  margin: 6px 0 6px 18px;
+}
+
+.crm-assistant-msg table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 6px;
+  font-size: 0.88rem;
+}
+
+.crm-assistant-msg th,
+.crm-assistant-msg td {
+  border: 1px solid var(--crm-border);
+  padding: 4px 6px;
+}
+
+.crm-assistant-msg a {
+  color: var(--crm-accent);
+}
+
+.crm-assistant-source {
+  flex: 0 0 auto;
+  margin-top: 2px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  border: 1px solid var(--crm-border);
+  color: var(--crm-muted);
+  background: #f8fafc;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.crm-assistant-source.rag {
+  border-color: #86efac;
+  color: #166534;
+  background: #ecfdf3;
+}
+
+.crm-assistant-source.general {
+  border-color: #fcd34d;
+  color: #92400e;
+  background: #fffbeb;
+}
+
+.crm-assistant-thinking {
+  color: var(--crm-muted);
+  font-size: 0.9rem;
+  font-style: italic;
+  padding: 4px 2px;
+}
+
+.crm-assistant-compose {
+  border-top: 1px solid var(--crm-border);
+  padding: 12px 14px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  align-items: end;
+  background: #f8fafc;
+}
+
+.crm-assistant-compose textarea {
+  width: 100%;
+  resize: vertical;
+  min-height: 56px;
+  max-height: 180px;
+  padding: 10px 12px;
+  border: 1px solid var(--crm-border);
+  border-radius: 10px;
+  font: inherit;
+  font-size: 0.92rem;
+  background: #fff;
+}
+
+.crm-assistant-compose textarea:focus {
+  outline: 2px solid rgba(49, 79, 138, 0.25);
+  border-color: var(--crm-accent);
+}
+
+.crm-assistant-err {
+  color: #b42318;
+  font-size: 0.82rem;
+  margin-top: 6px;
+  min-height: 1.1em;
+}

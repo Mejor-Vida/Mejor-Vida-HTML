@@ -1,0 +1,347 @@
+/* CRM OOS — out-of-state referrals, partner agents, archive */
+
+.crm-oos-shell {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  min-height: 0;
+}
+
+.crm-oos-page-title {
+  margin: 0 0 12px;
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
+.crm-oos-subtabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  border-bottom: 2px solid var(--crm-border);
+  margin: 0 0 16px;
+}
+
+.crm-oos-subtab {
+  border: 0;
+  background: transparent;
+  padding: 10px 16px;
+  font: inherit;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--crm-muted);
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+}
+
+.crm-oos-subtab:hover {
+  color: var(--crm-accent);
+  background: rgba(232, 240, 254, 0.5);
+}
+
+.crm-oos-subtab.active {
+  color: var(--crm-accent);
+  border-bottom-color: var(--crm-accent);
+}
+
+.crm-oos-panel.hidden {
+  display: none;
+}
+
+.crm-oos-card {
+  background: var(--crm-card-bg);
+  border: 1px solid var(--crm-border);
+  border-radius: var(--crm-radius);
+  box-shadow: var(--crm-shadow);
+  overflow: hidden;
+}
+
+.crm-oos-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--crm-border);
+  flex-wrap: wrap;
+}
+
+.crm-oos-head strong {
+  display: block;
+  font-size: 1rem;
+  margin-bottom: 4px;
+}
+
+.crm-oos-note {
+  font-size: 0.82rem;
+  color: var(--crm-muted);
+  line-height: 1.45;
+  max-width: 52rem;
+}
+
+.crm-oos-body {
+  display: grid;
+  grid-template-columns: minmax(220px, 280px) minmax(0, 1fr);
+  gap: 0;
+  min-height: 420px;
+}
+
+@media (max-width: 900px) {
+  .crm-oos-body {
+    grid-template-columns: 1fr;
+  }
+}
+
+.crm-oos-list-col {
+  border-right: 1px solid var(--crm-border);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 0;
+}
+
+@media (max-width: 900px) {
+  .crm-oos-list-col {
+    border-right: 0;
+    border-bottom: 1px solid var(--crm-border);
+    max-height: 240px;
+  }
+}
+
+.crm-oos-list-col label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--crm-muted);
+}
+
+.crm-oos-list-col input[type="search"] {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid var(--crm-border);
+  border-radius: 8px;
+  font: inherit;
+  font-size: 0.9rem;
+}
+
+.crm-oos-list-hint {
+  font-size: 0.78rem;
+  color: var(--crm-muted);
+  line-height: 1.35;
+  margin: 0;
+}
+
+.crm-oos-list {
+  flex: 1;
+  min-height: 120px;
+  overflow: auto;
+  border: 1px solid var(--crm-border);
+  border-radius: 8px;
+  background: #fafbfd;
+}
+
+.crm-oos-list-row {
+  padding: 10px 12px;
+  cursor: pointer;
+  border-bottom: 1px solid var(--crm-border);
+  transition: background 0.12s ease;
+}
+
+.crm-oos-list-row:last-child {
+  border-bottom: 0;
+}
+
+.crm-oos-list-row:hover {
+  background: rgba(232, 240, 254, 0.65);
+}
+
+.crm-oos-list-row.active {
+  background: rgba(49, 79, 138, 0.12);
+  box-shadow: inset 3px 0 0 0 var(--crm-accent);
+}
+
+.crm-oos-list-name {
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 2px;
+  word-break: break-word;
+}
+
+.crm-oos-list-meta {
+  font-size: 0.78rem;
+  color: var(--crm-muted);
+}
+
+.crm-oos-row-wrap {
+  display: flex;
+  align-items: stretch;
+  border-bottom: 1px solid var(--crm-border);
+}
+
+.crm-oos-row-wrap:last-child {
+  border-bottom: 0;
+}
+
+.crm-oos-row-wrap .crm-oos-list-row {
+  flex: 1;
+  min-width: 0;
+  border-bottom: 0;
+}
+
+.crm-oos-row-delete {
+  width: 40px;
+  flex-shrink: 0;
+  border: 0;
+  border-left: 1px solid var(--crm-border);
+  background: #f4f6fa;
+  cursor: pointer;
+  font-size: 1rem;
+  color: var(--crm-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.crm-oos-row-delete:hover {
+  background: #fdeaea;
+  color: #b42318;
+}
+
+.crm-oos-main-col {
+  padding: 16px 18px 20px;
+  overflow: auto;
+  min-height: 0;
+}
+
+.crm-oos-form.hidden,
+.crm-oos-empty.hidden {
+  display: none;
+}
+
+.crm-oos-empty {
+  padding: 48px 24px;
+  text-align: center;
+  color: var(--crm-muted);
+  font-size: 0.92rem;
+}
+
+.crm-oos-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.crm-oos-section-title {
+  margin: 8px 0 4px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--crm-text);
+}
+
+.crm-oos-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px 14px;
+}
+
+@media (max-width: 720px) {
+  .crm-oos-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .crm-oos-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.crm-oos-field label {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: var(--crm-muted);
+}
+
+.crm-oos-field input,
+.crm-oos-field select,
+.crm-oos-field textarea {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid var(--crm-border);
+  border-radius: 8px;
+  font: inherit;
+  font-size: 0.9rem;
+  background: #fff;
+  color: var(--crm-text);
+}
+
+.crm-oos-field input[readonly],
+.crm-oos-field textarea[readonly] {
+  background: #f4f6fa;
+  color: var(--crm-muted);
+}
+
+.crm-oos-field textarea {
+  resize: vertical;
+  min-height: 72px;
+}
+
+.crm-oos-field--full {
+  grid-column: 1 / -1;
+}
+
+.crm-oos-agent-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.crm-oos-agent-row select {
+  flex: 1;
+  min-width: 200px;
+  padding: 8px 10px;
+  border: 1px solid var(--crm-border);
+  border-radius: 8px;
+  font: inherit;
+}
+
+.crm-oos-lang-toggle {
+  display: inline-flex;
+  border: 1px solid var(--crm-border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.crm-oos-lang-toggle button {
+  border: 0;
+  background: #fff;
+  padding: 8px 14px;
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--crm-muted);
+}
+
+.crm-oos-lang-toggle button.active {
+  background: var(--crm-accent);
+  color: #fff;
+}
+
+.crm-oos-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.crm-oos-foot-status {
+  font-size: 0.82rem;
+  color: var(--crm-muted);
+  min-height: 1.2em;
+}
