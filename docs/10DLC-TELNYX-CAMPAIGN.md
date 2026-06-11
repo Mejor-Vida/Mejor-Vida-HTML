@@ -44,7 +44,8 @@ At low volume (dozens of texts per day, not thousands), MPS limits rarely matter
 ```
 Consumers opt in on our English website at
 https://www.mejorvidainsurance.com/en/gastos-finales-ads-v2/
-(phone/SMS step preview: add ?compliance-preview=phone)
+(phone/SMS step preview:
+https://www.mejorvidainsurance.com/en/gastos-finales-ads-v2/?compliance-preview=phone)
 or https://www.mejorvidainsurance.com/en/quote.html.
 
 PHONE VERIFICATION (2FA): On the phone step, the user enters a mobile number
