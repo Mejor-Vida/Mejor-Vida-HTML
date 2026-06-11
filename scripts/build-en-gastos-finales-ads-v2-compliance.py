@@ -10,10 +10,11 @@ SRC = ROOT / "gastos-finales-ads-v2" / "index.html"
 DST = ROOT / "en" / "gastos-finales-ads-v2" / "index.html"
 
 SMS_EN = (
-    "Yes, I agree to receive SMS text messages from Mejor Vida Insurance LLC about insurance options. "
-    "Frequency: 1–5 messages per week. Msg &amp; data rates may apply. Reply STOP to cancel. "
-    "Consent is not required to get a quote or purchase insurance. "
-    "SMS is delivered via authorized providers including Telnyx. "
+    "Yes, I agree to receive SMS text messages from Mejor Vida Insurance LLC, including personalized "
+    "quote follow-up, appointment scheduling reminders, application status updates, and customer "
+    "service messages. Msg &amp; data rates may apply. Frequency: 1–5 messages per week. "
+    "Reply STOP to cancel. Reply HELP for help. Consent is not required to get a quote or purchase "
+    "insurance. SMS is delivered via authorized providers including Telnyx. "
     '<a href="../privacy-policy.html" target="_blank" rel="noopener noreferrer">Privacy Policy</a> · '
     '<a href="../terms-service.html" target="_blank" rel="noopener noreferrer">Terms of Service</a>.'
 )

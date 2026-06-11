@@ -66,12 +66,14 @@ Terms of Service:
 https://www.mejorvidainsurance.com/en/terms-service.html
 
 Consent language on the form (optional checkbox):
-"Yes, I agree to receive SMS text messages from Mejor Vida Insurance LLC
-about insurance options, including one-time verification codes to confirm my
-phone number. Frequency: 1–5 messages per week (excluding verification codes).
-Msg & data rates may apply. Reply STOP to cancel. Reply HELP for help. Consent
-is not required to get a quote or purchase insurance." Links to Privacy Policy
-and Terms of Service.
+"Yes, I agree to receive SMS text messages from Mejor Vida Insurance LLC,
+including personalized quote follow-up, appointment scheduling reminders,
+application status updates, and customer service messages. Msg & data rates may
+apply. Frequency: 1–5 messages per week. Reply STOP to cancel. Reply HELP for
+help. Consent is not required to get a quote or purchase insurance. SMS is
+delivered via authorized providers including Telnyx. Privacy Policy:
+https://www.mejorvidainsurance.com/en/privacy-policy.html · Terms of Service:
+https://www.mejorvidainsurance.com/en/terms-service.html"
 
 Verification-code consent (Send verification code button):
 "By clicking Send verification code, you agree to receive a one-time SMS with
@@ -172,7 +174,7 @@ Telnyx rejected this campaign because consent and samples did not match the sele
 | Issue | Fix (deployed in repo) |
 |-------|------------------------|
 | **Missing HELP in opt-in consent** | All English opt-in forms now include **Reply HELP for help** |
-| **2FA not covered in consent** | Consent mentions **one-time verification codes**; phone step has **Send verification code** button with separate 2FA consent |
+| **Vague marketing consent** | Optional checkbox lists sub use cases: quote follow-up, appointment reminders, application status, customer service; 2FA has **separate** consent at **Send verification code** |
 | **Missing 2FA sample message** | Add the 2FA sample below when resubmitting in Telnyx |
 
 ### Resubmit in Telnyx (after deploy)
