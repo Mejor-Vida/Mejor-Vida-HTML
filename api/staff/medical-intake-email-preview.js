@@ -1,13 +1,11 @@
 const { requireStaffAuth } = require("../auth-check");
 const { json, readJsonBody } = require("./_inbox-lib");
 const {
+  MEDICAL_INTAKE_PREVIEW_LINK,
   buildMedicalIntakePlainText,
   buildMedicalIntakeSubject,
 } = require("../../lib/medical-intake-email-template");
 const { normalizeFirstName } = require("../../lib/medical-intake-lead-greeting");
-
-const PREVIEW_LINK =
-  "https://www.mejorvidainsurance.com/medical-intake.html?t=[secure link created when you send]";
 
 module.exports = async function handler(req, res) {
   if (req.method !== "POST") {
@@ -32,8 +30,8 @@ module.exports = async function handler(req, res) {
   const bodyText = buildMedicalIntakePlainText({
     language,
     firstName,
-    intakeUrl: PREVIEW_LINK,
+    intakeUrl: MEDICAL_INTAKE_PREVIEW_LINK,
   });
 
-  return json(res, 200, { subject, body: bodyText, previewLink: PREVIEW_LINK });
+  return json(res, 200, { subject, body: bodyText, previewLink: MEDICAL_INTAKE_PREVIEW_LINK });
 };

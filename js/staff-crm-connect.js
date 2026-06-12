@@ -307,7 +307,7 @@
     var notes = $("crm-conn-notes", state.root);
     if (genBtn) genBtn.classList.toggle("hidden", isTemplate);
     if (reply) {
-      reply.readOnly = isTemplate;
+      reply.readOnly = false;
       if (isMedical) reply.placeholder = t("conn_reply_ph_medical");
       else if (isReview) reply.placeholder = t("conn_reply_ph_review");
       else reply.placeholder = t("conn_reply_ph");
@@ -427,7 +427,7 @@
 
   async function onSend(state) {
     var f = readForm(state);
-    if (!f.reply && !isTemplateEmailType(state.emailType)) {
+    if (!f.reply) {
       setStatus(state, t("conn_status_need_draft"));
       return;
     }

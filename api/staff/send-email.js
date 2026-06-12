@@ -5,6 +5,7 @@ const { buildStaffClientReplyHtml } = require("../../lib/staff-reply-email-body"
 const { issueToken } = require("../../lib/medical-intake-token");
 const {
   buildMedicalIntakePlainText,
+  applyMedicalIntakeUrlToDraft,
   buildMedicalIntakeSubject,
   buildMedicalIntakeCtaHtml,
 } = require("../../lib/medical-intake-email-template");
@@ -208,7 +209,9 @@ module.exports = async function handler(req, res) {
         recipientFirstName: fn,
       });
       intakeUrl = issued.url;
-      draftForSend = buildMedicalIntakePlainText({ language, firstName: fn, intakeUrl });
+      draftForSend = replyDraft
+        ? applyMedicalIntakeUrlToDraft(replyDraft, intakeUrl)
+        : buildMedicalIntakePlainText({ language, firstName: fn, intakeUrl });
     }
 
     if (compose && emailType === "review_request") {
@@ -225,11 +228,13 @@ module.exports = async function handler(req, res) {
         }
       }
       reviewLink = reviewUrl();
-      draftForSend = buildReviewRequestPlainText({
-        language,
-        firstName: fn,
-        reviewLink,
-      });
+      draftForSend = replyDraft
+        ? replyDraft
+        : buildReviewRequestPlainText({
+            language,
+            firstName: fn,
+            reviewLink,
+          });
       subjectForSend = buildReviewRequestSubject({ language, firstName: fn });
     }
 
