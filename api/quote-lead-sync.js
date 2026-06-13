@@ -319,6 +319,8 @@ module.exports = async function handler(req, res) {
   const leadSource =
     body.source === "out_of_state_referral"
       ? "out_of_state_referral"
+      : body.source === "nebraska_term_quote_page"
+        ? "nebraska_term_quote_page"
       : body.source === "nebraska_quote_page"
         ? "nebraska_quote_page"
         : body.source === "facebook_landing_gastos_finales"
@@ -340,7 +342,7 @@ module.exports = async function handler(req, res) {
         error: "Use the Nebraska quote flow for NE residents",
       });
     }
-  } else if (leadSource === "nebraska_quote_page") {
+  } else if (leadSource === "nebraska_quote_page" || leadSource === "nebraska_term_quote_page") {
     if (!stateCode || stateCode.length !== 2) {
       stateCode = "NE";
     }
@@ -365,7 +367,7 @@ module.exports = async function handler(req, res) {
   const smsConsentOptIn = body.consent === true || body.consent === "true";
 
   let nebraskaQuote = null;
-  if (leadSource === "nebraska_quote_page") {
+  if (leadSource === "nebraska_quote_page" || leadSource === "nebraska_term_quote_page") {
     const digits = phone.replace(/\D/g, "");
     if (digits.length < 10) {
       return json(res, 400, { ok: false, error: "Valid phone number required" });
@@ -501,7 +503,10 @@ module.exports = async function handler(req, res) {
     request_raw: requestRaw,
     quote_status: quoteStatus,
     quote_generated_at:
-      (leadSource === "fexquotes_page" || leadSource === "nebraska_quote_page") && quoteSummary
+      (leadSource === "fexquotes_page" ||
+        leadSource === "nebraska_quote_page" ||
+        leadSource === "nebraska_term_quote_page") &&
+      quoteSummary
         ? nowIso
         : null,
     crm_sync_needed: true,
@@ -514,8 +519,13 @@ module.exports = async function handler(req, res) {
     insertRow.gender = nebraskaQuote.sex;
     insertRow.tobacco = nebraskaQuote.isSmoker ? "yes" : "no";
     const cov = parseInt(String(body.coverageAmount || body.coverage || 10000), 10);
-    insertRow.coverage =
-      Number.isFinite(cov) && cov >= 2000 && cov <= 50000 ? cov : 10000;
+    if (leadSource === "nebraska_term_quote_page") {
+      insertRow.coverage =
+        Number.isFinite(cov) && cov >= 25000 && cov <= 5000000 ? cov : 250000;
+    } else {
+      insertRow.coverage =
+        Number.isFinite(cov) && cov >= 2000 && cov <= 50000 ? cov : 10000;
+    }
   }
 
   let leadId;

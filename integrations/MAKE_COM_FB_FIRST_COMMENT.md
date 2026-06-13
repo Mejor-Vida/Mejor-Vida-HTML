@@ -4,12 +4,12 @@
 
 | Scenario | Status | Role |
 |----------|--------|------|
-| **Cursor FB Custom Comment** | **Active** | Receives webhook from `facebook-posting/main.py`; posts custom `first_comment` after ~10 min |
+| **Cursor FB Custom Comment** | **Active** | Receives webhook from `facebook-posting/main.py`; posts custom `first_comment` after **5 min** (300s — Make sleep max) |
 | **Facebook Auto-Comment on New Posts** | **Inactive** | Legacy: hardcoded Spanish comment on every new Page post — **leave off** or you get duplicate comments |
 
 Webhook URL (Cursor scenario): `https://hook.us2.make.com/ytukuvzqkvjjz33ief8hi17ruo2df3vi`
 
-After `facebook-posting/main.py` publishes to Facebook, it POSTs JSON so Make waits ~10 minutes, then posts **one** follow-up comment.
+After `facebook-posting/main.py` publishes to Facebook, it POSTs JSON so Make waits **5 minutes**, then posts **one** follow-up comment.
 
 ---
 
@@ -35,7 +35,19 @@ After `facebook-posting/main.py` publishes to Facebook, it POSTs JSON so Make wa
 
 **Symptom:** Facebook Pages – Create a Comment fails with `BundleValidationError`; module mapped to `{{1.id}}` but value is empty.
 
-**Root cause (common):** Webhooks module shows **“No data detected”** — Make never saved the payload structure after the scenario was edited. At runtime bundle `1` is an empty collection, so `{{1.id}}` is null even though the HTTP request included JSON.
+**Root causes (most common first):**
+
+1. **Stale queue after scenario edit** — Make retried an old webhook run with an empty bundle after you changed mappings or restarted the scenario. Clear incomplete executions in Make before turning the scenario back on.
+2. **Webhook structure lost** — Webhooks module shows **“No data detected”**; bundle `1` is empty at runtime even though HTTP included JSON.
+3. **Scenario auto-deactivated** — After 3 errors (`maxErrors: 3`), Make sets the scenario **inactive** (`isActive: false`, `isinvalid: true`). Webhooks still queue but fail until you fix mappings and **Start** again.
+
+**Fix applied 2026-06-08:**
+
+- Facebook **id** → `{{ifempty(1.id; 1.post_id)}}`
+- Facebook **message** → `{{ifempty(1.message; 1.comment)}}`
+- Single **300s** sleep (5 min — maximum Make allows per Sleep module)
+- Bad webhook queue **deleted** (2 broken payloads with missing `post_id`)
+- Scenario **active** (`isActive: true`, `isinvalid: false`, `dlqCount: 0`)
 
 ### Fix (in Make.com)
 
@@ -50,10 +62,10 @@ After `facebook-posting/main.py` publishes to Facebook, it POSTs JSON so Make wa
      ```
    - Make should capture: `id`, `post_id`, `message`, `comment`
    - **Save** the webhook module
-3. **Remap Facebook module (module 6)**
-   - **id** → `{{1.id}}` (or `{{1.post_id}}` if `id` is missing in picker)
-   - **message** → `{{1.message}}` (or `{{1.comment}}`)
-4. **Save scenario** → turn **ON** → run one test with `--send` and confirm history shows **Success** after the sleep.
+3. **Remap Facebook module**
+   - **id** → `{{ifempty(1.id; 1.post_id)}}`
+   - **message** → `{{ifempty(1.message; 1.comment)}}`
+4. **Save scenario** → click **Start** / turn **ON** → run one test with `--send` and confirm history shows **Success** after the sleep.
 
 ### If bundle is still empty
 
@@ -68,12 +80,14 @@ After `facebook-posting/main.py` publishes to Facebook, it POSTs JSON so Make wa
 ```
 [1] Webhooks – Custom webhook
       ↓
-[2] Tools – Sleep 600 seconds (10 min)
+[2] Tools – Sleep 300 seconds (5 min — Make maximum)
       ↓
 [3] Facebook Pages – Create a Comment
-      id      → {{1.id}}
-      message → {{1.message}}
+      id      → {{ifempty(1.id; 1.post_id)}}
+      message → {{ifempty(1.message; 1.comment)}}
 ```
+
+**Scenario ID (Make):** `5319915` — **Cursor FB Custom Comment**
 
 ### Do not
 

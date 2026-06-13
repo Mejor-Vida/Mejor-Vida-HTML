@@ -9,11 +9,34 @@ footer picture:has(#footer-logo) {
 
 #footer-logo {
   display: block;
-  height: 130px !important;
+  height: 110px !important;
   width: auto !important;
   max-width: 100%;
   object-fit: contain;
   filter: brightness(0) invert(1);
-  margin-top: -25px;
-  margin-bottom: -25px;
+  margin: 0;
+}
+
+/* Room for floating Julie assistant + keep license/copyright visible above fold at scroll bottom */
+footer[style*="#1a365d"] {
+  padding-bottom: max(5.5rem, calc(env(safe-area-inset-bottom, 0px) + 4.5rem)) !important;
+}
+
+/* License + copyright row (below quick links / legal) */
+footer[style*="#1a365d"] > .container > .border-top.border-secondary {
+  margin-top: 1rem !important;
+  padding-top: 1rem !important;
+  padding-bottom: 0.35rem;
+  position: relative;
+  z-index: 2;
+}
+
+footer[style*="#1a365d"] > .container > .border-top.border-secondary p {
+  color: rgba(255, 255, 255, 0.92) !important;
+}
+
+footer[style*="#1a365d"] > .container > .border-top.border-secondary a {
+  color: rgba(255, 255, 255, 0.92) !important;
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }

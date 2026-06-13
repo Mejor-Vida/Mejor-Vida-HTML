@@ -51,7 +51,6 @@
 </div>
 <nav class="desktop-nav d-none d-lg-flex align-items-center">
 <a class="nav-link-cm nav-link-stack" href="about-julie.html">About Julie</a>
-<a class="nav-link-cm nav-link-stack" href="index.html#how-it-works">How It Works</a>
 <a class="nav-link-cm nav-link-stack nav-link-questions-wrap" href="index.html#final-expense-answers" title="Got questions about final expense insurance?">
 <i aria-hidden="true" class="fas fa-robot" style="font-size: 0.95em; opacity: 0.88;"></i><span>Got questions?</span>
 </a>
@@ -77,7 +76,6 @@
 </div>
 <div class="mobile-menu" id="mobile-menu">
 <a class="mobile-menu-link" href="about-julie.html">About Julie</a>
-<a class="mobile-menu-link" href="index.html#how-it-works">How It Works</a>
 <a class="mobile-menu-link" href="index.html#final-expense-answers">Got questions?</a>
 <a class="mobile-menu-link" href="blog.html">Blog</a>
 <a class="mobile-menu-link fw-bold" href="final-expense-estimator.html" style="color:#0D47A1;">Final Expense Calculator</a>
@@ -181,7 +179,8 @@
 <div class="mvi-quote-step-card" hidden="" id="mvi-step-contact">
 <p class="mvi-quote-question">Your quote is ready!</p>
 <p class="mvi-quote-question-sub">Enter your information to receive your quote.</p>
-<div class="mx-auto" style="max-width:22rem;">
+<div class="mx-auto mvi-quote-contact-fields">
+<div class="mvi-quote-contact-inputs">
 <label class="form-label small mb-1" for="ql-fullname">Your name</label>
 <input autocomplete="name" class="form-control mb-2" id="ql-fullname" maxlength="200" required="" type="text"/>
 <label class="form-label small mb-1" for="ql-email">Email</label>
@@ -189,9 +188,12 @@
 <label class="form-label small mb-1" for="ql-phone">Phone number</label>
 <input autocomplete="tel" class="form-control mb-2" id="ql-phone" maxlength="40" required="" type="tel"/>
 <p class="mvi-quote-guarantee text-center mb-3">Our guarantee: No junk mail. No spam calls.</p>
-<div class="form-check mb-3">
+</div>
+<div class="form-check mvi-sms-consent-block mb-3">
 <input class="form-check-input" id="ql-sms-consent" type="checkbox"/>
-<label class="form-check-label small text-muted" for="ql-sms-consent">Yes, I agree to receive SMS text messages from Mejor Vida Insurance LLC, including personalized quote follow-up, appointment scheduling reminders, application status updates, and customer service messages. Msg &amp; data rates may apply. Frequency: 1–5 messages per week. Reply STOP to cancel. Reply HELP for help. Consent is not required to get a quote or purchase insurance. SMS is delivered via authorized providers including Telnyx. <a href="privacy-policy.html">Privacy Policy</a> · <a href="terms-service.html">Terms of Service</a>.</label>
+<label class="form-check-label" for="ql-sms-consent">
+<span class="mvi-sms-consent-scroll" tabindex="0">Yes, I agree to receive SMS text messages from Mejor Vida Insurance LLC, including personalized quote follow-up, appointment scheduling reminders, application status updates, and customer service messages. Msg &amp; data rates may apply. Frequency: 1–5 messages per week. Reply STOP to cancel. Reply HELP for help. Consent is not required to get a quote or purchase insurance. SMS is delivered via authorized providers including Telnyx. <a href="privacy-policy.html">Privacy Policy</a> · <a href="terms-service.html">Terms of Service</a>.</span>
+</label>
 </div>
 <button class="mvi-quote-submit-cta" id="mvi-quote-submit" type="submit">
 <span>See my estimate</span>

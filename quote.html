@@ -62,7 +62,6 @@
 
         <nav class="desktop-nav d-none d-lg-flex align-items-center">
           <a href="about-julie.html" class="nav-link-cm nav-link-stack">Sobre Julie</a>
-          <a href="index.html#how-it-works" class="nav-link-cm nav-link-stack">Cómo funciona</a>
           <a href="index.html#final-expense-answers" class="nav-link-cm nav-link-stack nav-link-questions-wrap" title="¿Tienes preguntas sobre gastos finales?">
             <i class="fas fa-robot" style="font-size: 0.95em; opacity: 0.88;" aria-hidden="true"></i><span>¿Tienes preguntas?</span>
           </a>
@@ -90,7 +89,6 @@
 
     <div class="mobile-menu" id="mobile-menu">
       <a href="about-julie.html" class="mobile-menu-link">Sobre Julie</a>
-      <a href="index.html#how-it-works" class="mobile-menu-link">Cómo funciona</a>
       <a href="index.html#final-expense-answers" class="mobile-menu-link">¿Tienes preguntas?</a>
       <a href="blog.html" class="mobile-menu-link">Blog</a>
       <a href="final-expense-estimator.html" class="mobile-menu-link fw-bold" style="color:#0D47A1;">Calculadora de gastos finales</a>
@@ -208,7 +206,8 @@
 
 <p class="mvi-quote-question-sub">Ingresa tu información para recibirla.</p>
 
-<div class="mx-auto" style="max-width:22rem;">
+<div class="mx-auto mvi-quote-contact-fields">
+<div class="mvi-quote-contact-inputs">
 <label class="form-label small mb-1" for="ql-fullname">Su nombre</label>
 
 <input autocomplete="name" class="form-control mb-2" id="ql-fullname" maxlength="200" required="" type="text"/>
@@ -218,12 +217,12 @@
 
 <input autocomplete="tel" class="form-control mb-2" id="ql-phone" maxlength="40" required="" type="tel"/>
 <p class="mvi-quote-guarantee text-center mb-3">Nuestra promesa: sin correo basura. Sin llamadas spam.</p>
+</div>
 
-<div class="form-check mb-3">
+<div class="form-check mvi-sms-consent-block mb-3">
 <input class="form-check-input" id="ql-sms-consent" type="checkbox"/>
-<label class="form-check-label small text-muted" for="ql-sms-consent">
-<span>Sí, acepto recibir mensajes de texto (SMS) de Mejor Vida Insurance LLC, incluidos seguimiento personalizado de cotización, recordatorios de citas, actualizaciones del estado de la solicitud y mensajes de servicio al cliente. Pueden aplicar tarifas de mensajes y datos. Frecuencia: 1–5 mensajes por semana. Responda STOP para cancelar. Responda AYUDA para obtener ayuda. El consentimiento no es obligatorio para obtener una cotización ni para contratar un seguro. Los SMS se entregan a través de proveedores autorizados, incluido Telnyx. <a href="privacy-policy.html">Política de Privacidad</a> · <a href="terms-service.html">Términos de Servicio</a>.</span>
-
+<label class="form-check-label" for="ql-sms-consent">
+<span class="mvi-sms-consent-scroll" tabindex="0">Sí, acepto recibir mensajes de texto (SMS) de Mejor Vida Insurance LLC, incluidos seguimiento personalizado de cotización, recordatorios de citas, actualizaciones del estado de la solicitud y mensajes de servicio al cliente. Pueden aplicar tarifas de mensajes y datos. Frecuencia: 1–5 mensajes por semana. Responda STOP para cancelar. Responda AYUDA para obtener ayuda. El consentimiento no es obligatorio para obtener una cotización ni para contratar un seguro. Los SMS se entregan a través de proveedores autorizados, incluido Telnyx. <a href="privacy-policy.html">Política de Privacidad</a> · <a href="terms-service.html">Términos de Servicio</a>.</span>
 </label>
 </div>
 <button class="mvi-quote-submit-cta" id="mvi-quote-submit" type="submit">
