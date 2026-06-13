@@ -86,6 +86,38 @@ def sync_file(path: Path) -> bool:
     return False
 
 
+FOOTER_LOGO_IMG_RE = re.compile(r'<img\s+[^>]*?id="footer-logo"[^>]*?/?>', re.I)
+
+
+def clean_footer_logo_img(tag: str) -> str:
+    src_m = re.search(r'src="([^"]+)"', tag)
+    if not src_m:
+        return tag
+    src = src_m.group(1)
+    return (
+        f'<img alt="Mejor Vida Insurance" decoding="async" height="533" '
+        f'id="footer-logo" loading="lazy" src="{src}" width="800"/>'
+    )
+
+
+def strip_footer_logo_inline_style(html: str) -> str:
+    return FOOTER_LOGO_IMG_RE.sub(lambda m: clean_footer_logo_img(m.group(0)), html)
+
+
+def sync_en_footer_css(path: Path) -> bool:
+    """English site: add site-footer.css and normalize footer logo img."""
+    text = path.read_text(encoding="utf-8")
+    if 'background:#1a365d; padding: 8px 0 24px 0' not in text:
+        return False
+    prefix = prefix_for(path)
+    updated = ensure_footer_css(text, prefix)
+    updated = strip_footer_logo_inline_style(updated)
+    if updated == text:
+        return False
+    path.write_text(updated, encoding="utf-8")
+    return True
+
+
 def main() -> None:
     changed = []
     for path in sorted(ROOT.rglob("*.html")):
@@ -95,6 +127,11 @@ def main() -> None:
             continue
         if sync_file(path):
             changed.append(path.relative_to(ROOT))
+    en_dir = ROOT / "en"
+    if en_dir.is_dir():
+        for path in sorted(en_dir.rglob("*.html")):
+            if sync_en_footer_css(path):
+                changed.append(path.relative_to(ROOT))
     print(f"Updated {len(changed)} file(s):")
     for p in changed:
         print(f"  - {p}")
