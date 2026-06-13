@@ -22,6 +22,8 @@ SKIP_DIRS = {
     ".git",
     "includes",
     "scripts",
+    "en",
+    "sources",
 }
 SKIP_FILES = {"index.html", "blog/blog-template.html"}
 

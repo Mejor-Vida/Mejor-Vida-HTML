@@ -226,77 +226,59 @@
 <body class="d-flex flex-column min-vh-100 bg-light">
 <!-- HEADER -->
 <header class="sticky-top bg-white shadow-sm border-bottom">
-<div class="container">
-<div class="d-flex align-items-center justify-content-between header-inner">
-<div class="flex-shrink-0 header-logo-wrap">
-<a class="d-block" href="../index.html#home">
-<picture>
-<source id="header-logo-webp" type="image/webp" srcset="../img/opt/logo-spanish2.webp"/>
-<img alt="Mejor Vida Insurance logo" class="header-logo" id="header-logo" src="../img/opt/logo-spanish2.png" width="800" height="533" fetchpriority="high" decoding="async"/>
-</picture>
-</a>
-</div>
-<nav class="desktop-nav d-none d-lg-flex align-items-center">
-<a class="nav-link-cm nav-link-stack" href="../about-julie.html">Sobre Julie</a>
+    <div class="container">
+      <div class="d-flex align-items-center justify-content-between header-inner">
+        <div class="flex-shrink-0 header-logo-wrap">
+          <a href="../index.html#home" class="d-block">
+            <picture>
+              <source id="header-logo-webp" type="image/webp" srcset="../img/opt/logo-spanish2.webp" />
+              <img id="header-logo" src="../img/opt/logo-spanish2.png" alt="Mejor Vida Insurance logo" class="header-logo" width="800" height="533" fetchpriority="high" decoding="async" />
+            </picture>
+          </a>
+        </div>
 
-<a class="nav-link-cm nav-link-stack" href="../index.html#how-it-works">Cómo funciona</a>
+        <nav class="desktop-nav d-none d-lg-flex align-items-center">
+          <a href="../about-julie.html" class="nav-link-cm nav-link-stack">Sobre Julie</a>
+          <a href="../index.html#how-it-works" class="nav-link-cm nav-link-stack">Cómo funciona</a>
+          <a href="../index.html#final-expense-answers" class="nav-link-cm nav-link-stack nav-link-questions-wrap" title="¿Tienes preguntas sobre gastos finales?">
+            <i class="fas fa-robot" style="font-size: 0.95em; opacity: 0.88;" aria-hidden="true"></i><span>¿Tienes preguntas?</span>
+          </a>
+          <a href="../blog.html" class="nav-link-cm">Blog</a>
+          <a href="../final-expense-estimator.html" class="nav-link-cm nav-link-fe-calc-wrap">Calculadora de gastos finales</a>
+          <a href="../contact.html" class="nav-link-cm">Contacto</a>
+          <a href="/schedule-julie.html" class="nav-link-cm nav-link-schedule-wrap">Agendar con Julie</a>
+        </nav>
 
-<a class="nav-link-cm nav-link-stack nav-link-questions-wrap" href="../index.html#final-expense-answers" title="¿Tienes preguntas sobre gastos finales?">
-<i aria-hidden="true" class="fas fa-robot" style="font-size: 0.95em; opacity: 0.88;"></i><span>¿Tienes preguntas?</span>
-</a>
+        <div class="d-flex align-items-center gap-2 header-actions">
+          <a href="/quote.html" class="desktop-cta d-none d-lg-inline-block btn-see-prices">Cotización gratuita</a>
+          <a href="/en/" class="d-none d-lg-inline-block nav-link-cm small text-muted text-decoration-none ms-1" title="View site in English">English</a>
+          <button class="hamburger-btn" id="hamburger-btn" type="button" aria-label="Abrir menú">☰</button>
+        </div>
+      </div>
+    </div>
+    <div class="border-top py-2 d-none d-lg-block header-office-bar" style="background:#f8fbff;">
+      <div class="container d-flex flex-wrap gap-3 align-items-center justify-content-end small">
+        <a href="https://wa.me/14024405438?text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20seguro%20de%20gastos%20finales." target="_blank" rel="noopener" class="header-whatsapp-btn text-decoration-none"><i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp</a>
+        <span><strong>Oficina:</strong> <a href="tel:+14022078568" class="text-decoration-none">402-207-8568</a></span>
+        <span><strong>Línea directa de Julie:</strong> <a href="tel:+14024405438" class="text-decoration-none">402-440-5438</a></span>
+        <span><strong>SMS/Texto:</strong> <a href="tel:+14027355665" class="text-decoration-none">402-735-5665</a></span>
+      </div>
+    </div>
 
-<a class="nav-link-cm" href="../blog.html">Blog</a>
-
-<a class="nav-link-cm nav-link-fe-calc-wrap" href="../final-expense-estimator.html">Calculadora de gastos finales</a>
-
-<a class="nav-link-cm" href="../contact.html">Contacto</a>
-
-<a class="nav-link-cm nav-link-schedule-wrap" href="../schedule-julie.html">Agendar con Julie</a>
-
-</nav>
-<div class="d-flex align-items-center gap-2 header-actions">
-<a class="desktop-cta d-none d-lg-inline-block btn-see-prices" href="quote.html">Cotización gratuita</a>
-
-
-<a class="d-none d-lg-inline-block nav-link-cm small text-muted text-decoration-none ms-1" href="/en/blog/weekly-insurance-update-2026-05-31.html" title="View this page in English">English</a><button aria-label="Open menu" class="hamburger-btn" id="hamburger-btn" type="button">☰</button>
-</div>
-</div>
-</div>
-<div class="border-top py-2 d-none d-lg-block header-office-bar" style="background:#f8fbff;">
-<div class="container d-flex flex-wrap gap-3 align-items-center justify-content-end small">
-<a class="header-whatsapp-btn text-decoration-none" href="https://wa.me/14024405438?text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20seguro%20de%20gastos%20finales." rel="noopener" target="_blank"><i aria-hidden="true" class="fab fa-whatsapp"></i> WhatsApp</a>
-
-<span><strong>Oficina:</strong> <a class="text-decoration-none" href="tel:+14024405438">402-440-5438</a></span>
-
-<span><strong>SMS/Texto:</strong> <a class="text-decoration-none" href="tel:+14027355665">402-735-5665</a></span>
-
-</div>
-</div>
-<div class="mobile-menu" id="mobile-menu">
-<a class="mobile-menu-link" href="../about-julie.html">Sobre Julie</a>
-
-<a class="mobile-menu-link" href="../index.html#how-it-works">Cómo funciona</a>
-
-<a class="mobile-menu-link" href="../index.html#final-expense-answers">¿Tienes preguntas?</a>
-
-<a class="mobile-menu-link" href="../blog.html">Blog</a>
-
-<a class="mobile-menu-link fw-bold" href="../final-expense-estimator.html" style="color:#0D47A1;">Calculadora de gastos finales</a>
-
-<a class="mobile-menu-link" href="../contact.html">Contacto</a>
-
-<a class="mobile-menu-link fw-bold" href="https://wa.me/14024405438?text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20seguro%20de%20gastos%20finales." rel="noopener" style="color:#1D9E53;" target="_blank"><i class="fab fa-whatsapp me-2"></i>WhatsApp (recomendado)</a>
-
-<a class="mobile-menu-link fw-bold" href="quote.html" style="color:#0D47A1;"><i class="fas fa-file-invoice-dollar me-2"></i>Cotización gratis en línea</a>
-
-<a class="mobile-menu-link fw-bold" href="../schedule-julie.html" style="color:#0D47A1;"><i class="fas fa-calendar-alt me-2"></i>Agendar con Julie</a>
-
-<p class="mobile-menu-link small text-muted mb-0 px-2">¿Cliente actual? Línea de oficina: <a class="text-decoration-none" href="tel:+14024405438">402-440-5438</a></p>
-
-<p class="mobile-menu-link small text-muted mb-0 px-2">SMS/Texto: <a class="text-decoration-none" href="tel:+14027355665">402-735-5665</a></p>
-
-</div>
-</header>
+    <div class="mobile-menu" id="mobile-menu">
+      <a href="../about-julie.html" class="mobile-menu-link">Sobre Julie</a>
+      <a href="../index.html#how-it-works" class="mobile-menu-link">Cómo funciona</a>
+      <a href="../index.html#final-expense-answers" class="mobile-menu-link">¿Tienes preguntas?</a>
+      <a href="../blog.html" class="mobile-menu-link">Blog</a>
+      <a href="../final-expense-estimator.html" class="mobile-menu-link fw-bold" style="color:#0D47A1;">Calculadora de gastos finales</a>
+      <a href="../contact.html" class="mobile-menu-link">Contacto</a>
+      <a href="https://wa.me/14024405438?text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20seguro%20de%20gastos%20finales." target="_blank" rel="noopener" class="mobile-menu-link fw-bold" style="color:#1D9E53;"><i class="fab fa-whatsapp me-2"></i>WhatsApp (recomendado)</a>
+      <a href="/quote.html" class="mobile-menu-link fw-bold" style="color:#0D47A1;"><i class="fas fa-file-invoice-dollar me-2"></i>Cotización gratis en línea</a>
+      <a href="/schedule-julie.html" class="mobile-menu-link fw-bold" style="color:#0D47A1;"><i class="fas fa-calendar-alt me-2"></i>Agendar con Julie</a>
+      <p class="mobile-menu-link small text-muted mb-0 px-2">¿Cliente actual? Línea de oficina: <a href="tel:+14022078568" class="text-decoration-none">402-207-8568</a></p>
+      <p class="mobile-menu-link small text-muted mb-0 px-2">SMS/Texto: <a href="tel:+14027355665" class="text-decoration-none">402-735-5665</a></p>
+    </div>
+  </header>
 <!-- Blog Hero -->
 <div class="blog-hero mv-news hero">
 <div class="container">
@@ -453,8 +435,8 @@
 <span class="text-nowrap"><i class="fas fa-map-marker-alt me-2 opacity-75"></i>1201 O St Ste 309 Unit #597 Lincoln, NE 68508</span>
 </div>
 <div class="d-flex flex-wrap align-items-center justify-content-center gap-3 small mt-1">
-<span class="text-nowrap"><i class="fas fa-phone me-2 opacity-75"></i>Oficina: <a class="text-white text-opacity-90 text-decoration-none" href="tel:+14024405438" title="Office line">402-440-5438</a></span>
-<span class="text-nowrap"><i class="fas fa-phone-volume me-2 opacity-75"></i>Llamadas de Julie: <a class="text-white text-opacity-90 text-decoration-none" href="tel:+14025881125" title="Julie callback line">402-588-1125</a></span>
+<span class="text-nowrap"><i class="fas fa-phone me-2 opacity-75"></i>Oficina: <a class="text-white text-opacity-90 text-decoration-none" href="tel:+14022078568" title="Office line">402-207-8568</a></span>
+<span class="text-nowrap"><i class="fas fa-phone-volume me-2 opacity-75"></i>Línea directa de Julie: <a class="text-white text-opacity-90 text-decoration-none" href="tel:+14024405438" title="Julie direct line">402-440-5438</a></span>
 <span class="text-nowrap"><i class="fas fa-comment-dots me-2 opacity-75"></i>SMS/Texto: <a class="text-white text-opacity-90 text-decoration-none" href="tel:+14027355665">402-735-5665</a></span>
 </div>
 </div>
