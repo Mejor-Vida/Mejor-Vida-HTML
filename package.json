@@ -25,7 +25,9 @@
     "generate:favicon": "node scripts/generate-favicon-sun.js",
     "harvest:winflex:setup": "npm install && npx playwright install chromium",
     "harvest:winflex:install": "npx playwright install chromium",
-    "harvest:winflex": "node scripts/winflex-harvest.mjs"
+    "harvest:winflex": "node scripts/winflex-harvest.mjs",
+    "harvest:winflex:auto": "node scripts/winflex-auto-extract.mjs",
+    "term:import-spots": "node scripts/term-spot-import.mjs"
   },
   "dependencies": {
     "googleapis": "^171.4.0"

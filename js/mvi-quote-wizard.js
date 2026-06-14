@@ -167,6 +167,18 @@
         state.coverage = 10000;
       }
     }
+    if (isContact) {
+      var allDataStepsDone = SUMMARY_KEYS.every(function (key) {
+        return answered[key];
+      });
+      if (allDataStepsDone) {
+        if (window.MviGa4Funnel && window.MviGa4Funnel.trackFormStepsCompleted) {
+          window.MviGa4Funnel.trackFormStepsCompleted("nebraska_quote_wizard");
+        } else if (typeof gtag === "function") {
+          gtag("event", "form_steps_completed", { form_source: "nebraska_quote_wizard" });
+        }
+      }
+    }
     updateSummaryBar();
     var status = document.getElementById("mvi-quote-status");
     if (status) status.textContent = "";
@@ -256,7 +268,17 @@
       return;
     }
     answered[STEPS[stepIndex]] = true;
-    if (stepIndex < STEPS.length - 1) showStep(stepIndex + 1);
+    if (stepIndex < STEPS.length - 1) {
+      var nextIndex = stepIndex + 1;
+      if (STEPS[nextIndex] === "contact") {
+        if (window.MviGa4Funnel && window.MviGa4Funnel.trackFormStepsCompleted) {
+          window.MviGa4Funnel.trackFormStepsCompleted("nebraska_quote_wizard");
+        } else if (typeof gtag === "function") {
+          gtag("event", "form_steps_completed", { form_source: "nebraska_quote_wizard" });
+        }
+      }
+      showStep(nextIndex);
+    }
   }
 
   function goPrev() {
@@ -737,6 +759,22 @@
           })
         );
       } catch (storageErr) {}
+
+      if (window.MviGa4Funnel && window.MviGa4Funnel.trackQuoteSubmitted) {
+        window.MviGa4Funnel.trackQuoteSubmitted({
+          form_source: "nebraska_quote_wizard",
+          state: state.state,
+          coverage: coverage,
+          lead_saved: leadSaved,
+        });
+      } else if (typeof gtag === "function") {
+        gtag("event", "quote_submitted", {
+          form_source: "nebraska_quote_wizard",
+          state: state.state,
+          coverage: coverage,
+          lead_saved: leadSaved,
+        });
+      }
 
       if (status) {
         status.innerHTML =

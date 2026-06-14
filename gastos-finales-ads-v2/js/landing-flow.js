@@ -173,6 +173,22 @@
     });
   }
 
+  function trackFormStepsCompletedForLanding() {
+    trackGaEvent("form_steps_completed", {
+      form_source: "landing_quote",
+      state: selections.state,
+      sex: selections.sex,
+      tobacco: selections.tobacco,
+    });
+  }
+
+  function trackQuoteCtaClicked(location) {
+    trackGaEvent("quote_cta_clicked", {
+      link_location: location || "landing_objective",
+      page_path: window.location.pathname,
+    });
+  }
+
   var MULTI_FIELD_ORDER = {};
 
   function parseMultiValue(raw) {
@@ -1148,6 +1164,9 @@
         return;
       }
       trackStepCompleted(currentStep, getStepAnswer(currentStep));
+      if (activeFlow === "quote") {
+        trackFormStepsCompletedForLanding();
+      }
       submitLandingQuote();
     });
   }
@@ -1470,6 +1489,7 @@
       var quoteCard = ev.target.closest('[data-lf-objective="quote"]');
       if (quoteCard) {
         ev.preventDefault();
+        trackQuoteCtaClicked("landing_objective");
         trackGaEvent("objective_selected", { objective: "quote" });
         trackStepCompleted(1, "quote");
         activeFlow = "quote";

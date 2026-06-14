@@ -49,21 +49,45 @@ Simplified products (MOO TLE, AmAm Easy Term) may only have `standard_nt` / `sta
 
 ### WinFlex → CSV (Transamerica)
 
-Run **one command per line** (no inline `#` comments on the same line).
+**Recommended: spot import** (fast, no Playwright). Run quotes in WinFlex **Express Illustrations** yourself, then paste monthly premiums:
+
+1. **Express Illustrations** → **Term** → Insured / Quote / Company (Transamerica → Trendsetter Super) → Calculate  
+2. Quote specs: **NE**, **monthly**, **$250,000**, **20-year**, issue age **45**  
+3. Run twice: **Preferred Plus NT** (low) and **Standard NT** (high)
+
+**Option A — edit template, import batch**
 
 ```bash
-cd "/Users/mejorvidainsurance/Desktop/mejor-vida-html /Mejor-Vida-HTML"
-npm run harvest:winflex:setup
-npm run harvest:winflex -- run --pilot
-npm run harvest:winflex -- merge
+# Edit monthly_premium column in:
+# integrations/knowledge/Term_Life_Knowledge/winflex-spot-template.csv
+npm run term:import-spots
 node scripts/build-term-premiums-migration.js
+python3 integrations/supabase/apply_migrations.py
 ```
 
+**Option B — one CLI line per quote**
+
+```bash
+node scripts/term-spot-import.mjs --age 45 --sex male --term 20 --face 250000 --health preferred_plus_nt --monthly PASTE_HERE
+node scripts/term-spot-import.mjs --age 45 --sex male --term 20 --face 250000 --health standard_nt --monthly PASTE_HERE
+node scripts/build-term-premiums-migration.js
+python3 integrations/supabase/apply_migrations.py
+```
+
+Replace `PASTE_HERE` with the **monthly** premium from WinFlex (not annual). If only annual is shown: `monthly ≈ annual × 0.085`.
+
+**Optional — interactive harvest** (browser open, you run quotes, script reads results page):
+
+```bash
+npm run harvest:winflex:setup
+npm run harvest:winflex -- login
+npm run harvest:winflex -- snap   # on each results page, press Enter
+npm run harvest:winflex -- merge
+```
+
+Automated Playwright extract (`harvest:winflex:auto`) is experimental — Express UI selectors change often; prefer spot import.
+
 WinFlex per quote: **Transamerica → Trendsetter Super** (match term length), Nebraska, monthly, **Preferred Plus NT** (low) or **Standard NT** (high).
-
-Captures: `winflex-captures.jsonl` · Profile: `~/.mvi-winflex-harvest`
-
-MOO later: `npm run harvest:winflex -- run --pilot --carrier moo`
 
 ### AmAm Form 3350 → CSV
 

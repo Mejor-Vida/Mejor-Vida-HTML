@@ -1,0 +1,4 @@
+carrier,product,state,age,sex,smoker,term_years,face_band_min,face_band_max,health_class,monthly_premium,face_amount,source_file,source_date
+# Fast minimum — fill monthly_premium from Express Illustrations, then: npm run term:import-spots
+transamerica,trendsetter_super,NE,45,male,0,20,250000,499999,preferred_plus_nt,,250000,WinFlex_express,
+transamerica,trendsetter_super,NE,45,male,0,20,250000,499999,standard_nt,,250000,WinFlex_express,

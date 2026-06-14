@@ -25,7 +25,7 @@ SKIP_DIRS = {
     "en",
     "sources",
 }
-SKIP_FILES = {"index.html", "blog/blog-template.html"}
+SKIP_FILES = {"blog/blog-template.html"}
 
 
 def prefix_for(path: Path) -> str:

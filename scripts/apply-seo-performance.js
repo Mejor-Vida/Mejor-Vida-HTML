@@ -84,6 +84,34 @@ function addGa4(html) {
   return html;
 }
 
+function addGa4FunnelScript(html, filePath) {
+  if (!html.includes(GA_ID)) return html;
+  if (html.includes("mvi-ga4-funnel.js")) return html;
+  const prefix = relPrefix(filePath);
+  const deferTag = `<script defer src="${prefix}js/mvi-ga4-funnel.js"></script>`;
+  const syncTag = `<script src="${prefix}js/mvi-ga4-funnel.js"></script>`;
+
+  if (html.includes("mvi-quote-wizard.js")) {
+    return html.replace(
+      /(<script[^>]+src="[^"]*mvi-quote-wizard\.js[^"]*"[^>]*>)/i,
+      `${syncTag}\n$1`
+    );
+  }
+
+  const deferScriptMarkers = [
+    `<script defer src="${prefix}script.js"`,
+    `<script defer="" src="${prefix}script.js"`,
+    `<script defer src="script.js"`,
+    `<script defer="" src="script.js"`,
+  ];
+  for (const marker of deferScriptMarkers) {
+    if (html.includes(marker)) {
+      return html.replace(marker, `${deferTag}\n${marker}`);
+    }
+  }
+  return html;
+}
+
 function replaceFa(html, filePath) {
   const href = faHrefFor(filePath);
   if (!FA_CDN.test(html) && !html.includes("css/fontawesome-mvi.min.css")) return html;
@@ -150,6 +178,7 @@ function processFile(filePath) {
   const before = html;
 
   html = addGa4(html);
+  html = addGa4FunnelScript(html, filePath);
   html = replaceFa(html, filePath);
   html = addDefer(html);
   html = patchContactEs(html);
