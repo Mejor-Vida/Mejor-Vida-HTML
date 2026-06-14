@@ -996,6 +996,14 @@
 </footer>
 <!-- Bootstrap JS (local) -->
 <script defer src="bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/js/mvi-ga4-funnel.js"></script>
+<script>
+window.addEventListener('DOMContentLoaded', function () {
+  if (window.MviGa4Funnel && MviGa4Funnel.trackQuoteSubmitted) {
+    MviGa4Funnel.trackQuoteSubmitted({ page_path: '/quote-results.html' });
+  }
+});
+</script>
 <script src="js/mvi-hubspot-meeting-sync.js?v=20260607b"></script>
 <!-- Scripts -->
 <script>
