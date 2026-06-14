@@ -22,6 +22,7 @@
     "apply:image-opt-html": "node scripts/apply-image-opt-html.js",
     "build:fa-subset": "node scripts/build-fa-subset.js",
     "apply:seo-performance": "node scripts/apply-seo-performance.js",
+    "generate:sitemap": "node scripts/generate-sitemap.js",
     "generate:favicon": "node scripts/generate-favicon-sun.js",
     "harvest:winflex:setup": "npm install && npx playwright install chromium",
     "harvest:winflex:install": "npx playwright install chromium",

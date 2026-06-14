@@ -1,4 +1,11 @@
 User-agent: *
-Disallow:
+Disallow: /staff/
+Disallow: /sources/
+Disallow: /preview/
+Disallow: /medical-intake.html
+Disallow: /medical-intake-preview.html
+Disallow: /en/
+Disallow: /gastos-finales-ads/
+Disallow: /gastos-finales-ads-v2/
 
 Sitemap: https://www.mejorvidainsurance.com/sitemap.xml

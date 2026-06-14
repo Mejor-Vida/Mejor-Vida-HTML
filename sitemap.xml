@@ -3,312 +3,164 @@
 
   <url>
     <loc>https://www.mejorvidainsurance.com/</loc>
-    <lastmod>2025-12-17T01:44:27+00:00</lastmod>
+    <lastmod>2026-06-14T03:02:21+00:00</lastmod>
     <priority>1.00</priority>
   </url>
 
   <url>
     <loc>https://www.mejorvidainsurance.com/about-julie.html</loc>
-    <lastmod>2026-05-12T12:00:00+00:00</lastmod>
+    <lastmod>2026-06-14T03:02:27+00:00</lastmod>
     <priority>0.85</priority>
   </url>
 
-  <!-- Blog page (weekly newsletter content) -->
   <url>
     <loc>https://www.mejorvidainsurance.com/blog.html</loc>
-    <lastmod>2026-06-07T12:00:00+00:00</lastmod>
-    <priority>0.80</priority>
-  </url>
-
-  <!-- Blog post: Weekly Life and Final Expense Insurance Update - June 7, 2026 -->
-  <url>
-    <loc>https://www.mejorvidainsurance.com/blog/weekly-insurance-update-2026-06-07.html</loc>
-    <lastmod>2026-06-07T12:00:00+00:00</lastmod>
-    <priority>0.70</priority>
-  </url>
-
-  <url>
-    <loc>https://www.mejorvidainsurance.com/en/blog/weekly-insurance-update-2026-06-07.html</loc>
-    <lastmod>2026-06-07T12:00:00+00:00</lastmod>
-    <priority>0.70</priority>
-  </url>
-
-  <!-- Blog post: Weekly Life and Final Expense Insurance Update - May 31, 2026 -->
-  <url>
-    <loc>https://www.mejorvidainsurance.com/blog/weekly-insurance-update-2026-05-31.html</loc>
-    <lastmod>2026-05-31T12:00:00+00:00</lastmod>
-    <priority>0.70</priority>
-  </url>
-
-  <url>
-    <loc>https://www.mejorvidainsurance.com/en/blog/weekly-insurance-update-2026-05-31.html</loc>
-    <lastmod>2026-05-31T12:00:00+00:00</lastmod>
-    <priority>0.70</priority>
-  </url>
-
-  <!-- Blog post: Weekly Life and Final Expense Insurance Update - May 24, 2026 -->
-  <url>
-    <loc>https://www.mejorvidainsurance.com/blog/weekly-insurance-update-2026-05-24.html</loc>
-    <lastmod>2026-05-24T12:00:00+00:00</lastmod>
-    <priority>0.70</priority>
-  </url>
-
-  <url>
-    <loc>https://www.mejorvidainsurance.com/en/blog/weekly-insurance-update-2026-05-24.html</loc>
-    <lastmod>2026-05-24T12:00:00+00:00</lastmod>
-    <priority>0.70</priority>
-  </url>
-
-  <!-- Blog post: Weekly Life and Final Expense Insurance Update - May 17, 2026 -->
-  <url>
-    <loc>https://www.mejorvidainsurance.com/blog/weekly-insurance-update-2026-05-17.html</loc>
-    <lastmod>2026-05-17T12:00:00+00:00</lastmod>
-    <priority>0.70</priority>
-  </url>
-
-  <url>
-    <loc>https://www.mejorvidainsurance.com/en/blog/weekly-insurance-update-2026-05-17.html</loc>
-    <lastmod>2026-05-17T12:00:00+00:00</lastmod>
-    <priority>0.70</priority>
-  </url>
-
-  <!-- Blog post: Weekly Life and Final Expense Insurance Update - May 10, 2026 -->
-  <url>
-    <loc>https://www.mejorvidainsurance.com/blog/weekly-insurance-update-2026-05-10.html</loc>
-    <lastmod>2026-05-10T12:00:00+00:00</lastmod>
-    <priority>0.70</priority>
-  </url>
-
-  <!-- Blog post: Weekly Life and Final Expense Insurance Update - May 3, 2026 -->
-  <url>
-    <loc>https://www.mejorvidainsurance.com/blog/weekly-insurance-update-2026-05-03.html</loc>
-    <lastmod>2026-05-03T12:00:00+00:00</lastmod>
-    <priority>0.70</priority>
-  </url>
-
-  <!-- Blog post: Weekly Life and Final Expense Insurance Update - April 26, 2026 -->
-  <url>
-    <loc>https://www.mejorvidainsurance.com/blog/weekly-insurance-update-2026-04-26.html</loc>
-    <lastmod>2026-04-26T12:00:00+00:00</lastmod>
-    <priority>0.70</priority>
-  </url>
-
-  <!-- Blog post: Weekly Life and Final Expense Insurance Update - April 19, 2026 -->
-  <url>
-    <loc>https://www.mejorvidainsurance.com/blog/weekly-insurance-update-2026-04-19.html</loc>
-    <lastmod>2026-04-19T12:00:00+00:00</lastmod>
-    <priority>0.70</priority>
-  </url>
-
-  <!-- Blog post: Weekly Life and Final Expense Insurance Update - April 12, 2026 -->
-  <url>
-    <loc>https://www.mejorvidainsurance.com/blog/weekly-insurance-update-2026-04-12.html</loc>
-    <lastmod>2026-04-12T12:00:00+00:00</lastmod>
-    <priority>0.70</priority>
-  </url>
-
-  <!-- Blog post: Weekly Life and Final Expense Insurance Update - March 29, 2026 -->
-  <url>
-    <loc>https://www.mejorvidainsurance.com/blog/weekly-insurance-update-2026-03-29.html</loc>
-    <lastmod>2026-04-06T12:00:00+00:00</lastmod>
-    <priority>0.70</priority>
-  </url>
-
-  <!-- Blog post: Weekly Life and Final Expense Insurance Update - March 22, 2026 -->
-  <url>
-    <loc>https://www.mejorvidainsurance.com/blog/weekly-insurance-update-2026-03-22.html</loc>
-    <lastmod>2026-03-22T00:00:00+00:00</lastmod>
-    <priority>0.70</priority>
-  </url>
-
-  <!-- Blog post: Weekly Life and Final Expense Insurance Update - March 15, 2026 -->
-  <url>
-    <loc>https://www.mejorvidainsurance.com/blog/weekly-insurance-update-2026-03-15.html</loc>
-    <lastmod>2026-03-15T00:00:00+00:00</lastmod>
-    <priority>0.70</priority>
-  </url>
-
-  <!-- Blog post: Weekly Insurance News Digest - March 8, 2026 -->
-  <url>
-    <loc>https://www.mejorvidainsurance.com/blog/weekly-insurance-update-2026-03-08.html</loc>
-    <lastmod>2026-03-08T00:00:00+00:00</lastmod>
-    <priority>0.70</priority>
-  </url>
-
-  <!-- Blog post: Weekly Insurance News Digest - March 1, 2026 -->
-  <url>
-    <loc>https://www.mejorvidainsurance.com/blog/weekly-insurance-update-2026-03-01.html</loc>
-    <lastmod>2026-03-01T00:00:00+00:00</lastmod>
-    <priority>0.70</priority>
-  </url>
-
-  <!-- Blog post: Weekly Insurance News Digest - February 22, 2026 -->
-  <url>
-    <loc>https://www.mejorvidainsurance.com/blog/weekly-insurance-update-2026-02-22.html</loc>
-    <lastmod>2026-02-22T00:00:00+00:00</lastmod>
-    <priority>0.70</priority>
-  </url>
-
-  <!-- Blog post: Weekly Insurance Industry Update - February 16, 2026 -->
-  <url>
-    <loc>https://www.mejorvidainsurance.com/blog/weekly-insurance-update-2026-02-16.html</loc>
-    <lastmod>2026-02-16T00:00:00+00:00</lastmod>
-    <priority>0.70</priority>
-  </url>
-
-  <!-- Blog post: Weekly Insurance Industry Update - February 8, 2026 -->
-  <url>
-    <loc>https://www.mejorvidainsurance.com/blog/weekly-insurance-update-2026-02-08.html</loc>
-    <lastmod>2026-02-08T00:00:00+00:00</lastmod>
-    <priority>0.70</priority>
-  </url>
-
-  <!-- Blog post: Weekly Insurance Industry Update - February 1, 2026 -->
-  <url>
-    <loc>https://www.mejorvidainsurance.com/blog/weekly-insurance-update-2026-02-01.html</loc>
-    <lastmod>2026-02-01T00:00:00+00:00</lastmod>
-    <priority>0.70</priority>
-  </url>
-
-  <url>
-    <loc>https://www.mejorvidainsurance.com/quote.html</loc>
-    <lastmod>2026-01-22T00:00:00+00:00</lastmod>
+    <lastmod>2026-06-14T03:02:27+00:00</lastmod>
     <priority>0.80</priority>
   </url>
 
   <url>
     <loc>https://www.mejorvidainsurance.com/contact.html</loc>
-    <lastmod>2026-05-19T12:00:00+00:00</lastmod>
+    <lastmod>2026-06-14T03:02:27+00:00</lastmod>
     <priority>0.75</priority>
   </url>
 
   <url>
     <loc>https://www.mejorvidainsurance.com/final-expense-estimator.html</loc>
-    <lastmod>2026-05-19T12:00:00+00:00</lastmod>
+    <lastmod>2026-06-13T04:10:32+00:00</lastmod>
     <priority>0.80</priority>
   </url>
 
   <url>
-    <loc>https://www.mejorvidainsurance.com/landing-gastos-finales.html</loc>
-    <lastmod>2026-05-19T12:00:00+00:00</lastmod>
+    <loc>https://www.mejorvidainsurance.com/schedule-julie.html</loc>
+    <lastmod>2026-06-13T04:10:32+00:00</lastmod>
     <priority>0.75</priority>
-  </url>
-
-  <url>
-    <loc>https://www.mejorvidainsurance.com/privacy-policy.html</loc>
-    <lastmod>2026-05-19T12:00:00+00:00</lastmod>
-    <priority>0.50</priority>
-  </url>
-
-  <url>
-    <loc>https://www.mejorvidainsurance.com/terms-service.html</loc>
-    <lastmod>2026-05-19T12:00:00+00:00</lastmod>
-    <priority>0.50</priority>
-  </url>
-
-  <url>
-    <loc>https://www.mejorvidainsurance.com/sms-optin.html</loc>
-    <lastmod>2026-05-19T12:00:00+00:00</lastmod>
-    <priority>0.50</priority>
-  </url>
-
-  <!-- English site (/en/) -->
-  <url>
-    <loc>https://www.mejorvidainsurance.com/en/</loc>
-    <lastmod>2026-05-19T12:00:00+00:00</lastmod>
-    <priority>0.95</priority>
-  </url>
-
-  <url>
-    <loc>https://www.mejorvidainsurance.com/en/quote.html</loc>
-    <lastmod>2026-05-19T12:00:00+00:00</lastmod>
-    <priority>0.80</priority>
-  </url>
-
-  <url>
-    <loc>https://www.mejorvidainsurance.com/en/about-julie.html</loc>
-    <lastmod>2026-05-19T12:00:00+00:00</lastmod>
-    <priority>0.85</priority>
-  </url>
-
-  <url>
-    <loc>https://www.mejorvidainsurance.com/en/contact.html</loc>
-    <lastmod>2026-05-19T12:00:00+00:00</lastmod>
-    <priority>0.75</priority>
-  </url>
-
-  <url>
-    <loc>https://www.mejorvidainsurance.com/en/blog.html</loc>
-    <lastmod>2026-05-19T12:00:00+00:00</lastmod>
-    <priority>0.80</priority>
-  </url>
-
-  <url>
-    <loc>https://www.mejorvidainsurance.com/en/final-expense-estimator.html</loc>
-    <lastmod>2026-05-19T12:00:00+00:00</lastmod>
-    <priority>0.80</priority>
-  </url>
-
-  <url>
-    <loc>https://www.mejorvidainsurance.com/en/landing-final-expense.html</loc>
-    <lastmod>2026-05-19T12:00:00+00:00</lastmod>
-    <priority>0.75</priority>
-  </url>
-
-  <url>
-    <loc>https://www.mejorvidainsurance.com/en/privacy-policy.html</loc>
-    <lastmod>2026-05-19T12:00:00+00:00</lastmod>
-    <priority>0.50</priority>
-  </url>
-
-  <url>
-    <loc>https://www.mejorvidainsurance.com/en/terms-service.html</loc>
-    <lastmod>2026-05-19T12:00:00+00:00</lastmod>
-    <priority>0.50</priority>
-  </url>
-
-  <url>
-    <loc>https://www.mejorvidainsurance.com/en/sms-optin.html</loc>
-    <lastmod>2026-05-19T12:00:00+00:00</lastmod>
-    <priority>0.50</priority>
   </url>
 
   <url>
     <loc>https://www.mejorvidainsurance.com/carriers/assurity.html</loc>
-    <lastmod>2026-06-05T12:00:00+00:00</lastmod>
+    <lastmod>2026-06-14T03:02:27+00:00</lastmod>
     <priority>0.70</priority>
   </url>
 
   <url>
     <loc>https://www.mejorvidainsurance.com/carriers/mutual-of-omaha.html</loc>
-    <lastmod>2026-06-05T12:00:00+00:00</lastmod>
+    <lastmod>2026-06-14T03:02:27+00:00</lastmod>
     <priority>0.70</priority>
   </url>
 
   <url>
     <loc>https://www.mejorvidainsurance.com/carriers/american-amicable.html</loc>
-    <lastmod>2026-06-05T12:00:00+00:00</lastmod>
+    <lastmod>2026-06-14T03:02:27+00:00</lastmod>
     <priority>0.70</priority>
   </url>
 
   <url>
-    <loc>https://www.mejorvidainsurance.com/en/carriers/assurity.html</loc>
-    <lastmod>2026-06-05T12:00:00+00:00</lastmod>
+    <loc>https://www.mejorvidainsurance.com/blog/weekly-insurance-update-2026-06-07.html</loc>
+    <lastmod>2026-06-14T03:02:27+00:00</lastmod>
     <priority>0.70</priority>
   </url>
 
   <url>
-    <loc>https://www.mejorvidainsurance.com/en/carriers/mutual-of-omaha.html</loc>
-    <lastmod>2026-06-05T12:00:00+00:00</lastmod>
+    <loc>https://www.mejorvidainsurance.com/blog/weekly-insurance-update-2026-05-31.html</loc>
+    <lastmod>2026-06-14T03:02:27+00:00</lastmod>
     <priority>0.70</priority>
   </url>
 
   <url>
-    <loc>https://www.mejorvidainsurance.com/en/carriers/american-amicable.html</loc>
-    <lastmod>2026-06-05T12:00:00+00:00</lastmod>
+    <loc>https://www.mejorvidainsurance.com/blog/weekly-insurance-update-2026-05-24.html</loc>
+    <lastmod>2026-06-14T03:02:27+00:00</lastmod>
     <priority>0.70</priority>
   </url>
 
-  <!-- Future blog post URLs: add one <url> block per post -->
+  <url>
+    <loc>https://www.mejorvidainsurance.com/blog/weekly-insurance-update-2026-05-17.html</loc>
+    <lastmod>2026-06-14T03:02:27+00:00</lastmod>
+    <priority>0.70</priority>
+  </url>
+
+  <url>
+    <loc>https://www.mejorvidainsurance.com/blog/weekly-insurance-update-2026-05-10.html</loc>
+    <lastmod>2026-06-14T03:02:27+00:00</lastmod>
+    <priority>0.70</priority>
+  </url>
+
+  <url>
+    <loc>https://www.mejorvidainsurance.com/blog/weekly-insurance-update-2026-05-03.html</loc>
+    <lastmod>2026-06-14T03:02:27+00:00</lastmod>
+    <priority>0.70</priority>
+  </url>
+
+  <url>
+    <loc>https://www.mejorvidainsurance.com/blog/weekly-insurance-update-2026-04-26.html</loc>
+    <lastmod>2026-06-14T03:02:27+00:00</lastmod>
+    <priority>0.70</priority>
+  </url>
+
+  <url>
+    <loc>https://www.mejorvidainsurance.com/blog/weekly-insurance-update-2026-04-19.html</loc>
+    <lastmod>2026-06-14T03:02:27+00:00</lastmod>
+    <priority>0.70</priority>
+  </url>
+
+  <url>
+    <loc>https://www.mejorvidainsurance.com/blog/weekly-insurance-update-2026-04-12.html</loc>
+    <lastmod>2026-06-14T03:02:27+00:00</lastmod>
+    <priority>0.70</priority>
+  </url>
+
+  <url>
+    <loc>https://www.mejorvidainsurance.com/blog/weekly-insurance-update-2026-03-29.html</loc>
+    <lastmod>2026-06-14T03:02:27+00:00</lastmod>
+    <priority>0.70</priority>
+  </url>
+
+  <url>
+    <loc>https://www.mejorvidainsurance.com/blog/weekly-insurance-update-2026-03-22.html</loc>
+    <lastmod>2026-06-14T03:02:27+00:00</lastmod>
+    <priority>0.70</priority>
+  </url>
+
+  <url>
+    <loc>https://www.mejorvidainsurance.com/blog/weekly-insurance-update-2026-03-15.html</loc>
+    <lastmod>2026-06-14T03:02:27+00:00</lastmod>
+    <priority>0.70</priority>
+  </url>
+
+  <url>
+    <loc>https://www.mejorvidainsurance.com/blog/weekly-insurance-update-2026-03-08.html</loc>
+    <lastmod>2026-06-14T03:02:27+00:00</lastmod>
+    <priority>0.70</priority>
+  </url>
+
+  <url>
+    <loc>https://www.mejorvidainsurance.com/blog/weekly-insurance-update-2026-03-01.html</loc>
+    <lastmod>2026-06-14T03:02:27+00:00</lastmod>
+    <priority>0.70</priority>
+  </url>
+
+  <url>
+    <loc>https://www.mejorvidainsurance.com/blog/weekly-insurance-update-2026-02-22.html</loc>
+    <lastmod>2026-06-14T03:02:27+00:00</lastmod>
+    <priority>0.70</priority>
+  </url>
+
+  <url>
+    <loc>https://www.mejorvidainsurance.com/blog/weekly-insurance-update-2026-02-16.html</loc>
+    <lastmod>2026-06-14T03:02:27+00:00</lastmod>
+    <priority>0.70</priority>
+  </url>
+
+  <url>
+    <loc>https://www.mejorvidainsurance.com/blog/weekly-insurance-update-2026-02-08.html</loc>
+    <lastmod>2026-06-14T03:02:27+00:00</lastmod>
+    <priority>0.70</priority>
+  </url>
+
+  <url>
+    <loc>https://www.mejorvidainsurance.com/blog/weekly-insurance-update-2026-02-01.html</loc>
+    <lastmod>2026-06-14T03:02:27+00:00</lastmod>
+    <priority>0.70</priority>
+  </url>
 
 </urlset>
