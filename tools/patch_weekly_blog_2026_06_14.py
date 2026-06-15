@@ -93,7 +93,7 @@ hero_block = """<p class="lead mb-3 fw-semibold">📰 4 historias  |  📈 Venta
 
 <picture>
 <source type="image/webp" srcset="../img/opt/blog-generated/weekly-insurance-update-2026-06-14/hero-es.webp"/>
-<img alt="[Imagen pendiente] Actualización semanal 14 junio 2026 — ventas LIMRA, VUL, Oklahoma y crédito privado" class="img-fluid rounded-3 shadow-sm" src="../img/opt/blog-generated/weekly-insurance-update-2026-06-14/hero-es.png" width="1024" height="682" loading="eager" fetchpriority="high" decoding="async" onerror="this.src='../img/opt/3-1-2026-Blog.png'"/>
+<img alt="Profesional de seguros revisa un informe de ventas récord del primer trimestre de 2026 con gráfico de crecimiento — actualización semanal junio 2026" class="img-fluid rounded-3 shadow-sm" src="../img/opt/blog-generated/weekly-insurance-update-2026-06-14/hero-es.png" width="1024" height="682" loading="eager" fetchpriority="high" decoding="async" onerror="this.onerror=null;this.src='../img/opt/3-1-2026-Blog.png'"/>
 </picture>"""
 
 html = re.sub(
