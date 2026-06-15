@@ -211,6 +211,9 @@
       '<option value="review_request">' +
       esc(t("conn_type_review")) +
       "</option>" +
+      '<option value="agent_credentials">' +
+      esc(t("conn_type_credentials")) +
+      "</option>" +
       "</select></div></div>" +
       '<label for="crm-conn-issue" id="crm-conn-issue-label">' +
       esc(t("conn_customer_issue")) +
@@ -268,11 +271,16 @@
   function normalizeEmailType(type) {
     if (type === "medical_information_request") return "medical_information_request";
     if (type === "review_request") return "review_request";
+    if (type === "agent_credentials") return "agent_credentials";
     return "general";
   }
 
   function isTemplateEmailType(type) {
-    return type === "medical_information_request" || type === "review_request";
+    return (
+      type === "medical_information_request" ||
+      type === "review_request" ||
+      type === "agent_credentials"
+    );
   }
 
   function setLanguage(state, lang) {
@@ -283,6 +291,7 @@
     if (es) es.classList.toggle("active", state.composeLang === "Spanish");
     if (state.emailType === "medical_information_request") void refreshMedicalPreview(state);
     else if (state.emailType === "review_request") void refreshReviewPreview(state);
+    else if (state.emailType === "agent_credentials") void refreshCredentialsPreview(state);
   }
 
   function setEmailType(state, type) {
@@ -292,12 +301,14 @@
     updateEmailTypeUi(state);
     if (state.emailType === "medical_information_request") void refreshMedicalPreview(state);
     else if (state.emailType === "review_request") void refreshReviewPreview(state);
+    else if (state.emailType === "agent_credentials") void refreshCredentialsPreview(state);
   }
 
   function updateEmailTypeUi(state) {
     var isTemplate = isTemplateEmailType(state.emailType);
     var isMedical = state.emailType === "medical_information_request";
     var isReview = state.emailType === "review_request";
+    var isCredentials = state.emailType === "agent_credentials";
     var genBtn = $("crm-conn-generate", state.root);
     var reply = $("crm-conn-reply", state.root);
     var replyLabel = $("crm-conn-reply-label", state.root);
@@ -310,6 +321,7 @@
       reply.readOnly = false;
       if (isMedical) reply.placeholder = t("conn_reply_ph_medical");
       else if (isReview) reply.placeholder = t("conn_reply_ph_review");
+      else if (isCredentials) reply.placeholder = t("conn_reply_ph_credentials");
       else reply.placeholder = t("conn_reply_ph");
     }
     if (replyLabel) {
@@ -376,6 +388,27 @@
     }
   }
 
+  async function refreshCredentialsPreview(state) {
+    if (state.emailType !== "agent_credentials") return;
+    var reply = $("crm-conn-reply", state.root);
+    if (!reply) return;
+    setStatus(state, t("conn_status_preview_loading"));
+    reply.value = "";
+    try {
+      var data = await api("/api/staff/agent-credentials-email-preview", {
+        language: state.composeLang,
+        firstName: previewFirstName(state),
+      });
+      reply.value = (data && data.body) || "";
+      setStatus(
+        state,
+        t("conn_status_preview_ready", { subject: (data && data.subject) || "(preview)" })
+      );
+    } catch (e) {
+      setStatus(state, t("conn_status_preview_failed"));
+    }
+  }
+
   function readForm(state) {
     return {
       firstName: String(($("crm-conn-first", state.root) && $("crm-conn-first", state.root).value) || "").trim(),
@@ -395,6 +428,10 @@
     }
     if (state.emailType === "review_request") {
       await refreshReviewPreview(state);
+      return;
+    }
+    if (state.emailType === "agent_credentials") {
+      await refreshCredentialsPreview(state);
       return;
     }
     var f = readForm(state);

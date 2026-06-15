@@ -1,3 +1,5 @@
+const fs = require("fs");
+const path = require("path");
 const { google } = require("googleapis");
 const { requireStaffAuth, json, readJsonBody, serviceConfig, restPatch, restInsert } = require("./_inbox-lib");
 const { saveCanonicalLeadProfile } = require("./_lead-profile");
@@ -15,6 +17,11 @@ const {
   buildReviewRequestCtaHtml,
   reviewUrl,
 } = require("../../lib/review-request-email-template");
+const {
+  buildAgentCredentialsPlainText,
+  buildAgentCredentialsSubject,
+  buildAgentCredentialsEmailHtml,
+} = require("../../lib/agent-credentials-email-template");
 const {
   normalizeFirstName,
   fetchLeadGreetingFromDb,
@@ -92,6 +99,65 @@ function buildMultipartRaw({ fromEmail, toEmail, ccEmail, subject, textBody, htm
   return lines.join(nl);
 }
 
+/** multipart/mixed: alternative (plain + HTML) + file attachment for Gmail raw send. */
+function buildMultipartMixedWithAlternativeAndAttachment({
+  fromEmail,
+  toEmail,
+  ccEmail,
+  subject,
+  textBody,
+  htmlBody,
+  attachmentFilename,
+  attachmentContent,
+  attachmentContentType,
+}) {
+  const mixedBoundary = `mvi_mixed_${Date.now()}_${Math.random().toString(36).slice(2, 11)}`;
+  const altBoundary = `mvi_alt_${Date.now()}_${Math.random().toString(36).slice(2, 11)}`;
+  const nl = "\r\n";
+  const subj = encodeSubject(subject);
+  const plainB64 = mimeBase64Body(textBody);
+  const htmlB64 = mimeBase64Body(htmlBody);
+  const attachB64 = mimeBase64Body(attachmentContent);
+  const cc = ccEmail && String(ccEmail).trim() ? String(ccEmail).trim() : "";
+  const ctype = attachmentContentType || "application/octet-stream";
+  const fname = attachmentFilename || "attachment";
+  const lines = [`From: ${fromEmail}`, `To: ${toEmail}`];
+  if (cc) lines.push(`Cc: ${cc}`);
+  lines.push(
+    `Subject: ${subj}`,
+    "MIME-Version: 1.0",
+    `Content-Type: multipart/mixed; boundary="${mixedBoundary}"`,
+    "",
+    `--${mixedBoundary}`,
+    `Content-Type: multipart/alternative; boundary="${altBoundary}"`,
+    "",
+    `--${altBoundary}`,
+    "Content-Type: text/plain; charset=UTF-8",
+    "Content-Transfer-Encoding: base64",
+    "",
+    plainB64,
+    "",
+    `--${altBoundary}`,
+    "Content-Type: text/html; charset=UTF-8",
+    "Content-Transfer-Encoding: base64",
+    "",
+    htmlB64,
+    "",
+    `--${altBoundary}--`,
+    "",
+    `--${mixedBoundary}`,
+    `Content-Type: ${ctype}; charset=UTF-8; name="${fname}"`,
+    `Content-Disposition: attachment; filename="${fname}"`,
+    "Content-Transfer-Encoding: base64",
+    "",
+    attachB64,
+    "",
+    `--${mixedBoundary}--`,
+    ""
+  );
+  return lines.join(nl);
+}
+
 function toGmailRaw(rfc822) {
   return Buffer.from(rfc822, "utf8")
     .toString("base64")
@@ -144,7 +210,9 @@ module.exports = async function handler(req, res) {
   const leadFirstName = body && body.leadFirstName != null ? String(body.leadFirstName).trim() : "";
 
   const isTemplateEmail =
-    emailType === "medical_information_request" || emailType === "review_request";
+    emailType === "medical_information_request" ||
+    emailType === "review_request" ||
+    emailType === "agent_credentials";
   if (!replyDraft && !isTemplateEmail) {
     return json(res, 400, { success: false, error: "replyDraft required" });
   }
@@ -176,9 +244,11 @@ module.exports = async function handler(req, res) {
       ? buildMedicalIntakeSubject({ language })
       : emailType === "review_request"
         ? buildReviewRequestSubject({ language, firstName: leadFirstName })
-        : subjectOverride
-          ? subjectOverride.slice(0, 200)
-          : subjectFromCustomerIssue(customerIssue)
+        : emailType === "agent_credentials"
+          ? buildAgentCredentialsSubject({ language, firstName: leadFirstName })
+          : subjectOverride
+            ? subjectOverride.slice(0, 200)
+            : subjectFromCustomerIssue(customerIssue)
     : "Re: Your Insurance Question — Mejor Vida Insurance";
 
   try {
@@ -238,8 +308,32 @@ module.exports = async function handler(req, res) {
       subjectForSend = buildReviewRequestSubject({ language, firstName: fn });
     }
 
-    const { html, plainBody } = buildStaffClientReplyHtml(draftForSend, language);
-    let htmlOut = html;
+    let htmlOut;
+    let plainBody;
+    if (compose && emailType === "agent_credentials") {
+      let fn = normalizeFirstName(leadFirstName);
+      if (!fn) {
+        try {
+          const g = await fetchLeadGreetingFromDb(cfg, leadId, leadSourceTable);
+          fn = g.first_name;
+        } catch (_) {
+          /* use salutation without name */
+        }
+      }
+      subjectForSend = buildAgentCredentialsSubject({ language, firstName: fn });
+      const credentialsEmail = buildAgentCredentialsEmailHtml({
+        language,
+        firstName: fn,
+        introOverride: replyDraft || undefined,
+      });
+      htmlOut = credentialsEmail.html;
+      plainBody = credentialsEmail.plainBody;
+      draftForSend = credentialsEmail.plainBody;
+    } else {
+      const built = buildStaffClientReplyHtml(draftForSend, language);
+      htmlOut = built.html;
+      plainBody = built.plainBody;
+    }
     if (intakeUrl) {
       const cta = buildMedicalIntakeCtaHtml({ language, intakeUrl });
       htmlOut = htmlOut.replace("</body>", `${cta}</body>`);
@@ -248,14 +342,31 @@ module.exports = async function handler(req, res) {
       const cta = buildReviewRequestCtaHtml({ language, reviewLink });
       htmlOut = htmlOut.replace("</body>", `${cta}</body>`);
     }
-    const rfc822 = buildMultipartRaw({
-      fromEmail,
-      toEmail,
-      ccEmail: ccEmail || undefined,
-      subject: subjectForSend,
-      textBody: plainBody,
-      htmlBody: htmlOut,
-    });
+    let rfc822;
+    if (compose && emailType === "agent_credentials") {
+      const vcardPath = path.join(__dirname, "..", "..", "julie.vcf");
+      const vcardContent = fs.readFileSync(vcardPath, "utf8");
+      rfc822 = buildMultipartMixedWithAlternativeAndAttachment({
+        fromEmail,
+        toEmail,
+        ccEmail: ccEmail || undefined,
+        subject: subjectForSend,
+        textBody: plainBody,
+        htmlBody: htmlOut,
+        attachmentFilename: "julie.vcf",
+        attachmentContent: vcardContent,
+        attachmentContentType: "text/vcard",
+      });
+    } else {
+      rfc822 = buildMultipartRaw({
+        fromEmail,
+        toEmail,
+        ccEmail: ccEmail || undefined,
+        subject: subjectForSend,
+        textBody: plainBody,
+        htmlBody: htmlOut,
+      });
+    }
     const raw = toGmailRaw(rfc822);
 
     const oauth2Client = new google.auth.OAuth2(clientId, clientSecret, GMAIL_REDIRECT_URI);

@@ -73,6 +73,9 @@ function formatEventTitle(ev) {
   if (type === "staff_email_sent" && data.email_type === "medical_information_request") {
     return "Medical information request sent";
   }
+  if (type === "staff_email_sent" && data.email_type === "agent_credentials") {
+    return "Agent credentials email sent";
+  }
   return EVENT_LABELS[type] || type || "Event";
 }
 

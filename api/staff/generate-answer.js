@@ -18,6 +18,7 @@ function buildPrompt(questionText, language, lead, staffNotes, opts) {
     `You are drafting the message body that Julie Braunsroth will send to the client **as Julie** (first person is fine: "I" / Julie).\n` +
     `Reply language must be ${locale}.\n` +
     `Tone: warm, clear, professional, plain language, no emojis.\n` +
+    `- For Spanish: use **tú** (informal tutear), not usted — e.g. tienes, puedes, tu/tus, te.\n` +
     `Constraints:\n` +
     `- 80 to 180 words.\n` +
     `- Do not invent exact prices.\n` +
