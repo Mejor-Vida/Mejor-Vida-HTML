@@ -155,7 +155,7 @@
       err_birthdate: "Please select your date of birth.",
       err_birthdate_invalid: "Invalid date.",
       err_birthdate_min: "Birthdate must be for age 18 or older.",
-      err_birthdate_max: "Birthdate must be for age 85 or younger.",
+      err_birthdate_max: "Birthdate must be for age 100 or younger.",
       err_height: "Please enter your height.",
       err_weight: "Please enter your weight in pounds.",
       err_tobacco: "Please select Yes or No.",
@@ -280,7 +280,7 @@
       err_birthdate: "Seleccione su fecha de nacimiento.",
       err_birthdate_invalid: "Fecha no válida.",
       err_birthdate_min: "La fecha de nacimiento debe ser para edad de 18 años o más.",
-      err_birthdate_max: "La fecha de nacimiento debe ser para edad de 85 años o menos.",
+      err_birthdate_max: "La fecha de nacimiento debe ser para edad de 100 años o menos.",
       err_height: "Ingrese su estatura.",
       err_weight: "Ingrese su peso en libras.",
       err_tobacco: "Seleccione Sí o No.",
@@ -359,7 +359,7 @@
   }
 
   var DOB_MIN_AGE = 18;
-  var DOB_MAX_AGE = 85;
+  var DOB_MAX_AGE = 100;
   var MONTH_ABBR = {
     es: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
     en: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
