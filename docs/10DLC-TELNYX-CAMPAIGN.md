@@ -69,12 +69,13 @@ https://www.mejorvidainsurance.com/en/terms-service.html
 Consent language on the form (optional checkbox):
 "Yes, I agree to receive marketing SMS text messages from Mejor Vida Insurance LLC,
 including personalized quote follow-up, appointment scheduling reminders,
-application status updates, and customer service messages. Msg & data rates may
-apply. Frequency: 1–5 messages per week. Reply STOP to cancel. Reply HELP for
+application status updates, and customer service messages. Message and data rates may
+apply. Frequency: up to 1–5 messages per week. Reply STOP to opt out. Reply HELP for
 help. Consent is not required to get a quote or purchase insurance. SMS is
 delivered via authorized providers including Telnyx. Privacy Policy:
 https://www.mejorvidainsurance.com/en/privacy-policy.html · Terms of Service:
-https://www.mejorvidainsurance.com/en/terms-service.html"
+https://www.mejorvidainsurance.com/en/terms-service.html · SMS program:
+https://www.mejorvidainsurance.com/en/sms-optin.html"
 
 Verification-code consent (Send verification code button):
 "By clicking Send verification code, you agree to receive a one-time SMS with
@@ -190,6 +191,23 @@ Telnyx Messaging Compliance rejected campaign **C18HVT1** because the **marketin
 
 After deploy, reviewers should see **marketing** on:
 `https://www.mejorvidainsurance.com/en/gastos-finales-ads-v2/?compliance-preview=phone`
+
+## MNO_REJECTED — error 806 (Jun 16, 2026)
+
+Campaign **C18HVT1** / Telnyx `4b30019e-a962-6baf-89a1-a10146fc4c9f` rejected by mobile networks:
+
+> Unable to verify, needs compliant and accurate CTA information. Update with specific path for mobile opt-in, HELP instructions, STOP instructions, message frequency disclosure, "message and data rates may apply" disclosure and link to the message program privacy policy.
+
+| 806 requirement | Site fix |
+|-----------------|----------|
+| Specific mobile opt-in path | `en/sms-optin.html` lists `?compliance-preview=phone`; message flow cites step 13 URL |
+| STOP | "Reply STOP to opt out" on checkbox |
+| HELP | "Reply HELP for help" on checkbox |
+| Frequency | "Frequency: up to 1–5 messages per week" |
+| Rates | Full phrase **"Message and data rates may apply"** (not "Msg & data") |
+| Privacy / program | Absolute links to Privacy Policy, Terms, and **SMS program** (`en/sms-optin.html`) on live checkbox |
+
+Resubmit in Telnyx after deploy; confirm live checkbox at compliance-preview URL.
 
 ### Resubmit in Telnyx (after deploy)
 

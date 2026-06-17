@@ -12,11 +12,12 @@ DST = ROOT / "en" / "gastos-finales-ads-v2" / "index.html"
 SMS_EN = (
     "Yes, I agree to receive marketing SMS text messages from Mejor Vida Insurance LLC, including personalized "
     "quote follow-up, appointment scheduling reminders, application status updates, and customer "
-    "service messages. Msg &amp; data rates may apply. Frequency: 1–5 messages per week. "
-    "Reply STOP to cancel. Reply HELP for help. Consent is not required to get a quote or purchase "
+    "service messages. Message and data rates may apply. Frequency: up to 1–5 messages per week. "
+    "Reply STOP to opt out. Reply HELP for help. Consent is not required to get a quote or purchase "
     "insurance. SMS is delivered via authorized providers including Telnyx. "
-    '<a href="../privacy-policy.html" target="_blank" rel="noopener noreferrer">Privacy Policy</a> · '
-    '<a href="../terms-service.html" target="_blank" rel="noopener noreferrer">Terms of Service</a>.'
+    '<a href="https://www.mejorvidainsurance.com/en/privacy-policy.html" target="_blank" rel="noopener noreferrer">Privacy Policy</a> · '
+    '<a href="https://www.mejorvidainsurance.com/en/terms-service.html" target="_blank" rel="noopener noreferrer">Terms of Service</a> · '
+    '<a href="https://www.mejorvidainsurance.com/en/sms-optin.html" target="_blank" rel="noopener noreferrer">SMS program</a>.'
 )
 
 STRUCTURAL_REPLACEMENTS = [
