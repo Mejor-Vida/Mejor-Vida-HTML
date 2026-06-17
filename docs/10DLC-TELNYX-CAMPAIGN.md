@@ -67,7 +67,7 @@ Terms of Service:
 https://www.mejorvidainsurance.com/en/terms-service.html
 
 Consent language on the form (optional checkbox):
-"Yes, I agree to receive SMS text messages from Mejor Vida Insurance LLC,
+"Yes, I agree to receive marketing SMS text messages from Mejor Vida Insurance LLC,
 including personalized quote follow-up, appointment scheduling reminders,
 application status updates, and customer service messages. Msg & data rates may
 apply. Frequency: 1–5 messages per week. Reply STOP to cancel. Reply HELP for
@@ -177,6 +177,19 @@ Telnyx rejected this campaign because consent and samples did not match the sele
 | **Missing HELP in opt-in consent** | All English opt-in forms now include **Reply HELP for help** |
 | **Vague marketing consent** | Optional checkbox lists sub use cases: quote follow-up, appointment reminders, application status, customer service; 2FA has **separate** consent at **Send verification code** |
 | **Missing 2FA sample message** | Add the 2FA sample below when resubmitting in Telnyx |
+
+## TCR campaign C18HVT1 — marketing disclosure (Jun 2026)
+
+Telnyx Messaging Compliance rejected campaign **C18HVT1** because the **marketing** use case requires the word **marketing** on the website opt-in form so users know they may receive marketing SMS.
+
+| Fix | Status |
+|-----|--------|
+| Optional SMS checkbox includes **“marketing SMS text messages”** | `en/gastos-finales-ads-v2/`, `en/quote.html`, `en/term-quote.html`, `en/sms-optin.html` |
+| `en/sms-optin.html` sample matches live forms | Updated |
+| Resubmit / vetting | Telnyx credited account and resubmitted (confirm in portal) |
+
+After deploy, reviewers should see **marketing** on:
+`https://www.mejorvidainsurance.com/en/gastos-finales-ads-v2/?compliance-preview=phone`
 
 ### Resubmit in Telnyx (after deploy)
 
