@@ -165,12 +165,16 @@
   }
 
   function trackQuoteSubmitted() {
-    trackGaEvent("quote_submitted", {
+    var payload = {
+      form_source: "landing_quote",
       state: selections.state,
       sex: selections.sex,
       tobacco: selections.tobacco,
       age_range: getAgeRangeBucket(selections.birthdate),
-    });
+      page_path: window.location.pathname,
+    };
+    trackGaEvent("quote_submitted", payload);
+    trackGaEvent("qualify_lead", payload);
   }
 
   function trackFormStepsCompletedForLanding() {

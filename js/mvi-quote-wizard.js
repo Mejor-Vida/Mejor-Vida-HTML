@@ -768,12 +768,14 @@
           lead_saved: leadSaved,
         });
       } else if (typeof gtag === "function") {
-        gtag("event", "quote_submitted", {
+        var quotePayload = {
           form_source: "nebraska_quote_wizard",
           state: state.state,
           coverage: coverage,
           lead_saved: leadSaved,
-        });
+        };
+        gtag("event", "quote_submitted", quotePayload);
+        gtag("event", "qualify_lead", quotePayload);
       }
 
       if (status) {

@@ -1,6 +1,7 @@
 /**
  * GA4 conversion funnel events (Mejor Vida quote flow).
- * Funnel: page_view → quote_cta_clicked → form_steps_completed → quote_submitted
+ * Funnel: page_view → quote_cta_clicked → form_steps_completed → quote_submitted → qualify_lead
+ * Booking: appointment_booked → close_convert_lead (Google Ads primary conversions)
  */
 (function (global) {
   var formStepsTracked = false;
@@ -70,6 +71,15 @@
       if (!payload.page_path) payload.page_path = global.location.pathname;
     } catch (ePath) {}
     track("quote_submitted", payload);
+    track("qualify_lead", payload);
+  }
+
+  function trackCloseConvertLead(extra) {
+    var payload = extra || {};
+    try {
+      if (!payload.page_path) payload.page_path = global.location.pathname;
+    } catch (ePath) {}
+    track("close_convert_lead", payload);
   }
 
   function bindQuoteCtaClicks() {
@@ -96,6 +106,7 @@
     trackQuoteCtaClicked: trackQuoteCtaClicked,
     trackFormStepsCompleted: trackFormStepsCompleted,
     trackQuoteSubmitted: trackQuoteSubmitted,
+    trackCloseConvertLead: trackCloseConvertLead,
     bindQuoteCtaClicks: bindQuoteCtaClicks,
     resetFormStepsCompleted: function () {
       formStepsTracked = false;

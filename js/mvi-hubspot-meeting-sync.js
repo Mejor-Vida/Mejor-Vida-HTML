@@ -165,11 +165,13 @@
     var payload = buildPayload(data);
     if (!postBooking(payload)) return;
 
-    trackGaEvent("appointment_booked", {
+    var analyticsPayload = {
       location: "hubspot_scheduler",
       page_path: location.pathname,
       source: payload.source || "hubspot_scheduler",
-    });
+    };
+    trackGaEvent("appointment_booked", analyticsPayload);
+    trackGaEvent("close_convert_lead", analyticsPayload);
 
     var leadCtx = getSessionLeadContext();
     postCallScheduledIndicated(payload, leadCtx);
