@@ -5,6 +5,7 @@
  * out-of-state referrals use source: out_of_state_referral.
  *
  * Vercel env: SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, HUBSPOT_ACCESS_TOKEN,
+ *             META_CAPI_ACCESS_TOKEN (Meta Conversions API — Lead on gastos-finales landings),
  *             GMAIL_CLIENT_ID, GMAIL_CLIENT_SECRET, GMAIL_REFRESH_TOKEN, GMAIL_FROM_EMAIL
  */
 
@@ -196,16 +197,41 @@ function capiEventSourceUrl(originDetail) {
   if (path.startsWith("/")) {
     return `https://www.mejorvidainsurance.com${path.split("?")[0]}`;
   }
-  return "https://www.mejorvidainsurance.com/gastos-finales-ads/";
+  return "https://www.mejorvidainsurance.com/gastos-finales-ads-v2/";
+}
+
+function gastosFinalesLandingPath(originDetail) {
+  return String(
+    (originDetail && (originDetail.page_path || originDetail.landing_path)) || ""
+  );
+}
+
+function isGastosFinalesLanding(originDetail) {
+  return gastosFinalesLandingPath(originDetail).includes("gastos-finales-ads");
+}
+
+function resolveLeadSource(body) {
+  const src = String((body && body.source) || "").trim();
+  if (src === "out_of_state_referral") return "out_of_state_referral";
+  if (src === "nebraska_term_quote_page") return "nebraska_term_quote_page";
+  if (src === "nebraska_quote_page") return "nebraska_quote_page";
+  if (src === "facebook_landing_gastos_finales") return "facebook_landing_gastos_finales";
+  if (src === "english_landing_gastos_finales") return "english_landing_gastos_finales";
+  return "fexquotes_page";
 }
 
 function shouldSendMetaCAPI(leadSource, originDetail) {
-  if (leadSource === "facebook_landing_gastos_finales") return true;
-  if (leadSource === "nebraska_quote_page") {
-    const path = String(
-      (originDetail && (originDetail.page_path || originDetail.landing_path)) || ""
-    );
-    return path.includes("gastos-finales-ads");
+  if (
+    leadSource === "facebook_landing_gastos_finales" ||
+    leadSource === "english_landing_gastos_finales"
+  ) {
+    return true;
+  }
+  if (leadSource === "nebraska_quote_page" && isGastosFinalesLanding(originDetail)) {
+    return true;
+  }
+  if (leadSource === "fexquotes_page" && isGastosFinalesLanding(originDetail)) {
+    return true;
   }
   return false;
 }
@@ -218,6 +244,7 @@ async function sendMetaCAPIEvent({
   lastName,
   sex,
   originDetail,
+  eventId,
 }) {
   try {
     if (!shouldSendMetaCAPI(leadSource, originDetail)) return;
@@ -225,9 +252,11 @@ async function sendMetaCAPIEvent({
     const accessToken = process.env.META_CAPI_ACCESS_TOKEN;
     if (!accessToken) return;
 
-    const userData = {
-      ge: capiSha256(sex === "male" ? "m" : "f"),
-    };
+    const userData = {};
+    const sexNorm = String(sex || "").toLowerCase();
+    if (sexNorm === "male" || sexNorm === "female") {
+      userData.ge = [capiSha256(sexNorm === "male" ? "m" : "f")];
+    }
     const emNorm = String(email || "")
       .trim()
       .toLowerCase();
@@ -246,18 +275,18 @@ async function sendMetaCAPIEvent({
       .toLowerCase();
     if (lnNorm) userData.ln = [capiSha256(lnNorm)];
 
-    const payload = {
-      data: [
-        {
-          event_name: "Lead",
-          event_time: Math.floor(Date.now() / 1000),
-          action_source: "website",
-          event_source_url: capiEventSourceUrl(originDetail),
-          user_data: userData,
-          custom_data: { currency: "USD", value: 0 },
-        },
-      ],
+    const eventRow = {
+      event_name: "Lead",
+      event_time: Math.floor(Date.now() / 1000),
+      action_source: "website",
+      event_source_url: capiEventSourceUrl(originDetail),
+      user_data: userData,
+      custom_data: { currency: "USD", value: 0 },
     };
+    const dedupeId = String(eventId || "").trim().slice(0, 128);
+    if (dedupeId) eventRow.event_id = dedupeId;
+
+    const payload = { data: [eventRow] };
 
     const url = `https://graph.facebook.com/v19.0/873141755808233/events?access_token=${encodeURIComponent(accessToken)}`;
     const r = await fetch(url, {
@@ -316,16 +345,7 @@ module.exports = async function handler(req, res) {
   const phone = String(body.phone || "").trim().slice(0, 40);
   const quoteSummary = String(body.quoteSummary || "").trim().slice(0, 20000);
   const lang = body.lang === "en" ? "en" : "es";
-  const leadSource =
-    body.source === "out_of_state_referral"
-      ? "out_of_state_referral"
-      : body.source === "nebraska_term_quote_page"
-        ? "nebraska_term_quote_page"
-      : body.source === "nebraska_quote_page"
-        ? "nebraska_quote_page"
-        : body.source === "facebook_landing_gastos_finales"
-          ? "facebook_landing_gastos_finales"
-          : "fexquotes_page";
+  const leadSource = resolveLeadSource(body);
 
   let stateCode = String(body.state || "")
     .trim()
@@ -536,7 +556,20 @@ module.exports = async function handler(req, res) {
     return json(res, 500, { ok: false, error: "Could not save lead" });
   }
 
+  const capiEventId =
+    sessionClientId || (leadId ? `lead-${leadId}` : null);
+
   if (!hubspotToken) {
+    await sendMetaCAPIEvent({
+      leadSource,
+      email,
+      phone,
+      firstName,
+      lastName,
+      sex: body.sex,
+      originDetail,
+      eventId: capiEventId,
+    });
     await sendQuoteLeadNotification({
       leadSource,
       firstName,
@@ -614,6 +647,7 @@ module.exports = async function handler(req, res) {
     lastName,
     sex: body.sex,
     originDetail,
+    eventId: capiEventId,
   });
 
   await sendQuoteLeadNotification({
