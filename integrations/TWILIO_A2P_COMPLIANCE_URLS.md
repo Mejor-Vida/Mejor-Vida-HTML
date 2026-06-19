@@ -124,7 +124,7 @@ All should return **200**. Use `www` — non-www redirects to www.
 | **Message samples** | 2–3 realistic examples (quote follow-up, appointment reminder) |
 | **Message flow / call-to-action** | Describe: user visits `/en/quote`, optionally checks SMS box, submits; cite `/en/sms-optin` |
 | **Embedded links** | Yes (quote links, scheduling) |
-| **Embedded phone numbers** | Yes (402-440-5438 office, 402-735-5665 SMS) |
+| **Embedded phone numbers** | Yes (402-440-5438 office, 402-844-1199 SMS) |
 | **Age-gated / direct lending** | No |
 
 ### After approval

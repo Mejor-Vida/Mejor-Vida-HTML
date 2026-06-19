@@ -1,6 +1,8 @@
 # Telnyx 10DLC campaign — Mejor Vida Insurance LLC
 
-Use **English URLs only** for registration. Brand: **Mejor Vida Insurance** (verified). SMS sending number: **402-735-5665**.
+Use **English URLs only** for registration. Brand: **Mejor Vida Insurance** (verified). SMS sending number: **402-844-1199** (`+14028441199`).
+
+**Campaign C18HVT1** — **Active** (Telnyx). Number **+1 402 844 1199** assigned to campaign. Website and `en/sms-optin.html` updated to match.
 
 ## Campaign type (use case)
 
@@ -84,7 +86,7 @@ Reply STOP to cancel. Reply HELP for help."
 
 We send follow-up SMS only to users who checked the optional box and submitted.
 Message frequency up to 1–5 per week during quoting/follow-up. Opt-out: reply
-STOP. Help: reply HELP or call 402-440-5438. Messages are sent from 402-735-5665
+STOP. Help: reply HELP or call 402-440-5438. Messages are sent from 402-844-1199
 by Mejor Vida Insurance LLC, a licensed Nebraska insurance agency (Producer
 License #21695431).
 ```
@@ -111,7 +113,7 @@ Mejor Vida Insurance: Update on your insurance request — please call 402-440-5
 Mejor Vida Insurance: Your verification code is 123456. It expires in 10 minutes. Reply STOP to opt out. Reply HELP for help. Msg & data rates may apply.
 ```
 
-If Telnyx marks **Embedded phone number**, include **402-735-5665** in samples. If **Embedded link**, include `https://www.mejorvidainsurance.com/en/gastos-finales-ads-v2/` (or `en/quote.html`) in at least one sample.
+If Telnyx marks **Embedded phone number**, include **402-844-1199** in samples. If **Embedded link**, include `https://www.mejorvidainsurance.com/en/gastos-finales-ads-v2/` (or `en/quote.html`) in at least one sample.
 
 **Do not** list `en/landing-final-expense.html` on this campaign — that page is retired for 10DLC.
 
@@ -142,8 +144,8 @@ If Telnyx marks **Embedded phone number**, include **402-735-5665** in samples. 
 |----------|--------|
 | Will my **old Twilio number** work on Telnyx automatically? | **No.** A US number is active on **one** messaging provider at a time for 10DLC. Twilio-owned numbers send through Twilio; Telnyx 10DLC SMS must use a number **in your Telnyx account** with the approved campaign assigned. |
 | How do I keep the **same digits** customers know? | **Port** the number from Twilio → Telnyx (number porting / LNP in Telnyx portal). Allow several business days; both carriers coordinate. Until port completes, keep sending from Twilio or pause SMS. |
-| What number should this campaign use? | The number shown on the site for **SMS/Text: 402-735-5665** — confirm in Telnyx → Numbers that this E.164 (`+14027355665`) is on Telnyx and will get the campaign. If 402-735-5665 is still only on Twilio, either **port it** or **buy/host a Telnyx number** and update the website + `en/sms-optin.html` before vetting. |
-| Office line **402-440-5438** | Voice/office — not the 10DLC SMS sender unless you deliberately register it (usually keep SMS on 402-735-5665). |
+| What number should this campaign use? | The number shown on the site for **SMS/Text: 402-844-1199** — confirm in Telnyx → Numbers that this E.164 (`+14028441199`) is on Telnyx and will get the campaign. If 402-844-1199 is still only on Twilio, either **port it** or **buy/host a Telnyx number** and update the website + `en/sms-optin.html` before vetting. |
+| Office line **402-440-5438** | Voice/office — not the 10DLC SMS sender unless you deliberately register it (usually keep SMS on 402-844-1199). |
 | After campaign approval | **Port** the Twilio SMS number to Telnyx (LNP), assign the approved 10DLC campaign to that number, then switch app env from `TWILIO_*` to Telnyx API keys. |
 
 **Practical rule:** Campaign samples, message flow, privacy policy, and live opt-in forms must all show the **same** SMS sender number that Telnyx will actually use.
@@ -151,7 +153,7 @@ If Telnyx marks **Embedded phone number**, include **402-735-5665** in samples. 
 ## After approval
 
 1. Link campaign to brand in Telnyx → Messaging → 10DLC → Campaigns.
-2. Assign campaign to number **402-735-5665**.
+2. Assign campaign to number **402-844-1199**.
 3. Point application SMS API to Telnyx (replace Twilio env vars when ready).
 
 ## Fees and vetting (two layers)

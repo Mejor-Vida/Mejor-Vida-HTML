@@ -273,7 +273,7 @@ module.exports = async function handler(req, res) {
       return res.status(200).send(twiml(msg));
     } catch (err) {
       console.error('[sms-webhook] Email send error:', err.message);
-      return res.status(200).send(twiml(`I saved your email but had trouble sending the link. Call me at 402-735-5665 and I'll help you right now!`));
+      return res.status(200).send(twiml(`I saved your email but had trouble sending the link. Call me at 402-844-1199 and I'll help you right now!`));
     }
   }
 

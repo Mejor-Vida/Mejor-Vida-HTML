@@ -59,13 +59,20 @@ async function main() {
   }
   await sharp(await iconSquare(iconBuf, 180)).toFile("apple-touch-icon.png");
 
+  const adsDir = "img/google-ads";
+  const fs = require("fs");
+  fs.mkdirSync(adsDir, { recursive: true });
+  for (const size of [512, 1200]) {
+    await sharp(await iconSquare(iconBuf, size)).toFile(`${adsDir}/mvi-square-logo-${size}.png`);
+  }
+
   execSync(
     `python3 - <<'PY'
 from PIL import Image
 sizes = [16, 32, 48]
 imgs = [Image.open(f"favicon-{s}x{s}.png").convert("RGBA") for s in sizes]
 imgs[0].save("favicon.ico", format="ICO", sizes=[(s, s) for s in sizes])
-print("Updated favicon.ico and PNG sizes")
+print("Updated favicon.ico, PNG sizes, and img/google-ads/mvi-square-logo-*.png")
 PY`,
     { stdio: "inherit" }
   );

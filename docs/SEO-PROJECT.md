@@ -40,7 +40,7 @@
 | Office / main | 402-440-5438 | Primary CTA in meta descriptions |
 | WhatsApp | 402-440-5438 | Primary for Spanish-speaking leads |
 | Julie callback | 402-588-1125 | Secondary; use in body copy, not meta |
-| SMS / texto | 402-735-5665 | Footer + header bar |
+| SMS / texto | 402-844-1199 | Footer + header bar |
 | Email | julie@mejorvidainsurance.com | Schema + contact pages |
 | Hours | Mon–Fri 4–8 PM CST, Sat 8 AM–12 PM CST | Schema `openingHoursSpecification` |
 
