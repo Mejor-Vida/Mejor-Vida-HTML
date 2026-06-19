@@ -12,7 +12,7 @@
  *     Step 1: 5 hours   — value + book call
  *     Step 2: 21 hours  — soft check-in
  *
- *   Phase 2 — SMS/Twilio (3 messages, days 3/5/7 — 48h / 96h / 144h from enroll)
+ *   Phase 2 — SMS/Telnyx (3 messages, days 3/5/7 — 48h / 96h / 144h from enroll)
  *     Step 1: Day 3  — QUOTE/CALL keywords (avoids same-day overlap with WhatsApp step 2 ~21h)
  *     Step 2: Day 5  — value + VCF (if not sent)
  *     Step 3: Day 7  — last SMS
@@ -26,9 +26,7 @@
  * vercel.json: { "path": "/api/nurture-cron", "schedule": "0,30 * * * *" }
  *
  * Env vars: SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY,
- *   TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN,
- *   TWILIO_MESSAGING_SERVICE_SID (A2P Messaging Service MG…; preferred for Phase 2 SMS),
- *   TWILIO_PHONE_NUMBER (E.164 fallback if Messaging Service SID not set),
+ *   TELNYX_API_KEY, TELNYX_SMS_FROM (+14028441199),
  *   MANYCHAT_API_KEY (Bearer for sendFlow), MANYCHAT_FLOW_PHASE1_STEP1/STEP2,
  *   RESEND_API_KEY, CRON_SECRET
  */
@@ -37,6 +35,7 @@ const { wrapResendEmailHtml, LOGO_EN, LOGO_ES } = require('../lib/resend-email-t
 const { computeNextSend } = require('../lib/nurture-schedule');
 const { VCF_URL, getSmsMessage, getEmailContent } = require('../lib/nurture-templates');
 const { logContactCommunication, htmlToPlain } = require('../lib/contact-communications');
+const { sendSms } = require('../lib/sms-send');
 
 // ─── Supabase helpers ─────────────────────────────────────────────────────────
 function sbHeaders() {
@@ -132,49 +131,26 @@ async function sendWhatsApp(contact, nurtureRow, step) {
   return { ok: true, providerId: flowNs };
 }
 
-// ─── Phase 2: SMS via Twilio ──────────────────────────────────────────────────
-async function sendSms(contact, nurtureRow, step) {
+// ─── Phase 2: SMS via Telnyx (lib/sms-send.js) ───────────────────────────────
+async function sendSmsStep(contact, nurtureRow, step) {
   if (nurtureRow.twilio_opt_out) return { ok: false, reason: 'opted_out' };
   const phone = contact.phone;
   if (!phone) return { ok: false, reason: 'no_phone' };
-
-  const sid                 = process.env.TWILIO_ACCOUNT_SID;
-  const token               = process.env.TWILIO_AUTH_TOKEN;
-  const messagingServiceSid = (process.env.TWILIO_MESSAGING_SERVICE_SID || '').trim();
-  const fromNumber          = (process.env.TWILIO_PHONE_NUMBER || '').trim();
-
-  if (!sid || !token) return { ok: false, reason: 'missing_twilio_env' };
-  if (!messagingServiceSid && !fromNumber) return { ok: false, reason: 'missing_twilio_env' };
 
   const msgBody = getSmsMessage(step, contact);
   if (!msgBody) return { ok: false, reason: 'no_message' };
 
   const includeVcf = step === 2 && !contact.vcf_sent_at;
+  const mediaUrls = includeVcf ? [VCF_URL] : undefined;
 
-  // Ensure E.164 format (Twilio requires leading +)
-  const toPhone = phone.startsWith('+') ? phone : `+${phone}`;
-  const params = new URLSearchParams({ Body: msgBody, To: toPhone });
-  if (messagingServiceSid) {
-    params.append('MessagingServiceSid', messagingServiceSid);
-  } else {
-    params.append('From', fromNumber);
+  const sent = await sendSms({ to: phone, body: msgBody, mediaUrls });
+  if (!sent.ok) {
+    throw new Error(`${sent.provider || 'sms'}: ${sent.reason} ${JSON.stringify(sent.detail || '')}`);
   }
-  if (includeVcf) params.append('MediaUrl', VCF_URL);
-
-  const res = await fetch(`https://api.twilio.com/2010-04-01/Accounts/${sid}/Messages.json`, {
-    method:  'POST',
-    headers: {
-      Authorization:  'Basic ' + Buffer.from(`${sid}:${token}`).toString('base64'),
-      'Content-Type': 'application/x-www-form-urlencoded',
-    },
-    body: params.toString(),
-  });
-  const json = await res.json();
-  if (json.error_code) throw new Error(`Twilio: ${JSON.stringify(json)}`);
   console.log(
-    `[nurture] SMS sent to ${phone}, twilio ${json.sid}${includeVcf ? ' (VCF)' : ''} via ${messagingServiceSid ? 'MessagingServiceSid' : 'From'}`,
+    `[nurture] SMS sent to ${phone}, ${sent.provider} ${sent.sid}${includeVcf ? ' (VCF)' : ''}`,
   );
-  return { ok: true, sid: json.sid, vcfSent: includeVcf };
+  return { ok: true, sid: sent.sid, vcfSent: includeVcf };
 }
 
 // ─── Phase 3: Email via Resend ────────────────────────────────────────────────
@@ -256,7 +232,7 @@ module.exports = async function handler(req, res) {
         overrideRow = await fetchEmailOverride(contact.id, phase, step);
       }
       if (phase === 1) sendResult = await sendWhatsApp(contact, row, step);
-      else if (phase === 2) sendResult = await sendSms(contact, row, step);
+      else if (phase === 2) sendResult = await sendSmsStep(contact, row, step);
       else if (phase === 3) sendResult = await sendEmail(contact, row, step, overrideRow);
     } catch (err) {
       console.error(`[nurture] Row ${row.id} send error:`, err.message);

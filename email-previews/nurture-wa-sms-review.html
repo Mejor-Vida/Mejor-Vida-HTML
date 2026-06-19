@@ -76,7 +76,7 @@
           </tr>
           <tr>
             <td>2</td>
-            <td>SMS (Twilio)</td>
+            <td>SMS (Telnyx)</td>
             <td>Day 1, 3, 5 (24h / 72h / 120h from enroll)</td>
             <td>3 (see below)</td>
           </tr>
@@ -121,7 +121,7 @@
       <p class="tag">Step 2 — Day 3 (VCF)</p>
       <div class="bubble sms">Hey Maria, Julie here from Mejor Vida Insurance! Final expense plans start under $30/month — could be a perfect fit. Save my contact so I'm just a tap away 👉 https://www.mejorvidainsurance.com/julie.vcf — then reply QUOTE or CALL. Reply STOP to unsubscribe.</div>
       <p class="note">
-        If <code>vcf_sent_at</code> is still null, Twilio also sends the vCard as an attachment (<code>MediaUrl</code>) on this step.
+        If <code>vcf_sent_at</code> is still null, Telnyx also sends the vCard as MMS (<code>media_urls</code>) on this step.
       </p>
 
       <p class="tag">Step 3 — Day 5 (final SMS)</p>

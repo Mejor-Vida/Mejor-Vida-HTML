@@ -13,11 +13,12 @@
  *
  * Required env vars:
  *   SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY
- *   TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, TWILIO_PHONE_NUMBER
+ *   TELNYX_API_KEY, TELNYX_SMS_FROM
  *   MANYCHAT_WEBHOOK_SECRET
  */
 
 const VCF_URL = 'https://www.mejorvidainsurance.com/julie.vcf';
+const { sendSms } = require('../lib/sms-send');
 
 function json(res, status, payload) {
   res.status(status).setHeader('Content-Type', 'application/json');
@@ -54,22 +55,6 @@ async function sbPatch(url, key, path, data) {
     body: JSON.stringify(data),
   });
   if (!res.ok) { const t = await res.text(); throw new Error(`Supabase PATCH ${path}: ${res.status} ${t}`); }
-}
-
-async function sendTwilioSms(sid, token, from, to, body, mediaUrl) {
-  const params = new URLSearchParams({ Body: body, From: from, To: to });
-  if (mediaUrl) params.append('MediaUrl', mediaUrl);
-  const res = await fetch(`https://api.twilio.com/2010-04-01/Accounts/${sid}/Messages.json`, {
-    method: 'POST',
-    headers: {
-      Authorization: 'Basic ' + Buffer.from(`${sid}:${token}`).toString('base64'),
-      'Content-Type': 'application/x-www-form-urlencoded',
-    },
-    body: params.toString(),
-  });
-  const result = await res.json();
-  if (result.error_code) throw new Error(`Twilio error ${result.error_code}: ${result.message}`);
-  return result.sid;
 }
 
 module.exports = async function handler(req, res) {
@@ -116,20 +101,16 @@ module.exports = async function handler(req, res) {
   }
 
   // Send VCF reminder SMS
-  const sid   = process.env.TWILIO_ACCOUNT_SID;
-  const token = process.env.TWILIO_AUTH_TOKEN;
-  const from  = process.env.TWILIO_PHONE_NUMBER;
-
-  if (!sid || !token || !from) {
-    return json(res, 500, { ok: false, error: 'Missing Twilio env vars' });
-  }
-
   const message = `Hi ${name}! Your call with Julie is confirmed 🎉 One quick thing — save her contact so you can always reach her directly: ${VCF_URL} See you soon!`;
 
   let smsSid;
   try {
-    smsSid = await sendTwilioSms(sid, token, from, phone, message, VCF_URL);
-    console.log(`[call-scheduled] VCF reminder SMS sent to ${phone}, SID: ${smsSid}`);
+    const sent = await sendSms({ to: phone, body: message, mediaUrls: [VCF_URL] });
+    if (!sent.ok) {
+      throw new Error(`${sent.provider || 'sms'}: ${sent.reason} ${JSON.stringify(sent.detail || '')}`);
+    }
+    smsSid = sent.sid;
+    console.log(`[call-scheduled] VCF reminder SMS sent to ${phone}, ${sent.provider} ${smsSid}`);
   } catch (err) {
     console.error('[call-scheduled] SMS send error:', err.message);
     return json(res, 500, { ok: false, error: 'Failed to send SMS', detail: err.message });

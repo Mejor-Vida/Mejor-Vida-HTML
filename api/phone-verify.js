@@ -1,15 +1,13 @@
 /**
  * POST /api/phone-verify
- * Site phone SMS verification (Twilio + Supabase OTP store).
- * Not used on the landing flow until Twilio A2P is approved — kept for later enablement.
+ * Site phone SMS verification (Telnyx + Supabase OTP store).
  *
  * Body: { "action": "send" | "check", "phone": "...", "code": "123456" }
  * Origin-guarded — see lib/site-origin.js
  *
  * Env: SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY,
- *      TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN,
- *      TWILIO_MESSAGING_SERVICE_SID or TWILIO_PHONE_NUMBER,
- *      PHONE_VERIFY_OTP_SECRET (recommended; falls back to TWILIO_AUTH_TOKEN)
+ *      TELNYX_API_KEY, TELNYX_SMS_FROM,
+ *      PHONE_VERIFY_OTP_SECRET (recommended; falls back to CRON_SECRET)
  */
 
 const { verifySiteOrigin } = require("../lib/site-origin");

@@ -4,6 +4,8 @@ Use **English URLs only** for registration. Brand: **Mejor Vida Insurance** (ver
 
 **Campaign C18HVT1** — **Active** (Telnyx). Number **+1 402 844 1199** assigned to campaign. Website and `en/sms-optin.html` updated to match.
 
+**API wiring:** After campaign approval, configure outbound + inbound SMS in Vercel and Telnyx — see **[integrations/TELNYX_SMS_SETUP.md](../integrations/TELNYX_SMS_SETUP.md)**.
+
 ## Campaign type (use case)
 
 ### What Telnyx / TCR use this for
@@ -138,23 +140,23 @@ If Telnyx marks **Embedded phone number**, include **402-844-1199** in samples. 
 | ~~`en/landing-final-expense.html`~~ | **Do not use** for Telnyx 10DLC (retired; not listed on campaign) |
 | ~~`en/quote-out-of-state.html`~~ | **Not used** on English 10DLC paths (noindex; Spanish site only) |
 
-## SMS phone number: Twilio vs Telnyx
+## SMS phone number (Telnyx)
 
-| Question | Answer |
-|----------|--------|
-| Will my **old Twilio number** work on Telnyx automatically? | **No.** A US number is active on **one** messaging provider at a time for 10DLC. Twilio-owned numbers send through Twilio; Telnyx 10DLC SMS must use a number **in your Telnyx account** with the approved campaign assigned. |
-| How do I keep the **same digits** customers know? | **Port** the number from Twilio → Telnyx (number porting / LNP in Telnyx portal). Allow several business days; both carriers coordinate. Until port completes, keep sending from Twilio or pause SMS. |
-| What number should this campaign use? | The number shown on the site for **SMS/Text: 402-844-1199** — confirm in Telnyx → Numbers that this E.164 (`+14028441199`) is on Telnyx and will get the campaign. If 402-844-1199 is still only on Twilio, either **port it** or **buy/host a Telnyx number** and update the website + `en/sms-optin.html` before vetting. |
-| Office line **402-440-5438** | Voice/office — not the 10DLC SMS sender unless you deliberately register it (usually keep SMS on 402-844-1199). |
-| After campaign approval | **Port** the Twilio SMS number to Telnyx (LNP), assign the approved 10DLC campaign to that number, then switch app env from `TWILIO_*` to Telnyx API keys. |
+| Item | Value |
+|------|--------|
+| **Live SMS number** | **402-844-1199** (`+14028441199`) on Telnyx |
+| **10DLC campaign** | **C18HVT1** — Active, assigned to this number |
+| **App integration** | Telnyx API — see **[integrations/TELNYX_SMS_SETUP.md](../integrations/TELNYX_SMS_SETUP.md)** |
+| **Office line 402-440-5438** | Voice/office — not the 10DLC SMS sender |
 
-**Practical rule:** Campaign samples, message flow, privacy policy, and live opt-in forms must all show the **same** SMS sender number that Telnyx will actually use.
+**Practical rule:** Campaign samples, message flow, privacy policy, and live opt-in forms must all show the **same** SMS sender number that Telnyx uses (`402-844-1199`).
 
 ## After approval
 
 1. Link campaign to brand in Telnyx → Messaging → 10DLC → Campaigns.
 2. Assign campaign to number **402-844-1199**.
-3. Point application SMS API to Telnyx (replace Twilio env vars when ready).
+3. Set Vercel env: `TELNYX_API_KEY`, `TELNYX_SMS_FROM=+14028441199`, `TELNYX_WEBHOOK_SECRET`.
+4. Configure inbound webhook → `POST /api/telnyx-sms-webhook`.
 
 ## Fees and vetting (two layers)
 
@@ -223,5 +225,6 @@ Resubmit in Telnyx after deploy; confirm live checkbox at compliance-preview URL
 
 ### After campaign approval
 
-- OTP API (`/api/phone-verify`) currently sends via Twilio env vars; switch to Telnyx when the number is ported and Telnyx API keys are configured.
+- OTP API (`/api/phone-verify`) sends via Telnyx (`TELNYX_API_KEY`, `TELNYX_SMS_FROM`).
+- Inbound SMS: `POST /api/telnyx-sms-webhook`.
 - `en/gastos-finales-ads-v2/` has phone OTP enabled (`MVI_LANDING_PHONE_OTP_ENABLED`).

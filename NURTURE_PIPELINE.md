@@ -70,9 +70,9 @@ Uses **Meta-approved templates** in ManyChat. Timing is from **`nurture_sequence
 
 ---
 
-## Phase 2 — SMS via Twilio (days 1, 3, 5)
+## Phase 2 — SMS via Telnyx (days 1, 3, 5)
 
-Hour offsets from **`enrolled_at`**: **24h / 72h / 120h** (calendar days 1, 3, 5). Inbound replies are handled by **`api/sms-webhook.js`** (`QUOTE`, `CALL`, `STOP`, and email collection).
+Hour offsets from **`enrolled_at`**: **24h / 72h / 120h** (calendar days 1, 3, 5). Inbound replies are handled by **`api/telnyx-sms-webhook.js`** (`QUOTE`, `CALL`, `STOP`, and email collection).
 
 **Smart logic**
 
@@ -134,7 +134,7 @@ Mark unresponsive leads in CRM / Supabase; pause or complete nurture.
 | Quote + post-quote email | ManyChat → **`POST /api/post-quote-email`** |
 | Scheduled call + VCF SMS | Automation → **`POST /api/call-scheduled-webhook`** |
 | Nurture progression | Vercel Cron → **`GET /api/nurture-cron`** (Bearer `CRON_SECRET`) |
-| SMS inbound | Twilio → **`POST /api/sms-webhook`** |
+| SMS inbound | Telnyx → **`POST /api/telnyx-sms-webhook`** |
 
 ---
 
@@ -145,7 +145,7 @@ Mark unresponsive leads in CRM / Supabase; pause or complete nurture.
 | `MANYCHAT_FLOW_PHASE1_STEP1` | ManyChat flow namespace — **5-hour** step (`nurture_day3` template in flow) |
 | `MANYCHAT_FLOW_PHASE1_STEP2` | ManyChat flow namespace — **21-hour** step (`nurture_day_5` template in flow) |
 
-No `STEP3` / `STEP4`. Twilio, Resend, Supabase, and cron vars are in **`.env.example`**.
+No `STEP3` / `STEP4`. Telnyx, Resend, Supabase, and cron vars are in **`.env.example`**.
 
 ---
 
@@ -164,7 +164,7 @@ No `STEP3` / `STEP4`. Twilio, Resend, Supabase, and cron vars are in **`.env.exa
 | `api/nurture-cron.js` | `SCHEDULE_HOURS`: phase `1` = `{1:5,2:21}`, `2` = `{1:24,2:72,3:120}`, `3` = `{1:168,2:336,3:504,4:672}`; `MAX_STEPS` = `{1:2,2:3,3:4}` |
 | `api/post-quote-email.js` | Present; immediate post-quote email + `vcf_sent_at` update |
 | `api/lead-intake.js` | `firstSendAt` = **5 hours** after enroll |
-| `api/sms-webhook.js` | Present; QUOTE / CALL / STOP / email capture |
+| `api/telnyx-sms-webhook.js` | Present; QUOTE / CALL / STOP / email capture |
 | `api/call-scheduled-webhook.js` | Present; VCF reminder SMS |
 
 If production behavior diverges (e.g. ManyChat API auth), adjust env and ManyChat, not this checklist, unless agreed.

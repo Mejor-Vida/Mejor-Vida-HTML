@@ -1,7 +1,7 @@
 /**
  * Landing flow — U.S. phone entry + SMS OTP verification.
  *
- * DISABLED until Twilio A2P is approved. Re-enable by:
+ * DISABLED until Telnyx SMS is enabled on the landing. Re-enable by:
  * 1. Restoring the OTP markup in index.html (phone step section)
  * 2. Adding <script src="js/landing-flow-phone-verify.js"></script> before landing-flow.js
  * 3. Setting MVI_LANDING_PHONE_OTP_ENABLED = true on the phone step or in landing-flow.js

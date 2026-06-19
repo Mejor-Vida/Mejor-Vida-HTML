@@ -30,7 +30,7 @@ All messages across every channel use these placeholders. The table shows what e
 ### ManyChat (WhatsApp templates)
 ManyChat uses `{{First Name}}`, `{{Last Name}}`, `{{Phone}}` etc. as system fields. Custom fields are set via the MVI Chatflow.
 
-### Twilio SMS (nurture-cron.js)
+### Telnyx SMS (nurture-cron.js)
 Placeholders are inserted directly in JavaScript template literals:
 ```javascript
 const name = (contact.full_name || '').split(' ')[0] || 'there';
@@ -376,10 +376,10 @@ Mejor Vida Insurance
 
 ---
 
-## Post-Call-Schedule VCF Reminder (via sms-webhook or call-scheduled-webhook)
+## Post-Call-Schedule VCF Reminder (via telnyx-sms-webhook or call-scheduled-webhook)
 
 **Trigger:** Lead schedules a call
-**Channel:** SMS (Twilio)
+**Channel:** SMS (Telnyx)
 **Condition:** Only if `vcf_sent_at` is null
 
 Hi [First Name]! Your call with Julie is confirmed 🎉 One quick thing — save her contact so you can always reach her directly: [VCF Link] See you soon!
