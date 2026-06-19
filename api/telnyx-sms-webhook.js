@@ -41,15 +41,15 @@ module.exports = async function handler(req, res) {
     return res.status(405).json({ ok: false, error: "Method Not Allowed" });
   }
 
-  if (!validateTelnyxWebhookSecret(req)) {
-    console.warn("[telnyx-sms-webhook] Invalid webhook secret");
-    return res.status(403).json({ ok: false, error: "Forbidden" });
-  }
-
   let body = readJsonBody(req);
   if (!body) {
     console.warn("[telnyx-sms-webhook] Invalid JSON body");
     return res.status(400).json({ ok: false, error: "Invalid JSON" });
+  }
+
+  if (!validateTelnyxWebhookSecret(req, body)) {
+    console.warn("[telnyx-sms-webhook] Invalid webhook secret");
+    return res.status(403).json({ ok: false, error: "Forbidden" });
   }
 
   const inbound = parseTelnyxInbound(body);
