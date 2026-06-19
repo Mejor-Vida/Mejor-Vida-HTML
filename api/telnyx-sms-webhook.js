@@ -17,6 +17,24 @@ const {
   validateTelnyxWebhookSecret,
 } = require("../lib/sms-inbound-handler");
 
+function readJsonBody(req) {
+  if (Buffer.isBuffer(req.body)) {
+    try {
+      return JSON.parse(req.body.toString("utf8") || "{}");
+    } catch (e) {
+      return null;
+    }
+  }
+  if (typeof req.body === "string") {
+    try {
+      return JSON.parse(req.body || "{}");
+    } catch (e) {
+      return null;
+    }
+  }
+  return req.body && typeof req.body === "object" ? req.body : null;
+}
+
 module.exports = async function handler(req, res) {
   if (req.method !== "POST") {
     res.setHeader("Allow", "POST");
@@ -28,17 +46,16 @@ module.exports = async function handler(req, res) {
     return res.status(403).json({ ok: false, error: "Forbidden" });
   }
 
-  let body = req.body;
-  if (typeof body === "string") {
-    try {
-      body = JSON.parse(body);
-    } catch (e) {
-      return res.status(400).json({ ok: false, error: "Invalid JSON" });
-    }
+  let body = readJsonBody(req);
+  if (!body) {
+    console.warn("[telnyx-sms-webhook] Invalid JSON body");
+    return res.status(400).json({ ok: false, error: "Invalid JSON" });
   }
 
   const inbound = parseTelnyxInbound(body);
   if (!inbound) {
+    const eventType = body.data && body.data.event_type;
+    console.log(`[telnyx-sms-webhook] Ignored event: ${eventType || "unknown"}`);
     return res.status(200).json({ ok: true, ignored: true });
   }
 
@@ -66,8 +83,12 @@ module.exports = async function handler(req, res) {
 
   const sent = await sendSms({ to: fromPhone, body: result.reply });
   if (!sent.ok) {
-    console.error("[telnyx-sms-webhook] Outbound reply failed:", sent.reason, sent.detail || "");
-    return res.status(200).json({ ok: true, reply_failed: true });
+    console.error(
+      "[telnyx-sms-webhook] Outbound reply failed:",
+      sent.reason,
+      JSON.stringify(sent.detail || "").slice(0, 400),
+    );
+    return res.status(200).json({ ok: true, reply_failed: true, reason: sent.reason });
   }
 
   return res.status(200).json({ ok: true, message_id: sent.sid });
