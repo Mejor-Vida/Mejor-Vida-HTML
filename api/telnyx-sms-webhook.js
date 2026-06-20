@@ -86,9 +86,15 @@ module.exports = async function handler(req, res) {
     console.error(
       "[telnyx-sms-webhook] Outbound reply failed:",
       sent.reason,
-      JSON.stringify(sent.detail || "").slice(0, 400),
+      sent.message || JSON.stringify(sent.detail || "").slice(0, 400),
     );
-    return res.status(200).json({ ok: true, reply_failed: true, reason: sent.reason });
+    return res.status(200).json({
+      ok: true,
+      reply_failed: true,
+      reason: sent.reason,
+      telnyx_status: sent.status || null,
+      telnyx_error: sent.message || null,
+    });
   }
 
   return res.status(200).json({ ok: true, message_id: sent.sid });
