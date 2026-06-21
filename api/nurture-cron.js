@@ -32,7 +32,7 @@
  */
 
 const { wrapResendEmailHtml, LOGO_EN, LOGO_ES } = require('../lib/resend-email-template');
-const { computeNextSend } = require('../lib/nurture-schedule');
+const { computeNextSendWithSchedule, scheduleMapFromRows } = require('../lib/nurture-email-schedule');
 const { VCF_URL, getSmsMessage, getEmailContent } = require('../lib/nurture-templates');
 const { logContactCommunication, htmlToPlain } = require('../lib/contact-communications');
 const { sendSms } = require('../lib/sms-send');
@@ -85,6 +85,17 @@ function channelForPhase(phase) {
   if (phase === 1) return 'whatsapp';
   if (phase === 2) return 'sms';
   return 'email';
+}
+
+async function fetchEmailScheduleMap(contactId) {
+  try {
+    const rows = await sbFetch(
+      `/nurture_email_schedule?contact_id=eq.${contactId}&order=step.asc`
+    );
+    return scheduleMapFromRows(rows);
+  } catch (e) {
+    return {};
+  }
 }
 
 async function fetchEmailOverride(contactId, phase, step) {
@@ -226,6 +237,7 @@ module.exports = async function handler(req, res) {
     const { phase, step } = row;
     let sendResult = { ok: false, reason: 'unknown_phase' };
     let overrideRow = null;
+    const emailScheduleMap = phase === 3 ? await fetchEmailScheduleMap(contact.id) : {};
 
     try {
       if (phase === 3) {
@@ -243,7 +255,12 @@ module.exports = async function handler(req, res) {
     if (!sendResult.ok && sendResult.reason === 'no_email' && phase === 3) {
       console.warn(`[nurture] Skipping email step ${step} for contact ${contact.id} — no email on file`);
       await insertDeliveryLog(contact.id, 'email', phase, step, 'skipped', { reason: 'no_email' });
-      const { nextPhase, nextStep, nextSendAt } = computeNextSend(phase, step, row.enrolled_at);
+      const { nextPhase, nextStep, nextSendAt } = computeNextSendWithSchedule(
+        phase,
+        step,
+        row.enrolled_at,
+        emailScheduleMap
+      );
       const skipUpdate = {
         phase:        nextPhase ?? phase,
         step:         nextStep ?? step,
@@ -333,7 +350,12 @@ module.exports = async function handler(req, res) {
       }
     }
 
-    const { nextPhase, nextStep, nextSendAt } = computeNextSend(phase, step, row.enrolled_at);
+    const { nextPhase, nextStep, nextSendAt } = computeNextSendWithSchedule(
+      phase,
+      step,
+      row.enrolled_at,
+      emailScheduleMap
+    );
     const update = {
       last_sent_at: now.toISOString(),
       phase:        nextPhase ?? phase,

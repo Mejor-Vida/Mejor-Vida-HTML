@@ -3,7 +3,7 @@ const { json, readJsonBody } = require("./_inbox-lib");
 const {
   buildReviewRequestPlainText,
   buildReviewRequestSubject,
-  reviewUrl,
+  facebookReviewUrl,
 } = require("../../lib/review-request-email-template");
 const { normalizeFirstName } = require("../../lib/medical-intake-lead-greeting");
 
@@ -25,14 +25,18 @@ module.exports = async function handler(req, res) {
 
   const language = body && body.language != null ? String(body.language).trim() : "English";
   const firstName = normalizeFirstName(body && body.firstName != null ? body.firstName : "");
-  const link = reviewUrl();
+  const link = facebookReviewUrl();
 
   const subject = buildReviewRequestSubject({ language, firstName });
   const bodyText = buildReviewRequestPlainText({
     language,
     firstName,
-    reviewLink: link,
+    facebookReviewLink: link,
   });
 
-  return json(res, 200, { subject, body: bodyText, previewLink: link });
+  return json(res, 200, {
+    subject,
+    body: bodyText,
+    previewLink: link,
+  });
 };

@@ -13,7 +13,7 @@ const path = require("path");
 const ROOT = path.join(__dirname, "..");
 const PORT = Number(process.env.PORT || 3000);
 
-function loadEnvLocal() {
+function loadEnvLocal(overwrite) {
   const p = path.join(ROOT, ".env.local");
   if (!fs.existsSync(p)) return;
   const raw = fs.readFileSync(p, "utf8");
@@ -27,7 +27,7 @@ function loadEnvLocal() {
     if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
       val = val.slice(1, -1);
     }
-    if (key && process.env[key] === undefined) process.env[key] = val;
+    if (key && (overwrite || process.env[key] === undefined)) process.env[key] = val;
   }
 }
 
@@ -77,6 +77,7 @@ function apiHandlerPath(pathname) {
 }
 
 async function runApi(absHandler, req, res, query) {
+  loadEnvLocal(true);
   delete require.cache[require.resolve(absHandler)];
   // API handlers import lib/* — bust that cache too so search fixes apply without restart.
   const libRoot = path.join(ROOT, "lib") + path.sep;

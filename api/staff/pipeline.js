@@ -6,6 +6,7 @@ const {
   buildPipelineSteps,
   buildTemplatePipelineSteps,
   fetchNurtureRowWithContact,
+  loadEmailScheduleMap,
 } = require("./_nurture-lib");
 
 function displayName(contact) {
@@ -140,7 +141,10 @@ function isTerminalNurtureStatus(status) {
 }
 
 async function buildEntryForContact(cfg, contact, ns, deliveryLogs, leadState, ovMap) {
-  const steps = ns ? buildPipelineSteps(ns, deliveryLogs) : buildTemplatePipelineSteps();
+  const emailScheduleMap = ns ? await loadEmailScheduleMap(cfg, contact.id) : {};
+  const steps = ns
+    ? buildPipelineSteps(ns, deliveryLogs, emailScheduleMap)
+    : buildTemplatePipelineSteps();
   attachStepPreviews(steps, contact, ovMap);
   return {
     contact: contactPayload(contact),

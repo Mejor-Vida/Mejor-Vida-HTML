@@ -5,6 +5,7 @@ const {
   scheduledAtForStep,
   computeNextSend,
 } = require("../../lib/nurture-schedule");
+const { scheduleMapFromRows } = require("../../lib/nurture-email-schedule");
 
 function channelForPhase(phase) {
   if (phase === 1) return "whatsapp";
@@ -28,10 +29,11 @@ function pickLatestLog(logs) {
 /**
  * Timeline rows for the pipeline UI — honors nurture_delivery_log when present.
  */
-function buildPipelineSteps(nurtureRow, deliveryLogs) {
+function buildPipelineSteps(nurtureRow, deliveryLogs, emailScheduleMap) {
   if (!nurtureRow || !nurtureRow.enrolled_at) return [];
 
   const enrolled = nurtureRow.enrolled_at;
+  const customEmailSchedule = emailScheduleMap || {};
   const ordered = allStepsOrdered();
   const curIdx = stepIndex(nurtureRow.phase, nurtureRow.step);
   const st = String(nurtureRow.status || 'active');
@@ -68,7 +70,10 @@ function buildPipelineSteps(nurtureRow, deliveryLogs) {
   const mainSteps = ordered.map((stDef, idx) => {
     const k = `${stDef.phase}:${stDef.step}`;
     const lastLog = pickLatestLog(logsByKey[k]);
-    const scheduledAt = scheduledAtForStep(enrolled, stDef.phase, stDef.step);
+    let scheduledAt = scheduledAtForStep(enrolled, stDef.phase, stDef.step);
+    if (stDef.phase === 3 && customEmailSchedule[stDef.step]) {
+      scheduledAt = customEmailSchedule[stDef.step];
+    }
 
     let uiStatus = "pending";
     let actualSentAt = null;
@@ -179,6 +184,19 @@ async function insertSkippedDelivery(cfg, contactId, phase, step, reason) {
   });
 }
 
+async function loadEmailScheduleMap(cfg, contactId) {
+  try {
+    const rows = await restSelect(
+      cfg,
+      "nurture_email_schedule",
+      `contact_id=eq.${encodeURIComponent(contactId)}&order=step.asc`
+    );
+    return scheduleMapFromRows(rows);
+  } catch (e) {
+    return {};
+  }
+}
+
 module.exports = {
   channelForPhase,
   computeNextSend,
@@ -187,6 +205,7 @@ module.exports = {
   fetchNurtureRow,
   fetchNurtureRowWithContact,
   insertSkippedDelivery,
+  loadEmailScheduleMap,
   restPatch,
   restSelect,
   restInsert,

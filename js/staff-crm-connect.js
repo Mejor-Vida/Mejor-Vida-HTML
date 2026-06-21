@@ -381,7 +381,7 @@
       reply.value = (data && data.body) || "";
       setStatus(
         state,
-        t("conn_status_preview_ready", { subject: (data && data.subject) || "(preview)" })
+        t("conn_status_review_preview_ready", { subject: (data && data.subject) || "(preview)" })
       );
     } catch (e) {
       setStatus(state, t("conn_status_preview_failed"));

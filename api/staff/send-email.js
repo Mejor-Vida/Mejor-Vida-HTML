@@ -15,7 +15,7 @@ const {
   buildReviewRequestPlainText,
   buildReviewRequestSubject,
   buildReviewRequestCtaHtml,
-  reviewUrl,
+  facebookReviewUrl,
 } = require("../../lib/review-request-email-template");
 const {
   buildAgentCredentialsPlainText,
@@ -297,13 +297,13 @@ module.exports = async function handler(req, res) {
           /* use salutation without name */
         }
       }
-      reviewLink = reviewUrl();
+      reviewLink = facebookReviewUrl();
       draftForSend = replyDraft
         ? replyDraft
         : buildReviewRequestPlainText({
             language,
             firstName: fn,
-            reviewLink,
+            facebookReviewLink: reviewLink,
           });
       subjectForSend = buildReviewRequestSubject({ language, firstName: fn });
     }
@@ -339,7 +339,10 @@ module.exports = async function handler(req, res) {
       htmlOut = htmlOut.replace("</body>", `${cta}</body>`);
     }
     if (reviewLink) {
-      const cta = buildReviewRequestCtaHtml({ language, reviewLink });
+      const cta = buildReviewRequestCtaHtml({
+        language,
+        facebookReviewLink: reviewLink,
+      });
       htmlOut = htmlOut.replace("</body>", `${cta}</body>`);
     }
     let rfc822;
