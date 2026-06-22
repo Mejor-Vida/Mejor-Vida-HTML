@@ -27,7 +27,9 @@ function loadEnvLocal(overwrite) {
     if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
       val = val.slice(1, -1);
     }
-    if (key && (overwrite || process.env[key] === undefined)) process.env[key] = val;
+    if (key && (overwrite || process.env[key] === undefined || process.env[key] === "")) {
+      process.env[key] = val;
+    }
   }
 }
 
@@ -118,6 +120,7 @@ async function runApi(absHandler, req, res, query) {
   if (req.method !== "GET" && req.method !== "HEAD" && ct.includes("application/json")) {
     try {
       const buf = await readBody(req);
+      req.rawBody = buf;
       const text = buf.toString("utf8");
       req.body = text ? JSON.parse(text) : {};
     } catch (e) {
@@ -128,6 +131,7 @@ async function runApi(absHandler, req, res, query) {
     }
   } else if (req.method !== "GET" && req.method !== "HEAD") {
     const buf = await readBody(req);
+    req.rawBody = buf;
     req.body = buf.toString("utf8");
   }
   await handler(req, res);
@@ -158,7 +162,16 @@ function serveStatic(urlPath, res) {
   fs.createReadStream(abs).pipe(res);
 }
 
-loadEnvLocal();
+loadEnvLocal(true);
+
+function telnyxEnvStatus() {
+  const key = String(process.env.TELNYX_API_KEY || "").trim();
+  const from = String(process.env.TELNYX_SMS_FROM || "").trim();
+  if (!key) return "Telnyx SMS: TELNYX_API_KEY missing — add to .env.local and restart dev:local";
+  if (!key.startsWith("KEY")) return "Telnyx SMS: TELNYX_API_KEY looks malformed (should start with KEY)";
+  if (!from) return "Telnyx SMS: TELNYX_SMS_FROM missing — set to +14028441199";
+  return "Telnyx SMS: configured (from " + from + ")";
+}
 
 const server = http.createServer(async (req, res) => {
   const u = new URL(req.url || "/", `http://${req.headers.host || "localhost"}`);
@@ -210,6 +223,7 @@ server.listen(PORT, () => {
   console.log(`Site home:        ${base}/`);
   console.log("────────────────────────────────────────");
   console.log("Loads .env.local — uses your Supabase project for tokens/PHI.");
+  console.log(telnyxEnvStatus());
   console.log("Preview link:     npm run mint:intake-link");
   console.log("");
 });
