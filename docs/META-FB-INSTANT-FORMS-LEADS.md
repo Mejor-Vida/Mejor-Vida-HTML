@@ -52,6 +52,8 @@ Add to **`.env.local`** (local) and **Vercel → Project → Settings → Enviro
 | `META_LEADGEN_DEFAULT_LANG` | Optional | `es` (default) or `en` |
 | `META_LEADGEN_SKIP_SIGNATURE` | Dev only | `1` to skip signature check locally — **never in production** |
 
+**Signature failures:** `FACEBOOK_APP_SECRET` must be the **MejorVidaAutomation** app secret (App → Settings → Basic). If Supabase `webhook_logs` shows `signature_mismatch`, re-copy the secret into Vercel with no trailing spaces and redeploy (the API route disables Vercel JSON body parsing so Meta’s HMAC matches).
+
 \* At least one Page access token with leads scope.
 
 ## 3. Subscribe the webhook in Meta

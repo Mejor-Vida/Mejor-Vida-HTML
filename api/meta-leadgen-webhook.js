@@ -163,3 +163,10 @@ module.exports = async function handler(req, res) {
   const okCount = results.filter((r) => r.ok).length;
   return json(res, 200, { ok: true, processed: okCount, results });
 };
+
+// Meta signs the raw POST bytes — Vercel must not JSON-parse before verify.
+module.exports.config = {
+  api: {
+    bodyParser: false,
+  },
+};
