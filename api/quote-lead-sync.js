@@ -187,6 +187,14 @@ function capiNormalizePhone(phone) {
   return digits || null;
 }
 
+function capiClientUserAgent(req, body) {
+  const fromBody = String((body && body.clientUserAgent) || "").trim();
+  if (fromBody) return fromBody.slice(0, 1000);
+  const h = (req && req.headers) || {};
+  const fromReq = String(h["user-agent"] || h["User-Agent"] || "").trim();
+  return fromReq ? fromReq.slice(0, 1000) : null;
+}
+
 function capiClientIp(req) {
   const h = req.headers || {};
   const xff = String(h["x-forwarded-for"] || h["X-Forwarded-For"] || "")
@@ -606,7 +614,7 @@ module.exports = async function handler(req, res) {
       eventId: capiEventId,
       metaFbp: body.metaFbp,
       metaFbc: body.metaFbc,
-      clientUserAgent: body.clientUserAgent,
+      clientUserAgent: capiClientUserAgent(req, body),
       clientIp: capiClientIp(req),
     });
     await sendQuoteLeadNotification({
@@ -689,7 +697,7 @@ module.exports = async function handler(req, res) {
     eventId: capiEventId,
     metaFbp: body.metaFbp,
     metaFbc: body.metaFbc,
-    clientUserAgent: body.clientUserAgent,
+    clientUserAgent: capiClientUserAgent(req, body),
     clientIp: capiClientIp(req),
   });
 
