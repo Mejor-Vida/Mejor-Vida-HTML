@@ -187,6 +187,25 @@ function capiNormalizePhone(phone) {
   return digits || null;
 }
 
+function capiClientIp(req) {
+  const h = req.headers || {};
+  const xff = String(h["x-forwarded-for"] || h["X-Forwarded-For"] || "")
+    .split(",")[0]
+    .trim();
+  const real = String(h["x-real-ip"] || h["X-Real-IP"] || "").trim();
+  const ip = xff || real;
+  if (ip && /^[\da-fA-F:.]+$/.test(ip) && ip.length <= 45) return ip;
+  return null;
+}
+
+function capiFbcFromOrigin(metaFbc, originDetail) {
+  const fromClient = String(metaFbc || "").trim();
+  if (fromClient) return fromClient.slice(0, 500);
+  const fbclid = String((originDetail && originDetail.fbclid) || "").trim();
+  if (!fbclid) return null;
+  return `fb.1.${Date.now()}.${fbclid.slice(0, 500)}`;
+}
+
 function capiEventSourceUrl(originDetail) {
   const path = String(
     (originDetail && (originDetail.page_path || originDetail.landing_path)) || ""
@@ -221,10 +240,7 @@ function resolveLeadSource(body) {
 }
 
 function shouldSendMetaCAPI(leadSource, originDetail) {
-  if (
-    leadSource === "facebook_landing_gastos_finales" ||
-    leadSource === "english_landing_gastos_finales"
-  ) {
+  if (leadSource === "facebook_landing_gastos_finales") {
     return true;
   }
   if (leadSource === "nebraska_quote_page" && isGastosFinalesLanding(originDetail)) {
@@ -245,6 +261,10 @@ async function sendMetaCAPIEvent({
   sex,
   originDetail,
   eventId,
+  metaFbp,
+  metaFbc,
+  clientUserAgent,
+  clientIp,
 }) {
   try {
     if (!shouldSendMetaCAPI(leadSource, originDetail)) return;
@@ -275,6 +295,20 @@ async function sendMetaCAPIEvent({
       .toLowerCase();
     if (lnNorm) userData.ln = [capiSha256(lnNorm)];
 
+    const fbp = String(metaFbp || "").trim();
+    if (fbp) userData.fbp = fbp.slice(0, 200);
+
+    const fbc = capiFbcFromOrigin(metaFbc, originDetail);
+    if (fbc) userData.fbc = fbc;
+
+    const ua = String(clientUserAgent || "").trim();
+    if (ua) userData.client_user_agent = ua.slice(0, 1000);
+
+    if (clientIp) userData.client_ip_address = clientIp;
+
+    const dedupeId = String(eventId || "").trim().slice(0, 128);
+    if (dedupeId) userData.external_id = [capiSha256(dedupeId)];
+
     const eventRow = {
       event_name: "Lead",
       event_time: Math.floor(Date.now() / 1000),
@@ -283,7 +317,6 @@ async function sendMetaCAPIEvent({
       user_data: userData,
       custom_data: { currency: "USD", value: 0 },
     };
-    const dedupeId = String(eventId || "").trim().slice(0, 128);
     if (dedupeId) eventRow.event_id = dedupeId;
 
     const payload = { data: [eventRow] };
@@ -569,6 +602,10 @@ module.exports = async function handler(req, res) {
       sex: body.sex,
       originDetail,
       eventId: capiEventId,
+      metaFbp: body.metaFbp,
+      metaFbc: body.metaFbc,
+      clientUserAgent: body.clientUserAgent,
+      clientIp: capiClientIp(req),
     });
     await sendQuoteLeadNotification({
       leadSource,
@@ -648,6 +685,10 @@ module.exports = async function handler(req, res) {
     sex: body.sex,
     originDetail,
     eventId: capiEventId,
+    metaFbp: body.metaFbp,
+    metaFbc: body.metaFbc,
+    clientUserAgent: body.clientUserAgent,
+    clientIp: capiClientIp(req),
   });
 
   await sendQuoteLeadNotification({

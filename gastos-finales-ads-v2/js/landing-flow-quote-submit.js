@@ -215,33 +215,42 @@
 
           setQuoteStatus(msg("Saving your estimate…", "Guardando tu estimado…"), false);
 
+          var originDetail = collectOriginDetail();
+          var syncPayload = {
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            phone: phone,
+            state: stateCode,
+            quoteSummary: quoteSummary,
+            quoteLow: data.quote_low,
+            quoteHigh: data.quote_high,
+            quoteAnchor: data.quote_anchor,
+            age: age,
+            sex: sex,
+            smoker: smoker,
+            dob: dobIso,
+            coverageAmount: coverage,
+            consent: !!selections.smsConsent,
+            lang: LANG,
+            source: IS_EN ? "english_landing_gastos_finales" : "facebook_landing_gastos_finales",
+            sessionClientId: sessionClientId,
+            originDetail: originDetail,
+          };
+          if (!IS_EN && window.MVIMetaCapiMatch && typeof window.MVIMetaCapiMatch.collectForLeadSync === "function") {
+            var capiMatch = window.MVIMetaCapiMatch.collectForLeadSync(originDetail);
+            if (capiMatch.metaFbp) syncPayload.metaFbp = capiMatch.metaFbp;
+            if (capiMatch.metaFbc) syncPayload.metaFbc = capiMatch.metaFbc;
+            if (capiMatch.clientUserAgent) syncPayload.clientUserAgent = capiMatch.clientUserAgent;
+          }
+
           return fetch(siteApiUrl("/api/quote-lead-sync"), {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              firstName: firstName,
-              lastName: lastName,
-              email: email,
-              phone: phone,
-              state: stateCode,
-              quoteSummary: quoteSummary,
-              quoteLow: data.quote_low,
-              quoteHigh: data.quote_high,
-              quoteAnchor: data.quote_anchor,
-              age: age,
-              sex: sex,
-              smoker: smoker,
-              dob: dobIso,
-              coverageAmount: coverage,
-              consent: !!selections.smsConsent,
-              lang: LANG,
-              source: IS_EN ? "english_landing_gastos_finales" : "facebook_landing_gastos_finales",
-              sessionClientId: sessionClientId,
-              originDetail: collectOriginDetail(),
-            }),
+            body: JSON.stringify(syncPayload),
           }).then(function (syncRes) {
             return syncRes.json().then(function (syncData) {
-              if (syncRes.ok && syncData && syncData.ok && typeof fbq === "function") {
+              if (!IS_EN && syncRes.ok && syncData && syncData.ok && typeof fbq === "function") {
                 var leadEventOpts = {
                   em: email,
                   ph: phone,
