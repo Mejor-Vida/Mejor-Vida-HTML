@@ -54,7 +54,7 @@ STRUCTURAL_REPLACEMENTS = [
     ('aria-label="WhatsApp con Mejor Vida"', 'aria-label="WhatsApp Mejor Vida"'),
     ('aria-label="Progreso"', 'aria-label="Progress"'),
     (
-        'hidden>¿Listo para aprender más de gastos finales?</h1>',
+        'hidden>En Nebraska, el costo promedio de un funeral puede alcanzar los $9,500 en 2026</h1>',
         'hidden>Ready to learn more about final expense insurance?</h1>',
     ),
     ('aria-label="Volver al paso anterior">← Atrás</button>', 'aria-label="Go back to previous step">← Back</button>'),

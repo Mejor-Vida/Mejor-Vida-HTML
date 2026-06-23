@@ -930,7 +930,7 @@
       if (step === 1) {
         headerTagline.textContent = ui(
           "Ready to learn more about final expense insurance?",
-          "¿Listo para aprender más de gastos finales?"
+          "En Nebraska, el costo promedio de un funeral puede alcanzar los $9,500 en 2026"
         );
       } else if (isCalculatorStep(step) && !isCalcResults) {
         headerTagline.hidden = false;
