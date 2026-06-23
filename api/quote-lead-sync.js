@@ -320,6 +320,8 @@ async function sendMetaCAPIEvent({
     if (dedupeId) eventRow.event_id = dedupeId;
 
     const payload = { data: [eventRow] };
+    const testCode = String(process.env.META_CAPI_TEST_EVENT_CODE || "").trim();
+    if (testCode) payload.test_event_code = testCode;
 
     const url = `https://graph.facebook.com/v19.0/873141755808233/events?access_token=${encodeURIComponent(accessToken)}`;
     const r = await fetch(url, {
