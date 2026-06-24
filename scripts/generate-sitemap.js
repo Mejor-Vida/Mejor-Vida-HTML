@@ -15,7 +15,7 @@ const STATIC_PAGES = [
   { loc: "/about-julie.html", priority: "0.85" },
   { loc: "/blog.html", priority: "0.80" },
   { loc: "/contact.html", priority: "0.75" },
-  { loc: "/final-expense-estimator.html", priority: "0.80" },
+  { loc: "/quote.html", priority: "0.90" },
   { loc: "/schedule-julie.html", priority: "0.75" },
   { loc: "/carriers/assurity.html", priority: "0.70" },
   { loc: "/carriers/mutual-of-omaha.html", priority: "0.70" },
