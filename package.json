@@ -29,7 +29,9 @@
     "harvest:winflex:install": "npx playwright install chromium",
     "harvest:winflex": "node scripts/winflex-harvest.mjs",
     "harvest:winflex:auto": "node scripts/winflex-auto-extract.mjs",
-    "term:import-spots": "node scripts/term-spot-import.mjs"
+    "term:import-spots": "node scripts/term-spot-import.mjs",
+    "assurity:import-spot": "node scripts/assurity-fe-spot-import.js",
+    "assurity:interpolate-tobacco": "node scripts/interpolate-assurity-tobacco-from-anchors.js"
   },
   "dependencies": {
     "googleapis": "^171.4.0"

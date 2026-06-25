@@ -34,6 +34,28 @@ Columns:
 Export illustrations (NE, $10K, monthly, Pay to 100, Protect+) and append rows to the CSV, then rebuild:
 
 ```bash
+node scripts/assurity-fe-spot-import.js --age 40 --sex male --monthly 19.33 --class preferred_tobacco
+python3 integrations/supabase/apply_migrations.py
+```
+
+Quick Quote settings (Agent Center): **Whole Life Protect+**, **Pay to Age 100**, **$10,000**, **monthly**, Nebraska. Do not use Perform+ or Single Premium rows for the landing quoter.
+
+**Agent Center spots (male, Protect+ Pay to Age 100):**
+
+| Age | Class | Monthly | Source |
+|-----|--------|---------|--------|
+| 40 | preferred_tobacco | $19.33 | Quick Quote text paste |
+| 40 | standard_tobacco | $19.51 | Protect+ 10-Pay $37.22 × Pay100/10Pay ratio from age 40 Preferred |
+| 30 | standard_tobacco | $14.82 | Protect+ 10-Pay $28.28 × same ratio |
+| 30 | preferred_tobacco | $14.68 | Standard × Preferred/Standard spread at age 40 |
+| 20 | standard_tobacco | $11.58 | Protect+ 10-Pay $22.10 × same ratio |
+| 20 | preferred_tobacco | $11.47 | Standard × Preferred/Standard spread at age 40 |
+
+Ratio anchor: Protect+ Pay to Age 100 $19.33 ÷ Protect+ 10-Pay $36.88 at age 40 Preferred Tobacco.
+
+**Interpolation (ages 18–44):** After adding Agent Center anchors, run `npm run assurity:interpolate-tobacco` to fill in-between ages with linear interpolation (and extrapolation below 20 / above 40). Female tobacco uses the female/male ratio at anchor ages 20/30/40. Source tag: `agent_center_interpolated`. Re-importing a new anchor spot then re-running interpolate refreshes the curve.
+
+```bash
 node scripts/generate-assurity-tobacco-interim.js   # only if refreshing interim tobacco rows
 node scripts/build-assurity-quote-ranges-from-csv.js
 python3 integrations/supabase/apply_migrations.py   # or run 060 SQL in Supabase
