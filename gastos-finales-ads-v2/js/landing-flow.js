@@ -946,7 +946,14 @@
     updateNextButton();
     trackStepViewed(step);
     if (!IS_EN && window.MVIMetaCapiEvents && typeof window.MVIMetaCapiEvents.onLandingStep === "function") {
-      window.MVIMetaCapiEvents.onLandingStep(step, activeFlow);
+      window.MVIMetaCapiEvents.onLandingStep(step, activeFlow, {
+        email: selections.email,
+        phone: selections.phone,
+        firstName: selections.firstName,
+        lastName: selections.lastName,
+        sex: selections.sex,
+        state: selections.state,
+      });
     }
     window.scrollTo(0, 0);
   }

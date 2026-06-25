@@ -2,7 +2,8 @@
  * POST /api/meta-capi-event
  * Server-side Meta CAPI for Spanish FE landing PageView / ViewContent.
  *
- * Body: { eventName, eventId, originDetail, sessionClientId, metaFbp, metaFbc, clientUserAgent }
+ * Body: { eventName, eventId, originDetail, sessionClientId, metaFbp, metaFbc, clientUserAgent,
+ *         email, phone, firstName, lastName, sex, state }
  * Env: META_CAPI_ACCESS_TOKEN, optional META_CAPI_TEST_EVENT_CODE
  */
 const {

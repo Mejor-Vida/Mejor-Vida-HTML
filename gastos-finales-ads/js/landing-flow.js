@@ -671,7 +671,14 @@
     refreshStepUI();
     updateProgress();
     if (window.MVIMetaCapiEvents && typeof window.MVIMetaCapiEvents.onLandingStep === "function") {
-      window.MVIMetaCapiEvents.onLandingStep(step, "quote");
+      window.MVIMetaCapiEvents.onLandingStep(step, "quote", {
+        email: selections.email,
+        phone: selections.phone,
+        firstName: selections.firstName,
+        lastName: selections.lastName,
+        sex: selections.sex,
+        state: selections.state,
+      });
     }
     window.scrollTo(0, 0);
   }

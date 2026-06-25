@@ -16,6 +16,15 @@
   } catch (e) {}
   if (path.indexOf("gastos-finales-ads") === -1) return;
 
+  var STORAGE_KEYS = {
+    email: "mviLandingEmail",
+    phone: "mviLandingPhone",
+    firstName: "mviLandingFirstName",
+    lastName: "mviLandingLastName",
+    sex: "mviLandingSex",
+    state: "mviLandingState",
+  };
+
   function siteApiUrl(apiPath) {
     var origin = window.location.origin || "";
     if (/^https?:\/\/(127\.0\.0\.1|localhost)(:\d+)?$/i.test(origin)) {
@@ -33,6 +42,15 @@
       return created;
     } catch (e) {
       return generator();
+    }
+  }
+
+  function readSessionValue(key) {
+    try {
+      var value = sessionStorage.getItem(key);
+      return value && value.length > 0 ? value : "";
+    } catch (e) {
+      return "";
     }
   }
 
@@ -62,6 +80,37 @@
     return readStorage("mviMetaViewContentEventId", function () {
       return newEventId("vc-");
     });
+  }
+
+  function normalizePhoneForPayload(phone) {
+    var digits = String(phone || "").replace(/\D/g, "");
+    if (digits.length === 10) return "+1" + digits;
+    if (digits.length === 11 && digits.charAt(0) === "1") return "+" + digits;
+    return String(phone || "").trim();
+  }
+
+  function collectLeadHints(leadHints) {
+    var hints = {};
+    if (leadHints && typeof leadHints === "object") {
+      Object.keys(leadHints).forEach(function (key) {
+        if (leadHints[key] != null && String(leadHints[key]).trim()) {
+          hints[key] = String(leadHints[key]).trim();
+        }
+      });
+    }
+    var email = hints.email || readSessionValue(STORAGE_KEYS.email);
+    var phone = hints.phone || readSessionValue(STORAGE_KEYS.phone);
+    var firstName = hints.firstName || readSessionValue(STORAGE_KEYS.firstName);
+    var lastName = hints.lastName || readSessionValue(STORAGE_KEYS.lastName);
+    var sex = hints.sex || readSessionValue(STORAGE_KEYS.sex);
+    var state = hints.state || readSessionValue(STORAGE_KEYS.state);
+    if (email) hints.email = email.slice(0, 320);
+    if (phone) hints.phone = normalizePhoneForPayload(phone).slice(0, 32);
+    if (firstName) hints.firstName = firstName.slice(0, 120);
+    if (lastName) hints.lastName = lastName.slice(0, 120);
+    if (sex) hints.sex = sex.slice(0, 16);
+    if (state) hints.state = state.slice(0, 8);
+    return hints;
   }
 
   function collectOriginDetail() {
@@ -116,7 +165,16 @@
     }
   }
 
-  var viewContentSent = false;
+  var viewContentPixelSent = false;
+  var viewContentCapiSent = false;
+
+  function viewContentCustomData() {
+    return {
+      content_type: "product",
+      content_name: "final_expense_quote",
+      content_category: "insurance",
+    };
+  }
 
   function trackPageView() {
     var eventId = getPageViewEventId();
@@ -126,29 +184,51 @@
     postCapi(buildCapiPayload("PageView", eventId));
   }
 
-  function trackViewContent() {
-    if (viewContentSent) return;
-    viewContentSent = true;
+  function sendViewContentCapi(leadHints) {
+    if (viewContentCapiSent) return;
+    var hints = collectLeadHints(leadHints);
+    if (!hints.email && !hints.phone) return;
+    viewContentCapiSent = true;
     var eventId = getViewContentEventId();
-    var content = {
-      content_type: "product",
-      content_name: "final_expense_quote",
-      content_category: "insurance",
-    };
-    if (typeof fbq === "function") {
-      fbq("track", "ViewContent", content, { eventID: eventId });
-    }
     postCapi(
       buildCapiPayload("ViewContent", eventId, {
         contentName: "final_expense_quote",
+        email: hints.email || undefined,
+        phone: hints.phone || undefined,
+        firstName: hints.firstName || undefined,
+        lastName: hints.lastName || undefined,
+        sex: hints.sex || undefined,
+        state: hints.state || undefined,
       })
     );
   }
 
-  function onLandingStep(step, activeFlow) {
+  function trackViewContentPixel() {
+    if (viewContentPixelSent) return;
+    viewContentPixelSent = true;
+    var eventId = getViewContentEventId();
+    if (typeof fbq === "function") {
+      fbq("track", "ViewContent", viewContentCustomData(), { eventID: eventId });
+    }
+  }
+
+  function trackViewContent(leadHints) {
+    trackViewContentPixel();
+    sendViewContentCapi(leadHints);
+  }
+
+  function onLandingStep(step, activeFlow, leadHints) {
     var flow = activeFlow || "quote";
-    if (step === 2 && (flow === "quote" || flow == null)) {
-      trackViewContent();
+    if (flow !== "quote" && flow != null) return;
+
+    if (step === 2) {
+      trackViewContentPixel();
+      return;
+    }
+
+    if (step >= 12 && step <= 14) {
+      trackViewContentPixel();
+      sendViewContentCapi(leadHints);
     }
   }
 
@@ -167,6 +247,7 @@
     getPageViewEventId: getPageViewEventId,
     getViewContentEventId: getViewContentEventId,
     getSessionClientId: getSessionClientId,
+    collectLeadHints: collectLeadHints,
   };
 
   if (document.readyState === "loading") {
