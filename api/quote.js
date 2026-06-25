@@ -154,7 +154,7 @@ module.exports = async function handler(req, res) {
     if (!range) {
       const tobaccoMsg =
         age <= 44 && smoker
-          ? "We do not have Assurity tobacco premiums on file yet. Julie can quote you from Agent Center."
+          ? "Aún no tenemos tarifas de tabaco para Assurity en línea. Julie puede cotizarle desde Agent Center."
           : "We don't have rate data for that combination yet.";
       return json(
         res,

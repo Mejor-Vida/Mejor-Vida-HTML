@@ -14,7 +14,7 @@ Columns:
 - `sex` — `male` or `female`
 - `uw_class` — Assurity underwriting class (see below)
 - `monthly` — monthly premium in dollars
-- `source` — `flyer_rates_compare_rev_10_25`, `flyer_interpolated`, or `agent_center`
+- `source` — `flyer_rates_compare_rev_10_25`, `flyer_interpolated`, `agent_center`, or interim `moo_ratio_calibrated_v050` (replace with `agent_center`)
 
 ### Underwriting classes (Assurity product guide)
 
@@ -27,15 +27,16 @@ Columns:
 
 1. Run `node scripts/build-assurity-quote-ranges-from-csv.js` to regenerate `050_quote_ranges_assurity.sql` (or apply directly to Supabase).
 2. **Non-smoker:** `low` = lowest available NT class premium; `high` = highest available NT class premium. If only one NT class exists, all three amounts match (no fabricated spread).
-3. **Tobacco:** quotes only when `preferred_tobacco` and/or `standard_tobacco` rows exist for that age/sex. Otherwise the API returns `no_data`.
+3. **Tobacco:** quotes when `preferred_tobacco` / `standard_tobacco` rows exist in the CSV. Interim tobacco uses `moo_ratio_calibrated_v050` until Agent Center rows replace them.
 
 ## Adding real rates from Agent Center
 
 Export illustrations (NE, $10K, monthly, Pay to 100, Protect+) and append rows to the CSV, then rebuild:
 
 ```bash
+node scripts/generate-assurity-tobacco-interim.js   # only if refreshing interim tobacco rows
 node scripts/build-assurity-quote-ranges-from-csv.js
-python3 integrations/supabase/apply_migrations.py   # or run 051 SQL in Supabase
+python3 integrations/supabase/apply_migrations.py   # or run 060 SQL in Supabase
 ```
 
 Do **not** add estimated tobacco or standard premiums without an Assurity source.
