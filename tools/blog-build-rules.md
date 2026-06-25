@@ -60,6 +60,7 @@ When the post includes the full newsletter or long source text:
 
 1. **Base file**: Copy the most recent `weekly-insurance-update-*.html` to preserve header, nav, footer, styles, assistant widget, and JSON-LD patterns.
 2. **Head**: Update `title`, `meta name="description"`, `canonical`, Open Graph, `article:published_time` / `modified_time`, `NewsArticle` + `BreadcrumbList` + `FAQPage` + `ItemList` JSON-LD.
+   - **`BreadcrumbList`** must be site navigation only: Home/Inicio → Blog → article title, each with `name` + `item` URL. Do **not** put weekly news stories in `BreadcrumbList` (use `ItemList` for those). Run `node scripts/fix-blog-breadcrumb-schema.js` if unsure.
 3. **`blog.html`**:
    - Update `.newsletter-summary-block` (ES + EN) for the covered week.
    - Prepend a new **blog card** inside `#blog-feed` (most recent first).
