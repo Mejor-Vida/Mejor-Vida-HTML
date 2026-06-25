@@ -945,6 +945,9 @@
     refreshStepUI();
     updateNextButton();
     trackStepViewed(step);
+    if (!IS_EN && window.MVIMetaCapiEvents && typeof window.MVIMetaCapiEvents.onLandingStep === "function") {
+      window.MVIMetaCapiEvents.onLandingStep(step, activeFlow);
+    }
     window.scrollTo(0, 0);
   }
 

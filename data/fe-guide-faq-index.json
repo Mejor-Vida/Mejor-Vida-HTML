@@ -1,0 +1,311 @@
+{
+  "intro": "Guías en español escritas por Julie, agente con licencia en Nebraska. Cada enlace abre una página dedicada con información detallada (sin contenido generado por IA).",
+  "categories": [
+    {
+      "id": "esencial",
+      "title": "Lo esencial",
+      "guides": [
+        {
+          "slug": "que-es-seguro-gastos-finales",
+          "question": "¿Qué es un seguro de gastos finales?",
+          "teaser": "Qué cubre, para quién sirve y cómo ayuda a su familia con el funeral y deudas pequeñas."
+        },
+        {
+          "slug": "cuanto-cuesta-seguro-gastos-finales",
+          "question": "¿Cuánto cuesta un seguro de gastos finales?",
+          "teaser": "Rangos de precio por edad, tabaco y cobertura — con ejemplos para Nebraska."
+        },
+        {
+          "slug": "medicare-paga-gastos-finales",
+          "question": "¿Se encarga Medicare de pagar los gastos finales?",
+          "teaser": "Qué paga Medicare, qué no cubre y por qué muchas familias necesitan otra protección."
+        },
+        {
+          "slug": "diferencia-seguro-vida-y-gastos-finales",
+          "question": "¿Cuál es la diferencia entre seguro de vida y seguro de gastos finales?",
+          "teaser": "Compare propósito, montos de cobertura y cuándo conviene cada uno."
+        },
+        {
+          "slug": "que-pasa-sin-seguro-gastos-finales",
+          "question": "¿Qué pasa si no tengo seguro de gastos finales?",
+          "teaser": "Riesgos para la familia, costos del funeral y alternativas para planificar."
+        },
+        {
+          "slug": "que-son-polizas-gastos-finales",
+          "question": "¿Qué son las pólizas de gastos finales?",
+          "teaser": "Tipos de pólizas, beneficios en vida y cómo funcionan las primas niveladas."
+        }
+      ]
+    },
+    {
+      "id": "costos",
+      "title": "Costos y cobertura",
+      "guides": [
+        {
+          "slug": "cuanto-cuesta-funeral-nebraska",
+          "question": "¿Cuánto cuesta un funeral en Nebraska?",
+          "teaser": "Promedios locales, entierro vs cremación y cómo se relaciona con su cobertura."
+        },
+        {
+          "slug": "cuanta-cobertura-gastos-finales-necesito",
+          "question": "¿Cuánta cobertura de gastos finales necesito?",
+          "teaser": "$5,000, $10,000 o $15,000 — cómo elegir el monto adecuado."
+        },
+        {
+          "slug": "factores-precio-seguro-gastos-finales",
+          "question": "¿Qué factores afectan el precio del seguro de gastos finales?",
+          "teaser": "Edad, salud, tabaco, compañía y monto de beneficio explicados en sencillo."
+        },
+        {
+          "slug": "examen-medico-seguro-gastos-finales",
+          "question": "¿Necesito examen médico para un seguro de gastos finales?",
+          "teaser": "Pólizas sin examen, cuestionarios de salud y qué esperar al aplicar."
+        },
+        {
+          "slug": "seguro-gastos-finales-con-problemas-salud",
+          "question": "¿Puedo obtener seguro de gastos finales si tengo problemas de salud?",
+          "teaser": "Opciones graduadas, aceptación garantizada y cómo Julie compara compañías."
+        },
+        {
+          "slug": "seguro-gastos-finales-fumadores",
+          "question": "¿Puedo obtener seguro de gastos finales si fumo?",
+          "teaser": "Cómo el tabaco afecta la prima y qué alternativas existen."
+        },
+        {
+          "slug": "edad-contratar-seguro-gastos-finales",
+          "question": "¿A qué edad conviene contratar un seguro de gastos finales?",
+          "teaser": "50s, 60s, 70s y más — por qué antes suele ser más económico."
+        },
+        {
+          "slug": "cuanto-tiempo-aprobacion-poliza-gastos-finales",
+          "question": "¿Cuánto tiempo tarda en aprobarse una póliza de gastos finales?",
+          "teaser": "Pasos desde la cotización hasta la emisión, y qué puede acelerar el proceso."
+        }
+      ]
+    },
+    {
+      "id": "local",
+      "title": "Nebraska y atención en español",
+      "guides": [
+        {
+          "slug": "seguro-gastos-finales-nebraska",
+          "question": "Seguro de gastos finales en Nebraska — guía en español",
+          "teaser": "Opciones, compañías y cómo trabajar con un agente local en su idioma."
+        },
+        {
+          "slug": "agente-seguros-gastos-finales-espanol-nebraska",
+          "question": "Agente de seguros de gastos finales en español en Nebraska",
+          "teaser": "Qué hace un agente independiente y cómo Julie le ayuda a comparar."
+        },
+        {
+          "slug": "seguro-gastos-finales-en-espanol",
+          "question": "¿Ofrecen seguro de gastos finales en español?",
+          "teaser": "Atención bilingüe, documentos y proceso de cotización en español."
+        },
+        {
+          "slug": "seguro-funerario-hispanos-nebraska",
+          "question": "Seguro funerario para hispanos en Nebraska",
+          "teaser": "Planificación cultural, familia y protección financiera en español."
+        }
+      ]
+    },
+    {
+      "id": "ciudades",
+      "title": "Por ciudad en Nebraska",
+      "guides": [
+        {
+          "slug": "seguro-gastos-finales-omaha",
+          "question": "Seguro de gastos finales en Omaha",
+          "teaser": "Guía para familias del área metropolitana de Omaha y alrededores."
+        },
+        {
+          "slug": "seguro-gastos-finales-lincoln",
+          "question": "Seguro de gastos finales en Lincoln",
+          "teaser": "Opciones y planificación para la capital de Nebraska y el condado de Lancaster."
+        },
+        {
+          "slug": "seguro-gastos-finales-bellevue",
+          "question": "Seguro de gastos finales en Bellevue",
+          "teaser": "Cobertura para familias en Bellevue y el este del área de Omaha."
+        },
+        {
+          "slug": "seguro-gastos-finales-grand-island",
+          "question": "Seguro de gastos finales en Grand Island",
+          "teaser": "Información para el centro de Nebraska y el condado de Hall."
+        },
+        {
+          "slug": "seguro-gastos-finales-kearney",
+          "question": "Seguro de gastos finales en Kearney",
+          "teaser": "Planificación de gastos finales para familias en Kearney y Buffalo County."
+        },
+        {
+          "slug": "seguro-gastos-finales-fremont",
+          "question": "Seguro de gastos finales en Fremont",
+          "teaser": "Guía para el noreste de Nebraska y el condado de Dodge."
+        },
+        {
+          "slug": "seguro-gastos-finales-hastings",
+          "question": "Seguro de gastos finales en Hastings",
+          "teaser": "Cobertura y costos funerarios para familias en Hastings y Adams County."
+        },
+        {
+          "slug": "seguro-gastos-finales-norfolk",
+          "question": "Seguro de gastos finales en Norfolk",
+          "teaser": "Opciones para el noreste de Nebraska y el condado de Madison."
+        },
+        {
+          "slug": "seguro-gastos-finales-north-platte",
+          "question": "Seguro de gastos finales en North Platte",
+          "teaser": "Planificación para el oeste de Nebraska y Lincoln County."
+        },
+        {
+          "slug": "seguro-gastos-finales-columbus",
+          "question": "Seguro de gastos finales en Columbus",
+          "teaser": "Información para familias en Columbus y Platte County."
+        },
+        {
+          "slug": "seguro-gastos-finales-papillion",
+          "question": "Seguro de gastos finales en Papillion",
+          "teaser": "Guía para Papillion, Sarpy County y el sur del área de Omaha."
+        },
+        {
+          "slug": "seguro-gastos-finales-la-vista",
+          "question": "Seguro de gastos finales en La Vista",
+          "teaser": "Cobertura para familias en La Vista y el condado de Sarpy."
+        },
+        {
+          "slug": "seguro-gastos-finales-scottsbluff",
+          "question": "Seguro de gastos finales en Scottsbluff",
+          "teaser": "Opciones en el Panhandle de Nebraska y Scotts Bluff County."
+        },
+        {
+          "slug": "seguro-gastos-finales-south-sioux-city",
+          "question": "Seguro de gastos finales en South Sioux City",
+          "teaser": "Planificación para familias en el noreste de Nebraska, cerca de Dakota del Sur."
+        },
+        {
+          "slug": "seguro-gastos-finales-beatrice",
+          "question": "Seguro de gastos finales en Beatrice",
+          "teaser": "Guía para el sureste de Nebraska y Gage County."
+        },
+        {
+          "slug": "seguro-gastos-finales-lexington",
+          "question": "Seguro de gastos finales en Lexington",
+          "teaser": "Información para familias en Lexington y el condado de Dawson."
+        },
+        {
+          "slug": "seguro-gastos-finales-alliance",
+          "question": "Seguro de gastos finales en Alliance",
+          "teaser": "Cobertura y planificación para el oeste de Nebraska y Box Butte County."
+        },
+        {
+          "slug": "seguro-gastos-finales-mccook",
+          "question": "Seguro de gastos finales en McCook",
+          "teaser": "Opciones para el suroeste de Nebraska y Red Willow County."
+        },
+        {
+          "slug": "seguro-gastos-finales-crete",
+          "question": "Seguro de gastos finales en Crete",
+          "teaser": "Guía para familias en Crete y el sureste del área de Lincoln."
+        },
+        {
+          "slug": "seguro-gastos-finales-schuyler",
+          "question": "Seguro de gastos finales en Schuyler",
+          "teaser": "Planificación para Schuyler y el condado de Colfax."
+        }
+      ]
+    },
+    {
+      "id": "producto",
+      "title": "Productos y compañías",
+      "guides": [
+        {
+          "slug": "companias-seguro-gastos-finales",
+          "question": "¿Qué compañías ofrecen seguro de gastos finales?",
+          "teaser": "Assurity, Mutual of Omaha, American Amicable y cómo comparar opciones."
+        },
+        {
+          "slug": "comparar-mutual-omaha-american-amicable",
+          "question": "Mutual of Omaha vs American Amicable — gastos finales",
+          "teaser": "Diferencias generales que Julie considera al cotizar."
+        },
+        {
+          "slug": "seguro-vida-entero-gastos-finales",
+          "question": "¿Qué es un seguro de vida entero para gastos finales?",
+          "teaser": "Vida entero simplificado y por qué es común en gastos finales."
+        },
+        {
+          "slug": "poliza-graduada-gastos-finales",
+          "question": "¿Qué es una póliza graduada (graded) de gastos finales?",
+          "teaser": "Beneficios parciales al inicio, aceptación y cuándo aplica."
+        },
+        {
+          "slug": "seguro-gastos-finales-cubre-deudas-medicas",
+          "question": "¿El seguro de gastos finales cubre deudas médicas?",
+          "teaser": "Uso del beneficio, facturas pendientes y qué puede pagar la familia."
+        },
+        {
+          "slug": "beneficio-seguro-gastos-finales-familia",
+          "question": "¿Puedo dejar dinero a mi familia además del funeral?",
+          "teaser": "Beneficio sobrante, legado pequeño y flexibilidad del pago."
+        },
+        {
+          "slug": "periodo-carencia-seguro-gastos-finales",
+          "question": "¿Qué es el período de carencia (waiting period)?",
+          "teaser": "Primeros meses de la póliza, muerte accidental y lectura de contrato."
+        },
+        {
+          "slug": "cancelar-seguro-gastos-finales",
+          "question": "¿Puedo cancelar un seguro de gastos finales?",
+          "teaser": "Cancelación, dejar de pagar y consecuencias antes de decidir."
+        }
+      ]
+    },
+    {
+      "id": "mas",
+      "title": "Más preguntas",
+      "guides": [
+        {
+          "slug": "seguro-gastos-finales-mayores-70",
+          "question": "Seguro de gastos finales para personas mayores de 70 años",
+          "teaser": "Opciones, precios y aceptación después de los 70."
+        },
+        {
+          "slug": "seguro-gastos-finales-mayores-80",
+          "question": "Seguro de gastos finales para personas mayores de 80 años",
+          "teaser": "Qué compañías consideran 80+, límites de edad y expectativas realistas."
+        },
+        {
+          "slug": "seguro-gastos-finales-sin-examen-nebraska",
+          "question": "Seguro de gastos finales sin examen médico en Nebraska",
+          "teaser": "Productos sin examen disponibles en Nebraska y cómo calificar."
+        },
+        {
+          "slug": "vale-pena-seguro-10000-dolares",
+          "question": "¿Vale la pena un seguro de gastos finales con $10,000 de cobertura?",
+          "teaser": "Por qué $10,000 es un punto de partida común y si le alcanza."
+        },
+        {
+          "slug": "que-son-gastos-finales",
+          "question": "¿Qué son los gastos finales?",
+          "teaser": "Funeral, cremación, deudas y costos que la familia enfrenta."
+        },
+        {
+          "slug": "cremacion-vs-entierro-nebraska",
+          "question": "Cremación vs entierro — ¿cuánto cuesta en Nebraska?",
+          "teaser": "Compare costos y cómo influye en la cobertura que necesita."
+        },
+        {
+          "slug": "como-pagar-funeral-sin-seguro",
+          "question": "¿Cómo pagar un funeral sin seguro?",
+          "teaser": "Opciones de financiamiento, familia y por qué planificar antes ayuda."
+        },
+        {
+          "slug": "seguro-gastos-finales-vs-prepago-funerario",
+          "question": "Seguro de gastos finales vs prepago funerario",
+          "teaser": "Ventajas y límites de cada opción para su familia."
+        }
+      ]
+    }
+  ]
+}

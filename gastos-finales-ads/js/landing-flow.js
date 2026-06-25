@@ -670,6 +670,9 @@
     placeNextButton();
     refreshStepUI();
     updateProgress();
+    if (window.MVIMetaCapiEvents && typeof window.MVIMetaCapiEvents.onLandingStep === "function") {
+      window.MVIMetaCapiEvents.onLandingStep(step, "quote");
+    }
     window.scrollTo(0, 0);
   }
 

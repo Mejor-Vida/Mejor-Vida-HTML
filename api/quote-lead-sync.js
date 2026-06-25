@@ -9,8 +9,9 @@
  *             GMAIL_CLIENT_ID, GMAIL_CLIENT_SECRET, GMAIL_REFRESH_TOKEN, GMAIL_FROM_EMAIL
  */
 
-const crypto = require("crypto");
+
 const { sendQuoteLeadNotification } = require("../lib/ic-lead-notify");
+const { sendMetaCapiWebsiteEvent } = require("../lib/meta-capi");
 
 function applyCors(req, res) {
   const origin = String(req.headers.origin || "").trim();
@@ -177,14 +178,58 @@ async function hubspotUpdateContact(token, id, properties) {
   }
 }
 
-function capiSha256(value) {
-  return crypto.createHash("sha256").update(value).digest("hex");
+async function sendMetaCAPIEvent({
+  leadSource,
+  email,
+  phone,
+  firstName,
+  lastName,
+  sex,
+  city,
+  state,
+  zip,
+  originDetail,
+  eventId,
+  metaFbp,
+  metaFbc,
+  clientUserAgent,
+  clientIp,
+  req,
+}) {
+  await sendMetaCapiWebsiteEvent({
+    eventName: "Lead",
+    eventId,
+    originDetail,
+    leadSource,
+    req,
+    body: {
+      email,
+      phone,
+      firstName,
+      lastName,
+      sex,
+      city,
+      state,
+      zip,
+      country: "us",
+      metaFbp,
+      metaFbc,
+      clientUserAgent,
+      sessionClientId: eventId,
+      eventId,
+    },
+    customData: { currency: "USD", value: 0 },
+  });
 }
 
-function capiNormalizePhone(phone) {
-  let digits = String(phone || "").replace(/\D/g, "");
-  if (digits.length === 10) digits = "1" + digits;
-  return digits || null;
+function resolveLeadSource(body) {
+  const src = String((body && body.source) || "").trim();
+  if (src === "out_of_state_referral") return "out_of_state_referral";
+  if (src === "nebraska_term_quote_page") return "nebraska_term_quote_page";
+  if (src === "nebraska_quote_page") return "nebraska_quote_page";
+  if (src === "facebook_landing_gastos_finales") return "facebook_landing_gastos_finales";
+  if (src === "english_landing_gastos_finales") return "english_landing_gastos_finales";
+  return "fexquotes_page";
 }
 
 function capiClientUserAgent(req, body) {
@@ -204,148 +249,6 @@ function capiClientIp(req) {
   const ip = xff || real;
   if (ip && /^[\da-fA-F:.]+$/.test(ip) && ip.length <= 45) return ip;
   return null;
-}
-
-function capiFbcFromOrigin(metaFbc, originDetail) {
-  const fromClient = String(metaFbc || "").trim();
-  if (fromClient) return fromClient.slice(0, 500);
-  const fbclid = String((originDetail && originDetail.fbclid) || "").trim();
-  if (!fbclid) return null;
-  return `fb.1.${Date.now()}.${fbclid.slice(0, 500)}`;
-}
-
-function capiEventSourceUrl(originDetail) {
-  const path = String(
-    (originDetail && (originDetail.page_path || originDetail.landing_path)) || ""
-  ).trim();
-  if (path.startsWith("http://") || path.startsWith("https://")) {
-    return path.split("?")[0];
-  }
-  if (path.startsWith("/")) {
-    return `https://www.mejorvidainsurance.com${path.split("?")[0]}`;
-  }
-  return "https://www.mejorvidainsurance.com/gastos-finales-ads-v2/";
-}
-
-function gastosFinalesLandingPath(originDetail) {
-  return String(
-    (originDetail && (originDetail.page_path || originDetail.landing_path)) || ""
-  );
-}
-
-function isGastosFinalesLanding(originDetail) {
-  return gastosFinalesLandingPath(originDetail).includes("gastos-finales-ads");
-}
-
-function resolveLeadSource(body) {
-  const src = String((body && body.source) || "").trim();
-  if (src === "out_of_state_referral") return "out_of_state_referral";
-  if (src === "nebraska_term_quote_page") return "nebraska_term_quote_page";
-  if (src === "nebraska_quote_page") return "nebraska_quote_page";
-  if (src === "facebook_landing_gastos_finales") return "facebook_landing_gastos_finales";
-  if (src === "english_landing_gastos_finales") return "english_landing_gastos_finales";
-  return "fexquotes_page";
-}
-
-function shouldSendMetaCAPI(leadSource, originDetail) {
-  if (leadSource === "facebook_landing_gastos_finales") {
-    return true;
-  }
-  if (leadSource === "nebraska_quote_page" && isGastosFinalesLanding(originDetail)) {
-    return true;
-  }
-  if (leadSource === "fexquotes_page" && isGastosFinalesLanding(originDetail)) {
-    return true;
-  }
-  return false;
-}
-
-async function sendMetaCAPIEvent({
-  leadSource,
-  email,
-  phone,
-  firstName,
-  lastName,
-  sex,
-  originDetail,
-  eventId,
-  metaFbp,
-  metaFbc,
-  clientUserAgent,
-  clientIp,
-}) {
-  try {
-    if (!shouldSendMetaCAPI(leadSource, originDetail)) return;
-
-    const accessToken = process.env.META_CAPI_ACCESS_TOKEN;
-    if (!accessToken) return;
-
-    const userData = {};
-    const sexNorm = String(sex || "").toLowerCase();
-    if (sexNorm === "male" || sexNorm === "female") {
-      userData.ge = [capiSha256(sexNorm === "male" ? "m" : "f")];
-    }
-    const emNorm = String(email || "")
-      .trim()
-      .toLowerCase();
-    if (emNorm) userData.em = [capiSha256(emNorm)];
-
-    const phNorm = capiNormalizePhone(phone);
-    if (phNorm) userData.ph = [capiSha256(phNorm)];
-
-    const fnNorm = String(firstName || "")
-      .trim()
-      .toLowerCase();
-    if (fnNorm) userData.fn = [capiSha256(fnNorm)];
-
-    const lnNorm = String(lastName || "")
-      .trim()
-      .toLowerCase();
-    if (lnNorm) userData.ln = [capiSha256(lnNorm)];
-
-    const fbp = String(metaFbp || "").trim();
-    if (fbp) userData.fbp = fbp.slice(0, 200);
-
-    const fbc = capiFbcFromOrigin(metaFbc, originDetail);
-    if (fbc) userData.fbc = fbc;
-
-    const ua = String(clientUserAgent || "").trim();
-    if (ua) userData.client_user_agent = ua.slice(0, 1000);
-
-    if (clientIp) userData.client_ip_address = clientIp;
-
-    const dedupeId = String(eventId || "").trim().slice(0, 128);
-    if (dedupeId) userData.external_id = [capiSha256(dedupeId)];
-
-    const eventRow = {
-      event_name: "Lead",
-      event_time: Math.floor(Date.now() / 1000),
-      action_source: "website",
-      event_source_url: capiEventSourceUrl(originDetail),
-      user_data: userData,
-      custom_data: { currency: "USD", value: 0 },
-    };
-    if (dedupeId) eventRow.event_id = dedupeId;
-
-    const payload = { data: [eventRow] };
-    const testCode = String(process.env.META_CAPI_TEST_EVENT_CODE || "").trim();
-    if (testCode) payload.test_event_code = testCode;
-
-    const url = `https://graph.facebook.com/v19.0/873141755808233/events?access_token=${encodeURIComponent(accessToken)}`;
-    const r = await fetch(url, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    });
-    const text = await r.text();
-    if (!r.ok) {
-      console.log("[CAPI] failure", r.status, text.slice(0, 400));
-      return;
-    }
-    console.log("[CAPI] success", text.slice(0, 400));
-  } catch (e) {
-    console.log("[CAPI] failure", e.message || String(e));
-  }
 }
 
 module.exports = async function handler(req, res) {
@@ -610,12 +513,16 @@ module.exports = async function handler(req, res) {
       firstName,
       lastName,
       sex: body.sex,
+      city: body.city,
+      state: stateCode,
+      zip: body.zip,
       originDetail,
       eventId: capiEventId,
       metaFbp: body.metaFbp,
       metaFbc: body.metaFbc,
       clientUserAgent: capiClientUserAgent(req, body),
       clientIp: capiClientIp(req),
+      req,
     });
     await sendQuoteLeadNotification({
       leadSource,
@@ -693,12 +600,16 @@ module.exports = async function handler(req, res) {
     firstName,
     lastName,
     sex: body.sex,
+    city: body.city,
+    state: stateCode,
+    zip: body.zip,
     originDetail,
     eventId: capiEventId,
     metaFbp: body.metaFbp,
     metaFbc: body.metaFbc,
     clientUserAgent: capiClientUserAgent(req, body),
     clientIp: capiClientIp(req),
+    req,
   });
 
   await sendQuoteLeadNotification({

@@ -23,6 +23,7 @@
     "build:fa-subset": "node scripts/build-fa-subset.js",
     "apply:seo-performance": "node scripts/apply-seo-performance.js",
     "generate:sitemap": "node scripts/generate-sitemap.js",
+    "render:fe-guide-faq": "node scripts/render-fe-guide-faq-index.js",
     "generate:favicon": "node scripts/generate-favicon-sun.js",
     "harvest:winflex:setup": "npm install && npx playwright install chromium",
     "harvest:winflex:install": "npx playwright install chromium",
