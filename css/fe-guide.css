@@ -1,0 +1,385 @@
+/* FE guide pages — editorial trust layout (Choice Mutual–style structure, MVI brand) */
+.fe-guide-hero {
+  background: linear-gradient(135deg, #1a365d 0%, #2c5282 48%, #1e4a7a 100%);
+  color: #fff;
+  padding: 1.75rem 0 2rem;
+  margin-bottom: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.fe-guide-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 85% 20%, rgba(255, 255, 255, 0.08) 0%, transparent 55%);
+  pointer-events: none;
+}
+
+.fe-guide-hero .container {
+  position: relative;
+  z-index: 1;
+  max-width: 64rem;
+}
+
+.fe-guide-breadcrumb {
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  opacity: 0.92;
+}
+
+.fe-guide-breadcrumb a {
+  color: #e2e8f0;
+  text-decoration: none;
+}
+
+.fe-guide-breadcrumb a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+.fe-guide-breadcrumb span[aria-hidden] {
+  margin: 0 0.35rem;
+  opacity: 0.65;
+}
+
+.fe-guide-hero h1 {
+  font-size: clamp(1.65rem, 4vw, 2.35rem);
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0 0 0.5rem;
+  color: #fff;
+  letter-spacing: -0.02em;
+}
+
+.fe-guide-alt-names {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.88);
+  margin: 0 0 1rem;
+  max-width: 42rem;
+}
+
+.fe-guide-alt-names strong {
+  color: #fff;
+  font-weight: 600;
+}
+
+.fe-guide-hero-dek {
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.92);
+  max-width: 42rem;
+  margin: 0 0 1.5rem;
+}
+
+.fe-guide-ai-pledge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 999px;
+  padding: 0.35rem 0.85rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: #fff;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  font-family: inherit;
+  line-height: 1.3;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.fe-guide-ai-pledge:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.45);
+}
+
+.fe-guide-ai-pledge:focus-visible {
+  outline: 2px solid #fec963;
+  outline-offset: 2px;
+}
+
+.fe-guide-ai-pledge i {
+  color: #fec963;
+}
+
+.fe-guide-trust-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 1rem 1.25rem;
+}
+
+.fe-guide-avatar {
+  flex: 0 0 auto;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid rgba(255, 255, 255, 0.92);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+  background: #fff;
+}
+
+.fe-guide-avatar picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.fe-guide-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Headshot has white bg + extra headroom — center on face */
+  object-position: 50% 28%;
+  transform: scale(1.35);
+  transform-origin: 50% 28%;
+  display: block;
+}
+
+.fe-guide-trust-meta {
+  flex: 1 1 14rem;
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.fe-guide-trust-meta p {
+  margin: 0 0 0.35rem;
+}
+
+.fe-guide-trust-meta strong {
+  font-weight: 600;
+  color: #fff;
+}
+
+.fe-guide-trust-meta a {
+  color: #bfdbfe;
+  text-decoration: underline;
+}
+
+.fe-guide-trust-meta a:hover {
+  color: #fff;
+}
+
+.fe-guide-content-wrap {
+  max-width: 64rem;
+  margin: 0 auto;
+  padding: 0 1rem 3rem;
+}
+
+.fe-guide-takeaways {
+  background: #f0f7ff;
+  border: 1px solid #c3daf5;
+  border-radius: 0.5rem;
+  margin-top: -1.25rem;
+  margin-bottom: 2rem;
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 8px 24px rgba(26, 54, 93, 0.08);
+  overflow: hidden;
+}
+
+.fe-guide-takeaways-header {
+  background: #1a365d;
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.65rem 1.25rem;
+  margin: 0;
+}
+
+.fe-guide-takeaways-body {
+  padding: 1.1rem 1.25rem 1.25rem;
+}
+
+.fe-guide-takeaways ul {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
+.fe-guide-takeaways li {
+  margin-bottom: 0.55rem;
+  line-height: 1.6;
+  color: #1f2937;
+}
+
+.fe-guide-takeaways li:last-child {
+  margin-bottom: 0;
+}
+
+.fe-guide-body {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: #1f2937;
+}
+
+.fe-guide-body p {
+  margin-bottom: 1.25rem;
+}
+
+.fe-guide-disclosures {
+  margin-top: 2.5rem;
+  padding: 1.25rem 1.35rem;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5rem;
+  font-size: 0.8rem;
+  line-height: 1.65;
+  color: #64748b;
+}
+
+.fe-guide-disclosures h2 {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #475569;
+  margin: 0 0 0.65rem;
+}
+
+.fe-guide-disclosures p {
+  margin: 0 0 0.65rem;
+}
+
+.fe-guide-disclosures p:last-child {
+  margin-bottom: 0;
+}
+
+.fe-guide-cta {
+  background: #ebf8ff;
+  border-left: 4px solid #2563eb;
+  border-radius: 0.5rem;
+  padding: 1.25rem 1.5rem;
+  margin-top: 2rem;
+}
+
+.fe-guide-related {
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.fe-guide-related ul {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+.fe-guide-related li {
+  margin-bottom: 0.5rem;
+}
+
+@media (min-width: 768px) {
+  .fe-guide-hero {
+    padding: 2.25rem 0 2.5rem;
+  }
+
+  .fe-guide-ai-pledge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-bottom: 0;
+  }
+
+  .fe-guide-hero-head {
+    position: relative;
+    padding-right: 11rem;
+  }
+}
+
+/* AI-free pledge modal */
+.fe-guide-modal-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: rgba(15, 23, 42, 0.55);
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.fe-guide-modal-backdrop.is-open {
+  display: flex;
+}
+
+.fe-guide-modal {
+  background: #fff;
+  color: #1f2937;
+  border-radius: 0.65rem;
+  max-width: 28rem;
+  width: 100%;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+  position: relative;
+}
+
+.fe-guide-modal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.25rem 1.25rem 0;
+}
+
+.fe-guide-modal-header h2 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #1a365d;
+  margin: 0;
+  line-height: 1.35;
+}
+
+.fe-guide-modal-close {
+  flex-shrink: 0;
+  border: none;
+  background: #f1f5f9;
+  color: #475569;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+}
+
+.fe-guide-modal-close:hover {
+  background: #e2e8f0;
+  color: #1a365d;
+}
+
+.fe-guide-modal-body {
+  padding: 0.85rem 1.25rem 1.35rem;
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: #374151;
+}
+
+.fe-guide-modal-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: #ebf8ff;
+  border: 1px solid #bee3f8;
+  color: #1a365d;
+  border-radius: 999px;
+  padding: 0.3rem 0.75rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 0.85rem;
+}
+
+.fe-guide-modal-badge i {
+  color: #d69e2e;
+}

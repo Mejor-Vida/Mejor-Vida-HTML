@@ -32,6 +32,32 @@ function lastmodFromFile(filePath) {
   return stat.mtime.toISOString().replace(/\.\d{3}Z$/, "+00:00");
 }
 
+function feGuidePages() {
+  const dir = path.join(ROOT, "blog");
+  if (!fs.existsSync(dir)) return [];
+  return fs
+    .readdirSync(dir)
+    .filter(
+      (name) =>
+        name.endsWith(".html") &&
+        !name.startsWith("_") &&
+        !/^weekly-insurance-update-/.test(name) &&
+        !/^blog-template/.test(name)
+    )
+    .map((name) => {
+      const abs = path.join(dir, name);
+      const html = fs.readFileSync(abs, "utf8");
+      if (isNoindex(html)) return null;
+      return {
+        loc: `/blog/${name}`,
+        priority: "0.85",
+        lastmod: lastmodFromFile(abs),
+      };
+    })
+    .filter(Boolean)
+    .sort((a, b) => a.loc.localeCompare(b.loc));
+}
+
 function blogPosts() {
   const dir = path.join(ROOT, "blog");
   if (!fs.existsSync(dir)) return [];
@@ -70,6 +96,10 @@ for (const page of STATIC_PAGES) {
   const abs = path.join(ROOT, rel);
   const lastmod = fs.existsSync(abs) ? lastmodFromFile(abs) : null;
   entries.push(buildUrlEntry(page.loc, page.priority, lastmod));
+}
+
+for (const guide of feGuidePages()) {
+  entries.push(buildUrlEntry(guide.loc, guide.priority, guide.lastmod));
 }
 
 for (const post of blogPosts()) {
