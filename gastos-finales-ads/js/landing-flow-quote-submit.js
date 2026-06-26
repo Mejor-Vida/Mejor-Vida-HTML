@@ -205,6 +205,10 @@
           setQuoteStatus("Guardando tu estimado…", false);
 
           var originDetail = collectOriginDetail();
+          var leadEventId =
+            window.MVIMetaCapiEvents && typeof window.MVIMetaCapiEvents.getLeadEventId === "function"
+              ? window.MVIMetaCapiEvents.getLeadEventId()
+              : sessionClientId;
           var syncPayload = {
             firstName: firstName,
             lastName: lastName,
@@ -224,6 +228,7 @@
             lang: "es",
             source: "facebook_landing_gastos_finales",
             sessionClientId: sessionClientId,
+            metaLeadEventId: leadEventId,
             originDetail: originDetail,
           };
           if (window.MVIMetaCapiMatch && typeof window.MVIMetaCapiMatch.collectForLeadSync === "function") {
@@ -241,15 +246,13 @@
             return syncRes.json().then(function (syncData) {
               if (syncRes.ok && syncData && syncData.ok && typeof fbq === "function") {
                 var leadEventOpts = {
+                  eventID: leadEventId,
                   em: email,
                   ph: phone,
                   fn: firstName,
                   ln: lastName,
                   ge: sex === "male" ? "m" : "f",
                 };
-                if (sessionClientId) {
-                  leadEventOpts.eventID = sessionClientId;
-                }
                 fbq("track", "Lead", { currency: "USD", value: 0 }, leadEventOpts);
               }
               return {

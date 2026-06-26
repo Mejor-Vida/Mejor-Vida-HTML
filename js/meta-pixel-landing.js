@@ -15,4 +15,4 @@
   s = b.getElementsByTagName(e)[0];
   s.parentNode.insertBefore(t, s);
 }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '873141755808233');
+fbq('init', '873141755808233', {}, { autoConfig: false });

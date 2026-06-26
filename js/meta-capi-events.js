@@ -1,6 +1,6 @@
 /**
- * Meta Pixel + CAPI — PageView (landing) and ViewContent (quote section).
- * Spanish gastos-finales landings only. Pairs browser eventID with server event_id.
+ * Meta Pixel + CAPI — PageView, ViewContent, Lead (Spanish gastos-finales landings).
+ * Same event_id for browser Pixel (eventID) and server CAPI (event_id).
  */
 (function () {
   "use strict";
@@ -23,6 +23,9 @@
     lastName: "mviLandingLastName",
     sex: "mviLandingSex",
     state: "mviLandingState",
+    dob: "mviLandingDob",
+    city: "mviLandingCity",
+    zip: "mviLandingZip",
   };
 
   function siteApiUrl(apiPath) {
@@ -82,6 +85,12 @@
     });
   }
 
+  function getLeadEventId() {
+    return readStorage("mviMetaLeadEventId", function () {
+      return newEventId("lead-");
+    });
+  }
+
   function normalizePhoneForPayload(phone) {
     var digits = String(phone || "").replace(/\D/g, "");
     if (digits.length === 10) return "+1" + digits;
@@ -104,12 +113,18 @@
     var lastName = hints.lastName || readSessionValue(STORAGE_KEYS.lastName);
     var sex = hints.sex || readSessionValue(STORAGE_KEYS.sex);
     var state = hints.state || readSessionValue(STORAGE_KEYS.state);
+    var dob = hints.dob || readSessionValue(STORAGE_KEYS.dob);
+    var city = hints.city || readSessionValue(STORAGE_KEYS.city);
+    var zip = hints.zip || readSessionValue(STORAGE_KEYS.zip);
     if (email) hints.email = email.slice(0, 320);
     if (phone) hints.phone = normalizePhoneForPayload(phone).slice(0, 32);
     if (firstName) hints.firstName = firstName.slice(0, 120);
     if (lastName) hints.lastName = lastName.slice(0, 120);
     if (sex) hints.sex = sex.slice(0, 16);
     if (state) hints.state = state.slice(0, 8);
+    if (dob) hints.dob = dob.slice(0, 10);
+    if (city) hints.city = city.slice(0, 120);
+    if (zip) hints.zip = zip.slice(0, 16);
     return hints;
   }
 
@@ -137,6 +152,7 @@
       sessionClientId: getSessionClientId(),
       originDetail: originDetail,
       lang: "es",
+      country: "us",
     };
     if (extra && typeof extra === "object") {
       Object.keys(extra).forEach(function (k) {
@@ -166,7 +182,6 @@
   }
 
   var viewContentPixelSent = false;
-  var viewContentCapiSent = false;
 
   function viewContentCustomData() {
     return {
@@ -185,10 +200,7 @@
   }
 
   function sendViewContentCapi(leadHints) {
-    if (viewContentCapiSent) return;
     var hints = collectLeadHints(leadHints);
-    if (!hints.email && !hints.phone) return;
-    viewContentCapiSent = true;
     var eventId = getViewContentEventId();
     postCapi(
       buildCapiPayload("ViewContent", eventId, {
@@ -199,6 +211,9 @@
         lastName: hints.lastName || undefined,
         sex: hints.sex || undefined,
         state: hints.state || undefined,
+        dob: hints.dob || undefined,
+        city: hints.city || undefined,
+        zip: hints.zip || undefined,
       })
     );
   }
@@ -223,6 +238,7 @@
 
     if (step === 2) {
       trackViewContentPixel();
+      sendViewContentCapi(leadHints);
       return;
     }
 
@@ -246,6 +262,7 @@
     onLandingStep: onLandingStep,
     getPageViewEventId: getPageViewEventId,
     getViewContentEventId: getViewContentEventId,
+    getLeadEventId: getLeadEventId,
     getSessionClientId: getSessionClientId,
     collectLeadHints: collectLeadHints,
   };

@@ -11,7 +11,7 @@
 
 
 const { sendQuoteLeadNotification } = require("../lib/ic-lead-notify");
-const { sendMetaCapiWebsiteEvent } = require("../lib/meta-capi");
+const { sendMetaCapiWebsiteEvent, capiClientUserAgent, capiClientIp } = require("../lib/meta-capi");
 
 function applyCors(req, res) {
   const origin = String(req.headers.origin || "").trim();
@@ -188,15 +188,16 @@ async function sendMetaCAPIEvent({
   city,
   state,
   zip,
+  dob,
   originDetail,
   eventId,
   metaFbp,
   metaFbc,
   clientUserAgent,
-  clientIp,
+  sessionClientId,
   req,
 }) {
-  await sendMetaCapiWebsiteEvent({
+  const result = await sendMetaCapiWebsiteEvent({
     eventName: "Lead",
     eventId,
     originDetail,
@@ -212,14 +213,20 @@ async function sendMetaCAPIEvent({
       state,
       zip,
       country: "us",
+      dob,
       metaFbp,
       metaFbc,
       clientUserAgent,
-      sessionClientId: eventId,
+      sessionClientId,
+      metaLeadEventId: eventId,
       eventId,
     },
     customData: { currency: "USD", value: 0 },
   });
+  if (result.skipped) {
+    console.log("[CAPI] Lead skipped", result.reason);
+  }
+  return result;
 }
 
 function resolveLeadSource(body) {
@@ -230,25 +237,6 @@ function resolveLeadSource(body) {
   if (src === "facebook_landing_gastos_finales") return "facebook_landing_gastos_finales";
   if (src === "english_landing_gastos_finales") return "english_landing_gastos_finales";
   return "fexquotes_page";
-}
-
-function capiClientUserAgent(req, body) {
-  const fromBody = String((body && body.clientUserAgent) || "").trim();
-  if (fromBody) return fromBody.slice(0, 1000);
-  const h = (req && req.headers) || {};
-  const fromReq = String(h["user-agent"] || h["User-Agent"] || "").trim();
-  return fromReq ? fromReq.slice(0, 1000) : null;
-}
-
-function capiClientIp(req) {
-  const h = req.headers || {};
-  const xff = String(h["x-forwarded-for"] || h["X-Forwarded-For"] || "")
-    .split(",")[0]
-    .trim();
-  const real = String(h["x-real-ip"] || h["X-Real-IP"] || "").trim();
-  const ip = xff || real;
-  if (ip && /^[\da-fA-F:.]+$/.test(ip) && ip.length <= 45) return ip;
-  return null;
 }
 
 module.exports = async function handler(req, res) {
@@ -503,27 +491,36 @@ module.exports = async function handler(req, res) {
   }
 
   const capiEventId =
-    sessionClientId || (leadId ? `lead-${leadId}` : null);
+    String(body.metaLeadEventId || body.eventId || "").trim().slice(0, 128) ||
+    sessionClientId ||
+    (leadId ? `lead-${leadId}` : null);
+
+  const leadDob = String(body.dob || body.dateOfBirth || "").trim().slice(0, 10) || null;
+  const leadCity = String(body.city || "").trim().slice(0, 120) || null;
+  const leadZip = String(body.zip || "").trim().slice(0, 16) || null;
+
+  const capiBase = {
+    leadSource,
+    email,
+    phone,
+    firstName,
+    lastName,
+    sex: body.sex,
+    city: leadCity,
+    state: stateCode,
+    zip: leadZip,
+    dob: leadDob,
+    originDetail,
+    eventId: capiEventId,
+    metaFbp: body.metaFbp,
+    metaFbc: body.metaFbc,
+    clientUserAgent: capiClientUserAgent(req, body),
+    sessionClientId,
+    req,
+  };
 
   if (!hubspotToken) {
-    await sendMetaCAPIEvent({
-      leadSource,
-      email,
-      phone,
-      firstName,
-      lastName,
-      sex: body.sex,
-      city: body.city,
-      state: stateCode,
-      zip: body.zip,
-      originDetail,
-      eventId: capiEventId,
-      metaFbp: body.metaFbp,
-      metaFbc: body.metaFbc,
-      clientUserAgent: capiClientUserAgent(req, body),
-      clientIp: capiClientIp(req),
-      req,
-    });
+    await sendMetaCAPIEvent(capiBase);
     await sendQuoteLeadNotification({
       leadSource,
       firstName,
@@ -554,6 +551,7 @@ module.exports = async function handler(req, res) {
     return json(res, 200, {
       ok: true,
       id: leadId,
+      metaLeadEventId: capiEventId,
       hubspot: { skipped: true, reason: "HUBSPOT_ACCESS_TOKEN not set" },
     });
   }
@@ -593,24 +591,7 @@ module.exports = async function handler(req, res) {
     console.error("quote-lead-sync supabase patch", e);
   }
 
-  await sendMetaCAPIEvent({
-    leadSource,
-    email,
-    phone,
-    firstName,
-    lastName,
-    sex: body.sex,
-    city: body.city,
-    state: stateCode,
-    zip: body.zip,
-    originDetail,
-    eventId: capiEventId,
-    metaFbp: body.metaFbp,
-    metaFbc: body.metaFbc,
-    clientUserAgent: capiClientUserAgent(req, body),
-    clientIp: capiClientIp(req),
-    req,
-  });
+  await sendMetaCAPIEvent(capiBase);
 
   await sendQuoteLeadNotification({
     leadSource,
@@ -643,6 +624,7 @@ module.exports = async function handler(req, res) {
   return json(res, 200, {
     ok: true,
     id: leadId,
+    metaLeadEventId: capiEventId,
     hubspot: {
       contactId: hubspotContactId,
       error: hubspotErr || null,
