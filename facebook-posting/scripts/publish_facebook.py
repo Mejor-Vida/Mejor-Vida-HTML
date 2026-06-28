@@ -6,8 +6,6 @@ Uses /photos when image_url is provided, otherwise /feed.
 
 import json
 import os
-import sys
-import threading
 import time
 from pathlib import Path
 from typing import Any, Optional
@@ -135,7 +133,16 @@ def post_comment(post_id: str, message: str) -> dict:
     url = f"{base}/{post_id}/comments"
     payload = {"message": message, "access_token": token}
     resp = requests.post(url, data=payload, timeout=30, verify=certifi.where())
-    resp.raise_for_status()
+    if not resp.ok:
+        snippet = (resp.text or "")[:800]
+        if resp.status_code == 403 and "permissions" in snippet.lower():
+            raise requests.HTTPError(
+                "403 — Page token missing pages_manage_engagement. "
+                "Regenerate via scripts/get_page_token.py (see Graph API Explorer permissions). "
+                f"Meta: {snippet}",
+                response=resp,
+            )
+        raise requests.HTTPError(f"{resp.status_code} {resp.reason} — {snippet}", response=resp)
     return resp.json()
 
 
@@ -204,15 +211,15 @@ def publish_post_package(
     image_url: Optional[str] = None,
     *,
     image_path: Optional[Path] = None,
-    first_comment_mode: str = "make",
-    first_comment_delay_sec: int = 600,
+    first_comment_mode: str = "graph",
+    first_comment_delay_sec: int = 0,
 ) -> dict[str, Any]:
     """
     Publish main_caption (+ optional image), then schedule/post the first follow-up comment.
 
     ``first_comment_mode``:
-    - ``make`` (default): POST to Make.com webhook immediately; Make waits ~10 min then comments.
-    - ``graph``: post comment via Graph API (optional delay via background thread).
+    - ``graph`` (default): post comment via Graph API after optional delay (blocks until done).
+    - ``make``: POST to Make.com webhook; Make waits ~10 min then comments (legacy).
     - ``none``: main post only.
 
     Aligns with facebook-post-rules.md (link in comment, not main caption).
@@ -237,25 +244,26 @@ def publish_post_package(
     if first_comment_mode != "graph":
         raise ValueError(f"Unknown first_comment_mode: {first_comment_mode!r}")
 
-    if first_comment_delay_sec <= 0:
-        try:
-            result["first_comment_response"] = post_comment(pid, comment)
-        except Exception as e:
-            result["first_comment_error"] = str(e)
-        return result
+    if first_comment_delay_sec > 0:
+        print(
+            f"Waiting {first_comment_delay_sec}s (~{first_comment_delay_sec // 60} min) before first comment…",
+            flush=True,
+        )
+        time.sleep(first_comment_delay_sec)
 
-    def _delayed() -> None:
-        try:
-            time.sleep(first_comment_delay_sec)
-            post_comment(pid, comment)
+    try:
+        result["first_comment_response"] = post_comment(pid, comment)
+        result["first_comment_posted"] = True
+        result["first_comment_post_id"] = pid
+        if first_comment_delay_sec > 0:
             print(
                 f"First comment posted (after {first_comment_delay_sec}s delay).",
                 flush=True,
             )
-        except Exception as e:
-            print(f"First comment failed: {e}", file=sys.stderr, flush=True)
+        else:
+            print("First comment posted.", flush=True)
+    except Exception as e:
+        result["first_comment_error"] = str(e)
+        raise RuntimeError(f"First comment failed: {e}") from e
 
-    threading.Thread(target=_delayed, name="fb_first_comment_delay", daemon=False).start()
-    result["first_comment_scheduled_in_sec"] = first_comment_delay_sec
-    result["first_comment_post_id"] = pid
     return result

@@ -96,6 +96,7 @@ if not SHORT_TOKEN:
         "  3. Click 'Generate Access Token'\n"
         "  4. In the permissions dialog add:\n"
         "       pages_manage_posts\n"
+        "       pages_manage_engagement\n"
         "       pages_read_engagement\n"
         "       pages_show_list\n"
         "  5. Authorize — copy the 'User Token' shown\n"

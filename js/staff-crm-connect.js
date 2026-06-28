@@ -47,17 +47,111 @@
     return String(state.displayName || "").trim();
   }
 
-  function smsPlaceholderHtml() {
+  function smsComposeHtml(state) {
+    var phone = String(state.clientPhone || "").trim();
     return (
-      '<div class="crm-connect-sms-placeholder">' +
-      "<strong>" +
-      esc(t("conn_sms_placeholder_title")) +
-      "</strong>" +
-      "<p>" +
-      esc(t("conn_sms_placeholder_body")) +
+      '<div class="crm-connect-sms-compose">' +
+      '<p class="crm-connect-heading">' +
+      esc(t("conn_sms_compose_heading")) +
       "</p>" +
+      "<div><label for=\"crm-conn-sms-phone\">" +
+      esc(t("conn_phone")) +
+      '</label><input id="crm-conn-sms-phone" type="text" inputmode="tel" autocomplete="off" value="' +
+      esc(phone) +
+      '" /></div>' +
+      "<div><label for=\"crm-conn-sms-body\">" +
+      esc(t("conn_sms_message")) +
+      '</label><textarea id="crm-conn-sms-body" rows="6" maxlength="1600" placeholder="' +
+      esc(t("conn_sms_message_ph")) +
+      '"></textarea></div>' +
+      '<p class="crm-connect-hint">' +
+      esc(t("conn_sms_char_hint")) +
+      "</p>" +
+      '<div class="crm-connect-actions">' +
+      '<button type="button" id="crm-conn-sms-send" class="crm-btn">' +
+      esc(t("conn_sms_send")) +
+      "</button></div>" +
+      '<p id="crm-conn-sms-status" class="crm-connect-status" aria-live="polite"></p>' +
       "</div>"
     );
+  }
+
+  function setSmsStatus(state, msg) {
+    var el = $("crm-conn-sms-status", state.root);
+    if (el) el.textContent = msg || "";
+  }
+
+  function syncPhoneToSms(state) {
+    var emailPhone = $("crm-conn-phone", state.root);
+    var smsPhone = $("crm-conn-sms-phone", state.root);
+    if (!smsPhone) return;
+    var fromEmail = emailPhone ? String(emailPhone.value || "").trim() : "";
+    var current = String(smsPhone.value || "").trim();
+    if (fromEmail && (!current || current === String(state.clientPhone || "").trim())) {
+      smsPhone.value = fromEmail;
+    }
+    state.clientPhone = String(smsPhone.value || fromEmail || state.clientPhone || "").trim();
+  }
+
+  function readSmsForm(state) {
+    return {
+      phone: String(($("crm-conn-sms-phone", state.root) && $("crm-conn-sms-phone", state.root).value) || "").trim(),
+      body: String(($("crm-conn-sms-body", state.root) && $("crm-conn-sms-body", state.root).value) || "").trim(),
+    };
+  }
+
+  async function onSendSms(state) {
+    syncPhoneToSms(state);
+    var f = readSmsForm(state);
+    if (!f.body) {
+      setSmsStatus(state, t("conn_status_sms_need_message"));
+      return;
+    }
+    if (!f.phone) {
+      setSmsStatus(state, t("conn_status_sms_need_phone"));
+      return;
+    }
+    var sendBtn = $("crm-conn-sms-send", state.root);
+    if (sendBtn) {
+      sendBtn.disabled = true;
+      sendBtn.textContent = t("conn_sms_sending");
+    }
+    setSmsStatus(state, t("conn_sms_sending"));
+    try {
+      var data = await api("/api/staff/send-sms", {
+        compose: true,
+        leadId: state.leadId,
+        leadSourceTable: state.leadSourceTable,
+        toPhone: f.phone,
+        body: f.body,
+      });
+      if (data && data.success === true) {
+        var bodyEl = $("crm-conn-sms-body", state.root);
+        if (bodyEl) bodyEl.value = "";
+        setSmsStatus(state, t("conn_status_sms_sent", { phone: (data && data.toPhone) || f.phone }));
+        window.dispatchEvent(
+          new CustomEvent("staffcrm-comm-updated", { detail: { leadId: state.leadId } })
+        );
+      } else {
+        setSmsStatus(state, (data && data.error) || t("conn_status_sms_failed"));
+      }
+    } catch (e) {
+      setSmsStatus(state, t("conn_status_sms_failed"));
+    } finally {
+      if (sendBtn) {
+        sendBtn.disabled = false;
+        sendBtn.textContent = t("conn_sms_send");
+      }
+    }
+  }
+
+  function wireSmsPanel(state) {
+    var sendBtn = $("crm-conn-sms-send", state.root);
+    if (sendBtn) {
+      sendBtn.addEventListener("click", function () {
+        void onSendSms(state);
+      });
+    }
   }
 
   function formatSmsOptInDate(iso) {
@@ -108,7 +202,7 @@
     }
     html += "</div>";
     if (optedIn) {
-      html += smsPlaceholderHtml();
+      html += smsComposeHtml(state);
     } else {
       html +=
         '<div class="crm-connect-sms-blocked">' +
@@ -128,6 +222,8 @@
     var panel = $("crm-connect-panel-sms", state.root);
     if (!panel) return;
     panel.innerHTML = buildSmsPanelHtml(state);
+    wireSmsPanel(state);
+    syncPhoneToSms(state);
     var smsBtn = $("crm-conn-subtab-sms", state.root);
     if (smsBtn) {
       smsBtn.classList.toggle("crm-connect-subtab--sms-blocked", state.smsOptIn !== true);
@@ -641,7 +737,10 @@
     if (smsPanel) {
       smsPanel.classList.toggle("hidden", isEmail);
       if (isEmail) smsPanel.setAttribute("hidden", "");
-      else smsPanel.removeAttribute("hidden");
+      else {
+        smsPanel.removeAttribute("hidden");
+        syncPhoneToSms(state);
+      }
     }
   }
 
@@ -697,6 +796,7 @@
     if (last) last.value = names.ln;
     if (email) email.value = detail.email || "";
     if (phone) phone.value = detail.phone || "";
+    state.clientPhone = detail.phone || "";
     setLanguage(state, detailLangToCompose(detail.language));
     setEmailType(state, "general");
   }
@@ -724,6 +824,7 @@
       smsOptIn: detail.sms_opt_in === true ? true : detail.sms_opt_in === false ? false : null,
       smsOptInAt: detail.sms_opt_in_at || detail.opt_in_at || null,
       smsOptInNote: detail.sms_opt_in_note || null,
+      clientPhone: detail.phone || "",
     };
 
     rootEl.innerHTML = shellHtml();

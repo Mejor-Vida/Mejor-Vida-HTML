@@ -4,8 +4,8 @@ Mejor Vida Insurance — Facebook posting system.
 
 Follows facebook-post-rules.md (repo root): main caption has no blog link; link in first comment;
 INFO / REVISAR + DM; full package written to preview + FB/post-package.json.
-After publish, schedules the first comment via Make.com webhook (10 min delay in Make).
-Use --no-first-comment to skip; --first-comment-graph-api for legacy Graph API posting.
+After publish, posts the first comment via Graph API immediately (default).
+Use --no-first-comment to skip; --first-comment-delay-seconds N to wait before commenting.
 """
 
 from __future__ import annotations
@@ -47,24 +47,24 @@ def main() -> int:
     parser.add_argument(
         "--no-first-comment",
         action="store_true",
-        help="On publish: post main only; skip Make.com webhook and Graph API comment",
+        help="On publish: post main only; skip first comment",
     )
     parser.add_argument(
-        "--first-comment-graph-api",
+        "--first-comment-make",
         action="store_true",
-        help="Post first comment via Graph API instead of Make.com webhook (legacy)",
+        help="Schedule first comment via Make.com webhook instead of Graph API (legacy)",
     )
     parser.add_argument(
         "--first-comment-delay-seconds",
         type=int,
-        default=600,
+        default=0,
         metavar="N",
-        help="Graph API mode only: wait N seconds before first comment (default: 600)",
+        help="Wait N seconds before first comment via Graph API (default: 0 = immediate)",
     )
     parser.add_argument(
         "--first-comment-now",
         action="store_true",
-        help="Graph API mode only: post first comment immediately",
+        help="Alias for default behavior (post first comment immediately)",
     )
     parser.add_argument(
         "--from-json",
@@ -239,10 +239,10 @@ Comenta “INFO” para el artículo o “REVISAR” para tu caso. También por 
 
     if args.no_first_comment:
         first_comment_mode = "none"
-    elif args.first_comment_graph_api:
-        first_comment_mode = "graph"
-    else:
+    elif args.first_comment_make:
         first_comment_mode = "make"
+    else:
+        first_comment_mode = "graph"
 
     delay_sec = 0 if args.first_comment_now else args.first_comment_delay_seconds
 
@@ -285,12 +285,8 @@ Comenta “INFO” para el artículo o “REVISAR” para tu caso. También por 
                 flush=True,
             )
             return 1
-        elif first_comment_mode == "graph" and delay_sec > 0:
-            print(
-                f"\nFirst comment is scheduled in {delay_sec}s (~{delay_sec // 60} min). "
-                "Keep this terminal open until you see “First comment posted…” or the process will exit early.",
-                flush=True,
-            )
+        elif first_comment_mode == "graph" and result.get("first_comment_posted"):
+            print("\nFirst comment posted via Graph API.", flush=True)
         return 0
     except Exception as e:
         print(f"Publish failed: {e}", file=sys.stderr)

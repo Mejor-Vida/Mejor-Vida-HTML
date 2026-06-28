@@ -607,8 +607,14 @@
     function onRemindersSent() {
       void loadClientReminders(state);
     }
+    function onCommUpdated(e) {
+      if (!e || !e.detail || String(e.detail.leadId) !== String(state.leadId)) return;
+      void loadAll(state);
+    }
     window.addEventListener("staffcrm-reminders-sent", onRemindersSent);
+    window.addEventListener("staffcrm-comm-updated", onCommUpdated);
     state._onRemindersSent = onRemindersSent;
+    state._onCommUpdated = onCommUpdated;
     root.innerHTML = formHtml();
     wireForm(state);
     await loadAll(state);

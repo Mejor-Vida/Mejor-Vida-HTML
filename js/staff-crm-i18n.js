@@ -479,6 +479,16 @@
       conn_subtabs_label: "Connect channels",
       conn_subtab_email: "Email",
       conn_subtab_sms: "SMS",
+      conn_sms_compose_heading: "Send SMS",
+      conn_sms_message: "Message",
+      conn_sms_message_ph: "Type your text message…",
+      conn_sms_char_hint: "Keep messages concise — long texts may split into multiple segments.",
+      conn_sms_send: "Send SMS",
+      conn_sms_sending: "Sending SMS…",
+      conn_status_sms_need_message: "Enter a message before sending.",
+      conn_status_sms_need_phone: "Enter a phone number before sending.",
+      conn_status_sms_sent: "SMS sent to {phone}.",
+      conn_status_sms_failed: "Could not send SMS. Try again or check the number.",
       conn_sms_placeholder_title: "SMS messaging",
       conn_sms_placeholder_body:
         "Two-way SMS from the CRM is coming soon. We're waiting for 10DLC registration approval before this channel goes live.",
@@ -486,7 +496,7 @@
       conn_sms_status_not_opted_in: "SMS opt-in: No",
       conn_sms_status_unknown: "SMS opt-in: Not recorded",
       conn_sms_status_opted_in_body:
-        "This client checked the optional SMS consent box on the quote form. You may contact them by text when SMS is enabled.",
+        "This client checked the optional SMS consent box on the quote form. You may send them text messages from this tab.",
       conn_sms_status_not_opted_in_body:
         "This client did not opt in to SMS on the quote form. Do not send marketing or follow-up text messages.",
       conn_sms_status_unknown_body:
@@ -1199,6 +1209,16 @@
       conn_subtabs_label: "Canales de contacto",
       conn_subtab_email: "Correo",
       conn_subtab_sms: "SMS",
+      conn_sms_compose_heading: "Enviar SMS",
+      conn_sms_message: "Mensaje",
+      conn_sms_message_ph: "Escriba su mensaje de texto…",
+      conn_sms_char_hint: "Mantenga el mensaje breve — los textos largos pueden dividirse en varios segmentos.",
+      conn_sms_send: "Enviar SMS",
+      conn_sms_sending: "Enviando SMS…",
+      conn_status_sms_need_message: "Escriba un mensaje antes de enviar.",
+      conn_status_sms_need_phone: "Ingrese un número de teléfono antes de enviar.",
+      conn_status_sms_sent: "SMS enviado a {phone}.",
+      conn_status_sms_failed: "No se pudo enviar el SMS. Inténtelo de nuevo o verifique el número.",
       conn_sms_placeholder_title: "Mensajes SMS",
       conn_sms_placeholder_body:
         "El SMS bidireccional desde el CRM estará disponible pronto. Estamos esperando la aprobación del registro 10DLC antes de activar este canal.",
@@ -1206,7 +1226,7 @@
       conn_sms_status_not_opted_in: "Consentimiento SMS: No",
       conn_sms_status_unknown: "Consentimiento SMS: Sin registro",
       conn_sms_status_opted_in_body:
-        "Este cliente marcó la casilla opcional de consentimiento SMS en el formulario de cotización. Puede contactarlo por texto cuando SMS esté activo.",
+        "Este cliente marcó la casilla opcional de consentimiento SMS en el formulario de cotización. Puede enviarle mensajes de texto desde esta pestaña.",
       conn_sms_status_not_opted_in_body:
         "Este cliente no optó por SMS en el formulario de cotización. No envíe mensajes de texto de marketing o seguimiento.",
       conn_sms_status_unknown_body:

@@ -67,12 +67,18 @@ Each `index.html` sets on `<body>`:
 
 | Path | Purpose |
 |------|---------|
-| `gastos-finales-ads/` (repo root) | **Live URL for Meta ads** — Spanish wizard, `noindex`, not linked from site nav |
+| `gastos-finales-ads-v2/` (repo root) | **Primary Meta ad destination** — Spanish wizard v2, `noindex`, not linked from site nav |
+| `gastos-finales-ads/` (repo root) | Legacy v1 wizard (still live; prefer v2 for new ads) |
 | `Landing page/final-expense-en-backup/` | English backup copy (same as `final-expense/`) |
 | `Landing page/final-expense-es/` | Spanish working copy (dev preview under `Landing page/`) |
 | `Landing page/final-expense-es-backup/` | Spanish backup copy |
 
-**Ad URL (after deploy):** `https://www.mejorvidainsurance.com/gastos-finales-ads/`
+**Ad URL (use in Meta Ads Manager):** `https://www.mejorvidainsurance.com/gastos-finales-ads-v2/`
+
+**URL Parameters (ad level → Website URL → URL Parameters):**
+`utm_source=facebook&utm_medium=paid_social&utm_campaign={{campaign.name}}&utm_content={{ad.name}}&utm_term={{adset.name}}`
+
+Use `https://www…` (not bare domain or `http://`). Preview each ad and confirm `?utm_source=facebook` appears in the browser bar before scaling spend.
 
 - Results show **inline** on the last wizard step (landing header only; no site footer or redirect).
 - Leads sync with `lang: "es"`.

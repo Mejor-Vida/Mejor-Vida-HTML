@@ -147,11 +147,12 @@ if APP_ID and APP_SECRET:
             print("  ⚠️  Token type is not PAGE. You need a Page access token,")
             print("     not a User token. Run get_page_token.py to exchange it.")
 
-        required = {"pages_manage_posts"}
+        required = {"pages_manage_posts", "pages_manage_engagement"}
         missing = required - set(scopes)
         if missing:
             print()
-            print(f"  ⚠️  Missing required scope(s): {', '.join(missing)}")
+            print(f"  ⚠️  Missing required scope(s): {', '.join(sorted(missing))}")
+            print("     pages_manage_engagement is required to post first comments.")
             print("     In Graph API Explorer, add these and regenerate your User token,")
             print("     then run get_page_token.py again.")
 

@@ -41,6 +41,47 @@
   display: none;
 }
 
+.crm-connect-sms-compose {
+  background: var(--crm-card-bg);
+  border: 1px solid var(--crm-border);
+  border-radius: var(--crm-radius);
+  padding: 20px 22px;
+  box-shadow: var(--crm-shadow);
+}
+
+.crm-connect-sms-compose .crm-connect-heading {
+  margin: 0 0 14px;
+}
+
+.crm-connect-sms-compose label {
+  display: block;
+  font-size: 0.88rem;
+  font-weight: 600;
+  margin: 12px 0 6px;
+  color: var(--crm-text);
+}
+
+.crm-connect-sms-compose input,
+.crm-connect-sms-compose textarea {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid var(--crm-border);
+  border-radius: 8px;
+  padding: 10px 12px;
+  font: inherit;
+  background: var(--crm-bg);
+  color: var(--crm-text);
+}
+
+.crm-connect-sms-compose textarea {
+  min-height: 140px;
+  resize: vertical;
+}
+
+.crm-connect-sms-compose .crm-connect-actions {
+  margin-top: 16px;
+}
+
 .crm-connect-sms-placeholder {
   background: var(--crm-card-bg);
   border: 1px dashed var(--crm-border);
