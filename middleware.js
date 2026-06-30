@@ -36,14 +36,17 @@ function buildContentSecurityPolicy(nonce) {
      * Removing these will silently break the Meta Pixel Lead event and
      * Advanced Matching — ads will stop optimizing without any visible error.
      * Last confirmed working: May 2026.
+     *
+     * GA4 (gtag.js G-K921EG6JWG): script-src needs googletagmanager.com;
+     * connect-src needs google-analytics.com / analytics.google.com or events never reach GA4.
      */
-    `script-src 'self' ${n} https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://cdn.tailwindcss.com https://connect.facebook.net`,
+    `script-src 'self' ${n} https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://cdn.tailwindcss.com https://connect.facebook.net https://www.googletagmanager.com`,
     `style-src-elem 'self' ${n} ${styleHosts}`,
     "style-src-attr 'unsafe-inline'",
     `style-src 'self' ${n} ${styleHosts} 'unsafe-inline'`,
     "font-src 'self' data: https://fonts.gstatic.com https://cdnjs.cloudflare.com",
     "img-src 'self' data: https: blob:",
-    "connect-src 'self' https://*.supabase.co wss://*.supabase.co https://www.facebook.com https://facebook.com https://connect.facebook.net https://*.facebook.com https://*.facebook.net",
+    "connect-src 'self' https://*.supabase.co wss://*.supabase.co https://www.facebook.com https://facebook.com https://connect.facebook.net https://*.facebook.com https://*.facebook.net https://www.google-analytics.com https://*.google-analytics.com https://analytics.google.com https://*.analytics.google.com https://www.googletagmanager.com",
     "media-src 'self' https:",
     "frame-src 'self' https://www.facebook.com https://meetings-na2.hubspot.com https://*.hubspot.com https://*.hsforms.com",
     "form-action 'self' https://www.facebook.com https://meetings-na2.hubspot.com https://*.hubspot.com",
