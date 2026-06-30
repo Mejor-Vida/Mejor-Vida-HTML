@@ -34,21 +34,32 @@
   function fbclidFromUrl() {
     try {
       var v = new URLSearchParams(location.search).get("fbclid");
-      return v ? String(v).trim() : "";
+      return isPlausibleFbclid(v) ? String(v).trim() : "";
     } catch (e) {
       return "";
     }
   }
 
+  /** Real ad clicks are long tokens; preview/placeholder values break Meta attribution. */
+  function isPlausibleFbclid(value) {
+    var id = String(value || "").trim();
+    if (!id || id.length < 20) return false;
+    if (/^(fbclid|\{\{fbclid\}\}|test|placeholder)$/i.test(id)) return false;
+    return true;
+  }
+
   function isValidFbc(value) {
-    return /^fb\.1\.\d+\..+/.test(String(value || "").trim());
+    var fbc = String(value || "").trim();
+    if (!/^fb\.1\.\d+\..+/.test(fbc)) return false;
+    var fbclidPart = fbc.replace(/^fb\.1\.\d+\./, "");
+    return isPlausibleFbclid(fbclidPart);
   }
 
   function fbcFromFbclid(fbclid, clickTimeMs) {
     var id = String(fbclid || "").trim();
-    if (!id) return "";
+    if (!isPlausibleFbclid(id)) return "";
     var ts = String(clickTimeMs || readSession("mviFbClickTime") || Date.now());
-    return "fb.1." + ts + "." + id.slice(0, 500);
+    return "fb.1." + ts + "." + id;
   }
 
   function setFbcCookie(fbc) {
@@ -73,7 +84,7 @@
     }
 
     var fbclid = fbclidFromUrl() || readSession("mviFbclid");
-    if (!fbclid) return "";
+    if (!isPlausibleFbclid(fbclid)) return "";
 
     var clickTime = readSession("mviFbClickTime");
     if (!clickTime) {
@@ -94,7 +105,9 @@
       fbc = readSession("mviMetaFbc");
     }
     if (!isValidFbc(fbc)) {
-      var fbclid = String(originDetail.fbclid || "").trim() || readSession("mviFbclid");
+      var fbclid =
+        (isPlausibleFbclid(originDetail.fbclid) ? String(originDetail.fbclid).trim() : "") ||
+        (isPlausibleFbclid(readSession("mviFbclid")) ? readSession("mviFbclid") : "");
       if (fbclid) {
         fbc = fbcFromFbclid(fbclid, readSession("mviFbClickTime"));
         if (isValidFbc(fbc)) setFbcCookie(fbc);
@@ -111,7 +124,7 @@
       typeof navigator !== "undefined" ? String(navigator.userAgent || "").trim() : "";
     var out = {};
     if (fbp) out.metaFbp = fbp.slice(0, 200);
-    if (fbc) out.metaFbc = fbc.slice(0, 500);
+    if (fbc) out.metaFbc = fbc;
     if (ua) out.clientUserAgent = ua.slice(0, 1000);
     return out;
   }

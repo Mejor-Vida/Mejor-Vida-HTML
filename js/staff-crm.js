@@ -116,6 +116,7 @@
       return { view: "oos", oosTab: validOos[oosTab] ? oosTab : "referrals" };
     }
     if (parts[0] === "knowledge") return { view: "knowledge" };
+    if (parts[0] === "ga4") return { view: "ga4" };
     if (parts[0] === "todo") {
       var todoOwner = parts[1] || "";
       if (todoOwner === "julie" || todoOwner === "justin") {
@@ -239,7 +240,9 @@
       data = await r.json();
     } catch (e) {}
     if (!r.ok) {
-      throw new Error((data && data.error) || "Request failed");
+      var errMsg = (data && data.error) || "Request failed";
+      if (data && data.detail) errMsg += ": " + data.detail;
+      throw new Error(errMsg);
     }
     return data;
   }
@@ -369,6 +372,7 @@
     else if (nav === "assistant") navigate("#/assistant");
     else if (nav === "oos") navigate("#/oos");
     else if (nav === "knowledge") navigate("#/knowledge");
+    else if (nav === "ga4") navigate("#/ga4");
     else if (nav === "todo") navigate("#/todo");
   }
 
@@ -601,6 +605,17 @@
       esc(t("calls_today")) +
       "</div></div>" +
       "</div></div>" +
+      '<div class="crm-card crm-ga4-dash-card" style="margin-bottom:16px">' +
+      '<a href="#/ga4" class="crm-ga4-dash-link">' +
+      "<div>" +
+      "<strong>" +
+      esc(t("ga4_dash_title")) +
+      "</strong>" +
+      "<span>" +
+      esc(t("ga4_dash_blurb")) +
+      "</span></div>" +
+      '<span class="crm-ga4-dash-arrow" aria-hidden="true">→</span>' +
+      "</a></div>" +
       '<div class="crm-card">' +
       "<h2>" +
       esc(t("pipeline_snapshot")) +
@@ -1561,6 +1576,18 @@
             '<div class="crm-placeholder"><strong>' +
             esc(t("load_error")) +
             "</strong><p>To-Do module failed to load.</p></div>";
+        }
+        resetIdleTimer();
+        return;
+      }
+      if (route.view === "ga4") {
+        if (window.StaffCrmGa4Analytics) {
+          await window.StaffCrmGa4Analytics.mount(main);
+        } else {
+          main.innerHTML =
+            '<div class="crm-placeholder"><strong>' +
+            esc(t("load_error")) +
+            "</strong><p>GA4 Analytics module failed to load.</p></div>";
         }
         resetIdleTimer();
         return;

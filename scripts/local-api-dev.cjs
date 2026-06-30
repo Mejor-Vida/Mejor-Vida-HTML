@@ -116,6 +116,12 @@ async function runApi(absHandler, req, res, query) {
     }
     return res.end(JSON.stringify(payload));
   };
+  res.redirect = function redirect(location, statusCode) {
+    const code = Number(statusCode) || 302;
+    res.statusCode = code;
+    res.setHeader("Location", location);
+    return res.end();
+  };
   const ct = String(req.headers["content-type"] || "").toLowerCase();
   if (req.method !== "GET" && req.method !== "HEAD" && ct.includes("application/json")) {
     try {
