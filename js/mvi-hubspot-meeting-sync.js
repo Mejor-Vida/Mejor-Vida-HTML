@@ -8,7 +8,6 @@
 
   var API_URL = "/api/webhooks/appointment";
   var ANALYTICS_URL = "/api/analytics-event";
-  var ORIGIN_RE = /^https:\/\/meetings(?:-[a-z0-9]+)?\.hubspot\.com$/i;
 
   function pickString() {
     for (var i = 0; i < arguments.length; i++) {
@@ -179,13 +178,32 @@
 
   window.addEventListener("message", function (event) {
     var data = event.data;
-    if (!data || data.meetingBookSucceeded !== true) return;
-    if (!ORIGIN_RE.test(String(event.origin || ""))) return;
+
+    // DEBUG: log every postMessage to find the real booking event — remove after confirming.
+    if (data && typeof data === "object") {
+      console.log(
+        "[MVI booking debug] postMessage from:",
+        event.origin,
+        "| data:",
+        JSON.stringify(data)
+      );
+    }
+
+    var origin = String(event.origin || "");
+    var isHubspot = /hubspot\.com$/i.test(origin);
+    if (!isHubspot) return;
+
+    var isMeetingBooked =
+      data.meetingBookSucceeded === true ||
+      data.type === "meetingBookSucceeded" ||
+      (data.meetingsPayload && data.meetingsPayload.bookingResponse);
+
+    if (!data || !isMeetingBooked) return;
 
     try {
       handleMeetingBookSucceeded(data);
     } catch (_e) {
-      /* ignore malformed payloads */
+      console.error("[MVI booking debug] handleMeetingBookSucceeded error:", _e);
     }
   });
 })();

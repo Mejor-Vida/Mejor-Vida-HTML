@@ -31,6 +31,7 @@
   var stateCombobox = null;
   var quoteSubmitting = false;
   var phoneStepBinder = null;
+  var qualifyLeadTracked = false;
 
   var STORAGE_KEYS = {
     sex: "mviLandingSex",
@@ -164,6 +165,19 @@
     trackGaEvent("step_completed", payload);
   }
 
+  function trackQualifyLeadEarly() {
+    if (qualifyLeadTracked) return;
+    qualifyLeadTracked = true;
+    trackGaEvent("qualify_lead", {
+      form_source: "landing_quote_early",
+      state: selections.state,
+      sex: selections.sex,
+      tobacco: selections.tobacco,
+      age_range: getAgeRangeBucket(selections.birthdate),
+      page_path: window.location.pathname,
+    });
+  }
+
   function trackQuoteSubmitted() {
     var payload = {
       form_source: "landing_quote",
@@ -174,7 +188,10 @@
       page_path: window.location.pathname,
     };
     trackGaEvent("quote_submitted", payload);
-    trackGaEvent("qualify_lead", payload);
+    if (!qualifyLeadTracked) {
+      qualifyLeadTracked = true;
+      trackGaEvent("qualify_lead", payload);
+    }
   }
 
   function trackFormStepsCompletedForLanding() {
@@ -1174,6 +1191,9 @@
       var next = getNextStepNumber(currentStep);
       if (next !== null) {
         trackStepCompleted(currentStep, getStepAnswer(currentStep));
+        if (activeFlow === "quote" && currentStep === 12) {
+          trackQualifyLeadEarly();
+        }
         showStep(next);
         return;
       }
