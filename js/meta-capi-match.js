@@ -1,6 +1,9 @@
 /**
  * Meta CAPI match keys for Spanish FE landing quote sync (fbp, fbc, user agent).
  * Load only on Spanish gastos-finales landings — not EN compliance pages.
+ *
+ * fbc must be the exact _fbc cookie value (fb.1.{clickMs}.{fbclid}) — never
+ * transform the fbclid segment or CAPI attribution breaks.
  */
 (function () {
   "use strict";
@@ -31,39 +34,38 @@
     } catch (e) {}
   }
 
-  function fbclidFromUrl() {
+  function hasFbcShape(value) {
+    return /^fb\.1\.\d+\..+/.test(String(value || "").trim());
+  }
+
+  function isPlaceholderFbclid(value) {
+    var id = String(value || "");
+    return /^(fbclid|\{\{fbclid\}\}|test|placeholder)$/i.test(id);
+  }
+
+  function rawFbclidFromUrl() {
     try {
       var v = new URLSearchParams(location.search).get("fbclid");
-      return isPlausibleFbclid(v) ? String(v).trim() : "";
+      if (v == null || v === "" || isPlaceholderFbclid(v)) return "";
+      return String(v);
     } catch (e) {
       return "";
     }
   }
 
-  /** Real ad clicks are long tokens; preview/placeholder values break Meta attribution. */
-  function isPlausibleFbclid(value) {
-    var id = String(value || "").trim();
-    if (!id || id.length < 20) return false;
-    if (/^(fbclid|\{\{fbclid\}\}|test|placeholder)$/i.test(id)) return false;
-    return true;
-  }
-
-  function isValidFbc(value) {
-    var fbc = String(value || "").trim();
-    if (!/^fb\.1\.\d+\..+/.test(fbc)) return false;
-    var fbclidPart = fbc.replace(/^fb\.1\.\d+\./, "");
-    return isPlausibleFbclid(fbclidPart);
+  function fbclidFromFbc(fbc) {
+    var match = String(fbc || "").trim().match(/^fb\.1\.\d+\.(.+)$/);
+    return match ? match[1] : "";
   }
 
   function fbcFromFbclid(fbclid, clickTimeMs) {
-    var id = String(fbclid || "").trim();
-    if (!isPlausibleFbclid(id)) return "";
-    var ts = String(clickTimeMs || readSession("mviFbClickTime") || Date.now());
-    return "fb.1." + ts + "." + id;
+    if (!fbclid || isPlaceholderFbclid(fbclid)) return "";
+    var ts = String(clickTimeMs || Date.now());
+    return "fb.1." + ts + "." + fbclid;
   }
 
   function setFbcCookie(fbc) {
-    if (!isValidFbc(fbc)) return;
+    if (!hasFbcShape(fbc)) return;
     try {
       document.cookie =
         "_fbc=" +
@@ -75,51 +77,57 @@
     } catch (e) {}
   }
 
-  /** Capture fbclid + click timestamp once per session; set _fbc before Pixel/CAPI events. */
-  function captureFbClickId() {
-    var cookieFbc = readCookie("_fbc").trim();
-    if (isValidFbc(cookieFbc)) {
-      writeSession("mviMetaFbc", cookieFbc);
-      return cookieFbc;
-    }
-
-    var fbclid = fbclidFromUrl() || readSession("mviFbclid");
-    if (!isPlausibleFbclid(fbclid)) return "";
-
+  function rememberFbclidClick(fbclid) {
+    var stored = readSession("mviFbclid");
     var clickTime = readSession("mviFbClickTime");
+    if (stored && stored !== fbclid) {
+      clickTime = "";
+    }
     if (!clickTime) {
       clickTime = String(Date.now());
       writeSession("mviFbClickTime", clickTime);
-      writeSession("mviFbclid", fbclid);
+    }
+    writeSession("mviFbclid", fbclid);
+    return clickTime;
+  }
+
+  /** Prefer Meta Pixel's _fbc; only seed the cookie when missing. */
+  function captureFbClickId() {
+    var cookieFbc = readCookie("_fbc").trim();
+    if (hasFbcShape(cookieFbc)) {
+      writeSession("mviMetaFbc", cookieFbc);
+      var cookieFbclid = fbclidFromFbc(cookieFbc);
+      if (cookieFbclid) writeSession("mviFbclid", cookieFbclid);
+      return cookieFbc;
     }
 
+    var fbclid = rawFbclidFromUrl() || readSession("mviFbclid");
+    if (!fbclid) return "";
+
+    var clickTime = rememberFbclidClick(fbclid);
     var fbc = fbcFromFbclid(fbclid, clickTime);
     setFbcCookie(fbc);
     return fbc;
   }
 
-  function resolveFbc(originDetail) {
-    originDetail = originDetail || {};
+  function resolveFbc() {
+    captureFbClickId();
+
     var fbc = readCookie("_fbc").trim();
-    if (!isValidFbc(fbc)) {
-      fbc = readSession("mviMetaFbc");
+    if (hasFbcShape(fbc)) {
+      writeSession("mviMetaFbc", fbc);
+      return fbc;
     }
-    if (!isValidFbc(fbc)) {
-      var fbclid =
-        (isPlausibleFbclid(originDetail.fbclid) ? String(originDetail.fbclid).trim() : "") ||
-        (isPlausibleFbclid(readSession("mviFbclid")) ? readSession("mviFbclid") : "");
-      if (fbclid) {
-        fbc = fbcFromFbclid(fbclid, readSession("mviFbClickTime"));
-        if (isValidFbc(fbc)) setFbcCookie(fbc);
-      }
-    }
-    return isValidFbc(fbc) ? fbc : "";
+
+    fbc = readSession("mviMetaFbc").trim();
+    if (hasFbcShape(fbc)) return fbc;
+
+    return "";
   }
 
-  function collectForLeadSync(originDetail) {
-    originDetail = originDetail || {};
+  function collectForLeadSync() {
     var fbp = readCookie("_fbp").trim();
-    var fbc = resolveFbc(originDetail);
+    var fbc = resolveFbc();
     var ua =
       typeof navigator !== "undefined" ? String(navigator.userAgent || "").trim() : "";
     var out = {};

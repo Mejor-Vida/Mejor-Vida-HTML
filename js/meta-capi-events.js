@@ -135,7 +135,12 @@
       ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "gclid", "fbclid"].forEach(
         function (key) {
           var v = p.get(key);
-          if (v) o[key] = v.slice(0, 500);
+          if (v == null || v === "") return;
+          if (key === "fbclid") {
+            o[key] = String(v);
+            return;
+          }
+          o[key] = String(v).slice(0, 500);
         }
       );
       o.page_path = (location.pathname + location.search).slice(0, 2000);
@@ -145,6 +150,9 @@
   }
 
   function buildCapiPayload(eventName, eventId, extra) {
+    if (window.MVIMetaCapiMatch && typeof window.MVIMetaCapiMatch.captureFbClickId === "function") {
+      window.MVIMetaCapiMatch.captureFbClickId();
+    }
     var originDetail = collectOriginDetail();
     var payload = {
       eventName: eventName,
@@ -160,7 +168,7 @@
       });
     }
     if (window.MVIMetaCapiMatch && typeof window.MVIMetaCapiMatch.collectForLeadSync === "function") {
-      var match = window.MVIMetaCapiMatch.collectForLeadSync(originDetail);
+      var match = window.MVIMetaCapiMatch.collectForLeadSync();
       if (match.metaFbp) payload.metaFbp = match.metaFbp;
       if (match.metaFbc) payload.metaFbc = match.metaFbc;
       if (match.clientUserAgent) payload.clientUserAgent = match.clientUserAgent;
@@ -196,7 +204,9 @@
     if (typeof fbq === "function") {
       fbq("track", "PageView", {}, { eventID: eventId });
     }
-    postCapi(buildCapiPayload("PageView", eventId));
+    window.setTimeout(function () {
+      postCapi(buildCapiPayload("PageView", eventId));
+    }, 0);
   }
 
   function sendViewContentCapi(leadHints) {
