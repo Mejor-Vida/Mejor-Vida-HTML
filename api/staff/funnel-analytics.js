@@ -7,6 +7,7 @@
 const { requireStaffAuth } = require("../auth-check");
 const { json, serviceConfig, restSelect } = require("./_inbox-lib");
 const { buildDashboard, buildNodeDetail, groupSessions, filterSessions } = require("../../lib/funnel-analytics");
+const { fetchAdPlatformMetrics } = require("../../lib/ad-platform-insights");
 
 const CHICAGO_TZ = "America/Chicago";
 
@@ -130,9 +131,28 @@ module.exports = async function handler(req, res) {
   }
 
   const dashboard = buildDashboard(events, filters);
+
+  let adMetrics = { show: false };
+  if (view === "facebook" || view === "google") {
+    try {
+      adMetrics = await fetchAdPlatformMetrics(view, range.dateFrom, range.dateTo);
+    } catch (e) {
+      console.error("[funnel-analytics] ad metrics", e.message || e);
+      adMetrics = {
+        show: true,
+        platform: view,
+        configured: false,
+        impressions: null,
+        clicks: null,
+        error: e.message || "Could not load ad impressions",
+      };
+    }
+  }
+
   return json(res, 200, {
     ok: true,
     ...dashboard,
+    adMetrics,
     dateFrom: range.dateFrom,
     dateTo: range.dateTo,
     hasData: events.length > 0,

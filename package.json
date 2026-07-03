@@ -19,6 +19,7 @@
     "embed:internal-moo": "node scripts/embed-internal-knowledge.js",
     "optimize:homepage-images": "node scripts/optimize-images.js",
     "optimize:images": "node scripts/optimize-images.js",
+    "meta:ads-discover": "node scripts/meta-ads-discover.js",
     "apply:image-opt-html": "node scripts/apply-image-opt-html.js",
     "build:fa-subset": "node scripts/build-fa-subset.js",
     "apply:seo-performance": "node scripts/apply-seo-performance.js",

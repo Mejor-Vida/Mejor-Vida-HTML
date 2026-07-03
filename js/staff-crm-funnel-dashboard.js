@@ -129,9 +129,7 @@
       '<section class="crm-funnel-entry">' +
       '<h2 class="crm-funnel-section-title">' + esc(t("funnel_entry_context")) + "</h2>" +
       '<p class="crm-funnel-entry-sub">' +
-      esc(t("funnel_entry_at", { entry: state.data ? state.data.entryLabel : "" })) +
-      " · " +
-      esc(t("funnel_sessions", { n: fmtNum(ctx.totalSessions) })) +
+      esc(t("funnel_entry_all_traffic", { n: fmtNum(ctx.totalSessions) })) +
       "</p>" +
       '<div class="crm-funnel-source-pills">' +
       ["facebook", "google", "organic", "direct"].map(function (src) {
@@ -143,15 +141,56 @@
       }).join("") +
       "</div>";
 
-    if (state.view === "facebook" || state.view === "google") {
-      html += '<div class="crm-funnel-acq-grid">';
-      if (state.view === "facebook") {
-        html += renderAcqList(t("funnel_top_ads_clicks"), ctx.topAdsByClicks);
-        html += renderAcqList(t("funnel_top_ads_leads"), ctx.topAdsByLeads);
-      }
-      if (state.view === "google") {
-        html += renderAcqList(t("funnel_top_kw_clicks"), ctx.topKeywordsByClicks);
-        html += renderAcqList(t("funnel_top_kw_leads"), ctx.topKeywordsByLeads);
+    html +=
+      '<div class="crm-funnel-acq-grid">' +
+      renderAcqList(t("funnel_top_ads_clicks"), ctx.topAdsByClicks) +
+      renderAcqList(t("funnel_top_ads_leads"), ctx.topAdsByLeads) +
+      renderAcqList(t("funnel_top_kw_clicks"), ctx.topKeywordsByClicks) +
+      renderAcqList(t("funnel_top_kw_leads"), ctx.topKeywordsByLeads) +
+      "</div>";
+
+    html += "</section>";
+    return html;
+  }
+
+  function AdPlatformMetrics(metrics) {
+    if (!metrics || !metrics.show) return "";
+
+    var platformLabel =
+      metrics.platform === "google"
+        ? t("funnel_ad_platform_google")
+        : t("funnel_ad_platform_facebook");
+
+    var html =
+      '<section class="crm-funnel-ad-metrics">' +
+      '<h2 class="crm-funnel-section-title">' + esc(platformLabel) + "</h2>";
+
+    if (metrics.error) {
+      html += '<p class="crm-funnel-ad-metrics-note crm-funnel-error">' + esc(metrics.error) + "</p>";
+    } else if (!metrics.configured) {
+      html +=
+        '<p class="crm-funnel-ad-metrics-note">' +
+        esc(metrics.setupHint || t("funnel_ad_metrics_not_configured")) +
+        "</p>";
+    } else {
+      html += '<div class="crm-funnel-ad-metrics-grid">';
+      html +=
+        '<div class="crm-funnel-ad-metric">' +
+        '<span class="crm-funnel-ad-metric-label">' +
+        esc(t("funnel_ad_impressions")) +
+        "</span>" +
+        '<strong class="crm-funnel-ad-metric-value">' +
+        esc(fmtNum(metrics.impressions)) +
+        "</strong></div>";
+      if (metrics.clicks != null) {
+        html +=
+          '<div class="crm-funnel-ad-metric">' +
+          '<span class="crm-funnel-ad-metric-label">' +
+          esc(t("funnel_ad_clicks")) +
+          "</span>" +
+          '<strong class="crm-funnel-ad-metric-value">' +
+          esc(fmtNum(metrics.clicks)) +
+          "</strong></div>";
       }
       html += "</div>";
     }
@@ -236,8 +275,16 @@
     var order = ["quote", "calculator", "schedule", "bio", "whatsapp"];
     return (
       '<section class="crm-funnel-viz">' +
+      '<div class="crm-funnel-viz-head">' +
+      '<div class="crm-funnel-viz-head-text">' +
       '<h2 class="crm-funnel-section-title">' + esc(t("funnel_viz_title")) + "</h2>" +
       '<p class="crm-funnel-viz-sub">' + esc(t("funnel_viz_sub")) + "</p>" +
+      "</div>" +
+      '<button type="button" class="crm-funnel-reload" data-funnel-reload aria-label="' +
+      esc(t("funnel_reload_aria")) +
+      '">' +
+      esc(t("funnel_reload")) +
+      "</button></div>" +
       '<div class="crm-funnel-branches">' +
       order
         .map(function (key) {
@@ -346,8 +393,9 @@
     if (!state.data || !state.data.hasData) {
       return (
         '<div class="crm-funnel-page">' +
-        FilterBar() +
-        '<div class="crm-funnel-empty">' +
+      FilterBar() +
+      AdPlatformMetrics(state.data && state.data.adMetrics) +
+      '<div class="crm-funnel-empty">' +
         "<strong>" + esc(t("funnel_no_data_title")) + "</strong>" +
         "<p>" + esc(t("funnel_no_data_blurb")) + "</p></div></div>"
       );
@@ -359,6 +407,7 @@
       "<h1>" + esc(t("funnel_title")) + "</h1>" +
       "<p>" + esc(t("funnel_subtitle")) + "</p></header>" +
       FilterBar() +
+      AdPlatformMetrics(state.data.adMetrics) +
       EntryContextPanel(state.data.entryContext) +
       '<div class="crm-funnel-main">' +
       FunnelVisualization(state.data.branches || {}) +
@@ -461,6 +510,17 @@
         state.detailError = null;
         paint(main);
         wireEvents(main);
+      });
+    }
+
+    var reloadBtn = main.querySelector("[data-funnel-reload]");
+    if (reloadBtn) {
+      reloadBtn.addEventListener("click", function (ev) {
+        ev.preventDefault();
+        state.selectedNode = null;
+        state.detail = null;
+        state.detailError = null;
+        loadData(main);
       });
     }
   }

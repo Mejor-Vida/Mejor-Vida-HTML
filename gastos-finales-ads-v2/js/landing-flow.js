@@ -112,6 +112,11 @@
     }
   }
 
+  function trackCalculatorEntry() {
+    activeFlow = "calculator";
+    trackGaEvent("objective_selected", { objective: "calculator" });
+  }
+
   function getAgeRangeBucket(birthdateStr) {
     var parsed = parseBirthdate(birthdateStr);
     if (!parsed) return null;
@@ -1542,11 +1547,11 @@
       var calcCard = ev.target.closest('[data-lf-objective="calculator"]');
       if (calcCard) {
         ev.preventDefault();
-        trackGaEvent("objective_selected", { objective: "calculator" });
-        activeFlow = "calculator";
+        trackCalculatorEntry();
         var calcFirst =
           (window.MVILandingCalculator && window.MVILandingCalculator.FIRST_STEP) || 21;
         showStep(calcFirst);
+        return;
       }
     });
   })();
@@ -1645,7 +1650,7 @@
     if (calcBtn && calcBtn.getAttribute("data-lf-results-bound") !== "1") {
       calcBtn.setAttribute("data-lf-results-bound", "1");
       calcBtn.addEventListener("click", function () {
-        activeFlow = "calculator";
+        trackCalculatorEntry();
         var calcFirst =
           (window.MVILandingCalculator && window.MVILandingCalculator.FIRST_STEP) || 21;
         showStep(calcFirst);
