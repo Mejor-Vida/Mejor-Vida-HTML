@@ -209,11 +209,12 @@
     }
 
     if (eventName === "qualify_lead") {
+      if (isLandingPage()) return;
       if (leadAlreadyTracked()) return;
       markLeadConverted();
       track({
         tool: "quote",
-        step_name: isLandingPage() ? "lead_submitted" : "qualify_lead",
+        step_name: "qualify_lead",
         event_type: "conversion",
         page_or_step: page,
       });
@@ -248,11 +249,13 @@
     }
 
     if (eventName === "quote_cta_clicked") {
+      if (isLandingPage()) return;
       track({ tool: "quote", step_name: "quote_cta_click", event_type: "click", page_or_step: page });
       return;
     }
 
     if (eventName === "form_steps_completed") {
+      if (isLandingPage()) return;
       track({ tool: "quote", step_name: "form_steps_done", event_type: "step_view", page_or_step: page });
       return;
     }

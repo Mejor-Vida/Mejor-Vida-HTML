@@ -8,6 +8,8 @@ const { requireStaffAuth } = require("../auth-check");
 const { json, serviceConfig, restSelect } = require("./_inbox-lib");
 const { buildDashboard, buildNodeDetail, groupSessions, filterSessions } = require("../../lib/funnel-analytics");
 
+const CHICAGO_TZ = "America/Chicago";
+
 function parseYmd(value) {
   const s = String(value || "").trim();
   if (!/^\d{4}-\d{2}-\d{2}$/.test(s)) return null;
@@ -16,11 +18,41 @@ function parseYmd(value) {
   return s;
 }
 
+function ymdChicago(date) {
+  return new Intl.DateTimeFormat("en-CA", { timeZone: CHICAGO_TZ }).format(date || new Date());
+}
+
+function addDaysYmd(ymd, days) {
+  const [y, m, d] = ymd.split("-").map(Number);
+  const t = new Date(Date.UTC(y, m - 1, d + days, 12, 0, 0));
+  return t.toISOString().slice(0, 10);
+}
+
+/** Midnight on `ymd` in America/Chicago, as UTC ISO (for Supabase created_at filters). */
+function chicagoMidnightUtcIso(ymd) {
+  const [y, m, d] = ymd.split("-").map(Number);
+  for (let utcHour = 4; utcHour <= 7; utcHour++) {
+    const candidate = new Date(Date.UTC(y, m - 1, d, utcHour, 0, 0, 0));
+    const parts = new Intl.DateTimeFormat("en-US", {
+      timeZone: CHICAGO_TZ,
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "numeric",
+      hour12: false,
+    }).formatToParts(candidate);
+    const get = (type) => parts.find((p) => p.type === type)?.value;
+    const cYmd = `${get("year")}-${get("month")}-${get("day")}`;
+    if (cYmd === ymd && Number(get("hour")) === 0) {
+      return candidate.toISOString();
+    }
+  }
+  throw new Error("Could not resolve Chicago midnight for " + ymd);
+}
+
 function resolveDateRange(query) {
-  const today = new Date();
-  const defaultTo = today.toISOString().slice(0, 10);
-  const defaultFromDate = new Date(today.getTime() - 29 * 24 * 60 * 60 * 1000);
-  const defaultFrom = defaultFromDate.toISOString().slice(0, 10);
+  const defaultTo = ymdChicago();
+  const defaultFrom = addDaysYmd(defaultTo, -29);
 
   let dateFrom = parseYmd(query.date_from || query.dateFrom) || defaultFrom;
   let dateTo = parseYmd(query.date_to || query.dateTo) || defaultTo;
@@ -34,18 +66,18 @@ function resolveDateRange(query) {
   return {
     dateFrom,
     dateTo,
-    startIso: dateFrom + "T00:00:00.000Z",
-    endIso: dateTo + "T23:59:59.999Z",
+    startIso: chicagoMidnightUtcIso(dateFrom),
+    endExclusiveIso: chicagoMidnightUtcIso(addDaysYmd(dateTo, 1)),
   };
 }
 
-async function loadFunnelEvents(cfg, startIso, endIso) {
+async function loadFunnelEvents(cfg, startIso, endExclusiveIso) {
   const q =
     "select=session_id,created_at,source,campaign,ad_set,ad_name,keyword,search_term,tool,step_name,event_type,page_or_step,device" +
     "&created_at=gte." +
     encodeURIComponent(startIso) +
-    "&created_at=lte." +
-    encodeURIComponent(endIso) +
+    "&created_at=lt." +
+    encodeURIComponent(endExclusiveIso) +
     "&order=created_at.asc&limit=50000";
   const rows = await restSelect(cfg, "funnel_events", q);
   return rows || [];
@@ -69,7 +101,7 @@ module.exports = async function handler(req, res) {
 
   let events;
   try {
-    events = await loadFunnelEvents(cfg, range.startIso, range.endIso);
+    events = await loadFunnelEvents(cfg, range.startIso, range.endExclusiveIso);
   } catch (e) {
     console.error("[funnel-analytics] load", e.message || e);
     return json(res, 500, { error: "Could not load funnel events" });

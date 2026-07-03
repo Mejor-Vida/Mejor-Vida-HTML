@@ -14,6 +14,7 @@
     selectedNode: null,
     detail: null,
     detailLoading: false,
+    detailError: null,
   };
 
   function pad2(n) {
@@ -25,10 +26,8 @@
   }
 
   function defaultDateRange() {
-    var end = new Date();
-    var start = new Date();
-    start.setDate(start.getDate() - 29);
-    return { dateFrom: formatDateInput(start), dateTo: formatDateInput(end) };
+    var today = formatDateInput(new Date());
+    return { dateFrom: today, dateTo: today };
   }
 
   function ensureDateRange() {
@@ -54,9 +53,9 @@
     return window.StaffCrm ? window.StaffCrm.esc(s) : String(s == null ? "" : s);
   }
 
-  function api(path) {
+  function api(path, opts) {
     if (!window.StaffCrm || !window.StaffCrm.authedApi) throw new Error("StaffCrm not ready");
-    return window.StaffCrm.authedApi(path);
+    return window.StaffCrm.authedApi(path, null, opts || { method: "GET" });
   }
 
   function fmtNum(n) {
@@ -258,6 +257,17 @@
         '<p class="crm-funnel-inspector-loading">' + esc(t("funnel_loading_detail")) + "</p></aside>"
       );
     }
+    if (state.detailError) {
+      return (
+        '<aside class="crm-funnel-inspector">' +
+        '<div class="crm-funnel-inspector-head">' +
+        "<h3>" + esc(t("funnel_inspector")) + "</h3>" +
+        '<button type="button" class="crm-funnel-inspector-close" data-funnel-close-detail aria-label="' +
+        esc(t("funnel_close")) +
+        '">×</button></div>' +
+        '<p class="crm-funnel-error">' + esc(state.detailError) + "</p></aside>"
+      );
+    }
     var d = state.detail;
     if (!d) return "";
 
@@ -384,21 +394,25 @@
   function loadNodeDetail(main, tool, step) {
     state.detailLoading = true;
     state.selectedNode = tool + ":" + step;
+    state.detailError = null;
     paint(main);
     wireEvents(main);
     return api(
       "/api/staff/funnel-analytics?" +
-        queryString({ action: "node", tool: tool, step: step })
+        queryString({ action: "node", tool: tool, step: step }),
+      { method: "GET", softAuth: true }
     )
       .then(function (res) {
         state.detail = res.detail || null;
         state.detailLoading = false;
+        state.detailError = null;
         paint(main);
         wireEvents(main);
       })
-      .catch(function () {
+      .catch(function (err) {
         state.detailLoading = false;
         state.detail = null;
+        state.detailError = (err && err.message) || t("funnel_load_error");
         paint(main);
         wireEvents(main);
       });
@@ -430,7 +444,9 @@
     if (toEl) toEl.addEventListener("change", onDateChange);
 
     main.querySelectorAll("[data-funnel-node]").forEach(function (btn) {
-      btn.addEventListener("click", function () {
+      btn.addEventListener("click", function (ev) {
+        ev.preventDefault();
+        ev.stopPropagation();
         var parts = (btn.getAttribute("data-funnel-node") || "").split(":");
         if (parts.length === 2) loadNodeDetail(main, parts[0], parts[1]);
       });
@@ -438,9 +454,11 @@
 
     var closeBtn = main.querySelector("[data-funnel-close-detail]");
     if (closeBtn) {
-      closeBtn.addEventListener("click", function () {
+      closeBtn.addEventListener("click", function (ev) {
+        ev.preventDefault();
         state.selectedNode = null;
         state.detail = null;
+        state.detailError = null;
         paint(main);
         wireEvents(main);
       });
@@ -454,6 +472,7 @@
     state.dateTo = defaults.dateTo;
     state.selectedNode = null;
     state.detail = null;
+    state.detailError = null;
     return loadData(main);
   }
 

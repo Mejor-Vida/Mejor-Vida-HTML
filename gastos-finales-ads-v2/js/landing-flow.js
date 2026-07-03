@@ -80,9 +80,20 @@
     25: "calc_results",
   };
 
+  var quoteGa4StepId = { 2: 1, 3: 2, 4: 3, 5: 4, 11: 5, 12: 6, 13: 7, 14: 8 };
+  var calcGa4StepId = { 21: 1, 22: 2, 23: 3, 24: 4, 25: 5 };
+
+  function ga4StepId(stepNum) {
+    if (stepNum === 1) return 1;
+    if (quoteGa4StepId[stepNum] != null) return quoteGa4StepId[stepNum];
+    if (calcGa4StepId[stepNum] != null) return calcGa4StepId[stepNum];
+    return stepNum;
+  }
+
   function trackGaEvent(eventName, params) {
-    if (typeof gtag !== "function") return;
-    gtag("event", eventName, params || {});
+    if (typeof gtag === "function") {
+      gtag("event", eventName, params || {});
+    }
     if (window.MVIFunnelTrack && typeof window.MVIFunnelTrack.fromGa4 === "function") {
       window.MVIFunnelTrack.fromGa4(eventName, params || {}, {
         activeFlow: activeFlow,
@@ -153,7 +164,7 @@
   function trackStepViewed(stepNum) {
     if (!stepNameMap[stepNum]) return;
     trackGaEvent("step_viewed", {
-      step_id: stepNum,
+      step_id: ga4StepId(stepNum),
       step_name: stepNameMap[stepNum],
     });
   }
@@ -161,7 +172,7 @@
   function trackStepCompleted(stepNum, answer) {
     if (!stepNameMap[stepNum]) return;
     var payload = {
-      step_id: stepNum,
+      step_id: ga4StepId(stepNum),
       step_name: stepNameMap[stepNum],
     };
     var answerValue = answer !== undefined ? answer : getStepAnswer(stepNum);
@@ -198,22 +209,6 @@
       qualifyLeadTracked = true;
       trackGaEvent("qualify_lead", payload);
     }
-  }
-
-  function trackFormStepsCompletedForLanding() {
-    trackGaEvent("form_steps_completed", {
-      form_source: "landing_quote",
-      state: selections.state,
-      sex: selections.sex,
-      tobacco: selections.tobacco,
-    });
-  }
-
-  function trackQuoteCtaClicked(location) {
-    trackGaEvent("quote_cta_clicked", {
-      link_location: location || "landing_objective",
-      page_path: window.location.pathname,
-    });
   }
 
   var MULTI_FIELD_ORDER = {};
@@ -1113,7 +1108,9 @@
         updateNextButton();
       },
       onQuoteComplete: function (quotePayload) {
-        trackQuoteSubmitted();
+        if (quotePayload && quotePayload.leadSaved) {
+          trackQuoteSubmitted();
+        }
         showQuoteResultsStep(quotePayload);
       },
     });
@@ -1187,7 +1184,6 @@
         return;
       }
       if (currentStep === 11 && nameStepPhase === "fields") {
-        trackStepCompleted(currentStep, "name_entered");
         showNameConsentPhase();
         return;
       }
@@ -1204,9 +1200,6 @@
         return;
       }
       trackStepCompleted(currentStep, getStepAnswer(currentStep));
-      if (activeFlow === "quote") {
-        trackFormStepsCompletedForLanding();
-      }
       submitLandingQuote();
     });
   }
@@ -1529,7 +1522,6 @@
       var quoteCard = ev.target.closest('[data-lf-objective="quote"]');
       if (quoteCard) {
         ev.preventDefault();
-        trackQuoteCtaClicked("landing_objective");
         trackGaEvent("objective_selected", { objective: "quote" });
         trackStepCompleted(1, "quote");
         activeFlow = "quote";
@@ -1551,21 +1543,27 @@
   })();
 
   (function bindScheduleObjectiveCards() {
-    document.querySelectorAll('[data-lf-objective="schedule"]').forEach(function (btn) {
-      if (btn.getAttribute("data-lf-ga-bound") === "1") return;
-      btn.setAttribute("data-lf-ga-bound", "1");
-      btn.addEventListener("click", function () {
-        trackGaEvent("objective_selected", { objective: "schedule" });
-        trackStepCompleted(1, "schedule");
+    document
+      .querySelectorAll(
+        '[data-lf-objective="schedule"], #lf-calc-schedule-call, #lf-results-schedule-call'
+      )
+      .forEach(function (btn) {
+        if (btn.getAttribute("data-lf-ga-bound") === "1") return;
+        btn.setAttribute("data-lf-ga-bound", "1");
+        btn.setAttribute("data-lf-schedule-trigger", "1");
+        btn.addEventListener("click", function () {
+          trackGaEvent("objective_selected", { objective: "schedule" });
+          trackStepCompleted(1, "schedule");
+        });
       });
-    });
   })();
 
   (function bindContactTracking() {
     document.querySelectorAll('a.lf-header-whatsapp-btn, a[href*="wa.me"]').forEach(function (link) {
       if (link.getAttribute("data-lf-ga-bound") === "1") return;
       link.setAttribute("data-lf-ga-bound", "1");
-      link.addEventListener("click", function () {
+      link.addEventListener("click", function (ev) {
+        ev.stopPropagation();
         trackGaEvent("whatsapp_clicked", { location: "landing_flow" });
       });
     });
@@ -1619,11 +1617,13 @@
     }
 
     modalEl.addEventListener("show.bs.modal", setScheduleIframeSrc);
-    modalEl.addEventListener("show.bs.modal", function () {
+    modalEl.addEventListener("show.bs.modal", function (ev) {
+      var trigger = ev.relatedTarget;
+      if (!trigger || trigger.getAttribute("data-lf-schedule-trigger") !== "1") return;
       document.body.classList.add("lf-schedule-modal-open");
       trackGaEvent("schedule_modal_opened", {
         location: "landing_flow",
-        step_id: currentStep,
+        step_id: ga4StepId(currentStep),
         step_name: stepNameMap[currentStep] || null,
       });
     });

@@ -232,7 +232,7 @@
       body: hasJson ? JSON.stringify(body) : undefined,
     });
     if (r.status === 401) {
-      await signOutNow();
+      if (!opts.softAuth) await signOutNow();
       throw new Error("unauthorized");
     }
     var data = {};

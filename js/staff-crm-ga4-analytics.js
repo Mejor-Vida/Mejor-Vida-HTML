@@ -1,11 +1,12 @@
 /**
- * Staff CRM — GA4 Analytics funnel view.
+ * Staff CRM — GA4 Analytics (website events + landing path funnels).
  */
 (function () {
   "use strict";
 
   var state = {
     tab: "website",
+    path: "quote",
     periodDays: 30,
     data: null,
     loading: false,
@@ -13,6 +14,9 @@
     detailData: null,
     detailLoading: false,
   };
+
+  var LANDING_TABS = ["landing_ga4", "landing_facebook"];
+  var PATH_KEYS = ["quote", "calculator", "schedule"];
 
   function t(key, vars) {
     if (window.StaffCrm && window.StaffCrm.t) return window.StaffCrm.t(key, vars);
@@ -30,8 +34,7 @@
   }
 
   function fmtNum(n) {
-    var v = Number(n) || 0;
-    return v.toLocaleString();
+    return (Number(n) || 0).toLocaleString();
   }
 
   function fmtPct(n) {
@@ -64,9 +67,29 @@
     return dt.toLocaleDateString(undefined, { month: "short", day: "numeric" });
   }
 
-  function currentFunnelData() {
+  function isLandingTab() {
+    return LANDING_TABS.indexOf(state.tab) >= 0;
+  }
+
+  function currentTabData() {
     if (!state.data) return { stages: [], detail: {}, synced_at: null };
-    return state.tab === "landing" ? state.data.landing : state.data.website;
+    if (state.tab === "website") return state.data.website || { stages: [], detail: {} };
+    if (state.tab === "landing_facebook") return state.data.landing_facebook || { stages: [], detail: {} };
+    return state.data.landing_ga4 || { stages: [], detail: {} };
+  }
+
+  function currentPathStages() {
+    var tabData = currentTabData();
+    var paths = (tabData.detail && tabData.detail.paths) || {};
+    var pathData = paths[state.path] || { stages: [] };
+    return pathData.stages || [];
+  }
+
+  function pathLabel(pathKey) {
+    if (pathKey === "quote") return t("ga4_path_quote");
+    if (pathKey === "calculator") return t("ga4_path_calculator");
+    if (pathKey === "schedule") return t("ga4_path_schedule");
+    return pathKey;
   }
 
   function maxStageCount(stages) {
@@ -75,6 +98,32 @@
       if (s.count > max) max = s.count;
     });
     return max || 1;
+  }
+
+  function renderWebsiteEventRow(stage, maxCount) {
+    var widthPct = Math.max(12, Math.round((stage.count / maxCount) * 100));
+    return (
+      '<button type="button" class="crm-ga4-event-row" data-stage-id="' +
+      esc(stage.id) +
+      '" style="--stage-width:' +
+      widthPct +
+      '%">' +
+      '<div class="crm-ga4-event-inner">' +
+      '<div class="crm-ga4-event-head">' +
+      '<span class="crm-ga4-event-label">' +
+      esc(stage.label) +
+      "</span>" +
+      '<span class="crm-ga4-stage-event">' +
+      esc(stage.eventName || stage.id) +
+      "</span></div>" +
+      '<div class="crm-ga4-stage-metrics">' +
+      '<strong class="crm-ga4-stage-count">' +
+      esc(fmtNum(stage.count)) +
+      "</strong>" +
+      '<span class="crm-ga4-stage-users">' +
+      esc(t("ga4_users", { n: fmtNum(stage.users) })) +
+      "</span></div></div></button>"
+    );
   }
 
   function renderFunnelBar(stage, maxCount, index, total) {
@@ -174,26 +223,6 @@
     );
   }
 
-  function renderLandingSteps(stepsData) {
-    if (!stepsData || !stepsData.steps || !stepsData.steps.length) return "";
-    var html =
-      '<div class="crm-ga4-detail-section"><h4>' +
-      esc(t("ga4_landing_steps")) +
-      '</h4><ul class="crm-ga4-step-list">';
-    stepsData.steps.forEach(function (step, i) {
-      html +=
-        "<li><span>" +
-        esc(String(i + 1) + ". " + step.label) +
-        '</span><strong>' +
-        esc(fmtNum(step.count)) +
-        "</strong>" +
-        (i > 0 ? '<em>' + esc(fmtPct(step.stepConversion) + " conv") + "</em>" : "") +
-        "</li>";
-    });
-    html += "</ul></div>";
-    return html;
-  }
-
   function renderDetailModal() {
     if (!state.detailStage) return "";
     var stage = state.detailStage;
@@ -211,9 +240,7 @@
       esc(t("ga4_close")) +
       '">×</button></div>' +
       '<div class="crm-ga4-modal-body">' +
-      (loading
-        ? '<p class="crm-ga4-detail-empty">' + esc(t("loading")) + "</p>"
-        : "") +
+      (loading ? '<p class="crm-ga4-detail-empty">' + esc(t("loading")) + "</p>" : "") +
       (!loading
         ? '<p class="crm-ga4-detail-desc">' + esc(stage.description || "") + "</p>" +
           '<div class="crm-ga4-detail-stats">' +
@@ -227,12 +254,14 @@
           "</span><strong>" +
           esc(fmtNum(stage.users)) +
           "</strong></div>" +
-          '<div><span>' +
-          esc(t("ga4_from_top")) +
-          "</span><strong>" +
-          esc(fmtPct(stage.conversionFromTop)) +
-          "</strong></div>" +
-          (stage.stepConversion != null
+          (isLandingTab() && stage.conversionFromTop != null
+            ? '<div><span>' +
+              esc(t("ga4_from_top")) +
+              "</span><strong>" +
+              esc(fmtPct(stage.conversionFromTop)) +
+              "</strong></div>"
+            : "") +
+          (isLandingTab() && stage.stepConversion != null
             ? '<div><span>' +
               esc(t("ga4_from_prev")) +
               "</span><strong>" +
@@ -249,39 +278,93 @@
           esc(t("ga4_top_pages")) +
           "</h4>" +
           renderTopPages(detail.topPages) +
-          "</div>" +
-          renderLandingSteps(state.detailData && state.detailData.landingSteps)
+          "</div>"
         : "") +
       "</div></div></div>"
     );
   }
 
+  function renderPathTabs() {
+    if (!isLandingTab()) return "";
+    return (
+      '<div class="crm-ga4-path-tabs" role="tablist">' +
+      PATH_KEYS.map(function (pathKey) {
+        return (
+          '<button type="button" class="crm-ga4-path-tab' +
+          (state.path === pathKey ? " is-active" : "") +
+          '" data-ga4-path="' +
+          esc(pathKey) +
+          '" role="tab">' +
+          esc(pathLabel(pathKey)) +
+          "</button>"
+        );
+      }).join("") +
+      "</div>"
+    );
+  }
+
+  function renderTabNote() {
+    if (state.tab === "website") {
+      return '<p class="crm-ga4-tab-note">' + esc(t("ga4_website_note")) + "</p>";
+    }
+    if (state.tab === "landing_ga4") {
+      return '<p class="crm-ga4-tab-note">' + esc(t("ga4_landing_ga4_note")) + "</p>";
+    }
+    if (state.tab === "landing_facebook") {
+      var tabData = currentTabData();
+      var metaNote =
+        tabData.detail &&
+        tabData.detail.paths &&
+        tabData.detail.paths.quote &&
+        tabData.detail.paths.quote.metaNote;
+      return (
+        '<p class="crm-ga4-tab-note">' +
+        esc(t("ga4_landing_facebook_note")) +
+        (metaNote ? " " + esc(metaNote) : "") +
+        "</p>"
+      );
+    }
+    return "";
+  }
+
   function renderShell() {
-    var funnel = currentFunnelData();
-    var stages = funnel.stages || [];
-    var maxCount = maxStageCount(stages);
-    var syncedAt = funnel.synced_at || (state.data && state.data.website && state.data.website.synced_at);
+    var tabData = currentTabData();
+    var syncedAt = tabData.synced_at;
+    var contentHtml = "";
 
-    var funnelHtml = stages.length
-      ? stages
-          .map(function (stage, i) {
-            return renderFunnelBar(stage, maxCount, i, stages.length);
-          })
-          .join("")
-      : '<p class="crm-ga4-empty">' + esc(t("ga4_no_data")) + "</p>";
+    if (state.tab === "website") {
+      var events = tabData.stages || [];
+      var maxEvents = maxStageCount(events);
+      contentHtml = events.length
+        ? events.map(function (stage) {
+            return renderWebsiteEventRow(stage, maxEvents);
+          }).join("")
+        : '<p class="crm-ga4-empty">' + esc(t("ga4_no_data")) + "</p>";
+    } else {
+      var stages = currentPathStages();
+      var maxCount = maxStageCount(stages);
+      contentHtml = stages.length
+        ? stages
+            .map(function (stage, i) {
+              return renderFunnelBar(stage, maxCount, i, stages.length);
+            })
+            .join("")
+        : '<p class="crm-ga4-empty">' + esc(t("ga4_no_data")) + "</p>";
+    }
 
-    var setupHint = state.data && state.data.setupHint
-      ? '<div class="crm-ga4-setup-hint">' +
-        esc(state.data.setupHint) +
-        (state.data.oauthAuthUrl
-          ? ' <a href="' +
-            esc(state.data.oauthAuthUrl) +
-            '" target="_blank" rel="noopener">' +
-            esc(t("ga4_connect_oauth")) +
-            "</a>"
-          : "") +
-        "</div>"
-      : "";
+    var setupHint =
+      state.data && state.data.setupHint
+        ? '<div class="crm-ga4-setup-hint">' +
+          esc(state.data.setupHint) +
+          (state.data.oauthAuthUrl
+            ? ' <a href="' +
+              esc(state.data.oauthAuthUrl) +
+              '" target="_blank" rel="noopener">' +
+              esc(t("ga4_connect_oauth")) +
+              "</a>"
+            : "") +
+          "</div>"
+        : "";
 
     return (
       '<div class="crm-ga4-shell">' +
@@ -316,25 +399,34 @@
       esc(t("ga4_refresh")) +
       "</button></div></div>" +
       setupHint +
-      '<div class="crm-ga4-tabs" role="tablist">' +
+      '<div class="crm-ga4-tabs crm-ga4-tabs--main" role="tablist">' +
       '<button type="button" class="crm-ga4-tab' +
       (state.tab === "website" ? " is-active" : "") +
       '" data-ga4-tab="website" role="tab">' +
       esc(t("ga4_tab_website")) +
       "</button>" +
       '<button type="button" class="crm-ga4-tab' +
-      (state.tab === "landing" ? " is-active" : "") +
-      '" data-ga4-tab="landing" role="tab">' +
-      esc(t("ga4_tab_landing")) +
+      (state.tab === "landing_ga4" ? " is-active" : "") +
+      '" data-ga4-tab="landing_ga4" role="tab">' +
+      esc(t("ga4_tab_landing_ga4")) +
+      "</button>" +
+      '<button type="button" class="crm-ga4-tab' +
+      (state.tab === "landing_facebook" ? " is-active" : "") +
+      '" data-ga4-tab="landing_facebook" role="tab">' +
+      esc(t("ga4_tab_landing_facebook")) +
       "</button></div>" +
+      renderTabNote() +
+      renderPathTabs() +
       '<p class="crm-ga4-synced">' +
       esc(t("ga4_last_sync", { when: fmtDateTime(syncedAt) })) +
       "</p>" +
-      '<div class="crm-ga4-funnel" id="crm-ga4-funnel">' +
-      funnelHtml +
+      '<div class="crm-ga4-funnel' +
+      (state.tab === "website" ? " crm-ga4-funnel--events" : "") +
+      '" id="crm-ga4-funnel">' +
+      contentHtml +
       "</div>" +
       '<p class="crm-ga4-hint">' +
-      esc(t("ga4_click_stage")) +
+      esc(isLandingTab() ? t("ga4_click_stage") : t("ga4_click_event")) +
       "</p>" +
       renderDetailModal() +
       "</div>"
@@ -359,13 +451,13 @@
       var msg = (e && e.message) || t("ga4_load_error");
       state.data = {
         website: { stages: [] },
-        landing: { stages: [] },
+        landing_ga4: { stages: [], detail: { paths: {} } },
+        landing_facebook: { stages: [], detail: { paths: {} } },
         setupHint: msg,
         oauthAuthUrl: "/api/staff/ga4-auth",
       };
       if (/invalid_grant/i.test(msg)) {
-        state.data.setupHint =
-          t("ga4_invalid_grant") + " " + msg;
+        state.data.setupHint = t("ga4_invalid_grant") + " " + msg;
       }
     } finally {
       state.loading = false;
@@ -374,10 +466,16 @@
   }
 
   async function openStageDetail(stageId) {
-    var funnel = currentFunnelData();
-    var stage = (funnel.stages || []).find(function (s) {
-      return s.id === stageId;
-    });
+    var stage = null;
+    if (state.tab === "website") {
+      stage = (currentTabData().stages || []).find(function (s) {
+        return s.id === stageId;
+      });
+    } else {
+      stage = currentPathStages().find(function (s) {
+        return s.id === stageId;
+      });
+    }
     if (!stage) return;
 
     state.detailStage = stage;
@@ -387,16 +485,17 @@
     if (main) paint(main);
 
     try {
-      state.detailData = await api(
-        "/api/staff/ga4-analytics?action=stage&funnel=" +
-          encodeURIComponent(state.tab) +
-          "&stage=" +
-          encodeURIComponent(stageId) +
-          "&period=" +
-          encodeURIComponent(String(state.periodDays)),
-        null,
-        { method: "GET" }
-      );
+      var qs =
+        "/api/staff/ga4-analytics?action=stage&tab=" +
+        encodeURIComponent(state.tab) +
+        "&stage=" +
+        encodeURIComponent(stageId) +
+        "&period=" +
+        encodeURIComponent(String(state.periodDays));
+      if (isLandingTab()) {
+        qs += "&path=" + encodeURIComponent(state.path);
+      }
+      state.detailData = await api(qs, null, { method: "GET" });
     } catch (e) {
       state.detailData = { detail: {}, error: e.message };
     } finally {
@@ -421,6 +520,14 @@
       });
     });
 
+    main.querySelectorAll("[data-ga4-path]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        state.path = btn.getAttribute("data-ga4-path") || "quote";
+        closeDetailModal();
+        paint(main);
+      });
+    });
+
     var periodSel = main.querySelector("#crm-ga4-period");
     if (periodSel) {
       periodSel.addEventListener("change", function () {
@@ -440,7 +547,7 @@
       });
     }
 
-    main.querySelectorAll(".crm-ga4-stage").forEach(function (btn) {
+    main.querySelectorAll(".crm-ga4-stage, .crm-ga4-event-row").forEach(function (btn) {
       btn.addEventListener("click", function () {
         openStageDetail(btn.getAttribute("data-stage-id"));
       });
@@ -458,6 +565,7 @@
 
   async function mount(main) {
     state.tab = "website";
+    state.path = "quote";
     state.detailStage = null;
     await loadData(main, false);
   }

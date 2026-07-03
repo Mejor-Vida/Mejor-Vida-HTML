@@ -140,7 +140,8 @@
       funnel_loading_detail: "Loading step detail…",
       funnel_load_error: "Could not load funnel analytics.",
       funnel_no_data_title: "No funnel events yet",
-      funnel_no_data_blurb: "Events appear when users visit gastos-finales-ads landing pages. Check back after ad traffic flows.",
+      funnel_no_data_blurb:
+        "Events appear when users visit landing pages, quote.html, or other site tools in this date range. Try widening the From/To dates.",
       clients_title: "Clients",
       add_new: "Add New",
       add_client_title: "Add New Contact",
@@ -963,7 +964,8 @@
       funnel_loading_detail: "Cargando detalle…",
       funnel_load_error: "No se pudieron cargar los datos del embudo.",
       funnel_no_data_title: "Aún no hay eventos de embudo",
-      funnel_no_data_blurb: "Los eventos aparecen cuando los usuarios visitan las landing de gastos-finales-ads.",
+      funnel_no_data_blurb:
+        "Los eventos aparecen cuando los usuarios visitan landing pages, quote.html u otras herramientas del sitio en este rango de fechas. Amplíe Desde/Hasta.",
       clients_title: "Clientes",
       add_new: "Agregar",
       add_client_title: "Agregar contacto",
