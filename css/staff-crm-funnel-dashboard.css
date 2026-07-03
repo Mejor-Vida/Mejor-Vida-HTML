@@ -1,8 +1,9 @@
 /* Staff CRM — Product Funnel Analytics Dashboard */
 
 .crm-funnel-page {
-  max-width: 1200px;
-  margin: 0 auto;
+  max-width: none;
+  width: 100%;
+  margin: 0;
   padding: 8px 0 48px;
 }
 
@@ -285,15 +286,16 @@
 
 .crm-funnel-branches {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
 }
 
 .crm-funnel-branch {
-  padding: 14px;
+  padding: 10px 8px;
   background: #fff;
   border: 1px solid var(--crm-border, #dbe3ef);
-  border-radius: 12px;
+  border-radius: 10px;
+  min-width: 0;
 }
 
 .crm-funnel-branch--terminal {
@@ -302,44 +304,46 @@
 
 .crm-funnel-branch-head {
   display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 8px;
-  margin-bottom: 12px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  margin-bottom: 8px;
 }
 
 .crm-funnel-branch-head h3 {
   margin: 0;
-  font-size: 0.95rem;
+  font-size: 0.82rem;
   font-weight: 700;
   color: var(--crm-text, #1a2b4a);
+  line-height: 1.25;
 }
 
 .crm-funnel-branch-entry {
-  font-size: 0.78rem;
+  font-size: 0.72rem;
   color: var(--crm-muted, #64748b);
 }
 
 .crm-funnel-branch-steps {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 4px;
 }
 
 .crm-funnel-node {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 2px;
+  gap: 1px;
   width: 100%;
-  padding: 10px 12px;
+  padding: 7px 8px;
   border: 1px solid var(--crm-border, #dbe3ef);
-  border-radius: 8px;
+  border-radius: 6px;
   background: #fff;
   text-align: left;
   font: inherit;
   cursor: pointer;
   transition: border-color 0.15s, box-shadow 0.15s;
+  min-width: 0;
 }
 
 .crm-funnel-node:hover {
@@ -348,36 +352,44 @@
 }
 
 .crm-funnel-node--good {
-  border-left: 4px solid #16a34a;
+  border-left: 3px solid #16a34a;
 }
 
 .crm-funnel-node--avg {
-  border-left: 4px solid #ca8a04;
+  border-left: 3px solid #ca8a04;
 }
 
 .crm-funnel-node--weak {
-  border-left: 4px solid #dc2626;
+  border-left: 3px solid #dc2626;
 }
 
 .crm-funnel-node--neutral {
-  border-left: 4px solid var(--crm-primary, #2563eb);
+  border-left: 3px solid var(--crm-primary, #2563eb);
 }
 
 .crm-funnel-node-label {
-  font-size: 0.82rem;
+  font-size: 0.72rem;
   font-weight: 600;
   color: var(--crm-text, #1a2b4a);
+  line-height: 1.25;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 
 .crm-funnel-node-count {
-  font-size: 1.15rem;
+  font-size: 1rem;
   color: var(--crm-text, #1a2b4a);
 }
 
 .crm-funnel-node-meta,
 .crm-funnel-node-drop {
-  font-size: 0.76rem;
+  font-size: 0.68rem;
   color: var(--crm-muted, #64748b);
+  line-height: 1.2;
 }
 
 .crm-funnel-node-drop {
@@ -386,9 +398,25 @@
 
 .crm-funnel-node-arrow {
   align-self: center;
-  font-size: 0.9rem;
+  font-size: 0.75rem;
   color: var(--crm-muted, #94a3b8);
   line-height: 1;
+}
+
+@media (max-width: 900px) {
+  .crm-funnel-branches {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding-bottom: 6px;
+    scroll-snap-type: x proximity;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .crm-funnel-branch {
+    flex: 0 0 min(168px, 42vw);
+    scroll-snap-align: start;
+  }
 }
 
 .crm-funnel-inspector {
