@@ -84,6 +84,38 @@ function addGa4(html) {
   return html;
 }
 
+function addFunnelTrackScript(html, filePath) {
+  if (!html.includes(GA_ID)) return html;
+  if (html.includes("mvi-funnel-track.js")) return html;
+  const prefix = relPrefix(filePath);
+  const tag = `<script src="${prefix}js/mvi-funnel-track.js?v=20260702e"></script>`;
+
+  if (html.includes("mvi-ga4-funnel.js")) {
+    return html.replace(
+      /(<script[^>]+src="[^"]*mvi-ga4-funnel\.js[^"]*"[^>]*>)/i,
+      `${tag}\n$1`
+    );
+  }
+  if (html.includes("mvi-hubspot-meeting-sync.js")) {
+    return html.replace(
+      /(<script[^>]+src="[^"]*mvi-hubspot-meeting-sync\.js[^"]*"[^>]*>)/i,
+      `${tag}\n$1`
+    );
+  }
+  const deferScriptMarkers = [
+    `<script defer src="${prefix}script.js"`,
+    `<script defer="" src="${prefix}script.js"`,
+    `<script defer src="script.js"`,
+    `<script defer="" src="script.js"`,
+  ];
+  for (const marker of deferScriptMarkers) {
+    if (html.includes(marker)) {
+      return html.replace(marker, `${tag}\n${marker}`);
+    }
+  }
+  return html;
+}
+
 function addGa4FunnelScript(html, filePath) {
   if (!html.includes(GA_ID)) return html;
   if (html.includes("mvi-ga4-funnel.js")) return html;
@@ -179,6 +211,7 @@ function processFile(filePath) {
 
   html = addGa4(html);
   html = addGa4FunnelScript(html, filePath);
+  html = addFunnelTrackScript(html, filePath);
   html = replaceFa(html, filePath);
   html = addDefer(html);
   html = patchContactEs(html);

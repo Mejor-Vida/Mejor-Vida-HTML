@@ -7,8 +7,10 @@
   var formStepsTracked = false;
 
   function track(eventName, params) {
-    if (typeof gtag !== "function") return;
-    gtag("event", eventName, params || {});
+    if (typeof gtag === "function") gtag("event", eventName, params || {});
+    if (global.MVIFunnelTrack && typeof global.MVIFunnelTrack.mirrorGa4 === "function") {
+      global.MVIFunnelTrack.mirrorGa4(eventName, params || {}, { surface: "website" });
+    }
   }
 
   function isQuotePagePath(pathname) {
@@ -65,6 +67,23 @@
     track("form_steps_completed", payload);
   }
 
+  var formStartedTracked = false;
+
+  function trackFormStarted(extra) {
+    if (formStartedTracked) return;
+    formStartedTracked = true;
+    var payload = { form_source: "nebraska_quote_wizard" };
+    if (extra) {
+      Object.keys(extra).forEach(function (key) {
+        payload[key] = extra[key];
+      });
+    }
+    try {
+      payload.page_path = global.location.pathname;
+    } catch (ePath) {}
+    track("form_started", payload);
+  }
+
   function trackQuoteSubmitted(extra) {
     var payload = extra || {};
     try {
@@ -105,6 +124,7 @@
     track: track,
     trackQuoteCtaClicked: trackQuoteCtaClicked,
     trackFormStepsCompleted: trackFormStepsCompleted,
+    trackFormStarted: trackFormStarted,
     trackQuoteSubmitted: trackQuoteSubmitted,
     trackCloseConvertLead: trackCloseConvertLead,
     bindQuoteCtaClicks: bindQuoteCtaClicks,

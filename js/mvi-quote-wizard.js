@@ -145,6 +145,9 @@
   }
 
   function showStep(i) {
+    if (i > 0 && stepIndex === 0 && window.MviGa4Funnel && window.MviGa4Funnel.trackFormStarted) {
+      window.MviGa4Funnel.trackFormStarted();
+    }
     stepIndex = i;
     STEPS.forEach(function (id, idx) {
       var panel = document.getElementById("mvi-step-" + id);

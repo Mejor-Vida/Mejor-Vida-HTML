@@ -114,8 +114,10 @@
   }
 
   function trackGaEvent(eventName, params) {
-    if (typeof gtag !== "function") return;
-    gtag("event", eventName, params || {});
+    if (typeof gtag === "function") gtag("event", eventName, params || {});
+    if (window.MVIFunnelTrack && typeof window.MVIFunnelTrack.mirrorGa4 === "function") {
+      window.MVIFunnelTrack.mirrorGa4(eventName, params || {}, { surface: "website" });
+    }
   }
 
   function postCallScheduledIndicated(payload, leadCtx) {

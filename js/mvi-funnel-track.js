@@ -149,6 +149,24 @@
     return "quote";
   }
 
+  function isLandingPage() {
+    try {
+      return /gastos-finales-ads|landing-gastos-finales|landing-final-expense/i.test(
+        global.location.pathname || ""
+      );
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function markLeadConverted() {
+    writeSession("mviLeadConversionTracked", "1");
+  }
+
+  function leadAlreadyTracked() {
+    return readSession("mviLeadConversionTracked") === "1";
+  }
+
   function fromGa4(eventName, params, ctx) {
     ctx = ctx || {};
     var flow = ctx.activeFlow || "quote";
@@ -179,8 +197,31 @@
       return;
     }
 
-    if (eventName === "quote_submitted" || eventName === "qualify_lead") {
-      track({ tool: "quote", step_name: "lead_submitted", event_type: "conversion", page_or_step: page });
+    if (eventName === "quote_submitted") {
+      if (isLandingPage()) {
+        markLeadConverted();
+        track({ tool: "quote", step_name: "lead_submitted", event_type: "conversion", page_or_step: page });
+      } else {
+        markLeadConverted();
+        track({ tool: "quote", step_name: "quote_submitted", event_type: "conversion", page_or_step: page });
+      }
+      return;
+    }
+
+    if (eventName === "qualify_lead") {
+      if (leadAlreadyTracked()) return;
+      markLeadConverted();
+      track({
+        tool: "quote",
+        step_name: isLandingPage() ? "lead_submitted" : "qualify_lead",
+        event_type: "conversion",
+        page_or_step: page,
+      });
+      return;
+    }
+
+    if (eventName === "form_started") {
+      track({ tool: "quote", step_name: "form_started", event_type: "step_view", page_or_step: page });
       return;
     }
 
@@ -220,6 +261,7 @@
   global.MVIFunnelTrack = {
     track: track,
     fromGa4: fromGa4,
+    mirrorGa4: fromGa4,
     getAcquisition: getAcquisition,
     getSessionId: getSessionId,
   };
