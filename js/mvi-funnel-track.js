@@ -201,6 +201,10 @@
 
     if (eventName === "step_viewed" && params && params.step_name) {
       var step = STEP_NAME_MAP[params.step_name] || params.step_name;
+      if (isLandingPage()) {
+        var funnelViewSteps = { landing: true, quote_result: true, calc_results: true };
+        if (!funnelViewSteps[step]) return;
+      }
       track({ tool: tool, step_name: step, event_type: "step_view", page_or_step: page });
       return;
     }
