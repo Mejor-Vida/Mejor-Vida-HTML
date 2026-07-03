@@ -83,6 +83,12 @@
   function trackGaEvent(eventName, params) {
     if (typeof gtag !== "function") return;
     gtag("event", eventName, params || {});
+    if (window.MVIFunnelTrack && typeof window.MVIFunnelTrack.fromGa4 === "function") {
+      window.MVIFunnelTrack.fromGa4(eventName, params || {}, {
+        activeFlow: activeFlow,
+        currentStep: currentStep,
+      });
+    }
   }
 
   function getAgeRangeBucket(birthdateStr) {

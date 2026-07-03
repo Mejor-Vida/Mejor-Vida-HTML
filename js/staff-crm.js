@@ -605,16 +605,16 @@
       esc(t("calls_today")) +
       "</div></div>" +
       "</div></div>" +
-      '<div class="crm-card crm-ga4-dash-card" style="margin-bottom:16px">' +
-      '<a href="#/ga4" class="crm-ga4-dash-link">' +
+      '<div class="crm-card crm-funnel-dash-card" style="margin-bottom:16px">' +
+      '<a href="#/ga4" class="crm-funnel-dash-link">' +
       "<div>" +
       "<strong>" +
-      esc(t("ga4_dash_title")) +
+      esc(t("funnel_dash_title")) +
       "</strong>" +
       "<span>" +
-      esc(t("ga4_dash_blurb")) +
+      esc(t("funnel_dash_blurb")) +
       "</span></div>" +
-      '<span class="crm-ga4-dash-arrow" aria-hidden="true">→</span>' +
+      '<span class="crm-funnel-dash-arrow" aria-hidden="true">→</span>' +
       "</a></div>" +
       '<div class="crm-card">' +
       "<h2>" +
@@ -1581,13 +1581,13 @@
         return;
       }
       if (route.view === "ga4") {
-        if (window.StaffCrmGa4Analytics) {
-          await window.StaffCrmGa4Analytics.mount(main);
+        if (window.StaffCrmFunnelDashboard) {
+          await window.StaffCrmFunnelDashboard.mount(main);
         } else {
           main.innerHTML =
             '<div class="crm-placeholder"><strong>' +
             esc(t("load_error")) +
-            "</strong><p>GA4 Analytics module failed to load.</p></div>";
+            "</strong><p>Funnel Analytics module failed to load.</p></div>";
         }
         resetIdleTimer();
         return;
