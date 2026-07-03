@@ -6,6 +6,9 @@
   "use strict";
 
   var ACQ_KEY = "mviFunnelAcq";
+  var mirrorContext = {};
+  var recentTrackKeys = {};
+  var DEDUPE_MS = 600;
 
   var STEP_NAME_MAP = {
     objective_picker: "landing",
@@ -126,6 +129,17 @@
 
   function track(opts) {
     var acq = getAcquisition();
+    var dedupeKey = [
+      getSessionId(),
+      opts.tool,
+      opts.step_name,
+      opts.event_type,
+    ].join("|");
+    var now = Date.now();
+    if (recentTrackKeys[dedupeKey] && now - recentTrackKeys[dedupeKey] < DEDUPE_MS) {
+      return;
+    }
+    recentTrackKeys[dedupeKey] = now;
     postEvent({
       session_id: getSessionId(),
       source: acq.source,
@@ -168,7 +182,7 @@
   }
 
   function fromGa4(eventName, params, ctx) {
-    ctx = ctx || {};
+    ctx = ctx || mirrorContext || {};
     var flow = ctx.activeFlow || "quote";
     var tool = toolFromFlow(flow);
     var page = global.location.pathname;
@@ -261,11 +275,43 @@
     }
   }
 
+  function setMirrorContext(ctx) {
+    mirrorContext = ctx && typeof ctx === "object" ? ctx : {};
+  }
+
+  function installGtagMirrorOnce() {
+    if (global.__mviFunnelGtagMirrored) return;
+    if (typeof global.gtag !== "function") return;
+    var originalGtag = global.gtag;
+    global.gtag = function () {
+      var args = arguments;
+      var result = originalGtag.apply(this, args);
+      if (args.length >= 2 && String(args[0]) === "event" && args[1]) {
+        fromGa4(String(args[1]), args[2] || {}, mirrorContext);
+      }
+      return result;
+    };
+    global.__mviFunnelGtagMirrored = true;
+  }
+
   global.MVIFunnelTrack = {
     track: track,
     fromGa4: fromGa4,
     mirrorGa4: fromGa4,
+    setMirrorContext: setMirrorContext,
     getAcquisition: getAcquisition,
     getSessionId: getSessionId,
   };
+
+  installGtagMirrorOnce();
+  if (!global.__mviFunnelGtagMirrored) {
+    var hookAttempts = 0;
+    var hookTimer = global.setInterval(function () {
+      installGtagMirrorOnce();
+      hookAttempts += 1;
+      if (global.__mviFunnelGtagMirrored || hookAttempts > 40) {
+        global.clearInterval(hookTimer);
+      }
+    }, 50);
+  }
 })(typeof window !== "undefined" ? window : this);

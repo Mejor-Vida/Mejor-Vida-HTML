@@ -7,7 +7,10 @@
   var formStepsTracked = false;
 
   function track(eventName, params) {
-    if (typeof gtag === "function") gtag("event", eventName, params || {});
+    if (typeof gtag === "function") {
+      gtag("event", eventName, params || {});
+      return;
+    }
     if (global.MVIFunnelTrack && typeof global.MVIFunnelTrack.mirrorGa4 === "function") {
       global.MVIFunnelTrack.mirrorGa4(eventName, params || {}, { surface: "website" });
     }

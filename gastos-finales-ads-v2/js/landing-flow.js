@@ -1,4 +1,7 @@
 (function () {
+  if (window.__MVILandingFlowBound) return;
+  window.__MVILandingFlowBound = true;
+
   var steps = Array.prototype.slice.call(document.querySelectorAll(".lf-step"));
   var maxBuiltStep = steps.reduce(function (max, el) {
     return Math.max(max, Number(el.getAttribute("data-step")) || 0);
@@ -91,8 +94,15 @@
   }
 
   function trackGaEvent(eventName, params) {
+    if (window.MVIFunnelTrack && typeof window.MVIFunnelTrack.setMirrorContext === "function") {
+      window.MVIFunnelTrack.setMirrorContext({
+        activeFlow: activeFlow,
+        currentStep: currentStep,
+      });
+    }
     if (typeof gtag === "function") {
       gtag("event", eventName, params || {});
+      return;
     }
     if (window.MVIFunnelTrack && typeof window.MVIFunnelTrack.fromGa4 === "function") {
       window.MVIFunnelTrack.fromGa4(eventName, params || {}, {
@@ -1517,13 +1527,13 @@
 
   (function bindObjectiveCards() {
     var grid = document.getElementById("lf-objective-grid");
-    if (!grid) return;
+    if (!grid || grid.getAttribute("data-lf-objectives-bound") === "1") return;
+    grid.setAttribute("data-lf-objectives-bound", "1");
     grid.addEventListener("click", function (ev) {
       var quoteCard = ev.target.closest('[data-lf-objective="quote"]');
       if (quoteCard) {
         ev.preventDefault();
         trackGaEvent("objective_selected", { objective: "quote" });
-        trackStepCompleted(1, "quote");
         activeFlow = "quote";
         var next = getNextStepNumber(1);
         if (next !== null) showStep(next);
@@ -1533,7 +1543,6 @@
       if (calcCard) {
         ev.preventDefault();
         trackGaEvent("objective_selected", { objective: "calculator" });
-        trackStepCompleted(1, "calculator");
         activeFlow = "calculator";
         var calcFirst =
           (window.MVILandingCalculator && window.MVILandingCalculator.FIRST_STEP) || 21;
@@ -1553,7 +1562,6 @@
         btn.setAttribute("data-lf-schedule-trigger", "1");
         btn.addEventListener("click", function () {
           trackGaEvent("objective_selected", { objective: "schedule" });
-          trackStepCompleted(1, "schedule");
         });
       });
   })();
