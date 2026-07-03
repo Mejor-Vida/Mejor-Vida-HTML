@@ -106,7 +106,7 @@
       "</label>" +
       "</div>" +
       '<div class="crm-funnel-view-tabs">' +
-      ["facebook", "google", "website"].map(function (v) {
+      ["facebook", "google", "lp_direct", "website"].map(function (v) {
         return (
           '<button type="button" class="crm-funnel-view-tab' +
           (state.view === v ? " is-active" : "") +

@@ -1,7 +1,7 @@
 /**
  * GET /api/staff/funnel-analytics
  *
- * Overview: ?view=facebook|google|website&date_from=YYYY-MM-DD&date_to=YYYY-MM-DD
+ * Overview: ?view=facebook|google|lp_direct|website&date_from=YYYY-MM-DD&date_to=YYYY-MM-DD
  * Node detail: ?action=node&view=facebook&tool=quote&step=state&date_from=...&date_to=...
  */
 const { requireStaffAuth } = require("../auth-check");
