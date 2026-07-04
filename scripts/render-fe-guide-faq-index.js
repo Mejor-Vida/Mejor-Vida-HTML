@@ -8,6 +8,7 @@ const path = require("path");
 
 const ROOT = path.join(__dirname, "..");
 const DATA = path.join(ROOT, "data/fe-guide-faq-index.json");
+const GUIDES_DIR = path.join(ROOT, "data/fe-guides");
 const INDEX = path.join(ROOT, "index.html");
 
 const data = JSON.parse(fs.readFileSync(DATA, "utf8"));
@@ -20,7 +21,11 @@ function esc(s) {
     .replace(/"/g, "&quot;");
 }
 
-function card(g) {
+function isGuidePublished(slug) {
+  return fs.existsSync(path.join(GUIDES_DIR, `${slug}.json`));
+}
+
+function cardPublished(g) {
   const href = `blog/${g.slug}.html`;
   return `        <div class="col-md-6 col-lg-4">
           <article class="bg-white rounded-3 p-4 shadow-sm h-100 fe-guide-faq-card position-relative">
@@ -29,6 +34,21 @@ function card(g) {
             <p class="small mb-0"><span class="text-primary fw-semibold">Guía de Julie →</span></p>
           </article>
         </div>`;
+}
+
+function cardComingSoon(g) {
+  return `        <div class="col-md-6 col-lg-4">
+          <article class="rounded-3 p-4 h-100 fe-guide-faq-card fe-guide-faq-card--soon" aria-disabled="true">
+            <p class="fe-guide-faq-soon-badge mb-2">Próximamente</p>
+            <h3 class="h6 fw-bold mb-2 fe-guide-faq-soon-title">${esc(g.question)}</h3>
+            <p class="small lh-base mb-2 fe-guide-faq-soon-teaser">${esc(g.teaser)}</p>
+            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Julie</p>
+          </article>
+        </div>`;
+}
+
+function card(g) {
+  return isGuidePublished(g.slug) ? cardPublished(g) : cardComingSoon(g);
 }
 
 const htmlParts = [];
@@ -45,6 +65,7 @@ const htmlBlock = htmlParts.join("\n");
 const entities = [];
 for (const cat of data.categories) {
   for (const g of cat.guides) {
+    if (!isGuidePublished(g.slug)) continue;
     entities.push({
       "@type": "Question",
       name: g.question,
@@ -89,5 +110,8 @@ index = index.replace(
 );
 
 fs.writeFileSync(INDEX, index, "utf8");
-const count = entities.length;
-console.log(`Updated index.html FAQ section (${count} guide links, ${data.categories.length} categories).`);
+const total = data.categories.reduce((n, c) => n + c.guides.length, 0);
+const published = entities.length;
+console.log(
+  `Updated index.html FAQ section (${published} published of ${total} guides, ${data.categories.length} categories).`
+);

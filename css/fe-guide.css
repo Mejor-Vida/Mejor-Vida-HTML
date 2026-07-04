@@ -383,3 +383,37 @@
 .fe-guide-modal-badge i {
   color: #d69e2e;
 }
+
+/* Homepage FAQ guide cards (index.html #final-expense-answers) */
+.fe-guide-faq-card--soon {
+  background: #f1f5f9;
+  border: 1px dashed #cbd5e1;
+  box-shadow: none;
+  opacity: 0.92;
+}
+
+.fe-guide-faq-soon-badge {
+  display: inline-block;
+  margin: 0;
+  padding: 0.15rem 0.55rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: #64748b;
+  background: #e2e8f0;
+  border-radius: 999px;
+}
+
+.fe-guide-faq-soon-title {
+  color: #64748b;
+}
+
+.fe-guide-faq-soon-teaser {
+  color: #94a3b8;
+}
+
+.fe-guide-faq-soon-foot {
+  color: #94a3b8;
+  font-weight: 500;
+}
