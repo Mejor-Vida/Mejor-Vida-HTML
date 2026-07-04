@@ -7,7 +7,8 @@
 const { requireStaffAuth } = require("../auth-check");
 const { json, serviceConfig, restSelect } = require("./_inbox-lib");
 const { buildDashboard, buildNodeDetail, groupSessions, filterSessions } = require("../../lib/funnel-analytics");
-const { fetchAdPlatformMetrics } = require("../../lib/ad-platform-insights");
+const { fetchAdPlatformMetrics, fetchAdDailySeries } = require("../../lib/ad-platform-insights");
+const { fetchTopKeywordsByClicks } = require("../../lib/google-ads-api");
 
 const CHICAGO_TZ = "America/Chicago";
 
@@ -130,7 +131,48 @@ module.exports = async function handler(req, res) {
     return json(res, 200, { ok: true, detail, dateFrom: range.dateFrom, dateTo: range.dateTo });
   }
 
+  if (action === "ad_daily") {
+    if (view !== "facebook" && view !== "google") {
+      return json(res, 400, { error: "ad_daily requires facebook or google view" });
+    }
+    try {
+      const series = await fetchAdDailySeries(view, range.dateFrom, range.dateTo);
+      return json(res, 200, {
+        ok: true,
+        dateFrom: range.dateFrom,
+        dateTo: range.dateTo,
+        ...series,
+      });
+    } catch (e) {
+      console.error("[funnel-analytics] ad_daily", e.message || e);
+      return json(res, 502, { error: e.message || "Could not load ad daily series" });
+    }
+  }
+
   const dashboard = buildDashboard(events, filters);
+
+  let googleAdsKeywords = null;
+  if (view === "google") {
+    try {
+      googleAdsKeywords = await fetchTopKeywordsByClicks(range.dateFrom, range.dateTo, 10);
+      if (
+        googleAdsKeywords &&
+        googleAdsKeywords.configured &&
+        googleAdsKeywords.keywords &&
+        googleAdsKeywords.keywords.length
+      ) {
+        dashboard.entryContext.topKeywordsByClicks = googleAdsKeywords.keywords;
+        dashboard.entryContext.keywordClicksSource = "google_ads_api";
+      }
+    } catch (e) {
+      console.error("[funnel-analytics] google ads keywords", e.message || e);
+      googleAdsKeywords = {
+        configured: false,
+        keywords: [],
+        error: e.message || "Could not load Google Ads keywords",
+      };
+    }
+  }
 
   let adMetrics = { show: false };
   if (view === "facebook" || view === "google") {
@@ -153,6 +195,7 @@ module.exports = async function handler(req, res) {
     ok: true,
     ...dashboard,
     adMetrics,
+    googleAdsKeywords,
     dateFrom: range.dateFrom,
     dateTo: range.dateTo,
     hasData: events.length > 0,

@@ -7,6 +7,7 @@
 
   var state = {
     view: "facebook",
+    periodDays: 7,
     dateFrom: "",
     dateTo: "",
     data: null,
@@ -15,7 +16,13 @@
     detail: null,
     detailLoading: false,
     detailError: null,
+    adChartMetric: null,
+    adChartLoading: false,
+    adChartData: null,
+    adChartError: null,
   };
+
+  var PERIOD_PRESETS = [7, 14, 30, 90];
 
   function pad2(n) {
     return n < 10 ? "0" + n : String(n);
@@ -28,6 +35,55 @@
   function defaultDateRange() {
     var today = formatDateInput(new Date());
     return { dateFrom: today, dateTo: today };
+  }
+
+  function addDaysFromDate(ymd, delta) {
+    var parts = ymd.split("-").map(Number);
+    var d = new Date(parts[0], parts[1] - 1, parts[2]);
+    d.setDate(d.getDate() + delta);
+    return formatDateInput(d);
+  }
+
+  function applyPeriodDays(days) {
+    var n = Number(days);
+    if (!n || n < 1) return;
+    state.periodDays = n;
+    var today = formatDateInput(new Date());
+    state.dateTo = today;
+    state.dateFrom = addDaysFromDate(today, -(n - 1));
+  }
+
+  function countDaysInclusive(from, to) {
+    if (!from || !to || from > to) return 0;
+    var n = 0;
+    var cur = from;
+    while (cur <= to) {
+      n += 1;
+      cur = addDaysFromDate(cur, 1);
+    }
+    return n;
+  }
+
+  function fmtShortDate(ymd) {
+    if (!ymd) return "";
+    var p = ymd.split("-");
+    if (p.length !== 3) return ymd;
+    return p[1] + "/" + p[2];
+  }
+
+  function fmtDateRangeLabel(from, to) {
+    if (!from || !to) return "";
+    var days = countDaysInclusive(from, to);
+    return fmtShortDate(from) + " – " + fmtShortDate(to) + " · " + days + " " + t("funnel_days_label");
+  }
+
+  function syncPeriodFromDates() {
+    var days = countDaysInclusive(state.dateFrom, state.dateTo);
+    if (PERIOD_PRESETS.indexOf(days) >= 0 && state.dateTo === formatDateInput(new Date())) {
+      state.periodDays = days;
+      return;
+    }
+    state.periodDays = "custom";
   }
 
   function ensureDateRange() {
@@ -89,6 +145,25 @@
       '<div class="crm-funnel-filterbar-row">' +
       '<div class="crm-funnel-date-range">' +
       '<label class="crm-funnel-filter">' +
+      "<span>" + esc(t("funnel_period")) + "</span>" +
+      '<select data-funnel-period>' +
+      PERIOD_PRESETS.map(function (n) {
+        return (
+          '<option value="' +
+          n +
+          '"' +
+          (state.periodDays === n ? " selected" : "") +
+          ">" +
+          esc(t("funnel_period_days", { n: n })) +
+          "</option>"
+        );
+      }).join("") +
+      '<option value="custom"' +
+      (state.periodDays === "custom" ? " selected" : "") +
+      ">" +
+      esc(t("funnel_period_custom")) +
+      "</option></select></label>" +
+      '<label class="crm-funnel-filter">' +
       "<span>" + esc(t("funnel_date_from")) + "</span>" +
       '<input type="date" data-funnel-date-from value="' +
       esc(state.dateFrom) +
@@ -125,6 +200,10 @@
   function EntryContextPanel(ctx) {
     if (!ctx) return "";
     var sb = ctx.sourceBreakdown || {};
+    var gads = (state.data && state.data.googleAdsKeywords) || {};
+    var kwClicksHint = t("funnel_kw_clicks_setup_hint");
+    if (gads.error) kwClicksHint = gads.error;
+    else if (gads.setupHint) kwClicksHint = gads.setupHint;
     var html =
       '<section class="crm-funnel-entry">' +
       '<h2 class="crm-funnel-section-title">' + esc(t("funnel_entry_context")) + "</h2>" +
@@ -145,8 +224,22 @@
       '<div class="crm-funnel-acq-grid">' +
       renderAcqList(t("funnel_top_ads_clicks"), ctx.topAdsByClicks) +
       renderAcqList(t("funnel_top_ads_leads"), ctx.topAdsByLeads) +
-      renderAcqList(t("funnel_top_kw_clicks"), ctx.topKeywordsByClicks) +
-      renderAcqList(t("funnel_top_kw_leads"), ctx.topKeywordsByLeads) +
+      renderAcqList(t("funnel_top_kw_clicks"), ctx.topKeywordsByClicks, {
+        setupHint:
+          state.view === "google" && !(ctx.topKeywordsByClicks || []).length
+            ? kwClicksHint
+            : "",
+        sourceNote:
+          state.view === "google" && ctx.keywordClicksSource === "google_ads_api"
+            ? t("funnel_kw_clicks_source")
+            : "",
+      }) +
+      renderAcqList(t("funnel_top_kw_leads"), ctx.topKeywordsByLeads, {
+        setupHint:
+          state.view === "google" && !(ctx.topKeywordsByLeads || []).length
+            ? t("funnel_kw_leads_setup_hint")
+            : "",
+      }) +
       "</div>";
 
     html += "</section>";
@@ -165,6 +258,13 @@
       '<section class="crm-funnel-ad-metrics">' +
       '<h2 class="crm-funnel-section-title">' + esc(platformLabel) + "</h2>";
 
+    if (metrics.dateFrom && metrics.dateTo) {
+      html +=
+        '<p class="crm-funnel-ad-metrics-range">' +
+        esc(fmtDateRangeLabel(metrics.dateFrom, metrics.dateTo)) +
+        "</p>";
+    }
+
     if (metrics.error) {
       html += '<p class="crm-funnel-ad-metrics-note crm-funnel-error">' + esc(metrics.error) + "</p>";
     } else if (!metrics.configured) {
@@ -175,22 +275,24 @@
     } else {
       html += '<div class="crm-funnel-ad-metrics-grid">';
       html +=
-        '<div class="crm-funnel-ad-metric">' +
+        '<button type="button" class="crm-funnel-ad-metric crm-funnel-ad-metric--clickable" data-funnel-ad-chart="impressions">' +
         '<span class="crm-funnel-ad-metric-label">' +
         esc(t("funnel_ad_impressions")) +
         "</span>" +
         '<strong class="crm-funnel-ad-metric-value">' +
         esc(fmtNum(metrics.impressions)) +
-        "</strong></div>";
+        "</strong>" +
+        '<span class="crm-funnel-ad-metric-hint">' + esc(t("funnel_ad_chart_hint")) + "</span></button>";
       if (metrics.clicks != null) {
         html +=
-          '<div class="crm-funnel-ad-metric">' +
+          '<button type="button" class="crm-funnel-ad-metric crm-funnel-ad-metric--clickable" data-funnel-ad-chart="clicks">' +
           '<span class="crm-funnel-ad-metric-label">' +
           esc(t("funnel_ad_clicks")) +
           "</span>" +
           '<strong class="crm-funnel-ad-metric-value">' +
           esc(fmtNum(metrics.clicks)) +
-          "</strong></div>";
+          "</strong>" +
+          '<span class="crm-funnel-ad-metric-hint">' + esc(t("funnel_ad_chart_hint")) + "</span></button>";
       }
       html += "</div>";
     }
@@ -199,11 +301,86 @@
     return html;
   }
 
-  function renderAcqList(title, items) {
+  function renderAdDailyChart(metric, daily) {
+    if (!daily || !daily.length) {
+      return '<p class="crm-funnel-ad-chart-empty">' + esc(t("funnel_ad_no_daily")) + "</p>";
+    }
+    var key = metric === "clicks" ? "clicks" : "impressions";
+    var max = 1;
+    daily.forEach(function (d) {
+      if ((d[key] || 0) > max) max = d[key];
+    });
+    return (
+      '<div class="crm-funnel-ad-chart">' +
+      daily
+        .map(function (d) {
+          var val = d[key] || 0;
+          var h = Math.max(4, Math.round((val / max) * 100));
+          return (
+            '<div class="crm-funnel-ad-bar-col" title="' +
+            esc(fmtShortDate(d.date) + ": " + fmtNum(val)) +
+            '">' +
+            '<span class="crm-funnel-ad-bar-value">' +
+            esc(fmtNum(val)) +
+            "</span>" +
+            '<div class="crm-funnel-ad-bar" style="height:' +
+            h +
+            '%"></div>' +
+            '<span class="crm-funnel-ad-bar-label">' +
+            esc(fmtShortDate(d.date)) +
+            "</span></div>"
+          );
+        })
+        .join("") +
+      "</div>"
+    );
+  }
+
+  function AdChartModal() {
+    if (!state.adChartMetric) return "";
+    var metric = state.adChartMetric;
+    var title =
+      metric === "clicks" ? t("funnel_ad_clicks_daily") : t("funnel_ad_impressions_daily");
+    var daily = (state.adChartData && state.adChartData.daily) || [];
+    var rangeLabel = fmtDateRangeLabel(state.dateFrom, state.dateTo);
+
+    return (
+      '<div class="crm-funnel-ad-modal-backdrop" data-funnel-ad-modal-backdrop>' +
+      '<div class="crm-funnel-ad-modal" role="dialog" aria-labelledby="crm-funnel-ad-modal-title">' +
+      '<div class="crm-funnel-ad-modal-head">' +
+      '<div><h3 id="crm-funnel-ad-modal-title">' +
+      esc(title) +
+      "</h3>" +
+      (rangeLabel ? '<p class="crm-funnel-ad-modal-sub">' + esc(rangeLabel) + "</p>" : "") +
+      "</div>" +
+      '<button type="button" class="crm-funnel-ad-modal-close" data-funnel-ad-modal-close aria-label="' +
+      esc(t("funnel_close")) +
+      '">×</button></div>' +
+      '<div class="crm-funnel-ad-modal-body">' +
+      (state.adChartLoading
+        ? '<p class="crm-funnel-ad-chart-empty">' + esc(t("funnel_ad_chart_loading")) + "</p>"
+        : state.adChartError
+          ? '<p class="crm-funnel-error">' + esc(state.adChartError) + "</p>"
+          : renderAdDailyChart(metric, daily)) +
+      "</div></div></div>"
+    );
+  }
+
+  function renderAcqList(title, items, opts) {
     items = items || [];
+    opts = opts || {};
+    var emptyHtml =
+      '<p class="crm-funnel-empty-list">' + esc(t("funnel_no_acq_data")) + "</p>";
+    if (!items.length && opts.setupHint) {
+      emptyHtml += '<p class="crm-funnel-setup-hint">' + esc(opts.setupHint) + "</p>";
+    }
+    var sourceNoteHtml = opts.sourceNote
+      ? '<p class="crm-funnel-acq-source-note">' + esc(opts.sourceNote) + "</p>"
+      : "";
     return (
       '<div class="crm-funnel-acq-list">' +
       "<h3>" + esc(title) + "</h3>" +
+      sourceNoteHtml +
       (items.length
         ? "<ul>" +
           items.map(function (row) {
@@ -212,7 +389,7 @@
             );
           }).join("") +
           "</ul>"
-        : '<p class="crm-funnel-empty-list">' + esc(t("funnel_no_acq_data")) + "</p>") +
+        : emptyHtml) +
       "</div>"
     );
   }
@@ -387,17 +564,21 @@
     if (state.loading) {
       return (
         '<div class="crm-funnel-page">' +
-        '<p class="crm-funnel-loading">' + esc(t("funnel_loading")) + "</p></div>"
+        '<p class="crm-funnel-loading">' + esc(t("funnel_loading")) + "</p>" +
+        AdChartModal() +
+        "</div>"
       );
     }
     if (!state.data || !state.data.hasData) {
       return (
         '<div class="crm-funnel-page">' +
-      FilterBar() +
-      AdPlatformMetrics(state.data && state.data.adMetrics) +
-      '<div class="crm-funnel-empty">' +
+        FilterBar() +
+        AdPlatformMetrics(state.data && state.data.adMetrics) +
+        '<div class="crm-funnel-empty">' +
         "<strong>" + esc(t("funnel_no_data_title")) + "</strong>" +
-        "<p>" + esc(t("funnel_no_data_blurb")) + "</p></div></div>"
+        "<p>" + esc(t("funnel_no_data_blurb")) + "</p></div>" +
+        AdChartModal() +
+        "</div>"
       );
     }
 
@@ -412,7 +593,9 @@
       '<div class="crm-funnel-main">' +
       FunnelVisualization(state.data.branches || {}) +
       DetailInspectorPanel() +
-      "</div></div>"
+      "</div>" +
+      AdChartModal() +
+      "</div>"
     );
   }
 
@@ -467,6 +650,41 @@
       });
   }
 
+  function loadAdChart(main, metric) {
+    state.adChartMetric = metric;
+    state.adChartLoading = true;
+    state.adChartError = null;
+    state.adChartData = null;
+    paint(main);
+    wireEvents(main);
+    return api(
+      "/api/staff/funnel-analytics?" + queryString({ action: "ad_daily" }),
+      { method: "GET", softAuth: true }
+    )
+      .then(function (res) {
+        state.adChartData = res;
+        state.adChartLoading = false;
+        state.adChartError = res.error || null;
+        paint(main);
+        wireEvents(main);
+      })
+      .catch(function (err) {
+        state.adChartLoading = false;
+        state.adChartError = (err && err.message) || t("funnel_load_error");
+        paint(main);
+        wireEvents(main);
+      });
+  }
+
+  function closeAdChart(main) {
+    state.adChartMetric = null;
+    state.adChartLoading = false;
+    state.adChartData = null;
+    state.adChartError = null;
+    paint(main);
+    wireEvents(main);
+  }
+
   function wireEvents(main) {
     if (!main) return;
 
@@ -475,9 +693,26 @@
         state.view = btn.getAttribute("data-funnel-view");
         state.selectedNode = null;
         state.detail = null;
+        closeAdChart(main);
         loadData(main);
       });
     });
+
+    var periodSelect = main.querySelector("[data-funnel-period]");
+    if (periodSelect) {
+      periodSelect.addEventListener("change", function () {
+        var val = periodSelect.value;
+        if (val === "custom") {
+          state.periodDays = "custom";
+          return;
+        }
+        applyPeriodDays(Number(val));
+        state.selectedNode = null;
+        state.detail = null;
+        closeAdChart(main);
+        loadData(main);
+      });
+    }
 
     var periodEl = main.querySelector("[data-funnel-date-from]");
     var toEl = main.querySelector("[data-funnel-date-to]");
@@ -485,8 +720,13 @@
       if (periodEl) state.dateFrom = periodEl.value;
       if (toEl) state.dateTo = toEl.value;
       ensureDateRange();
+      syncPeriodFromDates();
+      if (periodSelect && state.periodDays === "custom") {
+        periodSelect.value = "custom";
+      }
       state.selectedNode = null;
       state.detail = null;
+      closeAdChart(main);
       loadData(main);
     }
     if (periodEl) periodEl.addEventListener("change", onDateChange);
@@ -520,16 +760,37 @@
         state.selectedNode = null;
         state.detail = null;
         state.detailError = null;
+        closeAdChart(main);
         loadData(main);
+      });
+    }
+
+    main.querySelectorAll("[data-funnel-ad-chart]").forEach(function (btn) {
+      btn.addEventListener("click", function (ev) {
+        ev.preventDefault();
+        var metric = btn.getAttribute("data-funnel-ad-chart");
+        if (metric) loadAdChart(main, metric);
+      });
+    });
+
+    var adModalClose = main.querySelector("[data-funnel-ad-modal-close]");
+    if (adModalClose) {
+      adModalClose.addEventListener("click", function (ev) {
+        ev.preventDefault();
+        closeAdChart(main);
+      });
+    }
+    var adModalBackdrop = main.querySelector("[data-funnel-ad-modal-backdrop]");
+    if (adModalBackdrop) {
+      adModalBackdrop.addEventListener("click", function (ev) {
+        if (ev.target === adModalBackdrop) closeAdChart(main);
       });
     }
   }
 
   function mount(main) {
-    var defaults = defaultDateRange();
+    applyPeriodDays(7);
     state.view = "facebook";
-    state.dateFrom = defaults.dateFrom;
-    state.dateTo = defaults.dateTo;
     state.selectedNode = null;
     state.detail = null;
     state.detailError = null;

@@ -142,6 +142,131 @@
   color: var(--crm-muted, #64748b);
 }
 
+.crm-funnel-ad-metrics-range {
+  margin: 0 0 12px;
+  font-size: 0.86rem;
+  color: var(--crm-muted, #64748b);
+}
+
+.crm-funnel-ad-metric--clickable {
+  border: 1px solid var(--crm-border, #dbe3ef);
+  border-radius: 10px;
+  background: #f8fafc;
+  cursor: pointer;
+  text-align: left;
+  font: inherit;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.crm-funnel-ad-metric--clickable:hover {
+  border-color: var(--crm-primary, #2563eb);
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.1);
+}
+
+.crm-funnel-ad-metric-hint {
+  font-size: 0.72rem;
+  color: var(--crm-muted, #94a3b8);
+}
+
+.crm-funnel-ad-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.55);
+  z-index: 1200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.crm-funnel-ad-modal {
+  background: #fff;
+  border-radius: 14px;
+  width: min(720px, 100%);
+  max-height: 90vh;
+  overflow: auto;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+}
+
+.crm-funnel-ad-modal-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 18px 20px;
+  border-bottom: 1px solid var(--crm-border, #dbe3ef);
+}
+
+.crm-funnel-ad-modal-head h3 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.crm-funnel-ad-modal-sub {
+  margin: 4px 0 0;
+  font-size: 0.84rem;
+  color: var(--crm-muted, #64748b);
+}
+
+.crm-funnel-ad-modal-close {
+  border: none;
+  background: transparent;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  color: var(--crm-muted, #64748b);
+  padding: 4px 8px;
+}
+
+.crm-funnel-ad-modal-body {
+  padding: 20px;
+}
+
+.crm-funnel-ad-chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  height: 200px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.crm-funnel-ad-bar-col {
+  flex: 1;
+  min-width: 36px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+}
+
+.crm-funnel-ad-bar-value {
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--crm-text, #1a2b4a);
+  margin-bottom: 4px;
+}
+
+.crm-funnel-ad-bar {
+  width: 100%;
+  max-width: 28px;
+  background: var(--crm-primary, #2563eb);
+  border-radius: 4px 4px 0 0;
+  margin-top: auto;
+}
+
+.crm-funnel-ad-bar-label {
+  font-size: 0.65rem;
+  color: var(--crm-muted, #64748b);
+  margin-top: 6px;
+}
+
+.crm-funnel-ad-chart-empty {
+  margin: 0;
+  font-size: 0.88rem;
+  color: var(--crm-muted, #64748b);
+}
+
 .crm-funnel-entry {
   margin-bottom: 24px;
   padding: 18px;
@@ -223,6 +348,19 @@
   margin: 0;
   font-size: 0.84rem;
   color: var(--crm-muted, #94a3b8);
+}
+
+.crm-funnel-setup-hint {
+  margin: 8px 0 0;
+  font-size: 0.78rem;
+  line-height: 1.45;
+  color: var(--crm-muted, #64748b);
+}
+
+.crm-funnel-acq-source-note {
+  margin: 0 0 8px;
+  font-size: 0.72rem;
+  color: var(--crm-muted, #64748b);
 }
 
 .crm-funnel-main {

@@ -1,0 +1,64 @@
+{\rtf1\ansi\deff0
+{\fonttbl{\f0 Times New Roman;}}
+\f0\fs22
+\b Google Ads API Design Document\b0\par
+\par
+Company: Mejor Vida Insurance\par
+Website: https://www.mejorvidainsurance.com\par
+Manager account (MCC): 337-375-5801\par
+API contact: admin@mejorvidainsurance.com\par
+Document date: July 3, 2026\par
+\par
+\b 1. Application overview\b0\par
+Mejor Vida Insurance operates a password-protected internal Staff CRM at https://www.mejorvidainsurance.com/staff/crm.html. The CRM includes a Funnel Analytics dashboard used by our employees to review marketing performance for our own Google Search campaigns.\par
+\par
+We are requesting Google Ads API Basic Access to add read-only keyword click reporting to this internal dashboard. The tool is not offered to external customers, agencies, or third parties.\par
+\par
+\b 2. Business model\b0\par
+Mejor Vida Insurance is a bilingual final expense life insurance agency. We are the advertiser - we run Google Ads for our own business to generate leads for our own products. We do not resell API access, manage other companies' accounts, or operate a SaaS product.\par
+\par
+\b 3. Intended users\b0\par
+Internal users only. Access requires staff authentication to our CRM. Estimated users: 1-5 Mejor Vida employees (agents and administrators).\par
+\par
+\b 4. Problem being solved\b0\par
+Our staff need to see which search keywords receive ad clicks during a selected date range, alongside funnel and landing-page analytics already shown in the CRM. Keyword-level click data is not available from first-party site tracking alone. We need read-only reporting from the Google Ads API for our own account.\par
+\par
+\b 5. Architecture\b0\par
+- Frontend: Staff CRM web app, Funnel Analytics tab "LP Google ads"\par
+- Backend: Serverless API route GET /api/staff/funnel-analytics on Vercel\par
+- Google Ads integration: Node.js calls Google Ads API REST googleAds:searchStream\par
+- Auth: OAuth 2.0 refresh token; developer token in server environment variables\par
+- Hosting: Vercel (mejorvidainsurance.com)\par
+\par
+Data flow: Staff selects date range -> backend queries Google Ads API -> keyword click totals returned as JSON -> displayed in dashboard. No data is written back to Google Ads.\par
+\par
+\b 6. Google Ads API usage\b0\par
+Access type: Read-only reporting.\par
+Resource: keyword_view (keyword text and click metrics).\par
+\par
+Example GAQL query:\par
+SELECT ad_group_criterion.keyword.text, metrics.clicks FROM keyword_view WHERE segments.date BETWEEN 'YYYY-MM-DD' AND 'YYYY-MM-DD' AND metrics.clicks > 0\par
+\par
+We do NOT: create or modify campaigns, ad groups, keywords, or bids; change budgets; perform bulk mutates; or manage accounts via API.\par
+\par
+\b 7. Authentication and security\b0\par
+- Developer token, OAuth client secret, and refresh token stored only in server environment variables.\par
+- Secrets are never exposed to browsers or end users.\par
+- CRM endpoints require staff login before analytics data is returned.\par
+- OAuth scope: https://www.googleapis.com/auth/adwords\par
+- Google Cloud project: cursor-sheets\par
+\par
+\b 8. Expected call volume\b0\par
+Low volume. Staff manually load the dashboard a few times per day. Each load triggers one searchStream request for the selected date range (typically 7-30 days). Estimated: fewer than 50 API operations per day.\par
+\par
+\b 9. Data handling\b0\par
+- Keyword click aggregates computed at request time for authenticated staff sessions.\par
+- Raw API responses are not stored in a public database.\par
+- Data used solely for internal review of our own advertising.\par
+- No personal user data from Google Ads is collected or resold.\par
+\par
+\b 10. Compliance\b0\par
+- Tool is for Mejor Vida Insurance's own Google Ads accounts only.\par
+- Not a third-party tool; not distributed externally.\par
+- We will comply with Google Ads API Terms and applicable policies.\par
+}
