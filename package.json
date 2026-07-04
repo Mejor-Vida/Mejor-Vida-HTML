@@ -20,6 +20,7 @@
     "optimize:homepage-images": "node scripts/optimize-images.js",
     "optimize:images": "node scripts/optimize-images.js",
     "meta:ads-discover": "node scripts/meta-ads-discover.js",
+    "meta:system-user-token": "node scripts/meta-system-user-token.js",
     "google-ads:keywords": "node scripts/google-ads-keywords-test.js",
     "google-ads:discover": "node scripts/google-ads-discover.js",
     "apply:image-opt-html": "node scripts/apply-image-opt-html.js",
