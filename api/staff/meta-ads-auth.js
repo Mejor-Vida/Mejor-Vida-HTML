@@ -23,5 +23,8 @@ module.exports = async function handler(req, res) {
   }
 
   const redirectUri = resolveMetaOAuthRedirectUri(req);
-  res.redirect(buildMetaOAuthUrl(redirectUri));
+  const userOnly =
+    String((req.query && req.query.user) || "").trim() === "1" ||
+    String((req.query && req.query.mode) || "").trim() === "user";
+  res.redirect(buildMetaOAuthUrl(redirectUri, { userOnly }));
 };
