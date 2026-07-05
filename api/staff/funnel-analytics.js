@@ -10,6 +10,7 @@ const { buildDashboard, buildNodeDetail, groupSessions, filterSessions } = requi
 const { fetchAdPlatformMetrics, fetchAdDailySeries } = require("../../lib/ad-platform-insights");
 const { fetchTopKeywordsByClicks } = require("../../lib/google-ads-api");
 const { fetchGscOrganicSearch, fetchGscDaily } = require("../../lib/gsc-data-api");
+const { fetchPoliciesSoldMetrics } = require("../../lib/crm-stage-transitions");
 
 const CHICAGO_TZ = "America/Chicago";
 
@@ -76,7 +77,7 @@ function resolveDateRange(query) {
 
 async function loadFunnelEvents(cfg, startIso, endExclusiveIso) {
   const q =
-    "select=session_id,created_at,source,campaign,ad_set,ad_name,keyword,search_term,tool,step_name,event_type,page_or_step,device" +
+    "select=session_id,visitor_id,visitor_type,created_at,source,campaign,ad_set,ad_name,keyword,search_term,tool,step_name,event_type,page_or_step,device" +
     "&created_at=gte." +
     encodeURIComponent(startIso) +
     "&created_at=lt." +
@@ -169,6 +170,30 @@ module.exports = async function handler(req, res) {
     }
   }
 
+  if (action === "policies_daily") {
+    try {
+      const metrics = await fetchPoliciesSoldMetrics(
+        cfg,
+        range.startIso,
+        range.endExclusiveIso,
+        range.dateFrom,
+        range.dateTo
+      );
+      return json(res, 200, {
+        ok: true,
+        dateFrom: range.dateFrom,
+        dateTo: range.dateTo,
+        platform: "policies",
+        configured: metrics.configured,
+        daily: metrics.daily || [],
+        error: metrics.error || null,
+      });
+    } catch (e) {
+      console.error("[funnel-analytics] policies_daily", e.message || e);
+      return json(res, 502, { error: e.message || "Could not load policies sold daily series" });
+    }
+  }
+
   const dashboard = buildDashboard(events, filters);
 
   let googleAdsKeywords = null;
@@ -226,11 +251,32 @@ module.exports = async function handler(req, res) {
     }
   }
 
+  let policiesSold = { show: true };
+  try {
+    policiesSold = await fetchPoliciesSoldMetrics(
+      cfg,
+      range.startIso,
+      range.endExclusiveIso,
+      range.dateFrom,
+      range.dateTo
+    );
+  } catch (e) {
+    console.error("[funnel-analytics] policies sold", e.message || e);
+    policiesSold = {
+      show: true,
+      configured: false,
+      count: null,
+      sales: [],
+      error: e.message || "Could not load policies sold",
+    };
+  }
+
   return json(res, 200, {
     ok: true,
     ...dashboard,
     adMetrics,
     organicSearch,
+    policiesSold,
     googleAdsKeywords,
     dateFrom: range.dateFrom,
     dateTo: range.dateTo,

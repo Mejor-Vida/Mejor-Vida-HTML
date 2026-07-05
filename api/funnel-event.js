@@ -95,8 +95,16 @@ module.exports = async function handler(req, res) {
   const deviceRaw = String(body.device || "").trim().toLowerCase();
   const device = VALID_DEVICES.has(deviceRaw) ? deviceRaw : null;
 
+  const visitorId = body.visitor_id || body.visitorId
+    ? String(body.visitor_id || body.visitorId).trim().slice(0, 128)
+    : null;
+  const visitorTypeRaw = String(body.visitor_type || body.visitorType || "").trim().toLowerCase();
+  const visitorType = visitorTypeRaw === "new" || visitorTypeRaw === "returning" ? visitorTypeRaw : null;
+
   const row = {
     session_id: sessionId,
+    visitor_id: visitorId,
+    visitor_type: visitorType,
     source,
     campaign: body.campaign ? String(body.campaign).slice(0, 500) : null,
     ad_set: body.ad_set || body.adSet ? String(body.ad_set || body.adSet).slice(0, 500) : null,

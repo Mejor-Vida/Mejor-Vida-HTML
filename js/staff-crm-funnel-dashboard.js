@@ -224,10 +224,42 @@
     );
   }
 
+  function fmtVisitorSplit(row) {
+    if (!row) return "";
+    var parts = [];
+    if (row.new) parts.push(t("funnel_visitor_new_short", { n: fmtNum(row.new) }));
+    if (row.returning) parts.push(t("funnel_visitor_returning_short", { n: fmtNum(row.returning) }));
+    if (row.unknown) parts.push(t("funnel_visitor_unknown_short", { n: fmtNum(row.unknown) }));
+    return parts.join(" · ");
+  }
+
+  function renderSourceVisitorRows(sourceBreakdown) {
+    return ["facebook", "google", "organic", "direct"]
+      .map(function (src) {
+        var row = (sourceBreakdown && sourceBreakdown[src]) || {};
+        if (!row.total) return "";
+        var split = fmtVisitorSplit(row);
+        return (
+          "<li class=\"crm-funnel-source-row\">" +
+          "<div class=\"crm-funnel-source-row-head\">" +
+          "<span>" + esc(t("funnel_src_" + src)) + "</span>" +
+          "<strong>" + esc(fmtNum(row.total)) + "</strong>" +
+          "</div>" +
+          (split
+            ? '<span class="crm-funnel-source-row-split">' + esc(split) + "</span>"
+            : "") +
+          "</li>"
+        );
+      })
+      .join("");
+  }
+
   /* ── EntryContextPanel ── */
   function EntryContextPanel(ctx) {
     if (!ctx) return "";
     var sb = ctx.sourceBreakdown || {};
+    var sv = ctx.sourceVisitorBreakdown || {};
+    var vt = ctx.visitorTotals || {};
     var gads = (state.data && state.data.googleAdsKeywords) || {};
     var kwClicksHint = t("funnel_kw_clicks_setup_hint");
     if (gads.error) kwClicksHint = gads.error;
@@ -238,12 +270,38 @@
       '<p class="crm-funnel-entry-sub">' +
       esc(t("funnel_entry_all_traffic", { n: fmtNum(ctx.totalSessions) })) +
       "</p>" +
+      (vt.total
+        ? '<p class="crm-funnel-entry-visitors">' +
+          esc(t("funnel_visitor_summary", {
+            total: fmtNum(vt.total),
+            newCount: fmtNum(vt.new),
+            returning: fmtNum(vt.returning),
+          })) +
+          (vt.unknown
+            ? " · " + esc(t("funnel_visitor_unknown_short", { n: fmtNum(vt.unknown) }))
+            : "") +
+          "</p>"
+        : "") +
       '<div class="crm-funnel-source-pills">' +
       ["facebook", "google", "organic", "direct"].map(function (src) {
+        var row = sv[src] || {};
+        var total = row.total || ctx.sourceCounts[src] || 0;
+        if (!total) {
+          return (
+            '<div class="crm-funnel-source-pill crm-funnel-source-pill--empty">' +
+            '<span class="crm-funnel-source-name">' + esc(t("funnel_src_" + src)) + "</span>" +
+            '<strong>' + esc(fmtPct(sb[src])) + "</strong></div>"
+          );
+        }
+        var split = fmtVisitorSplit(row);
         return (
           '<div class="crm-funnel-source-pill">' +
           '<span class="crm-funnel-source-name">' + esc(t("funnel_src_" + src)) + "</span>" +
-          '<strong>' + esc(fmtPct(sb[src])) + "</strong></div>"
+          '<strong>' + esc(fmtNum(total)) + "</strong>" +
+          (split
+            ? '<span class="crm-funnel-source-visitor-split">' + esc(split) + "</span>"
+            : '<span class="crm-funnel-source-visitor-split">' + esc(fmtPct(sb[src])) + "</span>") +
+          "</div>"
         );
       }).join("") +
       "</div>";
@@ -274,66 +332,123 @@
     return html;
   }
 
-  function AdPlatformMetrics(metrics) {
-    if (!metrics || !metrics.show) return "";
+  function renderPoliciesSoldMetric(policiesSold) {
+    if (!policiesSold || !policiesSold.show) return "";
+    if (policiesSold.error && !policiesSold.configured) {
+      return (
+        '<div class="crm-funnel-ad-metric crm-funnel-ad-metric--policies">' +
+        '<span class="crm-funnel-ad-metric-label">' + esc(t("funnel_policies_sold")) + "</span>" +
+        '<strong class="crm-funnel-ad-metric-value">—</strong></div>'
+      );
+    }
+    return (
+      '<button type="button" class="crm-funnel-ad-metric crm-funnel-ad-metric--clickable crm-funnel-ad-metric--policies" data-funnel-ad-chart="policies_sold">' +
+      '<span class="crm-funnel-ad-metric-label">' + esc(t("funnel_policies_sold")) + "</span>" +
+      '<strong class="crm-funnel-ad-metric-value">' + esc(fmtNum(policiesSold.count)) + "</strong>" +
+      '<span class="crm-funnel-ad-metric-hint">' + esc(t("funnel_ad_chart_hint")) + "</span></button>"
+    );
+  }
+
+  function renderPoliciesSoldRecent(policiesSold) {
+    if (!policiesSold || !policiesSold.show || !(policiesSold.sales || []).length) return "";
+    return (
+      '<div class="crm-funnel-policies-recent">' +
+      renderAcqList(
+        t("funnel_policies_recent"),
+        policiesSold.sales.map(function (row) {
+          return { name: row.name + " · " + row.soldDate, count: 1 };
+        })
+      ) +
+      "</div>"
+    );
+  }
+
+  function AdPlatformMetrics(metrics, policiesSold) {
+    var hasAds = metrics && metrics.show;
+    var hasPolicies = policiesSold && policiesSold.show;
+    if (!hasAds && !hasPolicies) return "";
 
     var platformLabel =
-      metrics.platform === "google"
+      metrics && metrics.platform === "google"
         ? t("funnel_ad_platform_google")
         : t("funnel_ad_platform_facebook");
 
-    var html =
-      '<section class="crm-funnel-ad-metrics">' +
-      '<h2 class="crm-funnel-section-title">' + esc(platformLabel) + "</h2>";
+    var html = '<section class="crm-funnel-ad-metrics">';
 
-    if (metrics.dateFrom && metrics.dateTo) {
-      html +=
-        '<p class="crm-funnel-ad-metrics-range">' +
-        esc(fmtDateRangeLabel(metrics.dateFrom, metrics.dateTo)) +
-        "</p>";
+    if (hasAds) {
+      html += '<h2 class="crm-funnel-section-title">' + esc(platformLabel) + "</h2>";
+      if (metrics.dateFrom && metrics.dateTo) {
+        html +=
+          '<p class="crm-funnel-ad-metrics-range">' +
+          esc(fmtDateRangeLabel(metrics.dateFrom, metrics.dateTo)) +
+          "</p>";
+      }
+    } else {
+      html += '<h2 class="crm-funnel-section-title">' + esc(t("funnel_policies_title")) + "</h2>";
+      if (policiesSold.dateFrom && policiesSold.dateTo) {
+        html +=
+          '<p class="crm-funnel-ad-metrics-range">' +
+          esc(fmtDateRangeLabel(policiesSold.dateFrom, policiesSold.dateTo)) +
+          "</p>";
+      }
     }
 
-    if (metrics.error) {
+    if (hasPolicies && !hasAds) {
+      html += '<p class="crm-funnel-policies-note">' + esc(t("funnel_policies_note")) + "</p>";
+    }
+
+    if (hasAds && metrics.error) {
       html += '<p class="crm-funnel-ad-metrics-note crm-funnel-error">' + esc(metrics.error) + "</p>";
-    } else if (!metrics.configured) {
+    } else if (hasAds && !metrics.configured) {
       html +=
         '<p class="crm-funnel-ad-metrics-note">' +
         esc(metrics.setupHint || t("funnel_ad_metrics_not_configured")) +
         "</p>";
-    } else {
+    }
+
+    if ((hasAds && metrics.configured && !metrics.error) || hasPolicies) {
       html += '<div class="crm-funnel-ad-metrics-grid">';
-      html +=
-        '<button type="button" class="crm-funnel-ad-metric crm-funnel-ad-metric--clickable" data-funnel-ad-chart="impressions">' +
-        '<span class="crm-funnel-ad-metric-label">' +
-        esc(t("funnel_ad_impressions")) +
-        "</span>" +
-        '<strong class="crm-funnel-ad-metric-value">' +
-        esc(fmtNum(metrics.impressions)) +
-        "</strong>" +
-        '<span class="crm-funnel-ad-metric-hint">' + esc(t("funnel_ad_chart_hint")) + "</span></button>";
-      if (metrics.clicks != null) {
+      if (hasAds && metrics.configured && !metrics.error) {
         html +=
-          '<button type="button" class="crm-funnel-ad-metric crm-funnel-ad-metric--clickable" data-funnel-ad-chart="clicks">' +
+          '<button type="button" class="crm-funnel-ad-metric crm-funnel-ad-metric--clickable" data-funnel-ad-chart="impressions">' +
           '<span class="crm-funnel-ad-metric-label">' +
-          esc(t("funnel_ad_clicks")) +
+          esc(t("funnel_ad_impressions")) +
           "</span>" +
           '<strong class="crm-funnel-ad-metric-value">' +
-          esc(fmtNum(metrics.clicks)) +
+          esc(fmtNum(metrics.impressions)) +
           "</strong>" +
           '<span class="crm-funnel-ad-metric-hint">' + esc(t("funnel_ad_chart_hint")) + "</span></button>";
+        if (metrics.clicks != null) {
+          html +=
+            '<button type="button" class="crm-funnel-ad-metric crm-funnel-ad-metric--clickable" data-funnel-ad-chart="clicks">' +
+            '<span class="crm-funnel-ad-metric-label">' +
+            esc(t("funnel_ad_clicks")) +
+            "</span>" +
+            '<strong class="crm-funnel-ad-metric-value">' +
+            esc(fmtNum(metrics.clicks)) +
+            "</strong>" +
+            '<span class="crm-funnel-ad-metric-hint">' + esc(t("funnel_ad_chart_hint")) + "</span></button>";
+        }
+        if (metrics.spend != null) {
+          html +=
+            '<button type="button" class="crm-funnel-ad-metric crm-funnel-ad-metric--clickable" data-funnel-ad-chart="spend">' +
+            '<span class="crm-funnel-ad-metric-label">' +
+            esc(t("funnel_ad_spend")) +
+            "</span>" +
+            '<strong class="crm-funnel-ad-metric-value">' +
+            esc(fmtCurrency(metrics.spend)) +
+            "</strong>" +
+            '<span class="crm-funnel-ad-metric-hint">' + esc(t("funnel_ad_chart_hint")) + "</span></button>";
+        }
       }
-      if (metrics.spend != null) {
-        html +=
-          '<button type="button" class="crm-funnel-ad-metric crm-funnel-ad-metric--clickable" data-funnel-ad-chart="spend">' +
-          '<span class="crm-funnel-ad-metric-label">' +
-          esc(t("funnel_ad_spend")) +
-          "</span>" +
-          '<strong class="crm-funnel-ad-metric-value">' +
-          esc(fmtCurrency(metrics.spend)) +
-          "</strong>" +
-          '<span class="crm-funnel-ad-metric-hint">' + esc(t("funnel_ad_chart_hint")) + "</span></button>";
-      }
+      html += renderPoliciesSoldMetric(policiesSold);
       html += "</div>";
+      html += renderPoliciesSoldRecent(policiesSold);
+    } else if (hasPolicies && policiesSold.error && !policiesSold.configured) {
+      html += '<p class="crm-funnel-ad-metrics-note crm-funnel-error">' + esc(policiesSold.error) + "</p>";
+      if (policiesSold.setupHint) {
+        html += '<p class="crm-funnel-setup-hint">' + esc(policiesSold.setupHint) + "</p>";
+      }
     }
 
     html += "</section>";
@@ -363,6 +478,13 @@
       html +=
         '<p class="crm-funnel-ad-metrics-note">' +
         esc(metrics.setupHint || t("funnel_gsc_not_configured")) +
+        (metrics.oauthAuthUrl
+          ? ' <a class="crm-funnel-gsc-connect" href="' +
+            esc(metrics.oauthAuthUrl) +
+            '" target="_blank" rel="noopener">' +
+            esc(t("funnel_gsc_connect_oauth")) +
+            "</a>"
+          : "") +
         "</p>";
     } else {
       html += '<div class="crm-funnel-ad-metrics-grid">';
@@ -430,31 +552,106 @@
     );
   }
 
+  function chooseChartBucketDays(dayCount) {
+    if (dayCount <= 31) return 1;
+    if (dayCount <= 120) return 7;
+    return 14;
+  }
+
+  function bucketDailySeries(daily, bucketDays) {
+    if (!daily || !daily.length) return [];
+    if (bucketDays <= 1) {
+      return daily.map(function (d) {
+        return {
+          date: d.date,
+          endDate: d.date,
+          clicks: Number(d.clicks) || 0,
+          impressions: Number(d.impressions) || 0,
+          spend: Number(d.spend) || 0,
+          label: fmtShortDate(d.date),
+        };
+      });
+    }
+    var out = [];
+    for (var i = 0; i < daily.length; i += bucketDays) {
+      var chunk = daily.slice(i, i + bucketDays);
+      var start = chunk[0].date;
+      var end = chunk[chunk.length - 1].date;
+      var agg = { date: start, endDate: end, clicks: 0, impressions: 0, spend: 0 };
+      chunk.forEach(function (d) {
+        agg.clicks += Number(d.clicks) || 0;
+        agg.impressions += Number(d.impressions) || 0;
+        agg.spend += Number(d.spend) || 0;
+      });
+      agg.label =
+        start === end
+          ? fmtShortDate(start)
+          : fmtShortDate(start) + "–" + fmtShortDate(end);
+      out.push(agg);
+    }
+    return out;
+  }
+
+  function chartBucketNote(bucketDays) {
+    if (bucketDays <= 1) return "";
+    if (bucketDays === 7) return t("funnel_ad_chart_weekly");
+    if (bucketDays === 14) return t("funnel_ad_chart_biweekly");
+    return t("funnel_ad_chart_grouped").replace("{days}", String(bucketDays));
+  }
+
   function renderAdDailyChart(metric, daily) {
     if (!daily || !daily.length) {
       return '<p class="crm-funnel-ad-chart-empty">' + esc(t("funnel_ad_no_daily")) + "</p>";
     }
     var key =
-      metric === "clicks" || metric === "gsc_clicks"
+      metric === "policies_sold"
+        ? "sold"
+        : metric === "clicks" || metric === "gsc_clicks"
         ? "clicks"
         : metric === "spend"
           ? "spend"
           : metric === "gsc_impressions"
             ? "impressions"
             : "impressions";
+    var bucketDays = chooseChartBucketDays(daily.length);
+    var series = bucketDailySeries(daily, bucketDays);
     var max = 1;
-    daily.forEach(function (d) {
+    series.forEach(function (d) {
       if ((d[key] || 0) > max) max = d[key];
     });
+    var fitChart = bucketDays > 1 || series.length <= 45;
+    var denseDaily = bucketDays === 1 && series.length > 14;
+    var bucketNote = chartBucketNote(bucketDays);
     return (
-      '<div class="crm-funnel-ad-chart crm-funnel-ad-chart--' + esc(metric) + '">' +
-      daily
-        .map(function (d) {
+      (bucketNote
+        ? '<p class="crm-funnel-ad-chart-scroll-hint">' + esc(bucketNote) + "</p>"
+        : denseDaily
+          ? '<p class="crm-funnel-ad-chart-scroll-hint">' + esc(t("funnel_ad_chart_scroll")) + "</p>"
+          : "") +
+      (fitChart
+        ? '<div class="crm-funnel-ad-chart crm-funnel-ad-chart--' +
+          esc(metric) +
+          " crm-funnel-ad-chart--fit" +
+          (denseDaily ? " crm-funnel-ad-chart--dense" : "") +
+          '">'
+        : '<div class="crm-funnel-ad-chart-scroll-wrap"><div class="crm-funnel-ad-chart crm-funnel-ad-chart--' +
+          esc(metric) +
+          (denseDaily ? " crm-funnel-ad-chart--dense" : "") +
+          '">') +
+      series
+        .map(function (d, i) {
           var val = d[key] || 0;
           var h = Math.max(4, Math.round((val / max) * 100));
+          var showLabel =
+            bucketDays > 1 || !denseDaily || i % 2 === 0 || i === series.length - 1;
+          var tip =
+            d.endDate && d.endDate !== d.date
+              ? fmtShortDate(d.date) + " – " + fmtShortDate(d.endDate) + ": " + fmtChartValue(metric, val)
+              : fmtShortDate(d.date) + ": " + fmtChartValue(metric, val);
+          var labelText = bucketDays > 1 ? fmtShortDate(d.date) : d.label || fmtShortDate(d.date);
           return (
             '<div class="crm-funnel-ad-bar-col" title="' +
-            esc(fmtShortDate(d.date) + ": " + fmtChartValue(metric, val)) +
+            esc(tip) +
             '">' +
             '<span class="crm-funnel-ad-bar-value">' +
             esc(fmtChartValue(metric, val)) +
@@ -462,13 +659,14 @@
             '<div class="crm-funnel-ad-bar" style="height:' +
             h +
             '%"></div>' +
-            '<span class="crm-funnel-ad-bar-label">' +
-            esc(fmtShortDate(d.date)) +
-            "</span></div>"
+            (showLabel
+              ? '<span class="crm-funnel-ad-bar-label">' + esc(labelText) + "</span>"
+              : '<span class="crm-funnel-ad-bar-label crm-funnel-ad-bar-label--skip" aria-hidden="true"></span>') +
+            "</div>"
           );
         })
         .join("") +
-      "</div>"
+      (fitChart ? "</div>" : "</div></div>")
     );
   }
 
@@ -476,7 +674,9 @@
     if (!state.adChartMetric) return "";
     var metric = state.adChartMetric;
     var title =
-      metric === "clicks"
+      metric === "policies_sold"
+        ? t("funnel_policies_sold_daily")
+        : metric === "clicks"
         ? t("funnel_ad_clicks_daily")
         : metric === "gsc_clicks"
           ? t("funnel_gsc_clicks_daily")
@@ -490,7 +690,7 @@
 
     return (
       '<div class="crm-funnel-ad-modal-backdrop" data-funnel-ad-modal-backdrop>' +
-      '<div class="crm-funnel-ad-modal" role="dialog" aria-labelledby="crm-funnel-ad-modal-title">' +
+      '<div class="crm-funnel-ad-modal crm-funnel-ad-modal--chart" role="dialog" aria-labelledby="crm-funnel-ad-modal-title">' +
       '<div class="crm-funnel-ad-modal-head">' +
       '<div><h3 id="crm-funnel-ad-modal-title">' +
       esc(title) +
@@ -652,6 +852,18 @@
         .join("");
     }
 
+    var visitorSummary = d.visitorBreakdown
+      ? t("funnel_users_in_step_visitors", {
+          n: fmtNum(d.users),
+          newCount: fmtNum(d.visitorBreakdown.new || 0),
+          returning: fmtNum(d.visitorBreakdown.returning || 0),
+        })
+      : t("funnel_users_in_step", { n: fmtNum(d.users) });
+    if (d.visitorBreakdown && d.visitorBreakdown.unknown) {
+      visitorSummary +=
+        " · " + t("funnel_visitor_unknown_short", { n: fmtNum(d.visitorBreakdown.unknown) });
+    }
+
     return (
       '<aside class="crm-funnel-inspector" aria-label="' + esc(t("funnel_inspector")) + '">' +
       '<div class="crm-funnel-inspector-head">' +
@@ -660,17 +872,14 @@
       esc(t("funnel_close")) +
       '">×</button></div>' +
       '<p class="crm-funnel-inspector-users">' +
-      esc(t("funnel_users_in_step", { n: fmtNum(d.users) })) +
+      esc(visitorSummary) +
       "</p>" +
       '<div class="crm-funnel-inspector-grid">' +
-      '<div class="crm-funnel-inspector-block">' +
-      "<h4>" + esc(t("funnel_by_source")) + "</h4><ul>" +
-      breakdownRows(d.sourceBreakdown, {
-        facebook: t("funnel_src_facebook"),
-        google: t("funnel_src_google"),
-        organic: t("funnel_src_organic"),
-        direct: t("funnel_src_direct"),
-      }) +
+      '<div class="crm-funnel-inspector-block crm-funnel-inspector-block--wide">' +
+      "<h4>" + esc(t("funnel_by_source")) + "</h4>" +
+      '<p class="crm-funnel-inspector-hint">' + esc(t("funnel_by_source_hint")) + "</p>" +
+      "<ul>" +
+      renderSourceVisitorRows(d.sourceBreakdown) +
       "</ul></div>" +
       '<div class="crm-funnel-inspector-block">' +
       "<h4>" + esc(t("funnel_by_device")) + "</h4><ul>" +
@@ -718,7 +927,8 @@
       return (
         '<div class="crm-funnel-page">' +
         FilterBar() +
-        AdPlatformMetrics(state.data && state.data.adMetrics) +
+        EntryContextPanel(state.data && state.data.entryContext) +
+        AdPlatformMetrics(state.data && state.data.adMetrics, state.data && state.data.policiesSold) +
         OrganicSearchMetrics(state.data && state.data.organicSearch) +
         '<div class="crm-funnel-empty">' +
         "<strong>" + esc(t("funnel_no_data_title")) + "</strong>" +
@@ -734,9 +944,9 @@
       "<h1>" + esc(t("funnel_title")) + "</h1>" +
       "<p>" + esc(t("funnel_subtitle")) + "</p></header>" +
       FilterBar() +
-      AdPlatformMetrics(state.data.adMetrics) +
-      OrganicSearchMetrics(state.data.organicSearch) +
       EntryContextPanel(state.data.entryContext) +
+      AdPlatformMetrics(state.data.adMetrics, state.data.policiesSold) +
+      OrganicSearchMetrics(state.data.organicSearch) +
       '<div class="crm-funnel-main">' +
       FunnelVisualization(state.data.branches || {}) +
       DetailInspectorPanel() +
@@ -806,7 +1016,14 @@
     wireEvents(main);
     return api(
       "/api/staff/funnel-analytics?" +
-        queryString({ action: metric.indexOf("gsc_") === 0 ? "gsc_daily" : "ad_daily" }),
+        queryString({
+          action:
+            metric === "policies_sold"
+              ? "policies_daily"
+              : metric.indexOf("gsc_") === 0
+                ? "gsc_daily"
+                : "ad_daily",
+        }),
       { method: "GET", softAuth: true }
     )
       .then(function (res) {

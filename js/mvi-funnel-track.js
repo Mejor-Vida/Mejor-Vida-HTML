@@ -6,6 +6,7 @@
   "use strict";
 
   var ACQ_KEY = "mviFunnelAcq";
+  var VISITOR_KEY = "mviVisitorId";
   var mirrorContext = {};
   var recentTrackKeys = {};
   var DEDUPE_MS = 600;
@@ -39,6 +40,37 @@
     try {
       sessionStorage.setItem(key, value);
     } catch (e) {}
+  }
+
+  function readLocal(key) {
+    try {
+      return localStorage.getItem(key) || "";
+    } catch (e) {
+      return "";
+    }
+  }
+
+  function writeLocal(key, value) {
+    try {
+      localStorage.setItem(key, value);
+    } catch (e) {}
+  }
+
+  function newVisitorId() {
+    return typeof crypto !== "undefined" && crypto.randomUUID
+      ? crypto.randomUUID()
+      : "v-" + String(Date.now()) + "-" + Math.random().toString(36).slice(2, 10);
+  }
+
+  /** Persistent visitor id + new/returning for analytics. */
+  function getVisitorContext() {
+    var existing = readLocal(VISITOR_KEY);
+    if (existing && existing.length > 0 && existing.length < 200) {
+      return { visitor_id: existing, visitor_type: "returning" };
+    }
+    var id = newVisitorId();
+    writeLocal(VISITOR_KEY, id);
+    return { visitor_id: id, visitor_type: "new" };
   }
 
   function getSessionId() {
@@ -140,8 +172,11 @@
       return;
     }
     recentTrackKeys[dedupeKey] = now;
+    var visitor = getVisitorContext();
     postEvent({
       session_id: getSessionId(),
+      visitor_id: visitor.visitor_id,
+      visitor_type: visitor.visitor_type,
       source: acq.source,
       campaign: acq.campaign || undefined,
       ad_set: acq.ad_set || undefined,
@@ -305,6 +340,7 @@
     setMirrorContext: setMirrorContext,
     getAcquisition: getAcquisition,
     getSessionId: getSessionId,
+    getVisitorContext: getVisitorContext,
   };
 
   installGtagMirrorOnce();

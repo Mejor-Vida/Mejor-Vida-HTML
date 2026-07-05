@@ -41,7 +41,7 @@ module.exports = async function handler(req, res) {
         : "";
 
     const html = refreshToken
-      ? `<!doctype html><html><head><meta charset="utf-8"><title>Search Console refresh token</title></head><body style="font-family:system-ui,sans-serif;padding:24px;max-width:720px"><h2>Search Console refresh token</h2><p>Copy into <code>GSC_REFRESH_TOKEN</code> in <code>.env.local</code> and Vercel.</p><p>Set <code>GSC_SITE_URL</code> to your Search Console property (e.g. <code>https://www.mejorvidainsurance.com/</code>).</p><pre style="white-space:pre-wrap;word-break:break-all;background:#f1f5f9;padding:12px;border-radius:8px">${escapeHtml(
+      ? `<!doctype html><html><head><meta charset="utf-8"><title>Search Console refresh token</title></head><body style="font-family:system-ui,sans-serif;padding:24px;max-width:720px"><h2>Search Console refresh token</h2><p>Copy into <code>GSC_REFRESH_TOKEN</code> in <code>.env.local</code> and Vercel.</p><p>Set <code>GSC_SITE_URL</code> to your Search Console property (e.g. <code>sc-domain:mejorvidainsurance.com</code> or <code>https://www.example.com/</code>).</p><pre style="white-space:pre-wrap;word-break:break-all;background:#f1f5f9;padding:12px;border-radius:8px">${escapeHtml(
           refreshToken
         )}</pre></body></html>`
       : `<!doctype html><html><body style="font-family:system-ui,sans-serif;padding:24px"><h2>No refresh token</h2><p>Google did not return a refresh token. Open <a href="/api/staff/gsc-auth">/api/staff/gsc-auth</a> again (uses prompt=consent).</p></body></html>`;
