@@ -6,6 +6,7 @@ const { readPhiByLead, writePhiByLead } = require("../../lib/phi-store");
 const { hubspotPhoneSearchVariants, phoneLast10Digits } = require("../../lib/hubspot-phone-variants");
 const { linkLeadToContacts } = require("./_contact-link");
 const { saveCanonicalLeadProfile } = require("./_lead-profile");
+const { onStageChange } = require("../../lib/crm-nurture-engine");
 
 function isUuid(s) {
   return /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(String(s || ""));
@@ -1553,6 +1554,9 @@ module.exports = async function handler(req, res) {
           citizenship_status: normalizeCitizenshipStatus(body.profile_ext.citizenship_status) || null,
         });
       }
+      const canonicalBeforeSave = await loadCanonicalLeadProfile(cfg, id, src || "unknown");
+      const oldPipelineStage = normalizeIcPipelineStage(canonicalBeforeSave.pipeline_stage) || "new";
+
       await saveCanonicalLeadProfile(
         cfg,
         id,
@@ -1560,6 +1564,27 @@ module.exports = async function handler(req, res) {
         canonicalPatch,
         auth.user && auth.user.email ? auth.user.email : null
       );
+
+      if (Object.prototype.hasOwnProperty.call(body, "pipeline_stage")) {
+        const newPipelineStage = normalizeIcPipelineStage(payload.pipeline_stage) || "new";
+        if (newPipelineStage !== oldPipelineStage) {
+          try {
+            await onStageChange(cfg, {
+              leadId: id,
+              leadSourceTable: src || "unknown",
+              oldStage: oldPipelineStage,
+              newStage: newPipelineStage,
+              contactId:
+                canonicalBeforeSave.contacts_contact_id ||
+                canonicalBeforeSave.contact_id ||
+                null,
+              actor: auth.user && auth.user.email ? auth.user.email : null,
+            });
+          } catch (stageErr) {
+            console.error("staff/leads PATCH nurture stage change", stageErr);
+          }
+        }
+      }
 
       const canonicalAfterSave = await loadCanonicalLeadProfile(cfg, id, src || "unknown");
       const linkFieldTouched = ["email", "phone", "manychat_subscriber_id", "first_name", "last_name"].some((k) =>

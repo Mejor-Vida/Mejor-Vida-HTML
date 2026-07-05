@@ -598,6 +598,31 @@ body.crm-body {
   border-bottom: 0;
 }
 
+.crm-task-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.crm-task-list li {
+  padding: 6px 0;
+  border-bottom: 1px solid var(--crm-border);
+  font-size: 0.9rem;
+}
+
+.crm-task-list li:last-child {
+  border-bottom: 0;
+}
+
+.crm-task-list a {
+  color: var(--crm-accent);
+  text-decoration: none;
+}
+
+.crm-task-list a:hover {
+  text-decoration: underline;
+}
+
 .crm-dot {
   display: inline-block;
   width: 8px;

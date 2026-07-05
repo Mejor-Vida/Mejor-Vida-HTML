@@ -118,10 +118,38 @@
     return (Number(n) || 0).toLocaleString();
   }
 
+  function fmtCurrency(n) {
+    var v = Number(n);
+    if (!isFinite(v)) return "—";
+    return v.toLocaleString(undefined, {
+      style: "currency",
+      currency: "USD",
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+  }
+
+  function fmtChartValue(metric, val) {
+    if (metric === "spend") return fmtCurrency(val);
+    return fmtNum(val);
+  }
+
   function fmtPct(n) {
     var v = Number(n);
     if (v == null || isNaN(v)) return "—";
     return v.toFixed(1) + "%";
+  }
+
+  function fmtPctRate(n) {
+    var v = Number(n);
+    if (!isFinite(v)) return "—";
+    return (v * 100).toFixed(2) + "%";
+  }
+
+  function fmtPosition(n) {
+    var v = Number(n);
+    if (!isFinite(v)) return "—";
+    return v.toFixed(1);
   }
 
   function queryString(extra) {
@@ -294,6 +322,17 @@
           "</strong>" +
           '<span class="crm-funnel-ad-metric-hint">' + esc(t("funnel_ad_chart_hint")) + "</span></button>";
       }
+      if (metrics.spend != null) {
+        html +=
+          '<button type="button" class="crm-funnel-ad-metric crm-funnel-ad-metric--clickable" data-funnel-ad-chart="spend">' +
+          '<span class="crm-funnel-ad-metric-label">' +
+          esc(t("funnel_ad_spend")) +
+          "</span>" +
+          '<strong class="crm-funnel-ad-metric-value">' +
+          esc(fmtCurrency(metrics.spend)) +
+          "</strong>" +
+          '<span class="crm-funnel-ad-metric-hint">' + esc(t("funnel_ad_chart_hint")) + "</span></button>";
+      }
       html += "</div>";
     }
 
@@ -301,27 +340,124 @@
     return html;
   }
 
+  function OrganicSearchMetrics(metrics) {
+    if (!metrics || !metrics.show) return "";
+
+    var html =
+      '<section class="crm-funnel-ad-metrics crm-funnel-organic-metrics">' +
+      '<h2 class="crm-funnel-section-title">' + esc(t("funnel_gsc_title")) + "</h2>";
+
+    if (metrics.dateFrom && metrics.dateTo) {
+      html +=
+        '<p class="crm-funnel-ad-metrics-range">' +
+        esc(fmtDateRangeLabel(metrics.dateFrom, metrics.dateTo)) +
+        "</p>";
+    }
+
+    if (metrics.error) {
+      html += '<p class="crm-funnel-ad-metrics-note crm-funnel-error">' + esc(metrics.error) + "</p>";
+      if (metrics.setupHint) {
+        html += '<p class="crm-funnel-setup-hint">' + esc(metrics.setupHint) + "</p>";
+      }
+    } else if (!metrics.configured) {
+      html +=
+        '<p class="crm-funnel-ad-metrics-note">' +
+        esc(metrics.setupHint || t("funnel_gsc_not_configured")) +
+        "</p>";
+    } else {
+      html += '<div class="crm-funnel-ad-metrics-grid">';
+      html +=
+        '<button type="button" class="crm-funnel-ad-metric crm-funnel-ad-metric--clickable" data-funnel-ad-chart="gsc_clicks">' +
+        '<span class="crm-funnel-ad-metric-label">' + esc(t("funnel_gsc_clicks")) + "</span>" +
+        '<strong class="crm-funnel-ad-metric-value">' + esc(fmtNum(metrics.clicks)) + "</strong>" +
+        '<span class="crm-funnel-ad-metric-hint">' + esc(t("funnel_ad_chart_hint")) + "</span></button>";
+      html +=
+        '<button type="button" class="crm-funnel-ad-metric crm-funnel-ad-metric--clickable" data-funnel-ad-chart="gsc_impressions">' +
+        '<span class="crm-funnel-ad-metric-label">' + esc(t("funnel_gsc_impressions")) + "</span>" +
+        '<strong class="crm-funnel-ad-metric-value">' + esc(fmtNum(metrics.impressions)) + "</strong>" +
+        '<span class="crm-funnel-ad-metric-hint">' + esc(t("funnel_ad_chart_hint")) + "</span></button>";
+      html +=
+        '<div class="crm-funnel-ad-metric">' +
+        '<span class="crm-funnel-ad-metric-label">' + esc(t("funnel_gsc_ctr")) + "</span>" +
+        '<strong class="crm-funnel-ad-metric-value">' + esc(fmtPctRate(metrics.ctr)) + "</strong></div>";
+      html +=
+        '<div class="crm-funnel-ad-metric">' +
+        '<span class="crm-funnel-ad-metric-label">' + esc(t("funnel_gsc_position")) + "</span>" +
+        '<strong class="crm-funnel-ad-metric-value">' + esc(fmtPosition(metrics.position)) + "</strong></div>";
+      html += "</div>";
+
+      html += '<div class="crm-funnel-acq-grid crm-funnel-gsc-grid">';
+      html += renderAcqList(
+        t("funnel_gsc_top_queries"),
+        (metrics.topQueries || []).map(function (row) {
+          return { name: row.query, count: row.clicks };
+        })
+      );
+      html += renderAcqList(
+        t("funnel_gsc_top_pages"),
+        (metrics.topPages || []).map(function (row) {
+          return { name: row.path || row.page, count: row.clicks };
+        })
+      );
+      html += "</div>";
+    }
+
+    html += "</section>";
+    return html;
+  }
+
+  function avgDailySpend(daily, dateFrom, dateTo) {
+    var days = countDaysInclusive(dateFrom, dateTo);
+    if (!days || !daily || !daily.length) return null;
+    var total = 0;
+    daily.forEach(function (d) {
+      total += Number(d.spend) || 0;
+    });
+    return total / days;
+  }
+
+  function renderSpendChartSummary(daily) {
+    var avg = avgDailySpend(daily, state.dateFrom, state.dateTo);
+    if (avg == null) return "";
+    return (
+      '<p class="crm-funnel-ad-spend-summary">' +
+      '<span class="crm-funnel-ad-spend-summary-label">' +
+      esc(t("funnel_ad_spend_avg_daily")) +
+      "</span>" +
+      '<strong class="crm-funnel-ad-spend-summary-value">' +
+      esc(fmtCurrency(avg)) +
+      "</strong></p>"
+    );
+  }
+
   function renderAdDailyChart(metric, daily) {
     if (!daily || !daily.length) {
       return '<p class="crm-funnel-ad-chart-empty">' + esc(t("funnel_ad_no_daily")) + "</p>";
     }
-    var key = metric === "clicks" ? "clicks" : "impressions";
+    var key =
+      metric === "clicks" || metric === "gsc_clicks"
+        ? "clicks"
+        : metric === "spend"
+          ? "spend"
+          : metric === "gsc_impressions"
+            ? "impressions"
+            : "impressions";
     var max = 1;
     daily.forEach(function (d) {
       if ((d[key] || 0) > max) max = d[key];
     });
     return (
-      '<div class="crm-funnel-ad-chart">' +
+      '<div class="crm-funnel-ad-chart crm-funnel-ad-chart--' + esc(metric) + '">' +
       daily
         .map(function (d) {
           var val = d[key] || 0;
           var h = Math.max(4, Math.round((val / max) * 100));
           return (
             '<div class="crm-funnel-ad-bar-col" title="' +
-            esc(fmtShortDate(d.date) + ": " + fmtNum(val)) +
+            esc(fmtShortDate(d.date) + ": " + fmtChartValue(metric, val)) +
             '">' +
             '<span class="crm-funnel-ad-bar-value">' +
-            esc(fmtNum(val)) +
+            esc(fmtChartValue(metric, val)) +
             "</span>" +
             '<div class="crm-funnel-ad-bar" style="height:' +
             h +
@@ -340,7 +476,15 @@
     if (!state.adChartMetric) return "";
     var metric = state.adChartMetric;
     var title =
-      metric === "clicks" ? t("funnel_ad_clicks_daily") : t("funnel_ad_impressions_daily");
+      metric === "clicks"
+        ? t("funnel_ad_clicks_daily")
+        : metric === "gsc_clicks"
+          ? t("funnel_gsc_clicks_daily")
+          : metric === "gsc_impressions"
+            ? t("funnel_gsc_impressions_daily")
+            : metric === "spend"
+              ? t("funnel_ad_spend_daily")
+              : t("funnel_ad_impressions_daily");
     var daily = (state.adChartData && state.adChartData.daily) || [];
     var rangeLabel = fmtDateRangeLabel(state.dateFrom, state.dateTo);
 
@@ -361,7 +505,8 @@
         ? '<p class="crm-funnel-ad-chart-empty">' + esc(t("funnel_ad_chart_loading")) + "</p>"
         : state.adChartError
           ? '<p class="crm-funnel-error">' + esc(state.adChartError) + "</p>"
-          : renderAdDailyChart(metric, daily)) +
+          : (metric === "spend" ? renderSpendChartSummary(daily) : "") +
+            renderAdDailyChart(metric, daily)) +
       "</div></div></div>"
     );
   }
@@ -574,6 +719,7 @@
         '<div class="crm-funnel-page">' +
         FilterBar() +
         AdPlatformMetrics(state.data && state.data.adMetrics) +
+        OrganicSearchMetrics(state.data && state.data.organicSearch) +
         '<div class="crm-funnel-empty">' +
         "<strong>" + esc(t("funnel_no_data_title")) + "</strong>" +
         "<p>" + esc(t("funnel_no_data_blurb")) + "</p></div>" +
@@ -589,6 +735,7 @@
       "<p>" + esc(t("funnel_subtitle")) + "</p></header>" +
       FilterBar() +
       AdPlatformMetrics(state.data.adMetrics) +
+      OrganicSearchMetrics(state.data.organicSearch) +
       EntryContextPanel(state.data.entryContext) +
       '<div class="crm-funnel-main">' +
       FunnelVisualization(state.data.branches || {}) +
@@ -658,7 +805,8 @@
     paint(main);
     wireEvents(main);
     return api(
-      "/api/staff/funnel-analytics?" + queryString({ action: "ad_daily" }),
+      "/api/staff/funnel-analytics?" +
+        queryString({ action: metric.indexOf("gsc_") === 0 ? "gsc_daily" : "ad_daily" }),
       { method: "GET", softAuth: true }
     )
       .then(function (res) {

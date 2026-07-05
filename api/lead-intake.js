@@ -61,6 +61,8 @@ const {
 const { syncContactToHubspot } = require("../lib/hubspot-sync-lib");
 const { logIntegrationAudit } = require("../lib/integration-audit");
 const { fetchManychatSubscriber } = require("../lib/manychat-pull");
+const { saveCanonicalLeadProfile } = require("./staff/_lead-profile");
+const { maybeEnrollCrmLead } = require("../lib/crm-nurture-engine");
 
 function json(res, status, payload) {
   res.status(status).setHeader("Content-Type", "application/json");
@@ -553,6 +555,27 @@ module.exports = async function handler(req, res) {
     if (quoteHigh) savedSet.add("quote_high");
     const saved_fields = Array.from(savedSet);
     const missing_fields = CANONICAL.filter((k) => !savedSet.has(k));
+
+    if (created) {
+      const crmCfg = { supabaseUrl, serviceKey: supabaseKey };
+      try {
+        await saveCanonicalLeadProfile(
+          crmCfg,
+          contactId,
+          "contacts",
+          { pipeline_stage: "new", contacts_contact_id: String(contactId), contact_id: String(contactId) },
+          "lead_intake"
+        );
+        await maybeEnrollCrmLead(crmCfg, {
+          leadId: contactId,
+          leadSourceTable: "contacts",
+          stage: "new",
+          contactId,
+        });
+      } catch (enrollErr) {
+        console.error("[lead-intake] crm nurture enroll:", enrollErr.message);
+      }
+    }
 
     await logIntegrationAudit(supabaseUrl, supabaseKey, {
       stage: "lead_intake_complete",

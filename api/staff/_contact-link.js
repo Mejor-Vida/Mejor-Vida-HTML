@@ -11,6 +11,7 @@ const {
   updateContact,
   upsertLeadState,
 } = require("../../lib/contacts-db");
+const { maybeEnrollCrmLead } = require("../../lib/crm-nurture-engine");
 
 const UNRESOLVED_TEMPLATE = /^\{\{[\s\S]*\}\}$/;
 
@@ -219,6 +220,19 @@ async function linkLeadToContacts(cfg, opts) {
       opts.updatedBy || null,
       opts
     );
+    const stage = crmPipelineStage(opts.pipeline_stage);
+    if (stage === "new") {
+      try {
+        await maybeEnrollCrmLead(cfg, {
+          leadId: opts.leadId,
+          leadSourceTable: opts.leadSourceTable,
+          stage: "new",
+          contactId: result.contactId,
+        });
+      } catch (e) {
+        console.error("[contact-link] nurture enroll", e && e.message ? e.message : e);
+      }
+    }
   }
 
   return { linked: true, contactId: result.contactId, created: !!result.created };

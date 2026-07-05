@@ -9,6 +9,7 @@ const { json, serviceConfig, restSelect } = require("./_inbox-lib");
 const { buildDashboard, buildNodeDetail, groupSessions, filterSessions } = require("../../lib/funnel-analytics");
 const { fetchAdPlatformMetrics, fetchAdDailySeries } = require("../../lib/ad-platform-insights");
 const { fetchTopKeywordsByClicks } = require("../../lib/google-ads-api");
+const { fetchGscOrganicSearch, fetchGscDaily } = require("../../lib/gsc-data-api");
 
 const CHICAGO_TZ = "America/Chicago";
 
@@ -149,6 +150,25 @@ module.exports = async function handler(req, res) {
     }
   }
 
+  if (action === "gsc_daily") {
+    if (view !== "website") {
+      return json(res, 400, { error: "gsc_daily requires website view" });
+    }
+    try {
+      const series = await fetchGscDaily(range.dateFrom, range.dateTo);
+      return json(res, 200, {
+        ok: true,
+        dateFrom: range.dateFrom,
+        dateTo: range.dateTo,
+        platform: "gsc",
+        ...series,
+      });
+    } catch (e) {
+      console.error("[funnel-analytics] gsc_daily", e.message || e);
+      return json(res, 502, { error: e.message || "Could not load Search Console daily series" });
+    }
+  }
+
   const dashboard = buildDashboard(events, filters);
 
   let googleAdsKeywords = null;
@@ -191,10 +211,26 @@ module.exports = async function handler(req, res) {
     }
   }
 
+  let organicSearch = { show: false };
+  if (view === "website") {
+    try {
+      organicSearch = await fetchGscOrganicSearch(range.dateFrom, range.dateTo);
+    } catch (e) {
+      console.error("[funnel-analytics] gsc", e.message || e);
+      organicSearch = {
+        show: true,
+        source: "gsc",
+        configured: false,
+        error: e.message || "Could not load Search Console data",
+      };
+    }
+  }
+
   return json(res, 200, {
     ok: true,
     ...dashboard,
     adMetrics,
+    organicSearch,
     googleAdsKeywords,
     dateFrom: range.dateFrom,
     dateTo: range.dateTo,

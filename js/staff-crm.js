@@ -124,6 +124,7 @@
       }
       return { view: "todo" };
     }
+    if (parts[0] === "nurture-settings") return { view: "nurtureSettings" };
     return { view: "dashboard" };
   }
 
@@ -330,7 +331,9 @@
         ? "clients"
         : route.view === "dashboard"
           ? "dashboard"
-          : route.view;
+          : route.view === "nurtureSettings"
+            ? "nurture-settings"
+            : route.view;
     document.querySelectorAll(".crm-nav-item").forEach(function (btn) {
       btn.classList.toggle("active", btn.getAttribute("data-nav") === active);
     });
@@ -374,6 +377,7 @@
     else if (nav === "knowledge") navigate("#/knowledge");
     else if (nav === "ga4") navigate("#/ga4");
     else if (nav === "todo") navigate("#/todo");
+    else if (nav === "nurture-settings") navigate("#/nurture-settings");
   }
 
   async function ensureLeads(force) {
@@ -578,8 +582,87 @@
     patchClientsListIndicators(item.id);
   }
 
-  function renderDashboard(main) {
+  function renderCallTaskList(tasks, emptyKey) {
+    if (!tasks || !tasks.length) {
+      return '<p class="crm-empty-state">' + esc(t(emptyKey || "nurture_no_calls")) + "</p>";
+    }
+    var html = '<ul class="crm-task-list">';
+    tasks.forEach(function (task) {
+      var when = "";
+      try {
+        when = new Date(task.due_at).toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit" });
+      } catch (e) {
+        when = String(task.due_at || "");
+      }
+      var leadHash =
+        "#/clients/" +
+        encodeURIComponent(task.lead_id) +
+        "/overview";
+      html +=
+        '<li><a href="' +
+        esc(leadHash) +
+        '">' +
+        esc(task.display_name || "Lead") +
+        "</a> — " +
+        esc(t("nurture_attempt", { n: task.attempt_number || 1 })) +
+        " · " +
+        esc(when) +
+        "</li>";
+    });
+    html += "</ul>";
+    return html;
+  }
+
+  async function renderDashboard(main) {
+    var dash = null;
+    try {
+      dash = await authedApi("/api/staff/crm-dashboard", null, { method: "GET" });
+    } catch (e) {
+      dash = null;
+    }
+
     var total = leadsCache.length;
+    var callsToday = dash && dash.calls_today != null ? dash.calls_today : "—";
+    var medicalPending = dash && dash.medical_pending != null ? dash.medical_pending : "—";
+    var stageCounts = (dash && dash.stage_counts) || {};
+    var daily = dash && dash.daily_summary ? dash.daily_summary : null;
+    var newInSeq = (dash && dash.new_leads_in_sequence) || [];
+
+    var stageListHtml = ["new", "contacted", "engaged", "client", "enrolled"]
+      .map(function (key) {
+        var labelKey = key === "enrolled" ? "stage_enrolled" : "stage_" + key;
+        if (key === "engaged" || key === "client") labelKey = "ov_stage_" + key;
+        var count = stageCounts[key] != null ? stageCounts[key] : "—";
+        return (
+          '<li><span><span class="crm-dot ' +
+          esc(key === "enrolled" ? "enrolled" : key) +
+          '"></span>' +
+          esc(t(labelKey)) +
+          '</span><strong>' +
+          esc(String(count)) +
+          "</strong></li>"
+        );
+      })
+      .join("");
+
+    var newSeqHtml = "";
+    if (newInSeq.length) {
+      newSeqHtml = '<ul class="crm-task-list">';
+      newInSeq.forEach(function (row) {
+        newSeqHtml +=
+          '<li><a href="#/clients/' +
+          encodeURIComponent(row.lead_id) +
+          '/overview">' +
+          esc(row.display_name || "Lead") +
+          "</a> — " +
+          esc(t("nurture_days_in", { n: row.days_in_sequence })) +
+          "</li>";
+      });
+      newSeqHtml += "</ul>";
+    } else {
+      newSeqHtml = '<p class="crm-empty-state">' + esc(t("nurture_no_calls")) + "</p>";
+    }
+
     main.innerHTML =
       '<p class="crm-greeting">' +
       esc(timeGreeting()) +
@@ -598,13 +681,30 @@
       '</div><div class="crm-stat-label">' +
       esc(t("total_clients")) +
       '</div></div>' +
-      '<div class="crm-stat"><div class="crm-stat-value">—</div><div class="crm-stat-label">' +
+      '<div class="crm-stat"><div class="crm-stat-value">' +
+      esc(String(medicalPending)) +
+      '</div><div class="crm-stat-label">' +
       esc(t("medical_pending")) +
       '</div></div>' +
-      '<div class="crm-stat"><div class="crm-stat-value">—</div><div class="crm-stat-label">' +
+      '<div class="crm-stat"><div class="crm-stat-value">' +
+      esc(String(callsToday)) +
+      '</div><div class="crm-stat-label">' +
       esc(t("calls_today")) +
       "</div></div>" +
       "</div></div>" +
+      '<div class="crm-card" style="margin-bottom:16px">' +
+      "<h2>" +
+      esc(t("nurture_daily_summary")) +
+      "</h2>" +
+      "<h3>" +
+      esc(t("nurture_new_calls")) +
+      "</h3>" +
+      renderCallTaskList(daily && daily.new_call_tasks, "nurture_no_calls") +
+      "<h3 style=\"margin-top:16px\">" +
+      esc(t("nurture_contacted_calls")) +
+      "</h3>" +
+      renderCallTaskList(daily && daily.contacted_call_tasks, "nurture_no_calls") +
+      "</div>" +
       '<div class="crm-card crm-funnel-dash-card" style="margin-bottom:16px">' +
       '<a href="#/ga4" class="crm-funnel-dash-link">' +
       "<div>" +
@@ -618,30 +718,21 @@
       "</a></div>" +
       '<div class="crm-card">' +
       "<h2>" +
-      esc(t("pipeline_snapshot")) +
+      esc(t("nurture_new_in_sequence")) +
       "</h2>" +
-      '<div class="crm-empty-state">' +
-      esc(t("application_metrics")) +
-      "</div>" +
+      newSeqHtml +
       "</div></div>" +
       '<div class="crm-card">' +
       "<h2>" +
       esc(t("client_snapshot")) +
       "</h2>" +
       '<ul class="crm-stage-list">' +
-      '<li><span><span class="crm-dot new"></span>' +
-      esc(t("stage_new")) +
-      '</span><strong>—</strong></li>' +
-      '<li><span><span class="crm-dot contacted"></span>' +
-      esc(t("stage_contacted")) +
-      '</span><strong>—</strong></li>' +
-      '<li><span><span class="crm-dot enrolled"></span>' +
-      esc(t("stage_enrolled")) +
-      '</span><strong>—</strong></li>' +
+      stageListHtml +
       "</ul>" +
       '<p class="crm-empty-state" style="padding-top:12px">' +
-      esc(t("stage_counts_note")) +
-      "</p>" +
+      '<a href="#/nurture-settings">' +
+      esc(t("nav_nurture_settings")) +
+      "</a></p>" +
       "</div></div>";
   }
 
@@ -1499,7 +1590,7 @@
     try {
       if (route.view === "dashboard") {
         await ensureLeads();
-        renderDashboard(main);
+        await renderDashboard(main);
         resetIdleTimer();
         return;
       }
@@ -1592,7 +1683,19 @@
         resetIdleTimer();
         return;
       }
-      renderDashboard(main);
+      if (route.view === "nurtureSettings") {
+        if (window.StaffCrmNurtureSettings) {
+          await window.StaffCrmNurtureSettings.mount(main);
+        } else {
+          main.innerHTML =
+            '<div class="crm-placeholder"><strong>' +
+            esc(t("load_error")) +
+            "</strong><p>Nurture settings module failed to load.</p></div>";
+        }
+        resetIdleTimer();
+        return;
+      }
+      await renderDashboard(main);
     } catch (e) {
       main.innerHTML =
         '<div class="crm-placeholder"><strong>' +

@@ -238,12 +238,16 @@
   ],
   "crons": [
     {
-      "path": "/api/nurture-cron",
-      "schedule": "0,30 * * * *"
+      "path": "/api/crm-nurture-cron",
+      "schedule": "*/5 * * * *"
     },
     {
-      "path": "/api/nurture-enroll-cron",
-      "schedule": "5,15,25,35,45,55 * * * *"
+      "path": "/api/crm-daily-summary-cron",
+      "schedule": "0 13 * * *"
+    },
+    {
+      "path": "/api/crm-newsletter-cron",
+      "schedule": "0 21 * * 0"
     },
     {
       "path": "/api/staff-reminder-cron",

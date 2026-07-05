@@ -34,10 +34,10 @@ function loadEnvFile(filePath) {
 }
 
 function getToken() {
-  const fromEnv = String(process.env.META_AD_ACCESS_TOKEN || process.env.META_ACCESS_TOKEN || "").trim();
-  if (fromEnv) return fromEnv;
   const fileEnv = loadEnvFile(ENV_PATH);
-  return String(fileEnv.META_AD_ACCESS_TOKEN || fileEnv.META_ACCESS_TOKEN || "").trim();
+  const fromFile = String(fileEnv.META_AD_ACCESS_TOKEN || fileEnv.META_ACCESS_TOKEN || "").trim();
+  if (fromFile) return fromFile;
+  return String(process.env.META_AD_ACCESS_TOKEN || process.env.META_ACCESS_TOKEN || "").trim();
 }
 
 async function main() {

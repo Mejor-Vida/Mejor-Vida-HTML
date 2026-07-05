@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta name="robots" content="noindex,nofollow" />
+  <title>Nurture review — Mejor Vida Staff</title>
+  <link rel="stylesheet" href="/css/staff-nurture-review.css?v=20260705e" />
+</head>
+<body>
+  <div id="nr-login" class="nr-login-wrap">
+    <section class="nr-card nr-login-card">
+      <h1>Nurture communications review</h1>
+      <p class="nr-muted">Sign in to review the full automated sequence. Page labels are in English; client emails and SMS previews are in Spanish.</p>
+      <form id="nr-login-form">
+        <label for="nr-email">Email</label>
+        <input id="nr-email" type="email" autocomplete="username" required />
+        <label for="nr-pass">Password</label>
+        <input id="nr-pass" type="password" autocomplete="current-password" required />
+        <button type="submit" class="nr-btn" id="nr-login-btn">Sign in</button>
+        <p id="nr-login-err" class="nr-err" role="alert"></p>
+      </form>
+      <p class="nr-foot"><a href="/staff/">← Staff portal</a> · <a href="/staff/crm.html">CRM</a></p>
+    </section>
+  </div>
+
+  <div id="nr-app" class="nr-app hidden" aria-hidden="true">
+    <header class="nr-header">
+      <div>
+        <h1>Automated nurture sequence</h1>
+        <p class="nr-muted">All <strong>client</strong> emails and SMS are sent in <strong>Spanish only</strong>. Review order, schedule, and message copy below.</p>
+      </div>
+      <div class="nr-header-actions">
+        <a href="/staff/" class="nr-link">Staff portal</a>
+        <button type="button" id="nr-signout" class="nr-btn secondary">Sign out</button>
+      </div>
+    </header>
+
+    <div id="nr-status-banner" class="nr-banner hidden"></div>
+    <div id="nr-rollout-banner" class="nr-banner nr-banner-testing hidden"></div>
+
+    <div id="nr-loading" class="nr-loading">Loading sequence…</div>
+    <div id="nr-content" class="nr-content hidden"></div>
+
+    <section class="nr-approval card" id="nr-approval">
+      <h2>Approval</h2>
+      <p class="nr-muted">When you are satisfied with the schedule and Spanish client copy, approve. To request edits, describe them below.</p>
+      <label for="nr-notes">Notes / requested changes</label>
+      <textarea id="nr-notes" rows="4" placeholder="e.g. Shorten the Day 2 SMS, change the welcome email subject line…"></textarea>
+      <div class="nr-approval-actions">
+        <button type="button" class="nr-btn" id="nr-approve">Approve sequence</button>
+        <button type="button" class="nr-btn secondary" id="nr-request-changes">Request changes</button>
+      </div>
+      <p id="nr-approval-msg" class="nr-muted"></p>
+    </section>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="/js/staff-nurture-review.js?v=20260705h"></script>
+</body>
+</html>

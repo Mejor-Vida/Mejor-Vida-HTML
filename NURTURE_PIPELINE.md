@@ -1,6 +1,8 @@
 # Mejor Vida Insurance — Lead Nurture Pipeline (v2)
 
-This document is the **design source of truth** for the automated nurture system.  
+> **Superseded for IC CRM automation** by the [CRM Lead Nurture Engine](CRM_NURTURE_CONTENT.md) (stage-driven New/Contacted sequences, daily summary, newsletter). This document remains for legacy WhatsApp quote flow and `post-quote-email` reference.
+
+This document is the **design source of truth** for the **legacy** automated nurture system.  
 **All message copy, placeholders, and channel-specific formatting** live in **`NURTURE_CONTENT.md`** — keep that file in sync when templates or code changes.
 
 ---
