@@ -1,9 +1,9 @@
 /**
  * /api/crm-newsletter-cron.js
- * Sends weekly newsletter to all leads with email (except unsubscribed).
+ * Sends weekly Facebook post email to all leads with email (except unsubscribed).
  */
 const { loadSettings } = require("../lib/crm-nurture-engine");
-const { wrapNewsletterHtml } = require("../lib/crm-nurture-templates");
+const { wrapNewsletterHtml, leadEmailCtaRow } = require("../lib/crm-nurture-templates");
 const { canAutomateLead } = require("../lib/crm-nurture-rollout");
 
 function sbHeaders(key) {
@@ -107,7 +107,8 @@ module.exports = async function handler(req, res) {
         idioma: pd.idioma,
       };
       const subject = issue.subject || "Mejor Vida Insurance — Actualización semanal";
-      const html = wrapNewsletterHtml(issue.hero_html || "", issue.body_html || "", contact, settings);
+      const bodyWithCta = (issue.body_html || "") + leadEmailCtaRow(false);
+      const html = wrapNewsletterHtml(issue.hero_html || "", bodyWithCta, contact, settings);
 
       try {
         const result = await sendResendEmail({ to: email, subject, html });
