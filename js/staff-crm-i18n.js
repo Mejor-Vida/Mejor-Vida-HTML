@@ -760,7 +760,7 @@
       conn_nurture_status_upcoming: "upcoming",
       conn_nurture_status_pending: "pending",
       pipe_title: "Nurture pipeline",
-      pipe_subtitle: "Sequence status, delivery log, and per-client controls (pause, sold, opt-out).",
+      pipe_subtitle: "CRM nurture sequence status and delivery log (New days 0–3, Contacted long-term).",
       pipe_show_stopped: "Show sold / opt-out / completed",
       pipe_refresh: "Refresh",
       pipe_pause: "Pause",
@@ -773,7 +773,7 @@
       pipe_col_scheduled: "Scheduled",
       pipe_col_sent: "Sent",
       pipe_col_status: "Status",
-      pipe_preview_label: "Message preview / override",
+      pipe_preview_label: "Message preview",
       pipe_no_preview: "No preview for this step.",
       pipe_subscriber_ready: "Subscriber ID on file: {yes}",
       pipe_yes: "yes",
@@ -789,7 +789,7 @@
       pipe_next_send: "Next send:",
       pipe_no_enrollment_title: "No nurture enrollment",
       pipe_no_enrollment_body:
-        " This client is not enrolled in an automated nurture sequence, or the sequence has ended and is hidden. Check “Show sold / opt-out / completed” or enroll them from the classic portal.",
+        " No nurture steps for this lead. Enroll from New or Contacted stage, or check “Show sold / opt-out / completed”.",
       pipe_no_contact_title: "No linked contact record",
       pipe_no_contact_body:
         " Pipeline tracking uses the contacts table. Link this client to a contact record (or use a contact-source lead) to view nurture steps here.",
@@ -801,7 +801,12 @@
       pipe_enroll: "Start nurture sequence",
       pipe_status_not_enrolled: "not enrolled",
       pipe_not_enrolled_notice:
-        "This contact is not enrolled yet. Review the stages below, then click Start nurture sequence to begin automated follow-up (quote completion / schedule a call).",
+        "Not enrolled in the CRM nurture engine. New and Contacted leads auto-enroll on intake; click Start nurture sequence to enroll manually.",
+      pipe_status_upcoming: "upcoming",
+      pipe_status_missed: "missed (before enroll)",
+      pipe_crm_entry: "CRM entry:",
+      pipe_no_lead_title: "Lead not loaded",
+      pipe_no_lead_body: " Open this client from the Clients list to view their nurture pipeline.",
       pipe_preview_unlinked:
         "No matching contacts record yet — showing the planned sequence. Save phone or email on Overview so we can link and enroll this client.",
       pipe_add_contact_hint: "Add phone or email on Overview to link this client for nurture.",
@@ -1671,7 +1676,7 @@
       conn_nurture_status_upcoming: "próximo",
       conn_nurture_status_pending: "pendiente",
       pipe_title: "Pipeline de nurturing",
-      pipe_subtitle: "Estado de la secuencia, registro de envíos y controles por cliente (pausar, vendido, opt-out).",
+      pipe_subtitle: "Secuencia CRM de nurturing: New (días 0–3) y Contacted (largo plazo).",
       pipe_show_stopped: "Mostrar vendido / opt-out / completado",
       pipe_refresh: "Actualizar",
       pipe_pause: "Pausar",
@@ -1684,7 +1689,7 @@
       pipe_col_scheduled: "Programado",
       pipe_col_sent: "Enviado",
       pipe_col_status: "Estado",
-      pipe_preview_label: "Vista previa / personalización del mensaje",
+      pipe_preview_label: "Vista previa del mensaje",
       pipe_no_preview: "Sin vista previa para este paso.",
       pipe_subscriber_ready: "ID de suscriptor registrado: {yes}",
       pipe_yes: "sí",
@@ -1700,7 +1705,7 @@
       pipe_next_send: "Próximo envío:",
       pipe_no_enrollment_title: "Sin inscripción en nurturing",
       pipe_no_enrollment_body:
-        " Este cliente no está inscrito en una secuencia automatizada, o la secuencia terminó y está oculta. Marque “Mostrar vendido / opt-out / completado” o inscríbalo desde el portal clásico.",
+        " No hay pasos de nurturing para este cliente. Inscríbalo en etapa New o Contacted, o marque “Mostrar vendido / opt-out / completado”.",
       pipe_no_contact_title: "Sin registro de contacto vinculado",
       pipe_no_contact_body:
         " El pipeline usa la tabla contacts. Vincule este cliente a un contacto (o use un lead de origen contacts) para ver los pasos aquí.",
@@ -1712,7 +1717,12 @@
       pipe_enroll: "Iniciar secuencia de nurturing",
       pipe_status_not_enrolled: "sin inscripción",
       pipe_not_enrolled_notice:
-        "Este contacto aún no está inscrito. Revise las etapas abajo y haga clic en Iniciar secuencia para comenzar el seguimiento automático (completar cotización / agendar llamada).",
+        "Sin inscripción en el motor CRM de nurturing. Los leads New y Contacted se inscriben al ingresar; use Iniciar secuencia para inscribir manualmente.",
+      pipe_status_upcoming: "próximo",
+      pipe_status_missed: "omitido (antes de inscribir)",
+      pipe_crm_entry: "Ingreso al CRM:",
+      pipe_no_lead_title: "Lead no cargado",
+      pipe_no_lead_body: " Abra este cliente desde la lista de Clientes para ver su pipeline.",
       pipe_preview_unlinked:
         "Aún no hay un registro en contacts — se muestra la secuencia planificada. Guarde teléfono o correo en Resumen para vincular e inscribir.",
       pipe_add_contact_hint: "Agregue teléfono o correo en Resumen para vincular este cliente.",

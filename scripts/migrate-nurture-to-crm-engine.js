@@ -92,7 +92,7 @@ async function main() {
     console.log(`${dryRun ? "[dry-run] " : ""}Migrate contact ${contactId} → ${leadSourceTable}/${leadId} stage=${stage}`);
 
     if (!dryRun) {
-      await enrollLead(cfg, { leadId, leadSourceTable, stage, contactId });
+      await enrollLead(cfg, { leadId, leadSourceTable, stage, contactId, backdateToCrmEntry: true });
       await sbFetch(supabaseUrl, serviceKey, `/nurture_sequence?contact_id=eq.${contactId}&status=eq.active`, {
         method: "PATCH",
         headers: { Prefer: "return=minimal" },

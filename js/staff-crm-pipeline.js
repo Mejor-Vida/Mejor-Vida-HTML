@@ -1,5 +1,5 @@
 /**
- * CRM Pipeline tab — per-client nurture sequence tracker (classic portal parity).
+ * CRM Pipeline tab — per-client CRM nurture sequence (new engine).
  */
 (function () {
   "use strict";
@@ -32,66 +32,19 @@
     return "";
   }
 
-  function hasLookupHints(detail) {
-    if (!detail) return false;
-    return !!(
-      resolveContactId(detail) ||
-      String(detail.phone || "").trim() ||
-      String(detail.email || "").trim() ||
-      String(detail.manychat_subscriber_id || "").trim()
-    );
-  }
-
-  /** Planned nurture stages when no contacts row is linked yet (matches server template). */
-  function buildLocalTemplateSteps() {
-    var rows = [
-      { stageNumber: 1, name: "WA-Quote email", channel: "email", channelUi: "Email", is_next: true },
-      { stageNumber: 2, name: "WA — Value + book call", channel: "whatsapp", channelUi: "WhatsApp" },
-      { stageNumber: 3, name: "WA — Check-in", channel: "whatsapp", channelUi: "WhatsApp" },
-      { stageNumber: 4, name: "SMS — Day 3", channel: "sms", channelUi: "SMS" },
-      { stageNumber: 5, name: "SMS — Day 5 + VCF", channel: "sms", channelUi: "SMS" },
-      { stageNumber: 6, name: "SMS — Day 7", channel: "sms", channelUi: "SMS" },
-      { stageNumber: 7, name: "Email — Week 1", channel: "email", channelUi: "Email" },
-      { stageNumber: 8, name: "Email — Week 2", channel: "email", channelUi: "Email" },
-      { stageNumber: 9, name: "Email — Week 3", channel: "email", channelUi: "Email" },
-      { stageNumber: 10, name: "Email — Week 4", channel: "email", channelUi: "Email" },
-    ];
-    return rows.map(function (r) {
-      return {
-        stageNumber: r.stageNumber,
-        phase: 0,
-        step: 1,
-        channel: r.channel,
-        channelUi: r.channelUi,
-        name: r.name,
-        scheduled_at: null,
-        actual_sent_at: null,
-        status: "not_enrolled",
-        is_next: !!r.is_next,
-        detail_reason: null,
-        preview: null,
-      };
-    });
+  function leadSourceTable(detail) {
+    return String((detail && detail.source_table) || "unknown").trim();
   }
 
   function buildPipelineQuery(state) {
     var parts = [];
-    var d = state.detail || {};
-    var cid = state.contactId || resolveContactId(d);
-    if (cid) parts.push("contactId=" + encodeURIComponent(cid));
-    if (d.phone) parts.push("phone=" + encodeURIComponent(String(d.phone).trim()));
-    if (d.email) parts.push("email=" + encodeURIComponent(String(d.email).trim()));
-    if (d.manychat_subscriber_id) {
-      parts.push("subscriberId=" + encodeURIComponent(String(d.manychat_subscriber_id).trim()));
+    if (state.leadId) parts.push("leadId=" + encodeURIComponent(String(state.leadId)));
+    if (state.leadSourceTable) {
+      parts.push("leadSourceTable=" + encodeURIComponent(state.leadSourceTable));
     }
     var showStopped = $("crm-pt-show-stopped", state.root);
     if (showStopped && showStopped.checked) parts.push("includeStopped=1");
     return parts.length ? "?" + parts.join("&") : "";
-  }
-
-  function buildEnrollQuery(state) {
-    var qs = buildPipelineQuery(state);
-    return qs.replace(/^\?/, "?") || "";
   }
 
   function fmtDate(iso) {
@@ -108,8 +61,7 @@
     if (s === "active") return "active";
     if (s === "paused") return "paused";
     if (s === "completed") return "completed";
-    if (s === "converted") return "converted";
-    if (s === "opted_out") return "opted_out";
+    if (s === "cancelled") return "opted_out";
     return "completed";
   }
 
@@ -180,26 +132,6 @@
     if (el) el.textContent = msg || "";
   }
 
-  async function saveOverride(state, stepRow) {
-    var subj = $("crm-pt-email-subj", state.root);
-    var body = $("crm-pt-email-body", state.root);
-    if (!subj || !body || !state.contactId) return;
-    try {
-      await api(
-        "/api/staff/nurture-override?contactId=" +
-          encodeURIComponent(state.contactId) +
-          "&phase=3&step=" +
-          encodeURIComponent(String(stepRow.step)),
-        { subject: subj.value, body: body.value },
-        { method: "POST" }
-      );
-      setFoot(state, t("pipe_override_saved"));
-      await loadPipeline(state);
-    } catch (e) {
-      setFoot(state, String((e && e.message) || t("pipe_load_failed")));
-    }
-  }
-
   function renderPreview(state) {
     var wrap = $("crm-pt-preview-inner", state.root);
     var entry = state.entry;
@@ -221,12 +153,12 @@
     }
     var p = st.preview;
     wrap.innerHTML = "";
-    if (p.kind === "whatsapp") {
+    if (p.kind === "call" || p.kind === "system") {
       wrap.innerHTML =
-        '<p class="crm-pipeline-preview-hint">' +
-        esc(p.note || "") +
-        '</p><p class="crm-pipeline-preview-hint">' +
-        esc(t("pipe_subscriber_ready", { yes: p.subscriber_ready ? t("pipe_yes") : t("pipe_no") })) +
+        '<p class="crm-pipeline-preview-hint"><strong>' +
+        esc(st.name || "") +
+        '</strong></p><p class="crm-pipeline-preview-hint">' +
+        esc(p.description || p.note || "") +
         "</p>";
       return;
     }
@@ -240,39 +172,32 @@
       return;
     }
     if (p.kind === "email") {
-      if (!p.editable && p.note && !((p.subject || "").trim() || (p.body || "").trim())) {
-        wrap.innerHTML = '<p class="crm-pipeline-preview-hint">' + esc(p.note) + "</p>";
-        return;
-      }
       wrap.innerHTML =
         '<label for="crm-pt-email-subj">' +
         esc(t("pipe_subject")) +
-        '</label><input id="crm-pt-email-subj" type="text" value="' +
+        '</label><input id="crm-pt-email-subj" type="text" readonly value="' +
         esc(p.subject || "") +
-        '"' +
-        (p.editable ? "" : " readonly") +
-        ' /><label for="crm-pt-email-body" style="margin-top:10px;display:block">' +
+        '" /><label for="crm-pt-email-body" style="margin-top:10px;display:block">' +
         esc(t("pipe_body_html")) +
-        '</label><textarea id="crm-pt-email-body" rows="14"' +
-        (p.editable ? "" : " readonly") +
-        ">" +
+        '</label><textarea id="crm-pt-email-body" rows="14" readonly>' +
         esc(p.body || "") +
         "</textarea>";
-      if (p.editable) {
-        var actions = document.createElement("div");
-        actions.className = "crm-pipeline-preview-actions";
-        actions.innerHTML =
-          '<button type="button" id="crm-pt-save-override" class="crm-btn secondary">' +
-          esc(t("pipe_save_override")) +
-          '</button><span class="crm-pipeline-preview-hint">' +
-          esc(p.is_override ? t("pipe_using_custom") : t("pipe_using_default")) +
-          "</span>";
-        wrap.appendChild(actions);
-        $("crm-pt-save-override", wrap).addEventListener("click", function () {
-          void saveOverride(state, st);
-        });
-      }
     }
+  }
+
+  function formatStepStatus(status) {
+    if (status === "not_enrolled") return t("pipe_status_not_enrolled");
+    if (status === "upcoming") return t("pipe_status_upcoming");
+    if (status === "missed") return t("pipe_status_missed");
+    return status || "";
+  }
+
+  function channelClass(channel) {
+    var ch = String(channel || "").toLowerCase();
+    if (ch === "sms") return "ch-sms";
+    if (ch === "email") return "ch-em";
+    if (ch === "call") return "ch-call";
+    return "ch-sys";
   }
 
   function renderDetail(state) {
@@ -281,14 +206,24 @@
     var entry = state.entry;
     var notice = $("crm-pt-notice", state.root);
 
+    if (!state.leadId) {
+      if (empty) {
+        empty.classList.remove("hidden");
+        empty.innerHTML =
+          "<strong>" + esc(t("pipe_no_lead_title")) + "</strong>" + esc(t("pipe_no_lead_body"));
+      }
+      if (detailPanel) detailPanel.classList.add("hidden");
+      return;
+    }
+
     if (!entry || !entry.steps || !entry.steps.length) {
       if (empty) {
         empty.classList.remove("hidden");
         empty.innerHTML =
           "<strong>" +
-          esc(t("pipe_no_contact_title")) +
+          esc(t("pipe_no_enrollment_title")) +
           "</strong>" +
-          esc(t("pipe_no_contact_body"));
+          esc(t("pipe_no_enrollment_body"));
       }
       if (detailPanel) detailPanel.classList.add("hidden");
       return;
@@ -297,17 +232,13 @@
     if (empty) empty.classList.add("hidden");
     if (detailPanel) detailPanel.classList.remove("hidden");
 
-    var ns = entry.nurture_sequence || null;
-    var ls = entry.lead_state || {};
+    var ns = entry.nurture_enrollment || null;
     var enrolled = !!state.enrolled && !!ns;
     var pipelineStage =
-      ls.pipeline_stage || (state.detail && state.detail.pipeline_stage) || "—";
+      entry.pipeline_stage || (state.detail && state.detail.pipeline_stage) || "—";
 
     if (notice) {
-      if (!state.contactFound) {
-        notice.classList.remove("hidden");
-        notice.textContent = t("pipe_preview_unlinked");
-      } else if (!enrolled) {
+      if (!enrolled) {
         notice.classList.remove("hidden");
         notice.textContent = t("pipe_not_enrolled_notice");
       } else {
@@ -325,6 +256,17 @@
           esc(String(ns.status || "")) +
           "</span>"
         : '<span class="crm-pt-badge completed">' + esc(t("pipe_status_not_enrolled")) + "</span>";
+      var seqLabel = entry.sequence_label
+        ? ' · <span class="crm-pipeline-muted">' + esc(entry.sequence_label) + "</span>"
+        : "";
+      var entryLabel =
+        enrolled && (entry.crm_entry_at || (ns && ns.enrolled_at))
+          ? ' · <span class="crm-pipeline-muted">' +
+            esc(t("pipe_crm_entry")) +
+            " " +
+            esc(fmtDate(entry.crm_entry_at || ns.enrolled_at)) +
+            "</span>"
+          : "";
       stageLine.innerHTML =
         esc(t("pipe_pipeline_stage")) +
         ': <strong>' +
@@ -333,6 +275,8 @@
         esc(t("pipe_nurture")) +
         "</span> " +
         nurtureLabel +
+        seqLabel +
+        entryLabel +
         (enrolled && ns.next_send_at
           ? ' · <span class="crm-pipeline-muted">' +
             esc(t("pipe_next_send")) +
@@ -349,7 +293,7 @@
     if (tbody) {
       tbody.innerHTML = steps
         .map(function (row, idx) {
-          var ch = row.channel === "whatsapp" ? "ch-wa" : row.channel === "sms" ? "ch-sms" : "ch-em";
+          var ch = channelClass(row.channel);
           var active = idx === state.stepIndex ? " crm-pt-row-active" : "";
           var next = row.is_next ? " crm-pt-row-next" : "";
           return (
@@ -361,6 +305,9 @@
             '"><td>' +
             esc(String(row.stageNumber)) +
             "</td><td>" +
+            (row.phase_label
+              ? '<span class="crm-pipeline-muted small">' + esc(row.phase_label) + " · </span>"
+              : "") +
             esc(row.name || "") +
             '</td><td><span class="crm-pt-ch-pill ' +
             ch +
@@ -392,8 +339,7 @@
     }
 
     var stopped =
-      ns &&
-      (ns.status === "converted" || ns.status === "opted_out" || ns.status === "completed");
+      ns && (ns.status === "cancelled" || ns.status === "completed");
     var pauseBtn = $("crm-pt-pause", state.root);
     var resumeBtn = $("crm-pt-resume", state.root);
     var soldBtn = $("crm-pt-sold", state.root);
@@ -410,65 +356,39 @@
     }
     if (soldBtn) soldBtn.disabled = !enrolled || stopped;
     if (optBtn) optBtn.disabled = !enrolled || stopped;
-    if (linkBtn) {
-      linkBtn.style.display = !state.contactFound && hasLookupHints(state.detail) ? "inline-block" : "none";
-      linkBtn.disabled = state.contactFound || !hasLookupHints(state.detail);
-    }
+    if (linkBtn) linkBtn.style.display = "none";
     if (enrollBtn) {
-      enrollBtn.style.display = state.contactFound && !enrolled ? "inline-block" : "none";
-      enrollBtn.disabled = !state.contactFound;
+      var canEnroll = !enrolled && !!state.canEnroll;
+      enrollBtn.style.display = canEnroll ? "inline-block" : "none";
+      enrollBtn.disabled = !canEnroll;
     }
 
     renderPreview(state);
   }
 
-  function formatStepStatus(status) {
-    if (status === "not_enrolled") return t("pipe_status_not_enrolled");
-    return status || "";
-  }
-
   async function loadPipeline(state) {
-    if (!hasLookupHints(state.detail)) {
-      state.entry = { steps: buildLocalTemplateSteps(), contact: null, nurture_sequence: null };
-      state.contactFound = false;
+    if (!state.leadId) {
+      state.entry = null;
       state.enrolled = false;
-      state.stepIndex = 0;
       renderDetail(state);
-      setFoot(state, t("pipe_add_contact_hint"));
       return;
     }
 
     setFoot(state, t("pipe_loading"));
     try {
-      var data = await api("/api/staff/pipeline" + buildPipelineQuery(state), null, { method: "GET" });
-      var leads = (data && data.leads) || [];
-      state.contactFound = !!(data && data.contact_found);
+      var data = await api("/api/staff/nurture-pipeline" + buildPipelineQuery(state), null, {
+        method: "GET",
+      });
       state.enrolled = !!(data && data.enrolled);
-      if (data && data.resolved_contact_id) {
-        state.contactId = data.resolved_contact_id;
-      }
-
-      if (leads.length && leads[0].steps && leads[0].steps.length) {
-        state.entry = leads[0];
-      } else if (state.contactFound) {
-        state.entry = {
-          contact: leads[0] && leads[0].contact,
-          nurture_sequence: null,
-          lead_state: (leads[0] && leads[0].lead_state) || null,
-          steps: buildLocalTemplateSteps(),
-        };
-        state.enrolled = false;
-      } else {
-        state.entry = {
-          contact: null,
-          nurture_sequence: null,
-          lead_state: null,
-          steps: buildLocalTemplateSteps(),
-        };
-        state.contactFound = false;
-        state.enrolled = false;
-      }
-
+      state.canEnroll = !!(data && data.can_enroll);
+      if (data && data.contact_id) state.contactId = data.contact_id;
+      state.entry = {
+        pipeline_stage: data.pipeline_stage,
+        sequence_label: data.sequence_label,
+        nurture_enrollment: data.nurture_enrollment,
+        crm_entry_at: data.crm_entry_at,
+        steps: (data && data.steps) || [],
+      };
       state.stepIndex = 0;
       renderDetail(state);
       setFoot(state, "");
@@ -477,46 +397,12 @@
     }
   }
 
-  async function linkContactRecord(state) {
-    if (!state.leadId) {
-      setFoot(state, t("pipe_link_failed"));
-      return;
-    }
-    var btn = $("crm-pt-link", state.root);
-    if (btn) btn.disabled = true;
-    setFoot(state, t("pipe_linking"));
-    try {
-      var data = await api(
-        "/api/staff/contact-link?leadId=" + encodeURIComponent(String(state.leadId)),
-        null,
-        { method: "POST" }
-      );
-      if (data && data.contact_id) {
-        state.contactId = String(data.contact_id);
-        if (state.detail) {
-          state.detail.contact_id = state.contactId;
-          state.detail.contacts_contact_id = state.contactId;
-        }
-      }
-      setFoot(state, t("pipe_linked_ok"));
-      await loadPipeline(state);
-    } catch (e) {
-      setFoot(state, String((e && e.message) || t("pipe_link_failed")));
-    } finally {
-      if (btn) btn.disabled = false;
-    }
-  }
-
   async function enrollInNurture(state) {
-    if (!state.contactFound) {
-      setFoot(state, t("pipe_enroll_need_contact"));
-      return;
-    }
     var btn = $("crm-pt-enroll", state.root);
     if (btn) btn.disabled = true;
     setFoot(state, t("pipe_enrolling"));
     try {
-      await api("/api/staff/nurture-enroll" + buildEnrollQuery(state), null, { method: "POST" });
+      await api("/api/staff/nurture-pipeline" + buildPipelineQuery(state), null, { method: "POST" });
       setFoot(state, t("pipe_enrolled_ok"));
       await loadPipeline(state);
     } catch (e) {
@@ -526,13 +412,19 @@
     }
   }
 
-  function bindPatch(state, btnId, url) {
+  function bindAction(state, btnId, action) {
     var btn = $(btnId, state.root);
     if (!btn) return;
     btn.addEventListener("click", async function () {
-      if (!state.contactId) return;
+      if (!state.leadId) return;
       try {
-        await api(url + "?contactId=" + encodeURIComponent(state.contactId), null, { method: "PATCH" });
+        var qs = buildPipelineQuery(state);
+        var sep = qs.indexOf("?") >= 0 ? "&" : "?";
+        await api(
+          "/api/staff/nurture-pipeline" + qs + sep + "action=" + encodeURIComponent(action),
+          null,
+          { method: "PATCH" }
+        );
         setFoot(state, t("pipe_updated"));
         await loadPipeline(state);
       } catch (e) {
@@ -554,16 +446,10 @@
         void loadPipeline(state);
       });
     }
-    bindPatch(state, "crm-pt-pause", "/api/staff/nurture-pause");
-    bindPatch(state, "crm-pt-resume", "/api/staff/nurture-resume");
-    bindPatch(state, "crm-pt-sold", "/api/staff/nurture-clear-sold");
-    bindPatch(state, "crm-pt-optout", "/api/staff/nurture-clear-opt-out");
-    var linkBtn = $("crm-pt-link", state.root);
-    if (linkBtn) {
-      linkBtn.addEventListener("click", function () {
-        void linkContactRecord(state);
-      });
-    }
+    bindAction(state, "crm-pt-pause", "pause");
+    bindAction(state, "crm-pt-resume", "resume");
+    bindAction(state, "crm-pt-sold", "sold");
+    bindAction(state, "crm-pt-optout", "opt_out");
     var enrollBtn = $("crm-pt-enroll", state.root);
     if (enrollBtn) {
       enrollBtn.addEventListener("click", function () {
@@ -575,15 +461,15 @@
   async function mount(rootEl, opts) {
     if (!rootEl) return;
     var detail = opts.detail || {};
-    var contactId = resolveContactId(detail);
 
     var state = {
       root: rootEl,
       leadId: opts.leadId || detail.id,
+      leadSourceTable: leadSourceTable(detail),
       detail: detail,
       contactId: resolveContactId(detail),
-      contactFound: false,
       enrolled: false,
+      canEnroll: false,
       entry: null,
       stepIndex: 0,
     };
