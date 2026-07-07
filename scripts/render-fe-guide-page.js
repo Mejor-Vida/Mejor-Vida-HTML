@@ -12,6 +12,7 @@ const DEFAULTS_FILE = path.join(GUIDES_DIR, "_defaults.json");
 const SHELL = path.join(ROOT, "blog/_fe-guide-shell.html");
 const HEADER_SRC = path.join(ROOT, "includes/site-header-inner.html");
 const FOOTER_SRC = path.join(ROOT, "includes/site-footer-inner.html");
+const { renderTocChrome } = require("../lib/fe-guide-catalog");
 const FAQ_INDEX = path.join(ROOT, "data/fe-guide-faq-index.json");
 const BASE = "https://www.mejorvidainsurance.com";
 
@@ -34,6 +35,7 @@ function mergeGuide(raw, defaults) {
     ...raw,
     disclosures: raw.disclosures || defaults.disclosures || [],
     keyTakeaways: raw.keyTakeaways || [],
+    transparencyDisclosures: raw.transparencyDisclosures || defaults.transparencyDisclosures || null,
   };
 }
 
@@ -57,11 +59,48 @@ function formatDateEs(iso) {
   return `${d} de ${months[m - 1]} de ${y}`;
 }
 
+function renderTransparencyModal(guide) {
+  const t = guide.transparencyDisclosures;
+  if (!t || !Array.isArray(t.sections) || !t.sections.length) return "";
+
+  const pageUrl = t.learnMorePageUrl || "../divulgaciones-editoriales.html";
+  const sectionsHtml = t.sections
+    .map((section) => {
+      const learnHref = section.externalUrl
+        ? section.externalUrl
+        : pageUrl + (section.learnMoreAnchor || `#${section.id || ""}`);
+      const learnLabel = section.learnMoreLabel || "Más información";
+      const learnTarget = section.externalUrl ? ' rel="noopener" target="_blank"' : "";
+      return (
+        `<section class="fe-guide-transparency-section">` +
+        `<h3>${escHtml(section.title)}</h3>` +
+        `<p>${escHtml(section.body)}</p>` +
+        `<p><a href="${escHtml(learnHref)}"${learnTarget}>${escHtml(learnLabel)}</a></p>` +
+        `</section>`
+      );
+    })
+    .join("\n");
+
+  return (
+    `<div class="fe-guide-modal-backdrop" id="fe-guide-disclosures-modal-backdrop" hidden>` +
+    `<div aria-labelledby="fe-guide-disclosures-modal-title" aria-modal="true" class="fe-guide-modal fe-guide-modal--wide" id="fe-guide-disclosures-modal" role="dialog">` +
+    `<div class="fe-guide-modal-header">` +
+    `<h2 id="fe-guide-disclosures-modal-title">${escHtml(t.modalTitle || t.heroLinkLabel || "Divulgaciones")}</h2>` +
+    `<button type="button" class="fe-guide-modal-close" id="fe-guide-disclosures-modal-close" aria-label="Cerrar">×</button>` +
+    `</div>` +
+    `<div class="fe-guide-modal-body fe-guide-modal-body--transparency">` +
+    sectionsHtml +
+    `</div>` +
+    `</div>` +
+    `</div>`
+  );
+}
+
 function renderGuide(guide, faqIndex, shell) {
   const canonical = `${BASE}/blog/${guide.slug}.html`;
   const answerText = guide.paragraphs.join(" ");
   const headline = guide.headline || guide.question;
-  const pageTitle = guide.pageTitle || `${headline} — Guía de Julie`;
+  const pageTitle = guide.pageTitle || `${headline} — Guía de Mejor Vida`;
   const ogTitle = guide.pageTitle || headline;
   const alternateLine = guide.alternateNamesLine || "";
   const alternateNamesHtml = alternateLine
@@ -103,14 +142,9 @@ function renderGuide(guide, faqIndex, shell) {
     headline: alternateLine ? `${headline} — ${alternateLine}` : headline,
     description: guide.metaDescription || guide.dek,
     author: {
-      "@type": "Person",
-      name: guide.authorName,
-      jobTitle: guide.authorTitle,
-      worksFor: {
-        "@type": "Organization",
-        name: "Mejor Vida Insurance LLC",
-        url: `${BASE}/`,
-      },
+      "@type": "Organization",
+      name: guide.authorName || "Mejor Vida Insurance LLC",
+      url: `${BASE}/`,
     },
     editor: {
       "@type": "Organization",
@@ -156,7 +190,7 @@ function renderGuide(guide, faqIndex, shell) {
         "@type": "ListItem",
         position: 2,
         name: "Respuestas sobre gastos finales",
-        item: `${BASE}/index.html#final-expense-answers`,
+        item: `${BASE}/guias-gastos-finales.html`,
       },
       { "@type": "ListItem", position: 3, name: guide.question, item: canonical },
     ],
@@ -182,6 +216,15 @@ function renderGuide(guide, faqIndex, shell) {
     .replace(/\{\{QUESTION\}\}/g, escHtml(guide.question))
     .replace(/\{\{DEK\}\}/g, escHtml(guide.dek))
     .replace(/\{\{DATE_DISPLAY\}\}/g, escHtml(formatDateEs(guide.modified || guide.published)))
+    .replace(/\{\{TRANSPARENCY_LINK_LABEL\}\}/g, escHtml(guide.transparencyDisclosures?.heroLinkLabel || "Divulgaciones"))
+    .replace(/\{\{GUIDE_TOC_CHROME\}\}/g, renderTocChrome({
+      currentSlug: guide.slug,
+      hubPrefix: "../",
+      inBlogDir: true,
+      includePageSections: true,
+      includeHubLink: true,
+    }))
+    .replace(/\{\{TRANSPARENCY_MODAL\}\}/g, renderTransparencyModal(guide))
     .replace(/\{\{CANONICAL_URL\}\}/g, canonical)
     .replace(/\{\{KEY_TAKEAWAYS_LIST\}\}/g, takeawaysHtml)
     .replace(/\{\{BODY_PARAGRAPHS\}\}/g, paragraphsHtml)

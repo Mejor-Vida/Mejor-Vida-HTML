@@ -288,6 +288,15 @@
     "keepPng": true
   },
   {
+    "src": "img/landing-v3-quote-cta-hero.jpg",
+    "base": "landing-v3-quote-cta-hero",
+    "width": 640,
+    "height": 640,
+    "webp": "img/opt/landing-v3-quote-cta-hero.webp",
+    "fallback": "img/opt/landing-v3-quote-cta-hero.jpg",
+    "keepPng": false
+  },
+  {
     "src": "img/3-1-2026-Blog.png",
     "base": "3-1-2026-Blog",
     "width": 1013,

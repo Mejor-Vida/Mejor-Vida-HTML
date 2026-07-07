@@ -97,6 +97,14 @@
         "@type": "Answer",
         "text": "Emisión simplificada, modificada y garantizada — cómo difieren en salud, espera y aprobación."
       }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cuánto cuesta un seguro de gastos finales?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Rangos de precio por edad, tabaco y cobertura — con ejemplos para Nebraska."
+      }
     }
   ]
 }
@@ -113,6 +121,7 @@
 <link href="css/mvi-assistant-widget.css" rel="stylesheet">
 <link href="css/site-footer.css" rel="stylesheet">
 <link href="css/fe-guide.css" rel="stylesheet">
+<link href="css/nav-questions-dropdown.css" rel="stylesheet">
 <style>
     /* Smooth scrolling */
     html { scroll-behavior: smooth; }
@@ -873,16 +882,20 @@
 
     /* Custom header: 81px, logo 111px; nav links right-aligned with even gap */
     header.sticky-top {
-      height: 81px !important;
+      height: auto !important;
+      min-height: 81px;
       padding: 0 !important;
+      overflow: visible !important;
     }
     header.sticky-top > .container {
-      height: 100% !important;
+      height: auto !important;
+      min-height: 81px;
       padding-top: 0 !important;
       padding-bottom: 0 !important;
       padding-left: 0 !important;
       display: flex !important;
       align-items: center !important;
+      overflow: visible !important;
     }
     .header-inner {
       display: flex !important;
@@ -890,6 +903,7 @@
       justify-content: flex-start !important;
       gap: 0;
       width: 100%;
+      overflow: visible !important;
     }
     .header-logo-wrap {
       flex: 0 0 auto;
@@ -961,6 +975,7 @@
       gap: 0.35rem 0.72rem !important;
       justify-content: flex-start !important;
       padding-right: 0.5rem;
+      overflow: visible !important;
     }
     .header-inner > .d-flex.align-items-center.gap-2,
     .header-inner > .header-actions {
@@ -1249,9 +1264,19 @@
 
         <nav class="desktop-nav d-none d-lg-flex align-items-center">
           <a href="about-julie.html" class="nav-link-cm nav-link-stack">Sobre Julie</a>
-          <a href="index.html#final-expense-answers" class="nav-link-cm nav-link-stack nav-link-questions-wrap" title="¿Tienes preguntas sobre gastos finales?">
-            <i class="fas fa-robot" style="font-size: 0.95em; opacity: 0.88;" aria-hidden="true"></i><span>¿Tienes preguntas?</span>
-          </a>
+          <div class="nav-questions-dropdown">
+            <button type="button" class="nav-link-cm nav-link-stack nav-link-questions-wrap nav-questions-dropdown-trigger" id="nav-questions-trigger" aria-expanded="false" aria-haspopup="true" title="¿Tienes preguntas sobre gastos finales?">
+              <i class="fas fa-robot" style="font-size: 0.95em; opacity: 0.88;" aria-hidden="true"></i><span>¿Tienes preguntas?</span>
+            </button>
+            <div class="nav-questions-dropdown-menu" hidden>
+              <button type="button" class="nav-questions-dropdown-item" data-mvi-open-chat>
+                <i class="fas fa-comments" aria-hidden="true"></i> Asistente de chat MVI
+              </button>
+              <a href="guias-gastos-finales.html" class="nav-questions-dropdown-item">
+                <i class="fas fa-book-open" aria-hidden="true"></i> Seguro de gastos finales
+              </a>
+            </div>
+          </div>
           <a href="blog.html" class="nav-link-cm">Blog</a>
           <a href="final-expense-estimator.html" class="nav-link-cm nav-link-fe-calc-wrap">Calculadora de gastos finales</a>
           <a href="contact.html" class="nav-link-cm">Contacto</a>
@@ -1276,7 +1301,9 @@
 
     <div class="mobile-menu" id="mobile-menu">
       <a href="about-julie.html" class="mobile-menu-link">Sobre Julie</a>
-      <a href="index.html#final-expense-answers" class="mobile-menu-link">¿Tienes preguntas?</a>
+      <p class="mobile-menu-sublabel">¿Tienes preguntas?</p>
+      <button type="button" class="mobile-menu-link mobile-menu-link--action" data-mvi-open-chat>Asistente de chat MVI</button>
+      <a href="guias-gastos-finales.html" class="mobile-menu-link">Guías de gastos finales</a>
       <a href="blog.html" class="mobile-menu-link">Blog</a>
       <a href="final-expense-estimator.html" class="mobile-menu-link fw-bold" style="color:#0D47A1;">Calculadora de gastos finales</a>
       <a href="contact.html" class="mobile-menu-link">Contacto</a>
@@ -1671,7 +1698,7 @@
 <div class="text-center mb-5">
 <h2 class="h2 fw-bold mb-3" style="color:#1a365d;">Respuestas sobre tu seguro de gastos finales</h2>
 
-<p class="fs-5 text-body-secondary">Guías escritas por Julie sobre los temas que más preguntan las familias en Nebraska. Cada pregunta tiene su propia página con información detallada. Para su caso personal, use la <a href="quote.html">cotización en línea</a> o el asistente de chat.</p>
+<p class="fs-5 text-body-secondary">Guías escritas por Mejor Vida Insurance sobre los temas que más preguntan las familias en Nebraska. Cada pregunta tiene su propia página con información detallada. <a href="guias-gastos-finales.html">Ver índice completo de guías</a> · Para su caso personal, use la <a href="quote.html">cotización en línea</a> o el asistente de chat.</p>
 
 </div>
       <!-- FE_GUIDE_FAQ_CARDS_START -->
@@ -1681,22 +1708,21 @@
           <article class="bg-white rounded-3 p-4 shadow-sm h-100 fe-guide-faq-card position-relative">
             <h3 class="h6 fw-bold mb-2" style="color:#1a365d;"><a class="text-decoration-none stretched-link" style="color:#1a365d;" href="blog/que-es-seguro-gastos-finales.html">¿Qué es un seguro de gastos finales?</a></h3>
             <p class="small text-body-secondary lh-base mb-2">Qué cubre, para quién sirve y cómo ayuda a su familia con el funeral y deudas pequeñas.</p>
-            <p class="small mb-0"><span class="text-primary fw-semibold">Guía de Julie →</span></p>
+            <p class="small mb-0"><span class="text-primary fw-semibold">Guía de Mejor Vida →</span></p>
           </article>
         </div>
         <div class="col-md-6 col-lg-4">
           <article class="bg-white rounded-3 p-4 shadow-sm h-100 fe-guide-faq-card position-relative">
             <h3 class="h6 fw-bold mb-2" style="color:#1a365d;"><a class="text-decoration-none stretched-link" style="color:#1a365d;" href="blog/tipos-planes-seguro-gastos-finales.html">¿Qué tipos de planes existen?</a></h3>
             <p class="small text-body-secondary lh-base mb-2">Emisión simplificada, modificada y garantizada — cómo difieren en salud, espera y aprobación.</p>
-            <p class="small mb-0"><span class="text-primary fw-semibold">Guía de Julie →</span></p>
+            <p class="small mb-0"><span class="text-primary fw-semibold">Guía de Mejor Vida →</span></p>
           </article>
         </div>
         <div class="col-md-6 col-lg-4">
-          <article class="rounded-3 p-4 h-100 fe-guide-faq-card fe-guide-faq-card--soon" aria-disabled="true">
-            <p class="fe-guide-faq-soon-badge mb-2">Próximamente</p>
-            <h3 class="h6 fw-bold mb-2 fe-guide-faq-soon-title">¿Cuánto cuesta un seguro de gastos finales?</h3>
-            <p class="small lh-base mb-2 fe-guide-faq-soon-teaser">Rangos de precio por edad, tabaco y cobertura — con ejemplos para Nebraska.</p>
-            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Julie</p>
+          <article class="bg-white rounded-3 p-4 shadow-sm h-100 fe-guide-faq-card position-relative">
+            <h3 class="h6 fw-bold mb-2" style="color:#1a365d;"><a class="text-decoration-none stretched-link" style="color:#1a365d;" href="blog/cuanto-cuesta-seguro-gastos-finales.html">¿Cuánto cuesta un seguro de gastos finales?</a></h3>
+            <p class="small text-body-secondary lh-base mb-2">Rangos de precio por edad, tabaco y cobertura — con ejemplos para Nebraska.</p>
+            <p class="small mb-0"><span class="text-primary fw-semibold">Guía de Mejor Vida →</span></p>
           </article>
         </div>
         <div class="col-md-6 col-lg-4">
@@ -1704,7 +1730,7 @@
             <p class="fe-guide-faq-soon-badge mb-2">Próximamente</p>
             <h3 class="h6 fw-bold mb-2 fe-guide-faq-soon-title">¿Se encarga Medicare de pagar los gastos finales?</h3>
             <p class="small lh-base mb-2 fe-guide-faq-soon-teaser">Qué paga Medicare, qué no cubre y por qué muchas familias necesitan otra protección.</p>
-            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Julie</p>
+            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Mejor Vida</p>
           </article>
         </div>
         <div class="col-md-6 col-lg-4">
@@ -1712,7 +1738,7 @@
             <p class="fe-guide-faq-soon-badge mb-2">Próximamente</p>
             <h3 class="h6 fw-bold mb-2 fe-guide-faq-soon-title">¿Cuál es la diferencia entre seguro de vida y seguro de gastos finales?</h3>
             <p class="small lh-base mb-2 fe-guide-faq-soon-teaser">Compare propósito, montos de cobertura y cuándo conviene cada uno.</p>
-            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Julie</p>
+            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Mejor Vida</p>
           </article>
         </div>
         <div class="col-md-6 col-lg-4">
@@ -1720,7 +1746,7 @@
             <p class="fe-guide-faq-soon-badge mb-2">Próximamente</p>
             <h3 class="h6 fw-bold mb-2 fe-guide-faq-soon-title">¿Qué pasa si no tengo seguro de gastos finales?</h3>
             <p class="small lh-base mb-2 fe-guide-faq-soon-teaser">Riesgos para la familia, costos del funeral y alternativas para planificar.</p>
-            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Julie</p>
+            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Mejor Vida</p>
           </article>
         </div>
         <div class="col-md-6 col-lg-4">
@@ -1728,7 +1754,7 @@
             <p class="fe-guide-faq-soon-badge mb-2">Próximamente</p>
             <h3 class="h6 fw-bold mb-2 fe-guide-faq-soon-title">¿Qué son las pólizas de gastos finales?</h3>
             <p class="small lh-base mb-2 fe-guide-faq-soon-teaser">Tipos de pólizas, beneficios en vida y cómo funcionan las primas niveladas.</p>
-            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Julie</p>
+            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Mejor Vida</p>
           </article>
         </div>
       </div>
@@ -1739,7 +1765,7 @@
             <p class="fe-guide-faq-soon-badge mb-2">Próximamente</p>
             <h3 class="h6 fw-bold mb-2 fe-guide-faq-soon-title">¿Cuánto cuesta un funeral en Nebraska?</h3>
             <p class="small lh-base mb-2 fe-guide-faq-soon-teaser">Promedios locales, entierro vs cremación y cómo se relaciona con su cobertura.</p>
-            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Julie</p>
+            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Mejor Vida</p>
           </article>
         </div>
         <div class="col-md-6 col-lg-4">
@@ -1747,7 +1773,7 @@
             <p class="fe-guide-faq-soon-badge mb-2">Próximamente</p>
             <h3 class="h6 fw-bold mb-2 fe-guide-faq-soon-title">¿Cuánta cobertura de gastos finales necesito?</h3>
             <p class="small lh-base mb-2 fe-guide-faq-soon-teaser">$5,000, $10,000 o $15,000 — cómo elegir el monto adecuado.</p>
-            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Julie</p>
+            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Mejor Vida</p>
           </article>
         </div>
         <div class="col-md-6 col-lg-4">
@@ -1755,7 +1781,7 @@
             <p class="fe-guide-faq-soon-badge mb-2">Próximamente</p>
             <h3 class="h6 fw-bold mb-2 fe-guide-faq-soon-title">¿Qué factores afectan el precio del seguro de gastos finales?</h3>
             <p class="small lh-base mb-2 fe-guide-faq-soon-teaser">Edad, salud, tabaco, compañía y monto de beneficio explicados en sencillo.</p>
-            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Julie</p>
+            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Mejor Vida</p>
           </article>
         </div>
         <div class="col-md-6 col-lg-4">
@@ -1763,15 +1789,15 @@
             <p class="fe-guide-faq-soon-badge mb-2">Próximamente</p>
             <h3 class="h6 fw-bold mb-2 fe-guide-faq-soon-title">¿Necesito examen médico para un seguro de gastos finales?</h3>
             <p class="small lh-base mb-2 fe-guide-faq-soon-teaser">Pólizas sin examen, cuestionarios de salud y qué esperar al aplicar.</p>
-            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Julie</p>
+            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Mejor Vida</p>
           </article>
         </div>
         <div class="col-md-6 col-lg-4">
           <article class="rounded-3 p-4 h-100 fe-guide-faq-card fe-guide-faq-card--soon" aria-disabled="true">
             <p class="fe-guide-faq-soon-badge mb-2">Próximamente</p>
             <h3 class="h6 fw-bold mb-2 fe-guide-faq-soon-title">¿Puedo obtener seguro de gastos finales si tengo problemas de salud?</h3>
-            <p class="small lh-base mb-2 fe-guide-faq-soon-teaser">Opciones graduadas, aceptación garantizada y cómo Julie compara compañías.</p>
-            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Julie</p>
+            <p class="small lh-base mb-2 fe-guide-faq-soon-teaser">Opciones graduadas, aceptación garantizada y cómo Mejor Vida compara compañías.</p>
+            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Mejor Vida</p>
           </article>
         </div>
         <div class="col-md-6 col-lg-4">
@@ -1779,7 +1805,7 @@
             <p class="fe-guide-faq-soon-badge mb-2">Próximamente</p>
             <h3 class="h6 fw-bold mb-2 fe-guide-faq-soon-title">¿Puedo obtener seguro de gastos finales si fumo?</h3>
             <p class="small lh-base mb-2 fe-guide-faq-soon-teaser">Cómo el tabaco afecta la prima y qué alternativas existen.</p>
-            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Julie</p>
+            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Mejor Vida</p>
           </article>
         </div>
         <div class="col-md-6 col-lg-4">
@@ -1787,7 +1813,7 @@
             <p class="fe-guide-faq-soon-badge mb-2">Próximamente</p>
             <h3 class="h6 fw-bold mb-2 fe-guide-faq-soon-title">¿A qué edad conviene contratar un seguro de gastos finales?</h3>
             <p class="small lh-base mb-2 fe-guide-faq-soon-teaser">50s, 60s, 70s y más — por qué antes suele ser más económico.</p>
-            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Julie</p>
+            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Mejor Vida</p>
           </article>
         </div>
         <div class="col-md-6 col-lg-4">
@@ -1795,7 +1821,7 @@
             <p class="fe-guide-faq-soon-badge mb-2">Próximamente</p>
             <h3 class="h6 fw-bold mb-2 fe-guide-faq-soon-title">¿Cuánto tiempo tarda en aprobarse una póliza de gastos finales?</h3>
             <p class="small lh-base mb-2 fe-guide-faq-soon-teaser">Pasos desde la cotización hasta la emisión, y qué puede acelerar el proceso.</p>
-            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Julie</p>
+            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Mejor Vida</p>
           </article>
         </div>
       </div>
@@ -1806,15 +1832,15 @@
             <p class="fe-guide-faq-soon-badge mb-2">Próximamente</p>
             <h3 class="h6 fw-bold mb-2 fe-guide-faq-soon-title">Seguro de gastos finales en Nebraska — guía en español</h3>
             <p class="small lh-base mb-2 fe-guide-faq-soon-teaser">Opciones, compañías y cómo trabajar con un agente local en su idioma.</p>
-            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Julie</p>
+            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Mejor Vida</p>
           </article>
         </div>
         <div class="col-md-6 col-lg-4">
           <article class="rounded-3 p-4 h-100 fe-guide-faq-card fe-guide-faq-card--soon" aria-disabled="true">
             <p class="fe-guide-faq-soon-badge mb-2">Próximamente</p>
             <h3 class="h6 fw-bold mb-2 fe-guide-faq-soon-title">Agente de seguros de gastos finales en español en Nebraska</h3>
-            <p class="small lh-base mb-2 fe-guide-faq-soon-teaser">Qué hace un agente independiente y cómo Julie le ayuda a comparar.</p>
-            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Julie</p>
+            <p class="small lh-base mb-2 fe-guide-faq-soon-teaser">Qué hace un agente independiente y cómo Mejor Vida le ayuda a comparar.</p>
+            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Mejor Vida</p>
           </article>
         </div>
         <div class="col-md-6 col-lg-4">
@@ -1822,7 +1848,7 @@
             <p class="fe-guide-faq-soon-badge mb-2">Próximamente</p>
             <h3 class="h6 fw-bold mb-2 fe-guide-faq-soon-title">¿Ofrecen seguro de gastos finales en español?</h3>
             <p class="small lh-base mb-2 fe-guide-faq-soon-teaser">Atención bilingüe, documentos y proceso de cotización en español.</p>
-            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Julie</p>
+            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Mejor Vida</p>
           </article>
         </div>
         <div class="col-md-6 col-lg-4">
@@ -1830,7 +1856,7 @@
             <p class="fe-guide-faq-soon-badge mb-2">Próximamente</p>
             <h3 class="h6 fw-bold mb-2 fe-guide-faq-soon-title">Seguro funerario para hispanos en Nebraska</h3>
             <p class="small lh-base mb-2 fe-guide-faq-soon-teaser">Planificación cultural, familia y protección financiera en español.</p>
-            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Julie</p>
+            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Mejor Vida</p>
           </article>
         </div>
       </div>
@@ -1841,7 +1867,7 @@
             <p class="fe-guide-faq-soon-badge mb-2">Próximamente</p>
             <h3 class="h6 fw-bold mb-2 fe-guide-faq-soon-title">Seguro de gastos finales en Omaha</h3>
             <p class="small lh-base mb-2 fe-guide-faq-soon-teaser">Guía para familias del área metropolitana de Omaha y alrededores.</p>
-            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Julie</p>
+            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Mejor Vida</p>
           </article>
         </div>
         <div class="col-md-6 col-lg-4">
@@ -1849,7 +1875,7 @@
             <p class="fe-guide-faq-soon-badge mb-2">Próximamente</p>
             <h3 class="h6 fw-bold mb-2 fe-guide-faq-soon-title">Seguro de gastos finales en Lincoln</h3>
             <p class="small lh-base mb-2 fe-guide-faq-soon-teaser">Opciones y planificación para la capital de Nebraska y el condado de Lancaster.</p>
-            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Julie</p>
+            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Mejor Vida</p>
           </article>
         </div>
         <div class="col-md-6 col-lg-4">
@@ -1857,7 +1883,7 @@
             <p class="fe-guide-faq-soon-badge mb-2">Próximamente</p>
             <h3 class="h6 fw-bold mb-2 fe-guide-faq-soon-title">Seguro de gastos finales en Bellevue</h3>
             <p class="small lh-base mb-2 fe-guide-faq-soon-teaser">Cobertura para familias en Bellevue y el este del área de Omaha.</p>
-            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Julie</p>
+            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Mejor Vida</p>
           </article>
         </div>
         <div class="col-md-6 col-lg-4">
@@ -1865,7 +1891,7 @@
             <p class="fe-guide-faq-soon-badge mb-2">Próximamente</p>
             <h3 class="h6 fw-bold mb-2 fe-guide-faq-soon-title">Seguro de gastos finales en Grand Island</h3>
             <p class="small lh-base mb-2 fe-guide-faq-soon-teaser">Información para el centro de Nebraska y el condado de Hall.</p>
-            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Julie</p>
+            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Mejor Vida</p>
           </article>
         </div>
         <div class="col-md-6 col-lg-4">
@@ -1873,7 +1899,7 @@
             <p class="fe-guide-faq-soon-badge mb-2">Próximamente</p>
             <h3 class="h6 fw-bold mb-2 fe-guide-faq-soon-title">Seguro de gastos finales en Kearney</h3>
             <p class="small lh-base mb-2 fe-guide-faq-soon-teaser">Planificación de gastos finales para familias en Kearney y Buffalo County.</p>
-            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Julie</p>
+            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Mejor Vida</p>
           </article>
         </div>
         <div class="col-md-6 col-lg-4">
@@ -1881,7 +1907,7 @@
             <p class="fe-guide-faq-soon-badge mb-2">Próximamente</p>
             <h3 class="h6 fw-bold mb-2 fe-guide-faq-soon-title">Seguro de gastos finales en Fremont</h3>
             <p class="small lh-base mb-2 fe-guide-faq-soon-teaser">Guía para el noreste de Nebraska y el condado de Dodge.</p>
-            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Julie</p>
+            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Mejor Vida</p>
           </article>
         </div>
         <div class="col-md-6 col-lg-4">
@@ -1889,7 +1915,7 @@
             <p class="fe-guide-faq-soon-badge mb-2">Próximamente</p>
             <h3 class="h6 fw-bold mb-2 fe-guide-faq-soon-title">Seguro de gastos finales en Hastings</h3>
             <p class="small lh-base mb-2 fe-guide-faq-soon-teaser">Cobertura y costos funerarios para familias en Hastings y Adams County.</p>
-            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Julie</p>
+            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Mejor Vida</p>
           </article>
         </div>
         <div class="col-md-6 col-lg-4">
@@ -1897,7 +1923,7 @@
             <p class="fe-guide-faq-soon-badge mb-2">Próximamente</p>
             <h3 class="h6 fw-bold mb-2 fe-guide-faq-soon-title">Seguro de gastos finales en Norfolk</h3>
             <p class="small lh-base mb-2 fe-guide-faq-soon-teaser">Opciones para el noreste de Nebraska y el condado de Madison.</p>
-            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Julie</p>
+            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Mejor Vida</p>
           </article>
         </div>
         <div class="col-md-6 col-lg-4">
@@ -1905,7 +1931,7 @@
             <p class="fe-guide-faq-soon-badge mb-2">Próximamente</p>
             <h3 class="h6 fw-bold mb-2 fe-guide-faq-soon-title">Seguro de gastos finales en North Platte</h3>
             <p class="small lh-base mb-2 fe-guide-faq-soon-teaser">Planificación para el oeste de Nebraska y Lincoln County.</p>
-            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Julie</p>
+            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Mejor Vida</p>
           </article>
         </div>
         <div class="col-md-6 col-lg-4">
@@ -1913,7 +1939,7 @@
             <p class="fe-guide-faq-soon-badge mb-2">Próximamente</p>
             <h3 class="h6 fw-bold mb-2 fe-guide-faq-soon-title">Seguro de gastos finales en Columbus</h3>
             <p class="small lh-base mb-2 fe-guide-faq-soon-teaser">Información para familias en Columbus y Platte County.</p>
-            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Julie</p>
+            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Mejor Vida</p>
           </article>
         </div>
         <div class="col-md-6 col-lg-4">
@@ -1921,7 +1947,7 @@
             <p class="fe-guide-faq-soon-badge mb-2">Próximamente</p>
             <h3 class="h6 fw-bold mb-2 fe-guide-faq-soon-title">Seguro de gastos finales en Papillion</h3>
             <p class="small lh-base mb-2 fe-guide-faq-soon-teaser">Guía para Papillion, Sarpy County y el sur del área de Omaha.</p>
-            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Julie</p>
+            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Mejor Vida</p>
           </article>
         </div>
         <div class="col-md-6 col-lg-4">
@@ -1929,7 +1955,7 @@
             <p class="fe-guide-faq-soon-badge mb-2">Próximamente</p>
             <h3 class="h6 fw-bold mb-2 fe-guide-faq-soon-title">Seguro de gastos finales en La Vista</h3>
             <p class="small lh-base mb-2 fe-guide-faq-soon-teaser">Cobertura para familias en La Vista y el condado de Sarpy.</p>
-            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Julie</p>
+            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Mejor Vida</p>
           </article>
         </div>
         <div class="col-md-6 col-lg-4">
@@ -1937,7 +1963,7 @@
             <p class="fe-guide-faq-soon-badge mb-2">Próximamente</p>
             <h3 class="h6 fw-bold mb-2 fe-guide-faq-soon-title">Seguro de gastos finales en Scottsbluff</h3>
             <p class="small lh-base mb-2 fe-guide-faq-soon-teaser">Opciones en el Panhandle de Nebraska y Scotts Bluff County.</p>
-            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Julie</p>
+            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Mejor Vida</p>
           </article>
         </div>
         <div class="col-md-6 col-lg-4">
@@ -1945,7 +1971,7 @@
             <p class="fe-guide-faq-soon-badge mb-2">Próximamente</p>
             <h3 class="h6 fw-bold mb-2 fe-guide-faq-soon-title">Seguro de gastos finales en South Sioux City</h3>
             <p class="small lh-base mb-2 fe-guide-faq-soon-teaser">Planificación para familias en el noreste de Nebraska, cerca de Dakota del Sur.</p>
-            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Julie</p>
+            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Mejor Vida</p>
           </article>
         </div>
         <div class="col-md-6 col-lg-4">
@@ -1953,7 +1979,7 @@
             <p class="fe-guide-faq-soon-badge mb-2">Próximamente</p>
             <h3 class="h6 fw-bold mb-2 fe-guide-faq-soon-title">Seguro de gastos finales en Beatrice</h3>
             <p class="small lh-base mb-2 fe-guide-faq-soon-teaser">Guía para el sureste de Nebraska y Gage County.</p>
-            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Julie</p>
+            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Mejor Vida</p>
           </article>
         </div>
         <div class="col-md-6 col-lg-4">
@@ -1961,7 +1987,7 @@
             <p class="fe-guide-faq-soon-badge mb-2">Próximamente</p>
             <h3 class="h6 fw-bold mb-2 fe-guide-faq-soon-title">Seguro de gastos finales en Lexington</h3>
             <p class="small lh-base mb-2 fe-guide-faq-soon-teaser">Información para familias en Lexington y el condado de Dawson.</p>
-            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Julie</p>
+            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Mejor Vida</p>
           </article>
         </div>
         <div class="col-md-6 col-lg-4">
@@ -1969,7 +1995,7 @@
             <p class="fe-guide-faq-soon-badge mb-2">Próximamente</p>
             <h3 class="h6 fw-bold mb-2 fe-guide-faq-soon-title">Seguro de gastos finales en Alliance</h3>
             <p class="small lh-base mb-2 fe-guide-faq-soon-teaser">Cobertura y planificación para el oeste de Nebraska y Box Butte County.</p>
-            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Julie</p>
+            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Mejor Vida</p>
           </article>
         </div>
         <div class="col-md-6 col-lg-4">
@@ -1977,7 +2003,7 @@
             <p class="fe-guide-faq-soon-badge mb-2">Próximamente</p>
             <h3 class="h6 fw-bold mb-2 fe-guide-faq-soon-title">Seguro de gastos finales en McCook</h3>
             <p class="small lh-base mb-2 fe-guide-faq-soon-teaser">Opciones para el suroeste de Nebraska y Red Willow County.</p>
-            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Julie</p>
+            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Mejor Vida</p>
           </article>
         </div>
         <div class="col-md-6 col-lg-4">
@@ -1985,7 +2011,7 @@
             <p class="fe-guide-faq-soon-badge mb-2">Próximamente</p>
             <h3 class="h6 fw-bold mb-2 fe-guide-faq-soon-title">Seguro de gastos finales en Crete</h3>
             <p class="small lh-base mb-2 fe-guide-faq-soon-teaser">Guía para familias en Crete y el sureste del área de Lincoln.</p>
-            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Julie</p>
+            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Mejor Vida</p>
           </article>
         </div>
         <div class="col-md-6 col-lg-4">
@@ -1993,7 +2019,7 @@
             <p class="fe-guide-faq-soon-badge mb-2">Próximamente</p>
             <h3 class="h6 fw-bold mb-2 fe-guide-faq-soon-title">Seguro de gastos finales en Schuyler</h3>
             <p class="small lh-base mb-2 fe-guide-faq-soon-teaser">Planificación para Schuyler y el condado de Colfax.</p>
-            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Julie</p>
+            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Mejor Vida</p>
           </article>
         </div>
       </div>
@@ -2004,15 +2030,15 @@
             <p class="fe-guide-faq-soon-badge mb-2">Próximamente</p>
             <h3 class="h6 fw-bold mb-2 fe-guide-faq-soon-title">¿Qué compañías ofrecen seguro de gastos finales?</h3>
             <p class="small lh-base mb-2 fe-guide-faq-soon-teaser">Assurity, Mutual of Omaha, American Amicable y cómo comparar opciones.</p>
-            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Julie</p>
+            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Mejor Vida</p>
           </article>
         </div>
         <div class="col-md-6 col-lg-4">
           <article class="rounded-3 p-4 h-100 fe-guide-faq-card fe-guide-faq-card--soon" aria-disabled="true">
             <p class="fe-guide-faq-soon-badge mb-2">Próximamente</p>
             <h3 class="h6 fw-bold mb-2 fe-guide-faq-soon-title">Mutual of Omaha vs American Amicable — gastos finales</h3>
-            <p class="small lh-base mb-2 fe-guide-faq-soon-teaser">Diferencias generales que Julie considera al cotizar.</p>
-            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Julie</p>
+            <p class="small lh-base mb-2 fe-guide-faq-soon-teaser">Diferencias generales que Mejor Vida considera al cotizar.</p>
+            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Mejor Vida</p>
           </article>
         </div>
         <div class="col-md-6 col-lg-4">
@@ -2020,7 +2046,7 @@
             <p class="fe-guide-faq-soon-badge mb-2">Próximamente</p>
             <h3 class="h6 fw-bold mb-2 fe-guide-faq-soon-title">¿Qué es un seguro de vida entero para gastos finales?</h3>
             <p class="small lh-base mb-2 fe-guide-faq-soon-teaser">Vida entero simplificado y por qué es común en gastos finales.</p>
-            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Julie</p>
+            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Mejor Vida</p>
           </article>
         </div>
         <div class="col-md-6 col-lg-4">
@@ -2028,7 +2054,7 @@
             <p class="fe-guide-faq-soon-badge mb-2">Próximamente</p>
             <h3 class="h6 fw-bold mb-2 fe-guide-faq-soon-title">¿Qué es una póliza graduada (graded) de gastos finales?</h3>
             <p class="small lh-base mb-2 fe-guide-faq-soon-teaser">Beneficios parciales al inicio, aceptación y cuándo aplica.</p>
-            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Julie</p>
+            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Mejor Vida</p>
           </article>
         </div>
         <div class="col-md-6 col-lg-4">
@@ -2036,7 +2062,7 @@
             <p class="fe-guide-faq-soon-badge mb-2">Próximamente</p>
             <h3 class="h6 fw-bold mb-2 fe-guide-faq-soon-title">¿El seguro de gastos finales cubre deudas médicas?</h3>
             <p class="small lh-base mb-2 fe-guide-faq-soon-teaser">Uso del beneficio, facturas pendientes y qué puede pagar la familia.</p>
-            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Julie</p>
+            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Mejor Vida</p>
           </article>
         </div>
         <div class="col-md-6 col-lg-4">
@@ -2044,7 +2070,7 @@
             <p class="fe-guide-faq-soon-badge mb-2">Próximamente</p>
             <h3 class="h6 fw-bold mb-2 fe-guide-faq-soon-title">¿Puedo dejar dinero a mi familia además del funeral?</h3>
             <p class="small lh-base mb-2 fe-guide-faq-soon-teaser">Beneficio sobrante, legado pequeño y flexibilidad del pago.</p>
-            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Julie</p>
+            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Mejor Vida</p>
           </article>
         </div>
         <div class="col-md-6 col-lg-4">
@@ -2052,7 +2078,7 @@
             <p class="fe-guide-faq-soon-badge mb-2">Próximamente</p>
             <h3 class="h6 fw-bold mb-2 fe-guide-faq-soon-title">¿Qué es el período de carencia (waiting period)?</h3>
             <p class="small lh-base mb-2 fe-guide-faq-soon-teaser">Primeros meses de la póliza, muerte accidental y lectura de contrato.</p>
-            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Julie</p>
+            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Mejor Vida</p>
           </article>
         </div>
         <div class="col-md-6 col-lg-4">
@@ -2060,7 +2086,7 @@
             <p class="fe-guide-faq-soon-badge mb-2">Próximamente</p>
             <h3 class="h6 fw-bold mb-2 fe-guide-faq-soon-title">¿Puedo cancelar un seguro de gastos finales?</h3>
             <p class="small lh-base mb-2 fe-guide-faq-soon-teaser">Cancelación, dejar de pagar y consecuencias antes de decidir.</p>
-            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Julie</p>
+            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Mejor Vida</p>
           </article>
         </div>
       </div>
@@ -2071,7 +2097,7 @@
             <p class="fe-guide-faq-soon-badge mb-2">Próximamente</p>
             <h3 class="h6 fw-bold mb-2 fe-guide-faq-soon-title">Seguro de gastos finales para personas mayores de 70 años</h3>
             <p class="small lh-base mb-2 fe-guide-faq-soon-teaser">Opciones, precios y aceptación después de los 70.</p>
-            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Julie</p>
+            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Mejor Vida</p>
           </article>
         </div>
         <div class="col-md-6 col-lg-4">
@@ -2079,7 +2105,7 @@
             <p class="fe-guide-faq-soon-badge mb-2">Próximamente</p>
             <h3 class="h6 fw-bold mb-2 fe-guide-faq-soon-title">Seguro de gastos finales para personas mayores de 80 años</h3>
             <p class="small lh-base mb-2 fe-guide-faq-soon-teaser">Qué compañías consideran 80+, límites de edad y expectativas realistas.</p>
-            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Julie</p>
+            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Mejor Vida</p>
           </article>
         </div>
         <div class="col-md-6 col-lg-4">
@@ -2087,7 +2113,7 @@
             <p class="fe-guide-faq-soon-badge mb-2">Próximamente</p>
             <h3 class="h6 fw-bold mb-2 fe-guide-faq-soon-title">Seguro de gastos finales sin examen médico en Nebraska</h3>
             <p class="small lh-base mb-2 fe-guide-faq-soon-teaser">Productos sin examen disponibles en Nebraska y cómo calificar.</p>
-            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Julie</p>
+            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Mejor Vida</p>
           </article>
         </div>
         <div class="col-md-6 col-lg-4">
@@ -2095,7 +2121,7 @@
             <p class="fe-guide-faq-soon-badge mb-2">Próximamente</p>
             <h3 class="h6 fw-bold mb-2 fe-guide-faq-soon-title">¿Vale la pena un seguro de gastos finales con $10,000 de cobertura?</h3>
             <p class="small lh-base mb-2 fe-guide-faq-soon-teaser">Por qué $10,000 es un punto de partida común y si le alcanza.</p>
-            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Julie</p>
+            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Mejor Vida</p>
           </article>
         </div>
         <div class="col-md-6 col-lg-4">
@@ -2103,7 +2129,7 @@
             <p class="fe-guide-faq-soon-badge mb-2">Próximamente</p>
             <h3 class="h6 fw-bold mb-2 fe-guide-faq-soon-title">¿Qué son los gastos finales?</h3>
             <p class="small lh-base mb-2 fe-guide-faq-soon-teaser">Funeral, cremación, deudas y costos que la familia enfrenta.</p>
-            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Julie</p>
+            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Mejor Vida</p>
           </article>
         </div>
         <div class="col-md-6 col-lg-4">
@@ -2111,7 +2137,7 @@
             <p class="fe-guide-faq-soon-badge mb-2">Próximamente</p>
             <h3 class="h6 fw-bold mb-2 fe-guide-faq-soon-title">Cremación vs entierro — ¿cuánto cuesta en Nebraska?</h3>
             <p class="small lh-base mb-2 fe-guide-faq-soon-teaser">Compare costos y cómo influye en la cobertura que necesita.</p>
-            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Julie</p>
+            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Mejor Vida</p>
           </article>
         </div>
         <div class="col-md-6 col-lg-4">
@@ -2119,7 +2145,7 @@
             <p class="fe-guide-faq-soon-badge mb-2">Próximamente</p>
             <h3 class="h6 fw-bold mb-2 fe-guide-faq-soon-title">¿Cómo pagar un funeral sin seguro?</h3>
             <p class="small lh-base mb-2 fe-guide-faq-soon-teaser">Opciones de financiamiento, familia y por qué planificar antes ayuda.</p>
-            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Julie</p>
+            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Mejor Vida</p>
           </article>
         </div>
         <div class="col-md-6 col-lg-4">
@@ -2127,7 +2153,7 @@
             <p class="fe-guide-faq-soon-badge mb-2">Próximamente</p>
             <h3 class="h6 fw-bold mb-2 fe-guide-faq-soon-title">Seguro de gastos finales vs prepago funerario</h3>
             <p class="small lh-base mb-2 fe-guide-faq-soon-teaser">Ventajas y límites de cada opción para su familia.</p>
-            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Julie</p>
+            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Mejor Vida</p>
           </article>
         </div>
       </div>
@@ -2231,6 +2257,7 @@
 <script src="js/mvi-funnel-track.js?v=20260702e"></script>
 <script defer src="js/mvi-ga4-funnel.js"></script>
 <script defer src="script.js"></script>
+<script defer src="js/mvi-nav-questions.js"></script>
 <script defer="" src="js/website-assistant-widget.js"></script>
 <!-- Mobile menu script -->
 <script>

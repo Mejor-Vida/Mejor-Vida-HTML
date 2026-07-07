@@ -1,0 +1,3004 @@
+/* English landing flow — Ethos-style type, MVI brand accents */
+:root {
+  /* Ethos-like lettering */
+  --lf-heading: #1e3329;
+  --lf-label: #2d3b36;
+  --lf-muted: #6b7280;
+  --lf-help: #1e3329;
+
+  /* MVI brand */
+  --lf-navy: #1a365d;
+  --lf-blue: #0d47a1;
+  --lf-blue-soft: #e8f0fa;
+  --lf-gold: #fec963;
+  --lf-accent: #0d47a1;
+
+  /* UI surfaces */
+  --lf-text: var(--lf-label);
+  --lf-border: #e5e7eb;
+  --lf-card: #eef5fc;
+  --lf-card-hover: #e3eef9;
+  --lf-progress-track: #e5e7eb;
+  --lf-btn-disabled: #b8c4d4;
+  --lf-card-label-size: 1.0625rem;
+  --lf-card-label-weight: 500;
+  --lf-max: 32rem;
+  --lf-content-pad: clamp(1rem, 4vw, 1.5rem);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body.lf-landing {
+  margin: 0;
+  min-height: 100vh;
+  font-family: Inter, system-ui, -apple-system, sans-serif;
+  color: var(--lf-text);
+  background: #fff;
+  line-height: 1.5;
+}
+
+.lf-header {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.lf-header-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+  padding: 0 clamp(1.25rem, 4vw, 2.5rem) 0 0;
+}
+
+.lf-logo {
+  flex: 0 0 auto;
+  line-height: 0;
+  margin-top: -2.75rem;
+  margin-left: -1.35rem;
+}
+
+.lf-logo img {
+  display: block;
+  height: clamp(9.5rem, 28vw, 13.5rem);
+  width: auto;
+  max-width: min(780px, 88vw);
+  object-fit: contain;
+  object-position: left top;
+  transform: translateY(-0.35rem);
+}
+
+.lf-header-actions {
+  flex: 0 0 auto;
+  margin-left: auto;
+  align-self: flex-start;
+  padding-top: 2.5rem;
+  padding-right: clamp(1.25rem, 4vw, 2.5rem);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.5rem;
+}
+
+.lf-help {
+  flex: 0 0 auto;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--lf-help);
+  text-decoration: none;
+  white-space: nowrap;
+  text-align: right;
+}
+
+.lf-header-whatsapp-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: #25d366;
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.875rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  white-space: nowrap;
+  text-decoration: none;
+  transition: background 0.15s ease;
+}
+
+.lf-header-whatsapp-btn:hover {
+  background: #1da851;
+  color: #fff;
+}
+
+.lf-help-phone {
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  text-transform: none;
+}
+
+.lf-progress-wrap {
+  max-width: var(--lf-max);
+  margin: -2.5rem auto 0;
+  padding: 0 var(--lf-content-pad);
+  position: relative;
+  z-index: 2;
+}
+
+.lf-header-sticky-band {
+  width: 100%;
+}
+
+.lf-landing--bio-pro.lf-landing--in-flow .lf-header-sticky-band {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: #fff;
+  box-shadow: 0 1px 0 rgba(15, 23, 42, 0.06);
+}
+
+.lf-flow-reassurance {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  max-width: var(--lf-max);
+  margin: 0 auto;
+  padding: 0.5rem var(--lf-content-pad) 0.65rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.35;
+  color: #166534;
+  background: #f0fdf4;
+  text-align: center;
+}
+
+.lf-flow-reassurance[hidden] {
+  display: none !important;
+}
+
+.lf-flow-reassurance-icon {
+  flex: 0 0 auto;
+  font-size: 0.9rem;
+  color: #15803d;
+  line-height: 1;
+}
+
+.lf-header-tagline {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0.35rem clamp(1.25rem, 5vw, 3rem) 1rem;
+  font-family: "Libre Baskerville", Georgia, "Times New Roman", serif;
+  font-size: clamp(1.85rem, 4.5vw, 3.25rem);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--lf-heading);
+  text-align: center;
+  text-wrap: balance;
+}
+
+@media (min-width: 900px) {
+  .lf-header-tagline {
+    font-size: clamp(2.25rem, 3.2vw, 3.35rem);
+    padding-inline: clamp(2rem, 6vw, 4rem);
+  }
+}
+
+.lf-header:has(.lf-header-tagline:not([hidden])) .lf-progress-wrap {
+  margin-top: -1.25rem;
+  margin-bottom: 0.65rem;
+}
+
+.lf-header:has(.lf-header-tagline:not([hidden])) .lf-header-tagline {
+  padding-top: 0;
+  padding-bottom: 0.65rem;
+}
+
+.lf-header-hero-sub {
+  width: 100%;
+  max-width: 34rem;
+  margin: 0 auto;
+  padding: 0 clamp(1.25rem, 5vw, 3rem) 1.15rem;
+  text-align: center;
+}
+
+.lf-header-hero-sub-lead {
+  margin: 0 0 0.4rem;
+  font-size: clamp(1rem, 2.4vw, 1.125rem);
+  font-weight: 500;
+  line-height: 1.4;
+  color: #475569;
+}
+
+.lf-header-hero-sub-trust {
+  margin: 0;
+  font-size: clamp(0.8125rem, 2vw, 0.9375rem);
+  line-height: 1.45;
+  color: #64748b;
+}
+
+.lf-progress {
+  width: 100%;
+  height: 6px;
+  background: var(--lf-progress-track);
+  overflow: hidden;
+  border-radius: 999px;
+}
+
+.lf-progress-bar {
+  height: 100%;
+  width: 0;
+  background: var(--lf-accent);
+  border-radius: 999px;
+  transition: width 0.4s ease;
+}
+
+.lf-main {
+  max-width: var(--lf-max);
+  margin: 0 auto;
+  padding: 0.35rem var(--lf-content-pad) 3rem;
+}
+
+.lf-step[hidden] {
+  display: none !important;
+}
+
+.lf-title {
+  font-family: "Libre Baskerville", Georgia, "Times New Roman", serif;
+  font-size: clamp(1.65rem, 4.5vw, 2.25rem);
+  font-weight: 400;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  color: var(--lf-heading);
+  margin: 0 0 0.5rem;
+  text-align: center;
+}
+
+.lf-lead {
+  margin: 0 0 1.35rem;
+  text-align: center;
+  color: var(--lf-muted);
+  font-size: clamp(0.95rem, 2.5vw, 1.05rem);
+  font-weight: 400;
+}
+
+.lf-goal-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.35rem;
+}
+
+@media (max-width: 540px) {
+  .lf-goal-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.lf-goal-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  aspect-ratio: 3 / 2;
+  min-height: 0;
+  padding: 0.85rem 0.7rem 0.75rem;
+  border: 2px solid transparent;
+  border-radius: 4px;
+  background: var(--lf-card);
+  cursor: pointer;
+  text-align: center;
+  font: inherit;
+  color: inherit;
+  width: 100%;
+  transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.lf-goal-card:hover {
+  background: var(--lf-card-hover);
+}
+
+.lf-goal-card.is-selected {
+  border-color: var(--lf-accent);
+  background: var(--lf-blue-soft);
+  box-shadow: 0 0 0 1px rgba(13, 71, 161, 0.12);
+}
+
+.lf-goal-card:focus-visible {
+  outline: 2px solid var(--lf-accent);
+  outline-offset: 2px;
+}
+
+.lf-goal-radio {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  width: 1.05rem;
+  height: 1.05rem;
+  border: 2px solid #cbd5e1;
+  border-radius: 50%;
+  background: #fff;
+}
+
+.lf-goal-card.is-selected .lf-goal-radio {
+  border-color: var(--lf-accent);
+  box-shadow: inset 0 0 0 3px #fff, inset 0 0 0 5px var(--lf-accent);
+}
+
+.lf-goal-icon {
+  font-size: 2rem;
+  color: var(--lf-navy);
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.lf-goal-label {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--lf-label);
+  max-width: 8.75rem;
+  line-height: 1.35;
+}
+
+/* Full-art cards (custom icon + shared label style) */
+.lf-goal-card--art {
+  padding: 0.5rem 0.4rem 0.55rem;
+  background: var(--lf-card);
+  gap: 0.65rem;
+  justify-content: center;
+}
+
+.lf-goal-card--art:hover {
+  background: var(--lf-card-hover);
+}
+
+.lf-goal-card--art.is-selected {
+  background: var(--lf-blue-soft);
+}
+
+.lf-goal-card--multi.is-selected .lf-goal-radio {
+  background: var(--lf-accent);
+  border-color: var(--lf-accent);
+  box-shadow: none;
+}
+
+.lf-goal-card--multi.is-selected .lf-goal-radio::after {
+  content: "✓";
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 0.62rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.lf-goal-card--multi .lf-goal-radio {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lf-goal-art {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 68%;
+  max-height: 44%;
+  flex: 0 1 auto;
+  object-fit: contain;
+  margin: 0 auto;
+  pointer-events: none;
+}
+
+.lf-goal-label--art {
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: var(--lf-card-label-size);
+  font-weight: var(--lf-card-label-weight);
+  color: var(--lf-label);
+  line-height: 1.3;
+  max-width: 100%;
+  margin-top: 0.2rem;
+  padding: 0 0.15rem;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
+.lf-goal-label--wrap {
+  white-space: normal;
+  line-height: 1.25;
+}
+
+.lf-btn-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin: 0 0 0.65rem;
+  padding: 0;
+  border: none;
+  background: none;
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--lf-label);
+  cursor: pointer;
+}
+
+.lf-btn-back:hover {
+  color: var(--lf-navy);
+}
+
+.lf-btn-back[hidden] {
+  display: none !important;
+}
+
+.lf-goal-card--icon .lf-goal-icon {
+  font-size: 2.35rem;
+  margin-bottom: 0.15rem;
+}
+
+.lf-goal-card--icon .lf-goal-label {
+  font-size: var(--lf-card-label-size);
+  font-weight: var(--lf-card-label-weight);
+  max-width: 100%;
+  white-space: nowrap;
+}
+
+.lf-main:has(.lf-step--objectives:not([hidden])) {
+  max-width: min(100%, 68rem);
+  padding-left: max(0.25rem, env(safe-area-inset-left, 0.25rem));
+  padding-right: max(0.25rem, env(safe-area-inset-right, 0.25rem));
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+body.lf-landing:has(.lf-step--objectives:not([hidden])) {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+}
+
+body.lf-landing:has(.lf-step--objectives:not([hidden])) .lf-main {
+  padding-bottom: clamp(1rem, 2.5vh, 1.75rem);
+}
+
+.lf-landing:has(.lf-step--objectives:not([hidden])) #lf-next-default-anchor {
+  display: none;
+}
+
+.lf-objective-grid {
+  --obj-gap: clamp(0.35rem, 1vw, 0.9rem);
+  --obj-cols: 3;
+  --obj-size: min(
+    17.5rem,
+    calc((100vw - 0.65rem - (var(--obj-cols) - 1) * var(--obj-gap)) / var(--obj-cols))
+  );
+  display: grid;
+  grid-template-columns: repeat(var(--obj-cols), var(--obj-size));
+  justify-content: center;
+  gap: var(--obj-gap);
+  width: 100%;
+  margin: 0.85rem auto 0;
+}
+
+.lf-objective-grid--single {
+  --obj-cols: 1;
+  --obj-size: min(26rem, calc(100vw - 1rem));
+  margin-top: 0.35rem;
+}
+
+.lf-objective-grid--single .lf-objective-card--price-cta {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  width: 100%;
+  max-width: var(--obj-size);
+  height: auto;
+  min-height: 0;
+  padding: 0;
+  gap: 0;
+  overflow: hidden;
+  border-color: #c5d4e8;
+  text-align: center;
+}
+
+.lf-objective-grid--single .lf-objective-card--price-cta:hover {
+  border-color: var(--lf-accent);
+}
+
+.lf-objective-grid--single .lf-objective-card--price-cta .lf-objective-hero-image {
+  display: block;
+  flex: 0 0 auto;
+  width: 100%;
+  line-height: 0;
+  background: #f4f0ea;
+}
+
+.lf-objective-grid--single .lf-objective-card--price-cta .lf-objective-hero-image picture {
+  display: block;
+  width: 100%;
+}
+
+.lf-objective-grid--single .lf-objective-card--price-cta .lf-objective-hero-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  vertical-align: top;
+}
+
+.lf-objective-grid--single .lf-objective-card--price-cta .lf-objective-cta-bar {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 1rem 1.15rem;
+  background: var(--lf-accent);
+  color: #fff;
+}
+
+.lf-objective-grid--single .lf-objective-card--price-cta .lf-objective-title {
+  display: block;
+  min-height: 0;
+  margin: 0;
+  font-size: clamp(1rem, 2.8vw, 1.1rem);
+  font-weight: 600;
+  color: #fff;
+  line-height: 1.25;
+  text-align: center;
+}
+
+.lf-objective-grid--single .lf-objective-card--price-cta .lf-objective-chevron {
+  display: flex;
+  flex: 0 0 auto;
+  color: #fff;
+  font-size: 1rem;
+}
+
+.lf-objective-grid--single .lf-objective-card--price-cta:hover .lf-objective-cta-bar {
+  background: #0a3d8f;
+}
+
+.lf-hero-reassurance {
+  width: 100%;
+  max-width: 22rem;
+  margin: 0.85rem auto 0;
+  text-align: center;
+}
+
+.lf-hero-reassurance-local {
+  margin: 0;
+  font-size: 0.75rem;
+  line-height: 1.45;
+  color: #64748b;
+}
+
+@media (max-width: 639px) {
+  .lf-objective-grid {
+    --obj-cols: 2;
+    --obj-size: min(
+      19.5rem,
+      calc((100vw - 0.65rem - var(--obj-gap)) / 2)
+    );
+  }
+
+  .lf-objective-grid--single {
+    --obj-cols: 1;
+    --obj-size: min(26rem, calc(100vw - 1rem));
+  }
+
+  .lf-objective-grid--single .lf-objective-card--price-cta {
+    flex-direction: column;
+    align-items: stretch;
+    min-height: 0;
+    padding: 0;
+    gap: 0;
+    text-align: center;
+  }
+
+  .lf-objective-grid--single .lf-objective-card--price-cta .lf-objective-cta-bar {
+    justify-content: center;
+    padding: 1rem 1.1rem;
+  }
+
+  .lf-objective-grid--single .lf-objective-card--price-cta .lf-objective-title {
+    text-align: center;
+    flex: 0 1 auto;
+  }
+}
+
+@media (min-width: 768px) {
+  .lf-objective-grid {
+    --obj-size: min(
+      18.5rem,
+      calc((min(100vw, 68rem) - 1.25rem - (var(--obj-cols) - 1) * var(--obj-gap)) / var(--obj-cols))
+    );
+  }
+}
+
+.lf-objective-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.65rem;
+  box-sizing: border-box;
+  width: var(--obj-size);
+  height: var(--obj-size);
+  padding: clamp(0.85rem, 2.5vw, 1.35rem);
+  border: 2px solid #dbe3ec;
+  border-radius: 12px;
+  background: var(--lf-card);
+  text-decoration: none;
+  color: inherit;
+  font: inherit;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+button.lf-objective-card {
+  appearance: none;
+  -webkit-appearance: none;
+  margin: 0;
+  letter-spacing: inherit;
+  line-height: inherit;
+}
+
+.lf-objective-card:hover {
+  border-color: var(--lf-accent);
+  background: var(--lf-blue-soft);
+  box-shadow: 0 2px 10px rgba(13, 71, 161, 0.08);
+}
+
+.lf-objective-card:focus-visible {
+  outline: 2px solid var(--lf-accent);
+  outline-offset: 2px;
+}
+
+.lf-objective-icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(3rem, 14vw, 4rem);
+  height: clamp(3rem, 14vw, 4rem);
+  border-radius: 50%;
+  background: var(--lf-blue-soft);
+  color: var(--lf-accent);
+  font-size: clamp(1.35rem, 5vw, 1.75rem);
+}
+
+.lf-objective-icon--image {
+  flex: 0 0 auto;
+  width: clamp(4.75rem, 30vw, 7.25rem);
+  height: clamp(4.75rem, 30vw, 7.25rem);
+  border-radius: 0;
+  background: transparent;
+}
+
+.lf-objective-icon--image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center center;
+}
+
+.lf-objective-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.2rem;
+  min-width: 0;
+  width: 100%;
+  flex: 1 1 auto;
+}
+
+.lf-objective-title {
+  font-size: clamp(0.9rem, 3vw, 1.15rem);
+  font-weight: 600;
+  color: var(--lf-navy);
+  line-height: 1.25;
+  min-height: 2.55em;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  text-wrap: balance;
+}
+
+.lf-objective-desc {
+  font-size: clamp(0.78rem, 2.5vw, 0.95rem);
+  color: var(--lf-muted);
+  line-height: 1.35;
+}
+
+.lf-objective-chevron {
+  display: none;
+}
+
+.lf-landing:has(.lf-step--objectives:not([hidden])) #lf-next-default-anchor .lf-btn-next {
+  display: none;
+}
+
+.lf-btn-next {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0.95rem 1.5rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #fff;
+  background: var(--lf-accent);
+  cursor: pointer;
+  transition: background 0.15s ease, opacity 0.15s ease;
+}
+
+.lf-btn-next:disabled {
+  background: var(--lf-btn-disabled);
+  color: #fff;
+  cursor: not-allowed;
+}
+
+.lf-btn-next:not(:disabled):hover {
+  background: #0a3d8f;
+}
+
+.lf-footer-note {
+  margin-top: 2rem;
+  text-align: center;
+  font-size: 0.78rem;
+  font-weight: 400;
+  color: var(--lf-muted);
+}
+
+.lf-footer-note a {
+  color: var(--lf-accent);
+}
+
+.lf-step-placeholder {
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.lf-step-placeholder p {
+  color: var(--lf-muted);
+  margin-bottom: 1.25rem;
+}
+
+/* Step 3 — How it works (linear path; selections saved earlier) */
+.lf-main:has(.lf-step--info:not([hidden])) {
+  max-width: 36rem;
+}
+
+.lf-step--info .lf-estimate-note {
+  margin: 0 0 1.25rem;
+  text-align: center;
+  font-size: clamp(0.8125rem, 2.1vw, 0.9375rem);
+  font-weight: 400;
+  line-height: 1.45;
+  color: var(--lf-muted);
+}
+
+.lf-step--info .lf-title {
+  font-size: clamp(1.85rem, 5.2vw, 2.55rem);
+  line-height: 1.2;
+  margin-bottom: 1.25rem;
+}
+
+.lf-step--info .lf-how-kicker {
+  display: block;
+  width: fit-content;
+  margin: 0 auto 1.5rem;
+  padding: 0.45rem 0.9rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+}
+
+.lf-step--info .lf-how-steps {
+  margin: 0 0 1.75rem;
+  padding: 0 0.15rem;
+}
+
+.lf-step--info .lf-how-step {
+  gap: 1rem;
+  padding: 0 0 1.5rem;
+}
+
+.lf-step--info .lf-how-step:not(:last-child)::after {
+  left: 1.2rem;
+  top: 2.5rem;
+  width: 2px;
+}
+
+.lf-step--info .lf-how-num {
+  width: 2.35rem;
+  height: 2.35rem;
+  font-size: 1rem;
+  line-height: 2.35rem;
+}
+
+.lf-step--info .lf-how-text {
+  padding-top: 0.45rem;
+  font-size: 1.0625rem;
+  line-height: 1.4;
+}
+
+.lf-step--info .lf-julie-card {
+  padding: 1.25rem 1.35rem;
+  gap: 1.15rem;
+}
+
+.lf-step--info .lf-julie-stars {
+  top: 0.9rem;
+  right: 1rem;
+  font-size: 1.05rem;
+  gap: 0.12rem;
+}
+
+.lf-step--info .lf-julie-photo {
+  width: 5rem;
+  height: 5rem;
+}
+
+.lf-step--info .lf-julie-name {
+  font-size: 1.0625rem;
+}
+
+.lf-step--info .lf-julie-title {
+  font-size: 0.9375rem;
+}
+
+.lf-step--info .lf-julie-langs {
+  font-size: 0.875rem;
+}
+
+.lf-how-kicker {
+  display: inline-block;
+  margin: 0 0 1.25rem;
+  padding: 0.35rem 0.65rem;
+  border: 1px solid var(--lf-accent);
+  border-radius: 3px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--lf-accent);
+}
+
+.lf-how-steps {
+  list-style: none;
+  margin: 0 0 1.35rem;
+  padding: 0;
+}
+
+.lf-how-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  margin: 0;
+  padding: 0 0 1.15rem;
+  position: relative;
+}
+
+.lf-how-step:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: 0.95rem;
+  top: 2rem;
+  bottom: 0;
+  width: 2px;
+  background: #d1d5db;
+  transform: translateX(-50%);
+}
+
+.lf-how-num {
+  flex: 0 0 auto;
+  width: 1.9rem;
+  height: 1.9rem;
+  border-radius: 50%;
+  border: 2px solid #d1d5db;
+  background: #fff;
+  color: var(--lf-muted);
+  font-size: 0.85rem;
+  font-weight: 600;
+  line-height: 1.9rem;
+  text-align: center;
+}
+
+.lf-how-step.is-active .lf-how-num {
+  border-color: var(--lf-accent);
+  background: var(--lf-accent);
+  color: #fff;
+}
+
+.lf-how-text {
+  flex: 1;
+  padding-top: 0.35rem;
+  font-size: 0.98rem;
+  font-weight: 500;
+  color: var(--lf-label);
+  line-height: 1.35;
+}
+
+.lf-julie-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 0;
+  padding: 1rem 1.1rem;
+  border: 2px solid transparent;
+  border-radius: 4px;
+  background: var(--lf-blue-soft);
+  text-align: left;
+}
+
+button.lf-julie-card {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  font: inherit;
+  color: inherit;
+  letter-spacing: inherit;
+  line-height: inherit;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+button.lf-julie-card--clickable:hover {
+  background: #dceaf8;
+  border-color: #b8d4f0;
+  box-shadow: 0 2px 10px rgba(13, 71, 161, 0.08);
+}
+
+button.lf-julie-card--clickable:focus-visible {
+  outline: 2px solid var(--lf-accent);
+  outline-offset: 2px;
+}
+
+.lf-julie-stars {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.85rem;
+  display: flex;
+  gap: 0.1rem;
+  line-height: 1;
+  color: #d4a017;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+}
+
+.lf-julie-stars span {
+  display: inline-block;
+}
+
+/* Gap between Julie card and Next button (Ethos-style) */
+.lf-step--info:not([hidden]) {
+  margin-bottom: 2rem;
+}
+
+.lf-main > .lf-btn-next,
+.lf-main > #lf-next-default-anchor .lf-btn-next {
+  margin-top: 0;
+}
+
+.lf-julie-photo {
+  flex: 0 0 auto;
+  width: 4.5rem;
+  height: 4.5rem;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center 15%;
+  border: 2px solid #fff;
+  box-shadow: 0 1px 4px rgba(26, 54, 93, 0.12);
+}
+
+.lf-julie-info {
+  flex: 1;
+  min-width: 0;
+  padding-right: 5.25rem;
+}
+
+.lf-julie-name {
+  margin: 0 0 0.2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--lf-heading);
+  line-height: 1.25;
+}
+
+.lf-julie-title {
+  margin: 0 0 0.2rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--lf-label);
+  line-height: 1.3;
+}
+
+.lf-julie-license {
+  margin: 0 0 0.35rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--lf-muted);
+  line-height: 1.3;
+}
+
+.lf-julie-langs {
+  margin: 0;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--lf-muted);
+  line-height: 1.3;
+}
+
+/* Step 4+ — Ethos-style vertical list options */
+.lf-step--list .lf-title {
+  text-align: left;
+  font-size: clamp(1.75rem, 4.8vw, 2.35rem);
+  line-height: 1.22;
+  margin-bottom: 1rem;
+}
+
+.lf-step--list .lf-lead--list {
+  text-align: left;
+  margin: 0 0 1.5rem;
+  font-size: clamp(0.95rem, 2.5vw, 1.05rem);
+  line-height: 1.45;
+  color: var(--lf-label);
+}
+
+.lf-step--list:not(:has(.lf-lead--list)) .lf-title {
+  margin-bottom: 1.5rem;
+}
+
+.lf-option-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin: 0;
+}
+
+.lf-option-btn {
+  display: block;
+  width: 100%;
+  padding: 1.15rem 1.25rem;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  background: var(--lf-card);
+  text-align: left;
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 1.0625rem;
+  font-weight: 500;
+  color: var(--lf-label);
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.lf-option-btn:hover {
+  background: var(--lf-card-hover);
+}
+
+.lf-option-btn.is-selected {
+  border-color: var(--lf-accent);
+  background: var(--lf-blue-soft);
+  color: var(--lf-label);
+  box-shadow: 0 0 0 1px rgba(13, 71, 161, 0.12);
+}
+
+.lf-option-btn.is-selected:hover {
+  background: #dce8f7;
+}
+
+.lf-option-btn:focus-visible {
+  outline: 2px solid var(--lf-accent);
+  outline-offset: 2px;
+}
+
+.lf-main:has(.lf-step--list:not([hidden])) > .lf-btn-next,
+.lf-main:has(.lf-step--list:not([hidden])) > #lf-next-default-anchor .lf-btn-next {
+  margin-top: 2.75rem;
+  background: var(--lf-accent);
+  font-weight: 600;
+}
+
+.lf-main:has(.lf-step--list:not([hidden])) > .lf-btn-next:not(:disabled):hover,
+.lf-main:has(.lf-step--list:not([hidden])) > #lf-next-default-anchor .lf-btn-next:not(:disabled):hover {
+  background: #0a3d8f;
+}
+
+.lf-main:has(.lf-step--list:not([hidden])) > .lf-btn-next:disabled,
+.lf-main:has(.lf-step--list:not([hidden])) > #lf-next-default-anchor .lf-btn-next:disabled {
+  background: #b8c4d4;
+}
+
+/* Step 8 — Estate plan confirmation (Yes path) */
+.lf-step--estate-ahead .lf-title {
+  text-align: left;
+  margin-bottom: 1rem;
+}
+
+.lf-estate-ahead-copy {
+  margin: 0 0 1.75rem;
+}
+
+.lf-estate-ahead-copy p {
+  margin: 0 0 1rem;
+  text-align: left;
+  font-size: clamp(0.98rem, 2.5vw, 1.0625rem);
+  line-height: 1.5;
+  color: var(--lf-label);
+}
+
+.lf-estate-ahead-copy p:last-child {
+  margin-bottom: 0;
+}
+
+.lf-estate-ahead-lead {
+  position: relative;
+}
+
+.lf-estate-ahead-copy sup {
+  font-size: 0.72em;
+  line-height: 0;
+}
+
+.lf-step--estate-ahead:not([hidden]) {
+  margin-bottom: 2rem;
+}
+
+.lf-main:has(.lf-step--estate-ahead:not([hidden])) > .lf-btn-next,
+.lf-main:has(.lf-step--estate-ahead:not([hidden])) > #lf-next-default-anchor .lf-btn-next {
+  margin-top: 2.75rem;
+  background: var(--lf-accent);
+  font-weight: 600;
+}
+
+.lf-main:has(.lf-step--estate-ahead:not([hidden])) > .lf-btn-next:not(:disabled):hover,
+.lf-main:has(.lf-step--estate-ahead:not([hidden])) > #lf-next-default-anchor .lf-btn-next:not(:disabled):hover {
+  background: #0a3d8f;
+}
+
+/* Step 9 — Legacy Safeguard promo (Ethos-style educational) */
+.lf-step--promo .lf-title {
+  text-align: left;
+  margin-bottom: 1rem;
+}
+
+.lf-promo-copy {
+  margin: 0 0 1.75rem;
+}
+
+.lf-promo-copy p {
+  margin: 0 0 1rem;
+  text-align: left;
+  font-size: clamp(0.98rem, 2.5vw, 1.0625rem);
+  line-height: 1.5;
+  color: var(--lf-label);
+}
+
+.lf-promo-copy p:last-child {
+  margin-bottom: 0;
+}
+
+.lf-promo-copy sup {
+  font-size: 0.72em;
+  line-height: 0;
+}
+
+.lf-promo-lead {
+  position: relative;
+}
+
+.lf-info-wrap {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 0.15rem;
+  top: -0.05rem;
+}
+
+.lf-info-btn {
+  width: 1.25rem;
+  height: 1.25rem;
+  padding: 0;
+  border: 1.5px solid var(--lf-muted);
+  border-radius: 50%;
+  background: #fff;
+  color: var(--lf-muted);
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  font-style: italic;
+  line-height: 1;
+  cursor: pointer;
+  vertical-align: middle;
+  transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
+}
+
+.lf-info-btn:hover,
+.lf-info-btn[aria-expanded="true"] {
+  border-color: var(--lf-accent);
+  color: var(--lf-accent);
+  background: var(--lf-blue-soft);
+}
+
+.lf-info-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  background: transparent;
+}
+
+.lf-info-backdrop[hidden] {
+  display: none !important;
+}
+
+.lf-info-popover {
+  position: fixed;
+  z-index: 100;
+  width: min(21rem, calc(100vw - 2rem));
+  max-height: min(70vh, 26rem);
+  overflow-y: auto;
+  padding: 1rem 1.1rem;
+  border-radius: 4px;
+  background: #111;
+  color: #fff;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.28);
+  text-align: left;
+  -webkit-overflow-scrolling: touch;
+}
+
+.lf-info-popover[hidden] {
+  display: none !important;
+}
+
+.lf-info-popover::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  border: 8px solid transparent;
+}
+
+.lf-info-popover.is-below::after {
+  top: -16px;
+  left: var(--lf-info-arrow-x, 50%);
+  transform: translateX(-50%);
+  border-bottom-color: #111;
+}
+
+.lf-info-popover.is-above::after {
+  bottom: -16px;
+  left: var(--lf-info-arrow-x, 50%);
+  transform: translateX(-50%);
+  border-top-color: #111;
+}
+
+.lf-info-tip-lead {
+  margin: 0 0 0.65rem;
+  font-size: 0.8125rem;
+  font-weight: 400;
+  line-height: 1.45;
+  color: #fff;
+}
+
+.lf-info-tip-list {
+  margin: 0 0 0.75rem;
+  padding-left: 1.2rem;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+}
+
+.lf-info-tip-list li {
+  margin-bottom: 0.5rem;
+}
+
+.lf-info-tip-list li:last-child {
+  margin-bottom: 0;
+}
+
+.lf-info-tip-list strong {
+  color: #fff;
+  font-weight: 600;
+}
+
+.lf-info-tip-extra {
+  margin: 0 0 0.75rem;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.lf-info-tip-note {
+  margin: 0;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.lf-info-popover a {
+  color: #93c5fd;
+  text-decoration: underline;
+}
+
+.lf-info-popover a:hover {
+  color: #bfdbfe;
+}
+
+.lf-promo-art {
+  display: flex;
+  justify-content: center;
+  margin: 0.5rem auto 0.25rem;
+  max-width: 22rem;
+}
+
+.lf-promo-art img,
+.lf-promo-illustration {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.lf-step--promo:not([hidden]) {
+  margin-bottom: 2rem;
+}
+
+.lf-main:has(.lf-step--promo:not([hidden])) > .lf-btn-next,
+.lf-main:has(.lf-step--promo:not([hidden])) > #lf-next-default-anchor .lf-btn-next {
+  margin-top: 2.75rem;
+  background: var(--lf-accent);
+  font-weight: 600;
+}
+
+.lf-main:has(.lf-step--promo:not([hidden])) > .lf-btn-next:not(:disabled):hover,
+.lf-main:has(.lf-step--promo:not([hidden])) > #lf-next-default-anchor .lf-btn-next:not(:disabled):hover {
+  background: #0a3d8f;
+}
+
+/* Step 9 — Mortgage slider (Ethos-style) */
+.lf-step--slider .lf-title {
+  text-align: left;
+  margin-bottom: 1.5rem;
+}
+
+.lf-slider-field {
+  margin: 0 0 1.35rem;
+}
+
+.lf-slider-label {
+  display: block;
+  margin: 0 0 0.35rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--lf-muted);
+}
+
+.lf-slider-value {
+  display: block;
+  margin: 0 0 0.85rem;
+  font-family: "Libre Baskerville", Georgia, serif;
+  font-size: clamp(1.75rem, 5vw, 2.25rem);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--lf-heading);
+}
+
+.lf-slider-range {
+  display: block;
+  width: 100%;
+  height: 6px;
+  margin: 0;
+  accent-color: var(--lf-accent);
+  cursor: pointer;
+}
+
+.lf-slider-ticks {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--lf-muted);
+}
+
+.lf-callout {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0.9rem 1rem;
+  border: 1px solid #c5d9f0;
+  border-radius: 4px;
+  background: var(--lf-blue-soft);
+}
+
+.lf-callout-icon {
+  flex: 0 0 auto;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 50%;
+  background: var(--lf-accent);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  font-style: italic;
+  line-height: 1.25rem;
+  text-align: center;
+}
+
+.lf-callout p {
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: 1.45;
+  color: var(--lf-accent);
+}
+
+.lf-main:has(.lf-step--slider:not([hidden])) > .lf-btn-next,
+.lf-main:has(.lf-step--slider:not([hidden])) > #lf-next-default-anchor .lf-btn-next {
+  margin-top: 2.75rem;
+  background: var(--lf-accent);
+  font-weight: 600;
+}
+
+.lf-main:has(.lf-step--slider:not([hidden])) > .lf-btn-next:not(:disabled):hover,
+.lf-main:has(.lf-step--slider:not([hidden])) > #lf-next-default-anchor .lf-btn-next:not(:disabled):hover {
+  background: #0a3d8f;
+}
+
+/* Step 10 — Birthdate (Ethos-style) */
+.lf-step--date .lf-title {
+  text-align: left;
+  margin-bottom: 0.75rem;
+}
+
+.lf-step--date .lf-lead--list {
+  margin-bottom: 1.5rem;
+}
+
+.lf-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.lf-date-field {
+  position: relative;
+  margin: 0 0 0.75rem;
+}
+
+.lf-date-icon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--lf-muted);
+  font-size: 1rem;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.lf-date-input {
+  display: block;
+  width: 100%;
+  padding: 0.95rem 1rem 0.95rem 2.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background: #fff;
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 1.0625rem;
+  font-weight: 400;
+  color: var(--lf-heading);
+  line-height: 1.3;
+}
+
+.lf-date-input::placeholder {
+  color: #9ca3af;
+}
+
+.lf-date-input:focus {
+  outline: 2px solid rgba(13, 71, 161, 0.25);
+  border-color: var(--lf-accent);
+}
+
+.lf-date-input.is-invalid {
+  border-color: #dc2626;
+}
+
+.lf-date-hint {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: #dc2626;
+}
+
+.lf-text-field {
+  margin: 0;
+}
+
+.lf-text-input {
+  display: block;
+  width: 100%;
+  padding: 0.95rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background: #fff;
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 1.0625rem;
+  font-weight: 400;
+  color: var(--lf-heading);
+  line-height: 1.3;
+}
+
+.lf-text-input:focus {
+  outline: 2px solid rgba(13, 71, 161, 0.25);
+  border-color: var(--lf-accent);
+}
+
+.lf-text-input.is-invalid {
+  border-color: #dc2626;
+}
+
+.lf-text-hint {
+  margin: 0.5rem 0 0;
+  font-size: 0.8125rem;
+  color: #dc2626;
+}
+
+.lf-step--zip:not([hidden]),
+.lf-step--email:not([hidden]) {
+  margin-bottom: 2rem;
+}
+
+.lf-main:has(.lf-step--zip:not([hidden])) > #lf-next-default-anchor .lf-btn-next,
+.lf-main:has(.lf-step--email:not([hidden])) > #lf-next-default-anchor .lf-btn-next {
+  margin-top: 2.75rem;
+  background: var(--lf-accent);
+  font-weight: 600;
+}
+
+.lf-main:has(.lf-step--zip:not([hidden])) > #lf-next-default-anchor .lf-btn-next:not(:disabled):hover,
+.lf-main:has(.lf-step--email:not([hidden])) > #lf-next-default-anchor .lf-btn-next:not(:disabled):hover {
+  background: #0a3d8f;
+}
+
+.lf-name-fields {
+  display: grid;
+  gap: 1rem;
+  margin: 0 0 1rem;
+}
+
+.lf-text-field--lock {
+  margin: 0;
+}
+
+.lf-input-wrap {
+  position: relative;
+}
+
+.lf-text-input--lock {
+  padding-right: 2.75rem;
+}
+
+.lf-input-lock {
+  position: absolute;
+  top: 50%;
+  right: 1rem;
+  transform: translateY(-50%);
+  color: var(--lf-muted);
+  font-size: 0.875rem;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.lf-encrypt-note {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin: 0;
+  font-size: 0.8125rem;
+  color: var(--lf-muted);
+}
+
+.lf-encrypt-note i {
+  font-size: 0.75rem;
+}
+
+.lf-step--name:not([hidden]) {
+  margin-bottom: 2rem;
+}
+
+.lf-main:has(.lf-step--name:not([hidden])) > #lf-next-default-anchor .lf-btn-next {
+  margin-top: 2.75rem;
+  background: var(--lf-accent);
+  font-weight: 600;
+}
+
+.lf-main:has(.lf-step--name:not([hidden])) > #lf-next-default-anchor .lf-btn-next:not(:disabled):hover {
+  background: #0a3d8f;
+}
+
+.lf-consent-block {
+  margin: 1.25rem 0 0;
+  padding-top: 0;
+}
+
+.lf-consent-lead {
+  margin: 0 0 0.5rem;
+  font-size: 0.75rem;
+  line-height: 1.45;
+  color: var(--lf-muted);
+}
+
+.lf-consent-links {
+  margin: 0;
+  font-size: 0.75rem;
+  line-height: 1.45;
+  color: var(--lf-muted);
+}
+
+.lf-consent-links a {
+  color: var(--lf-accent);
+  text-decoration: underline;
+  text-underline-offset: 1px;
+  font-weight: 400;
+}
+
+.lf-consent-links a:hover {
+  color: #0a3d8f;
+}
+
+.lf-julie-card--after-next {
+  display: none;
+  margin-top: 1.25rem;
+}
+
+.lf-julie-card--after-next[hidden] {
+  display: none !important;
+}
+
+.lf-main:has(.lf-step[data-step="1"]:not([hidden])) > .lf-julie-card--after-next {
+  display: flex;
+}
+
+.lf-main:has(.lf-step--objectives:not([hidden])) > .lf-julie-card--after-next:not([hidden]) {
+  margin-top: auto;
+  width: 100%;
+}
+
+.lf-julie-bio-modal-body {
+  color: var(--lf-label);
+  font-size: 0.98rem;
+  line-height: 1.65;
+}
+
+.lf-julie-bio-modal-body p {
+  margin-bottom: 1rem;
+}
+
+.lf-julie-bio-modal-lead {
+  font-weight: 600;
+  color: var(--lf-navy);
+}
+
+.lf-julie-bio-modal-heading {
+  margin: 1.35rem 0 0.75rem;
+  font-family: "Libre Baskerville", Georgia, "Times New Roman", serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #1a365d;
+}
+
+.lf-julie-bio-modal-photo {
+  max-width: min(36rem, 100%);
+  margin: 1.5rem auto 1.25rem;
+}
+
+.lf-julie-bio-modal-photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 0.35rem;
+  box-shadow: 0 4px 18px rgba(26, 54, 93, 0.14);
+}
+
+.lf-julie-bio-modal-photo--portrait {
+  max-width: min(17rem, 82vw);
+}
+
+.lf-julie-bio-modal-map {
+  max-width: 14rem;
+  margin: 1.75rem auto 0;
+  text-align: center;
+}
+
+.lf-julie-bio-modal-map img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+
+.lf-julie-bio-modal-map figcaption {
+  margin-top: 0.65rem;
+  font-size: 0.875rem;
+  color: var(--lf-muted);
+  line-height: 1.45;
+}
+
+.lf-main:has(.lf-step--date:not([hidden])) > #lf-next-default-anchor .lf-btn-next {
+  margin-top: 2.75rem;
+  background: var(--lf-accent);
+  font-weight: 600;
+}
+
+.lf-main:has(.lf-step--date:not([hidden])) > .lf-btn-next:not(:disabled):hover,
+.lf-main:has(.lf-step--date:not([hidden])) > #lf-next-default-anchor .lf-btn-next:not(:disabled):hover {
+  background: #0a3d8f;
+}
+
+/* Step 11 — Personalized coverage recommendation */
+.lf-step--recommendation .lf-title {
+  text-align: left;
+  margin-bottom: 0.75rem;
+}
+
+.lf-lead--recommendation {
+  text-align: left;
+  margin: 0 0 1.5rem;
+  font-size: clamp(0.98rem, 2.5vw, 1.0625rem);
+  line-height: 1.5;
+  color: var(--lf-label);
+}
+
+.lf-protection-kicker {
+  margin: 0 0 0.65rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--lf-muted);
+}
+
+.lf-protection-cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin: 0 0 1.75rem;
+}
+
+.lf-protection-cards:empty {
+  display: none;
+}
+
+.lf-protection-cards .lf-protection-card {
+  margin: 0;
+  min-height: 7.5rem;
+  padding: 1rem 0.75rem;
+}
+
+.lf-protection-cards .lf-protection-icon {
+  width: 3.25rem;
+  max-height: 3.25rem;
+}
+
+.lf-protection-cards .lf-protection-label {
+  font-size: 0.98rem;
+  text-align: center;
+}
+
+@media (max-width: 360px) {
+  .lf-protection-cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+.lf-protection-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin: 0 0 1.75rem;
+  padding: 1.35rem 1rem;
+  border: 2px solid var(--lf-accent);
+  border-radius: 8px;
+  background: var(--lf-blue-soft);
+  box-shadow: 0 0 0 1px rgba(13, 71, 161, 0.12);
+}
+
+.lf-protection-icon {
+  display: block;
+  width: 4.5rem;
+  height: auto;
+  max-height: 4.5rem;
+  object-fit: contain;
+}
+
+.lf-protection-label {
+  font-size: 1.0625rem;
+  font-weight: 600;
+  color: var(--lf-heading);
+  line-height: 1.3;
+}
+
+.lf-recommendation-intro {
+  margin: 0 0 1.25rem;
+  font-size: clamp(0.98rem, 2.5vw, 1.0625rem);
+  line-height: 1.5;
+  color: var(--lf-label);
+  text-align: left;
+}
+
+.lf-benefit-list {
+  list-style: none;
+  margin: 0 0 1.5rem;
+  padding: 0;
+}
+
+.lf-benefit-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin: 0 0 1.35rem;
+}
+
+.lf-benefit-item:last-child {
+  margin-bottom: 0;
+}
+
+.lf-benefit-icon {
+  flex: 0 0 auto;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--lf-accent);
+  font-size: 1.65rem;
+  line-height: 1;
+}
+
+.lf-benefit-icon:has(.lf-benefit-art) {
+  width: 4rem;
+  height: 4rem;
+}
+
+.lf-benefit-art {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.lf-benefit-copy {
+  flex: 1;
+  min-width: 0;
+}
+
+.lf-benefit-title {
+  margin: 0 0 0.25rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--lf-heading);
+  line-height: 1.3;
+}
+
+.lf-benefit-text {
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: 1.45;
+  color: var(--lf-muted);
+}
+
+.lf-step--recommendation:not([hidden]) {
+  margin-bottom: 2rem;
+}
+
+.lf-recommendation-next-slot {
+  margin: 0.85rem 0 1.5rem;
+}
+
+.lf-recommendation-next-slot .lf-btn-next {
+  background: var(--lf-accent);
+  font-weight: 600;
+}
+
+.lf-recommendation-next-slot .lf-btn-next:not(:disabled):hover {
+  background: #0a3d8f;
+}
+
+.lf-step--recommendation .lf-protection-cards {
+  margin-bottom: 1rem;
+}
+
+/* Step 13 — Milestone / eligibility confirmation */
+.lf-step--milestone .lf-title {
+  text-align: left;
+  margin-bottom: 1.35rem;
+}
+
+.lf-how-steps--milestone {
+  margin: 0 0 1.5rem;
+}
+
+.lf-how-step.is-complete .lf-how-num {
+  border-color: var(--lf-accent);
+  background: var(--lf-accent);
+  color: #fff;
+  font-size: 0.75rem;
+  line-height: 2.35rem;
+}
+
+.lf-step--info .lf-how-step.is-complete .lf-how-num {
+  line-height: 2.35rem;
+}
+
+.lf-how-step.is-upcoming .lf-how-num {
+  border-color: #d1d5db;
+  background: #fff;
+  color: #9ca3af;
+}
+
+.lf-how-step.is-upcoming .lf-how-text {
+  color: var(--lf-muted);
+}
+
+.lf-trust-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin: 0;
+  padding: 1.15rem 1.2rem 1.1rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 4px;
+  background: #f9fafb;
+  text-align: left;
+}
+
+.lf-trust-art {
+  flex: 0 0 auto;
+  width: 5.25rem;
+  height: auto;
+  object-fit: contain;
+}
+
+.lf-trust-copy {
+  flex: 1;
+  min-width: 0;
+}
+
+.lf-trust-title {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--lf-heading);
+  line-height: 1.35;
+}
+
+.lf-trust-badges {
+  margin: 0 0 0.65rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--lf-accent);
+  line-height: 1.4;
+}
+
+.lf-trust-text {
+  margin: 0;
+  font-size: clamp(0.98rem, 2.5vw, 1.0625rem);
+  line-height: 1.5;
+  color: var(--lf-label);
+}
+
+.lf-step--milestone:not([hidden]) {
+  margin-bottom: 2rem;
+}
+
+.lf-main:has(.lf-step--milestone:not([hidden])) > #lf-next-default-anchor .lf-btn-next {
+  margin-top: 2.75rem;
+  background: var(--lf-accent);
+  font-weight: 600;
+}
+
+.lf-main:has(.lf-step--milestone:not([hidden])) > #lf-next-default-anchor .lf-btn-next:not(:disabled):hover {
+  background: #0a3d8f;
+}
+
+/* Searchable combobox (country, state, etc.) */
+.lf-search-combobox-mount,
+.lf-country-combobox-mount,
+.lf-state-combobox-mount {
+  position: relative;
+}
+
+.lf-search-combobox,
+.lf-country-combobox,
+.lf-state-combobox {
+  position: relative;
+}
+
+.lf-search-combobox__trigger-wrap,
+.lf-country-combobox__trigger-wrap,
+.lf-state-combobox__trigger-wrap {
+  position: relative;
+}
+
+.lf-search-combobox__input,
+.lf-country-combobox__input {
+  display: block;
+  width: 100%;
+  padding: 0.95rem 2.5rem 0.95rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background: #fff;
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 1.125rem;
+  font-weight: 400;
+  color: var(--lf-heading);
+  line-height: 1.3;
+  cursor: pointer;
+}
+
+.lf-search-combobox__input.is-empty,
+.lf-country-combobox__input.is-empty {
+  color: var(--lf-muted);
+}
+
+.lf-search-combobox__input:focus,
+.lf-country-combobox__input:focus {
+  outline: 2px solid rgba(13, 71, 161, 0.25);
+  border-color: var(--lf-accent);
+}
+
+.lf-search-combobox.is-open .lf-search-combobox__input,
+.lf-country-combobox.is-open .lf-country-combobox__input {
+  cursor: text;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.lf-search-combobox__chevron,
+.lf-country-combobox__chevron,
+.lf-state-combobox__chevron {
+  position: absolute;
+  top: 50%;
+  right: 1rem;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-right: 2px solid var(--lf-muted);
+  border-bottom: 2px solid var(--lf-muted);
+  transform: translateY(-65%) rotate(45deg);
+  pointer-events: none;
+}
+
+.lf-search-combobox.is-open .lf-search-combobox__chevron,
+.lf-country-combobox.is-open .lf-country-combobox__chevron,
+.lf-state-combobox.is-open .lf-state-combobox__chevron {
+  transform: translateY(-35%) rotate(-135deg);
+}
+
+.lf-search-combobox__panel,
+.lf-country-combobox__panel,
+.lf-state-combobox__panel {
+  position: absolute;
+  z-index: 20;
+  left: 0;
+  right: 0;
+  top: 100%;
+  margin-top: -1px;
+  border: 1px solid #d1d5db;
+  border-radius: 0 0 8px 8px;
+  background: #fff;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+
+.lf-search-combobox__list,
+.lf-country-combobox__list,
+.lf-state-combobox__list {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.lf-search-combobox__option,
+.lf-country-combobox__option,
+.lf-state-combobox__option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 12px 16px;
+  font-size: 1rem;
+  color: var(--lf-heading);
+  cursor: pointer;
+}
+
+.lf-search-combobox__option-label,
+.lf-country-combobox__option-label,
+.lf-state-combobox__option-label {
+  min-width: 0;
+}
+
+.lf-search-combobox__option-code,
+.lf-country-combobox__option-code,
+.lf-state-combobox__option-code {
+  flex-shrink: 0;
+  color: var(--lf-muted);
+  font-weight: 400;
+}
+
+.lf-search-combobox__option:hover,
+.lf-country-combobox__option:hover,
+.lf-state-combobox__option:hover {
+  background: var(--lf-card-hover);
+}
+
+.lf-search-combobox__option.is-selected,
+.lf-country-combobox__option.is-selected,
+.lf-state-combobox__option.is-selected {
+  background: var(--lf-card);
+  font-weight: 700;
+}
+
+.lf-search-combobox__option.is-highlighted,
+.lf-country-combobox__option.is-highlighted,
+.lf-state-combobox__option.is-highlighted {
+  background: var(--lf-card-hover);
+}
+
+.lf-search-combobox__option.is-selected.is-highlighted,
+.lf-country-combobox__option.is-selected.is-highlighted,
+.lf-state-combobox__option.is-selected.is-highlighted {
+  background: var(--lf-card-hover);
+}
+
+.lf-search-combobox__empty,
+.lf-country-combobox__empty,
+.lf-state-combobox__empty {
+  padding: 12px 16px;
+  font-size: 1rem;
+  color: var(--lf-muted);
+}
+
+.lf-select-field {
+  margin: 0;
+}
+
+.lf-select-label {
+  display: block;
+  margin: 0 0 0.5rem;
+  font-size: 0.9375rem;
+  font-weight: 400;
+  color: var(--lf-label);
+}
+
+.lf-step--select .lf-select-field {
+  width: 100%;
+}
+
+.lf-step--select .lf-state-combobox-mount,
+.lf-step--select .lf-state-combobox {
+  width: 100%;
+}
+
+.lf-step--select .lf-state-combobox__input {
+  display: block;
+  width: 100%;
+  padding: 1.15rem 2.75rem 1.15rem 1.25rem;
+  border: 2px solid var(--lf-border);
+  border-radius: 6px;
+  background: #fff;
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 1.0625rem;
+  font-weight: 500;
+  color: var(--lf-label);
+  line-height: 1.35;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.lf-step--select .lf-state-combobox__input.is-empty {
+  color: var(--lf-muted);
+}
+
+.lf-step--select .lf-state-combobox__input:focus {
+  outline: 2px solid rgba(13, 71, 161, 0.25);
+  border-color: var(--lf-accent);
+}
+
+.lf-step--select .lf-state-combobox.is-open .lf-state-combobox__input {
+  cursor: text;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.lf-step--select .lf-state-combobox__input.is-invalid {
+  border-color: #c53030;
+}
+
+.lf-step--select .lf-state-combobox__option {
+  padding: 1.15rem 1.25rem;
+  font-size: 1.0625rem;
+  font-weight: 500;
+}
+
+.lf-step--select .lf-state-combobox__option-code {
+  font-size: 1.0625rem;
+  font-weight: 500;
+}
+
+.lf-step--select .lf-title {
+  white-space: nowrap;
+  font-size: clamp(1.5rem, 5vw, 2.35rem);
+  letter-spacing: -0.025em;
+}
+
+.lf-main:has(.lf-step--select:not([hidden])) {
+  max-width: 36rem;
+}
+
+.lf-step--select:not([hidden]) {
+  margin-bottom: 2rem;
+}
+
+.lf-main:has(.lf-step--select:not([hidden])) > #lf-next-default-anchor .lf-btn-next {
+  margin-top: 2.75rem;
+  background: var(--lf-accent);
+  font-weight: 600;
+}
+
+.lf-main:has(.lf-step--select:not([hidden])) > #lf-next-default-anchor .lf-btn-next:not(:disabled):hover {
+  background: #0a3d8f;
+}
+
+/* Phone verification step */
+.lf-step--phone .lf-phone-step {
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+.lf-step--phone .lf-phone-code-lead {
+  margin: 0 0 1rem;
+  font-size: 1rem;
+  line-height: 1.45;
+  color: var(--lf-label);
+}
+
+.lf-step--phone .lf-phone-code-input {
+  letter-spacing: 0.35em;
+  font-size: 1.25rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.lf-phone-action-btn {
+  display: block;
+  width: 100%;
+  margin-top: 0.75rem;
+  padding: 1rem 1.25rem;
+  border: none;
+  border-radius: 6px;
+  background: var(--lf-accent);
+  color: #fff;
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 1.0625rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease, opacity 0.15s ease;
+}
+
+.lf-phone-action-btn:hover:not(:disabled) {
+  background: #0a3d8f;
+}
+
+.lf-phone-action-btn:disabled,
+.lf-phone-action-btn.is-loading {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.lf-phone-action-btn--secondary {
+  background: #fff;
+  color: var(--lf-accent);
+  border: 2px solid var(--lf-accent);
+}
+
+.lf-phone-action-btn--secondary:hover:not(:disabled) {
+  background: var(--lf-blue-soft);
+}
+
+.lf-phone-hint {
+  margin: 0.5rem 0 0;
+  font-size: 0.9375rem;
+  line-height: 1.4;
+  color: var(--lf-muted);
+}
+
+.lf-phone-hint--error {
+  color: #c53030;
+}
+
+.lf-phone-hint--ok {
+  color: #2f855a;
+}
+
+.lf-phone-verified-msg {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0 0 0.75rem;
+  font-size: 1.0625rem;
+  font-weight: 500;
+  color: #2f855a;
+}
+
+.lf-phone-verified-msg .fa-circle-check {
+  font-size: 1.25rem;
+}
+
+.lf-phone-guarantee {
+  margin: 1rem 0 0.75rem;
+  text-align: center;
+  color: #0d7a6f;
+  font-weight: 600;
+  font-size: clamp(1rem, 2.4vw, 1.15rem);
+  line-height: 1.35;
+}
+
+.lf-step--phone .lf-phone-otp-consent {
+  margin: 0.75rem 0 0;
+  line-height: 1.45;
+}
+
+.lf-sms-optin {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin: 0 0 0.5rem;
+}
+
+.lf-sms-optin-check {
+  flex-shrink: 0;
+  width: 1rem;
+  height: 1rem;
+  margin: 0.2rem 0 0;
+  accent-color: var(--lf-accent);
+  cursor: pointer;
+}
+
+.lf-sms-optin-text {
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  font-weight: 400;
+  color: var(--lf-muted);
+  cursor: pointer;
+}
+
+.lf-sms-optin-text a {
+  color: var(--lf-accent);
+  text-decoration: underline;
+  text-underline-offset: 1px;
+}
+
+.lf-sms-optin-text a:hover {
+  color: #0a3d8f;
+}
+
+.lf-quote-status {
+  margin: 0.75rem 0 0;
+  font-size: 0.875rem;
+  line-height: 1.45;
+  text-align: center;
+  color: var(--lf-muted);
+}
+
+.lf-quote-status--error {
+  color: #c53030;
+}
+
+.lf-main:has(.lf-step--phone:not([hidden])) > #lf-next-default-anchor .lf-btn-next {
+  margin-top: 2.75rem;
+  background: #e67e22;
+  font-weight: 700;
+}
+
+.lf-main:has(.lf-step--phone:not([hidden])) > #lf-next-default-anchor .lf-btn-next:not(:disabled):hover {
+  background: #cf6d17;
+}
+
+/* Mobile: center wizard steps; compact header; fix state dropdown */
+@media (max-width: 767.98px) {
+  .lf-header-row {
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.35rem;
+    padding: 0 0.75rem 0 0.65rem;
+    overflow: visible;
+  }
+
+  .lf-logo {
+    flex: 0 1 auto;
+    min-width: 0;
+    max-width: 58%;
+    margin-top: -1.35rem;
+    margin-left: 0;
+  }
+
+  .lf-logo img {
+    height: clamp(7.25rem, 30vw, 9.25rem);
+    max-width: 100%;
+    width: auto;
+    transform: none;
+    object-position: left top;
+  }
+
+  .lf-header-actions {
+    flex: 0 0 auto;
+    flex-shrink: 0;
+    min-width: 8.75rem;
+    max-width: 42%;
+    margin-left: 0;
+    padding-top: 1.15rem;
+    padding-right: 0;
+    align-items: flex-end;
+  }
+
+  /* Home + results: full-width stacked objective cards (not squares) */
+  .lf-objective-grid,
+  .lf-objective-grid--calc-results,
+  .lf-results-panel .lf-objective-grid--results {
+    --obj-cols: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+    width: 100%;
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    padding: 0;
+  }
+
+  .lf-objective-card {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    min-height: 5.75rem;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.85rem 1rem;
+    padding: 0.95rem 1.1rem;
+    text-align: left;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    cursor: pointer;
+  }
+
+  .lf-objective-card--price-cta {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    min-height: 0;
+    padding: 0;
+    gap: 0;
+  }
+
+  .lf-objective-card--price-cta .lf-objective-cta-bar {
+    justify-content: center;
+    padding: 1rem 1.1rem;
+  }
+
+  .lf-objective-card--price-cta .lf-objective-title {
+    text-align: center;
+    flex: 0 1 auto;
+  }
+
+  .lf-objective-card--price-cta .lf-objective-chevron {
+    display: flex;
+  }
+
+  .lf-objective-icon--image {
+    width: clamp(4.75rem, 24vw, 6rem);
+    height: clamp(4.75rem, 24vw, 6rem);
+    flex: 0 0 auto;
+  }
+
+  .lf-objective-copy {
+    align-items: flex-start;
+    justify-content: center;
+    text-align: left;
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .lf-objective-title {
+    font-size: clamp(1rem, 4.2vw, 1.2rem);
+    min-height: 0;
+    justify-content: flex-start;
+    text-align: left;
+  }
+
+  .lf-objective-desc {
+    font-size: clamp(0.82rem, 3.5vw, 0.95rem);
+    text-align: left;
+  }
+
+  .lf-objective-chevron {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    color: var(--lf-accent);
+    font-size: 1.15rem;
+    opacity: 0.85;
+  }
+
+  body.lf-landing:has(.lf-step--objectives:not([hidden])) .lf-main {
+    justify-content: flex-start;
+    min-height: auto;
+    padding-top: 0.5rem;
+  }
+
+  .lf-step--objectives:not([hidden]) {
+    width: 100%;
+  }
+
+  .lf-help {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    width: 100%;
+    max-width: 100%;
+    white-space: normal;
+    line-height: 1.25;
+    gap: 0.12rem;
+    font-size: clamp(0.58rem, 2.8vw, 0.68rem);
+    text-align: right;
+  }
+
+  .lf-help-label {
+    display: block;
+    word-break: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .lf-help-phone {
+    display: block;
+    font-size: clamp(0.72rem, 3.4vw, 0.82rem);
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+  }
+
+  .lf-progress-wrap {
+    margin-top: -0.75rem;
+  }
+
+  .lf-header:has(.lf-header-tagline:not([hidden])) .lf-progress-wrap {
+    margin-top: -0.75rem;
+    margin-bottom: 0.5rem;
+  }
+
+  body.lf-landing:not(.lf-landing--results) .lf-main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: calc(100dvh - 10rem);
+    padding-top: 0.75rem;
+    padding-bottom: 1.75rem;
+    overflow: visible;
+  }
+
+  body.lf-landing:not(.lf-landing--results) .lf-step:not([hidden]) {
+    overflow: visible;
+  }
+
+  .lf-step--select:not([hidden]) {
+    overflow: visible;
+  }
+
+  .lf-state-combobox__panel,
+  .lf-search-combobox__panel,
+  .lf-country-combobox__panel {
+    z-index: 200;
+  }
+
+  .lf-state-combobox__option,
+  .lf-search-combobox__option,
+  .lf-country-combobox__option {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .lf-state-combobox__trigger-wrap,
+  .lf-search-combobox__trigger-wrap {
+    touch-action: manipulation;
+  }
+
+  /* Floating green WhatsApp bubble (mobile) */
+  .lf-header-whatsapp-btn {
+    position: fixed;
+    right: max(1rem, env(safe-area-inset-right, 0px));
+    bottom: max(1.15rem, env(safe-area-inset-bottom, 0px));
+    z-index: 300;
+    width: 3.5rem;
+    height: 3.5rem;
+    padding: 0;
+    border-radius: 50%;
+    justify-content: center;
+    gap: 0;
+    font-size: 0;
+    background: linear-gradient(180deg, #3ee576 0%, #25d366 45%, #1ebe5b 100%);
+    border: none;
+    box-shadow:
+      0 4px 16px rgba(37, 211, 102, 0.5),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  }
+
+  .lf-header-whatsapp-btn:active {
+    transform: scale(0.96);
+  }
+
+  .lf-header-whatsapp-btn .lf-wa-label {
+    display: none;
+  }
+
+  .lf-header-whatsapp-btn i {
+    font-size: 1.75rem;
+    line-height: 1;
+    filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.15));
+  }
+
+  body.lf-landing .lf-main {
+    padding-bottom: 5.5rem;
+  }
+}
+
+/* —— Final expense calculator (inline flow) —— */
+.lf-step--calc .lf-calc-summary-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  margin: 0 0 1.25rem;
+  font-size: 0.88rem;
+  color: #475569;
+}
+
+.lf-step--calc .lf-calc-summary-chips span strong {
+  color: #1e293b;
+}
+
+.lf-calc-tier-row {
+  margin-bottom: 1rem;
+}
+
+.lf-calc-tier-select,
+.lf-calc-line-select {
+  width: 100%;
+  max-width: 18rem;
+  margin-left: auto;
+  display: block;
+  padding: 0.55rem 0.75rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  background: #fff;
+  color: #1e293b;
+}
+
+.lf-calc-tier-guide {
+  margin-top: 0.75rem;
+}
+
+.lf-calc-tier-examples {
+  margin: 0;
+  padding-left: 1.15rem;
+  font-size: 0.86rem;
+  color: #64748b;
+  line-height: 1.45;
+}
+
+.lf-calc-tier-examples li + li {
+  margin-top: 0.35rem;
+}
+
+.lf-calc-tier-most {
+  font-style: normal;
+  color: #0d47a1;
+}
+
+.lf-calc-table-wrap {
+  overflow-x: auto;
+  margin-top: 0.5rem;
+}
+
+.lf-calc-line-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+
+.lf-calc-line-table th,
+.lf-calc-line-table td {
+  padding: 0.65rem 0.5rem;
+  border-bottom: 1px solid #e2e8f0;
+  vertical-align: middle;
+}
+
+.lf-calc-line-table th {
+  font-weight: 500;
+  color: #334155;
+  text-align: left;
+  width: 58%;
+}
+
+.lf-calc-line-table td {
+  text-align: right;
+}
+
+.lf-calc-amt {
+  font-weight: 600;
+  color: #1e293b;
+  white-space: nowrap;
+}
+
+.lf-calc-subtotal-row th,
+.lf-calc-subtotal-row td {
+  border-bottom: none;
+  padding-top: 0.85rem;
+  font-weight: 700;
+}
+
+.lf-calc-money-input {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.35rem;
+  max-width: 12rem;
+  margin-left: auto;
+}
+
+.lf-calc-money-input span {
+  color: #64748b;
+  font-weight: 600;
+}
+
+.lf-calc-money-input .lf-text-input {
+  max-width: 9rem;
+  text-align: right;
+}
+
+.lf-calc-info-breakdown {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 0.84rem;
+}
+
+.lf-calc-info-breakdown li {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.25rem 0;
+}
+
+.lf-calc-info-breakdown-amt {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.lf-calc-total-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 1.25rem 1.35rem;
+  margin: 1.25rem 0;
+}
+
+.lf-calc-total-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 0.45rem 0;
+  font-size: 0.95rem;
+  color: #475569;
+}
+
+.lf-calc-total-line--grand {
+  margin-top: 0.5rem;
+  padding-top: 0.85rem;
+  border-top: 2px solid #cbd5e1;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.lf-calc-amt--lg {
+  font-size: 1.05rem;
+}
+
+.lf-calc-amt--grand {
+  font-size: 1.35rem;
+  color: #0d47a1;
+}
+
+.lf-objective-grid--calc-results {
+  --obj-cols: 2;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+@media (max-width: 639px) {
+  .lf-objective-grid--calc-results {
+    --obj-size: min(
+      19.5rem,
+      calc((100vw - 0.65rem - var(--obj-gap)) / 2)
+    );
+  }
+}
+
+@media (min-width: 640px) {
+  .lf-objective-grid--calc-results {
+    --obj-size: min(18.5rem, calc((min(100vw, 42rem) - var(--obj-gap)) / 2));
+  }
+}
+
+.lf-calc-disclaimer {
+  font-size: 0.78rem;
+  color: #94a3b8;
+  line-height: 1.45;
+  margin: 1rem 0 0;
+}
+
+.lf-calc-start-over-wrap {
+  text-align: center;
+  margin: 0.75rem 0 0;
+}
+
+.lf-calc-start-over {
+  background: none;
+  border: none;
+  color: #64748b;
+  font-size: 0.88rem;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 0.25rem;
+}
+
+.lf-calc-start-over:hover {
+  color: #334155;
+}
+
+body.lf-landing--calc-results .lf-main {
+  padding-bottom: 2rem;
+}
+
+body.lf-landing--calc-results #lf-next-default-anchor {
+  display: none;
+}
+
+.lf-main:has(.lf-step--calc:not([hidden])) > #lf-next-default-anchor .lf-btn-next {
+  margin-top: 1.25rem;
+}
+
+.lf-main:has(.lf-step--calc-funeral:not([hidden])) > #lf-next-default-anchor .lf-btn-next,
+.lf-main:has(.lf-step--calc-family:not([hidden])) > #lf-next-default-anchor .lf-btn-next {
+  margin-top: 1.5rem;
+}
+
+/* v3 — professional bio (text only, no photo or personal story) */
+.lf-landing--bio-pro .lf-julie-card--pro {
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  gap: 0.25rem;
+  padding: 1rem 1.15rem;
+  background: #f8fafc;
+  border: 1px solid #dbe3ef;
+  border-radius: 0.5rem;
+}
+
+.lf-landing--bio-pro .lf-julie-card--pro .lf-julie-name {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1a365d;
+}
+
+.lf-landing--bio-pro .lf-julie-card--pro .lf-julie-title {
+  margin: 0;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #334155;
+  line-height: 1.35;
+}
+
+.lf-landing--bio-pro .lf-julie-card--pro .lf-julie-license {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: #64748b;
+}
+
+.lf-landing--bio-pro .lf-julie-card--pro .lf-julie-pro-link {
+  margin: 0.35rem 0 0;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #2563eb;
+}
+
+.lf-landing--bio-pro .lf-julie-bio-modal-body--pro {
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: #334155;
+}
+
+.lf-landing--bio-pro .lf-julie-bio-modal-body--pro .lf-julie-bio-modal-lead {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #475569;
+  margin-bottom: 0.75rem;
+}
+
+.lf-landing--bio-pro .lf-julie-bio-modal-body--pro p {
+  margin-bottom: 0.75rem;
+}
+
+.lf-landing--bio-pro .lf-julie-bio-modal-body--pro .lf-julie-bio-modal-license {
+  font-size: 0.8125rem;
+  color: #64748b;
+}
+
+.lf-landing--bio-pro .lf-julie-bio-modal-body--pro .lf-julie-bio-modal-license a {
+  font-weight: 600;
+  color: #2563eb;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.lf-landing--bio-pro .lf-julie-bio-modal-body--pro .lf-julie-bio-modal-license a:hover {
+  color: #1d4ed8;
+}
+
+/* v3 — centered step headings (match hero; allow long titles to wrap) */
+.lf-landing--bio-pro .lf-step--list .lf-title {
+  text-align: center;
+  text-wrap: balance;
+}
+
+.lf-landing--bio-pro .lf-step--list .lf-lead--list {
+  text-align: center;
+  text-wrap: balance;
+}
+
+.lf-landing--bio-pro .lf-step--select .lf-title {
+  white-space: normal;
+}

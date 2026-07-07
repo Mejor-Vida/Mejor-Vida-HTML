@@ -7,7 +7,7 @@
 
   var state = {
     view: "facebook",
-    periodDays: 7,
+    periodDays: 1,
     dateFrom: "",
     dateTo: "",
     data: null,
@@ -22,7 +22,7 @@
     adChartError: null,
   };
 
-  var PERIOD_PRESETS = [7, 14, 30, 90];
+  var PERIOD_PRESETS = [1, 7, 14, 30, 90];
 
   function pad2(n) {
     return n < 10 ? "0" + n : String(n);
@@ -176,13 +176,14 @@
       "<span>" + esc(t("funnel_period")) + "</span>" +
       '<select data-funnel-period>' +
       PERIOD_PRESETS.map(function (n) {
+        var label = n === 1 ? t("funnel_period_today") : t("funnel_period_days", { n: n });
         return (
           '<option value="' +
           n +
           '"' +
           (state.periodDays === n ? " selected" : "") +
           ">" +
-          esc(t("funnel_period_days", { n: n })) +
+          esc(label) +
           "</option>"
         );
       }).join("") +
@@ -507,6 +508,13 @@
         '<span class="crm-funnel-ad-metric-label">' + esc(t("funnel_gsc_position")) + "</span>" +
         '<strong class="crm-funnel-ad-metric-value">' + esc(fmtPosition(metrics.position)) + "</strong></div>";
       html += "</div>";
+
+      if (metrics.firstIncompleteDate && metrics.dateTo >= metrics.firstIncompleteDate) {
+        html +=
+          '<p class="crm-funnel-ad-metrics-note">' +
+          esc(t("funnel_gsc_fresh_data_note", { date: metrics.firstIncompleteDate })) +
+          "</p>";
+      }
 
       html += '<div class="crm-funnel-acq-grid crm-funnel-gsc-grid">';
       html += renderAcqList(
@@ -1154,7 +1162,7 @@
   }
 
   function mount(main) {
-    applyPeriodDays(7);
+    applyPeriodDays(1);
     state.view = "facebook";
     state.selectedNode = null;
     state.detail = null;

@@ -31,7 +31,7 @@ function cardPublished(g) {
           <article class="bg-white rounded-3 p-4 shadow-sm h-100 fe-guide-faq-card position-relative">
             <h3 class="h6 fw-bold mb-2" style="color:#1a365d;"><a class="text-decoration-none stretched-link" style="color:#1a365d;" href="${href}">${esc(g.question)}</a></h3>
             <p class="small text-body-secondary lh-base mb-2">${esc(g.teaser)}</p>
-            <p class="small mb-0"><span class="text-primary fw-semibold">Guía de Julie →</span></p>
+            <p class="small mb-0"><span class="text-primary fw-semibold">Guía de Mejor Vida →</span></p>
           </article>
         </div>`;
 }
@@ -42,7 +42,7 @@ function cardComingSoon(g) {
             <p class="fe-guide-faq-soon-badge mb-2">Próximamente</p>
             <h3 class="h6 fw-bold mb-2 fe-guide-faq-soon-title">${esc(g.question)}</h3>
             <p class="small lh-base mb-2 fe-guide-faq-soon-teaser">${esc(g.teaser)}</p>
-            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Julie</p>
+            <p class="small mb-0 fe-guide-faq-soon-foot">Guía de Mejor Vida</p>
           </article>
         </div>`;
 }

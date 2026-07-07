@@ -1,3 +1,5 @@
+@import url("nav-questions-dropdown.css");
+
 /* Shared quote flow pages — header + hero (from quote.html) */
     /* Two-tone blue hero - smooth curve from bottom-left to top-right */
     .hero-two-tone {
@@ -208,9 +210,9 @@
     .navbar-nav { flex: 1 1 auto; display: flex !important; align-items: center !important; justify-content: flex-start; margin: 0; padding: 0; list-style: none; }
     .navbar-nav .nav-link { padding-left: 15px; padding-right: 15px; }
 
-    header.sticky-top { height: auto !important; min-height: 81px; padding: 0 !important; }
-    header.sticky-top > .container { height: auto !important; min-height: 81px; padding-top: 0 !important; padding-bottom: 0 !important; padding-left: 0 !important; display: flex !important; align-items: center !important; }
-    .header-inner { display: flex !important; align-items: center !important; justify-content: flex-start !important; gap: 0; width: 100%; }
+    header.sticky-top { height: auto !important; min-height: 81px; padding: 0 !important; overflow: visible !important; }
+    header.sticky-top > .container { height: auto !important; min-height: 81px; padding-top: 0 !important; padding-bottom: 0 !important; padding-left: 0 !important; display: flex !important; align-items: center !important; overflow: visible !important; }
+    .header-inner { display: flex !important; align-items: center !important; justify-content: flex-start !important; gap: 0; width: 100%; overflow: visible !important; }
     .header-logo-wrap { flex: 0 0 auto; display: flex !important; align-items: center !important; justify-content: center !important; height: 81px !important; padding: 0 !important; margin-left: -120px !important; margin-right: 1rem !important; }
     .header-logo { height: 244px !important; width: auto !important; max-height: none !important; object-fit: contain; display: block !important; transform: translateY(8px) !important; }
     .nav-link-cm { white-space: nowrap !important; }
@@ -227,6 +229,7 @@
       gap: 0.35rem 0.72rem !important;
       justify-content: flex-start !important;
       padding-right: 0.5rem;
+      overflow: visible !important;
     }
     .header-inner > .d-flex.align-items-center.gap-2,
     .header-inner > .header-actions {

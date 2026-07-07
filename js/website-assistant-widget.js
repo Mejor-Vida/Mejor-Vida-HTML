@@ -75,19 +75,15 @@
 
   var NAV_TO_ASSISTANT_BOUND = false;
 
-  /** Desktop header + mobile drawer: "Got questions?" links use #final-expense-answers — open chat instead. */
+  /** Open chat from header dropdown items marked data-mvi-open-chat. */
   function bindNavQuestionsToAssistant(setOpen) {
     if (NAV_TO_ASSISTANT_BOUND) return;
     NAV_TO_ASSISTANT_BOUND = true;
     document.addEventListener(
       "click",
       function (e) {
-        var a = e.target && e.target.closest && e.target.closest("a[href]");
-        if (!a) return;
-        if (a.getAttribute("target") === "_blank") return;
-        var href = a.getAttribute("href") || "";
-        if (href.indexOf("#final-expense-answers") === -1) return;
-        if (!a.closest("header")) return;
+        var el = e.target && e.target.closest && e.target.closest("[data-mvi-open-chat]");
+        if (!el) return;
         e.preventDefault();
         setOpen(true);
         var mm = document.getElementById("mobile-menu");

@@ -14,7 +14,7 @@
 <title>{{PAGE_TITLE}} | Mejor Vida Insurance</title>
 <meta content="{{META_DESCRIPTION}}" name="description"/>
 <meta content="index, follow" name="robots"/>
-<meta content="{{AUTHOR_NAME}}, Licensed Insurance Agent - Mejor Vida Insurance LLC" name="author"/>
+<meta content="Mejor Vida Insurance LLC" name="author"/>
 <link href="{{CANONICAL_URL}}" rel="canonical"/>
 <meta content="{{OG_TITLE}}" property="og:title"/>
 <meta content="{{META_DESCRIPTION}}" property="og:description"/>
@@ -39,13 +39,14 @@
 </head>
 <body style="font-family:'Inter',system-ui,sans-serif;">
 {{HEADER}}
+{{GUIDE_TOC_CHROME}}
 <section class="fe-guide-hero" aria-label="Encabezado de la guía">
 <div class="container">
 <div class="fe-guide-hero-head">
 <button type="button" class="fe-guide-ai-pledge" id="fe-guide-ai-pledge-btn" aria-haspopup="dialog" aria-controls="fe-guide-ai-modal"><i class="fas fa-user-check" aria-hidden="true"></i> {{AI_FREE_PLEDGE_LABEL}}</button>
 <nav aria-label="Breadcrumb" class="fe-guide-breadcrumb">
 <a href="../index.html">Inicio</a> <span aria-hidden="true">›</span>
-<a href="../index.html#final-expense-answers">Gastos finales</a> <span aria-hidden="true">›</span>
+<a href="../guias-gastos-finales.html">Gastos finales</a> <span aria-hidden="true">›</span>
 <span>{{QUESTION}}</span>
 </nav>
 <h1>{{HEADLINE}}</h1>
@@ -55,20 +56,20 @@
 <div class="fe-guide-avatar">
 <picture>
 <source type="image/webp" srcset="../img/opt/julie-headshot.webp"/>
-<img alt="Julie Braunsroth, experta en gastos finales en Nebraska" decoding="async" height="72" loading="eager" src="../img/opt/julie-headshot.png" width="72"/>
+<img alt="Mejor Vida Insurance, agencia de gastos finales en Nebraska" decoding="async" height="72" loading="eager" src="../img/opt/julie-headshot.png" width="72"/>
 </picture>
 </div>
 <div class="fe-guide-trust-meta">
 <p><strong>Escrito por:</strong> <a href="{{AUTHOR_PROFILE_URL}}">{{AUTHOR_NAME}}</a>, {{AUTHOR_TITLE}} en {{AUTHOR_LOCATION}}</p>
 <p><strong>Verificado por:</strong> {{FACT_CHECKED_BY}}</p>
-<p><strong>Actualizado el:</strong> {{DATE_DISPLAY}}</p>
+<p><strong>Actualizado el:</strong> {{DATE_DISPLAY}} · <button type="button" class="fe-guide-disclosures-link" id="fe-guide-disclosures-btn" aria-haspopup="dialog" aria-controls="fe-guide-disclosures-modal">{{TRANSPARENCY_LINK_LABEL}}</button></p>
 </div>
 </div>
 </div>
 </div>
 </section>
 <main class="fe-guide-content-wrap">
-<section aria-label="Puntos clave" class="fe-guide-takeaways">
+<section aria-label="Puntos clave" class="fe-guide-takeaways" id="fe-guide-takeaways">
 <h2 class="fe-guide-takeaways-header">Puntos clave</h2>
 <div class="fe-guide-takeaways-body">
 <ul>
@@ -76,15 +77,15 @@
 </ul>
 </div>
 </section>
-<article class="fe-guide-body">
+<article class="fe-guide-body" id="fe-guide-body">
 {{BODY_PARAGRAPHS}}
-<section class="fe-guide-cta" aria-label="Siguiente paso">
+<section class="fe-guide-cta" aria-label="Siguiente paso" id="fe-guide-cta">
 <h2 class="h5 fw-bold mb-2" style="color:#1a365d;">¿Quiere ver opciones para su situación?</h2>
 <p class="mb-3 small text-body-secondary">Julie compara compañías de gastos finales para familias en Nebraska. Empiece con una cotización gratuita en línea o escríbanos por WhatsApp.</p>
 <a class="btn btn-primary me-2 mb-2" href="/quote.html">Cotización gratuita</a>
 <a class="btn btn-outline-primary mb-2" href="https://wa.me/14024405438?text=Hola%2C%20tengo%20una%20pregunta%20sobre%20el%20seguro%20de%20gastos%20finales." rel="noopener" target="_blank">WhatsApp</a>
 </section>
-<section aria-label="Avisos legales" class="fe-guide-disclosures">
+<section aria-label="Avisos legales" class="fe-guide-disclosures" id="fe-guide-disclosures">
 <h2>Divulgaciones</h2>
 {{DISCLOSURES_BLOCK}}
 </section>
@@ -103,11 +104,14 @@
 </div>
 </div>
 </div>
+{{TRANSPARENCY_MODAL}}
 {{FOOTER}}
 <script defer src="../bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="../js/mvi-funnel-track.js?v=20260702e"></script>
 <script defer src="../js/mvi-ga4-funnel.js"></script>
+<script defer src="../js/fe-guide-toc.js"></script>
 <script defer src="../script.js"></script>
+<script defer src="../js/mvi-nav-questions.js"></script>
 <script>
   const hamburgerBtn = document.getElementById('hamburger-btn');
   const mobileMenu = document.getElementById('mobile-menu');
@@ -127,34 +131,38 @@
   if (document.getElementById('year')) document.getElementById('year').textContent = new Date().getFullYear();
 
   (function () {
-    const btn = document.getElementById('fe-guide-ai-pledge-btn');
-    const backdrop = document.getElementById('fe-guide-ai-modal-backdrop');
-    const closeBtn = document.getElementById('fe-guide-ai-modal-close');
-    const modal = document.getElementById('fe-guide-ai-modal');
-    if (!btn || !backdrop || !closeBtn || !modal) return;
+    function bindModal(btnId, backdropId, closeId) {
+      const btn = document.getElementById(btnId);
+      const backdrop = document.getElementById(backdropId);
+      const closeBtn = document.getElementById(closeId);
+      if (!btn || !backdrop || !closeBtn) return;
 
-    function openModal() {
-      backdrop.hidden = false;
-      backdrop.classList.add('is-open');
-      document.body.style.overflow = 'hidden';
-      closeBtn.focus();
+      function openModal() {
+        backdrop.hidden = false;
+        backdrop.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+        closeBtn.focus();
+      }
+
+      function closeModal() {
+        backdrop.classList.remove('is-open');
+        backdrop.hidden = true;
+        document.body.style.overflow = '';
+        btn.focus();
+      }
+
+      btn.addEventListener('click', openModal);
+      closeBtn.addEventListener('click', closeModal);
+      backdrop.addEventListener('click', function (e) {
+        if (e.target === backdrop) closeModal();
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && backdrop.classList.contains('is-open')) closeModal();
+      });
     }
 
-    function closeModal() {
-      backdrop.classList.remove('is-open');
-      backdrop.hidden = true;
-      document.body.style.overflow = '';
-      btn.focus();
-    }
-
-    btn.addEventListener('click', openModal);
-    closeBtn.addEventListener('click', closeModal);
-    backdrop.addEventListener('click', function (e) {
-      if (e.target === backdrop) closeModal();
-    });
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && backdrop.classList.contains('is-open')) closeModal();
-    });
+    bindModal('fe-guide-ai-pledge-btn', 'fe-guide-ai-modal-backdrop', 'fe-guide-ai-modal-close');
+    bindModal('fe-guide-disclosures-btn', 'fe-guide-disclosures-modal-backdrop', 'fe-guide-disclosures-modal-close');
   })();
 </script>
 <div data-api-url="/api/website-chat" data-mvi-avatar-base="/img/mvi-chat-avatar" id="mvi-assistant-root"></div>

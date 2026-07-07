@@ -170,6 +170,7 @@
       funnel_ad_spend: "Ad spend",
       funnel_ad_metrics_not_configured: "Ad platform credentials not configured for this tab.",
       funnel_period: "Period",
+      funnel_period_today: "Today",
       funnel_period_days: "Last {n} days",
       funnel_period_custom: "Custom range",
       funnel_days_label: "days",
@@ -190,6 +191,8 @@
       funnel_gsc_top_pages: "Top landing pages (clicks)",
       funnel_gsc_clicks_daily: "Daily search clicks",
       funnel_gsc_impressions_daily: "Daily search impressions",
+      funnel_gsc_fresh_data_note:
+        "Includes preliminary Search Console data from {date} onward; numbers may change until Google finalizes them (often 2–3 days).",
       funnel_policies_title: "Policies sold",
       funnel_policies_sold: "Policies sold",
       funnel_policies_sold_daily: "Daily policies sold",
@@ -1078,6 +1081,7 @@
       funnel_ad_spend: "Gasto en anuncios",
       funnel_ad_metrics_not_configured: "Credenciales de la plataforma de anuncios no configuradas para esta pestaña.",
       funnel_period: "Período",
+      funnel_period_today: "Hoy",
       funnel_period_days: "Últimos {n} días",
       funnel_period_custom: "Rango personalizado",
       funnel_days_label: "días",
@@ -1098,6 +1102,8 @@
       funnel_gsc_top_pages: "Páginas principales (clics)",
       funnel_gsc_clicks_daily: "Clics diarios en búsqueda",
       funnel_gsc_impressions_daily: "Impresiones diarias en búsqueda",
+      funnel_gsc_fresh_data_note:
+        "Incluye datos preliminares de Search Console desde el {date}; las cifras pueden cambiar hasta que Google las finalice (a menudo 2–3 días).",
       funnel_policies_title: "Pólizas vendidas",
       funnel_policies_sold: "Pólizas vendidas",
       funnel_policies_sold_daily: "Pólizas vendidas por día",
