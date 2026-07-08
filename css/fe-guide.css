@@ -283,6 +283,24 @@
   margin-top: 2rem;
 }
 
+.fe-guide-btn-whatsapp {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: #25d366;
+  border-color: #25d366;
+  color: #fff !important;
+  font-weight: 600;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.fe-guide-btn-whatsapp:hover,
+.fe-guide-btn-whatsapp:focus {
+  background: #1da851;
+  border-color: #1da851;
+  color: #fff !important;
+}
+
 .fe-guide-related {
   margin-top: 2.5rem;
   padding-top: 1.5rem;

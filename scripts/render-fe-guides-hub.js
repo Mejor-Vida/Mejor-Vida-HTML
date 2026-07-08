@@ -57,7 +57,7 @@ ${categories}
 <h2 class="h5 fw-bold mb-2" style="color:#1a365d;">¿Quiere ver opciones para su situación?</h2>
 <p class="mb-3 small text-body-secondary">Mejor Vida Insurance compara compañías de gastos finales para familias en Nebraska. Empiece con una cotización gratuita en línea o escríbanos por WhatsApp.</p>
 <a class="btn btn-primary me-2 mb-2" href="/quote.html">Cotización gratuita</a>
-<a class="btn btn-outline-primary mb-2" href="https://wa.me/14024405438?text=Hola%2C%20tengo%20una%20pregunta%20sobre%20el%20seguro%20de%20gastos%20finales." rel="noopener" target="_blank">WhatsApp</a>
+<a class="btn fe-guide-btn-whatsapp mb-2" href="https://wa.me/14024405438?text=Hola%2C%20tengo%20una%20pregunta%20sobre%20el%20seguro%20de%20gastos%20finales." rel="noopener" target="_blank"><i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp</a>
 </section>
 </main>
 ${footer}

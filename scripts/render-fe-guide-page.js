@@ -142,9 +142,10 @@ function renderGuide(guide, faqIndex, shell) {
     headline: alternateLine ? `${headline} — ${alternateLine}` : headline,
     description: guide.metaDescription || guide.dek,
     author: {
-      "@type": "Organization",
-      name: guide.authorName || "Mejor Vida Insurance LLC",
-      url: `${BASE}/`,
+      "@type": "Person",
+      name: guide.authorName || "Julie Braunsroth",
+      url: `${BASE}/about-julie.html`,
+      jobTitle: guide.authorTitle || "experta en gastos finales",
     },
     editor: {
       "@type": "Organization",
