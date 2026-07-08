@@ -63,7 +63,7 @@
   }
 
   var NEXT_LABELS = {
-    default: IS_EN ? "Next" : "Siguiente",
+    default: IS_EN ? "Continue to your price →" : "Continuar hacia su precio →",
   };
 
   var CHOICE_SELECTOR = ".lf-option-btn";
@@ -519,6 +519,28 @@
     setProgressPct(((idx + credit) / nums.length) * 100);
   }
 
+  function updateFlowReassurance(step) {
+    if (!flowReassurance) return;
+    var icon = document.getElementById("lf-flow-reassurance-icon");
+    var textEl = document.getElementById("lf-flow-reassurance-text");
+    if (!textEl) return;
+    if (quoteSubmitting) {
+      if (icon) icon.hidden = false;
+      textEl.textContent = ui(
+        "Calculating your personalized price.",
+        "Estamos calculando su precio personalizado."
+      );
+      return;
+    }
+    if (icon) icon.hidden = true;
+    if (step > 1) {
+      textEl.textContent = ui(
+        "We're almost done. Your personalized price will be ready in about 1 minute.",
+        "Ya casi terminamos. Su precio personalizado estará listo en aproximadamente 1 minuto."
+      );
+    }
+  }
+
   function updateNextButton() {
     if (!nextBtn) {
       updateProgress();
@@ -537,7 +559,7 @@
     }
     if (isCalculatorStep(currentStep)) {
       nextBtn.hidden = false;
-      nextBtn.textContent = ui("Next", "Siguiente");
+      nextBtn.textContent = NEXT_LABELS.default;
       var canProceed =
         window.MVILandingCalculator && window.MVILandingCalculator.canProceed
           ? window.MVILandingCalculator.canProceed(currentStep)
@@ -560,7 +582,7 @@
     if (currentStep === 11) {
       nextBtn.textContent = nameStepPhase === "consent" ? ui("Continue", "Continuar") : (NEXT_LABELS[currentStep] || NEXT_LABELS.default);
     } else if (currentStep === 13 && !quoteSubmitting) {
-      nextBtn.textContent = ui("See my estimate", "Ver mi estimado");
+      nextBtn.textContent = ui("See your estimate", "Ver su estimado");
     } else {
       nextBtn.textContent = NEXT_LABELS[currentStep] || NEXT_LABELS.default;
     }
@@ -978,7 +1000,9 @@
     var inFlow = step > 1;
     document.body.classList.toggle("lf-landing--in-flow", inFlow);
     if (flowReassurance) {
-      flowReassurance.hidden = !inFlow;
+      var showReassurance = inFlow && !isResults && !isCalcResults;
+      flowReassurance.hidden = !showReassurance;
+      if (showReassurance) updateFlowReassurance(step);
     }
     syncNameStepPhase();
     placeNextButton();
@@ -1130,6 +1154,7 @@
       },
       setSubmitting: function (v) {
         quoteSubmitting = !!v;
+        updateFlowReassurance(currentStep);
         updateNextButton();
       },
       onQuoteComplete: function (quotePayload) {
@@ -1281,7 +1306,7 @@
       items: getStateListItems(),
       showCode: true,
       allowEmpty: true,
-      placeholder: ui("Select your state", "Selecciona tu estado"),
+      placeholder: ui("Select your state", "Seleccione su estado"),
       inputId: "lf-state-combobox-input",
       listboxId: "lf-state-combobox-listbox",
       skipLabel: true,
@@ -1636,7 +1661,7 @@
         ? iframe.getAttribute("data-src-en") || iframe.getAttribute("data-src-es")
         : iframe.getAttribute("data-src-es") || iframe.getAttribute("data-src-en");
       if (url) iframe.setAttribute("src", url);
-      iframe.setAttribute("title", ui("Schedule a call with Julie", "Agendar cita con Julie"));
+      iframe.setAttribute("title", ui("Schedule a call with Mejor Vida Insurance", "Agendar cita con Mejor Vida Insurance"));
     }
 
     modalEl.addEventListener("show.bs.modal", setScheduleIframeSrc);

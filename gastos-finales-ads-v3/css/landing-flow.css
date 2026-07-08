@@ -172,6 +172,10 @@ body.lf-landing {
   line-height: 1;
 }
 
+.lf-flow-reassurance-icon[hidden] {
+  display: none !important;
+}
+
 .lf-header-tagline {
   width: 100%;
   max-width: none;

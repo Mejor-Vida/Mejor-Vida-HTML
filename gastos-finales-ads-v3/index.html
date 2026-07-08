@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex, nofollow" />
-  <meta name="description" content="Tu estimado personalizado de seguro de gastos finales con Mejor Vida Insurance en Nebraska." />
+  <meta name="description" content="Su estimado personalizado de seguro de gastos finales con Mejor Vida Insurance en Nebraska." />
   <meta name="mvi-landing-variant" content="final-expense-es-v3" />
   <!-- Meta Pixel Code -->
   <script defer src="/js/meta-pixel-landing.js"></script>
@@ -26,7 +26,7 @@
   <link href="../css/fontawesome-mvi.min.css" rel="stylesheet"/>
   <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css" />
   <link rel="stylesheet" href="../css/quote-flow-shared.css" />
-  <link rel="stylesheet" href="css/landing-flow.css?v=20260705v3gear" />
+  <link rel="stylesheet" href="css/landing-flow.css?v=20260707v3usted" />
   <link rel="stylesheet" href="css/landing-quote-results.css?v=20260605b" />
   <link rel="preload" as="image" href="../img/opt/landing-v3-quote-cta-hero.webp?v=20260705v3hero2" type="image/webp" />
 </head>
@@ -40,7 +40,7 @@
 </picture>
       </a>
       <div class="lf-header-actions">
-        <a class="lf-help" href="tel:+14024405438"><span class="lf-help-label">¿Necesitas ayuda?</span><span class="lf-help-phone">402-440-5438</span></a>
+        <a class="lf-help" href="tel:+14024405438"><span class="lf-help-label">¿Necesita ayuda?</span><span class="lf-help-phone">402-440-5438</span></a>
         <a class="lf-header-whatsapp-btn" href="https://wa.me/14024405438?text=Hola%2C%20me%20interes%C3%B3%20conocer%20el%20seguro%20de%20gastos%20finales." rel="noopener noreferrer" target="_blank" aria-label="WhatsApp con Mejor Vida"><i class="fab fa-whatsapp" aria-hidden="true"></i><span class="lf-wa-label">WhatsApp</span></a>
       </div>
     </div>
@@ -51,8 +51,8 @@
         </div>
       </div>
       <p class="lf-flow-reassurance" id="lf-flow-reassurance" hidden aria-live="polite">
-        <i class="fa-solid fa-gear fa-spin lf-flow-reassurance-icon" aria-hidden="true"></i>
-        <span>Estamos calculando su precio personalizado.</span>
+        <i class="fa-solid fa-gear fa-spin lf-flow-reassurance-icon" id="lf-flow-reassurance-icon" aria-hidden="true" hidden></i>
+        <span id="lf-flow-reassurance-text">Ya casi terminamos. Su precio personalizado estará listo en aproximadamente 1 minuto.</span>
       </p>
     </div>
     <h1 class="lf-header-tagline" id="lf-header-tagline" hidden>¿Cuánto costaría proteger a su familia?</h1>
@@ -66,7 +66,7 @@
     <button type="button" class="lf-btn-back" id="lf-btn-back" hidden aria-label="Volver al paso anterior">← Atrás</button>
 
     <section class="lf-step lf-step--info lf-step--objectives" data-step="1" aria-labelledby="lf-header-tagline">
-      <div class="lf-objective-grid lf-objective-grid--single" id="lf-objective-grid" role="group" aria-label="Calcular mi precio en 1 minuto">
+      <div class="lf-objective-grid lf-objective-grid--single" id="lf-objective-grid" role="group" aria-label="Calcular su precio en 1 minuto">
         <button type="button" class="lf-objective-card lf-objective-card--price-cta" data-lf-objective="quote">
           <span class="lf-objective-hero-image" aria-hidden="true">
             <picture>
@@ -75,7 +75,7 @@
             </picture>
           </span>
           <span class="lf-objective-cta-bar">
-            <span class="lf-objective-title">Calcular mi precio en 1 minuto</span>
+            <span class="lf-objective-title">Calcular su precio en 1 minuto</span>
             <span class="lf-objective-chevron" aria-hidden="true"><i class="fa-solid fa-chevron-right"></i></span>
           </span>
         </button>
@@ -86,15 +86,15 @@
     </section>
 
     <section class="lf-step lf-step--list lf-step--select lf-step--calc" data-step="21" data-lf-flow="calculator" aria-labelledby="lf-calc-step21-title" hidden>
-      <h1 class="lf-title" id="lf-calc-step21-title">¿En qué estado vives?</h1>
-      <p class="lf-lead lf-lead--list">Verás promedios de entierro y cremación para ese estado. Nebraska viene preseleccionado; elige otro estado si planeas fuera de Nebraska.</p>
+      <h1 class="lf-title" id="lf-calc-step21-title">¿En qué estado vive usted?</h1>
+      <p class="lf-lead lf-lead--list">Verá promedios de entierro y cremación para ese estado. Nebraska viene preseleccionado; elija otro estado si planea fuera de Nebraska.</p>
       <div class="lf-select-field">
         <div class="lf-state-combobox-mount" id="lf-calc-state-mount"></div>
       </div>
     </section>
 
     <section class="lf-step lf-step--list lf-step--calc" data-step="22" data-lf-flow="calculator" aria-labelledby="lf-calc-step22-title" hidden>
-      <h1 class="lf-title" id="lf-calc-step22-title">¿Qué tipo de ceremonia prefieres?</h1>
+      <h1 class="lf-title" id="lf-calc-step22-title">¿Qué tipo de ceremonia prefiere?</h1>
       <p class="lf-lead lf-lead--list">Esto nos ayuda a estimar costos aproximados de gastos funerarios.</p>
       <div class="lf-option-list" role="radiogroup" aria-label="Tipo de ceremonia">
         <button type="button" class="lf-option-btn" data-value="burial" role="radio" aria-checked="false" tabindex="-1">Entierro</button>
@@ -103,8 +103,8 @@
     </section>
 
     <section class="lf-step lf-step--list lf-step--calc lf-step--calc-funeral" data-step="23" data-lf-flow="calculator" data-field-type="calc-funeral" aria-labelledby="lf-calc-step23-title" hidden>
-      <h1 class="lf-title" id="lf-calc-step23-title">¿Cuánto podrían costar tus gastos funerarios?</h1>
-      <p class="lf-lead lf-lead--list">Elige un nivel y ajusta las partidas abajo.</p>
+      <h1 class="lf-title" id="lf-calc-step23-title">¿Cuánto podrían costar sus gastos funerarios?</h1>
+      <p class="lf-lead lf-lead--list">Elija un nivel y ajuste las partidas abajo.</p>
       <div class="lf-calc-summary-chips" id="lf-calc-funeral-chips"></div>
       <div class="lf-calc-tier-row">
         <label class="lf-select-label" for="lf-calc-tier-select">Nivel de planificación</label>
@@ -119,7 +119,7 @@
     </section>
 
     <section class="lf-step lf-step--list lf-step--calc lf-step--calc-family" data-step="24" data-lf-flow="calculator" data-field-type="calc-family" aria-labelledby="lf-calc-step24-title" hidden>
-      <h1 class="lf-title" id="lf-calc-step24-title">¿Qué gastos del hogar seguirían para tu familia?</h1>
+      <h1 class="lf-title" id="lf-calc-step24-title">¿Qué gastos del hogar seguirían para su familia?</h1>
       <p class="lf-lead lf-lead--list">Muchas familias planean al menos 90 días de margen financiero.</p>
       <div class="lf-calc-table-wrap">
         <table class="lf-calc-line-table">
@@ -166,7 +166,7 @@
 
     <section class="lf-step lf-step--list lf-step--calc lf-step--calc-results" data-step="25" data-lf-flow="calculator" data-field-type="calc-results" aria-labelledby="lf-calc-step25-title" hidden>
       <h1 class="lf-title" id="lf-calc-step25-title">Estimación total de gastos finales</h1>
-      <p class="lf-lead lf-lead--list">Según tus selecciones, aquí está tu estimación total. Esta herramienta es para planificación — Julie puede ayudarte a elegir cobertura de seguro según tus metas.</p>
+      <p class="lf-lead lf-lead--list">Según sus selecciones, aquí está su estimación total. Esta herramienta es para planificación — Julie puede ayudarle a elegir cobertura de seguro según sus metas.</p>
       <div class="lf-calc-summary-chips" id="lf-calc-results-chips"></div>
       <div class="lf-calc-total-card">
         <div class="lf-calc-total-line">
@@ -215,14 +215,14 @@
     </section>
 
     <section class="lf-step lf-step--list lf-step--select" data-step="2" data-field="state" data-field-type="select" aria-labelledby="lf-step2-title" hidden>
-      <h1 class="lf-title" id="lf-step2-title">Las aseguradoras y los precios cambian según el estado donde vive.</h1>
-      <p class="lf-lead lf-lead--list">Seleccione su estado para mostrar únicamente las opciones disponibles para usted.</p>
+      <h1 class="lf-title" id="lf-step2-title">¿En qué estado vive usted?</h1>
+      <p class="lf-lead lf-lead--list">Los precios y las aseguradoras varían según el estado. Confirme su estado para mostrar únicamente las opciones disponibles para usted.</p>
 
       <div class="lf-select-field">
         <label class="lf-select-label" for="lf-state-combobox-input">Estado</label>
         <div class="lf-state-combobox-mount" id="lf-state-combobox-mount"></div>
       </div>
-      <p class="lf-text-hint" id="lf-state-hint" hidden>Selecciona tu estado.</p>
+      <p class="lf-text-hint" id="lf-state-hint" hidden>Seleccione su estado.</p>
     </section>
 
     <section class="lf-step lf-step--list" data-step="3" data-field="sex" aria-labelledby="lf-step3-title" hidden>
@@ -236,19 +236,19 @@
     </section>
 
     <section class="lf-step lf-step--list lf-step--date" data-step="4" data-field="birthdate" data-field-type="date" aria-labelledby="lf-step4-title" hidden>
-      <h1 class="lf-title" id="lf-step4-title">¿Cuál es tu fecha de nacimiento?</h1>
-      <p class="lf-lead lf-lead--list">Tu edad es un factor clave para calcular tu tarifa.</p>
+      <h1 class="lf-title" id="lf-step4-title">¿Cuál es su fecha de nacimiento?</h1>
+      <p class="lf-lead lf-lead--list">Su edad es un factor clave para calcular su tarifa.</p>
 
       <div class="lf-date-field">
         <label class="lf-visually-hidden" for="lf-birthdate-input">Fecha de nacimiento</label>
         <span class="lf-date-icon" aria-hidden="true"><i class="fa-regular fa-calendar"></i></span>
         <input type="tel" class="lf-date-input" id="lf-birthdate-input" inputmode="numeric" autocomplete="bday" placeholder="mm/dd/yyyy" maxlength="10" aria-describedby="lf-birthdate-hint" />
       </div>
-      <p class="lf-date-hint" id="lf-birthdate-hint" hidden>Ingresa una fecha válida (mm/dd/aaaa).</p>
+      <p class="lf-date-hint" id="lf-birthdate-hint" hidden>Ingrese una fecha válida (mm/dd/aaaa).</p>
     </section>
 
     <section class="lf-step lf-step--list" data-step="5" data-field="tobacco" aria-labelledby="lf-step5-title" hidden>
-      <h1 class="lf-title" id="lf-step5-title">¿Has usado tabaco en los últimos 12 meses?</h1>
+      <h1 class="lf-title" id="lf-step5-title">¿Ha usado tabaco en los últimos 12 meses?</h1>
       <p class="lf-lead lf-lead--list">Incluye cigarrillos, puros, vapeo y otros productos con nicotina.</p>
 
       <div class="lf-option-list" role="radiogroup" aria-label="Uso de tabaco en los últimos 12 meses">
@@ -258,8 +258,8 @@
     </section>
 
     <section class="lf-step lf-step--list lf-step--name" data-step="11" data-field="legalName" data-field-type="name" aria-labelledby="lf-step11-title" hidden>
-      <h1 class="lf-title" id="lf-step11-title">¿Cuál es tu nombre?</h1>
-      <p class="lf-lead lf-lead--list">Esto nos ayuda a verificar tu identidad para darte tu estimado personalizado.<span class="lf-info-wrap"><button type="button" class="lf-info-btn" aria-expanded="false" aria-controls="lf-final-rate-info-tip" aria-label="Información sobre tu estimado y tarifa final con Julie">i</button></span></p>
+      <h1 class="lf-title" id="lf-step11-title">¿Cuál es su nombre?</h1>
+      <p class="lf-lead lf-lead--list">Esto nos ayuda a verificar su identidad para darle su estimado personalizado.<span class="lf-info-wrap"><button type="button" class="lf-info-btn" aria-expanded="false" aria-controls="lf-final-rate-info-tip" aria-label="Información sobre su estimado y tarifa final con Julie">i</button></span></p>
 
       <div class="lf-name-fields">
         <div class="lf-text-field lf-text-field--lock">
@@ -279,7 +279,7 @@
         </div>
       </div>
 
-      <p class="lf-encrypt-note"><i class="fa-solid fa-lock" aria-hidden="true"></i> Usamos cifrado seguro para proteger tus datos.</p>
+      <p class="lf-encrypt-note"><i class="fa-solid fa-lock" aria-hidden="true"></i> Usamos cifrado seguro para proteger sus datos.</p>
 
       <div class="lf-consent-block" id="lf-name-consent" hidden>
         <p class="lf-consent-lead">Al hacer clic en «Continuar», confirmo que soy el solicitante y que he recibido, leído y acepto:</p>
@@ -292,28 +292,28 @@
     </section>
 
     <section class="lf-step lf-step--list lf-step--email" data-step="12" data-field="email" data-field-type="email" aria-labelledby="lf-step12-title" hidden>
-      <h1 class="lf-title" id="lf-step12-title">¿Cuál es tu correo electrónico?</h1>
+      <h1 class="lf-title" id="lf-step12-title">¿Cuál es su correo electrónico?</h1>
 
       <div class="lf-text-field">
         <label class="lf-select-label" for="lf-email-input">Correo electrónico</label>
-        <input type="email" class="lf-text-input" id="lf-email-input" autocomplete="email" inputmode="email" maxlength="254" placeholder="tu@ejemplo.com" aria-describedby="lf-email-hint" />
+        <input type="email" class="lf-text-input" id="lf-email-input" autocomplete="email" inputmode="email" maxlength="254" placeholder="su@ejemplo.com" aria-describedby="lf-email-hint" />
       </div>
-      <p class="lf-text-hint" id="lf-email-hint" hidden>Ingresa un correo electrónico válido.</p>
+      <p class="lf-text-hint" id="lf-email-hint" hidden>Ingrese un correo electrónico válido.</p>
 
-      <p class="lf-encrypt-note"><i class="fa-solid fa-lock" aria-hidden="true"></i> Usamos cifrado seguro para proteger tus datos.</p>
+      <p class="lf-encrypt-note"><i class="fa-solid fa-lock" aria-hidden="true"></i> Usamos cifrado seguro para proteger sus datos.</p>
     </section>
 
     <section class="lf-step lf-step--list lf-step--phone" data-step="13" data-field="phone" data-field-type="phone" aria-labelledby="lf-step13-title" hidden>
-      <h1 class="lf-title" id="lf-step13-title">¿Cuál es tu número de teléfono?</h1>
-      <p class="lf-lead lf-lead--list">Julie usará este número para dar seguimiento a tu cotización.</p>
+      <h1 class="lf-title" id="lf-step13-title">¿Cuál es su número de teléfono?</h1>
+      <p class="lf-lead lf-lead--list">Julie usará este número para dar seguimiento a su cotización.</p>
 
       <div class="lf-text-field">
         <label class="lf-select-label" for="lf-phone-input">Número de teléfono</label>
         <input type="tel" class="lf-text-input" id="lf-phone-input" inputmode="tel" autocomplete="tel" placeholder="(402) 555-1234" maxlength="16" aria-describedby="lf-phone-hint" />
       </div>
-      <p class="lf-text-hint" id="lf-phone-hint" hidden>Ingresa un número de teléfono válido de 10 dígitos en EE. UU.</p>
+      <p class="lf-text-hint" id="lf-phone-hint" hidden>Ingrese un número de teléfono válido de 10 dígitos en EE. UU.</p>
 
-      <p class="lf-phone-guarantee">Te garantizamos: sin correo basura. Sin llamadas spam.</p>
+      <p class="lf-phone-guarantee">Le garantizamos: sin correo basura. Sin llamadas spam.</p>
 
       <div class="lf-sms-optin">
         <input type="checkbox" class="lf-sms-optin-check" id="lf-sms-consent" name="sms-consent" value="1" />
@@ -324,7 +324,7 @@
 
     <section class="lf-step lf-step--results" data-step="14" data-lf-results-only hidden aria-labelledby="lf-results-hero-title">
       <div class="lf-results-hero">
-        <h2 id="lf-results-hero-title">Tus mejores tarifas podrían no durar para siempre</h2>
+        <h2 id="lf-results-hero-title">Sus mejores tarifas podrían no durar para siempre</h2>
         <p>La edad y los cambios de salud pueden afectar las opciones futuras.</p>
       </div>
       <div class="lf-results-panel" id="lf-results-panel">
@@ -332,8 +332,8 @@
         <nav aria-label="Progreso de cotización" class="mvi-quote-macro-stepper mvi-quote-macro-stepper--light">
           <ol>
             <li class="is-done"><span class="mvi-quote-macro-num">1</span><span class="mvi-quote-macro-label">Información</span></li>
-            <li class="is-active"><span class="mvi-quote-macro-num">2</span><span class="mvi-quote-macro-label">Tu estimación</span></li>
-            <li><span class="mvi-quote-macro-num">3</span><span class="mvi-quote-macro-label">Agendar con Julie</span></li>
+            <li class="is-active"><span class="mvi-quote-macro-num">2</span><span class="mvi-quote-macro-label">Su estimación</span></li>
+            <li><span class="mvi-quote-macro-num">3</span><span class="mvi-quote-macro-label">Agendar con Mejor Vida Insurance</span></li>
           </ol>
         </nav>
         <p class="lf-results-lead-warning" id="lf-results-lead-warning" role="alert" hidden></p>
@@ -353,7 +353,7 @@
           <div class="mvi-results-main-col">
             <div class="mvi-result-action-card">
               <div class="mvi-result-action-main">
-                <p class="small text-body-secondary text-uppercase fw-semibold mb-2" style="letter-spacing:0.06em;">Mejor precio estimado para ti</p>
+                <p class="small text-body-secondary text-uppercase fw-semibold mb-2" style="letter-spacing:0.06em;">Mejor precio estimado para usted</p>
                 <div class="mvi-result-price-row">
                   <div>
                     <span class="mvi-result-low-value" id="lf-results-low-line" role="status"></span>
@@ -367,7 +367,7 @@
                 </div>
                 <p class="small text-body-secondary mb-0" id="lf-results-range-hint"></p>
                 <div class="mvi-result-action-cta">
-                  <p class="mvi-result-urgency mb-0">Reserva tu mejor precio <strong>hoy</strong>. La edad y los cambios de salud pueden limitar las opciones disponibles mañana.</p>
+                  <p class="mvi-result-urgency mb-0">Reserve su mejor precio <strong>hoy</strong>. La edad y los cambios de salud pueden limitar las opciones disponibles mañana.</p>
                   <div class="lf-objective-grid lf-objective-grid--calc-results lf-objective-grid--results" role="group" aria-label="Más opciones">
                     <button type="button" class="lf-objective-card" id="lf-results-start-calc">
                       <span class="lf-objective-icon lf-objective-icon--image" aria-hidden="true">
@@ -378,7 +378,7 @@
                       </span>
                       <span class="lf-objective-copy">
                         <span class="lf-objective-title">Calculadora de gastos finales</span>
-                        <span class="lf-objective-desc">Estima costos funerarios en tu estado</span>
+                        <span class="lf-objective-desc">Estime costos funerarios en su estado</span>
                       </span>
                       <span class="lf-objective-chevron" aria-hidden="true"><i class="fa-solid fa-chevron-right"></i></span>
                     </button>
@@ -391,7 +391,7 @@
                       </span>
                       <span class="lf-objective-copy">
                         <span class="lf-objective-title">Programar una llamada</span>
-                        <span class="lf-objective-desc">Agenda una cita con Julie</span>
+                        <span class="lf-objective-desc">Agende una cita con Mejor Vida Insurance</span>
                       </span>
                       <span class="lf-objective-chevron" aria-hidden="true"><i class="fa-solid fa-chevron-right"></i></span>
                     </button>
@@ -402,7 +402,7 @@
           </div>
           <aside class="mvi-results-details-aside" aria-labelledby="lf-results-details-heading">
             <div class="mvi-results-details-card">
-              <h3 id="lf-results-details-heading">Tu tarifa según estos datos</h3>
+              <h3 id="lf-results-details-heading">Su tarifa según estos datos</h3>
               <table class="mvi-results-details-table">
                 <tbody>
                   <tr><th scope="row">Nacimiento</th><td id="lf-results-detail-dob">—</td></tr>
@@ -422,21 +422,21 @@
           </aside>
         </div>
         <p class="lf-results-disclaimer" role="note">
-          <strong>Importante:</strong> Lo que ves aquí es solo un <strong>estimado orientativo</strong>, no el precio final de tu póliza. En tu llamada con Julie recibirás la <strong>cotización oficial</strong> según tu edad, salud y aseguradora — y, si calificas, podrás <strong>reservar y bloquear</strong> esa tarifa.
+          <strong>Importante:</strong> Lo que ve aquí es solo un <strong>estimado orientativo</strong>, no el precio final de su póliza. En su llamada con Mejor Vida Insurance recibirá la <strong>cotización oficial</strong> según su edad, salud y aseguradora — y, si califica, podrá <strong>reservar y bloquear</strong> esa tarifa.
         </p>
       </div>
     </section>
 
     <div class="lf-info-popover" id="lf-final-rate-info-tip" role="dialog" aria-labelledby="lf-final-rate-info-title" hidden>
-      <p class="lf-info-tip-lead" id="lf-final-rate-info-title">El precio del seguro de vida es personal; las tarifas dependen de tu situación.</p>
-      <p class="lf-info-tip-lead">Mejor Vida facilita este proceso. Responde unas preguntas y te daremos un estimado personalizado.</p>
+      <p class="lf-info-tip-lead" id="lf-final-rate-info-title">El precio del seguro de vida es personal; las tarifas dependen de su situación.</p>
+      <p class="lf-info-tip-lead">Mejor Vida facilita este proceso. Responda unas preguntas y le daremos un estimado personalizado.</p>
       <ul class="lf-info-tip-list">
-        <li><strong>Tarifa final:</strong> El costo exacto de tu póliza, confirmado en una llamada con Julie cuando se verifiquen tus datos.</li>
+        <li><strong>Tarifa final:</strong> El costo exacto de su póliza, confirmado en una llamada con Julie cuando se verifiquen sus datos.</li>
       </ul>
     </div>
 
     <div id="lf-next-default-anchor">
-      <button type="button" class="lf-btn-next" id="lf-btn-next" disabled>Siguiente</button>
+      <button type="button" class="lf-btn-next" id="lf-btn-next" disabled>Continuar hacia su precio →</button>
     </div>
 
     <button type="button" class="lf-julie-card lf-julie-card--after-next lf-julie-card--clickable lf-julie-card--pro" id="lf-julie-after-next" hidden data-bs-toggle="modal" data-bs-target="#lf-julie-bio-modal" aria-label="Información profesional sobre Mejor Vida Seguros">
@@ -501,11 +501,11 @@
     <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
       <div class="modal-content">
         <div class="modal-header border-bottom-0 pb-0">
-          <h2 class="modal-title h5 fw-bold" id="lf-schedule-modal-title" style="color:#1a365d;">Agendar cita con Julie</h2>
+          <h2 class="modal-title h5 fw-bold" id="lf-schedule-modal-title" style="color:#1a365d;">Agendar cita con Mejor Vida Insurance</h2>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
         </div>
         <div class="modal-body pt-2 lf-schedule-modal-iframe-wrap">
-          <iframe id="lf-schedule-iframe" data-src-es="https://meetings-na2.hubspot.com/julie-braunsroth" title="Agendar con Julie" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          <iframe id="lf-schedule-iframe" data-src-es="https://meetings-na2.hubspot.com/julie-braunsroth" title="Agendar con Mejor Vida Insurance" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
       </div>
     </div>
@@ -519,11 +519,11 @@
   <script src="js/landing-flow-search-combobox.js?v=20260526"></script>
   <script src="js/landing-flow-date-mask.js?v=20260526"></script>
   <script src="js/landing-flow-calculator.js?v=20260605a"></script>
-  <script src="js/landing-flow-quote-results.js?v=20260526"></script>
+  <script src="js/landing-flow-quote-results.js?v=20260707v3company"></script>
   <script src="/js/mvi-funnel-track.js?v=20260703d"></script>
   <script src="/js/meta-capi-match.js?v=20260701b"></script>
   <script src="/js/meta-capi-events.js?v=20260701b"></script>
   <script src="js/landing-flow-quote-submit.js?v=20260622"></script>
-  <script src="js/landing-flow.js?v=20260705v3reassurebar"></script>
+  <script src="js/landing-flow.js?v=20260707v3noresultsbanner"></script>
 </body>
 </html>

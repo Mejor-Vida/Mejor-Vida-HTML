@@ -109,13 +109,13 @@
 
       var parsed = parseBirthdate ? parseBirthdate(selections.birthdate) : null;
       if (!isValidBirthdate || !isValidBirthdate(selections.birthdate)) {
-        setQuoteStatus(msg("Enter a valid date of birth.", "Ingresa una fecha de nacimiento válida."), true);
+        setQuoteStatus(msg("Enter a valid date of birth.", "Ingrese una fecha de nacimiento válida."), true);
         return Promise.resolve();
       }
 
       var age = ageFromParsedDob(parsed);
       if (age == null) {
-        setQuoteStatus(msg("Enter a valid date of birth.", "Ingresa una fecha de nacimiento válida."), true);
+        setQuoteStatus(msg("Enter a valid date of birth.", "Ingrese una fecha de nacimiento válida."), true);
         return Promise.resolve();
       }
       if (age < 18) {
@@ -129,12 +129,12 @@
 
       var sex = String(selections.sex || "").toLowerCase();
       if (sex !== "male" && sex !== "female") {
-        setQuoteStatus(msg("Complete all previous steps.", "Completa todos los pasos anteriores."), true);
+        setQuoteStatus(msg("Complete all previous steps.", "Complete todos los pasos anteriores."), true);
         return Promise.resolve();
       }
 
       if (selections.tobacco !== "yes" && selections.tobacco !== "no") {
-        setQuoteStatus(msg("Complete all previous steps.", "Completa todos los pasos anteriores."), true);
+        setQuoteStatus(msg("Complete all previous steps.", "Complete todos los pasos anteriores."), true);
         return Promise.resolve();
       }
 
@@ -149,7 +149,7 @@
       var phone = String(selections.phone || "").trim();
 
       if (ctx.setSubmitting) ctx.setSubmitting(true);
-      setQuoteStatus(msg("Calculating your estimate…", "Calculando tu estimado…"), false);
+      setQuoteStatus(msg("Calculating your estimate…", "Calculando su estimado…"), false);
       if (nextBtn) {
         nextBtn.disabled = true;
         nextBtn.textContent = msg("Calculating…", "Calculando…");
@@ -177,7 +177,7 @@
           var data = out.data || {};
           if (!res.ok || data.ok === false) {
             throw new Error(
-              data.error || data.quote_error || msg("We could not calculate your estimate.", "No pudimos calcular tu estimado.")
+              data.error || data.quote_error || msg("We could not calculate your estimate.", "No pudimos calcular su estimado.")
             );
           }
           if (data.quote_status !== "ok") {
@@ -213,7 +213,7 @@
             (smoker ? "yes" : "no") +
             ".";
 
-          setQuoteStatus(msg("Saving your estimate…", "Guardando tu estimado…"), false);
+          setQuoteStatus(msg("Saving your estimate…", "Guardando su estimado…"), false);
 
           var originDetail = collectOriginDetail();
           var leadEventId =
@@ -273,7 +273,7 @@
                 syncError:
                   syncRes.ok && syncData && syncData.ok
                     ? null
-                    : (syncData && syncData.error) || msg("We could not save your information.", "No pudimos guardar tus datos."),
+                    : (syncData && syncData.error) || msg("We could not save your information.", "No pudimos guardar sus datos."),
               };
             });
           });
@@ -334,7 +334,7 @@
             return;
           }
 
-          setQuoteStatus(msg("Taking you to your results…", "Llevándote a tus resultados…"), false);
+          setQuoteStatus(msg("Taking you to your results…", "Llevándole a sus resultados…"), false);
           window.location.replace(resultsHref);
         })
         .catch(function (err) {
@@ -342,7 +342,7 @@
           if (ctx.setSubmitting) ctx.setSubmitting(false);
           if (nextBtn) {
             nextBtn.disabled = false;
-            nextBtn.textContent = msg("See my estimate", "Ver mi estimado");
+            nextBtn.textContent = msg("See your estimate", "Ver su estimado");
           }
         });
     },

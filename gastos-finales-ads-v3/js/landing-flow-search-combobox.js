@@ -9,7 +9,7 @@
     var isEn =
       document.documentElement.lang === "en" ||
       document.body.getAttribute("data-lf-lang") === "en";
-    var placeholder = options.placeholder || (isEn ? "Select..." : "Selecciona...");
+    var placeholder = options.placeholder || (isEn ? "Select..." : "Seleccione...");
     var inputId = options.inputId || "lf-search-combobox-input";
     var listboxId = options.listboxId || "lf-search-combobox-listbox";
     var labelId = options.labelId || null;

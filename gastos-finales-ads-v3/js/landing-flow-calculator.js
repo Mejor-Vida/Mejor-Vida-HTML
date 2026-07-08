@@ -330,7 +330,7 @@
     stateCombobox = window.MVILandingSearchCombobox.create(mount, {
       items: getStateListItems(),
       value: stateNameFromCode(state.stateCode),
-      placeholder: t("Select your state", "Selecciona tu estado"),
+      placeholder: t("Select your state", "Seleccione su estado"),
       label: t("State", "Estado"),
       inputId: "lf-calc-state-input",
       listboxId: "lf-calc-state-listbox",

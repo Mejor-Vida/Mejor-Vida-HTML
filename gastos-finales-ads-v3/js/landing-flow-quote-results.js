@@ -76,7 +76,7 @@
         ? iframe.getAttribute("data-src-en") || iframe.getAttribute("data-src-es")
         : iframe.getAttribute("data-src-es") || iframe.getAttribute("data-src-en");
       if (url) iframe.setAttribute("src", url);
-      iframe.setAttribute("title", ui("Schedule a call with Julie", "Agendar cita con Julie"));
+      iframe.setAttribute("title", ui("Schedule a call with Mejor Vida Insurance", "Agendar cita con Mejor Vida Insurance"));
     }
 
     modalEl.addEventListener("show.bs.modal", setScheduleIframeSrc);
@@ -101,10 +101,10 @@
       if (q.leadSaved === false) {
         leadWarn.hidden = false;
         leadWarn.textContent =
-          (q.syncError || ui("We could not save your information", "No pudimos guardar tus datos")) +
+          (q.syncError || ui("We could not save your information", "No pudimos guardar sus datos")) +
           ui(
             ". Your estimate is shown below. Check your phone or email, or call 402-440-5438.",
-            ". Tu estimación aparece abajo. Revisa tu teléfono o correo, o llama al 402-440-5438."
+            ". Su estimación aparece abajo. Revise su teléfono o correo, o llame al 402-440-5438."
           );
       } else {
         leadWarn.hidden = true;
@@ -153,8 +153,8 @@
       if (singleRate) {
         rangeHint.textContent =
           lang === "es"
-            ? "Estimado de referencia con la tarifa Assurity que tenemos en archivo. Julie confirma el precio final según salud y aseguradora."
-            : "Reference estimate from our on-file Assurity rate. Julie confirms your final price based on health and carrier.";
+            ? "Estimado de referencia con la tarifa Assurity que tenemos en archivo. Mejor Vida Insurance confirma el precio final según salud y aseguradora."
+            : "Reference estimate from our on-file Assurity rate. Mejor Vida Insurance confirms your final price based on health and carrier.";
       } else {
         rangeHint.textContent =
           lang === "es"
@@ -198,8 +198,8 @@
         if (singleRateNow) {
           rangeHint.textContent =
             lang === "es"
-              ? "Estimado de referencia con la tarifa Assurity que tenemos en archivo. Julie confirma el precio final según salud y aseguradora."
-              : "Reference estimate from our on-file Assurity rate. Julie confirms your final price based on health and carrier.";
+              ? "Estimado de referencia con la tarifa Assurity que tenemos en archivo. Mejor Vida Insurance confirma el precio final según salud y aseguradora."
+              : "Reference estimate from our on-file Assurity rate. Mejor Vida Insurance confirms your final price based on health and carrier.";
         } else {
           rangeHint.textContent =
             lang === "es"
@@ -245,7 +245,7 @@
     if (greeting && q.firstName) {
       greeting.textContent =
         lang === "es"
-          ? "Gracias, " + q.firstName + ". Este es tu estimado personalizado."
+          ? "Gracias, " + q.firstName + ". Este es su estimado personalizado."
           : "Thank you, " + q.firstName + ". Here is your personalized estimate.";
       greeting.hidden = false;
     }
