@@ -6,7 +6,7 @@
   "use strict";
 
   var state = {
-    view: "facebook",
+    view: "facebook_v2",
     periodDays: 1,
     dateFrom: "",
     dateTo: "",
@@ -210,7 +210,7 @@
       "</label>" +
       "</div>" +
       '<div class="crm-funnel-view-tabs">' +
-      ["facebook", "google", "lp_direct", "website"].map(function (v) {
+      ["facebook_v2", "facebook_v3", "google", "lp_direct", "website"].map(function (v) {
         return (
           '<button type="button" class="crm-funnel-view-tab' +
           (state.view === v ? " is-active" : "") +
@@ -269,7 +269,14 @@
       '<section class="crm-funnel-entry">' +
       '<h2 class="crm-funnel-section-title">' + esc(t("funnel_entry_context")) + "</h2>" +
       '<p class="crm-funnel-entry-sub">' +
-      esc(t("funnel_entry_all_traffic", { n: fmtNum(ctx.totalSessions) })) +
+      esc(
+        state.data && state.data.viewLabel
+          ? t("funnel_entry_view_sessions", {
+              view: state.data.viewLabel,
+              n: fmtNum(ctx.totalSessions),
+            })
+          : t("funnel_entry_all_traffic", { n: fmtNum(ctx.totalSessions) })
+      ) +
       "</p>" +
       (vt.total
         ? '<p class="crm-funnel-entry-visitors">' +
@@ -1163,7 +1170,7 @@
 
   function mount(main) {
     applyPeriodDays(1);
-    state.view = "facebook";
+    state.view = "facebook_v2";
     state.selectedNode = null;
     state.detail = null;
     state.detailError = null;

@@ -1,12 +1,13 @@
 /**
  * GET /api/staff/funnel-analytics
  *
- * Overview: ?view=facebook|google|lp_direct|website&date_from=YYYY-MM-DD&date_to=YYYY-MM-DD
+ * Overview: ?view=facebook_v2|facebook_v3|google|lp_direct|website&date_from=YYYY-MM-DD&date_to=YYYY-MM-DD
  * Node detail: ?action=node&view=facebook&tool=quote&step=state&date_from=...&date_to=...
  */
 const { requireStaffAuth } = require("../auth-check");
 const { json, serviceConfig, restSelect } = require("./_inbox-lib");
 const { buildDashboard, buildNodeDetail, groupSessions, filterSessions } = require("../../lib/funnel-analytics");
+const { resolveAdPlatformView } = require("../../lib/funnel-analytics-config");
 const { fetchAdPlatformMetrics, fetchAdDailySeries } = require("../../lib/ad-platform-insights");
 const { fetchTopKeywordsByClicks } = require("../../lib/google-ads-api");
 const { fetchGscOrganicSearch, fetchGscDaily } = require("../../lib/gsc-data-api");
@@ -99,7 +100,8 @@ module.exports = async function handler(req, res) {
   const cfg = serviceConfig();
   if (!cfg) return json(res, 500, { error: "Server missing required configuration" });
 
-  const view = String(req.query.view || "facebook").trim();
+  const view = String(req.query.view || "facebook_v2").trim();
+  const adPlatformView = resolveAdPlatformView(view);
   const action = String(req.query.action || "").trim();
   const range = resolveDateRange(req.query);
 
@@ -134,11 +136,15 @@ module.exports = async function handler(req, res) {
   }
 
   if (action === "ad_daily") {
-    if (view !== "facebook" && view !== "google") {
+    const adDailyView =
+      view === "facebook" || view === "facebook_v2" || view === "facebook_v3" || view === "google"
+        ? view
+        : null;
+    if (!adDailyView) {
       return json(res, 400, { error: "ad_daily requires facebook or google view" });
     }
     try {
-      const series = await fetchAdDailySeries(view, range.dateFrom, range.dateTo);
+      const series = await fetchAdDailySeries(adDailyView, range.dateFrom, range.dateTo);
       return json(res, 200, {
         ok: true,
         dateFrom: range.dateFrom,
@@ -220,14 +226,14 @@ module.exports = async function handler(req, res) {
   }
 
   let adMetrics = { show: false };
-  if (view === "facebook" || view === "google") {
+  if (view === "facebook" || view === "facebook_v2" || view === "facebook_v3" || view === "google") {
     try {
       adMetrics = await fetchAdPlatformMetrics(view, range.dateFrom, range.dateTo);
     } catch (e) {
       console.error("[funnel-analytics] ad metrics", e.message || e);
       adMetrics = {
         show: true,
-        platform: view,
+        platform: adPlatformView,
         configured: false,
         impressions: null,
         clicks: null,
