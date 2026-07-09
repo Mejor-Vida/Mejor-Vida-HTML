@@ -6,7 +6,8 @@ const { readPhiByLead, writePhiByLead } = require("../../lib/phi-store");
 const { hubspotPhoneSearchVariants, phoneLast10Digits } = require("../../lib/hubspot-phone-variants");
 const { linkLeadToContacts } = require("./_contact-link");
 const { saveCanonicalLeadProfile } = require("./_lead-profile");
-const { onStageChange } = require("../../lib/crm-nurture-engine");
+const { onStageChange, loadSettings } = require("../../lib/crm-nurture-engine");
+const { resolveNurtureStepSummary } = require("../../lib/crm-nurture-pipeline-view");
 
 function isUuid(s) {
   return /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(String(s || ""));
@@ -345,6 +346,109 @@ async function enrichListItemsWithManychatPipeline(cfg, items) {
     const raw = byId.get(String(item.id));
     item.pipeline_stage = normalizeIcPipelineStage(raw) || "new";
   });
+  return items;
+}
+
+async function enrichListItemsWithNurtureStep(cfg, items) {
+  if (!Array.isArray(items) || !items.length) return items;
+
+  const leadKeys = new Set(items.map((item) => `${item.id}|${item.source_table || "unknown"}`));
+  let enrollments = [];
+  try {
+    enrollments = await restSelect(
+      cfg,
+      "crm_nurture_enrollments",
+      "select=id,lead_id,lead_source_table,stage,status,enrolled_at,created_at,cancelled_reason,completed_at&status=in.(active,paused)&order=created_at.desc&limit=1000"
+    );
+  } catch (e) {
+    console.error("staff/leads enrichListItemsWithNurtureStep enrollments", e);
+    return items;
+  }
+
+  const enrollmentByKey = new Map();
+  (enrollments || []).forEach((row) => {
+    if (!row || !row.lead_id) return;
+    const key = `${row.lead_id}|${row.lead_source_table || "unknown"}`;
+    if (!leadKeys.has(key)) return;
+    if (!enrollmentByKey.has(key)) enrollmentByKey.set(key, row);
+  });
+
+  const enrollmentIds = [...enrollmentByKey.values()].map((e) => e.id).filter(Boolean);
+  if (!enrollmentIds.length) {
+    items.forEach((item) => {
+      item.nurture_step_number = null;
+      item.nurture_step_total = null;
+      item.nurture_step_label = null;
+    });
+    return items;
+  }
+
+  const idList = pgInListQuoted(enrollmentIds);
+  let taskRows = [];
+  let callRows = [];
+  try {
+    [taskRows, callRows] = await Promise.all([
+      restSelect(
+        cfg,
+        "crm_nurture_tasks",
+        `select=*&enrollment_id=in.(${idList})&order=due_at.asc&limit=5000`
+      ),
+      restSelect(
+        cfg,
+        "crm_call_tasks",
+        `select=*&enrollment_id=in.(${idList})&order=due_at.asc&limit=5000`
+      ),
+    ]);
+  } catch (e) {
+    console.error("staff/leads enrichListItemsWithNurtureStep tasks", e);
+    return items;
+  }
+
+  const tasksByEnrollment = new Map();
+  (taskRows || []).forEach((t) => {
+    if (!t || !t.enrollment_id) return;
+    const id = String(t.enrollment_id);
+    if (!tasksByEnrollment.has(id)) tasksByEnrollment.set(id, []);
+    tasksByEnrollment.get(id).push(t);
+  });
+
+  const callTasksByEnrollment = new Map();
+  (callRows || []).forEach((t) => {
+    if (!t || !t.enrollment_id) return;
+    const id = String(t.enrollment_id);
+    if (!callTasksByEnrollment.has(id)) callTasksByEnrollment.set(id, []);
+    callTasksByEnrollment.get(id).push(t);
+  });
+
+  let settings;
+  try {
+    settings = await loadSettings(cfg.supabaseUrl, cfg.serviceKey);
+  } catch (e) {
+    console.error("staff/leads enrichListItemsWithNurtureStep settings", e);
+    return items;
+  }
+
+  items.forEach((item) => {
+    const key = `${item.id}|${item.source_table || "unknown"}`;
+    const enrollment = enrollmentByKey.get(key);
+    if (!enrollment) {
+      item.nurture_step_number = null;
+      item.nurture_step_total = null;
+      item.nurture_step_label = null;
+      return;
+    }
+    const summary = resolveNurtureStepSummary({
+      enrollment,
+      tasks: tasksByEnrollment.get(String(enrollment.id)) || [],
+      callTasks: callTasksByEnrollment.get(String(enrollment.id)) || [],
+      settings,
+      pipelineStage: item.pipeline_stage,
+    });
+    item.nurture_step_number = summary.nurture_step_number;
+    item.nurture_step_total = summary.nurture_step_total;
+    item.nurture_step_label = summary.nurture_step_label;
+  });
+
   return items;
 }
 
@@ -1301,6 +1405,11 @@ module.exports = async function handler(req, res) {
         items = await enrichListItemsWithAppointments(cfg, items);
       } catch (e) {
         console.error("staff/leads GET enrichListItemsWithAppointments", e);
+      }
+      try {
+        items = await enrichListItemsWithNurtureStep(cfg, items);
+      } catch (e) {
+        console.error("staff/leads GET enrichListItemsWithNurtureStep", e);
       }
       items.sort((x, y) => sortKey(x).localeCompare(sortKey(y)));
       return json(res, 200, { items });

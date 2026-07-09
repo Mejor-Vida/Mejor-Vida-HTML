@@ -259,6 +259,26 @@
   color: var(--crm-muted);
 }
 
+.crm-pipeline-preview-inner label.crm-pipeline-preview-msg-label {
+  margin-top: 10px;
+}
+
+.crm-pipeline-email-render {
+  background: #fff;
+  border: 1px solid var(--crm-border);
+  border-radius: 8px;
+  padding: 12px;
+  max-height: 420px;
+  overflow: auto;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.crm-pipeline-email-render img {
+  max-width: 100%;
+  height: auto;
+}
+
 .crm-pipeline-preview-actions {
   display: flex;
   flex-wrap: wrap;

@@ -169,9 +169,7 @@
       "<h2>" +
       esc(t("nurture_settings_contacted")) +
       "</h2>" +
-      field(t("nurture_call_interval"), "ns-call-days", cs.call_interval_days || 14, "number") +
       field(t("nurture_email_interval"), "ns-email-days", cs.email_interval_days || 30, "number") +
-      field(t("nurture_call_time"), "ns-call-time", cs.call_time || "09:30") +
       "</div>" +
       '<div class="crm-card" style="margin-bottom:16px">' +
       "<h2>" +
@@ -210,9 +208,9 @@
       ];
       next.new_sequence.day0.calls[1].time = document.getElementById("ns-day0-pm").value.trim() || "17:00";
       next.contacted_sequence = next.contacted_sequence || {};
-      next.contacted_sequence.call_interval_days = Number(document.getElementById("ns-call-days").value) || 14;
       next.contacted_sequence.email_interval_days = Number(document.getElementById("ns-email-days").value) || 30;
-      next.contacted_sequence.call_time = document.getElementById("ns-call-time").value.trim() || "09:30";
+      delete next.contacted_sequence.call_interval_days;
+      delete next.contacted_sequence.call_time;
       next.daily_summary = next.daily_summary || {};
       next.daily_summary.hour = Number(document.getElementById("ns-daily-hour").value);
       next.daily_summary.recipients = String(document.getElementById("ns-daily-email").value || "")

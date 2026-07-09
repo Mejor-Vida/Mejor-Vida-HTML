@@ -172,16 +172,31 @@
       return;
     }
     if (p.kind === "email") {
-      wrap.innerHTML =
-        '<label for="crm-pt-email-subj">' +
-        esc(t("pipe_subject")) +
-        '</label><input id="crm-pt-email-subj" type="text" readonly value="' +
-        esc(p.subject || "") +
-        '" /><label for="crm-pt-email-body" style="margin-top:10px;display:block">' +
-        esc(t("pipe_body_html")) +
-        '</label><textarea id="crm-pt-email-body" rows="14" readonly>' +
-        esc(p.body || "") +
-        "</textarea>";
+      wrap.innerHTML = "";
+      var subLab = document.createElement("label");
+      subLab.textContent = t("pipe_subject");
+      var subInp = document.createElement("input");
+      subInp.type = "text";
+      subInp.readOnly = true;
+      subInp.value = p.subject || "";
+      var msgLab = document.createElement("label");
+      msgLab.className = "crm-pipeline-preview-msg-label";
+      msgLab.textContent = t("pipe_message");
+      wrap.appendChild(subLab);
+      wrap.appendChild(subInp);
+      wrap.appendChild(msgLab);
+      if (p.body && String(p.body).trim()) {
+        var msgBox = document.createElement("div");
+        msgBox.className = "crm-pipeline-email-render";
+        msgBox.innerHTML = p.body;
+        wrap.appendChild(msgBox);
+      } else {
+        var empty = document.createElement("p");
+        empty.className = "crm-pipeline-preview-hint";
+        empty.textContent = t("pipe_no_preview");
+        wrap.appendChild(empty);
+      }
+      return;
     }
   }
 

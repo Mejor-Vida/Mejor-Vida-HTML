@@ -115,6 +115,11 @@
       var validOos = { referrals: true, agents: true, archive: true };
       return { view: "oos", oosTab: validOos[oosTab] ? oosTab : "referrals" };
     }
+    if (parts[0] === "licensing") {
+      var licTab = parts[1] || "overview";
+      var validLic = { overview: true, states: true, agency: true, training: true };
+      return { view: "licensing", licTab: validLic[licTab] ? licTab : "overview" };
+    }
     if (parts[0] === "knowledge") return { view: "knowledge" };
     if (parts[0] === "ga4") return { view: "ga4" };
     if (parts[0] === "todo") {
@@ -374,6 +379,7 @@
     else if (nav === "inbox") navigate("#/inbox");
     else if (nav === "assistant") navigate("#/assistant");
     else if (nav === "oos") navigate("#/oos");
+    else if (nav === "licensing") navigate("#/licensing/overview");
     else if (nav === "knowledge") navigate("#/knowledge");
     else if (nav === "ga4") navigate("#/ga4");
     else if (nav === "todo") navigate("#/todo");
@@ -444,6 +450,30 @@
     var stages = window.StaffCrmStages;
     if (!stages || !stages.renderStagePicker) return "—";
     return stages.renderStagePicker(L.id, L.pipeline_stage, esc, t("col_stage"));
+  }
+
+  function renderNurtureStepCell(L) {
+    var num = L.nurture_step_number;
+    if (num == null || num === "") return "—";
+    var total = L.nurture_step_total;
+    var label = L.nurture_step_label || "";
+    var display = total ? String(num) + "/" + String(total) : String(num);
+    var title = label
+      ? total
+        ? t("col_nurture_step_aria", { n: num, total: total, step: label })
+        : t("col_nurture_step_aria_short", { n: num, step: label })
+      : total
+        ? t("col_nurture_step_aria_no_name", { n: num, total: total })
+        : String(num);
+    return (
+      '<span class="crm-stage-num" title="' +
+      esc(title) +
+      '" aria-label="' +
+      esc(title) +
+      '">' +
+      esc(display) +
+      "</span>"
+    );
   }
 
   function hasValidEmail(L) {
@@ -700,10 +730,6 @@
       esc(t("nurture_new_calls")) +
       "</h3>" +
       renderCallTaskList(daily && daily.new_call_tasks, "nurture_no_calls") +
-      "<h3 style=\"margin-top:16px\">" +
-      esc(t("nurture_contacted_calls")) +
-      "</h3>" +
-      renderCallTaskList(daily && daily.contacted_call_tasks, "nurture_no_calls") +
       "</div>" +
       '<div class="crm-card crm-funnel-dash-card" style="margin-bottom:16px">' +
       '<a href="#/ga4" class="crm-funnel-dash-link">' +
@@ -785,6 +811,8 @@
       esc(t("col_phone")) +
       '</th><th class="crm-col-indicator crm-col-review" scope="col">' +
       esc(t("col_review_sent")) +
+      '</th><th class="crm-col-stage-num" scope="col">' +
+      esc(t("col_nurture_step")) +
       '</th><th class="crm-col-stage">' +
       renderStageFilterHeaderCell() +
       '</th><th class="crm-col-calendar">' +
@@ -1161,6 +1189,8 @@
             renderPhoneIndicator(L) +
             '</td><td class="crm-col-indicator crm-col-review">' +
             renderReviewIndicator(L) +
+            '</td><td class="crm-col-stage-num">' +
+            renderNurtureStepCell(L) +
             '</td><td class="crm-col-stage">' +
             renderStageCell(L) +
             '</td><td class="crm-col-calendar">' +
@@ -1643,6 +1673,18 @@
             '<div class="crm-placeholder"><strong>' +
             esc(t("load_error")) +
             "</strong><p>OOS module failed to load.</p></div>";
+        }
+        resetIdleTimer();
+        return;
+      }
+      if (route.view === "licensing") {
+        if (window.StaffCrmLicensing) {
+          await window.StaffCrmLicensing.mount(main, { tab: route.licTab || "overview" });
+        } else {
+          main.innerHTML =
+            '<div class="crm-placeholder"><strong>' +
+            esc(t("load_error")) +
+            "</strong><p>Licensing module failed to load.</p></div>";
         }
         resetIdleTimer();
         return;

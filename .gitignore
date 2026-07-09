@@ -18,5 +18,8 @@ integrations/.playwright_ic_session/
 FB/post-preview.html
 FB/post-preview-*.html
 
+# Local-only licensing / PII for agent workflows (never commit)
+docs/*-private.local.md
+
 # Kontext multi-candidate runs (large; keep finals in mvi-chat-avatar/*.png only)
 img/mvi-chat-avatar/_candidates/

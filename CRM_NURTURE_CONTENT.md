@@ -11,7 +11,7 @@ Template keys in `crm_nurture_settings` map to copy below. Code: `lib/crm-nurtur
 | Stage | Automation |
 |-------|------------|
 | **new** | 4-day intensive sequence (4 calls — morning/evening alternating, welcome email/SMS, educational email) → auto **contacted** end of Day 3 |
-| **contacted** | Call every 14 days, educational email every 30 days, weekly newsletter |
+| **contacted** | Rotating educational email every 30 days (4 topics, then repeats), weekly newsletter (no auto calls — only the 4 New-stage call attempts) |
 | **engaged** | No auto calls; Julie manual tasks; newsletter |
 | **client / retained / loyal / enrolled** | Newsletter only (retained/loyal auto-promoted by policy date) |
 | **lost** | Newsletter only; no calls/SMS |
@@ -42,17 +42,20 @@ SMS sends only when `profile_data.sms_opt_in === true`.
 
 ## Contacted sequence
 
-| Cadence | Channel | Template key |
-|---------|---------|----------------|
-| Every 14 days | Call task | — |
-| Every 30 days | Email | `contacted_educational` |
-| Weekly (Sunday) | Newsletter | imported issue |
+| Cadence | Channel | Template key | Topic |
+|---------|---------|--------------|-------|
+| +30 days (1st Contacted email) | Email | `contacted_educational_1` | Personal check-in from Julie |
+| +60 days | Email | `contacted_educational_2` | What is final expense insurance? |
+| +90 days | Email | `contacted_educational_3` | Julie's personal story |
+| +120 days | Email | `contacted_educational_4` | Gentle urgency — don't wait too long |
+| +150 days | Email | `contacted_educational_1` | (series repeats) |
+| Weekly (Sunday) | Newsletter | imported issue | Weekly FB post email |
 
 ---
 
 ## Daily summary (8 AM Chicago)
 
-Email to julie@ and admin@ (`daily_summary.recipients`): New call tasks with attempt #, Contacted due calls, queued emails/SMS. CRM dashboard mirrors this data via `/api/staff/crm-dashboard`.
+Email to julie@ and admin@ (`daily_summary.recipients`): New-stage call tasks with attempt #, queued emails/SMS. CRM dashboard mirrors this data via `/api/staff/crm-dashboard`.
 
 ---
 

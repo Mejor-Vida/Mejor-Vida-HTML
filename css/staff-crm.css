@@ -708,6 +708,32 @@ body.crm-body {
   min-width: 130px;
 }
 
+.crm-table-clients th.crm-col-stage-num,
+.crm-table-clients td.crm-col-stage-num {
+  width: 56px;
+  min-width: 56px;
+  max-width: 56px;
+  text-align: center;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+.crm-table-clients th.crm-col-stage-num {
+  font-size: 0.68rem;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.crm-stage-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.5rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--crm-text-muted, #5a6a7a);
+}
+
 .crm-table-clients th.crm-col-calendar,
 .crm-table-clients td.crm-col-calendar {
   width: 72px;

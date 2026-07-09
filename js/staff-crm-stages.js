@@ -73,6 +73,16 @@
     return "#bdc3c7";
   }
 
+  /** 1-based position in the client lifecycle pipeline (empty stage → null). */
+  function stageNumber(key) {
+    var k = normalizeStage(key);
+    if (!k) return null;
+    for (var i = 0; i < CLIENT_STAGES.length; i++) {
+      if (CLIENT_STAGES[i].key === k) return i + 1;
+    }
+    return null;
+  }
+
   function isValidStage(key) {
     var k = String(key == null ? "" : key).trim();
     if (!k) return true;
@@ -222,6 +232,7 @@
     normalizeStage: normalizeStage,
     stageLabel: stageLabel,
     stageColor: stageColor,
+    stageNumber: stageNumber,
     isValidStage: isValidStage,
     buildStageOptions: buildStageOptions,
     renderStagePicker: renderStagePicker,
