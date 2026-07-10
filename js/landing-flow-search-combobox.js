@@ -117,7 +117,7 @@
 
     function formatDisplay(item) {
       if (!item) return "";
-      if (showCode && item.code) return item.label + " (" + item.code + ")";
+      if (showCode && item.code && item.code !== "OTHER") return item.label + " (" + item.code + ")";
       return item.label;
     }
 
@@ -163,7 +163,7 @@
         opt.classList.toggle("is-selected", item.value === state.value);
         opt.classList.toggle("is-highlighted", index === state.highlightIndex);
 
-        if (showCode && item.code) {
+        if (showCode && item.code && item.code !== "OTHER") {
           var nameEl = document.createElement("span");
           nameEl.className = baseClass + "__option-label";
           nameEl.textContent = item.label;

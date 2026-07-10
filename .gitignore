@@ -23,3 +23,7 @@ docs/*-private.local.md
 
 # Kontext multi-candidate runs (large; keep finals in mvi-chat-avatar/*.png only)
 img/mvi-chat-avatar/_candidates/
+
+# Unredacted license PDFs (personal address) — do not publish
+licenses/private-originals/
+.venv-lic-redact/

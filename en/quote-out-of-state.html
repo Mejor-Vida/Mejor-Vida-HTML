@@ -20,7 +20,7 @@
   </script>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
-<title>Outside Nebraska — Mejor Vida Insurance</title>
+<title>Outside Our Licensed States — Mejor Vida Insurance</title>
 <meta content="noindex, follow" name="robots"/>
 <link href="../favicon.ico" rel="icon" type="image/x-icon"/>
 <link href="../favicon.ico" rel="icon" sizes="32x32" type="image/png"/>
@@ -208,7 +208,7 @@
 </div>
 </div>
 <div class="border-top border-secondary mt-2 pt-2">
-<p class="small text-center text-white text-opacity-75 mb-1">Julie is a licensed insurance agent. Nebraska Department of Insurance, Producer License #21695431. <a class="text-white text-opacity-75" href="https://sbs.naic.org/solar-external-lookup/" rel="noopener" target="_blank">Verify license</a></p>
+<p class="small text-center text-white text-opacity-75 mb-1">Julie is a licensed insurance agent in Nebraska, Kansas, Colorado, and Nevada. NPN #21695431. <a class="text-white text-opacity-75" href="licenses.html">View licenses</a></p>
 <p class="small text-center text-white text-opacity-50 mb-0">© <span id="year"></span> Mejor Vida Insurance LLC. All rights reserved.</p>
 </div>
 </div>
@@ -217,15 +217,16 @@
 
 <script>
     (function () {
-      var NAMES = { AL:'Alabama', AK:'Alaska', AZ:'Arizona', AR:'Arkansas', CA:'California', CO:'Colorado', CT:'Connecticut', DE:'Delaware', DC:'District of Columbia', FL:'Florida', GA:'Georgia', HI:'Hawaii', ID:'Idaho', IL:'Illinois', IN:'Indiana', IA:'Iowa', KS:'Kansas', KY:'Kentucky', LA:'Louisiana', ME:'Maine', MD:'Maryland', MA:'Massachusetts', MI:'Michigan', MN:'Minnesota', MS:'Mississippi', MO:'Missouri', MT:'Montana', NE:'Nebraska', NV:'Nevada', NH:'New Hampshire', NJ:'New Jersey', NM:'New Mexico', NY:'New York', NC:'North Carolina', ND:'North Dakota', OH:'Ohio', OK:'Oklahoma', OR:'Oregon', PA:'Pennsylvania', RI:'Rhode Island', SC:'South Carolina', SD:'South Dakota', TN:'Tennessee', TX:'Texas', UT:'Utah', VT:'Vermont', VA:'Virginia', WA:'Washington', WV:'West Virginia', WI:'Wisconsin', WY:'Wyoming' };
+      var NAMES = { AL:'Alabama', AK:'Alaska', AZ:'Arizona', AR:'Arkansas', CA:'California', CO:'Colorado', CT:'Connecticut', DE:'Delaware', DC:'District of Columbia', FL:'Florida', GA:'Georgia', HI:'Hawaii', ID:'Idaho', IL:'Illinois', IN:'Indiana', IA:'Iowa', KS:'Kansas', KY:'Kentucky', LA:'Louisiana', ME:'Maine', MD:'Maryland', MA:'Massachusetts', MI:'Michigan', MN:'Minnesota', MS:'Mississippi', MO:'Missouri', MT:'Montana', NE:'Nebraska', NV:'Nevada', NH:'New Hampshire', NJ:'New Jersey', NM:'New Mexico', NY:'New York', NC:'North Carolina', ND:'North Dakota', OH:'Ohio', OK:'Oklahoma', OR:'Oregon', PA:'Pennsylvania', RI:'Rhode Island', SC:'South Carolina', SD:'South Dakota', TN:'Tennessee', TX:'Texas', UT:'Utah', VT:'Vermont', VA:'Virginia', WA:'Washington', WV:'West Virginia', WI:'Wisconsin', WY:'Wyoming', XX:'Other state' };
+      var LICENSED = { NE:1, KS:1, CO:1, NV:1 };
       var code = '';
       try { code = (new URLSearchParams(location.search).get('state') || '').toUpperCase().slice(0, 2); } catch (e) {}
-      if (!code || code === 'NE' || !NAMES[code]) {
+      if (!code || LICENSED[code] || (!NAMES[code] && code !== 'XX')) {
         window.location.replace('quote.html');
         return;
       }
       document.getElementById('oos-state-code').value = code;
-      var label = NAMES[code] + ' (' + code + ')';
+      var label = code === 'XX' ? 'Other state' : (NAMES[code] + ' (' + code + ')');
       var el = document.getElementById('oos-state-label');
       var elEn = document.getElementById('oos-state-label-en');
       if (el) el.textContent = label;

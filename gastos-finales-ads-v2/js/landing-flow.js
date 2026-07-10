@@ -396,11 +396,21 @@
 
   function isValidStateCode(value) {
     var code = String(value || "").trim().toUpperCase();
+    if (code === "OTHER") return true;
     if (!/^[A-Z]{2}$/.test(code)) return false;
-    var list = window.MVS_US_STATES || [];
+    if (window.MVS_isLicensedQuoteState) return window.MVS_isLicensedQuoteState(code);
+    var list = window.MVS_QUOTE_STATES || window.MVS_US_STATES || [];
     return list.some(function (s) {
       return s.c === code;
     });
+  }
+
+  function isOutOfStateSelection(code) {
+    if (window.MVS_isOutOfStateQuoteSelection) {
+      return window.MVS_isOutOfStateQuoteSelection(code);
+    }
+    var c = String(code || "").trim().toUpperCase();
+    return !!c && c !== "NE";
   }
 
   function isValidLegalName(value) {
@@ -743,34 +753,35 @@
   }
 
   function isEnQuoteStateIneligible() {
-    return IS_EN && selections.state && selections.state !== "NE";
+    return false;
   }
 
   function syncQuoteStateEligibilityUI() {
     var block = document.getElementById("lf-state-not-eligible");
-    if (block) block.hidden = !isEnQuoteStateIneligible();
+    if (block) block.hidden = true;
     updateNextButton();
   }
 
   function getStateListItems() {
-    var list = window.MVS_US_STATES || [];
-    return list
-      .slice()
-      .sort(function (a, b) {
-        if (a.c === "NE") return -1;
-        if (b.c === "NE") return 1;
-        return a.n.localeCompare(b.n);
-      })
-      .map(function (st) {
-        return { name: st.n, code: st.c };
-      });
+    var list = window.MVS_QUOTE_STATES || window.MVS_US_STATES || [];
+    return list.map(function (st) {
+      var name =
+        window.MVS_quoteStateLabel
+          ? window.MVS_quoteStateLabel(st, IS_EN ? "en" : "es")
+          : st.n;
+      return { name: name, code: st.c };
+    });
   }
 
   function stateCodeFromName(name) {
     if (!name) return null;
-    var list = window.MVS_US_STATES || [];
+    var list = window.MVS_QUOTE_STATES || window.MVS_US_STATES || [];
     for (var i = 0; i < list.length; i++) {
-      if (list[i].n === name) return list[i].c;
+      var label =
+        window.MVS_quoteStateLabel
+          ? window.MVS_quoteStateLabel(list[i], IS_EN ? "en" : "es")
+          : list[i].n;
+      if (list[i].n === name || label === name) return list[i].c;
     }
     return null;
   }
@@ -778,9 +789,13 @@
   function stateNameFromCode(code) {
     if (!code) return "";
     var upper = String(code).trim().toUpperCase();
-    var list = window.MVS_US_STATES || [];
+    var list = window.MVS_QUOTE_STATES || window.MVS_US_STATES || [];
     for (var i = 0; i < list.length; i++) {
-      if (list[i].c === upper) return list[i].n;
+      if (list[i].c === upper) {
+        return window.MVS_quoteStateLabel
+          ? window.MVS_quoteStateLabel(list[i], IS_EN ? "en" : "es")
+          : list[i].n;
+      }
     }
     return "";
   }
@@ -1187,15 +1202,13 @@
         syncQuoteStateEligibilityUI();
         return;
       }
-      if (
-        !IS_EN &&
-        currentStep === 2 &&
-        selections.state &&
-        selections.state !== "NE"
-      ) {
+      if (currentStep === 2 && selections.state && isOutOfStateSelection(selections.state)) {
         trackStepCompleted(currentStep, selections.state);
-        window.location.href =
-          "../quote-out-of-state.html?state=" + encodeURIComponent(selections.state);
+        var oosCode = selections.state === "OTHER" ? "XX" : selections.state;
+        var oosHref = IS_EN
+          ? "../../en/quote-out-of-state.html?state="
+          : "../quote-out-of-state.html?state=";
+        window.location.href = oosHref + encodeURIComponent(oosCode);
         return;
       }
       if (currentStep === 11 && nameStepPhase === "fields") {

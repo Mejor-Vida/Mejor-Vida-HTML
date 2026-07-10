@@ -159,7 +159,7 @@ module.exports = async function handler(req, res) {
       return json(res, 200, {
         ok: true,
         quote_status: "error",
-        quote_error: "Online term quotes are available for Nebraska residents only.",
+        quote_error: "Online term quotes are available for licensed states only (NE, KS, CO, NV).",
       });
     }
 

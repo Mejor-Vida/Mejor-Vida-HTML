@@ -243,6 +243,15 @@
     "keepPng": true
   },
   {
+    "src": "img/julie-promo-funeral-cost.png",
+    "base": "julie-promo-funeral-cost",
+    "width": 900,
+    "height": 900,
+    "webp": "img/opt/julie-promo-funeral-cost.webp",
+    "fallback": "img/opt/julie-promo-funeral-cost.png",
+    "keepPng": true
+  },
+  {
     "src": "img/logo-spanish2-email.png",
     "base": "logo-spanish2-email",
     "width": 440,

@@ -19,7 +19,7 @@
   </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Outside Nebraska — Mejor Vida Insurance</title>
+  <title>Outside Our Licensed States — Mejor Vida Insurance</title>
   <meta name="robots" content="noindex, follow" />
   <link rel="icon" type="image/x-icon" href="favicon.ico" />
   <link rel="icon" type="image/png" sizes="32x32" href="favicon.ico" />
@@ -246,8 +246,8 @@
         </div>
       </div>
       <div class="border-top border-secondary mt-2 pt-2">
-        <p class="small text-center text-white text-opacity-75 mb-1" data-lang="es">Julie es una agente de seguros licenciada. Departamento de Seguros de Nebraska, Licencia de Productor #21695431. <a href="https://sbs.naic.org/solar-external-lookup/" target="_blank" rel="noopener" class="text-white text-opacity-75">Verificar licencia</a></p>
-        <p class="small text-center text-white text-opacity-75 mb-1" data-lang="en">Julie is a licensed insurance agent. Nebraska Department of Insurance, Producer License #21695431. <a href="https://sbs.naic.org/solar-external-lookup/" target="_blank" rel="noopener" class="text-white text-opacity-75">Verify license</a></p>
+        <p class="small text-center text-white text-opacity-75 mb-1" data-lang="es">Julie es una agente de seguros licenciada en Nebraska, Kansas, Colorado y Nevada. NPN #21695431. <a class="text-white text-opacity-75" href="../licencias.html">Ver licencias</a></p>
+        <p class="small text-center text-white text-opacity-75 mb-1" data-lang="en">Julie is a licensed insurance agent in Nebraska, Kansas, Colorado, and Nevada. NPN #21695431. <a class="text-white text-opacity-75" href="../en/licenses.html">View licenses</a></p>
         <p class="small text-center text-white text-opacity-50 mb-0">&copy; <span id="year"></span> Mejor Vida Insurance LLC. All rights reserved.</p>
       </div>
     </div>
@@ -259,15 +259,16 @@
 <script defer src="script.js"></script>
   <script>
     (function () {
-      var NAMES = { AL:'Alabama', AK:'Alaska', AZ:'Arizona', AR:'Arkansas', CA:'California', CO:'Colorado', CT:'Connecticut', DE:'Delaware', DC:'District of Columbia', FL:'Florida', GA:'Georgia', HI:'Hawaii', ID:'Idaho', IL:'Illinois', IN:'Indiana', IA:'Iowa', KS:'Kansas', KY:'Kentucky', LA:'Louisiana', ME:'Maine', MD:'Maryland', MA:'Massachusetts', MI:'Michigan', MN:'Minnesota', MS:'Mississippi', MO:'Missouri', MT:'Montana', NE:'Nebraska', NV:'Nevada', NH:'New Hampshire', NJ:'New Jersey', NM:'New Mexico', NY:'New York', NC:'North Carolina', ND:'North Dakota', OH:'Ohio', OK:'Oklahoma', OR:'Oregon', PA:'Pennsylvania', RI:'Rhode Island', SC:'South Carolina', SD:'South Dakota', TN:'Tennessee', TX:'Texas', UT:'Utah', VT:'Vermont', VA:'Virginia', WA:'Washington', WV:'West Virginia', WI:'Wisconsin', WY:'Wyoming' };
+      var NAMES = { AL:'Alabama', AK:'Alaska', AZ:'Arizona', AR:'Arkansas', CA:'California', CO:'Colorado', CT:'Connecticut', DE:'Delaware', DC:'District of Columbia', FL:'Florida', GA:'Georgia', HI:'Hawaii', ID:'Idaho', IL:'Illinois', IN:'Indiana', IA:'Iowa', KS:'Kansas', KY:'Kentucky', LA:'Louisiana', ME:'Maine', MD:'Maryland', MA:'Massachusetts', MI:'Michigan', MN:'Minnesota', MS:'Mississippi', MO:'Missouri', MT:'Montana', NE:'Nebraska', NV:'Nevada', NH:'New Hampshire', NJ:'New Jersey', NM:'New Mexico', NY:'New York', NC:'North Carolina', ND:'North Dakota', OH:'Ohio', OK:'Oklahoma', OR:'Oregon', PA:'Pennsylvania', RI:'Rhode Island', SC:'South Carolina', SD:'South Dakota', TN:'Tennessee', TX:'Texas', UT:'Utah', VT:'Vermont', VA:'Virginia', WA:'Washington', WV:'West Virginia', WI:'Wisconsin', WY:'Wyoming', XX:'Otro estado' };
+      var LICENSED = { NE:1, KS:1, CO:1, NV:1 };
       var code = '';
       try { code = (new URLSearchParams(location.search).get('state') || '').toUpperCase().slice(0, 2); } catch (e) {}
-      if (!code || code === 'NE' || !NAMES[code]) {
+      if (!code || LICENSED[code] || (!NAMES[code] && code !== 'XX')) {
         window.location.replace('quote.html');
         return;
       }
       document.getElementById('oos-state-code').value = code;
-      var label = NAMES[code] + ' (' + code + ')';
+      var label = code === 'XX' ? 'Otro estado' : (NAMES[code] + ' (' + code + ')');
       var el = document.getElementById('oos-state-label');
       var elEn = document.getElementById('oos-state-label-en');
       if (el) el.textContent = label;

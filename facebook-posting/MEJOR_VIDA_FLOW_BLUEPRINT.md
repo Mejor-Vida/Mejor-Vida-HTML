@@ -64,11 +64,11 @@ Logic:
 ### Box 3 — Other State Offer
 
 English:
-> "Got it! I'm currently licensed in Nebraska, but I do work with trusted agents across the country.
+> "Got it! I'm currently licensed in Nebraska, Kansas, Colorado, and Nevada. For other states, I work with trusted agents across the country.
 > Would you like me to connect you with someone in your area?"
 
 Spanish:
-> "Perfecto. Por ahora solo tengo licencia en Nebraska, pero trabajo con agentes de confianza en todo el país.
+> "Perfecto. Tengo licencia en Nebraska, Kansas, Colorado y Nevada. En otros estados trabajo con agentes de confianza en todo el país.
 > ¿Te gustaría que te conecte con alguien en tu área?"
 
 Buttons:

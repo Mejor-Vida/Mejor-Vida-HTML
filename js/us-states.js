@@ -1,4 +1,4 @@
-/* U.S. states + DC for quote form (values must match server VALID_US_STATE_CODES). */
+/* U.S. states + DC (full list for staff CRM / lookups). */
 window.MVS_US_STATES = [
   { c: 'AL', n: 'Alabama' },
   { c: 'AK', n: 'Alaska' },
@@ -52,3 +52,35 @@ window.MVS_US_STATES = [
   { c: 'WI', n: 'Wisconsin' },
   { c: 'WY', n: 'Wyoming' },
 ];
+
+/** States where Julie can quote online (producer licenses). */
+window.MVS_LICENSED_STATE_CODES = ['NE', 'KS', 'CO', 'NV'];
+
+/**
+ * Quote / landing residence picker: licensed states + Other.
+ * Prefer this over MVS_US_STATES for public quote flows.
+ */
+window.MVS_QUOTE_STATES = [
+  { c: 'NE', n: 'Nebraska' },
+  { c: 'KS', n: 'Kansas' },
+  { c: 'CO', n: 'Colorado' },
+  { c: 'NV', n: 'Nevada' },
+  { c: 'OTHER', n: 'Other state', nEs: 'Otro estado' },
+];
+
+window.MVS_isLicensedQuoteState = function (code) {
+  var c = String(code || '').trim().toUpperCase();
+  return window.MVS_LICENSED_STATE_CODES.indexOf(c) !== -1;
+};
+
+window.MVS_isOutOfStateQuoteSelection = function (code) {
+  var c = String(code || '').trim().toUpperCase();
+  if (!c) return false;
+  return !window.MVS_isLicensedQuoteState(c);
+};
+
+window.MVS_quoteStateLabel = function (row, lang) {
+  if (!row) return '';
+  if (row.c === 'OTHER' && lang === 'es' && row.nEs) return row.nEs;
+  return row.n || row.c || '';
+};

@@ -238,11 +238,6 @@
       if (!state.state) {
         return t("Seleccione su estado.", "Please select your state.");
       }
-      if (lang() === "en" && state.state !== "NE") {
-        return (
-          "We're sorry — Julie is licensed in Nebraska only. We cannot provide an online quote for residents of other states at this time."
-        );
-      }
     }
     if (step === "tobacco" && !state.tobacco) {
       return t("Indique si usa tabaco.", "Please answer the tobacco question.");
@@ -303,11 +298,19 @@
       }
       return;
     }
-    if (lang() !== "en" && STEPS[stepIndex] === "state" && state.state !== "NE") {
+    if (
+      STEPS[stepIndex] === "state" &&
+      window.MVS_isOutOfStateQuoteSelection &&
+      window.MVS_isOutOfStateQuoteSelection(state.state)
+    ) {
       answered.state = true;
       updateSummaryBar();
-      window.location.href =
-        "quote-out-of-state.html?state=" + encodeURIComponent(state.state);
+      var oosCode = state.state === "OTHER" ? "XX" : state.state;
+      var oosPath = "quote-out-of-state.html";
+      if (lang() === "en" && location.pathname.indexOf("/en/") === -1) {
+        oosPath = "en/quote-out-of-state.html";
+      }
+      window.location.href = oosPath + "?state=" + encodeURIComponent(oosCode);
       return;
     }
     var step = STEPS[stepIndex];
@@ -683,17 +686,30 @@
   function populateStateSelect() {
     var sel = document.getElementById("mvi-state");
     if (!sel || sel.options.length > 1) return;
-    var list = window.MVS_US_STATES || [];
+    var list = window.MVS_QUOTE_STATES || window.MVS_US_STATES || [];
+    var isEs = lang() === "es";
     list.forEach(function (row) {
       var o = document.createElement("option");
       o.value = row.c;
-      o.textContent = row.n + " (" + row.c + ")";
+      var label =
+        window.MVS_quoteStateLabel
+          ? window.MVS_quoteStateLabel(row, isEs ? "es" : "en")
+          : row.n;
+      o.textContent = row.c === "OTHER" ? label : label + " (" + row.c + ")";
       sel.appendChild(o);
     });
     try {
       var p = new URLSearchParams(location.search);
       var fromUrl = (p.get("state") || "").toUpperCase();
-      if (fromUrl && fromUrl.length === 2) state.state = fromUrl;
+      if (fromUrl === "OTHER" || fromUrl === "XX") state.state = "OTHER";
+      else if (
+        fromUrl &&
+        fromUrl.length === 2 &&
+        window.MVS_isLicensedQuoteState &&
+        window.MVS_isLicensedQuoteState(fromUrl)
+      ) {
+        state.state = fromUrl;
+      }
     } catch (e) {}
     sel.value = state.state || "NE";
   }
@@ -756,19 +772,8 @@
         updateSummaryBar();
         var status = document.getElementById("mvi-quote-status");
         var notEligible = document.getElementById("mvi-state-not-eligible");
-        var ineligible =
-          lang() === "en" && state.state && state.state !== "NE";
-        var msg =
-          "We're sorry — Julie is licensed in Nebraska only. We cannot provide an online quote for residents of other states at this time.";
-        if (notEligible) notEligible.hidden = !ineligible;
-        if (status) {
-          if (ineligible) {
-            status.className = "small text-center text-danger mt-2";
-            status.textContent = msg;
-          } else {
-            status.textContent = "";
-          }
-        }
+        if (notEligible) notEligible.hidden = true;
+        if (status) status.textContent = "";
       });
     }
     var cov = document.getElementById("mvi-coverage");

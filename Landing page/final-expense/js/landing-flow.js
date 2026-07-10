@@ -198,11 +198,21 @@
 
   function isValidStateCode(value) {
     var code = String(value || "").trim().toUpperCase();
+    if (code === "OTHER") return true;
     if (!/^[A-Z]{2}$/.test(code)) return false;
-    var list = window.MVS_US_STATES || [];
+    if (window.MVS_isLicensedQuoteState) return window.MVS_isLicensedQuoteState(code);
+    var list = window.MVS_QUOTE_STATES || window.MVS_US_STATES || [];
     return list.some(function (s) {
       return s.c === code;
     });
+  }
+
+  function isOutOfStateSelection(code) {
+    if (window.MVS_isOutOfStateQuoteSelection) {
+      return window.MVS_isOutOfStateQuoteSelection(code);
+    }
+    var c = String(code || "").trim().toUpperCase();
+    return !!c && c !== "NE";
   }
 
   function isValidLegalName(value) {
@@ -461,24 +471,25 @@
   }
 
   function getStateListItems() {
-    var list = window.MVS_US_STATES || [];
-    return list
-      .slice()
-      .sort(function (a, b) {
-        if (a.c === "NE") return -1;
-        if (b.c === "NE") return 1;
-        return a.n.localeCompare(b.n);
-      })
-      .map(function (st) {
-        return { name: st.n, code: st.c };
-      });
+    var list = window.MVS_QUOTE_STATES || window.MVS_US_STATES || [];
+    return list.map(function (st) {
+      var name =
+        window.MVS_quoteStateLabel
+          ? window.MVS_quoteStateLabel(st, "en")
+          : st.n;
+      return { name: name, code: st.c };
+    });
   }
 
   function stateCodeFromName(name) {
     if (!name) return null;
-    var list = window.MVS_US_STATES || [];
+    var list = window.MVS_QUOTE_STATES || window.MVS_US_STATES || [];
     for (var i = 0; i < list.length; i++) {
-      if (list[i].n === name) return list[i].c;
+      var label =
+        window.MVS_quoteStateLabel
+          ? window.MVS_quoteStateLabel(list[i], "en")
+          : list[i].n;
+      if (list[i].n === name || label === name) return list[i].c;
     }
     return null;
   }
@@ -486,9 +497,13 @@
   function stateNameFromCode(code) {
     if (!code) return "";
     var upper = String(code).trim().toUpperCase();
-    var list = window.MVS_US_STATES || [];
+    var list = window.MVS_QUOTE_STATES || window.MVS_US_STATES || [];
     for (var i = 0; i < list.length; i++) {
-      if (list[i].c === upper) return list[i].n;
+      if (list[i].c === upper) {
+        return window.MVS_quoteStateLabel
+          ? window.MVS_quoteStateLabel(list[i], "en")
+          : list[i].n;
+      }
     }
     return "";
   }
@@ -780,9 +795,10 @@
         var field = getActiveField();
         if (!fieldHasValue(step, field)) return;
       }
-      if (currentStep === 2 && selections.state && selections.state !== "NE") {
+      if (currentStep === 2 && selections.state && isOutOfStateSelection(selections.state)) {
+        var oosCode = selections.state === "OTHER" ? "XX" : selections.state;
         window.location.href =
-          "../../en/quote-out-of-state.html?state=" + encodeURIComponent(selections.state);
+          "../../en/quote-out-of-state.html?state=" + encodeURIComponent(oosCode);
         return;
       }
       if (currentStep === 11 && nameStepPhase === "fields") {
