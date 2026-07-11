@@ -248,6 +248,26 @@
     return null;
   }
 
+  function trackWizardStepComplete(stepId) {
+    var map = {
+      gender: "sex",
+      dob: "date_of_birth",
+      state: "state",
+      tobacco: "tobacco",
+      coverage: "coverage",
+    };
+    var stepName = map[stepId];
+    if (!stepName) return;
+    if (window.MviGa4Funnel && window.MviGa4Funnel.trackQuoteStepCompleted) {
+      window.MviGa4Funnel.trackQuoteStepCompleted(stepName);
+    } else if (typeof gtag === "function") {
+      gtag("event", "step_completed", {
+        step_name: stepName,
+        form_source: "nebraska_quote_wizard",
+      });
+    }
+  }
+
   function goNext() {
     var err = validateCurrentStep();
     var status = document.getElementById("mvi-quote-status");
@@ -264,6 +284,7 @@
       window.MVS_isOutOfStateQuoteSelection(state.state)
     ) {
       answered.state = true;
+      trackWizardStepComplete("state");
       updateSummaryBar();
       var oosCode = state.state === "OTHER" ? "XX" : state.state;
       var oosPath =
@@ -275,6 +296,7 @@
       return;
     }
     answered[STEPS[stepIndex]] = true;
+    trackWizardStepComplete(STEPS[stepIndex]);
     if (stepIndex < STEPS.length - 1) {
       var nextIndex = stepIndex + 1;
       if (STEPS[nextIndex] === "contact") {
@@ -293,6 +315,7 @@
   }
 
   var dobPickers = {};
+  var statePicker = null;
   var dobPickerDocBound = false;
 
   function dobPlaceholder(part) {
@@ -482,21 +505,24 @@
     refreshMonthPicker();
   }
 
-  function populateStateSelect() {
-    var sel = document.getElementById("mvi-state");
-    if (!sel || sel.options.length > 1) return;
+  function stateOptionsList() {
     var list = window.MVS_QUOTE_STATES || window.MVS_US_STATES || [];
     var isEs = lang() === "es";
+    var options = [{ value: "", label: "—" }];
     list.forEach(function (row) {
-      var o = document.createElement("option");
-      o.value = row.c;
       var label =
         window.MVS_quoteStateLabel
           ? window.MVS_quoteStateLabel(row, isEs ? "es" : "en")
           : row.n;
-      o.textContent = row.c === "OTHER" ? label : label + " (" + row.c + ")";
-      sel.appendChild(o);
+      options.push({
+        value: row.c,
+        label: row.c === "OTHER" ? label : label + " (" + row.c + ")",
+      });
     });
+    return options;
+  }
+
+  function applyStateFromUrl() {
     try {
       var p = new URLSearchParams(location.search);
       var fromUrl = (p.get("state") || "").toUpperCase();
@@ -510,7 +536,119 @@
         state.state = fromUrl;
       }
     } catch (e) {}
-    sel.value = state.state || "NE";
+  }
+
+  function initStatePicker() {
+    var wrap = document.getElementById("mvi-state-wrap");
+    if (!wrap || wrap.dataset.ready === "1") return;
+
+    applyStateFromUrl();
+    if (!state.state) state.state = "NE";
+
+    var options = stateOptionsList();
+    var hidden = document.createElement("input");
+    hidden.type = "hidden";
+    hidden.id = "mvi-state";
+    hidden.value = state.state || "NE";
+    hidden.required = true;
+
+    var btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "mvi-dob-picker-btn form-select form-select-lg";
+    btn.setAttribute("aria-haspopup", "listbox");
+    btn.setAttribute("aria-expanded", "false");
+    btn.setAttribute("aria-label", t("Estado", "State"));
+
+    var labelSpan = document.createElement("span");
+    labelSpan.className = "mvi-dob-picker-label";
+    btn.appendChild(labelSpan);
+
+    var menu = document.createElement("ul");
+    menu.className = "mvi-dob-picker-menu";
+    menu.setAttribute("role", "listbox");
+    menu.hidden = true;
+
+    function renderMenu(opts) {
+      menu.innerHTML = "";
+      opts.forEach(function (opt) {
+        var li = document.createElement("li");
+        li.setAttribute("role", "option");
+        li.setAttribute("data-value", opt.value);
+        li.textContent = opt.label;
+        if (!opt.value) li.classList.add("is-placeholder");
+        menu.appendChild(li);
+      });
+    }
+
+    function syncLabel() {
+      var v = hidden.value;
+      var match = options.find(function (o) {
+        return o.value === v;
+      });
+      labelSpan.textContent = match ? match.label : options[0].label;
+      menu.querySelectorAll('[role="option"]').forEach(function (li) {
+        var selected = li.getAttribute("data-value") === v;
+        li.classList.toggle("is-selected", selected);
+        li.setAttribute("aria-selected", selected ? "true" : "false");
+      });
+    }
+
+    function setOptions(opts) {
+      options = opts;
+      renderMenu(opts);
+      syncLabel();
+    }
+
+    renderMenu(options);
+    syncLabel();
+
+    btn.addEventListener("click", function (e) {
+      e.stopPropagation();
+      var willOpen = menu.hidden;
+      closeAllDobPickerMenus();
+      if (willOpen) {
+        menu.hidden = false;
+        wrap.classList.add("is-open");
+        btn.setAttribute("aria-expanded", "true");
+      }
+    });
+
+    menu.addEventListener("click", function (e) {
+      var li = e.target.closest('[role="option"]');
+      if (!li) return;
+      hidden.value = li.getAttribute("data-value") || "";
+      state.state = hidden.value;
+      syncLabel();
+      closeAllDobPickerMenus();
+      hidden.dispatchEvent(new Event("change", { bubbles: true }));
+    });
+
+    wrap.appendChild(btn);
+    wrap.appendChild(menu);
+    wrap.appendChild(hidden);
+    wrap.dataset.ready = "1";
+
+    statePicker = { setOptions: setOptions, syncLabel: syncLabel, hidden: hidden };
+
+    if (!dobPickerDocBound) {
+      dobPickerDocBound = true;
+      document.addEventListener("click", closeAllDobPickerMenus);
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") closeAllDobPickerMenus();
+      });
+    }
+  }
+
+  function refreshStatePicker() {
+    if (statePicker) statePicker.setOptions(stateOptionsList());
+  }
+
+  function populateStateSelect() {
+    initStatePicker();
+    if (statePicker) {
+      statePicker.hidden.value = state.state || "NE";
+      statePicker.syncLabel();
+    }
   }
 
   function populateCoverageSelect() {
@@ -537,6 +675,7 @@
             b.classList.toggle("is-selected", b === btn);
           });
         answered[field] = true;
+        trackWizardStepComplete(field);
         updateSummaryBar();
         setTimeout(function () {
           if (stepIndex < STEPS.length - 1) showStep(stepIndex + 1);
@@ -711,35 +850,60 @@
             ".";
 
       var sessionClientId = mviGetSessionClientId();
+      var originDetail = mviCollectOriginDetail();
+      var leadEventId =
+        window.MVIMetaCapiEvents && typeof window.MVIMetaCapiEvents.getLeadEventId === "function"
+          ? window.MVIMetaCapiEvents.getLeadEventId()
+          : sessionClientId;
+      var syncPayload = {
+        firstName: names.firstName,
+        lastName: names.lastName,
+        email: state.email.trim(),
+        phone: state.phone.trim(),
+        state: state.state,
+        quoteSummary: quoteSummary,
+        quoteLow: data.quote_low,
+        quoteHigh: data.quote_high,
+        quoteAnchor: data.quote_anchor,
+        age: age,
+        sex: sex,
+        smoker: smoker,
+        dob: isoDob(),
+        coverageAmount: coverage,
+        consent: state.smsConsent,
+        lang: L,
+        source: "nebraska_quote_page",
+        sessionClientId: sessionClientId,
+        metaLeadEventId: leadEventId,
+        originDetail: originDetail,
+      };
+      if (window.MVIMetaCapiMatch && typeof window.MVIMetaCapiMatch.collectForLeadSync === "function") {
+        var capiMatch = window.MVIMetaCapiMatch.collectForLeadSync(originDetail);
+        if (capiMatch.metaFbp) syncPayload.metaFbp = capiMatch.metaFbp;
+        if (capiMatch.metaFbc) syncPayload.metaFbc = capiMatch.metaFbc;
+        if (capiMatch.clientUserAgent) syncPayload.clientUserAgent = capiMatch.clientUserAgent;
+      }
       var syncRes = await fetch("/api/quote-lead-sync", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          firstName: names.firstName,
-          lastName: names.lastName,
-          email: state.email.trim(),
-          phone: state.phone.trim(),
-          state: state.state,
-          quoteSummary: quoteSummary,
-          quoteLow: data.quote_low,
-          quoteHigh: data.quote_high,
-          quoteAnchor: data.quote_anchor,
-          age: age,
-          sex: sex,
-          smoker: smoker,
-          dob: isoDob(),
-          coverageAmount: coverage,
-          consent: state.smsConsent,
-          lang: L,
-          source: "nebraska_quote_page",
-          sessionClientId: sessionClientId,
-          originDetail: mviCollectOriginDetail(),
-        }),
+        body: JSON.stringify(syncPayload),
       });
       var syncData = await syncRes.json().catch(function () {
         return {};
       });
       var leadSaved = syncRes.ok && syncData.ok;
+
+      if (leadSaved && typeof fbq === "function") {
+        var leadEventOpts = {
+          eventID: leadEventId,
+          em: state.email.trim(),
+          ph: state.phone.trim(),
+          fn: names.firstName,
+          ln: names.lastName,
+          ge: sex === "male" ? "m" : "f",
+        };
+        fbq("track", "Lead", { currency: "USD", value: 0 }, leadEventOpts);
+      }
 
       try {
         sessionStorage.setItem(
@@ -907,6 +1071,7 @@
       refreshMonthPicker();
       if (dobPickers.day) dobPickers.day.setOptions(dayOptionsList());
       if (dobPickers.year) dobPickers.year.setOptions(yearOptionsList());
+      refreshStatePicker();
     });
   }
 

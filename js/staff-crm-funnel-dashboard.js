@@ -6,6 +6,8 @@
   "use strict";
 
   var state = {
+    sourceChannel: "facebook",
+    landingPage: "v2",
     view: "facebook_v2",
     periodDays: 1,
     dateFrom: "",
@@ -23,6 +25,28 @@
   };
 
   var PERIOD_PRESETS = [1, 7, 14, 30, 90];
+  var SOURCE_CHANNELS = ["facebook", "google", "direct", "organic"];
+  var LANDING_PAGES = { v2: "V2", v3: "V3", website: "Website" };
+
+  function landingPagesForSource(source) {
+    return source === "organic" ? ["website"] : ["v2", "v3", "website"];
+  }
+
+  function composeViewId(source, landing) {
+    return String(source || "facebook") + "_" + String(landing || "v2");
+  }
+
+  function syncViewFromFilters() {
+    var landings = landingPagesForSource(state.sourceChannel);
+    if (landings.indexOf(state.landingPage) < 0) {
+      state.landingPage = landings[0];
+    }
+    state.view = composeViewId(state.sourceChannel, state.landingPage);
+  }
+
+  function isGoogleView() {
+    return state.sourceChannel === "google";
+  }
 
   function pad2(n) {
     return n < 10 ? "0" + n : String(n);
@@ -209,19 +233,37 @@
       '">' +
       "</label>" +
       "</div>" +
-      '<div class="crm-funnel-view-tabs">' +
-      ["facebook_v2", "facebook_v3", "google", "lp_direct", "website"].map(function (v) {
+      '<div class="crm-funnel-view-tabs crm-funnel-source-tabs">' +
+      SOURCE_CHANNELS.map(function (src) {
         return (
           '<button type="button" class="crm-funnel-view-tab' +
-          (state.view === v ? " is-active" : "") +
-          '" data-funnel-view="' +
-          esc(v) +
+          (state.sourceChannel === src ? " is-active" : "") +
+          '" data-funnel-source="' +
+          esc(src) +
           '">' +
-          esc(t("funnel_view_" + v)) +
+          esc(t("funnel_src_" + src)) +
           "</button>"
         );
       }).join("") +
-      "</div></div></div>"
+      "</div>" +
+      '<label class="crm-funnel-filter crm-funnel-landing-filter">' +
+      "<span>" + esc(t("funnel_landing_page")) + "</span>" +
+      '<select data-funnel-landing>' +
+      landingPagesForSource(state.sourceChannel)
+        .map(function (lp) {
+          return (
+            '<option value="' +
+            esc(lp) +
+            '"' +
+            (state.landingPage === lp ? " selected" : "") +
+            ">" +
+            esc(t("funnel_landing_" + lp)) +
+            "</option>"
+          );
+        })
+        .join("") +
+      "</select></label>" +
+      "</div></div>"
     );
   }
 
@@ -320,17 +362,17 @@
       renderAcqList(t("funnel_top_ads_leads"), ctx.topAdsByLeads) +
       renderAcqList(t("funnel_top_kw_clicks"), ctx.topKeywordsByClicks, {
         setupHint:
-          state.view === "google" && !(ctx.topKeywordsByClicks || []).length
+          isGoogleView() && !(ctx.topKeywordsByClicks || []).length
             ? kwClicksHint
             : "",
         sourceNote:
-          state.view === "google" && ctx.keywordClicksSource === "google_ads_api"
+          isGoogleView() && ctx.keywordClicksSource === "google_ads_api"
             ? t("funnel_kw_clicks_source")
             : "",
       }) +
       renderAcqList(t("funnel_top_kw_leads"), ctx.topKeywordsByLeads, {
         setupHint:
-          state.view === "google" && !(ctx.topKeywordsByLeads || []).length
+          isGoogleView() && !(ctx.topKeywordsByLeads || []).length
             ? t("funnel_kw_leads_setup_hint")
             : "",
       }) +
@@ -1068,6 +1110,31 @@
   function wireEvents(main) {
     if (!main) return;
 
+    main.querySelectorAll("[data-funnel-source]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        state.sourceChannel = btn.getAttribute("data-funnel-source") || "facebook";
+        syncViewFromFilters();
+        state.selectedNode = null;
+        state.detail = null;
+        closeAdChart(main);
+        paint(main);
+        wireEvents(main);
+        loadData(main);
+      });
+    });
+
+    var landingSelect = main.querySelector("[data-funnel-landing]");
+    if (landingSelect) {
+      landingSelect.addEventListener("change", function () {
+        state.landingPage = landingSelect.value || "v2";
+        syncViewFromFilters();
+        state.selectedNode = null;
+        state.detail = null;
+        closeAdChart(main);
+        loadData(main);
+      });
+    }
+
     main.querySelectorAll("[data-funnel-view]").forEach(function (btn) {
       btn.addEventListener("click", function () {
         state.view = btn.getAttribute("data-funnel-view");
@@ -1170,7 +1237,9 @@
 
   function mount(main) {
     applyPeriodDays(1);
-    state.view = "facebook_v2";
+    state.sourceChannel = "facebook";
+    state.landingPage = "v2";
+    syncViewFromFilters();
     state.selectedNode = null;
     state.detail = null;
     state.detailError = null;

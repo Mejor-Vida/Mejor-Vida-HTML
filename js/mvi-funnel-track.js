@@ -26,6 +26,7 @@
     calc_funeral_costs: "calc_funeral_costs",
     calc_household: "calc_household",
     calc_results: "calc_results",
+    coverage: "coverage",
   };
 
   function readSession(key) {
@@ -246,7 +247,10 @@
 
     if (eventName === "step_completed" && params && params.step_name) {
       var stepC = STEP_NAME_MAP[params.step_name] || params.step_name;
-      track({ tool: tool, step_name: stepC, event_type: "step_complete", page_or_step: page });
+      var toolForStep = tool;
+      if (stepC.indexOf("calc_") === 0) toolForStep = "calculator";
+      else if (!isLandingPage()) toolForStep = "quote";
+      track({ tool: toolForStep, step_name: stepC, event_type: "step_complete", page_or_step: page });
       return;
     }
 
@@ -298,6 +302,16 @@
 
     if (eventName === "whatsapp_clicked") {
       track({ tool: "whatsapp", step_name: "whatsapp_click", event_type: "click", page_or_step: page });
+      return;
+    }
+
+    if (eventName === "schedule_click") {
+      track({ tool: "schedule", step_name: "schedule_click", event_type: "click", page_or_step: page });
+      return;
+    }
+
+    if (eventName === "calculator_click") {
+      track({ tool: "calculator", step_name: "calculator_click", event_type: "click", page_or_step: page });
       return;
     }
 

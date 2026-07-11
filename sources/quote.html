@@ -9,6 +9,10 @@
   gtag('js', new Date());
   gtag('config', 'G-K921EG6JWG');
 </script>
+<!-- Meta Pixel Code -->
+<script defer src="/js/meta-pixel-landing.js"></script>
+<noscript><img alt="" height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=873141755808233&amp;ev=PageView&amp;noscript=1" /></noscript>
+<!-- End Meta Pixel Code -->
   <meta charset="utf-8" />
   <!-- Apex → www: Vercel 307s /api/* to www; same-origin fetch+POST can hang or fail. -->
   <script>
@@ -204,9 +208,7 @@
         <div id="mvi-step-state" class="mvi-quote-step-card" hidden>
           <p class="mvi-quote-question" data-lang="es">¿En qué estado reside?</p>
           <p class="mvi-quote-question" data-lang="en">What is your state of residence?</p>
-          <select id="mvi-state" class="form-select form-select-lg mx-auto" style="max-width:20rem;display:block;" required aria-label="State">
-            <option value="">—</option>
-          </select>
+          <div id="mvi-state-wrap" class="mvi-dob-picker mvi-state-picker mx-auto" role="group" aria-label="State"></div>
           <p class="small text-body-secondary text-center mt-3 mb-0" data-lang="es">Julie cotiza en Nebraska, Kansas, Colorado y Nevada. Si vive en otro estado, elija «Otro estado» y le conectamos con un agente licenciado allí.</p>
           <p class="small text-body-secondary text-center mt-3 mb-0" data-lang="en">Julie quotes in Nebraska. If you live elsewhere, we’ll connect you with a licensed agent in your state.</p>
         </div>
@@ -364,9 +366,11 @@
   <script defer src="script.js"></script>
   <script src="js/us-states.js?v=20260709f"></script>
   <script src="js/mvi-quote-coverage-amounts.js"></script>
-  <script src="../js/mvi-funnel-track.js?v=20260702e"></script>
-<script src="../js/mvi-ga4-funnel.js"></script>
-<script src="js/mvi-quote-wizard.js"></script>
+  <script src="../js/mvi-funnel-track.js?v=20260711a"></script>
+<script defer src="../js/mvi-ga4-funnel.js?v=20260711a"></script>
+<script src="../js/meta-capi-match.js?v=20260711b"></script>
+<script src="../js/meta-capi-events.js?v=20260711b"></script>
+<script src="js/mvi-quote-wizard.js?v=20260711b"></script>
 
   <!-- Mobile menu script -->
   <script>

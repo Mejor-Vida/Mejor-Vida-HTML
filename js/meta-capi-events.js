@@ -5,16 +5,19 @@
 (function () {
   "use strict";
 
-  var IS_EN =
-    document.documentElement.lang === "en" ||
-    document.body.getAttribute("data-lf-lang") === "en";
-  if (IS_EN) return;
-
   var path = "";
   try {
     path = location.pathname || "";
   } catch (e) {}
-  if (path.indexOf("gastos-finales-ads") === -1) return;
+
+  var isQuotePage = /\/quote\.html$/i.test(path);
+  var isLandingPage = path.indexOf("gastos-finales-ads") !== -1;
+  if (!isQuotePage && !isLandingPage) return;
+
+  var IS_EN =
+    document.documentElement.lang === "en" ||
+    document.body.getAttribute("data-lf-lang") === "en";
+  if (IS_EN && isLandingPage) return;
 
   var STORAGE_KEYS = {
     email: "mviLandingEmail",
@@ -159,7 +162,7 @@
       eventId: eventId,
       sessionClientId: getSessionClientId(),
       originDetail: originDetail,
-      lang: "es",
+      lang: document.documentElement.lang === "en" ? "en" : "es",
       country: "us",
     };
     if (extra && typeof extra === "object") {

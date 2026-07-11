@@ -14,6 +14,8 @@ const {
   fetchLeadContact,
   canManualEnroll,
   resolveManualEnrollStage,
+  enrollmentPipelineNeedsRebuild,
+  rebuildEnrollmentPipelineFromCrmEntry,
 } = require("../../lib/crm-nurture-engine");
 const { buildClientPipelineView } = require("../../lib/crm-nurture-pipeline-view");
 
@@ -131,7 +133,28 @@ async function buildPipelinePayload(cfg, leadId, leadSourceTable, includeStopped
   );
 
   const enrollment = await loadEnrollment(cfg, leadId, leadSourceTable, includeStopped);
-  const tasks = enrollment ? await loadEnrollmentTasks(cfg, enrollment.id) : [];
+  let tasks = enrollment ? await loadEnrollmentTasks(cfg, enrollment.id) : [];
+  if (enrollment && enrollment.status === "active") {
+    const audit = await enrollmentPipelineNeedsRebuild(
+      cfg.supabaseUrl,
+      cfg.serviceKey,
+      enrollment,
+      tasks,
+      settings,
+      new Date()
+    );
+    if (audit.needs) {
+      await rebuildEnrollmentPipelineFromCrmEntry(
+        cfg.supabaseUrl,
+        cfg.serviceKey,
+        enrollment,
+        settings,
+        { crmEntry: audit.crm_entry }
+      );
+      enrollment = await loadEnrollment(cfg, leadId, leadSourceTable, includeStopped);
+      tasks = enrollment ? await loadEnrollmentTasks(cfg, enrollment.id) : [];
+    }
+  }
   const callTasks = enrollment ? await loadCallTasks(cfg, enrollment.id) : [];
 
   const view = buildClientPipelineView({

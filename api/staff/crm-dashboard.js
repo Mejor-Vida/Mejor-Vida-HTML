@@ -4,6 +4,7 @@
 const { requireStaffAuth } = require("../auth-check");
 const { json, serviceConfig, restSelect } = require("./_inbox-lib");
 const { buildDailySummaryData } = require("../../lib/crm-nurture-engine");
+const { countMedicalPendingLeads } = require("../../lib/medical-questionnaire-status");
 
 const IC_STAGES = ["new", "contacted", "engaged", "client", "retained", "loyal", "lost", "enrolled"];
 
@@ -110,25 +111,18 @@ module.exports = async function handler(req, res) {
   if (!cfg) return json(res, 500, { error: "Missing Supabase config" });
 
   try {
-    const [rows, profileMap, intakeRows, nurtureSummary] = await Promise.all([
+    const [rows, profileMap, medicalPending, nurtureSummary] = await Promise.all([
       loadUnifiedLeads(cfg),
       loadStaffProfileMap(cfg),
-      restSelect(cfg, "medical_intake_submissions", "select=lead_id,lead_source_table&limit=5000").catch(
-        () => []
-      ),
+      countMedicalPendingLeads(cfg).catch(() => 0),
       buildDailySummaryData(cfg).catch(() => null),
     ]);
-
-    const intakeKeys = new Set(
-      (intakeRows || []).map((r) => `${r.lead_id}|${r.lead_source_table}`).filter(Boolean)
-    );
 
     const stageCounts = {};
     IC_STAGES.forEach((s) => {
       stageCounts[s] = 0;
     });
     let inApplication = 0;
-    let medicalPending = 0;
 
     (rows || []).forEach((r) => {
       if (!r || !r.id) return;
@@ -139,7 +133,6 @@ module.exports = async function handler(req, res) {
       );
       stageCounts[stage] = (stageCounts[stage] || 0) + 1;
       if (IN_APPLICATION_STAGES.has(String(r.pipeline_stage || "").toLowerCase())) inApplication++;
-      if (!intakeKeys.has(key)) medicalPending++;
     });
 
     let dailySummary = nurtureSummary;
@@ -188,7 +181,7 @@ module.exports = async function handler(req, res) {
       stage_counts: stageCounts,
       medical_pending: medicalPending,
       in_application: inApplication,
-      calls_today: dailySummary ? dailySummary.new_call_count + dailySummary.contacted_call_count : null,
+      calls_today: dailySummary ? dailySummary.new_call_count : null,
       daily_summary: dailySummary,
       new_leads_in_sequence: newLeadsInSequence,
     });

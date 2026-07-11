@@ -69,7 +69,12 @@
   font: inherit;
 }
 
-.crm-funnel-view-tabs {
+.crm-funnel-landing-filter {
+  min-width: 9rem;
+}
+
+.crm-funnel-view-tabs,
+.crm-funnel-source-tabs {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;

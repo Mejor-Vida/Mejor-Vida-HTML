@@ -7,7 +7,13 @@
 const { requireStaffAuth } = require("../auth-check");
 const { json, serviceConfig, restSelect } = require("./_inbox-lib");
 const { buildDashboard, buildNodeDetail, groupSessions, filterSessions } = require("../../lib/funnel-analytics");
-const { resolveAdPlatformView } = require("../../lib/funnel-analytics-config");
+const {
+  resolveAdPlatformView,
+  normalizeViewId,
+  viewShowsAdMetrics,
+  viewShowsGsc,
+  viewShowsGoogleAdsKeywords,
+} = require("../../lib/funnel-analytics-config");
 const { fetchAdPlatformMetrics, fetchAdDailySeries } = require("../../lib/ad-platform-insights");
 const { fetchTopKeywordsByClicks } = require("../../lib/google-ads-api");
 const { fetchGscOrganicSearch, fetchGscDaily } = require("../../lib/gsc-data-api");
@@ -100,7 +106,7 @@ module.exports = async function handler(req, res) {
   const cfg = serviceConfig();
   if (!cfg) return json(res, 500, { error: "Server missing required configuration" });
 
-  const view = String(req.query.view || "facebook_v2").trim();
+  const view = normalizeViewId(String(req.query.view || "facebook_v2").trim());
   const adPlatformView = resolveAdPlatformView(view);
   const action = String(req.query.action || "").trim();
   const range = resolveDateRange(req.query);
@@ -136,15 +142,11 @@ module.exports = async function handler(req, res) {
   }
 
   if (action === "ad_daily") {
-    const adDailyView =
-      view === "facebook" || view === "facebook_v2" || view === "facebook_v3" || view === "google"
-        ? view
-        : null;
-    if (!adDailyView) {
+    if (!viewShowsAdMetrics(view)) {
       return json(res, 400, { error: "ad_daily requires facebook or google view" });
     }
     try {
-      const series = await fetchAdDailySeries(adDailyView, range.dateFrom, range.dateTo);
+      const series = await fetchAdDailySeries(adPlatformView, range.dateFrom, range.dateTo);
       return json(res, 200, {
         ok: true,
         dateFrom: range.dateFrom,
@@ -158,8 +160,8 @@ module.exports = async function handler(req, res) {
   }
 
   if (action === "gsc_daily") {
-    if (view !== "website") {
-      return json(res, 400, { error: "gsc_daily requires website view" });
+    if (!viewShowsGsc(view)) {
+      return json(res, 400, { error: "gsc_daily requires organic website view" });
     }
     try {
       const series = await fetchGscDaily(range.dateFrom, range.dateTo);
@@ -203,7 +205,7 @@ module.exports = async function handler(req, res) {
   const dashboard = buildDashboard(events, filters);
 
   let googleAdsKeywords = null;
-  if (view === "google") {
+  if (viewShowsGoogleAdsKeywords(view)) {
     try {
       googleAdsKeywords = await fetchTopKeywordsByClicks(range.dateFrom, range.dateTo, 10);
       if (
@@ -226,9 +228,9 @@ module.exports = async function handler(req, res) {
   }
 
   let adMetrics = { show: false };
-  if (view === "facebook" || view === "facebook_v2" || view === "facebook_v3" || view === "google") {
+  if (viewShowsAdMetrics(view)) {
     try {
-      adMetrics = await fetchAdPlatformMetrics(view, range.dateFrom, range.dateTo);
+      adMetrics = await fetchAdPlatformMetrics(adPlatformView, range.dateFrom, range.dateTo);
     } catch (e) {
       console.error("[funnel-analytics] ad metrics", e.message || e);
       adMetrics = {
@@ -243,7 +245,7 @@ module.exports = async function handler(req, res) {
   }
 
   let organicSearch = { show: false };
-  if (view === "website") {
+  if (viewShowsGsc(view)) {
     try {
       organicSearch = await fetchGscOrganicSearch(range.dateFrom, range.dateTo);
     } catch (e) {

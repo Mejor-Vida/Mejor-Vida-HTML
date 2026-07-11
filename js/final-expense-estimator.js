@@ -336,8 +336,40 @@
     window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
   }
 
+  function fireFeAnalytics(eventName, stepName) {
+    var payload = { step_name: stepName, form_source: "fe_calculator" };
+    if (typeof gtag === "function") {
+      gtag("event", eventName, payload);
+    } else if (window.MVIFunnelTrack && typeof window.MVIFunnelTrack.mirrorGa4 === "function") {
+      window.MVIFunnelTrack.mirrorGa4(eventName, payload, { activeFlow: "calculator" });
+    }
+  }
+
+  function trackFeStepCompleted(stepNum) {
+    var stepMap = {
+      1: "calc_state",
+      2: "calc_ceremony",
+      3: "calc_funeral_costs",
+      4: "calc_household",
+    };
+    var stepName = stepMap[stepNum];
+    if (!stepName) return;
+    fireFeAnalytics("step_completed", stepName);
+  }
+
+  function trackFeResultsViewed() {
+    fireFeAnalytics("step_viewed", "calc_results");
+  }
+
   function goToStep(n) {
+    var prev = step;
+    if (n > prev && prev >= 1 && prev <= 4) {
+      trackFeStepCompleted(prev);
+    }
     step = n;
+    if (n === 5 && prev !== 5) {
+      trackFeResultsViewed();
+    }
     saveProgress();
     render();
     requestAnimationFrame(function () {
