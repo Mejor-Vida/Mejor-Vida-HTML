@@ -9,6 +9,7 @@
     sourceChannel: "facebook",
     landingPage: "v2",
     view: "facebook_v2",
+    licensedState: "ALL",
     periodDays: 1,
     dateFrom: "",
     dateTo: "",
@@ -27,6 +28,13 @@
   var PERIOD_PRESETS = [1, 7, 14, 30, 90];
   var SOURCE_CHANNELS = ["facebook", "google", "direct", "organic"];
   var LANDING_PAGES = { v2: "V2", v3: "V3", website: "Website" };
+  var LICENSED_STATES = [
+    { value: "ALL", labelKey: "funnel_state_all" },
+    { value: "NE", labelKey: "funnel_state_ne" },
+    { value: "KS", labelKey: "funnel_state_ks" },
+    { value: "CO", labelKey: "funnel_state_co" },
+    { value: "NV", labelKey: "funnel_state_nv" },
+  ];
 
   function landingPagesForSource(source) {
     return source === "organic" ? ["website"] : ["v2", "v3", "website"];
@@ -182,6 +190,7 @@
       "view=" + encodeURIComponent(state.view),
       "date_from=" + encodeURIComponent(state.dateFrom),
       "date_to=" + encodeURIComponent(state.dateTo),
+      "state=" + encodeURIComponent(state.licensedState || "ALL"),
     ];
     if (extra) Object.keys(extra).forEach(function (k) {
       q.push(encodeURIComponent(k) + "=" + encodeURIComponent(extra[k]));
@@ -262,6 +271,21 @@
           );
         })
         .join("") +
+      "</select></label>" +
+      '<label class="crm-funnel-filter crm-funnel-state-filter">' +
+      "<span>" + esc(t("funnel_state")) + "</span>" +
+      '<select data-funnel-state>' +
+      LICENSED_STATES.map(function (row) {
+        return (
+          '<option value="' +
+          esc(row.value) +
+          '"' +
+          (state.licensedState === row.value ? " selected" : "") +
+          ">" +
+          esc(t(row.labelKey)) +
+          "</option>"
+        );
+      }).join("") +
       "</select></label>" +
       "</div></div>"
     );
@@ -1135,6 +1159,17 @@
       });
     }
 
+    var stateSelect = main.querySelector("[data-funnel-state]");
+    if (stateSelect) {
+      stateSelect.addEventListener("change", function () {
+        state.licensedState = stateSelect.value || "ALL";
+        state.selectedNode = null;
+        state.detail = null;
+        closeAdChart(main);
+        loadData(main);
+      });
+    }
+
     main.querySelectorAll("[data-funnel-view]").forEach(function (btn) {
       btn.addEventListener("click", function () {
         state.view = btn.getAttribute("data-funnel-view");
@@ -1239,6 +1274,7 @@
     applyPeriodDays(1);
     state.sourceChannel = "facebook";
     state.landingPage = "v2";
+    state.licensedState = "ALL";
     syncViewFromFilters();
     state.selectedNode = null;
     state.detail = null;

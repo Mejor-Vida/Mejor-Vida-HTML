@@ -7,9 +7,12 @@
 
   var ACQ_KEY = "mviFunnelAcq";
   var VISITOR_KEY = "mviVisitorId";
+  var STATE_KEY = "mviFunnelState";
   var mirrorContext = {};
   var recentTrackKeys = {};
   var DEDUPE_MS = 600;
+
+  var LICENSED_STATES = { NE: true, KS: true, CO: true, NV: true };
 
   var STEP_NAME_MAP = {
     objective_picker: "landing",
@@ -88,6 +91,25 @@
     } catch (e) {
       return "s-" + String(Date.now());
     }
+  }
+
+  function normalizeStateCode(raw) {
+    var code = String(raw || "")
+      .trim()
+      .toUpperCase();
+    if (LICENSED_STATES[code]) return code;
+    return "";
+  }
+
+  function getSelectedState() {
+    return normalizeStateCode(readSession(STATE_KEY));
+  }
+
+  function setSelectedState(raw) {
+    var code = normalizeStateCode(raw);
+    if (!code) return "";
+    writeSession(STATE_KEY, code);
+    return code;
   }
 
   function detectDevice() {
@@ -174,6 +196,18 @@
     }
     recentTrackKeys[dedupeKey] = now;
     var visitor = getVisitorContext();
+    var eventData =
+      opts.event_data && typeof opts.event_data === "object" ? Object.assign({}, opts.event_data) : {};
+    if (eventData.state) {
+      var fromData = setSelectedState(eventData.state);
+      if (fromData) eventData.state = fromData;
+      else delete eventData.state;
+    } else if (eventData.answer) {
+      var fromAnswer = setSelectedState(eventData.answer);
+      if (fromAnswer) eventData.state = fromAnswer;
+    }
+    var selectedState = getSelectedState();
+    if (selectedState && !eventData.state) eventData.state = selectedState;
     postEvent({
       session_id: getSessionId(),
       visitor_id: visitor.visitor_id,
@@ -189,7 +223,7 @@
       event_type: opts.event_type,
       page_or_step: opts.page_or_step || global.location.pathname,
       device: detectDevice(),
-      event_data: opts.event_data || {},
+      event_data: eventData,
     });
   }
 
@@ -250,7 +284,23 @@
       var toolForStep = tool;
       if (stepC.indexOf("calc_") === 0) toolForStep = "calculator";
       else if (!isLandingPage()) toolForStep = "quote";
-      track({ tool: toolForStep, step_name: stepC, event_type: "step_complete", page_or_step: page });
+      var eventData = {};
+      if (params.answer != null && params.answer !== "") eventData.answer = params.answer;
+      if (params.state) eventData.state = params.state;
+      if (
+        (stepC === "state" || stepC === "calc_state") &&
+        !eventData.state &&
+        eventData.answer
+      ) {
+        eventData.state = eventData.answer;
+      }
+      track({
+        tool: toolForStep,
+        step_name: stepC,
+        event_type: "step_complete",
+        page_or_step: page,
+        event_data: eventData,
+      });
       return;
     }
 
@@ -355,6 +405,8 @@
     getAcquisition: getAcquisition,
     getSessionId: getSessionId,
     getVisitorContext: getVisitorContext,
+    getSelectedState: getSelectedState,
+    setSelectedState: setSelectedState,
   };
 
   installGtagMirrorOnce();

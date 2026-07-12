@@ -337,7 +337,12 @@
   }
 
   function fireFeAnalytics(eventName, stepName) {
-    var payload = { step_name: stepName, form_source: "fe_calculator" };
+    var payload = {
+      step_name: stepName,
+      form_source: "fe_calculator",
+      state: stateCode,
+      answer: stateCode,
+    };
     if (typeof gtag === "function") {
       gtag("event", eventName, payload);
     } else if (window.MVIFunnelTrack && typeof window.MVIFunnelTrack.mirrorGa4 === "function") {
@@ -1046,6 +1051,9 @@
       if (!li) return;
       hidden.value = li.getAttribute("data-value") || stateCode;
       stateCode = hidden.value;
+      if (window.MVIFunnelTrack && typeof window.MVIFunnelTrack.setSelectedState === "function") {
+        window.MVIFunnelTrack.setSelectedState(stateCode);
+      }
       syncLabel();
       closeFeStatePickerMenu();
       if (step === 3 && ceremony) refreshFuneralTable();

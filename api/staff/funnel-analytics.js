@@ -84,7 +84,7 @@ function resolveDateRange(query) {
 
 async function loadFunnelEvents(cfg, startIso, endExclusiveIso) {
   const q =
-    "select=session_id,visitor_id,visitor_type,created_at,source,campaign,ad_set,ad_name,keyword,search_term,tool,step_name,event_type,page_or_step,device" +
+    "select=session_id,visitor_id,visitor_type,created_at,source,campaign,ad_set,ad_name,keyword,search_term,tool,step_name,event_type,page_or_step,device,event_data" +
     "&created_at=gte." +
     encodeURIComponent(startIso) +
     "&created_at=lt." +
@@ -110,6 +110,15 @@ module.exports = async function handler(req, res) {
   const adPlatformView = resolveAdPlatformView(view);
   const action = String(req.query.action || "").trim();
   const range = resolveDateRange(req.query);
+  const stateFilterRaw = String(req.query.state || req.query.state_code || "ALL")
+    .trim()
+    .toUpperCase();
+  const stateFilter =
+    stateFilterRaw === "ALL" || !stateFilterRaw
+      ? "ALL"
+      : ["NE", "KS", "CO", "NV"].includes(stateFilterRaw)
+        ? stateFilterRaw
+        : "ALL";
 
   let events;
   try {
@@ -124,6 +133,7 @@ module.exports = async function handler(req, res) {
     source: "all",
     campaign: "",
     device: "all",
+    state: stateFilter,
     dateFrom: range.dateFrom,
     dateTo: range.dateTo,
   };

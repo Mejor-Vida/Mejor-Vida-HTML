@@ -258,13 +258,25 @@
     };
     var stepName = map[stepId];
     if (!stepName) return;
+    var extra = {};
+    if (stepId === "state" && state.state) {
+      extra.state = state.state;
+      extra.answer = state.state;
+    }
     if (window.MviGa4Funnel && window.MviGa4Funnel.trackQuoteStepCompleted) {
-      window.MviGa4Funnel.trackQuoteStepCompleted(stepName);
+      window.MviGa4Funnel.trackQuoteStepCompleted(stepName, extra);
     } else if (typeof gtag === "function") {
-      gtag("event", "step_completed", {
-        step_name: stepName,
-        form_source: "nebraska_quote_wizard",
-      });
+      gtag(
+        "event",
+        "step_completed",
+        Object.assign(
+          {
+            step_name: stepName,
+            form_source: "nebraska_quote_wizard",
+          },
+          extra
+        )
+      );
     }
   }
 

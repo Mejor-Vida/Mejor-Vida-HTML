@@ -69,7 +69,8 @@
   font: inherit;
 }
 
-.crm-funnel-landing-filter {
+.crm-funnel-landing-filter,
+.crm-funnel-state-filter {
   min-width: 9rem;
 }
 
