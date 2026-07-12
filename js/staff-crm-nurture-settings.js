@@ -336,6 +336,8 @@
   }
 
   function bindWeeklyHandlers(weeklyData) {
+    weeklyData = weeklyData || {};
+    var emailReady = weeklyData.email_provider_ready !== false;
     var statusEl = document.getElementById("ns-we-status");
     var wrap = document.getElementById("ns-we-preview-wrap");
     var frame = document.getElementById("ns-we-frame");
@@ -412,11 +414,18 @@
             { method: "POST" }
           );
           var r = (res && res.result) || {};
-          statusEl.textContent = t("nurture_weekly_sent_ok", {
+          var staffCopy = r.staff_copy || {};
+          var statusText = t("nurture_weekly_sent_ok", {
             sent: String(r.sent || 0),
             failed: String(r.failed || 0),
             skipped: String(r.skipped || 0),
           });
+          if (staffCopy.sent) {
+            statusText += " " + t("nurture_weekly_staff_copy_sent");
+          } else if (staffCopy.error) {
+            statusText += " " + t("nurture_weekly_staff_copy_failed");
+          }
+          statusEl.textContent = statusText;
           // refresh list
           var refreshed = await api("/api/staff/weekly-emails", null, { method: "GET" });
           var panel = document.getElementById("ns-panel-weekly");
