@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
   <meta name="robots" content="noindex,nofollow" />
-  <title>Weekly email review — Mejor Vida Staff</title>
-  <link rel="stylesheet" href="/css/staff-nurture-review.css?v=20260712a" />
+  <title>Weekly blog digest email — Mejor Vida Staff</title>
+  <link rel="stylesheet" href="/css/staff-nurture-review.css?v=20260712b" />
   <style>
     .we-meta { margin: 0 0 16px; }
     .we-meta code { font-size: 0.85em; }
@@ -22,7 +22,7 @@
       max-width: 640px;
       margin: 0 auto;
       display: block;
-      min-height: 720px;
+      min-height: 900px;
       border: 0;
       background: #fff;
       border-radius: 8px;
@@ -36,13 +36,28 @@
       font-size: 0.95rem;
     }
     .we-subject strong { color: var(--accent); }
+    .we-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 16px; }
+    .we-tab {
+      background: transparent;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .we-tab.active {
+      background: var(--accent);
+      color: #111;
+      border-color: var(--accent);
+    }
   </style>
 </head>
 <body>
   <div id="we-login" class="nr-login-wrap">
     <section class="nr-card nr-login-card">
       <h1>Weekly email review</h1>
-      <p class="nr-muted">Sign in to preview this week’s Facebook post as the Sunday client email.</p>
+      <p class="nr-muted">Sign in to preview the condensed weekly blog digest email for your client list.</p>
       <form id="we-login-form">
         <label for="we-email">Email</label>
         <input id="we-email" type="email" autocomplete="username" required />
@@ -51,15 +66,15 @@
         <button type="submit" class="nr-btn" id="we-login-btn">Sign in</button>
         <p id="we-login-err" class="nr-err" role="alert"></p>
       </form>
-      <p class="nr-foot"><a href="/staff/">← Staff portal</a> · <a href="/staff/nurture-review.html">Nurture review</a></p>
+      <p class="nr-foot"><a href="/staff/">← Staff portal</a> · <a href="/email-previews/weekly-blog-digest-email-2026-07-12.html">Static preview (no login)</a></p>
     </section>
   </div>
 
   <div id="we-app" class="nr-app hidden" aria-hidden="true">
     <header class="nr-header">
       <div>
-        <h1>Weekly Facebook → email</h1>
-        <p class="nr-muted">Same Spanish caption + hero as this week’s FB post, formatted for the lead email list. Review before scheduling the Sunday send.</p>
+        <h1>Weekly blog → email</h1>
+        <p class="nr-muted">Condensed Spanish digest: short summary + small image per story, with a link to each full website article. Review before scheduling the Sunday send.</p>
       </div>
       <div class="nr-header-actions">
         <a href="/staff/" class="nr-link">Staff portal</a>
@@ -67,13 +82,19 @@
       </div>
     </header>
 
+    <div class="we-tabs" role="tablist">
+      <button type="button" class="we-tab active" data-source="blog" id="we-tab-blog">Blog digest (recommended)</button>
+      <button type="button" class="we-tab" data-source="facebook" id="we-tab-fb">Facebook post version</button>
+    </div>
+
     <p class="nr-muted we-meta" id="we-meta"></p>
     <div class="we-subject" id="we-subject"></div>
 
     <div class="we-actions">
       <button type="button" class="nr-btn" id="we-reload">Reload preview</button>
       <button type="button" class="nr-btn secondary" id="we-schedule">Schedule for Sunday send</button>
-      <a class="nr-btn secondary" id="we-blog" href="#" target="_blank" rel="noopener">Open blog story</a>
+      <a class="nr-btn secondary" id="we-blog" href="#" target="_blank" rel="noopener">Open weekly blog</a>
+      <a class="nr-btn secondary" href="/email-previews/weekly-blog-digest-email-2026-07-12.html" target="_blank" rel="noopener">Static preview</a>
     </div>
     <p id="we-msg" class="nr-muted" role="status"></p>
 
@@ -83,6 +104,6 @@
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="/js/staff-weekly-email-review.js?v=20260712a"></script>
+  <script src="/js/staff-weekly-email-review.js?v=20260712b"></script>
 </body>
 </html>

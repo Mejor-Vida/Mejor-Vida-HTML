@@ -4,6 +4,7 @@
   var accessToken = "";
   var sb = null;
   var blogUrl = "";
+  var currentSource = "blog";
 
   function $(id) {
     return document.getElementById(id);
@@ -13,6 +14,13 @@
     $("we-login").classList.toggle("hidden", on);
     $("we-app").classList.toggle("hidden", !on);
     $("we-app").setAttribute("aria-hidden", on ? "false" : "true");
+  }
+
+  function setTab(source) {
+    currentSource = source === "facebook" ? "facebook" : "blog";
+    document.querySelectorAll(".we-tab").forEach(function (btn) {
+      btn.classList.toggle("active", btn.getAttribute("data-source") === currentSource);
+    });
   }
 
   async function api(path, body, method) {
@@ -32,25 +40,30 @@
 
   async function loadPreview() {
     $("we-msg").textContent = "Loading preview…";
-    var data = await api("/api/staff/weekly-email-preview");
+    var data = await api("/api/staff/weekly-email-preview?source=" + encodeURIComponent(currentSource));
     blogUrl = data.blog_url || "";
     $("we-meta").innerHTML =
       "Source: <code>" +
-      (data.source_package || "FB package") +
+      (data.source_package || data.source || "weekly") +
       "</code>" +
-      (data.post_date_iso ? " · Date: <strong>" + data.post_date_iso + "</strong>" : "");
+      (data.post_date_iso ? " · Date: <strong>" + data.post_date_iso + "</strong>" : "") +
+      (data.stories && data.stories.length
+        ? " · Stories: <strong>" + data.stories.length + "</strong>"
+        : "");
     $("we-subject").innerHTML =
       "<strong>Subject:</strong> " + (data.subject || "(none)");
-    var frame = $("we-frame");
-    frame.srcdoc = data.html || "<p>No HTML</p>";
+    $("we-frame").srcdoc = data.html || "<p>No HTML</p>";
     var blog = $("we-blog");
     if (blogUrl) {
       blog.href = blogUrl;
       blog.style.display = "";
+      blog.textContent =
+        currentSource === "blog" ? "Open weekly blog" : "Open blog story";
     } else {
       blog.style.display = "none";
     }
-    $("we-msg").textContent = "Preview ready — review the email below. Nothing has been sent yet.";
+    $("we-msg").textContent =
+      "Preview ready — review the email below. Nothing has been sent yet.";
   }
 
   async function scheduleSend() {
@@ -63,9 +76,15 @@
     }
     $("we-msg").textContent = "Scheduling…";
     try {
-      var data = await api("/api/staff/weekly-email-preview", { status: "scheduled" }, "POST");
+      var data = await api(
+        "/api/staff/weekly-email-preview",
+        { status: "scheduled", source: currentSource },
+        "POST"
+      );
       $("we-msg").textContent =
-        "Scheduled. Issue id: " +
+        "Scheduled (" +
+        (data.source || currentSource) +
+        "). Issue id: " +
         ((data.issue && data.issue.id) || "ok") +
         ". Sunday cron sends to your client list (rollout rules still apply).";
     } catch (e) {
@@ -113,6 +132,15 @@
   $("we-schedule").addEventListener("click", function () {
     scheduleSend().catch(function (e) {
       $("we-msg").textContent = e.message || String(e);
+    });
+  });
+
+  document.querySelectorAll(".we-tab").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      setTab(btn.getAttribute("data-source"));
+      loadPreview().catch(function (e) {
+        $("we-msg").textContent = e.message || String(e);
+      });
     });
   });
 })();
