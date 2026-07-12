@@ -16,6 +16,7 @@ const {
   CONSENT_CONTACT_DAYS,
   consentExpiresAt,
   logComplianceEvent,
+  clearActiveFeedPartitionHides,
 } = require("../lib/crm-compliance");
 
 function applyCors(req, res) {
@@ -528,6 +529,13 @@ module.exports = async function handler(req, res) {
   } catch (e) {
     console.error("quote-lead-sync supabase", e);
     return json(res, 500, { ok: false, error: "Could not save lead" });
+  }
+
+  // New inbound quote should resurface in Active Feed even if this person was archived.
+  try {
+    await clearActiveFeedPartitionHides(supabaseUrl, supabaseKey, { email, phone });
+  } catch (e) {
+    console.warn("quote-lead-sync clear partition hides", e && e.message);
   }
 
   try {

@@ -981,8 +981,9 @@ async function findSiblingLeadRefs(cfg, { email, phone, excludeId, excludeSource
 }
 
 /**
- * Hide every unified_leads partition key for this person so the next duplicate
- * cannot reappear in Active Feed after one source row is archived.
+ * Hide this source row from Active Feed. Also write partition-level keys so
+ * existing duplicate rows for the same email/phone stay hidden until a *new*
+ * inbound submission clears those keys (see clearActiveFeedPartitionHides).
  */
 async function hidePersonFromActiveFeed(cfg, { id, sourceTable, email, phone, displayName, archivedBy }) {
   const emailKey = cleanText(email).toLowerCase() || null;
