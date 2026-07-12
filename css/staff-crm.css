@@ -1870,6 +1870,42 @@ body.crm-body {
 .crm-archive-row:hover {
   background: rgba(15, 118, 110, 0.06);
 }
+.crm-table-archive {
+  table-layout: fixed;
+  width: 100%;
+}
+.crm-table-archive th:nth-child(1),
+.crm-table-archive td:nth-child(1) {
+  width: 16%;
+}
+.crm-table-archive th:nth-child(2),
+.crm-table-archive td:nth-child(2) {
+  width: 22%;
+}
+.crm-table-archive th:nth-child(3),
+.crm-table-archive td:nth-child(3) {
+  width: 14%;
+}
+.crm-table-archive th:nth-child(4),
+.crm-table-archive td:nth-child(4),
+.crm-table-archive th:nth-child(6),
+.crm-table-archive td:nth-child(6) {
+  width: 14%;
+}
+.crm-table-archive th:nth-child(5),
+.crm-table-archive td:nth-child(5) {
+  width: 12%;
+}
+.crm-table-archive th:nth-child(7),
+.crm-table-archive td:nth-child(7) {
+  width: 10%;
+}
+.crm-archive-cell-wrap {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-break: normal;
+}
 
 /* Compliance tab */
 .crm-compliance-summary {

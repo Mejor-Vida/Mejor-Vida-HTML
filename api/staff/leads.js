@@ -1767,53 +1767,120 @@ async function withCompliancePayload(cfg, detail, canPhi) {
   };
 }
 
-function archivePersonGroupKey(row) {
-  const email = cleanText(row && row.email).toLowerCase();
-  const phone = phoneLast10Digits(row && row.phone);
-  if (email) return `e:${email}`;
-  if (phone) return `p:${phone}`;
-  if (row && row.lead_id) return `l:${row.lead_id}`;
-  return `id:${row && row.id}`;
+function normalizeArchiveName(name) {
+  return cleanText(name)
+    .toLowerCase()
+    .replace(/[^a-z0-9\s]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
 }
 
-/** Collapse duplicate archive rows (same person, multiple source records) into one list card. */
-function groupArchiveVaultRows(rows) {
-  const map = new Map();
-  (rows || []).forEach((r) => {
-    const key = archivePersonGroupKey(r);
-    if (!map.has(key)) map.set(key, []);
-    map.get(key).push(r);
+/** "Justin" matches "Justin Braunsroth"; different last names do not. */
+function archiveNamesCompatible(nameA, nameB) {
+  const na = normalizeArchiveName(nameA);
+  const nb = normalizeArchiveName(nameB);
+  if (!na || !nb) return false;
+  if (na === nb) return true;
+  if (na.startsWith(nb + " ") || nb.startsWith(na + " ")) return true;
+  const pa = na.split(" ");
+  const pb = nb.split(" ");
+  if (pa[0] !== pb[0]) return false;
+  if (pa.length === 1 || pb.length === 1) return true;
+  return pa[pa.length - 1] === pb[pb.length - 1];
+}
+
+/**
+ * Group archive cards when name matches AND (phone OR email) matches.
+ * Phone is preferred secondary key; email covers same-person alternate numbers.
+ */
+function archiveRowsMatch(a, b) {
+  if (!archiveNamesCompatible(a && a.display_name, b && b.display_name)) return false;
+  const ea = cleanText(a && a.email).toLowerCase();
+  const eb = cleanText(b && b.email).toLowerCase();
+  const pa = phoneLast10Digits(a && a.phone);
+  const pb = phoneLast10Digits(b && b.phone);
+  if (pa && pb && pa === pb) return true;
+  if (ea && eb && ea === eb) return true;
+  return false;
+}
+
+function pickBestArchiveDisplayName(list) {
+  let best = "";
+  (list || []).forEach((x) => {
+    const n = cleanText(x && x.display_name);
+    if (n.length > best.length) best = n;
   });
+  return best || null;
+}
+
+/** Collapse duplicate archive rows into one person card via connected matching. */
+function groupArchiveVaultRows(rows) {
+  const list = Array.isArray(rows) ? rows.slice() : [];
+  const n = list.length;
+  const parent = Array.from({ length: n }, (_, i) => i);
+  function find(i) {
+    while (parent[i] !== i) {
+      parent[i] = parent[parent[i]];
+      i = parent[i];
+    }
+    return i;
+  }
+  function union(i, j) {
+    const a = find(i);
+    const b = find(j);
+    if (a !== b) parent[b] = a;
+  }
+  for (let i = 0; i < n; i++) {
+    for (let j = i + 1; j < n; j++) {
+      if (archiveRowsMatch(list[i], list[j])) union(i, j);
+    }
+  }
+
+  const clusters = new Map();
+  for (let i = 0; i < n; i++) {
+    const root = find(i);
+    if (!clusters.has(root)) clusters.set(root, []);
+    clusters.get(root).push(list[i]);
+  }
+
   const out = [];
-  for (const list of map.values()) {
-    list.sort((a, b) => new Date(b.archived_at || 0) - new Date(a.archived_at || 0));
-    const primary = list[0];
+  for (const group of clusters.values()) {
+    group.sort((a, b) => new Date(b.archived_at || 0) - new Date(a.archived_at || 0));
+    const primary = group[0];
     const emails = [
-      ...new Set(list.map((x) => cleanText(x.email).toLowerCase()).filter(Boolean)),
+      ...new Set(group.map((x) => cleanText(x.email).toLowerCase()).filter(Boolean)),
     ];
-    const phones = [...new Set(list.map((x) => cleanText(x.phone)).filter(Boolean))];
-    const registered = list
+    const phoneKeys = new Set();
+    const phones = [];
+    group.forEach((x) => {
+      const raw = cleanText(x.phone);
+      const key = phoneLast10Digits(raw);
+      if (!raw || !key || phoneKeys.has(key)) return;
+      phoneKeys.add(key);
+      phones.push(raw);
+    });
+    const registered = group
       .map((x) => x.registered_at)
       .filter(Boolean)
       .sort();
     out.push({
       id: primary.id,
-      display_name:
-        list.map((x) => cleanText(x.display_name)).find(Boolean) || primary.display_name || null,
+      display_name: pickBestArchiveDisplayName(group) || primary.display_name || null,
       email: emails[0] || primary.email || null,
       phone: phones[0] || primary.phone || null,
       emails,
       phones,
-      state_code: list.map((x) => x.state_code).find(Boolean) || null,
+      state_code: group.map((x) => x.state_code).find(Boolean) || null,
       registered_at: registered[0] || null,
       archived_at: primary.archived_at || null,
       archived_by: primary.archived_by || null,
       reason: primary.reason || null,
-      consent_ip: list.map((x) => x.consent_ip).find(Boolean) || null,
-      consent_text: list.map((x) => x.consent_text).find(Boolean) || null,
-      record_count: list.length,
-      related_archive_ids: list.map((x) => x.id),
-      lead_keys: list.map((x) => ({
+      consent_ip: group.map((x) => x.consent_ip).find(Boolean) || null,
+      consent_text: group.map((x) => x.consent_text).find(Boolean) || null,
+      consent_screenshot_path: group.map((x) => x.consent_screenshot_path).find(Boolean) || null,
+      record_count: group.length,
+      related_archive_ids: group.map((x) => x.id),
+      lead_keys: group.map((x) => ({
         lead_id: x.lead_id,
         lead_source_table: x.lead_source_table,
       })),
@@ -1829,8 +1896,24 @@ async function loadArchiveRelatedRows(cfg, primary) {
     "crm_lead_archives",
     "select=*&order=archived_at.desc&limit=2000"
   );
-  const key = archivePersonGroupKey(primary);
-  return (all || []).filter((r) => archivePersonGroupKey(r) === key);
+  const seed = primary && primary.id ? primary : null;
+  if (!seed) return [];
+  const group = [seed];
+  const seen = new Set([String(seed.id)]);
+  let changed = true;
+  while (changed) {
+    changed = false;
+    for (const cand of all || []) {
+      const id = cand && cand.id != null ? String(cand.id) : "";
+      if (!id || seen.has(id)) continue;
+      if (group.some((g) => archiveRowsMatch(g, cand))) {
+        group.push(cand);
+        seen.add(id);
+        changed = true;
+      }
+    }
+  }
+  return group;
 }
 
 async function loadArchiveHistoryBundle(cfg, leadKeys, personHints) {

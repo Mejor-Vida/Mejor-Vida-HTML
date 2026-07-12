@@ -818,7 +818,7 @@
         '<p class="crm-page-sub">' +
         esc(t("clients_archive_blurb")) +
         "</p>" +
-        '<div class="crm-table-wrap"><table class="crm-table crm-table-clients"><thead><tr>' +
+        '<div class="crm-table-wrap"><table class="crm-table crm-table-archive"><thead><tr>' +
         "<th>" +
         esc(t("col_name")) +
         "</th><th>" +
@@ -857,6 +857,12 @@
           tbody.innerHTML = rows
             .map(function (r) {
               var name = r.display_name || "—";
+              var emails = Array.isArray(r.emails) && r.emails.length ? r.emails : r.email ? [r.email] : [];
+              var phones = Array.isArray(r.phones) && r.phones.length ? r.phones : r.phone ? [r.phone] : [];
+              var emailLabel = emails[0] || "—";
+              if (emails.length > 1) emailLabel += " (+" + (emails.length - 1) + ")";
+              var phoneLabel = phones[0] || "—";
+              if (phones.length > 1) phoneLabel += " (+" + (phones.length - 1) + ")";
               var rec =
                 r.record_count && r.record_count > 1
                   ? t("clients_archive_records_n", { count: r.record_count })
@@ -867,10 +873,14 @@
                 '" tabindex="0">' +
                 "<td><strong>" +
                 esc(name) +
-                "</strong></td><td>" +
-                esc(r.email || "—") +
-                "</td><td>" +
-                esc(r.phone || "—") +
+                '</strong></td><td class="crm-archive-cell-wrap" title="' +
+                esc(emails.join(", ") || "—") +
+                '">' +
+                esc(emailLabel) +
+                '</td><td class="crm-archive-cell-wrap" title="' +
+                esc(phones.join(", ") || "—") +
+                '">' +
+                esc(phoneLabel) +
                 "</td><td>" +
                 esc(r.registered_at ? new Date(r.registered_at).toLocaleString() : "—") +
                 "</td><td>" +
