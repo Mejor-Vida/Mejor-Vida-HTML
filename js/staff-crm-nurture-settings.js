@@ -265,6 +265,9 @@
             .join("") +
           "</ul></details>"
         : "") +
+      '<p class="crm-muted" style="font-size:13px;margin:0 0 8px">' +
+      esc(t("nurture_weekly_staff_copy")) +
+      "</p>" +
       (storyList ? "<ul style=\"margin:12px 0 16px;padding-left:18px\">" + storyList + "</ul>" : "") +
       (!emailReady
         ? '<p class="crm-muted" style="color:#b45309;margin-bottom:12px">' +
