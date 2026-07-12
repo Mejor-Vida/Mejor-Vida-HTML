@@ -168,6 +168,24 @@ module.exports = async function handler(req, res) {
   }
 
   const sourceTable = leadSourceTable || resolved.sourceTable || "";
+  try {
+    const profiles = await restSelect(
+      cfg,
+      "staff_lead_profiles",
+      `lead_id=eq.${encodeURIComponent(leadId)}&lead_source_table=eq.${encodeURIComponent(
+        sourceTable
+      )}&select=profile_data&limit=1`
+    );
+    const pd = profiles && profiles[0] && profiles[0].profile_data;
+    if (pd && (pd.archived_at || pd.status === "archived" || pd.sms_opt_in === false)) {
+      return json(res, 200, {
+        success: false,
+        error: "SMS not allowed — this lead is archived or SMS permission is off.",
+      });
+    }
+  } catch (e) {
+    console.warn("staff/send-sms archive check", e && e.message);
+  }
   const phoneForOptIn = toPhoneRaw || resolved.unified.phone || "";
   let optedIn;
   try {

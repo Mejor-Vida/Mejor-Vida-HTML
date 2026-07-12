@@ -187,6 +187,23 @@
       field(t("nurture_newsletter_hour"), "ns-nl-hour", nl.hour != null ? nl.hour : 16, "number") +
       field(t("nurture_timezone"), "ns-tz", cfg.timezone || "America/Chicago") +
       "</div>" +
+      '<div class="crm-card" style="margin-bottom:16px">' +
+      "<h2>" +
+      esc(t("nurture_compliance_title")) +
+      "</h2>" +
+      '<p class="crm-muted">' +
+      esc(t("nurture_compliance_sub")) +
+      "</p>" +
+      '<label class="crm-field-label" style="display:flex;align-items:flex-start;gap:10px;margin-top:12px">' +
+      '<input type="checkbox" id="ns-block-holidays" ' +
+      ((cfg.compliance && cfg.compliance.block_federal_holidays !== false) ? "checked " : "") +
+      "/>" +
+      "<span>" +
+      esc(t("nurture_block_federal_holidays")) +
+      '<br><span class="crm-muted">' +
+      esc(t("nurture_block_federal_holidays_hint")) +
+      "</span></span></label>" +
+      "</div>" +
       '<div class="crm-form-actions">' +
       '<button type="button" class="crm-btn" id="ns-save">' +
       esc(t("ov_save")) +
@@ -222,6 +239,12 @@
       delete next.daily_summary.recipient;
       next.newsletter = next.newsletter || {};
       next.newsletter.hour = Number(document.getElementById("ns-nl-hour").value);
+      next.compliance = next.compliance || {};
+      next.compliance.block_federal_holidays = !!(
+        document.getElementById("ns-block-holidays") &&
+        document.getElementById("ns-block-holidays").checked
+      );
+      if (!next.compliance.preferred_resume_hour) next.compliance.preferred_resume_hour = 9;
       try {
         await api("/api/staff/nurture-settings", { config: next }, { method: "PATCH" });
         status.textContent = t("ov_status_saved");

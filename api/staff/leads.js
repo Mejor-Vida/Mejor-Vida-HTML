@@ -668,7 +668,7 @@ async function selectQuoteLeadDetailById(cfg, id) {
   const rows = await restSelect(
     cfg,
     "quote_lead_submissions",
-    `select=id,first_name,last_name,email,phone,age,gender,tobacco,lang,source,created_at,quote_status,state_code,payload,consent_summary&limit=1&id=eq.${encodeURIComponent(id)}`
+    `select=id,first_name,last_name,email,phone,age,gender,tobacco,lang,source,created_at,quote_status,state_code,payload,consent_summary,consent_ip,consent_text,consent_url,consent_user_agent,consent_captured_at,consent_expires_at&limit=1&id=eq.${encodeURIComponent(id)}`
   );
   const row = Array.isArray(rows) && rows[0] ? rows[0] : null;
   if (!row) return null;
@@ -713,6 +713,22 @@ async function selectQuoteLeadDetailById(cfg, id) {
     sms_opt_in: smsMeta.sms_opt_in,
     sms_opt_in_at: smsMeta.sms_opt_in_at,
     sms_opt_in_note: smsMeta.sms_opt_in_note,
+    consent_ip: row.consent_ip || (row.consent_summary && row.consent_summary.ip) || null,
+    consent_text:
+      row.consent_text ||
+      (row.consent_summary && row.consent_summary.consentText) ||
+      (row.consent_summary &&
+        row.consent_summary.marketingOptIn &&
+        row.consent_summary.marketingOptIn.label) ||
+      null,
+    consent_url: row.consent_url || (row.consent_summary && row.consent_summary.url) || null,
+    consent_user_agent:
+      row.consent_user_agent || (row.consent_summary && row.consent_summary.userAgent) || null,
+    consent_captured_at:
+      row.consent_captured_at || (row.consent_summary && row.consent_summary.at) || row.created_at || null,
+    consent_expires_at:
+      row.consent_expires_at || (row.consent_summary && row.consent_summary.expiresAt) || null,
+    consent_summary: row.consent_summary || null,
     manychat_subscriber_id: null,
     created_at: row.created_at || null,
     updated_at: row.created_at || null,
@@ -879,6 +895,423 @@ async function hardDeleteUnifiedSourceRow(cfg, unified) {
     return;
   }
   throw new Error(`Hard delete is not implemented for source table: ${st}`);
+}
+
+/**
+ * Insert staff_hidden_leads row; ignore unique conflicts.
+ * Partition-level hides must use dedupe_key = email/phone/name key with null source_*
+ * so unified_leads suppresses the whole person bucket (not just one source row).
+ */
+async function insertStaffHiddenLead(cfg, row) {
+  try {
+    await restInsert(cfg, "staff_hidden_leads", [row]);
+    return true;
+  } catch (e) {
+    if (/23505|duplicate|unique/i.test(String(e && e.message))) return false;
+    throw e;
+  }
+}
+
+async function findSiblingLeadRefs(cfg, { email, phone, excludeId, excludeSourceTable }) {
+  const out = [];
+  const seen = new Set();
+  const excludeKey = `${excludeSourceTable}:${excludeId}`;
+  const add = (source_table, id, row) => {
+    const sid = String(id || "").trim();
+    if (!isUuid(sid) || !source_table) return;
+    const key = `${source_table}:${sid}`;
+    if (key === excludeKey || seen.has(key)) return;
+    seen.add(key);
+    out.push({
+      id: sid,
+      source_table,
+      first_name: row.first_name || "",
+      last_name: row.last_name || "",
+      display_name:
+        [row.first_name, row.last_name].filter(Boolean).join(" ").trim() ||
+        row.display_name ||
+        "",
+      email: row.email || "",
+      phone: row.phone || "",
+      created_at: row.created_at || null,
+    });
+  };
+
+  const tables = [
+    "manychat_leads",
+    "contacts",
+    "quote_lead_submissions",
+    "whatsapp_leads",
+    "fex_email_quotes",
+  ];
+  const emailNorm = cleanText(email).toLowerCase();
+  const last10 = phoneLast10Digits(phone);
+
+  for (const table of tables) {
+    if (emailNorm) {
+      try {
+        const rows = await restSelect(
+          cfg,
+          table,
+          `select=id,first_name,last_name,email,phone,created_at&email=ilike.${encodeURIComponent(
+            emailNorm
+          )}&limit=50`
+        );
+        (rows || []).forEach((r) => add(table, r.id, r));
+      } catch (_) {
+        /* table/column may differ */
+      }
+    }
+    if (last10 && last10.length === 10) {
+      try {
+        const rows = await restSelect(
+          cfg,
+          table,
+          `select=id,first_name,last_name,email,phone,created_at&phone=like.*${encodeURIComponent(
+            last10
+          )}*&limit=50`
+        );
+        (rows || []).forEach((r) => add(table, r.id, r));
+      } catch (_) {
+        /* ignore */
+      }
+    }
+  }
+  return out;
+}
+
+/**
+ * Hide every unified_leads partition key for this person so the next duplicate
+ * cannot reappear in Active Feed after one source row is archived.
+ */
+async function hidePersonFromActiveFeed(cfg, { id, sourceTable, email, phone, displayName, archivedBy }) {
+  const emailKey = cleanText(email).toLowerCase() || null;
+  const phoneDigits = digitsOnly(phone) || null;
+  const phoneLast10 = phoneLast10Digits(phone) || null;
+  const nameKey = cleanText(displayName).toLowerCase() || null;
+
+  await insertStaffHiddenLead(cfg, {
+    dedupe_key: staffHiddenDedupeKey({ id, source_table: sourceTable }),
+    email_key: emailKey,
+    phone_key: phoneLast10 || phoneDigits,
+    name_key: nameKey,
+    source_table: sourceTable,
+    source_id: id,
+    hidden_by: archivedBy || null,
+  });
+
+  // Partition-level hides (null source_*) match unified_leads view OR-branch.
+  // View phone_key is ALL digits (may include leading 1); also hide last-10.
+  const partitionKeys = new Set();
+  if (emailKey) partitionKeys.add(emailKey);
+  if (phoneDigits) partitionKeys.add(phoneDigits);
+  if (phoneLast10) partitionKeys.add(phoneLast10);
+  if (phoneDigits && phoneDigits.length === 11 && phoneDigits.startsWith("1")) {
+    partitionKeys.add(phoneDigits.slice(1));
+  }
+  if (phoneLast10 && phoneLast10.length === 10) {
+    partitionKeys.add(`1${phoneLast10}`);
+  }
+
+  for (const key of partitionKeys) {
+    await insertStaffHiddenLead(cfg, {
+      dedupe_key: key,
+      email_key: emailKey,
+      phone_key: phoneLast10 || phoneDigits,
+      name_key: nameKey,
+      source_table: null,
+      source_id: null,
+      hidden_by: archivedBy || null,
+    });
+  }
+}
+
+/**
+ * Archive lead for insurance retention: snapshot + hide from directory.
+ * Source rows are preserved; nurture is cancelled.
+ * Also archives/hides sibling rows for the same email/phone so duplicates
+ * do not keep resurfacing in Active Feed.
+ */
+async function archiveUnifiedLead(cfg, unified, opts = {}) {
+  const id = String(unified.id || "").trim();
+  const st = String(unified.source_table || "").trim();
+  if (!isUuid(id) || !st) throw new Error("invalid lead");
+
+  let sourceRow = null;
+  try {
+    if (st === "manychat_leads") {
+      sourceRow = await selectManychatLeadDetailById(cfg, id);
+    } else {
+      const rows = await restSelect(
+        cfg,
+        st,
+        `select=*&limit=1&id=eq.${encodeURIComponent(id)}`
+      );
+      sourceRow = Array.isArray(rows) && rows[0] ? rows[0] : null;
+    }
+  } catch (_) {
+    sourceRow = null;
+  }
+
+  let profileData = null;
+  try {
+    const profiles = await restSelect(
+      cfg,
+      "staff_lead_profiles",
+      `lead_id=eq.${encodeURIComponent(id)}&lead_source_table=eq.${encodeURIComponent(
+        st
+      )}&select=*&limit=1`
+    );
+    profileData = Array.isArray(profiles) && profiles[0] ? profiles[0] : null;
+  } catch (_) {
+    profileData = null;
+  }
+
+  const displayName =
+    cleanText(unified.display_name) ||
+    [cleanText(unified.first_name), cleanText(unified.last_name)].filter(Boolean).join(" ") ||
+    null;
+  const email =
+    cleanText(unified.email) ||
+    (sourceRow && cleanText(sourceRow.email)) ||
+    null;
+  const phone =
+    cleanText(unified.phone) ||
+    (sourceRow && cleanText(sourceRow.phone)) ||
+    null;
+  const pd =
+    profileData && profileData.profile_data && typeof profileData.profile_data === "object"
+      ? profileData.profile_data
+      : {};
+  const stateCode =
+    cleanText(
+      (sourceRow && (sourceRow.state_code || sourceRow.state)) ||
+        pd.state_code ||
+        pd.state ||
+        ""
+    )
+      .toUpperCase()
+      .slice(0, 2) || null;
+
+  const snapshot = {
+    unified,
+    source_row: sourceRow,
+    staff_lead_profile: profileData,
+    archived_reason: opts.reason || "staff_archive",
+  };
+
+  const consentIp =
+    (sourceRow && sourceRow.consent_ip) ||
+    (sourceRow &&
+      sourceRow.consent_summary &&
+      sourceRow.consent_summary.ip) ||
+    pd.consent_ip ||
+    null;
+  const consentText =
+    (sourceRow && sourceRow.consent_text) ||
+    (sourceRow &&
+      sourceRow.consent_summary &&
+      (sourceRow.consent_summary.consentText ||
+        (sourceRow.consent_summary.marketingOptIn &&
+          sourceRow.consent_summary.marketingOptIn.label))) ||
+    pd.consent_text ||
+    null;
+  const consentCapturedAt =
+    (sourceRow && sourceRow.consent_captured_at) ||
+    (sourceRow && sourceRow.consent_summary && sourceRow.consent_summary.at) ||
+    pd.consent_captured_at ||
+    (sourceRow && sourceRow.created_at) ||
+    unified.created_at ||
+    null;
+  const consentExpiresAt =
+    (sourceRow && sourceRow.consent_expires_at) ||
+    (sourceRow && sourceRow.consent_summary && sourceRow.consent_summary.expiresAt) ||
+    pd.consent_expires_at ||
+    null;
+  const registeredAt =
+    (sourceRow && sourceRow.created_at) || unified.created_at || consentCapturedAt || null;
+
+  await restInsert(cfg, "crm_lead_archives", [
+    {
+      lead_id: id,
+      lead_source_table: st,
+      display_name: displayName,
+      email,
+      phone,
+      state_code: stateCode,
+      archived_by: opts.archivedBy || null,
+      reason: opts.reason || "staff_archive",
+      snapshot,
+      status: "archived",
+      consent_ip: consentIp,
+      consent_text: consentText,
+      consent_captured_at: consentCapturedAt,
+      consent_expires_at: consentExpiresAt,
+      registered_at: registeredAt,
+    },
+  ]);
+
+  await hidePersonFromActiveFeed(cfg, {
+    id,
+    sourceTable: st,
+    email,
+    phone,
+    displayName,
+    archivedBy: opts.archivedBy,
+  });
+
+  if (st === "manychat_leads") {
+    try {
+      await restPatch(cfg, "manychat_leads", `id=eq.${encodeURIComponent(id)}`, {
+        staff_hidden_at: new Date().toISOString(),
+      });
+    } catch (e) {
+      if (!isStaffHiddenColumnError(e && e.message)) {
+        console.warn("archiveUnifiedLead manychat staff_hidden_at", e && e.message);
+      }
+    }
+  }
+
+  if (profileData) {
+    try {
+      await restPatch(
+        cfg,
+        "staff_lead_profiles",
+        `lead_id=eq.${encodeURIComponent(id)}&lead_source_table=eq.${encodeURIComponent(st)}`,
+        {
+          profile_data: Object.assign({}, pd, {
+            archived_at: new Date().toISOString(),
+            archived_by: opts.archivedBy || null,
+            archived_reason: opts.reason || "staff_archive",
+            status: "archived",
+            sms_opt_in: false,
+            voice_opt_in: false,
+            phone_opt_in: false,
+            marketing_opt_in: false,
+            sms_opt_out_at: new Date().toISOString(),
+            voice_opt_out_at: new Date().toISOString(),
+            outreach_blocked_reason: "archived",
+          }),
+          updated_at: new Date().toISOString(),
+        }
+      );
+    } catch (e) {
+      console.warn("archiveUnifiedLead profile flag", e && e.message);
+    }
+  } else {
+    try {
+      await restInsert(cfg, "staff_lead_profiles", [
+        {
+          lead_id: id,
+          lead_source_table: st,
+          profile_data: {
+            archived_at: new Date().toISOString(),
+            archived_by: opts.archivedBy || null,
+            archived_reason: opts.reason || "staff_archive",
+            status: "archived",
+            sms_opt_in: false,
+            voice_opt_in: false,
+            phone_opt_in: false,
+            marketing_opt_in: false,
+            outreach_blocked_reason: "archived",
+          },
+        },
+      ]);
+    } catch (e) {
+      console.warn("archiveUnifiedLead create profile", e && e.message);
+    }
+  }
+
+  try {
+    await restPatch(
+      cfg,
+      "sms_compliance_queue",
+      `lead_id=eq.${encodeURIComponent(id)}&status=eq.pending`,
+      {
+        status: "cancelled",
+        error: "lead_archived",
+        updated_at: new Date().toISOString(),
+      }
+    );
+  } catch (e) {
+    console.warn("archiveUnifiedLead cancel sms queue", e && e.message);
+  }
+
+  try {
+    const { cancelActiveEnrollment } = require("../../lib/crm-nurture-engine");
+    await cancelActiveEnrollment(cfg.supabaseUrl, cfg.serviceKey, id, st, "lead_archived");
+  } catch (e) {
+    console.warn("archiveUnifiedLead cancel nurture", e && e.message);
+  }
+
+  try {
+    const { logComplianceEvent } = require("../../lib/crm-compliance");
+    await logComplianceEvent(cfg.supabaseUrl, cfg.serviceKey, {
+      leadId: id,
+      leadSourceTable: st,
+      eventType: "archived",
+      title: "Lead moved to Archive Vault",
+      actor: opts.archivedBy || "staff",
+      detail: {
+        reason: opts.reason || "staff_archive",
+        archived_at: new Date().toISOString(),
+        sms_opt_in: false,
+        voice_opt_in: false,
+        consent_ip: consentIp,
+        consent_text: consentText,
+        registered_at: registeredAt,
+      },
+    });
+  } catch (e) {
+    console.warn("archiveUnifiedLead compliance event", e && e.message);
+  }
+
+  let siblingsArchived = 0;
+  if (!opts.skipSiblingSweep) {
+    try {
+      const siblings = await findSiblingLeadRefs(cfg, {
+        email,
+        phone,
+        excludeId: id,
+        excludeSourceTable: st,
+      });
+      for (const sib of siblings) {
+        try {
+          await archiveUnifiedLead(cfg, sib, {
+            archivedBy: opts.archivedBy,
+            reason: "staff_archive_sibling",
+            skipSiblingSweep: true,
+          });
+          siblingsArchived += 1;
+        } catch (e) {
+          // Still force-hide sibling source if full archive fails.
+          console.warn("archiveUnifiedLead sibling", sib.source_table, sib.id, e && e.message);
+          try {
+            await hidePersonFromActiveFeed(cfg, {
+              id: sib.id,
+              sourceTable: sib.source_table,
+              email: sib.email || email,
+              phone: sib.phone || phone,
+              displayName: sib.display_name || displayName,
+              archivedBy: opts.archivedBy,
+            });
+          } catch (_) {
+            /* ignore */
+          }
+        }
+      }
+    } catch (e) {
+      console.warn("archiveUnifiedLead sibling sweep", e && e.message);
+    }
+  }
+
+  return {
+    archived: true,
+    lead_id: id,
+    lead_source_table: st,
+    status: "archived",
+    siblings_archived: siblingsArchived,
+  };
 }
 
 /** Same scoring idea as staff/questions — match lead phone to contacts.whatsapp_id / phone / subscriber. */
@@ -1292,6 +1725,268 @@ async function enrichLeadEmailsFromContacts(cfg, items) {
   });
 }
 
+async function withCompliancePayload(cfg, detail, canPhi) {
+  let compliance_events = [];
+  try {
+    if (detail && detail.id && detail.source_table) {
+      const { listComplianceEvents } = require("../../lib/crm-compliance");
+      compliance_events = await listComplianceEvents(
+        cfg.supabaseUrl,
+        cfg.serviceKey,
+        detail.id,
+        detail.source_table
+      );
+    }
+  } catch (_) {
+    compliance_events = [];
+  }
+  return {
+    detail,
+    compliance_events,
+    can_access_phi: canPhi,
+  };
+}
+
+function archivePersonGroupKey(row) {
+  const email = cleanText(row && row.email).toLowerCase();
+  const phone = phoneLast10Digits(row && row.phone);
+  if (email) return `e:${email}`;
+  if (phone) return `p:${phone}`;
+  if (row && row.lead_id) return `l:${row.lead_id}`;
+  return `id:${row && row.id}`;
+}
+
+/** Collapse duplicate archive rows (same person, multiple source records) into one list card. */
+function groupArchiveVaultRows(rows) {
+  const map = new Map();
+  (rows || []).forEach((r) => {
+    const key = archivePersonGroupKey(r);
+    if (!map.has(key)) map.set(key, []);
+    map.get(key).push(r);
+  });
+  const out = [];
+  for (const list of map.values()) {
+    list.sort((a, b) => new Date(b.archived_at || 0) - new Date(a.archived_at || 0));
+    const primary = list[0];
+    const emails = [
+      ...new Set(list.map((x) => cleanText(x.email).toLowerCase()).filter(Boolean)),
+    ];
+    const phones = [...new Set(list.map((x) => cleanText(x.phone)).filter(Boolean))];
+    const registered = list
+      .map((x) => x.registered_at)
+      .filter(Boolean)
+      .sort();
+    out.push({
+      id: primary.id,
+      display_name:
+        list.map((x) => cleanText(x.display_name)).find(Boolean) || primary.display_name || null,
+      email: emails[0] || primary.email || null,
+      phone: phones[0] || primary.phone || null,
+      emails,
+      phones,
+      state_code: list.map((x) => x.state_code).find(Boolean) || null,
+      registered_at: registered[0] || null,
+      archived_at: primary.archived_at || null,
+      archived_by: primary.archived_by || null,
+      reason: primary.reason || null,
+      consent_ip: list.map((x) => x.consent_ip).find(Boolean) || null,
+      consent_text: list.map((x) => x.consent_text).find(Boolean) || null,
+      record_count: list.length,
+      related_archive_ids: list.map((x) => x.id),
+      lead_keys: list.map((x) => ({
+        lead_id: x.lead_id,
+        lead_source_table: x.lead_source_table,
+      })),
+    });
+  }
+  out.sort((a, b) => new Date(b.archived_at || 0) - new Date(a.archived_at || 0));
+  return out;
+}
+
+async function loadArchiveRelatedRows(cfg, primary) {
+  const all = await restSelect(
+    cfg,
+    "crm_lead_archives",
+    "select=*&order=archived_at.desc&limit=2000"
+  );
+  const key = archivePersonGroupKey(primary);
+  return (all || []).filter((r) => archivePersonGroupKey(r) === key);
+}
+
+async function loadArchiveHistoryBundle(cfg, leadKeys, personHints) {
+  const { listComplianceEvents } = require("../../lib/crm-compliance");
+  const { resolveContactForPipeline } = require("./_contact-resolve");
+  const compliance_events = [];
+  const communications = [];
+  const notes = [];
+  const appointments = [];
+  const reminders = [];
+  const seenComm = new Set();
+  const seenNotes = new Set();
+  const contactIds = new Set();
+
+  const hintEmail = cleanText(personHints && personHints.email).toLowerCase();
+  const hintPhone = cleanText(personHints && personHints.phone);
+
+  async function resolveContactIdForLead(leadId, sourceTable) {
+    try {
+      const profile = await restSelect(
+        cfg,
+        "staff_lead_profiles",
+        `lead_id=eq.${encodeURIComponent(leadId)}&lead_source_table=eq.${encodeURIComponent(
+          sourceTable || ""
+        )}&select=profile_data&limit=1`
+      );
+      const pd = profile && profile[0] && profile[0].profile_data;
+      const stored = pd && (pd.contacts_contact_id || pd.contact_id);
+      if (stored && isUuid(stored)) return String(stored);
+    } catch (_) {
+      /* ignore */
+    }
+    if (sourceTable === "contacts" && isUuid(leadId)) return leadId;
+    try {
+      const c = await resolveContactForPipeline(cfg, {
+        phone: hintPhone || undefined,
+        email: hintEmail || undefined,
+      });
+      if (c && c.id) return String(c.id);
+    } catch (_) {
+      /* ignore */
+    }
+    return null;
+  }
+
+  for (const key of leadKeys || []) {
+    const leadId = key.lead_id;
+    const sourceTable = key.lead_source_table;
+    if (!leadId) continue;
+    try {
+      const evs = await listComplianceEvents(cfg.supabaseUrl, cfg.serviceKey, leadId, sourceTable);
+      (evs || []).forEach((e) => compliance_events.push(e));
+    } catch (_) {
+      /* ignore */
+    }
+
+    const contactId = await resolveContactIdForLead(leadId, sourceTable);
+    if (contactId) contactIds.add(contactId);
+
+    if (contactId) {
+      try {
+        const commRows = await restSelect(
+          cfg,
+          "contact_communications",
+          `select=id,direction,channel,summary,body,subject,meta,created_at&contact_id=eq.${encodeURIComponent(
+            contactId
+          )}&order=created_at.desc&limit=200`
+        );
+        (commRows || []).forEach((row) => {
+          if (seenComm.has(row.id)) return;
+          seenComm.add(row.id);
+          communications.push({
+            id: row.id,
+            at: row.created_at,
+            type: "message",
+            direction: row.direction,
+            channel: row.channel,
+            summary: row.summary,
+            title: row.summary || row.subject || "Message",
+            subject: row.subject,
+            body: row.body,
+          });
+        });
+      } catch (_) {
+        /* ignore */
+      }
+      try {
+        const noteRows = await restSelect(
+          cfg,
+          "notes",
+          `select=id,note,note_type,created_by,created_at&contact_id=eq.${encodeURIComponent(
+            contactId
+          )}&note_type=eq.manual&order=created_at.desc&limit=200`
+        );
+        (noteRows || []).forEach((n) => {
+          if (seenNotes.has(n.id)) return;
+          seenNotes.add(n.id);
+          notes.push(n);
+        });
+      } catch (_) {
+        /* ignore */
+      }
+      try {
+        const ls = await restSelect(
+          cfg,
+          "lead_state",
+          `select=call_scheduled_at,call_completed_at,quote_generated_at&contact_id=eq.${encodeURIComponent(
+            contactId
+          )}&limit=1`
+        );
+        if (ls && ls[0] && ls[0].call_scheduled_at) {
+          appointments.push({
+            type: "scheduled_call",
+            at: ls[0].call_scheduled_at,
+            title: "Scheduled call",
+            status: ls[0].call_completed_at ? "completed" : "scheduled",
+            completed_at: ls[0].call_completed_at || null,
+            contact_id: contactId,
+          });
+        }
+      } catch (_) {
+        /* ignore */
+      }
+    }
+
+    try {
+      const rem = await restSelect(
+        cfg,
+        "staff_reminders",
+        `lead_id=eq.${encodeURIComponent(
+          leadId
+        )}&select=id,title,body,scheduled_at,status,created_at&order=scheduled_at.desc&limit=50`
+      );
+      (rem || []).forEach((r) => reminders.push(r));
+    } catch (_) {
+      /* ignore */
+    }
+
+    try {
+      const calls = await restSelect(
+        cfg,
+        "crm_call_tasks",
+        `lead_id=eq.${encodeURIComponent(
+          leadId
+        )}&select=id,due_at,status,attempt_number,stage,created_at&order=due_at.desc&limit=50`
+      );
+      (calls || []).forEach((c) => {
+        appointments.push({
+          type: "nurture_call_task",
+          at: c.due_at || c.created_at,
+          title: `Call task${c.attempt_number ? ` #${c.attempt_number}` : ""}`,
+          status: c.status || null,
+          stage: c.stage || null,
+        });
+      });
+    } catch (_) {
+      /* ignore */
+    }
+  }
+
+  compliance_events.sort((a, b) => new Date(b.created_at || 0) - new Date(a.created_at || 0));
+  communications.sort((a, b) => new Date(b.at || 0) - new Date(a.at || 0));
+  notes.sort((a, b) => new Date(b.created_at || 0) - new Date(a.created_at || 0));
+  appointments.sort((a, b) => new Date(b.at || 0) - new Date(a.at || 0));
+  reminders.sort((a, b) => new Date(b.scheduled_at || 0) - new Date(a.scheduled_at || 0));
+
+  return {
+    compliance_events,
+    communications,
+    notes,
+    appointments,
+    reminders,
+    contact_ids: [...contactIds],
+  };
+}
+
 module.exports = async function handler(req, res) {
   const auth = await requireStaffAuth(req, res);
   if (!auth.valid) return;
@@ -1303,6 +1998,79 @@ module.exports = async function handler(req, res) {
   if (req.method === "GET") {
     res.setHeader("Cache-Control", "private, no-store, max-age=0, must-revalidate");
     res.setHeader("Pragma", "no-cache");
+
+    const view = String((req.query && req.query.view) || "").trim().toLowerCase();
+    const archiveId = String((req.query && req.query.archive_id) || "").trim();
+
+    if (archiveId && isUuid(archiveId)) {
+      try {
+        const rows = await restSelect(
+          cfg,
+          "crm_lead_archives",
+          `select=*&limit=1&id=eq.${encodeURIComponent(archiveId)}`
+        );
+        const row = Array.isArray(rows) && rows[0] ? rows[0] : null;
+        if (!row) return json(res, 404, { error: "Archive record not found" });
+
+        const related = await loadArchiveRelatedRows(cfg, row);
+        const leadKeys = related.map((r) => ({
+          lead_id: r.lead_id,
+          lead_source_table: r.lead_source_table,
+        }));
+        const person = groupArchiveVaultRows(related)[0] || null;
+        const history = await loadArchiveHistoryBundle(cfg, leadKeys, {
+          email: person && person.email,
+          phone: person && person.phone,
+        });
+
+        // Prefer richest contact fields from related snapshots.
+        const snapEmail =
+          (person && person.email) ||
+          related.map((r) => r.email).find(Boolean) ||
+          (row.snapshot && row.snapshot.unified && row.snapshot.unified.email) ||
+          null;
+        const snapPhone =
+          (person && person.phone) ||
+          related.map((r) => r.phone).find(Boolean) ||
+          (row.snapshot && row.snapshot.unified && row.snapshot.unified.phone) ||
+          null;
+
+        return json(res, 200, {
+          archive: Object.assign({}, row, {
+            email: snapEmail || row.email,
+            phone: snapPhone || row.phone,
+            display_name: (person && person.display_name) || row.display_name,
+          }),
+          person,
+          related_archives: related,
+          compliance_events: history.compliance_events,
+          communications: history.communications,
+          notes: history.notes,
+          appointments: history.appointments,
+          reminders: history.reminders,
+          can_access_phi: canPhi,
+        });
+      } catch (e) {
+        console.error("staff/leads GET archive_id", e);
+        return json(res, 500, { error: "Failed to load archive record" });
+      }
+    }
+
+    if (view === "archive" || view === "vault") {
+      try {
+        const rows = await restSelect(
+          cfg,
+          "crm_lead_archives",
+          "select=id,archived_at,archived_by,reason,lead_id,lead_source_table,display_name,email,phone,state_code,status,consent_ip,consent_text,consent_captured_at,consent_expires_at,registered_at&order=archived_at.desc&limit=2000"
+        );
+        const grouped = groupArchiveVaultRows(rows || []);
+        return json(res, 200, { items: grouped, raw_count: (rows || []).length, view: "archive" });
+      } catch (e) {
+        console.error("staff/leads GET archive list", e);
+        return json(res, 500, { error: "Failed to load archive vault" });
+      }
+    }
+
     const detailId = String((req.query && req.query.id) || "").trim();
     if (detailId && isUuid(detailId)) {
       try {
@@ -1321,7 +2089,7 @@ module.exports = async function handler(req, res) {
             detail.phi = await readPhiMergedForLead(cfg, detailId, src, cross.alternateLeadKeys);
           }
           enrichDetailTopLevelFromPhi(detail);
-          return json(res, 200, { detail, can_access_phi: canPhi });
+          return json(res, 200, await withCompliancePayload(cfg, detail, canPhi));
         }
         if (src === "contacts") {
           const sourceDetail = await selectContactsLeadDetailById(cfg, detailId);
@@ -1334,7 +2102,7 @@ module.exports = async function handler(req, res) {
             detail.phi = await readPhiMergedForLead(cfg, detailId, src, cross.alternateLeadKeys);
           }
           enrichDetailTopLevelFromPhi(detail);
-          return json(res, 200, { detail, can_access_phi: canPhi });
+          return json(res, 200, await withCompliancePayload(cfg, detail, canPhi));
         }
         if (src === "quote_lead_submissions") {
           const sourceDetail = await selectQuoteLeadDetailById(cfg, detailId);
@@ -1345,7 +2113,7 @@ module.exports = async function handler(req, res) {
             detail.phi = phi.payload || {};
           }
           enrichDetailTopLevelFromPhi(detail);
-          return json(res, 200, { detail, can_access_phi: canPhi });
+          return json(res, 200, await withCompliancePayload(cfg, detail, canPhi));
         }
         const detail = {
           read_only: true,
@@ -1367,10 +2135,7 @@ module.exports = async function handler(req, res) {
         }
         const merged = await composeMergedLeadDetail(cfg, detail);
         enrichDetailTopLevelFromPhi(merged);
-        return json(res, 200, {
-          detail: merged,
-          can_access_phi: canPhi,
-        });
+        return json(res, 200, await withCompliancePayload(cfg, merged, canPhi));
       } catch (e) {
         console.error("staff/leads GET id", e);
         return json(res, 500, { error: "Failed to load lead" });
@@ -1801,28 +2566,37 @@ module.exports = async function handler(req, res) {
       const unified = await resolveLeadRowForDelete(cfg, id);
       if (!unified) return json(res, 404, { error: "Lead not found" });
       const src = String(unified.source_table || "");
-      await hardDeleteUnifiedSourceRow(cfg, unified);
+      const archivedBy = auth.user && auth.user.email ? auth.user.email : null;
+      const archiveResult = await archiveUnifiedLead(cfg, unified, {
+        archivedBy,
+        reason: "staff_archive",
+      });
       await logIntegrationAudit(cfg.supabaseUrl, cfg.serviceKey, {
-        stage: "staff_lead_hard_delete",
+        stage: "staff_lead_archive",
         endpoint: "/api/staff/leads",
         outcome: "ok",
-        detail: { source_table: src, deleted_id: id },
+        detail: { source_table: src, archived_id: id },
       });
-      return json(res, 200, { ok: true, id, source_table: src, deleted: true });
+      return json(res, 200, {
+        ok: true,
+        id,
+        source_table: src,
+        archived: true,
+        deleted: false,
+        ...archiveResult,
+      });
     } catch (e) {
-      console.error("staff/leads DELETE", e);
-      const msg = e && e.message ? String(e.message) : "Failed to delete lead";
-      if (/not implemented for source table/i.test(msg)) {
-        return json(res, 400, { error: msg });
-      }
-      if (/23503|foreign key|violates/i.test(msg)) {
-        return json(res, 409, {
+      console.error("staff/leads DELETE(archive)", e);
+      const msg = e && e.message ? String(e.message) : "Failed to archive lead";
+      if (/crm_lead_archives|PGRST|Could not find|does not exist/i.test(msg)) {
+        return json(res, 503, {
           error:
-            "Cannot delete this lead while other database rows still reference it. Remove dependents or delete from Supabase SQL.",
+            "Archive table is not available yet. Apply migration 083_sms_compliance_and_lead_archives.sql, then retry.",
+          detail: msg.length > 400 ? `${msg.slice(0, 400)}…` : msg,
         });
       }
       return json(res, 500, {
-        error: "Failed to delete lead",
+        error: "Failed to archive lead",
         detail: msg.length > 400 ? `${msg.slice(0, 400)}…` : msg,
       });
     }

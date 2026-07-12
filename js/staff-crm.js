@@ -25,7 +25,11 @@
     { id: "products", labelKey: "tab_products" },
     { id: "medical", labelKey: "tab_medical" },
     { id: "coverage", labelKey: "tab_coverage" },
+    { id: "compliance", labelKey: "tab_compliance" },
   ];
+
+  var currentComplianceEvents = [];
+  var archiveCache = [];
 
   function t(key, vars) {
     return window.StaffCrmI18n ? window.StaffCrmI18n.t(key, vars) : key;
@@ -99,7 +103,7 @@
       return { view: "dashboard" };
     }
     if (parts[0] === "clients") {
-      if (parts.length === 1) return { view: "clients" };
+      if (parts.length === 1) return { view: "clients", feed: "active" };
       if (parts[1] === "new") return { view: "clientNew" };
       var id = parts[1];
       var tab = parts[2] || "overview";
@@ -107,6 +111,10 @@
         return t.id === tab;
       });
       return { view: "client", id: id, tab: validTab ? tab : "overview" };
+    }
+    if (parts[0] === "archive") {
+      if (parts.length === 1) return { view: "clients", feed: "archive" };
+      return { view: "archiveDetail", id: parts[1] };
     }
     if (parts[0] === "inbox") return { view: "inbox" };
     if (parts[0] === "assistant") return { view: "assistant" };
@@ -332,7 +340,10 @@
 
   function syncSidebar(route) {
     var active =
-      route.view === "client" || route.view === "clientNew"
+      route.view === "client" ||
+      route.view === "clientNew" ||
+      route.view === "archiveDetail" ||
+      (route.view === "clients")
         ? "clients"
         : route.view === "dashboard"
           ? "dashboard"
@@ -400,7 +411,15 @@
   async function loadLeadDetail(id) {
     var data = await authedApi("/api/staff/leads?id=" + encodeURIComponent(id), null, { method: "GET" });
     currentDetail = data.detail || null;
+    currentComplianceEvents = Array.isArray(data.compliance_events) ? data.compliance_events : [];
     return currentDetail;
+  }
+
+  async function ensureArchives(force) {
+    if (!force && archiveCache.length) return archiveCache;
+    var data = await authedApi("/api/staff/leads?view=archive", null, { method: "GET" });
+    archiveCache = Array.isArray(data.items) ? data.items : [];
+    return archiveCache;
   }
 
   async function reloadLeadDetail(id) {
@@ -762,7 +781,8 @@
       "</div></div>";
   }
 
-  function renderClientsList(main) {
+  function renderClientsList(main, feed) {
+    feed = feed === "archive" ? "archive" : "active";
     var stageFilter = "";
 
     function renderStageFilterHeaderCell() {
@@ -771,17 +791,123 @@
       return stages.renderStageFilterHeader(stageFilter, esc);
     }
 
+    var feedTabs =
+      '<div class="crm-feed-tabs" role="tablist">' +
+      '<button type="button" class="crm-feed-tab' +
+      (feed === "active" ? " active" : "") +
+      '" data-feed="active" role="tab" aria-selected="' +
+      (feed === "active" ? "true" : "false") +
+      '">' +
+      esc(t("clients_feed_active")) +
+      "</button>" +
+      '<button type="button" class="crm-feed-tab' +
+      (feed === "archive" ? " active" : "") +
+      '" data-feed="archive" role="tab" aria-selected="' +
+      (feed === "archive" ? "true" : "false") +
+      '">' +
+      esc(t("clients_feed_archive")) +
+      "</button></div>";
+
+    if (feed === "archive") {
+      main.innerHTML =
+        '<div class="crm-clients-head">' +
+        '<div class="crm-clients-head-left"><h1 class="crm-page-title">' +
+        esc(t("clients_title")) +
+        "</h1></div></div>" +
+        feedTabs +
+        '<p class="crm-page-sub">' +
+        esc(t("clients_archive_blurb")) +
+        "</p>" +
+        '<div class="crm-table-wrap"><table class="crm-table crm-table-clients"><thead><tr>' +
+        "<th>" +
+        esc(t("col_name")) +
+        "</th><th>" +
+        esc(t("col_email")) +
+        "</th><th>" +
+        esc(t("col_phone")) +
+        "</th><th>" +
+        esc(t("compliance_registered")) +
+        "</th><th>" +
+        esc(t("compliance_ip")) +
+        "</th><th>" +
+        esc(t("clients_archived_at")) +
+        "</th><th>" +
+        esc(t("clients_archive_records")) +
+        "</th></tr></thead><tbody id=\"crm-archive-tbody\"></tbody></table></div>" +
+        '<p id="crm-clients-status" class="crm-empty-state"></p>';
+
+      main.querySelectorAll(".crm-feed-tab").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          var f = btn.getAttribute("data-feed");
+          navigate(f === "archive" ? "#/archive" : "#/clients");
+        });
+      });
+
+      var status = $("crm-clients-status");
+      var tbody = $("crm-archive-tbody");
+      ensureArchives(true)
+        .then(function (rows) {
+          if (!tbody) return;
+          if (!rows.length) {
+            tbody.innerHTML = "";
+            if (status) status.textContent = t("clients_archive_empty");
+            return;
+          }
+          if (status) status.textContent = "";
+          tbody.innerHTML = rows
+            .map(function (r) {
+              var name = r.display_name || "—";
+              var rec =
+                r.record_count && r.record_count > 1
+                  ? t("clients_archive_records_n", { count: r.record_count })
+                  : "1";
+              return (
+                '<tr class="crm-archive-row" data-archive-id="' +
+                esc(r.id) +
+                '" tabindex="0">' +
+                "<td><strong>" +
+                esc(name) +
+                "</strong></td><td>" +
+                esc(r.email || "—") +
+                "</td><td>" +
+                esc(r.phone || "—") +
+                "</td><td>" +
+                esc(r.registered_at ? new Date(r.registered_at).toLocaleString() : "—") +
+                "</td><td>" +
+                esc(r.consent_ip || "—") +
+                "</td><td>" +
+                esc(r.archived_at ? new Date(r.archived_at).toLocaleString() : "—") +
+                "</td><td>" +
+                esc(rec) +
+                "</td></tr>"
+              );
+            })
+            .join("");
+          tbody.querySelectorAll(".crm-archive-row").forEach(function (tr) {
+            tr.addEventListener("click", function () {
+              navigate("#/archive/" + encodeURIComponent(tr.getAttribute("data-archive-id")));
+            });
+          });
+        })
+        .catch(function (e) {
+          if (status) status.textContent = e.message || t("load_error");
+        });
+      return;
+    }
+
     main.innerHTML =
       '<div class="crm-clients-head">' +
       '<div class="crm-clients-head-left">' +
       '<h1 class="crm-page-title">' +
       esc(t("clients_title")) +
       "</h1>" +
-      '<button type="button" id="crm-clients-delete" class="crm-icon-btn is-danger" disabled title="' +
+      '<button type="button" id="crm-clients-delete" class="crm-btn secondary" disabled title="' +
       esc(t("clients_delete")) +
       '" aria-label="' +
       esc(t("clients_delete")) +
-      '">🗑</button>' +
+      '">' +
+      esc(t("clients_delete")) +
+      "</button>" +
       "</div>" +
       '<div class="crm-clients-head-actions">' +
       '<button type="button" id="crm-add-client-btn" class="crm-btn crm-btn-pill">' +
@@ -789,6 +915,7 @@
       esc(t("add_new")) +
       "</button>" +
       "</div></div>" +
+      feedTabs +
       '<div class="crm-table-wrap">' +
       '<div class="crm-clients-search-row">' +
       '<span class="crm-col-check-spacer" aria-hidden="true"></span>' +
@@ -840,6 +967,13 @@
       '<button type="button" id="crm-clients-delete-confirm" class="crm-btn">' +
       esc(t("clients_delete")) +
       "</button></div></div></div>";
+
+    main.querySelectorAll(".crm-feed-tab").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var f = btn.getAttribute("data-feed");
+        navigate(f === "archive" ? "#/archive" : "#/clients");
+      });
+    });
 
     var q = "";
     var selectedIds = new Set();
@@ -1325,6 +1459,7 @@
         }
       }
       await refreshLeads();
+      archiveCache = [];
       draw();
       if (status) {
         status.textContent = fail
@@ -1543,7 +1678,9 @@
               ? '<div id="crm-pipeline-root"></div>'
               : route.tab === "comm-notes"
                 ? '<div id="crm-comm-notes-root"></div>'
-                : tabPlaceholder(route.tab);
+                : route.tab === "compliance"
+                  ? '<div id="crm-compliance-root"></div>'
+                  : tabPlaceholder(route.tab);
 
     main.innerHTML =
       '<div class="crm-client-detail">' +
@@ -1593,6 +1730,164 @@
       var cnRoot = document.getElementById("crm-comm-notes-root");
       if (cnRoot) await window.StaffCrmCommNotes.mount(cnRoot, { leadId: route.id, detail: d });
     }
+    if (route.tab === "compliance" && window.StaffCrmCompliance) {
+      var compRoot = document.getElementById("crm-compliance-root");
+      if (compRoot) {
+        await window.StaffCrmCompliance.mount(compRoot, {
+          leadId: route.id,
+          detail: d,
+          complianceEvents: currentComplianceEvents,
+        });
+      }
+    }
+  }
+
+  async function renderArchiveDetail(main, archiveId) {
+    main.innerHTML = '<p class="crm-empty-state">' + esc(t("loading")) + "</p>";
+    try {
+      var data = await authedApi(
+        "/api/staff/leads?archive_id=" + encodeURIComponent(archiveId),
+        null,
+        { method: "GET" }
+      );
+      var arch = data.archive || {};
+      var person = data.person || {};
+      var events = Array.isArray(data.compliance_events) ? data.compliance_events : [];
+      var communications = Array.isArray(data.communications) ? data.communications : [];
+      var notes = Array.isArray(data.notes) ? data.notes : [];
+      var appointments = Array.isArray(data.appointments) ? data.appointments : [];
+      var reminders = Array.isArray(data.reminders) ? data.reminders : [];
+      var name = person.display_name || arch.display_name || arch.email || arch.phone || "—";
+      var email = person.email || arch.email || "—";
+      var phone = person.phone || arch.phone || "—";
+      var recCount = person.record_count || (data.related_archives || []).length || 1;
+
+      function fmt(iso) {
+        if (!iso) return "—";
+        try {
+          return new Date(iso).toLocaleString();
+        } catch (e) {
+          return String(iso);
+        }
+      }
+
+      var apptHtml =
+        '<div class="crm-card" style="margin-bottom:16px"><h2>' +
+        esc(t("clients_archive_calls_title")) +
+        "</h2>";
+      if (!appointments.length && !reminders.length) {
+        apptHtml += '<p class="crm-empty-state">' + esc(t("clients_archive_calls_empty")) + "</p>";
+      } else {
+        apptHtml += "<ul class=\"crm-compliance-timeline\">";
+        appointments.forEach(function (a) {
+          apptHtml +=
+            "<li><strong>" +
+            esc(a.title || t("clients_archive_scheduled_call")) +
+            "</strong><div class=\"crm-muted\">" +
+            esc(fmt(a.at)) +
+            (a.status ? " · " + esc(a.status) : "") +
+            "</div></li>";
+        });
+        reminders.forEach(function (r) {
+          apptHtml +=
+            "<li><strong>" +
+            esc(r.title || t("menu_add_reminder")) +
+            "</strong><div class=\"crm-muted\">" +
+            esc(fmt(r.scheduled_at)) +
+            (r.status ? " · " + esc(r.status) : "") +
+            "</div>" +
+            (r.body ? "<pre class=\"crm-compliance-ev-detail\">" + esc(r.body) + "</pre>" : "") +
+            "</li>";
+        });
+        apptHtml += "</ul>";
+      }
+      apptHtml += "</div>";
+
+      main.innerHTML =
+        '<div class="crm-client-detail">' +
+        '<div class="crm-client-topbar">' +
+        '<button type="button" class="crm-client-back" id="crm-back-archive">' +
+        esc(t("back")) +
+        "</button>" +
+        '<div class="crm-client-name-right"><h1>' +
+        esc(name) +
+        "</h1><p>" +
+        esc(t("clients_feed_archive")) +
+        (recCount > 1 ? " · " + esc(t("clients_archive_records_n", { count: recCount })) : "") +
+        "</p></div></div>" +
+        '<div class="crm-tab-panel">' +
+        '<div class="crm-card" style="margin-bottom:16px"><h2>' +
+        esc(t("contact_details")) +
+        '</h2><dl class="crm-compliance-dl">' +
+        "<dt>" +
+        esc(t("col_email")) +
+        "</dt><dd>" +
+        esc(email) +
+        "</dd>" +
+        "<dt>" +
+        esc(t("col_phone")) +
+        "</dt><dd>" +
+        esc(phone) +
+        "</dd>" +
+        "<dt>" +
+        esc(t("compliance_registered")) +
+        "</dt><dd>" +
+        esc(fmt(person.registered_at || arch.registered_at)) +
+        "</dd>" +
+        "<dt>" +
+        esc(t("clients_archived_at")) +
+        "</dt><dd>" +
+        esc(fmt(person.archived_at || arch.archived_at)) +
+        "</dd>" +
+        "<dt>" +
+        esc(t("compliance_ip")) +
+        "</dt><dd>" +
+        esc(arch.consent_ip || person.consent_ip || "—") +
+        "</dd>" +
+        "<dt>" +
+        esc(t("compliance_wording")) +
+        '</dt><dd class="crm-compliance-wording">' +
+        esc(arch.consent_text || person.consent_text || "—") +
+        "</dd></dl>" +
+        '<p class="crm-muted">' +
+        esc(t("clients_archive_no_outreach")) +
+        "</p></div>" +
+        apptHtml +
+        '<div id="crm-archive-compliance-root"></div></div></div>';
+      $("crm-back-archive").addEventListener("click", function () {
+        navigate("#/archive");
+      });
+      if (window.StaffCrmCompliance) {
+        var root = document.getElementById("crm-archive-compliance-root");
+        if (root) {
+          await window.StaffCrmCompliance.mount(root, {
+            leadId: arch.lead_id,
+            detail: {
+              id: arch.lead_id,
+              consent_ip: arch.consent_ip || person.consent_ip,
+              consent_text: arch.consent_text || person.consent_text,
+              consent_captured_at: arch.consent_captured_at,
+              consent_expires_at: arch.consent_expires_at,
+              created_at: person.registered_at || arch.registered_at,
+              email: email,
+              phone: phone,
+              sms_opt_in: false,
+            },
+            complianceEvents: events,
+            communications: communications,
+            notes: notes,
+            skipRemoteFetch: true,
+          });
+        }
+      }
+    } catch (e) {
+      main.innerHTML =
+        '<div class="crm-placeholder"><strong>' +
+        esc(t("load_error")) +
+        "</strong><p>" +
+        esc(e.message || "") +
+        "</p></div>";
+    }
   }
 
   function renderGlobalPlaceholder(main, titleKey, blurbKey) {
@@ -1625,8 +1920,17 @@
         return;
       }
       if (route.view === "clients") {
-        await refreshLeads();
-        renderClientsList(main);
+        if (route.feed === "archive") {
+          renderClientsList(main, "archive");
+        } else {
+          await refreshLeads();
+          renderClientsList(main, "active");
+        }
+        resetIdleTimer();
+        return;
+      }
+      if (route.view === "archiveDetail") {
+        await renderArchiveDetail(main, route.id);
         resetIdleTimer();
         return;
       }

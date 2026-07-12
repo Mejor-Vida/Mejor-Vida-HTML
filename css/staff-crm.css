@@ -1840,3 +1840,120 @@ body.crm-body {
   opacity: 0.7;
   margin-left: 8px;
 }
+
+/* Active Feed / Archive Vault tabs */
+.crm-feed-tabs {
+  display: flex;
+  gap: 8px;
+  margin: 0 0 16px;
+  border-bottom: 1px solid var(--crm-border, #e5e7eb);
+  padding-bottom: 8px;
+}
+.crm-feed-tab {
+  appearance: none;
+  background: transparent;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  padding: 8px 12px;
+  font: inherit;
+  font-weight: 600;
+  color: var(--crm-muted, #6b7280);
+  cursor: pointer;
+}
+.crm-feed-tab.active {
+  color: var(--crm-text, #111827);
+  border-bottom-color: var(--crm-accent, #0f766e);
+}
+.crm-archive-row {
+  cursor: pointer;
+}
+.crm-archive-row:hover {
+  background: rgba(15, 118, 110, 0.06);
+}
+
+/* Compliance tab */
+.crm-compliance-summary {
+  margin-bottom: 16px;
+}
+.crm-compliance-banner {
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  margin: 8px 0 16px;
+  font-weight: 600;
+}
+.crm-compliance-banner.is-expired {
+  background: #fef2f2;
+  border-color: #fecaca;
+  color: #991b1b;
+}
+.crm-compliance-banner.is-legacy {
+  background: #fffbeb;
+  border-color: #fde68a;
+  color: #92400e;
+}
+.crm-compliance-kind {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: #f3f4f6;
+  color: #374151;
+}
+.crm-compliance-ev--sms .crm-compliance-kind { background: #ecfeff; color: #0e7490; }
+.crm-compliance-ev--email .crm-compliance-kind { background: #eff6ff; color: #1d4ed8; }
+.crm-compliance-ev--note .crm-compliance-kind { background: #f5f3ff; color: #6d28d9; }
+.crm-compliance-ev--compliance .crm-compliance-kind { background: #ecfdf5; color: #047857; }
+.crm-compliance-dl {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 8px 16px;
+  margin: 0;
+}
+.crm-compliance-dl dt {
+  color: var(--crm-muted, #6b7280);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+.crm-compliance-dl dd {
+  margin: 0;
+}
+.crm-compliance-wording,
+.crm-compliance-wrap {
+  white-space: pre-wrap;
+  word-break: break-word;
+  line-height: 1.45;
+}
+.crm-compliance-timeline {
+  list-style: none;
+  margin: 12px 0 0;
+  padding: 0;
+}
+.crm-compliance-timeline li {
+  border-left: 3px solid var(--crm-border, #e5e7eb);
+  padding: 0 0 16px 14px;
+  margin: 0;
+}
+.crm-compliance-ev-head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  justify-content: space-between;
+}
+.crm-compliance-ev-detail {
+  margin: 8px 0 0;
+  font-size: 0.88rem;
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-family: inherit;
+  background: #f9fafb;
+  border: 1px solid var(--crm-border, #e5e7eb);
+  border-radius: 8px;
+  padding: 10px 12px;
+  max-height: 220px;
+  overflow: auto;
+}

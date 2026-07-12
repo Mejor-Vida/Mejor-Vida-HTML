@@ -889,6 +889,19 @@
         metaLeadEventId: leadEventId,
         originDetail: originDetail,
       };
+      if (window.MVIConsentCapture && typeof window.MVIConsentCapture.attachToPayload === "function") {
+        window.MVIConsentCapture.attachToPayload(syncPayload, "ql-sms-consent");
+      } else {
+        var consentLabelEl = document.querySelector('label[for="ql-sms-consent"]');
+        if (consentLabelEl) {
+          syncPayload.consentText = String(consentLabelEl.innerText || consentLabelEl.textContent || "")
+            .replace(/\s+/g, " ")
+            .trim();
+        }
+        try {
+          syncPayload.consentUrl = String(location.href || "").slice(0, 2000);
+        } catch (e) {}
+      }
       if (window.MVIMetaCapiMatch && typeof window.MVIMetaCapiMatch.collectForLeadSync === "function") {
         var capiMatch = window.MVIMetaCapiMatch.collectForLeadSync(originDetail);
         if (capiMatch.metaFbp) syncPayload.metaFbp = capiMatch.metaFbp;

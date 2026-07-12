@@ -19,6 +19,9 @@
 
 const VCF_URL = 'https://www.mejorvidainsurance.com/julie.vcf';
 const { sendSms } = require('../lib/sms-send');
+const { gateAutomatedSms } = require('../lib/sms-compliance-queue');
+const { loadSettings } = require('../lib/crm-nurture-engine');
+const { normalizeStateCode } = require('../lib/telemarketing-compliance');
 
 function json(res, status, payload) {
   res.status(status).setHeader('Content-Type', 'application/json');
@@ -100,11 +103,44 @@ module.exports = async function handler(req, res) {
     return json(res, 200, { ok: true, vcf_reminder_sent: false, reason: 'already_sent' });
   }
 
-  // Send VCF reminder SMS
+  // Send VCF reminder SMS (compliance-gated for automated Telnyx)
   const message = `Hi ${name}! Your call with Julie is confirmed 🎉 One quick thing — save her contact so you can always reach her directly: ${VCF_URL} See you soon!`;
+  const stateCode = normalizeStateCode(body.state || body.state_code) || 'NE';
+  let settings = {};
+  try {
+    settings = await loadSettings(supabaseUrl, supabaseKey);
+  } catch (_) {
+    settings = {};
+  }
 
   let smsSid;
   try {
+    const gate = await gateAutomatedSms({
+      supabaseUrl,
+      serviceKey: supabaseKey,
+      phone,
+      body: message,
+      stateCode,
+      settings,
+      contactId: contact && contact.id,
+      source: 'call_scheduled_vcf',
+      mediaUrls: [VCF_URL],
+      meta: { name },
+    });
+    if (gate.deferred) {
+      console.log(
+        `[call-scheduled] VCF SMS deferred for ${phone} until ${gate.sendAfter} (${gate.reason})`
+      );
+      return json(res, 200, {
+        ok: true,
+        vcf_reminder_sent: false,
+        deferred: true,
+        send_after_timestamp: gate.sendAfter,
+        reason: gate.reason,
+        queue_id: gate.queueId || null,
+      });
+    }
+
     const sent = await sendSms({ to: phone, body: message, mediaUrls: [VCF_URL] });
     if (!sent.ok) {
       throw new Error(`${sent.provider || 'sms'}: ${sent.reason} ${JSON.stringify(sent.detail || '')}`);

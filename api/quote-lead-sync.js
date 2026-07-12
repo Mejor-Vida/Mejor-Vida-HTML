@@ -12,6 +12,11 @@
 
 const { sendQuoteLeadNotification } = require("../lib/ic-lead-notify");
 const { sendMetaCapiWebsiteEvent, capiClientUserAgent, capiClientIp } = require("../lib/meta-capi");
+const {
+  CONSENT_CONTACT_DAYS,
+  consentExpiresAt,
+  logComplianceEvent,
+} = require("../lib/crm-compliance");
 
 function applyCors(req, res) {
   const origin = String(req.headers.origin || "").trim();
@@ -319,6 +324,17 @@ module.exports = async function handler(req, res) {
   }
 
   const smsConsentOptIn = body.consent === true || body.consent === "true";
+  const clientIp = capiClientIp(req);
+  const consentTextRaw = String(
+    body.consentText || body.consent_text || body.consentLabel || ""
+  )
+    .replace(/\s+/g, " ")
+    .trim()
+    .slice(0, 4000);
+  const consentUrl = String(body.consentUrl || body.consent_url || "")
+    .trim()
+    .slice(0, 2000);
+  const consentUa = capiClientUserAgent(req, body);
 
   let nebraskaQuote = null;
   if (leadSource === "nebraska_quote_page" || leadSource === "nebraska_term_quote_page") {
@@ -358,6 +374,7 @@ module.exports = async function handler(req, res) {
   }
 
   const nowIso = new Date().toISOString();
+  const consentExpires = consentExpiresAt(nowIso, CONSENT_CONTACT_DAYS);
   const payload = {
     firstName,
     lastName,
@@ -383,7 +400,11 @@ module.exports = async function handler(req, res) {
     if (dobIso) payload.dob = dobIso.slice(0, 10);
   }
   if (leadSource !== "out_of_state_referral") {
-    payload.marketingOptIn = { sms: smsConsentOptIn, email: true, phoneCalls: true };
+    payload.marketingOptIn = {
+      sms: smsConsentOptIn,
+      email: true,
+      phoneCalls: smsConsentOptIn,
+    };
   }
   const originDetail = buildOriginDetail(body);
   const sessionClientId = body.sessionClientId
@@ -427,19 +448,32 @@ module.exports = async function handler(req, res) {
           agreementVersion: "oos_licensed_agent_v2",
           at: nowIso,
           lang,
+          ip: clientIp || null,
+          url: consentUrl || null,
+          userAgent: consentUa || null,
+          expiresAt: consentExpires,
         }
       : {
           followUp: true,
           smsOptIn: smsConsentOptIn,
+          voiceOptIn: smsConsentOptIn,
           marketingOptIn: {
             sms: smsConsentOptIn,
             email: true,
-            phoneCalls: true,
-            label: smsConsentOptIn
-              ? "User opted in to SMS via optional checkbox on quote form."
-              : "User submitted quote without SMS opt-in (optional checkbox unchecked).",
+            phoneCalls: smsConsentOptIn,
+            label: consentTextRaw
+              ? consentTextRaw.slice(0, 500)
+              : smsConsentOptIn
+                ? "User opted in to SMS via optional checkbox on quote form."
+                : "User submitted quote without SMS opt-in (optional checkbox unchecked).",
           },
+          consentText: consentTextRaw || null,
+          ip: clientIp || null,
+          url: consentUrl || null,
+          userAgent: consentUa || null,
           at: nowIso,
+          expiresAt: consentExpires,
+          consentWindowDays: CONSENT_CONTACT_DAYS,
           lang,
         };
 
@@ -466,6 +500,12 @@ module.exports = async function handler(req, res) {
     crm_sync_needed: true,
     origin_detail: originDetail,
     session_client_id: sessionClientId || null,
+    consent_ip: clientIp || null,
+    consent_text: consentTextRaw || null,
+    consent_url: consentUrl || null,
+    consent_user_agent: consentUa || null,
+    consent_captured_at: nowIso,
+    consent_expires_at: consentExpires,
   };
 
   if (nebraskaQuote) {
@@ -488,6 +528,35 @@ module.exports = async function handler(req, res) {
   } catch (e) {
     console.error("quote-lead-sync supabase", e);
     return json(res, 500, { ok: false, error: "Could not save lead" });
+  }
+
+  try {
+    await logComplianceEvent(supabaseUrl, supabaseKey, {
+      leadId,
+      leadSourceTable: "quote_lead_submissions",
+      eventType: smsConsentOptIn ? "consent_captured" : "form_submitted_no_sms_opt_in",
+      title: smsConsentOptIn
+        ? "Landing form consent captured (SMS + voice window)"
+        : "Landing form submitted without SMS opt-in",
+      actor: "system:quote-lead-sync",
+      detail: {
+        ip: clientIp,
+        consent_text: consentTextRaw || null,
+        consent_url: consentUrl || null,
+        user_agent: consentUa || null,
+        sms_opt_in: smsConsentOptIn,
+        voice_opt_in: smsConsentOptIn,
+        captured_at: nowIso,
+        expires_at: consentExpires,
+        consent_window_days: CONSENT_CONTACT_DAYS,
+        source: leadSource,
+        email,
+        phone: phone || null,
+        state: stateCode || null,
+      },
+    });
+  } catch (e) {
+    console.warn("quote-lead-sync compliance event", e && e.message);
   }
 
   const capiEventId =

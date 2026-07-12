@@ -970,30 +970,34 @@
             " lbs.";
 
       var sessionClientId = mviGetSessionClientId();
+      var termSyncPayload = {
+        firstName: names.firstName,
+        lastName: names.lastName,
+        email: state.email.trim(),
+        phone: state.phone.trim(),
+        state: state.state,
+        quoteSummary: quoteSummary,
+        quoteLow: data.quote_low,
+        quoteHigh: data.quote_high,
+        quoteAnchor: data.quote_anchor,
+        age: age,
+        sex: sex,
+        smoker: smoker,
+        dob: isoDob(),
+        coverageAmount: coverage,
+        consent: state.smsConsent,
+        lang: L,
+        source: "nebraska_term_quote_page",
+        sessionClientId: sessionClientId,
+        originDetail: mviCollectOriginDetail(),
+      };
+      if (window.MVIConsentCapture && typeof window.MVIConsentCapture.attachToPayload === "function") {
+        window.MVIConsentCapture.attachToPayload(termSyncPayload, "ql-sms-consent");
+      }
       var syncRes = await fetch("/api/quote-lead-sync", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          firstName: names.firstName,
-          lastName: names.lastName,
-          email: state.email.trim(),
-          phone: state.phone.trim(),
-          state: state.state,
-          quoteSummary: quoteSummary,
-          quoteLow: data.quote_low,
-          quoteHigh: data.quote_high,
-          quoteAnchor: data.quote_anchor,
-          age: age,
-          sex: sex,
-          smoker: smoker,
-          dob: isoDob(),
-          coverageAmount: coverage,
-          consent: state.smsConsent,
-          lang: L,
-          source: "nebraska_term_quote_page",
-          sessionClientId: sessionClientId,
-          originDetail: mviCollectOriginDetail(),
-        }),
+        body: JSON.stringify(termSyncPayload),
       });
       var syncData = await syncRes.json().catch(function () {
         return {};

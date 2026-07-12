@@ -64,6 +64,20 @@ module.exports = async function handler(req, res) {
         noteType: "manual",
         createdBy,
       });
+      try {
+        const { logComplianceEvent } = require("../../lib/crm-compliance");
+        const src = resolved.sourceTable || resolved.unified?.source_table || "contacts";
+        await logComplianceEvent(cfg.supabaseUrl, cfg.serviceKey, {
+          leadId,
+          leadSourceTable: src,
+          eventType: "staff_note",
+          title: "Staff note added",
+          actor: createdBy,
+          detail: { note: note.slice(0, 2000), contact_id: contactId },
+        });
+      } catch (_) {
+        /* non-fatal */
+      }
       const rows = await restSelect(
         cfg,
         "notes",

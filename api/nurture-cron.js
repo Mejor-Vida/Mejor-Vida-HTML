@@ -36,6 +36,9 @@ const { computeNextSendWithSchedule, scheduleMapFromRows } = require('../lib/nur
 const { VCF_URL, getSmsMessage, getEmailContent } = require('../lib/nurture-templates');
 const { logContactCommunication, htmlToPlain } = require('../lib/contact-communications');
 const { sendSms } = require('../lib/sms-send');
+const { gateAutomatedSms } = require('../lib/sms-compliance-queue');
+const { loadSettings } = require('../lib/crm-nurture-engine');
+const { normalizeStateCode } = require('../lib/telemarketing-compliance');
 
 // ─── Supabase helpers ─────────────────────────────────────────────────────────
 function sbHeaders() {
@@ -143,7 +146,7 @@ async function sendWhatsApp(contact, nurtureRow, step) {
 }
 
 // ─── Phase 2: SMS via Telnyx (lib/sms-send.js) ───────────────────────────────
-async function sendSmsStep(contact, nurtureRow, step) {
+async function sendSmsStep(contact, nurtureRow, step, settings) {
   if (nurtureRow.twilio_opt_out) return { ok: false, reason: 'opted_out' };
   const phone = contact.phone;
   if (!phone) return { ok: false, reason: 'no_phone' };
@@ -153,6 +156,33 @@ async function sendSmsStep(contact, nurtureRow, step) {
 
   const includeVcf = step === 2 && !contact.vcf_sent_at;
   const mediaUrls = includeVcf ? [VCF_URL] : undefined;
+  const stateCode = normalizeStateCode(
+    contact.state_code || contact.state || nurtureRow.state_code || nurtureRow.state
+  ) || 'NE';
+
+  const gate = await gateAutomatedSms({
+    supabaseUrl: process.env.SUPABASE_URL,
+    serviceKey: process.env.SUPABASE_SERVICE_ROLE_KEY,
+    phone,
+    body: msgBody,
+    stateCode,
+    settings: settings || {},
+    contactId: contact.id,
+    source: 'legacy_nurture_cron',
+    mediaUrls: mediaUrls || null,
+    meta: { phase: 2, step },
+    // Reschedule next_send_at in caller — avoid double-send with queue flush.
+    skipQueue: true,
+  });
+  if (gate.deferred) {
+    return {
+      ok: true,
+      deferred: true,
+      reason: gate.reason,
+      send_after: gate.sendAfter,
+      queue_id: gate.queueId || null,
+    };
+  }
 
   const sent = await sendSms({ to: phone, body: msgBody, mediaUrls });
   if (!sent.ok) {
@@ -229,6 +259,12 @@ module.exports = async function handler(req, res) {
 
   console.log(`[nurture-cron] ${dueRows.length} rows due`);
   const results = [];
+  let settings = {};
+  try {
+    settings = await loadSettings(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY);
+  } catch (_) {
+    settings = {};
+  }
 
   for (const row of dueRows) {
     const contact = row.contacts;
@@ -244,11 +280,37 @@ module.exports = async function handler(req, res) {
         overrideRow = await fetchEmailOverride(contact.id, phase, step);
       }
       if (phase === 1) sendResult = await sendWhatsApp(contact, row, step);
-      else if (phase === 2) sendResult = await sendSmsStep(contact, row, step);
+      else if (phase === 2) sendResult = await sendSmsStep(contact, row, step, settings);
       else if (phase === 3) sendResult = await sendEmail(contact, row, step, overrideRow);
     } catch (err) {
       console.error(`[nurture] Row ${row.id} send error:`, err.message);
       sendResult = { ok: false, reason: err.message };
+    }
+
+    if (sendResult.deferred && sendResult.send_after) {
+      try {
+        await sbFetch(`/nurture_sequence?id=eq.${row.id}`, {
+          method: 'PATCH',
+          headers: { Prefer: 'return=minimal' },
+          body: JSON.stringify({
+            next_send_at: sendResult.send_after,
+            updated_at: now.toISOString(),
+          }),
+        });
+      } catch (err) {
+        console.error(`[nurture] Row ${row.id} compliance defer update error:`, err.message);
+      }
+      results.push({
+        nurtureId: row.id,
+        contactId: contact.id,
+        phase,
+        step,
+        sent: false,
+        deferred: true,
+        reason: sendResult.reason,
+        nextSendAt: sendResult.send_after,
+      });
+      continue;
     }
 
     // Email phase but no address on file — advance so the row does not stick forever
