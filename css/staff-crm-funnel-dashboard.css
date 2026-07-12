@@ -198,6 +198,37 @@
   width: min(960px, 96vw);
 }
 
+.crm-funnel-ad-modal--entry {
+  width: min(920px, 96vw);
+}
+
+.crm-funnel-entry-btn {
+  align-self: end;
+  padding: 8px 14px;
+  border: 1px solid var(--crm-border, #dbe3ef);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--crm-ink, #0f172a);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.crm-funnel-entry-btn:hover {
+  border-color: #93c5fd;
+  background: #eff6ff;
+  color: #1d4ed8;
+}
+
+.crm-funnel-entry--modal {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-shadow: none;
+  background: transparent;
+}
+
 .crm-funnel-ad-modal-head {
   display: flex;
   align-items: flex-start;

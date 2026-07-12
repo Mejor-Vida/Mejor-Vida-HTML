@@ -23,6 +23,7 @@
     adChartLoading: false,
     adChartData: null,
     adChartError: null,
+    entryModalOpen: false,
   };
 
   var PERIOD_PRESETS = [1, 7, 14, 30, 90];
@@ -287,6 +288,9 @@
         );
       }).join("") +
       "</select></label>" +
+      '<button type="button" class="crm-funnel-entry-btn" data-funnel-entry-open>' +
+      esc(t("funnel_entry_context")) +
+      "</button>" +
       "</div></div>"
     );
   }
@@ -321,9 +325,13 @@
       .join("");
   }
 
-  /* ── EntryContextPanel ── */
+  /* ── EntryContextPanel (modal body content) ── */
   function EntryContextPanel(ctx) {
-    if (!ctx) return "";
+    if (!ctx) {
+      return (
+        '<p class="crm-funnel-empty-list">' + esc(t("funnel_no_acq_data")) + "</p>"
+      );
+    }
     var sb = ctx.sourceBreakdown || {};
     var sv = ctx.sourceVisitorBreakdown || {};
     var vt = ctx.visitorTotals || {};
@@ -332,8 +340,7 @@
     if (gads.error) kwClicksHint = gads.error;
     else if (gads.setupHint) kwClicksHint = gads.setupHint;
     var html =
-      '<section class="crm-funnel-entry">' +
-      '<h2 class="crm-funnel-section-title">' + esc(t("funnel_entry_context")) + "</h2>" +
+      '<div class="crm-funnel-entry crm-funnel-entry--modal">' +
       '<p class="crm-funnel-entry-sub">' +
       esc(
         state.data && state.data.viewLabel
@@ -359,7 +366,7 @@
       '<div class="crm-funnel-source-pills">' +
       ["facebook", "google", "organic", "direct"].map(function (src) {
         var row = sv[src] || {};
-        var total = row.total || ctx.sourceCounts[src] || 0;
+        var total = row.total || (ctx.sourceCounts && ctx.sourceCounts[src]) || 0;
         if (!total) {
           return (
             '<div class="crm-funnel-source-pill crm-funnel-source-pill--empty">' +
@@ -402,8 +409,30 @@
       }) +
       "</div>";
 
-    html += "</section>";
+    html += "</div>";
     return html;
+  }
+
+  function EntryContextModal() {
+    if (!state.entryModalOpen) return "";
+    var ctx = state.data && state.data.entryContext ? state.data.entryContext : null;
+    var rangeLabel = fmtDateRangeLabel(state.dateFrom, state.dateTo);
+    return (
+      '<div class="crm-funnel-ad-modal-backdrop" data-funnel-entry-modal-backdrop>' +
+      '<div class="crm-funnel-ad-modal crm-funnel-ad-modal--entry" role="dialog" aria-labelledby="crm-funnel-entry-modal-title">' +
+      '<div class="crm-funnel-ad-modal-head">' +
+      '<div><h3 id="crm-funnel-entry-modal-title">' +
+      esc(t("funnel_entry_context")) +
+      "</h3>" +
+      (rangeLabel ? '<p class="crm-funnel-ad-modal-sub">' + esc(rangeLabel) + "</p>" : "") +
+      "</div>" +
+      '<button type="button" class="crm-funnel-ad-modal-close" data-funnel-entry-modal-close aria-label="' +
+      esc(t("funnel_close")) +
+      '">×</button></div>' +
+      '<div class="crm-funnel-ad-modal-body">' +
+      EntryContextPanel(ctx) +
+      "</div></div></div>"
+    );
   }
 
   function renderPoliciesSoldMetric(policiesSold) {
@@ -1001,6 +1030,7 @@
         '<div class="crm-funnel-page">' +
         '<p class="crm-funnel-loading">' + esc(t("funnel_loading")) + "</p>" +
         AdChartModal() +
+        EntryContextModal() +
         "</div>"
       );
     }
@@ -1008,13 +1038,13 @@
       return (
         '<div class="crm-funnel-page">' +
         FilterBar() +
-        EntryContextPanel(state.data && state.data.entryContext) +
         AdPlatformMetrics(state.data && state.data.adMetrics, state.data && state.data.policiesSold) +
         OrganicSearchMetrics(state.data && state.data.organicSearch) +
         '<div class="crm-funnel-empty">' +
         "<strong>" + esc(t("funnel_no_data_title")) + "</strong>" +
         "<p>" + esc(t("funnel_no_data_blurb")) + "</p></div>" +
         AdChartModal() +
+        EntryContextModal() +
         "</div>"
       );
     }
@@ -1025,7 +1055,6 @@
       "<h1>" + esc(t("funnel_title")) + "</h1>" +
       "<p>" + esc(t("funnel_subtitle")) + "</p></header>" +
       FilterBar() +
-      EntryContextPanel(state.data.entryContext) +
       AdPlatformMetrics(state.data.adMetrics, state.data.policiesSold) +
       OrganicSearchMetrics(state.data.organicSearch) +
       '<div class="crm-funnel-main">' +
@@ -1033,6 +1062,7 @@
       DetailInspectorPanel() +
       "</div>" +
       AdChartModal() +
+      EntryContextModal() +
       "</div>"
     );
   }
@@ -1131,6 +1161,18 @@
     wireEvents(main);
   }
 
+  function openEntryModal(main) {
+    state.entryModalOpen = true;
+    paint(main);
+    wireEvents(main);
+  }
+
+  function closeEntryModal(main) {
+    state.entryModalOpen = false;
+    paint(main);
+    wireEvents(main);
+  }
+
   function wireEvents(main) {
     if (!main) return;
 
@@ -1140,6 +1182,7 @@
         syncViewFromFilters();
         state.selectedNode = null;
         state.detail = null;
+        state.entryModalOpen = false;
         closeAdChart(main);
         paint(main);
         wireEvents(main);
@@ -1154,6 +1197,7 @@
         syncViewFromFilters();
         state.selectedNode = null;
         state.detail = null;
+        state.entryModalOpen = false;
         closeAdChart(main);
         loadData(main);
       });
@@ -1165,8 +1209,31 @@
         state.licensedState = stateSelect.value || "ALL";
         state.selectedNode = null;
         state.detail = null;
+        state.entryModalOpen = false;
         closeAdChart(main);
         loadData(main);
+      });
+    }
+
+    var entryOpenBtn = main.querySelector("[data-funnel-entry-open]");
+    if (entryOpenBtn) {
+      entryOpenBtn.addEventListener("click", function (ev) {
+        ev.preventDefault();
+        openEntryModal(main);
+      });
+    }
+
+    var entryModalClose = main.querySelector("[data-funnel-entry-modal-close]");
+    if (entryModalClose) {
+      entryModalClose.addEventListener("click", function (ev) {
+        ev.preventDefault();
+        closeEntryModal(main);
+      });
+    }
+    var entryModalBackdrop = main.querySelector("[data-funnel-entry-modal-backdrop]");
+    if (entryModalBackdrop) {
+      entryModalBackdrop.addEventListener("click", function (ev) {
+        if (ev.target === entryModalBackdrop) closeEntryModal(main);
       });
     }
 
@@ -1275,6 +1342,7 @@
     state.sourceChannel = "facebook";
     state.landingPage = "v2";
     state.licensedState = "ALL";
+    state.entryModalOpen = false;
     syncViewFromFilters();
     state.selectedNode = null;
     state.detail = null;
