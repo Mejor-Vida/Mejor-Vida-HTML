@@ -1957,3 +1957,19 @@ body.crm-body {
   max-height: 220px;
   overflow: auto;
 }
+.crm-compliance-shot {
+  margin: 0;
+  max-width: 420px;
+}
+.crm-compliance-shot img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--crm-border, #e5e7eb);
+  border-radius: 8px;
+  background: #fff;
+}
+.crm-compliance-shot figcaption {
+  margin-top: 6px;
+  font-size: 0.8rem;
+}

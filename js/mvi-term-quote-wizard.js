@@ -993,6 +993,11 @@
       };
       if (window.MVIConsentCapture && typeof window.MVIConsentCapture.attachToPayload === "function") {
         window.MVIConsentCapture.attachToPayload(termSyncPayload, "ql-sms-consent");
+        if (typeof window.MVIConsentCapture.attachScreenshot === "function") {
+          await window.MVIConsentCapture.attachScreenshot(termSyncPayload, {
+            root: "#mvi-step-contact",
+          });
+        }
       }
       var syncRes = await fetch("/api/quote-lead-sync", {
         method: "POST",

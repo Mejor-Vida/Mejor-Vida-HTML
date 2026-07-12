@@ -17,6 +17,7 @@ const {
   consentExpiresAt,
   logComplianceEvent,
   clearActiveFeedPartitionHides,
+  uploadConsentScreenshot,
 } = require("../lib/crm-compliance");
 
 function applyCors(req, res) {
@@ -538,6 +539,28 @@ module.exports = async function handler(req, res) {
     console.warn("quote-lead-sync clear partition hides", e && e.message);
   }
 
+  let consentScreenshotPath = null;
+  const consentScreenshotRaw = String(
+    body.consentScreenshot || body.consent_screenshot || ""
+  ).trim();
+  if (leadId && consentScreenshotRaw.indexOf("data:image/") === 0) {
+    try {
+      consentScreenshotPath = await uploadConsentScreenshot(
+        supabaseUrl,
+        supabaseKey,
+        leadId,
+        consentScreenshotRaw
+      );
+      if (consentScreenshotPath) {
+        await supabasePatch(supabaseUrl, supabaseKey, leadId, {
+          consent_screenshot_path: consentScreenshotPath,
+        });
+      }
+    } catch (e) {
+      console.warn("quote-lead-sync consent screenshot", e && e.message);
+    }
+  }
+
   try {
     await logComplianceEvent(supabaseUrl, supabaseKey, {
       leadId,
@@ -561,6 +584,8 @@ module.exports = async function handler(req, res) {
         email,
         phone: phone || null,
         state: stateCode || null,
+        consent_screenshot_path: consentScreenshotPath || null,
+        consent_screenshot_captured: Boolean(consentScreenshotPath),
       },
     });
   } catch (e) {

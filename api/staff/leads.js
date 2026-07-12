@@ -668,7 +668,7 @@ async function selectQuoteLeadDetailById(cfg, id) {
   const rows = await restSelect(
     cfg,
     "quote_lead_submissions",
-    `select=id,first_name,last_name,email,phone,age,gender,tobacco,lang,source,created_at,quote_status,state_code,payload,consent_summary,consent_ip,consent_text,consent_url,consent_user_agent,consent_captured_at,consent_expires_at&limit=1&id=eq.${encodeURIComponent(id)}`
+    `select=id,first_name,last_name,email,phone,age,gender,tobacco,lang,source,created_at,quote_status,state_code,payload,consent_summary,consent_ip,consent_text,consent_url,consent_user_agent,consent_captured_at,consent_expires_at,consent_screenshot_path&limit=1&id=eq.${encodeURIComponent(id)}`
   );
   const row = Array.isArray(rows) && rows[0] ? rows[0] : null;
   if (!row) return null;
@@ -728,6 +728,7 @@ async function selectQuoteLeadDetailById(cfg, id) {
       row.consent_captured_at || (row.consent_summary && row.consent_summary.at) || row.created_at || null,
     consent_expires_at:
       row.consent_expires_at || (row.consent_summary && row.consent_summary.expiresAt) || null,
+    consent_screenshot_path: row.consent_screenshot_path || null,
     consent_summary: row.consent_summary || null,
     manychat_subscriber_id: null,
     created_at: row.created_at || null,
@@ -1129,6 +1130,10 @@ async function archiveUnifiedLead(cfg, unified, opts = {}) {
     (sourceRow && sourceRow.consent_summary && sourceRow.consent_summary.expiresAt) ||
     pd.consent_expires_at ||
     null;
+  const consentScreenshotPath =
+    (sourceRow && sourceRow.consent_screenshot_path) ||
+    pd.consent_screenshot_path ||
+    null;
   const registeredAt =
     (sourceRow && sourceRow.created_at) || unified.created_at || consentCapturedAt || null;
 
@@ -1148,6 +1153,7 @@ async function archiveUnifiedLead(cfg, unified, opts = {}) {
       consent_text: consentText,
       consent_captured_at: consentCapturedAt,
       consent_expires_at: consentExpiresAt,
+      consent_screenshot_path: consentScreenshotPath,
       registered_at: registeredAt,
     },
   ]);
@@ -1740,6 +1746,19 @@ async function withCompliancePayload(cfg, detail, canPhi) {
     }
   } catch (_) {
     compliance_events = [];
+  }
+  if (detail && detail.consent_screenshot_path) {
+    try {
+      const { signConsentScreenshotUrl } = require("../../lib/crm-compliance");
+      detail.consent_screenshot_url = await signConsentScreenshotUrl(
+        cfg.supabaseUrl,
+        cfg.serviceKey,
+        detail.consent_screenshot_path,
+        3600
+      );
+    } catch (_) {
+      detail.consent_screenshot_url = null;
+    }
   }
   return {
     detail,

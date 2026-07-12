@@ -891,6 +891,11 @@
       };
       if (window.MVIConsentCapture && typeof window.MVIConsentCapture.attachToPayload === "function") {
         window.MVIConsentCapture.attachToPayload(syncPayload, "ql-sms-consent");
+        if (typeof window.MVIConsentCapture.attachScreenshot === "function") {
+          await window.MVIConsentCapture.attachScreenshot(syncPayload, {
+            root: "#mvi-step-contact",
+          });
+        }
       } else {
         var consentLabelEl = document.querySelector('label[for="ql-sms-consent"]');
         if (consentLabelEl) {

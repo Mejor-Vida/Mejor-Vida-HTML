@@ -255,6 +255,15 @@
               syncPayload.consentUrl = String(location.href || "").slice(0, 2000);
             } catch (e) {}
           }
+          var consentShotReady = Promise.resolve(syncPayload);
+          if (
+            window.MVIConsentCapture &&
+            typeof window.MVIConsentCapture.attachScreenshot === "function"
+          ) {
+            consentShotReady = window.MVIConsentCapture.attachScreenshot(syncPayload, {
+              root: ".lf-contact-step, .lf-quote-form, form",
+            });
+          }
           if (!IS_EN && window.MVIMetaCapiMatch && typeof window.MVIMetaCapiMatch.collectForLeadSync === "function") {
             var capiMatch = window.MVIMetaCapiMatch.collectForLeadSync(originDetail);
             if (capiMatch.metaFbp) syncPayload.metaFbp = capiMatch.metaFbp;
@@ -262,7 +271,8 @@
             if (capiMatch.clientUserAgent) syncPayload.clientUserAgent = capiMatch.clientUserAgent;
           }
 
-          return fetch(siteApiUrl("/api/quote-lead-sync"), {
+          return consentShotReady.then(function () {
+            return fetch(siteApiUrl("/api/quote-lead-sync"), {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(syncPayload),
@@ -289,6 +299,7 @@
                     : (syncData && syncData.error) || msg("We could not save your information.", "No pudimos guardar sus datos."),
               };
             });
+          });
           });
         })
         .then(function (result) {

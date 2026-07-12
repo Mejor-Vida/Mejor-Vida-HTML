@@ -54,7 +54,11 @@
   }
 
   function hasFullConsentProof(detail) {
-    return !!(detail.consent_ip && (detail.consent_text || detail.sms_opt_in_note) && detail.consent_url);
+    return !!(
+      detail.consent_ip &&
+      (detail.consent_text || detail.sms_opt_in_note) &&
+      detail.consent_url
+    );
   }
 
   function channelLabel(ch) {
@@ -265,6 +269,25 @@
       esc(t("compliance_wording")) +
       "</dt><dd class=\"crm-compliance-wording\">" +
       esc(detail.consent_text || detail.sms_opt_in_note || "—") +
+      "</dd>" +
+      "<dt>" +
+      esc(t("compliance_screenshot")) +
+      "</dt><dd>" +
+      (detail.consent_screenshot_url
+        ? '<figure class="crm-compliance-shot">' +
+          '<a href="' +
+          esc(detail.consent_screenshot_url) +
+          '" target="_blank" rel="noopener">' +
+          '<img src="' +
+          esc(detail.consent_screenshot_url) +
+          '" alt="' +
+          esc(t("compliance_screenshot")) +
+          '" loading="lazy" />' +
+          "</a>" +
+          '<figcaption class="crm-muted">' +
+          esc(t("compliance_screenshot_hint")) +
+          "</figcaption></figure>"
+        : esc(detail.consent_screenshot_path ? t("compliance_screenshot_pending") : "—")) +
       "</dd>" +
       "</dl></div>";
 
