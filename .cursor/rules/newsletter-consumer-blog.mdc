@@ -1,15 +1,17 @@
 ---
-description: Convert insurance newsletters into plain-language consumer blog copy (not agent weekly HTML)
-globs: tools/newsletter-to-consumer-blog-prompt.md,blog/**/*.html,index.html
+description: Transform Julie's weekly insurance newsletter into a consumer weekly blog digest (families, not agents)
+globs: tools/newsletter-to-consumer-blog-prompt.md,tools/blog-build-rules.md,blog/weekly-insurance-update-*.html,en/blog/weekly-insurance-update-*.html
 alwaysApply: false
 ---
 
-# Newsletter → consumer blog (Mejor Vida)
+# Newsletter → consumer weekly blog (Mejor Vida)
 
-When the user asks to **convert a newsletter** into a **public-facing blog** for everyday readers (not the weekly industry update for producers):
+When building or updating a **public weekly blog** from Julie’s newsletter / industry briefing:
 
-1. Open and follow **`tools/newsletter-to-consumer-blog-prompt.md`** — middle-school reading level, hook + 2–4 body sections + conclusion, warm tone, no over-compression, audience is non-expert families (often bilingual context).
-
-2. **Do not** substitute the shorter **agent / industry** weekly template (`tools/blog-build-rules.md`) unless they explicitly want the `weekly-insurance-update-*.html` format with `data-lang` pairs and JSON-LD.
-
-3. If they later want that post **on the static site as HTML**, wire it like other pages (nav, footer, optional ES version per `newsletter-to-consumer-blog-prompt.md` optional section).
+1. Follow **`tools/newsletter-to-consumer-blog-prompt.md`** (source of truth for structure, tone, audience, and SEO).
+2. The weekly URL (`blog/weekly-insurance-update-YYYY-MM-DD.html` + `en/blog/…`) is a **digest**, not the full newsletter.
+3. Each story on the weekly page: keep image + headline → write a **fresh** 150–250 word consumer summary → CTA **Leer el artículo completo** / **Read the full article** linking to a **separate** full-article page.
+4. Full articles must be **rewritten** for families (not cut-paste from the digest or the agent newsletter). No duplicate near-identical pages.
+5. **Never** address agents, IMOs, BGAs, underwriters, or “what this means for producers” on public weekly/digest pages.
+6. Keep SEO assets: headings, images, alt text, internal links, schema, metadata — only simplify **visible** copy.
+7. Mirror ES ↔ EN per `bilingual-es-en-parity.mdc`. Wire `blog.html` / `en/blog.html` + `sitemap.xml`.

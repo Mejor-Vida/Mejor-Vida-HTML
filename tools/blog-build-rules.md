@@ -1,85 +1,68 @@
 # Blog build rules — Mejor Vida Insurance
 
-Rules for authoring **weekly industry update** posts (`blog/weekly-insurance-update-YYYY-MM-DD.html`) and keeping **`blog.html`** + **`sitemap.xml`** in sync.
-(Image prompts: see `tools/blog-image-rules.md` and `HUGGINGFACE_BLOG_IMAGES.md`.)
+Rules for authoring **public weekly digest** posts (`blog/weekly-insurance-update-YYYY-MM-DD.html` + `en/blog/…`) and keeping **`blog.html`** + **`sitemap.xml`** in sync.
 
-**Different workflow:** For a **consumer-facing** newsletter rewrite (plain language, hook + sections, middle school reading level—not the paired EN/ES HTML for agents), use **`tools/newsletter-to-consumer-blog-prompt.md`** and the Cursor rule **`newsletter-consumer-blog`**.
+**Primary workflow:** Transform Julie’s newsletter into a **consumer digest** + **separate full articles**. Follow **`tools/newsletter-to-consumer-blog-prompt.md`** and Cursor rule **`newsletter-consumer-blog`**.
+
+(Image prompts: `tools/blog-image-rules.md` and `HUGGINGFACE_BLOG_IMAGES.md`.)
+
+---
+
+## 0. Audience (public weekly pages)
+
+- Write for **families** (Hispanic households, seniors, adult children) — **not** agents, IMOs, BGAs, or underwriters.
+- Weekly page = **news digest** (150–250 word preview per story + CTA to full article).
+- Full story body lives on **individual article pages**, rewritten in fresh language (no near-duplicates).
+- Never include “Qué significa esto para los agentes” / “What this means for agents.”
 
 ---
 
 ## 1. Bilingual parity (English / Spanish) — **required**
 
-The blog UI uses `data-lang="en"` and `data-lang="es"` on elements, with `html.lang-en` / `html.lang-es` on `<html>` (see `script.js` / weekly post inline script). Only one language is visible at a time.
+Prefer **separate language files** (current pattern):
 
-**Do not publish Spanish that is shorter or “summary only” when English is full length.** Both languages must carry the **same facts, structure, and depth**.
+- Spanish: `blog/weekly-insurance-update-YYYY-MM-DD.html`
+- English: `en/blog/weekly-insurance-update-YYYY-MM-DD.html`
 
-### 1.1 Hero and executive summary
+Same structure, depth, and facts in both languages. Do **not** ship a short Spanish teaser against a full English page (or vice versa).
 
-- **Hero** (`blog-hero`): pair `lead` paragraphs — `<p class="lead mb-3" data-lang="en">` immediately followed by `<p class="lead mb-3" data-lang="es">` with a full equivalent (not a one-line teaser).
-- **Executive summary**: two sibling `<div class="executive-summary" data-lang="en">` and `data-lang="es">`, each with the same number of substantive paragraphs and the same bullet/intake list ideas.
-
-### 1.2 Story sections (body)
-
-For every visible English paragraph in the main narrative (after the story image, before optional collapsible briefings):
-
-- Use **immediate pairs**: `<p data-lang="en">…</p>` then `<p data-lang="es">…</p>`.
-- Spanish must translate the **full** English thought (statistics, qualifiers, source framing), not a condensed rewrite.
-
-### 1.3 Long-form / newsletter text inside `<details>`
-
-When the post includes the full newsletter or long source text:
-
-- Provide **two separate** `<details>` siblings:
-  - `<details class="border rounded p-3 mb-3 bg-light" data-lang="en">` — summary e.g. `Read the full briefing (complete newsletter text)`.
-  - `<details class="border rounded p-3 mb-3 bg-light" data-lang="es">` — summary e.g. `Leer el informe completo (texto íntegro del boletín)`.
-- The inner `<div class="mt-3 small">` must contain **paragraph-by-paragraph** (or clearly equivalent) Spanish for every English `<p>` in the English `<details>`, including closing **“What this means for agents”** / **“Qué significa para los agentes (boletín)”** blocks.
-- Do **not** put `data-lang` on each inner `<p>` inside `<details>` unless you duplicate again; language visibility is controlled by `data-lang` on the **`<details>`** wrapper.
-
-### 1.4 “What this means for agents” (visible, under `h3`)
-
-- Keep the shared `h3` pair (`data-lang="en"` / `data-lang="es"`).
-- The following **short** closing paragraphs (one EN, one ES) must be **equal in intent and length order** — both operational takeaways, not a one-sentence ES.
-
-### 1.5 FAQ
-
-- For each question: one `<div class="faq-item" data-lang="en">` and one `<div class="faq-item" data-lang="es">`.
-- Spanish **answers** must be full paragraph equivalents of English (same informational load), not ultra-short bullets.
-
-### 1.6 Conclusion and sidebar
-
-- **Conclusion**: EN and ES paragraphs must match in scope (macro takeaway + agent action).
-- **Sidebar “At a glance” / “De un vistazo”**: same number of bullets and comparable detail (bold labels optional but structure should mirror).
-
-### 1.7 Source lines
-
-- ES source blocks should name the same publication, date, and caveats as EN (e.g. “confirm evolving facts” / “confirme hechos en evolución”).
+If a legacy page still uses `data-lang="en"|"es"` toggles on one file, keep EN/ES pairs equal in depth.
 
 ---
 
-## 2. Structural checklist (each new week)
+## 2. Weekly digest checklist
 
-1. **Base file**: Copy the most recent `weekly-insurance-update-*.html` to preserve header, nav, footer, styles, assistant widget, and JSON-LD patterns.
-2. **Head**: Update `title`, `meta name="description"`, `canonical`, Open Graph, `article:published_time` / `modified_time`, `NewsArticle` + `BreadcrumbList` + `FAQPage` + `ItemList` JSON-LD.
-   - **`BreadcrumbList`** must be site navigation only: Home/Inicio → Blog → article title, each with `name` + `item` URL. Do **not** put weekly news stories in `BreadcrumbList` (use `ItemList` for those). Run `node scripts/fix-blog-breadcrumb-schema.js` if unsure.
-3. **`blog.html`**:
-   - Update `.newsletter-summary-block` (ES + EN) for the covered week.
-   - Prepend a new **blog card** inside `#blog-feed` (most recent first).
-4. **`sitemap.xml`**: Add `<url>` for the new post; bump `blog.html` `lastmod`.
-5. **Images**: `img/blog-generated/<slug>/hero.png`, `story-1.png`, … — wire paths with `onerror` fallback to `../img/3-1-2026-Blog.png` if assets are not yet generated.
-6. **Slug**: `weekly-insurance-update-YYYY-MM-DD.html` where the date is the **publication** date of the post (week covered is stated in hero copy).
+1. **Base file**: Copy the most recent weekly HTML for header, nav, footer, styles, widget, JSON-LD patterns.
+2. **Intro**: Family-facing lead. No agent briefing language.
+3. **Each story block**:
+   - `id="story1"` … `storyN`
+   - Keep image + alt
+   - Keep headline
+   - Fresh 150–250 word summary answering: why care / does it affect me / should I act / is my coverage okay?
+   - CTA: `¿Quiere conocer todos los detalles?` + button **Leer el artículo completo** (EN equivalents)
+4. **Full articles**: Create paired ES/EN pages; wire CTA `href`s; add to sitemap.
+5. **Head**: Update title, description, canonical, OG, `article:published_time` / `modified_time`, NewsArticle + BreadcrumbList + ItemList.
+   - Descriptions must **not** say the post is for agents.
+   - **BreadcrumbList** = site nav only (Home → Blog → title). Stories go in **ItemList**.
+6. **`blog.html` / `en/blog.html`**: summary block + feed card (most recent first).
+7. **`sitemap.xml`**: weekly URL + each full-article URL; bump blog index `lastmod`.
+8. **Images**: `img/blog-generated/<slug>/hero.png`, `story-1.png`, … + `img/opt/…` WebP.
+9. **Reading time**: digest is short (often ~5–8 min), not 25+ minutes of full newsletter text.
+10. **Footer blurb**: serve families / clients — not “independent agents.”
 
 ---
 
 ## 3. QA before merge
 
-- [ ] Toggle **ES** and **EN** in the page header; confirm no language shows empty story bodies.
-- [ ] Count intro paragraph **pairs** per story; spot-check that ES is not shorter than EN.
-- [ ] Open both `<details>` (in each language mode) and confirm the long briefing exists only in the active language and reads complete.
-- [ ] FAQ: four question pairs with substantial ES answers.
-- [ ] Valid relative links (`../quote.html`, `../blog.html`).
+- [ ] No agent / IMO / BGA / underwriter framing on public pages
+- [ ] Each story has digest-length unique copy + working full-article link
+- [ ] Full articles are not copy-pastes of the digest
+- [ ] ES and EN parity
+- [ ] Schema/metadata consumer-facing
+- [ ] Relative links valid (`../quote.html`, `../blog.html`, etc.)
 
 ---
 
-## 4. Reference implementation
+## Reference
 
-See `blog/weekly-insurance-update-2026-04-12.html` for the paired-paragraph pattern, dual `<details>` briefings, and balanced FAQ/conclusion/sidebar after the bilingual parity fix.
+July 12, 2026 consumer digest + full articles is the first week built fully to this pattern.

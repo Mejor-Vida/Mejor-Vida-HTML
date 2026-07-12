@@ -1,70 +1,161 @@
-# Newsletter → consumer blog post (prompt template)
+# Newsletter → consumer weekly blog (prompt + build rules)
 
-Use this when converting an **insurance newsletter** into a **clear, structured blog article** for the public site—**not** the same workflow as the weekly **industry update** HTML for agents (`tools/blog-build-rules.md`).
+Use this when converting Julie’s **insurance newsletter / industry briefing** into the **public weekly blog** on mejorvidainsurance.com.
 
-Copy everything below the line into chat (or Cursor), replace `[PASTE NEWSLETTER HERE]` with the newsletter text.
-
----
-
-## Prompt (copy from here)
-
-Convert the following insurance newsletter into a clear, structured blog post for my website.
-
-Do **NOT** overly summarize. Preserve the full meaning, context, and important details, but rewrite it in a way that is easy for a general audience (**middle school reading level**) to understand.
-
-Use a structured format similar to a simple research paper:
-
-### Title
-
-Clear, engaging, and benefit-driven.
-
-### Introduction (Hook + Context)
-
-- Start with a strong hook (question, surprising fact, or relatable problem).
-- Clearly explain what the article is about.
-- Make the reader want to continue.
-
-### Body (Organized Sections)
-
-- Break into **2–4 sections** with clear subheadings.
-- Each section should explain **one key idea**.
-- Use simple language and short paragraphs.
-- Add brief explanations where needed so nothing feels confusing or out of context.
-- Avoid jargon—or **explain it** if you must use a term.
-
-### Conclusion (Takeaway + Action)
-
-- Summarize the key point clearly.
-- Reinforce why it matters to the reader.
-- End with a **soft call to action** related to insurance planning.
-
-### Style guidelines
-
-- Write in a **warm, professional, and trustworthy** tone.
-- Do **NOT** sound robotic or overly academic.
-- Do **NOT** remove important context.
-- Do **NOT** compress multiple ideas into one sentence.
-- Keep paragraphs short and easy to read.
-- Make it feel like you are explaining this to a **real person**, not writing an abstract.
-
-### Audience
-
-- Write for **everyday people** (especially **Spanish-speaking or bilingual families** in the U.S.).
-- Assume they are **not** experts in insurance.
-
-### Optional: Spanish
-
-If the site needs **Spanish** as well as English, produce a **full Spanish version** with the same section structure and depth—not a short summary. (For bilingual **HTML** pages with `data-lang` toggles, follow `tools/blog-build-rules.md` after drafting the copy.)
+This is **not** an agent newsletter republish. The site audience is **families**, not producers.
 
 ---
 
-## Newsletter to convert
+## Audience
+
+Write for:
+
+- Hispanic families in the United States
+- Seniors
+- Adult children helping their parents
+- People who know very little about insurance
+
+Do **NOT** write for:
+
+- Insurance agents
+- Underwriters
+- IMOs / BGAs
+- Industry professionals
+
+Assume an **8th–10th grade** reading level.
+
+---
+
+## Purpose
+
+The page goal is **not** to teach insurance.
+
+The goal is to:
+
+1. Build trust
+2. Keep clients informed
+3. Show that Mejor Vida Insurance stays current on important insurance news
+4. Encourage readers to click into the **full article**
+
+The weekly page should feel like a **modern online news digest**.
+
+---
+
+## Structure (required)
+
+### Weekly digest page (`blog/weekly-insurance-update-YYYY-MM-DD.html`)
+
+- Rewrite the **intro** for families. Example direction (adapt weekly):
+
+  > Cada semana resumimos las noticias más importantes del mundo de los seguros para ayudar a las familias a entender cómo estos cambios podrían afectar su protección financiera.
+
+- **Do not mention agents** anywhere on the page.
+- For **each story**:
+  - Keep the existing **image**
+  - Keep the **headline** (may lightly softensensation; keep accuracy)
+  - Write a **consumer-friendly summary of 150–250 words** in **fresh language** (not a cut from the full article)
+  - End with a prominent button:
+
+    - ES: **Leer el artículo completo**
+    - EN: **Read the full article**
+
+    linking to the individual full-article URL
+  - Also include the soft CTA line:
+
+    - ES: ¿Quiere conocer todos los detalles?
+    - EN: Want the full details?
+
+- **Do NOT** put the full article on the weekly page.
+
+### Individual full-article pages (one per story)
+
+- Separate ES + EN HTML files under `blog/` and `en/blog/`
+- Rewrite the story for consumers at greater depth than the digest
+- Answer: Why should I care? Does this affect me? Should I do anything? Is my insurance still okay?
+- Soft CTA (quote / schedule / WhatsApp) at the end — not “call your agent network”
+- Unique wording vs. the digest (SEO: avoid near-duplicate pages)
+
+---
+
+## Rewrite style
+
+Do **NOT** explain (unless a one-line plain gloss is essential):
+
+- actuarial corrections, reserve transfers, RBC ratios
+- reinsurance structures, underwriting mechanics
+- regulatory technicalities, accounting details
+
+Instead explain:
+
+- Why should I care?
+- Does this affect me?
+- Should I do anything?
+- Is my insurance still okay?
+
+Every story should answer those questions.
+
+---
+
+## Tone
+
+Write like a **trusted advisor**.
+
+Not like: an insurance company brochure, compliance memo, legal document, or textbook.
+
+Use:
+
+- short paragraphs
+- conversational Spanish / clear English
+- simple explanations
+
+Preserve **accuracy**. Simplify the **explanation**, not the facts.
+
+---
+
+## SEO (keep)
+
+Do not remove:
+
+- headings
+- images + alt text
+- internal links
+- schema (NewsArticle / Article, BreadcrumbList, ItemList)
+- metadata (title, description, OG)
+
+Only simplify **visible** article content. Update schema/descriptions so they no longer say the post is “for agents.”
+
+---
+
+## Duplicate-content rule (critical)
+
+- Digest summaries = **new** wording
+- Full articles = **new** wording
+- Do **not** paste the newsletter, and do **not** paste the digest into the full article (or vice versa)
+
+---
+
+## Prompt (copy into chat)
+
+Convert the following insurance newsletter into:
+
+1. A **weekly digest page** for families (150–250 word preview per story + “Leer el artículo completo” / “Read the full article”)
+2. **Separate full articles** for each story, rewritten for consumers
+
+Follow `tools/newsletter-to-consumer-blog-prompt.md` and `.cursor/rules/newsletter-consumer-blog.mdc`.
+
+Do not write for agents. No “what this means for agents.” No IMOs/BGAs.
+
+### Newsletter / briefing to convert
 
 [PASTE NEWSLETTER HERE]
 
 ---
 
-## After you get the draft
+## After drafting
 
-- If this becomes a **static HTML** page on mejorvidainsurance.com, match existing site typography, nav, and footer patterns (see `blog.html` or `index.html` as needed).
-- If this is a **weekly industry/agent** post with JSON-LD and paired EN/ES markup, use **`tools/blog-build-rules.md`** instead of this consumer prompt.
+1. Update `blog/weekly-insurance-update-YYYY-MM-DD.html` + `en/blog/…`
+2. Create full-article ES/EN pages and link CTAs
+3. Update `blog.html` / `en/blog.html` card copy if the summary changed
+4. Add full-article URLs to `sitemap.xml`
+5. Mirror `sources/` if the project still syncs sources for that week
+6. See also `tools/blog-build-rules.md` (weekly digest checklist — consumer edition)
