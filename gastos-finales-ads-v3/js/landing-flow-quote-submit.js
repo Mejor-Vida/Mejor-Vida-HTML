@@ -261,7 +261,8 @@
             typeof window.MVIConsentCapture.attachScreenshot === "function"
           ) {
             consentShotReady = window.MVIConsentCapture.attachScreenshot(syncPayload, {
-              root: ".lf-contact-step, .lf-quote-form, form",
+              mode: "landing",
+              root: "#lf-consent-capture-root, .lf-step--phone, section.lf-step[data-field='phone']",
             });
           }
           if (!IS_EN && window.MVIMetaCapiMatch && typeof window.MVIMetaCapiMatch.collectForLeadSync === "function") {
