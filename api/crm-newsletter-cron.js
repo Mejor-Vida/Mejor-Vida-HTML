@@ -3,8 +3,20 @@
  * Sends weekly Facebook post email to all leads with email (except unsubscribed).
  */
 const { loadSettings } = require("../lib/crm-nurture-engine");
-const { wrapNewsletterHtml, leadEmailCtaRow } = require("../lib/crm-nurture-templates");
+const {
+  wrapNewsletterHtml,
+  leadEmailCtaRow,
+  contactName,
+} = require("../lib/crm-nurture-templates");
 const { canAutomateLead } = require("../lib/crm-nurture-rollout");
+
+function escapeHtml(s) {
+  return String(s || "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
 
 function sbHeaders(key) {
   return {
@@ -107,7 +119,9 @@ module.exports = async function handler(req, res) {
         idioma: pd.idioma,
       };
       const subject = issue.subject || "Mejor Vida Insurance — Actualización semanal";
-      const bodyWithCta = (issue.body_html || "") + leadEmailCtaRow(false);
+      const name = contactName(contact, "spanish");
+      const greeting = `<p>Hola ${escapeHtml(name)},</p>`;
+      const bodyWithCta = greeting + (issue.body_html || "") + leadEmailCtaRow(false);
       const html = wrapNewsletterHtml(issue.hero_html || "", bodyWithCta, contact, settings);
 
       try {
