@@ -445,10 +445,12 @@
       );
     }
     return (
-      '<button type="button" class="crm-funnel-ad-metric crm-funnel-ad-metric--clickable crm-funnel-ad-metric--policies" data-funnel-ad-chart="policies_sold">' +
+      '<button type="button" class="crm-funnel-ad-metric crm-funnel-ad-metric--clickable crm-funnel-ad-metric--policies" data-funnel-ad-chart="policies_sold" title="' +
+      esc(t("funnel_ad_chart_hint")) +
+      '">' +
       '<span class="crm-funnel-ad-metric-label">' + esc(t("funnel_policies_sold")) + "</span>" +
       '<strong class="crm-funnel-ad-metric-value">' + esc(fmtNum(policiesSold.count)) + "</strong>" +
-      '<span class="crm-funnel-ad-metric-hint">' + esc(t("funnel_ad_chart_hint")) + "</span></button>"
+      "</button>"
     );
   }
 
@@ -479,21 +481,31 @@
     var html = '<section class="crm-funnel-ad-metrics">';
 
     if (hasAds) {
-      html += '<h2 class="crm-funnel-section-title">' + esc(platformLabel) + "</h2>";
+      html +=
+        '<div class="crm-funnel-ad-metrics-head">' +
+        '<h2 class="crm-funnel-section-title">' +
+        esc(platformLabel) +
+        "</h2>";
       if (metrics.dateFrom && metrics.dateTo) {
         html +=
           '<p class="crm-funnel-ad-metrics-range">' +
           esc(fmtDateRangeLabel(metrics.dateFrom, metrics.dateTo)) +
           "</p>";
       }
+      html += "</div>";
     } else {
-      html += '<h2 class="crm-funnel-section-title">' + esc(t("funnel_policies_title")) + "</h2>";
+      html +=
+        '<div class="crm-funnel-ad-metrics-head">' +
+        '<h2 class="crm-funnel-section-title">' +
+        esc(t("funnel_policies_title")) +
+        "</h2>";
       if (policiesSold.dateFrom && policiesSold.dateTo) {
         html +=
           '<p class="crm-funnel-ad-metrics-range">' +
           esc(fmtDateRangeLabel(policiesSold.dateFrom, policiesSold.dateTo)) +
           "</p>";
       }
+      html += "</div>";
     }
 
     if (hasPolicies && !hasAds) {
@@ -513,35 +525,38 @@
       html += '<div class="crm-funnel-ad-metrics-grid">';
       if (hasAds && metrics.configured && !metrics.error) {
         html +=
-          '<button type="button" class="crm-funnel-ad-metric crm-funnel-ad-metric--clickable" data-funnel-ad-chart="impressions">' +
+          '<button type="button" class="crm-funnel-ad-metric crm-funnel-ad-metric--clickable" data-funnel-ad-chart="impressions" title="' +
+          esc(t("funnel_ad_chart_hint")) +
+          '">' +
           '<span class="crm-funnel-ad-metric-label">' +
           esc(t("funnel_ad_impressions")) +
           "</span>" +
           '<strong class="crm-funnel-ad-metric-value">' +
           esc(fmtNum(metrics.impressions)) +
-          "</strong>" +
-          '<span class="crm-funnel-ad-metric-hint">' + esc(t("funnel_ad_chart_hint")) + "</span></button>";
+          "</strong></button>";
         if (metrics.clicks != null) {
           html +=
-            '<button type="button" class="crm-funnel-ad-metric crm-funnel-ad-metric--clickable" data-funnel-ad-chart="clicks">' +
+            '<button type="button" class="crm-funnel-ad-metric crm-funnel-ad-metric--clickable" data-funnel-ad-chart="clicks" title="' +
+            esc(t("funnel_ad_chart_hint")) +
+            '">' +
             '<span class="crm-funnel-ad-metric-label">' +
             esc(t("funnel_ad_clicks")) +
             "</span>" +
             '<strong class="crm-funnel-ad-metric-value">' +
             esc(fmtNum(metrics.clicks)) +
-            "</strong>" +
-            '<span class="crm-funnel-ad-metric-hint">' + esc(t("funnel_ad_chart_hint")) + "</span></button>";
+            "</strong></button>";
         }
         if (metrics.spend != null) {
           html +=
-            '<button type="button" class="crm-funnel-ad-metric crm-funnel-ad-metric--clickable" data-funnel-ad-chart="spend">' +
+            '<button type="button" class="crm-funnel-ad-metric crm-funnel-ad-metric--clickable" data-funnel-ad-chart="spend" title="' +
+            esc(t("funnel_ad_chart_hint")) +
+            '">' +
             '<span class="crm-funnel-ad-metric-label">' +
             esc(t("funnel_ad_spend")) +
             "</span>" +
             '<strong class="crm-funnel-ad-metric-value">' +
             esc(fmtCurrency(metrics.spend)) +
-            "</strong>" +
-            '<span class="crm-funnel-ad-metric-hint">' + esc(t("funnel_ad_chart_hint")) + "</span></button>";
+            "</strong></button>";
         }
       }
       html += renderPoliciesSoldMetric(policiesSold);
