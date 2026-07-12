@@ -146,8 +146,10 @@
     weeklyData = weeklyData || {};
     var current = weeklyData.current || {};
     var counts = weeklyData.recipient_counts || {};
+    var recipients = weeklyData.recipients_preview || [];
     var issues = weeklyData.issues || [];
     var stories = current.stories || [];
+    var emailReady = weeklyData.email_provider_ready !== false;
 
     var storyList = stories
       .map(function (s, i) {
@@ -233,12 +235,42 @@
       esc(t("nurture_weekly_skip_hint")) +
       " — no email: " +
       esc(String(counts.skipped_no_email || 0)) +
+      ", archived: " +
+      esc(String(counts.skipped_archived || 0)) +
+      ", duplicate email: " +
+      esc(String(counts.skipped_duplicate || 0)) +
       ", unsubscribed/DNC: " +
       esc(String(counts.skipped_stage || 0)) +
       ", rollout: " +
       esc(String(counts.skipped_rollout || 0)) +
       "</p>" +
+      (recipients.length
+        ? '<details style="margin:8px 0 12px"><summary style="cursor:pointer;font-size:13px">' +
+          esc(t("nurture_weekly_recipients_list")) +
+          " (" +
+          esc(String(recipients.length)) +
+          ")</summary><ul style=\"margin:8px 0 0;padding-left:18px;font-size:13px\">" +
+          recipients
+            .map(function (r) {
+              return (
+                "<li>" +
+                esc(r.display_name || r.email || "—") +
+                " &lt;" +
+                esc(r.email || "") +
+                "&gt;" +
+                (r.pipeline_stage ? " — " + esc(r.pipeline_stage) : "") +
+                "</li>"
+              );
+            })
+            .join("") +
+          "</ul></details>"
+        : "") +
       (storyList ? "<ul style=\"margin:12px 0 16px;padding-left:18px\">" + storyList + "</ul>" : "") +
+      (!emailReady
+        ? '<p class="crm-muted" style="color:#b45309;margin-bottom:12px">' +
+          esc(t("nurture_weekly_no_email_provider")) +
+          "</p>"
+        : "") +
       '<div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:12px">' +
       '<button type="button" class="crm-btn" id="ns-we-preview-current">' +
       esc(t("nurture_weekly_preview")) +
@@ -250,7 +282,9 @@
           esc(t("nurture_weekly_open_blog")) +
           "</a>"
         : "") +
-      '<button type="button" class="crm-btn" id="ns-we-send" style="background:#1e7e34;border-color:#1e7e34">' +
+      '<button type="button" class="crm-btn" id="ns-we-send" style="background:#1e7e34;border-color:#1e7e34"' +
+      (emailReady ? "" : " disabled") +
+      ">" +
       esc(t("nurture_weekly_send")) +
       "</button>" +
       "</div>" +
@@ -353,6 +387,10 @@
     var sendBtn = document.getElementById("ns-we-send");
     if (sendBtn) {
       sendBtn.addEventListener("click", async function () {
+        if (!emailReady) {
+          statusEl.textContent = t("nurture_weekly_no_email_provider");
+          return;
+        }
         var n = (weeklyData.recipient_counts && weeklyData.recipient_counts.eligible) || 0;
         if (
           !window.confirm(

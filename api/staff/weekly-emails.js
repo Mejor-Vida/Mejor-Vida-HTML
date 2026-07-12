@@ -11,6 +11,7 @@ const {
   listWeeklyEmailRecipients,
   ensureBlogDigestIssue,
   sendWeeklyNewsletterIssue,
+  emailProviderReady,
   getCurrentWeeklyBlogDigest,
   buildWeeklyBlogDigestEmailParts,
   sbFetch,
@@ -34,7 +35,7 @@ module.exports = async function handler(req, res) {
       const digest = getCurrentWeeklyBlogDigest();
       const parts = buildWeeklyBlogDigestEmailParts(digest);
       const preview = getWeeklyBlogDigestEmailPreview(digest);
-      const { counts } = await listWeeklyEmailRecipients(supabaseUrl, serviceKey, settings);
+      const { counts, recipients } = await listWeeklyEmailRecipients(supabaseUrl, serviceKey, settings);
       const issues = await listNewsletterIssues(supabaseUrl, serviceKey, 25);
 
       const issuesWithStats = [];
@@ -48,6 +49,15 @@ module.exports = async function handler(req, res) {
         issuesWithStats.push({ ...issue, send_stats: stats });
       }
 
+      const recipientsPreview = (recipients || []).map((r) => ({
+        display_name:
+          r.display_name ||
+          [r.first_name, r.last_name].filter(Boolean).join(" ").trim() ||
+          r.email,
+        email: r.email,
+        pipeline_stage: r.pipeline_stage || "",
+      }));
+
       return json(res, 200, {
         current: {
           post_date_iso: digest.post_date_iso,
@@ -59,6 +69,8 @@ module.exports = async function handler(req, res) {
           status: "ready",
         },
         recipient_counts: counts,
+        recipients_preview: recipientsPreview,
+        email_provider_ready: emailProviderReady(),
         issues: issuesWithStats,
         rollout: {
           mode: settings.rollout_mode || "testing",
@@ -93,9 +105,17 @@ module.exports = async function handler(req, res) {
         issue = rows && rows[0];
         if (!issue) return json(res, 404, { error: "Issue not found" });
         if (issue.status === "sent" && !dryRun) {
-          return json(res, 400, {
-            error: "This issue was already sent. Create a new weekly issue to send again.",
-          });
+          let stats = null;
+          try {
+            stats = await getIssueSendStats(supabaseUrl, serviceKey, issue.id);
+          } catch (_) {
+            stats = null;
+          }
+          if (!stats || stats.sent > 0) {
+            return json(res, 400, {
+              error: "This issue was already sent. Create a new weekly issue to send again.",
+            });
+          }
         }
       } else {
         issue = await ensureBlogDigestIssue(supabaseUrl, serviceKey, importedBy);
