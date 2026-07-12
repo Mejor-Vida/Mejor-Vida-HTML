@@ -23,7 +23,8 @@ function buildContentSecurityPolicy(nonce) {
     "default-src 'none'",
     "base-uri 'self'",
     "frame-ancestors 'self'",
-    "object-src 'none'",
+    /* blob: — license map modal embeds fetched PDFs via object URL (licencias / licenses). */
+    "object-src 'self' blob:",
     /*
      * IMPORTANT — DO NOT MODIFY WITHOUT READING THIS:
      * The following CSP directives are required for the Meta Pixel to work:
@@ -48,7 +49,7 @@ function buildContentSecurityPolicy(nonce) {
     "img-src 'self' data: https: blob:",
     "connect-src 'self' https://*.supabase.co wss://*.supabase.co https://www.facebook.com https://facebook.com https://connect.facebook.net https://*.facebook.com https://*.facebook.net https://www.google-analytics.com https://*.google-analytics.com https://analytics.google.com https://*.analytics.google.com https://www.googletagmanager.com",
     "media-src 'self' https:",
-    "frame-src 'self' https://www.facebook.com https://meetings-na2.hubspot.com https://*.hubspot.com https://*.hsforms.com",
+    "frame-src 'self' blob: https://www.facebook.com https://meetings-na2.hubspot.com https://*.hubspot.com https://*.hsforms.com https://docs.google.com",
     "form-action 'self' https://www.facebook.com https://meetings-na2.hubspot.com https://*.hubspot.com",
     "upgrade-insecure-requests",
   ].join("; ");

@@ -101,16 +101,27 @@
           "</object>";
       })
       .catch(function () {
-        // Fallback: embed via Google Docs viewer so the browser does not force a download.
+        // Same-origin iframe first; Google Docs viewer as last resort.
+        var safeName = name.replace(/"/g, "");
+        var abs = new URL(pdfUrl, window.location.href).href;
         var gview =
-          "https://docs.google.com/gview?embedded=1&url=" +
-          encodeURIComponent(new URL(pdfUrl, window.location.href).href);
+          "https://docs.google.com/gview?embedded=1&url=" + encodeURIComponent(abs);
         body.innerHTML =
           '<iframe class="mvi-lic-pdf-frame" title="' +
-          name.replace(/"/g, "") +
+          safeName +
           '" src="' +
+          abs +
+          '#toolbar=0&navpanes=0&view=FitH"></iframe>' +
+          '<p class="mvi-lic-note mvi-lic-viewer-fallback">' +
+          t(
+            'Si no se ve el PDF, use “Abrir en pestaña”.',
+            'If the PDF does not appear, use “Open in new tab”.'
+          ) +
+          ' <a href="' +
           gview +
-          '"></iframe>';
+          '" target="_blank" rel="noopener">' +
+          t("Visor alternativo", "Alternate viewer") +
+          "</a></p>";
       });
   }
 
