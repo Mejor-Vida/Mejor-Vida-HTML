@@ -56,6 +56,36 @@
       "has": [{ "type": "query", "key": "schedule", "value": "1" }],
       "destination": "/schedule-julie.html",
       "permanent": true
+    },
+    {
+      "source": "/blog/unum-reaseguro-ltc-2026-07-06.html",
+      "destination": "/blog/weekly-insurance-update-2026-07-12.html#story1",
+      "permanent": false
+    },
+    {
+      "source": "/blog/aumentos-primas-medigap-2026-07-08.html",
+      "destination": "/blog/weekly-insurance-update-2026-07-12.html#story2",
+      "permanent": false
+    },
+    {
+      "source": "/blog/liquidaciones-vida-naifa-2026-07-11.html",
+      "destination": "/blog/weekly-insurance-update-2026-07-12.html#story3",
+      "permanent": false
+    },
+    {
+      "source": "/en/blog/unum-ltc-reinsurance-2026-07-06.html",
+      "destination": "/en/blog/weekly-insurance-update-2026-07-12.html#story1",
+      "permanent": false
+    },
+    {
+      "source": "/en/blog/medigap-premium-increases-2026-07-08.html",
+      "destination": "/en/blog/weekly-insurance-update-2026-07-12.html#story2",
+      "permanent": false
+    },
+    {
+      "source": "/en/blog/naifa-life-settlement-alert-2026-07-11.html",
+      "destination": "/en/blog/weekly-insurance-update-2026-07-12.html#story3",
+      "permanent": false
     }
   ],
   "functions": {
