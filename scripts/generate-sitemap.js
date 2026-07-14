@@ -14,6 +14,7 @@ const STATIC_PAGES = [
   { loc: "/", priority: "1.00" },
   { loc: "/about-julie.html", priority: "0.85" },
   { loc: "/blog.html", priority: "0.80" },
+  { loc: "/guias-gastos-finales.html", priority: "0.85" },
   { loc: "/contact.html", priority: "0.75" },
   { loc: "/quote.html", priority: "0.90" },
   { loc: "/schedule-julie.html", priority: "0.75" },
@@ -21,6 +22,13 @@ const STATIC_PAGES = [
   { loc: "/carriers/mutual-of-omaha.html", priority: "0.70" },
   { loc: "/carriers/american-amicable.html", priority: "0.70" },
 ];
+
+/** Standalone July articles redirect to the weekly digest — omit from sitemap. */
+const REDIRECT_ONLY_BLOGS = new Set([
+  "unum-reaseguro-ltc-2026-07-06.html",
+  "aumentos-primas-medigap-2026-07-08.html",
+  "liquidaciones-vida-naifa-2026-07-11.html",
+]);
 
 function isNoindex(html) {
   return /name=["']robots["'][^>]+content=["'][^"']*noindex/i.test(html) ||
@@ -42,7 +50,8 @@ function feGuidePages() {
         name.endsWith(".html") &&
         !name.startsWith("_") &&
         !/^weekly-insurance-update-/.test(name) &&
-        !/^blog-template/.test(name)
+        !/^blog-template/.test(name) &&
+        !REDIRECT_ONLY_BLOGS.has(name)
     )
     .map((name) => {
       const abs = path.join(dir, name);
