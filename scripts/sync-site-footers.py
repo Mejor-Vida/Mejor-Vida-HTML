@@ -95,7 +95,7 @@ def clean_footer_logo_img(tag: str) -> str:
         return tag
     src = src_m.group(1)
     return (
-        f'<img alt="Mejor Vida Insurance" decoding="async" height="533" '
+        f'<img alt="Mejor Vida Insurance LLC" decoding="async" height="533" '
         f'id="footer-logo" loading="lazy" src="{src}" width="800"/>'
     )
 

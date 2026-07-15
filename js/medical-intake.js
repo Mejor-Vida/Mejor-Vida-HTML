@@ -129,7 +129,6 @@
       julie_card_title: "Licensed Life & Health Insurance Agent in Nebraska, Kansas, Colorado & Nevada",
       julie_card_npn: "Producer License #21695431",
       julie_card_langs: "English · Spanish",
-      julie_stars_aria: "5 out of 5 stars",
       next: "Next",
       back: "Back",
       step_submit_title: "Review and submit",
@@ -254,7 +253,6 @@
       julie_card_title: "Agente de seguros licenciada en Nebraska, Kansas, Colorado y Nevada",
       julie_card_npn: "Licencia de productor #21695431",
       julie_card_langs: "Inglés · Español",
-      julie_stars_aria: "5 de 5 estrellas",
       next: "Siguiente",
       back: "Atrás",
       step_submit_title: "Revisar y enviar",
@@ -949,8 +947,6 @@
     if (julieNpn) julieNpn.textContent = t("julie_card_npn");
     var julieLangs = $("mi-julie-card-langs");
     if (julieLangs) julieLangs.textContent = t("julie_card_langs");
-    var julieStars = $("mi-julie-stars");
-    if (julieStars) julieStars.setAttribute("aria-label", t("julie_stars_aria"));
   }
 
   function wireLangToggle() {
