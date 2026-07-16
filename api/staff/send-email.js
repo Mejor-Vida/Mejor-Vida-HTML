@@ -15,6 +15,7 @@ const {
   buildReviewRequestPlainText,
   buildReviewRequestSubject,
   buildReviewRequestCtaHtml,
+  googleReviewUrl,
   facebookReviewUrl,
 } = require("../../lib/review-request-email-template");
 const {
@@ -297,13 +298,15 @@ module.exports = async function handler(req, res) {
           /* use salutation without name */
         }
       }
-      reviewLink = facebookReviewUrl();
+      reviewLink = googleReviewUrl();
+      const facebookLink = facebookReviewUrl();
       draftForSend = replyDraft
         ? replyDraft
         : buildReviewRequestPlainText({
             language,
             firstName: fn,
-            facebookReviewLink: reviewLink,
+            googleReviewLink: reviewLink,
+            facebookReviewLink: facebookLink,
           });
       subjectForSend = buildReviewRequestSubject({ language, firstName: fn });
     }
@@ -341,7 +344,8 @@ module.exports = async function handler(req, res) {
     if (reviewLink) {
       const cta = buildReviewRequestCtaHtml({
         language,
-        facebookReviewLink: reviewLink,
+        googleReviewLink: reviewLink,
+        facebookReviewLink: facebookReviewUrl(),
       });
       htmlOut = htmlOut.replace("</body>", `${cta}</body>`);
     }
