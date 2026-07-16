@@ -17,6 +17,8 @@ const {
   buildReviewRequestCtaHtml,
   googleReviewUrl,
   facebookReviewUrl,
+  GOOGLE_REVIEW_QR_CID,
+  GOOGLE_REVIEW_QR_CID_SRC,
 } = require("../../lib/review-request-email-template");
 const {
   buildAgentCredentialsPlainText,
@@ -65,6 +67,13 @@ function mimeBase64Body(s) {
     .trimEnd();
 }
 
+function mimeBase64Binary(buf) {
+  return Buffer.from(buf)
+    .toString("base64")
+    .replace(/.{1,76}/g, "$&\r\n")
+    .trimEnd();
+}
+
 /**
  * multipart/alternative: plain + HTML (UTF-8), for Gmail users.messages.send raw.
  */
@@ -100,6 +109,73 @@ function buildMultipartRaw({ fromEmail, toEmail, ccEmail, subject, textBody, htm
   return lines.join(nl);
 }
 
+/**
+ * multipart/related: alternative (plain + HTML) + inline image(s) referenced via cid:.
+ * Gmail shows these without fetching a remote URL.
+ */
+function buildMultipartRelatedWithInlineImages({
+  fromEmail,
+  toEmail,
+  ccEmail,
+  subject,
+  textBody,
+  htmlBody,
+  inlineImages,
+}) {
+  const relatedBoundary = `mvi_rel_${Date.now()}_${Math.random().toString(36).slice(2, 11)}`;
+  const altBoundary = `mvi_alt_${Date.now()}_${Math.random().toString(36).slice(2, 11)}`;
+  const nl = "\r\n";
+  const subj = encodeSubject(subject);
+  const plainB64 = mimeBase64Body(textBody);
+  const htmlB64 = mimeBase64Body(htmlBody);
+  const cc = ccEmail && String(ccEmail).trim() ? String(ccEmail).trim() : "";
+  const lines = [`From: ${fromEmail}`, `To: ${toEmail}`];
+  if (cc) lines.push(`Cc: ${cc}`);
+  lines.push(
+    `Subject: ${subj}`,
+    "MIME-Version: 1.0",
+    `Content-Type: multipart/related; type="multipart/alternative"; boundary="${relatedBoundary}"`,
+    "",
+    `--${relatedBoundary}`,
+    `Content-Type: multipart/alternative; boundary="${altBoundary}"`,
+    "",
+    `--${altBoundary}`,
+    "Content-Type: text/plain; charset=UTF-8",
+    "Content-Transfer-Encoding: base64",
+    "",
+    plainB64,
+    "",
+    `--${altBoundary}`,
+    "Content-Type: text/html; charset=UTF-8",
+    "Content-Transfer-Encoding: base64",
+    "",
+    htmlB64,
+    "",
+    `--${altBoundary}--`,
+    ""
+  );
+
+  for (const img of inlineImages || []) {
+    const cid = String(img.cid || "").replace(/[<>]/g, "");
+    const fname = img.filename || `${cid}.png`;
+    const ctype = img.contentType || "image/png";
+    const b64 = mimeBase64Binary(img.content);
+    lines.push(
+      `--${relatedBoundary}`,
+      `Content-Type: ${ctype}; name="${fname}"`,
+      "Content-Transfer-Encoding: base64",
+      `Content-ID: <${cid}>`,
+      `Content-Disposition: inline; filename="${fname}"`,
+      "",
+      b64,
+      ""
+    );
+  }
+
+  lines.push(`--${relatedBoundary}--`, "");
+  return lines.join(nl);
+}
+
 /** multipart/mixed: alternative (plain + HTML) + file attachment for Gmail raw send. */
 function buildMultipartMixedWithAlternativeAndAttachment({
   fromEmail,
@@ -118,7 +194,10 @@ function buildMultipartMixedWithAlternativeAndAttachment({
   const subj = encodeSubject(subject);
   const plainB64 = mimeBase64Body(textBody);
   const htmlB64 = mimeBase64Body(htmlBody);
-  const attachB64 = mimeBase64Body(attachmentContent);
+  const attachB64 =
+    Buffer.isBuffer(attachmentContent) || attachmentContent instanceof Uint8Array
+      ? mimeBase64Binary(attachmentContent)
+      : mimeBase64Body(attachmentContent);
   const cc = ccEmail && String(ccEmail).trim() ? String(ccEmail).trim() : "";
   const ctype = attachmentContentType || "application/octet-stream";
   const fname = attachmentFilename || "attachment";
@@ -346,6 +425,7 @@ module.exports = async function handler(req, res) {
         language,
         googleReviewLink: reviewLink,
         facebookReviewLink: facebookReviewUrl(),
+        googleReviewQrImage: GOOGLE_REVIEW_QR_CID_SRC,
       });
       htmlOut = htmlOut.replace("</body>", `${cta}</body>`);
     }
@@ -363,6 +443,25 @@ module.exports = async function handler(req, res) {
         attachmentFilename: "julie.vcf",
         attachmentContent: vcardContent,
         attachmentContentType: "text/vcard",
+      });
+    } else if (compose && emailType === "review_request") {
+      const qrPath = path.join(__dirname, "..", "..", "img", "google-review-qr.png");
+      const qrPng = fs.readFileSync(qrPath);
+      rfc822 = buildMultipartRelatedWithInlineImages({
+        fromEmail,
+        toEmail,
+        ccEmail: ccEmail || undefined,
+        subject: subjectForSend,
+        textBody: plainBody,
+        htmlBody: htmlOut,
+        inlineImages: [
+          {
+            cid: GOOGLE_REVIEW_QR_CID,
+            filename: "google-review-qr.png",
+            contentType: "image/png",
+            content: qrPng,
+          },
+        ],
       });
     } else {
       rfc822 = buildMultipartRaw({
