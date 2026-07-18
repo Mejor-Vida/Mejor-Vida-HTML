@@ -300,7 +300,7 @@
         z-index: 3;
       }
       .header-inner > .header-actions {
-        padding-right: 126px; /* room for absolute BBB seal */
+        padding-right: 176px; /* room for absolute BBB seal + gap from quote CTA */
       }
     }
     .header-bbb-seal img {
