@@ -22,7 +22,7 @@ const JOBS = [
   { src: "img/happy-family.png", maxWidth: 1400, maxHeight: 900 },
   { src: "img/grandma-grandson.png", maxWidth: 960, maxHeight: 1024, keepPng: true },
   { src: "img/woman-flowers.png", maxWidth: 566, maxHeight: 1024, keepPng: true },
-  { src: "img/julie-about.png", maxWidth: 530, maxHeight: 795 },
+  { src: "img/julie-about.png", maxWidth: 530, maxHeight: 795, keepPng: true },
   { src: "img/logo-spanish2.png", maxWidth: 800, maxHeight: 534, keepPng: true },
   { src: "img/logo-english2.png", maxWidth: 800, maxHeight: 534, keepPng: true },
   { src: "img/landing/como-funciona/lp-step-1-mira-aprende.jpg", maxWidth: 640, maxHeight: 427 },

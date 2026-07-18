@@ -47,7 +47,7 @@
   {
     "src": "img/julie-about.png",
     "base": "julie-about",
-    "width": 529,
+    "width": 530,
     "height": 795,
     "webp": "img/opt/julie-about.webp",
     "fallback": "img/opt/julie-about.png",
