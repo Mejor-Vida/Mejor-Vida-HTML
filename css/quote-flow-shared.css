@@ -276,21 +276,20 @@
       color: #fff !important;
     }
 
-    /* BBB seal — left side of phone row, under logo (keep row height unchanged) */
+    /* BBB seal — 2× prior (28→56), sized to fill existing phone-row height */
     .header-bbb-seal {
       display: inline-flex;
       align-items: center;
       flex: 0 0 auto;
       line-height: 0;
-      margin-left: -0.25rem;
-      max-height: 28px;
+      max-height: 56px;
     }
     .header-bbb-seal img {
       display: block;
       width: auto !important;
-      height: 28px !important;
-      max-height: 28px !important;
-      max-width: 56px !important;
+      height: 56px !important;
+      max-height: 56px !important;
+      max-width: 110px !important;
       border: 0;
       object-fit: contain;
     }
