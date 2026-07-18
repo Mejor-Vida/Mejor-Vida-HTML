@@ -20,7 +20,7 @@ const JOBS = [
   { src: "img/business-man.png", maxWidth: 681, maxHeight: 1024, keepPng: true },
   { src: "img/hero-couple-embrace.png", maxWidth: 681, maxHeight: 1024 },
   { src: "img/happy-family.png", maxWidth: 1400, maxHeight: 900 },
-  { src: "img/grandma-grandson.png", maxWidth: 1200, maxHeight: 800 },
+  { src: "img/grandma-grandson.png", maxWidth: 1024, maxHeight: 795, keepPng: true },
   { src: "img/woman-flowers.png", maxWidth: 566, maxHeight: 1024, keepPng: true },
   { src: "img/julie-about.png", maxWidth: 530, maxHeight: 795 },
   { src: "img/logo-spanish2.png", maxWidth: 800, maxHeight: 534, keepPng: true },
