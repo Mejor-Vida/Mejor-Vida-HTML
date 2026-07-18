@@ -9,7 +9,7 @@
   position: relative;
   align-self: center;
   flex: 0 0 auto;
-  z-index: 5;
+  z-index: 1061;
 }
 
 .nav-about-dropdown-trigger {
