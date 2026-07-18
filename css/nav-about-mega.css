@@ -1,13 +1,15 @@
 /* About Us — Choice Mutual–style mega menu */
 
-.desktop-nav {
+.header-actions {
   position: relative;
+  overflow: visible !important;
 }
 
 .nav-about-dropdown {
   position: relative;
   align-self: center;
   flex: 0 0 auto;
+  z-index: 5;
 }
 
 .nav-about-dropdown-trigger {
