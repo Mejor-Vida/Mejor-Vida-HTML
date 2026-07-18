@@ -276,26 +276,41 @@
       color: #fff !important;
     }
 
-    /* BBB seal — clip baked-in “Click for Profile” under the badge */
+    /* BBB seal — in top actions (right of quote CTA); clip “Click for Profile” */
     .header-bbb-seal {
-      display: inline-flex;
+      display: none;
       align-items: flex-start;
       flex: 0 0 auto;
       line-height: 0;
       overflow: hidden;
-      height: 42px;
-      max-height: 42px;
-      width: 110px;
+      height: 36px;
+      max-height: 36px;
+      width: 94px;
+      margin-left: 0.15rem;
+    }
+    @media (min-width: 992px) {
+      .header-actions .header-bbb-seal {
+        display: inline-flex !important;
+      }
     }
     .header-bbb-seal img {
       display: block;
-      width: 110px !important;
-      height: 56px !important;
+      width: 94px !important;
+      height: 48px !important;
       max-width: none !important;
       max-height: none !important;
       border: 0;
       object-fit: cover;
       object-position: top left;
+    }
+
+    .header-office-bar {
+      padding-top: 0.35rem !important;
+      padding-bottom: 0.35rem !important;
+    }
+    .header-lang-toggle {
+      white-space: nowrap;
+      font-weight: 600;
     }
     
     /* Header sticks to top when scrolling. */
