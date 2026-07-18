@@ -275,6 +275,21 @@
       background: #1da851;
       color: #fff !important;
     }
+
+    /* BBB seal — left side of phone row, under logo */
+    .header-bbb-seal {
+      display: inline-flex;
+      align-items: center;
+      flex: 0 0 auto;
+      line-height: 0;
+      margin-left: -0.25rem;
+    }
+    .header-bbb-seal img {
+      display: block;
+      width: auto;
+      height: 46px;
+      border: 0;
+    }
     
     /* Header sticks to top when scrolling. */
     header.sticky-top {

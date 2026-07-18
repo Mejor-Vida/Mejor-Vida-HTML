@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Replace site headers on inner pages with includes/site-header-inner.html (matches index layout)."""
+"""Replace site headers with includes/site-header-inner.html and includes/en-site-header.html."""
 
 from __future__ import annotations
 
@@ -7,7 +7,8 @@ import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-TEMPLATE = (ROOT / "includes" / "site-header-inner.html").read_text(encoding="utf-8")
+ES_TEMPLATE = (ROOT / "includes" / "site-header-inner.html").read_text(encoding="utf-8")
+EN_TEMPLATE = (ROOT / "includes" / "en-site-header.html").read_text(encoding="utf-8")
 HEADER_RE = re.compile(
     r"<header class=\"sticky-top bg-white shadow-sm border-bottom\">.*?</header>",
     re.DOTALL,
@@ -43,7 +44,6 @@ def ensure_shared_css(html: str, prefix: str) -> str:
     marker = 'href="' + css_href(prefix) + '"'
     if marker in html:
         return html
-    # After bootstrap if present
     boot = f'href="{prefix}bootstrap/css/bootstrap.min.css"'
     if boot in html:
         return html.replace(
@@ -51,7 +51,6 @@ def ensure_shared_css(html: str, prefix: str) -> str:
             f'<link href="{prefix}bootstrap/css/bootstrap.min.css" rel="stylesheet" />\n{link.rstrip()}',
             1,
         )
-    # After first stylesheet
     m = re.search(r'(<link[^>]+stylesheet[^>]*>)', html)
     if m:
         insert_at = m.end()
@@ -59,15 +58,59 @@ def ensure_shared_css(html: str, prefix: str) -> str:
     return html
 
 
-def sync_file(path: Path) -> bool:
+def sync_es_file(path: Path) -> bool:
     text = path.read_text(encoding="utf-8")
     if 'class="sticky-top bg-white shadow-sm border-bottom"' not in text:
         return False
     prefix = prefix_for(path)
-    new_header = TEMPLATE.replace("__PREFIX__", prefix)
+    new_header = ES_TEMPLATE.replace("__PREFIX__", prefix)
     updated, n = HEADER_RE.subn(new_header.strip(), text, count=1)
     if n == 0:
         return False
+    updated = ensure_shared_css(updated, prefix)
+    if updated != text:
+        path.write_text(updated, encoding="utf-8")
+        return True
+    return False
+
+
+def prepare_en_header(path: Path) -> str:
+    header = EN_TEMPLATE.strip()
+    en_root = ROOT / "en"
+    if path.parent != en_root:
+        depth = len(path.relative_to(en_root).parts) - 1
+        up_site = "../" * (depth + 1)
+        nest = "../" * depth
+        header = header.replace("../img/", up_site + "img/")
+        header = header.replace('href="../index.html"', f'href="{up_site}index.html"')
+        header = header.replace(
+            'href="../guias-gastos-finales.html"',
+            f'href="{up_site}guias-gastos-finales.html"',
+        )
+        if depth:
+            for name in (
+                "about-julie.html",
+                "blog.html",
+                "final-expense-estimator.html",
+                "contact.html",
+                "quote.html",
+                "licenses.html",
+            ):
+                header = header.replace(f'href="{name}"', f'href="{nest}{name}"')
+    return header
+
+
+def sync_en_file(path: Path) -> bool:
+    text = path.read_text(encoding="utf-8")
+    if 'class="sticky-top bg-white shadow-sm border-bottom"' not in text:
+        return False
+    new_header = prepare_en_header(path)
+    updated, n = HEADER_RE.subn(new_header, text, count=1)
+    if n == 0:
+        return False
+    en_root = ROOT / "en"
+    depth = len(path.relative_to(en_root).parts) - 1
+    prefix = "../" * (depth + 1)
     updated = ensure_shared_css(updated, prefix)
     if updated != text:
         path.write_text(updated, encoding="utf-8")
@@ -82,8 +125,15 @@ def main() -> None:
             continue
         if path.name in SKIP_FILES:
             continue
-        if sync_file(path):
+        if sync_es_file(path):
             changed.append(path.relative_to(ROOT))
+    en_dir = ROOT / "en"
+    if en_dir.is_dir():
+        for path in sorted(en_dir.rglob("*.html")):
+            if "blog-template" in path.name:
+                continue
+            if sync_en_file(path):
+                changed.append(path.relative_to(ROOT))
     print(f"Updated {len(changed)} file(s):")
     for p in changed:
         print(f"  - {p}")
