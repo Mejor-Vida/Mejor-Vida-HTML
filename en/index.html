@@ -1032,27 +1032,37 @@
       color: #fff !important;
     }
 
-    /* BBB seal — in top actions (right of quote CTA); clip “Click for Profile” */
+    /* BBB seal — top-right of header (right of quote CTA); clip “Click for Profile” */
     .header-bbb-seal {
       display: none;
       align-items: flex-start;
       flex: 0 0 auto;
       line-height: 0;
       overflow: hidden;
-      height: 36px;
-      max-height: 36px;
-      width: 94px;
-      margin-left: 0.15rem;
+      height: 44px;
+      max-height: 44px;
+      width: 116px;
     }
     @media (min-width: 992px) {
+      .header-inner {
+        position: relative;
+      }
       .header-actions .header-bbb-seal {
         display: inline-flex !important;
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 3;
+      }
+      .header-inner > .header-actions {
+        padding-right: 126px; /* room for absolute BBB seal */
       }
     }
     .header-bbb-seal img {
       display: block;
-      width: 94px !important;
-      height: 48px !important;
+      width: 116px !important;
+      height: 58px !important;
       max-width: none !important;
       max-height: none !important;
       border: 0;
