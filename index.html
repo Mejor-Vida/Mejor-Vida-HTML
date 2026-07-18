@@ -13,6 +13,18 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+<script>
+  // Always open the homepage at the top; #home and browser restoration can
+  // otherwise position the hero underneath the sticky header.
+  if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+  if (location.hash === "#home") {
+    history.replaceState(null, "", location.pathname + location.search);
+  }
+  window.scrollTo(0, 0);
+  window.addEventListener("pageshow", function () {
+    window.scrollTo(0, 0);
+  });
+</script>
 <title>Seguro de Gastos Finales | Mejor Vida Insurance LLC</title>
 <!-- Favicon — sun icon only (see scripts/generate-favicon-sun.js) -->
 <link href="favicon.ico" rel="icon" sizes="48x48" type="image/x-icon"/>

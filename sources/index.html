@@ -12,6 +12,18 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <script>
+    // Always open the homepage at the top; #home and browser restoration can
+    // otherwise position the hero underneath the sticky header.
+    if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+    if (location.hash === "#home") {
+      history.replaceState(null, "", location.pathname + location.search);
+    }
+    window.scrollTo(0, 0);
+    window.addEventListener("pageshow", function () {
+      window.scrollTo(0, 0);
+    });
+  </script>
 
   <title>Seguro de Gastos Finales | Mejor Vida Insurance LLC</title>
 
