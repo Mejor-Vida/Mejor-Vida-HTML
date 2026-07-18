@@ -1025,22 +1025,26 @@
       color: #fff !important;
     }
 
-    /* BBB seal — 2× prior (28→56), sized to fill existing phone-row height */
+    /* BBB seal — clip baked-in “Click for Profile” under the badge */
     .header-bbb-seal {
       display: inline-flex;
-      align-items: center;
+      align-items: flex-start;
       flex: 0 0 auto;
       line-height: 0;
-      max-height: 56px;
+      overflow: hidden;
+      height: 42px;
+      max-height: 42px;
+      width: 110px;
     }
     .header-bbb-seal img {
       display: block;
-      width: auto !important;
+      width: 110px !important;
       height: 56px !important;
-      max-height: 56px !important;
-      max-width: 110px !important;
+      max-width: none !important;
+      max-height: none !important;
       border: 0;
-      object-fit: contain;
+      object-fit: cover;
+      object-position: top left;
     }
 
     /* Header sticks to top when scrolling. */
