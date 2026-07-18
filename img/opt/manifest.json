@@ -29,8 +29,8 @@
   {
     "src": "img/grandma-grandson.png",
     "base": "grandma-grandson",
-    "width": 1200,
-    "height": 800,
+    "width": 1024,
+    "height": 795,
     "webp": "img/opt/grandma-grandson.webp",
     "fallback": "img/opt/grandma-grandson.png",
     "keepPng": true
