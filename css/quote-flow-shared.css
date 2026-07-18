@@ -1,6 +1,7 @@
 @import url("nav-questions-dropdown.css");
 @import url("nav-about-mega.css");
 @import url("nav-funeral-resources.css");
+@import url("nav-life-insurance.css");
 
 /* Shared quote flow pages — header + hero (from quote.html) */
     /* Two-tone blue hero - smooth curve from bottom-left to top-right */
@@ -149,12 +150,17 @@
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
       transition: all 0.15s cubic-bezier(0, 0, 0.2, 1);
       white-space: nowrap;
+      text-decoration: none;
     }
     
-    .btn-see-prices:hover {
+    .btn-see-prices:hover,
+    .btn-see-prices:focus,
+    .btn-see-prices:active {
       background-color: #f5b942;
       box-shadow: 0 4px 8px rgba(254, 201, 99, 0.4);
       transform: translateY(-1px);
+      text-decoration: none;
+      color: #1a202c;
     }
     
     /* Phone block styles */

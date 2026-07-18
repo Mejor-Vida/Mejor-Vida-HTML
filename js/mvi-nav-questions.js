@@ -1,5 +1,5 @@
 /**
- * Header nav dropdowns: "¿Tienes preguntas?" + About Us mega menu + open MVI chatbot.
+ * Header nav dropdowns: insurance, questions, funeral resources, About Us, and MVI chatbot.
  */
 (function () {
   "use strict";
@@ -100,6 +100,9 @@
     });
     document.querySelectorAll(".nav-funeral-dropdown-trigger").forEach(function (trigger) {
       bindDropdown(trigger, ".nav-funeral-dropdown", ".nav-funeral-mega");
+    });
+    document.querySelectorAll(".nav-life-dropdown-trigger").forEach(function (trigger) {
+      bindDropdown(trigger, ".nav-life-dropdown", ".nav-life-mega");
     });
   }
 

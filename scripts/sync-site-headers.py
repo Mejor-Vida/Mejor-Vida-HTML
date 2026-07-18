@@ -95,6 +95,7 @@ def prepare_en_header(path: Path) -> str:
                 "final-expense-estimator.html",
                 "contact.html",
                 "quote.html",
+                "term-quote.html",
                 "licenses.html",
             ):
                 header = header.replace(f'href="{name}"', f'href="{nest}{name}"')
