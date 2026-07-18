@@ -38,7 +38,41 @@
         </div>
 
         <nav class="desktop-nav d-none d-lg-flex align-items-center">
-          <a href="about-julie.html" class="nav-link-cm nav-link-stack">Meet the founder</a>
+          <div class="nav-about-dropdown">
+            <button type="button" class="nav-link-cm nav-about-dropdown-trigger" id="nav-about-trigger" aria-expanded="false" aria-haspopup="true" aria-controls="nav-about-mega">
+              About Us <i class="fas fa-chevron-down nav-about-caret" aria-hidden="true"></i>
+            </button>
+            <div class="nav-about-mega" id="nav-about-mega" role="region" aria-label="About Us">
+              <div class="nav-about-mega-links">
+                <a href="about-julie.html">Meet the founder</a>
+                <a href="contact.html">Contact</a>
+                <a href="/en/schedule-julie.html">Schedule a call</a>
+                <a href="../guias-gastos-finales.html">FAQs</a>
+                <a href="licenses.html">Licenses</a>
+              </div>
+              <div class="nav-about-mega-feature">
+                <div class="nav-about-mega-feature-copy">
+                  <h3>Meet Julie</h3>
+                  <p>A bilingual agent who guides families with clarity, respect, and no pressure.</p>
+                  <a class="nav-about-mega-feature-cta" href="about-julie.html">Read her story</a>
+                </div>
+                <div class="nav-about-mega-feature-media">
+                  <picture>
+                    <source type="image/webp" srcset="../img/opt/julie-about.webp" />
+                    <img src="../img/opt/julie-about.png" alt="Julie Braunsroth, founder of Mejor Vida Insurance" width="529" height="794" loading="lazy" decoding="async" />
+                  </picture>
+                </div>
+              </div>
+              <div class="nav-about-mega-contact">
+                <div>
+                  <h3>We're here to help.</h3>
+                  <p>Get in touch with a licensed agent by phone, WhatsApp, or our contact form.</p>
+                </div>
+                <a class="nav-about-mega-contact-cta" href="contact.html">Contact Us</a>
+                <i class="fas fa-paper-plane nav-about-mega-contact-icon" aria-hidden="true"></i>
+              </div>
+            </div>
+          </div>
           <div class="nav-questions-dropdown">
             <button type="button" class="nav-link-cm nav-link-stack nav-link-questions-wrap nav-questions-dropdown-trigger" id="nav-questions-trigger" aria-expanded="false" aria-haspopup="true" title="Got questions about final expense insurance?">
               <i class="fas fa-robot" style="font-size: 0.95em; opacity: 0.88;" aria-hidden="true"></i><span>Got questions?</span>
@@ -54,8 +88,6 @@
           </div>
           <a href="blog.html" class="nav-link-cm">Blog</a>
           <a href="final-expense-estimator.html" class="nav-link-cm nav-link-fe-calc-wrap">Final Expense Calculator</a>
-          <a href="contact.html" class="nav-link-cm">Contact</a>
-          <a href="/en/schedule-julie.html" class="nav-link-cm nav-link-schedule-wrap">Schedule a call</a>
         </nav>
 
         <div class="d-flex align-items-center gap-2 header-actions">
@@ -77,16 +109,19 @@
     </div>
 
     <div class="mobile-menu" id="mobile-menu">
+      <p class="mobile-menu-sublabel">About Us</p>
       <a href="about-julie.html" class="mobile-menu-link">Meet the founder</a>
+      <a href="contact.html" class="mobile-menu-link">Contact</a>
+      <a href="/en/schedule-julie.html" class="mobile-menu-link">Schedule a call</a>
+      <a href="../guias-gastos-finales.html" class="mobile-menu-link">FAQs</a>
+      <a href="licenses.html" class="mobile-menu-link">Licenses</a>
       <p class="mobile-menu-sublabel">Got questions?</p>
       <button type="button" class="mobile-menu-link mobile-menu-link--action" data-mvi-open-chat>MVI chat assistant</button>
       <a href="../guias-gastos-finales.html" class="mobile-menu-link">Final expense guides</a>
       <a href="blog.html" class="mobile-menu-link">Blog</a>
       <a href="final-expense-estimator.html" class="mobile-menu-link fw-bold" style="color:#0D47A1;">Final Expense Calculator</a>
-      <a href="contact.html" class="mobile-menu-link">Contact</a>
       <a href="https://wa.me/14024405438?text=Hello%2C%20I%20am%20interested%20in%20learning%20about%20final%20expense%20insurance." target="_blank" rel="noopener" class="mobile-menu-link fw-bold" style="color:#1D9E53;"><i class="fab fa-whatsapp me-2"></i>WhatsApp (recommended)</a>
       <a href="quote.html" class="mobile-menu-link fw-bold" style="color:#0D47A1;"><i class="fas fa-file-invoice-dollar me-2"></i>Free online quote</a>
-      <a href="/en/schedule-julie.html" class="mobile-menu-link fw-bold" style="color:#0D47A1;"><i class="fas fa-calendar-alt me-2"></i>Schedule a call</a>
       <a href="../index.html" class="mobile-menu-link small text-muted">Español</a>
       <p class="mobile-menu-link small text-muted mb-0 px-2">Current client? Phone line: <a href="tel:+14024405438" class="text-decoration-none">402-440-5438</a></p>
       <p class="mobile-menu-link small text-muted mb-0 px-2">SMS/Text: <a href="tel:+14028441199" class="text-decoration-none">402-844-1199</a></p>
@@ -198,6 +233,7 @@
 <script defer src="../bootstrap/js/bootstrap.bundle.min.js"></script>
 
 <div data-api-url="/api/website-chat" id="mvi-assistant-root"></div>
+<script defer src="../js/mvi-nav-questions.js"></script>
 <script defer="" src="../js/website-assistant-widget.js"></script>
 
   <script>

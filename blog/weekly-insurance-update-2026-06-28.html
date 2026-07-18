@@ -239,7 +239,41 @@
         </div>
 
         <nav class="desktop-nav d-none d-lg-flex align-items-center">
-          <a href="../about-julie.html" class="nav-link-cm nav-link-stack">Conozca a la fundadora</a>
+          <div class="nav-about-dropdown">
+            <button type="button" class="nav-link-cm nav-about-dropdown-trigger" id="nav-about-trigger" aria-expanded="false" aria-haspopup="true" aria-controls="nav-about-mega">
+              Sobre nosotros <i class="fas fa-chevron-down nav-about-caret" aria-hidden="true"></i>
+            </button>
+            <div class="nav-about-mega" id="nav-about-mega" role="region" aria-label="Sobre nosotros">
+              <div class="nav-about-mega-links">
+                <a href="../about-julie.html">Conozca a la fundadora</a>
+                <a href="../contact.html">Contacto</a>
+                <a href="/schedule-julie.html">Agendar una llamada</a>
+                <a href="../guias-gastos-finales.html">FAQs</a>
+                <a href="../licencias.html">Licencias</a>
+              </div>
+              <div class="nav-about-mega-feature">
+                <div class="nav-about-mega-feature-copy">
+                  <h3>Conozca a Julie</h3>
+                  <p>Agente bilingüe que guía a las familias con claridad, respeto y sin presión.</p>
+                  <a class="nav-about-mega-feature-cta" href="../about-julie.html">Leer su historia</a>
+                </div>
+                <div class="nav-about-mega-feature-media">
+                  <picture>
+                    <source type="image/webp" srcset="../img/opt/julie-about.webp" />
+                    <img src="../img/opt/julie-about.png" alt="Julie Braunsroth, fundadora de Mejor Vida Insurance" width="529" height="794" loading="lazy" decoding="async" />
+                  </picture>
+                </div>
+              </div>
+              <div class="nav-about-mega-contact">
+                <div>
+                  <h3>Estamos aquí para ayudar.</h3>
+                  <p>Hable con una agente licenciada por teléfono, WhatsApp o nuestro formulario de contacto.</p>
+                </div>
+                <a class="nav-about-mega-contact-cta" href="../contact.html">Contáctenos</a>
+                <i class="fas fa-paper-plane nav-about-mega-contact-icon" aria-hidden="true"></i>
+              </div>
+            </div>
+          </div>
           <div class="nav-questions-dropdown">
             <button type="button" class="nav-link-cm nav-link-stack nav-link-questions-wrap nav-questions-dropdown-trigger" id="nav-questions-trigger" aria-expanded="false" aria-haspopup="true" title="¿Tienes preguntas sobre gastos finales?">
               <i class="fas fa-robot" style="font-size: 0.95em; opacity: 0.88;" aria-hidden="true"></i><span>¿Tienes preguntas?</span>
@@ -255,8 +289,6 @@
           </div>
           <a href="../blog.html" class="nav-link-cm">Blog</a>
           <a href="../final-expense-estimator.html" class="nav-link-cm nav-link-fe-calc-wrap">Calculadora de gastos finales</a>
-          <a href="../contact.html" class="nav-link-cm">Contacto</a>
-          <a href="/schedule-julie.html" class="nav-link-cm nav-link-schedule-wrap">Agendar una llamada</a>
         </nav>
 
         <div class="d-flex align-items-center gap-2 header-actions">
@@ -278,16 +310,19 @@
     </div>
 
     <div class="mobile-menu" id="mobile-menu">
+      <p class="mobile-menu-sublabel">Sobre nosotros</p>
       <a href="../about-julie.html" class="mobile-menu-link">Conozca a la fundadora</a>
+      <a href="../contact.html" class="mobile-menu-link">Contacto</a>
+      <a href="/schedule-julie.html" class="mobile-menu-link">Agendar una llamada</a>
+      <a href="../guias-gastos-finales.html" class="mobile-menu-link">FAQs</a>
+      <a href="../licencias.html" class="mobile-menu-link">Licencias</a>
       <p class="mobile-menu-sublabel">¿Tienes preguntas?</p>
       <button type="button" class="mobile-menu-link mobile-menu-link--action" data-mvi-open-chat>Asistente de chat MVI</button>
       <a href="../guias-gastos-finales.html" class="mobile-menu-link">Guías de gastos finales</a>
       <a href="../blog.html" class="mobile-menu-link">Blog</a>
       <a href="../final-expense-estimator.html" class="mobile-menu-link fw-bold" style="color:#0D47A1;">Calculadora de gastos finales</a>
-      <a href="../contact.html" class="mobile-menu-link">Contacto</a>
       <a href="https://wa.me/14024405438?text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20seguro%20de%20gastos%20finales." target="_blank" rel="noopener" class="mobile-menu-link fw-bold" style="color:#1D9E53;"><i class="fab fa-whatsapp me-2"></i>WhatsApp (recomendado)</a>
       <a href="/quote.html" class="mobile-menu-link fw-bold" style="color:#0D47A1;"><i class="fas fa-file-invoice-dollar me-2"></i>Cotización gratis en línea</a>
-      <a href="/schedule-julie.html" class="mobile-menu-link fw-bold" style="color:#0D47A1;"><i class="fas fa-calendar-alt me-2"></i>Agendar una llamada</a>
       <a href="/en/" class="mobile-menu-link small text-muted">English</a>
       <p class="mobile-menu-link small text-muted mb-0 px-2">¿Cliente actual? Línea de atención: <a href="tel:+14024405438" class="text-decoration-none">402-440-5438</a></p>
       <p class="mobile-menu-link small text-muted mb-0 px-2">SMS/Texto: <a href="tel:+14028441199" class="text-decoration-none">402-844-1199</a></p>
@@ -544,6 +579,7 @@
   if (document.getElementById('year')) document.getElementById('year').textContent = new Date().getFullYear();
 </script>
 <div data-api-url="/api/website-chat" data-mvi-avatar-base="/img/mvi-chat-avatar" id="mvi-assistant-root"></div>
+<script defer src="../js/mvi-nav-questions.js"></script>
 <script defer="" src="../js/website-assistant-widget.js"></script>
 </body>
 </html>

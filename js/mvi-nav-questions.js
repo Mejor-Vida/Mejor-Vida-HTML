@@ -1,5 +1,5 @@
 /**
- * Header "¿Tienes preguntas?" dropdown + open MVI chatbot.
+ * Header nav dropdowns: "¿Tienes preguntas?" + About Us mega menu + open MVI chatbot.
  */
 (function () {
   "use strict";
@@ -34,15 +34,16 @@
     );
   }
 
-  function bindDropdown(trigger) {
-    var wrap = trigger.closest(".nav-questions-dropdown");
-    var menu = wrap && wrap.querySelector(".nav-questions-dropdown-menu");
+  function bindDropdown(trigger, wrapSelector, menuSelector) {
+    var wrap = trigger.closest(wrapSelector);
+    var menu = wrap && wrap.querySelector(menuSelector);
     if (!wrap || !menu) return;
 
     var hoverCloseTimer = null;
+    var usesHidden = menu.hasAttribute("hidden") || menuSelector.indexOf("questions") !== -1;
 
     function openMenu() {
-      menu.removeAttribute("hidden");
+      if (usesHidden) menu.removeAttribute("hidden");
       wrap.classList.add("is-open");
       trigger.setAttribute("aria-expanded", "true");
       menu.setAttribute("aria-hidden", "false");
@@ -52,7 +53,7 @@
       wrap.classList.remove("is-open");
       trigger.setAttribute("aria-expanded", "false");
       menu.setAttribute("aria-hidden", "true");
-      menu.setAttribute("hidden", "");
+      if (usesHidden) menu.setAttribute("hidden", "");
     }
 
     function scheduleClose() {
@@ -91,7 +92,12 @@
 
   function init() {
     bindOpenChatTriggers();
-    document.querySelectorAll(".nav-questions-dropdown-trigger").forEach(bindDropdown);
+    document.querySelectorAll(".nav-questions-dropdown-trigger").forEach(function (trigger) {
+      bindDropdown(trigger, ".nav-questions-dropdown", ".nav-questions-dropdown-menu");
+    });
+    document.querySelectorAll(".nav-about-dropdown-trigger").forEach(function (trigger) {
+      bindDropdown(trigger, ".nav-about-dropdown", ".nav-about-mega");
+    });
   }
 
   if (document.readyState === "loading") {
