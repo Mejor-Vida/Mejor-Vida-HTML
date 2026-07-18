@@ -1,0 +1,215 @@
+/* Choice Mutual–style Funeral Resources mega menu */
+
+.nav-funeral-dropdown {
+  position: relative;
+  align-self: center;
+  flex: 0 0 auto;
+  z-index: 1061;
+}
+
+.nav-funeral-dropdown-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  max-width: 7rem;
+  margin: 0;
+  padding: 5px 9px;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: 13.5px;
+  line-height: 1.15;
+  text-align: center;
+  white-space: normal !important;
+  cursor: pointer;
+}
+
+.nav-funeral-caret {
+  flex: 0 0 auto;
+  font-size: 0.65em;
+  opacity: 0.75;
+  transition: transform 0.15s ease;
+}
+
+.nav-funeral-dropdown:hover .nav-funeral-dropdown-trigger,
+.nav-funeral-dropdown:focus-within .nav-funeral-dropdown-trigger,
+.nav-funeral-dropdown.is-open .nav-funeral-dropdown-trigger {
+  color: #0d47a1;
+  background: #e8f1fc;
+  border-radius: 0.35rem;
+  box-shadow: inset 0 -2px 0 #0d47a1;
+}
+
+.nav-funeral-dropdown:hover .nav-funeral-caret,
+.nav-funeral-dropdown:focus-within .nav-funeral-caret,
+.nav-funeral-dropdown.is-open .nav-funeral-caret {
+  transform: rotate(180deg);
+}
+
+.nav-funeral-mega {
+  display: none;
+  position: absolute;
+  top: calc(100% + 0.55rem);
+  left: 50%;
+  z-index: 1400;
+  box-sizing: border-box;
+  width: min(780px, calc(100vw - 2.5rem));
+  padding: 1rem 1rem 0;
+  transform: translateX(-48%);
+  grid-template-columns: 0.9fr 1.05fr 1.25fr;
+  gap: 0.9rem;
+  align-items: stretch;
+  background: #fff;
+  border-radius: 0.65rem;
+  box-shadow:
+    0 4px 6px rgba(15, 23, 42, 0.06),
+    0 20px 48px rgba(15, 23, 42, 0.18);
+}
+
+.nav-funeral-dropdown:hover .nav-funeral-mega,
+.nav-funeral-dropdown:focus-within .nav-funeral-mega,
+.nav-funeral-dropdown.is-open .nav-funeral-mega {
+  display: grid;
+}
+
+.nav-funeral-mega::before {
+  content: "";
+  position: absolute;
+  top: -0.7rem;
+  right: 0;
+  left: 0;
+  height: 0.7rem;
+}
+
+.nav-funeral-links {
+  padding: 0.25rem 0.2rem 0.75rem;
+}
+
+.nav-funeral-links h3,
+.nav-funeral-feature h3,
+.nav-funeral-calculator h3 {
+  margin: 0 0 0.55rem;
+  color: #1a365d;
+  font-size: 0.95rem;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.nav-funeral-links a {
+  display: block;
+  padding: 0.42rem 0.25rem;
+  border-radius: 0.3rem;
+  color: #334155;
+  font-size: 0.82rem;
+  font-weight: 600;
+  line-height: 1.3;
+  text-decoration: none;
+}
+
+.nav-funeral-links a:hover,
+.nav-funeral-links a:focus-visible {
+  color: #0d47a1;
+  background: #f1f7ff;
+  outline: none;
+}
+
+.nav-funeral-feature,
+.nav-funeral-calculator {
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  min-height: 178px;
+  padding: 1rem;
+  border-radius: 0.4rem;
+  text-decoration: none;
+}
+
+.nav-funeral-feature {
+  flex-direction: column;
+  background: #dff2f1;
+}
+
+.nav-funeral-feature-badge {
+  align-self: flex-start;
+  margin: -1rem 0 0.65rem -1rem;
+  padding: 0.28rem 0.55rem;
+  background: #26a69a;
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.nav-funeral-feature img {
+  align-self: center;
+  width: 104px;
+  height: 104px;
+  margin-top: auto;
+  object-fit: contain;
+}
+
+.nav-funeral-calculator {
+  flex-direction: column;
+  background: linear-gradient(135deg, #006d70, #008d91);
+  color: #fff;
+}
+
+.nav-funeral-calculator h3,
+.nav-funeral-calculator p {
+  position: relative;
+  z-index: 1;
+  max-width: 68%;
+  color: #fff;
+}
+
+.nav-funeral-calculator p {
+  margin: 0;
+  font-size: 0.78rem;
+  line-height: 1.4;
+}
+
+.nav-funeral-calculator img {
+  position: absolute;
+  right: 0.45rem;
+  bottom: 1.75rem;
+  width: 88px;
+  height: 88px;
+  object-fit: contain;
+}
+
+.nav-funeral-calculator > span {
+  position: relative;
+  z-index: 1;
+  align-self: flex-start;
+  margin-top: auto;
+  color: #fff;
+  font-size: 0.77rem;
+  font-weight: 800;
+}
+
+.nav-funeral-feature:hover,
+.nav-funeral-calculator:hover {
+  filter: brightness(1.04);
+}
+
+.nav-funeral-explore {
+  grid-column: 1 / -1;
+  margin: 0 -1rem;
+  padding: 0.7rem 1rem;
+  border-top: 1px solid #dbe5ef;
+  color: #087c80;
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.nav-funeral-explore:hover {
+  color: #0d47a1;
+  background: #f8fbff;
+}
+
+@media (max-width: 991.98px) {
+  .nav-funeral-mega {
+    display: none !important;
+  }
+}

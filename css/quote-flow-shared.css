@@ -1,5 +1,6 @@
 @import url("nav-questions-dropdown.css");
 @import url("nav-about-mega.css");
+@import url("nav-funeral-resources.css");
 
 /* Shared quote flow pages — header + hero (from quote.html) */
     /* Two-tone blue hero - smooth curve from bottom-left to top-right */
@@ -223,7 +224,8 @@
     .nav-link-cm.nav-link-stack,
     .nav-link-cm.nav-link-questions-wrap,
     .nav-link-cm.nav-link-schedule-wrap,
-    .nav-link-cm.nav-link-fe-calc-wrap {
+    .nav-link-cm.nav-link-fe-calc-wrap,
+    .nav-link-cm.nav-link-news-wrap {
       white-space: normal !important;
     }
     .header-inner .desktop-nav {
@@ -259,6 +261,12 @@
       }
       .header-inner .desktop-nav .nav-link-cm.nav-link-fe-calc-wrap {
         font-size: 13.5px;
+      }
+      .header-inner .desktop-nav .nav-link-cm.nav-link-news-wrap {
+        max-width: 7rem;
+        font-size: 13.5px;
+        line-height: 1.15;
+        text-align: center;
       }
     }
 

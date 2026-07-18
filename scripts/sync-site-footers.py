@@ -8,6 +8,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 TEMPLATE = (ROOT / "includes" / "site-footer-inner.html").read_text(encoding="utf-8")
+EN_TEMPLATE = (ROOT / "includes" / "en-site-footer.html").read_text(encoding="utf-8")
 FOOTER_RE = re.compile(
     r'<footer style="background:#1a365d; padding: 8px 0 24px 0;">.*?</footer>',
     re.DOTALL,
@@ -104,13 +105,22 @@ def strip_footer_logo_inline_style(html: str) -> str:
     return FOOTER_LOGO_IMG_RE.sub(lambda m: clean_footer_logo_img(m.group(0)), html)
 
 
-def sync_en_footer_css(path: Path) -> bool:
-    """English site: add site-footer.css and normalize footer logo img."""
+def sync_en_footer(path: Path) -> bool:
+    """Replace English footer and normalize its shared styles."""
     text = path.read_text(encoding="utf-8")
     if 'background:#1a365d; padding: 8px 0 24px 0' not in text:
         return False
-    prefix = prefix_for(path)
-    updated = ensure_footer_css(text, prefix)
+    en_root = ROOT / "en"
+    depth = len(path.relative_to(en_root).parts) - 1
+    asset_prefix = "../" * (depth + 1)
+    page_prefix = "../" * depth
+    updated = ensure_footer_css(text, asset_prefix)
+    new_footer = (
+        EN_TEMPLATE.replace("__ASSET__", asset_prefix)
+        .replace("__PAGE__", page_prefix)
+        .strip()
+    )
+    updated, _ = FOOTER_RE.subn(new_footer, updated, count=1)
     updated = strip_footer_logo_inline_style(updated)
     if updated == text:
         return False
@@ -130,7 +140,7 @@ def main() -> None:
     en_dir = ROOT / "en"
     if en_dir.is_dir():
         for path in sorted(en_dir.rglob("*.html")):
-            if sync_en_footer_css(path):
+            if sync_en_footer(path):
                 changed.append(path.relative_to(ROOT))
     print(f"Updated {len(changed)} file(s):")
     for p in changed:

@@ -87,6 +87,7 @@ def prepare_en_header(path: Path) -> str:
             'href="../guias-gastos-finales.html"',
             f'href="{up_site}guias-gastos-finales.html"',
         )
+        header = header.replace('href="../blog/', f'href="{up_site}blog/')
         if depth:
             for name in (
                 "about-julie.html",

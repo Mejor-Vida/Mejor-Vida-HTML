@@ -98,6 +98,9 @@
     document.querySelectorAll(".nav-about-dropdown-trigger").forEach(function (trigger) {
       bindDropdown(trigger, ".nav-about-dropdown", ".nav-about-mega");
     });
+    document.querySelectorAll(".nav-funeral-dropdown-trigger").forEach(function (trigger) {
+      bindDropdown(trigger, ".nav-funeral-dropdown", ".nav-funeral-mega");
+    });
   }
 
   if (document.readyState === "loading") {
