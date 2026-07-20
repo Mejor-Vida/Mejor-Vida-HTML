@@ -1,7 +1,7 @@
-@import url("nav-questions-dropdown.css?v=20260719-nav2");
-@import url("nav-about-mega.css?v=20260719-nav2");
-@import url("nav-funeral-resources.css?v=20260719-nav2");
-@import url("nav-life-insurance.css?v=20260719-nav2");
+@import url("nav-questions-dropdown.css?v=20260719-nav3");
+@import url("nav-about-mega.css?v=20260719-nav3");
+@import url("nav-funeral-resources.css?v=20260719-nav3");
+@import url("nav-life-insurance.css?v=20260719-nav3");
 
 /* Shared quote flow pages — header + hero (from quote.html) */
     /* Two-tone blue hero - smooth curve from bottom-left to top-right */
@@ -319,11 +319,6 @@
       }
       .header-inner {
         padding-right: 130px; /* room for absolute BBB seal (header-actions uses display:contents) */
-      }
-    }
-    @media (min-width: 992px) and (max-width: 1399.98px) {
-      .header-inner {
-        padding-right: 118px !important;
       }
     }
     .header-bbb-seal img {
