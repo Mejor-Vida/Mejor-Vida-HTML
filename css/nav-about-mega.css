@@ -119,9 +119,25 @@
   overflow: hidden;
   min-height: 220px;
   padding: 1.35rem 1.25rem;
+  border: 0;
   border-radius: 0.65rem;
   background: linear-gradient(135deg, #0b3a7a 0%, #1565c0 55%, #1e88e5 100%);
   color: #fff;
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+  width: 100%;
+  transition: filter 0.15s ease, transform 0.15s ease;
+}
+
+button.nav-about-mega-feature:hover,
+button.nav-about-mega-feature:focus-visible {
+  filter: brightness(1.05);
+  outline: none;
+}
+
+button.nav-about-mega-feature:focus-visible {
+  box-shadow: 0 0 0 3px rgba(254, 201, 99, 0.65);
 }
 
 .nav-about-mega-feature-copy {
@@ -136,7 +152,7 @@
 
 .nav-about-mega-feature-copy h3 {
   margin: 0;
-  font-size: 1.35rem;
+  font-size: 1.25rem;
   font-weight: 800;
   line-height: 1.2;
   color: #fff;
@@ -144,7 +160,7 @@
 
 .nav-about-mega-feature-copy p {
   margin: 0;
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   line-height: 1.45;
   color: rgba(255, 255, 255, 0.92);
 }
@@ -163,22 +179,23 @@
   font-weight: 700;
   text-decoration: none !important;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  pointer-events: none;
 }
 
-.nav-about-mega-feature-cta:hover {
+.nav-about-mega-feature:hover .nav-about-mega-feature-cta {
   background: #ffd666;
   color: #1a202c !important;
 }
 
 .nav-about-mega-feature-media {
   position: absolute;
-  right: 1.1rem;
+  right: 0.65rem;
   bottom: 0;
-  top: 0.65rem;
-  width: 48%;
+  top: 0.5rem;
+  width: 42%;
   display: flex;
   align-items: flex-end;
-  justify-content: flex-end;
+  justify-content: center;
   pointer-events: none;
 }
 
@@ -186,10 +203,10 @@
   display: block;
   width: auto;
   max-width: 100%;
-  height: 100%;
-  max-height: 210px;
+  height: auto;
+  max-height: 200px;
   object-fit: contain;
-  object-position: bottom right;
+  object-position: bottom center;
   filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.28));
 }
 

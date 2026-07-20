@@ -3,7 +3,7 @@
 /* Header navigation links */
 .nav-link-cm {
   font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 600;
   letter-spacing: -0.01em;
   color: #1a202c;
@@ -163,22 +163,30 @@ header.sticky-top > .container {
 }
 
 .header-logo-wrap {
-  flex: 0 0 auto;
+  /* Cap layout width — raw 800×533 logo at 244px tall is ~366px wide and
+     steals the row, causing nav labels to shrink/overlap on laptop widths. */
+  flex: 0 0 232px !important;
+  width: 232px !important;
+  max-width: 232px !important;
   display: flex !important;
   align-items: center !important;
-  justify-content: center !important;
+  justify-content: flex-start !important;
   height: 81px !important;
   padding: 0 !important;
-  margin-left: -120px !important;
-  margin-right: 1rem !important;
+  margin-left: -28px !important;
+  margin-right: 0.75rem !important;
+  overflow: hidden !important;
 }
 
 .header-logo {
   height: 244px !important;
   width: auto !important;
+  max-width: none !important;
   max-height: none !important;
   object-fit: contain;
   display: block !important;
+  /* Shift crop so sun + wordmark sit in the 232×81 window */
+  margin-left: -88px !important;
   transform: translateY(8px) !important;
 }
 
@@ -228,11 +236,11 @@ header.sticky-top > .container {
 }
 
 .header-inner .desktop-nav {
-  flex: 1 1 0 !important;
+  flex: 0 1 auto !important;
   min-width: 0 !important;
   margin-left: 0 !important;
-  gap: 0.35rem 0.72rem !important;
-  justify-content: space-evenly !important;
+  gap: 0.15rem 0.85rem !important;
+  justify-content: flex-start !important;
   padding-right: 0.5rem;
   overflow: visible !important;
 }
@@ -245,8 +253,8 @@ header.sticky-top > .container {
 
 @media (min-width: 992px) {
   .header-inner .desktop-nav .nav-link-cm {
-    padding: 6px 12px !important;
-    font-size: 16px;
+    padding: 6px 14px !important;
+    font-size: 16px !important;
   }
 
   .header-inner .desktop-nav .nav-link-cm.nav-link-stack {
@@ -421,6 +429,13 @@ header.sticky-top .header-logo-wrap {
   }
 
   .header-logo-wrap {
-    margin-left: -60px !important;
+    flex: 0 0 168px !important;
+    width: 168px !important;
+    max-width: 168px !important;
+    margin-left: -12px !important;
+  }
+
+  .header-logo {
+    margin-left: -72px !important;
   }
 }

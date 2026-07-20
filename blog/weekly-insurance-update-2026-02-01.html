@@ -40,7 +40,7 @@
 <link href="../favicon.ico" rel="icon" type="image/x-icon"/>
 <!-- Bootstrap 5 (local) -->
 <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
-<link href="../css/quote-flow-shared.css?v=20260720-header" rel="stylesheet"/>
+<link href="../css/quote-flow-shared.css?v=20260721-headerfix" rel="stylesheet"/>
 <link href="../css/site-footer.css" rel="stylesheet"/>
 <link href="../css/mvi-assistant-widget.css" rel="stylesheet"/>
 <!-- Font Awesome -->
@@ -511,23 +511,15 @@
                 <button type="button" class="nav-funeral-chat-link" data-mvi-open-chat><i class="fas fa-comments" aria-hidden="true"></i> Asistente de chat MVI</button>
                 <a href="../blog.html">Noticias semanales de seguros</a>
                 <a href="../guias-gastos-finales.html">Guías de gastos finales</a>
-                <a href="../blog/cuanto-cuesta-seguro-gastos-finales.html">¿Cuánto cuesta un seguro?</a>
-                <a href="../blog/tipos-planes-seguro-gastos-finales.html">Tipos de planes</a>
-                <a href="../blog/medicare-paga-gastos-finales.html">Medicare y gastos finales</a>
+                <a href="cuanto-cuesta-seguro-gastos-finales.html">¿Cuánto cuesta un seguro?</a>
+                <a href="tipos-planes-seguro-gastos-finales.html">Tipos de planes</a>
               </div>
-              <a class="nav-funeral-feature" href="../blog/cuanto-cuesta-seguro-gastos-finales.html">
-                <span class="nav-funeral-feature-badge">DESTACADO</span>
-                <h3>¿Cuánto cuesta un funeral?</h3>
-                <img src="../img/opt/goal-funeral-expenses-icon.webp" alt="" width="320" height="320" loading="lazy" decoding="async" />
-              </a>
-              <a class="nav-funeral-calculator" href="../final-expense-estimator.html">
-                <div>
-                  <h3>Calculadora de gastos finales</h3>
-                  <p>Calcule sus gastos funerarios actuales y futuros.</p>
-                </div>
-                <img src="../img/opt/objective-calculator.webp" alt="" width="293" height="293" loading="lazy" decoding="async" />
-                <span>Calcular ahora →</span>
-              </a>
+              <div class="nav-funeral-links">
+                <h3>Herramientas y costos</h3>
+                <a href="cuanto-cuesta-seguro-gastos-finales.html">¿Cuánto cuesta un funeral?</a>
+                <a href="medicare-paga-gastos-finales.html">Medicare y gastos finales</a>
+                <a href="../final-expense-estimator.html">Calculadora de gastos finales</a>
+              </div>
               <a class="nav-funeral-explore" href="../guias-gastos-finales.html">Explorar todos los recursos funerarios →</a>
             </div>
           </div>
@@ -546,19 +538,16 @@
                 <a href="../guias-gastos-finales.html">FAQs</a>
                 <a href="../licencias.html">Licencias</a>
               </div>
-              <div class="nav-about-mega-feature">
+              <button type="button" class="nav-about-mega-feature" data-mvi-open-chat aria-label="Abrir el asistente de chat de Julie">
                 <div class="nav-about-mega-feature-copy">
-                  <h3>Nuestra fundadora</h3>
-                  <p>Agente bilingüe que guía a las familias con claridad, respeto y sin presión.</p>
-                  <a class="nav-about-mega-feature-cta" href="../about-julie.html">Leer su historia</a>
+                  <h3>¿Tiene una pregunta?</h3>
+                  <p>Pregúntele a nuestra asistente de IA sobre seguros de vida y gastos finales.</p>
+                  <span class="nav-about-mega-feature-cta">Abrir chat</span>
                 </div>
                 <div class="nav-about-mega-feature-media">
-                  <picture>
-                    <source type="image/webp" srcset="../img/opt/julie-about.webp" />
-                    <img src="../img/opt/julie-about.png" alt="Julie Braunsroth, fundadora de Mejor Vida Insurance" width="529" height="794" loading="lazy" decoding="async" />
-                  </picture>
+                  <img src="../img/mvi-chat-avatar/idle.png" alt="" width="176" height="264" loading="lazy" decoding="async" />
                 </div>
-              </div>
+              </button>
               <div class="nav-about-mega-contact">
                 <div>
                   <h3>Estamos aquí para ayudar.</h3>

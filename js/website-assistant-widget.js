@@ -21,7 +21,11 @@
   }
 
   function renderMarkdown(text) {
-    return escapeHtml(String(text || ""))
+    return escapeHtml(
+      String(text || "")
+        .replace(/\\n/g, "\n")
+        .replace(/\\t/g, "\t"),
+    )
       .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
       .replace(
         /\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g,
@@ -90,6 +94,12 @@
         if (mm) mm.classList.remove("active");
         var hb = document.getElementById("hamburger-btn");
         if (hb) hb.textContent = "☰";
+        document.querySelectorAll(".nav-about-dropdown.is-open, .nav-life-dropdown.is-open, .nav-funeral-dropdown.is-open").forEach(function (d) {
+          d.classList.remove("is-open");
+        });
+        document.querySelectorAll(".nav-about-dropdown-trigger[aria-expanded='true'], .nav-life-dropdown-trigger[aria-expanded='true'], .nav-funeral-dropdown-trigger[aria-expanded='true']").forEach(function (t) {
+          t.setAttribute("aria-expanded", "false");
+        });
       },
       true,
     );
