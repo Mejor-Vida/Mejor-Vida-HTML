@@ -3,7 +3,13 @@
 **Source of truth** for researching and drafting the weekly consumer blog posts. Adapted from Abacus *Mejor_Vida_Blog_System_Rules.docx* (effective July 19, 2026) and updated for Julie’s SEO and licensing goals.
 
 **Audience of this document:** Cursor AI / automation agents.  
-**Audience of the posts:** Spanish-speaking families and future clients who need clear information about **final expense**, **term life**, and **whole life** (drafts in **English**; Spanish when publishing).
+**Audience of the posts:** Spanish-speaking families and future clients who need clear information about **final expense**, **term life**, and **whole life** only (drafts in **English**; Spanish when publishing).
+
+**Hard focus (Julie — locked):**
+- **Consumer only** — never write for agents, IMOs, BGAs, underwriters, or producers.
+- **Spanish SEO first** — index Spanish pages; English is compliance/`noindex`.
+- **Products only:** final expense → term life → whole life. Nothing else as a weekly focus (no Medigap/Medicare sales, IUL/VUL, LTC reinsurance, industry M&A, GAO/NAIC trade news, agent tools).
+- Do **not** publish a weekly digest to the index unless ≥2 of 3 stories clearly serve FE / term / whole for families.
 
 **Cadence:** Every Sunday (manual run in Cursor). Always deliver **exactly 3** complete drafts. Never skip a week — use evergreen topics if news is slow.
 
@@ -23,15 +29,16 @@ After Julie picks an article to publish on the site, follow `tools/newsletter-to
 | Website | mejorvidainsurance.com |
 | Licensed now (priority) | Nebraska, Kansas, Colorado, Nevada (telephonic sales) |
 | Expansion | Other U.S. states welcome in content; Julie will get licensed if a client from another state wants help |
-| Target audience | Spanish-speaking families and future clients who need life / final expense protection |
-| Products sold | **Final expense** (main), **term life**, **whole life**, health insurance |
-| Products NOT sold | IUL, VUL, variable life, investment-linked products, **Medicare plans** (do not write Medicare sales/content as a focus) |
+| Target audience | Spanish-speaking **families / consumers** (not producers) who need life / final expense protection |
+| Products sold | **Final expense** (main), **term life**, **whole life** only for blog SEO focus |
+| Products NOT sold / NOT for blog focus | IUL, VUL, variable life, investment-linked products, **Medicare / Medigap** sales, LTC as a product line, auto/home, industry trade topics |
 | Approved carriers (blog Category 4) | Assurity, Mutual of Omaha, American Amicable, Corebridge, Transamerica, Aetna |
-| Primary site language | Spanish (English for compliance) |
-| Primary SEO goal | Drive traffic: **(1) final expense** → **(2) term life** → **(3) whole life** |
-| Primary SEO targets (EN) | final expense insurance, funeral / burial insurance, term life insurance, whole life insurance |
-| Primary SEO targets (ES) | seguro de gastos funerarios / final expense, seguro de vida a término, seguro de vida entera |
+| Primary site language | **Spanish** (English for compliance / language toggle only) |
+| Primary SEO goal | Drive Spanish traffic: **(1) final expense** → **(2) term life** → **(3) whole life** — that is it |
+| Primary SEO targets (EN drafts) | final expense insurance, funeral / burial insurance, term life insurance, whole life insurance |
+| Primary SEO targets (ES publish) | seguro de gastos finales / gastos funerarios, seguro de vida a término, seguro de vida entera |
 | Blog draft language | English only |
+| Indexing | Spanish `index, follow` + sitemap; English `noindex, follow`; never index producer/off-topic weeks |
 
 **Mutual of Omaha note:** Mutual of Omaha (the carrier) is approved. **Mutual of Omaha Direct** (call-center / TV advertiser) is a competitor — never mention it.
 
@@ -248,9 +255,9 @@ Clear, simple (≈6th-grade readable). Prefer SEO keywords in this order when th
 2. **MAIN BODY** (4–6 paragraphs) — who/what/when/where/why; concrete numbers; one real-world example (e.g. Maria, 62, needs enough final expense coverage for a $10,000–$15,000 funeral)  
 3. **WHAT THIS MEANS FOR YOU** (2 paragraphs) — practical takeaway + action to consider  
 4. **CALL TO ACTION** (1 paragraph) — invite a free consultation at **1-402-440-5438**; no specific prices or product guarantees; warm, not pushy  
-5. **SOURCE CREDIT** (1 line) — for news:  
+5. **SOURCE CREDIT** (required — anti-hallucination) — for news:  
    `Source: [Article Title] | [Website Name] | [URL] | Published: [Date]`  
-   For evergreen: cite public data sources used (NFDA, SSA, FTC, etc.) the same way when applicable.
+   For evergreen: cite **primary authorities** with working URLs (NFDA, FTC, III, BLS, SSA, state DOI, major newsrooms). Never cite unknown blogs or commercial vendor blogs as authority. Never deliver a draft whose only citation is Mejor Vida. If a fact cannot be verified with a reputable link, remove it. On publish, the full-article page must show a **Fuentes / Sources** box with those live links.
 
 ### Style
 
@@ -328,7 +335,12 @@ Execute in order. Do not reorder. Do not skip.
 11. Log the run  
 12. Update history JSON; prune expired entries  
 
-After Julie picks one article → publish via existing blog-build / consumer-blog rules (bilingual, digest + full article as applicable).
+After Julie picks stories → publish via `tools/blog-build-rules.md` + consumer-blog rules:
+
+- Weekly digest = **condensed** (150–250 words per story).
+- Each full-article page = **full emailed draft depth (~600–900 words)**, not a short rewrite.
+- Bilingual ES/EN pages; **index Spanish only** in `sitemap.xml`; English `noindex, follow`.
+- FAQ + pillar internal links on full articles; strip prior-week schema/hreflang/preload leftovers.
 
 ---
 

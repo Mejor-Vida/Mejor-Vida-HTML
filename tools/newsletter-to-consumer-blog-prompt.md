@@ -70,10 +70,13 @@ The weekly page should feel like a **modern online news digest**.
 ### Individual full-article pages (one per story)
 
 - Separate ES + EN HTML files under `blog/` and `en/blog/`
-- Rewrite the story for consumers at greater depth than the digest
-- Answer: Why should I care? Does this affect me? Should I do anything? Is my insurance still okay?
+- **Length:** match the Sunday emailed draft — about **600–900 words** of article prose (full depth). The digest stays condensed (150–250); the full page is the long version.
+- Rewrite for consumers; answer: Why should I care? Does this affect me? Should I do anything? Is my insurance still okay?
 - Soft CTA (quote / schedule / WhatsApp) at the end — not “call your agent network”
 - Unique wording vs. the digest (SEO: avoid near-duplicate pages)
+- Include FAQ (visible + `FAQPage` schema) and internal links to pillar final-expense guides when relevant
+- **Sources:** end every full article with a **Fuentes / Sources** box and working links to **primary authorities** (FTC, NFDA, III, BLS, `.gov`, major press — not unknown blogs or vendor sites). No self-only citations. Drop unsourced claims.
+- **Indexing:** Spanish `index, follow` + sitemap; English `noindex, follow` (compliance only). See `tools/blog-build-rules.md` §1 and §4.
 
 ---
 
@@ -112,17 +115,19 @@ Preserve **accuracy**. Simplify the **explanation**, not the facts.
 
 ---
 
-## SEO (keep)
+## SEO / AEO (keep + Spanish-first)
 
 Do not remove:
 
 - headings
 - images + alt text
-- internal links
-- schema (NewsArticle / Article, BreadcrumbList, ItemList)
+- internal links (digest ↔ full articles ↔ pillar FE guides)
+- schema (NewsArticle / Article, BreadcrumbList; digest ItemList; full-article FAQPage)
 - metadata (title, description, OG)
 
 Only simplify **visible** article content. Update schema/descriptions so they no longer say the post is “for agents.”
+
+When cloning last week’s template: rewrite canonical, dates, preload, hreflang, ItemList, and keywords for **this** week — never leave prior-week leftovers. Full checklist: `tools/blog-build-rules.md` §4.
 
 ---
 

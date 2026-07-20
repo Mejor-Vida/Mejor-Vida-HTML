@@ -8,10 +8,10 @@ alwaysApply: false
 
 When creating or editing **weekly insurance update** posts or the blog index:
 
-1. Follow **`tools/blog-build-rules.md`** end-to-end — especially **§1 Bilingual parity** (paired `data-lang` paragraphs, **two** `<details>` blocks per long briefing with `data-lang="en"` and `data-lang="es"`, full FAQ/conclusion/sidebar in Spanish matching English depth).
+1. Follow **`tools/blog-build-rules.md`** end-to-end — especially digest vs full-article length, Spanish-only indexing, FAQ/internal links, **primary-authority Fuentes/Sources** (no unknown blogs or vendor sites), and **§4 anti-regression** (no prior-week schema/hreflang/preload leftovers).
 
-2. Never ship Spanish as a short summary when English is long-form in the same section.
+2. Digest = 150–250 words/story; full articles = ~600–900 words (email-draft depth). ES/EN structure parity. EN pages `noindex`; sitemap Spanish only.
 
-3. After a new post file: update **`blog.html`** (summary block + new card first in `#blog-feed`) and **`sitemap.xml`** (new URL + `blog.html` lastmod).
+3. After a new post: update **`blog.html`** / **`en/blog.html`** cards and **`sitemap.xml`** (Spanish URLs + `blog.html` lastmod).
 
-Reference post: `blog/weekly-insurance-update-2026-04-12.html`.
+Reference: `blog/weekly-insurance-update-2026-07-19.html` + paired full articles.

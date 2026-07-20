@@ -8,10 +8,10 @@ alwaysApply: false
 
 When building or updating a **public weekly blog** from Julie’s newsletter / industry briefing:
 
-1. Follow **`tools/newsletter-to-consumer-blog-prompt.md`** (source of truth for structure, tone, audience, and SEO).
-2. The weekly URL (`blog/weekly-insurance-update-YYYY-MM-DD.html` + `en/blog/…`) is a **digest**, not the full newsletter.
-3. Each story on the weekly page: keep image + headline → write a **fresh** 150–250 word consumer summary → CTA **Leer el artículo completo** / **Read the full article** linking to a **separate** full-article page.
-4. Full articles must be **rewritten** for families (not cut-paste from the digest or the agent newsletter). No duplicate near-identical pages.
-5. **Never** address agents, IMOs, BGAs, underwriters, or “what this means for producers” on public weekly/digest pages.
-6. Keep SEO assets: headings, images, alt text, internal links, schema, metadata — only simplify **visible** copy.
-7. Mirror ES ↔ EN per `bilingual-es-en-parity.mdc`. Wire `blog.html` / `en/blog.html` + `sitemap.xml`.
+1. Follow **`tools/newsletter-to-consumer-blog-prompt.md`** and **`tools/blog-build-rules.md`** (anti-regression checklist §4).
+2. Weekly URL = **condensed digest** (150–250 words per story), not the full article.
+3. Each digest story: image + headline → fresh summary → CTA to a **separate** full-article page.
+4. Full articles = **email-draft length (~600–900 words)**, rewritten for families — not a short teaser and not a paste of the digest. Include FAQ + pillar internal links + bottom **Fuentes / Sources** box with live **primary-authority** URLs (FTC, NFDA, III, BLS, `.gov`, major press — not unknown blogs or vendor sites; no self-only citations; cut unsourced claims).
+5. **Never** address agents / IMOs / BGAs / producers on public pages. Topics: **final expense, term life, whole life** for families — Spanish indexed, English `noindex`.
+6. Keep SEO assets; strip prior-week schema/hreflang/preload leftovers when cloning templates.
+7. Mirror ES ↔ EN structure. **Index Spanish only** (`sitemap.xml` ES URLs; EN `noindex, follow`). No `hreflang` from ES to noindex EN. Do not sitemap/`index` off-topic archive weeks.

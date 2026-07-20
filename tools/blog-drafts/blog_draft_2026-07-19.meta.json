@@ -1,0 +1,28 @@
+{
+  "today": "2026-07-19",
+  "start": "2026-07-12",
+  "end": "2026-07-18",
+  "articles": [
+    {
+      "headline": "Fake Letters About Unclaimed Life Insurance Are Back \u2014 Protect Your Family",
+      "category": "5 \u2014 Consumer protection / scams",
+      "kind": "news",
+      "url": "https://newsroom.ocfl.net/media-advisories/press-releases/2026/07/scam-alert-orange-county-neighborhood-services-division-warns-residents-about-unclaimed-life-insurance-and-inheritance-scam/",
+      "words": 662
+    },
+    {
+      "headline": "Final Expense Insurance vs Prepaid Funeral Contracts \u2014 Which Protects Your Family Better?",
+      "category": "1 \u2014 Final expense & funeral costs (evergreen)",
+      "kind": "evergreen",
+      "url": "https://www.nfda.org/news/statistics",
+      "words": 647
+    },
+    {
+      "headline": "What Happens When a Term Life Policy Ends \u2014 Options Families Should Know",
+      "category": "2 \u2014 Term life (evergreen)",
+      "kind": "evergreen",
+      "url": "evergreen://term-life-policy-ends",
+      "words": 628
+    }
+  ]
+}
