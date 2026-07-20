@@ -20,8 +20,12 @@
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  padding: 5px 12px;
+  padding: 6px 12px;
   margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap !important;
 }
 
 .nav-about-dropdown-trigger .nav-about-caret {

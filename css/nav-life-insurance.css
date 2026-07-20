@@ -13,16 +13,17 @@
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  max-width: 8.8rem;
+  max-width: none;
   margin: 0;
-  padding: 5px 8px;
+  padding: 6px 12px;
   border: 0;
   background: none;
   font: inherit;
-  font-size: 13px;
-  line-height: 1.15;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.2;
   text-align: center;
-  white-space: normal !important;
+  white-space: nowrap !important;
   cursor: pointer;
 }
 
@@ -35,7 +36,7 @@
 
 .nav-life-dropdown-trigger > span {
   min-width: 0;
-  white-space: normal;
+  white-space: nowrap;
 }
 
 .nav-life-dropdown:hover .nav-life-dropdown-trigger,
@@ -151,74 +152,94 @@
 /* Keep the expanded navigation readable without allowing header items to overlap. */
 @media (min-width: 992px) {
   .header-inner .desktop-nav .nav-link-news-wrap {
-    max-width: 7rem;
-    font-size: 13.5px;
-    line-height: 1.15;
+    max-width: none;
+    font-size: 16px;
+    line-height: 1.2;
     text-align: center;
-    white-space: normal !important;
+    white-space: nowrap !important;
+  }
+
+  /* Spread Life / Funeral / About evenly between logo and CTA */
+  .header-inner > .desktop-nav,
+  .header-inner > .header-actions {
+    display: contents !important;
+  }
+
+  .nav-life-dropdown,
+  .nav-funeral-dropdown,
+  .nav-about-dropdown {
+    flex: 1 1 0;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    min-width: 0;
+  }
+
+  .header-inner > .header-logo-wrap {
+    flex: 0 0 auto;
+  }
+
+  .header-actions .btn-see-prices,
+  .header-actions .desktop-cta,
+  .header-bbb-seal,
+  .hamburger-btn {
+    flex: 0 0 auto;
+  }
+
+  /* BBB is absolutely positioned; reserve space on the row (display:contents drops header-actions padding) */
+  .header-inner {
+    padding-right: 130px;
   }
 }
 
 @media (min-width: 992px) and (max-width: 1399.98px) {
   .header-inner .header-logo-wrap {
-    flex: 0 0 210px !important;
-    width: 210px !important;
+    flex: 0 0 180px !important;
+    width: 180px !important;
     margin-left: -28px !important;
-    margin-right: 0.35rem !important;
+    margin-right: 0.25rem !important;
   }
 
-  .header-inner .desktop-nav {
-    gap: 0.15rem !important;
-    padding-right: 0.25rem !important;
+  /* Keep room for the absolute BBB seal on laptop widths */
+  .header-inner {
+    padding-right: 118px !important;
   }
 
   .header-inner .desktop-nav .nav-link-cm,
   .nav-life-dropdown-trigger,
-  .nav-funeral-dropdown-trigger {
-    padding-right: 5px !important;
-    padding-left: 5px !important;
-    font-size: 12px !important;
-  }
-
-  .nav-life-dropdown-trigger {
-    max-width: 7rem;
-    white-space: normal !important;
+  .nav-funeral-dropdown-trigger,
+  .header-actions .nav-about-dropdown-trigger {
+    padding-right: 8px !important;
+    padding-left: 8px !important;
+    font-size: 14px !important;
+    white-space: nowrap !important;
+    max-width: none;
   }
 
   .header-inner .desktop-nav .nav-link-questions-wrap {
-    max-width: 4.7rem !important;
+    max-width: none !important;
   }
 
   .header-inner .desktop-nav .nav-link-news-wrap {
-    max-width: 6.3rem;
-    font-size: 11.5px !important;
+    max-width: none;
+    font-size: 14px !important;
   }
 
-  .nav-funeral-dropdown-trigger {
-    max-width: 5.8rem;
+  header .header-inner .header-bbb-seal {
+    display: inline-flex !important;
+    width: 100px;
+    height: 40px;
+    max-height: 40px;
   }
 
-  .header-inner > .header-actions {
-    gap: 0.25rem !important;
-    padding-right: 0 !important;
-  }
-
-  header .header-inner .header-actions .header-bbb-seal {
-    display: none !important;
-  }
-
-  .header-actions .nav-about-dropdown-trigger {
-    max-width: 6rem;
-    padding-right: 5px;
-    padding-left: 5px;
-    font-size: 12px;
-    line-height: 1.15;
-    white-space: normal !important;
+  header .header-inner .header-bbb-seal img {
+    width: 100px !important;
+    height: 50px !important;
   }
 
   .header-actions .btn-see-prices {
     padding: 9px 12px;
-    font-size: 12.5px;
+    font-size: 13px;
   }
 }
 

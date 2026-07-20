@@ -151,9 +151,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
 <link href="../css/mvi-assistant-widget.css" rel="stylesheet"/>
 <link href="../css/nav-questions-dropdown.css" rel="stylesheet"/>
-<link href="../css/nav-about-mega.css" rel="stylesheet"/>
-<link href="../css/nav-funeral-resources.css" rel="stylesheet"/>
-<link href="../css/nav-life-insurance.css" rel="stylesheet"/>
+<link href="../css/nav-about-mega.css?v=20260719-nav2" rel="stylesheet"/>
+<link href="../css/nav-funeral-resources.css?v=20260719-nav2" rel="stylesheet"/>
+<link href="../css/nav-life-insurance.css?v=20260719-nav2" rel="stylesheet"/>
 <style>
     /* Smooth scrolling */
     html { scroll-behavior: smooth; }
@@ -1013,7 +1013,7 @@
       min-width: 0 !important;
       margin-left: 0 !important;
       gap: 0.35rem 0.72rem !important;
-      justify-content: flex-start !important;
+      justify-content: space-evenly !important;
       padding-right: 0.5rem;
     }
     .header-inner > .d-flex.align-items-center.gap-2,
@@ -1023,8 +1023,8 @@
     }
     @media (min-width: 992px) {
       .header-inner .desktop-nav .nav-link-cm {
-        padding: 5px 9px !important;
-        font-size: 15px;
+        padding: 6px 12px !important;
+        font-size: 16px;
       }
       .header-inner .desktop-nav .nav-link-cm.nav-link-stack {
         max-width: 5rem;
@@ -1084,8 +1084,13 @@
         transform: translateY(-50%);
         z-index: 3;
       }
-      .header-inner > .header-actions {
-        padding-right: 176px; /* room for absolute BBB seal + gap from quote CTA */
+      .header-inner {
+        padding-right: 130px; /* room for absolute BBB seal (header-actions uses display:contents) */
+      }
+    }
+    @media (min-width: 992px) and (max-width: 1399.98px) {
+      .header-inner {
+        padding-right: 118px !important;
       }
     }
     .header-bbb-seal img {
