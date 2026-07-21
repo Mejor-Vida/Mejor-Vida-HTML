@@ -111,9 +111,9 @@
 }
 
 .navbar-brand img {
-  height: 244px !important;
+  height: 68px !important;
   width: auto !important;
-  max-height: none !important;
+  max-height: 72px !important;
   object-fit: contain;
 }
 
@@ -157,37 +157,35 @@ header.sticky-top > .container {
   display: flex !important;
   align-items: center !important;
   justify-content: flex-start !important;
-  gap: 0;
+  gap: 0.5rem;
   width: 100%;
   overflow: visible !important;
 }
 
 .header-logo-wrap {
-  /* Cap layout width — raw 800×533 logo at 244px tall is ~366px wide and
-     steals the row, causing nav labels to shrink/overlap on laptop widths. */
-  flex: 0 0 232px !important;
-  width: 232px !important;
-  max-width: 232px !important;
+  /* Email-cropped logo assets — natural size, no giant 800×533 crop hack */
+  flex: 0 0 auto !important;
+  width: auto !important;
+  max-width: none !important;
   display: flex !important;
   align-items: center !important;
   justify-content: flex-start !important;
   height: 81px !important;
   padding: 0 !important;
-  margin-left: -28px !important;
-  margin-right: 0.75rem !important;
-  overflow: hidden !important;
+  margin-left: 0 !important;
+  margin-right: 0.35rem !important;
+  overflow: visible !important;
 }
 
 .header-logo {
-  height: 244px !important;
+  height: 68px !important;
   width: auto !important;
-  max-width: none !important;
-  max-height: none !important;
+  max-width: 240px !important;
+  max-height: 72px !important;
   object-fit: contain;
   display: block !important;
-  /* Shift crop so sun + wordmark sit in the 232×81 window */
-  margin-left: -88px !important;
-  transform: translateY(8px) !important;
+  margin: 0 !important;
+  transform: none !important;
 }
 
 .nav-link-cm.nav-link-stack {
@@ -236,19 +234,30 @@ header.sticky-top > .container {
 }
 
 .header-inner .desktop-nav {
-  flex: 0 1 auto !important;
+  flex: 1 1 auto !important;
   min-width: 0 !important;
   margin-left: 0 !important;
-  gap: 0.15rem 0.85rem !important;
+  gap: 0.15rem 0.65rem !important;
   justify-content: flex-start !important;
-  padding-right: 0.5rem;
+  padding-right: 0.25rem;
   overflow: visible !important;
 }
 
 .header-inner > .d-flex.align-items-center.gap-2,
 .header-inner > .header-actions {
+  flex: 0 0 auto !important;
   flex-shrink: 0 !important;
   margin-left: auto !important;
+  gap: 0.5rem !important;
+  align-items: center !important;
+}
+
+.header-inner .btn-see-prices,
+.header-inner .desktop-cta {
+  flex: 0 0 auto !important;
+  flex-shrink: 0 !important;
+  overflow: visible !important;
+  white-space: nowrap !important;
 }
 
 @media (min-width: 992px) {
@@ -307,28 +316,31 @@ header.sticky-top > .container {
 
 .header-bbb-seal {
   display: none;
-  align-items: flex-start;
+  align-items: center;
   flex: 0 0 auto;
   line-height: 0;
   overflow: hidden;
   height: 44px;
   max-height: 44px;
   width: 116px;
+  position: static;
+  transform: none;
 }
 
 @media (min-width: 992px) {
   .header-inner {
     position: relative;
-    padding-right: 130px;
+    padding-right: 0;
   }
 
+  /* Keep BBB in normal flow so it cannot overlap the CTA on laptop widths */
   .header-actions .header-bbb-seal {
     display: inline-flex !important;
-    position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 3;
+    position: static !important;
+    right: auto;
+    top: auto;
+    transform: none !important;
+    z-index: 1;
   }
 }
 
@@ -354,7 +366,7 @@ header.sticky-top > .container {
 }
 
 header.sticky-top .header-logo-wrap {
-  overflow: hidden;
+  overflow: visible;
   max-height: 81px;
 }
 
@@ -429,13 +441,12 @@ header.sticky-top .header-logo-wrap {
   }
 
   .header-logo-wrap {
-    flex: 0 0 168px !important;
-    width: 168px !important;
-    max-width: 168px !important;
-    margin-left: -12px !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
   }
 
   .header-logo {
-    margin-left: -72px !important;
+    height: 56px !important;
+    max-width: 200px !important;
   }
 }

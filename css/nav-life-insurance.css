@@ -159,13 +159,10 @@
     white-space: nowrap !important;
   }
 
-  /*
-   * Flatten nav + actions into one flex row, but size items to content.
-   * flex:1 + min-width:0 was shrinking labels until they overlapped on ~1280px laptops.
-   */
+  /* Keep structural groups: [logo] [life+funeral] … [about+CTA+BBB] */
   .header-inner > .desktop-nav,
   .header-inner > .header-actions {
-    display: contents !important;
+    display: flex !important;
   }
 
   .nav-life-dropdown,
@@ -179,24 +176,19 @@
   }
 
   .header-inner > .header-logo-wrap {
-    flex: 0 0 232px !important;
+    flex: 0 0 auto !important;
   }
 
   .header-actions .btn-see-prices,
-  .header-actions .desktop-cta {
-    flex: 0 0 auto !important;
-    margin-left: auto !important;
-  }
-
+  .header-actions .desktop-cta,
   .header-bbb-seal,
   .hamburger-btn {
-    flex: 0 0 auto;
+    flex: 0 0 auto !important;
   }
 
-  /* BBB is absolutely positioned; reserve space on the row */
   .header-inner {
-    gap: 0.35rem;
-    padding-right: 130px;
+    gap: 0.5rem;
+    padding-right: 0;
   }
 
   /* Same logo + nav sizing on all desktop widths (do not shrink under 1400px) */
@@ -204,7 +196,7 @@
   .nav-life-dropdown-trigger,
   .nav-funeral-dropdown-trigger,
   .nav-about-dropdown-trigger {
-    padding: 6px 14px !important;
+    padding: 6px 12px !important;
     font-size: 16px !important;
     font-weight: 600;
     white-space: nowrap !important;
@@ -214,6 +206,8 @@
 
   header .header-inner .header-bbb-seal {
     display: inline-flex !important;
+    position: static !important;
+    transform: none !important;
   }
 }
 
