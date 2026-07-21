@@ -1083,6 +1083,11 @@
   function applyLandingQueryParams() {
     try {
       var p = new URLSearchParams(location.search);
+      var g = (p.get("gender") || "").toLowerCase();
+      if (g === "male" || g === "female") {
+        state.gender = g;
+        answered.gender = true;
+      }
       if (p.get("from") !== "landing") return;
       var nm = document.getElementById("ql-fullname");
       var em = document.getElementById("ql-email");

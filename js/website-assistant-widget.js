@@ -118,6 +118,8 @@
       openChat: "Open chat assistant",
       closeChat: "Close",
       minimize: "Minimize",
+      expand: "Expand chat",
+      shrink: "Shrink chat",
       dragHint: "Drag header to move the chat window · Double-click header to dock above the button",
       suggestedHeading: "Try asking:",
       s1: "What is final expense insurance?",
@@ -136,6 +138,8 @@
       openChat: "Abrir asistente de chat",
       closeChat: "Cerrar",
       minimize: "Minimizar",
+      expand: "Ampliar chat",
+      shrink: "Reducir chat",
       dragHint: "Arrastra el encabezado para mover la ventana · Doble clic para acoplar sobre el botón",
       suggestedHeading: "Prueba preguntar:",
       s1: "¿Qué es un seguro de gastos finales?",
@@ -161,6 +165,7 @@
       messages: loadJson(STORAGE_MESSAGES, []),
       sessionId: sessionStorage.getItem(STORAGE_SESSION) || "",
       unread: 0,
+      expanded: false,
     };
 
     if (!state.sessionId) {
@@ -191,7 +196,6 @@
       '        <div class="mvi-assist-avatar-host-open" data-mvi-avatar-host-open></div>' +
       '        <div class="mvi-assist-header-text">' +
       '          <div class="mvi-assist-title" data-mvi-title></div>' +
-      '          <div class="mvi-assist-subtitle small" data-mvi-subtitle></div>' +
       "        </div>" +
       "      </div>" +
       '      <div class="mvi-assist-header-actions">' +
@@ -199,6 +203,9 @@
       '          <button type="button" class="mvi-assist-lang-btn" data-mvi-lang-pick="es" aria-pressed="false">ES</button>' +
       '          <button type="button" class="mvi-assist-lang-btn" data-mvi-lang-pick="en" aria-pressed="false">EN</button>' +
       "        </div>" +
+      '        <button type="button" class="mvi-assist-expand btn btn-sm" data-mvi-expand aria-pressed="false">' +
+      '          <i class="fas fa-expand" data-mvi-expand-icon aria-hidden="true"></i>' +
+      "        </button>" +
       '        <button type="button" class="mvi-assist-close btn btn-sm" data-mvi-close>&times;</button>' +
       "      </div>" +
       "    </div>" +
@@ -221,6 +228,8 @@
     var elLangEs = root.querySelector('[data-mvi-lang-pick="es"]');
     var elLangEn = root.querySelector('[data-mvi-lang-pick="en"]');
     var elClose = root.querySelector("[data-mvi-close]");
+    var elExpand = root.querySelector("[data-mvi-expand]");
+    var elExpandIcon = root.querySelector("[data-mvi-expand-icon]");
     var elMessages = root.querySelector("[data-mvi-messages]");
     var elSuggested = root.querySelector("[data-mvi-suggested]");
     var elInput = root.querySelector("[data-mvi-input]");
@@ -282,6 +291,36 @@
       panelPositionCustom = false;
     }
 
+    function syncExpandChrome() {
+      var t = tr();
+      var expanded = !!state.expanded;
+      panel.classList.toggle("mvi-assist-panel--expanded", expanded);
+      if (elExpand) {
+        elExpand.setAttribute("aria-pressed", expanded ? "true" : "false");
+        elExpand.setAttribute("aria-label", expanded ? t.shrink : t.expand);
+        elExpand.setAttribute("title", expanded ? t.shrink : t.expand);
+      }
+      if (elExpandIcon) {
+        elExpandIcon.className = expanded ? "fas fa-compress" : "fas fa-expand";
+      }
+    }
+
+    function setExpanded(expanded) {
+      state.expanded = !!expanded;
+      syncExpandChrome();
+      if (panelPositionCustom) {
+        var r = panel.getBoundingClientRect();
+        panel.style.width = "";
+        panel.style.height = "";
+        // Let CSS size the panel, then lock size for drag positioning.
+        var w = panel.offsetWidth;
+        var h = panel.offsetHeight;
+        panel.style.width = Math.round(w) + "px";
+        panel.style.height = Math.round(h) + "px";
+        applyPanelPosition(r.left, r.top);
+      }
+    }
+
     function tr() {
       return T[state.language] || T.English;
     }
@@ -295,7 +334,7 @@
     function applyChromeStrings() {
       var t = tr();
       elTitle.textContent = t.title;
-      elSub.textContent = t.subtitle;
+      if (elSub) elSub.textContent = "";
       elInput.placeholder = t.placeholder;
       elSend.textContent = t.send;
       elInput.setAttribute("aria-label", t.placeholder);
@@ -315,6 +354,7 @@
       var avOpenEl = root.querySelector("[data-mvi-avatar-open]");
       if (avOpenEl) avOpenEl.setAttribute("aria-label", t.openChat);
       elClose.setAttribute("aria-label", t.closeChat);
+      syncExpandChrome();
       if (elHeader) elHeader.setAttribute("title", t.dragHint);
       sessionStorage.setItem(STORAGE_LANG, state.language);
     }
@@ -541,6 +581,12 @@
     elClose.addEventListener("click", function () {
       setOpen(false);
     });
+    if (elExpand) {
+      elExpand.addEventListener("click", function (e) {
+        e.stopPropagation();
+        setExpanded(!state.expanded);
+      });
+    }
     function pickChatLang(code) {
       window.dispatchEvent(new CustomEvent("mvi-assistant-language", { detail: { code: code } }));
     }

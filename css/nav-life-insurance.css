@@ -61,12 +61,13 @@
   left: 50%;
   z-index: 1400;
   box-sizing: border-box;
-  width: min(1100px, calc(100vw - 2rem));
+  width: min(1140px, calc(100vw - 2rem));
   min-height: 0;
   padding: 0;
   transform: translateX(-50%);
-  grid-template-columns: minmax(170px, 0.7fr) minmax(0, 1.35fr) minmax(220px, 0.95fr);
-  overflow: hidden;
+  grid-template-columns: minmax(240px, 1.05fr) minmax(0, 2.15fr);
+  /* visible so the hover bridge above the panel can receive pointer events */
+  overflow: visible;
   background: #fff;
   border-radius: 0.65rem;
   box-shadow:
@@ -80,30 +81,44 @@
   display: grid;
 }
 
+/*
+ * Hover bridge across the blue contact bar.
+ * Full-viewport width so a diagonal path from the nav label to the
+ * left category rail stays inside the open menu hit-area.
+ */
 .nav-life-mega::before {
   content: "";
   position: absolute;
-  top: -2.85rem;
-  right: 0;
-  left: 0;
-  height: 2.85rem;
+  top: -3.25rem;
+  left: 50%;
+  z-index: 0;
+  width: 100vw;
+  height: 3.25rem;
+  transform: translateX(-50%);
+  pointer-events: auto;
 }
 
 .nav-life-categories {
   padding: 0.9rem 0;
   background: #f0f7ff;
   border-right: 1px solid #dbe5ef;
+  border-radius: 0.65rem 0 0 0.65rem;
 }
 
 .nav-life-category {
   display: flex;
   align-items: center;
   gap: 0.65rem;
+  width: 100%;
   padding: 0.85rem 1rem;
+  border: 0;
+  background: transparent;
   color: #1a365d;
   font-size: 0.88rem;
   font-weight: 750;
   line-height: 1.25;
+  text-align: left;
+  cursor: pointer;
 }
 
 .nav-life-category.is-active {
@@ -115,6 +130,52 @@
 .nav-life-category i {
   color: #0d47a1;
   font-size: 0.95rem;
+}
+
+.nav-life-panel {
+  display: none;
+  grid-template-columns: minmax(0, 1.35fr) minmax(220px, 0.95fr);
+  min-width: 0;
+  min-height: 100%;
+  align-items: stretch;
+}
+
+.nav-life-panel.is-active {
+  display: grid;
+  border-radius: 0 0.65rem 0.65rem 0;
+}
+
+.nav-life-panel[hidden] {
+  display: none !important;
+}
+
+.nav-life-panel[data-life-panel="cost"].is-active {
+  grid-template-columns: minmax(180px, 1fr) minmax(280px, 1.25fr);
+  min-height: 280px;
+}
+
+.nav-life-cost-middle {
+  min-height: 100%;
+  border-right: 1px solid #e8eef5;
+  background: #fafbfc;
+}
+
+.nav-life-panel[data-life-panel="cost"] .nav-life-feature--cm {
+  min-height: 100%;
+  height: calc(100% - 1.5rem);
+  margin: 0.75rem;
+}
+
+.nav-life-options-subhead {
+  margin: 1rem 0 0.45rem;
+  color: #1a365d;
+  font-size: 0.95rem;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.nav-life-options-grid--amounts {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .nav-life-options {
@@ -161,20 +222,23 @@
   margin: 0.75rem;
   border-radius: 0.55rem;
   text-decoration: none;
-  background: #0d47a1;
+  background: #0b3a7a;
   color: #fff;
-  height: 148px;
-  min-height: 148px;
-  max-height: 148px;
+  /* Stretch with the taller options column */
+  align-self: stretch;
+  box-sizing: border-box;
+  height: calc(100% - 1.5rem);
+  min-height: 220px;
+  max-height: none;
 }
 
 .nav-life-feature-copy {
   position: absolute;
-  z-index: 2;
+  z-index: 3;
   top: 0;
   right: 0;
   left: 0;
-  padding: 0.7rem 0.75rem 0.55rem;
+  padding: 0.85rem 0.85rem 0.65rem;
 }
 
 .nav-life-feature-copy h3 {
@@ -183,7 +247,7 @@
   font-size: 0.95rem;
   font-weight: 800;
   line-height: 1.2;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
+  text-shadow: 0 1px 8px rgba(11, 58, 122, 0.65);
 }
 
 .nav-life-feature-copy p {
@@ -191,11 +255,12 @@
   color: rgba(255, 255, 255, 0.95);
   font-size: 0.75rem;
   line-height: 1.35;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  text-shadow: 0 1px 8px rgba(11, 58, 122, 0.55);
 }
 
 .nav-life-feature-media {
   position: absolute;
+  z-index: 0;
   inset: 0;
   margin: 0;
   min-height: 0;
@@ -203,15 +268,37 @@
   overflow: hidden;
 }
 
+/* Soft wash so the photo reads as card background, not a framed image */
 .nav-life-feature-media::before {
   content: "";
   position: absolute;
   z-index: 1;
-  top: 0;
-  right: 0;
-  left: 0;
-  height: 4.25rem;
-  background: linear-gradient(180deg, rgba(11, 58, 122, 0.88) 0%, rgba(11, 58, 122, 0.45) 60%, rgba(11, 58, 122, 0) 100%);
+  inset: 0;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(11, 58, 122, 0.94) 0%,
+      rgba(11, 58, 122, 0.72) 22%,
+      rgba(11, 58, 122, 0.28) 48%,
+      rgba(11, 58, 122, 0.2) 68%,
+      rgba(11, 58, 122, 0.55) 100%
+    ),
+    linear-gradient(
+      90deg,
+      rgba(11, 58, 122, 0.45) 0%,
+      transparent 32%,
+      transparent 68%,
+      rgba(11, 58, 122, 0.35) 100%
+    );
+  pointer-events: none;
+}
+
+.nav-life-feature-media::after {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  box-shadow: inset 0 0 42px 18px rgba(11, 58, 122, 0.55);
   pointer-events: none;
 }
 
@@ -220,13 +307,121 @@
   display: block;
   width: 100%;
   height: 100%;
-  min-height: 148px;
+  min-height: 100%;
   object-fit: cover;
-  object-position: center 28%;
+  object-position: center 18%;
+  transform: scale(1.08);
+  transform-origin: center top;
+  filter: saturate(0.88) contrast(1.05) brightness(0.95);
 }
 
 .nav-life-feature:hover {
-  filter: brightness(1.04);
+  filter: brightness(1.03);
+}
+
+.nav-life-feature:hover .nav-life-feature-media img {
+  transform: scale(1.12);
+  transition: transform 0.35s ease;
+}
+
+/* Cost panel CTA — natural portrait + bottom fade */
+.nav-life-feature--cm {
+  background: #2a62a8;
+  filter: none;
+}
+
+.nav-life-feature--cm:hover {
+  filter: none;
+}
+
+/* Kill the default dark washes — fade is handled by the mask below */
+.nav-life-feature--cm .nav-life-feature-media::before,
+.nav-life-feature--cm .nav-life-feature-media::after {
+  content: none;
+  display: none;
+}
+
+.nav-life-feature--cm .nav-life-feature-media {
+  /* Solid at top → translucent toward bottom */
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 40%,
+    rgba(0, 0, 0, 0.5) 70%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 40%,
+    rgba(0, 0, 0, 0.5) 70%,
+    transparent 100%
+  );
+}
+
+.nav-life-feature--cm .nav-life-feature-media picture {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  filter: none;
+}
+
+/* Head near the top of the card, with a little clearance (no source headroom) */
+.nav-life-feature--cm .nav-life-feature-media img {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 112%;
+  height: 122%;
+  max-width: none;
+  object-fit: cover;
+  object-position: center top;
+  transform: translate(-50%, 2%);
+  filter: none !important;
+  opacity: 1;
+  transition: transform 0.35s ease;
+}
+
+.nav-life-feature.nav-life-feature--cm:hover .nav-life-feature-media img {
+  transform: translate(-50%, 2%) scale(1.02);
+  filter: none !important;
+}
+
+/* Copy — vertically centered in the card */
+.nav-life-feature--cm .nav-life-feature-copy {
+  top: 50%;
+  right: 0;
+  bottom: auto;
+  left: 0;
+  padding: 0 1.35rem;
+  text-align: center;
+  transform: translateY(-50%);
+}
+
+.nav-life-feature--cm .nav-life-feature-copy h3 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.15rem, 1.6vw, 1.45rem);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  text-shadow: 0 2px 14px rgba(11, 58, 122, 0.55);
+}
+
+.nav-life-feature--cm .nav-life-feature-copy p {
+  margin: 0.45rem auto 0;
+  max-width: 16rem;
+  font-size: 0.84rem;
+  line-height: 1.4;
+  text-shadow: 0 1px 10px rgba(11, 58, 122, 0.45);
+}
+
+.nav-life-feature-em {
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+  font-weight: 700;
 }
 
 /* Keep the expanded navigation readable without allowing header items to overlap. */

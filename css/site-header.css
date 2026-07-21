@@ -172,7 +172,8 @@ header.sticky-top > .container {
   justify-content: flex-start !important;
   height: 81px !important;
   padding: 0 !important;
-  margin-left: -28px !important;
+  /* Keep wrap on-screen — negative margin was clipping the left leaf at the viewport edge */
+  margin-left: 0 !important;
   margin-right: 0.5rem !important;
   overflow: hidden !important;
 }
@@ -184,7 +185,8 @@ header.sticky-top > .container {
   max-height: none !important;
   object-fit: contain;
   display: block !important;
-  margin-left: -88px !important;
+  /* Crop empty padding only — leave the left leaf tip intact */
+  margin-left: -72px !important;
   transform: translateY(8px) !important;
 }
 
@@ -299,7 +301,7 @@ header.sticky-top > .container {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  background: #25d366;
+  background: #0b3a7a;
   color: #fff !important;
   font-weight: 700;
   font-size: 0.875rem;
@@ -310,7 +312,7 @@ header.sticky-top > .container {
 }
 
 .header-whatsapp-btn:hover {
-  background: #1da851;
+  background: #0d47a1;
   color: #fff !important;
 }
 
@@ -447,14 +449,14 @@ header.sticky-top .header-logo-wrap {
     flex: 0 0 168px !important;
     width: 168px !important;
     max-width: 168px !important;
-    margin-left: -12px !important;
+    margin-left: 0 !important;
     margin-right: 0 !important;
     overflow: hidden !important;
   }
 
   .header-logo {
     height: 200px !important;
-    margin-left: -72px !important;
+    margin-left: -58px !important;
     max-width: none !important;
   }
 }

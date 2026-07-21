@@ -53,6 +53,7 @@ const JOBS = [
   { src: "gastos-finales-ads-v2/img/objective-calculator.png", maxWidth: 320, maxHeight: 320, keepPng: true, outBase: "objective-calculator" },
   { src: "gastos-finales-ads-v2/img/objective-schedule.png", maxWidth: 320, maxHeight: 320, keepPng: true, outBase: "objective-schedule" },
   { src: "img/landing-v3-quote-cta-hero.jpg", maxWidth: 640, maxHeight: 640, outBase: "landing-v3-quote-cta-hero" },
+  { src: "img/lip-hero-sunrise.jpg", maxWidth: 1600, maxHeight: 1066, outBase: "lip-hero-sunrise" },
   { src: "img/3-1-2026-Blog.png", maxWidth: 1200, maxHeight: 675 },
   { src: "img/2-22-2026-Blog.png", maxWidth: 1200, maxHeight: 675 },
   { src: "img/2-16-2026-Blog.png", maxWidth: 1200, maxHeight: 675 },

@@ -16,7 +16,7 @@ small,
 }
 
 /* Floating website assistant — session-only client state; POST /api/website-chat */
-/* Below Bootstrap modal/backdrop (~1050–1055). */
+/* Above sticky site header (1060); below mega menus (~1400). */
 #mvi-assistant-root {
   /* Launcher avatar dimensions (used by .mvi-assist-avatar-shell / header slot) */
   --mvi-avatar-w-compact: 5.5rem;
@@ -24,7 +24,7 @@ small,
   --mvi-avatar-w-open: 3.5rem;
   --mvi-avatar-h-open: 5.25rem;
   position: fixed;
-  z-index: 1048;
+  z-index: 1085;
   bottom: max(1rem, calc(env(safe-area-inset-bottom, 0px) + 0.75rem));
   right: max(1rem, env(safe-area-inset-right, 0px));
   font-family: inherit;
@@ -116,13 +116,27 @@ small,
 .mvi-assist-panel.mvi-assist-panel--dragging {
   box-shadow: 0 20px 56px rgba(26, 54, 93, 0.28), 0 0 0 1px rgba(26, 54, 93, 0.1);
 }
+/* Grow up from the FAB; cap so the panel stays fully inside the viewport */
+.mvi-assist-panel.mvi-assist-panel--expanded {
+  width: min(540px, calc(100vw - 1.5rem));
+  max-width: min(540px, calc(100vw - 1.5rem));
+  height: min(640px, calc(100vh - 9rem));
+  max-height: min(640px, calc(100vh - 9rem));
+  height: min(640px, calc(100dvh - 9rem));
+  max-height: min(640px, calc(100dvh - 9rem));
+}
+.mvi-assist-panel.mvi-assist-panel--custom-pos.mvi-assist-panel--expanded {
+  max-width: min(540px, calc(100vw - 1.5rem));
+  max-height: min(640px, calc(100vh - 1.5rem));
+  max-height: min(640px, calc(100dvh - 1.5rem));
+}
 .mvi-assist-header {
   flex-shrink: 0;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
   gap: 0.5rem;
-  padding: 0.85rem 1rem;
+  padding: 0.55rem 0.85rem;
   background: linear-gradient(135deg, #1a365d 0%, #2c5282 100%);
   color: #fff;
   cursor: grab;
@@ -158,11 +172,10 @@ small,
 .mvi-assist-title {
   font-weight: 700;
   font-size: 0.95rem;
-  line-height: 1.25;
+  line-height: 1.2;
 }
 .mvi-assist-subtitle {
-  opacity: 0.85;
-  margin-top: 0.15rem;
+  display: none !important;
 }
 .mvi-assist-header-actions {
   display: flex;
@@ -354,13 +367,20 @@ small,
   outline: 2px solid #93c5fd;
   outline-offset: 2px;
 }
-#mvi-assistant-root .mvi-assist-close.btn {
+#mvi-assistant-root .mvi-assist-close.btn,
+#mvi-assistant-root .mvi-assist-expand.btn {
   font-size: 1.125rem;
   padding: 0.125rem 0.45rem;
   min-width: 2rem;
   border-radius: 6px;
   cursor: pointer;
   line-height: 1.25;
+}
+#mvi-assistant-root .mvi-assist-expand.btn {
+  font-size: 0.85rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 #mvi-assistant-root .mvi-assist-more.btn-link {
   background: none;

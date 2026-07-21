@@ -58,7 +58,8 @@
 
     function scheduleClose() {
       clearTimeout(hoverCloseTimer);
-      hoverCloseTimer = setTimeout(closeMenu, 180);
+      /* Longer grace so diagonal moves into wide megas don't drop the menu */
+      hoverCloseTimer = setTimeout(closeMenu, 320);
     }
 
     trigger.addEventListener("click", function (e) {
@@ -90,8 +91,42 @@
     });
   }
 
+  function bindLifePanels() {
+    document.querySelectorAll(".nav-life-mega").forEach(function (mega) {
+      var cats = mega.querySelectorAll("[data-life-panel].nav-life-category");
+      var panels = mega.querySelectorAll(".nav-life-panel[data-life-panel]");
+      if (!cats.length || !panels.length) return;
+
+      function activate(id) {
+        cats.forEach(function (c) {
+          var on = c.getAttribute("data-life-panel") === id;
+          c.classList.toggle("is-active", on);
+          c.setAttribute("aria-pressed", on ? "true" : "false");
+        });
+        panels.forEach(function (p) {
+          var on = p.getAttribute("data-life-panel") === id;
+          p.classList.toggle("is-active", on);
+          if (on) p.removeAttribute("hidden");
+          else p.setAttribute("hidden", "");
+        });
+      }
+
+      cats.forEach(function (cat) {
+        cat.addEventListener("click", function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          activate(cat.getAttribute("data-life-panel"));
+        });
+        cat.addEventListener("mouseenter", function () {
+          activate(cat.getAttribute("data-life-panel"));
+        });
+      });
+    });
+  }
+
   function init() {
     bindOpenChatTriggers();
+    bindLifePanels();
     document.querySelectorAll(".nav-questions-dropdown-trigger").forEach(function (trigger) {
       bindDropdown(trigger, ".nav-questions-dropdown", ".nav-questions-dropdown-menu");
     });

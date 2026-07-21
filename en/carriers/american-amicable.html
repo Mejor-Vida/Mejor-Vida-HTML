@@ -18,10 +18,12 @@
 <link href="../favicon.ico" rel="icon" type="image/x-icon"/>
 <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
   <link href="../../css/quote-flow-shared.css" rel="stylesheet" />
-  <link href="../../css/quote-flow-shared.css?v=20260721-life-overlay" rel="stylesheet" />
+  <link href="../../css/quote-flow-shared.css?v=20260721-cm-low3" rel="stylesheet" />
+  <link href="../../css/quote-flow-shared.css?v=20260721-cm-low3" rel="stylesheet" />
+  <link href="../../css/quote-flow-shared.css?v=20260721-cm-low3" rel="stylesheet" />
 <link href="../../css/site-footer.css?v=20260721-lip-page" rel="stylesheet"/>
-<link href="../css/quote-flow-shared.css?v=20260721-life-overlay" rel="stylesheet"/>
-<link href="../css/mvi-assistant-widget.css" rel="stylesheet"/>
+<link href="../css/quote-flow-shared.css?v=20260721-cm-low3" rel="stylesheet"/>
+<link href="../css/mvi-assistant-widget.css?v=20260721-chat-z" rel="stylesheet"/>
 <link href="../../css/fontawesome-mvi.min.css" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -95,11 +97,16 @@
             </button>
             <div class="nav-life-mega" id="nav-life-mega" role="region" aria-label="Life and Final Expense Insurance">
               <div class="nav-life-categories">
-                <div class="nav-life-category is-active">
+                <button type="button" class="nav-life-category is-active" data-life-panel="coverage" aria-pressed="true">
                   <i class="fas fa-umbrella" aria-hidden="true"></i>
                   <span>Coverage Options</span>
-                </div>
+                </button>
+                <button type="button" class="nav-life-category" data-life-panel="cost" aria-pressed="false">
+                  <i class="fas fa-dollar-sign" aria-hidden="true"></i>
+                  <span>Insurance Cost</span>
+                </button>
               </div>
+              <div class="nav-life-panel is-active" data-life-panel="coverage">
               <div class="nav-life-options">
                 <h3>Policy Types</h3>
                 <div class="nav-life-options-grid">
@@ -126,6 +133,29 @@
                   </picture>
                 </div>
               </a>
+              </div>
+              <div class="nav-life-panel" data-life-panel="cost" hidden>
+              <div class="nav-life-cost-middle" data-nav-cost-slot aria-hidden="true"></div>
+              <a class="nav-life-feature nav-life-feature--cm" href="life-insurance-cost.html">
+                <div class="nav-life-feature-media" aria-hidden="true">
+                  <picture>
+                    <source type="image/webp" srcset="../../img/opt/business-man.webp?v=20260721-cutout" />
+                    <img
+                      src="../../img/opt/business-man.png?v=20260721-cutout"
+                      alt=""
+                      width="681"
+                      height="1024"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </picture>
+                </div>
+                <div class="nav-life-feature-copy">
+                  <h3>Getting Affordable Coverage</h3>
+                  <p>Learn how much <span class="nav-life-feature-em">life insurance costs</span> based on policy type and coverage amount.</p>
+                </div>
+              </a>
+              </div>
             </div>
           </div>
           <div class="nav-funeral-dropdown">
@@ -224,7 +254,7 @@
       <a href="../blog.html" class="mobile-menu-link">Weekly Insurance News</a>
       <a href="../../guias-gastos-finales.html" class="mobile-menu-link">Final expense guides</a>
       <a href="../final-expense-estimator.html" class="mobile-menu-link fw-bold" style="color:#0D47A1;">Final Expense Calculator</a>
-      <a href="https://wa.me/14024405438?text=Hello%2C%20I%20am%20interested%20in%20learning%20about%20final%20expense%20insurance." target="_blank" rel="noopener" class="mobile-menu-link fw-bold" style="color:#1D9E53;"><i class="fab fa-whatsapp me-2"></i>WhatsApp (recommended)</a>
+      <a href="https://wa.me/14024405438?text=Hello%2C%20I%20am%20interested%20in%20learning%20about%20final%20expense%20insurance." target="_blank" rel="noopener" class="mobile-menu-link fw-bold" style="color:#0b3a7a;"><i class="fab fa-whatsapp me-2"></i>WhatsApp (recommended)</a>
       <a href="../quote.html" class="mobile-menu-link fw-bold" style="color:#0D47A1;"><i class="fas fa-file-invoice-dollar me-2"></i>Free online quote</a>
       <a href="../../index.html" class="mobile-menu-link small text-muted">Español</a>
       <p class="mobile-menu-link small text-muted mb-0 px-2">Current client? Phone line: <a href="tel:+14024405438" class="text-decoration-none">402-440-5438</a></p>
@@ -364,7 +394,7 @@
 <p class="mb-4 text-white-50">Julie can review Golden Solution, Senior Choice, and other options she offers — free quote, no obligation.</p>
 <div class="d-flex flex-column flex-sm-row justify-content-center gap-2">
 <a class="btn btn-primary-gold px-4 py-3 rounded fw-bold d-inline-flex align-items-center justify-content-center" href="quote.html"><i class="fas fa-file-invoice-dollar me-2"></i>Get a Free Quote</a>
-<a class="btn px-4 py-3 rounded fw-bold d-inline-flex align-items-center justify-content-center" href="https://wa.me/14024405438?text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20seguro%20de%20gastos%20finales." rel="noopener" style="background:#25D366;border-color:#25D366;color:#fff;" target="_blank"><i class="fab fa-whatsapp me-2"></i><span>Contact Julie via WhatsApp</span></a>
+<a class="btn px-4 py-3 rounded fw-bold d-inline-flex align-items-center justify-content-center" href="https://wa.me/14024405438?text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20seguro%20de%20gastos%20finales." rel="noopener" style="background:#0b3a7a;border-color:#0b3a7a;color:#fff;" target="_blank"><i class="fab fa-whatsapp me-2"></i><span>Contact Julie via WhatsApp</span></a>
 </div>
 </div>
 </section>
@@ -436,8 +466,8 @@
 <div data-api-url="/api/website-chat" data-mvi-avatar-base="../img/mvi-chat-avatar" id="mvi-assistant-root"></div>
 <script defer src="../bootstrap/js/bootstrap.bundle.min.js"></script>
 
-<script defer src="../../js/mvi-nav-questions.js"></script>
-<script defer="" src="../js/website-assistant-widget.js"></script>
+<script defer src="../../js/mvi-nav-questions.js?v=20260721-hover-bridge"></script>
+<script defer="" src="../js/website-assistant-widget.js?v=20260721-chat-z"></script>
 
   <script>
     (function () {

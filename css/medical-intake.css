@@ -113,7 +113,7 @@ body.mvi-medical-intake-page {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  background: #25d366;
+  background: #0b3a7a;
   color: #fff;
   font-weight: 700;
   font-size: 0.875rem;
@@ -124,7 +124,7 @@ body.mvi-medical-intake-page {
   transition: background 0.15s ease;
 }
 .mi-header-wa:hover {
-  background: #1da851;
+  background: #0d47a1;
   color: #fff;
 }
 @media (max-width: 720px) {

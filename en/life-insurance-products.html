@@ -19,10 +19,10 @@
 <link href="https://www.mejorvidainsurance.com/tipos-seguro-vida.html" hreflang="x-default" rel="alternate"/>
 <link href="../favicon.ico" rel="icon" type="image/x-icon"/>
 <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
-<link href="../css/quote-flow-shared.css?v=20260721-life-overlay" rel="stylesheet"/>
+<link href="../css/quote-flow-shared.css?v=20260721-cm-low3" rel="stylesheet"/>
 <link href="../css/site-footer.css?v=20260721-lip-page" rel="stylesheet"/>
-<link href="../css/life-insurance-products.css?v=20260721-blue-table" rel="stylesheet"/>
-<link href="../css/mvi-assistant-widget.css" rel="stylesheet"/>
+<link href="../css/life-insurance-products.css?v=20260721-hero-art" rel="stylesheet"/>
+<link href="../css/mvi-assistant-widget.css?v=20260721-chat-z" rel="stylesheet"/>
 <link href="../css/fontawesome-mvi.min.css" rel="stylesheet"/>
 <style>body { font-family: Inter, system-ui, -apple-system, sans-serif; }</style>
 </head>
@@ -46,11 +46,16 @@
             </button>
             <div class="nav-life-mega" id="nav-life-mega" role="region" aria-label="Life and Final Expense Insurance">
               <div class="nav-life-categories">
-                <div class="nav-life-category is-active">
+                <button type="button" class="nav-life-category is-active" data-life-panel="coverage" aria-pressed="true">
                   <i class="fas fa-umbrella" aria-hidden="true"></i>
                   <span>Coverage Options</span>
-                </div>
+                </button>
+                <button type="button" class="nav-life-category" data-life-panel="cost" aria-pressed="false">
+                  <i class="fas fa-dollar-sign" aria-hidden="true"></i>
+                  <span>Insurance Cost</span>
+                </button>
               </div>
+              <div class="nav-life-panel is-active" data-life-panel="coverage">
               <div class="nav-life-options">
                 <h3>Policy Types</h3>
                 <div class="nav-life-options-grid">
@@ -77,6 +82,29 @@
                   </picture>
                 </div>
               </a>
+              </div>
+              <div class="nav-life-panel" data-life-panel="cost" hidden>
+              <div class="nav-life-cost-middle" data-nav-cost-slot aria-hidden="true"></div>
+              <a class="nav-life-feature nav-life-feature--cm" href="life-insurance-cost.html">
+                <div class="nav-life-feature-media" aria-hidden="true">
+                  <picture>
+                    <source type="image/webp" srcset="../img/opt/business-man.webp?v=20260721-cutout" />
+                    <img
+                      src="../img/opt/business-man.png?v=20260721-cutout"
+                      alt=""
+                      width="681"
+                      height="1024"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </picture>
+                </div>
+                <div class="nav-life-feature-copy">
+                  <h3>Getting Affordable Coverage</h3>
+                  <p>Learn how much <span class="nav-life-feature-em">life insurance costs</span> based on policy type and coverage amount.</p>
+                </div>
+              </a>
+              </div>
             </div>
           </div>
           <div class="nav-funeral-dropdown">
@@ -175,7 +203,7 @@
       <a href="blog.html" class="mobile-menu-link">Weekly Insurance News</a>
       <a href="../guias-gastos-finales.html" class="mobile-menu-link">Final expense guides</a>
       <a href="final-expense-estimator.html" class="mobile-menu-link fw-bold" style="color:#0D47A1;">Final Expense Calculator</a>
-      <a href="https://wa.me/14024405438?text=Hello%2C%20I%20am%20interested%20in%20learning%20about%20final%20expense%20insurance." target="_blank" rel="noopener" class="mobile-menu-link fw-bold" style="color:#1D9E53;"><i class="fab fa-whatsapp me-2"></i>WhatsApp (recommended)</a>
+      <a href="https://wa.me/14024405438?text=Hello%2C%20I%20am%20interested%20in%20learning%20about%20final%20expense%20insurance." target="_blank" rel="noopener" class="mobile-menu-link fw-bold" style="color:#0b3a7a;"><i class="fab fa-whatsapp me-2"></i>WhatsApp (recommended)</a>
       <a href="quote.html" class="mobile-menu-link fw-bold" style="color:#0D47A1;"><i class="fas fa-file-invoice-dollar me-2"></i>Free online quote</a>
       <a href="../index.html" class="mobile-menu-link small text-muted">Español</a>
       <p class="mobile-menu-link small text-muted mb-0 px-2">Current client? Phone line: <a href="tel:+14024405438" class="text-decoration-none">402-440-5438</a></p>
@@ -186,10 +214,18 @@
 <main>
 
 <section class="lip-hero">
-<div class="container">
+<div class="lip-hero-media" aria-hidden="true">
+<picture>
+<source srcset="../img/opt/lip-hero-sunrise.webp" type="image/webp"/>
+<img src="../img/opt/lip-hero-sunrise.jpg" alt="" width="1024" height="682" decoding="async" fetchpriority="high"/>
+</picture>
+</div>
+<div class="container lip-hero-inner">
+<div class="lip-hero-copy">
 <p class="lip-breadcrumb"><a href="index.html">Home</a> › Life insurance products</p>
 <h1>Types of Life Insurance Explained</h1>
 <p class="lip-hero-lead">There are three main families of life insurance: whole life, term life, and (in some markets) universal life. There are also many specialties—final expense, cremation, guaranteed acceptance, mortgage protection, and more.</p><p class="lip-hero-lead">Each type has its own features, benefits, and cost. Ultimately, all types pay a cash death benefit to beneficiaries, who can use the money for funeral costs, medical bills, income replacement, or other needs.</p>
+</div>
 </div>
 </section>
 
@@ -212,16 +248,16 @@
 <tr>
 <th scope="row"><a href="#whole-life">Whole Life Insurance</a></th>
 <td>Forever</td>
-<td>$50K+</td>
-<td>85</td>
+<td>$1K–$100K</td>
+<td>89</td>
 <td>Yes</td>
 <td>Yes</td>
 <td>Yes</td>
 </tr>
 <tr>
 <th scope="row"><a href="#term-life">Term Life Insurance</a></th>
-<td>10–40 years</td>
-<td>$50K+</td>
+<td>10–30 years</td>
+<td>$25K+</td>
 <td>80</td>
 <td>No</td>
 <td>Yes</td>
@@ -230,8 +266,8 @@
 <tr>
 <th scope="row"><a href="#final-expense">Final Expense Insurance</a></th>
 <td>Forever</td>
-<td>$2K–$50K</td>
-<td>90</td>
+<td>$1K–$50K</td>
+<td>89</td>
 <td>Yes</td>
 <td>Yes</td>
 <td>Yes</td>
@@ -240,7 +276,7 @@
 <th scope="row"><a href="#guaranteed">Guaranteed Acceptance</a></th>
 <td>Forever</td>
 <td>$2K–$25K</td>
-<td>85</td>
+<td>80</td>
 <td>Yes</td>
 <td>Yes</td>
 <td>Yes</td>
@@ -249,7 +285,7 @@
 <th scope="row"><a href="#no-waiting">No-Waiting-Period Insurance</a></th>
 <td>Forever</td>
 <td>$2K+</td>
-<td>80–90</td>
+<td>89</td>
 <td>Yes</td>
 <td>Yes</td>
 <td>Yes</td>
@@ -257,8 +293,8 @@
 <tr>
 <th scope="row"><a href="#cremation">Cremation Insurance</a></th>
 <td>Forever</td>
-<td>$2K–$50K</td>
-<td>90</td>
+<td>$1K–$50K</td>
+<td>89</td>
 <td>Yes</td>
 <td>Yes</td>
 <td>Yes</td>
@@ -274,9 +310,9 @@
 </tr>
 <tr>
 <th scope="row"><a href="#mortgage">Mortgage Protection</a></th>
-<td>10–40 years</td>
-<td>$50K+</td>
-<td>80</td>
+<td>15–30 years</td>
+<td>$25K+</td>
+<td>75</td>
 <td>No</td>
 <td>Yes</td>
 <td>Usually</td>
@@ -284,7 +320,7 @@
 <tr>
 <th scope="row"><a href="#children">Children's Life Insurance</a></th>
 <td>Forever</td>
-<td>$2K–$100K</td>
+<td>$5K–$50K</td>
 <td>17</td>
 <td>Yes</td>
 <td>Yes</td>
@@ -292,6 +328,7 @@
 </tr>
 </tbody>
 </table>
+<p class="lip-table-note">Guide figures based on products Mejor Vida can place with Mutual of Omaha, American Amicable, Assurity, Aetna, Americo, Corebridge, and Transamerica. Exact amounts and ages depend on the product and eligibility.</p>
 </div>
 </div>
 </section>
@@ -308,7 +345,7 @@
 </section>
 <section class="lip-section" id="term-life">
 <h2>Term Life Insurance</h2>
-<p>Term life insurance covers a set period—often 10–40 years or until a stated age. When the term ends, coverage ends unless you convert or renew under policy options.</p>
+<p>Term life insurance covers a set period—often 10–30 years or until a stated age. When the term ends, coverage ends unless you convert or renew under policy options.</p>
 <div class="lip-key">
 <h3>Key Features</h3>
 <ul><li>Often the most affordable coverage per dollar.</li><li>Best for temporary needs like debt or income replacement.</li><li>Underwriting is typically stricter than final expense products.</li></ul>
@@ -406,7 +443,7 @@
 </details>
 <details>
 <summary>Can seniors get life insurance?</summary>
-<p>Yes. Final expense and guaranteed acceptance products are designed for older applicants. Some companies consider applications into the mid-80s or even age 90, depending on the product. Eligibility and price depend on age and health.</p>
+<p>Yes. Final expense and guaranteed acceptance products are designed for older applicants. With the carriers we work with, applications can go up to age 85 or 89 (for example Aetna), depending on the product. Eligibility and price depend on age and health.</p>
 </details>
 <details>
 <summary>Do I need life insurance if I have it through my employer?</summary>
@@ -542,8 +579,8 @@
 <script defer src="../bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="../js/mvi-funnel-track.js?v=20260702e"></script>
 <div data-api-url="/api/website-chat" id="mvi-assistant-root"></div>
-<script defer src="../js/mvi-nav-questions.js"></script>
-<script defer src="../js/website-assistant-widget.js"></script>
+<script defer src="../js/mvi-nav-questions.js?v=20260721-hover-bridge"></script>
+<script defer src="../js/website-assistant-widget.js?v=20260721-chat-z"></script>
 
 <script>
 (function () {

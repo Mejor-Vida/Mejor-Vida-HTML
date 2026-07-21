@@ -1,0 +1,634 @@
+/* Life insurance cost hub — Choice Mutual–style rates page */
+
+.lic-page {
+  --lic-navy: #0b3a7a;
+  --lic-blue: #0d47a1;
+  --lic-ink: #1f2937;
+  --lic-muted: #475569;
+  --lic-soft: #e8f1fc;
+  --lic-gold: #f5a623;
+  color: var(--lic-ink);
+  background: #f7fafc;
+}
+
+.lic-hero {
+  position: relative;
+  overflow: hidden;
+  background: var(--lic-navy);
+  color: #fff;
+  padding: 2.5rem 0 3rem;
+  isolation: isolate;
+}
+
+.lic-hero-media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.lic-hero-media picture,
+.lic-hero-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: right center;
+}
+
+.lic-hero-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    #0b3a7a 0%,
+    #0b3a7a 28%,
+    rgba(11, 58, 122, 0.88) 48%,
+    rgba(13, 71, 161, 0.45) 68%,
+    transparent 90%
+  );
+}
+
+.lic-hero .container {
+  position: relative;
+  z-index: 1;
+  max-width: 1100px;
+}
+
+.lic-hero-copy {
+  max-width: min(38rem, 62%);
+}
+
+@media (max-width: 768px) {
+  .lic-hero-copy {
+    max-width: 100%;
+  }
+  .lic-hero-media {
+    opacity: 0.5;
+  }
+}
+
+.lic-breadcrumb {
+  margin: 0 0 0.85rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  opacity: 0.9;
+}
+
+.lic-breadcrumb a {
+  color: rgba(255, 255, 255, 0.92);
+  text-decoration: none;
+}
+
+.lic-hero h1 {
+  margin: 0 0 1rem;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.85rem, 3.2vw, 2.65rem);
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.lic-hero-lead {
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.94);
+}
+
+.lic-layout {
+  position: relative;
+  z-index: 2;
+  max-width: 1080px;
+  margin: -3.25rem auto 0;
+  padding: 0 1rem 3.5rem;
+  display: block;
+}
+
+@media (max-width: 991px) {
+  .lic-layout {
+    margin-top: -2rem;
+  }
+}
+
+.lic-main {
+  width: 100%;
+  max-width: none;
+}
+
+.lic-takeaways {
+  position: relative;
+  z-index: 2;
+  background: #fff;
+  border-top: 4px solid var(--lic-blue);
+  border-radius: 0.35rem;
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.08);
+  padding: 1.15rem 1.25rem 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.lic-takeaways h2 {
+  margin: 0 0 0.75rem;
+  color: var(--lic-navy);
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.lic-takeaways ul {
+  margin: 0;
+  padding-left: 1.15rem;
+}
+
+.lic-takeaways li {
+  margin: 0 0 0.45rem;
+  color: var(--lic-muted);
+  line-height: 1.45;
+}
+
+.lic-section {
+  background: #fff;
+  border-radius: 0.35rem;
+  box-shadow: 0 6px 20px rgba(15, 23, 42, 0.05);
+  padding: 1.35rem 1.25rem 1.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.lic-section h2 {
+  margin: 0 0 0.55rem;
+  color: #111827;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.35rem, 2vw, 1.7rem);
+  font-weight: 700;
+}
+
+.lic-section > p {
+  margin: 0 0 1rem;
+  color: var(--lic-muted);
+  line-height: 1.5;
+}
+
+.lic-face-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin: 0 0 0.85rem;
+}
+
+.lic-face-tab {
+  border: none;
+  border-radius: 0.35rem 0.35rem 0 0;
+  background: #f3ebe0;
+  color: #1a365d;
+  font-weight: 700;
+  font-size: 0.92rem;
+  padding: 0.55rem 0.9rem;
+  cursor: pointer;
+}
+
+.lic-face-tab.is-active {
+  background: var(--lic-gold);
+  color: #1a202c;
+}
+
+.lic-face-tab:focus-visible {
+  outline: 3px solid #63b3ed;
+  outline-offset: 2px;
+}
+
+.lic-rate-wrap {
+  max-width: 28rem;
+  overflow-x: auto;
+  border-radius: 0 0.35rem 0.35rem 0.35rem;
+  -webkit-overflow-scrolling: touch;
+}
+
+.lic-rate-table {
+  width: 100%;
+  max-width: 28rem;
+  min-width: 0;
+  border-collapse: collapse;
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.25;
+}
+
+.lic-rate-table th,
+.lic-rate-table td {
+  padding: 0.28rem 0.65rem;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.lic-rate-table thead th {
+  background: #0b3a7a;
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.8rem;
+  padding: 0.35rem 0.65rem;
+}
+
+/* Edad left · Mujer center · Hombre right */
+.lic-rate-table th:nth-child(2),
+.lic-rate-table td:nth-child(2) {
+  text-align: center;
+}
+
+.lic-rate-table th:nth-child(3),
+.lic-rate-table td:nth-child(3) {
+  text-align: right;
+}
+
+.lic-rate-table th:nth-child(n + 4),
+.lic-rate-table td:nth-child(n + 4) {
+  text-align: right;
+}
+
+.lic-rate-table tbody tr:nth-child(even) td {
+  background: #f8fafc;
+}
+
+.lic-rate-note {
+  margin: 0.65rem 0 0;
+  color: #64748b;
+  font-size: 0.78rem;
+  line-height: 1.4;
+}
+
+.lic-quote-cell {
+  text-align: center;
+  font-size: 0.92rem;
+}
+
+.lic-quote-inline {
+  color: #0b3a7a;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.lic-quote-inline:hover {
+  text-decoration: underline;
+}
+
+.lic-panel[hidden] {
+  display: none !important;
+}
+
+.lic-sidebar {
+  position: sticky;
+  top: 6.5rem;
+}
+
+.lic-quote-wrap {
+  background: #fff;
+  border-radius: 0.45rem;
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.12);
+  overflow: hidden;
+}
+
+.lic-quote-card {
+  position: relative;
+  background: #1e293b;
+  color: #fff;
+  border-radius: 0;
+  padding: 1.15rem 1.15rem 1.35rem;
+  box-shadow: none;
+}
+
+.lic-quote-card::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -10px;
+  width: 0;
+  height: 0;
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-top: 10px solid #1e293b;
+  transform: translateX(-50%);
+}
+
+.lic-quote-card h2 {
+  margin: 0 0 0.75rem;
+  font-size: 1.15rem;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.lic-quote-card ul {
+  margin: 0;
+  padding-left: 1.1rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+.lic-quote-form {
+  padding: 1.35rem 1.1rem 1.15rem;
+  background: #fff;
+}
+
+.lic-quote-progress {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0 0 1rem;
+}
+
+.lic-quote-progress-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.28rem 0.7rem;
+  border-radius: 999px;
+  background: #0b3a7a;
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.lic-quote-progress-bar {
+  flex: 1;
+  height: 6px;
+  border-radius: 999px;
+  background: #c5d4e8;
+  overflow: hidden;
+}
+
+.lic-quote-progress-bar > span {
+  display: block;
+  width: 18%;
+  height: 100%;
+  background: #0b3a7a;
+}
+
+.lic-quote-form h3 {
+  margin: 0 0 0.85rem;
+  color: #1a202c;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.lic-gender-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.55rem;
+}
+
+.lic-gender-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3rem;
+  padding: 0.65rem 0.5rem;
+  border: 2px solid #0b3a7a;
+  border-radius: 0.4rem;
+  background: #fff;
+  color: #0b3a7a;
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.lic-gender-btn:hover,
+.lic-gender-btn:focus-visible {
+  background: #e8f1fc;
+  color: #0b3a7a;
+  outline: none;
+}
+
+.lic-carriers {
+  margin: 0.85rem 1.1rem 1.1rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid #e5e7eb;
+  color: #64748b;
+  font-size: 0.78rem;
+  line-height: 1.4;
+}
+
+.lic-carrier-logos {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem 0.85rem;
+  margin: 0 1.1rem 0.55rem;
+}
+
+.lic-carrier-logos img {
+  display: block;
+  height: 22px;
+  width: auto;
+  max-width: 88px;
+  object-fit: contain;
+  filter: grayscale(1);
+  opacity: 0.85;
+}
+
+.lic-fe-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.5rem 1rem;
+}
+
+@media (max-width: 576px) {
+  .lic-fe-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.lic-fe-grid a {
+  color: var(--lic-blue);
+  font-weight: 650;
+  text-decoration: none;
+}
+
+.lic-fe-grid a:hover {
+  text-decoration: underline;
+}
+
+.lic-rate-table--faces th,
+.lic-rate-table--faces td {
+  text-align: center;
+}
+
+.lic-rate-table--faces th:first-child,
+.lic-rate-table--faces td:first-child {
+  text-align: left;
+}
+
+.lic-guide > p {
+  margin: 0 0 0.85rem;
+}
+
+.lic-callout {
+  margin: 0 0 1rem;
+  padding: 0.85rem 1rem;
+  background: #e8f1fc;
+  border-left: 4px solid #0b3a7a;
+  border-radius: 0.35rem;
+}
+
+.lic-callout strong {
+  display: block;
+  margin-bottom: 0.35rem;
+  color: #0b3a7a;
+  font-size: 0.95rem;
+}
+
+.lic-callout p {
+  margin: 0;
+  color: #334155;
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+.lic-factor-list {
+  margin: 0;
+  padding-left: 1.15rem;
+  color: #334155;
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.lic-factor-list li {
+  margin-bottom: 0.55rem;
+}
+
+.lic-factor-list a,
+.lic-guide a {
+  color: var(--lic-blue);
+  font-weight: 650;
+  text-decoration: none;
+}
+
+.lic-factor-list a:hover,
+.lic-guide a:hover {
+  text-decoration: underline;
+}
+
+.lic-faq details {
+  margin: 0;
+  padding: 0.95rem 0;
+  border-bottom: 1px solid #dbe5ef;
+}
+
+.lic-faq summary {
+  list-style: none;
+  cursor: pointer;
+  color: #0b3a7a;
+  font-weight: 700;
+  font-size: 1.02rem;
+  padding-left: 1.6rem;
+  position: relative;
+}
+
+.lic-faq summary::-webkit-details-marker {
+  display: none;
+}
+
+.lic-faq summary::before {
+  content: "+";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #0b3a7a;
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.lic-faq details[open] summary::before {
+  content: "−";
+}
+
+.lic-faq details p {
+  margin: 0.7rem 0 0.15rem 1.6rem;
+  color: #475569;
+  line-height: 1.6;
+}
+
+.lic-meta-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin: 0 0 1rem;
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 0.35rem;
+}
+
+.lic-meta-tab {
+  border: none;
+  background: transparent;
+  color: #64748b;
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 0.45rem 0.75rem;
+  cursor: pointer;
+  border-radius: 0.35rem 0.35rem 0 0;
+}
+
+.lic-meta-tab.is-active {
+  color: #0b3a7a;
+  background: #e8f1fc;
+}
+
+.lic-meta-tab:focus-visible {
+  outline: 3px solid #63b3ed;
+  outline-offset: 2px;
+}
+
+.lic-meta-panel p,
+.lic-sources,
+.lic-updates {
+  margin: 0 0 0.75rem;
+  color: #334155;
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.lic-sources,
+.lic-updates {
+  padding-left: 1.2rem;
+}
+
+.lic-sources li,
+.lic-updates li {
+  margin-bottom: 0.45rem;
+}
+
+.lic-meta-panel a {
+  color: var(--lic-blue);
+  font-weight: 650;
+  text-decoration: none;
+}
+
+.lic-meta-panel a:hover {
+  text-decoration: underline;
+}
+
+.lic-helpful {
+  margin-top: 1.25rem;
+  padding: 0.9rem 1rem;
+  background: #e8f1fc;
+  border-radius: 0.4rem;
+}
+
+.lic-helpful p {
+  margin: 0;
+  color: #0b3a7a;
+  font-size: 0.95rem;
+}
+
+.lic-helpful a {
+  color: #0b3a7a;
+  font-weight: 700;
+}
