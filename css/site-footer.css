@@ -40,3 +40,16 @@ footer[style*="#1a365d"] > .container > .border-top.border-secondary a {
   text-decoration: underline;
   text-underline-offset: 2px;
 }
+
+.site-footer-bbb {
+  display: inline-flex;
+  line-height: 0;
+  text-decoration: none !important;
+}
+
+.site-footer-bbb img {
+  display: block;
+  width: 160px;
+  height: auto;
+  max-width: min(160px, 70vw);
+}
