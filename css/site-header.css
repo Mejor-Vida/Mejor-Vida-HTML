@@ -332,11 +332,40 @@ header.sticky-top > .container {
 .header-office-bar {
   padding-top: 0.35rem !important;
   padding-bottom: 0.35rem !important;
+  background: #0d47a1 !important;
+  border-top-color: rgba(255, 255, 255, 0.18) !important;
+  color: #fff;
+}
+
+.header-office-bar span,
+.header-office-bar strong {
+  color: #fff;
+}
+
+.header-office-bar a:not(.header-whatsapp-btn) {
+  color: #fff !important;
+  text-decoration: none;
+}
+
+.header-office-bar a:not(.header-whatsapp-btn):hover,
+.header-office-bar a:not(.header-whatsapp-btn):focus-visible {
+  color: #e3f2fd !important;
+  text-decoration: underline;
 }
 
 .header-lang-toggle {
   white-space: nowrap;
   font-weight: 600;
+  font-size: 0.78rem;
+  line-height: 1.2;
+  color: #1a365d;
+  padding: 0.15rem 0.2rem;
+}
+
+.header-actions .header-lang-toggle:hover,
+.header-actions .header-lang-toggle:focus-visible {
+  color: #0d47a1;
+  text-decoration: underline;
 }
 
 header.sticky-top .header-logo-wrap {

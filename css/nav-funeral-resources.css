@@ -1,7 +1,8 @@
-/* Choice Mutual–style Funeral Resources mega menu */
+/* Funeral Resources mega menu — match Sobre nosotros blue/type system */
 
 .nav-funeral-dropdown {
-  position: relative;
+  /* Static so the mega can center against the full header, not the nav item */
+  position: static;
   align-self: center;
   flex: 0 0 auto;
   z-index: 1061;
@@ -16,7 +17,7 @@
   padding: 6px 12px;
   border: 0;
   background: none;
-  font: inherit;
+  font-family: inherit;
   font-size: 16px;
   font-weight: 600;
   line-height: 1.2;
@@ -50,15 +51,17 @@
 .nav-funeral-mega {
   display: none;
   position: absolute;
-  top: calc(100% + 0.55rem);
+  /* Drop below the blue contact bar so blue (not white) sits above the panel */
+  top: calc(100% + 2.75rem);
   left: 50%;
   z-index: 1400;
   box-sizing: border-box;
-  width: min(560px, calc(100vw - 2.5rem));
-  padding: 1rem 1rem 0;
-  transform: translateX(-48%);
-  grid-template-columns: 1fr 1fr;
-  gap: 0.5rem 1.5rem;
+  width: min(1100px, calc(100vw - 2rem));
+  padding: 0.75rem 0.9rem;
+  transform: translateX(-50%);
+  grid-template-columns: minmax(220px, 1fr) minmax(240px, 1.05fr) minmax(280px, 1.2fr);
+  grid-template-rows: auto;
+  gap: 0.65rem 0.9rem;
   align-items: start;
   background: #fff;
   border-radius: 0.65rem;
@@ -73,21 +76,28 @@
   display: grid;
 }
 
+/* Hover bridge across the blue contact bar into the panel */
 .nav-funeral-mega::before {
   content: "";
   position: absolute;
-  top: -0.7rem;
+  top: -2.85rem;
   right: 0;
   left: 0;
-  height: 0.7rem;
+  height: 2.85rem;
 }
 
 .nav-funeral-links {
-  padding: 0.25rem 0.2rem 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 0.15rem 0.35rem;
+  min-height: 0;
+  align-self: stretch;
 }
 
-.nav-funeral-links h3 {
-  margin: 0 0 0.55rem;
+.nav-funeral-links h3,
+.nav-funeral-feature h3 {
+  margin: 0 0 0.4rem;
   color: #1a365d;
   font-size: 0.95rem;
   font-weight: 800;
@@ -98,18 +108,17 @@
 .nav-funeral-chat-link {
   display: block;
   width: 100%;
-  padding: 0.45rem 0.3rem;
-  border-radius: 0.3rem;
+  padding: 0.4rem 0.35rem;
+  border-radius: 0.35rem;
   border: 0;
   background: transparent;
   color: #334155;
   font-family: inherit;
-  font-size: 0.88rem;
+  font-size: 0.95rem;
   font-weight: 600;
   line-height: 1.3;
   text-align: left;
   text-decoration: none;
-  white-space: nowrap;
   cursor: pointer;
 }
 
@@ -125,24 +134,165 @@
 .nav-funeral-chat-link i {
   width: 1rem;
   margin-right: 0.3rem;
-  color: #087c80;
+  color: #0d47a1;
   text-align: center;
 }
 
-.nav-funeral-explore {
-  grid-column: 1 / -1;
-  margin: 0 -1rem;
-  padding: 0.7rem 1rem;
-  border-top: 1px solid #dbe5ef;
-  color: #087c80;
-  font-size: 0.78rem;
-  font-weight: 800;
+.nav-funeral-feature,
+.nav-funeral-calculator {
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  height: 148px;
+  min-height: 148px;
+  max-height: 148px;
+  padding: 0.65rem;
+  border-radius: 0.55rem;
   text-decoration: none;
 }
 
-.nav-funeral-explore:hover {
+.nav-funeral-feature {
+  flex-direction: column;
+  padding: 0;
+  background: #f0f7ff;
+  color: #1a365d;
+}
+
+.nav-funeral-feature-badge {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  align-self: auto;
+  margin: 0;
+  padding: 0.22rem 0.5rem;
+  background: #0d47a1;
+  color: #fff;
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  border-radius: 0.55rem 0 0.35rem 0;
+}
+
+.nav-funeral-feature h3 {
+  position: absolute;
+  z-index: 2;
+  top: 1.55rem;
+  left: 0.55rem;
+  right: 0.55rem;
+  margin: 0;
+  max-width: none;
   color: #0d47a1;
-  background: #f8fbff;
+  font-size: 0.88rem;
+  font-weight: 800;
+  line-height: 1.2;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.85);
+}
+
+.nav-funeral-feature-media {
+  position: absolute;
+  inset: 0;
+  flex: none;
+  margin: 0;
+  min-height: 0;
+  border-radius: 0.55rem;
+  overflow: hidden;
+  line-height: 0;
+}
+
+/* Soft fade behind title so faces stay readable without shrinking the photo */
+.nav-funeral-feature-media::before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 3.1rem;
+  background: linear-gradient(180deg, rgba(240, 247, 255, 0.95) 0%, rgba(240, 247, 255, 0.55) 55%, rgba(240, 247, 255, 0) 100%);
+  pointer-events: none;
+}
+
+.nav-funeral-feature-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 148px;
+  object-fit: cover;
+  /* Anchor to the top so all three heads stay in frame */
+  object-position: center top;
+}
+
+.nav-funeral-calculator {
+  flex-direction: row;
+  align-items: stretch;
+  padding: 0;
+  background: linear-gradient(135deg, #0b3a7a 0%, #1565c0 55%, #1e88e5 100%);
+  color: #fff;
+}
+
+.nav-funeral-calculator-copy {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 46%;
+  min-width: 0;
+  padding: 0.7rem 0.6rem 0.7rem 0.75rem;
+}
+
+.nav-funeral-calculator h3,
+.nav-funeral-calculator p {
+  position: relative;
+  z-index: 1;
+  max-width: none;
+  color: #fff;
+}
+
+.nav-funeral-calculator h3 {
+  font-size: 0.92rem;
+  font-weight: 800;
+  line-height: 1.2;
+  margin: 0 0 0.25rem;
+}
+
+.nav-funeral-calculator p {
+  margin: 0;
+  font-size: 0.75rem;
+  line-height: 1.3;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.nav-funeral-calculator-copy > span {
+  margin-top: auto;
+  padding-top: 0.3rem;
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.nav-funeral-calculator-media {
+  flex: 0 0 54%;
+  min-width: 0;
+  align-self: stretch;
+  line-height: 0;
+  overflow: hidden;
+}
+
+.nav-funeral-calculator-media picture,
+.nav-funeral-calculator-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 148px;
+  max-height: 148px;
+  object-fit: cover;
+  object-position: center 20%;
+}
+
+.nav-funeral-feature:hover,
+.nav-funeral-calculator:hover {
+  filter: brightness(1.04);
 }
 
 @media (max-width: 991.98px) {

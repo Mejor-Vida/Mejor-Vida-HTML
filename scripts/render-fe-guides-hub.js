@@ -30,7 +30,7 @@ const html = `<!DOCTYPE html>
 <link href="favicon.ico" rel="icon" type="image/x-icon"/>
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
 <link href="css/quote-flow-shared.css" rel="stylesheet"/>
-<link href="css/site-footer.css" rel="stylesheet"/>
+<link href="css/site-footer.css?v=20260721-funeral-mega" rel="stylesheet"/>
 <link href="css/mvi-assistant-widget.css" rel="stylesheet"/>
 <link href="css/fontawesome-mvi.min.css" rel="stylesheet"/>
 <link href="css/fe-guide.css" rel="stylesheet"/>

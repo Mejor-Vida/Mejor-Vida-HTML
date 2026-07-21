@@ -46,6 +46,7 @@ const JOBS = [
   { src: "img/carriers/american-amicable-logo.png", maxWidth: 520, maxHeight: 120, keepPng: true },
   { src: "img/mvi-promo-seguros-whatsapp.png", maxWidth: 800, maxHeight: 450 },
   { src: "img/julie-promo-funeral-cost.png", maxWidth: 900, maxHeight: 900 },
+  { src: "img/funeral-calculator-menu.png", maxWidth: 720, maxHeight: 576, outBase: "funeral-calculator-menu" },
   { src: "img/logo-spanish2-email.png", maxWidth: 440, maxHeight: 300, keepPng: true },
   { src: "img/logo-english2-email.png", maxWidth: 440, maxHeight: 300, keepPng: true },
   { src: "gastos-finales-ads-v2/img/objective-quote.png", maxWidth: 320, maxHeight: 320, keepPng: true, outBase: "objective-quote" },

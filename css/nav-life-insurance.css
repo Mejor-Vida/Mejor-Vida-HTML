@@ -1,8 +1,8 @@
-/* Life & Final Expense Insurance — Coverage Options mega menu */
+/* Life & Final Expense Insurance mega — match Recursos funerarios panel */
 
 .nav-life-dropdown {
-  position: relative;
-  align-self: stretch;
+  position: static;
+  align-self: center;
   display: flex;
   align-items: center;
   flex: 0 0 auto;
@@ -30,7 +30,7 @@
 .nav-life-caret {
   flex: 0 0 auto;
   font-size: 0.65em;
-  opacity: 0.72;
+  opacity: 0.75;
   transition: transform 0.15s ease;
 }
 
@@ -42,9 +42,10 @@
 .nav-life-dropdown:hover .nav-life-dropdown-trigger,
 .nav-life-dropdown:focus-within .nav-life-dropdown-trigger,
 .nav-life-dropdown.is-open .nav-life-dropdown-trigger {
-  color: #087c80;
-  background: #e5f5f4;
-  box-shadow: inset 0 -3px 0 #087c80;
+  color: #0d47a1;
+  background: #e8f1fc;
+  border-radius: 0.35rem;
+  box-shadow: inset 0 -2px 0 #0d47a1;
 }
 
 .nav-life-dropdown:hover .nav-life-caret,
@@ -56,18 +57,21 @@
 .nav-life-mega {
   display: none;
   position: absolute;
-  top: calc(100% + 0.55rem);
-  left: 0;
+  top: calc(100% + 2.75rem);
+  left: 50%;
   z-index: 1400;
-  width: min(700px, calc(100vw - 2.5rem));
-  min-height: 215px;
-  grid-template-columns: 170px 1fr;
+  box-sizing: border-box;
+  width: min(1100px, calc(100vw - 2rem));
+  min-height: 0;
+  padding: 0;
+  transform: translateX(-50%);
+  grid-template-columns: minmax(170px, 0.7fr) minmax(0, 1.35fr) minmax(220px, 0.95fr);
   overflow: hidden;
   background: #fff;
-  border-radius: 0.45rem;
+  border-radius: 0.65rem;
   box-shadow:
-    0 4px 6px rgba(15, 23, 42, 0.07),
-    0 20px 48px rgba(15, 23, 42, 0.2);
+    0 4px 6px rgba(15, 23, 42, 0.06),
+    0 20px 48px rgba(15, 23, 42, 0.18);
 }
 
 .nav-life-dropdown:hover .nav-life-mega,
@@ -79,16 +83,16 @@
 .nav-life-mega::before {
   content: "";
   position: absolute;
-  top: -0.7rem;
+  top: -2.85rem;
   right: 0;
   left: 0;
-  height: 0.7rem;
+  height: 2.85rem;
 }
 
 .nav-life-categories {
-  padding: 0.75rem 0;
-  background: #f4f8f8;
-  border-right: 1px solid #d8e4e5;
+  padding: 0.9rem 0;
+  background: #f0f7ff;
+  border-right: 1px solid #dbe5ef;
 }
 
 .nav-life-category {
@@ -96,47 +100,48 @@
   align-items: center;
   gap: 0.65rem;
   padding: 0.85rem 1rem;
-  color: #1f2937;
-  font-size: 0.8rem;
+  color: #1a365d;
+  font-size: 0.88rem;
   font-weight: 750;
   line-height: 1.25;
 }
 
 .nav-life-category.is-active {
-  color: #173f42;
-  background: #e1f3f2;
-  box-shadow: inset -3px 0 0 #087c80;
+  color: #0d47a1;
+  background: #e8f1fc;
+  box-shadow: inset -3px 0 0 #0d47a1;
 }
 
 .nav-life-category i {
-  color: #173f42;
-  font-size: 0.9rem;
+  color: #0d47a1;
+  font-size: 0.95rem;
 }
 
 .nav-life-options {
-  padding: 1.2rem 1.4rem;
+  padding: 0.9rem 1.15rem 1rem;
 }
 
 .nav-life-options h3 {
-  margin: 0 0 0.8rem;
-  color: #374151;
-  font-size: 0.92rem;
+  margin: 0 0 0.45rem;
+  color: #1a365d;
+  font-size: 0.95rem;
   font-weight: 800;
+  line-height: 1.25;
 }
 
 .nav-life-options-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  column-gap: 1.6rem;
-  row-gap: 0.15rem;
+  column-gap: 1.25rem;
+  row-gap: 0;
 }
 
 .nav-life-options-grid a {
   display: block;
-  padding: 0.44rem 0.3rem;
-  border-radius: 0.25rem;
-  color: #25313d;
-  font-size: 0.8rem;
+  padding: 0.4rem 0.35rem;
+  border-radius: 0.35rem;
+  color: #334155;
+  font-size: 0.95rem;
   font-weight: 600;
   line-height: 1.3;
   text-decoration: none;
@@ -144,9 +149,84 @@
 
 .nav-life-options-grid a:hover,
 .nav-life-options-grid a:focus-visible {
-  color: #087c80;
-  background: #eef8f7;
+  color: #0d47a1;
+  background: #f1f7ff;
   outline: none;
+}
+
+.nav-life-feature {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  margin: 0.75rem;
+  border-radius: 0.55rem;
+  text-decoration: none;
+  background: #0d47a1;
+  color: #fff;
+  height: 148px;
+  min-height: 148px;
+  max-height: 148px;
+}
+
+.nav-life-feature-copy {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  right: 0;
+  left: 0;
+  padding: 0.7rem 0.75rem 0.55rem;
+}
+
+.nav-life-feature-copy h3 {
+  margin: 0 0 0.3rem;
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 800;
+  line-height: 1.2;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
+}
+
+.nav-life-feature-copy p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.95);
+  font-size: 0.75rem;
+  line-height: 1.35;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+.nav-life-feature-media {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  min-height: 0;
+  line-height: 0;
+  overflow: hidden;
+}
+
+.nav-life-feature-media::before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 4.25rem;
+  background: linear-gradient(180deg, rgba(11, 58, 122, 0.88) 0%, rgba(11, 58, 122, 0.45) 60%, rgba(11, 58, 122, 0) 100%);
+  pointer-events: none;
+}
+
+.nav-life-feature-media picture,
+.nav-life-feature-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 148px;
+  object-fit: cover;
+  object-position: center 28%;
+}
+
+.nav-life-feature:hover {
+  filter: brightness(1.04);
 }
 
 /* Keep the expanded navigation readable without allowing header items to overlap. */
@@ -159,7 +239,6 @@
     white-space: nowrap !important;
   }
 
-  /* Three nav triggers live in .desktop-nav; CTA + BBB stay in .header-actions */
   .header-inner > .desktop-nav,
   .header-inner > .header-actions {
     display: flex !important;

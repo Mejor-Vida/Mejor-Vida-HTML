@@ -2,7 +2,7 @@
   {
     "src": "img/business-man.png",
     "base": "business-man",
-    "width": 1024,
+    "width": 681,
     "height": 1024,
     "webp": "img/opt/business-man.webp",
     "fallback": "img/opt/business-man.png",
@@ -38,8 +38,8 @@
   {
     "src": "img/woman-flowers.png",
     "base": "woman-flowers",
-    "width": 1024,
-    "height": 682,
+    "width": 566,
+    "height": 1024,
     "webp": "img/opt/woman-flowers.webp",
     "fallback": "img/opt/woman-flowers.png",
     "keepPng": true
@@ -1343,8 +1343,8 @@
   {
     "src": "img/blog-generated/weekly-insurance-update-2026-07-12/hero-en.png",
     "base": "hero-en",
-    "width": 1200,
-    "height": 771,
+    "width": 1024,
+    "height": 682,
     "webp": "img/opt/blog-generated/weekly-insurance-update-2026-07-12/hero-en.webp",
     "fallback": "img/opt/blog-generated/weekly-insurance-update-2026-07-12/hero-en.png",
     "keepPng": true
@@ -1352,8 +1352,8 @@
   {
     "src": "img/blog-generated/weekly-insurance-update-2026-07-12/hero-es.png",
     "base": "hero-es",
-    "width": 1200,
-    "height": 771,
+    "width": 1024,
+    "height": 682,
     "webp": "img/opt/blog-generated/weekly-insurance-update-2026-07-12/hero-es.webp",
     "fallback": "img/opt/blog-generated/weekly-insurance-update-2026-07-12/hero-es.png",
     "keepPng": true
@@ -1361,8 +1361,8 @@
   {
     "src": "img/blog-generated/weekly-insurance-update-2026-07-12/hero.png",
     "base": "hero",
-    "width": 1200,
-    "height": 771,
+    "width": 1024,
+    "height": 682,
     "webp": "img/opt/blog-generated/weekly-insurance-update-2026-07-12/hero.webp",
     "fallback": "img/opt/blog-generated/weekly-insurance-update-2026-07-12/hero.png",
     "keepPng": true
@@ -1371,7 +1371,7 @@
     "src": "img/blog-generated/weekly-insurance-update-2026-07-12/story-1.png",
     "base": "story-1",
     "width": 800,
-    "height": 440,
+    "height": 553,
     "webp": "img/opt/blog-generated/weekly-insurance-update-2026-07-12/story-1.webp",
     "fallback": "img/opt/blog-generated/weekly-insurance-update-2026-07-12/story-1.png",
     "keepPng": true
@@ -1380,7 +1380,7 @@
     "src": "img/blog-generated/weekly-insurance-update-2026-07-12/story-2.png",
     "base": "story-2",
     "width": 800,
-    "height": 440,
+    "height": 314,
     "webp": "img/opt/blog-generated/weekly-insurance-update-2026-07-12/story-2.webp",
     "fallback": "img/opt/blog-generated/weekly-insurance-update-2026-07-12/story-2.png",
     "keepPng": true
@@ -1389,9 +1389,63 @@
     "src": "img/blog-generated/weekly-insurance-update-2026-07-12/story-3.png",
     "base": "story-3",
     "width": 800,
-    "height": 440,
+    "height": 533,
     "webp": "img/opt/blog-generated/weekly-insurance-update-2026-07-12/story-3.webp",
     "fallback": "img/opt/blog-generated/weekly-insurance-update-2026-07-12/story-3.png",
+    "keepPng": true
+  },
+  {
+    "src": "img/blog-generated/weekly-insurance-update-2026-07-19/hero-en.png",
+    "base": "hero-en",
+    "width": 1200,
+    "height": 771,
+    "webp": "img/opt/blog-generated/weekly-insurance-update-2026-07-19/hero-en.webp",
+    "fallback": "img/opt/blog-generated/weekly-insurance-update-2026-07-19/hero-en.png",
+    "keepPng": true
+  },
+  {
+    "src": "img/blog-generated/weekly-insurance-update-2026-07-19/hero-es.png",
+    "base": "hero-es",
+    "width": 1200,
+    "height": 771,
+    "webp": "img/opt/blog-generated/weekly-insurance-update-2026-07-19/hero-es.webp",
+    "fallback": "img/opt/blog-generated/weekly-insurance-update-2026-07-19/hero-es.png",
+    "keepPng": true
+  },
+  {
+    "src": "img/blog-generated/weekly-insurance-update-2026-07-19/hero.png",
+    "base": "hero",
+    "width": 1200,
+    "height": 771,
+    "webp": "img/opt/blog-generated/weekly-insurance-update-2026-07-19/hero.webp",
+    "fallback": "img/opt/blog-generated/weekly-insurance-update-2026-07-19/hero.png",
+    "keepPng": true
+  },
+  {
+    "src": "img/blog-generated/weekly-insurance-update-2026-07-19/story-1.png",
+    "base": "story-1",
+    "width": 800,
+    "height": 440,
+    "webp": "img/opt/blog-generated/weekly-insurance-update-2026-07-19/story-1.webp",
+    "fallback": "img/opt/blog-generated/weekly-insurance-update-2026-07-19/story-1.png",
+    "keepPng": true
+  },
+  {
+    "src": "img/blog-generated/weekly-insurance-update-2026-07-19/story-2.png",
+    "base": "story-2",
+    "width": 800,
+    "height": 440,
+    "webp": "img/opt/blog-generated/weekly-insurance-update-2026-07-19/story-2.webp",
+    "fallback": "img/opt/blog-generated/weekly-insurance-update-2026-07-19/story-2.png",
+    "keepPng": true
+  },
+  {
+    "src": "img/blog-generated/weekly-insurance-update-2026-07-19/story-3.png",
+    "base": "story-3",
+    "width": 800,
+    "height": 440,
+    "webp": "img/opt/blog-generated/weekly-insurance-update-2026-07-19/story-3.webp",
+    "fallback": "img/opt/blog-generated/weekly-insurance-update-2026-07-19/story-3.png",
     "keepPng": true
   }
 ]

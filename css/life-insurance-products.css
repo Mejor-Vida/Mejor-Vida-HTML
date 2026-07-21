@@ -1,0 +1,688 @@
+/* Types of life insurance — Choice Mutual–inspired educational guide */
+
+.lip-page {
+  --lip-navy: #1a365d;
+  --lip-blue: #0d47a1;
+  --lip-blue-soft: #e8f1fc;
+  --lip-teal-bar: #d7ebf5;
+  --lip-ink: #1f2937;
+  --lip-muted: #475569;
+  color: var(--lip-ink);
+  background: #fff;
+}
+
+.lip-toc {
+  background: var(--lip-teal-bar);
+  border-bottom: 1px solid #c5dde8;
+}
+
+.lip-toc .container {
+  max-width: 1100px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem 1rem;
+  padding-top: 0.55rem;
+  padding-bottom: 0.55rem;
+}
+
+.lip-toc-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--lip-navy);
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+
+.lip-toc-label i {
+  font-size: 0.95rem;
+  opacity: 0.85;
+}
+
+.lip-toc-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.85rem;
+}
+
+.lip-toc-nav a {
+  color: var(--lip-blue);
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.lip-toc-nav a:hover {
+  text-decoration: underline;
+}
+
+.lip-hero {
+  background: linear-gradient(135deg, #0b3a7a 0%, #1565c0 55%, #1e88e5 100%);
+  color: #fff;
+  padding: 2.5rem 0 2.75rem;
+}
+
+.lip-hero .container {
+  max-width: 1100px;
+}
+
+.lip-breadcrumb {
+  margin: 0 0 0.85rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  opacity: 0.9;
+}
+
+.lip-breadcrumb a {
+  color: rgba(255, 255, 255, 0.92);
+  text-decoration: none;
+}
+
+.lip-breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+.lip-hero h1 {
+  margin: 0 0 1rem;
+  max-width: 18ch;
+  font-size: clamp(1.85rem, 3.2vw, 2.65rem);
+  font-weight: 800;
+  line-height: 1.15;
+  color: #fff;
+}
+
+.lip-hero-lead {
+  margin: 0;
+  max-width: 42rem;
+  font-size: 1.05rem;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.94);
+}
+
+.lip-hero-lead + .lip-hero-lead {
+  margin-top: 0.85rem;
+}
+
+.lip-main {
+  padding: 2rem 0 3.5rem;
+  background: #fff;
+}
+
+.lip-main .container {
+  max-width: 1100px;
+}
+
+.lip-compare {
+  background:
+    radial-gradient(ellipse at 12% 18%, rgba(255, 255, 255, 0.1), transparent 42%),
+    radial-gradient(ellipse at 88% 75%, rgba(13, 71, 161, 0.35), transparent 48%),
+    linear-gradient(160deg, #0b3a7a 0%, #1565c0 48%, #0d47a1 100%);
+  padding: 1.75rem 0 2rem;
+}
+
+.lip-compare-inner {
+  max-width: min(1280px, calc(100% - 1.5rem));
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+
+.lip-table-wrap {
+  overflow-x: auto;
+  margin: 0;
+  border-radius: 0.25rem;
+  background: transparent;
+  box-shadow: 0 12px 36px rgba(15, 23, 42, 0.28);
+}
+
+.lip-table {
+  width: 100%;
+  min-width: 980px;
+  margin: 0;
+  border-collapse: collapse;
+  font-size: 0.86rem;
+  table-layout: fixed;
+}
+
+.lip-table th,
+.lip-table td {
+  padding: 0.85rem 0.7rem;
+  border: 1px solid #c5d4e8;
+  vertical-align: middle;
+}
+
+.lip-table thead th {
+  background: #0d47a1;
+  color: #fff;
+  font-weight: 700;
+  text-align: center;
+  line-height: 1.25;
+  white-space: normal;
+  hyphens: auto;
+}
+
+.lip-table thead th:first-child {
+  text-align: left;
+  width: 18%;
+  background: #1a365d;
+}
+
+.lip-table tbody th {
+  background: #243b6b;
+  color: #fff;
+  font-weight: 700;
+  text-align: left;
+  white-space: normal;
+  width: 18%;
+}
+
+.lip-table tbody th a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.lip-table tbody th a:hover {
+  color: #f2c94c;
+  text-decoration: underline;
+}
+
+.lip-table tbody td {
+  background: #fff;
+  color: #334155;
+  text-align: center;
+  font-weight: 600;
+}
+
+.lip-table tbody tr:nth-child(even) td {
+  background: #f3f7fc;
+}
+
+.lip-table tbody tr:hover td {
+  background: #fff8e6;
+}
+
+.lip-section {
+  margin: 0 0 2.25rem;
+  padding: 0;
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.lip-section h2 {
+  margin: 0 0 0.75rem;
+  color: #1a202c;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.45rem, 2.2vw, 1.85rem);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.lip-section p {
+  margin: 0 0 0.85rem;
+  color: var(--lip-muted);
+  font-size: 1.02rem;
+  line-height: 1.65;
+}
+
+.lip-section p a {
+  color: var(--lip-blue);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.lip-key {
+  margin: 1.1rem 0 0;
+  padding: 1.05rem 1.15rem;
+  background: #edf5f8;
+  border-radius: 0.35rem;
+}
+
+.lip-key h3 {
+  margin: 0 0 0.65rem;
+  color: var(--lip-navy);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.lip-key ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--lip-navy);
+}
+
+.lip-key li {
+  position: relative;
+  margin: 0.45rem 0;
+  padding-left: 1.45rem;
+  line-height: 1.45;
+}
+
+.lip-key li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.28rem;
+  width: 0.95rem;
+  height: 0.95rem;
+  border-radius: 50%;
+  background: #0d47a1 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='%23fff' d='M6.2 11.1 3.1 8l1.1-1.1 2 2 5-5L12.3 5z'/%3E%3C/svg%3E") center / 0.7rem no-repeat;
+}
+
+.lip-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.95rem;
+  color: var(--lip-blue);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.lip-more:hover {
+  text-decoration: underline;
+}
+
+.lip-more i {
+  font-size: 0.9em;
+  opacity: 0.9;
+}
+
+.lip-aside {
+  position: sticky;
+  top: 6.5rem;
+}
+
+.lip-quote-widget {
+  overflow: hidden;
+  border-radius: 0.35rem;
+  border: 1px solid #dbe5ef;
+  background: #fff;
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.1);
+}
+
+.lip-quote-head {
+  padding: 1.1rem 1.1rem 1.2rem;
+  background: #2a3645;
+  color: #fff;
+}
+
+.lip-quote-head h2 {
+  margin: 0 0 0.65rem;
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.25;
+}
+
+.lip-quote-head ul {
+  margin: 0;
+  padding: 0 0 0 1.05rem;
+  font-size: 0.86rem;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.lip-quote-body {
+  padding: 1rem 1rem 1.15rem;
+}
+
+.lip-quote-step {
+  display: inline-block;
+  margin-bottom: 0.65rem;
+  padding: 0.28rem 0.7rem;
+  border-radius: 999px;
+  background: #0d47a1;
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.lip-quote-progress {
+  height: 4px;
+  margin: 0 0 1rem;
+  border-radius: 999px;
+  background: #e2e8f0;
+  overflow: hidden;
+}
+
+.lip-quote-progress > span {
+  display: block;
+  width: 18%;
+  height: 100%;
+  background: #0d47a1;
+}
+
+.lip-quote-q {
+  margin: 0 0 0.85rem;
+  color: var(--lip-navy);
+  font-size: 1.05rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.lip-quote-choices {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.55rem;
+}
+
+.lip-quote-choices a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3rem;
+  border: 1.5px solid #0d47a1;
+  border-radius: 0.35rem;
+  background: #fff;
+  color: #0d47a1;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.lip-quote-choices a:hover {
+  background: #e8f1fc;
+}
+
+.lip-carriers {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.65rem 0.75rem;
+  align-items: center;
+  margin-top: 1.1rem;
+  padding-top: 0.95rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.lip-carriers img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  max-height: 28px;
+  margin: 0 auto;
+  object-fit: contain;
+  filter: grayscale(1);
+  opacity: 0.7;
+}
+
+.lip-faq {
+  margin-top: 0.25rem;
+  padding-top: 0.5rem;
+}
+
+.lip-faq h2 {
+  margin: 0 0 1rem;
+  color: #1a202c;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.45rem, 2.2vw, 1.85rem);
+  font-weight: 700;
+}
+
+.lip-faq details {
+  margin: 0;
+  padding: 0.95rem 0;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid #dbe5ef;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.lip-faq summary {
+  list-style: none;
+  cursor: pointer;
+  color: var(--lip-navy);
+  font-weight: 700;
+  font-size: 1.02rem;
+  padding-left: 1.6rem;
+  position: relative;
+}
+
+.lip-faq summary::-webkit-details-marker {
+  display: none;
+}
+
+.lip-faq summary::before {
+  content: "+";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #0d47a1;
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.lip-faq details[open] summary::before {
+  content: "−";
+}
+
+.lip-faq details p {
+  margin: 0.7rem 0 0.15rem 1.6rem;
+  color: var(--lip-muted);
+  line-height: 1.6;
+}
+
+.lip-faq details p a {
+  color: var(--lip-blue);
+  font-weight: 600;
+}
+
+.lip-note {
+  margin: 1.5rem 0 0;
+  padding: 0.85rem 1rem;
+  border-left: 3px solid #0d47a1;
+  background: #f8fafc;
+  color: var(--lip-muted);
+  font-size: 0.9rem;
+  border-radius: 0 0.4rem 0.4rem 0;
+}
+
+.lip-meta {
+  margin: 2rem 0 0;
+  border: 1px solid #dbe5ef;
+  border-radius: 0.35rem;
+  background: #fff;
+  overflow: hidden;
+}
+
+.lip-meta-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  border-bottom: 1px solid #dbe5ef;
+  background: #f8fafc;
+}
+
+.lip-meta-tab {
+  appearance: none;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  padding: 0.85rem 1rem;
+  color: #64748b;
+  font: inherit;
+  font-size: 0.92rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.lip-meta-tab.is-active,
+.lip-meta-tab[aria-selected="true"] {
+  color: #0d47a1;
+  border-bottom-color: #0d47a1;
+  background: #fff;
+}
+
+.lip-meta-panel {
+  display: none;
+  padding: 1.15rem 1.15rem 1.25rem;
+}
+
+.lip-meta-panel.is-active {
+  display: block;
+}
+
+.lip-author {
+  display: grid;
+  grid-template-columns: 72px minmax(0, 1fr);
+  gap: 0.95rem;
+  align-items: start;
+}
+
+.lip-author img {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+}
+
+.lip-author h3 {
+  margin: 0 0 0.15rem;
+  color: var(--lip-navy);
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+
+.lip-author .lip-author-role {
+  margin: 0 0 0.55rem;
+  color: #64748b;
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.lip-author p {
+  margin: 0;
+  color: var(--lip-muted);
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+.lip-author-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-top: 0.7rem;
+}
+
+.lip-author-links a {
+  color: #0d47a1;
+  font-size: 0.88rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.lip-author-links a:hover {
+  text-decoration: underline;
+}
+
+.lip-sources p,
+.lip-editors p,
+.lip-history p {
+  margin: 0 0 0.75rem;
+  color: var(--lip-muted);
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.lip-sources ol {
+  margin: 0;
+  padding-left: 1.2rem;
+  color: var(--lip-navy);
+}
+
+.lip-sources li {
+  margin: 0.35rem 0;
+  line-height: 1.45;
+}
+
+.lip-sources a {
+  color: #0d47a1;
+  font-weight: 600;
+}
+
+.lip-helpful {
+  margin: 1.25rem 0 0;
+  padding: 1.15rem 1.15rem 1.25rem;
+  border: 1px solid #dbe5ef;
+  border-radius: 0.35rem;
+  background: #fff;
+}
+
+.lip-helpful h2 {
+  margin: 0 0 0.85rem;
+  color: #1a202c;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.lip-helpful-scale {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 0.4rem;
+}
+
+.lip-helpful-scale label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  margin: 0;
+  cursor: pointer;
+}
+
+.lip-helpful-scale span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 2.4rem;
+  border-radius: 0.3rem;
+  background: #0d47a1;
+  color: #fff;
+  font-weight: 800;
+}
+
+.lip-helpful-scale small {
+  color: #64748b;
+  font-size: 0.68rem;
+  text-align: center;
+  line-height: 1.2;
+}
+
+.lip-helpful-scale input {
+  accent-color: #0d47a1;
+}
+
+@media (max-width: 575.98px) {
+  .lip-helpful-scale {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .lip-author {
+    grid-template-columns: 64px minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 991.98px) {
+  .lip-aside {
+    position: static;
+  }
+
+  .lip-toc-nav {
+    width: 100%;
+  }
+}
