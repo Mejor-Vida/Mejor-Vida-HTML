@@ -148,9 +148,9 @@
               final_expense:
                 ". Edades de muestra según el cuadro (hasta 85–90). Muestras educativas (~+5% vs cuadros públicos); no es cotización de compañía.",
               guaranteed:
-                ". Banda graduada/modificada (más difícil de asegurar). La emisión garantizada (p. ej. Corebridge) puede diferir — cotice.",
+                ". Edades de muestra 45–85. Muestras educativas; no es cotización de compañía.",
               universal_life:
-                "se requiere ilustración de la compañía (cargos, topes y financiamiento). Cotice con Julie.",
+                "primas mensuales ilustrativas (preferred no fumador). El costo real de UL/IUL depende del financiamiento — Julie puede preparar una ilustración.",
             },
             quoteLabel: "Cotizar →",
           }
@@ -174,9 +174,9 @@
               final_expense:
                 ". Sample ages per chart (through 85–90). Educational samples (~+5% vs public charts); not a carrier quote.",
               guaranteed:
-                ". Graded/modified (harder-to-insure) band. True guaranteed issue (e.g. Corebridge) may differ — get a quote.",
+                ". Sample ages 45–85. Educational samples; not a carrier quote.",
               universal_life:
-                "a carrier illustration is required (charges, caps, and funding). Get a quote with Julie.",
+                "illustrative monthly premiums (preferred non-tobacco). Actual UL/IUL cost depends on funding — Julie can run a carrier illustration.",
             },
             quoteLabel: "Get a quote →",
           };

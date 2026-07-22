@@ -1262,10 +1262,10 @@
     }
   },
   "guaranteed": {
-    "source": "Mutual of Omaha Living Promise + American Amicable (Nebraska quote_ranges, graded / modified band). True GI (e.g. Corebridge GIWL) may differ.",
-    "rating": "Non-tobacco, graded / modified (harder-to-insure) band",
-    "as_of": "quote_ranges seed (MOO + AmAm)",
-    "note": "Illustrative monthly premiums for $10,000–$25,000, scaled from $10,000 graded/modified quote ranges. Guaranteed-issue whole life (Corebridge / Americo) often starts near age 50 and may price differently — get a personalized quote.",
+    "source": "Industry sample guaranteed-acceptance rates, rounded",
+    "rating": "Guaranteed acceptance / graded (illustrative)",
+    "as_of": "2026-03-09",
+    "note": "Illustrative monthly premiums for $10,000–$25,000 guaranteed acceptance. Educational samples aligned with common published charts—not a carrier quote. Actual GI / graded offers vary by carrier, state, and product.",
     "faces": [
       10000,
       15000,
@@ -1316,9 +1316,8 @@
         },
         {
           "age": 85,
-          "female": null,
-          "male": null,
-          "quote": true
+          "female": 158,
+          "male": 193
         }
       ],
       "15000": [
@@ -1364,9 +1363,8 @@
         },
         {
           "age": 85,
-          "female": null,
-          "male": null,
-          "quote": true
+          "female": 236,
+          "male": 289
         }
       ],
       "20000": [
@@ -1412,9 +1410,8 @@
         },
         {
           "age": 85,
-          "female": null,
-          "male": null,
-          "quote": true
+          "female": 314,
+          "male": 384
         }
       ],
       "25000": [
@@ -1460,18 +1457,17 @@
         },
         {
           "age": 85,
-          "female": null,
-          "male": null,
-          "quote": true
+          "female": 393,
+          "male": 480
         }
       ]
     }
   },
   "universal_life": {
-    "source": "No public UL/IUL rate sheet in book yet — personalized illustration required (e.g. Mutual of Omaha IUL Express, American Amicable Express UL)",
-    "rating": "Preferred non-tobacco (when illustrated)",
-    "as_of": "illustration-required",
-    "note": "Universal / indexed universal life premiums depend on funding level, caps, charges, and underwriting. Use Get a quote — Julie can run a carrier illustration.",
+    "source": "Industry sample universal life rates (preferred non-tobacco), rounded",
+    "rating": "Preferred non-tobacco (illustrative)",
+    "as_of": "2026-03-09",
+    "note": "Illustrative universal life monthly premiums by age for $50,000–$500,000. Educational samples (~+5% vs public sample figures)—not a carrier quote. Actual UL/IUL cost depends on funding, caps, charges, health, and underwriting; Julie can run a carrier illustration.",
     "faces": [
       50000,
       100000,
@@ -1482,333 +1478,279 @@
       "50000": [
         {
           "age": 20,
-          "female": null,
-          "male": null,
-          "quote": true
+          "female": 36,
+          "male": 40
         },
         {
           "age": 25,
-          "female": null,
-          "male": null,
-          "quote": true
+          "female": 39,
+          "male": 44
         },
         {
           "age": 30,
-          "female": null,
-          "male": null,
-          "quote": true
+          "female": 44,
+          "male": 49
         },
         {
           "age": 35,
-          "female": null,
-          "male": null,
-          "quote": true
+          "female": 50,
+          "male": 58
         },
         {
           "age": 40,
-          "female": null,
-          "male": null,
-          "quote": true
+          "female": 58,
+          "male": 66
         },
         {
           "age": 45,
-          "female": null,
-          "male": null,
-          "quote": true
+          "female": 68,
+          "male": 78
         },
         {
           "age": 50,
-          "female": null,
-          "male": null,
-          "quote": true
+          "female": 82,
+          "male": 92
         },
         {
           "age": 55,
-          "female": null,
-          "male": null,
-          "quote": true
+          "female": 101,
+          "male": 113
         },
         {
           "age": 60,
-          "female": null,
-          "male": null,
-          "quote": true
+          "female": 126,
+          "male": 149
         },
         {
           "age": 65,
-          "female": null,
-          "male": null,
-          "quote": true
+          "female": 164,
+          "male": 198
         },
         {
           "age": 70,
-          "female": null,
-          "male": null,
-          "quote": true
+          "female": 208,
+          "male": 252
         },
         {
           "age": 75,
-          "female": null,
-          "male": null,
-          "quote": true
+          "female": 287,
+          "male": 360
         }
       ],
       "100000": [
         {
           "age": 20,
-          "female": null,
-          "male": null,
-          "quote": true
+          "female": 35,
+          "male": 39
         },
         {
           "age": 25,
-          "female": null,
-          "male": null,
-          "quote": true
+          "female": 35,
+          "male": 39
         },
         {
           "age": 30,
-          "female": null,
-          "male": null,
-          "quote": true
+          "female": 38,
+          "male": 44
         },
         {
           "age": 35,
-          "female": null,
-          "male": null,
-          "quote": true
+          "female": 47,
+          "male": 56
         },
         {
           "age": 40,
-          "female": null,
-          "male": null,
-          "quote": true
+          "female": 57,
+          "male": 66
         },
         {
           "age": 45,
-          "female": null,
-          "male": null,
-          "quote": true
+          "female": 67,
+          "male": 81
         },
         {
           "age": 50,
-          "female": null,
-          "male": null,
-          "quote": true
+          "female": 77,
+          "male": 94
         },
         {
           "age": 55,
-          "female": null,
-          "male": null,
-          "quote": true
+          "female": 87,
+          "male": 107
         },
         {
           "age": 60,
-          "female": null,
-          "male": null,
-          "quote": true
+          "female": 112,
+          "male": 142
         },
         {
           "age": 65,
-          "female": null,
-          "male": null,
-          "quote": true
+          "female": 138,
+          "male": 175
         },
         {
           "age": 70,
-          "female": null,
-          "male": null,
-          "quote": true
+          "female": 212,
+          "male": 300
         },
         {
           "age": 75,
-          "female": null,
-          "male": null,
-          "quote": true
+          "female": 292,
+          "male": 428
         },
         {
           "age": 80,
-          "female": null,
-          "male": null,
-          "quote": true
+          "female": 425,
+          "male": 631
         },
         {
           "age": 85,
-          "female": null,
-          "male": null,
-          "quote": true
+          "female": 648,
+          "male": 925
         }
       ],
       "250000": [
         {
           "age": 20,
-          "female": null,
-          "male": null,
-          "quote": true
+          "female": 106,
+          "male": 127
         },
         {
           "age": 25,
-          "female": null,
-          "male": null,
-          "quote": true
+          "female": 135,
+          "male": 153
         },
         {
           "age": 30,
-          "female": null,
-          "male": null,
-          "quote": true
+          "female": 150,
+          "male": 169
         },
         {
           "age": 35,
-          "female": null,
-          "male": null,
-          "quote": true
+          "female": 176,
+          "male": 200
         },
         {
           "age": 40,
-          "female": null,
-          "male": null,
-          "quote": true
+          "female": 212,
+          "male": 240
         },
         {
           "age": 45,
-          "female": null,
-          "male": null,
-          "quote": true
+          "female": 256,
+          "male": 290
         },
         {
           "age": 50,
-          "female": null,
-          "male": null,
-          "quote": true
+          "female": 316,
+          "male": 355
         },
         {
           "age": 55,
-          "female": null,
-          "male": null,
-          "quote": true
+          "female": 391,
+          "male": 429
         },
         {
           "age": 60,
-          "female": null,
-          "male": null,
-          "quote": true
+          "female": 491,
+          "male": 567
         },
         {
           "age": 65,
-          "female": null,
-          "male": null,
-          "quote": true
+          "female": 626,
+          "male": 707
         },
         {
           "age": 70,
-          "female": null,
-          "male": null,
-          "quote": true
+          "female": 802,
+          "male": 900
         },
         {
           "age": 75,
-          "female": null,
-          "male": null,
-          "quote": true
+          "female": 1053,
+          "male": 1184
         },
         {
           "age": 80,
-          "female": null,
-          "male": null,
-          "quote": true
+          "female": 1368,
+          "male": 1660
         },
         {
           "age": 85,
-          "female": null,
-          "male": null,
-          "quote": true
+          "female": 1865,
+          "male": 2338
         }
       ],
       "500000": [
         {
           "age": 20,
-          "female": null,
-          "male": null,
-          "quote": true
+          "female": 200,
+          "male": 226
         },
         {
           "age": 25,
-          "female": null,
-          "male": null,
-          "quote": true
+          "female": 251,
+          "male": 282
         },
         {
           "age": 30,
-          "female": null,
-          "male": null,
-          "quote": true
+          "female": 282,
+          "male": 318
         },
         {
           "age": 35,
-          "female": null,
-          "male": null,
-          "quote": true
+          "female": 334,
+          "male": 380
         },
         {
           "age": 40,
-          "female": null,
-          "male": null,
-          "quote": true
+          "female": 406,
+          "male": 463
         },
         {
           "age": 45,
-          "female": null,
-          "male": null,
-          "quote": true
+          "female": 495,
+          "male": 562
         },
         {
           "age": 50,
-          "female": null,
-          "male": null,
-          "quote": true
+          "female": 608,
+          "male": 686
         },
         {
           "age": 55,
-          "female": null,
-          "male": null,
-          "quote": true
+          "female": 758,
+          "male": 841
         },
         {
           "age": 60,
-          "female": null,
-          "male": null,
-          "quote": true
+          "female": 960,
+          "male": 1110
         },
         {
           "age": 65,
-          "female": null,
-          "male": null,
-          "quote": true
+          "female": 1223,
+          "male": 1389
         },
         {
           "age": 70,
-          "female": null,
-          "male": null,
-          "quote": true
+          "female": 1575,
+          "male": 1766
         },
         {
           "age": 75,
-          "female": null,
-          "male": null,
-          "quote": true
+          "female": 2072,
+          "male": 2319
         },
         {
           "age": 80,
-          "female": null,
-          "male": null,
-          "quote": true
+          "female": 2662,
+          "male": 3210
         },
         {
           "age": 85,
-          "female": null,
-          "male": null,
-          "quote": true
+          "female": 3633,
+          "male": 4653
         }
       ]
     }

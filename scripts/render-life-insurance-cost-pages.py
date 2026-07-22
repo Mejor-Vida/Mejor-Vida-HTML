@@ -132,15 +132,13 @@ def guaranteed_section(lang: str, quote_href: str) -> str:
         title = "Costo promedio del seguro de aceptación garantizada"
         lead = (
             "Primas mensuales ilustrativas por edad para montos de $10,000 a $25,000 "
-            "(banda graduada / modificada de Mutual of Omaha y American Amicable). "
-            "La emisión garantizada verdadera (p. ej. Corebridge GIWL, a menudo 50–80) puede cotizar distinto — hable con Julie."
+            "(aceptación garantizada / banda graduada; edades de muestra 45–85)."
         )
     else:
         title = "Average cost of guaranteed acceptance life insurance"
         lead = (
             "Illustrative monthly premiums by age for coverage amounts from $10,000 to $25,000 "
-            "(graded / modified band from Mutual of Omaha and American Amicable). "
-            "True guaranteed-issue products (e.g. Corebridge GIWL, often ages 50–80) may price differently — talk with Julie."
+            "(guaranteed acceptance / graded band; sample ages 45–85)."
         )
     return f"""<section class="lic-section" id="guaranteed" data-lic-product="gi" data-lic-quote-href="{quote_href}">
 <h2>{title}</h2>
@@ -167,16 +165,14 @@ def universal_life_section(lang: str, quote_href: str) -> str:
     if lang == "es":
         title = "Costo promedio del seguro de vida universal"
         lead = (
-            "La vida universal e indexada (IUL) no tiene una prima fija como la temporal o la vida entera: "
-            "depende del financiamiento, cargos y topes del índice. "
-            "Use Cotizar para que Julie prepare una ilustración (p. ej. Mutual of Omaha IUL Express o American Amicable Express UL)."
+            "Primas mensuales ilustrativas (preferred no fumador) por edad para montos de $50,000 a $500,000. "
+            "La vida universal e indexada (IUL) también depende del financiamiento, cargos y topes — Julie puede preparar una ilustración real."
         )
     else:
         title = "Average cost of universal life insurance"
         lead = (
-            "Universal and indexed universal life (IUL) do not have a single fixed premium like term or whole life — "
-            "cost depends on funding level, charges, and index caps. "
-            "Use Get a quote so Julie can run an illustration (e.g. Mutual of Omaha IUL Express or American Amicable Express UL)."
+            "Illustrative monthly premiums (preferred non-tobacco) by age for coverage amounts from $50,000 to $500,000. "
+            "Universal and indexed universal life (IUL) also depend on funding, charges, and caps — Julie can run a real carrier illustration."
         )
     return f"""<section class="lic-section" id="universal-life" data-lic-product="ul" data-lic-quote-href="{quote_href}">
 <h2>{title}</h2>
@@ -195,33 +191,38 @@ def universal_life_section(lang: str, quote_href: str) -> str:
 
 
 def children_section(lang: str, quote_href: str) -> str:
-    q = "Cotizar →" if lang == "es" else "Get a quote →"
-    bands = ["0–4", "5–9", "10–14", "15–17"]
+    # Industry sample children’s whole life (unisex), ~+5% vs public sample figures, rounded.
+    # Bands: 0–4, 5–9, 10–14, 15–17 × $10k / $25k / $50k
+    rates = [
+        ("0–4", 5, 11, 20),
+        ("5–9", 6, 13, 24),
+        ("10–14", 6, 15, 28),
+        ("15–17", 8, 19, 36),
+    ]
     rows = "".join(
-        f'<tr><td>{b}</td><td colspan="3" class="lic-quote-cell">'
-        f'<a class="lic-quote-inline" href="{quote_href}">{q}</a></td></tr>'
-        for b in bands
+        f"<tr><td>{band}</td><td>${a10:,}</td><td>${a25:,}</td><td>${a50:,}</td></tr>"
+        for band, a10, a25, a50 in rates
     )
     if lang == "es":
         title = "Costo promedio del seguro de vida infantil"
         lead = (
-            "Mutual of Omaha Children’s Whole Life suele ofrecer $5,000–$50,000 desde los 14 días hasta los 17 años "
-            "(sin examen médico en muchos casos). Las primas exactas dependen de la edad y el monto — cotice con Julie."
+            "Primas mensuales ilustrativas (unisex) por banda de edad para $10,000, $25,000 y $50,000 "
+            "(seguro de vida entera infantil; edades típicas desde 14 días hasta 17 años)."
         )
         note = (
-            "Tabla orientativa por bandas de edad. No publicamos una hoja de tarifas infantil completa en el sitio; "
-            "Julie cotiza Children’s Whole Life u opciones juveniles de compañías designadas."
+            "Primas mensuales ilustrativas (redondeadas). Muestras educativas (~+5% vs cuadros públicos); "
+            "no es cotización de compañía. Las cotizaciones reales de Mejor Vida dependen de la compañía, la edad exacta y el monto."
         )
         age_h, c10, c25, c50 = "Edad", "$10,000", "$25,000", "$50,000"
     else:
         title = "Average cost of children’s life insurance"
         lead = (
-            "Mutual of Omaha Children’s Whole Life typically offers $5,000–$50,000 from 14 days through age 17 "
-            "(often no medical exam). Exact premiums depend on age and face amount — get a quote with Julie."
+            "Illustrative monthly premiums (unisex) by age band for $10,000, $25,000, and $50,000 "
+            "(children’s whole life; typical issue ages from 14 days through 17)."
         )
         note = (
-            "Age-band orientation table. We do not publish a full children’s rate sheet on the site; "
-            "Julie quotes Children’s Whole Life or appointed-carrier juvenile options."
+            "Illustrative monthly premiums (rounded). Educational samples (~+5% vs public charts); "
+            "not a carrier quote. Actual Mejor Vida prices depend on carrier, exact age, and face amount."
         )
         age_h, c10, c25, c50 = "Age", "$10,000", "$25,000", "$50,000"
     return f"""<section class="lic-section" id="children">
@@ -395,9 +396,6 @@ def faq_and_meta_sections(lang: str, quote_href: str, prefix: str) -> str:
 <li><strong>Julio 2026</strong> — Tablas temporales alineadas a rangos preferred ilustrativos (edades 20–80) y página de costos bilingüe.</li>
 </ul>
 </div>
-<aside class="lic-helpful" aria-label="Comentarios">
-<p><strong>¿Le fue útil esta guía?</strong> <a href="{contact}">Cuéntenos</a> o <a href="{quote_href}">cotice con Julie</a>.</p>
-</aside>
 </section>"""
 
     faqs = [
@@ -460,9 +458,6 @@ def faq_and_meta_sections(lang: str, quote_href: str, prefix: str) -> str:
 <li><strong>July 2026</strong> — Term charts aligned to illustrative preferred ranges (ages 20–80) and bilingual cost hub published.</li>
 </ul>
 </div>
-<aside class="lic-helpful" aria-label="Feedback">
-<p><strong>Was this guide helpful?</strong> <a href="{contact}">Tell us</a> or <a href="{quote_href}">get a quote with Julie</a>.</p>
-</aside>
 </section>"""
 
 
@@ -668,7 +663,7 @@ def build(lang: str, header: str, footer: str) -> str:
 <script defer src="{prefix}js/mvi-nav-questions.js"></script>
 <script defer src="{prefix}js/website-assistant-widget.js?v=20260721-chat-z"></script>
 <script>window.MVI_LIC_RATES = {RATES_JS};</script>
-<script defer src="{prefix}js/life-insurance-cost.js?v=20260721-cm-ages"></script>
+<script defer src="{prefix}js/life-insurance-cost.js?v=20260721-gi-ul-fill"></script>
 <script>document.getElementById('year') && (document.getElementById('year').textContent = new Date().getFullYear());</script>
 </body>
 </html>
