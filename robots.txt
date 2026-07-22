@@ -1,3 +1,6 @@
+# Mejor Vida Insurance — Spanish is the SEO language.
+# /en/ stays live for bilingual families (UI language switchers) but is
+# disallowed for crawlers. English pages also use noindex, follow.
 User-agent: *
 Disallow: /staff/
 Disallow: /sources/

@@ -22,9 +22,10 @@ PAGES = {
     "sms-optin.html": ("/sms-optin.html", "/en/sms-optin.html"),
 }
 
+# Spanish-only SEO: keep EN pages for bilingual families, but do not advertise
+# them to crawlers via hreflang="en" (robots.txt Disallow: /en/ + noindex).
 HREFLANG_BLOCK = """
   <link rel="alternate" hreflang="es" href="{es_url}" />
-  <link rel="alternate" hreflang="en" href="{en_url}" />
   <link rel="alternate" hreflang="x-default" href="{es_url}" />"""
 
 ENGLISH_LINK = (

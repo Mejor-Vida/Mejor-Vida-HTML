@@ -408,9 +408,19 @@ def inject_en_urls_basic(soup: BeautifulSoup, en_rel: str, es_rel: str) -> None:
             meta["content"] = "en_US"
     for link in head.find_all("link", rel="alternate"):
         link.decompose()
-    head.append(soup.new_tag("link", rel="alternate", hreflang="es", href=es_url))
-    head.append(soup.new_tag("link", rel="alternate", hreflang="en", href=en_url))
-    head.append(soup.new_tag("link", rel="alternate", hreflang="x-default", href=es_url))
+    # EN is for bilingual families only — do not emit hreflang="en".
+    # Spanish remains the sole crawlable language (robots Disallow: /en/).
+    robots = head.find("meta", attrs={"name": "robots"})
+    if robots:
+        robots["content"] = "noindex, follow"
+    else:
+        m = soup.new_tag("meta")
+        m["content"] = "noindex, follow"
+        m["name"] = "robots"
+        head.append(m)
+    for meta in head.find_all("meta"):
+        if meta.get("property") == "og:locale:alternate":
+            meta.decompose()
 
 
 def remove_lang_toggle_ui(soup: BeautifulSoup) -> None:
@@ -853,10 +863,18 @@ def inject_seo(soup: BeautifulSoup, en_file: str, es_key: str) -> None:
 
     for link in head.find_all("link", rel="alternate"):
         link.decompose()
-
-    head.append(soup.new_tag("link", rel="alternate", hreflang="es", href=es_url))
-    head.append(soup.new_tag("link", rel="alternate", hreflang="en", href=en_url))
-    head.append(soup.new_tag("link", rel="alternate", hreflang="x-default", href=es_url))
+    # EN is for bilingual families only — no hreflang="en"; keep pages noindex.
+    robots = head.find("meta", attrs={"name": "robots"})
+    if robots:
+        robots["content"] = "noindex, follow"
+    else:
+        m = soup.new_tag("meta")
+        m["content"] = "noindex, follow"
+        m["name"] = "robots"
+        head.append(m)
+    for meta in list(head.find_all("meta")):
+        if meta.get("property") == "og:locale:alternate":
+            meta.decompose()
 
     if not head.find("meta", property="og:title"):
         m = soup.new_tag("meta")

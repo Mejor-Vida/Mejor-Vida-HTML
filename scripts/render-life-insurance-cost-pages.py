@@ -595,12 +595,11 @@ def build(lang: str, header: str, footer: str) -> str:
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>{title}</title>
 <meta content="{desc}" name="description"/>
-<meta content="index, follow" name="robots"/>
+<meta content="{"index, follow" if is_es else "noindex, follow"}" name="robots"/>
 <link href="{canonical}" rel="canonical"/>
-<link href="https://www.mejorvidainsurance.com/costo-seguro-vida.html" hreflang="es" rel="alternate"/>
-<link href="https://www.mejorvidainsurance.com/en/life-insurance-cost.html" hreflang="en" rel="alternate"/>
+{'''<link href="https://www.mejorvidainsurance.com/costo-seguro-vida.html" hreflang="es" rel="alternate"/>
 <link href="https://www.mejorvidainsurance.com/costo-seguro-vida.html" hreflang="x-default" rel="alternate"/>
-<link href="{prefix}favicon.ico" rel="icon" type="image/x-icon"/>
+''' if is_es else ""}<link href="{prefix}favicon.ico" rel="icon" type="image/x-icon"/>
 <link href="{prefix}bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
 <link href="{prefix}css/quote-flow-shared.css?v=20260721-lic-cost" rel="stylesheet"/>
 <link href="{prefix}css/site-footer.css?v=20260721-lip-page" rel="stylesheet"/>
