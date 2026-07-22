@@ -62,16 +62,14 @@ def whole_life_section(lang: str, quote_href: str) -> str:
     if lang == "es":
         title = "Costo promedio del seguro de vida entera"
         lead = (
-            "Primas mensuales ilustrativas por edad para montos de $50,000 a $500,000 "
-            "(Assurity Protect+, preferred plus no fumador, escaladas desde la tarifa de $10,000). "
-            "Para edades 50+, use el enlace de cotización en la tabla o hable con Julie."
+            "Primas mensuales ilustrativas (preferred / no fumador) por edad para montos de $50,000 a $500,000 "
+            "(edades de muestra 20–85)."
         )
     else:
         title = "Average cost of whole life insurance"
         lead = (
-            "Illustrative monthly premiums by age for coverage amounts from $50,000 to $500,000 "
-            "(Assurity Protect+, preferred plus non-tobacco, scaled from $10,000 rates). "
-            "For ages 50+, use the quote link in the table or talk with Julie."
+            "Illustrative monthly premiums (preferred / non-tobacco) by age for coverage amounts from $50,000 to $500,000 "
+            "(sample ages 20–85)."
         )
     return f"""<section class="lic-section" id="whole-life" data-lic-product="whole" data-lic-quote-href="{quote_href}">
 <h2>{title}</h2>
@@ -98,16 +96,14 @@ def final_expense_section(lang: str, quote_href: str, fe_p: str) -> str:
     if lang == "es":
         title = "Costo promedio del seguro de gastos finales"
         lead = (
-            "Primas mensuales ilustrativas por edad para montos de $5,000 a $50,000 "
-            "(banda de buena salud / beneficio nivelado, Mutual of Omaha Living Promise y American Amicable; "
-            "edad 40 desde Assurity Protect+). Edades 86+ requieren cotización."
+            "Primas mensuales ilustrativas (no fumador) por edad para montos de $5,000 a $50,000 "
+            "(edades de muestra según el cuadro, hasta 85–90)."
         )
     else:
         title = "Average cost of final expense insurance"
         lead = (
-            "Illustrative monthly premiums by age for coverage amounts from $5,000 to $50,000 "
-            "(good-health / level benefit band from Mutual of Omaha Living Promise and American Amicable; "
-            "age 40 from Assurity Protect+). Ages 86+ require a quote."
+            "Illustrative monthly premiums (non-tobacco) by age for coverage amounts from $5,000 to $50,000 "
+            "(sample ages per chart, through 85–90)."
         )
     return f"""<section class="lic-section" id="final-expense" data-lic-product="fe" data-lic-quote-href="{quote_href}">
 <h2>{title}</h2>
@@ -388,7 +384,8 @@ def faq_and_meta_sections(lang: str, quote_href: str, prefix: str) -> str:
 <ol class="lic-sources">
 <li>Tablas temporales: primas ilustrativas preferred no fumador (muestras del sector, redondeadas).</li>
 <li>Gastos finales / graduado: rangos de cotización Mutual of Omaha + American Amicable (Nebraska).</li>
-<li>Vida entera ilustrativa (edades jóvenes): Assurity Protect+ (flyer preferred plus).</li>
+<li>Vida entera ilustrativa: muestras educativas de mercado (preferred / no fumador), edades 20–85.</li>
+<li>Gastos finales ilustrativos: muestras educativas de mercado (no fumador).</li>
 <li>Esperanza de vida (contexto educativo): <a href="https://www.cdc.gov/nchs/fastats/life-expectancy.htm" rel="noopener noreferrer" target="_blank">CDC NCHS</a>.</li>
 <li>Necesidad de cobertura (DIME): prácticas de la industria; Julie adapta el análisis a su situación.</li>
 </ol>
@@ -452,7 +449,8 @@ def faq_and_meta_sections(lang: str, quote_href: str, prefix: str) -> str:
 <ol class="lic-sources">
 <li>Term tables: illustrative preferred non-tobacco industry sample rates (rounded).</li>
 <li>Final expense / graded bands: Mutual of Omaha + American Amicable Nebraska quote ranges.</li>
-<li>Illustrative whole life (younger ages): Assurity Protect+ (preferred plus flyer).</li>
+<li>Illustrative whole life: educational market samples (preferred / non-tobacco), ages 20–85.</li>
+<li>Illustrative final expense: educational market samples (non-tobacco).</li>
 <li>Life expectancy (educational context): <a href="https://www.cdc.gov/nchs/fastats/life-expectancy.htm" rel="noopener noreferrer" target="_blank">CDC NCHS</a>.</li>
 <li>Coverage need (DIME): industry practice; Julie tailors the analysis to your situation.</li>
 </ol>

@@ -144,9 +144,9 @@
             },
             bucketNoteSuffix: {
               whole_life:
-                ". Edades 50+ requieren cotización personalizada. Montos altos son solo comparación; Assurity Protect+ suele empezar cerca de $10,000.",
+                ". Edades de muestra 20–85. Muestras educativas (~+5% vs cuadros públicos); no es cotización de compañía.",
               final_expense:
-                ". Edades 86+ requieren cotización personalizada. Escaladas desde rangos de $10,000 (MOO + AmAm).",
+                ". Edades de muestra según el cuadro (hasta 85–90). Muestras educativas (~+5% vs cuadros públicos); no es cotización de compañía.",
               guaranteed:
                 ". Banda graduada/modificada (más difícil de asegurar). La emisión garantizada (p. ej. Corebridge) puede diferir — cotice.",
               universal_life:
@@ -170,9 +170,9 @@
             },
             bucketNoteSuffix: {
               whole_life:
-                ". Ages 50+ need a personalized quote. Higher face amounts are for comparison only; Assurity Protect+ typically starts near $10,000.",
+                ". Sample ages 20–85. Educational samples (~+5% vs public charts); not a carrier quote.",
               final_expense:
-                ". Ages 86+ need a personalized quote. Scaled from $10,000 quote ranges (MOO + AmAm).",
+                ". Sample ages per chart (through 85–90). Educational samples (~+5% vs public charts); not a carrier quote.",
               guaranteed:
                 ". Graded/modified (harder-to-insure) band. True guaranteed issue (e.g. Corebridge) may differ — get a quote.",
               universal_life:
