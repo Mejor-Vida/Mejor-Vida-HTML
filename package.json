@@ -37,7 +37,8 @@
     "harvest:winflex:auto": "node scripts/winflex-auto-extract.mjs",
     "term:import-spots": "node scripts/term-spot-import.mjs",
     "assurity:import-spot": "node scripts/assurity-fe-spot-import.js",
-    "assurity:interpolate-tobacco": "node scripts/interpolate-assurity-tobacco-from-anchors.js"
+    "assurity:interpolate-tobacco": "node scripts/interpolate-assurity-tobacco-from-anchors.js",
+    "optimize:avatars": "node scripts/optimize-chat-avatars.js"
   },
   "dependencies": {
     "googleapis": "^171.4.0"
