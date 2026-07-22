@@ -103,7 +103,7 @@ body.lf-landing {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  background: #0b3a7a;
+  background: #25d366;
   color: #fff;
   font-weight: 700;
   font-size: 0.875rem;
@@ -115,7 +115,7 @@ body.lf-landing {
 }
 
 .lf-header-whatsapp-btn:hover {
-  background: #0d47a1;
+  background: #1da851;
   color: #fff;
 }
 
@@ -2082,7 +2082,7 @@ body.lf-landing {
     justify-content: center;
     gap: 0;
     font-size: 0;
-    background: linear-gradient(180deg, #3ee576 0%, #0b3a7a 45%, #1ebe5b 100%);
+    background: linear-gradient(180deg, #3ee576 0%, #25d366 45%, #1ebe5b 100%);
     border: none;
     box-shadow:
       0 4px 16px rgba(37, 211, 102, 0.5),

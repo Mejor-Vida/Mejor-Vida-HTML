@@ -301,7 +301,7 @@ header.sticky-top > .container {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  background: #0b3a7a;
+  background: #25d366;
   color: #fff !important;
   font-weight: 700;
   font-size: 0.875rem;
@@ -312,7 +312,7 @@ header.sticky-top > .container {
 }
 
 .header-whatsapp-btn:hover {
-  background: #0d47a1;
+  background: #1da851;
   color: #fff !important;
 }
 
