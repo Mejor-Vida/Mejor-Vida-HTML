@@ -10,7 +10,9 @@ ROOT = Path(__file__).resolve().parents[1]
 ES_TEMPLATE = (ROOT / "includes" / "site-header-inner.html").read_text(encoding="utf-8")
 EN_TEMPLATE = (ROOT / "includes" / "en-site-header.html").read_text(encoding="utf-8")
 HEADER_RE = re.compile(
-    r"<header class=\"sticky-top bg-white shadow-sm border-bottom\">.*?</header>",
+    r"<header class=\"sticky-top bg-white shadow-sm border-bottom\">.*?</header>"
+    r"(?:\s*<a\b[^>]*\bmvi-whatsapp-fab\b[^>]*>.*?</a>)?"
+    r"(?:\s*<div class=\"mvi-float-stack\">.*?</div>)?",
     re.DOTALL,
 )
 SKIP_DIRS = {
