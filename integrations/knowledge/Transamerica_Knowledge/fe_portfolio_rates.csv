@@ -1,0 +1,1412 @@
+product,risk_class,age,sex,tobacco,rate_per_1000,source,notes
+10-Pay,Preferred,0,Female,Juvenile,16.44,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,0,Male,Juvenile,18.23,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,1,Female,Juvenile,16.72,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,1,Male,Juvenile,18.55,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,2,Female,Juvenile,16.99,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,2,Male,Juvenile,18.85,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,3,Female,Juvenile,17.27,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,3,Male,Juvenile,19.17,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,4,Female,Juvenile,17.54,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,4,Male,Juvenile,19.48,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,5,Female,Juvenile,17.82,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,5,Male,Juvenile,19.8,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,6,Female,Juvenile,18.23,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,6,Male,Juvenile,20.34,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,7,Female,Juvenile,18.64,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,7,Male,Juvenile,20.88,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,8,Female,Juvenile,19.06,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,8,Male,Juvenile,21.43,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,9,Female,Juvenile,19.47,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,9,Male,Juvenile,21.96,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,10,Female,Juvenile,19.88,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,10,Male,Juvenile,22.51,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,11,Female,Juvenile,20.39,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,11,Male,Juvenile,23.29,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,12,Female,Juvenile,20.9,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,12,Male,Juvenile,24.08,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,13,Female,Juvenile,21.42,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,13,Male,Juvenile,24.85,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,14,Female,Juvenile,21.93,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,14,Male,Juvenile,25.64,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,15,Female,Juvenile,22.44,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,15,Male,Juvenile,26.42,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,16,Female,Juvenile,23.64,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,16,Male,Juvenile,28.37,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,17,Female,Juvenile,24.85,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,17,Male,Juvenile,30.32,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,18,Female,Nontobacco,19.61,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,18,Female,Tobacco,26.07,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,18,Male,Nontobacco,25.49,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,18,Male,Tobacco,32.28,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,19,Female,Nontobacco,19.96,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,19,Female,Tobacco,27.28,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,19,Male,Nontobacco,25.94,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,19,Male,Tobacco,34.22,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,20,Female,Nontobacco,20.4,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,20,Female,Tobacco,28.49,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,20,Male,Nontobacco,26.39,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,20,Male,Tobacco,36.17,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,21,Female,Nontobacco,21.03,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,21,Female,Tobacco,29.4,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,21,Male,Nontobacco,28.07,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,21,Male,Tobacco,37.21,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,22,Female,Nontobacco,21.67,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,22,Female,Tobacco,30.3,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,22,Male,Nontobacco,29.75,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,22,Male,Tobacco,38.25,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,23,Female,Nontobacco,22.3,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,23,Female,Tobacco,31.19,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,23,Male,Nontobacco,31.43,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,23,Male,Tobacco,39.29,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,24,Female,Nontobacco,22.93,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,24,Female,Tobacco,32.09,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,24,Male,Nontobacco,33.11,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,24,Male,Tobacco,40.33,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,25,Female,Nontobacco,23.57,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,25,Female,Tobacco,33.0,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,25,Male,Nontobacco,34.79,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,25,Male,Tobacco,41.37,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,26,Female,Nontobacco,25.36,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,26,Female,Tobacco,34.85,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,26,Male,Nontobacco,35.58,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,26,Male,Tobacco,42.78,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,27,Female,Nontobacco,27.16,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,27,Female,Tobacco,36.7,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,27,Male,Nontobacco,36.36,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,27,Male,Tobacco,44.19,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,28,Female,Nontobacco,28.94,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,28,Female,Tobacco,38.54,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,28,Male,Nontobacco,37.16,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,28,Male,Tobacco,45.61,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,29,Female,Nontobacco,30.74,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,29,Female,Tobacco,40.4,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,29,Male,Nontobacco,37.95,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,29,Male,Tobacco,47.02,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,30,Female,Nontobacco,32.53,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,30,Female,Tobacco,42.25,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,30,Male,Nontobacco,38.74,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,30,Male,Tobacco,48.43,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,31,Female,Nontobacco,33.3,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,31,Female,Tobacco,43.05,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,31,Male,Nontobacco,39.5,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,31,Male,Tobacco,49.45,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,32,Female,Nontobacco,34.07,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,32,Female,Tobacco,43.84,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,32,Male,Nontobacco,40.27,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,32,Male,Tobacco,50.47,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,33,Female,Nontobacco,34.85,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,33,Female,Tobacco,44.64,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,33,Male,Nontobacco,41.03,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,33,Male,Tobacco,51.49,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,34,Female,Nontobacco,35.62,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,34,Female,Tobacco,45.44,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,34,Male,Nontobacco,41.8,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,34,Male,Tobacco,52.51,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,35,Female,Nontobacco,36.38,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,35,Female,Tobacco,46.23,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,35,Male,Nontobacco,42.57,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,35,Male,Tobacco,53.53,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,36,Female,Nontobacco,37.27,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,36,Female,Tobacco,47.15,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,36,Male,Nontobacco,43.21,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,36,Male,Tobacco,54.76,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,37,Female,Nontobacco,38.15,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,37,Female,Tobacco,48.06,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,37,Male,Nontobacco,43.85,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,37,Male,Tobacco,55.99,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,38,Female,Nontobacco,39.03,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,38,Female,Tobacco,48.97,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,38,Male,Nontobacco,44.51,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,38,Male,Tobacco,57.23,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,39,Female,Nontobacco,39.92,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,39,Female,Tobacco,49.88,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,39,Male,Nontobacco,45.15,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,39,Male,Tobacco,58.45,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,40,Female,Nontobacco,40.8,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,40,Female,Tobacco,50.79,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,40,Male,Nontobacco,45.79,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,40,Male,Tobacco,59.68,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,41,Female,Nontobacco,42.39,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,41,Female,Tobacco,53.53,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,41,Male,Nontobacco,48.52,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,41,Male,Tobacco,62.99,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,42,Female,Nontobacco,43.99,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,42,Female,Tobacco,56.27,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,42,Male,Nontobacco,51.25,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,42,Male,Tobacco,66.28,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,43,Female,Nontobacco,45.57,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,43,Female,Tobacco,59.0,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,43,Male,Nontobacco,53.98,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,43,Male,Tobacco,69.58,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,44,Female,Nontobacco,47.16,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,44,Female,Tobacco,61.74,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,44,Male,Nontobacco,56.72,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,44,Male,Tobacco,72.87,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,45,Female,Nontobacco,48.76,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,45,Female,Tobacco,64.47,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,45,Male,Nontobacco,59.44,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,45,Male,Tobacco,76.18,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,46,Female,Nontobacco,50.73,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,46,Female,Tobacco,66.14,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,46,Male,Nontobacco,61.38,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,46,Male,Tobacco,78.11,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,47,Female,Nontobacco,52.68,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,47,Female,Tobacco,67.81,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,47,Male,Nontobacco,63.32,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,47,Male,Tobacco,80.04,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,48,Female,Nontobacco,54.65,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,48,Female,Tobacco,69.48,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,48,Male,Nontobacco,65.25,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,48,Male,Tobacco,81.96,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,49,Female,Nontobacco,56.61,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,49,Female,Tobacco,71.16,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,49,Male,Nontobacco,67.19,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,49,Male,Tobacco,83.89,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,50,Female,Nontobacco,58.58,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,50,Female,Tobacco,72.83,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,50,Male,Nontobacco,69.13,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,50,Male,Tobacco,85.82,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,51,Female,Nontobacco,60.36,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,51,Female,Tobacco,74.74,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,51,Male,Nontobacco,71.1,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,51,Male,Tobacco,88.17,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,52,Female,Nontobacco,62.15,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,52,Female,Tobacco,76.65,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,52,Male,Nontobacco,73.07,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,52,Male,Tobacco,90.51,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,53,Female,Nontobacco,63.95,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,53,Female,Tobacco,78.57,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,53,Male,Nontobacco,75.03,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,53,Male,Tobacco,92.84,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,54,Female,Nontobacco,65.73,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,54,Female,Tobacco,80.48,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,54,Male,Nontobacco,77.0,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,54,Male,Tobacco,95.18,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,55,Female,Nontobacco,67.52,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,55,Female,Tobacco,82.39,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,55,Male,Nontobacco,78.97,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,55,Male,Tobacco,97.53,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,56,Female,Nontobacco,68.78,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,56,Female,Tobacco,83.16,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,56,Male,Nontobacco,80.23,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,56,Male,Tobacco,98.47,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,57,Female,Nontobacco,70.04,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,57,Female,Tobacco,83.94,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,57,Male,Nontobacco,81.48,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,57,Male,Tobacco,99.41,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,58,Female,Nontobacco,71.31,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,58,Female,Tobacco,84.73,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,58,Male,Nontobacco,82.74,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,58,Male,Tobacco,100.36,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,59,Female,Nontobacco,72.57,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,59,Female,Tobacco,85.51,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,59,Male,Nontobacco,84.0,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,59,Male,Tobacco,101.3,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,60,Female,Nontobacco,73.83,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,60,Female,Tobacco,86.28,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,60,Male,Nontobacco,85.26,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,60,Male,Tobacco,102.24,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,61,Female,Nontobacco,75.92,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,61,Female,Tobacco,88.34,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,61,Male,Nontobacco,88.15,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,61,Male,Tobacco,105.66,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,62,Female,Nontobacco,78.01,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,62,Female,Tobacco,90.4,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,62,Male,Nontobacco,91.04,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,62,Male,Tobacco,109.08,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,63,Female,Nontobacco,80.09,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,63,Female,Tobacco,92.46,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,63,Male,Nontobacco,93.93,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,63,Male,Tobacco,112.48,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,64,Female,Nontobacco,82.19,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,64,Female,Tobacco,94.52,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,64,Male,Nontobacco,96.82,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,64,Male,Tobacco,115.9,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,65,Female,Nontobacco,84.27,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,65,Female,Tobacco,96.58,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,65,Male,Nontobacco,99.71,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,65,Male,Tobacco,119.32,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,66,Female,Nontobacco,86.84,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,66,Female,Tobacco,99.86,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,66,Male,Nontobacco,103.48,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,66,Male,Tobacco,124.18,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,67,Female,Nontobacco,89.41,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,67,Female,Tobacco,103.14,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,67,Male,Nontobacco,107.26,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,67,Male,Tobacco,129.02,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,68,Female,Nontobacco,91.98,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,68,Female,Tobacco,106.44,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,68,Male,Nontobacco,111.03,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,68,Male,Tobacco,133.88,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,69,Female,Nontobacco,94.55,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,69,Female,Tobacco,109.72,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,69,Male,Nontobacco,114.82,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,69,Male,Tobacco,138.73,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,70,Female,Nontobacco,97.12,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,70,Female,Tobacco,113.0,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,70,Male,Nontobacco,118.59,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,70,Male,Tobacco,143.59,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,71,Female,Nontobacco,100.74,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,71,Female,Tobacco,117.5,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,71,Male,Nontobacco,122.83,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,71,Male,Tobacco,149.51,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,72,Female,Nontobacco,104.36,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,72,Female,Tobacco,122.01,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,72,Male,Nontobacco,127.08,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,72,Male,Tobacco,155.42,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,73,Female,Nontobacco,107.98,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,73,Female,Tobacco,126.52,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,73,Male,Nontobacco,131.33,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,73,Male,Tobacco,161.35,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,74,Female,Nontobacco,111.6,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,74,Female,Tobacco,131.02,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,74,Male,Nontobacco,135.57,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,74,Male,Tobacco,174.23,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,75,Female,Nontobacco,115.22,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,75,Female,Tobacco,135.52,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,75,Male,Nontobacco,139.81,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,75,Male,Tobacco,180.4,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,76,Female,Nontobacco,121.97,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,76,Female,Tobacco,145.16,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,76,Male,Nontobacco,148.7,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,76,Male,Tobacco,194.63,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,77,Female,Nontobacco,128.72,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,77,Female,Tobacco,154.81,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,77,Male,Nontobacco,157.58,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,77,Male,Tobacco,208.85,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,78,Female,Nontobacco,135.48,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,78,Female,Tobacco,164.45,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,78,Male,Nontobacco,166.47,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,78,Male,Tobacco,223.08,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,79,Female,Nontobacco,142.22,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,79,Female,Tobacco,174.1,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,79,Male,Nontobacco,175.35,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,79,Male,Tobacco,237.3,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,80,Female,Nontobacco,148.97,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,80,Female,Tobacco,183.73,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,80,Male,Nontobacco,184.24,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,80,Male,Tobacco,251.53,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,81,Female,Nontobacco,156.4,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,81,Female,Tobacco,195.39,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,81,Male,Nontobacco,195.31,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,81,Male,Tobacco,272.29,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,82,Female,Nontobacco,163.83,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,82,Female,Tobacco,207.04,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,82,Male,Nontobacco,206.39,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,82,Male,Tobacco,293.04,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,83,Female,Nontobacco,171.27,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,83,Female,Tobacco,218.69,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,83,Male,Nontobacco,217.46,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,83,Male,Tobacco,313.8,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,84,Female,Nontobacco,178.7,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,84,Female,Tobacco,239.94,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,84,Male,Nontobacco,238.06,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,84,Male,Tobacco,334.55,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,85,Female,Nontobacco,186.13,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,85,Female,Tobacco,252.08,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,85,Male,Nontobacco,249.59,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Preferred,85,Male,Tobacco,355.31,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,0,Female,Juvenile,17.85,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,0,Male,Juvenile,20.68,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,1,Female,Juvenile,18.02,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,1,Male,Juvenile,20.84,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,2,Female,Juvenile,18.19,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,2,Male,Juvenile,21.01,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,3,Female,Juvenile,18.37,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,3,Male,Juvenile,21.18,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,4,Female,Juvenile,18.55,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,4,Male,Juvenile,21.35,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,5,Female,Juvenile,18.72,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,5,Male,Juvenile,21.51,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,6,Female,Juvenile,19.18,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,6,Male,Juvenile,22.23,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,7,Female,Juvenile,19.64,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,7,Male,Juvenile,22.95,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,8,Female,Juvenile,20.1,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,8,Male,Juvenile,23.66,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,9,Female,Juvenile,20.56,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,9,Male,Juvenile,24.38,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,10,Female,Juvenile,21.02,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,10,Male,Juvenile,25.1,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,11,Female,Juvenile,21.62,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,11,Male,Juvenile,26.26,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,12,Female,Juvenile,22.21,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,12,Male,Juvenile,27.42,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,13,Female,Juvenile,22.81,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,13,Male,Juvenile,28.57,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,14,Female,Juvenile,23.4,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,14,Male,Juvenile,29.73,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,15,Female,Juvenile,24.0,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,15,Male,Juvenile,30.88,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,16,Female,Juvenile,25.56,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,16,Male,Juvenile,32.45,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,17,Female,Juvenile,27.11,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,17,Male,Juvenile,34.0,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,18,Female,Nontobacco,20.64,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,18,Female,Tobacco,28.66,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,18,Male,Nontobacco,26.57,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,18,Male,Tobacco,35.57,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,19,Female,Nontobacco,21.0,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,19,Female,Tobacco,30.21,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,19,Male,Nontobacco,27.0,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,19,Male,Tobacco,37.12,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,20,Female,Nontobacco,21.46,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,20,Female,Tobacco,31.77,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,20,Male,Nontobacco,27.32,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,20,Male,Tobacco,38.69,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,21,Female,Nontobacco,22.31,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,21,Female,Tobacco,32.79,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,21,Male,Nontobacco,29.18,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,21,Male,Tobacco,40.0,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,22,Female,Nontobacco,23.17,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,22,Female,Tobacco,33.82,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,22,Male,Nontobacco,31.05,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,22,Male,Tobacco,41.32,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,23,Female,Nontobacco,24.03,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,23,Female,Tobacco,34.85,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,23,Male,Nontobacco,32.91,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,23,Male,Tobacco,42.64,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,24,Female,Nontobacco,24.89,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,24,Female,Tobacco,35.88,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,24,Male,Nontobacco,34.77,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,24,Male,Tobacco,43.96,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,25,Female,Nontobacco,25.75,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,25,Female,Tobacco,36.9,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,25,Male,Nontobacco,36.63,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,25,Male,Tobacco,45.27,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,26,Female,Nontobacco,27.64,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,26,Female,Tobacco,38.23,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,26,Male,Nontobacco,37.38,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,26,Male,Tobacco,46.93,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,27,Female,Nontobacco,29.53,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,27,Female,Tobacco,39.55,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,27,Male,Nontobacco,38.12,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,27,Male,Tobacco,48.6,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,28,Female,Nontobacco,31.42,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,28,Female,Tobacco,40.87,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,28,Male,Nontobacco,38.87,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,28,Male,Tobacco,50.25,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,29,Female,Nontobacco,33.31,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,29,Female,Tobacco,42.19,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,29,Male,Nontobacco,39.61,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,29,Male,Tobacco,51.91,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,30,Female,Nontobacco,35.2,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,30,Female,Tobacco,43.52,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,30,Male,Nontobacco,40.36,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,30,Male,Tobacco,53.57,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,31,Female,Nontobacco,35.71,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,31,Female,Tobacco,45.01,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,31,Male,Nontobacco,41.2,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,31,Male,Tobacco,54.46,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,32,Female,Nontobacco,36.22,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,32,Female,Tobacco,46.5,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,32,Male,Nontobacco,42.05,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,32,Male,Tobacco,55.35,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,33,Female,Nontobacco,36.73,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,33,Female,Tobacco,48.0,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,33,Male,Nontobacco,42.89,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,33,Male,Tobacco,56.26,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,34,Female,Nontobacco,37.24,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,34,Female,Tobacco,49.49,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,34,Male,Nontobacco,43.74,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,34,Male,Tobacco,57.15,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,35,Female,Nontobacco,37.75,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,35,Female,Tobacco,50.99,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,35,Male,Nontobacco,44.58,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,35,Male,Tobacco,58.04,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,36,Female,Nontobacco,38.62,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,36,Female,Tobacco,51.57,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,36,Male,Nontobacco,45.41,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,36,Male,Tobacco,59.46,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,37,Female,Nontobacco,39.48,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,37,Female,Tobacco,52.15,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,37,Male,Nontobacco,46.23,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,37,Male,Tobacco,60.88,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,38,Female,Nontobacco,40.36,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,38,Female,Tobacco,52.73,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,38,Male,Nontobacco,47.06,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,38,Male,Tobacco,62.3,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,39,Female,Nontobacco,41.22,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,39,Female,Tobacco,53.31,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,39,Male,Nontobacco,47.88,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,39,Male,Tobacco,63.72,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,40,Female,Nontobacco,42.1,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,40,Female,Tobacco,53.89,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,40,Male,Nontobacco,48.71,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,40,Male,Tobacco,65.15,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,41,Female,Nontobacco,44.31,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,41,Female,Tobacco,57.52,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,41,Male,Nontobacco,52.14,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,41,Male,Tobacco,69.75,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,42,Female,Nontobacco,46.54,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,42,Female,Tobacco,61.15,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,42,Male,Nontobacco,55.56,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,42,Male,Tobacco,74.37,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,43,Female,Nontobacco,48.76,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,43,Female,Tobacco,64.78,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,43,Male,Nontobacco,58.98,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,43,Male,Tobacco,78.98,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,44,Female,Nontobacco,50.99,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,44,Female,Tobacco,68.41,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,44,Male,Nontobacco,62.4,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,44,Male,Tobacco,83.6,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,45,Female,Nontobacco,53.2,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,45,Female,Tobacco,72.04,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,45,Male,Nontobacco,65.83,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,45,Male,Tobacco,88.2,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,46,Female,Nontobacco,55.37,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,46,Female,Tobacco,73.97,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,46,Male,Nontobacco,68.16,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,46,Male,Tobacco,90.75,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,47,Female,Nontobacco,57.54,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,47,Female,Tobacco,75.9,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,47,Male,Nontobacco,70.49,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,47,Male,Tobacco,93.29,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,48,Female,Nontobacco,59.71,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,48,Female,Tobacco,77.83,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,48,Male,Nontobacco,72.84,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,48,Male,Tobacco,95.84,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,49,Female,Nontobacco,61.88,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,49,Female,Tobacco,79.76,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,49,Male,Nontobacco,75.17,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,49,Male,Tobacco,98.38,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,50,Female,Nontobacco,64.05,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,50,Female,Tobacco,81.69,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,50,Male,Nontobacco,77.5,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,50,Male,Tobacco,100.92,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,51,Female,Nontobacco,66.03,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,51,Female,Tobacco,84.04,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,51,Male,Nontobacco,79.96,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,51,Male,Tobacco,104.14,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,52,Female,Nontobacco,68.02,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,52,Female,Tobacco,86.39,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,52,Male,Nontobacco,82.42,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,52,Male,Tobacco,107.36,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,53,Female,Nontobacco,69.99,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,53,Female,Tobacco,88.73,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,53,Male,Nontobacco,84.87,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,53,Male,Tobacco,110.57,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,54,Female,Nontobacco,71.98,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,54,Female,Tobacco,91.08,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,54,Male,Nontobacco,87.33,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,54,Male,Tobacco,113.79,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,55,Female,Nontobacco,73.96,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,55,Female,Tobacco,93.44,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,55,Male,Nontobacco,89.79,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,55,Male,Tobacco,117.0,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,56,Female,Nontobacco,75.83,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,56,Female,Tobacco,95.31,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,56,Male,Nontobacco,92.29,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,56,Male,Tobacco,118.92,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,57,Female,Nontobacco,77.7,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,57,Female,Tobacco,97.18,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,57,Male,Nontobacco,94.79,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,57,Male,Tobacco,120.85,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,58,Female,Nontobacco,79.58,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,58,Female,Tobacco,99.06,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,58,Male,Nontobacco,97.3,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,58,Male,Tobacco,122.77,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,59,Female,Nontobacco,81.46,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,59,Female,Tobacco,100.93,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,59,Male,Nontobacco,99.79,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,59,Male,Tobacco,124.7,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,60,Female,Nontobacco,83.33,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,60,Female,Tobacco,102.81,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,60,Male,Nontobacco,102.3,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,60,Male,Tobacco,126.62,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,61,Female,Nontobacco,86.04,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,61,Female,Tobacco,105.83,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,61,Male,Nontobacco,106.54,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,61,Male,Tobacco,132.21,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,62,Female,Nontobacco,88.75,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,62,Female,Tobacco,108.85,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,62,Male,Nontobacco,110.78,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,62,Male,Tobacco,137.8,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,63,Female,Nontobacco,91.47,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,63,Female,Tobacco,111.89,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,63,Male,Nontobacco,115.04,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,63,Male,Tobacco,143.39,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,64,Female,Nontobacco,94.18,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,64,Female,Tobacco,114.91,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,64,Male,Nontobacco,119.28,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,64,Male,Tobacco,148.97,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,65,Female,Nontobacco,96.89,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,65,Female,Tobacco,117.94,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,65,Male,Nontobacco,123.52,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,65,Male,Tobacco,154.56,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,66,Female,Nontobacco,100.44,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,66,Female,Tobacco,122.22,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,66,Male,Nontobacco,128.53,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,66,Male,Tobacco,161.47,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,67,Female,Nontobacco,103.98,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,67,Female,Tobacco,126.5,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,67,Male,Nontobacco,133.54,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,67,Male,Tobacco,168.39,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,68,Female,Nontobacco,107.53,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,68,Female,Tobacco,130.79,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,68,Male,Nontobacco,138.55,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,68,Male,Tobacco,175.31,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,69,Female,Nontobacco,111.07,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,69,Female,Tobacco,135.07,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,69,Male,Nontobacco,143.55,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,69,Male,Tobacco,182.23,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,70,Female,Nontobacco,114.61,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,70,Female,Tobacco,139.35,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,70,Male,Nontobacco,148.56,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,70,Male,Tobacco,197.02,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,71,Female,Nontobacco,119.55,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,71,Female,Tobacco,145.8,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,71,Male,Nontobacco,154.51,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,71,Male,Tobacco,206.23,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,72,Female,Nontobacco,124.48,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,72,Female,Tobacco,152.24,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,72,Male,Nontobacco,160.46,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,72,Male,Tobacco,215.44,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,73,Female,Nontobacco,129.42,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,73,Female,Tobacco,158.67,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,73,Male,Nontobacco,166.41,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,73,Male,Tobacco,224.64,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,74,Female,Nontobacco,134.35,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,74,Female,Tobacco,165.11,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,74,Male,Nontobacco,172.36,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,74,Male,Tobacco,233.85,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,75,Female,Nontobacco,139.29,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,75,Female,Tobacco,171.55,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,75,Male,Nontobacco,178.31,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,75,Male,Tobacco,243.06,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,76,Female,Nontobacco,147.24,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,76,Female,Tobacco,183.53,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,76,Male,Nontobacco,189.09,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,76,Male,Tobacco,262.13,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,77,Female,Nontobacco,155.17,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,77,Female,Tobacco,195.51,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,77,Male,Nontobacco,199.87,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,77,Male,Tobacco,281.21,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,78,Female,Nontobacco,163.12,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,78,Female,Tobacco,216.13,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,78,Male,Nontobacco,210.66,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,78,Male,Tobacco,300.28,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,79,Female,Nontobacco,171.06,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,79,Female,Tobacco,228.61,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,79,Male,Nontobacco,221.44,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,79,Male,Tobacco,319.36,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,80,Female,Nontobacco,179.01,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,80,Female,Tobacco,241.09,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,80,Male,Nontobacco,232.22,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,80,Male,Tobacco,338.43,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,81,Female,Nontobacco,189.14,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,81,Female,Tobacco,258.65,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,81,Male,Nontobacco,248.25,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,81,Male,Tobacco,370.59,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,82,Female,Nontobacco,199.28,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,82,Female,Tobacco,276.2,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,82,Male,Nontobacco,275.27,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,82,Male,Tobacco,402.74,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,83,Female,Nontobacco,209.4,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,83,Female,Tobacco,293.76,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,83,Male,Nontobacco,291.96,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,83,Male,Tobacco,434.9,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,84,Female,Nontobacco,219.54,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,84,Female,Tobacco,311.31,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,84,Male,Nontobacco,308.64,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,84,Male,Tobacco,467.05,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,85,Female,Nontobacco,239.24,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,85,Female,Tobacco,328.87,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,85,Male,Nontobacco,325.33,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+10-Pay,Standard,85,Male,Tobacco,499.21,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Easy,Uni-smoke,18,Female,Uni-smoke,28.48,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,18,Male,Uni-smoke,37.74,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,19,Female,Uni-smoke,29.05,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,19,Male,Uni-smoke,38.29,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,20,Female,Uni-smoke,29.61,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,20,Male,Uni-smoke,38.83,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,21,Female,Uni-smoke,30.17,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,21,Male,Uni-smoke,39.38,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,22,Female,Uni-smoke,30.75,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,22,Male,Uni-smoke,39.93,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,23,Female,Uni-smoke,31.3,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,23,Male,Uni-smoke,40.48,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,24,Female,Uni-smoke,31.87,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,24,Male,Uni-smoke,41.04,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,25,Female,Uni-smoke,32.43,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,25,Male,Uni-smoke,41.59,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,26,Female,Uni-smoke,32.95,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,26,Male,Uni-smoke,42.19,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,27,Female,Uni-smoke,33.44,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,27,Male,Uni-smoke,42.85,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,28,Female,Uni-smoke,33.97,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,28,Male,Uni-smoke,43.5,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,29,Female,Uni-smoke,34.56,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,29,Male,Uni-smoke,44.06,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,30,Female,Uni-smoke,35.3,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,30,Male,Uni-smoke,44.52,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,31,Female,Uni-smoke,36.07,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,31,Male,Uni-smoke,44.63,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,32,Female,Uni-smoke,37.01,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,32,Male,Uni-smoke,44.74,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,33,Female,Uni-smoke,38.13,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,33,Male,Uni-smoke,44.86,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,34,Female,Uni-smoke,39.47,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,34,Male,Uni-smoke,45.01,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,35,Female,Uni-smoke,40.81,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,35,Male,Uni-smoke,45.33,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,36,Female,Uni-smoke,42.67,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,36,Male,Uni-smoke,47.79,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,37,Female,Uni-smoke,44.43,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,37,Male,Uni-smoke,49.91,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,38,Female,Uni-smoke,46.31,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,38,Male,Uni-smoke,52.36,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,39,Female,Uni-smoke,48.66,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,39,Male,Uni-smoke,55.44,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,40,Female,Uni-smoke,51.17,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,40,Male,Uni-smoke,59.04,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,41,Female,Uni-smoke,53.26,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,41,Male,Uni-smoke,61.48,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,42,Female,Uni-smoke,55.43,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,42,Male,Uni-smoke,64.26,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,43,Female,Uni-smoke,57.5,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,43,Male,Uni-smoke,66.94,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,44,Female,Uni-smoke,59.46,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,44,Male,Uni-smoke,69.51,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,45,Female,Uni-smoke,61.48,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,45,Male,Uni-smoke,72.13,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,46,Female,Uni-smoke,63.09,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,46,Male,Uni-smoke,74.58,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,47,Female,Uni-smoke,64.81,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,47,Male,Uni-smoke,77.17,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,48,Female,Uni-smoke,66.52,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,48,Male,Uni-smoke,79.84,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,49,Female,Uni-smoke,67.7,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,49,Male,Uni-smoke,81.94,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,50,Female,Uni-smoke,68.76,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,50,Male,Uni-smoke,83.93,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,51,Female,Uni-smoke,70.99,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,51,Male,Uni-smoke,87.47,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,52,Female,Uni-smoke,73.13,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,52,Male,Uni-smoke,90.91,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,53,Female,Uni-smoke,75.38,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,53,Male,Uni-smoke,94.45,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,54,Female,Uni-smoke,77.65,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,54,Male,Uni-smoke,98.02,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,55,Female,Uni-smoke,80.25,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,55,Male,Uni-smoke,102.11,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,56,Female,Uni-smoke,82.5,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,56,Male,Uni-smoke,105.45,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,57,Female,Uni-smoke,84.61,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,57,Male,Uni-smoke,108.54,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,58,Female,Uni-smoke,86.84,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,58,Male,Uni-smoke,111.73,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,59,Female,Uni-smoke,89.39,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,59,Male,Uni-smoke,115.47,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,60,Female,Uni-smoke,92.45,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,60,Male,Uni-smoke,120.1,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,61,Female,Uni-smoke,96.78,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,61,Male,Uni-smoke,126.98,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,62,Female,Uni-smoke,101.13,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,62,Male,Uni-smoke,133.86,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,63,Female,Uni-smoke,105.48,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,63,Male,Uni-smoke,140.71,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,64,Female,Uni-smoke,109.82,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,64,Male,Uni-smoke,147.59,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,65,Female,Uni-smoke,114.16,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,65,Male,Uni-smoke,154.47,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,66,Female,Uni-smoke,119.68,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,66,Male,Uni-smoke,161.38,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,67,Female,Uni-smoke,125.22,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,67,Male,Uni-smoke,168.3,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,68,Female,Uni-smoke,130.74,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,68,Male,Uni-smoke,175.2,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,69,Female,Uni-smoke,136.26,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,69,Male,Uni-smoke,182.11,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,70,Female,Uni-smoke,141.79,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,70,Male,Uni-smoke,201.71,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,71,Female,Uni-smoke,148.84,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,71,Male,Uni-smoke,214.4,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,72,Female,Uni-smoke,155.89,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,72,Male,Uni-smoke,227.1,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,73,Female,Uni-smoke,162.95,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,73,Male,Uni-smoke,239.78,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,74,Female,Uni-smoke,169.99,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,74,Male,Uni-smoke,252.49,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,75,Female,Uni-smoke,177.05,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,75,Male,Uni-smoke,265.18,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,76,Female,Uni-smoke,189.04,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,76,Male,Uni-smoke,285.79,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,77,Female,Uni-smoke,201.04,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,77,Male,Uni-smoke,311.96,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,78,Female,Uni-smoke,213.05,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,78,Male,Uni-smoke,341.84,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,79,Female,Uni-smoke,236.82,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,79,Male,Uni-smoke,363.37,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,80,Female,Uni-smoke,250.26,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Easy,Uni-smoke,80,Male,Uni-smoke,384.91,Final_Expense_Agent_Guide_2644970R5,Uni-smoke rates; Montana Unisex-Male footnote
+Immediate,ADR Rider,18,Unisex,N/A,2.2,Final_Expense_Agent_Guide_2644970R5,Annual per $1000 ADR; Immediate only ages 18-70
+Immediate,ADR Rider,19,Unisex,N/A,2.21,Final_Expense_Agent_Guide_2644970R5,Annual per $1000 ADR; Immediate only ages 18-70
+Immediate,ADR Rider,20,Unisex,N/A,2.22,Final_Expense_Agent_Guide_2644970R5,Annual per $1000 ADR; Immediate only ages 18-70
+Immediate,ADR Rider,21,Unisex,N/A,2.23,Final_Expense_Agent_Guide_2644970R5,Annual per $1000 ADR; Immediate only ages 18-70
+Immediate,ADR Rider,22,Unisex,N/A,2.24,Final_Expense_Agent_Guide_2644970R5,Annual per $1000 ADR; Immediate only ages 18-70
+Immediate,ADR Rider,23,Unisex,N/A,2.26,Final_Expense_Agent_Guide_2644970R5,Annual per $1000 ADR; Immediate only ages 18-70
+Immediate,ADR Rider,24,Unisex,N/A,2.27,Final_Expense_Agent_Guide_2644970R5,Annual per $1000 ADR; Immediate only ages 18-70
+Immediate,ADR Rider,25,Unisex,N/A,2.28,Final_Expense_Agent_Guide_2644970R5,Annual per $1000 ADR; Immediate only ages 18-70
+Immediate,ADR Rider,26,Unisex,N/A,2.29,Final_Expense_Agent_Guide_2644970R5,Annual per $1000 ADR; Immediate only ages 18-70
+Immediate,ADR Rider,27,Unisex,N/A,2.3,Final_Expense_Agent_Guide_2644970R5,Annual per $1000 ADR; Immediate only ages 18-70
+Immediate,ADR Rider,28,Unisex,N/A,2.31,Final_Expense_Agent_Guide_2644970R5,Annual per $1000 ADR; Immediate only ages 18-70
+Immediate,ADR Rider,29,Unisex,N/A,2.32,Final_Expense_Agent_Guide_2644970R5,Annual per $1000 ADR; Immediate only ages 18-70
+Immediate,ADR Rider,30,Unisex,N/A,2.33,Final_Expense_Agent_Guide_2644970R5,Annual per $1000 ADR; Immediate only ages 18-70
+Immediate,ADR Rider,31,Unisex,N/A,2.34,Final_Expense_Agent_Guide_2644970R5,Annual per $1000 ADR; Immediate only ages 18-70
+Immediate,ADR Rider,32,Unisex,N/A,2.35,Final_Expense_Agent_Guide_2644970R5,Annual per $1000 ADR; Immediate only ages 18-70
+Immediate,ADR Rider,33,Unisex,N/A,2.37,Final_Expense_Agent_Guide_2644970R5,Annual per $1000 ADR; Immediate only ages 18-70
+Immediate,ADR Rider,34,Unisex,N/A,2.38,Final_Expense_Agent_Guide_2644970R5,Annual per $1000 ADR; Immediate only ages 18-70
+Immediate,ADR Rider,35,Unisex,N/A,2.39,Final_Expense_Agent_Guide_2644970R5,Annual per $1000 ADR; Immediate only ages 18-70
+Immediate,ADR Rider,36,Unisex,N/A,2.41,Final_Expense_Agent_Guide_2644970R5,Annual per $1000 ADR; Immediate only ages 18-70
+Immediate,ADR Rider,37,Unisex,N/A,2.43,Final_Expense_Agent_Guide_2644970R5,Annual per $1000 ADR; Immediate only ages 18-70
+Immediate,ADR Rider,38,Unisex,N/A,2.45,Final_Expense_Agent_Guide_2644970R5,Annual per $1000 ADR; Immediate only ages 18-70
+Immediate,ADR Rider,39,Unisex,N/A,2.48,Final_Expense_Agent_Guide_2644970R5,Annual per $1000 ADR; Immediate only ages 18-70
+Immediate,ADR Rider,40,Unisex,N/A,2.5,Final_Expense_Agent_Guide_2644970R5,Annual per $1000 ADR; Immediate only ages 18-70
+Immediate,ADR Rider,41,Unisex,N/A,2.52,Final_Expense_Agent_Guide_2644970R5,Annual per $1000 ADR; Immediate only ages 18-70
+Immediate,ADR Rider,42,Unisex,N/A,2.54,Final_Expense_Agent_Guide_2644970R5,Annual per $1000 ADR; Immediate only ages 18-70
+Immediate,ADR Rider,43,Unisex,N/A,2.56,Final_Expense_Agent_Guide_2644970R5,Annual per $1000 ADR; Immediate only ages 18-70
+Immediate,ADR Rider,44,Unisex,N/A,2.59,Final_Expense_Agent_Guide_2644970R5,Annual per $1000 ADR; Immediate only ages 18-70
+Immediate,ADR Rider,45,Unisex,N/A,2.61,Final_Expense_Agent_Guide_2644970R5,Annual per $1000 ADR; Immediate only ages 18-70
+Immediate,ADR Rider,46,Unisex,N/A,2.63,Final_Expense_Agent_Guide_2644970R5,Annual per $1000 ADR; Immediate only ages 18-70
+Immediate,ADR Rider,47,Unisex,N/A,2.65,Final_Expense_Agent_Guide_2644970R5,Annual per $1000 ADR; Immediate only ages 18-70
+Immediate,ADR Rider,48,Unisex,N/A,2.67,Final_Expense_Agent_Guide_2644970R5,Annual per $1000 ADR; Immediate only ages 18-70
+Immediate,ADR Rider,49,Unisex,N/A,2.71,Final_Expense_Agent_Guide_2644970R5,Annual per $1000 ADR; Immediate only ages 18-70
+Immediate,ADR Rider,50,Unisex,N/A,2.73,Final_Expense_Agent_Guide_2644970R5,Annual per $1000 ADR; Immediate only ages 18-70
+Immediate,ADR Rider,51,Unisex,N/A,2.76,Final_Expense_Agent_Guide_2644970R5,Annual per $1000 ADR; Immediate only ages 18-70
+Immediate,ADR Rider,52,Unisex,N/A,2.79,Final_Expense_Agent_Guide_2644970R5,Annual per $1000 ADR; Immediate only ages 18-70
+Immediate,ADR Rider,53,Unisex,N/A,2.84,Final_Expense_Agent_Guide_2644970R5,Annual per $1000 ADR; Immediate only ages 18-70
+Immediate,ADR Rider,54,Unisex,N/A,2.89,Final_Expense_Agent_Guide_2644970R5,Annual per $1000 ADR; Immediate only ages 18-70
+Immediate,ADR Rider,55,Unisex,N/A,2.95,Final_Expense_Agent_Guide_2644970R5,Annual per $1000 ADR; Immediate only ages 18-70
+Immediate,ADR Rider,56,Unisex,N/A,3.01,Final_Expense_Agent_Guide_2644970R5,Annual per $1000 ADR; Immediate only ages 18-70
+Immediate,ADR Rider,57,Unisex,N/A,3.08,Final_Expense_Agent_Guide_2644970R5,Annual per $1000 ADR; Immediate only ages 18-70
+Immediate,ADR Rider,58,Unisex,N/A,3.16,Final_Expense_Agent_Guide_2644970R5,Annual per $1000 ADR; Immediate only ages 18-70
+Immediate,ADR Rider,59,Unisex,N/A,3.25,Final_Expense_Agent_Guide_2644970R5,Annual per $1000 ADR; Immediate only ages 18-70
+Immediate,ADR Rider,60,Unisex,N/A,3.33,Final_Expense_Agent_Guide_2644970R5,Annual per $1000 ADR; Immediate only ages 18-70
+Immediate,ADR Rider,61,Unisex,N/A,3.44,Final_Expense_Agent_Guide_2644970R5,Annual per $1000 ADR; Immediate only ages 18-70
+Immediate,ADR Rider,62,Unisex,N/A,3.56,Final_Expense_Agent_Guide_2644970R5,Annual per $1000 ADR; Immediate only ages 18-70
+Immediate,ADR Rider,63,Unisex,N/A,3.71,Final_Expense_Agent_Guide_2644970R5,Annual per $1000 ADR; Immediate only ages 18-70
+Immediate,ADR Rider,64,Unisex,N/A,3.86,Final_Expense_Agent_Guide_2644970R5,Annual per $1000 ADR; Immediate only ages 18-70
+Immediate,ADR Rider,65,Unisex,N/A,4.03,Final_Expense_Agent_Guide_2644970R5,Annual per $1000 ADR; Immediate only ages 18-70
+Immediate,ADR Rider,66,Unisex,N/A,4.24,Final_Expense_Agent_Guide_2644970R5,Annual per $1000 ADR; Immediate only ages 18-70
+Immediate,ADR Rider,67,Unisex,N/A,4.49,Final_Expense_Agent_Guide_2644970R5,Annual per $1000 ADR; Immediate only ages 18-70
+Immediate,ADR Rider,68,Unisex,N/A,4.79,Final_Expense_Agent_Guide_2644970R5,Annual per $1000 ADR; Immediate only ages 18-70
+Immediate,ADR Rider,69,Unisex,N/A,5.09,Final_Expense_Agent_Guide_2644970R5,Annual per $1000 ADR; Immediate only ages 18-70
+Immediate,ADR Rider,70,Unisex,N/A,5.46,Final_Expense_Agent_Guide_2644970R5,Annual per $1000 ADR; Immediate only ages 18-70
+Immediate,Preferred,0,Female,Juvenile,11.86,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,0,Male,Juvenile,13.68,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,1,Female,Juvenile,11.94,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,1,Male,Juvenile,13.79,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,2,Female,Juvenile,12.04,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,2,Male,Juvenile,13.89,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,3,Female,Juvenile,12.12,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,3,Male,Juvenile,14.01,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,4,Female,Juvenile,12.24,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,4,Male,Juvenile,14.12,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,5,Female,Juvenile,12.33,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,5,Male,Juvenile,14.22,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,6,Female,Juvenile,12.51,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,6,Male,Juvenile,14.52,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,7,Female,Juvenile,12.69,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,7,Male,Juvenile,14.82,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,8,Female,Juvenile,12.89,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,8,Male,Juvenile,15.14,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,9,Female,Juvenile,13.08,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,9,Male,Juvenile,15.44,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,10,Female,Juvenile,13.26,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,10,Male,Juvenile,15.74,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,11,Female,Juvenile,13.51,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,11,Male,Juvenile,16.17,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,12,Female,Juvenile,13.52,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,12,Male,Juvenile,16.63,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,13,Female,Juvenile,13.74,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,13,Male,Juvenile,17.05,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,14,Female,Juvenile,14.0,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,14,Male,Juvenile,17.5,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,15,Female,Juvenile,14.24,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,15,Male,Juvenile,17.93,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,16,Female,Juvenile,14.28,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,16,Male,Juvenile,18.12,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,17,Female,Juvenile,14.33,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,17,Male,Juvenile,18.2,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,18,Female,Nontobacco,11.78,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,18,Female,Tobacco,14.85,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,18,Male,Nontobacco,14.54,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,18,Male,Tobacco,21.62,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,19,Female,Nontobacco,11.83,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,19,Female,Tobacco,14.85,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,19,Male,Nontobacco,14.59,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,19,Male,Tobacco,21.68,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,20,Female,Nontobacco,11.88,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,20,Female,Tobacco,14.96,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,20,Male,Nontobacco,14.7,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,20,Male,Tobacco,21.84,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,21,Female,Nontobacco,12.12,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,21,Female,Tobacco,15.32,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,21,Male,Nontobacco,14.96,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,21,Male,Tobacco,22.2,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,22,Female,Nontobacco,12.37,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,22,Female,Tobacco,15.68,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,22,Male,Nontobacco,15.21,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,22,Male,Tobacco,22.56,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,23,Female,Nontobacco,12.63,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,23,Female,Tobacco,16.03,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,23,Male,Nontobacco,15.47,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,23,Male,Tobacco,22.92,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,24,Female,Nontobacco,12.88,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,24,Female,Tobacco,16.38,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,24,Male,Nontobacco,15.72,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,24,Male,Tobacco,23.3,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,25,Female,Nontobacco,13.12,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,25,Female,Tobacco,16.74,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,25,Male,Nontobacco,15.97,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,25,Male,Tobacco,23.66,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,26,Female,Nontobacco,13.42,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,26,Female,Tobacco,17.16,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,26,Male,Nontobacco,16.29,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,26,Male,Tobacco,24.16,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,27,Female,Nontobacco,13.74,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,27,Female,Tobacco,17.61,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,27,Male,Nontobacco,16.67,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,27,Male,Tobacco,24.72,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,28,Female,Nontobacco,14.07,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,28,Female,Tobacco,18.08,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,28,Male,Nontobacco,17.03,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,28,Male,Tobacco,25.31,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,29,Female,Nontobacco,14.41,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,29,Female,Tobacco,18.59,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,29,Male,Nontobacco,17.45,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,29,Male,Tobacco,25.97,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,30,Female,Nontobacco,14.8,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,30,Female,Tobacco,19.14,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,30,Male,Nontobacco,17.9,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,30,Male,Tobacco,26.69,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,31,Female,Nontobacco,15.18,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,31,Female,Tobacco,19.71,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,31,Male,Nontobacco,18.33,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,31,Male,Tobacco,27.37,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,32,Female,Nontobacco,15.62,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,32,Female,Tobacco,20.35,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,32,Male,Nontobacco,18.82,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,32,Male,Tobacco,28.18,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,33,Female,Nontobacco,16.11,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,33,Female,Tobacco,21.06,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,33,Male,Nontobacco,19.37,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,33,Male,Tobacco,29.06,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,34,Female,Nontobacco,16.64,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,34,Female,Tobacco,21.85,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,34,Male,Nontobacco,20.0,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,34,Male,Tobacco,30.04,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,35,Female,Nontobacco,17.18,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,35,Female,Tobacco,22.65,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,35,Male,Nontobacco,20.63,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,35,Male,Tobacco,31.07,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,36,Female,Nontobacco,17.8,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,36,Female,Tobacco,23.42,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,36,Male,Nontobacco,21.39,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,36,Male,Tobacco,32.18,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,37,Female,Nontobacco,18.38,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,37,Female,Tobacco,24.17,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,37,Male,Nontobacco,22.14,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,37,Male,Tobacco,33.3,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,38,Female,Nontobacco,19.04,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,38,Female,Tobacco,24.97,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,38,Male,Nontobacco,22.94,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,38,Male,Tobacco,34.51,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,39,Female,Nontobacco,19.7,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,39,Female,Tobacco,25.79,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,39,Male,Nontobacco,23.8,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,39,Male,Tobacco,35.78,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,40,Female,Nontobacco,20.38,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,40,Female,Tobacco,26.62,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,40,Male,Nontobacco,24.71,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,40,Male,Tobacco,37.14,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,41,Female,Nontobacco,20.96,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,41,Female,Tobacco,27.85,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,41,Male,Nontobacco,25.44,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,41,Male,Tobacco,38.04,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,42,Female,Nontobacco,21.52,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,42,Female,Tobacco,29.11,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,42,Male,Nontobacco,26.21,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,42,Male,Tobacco,38.43,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,43,Female,Nontobacco,22.04,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,43,Female,Tobacco,30.33,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,43,Male,Nontobacco,26.95,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,43,Male,Tobacco,38.81,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,44,Female,Nontobacco,22.53,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,44,Female,Tobacco,31.54,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,44,Male,Nontobacco,27.69,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,44,Male,Tobacco,38.94,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,45,Female,Nontobacco,22.63,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,45,Female,Tobacco,32.86,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,45,Male,Nontobacco,27.97,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,45,Male,Tobacco,39.89,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,46,Female,Nontobacco,22.9,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,46,Female,Tobacco,33.28,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,46,Male,Nontobacco,28.64,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,46,Male,Tobacco,40.45,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,47,Female,Nontobacco,23.17,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,47,Female,Tobacco,33.87,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,47,Male,Nontobacco,29.31,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,47,Male,Tobacco,42.33,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,48,Female,Nontobacco,23.44,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,48,Female,Tobacco,34.47,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,48,Male,Nontobacco,29.98,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,48,Male,Tobacco,43.14,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,49,Female,Nontobacco,23.71,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,49,Female,Tobacco,35.19,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,49,Male,Nontobacco,30.65,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,49,Male,Tobacco,44.09,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,50,Female,Nontobacco,23.98,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,50,Female,Tobacco,35.77,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,50,Male,Nontobacco,31.32,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,50,Male,Tobacco,44.93,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,51,Female,Nontobacco,24.76,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,51,Female,Tobacco,37.58,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,51,Male,Nontobacco,32.53,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,51,Male,Tobacco,46.98,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,52,Female,Nontobacco,25.54,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,52,Female,Tobacco,39.28,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,52,Male,Nontobacco,33.74,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,52,Male,Tobacco,48.94,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,53,Female,Nontobacco,26.33,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,53,Female,Tobacco,41.07,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,53,Male,Nontobacco,34.96,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,53,Male,Tobacco,51.01,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,54,Female,Nontobacco,27.11,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,54,Female,Tobacco,42.89,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,54,Male,Nontobacco,36.17,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,54,Male,Tobacco,53.09,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,55,Female,Nontobacco,27.89,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,55,Female,Tobacco,43.82,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,55,Male,Nontobacco,37.38,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,55,Male,Tobacco,55.49,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,56,Female,Nontobacco,29.08,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,56,Female,Tobacco,45.38,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,56,Male,Nontobacco,39.18,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,56,Male,Tobacco,58.21,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,57,Female,Nontobacco,30.27,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,57,Female,Tobacco,46.77,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,57,Male,Nontobacco,40.98,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,57,Male,Tobacco,60.84,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,58,Female,Nontobacco,31.45,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,58,Female,Tobacco,48.18,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,58,Male,Nontobacco,42.77,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,58,Male,Tobacco,63.59,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,59,Female,Nontobacco,32.64,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,59,Female,Tobacco,49.8,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,59,Male,Nontobacco,44.57,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,59,Male,Tobacco,66.69,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,60,Female,Nontobacco,33.83,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,60,Female,Tobacco,51.76,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,60,Male,Nontobacco,46.37,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,60,Male,Tobacco,70.35,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,61,Female,Nontobacco,35.71,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,61,Female,Tobacco,54.61,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,61,Male,Nontobacco,49.3,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,61,Male,Tobacco,75.41,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,62,Female,Nontobacco,37.58,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,62,Female,Tobacco,57.47,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,62,Male,Nontobacco,52.23,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,62,Male,Tobacco,80.49,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,63,Female,Nontobacco,39.46,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,63,Female,Tobacco,60.31,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,63,Male,Nontobacco,55.16,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,63,Male,Tobacco,85.54,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,64,Female,Nontobacco,41.33,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,64,Female,Tobacco,63.16,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,64,Male,Nontobacco,58.09,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,64,Male,Tobacco,90.6,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,65,Female,Nontobacco,43.21,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,65,Female,Tobacco,66.01,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,65,Male,Nontobacco,58.56,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,65,Male,Tobacco,95.67,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,66,Female,Nontobacco,46.03,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,66,Female,Tobacco,70.44,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,66,Male,Nontobacco,62.24,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,66,Male,Tobacco,102.68,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,67,Female,Nontobacco,48.84,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,67,Female,Tobacco,74.87,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,67,Male,Nontobacco,65.91,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,67,Male,Tobacco,109.7,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,68,Female,Nontobacco,51.66,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,68,Female,Tobacco,79.3,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,68,Male,Nontobacco,69.59,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,68,Male,Tobacco,116.73,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,69,Female,Nontobacco,54.47,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,69,Female,Tobacco,83.73,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,69,Male,Nontobacco,73.26,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,69,Male,Tobacco,123.74,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,70,Female,Nontobacco,57.29,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,70,Female,Tobacco,88.16,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,70,Male,Nontobacco,76.94,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,70,Male,Tobacco,130.76,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,71,Female,Nontobacco,61.49,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,71,Female,Tobacco,94.48,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,71,Male,Nontobacco,83.34,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,71,Male,Tobacco,140.07,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,72,Female,Nontobacco,65.69,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,72,Female,Tobacco,100.82,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,72,Male,Nontobacco,89.74,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,72,Male,Tobacco,149.39,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,73,Female,Nontobacco,69.89,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,73,Female,Tobacco,107.15,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,73,Male,Nontobacco,96.14,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,73,Male,Tobacco,158.68,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,74,Female,Nontobacco,74.09,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,74,Female,Tobacco,113.48,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,74,Male,Nontobacco,102.54,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,74,Male,Tobacco,167.99,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,75,Female,Nontobacco,78.29,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,75,Female,Tobacco,119.81,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,75,Male,Nontobacco,108.94,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,75,Male,Tobacco,177.29,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,76,Female,Nontobacco,86.61,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,76,Female,Tobacco,133.04,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,76,Male,Nontobacco,119.82,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,76,Male,Tobacco,192.68,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,77,Female,Nontobacco,94.44,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,77,Female,Tobacco,145.6,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,77,Male,Nontobacco,129.99,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,77,Male,Tobacco,206.76,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,78,Female,Nontobacco,102.58,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,78,Female,Tobacco,158.65,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,78,Male,Nontobacco,140.53,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,78,Male,Tobacco,220.85,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,79,Female,Nontobacco,108.06,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,79,Female,Tobacco,167.8,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,79,Male,Nontobacco,147.44,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,79,Male,Tobacco,234.93,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,80,Female,Nontobacco,113.55,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,80,Female,Tobacco,176.95,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,80,Male,Nontobacco,154.34,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,80,Male,Tobacco,249.01,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,81,Female,Nontobacco,133.04,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,81,Female,Tobacco,187.8,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,81,Male,Nontobacco,180.77,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,81,Male,Tobacco,269.57,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,82,Female,Nontobacco,146.32,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,82,Female,Tobacco,201.89,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,82,Male,Nontobacco,198.75,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,82,Male,Tobacco,290.11,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,83,Female,Nontobacco,157.45,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,83,Female,Tobacco,215.96,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,83,Male,Nontobacco,213.76,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,83,Male,Tobacco,310.66,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,84,Female,Nontobacco,168.73,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,84,Female,Tobacco,232.18,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,84,Male,Nontobacco,229.05,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,84,Male,Tobacco,331.2,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,85,Female,Nontobacco,180.21,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,85,Female,Tobacco,248.65,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,85,Male,Nontobacco,244.57,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Preferred,85,Male,Tobacco,351.76,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,0,Female,Juvenile,12.88,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,0,Male,Juvenile,15.69,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,1,Female,Juvenile,12.91,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,1,Male,Juvenile,15.7,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,2,Female,Juvenile,12.96,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,2,Male,Juvenile,15.72,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,3,Female,Juvenile,12.98,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,3,Male,Juvenile,15.74,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,4,Female,Juvenile,13.01,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,4,Male,Juvenile,15.75,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,5,Female,Juvenile,13.06,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,5,Male,Juvenile,15.77,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,6,Female,Juvenile,13.3,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,6,Male,Juvenile,16.22,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,7,Female,Juvenile,13.55,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,7,Male,Juvenile,16.68,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,8,Female,Juvenile,13.8,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,8,Male,Juvenile,17.14,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,9,Female,Juvenile,14.04,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,9,Male,Juvenile,17.59,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,10,Female,Juvenile,14.28,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,10,Male,Juvenile,18.05,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,11,Female,Juvenile,14.59,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,11,Male,Juvenile,18.87,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,12,Female,Juvenile,14.64,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,12,Male,Juvenile,19.69,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,13,Female,Juvenile,14.92,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,13,Male,Juvenile,20.49,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,14,Female,Juvenile,15.23,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,14,Male,Juvenile,21.3,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,15,Female,Juvenile,15.52,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,15,Male,Juvenile,22.12,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,16,Female,Juvenile,15.63,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,16,Male,Juvenile,22.43,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,17,Female,Juvenile,15.68,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,17,Male,Juvenile,22.52,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,18,Female,Nontobacco,12.44,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,18,Female,Tobacco,16.29,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,18,Male,Nontobacco,17.03,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,18,Male,Tobacco,26.72,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,19,Female,Nontobacco,12.48,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,19,Female,Tobacco,16.32,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,19,Male,Nontobacco,17.05,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,19,Male,Tobacco,26.76,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,20,Female,Nontobacco,12.58,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,20,Female,Tobacco,16.45,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,20,Male,Nontobacco,17.07,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,20,Male,Tobacco,26.78,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,21,Female,Nontobacco,12.88,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,21,Female,Tobacco,16.85,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,21,Male,Nontobacco,17.26,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,21,Male,Tobacco,27.03,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,22,Female,Nontobacco,13.19,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,22,Female,Tobacco,17.22,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,22,Male,Nontobacco,17.46,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,22,Male,Tobacco,27.29,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,23,Female,Nontobacco,13.49,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,23,Female,Tobacco,17.62,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,23,Male,Nontobacco,17.64,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,23,Male,Tobacco,27.54,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,24,Female,Nontobacco,13.8,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,24,Female,Tobacco,18.0,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,24,Male,Nontobacco,17.86,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,24,Male,Tobacco,27.81,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,25,Female,Nontobacco,14.1,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,25,Female,Tobacco,18.37,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,25,Male,Nontobacco,18.04,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,25,Male,Tobacco,28.06,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,26,Female,Nontobacco,14.42,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,26,Female,Tobacco,18.86,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,26,Male,Nontobacco,18.35,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,26,Male,Tobacco,28.51,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,27,Female,Nontobacco,14.74,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,27,Female,Tobacco,19.37,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,27,Male,Nontobacco,18.68,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,27,Male,Tobacco,29.04,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,28,Female,Nontobacco,15.09,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,28,Female,Tobacco,19.93,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,28,Male,Nontobacco,19.06,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,28,Male,Tobacco,29.64,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,29,Female,Nontobacco,15.47,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,29,Female,Tobacco,20.53,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,29,Male,Nontobacco,19.49,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,29,Male,Tobacco,30.31,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,30,Female,Nontobacco,15.93,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,30,Female,Tobacco,21.24,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,30,Male,Nontobacco,19.96,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,30,Male,Tobacco,31.08,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,31,Female,Nontobacco,16.42,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,31,Female,Tobacco,21.96,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,31,Male,Nontobacco,20.42,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,31,Male,Tobacco,31.86,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,32,Female,Nontobacco,16.97,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,32,Female,Tobacco,22.77,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,32,Male,Nontobacco,20.99,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,32,Male,Tobacco,32.8,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,33,Female,Nontobacco,17.59,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,33,Female,Tobacco,23.69,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,33,Male,Nontobacco,21.63,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,33,Male,Tobacco,33.86,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,34,Female,Nontobacco,18.28,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,34,Female,Tobacco,24.72,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,34,Male,Nontobacco,22.37,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,34,Male,Tobacco,35.1,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,35,Female,Nontobacco,19.01,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,35,Female,Tobacco,25.79,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,35,Male,Nontobacco,23.14,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,35,Male,Tobacco,36.38,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,36,Female,Nontobacco,19.76,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,36,Female,Tobacco,26.89,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,36,Male,Nontobacco,24.06,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,36,Male,Tobacco,37.83,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,37,Female,Nontobacco,20.52,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,37,Female,Tobacco,27.98,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,37,Male,Nontobacco,25.0,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,37,Male,Tobacco,39.32,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,38,Female,Nontobacco,21.33,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,38,Female,Tobacco,29.14,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,38,Male,Nontobacco,26.02,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,38,Male,Tobacco,40.94,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,39,Female,Nontobacco,22.18,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,39,Female,Tobacco,30.33,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,39,Male,Nontobacco,27.11,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,39,Male,Tobacco,42.67,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,40,Female,Nontobacco,23.06,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,40,Female,Tobacco,31.55,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,40,Male,Nontobacco,28.29,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,40,Male,Tobacco,44.55,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,41,Female,Nontobacco,23.87,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,41,Female,Tobacco,33.21,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,41,Male,Nontobacco,29.3,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,41,Male,Tobacco,45.87,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,42,Female,Nontobacco,24.7,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,42,Female,Tobacco,34.88,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,42,Male,Nontobacco,30.36,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,42,Male,Tobacco,47.26,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,43,Female,Nontobacco,25.58,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,43,Female,Tobacco,36.49,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,43,Male,Nontobacco,31.4,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,43,Male,Tobacco,48.65,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,44,Female,Nontobacco,26.47,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,44,Female,Tobacco,38.05,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,44,Male,Nontobacco,32.46,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,44,Male,Tobacco,50.02,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,45,Female,Nontobacco,26.72,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,45,Female,Tobacco,40.11,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,45,Male,Nontobacco,33.35,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,45,Male,Tobacco,51.69,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,46,Female,Nontobacco,26.97,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,46,Female,Tobacco,41.22,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,46,Male,Nontobacco,33.9,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,46,Male,Tobacco,52.84,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,47,Female,Nontobacco,27.22,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,47,Female,Tobacco,42.58,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,47,Male,Nontobacco,34.45,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,47,Male,Tobacco,54.23,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,48,Female,Nontobacco,27.48,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,48,Female,Tobacco,44.04,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,48,Male,Nontobacco,35.0,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,48,Male,Tobacco,55.77,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,49,Female,Nontobacco,27.73,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,49,Female,Tobacco,45.7,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,49,Male,Nontobacco,35.55,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,49,Male,Tobacco,57.5,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,50,Female,Nontobacco,27.98,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,50,Female,Tobacco,47.16,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,50,Male,Nontobacco,36.1,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,50,Male,Tobacco,59.1,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,51,Female,Nontobacco,29.48,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,51,Female,Tobacco,50.0,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,51,Male,Nontobacco,38.17,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,51,Male,Tobacco,62.98,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,52,Female,Nontobacco,30.98,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,52,Female,Tobacco,52.65,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,52,Male,Nontobacco,40.24,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,52,Male,Tobacco,66.78,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,53,Female,Nontobacco,32.49,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,53,Female,Tobacco,55.44,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,53,Male,Nontobacco,41.9,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,53,Male,Tobacco,70.83,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,54,Female,Nontobacco,33.98,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,54,Female,Tobacco,58.24,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,54,Male,Nontobacco,43.5,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,54,Male,Tobacco,75.0,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,55,Female,Nontobacco,35.48,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,55,Female,Tobacco,59.85,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,55,Male,Nontobacco,45.07,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,55,Male,Tobacco,78.3,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,56,Female,Nontobacco,36.71,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,56,Female,Tobacco,62.19,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,56,Male,Nontobacco,46.72,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,56,Male,Tobacco,82.66,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,57,Female,Nontobacco,37.94,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,57,Female,Tobacco,64.28,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,57,Male,Nontobacco,48.85,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,57,Male,Tobacco,86.9,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,58,Female,Nontobacco,39.18,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,58,Female,Tobacco,66.36,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,58,Male,Nontobacco,50.98,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,58,Male,Tobacco,91.33,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,59,Female,Nontobacco,40.41,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,59,Female,Tobacco,68.67,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,59,Male,Nontobacco,53.11,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,59,Male,Tobacco,96.25,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,60,Female,Nontobacco,41.64,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,60,Female,Tobacco,71.44,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,60,Male,Nontobacco,55.23,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,60,Male,Tobacco,101.95,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,61,Female,Nontobacco,43.83,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,61,Female,Tobacco,75.27,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,61,Male,Nontobacco,58.79,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,61,Male,Tobacco,109.62,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,62,Female,Nontobacco,46.03,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,62,Female,Tobacco,79.1,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,62,Male,Nontobacco,62.35,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,62,Male,Tobacco,117.29,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,63,Female,Nontobacco,48.23,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,63,Female,Tobacco,82.95,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,63,Male,Nontobacco,65.91,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,63,Male,Tobacco,124.95,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,64,Female,Nontobacco,50.43,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,64,Female,Tobacco,86.78,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,64,Male,Nontobacco,69.48,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,64,Male,Tobacco,132.61,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,65,Female,Nontobacco,53.18,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,65,Female,Tobacco,90.61,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,65,Male,Nontobacco,73.04,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,65,Male,Tobacco,140.28,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,66,Female,Nontobacco,57.91,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,66,Female,Tobacco,96.72,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,66,Male,Nontobacco,81.28,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,66,Male,Tobacco,150.64,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,67,Female,Nontobacco,62.64,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,67,Female,Tobacco,102.81,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,67,Male,Nontobacco,89.54,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,67,Male,Tobacco,161.01,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,68,Female,Nontobacco,67.36,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,68,Female,Tobacco,108.9,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,68,Male,Nontobacco,97.79,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,68,Male,Tobacco,171.38,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,69,Female,Nontobacco,72.09,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,69,Female,Tobacco,114.99,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,69,Male,Nontobacco,106.04,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,69,Male,Tobacco,181.75,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,70,Female,Nontobacco,76.82,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,70,Female,Tobacco,121.08,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,70,Male,Nontobacco,114.29,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,70,Male,Tobacco,192.11,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,71,Female,Nontobacco,82.42,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,71,Female,Tobacco,130.21,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,71,Male,Nontobacco,121.99,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,71,Male,Tobacco,204.19,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,72,Female,Nontobacco,88.01,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,72,Female,Tobacco,139.36,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,72,Male,Nontobacco,129.69,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,72,Male,Tobacco,213.29,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,73,Female,Nontobacco,93.61,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,73,Female,Tobacco,148.48,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,73,Male,Nontobacco,137.38,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,73,Male,Tobacco,222.39,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,74,Female,Nontobacco,99.21,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,74,Female,Tobacco,157.63,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,74,Male,Nontobacco,145.08,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,74,Male,Tobacco,231.51,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,75,Female,Nontobacco,104.8,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,75,Female,Tobacco,166.76,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,75,Male,Nontobacco,152.78,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,75,Male,Tobacco,240.63,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,76,Female,Nontobacco,116.06,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,76,Female,Tobacco,179.0,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,76,Male,Nontobacco,168.04,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,76,Male,Tobacco,259.51,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,77,Female,Nontobacco,126.73,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,77,Female,Tobacco,194.73,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,77,Male,Nontobacco,182.36,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,77,Male,Tobacco,278.4,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,78,Female,Nontobacco,137.8,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,78,Female,Tobacco,212.75,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,78,Male,Nontobacco,197.22,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,78,Male,Tobacco,297.28,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,79,Female,Nontobacco,145.48,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,79,Female,Tobacco,225.54,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,79,Male,Nontobacco,207.18,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,79,Male,Tobacco,316.17,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,80,Female,Nontobacco,153.15,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,80,Female,Tobacco,238.34,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,80,Male,Nontobacco,217.13,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,80,Male,Tobacco,335.05,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,81,Female,Nontobacco,174.37,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,81,Female,Tobacco,252.95,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,81,Male,Nontobacco,247.61,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,81,Male,Tobacco,366.88,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,82,Female,Nontobacco,188.19,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,82,Female,Tobacco,271.9,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,82,Male,Nontobacco,267.54,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,82,Male,Tobacco,398.71,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,83,Female,Nontobacco,202.21,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,83,Female,Tobacco,290.83,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,83,Male,Nontobacco,287.83,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,83,Male,Tobacco,430.55,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,84,Female,Nontobacco,216.49,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,84,Female,Tobacco,308.2,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,84,Male,Nontobacco,308.43,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,84,Male,Tobacco,462.38,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,85,Female,Nontobacco,230.97,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,85,Female,Tobacco,325.58,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,85,Male,Nontobacco,322.08,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote
+Immediate,Standard,85,Male,Tobacco,494.22,Final_Expense_Agent_Guide_2644970R5,Montana uses Unisex-Male rates per guide footnote

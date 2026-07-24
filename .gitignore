@@ -27,3 +27,6 @@ img/mvi-chat-avatar/_candidates/
 # Unredacted license PDFs (personal address) — do not publish
 licenses/private-originals/
 .venv-lic-redact/
+
+# Transamerica Brandfolder PDFs/PPTX (local extracts only; MD/CSV committed)
+integrations/knowledge/Transamerica_Knowledge/source_pdfs/

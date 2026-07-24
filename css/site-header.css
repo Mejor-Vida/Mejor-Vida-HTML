@@ -525,29 +525,141 @@ header.sticky-top .header-logo-wrap {
   right: 0;
   background: white;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  padding: 16px;
+  padding: 12px 16px 16px;
   z-index: 100;
+  max-height: min(78vh, 640px);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .mobile-menu.active {
   display: block;
 }
 
-.mobile-menu a {
-  display: block;
-  padding: 12px 16px;
-  color: #1a365d;
-  font-weight: 500;
+.mobile-menu-primary {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.15rem;
+  width: 100%;
+  margin: 0 0 0.55rem;
+  padding: 0.85rem 1rem;
+  border-radius: 10px;
+  text-decoration: none !important;
+  font-weight: 700;
+  line-height: 1.25;
+  border: 1px solid transparent;
+}
+
+.mobile-menu-phone {
+  background: #f0f6ff;
+  border-color: rgba(13, 71, 161, 0.18);
+  color: #0d47a1 !important;
+}
+
+.mobile-menu-primary-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #475569;
+}
+
+.mobile-menu-primary-value {
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+}
+
+.mobile-menu-prices {
+  align-items: center;
+  justify-content: center;
+  background: #FEC963;
+  color: #1a202c !important;
+  font-size: 1rem;
+  padding: 0.9rem 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.mobile-menu-prices:hover,
+.mobile-menu-prices:focus-visible {
+  background: #f5b942;
+  color: #1a202c !important;
+}
+
+.mobile-menu-phone:hover,
+.mobile-menu-phone:focus-visible {
+  background: #e4efff;
+}
+
+.mobile-menu-accordion {
+  border-top: 1px solid #e5e7eb;
+}
+
+.mobile-menu-accordion:last-child {
   border-bottom: 1px solid #e5e7eb;
-  transition: background-color 0.15s;
 }
 
-.mobile-menu a:hover {
-  background-color: #f3f4f6;
+.mobile-menu-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  width: 100%;
+  margin: 0;
+  padding: 0.95rem 0.25rem;
+  border: 0;
+  background: transparent;
+  color: #1a365d;
+  font-size: 0.98rem;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
 }
 
-.mobile-menu a:last-child {
+.mobile-menu-toggle i {
+  font-size: 0.78rem;
+  color: #64748b;
+  transition: transform 0.18s ease;
+}
+
+.mobile-menu-accordion.is-open .mobile-menu-toggle i {
+  transform: rotate(180deg);
+}
+
+.mobile-menu-panel {
+  padding: 0 0 0.65rem 0.35rem;
+}
+
+.mobile-menu-panel[hidden] {
+  display: none !important;
+}
+
+.mobile-menu a.mobile-menu-link,
+.mobile-menu .mobile-menu-link {
+  display: block;
+  padding: 0.7rem 0.5rem;
+  color: #0d47a1;
+  font-weight: 600;
+  font-size: 0.92rem;
+  text-decoration: none;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.mobile-menu a.mobile-menu-link:last-child,
+.mobile-menu .mobile-menu-link:last-child {
   border-bottom: none;
+}
+
+.mobile-menu a.mobile-menu-link:hover {
+  background-color: #f8fafc;
+  text-decoration: underline;
+}
+
+/* Keep floating FABs from covering the open menu */
+body:has(.mobile-menu.active) .mvi-float-stack {
+  visibility: hidden;
+  pointer-events: none;
 }
 
 .hamburger-btn {
@@ -587,18 +699,33 @@ header.sticky-top .header-logo-wrap {
     z-index: 2;
   }
 
+  /* Wide enough to show full “MEJOR VIDA” + tagline; leave room for hamburger */
   .header-logo-wrap {
-    flex: 0 0 168px !important;
-    width: 168px !important;
-    max-width: 168px !important;
+    flex: 0 0 216px !important;
+    width: 216px !important;
+    max-width: 216px !important;
     margin-left: 0 !important;
     margin-right: 0 !important;
     overflow: hidden !important;
   }
 
   .header-logo {
-    height: 200px !important;
-    margin-left: -58px !important;
+    height: 172px !important;
+    margin-left: -48px !important;
     max-width: none !important;
+    transform: translateY(2px) !important;
+  }
+}
+
+@media (max-width: 374.98px) {
+  .header-logo-wrap {
+    flex: 0 0 196px !important;
+    width: 196px !important;
+    max-width: 196px !important;
+  }
+
+  .header-logo {
+    height: 156px !important;
+    margin-left: -42px !important;
   }
 }

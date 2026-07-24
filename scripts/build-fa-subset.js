@@ -242,8 +242,9 @@ function main() {
   const core = coreCssWithoutIcons(path.join(faRoot, "css", "fontawesome.min.css"));
   // Keep only Free solid + Brands faces pointing at our subset files; drop regular face weight if present.
   let faces = `
-@font-face{font-family:"Font Awesome 7 Free";font-style:normal;font-weight:900;font-display:swap;src:url(fontawesome/webfonts/fa-solid-900.woff2?v=20260722subset) format("woff2")}
-@font-face{font-family:"Font Awesome 7 Brands";font-style:normal;font-weight:400;font-display:swap;src:url(fontawesome/webfonts/fa-brands-400.woff2?v=20260722subset) format("woff2")}
+:host,:root{--fa-family-brands:"Font Awesome 7 Brands";--fa-family-classic:"Font Awesome 7 Free";--fa-style-family-brands:"Font Awesome 7 Brands";--fa-style-family:"Font Awesome 7 Free"}
+@font-face{font-family:"Font Awesome 7 Free";font-style:normal;font-weight:900;font-display:swap;src:url(fontawesome/webfonts/fa-solid-900.woff2?v=20260723subset) format("woff2")}
+@font-face{font-family:"Font Awesome 7 Brands";font-style:normal;font-weight:400;font-display:swap;src:url(fontawesome/webfonts/fa-brands-400.woff2?v=20260723subset) format("woff2")}
 .fa-brands,.fab{--fa-family:var(--fa-family-brands);--fa-style:400}
 .fa-solid,.fas{--fa-family:var(--fa-family-classic);--fa-style:900}
 `.trim();

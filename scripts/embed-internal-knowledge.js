@@ -10,7 +10,9 @@
  *   node scripts/embed-internal-knowledge.js
  *   node scripts/embed-internal-knowledge.js --only=moo
  *   node scripts/embed-internal-knowledge.js --only=amam
+ *   node scripts/embed-internal-knowledge.js --only=transamerica
  *   node scripts/embed-internal-knowledge.js --carrier american_amicable --file path/to/MASTER.md
+ *   node scripts/embed-internal-knowledge.js --carrier=transamerica --file=integrations/knowledge/Transamerica_Knowledge/MASTER_TRANSAMERICA_KNOWLEDGE.md
  *
  * Idempotent: UNIQUE(carrier, chunk_fingerprint); fingerprint = sha256(carrier+product+category+normalized content).
  */
@@ -40,6 +42,17 @@ const DEFAULT_JOBS = [
       "MASTER_AMAM_KNOWLEDGE.md",
     ),
     label: "American Amicable",
+  },
+  {
+    carrier: "transamerica",
+    file: path.join(
+      REPO_ROOT,
+      "integrations",
+      "knowledge",
+      "Transamerica_Knowledge",
+      "MASTER_TRANSAMERICA_KNOWLEDGE.md",
+    ),
+    label: "Transamerica",
   },
 ];
 
@@ -283,6 +296,7 @@ function parseArgs(argv) {
     const a = argv[i];
     if (a === "--only=moo") out.only = "moo";
     else if (a === "--only=amam") out.only = "amam";
+    else if (a === "--only=transamerica") out.only = "transamerica";
     else if (a === "--only=all" || a === "--only=both") out.only = "all";
     else if (a.startsWith("--carrier=")) out.carrier = a.slice("--carrier=".length).trim();
     else if (a.startsWith("--file=")) out.file = a.slice("--file=".length).trim();
@@ -363,6 +377,8 @@ async function main() {
     jobs = jobs.filter((j) => j.carrier === "mutual_of_omaha");
   } else if (args.only === "amam") {
     jobs = jobs.filter((j) => j.carrier === "american_amicable");
+  } else if (args.only === "transamerica") {
+    jobs = jobs.filter((j) => j.carrier === "transamerica");
   }
 
   for (const job of jobs) {
@@ -370,7 +386,7 @@ async function main() {
   }
 
   console.log("\n========== TOTAL ROWS BY CARRIER (internal_knowledge_chunks) ==========");
-  const carriers = ["mutual_of_omaha", "american_amicable"];
+  const carriers = ["mutual_of_omaha", "american_amicable", "transamerica"];
   for (const c of carriers) {
     const n = await countCarrierRows(supabaseUrl, serviceKey, c);
     console.log(c + ":", n, "rows");

@@ -18,12 +18,12 @@
   <link rel="icon" type="image/x-icon" href="favicon.ico" />
   <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
   <link href="css/quote-flow-shared.css" rel="stylesheet" />
-  <link href="css/quote-flow-shared.css?v=20260721-cm-low3" rel="stylesheet" />
-  <link href="css/quote-flow-shared.css?v=20260721-cm-low3" rel="stylesheet" />
-  <link href="css/quote-flow-shared.css?v=20260721-cm-low3" rel="stylesheet" />
+  <link href="css/quote-flow-shared.css?v=20260723-mobile-menu" rel="stylesheet" />
+  <link href="css/quote-flow-shared.css?v=20260723-mobile-menu" rel="stylesheet" />
+  <link href="css/quote-flow-shared.css?v=20260723-mobile-menu" rel="stylesheet" />
 <link href="css/site-footer.css?v=20260721-lip-page" rel="stylesheet"/>
   <link href="css/mvi-assistant-widget.css?v=20260721-chat-z" rel="stylesheet" />
-  <link href="css/fontawesome-mvi.min.css?v=20260722-subset" rel="stylesheet"/>
+  <link href="css/fontawesome-mvi.min.css?v=20260723-brands-fix" rel="stylesheet"/>
   <style>
     body {
       font-family: 'Inter', system-ui, -apple-system, sans-serif;
@@ -229,24 +229,59 @@
     </div>
 
     <div class="mobile-menu" id="mobile-menu">
-      <p class="mobile-menu-sublabel">Seguro de vida y gastos finales</p>
-      <a href="guias-gastos-finales.html" class="mobile-menu-link">Opciones de cobertura</a>
-      <p class="mobile-menu-sublabel">Sobre nosotros</p>
-      <a href="about-julie.html" class="mobile-menu-link">Conozca a la fundadora</a>
-      <a href="contact.html" class="mobile-menu-link">Contacto</a>
-      <a href="/schedule-julie.html" class="mobile-menu-link">Agendar una llamada</a>
-      <a href="guias-gastos-finales.html" class="mobile-menu-link">FAQs</a>
-      <a href="licencias.html" class="mobile-menu-link">Licencias</a>
-      <p class="mobile-menu-sublabel">Recursos funerarios</p>
-      <button type="button" class="mobile-menu-link mobile-menu-link--action" data-mvi-open-chat>Asistente de chat MVI</button>
-      <a href="blog.html" class="mobile-menu-link">Noticias semanales de seguros</a>
-      <a href="guias-gastos-finales.html" class="mobile-menu-link">Guías de gastos finales</a>
-      <a href="final-expense-estimator.html" class="mobile-menu-link fw-bold" style="color:#0D47A1;">Calculadora de gastos finales</a>
-      <a href="https://wa.me/14024405438?text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20seguro%20de%20gastos%20finales." target="_blank" rel="noopener" class="mobile-menu-link fw-bold" style="color:#1D9E53;"><i class="fab fa-whatsapp me-2"></i>WhatsApp (recomendado)</a>
-      <a href="/quote.html" class="mobile-menu-link fw-bold" style="color:#0D47A1;"><i class="fas fa-file-invoice-dollar me-2"></i>Cotización gratis en línea</a>
-      <a href="/en/" class="mobile-menu-link small text-muted">English</a>
-      <p class="mobile-menu-link small text-muted mb-0 px-2">¿Cliente actual? Línea de atención: <a href="tel:+14024405438" class="text-decoration-none">402-440-5438</a></p>
-      <p class="mobile-menu-link small text-muted mb-0 px-2">SMS/Texto: <a href="tel:+14028441199" class="text-decoration-none">402-844-1199</a></p>
+      <a href="tel:+14024405438" class="mobile-menu-primary mobile-menu-phone">
+        <span class="mobile-menu-primary-label">Hable con una agente licenciada</span>
+        <span class="mobile-menu-primary-value">402-440-5438</span>
+      </a>
+      <a href="/quote.html" class="mobile-menu-primary mobile-menu-prices">Ver precios</a>
+
+      <div class="mobile-menu-accordion">
+        <button type="button" class="mobile-menu-toggle" aria-expanded="false" aria-controls="mm-about" id="mm-about-btn">
+          <span>Sobre nosotros</span>
+          <i class="fas fa-chevron-down" aria-hidden="true"></i>
+        </button>
+        <div class="mobile-menu-panel" id="mm-about" role="region" aria-labelledby="mm-about-btn" hidden>
+          <a href="about-julie.html" class="mobile-menu-link">Conozca a la fundadora</a>
+          <a href="contact.html" class="mobile-menu-link">Contacto</a>
+          <a href="/schedule-julie.html" class="mobile-menu-link">Agendar una llamada</a>
+          <a href="guias-gastos-finales.html" class="mobile-menu-link">FAQs</a>
+          <a href="licencias.html" class="mobile-menu-link">Licencias</a>
+        </div>
+      </div>
+
+      <div class="mobile-menu-accordion">
+        <button type="button" class="mobile-menu-toggle" aria-expanded="false" aria-controls="mm-funeral" id="mm-funeral-btn">
+          <span>Recursos funerarios</span>
+          <i class="fas fa-chevron-down" aria-hidden="true"></i>
+        </button>
+        <div class="mobile-menu-panel" id="mm-funeral" role="region" aria-labelledby="mm-funeral-btn" hidden>
+          <a href="blog/cuanto-cuesta-seguro-gastos-finales.html" class="mobile-menu-link">Guía de costos funerarios</a>
+          <a href="blog/final-expense-vs-prepagado-funerario-2026-07-19.html" class="mobile-menu-link">Funerales prepagados</a>
+          <a href="blog/medicare-paga-gastos-finales.html" class="mobile-menu-link">Cómo pagar un funeral</a>
+          <a href="guias-gastos-finales.html" class="mobile-menu-link">Cómo planificar su funeral</a>
+          <a href="final-expense-estimator.html" class="mobile-menu-link">Calculadora de gastos finales</a>
+        </div>
+      </div>
+
+      <div class="mobile-menu-accordion">
+        <button type="button" class="mobile-menu-toggle" aria-expanded="false" aria-controls="mm-life" id="mm-life-btn">
+          <span>Seguro de vida y gastos finales</span>
+          <i class="fas fa-chevron-down" aria-hidden="true"></i>
+        </button>
+        <div class="mobile-menu-panel" id="mm-life" role="region" aria-labelledby="mm-life-btn" hidden>
+          <a href="tipos-seguro-vida.html" class="mobile-menu-link">Tipos de seguro de vida</a>
+          <a href="guias-gastos-finales.html" class="mobile-menu-link">Seguro de gastos finales</a>
+          <a href="term-quote.html" class="mobile-menu-link">Seguro de vida temporal</a>
+          <a href="costo-seguro-vida.html" class="mobile-menu-link">Costo del seguro</a>
+          <a href="quote.html" class="mobile-menu-link">Seguro de vida de emisión inmediata</a>
+          <a href="blog/tipos-planes-seguro-gastos-finales.html" class="mobile-menu-link">Vida y entierro sin período de espera</a>
+          <a href="blog/tipos-planes-seguro-gastos-finales.html" class="mobile-menu-link">Aceptación garantizada</a>
+          <a href="contact.html" class="mobile-menu-link">Seguro de protección hipotecaria</a>
+          <a href="blog/que-es-seguro-gastos-finales.html" class="mobile-menu-link">Seguro para cremación</a>
+          <a href="contact.html" class="mobile-menu-link">Seguro de vida infantil</a>
+          <a href="blog/que-es-seguro-gastos-finales.html" class="mobile-menu-link">Seguro de vida entera</a>
+        </div>
+      </div>
     </div>
   </header>
   <div class="mvi-float-stack">
@@ -400,6 +435,6 @@
 </div>
 </div>
 </footer>
-<script defer src="js/mvi-nav-questions.js?v=20260721-hover-bridge"></script>
+<script defer src="js/mvi-nav-questions.js?v=20260723-mobile-menu"></script>
 </body>
 </html>

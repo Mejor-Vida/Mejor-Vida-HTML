@@ -124,9 +124,43 @@
     });
   }
 
+  function bindMobileAccordions() {
+    var menu = document.getElementById("mobile-menu");
+    if (!menu) return;
+
+    menu.querySelectorAll(".mobile-menu-toggle").forEach(function (btn) {
+      btn.addEventListener("click", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var panelId = btn.getAttribute("aria-controls");
+        var panel = panelId ? document.getElementById(panelId) : null;
+        var wrap = btn.closest(".mobile-menu-accordion");
+        if (!panel || !wrap) return;
+
+        var willOpen = btn.getAttribute("aria-expanded") !== "true";
+
+        menu.querySelectorAll(".mobile-menu-accordion").forEach(function (other) {
+          var otherBtn = other.querySelector(".mobile-menu-toggle");
+          var otherPanelId = otherBtn && otherBtn.getAttribute("aria-controls");
+          var otherPanel = otherPanelId ? document.getElementById(otherPanelId) : null;
+          other.classList.remove("is-open");
+          if (otherBtn) otherBtn.setAttribute("aria-expanded", "false");
+          if (otherPanel) otherPanel.setAttribute("hidden", "");
+        });
+
+        if (willOpen) {
+          wrap.classList.add("is-open");
+          btn.setAttribute("aria-expanded", "true");
+          panel.removeAttribute("hidden");
+        }
+      });
+    });
+  }
+
   function init() {
     bindOpenChatTriggers();
     bindLifePanels();
+    bindMobileAccordions();
     document.querySelectorAll(".nav-questions-dropdown-trigger").forEach(function (trigger) {
       bindDropdown(trigger, ".nav-questions-dropdown", ".nav-questions-dropdown-menu");
     });
