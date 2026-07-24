@@ -16,6 +16,7 @@ Julie noted these **new appointments** on 2026-07-19. Store for later site/RAG c
 - Assurity
 - Mutual of Omaha
 - American Amicable
+- Homepage carrier trust strip also shows **Aetna**, **Corebridge**, and **Transamerica** wordmarks (no dedicated carrier pages yet)
 
 ## When ready to build
 

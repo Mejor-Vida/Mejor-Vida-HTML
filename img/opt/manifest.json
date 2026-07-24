@@ -18,6 +18,15 @@
     "keepPng": true
   },
   {
+    "src": "img/hero-couple-embrace.png",
+    "base": "hero-couple-embrace-480",
+    "width": 479,
+    "height": 720,
+    "webp": "img/opt/hero-couple-embrace-480.webp",
+    "fallback": "img/opt/hero-couple-embrace-480.png",
+    "keepPng": true
+  },
+  {
     "src": "img/happy-family.png",
     "base": "happy-family",
     "width": 1400,
@@ -27,12 +36,30 @@
     "keepPng": true
   },
   {
+    "src": "img/happy-family.png",
+    "base": "happy-family-800",
+    "width": 800,
+    "height": 436,
+    "webp": "img/opt/happy-family-800.webp",
+    "fallback": "img/opt/happy-family-800.png",
+    "keepPng": true
+  },
+  {
     "src": "img/grandma-grandson.png",
     "base": "grandma-grandson",
     "width": 960,
     "height": 1024,
     "webp": "img/opt/grandma-grandson.webp",
     "fallback": "img/opt/grandma-grandson.png",
+    "keepPng": true
+  },
+  {
+    "src": "img/grandma-grandson.png",
+    "base": "grandma-grandson-640",
+    "width": 639,
+    "height": 682,
+    "webp": "img/opt/grandma-grandson-640.webp",
+    "fallback": "img/opt/grandma-grandson-640.png",
     "keepPng": true
   },
   {
@@ -231,6 +258,15 @@
     "height": 109,
     "webp": "img/opt/american-amicable-logo.webp",
     "fallback": "img/opt/american-amicable-logo.png",
+    "keepPng": true
+  },
+  {
+    "src": "img/carriers/transamerica-logo.png",
+    "base": "transamerica-logo",
+    "width": 480,
+    "height": 114,
+    "webp": "img/opt/transamerica-logo.webp",
+    "fallback": "img/opt/transamerica-logo.png",
     "keepPng": true
   },
   {

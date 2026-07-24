@@ -154,6 +154,8 @@
 <link href="../css/nav-about-mega.css?v=20260721-lip-page" rel="stylesheet"/>
 <link href="../css/nav-funeral-resources.css?v=20260721-faces-top" rel="stylesheet"/>
 <link href="../css/nav-life-insurance.css?v=20260721-cost-blue" rel="stylesheet"/>
+<link href="../css/carrier-trust-strip.css?v=20260723-trust-fold6" rel="stylesheet"/>
+<link href="../css/mvi-licensing-map.css?v=20260723-home-lic2" rel="stylesheet"/>
 <style>
     /* Smooth scrolling */
     html { scroll-behavior: smooth; }
@@ -335,6 +337,119 @@
       position: relative;
       background: #90CDF4;
       overflow: hidden;
+    }
+
+    /*
+     * Homepage fold: header + hero + carrier strip = one screen (Choice Mutual pattern).
+     * Hero flex-grows; strip stays at the bottom of the first viewport.
+     */
+    .mvi-home-fold {
+      /* Exactly one screen under the sticky header — logos sit on the fold bottom */
+      height: calc(100svh - 81px);
+      min-height: calc(100svh - 81px);
+      max-height: calc(100svh - 81px);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    #home.hero-two-tone {
+      flex: 1 1 auto;
+      min-height: 0;
+      padding-top: clamp(0.85rem, 2.2vh, 1.75rem) !important;
+      /* Image sits flush on the hero → logo-strip seam */
+      padding-bottom: 0 !important;
+      display: flex;
+      align-items: stretch;
+    }
+    #home .hero-content-overlay {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: stretch;
+    }
+    #home .hero-content-overlay > .row {
+      --bs-gutter-x: 1.5rem;
+      --bs-gutter-y: 0.85rem;
+      width: 100%;
+      min-height: 100%;
+      align-items: flex-end !important;
+    }
+    #home .hero-content-overlay > .row > .col-lg-6:first-child {
+      align-self: center;
+      padding-bottom: clamp(1rem, 2.5vh, 1.75rem);
+    }
+    #home .hero-content-overlay > .row > .col-lg-6.position-relative {
+      align-self: stretch;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding-bottom: 0;
+    }
+    #home .display-5 {
+      font-size: clamp(2.05rem, 2.9vw + 1.05rem, 3.4rem) !important;
+      margin-bottom: 1.15rem !important;
+      line-height: 1.15 !important;
+    }
+    #home .col-lg-6 > p.fs-5 {
+      font-size: clamp(1.08rem, 0.85vw + 0.85rem, 1.35rem) !important;
+      margin-bottom: 1.35rem !important;
+      line-height: 1.5 !important;
+    }
+    #home .col-lg-6 > .d-flex.flex-column.flex-sm-row {
+      margin-bottom: 0 !important;
+    }
+    #home .btn-primary-gold.px-4.py-3 {
+      padding: 0.85rem 1.45rem !important;
+      font-size: 1.12rem;
+    }
+    #home .carousel-container {
+      max-height: min(58vh, 520px);
+      width: min(100%, 560px);
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 0;
+    }
+    @media (min-width: 992px) {
+      #home .carousel-container {
+        max-height: min(62vh, 560px);
+        width: 100%;
+      }
+    }
+    @media (max-height: 720px) {
+      #home .carousel-container {
+        max-height: min(46vh, 360px);
+      }
+      #home .display-5 {
+        font-size: clamp(1.75rem, 2vw + 0.95rem, 2.6rem) !important;
+      }
+      #home .col-lg-6 > p.fs-5 {
+        font-size: clamp(1rem, 0.6vw + 0.8rem, 1.15rem) !important;
+      }
+    }
+    @media (max-width: 991.98px) {
+      .mvi-home-fold {
+        height: auto;
+        min-height: 0;
+        max-height: none;
+        overflow: visible;
+      }
+      #home.hero-two-tone {
+        flex: none;
+        padding-bottom: clamp(0.85rem, 2vh, 1.5rem) !important;
+      }
+      #home .hero-content-overlay > .row {
+        align-items: center !important;
+        min-height: 0;
+      }
+      #home .hero-content-overlay > .row > .col-lg-6:first-child,
+      #home .hero-content-overlay > .row > .col-lg-6.position-relative {
+        align-self: auto;
+        padding-bottom: 0;
+        display: block;
+      }
+      #home .carousel-container {
+        max-height: min(48vw, 300px);
+      }
     }
     
     .hero-dark-overlay {
@@ -1178,7 +1293,8 @@
     <a href="../index.html" class="mvi-lang-fab text-decoration-none" title="Ver sitio en español">Español</a>
   </div>
 
-<section class="hero-two-tone py-5 py-md-5 relative" id="home">
+<div class="mvi-home-fold">
+<section class="hero-two-tone hero-home relative" id="home">
 
 <div class="hero-dark-overlay">
 <svg aria-hidden="true" preserveaspectratio="none" viewbox="0 0 1200 500" xmlns="http://www.w3.org/2000/svg">
@@ -1186,7 +1302,7 @@
 </svg>
 </div>
 <div class="container hero-content-overlay">
-<div class="row g-4 g-lg-5 align-items-center">
+<div class="row g-4 g-lg-5 align-items-end">
 
 <div class="col-lg-6 text-white">
 <h1 class="display-5 fw-bold lh-tight mb-4">
@@ -1195,25 +1311,10 @@
 <p class="fs-5 text-white opacity-90 mb-4 lh-lg">
             At Mejor Vida Insurance, we help you find final expense life insurance that fits your budget, working with trusted companies like Assurity, Mutual of Omaha, and American Amicable.
           </p>
-<div class="d-flex flex-column flex-sm-row gap-2 mb-5">
+<div class="d-flex flex-column flex-sm-row gap-2 mb-0">
 <a class="btn btn-primary-gold px-4 py-3 rounded fw-bold d-inline-flex align-items-center justify-content-center" href="quote.html">
 <i class="fas fa-calendar-check me-2"></i>Get a Free Quote!
             </a>
-</div>
-
-<div class="d-flex flex-wrap gap-3 align-items-center">
-<div class="d-flex align-items-center gap-2 text-white opacity-90">
-<i class="fas fa-shield-halved fa-lg" style="color:#90CDF4"></i>
-<span class="small fw-medium">Licensed Agent</span>
-</div>
-<div class="d-flex align-items-center gap-2 text-white opacity-90">
-<i class="fas fa-comments fa-lg" style="color:#90CDF4"></i>
-<span class="small fw-medium">English &amp; Spanish</span>
-</div>
-<div class="d-flex align-items-center gap-2 text-white opacity-90">
-<i class="fas fa-handshake fa-lg" style="color:#90CDF4"></i>
-<span class="small fw-medium">No pressure</span>
-</div>
 </div>
 </div>
 
@@ -1302,45 +1403,78 @@
 </div>
 </section>
 
-<section class="py-5 py-md-5 bg-white" id="about">
-<div class="container">
-<div class="text-center mb-5">
-<h2 class="h2 fw-bold mb-4" style="color:#1a365d;">Meet the founder</h2>
-</div>
-
-<div class="d-flex flex-wrap gap-2 mb-4 justify-content-center justify-content-md-start">
-<span class="rounded-pill px-3 py-1 small fw-semibold" style="background:#ebf8ff;color:#2563eb;"><i class="fas fa-globe me-1"></i> Service in English &amp; Spanish</span>
-<span class="rounded-pill px-3 py-1 small fw-semibold" style="background:#ebf8ff;color:#2563eb;"><i class="fas fa-heart me-1"></i> Focused on final expense</span>
-</div>
-<div class="row g-4 align-items-start">
-
-<div class="col-12 col-md-auto text-center text-md-start julie-about-photo-col">
-<picture>
-<source srcset="../img/opt/julie-about.webp" type="image/webp"/>
-<img alt="Julie, agente de seguros — Mejor Vida Insurance" class="mx-auto mx-md-0 mb-3 julie-about-img" decoding="async" height="795" loading="lazy" src="../img/opt/julie-about.jpg" width="529"/>
-</picture>
-<p class="small text-muted mb-0">Julie, founder of Mejor Vida Insurance LLC</p>
-</div>
-
-<div class="col-12 col-md">
-<h3 class="h4 fw-bold mb-3" style="color:#1a365d;">A human approach to hard conversations</h3>
-<p class="text-body-secondary lh-lg mb-3">Julie specializes in final expense life insurance. Her goal is to make these conversations easier: explain how coverage works, what your options are, and how to best protect your family—without complicated language.</p>
-<p class="text-body-secondary lh-lg mb-4">As an independent agent, she doesn't work for just one company. That means she can look at different insurers, like Assurity, Mutual of Omaha, and American Amicable, to find a policy that fits your age, health, and budget.</p>
-<ul class="list-unstyled">
-<li class="d-flex align-items-start gap-2 mb-2"><i class="fas fa-check-circle text-success mt-1"></i><span class="text-body-secondary">Clear and honest explanations.</span></li>
-<li class="d-flex align-items-start gap-2 mb-2"><i class="fas fa-check-circle text-success mt-1"></i><span class="text-body-secondary">Recommendations based on your needs, not commissions.</span></li>
-<li class="d-flex align-items-start gap-2 mb-2"><i class="fas fa-check-circle text-success mt-1"></i><span class="text-body-secondary">Support through the application process and after approval.</span></li>
-</ul>
-<p class="mb-0 mt-3"><a class="fw-semibold link-primary text-decoration-underline" href="about-julie.html">Read Julie’s full story</a></p>
-</div>
-</div>
-</div>
+<!-- Carrier trust strip (Choice Mutual–style) -->
+<section class="mvi-carrier-trust-strip" aria-label="Trusted life insurers">
+  <div class="container">
+    <p class="mvi-carrier-trust-strip__headline">Compare prices among these trusted life insurers — and more options based on your profile</p>
+    <ul class="mvi-carrier-trust-strip__logos">
+      <li class="mvi-carrier-trust-strip__logo--assurity">
+        <a href="/en/carriers/assurity.html" aria-label="Assurity">
+          <img src="../img/carriers/assurity-wordmark.png" alt="Assurity" width="526" height="132" loading="lazy" decoding="async" />
+        </a>
+      </li>
+      <li class="mvi-carrier-trust-strip__logo--omaha">
+        <a href="/en/carriers/mutual-of-omaha.html" aria-label="Mutual of Omaha">
+          <picture>
+            <source type="image/webp" srcset="../img/opt/mutual-of-omaha-logo.webp" />
+            <img src="../img/opt/mutual-of-omaha-logo.png" alt="Mutual of Omaha" width="400" height="94" loading="lazy" decoding="async" />
+          </picture>
+        </a>
+      </li>
+      <li class="mvi-carrier-trust-strip__logo--amicable">
+        <a href="/en/carriers/american-amicable.html" aria-label="American Amicable">
+          <img src="../img/carriers/american-amicable-logo.png" alt="American Amicable" width="638" height="134" loading="lazy" decoding="async" />
+        </a>
+      </li>
+      <li class="mvi-carrier-trust-strip__logo--aetna">
+        <span class="mvi-carrier-trust-strip__mark" role="img" aria-label="Aetna">
+          <img src="../img/carriers/aetna-logo.svg" alt="Aetna" width="512" height="98" loading="lazy" decoding="async" />
+        </span>
+      </li>
+      <li class="mvi-carrier-trust-strip__logo--corebridge">
+        <span class="mvi-carrier-trust-strip__mark" role="img" aria-label="Corebridge">
+          <img src="../img/carriers/corebridge-wordmark.svg" alt="Corebridge" width="280" height="48" loading="lazy" decoding="async" />
+        </span>
+      </li>
+      <li class="mvi-carrier-trust-strip__logo--transamerica">
+        <span class="mvi-carrier-trust-strip__mark" role="img" aria-label="Transamerica">
+          <picture>
+            <source type="image/webp" srcset="../img/opt/transamerica-logo.webp?v=20260723-nobg" />
+            <img src="../img/opt/transamerica-logo.png?v=20260723-nobg" alt="Transamerica" width="480" height="114" loading="lazy" decoding="async" />
+          </picture>
+        </span>
+      </li>
+    </ul>
+  </div>
 </section>
+</div>
 
 <section aria-labelledby="how-it-works-title" class="py-5 py-md-5" id="how-it-works" style="background:#ebf8ff;">
+<div class="container">
+  <div class="mvi-home-lic">
+    <p class="mvi-home-lic__statement">
+      Mejor Vida Insurance agency specializes in final expense insurance in
+      <em>Nebraska, Kansas, Colorado, and Nevada</em>.
+    </p>
+    <div class="mvi-home-lic__map-card">
+      <div class="mvi-lic-legend" aria-hidden="true">
+        <span><span class="mvi-lic-swatch mvi-lic-swatch--licensed"></span>Licensed here</span>
+        <span><span class="mvi-lic-swatch mvi-lic-swatch--other"></span>Coming soon</span>
+      </div>
+      <div class="mvi-lic-map-wrap" id="mvi-lic-map-host" data-map-src="../img/us-states-map.svg?v=20260723-viewbox" data-map-mode="highlight-only" aria-label="United States map highlighting Nebraska, Kansas, Colorado, and Nevada"></div>
+      <ul class="mvi-home-lic__states" aria-label="Licensed states">
+        <li>Nebraska</li>
+        <li>Kansas</li>
+        <li>Colorado</li>
+        <li>Nevada</li>
+      </ul>
+      <a class="mvi-home-lic__link link-primary" href="licenses.html">View licenses and NPN</a>
+    </div>
+  </div>
+</div>
 <div class="container hiw-steps-wrap">
 <header class="hiw-steps-header">
-<h2 class="fw-bold" style="color:#1a365d;">How It Works</h2>
+<h2 class="fw-bold" id="how-it-works-title" style="color:#1a365d;">How It Works</h2>
 </header>
 <div class="hiw-steps">
 <article class="hiw-step">
@@ -1626,6 +1760,7 @@
 <script defer src="../script.js"></script>
 
 <script defer src="../js/mvi-nav-questions.js?v=20260723-mobile-menu"></script>
+<script defer src="../js/mvi-licensing-map.js?v=20260723-home-lic2"></script>
 <script defer="" src="../js/website-assistant-widget.js?v=20260721-chat-z"></script>
 
 <script>

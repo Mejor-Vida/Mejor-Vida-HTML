@@ -203,12 +203,13 @@
     document.body.style.overflow = "";
   }
 
-  function wireMap(svgRoot) {
+  function wireMap(svgRoot, highlightOnly) {
     if (!svgRoot) return;
     Object.keys(LICENSED).forEach(function (code) {
       var el = svgRoot.getElementById(code) || svgRoot.querySelector('[data-state="' + code + '"]');
       if (!el) return;
       el.classList.add("is-licensed");
+      if (highlightOnly) return;
       el.setAttribute("tabindex", "0");
       el.setAttribute("role", "button");
       var info = LICENSED[code];
@@ -262,6 +263,7 @@
     if (!host) return;
     var src = host.getAttribute("data-map-src");
     if (!src) return;
+    var highlightOnly = host.getAttribute("data-map-mode") === "highlight-only";
     fetch(src)
       .then(function (r) {
         if (!r.ok) throw new Error("map fetch failed");
@@ -270,7 +272,13 @@
       .then(function (text) {
         host.innerHTML = text;
         var svg = host.querySelector("svg");
-        wireMap(svg);
+        if (svg && !svg.getAttribute("viewBox")) {
+          var w = parseFloat(svg.getAttribute("width")) || 959;
+          var h = parseFloat(svg.getAttribute("height")) || 593;
+          svg.setAttribute("viewBox", "0 0 " + w + " " + h);
+          svg.setAttribute("preserveAspectRatio", "xMidYMid meet");
+        }
+        wireMap(svg, highlightOnly);
       })
       .catch(function () {
         host.innerHTML =
