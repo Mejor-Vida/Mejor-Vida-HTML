@@ -115,6 +115,8 @@
       readMore: "Read more",
       readLess: "Show less",
       error: "Sorry, I couldn't reach the server. Please try again.",
+      rateLimited:
+        "You've sent quite a few messages in a short time. Please wait a few minutes and try again.",
       openChat: "Open chat assistant",
       closeChat: "Close",
       minimize: "Minimize",
@@ -135,6 +137,8 @@
       readMore: "Leer más",
       readLess: "Mostrar menos",
       error: "No pude conectar con el servidor. Intenta de nuevo.",
+      rateLimited:
+        "Has enviado muchas preguntas en poco tiempo. Espera unos minutos e intenta de nuevo.",
       openChat: "Abrir asistente de chat",
       closeChat: "Cerrar",
       minimize: "Minimizar",
@@ -495,8 +499,10 @@
           state.loading = false;
           var data = res.data || {};
           var answer = typeof data.answer === "string" ? data.answer : "";
-          if (!res.ok || data.status === "error") {
-            answer = tr().error;
+          if (data.status === "rate_limited" || res.status === 429) {
+            answer = answer || tr().rateLimited;
+          } else if (!res.ok || data.status === "error") {
+            answer = answer || tr().error;
           } else if (data.status === "no_answer" && !answer) {
             answer = tr().error;
           }

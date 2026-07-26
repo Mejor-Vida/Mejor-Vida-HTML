@@ -23,6 +23,7 @@ This folder holds **SQL migrations** for **Postgres (Supabase)** used by the mar
 | **`050_quote_ranges_assurity.sql`** | **`quote_ranges_assurity`** — table created (superseded by 051 seed) |
 | **`051_quote_ranges_assurity_assurity_only.sql`** | Reseed from `integrations/knowledge/Assurity_Knowledge/assurity_protect_plus_premiums_10k.csv` (Assurity-only; no MOO) |
 | **`015_schema_migrations_record_014.sql`** | Inserts `014_quote_ranges.sql` into **`schema_migrations`** if `014` was run manually in SQL editor |
+| **`086_api_rate_limits.sql`** | **`api_rate_limits`** + **`consume_rate_limit()`** — distributed throttling for website/ManyChat RAG on Vercel |
 | **`027_drop_fex_email_quotes.sql`** | Retires legacy `fex_email_quotes` table |
 | **`030_internal_knowledge_chunks.sql`** | `internal_knowledge_chunks` — staff Product Selector RAG only (not `knowledge_chunks`) |
 | **`031_match_internal_knowledge_chunks.sql`** | `match_internal_knowledge_chunks()` — vector search RPC for internal KB |

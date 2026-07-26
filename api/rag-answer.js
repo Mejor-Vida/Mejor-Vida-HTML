@@ -6,6 +6,10 @@
 
 const { verifyManychatSecret, logRequest } = require("../lib/manychat-auth");
 const { runRagPipeline } = require("../lib/rag-pipeline");
+const {
+  checkManychatChatRateLimit,
+  rateLimitMessage,
+} = require("../lib/rate-limit");
 
 function json(res, status, payload) {
   res.status(status).setHeader("Content-Type", "application/json");
@@ -47,6 +51,22 @@ module.exports = async function handler(req, res) {
     body = readJsonBody(req);
   } catch (e) {
     return json(res, 400, { status: "error", error: "Invalid JSON" });
+  }
+
+  const identity =
+    String(body.phone || "").trim() ||
+    String(body.subscriber_id || body.manychat_subscriber_id || "").trim();
+  const language = body.language ? String(body.language).trim() : "English";
+  const limit = await checkManychatChatRateLimit(req, identity);
+  if (!limit.allowed) {
+    const retry = limit.retryAfterSeconds || 60;
+    res.setHeader("Retry-After", String(retry));
+    return json(res, 429, {
+      status: "rate_limited",
+      answer: rateLimitMessage(language, retry),
+      error: "rate_limited",
+      retry_after_seconds: retry,
+    });
   }
 
   try {

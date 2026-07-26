@@ -15,6 +15,10 @@ const { verifySiteOrigin } = require("../lib/site-origin");
 const { logRequest } = require("../lib/manychat-auth");
 const { runRagPipeline } = require("../lib/rag-pipeline");
 const { normalizeAssistantLanguage } = require("../lib/assistant-language");
+const {
+  checkWebsiteChatRateLimit,
+  rateLimitMessage,
+} = require("../lib/rate-limit");
 
 function json(res, status, payload) {
   res.status(status).setHeader("Content-Type", "application/json");
@@ -117,7 +121,19 @@ module.exports = async function handler(req, res) {
       });
     }
 
-       try {
+    const limit = await checkWebsiteChatRateLimit(req, sessionId);
+    if (!limit.allowed) {
+      const retry = limit.retryAfterSeconds || 60;
+      res.setHeader("Retry-After", String(retry));
+      return json(res, 429, {
+        status: "rate_limited",
+        answer: rateLimitMessage(language, retry),
+        message_id: messageId,
+        retry_after_seconds: retry,
+      });
+    }
+
+    try {
       const out = await runRagPipeline(pipelineBody, { hubspotNotePrefix: "Website assistant" });
       const includeUsage = process.env.RAG_RETURN_USAGE === "1";
       if (out.error) {
@@ -168,6 +184,18 @@ module.exports = async function handler(req, res) {
     phone: String(phone).trim(),
     flow_stage: flowStage,
   };
+
+  const legacyLimit = await checkWebsiteChatRateLimit(req, String(phone || "").trim());
+  if (!legacyLimit.allowed) {
+    const retry = legacyLimit.retryAfterSeconds || 60;
+    res.setHeader("Retry-After", String(retry));
+    return json(res, 429, {
+      reply: rateLimitMessage(language, retry),
+      status: "rate_limited",
+      error: "rate_limited",
+      retry_after_seconds: retry,
+    });
+  }
 
   try {
     const out = await runRagPipeline(pipelineBody, { hubspotNotePrefix: "Website RAG" });
