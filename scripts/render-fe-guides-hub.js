@@ -33,7 +33,7 @@ const html = `<!DOCTYPE html>
 <link href="css/site-footer.css?v=20260721-funeral-mega" rel="stylesheet"/>
 <link href="css/mvi-assistant-widget.css" rel="stylesheet"/>
 <link href="css/fontawesome-mvi.min.css" rel="stylesheet"/>
-<link href="css/fe-guide.css" rel="stylesheet"/>
+<link href="css/fe-guide.css?v=20260726-wave-gold" rel="stylesheet"/>
 <script>(function(){document.documentElement.lang='es';document.documentElement.className='lang-es';})();</script>
 </head>
 <body style="font-family:'Inter',system-ui,sans-serif;">

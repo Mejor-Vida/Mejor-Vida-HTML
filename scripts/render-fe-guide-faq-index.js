@@ -5,36 +5,17 @@
  */
 const fs = require("fs");
 const path = require("path");
+const {
+  loadFaqIndex,
+  isGuidePublished,
+  renderPublishedGuideCard,
+  escHtml,
+} = require("../lib/fe-guide-catalog");
 
 const ROOT = path.join(__dirname, "..");
-const DATA = path.join(ROOT, "data/fe-guide-faq-index.json");
-const GUIDES_DIR = path.join(ROOT, "data/fe-guides");
 const INDEX = path.join(ROOT, "index.html");
 
-const data = JSON.parse(fs.readFileSync(DATA, "utf8"));
-
-function esc(s) {
-  return String(s)
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;");
-}
-
-function isGuidePublished(slug) {
-  return fs.existsSync(path.join(GUIDES_DIR, `${slug}.json`));
-}
-
-function cardPublished(g) {
-  const href = `blog/${g.slug}.html`;
-  return `        <div class="col-md-6 col-lg-4">
-          <article class="bg-white rounded-3 p-4 shadow-sm h-100 fe-guide-faq-card position-relative">
-            <h3 class="h6 fw-bold mb-2" style="color:#1a365d;"><a class="text-decoration-none stretched-link" style="color:#1a365d;" href="${href}">${esc(g.question)}</a></h3>
-            <p class="small text-body-secondary lh-base mb-2">${esc(g.teaser)}</p>
-            <p class="small mb-0"><span class="text-primary fw-semibold">Guía de Mejor Vida →</span></p>
-          </article>
-        </div>`;
-}
+const data = loadFaqIndex();
 
 const htmlParts = [];
 let soonCount = 0;
@@ -42,10 +23,18 @@ for (const cat of data.categories) {
   const published = cat.guides.filter((g) => isGuidePublished(g.slug));
   soonCount += cat.guides.length - published.length;
   if (!published.length) continue;
-  htmlParts.push(`      <h3 class="h5 fw-bold mt-4 mb-3" style="color:#1a365d;">${esc(cat.title)}</h3>`);
-  htmlParts.push(`      <div class="row g-3 mb-2">`);
+  const hasMedia = published.some((g) => g.image);
+  // Media card grid sits under the section H2; skip redundant category labels like "Lo esencial".
+  if (!hasMedia) {
+    htmlParts.push(
+      `      <h3 class="h5 fw-bold mt-4 mb-3" style="color:#1a365d;">${escHtml(cat.title)}</h3>`
+    );
+  }
+  htmlParts.push(
+    `      <div class="row ${hasMedia ? "g-4" : "g-3"} mb-2${hasMedia ? " fe-guide-media-grid" : ""}">`
+  );
   for (const g of published) {
-    htmlParts.push(cardPublished(g));
+    htmlParts.push(renderPublishedGuideCard(g, { imagePrefix: "img/opt/" }));
   }
   htmlParts.push(`      </div>`);
 }
@@ -102,9 +91,29 @@ index = index.replace(
   new RegExp(`${htmlStart}[\\s\\S]*?${htmlEnd}`, "m"),
   `${htmlStart}\n${htmlBlock}\n      ${htmlEnd}`
 );
+
+if (index.includes(schemaStart) && index.includes(schemaEnd)) {
+  index = index.replace(
+    new RegExp(`${schemaStart}[\\s\\S]*?${schemaEnd}`, "m"),
+    `${schemaStart}\n${schemaBlock}\n${schemaEnd}`
+  );
+}
+
+if (!index.includes('fe-guide-answers--media')) {
+  index = index.replace(
+    /<section class="py-5 py-md-5(?: bg-light)?" id="final-expense-answers">/,
+    '<section class="py-5 py-md-5 fe-guide-answers--media" id="final-expense-answers">'
+  );
+}
+
 index = index.replace(
-  new RegExp(`${schemaStart}[\\s\\S]*?${schemaEnd}`, "m"),
-  `${schemaStart}\n${schemaBlock}\n${schemaEnd}`
+  /href="css\/fe-guide\.css(?:\?v=[^"]*)?"/,
+  'href="css/fe-guide.css?v=20260726-wave-gold"'
+);
+
+index = index.replace(
+  /(<section[^>]*id="final-expense-answers"[^>]*>[\s\S]*?<div class="container") style="max-width:\d+rem;"/,
+  '$1 style="max-width:52rem;"'
 );
 
 fs.writeFileSync(INDEX, index, "utf8");

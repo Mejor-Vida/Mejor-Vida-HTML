@@ -727,6 +727,109 @@
       }
     }
 
+    /* Six full-color carrier logos (3×2) — quote + FE estimator */
+    .mvi-quote-carrier-logos.mvi-quote-carrier-logos--six {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      align-items: center;
+      justify-items: center;
+      flex-wrap: unset;
+      flex-direction: unset;
+      /* Break out of the narrower quote wizard wrap so logos have room */
+      width: min(56rem, calc(100vw - 2rem));
+      max-width: min(56rem, calc(100vw - 2rem));
+      margin-left: 50%;
+      transform: translateX(-50%);
+      column-gap: 3.75rem;
+      row-gap: 1.85rem;
+      padding-inline: 0.75rem;
+      gap: unset;
+    }
+
+    .mvi-quote-carrier-logos.mvi-quote-carrier-logos--six > div {
+      flex: none;
+      max-width: none;
+      width: 100%;
+      min-width: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding-inline: 0.35rem;
+    }
+
+    .mvi-quote-carrier-logos.mvi-quote-carrier-logos--six img {
+      filter: none;
+      width: auto;
+      height: auto;
+      max-width: 100%;
+      max-height: clamp(2.1rem, 4.6vw, 2.85rem);
+      object-fit: contain;
+    }
+
+    .mvi-quote-carrier-logos.mvi-quote-carrier-logos--six .mvi-quote-carrier-logo--omaha img {
+      max-height: clamp(3.1rem, 6.8vw, 4.25rem);
+    }
+
+    .mvi-quote-carrier-logos.mvi-quote-carrier-logos--six .mvi-quote-carrier-logo--assurity img {
+      max-height: clamp(1.65rem, 3.6vw, 2.15rem);
+    }
+
+    .mvi-quote-carrier-logos.mvi-quote-carrier-logos--six .mvi-quote-carrier-logo--amicable img {
+      max-height: clamp(3.2rem, 7vw, 4.4rem);
+    }
+
+    .mvi-quote-carrier-logos.mvi-quote-carrier-logos--six .mvi-quote-carrier-logo--aetna img {
+      max-height: clamp(1.35rem, 3.2vw, 1.85rem);
+    }
+
+    .mvi-quote-carrier-logos.mvi-quote-carrier-logos--six .mvi-quote-carrier-logo--corebridge img {
+      max-height: clamp(2.35rem, 5.2vw, 3.25rem);
+    }
+
+    .mvi-quote-carrier-logos.mvi-quote-carrier-logos--six .mvi-quote-carrier-logo--transamerica img {
+      max-height: clamp(2.75rem, 6.2vw, 3.75rem);
+    }
+
+    @media (max-width: 575.98px) {
+      .mvi-quote-carrier-logos.mvi-quote-carrier-logos--six {
+        width: calc(100vw - 1.25rem);
+        max-width: calc(100vw - 1.25rem);
+        column-gap: 1.5rem;
+        row-gap: 1.4rem;
+        padding-inline: 0.35rem;
+      }
+
+      .mvi-quote-carrier-logos.mvi-quote-carrier-logos--six > div {
+        padding-inline: 0.2rem;
+      }
+
+      .mvi-quote-carrier-logos.mvi-quote-carrier-logos--six img {
+        max-height: clamp(1.5rem, 6vw, 1.95rem);
+      }
+
+      .mvi-quote-carrier-logos.mvi-quote-carrier-logos--six .mvi-quote-carrier-logo--omaha img,
+      .mvi-quote-carrier-logos.mvi-quote-carrier-logos--six .mvi-quote-carrier-logo--amicable img {
+        max-height: clamp(2.2rem, 9vw, 2.85rem);
+      }
+
+      .mvi-quote-carrier-logos.mvi-quote-carrier-logos--six .mvi-quote-carrier-logo--assurity img {
+        max-height: clamp(1.25rem, 5vw, 1.6rem);
+      }
+
+      .mvi-quote-carrier-logos.mvi-quote-carrier-logos--six .mvi-quote-carrier-logo--aetna img {
+        max-height: clamp(1.15rem, 4.8vw, 1.45rem);
+      }
+
+      .mvi-quote-carrier-logos.mvi-quote-carrier-logos--six .mvi-quote-carrier-logo--corebridge img {
+        max-height: clamp(1.7rem, 7vw, 2.2rem);
+      }
+
+      .mvi-quote-carrier-logos.mvi-quote-carrier-logos--six .mvi-quote-carrier-logo--transamerica img {
+        max-height: clamp(2rem, 8.2vw, 2.6rem);
+      }
+    }
+
     .mvi-quote-trust-strip .small.text-muted {
       font-size: clamp(0.9rem, 2vw, 1rem) !important;
     }

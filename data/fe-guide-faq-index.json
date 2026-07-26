@@ -3,27 +3,35 @@
   "categories": [
     {
       "id": "esencial",
-      "title": "Lo esencial",
+      "title": "Guías principales",
       "guides": [
         {
           "slug": "que-es-seguro-gastos-finales",
           "question": "¿Qué es un seguro de gastos finales?",
-          "teaser": "Qué cubre, para quién sirve y cómo ayuda a su familia con el funeral y deudas pequeñas."
+          "cardLabel": "Qué es el seguro",
+          "teaser": "Qué cubre, para quién sirve y cómo ayuda a su familia con el funeral y deudas pequeñas.",
+          "image": "fe-guide-card-que-es"
         },
         {
           "slug": "tipos-planes-seguro-gastos-finales",
           "question": "¿Qué tipos de planes existen?",
-          "teaser": "Emisión simplificada, modificada y garantizada — cómo difieren en salud, espera y aprobación."
+          "cardLabel": "Tipos de planes",
+          "teaser": "Emisión simplificada, modificada y garantizada — cómo difieren en salud, espera y aprobación.",
+          "image": "fe-guide-card-tipos"
         },
         {
           "slug": "cuanto-cuesta-seguro-gastos-finales",
           "question": "¿Cuánto cuesta un seguro de gastos finales?",
-          "teaser": "Rangos de precio por edad, tabaco y cobertura — con ejemplos para Nebraska."
+          "cardLabel": "Cuánto cuesta",
+          "teaser": "Rangos de precio por edad, tabaco y cobertura — con ejemplos para Nebraska.",
+          "image": "fe-guide-card-cuanto-cuesta"
         },
         {
           "slug": "medicare-paga-gastos-finales",
           "question": "¿Se encarga Medicare de pagar los gastos finales?",
-          "teaser": "Qué paga Medicare, qué no cubre y por qué muchas familias necesitan otra protección."
+          "cardLabel": "Qué paga Medicare",
+          "teaser": "Qué paga Medicare, qué no cubre y por qué muchas familias necesitan otra protección.",
+          "image": "fe-guide-card-medicare"
         },
         {
           "slug": "diferencia-seguro-vida-y-gastos-finales",

@@ -472,6 +472,141 @@
 }
 
 /* Homepage FAQ guide cards (index.html #final-expense-answers) */
+
+/* Choice Mutual–style image + title guide cards */
+.fe-guide-media-grid {
+  --fe-media-navy: #1a365d;
+  max-width: 44rem;
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: center;
+}
+
+.fe-guide-media-grid > [class*="col-"] {
+  max-width: 22.5rem;
+}
+
+.fe-guide-media-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  background: #fff;
+  border-radius: 0.65rem;
+  box-shadow: 0 1px 3px rgba(26, 54, 93, 0.08);
+  color: inherit;
+  text-decoration: none;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.fe-guide-media-card:hover,
+.fe-guide-media-card:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 0.5rem 1.1rem rgba(26, 54, 93, 0.12);
+  color: inherit;
+  text-decoration: none;
+  outline: none;
+}
+
+.fe-guide-media-card:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 3px;
+}
+
+.fe-guide-media-card__media {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  max-height: 12.75rem;
+  overflow: hidden;
+  background: #e2e8f0;
+}
+
+.fe-guide-media-card__media picture,
+.fe-guide-media-card__media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 22%;
+}
+
+.fe-guide-media-card__body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 0.9rem 1rem 1.05rem;
+}
+
+.fe-guide-media-card__body h3 {
+  margin: 0;
+  color: var(--fe-media-navy);
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (min-width: 768px) {
+  .fe-guide-media-card__body h3 {
+    font-size: 1.2rem;
+  }
+}
+
+.fe-guide-media-card__teaser {
+  margin: 0;
+  color: #64748b;
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+#final-expense-answers.fe-guide-answers--media {
+  --fe-guide-section-bg: #fff8e6;
+  position: relative;
+  background: var(--fe-guide-section-bg) !important;
+  overflow: visible;
+}
+
+.fe-guide-answers__wave {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -2.75rem;
+  height: 2.75rem;
+  color: var(--fe-guide-section-bg, #fff8e6);
+  line-height: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.fe-guide-answers__wave svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+#final-expense-answers.fe-guide-answers--media > .container {
+  max-width: 56rem;
+  position: relative;
+  z-index: 2;
+}
+
+.fe-hub-category .fe-guide-media-grid {
+  margin-top: 0.25rem;
+}
+
+@media (max-width: 575.98px) {
+  .fe-guide-media-grid > [class*="col-"] {
+    max-width: 100%;
+  }
+
+  .fe-guide-media-card__media {
+    max-height: 14rem;
+  }
+}
+
 .fe-guide-faq-card--soon {
   background: #f1f5f9;
   border: 1px dashed #cbd5e1;
