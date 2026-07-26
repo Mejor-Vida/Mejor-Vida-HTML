@@ -18,9 +18,14 @@ const STATIC_PAGES = [
   { loc: "/contact.html", priority: "0.75" },
   { loc: "/quote.html", priority: "0.90" },
   { loc: "/schedule-julie.html", priority: "0.75" },
+  { loc: "/aseguradoras.html", priority: "0.80" },
+  { loc: "/tipos-seguro-vida.html", priority: "0.80" },
+  { loc: "/costo-seguro-vida.html", priority: "0.80" },
+  { loc: "/final-expense-estimator.html", priority: "0.70" },
   { loc: "/carriers/assurity.html", priority: "0.70" },
   { loc: "/carriers/mutual-of-omaha.html", priority: "0.70" },
   { loc: "/carriers/american-amicable.html", priority: "0.70" },
+  { loc: "/carriers/transamerica.html", priority: "0.70" },
 ];
 
 /** Standalone July articles redirect to the weekly digest — omit from sitemap. */
