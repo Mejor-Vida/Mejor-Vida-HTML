@@ -1,0 +1,185 @@
+/* Homepage “About final expense” band (guide teaser → Julie’s FE guide) */
+
+.mvi-fe-about {
+  --mvi-fe-navy: #1a365d;
+  --mvi-fe-blue-top: #e8f1fb;
+  --mvi-fe-blue-benefits: #d7e8f7;
+  --mvi-fe-gold: #f5c518;
+  --mvi-fe-gold-hover: #e0b000;
+  padding: 2.5rem 0 3rem;
+  background: #f4f8fc;
+}
+
+.mvi-fe-about__panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.95fr);
+  gap: 0;
+  align-items: stretch;
+  max-width: 72rem;
+  margin: 0 auto;
+  background: var(--mvi-fe-blue-top);
+  border-radius: 1.25rem;
+  overflow: hidden;
+}
+
+.mvi-fe-about__copy {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  min-width: 0;
+}
+
+.mvi-fe-about__intro {
+  padding: clamp(1.75rem, 3.5vw, 2.5rem) clamp(1.5rem, 3vw, 2.5rem) 1.25rem;
+  background: var(--mvi-fe-blue-top);
+}
+
+.mvi-fe-about__intro h2 {
+  margin: 0 0 1rem;
+  color: var(--mvi-fe-navy);
+  font-size: clamp(1.55rem, 2.2vw, 2rem);
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.mvi-fe-about__lede {
+  margin: 0 0 0.85rem;
+  color: #334155;
+  font-size: 1.05rem;
+  line-height: 1.65;
+  max-width: 38rem;
+}
+
+.mvi-fe-about__lede:last-of-type {
+  margin-bottom: 0;
+}
+
+.mvi-fe-about__lede a {
+  color: #2563eb;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.mvi-fe-about__lede a:hover {
+  color: #1d4ed8;
+}
+
+.mvi-fe-about__cta-wrap {
+  display: flex;
+  justify-content: center;
+  padding: 1.15rem 1.5rem 1.35rem;
+  background: var(--mvi-fe-blue-top);
+}
+
+.mvi-fe-about__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  margin: 0;
+  padding: 0.85rem 1.75rem;
+  border-radius: 0.45rem;
+  border: none;
+  background: var(--mvi-fe-gold);
+  color: #1a1a1a;
+  font-weight: 700;
+  font-size: 1.05rem;
+  text-decoration: none;
+  box-shadow: 0 2px 6px rgba(26, 54, 93, 0.12);
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+
+.mvi-fe-about__cta:hover,
+.mvi-fe-about__cta:focus-visible {
+  background: var(--mvi-fe-gold-hover);
+  color: #1a1a1a;
+  outline: none;
+  transform: translateY(-1px);
+}
+
+.mvi-fe-about__cta i {
+  font-size: 0.95rem;
+}
+
+.mvi-fe-about__benefits-block {
+  padding: clamp(1.35rem, 2.5vw, 1.85rem) clamp(1.5rem, 3vw, 2.5rem) clamp(1.75rem, 3vw, 2.35rem);
+  background: var(--mvi-fe-blue-benefits);
+  flex: 1;
+}
+
+.mvi-fe-about__benefits-title {
+  margin: 0 0 0.85rem;
+  color: var(--mvi-fe-navy);
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
+.mvi-fe-about__benefits {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.55rem 1.25rem;
+}
+
+.mvi-fe-about__benefits li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.55rem;
+  color: #334155;
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+
+.mvi-fe-about__benefits i {
+  flex-shrink: 0;
+  margin-top: 0.2rem;
+  color: #059669;
+  font-size: 0.9rem;
+}
+
+.mvi-fe-about__media {
+  position: relative;
+  min-height: 100%;
+  background: #cfe0f0;
+}
+
+.mvi-fe-about__media picture,
+.mvi-fe-about__media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 25%;
+}
+
+@media (max-width: 991.98px) {
+  .mvi-fe-about__panel {
+    grid-template-columns: 1fr;
+  }
+
+  .mvi-fe-about__media {
+    min-height: 16rem;
+    max-height: 22rem;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .mvi-fe-about {
+    padding: 1.75rem 0 2.25rem;
+  }
+
+  .mvi-fe-about__panel {
+    border-radius: 1rem;
+  }
+
+  .mvi-fe-about__benefits {
+    grid-template-columns: 1fr;
+  }
+
+  .mvi-fe-about__media {
+    max-height: 14rem;
+  }
+}

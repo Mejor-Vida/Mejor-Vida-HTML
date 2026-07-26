@@ -45,6 +45,15 @@
     "keepPng": true
   },
   {
+    "src": "img/fe-about-seniors-laptop.jpg",
+    "base": "fe-about-seniors-laptop",
+    "width": 1000,
+    "height": 744,
+    "webp": "img/opt/fe-about-seniors-laptop.webp",
+    "fallback": "img/opt/fe-about-seniors-laptop.jpg",
+    "keepPng": false
+  },
+  {
     "src": "img/grandma-grandson.png",
     "base": "grandma-grandson",
     "width": 960,

@@ -85,6 +85,8 @@ def prepare_en_header(path: Path) -> str:
         nest = "../" * depth
         header = header.replace("../img/", up_site + "img/")
         header = header.replace('href="../index.html"', f'href="{up_site}index.html"')
+        header = header.replace('href="index.html#home"', f'href="{nest}index.html#home"')
+        header = header.replace('href="index.html"', f'href="{nest}index.html"')
         header = header.replace(
             'href="../guias-gastos-finales.html"',
             f'href="{up_site}guias-gastos-finales.html"',
@@ -101,6 +103,7 @@ def prepare_en_header(path: Path) -> str:
                 "licenses.html",
                 "life-insurance-products.html",
                 "life-insurance-cost.html",
+                "insurance-carriers.html",
             ):
                 header = header.replace(f'href="{name}"', f'href="{nest}{name}"')
             header = header.replace(

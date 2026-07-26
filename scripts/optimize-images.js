@@ -22,6 +22,7 @@ const JOBS = [
   { src: "img/hero-couple-embrace.png", maxWidth: 480, maxHeight: 720, outBase: "hero-couple-embrace-480" },
   { src: "img/happy-family.png", maxWidth: 1400, maxHeight: 900 },
   { src: "img/happy-family.png", maxWidth: 800, maxHeight: 514, outBase: "happy-family-800" },
+  { src: "img/fe-about-seniors-laptop.jpg", maxWidth: 1000, maxHeight: 750 },
   { src: "img/grandma-grandson.png", maxWidth: 960, maxHeight: 1024, keepPng: true },
   { src: "img/grandma-grandson.png", maxWidth: 640, maxHeight: 682, keepPng: true, outBase: "grandma-grandson-640" },
   { src: "img/woman-flowers.png", maxWidth: 566, maxHeight: 1024, keepPng: true },

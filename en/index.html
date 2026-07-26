@@ -141,6 +141,7 @@
   </script>
 
 <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="../css/site-footer.css" rel="stylesheet"/>
 <link href="../css/site-footer.css?v=20260721-lip-page" rel="stylesheet"/>
 
 <link href="../css/fontawesome-mvi.min.css?v=20260723-brands-fix" rel="stylesheet"/>
@@ -156,6 +157,7 @@
 <link href="../css/nav-life-insurance.css?v=20260721-cost-blue" rel="stylesheet"/>
 <link href="../css/carrier-trust-strip.css?v=20260723-trust-fold6" rel="stylesheet"/>
 <link href="../css/mvi-licensing-map.css?v=20260723-home-lic2" rel="stylesheet"/>
+<link href="../css/mvi-home-fe-about.css?v=20260725c" rel="stylesheet"/>
 <style>
     /* Smooth scrolling */
     html { scroll-behavior: smooth; }
@@ -1031,43 +1033,6 @@
       color: #475569;
       margin: 0;
     }
-
-    /* Carriers: whole card is one link */
-    #carriers .carrier-card-link { color: inherit; }
-    #carriers .carrier-card-link .feature-card {
-      transition: box-shadow 0.2s ease, transform 0.15s ease;
-    }
-    #carriers .carrier-card-link:hover .feature-card {
-      box-shadow: 0 0.5rem 1.25rem rgba(26, 54, 93, 0.14) !important;
-      transform: translateY(-2px);
-    }
-    #carriers .carrier-card-link:focus-visible { outline: none; }
-    #carriers .carrier-card-link:focus-visible .feature-card {
-      outline: 2px solid #2563eb;
-      outline-offset: 3px;
-    }
-    #carriers .carrier-card-logo-wrap {
-      display: flex;
-      align-items: center;
-      min-height: 3.25rem;
-      margin-bottom: 1rem;
-    }
-    #carriers .carrier-card-logo-wrap img {
-      display: block;
-      width: auto;
-      max-width: 100%;
-      object-fit: contain;
-    }
-    #carriers .carrier-card-logo-wrap--omaha img {
-      height: clamp(2.75rem, 6vw, 3.5rem);
-    }
-    #carriers .carrier-card-logo-wrap--amicable {
-      min-height: 4rem;
-    }
-    #carriers .carrier-card-logo-wrap--amicable img {
-      height: clamp(3.75rem, 9vw, 5rem);
-      max-width: min(100%, 20rem);
-    }
   </style>
 <script>(function(){document.documentElement.className="lang-en";document.documentElement.lang="en";})();</script><link rel="preload" as="image" href="../img/opt/business-man.webp?v=20260721-cutout" type="image/webp" fetchpriority="high"/>
 </head>
@@ -1164,6 +1129,7 @@
                 <a href="blog/final-expense-vs-prepaid-funeral-2026-07-19.html">Prepaid funerals</a>
                 <a href="../blog/medicare-paga-gastos-finales.html">How to pay for a funeral</a>
                 <a href="../guias-gastos-finales.html">How to plan your own funeral</a>
+                <a href="insurance-carriers.html">Trusted insurance companies</a>
               </div>
               <a class="nav-funeral-feature" href="../blog/cuanto-cuesta-seguro-gastos-finales.html">
                 <span class="nav-funeral-feature-badge">FEATURED</span>
@@ -1263,6 +1229,7 @@
           <a href="blog/final-expense-vs-prepaid-funeral-2026-07-19.html" class="mobile-menu-link">Prepaid funerals</a>
           <a href="../blog/medicare-paga-gastos-finales.html" class="mobile-menu-link">How to pay for a funeral</a>
           <a href="../guias-gastos-finales.html" class="mobile-menu-link">How to plan your own funeral</a>
+          <a href="insurance-carriers.html" class="mobile-menu-link">Trusted insurance companies</a>
           <a href="final-expense-estimator.html" class="mobile-menu-link">Funeral Cost Calculator</a>
         </div>
       </div>
@@ -1406,7 +1373,7 @@
 <!-- Carrier trust strip (Choice Mutual–style) -->
 <section class="mvi-carrier-trust-strip" aria-label="Trusted life insurers">
   <div class="container">
-    <p class="mvi-carrier-trust-strip__headline">Compare prices among these trusted life insurers — and more options based on your profile</p>
+    <p class="mvi-carrier-trust-strip__headline">Compare prices among these trusted life insurers</p>
     <ul class="mvi-carrier-trust-strip__logos">
       <li class="mvi-carrier-trust-strip__logo--assurity">
         <a href="/en/carriers/assurity.html" aria-label="Assurity">
@@ -1449,10 +1416,11 @@
 </section>
 </div>
 
-<section aria-labelledby="how-it-works-title" class="py-5 py-md-5" id="how-it-works" style="background:#ebf8ff;">
+<!-- Licensing map -->
+<section aria-labelledby="licensing-map-title" class="py-5 py-md-5" id="licensing-map" style="background:#ebf8ff;">
 <div class="container">
   <div class="mvi-home-lic">
-    <p class="mvi-home-lic__statement">
+    <p class="mvi-home-lic__statement" id="licensing-map-title">
       Mejor Vida Insurance agency specializes in final expense insurance in
       <em>Nebraska, Kansas, Colorado, and Nevada</em>.
     </p>
@@ -1472,6 +1440,46 @@
     </div>
   </div>
 </div>
+</section>
+
+<section class="mvi-fe-about" id="about-final-expense" aria-labelledby="about-fe-title">
+  <div class="container">
+    <div class="mvi-fe-about__panel">
+      <div class="mvi-fe-about__copy">
+        <div class="mvi-fe-about__intro">
+          <h2 id="about-fe-title">About final expense insurance</h2>
+          <p class="mvi-fe-about__lede">Also known as <a href="../blog/que-es-seguro-gastos-finales.html">burial insurance</a> or funeral insurance, final expense insurance is a permanent life policy with affordable premiums designed to cover funeral costs and related expenses when you die.</p>
+          <p class="mvi-fe-about__lede">Upon your passing, the insurance company pays a cash benefit to your chosen beneficiaries, so your family does not have to face funeral costs, medical bills, and other end-of-life expenses alone.</p>
+        </div>
+        <div class="mvi-fe-about__cta-wrap">
+          <a class="mvi-fe-about__cta" href="../blog/que-es-seguro-gastos-finales.html">Read the guide <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+        </div>
+        <div class="mvi-fe-about__benefits-block">
+          <h3 class="mvi-fe-about__benefits-title">Benefits</h3>
+          <ul class="mvi-fe-about__benefits">
+            <li><i class="fas fa-check" aria-hidden="true"></i><span>Coverage typically ranges from <strong>$2,000 to $50,000</strong></span></li>
+            <li><i class="fas fa-check" aria-hidden="true"></i><span><strong>Rates stay the same</strong> for life while premiums are paid on time</span></li>
+            <li><i class="fas fa-check" aria-hidden="true"></i><span>Loved ones can spend the money with <strong>no restrictions</strong></span></li>
+            <li><i class="fas fa-check" aria-hidden="true"></i><span><strong>Permanent coverage</strong> while the policy stays in force</span></li>
+            <li><i class="fas fa-check" aria-hidden="true"></i><span>Many simplified-issue plans: <strong>no medical exam</strong></span></li>
+            <li><i class="fas fa-check" aria-hidden="true"></i><span>Simplified issue often has <strong>no waiting period</strong></span></li>
+            <li><i class="fas fa-check" aria-hidden="true"></i><span>Options exist even with <strong>health conditions</strong></span></li>
+            <li><i class="fas fa-check" aria-hidden="true"></i><span>Helps with funeral, medical debts, and related costs</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="mvi-fe-about__media" aria-hidden="true">
+        <picture>
+          <source type="image/webp" srcset="../img/opt/fe-about-seniors-laptop.webp"/>
+          <img src="../img/opt/fe-about-seniors-laptop.jpg" alt="" width="921" height="717" loading="lazy" decoding="async"/>
+        </picture>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS (matches landing-gastos-finales photo cards) -->
+<section aria-labelledby="how-it-works-title" class="py-5 py-md-5" id="how-it-works" style="background:#ebf8ff;">
 <div class="container hiw-steps-wrap">
 <header class="hiw-steps-header">
 <h2 class="fw-bold" id="how-it-works-title" style="color:#1a365d;">How It Works</h2>
@@ -1540,108 +1548,6 @@
 </div>
 <div class="text-center mt-5">
 <a class="btn btn-primary-gold px-4 py-3 rounded fw-bold d-inline-flex align-items-center" href="/en/schedule-julie.html"><i class="fas fa-calendar-check me-2"></i>Schedule Your Free Consultation</a>
-</div>
-</div>
-</section>
-
-<section class="py-5 py-md-5 bg-white" id="carriers">
-<div class="container">
-<div class="text-center mb-5">
-<h2 class="h2 fw-bold mb-3" style="color:#1a365d;">Trusted Insurance Companies</h2>
-<p class="fs-5 text-body-secondary mx-auto" style="max-width:48rem;">As an independent agent, Julie works with several well-known insurance companies to offer you the best options.</p>
-</div>
-<div class="mb-5" id="elegibilidad-productos">
-<h3 class="h5 fw-bold text-center mb-3" style="color:#1a365d;">Product eligibility (at a glance)</h3>
-<div class="table-responsive rounded-3 border bg-white">
-<table class="table table-sm table-bordered align-middle mb-0 text-center" style="font-size:0.9rem;">
-<thead class="table-light">
-<tr>
-<th class="text-start" scope="col">Situation (documentation)</th>
-<th scope="col">Assurity<br/><span class="fw-normal small">Protect+ / Perform+</span></th>
-<th scope="col">Mutual of Omaha<br/><span class="fw-normal small">Living Promise</span></th>
-<th scope="col">American Amicable<br/><span class="fw-normal small">Golden Solution / Senior Choice</span></th>
-</tr>
-</thead>
-<tbody class="small">
-<tr>
-<th class="text-start fw-normal" scope="row">U.S. citizen (e.g. with SSN)</th>
-<td>Yes*</td>
-<td>Yes*</td>
-<td>Yes*</td>
-</tr>
-<tr>
-<th class="text-start fw-normal" scope="row">Lawful permanent resident</th>
-<td>Yes*</td>
-<td>Yes*</td>
-<td>Yes*</td>
-</tr>
-<tr>
-<th class="text-start fw-normal" scope="row">ITIN or other insurer-accepted ID</th>
-<td>Per carrier rules*</td>
-<td>Per carrier rules*</td>
-<td>Yes* (e.g. Senior Choice)</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p class="small text-muted text-center mt-2 mb-0">* Does not guarantee approval. Depends on the insurer, state, application, and documentation submitted.</p>
-</div>
-<div class="row g-4">
-<div class="col-12 col-md-6 col-lg-4">
-<a aria-label="Assurity — carrier overview" class="carrier-card-link d-block h-100 text-decoration-none text-reset rounded-3" href="/carriers/assurity.html">
-<div class="feature-card bg-light rounded-3 p-4 shadow h-100">
-<h3 class="visually-hidden">Assurity</h3>
-<div class="carrier-card-logo-wrap">
-<img alt="Assurity logo" class="d-block" decoding="async" height="30" src="../img/carriers/assurity-logo.svg" style="height:40px;width:auto;max-width:100%;" width="130" loading="lazy"/>
-</div>
-<ul class="list-unstyled mb-0">
-<li class="d-flex align-items-start gap-2 mb-2"><i class="fas fa-check text-success mt-1 flex-shrink-0"></i><span class="small text-body-secondary">Whole life final expense solutions with level premiums intended to help cover funeral, burial, and related end-of-life costs.</span></li>
-<li class="d-flex align-items-start gap-2 mb-2"><i class="fas fa-check text-success mt-1 flex-shrink-0"></i><span class="small text-body-secondary">Multiple health classes and simplified underwriting paths—many applicants qualify without a medical exam.</span></li>
-<li class="d-flex align-items-start gap-2 mb-2"><i class="fas fa-check text-success mt-1 flex-shrink-0"></i><span class="small text-body-secondary">Coverage amounts and structures that can be matched to common final expense planning goals.</span></li>
-</ul>
-</div>
-</a>
-</div>
-<div class="col-12 col-md-6 col-lg-4">
-<a aria-label="Mutual of Omaha — carrier overview" class="carrier-card-link d-block h-100 text-decoration-none text-reset rounded-3" href="/carriers/mutual-of-omaha.html">
-<div class="feature-card bg-light rounded-3 p-4 shadow h-100">
-<h3 class="visually-hidden">Mutual of Omaha</h3>
-<div class="carrier-card-logo-wrap carrier-card-logo-wrap--omaha">
-<picture>
-<source type="image/webp" srcset="../img/opt/mutual-of-omaha-logo.webp"/>
-<img alt="Mutual of Omaha logo" src="../img/opt/mutual-of-omaha-logo.png" width="400" height="94" />
-</picture>
-</div>
-<ul class="list-unstyled mb-0">
-<li class="d-flex align-items-start gap-2 mb-2"><i class="fas fa-check text-success mt-1 flex-shrink-0"></i><span class="small text-body-secondary">Over 100 years of history, known for financial strength.</span></li>
-<li class="d-flex align-items-start gap-2 mb-2"><i class="fas fa-check text-success mt-1 flex-shrink-0"></i><span class="small text-body-secondary">Whole life policies designed to cover funeral, burial, and memorial services.</span></li>
-<li class="d-flex align-items-start gap-2 mb-2"><i class="fas fa-check text-success mt-1 flex-shrink-0"></i><span class="small text-body-secondary">Premiums don't increase due to aging or health changes after the policy is issued.</span></li>
-<li class="d-flex align-items-start gap-2 mb-2"><i class="fas fa-check text-success mt-1 flex-shrink-0"></i><span class="small text-body-secondary"><strong>Living Promise</strong> may be issued as Level or Graded benefit based on the <strong>application needs questions</strong>—not something the client selects up front; other MoO products address different needs.</span></li>
-</ul>
-</div>
-</a>
-</div>
-<div class="col-12 col-md-6 col-lg-4 mx-md-auto mx-lg-0">
-<a aria-label="American Amicable — carrier overview" class="carrier-card-link d-block h-100 text-decoration-none text-reset rounded-3" href="/carriers/american-amicable.html">
-<div class="feature-card bg-light rounded-3 p-4 shadow h-100">
-<h3 class="visually-hidden">American Amicable</h3>
-<div class="carrier-card-logo-wrap carrier-card-logo-wrap--amicable">
-<picture>
-<source type="image/webp" srcset="../img/opt/american-amicable-logo.webp"/>
-<img alt="American Amicable logo" src="../img/opt/american-amicable-logo.png" width="520" height="109" />
-</picture>
-</div>
-<ul class="list-unstyled mb-0">
-<li class="d-flex align-items-start gap-2 mb-2"><i class="fas fa-check text-success mt-1 flex-shrink-0"></i><span class="small text-body-secondary">Established carrier offering whole life products often used for final expense and burial planning.</span></li>
-<li class="d-flex align-items-start gap-2 mb-2"><i class="fas fa-check text-success mt-1 flex-shrink-0"></i><span class="small text-body-secondary">Simplified underwriting on many products—qualifying applicants often avoid a medical exam.</span></li>
-<li class="d-flex align-items-start gap-2 mb-2"><i class="fas fa-check text-success mt-1 flex-shrink-0"></i><span class="small text-body-secondary">Level premium whole life for predictable monthly cost once the policy is issued.</span></li>
-</ul>
-</div>
-</a>
-</div>
-</div>
-<div class="mt-5 p-4 rounded-3 border-start border-4 border-primary" style="background:#ebf8ff;">
-<p class="small text-body-secondary mb-0"><strong>Note:</strong> This information is a general summary. Specific details, coverage amounts, eligibility requirements, and benefits depend on each company, the state you live in, and your personal situation. A licensed agent can review your case and explain which options apply to you.</p>
 </div>
 </div>
 </section>
@@ -1719,7 +1625,7 @@
 <span class="text-white text-opacity-50">·</span>
 <a class="text-white text-opacity-75 text-decoration-none" href="index.html#how-it-works">How It Works</a>
 <span class="text-white text-opacity-50">·</span>
-<a class="text-white text-opacity-75 text-decoration-none" href="index.html#carriers">Insurers</a>
+<a class="text-white text-opacity-75 text-decoration-none" href="insurance-carriers.html">Insurers</a>
 <span class="text-white text-opacity-50">·</span>
 <a class="text-white text-opacity-75 text-decoration-none" href="index.html#final-expense-answers">Got questions?</a>
 <span class="text-white text-opacity-50">·</span>

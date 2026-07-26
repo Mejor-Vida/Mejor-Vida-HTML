@@ -1,0 +1,82 @@
+/* Shared styles for the carriers hub page (#carriers) */
+#carriers .carrier-card-link {
+  color: inherit;
+}
+
+#carriers .carrier-card-link .feature-card {
+  transition: box-shadow 0.2s ease, transform 0.15s ease;
+}
+
+#carriers .carrier-card-link:hover .feature-card {
+  box-shadow: 0 0.5rem 1.25rem rgba(26, 54, 93, 0.14) !important;
+  transform: translateY(-2px);
+}
+
+#carriers .carrier-card-link:focus-visible {
+  outline: none;
+}
+
+#carriers .carrier-card-link:focus-visible .feature-card {
+  outline: 2px solid #2563eb;
+  outline-offset: 3px;
+}
+
+#carriers .carrier-card-logo-wrap {
+  display: flex;
+  align-items: center;
+  min-height: 3.25rem;
+  margin-bottom: 1rem;
+}
+
+#carriers .carrier-card-logo-wrap img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+#carriers .carrier-card-logo-wrap--omaha img {
+  height: clamp(2.75rem, 6vw, 3.5rem);
+}
+
+#carriers .carrier-card-logo-wrap--amicable {
+  min-height: 4rem;
+}
+
+#carriers .carrier-card-logo-wrap--amicable img {
+  height: clamp(3.75rem, 9vw, 5rem);
+  max-width: min(100%, 20rem);
+}
+
+#carriers .feature-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Centered, roomier carrier cards */
+#carriers .carrier-hub-cards {
+  justify-content: center;
+  max-width: 72rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#carriers .carrier-hub-cards > [class*="col-"] {
+  max-width: 22.5rem;
+}
+
+#carriers .carrier-hub-cards .feature-card {
+  padding: 1.75rem 1.5rem !important;
+}
+
+#carriers .carrier-hub-cards .feature-card .small {
+  font-size: 0.975rem;
+  line-height: 1.55;
+}
+
+@media (min-width: 992px) {
+  #carriers .carrier-hub-cards > [class*="col-"] {
+    flex: 0 1 22.5rem;
+    width: 22.5rem;
+    max-width: 22.5rem;
+  }
+}

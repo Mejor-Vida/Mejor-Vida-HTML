@@ -7,7 +7,7 @@ Julie noted these **new appointments** on 2026-07-19. Store for later site/RAG c
 | Carrier        | Status                         | Notes |
 |----------------|--------------------------------|-------|
 | Corebridge     | Appointed; content deferred    | GI whole life (AGL GIWL) used to ground `tipos-seguro-vida` / `en/life-insurance-products` GI row (~$5K–$25K, ages 50–80). Full carrier page still deferred. |
-| Transamerica   | Appointed; content deferred    | Named in products-guide table footnote; term (Trendsetter) already in Term_Life_Knowledge harvest. Full carrier page deferred. |
+| Transamerica   | FE public page live            | FE-only pages: `carriers/transamerica.html` + `en/carriers/transamerica.html` (Express + portfolio). Term page deferred. |
 | Aetna          | Appointed; content deferred    | FE whole life typically issue ages ~40–89 (or 45–89); faces ~$2K–$50K (lower max at older ages). Used to set chart max applicant age **89**. Full carrier page still deferred. |
 | Americo        | Confirm appointment / portal   | Eagle Premier Level ~to age **85**; Eagle Guaranteed ~**50–80**, faces roughly **$2K–$25K** band with Corebridge GI. Named on products-guide chart; not yet a public carrier page. |
 

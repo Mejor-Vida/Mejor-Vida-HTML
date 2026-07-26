@@ -1,0 +1,43 @@
+/* Carrier detail pages — layout under sticky header */
+.carriers-subpage main.carrier-detail-readability,
+.carriers-subpage main {
+  display: block;
+  width: 100%;
+}
+
+.carriers-subpage main > section:first-of-type {
+  /* Clear visual break under the sticky header */
+  margin-top: 0;
+  padding-top: clamp(2.5rem, 5vh, 3.5rem) !important;
+  border-top: 1px solid rgba(26, 54, 93, 0.08);
+}
+
+.carriers-subpage main > section .container {
+  max-width: 60rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: clamp(1rem, 4vw, 1.5rem);
+  padding-right: clamp(1rem, 4vw, 1.5rem);
+}
+
+.carriers-subpage main > section:first-of-type .text-center,
+.carriers-subpage main > section:first-of-type h1 {
+  text-align: center;
+}
+
+.carriers-subpage main > section:first-of-type img,
+.carriers-subpage main > section:first-of-type picture {
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.carriers-subpage main > section h2 {
+  text-align: left;
+}
+
+@media (min-width: 768px) {
+  .carriers-subpage main > section:not(:first-of-type) h2 {
+    text-align: left;
+  }
+}
