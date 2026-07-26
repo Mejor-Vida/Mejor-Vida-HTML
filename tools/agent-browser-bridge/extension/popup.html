@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>MVI Agent Bridge</title>
+  <style>
+    :root {
+      --navy: #0d47a1;
+      --gold: #fec963;
+      --ok: #0d7a6f;
+      --off: #64748b;
+      --bg: #f8fbff;
+    }
+    body {
+      margin: 0;
+      font: 13px/1.4 system-ui, -apple-system, sans-serif;
+      color: #1a365d;
+      background: var(--bg);
+      min-width: 280px;
+    }
+    header {
+      padding: 12px 14px 8px;
+      background: var(--navy);
+      color: #fff;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 14px;
+      font-weight: 700;
+    }
+    header p {
+      margin: 4px 0 0;
+      opacity: 0.85;
+      font-size: 11px;
+    }
+    main { padding: 12px 14px 14px; }
+    .row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .status {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--off);
+    }
+    .status.on { color: var(--ok); }
+    .toggle {
+      appearance: none;
+      width: 46px;
+      height: 26px;
+      border-radius: 999px;
+      border: none;
+      background: #cbd5e1;
+      position: relative;
+      cursor: pointer;
+      transition: background 0.15s ease;
+    }
+    .toggle::after {
+      content: "";
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #fff;
+      transition: transform 0.15s ease;
+    }
+    .toggle[aria-pressed="true"] {
+      background: var(--ok);
+    }
+    .toggle[aria-pressed="true"]::after {
+      transform: translateX(20px);
+    }
+    .meta {
+      font-size: 11px;
+      color: #475569;
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 8px 10px;
+      word-break: break-all;
+    }
+    .meta strong { color: #1a365d; }
+    .warn {
+      margin-top: 10px;
+      font-size: 11px;
+      color: #92400e;
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      border-radius: 8px;
+      padding: 8px 10px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>MVI Agent Bridge</h1>
+    <p>Localhost only · Cursor agent access</p>
+  </header>
+  <main>
+    <div class="row">
+      <div>
+        <div class="status" id="statusLabel">Bridge OFF</div>
+        <div style="font-size:11px;color:#64748b;">Allow agent to use this browser</div>
+      </div>
+      <button class="toggle" id="armToggle" type="button" aria-pressed="false" aria-label="Toggle agent bridge"></button>
+    </div>
+    <div class="meta" id="metaBox">
+      <div><strong>Server:</strong> <span id="serverState">checking…</span></div>
+      <div style="margin-top:4px;"><strong>Tab:</strong> <span id="tabState">—</span></div>
+    </div>
+    <div class="warn">
+      Only turn this ON while you want the agent connected. It can read the active page and click/navigate in this browser.
+    </div>
+  </main>
+  <script src="popup.js" type="module"></script>
+</body>
+</html>

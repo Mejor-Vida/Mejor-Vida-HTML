@@ -30,3 +30,6 @@ licenses/private-originals/
 
 # Transamerica Brandfolder PDFs/PPTX (local extracts only; MD/CSV committed)
 integrations/knowledge/Transamerica_Knowledge/source_pdfs/
+
+# Corebridge Connext PDFs/screenshots (local extracts only; MD committed)
+integrations/knowledge/Corebridge_Knowledge/raw/

@@ -1,0 +1,17 @@
+# MVI Agent Browser Bridge
+
+When the user has the **MVI Agent Browser Bridge** Chrome extension armed and `npm run bridge:browser` running:
+
+1. Check: `npm run bridge:browser:status` (needs `"armed": true`)
+2. Drive the logged-in browser with:
+   - `npm run bridge:browser:cmd -- tabs`
+   - `npm run bridge:browser:cmd -- active`
+   - `npm run bridge:browser:cmd -- text`
+   - `npm run bridge:browser:cmd -- links`
+   - `npm run bridge:browser:cmd -- screenshot /tmp/mvi-bridge.png`
+   - `npm run bridge:browser:cmd -- click 'css-selector'`
+   - `npm run bridge:browser:cmd -- navigate 'https://…'`
+
+Docs: `tools/agent-browser-bridge/README.md`
+
+Use this for carrier portals (Corebridge Connext, etc.) when Playwright/CDP is not attached. Store harvested FMO-only materials under `integrations/knowledge/`, not on public pages.

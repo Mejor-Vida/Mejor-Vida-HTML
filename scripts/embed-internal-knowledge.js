@@ -11,6 +11,7 @@
  *   node scripts/embed-internal-knowledge.js --only=moo
  *   node scripts/embed-internal-knowledge.js --only=amam
  *   node scripts/embed-internal-knowledge.js --only=transamerica
+ *   node scripts/embed-internal-knowledge.js --only=corebridge
  *   node scripts/embed-internal-knowledge.js --carrier american_amicable --file path/to/MASTER.md
  *   node scripts/embed-internal-knowledge.js --carrier=transamerica --file=integrations/knowledge/Transamerica_Knowledge/MASTER_TRANSAMERICA_KNOWLEDGE.md
  *
@@ -54,6 +55,17 @@ const DEFAULT_JOBS = [
     ),
     label: "Transamerica",
   },
+  {
+    carrier: "corebridge",
+    file: path.join(
+      REPO_ROOT,
+      "integrations",
+      "knowledge",
+      "Corebridge_Knowledge",
+      "MASTER_COREBRIDGE_KNOWLEDGE.md",
+    ),
+    label: "Corebridge",
+  },
 ];
 
 const MAX_CHARS = 3400;
@@ -87,17 +99,23 @@ function inferCategory(title, bodySnippet) {
     return "compliance";
 
   if (
-    /\bgolden solution\b|\bfamily solution\b|\bfinal expense\b|\bprearrangement\b|\bburial\b|\bmodified whole life application\b/.test(
+    /\bgolden solution\b|\bfamily solution\b|\bfinal expense\b|\bprearrangement\b|\bburial\b|\bmodified whole life application\b|\bsimplinow\b|\bsiwl\b|\bgiwl\b|\bguaranteed issue whole life\b|\blegacy max\b/.test(
       t,
     )
   )
     return "final_expense";
 
-  if (/\beasy term\b|\bterm life\b|\b10, 20, and 30-year\b|\blevel premium periods\b|\bsimplified issue term\b/.test(t))
+  if (
+    /\beasy term\b|\bterm life\b|\b10, 20, and 30-year\b|\blevel premium periods\b|\bsimplified issue term\b|\bselect-a-term\b|\bag ultra one\b|\bterm conversion\b/.test(
+      t,
+    )
+  )
     return "term_life";
 
   if (
-    /\bexpress ul\b|\buniversal life\b|\biul\b|\bindexed universal\b|\bflexible premium adjustable universal\b/.test(t)
+    /\bexpress ul\b|\bsecure lifetime gul\b|\bguaranteed universal life\b|\bgul 3\b|\buniversal life\b|\biul\b|\bindexed universal\b|\bflexible premium adjustable universal\b/.test(
+      t,
+    )
   )
     return "universal_life";
 
@@ -297,6 +315,7 @@ function parseArgs(argv) {
     if (a === "--only=moo") out.only = "moo";
     else if (a === "--only=amam") out.only = "amam";
     else if (a === "--only=transamerica") out.only = "transamerica";
+    else if (a === "--only=corebridge") out.only = "corebridge";
     else if (a === "--only=all" || a === "--only=both") out.only = "all";
     else if (a.startsWith("--carrier=")) out.carrier = a.slice("--carrier=".length).trim();
     else if (a.startsWith("--file=")) out.file = a.slice("--file=".length).trim();
@@ -379,6 +398,8 @@ async function main() {
     jobs = jobs.filter((j) => j.carrier === "american_amicable");
   } else if (args.only === "transamerica") {
     jobs = jobs.filter((j) => j.carrier === "transamerica");
+  } else if (args.only === "corebridge") {
+    jobs = jobs.filter((j) => j.carrier === "corebridge");
   }
 
   for (const job of jobs) {
@@ -386,7 +407,7 @@ async function main() {
   }
 
   console.log("\n========== TOTAL ROWS BY CARRIER (internal_knowledge_chunks) ==========");
-  const carriers = ["mutual_of_omaha", "american_amicable", "transamerica"];
+  const carriers = ["mutual_of_omaha", "american_amicable", "transamerica", "corebridge"];
   for (const c of carriers) {
     const n = await countCarrierRows(supabaseUrl, serviceKey, c);
     console.log(c + ":", n, "rows");
