@@ -38,8 +38,25 @@
   }
 
   function scaledBurialFuneralHomeBreakdown(total) {
+    var st = stateConfig();
+    var fo = st && st.funeralocity && st.funeralocity.burialBreakdown;
     var tmpl = DATA.lineInfo && DATA.lineInfo.funeralHomeBurialBreakdown;
     if (!tmpl || !tmpl.length) return [];
+
+    // Prefer live Funeralocity component averages for the selected state.
+    if (fo) {
+      var foRows = [];
+      tmpl.forEach(function (row) {
+        var key = row.key;
+        if (!key || fo[key] == null) return;
+        foRows.push({
+          label: lang === "en" ? row.labelEn : row.labelEs,
+          amount: Math.round(fo[key] || 0),
+        });
+      });
+      if (foRows.length) return foRows;
+    }
+
     var baseSum = tmpl.reduce(function (s, row) {
       return s + row.amount;
     }, 0);
@@ -134,7 +151,10 @@
 
   function burialFuneralHomeTotal(st) {
     if (!st || !st.burial) return 0;
-    var sum = st.burial.funeralHome || 0;
+    // Funeralocity traditional burial service components only.
+    // Merchandise / cemetery lines are selected separately and must not be re-added here.
+    if (st.burial.funeralHome) return st.burial.funeralHome;
+    var sum = 0;
     (DATA.burialStateKeys || []).forEach(function (key) {
       sum += st.burial[key] || 0;
     });

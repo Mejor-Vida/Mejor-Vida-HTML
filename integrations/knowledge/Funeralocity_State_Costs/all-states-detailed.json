@@ -1,0 +1,5516 @@
+{
+  "source": "Funeralocity",
+  "capturedAt": "2026-07-26T21:17:33.209Z",
+  "endpointShort": "https://www.funeralocity.com/api/common/average/full/short/{STATE}",
+  "endpointDetailed": "https://www.funeralocity.com/api/common/average/detailed/services/{service}/location/state/states/{state}",
+  "states": {
+    "AK": {
+      "code": "AK",
+      "name": "Alaska",
+      "sourceUrl": "https://www.funeralocity.com/average-funeral-price/ak",
+      "short": {
+        "fullBurial": {
+          "Average": 8272,
+          "Min": 6965,
+          "Max": 9665,
+          "Rank": 32
+        },
+        "immediateBurial": {
+          "Average": 4327,
+          "Min": 3495,
+          "Max": 5285,
+          "Rank": 51
+        },
+        "fullCremation": {
+          "Average": 6336,
+          "Min": 4675,
+          "Max": 7730,
+          "Rank": 24
+        },
+        "directCremation": {
+          "Average": 1972,
+          "Min": 1275,
+          "Max": 2985,
+          "Rank": 34
+        }
+      },
+      "detailed": {
+        "traditionalBurial": {
+          "Region": "\"AK\"",
+          "Basic_Services": 1404,
+          "Pricing_Transfer_Home": 403,
+          "Pricing_Embaliming": 829,
+          "Pricing_Dressing_Casketing": 265,
+          "Pricing_Viewing": 445,
+          "Pricing_Funeral": 740,
+          "Pricing_Hearse": 410,
+          "Pricing_Utility_Vehicle": 268,
+          "Max_Basic_Services": 1895,
+          "Max_Pricing_Transfer_Home": 495,
+          "Max_Pricing_Embaliming": 1095,
+          "Max_Pricing_Dressing_Casketing": 300,
+          "Max_Pricing_Viewing": 595,
+          "Max_Pricing_Funeral": 995,
+          "Max_Pricing_Hearse": 595,
+          "Max_Pricing_Utility_Vehicle": 394,
+          "Min_Basic_Services": 1050,
+          "Min_Pricing_Transfer_Home": 225,
+          "Min_Pricing_Embaliming": 535,
+          "Min_Pricing_Dressing_Casketing": 175,
+          "Min_Pricing_Viewing": 200,
+          "Min_Pricing_Funeral": 325,
+          "Min_Pricing_Hearse": 295,
+          "Min_Pricing_Utility_Vehicle": 190,
+          "MedianPricedCasketAverage": 3500
+        },
+        "fullCremation": {
+          "Region": "\"AK\"",
+          "Pricing_Base_Services": 1404,
+          "Pricing_Transfer_Home": 403,
+          "Pricing_Embaliming": 829,
+          "Pricing_Dressing_Casketing": 265,
+          "Pricing_Viewing": 445,
+          "Pricing_Funeral": 740,
+          "Pricing_Crematory_Fee": 952,
+          "Pricing_Transfer_Crematory": 80,
+          "Max_Pricing_Base_Services": 1895,
+          "Max_Pricing_Transfer_Home": 495,
+          "Max_Pricing_Embaliming": 1095,
+          "Max_Pricing_Dressing_Casketing": 300,
+          "Max_Pricing_Viewing": 595,
+          "Max_Pricing_Funeral": 995,
+          "Max_Pricing_Crematory_Fee": 1500,
+          "Max_Pricing_Transfer_Crematory": 425,
+          "Min_Pricing_Base_Services": 1050,
+          "Min_Pricing_Transfer_Home": 225,
+          "Min_Pricing_Embaliming": 535,
+          "Min_Pricing_Dressing_Casketing": 175,
+          "Min_Pricing_Viewing": 200,
+          "Min_Pricing_Funeral": 325,
+          "Min_Pricing_Crematory_Fee": 200,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "CremationCasketAverage": 1200
+        },
+        "affordableBurial": {
+          "Region": "\"AK\"",
+          "Pricing_Immediate_Burial": 1804,
+          "Max_Pricing_Immediate_Burial": 2785,
+          "Min_Pricing_Immediate_Burial": 995,
+          "BasicCasket": 2500
+        },
+        "directCremation": {
+          "Region": "\"AK\"",
+          "Pricing_Direct_Cremation": 1935,
+          "Pricing_Transfer_Crematory": 0,
+          "Pricing_Crematory_Fee": 0,
+          "Max_Pricing_Direct_Cremation": 2985,
+          "Max_Pricing_Transfer_Crematory": 0,
+          "Max_Pricing_Crematory_Fee": 0,
+          "Min_Pricing_Direct_Cremation": 1200,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "Min_Pricing_Crematory_Fee": 0
+        }
+      }
+    },
+    "AL": {
+      "code": "AL",
+      "name": "Alabama",
+      "sourceUrl": "https://www.funeralocity.com/average-funeral-price/al",
+      "short": {
+        "fullBurial": {
+          "Average": 8428,
+          "Min": 5430,
+          "Max": 15715,
+          "Rank": 27
+        },
+        "immediateBurial": {
+          "Average": 5041,
+          "Min": 2850,
+          "Max": 8870,
+          "Rank": 27
+        },
+        "fullCremation": {
+          "Average": 6137,
+          "Min": 3197,
+          "Max": 12935,
+          "Rank": 27
+        },
+        "directCremation": {
+          "Average": 2032,
+          "Min": 695,
+          "Max": 4475,
+          "Rank": 31
+        }
+      },
+      "detailed": {
+        "traditionalBurial": {
+          "Region": "\"AL\"",
+          "Basic_Services": 2052,
+          "Pricing_Transfer_Home": 338,
+          "Pricing_Embaliming": 869,
+          "Pricing_Dressing_Casketing": 237,
+          "Pricing_Viewing": 368,
+          "Pricing_Funeral": 476,
+          "Pricing_Hearse": 326,
+          "Pricing_Utility_Vehicle": 262,
+          "Max_Basic_Services": 6520,
+          "Max_Pricing_Transfer_Home": 850,
+          "Max_Pricing_Embaliming": 2500,
+          "Max_Pricing_Dressing_Casketing": 950,
+          "Max_Pricing_Viewing": 995,
+          "Max_Pricing_Funeral": 1895,
+          "Max_Pricing_Hearse": 600,
+          "Max_Pricing_Utility_Vehicle": 595,
+          "Min_Basic_Services": 395,
+          "Min_Pricing_Transfer_Home": 65,
+          "Min_Pricing_Embaliming": 40,
+          "Min_Pricing_Dressing_Casketing": 30,
+          "Min_Pricing_Viewing": 100,
+          "Min_Pricing_Funeral": 140,
+          "Min_Pricing_Hearse": 65,
+          "Min_Pricing_Utility_Vehicle": 50,
+          "MedianPricedCasketAverage": 3500
+        },
+        "fullCremation": {
+          "Region": "\"AL\"",
+          "Pricing_Base_Services": 2052,
+          "Pricing_Transfer_Home": 338,
+          "Pricing_Embaliming": 869,
+          "Pricing_Dressing_Casketing": 237,
+          "Pricing_Viewing": 368,
+          "Pricing_Funeral": 476,
+          "Pricing_Crematory_Fee": 477,
+          "Pricing_Transfer_Crematory": 119,
+          "Max_Pricing_Base_Services": 6520,
+          "Max_Pricing_Transfer_Home": 850,
+          "Max_Pricing_Embaliming": 2500,
+          "Max_Pricing_Dressing_Casketing": 950,
+          "Max_Pricing_Viewing": 995,
+          "Max_Pricing_Funeral": 1895,
+          "Max_Pricing_Crematory_Fee": 1305,
+          "Max_Pricing_Transfer_Crematory": 495,
+          "Min_Pricing_Base_Services": 395,
+          "Min_Pricing_Transfer_Home": 65,
+          "Min_Pricing_Embaliming": 40,
+          "Min_Pricing_Dressing_Casketing": 30,
+          "Min_Pricing_Viewing": 100,
+          "Min_Pricing_Funeral": 140,
+          "Min_Pricing_Crematory_Fee": 200,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "CremationCasketAverage": 1200
+        },
+        "affordableBurial": {
+          "Region": "\"AL\"",
+          "Pricing_Immediate_Burial": 2541,
+          "Max_Pricing_Immediate_Burial": 6370,
+          "Min_Pricing_Immediate_Burial": 350,
+          "BasicCasket": 2500
+        },
+        "directCremation": {
+          "Region": "\"AL\"",
+          "Pricing_Direct_Cremation": 2009,
+          "Pricing_Transfer_Crematory": 2,
+          "Pricing_Crematory_Fee": 21,
+          "Max_Pricing_Direct_Cremation": 4475,
+          "Max_Pricing_Transfer_Crematory": 395,
+          "Max_Pricing_Crematory_Fee": 765,
+          "Min_Pricing_Direct_Cremation": 400,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "Min_Pricing_Crematory_Fee": 0
+        }
+      }
+    },
+    "AR": {
+      "code": "AR",
+      "name": "Arkansas",
+      "sourceUrl": "https://www.funeralocity.com/average-funeral-price/ar",
+      "short": {
+        "fullBurial": {
+          "Average": 7668,
+          "Min": 5395,
+          "Max": 12050,
+          "Rank": 49
+        },
+        "immediateBurial": {
+          "Average": 4466,
+          "Min": 3250,
+          "Max": 7980,
+          "Rank": 50
+        },
+        "fullCremation": {
+          "Average": 5489,
+          "Min": 3140,
+          "Max": 9620,
+          "Rank": 47
+        },
+        "directCremation": {
+          "Average": 1679,
+          "Min": 595,
+          "Max": 3595,
+          "Rank": 45
+        }
+      },
+      "detailed": {
+        "traditionalBurial": {
+          "Region": "\"AR\"",
+          "Basic_Services": 1763,
+          "Pricing_Transfer_Home": 316,
+          "Pricing_Embaliming": 676,
+          "Pricing_Dressing_Casketing": 206,
+          "Pricing_Viewing": 308,
+          "Pricing_Funeral": 465,
+          "Pricing_Hearse": 298,
+          "Pricing_Utility_Vehicle": 137,
+          "Max_Basic_Services": 5500,
+          "Max_Pricing_Transfer_Home": 995,
+          "Max_Pricing_Embaliming": 1600,
+          "Max_Pricing_Dressing_Casketing": 450,
+          "Max_Pricing_Viewing": 1300,
+          "Max_Pricing_Funeral": 1295,
+          "Max_Pricing_Hearse": 695,
+          "Max_Pricing_Utility_Vehicle": 475,
+          "Min_Basic_Services": 250,
+          "Min_Pricing_Transfer_Home": 100,
+          "Min_Pricing_Embaliming": 100,
+          "Min_Pricing_Dressing_Casketing": 50,
+          "Min_Pricing_Viewing": 50,
+          "Min_Pricing_Funeral": 100,
+          "Min_Pricing_Hearse": 100,
+          "Min_Pricing_Utility_Vehicle": 25,
+          "MedianPricedCasketAverage": 3500
+        },
+        "fullCremation": {
+          "Region": "\"AR\"",
+          "Pricing_Base_Services": 1763,
+          "Pricing_Transfer_Home": 316,
+          "Pricing_Embaliming": 676,
+          "Pricing_Dressing_Casketing": 206,
+          "Pricing_Viewing": 308,
+          "Pricing_Funeral": 465,
+          "Pricing_Crematory_Fee": 477,
+          "Pricing_Transfer_Crematory": 78,
+          "Max_Pricing_Base_Services": 5500,
+          "Max_Pricing_Transfer_Home": 995,
+          "Max_Pricing_Embaliming": 1600,
+          "Max_Pricing_Dressing_Casketing": 450,
+          "Max_Pricing_Viewing": 1300,
+          "Max_Pricing_Funeral": 1295,
+          "Max_Pricing_Crematory_Fee": 1985,
+          "Max_Pricing_Transfer_Crematory": 815,
+          "Min_Pricing_Base_Services": 250,
+          "Min_Pricing_Transfer_Home": 100,
+          "Min_Pricing_Embaliming": 100,
+          "Min_Pricing_Dressing_Casketing": 50,
+          "Min_Pricing_Viewing": 50,
+          "Min_Pricing_Funeral": 100,
+          "Min_Pricing_Crematory_Fee": 65,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "CremationCasketAverage": 1200
+        },
+        "affordableBurial": {
+          "Region": "\"AR\"",
+          "Pricing_Immediate_Burial": 1966,
+          "Max_Pricing_Immediate_Burial": 5480,
+          "Min_Pricing_Immediate_Burial": 750,
+          "BasicCasket": 2500
+        },
+        "directCremation": {
+          "Region": "\"AR\"",
+          "Pricing_Direct_Cremation": 1670,
+          "Pricing_Transfer_Crematory": 0,
+          "Pricing_Crematory_Fee": 9,
+          "Max_Pricing_Direct_Cremation": 3595,
+          "Max_Pricing_Transfer_Crematory": 0,
+          "Max_Pricing_Crematory_Fee": 375,
+          "Min_Pricing_Direct_Cremation": 595,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "Min_Pricing_Crematory_Fee": 0
+        }
+      }
+    },
+    "AZ": {
+      "code": "AZ",
+      "name": "Arizona",
+      "sourceUrl": "https://www.funeralocity.com/average-funeral-price/az",
+      "short": {
+        "fullBurial": {
+          "Average": 7784,
+          "Min": 5580,
+          "Max": 10600,
+          "Rank": 46
+        },
+        "immediateBurial": {
+          "Average": 4480,
+          "Min": 3295,
+          "Max": 6500,
+          "Rank": 49
+        },
+        "fullCremation": {
+          "Average": 5372,
+          "Min": 3060,
+          "Max": 8035,
+          "Rank": 49
+        },
+        "directCremation": {
+          "Average": 1490,
+          "Min": 400,
+          "Max": 2895,
+          "Rank": 49
+        }
+      },
+      "detailed": {
+        "traditionalBurial": {
+          "Region": "\"AZ\"",
+          "Basic_Services": 1657,
+          "Pricing_Transfer_Home": 435,
+          "Pricing_Embaliming": 667,
+          "Pricing_Dressing_Casketing": 228,
+          "Pricing_Viewing": 345,
+          "Pricing_Funeral": 466,
+          "Pricing_Hearse": 311,
+          "Pricing_Utility_Vehicle": 163,
+          "Max_Basic_Services": 3255,
+          "Max_Pricing_Transfer_Home": 695,
+          "Max_Pricing_Embaliming": 1005,
+          "Max_Pricing_Dressing_Casketing": 495,
+          "Max_Pricing_Viewing": 820,
+          "Max_Pricing_Funeral": 1095,
+          "Max_Pricing_Hearse": 775,
+          "Max_Pricing_Utility_Vehicle": 650,
+          "Min_Basic_Services": 1,
+          "Min_Pricing_Transfer_Home": 145,
+          "Min_Pricing_Embaliming": 295,
+          "Min_Pricing_Dressing_Casketing": 35,
+          "Min_Pricing_Viewing": 0,
+          "Min_Pricing_Funeral": 125,
+          "Min_Pricing_Hearse": 85,
+          "Min_Pricing_Utility_Vehicle": 60,
+          "MedianPricedCasketAverage": 3500
+        },
+        "fullCremation": {
+          "Region": "\"AZ\"",
+          "Pricing_Base_Services": 1652,
+          "Pricing_Transfer_Home": 438,
+          "Pricing_Embaliming": 666,
+          "Pricing_Dressing_Casketing": 227,
+          "Pricing_Viewing": 345,
+          "Pricing_Funeral": 466,
+          "Pricing_Crematory_Fee": 317,
+          "Pricing_Transfer_Crematory": 49,
+          "Max_Pricing_Base_Services": 3255,
+          "Max_Pricing_Transfer_Home": 850,
+          "Max_Pricing_Embaliming": 1005,
+          "Max_Pricing_Dressing_Casketing": 495,
+          "Max_Pricing_Viewing": 820,
+          "Max_Pricing_Funeral": 1095,
+          "Max_Pricing_Crematory_Fee": 1495,
+          "Max_Pricing_Transfer_Crematory": 499,
+          "Min_Pricing_Base_Services": 1,
+          "Min_Pricing_Transfer_Home": 145,
+          "Min_Pricing_Embaliming": 295,
+          "Min_Pricing_Dressing_Casketing": 35,
+          "Min_Pricing_Viewing": 0,
+          "Min_Pricing_Funeral": 125,
+          "Min_Pricing_Crematory_Fee": 100,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "CremationCasketAverage": 1200
+        },
+        "affordableBurial": {
+          "Region": "\"AZ\"",
+          "Pricing_Immediate_Burial": 1977,
+          "Max_Pricing_Immediate_Burial": 4000,
+          "Min_Pricing_Immediate_Burial": 795,
+          "BasicCasket": 2500
+        },
+        "directCremation": {
+          "Region": "\"AZ\"",
+          "Pricing_Direct_Cremation": 1443,
+          "Pricing_Transfer_Crematory": 3,
+          "Pricing_Crematory_Fee": 36,
+          "Max_Pricing_Direct_Cremation": 2890,
+          "Max_Pricing_Transfer_Crematory": 499,
+          "Max_Pricing_Crematory_Fee": 795,
+          "Min_Pricing_Direct_Cremation": 400,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "Min_Pricing_Crematory_Fee": 0
+        }
+      }
+    },
+    "CA": {
+      "code": "CA",
+      "name": "California",
+      "sourceUrl": "https://www.funeralocity.com/average-funeral-price/ca",
+      "short": {
+        "fullBurial": {
+          "Average": 8041,
+          "Min": 5545,
+          "Max": 12845,
+          "Rank": 40
+        },
+        "immediateBurial": {
+          "Average": 4704,
+          "Min": 2900,
+          "Max": 9300,
+          "Rank": 44
+        },
+        "fullCremation": {
+          "Average": 5538,
+          "Min": 3070,
+          "Max": 9955,
+          "Rank": 46
+        },
+        "directCremation": {
+          "Average": 1645,
+          "Min": 438,
+          "Max": 4450,
+          "Rank": 46
+        }
+      },
+      "detailed": {
+        "traditionalBurial": {
+          "Region": "\"CA\"",
+          "Basic_Services": 1642,
+          "Pricing_Transfer_Home": 457,
+          "Pricing_Embaliming": 603,
+          "Pricing_Dressing_Casketing": 262,
+          "Pricing_Viewing": 413,
+          "Pricing_Funeral": 590,
+          "Pricing_Hearse": 375,
+          "Pricing_Utility_Vehicle": 194,
+          "Max_Basic_Services": 4090,
+          "Max_Pricing_Transfer_Home": 970,
+          "Max_Pricing_Embaliming": 1395,
+          "Max_Pricing_Dressing_Casketing": 800,
+          "Max_Pricing_Viewing": 1445,
+          "Max_Pricing_Funeral": 3595,
+          "Max_Pricing_Hearse": 820,
+          "Max_Pricing_Utility_Vehicle": 790,
+          "Min_Basic_Services": 300,
+          "Min_Pricing_Transfer_Home": 90,
+          "Min_Pricing_Embaliming": 0,
+          "Min_Pricing_Dressing_Casketing": 0,
+          "Min_Pricing_Viewing": 0,
+          "Min_Pricing_Funeral": 150,
+          "Min_Pricing_Hearse": 85,
+          "Min_Pricing_Utility_Vehicle": 45,
+          "MedianPricedCasketAverage": 3500
+        },
+        "fullCremation": {
+          "Region": "\"CA\"",
+          "Pricing_Base_Services": 1622,
+          "Pricing_Transfer_Home": 456,
+          "Pricing_Embaliming": 603,
+          "Pricing_Dressing_Casketing": 265,
+          "Pricing_Viewing": 416,
+          "Pricing_Funeral": 590,
+          "Pricing_Crematory_Fee": 329,
+          "Pricing_Transfer_Crematory": 53,
+          "Max_Pricing_Base_Services": 4090,
+          "Max_Pricing_Transfer_Home": 970,
+          "Max_Pricing_Embaliming": 1395,
+          "Max_Pricing_Dressing_Casketing": 800,
+          "Max_Pricing_Viewing": 1445,
+          "Max_Pricing_Funeral": 3595,
+          "Max_Pricing_Crematory_Fee": 2145,
+          "Max_Pricing_Transfer_Crematory": 545,
+          "Min_Pricing_Base_Services": 300,
+          "Min_Pricing_Transfer_Home": 90,
+          "Min_Pricing_Embaliming": 0,
+          "Min_Pricing_Dressing_Casketing": 0,
+          "Min_Pricing_Viewing": 0,
+          "Min_Pricing_Funeral": 95,
+          "Min_Pricing_Crematory_Fee": 8,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "CremationCasketAverage": 1200
+        },
+        "affordableBurial": {
+          "Region": "\"CA\"",
+          "Pricing_Immediate_Burial": 2201,
+          "Max_Pricing_Immediate_Burial": 6800,
+          "Min_Pricing_Immediate_Burial": 400,
+          "BasicCasket": 2500
+        },
+        "directCremation": {
+          "Region": "\"CA\"",
+          "Pricing_Direct_Cremation": 1562,
+          "Pricing_Transfer_Crematory": 25,
+          "Pricing_Crematory_Fee": 54,
+          "Max_Pricing_Direct_Cremation": 3970,
+          "Max_Pricing_Transfer_Crematory": 695,
+          "Max_Pricing_Crematory_Fee": 2145,
+          "Min_Pricing_Direct_Cremation": 438,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "Min_Pricing_Crematory_Fee": 0
+        }
+      }
+    },
+    "CO": {
+      "code": "CO",
+      "name": "Colorado",
+      "sourceUrl": "https://www.funeralocity.com/average-funeral-price/co",
+      "short": {
+        "fullBurial": {
+          "Average": 8162,
+          "Min": 5595,
+          "Max": 12185,
+          "Rank": 36
+        },
+        "immediateBurial": {
+          "Average": 4864,
+          "Min": 3400,
+          "Max": 7795,
+          "Rank": 38
+        },
+        "fullCremation": {
+          "Average": 5840,
+          "Min": 3280,
+          "Max": 9885,
+          "Rank": 39
+        },
+        "directCremation": {
+          "Average": 1730,
+          "Min": 495,
+          "Max": 4012,
+          "Rank": 41
+        }
+      },
+      "detailed": {
+        "traditionalBurial": {
+          "Region": "\"CO\"",
+          "Basic_Services": 1844,
+          "Pricing_Transfer_Home": 380,
+          "Pricing_Embaliming": 699,
+          "Pricing_Dressing_Casketing": 309,
+          "Pricing_Viewing": 331,
+          "Pricing_Funeral": 560,
+          "Pricing_Hearse": 353,
+          "Pricing_Utility_Vehicle": 185,
+          "Max_Basic_Services": 5595,
+          "Max_Pricing_Transfer_Home": 795,
+          "Max_Pricing_Embaliming": 1625,
+          "Max_Pricing_Dressing_Casketing": 745,
+          "Max_Pricing_Viewing": 800,
+          "Max_Pricing_Funeral": 1249,
+          "Max_Pricing_Hearse": 550,
+          "Max_Pricing_Utility_Vehicle": 525,
+          "Min_Basic_Services": 95,
+          "Min_Pricing_Transfer_Home": 80,
+          "Min_Pricing_Embaliming": 325,
+          "Min_Pricing_Dressing_Casketing": 95,
+          "Min_Pricing_Viewing": 90,
+          "Min_Pricing_Funeral": 150,
+          "Min_Pricing_Hearse": 150,
+          "Min_Pricing_Utility_Vehicle": 25,
+          "MedianPricedCasketAverage": 3500
+        },
+        "fullCremation": {
+          "Region": "\"CO\"",
+          "Pricing_Base_Services": 1842,
+          "Pricing_Transfer_Home": 380,
+          "Pricing_Embaliming": 699,
+          "Pricing_Dressing_Casketing": 309,
+          "Pricing_Viewing": 331,
+          "Pricing_Funeral": 561,
+          "Pricing_Crematory_Fee": 472,
+          "Pricing_Transfer_Crematory": 44,
+          "Max_Pricing_Base_Services": 5595,
+          "Max_Pricing_Transfer_Home": 795,
+          "Max_Pricing_Embaliming": 1625,
+          "Max_Pricing_Dressing_Casketing": 745,
+          "Max_Pricing_Viewing": 800,
+          "Max_Pricing_Funeral": 1249,
+          "Max_Pricing_Crematory_Fee": 1297,
+          "Max_Pricing_Transfer_Crematory": 425,
+          "Min_Pricing_Base_Services": 95,
+          "Min_Pricing_Transfer_Home": 80,
+          "Min_Pricing_Embaliming": 325,
+          "Min_Pricing_Dressing_Casketing": 95,
+          "Min_Pricing_Viewing": 90,
+          "Min_Pricing_Funeral": 150,
+          "Min_Pricing_Crematory_Fee": 195,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "CremationCasketAverage": 1200
+        },
+        "affordableBurial": {
+          "Region": "\"CO\"",
+          "Pricing_Immediate_Burial": 2364,
+          "Max_Pricing_Immediate_Burial": 5295,
+          "Min_Pricing_Immediate_Burial": 900,
+          "BasicCasket": 2500
+        },
+        "directCremation": {
+          "Region": "\"CO\"",
+          "Pricing_Direct_Cremation": 1711,
+          "Pricing_Transfer_Crematory": 1,
+          "Pricing_Crematory_Fee": 18,
+          "Max_Pricing_Direct_Cremation": 3562,
+          "Max_Pricing_Transfer_Crematory": 200,
+          "Max_Pricing_Crematory_Fee": 500,
+          "Min_Pricing_Direct_Cremation": 495,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "Min_Pricing_Crematory_Fee": 0
+        }
+      }
+    },
+    "CT": {
+      "code": "CT",
+      "name": "Connecticut",
+      "sourceUrl": "https://www.funeralocity.com/average-funeral-price/ct",
+      "short": {
+        "fullBurial": {
+          "Average": 9609,
+          "Min": 5430,
+          "Max": 13945,
+          "Rank": 2
+        },
+        "immediateBurial": {
+          "Average": 6139,
+          "Min": 3700,
+          "Max": 10350,
+          "Rank": 1
+        },
+        "fullCremation": {
+          "Average": 7156,
+          "Min": 2230,
+          "Max": 11445,
+          "Rank": 4
+        },
+        "directCremation": {
+          "Average": 3103,
+          "Min": 899,
+          "Max": 6520,
+          "Rank": 2
+        }
+      },
+      "detailed": {
+        "traditionalBurial": {
+          "Region": "\"CT\"",
+          "Basic_Services": 2481,
+          "Pricing_Transfer_Home": 486,
+          "Pricing_Embaliming": 839,
+          "Pricing_Dressing_Casketing": 305,
+          "Pricing_Viewing": 582,
+          "Pricing_Funeral": 720,
+          "Pricing_Hearse": 456,
+          "Pricing_Utility_Vehicle": 202,
+          "Max_Basic_Services": 4695,
+          "Max_Pricing_Transfer_Home": 1045,
+          "Max_Pricing_Embaliming": 1495,
+          "Max_Pricing_Dressing_Casketing": 975,
+          "Max_Pricing_Viewing": 1525,
+          "Max_Pricing_Funeral": 1500,
+          "Max_Pricing_Hearse": 975,
+          "Max_Pricing_Utility_Vehicle": 495,
+          "Min_Basic_Services": 320,
+          "Min_Pricing_Transfer_Home": 100,
+          "Min_Pricing_Embaliming": 300,
+          "Min_Pricing_Dressing_Casketing": 95,
+          "Min_Pricing_Viewing": 150,
+          "Min_Pricing_Funeral": 180,
+          "Min_Pricing_Hearse": 125,
+          "Min_Pricing_Utility_Vehicle": 50,
+          "MedianPricedCasketAverage": 3500
+        },
+        "fullCremation": {
+          "Region": "\"CT\"",
+          "Pricing_Base_Services": 2451,
+          "Pricing_Transfer_Home": 482,
+          "Pricing_Embaliming": 833,
+          "Pricing_Dressing_Casketing": 303,
+          "Pricing_Viewing": 576,
+          "Pricing_Funeral": 712,
+          "Pricing_Crematory_Fee": 402,
+          "Pricing_Transfer_Crematory": 164,
+          "Max_Pricing_Base_Services": 4695,
+          "Max_Pricing_Transfer_Home": 1045,
+          "Max_Pricing_Embaliming": 1495,
+          "Max_Pricing_Dressing_Casketing": 975,
+          "Max_Pricing_Viewing": 1525,
+          "Max_Pricing_Funeral": 1500,
+          "Max_Pricing_Crematory_Fee": 595,
+          "Max_Pricing_Transfer_Crematory": 595,
+          "Min_Pricing_Base_Services": 210,
+          "Min_Pricing_Transfer_Home": 100,
+          "Min_Pricing_Embaliming": 100,
+          "Min_Pricing_Dressing_Casketing": 50,
+          "Min_Pricing_Viewing": 50,
+          "Min_Pricing_Funeral": 100,
+          "Min_Pricing_Crematory_Fee": 200,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "CremationCasketAverage": 1200
+        },
+        "affordableBurial": {
+          "Region": "\"CT\"",
+          "Pricing_Immediate_Burial": 3622,
+          "Max_Pricing_Immediate_Burial": 7850,
+          "Min_Pricing_Immediate_Burial": 1200,
+          "BasicCasket": 2500
+        },
+        "directCremation": {
+          "Region": "\"CT\"",
+          "Pricing_Direct_Cremation": 2986,
+          "Pricing_Transfer_Crematory": 3,
+          "Pricing_Crematory_Fee": 106,
+          "Max_Pricing_Direct_Cremation": 6000,
+          "Max_Pricing_Transfer_Crematory": 350,
+          "Max_Pricing_Crematory_Fee": 525,
+          "Min_Pricing_Direct_Cremation": 660,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "Min_Pricing_Crematory_Fee": 0
+        }
+      }
+    },
+    "DC": {
+      "code": "DC",
+      "name": "District of Columbia",
+      "sourceUrl": "https://www.funeralocity.com/average-funeral-price/dc",
+      "short": {
+        "fullBurial": {
+          "Average": 9028,
+          "Min": 6365,
+          "Max": 18090,
+          "Rank": 11
+        },
+        "immediateBurial": {
+          "Average": 5469,
+          "Min": 3550,
+          "Max": 9300,
+          "Rank": 8
+        },
+        "fullCremation": {
+          "Average": 6462,
+          "Min": 3840,
+          "Max": 15985,
+          "Rank": 18
+        },
+        "directCremation": {
+          "Average": 2206,
+          "Min": 925,
+          "Max": 6800,
+          "Rank": 26
+        }
+      },
+      "detailed": {
+        "traditionalBurial": {
+          "Region": "\"DC\"",
+          "Basic_Services": 2301,
+          "Pricing_Transfer_Home": 396,
+          "Pricing_Embaliming": 775,
+          "Pricing_Dressing_Casketing": 279,
+          "Pricing_Viewing": 534,
+          "Pricing_Funeral": 531,
+          "Pricing_Hearse": 480,
+          "Pricing_Utility_Vehicle": 232,
+          "Max_Basic_Services": 9000,
+          "Max_Pricing_Transfer_Home": 700,
+          "Max_Pricing_Embaliming": 1250,
+          "Max_Pricing_Dressing_Casketing": 550,
+          "Max_Pricing_Viewing": 1200,
+          "Max_Pricing_Funeral": 1395,
+          "Max_Pricing_Hearse": 695,
+          "Max_Pricing_Utility_Vehicle": 575,
+          "Min_Basic_Services": 970,
+          "Min_Pricing_Transfer_Home": 250,
+          "Min_Pricing_Embaliming": 375,
+          "Min_Pricing_Dressing_Casketing": 105,
+          "Min_Pricing_Viewing": 150,
+          "Min_Pricing_Funeral": 150,
+          "Min_Pricing_Hearse": 250,
+          "Min_Pricing_Utility_Vehicle": 75,
+          "MedianPricedCasketAverage": 3500
+        },
+        "fullCremation": {
+          "Region": "\"DC\"",
+          "Pricing_Base_Services": 2301,
+          "Pricing_Transfer_Home": 396,
+          "Pricing_Embaliming": 775,
+          "Pricing_Dressing_Casketing": 279,
+          "Pricing_Viewing": 534,
+          "Pricing_Funeral": 531,
+          "Pricing_Crematory_Fee": 390,
+          "Pricing_Transfer_Crematory": 57,
+          "Max_Pricing_Base_Services": 9000,
+          "Max_Pricing_Transfer_Home": 700,
+          "Max_Pricing_Embaliming": 1250,
+          "Max_Pricing_Dressing_Casketing": 550,
+          "Max_Pricing_Viewing": 1200,
+          "Max_Pricing_Funeral": 1395,
+          "Max_Pricing_Crematory_Fee": 695,
+          "Max_Pricing_Transfer_Crematory": 600,
+          "Min_Pricing_Base_Services": 970,
+          "Min_Pricing_Transfer_Home": 250,
+          "Min_Pricing_Embaliming": 375,
+          "Min_Pricing_Dressing_Casketing": 105,
+          "Min_Pricing_Viewing": 150,
+          "Min_Pricing_Funeral": 150,
+          "Min_Pricing_Crematory_Fee": 100,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "CremationCasketAverage": 1200
+        },
+        "affordableBurial": {
+          "Region": "\"DC\"",
+          "Pricing_Immediate_Burial": 2968,
+          "Max_Pricing_Immediate_Burial": 6800,
+          "Min_Pricing_Immediate_Burial": 1050,
+          "BasicCasket": 2500
+        },
+        "directCremation": {
+          "Region": "\"DC\"",
+          "Pricing_Direct_Cremation": 2175,
+          "Pricing_Transfer_Crematory": 7,
+          "Pricing_Crematory_Fee": 23,
+          "Max_Pricing_Direct_Cremation": 6800,
+          "Max_Pricing_Transfer_Crematory": 200,
+          "Max_Pricing_Crematory_Fee": 425,
+          "Min_Pricing_Direct_Cremation": 765,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "Min_Pricing_Crematory_Fee": 0
+        }
+      }
+    },
+    "DE": {
+      "code": "DE",
+      "name": "Delaware",
+      "sourceUrl": "https://www.funeralocity.com/average-funeral-price/de",
+      "short": {
+        "fullBurial": {
+          "Average": 9166,
+          "Min": 6800,
+          "Max": 11285,
+          "Rank": 10
+        },
+        "immediateBurial": {
+          "Average": 5633,
+          "Min": 3695,
+          "Max": 8030,
+          "Rank": 5
+        },
+        "fullCremation": {
+          "Average": 6833,
+          "Min": 4485,
+          "Max": 9090,
+          "Rank": 8
+        },
+        "directCremation": {
+          "Average": 2634,
+          "Min": 1195,
+          "Max": 5000,
+          "Rank": 9
+        }
+      },
+      "detailed": {
+        "traditionalBurial": {
+          "Region": "\"DE\"",
+          "Basic_Services": 2350,
+          "Pricing_Transfer_Home": 406,
+          "Pricing_Embaliming": 870,
+          "Pricing_Dressing_Casketing": 312,
+          "Pricing_Viewing": 469,
+          "Pricing_Funeral": 632,
+          "Pricing_Hearse": 398,
+          "Pricing_Utility_Vehicle": 230,
+          "Max_Basic_Services": 3500,
+          "Max_Pricing_Transfer_Home": 575,
+          "Max_Pricing_Embaliming": 1425,
+          "Max_Pricing_Dressing_Casketing": 550,
+          "Max_Pricing_Viewing": 895,
+          "Max_Pricing_Funeral": 1125,
+          "Max_Pricing_Hearse": 575,
+          "Max_Pricing_Utility_Vehicle": 500,
+          "Min_Basic_Services": 825,
+          "Min_Pricing_Transfer_Home": 200,
+          "Min_Pricing_Embaliming": 325,
+          "Min_Pricing_Dressing_Casketing": 175,
+          "Min_Pricing_Viewing": 195,
+          "Min_Pricing_Funeral": 225,
+          "Min_Pricing_Hearse": 200,
+          "Min_Pricing_Utility_Vehicle": 75,
+          "MedianPricedCasketAverage": 3500
+        },
+        "fullCremation": {
+          "Region": "\"DE\"",
+          "Pricing_Base_Services": 2350,
+          "Pricing_Transfer_Home": 406,
+          "Pricing_Embaliming": 870,
+          "Pricing_Dressing_Casketing": 312,
+          "Pricing_Viewing": 469,
+          "Pricing_Funeral": 632,
+          "Pricing_Crematory_Fee": 565,
+          "Pricing_Transfer_Crematory": 29,
+          "Max_Pricing_Base_Services": 3500,
+          "Max_Pricing_Transfer_Home": 575,
+          "Max_Pricing_Embaliming": 1425,
+          "Max_Pricing_Dressing_Casketing": 550,
+          "Max_Pricing_Viewing": 895,
+          "Max_Pricing_Funeral": 1125,
+          "Max_Pricing_Crematory_Fee": 1995,
+          "Max_Pricing_Transfer_Crematory": 500,
+          "Min_Pricing_Base_Services": 825,
+          "Min_Pricing_Transfer_Home": 200,
+          "Min_Pricing_Embaliming": 325,
+          "Min_Pricing_Dressing_Casketing": 175,
+          "Min_Pricing_Viewing": 195,
+          "Min_Pricing_Funeral": 225,
+          "Min_Pricing_Crematory_Fee": 250,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "CremationCasketAverage": 1200
+        },
+        "affordableBurial": {
+          "Region": "\"DE\"",
+          "Pricing_Immediate_Burial": 3133,
+          "Max_Pricing_Immediate_Burial": 5530,
+          "Min_Pricing_Immediate_Burial": 1195,
+          "BasicCasket": 2500
+        },
+        "directCremation": {
+          "Region": "\"DE\"",
+          "Pricing_Direct_Cremation": 2539,
+          "Pricing_Transfer_Crematory": 4,
+          "Pricing_Crematory_Fee": 91,
+          "Max_Pricing_Direct_Cremation": 5000,
+          "Max_Pricing_Transfer_Crematory": 275,
+          "Max_Pricing_Crematory_Fee": 1995,
+          "Min_Pricing_Direct_Cremation": 1000,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "Min_Pricing_Crematory_Fee": 0
+        }
+      }
+    },
+    "FL": {
+      "code": "FL",
+      "name": "Florida",
+      "sourceUrl": "https://www.funeralocity.com/average-funeral-price/fl",
+      "short": {
+        "fullBurial": {
+          "Average": 8399,
+          "Min": 5390,
+          "Max": 13760,
+          "Rank": 28
+        },
+        "immediateBurial": {
+          "Average": 5234,
+          "Min": 3200,
+          "Max": 7945,
+          "Rank": 19
+        },
+        "fullCremation": {
+          "Average": 5971,
+          "Min": 3170,
+          "Max": 11210,
+          "Rank": 34
+        },
+        "directCremation": {
+          "Average": 1709,
+          "Min": 484,
+          "Max": 5190,
+          "Rank": 42
+        }
+      },
+      "detailed": {
+        "traditionalBurial": {
+          "Region": "\"FL\"",
+          "Basic_Services": 1911,
+          "Pricing_Transfer_Home": 405,
+          "Pricing_Embaliming": 813,
+          "Pricing_Dressing_Casketing": 260,
+          "Pricing_Viewing": 433,
+          "Pricing_Funeral": 533,
+          "Pricing_Hearse": 365,
+          "Pricing_Utility_Vehicle": 177,
+          "Max_Basic_Services": 4265,
+          "Max_Pricing_Transfer_Home": 1600,
+          "Max_Pricing_Embaliming": 1850,
+          "Max_Pricing_Dressing_Casketing": 995,
+          "Max_Pricing_Viewing": 1595,
+          "Max_Pricing_Funeral": 3800,
+          "Max_Pricing_Hearse": 995,
+          "Max_Pricing_Utility_Vehicle": 675,
+          "Min_Basic_Services": 0,
+          "Min_Pricing_Transfer_Home": 95,
+          "Min_Pricing_Embaliming": 100,
+          "Min_Pricing_Dressing_Casketing": 35,
+          "Min_Pricing_Viewing": 75,
+          "Min_Pricing_Funeral": 100,
+          "Min_Pricing_Hearse": 75,
+          "Min_Pricing_Utility_Vehicle": 0,
+          "MedianPricedCasketAverage": 3500
+        },
+        "fullCremation": {
+          "Region": "\"FL\"",
+          "Pricing_Base_Services": 1883,
+          "Pricing_Transfer_Home": 403,
+          "Pricing_Embaliming": 810,
+          "Pricing_Dressing_Casketing": 259,
+          "Pricing_Viewing": 433,
+          "Pricing_Funeral": 535,
+          "Pricing_Crematory_Fee": 401,
+          "Pricing_Transfer_Crematory": 41,
+          "Max_Pricing_Base_Services": 4265,
+          "Max_Pricing_Transfer_Home": 1600,
+          "Max_Pricing_Embaliming": 1850,
+          "Max_Pricing_Dressing_Casketing": 995,
+          "Max_Pricing_Viewing": 1595,
+          "Max_Pricing_Funeral": 3800,
+          "Max_Pricing_Crematory_Fee": 1995,
+          "Max_Pricing_Transfer_Crematory": 600,
+          "Min_Pricing_Base_Services": 0,
+          "Min_Pricing_Transfer_Home": 95,
+          "Min_Pricing_Embaliming": 50,
+          "Min_Pricing_Dressing_Casketing": 35,
+          "Min_Pricing_Viewing": 75,
+          "Min_Pricing_Funeral": 100,
+          "Min_Pricing_Crematory_Fee": 45,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "CremationCasketAverage": 1200
+        },
+        "affordableBurial": {
+          "Region": "\"FL\"",
+          "Pricing_Immediate_Burial": 2731,
+          "Max_Pricing_Immediate_Burial": 5445,
+          "Min_Pricing_Immediate_Burial": 700,
+          "BasicCasket": 2500
+        },
+        "directCremation": {
+          "Region": "\"FL\"",
+          "Pricing_Direct_Cremation": 1646,
+          "Pricing_Transfer_Crematory": 17,
+          "Pricing_Crematory_Fee": 44,
+          "Max_Pricing_Direct_Cremation": 5190,
+          "Max_Pricing_Transfer_Crematory": 600,
+          "Max_Pricing_Crematory_Fee": 1100,
+          "Min_Pricing_Direct_Cremation": 325,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "Min_Pricing_Crematory_Fee": 0
+        }
+      }
+    },
+    "GA": {
+      "code": "GA",
+      "name": "Georgia",
+      "sourceUrl": "https://www.funeralocity.com/average-funeral-price/ga",
+      "short": {
+        "fullBurial": {
+          "Average": 8550,
+          "Min": 5496,
+          "Max": 12890,
+          "Rank": 25
+        },
+        "immediateBurial": {
+          "Average": 5141,
+          "Min": 2850,
+          "Max": 8095,
+          "Rank": 24
+        },
+        "fullCremation": {
+          "Average": 6337,
+          "Min": 3195,
+          "Max": 11390,
+          "Rank": 23
+        },
+        "directCremation": {
+          "Average": 1940,
+          "Min": 550,
+          "Max": 4810,
+          "Rank": 35
+        }
+      },
+      "detailed": {
+        "traditionalBurial": {
+          "Region": "\"GA\"",
+          "Basic_Services": 2306,
+          "Pricing_Transfer_Home": 319,
+          "Pricing_Embaliming": 834,
+          "Pricing_Dressing_Casketing": 227,
+          "Pricing_Viewing": 377,
+          "Pricing_Funeral": 498,
+          "Pricing_Hearse": 316,
+          "Pricing_Utility_Vehicle": 168,
+          "Max_Basic_Services": 6150,
+          "Max_Pricing_Transfer_Home": 795,
+          "Max_Pricing_Embaliming": 1395,
+          "Max_Pricing_Dressing_Casketing": 795,
+          "Max_Pricing_Viewing": 995,
+          "Max_Pricing_Funeral": 1950,
+          "Max_Pricing_Hearse": 1750,
+          "Max_Pricing_Utility_Vehicle": 495,
+          "Min_Basic_Services": 405,
+          "Min_Pricing_Transfer_Home": 1,
+          "Min_Pricing_Embaliming": 1,
+          "Min_Pricing_Dressing_Casketing": 1,
+          "Min_Pricing_Viewing": 1,
+          "Min_Pricing_Funeral": 1,
+          "Min_Pricing_Hearse": 1,
+          "Min_Pricing_Utility_Vehicle": 0,
+          "MedianPricedCasketAverage": 3500
+        },
+        "fullCremation": {
+          "Region": "\"GA\"",
+          "Pricing_Base_Services": 2297,
+          "Pricing_Transfer_Home": 320,
+          "Pricing_Embaliming": 834,
+          "Pricing_Dressing_Casketing": 227,
+          "Pricing_Viewing": 378,
+          "Pricing_Funeral": 498,
+          "Pricing_Crematory_Fee": 511,
+          "Pricing_Transfer_Crematory": 66,
+          "Max_Pricing_Base_Services": 6150,
+          "Max_Pricing_Transfer_Home": 795,
+          "Max_Pricing_Embaliming": 1395,
+          "Max_Pricing_Dressing_Casketing": 795,
+          "Max_Pricing_Viewing": 995,
+          "Max_Pricing_Funeral": 1950,
+          "Max_Pricing_Crematory_Fee": 1500,
+          "Max_Pricing_Transfer_Crematory": 500,
+          "Min_Pricing_Base_Services": 405,
+          "Min_Pricing_Transfer_Home": 1,
+          "Min_Pricing_Embaliming": 1,
+          "Min_Pricing_Dressing_Casketing": 1,
+          "Min_Pricing_Viewing": 1,
+          "Min_Pricing_Funeral": 1,
+          "Min_Pricing_Crematory_Fee": 1,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "CremationCasketAverage": 1200
+        },
+        "affordableBurial": {
+          "Region": "\"GA\"",
+          "Pricing_Immediate_Burial": 2639,
+          "Max_Pricing_Immediate_Burial": 5595,
+          "Min_Pricing_Immediate_Burial": 350,
+          "BasicCasket": 2500
+        },
+        "directCremation": {
+          "Region": "\"GA\"",
+          "Pricing_Direct_Cremation": 1914,
+          "Pricing_Transfer_Crematory": 6,
+          "Pricing_Crematory_Fee": 18,
+          "Max_Pricing_Direct_Cremation": 4810,
+          "Max_Pricing_Transfer_Crematory": 495,
+          "Max_Pricing_Crematory_Fee": 650,
+          "Min_Pricing_Direct_Cremation": 550,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "Min_Pricing_Crematory_Fee": 0
+        }
+      }
+    },
+    "HI": {
+      "code": "HI",
+      "name": "Hawaii",
+      "sourceUrl": "https://www.funeralocity.com/average-funeral-price/hi",
+      "short": {
+        "fullBurial": {
+          "Average": 9467,
+          "Min": 6365,
+          "Max": 14760,
+          "Rank": 4
+        },
+        "immediateBurial": {
+          "Average": 4723,
+          "Min": 3395,
+          "Max": 6895,
+          "Rank": 43
+        },
+        "fullCremation": {
+          "Average": 7372,
+          "Min": 4040,
+          "Max": 11915,
+          "Rank": 2
+        },
+        "directCremation": {
+          "Average": 1688,
+          "Min": 895,
+          "Max": 3150,
+          "Rank": 44
+        }
+      },
+      "detailed": {
+        "traditionalBurial": {
+          "Region": "\"HI\"",
+          "Basic_Services": 1580,
+          "Pricing_Transfer_Home": 526,
+          "Pricing_Embaliming": 969,
+          "Pricing_Dressing_Casketing": 401,
+          "Pricing_Viewing": 735,
+          "Pricing_Funeral": 1078,
+          "Pricing_Hearse": 440,
+          "Pricing_Utility_Vehicle": 238,
+          "Max_Basic_Services": 2645,
+          "Max_Pricing_Transfer_Home": 975,
+          "Max_Pricing_Embaliming": 1945,
+          "Max_Pricing_Dressing_Casketing": 700,
+          "Max_Pricing_Viewing": 1995,
+          "Max_Pricing_Funeral": 1995,
+          "Max_Pricing_Hearse": 800,
+          "Max_Pricing_Utility_Vehicle": 595,
+          "Min_Basic_Services": 275,
+          "Min_Pricing_Transfer_Home": 250,
+          "Min_Pricing_Embaliming": 595,
+          "Min_Pricing_Dressing_Casketing": 150,
+          "Min_Pricing_Viewing": 250,
+          "Min_Pricing_Funeral": 200,
+          "Min_Pricing_Hearse": 250,
+          "Min_Pricing_Utility_Vehicle": 75,
+          "MedianPricedCasketAverage": 3500
+        },
+        "fullCremation": {
+          "Region": "\"HI\"",
+          "Pricing_Base_Services": 1580,
+          "Pricing_Transfer_Home": 526,
+          "Pricing_Embaliming": 969,
+          "Pricing_Dressing_Casketing": 401,
+          "Pricing_Viewing": 735,
+          "Pricing_Funeral": 1078,
+          "Pricing_Crematory_Fee": 846,
+          "Pricing_Transfer_Crematory": 38,
+          "Max_Pricing_Base_Services": 2645,
+          "Max_Pricing_Transfer_Home": 975,
+          "Max_Pricing_Embaliming": 1945,
+          "Max_Pricing_Dressing_Casketing": 700,
+          "Max_Pricing_Viewing": 1995,
+          "Max_Pricing_Funeral": 1995,
+          "Max_Pricing_Crematory_Fee": 2985,
+          "Max_Pricing_Transfer_Crematory": 395,
+          "Min_Pricing_Base_Services": 275,
+          "Min_Pricing_Transfer_Home": 250,
+          "Min_Pricing_Embaliming": 595,
+          "Min_Pricing_Dressing_Casketing": 150,
+          "Min_Pricing_Viewing": 250,
+          "Min_Pricing_Funeral": 200,
+          "Min_Pricing_Crematory_Fee": 425,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "CremationCasketAverage": 1200
+        },
+        "affordableBurial": {
+          "Region": "\"HI\"",
+          "Pricing_Immediate_Burial": 2223,
+          "Max_Pricing_Immediate_Burial": 4395,
+          "Min_Pricing_Immediate_Burial": 895,
+          "BasicCasket": 2500
+        },
+        "directCremation": {
+          "Region": "\"HI\"",
+          "Pricing_Direct_Cremation": 1638,
+          "Pricing_Transfer_Crematory": 0,
+          "Pricing_Crematory_Fee": 50,
+          "Max_Pricing_Direct_Cremation": 3150,
+          "Max_Pricing_Transfer_Crematory": 0,
+          "Max_Pricing_Crematory_Fee": 900,
+          "Min_Pricing_Direct_Cremation": 895,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "Min_Pricing_Crematory_Fee": 0
+        }
+      }
+    },
+    "IA": {
+      "code": "IA",
+      "name": "Iowa",
+      "sourceUrl": "https://www.funeralocity.com/average-funeral-price/ia",
+      "short": {
+        "fullBurial": {
+          "Average": 9382,
+          "Min": 6820,
+          "Max": 12350,
+          "Rank": 6
+        },
+        "immediateBurial": {
+          "Average": 5813,
+          "Min": 3525,
+          "Max": 9233,
+          "Rank": 3
+        },
+        "fullCremation": {
+          "Average": 7244,
+          "Min": 4410,
+          "Max": 10075,
+          "Rank": 3
+        },
+        "directCremation": {
+          "Average": 2991,
+          "Min": 995,
+          "Max": 5405,
+          "Rank": 3
+        }
+      },
+      "detailed": {
+        "traditionalBurial": {
+          "Region": "\"IA\"",
+          "Basic_Services": 2854,
+          "Pricing_Transfer_Home": 398,
+          "Pricing_Embaliming": 836,
+          "Pricing_Dressing_Casketing": 333,
+          "Pricing_Viewing": 452,
+          "Pricing_Funeral": 558,
+          "Pricing_Hearse": 312,
+          "Pricing_Utility_Vehicle": 139,
+          "Max_Basic_Services": 6300,
+          "Max_Pricing_Transfer_Home": 790,
+          "Max_Pricing_Embaliming": 1875,
+          "Max_Pricing_Dressing_Casketing": 695,
+          "Max_Pricing_Viewing": 1050,
+          "Max_Pricing_Funeral": 1575,
+          "Max_Pricing_Hearse": 615,
+          "Max_Pricing_Utility_Vehicle": 541,
+          "Min_Basic_Services": 995,
+          "Min_Pricing_Transfer_Home": 95,
+          "Min_Pricing_Embaliming": 310,
+          "Min_Pricing_Dressing_Casketing": 100,
+          "Min_Pricing_Viewing": 95,
+          "Min_Pricing_Funeral": 95,
+          "Min_Pricing_Hearse": 35,
+          "Min_Pricing_Utility_Vehicle": 35,
+          "MedianPricedCasketAverage": 3500
+        },
+        "fullCremation": {
+          "Region": "\"IA\"",
+          "Pricing_Base_Services": 2849,
+          "Pricing_Transfer_Home": 398,
+          "Pricing_Embaliming": 836,
+          "Pricing_Dressing_Casketing": 333,
+          "Pricing_Viewing": 452,
+          "Pricing_Funeral": 558,
+          "Pricing_Crematory_Fee": 495,
+          "Pricing_Transfer_Crematory": 125,
+          "Max_Pricing_Base_Services": 6300,
+          "Max_Pricing_Transfer_Home": 790,
+          "Max_Pricing_Embaliming": 1875,
+          "Max_Pricing_Dressing_Casketing": 695,
+          "Max_Pricing_Viewing": 1050,
+          "Max_Pricing_Funeral": 1575,
+          "Max_Pricing_Crematory_Fee": 2340,
+          "Max_Pricing_Transfer_Crematory": 525,
+          "Min_Pricing_Base_Services": 695,
+          "Min_Pricing_Transfer_Home": 95,
+          "Min_Pricing_Embaliming": 310,
+          "Min_Pricing_Dressing_Casketing": 100,
+          "Min_Pricing_Viewing": 95,
+          "Min_Pricing_Funeral": 95,
+          "Min_Pricing_Crematory_Fee": 100,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "CremationCasketAverage": 1200
+        },
+        "affordableBurial": {
+          "Region": "\"IA\"",
+          "Pricing_Immediate_Burial": 3315,
+          "Max_Pricing_Immediate_Burial": 6733,
+          "Min_Pricing_Immediate_Burial": 1025,
+          "BasicCasket": 2500
+        },
+        "directCremation": {
+          "Region": "\"IA\"",
+          "Pricing_Direct_Cremation": 2920,
+          "Pricing_Transfer_Crematory": 2,
+          "Pricing_Crematory_Fee": 71,
+          "Max_Pricing_Direct_Cremation": 5405,
+          "Max_Pricing_Transfer_Crematory": 450,
+          "Max_Pricing_Crematory_Fee": 795,
+          "Min_Pricing_Direct_Cremation": 995,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "Min_Pricing_Crematory_Fee": 0
+        }
+      }
+    },
+    "ID": {
+      "code": "ID",
+      "name": "Idaho",
+      "sourceUrl": "https://www.funeralocity.com/average-funeral-price/id",
+      "short": {
+        "fullBurial": {
+          "Average": 7745,
+          "Min": 5675,
+          "Max": 9750,
+          "Rank": 47
+        },
+        "immediateBurial": {
+          "Average": 4625,
+          "Min": 3620,
+          "Max": 6080,
+          "Rank": 46
+        },
+        "fullCremation": {
+          "Average": 5437,
+          "Min": 4034,
+          "Max": 7400,
+          "Rank": 48
+        },
+        "directCremation": {
+          "Average": 1706,
+          "Min": 765,
+          "Max": 2825,
+          "Rank": 43
+        }
+      },
+      "detailed": {
+        "traditionalBurial": {
+          "Region": "\"ID\"",
+          "Basic_Services": 1810,
+          "Pricing_Transfer_Home": 340,
+          "Pricing_Embaliming": 617,
+          "Pricing_Dressing_Casketing": 242,
+          "Pricing_Viewing": 314,
+          "Pricing_Funeral": 536,
+          "Pricing_Hearse": 258,
+          "Pricing_Utility_Vehicle": 129,
+          "Max_Basic_Services": 2995,
+          "Max_Pricing_Transfer_Home": 650,
+          "Max_Pricing_Embaliming": 1000,
+          "Max_Pricing_Dressing_Casketing": 500,
+          "Max_Pricing_Viewing": 750,
+          "Max_Pricing_Funeral": 965,
+          "Max_Pricing_Hearse": 425,
+          "Max_Pricing_Utility_Vehicle": 300,
+          "Min_Basic_Services": 600,
+          "Min_Pricing_Transfer_Home": 30,
+          "Min_Pricing_Embaliming": 375,
+          "Min_Pricing_Dressing_Casketing": 125,
+          "Min_Pricing_Viewing": 125,
+          "Min_Pricing_Funeral": 200,
+          "Min_Pricing_Hearse": 75,
+          "Min_Pricing_Utility_Vehicle": 1,
+          "MedianPricedCasketAverage": 3500
+        },
+        "fullCremation": {
+          "Region": "\"ID\"",
+          "Pricing_Base_Services": 1796,
+          "Pricing_Transfer_Home": 340,
+          "Pricing_Embaliming": 616,
+          "Pricing_Dressing_Casketing": 242,
+          "Pricing_Viewing": 315,
+          "Pricing_Funeral": 534,
+          "Pricing_Crematory_Fee": 372,
+          "Pricing_Transfer_Crematory": 22,
+          "Max_Pricing_Base_Services": 2995,
+          "Max_Pricing_Transfer_Home": 650,
+          "Max_Pricing_Embaliming": 1000,
+          "Max_Pricing_Dressing_Casketing": 500,
+          "Max_Pricing_Viewing": 750,
+          "Max_Pricing_Funeral": 965,
+          "Max_Pricing_Crematory_Fee": 1095,
+          "Max_Pricing_Transfer_Crematory": 295,
+          "Min_Pricing_Base_Services": 600,
+          "Min_Pricing_Transfer_Home": 30,
+          "Min_Pricing_Embaliming": 375,
+          "Min_Pricing_Dressing_Casketing": 125,
+          "Min_Pricing_Viewing": 125,
+          "Min_Pricing_Funeral": 200,
+          "Min_Pricing_Crematory_Fee": 95,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "CremationCasketAverage": 1200
+        },
+        "affordableBurial": {
+          "Region": "\"ID\"",
+          "Pricing_Immediate_Burial": 2125,
+          "Max_Pricing_Immediate_Burial": 3580,
+          "Min_Pricing_Immediate_Burial": 1120,
+          "BasicCasket": 2500
+        },
+        "directCremation": {
+          "Region": "\"ID\"",
+          "Pricing_Direct_Cremation": 1683,
+          "Pricing_Transfer_Crematory": 0,
+          "Pricing_Crematory_Fee": 23,
+          "Max_Pricing_Direct_Cremation": 2825,
+          "Max_Pricing_Transfer_Crematory": 0,
+          "Max_Pricing_Crematory_Fee": 350,
+          "Min_Pricing_Direct_Cremation": 765,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "Min_Pricing_Crematory_Fee": 0
+        }
+      }
+    },
+    "IL": {
+      "code": "IL",
+      "name": "Illinois",
+      "sourceUrl": "https://www.funeralocity.com/average-funeral-price/il",
+      "short": {
+        "fullBurial": {
+          "Average": 9184,
+          "Min": 5710,
+          "Max": 13160,
+          "Rank": 9
+        },
+        "immediateBurial": {
+          "Average": 5312,
+          "Min": 2850,
+          "Max": 8695,
+          "Rank": 15
+        },
+        "fullCremation": {
+          "Average": 6721,
+          "Min": 3265,
+          "Max": 12600,
+          "Rank": 12
+        },
+        "directCremation": {
+          "Average": 2564,
+          "Min": 695,
+          "Max": 6045,
+          "Rank": 11
+        }
+      },
+      "detailed": {
+        "traditionalBurial": {
+          "Region": "\"IL\"",
+          "Basic_Services": 2444,
+          "Pricing_Transfer_Home": 408,
+          "Pricing_Embaliming": 755,
+          "Pricing_Dressing_Casketing": 309,
+          "Pricing_Viewing": 547,
+          "Pricing_Funeral": 556,
+          "Pricing_Hearse": 413,
+          "Pricing_Utility_Vehicle": 252,
+          "Max_Basic_Services": 5449,
+          "Max_Pricing_Transfer_Home": 1045,
+          "Max_Pricing_Embaliming": 1850,
+          "Max_Pricing_Dressing_Casketing": 1495,
+          "Max_Pricing_Viewing": 1800,
+          "Max_Pricing_Funeral": 1625,
+          "Max_Pricing_Hearse": 895,
+          "Max_Pricing_Utility_Vehicle": 750,
+          "Min_Basic_Services": 100,
+          "Min_Pricing_Transfer_Home": 100,
+          "Min_Pricing_Embaliming": 0,
+          "Min_Pricing_Dressing_Casketing": 75,
+          "Min_Pricing_Viewing": 50,
+          "Min_Pricing_Funeral": 150,
+          "Min_Pricing_Hearse": 25,
+          "Min_Pricing_Utility_Vehicle": 0,
+          "MedianPricedCasketAverage": 3500
+        },
+        "fullCremation": {
+          "Region": "\"IL\"",
+          "Pricing_Base_Services": 2448,
+          "Pricing_Transfer_Home": 407,
+          "Pricing_Embaliming": 757,
+          "Pricing_Dressing_Casketing": 309,
+          "Pricing_Viewing": 566,
+          "Pricing_Funeral": 555,
+          "Pricing_Crematory_Fee": 399,
+          "Pricing_Transfer_Crematory": 78,
+          "Max_Pricing_Base_Services": 5449,
+          "Max_Pricing_Transfer_Home": 1045,
+          "Max_Pricing_Embaliming": 1850,
+          "Max_Pricing_Dressing_Casketing": 1495,
+          "Max_Pricing_Viewing": 5625,
+          "Max_Pricing_Funeral": 1625,
+          "Max_Pricing_Crematory_Fee": 1200,
+          "Max_Pricing_Transfer_Crematory": 700,
+          "Min_Pricing_Base_Services": 100,
+          "Min_Pricing_Transfer_Home": 100,
+          "Min_Pricing_Embaliming": 200,
+          "Min_Pricing_Dressing_Casketing": 75,
+          "Min_Pricing_Viewing": 50,
+          "Min_Pricing_Funeral": 150,
+          "Min_Pricing_Crematory_Fee": 100,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "CremationCasketAverage": 1200
+        },
+        "affordableBurial": {
+          "Region": "\"IL\"",
+          "Pricing_Immediate_Burial": 2811,
+          "Max_Pricing_Immediate_Burial": 6195,
+          "Min_Pricing_Immediate_Burial": 350,
+          "BasicCasket": 2500
+        },
+        "directCremation": {
+          "Region": "\"IL\"",
+          "Pricing_Direct_Cremation": 2420,
+          "Pricing_Transfer_Crematory": 2,
+          "Pricing_Crematory_Fee": 141,
+          "Max_Pricing_Direct_Cremation": 6045,
+          "Max_Pricing_Transfer_Crematory": 525,
+          "Max_Pricing_Crematory_Fee": 800,
+          "Min_Pricing_Direct_Cremation": 620,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "Min_Pricing_Crematory_Fee": 0
+        }
+      }
+    },
+    "IN": {
+      "code": "IN",
+      "name": "Indiana",
+      "sourceUrl": "https://www.funeralocity.com/average-funeral-price/in",
+      "short": {
+        "fullBurial": {
+          "Average": 8705,
+          "Min": 5875,
+          "Max": 12985,
+          "Rank": 19
+        },
+        "immediateBurial": {
+          "Average": 5211,
+          "Min": 2875,
+          "Max": 8195,
+          "Rank": 20
+        },
+        "fullCremation": {
+          "Average": 6385,
+          "Min": 3575,
+          "Max": 11745,
+          "Rank": 21
+        },
+        "directCremation": {
+          "Average": 2295,
+          "Min": 695,
+          "Max": 5695,
+          "Rank": 23
+        }
+      },
+      "detailed": {
+        "traditionalBurial": {
+          "Region": "\"IN\"",
+          "Basic_Services": 2254,
+          "Pricing_Transfer_Home": 351,
+          "Pricing_Embaliming": 770,
+          "Pricing_Dressing_Casketing": 287,
+          "Pricing_Viewing": 503,
+          "Pricing_Funeral": 558,
+          "Pricing_Hearse": 330,
+          "Pricing_Utility_Vehicle": 150,
+          "Max_Basic_Services": 5840,
+          "Max_Pricing_Transfer_Home": 995,
+          "Max_Pricing_Embaliming": 1765,
+          "Max_Pricing_Dressing_Casketing": 800,
+          "Max_Pricing_Viewing": 1995,
+          "Max_Pricing_Funeral": 2850,
+          "Max_Pricing_Hearse": 692,
+          "Max_Pricing_Utility_Vehicle": 595,
+          "Min_Basic_Services": 252,
+          "Min_Pricing_Transfer_Home": 100,
+          "Min_Pricing_Embaliming": 87,
+          "Min_Pricing_Dressing_Casketing": 30,
+          "Min_Pricing_Viewing": 95,
+          "Min_Pricing_Funeral": 95,
+          "Min_Pricing_Hearse": 90,
+          "Min_Pricing_Utility_Vehicle": 30,
+          "MedianPricedCasketAverage": 3500
+        },
+        "fullCremation": {
+          "Region": "\"IN\"",
+          "Pricing_Base_Services": 2254,
+          "Pricing_Transfer_Home": 351,
+          "Pricing_Embaliming": 770,
+          "Pricing_Dressing_Casketing": 287,
+          "Pricing_Viewing": 503,
+          "Pricing_Funeral": 558,
+          "Pricing_Crematory_Fee": 364,
+          "Pricing_Transfer_Crematory": 98,
+          "Max_Pricing_Base_Services": 5840,
+          "Max_Pricing_Transfer_Home": 995,
+          "Max_Pricing_Embaliming": 1765,
+          "Max_Pricing_Dressing_Casketing": 800,
+          "Max_Pricing_Viewing": 1995,
+          "Max_Pricing_Funeral": 2850,
+          "Max_Pricing_Crematory_Fee": 1500,
+          "Max_Pricing_Transfer_Crematory": 595,
+          "Min_Pricing_Base_Services": 252,
+          "Min_Pricing_Transfer_Home": 100,
+          "Min_Pricing_Embaliming": 87,
+          "Min_Pricing_Dressing_Casketing": 30,
+          "Min_Pricing_Viewing": 95,
+          "Min_Pricing_Funeral": 95,
+          "Min_Pricing_Crematory_Fee": 125,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "CremationCasketAverage": 1200
+        },
+        "affordableBurial": {
+          "Region": "\"IN\"",
+          "Pricing_Immediate_Burial": 2709,
+          "Max_Pricing_Immediate_Burial": 5695,
+          "Min_Pricing_Immediate_Burial": 375,
+          "BasicCasket": 2500
+        },
+        "directCremation": {
+          "Region": "\"IN\"",
+          "Pricing_Direct_Cremation": 2218,
+          "Pricing_Transfer_Crematory": 3,
+          "Pricing_Crematory_Fee": 71,
+          "Max_Pricing_Direct_Cremation": 5695,
+          "Max_Pricing_Transfer_Crematory": 595,
+          "Max_Pricing_Crematory_Fee": 695,
+          "Min_Pricing_Direct_Cremation": 595,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "Min_Pricing_Crematory_Fee": 0
+        }
+      }
+    },
+    "KS": {
+      "code": "KS",
+      "name": "Kansas",
+      "sourceUrl": "https://www.funeralocity.com/average-funeral-price/ks",
+      "short": {
+        "fullBurial": {
+          "Average": 8640,
+          "Min": 5935,
+          "Max": 21475,
+          "Rank": 21
+        },
+        "immediateBurial": {
+          "Average": 5374,
+          "Min": 2950,
+          "Max": 8360,
+          "Rank": 13
+        },
+        "fullCremation": {
+          "Average": 6452,
+          "Min": 3635,
+          "Max": 19300,
+          "Rank": 19
+        },
+        "directCremation": {
+          "Average": 2553,
+          "Min": 695,
+          "Max": 7245,
+          "Rank": 12
+        }
+      },
+      "detailed": {
+        "traditionalBurial": {
+          "Region": "\"KS\"",
+          "Basic_Services": 2349,
+          "Pricing_Transfer_Home": 347,
+          "Pricing_Embaliming": 775,
+          "Pricing_Dressing_Casketing": 278,
+          "Pricing_Viewing": 379,
+          "Pricing_Funeral": 538,
+          "Pricing_Hearse": 317,
+          "Pricing_Utility_Vehicle": 149,
+          "Max_Basic_Services": 15000,
+          "Max_Pricing_Transfer_Home": 795,
+          "Max_Pricing_Embaliming": 1995,
+          "Max_Pricing_Dressing_Casketing": 895,
+          "Max_Pricing_Viewing": 750,
+          "Max_Pricing_Funeral": 995,
+          "Max_Pricing_Hearse": 595,
+          "Max_Pricing_Utility_Vehicle": 650,
+          "Min_Basic_Services": 450,
+          "Min_Pricing_Transfer_Home": 85,
+          "Min_Pricing_Embaliming": 150,
+          "Min_Pricing_Dressing_Casketing": 75,
+          "Min_Pricing_Viewing": 100,
+          "Min_Pricing_Funeral": 175,
+          "Min_Pricing_Hearse": 75,
+          "Min_Pricing_Utility_Vehicle": 25,
+          "MedianPricedCasketAverage": 3500
+        },
+        "fullCremation": {
+          "Region": "\"KS\"",
+          "Pricing_Base_Services": 2335,
+          "Pricing_Transfer_Home": 347,
+          "Pricing_Embaliming": 777,
+          "Pricing_Dressing_Casketing": 279,
+          "Pricing_Viewing": 379,
+          "Pricing_Funeral": 537,
+          "Pricing_Crematory_Fee": 500,
+          "Pricing_Transfer_Crematory": 89,
+          "Max_Pricing_Base_Services": 15000,
+          "Max_Pricing_Transfer_Home": 795,
+          "Max_Pricing_Embaliming": 1995,
+          "Max_Pricing_Dressing_Casketing": 895,
+          "Max_Pricing_Viewing": 750,
+          "Max_Pricing_Funeral": 995,
+          "Max_Pricing_Crematory_Fee": 1350,
+          "Max_Pricing_Transfer_Crematory": 535,
+          "Min_Pricing_Base_Services": 450,
+          "Min_Pricing_Transfer_Home": 85,
+          "Min_Pricing_Embaliming": 150,
+          "Min_Pricing_Dressing_Casketing": 75,
+          "Min_Pricing_Viewing": 100,
+          "Min_Pricing_Funeral": 175,
+          "Min_Pricing_Crematory_Fee": 190,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "CremationCasketAverage": 1200
+        },
+        "affordableBurial": {
+          "Region": "\"KS\"",
+          "Pricing_Immediate_Burial": 2874,
+          "Max_Pricing_Immediate_Burial": 5860,
+          "Min_Pricing_Immediate_Burial": 450,
+          "BasicCasket": 2500
+        },
+        "directCremation": {
+          "Region": "\"KS\"",
+          "Pricing_Direct_Cremation": 2506,
+          "Pricing_Transfer_Crematory": 5,
+          "Pricing_Crematory_Fee": 42,
+          "Max_Pricing_Direct_Cremation": 7245,
+          "Max_Pricing_Transfer_Crematory": 400,
+          "Max_Pricing_Crematory_Fee": 1350,
+          "Min_Pricing_Direct_Cremation": 695,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "Min_Pricing_Crematory_Fee": 0
+        }
+      }
+    },
+    "KY": {
+      "code": "KY",
+      "name": "Kentucky",
+      "sourceUrl": "https://www.funeralocity.com/average-funeral-price/ky",
+      "short": {
+        "fullBurial": {
+          "Average": 8393,
+          "Min": 5925,
+          "Max": 11555,
+          "Rank": 29
+        },
+        "immediateBurial": {
+          "Average": 4823,
+          "Min": 2950,
+          "Max": 7145,
+          "Rank": 40
+        },
+        "fullCremation": {
+          "Average": 6114,
+          "Min": 3620,
+          "Max": 9555,
+          "Rank": 29
+        },
+        "directCremation": {
+          "Average": 2031,
+          "Min": 800,
+          "Max": 4450,
+          "Rank": 32
+        }
+      },
+      "detailed": {
+        "traditionalBurial": {
+          "Region": "\"KY\"",
+          "Basic_Services": 2173,
+          "Pricing_Transfer_Home": 281,
+          "Pricing_Embaliming": 783,
+          "Pricing_Dressing_Casketing": 270,
+          "Pricing_Viewing": 463,
+          "Pricing_Funeral": 496,
+          "Pricing_Hearse": 303,
+          "Pricing_Utility_Vehicle": 124,
+          "Max_Basic_Services": 5150,
+          "Max_Pricing_Transfer_Home": 870,
+          "Max_Pricing_Embaliming": 1495,
+          "Max_Pricing_Dressing_Casketing": 1050,
+          "Max_Pricing_Viewing": 1095,
+          "Max_Pricing_Funeral": 1095,
+          "Max_Pricing_Hearse": 500,
+          "Max_Pricing_Utility_Vehicle": 395,
+          "Min_Basic_Services": 300,
+          "Min_Pricing_Transfer_Home": 20,
+          "Min_Pricing_Embaliming": 195,
+          "Min_Pricing_Dressing_Casketing": 25,
+          "Min_Pricing_Viewing": 55,
+          "Min_Pricing_Funeral": 150,
+          "Min_Pricing_Hearse": 75,
+          "Min_Pricing_Utility_Vehicle": 25,
+          "MedianPricedCasketAverage": 3500
+        },
+        "fullCremation": {
+          "Region": "\"KY\"",
+          "Pricing_Base_Services": 2169,
+          "Pricing_Transfer_Home": 281,
+          "Pricing_Embaliming": 782,
+          "Pricing_Dressing_Casketing": 269,
+          "Pricing_Viewing": 463,
+          "Pricing_Funeral": 496,
+          "Pricing_Crematory_Fee": 366,
+          "Pricing_Transfer_Crematory": 87,
+          "Max_Pricing_Base_Services": 5150,
+          "Max_Pricing_Transfer_Home": 870,
+          "Max_Pricing_Embaliming": 1495,
+          "Max_Pricing_Dressing_Casketing": 1050,
+          "Max_Pricing_Viewing": 1095,
+          "Max_Pricing_Funeral": 1095,
+          "Max_Pricing_Crematory_Fee": 1500,
+          "Max_Pricing_Transfer_Crematory": 485,
+          "Min_Pricing_Base_Services": 300,
+          "Min_Pricing_Transfer_Home": 20,
+          "Min_Pricing_Embaliming": 195,
+          "Min_Pricing_Dressing_Casketing": 25,
+          "Min_Pricing_Viewing": 55,
+          "Min_Pricing_Funeral": 150,
+          "Min_Pricing_Crematory_Fee": 175,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "CremationCasketAverage": 1200
+        },
+        "affordableBurial": {
+          "Region": "\"KY\"",
+          "Pricing_Immediate_Burial": 2323,
+          "Max_Pricing_Immediate_Burial": 4645,
+          "Min_Pricing_Immediate_Burial": 450,
+          "BasicCasket": 2500
+        },
+        "directCremation": {
+          "Region": "\"KY\"",
+          "Pricing_Direct_Cremation": 1981,
+          "Pricing_Transfer_Crematory": 2,
+          "Pricing_Crematory_Fee": 49,
+          "Max_Pricing_Direct_Cremation": 4260,
+          "Max_Pricing_Transfer_Crematory": 295,
+          "Max_Pricing_Crematory_Fee": 800,
+          "Min_Pricing_Direct_Cremation": 695,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "Min_Pricing_Crematory_Fee": 0
+        }
+      }
+    },
+    "LA": {
+      "code": "LA",
+      "name": "Louisiana",
+      "sourceUrl": "https://www.funeralocity.com/average-funeral-price/la",
+      "short": {
+        "fullBurial": {
+          "Average": 8652,
+          "Min": 6010,
+          "Max": 13800,
+          "Rank": 20
+        },
+        "immediateBurial": {
+          "Average": 5201,
+          "Min": 3000,
+          "Max": 8670,
+          "Rank": 21
+        },
+        "fullCremation": {
+          "Average": 6378,
+          "Min": 3775,
+          "Max": 11945,
+          "Rank": 22
+        },
+        "directCremation": {
+          "Average": 2312,
+          "Min": 610,
+          "Max": 4149,
+          "Rank": 21
+        }
+      },
+      "detailed": {
+        "traditionalBurial": {
+          "Region": "\"LA\"",
+          "Basic_Services": 2282,
+          "Pricing_Transfer_Home": 372,
+          "Pricing_Embaliming": 846,
+          "Pricing_Dressing_Casketing": 260,
+          "Pricing_Viewing": 418,
+          "Pricing_Funeral": 447,
+          "Pricing_Hearse": 358,
+          "Pricing_Utility_Vehicle": 170,
+          "Max_Basic_Services": 5635,
+          "Max_Pricing_Transfer_Home": 695,
+          "Max_Pricing_Embaliming": 1820,
+          "Max_Pricing_Dressing_Casketing": 1050,
+          "Max_Pricing_Viewing": 1200,
+          "Max_Pricing_Funeral": 1195,
+          "Max_Pricing_Hearse": 820,
+          "Max_Pricing_Utility_Vehicle": 650,
+          "Min_Basic_Services": 550,
+          "Min_Pricing_Transfer_Home": 50,
+          "Min_Pricing_Embaliming": 150,
+          "Min_Pricing_Dressing_Casketing": 50,
+          "Min_Pricing_Viewing": 95,
+          "Min_Pricing_Funeral": 100,
+          "Min_Pricing_Hearse": 100,
+          "Min_Pricing_Utility_Vehicle": 50,
+          "MedianPricedCasketAverage": 3500
+        },
+        "fullCremation": {
+          "Region": "\"LA\"",
+          "Pricing_Base_Services": 2279,
+          "Pricing_Transfer_Home": 372,
+          "Pricing_Embaliming": 842,
+          "Pricing_Dressing_Casketing": 259,
+          "Pricing_Viewing": 416,
+          "Pricing_Funeral": 446,
+          "Pricing_Crematory_Fee": 453,
+          "Pricing_Transfer_Crematory": 112,
+          "Max_Pricing_Base_Services": 5635,
+          "Max_Pricing_Transfer_Home": 695,
+          "Max_Pricing_Embaliming": 1820,
+          "Max_Pricing_Dressing_Casketing": 1050,
+          "Max_Pricing_Viewing": 1200,
+          "Max_Pricing_Funeral": 1195,
+          "Max_Pricing_Crematory_Fee": 1500,
+          "Max_Pricing_Transfer_Crematory": 650,
+          "Min_Pricing_Base_Services": 550,
+          "Min_Pricing_Transfer_Home": 50,
+          "Min_Pricing_Embaliming": 150,
+          "Min_Pricing_Dressing_Casketing": 50,
+          "Min_Pricing_Viewing": 95,
+          "Min_Pricing_Funeral": 100,
+          "Min_Pricing_Crematory_Fee": 1,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "CremationCasketAverage": 1200
+        },
+        "affordableBurial": {
+          "Region": "\"LA\"",
+          "Pricing_Immediate_Burial": 2701,
+          "Max_Pricing_Immediate_Burial": 6170,
+          "Min_Pricing_Immediate_Burial": 500,
+          "BasicCasket": 2500
+        },
+        "directCremation": {
+          "Region": "\"LA\"",
+          "Pricing_Direct_Cremation": 2262,
+          "Pricing_Transfer_Crematory": 3,
+          "Pricing_Crematory_Fee": 47,
+          "Max_Pricing_Direct_Cremation": 4149,
+          "Max_Pricing_Transfer_Crematory": 390,
+          "Max_Pricing_Crematory_Fee": 680,
+          "Min_Pricing_Direct_Cremation": 250,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "Min_Pricing_Crematory_Fee": 0
+        }
+      }
+    },
+    "MA": {
+      "code": "MA",
+      "name": "Massachusetts",
+      "sourceUrl": "https://www.funeralocity.com/average-funeral-price/ma",
+      "short": {
+        "fullBurial": {
+          "Average": 9545,
+          "Min": 6970,
+          "Max": 13160,
+          "Rank": 3
+        },
+        "immediateBurial": {
+          "Average": 5535,
+          "Min": 3300,
+          "Max": 8915,
+          "Rank": 7
+        },
+        "fullCremation": {
+          "Average": 7109,
+          "Min": 4505,
+          "Max": 10850,
+          "Rank": 5
+        },
+        "directCremation": {
+          "Average": 2720,
+          "Min": 995,
+          "Max": 5305,
+          "Rank": 8
+        }
+      },
+      "detailed": {
+        "traditionalBurial": {
+          "Region": "\"MA\"",
+          "Basic_Services": 2540,
+          "Pricing_Transfer_Home": 455,
+          "Pricing_Embaliming": 765,
+          "Pricing_Dressing_Casketing": 289,
+          "Pricing_Viewing": 586,
+          "Pricing_Funeral": 719,
+          "Pricing_Hearse": 439,
+          "Pricing_Utility_Vehicle": 237,
+          "Max_Basic_Services": 4700,
+          "Max_Pricing_Transfer_Home": 1250,
+          "Max_Pricing_Embaliming": 1300,
+          "Max_Pricing_Dressing_Casketing": 795,
+          "Max_Pricing_Viewing": 1300,
+          "Max_Pricing_Funeral": 1990,
+          "Max_Pricing_Hearse": 775,
+          "Max_Pricing_Utility_Vehicle": 600,
+          "Min_Basic_Services": 795,
+          "Min_Pricing_Transfer_Home": 95,
+          "Min_Pricing_Embaliming": 0,
+          "Min_Pricing_Dressing_Casketing": 60,
+          "Min_Pricing_Viewing": 0,
+          "Min_Pricing_Funeral": 100,
+          "Min_Pricing_Hearse": 195,
+          "Min_Pricing_Utility_Vehicle": 65,
+          "MedianPricedCasketAverage": 3500
+        },
+        "fullCremation": {
+          "Region": "\"MA\"",
+          "Pricing_Base_Services": 2541,
+          "Pricing_Transfer_Home": 455,
+          "Pricing_Embaliming": 764,
+          "Pricing_Dressing_Casketing": 289,
+          "Pricing_Viewing": 586,
+          "Pricing_Funeral": 718,
+          "Pricing_Crematory_Fee": 343,
+          "Pricing_Transfer_Crematory": 195,
+          "Max_Pricing_Base_Services": 4700,
+          "Max_Pricing_Transfer_Home": 1250,
+          "Max_Pricing_Embaliming": 1300,
+          "Max_Pricing_Dressing_Casketing": 795,
+          "Max_Pricing_Viewing": 1300,
+          "Max_Pricing_Funeral": 1990,
+          "Max_Pricing_Crematory_Fee": 600,
+          "Max_Pricing_Transfer_Crematory": 795,
+          "Min_Pricing_Base_Services": 795,
+          "Min_Pricing_Transfer_Home": 95,
+          "Min_Pricing_Embaliming": 0,
+          "Min_Pricing_Dressing_Casketing": 60,
+          "Min_Pricing_Viewing": 0,
+          "Min_Pricing_Funeral": 100,
+          "Min_Pricing_Crematory_Fee": 200,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "CremationCasketAverage": 1200
+        },
+        "affordableBurial": {
+          "Region": "\"MA\"",
+          "Pricing_Immediate_Burial": 3035,
+          "Max_Pricing_Immediate_Burial": 6415,
+          "Min_Pricing_Immediate_Burial": 800,
+          "BasicCasket": 2500
+        },
+        "directCremation": {
+          "Region": "\"MA\"",
+          "Pricing_Direct_Cremation": 2553,
+          "Pricing_Transfer_Crematory": 1,
+          "Pricing_Crematory_Fee": 159,
+          "Max_Pricing_Direct_Cremation": 5305,
+          "Max_Pricing_Transfer_Crematory": 365,
+          "Max_Pricing_Crematory_Fee": 600,
+          "Min_Pricing_Direct_Cremation": 750,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "Min_Pricing_Crematory_Fee": 0
+        }
+      }
+    },
+    "MD": {
+      "code": "MD",
+      "name": "Maryland",
+      "sourceUrl": "https://www.funeralocity.com/average-funeral-price/md",
+      "short": {
+        "fullBurial": {
+          "Average": 9188,
+          "Min": 5915,
+          "Max": 16150,
+          "Rank": 8
+        },
+        "immediateBurial": {
+          "Average": 5694,
+          "Min": 3600,
+          "Max": 8460,
+          "Rank": 4
+        },
+        "fullCremation": {
+          "Average": 6866,
+          "Min": 3770,
+          "Max": 13535,
+          "Rank": 6
+        },
+        "directCremation": {
+          "Average": 2419,
+          "Min": 695,
+          "Max": 4925,
+          "Rank": 18
+        }
+      },
+      "detailed": {
+        "traditionalBurial": {
+          "Region": "\"MD\"",
+          "Basic_Services": 2389,
+          "Pricing_Transfer_Home": 416,
+          "Pricing_Embaliming": 889,
+          "Pricing_Dressing_Casketing": 293,
+          "Pricing_Viewing": 525,
+          "Pricing_Funeral": 589,
+          "Pricing_Hearse": 412,
+          "Pricing_Utility_Vehicle": 175,
+          "Max_Basic_Services": 5448,
+          "Max_Pricing_Transfer_Home": 1075,
+          "Max_Pricing_Embaliming": 1905,
+          "Max_Pricing_Dressing_Casketing": 845,
+          "Max_Pricing_Viewing": 2800,
+          "Max_Pricing_Funeral": 2800,
+          "Max_Pricing_Hearse": 975,
+          "Max_Pricing_Utility_Vehicle": 595,
+          "Min_Basic_Services": 975,
+          "Min_Pricing_Transfer_Home": 175,
+          "Min_Pricing_Embaliming": 1,
+          "Min_Pricing_Dressing_Casketing": 0,
+          "Min_Pricing_Viewing": 150,
+          "Min_Pricing_Funeral": 200,
+          "Min_Pricing_Hearse": 175,
+          "Min_Pricing_Utility_Vehicle": 0,
+          "MedianPricedCasketAverage": 3500
+        },
+        "fullCremation": {
+          "Region": "\"MD\"",
+          "Pricing_Base_Services": 2382,
+          "Pricing_Transfer_Home": 415,
+          "Pricing_Embaliming": 893,
+          "Pricing_Dressing_Casketing": 291,
+          "Pricing_Viewing": 519,
+          "Pricing_Funeral": 584,
+          "Pricing_Crematory_Fee": 482,
+          "Pricing_Transfer_Crematory": 100,
+          "Max_Pricing_Base_Services": 5448,
+          "Max_Pricing_Transfer_Home": 1075,
+          "Max_Pricing_Embaliming": 1905,
+          "Max_Pricing_Dressing_Casketing": 845,
+          "Max_Pricing_Viewing": 2800,
+          "Max_Pricing_Funeral": 2800,
+          "Max_Pricing_Crematory_Fee": 1995,
+          "Max_Pricing_Transfer_Crematory": 795,
+          "Min_Pricing_Base_Services": 975,
+          "Min_Pricing_Transfer_Home": 175,
+          "Min_Pricing_Embaliming": 175,
+          "Min_Pricing_Dressing_Casketing": 0,
+          "Min_Pricing_Viewing": 150,
+          "Min_Pricing_Funeral": 200,
+          "Min_Pricing_Crematory_Fee": 150,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "CremationCasketAverage": 1200
+        },
+        "affordableBurial": {
+          "Region": "\"MD\"",
+          "Pricing_Immediate_Burial": 3194,
+          "Max_Pricing_Immediate_Burial": 5960,
+          "Min_Pricing_Immediate_Burial": 1100,
+          "BasicCasket": 2500
+        },
+        "directCremation": {
+          "Region": "\"MD\"",
+          "Pricing_Direct_Cremation": 2281,
+          "Pricing_Transfer_Crematory": 7,
+          "Pricing_Crematory_Fee": 126,
+          "Max_Pricing_Direct_Cremation": 4620,
+          "Max_Pricing_Transfer_Crematory": 400,
+          "Max_Pricing_Crematory_Fee": 1995,
+          "Min_Pricing_Direct_Cremation": 390,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "Min_Pricing_Crematory_Fee": 0
+        }
+      }
+    },
+    "ME": {
+      "code": "ME",
+      "name": "Maine",
+      "sourceUrl": "https://www.funeralocity.com/average-funeral-price/me",
+      "short": {
+        "fullBurial": {
+          "Average": 8594,
+          "Min": 6555,
+          "Max": 12105,
+          "Rank": 24
+        },
+        "immediateBurial": {
+          "Average": 5452,
+          "Min": 3395,
+          "Max": 8085,
+          "Rank": 11
+        },
+        "fullCremation": {
+          "Average": 6265,
+          "Min": 3980,
+          "Max": 9740,
+          "Rank": 26
+        },
+        "directCremation": {
+          "Average": 2372,
+          "Min": 825,
+          "Max": 4830,
+          "Rank": 20
+        }
+      },
+      "detailed": {
+        "traditionalBurial": {
+          "Region": "\"ME\"",
+          "Basic_Services": 2138,
+          "Pricing_Transfer_Home": 406,
+          "Pricing_Embaliming": 643,
+          "Pricing_Dressing_Casketing": 260,
+          "Pricing_Viewing": 498,
+          "Pricing_Funeral": 557,
+          "Pricing_Hearse": 391,
+          "Pricing_Utility_Vehicle": 201,
+          "Max_Basic_Services": 4340,
+          "Max_Pricing_Transfer_Home": 695,
+          "Max_Pricing_Embaliming": 1295,
+          "Max_Pricing_Dressing_Casketing": 595,
+          "Max_Pricing_Viewing": 970,
+          "Max_Pricing_Funeral": 995,
+          "Max_Pricing_Hearse": 595,
+          "Max_Pricing_Utility_Vehicle": 395,
+          "Min_Basic_Services": 895,
+          "Min_Pricing_Transfer_Home": 195,
+          "Min_Pricing_Embaliming": 400,
+          "Min_Pricing_Dressing_Casketing": 50,
+          "Min_Pricing_Viewing": 200,
+          "Min_Pricing_Funeral": 150,
+          "Min_Pricing_Hearse": 180,
+          "Min_Pricing_Utility_Vehicle": 35,
+          "MedianPricedCasketAverage": 3500
+        },
+        "fullCremation": {
+          "Region": "\"ME\"",
+          "Pricing_Base_Services": 2117,
+          "Pricing_Transfer_Home": 406,
+          "Pricing_Embaliming": 643,
+          "Pricing_Dressing_Casketing": 259,
+          "Pricing_Viewing": 496,
+          "Pricing_Funeral": 557,
+          "Pricing_Crematory_Fee": 361,
+          "Pricing_Transfer_Crematory": 227,
+          "Max_Pricing_Base_Services": 4340,
+          "Max_Pricing_Transfer_Home": 695,
+          "Max_Pricing_Embaliming": 1295,
+          "Max_Pricing_Dressing_Casketing": 595,
+          "Max_Pricing_Viewing": 970,
+          "Max_Pricing_Funeral": 995,
+          "Max_Pricing_Crematory_Fee": 895,
+          "Max_Pricing_Transfer_Crematory": 595,
+          "Min_Pricing_Base_Services": 500,
+          "Min_Pricing_Transfer_Home": 195,
+          "Min_Pricing_Embaliming": 400,
+          "Min_Pricing_Dressing_Casketing": 50,
+          "Min_Pricing_Viewing": 200,
+          "Min_Pricing_Funeral": 150,
+          "Min_Pricing_Crematory_Fee": 270,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "CremationCasketAverage": 1200
+        },
+        "affordableBurial": {
+          "Region": "\"ME\"",
+          "Pricing_Immediate_Burial": 2952,
+          "Max_Pricing_Immediate_Burial": 5585,
+          "Min_Pricing_Immediate_Burial": 895,
+          "BasicCasket": 2500
+        },
+        "directCremation": {
+          "Region": "\"ME\"",
+          "Pricing_Direct_Cremation": 2287,
+          "Pricing_Transfer_Crematory": 11,
+          "Pricing_Crematory_Fee": 74,
+          "Max_Pricing_Direct_Cremation": 4830,
+          "Max_Pricing_Transfer_Crematory": 380,
+          "Max_Pricing_Crematory_Fee": 600,
+          "Min_Pricing_Direct_Cremation": 825,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "Min_Pricing_Crematory_Fee": 0
+        }
+      }
+    },
+    "MI": {
+      "code": "MI",
+      "name": "Michigan",
+      "sourceUrl": "https://www.funeralocity.com/average-funeral-price/mi",
+      "short": {
+        "fullBurial": {
+          "Average": 8950,
+          "Min": 5915,
+          "Max": 12105,
+          "Rank": 13
+        },
+        "immediateBurial": {
+          "Average": 5004,
+          "Min": 3395,
+          "Max": 8800,
+          "Rank": 31
+        },
+        "fullCremation": {
+          "Average": 6548,
+          "Min": 3705,
+          "Max": 9870,
+          "Rank": 14
+        },
+        "directCremation": {
+          "Average": 2264,
+          "Min": 695,
+          "Max": 4495,
+          "Rank": 25
+        }
+      },
+      "detailed": {
+        "traditionalBurial": {
+          "Region": "\"MI\"",
+          "Basic_Services": 2282,
+          "Pricing_Transfer_Home": 359,
+          "Pricing_Embaliming": 758,
+          "Pricing_Dressing_Casketing": 314,
+          "Pricing_Viewing": 583,
+          "Pricing_Funeral": 598,
+          "Pricing_Hearse": 361,
+          "Pricing_Utility_Vehicle": 195,
+          "Max_Basic_Services": 4950,
+          "Max_Pricing_Transfer_Home": 900,
+          "Max_Pricing_Embaliming": 1950,
+          "Max_Pricing_Dressing_Casketing": 985,
+          "Max_Pricing_Viewing": 1495,
+          "Max_Pricing_Funeral": 1590,
+          "Max_Pricing_Hearse": 1000,
+          "Max_Pricing_Utility_Vehicle": 450,
+          "Min_Basic_Services": 500,
+          "Min_Pricing_Transfer_Home": 150,
+          "Min_Pricing_Embaliming": 175,
+          "Min_Pricing_Dressing_Casketing": 29,
+          "Min_Pricing_Viewing": 90,
+          "Min_Pricing_Funeral": 0,
+          "Min_Pricing_Hearse": 150,
+          "Min_Pricing_Utility_Vehicle": 45,
+          "MedianPricedCasketAverage": 3500
+        },
+        "fullCremation": {
+          "Region": "\"MI\"",
+          "Pricing_Base_Services": 2283,
+          "Pricing_Transfer_Home": 359,
+          "Pricing_Embaliming": 759,
+          "Pricing_Dressing_Casketing": 314,
+          "Pricing_Viewing": 583,
+          "Pricing_Funeral": 598,
+          "Pricing_Crematory_Fee": 315,
+          "Pricing_Transfer_Crematory": 137,
+          "Max_Pricing_Base_Services": 4950,
+          "Max_Pricing_Transfer_Home": 900,
+          "Max_Pricing_Embaliming": 1950,
+          "Max_Pricing_Dressing_Casketing": 985,
+          "Max_Pricing_Viewing": 1495,
+          "Max_Pricing_Funeral": 1590,
+          "Max_Pricing_Crematory_Fee": 1000,
+          "Max_Pricing_Transfer_Crematory": 795,
+          "Min_Pricing_Base_Services": 500,
+          "Min_Pricing_Transfer_Home": 150,
+          "Min_Pricing_Embaliming": 175,
+          "Min_Pricing_Dressing_Casketing": 29,
+          "Min_Pricing_Viewing": 90,
+          "Min_Pricing_Funeral": 0,
+          "Min_Pricing_Crematory_Fee": 50,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "CremationCasketAverage": 1200
+        },
+        "affordableBurial": {
+          "Region": "\"MI\"",
+          "Pricing_Immediate_Burial": 2502,
+          "Max_Pricing_Immediate_Burial": 6300,
+          "Min_Pricing_Immediate_Burial": 895,
+          "BasicCasket": 2500
+        },
+        "directCremation": {
+          "Region": "\"MI\"",
+          "Pricing_Direct_Cremation": 2102,
+          "Pricing_Transfer_Crematory": 5,
+          "Pricing_Crematory_Fee": 155,
+          "Max_Pricing_Direct_Cremation": 4495,
+          "Max_Pricing_Transfer_Crematory": 700,
+          "Max_Pricing_Crematory_Fee": 600,
+          "Min_Pricing_Direct_Cremation": 695,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "Min_Pricing_Crematory_Fee": 0
+        }
+      }
+    },
+    "MN": {
+      "code": "MN",
+      "name": "Minnesota",
+      "sourceUrl": "https://www.funeralocity.com/average-funeral-price/mn",
+      "short": {
+        "fullBurial": {
+          "Average": 9697,
+          "Min": 6298,
+          "Max": 12567,
+          "Rank": 1
+        },
+        "immediateBurial": {
+          "Average": 5900,
+          "Min": 3525,
+          "Max": 10369,
+          "Rank": 2
+        },
+        "fullCremation": {
+          "Average": 7517,
+          "Min": 4138,
+          "Max": 10784,
+          "Rank": 1
+        },
+        "directCremation": {
+          "Average": 2955,
+          "Min": 995,
+          "Max": 5545,
+          "Rank": 5
+        }
+      },
+      "detailed": {
+        "traditionalBurial": {
+          "Region": "\"MN\"",
+          "Basic_Services": 3139,
+          "Pricing_Transfer_Home": 448,
+          "Pricing_Embaliming": 760,
+          "Pricing_Dressing_Casketing": 339,
+          "Pricing_Viewing": 395,
+          "Pricing_Funeral": 570,
+          "Pricing_Hearse": 384,
+          "Pricing_Utility_Vehicle": 160,
+          "Max_Basic_Services": 4995,
+          "Max_Pricing_Transfer_Home": 965,
+          "Max_Pricing_Embaliming": 1595,
+          "Max_Pricing_Dressing_Casketing": 850,
+          "Max_Pricing_Viewing": 995,
+          "Max_Pricing_Funeral": 1000,
+          "Max_Pricing_Hearse": 790,
+          "Max_Pricing_Utility_Vehicle": 495,
+          "Min_Basic_Services": 950,
+          "Min_Pricing_Transfer_Home": 150,
+          "Min_Pricing_Embaliming": 250,
+          "Min_Pricing_Dressing_Casketing": 50,
+          "Min_Pricing_Viewing": 150,
+          "Min_Pricing_Funeral": 140,
+          "Min_Pricing_Hearse": 75,
+          "Min_Pricing_Utility_Vehicle": 45,
+          "MedianPricedCasketAverage": 3500
+        },
+        "fullCremation": {
+          "Region": "\"MN\"",
+          "Pricing_Base_Services": 3130,
+          "Pricing_Transfer_Home": 448,
+          "Pricing_Embaliming": 765,
+          "Pricing_Dressing_Casketing": 340,
+          "Pricing_Viewing": 397,
+          "Pricing_Funeral": 569,
+          "Pricing_Crematory_Fee": 534,
+          "Pricing_Transfer_Crematory": 133,
+          "Max_Pricing_Base_Services": 4995,
+          "Max_Pricing_Transfer_Home": 965,
+          "Max_Pricing_Embaliming": 1620,
+          "Max_Pricing_Dressing_Casketing": 850,
+          "Max_Pricing_Viewing": 995,
+          "Max_Pricing_Funeral": 1000,
+          "Max_Pricing_Crematory_Fee": 1400,
+          "Max_Pricing_Transfer_Crematory": 575,
+          "Min_Pricing_Base_Services": 950,
+          "Min_Pricing_Transfer_Home": 150,
+          "Min_Pricing_Embaliming": 250,
+          "Min_Pricing_Dressing_Casketing": 50,
+          "Min_Pricing_Viewing": 150,
+          "Min_Pricing_Funeral": 140,
+          "Min_Pricing_Crematory_Fee": 200,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "CremationCasketAverage": 1200
+        },
+        "affordableBurial": {
+          "Region": "\"MN\"",
+          "Pricing_Immediate_Burial": 3394,
+          "Max_Pricing_Immediate_Burial": 7869,
+          "Min_Pricing_Immediate_Burial": 1025,
+          "BasicCasket": 2500
+        },
+        "directCremation": {
+          "Region": "\"MN\"",
+          "Pricing_Direct_Cremation": 2878,
+          "Pricing_Transfer_Crematory": 1,
+          "Pricing_Crematory_Fee": 70,
+          "Max_Pricing_Direct_Cremation": 5545,
+          "Max_Pricing_Transfer_Crematory": 395,
+          "Max_Pricing_Crematory_Fee": 970,
+          "Min_Pricing_Direct_Cremation": 995,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "Min_Pricing_Crematory_Fee": 0
+        }
+      }
+    },
+    "MO": {
+      "code": "MO",
+      "name": "Missouri",
+      "sourceUrl": "https://www.funeralocity.com/average-funeral-price/mo",
+      "short": {
+        "fullBurial": {
+          "Average": 8295,
+          "Min": 5985,
+          "Max": 12425,
+          "Rank": 31
+        },
+        "immediateBurial": {
+          "Average": 4995,
+          "Min": 3195,
+          "Max": 8400,
+          "Rank": 32
+        },
+        "fullCremation": {
+          "Average": 5973,
+          "Min": 3295,
+          "Max": 10090,
+          "Rank": 33
+        },
+        "directCremation": {
+          "Average": 1852,
+          "Min": 635,
+          "Max": 4780,
+          "Rank": 40
+        }
+      },
+      "detailed": {
+        "traditionalBurial": {
+          "Region": "\"MO\"",
+          "Basic_Services": 2071,
+          "Pricing_Transfer_Home": 333,
+          "Pricing_Embaliming": 681,
+          "Pricing_Dressing_Casketing": 276,
+          "Pricing_Viewing": 430,
+          "Pricing_Funeral": 510,
+          "Pricing_Hearse": 321,
+          "Pricing_Utility_Vehicle": 165,
+          "Max_Basic_Services": 4695,
+          "Max_Pricing_Transfer_Home": 895,
+          "Max_Pricing_Embaliming": 1600,
+          "Max_Pricing_Dressing_Casketing": 825,
+          "Max_Pricing_Viewing": 1000,
+          "Max_Pricing_Funeral": 1325,
+          "Max_Pricing_Hearse": 845,
+          "Max_Pricing_Utility_Vehicle": 595,
+          "Min_Basic_Services": 335,
+          "Min_Pricing_Transfer_Home": 50,
+          "Min_Pricing_Embaliming": 95,
+          "Min_Pricing_Dressing_Casketing": 50,
+          "Min_Pricing_Viewing": 100,
+          "Min_Pricing_Funeral": 125,
+          "Min_Pricing_Hearse": 50,
+          "Min_Pricing_Utility_Vehicle": 35,
+          "MedianPricedCasketAverage": 3500
+        },
+        "fullCremation": {
+          "Region": "\"MO\"",
+          "Pricing_Base_Services": 2069,
+          "Pricing_Transfer_Home": 333,
+          "Pricing_Embaliming": 682,
+          "Pricing_Dressing_Casketing": 276,
+          "Pricing_Viewing": 430,
+          "Pricing_Funeral": 510,
+          "Pricing_Crematory_Fee": 392,
+          "Pricing_Transfer_Crematory": 72,
+          "Max_Pricing_Base_Services": 4695,
+          "Max_Pricing_Transfer_Home": 895,
+          "Max_Pricing_Embaliming": 1600,
+          "Max_Pricing_Dressing_Casketing": 825,
+          "Max_Pricing_Viewing": 1000,
+          "Max_Pricing_Funeral": 1325,
+          "Max_Pricing_Crematory_Fee": 1495,
+          "Max_Pricing_Transfer_Crematory": 695,
+          "Min_Pricing_Base_Services": 335,
+          "Min_Pricing_Transfer_Home": 50,
+          "Min_Pricing_Embaliming": 95,
+          "Min_Pricing_Dressing_Casketing": 50,
+          "Min_Pricing_Viewing": 100,
+          "Min_Pricing_Funeral": 125,
+          "Min_Pricing_Crematory_Fee": 135,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "CremationCasketAverage": 1200
+        },
+        "affordableBurial": {
+          "Region": "\"MO\"",
+          "Pricing_Immediate_Burial": 2494,
+          "Max_Pricing_Immediate_Burial": 5900,
+          "Min_Pricing_Immediate_Burial": 695,
+          "BasicCasket": 2500
+        },
+        "directCremation": {
+          "Region": "\"MO\"",
+          "Pricing_Direct_Cremation": 1818,
+          "Pricing_Transfer_Crematory": 3,
+          "Pricing_Crematory_Fee": 31,
+          "Max_Pricing_Direct_Cremation": 4480,
+          "Max_Pricing_Transfer_Crematory": 400,
+          "Max_Pricing_Crematory_Fee": 1440,
+          "Min_Pricing_Direct_Cremation": 635,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "Min_Pricing_Crematory_Fee": 0
+        }
+      }
+    },
+    "MS": {
+      "code": "MS",
+      "name": "Mississippi",
+      "sourceUrl": "https://www.funeralocity.com/average-funeral-price/ms",
+      "short": {
+        "fullBurial": {
+          "Average": 7984,
+          "Min": 5360,
+          "Max": 12100,
+          "Rank": 43
+        },
+        "immediateBurial": {
+          "Average": 5005,
+          "Min": 3025,
+          "Max": 8950,
+          "Rank": 29
+        },
+        "fullCremation": {
+          "Average": 5837,
+          "Min": 3155,
+          "Max": 10610,
+          "Rank": 40
+        },
+        "directCremation": {
+          "Average": 1994,
+          "Min": 300,
+          "Max": 6860,
+          "Rank": 33
+        }
+      },
+      "detailed": {
+        "traditionalBurial": {
+          "Region": "\"MS\"",
+          "Basic_Services": 2051,
+          "Pricing_Transfer_Home": 315,
+          "Pricing_Embaliming": 736,
+          "Pricing_Dressing_Casketing": 208,
+          "Pricing_Viewing": 301,
+          "Pricing_Funeral": 390,
+          "Pricing_Hearse": 304,
+          "Pricing_Utility_Vehicle": 179,
+          "Max_Basic_Services": 4996,
+          "Max_Pricing_Transfer_Home": 995,
+          "Max_Pricing_Embaliming": 1800,
+          "Max_Pricing_Dressing_Casketing": 1200,
+          "Max_Pricing_Viewing": 700,
+          "Max_Pricing_Funeral": 1205,
+          "Max_Pricing_Hearse": 550,
+          "Max_Pricing_Utility_Vehicle": 495,
+          "Min_Basic_Services": 250,
+          "Min_Pricing_Transfer_Home": 72,
+          "Min_Pricing_Embaliming": 129,
+          "Min_Pricing_Dressing_Casketing": 25,
+          "Min_Pricing_Viewing": 25,
+          "Min_Pricing_Funeral": 100,
+          "Min_Pricing_Hearse": 100,
+          "Min_Pricing_Utility_Vehicle": 50,
+          "MedianPricedCasketAverage": 3500
+        },
+        "fullCremation": {
+          "Region": "\"MS\"",
+          "Pricing_Base_Services": 2051,
+          "Pricing_Transfer_Home": 315,
+          "Pricing_Embaliming": 736,
+          "Pricing_Dressing_Casketing": 208,
+          "Pricing_Viewing": 301,
+          "Pricing_Funeral": 390,
+          "Pricing_Crematory_Fee": 510,
+          "Pricing_Transfer_Crematory": 126,
+          "Max_Pricing_Base_Services": 4996,
+          "Max_Pricing_Transfer_Home": 995,
+          "Max_Pricing_Embaliming": 1800,
+          "Max_Pricing_Dressing_Casketing": 1200,
+          "Max_Pricing_Viewing": 700,
+          "Max_Pricing_Funeral": 1205,
+          "Max_Pricing_Crematory_Fee": 1500,
+          "Max_Pricing_Transfer_Crematory": 495,
+          "Min_Pricing_Base_Services": 250,
+          "Min_Pricing_Transfer_Home": 72,
+          "Min_Pricing_Embaliming": 129,
+          "Min_Pricing_Dressing_Casketing": 25,
+          "Min_Pricing_Viewing": 25,
+          "Min_Pricing_Funeral": 100,
+          "Min_Pricing_Crematory_Fee": 150,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "CremationCasketAverage": 1200
+        },
+        "affordableBurial": {
+          "Region": "\"MS\"",
+          "Pricing_Immediate_Burial": 2505,
+          "Max_Pricing_Immediate_Burial": 6450,
+          "Min_Pricing_Immediate_Burial": 525,
+          "BasicCasket": 2500
+        },
+        "directCremation": {
+          "Region": "\"MS\"",
+          "Pricing_Direct_Cremation": 1975,
+          "Pricing_Transfer_Crematory": 0,
+          "Pricing_Crematory_Fee": 19,
+          "Max_Pricing_Direct_Cremation": 5200,
+          "Max_Pricing_Transfer_Crematory": 0,
+          "Max_Pricing_Crematory_Fee": 1500,
+          "Min_Pricing_Direct_Cremation": 300,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "Min_Pricing_Crematory_Fee": 0
+        }
+      }
+    },
+    "MT": {
+      "code": "MT",
+      "name": "Montana",
+      "sourceUrl": "https://www.funeralocity.com/average-funeral-price/mt",
+      "short": {
+        "fullBurial": {
+          "Average": 7742,
+          "Min": 6210,
+          "Max": 9849,
+          "Rank": 48
+        },
+        "immediateBurial": {
+          "Average": 5079,
+          "Min": 3430,
+          "Max": 6735,
+          "Rank": 26
+        },
+        "fullCremation": {
+          "Average": 5684,
+          "Min": 3990,
+          "Max": 7294,
+          "Rank": 43
+        },
+        "directCremation": {
+          "Average": 2476,
+          "Min": 995,
+          "Max": 4090,
+          "Rank": 16
+        }
+      },
+      "detailed": {
+        "traditionalBurial": {
+          "Region": "\"MT\"",
+          "Basic_Services": 1810,
+          "Pricing_Transfer_Home": 334,
+          "Pricing_Embaliming": 638,
+          "Pricing_Dressing_Casketing": 222,
+          "Pricing_Viewing": 298,
+          "Pricing_Funeral": 570,
+          "Pricing_Hearse": 233,
+          "Pricing_Utility_Vehicle": 137,
+          "Max_Basic_Services": 2695,
+          "Max_Pricing_Transfer_Home": 695,
+          "Max_Pricing_Embaliming": 1140,
+          "Max_Pricing_Dressing_Casketing": 669,
+          "Max_Pricing_Viewing": 555,
+          "Max_Pricing_Funeral": 1150,
+          "Max_Pricing_Hearse": 670,
+          "Max_Pricing_Utility_Vehicle": 275,
+          "Min_Basic_Services": 820,
+          "Min_Pricing_Transfer_Home": 175,
+          "Min_Pricing_Embaliming": 325,
+          "Min_Pricing_Dressing_Casketing": 35,
+          "Min_Pricing_Viewing": 90,
+          "Min_Pricing_Funeral": 200,
+          "Min_Pricing_Hearse": 110,
+          "Min_Pricing_Utility_Vehicle": 65,
+          "MedianPricedCasketAverage": 3500
+        },
+        "fullCremation": {
+          "Region": "\"MT\"",
+          "Pricing_Base_Services": 1805,
+          "Pricing_Transfer_Home": 335,
+          "Pricing_Embaliming": 634,
+          "Pricing_Dressing_Casketing": 221,
+          "Pricing_Viewing": 296,
+          "Pricing_Funeral": 571,
+          "Pricing_Crematory_Fee": 595,
+          "Pricing_Transfer_Crematory": 28,
+          "Max_Pricing_Base_Services": 2695,
+          "Max_Pricing_Transfer_Home": 695,
+          "Max_Pricing_Embaliming": 1140,
+          "Max_Pricing_Dressing_Casketing": 669,
+          "Max_Pricing_Viewing": 555,
+          "Max_Pricing_Funeral": 1150,
+          "Max_Pricing_Crematory_Fee": 1250,
+          "Max_Pricing_Transfer_Crematory": 337,
+          "Min_Pricing_Base_Services": 820,
+          "Min_Pricing_Transfer_Home": 175,
+          "Min_Pricing_Embaliming": 325,
+          "Min_Pricing_Dressing_Casketing": 35,
+          "Min_Pricing_Viewing": 90,
+          "Min_Pricing_Funeral": 200,
+          "Min_Pricing_Crematory_Fee": 200,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "CremationCasketAverage": 1200
+        },
+        "affordableBurial": {
+          "Region": "\"MT\"",
+          "Pricing_Immediate_Burial": 2579,
+          "Max_Pricing_Immediate_Burial": 4235,
+          "Min_Pricing_Immediate_Burial": 930,
+          "BasicCasket": 2500
+        },
+        "directCremation": {
+          "Region": "\"MT\"",
+          "Pricing_Direct_Cremation": 2354,
+          "Pricing_Transfer_Crematory": 0,
+          "Pricing_Crematory_Fee": 122,
+          "Max_Pricing_Direct_Cremation": 4070,
+          "Max_Pricing_Transfer_Crematory": 0,
+          "Max_Pricing_Crematory_Fee": 895,
+          "Min_Pricing_Direct_Cremation": 995,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "Min_Pricing_Crematory_Fee": 0
+        }
+      }
+    },
+    "NC": {
+      "code": "NC",
+      "name": "North Carolina",
+      "sourceUrl": "https://www.funeralocity.com/average-funeral-price/nc",
+      "short": {
+        "fullBurial": {
+          "Average": 8136,
+          "Min": 4850,
+          "Max": 14155,
+          "Rank": 37
+        },
+        "immediateBurial": {
+          "Average": 4840,
+          "Min": 2850,
+          "Max": 9890,
+          "Rank": 39
+        },
+        "fullCremation": {
+          "Average": 5888,
+          "Min": 2685,
+          "Max": 11210,
+          "Rank": 37
+        },
+        "directCremation": {
+          "Average": 1933,
+          "Min": 500,
+          "Max": 4900,
+          "Rank": 38
+        }
+      },
+      "detailed": {
+        "traditionalBurial": {
+          "Region": "\"NC\"",
+          "Basic_Services": 2092,
+          "Pricing_Transfer_Home": 295,
+          "Pricing_Embaliming": 735,
+          "Pricing_Dressing_Casketing": 201,
+          "Pricing_Viewing": 371,
+          "Pricing_Funeral": 471,
+          "Pricing_Hearse": 305,
+          "Pricing_Utility_Vehicle": 169,
+          "Max_Basic_Services": 6250,
+          "Max_Pricing_Transfer_Home": 945,
+          "Max_Pricing_Embaliming": 1495,
+          "Max_Pricing_Dressing_Casketing": 645,
+          "Max_Pricing_Viewing": 850,
+          "Max_Pricing_Funeral": 1670,
+          "Max_Pricing_Hearse": 745,
+          "Max_Pricing_Utility_Vehicle": 520,
+          "Min_Basic_Services": 275,
+          "Min_Pricing_Transfer_Home": 75,
+          "Min_Pricing_Embaliming": 50,
+          "Min_Pricing_Dressing_Casketing": 25,
+          "Min_Pricing_Viewing": 90,
+          "Min_Pricing_Funeral": 100,
+          "Min_Pricing_Hearse": 75,
+          "Min_Pricing_Utility_Vehicle": 0,
+          "MedianPricedCasketAverage": 3500
+        },
+        "fullCremation": {
+          "Region": "\"NC\"",
+          "Pricing_Base_Services": 2092,
+          "Pricing_Transfer_Home": 295,
+          "Pricing_Embaliming": 735,
+          "Pricing_Dressing_Casketing": 201,
+          "Pricing_Viewing": 371,
+          "Pricing_Funeral": 471,
+          "Pricing_Crematory_Fee": 463,
+          "Pricing_Transfer_Crematory": 64,
+          "Max_Pricing_Base_Services": 6250,
+          "Max_Pricing_Transfer_Home": 945,
+          "Max_Pricing_Embaliming": 1495,
+          "Max_Pricing_Dressing_Casketing": 645,
+          "Max_Pricing_Viewing": 850,
+          "Max_Pricing_Funeral": 1670,
+          "Max_Pricing_Crematory_Fee": 2395,
+          "Max_Pricing_Transfer_Crematory": 495,
+          "Min_Pricing_Base_Services": 275,
+          "Min_Pricing_Transfer_Home": 75,
+          "Min_Pricing_Embaliming": 50,
+          "Min_Pricing_Dressing_Casketing": 25,
+          "Min_Pricing_Viewing": 90,
+          "Min_Pricing_Funeral": 100,
+          "Min_Pricing_Crematory_Fee": 95,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "CremationCasketAverage": 1200
+        },
+        "affordableBurial": {
+          "Region": "\"NC\"",
+          "Pricing_Immediate_Burial": 2344,
+          "Max_Pricing_Immediate_Burial": 7390,
+          "Min_Pricing_Immediate_Burial": 350,
+          "BasicCasket": 2500
+        },
+        "directCremation": {
+          "Region": "\"NC\"",
+          "Pricing_Direct_Cremation": 1870,
+          "Pricing_Transfer_Crematory": 1,
+          "Pricing_Crematory_Fee": 62,
+          "Max_Pricing_Direct_Cremation": 4420,
+          "Max_Pricing_Transfer_Crematory": 275,
+          "Max_Pricing_Crematory_Fee": 1495,
+          "Min_Pricing_Direct_Cremation": 500,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "Min_Pricing_Crematory_Fee": 0
+        }
+      }
+    },
+    "ND": {
+      "code": "ND",
+      "name": "North Dakota",
+      "sourceUrl": "https://www.funeralocity.com/average-funeral-price/nd",
+      "short": {
+        "fullBurial": {
+          "Average": 8868,
+          "Min": 5840,
+          "Max": 10990,
+          "Rank": 14
+        },
+        "immediateBurial": {
+          "Average": 5458,
+          "Min": 3595,
+          "Max": 7225,
+          "Rank": 10
+        },
+        "fullCremation": {
+          "Average": 6791,
+          "Min": 3795,
+          "Max": 8620,
+          "Rank": 9
+        },
+        "directCremation": {
+          "Average": 3183,
+          "Min": 1260,
+          "Max": 4500,
+          "Rank": 1
+        }
+      },
+      "detailed": {
+        "traditionalBurial": {
+          "Region": "\"ND\"",
+          "Basic_Services": 2575,
+          "Pricing_Transfer_Home": 304,
+          "Pricing_Embaliming": 764,
+          "Pricing_Dressing_Casketing": 311,
+          "Pricing_Viewing": 394,
+          "Pricing_Funeral": 574,
+          "Pricing_Hearse": 302,
+          "Pricing_Utility_Vehicle": 145,
+          "Max_Basic_Services": 3495,
+          "Max_Pricing_Transfer_Home": 490,
+          "Max_Pricing_Embaliming": 1495,
+          "Max_Pricing_Dressing_Casketing": 525,
+          "Max_Pricing_Viewing": 795,
+          "Max_Pricing_Funeral": 1095,
+          "Max_Pricing_Hearse": 565,
+          "Max_Pricing_Utility_Vehicle": 395,
+          "Min_Basic_Services": 775,
+          "Min_Pricing_Transfer_Home": 90,
+          "Min_Pricing_Embaliming": 325,
+          "Min_Pricing_Dressing_Casketing": 120,
+          "Min_Pricing_Viewing": 175,
+          "Min_Pricing_Funeral": 160,
+          "Min_Pricing_Hearse": 85,
+          "Min_Pricing_Utility_Vehicle": 45,
+          "MedianPricedCasketAverage": 3500
+        },
+        "fullCremation": {
+          "Region": "\"ND\"",
+          "Pricing_Base_Services": 2575,
+          "Pricing_Transfer_Home": 304,
+          "Pricing_Embaliming": 764,
+          "Pricing_Dressing_Casketing": 311,
+          "Pricing_Viewing": 394,
+          "Pricing_Funeral": 574,
+          "Pricing_Crematory_Fee": 527,
+          "Pricing_Transfer_Crematory": 142,
+          "Max_Pricing_Base_Services": 3495,
+          "Max_Pricing_Transfer_Home": 490,
+          "Max_Pricing_Embaliming": 1495,
+          "Max_Pricing_Dressing_Casketing": 525,
+          "Max_Pricing_Viewing": 795,
+          "Max_Pricing_Funeral": 1095,
+          "Max_Pricing_Crematory_Fee": 995,
+          "Max_Pricing_Transfer_Crematory": 450,
+          "Min_Pricing_Base_Services": 775,
+          "Min_Pricing_Transfer_Home": 90,
+          "Min_Pricing_Embaliming": 325,
+          "Min_Pricing_Dressing_Casketing": 120,
+          "Min_Pricing_Viewing": 175,
+          "Min_Pricing_Funeral": 160,
+          "Min_Pricing_Crematory_Fee": 375,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "CremationCasketAverage": 1200
+        },
+        "affordableBurial": {
+          "Region": "\"ND\"",
+          "Pricing_Immediate_Burial": 2958,
+          "Max_Pricing_Immediate_Burial": 4725,
+          "Min_Pricing_Immediate_Burial": 1095,
+          "BasicCasket": 2500
+        },
+        "directCremation": {
+          "Region": "\"ND\"",
+          "Pricing_Direct_Cremation": 2978,
+          "Pricing_Transfer_Crematory": 5,
+          "Pricing_Crematory_Fee": 199,
+          "Max_Pricing_Direct_Cremation": 4275,
+          "Max_Pricing_Transfer_Crematory": 450,
+          "Max_Pricing_Crematory_Fee": 795,
+          "Min_Pricing_Direct_Cremation": 1245,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "Min_Pricing_Crematory_Fee": 0
+        }
+      }
+    },
+    "NE": {
+      "code": "NE",
+      "name": "Nebraska",
+      "sourceUrl": "https://www.funeralocity.com/average-funeral-price/ne",
+      "short": {
+        "fullBurial": {
+          "Average": 8620,
+          "Min": 6300,
+          "Max": 12340,
+          "Rank": 22
+        },
+        "immediateBurial": {
+          "Average": 5467,
+          "Min": 3295,
+          "Max": 8118,
+          "Rank": 9
+        },
+        "fullCremation": {
+          "Average": 6530,
+          "Min": 3860,
+          "Max": 10455,
+          "Rank": 16
+        },
+        "directCremation": {
+          "Average": 2958,
+          "Min": 995,
+          "Max": 5100,
+          "Rank": 4
+        }
+      },
+      "detailed": {
+        "traditionalBurial": {
+          "Region": "\"NE\"",
+          "Basic_Services": 2340,
+          "Pricing_Transfer_Home": 336,
+          "Pricing_Embaliming": 769,
+          "Pricing_Dressing_Casketing": 297,
+          "Pricing_Viewing": 401,
+          "Pricing_Funeral": 534,
+          "Pricing_Hearse": 283,
+          "Pricing_Utility_Vehicle": 160,
+          "Max_Basic_Services": 6114,
+          "Max_Pricing_Transfer_Home": 575,
+          "Max_Pricing_Embaliming": 1500,
+          "Max_Pricing_Dressing_Casketing": 550,
+          "Max_Pricing_Viewing": 695,
+          "Max_Pricing_Funeral": 850,
+          "Max_Pricing_Hearse": 425,
+          "Max_Pricing_Utility_Vehicle": 495,
+          "Min_Basic_Services": 950,
+          "Min_Pricing_Transfer_Home": 90,
+          "Min_Pricing_Embaliming": 300,
+          "Min_Pricing_Dressing_Casketing": 95,
+          "Min_Pricing_Viewing": 100,
+          "Min_Pricing_Funeral": 145,
+          "Min_Pricing_Hearse": 120,
+          "Min_Pricing_Utility_Vehicle": 50,
+          "MedianPricedCasketAverage": 3500
+        },
+        "fullCremation": {
+          "Region": "\"NE\"",
+          "Pricing_Base_Services": 2340,
+          "Pricing_Transfer_Home": 336,
+          "Pricing_Embaliming": 769,
+          "Pricing_Dressing_Casketing": 297,
+          "Pricing_Viewing": 401,
+          "Pricing_Funeral": 534,
+          "Pricing_Crematory_Fee": 535,
+          "Pricing_Transfer_Crematory": 117,
+          "Max_Pricing_Base_Services": 6114,
+          "Max_Pricing_Transfer_Home": 575,
+          "Max_Pricing_Embaliming": 1500,
+          "Max_Pricing_Dressing_Casketing": 550,
+          "Max_Pricing_Viewing": 695,
+          "Max_Pricing_Funeral": 850,
+          "Max_Pricing_Crematory_Fee": 1225,
+          "Max_Pricing_Transfer_Crematory": 535,
+          "Min_Pricing_Base_Services": 950,
+          "Min_Pricing_Transfer_Home": 90,
+          "Min_Pricing_Embaliming": 300,
+          "Min_Pricing_Dressing_Casketing": 95,
+          "Min_Pricing_Viewing": 100,
+          "Min_Pricing_Funeral": 145,
+          "Min_Pricing_Crematory_Fee": 250,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "CremationCasketAverage": 1200
+        },
+        "affordableBurial": {
+          "Region": "\"NE\"",
+          "Pricing_Immediate_Burial": 2967,
+          "Max_Pricing_Immediate_Burial": 5618,
+          "Min_Pricing_Immediate_Burial": 795,
+          "BasicCasket": 2500
+        },
+        "directCremation": {
+          "Region": "\"NE\"",
+          "Pricing_Direct_Cremation": 2856,
+          "Pricing_Transfer_Crematory": 7,
+          "Pricing_Crematory_Fee": 95,
+          "Max_Pricing_Direct_Cremation": 4755,
+          "Max_Pricing_Transfer_Crematory": 195,
+          "Max_Pricing_Crematory_Fee": 995,
+          "Min_Pricing_Direct_Cremation": 795,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "Min_Pricing_Crematory_Fee": 0
+        }
+      }
+    },
+    "NH": {
+      "code": "NH",
+      "name": "New Hampshire",
+      "sourceUrl": "https://www.funeralocity.com/average-funeral-price/nh",
+      "short": {
+        "fullBurial": {
+          "Average": 8793,
+          "Min": 7095,
+          "Max": 11850,
+          "Rank": 17
+        },
+        "immediateBurial": {
+          "Average": 5339,
+          "Min": 3949,
+          "Max": 7295,
+          "Rank": 14
+        },
+        "fullCremation": {
+          "Average": 6409,
+          "Min": 4705,
+          "Max": 9640,
+          "Rank": 20
+        },
+        "directCremation": {
+          "Average": 2190,
+          "Min": 1275,
+          "Max": 4738,
+          "Rank": 27
+        }
+      },
+      "detailed": {
+        "traditionalBurial": {
+          "Region": "\"NH\"",
+          "Basic_Services": 2207,
+          "Pricing_Transfer_Home": 369,
+          "Pricing_Embaliming": 771,
+          "Pricing_Dressing_Casketing": 267,
+          "Pricing_Viewing": 512,
+          "Pricing_Funeral": 612,
+          "Pricing_Hearse": 349,
+          "Pricing_Utility_Vehicle": 207,
+          "Max_Basic_Services": 4385,
+          "Max_Pricing_Transfer_Home": 595,
+          "Max_Pricing_Embaliming": 1200,
+          "Max_Pricing_Dressing_Casketing": 495,
+          "Max_Pricing_Viewing": 950,
+          "Max_Pricing_Funeral": 995,
+          "Max_Pricing_Hearse": 500,
+          "Max_Pricing_Utility_Vehicle": 300,
+          "Min_Basic_Services": 1195,
+          "Min_Pricing_Transfer_Home": 150,
+          "Min_Pricing_Embaliming": 399,
+          "Min_Pricing_Dressing_Casketing": 48,
+          "Min_Pricing_Viewing": 150,
+          "Min_Pricing_Funeral": 300,
+          "Min_Pricing_Hearse": 150,
+          "Min_Pricing_Utility_Vehicle": 75,
+          "MedianPricedCasketAverage": 3500
+        },
+        "fullCremation": {
+          "Region": "\"NH\"",
+          "Pricing_Base_Services": 2207,
+          "Pricing_Transfer_Home": 369,
+          "Pricing_Embaliming": 771,
+          "Pricing_Dressing_Casketing": 267,
+          "Pricing_Viewing": 512,
+          "Pricing_Funeral": 612,
+          "Pricing_Crematory_Fee": 404,
+          "Pricing_Transfer_Crematory": 68,
+          "Max_Pricing_Base_Services": 4385,
+          "Max_Pricing_Transfer_Home": 595,
+          "Max_Pricing_Embaliming": 1200,
+          "Max_Pricing_Dressing_Casketing": 495,
+          "Max_Pricing_Viewing": 950,
+          "Max_Pricing_Funeral": 995,
+          "Max_Pricing_Crematory_Fee": 895,
+          "Max_Pricing_Transfer_Crematory": 395,
+          "Min_Pricing_Base_Services": 1195,
+          "Min_Pricing_Transfer_Home": 150,
+          "Min_Pricing_Embaliming": 399,
+          "Min_Pricing_Dressing_Casketing": 48,
+          "Min_Pricing_Viewing": 150,
+          "Min_Pricing_Funeral": 300,
+          "Min_Pricing_Crematory_Fee": 245,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "CremationCasketAverage": 1200
+        },
+        "affordableBurial": {
+          "Region": "\"NH\"",
+          "Pricing_Immediate_Burial": 2839,
+          "Max_Pricing_Immediate_Burial": 4795,
+          "Min_Pricing_Immediate_Burial": 1449,
+          "BasicCasket": 2500
+        },
+        "directCremation": {
+          "Region": "\"NH\"",
+          "Pricing_Direct_Cremation": 2141,
+          "Pricing_Transfer_Crematory": 0,
+          "Pricing_Crematory_Fee": 50,
+          "Max_Pricing_Direct_Cremation": 4738,
+          "Max_Pricing_Transfer_Crematory": 0,
+          "Max_Pricing_Crematory_Fee": 450,
+          "Min_Pricing_Direct_Cremation": 995,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "Min_Pricing_Crematory_Fee": 0
+        }
+      }
+    },
+    "NJ": {
+      "code": "NJ",
+      "name": "New Jersey",
+      "sourceUrl": "https://www.funeralocity.com/average-funeral-price/nj",
+      "short": {
+        "fullBurial": {
+          "Average": 9451,
+          "Min": 5720,
+          "Max": 15395,
+          "Rank": 5
+        },
+        "immediateBurial": {
+          "Average": 5417,
+          "Min": 3250,
+          "Max": 8400,
+          "Rank": 12
+        },
+        "fullCremation": {
+          "Average": 6864,
+          "Min": 3205,
+          "Max": 12465,
+          "Rank": 7
+        },
+        "directCremation": {
+          "Average": 2519,
+          "Min": 786,
+          "Max": 5810,
+          "Rank": 14
+        }
+      },
+      "detailed": {
+        "traditionalBurial": {
+          "Region": "\"NJ\"",
+          "Basic_Services": 2162,
+          "Pricing_Transfer_Home": 406,
+          "Pricing_Embaliming": 950,
+          "Pricing_Dressing_Casketing": 423,
+          "Pricing_Viewing": 650,
+          "Pricing_Funeral": 603,
+          "Pricing_Hearse": 444,
+          "Pricing_Utility_Vehicle": 312,
+          "Max_Basic_Services": 4845,
+          "Max_Pricing_Transfer_Home": 795,
+          "Max_Pricing_Embaliming": 2800,
+          "Max_Pricing_Dressing_Casketing": 1595,
+          "Max_Pricing_Viewing": 2360,
+          "Max_Pricing_Funeral": 2500,
+          "Max_Pricing_Hearse": 1095,
+          "Max_Pricing_Utility_Vehicle": 995,
+          "Min_Basic_Services": 350,
+          "Min_Pricing_Transfer_Home": 75,
+          "Min_Pricing_Embaliming": 0,
+          "Min_Pricing_Dressing_Casketing": 50,
+          "Min_Pricing_Viewing": 0,
+          "Min_Pricing_Funeral": 95,
+          "Min_Pricing_Hearse": 150,
+          "Min_Pricing_Utility_Vehicle": 65,
+          "MedianPricedCasketAverage": 3500
+        },
+        "fullCremation": {
+          "Region": "\"NJ\"",
+          "Pricing_Base_Services": 2159,
+          "Pricing_Transfer_Home": 406,
+          "Pricing_Embaliming": 952,
+          "Pricing_Dressing_Casketing": 423,
+          "Pricing_Viewing": 652,
+          "Pricing_Funeral": 602,
+          "Pricing_Crematory_Fee": 316,
+          "Pricing_Transfer_Crematory": 154,
+          "Max_Pricing_Base_Services": 4845,
+          "Max_Pricing_Transfer_Home": 795,
+          "Max_Pricing_Embaliming": 2800,
+          "Max_Pricing_Dressing_Casketing": 1595,
+          "Max_Pricing_Viewing": 2360,
+          "Max_Pricing_Funeral": 2500,
+          "Max_Pricing_Crematory_Fee": 600,
+          "Max_Pricing_Transfer_Crematory": 1095,
+          "Min_Pricing_Base_Services": 350,
+          "Min_Pricing_Transfer_Home": 75,
+          "Min_Pricing_Embaliming": 150,
+          "Min_Pricing_Dressing_Casketing": 50,
+          "Min_Pricing_Viewing": 90,
+          "Min_Pricing_Funeral": 95,
+          "Min_Pricing_Crematory_Fee": 130,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "CremationCasketAverage": 1200
+        },
+        "affordableBurial": {
+          "Region": "\"NJ\"",
+          "Pricing_Immediate_Burial": 2917,
+          "Max_Pricing_Immediate_Burial": 5900,
+          "Min_Pricing_Immediate_Burial": 750,
+          "BasicCasket": 2500
+        },
+        "directCremation": {
+          "Region": "\"NJ\"",
+          "Pricing_Direct_Cremation": 2269,
+          "Pricing_Transfer_Crematory": 6,
+          "Pricing_Crematory_Fee": 244,
+          "Max_Pricing_Direct_Cremation": 5610,
+          "Max_Pricing_Transfer_Crematory": 595,
+          "Max_Pricing_Crematory_Fee": 600,
+          "Min_Pricing_Direct_Cremation": 350,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "Min_Pricing_Crematory_Fee": 0
+        }
+      }
+    },
+    "NM": {
+      "code": "NM",
+      "name": "New Mexico",
+      "sourceUrl": "https://www.funeralocity.com/average-funeral-price/nm",
+      "short": {
+        "fullBurial": {
+          "Average": 7829,
+          "Min": 6070,
+          "Max": 9760,
+          "Rank": 45
+        },
+        "immediateBurial": {
+          "Average": 4757,
+          "Min": 3465,
+          "Max": 6495,
+          "Rank": 42
+        },
+        "fullCremation": {
+          "Average": 5588,
+          "Min": 3790,
+          "Max": 7325,
+          "Rank": 45
+        },
+        "directCremation": {
+          "Average": 1935,
+          "Min": 725,
+          "Max": 3700,
+          "Rank": 37
+        }
+      },
+      "detailed": {
+        "traditionalBurial": {
+          "Region": "\"NM\"",
+          "Basic_Services": 1769,
+          "Pricing_Transfer_Home": 350,
+          "Pricing_Embaliming": 661,
+          "Pricing_Dressing_Casketing": 230,
+          "Pricing_Viewing": 362,
+          "Pricing_Funeral": 488,
+          "Pricing_Hearse": 335,
+          "Pricing_Utility_Vehicle": 134,
+          "Max_Basic_Services": 2605,
+          "Max_Pricing_Transfer_Home": 595,
+          "Max_Pricing_Embaliming": 995,
+          "Max_Pricing_Dressing_Casketing": 315,
+          "Max_Pricing_Viewing": 600,
+          "Max_Pricing_Funeral": 800,
+          "Max_Pricing_Hearse": 600,
+          "Max_Pricing_Utility_Vehicle": 300,
+          "Min_Basic_Services": 750,
+          "Min_Pricing_Transfer_Home": 150,
+          "Min_Pricing_Embaliming": 400,
+          "Min_Pricing_Dressing_Casketing": 90,
+          "Min_Pricing_Viewing": 25,
+          "Min_Pricing_Funeral": 100,
+          "Min_Pricing_Hearse": 150,
+          "Min_Pricing_Utility_Vehicle": 55,
+          "MedianPricedCasketAverage": 3500
+        },
+        "fullCremation": {
+          "Region": "\"NM\"",
+          "Pricing_Base_Services": 1769,
+          "Pricing_Transfer_Home": 350,
+          "Pricing_Embaliming": 661,
+          "Pricing_Dressing_Casketing": 230,
+          "Pricing_Viewing": 362,
+          "Pricing_Funeral": 488,
+          "Pricing_Crematory_Fee": 427,
+          "Pricing_Transfer_Crematory": 102,
+          "Max_Pricing_Base_Services": 2605,
+          "Max_Pricing_Transfer_Home": 595,
+          "Max_Pricing_Embaliming": 995,
+          "Max_Pricing_Dressing_Casketing": 315,
+          "Max_Pricing_Viewing": 600,
+          "Max_Pricing_Funeral": 800,
+          "Max_Pricing_Crematory_Fee": 794,
+          "Max_Pricing_Transfer_Crematory": 475,
+          "Min_Pricing_Base_Services": 750,
+          "Min_Pricing_Transfer_Home": 150,
+          "Min_Pricing_Embaliming": 400,
+          "Min_Pricing_Dressing_Casketing": 90,
+          "Min_Pricing_Viewing": 25,
+          "Min_Pricing_Funeral": 100,
+          "Min_Pricing_Crematory_Fee": 230,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "CremationCasketAverage": 1200
+        },
+        "affordableBurial": {
+          "Region": "\"NM\"",
+          "Pricing_Immediate_Burial": 2257,
+          "Max_Pricing_Immediate_Burial": 3995,
+          "Min_Pricing_Immediate_Burial": 965,
+          "BasicCasket": 2500
+        },
+        "directCremation": {
+          "Region": "\"NM\"",
+          "Pricing_Direct_Cremation": 1849,
+          "Pricing_Transfer_Crematory": 19,
+          "Pricing_Crematory_Fee": 68,
+          "Max_Pricing_Direct_Cremation": 3200,
+          "Max_Pricing_Transfer_Crematory": 295,
+          "Max_Pricing_Crematory_Fee": 530,
+          "Min_Pricing_Direct_Cremation": 725,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "Min_Pricing_Crematory_Fee": 0
+        }
+      }
+    },
+    "NV": {
+      "code": "NV",
+      "name": "Nevada",
+      "sourceUrl": "https://www.funeralocity.com/average-funeral-price/nv",
+      "short": {
+        "fullBurial": {
+          "Average": 8538,
+          "Min": 6460,
+          "Max": 11355,
+          "Rank": 26
+        },
+        "immediateBurial": {
+          "Average": 4982,
+          "Min": 3495,
+          "Max": 7095,
+          "Rank": 33
+        },
+        "fullCremation": {
+          "Average": 6095,
+          "Min": 4125,
+          "Max": 8865,
+          "Rank": 30
+        },
+        "directCremation": {
+          "Average": 1467,
+          "Min": 559,
+          "Max": 2370,
+          "Rank": 50
+        }
+      },
+      "detailed": {
+        "traditionalBurial": {
+          "Region": "\"NV\"",
+          "Basic_Services": 2187,
+          "Pricing_Transfer_Home": 395,
+          "Pricing_Embaliming": 697,
+          "Pricing_Dressing_Casketing": 276,
+          "Pricing_Viewing": 346,
+          "Pricing_Funeral": 570,
+          "Pricing_Hearse": 396,
+          "Pricing_Utility_Vehicle": 179,
+          "Max_Basic_Services": 3990,
+          "Max_Pricing_Transfer_Home": 695,
+          "Max_Pricing_Embaliming": 895,
+          "Max_Pricing_Dressing_Casketing": 400,
+          "Max_Pricing_Viewing": 650,
+          "Max_Pricing_Funeral": 995,
+          "Max_Pricing_Hearse": 671,
+          "Max_Pricing_Utility_Vehicle": 405,
+          "Min_Basic_Services": 695,
+          "Min_Pricing_Transfer_Home": 195,
+          "Min_Pricing_Embaliming": 375,
+          "Min_Pricing_Dressing_Casketing": 110,
+          "Min_Pricing_Viewing": 100,
+          "Min_Pricing_Funeral": 200,
+          "Min_Pricing_Hearse": 125,
+          "Min_Pricing_Utility_Vehicle": 90,
+          "MedianPricedCasketAverage": 3500
+        },
+        "fullCremation": {
+          "Region": "\"NV\"",
+          "Pricing_Base_Services": 2187,
+          "Pricing_Transfer_Home": 395,
+          "Pricing_Embaliming": 697,
+          "Pricing_Dressing_Casketing": 276,
+          "Pricing_Viewing": 346,
+          "Pricing_Funeral": 570,
+          "Pricing_Crematory_Fee": 394,
+          "Pricing_Transfer_Crematory": 38,
+          "Max_Pricing_Base_Services": 3990,
+          "Max_Pricing_Transfer_Home": 695,
+          "Max_Pricing_Embaliming": 895,
+          "Max_Pricing_Dressing_Casketing": 400,
+          "Max_Pricing_Viewing": 650,
+          "Max_Pricing_Funeral": 995,
+          "Max_Pricing_Crematory_Fee": 1000,
+          "Max_Pricing_Transfer_Crematory": 450,
+          "Min_Pricing_Base_Services": 695,
+          "Min_Pricing_Transfer_Home": 195,
+          "Min_Pricing_Embaliming": 375,
+          "Min_Pricing_Dressing_Casketing": 110,
+          "Min_Pricing_Viewing": 100,
+          "Min_Pricing_Funeral": 200,
+          "Min_Pricing_Crematory_Fee": 90,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "CremationCasketAverage": 1200
+        },
+        "affordableBurial": {
+          "Region": "\"NV\"",
+          "Pricing_Immediate_Burial": 2474,
+          "Max_Pricing_Immediate_Burial": 4595,
+          "Min_Pricing_Immediate_Burial": 995,
+          "BasicCasket": 2500
+        },
+        "directCremation": {
+          "Region": "\"NV\"",
+          "Pricing_Direct_Cremation": 1432,
+          "Pricing_Transfer_Crematory": 10,
+          "Pricing_Crematory_Fee": 18,
+          "Max_Pricing_Direct_Cremation": 2370,
+          "Max_Pricing_Transfer_Crematory": 295,
+          "Max_Pricing_Crematory_Fee": 425,
+          "Min_Pricing_Direct_Cremation": 559,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "Min_Pricing_Crematory_Fee": 0
+        }
+      }
+    },
+    "NY": {
+      "code": "NY",
+      "name": "New York",
+      "sourceUrl": "https://www.funeralocity.com/average-funeral-price/ny",
+      "short": {
+        "fullBurial": {
+          "Average": 8836,
+          "Min": 4900,
+          "Max": 20625,
+          "Rank": 15
+        },
+        "immediateBurial": {
+          "Average": 5005,
+          "Min": 3055,
+          "Max": 11800,
+          "Rank": 30
+        },
+        "fullCremation": {
+          "Average": 6289,
+          "Min": 2555,
+          "Max": 17225,
+          "Rank": 25
+        },
+        "directCremation": {
+          "Average": 2395,
+          "Min": 555,
+          "Max": 9800,
+          "Rank": 19
+        }
+      },
+      "detailed": {
+        "traditionalBurial": {
+          "Region": "\"NY\"",
+          "Basic_Services": 1552,
+          "Pricing_Transfer_Home": 453,
+          "Pricing_Embaliming": 820,
+          "Pricing_Dressing_Casketing": 186,
+          "Pricing_Viewing": 807,
+          "Pricing_Funeral": 711,
+          "Pricing_Hearse": 466,
+          "Pricing_Utility_Vehicle": 340,
+          "Max_Basic_Services": 9000,
+          "Max_Pricing_Transfer_Home": 1100,
+          "Max_Pricing_Embaliming": 2650,
+          "Max_Pricing_Dressing_Casketing": 1195,
+          "Max_Pricing_Viewing": 2500,
+          "Max_Pricing_Funeral": 2650,
+          "Max_Pricing_Hearse": 975,
+          "Max_Pricing_Utility_Vehicle": 895,
+          "Min_Basic_Services": 10,
+          "Min_Pricing_Transfer_Home": 50,
+          "Min_Pricing_Embaliming": 0,
+          "Min_Pricing_Dressing_Casketing": 10,
+          "Min_Pricing_Viewing": 0,
+          "Min_Pricing_Funeral": 0,
+          "Min_Pricing_Hearse": 50,
+          "Min_Pricing_Utility_Vehicle": 0,
+          "MedianPricedCasketAverage": 3500
+        },
+        "fullCremation": {
+          "Region": "\"NY\"",
+          "Pricing_Base_Services": 1552,
+          "Pricing_Transfer_Home": 452,
+          "Pricing_Embaliming": 821,
+          "Pricing_Dressing_Casketing": 187,
+          "Pricing_Viewing": 808,
+          "Pricing_Funeral": 711,
+          "Pricing_Crematory_Fee": 432,
+          "Pricing_Transfer_Crematory": 125,
+          "Max_Pricing_Base_Services": 9000,
+          "Max_Pricing_Transfer_Home": 1100,
+          "Max_Pricing_Embaliming": 2650,
+          "Max_Pricing_Dressing_Casketing": 1195,
+          "Max_Pricing_Viewing": 2500,
+          "Max_Pricing_Funeral": 2650,
+          "Max_Pricing_Crematory_Fee": 2500,
+          "Max_Pricing_Transfer_Crematory": 895,
+          "Min_Pricing_Base_Services": 10,
+          "Min_Pricing_Transfer_Home": 50,
+          "Min_Pricing_Embaliming": 100,
+          "Min_Pricing_Dressing_Casketing": 10,
+          "Min_Pricing_Viewing": 50,
+          "Min_Pricing_Funeral": 0,
+          "Min_Pricing_Crematory_Fee": 150,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "CremationCasketAverage": 1200
+        },
+        "affordableBurial": {
+          "Region": "\"NY\"",
+          "Pricing_Immediate_Burial": 2504,
+          "Max_Pricing_Immediate_Burial": 9300,
+          "Min_Pricing_Immediate_Burial": 555,
+          "BasicCasket": 2500
+        },
+        "directCremation": {
+          "Region": "\"NY\"",
+          "Pricing_Direct_Cremation": 2014,
+          "Pricing_Transfer_Crematory": 3,
+          "Pricing_Crematory_Fee": 375,
+          "Max_Pricing_Direct_Cremation": 9300,
+          "Max_Pricing_Transfer_Crematory": 795,
+          "Max_Pricing_Crematory_Fee": 2500,
+          "Min_Pricing_Direct_Cremation": 240,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "Min_Pricing_Crematory_Fee": 0
+        }
+      }
+    },
+    "OH": {
+      "code": "OH",
+      "name": "Ohio",
+      "sourceUrl": "https://www.funeralocity.com/average-funeral-price/oh",
+      "short": {
+        "fullBurial": {
+          "Average": 8018,
+          "Min": 5285,
+          "Max": 11335,
+          "Rank": 42
+        },
+        "immediateBurial": {
+          "Average": 4949,
+          "Min": 2830,
+          "Max": 7908,
+          "Rank": 34
+        },
+        "fullCremation": {
+          "Average": 5666,
+          "Min": 3335,
+          "Max": 9185,
+          "Rank": 44
+        },
+        "directCremation": {
+          "Average": 2056,
+          "Min": 575,
+          "Max": 4375,
+          "Rank": 30
+        }
+      },
+      "detailed": {
+        "traditionalBurial": {
+          "Region": "\"OH\"",
+          "Basic_Services": 1929,
+          "Pricing_Transfer_Home": 293,
+          "Pricing_Embaliming": 664,
+          "Pricing_Dressing_Casketing": 240,
+          "Pricing_Viewing": 457,
+          "Pricing_Funeral": 474,
+          "Pricing_Hearse": 307,
+          "Pricing_Utility_Vehicle": 146,
+          "Max_Basic_Services": 4995,
+          "Max_Pricing_Transfer_Home": 695,
+          "Max_Pricing_Embaliming": 1295,
+          "Max_Pricing_Dressing_Casketing": 850,
+          "Max_Pricing_Viewing": 1595,
+          "Max_Pricing_Funeral": 3145,
+          "Max_Pricing_Hearse": 600,
+          "Max_Pricing_Utility_Vehicle": 450,
+          "Min_Basic_Services": 100,
+          "Min_Pricing_Transfer_Home": 50,
+          "Min_Pricing_Embaliming": 125,
+          "Min_Pricing_Dressing_Casketing": 32,
+          "Min_Pricing_Viewing": 90,
+          "Min_Pricing_Funeral": 150,
+          "Min_Pricing_Hearse": 50,
+          "Min_Pricing_Utility_Vehicle": 6,
+          "MedianPricedCasketAverage": 3500
+        },
+        "fullCremation": {
+          "Region": "\"OH\"",
+          "Pricing_Base_Services": 1929,
+          "Pricing_Transfer_Home": 294,
+          "Pricing_Embaliming": 664,
+          "Pricing_Dressing_Casketing": 240,
+          "Pricing_Viewing": 457,
+          "Pricing_Funeral": 474,
+          "Pricing_Crematory_Fee": 344,
+          "Pricing_Transfer_Crematory": 57,
+          "Max_Pricing_Base_Services": 4995,
+          "Max_Pricing_Transfer_Home": 695,
+          "Max_Pricing_Embaliming": 1295,
+          "Max_Pricing_Dressing_Casketing": 850,
+          "Max_Pricing_Viewing": 1595,
+          "Max_Pricing_Funeral": 3145,
+          "Max_Pricing_Crematory_Fee": 2500,
+          "Max_Pricing_Transfer_Crematory": 595,
+          "Min_Pricing_Base_Services": 100,
+          "Min_Pricing_Transfer_Home": 50,
+          "Min_Pricing_Embaliming": 125,
+          "Min_Pricing_Dressing_Casketing": 32,
+          "Min_Pricing_Viewing": 90,
+          "Min_Pricing_Funeral": 150,
+          "Min_Pricing_Crematory_Fee": 100,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "CremationCasketAverage": 1200
+        },
+        "affordableBurial": {
+          "Region": "\"OH\"",
+          "Pricing_Immediate_Burial": 2448,
+          "Max_Pricing_Immediate_Burial": 5408,
+          "Min_Pricing_Immediate_Burial": 330,
+          "BasicCasket": 2500
+        },
+        "directCremation": {
+          "Region": "\"OH\"",
+          "Pricing_Direct_Cremation": 1972,
+          "Pricing_Transfer_Crematory": 2,
+          "Pricing_Crematory_Fee": 76,
+          "Max_Pricing_Direct_Cremation": 4090,
+          "Max_Pricing_Transfer_Crematory": 395,
+          "Max_Pricing_Crematory_Fee": 995,
+          "Min_Pricing_Direct_Cremation": 575,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "Min_Pricing_Crematory_Fee": 0
+        }
+      }
+    },
+    "OK": {
+      "code": "OK",
+      "name": "Oklahoma",
+      "sourceUrl": "https://www.funeralocity.com/average-funeral-price/ok",
+      "short": {
+        "fullBurial": {
+          "Average": 7966,
+          "Min": 5645,
+          "Max": 10865,
+          "Rank": 44
+        },
+        "immediateBurial": {
+          "Average": 4902,
+          "Min": 3000,
+          "Max": 7015,
+          "Rank": 37
+        },
+        "fullCremation": {
+          "Average": 5692,
+          "Min": 3305,
+          "Max": 8600,
+          "Rank": 42
+        },
+        "directCremation": {
+          "Average": 2159,
+          "Min": 695,
+          "Max": 4980,
+          "Rank": 28
+        }
+      },
+      "detailed": {
+        "traditionalBurial": {
+          "Region": "\"OK\"",
+          "Basic_Services": 1888,
+          "Pricing_Transfer_Home": 329,
+          "Pricing_Embaliming": 752,
+          "Pricing_Dressing_Casketing": 234,
+          "Pricing_Viewing": 305,
+          "Pricing_Funeral": 526,
+          "Pricing_Hearse": 302,
+          "Pricing_Utility_Vehicle": 140,
+          "Max_Basic_Services": 4175,
+          "Max_Pricing_Transfer_Home": 995,
+          "Max_Pricing_Embaliming": 1595,
+          "Max_Pricing_Dressing_Casketing": 995,
+          "Max_Pricing_Viewing": 995,
+          "Max_Pricing_Funeral": 1595,
+          "Max_Pricing_Hearse": 695,
+          "Max_Pricing_Utility_Vehicle": 350,
+          "Min_Basic_Services": 135,
+          "Min_Pricing_Transfer_Home": 50,
+          "Min_Pricing_Embaliming": 75,
+          "Min_Pricing_Dressing_Casketing": 50,
+          "Min_Pricing_Viewing": 50,
+          "Min_Pricing_Funeral": 150,
+          "Min_Pricing_Hearse": 75,
+          "Min_Pricing_Utility_Vehicle": 40,
+          "MedianPricedCasketAverage": 3500
+        },
+        "fullCremation": {
+          "Region": "\"OK\"",
+          "Pricing_Base_Services": 1888,
+          "Pricing_Transfer_Home": 329,
+          "Pricing_Embaliming": 752,
+          "Pricing_Dressing_Casketing": 234,
+          "Pricing_Viewing": 305,
+          "Pricing_Funeral": 526,
+          "Pricing_Crematory_Fee": 394,
+          "Pricing_Transfer_Crematory": 72,
+          "Max_Pricing_Base_Services": 4175,
+          "Max_Pricing_Transfer_Home": 995,
+          "Max_Pricing_Embaliming": 1595,
+          "Max_Pricing_Dressing_Casketing": 995,
+          "Max_Pricing_Viewing": 995,
+          "Max_Pricing_Funeral": 1595,
+          "Max_Pricing_Crematory_Fee": 1500,
+          "Max_Pricing_Transfer_Crematory": 425,
+          "Min_Pricing_Base_Services": 135,
+          "Min_Pricing_Transfer_Home": 50,
+          "Min_Pricing_Embaliming": 75,
+          "Min_Pricing_Dressing_Casketing": 50,
+          "Min_Pricing_Viewing": 50,
+          "Min_Pricing_Funeral": 150,
+          "Min_Pricing_Crematory_Fee": 45,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "CremationCasketAverage": 1200
+        },
+        "affordableBurial": {
+          "Region": "\"OK\"",
+          "Pricing_Immediate_Burial": 2418,
+          "Max_Pricing_Immediate_Burial": 4825,
+          "Min_Pricing_Immediate_Burial": 500,
+          "BasicCasket": 2500
+        },
+        "directCremation": {
+          "Region": "\"OK\"",
+          "Pricing_Direct_Cremation": 2103,
+          "Pricing_Transfer_Crematory": 3,
+          "Pricing_Crematory_Fee": 57,
+          "Max_Pricing_Direct_Cremation": 4620,
+          "Max_Pricing_Transfer_Crematory": 395,
+          "Max_Pricing_Crematory_Fee": 600,
+          "Min_Pricing_Direct_Cremation": 695,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "Min_Pricing_Crematory_Fee": 0
+        }
+      }
+    },
+    "OR": {
+      "code": "OR",
+      "name": "Oregon",
+      "sourceUrl": "https://www.funeralocity.com/average-funeral-price/or",
+      "short": {
+        "fullBurial": {
+          "Average": 7554,
+          "Min": 5455,
+          "Max": 9880,
+          "Rank": 51
+        },
+        "immediateBurial": {
+          "Average": 4486,
+          "Min": 3195,
+          "Max": 7405,
+          "Rank": 48
+        },
+        "fullCremation": {
+          "Average": 5163,
+          "Min": 2845,
+          "Max": 7395,
+          "Rank": 51
+        },
+        "directCremation": {
+          "Average": 1332,
+          "Min": 595,
+          "Max": 2440,
+          "Rank": 51
+        }
+      },
+      "detailed": {
+        "traditionalBurial": {
+          "Region": "\"OR\"",
+          "Basic_Services": 1578,
+          "Pricing_Transfer_Home": 399,
+          "Pricing_Embaliming": 506,
+          "Pricing_Dressing_Casketing": 222,
+          "Pricing_Viewing": 262,
+          "Pricing_Funeral": 573,
+          "Pricing_Hearse": 329,
+          "Pricing_Utility_Vehicle": 193,
+          "Max_Basic_Services": 3465,
+          "Max_Pricing_Transfer_Home": 750,
+          "Max_Pricing_Embaliming": 895,
+          "Max_Pricing_Dressing_Casketing": 400,
+          "Max_Pricing_Viewing": 595,
+          "Max_Pricing_Funeral": 3300,
+          "Max_Pricing_Hearse": 575,
+          "Max_Pricing_Utility_Vehicle": 400,
+          "Min_Basic_Services": 150,
+          "Min_Pricing_Transfer_Home": 175,
+          "Min_Pricing_Embaliming": 250,
+          "Min_Pricing_Dressing_Casketing": 55,
+          "Min_Pricing_Viewing": 75,
+          "Min_Pricing_Funeral": 125,
+          "Min_Pricing_Hearse": 70,
+          "Min_Pricing_Utility_Vehicle": 0,
+          "MedianPricedCasketAverage": 3500
+        },
+        "fullCremation": {
+          "Region": "\"OR\"",
+          "Pricing_Base_Services": 1566,
+          "Pricing_Transfer_Home": 396,
+          "Pricing_Embaliming": 506,
+          "Pricing_Dressing_Casketing": 219,
+          "Pricing_Viewing": 277,
+          "Pricing_Funeral": 572,
+          "Pricing_Crematory_Fee": 389,
+          "Pricing_Transfer_Crematory": 46,
+          "Max_Pricing_Base_Services": 3465,
+          "Max_Pricing_Transfer_Home": 750,
+          "Max_Pricing_Embaliming": 895,
+          "Max_Pricing_Dressing_Casketing": 400,
+          "Max_Pricing_Viewing": 695,
+          "Max_Pricing_Funeral": 3300,
+          "Max_Pricing_Crematory_Fee": 850,
+          "Max_Pricing_Transfer_Crematory": 350,
+          "Min_Pricing_Base_Services": 150,
+          "Min_Pricing_Transfer_Home": 175,
+          "Min_Pricing_Embaliming": 250,
+          "Min_Pricing_Dressing_Casketing": 55,
+          "Min_Pricing_Viewing": 75,
+          "Min_Pricing_Funeral": 125,
+          "Min_Pricing_Crematory_Fee": 140,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "CremationCasketAverage": 1200
+        },
+        "affordableBurial": {
+          "Region": "\"OR\"",
+          "Pricing_Immediate_Burial": 1981,
+          "Max_Pricing_Immediate_Burial": 4905,
+          "Min_Pricing_Immediate_Burial": 695,
+          "BasicCasket": 2500
+        },
+        "directCremation": {
+          "Region": "\"OR\"",
+          "Pricing_Direct_Cremation": 1325,
+          "Pricing_Transfer_Crematory": 0,
+          "Pricing_Crematory_Fee": 5,
+          "Max_Pricing_Direct_Cremation": 2380,
+          "Max_Pricing_Transfer_Crematory": 0,
+          "Max_Pricing_Crematory_Fee": 295,
+          "Min_Pricing_Direct_Cremation": 495,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "Min_Pricing_Crematory_Fee": 0
+        }
+      }
+    },
+    "PA": {
+      "code": "PA",
+      "name": "Pennsylvania",
+      "sourceUrl": "https://www.funeralocity.com/average-funeral-price/pa",
+      "short": {
+        "fullBurial": {
+          "Average": 8820,
+          "Min": 5810,
+          "Max": 18950,
+          "Rank": 16
+        },
+        "immediateBurial": {
+          "Average": 5291,
+          "Min": 2850,
+          "Max": 10180,
+          "Rank": 16
+        },
+        "fullCremation": {
+          "Average": 6540,
+          "Min": 3600,
+          "Max": 15570,
+          "Rank": 15
+        },
+        "directCremation": {
+          "Average": 2461,
+          "Min": 500,
+          "Max": 6360,
+          "Rank": 17
+        }
+      },
+      "detailed": {
+        "traditionalBurial": {
+          "Region": "\"PA\"",
+          "Basic_Services": 2322,
+          "Pricing_Transfer_Home": 335,
+          "Pricing_Embaliming": 829,
+          "Pricing_Dressing_Casketing": 302,
+          "Pricing_Viewing": 487,
+          "Pricing_Funeral": 540,
+          "Pricing_Hearse": 342,
+          "Pricing_Utility_Vehicle": 162,
+          "Max_Basic_Services": 5000,
+          "Max_Pricing_Transfer_Home": 850,
+          "Max_Pricing_Embaliming": 3500,
+          "Max_Pricing_Dressing_Casketing": 1650,
+          "Max_Pricing_Viewing": 2495,
+          "Max_Pricing_Funeral": 2885,
+          "Max_Pricing_Hearse": 900,
+          "Max_Pricing_Utility_Vehicle": 700,
+          "Min_Basic_Services": 369,
+          "Min_Pricing_Transfer_Home": 25,
+          "Min_Pricing_Embaliming": 200,
+          "Min_Pricing_Dressing_Casketing": 45,
+          "Min_Pricing_Viewing": 39,
+          "Min_Pricing_Funeral": 100,
+          "Min_Pricing_Hearse": 100,
+          "Min_Pricing_Utility_Vehicle": 0,
+          "MedianPricedCasketAverage": 3500
+        },
+        "fullCremation": {
+          "Region": "\"PA\"",
+          "Pricing_Base_Services": 2322,
+          "Pricing_Transfer_Home": 335,
+          "Pricing_Embaliming": 829,
+          "Pricing_Dressing_Casketing": 302,
+          "Pricing_Viewing": 488,
+          "Pricing_Funeral": 540,
+          "Pricing_Crematory_Fee": 399,
+          "Pricing_Transfer_Crematory": 125,
+          "Max_Pricing_Base_Services": 5000,
+          "Max_Pricing_Transfer_Home": 850,
+          "Max_Pricing_Embaliming": 3500,
+          "Max_Pricing_Dressing_Casketing": 1650,
+          "Max_Pricing_Viewing": 2495,
+          "Max_Pricing_Funeral": 2885,
+          "Max_Pricing_Crematory_Fee": 1960,
+          "Max_Pricing_Transfer_Crematory": 600,
+          "Min_Pricing_Base_Services": 369,
+          "Min_Pricing_Transfer_Home": 25,
+          "Min_Pricing_Embaliming": 200,
+          "Min_Pricing_Dressing_Casketing": 45,
+          "Min_Pricing_Viewing": 39,
+          "Min_Pricing_Funeral": 100,
+          "Min_Pricing_Crematory_Fee": 175,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "CremationCasketAverage": 1200
+        },
+        "affordableBurial": {
+          "Region": "\"PA\"",
+          "Pricing_Immediate_Burial": 2791,
+          "Max_Pricing_Immediate_Burial": 7680,
+          "Min_Pricing_Immediate_Burial": 350,
+          "BasicCasket": 2500
+        },
+        "directCremation": {
+          "Region": "\"PA\"",
+          "Pricing_Direct_Cremation": 2394,
+          "Pricing_Transfer_Crematory": 2,
+          "Pricing_Crematory_Fee": 66,
+          "Max_Pricing_Direct_Cremation": 6360,
+          "Max_Pricing_Transfer_Crematory": 285,
+          "Max_Pricing_Crematory_Fee": 1250,
+          "Min_Pricing_Direct_Cremation": 500,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "Min_Pricing_Crematory_Fee": 0
+        }
+      }
+    },
+    "RI": {
+      "code": "RI",
+      "name": "Rhode Island",
+      "sourceUrl": "https://www.funeralocity.com/average-funeral-price/ri",
+      "short": {
+        "fullBurial": {
+          "Average": 9213,
+          "Min": 6900,
+          "Max": 10975,
+          "Rank": 7
+        },
+        "immediateBurial": {
+          "Average": 5243,
+          "Min": 4090,
+          "Max": 7395,
+          "Rank": 18
+        },
+        "fullCremation": {
+          "Average": 6765,
+          "Min": 4475,
+          "Max": 8630,
+          "Rank": 10
+        },
+        "directCremation": {
+          "Average": 2619,
+          "Min": 1320,
+          "Max": 5145,
+          "Rank": 10
+        }
+      },
+      "detailed": {
+        "traditionalBurial": {
+          "Region": "\"RI\"",
+          "Basic_Services": 2598,
+          "Pricing_Transfer_Home": 373,
+          "Pricing_Embaliming": 725,
+          "Pricing_Dressing_Casketing": 258,
+          "Pricing_Viewing": 527,
+          "Pricing_Funeral": 640,
+          "Pricing_Hearse": 370,
+          "Pricing_Utility_Vehicle": 223,
+          "Max_Basic_Services": 3895,
+          "Max_Pricing_Transfer_Home": 775,
+          "Max_Pricing_Embaliming": 1100,
+          "Max_Pricing_Dressing_Casketing": 500,
+          "Max_Pricing_Viewing": 975,
+          "Max_Pricing_Funeral": 1275,
+          "Max_Pricing_Hearse": 595,
+          "Max_Pricing_Utility_Vehicle": 400,
+          "Min_Basic_Services": 1550,
+          "Min_Pricing_Transfer_Home": 150,
+          "Min_Pricing_Embaliming": 375,
+          "Min_Pricing_Dressing_Casketing": 95,
+          "Min_Pricing_Viewing": 125,
+          "Min_Pricing_Funeral": 100,
+          "Min_Pricing_Hearse": 225,
+          "Min_Pricing_Utility_Vehicle": 100,
+          "MedianPricedCasketAverage": 3500
+        },
+        "fullCremation": {
+          "Region": "\"RI\"",
+          "Pricing_Base_Services": 2598,
+          "Pricing_Transfer_Home": 373,
+          "Pricing_Embaliming": 725,
+          "Pricing_Dressing_Casketing": 258,
+          "Pricing_Viewing": 527,
+          "Pricing_Funeral": 640,
+          "Pricing_Crematory_Fee": 347,
+          "Pricing_Transfer_Crematory": 98,
+          "Max_Pricing_Base_Services": 3895,
+          "Max_Pricing_Transfer_Home": 775,
+          "Max_Pricing_Embaliming": 1100,
+          "Max_Pricing_Dressing_Casketing": 500,
+          "Max_Pricing_Viewing": 975,
+          "Max_Pricing_Funeral": 1275,
+          "Max_Pricing_Crematory_Fee": 465,
+          "Max_Pricing_Transfer_Crematory": 395,
+          "Min_Pricing_Base_Services": 1550,
+          "Min_Pricing_Transfer_Home": 150,
+          "Min_Pricing_Embaliming": 375,
+          "Min_Pricing_Dressing_Casketing": 95,
+          "Min_Pricing_Viewing": 125,
+          "Min_Pricing_Funeral": 100,
+          "Min_Pricing_Crematory_Fee": 200,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "CremationCasketAverage": 1200
+        },
+        "affordableBurial": {
+          "Region": "\"RI\"",
+          "Pricing_Immediate_Burial": 2743,
+          "Max_Pricing_Immediate_Burial": 4895,
+          "Min_Pricing_Immediate_Burial": 1590,
+          "BasicCasket": 2500
+        },
+        "directCremation": {
+          "Region": "\"RI\"",
+          "Pricing_Direct_Cremation": 2505,
+          "Pricing_Transfer_Crematory": 9,
+          "Pricing_Crematory_Fee": 104,
+          "Max_Pricing_Direct_Cremation": 4870,
+          "Max_Pricing_Transfer_Crematory": 300,
+          "Max_Pricing_Crematory_Fee": 465,
+          "Min_Pricing_Direct_Cremation": 1300,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "Min_Pricing_Crematory_Fee": 0
+        }
+      }
+    },
+    "SC": {
+      "code": "SC",
+      "name": "South Carolina",
+      "sourceUrl": "https://www.funeralocity.com/average-funeral-price/sc",
+      "short": {
+        "fullBurial": {
+          "Average": 8270,
+          "Min": 5735,
+          "Max": 12675,
+          "Rank": 33
+        },
+        "immediateBurial": {
+          "Average": 4926,
+          "Min": 3060,
+          "Max": 7880,
+          "Rank": 35
+        },
+        "fullCremation": {
+          "Average": 6017,
+          "Min": 3385,
+          "Max": 9985,
+          "Rank": 32
+        },
+        "directCremation": {
+          "Average": 1911,
+          "Min": 275,
+          "Max": 4590,
+          "Rank": 39
+        }
+      },
+      "detailed": {
+        "traditionalBurial": {
+          "Region": "\"SC\"",
+          "Basic_Services": 2233,
+          "Pricing_Transfer_Home": 289,
+          "Pricing_Embaliming": 765,
+          "Pricing_Dressing_Casketing": 213,
+          "Pricing_Viewing": 349,
+          "Pricing_Funeral": 440,
+          "Pricing_Hearse": 311,
+          "Pricing_Utility_Vehicle": 169,
+          "Max_Basic_Services": 4920,
+          "Max_Pricing_Transfer_Home": 595,
+          "Max_Pricing_Embaliming": 1500,
+          "Max_Pricing_Dressing_Casketing": 500,
+          "Max_Pricing_Viewing": 995,
+          "Max_Pricing_Funeral": 1195,
+          "Max_Pricing_Hearse": 795,
+          "Max_Pricing_Utility_Vehicle": 495,
+          "Min_Basic_Services": 500,
+          "Min_Pricing_Transfer_Home": 75,
+          "Min_Pricing_Embaliming": 375,
+          "Min_Pricing_Dressing_Casketing": 20,
+          "Min_Pricing_Viewing": 100,
+          "Min_Pricing_Funeral": 100,
+          "Min_Pricing_Hearse": 100,
+          "Min_Pricing_Utility_Vehicle": 40,
+          "MedianPricedCasketAverage": 3500
+        },
+        "fullCremation": {
+          "Region": "\"SC\"",
+          "Pricing_Base_Services": 2233,
+          "Pricing_Transfer_Home": 289,
+          "Pricing_Embaliming": 765,
+          "Pricing_Dressing_Casketing": 213,
+          "Pricing_Viewing": 349,
+          "Pricing_Funeral": 440,
+          "Pricing_Crematory_Fee": 458,
+          "Pricing_Transfer_Crematory": 70,
+          "Max_Pricing_Base_Services": 4920,
+          "Max_Pricing_Transfer_Home": 595,
+          "Max_Pricing_Embaliming": 1500,
+          "Max_Pricing_Dressing_Casketing": 500,
+          "Max_Pricing_Viewing": 995,
+          "Max_Pricing_Funeral": 1195,
+          "Max_Pricing_Crematory_Fee": 950,
+          "Max_Pricing_Transfer_Crematory": 400,
+          "Min_Pricing_Base_Services": 500,
+          "Min_Pricing_Transfer_Home": 75,
+          "Min_Pricing_Embaliming": 375,
+          "Min_Pricing_Dressing_Casketing": 20,
+          "Min_Pricing_Viewing": 100,
+          "Min_Pricing_Funeral": 100,
+          "Min_Pricing_Crematory_Fee": 1,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "CremationCasketAverage": 1200
+        },
+        "affordableBurial": {
+          "Region": "\"SC\"",
+          "Pricing_Immediate_Burial": 2427,
+          "Max_Pricing_Immediate_Burial": 5380,
+          "Min_Pricing_Immediate_Burial": 560,
+          "BasicCasket": 2500
+        },
+        "directCremation": {
+          "Region": "\"SC\"",
+          "Pricing_Direct_Cremation": 1896,
+          "Pricing_Transfer_Crematory": 1,
+          "Pricing_Crematory_Fee": 10,
+          "Max_Pricing_Direct_Cremation": 4590,
+          "Max_Pricing_Transfer_Crematory": 175,
+          "Max_Pricing_Crematory_Fee": 700,
+          "Min_Pricing_Direct_Cremation": 275,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "Min_Pricing_Crematory_Fee": 0
+        }
+      }
+    },
+    "SD": {
+      "code": "SD",
+      "name": "South Dakota",
+      "sourceUrl": "https://www.funeralocity.com/average-funeral-price/sd",
+      "short": {
+        "fullBurial": {
+          "Average": 8614,
+          "Min": 6385,
+          "Max": 10305,
+          "Rank": 23
+        },
+        "immediateBurial": {
+          "Average": 5164,
+          "Min": 3775,
+          "Max": 7135,
+          "Rank": 23
+        },
+        "fullCremation": {
+          "Average": 6689,
+          "Min": 3955,
+          "Max": 8380,
+          "Rank": 13
+        },
+        "directCremation": {
+          "Average": 2826,
+          "Min": 1170,
+          "Max": 4450,
+          "Rank": 7
+        }
+      },
+      "detailed": {
+        "traditionalBurial": {
+          "Region": "\"SD\"",
+          "Basic_Services": 2268,
+          "Pricing_Transfer_Home": 306,
+          "Pricing_Embaliming": 845,
+          "Pricing_Dressing_Casketing": 348,
+          "Pricing_Viewing": 394,
+          "Pricing_Funeral": 524,
+          "Pricing_Hearse": 284,
+          "Pricing_Utility_Vehicle": 147,
+          "Max_Basic_Services": 4595,
+          "Max_Pricing_Transfer_Home": 495,
+          "Max_Pricing_Embaliming": 1470,
+          "Max_Pricing_Dressing_Casketing": 550,
+          "Max_Pricing_Viewing": 776,
+          "Max_Pricing_Funeral": 995,
+          "Max_Pricing_Hearse": 565,
+          "Max_Pricing_Utility_Vehicle": 335,
+          "Min_Basic_Services": 920,
+          "Min_Pricing_Transfer_Home": 145,
+          "Min_Pricing_Embaliming": 300,
+          "Min_Pricing_Dressing_Casketing": 50,
+          "Min_Pricing_Viewing": 100,
+          "Min_Pricing_Funeral": 275,
+          "Min_Pricing_Hearse": 95,
+          "Min_Pricing_Utility_Vehicle": 50,
+          "MedianPricedCasketAverage": 3500
+        },
+        "fullCremation": {
+          "Region": "\"SD\"",
+          "Pricing_Base_Services": 2268,
+          "Pricing_Transfer_Home": 306,
+          "Pricing_Embaliming": 845,
+          "Pricing_Dressing_Casketing": 348,
+          "Pricing_Viewing": 394,
+          "Pricing_Funeral": 524,
+          "Pricing_Crematory_Fee": 712,
+          "Pricing_Transfer_Crematory": 92,
+          "Max_Pricing_Base_Services": 4595,
+          "Max_Pricing_Transfer_Home": 495,
+          "Max_Pricing_Embaliming": 1470,
+          "Max_Pricing_Dressing_Casketing": 550,
+          "Max_Pricing_Viewing": 776,
+          "Max_Pricing_Funeral": 995,
+          "Max_Pricing_Crematory_Fee": 1295,
+          "Max_Pricing_Transfer_Crematory": 395,
+          "Min_Pricing_Base_Services": 920,
+          "Min_Pricing_Transfer_Home": 145,
+          "Min_Pricing_Embaliming": 300,
+          "Min_Pricing_Dressing_Casketing": 50,
+          "Min_Pricing_Viewing": 100,
+          "Min_Pricing_Funeral": 275,
+          "Min_Pricing_Crematory_Fee": 250,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "CremationCasketAverage": 1200
+        },
+        "affordableBurial": {
+          "Region": "\"SD\"",
+          "Pricing_Immediate_Burial": 2664,
+          "Max_Pricing_Immediate_Burial": 4635,
+          "Min_Pricing_Immediate_Burial": 1275,
+          "BasicCasket": 2500
+        },
+        "directCremation": {
+          "Region": "\"SD\"",
+          "Pricing_Direct_Cremation": 2764,
+          "Pricing_Transfer_Crematory": 3,
+          "Pricing_Crematory_Fee": 60,
+          "Max_Pricing_Direct_Cremation": 4250,
+          "Max_Pricing_Transfer_Crematory": 200,
+          "Max_Pricing_Crematory_Fee": 950,
+          "Min_Pricing_Direct_Cremation": 1170,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "Min_Pricing_Crematory_Fee": 0
+        }
+      }
+    },
+    "TN": {
+      "code": "TN",
+      "name": "Tennessee",
+      "sourceUrl": "https://www.funeralocity.com/average-funeral-price/tn",
+      "short": {
+        "fullBurial": {
+          "Average": 8167,
+          "Min": 5550,
+          "Max": 13005,
+          "Rank": 35
+        },
+        "immediateBurial": {
+          "Average": 4780,
+          "Min": 2900,
+          "Max": 7995,
+          "Rank": 41
+        },
+        "fullCremation": {
+          "Average": 5931,
+          "Min": 3250,
+          "Max": 10905,
+          "Rank": 35
+        },
+        "directCremation": {
+          "Average": 1938,
+          "Min": 500,
+          "Max": 4530,
+          "Rank": 36
+        }
+      },
+      "detailed": {
+        "traditionalBurial": {
+          "Region": "\"TN\"",
+          "Basic_Services": 2157,
+          "Pricing_Transfer_Home": 306,
+          "Pricing_Embaliming": 718,
+          "Pricing_Dressing_Casketing": 201,
+          "Pricing_Viewing": 410,
+          "Pricing_Funeral": 463,
+          "Pricing_Hearse": 273,
+          "Pricing_Utility_Vehicle": 138,
+          "Max_Basic_Services": 5995,
+          "Max_Pricing_Transfer_Home": 895,
+          "Max_Pricing_Embaliming": 1300,
+          "Max_Pricing_Dressing_Casketing": 500,
+          "Max_Pricing_Viewing": 1295,
+          "Max_Pricing_Funeral": 1295,
+          "Max_Pricing_Hearse": 695,
+          "Max_Pricing_Utility_Vehicle": 400,
+          "Min_Basic_Services": 475,
+          "Min_Pricing_Transfer_Home": 75,
+          "Min_Pricing_Embaliming": 300,
+          "Min_Pricing_Dressing_Casketing": 25,
+          "Min_Pricing_Viewing": 5,
+          "Min_Pricing_Funeral": 25,
+          "Min_Pricing_Hearse": 50,
+          "Min_Pricing_Utility_Vehicle": 25,
+          "MedianPricedCasketAverage": 3500
+        },
+        "fullCremation": {
+          "Region": "\"TN\"",
+          "Pricing_Base_Services": 2142,
+          "Pricing_Transfer_Home": 306,
+          "Pricing_Embaliming": 720,
+          "Pricing_Dressing_Casketing": 202,
+          "Pricing_Viewing": 411,
+          "Pricing_Funeral": 465,
+          "Pricing_Crematory_Fee": 401,
+          "Pricing_Transfer_Crematory": 82,
+          "Max_Pricing_Base_Services": 5995,
+          "Max_Pricing_Transfer_Home": 895,
+          "Max_Pricing_Embaliming": 1595,
+          "Max_Pricing_Dressing_Casketing": 500,
+          "Max_Pricing_Viewing": 1295,
+          "Max_Pricing_Funeral": 1295,
+          "Max_Pricing_Crematory_Fee": 900,
+          "Max_Pricing_Transfer_Crematory": 500,
+          "Min_Pricing_Base_Services": 299,
+          "Min_Pricing_Transfer_Home": 75,
+          "Min_Pricing_Embaliming": 300,
+          "Min_Pricing_Dressing_Casketing": 25,
+          "Min_Pricing_Viewing": 5,
+          "Min_Pricing_Funeral": 25,
+          "Min_Pricing_Crematory_Fee": 150,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "CremationCasketAverage": 1200
+        },
+        "affordableBurial": {
+          "Region": "\"TN\"",
+          "Pricing_Immediate_Burial": 2279,
+          "Max_Pricing_Immediate_Burial": 5495,
+          "Min_Pricing_Immediate_Burial": 400,
+          "BasicCasket": 2500
+        },
+        "directCremation": {
+          "Region": "\"TN\"",
+          "Pricing_Direct_Cremation": 1893,
+          "Pricing_Transfer_Crematory": 1,
+          "Pricing_Crematory_Fee": 47,
+          "Max_Pricing_Direct_Cremation": 4150,
+          "Max_Pricing_Transfer_Crematory": 195,
+          "Max_Pricing_Crematory_Fee": 895,
+          "Min_Pricing_Direct_Cremation": 500,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "Min_Pricing_Crematory_Fee": 0
+        }
+      }
+    },
+    "TX": {
+      "code": "TX",
+      "name": "Texas",
+      "sourceUrl": "https://www.funeralocity.com/average-funeral-price/tx",
+      "short": {
+        "fullBurial": {
+          "Average": 8792,
+          "Min": 4885,
+          "Max": 16660,
+          "Rank": 18
+        },
+        "immediateBurial": {
+          "Average": 5262,
+          "Min": 3165,
+          "Max": 10220,
+          "Rank": 17
+        },
+        "fullCremation": {
+          "Average": 6462,
+          "Min": 2695,
+          "Max": 14360,
+          "Rank": 17
+        },
+        "directCremation": {
+          "Average": 2135,
+          "Min": 500,
+          "Max": 6595,
+          "Rank": 29
+        }
+      },
+      "detailed": {
+        "traditionalBurial": {
+          "Region": "\"TX\"",
+          "Basic_Services": 2328,
+          "Pricing_Transfer_Home": 419,
+          "Pricing_Embaliming": 830,
+          "Pricing_Dressing_Casketing": 239,
+          "Pricing_Viewing": 388,
+          "Pricing_Funeral": 540,
+          "Pricing_Hearse": 365,
+          "Pricing_Utility_Vehicle": 177,
+          "Max_Basic_Services": 7695,
+          "Max_Pricing_Transfer_Home": 1095,
+          "Max_Pricing_Embaliming": 1700,
+          "Max_Pricing_Dressing_Casketing": 650,
+          "Max_Pricing_Viewing": 1250,
+          "Max_Pricing_Funeral": 1750,
+          "Max_Pricing_Hearse": 850,
+          "Max_Pricing_Utility_Vehicle": 595,
+          "Min_Basic_Services": 300,
+          "Min_Pricing_Transfer_Home": 100,
+          "Min_Pricing_Embaliming": 50,
+          "Min_Pricing_Dressing_Casketing": 35,
+          "Min_Pricing_Viewing": 0,
+          "Min_Pricing_Funeral": 100,
+          "Min_Pricing_Hearse": 0,
+          "Min_Pricing_Utility_Vehicle": 28,
+          "MedianPricedCasketAverage": 3500
+        },
+        "fullCremation": {
+          "Region": "\"TX\"",
+          "Pricing_Base_Services": 2321,
+          "Pricing_Transfer_Home": 419,
+          "Pricing_Embaliming": 830,
+          "Pricing_Dressing_Casketing": 239,
+          "Pricing_Viewing": 388,
+          "Pricing_Funeral": 540,
+          "Pricing_Crematory_Fee": 377,
+          "Pricing_Transfer_Crematory": 140,
+          "Max_Pricing_Base_Services": 7695,
+          "Max_Pricing_Transfer_Home": 1095,
+          "Max_Pricing_Embaliming": 1700,
+          "Max_Pricing_Dressing_Casketing": 650,
+          "Max_Pricing_Viewing": 1250,
+          "Max_Pricing_Funeral": 1750,
+          "Max_Pricing_Crematory_Fee": 1520,
+          "Max_Pricing_Transfer_Crematory": 795,
+          "Min_Pricing_Base_Services": 170,
+          "Min_Pricing_Transfer_Home": 100,
+          "Min_Pricing_Embaliming": 50,
+          "Min_Pricing_Dressing_Casketing": 35,
+          "Min_Pricing_Viewing": 0,
+          "Min_Pricing_Funeral": 100,
+          "Min_Pricing_Crematory_Fee": 25,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "CremationCasketAverage": 1200
+        },
+        "affordableBurial": {
+          "Region": "\"TX\"",
+          "Pricing_Immediate_Burial": 2752,
+          "Max_Pricing_Immediate_Burial": 7720,
+          "Min_Pricing_Immediate_Burial": 665,
+          "BasicCasket": 2500
+        },
+        "directCremation": {
+          "Region": "\"TX\"",
+          "Pricing_Direct_Cremation": 2049,
+          "Pricing_Transfer_Crematory": 6,
+          "Pricing_Crematory_Fee": 75,
+          "Max_Pricing_Direct_Cremation": 6595,
+          "Max_Pricing_Transfer_Crematory": 400,
+          "Max_Pricing_Crematory_Fee": 995,
+          "Min_Pricing_Direct_Cremation": 500,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "Min_Pricing_Crematory_Fee": 0
+        }
+      }
+    },
+    "UT": {
+      "code": "UT",
+      "name": "Utah",
+      "sourceUrl": "https://www.funeralocity.com/average-funeral-price/ut",
+      "short": {
+        "fullBurial": {
+          "Average": 8028,
+          "Min": 6045,
+          "Max": 10400,
+          "Rank": 41
+        },
+        "immediateBurial": {
+          "Average": 4655,
+          "Min": 2890,
+          "Max": 7550,
+          "Rank": 45
+        },
+        "fullCremation": {
+          "Average": 5803,
+          "Min": 3695,
+          "Max": 8070,
+          "Rank": 41
+        },
+        "directCremation": {
+          "Average": 1627,
+          "Min": 595,
+          "Max": 2995,
+          "Rank": 47
+        }
+      },
+      "detailed": {
+        "traditionalBurial": {
+          "Region": "\"UT\"",
+          "Basic_Services": 1903,
+          "Pricing_Transfer_Home": 349,
+          "Pricing_Embaliming": 748,
+          "Pricing_Dressing_Casketing": 275,
+          "Pricing_Viewing": 361,
+          "Pricing_Funeral": 477,
+          "Pricing_Hearse": 269,
+          "Pricing_Utility_Vehicle": 146,
+          "Max_Basic_Services": 4295,
+          "Max_Pricing_Transfer_Home": 595,
+          "Max_Pricing_Embaliming": 1000,
+          "Max_Pricing_Dressing_Casketing": 415,
+          "Max_Pricing_Viewing": 570,
+          "Max_Pricing_Funeral": 697,
+          "Max_Pricing_Hearse": 550,
+          "Max_Pricing_Utility_Vehicle": 300,
+          "Min_Basic_Services": 595,
+          "Min_Pricing_Transfer_Home": 135,
+          "Min_Pricing_Embaliming": 395,
+          "Min_Pricing_Dressing_Casketing": 100,
+          "Min_Pricing_Viewing": 165,
+          "Min_Pricing_Funeral": 250,
+          "Min_Pricing_Hearse": 135,
+          "Min_Pricing_Utility_Vehicle": 25,
+          "MedianPricedCasketAverage": 3500
+        },
+        "fullCremation": {
+          "Region": "\"UT\"",
+          "Pricing_Base_Services": 1903,
+          "Pricing_Transfer_Home": 349,
+          "Pricing_Embaliming": 748,
+          "Pricing_Dressing_Casketing": 275,
+          "Pricing_Viewing": 361,
+          "Pricing_Funeral": 477,
+          "Pricing_Crematory_Fee": 415,
+          "Pricing_Transfer_Crematory": 74,
+          "Max_Pricing_Base_Services": 4295,
+          "Max_Pricing_Transfer_Home": 595,
+          "Max_Pricing_Embaliming": 1000,
+          "Max_Pricing_Dressing_Casketing": 415,
+          "Max_Pricing_Viewing": 570,
+          "Max_Pricing_Funeral": 697,
+          "Max_Pricing_Crematory_Fee": 1000,
+          "Max_Pricing_Transfer_Crematory": 300,
+          "Min_Pricing_Base_Services": 595,
+          "Min_Pricing_Transfer_Home": 135,
+          "Min_Pricing_Embaliming": 395,
+          "Min_Pricing_Dressing_Casketing": 100,
+          "Min_Pricing_Viewing": 165,
+          "Min_Pricing_Funeral": 250,
+          "Min_Pricing_Crematory_Fee": 175,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "CremationCasketAverage": 1200
+        },
+        "affordableBurial": {
+          "Region": "\"UT\"",
+          "Pricing_Immediate_Burial": 2155,
+          "Max_Pricing_Immediate_Burial": 5050,
+          "Min_Pricing_Immediate_Burial": 390,
+          "BasicCasket": 2500
+        },
+        "directCremation": {
+          "Region": "\"UT\"",
+          "Pricing_Direct_Cremation": 1593,
+          "Pricing_Transfer_Crematory": 6,
+          "Pricing_Crematory_Fee": 28,
+          "Max_Pricing_Direct_Cremation": 2430,
+          "Max_Pricing_Transfer_Crematory": 300,
+          "Max_Pricing_Crematory_Fee": 600,
+          "Min_Pricing_Direct_Cremation": 595,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "Min_Pricing_Crematory_Fee": 0
+        }
+      }
+    },
+    "VA": {
+      "code": "VA",
+      "name": "Virginia",
+      "sourceUrl": "https://www.funeralocity.com/average-funeral-price/va",
+      "short": {
+        "fullBurial": {
+          "Average": 8321,
+          "Min": 5790,
+          "Max": 14045,
+          "Rank": 30
+        },
+        "immediateBurial": {
+          "Average": 5176,
+          "Min": 3295,
+          "Max": 9300,
+          "Rank": 22
+        },
+        "fullCremation": {
+          "Average": 6128,
+          "Min": 3625,
+          "Max": 11450,
+          "Rank": 28
+        },
+        "directCremation": {
+          "Average": 2515,
+          "Min": 775,
+          "Max": 5480,
+          "Rank": 15
+        }
+      },
+      "detailed": {
+        "traditionalBurial": {
+          "Region": "\"VA\"",
+          "Basic_Services": 2075,
+          "Pricing_Transfer_Home": 351,
+          "Pricing_Embaliming": 718,
+          "Pricing_Dressing_Casketing": 227,
+          "Pricing_Viewing": 420,
+          "Pricing_Funeral": 541,
+          "Pricing_Hearse": 333,
+          "Pricing_Utility_Vehicle": 155,
+          "Max_Basic_Services": 4735,
+          "Max_Pricing_Transfer_Home": 1070,
+          "Max_Pricing_Embaliming": 1675,
+          "Max_Pricing_Dressing_Casketing": 995,
+          "Max_Pricing_Viewing": 1200,
+          "Max_Pricing_Funeral": 1595,
+          "Max_Pricing_Hearse": 895,
+          "Max_Pricing_Utility_Vehicle": 495,
+          "Min_Basic_Services": 450,
+          "Min_Pricing_Transfer_Home": 125,
+          "Min_Pricing_Embaliming": 50,
+          "Min_Pricing_Dressing_Casketing": 38,
+          "Min_Pricing_Viewing": 100,
+          "Min_Pricing_Funeral": 125,
+          "Min_Pricing_Hearse": 25,
+          "Min_Pricing_Utility_Vehicle": 35,
+          "MedianPricedCasketAverage": 3500
+        },
+        "fullCremation": {
+          "Region": "\"VA\"",
+          "Pricing_Base_Services": 2082,
+          "Pricing_Transfer_Home": 352,
+          "Pricing_Embaliming": 719,
+          "Pricing_Dressing_Casketing": 228,
+          "Pricing_Viewing": 418,
+          "Pricing_Funeral": 541,
+          "Pricing_Crematory_Fee": 518,
+          "Pricing_Transfer_Crematory": 66,
+          "Max_Pricing_Base_Services": 4735,
+          "Max_Pricing_Transfer_Home": 1070,
+          "Max_Pricing_Embaliming": 1675,
+          "Max_Pricing_Dressing_Casketing": 995,
+          "Max_Pricing_Viewing": 1200,
+          "Max_Pricing_Funeral": 1595,
+          "Max_Pricing_Crematory_Fee": 2860,
+          "Max_Pricing_Transfer_Crematory": 595,
+          "Min_Pricing_Base_Services": 450,
+          "Min_Pricing_Transfer_Home": 125,
+          "Min_Pricing_Embaliming": 50,
+          "Min_Pricing_Dressing_Casketing": 38,
+          "Min_Pricing_Viewing": 100,
+          "Min_Pricing_Funeral": 125,
+          "Min_Pricing_Crematory_Fee": 150,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "CremationCasketAverage": 1200
+        },
+        "affordableBurial": {
+          "Region": "\"VA\"",
+          "Pricing_Immediate_Burial": 2673,
+          "Max_Pricing_Immediate_Burial": 6800,
+          "Min_Pricing_Immediate_Burial": 795,
+          "BasicCasket": 2500
+        },
+        "directCremation": {
+          "Region": "\"VA\"",
+          "Pricing_Direct_Cremation": 2448,
+          "Pricing_Transfer_Crematory": 3,
+          "Pricing_Crematory_Fee": 60,
+          "Max_Pricing_Direct_Cremation": 4440,
+          "Max_Pricing_Transfer_Crematory": 395,
+          "Max_Pricing_Crematory_Fee": 1295,
+          "Min_Pricing_Direct_Cremation": 695,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "Min_Pricing_Crematory_Fee": 0
+        }
+      }
+    },
+    "VT": {
+      "code": "VT",
+      "name": "Vermont",
+      "sourceUrl": "https://www.funeralocity.com/average-funeral-price/vt",
+      "short": {
+        "fullBurial": {
+          "Average": 8213,
+          "Min": 6490,
+          "Max": 9305,
+          "Rank": 34
+        },
+        "immediateBurial": {
+          "Average": 5035,
+          "Min": 3495,
+          "Max": 6196,
+          "Rank": 28
+        },
+        "fullCremation": {
+          "Average": 5918,
+          "Min": 4015,
+          "Max": 7630,
+          "Rank": 36
+        },
+        "directCremation": {
+          "Average": 2297,
+          "Min": 1290,
+          "Max": 3405,
+          "Rank": 22
+        }
+      },
+      "detailed": {
+        "traditionalBurial": {
+          "Region": "\"VT\"",
+          "Basic_Services": 2141,
+          "Pricing_Transfer_Home": 347,
+          "Pricing_Embaliming": 529,
+          "Pricing_Dressing_Casketing": 205,
+          "Pricing_Viewing": 444,
+          "Pricing_Funeral": 536,
+          "Pricing_Hearse": 332,
+          "Pricing_Utility_Vehicle": 179,
+          "Max_Basic_Services": 2850,
+          "Max_Pricing_Transfer_Home": 490,
+          "Max_Pricing_Embaliming": 895,
+          "Max_Pricing_Dressing_Casketing": 625,
+          "Max_Pricing_Viewing": 895,
+          "Max_Pricing_Funeral": 1075,
+          "Max_Pricing_Hearse": 475,
+          "Max_Pricing_Utility_Vehicle": 395,
+          "Min_Basic_Services": 525,
+          "Min_Pricing_Transfer_Home": 225,
+          "Min_Pricing_Embaliming": 200,
+          "Min_Pricing_Dressing_Casketing": 80,
+          "Min_Pricing_Viewing": 150,
+          "Min_Pricing_Funeral": 300,
+          "Min_Pricing_Hearse": 150,
+          "Min_Pricing_Utility_Vehicle": 75,
+          "MedianPricedCasketAverage": 3500
+        },
+        "fullCremation": {
+          "Region": "\"VT\"",
+          "Pricing_Base_Services": 2141,
+          "Pricing_Transfer_Home": 347,
+          "Pricing_Embaliming": 529,
+          "Pricing_Dressing_Casketing": 205,
+          "Pricing_Viewing": 444,
+          "Pricing_Funeral": 536,
+          "Pricing_Crematory_Fee": 394,
+          "Pricing_Transfer_Crematory": 123,
+          "Max_Pricing_Base_Services": 2850,
+          "Max_Pricing_Transfer_Home": 490,
+          "Max_Pricing_Embaliming": 895,
+          "Max_Pricing_Dressing_Casketing": 625,
+          "Max_Pricing_Viewing": 895,
+          "Max_Pricing_Funeral": 1075,
+          "Max_Pricing_Crematory_Fee": 900,
+          "Max_Pricing_Transfer_Crematory": 385,
+          "Min_Pricing_Base_Services": 525,
+          "Min_Pricing_Transfer_Home": 225,
+          "Min_Pricing_Embaliming": 200,
+          "Min_Pricing_Dressing_Casketing": 80,
+          "Min_Pricing_Viewing": 150,
+          "Min_Pricing_Funeral": 300,
+          "Min_Pricing_Crematory_Fee": 280,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "CremationCasketAverage": 1200
+        },
+        "affordableBurial": {
+          "Region": "\"VT\"",
+          "Pricing_Immediate_Burial": 2535,
+          "Max_Pricing_Immediate_Burial": 3696,
+          "Min_Pricing_Immediate_Burial": 995,
+          "BasicCasket": 2500
+        },
+        "directCremation": {
+          "Region": "\"VT\"",
+          "Pricing_Direct_Cremation": 2211,
+          "Pricing_Transfer_Crematory": 0,
+          "Pricing_Crematory_Fee": 86,
+          "Max_Pricing_Direct_Cremation": 3050,
+          "Max_Pricing_Transfer_Crematory": 0,
+          "Max_Pricing_Crematory_Fee": 450,
+          "Min_Pricing_Direct_Cremation": 965,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "Min_Pricing_Crematory_Fee": 0
+        }
+      }
+    },
+    "WA": {
+      "code": "WA",
+      "name": "Washington",
+      "sourceUrl": "https://www.funeralocity.com/average-funeral-price/wa",
+      "short": {
+        "fullBurial": {
+          "Average": 7659,
+          "Min": 5685,
+          "Max": 12430,
+          "Rank": 50
+        },
+        "immediateBurial": {
+          "Average": 4594,
+          "Min": 3095,
+          "Max": 9500,
+          "Rank": 47
+        },
+        "fullCremation": {
+          "Average": 5306,
+          "Min": 3035,
+          "Max": 10105,
+          "Rank": 50
+        },
+        "directCremation": {
+          "Average": 1523,
+          "Min": 495,
+          "Max": 3855,
+          "Rank": 48
+        }
+      },
+      "detailed": {
+        "traditionalBurial": {
+          "Region": "\"WA\"",
+          "Basic_Services": 1602,
+          "Pricing_Transfer_Home": 402,
+          "Pricing_Embaliming": 583,
+          "Pricing_Dressing_Casketing": 218,
+          "Pricing_Viewing": 296,
+          "Pricing_Funeral": 595,
+          "Pricing_Hearse": 307,
+          "Pricing_Utility_Vehicle": 142,
+          "Max_Basic_Services": 4235,
+          "Max_Pricing_Transfer_Home": 735,
+          "Max_Pricing_Embaliming": 1295,
+          "Max_Pricing_Dressing_Casketing": 445,
+          "Max_Pricing_Viewing": 999,
+          "Max_Pricing_Funeral": 1995,
+          "Max_Pricing_Hearse": 595,
+          "Max_Pricing_Utility_Vehicle": 450,
+          "Min_Basic_Services": 150,
+          "Min_Pricing_Transfer_Home": 95,
+          "Min_Pricing_Embaliming": 104,
+          "Min_Pricing_Dressing_Casketing": 35,
+          "Min_Pricing_Viewing": 75,
+          "Min_Pricing_Funeral": 195,
+          "Min_Pricing_Hearse": 1,
+          "Min_Pricing_Utility_Vehicle": 45,
+          "MedianPricedCasketAverage": 3500
+        },
+        "fullCremation": {
+          "Region": "\"WA\"",
+          "Pricing_Base_Services": 1599,
+          "Pricing_Transfer_Home": 402,
+          "Pricing_Embaliming": 583,
+          "Pricing_Dressing_Casketing": 218,
+          "Pricing_Viewing": 297,
+          "Pricing_Funeral": 595,
+          "Pricing_Crematory_Fee": 363,
+          "Pricing_Transfer_Crematory": 32,
+          "Max_Pricing_Base_Services": 4235,
+          "Max_Pricing_Transfer_Home": 735,
+          "Max_Pricing_Embaliming": 1295,
+          "Max_Pricing_Dressing_Casketing": 445,
+          "Max_Pricing_Viewing": 999,
+          "Max_Pricing_Funeral": 1995,
+          "Max_Pricing_Crematory_Fee": 899,
+          "Max_Pricing_Transfer_Crematory": 435,
+          "Min_Pricing_Base_Services": 150,
+          "Min_Pricing_Transfer_Home": 95,
+          "Min_Pricing_Embaliming": 104,
+          "Min_Pricing_Dressing_Casketing": 35,
+          "Min_Pricing_Viewing": 75,
+          "Min_Pricing_Funeral": 195,
+          "Min_Pricing_Crematory_Fee": 135,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "CremationCasketAverage": 1200
+        },
+        "affordableBurial": {
+          "Region": "\"WA\"",
+          "Pricing_Immediate_Burial": 2081,
+          "Max_Pricing_Immediate_Burial": 7000,
+          "Min_Pricing_Immediate_Burial": 595,
+          "BasicCasket": 2500
+        },
+        "directCremation": {
+          "Region": "\"WA\"",
+          "Pricing_Direct_Cremation": 1481,
+          "Pricing_Transfer_Crematory": 6,
+          "Pricing_Crematory_Fee": 24,
+          "Max_Pricing_Direct_Cremation": 3695,
+          "Max_Pricing_Transfer_Crematory": 195,
+          "Max_Pricing_Crematory_Fee": 590,
+          "Min_Pricing_Direct_Cremation": 495,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "Min_Pricing_Crematory_Fee": 0
+        }
+      }
+    },
+    "WI": {
+      "code": "WI",
+      "name": "Wisconsin",
+      "sourceUrl": "https://www.funeralocity.com/average-funeral-price/wi",
+      "short": {
+        "fullBurial": {
+          "Average": 9004,
+          "Min": 6085,
+          "Max": 13060,
+          "Rank": 12
+        },
+        "immediateBurial": {
+          "Average": 5579,
+          "Min": 3395,
+          "Max": 9570,
+          "Rank": 6
+        },
+        "fullCremation": {
+          "Average": 6731,
+          "Min": 3905,
+          "Max": 10790,
+          "Rank": 11
+        },
+        "directCremation": {
+          "Average": 2903,
+          "Min": 895,
+          "Max": 7538,
+          "Rank": 6
+        }
+      },
+      "detailed": {
+        "traditionalBurial": {
+          "Region": "\"WI\"",
+          "Basic_Services": 2618,
+          "Pricing_Transfer_Home": 402,
+          "Pricing_Embaliming": 729,
+          "Pricing_Dressing_Casketing": 327,
+          "Pricing_Viewing": 413,
+          "Pricing_Funeral": 509,
+          "Pricing_Hearse": 348,
+          "Pricing_Utility_Vehicle": 156,
+          "Max_Basic_Services": 5455,
+          "Max_Pricing_Transfer_Home": 1000,
+          "Max_Pricing_Embaliming": 1750,
+          "Max_Pricing_Dressing_Casketing": 695,
+          "Max_Pricing_Viewing": 1100,
+          "Max_Pricing_Funeral": 1300,
+          "Max_Pricing_Hearse": 795,
+          "Max_Pricing_Utility_Vehicle": 695,
+          "Min_Basic_Services": 1070,
+          "Min_Pricing_Transfer_Home": 40,
+          "Min_Pricing_Embaliming": 50,
+          "Min_Pricing_Dressing_Casketing": 70,
+          "Min_Pricing_Viewing": 50,
+          "Min_Pricing_Funeral": 0,
+          "Min_Pricing_Hearse": 30,
+          "Min_Pricing_Utility_Vehicle": 50,
+          "MedianPricedCasketAverage": 3500
+        },
+        "fullCremation": {
+          "Region": "\"WI\"",
+          "Pricing_Base_Services": 2614,
+          "Pricing_Transfer_Home": 402,
+          "Pricing_Embaliming": 729,
+          "Pricing_Dressing_Casketing": 327,
+          "Pricing_Viewing": 413,
+          "Pricing_Funeral": 509,
+          "Pricing_Crematory_Fee": 459,
+          "Pricing_Transfer_Crematory": 76,
+          "Max_Pricing_Base_Services": 5455,
+          "Max_Pricing_Transfer_Home": 1000,
+          "Max_Pricing_Embaliming": 1750,
+          "Max_Pricing_Dressing_Casketing": 695,
+          "Max_Pricing_Viewing": 1100,
+          "Max_Pricing_Funeral": 1300,
+          "Max_Pricing_Crematory_Fee": 1005,
+          "Max_Pricing_Transfer_Crematory": 695,
+          "Min_Pricing_Base_Services": 995,
+          "Min_Pricing_Transfer_Home": 40,
+          "Min_Pricing_Embaliming": 50,
+          "Min_Pricing_Dressing_Casketing": 70,
+          "Min_Pricing_Viewing": 50,
+          "Min_Pricing_Funeral": 0,
+          "Min_Pricing_Crematory_Fee": 100,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "CremationCasketAverage": 1200
+        },
+        "affordableBurial": {
+          "Region": "\"WI\"",
+          "Pricing_Immediate_Burial": 3079,
+          "Max_Pricing_Immediate_Burial": 7070,
+          "Min_Pricing_Immediate_Burial": 895,
+          "BasicCasket": 2500
+        },
+        "directCremation": {
+          "Region": "\"WI\"",
+          "Pricing_Direct_Cremation": 2777,
+          "Pricing_Transfer_Crematory": 1,
+          "Pricing_Crematory_Fee": 125,
+          "Max_Pricing_Direct_Cremation": 7043,
+          "Max_Pricing_Transfer_Crematory": 250,
+          "Max_Pricing_Crematory_Fee": 750,
+          "Min_Pricing_Direct_Cremation": 695,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "Min_Pricing_Crematory_Fee": 0
+        }
+      }
+    },
+    "WV": {
+      "code": "WV",
+      "name": "West Virginia",
+      "sourceUrl": "https://www.funeralocity.com/average-funeral-price/wv",
+      "short": {
+        "fullBurial": {
+          "Average": 8074,
+          "Min": 5860,
+          "Max": 10865,
+          "Rank": 38
+        },
+        "immediateBurial": {
+          "Average": 4902,
+          "Min": 2920,
+          "Max": 6960,
+          "Rank": 36
+        },
+        "fullCremation": {
+          "Average": 5878,
+          "Min": 3550,
+          "Max": 8585,
+          "Rank": 38
+        },
+        "directCremation": {
+          "Average": 2289,
+          "Min": 750,
+          "Max": 4218,
+          "Rank": 24
+        }
+      },
+      "detailed": {
+        "traditionalBurial": {
+          "Region": "\"WV\"",
+          "Basic_Services": 2025,
+          "Pricing_Transfer_Home": 274,
+          "Pricing_Embaliming": 713,
+          "Pricing_Dressing_Casketing": 239,
+          "Pricing_Viewing": 425,
+          "Pricing_Funeral": 456,
+          "Pricing_Hearse": 291,
+          "Pricing_Utility_Vehicle": 151,
+          "Max_Basic_Services": 4575,
+          "Max_Pricing_Transfer_Home": 550,
+          "Max_Pricing_Embaliming": 1295,
+          "Max_Pricing_Dressing_Casketing": 595,
+          "Max_Pricing_Viewing": 995,
+          "Max_Pricing_Funeral": 995,
+          "Max_Pricing_Hearse": 590,
+          "Max_Pricing_Utility_Vehicle": 325,
+          "Min_Basic_Services": 400,
+          "Min_Pricing_Transfer_Home": 75,
+          "Min_Pricing_Embaliming": 135,
+          "Min_Pricing_Dressing_Casketing": 25,
+          "Min_Pricing_Viewing": 125,
+          "Min_Pricing_Funeral": 150,
+          "Min_Pricing_Hearse": 100,
+          "Min_Pricing_Utility_Vehicle": 40,
+          "MedianPricedCasketAverage": 3500
+        },
+        "fullCremation": {
+          "Region": "\"WV\"",
+          "Pricing_Base_Services": 2020,
+          "Pricing_Transfer_Home": 274,
+          "Pricing_Embaliming": 713,
+          "Pricing_Dressing_Casketing": 239,
+          "Pricing_Viewing": 424,
+          "Pricing_Funeral": 456,
+          "Pricing_Crematory_Fee": 436,
+          "Pricing_Transfer_Crematory": 117,
+          "Max_Pricing_Base_Services": 4575,
+          "Max_Pricing_Transfer_Home": 550,
+          "Max_Pricing_Embaliming": 1295,
+          "Max_Pricing_Dressing_Casketing": 595,
+          "Max_Pricing_Viewing": 995,
+          "Max_Pricing_Funeral": 995,
+          "Max_Pricing_Crematory_Fee": 1295,
+          "Max_Pricing_Transfer_Crematory": 500,
+          "Min_Pricing_Base_Services": 400,
+          "Min_Pricing_Transfer_Home": 75,
+          "Min_Pricing_Embaliming": 135,
+          "Min_Pricing_Dressing_Casketing": 25,
+          "Min_Pricing_Viewing": 125,
+          "Min_Pricing_Funeral": 150,
+          "Min_Pricing_Crematory_Fee": 195,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "CremationCasketAverage": 1200
+        },
+        "affordableBurial": {
+          "Region": "\"WV\"",
+          "Pricing_Immediate_Burial": 2402,
+          "Max_Pricing_Immediate_Burial": 4460,
+          "Min_Pricing_Immediate_Burial": 420,
+          "BasicCasket": 2500
+        },
+        "directCremation": {
+          "Region": "\"WV\"",
+          "Pricing_Direct_Cremation": 2236,
+          "Pricing_Transfer_Crematory": 2,
+          "Pricing_Crematory_Fee": 52,
+          "Max_Pricing_Direct_Cremation": 4218,
+          "Max_Pricing_Transfer_Crematory": 175,
+          "Max_Pricing_Crematory_Fee": 1295,
+          "Min_Pricing_Direct_Cremation": 750,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "Min_Pricing_Crematory_Fee": 0
+        }
+      }
+    },
+    "WY": {
+      "code": "WY",
+      "name": "Wyoming",
+      "sourceUrl": "https://www.funeralocity.com/average-funeral-price/wy",
+      "short": {
+        "fullBurial": {
+          "Average": 8070,
+          "Min": 6755,
+          "Max": 9595,
+          "Rank": 39
+        },
+        "immediateBurial": {
+          "Average": 5082,
+          "Min": 3870,
+          "Max": 6500,
+          "Rank": 25
+        },
+        "fullCremation": {
+          "Average": 6043,
+          "Min": 4215,
+          "Max": 7415,
+          "Rank": 31
+        },
+        "directCremation": {
+          "Average": 2550,
+          "Min": 1295,
+          "Max": 3580,
+          "Rank": 13
+        }
+      },
+      "detailed": {
+        "traditionalBurial": {
+          "Region": "\"WY\"",
+          "Basic_Services": 2028,
+          "Pricing_Transfer_Home": 282,
+          "Pricing_Embaliming": 670,
+          "Pricing_Dressing_Casketing": 268,
+          "Pricing_Viewing": 323,
+          "Pricing_Funeral": 601,
+          "Pricing_Hearse": 256,
+          "Pricing_Utility_Vehicle": 142,
+          "Max_Basic_Services": 3195,
+          "Max_Pricing_Transfer_Home": 475,
+          "Max_Pricing_Embaliming": 1190,
+          "Max_Pricing_Dressing_Casketing": 485,
+          "Max_Pricing_Viewing": 500,
+          "Max_Pricing_Funeral": 1150,
+          "Max_Pricing_Hearse": 400,
+          "Max_Pricing_Utility_Vehicle": 395,
+          "Min_Basic_Services": 1165,
+          "Min_Pricing_Transfer_Home": 75,
+          "Min_Pricing_Embaliming": 395,
+          "Min_Pricing_Dressing_Casketing": 95,
+          "Min_Pricing_Viewing": 65,
+          "Min_Pricing_Funeral": 295,
+          "Min_Pricing_Hearse": 95,
+          "Min_Pricing_Utility_Vehicle": 50,
+          "MedianPricedCasketAverage": 3500
+        },
+        "fullCremation": {
+          "Region": "\"WY\"",
+          "Pricing_Base_Services": 2028,
+          "Pricing_Transfer_Home": 282,
+          "Pricing_Embaliming": 670,
+          "Pricing_Dressing_Casketing": 268,
+          "Pricing_Viewing": 323,
+          "Pricing_Funeral": 601,
+          "Pricing_Crematory_Fee": 577,
+          "Pricing_Transfer_Crematory": 95,
+          "Max_Pricing_Base_Services": 3195,
+          "Max_Pricing_Transfer_Home": 475,
+          "Max_Pricing_Embaliming": 1190,
+          "Max_Pricing_Dressing_Casketing": 485,
+          "Max_Pricing_Viewing": 500,
+          "Max_Pricing_Funeral": 1150,
+          "Max_Pricing_Crematory_Fee": 1100,
+          "Max_Pricing_Transfer_Crematory": 280,
+          "Min_Pricing_Base_Services": 1165,
+          "Min_Pricing_Transfer_Home": 75,
+          "Min_Pricing_Embaliming": 395,
+          "Min_Pricing_Dressing_Casketing": 95,
+          "Min_Pricing_Viewing": 65,
+          "Min_Pricing_Funeral": 295,
+          "Min_Pricing_Crematory_Fee": 250,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "CremationCasketAverage": 1200
+        },
+        "affordableBurial": {
+          "Region": "\"WY\"",
+          "Pricing_Immediate_Burial": 2582,
+          "Max_Pricing_Immediate_Burial": 4000,
+          "Min_Pricing_Immediate_Burial": 1370,
+          "BasicCasket": 2500
+        },
+        "directCremation": {
+          "Region": "\"WY\"",
+          "Pricing_Direct_Cremation": 2503,
+          "Pricing_Transfer_Crematory": 2,
+          "Pricing_Crematory_Fee": 45,
+          "Max_Pricing_Direct_Cremation": 3580,
+          "Max_Pricing_Transfer_Crematory": 40,
+          "Max_Pricing_Crematory_Fee": 780,
+          "Min_Pricing_Direct_Cremation": 1295,
+          "Min_Pricing_Transfer_Crematory": 0,
+          "Min_Pricing_Crematory_Fee": 0
+        }
+      }
+    }
+  }
+}

@@ -25,6 +25,10 @@
                   <i class="fas fa-dollar-sign" aria-hidden="true"></i>
                   <span>Insurance Cost</span>
                 </button>
+                <button type="button" class="nav-life-category" data-life-panel="by-state" aria-pressed="false">
+                  <i class="fas fa-map-marked-alt" aria-hidden="true"></i>
+                  <span>Coverage by State</span>
+                </button>
               </div>
               <div class="nav-life-panel is-active" data-life-panel="coverage">
               <div class="nav-life-options">
@@ -73,6 +77,29 @@
                 <div class="nav-life-feature-copy">
                   <h3>Getting Affordable Coverage</h3>
                   <p>Learn how much <span class="nav-life-feature-em">life insurance costs</span> based on policy type and coverage amount.</p>
+                </div>
+              </a>
+              </div>
+              <div class="nav-life-panel" data-life-panel="by-state" hidden>
+              <div class="nav-life-options">
+                <h3>Licensed states</h3>
+                <div class="nav-life-options-grid">
+                  <a href="states/nebraska.html">Nebraska</a>
+                  <a href="states/kansas.html">Kansas</a>
+                  <a href="states/colorado.html">Colorado</a>
+                  <a href="states/nevada.html">Nevada</a>
+                </div>
+              </div>
+              <a class="nav-life-feature" href="index.html#licensing-map">
+                <div class="nav-life-feature-copy">
+                  <h3>See the coverage map</h3>
+                  <p>Julie is licensed in Nebraska, Kansas, Colorado, and Nevada. Choose your state for local costs and options.</p>
+                </div>
+                <div class="nav-life-feature-media" aria-hidden="true">
+                  <picture>
+                    <source type="image/webp" srcset="../img/opt/hero-couple-embrace.webp" />
+                    <img src="../img/opt/hero-couple-embrace.jpg" alt="" width="640" height="480" loading="lazy" decoding="async" />
+                  </picture>
                 </div>
               </a>
               </div>
@@ -202,6 +229,10 @@
         <div class="mobile-menu-panel" id="mm-life" role="region" aria-labelledby="mm-life-btn" hidden>
           <a href="life-insurance-products.html" class="mobile-menu-link">Life Insurance Explained</a>
           <a href="../guias-gastos-finales.html" class="mobile-menu-link">Final Expense Insurance</a>
+          <a href="states/nebraska.html" class="mobile-menu-link">Coverage in Nebraska</a>
+          <a href="states/kansas.html" class="mobile-menu-link">Coverage in Kansas</a>
+          <a href="states/colorado.html" class="mobile-menu-link">Coverage in Colorado</a>
+          <a href="states/nevada.html" class="mobile-menu-link">Coverage in Nevada</a>
           <a href="term-quote.html" class="mobile-menu-link">Term Life Insurance</a>
           <a href="life-insurance-cost.html" class="mobile-menu-link">Insurance Cost</a>
           <a href="quote.html" class="mobile-menu-link">Instant Life Insurance</a>

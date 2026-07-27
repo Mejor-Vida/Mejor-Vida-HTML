@@ -1,6 +1,7 @@
 /**
  * Final expense funeral cost estimator — per-state burial & cremation averages
- * (Legacy Safeguard Expense Estimator, May 2026) plus optional tier add-ons.
+ * from Funeralocity (source of truth) plus optional tier add-ons for merchandise
+ * / cemetery items Funeralocity does not publish as state averages.
  */
 /** $0 option — matches Legacy “Not Desired” on merchandise line items */
 var MVI_FE_NOT_DESIRED = {
@@ -21,27 +22,21 @@ function buildFeEstimatorStates() {
       burial: row.burial,
       cremation: row.cremation,
       funeralHome: row.funeralHome,
+      funeralocity: row.funeralocity || null,
     };
   });
   return out;
 }
 
 window.MVI_FE_ESTIMATOR_DATA = {
-  storageKey: "mviFeEstimatorV6",
+  storageKey: "mviFeEstimatorV7",
   notDesiredOption: MVI_FE_NOT_DESIRED,
   defaultState: "NE",
   states: buildFeEstimatorStates(),
-  burialStateKeys: [
-    "casket",
-    "vault",
-    "cemetery",
-    "opening",
-    "flowers",
-    "deathCerts",
-    "stationery",
-  ],
+  /** Kept for compatibility; FH total uses burial.funeralHome only (Funeralocity services). */
+  burialStateKeys: [],
   cremationStateKeys: ["cremationPrice", "memorialService"],
-  /** Cemetery & opening/closing — Legacy Safeguard fixed tier amounts (all states). */
+  /** Cemetery & opening/closing — fixed tier amounts (all states; not published by Funeralocity). */
   cemeteryTierAmounts: [1500, 2500, 3500],
   openingTierAmounts: [1500, 2500, 3500],
   tierLineIds: {
@@ -64,7 +59,7 @@ window.MVI_FE_ESTIMATOR_DATA = {
     { id: "standard", labelEn: "Standard", labelEs: "Estándar", optionIndex: 1 },
     { id: "premium", labelEn: "Premium", labelEs: "Premium", optionIndex: 2 },
   ],
-  /** Burial: funeral home (state) + tiered merchandise; opening uses state average. */
+  /** Burial: Funeralocity funeral-home services (state) + tiered merchandise / cemetery. */
   burialLines: [
     {
       id: "casket",
@@ -264,33 +259,56 @@ window.MVI_FE_ESTIMATOR_DATA = {
   ],
   familyMonthsOptions: [1, 2, 3, 6, 9, 12],
   /**
-   * Info bubble copy (Legacy Safeguard–style). Burial funeral-home breakdown
-   * uses Nebraska amounts as template; scaled to each state’s funeral home total.
+   * Info bubble copy. Burial funeral-home breakdown prefers live Funeralocity
+   * component averages for the selected state (see funeralocity.burialBreakdown);
+   * this NE template is only a fallback if state detail is missing.
    */
   lineInfo: {
     funeralHomeBurialBreakdown: [
       {
         labelEn: "Basic Services for Director and Staff",
         labelEs: "Servicios básicos del director y personal",
-        amount: 1715,
+        key: "basicServices",
+        amount: 2340,
       },
-      { labelEn: "Embalming", labelEs: "Embalsamado", amount: 642 },
-      { labelEn: "Dressing and Casketing", labelEs: "Vestido y colocación en ataúd", amount: 248 },
       {
-        labelEn: "Facilities and Staff for Visitation",
-        labelEs: "Instalaciones y personal para visita",
-        amount: 363,
+        labelEn: "Transfer to Funeral Home",
+        labelEs: "Traslado a la funeraria",
+        key: "transferHome",
+        amount: 336,
       },
-      { labelEn: "Transfer to Funeral home", labelEs: "Traslado a la funeraria", amount: 279 },
-      { labelEn: "Hearse", labelEs: "Carroza", amount: 246 },
-      { labelEn: "Limousine", labelEs: "Limusina", amount: 194 },
-      { labelEn: "Utility and Flower vehicle", labelEs: "Vehículo de servicio y flores", amount: 117 },
+      { labelEn: "Embalming", labelEs: "Embalsamado", key: "embalming", amount: 769 },
+      {
+        labelEn: "Dressing and Casketing",
+        labelEs: "Vestido y colocación en ataúd",
+        key: "dressingCasketing",
+        amount: 297,
+      },
+      {
+        labelEn: "Viewing & Visitation",
+        labelEs: "Velatorio / visita",
+        key: "viewing",
+        amount: 401,
+      },
+      {
+        labelEn: "Funeral Service",
+        labelEs: "Servicio funerario",
+        key: "funeralService",
+        amount: 534,
+      },
+      { labelEn: "Hearse", labelEs: "Carroza", key: "hearse", amount: 283 },
+      {
+        labelEn: "Utility Vehicle",
+        labelEs: "Vehículo de servicio",
+        key: "utilityVehicle",
+        amount: 160,
+      },
     ],
     funeralHomeCremation: {
       infoEn:
-        "Funeral home expenses for cremation typically include basic services of the director and staff, transfer, preparation, use of facilities for a memorial service, and coordination of cremation arrangements. Amounts vary by state.",
+        "Funeral home expenses for cremation are based on Funeralocity’s full-service cremation average for the selected state (basic services, transfer, preparation, facilities, and cremation coordination). Merchandise such as an urn is selected separately below.",
       infoEs:
-        "Los gastos de funeraria para cremación suelen incluir servicios básicos del director y personal, traslado, preparación, uso de instalaciones para un servicio conmemorativo y coordinación de la cremación. Los montos varían según el estado.",
+        "Los gastos de funeraria para cremación se basan en el promedio de cremación con servicio completo de Funeralocity para el estado seleccionado (servicios básicos, traslado, preparación, instalaciones y coordinación de la cremación). Mercancía como la urna se elige por separado más abajo.",
     },
     casket: {
       infoEn:

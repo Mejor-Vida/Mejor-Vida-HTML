@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1000 420" width="1000" height="420" role="img" aria-label="Map of Nebraska highlighting Lincoln">
+  <defs>
+    <linearGradient id="neFill" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7eb6e0" stop-opacity="0.55"/>
+      <stop offset="55%" stop-color="#4a90c4" stop-opacity="0.75"/>
+      <stop offset="100%" stop-color="#2d6a9f" stop-opacity="0.9"/>
+    </linearGradient>
+    <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <path d="M 28,78 C 120,72 280,62 420,55 C 560,48 720,42 880,38 L 972,36 L 978,118 C 982,160 985,210 988,255 C 990,295 992,330 990,358 L 982,388 L 40,402 L 28,320 L 22,220 L 24,140 Z" fill="url(#neFill)" stroke="#dbeafe" stroke-width="3" stroke-linejoin="round"/>
+  <!-- State seal (southeast-center, Choice Mutual style) -->
+  <image href="nebraska-state-seal.png" x="620" y="95" width="210" height="210" opacity="0.92"/>
+  <!-- Lincoln star -->
+  <g transform="translate(780,285)" filter="url(#softGlow)">
+    <circle cx="0" cy="0" r="14" fill="#fbbf24" opacity="0.35"/>
+    <path d="M0,-11 L3.1,-3.4 L11,-3.4 L4.6,1.4 L7.1,9 L0,4.2 L-7.1,9 L-4.6,1.4 L-11,-3.4 L-3.1,-3.4 Z" fill="#f59e0b" stroke="#fff7ed" stroke-width="1.2"/>
+    <text x="16" y="5" fill="#fff" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="700">Lincoln</text>
+  </g>
+</svg>

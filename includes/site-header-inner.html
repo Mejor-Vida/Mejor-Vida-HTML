@@ -25,6 +25,10 @@
                   <i class="fas fa-dollar-sign" aria-hidden="true"></i>
                   <span>Costo del seguro</span>
                 </button>
+                <button type="button" class="nav-life-category" data-life-panel="by-state" aria-pressed="false">
+                  <i class="fas fa-map-marked-alt" aria-hidden="true"></i>
+                  <span>Cobertura por estado</span>
+                </button>
               </div>
               <div class="nav-life-panel is-active" data-life-panel="coverage">
               <div class="nav-life-options">
@@ -73,6 +77,29 @@
                 <div class="nav-life-feature-copy">
                   <h3>Obtener cobertura asequible</h3>
                   <p>Vea cuánto cuesta el <span class="nav-life-feature-em">seguro de vida</span> según el tipo de póliza y el monto.</p>
+                </div>
+              </a>
+              </div>
+              <div class="nav-life-panel" data-life-panel="by-state" hidden>
+              <div class="nav-life-options">
+                <h3>Estados con licencia</h3>
+                <div class="nav-life-options-grid">
+                  <a href="__PREFIX__estados/nebraska.html">Nebraska</a>
+                  <a href="__PREFIX__estados/kansas.html">Kansas</a>
+                  <a href="__PREFIX__estados/colorado.html">Colorado</a>
+                  <a href="__PREFIX__estados/nevada.html">Nevada</a>
+                </div>
+              </div>
+              <a class="nav-life-feature" href="__PREFIX__index.html#licensing-map">
+                <div class="nav-life-feature-copy">
+                  <h3>Vea el mapa de cobertura</h3>
+                  <p>Julie está licenciada en Nebraska, Kansas, Colorado y Nevada. Elija su estado para costos y opciones locales.</p>
+                </div>
+                <div class="nav-life-feature-media" aria-hidden="true">
+                  <picture>
+                    <source type="image/webp" srcset="__PREFIX__img/opt/hero-couple-embrace.webp" />
+                    <img src="__PREFIX__img/opt/hero-couple-embrace.jpg" alt="" width="640" height="480" loading="lazy" decoding="async" />
+                  </picture>
                 </div>
               </a>
               </div>
@@ -202,6 +229,10 @@
         <div class="mobile-menu-panel" id="mm-life" role="region" aria-labelledby="mm-life-btn" hidden>
           <a href="__PREFIX__tipos-seguro-vida.html" class="mobile-menu-link">Tipos de seguro de vida</a>
           <a href="__PREFIX__guias-gastos-finales.html" class="mobile-menu-link">Seguro de gastos finales</a>
+          <a href="__PREFIX__estados/nebraska.html" class="mobile-menu-link">Cobertura en Nebraska</a>
+          <a href="__PREFIX__estados/kansas.html" class="mobile-menu-link">Cobertura en Kansas</a>
+          <a href="__PREFIX__estados/colorado.html" class="mobile-menu-link">Cobertura en Colorado</a>
+          <a href="__PREFIX__estados/nevada.html" class="mobile-menu-link">Cobertura en Nevada</a>
           <a href="__PREFIX__term-quote.html" class="mobile-menu-link">Seguro de vida temporal</a>
           <a href="__PREFIX__costo-seguro-vida.html" class="mobile-menu-link">Costo del seguro</a>
           <a href="__PREFIX__quote.html" class="mobile-menu-link">Seguro de vida de emisión inmediata</a>

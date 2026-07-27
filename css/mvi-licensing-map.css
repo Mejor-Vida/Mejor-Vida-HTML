@@ -153,6 +153,57 @@
   fill: #b8c2d1;
 }
 
+.mvi-lic-map-wrap--coverage {
+  position: relative;
+}
+
+.mvi-lic-cost-tip {
+  position: absolute;
+  z-index: 5;
+  min-width: 11.5rem;
+  max-width: 15rem;
+  padding: 0.65rem 0.75rem;
+  border-radius: 0.55rem;
+  background: #0f172a;
+  color: #f8fafc;
+  font-size: 0.78rem;
+  line-height: 1.35;
+  box-shadow: 0 0.5rem 1.25rem rgba(15, 23, 42, 0.28);
+  pointer-events: none;
+}
+
+.mvi-lic-cost-tip strong {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: 0.86rem;
+}
+
+.mvi-lic-cost-tip span {
+  display: block;
+  color: #e2e8f0;
+}
+
+.mvi-lic-cost-tip em {
+  display: block;
+  margin-top: 0.4rem;
+  font-style: normal;
+  color: #93c5fd;
+  font-size: 0.72rem;
+}
+
+.mvi-home-lic__states a {
+  color: inherit;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.mvi-home-lic__states a:hover,
+.mvi-home-lic__states a:focus-visible {
+  color: #1d4ed8;
+  text-decoration: underline;
+  outline: none;
+}
+
 .mvi-lic-state-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
@@ -362,7 +413,7 @@
 }
 
 .mvi-home-lic .mvi-us-map .mvi-state.is-licensed {
-  cursor: default;
+  cursor: pointer;
 }
 
 .mvi-home-lic__states {

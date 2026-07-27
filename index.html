@@ -142,7 +142,7 @@
 <link href="css/nav-funeral-resources.css?v=20260721-faces-top" rel="stylesheet">
 <link href="css/nav-life-insurance.css?v=20260721-cost-blue" rel="stylesheet">
 <link href="css/carrier-trust-strip.css?v=20260723-trust-fold6" rel="stylesheet">
-<link href="css/mvi-licensing-map.css?v=20260723-home-lic2" rel="stylesheet">
+<link href="css/mvi-licensing-map.css?v=20260726-state-cov" rel="stylesheet">
 <link href="css/mvi-home-fe-about.css?v=20260725c" rel="stylesheet">
 <style>
     /* Smooth scrolling */
@@ -1054,6 +1054,10 @@
                   <i class="fas fa-dollar-sign" aria-hidden="true"></i>
                   <span>Costo del seguro</span>
                 </button>
+                <button type="button" class="nav-life-category" data-life-panel="by-state" aria-pressed="false">
+                  <i class="fas fa-map-marked-alt" aria-hidden="true"></i>
+                  <span>Cobertura por estado</span>
+                </button>
               </div>
               <div class="nav-life-panel is-active" data-life-panel="coverage">
               <div class="nav-life-options">
@@ -1102,6 +1106,29 @@
                 <div class="nav-life-feature-copy">
                   <h3>Obtener cobertura asequible</h3>
                   <p>Vea cuánto cuesta el <span class="nav-life-feature-em">seguro de vida</span> según el tipo de póliza y el monto.</p>
+                </div>
+              </a>
+              </div>
+              <div class="nav-life-panel" data-life-panel="by-state" hidden>
+              <div class="nav-life-options">
+                <h3>Estados con licencia</h3>
+                <div class="nav-life-options-grid">
+                  <a href="estados/nebraska.html">Nebraska</a>
+                  <a href="estados/kansas.html">Kansas</a>
+                  <a href="estados/colorado.html">Colorado</a>
+                  <a href="estados/nevada.html">Nevada</a>
+                </div>
+              </div>
+              <a class="nav-life-feature" href="index.html#licensing-map">
+                <div class="nav-life-feature-copy">
+                  <h3>Vea el mapa de cobertura</h3>
+                  <p>Julie está licenciada en Nebraska, Kansas, Colorado y Nevada. Elija su estado para costos y opciones locales.</p>
+                </div>
+                <div class="nav-life-feature-media" aria-hidden="true">
+                  <picture>
+                    <source type="image/webp" srcset="img/opt/hero-couple-embrace.webp" />
+                    <img src="img/opt/hero-couple-embrace.jpg" alt="" width="640" height="480" loading="lazy" decoding="async" />
+                  </picture>
                 </div>
               </a>
               </div>
@@ -1231,6 +1258,10 @@
         <div class="mobile-menu-panel" id="mm-life" role="region" aria-labelledby="mm-life-btn" hidden>
           <a href="tipos-seguro-vida.html" class="mobile-menu-link">Tipos de seguro de vida</a>
           <a href="guias-gastos-finales.html" class="mobile-menu-link">Seguro de gastos finales</a>
+          <a href="estados/nebraska.html" class="mobile-menu-link">Cobertura en Nebraska</a>
+          <a href="estados/kansas.html" class="mobile-menu-link">Cobertura en Kansas</a>
+          <a href="estados/colorado.html" class="mobile-menu-link">Cobertura en Colorado</a>
+          <a href="estados/nevada.html" class="mobile-menu-link">Cobertura en Nevada</a>
           <a href="term-quote.html" class="mobile-menu-link">Seguro de vida temporal</a>
           <a href="costo-seguro-vida.html" class="mobile-menu-link">Costo del seguro</a>
           <a href="quote.html" class="mobile-menu-link">Seguro de vida de emisión inmediata</a>
@@ -1421,10 +1452,10 @@
       </div>
       <div class="mvi-lic-map-wrap" id="mvi-lic-map-host" data-map-src="img/us-states-map.svg?v=20260723-viewbox" data-map-mode="highlight-only" aria-label="Mapa de Estados Unidos con Nebraska, Kansas, Colorado y Nevada destacados"></div>
       <ul class="mvi-home-lic__states" aria-label="Estados con licencia">
-        <li>Nebraska</li>
-        <li>Kansas</li>
-        <li>Colorado</li>
-        <li>Nevada</li>
+        <li><a href="/estados/nebraska.html">Nebraska</a></li>
+        <li><a href="/estados/kansas.html">Kansas</a></li>
+        <li><a href="/estados/colorado.html">Colorado</a></li>
+        <li><a href="/estados/nevada.html">Nevada</a></li>
       </ul>
       <a class="mvi-home-lic__link link-primary" href="licencias.html">Ver licencias y NPN</a>
     </div>
@@ -1681,8 +1712,9 @@
 <script defer src="js/mvi-ga4-funnel.js?v=20260711a"></script>
 <script defer src="script.js"></script>
 <script defer src="js/mvi-nav-questions.js?v=20260723-mobile-menu"></script>
-<script defer src="js/mvi-licensing-map.js?v=20260723-home-lic2"></script>
-<script defer="" src="js/website-assistant-widget.js?v=20260721-chat-z"></script>
+<script defer src="js/state-coverage-costs.js?v=20260726a"></script>
+<script defer src="js/mvi-licensing-map.js?v=20260726-state-cov"></script>
+<script defer="" src="js/website-assistant-widget.js?v=20260726-rate-limit"></script>
 <!-- Mobile menu script -->
 <script>
     // Mobile hamburger menu

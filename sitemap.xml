@@ -3,7 +3,7 @@
 
   <url>
     <loc>https://www.mejorvidainsurance.com/</loc>
-    <lastmod>2026-07-26T20:16:00+00:00</lastmod>
+    <lastmod>2026-07-26T20:50:00+00:00</lastmod>
     <priority>1.00</priority>
   </url>
 
@@ -95,6 +95,30 @@
     <loc>https://www.mejorvidainsurance.com/carriers/corebridge.html</loc>
     <lastmod>2026-07-26T20:05:00+00:00</lastmod>
     <priority>0.70</priority>
+  </url>
+
+  <url>
+    <loc>https://www.mejorvidainsurance.com/estados/nebraska.html</loc>
+    <lastmod>2026-07-26T20:50:00+00:00</lastmod>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://www.mejorvidainsurance.com/estados/kansas.html</loc>
+    <lastmod>2026-07-26T20:50:00+00:00</lastmod>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://www.mejorvidainsurance.com/estados/colorado.html</loc>
+    <lastmod>2026-07-26T20:50:00+00:00</lastmod>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://www.mejorvidainsurance.com/estados/nevada.html</loc>
+    <lastmod>2026-07-26T20:50:00+00:00</lastmod>
+    <priority>0.85</priority>
   </url>
 
   <url>

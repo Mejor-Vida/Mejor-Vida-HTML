@@ -1,0 +1,789 @@
+/* State coverage pages (NE / KS / CO / NV) */
+
+.state-coverage-page {
+  --sc-navy: #1a365d;
+  --sc-accent: #2563eb;
+  --sc-gold: #c9a227;
+}
+
+.state-coverage-page main.state-coverage-readability {
+  font-size: 1.125rem;
+  line-height: 1.65;
+}
+
+.state-coverage-page main.state-coverage-readability .lead {
+  font-size: clamp(1.25rem, 2.2vw, 1.45rem);
+  line-height: 1.5;
+}
+
+.state-coverage-cost-table thead th {
+  background: var(--sc-navy);
+  color: #fff;
+  border-color: #15304f;
+  font-weight: 600;
+}
+
+.state-coverage-cost-table tbody tr:nth-child(even) {
+  background: #f8fafc;
+}
+
+/* Funeralocity-style detailed cost accordion */
+.sc-cost-columns {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem 1rem;
+  padding: 0.55rem 1.1rem;
+  margin-bottom: 0.35rem;
+  background: #eef2f7;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.65rem;
+  color: #64748b;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.sc-cost-columns-service {
+  flex: 1 1 12rem;
+}
+
+.sc-cost-columns-range {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.sc-cost-columns-spacer {
+  width: 1.1rem;
+  flex: 0 0 1.1rem;
+}
+
+.sc-cost-chip--label {
+  color: #64748b;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.sc-cost-accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.sc-cost-panel {
+  border: 1px solid #e2e8f0;
+  border-radius: 0.65rem;
+  background: #fff;
+  overflow: hidden;
+}
+
+.sc-cost-summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 1rem;
+  padding: 0.95rem 1.1rem;
+  background: #f1f5f9;
+  color: var(--sc-navy);
+  font-weight: 600;
+}
+
+.sc-cost-summary::-webkit-details-marker {
+  display: none;
+}
+
+.sc-cost-summary::after {
+  content: "▾";
+  width: 1.1rem;
+  flex: 0 0 1.1rem;
+  text-align: center;
+  color: #64748b;
+  font-weight: 400;
+  transition: transform 0.15s ease;
+}
+
+.sc-cost-panel[open] > .sc-cost-summary::after {
+  transform: rotate(180deg);
+}
+
+.sc-cost-summary-title {
+  flex: 1 1 12rem;
+  padding-right: 0.5rem;
+}
+
+.sc-cost-summary-range {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.sc-cost-chip {
+  display: inline-block;
+  min-width: 4.75rem;
+  text-align: right;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #334155;
+}
+
+.sc-cost-chip--avg {
+  color: var(--sc-navy);
+}
+
+.sc-cost-panel-body {
+  padding: 0;
+  border-top: 1px solid #e2e8f0;
+}
+
+.sc-cost-detail-table {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.sc-cost-detail-table td,
+.sc-cost-detail-table th {
+  padding: 0.7rem 0.9rem;
+}
+
+.sc-cost-descriptions {
+  display: flex;
+  flex-direction: column;
+  gap: 1.35rem;
+}
+
+.sc-cost-desc-block {
+  padding-top: 0.15rem;
+}
+
+@media (max-width: 575.98px) {
+  .sc-cost-columns,
+  .sc-cost-summary {
+    padding: 0.85rem 0.9rem;
+  }
+
+  .sc-cost-columns-spacer {
+    display: none;
+  }
+
+  .sc-cost-chip {
+    min-width: 3.75rem;
+    font-size: 0.875rem;
+  }
+
+  .sc-cost-detail-table {
+    font-size: 0.95rem;
+  }
+}
+
+.state-coverage-carrier-grid a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 6.5rem;
+  padding: 1.15rem 1.25rem;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.65rem;
+  text-decoration: none;
+  transition: box-shadow 0.18s ease, transform 0.18s ease;
+}
+
+.state-coverage-carrier-grid a:hover,
+.state-coverage-carrier-grid a:focus-visible {
+  box-shadow: 0 0.45rem 1rem rgba(26, 54, 93, 0.12);
+  transform: translateY(-1px);
+  outline: none;
+}
+
+.state-coverage-carrier-grid img {
+  max-height: 3.75rem;
+  width: auto;
+  max-width: 92%;
+  object-fit: contain;
+}
+
+/* Ranked carrier comparison (Choice Mutual–style, richer rows, no quote CTA) */
+.sc-carrier-table-wrap {
+  border: 1px solid #e2e8f0;
+  border-radius: 0.75rem;
+  background: #fff;
+  overflow: hidden;
+}
+
+.sc-carrier-table {
+  --sc-carrier-gold: #c9a227;
+  --sc-carrier-ink: #1a365d;
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.sc-carrier-table thead th {
+  background: #f8fafc;
+  color: var(--sc-carrier-ink);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border-bottom: 1px solid #e2e8f0;
+  padding: 0.85rem 1rem;
+  white-space: nowrap;
+}
+
+.sc-carrier-table tbody td {
+  border-color: #edf2f7;
+  padding: 1.15rem 1rem;
+  vertical-align: top;
+}
+
+.sc-carrier-row:hover td {
+  background: #fbfdff;
+}
+
+.sc-carrier-insurer-inner {
+  position: relative;
+  padding-left: 1.75rem;
+  min-width: 11rem;
+}
+
+.sc-carrier-rank {
+  position: absolute;
+  left: 0;
+  top: 0.15rem;
+  width: 1.35rem;
+  height: 1.35rem;
+  border-radius: 999px;
+  background: #ebf4ff;
+  color: var(--sc-carrier-ink);
+  font-size: 0.72rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sc-carrier-logo-link {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.35rem;
+  text-decoration: none;
+  color: inherit;
+}
+
+.sc-carrier-logo-link img {
+  max-height: 2.35rem;
+  width: auto;
+  max-width: 10.5rem;
+  object-fit: contain;
+}
+
+.sc-carrier-name {
+  font-weight: 700;
+  color: var(--sc-carrier-ink);
+  font-size: 0.98rem;
+}
+
+.sc-carrier-issuer {
+  margin-top: 0.35rem;
+  font-size: 0.78rem;
+  color: #64748b;
+  line-height: 1.35;
+  max-width: 14rem;
+}
+
+.sc-carrier-profile {
+  display: inline-block;
+  margin-top: 0.45rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #0b5cab;
+  text-decoration: none;
+}
+
+.sc-carrier-profile:hover,
+.sc-carrier-profile:focus-visible {
+  text-decoration: underline;
+}
+
+.sc-carrier-product {
+  color: var(--sc-carrier-ink);
+  font-size: 0.92rem;
+}
+
+.sc-carrier-detail-list {
+  margin: 0;
+  padding-left: 1.1rem;
+  color: #475569;
+  font-size: 0.88rem;
+  line-height: 1.45;
+}
+
+.sc-carrier-detail-list li + li {
+  margin-top: 0.25rem;
+}
+
+.sc-carrier-ambest-label {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: #64748b;
+  margin-right: 0.35rem;
+}
+
+.sc-carrier-fsr {
+  font-size: 1.15rem;
+  color: var(--sc-carrier-ink);
+}
+
+.sc-carrier-fsr-desc {
+  color: #64748b;
+  font-size: 0.88rem;
+}
+
+.sc-carrier-outlook {
+  font-size: 0.88rem;
+  color: #334155;
+}
+
+.sc-carrier-other {
+  margin: 0;
+  padding-left: 1.05rem;
+  font-size: 0.82rem;
+  color: #475569;
+}
+
+.sc-carrier-score {
+  min-width: 9.5rem;
+}
+
+.sc-carrier-score-num {
+  color: var(--sc-carrier-ink);
+  font-size: 1.35rem;
+  line-height: 1.1;
+}
+
+.sc-carrier-score-num span {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #64748b;
+  margin-left: 0.1rem;
+}
+
+.sc-carrier-stars {
+  margin: 0.2rem 0 0.55rem;
+  letter-spacing: 0.06em;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.sc-star--on {
+  color: var(--sc-carrier-gold);
+}
+
+.sc-star--half {
+  color: var(--sc-carrier-gold);
+  opacity: 0.55;
+}
+
+.sc-star--off {
+  color: #cbd5e1;
+}
+
+.sc-carrier-score-why {
+  font-size: 0.78rem;
+  color: #64748b;
+  line-height: 1.4;
+  max-width: 14rem;
+}
+
+.sc-carrier-sources {
+  border: 1px solid #e2e8f0;
+  border-radius: 0.65rem;
+  background: #fff;
+  padding: 0.75rem 1rem;
+}
+
+.sc-carrier-sources summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--sc-carrier-ink);
+  font-size: 0.9rem;
+}
+
+.sc-carrier-sources ul {
+  padding-left: 1.15rem;
+}
+
+@media (max-width: 767.98px) {
+  .sc-carrier-table thead {
+    display: none;
+  }
+
+  .sc-carrier-table,
+  .sc-carrier-table tbody,
+  .sc-carrier-table tr,
+  .sc-carrier-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .sc-carrier-table tbody tr {
+    border-bottom: 1px solid #e2e8f0;
+    padding: 0.35rem 0 1rem;
+  }
+
+  .sc-carrier-table tbody td {
+    border: 0;
+    padding: 0.55rem 1rem;
+  }
+
+  .sc-carrier-table tbody td::before {
+    content: attr(data-label);
+    display: block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #64748b;
+    margin-bottom: 0.35rem;
+  }
+
+  .sc-carrier-score-why {
+    max-width: none;
+  }
+}
+
+.state-coverage-license-card {
+  background: #ebf8ff;
+  border: 1px solid #bee3f8;
+  border-radius: 0.75rem;
+  padding: 1.25rem 1.35rem;
+}
+
+.state-coverage-notes-slot {
+  border: 1px dashed #cbd5e1;
+  border-radius: 0.75rem;
+  background: #f8fafc;
+  padding: 1.15rem 1.25rem;
+}
+
+.state-coverage-notes-slot:empty {
+  display: none;
+}
+
+/* —— Choice Mutual–style state hero —— */
+.sc-hero {
+  --sc-hero-deep: #0a2f5c;
+  --sc-hero-mid: #1a5f9e;
+  /* Match county-map neighbor blue so letterboxing / gaps match the art */
+  --sc-hero-map: #1e5f96;
+  position: relative;
+  overflow: hidden;
+  color: #fff;
+  background: linear-gradient(
+    90deg,
+    var(--sc-hero-deep) 0%,
+    var(--sc-hero-deep) 30%,
+    var(--sc-hero-mid) 58%,
+    var(--sc-hero-map) 100%
+  );
+  min-height: clamp(28rem, 62vh, 36rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.sc-hero-visual {
+  position: absolute;
+  /* Full hero height so the top strip behind WhatsApp matches the map blue */
+  inset: 0 0 0 auto;
+  width: min(58%, 44rem);
+  pointer-events: none;
+  z-index: 1;
+  background: var(--sc-hero-map);
+  /* Fade image out toward the left into the darker blue */
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.15) 18%, #000 48%, #000 100%);
+  mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.15) 18%, #000 48%, #000 100%);
+}
+
+.sc-hero-visual picture,
+.sc-hero-visual img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: right center;
+}
+
+/* Colorado uses the same hero treatment as Nebraska (county map art) */
+
+/* Nevada: transparent state cutout on one shared hero gradient (no image backdrop / seam) */
+.sc-hero--nv .sc-hero-visual {
+  width: min(52%, 37rem);
+  inset: 0 2.5% 0 auto;
+  background: var(--sc-hero-map);
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+
+.sc-hero--nv .sc-hero-visual img {
+  object-fit: contain;
+  object-position: 70% center;
+}
+
+.sc-hero--nv .sc-hero-shade {
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(10, 47, 92, 0.94) 0%,
+    rgba(10, 47, 92, 0.78) 38%,
+    rgba(10, 47, 92, 0.35) 55%,
+    rgba(30, 95, 150, 0.12) 68%,
+    transparent 80%
+  );
+}
+
+.sc-hero-shade {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  /* Continuous L→R fade — same blues as the map panel (no light top band) */
+  background: linear-gradient(
+    90deg,
+    rgba(10, 47, 92, 0.92) 0%,
+    rgba(10, 47, 92, 0.72) 32%,
+    rgba(26, 95, 158, 0.35) 55%,
+    rgba(30, 95, 150, 0.12) 72%,
+    transparent 88%
+  );
+}
+
+.sc-hero-inner {
+  position: relative;
+  z-index: 3;
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  padding-top: clamp(2rem, 5vw, 3.25rem);
+  padding-bottom: clamp(1.5rem, 3vw, 2.5rem);
+  max-width: 72rem;
+}
+
+.sc-hero-copy {
+  max-width: min(34rem, 100%);
+}
+
+.sc-hero-title {
+  font-size: clamp(1.85rem, 3.6vw, 2.85rem);
+  font-weight: 800;
+  line-height: 1.12;
+  margin: 0 0 1.1rem;
+  color: #fff;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+
+.sc-hero-bullets {
+  margin: 0 0 1.15rem;
+  padding-left: 1.15rem;
+  font-size: clamp(1rem, 1.35vw, 1.125rem);
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.94);
+}
+
+.sc-hero-bullets li + li {
+  margin-top: 0.55rem;
+}
+
+.sc-hero-cta-note {
+  margin: 0 0 0.85rem;
+  font-size: 0.98rem;
+  color: rgba(255, 255, 255, 0.88);
+  max-width: 28rem;
+}
+
+.sc-hero-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
+.sc-hero-cta {
+  background: #e8b923;
+  color: #0a2f5c;
+  font-weight: 700;
+  border: none;
+  padding: 0.7rem 1.35rem;
+  border-radius: 0.4rem;
+}
+
+.sc-hero-cta:hover,
+.sc-hero-cta:focus-visible {
+  background: #f0c93a;
+  color: #0a2f5c;
+}
+
+.sc-hero-cta-secondary {
+  background: transparent;
+  color: #fff;
+  font-weight: 600;
+  border: 1.5px solid rgba(255, 255, 255, 0.65);
+  padding: 0.7rem 1.2rem;
+  border-radius: 0.4rem;
+}
+
+.sc-hero-cta-secondary:hover,
+.sc-hero-cta-secondary:focus-visible {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  border-color: #fff;
+}
+
+.sc-hero-agentbar {
+  position: relative;
+  z-index: 4;
+  background: rgba(6, 28, 56, 0.55);
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(6px);
+}
+
+.sc-hero-agentbar-inner {
+  max-width: 72rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.85rem 1.25rem;
+  padding-top: 0.85rem;
+  padding-bottom: 0.85rem;
+}
+
+.sc-hero-agent-identity {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  min-width: 0;
+}
+
+.sc-hero-agent-photo {
+  flex: 0 0 auto;
+  display: block;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.25);
+  background: #1a5f9e;
+}
+
+.sc-hero-agent-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+.sc-hero-agent-kicker {
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.sc-hero-agent-name,
+.sc-hero-agent-npn {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.sc-hero-agent-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.sc-hero-lic-btn {
+  background: #fff;
+  color: #0a2f5c;
+  font-weight: 600;
+  border: none;
+}
+
+.sc-hero-lic-btn:hover,
+.sc-hero-lic-btn:focus-visible {
+  background: #e8f1fb;
+  color: #0a2f5c;
+}
+
+.sc-hero-lic-btn-outline {
+  background: transparent;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  font-weight: 600;
+}
+
+.sc-hero-lic-btn-outline:hover,
+.sc-hero-lic-btn-outline:focus-visible {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+@media (max-width: 991.98px) {
+  .sc-hero {
+    min-height: auto;
+  }
+
+  .sc-hero-visual {
+    width: 70%;
+    opacity: 0.55;
+    inset: 0 0 0 auto;
+  }
+
+  .sc-hero-copy {
+    max-width: 100%;
+  }
+
+  .sc-hero-title {
+    white-space: normal;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .sc-hero-visual {
+    width: 100%;
+    opacity: 0.35;
+  }
+
+  .sc-hero-shade {
+    background: linear-gradient(
+      180deg,
+      rgba(10, 47, 92, 0.55) 0%,
+      rgba(10, 47, 92, 0.88) 55%,
+      rgba(10, 47, 92, 0.95) 100%
+    );
+  }
+
+  .sc-hero-agentbar-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .sc-hero-title {
+    font-size: clamp(1.45rem, 6.5vw, 1.85rem);
+    white-space: normal;
+  }
+}

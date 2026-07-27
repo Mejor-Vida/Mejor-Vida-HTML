@@ -1,0 +1,237 @@
+{
+  "updatedAt": "2026-07-26",
+  "methodology": {
+    "en": "Mejor Vida scores are a 5.0 scale led by AM Best Financial Strength Rating (FSR), with small adjustments for outlook / under-review status and whether additional independent agencies (Moody’s, S&P) also rate the issuer. Scores rank Julie’s active appointment carriers only and are not an endorsement by any rating agency.",
+    "es": "Las calificaciones de Mejor Vida usan una escala de 5.0 basada principalmente en la calificación de solidez financiera (FSR) de AM Best, con ajustes menores por perspectiva / revisión y por si otras agencias independientes (Moody’s, S&P) también califican al emisor. Solo ordenan las aseguradoras con las que Julie cotiza activamente y no son un respaldo de ninguna agencia."
+  },
+  "sources": [
+    {
+      "id": "ambest",
+      "name": "AM Best",
+      "url": "https://news.ambest.com/",
+      "whatEn": "Financial Strength Rating (ability to meet policyholder obligations)",
+      "whatEs": "Calificación de solidez financiera (capacidad de cumplir obligaciones con asegurados)"
+    },
+    {
+      "id": "moodys",
+      "name": "Moody’s",
+      "url": "https://ratings.moodys.com/",
+      "whatEn": "Insurance financial strength / credit ratings",
+      "whatEs": "Calificaciones de solidez financiera / crédito"
+    },
+    {
+      "id": "sp",
+      "name": "S&P Global",
+      "url": "https://www.spglobal.com/ratings/",
+      "whatEn": "Insurer financial strength ratings",
+      "whatEs": "Calificaciones de solidez financiera del asegurador"
+    },
+    {
+      "id": "naic",
+      "name": "NAIC Consumer Information Source",
+      "url": "https://content.naic.org/cis_consumer_information.htm",
+      "whatEn": "Official complaint and company lookup (verify by NAIC company code)",
+      "whatEs": "Consulta oficial de quejas y compañías (verifique por código NAIC)"
+    },
+    {
+      "id": "weiss",
+      "name": "Weiss Ratings",
+      "url": "https://weissratings.com/",
+      "whatEn": "Independent financial safety grades (subscription; verify on site)",
+      "whatEs": "Calificaciones independientes de seguridad financiera (suscripción; verifique en el sitio)"
+    },
+    {
+      "id": "jdpower",
+      "name": "J.D. Power",
+      "url": "https://www.jdpower.com/",
+      "whatEn": "Customer satisfaction studies (when published for life insurance)",
+      "whatEs": "Estudios de satisfacción del cliente (cuando se publican para vida)"
+    }
+  ],
+  "carriers": [
+    {
+      "id": "mutual-of-omaha",
+      "rank": 1,
+      "score": 4.75,
+      "slug": "mutual-of-omaha",
+      "name": "Mutual of Omaha",
+      "issuerEn": "United of Omaha Life Insurance Company",
+      "issuerEs": "United of Omaha Life Insurance Company",
+      "logo": "img/opt/mutual-of-omaha-logo.png",
+      "logoWidth": 480,
+      "logoHeight": 120,
+      "productEn": "Living Promise® whole life",
+      "productEs": "Living Promise® vida entera",
+      "coverageEn": "$2,000–$50,000 (level); graded up to $20,000",
+      "coverageEs": "$2,000–$50,000 (inmediato); escalonado hasta $20,000",
+      "agesEn": "Applicant ages 45–85",
+      "agesEs": "Edades 45–85",
+      "waitingEn": "Level benefit: no waiting period for natural death (when issued); graded plan available",
+      "waitingEs": "Beneficio inmediato: sin período de espera por muerte natural (si se emite); hay plan escalonado",
+      "amBest": {
+        "fsr": "A+",
+        "descriptor": "Superior",
+        "outlook": "Stable",
+        "effective": "2026-04-02",
+        "sourceUrl": "https://www.businesswire.com/news/home/20260402567677/en/AM-Best-Affirms-Credit-Ratings-of-Mutual-of-Omaha-Insurance-Company-and-Its-Subsidiaries",
+        "sourceLabel": "AM Best via Business Wire (Apr 2, 2026)"
+      },
+      "otherRatings": [
+        {
+          "agency": "Moody’s",
+          "rating": "A1",
+          "noteEn": "Good — 5th of 21 (per Mutual of Omaha public ratings page)",
+          "noteEs": "Buena — 5.ª de 21 (según página pública de Mutual of Omaha)",
+          "sourceUrl": "https://www.mutualofomaha.com/about/financial-strength/ratings"
+        },
+        {
+          "agency": "S&P Global",
+          "rating": "A+",
+          "noteEn": "Strong — 5th of 21 (per Mutual of Omaha public ratings page)",
+          "noteEs": "Fuerte — 5.ª de 21 (según página pública de Mutual of Omaha)",
+          "sourceUrl": "https://www.mutualofomaha.com/about/financial-strength/ratings"
+        }
+      ],
+      "naicNoteEn": "Verify United of Omaha (NAIC #69868) complaint history in the NAIC CIS lookup.",
+      "naicNoteEs": "Verifique el historial de quejas de United of Omaha (NAIC #69868) en el buscador CIS de la NAIC.",
+      "scoreWhyEn": "Highest AM Best FSR in this set (A+ Superior) plus Moody’s and S&P confirmation.",
+      "scoreWhyEs": "La FSR de AM Best más alta de este grupo (A+ Superior), con confirmación de Moody’s y S&P."
+    },
+    {
+      "id": "transamerica",
+      "rank": 2,
+      "score": 4.3,
+      "slug": "transamerica",
+      "name": "Transamerica",
+      "issuerEn": "Transamerica Life Insurance Company",
+      "issuerEs": "Transamerica Life Insurance Company",
+      "logo": "img/opt/transamerica-logo.png",
+      "logoWidth": 480,
+      "logoHeight": 114,
+      "productEn": "Final expense whole life portfolio (Immediate / Graded / Easy and related)",
+      "productEs": "Portafolio de vida entera para gastos finales (Inmediato / Escalonado / Easy y relacionados)",
+      "coverageEn": "From about $5,000; up to $100,000 (ages 18–75) or $25,000 (76–85) on select plans",
+      "coverageEs": "Desde ~$5,000; hasta $100,000 (18–75) o $25,000 (76–85) en planes selectos",
+      "agesEn": "Typical issue ages 18–85 (varies by plan)",
+      "agesEs": "Edades típicas 18–85 (varía por plan)",
+      "waitingEn": "Day-one full benefit on qualifying Immediate plans; graded designs available",
+      "waitingEs": "Beneficio completo desde el día uno en planes Immediate que califican; hay diseños escalonados",
+      "amBest": {
+        "fsr": "A",
+        "descriptor": "Excellent",
+        "outlook": "Stable",
+        "effective": "2026-02-13",
+        "icr": "a+",
+        "sourceUrl": "https://www.businesswire.com/news/home/20260213665353/en/AM-Best-Affirms-Credit-Ratings-of-Members-of-Aegon-Ltd.s-U.S.-Subsidiaries",
+        "sourceLabel": "AM Best via Business Wire (Feb 13, 2026)"
+      },
+      "otherRatings": [],
+      "naicNoteEn": "Verify Transamerica Life (NAIC #86231) in the NAIC CIS lookup; complaint indexes vary by state and year.",
+      "naicNoteEs": "Verifique Transamerica Life (NAIC #86231) en el CIS de la NAIC; los índices de quejas varían por estado y año.",
+      "scoreWhyEn": "AM Best A (Excellent) with Long-Term ICR a+ and large financial size category (XV).",
+      "scoreWhyEs": "AM Best A (Excelente) con ICR a largo plazo a+ y categoría de tamaño financiero grande (XV)."
+    },
+    {
+      "id": "american-amicable",
+      "rank": 3,
+      "score": 4.2,
+      "slug": "american-amicable",
+      "name": "American Amicable",
+      "issuerEn": "American-Amicable Life Insurance Company of Texas",
+      "issuerEs": "American-Amicable Life Insurance Company of Texas",
+      "logo": "img/opt/american-amicable-logo.png",
+      "logoWidth": 520,
+      "logoHeight": 109,
+      "productEn": "Golden Solution / Senior Choice whole life",
+      "productEs": "Golden Solution / Senior Choice vida entera",
+      "coverageEn": "Immediate up to $50,000 (50–75) / $25,000 (76–85); graded/ROP up to $25,000",
+      "coverageEs": "Inmediato hasta $50,000 (50–75) / $25,000 (76–85); escalonado/ROP hasta $25,000",
+      "agesEn": "Applicant ages 50–85",
+      "agesEs": "Edades 50–85",
+      "waitingEn": "Immediate (level) benefit available; graded and return-of-premium designs available",
+      "waitingEs": "Beneficio inmediato disponible; hay planes escalonados y de devolución de prima",
+      "amBest": {
+        "fsr": "A",
+        "descriptor": "Excellent",
+        "outlook": "Stable",
+        "effective": "2025-09-18",
+        "icr": "a",
+        "sourceUrl": "https://ratings.ambest.com/DisclosurePDF.aspx?AMBNum=9122",
+        "sourceLabel": "AM Best disclosure (AMB #009122, Sep 18, 2025)"
+      },
+      "otherRatings": [],
+      "naicNoteEn": "Verify American-Amicable Life of TX (NAIC #68594) in the NAIC CIS lookup.",
+      "naicNoteEs": "Verifique American-Amicable Life of TX (NAIC #68594) en el CIS de la NAIC.",
+      "scoreWhyEn": "AM Best A (Excellent), stable outlook; specialized final-expense focus.",
+      "scoreWhyEs": "AM Best A (Excelente), perspectiva estable; enfoque en gastos finales."
+    },
+    {
+      "id": "corebridge",
+      "rank": 4,
+      "score": 4.05,
+      "slug": "corebridge",
+      "name": "Corebridge",
+      "issuerEn": "American General Life Insurance Company",
+      "issuerEs": "American General Life Insurance Company",
+      "logo": "img/carriers/corebridge-logo.svg",
+      "logoWidth": 576,
+      "logoHeight": 188,
+      "productEn": "SimpliNow Legacy® / GIWL final expense",
+      "productEs": "SimpliNow Legacy® / GIWL gastos finales",
+      "coverageEn": "About $5,000–$35,000 (level); graded / GIWL typically up to ~$25,000",
+      "coverageEs": "Aprox. $5,000–$35,000 (inmediato); escalonado / GIWL típicamente hasta ~$25,000",
+      "agesEn": "Typical issue ages 50–80",
+      "agesEs": "Edades típicas 50–80",
+      "waitingEn": "Level or graded SimpliNow Legacy; guaranteed-issue option with waiting/graded period",
+      "waitingEs": "SimpliNow Legacy inmediato o escalonado; opción de emisión garantizada con período de espera/escalonado",
+      "amBest": {
+        "fsr": "A",
+        "descriptor": "Excellent",
+        "outlook": "Under Review — Developing",
+        "effective": "2026-03-27",
+        "icr": "a",
+        "sourceUrl": "https://news.ambest.com/NewsContent.aspx?altsrc=23&refnum=273514",
+        "sourceLabel": "AM Best Best’s News (Mar 27, 2026) — under review (Equitable merger)"
+      },
+      "otherRatings": [],
+      "naicNoteEn": "Verify American General Life (issuing company) in the NAIC CIS lookup. AM Best placed Corebridge FSRs under review after the announced Equitable combination.",
+      "naicNoteEs": "Verifique American General Life (compañía emisora) en el CIS de la NAIC. AM Best puso las FSR de Corebridge en revisión tras el anuncio de combinación con Equitable.",
+      "scoreWhyEn": "AM Best A (Excellent), tempered slightly because ratings are under review with developing implications.",
+      "scoreWhyEs": "AM Best A (Excelente), ajustado ligeramente porque las calificaciones están en revisión con implicaciones en desarrollo."
+    },
+    {
+      "id": "assurity",
+      "rank": 5,
+      "score": 3.85,
+      "slug": "assurity",
+      "name": "Assurity",
+      "issuerEn": "Assurity Life Insurance Company",
+      "issuerEs": "Assurity Life Insurance Company",
+      "logo": "img/carriers/assurity-wordmark.png",
+      "logoWidth": 526,
+      "logoHeight": 132,
+      "productEn": "Whole Life Protect+ / Perform+",
+      "productEs": "Whole Life Protect+ / Perform+",
+      "coverageEn": "Permanent coverage starting at $10,000 (simplified issue)",
+      "coverageEs": "Cobertura permanente desde $10,000 (emisión simplificada)",
+      "agesEn": "Issue ages 15 days–85 (simplified issue through age 85)",
+      "agesEs": "Edades de emisión: 15 días–85 (emisión simplificada hasta los 85)",
+      "waitingEn": "Built-in living benefits on Protect+/Perform+; underwriting determines benefit design",
+      "waitingEs": "Beneficios en vida incluidos en Protect+/Perform+; la suscripción define el diseño del beneficio",
+      "amBest": {
+        "fsr": "A-",
+        "descriptor": "Excellent",
+        "outlook": "Stable",
+        "effective": "2025-11-06",
+        "icr": "a-",
+        "sourceUrl": "https://ratings.ambest.com/DisclosurePDF.aspx?AMBNum=7374",
+        "sourceLabel": "AM Best disclosure (AMB #007374, Nov 6, 2025)"
+      },
+      "otherRatings": [],
+      "naicNoteEn": "Verify Assurity Life (NAIC #71439) in the NAIC CIS lookup.",
+      "naicNoteEs": "Verifique Assurity Life (NAIC #71439) en el CIS de la NAIC.",
+      "scoreWhyEn": "AM Best A- (Excellent) with stable outlook; mutual structure with century-plus history.",
+      "scoreWhyEs": "AM Best A- (Excelente) con perspectiva estable; estructura mutual con más de un siglo de historia."
+    }
+  ]
+}

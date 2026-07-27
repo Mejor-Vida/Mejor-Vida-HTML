@@ -1,0 +1,119 @@
+{
+  "source": "Funeralocity API",
+  "capturedAt": "2026-07-26",
+  "note": "State.Average figures for coverage pages + map tooltips.",
+  "states": {
+    "NE": {
+      "name": "Nebraska",
+      "sourceUrl": "https://www.funeralocity.com/average-funeral-price/ne",
+      "fullBurial": {
+        "Average": 8620,
+        "Min": 6300,
+        "Max": 12340,
+        "Rank": 22
+      },
+      "immediateBurial": {
+        "Average": 5467,
+        "Min": 3295,
+        "Max": 8118,
+        "Rank": 9
+      },
+      "fullCremation": {
+        "Average": 6530,
+        "Min": 3860,
+        "Max": 10455,
+        "Rank": 16
+      },
+      "directCremation": {
+        "Average": 2958,
+        "Min": 995,
+        "Max": 5100,
+        "Rank": 4
+      }
+    },
+    "KS": {
+      "name": "Kansas",
+      "sourceUrl": "https://www.funeralocity.com/average-funeral-price/ks",
+      "fullBurial": {
+        "Average": 8640,
+        "Min": 5935,
+        "Max": 21475,
+        "Rank": 21
+      },
+      "immediateBurial": {
+        "Average": 5374,
+        "Min": 2950,
+        "Max": 8360,
+        "Rank": 13
+      },
+      "fullCremation": {
+        "Average": 6452,
+        "Min": 3635,
+        "Max": 19300,
+        "Rank": 19
+      },
+      "directCremation": {
+        "Average": 2553,
+        "Min": 695,
+        "Max": 7245,
+        "Rank": 12
+      }
+    },
+    "CO": {
+      "name": "Colorado",
+      "sourceUrl": "https://www.funeralocity.com/average-funeral-price/co",
+      "fullBurial": {
+        "Average": 8162,
+        "Min": 5595,
+        "Max": 12185,
+        "Rank": 36
+      },
+      "immediateBurial": {
+        "Average": 4864,
+        "Min": 3400,
+        "Max": 7795,
+        "Rank": 38
+      },
+      "fullCremation": {
+        "Average": 5840,
+        "Min": 3280,
+        "Max": 9885,
+        "Rank": 39
+      },
+      "directCremation": {
+        "Average": 1730,
+        "Min": 495,
+        "Max": 4012,
+        "Rank": 41
+      }
+    },
+    "NV": {
+      "name": "Nevada",
+      "sourceUrl": "https://www.funeralocity.com/average-funeral-price/nv",
+      "fullBurial": {
+        "Average": 8538,
+        "Min": 6460,
+        "Max": 11355,
+        "Rank": 26
+      },
+      "immediateBurial": {
+        "Average": 4982,
+        "Min": 3495,
+        "Max": 7095,
+        "Rank": 33
+      },
+      "fullCremation": {
+        "Average": 6095,
+        "Min": 4125,
+        "Max": 8865,
+        "Rank": 30
+      },
+      "directCremation": {
+        "Average": 1467,
+        "Min": 559,
+        "Max": 2370,
+        "Rank": 50
+      }
+    }
+  }
+}

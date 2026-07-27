@@ -203,13 +203,115 @@
     document.body.style.overflow = "";
   }
 
+  function wireCoverageMap(svgRoot) {
+    var host = document.getElementById("mvi-lic-map-host");
+    if (!host) return;
+    host.classList.add("mvi-lic-map-wrap--coverage");
+
+    var tip = document.getElementById("mvi-lic-cost-tip");
+    if (!tip) {
+      tip = document.createElement("div");
+      tip.id = "mvi-lic-cost-tip";
+      tip.className = "mvi-lic-cost-tip";
+      tip.setAttribute("role", "tooltip");
+      tip.hidden = true;
+      host.appendChild(tip);
+    }
+
+    var costsApi = window.MVI_STATE_COVERAGE;
+    var es = isEs();
+
+    Object.keys(LICENSED).forEach(function (code) {
+      var el = svgRoot.getElementById(code) || svgRoot.querySelector('[data-state="' + code + '"]');
+      if (!el) return;
+      el.classList.add("is-licensed", "is-coverage-link");
+      el.setAttribute("tabindex", "0");
+      el.setAttribute("role", "link");
+      var info = LICENSED[code];
+      var name = es ? info.nameEs : info.nameEn;
+      var href = costsApi && costsApi.pageHref
+        ? costsApi.pageHref(code, es)
+        : es
+          ? "/estados/" + name.toLowerCase() + ".html"
+          : "/en/states/" + name.toLowerCase() + ".html";
+      // Prefer slug from costs module
+      if (costsApi && costsApi.costs && costsApi.costs[code]) {
+        href = costsApi.pageHref(code, es);
+      }
+      el.setAttribute("aria-label", name + " — " + t("Ver cobertura", "View coverage"));
+      el.style.cursor = "pointer";
+
+      function showTip(evt) {
+        var c = costsApi && costsApi.costs ? costsApi.costs[code] : null;
+        var money = costsApi && costsApi.money ? costsApi.money : function (n) { return "$" + n; };
+        if (!c) {
+          tip.hidden = true;
+          return;
+        }
+        tip.innerHTML =
+          "<strong>" +
+          name +
+          "</strong>" +
+          "<span>" +
+          t("Entierro promedio", "Avg. burial") +
+          ": " +
+          money(c.fullBurial) +
+          "</span>" +
+          "<span>" +
+          t("Cremación promedio", "Avg. cremation") +
+          ": " +
+          money(c.fullCremation) +
+          "</span>" +
+          "<em>" +
+          t("Clic para ver la página del estado", "Click for state page") +
+          "</em>";
+        tip.hidden = false;
+        positionTip(evt);
+      }
+
+      function positionTip(evt) {
+        var rect = host.getBoundingClientRect();
+        var x = (evt.clientX || 0) - rect.left + 12;
+        var y = (evt.clientY || 0) - rect.top + 12;
+        tip.style.left = Math.min(Math.max(8, x), Math.max(8, rect.width - 200)) + "px";
+        tip.style.top = Math.min(Math.max(8, y), Math.max(8, rect.height - 80)) + "px";
+      }
+
+      function go() {
+        window.location.href = href;
+      }
+
+      el.addEventListener("mouseenter", showTip);
+      el.addEventListener("mousemove", function (e) {
+        if (!tip.hidden) positionTip(e);
+      });
+      el.addEventListener("mouseleave", function () {
+        tip.hidden = true;
+      });
+      el.addEventListener("click", go);
+      el.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          go();
+        }
+      });
+    });
+  }
+
   function wireMap(svgRoot, highlightOnly) {
     if (!svgRoot) return;
     Object.keys(LICENSED).forEach(function (code) {
       var el = svgRoot.getElementById(code) || svgRoot.querySelector('[data-state="' + code + '"]');
       if (!el) return;
       el.classList.add("is-licensed");
-      if (highlightOnly) return;
+    });
+    if (highlightOnly) {
+      wireCoverageMap(svgRoot);
+      return;
+    }
+    Object.keys(LICENSED).forEach(function (code) {
+      var el = svgRoot.getElementById(code) || svgRoot.querySelector('[data-state="' + code + '"]');
+      if (!el) return;
       el.setAttribute("tabindex", "0");
       el.setAttribute("role", "button");
       var info = LICENSED[code];
@@ -309,5 +411,14 @@
     document.addEventListener("keydown", function (e) {
       if (e.key === "Escape") closeModal();
     });
+
+    document.querySelectorAll("[data-mvi-open-license]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var code = (btn.getAttribute("data-mvi-open-license") || "").toUpperCase();
+        if (code) openModal(code);
+      });
+    });
   });
+
+  window.MVI_openLicenseModal = openModal;
 })();
