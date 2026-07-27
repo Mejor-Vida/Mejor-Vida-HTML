@@ -1,8 +1,8 @@
 {
-  "updatedAt": "2026-07-26",
+  "updatedAt": "2026-07-27",
   "methodology": {
-    "en": "Mejor Vida scores are a 5.0 scale led by AM Best Financial Strength Rating (FSR), with small adjustments for outlook / under-review status and whether additional independent agencies (Moody’s, S&P) also rate the issuer. Scores rank Julie’s active appointment carriers only and are not an endorsement by any rating agency.",
-    "es": "Las calificaciones de Mejor Vida usan una escala de 5.0 basada principalmente en la calificación de solidez financiera (FSR) de AM Best, con ajustes menores por perspectiva / revisión y por si otras agencias independientes (Moody’s, S&P) también califican al emisor. Solo ordenan las aseguradoras con las que Julie cotiza activamente y no son un respaldo de ninguna agencia."
+    "en": "Mejor Vida proprietary score (/5): convert AM Best FSR to a percent (A++=100, A+=95, A=90, A-=85, …), use Comdex as a percent (1–100) when published, convert the NAIC CIS National Complaint Index to a percent where lower is better (0→100%, 1.00→50%, 2.00→0%), average the available percents, then score = average% ÷ 100 × 5. Stars match that /5 value. J.D. Power is shown for reference and is not in the average. Ranks Julie’s appointment carriers only — not an endorsement by any rating agency.",
+    "es": "Score propietario Mejor Vida (/5): convierte la FSR de AM Best a un porcentaje (A++=100, A+=95, A=90, A-=85, …), usa el Comdex como porcentaje (1–100) cuando se publica, convierte el índice nacional de quejas CIS de la NAIC a un porcentaje donde más bajo es mejor (0→100%, 1.00→50%, 2.00→0%), promedia los porcentajes disponibles y score = promedio% ÷ 100 × 5. Las estrellas coinciden con ese /5. J.D. Power se muestra como referencia y no entra en el promedio. Solo ordena las aseguradoras con cita de Julie — no es un respaldo de ninguna agencia."
   },
   "sources": [
     {
@@ -28,10 +28,10 @@
     },
     {
       "id": "naic",
-      "name": "NAIC Consumer Information Source",
+      "name": "NAIC Consumer Insurance Search (CIS)",
       "url": "https://content.naic.org/cis_consumer_information.htm",
-      "whatEn": "Official complaint and company lookup (verify by NAIC company code)",
-      "whatEs": "Consulta oficial de quejas y compañías (verifique por código NAIC)"
+      "whatEn": "CIS National Complaint Index and closed confirmed complaints (Consumer hub + company report)",
+      "whatEs": "Índice nacional de quejas CIS y quejas confirmadas cerradas (portal del consumidor + informe por compañía)"
     },
     {
       "id": "weiss",
@@ -46,20 +46,27 @@
       "url": "https://www.jdpower.com/",
       "whatEn": "Customer satisfaction studies (when published for life insurance)",
       "whatEs": "Estudios de satisfacción del cliente (cuando se publican para vida)"
+    },
+    {
+      "id": "comdex",
+      "name": "Comdex (EbixExchange)",
+      "url": "https://myannuitystore.com/resources/insurance-company-ratings/",
+      "whatEn": "Composite percentile (1–100) of AM Best / S&P / Moody’s / Fitch ratings when at least two major agencies rate the company",
+      "whatEs": "Percentil compuesto (1–100) de calificaciones AM Best / S&P / Moody’s / Fitch cuando al menos dos agencias principales califican a la compañía"
     }
   ],
   "carriers": [
     {
       "id": "mutual-of-omaha",
       "rank": 1,
-      "score": 4.75,
+      "score": 4.4,
       "slug": "mutual-of-omaha",
       "name": "Mutual of Omaha",
       "issuerEn": "United of Omaha Life Insurance Company",
       "issuerEs": "United of Omaha Life Insurance Company",
       "logo": "img/opt/mutual-of-omaha-logo.png",
-      "logoWidth": 480,
-      "logoHeight": 120,
+      "logoWidth": 322,
+      "logoHeight": 62,
       "productEn": "Living Promise® whole life",
       "productEs": "Living Promise® vida entera",
       "coverageEn": "$2,000–$50,000 (level); graded up to $20,000",
@@ -92,83 +99,57 @@
           "sourceUrl": "https://www.mutualofomaha.com/about/financial-strength/ratings"
         }
       ],
-      "naicNoteEn": "Verify United of Omaha (NAIC #69868) complaint history in the NAIC CIS lookup.",
-      "naicNoteEs": "Verifique el historial de quejas de United of Omaha (NAIC #69868) en el buscador CIS de la NAIC.",
-      "scoreWhyEn": "Highest AM Best FSR in this set (A+ Superior) plus Moody’s and S&P confirmation.",
-      "scoreWhyEs": "La FSR de AM Best más alta de este grupo (A+ Superior), con confirmación de Moody’s y S&P."
-    },
-    {
-      "id": "transamerica",
-      "rank": 2,
-      "score": 4.3,
-      "slug": "transamerica",
-      "name": "Transamerica",
-      "issuerEn": "Transamerica Life Insurance Company",
-      "issuerEs": "Transamerica Life Insurance Company",
-      "logo": "img/opt/transamerica-logo.png",
-      "logoWidth": 480,
-      "logoHeight": 114,
-      "productEn": "Final expense whole life portfolio (Immediate / Graded / Easy and related)",
-      "productEs": "Portafolio de vida entera para gastos finales (Inmediato / Escalonado / Easy y relacionados)",
-      "coverageEn": "From about $5,000; up to $100,000 (ages 18–75) or $25,000 (76–85) on select plans",
-      "coverageEs": "Desde ~$5,000; hasta $100,000 (18–75) o $25,000 (76–85) en planes selectos",
-      "agesEn": "Typical issue ages 18–85 (varies by plan)",
-      "agesEs": "Edades típicas 18–85 (varía por plan)",
-      "waitingEn": "Day-one full benefit on qualifying Immediate plans; graded designs available",
-      "waitingEs": "Beneficio completo desde el día uno en planes Immediate que califican; hay diseños escalonados",
-      "amBest": {
-        "fsr": "A",
-        "descriptor": "Excellent",
-        "outlook": "Stable",
-        "effective": "2026-02-13",
-        "icr": "a+",
-        "sourceUrl": "https://www.businesswire.com/news/home/20260213665353/en/AM-Best-Affirms-Credit-Ratings-of-Members-of-Aegon-Ltd.s-U.S.-Subsidiaries",
-        "sourceLabel": "AM Best via Business Wire (Feb 13, 2026)"
+      "comdex": {
+        "score": 90,
+        "asOf": "2025-09",
+        "noteEn": "90th percentile among rated companies (United of Omaha Life)",
+        "noteEs": "Percentil 90 entre compañías calificadas (United of Omaha Life)",
+        "sourceUrl": "https://myannuitystore.com/resources/insurance-company-ratings/",
+        "sourceLabel": "EbixExchange Comdex via industry chart (YE 2024 data; ratings ~Sep 2025)"
       },
-      "otherRatings": [],
-      "naicNoteEn": "Verify Transamerica Life (NAIC #86231) in the NAIC CIS lookup; complaint indexes vary by state and year.",
-      "naicNoteEs": "Verifique Transamerica Life (NAIC #86231) en el CIS de la NAIC; los índices de quejas varían por estado y año.",
-      "scoreWhyEn": "AM Best A (Excellent) with Long-Term ICR a+ and large financial size category (XV).",
-      "scoreWhyEs": "AM Best A (Excelente) con ICR a largo plazo a+ y categoría de tamaño financiero grande (XV)."
-    },
-    {
-      "id": "american-amicable",
-      "rank": 3,
-      "score": 4.2,
-      "slug": "american-amicable",
-      "name": "American Amicable",
-      "issuerEn": "American-Amicable Life Insurance Company of Texas",
-      "issuerEs": "American-Amicable Life Insurance Company of Texas",
-      "logo": "img/opt/american-amicable-logo.png",
-      "logoWidth": 520,
-      "logoHeight": 109,
-      "productEn": "Golden Solution / Senior Choice whole life",
-      "productEs": "Golden Solution / Senior Choice vida entera",
-      "coverageEn": "Immediate up to $50,000 (50–75) / $25,000 (76–85); graded/ROP up to $25,000",
-      "coverageEs": "Inmediato hasta $50,000 (50–75) / $25,000 (76–85); escalonado/ROP hasta $25,000",
-      "agesEn": "Applicant ages 50–85",
-      "agesEs": "Edades 50–85",
-      "waitingEn": "Immediate (level) benefit available; graded and return-of-premium designs available",
-      "waitingEs": "Beneficio inmediato disponible; hay planes escalonados y de devolución de prima",
-      "amBest": {
-        "fsr": "A",
-        "descriptor": "Excellent",
-        "outlook": "Stable",
-        "effective": "2025-09-18",
-        "icr": "a",
-        "sourceUrl": "https://ratings.ambest.com/DisclosurePDF.aspx?AMBNum=9122",
-        "sourceLabel": "AM Best disclosure (AMB #009122, Sep 18, 2025)"
+      "naicNoteEn": "NAIC CIS index 0.42 (#69868, 2025) — FE issuer United of Omaha Life; 1.00 ≈ expected; lower is better.",
+      "naicNoteEs": "Índice CIS NAIC 0.42 (#69868, 2025) — emisora FE United of Omaha Life; 1.00 ≈ esperado; más bajo es mejor.",
+      "scoreWhyEn": "Average of AM Best A+→95%; Comdex 90%; NAIC index 0.42→79% = 88% → 4.4/5.",
+      "scoreWhyEs": "Promedio de AM Best A+→95%; Comdex 90%; Índice NAIC 0.42→79% = 88% → 4.4/5.",
+      "naic": {
+        "code": "69868",
+        "complaintIndex": 0.42,
+        "asOf": "2025",
+        "lineEn": "NAIC CIS National Complaint Index · United of Omaha Life (FE issuer)",
+        "lineEs": "Índice nacional de quejas CIS de la NAIC · United of Omaha Life (emisora FE)",
+        "noteEn": "CIS National Complaint Index 0.42 for United of Omaha Life (#69868), the Living Promise / FE issuer (2025, all policy types). National expected = 1.00; lower is better. Parent Mutual of Omaha Ins Co (#71412) shows 1.29 (71 complaints) on the same CIS year.",
+        "noteEs": "Índice nacional de quejas CIS 0.42 para United of Omaha Life (#69868), emisora de Living Promise / gastos finales (2025, todos los tipos de póliza). Esperado nacional = 1.00; más bajo es mejor. La matriz Mutual of Omaha Ins Co (#71412) muestra 1.29 (71 quejas) en el mismo año del CIS.",
+        "sourceUrl": "https://content.naic.org/cis_refined_results.htm?TABLEAU=CIS_COMPLAINTS&COCODE=69868&REALM=PROD",
+        "sourceLabel": "NAIC CIS National Complaint Index Report",
+        "cisUrl": "https://content.naic.org/cis_refined_results.htm?TABLEAU=CIS_COMPLAINTS&COCODE=69868&REALM=PROD",
+        "consumerUrl": "https://content.naic.org/consumer"
       },
-      "otherRatings": [],
-      "naicNoteEn": "Verify American-Amicable Life of TX (NAIC #68594) in the NAIC CIS lookup.",
-      "naicNoteEs": "Verifique American-Amicable Life of TX (NAIC #68594) en el CIS de la NAIC.",
-      "scoreWhyEn": "AM Best A (Excellent), stable outlook; specialized final-expense focus.",
-      "scoreWhyEs": "AM Best A (Excelente), perspectiva estable; enfoque en gastos finales."
+      "uniqueEn": "Living Promise® whole life · ages 45–85 · level to $50k",
+      "uniqueEs": "Living Promise® vida entera · edades 45–85 · inmediato hasta $50k",
+      "jdPower": {
+        "inStudy": true,
+        "rank": 1,
+        "of": null,
+        "score": 707,
+        "study": "J.D. Power 2025 U.S. Individual Life Insurance Study",
+        "summaryEn": "Ranked #1 for overall customer satisfaction (707 / 1,000; industry avg ~650). First in six of eight study factors per Mutual of Omaha.",
+        "summaryEs": "Ocupó el #1 en satisfacción general del cliente (707 / 1.000; promedio industria ~650). Primera en seis de ocho factores según Mutual of Omaha.",
+        "sourceUrl": "https://www.mutualofomaha.com/about/newsroom/article/mutual-of-omaha-ranked-1-individual-life-insurance-provider-by-j-d-power",
+        "sourceLabel": "Mutual of Omaha / J.D. Power (Oct 2025)"
+      },
+      "scoreBreakdown": {
+        "amBestPct": 95,
+        "comdexPct": 90,
+        "naicPct": 79,
+        "avgPct": 88,
+        "score": 4.4,
+        "componentsUsed": 3
+      }
     },
     {
       "id": "corebridge",
-      "rank": 4,
-      "score": 4.05,
+      "rank": 2,
+      "score": 4.14,
       "slug": "corebridge",
       "name": "Corebridge",
       "issuerEn": "American General Life Insurance Company",
@@ -194,15 +175,158 @@
         "sourceLabel": "AM Best Best’s News (Mar 27, 2026) — under review (Equitable merger)"
       },
       "otherRatings": [],
-      "naicNoteEn": "Verify American General Life (issuing company) in the NAIC CIS lookup. AM Best placed Corebridge FSRs under review after the announced Equitable combination.",
-      "naicNoteEs": "Verifique American General Life (compañía emisora) en el CIS de la NAIC. AM Best puso las FSR de Corebridge en revisión tras el anuncio de combinación con Equitable.",
-      "scoreWhyEn": "AM Best A (Excellent), tempered slightly because ratings are under review with developing implications.",
-      "scoreWhyEs": "AM Best A (Excelente), ajustado ligeramente porque las calificaciones están en revisión con implicaciones en desarrollo."
+      "comdex": {
+        "score": 82,
+        "asOf": "2025-09",
+        "noteEn": "82nd percentile (American General Life Insurance Company, Corebridge issuer)",
+        "noteEs": "Percentil 82 (American General Life Insurance Company, emisora de Corebridge)",
+        "sourceUrl": "https://myannuitystore.com/resources/insurance-company-ratings/",
+        "sourceLabel": "EbixExchange Comdex via industry chart (YE 2024 data; ratings ~Sep 2025)"
+      },
+      "naicNoteEn": "NAIC CIS index 0.47 (#60488, 2025) — 1.00 ≈ expected; lower is better.",
+      "naicNoteEs": "Índice CIS NAIC 0.47 (#60488, 2025) — 1.00 ≈ esperado; más bajo es mejor.",
+      "scoreWhyEn": "Average of AM Best A→90%; Comdex 82%; NAIC index 0.47→76.5% = 82.8% → 4.14/5.",
+      "scoreWhyEs": "Promedio de AM Best A→90%; Comdex 82%; Índice NAIC 0.47→76.5% = 82.8% → 4.14/5.",
+      "naic": {
+        "code": "60488",
+        "complaintIndex": 0.47,
+        "asOf": "2025",
+        "lineEn": "NAIC CIS National Complaint Index · American General Life",
+        "lineEs": "Índice nacional de quejas CIS de la NAIC · American General Life",
+        "noteEn": "CIS National Complaint Index 0.47 for American General Life (#60488) (below the national expected 1.00; lower is better). Closed confirmed complaints; CIS default/all policy types.",
+        "noteEs": "Índice nacional de quejas CIS 0.47 para American General Life (#60488) (por debajo del 1.00 esperado; más bajo es mejor). Quejas confirmadas cerradas; tipos por defecto/todos en el CIS.",
+        "sourceUrl": "https://content.naic.org/cis_refined_results.htm?TABLEAU=CIS_COMPLAINTS&COCODE=60488&REALM=PROD",
+        "sourceLabel": "NAIC CIS National Complaint Index Report",
+        "cisUrl": "https://content.naic.org/cis_refined_results.htm?TABLEAU=CIS_COMPLAINTS&COCODE=60488&REALM=PROD",
+        "consumerUrl": "https://content.naic.org/consumer",
+        "totalComplaints": 186
+      },
+      "uniqueEn": "SimpliNow Legacy® + GIWL option · ages ~50–80",
+      "uniqueEs": "SimpliNow Legacy® + opción GIWL · edades ~50–80",
+      "jdPower": {
+        "inStudy": true,
+        "rank": 19,
+        "of": 22,
+        "score": 602,
+        "study": "J.D. Power 2025 U.S. Individual Life Insurance Study",
+        "summaryEn": "Customer satisfaction about 602 / 1,000 (about 19th of 22 in secondary citations). Separate from AM Best financial strength.",
+        "summaryEs": "Satisfacción del cliente aprox. 602 / 1.000 (aprox. 19.ª de 22 en citas secundarias). Independiente de la solidez financiera AM Best.",
+        "sourceUrl": "https://www.businesswire.com/news/home/20251009079533/en/Life-Insurance-Customer-Satisfaction-Varies-Widely-Based-on-Carrier-and-Distribution-Channel-J.D.-Power-Finds",
+        "sourceLabel": "J.D. Power study press release (Oct 2025); rank/score via secondary citations"
+      },
+      "scoreBreakdown": {
+        "amBestPct": 90,
+        "comdexPct": 82,
+        "naicPct": 76.5,
+        "avgPct": 82.8,
+        "score": 4.14,
+        "componentsUsed": 3
+      }
+    },
+    {
+      "id": "aetna",
+      "rank": 3,
+      "score": 3.67,
+      "slug": "aetna",
+      "name": "Aetna",
+      "hasProfilePage": true,
+      "issuerEn": "Aetna Life Insurance Company",
+      "issuerEs": "Aetna Life Insurance Company",
+      "logo": "img/carriers/aetna-logo.svg",
+      "logoWidth": 512,
+      "logoHeight": 98,
+      "productEn": "Final expense whole life (product names pending)",
+      "productEs": "Vida entera para gastos finales (nombres de producto pendientes)",
+      "coverageEn": "Typically about $2,000–$50,000 (lower maximums at older ages) — confirm with Julie",
+      "coverageEs": "Típicamente aprox. $2,000–$50,000 (máximos más bajos a edades mayores) — confirme con Julie",
+      "agesEn": "Typical issue ages about 40–89 (or 45–89 by plan) — confirm with Julie",
+      "agesEs": "Edades típicas aprox. 40–89 (o 45–89 según el plan) — confirme con Julie",
+      "waitingEn": "Plan design (level / graded) details pending Julie’s product sheet",
+      "waitingEs": "Detalles del diseño (inmediato / escalonado) pendientes de la ficha de producto de Julie",
+      "amBest": {
+        "fsr": "A",
+        "descriptor": "Excellent",
+        "outlook": "Stable",
+        "effective": "2026-06-05",
+        "icr": "a",
+        "sourceUrl": "https://news.ambest.com/newscontent.aspx?altsrc=23&refnum=274983",
+        "sourceLabel": "AM Best Best’s News (Jun 5, 2026) — Aetna Inc. subsidiaries affirmed"
+      },
+      "otherRatings": [
+        {
+          "agency": "S&P Global",
+          "rating": "A-",
+          "noteEn": "Per industry ratings chart (issuer Aetna Life)",
+          "noteEs": "Según tabla sectorial de calificaciones (emisora Aetna Life)",
+          "sourceUrl": "https://myannuitystore.com/resources/insurance-company-ratings/"
+        },
+        {
+          "agency": "Moody’s",
+          "rating": "A2",
+          "noteEn": "Per industry ratings chart (issuer Aetna Life)",
+          "noteEs": "Según tabla sectorial de calificaciones (emisora Aetna Life)",
+          "sourceUrl": "https://myannuitystore.com/resources/insurance-company-ratings/"
+        },
+        {
+          "agency": "Fitch",
+          "rating": "A",
+          "noteEn": "Per industry ratings chart (issuer Aetna Life)",
+          "noteEs": "Según tabla sectorial de calificaciones (emisora Aetna Life)",
+          "sourceUrl": "https://myannuitystore.com/resources/insurance-company-ratings/"
+        }
+      ],
+      "comdex": {
+        "score": 77,
+        "asOf": "2025-09",
+        "noteEn": "77th percentile (Aetna Life Insurance Company)",
+        "noteEs": "Percentil 77 (Aetna Life Insurance Company)",
+        "sourceUrl": "https://myannuitystore.com/resources/insurance-company-ratings/",
+        "sourceLabel": "EbixExchange Comdex via industry chart (YE 2024 data; ratings ~Sep 2025)"
+      },
+      "naicNoteEn": "NAIC CIS index 0.94 (#60054, 2025) — 1.00 ≈ expected; lower is better.",
+      "naicNoteEs": "Índice CIS NAIC 0.94 (#60054, 2025) — 1.00 ≈ esperado; más bajo es mejor.",
+      "scoreWhyEn": "Average of AM Best A→90%; Comdex 77%; NAIC index 0.94→53% = 73.3% → 3.67/5.",
+      "scoreWhyEs": "Promedio de AM Best A→90%; Comdex 77%; Índice NAIC 0.94→53% = 73.3% → 3.67/5.",
+      "naic": {
+        "code": "60054",
+        "complaintIndex": 0.94,
+        "asOf": "2025",
+        "lineEn": "NAIC CIS National Complaint Index · Aetna",
+        "lineEs": "Índice nacional de quejas CIS de la NAIC · Aetna",
+        "noteEn": "CIS National Complaint Index 0.94 for NAIC #60054 (near the national expected 1.00; lower is better). Closed confirmed complaints; CIS default/all policy types.",
+        "noteEs": "Índice nacional de quejas CIS 0.94 para NAIC #60054 (cerca del 1.00 esperado; más bajo es mejor). Quejas confirmadas cerradas; tipos por defecto/todos en el CIS.",
+        "sourceUrl": "https://content.naic.org/cis_refined_results.htm?TABLEAU=CIS_COMPLAINTS&COCODE=60054&REALM=PROD",
+        "sourceLabel": "NAIC CIS National Complaint Index Report",
+        "cisUrl": "https://content.naic.org/cis_refined_results.htm?TABLEAU=CIS_COMPLAINTS&COCODE=60054&REALM=PROD",
+        "consumerUrl": "https://content.naic.org/consumer",
+        "totalComplaints": 819
+      },
+      "uniqueEn": "FE whole life · typical issue ages into late 80s · details pending",
+      "uniqueEs": "Vida entera gastos finales · edades típicas hasta casi 90 · detalles pendientes",
+      "jdPower": {
+        "inStudy": false,
+        "rank": null,
+        "of": null,
+        "score": null,
+        "study": "J.D. Power 2025 U.S. Individual Life Insurance Study",
+        "summaryEn": "Not profiled in the published individual life satisfaction study (Aetna is better known for health products).",
+        "summaryEs": "No figura en el estudio publicado de satisfacción de vida individual (Aetna es más conocida por productos de salud).",
+        "sourceUrl": "https://www.jdpower.com/business/insurance/individual-life-insurance-study",
+        "sourceLabel": "J.D. Power Individual Life Insurance Study (brand list)"
+      },
+      "scoreBreakdown": {
+        "amBestPct": 90,
+        "comdexPct": 77,
+        "naicPct": 53,
+        "avgPct": 73.3,
+        "score": 3.67,
+        "componentsUsed": 3
+      }
     },
     {
       "id": "assurity",
-      "rank": 5,
-      "score": 3.85,
+      "rank": 4,
+      "score": 3.59,
       "slug": "assurity",
       "name": "Assurity",
       "issuerEn": "Assurity Life Insurance Company",
@@ -228,10 +352,223 @@
         "sourceLabel": "AM Best disclosure (AMB #007374, Nov 6, 2025)"
       },
       "otherRatings": [],
-      "naicNoteEn": "Verify Assurity Life (NAIC #71439) in the NAIC CIS lookup.",
-      "naicNoteEs": "Verifique Assurity Life (NAIC #71439) en el CIS de la NAIC.",
-      "scoreWhyEn": "AM Best A- (Excellent) with stable outlook; mutual structure with century-plus history.",
-      "scoreWhyEs": "AM Best A- (Excelente) con perspectiva estable; estructura mutual con más de un siglo de historia."
+      "comdex": {
+        "score": null,
+        "asOf": "2025-09",
+        "noteEn": "Not published — Assurity is primarily AM Best–rated among the major agencies used for Comdex",
+        "noteEs": "No publicado — Assurity está calificada principalmente por AM Best entre las agencias usadas para el Comdex",
+        "sourceUrl": "https://myannuitystore.com/resources/insurance-company-ratings/",
+        "sourceLabel": "Industry Comdex chart (no score listed for Assurity Life)"
+      },
+      "naicNoteEn": "NAIC CIS index 0.83 (#71439, 2025) — 1.00 ≈ expected; lower is better.",
+      "naicNoteEs": "Índice CIS NAIC 0.83 (#71439, 2025) — 1.00 ≈ esperado; más bajo es mejor.",
+      "scoreWhyEn": "Average of AM Best A-→85%; Comdex N/A (omitted); NAIC index 0.83→58.5% = 71.8% → 3.59/5.",
+      "scoreWhyEs": "Promedio de AM Best A-→85%; Comdex N/D (omitido); Índice NAIC 0.83→58.5% = 71.8% → 3.59/5.",
+      "naic": {
+        "code": "71439",
+        "complaintIndex": 0.83,
+        "asOf": "2025",
+        "lineEn": "NAIC CIS National Complaint Index · Assurity",
+        "lineEs": "Índice nacional de quejas CIS de la NAIC · Assurity",
+        "noteEn": "CIS National Complaint Index 0.83 for NAIC #71439 (below the national expected 1.00; lower is better). Closed confirmed complaints; CIS default/all policy types.",
+        "noteEs": "Índice nacional de quejas CIS 0.83 para NAIC #71439 (por debajo del 1.00 esperado; más bajo es mejor). Quejas confirmadas cerradas; tipos por defecto/todos en el CIS.",
+        "sourceUrl": "https://content.naic.org/cis_refined_results.htm?TABLEAU=CIS_COMPLAINTS&COCODE=71439&REALM=PROD",
+        "sourceLabel": "NAIC CIS National Complaint Index Report",
+        "cisUrl": "https://content.naic.org/cis_refined_results.htm?TABLEAU=CIS_COMPLAINTS&COCODE=71439&REALM=PROD",
+        "consumerUrl": "https://content.naic.org/consumer",
+        "totalComplaints": 4
+      },
+      "uniqueEn": "Protect+ / Perform+ · built-in living benefits · from $10k",
+      "uniqueEs": "Protect+ / Perform+ · beneficios en vida incluidos · desde $10k",
+      "jdPower": {
+        "inStudy": false,
+        "rank": null,
+        "of": null,
+        "score": null,
+        "study": "J.D. Power 2025 U.S. Individual Life Insurance Study",
+        "summaryEn": "Not among the largest individual life carriers profiled in the published study.",
+        "summaryEs": "No figura entre las aseguradoras de vida individual más grandes incluidas en el estudio publicado.",
+        "sourceUrl": "https://www.jdpower.com/business/insurance/individual-life-insurance-study",
+        "sourceLabel": "J.D. Power Individual Life Insurance Study (brand list)"
+      },
+      "scoreBreakdown": {
+        "amBestPct": 85,
+        "comdexPct": null,
+        "naicPct": 58.5,
+        "avgPct": 71.8,
+        "score": 3.59,
+        "componentsUsed": 2
+      }
+    },
+    {
+      "id": "transamerica",
+      "rank": 5,
+      "score": 2.9,
+      "slug": "transamerica",
+      "name": "Transamerica",
+      "issuerEn": "Transamerica Life Insurance Company",
+      "issuerEs": "Transamerica Life Insurance Company",
+      "logo": "img/opt/transamerica-logo.png",
+      "logoWidth": 362,
+      "logoHeight": 69,
+      "productEn": "Final expense whole life portfolio (Immediate / Graded / Easy and related)",
+      "productEs": "Portafolio de vida entera para gastos finales (Inmediato / Escalonado / Easy y relacionados)",
+      "coverageEn": "From about $5,000; up to $100,000 (ages 18–75) or $25,000 (76–85) on select plans",
+      "coverageEs": "Desde ~$5,000; hasta $100,000 (18–75) o $25,000 (76–85) en planes selectos",
+      "agesEn": "Typical issue ages 18–85 (varies by plan)",
+      "agesEs": "Edades típicas 18–85 (varía por plan)",
+      "waitingEn": "Day-one full benefit on qualifying Immediate plans; graded designs available",
+      "waitingEs": "Beneficio completo desde el día uno en planes Immediate que califican; hay diseños escalonados",
+      "amBest": {
+        "fsr": "A",
+        "descriptor": "Excellent",
+        "outlook": "Stable",
+        "effective": "2026-02-13",
+        "icr": "a+",
+        "sourceUrl": "https://www.businesswire.com/news/home/20260213665353/en/AM-Best-Affirms-Credit-Ratings-of-Members-of-Aegon-Ltd.s-U.S.-Subsidiaries",
+        "sourceLabel": "AM Best via Business Wire (Feb 13, 2026)"
+      },
+      "otherRatings": [],
+      "comdex": {
+        "score": 84,
+        "asOf": "2025-09",
+        "noteEn": "84th percentile (Transamerica Life Insurance Company)",
+        "noteEs": "Percentil 84 (Transamerica Life Insurance Company)",
+        "sourceUrl": "https://myannuitystore.com/resources/insurance-company-ratings/",
+        "sourceLabel": "EbixExchange Comdex via industry chart (YE 2024 data; ratings ~Sep 2025)"
+      },
+      "naicNoteEn": "NAIC CIS index 3.20 (#86231, 2025) — 1.00 ≈ expected; lower is better.",
+      "naicNoteEs": "Índice CIS NAIC 3.20 (#86231, 2025) — 1.00 ≈ esperado; más bajo es mejor.",
+      "scoreWhyEn": "Average of AM Best A→90%; Comdex 84%; NAIC index 3.2→0% = 58% → 2.9/5.",
+      "scoreWhyEs": "Promedio de AM Best A→90%; Comdex 84%; Índice NAIC 3.2→0% = 58% → 2.9/5.",
+      "naic": {
+        "code": "86231",
+        "complaintIndex": 3.2,
+        "asOf": "2025",
+        "lineEn": "NAIC CIS National Complaint Index · Transamerica Life",
+        "lineEs": "Índice nacional de quejas CIS de la NAIC · Transamerica Life",
+        "noteEn": "CIS National Complaint Index 3.20 for NAIC #86231 (above the national expected 1.00; lower is better). Closed confirmed complaints; CIS default/all policy types. The CIS chart scales to 2.0 — the published ratio is higher.",
+        "noteEs": "Índice nacional de quejas CIS 3.20 para NAIC #86231 (por encima del 1.00 esperado; más bajo es mejor). Quejas confirmadas cerradas; tipos por defecto/todos en el CIS. El gráfico del CIS escala hasta 2.0 — el ratio publicado es mayor.",
+        "sourceUrl": "https://content.naic.org/cis_refined_results.htm?TABLEAU=CIS_COMPLAINTS&COCODE=86231&REALM=PROD",
+        "sourceLabel": "NAIC CIS National Complaint Index Report",
+        "cisUrl": "https://content.naic.org/cis_refined_results.htm?TABLEAU=CIS_COMPLAINTS&COCODE=86231&REALM=PROD",
+        "consumerUrl": "https://content.naic.org/consumer",
+        "totalComplaints": 502
+      },
+      "uniqueEn": "Broad FE portfolio · ages 18–85 · faces up to $100k",
+      "uniqueEs": "Portafolio amplio de gastos finales · edades 18–85 · hasta $100k",
+      "jdPower": {
+        "inStudy": true,
+        "rank": 18,
+        "of": 22,
+        "score": 604,
+        "study": "J.D. Power 2025 U.S. Individual Life Insurance Study",
+        "summaryEn": "Customer satisfaction score 604 / 1,000 (about 18th of 22 profiled carriers in secondary citations of the study).",
+        "summaryEs": "Puntuación de satisfacción 604 / 1.000 (aprox. 18.ª de 22 aseguradoras citadas en fuentes secundarias del estudio).",
+        "sourceUrl": "https://www.businesswire.com/news/home/20251009079533/en/Life-Insurance-Customer-Satisfaction-Varies-Widely-Based-on-Carrier-and-Distribution-Channel-J.D.-Power-Finds",
+        "sourceLabel": "J.D. Power study press release (Oct 2025); rank/score via secondary citations"
+      },
+      "scoreBreakdown": {
+        "amBestPct": 90,
+        "comdexPct": 84,
+        "naicPct": 0,
+        "avgPct": 58,
+        "score": 2.9,
+        "componentsUsed": 3
+      }
+    },
+    {
+      "id": "american-amicable",
+      "rank": 6,
+      "score": 2.25,
+      "slug": "american-amicable",
+      "name": "American Amicable",
+      "issuerEn": "American-Amicable Life Insurance Company of Texas",
+      "issuerEs": "American-Amicable Life Insurance Company of Texas",
+      "logo": "img/opt/american-amicable-logo.png",
+      "logoWidth": 459,
+      "logoHeight": 54,
+      "productEn": "Golden Solution / Senior Choice whole life",
+      "productEs": "Golden Solution / Senior Choice vida entera",
+      "coverageEn": "Immediate up to $50,000 (50–75) / $25,000 (76–85); graded/ROP up to $25,000",
+      "coverageEs": "Inmediato hasta $50,000 (50–75) / $25,000 (76–85); escalonado/ROP hasta $25,000",
+      "agesEn": "Applicant ages 50–85",
+      "agesEs": "Edades 50–85",
+      "waitingEn": "Immediate (level) benefit available; graded and return-of-premium designs available",
+      "waitingEs": "Beneficio inmediato disponible; hay planes escalonados y de devolución de prima",
+      "amBest": {
+        "fsr": "A",
+        "descriptor": "Excellent",
+        "outlook": "Stable",
+        "effective": "2025-09-18",
+        "icr": "a",
+        "sourceUrl": "https://ratings.ambest.com/DisclosurePDF.aspx?AMBNum=9122",
+        "sourceLabel": "AM Best disclosure (AMB #009122, Sep 18, 2025)"
+      },
+      "otherRatings": [],
+      "comdex": {
+        "score": null,
+        "asOf": "2025-09",
+        "noteEn": "Not published — Comdex typically needs ratings from at least two of AM Best, S&P, Moody’s, and Fitch",
+        "noteEs": "No publicado — el Comdex suele requerir calificaciones de al menos dos de AM Best, S&P, Moody’s y Fitch",
+        "sourceUrl": "https://myannuitystore.com/resources/insurance-company-ratings/",
+        "sourceLabel": "Industry Comdex chart (no score listed for American-Amicable Life of TX)"
+      },
+      "naicNoteEn": "NAIC CIS index 6.72 (#68594, 2025) — 1.00 ≈ expected; lower is better.",
+      "naicNoteEs": "Índice CIS NAIC 6.72 (#68594, 2025) — 1.00 ≈ esperado; más bajo es mejor.",
+      "scoreWhyEn": "Average of AM Best A→90%; Comdex N/A (omitted); NAIC index 6.72→0% = 45% → 2.25/5.",
+      "scoreWhyEs": "Promedio de AM Best A→90%; Comdex N/D (omitido); Índice NAIC 6.72→0% = 45% → 2.25/5.",
+      "naic": {
+        "code": "68594",
+        "complaintIndex": 6.72,
+        "asOf": "2025",
+        "lineEn": "NAIC CIS National Complaint Index · American Amicable",
+        "lineEs": "Índice nacional de quejas CIS de la NAIC · American Amicable",
+        "noteEn": "CIS National Complaint Index 6.72 for NAIC #68594 (well above the national expected 1.00; lower is better). Closed confirmed complaints; CIS default/all policy types. The CIS chart scales to 2.0 — the published ratio is higher.",
+        "noteEs": "Índice nacional de quejas CIS 6.72 para NAIC #68594 (muy por encima del 1.00 esperado; más bajo es mejor). Quejas confirmadas cerradas; tipos por defecto/todos en el CIS. El gráfico del CIS escala hasta 2.0 — el ratio publicado es mayor.",
+        "sourceUrl": "https://content.naic.org/cis_refined_results.htm?TABLEAU=CIS_COMPLAINTS&COCODE=68594&REALM=PROD",
+        "sourceLabel": "NAIC CIS National Complaint Index Report",
+        "cisUrl": "https://content.naic.org/cis_refined_results.htm?TABLEAU=CIS_COMPLAINTS&COCODE=68594&REALM=PROD",
+        "consumerUrl": "https://content.naic.org/consumer",
+        "totalComplaints": 36
+      },
+      "uniqueEn": "Golden Solution / Senior Choice · ages 50–85",
+      "uniqueEs": "Golden Solution / Senior Choice · edades 50–85",
+      "jdPower": {
+        "inStudy": false,
+        "rank": null,
+        "of": null,
+        "score": null,
+        "study": "J.D. Power 2025 U.S. Individual Life Insurance Study",
+        "summaryEn": "Not among the largest individual life carriers profiled in the published study.",
+        "summaryEs": "No figura entre las aseguradoras de vida individual más grandes incluidas en el estudio publicado.",
+        "sourceUrl": "https://www.jdpower.com/business/insurance/individual-life-insurance-study",
+        "sourceLabel": "J.D. Power Individual Life Insurance Study (brand list)"
+      },
+      "scoreBreakdown": {
+        "amBestPct": 90,
+        "comdexPct": null,
+        "naicPct": 0,
+        "avgPct": 45,
+        "score": 2.25,
+        "componentsUsed": 2
+      }
     }
-  ]
+  ],
+  "scoring": {
+    "amBestMap": {
+      "A++": 100,
+      "A+": 95,
+      "A": 90,
+      "A-": 85,
+      "B++": 80,
+      "B+": 75,
+      "B": 70,
+      "B-": 65
+    },
+    "naicFormulaEn": "naic% = clamp(0, 100, 100 × (2 − index) / 2); 1.00 ≈ 50%",
+    "naicFormulaEs": "naic% = límite(0, 100, 100 × (2 − índice) / 2); 1.00 ≈ 50%",
+    "missingComdexEn": "If Comdex is unpublished, average AM Best % and NAIC % only.",
+    "missingComdexEs": "Si no hay Comdex publicado, se promedian solo AM Best % y NAIC %."
+  }
 }

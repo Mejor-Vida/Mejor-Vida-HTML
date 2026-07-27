@@ -277,13 +277,17 @@ function scoreDisplay(score) {
 
 function carriersRankedTable(lang, imgPrefix, pagePrefix) {
   const carriers = [...CARRIER_RATINGS.carriers].sort((a, b) => a.rank - b.rank);
-  const thInsurer = lang === "es" ? "Aseguradora" : "Insurer";
-  const thDetails = lang === "es" ? "Detalles del plan" : "Policy details";
-  const thStrength = lang === "es" ? "Solidez financiera" : "Financial strength";
-  const thScore = lang === "es" ? "Calificación" : "Score";
-  const outlookLabel = lang === "es" ? "Perspectiva" : "Outlook";
-  const reviewLabel = lang === "es" ? "Ver perfil" : "View profile";
+  const thInsurer = lang === "es" ? "Aseguradora" : "Carrier";
+  const thDetails = lang === "es" ? "Qué la distingue" : "What stands out";
+  const thAmBest = "AM Best";
+  const thComdex = "Comdex";
+  const thNaic = "NAIC";
+  const thJd = "J.D. Power";
+  const thScore = lang === "es" ? "Score" : "Score";
+  const reviewLabel = lang === "es" ? "Ver detalles" : "View details";
   const updated = CARRIER_RATINGS.updatedAt || "";
+  const naLabel = lang === "es" ? "N/D" : "N/A";
+  const cisLookup = lang === "es" ? "CIS" : "CIS";
 
   const rows = carriers
     .map((c) => {
@@ -291,96 +295,96 @@ function carriersRankedTable(lang, imgPrefix, pagePrefix) {
         lang === "es"
           ? `${imgPrefix}carriers/${c.slug}.html`
           : `${pagePrefix}carriers/${c.slug}.html`;
-      const logoSrc = `${imgPrefix}${c.logo}${c.slug === "transamerica" ? "?v=20260723-nobg" : ""}`;
-      const product = lang === "es" ? c.productEs : c.productEn;
-      const coverage = lang === "es" ? c.coverageEs : c.coverageEn;
-      const ages = lang === "es" ? c.agesEs : c.agesEn;
-      const waiting = lang === "es" ? c.waitingEs : c.waitingEn;
-      const issuer = lang === "es" ? c.issuerEs : c.issuerEn;
-      const why = lang === "es" ? c.scoreWhyEs : c.scoreWhyEn;
+      const logoSrc = `${imgPrefix}${c.logo}${
+        c.slug === "transamerica"
+          ? "?v=20260723-nobg"
+          : "?v=20260727-align"
+      }`;
+      const unique = lang === "es" ? c.uniqueEs || c.productEs : c.uniqueEn || c.productEn;
       const amDesc =
         lang === "es"
           ? ({ Superior: "Superior", Excellent: "Excelente" }[c.amBest.descriptor] || c.amBest.descriptor)
           : c.amBest.descriptor;
-      const outlook =
-        lang === "es"
-          ? ({
-              Stable: "Estable",
-              "Under Review — Developing": "En revisión — en desarrollo",
-            }[c.amBest.outlook] || c.amBest.outlook)
-          : c.amBest.outlook;
-      const other =
-        (c.otherRatings || [])
-          .map((r) => {
-            const note = lang === "es" ? r.noteEs : r.noteEn;
-            return `<li><strong>${esc(r.agency)}</strong>: ${esc(r.rating)}${
-              note ? ` <span class="text-body-secondary">(${esc(note)})</span>` : ""
-            }</li>`;
-          })
-          .join("") || "";
       const scoreNice = scoreDisplay(c.score);
+      const comdexVal =
+        c.comdex && c.comdex.score != null ? String(c.comdex.score) : naLabel;
+      const naicCode = (c.naic && c.naic.code) || "—";
+      const naicCis =
+        (c.naic && (c.naic.cisUrl || c.naic.sourceUrl)) ||
+        "https://content.naic.org/cis_consumer_information.htm";
+      const naicIdx =
+        c.naic && c.naic.complaintIndex != null
+          ? Number(c.naic.complaintIndex).toFixed(2)
+          : null;
+      const naicPrimary = naicIdx != null ? naicIdx : `#${naicCode}`;
+      const jd = c.jdPower || {};
+      let jdVal = naLabel;
+      if (jd.inStudy && jd.score != null) {
+        jdVal =
+          jd.rank != null
+            ? `#${jd.rank}${jd.of ? `/${jd.of}` : ""} · ${jd.score}`
+            : String(jd.score);
+      }
+
+      const logoLg =
+        c.slug === "mutual-of-omaha" ||
+        c.slug === "transamerica" ||
+        c.slug === "corebridge" ||
+        c.slug === "american-amicable"
+          ? " sc-carrier-logo-link--lg"
+          : "";
+      const logoSlugClass = ` sc-carrier-logo-link--${c.slug}`;
 
       return `<tr class="sc-carrier-row">
   <td class="sc-carrier-insurer" data-label="${esc(thInsurer)}">
     <div class="sc-carrier-insurer-inner">
       <span class="sc-carrier-rank" aria-hidden="true">${c.rank}</span>
-      <a class="sc-carrier-logo-link" href="${pageHref}">
-        <img src="${logoSrc}" alt="" width="${c.logoWidth}" height="${c.logoHeight}" loading="lazy" decoding="async"/>
-        <span class="sc-carrier-name">${esc(c.name)}</span>
+      <a class="sc-carrier-logo-link${logoLg}${logoSlugClass}" href="${pageHref}">
+        <img src="${logoSrc}" alt="${esc(c.name)}" width="${c.logoWidth}" height="${c.logoHeight}" loading="lazy" decoding="async"/>
       </a>
-      <p class="sc-carrier-issuer mb-0">${esc(issuer)}</p>
       <a class="sc-carrier-profile" href="${pageHref}">${esc(reviewLabel)} →</a>
     </div>
   </td>
   <td class="sc-carrier-details" data-label="${esc(thDetails)}">
-    <p class="sc-carrier-product mb-1"><strong>${esc(product)}</strong></p>
-    <ul class="sc-carrier-detail-list">
-      <li>${esc(coverage)}</li>
-      <li>${esc(ages)}</li>
-      <li>${esc(waiting)}</li>
-    </ul>
+    <p class="sc-carrier-unique mb-0">${esc(unique)}</p>
   </td>
-  <td class="sc-carrier-strength" data-label="${esc(thStrength)}">
-    <p class="sc-carrier-ambest mb-1">
-      <span class="sc-carrier-ambest-label">AM Best</span>
-      <strong class="sc-carrier-fsr">${esc(c.amBest.fsr)}</strong>
-      <span class="sc-carrier-fsr-desc">(${esc(amDesc)})</span>
-    </p>
-    <p class="sc-carrier-outlook mb-1">${esc(outlookLabel)}: <strong>${esc(outlook)}</strong></p>
-    <p class="sc-carrier-asof mb-2 small text-body-secondary">${
-      lang === "es" ? "Vigente" : "Effective"
-    }: ${esc(c.amBest.effective)} · <a href="${esc(c.amBest.sourceUrl)}" target="_blank" rel="noopener">${
-        lang === "es" ? "Fuente" : "Source"
-      }</a></p>
-    ${other ? `<ul class="sc-carrier-other mb-0">${other}</ul>` : ""}
+  <td class="sc-carrier-metric" data-label="${esc(thAmBest)}">
+    <strong class="sc-carrier-fsr">${esc(c.amBest.fsr)}</strong>
+    <span class="sc-carrier-metric-sub d-block">${esc(amDesc)}</span>
   </td>
-  <td class="sc-carrier-score" data-label="${esc(thScore)}">
-    <div class="sc-carrier-score-num"><strong>${esc(scoreNice)}</strong><span>/5</span></div>
-    <div class="sc-carrier-stars" aria-label="${esc(scoreNice)} / 5">${starsHtml(c.score)}</div>
-    <p class="sc-carrier-score-why mb-0">${esc(why)}</p>
+  <td class="sc-carrier-metric" data-label="${esc(thComdex)}">
+    <strong class="sc-carrier-metric-num">${esc(comdexVal)}</strong>
+    ${c.comdex && c.comdex.score != null ? `<span class="sc-carrier-metric-sub d-block">/100</span>` : ""}
+  </td>
+  <td class="sc-carrier-metric" data-label="${esc(thNaic)}">
+    <strong class="sc-carrier-metric-num">${esc(String(naicPrimary))}</strong>
+    <span class="sc-carrier-metric-sub d-block"><a href="${esc(
+      naicCis
+    )}" target="_blank" rel="noopener">#${esc(String(naicCode))} · ${esc(cisLookup)}</a></span>
+  </td>
+  <td class="sc-carrier-metric" data-label="${esc(thJd)}">
+    <strong class="sc-carrier-metric-num">${esc(jdVal)}</strong>
+  </td>
+  <td class="sc-carrier-score-cell" data-label="${esc(thScore)}">
+    <div class="sc-carrier-score-compact" aria-label="${esc(scoreNice)} / 5">
+      <strong>${esc(scoreNice)}</strong><span>/5</span>
+    </div>
+    <div class="sc-carrier-stars sc-carrier-stars--compact">${starsHtml(c.score)}</div>
   </td>
 </tr>`;
     })
     .join("\n");
 
-  const sourceLinks = (CARRIER_RATINGS.sources || [])
-    .map(
-      (s) =>
-        `<li><a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.name)}</a> — ${esc(
-          lang === "es" ? s.whatEs : s.whatEn
-        )}</li>`
-    )
-    .join("\n");
-
-  const method = lang === "es" ? CARRIER_RATINGS.methodology.es : CARRIER_RATINGS.methodology.en;
-
-  return `<div class="table-responsive sc-carrier-table-wrap">
-  <table class="table sc-carrier-table align-middle mb-0">
+  return `<div class="table-responsive sc-carrier-table-wrap sc-carrier-table-wrap--wide">
+  <table class="table sc-carrier-table sc-carrier-table--simple sc-carrier-table--tight align-middle mb-0">
     <thead>
       <tr>
         <th scope="col">${esc(thInsurer)}</th>
         <th scope="col">${esc(thDetails)}</th>
-        <th scope="col">${esc(thStrength)}</th>
+        <th scope="col">${esc(thAmBest)}</th>
+        <th scope="col">${esc(thComdex)}</th>
+        <th scope="col">${esc(thNaic)}</th>
+        <th scope="col">${esc(thJd)}</th>
         <th scope="col">${esc(thScore)}</th>
       </tr>
     </thead>
@@ -389,15 +393,13 @@ ${rows}
     </tbody>
   </table>
 </div>
-<p class="small text-muted mt-3 mb-2">${esc(method)} ${
-    lang === "es" ? "Datos actualizados" : "Data updated"
-  }: ${esc(updated)}.</p>
-<details class="sc-carrier-sources">
-  <summary>${lang === "es" ? "Fuentes de calificación (reputables)" : "Rating sources (reputable)"}</summary>
-  <ul class="small text-body-secondary mb-0 mt-2">
-${sourceLinks}
-  </ul>
-</details>`;
+<p class="small text-muted mt-3 mb-0">${lang === "es" ? "Actualizado" : "Updated"}: ${esc(
+    updated
+  )}. ${
+    lang === "es"
+      ? `<a href="https://content.naic.org/consumer" target="_blank" rel="noopener">Portal del consumidor NAIC</a> · <a href="https://content.naic.org/cis_consumer_information.htm" target="_blank" rel="noopener">CIS</a>.`
+      : `<a href="https://content.naic.org/consumer" target="_blank" rel="noopener">NAIC Consumer hub</a> · <a href="https://content.naic.org/cis_consumer_information.htm" target="_blank" rel="noopener">CIS</a>.`
+  }</p>`;
 }
 
 function carriersEs(prefix) {
@@ -736,7 +738,7 @@ function renderEs(code) {
 <link href="${prefix}bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
 <link href="${prefix}css/quote-flow-shared.css?v=20260726-state" rel="stylesheet"/>
 <link href="${prefix}css/site-footer.css?v=20260721-lip-page" rel="stylesheet"/>
-<link href="${prefix}css/state-coverage.css?v=20260726-shade-unify" rel="stylesheet"/>
+<link href="${prefix}css/state-coverage.css?v=20260727-details-gap" rel="stylesheet"/>
 <link href="${prefix}css/mvi-licensing-map.css?v=20260726-state-cov" rel="stylesheet"/>
 <link href="${prefix}css/mvi-assistant-widget.css?v=20260721-chat-z" rel="stylesheet"/>
 <link href="${prefix}css/fontawesome-mvi.min.css?v=20260723-brands-fix" rel="stylesheet"/>
@@ -769,11 +771,10 @@ ${stateHero(code, "es", prefix, prefix)}
 </section>
 
 <section class="py-5 bg-light border-bottom" id="aseguradoras">
-  <div class="container" style="max-width:72rem;">
-    <h2 class="h4 fw-bold mb-3" style="color:#1a365d;">Aseguradoras que Julie puede comparar en ${esc(name)}</h2>
-    <p class="text-body-secondary mb-4">Como agente independiente, Julie cotiza varias compañías. La tabla ordena de mayor a menor calificación según solidez financiera publicada (principalmente AM Best) y detalles de planes típicos de gastos finales. La disponibilidad de productos y montos varía; ella confirma qué opciones aplican en ${esc(name)}.</p>
+  <div class="container-fluid sc-carrier-section-container px-3 px-lg-4">
+    <h2 class="h4 fw-bold mb-2" style="color:#1a365d;">Aseguradoras que Julie puede comparar en ${esc(name)}</h2>
+    <p class="text-body-secondary mb-4">El detalle completo de cada aseguradora está en su página de perfil.</p>
     ${carriersEs(prefix)}
-    <p class="small text-muted mt-3 mb-0">También está nombrada con <strong>Aetna</strong> en el sitio (cita pendiente de página dedicada). Vea el <a href="${prefix}aseguradoras.html">resumen de aseguradoras</a>.</p>
   </div>
 </section>
 
@@ -844,7 +845,7 @@ function renderEn(code) {
 <link href="${root}bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
 <link href="${root}css/quote-flow-shared.css?v=20260726-state" rel="stylesheet"/>
 <link href="${root}css/site-footer.css?v=20260721-lip-page" rel="stylesheet"/>
-<link href="${root}css/state-coverage.css?v=20260726-shade-unify" rel="stylesheet"/>
+<link href="${root}css/state-coverage.css?v=20260727-details-gap" rel="stylesheet"/>
 <link href="${root}css/mvi-licensing-map.css?v=20260726-state-cov" rel="stylesheet"/>
 <link href="${root}css/mvi-assistant-widget.css?v=20260721-chat-z" rel="stylesheet"/>
 <link href="${root}css/fontawesome-mvi.min.css?v=20260723-brands-fix" rel="stylesheet"/>
@@ -876,11 +877,10 @@ ${stateHero(code, "en", en, root)}
 </section>
 
 <section class="py-5 bg-light border-bottom" id="carriers">
-  <div class="container" style="max-width:72rem;">
-    <h2 class="h4 fw-bold mb-3" style="color:#1a365d;">Carriers Julie can compare in ${esc(name)}</h2>
-    <p class="text-body-secondary mb-4">As an independent agent, Julie quotes multiple companies. The table ranks them from highest to lowest using published financial-strength data (primarily AM Best) plus typical final-expense plan details. Product and face-amount availability varies; she confirms what applies in ${esc(name)}.</p>
+  <div class="container-fluid sc-carrier-section-container px-3 px-lg-4">
+    <h2 class="h4 fw-bold mb-2" style="color:#1a365d;">Carriers Julie can compare in ${esc(name)}</h2>
+    <p class="text-body-secondary mb-4">Full detail for each carrier lives on its profile page.</p>
     ${carriersEn(root, en)}
-    <p class="small text-muted mt-3 mb-0"><strong>Aetna</strong> is also named on the site (dedicated page pending). See the <a href="${en}insurance-carriers.html">carrier overview</a>.</p>
   </div>
 </section>
 

@@ -16,7 +16,7 @@
 <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
 <link href="../css/quote-flow-shared.css?v=20260726-state" rel="stylesheet"/>
 <link href="../css/site-footer.css?v=20260721-lip-page" rel="stylesheet"/>
-<link href="../css/state-coverage.css?v=20260726-shade-unify" rel="stylesheet"/>
+<link href="../css/state-coverage.css?v=20260727-details-gap" rel="stylesheet"/>
 <link href="../css/mvi-licensing-map.css?v=20260726-state-cov" rel="stylesheet"/>
 <link href="../css/mvi-assistant-widget.css?v=20260721-chat-z" rel="stylesheet"/>
 <link href="../css/fontawesome-mvi.min.css?v=20260723-brands-fix" rel="stylesheet"/>
@@ -607,17 +607,20 @@
 </section>
 
 <section class="py-5 bg-light border-bottom" id="aseguradoras">
-  <div class="container" style="max-width:72rem;">
-    <h2 class="h4 fw-bold mb-3" style="color:#1a365d;">Aseguradoras que Julie puede comparar en Nebraska</h2>
-    <p class="text-body-secondary mb-4">Como agente independiente, Julie cotiza varias compañías. La tabla ordena de mayor a menor calificación según solidez financiera publicada (principalmente AM Best) y detalles de planes típicos de gastos finales. La disponibilidad de productos y montos varía; ella confirma qué opciones aplican en Nebraska.</p>
-    <div class="table-responsive sc-carrier-table-wrap">
-  <table class="table sc-carrier-table align-middle mb-0">
+  <div class="container-fluid sc-carrier-section-container px-3 px-lg-4">
+    <h2 class="h4 fw-bold mb-2" style="color:#1a365d;">Aseguradoras que Julie puede comparar en Nebraska</h2>
+    <p class="text-body-secondary mb-4">El detalle completo de cada aseguradora está en su página de perfil.</p>
+    <div class="table-responsive sc-carrier-table-wrap sc-carrier-table-wrap--wide">
+  <table class="table sc-carrier-table sc-carrier-table--simple sc-carrier-table--tight align-middle mb-0">
     <thead>
       <tr>
         <th scope="col">Aseguradora</th>
-        <th scope="col">Detalles del plan</th>
-        <th scope="col">Solidez financiera</th>
-        <th scope="col">Calificación</th>
+        <th scope="col">Qué la distingue</th>
+        <th scope="col">AM Best</th>
+        <th scope="col">Comdex</th>
+        <th scope="col">NAIC</th>
+        <th scope="col">J.D. Power</th>
+        <th scope="col">Score</th>
       </tr>
     </thead>
     <tbody>
@@ -625,198 +628,216 @@
   <td class="sc-carrier-insurer" data-label="Aseguradora">
     <div class="sc-carrier-insurer-inner">
       <span class="sc-carrier-rank" aria-hidden="true">1</span>
-      <a class="sc-carrier-logo-link" href="../carriers/mutual-of-omaha.html">
-        <img src="../img/opt/mutual-of-omaha-logo.png" alt="" width="480" height="120" loading="lazy" decoding="async"/>
-        <span class="sc-carrier-name">Mutual of Omaha</span>
+      <a class="sc-carrier-logo-link sc-carrier-logo-link--lg sc-carrier-logo-link--mutual-of-omaha" href="../carriers/mutual-of-omaha.html">
+        <img src="../img/opt/mutual-of-omaha-logo.png?v=20260727-align" alt="Mutual of Omaha" width="322" height="62" loading="lazy" decoding="async"/>
       </a>
-      <p class="sc-carrier-issuer mb-0">United of Omaha Life Insurance Company</p>
-      <a class="sc-carrier-profile" href="../carriers/mutual-of-omaha.html">Ver perfil →</a>
+      <a class="sc-carrier-profile" href="../carriers/mutual-of-omaha.html">Ver detalles →</a>
     </div>
   </td>
-  <td class="sc-carrier-details" data-label="Detalles del plan">
-    <p class="sc-carrier-product mb-1"><strong>Living Promise® vida entera</strong></p>
-    <ul class="sc-carrier-detail-list">
-      <li>$2,000–$50,000 (inmediato); escalonado hasta $20,000</li>
-      <li>Edades 45–85</li>
-      <li>Beneficio inmediato: sin período de espera por muerte natural (si se emite); hay plan escalonado</li>
-    </ul>
+  <td class="sc-carrier-details" data-label="Qué la distingue">
+    <p class="sc-carrier-unique mb-0">Living Promise® vida entera · edades 45–85 · inmediato hasta $50k</p>
   </td>
-  <td class="sc-carrier-strength" data-label="Solidez financiera">
-    <p class="sc-carrier-ambest mb-1">
-      <span class="sc-carrier-ambest-label">AM Best</span>
-      <strong class="sc-carrier-fsr">A+</strong>
-      <span class="sc-carrier-fsr-desc">(Superior)</span>
-    </p>
-    <p class="sc-carrier-outlook mb-1">Perspectiva: <strong>Estable</strong></p>
-    <p class="sc-carrier-asof mb-2 small text-body-secondary">Vigente: 2026-04-02 · <a href="https://www.businesswire.com/news/home/20260402567677/en/AM-Best-Affirms-Credit-Ratings-of-Mutual-of-Omaha-Insurance-Company-and-Its-Subsidiaries" target="_blank" rel="noopener">Fuente</a></p>
-    <ul class="sc-carrier-other mb-0"><li><strong>Moody’s</strong>: A1 <span class="text-body-secondary">(Buena — 5.ª de 21 (según página pública de Mutual of Omaha))</span></li><li><strong>S&amp;P Global</strong>: A+ <span class="text-body-secondary">(Fuerte — 5.ª de 21 (según página pública de Mutual of Omaha))</span></li></ul>
+  <td class="sc-carrier-metric" data-label="AM Best">
+    <strong class="sc-carrier-fsr">A+</strong>
+    <span class="sc-carrier-metric-sub d-block">Superior</span>
   </td>
-  <td class="sc-carrier-score" data-label="Calificación">
-    <div class="sc-carrier-score-num"><strong>4.75</strong><span>/5</span></div>
-    <div class="sc-carrier-stars" aria-label="4.75 / 5"><span class="sc-star sc-star--on" aria-hidden="true">★</span><span class="sc-star sc-star--on" aria-hidden="true">★</span><span class="sc-star sc-star--on" aria-hidden="true">★</span><span class="sc-star sc-star--on" aria-hidden="true">★</span><span class="sc-star sc-star--half" aria-hidden="true">★</span></div>
-    <p class="sc-carrier-score-why mb-0">La FSR de AM Best más alta de este grupo (A+ Superior), con confirmación de Moody’s y S&amp;P.</p>
+  <td class="sc-carrier-metric" data-label="Comdex">
+    <strong class="sc-carrier-metric-num">90</strong>
+    <span class="sc-carrier-metric-sub d-block">/100</span>
+  </td>
+  <td class="sc-carrier-metric" data-label="NAIC">
+    <strong class="sc-carrier-metric-num">0.42</strong>
+    <span class="sc-carrier-metric-sub d-block"><a href="https://content.naic.org/cis_refined_results.htm?TABLEAU=CIS_COMPLAINTS&amp;COCODE=69868&amp;REALM=PROD" target="_blank" rel="noopener">#69868 · CIS</a></span>
+  </td>
+  <td class="sc-carrier-metric" data-label="J.D. Power">
+    <strong class="sc-carrier-metric-num">#1 · 707</strong>
+  </td>
+  <td class="sc-carrier-score-cell" data-label="Score">
+    <div class="sc-carrier-score-compact" aria-label="4.4 / 5">
+      <strong>4.4</strong><span>/5</span>
+    </div>
+    <div class="sc-carrier-stars sc-carrier-stars--compact"><span class="sc-star sc-star--on" aria-hidden="true">★</span><span class="sc-star sc-star--on" aria-hidden="true">★</span><span class="sc-star sc-star--on" aria-hidden="true">★</span><span class="sc-star sc-star--on" aria-hidden="true">★</span><span class="sc-star sc-star--half" aria-hidden="true">★</span></div>
   </td>
 </tr>
 <tr class="sc-carrier-row">
   <td class="sc-carrier-insurer" data-label="Aseguradora">
     <div class="sc-carrier-insurer-inner">
       <span class="sc-carrier-rank" aria-hidden="true">2</span>
-      <a class="sc-carrier-logo-link" href="../carriers/transamerica.html">
-        <img src="../img/opt/transamerica-logo.png?v=20260723-nobg" alt="" width="480" height="114" loading="lazy" decoding="async"/>
-        <span class="sc-carrier-name">Transamerica</span>
+      <a class="sc-carrier-logo-link sc-carrier-logo-link--lg sc-carrier-logo-link--corebridge" href="../carriers/corebridge.html">
+        <img src="../img/carriers/corebridge-logo.svg?v=20260727-align" alt="Corebridge" width="576" height="188" loading="lazy" decoding="async"/>
       </a>
-      <p class="sc-carrier-issuer mb-0">Transamerica Life Insurance Company</p>
-      <a class="sc-carrier-profile" href="../carriers/transamerica.html">Ver perfil →</a>
+      <a class="sc-carrier-profile" href="../carriers/corebridge.html">Ver detalles →</a>
     </div>
   </td>
-  <td class="sc-carrier-details" data-label="Detalles del plan">
-    <p class="sc-carrier-product mb-1"><strong>Portafolio de vida entera para gastos finales (Inmediato / Escalonado / Easy y relacionados)</strong></p>
-    <ul class="sc-carrier-detail-list">
-      <li>Desde ~$5,000; hasta $100,000 (18–75) o $25,000 (76–85) en planes selectos</li>
-      <li>Edades típicas 18–85 (varía por plan)</li>
-      <li>Beneficio completo desde el día uno en planes Immediate que califican; hay diseños escalonados</li>
-    </ul>
+  <td class="sc-carrier-details" data-label="Qué la distingue">
+    <p class="sc-carrier-unique mb-0">SimpliNow Legacy® + opción GIWL · edades ~50–80</p>
   </td>
-  <td class="sc-carrier-strength" data-label="Solidez financiera">
-    <p class="sc-carrier-ambest mb-1">
-      <span class="sc-carrier-ambest-label">AM Best</span>
-      <strong class="sc-carrier-fsr">A</strong>
-      <span class="sc-carrier-fsr-desc">(Excelente)</span>
-    </p>
-    <p class="sc-carrier-outlook mb-1">Perspectiva: <strong>Estable</strong></p>
-    <p class="sc-carrier-asof mb-2 small text-body-secondary">Vigente: 2026-02-13 · <a href="https://www.businesswire.com/news/home/20260213665353/en/AM-Best-Affirms-Credit-Ratings-of-Members-of-Aegon-Ltd.s-U.S.-Subsidiaries" target="_blank" rel="noopener">Fuente</a></p>
-    
+  <td class="sc-carrier-metric" data-label="AM Best">
+    <strong class="sc-carrier-fsr">A</strong>
+    <span class="sc-carrier-metric-sub d-block">Excelente</span>
   </td>
-  <td class="sc-carrier-score" data-label="Calificación">
-    <div class="sc-carrier-score-num"><strong>4.3</strong><span>/5</span></div>
-    <div class="sc-carrier-stars" aria-label="4.3 / 5"><span class="sc-star sc-star--on" aria-hidden="true">★</span><span class="sc-star sc-star--on" aria-hidden="true">★</span><span class="sc-star sc-star--on" aria-hidden="true">★</span><span class="sc-star sc-star--on" aria-hidden="true">★</span><span class="sc-star sc-star--half" aria-hidden="true">★</span></div>
-    <p class="sc-carrier-score-why mb-0">AM Best A (Excelente) con ICR a largo plazo a+ y categoría de tamaño financiero grande (XV).</p>
+  <td class="sc-carrier-metric" data-label="Comdex">
+    <strong class="sc-carrier-metric-num">82</strong>
+    <span class="sc-carrier-metric-sub d-block">/100</span>
+  </td>
+  <td class="sc-carrier-metric" data-label="NAIC">
+    <strong class="sc-carrier-metric-num">0.47</strong>
+    <span class="sc-carrier-metric-sub d-block"><a href="https://content.naic.org/cis_refined_results.htm?TABLEAU=CIS_COMPLAINTS&amp;COCODE=60488&amp;REALM=PROD" target="_blank" rel="noopener">#60488 · CIS</a></span>
+  </td>
+  <td class="sc-carrier-metric" data-label="J.D. Power">
+    <strong class="sc-carrier-metric-num">#19/22 · 602</strong>
+  </td>
+  <td class="sc-carrier-score-cell" data-label="Score">
+    <div class="sc-carrier-score-compact" aria-label="4.14 / 5">
+      <strong>4.14</strong><span>/5</span>
+    </div>
+    <div class="sc-carrier-stars sc-carrier-stars--compact"><span class="sc-star sc-star--on" aria-hidden="true">★</span><span class="sc-star sc-star--on" aria-hidden="true">★</span><span class="sc-star sc-star--on" aria-hidden="true">★</span><span class="sc-star sc-star--on" aria-hidden="true">★</span><span class="sc-star sc-star--off" aria-hidden="true">★</span></div>
   </td>
 </tr>
 <tr class="sc-carrier-row">
   <td class="sc-carrier-insurer" data-label="Aseguradora">
     <div class="sc-carrier-insurer-inner">
       <span class="sc-carrier-rank" aria-hidden="true">3</span>
-      <a class="sc-carrier-logo-link" href="../carriers/american-amicable.html">
-        <img src="../img/opt/american-amicable-logo.png" alt="" width="520" height="109" loading="lazy" decoding="async"/>
-        <span class="sc-carrier-name">American Amicable</span>
+      <a class="sc-carrier-logo-link sc-carrier-logo-link--aetna" href="../carriers/aetna.html">
+        <img src="../img/carriers/aetna-logo.svg?v=20260727-align" alt="Aetna" width="512" height="98" loading="lazy" decoding="async"/>
       </a>
-      <p class="sc-carrier-issuer mb-0">American-Amicable Life Insurance Company of Texas</p>
-      <a class="sc-carrier-profile" href="../carriers/american-amicable.html">Ver perfil →</a>
+      <a class="sc-carrier-profile" href="../carriers/aetna.html">Ver detalles →</a>
     </div>
   </td>
-  <td class="sc-carrier-details" data-label="Detalles del plan">
-    <p class="sc-carrier-product mb-1"><strong>Golden Solution / Senior Choice vida entera</strong></p>
-    <ul class="sc-carrier-detail-list">
-      <li>Inmediato hasta $50,000 (50–75) / $25,000 (76–85); escalonado/ROP hasta $25,000</li>
-      <li>Edades 50–85</li>
-      <li>Beneficio inmediato disponible; hay planes escalonados y de devolución de prima</li>
-    </ul>
+  <td class="sc-carrier-details" data-label="Qué la distingue">
+    <p class="sc-carrier-unique mb-0">Vida entera gastos finales · edades típicas hasta casi 90 · detalles pendientes</p>
   </td>
-  <td class="sc-carrier-strength" data-label="Solidez financiera">
-    <p class="sc-carrier-ambest mb-1">
-      <span class="sc-carrier-ambest-label">AM Best</span>
-      <strong class="sc-carrier-fsr">A</strong>
-      <span class="sc-carrier-fsr-desc">(Excelente)</span>
-    </p>
-    <p class="sc-carrier-outlook mb-1">Perspectiva: <strong>Estable</strong></p>
-    <p class="sc-carrier-asof mb-2 small text-body-secondary">Vigente: 2025-09-18 · <a href="https://ratings.ambest.com/DisclosurePDF.aspx?AMBNum=9122" target="_blank" rel="noopener">Fuente</a></p>
-    
+  <td class="sc-carrier-metric" data-label="AM Best">
+    <strong class="sc-carrier-fsr">A</strong>
+    <span class="sc-carrier-metric-sub d-block">Excelente</span>
   </td>
-  <td class="sc-carrier-score" data-label="Calificación">
-    <div class="sc-carrier-score-num"><strong>4.2</strong><span>/5</span></div>
-    <div class="sc-carrier-stars" aria-label="4.2 / 5"><span class="sc-star sc-star--on" aria-hidden="true">★</span><span class="sc-star sc-star--on" aria-hidden="true">★</span><span class="sc-star sc-star--on" aria-hidden="true">★</span><span class="sc-star sc-star--on" aria-hidden="true">★</span><span class="sc-star sc-star--off" aria-hidden="true">★</span></div>
-    <p class="sc-carrier-score-why mb-0">AM Best A (Excelente), perspectiva estable; enfoque en gastos finales.</p>
+  <td class="sc-carrier-metric" data-label="Comdex">
+    <strong class="sc-carrier-metric-num">77</strong>
+    <span class="sc-carrier-metric-sub d-block">/100</span>
+  </td>
+  <td class="sc-carrier-metric" data-label="NAIC">
+    <strong class="sc-carrier-metric-num">0.94</strong>
+    <span class="sc-carrier-metric-sub d-block"><a href="https://content.naic.org/cis_refined_results.htm?TABLEAU=CIS_COMPLAINTS&amp;COCODE=60054&amp;REALM=PROD" target="_blank" rel="noopener">#60054 · CIS</a></span>
+  </td>
+  <td class="sc-carrier-metric" data-label="J.D. Power">
+    <strong class="sc-carrier-metric-num">N/D</strong>
+  </td>
+  <td class="sc-carrier-score-cell" data-label="Score">
+    <div class="sc-carrier-score-compact" aria-label="3.67 / 5">
+      <strong>3.67</strong><span>/5</span>
+    </div>
+    <div class="sc-carrier-stars sc-carrier-stars--compact"><span class="sc-star sc-star--on" aria-hidden="true">★</span><span class="sc-star sc-star--on" aria-hidden="true">★</span><span class="sc-star sc-star--on" aria-hidden="true">★</span><span class="sc-star sc-star--half" aria-hidden="true">★</span><span class="sc-star sc-star--off" aria-hidden="true">★</span></div>
   </td>
 </tr>
 <tr class="sc-carrier-row">
   <td class="sc-carrier-insurer" data-label="Aseguradora">
     <div class="sc-carrier-insurer-inner">
       <span class="sc-carrier-rank" aria-hidden="true">4</span>
-      <a class="sc-carrier-logo-link" href="../carriers/corebridge.html">
-        <img src="../img/carriers/corebridge-logo.svg" alt="" width="576" height="188" loading="lazy" decoding="async"/>
-        <span class="sc-carrier-name">Corebridge</span>
+      <a class="sc-carrier-logo-link sc-carrier-logo-link--assurity" href="../carriers/assurity.html">
+        <img src="../img/carriers/assurity-wordmark.png?v=20260727-align" alt="Assurity" width="526" height="132" loading="lazy" decoding="async"/>
       </a>
-      <p class="sc-carrier-issuer mb-0">American General Life Insurance Company</p>
-      <a class="sc-carrier-profile" href="../carriers/corebridge.html">Ver perfil →</a>
+      <a class="sc-carrier-profile" href="../carriers/assurity.html">Ver detalles →</a>
     </div>
   </td>
-  <td class="sc-carrier-details" data-label="Detalles del plan">
-    <p class="sc-carrier-product mb-1"><strong>SimpliNow Legacy® / GIWL gastos finales</strong></p>
-    <ul class="sc-carrier-detail-list">
-      <li>Aprox. $5,000–$35,000 (inmediato); escalonado / GIWL típicamente hasta ~$25,000</li>
-      <li>Edades típicas 50–80</li>
-      <li>SimpliNow Legacy inmediato o escalonado; opción de emisión garantizada con período de espera/escalonado</li>
-    </ul>
+  <td class="sc-carrier-details" data-label="Qué la distingue">
+    <p class="sc-carrier-unique mb-0">Protect+ / Perform+ · beneficios en vida incluidos · desde $10k</p>
   </td>
-  <td class="sc-carrier-strength" data-label="Solidez financiera">
-    <p class="sc-carrier-ambest mb-1">
-      <span class="sc-carrier-ambest-label">AM Best</span>
-      <strong class="sc-carrier-fsr">A</strong>
-      <span class="sc-carrier-fsr-desc">(Excelente)</span>
-    </p>
-    <p class="sc-carrier-outlook mb-1">Perspectiva: <strong>En revisión — en desarrollo</strong></p>
-    <p class="sc-carrier-asof mb-2 small text-body-secondary">Vigente: 2026-03-27 · <a href="https://news.ambest.com/NewsContent.aspx?altsrc=23&amp;refnum=273514" target="_blank" rel="noopener">Fuente</a></p>
+  <td class="sc-carrier-metric" data-label="AM Best">
+    <strong class="sc-carrier-fsr">A-</strong>
+    <span class="sc-carrier-metric-sub d-block">Excelente</span>
+  </td>
+  <td class="sc-carrier-metric" data-label="Comdex">
+    <strong class="sc-carrier-metric-num">N/D</strong>
     
   </td>
-  <td class="sc-carrier-score" data-label="Calificación">
-    <div class="sc-carrier-score-num"><strong>4.05</strong><span>/5</span></div>
-    <div class="sc-carrier-stars" aria-label="4.05 / 5"><span class="sc-star sc-star--on" aria-hidden="true">★</span><span class="sc-star sc-star--on" aria-hidden="true">★</span><span class="sc-star sc-star--on" aria-hidden="true">★</span><span class="sc-star sc-star--on" aria-hidden="true">★</span><span class="sc-star sc-star--off" aria-hidden="true">★</span></div>
-    <p class="sc-carrier-score-why mb-0">AM Best A (Excelente), ajustado ligeramente porque las calificaciones están en revisión con implicaciones en desarrollo.</p>
+  <td class="sc-carrier-metric" data-label="NAIC">
+    <strong class="sc-carrier-metric-num">0.83</strong>
+    <span class="sc-carrier-metric-sub d-block"><a href="https://content.naic.org/cis_refined_results.htm?TABLEAU=CIS_COMPLAINTS&amp;COCODE=71439&amp;REALM=PROD" target="_blank" rel="noopener">#71439 · CIS</a></span>
+  </td>
+  <td class="sc-carrier-metric" data-label="J.D. Power">
+    <strong class="sc-carrier-metric-num">N/D</strong>
+  </td>
+  <td class="sc-carrier-score-cell" data-label="Score">
+    <div class="sc-carrier-score-compact" aria-label="3.59 / 5">
+      <strong>3.59</strong><span>/5</span>
+    </div>
+    <div class="sc-carrier-stars sc-carrier-stars--compact"><span class="sc-star sc-star--on" aria-hidden="true">★</span><span class="sc-star sc-star--on" aria-hidden="true">★</span><span class="sc-star sc-star--on" aria-hidden="true">★</span><span class="sc-star sc-star--half" aria-hidden="true">★</span><span class="sc-star sc-star--off" aria-hidden="true">★</span></div>
   </td>
 </tr>
 <tr class="sc-carrier-row">
   <td class="sc-carrier-insurer" data-label="Aseguradora">
     <div class="sc-carrier-insurer-inner">
       <span class="sc-carrier-rank" aria-hidden="true">5</span>
-      <a class="sc-carrier-logo-link" href="../carriers/assurity.html">
-        <img src="../img/carriers/assurity-wordmark.png" alt="" width="526" height="132" loading="lazy" decoding="async"/>
-        <span class="sc-carrier-name">Assurity</span>
+      <a class="sc-carrier-logo-link sc-carrier-logo-link--lg sc-carrier-logo-link--transamerica" href="../carriers/transamerica.html">
+        <img src="../img/opt/transamerica-logo.png?v=20260723-nobg" alt="Transamerica" width="362" height="69" loading="lazy" decoding="async"/>
       </a>
-      <p class="sc-carrier-issuer mb-0">Assurity Life Insurance Company</p>
-      <a class="sc-carrier-profile" href="../carriers/assurity.html">Ver perfil →</a>
+      <a class="sc-carrier-profile" href="../carriers/transamerica.html">Ver detalles →</a>
     </div>
   </td>
-  <td class="sc-carrier-details" data-label="Detalles del plan">
-    <p class="sc-carrier-product mb-1"><strong>Whole Life Protect+ / Perform+</strong></p>
-    <ul class="sc-carrier-detail-list">
-      <li>Cobertura permanente desde $10,000 (emisión simplificada)</li>
-      <li>Edades de emisión: 15 días–85 (emisión simplificada hasta los 85)</li>
-      <li>Beneficios en vida incluidos en Protect+/Perform+; la suscripción define el diseño del beneficio</li>
-    </ul>
+  <td class="sc-carrier-details" data-label="Qué la distingue">
+    <p class="sc-carrier-unique mb-0">Portafolio amplio de gastos finales · edades 18–85 · hasta $100k</p>
   </td>
-  <td class="sc-carrier-strength" data-label="Solidez financiera">
-    <p class="sc-carrier-ambest mb-1">
-      <span class="sc-carrier-ambest-label">AM Best</span>
-      <strong class="sc-carrier-fsr">A-</strong>
-      <span class="sc-carrier-fsr-desc">(Excelente)</span>
-    </p>
-    <p class="sc-carrier-outlook mb-1">Perspectiva: <strong>Estable</strong></p>
-    <p class="sc-carrier-asof mb-2 small text-body-secondary">Vigente: 2025-11-06 · <a href="https://ratings.ambest.com/DisclosurePDF.aspx?AMBNum=7374" target="_blank" rel="noopener">Fuente</a></p>
+  <td class="sc-carrier-metric" data-label="AM Best">
+    <strong class="sc-carrier-fsr">A</strong>
+    <span class="sc-carrier-metric-sub d-block">Excelente</span>
+  </td>
+  <td class="sc-carrier-metric" data-label="Comdex">
+    <strong class="sc-carrier-metric-num">84</strong>
+    <span class="sc-carrier-metric-sub d-block">/100</span>
+  </td>
+  <td class="sc-carrier-metric" data-label="NAIC">
+    <strong class="sc-carrier-metric-num">3.20</strong>
+    <span class="sc-carrier-metric-sub d-block"><a href="https://content.naic.org/cis_refined_results.htm?TABLEAU=CIS_COMPLAINTS&amp;COCODE=86231&amp;REALM=PROD" target="_blank" rel="noopener">#86231 · CIS</a></span>
+  </td>
+  <td class="sc-carrier-metric" data-label="J.D. Power">
+    <strong class="sc-carrier-metric-num">#18/22 · 604</strong>
+  </td>
+  <td class="sc-carrier-score-cell" data-label="Score">
+    <div class="sc-carrier-score-compact" aria-label="2.9 / 5">
+      <strong>2.9</strong><span>/5</span>
+    </div>
+    <div class="sc-carrier-stars sc-carrier-stars--compact"><span class="sc-star sc-star--on" aria-hidden="true">★</span><span class="sc-star sc-star--on" aria-hidden="true">★</span><span class="sc-star sc-star--half" aria-hidden="true">★</span><span class="sc-star sc-star--off" aria-hidden="true">★</span><span class="sc-star sc-star--off" aria-hidden="true">★</span></div>
+  </td>
+</tr>
+<tr class="sc-carrier-row">
+  <td class="sc-carrier-insurer" data-label="Aseguradora">
+    <div class="sc-carrier-insurer-inner">
+      <span class="sc-carrier-rank" aria-hidden="true">6</span>
+      <a class="sc-carrier-logo-link sc-carrier-logo-link--lg sc-carrier-logo-link--american-amicable" href="../carriers/american-amicable.html">
+        <img src="../img/opt/american-amicable-logo.png?v=20260727-align" alt="American Amicable" width="459" height="54" loading="lazy" decoding="async"/>
+      </a>
+      <a class="sc-carrier-profile" href="../carriers/american-amicable.html">Ver detalles →</a>
+    </div>
+  </td>
+  <td class="sc-carrier-details" data-label="Qué la distingue">
+    <p class="sc-carrier-unique mb-0">Golden Solution / Senior Choice · edades 50–85</p>
+  </td>
+  <td class="sc-carrier-metric" data-label="AM Best">
+    <strong class="sc-carrier-fsr">A</strong>
+    <span class="sc-carrier-metric-sub d-block">Excelente</span>
+  </td>
+  <td class="sc-carrier-metric" data-label="Comdex">
+    <strong class="sc-carrier-metric-num">N/D</strong>
     
   </td>
-  <td class="sc-carrier-score" data-label="Calificación">
-    <div class="sc-carrier-score-num"><strong>3.85</strong><span>/5</span></div>
-    <div class="sc-carrier-stars" aria-label="3.85 / 5"><span class="sc-star sc-star--on" aria-hidden="true">★</span><span class="sc-star sc-star--on" aria-hidden="true">★</span><span class="sc-star sc-star--on" aria-hidden="true">★</span><span class="sc-star sc-star--half" aria-hidden="true">★</span><span class="sc-star sc-star--off" aria-hidden="true">★</span></div>
-    <p class="sc-carrier-score-why mb-0">AM Best A- (Excelente) con perspectiva estable; estructura mutual con más de un siglo de historia.</p>
+  <td class="sc-carrier-metric" data-label="NAIC">
+    <strong class="sc-carrier-metric-num">6.72</strong>
+    <span class="sc-carrier-metric-sub d-block"><a href="https://content.naic.org/cis_refined_results.htm?TABLEAU=CIS_COMPLAINTS&amp;COCODE=68594&amp;REALM=PROD" target="_blank" rel="noopener">#68594 · CIS</a></span>
+  </td>
+  <td class="sc-carrier-metric" data-label="J.D. Power">
+    <strong class="sc-carrier-metric-num">N/D</strong>
+  </td>
+  <td class="sc-carrier-score-cell" data-label="Score">
+    <div class="sc-carrier-score-compact" aria-label="2.25 / 5">
+      <strong>2.25</strong><span>/5</span>
+    </div>
+    <div class="sc-carrier-stars sc-carrier-stars--compact"><span class="sc-star sc-star--on" aria-hidden="true">★</span><span class="sc-star sc-star--on" aria-hidden="true">★</span><span class="sc-star sc-star--half" aria-hidden="true">★</span><span class="sc-star sc-star--off" aria-hidden="true">★</span><span class="sc-star sc-star--off" aria-hidden="true">★</span></div>
   </td>
 </tr>
     </tbody>
   </table>
 </div>
-<p class="small text-muted mt-3 mb-2">Las calificaciones de Mejor Vida usan una escala de 5.0 basada principalmente en la calificación de solidez financiera (FSR) de AM Best, con ajustes menores por perspectiva / revisión y por si otras agencias independientes (Moody’s, S&amp;P) también califican al emisor. Solo ordenan las aseguradoras con las que Julie cotiza activamente y no son un respaldo de ninguna agencia. Datos actualizados: 2026-07-26.</p>
-<details class="sc-carrier-sources">
-  <summary>Fuentes de calificación (reputables)</summary>
-  <ul class="small text-body-secondary mb-0 mt-2">
-<li><a href="https://news.ambest.com/" target="_blank" rel="noopener">AM Best</a> — Calificación de solidez financiera (capacidad de cumplir obligaciones con asegurados)</li>
-<li><a href="https://ratings.moodys.com/" target="_blank" rel="noopener">Moody’s</a> — Calificaciones de solidez financiera / crédito</li>
-<li><a href="https://www.spglobal.com/ratings/" target="_blank" rel="noopener">S&amp;P Global</a> — Calificaciones de solidez financiera del asegurador</li>
-<li><a href="https://content.naic.org/cis_consumer_information.htm" target="_blank" rel="noopener">NAIC Consumer Information Source</a> — Consulta oficial de quejas y compañías (verifique por código NAIC)</li>
-<li><a href="https://weissratings.com/" target="_blank" rel="noopener">Weiss Ratings</a> — Calificaciones independientes de seguridad financiera (suscripción; verifique en el sitio)</li>
-<li><a href="https://www.jdpower.com/" target="_blank" rel="noopener">J.D. Power</a> — Estudios de satisfacción del cliente (cuando se publican para vida)</li>
-  </ul>
-</details>
-    <p class="small text-muted mt-3 mb-0">También está nombrada con <strong>Aetna</strong> en el sitio (cita pendiente de página dedicada). Vea el <a href="../aseguradoras.html">resumen de aseguradoras</a>.</p>
+<p class="small text-muted mt-3 mb-0">Actualizado: 2026-07-27. <a href="https://content.naic.org/consumer" target="_blank" rel="noopener">Portal del consumidor NAIC</a> · <a href="https://content.naic.org/cis_consumer_information.htm" target="_blank" rel="noopener">CIS</a>.</p>
   </div>
 </section>
 
