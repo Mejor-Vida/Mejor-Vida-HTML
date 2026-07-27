@@ -237,7 +237,7 @@ Update `InsuranceAgency` block on homepages (and consider shared include later):
 - Add `hasOfferCatalog` for final expense + bilingual consultation (optional but recommended)  
 - Keep existing FAQPage schema on homepage  
 - Keep Person schema on about-julie  
-- Keep Product schema on carrier pages  
+- Use **Service** (+ InsuranceAgency provider) schema on carrier pages — not Product/Offer with a fixed price (life premiums are quote-based; incomplete Product markup triggers Search Console Product snippet errors)  
 
 Validate: [Google Rich Results Test](https://search.google.com/test/rich-results)
 

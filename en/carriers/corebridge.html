@@ -585,25 +585,29 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Product",
+  "@type": "Service",
   "name": "Corebridge Final Expense Whole Life",
   "description": "Corebridge final expense: SimpliNow Legacy and Guaranteed Issue Whole Life (GIWL).",
   "url": "https://www.mejorvidainsurance.com/en/carriers/corebridge.html",
+  "serviceType": "Final Expense Life Insurance",
+  "provider": {
+    "@type": "InsuranceAgency",
+    "name": "Mejor Vida Insurance LLC",
+    "url": "https://www.mejorvidainsurance.com/en/"
+  },
+  "areaServed": {
+    "@type": "State",
+    "name": "Nebraska"
+  },
   "brand": {
     "@type": "Brand",
     "name": "Corebridge Financial"
   },
-  "offers": {
-    "@type": "Offer",
-    "url": "https://www.mejorvidainsurance.com/en/quote.html",
-    "priceCurrency": "USD",
-    "availability": "https://schema.org/InStock",
-    "seller": {
-      "@type": "InsuranceAgency",
-      "name": "Mejor Vida Insurance LLC"
-    }
-  },
-  "category": "Final Expense Life Insurance"
+  "potentialAction": {
+    "@type": "CommunicateAction",
+    "name": "Get a free quote",
+    "target": "https://www.mejorvidainsurance.com/en/quote.html"
+  }
 }
 </script>
 

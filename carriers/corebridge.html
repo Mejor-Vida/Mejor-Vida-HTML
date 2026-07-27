@@ -571,25 +571,29 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Product",
+  "@type": "Service",
   "name": "Seguro de Vida Entera Corebridge (Gastos Finales)",
   "description": "Soluciones de vida entera Corebridge para gastos finales: SimpliNow Legacy (nivel o escalonado) y GIWL de aceptación garantizada.",
   "url": "https://www.mejorvidainsurance.com/carriers/corebridge.html",
+  "serviceType": "Final Expense Life Insurance",
+  "provider": {
+    "@type": "InsuranceAgency",
+    "name": "Mejor Vida Insurance LLC",
+    "url": "https://www.mejorvidainsurance.com/"
+  },
+  "areaServed": {
+    "@type": "State",
+    "name": "Nebraska"
+  },
   "brand": {
     "@type": "Brand",
     "name": "Corebridge Financial"
   },
-  "offers": {
-    "@type": "Offer",
-    "url": "https://www.mejorvidainsurance.com/quote.html",
-    "priceCurrency": "USD",
-    "availability": "https://schema.org/InStock",
-    "seller": {
-      "@type": "InsuranceAgency",
-      "name": "Mejor Vida Insurance LLC"
-    }
-  },
-  "category": "Final Expense Life Insurance"
+  "potentialAction": {
+    "@type": "CommunicateAction",
+    "name": "Obtener cotización gratuita",
+    "target": "https://www.mejorvidainsurance.com/quote.html"
+  }
 }
 </script>
 

@@ -591,25 +591,29 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Product",
+  "@type": "Service",
   "name": "Seguro de Vida Entera Transamerica (Gastos Finales)",
   "description": "Soluciones de vida entera Transamerica para gastos finales: FE Express e Immediate / 10-Pay / Easy.",
   "url": "https://www.mejorvidainsurance.com/carriers/transamerica.html",
+  "serviceType": "Final Expense Life Insurance",
+  "provider": {
+    "@type": "InsuranceAgency",
+    "name": "Mejor Vida Insurance LLC",
+    "url": "https://www.mejorvidainsurance.com/"
+  },
+  "areaServed": {
+    "@type": "State",
+    "name": "Nebraska"
+  },
   "brand": {
     "@type": "Brand",
     "name": "Transamerica"
   },
-  "offers": {
-    "@type": "Offer",
-    "url": "https://www.mejorvidainsurance.com/quote.html",
-    "priceCurrency": "USD",
-    "availability": "https://schema.org/InStock",
-    "seller": {
-      "@type": "InsuranceAgency",
-      "name": "Mejor Vida Insurance LLC"
-    }
-  },
-  "category": "Final Expense Life Insurance"
+  "potentialAction": {
+    "@type": "CommunicateAction",
+    "name": "Obtener cotización gratuita",
+    "target": "https://www.mejorvidainsurance.com/quote.html"
+  }
 }
 </script>
 

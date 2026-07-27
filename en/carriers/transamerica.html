@@ -606,25 +606,29 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Product",
+  "@type": "Service",
   "name": "Transamerica Whole Life Insurance (Final Expense)",
   "description": "Transamerica final expense whole life: FE Express and the Immediate / 10-Pay / Easy portfolio.",
   "url": "https://www.mejorvidainsurance.com/en/carriers/transamerica.html",
+  "serviceType": "Final Expense Life Insurance",
+  "provider": {
+    "@type": "InsuranceAgency",
+    "name": "Mejor Vida Insurance LLC",
+    "url": "https://www.mejorvidainsurance.com/en/"
+  },
+  "areaServed": {
+    "@type": "State",
+    "name": "Nebraska"
+  },
   "brand": {
     "@type": "Brand",
     "name": "Transamerica"
   },
-  "offers": {
-    "@type": "Offer",
-    "url": "https://www.mejorvidainsurance.com/en/quote.html",
-    "priceCurrency": "USD",
-    "availability": "https://schema.org/InStock",
-    "seller": {
-      "@type": "InsuranceAgency",
-      "name": "Mejor Vida Insurance LLC"
-    }
-  },
-  "category": "Final Expense Life Insurance"
+  "potentialAction": {
+    "@type": "CommunicateAction",
+    "name": "Get a free quote",
+    "target": "https://www.mejorvidainsurance.com/en/quote.html"
+  }
 }
 </script>
 
