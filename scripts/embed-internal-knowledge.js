@@ -12,6 +12,7 @@
  *   node scripts/embed-internal-knowledge.js --only=amam
  *   node scripts/embed-internal-knowledge.js --only=transamerica
  *   node scripts/embed-internal-knowledge.js --only=corebridge
+ *   node scripts/embed-internal-knowledge.js --only=aetna
  *   node scripts/embed-internal-knowledge.js --carrier american_amicable --file path/to/MASTER.md
  *   node scripts/embed-internal-knowledge.js --carrier=transamerica --file=integrations/knowledge/Transamerica_Knowledge/MASTER_TRANSAMERICA_KNOWLEDGE.md
  *
@@ -65,6 +66,28 @@ const DEFAULT_JOBS = [
       "MASTER_COREBRIDGE_KNOWLEDGE.md",
     ),
     label: "Corebridge",
+  },
+  {
+    carrier: "aetna",
+    file: path.join(
+      REPO_ROOT,
+      "integrations",
+      "knowledge",
+      "Aetna_Knowledge",
+      "MASTER_AETNA_FE_KNOWLEDGE.md",
+    ),
+    label: "Aetna / Accendo FE",
+  },
+  {
+    carrier: "aetna",
+    file: path.join(
+      REPO_ROOT,
+      "integrations",
+      "knowledge",
+      "Aetna_Knowledge",
+      "LIFE_PRODUCTS.md",
+    ),
+    label: "Aetna life products inventory",
   },
 ];
 
@@ -316,6 +339,7 @@ function parseArgs(argv) {
     else if (a === "--only=amam") out.only = "amam";
     else if (a === "--only=transamerica") out.only = "transamerica";
     else if (a === "--only=corebridge") out.only = "corebridge";
+    else if (a === "--only=aetna") out.only = "aetna";
     else if (a === "--only=all" || a === "--only=both") out.only = "all";
     else if (a.startsWith("--carrier=")) out.carrier = a.slice("--carrier=".length).trim();
     else if (a.startsWith("--file=")) out.file = a.slice("--file=".length).trim();
@@ -400,6 +424,8 @@ async function main() {
     jobs = jobs.filter((j) => j.carrier === "transamerica");
   } else if (args.only === "corebridge") {
     jobs = jobs.filter((j) => j.carrier === "corebridge");
+  } else if (args.only === "aetna") {
+    jobs = jobs.filter((j) => j.carrier === "aetna");
   }
 
   for (const job of jobs) {
@@ -407,7 +433,13 @@ async function main() {
   }
 
   console.log("\n========== TOTAL ROWS BY CARRIER (internal_knowledge_chunks) ==========");
-  const carriers = ["mutual_of_omaha", "american_amicable", "transamerica", "corebridge"];
+  const carriers = [
+    "mutual_of_omaha",
+    "american_amicable",
+    "transamerica",
+    "corebridge",
+    "aetna",
+  ];
   for (const c of carriers) {
     const n = await countCarrierRows(supabaseUrl, serviceKey, c);
     console.log(c + ":", n, "rows");
