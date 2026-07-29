@@ -16,6 +16,41 @@ const PRICING_INTENT_EN =
 const PRICING_INTENT_ES =
   /\b(cu[aá]nto\s+(cuesta|pago|pagar[ií]a|pagaria|saldr[ií]a|saldria)|cu[aá]nto\s+por\s+mes|cu[aá]nto\s+al\s+mes|precio|prima|mensual|cotizaci[oó]n|cotizar|cu[oó]nto\s+me\s+cuesta)\b/i;
 
+/** True only for personal insurance premium / quote-tool questions — not funeral costs, product lists, or agent topics. */
+function isPersonalCoveragePricingQuestion(message) {
+  const t = String(message || "");
+  if (
+    /\b(funeral|entierro|cremaci[oó]n|burial|ata[uú]d|urn|funeraria|cemetery|cementerio)\b/i.test(t)
+  ) {
+    return false;
+  }
+  if (
+    /\b(commission|comisi[oó]n|drug list|lista de (medicamentos|drogas)|underwriting chart|producer|agent only)\b/i.test(
+      t,
+    )
+  ) {
+    return false;
+  }
+  if (
+    /\b(no (puedo|pude) pagar|miss(ed)?\s+(a\s+)?premium|forgot.*(premium|prima)|atras(o|ada).*prima|lapse|caducar)\b/i.test(
+      t,
+    )
+  ) {
+    return false;
+  }
+  // "qué productos puedo cotizar" is product education, not a price request
+  if (
+    /\b(productos?|planes?|opciones?|aseguradoras?|carriers?|accendo|aetna|transamerica|assurity|mutual|protection series)\b/i.test(
+      t,
+    ) &&
+    /\b(cotizar|quote)\b/i.test(t) &&
+    !/\b(cu[aá]nto|how much|price|precio|cost|cuesta|prima|premium|mensual|per month)\b/i.test(t)
+  ) {
+    return false;
+  }
+  return PRICING_INTENT_EN.test(t) || PRICING_INTENT_ES.test(t);
+}
+
 function json(res, status, payload) {
   res.status(status).setHeader("Content-Type", "application/json");
   res.send(JSON.stringify(payload));
@@ -61,7 +96,7 @@ module.exports = async function handler(req, res) {
     return json(res, 400, { status: "error", error: "session_id and message required" });
   }
 
-  if (PRICING_INTENT_EN.test(userMessage) || PRICING_INTENT_ES.test(userMessage)) {
+  if (isPersonalCoveragePricingQuestion(userMessage)) {
     const isSpanish = assistantLocale === "Spanish" || String(body.lang || body.language || "").toLowerCase().startsWith("es");
     const answer = isSpanish
       ? `Para ver cuanto costaria tu cobertura, usa nuestra **herramienta de cotizacion gratuita** - solo toma un minuto.
@@ -125,8 +160,8 @@ Julie will see your information and can follow up with you personally.`;
     const assistantAnswer =
       ragOut.status === "no_answer" || ragOut.answer == null
         ? assistantLocale === "Spanish"
-          ? "Aún no tengo esa información, pero Julie con gusto te ayuda. Escríbele a [Julie@mejorvidainsurance.com](mailto:Julie@mejorvidainsurance.com) o [agenda una cita con ella aquí](https://meetings-na2.hubspot.com/julie-braunsroth)."
-          : "I don't have that information yet, but Julie would be happy to help. Email her at [Julie@mejorvidainsurance.com](mailto:Julie@mejorvidainsurance.com) or [schedule an appointment with her here](https://meetings-na2.hubspot.com/julie-braunsroth/insurance-consultation-mejor-vida-insurance)."
+          ? "No tengo esa información en mi base de conocimiento pública. Puedo ayudarte con seguro de vida y gastos finales, o puedes escribir a [Julie@mejorvidainsurance.com](mailto:Julie@mejorvidainsurance.com) / [agendar una cita](https://meetings-na2.hubspot.com/julie-braunsroth)."
+          : "I don’t have that in my public knowledge base. I can help with life and final expense insurance, or you can email [Julie@mejorvidainsurance.com](mailto:Julie@mejorvidainsurance.com) / [schedule a call](https://meetings-na2.hubspot.com/julie-braunsroth/insurance-consultation-mejor-vida-insurance)."
         : ragOut.answer;
 
     const responseStatus = ragOut.status === "answered" ? "answered" : "no_answer";

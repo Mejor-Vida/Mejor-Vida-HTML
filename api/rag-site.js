@@ -20,6 +20,63 @@ const {
   rateLimitMessage,
 } = require("../lib/rate-limit");
 
+const PRICING_INTENT_EN =
+  /\b(how much|cost|costs|price|premium|rate|per month|monthly|quote|what.*pay|what.*cost|afford)\b/i;
+const PRICING_INTENT_ES =
+  /\b(cu[aá]nto\s+(cuesta|pago|pagar[ií]a|pagaria|saldr[ií]a|saldria)|cu[aá]nto\s+por\s+mes|cu[aá]nto\s+al\s+mes|precio|prima|mensual|cotizaci[oó]n|cotizar|cu[oó]nto\s+me\s+cuesta)\b/i;
+
+/** Personal coverage premium / quote-tool only — not funeral costs, product lists, or agent topics. */
+function isPersonalCoveragePricingQuestion(message) {
+  const t = String(message || "");
+  if (
+    /\b(funeral|entierro|cremaci[oó]n|burial|ata[uú]d|urn|funeraria|cemetery|cementerio)\b/i.test(t)
+  ) {
+    return false;
+  }
+  if (
+    /\b(commission|comisi[oó]n|drug list|lista de (medicamentos|drogas)|underwriting chart|producer|agent only)\b/i.test(
+      t,
+    )
+  ) {
+    return false;
+  }
+  if (
+    /\b(no (puedo|pude) pagar|miss(ed)?\s+(a\s+)?premium|forgot.*(premium|prima)|atras(o|ada).*prima|lapse|caducar)\b/i.test(
+      t,
+    )
+  ) {
+    return false;
+  }
+  if (
+    /\b(productos?|planes?|opciones?|aseguradoras?|carriers?|accendo|aetna|transamerica|assurity|mutual|protection series)\b/i.test(
+      t,
+    ) &&
+    /\b(cotizar|quote)\b/i.test(t) &&
+    !/\b(cu[aá]nto|how much|price|precio|cost|cuesta|prima|premium|mensual|per month)\b/i.test(t)
+  ) {
+    return false;
+  }
+  return PRICING_INTENT_EN.test(t) || PRICING_INTENT_ES.test(t);
+}
+
+function quoteToolAnswer(isSpanish) {
+  return isSpanish
+    ? `Para ver cuanto costaria tu cobertura, usa nuestra **herramienta de cotizacion gratuita** - solo toma un minuto.
+
+👉 [Obtener mi cotizacion gratuita](https://www.mejorvidainsurance.com/quote.html)
+
+Ingresa tu edad, genero y si usas tabaco, y recibiras un rango de precio estimado al instante. Tambien puedes usar el boton **"Cotizacion gratuita"** en la parte superior de esta pagina.
+
+Julie revisara tu informacion y podra hacer seguimiento contigo personalmente.`
+    : `To see what coverage would cost you, use our **free quote tool** - it only takes a minute.
+
+👉 [Get my free quote](https://www.mejorvidainsurance.com/quote.html)
+
+Enter your age, gender, and tobacco status and you'll get an estimated price range right away. You can also tap the **"Get a Free Quote"** button at the top of this page.
+
+Julie will see your information and can follow up with you personally.`;
+}
+
 function json(res, status, payload) {
   res.status(status).setHeader("Content-Type", "application/json");
   res.send(JSON.stringify(payload));
@@ -53,15 +110,15 @@ function websiteNoAnswerLine(language) {
   const l = String(language || "").toLowerCase();
   if (l.startsWith("spanish") || l.startsWith("es")) {
     return (
-      "Aún no tengo esa información, pero Julie con gusto te ayuda. Escríbele a " +
-      "[Julie@mejorvidainsurance.com](mailto:Julie@mejorvidainsurance.com) o " +
-      "[agenda una cita con ella aquí](https://meetings-na2.hubspot.com/julie-braunsroth)."
+      "No tengo esa información en mi base de conocimiento pública. Puedo ayudarte con seguro de vida y gastos finales, o puedes escribir a " +
+      "[Julie@mejorvidainsurance.com](mailto:Julie@mejorvidainsurance.com) / " +
+      "[agendar una cita](https://meetings-na2.hubspot.com/julie-braunsroth)."
     );
   }
   return (
-    "I don't have that information yet, but Julie would be happy to help. Email her at " +
-    "[Julie@mejorvidainsurance.com](mailto:Julie@mejorvidainsurance.com) or " +
-    "[schedule an appointment with her here](https://meetings-na2.hubspot.com/julie-braunsroth/insurance-consultation-mejor-vida-insurance)."
+    "I don’t have that in my public knowledge base. I can help with life and final expense insurance, or you can email " +
+    "[Julie@mejorvidainsurance.com](mailto:Julie@mejorvidainsurance.com) / " +
+    "[schedule a call](https://meetings-na2.hubspot.com/julie-braunsroth/insurance-consultation-mejor-vida-insurance)."
   );
 }
 
@@ -102,7 +159,11 @@ module.exports = async function handler(req, res) {
   if (websiteChat) {
     const question = String(body.message || "").trim();
     language = normalizeAssistantLanguage(
-      body.language ? String(body.language).trim() : localeToLanguage(body.locale),
+      body.language
+        ? String(body.language).trim()
+        : body.lang
+          ? String(body.lang).trim()
+          : localeToLanguage(body.locale),
     );
     const conversationContext = historyToContext(body.history);
     pipelineBody = {
@@ -117,6 +178,18 @@ module.exports = async function handler(req, res) {
       return json(res, 400, {
         status: "error",
         answer: websiteErrorLine(language),
+        message_id: messageId,
+      });
+    }
+
+    if (isPersonalCoveragePricingQuestion(question)) {
+      const isSpanish =
+        String(language || "").toLowerCase().startsWith("spanish") ||
+        String(language || "").toLowerCase().startsWith("es") ||
+        /[áéíóúüñ¿¡]/i.test(question);
+      return json(res, 200, {
+        status: "ok",
+        answer: quoteToolAnswer(isSpanish),
         message_id: messageId,
       });
     }
