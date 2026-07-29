@@ -13,6 +13,8 @@
 
 **Cadence:** Every Sunday (manual run in Cursor). Always deliver **exactly 3** complete drafts. Never skip a week — use evergreen topics if news is slow.
 
+**Sunday client email:** Must use life insurance / final expense stories only (same product scope as drafts). Do not import Medicare/Medigap FB packages. Guard: `lib/crm-weekly-topic-guard.js`. Keep `lib/crm-weekly-blog-digest-email.js` and `FB/post-package.json` pointed at the current on-topic week.
+
 When rules conflict with ad-hoc chat instructions, **this document wins** unless Julie updates it.
 
 After Julie picks an article to publish on the site, follow `tools/newsletter-to-consumer-blog-prompt.md`, `.cursor/rules/newsletter-consumer-blog.mdc`, and `tools/blog-build-rules.md` for HTML wiring (digest + full article, ES/EN, sitemap).

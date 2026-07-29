@@ -386,6 +386,16 @@
   margin-left: -0.45rem;
 }
 
+/* Aetna SVG fills its viewBox edge-to-edge — shrink so visual weight matches peers */
+.sc-carrier-logo-link--aetna {
+  max-width: 9.5rem;
+}
+
+.sc-carrier-logo-link--aetna img {
+  height: 1.45rem;
+  max-width: 100%;
+}
+
 .sc-carrier-profile {
   grid-column: 2;
   display: block;

@@ -7,6 +7,7 @@ const {
   buildWeeklyFbPostEmailParts,
   normalizeFbPostImportBody,
 } = require("../../lib/crm-weekly-fb-email");
+const { assertNewsletterPartsOk } = require("../../lib/crm-weekly-topic-guard");
 
 module.exports = async function handler(req, res) {
   const auth = await requireStaffAuth(req, res);
@@ -49,6 +50,17 @@ module.exports = async function handler(req, res) {
 
   if (!subject) {
     subject = "Mejor Vida Insurance — Actualización semanal";
+  }
+
+  const topicCheck = assertNewsletterPartsOk({
+    subject,
+    bodyHtml,
+    heroHtml,
+    email_caption: body.email_caption || body.emailCaption || "",
+    main_caption: body.main_caption || body.mainCaption || "",
+  });
+  if (!topicCheck.ok) {
+    return json(res, 400, { error: topicCheck.error });
   }
 
   try {

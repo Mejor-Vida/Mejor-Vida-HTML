@@ -33,3 +33,6 @@ integrations/knowledge/Transamerica_Knowledge/source_pdfs/
 
 # Corebridge Connext PDFs/screenshots (local extracts only; MD committed)
 integrations/knowledge/Corebridge_Knowledge/raw/
+
+# Aetna Senior Supplemental PDFs/images (local extracts only; MD/JSON committed)
+integrations/knowledge/Aetna_Knowledge/raw/

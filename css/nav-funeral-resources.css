@@ -62,7 +62,7 @@
   grid-template-columns: minmax(220px, 1fr) minmax(240px, 1.05fr) minmax(280px, 1.2fr);
   grid-template-rows: auto;
   gap: 0.65rem 0.9rem;
-  align-items: start;
+  align-items: stretch;
   background: #fff;
   border-radius: 0.65rem;
   box-shadow:
@@ -143,9 +143,10 @@
   position: relative;
   display: flex;
   overflow: hidden;
-  height: 148px;
-  min-height: 148px;
-  max-height: 148px;
+  height: auto;
+  min-height: 100%;
+  max-height: none;
+  align-self: stretch;
   padding: 0.65rem;
   border-radius: 0.55rem;
   text-decoration: none;
@@ -154,13 +155,14 @@
 .nav-funeral-feature {
   flex-direction: column;
   padding: 0;
-  background: #f0f7ff;
+  background: #e8f2fc;
   color: #1a365d;
+  isolation: isolate;
 }
 
 .nav-funeral-feature-badge {
   position: absolute;
-  z-index: 2;
+  z-index: 3;
   top: 0;
   left: 0;
   align-self: auto;
@@ -176,40 +178,54 @@
 
 .nav-funeral-feature h3 {
   position: absolute;
-  z-index: 2;
-  top: 1.55rem;
-  left: 0.55rem;
-  right: 0.55rem;
+  z-index: 3;
+  top: 50%;
+  left: 0.75rem;
+  right: 0.75rem;
   margin: 0;
   max-width: none;
+  transform: translateY(-50%);
   color: #0d47a1;
-  font-size: 0.88rem;
+  font-size: 1.15rem;
   font-weight: 800;
-  line-height: 1.2;
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.85);
+  line-height: 1.25;
+  text-align: center;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.95);
 }
 
 .nav-funeral-feature-media {
   position: absolute;
   inset: 0;
+  z-index: 0;
   flex: none;
   margin: 0;
   min-height: 0;
   border-radius: 0.55rem;
   overflow: hidden;
   line-height: 0;
+  /* Soften photo into a background wash — keep faces readable */
+  opacity: 0.88;
+  filter: saturate(0.95) contrast(1.02);
 }
 
-/* Soft fade behind title so faces stay readable without shrinking the photo */
+/* Soft vignette / wash so the photo reads as background, not a hard card */
 .nav-funeral-feature-media::before {
   content: "";
   position: absolute;
   z-index: 1;
-  top: 0;
-  right: 0;
-  left: 0;
-  height: 3.1rem;
-  background: linear-gradient(180deg, rgba(240, 247, 255, 0.95) 0%, rgba(240, 247, 255, 0.55) 55%, rgba(240, 247, 255, 0) 100%);
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 48%, rgba(232, 242, 252, 0.55) 0%, rgba(232, 242, 252, 0.18) 55%, rgba(232, 242, 252, 0.12) 100%),
+    linear-gradient(180deg, rgba(232, 242, 252, 0.35) 0%, rgba(232, 242, 252, 0.08) 40%, rgba(232, 242, 252, 0.28) 100%);
+  pointer-events: none;
+}
+
+.nav-funeral-feature-media::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  box-shadow: inset 0 0 0 1px rgba(13, 71, 161, 0.06);
   pointer-events: none;
 }
 
@@ -217,10 +233,11 @@
   display: block;
   width: 100%;
   height: 100%;
-  min-height: 148px;
+  min-height: 100%;
   object-fit: cover;
   /* Anchor to the top so all three heads stay in frame */
   object-position: center top;
+  transform: scale(1.04);
 }
 
 .nav-funeral-calculator {
@@ -284,13 +301,22 @@
   display: block;
   width: 100%;
   height: 100%;
-  min-height: 148px;
-  max-height: 148px;
+  min-height: 100%;
+  max-height: none;
   object-fit: cover;
   object-position: center 20%;
 }
 
+.nav-funeral-feature:hover .nav-funeral-feature-media {
+  opacity: 0.95;
+  filter: saturate(1) contrast(1.04);
+}
+
 .nav-funeral-feature:hover,
+.nav-funeral-calculator:hover {
+  filter: none;
+}
+
 .nav-funeral-calculator:hover {
   filter: brightness(1.04);
 }

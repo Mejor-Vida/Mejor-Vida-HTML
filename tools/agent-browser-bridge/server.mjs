@@ -83,7 +83,8 @@ function flushPoller(cmd) {
 
 function enqueueCommand(action, args = {}) {
   return new Promise((resolve, reject) => {
-    if (!extension.connected || Date.now() - extension.lastSeen > 15000) {
+    // 45s freshness: long commands (navigate/PDF opens) can pause the poll loop briefly.
+    if (!extension.connected || Date.now() - extension.lastSeen > 45000) {
       reject(Object.assign(new Error("extension_offline"), { code: "extension_offline" }));
       return;
     }
@@ -165,7 +166,7 @@ const server = http.createServer(async (req, res) => {
 
     // Agent / status endpoints
     if (path === "/v1/status" && req.method === "GET") {
-      const fresh = extension.connected && Date.now() - extension.lastSeen < 15000;
+      const fresh = extension.connected && Date.now() - extension.lastSeen < 45000;
       return json(res, 200, {
         ok: true,
         online: fresh,

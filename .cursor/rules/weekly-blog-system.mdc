@@ -12,7 +12,7 @@ When the user asks to run the **weekly blog**, **Sunday blog**, **blog drafts**,
 2. News window: `START_DATE = TODAY−7` through `END_DATE = TODAY−1` (evergreen exempt).
 3. Categories: (1) final expense & funeral costs, (2) term life, (3) whole life, (4) approved-carrier consumer product news, (5) scams/consumer protection. SEO priority: **final expense → term life → whole life**. **That is the only topical focus.**
 4. **Consumer only** — never agent/IMO/producer framing. **Spanish SEO first** (EN drafts → ES publish indexed; EN pages `noindex`).
-5. **No Medicare/Medigap/IUL/VUL/LTC/industry-trade focus.** Brief “Medicare doesn’t pay funerals” lines OK inside FE articles only.
+5. **No Medicare/Medigap/IUL/VUL/LTC/industry-trade focus.** Brief “Medicare doesn’t pay funerals” lines OK inside FE articles only. **Sunday client newsletter / FB weekly package:** life insurance or final expense only — APIs block Medicare/Medigap imports (`lib/crm-weekly-topic-guard.js`).
 6. Story Fit Test: useful for clients/future clients + SEO. **Do not exclude by state** (NE/KS/CO/NV are priority, not a ban). **Do not exclude by publisher/source**.
 7. Hard limits only: no competitor names in drafts, no IUL/VUL/variable, no auto/home as main topic, Category 4 = Assurity / Mutual of Omaha / American Amicable / Corebridge / Transamerica / Aetna only.
 8. Evergreen: use Section 6.2 gap topics only; never duplicate `tools/blog-drafts/shared/covered-evergreen-topics.md`.

@@ -717,7 +717,7 @@ function renderEs(code) {
   const prefix = "../";
   const canon = `https://www.mejorvidainsurance.com/estados/${slug}.html`;
   const enCanon = `https://www.mejorvidainsurance.com/en/states/${slug}.html`;
-  const title = `Seguro de gastos finales en ${name} | Mejor Vida Insurance`;
+  const title = `Seguro de gastos finales en ${name} | Mejor Vida Seguros`;
   const desc = `Julie Braunsroth cotiza seguro de gastos finales en ${name}. Costos funerarios promedio, aseguradoras y licencia #${lic.number} (NPN #${NPN}).`;
 
   return `<!DOCTYPE html>
@@ -738,15 +738,15 @@ function renderEs(code) {
 <link href="${prefix}bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
 <link href="${prefix}css/quote-flow-shared.css?v=20260726-state" rel="stylesheet"/>
 <link href="${prefix}css/site-footer.css?v=20260721-lip-page" rel="stylesheet"/>
-<link href="${prefix}css/state-coverage.css?v=20260727-details-gap" rel="stylesheet"/>
+<link href="${prefix}css/state-coverage.css?v=20260728-aetna-logo" rel="stylesheet"/>
 <link href="${prefix}css/mvi-licensing-map.css?v=20260726-state-cov" rel="stylesheet"/>
 <link href="${prefix}css/mvi-assistant-widget.css?v=20260721-chat-z" rel="stylesheet"/>
 <link href="${prefix}css/fontawesome-mvi.min.css?v=20260723-brands-fix" rel="stylesheet"/>
 <link href="${prefix}css/site-header.css?v=20260723-ver-precios-gold" rel="stylesheet"/>
 <link href="${prefix}css/nav-questions-dropdown.css" rel="stylesheet"/>
-<link href="${prefix}css/nav-about-mega.css?v=20260721-lip-page" rel="stylesheet"/>
-<link href="${prefix}css/nav-funeral-resources.css?v=20260721-faces-top" rel="stylesheet"/>
-<link href="${prefix}css/nav-life-insurance.css?v=20260721-cost-blue" rel="stylesheet"/>
+<link href="${prefix}css/nav-about-mega.css?v=20260728-help-bg" rel="stylesheet"/>
+<link href="${prefix}css/nav-funeral-resources.css?v=20260728-photo-stronger" rel="stylesheet"/>
+<link href="${prefix}css/nav-life-insurance.css?v=20260728-map-type" rel="stylesheet"/>
 <meta property="og:type" content="website"/>
 <meta property="og:title" content="${esc(title)}"/>
 <meta property="og:description" content="${esc(desc)}"/>
@@ -845,15 +845,15 @@ function renderEn(code) {
 <link href="${root}bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
 <link href="${root}css/quote-flow-shared.css?v=20260726-state" rel="stylesheet"/>
 <link href="${root}css/site-footer.css?v=20260721-lip-page" rel="stylesheet"/>
-<link href="${root}css/state-coverage.css?v=20260727-details-gap" rel="stylesheet"/>
+<link href="${root}css/state-coverage.css?v=20260728-aetna-logo" rel="stylesheet"/>
 <link href="${root}css/mvi-licensing-map.css?v=20260726-state-cov" rel="stylesheet"/>
 <link href="${root}css/mvi-assistant-widget.css?v=20260721-chat-z" rel="stylesheet"/>
 <link href="${root}css/fontawesome-mvi.min.css?v=20260723-brands-fix" rel="stylesheet"/>
 <link href="${root}css/site-header.css?v=20260723-ver-precios-gold" rel="stylesheet"/>
 <link href="${root}css/nav-questions-dropdown.css" rel="stylesheet"/>
-<link href="${root}css/nav-about-mega.css?v=20260721-lip-page" rel="stylesheet"/>
-<link href="${root}css/nav-funeral-resources.css?v=20260721-faces-top" rel="stylesheet"/>
-<link href="${root}css/nav-life-insurance.css?v=20260721-cost-blue" rel="stylesheet"/>
+<link href="${root}css/nav-about-mega.css?v=20260728-help-bg" rel="stylesheet"/>
+<link href="${root}css/nav-funeral-resources.css?v=20260728-photo-stronger" rel="stylesheet"/>
+<link href="${root}css/nav-life-insurance.css?v=20260728-map-type" rel="stylesheet"/>
 <meta property="og:type" content="website"/>
 <meta property="og:title" content="${esc(title)}"/>
 <meta property="og:description" content="${esc(desc)}"/>

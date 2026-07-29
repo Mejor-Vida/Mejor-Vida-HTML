@@ -33,6 +33,15 @@ These Facebook posts are **not** only for traffic. They are designed to **create
 - They care about protecting family, avoiding financial stress, understanding coverage, and making wise decisions
 - Write for **normal people**, not agents, regulators, or insurance insiders
 
+### Topic scope (hard rule)
+
+Weekly Facebook posts **and** the Sunday client newsletter must be about **life insurance or final expense only**:
+
+- **Allowed:** final expense / burial / funeral funding, term life, whole life, life-insurance scams/consumer protection tied to those products
+- **Not allowed as the post or email topic:** Medicare, Medigap, Medicare Advantage, Med Supp shopping, Part A/B/D news, LTC as a product line, IUL/VUL, auto/home
+
+Do **not** publish or import a weekly package whose caption/subject is primarily Medicare/Medigap. The import APIs reject those topics.
+
 ---
 
 ## Primary business goal

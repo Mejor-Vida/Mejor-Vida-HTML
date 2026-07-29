@@ -17,6 +17,7 @@ const {
   getWeeklyBlogDigestEmailPreview,
   buildWeeklyBlogDigestEmailParts,
 } = require("../../lib/crm-weekly-blog-digest-email");
+const { assertNewsletterPartsOk } = require("../../lib/crm-weekly-topic-guard");
 
 module.exports = async function handler(req, res) {
   const auth = await requireStaffAuth(req, res);
@@ -28,6 +29,11 @@ module.exports = async function handler(req, res) {
   if (req.method === "GET") {
     if (source === "facebook" || source === "fb") {
       const post = loadExampleWeeklyFbPost();
+      const parts = buildWeeklyFbPostEmailParts(post);
+      const topicCheck = assertNewsletterPartsOk(parts);
+      if (!topicCheck.ok) {
+        return json(res, 400, { error: topicCheck.error });
+      }
       const preview = getWeeklyFbPostEmailPreview(post);
       return json(res, 200, {
         source: "facebook",
@@ -37,11 +43,21 @@ module.exports = async function handler(req, res) {
         subject: preview.subject,
         html: preview.html,
         language: preview.language,
-        source_package: "FB/post-package-weekly-2026-07-12-medigap.json",
+        source_package: "FB/post-package-weekly-2026-07-19-life.json",
       });
     }
 
     const digest = getCurrentWeeklyBlogDigest();
+    const digestParts = buildWeeklyBlogDigestEmailParts(digest);
+    const digestCheck = assertNewsletterPartsOk({
+      subject: digestParts.subject,
+      bodyHtml: digestParts.bodyHtml,
+      heroHtml: digestParts.heroHtml,
+      email_caption: (digest.stories || []).map((s) => `${s.title} ${s.summary}`).join("\n"),
+    });
+    if (!digestCheck.ok) {
+      return json(res, 400, { error: digestCheck.error });
+    }
     const preview = getWeeklyBlogDigestEmailPreview(digest);
     return json(res, 200, {
       source: "blog",
@@ -51,7 +67,7 @@ module.exports = async function handler(req, res) {
       html: preview.html,
       language: preview.language,
       stories: digest.stories || [],
-      source_package: "blog/weekly-insurance-update-2026-07-12.html (consumer digest)",
+      source_package: "blog/weekly-insurance-update-2026-07-19.html (life / FE digest)",
     });
   }
 
@@ -85,6 +101,11 @@ module.exports = async function handler(req, res) {
 
     if (!parts.heroHtml && !parts.bodyHtml) {
       return json(res, 400, { error: "No email content available" });
+    }
+
+    const topicCheck = assertNewsletterPartsOk(parts);
+    if (!topicCheck.ok) {
+      return json(res, 400, { error: topicCheck.error });
     }
 
     try {

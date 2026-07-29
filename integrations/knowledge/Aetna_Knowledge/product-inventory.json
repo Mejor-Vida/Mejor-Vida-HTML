@@ -1,0 +1,84 @@
+{
+  "captured": "2026-07-28",
+  "portal": "https://www.aetnaseniorproducts.com/ssibrokerwebaz/agent/home?channel=broker",
+  "lifeProducts": [
+    {
+      "id": "accendo-fe",
+      "name": "Accendo Final Expense",
+      "type": "whole_life_final_expense",
+      "underwriter": "Accendo Insurance Company",
+      "naic": "63444",
+      "issueAges": "40-89 Level; 40-75 Modified",
+      "faces": "Level $2k-$50k age-banded; Modified $2k-$25k",
+      "julieInScope": true
+    },
+    {
+      "id": "cli-protection-series-fe",
+      "name": "Protection Series Final Expense",
+      "type": "whole_life_final_expense",
+      "underwriter": "Continental Life Insurance Company of Brentwood, Tennessee",
+      "issueAges": "45-89",
+      "faces": "$2k-$50k (max by age)",
+      "plans": "Level",
+      "julieInScope": true,
+      "note": "Available NE/KS/CO/NV; include when quoting Aetna life FE"
+    }
+  ],
+  "nonLifeProducts": [
+    "Medicare Supplement (ACI/AHIC/AHLIC/CLI)",
+    "Cancer and Heart Attack or Stroke Plus (CLI)",
+    "Home Care Plus (CLI)",
+    "Recovery Care / Choice (CLI)",
+    "Hospital Indemnity Flex (CLI)",
+    "Home Recovery Care (CLI, TX only)",
+    "Dental, Vision and Hearing / Plus / Flex (CLI)"
+  ],
+  "documents": [
+    "raw/pdfs/AccendoFE_AdministrativeSalesHandbook.pdf",
+    "raw/pdfs/FinalExpenseACC_webinar.pdf",
+    "raw/pdfs/CGFLP04359_PRODUCER_GUIDE.pdf",
+    "raw/pdfs/CGFMP08411_ProductOverviewTraining.pdf",
+    "raw/pdfs/CGFMP06547_DOCUMENT_UNDERWRITING_FAQ_090823.pdf",
+    "raw/pdfs/AccendoFE_DrugList.pdf",
+    "raw/pdfs/Accendo-Final-Expense-Brochure-2025.pdf",
+    "raw/pdfs/ACCFE06490_CASH_VALUE_FNLEX_ACC_093021.pdf",
+    "raw/pdfs/CLIFE07472_CASH_VALUE_FNLEX_120221.pdf",
+    "raw/pdfs/PHS-ACC-ChangeOfBeneficiary.pdf",
+    "raw/pdfs/CGFLP01577ProductAvailabilityChart.pdf",
+    "raw/pdfs/CGFMP03457ProductDescriptionFlyer.pdf",
+    "raw/pdfs/CGFMP08395_AboutAetnaSSI.pdf",
+    "raw/pdfs/LandmarkCommissionStatement-ReferenceGuide.pdf",
+    "raw/pdfs/ACCFE08386_ConsumerPostcard.pdf",
+    "raw/pdfs/ACCFE08387_ConsumerFlyer.pdf",
+    "raw/pdfs/CLIFE07615_FinalExpenseConsumerPostcard.pdf",
+    "raw/pdfs/CGFFE07557_ProtectionSeriesFinalExpenseAgentFlyer.pdf",
+    "raw/pdfs/CGFMP03462MedSuppFEFlyer.pdf",
+    "raw/images/CLIFE07616_FinalExpenseConsumerEmail.jpg"
+  ],
+  "julieStates": {
+    "NE": {
+      "accendoFE": true,
+      "cliProtectionSeriesFE": true,
+      "medSupp": "CLI 7% HHD"
+    },
+    "KS": {
+      "accendoFE": true,
+      "cliProtectionSeriesFE": true,
+      "medSupp": "AHIC 7% HHD"
+    },
+    "CO": {
+      "accendoFE": true,
+      "cliProtectionSeriesFE": true,
+      "medSupp": "AHIC 7% HHD"
+    },
+    "NV": {
+      "accendoFE": true,
+      "cliProtectionSeriesFE": true,
+      "medSupp": "CLI 7% HHD"
+    },
+    "chartEffective": "05-11-26",
+    "form": "CGFLP01577"
+  },
+  "lifeProductsComplete": true,
+  "note": "Portal life = Accendo FE + CLI Protection Series FE only (no term/GUL/IUL). Both julieInScope for NE/KS/CO/NV."
+}

@@ -47,10 +47,46 @@
   {
     "src": "img/fe-about-seniors-laptop.jpg",
     "base": "fe-about-seniors-laptop",
-    "width": 1000,
-    "height": 744,
+    "width": 921,
+    "height": 717,
     "webp": "img/opt/fe-about-seniors-laptop.webp",
     "fallback": "img/opt/fe-about-seniors-laptop.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/fe-guide-card-que-es.jpg",
+    "base": "fe-guide-card-que-es",
+    "width": 800,
+    "height": 600,
+    "webp": "img/opt/fe-guide-card-que-es.webp",
+    "fallback": "img/opt/fe-guide-card-que-es.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/fe-guide-card-tipos.jpg",
+    "base": "fe-guide-card-tipos",
+    "width": 800,
+    "height": 600,
+    "webp": "img/opt/fe-guide-card-tipos.webp",
+    "fallback": "img/opt/fe-guide-card-tipos.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/fe-guide-card-cuanto-cuesta.jpg",
+    "base": "fe-guide-card-cuanto-cuesta",
+    "width": 800,
+    "height": 600,
+    "webp": "img/opt/fe-guide-card-cuanto-cuesta.webp",
+    "fallback": "img/opt/fe-guide-card-cuanto-cuesta.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/fe-guide-card-medicare.jpg",
+    "base": "fe-guide-card-medicare",
+    "width": 800,
+    "height": 600,
+    "webp": "img/opt/fe-guide-card-medicare.webp",
+    "fallback": "img/opt/fe-guide-card-medicare.jpg",
     "keepPng": false
   },
   {

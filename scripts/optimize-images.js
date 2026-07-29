@@ -56,6 +56,8 @@ const JOBS = [
   { src: "img/mvi-promo-seguros-whatsapp.png", maxWidth: 800, maxHeight: 450 },
   { src: "img/julie-promo-funeral-cost.png", maxWidth: 900, maxHeight: 900 },
   { src: "img/funeral-calculator-menu.png", maxWidth: 720, maxHeight: 576, outBase: "funeral-calculator-menu" },
+  { src: "img/about-help-hikers.jpg", maxWidth: 800, maxHeight: 572, outBase: "about-help-hikers" },
+  { src: "img/usa-coverage-map.jpg", maxWidth: 800, maxHeight: 533, outBase: "usa-coverage-map" },
   { src: "img/logo-spanish2-email.png", maxWidth: 440, maxHeight: 300, keepPng: true },
   { src: "img/logo-english2-email.png", maxWidth: 440, maxHeight: 300, keepPng: true },
   { src: "gastos-finales-ads-v2/img/objective-quote.png", maxWidth: 320, maxHeight: 320, keepPng: true, outBase: "objective-quote" },

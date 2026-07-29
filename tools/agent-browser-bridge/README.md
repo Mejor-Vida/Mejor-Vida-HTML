@@ -68,8 +68,10 @@ npm run bridge:browser:cmd -- screenshot /tmp/connext.png
 
 - **status says offline** → run `npm run bridge:browser`
 - **extension_disarmed** → open the popup and turn Bridge ON
-- **timeout** → keep the Connext tab focused; don’t sleep the laptop mid-command
+- **timeout** → keep the portal tab focused; don’t sleep the laptop mid-command
+- **PDF new tabs steal focus** → fixed in extension **v1.1.0** (sticky control tab + refocus after clicks). Reload the extension after pull.
 - After pulling extension code updates: `chrome://extensions` → Reload on MVI Agent Browser Bridge
+- Restart the local server after `server.mjs` changes: stop and re-run `npm run bridge:browser`
 
 ## Notes
 

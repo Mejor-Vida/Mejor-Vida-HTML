@@ -233,109 +233,6 @@ function inject(filePath, sectionHtml) {
   console.log("updated", path.relative(ROOT, filePath));
 }
 
-function aetnaStub(lang) {
-  const c = DATA.carriers.find((x) => x.id === "aetna");
-  const isEs = lang === "es";
-  const prefix = isEs ? "../" : "../../";
-  const enPrefix = isEs ? "" : "../";
-  const root = isEs ? "../" : "../../";
-  const title = isEs
-    ? "Aetna — Seguro de gastos finales | Mejor Vida Insurance LLC"
-    : "Aetna — Final Expense Insurance | Mejor Vida Insurance LLC";
-  const desc = isEs
-    ? "Aetna Life Insurance Company para gastos finales. Calificaciones AM Best, Comdex, NAIC y J.D. Power. Julie en Mejor Vida Insurance."
-    : "Aetna Life Insurance Company for final expense. AM Best, Comdex, NAIC, and J.D. Power ratings. Julie at Mejor Vida Insurance.";
-  const canon = isEs
-    ? "https://www.mejorvidainsurance.com/carriers/aetna.html"
-    : "https://www.mejorvidainsurance.com/en/carriers/aetna.html";
-  const alt = isEs
-    ? "https://www.mejorvidainsurance.com/en/carriers/aetna.html"
-    : "https://www.mejorvidainsurance.com/carriers/aetna.html";
-  const logoPath = `${isEs ? "../" : "../../"}img/carriers/aetna-logo.svg`;
-  const quote = isEs ? `${prefix}quote.html` : `${enPrefix}quote.html`;
-  const home = isEs ? `${prefix}index.html#home` : `${enPrefix}index.html#home`;
-  const langLogo = isEs ? "logo-spanish2" : "logo-english2";
-  const ratings = ratingsSection(c, lang);
-
-  return `<!DOCTYPE html>
-<html class="lang-${isEs ? "es" : "en"}" lang="${isEs ? "es" : "en"}">
-<head>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-K921EG6JWG"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-K921EG6JWG');</script>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>${esc(title)}</title>
-<meta name="description" content="${esc(desc)}"/>
-<link href="${canon}" rel="canonical"/>
-<link href="${isEs ? canon : alt}" hreflang="es" rel="alternate"/>
-<link href="${isEs ? alt : canon}" hreflang="en" rel="alternate"/>
-<link href="${prefix}favicon.ico" rel="icon" type="image/x-icon"/>
-<link href="${root}bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
-<link href="${root}css/quote-flow-shared.css?v=20260725-carrier-layout" rel="stylesheet"/>
-<link href="${root}css/site-footer.css?v=20260721-lip-page" rel="stylesheet"/>
-<link href="${root}css/carrier-detail.css?v=20260725a" rel="stylesheet"/>
-<link href="${root}css/fontawesome-mvi.min.css?v=20260723-brands-fix" rel="stylesheet"/>
-<link href="${root}css/site-header.css?v=20260723-ver-precios-gold" rel="stylesheet"/>
-<script>(function(){document.documentElement.lang="${isEs ? "es" : "en"}";document.documentElement.className="lang-${
-    isEs ? "es" : "en"
-  }";})();</script>
-</head>
-<body class="bg-white carriers-subpage">
-<header class="sticky-top bg-white shadow-sm border-bottom">
-  <div class="container">
-    <div class="d-flex align-items-center justify-content-between py-2">
-      <a href="${home}" class="d-block">
-        <img src="${root}img/opt/${langLogo}.png" alt="Mejor Vida Insurance" height="48" width="72"/>
-      </a>
-      <a class="btn btn-sm btn-outline-primary" href="${isEs ? alt : canon}">${
-    isEs ? "English" : "Español"
-  }</a>
-    </div>
-  </div>
-</header>
-<main class="carrier-detail-readability">
-<section class="py-5 bg-white border-bottom">
-  <div class="container text-center" style="max-width:60rem;">
-    <img src="${logoPath}" alt="Aetna" width="512" height="98" class="mb-3" style="max-height:3rem;width:auto;"/>
-    <h1 class="h2 fw-bold mb-3" style="color:#1a365d;">${
-      isEs ? "Aetna — gastos finales" : "Aetna — final expense"
-    }</h1>
-    <p class="lead text-body-secondary mb-0">${
-      isEs
-        ? "Julie puede cotizar opciones de gastos finales con Aetna Life Insurance Company. La ficha completa de producto se está completando; las calificaciones publicadas ya están abajo."
-        : "Julie can quote final expense options with Aetna Life Insurance Company. The full product sheet is still being completed; published ratings are below."
-    }</p>
-  </div>
-</section>
-${ratings}
-<section class="py-5 text-white" style="background:#1a365d;">
-  <div class="container text-center" style="max-width:60rem;">
-    <h2 class="h3 fw-bold mb-3">${
-      isEs ? "¿Listo para comparar Aetna?" : "Ready to compare Aetna?"
-    }</h2>
-    <p class="mb-4 text-white-50">${
-      isEs
-        ? "Cotización gratuita. Julie confirma disponibilidad y montos en su estado."
-        : "Free quote. Julie confirms availability and face amounts in your state."
-    }</p>
-    <a class="btn btn-primary-gold px-4 py-3 rounded fw-bold" href="${quote}">${
-    isEs ? "Cotización gratuita" : "Get a free quote"
-  }</a>
-  </div>
-</section>
-</main>
-<footer style="background:#1a365d;padding:1rem 0;">
-  <div class="container text-center text-white small">
-    <p class="mb-0">© <span id="year"></span> Mejor Vida Insurance LLC</p>
-  </div>
-</footer>
-<script>document.getElementById('year').textContent=new Date().getFullYear();</script>
-<script defer src="${root}bootstrap/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
-`;
-}
-
 const PAGE_MAP = [
   ["mutual-of-omaha", "carriers/mutual-of-omaha.html", "es"],
   ["mutual-of-omaha", "en/carriers/mutual-of-omaha.html", "en"],
@@ -347,6 +244,8 @@ const PAGE_MAP = [
   ["corebridge", "en/carriers/corebridge.html", "en"],
   ["assurity", "carriers/assurity.html", "es"],
   ["assurity", "en/carriers/assurity.html", "en"],
+  ["aetna", "carriers/aetna.html", "es"],
+  ["aetna", "en/carriers/aetna.html", "en"],
 ];
 
 for (const [id, rel, lang] of PAGE_MAP) {
@@ -354,7 +253,3 @@ for (const [id, rel, lang] of PAGE_MAP) {
   if (!c) throw new Error(`Missing carrier ${id}`);
   inject(path.join(ROOT, rel), ratingsSection(c, lang));
 }
-
-fs.writeFileSync(path.join(ROOT, "carriers/aetna.html"), aetnaStub("es"));
-fs.writeFileSync(path.join(ROOT, "en/carriers/aetna.html"), aetnaStub("en"));
-console.log("wrote carriers/aetna.html + en/carriers/aetna.html");

@@ -10,8 +10,9 @@ function paint(armed) {
 }
 
 async function refresh() {
-  const { armed } = await chrome.runtime.sendMessage({ type: "getState" });
-  paint(Boolean(armed));
+  const state = await chrome.runtime.sendMessage({ type: "getState" });
+  const armed = Boolean(state?.armed);
+  paint(armed);
 
   try {
     const status = await chrome.runtime.sendMessage({ type: "pingServer" });
@@ -29,10 +30,20 @@ async function refresh() {
   }
 
   try {
-    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-    if (tab) {
-      tabState.textContent = `${tab.title || "(no title)"} — ${tab.url || ""}`;
+    let controlLabel = "";
+    if (typeof state?.controlTabId === "number") {
+      try {
+        const t = await chrome.tabs.get(state.controlTabId);
+        controlLabel = `Control: ${(t.title || "(no title)").slice(0, 40)} — ${(t.url || "").slice(0, 80)}`;
+      } catch {
+        controlLabel = "Control tab closed — focus the portal and toggle Bridge OFF/ON";
+      }
     }
+    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+    const activeLabel = tab
+      ? `Active: ${(tab.title || "(no title)").slice(0, 40)} — ${(tab.url || "").slice(0, 80)}`
+      : "Active: —";
+    tabState.textContent = controlLabel ? `${controlLabel}\n${activeLabel}` : activeLabel;
   } catch {
     tabState.textContent = "—";
   }
