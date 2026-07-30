@@ -21,7 +21,7 @@ const {
 } = require("../lib/rate-limit");
 
 const PRICING_INTENT_EN =
-  /\b(how much|cost|costs|price|premium|rate|per month|monthly|quote|what.*pay|what.*cost|afford)\b/i;
+  /\b(how much|cost|costs|price|premium|rate|per month|monthly|quote|what (will|would|do) (i|we) (pay|cost)|what.*(cost|price)|afford)\b/i;
 const PRICING_INTENT_ES =
   /\b(cu[aá]nto\s+(cuesta|pago|pagar[ií]a|pagaria|saldr[ií]a|saldria)|cu[aá]nto\s+por\s+mes|cu[aá]nto\s+al\s+mes|precio|prima|mensual|cotizaci[oó]n|cotizar|cu[oó]nto\s+me\s+cuesta)\b/i;
 
@@ -47,8 +47,15 @@ function isPersonalCoveragePricingQuestion(message) {
   ) {
     return false;
   }
+  // "What is … 10-Pay / Living Promise / Accendo" is product education, not a price ask
   if (
-    /\b(productos?|planes?|opciones?|aseguradoras?|carriers?|accendo|aetna|transamerica|assurity|mutual|protection series)\b/i.test(
+    /\b(what is|what'?s|que es|qu[eé] es)\b/i.test(t) &&
+    !/\b(how much|cu[aá]nto|price|precio|cost|cuesta|premium|prima|per month|mensual)\b/i.test(t)
+  ) {
+    return false;
+  }
+  if (
+    /\b(productos?|planes?|opciones?|aseguradoras?|carriers?|accendo|aetna|transamerica|assurity|mutual|protection series|corebridge|amicable|10-pay|fe express|living promise|simplinow)\b/i.test(
       t,
     ) &&
     /\b(cotizar|quote)\b/i.test(t) &&
