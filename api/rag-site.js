@@ -117,15 +117,15 @@ function websiteNoAnswerLine(language) {
   const l = String(language || "").toLowerCase();
   if (l.startsWith("spanish") || l.startsWith("es")) {
     return (
-      "No tengo esa información en mi base de conocimiento pública. Puedo ayudarte con seguro de vida y gastos finales, o puedes escribir a " +
-      "[Julie@mejorvidainsurance.com](mailto:Julie@mejorvidainsurance.com) / " +
-      "[agendar una cita](https://meetings-na2.hubspot.com/julie-braunsroth)."
+      "Quiero orientarte bien y no adivinar. ¿Me cuentas un poco más — tienes una edad o estado en mente, o te interesa una compañía en particular (por ejemplo Aetna, Mutual of Omaha o Transamerica)? " +
+      "También puedo explicarte cómo funciona el seguro de gastos finales, o conectarte con Julie al 402-440-5438 / " +
+      "[Julie@mejorvidainsurance.com](mailto:Julie@mejorvidainsurance.com)."
     );
   }
   return (
-    "I don’t have that in my public knowledge base. I can help with life and final expense insurance, or you can email " +
-    "[Julie@mejorvidainsurance.com](mailto:Julie@mejorvidainsurance.com) / " +
-    "[schedule a call](https://meetings-na2.hubspot.com/julie-braunsroth/insurance-consultation-mejor-vida-insurance)."
+    "I want to point you the right way — not guess. Can you tell me a bit more: do you have an age or state in mind, or a company you’re curious about (like Aetna, Mutual of Omaha, or Transamerica)? " +
+    "I can also explain how final expense works, or connect you with Julie at 402-440-5438 / " +
+    "[Julie@mejorvidainsurance.com](mailto:Julie@mejorvidainsurance.com)."
   );
 }
 
