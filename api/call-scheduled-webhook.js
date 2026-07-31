@@ -22,6 +22,7 @@ const { sendSms } = require('../lib/sms-send');
 const { gateAutomatedSms } = require('../lib/sms-compliance-queue');
 const { loadSettings } = require('../lib/crm-nurture-engine');
 const { normalizeStateCode } = require('../lib/telemarketing-compliance');
+const { evaluateSmsSendEligibility } = require('../lib/sms-consent-gate');
 
 function json(res, status, payload) {
   res.status(status).setHeader('Content-Type', 'application/json');
@@ -103,7 +104,7 @@ module.exports = async function handler(req, res) {
     return json(res, 200, { ok: true, vcf_reminder_sent: false, reason: 'already_sent' });
   }
 
-  // Send VCF reminder SMS (compliance-gated for automated Telnyx)
+  // Send VCF reminder SMS (consent + STOP + curfew gated)
   const message = `Hi ${name}! Your call with Julie is confirmed 🎉 One quick thing — save her contact so you can always reach her directly: ${VCF_URL} See you soon!`;
   const stateCode = normalizeStateCode(body.state || body.state_code) || 'NE';
   let settings = {};
@@ -111,6 +112,31 @@ module.exports = async function handler(req, res) {
     settings = await loadSettings(supabaseUrl, supabaseKey);
   } catch (_) {
     settings = {};
+  }
+
+  try {
+    const consent = await evaluateSmsSendEligibility({
+      supabaseUrl,
+      serviceKey: supabaseKey,
+      phone,
+      contactId: contact && contact.id,
+      requireOptIn: true,
+    });
+    if (!consent.allowed) {
+      console.log(`[call-scheduled] VCF SMS blocked for ${phone}: ${consent.reason}`);
+      return json(res, 200, {
+        ok: true,
+        vcf_reminder_sent: false,
+        reason: consent.reason || 'sms_consent_blocked',
+      });
+    }
+  } catch (err) {
+    console.error('[call-scheduled] consent check error:', err.message);
+    return json(res, 200, {
+      ok: true,
+      vcf_reminder_sent: false,
+      reason: 'sms_consent_check_failed',
+    });
   }
 
   let smsSid;

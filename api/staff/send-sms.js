@@ -4,6 +4,7 @@ const { resolveContactForStaffLead, isUuid } = require("./_lead-contact");
 const { sendSms, normalizeE164 } = require("../../lib/sms-send");
 const { logContactCommunication } = require("../../lib/contact-communications");
 const { insertEvent } = require("../../lib/contacts-db");
+const { evaluateSmsSendEligibility } = require("../../lib/sms-consent-gate");
 
 function parseSmsOptInFromQuoteLead(consentSummary, payload) {
   const cs = consentSummary && typeof consentSummary === "object" ? consentSummary : {};
@@ -206,6 +207,26 @@ module.exports = async function handler(req, res) {
       success: false,
       error: "SMS not allowed — this number replied STOP to opt out.",
     });
+  }
+
+  try {
+    const elig = await evaluateSmsSendEligibility({
+      supabaseUrl: cfg.supabaseUrl,
+      serviceKey: cfg.serviceKey,
+      phone: toE164,
+      leadId,
+      leadSourceTable: sourceTable,
+      contactId: resolved.contactId,
+      requireOptIn: false,
+    });
+    if (elig.optedOut || elig.reason === "producer_dnc") {
+      return json(res, 200, {
+        success: false,
+        error: "SMS not allowed — this number is on the do-not-contact / STOP list.",
+      });
+    }
+  } catch (e) {
+    console.warn("staff/send-sms DNC check", e && e.message);
   }
 
   const sent = await sendSms({ to: toE164, body: message });

@@ -36,6 +36,7 @@ const { computeNextSendWithSchedule, scheduleMapFromRows } = require('../lib/nur
 const { VCF_URL, getSmsMessage, getEmailContent } = require('../lib/nurture-templates');
 const { logContactCommunication, htmlToPlain } = require('../lib/contact-communications');
 const { sendSms } = require('../lib/sms-send');
+const { evaluateSmsSendEligibility } = require('../lib/sms-consent-gate');
 const { gateAutomatedSms } = require('../lib/sms-compliance-queue');
 const { loadSettings } = require('../lib/crm-nurture-engine');
 const { normalizeStateCode } = require('../lib/telemarketing-compliance');
@@ -159,6 +160,22 @@ async function sendSmsStep(contact, nurtureRow, step, settings) {
   const stateCode = normalizeStateCode(
     contact.state_code || contact.state || nurtureRow.state_code || nurtureRow.state
   ) || 'NE';
+
+  try {
+    const consent = await evaluateSmsSendEligibility({
+      supabaseUrl: process.env.SUPABASE_URL,
+      serviceKey: process.env.SUPABASE_SERVICE_ROLE_KEY,
+      phone,
+      contactId: contact.id,
+      requireOptIn: true,
+    });
+    if (!consent.allowed) {
+      return { ok: false, reason: consent.reason || 'sms_consent_blocked' };
+    }
+  } catch (e) {
+    console.warn('[nurture] SMS consent check failed:', e && e.message);
+    return { ok: false, reason: 'sms_consent_check_failed' };
+  }
 
   const gate = await gateAutomatedSms({
     supabaseUrl: process.env.SUPABASE_URL,
