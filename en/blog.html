@@ -36,6 +36,11 @@
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="../css/site-header.css?v=20260723-ver-precios-gold" rel="stylesheet"/>
+<link href="../css/nav-questions-dropdown.css" rel="stylesheet"/>
+<link href="../css/nav-about-mega.css?v=20260721-lip-page" rel="stylesheet"/>
+<link href="../css/nav-funeral-resources.css?v=20260728-photo-stronger" rel="stylesheet"/>
+<link href="../css/nav-life-insurance.css?v=20260728-map-type" rel="stylesheet"/>
 <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -154,118 +159,7 @@
       color: #1565C0;
       text-decoration: underline;
     }
-    /* Header: tap-to-call icon only (number in aria-label / title, not shown as text) */
-    .header-phone-compact {
-      display: none; /* lg+ header bar only; mobile uses hamburger menu */
-      align-items: center;
-      justify-content: center;
-      min-width: 2.5rem;
-      min-height: 2.5rem;
-      padding: 0.2rem;
-      color: #0D47A1;
-      text-decoration: none !important;
-      border-radius: 8px;
-      line-height: 1;
-      flex-shrink: 0;
-      -webkit-tap-highlight-color: transparent;
-    }
-    .header-phone-compact .fa-phone {
-      font-size: 1.15rem;
-    }
-    .header-phone-compact:hover {
-      color: #1565C0;
-    }
-    @media (min-width: 992px) {
-      .header-phone-compact {
-        display: inline-flex;
-      }
-    }
-    header.sticky-top {
-      height: 81px !important;
-      padding: 0 !important;
-      position: sticky !important;
-      top: 0 !important;
-      z-index: 1020;
-      overflow: visible;
-    }
-    header.sticky-top > .container {
-      height: 100% !important;
-      padding-top: 0 !important;
-      padding-bottom: 0 !important;
-      padding-left: 0 !important;
-      display: flex !important;
-      align-items: center !important;
-    }
-    .header-inner {
-      display: flex !important;
-      align-items: center !important;
-      justify-content: flex-start !important;
-      gap: 0;
-      width: 100%;
-    }
-    .header-logo-wrap {
-      flex: 0 0 auto;
-      display: flex !important;
-      align-items: center !important;
-      justify-content: center !important;
-      height: 81px !important;
-      padding: 0 !important;
-      margin-left: -120px !important;
-      margin-right: 1rem !important;
-    }
-    .header-logo {
-      height: 244px !important;
-      width: auto !important;
-      max-height: none !important;
-      object-fit: contain;
-      display: block !important;
-      transform: translateY(8px) !important;
-    }
-    .nav-link-cm { white-space: nowrap !important; }
-    .header-inner .desktop-nav {
-      flex: 1 1 auto !important;
-      margin-left: 0 !important;
-      gap: 0 !important;
-      justify-content: space-evenly !important;
-      max-width: 100%;
-    }
-    .mobile-menu {
-      display: none;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      right: 0;
-      background: white;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-      padding: 16px;
-      z-index: 100;
-    }
-    .mobile-menu.active { display: block; }
-    .mobile-menu a {
-      display: block;
-      padding: 12px 16px;
-      color: #1a365d;
-      font-weight: 500;
-      border-bottom: 1px solid #e5e7eb;
-      transition: background-color 0.15s;
-    }
-    .mobile-menu a:hover { background-color: #f3f4f6; }
-    .mobile-menu a:last-child { border-bottom: none; }
-    .hamburger-btn {
-      display: none;
-      padding: 8px;
-      cursor: pointer;
-      font-size: 24px;
-      color: #1a365d;
-    }
-    @media (max-width: 991px) {
-      .hamburger-btn { display: block; margin-right: 0; }
-      .desktop-nav { display: none !important; }
-      .desktop-cta { display: none !important; }
-      .header-inner { justify-content: space-between !important; position: relative; }
-      .header-inner > .d-flex.align-items-center.gap-2 { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); margin-left: 0; z-index: 2; }
-      .header-logo-wrap { margin-left: -60px !important; }
-    }
+    /* Header styles: use css/site-header.css (same as index) */
 
     :root {
       --brand-blue: #1F4FBF;
