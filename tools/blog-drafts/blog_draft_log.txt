@@ -1,3 +1,9 @@
 # Mejor Vida Insurance — weekly blog draft log
 # Format: date | range | article headlines | source URLs | word counts | delivery notes
 2026-07-19 | 2026-07-12 to 2026-07-18 | Fake Letters About Unclaimed Life Insurance Are Back — Protect Your Family | Final Expense Insurance vs Prepaid Funeral Contracts — Which Protects Your Family Better? | What Happens When a Term Life Policy Ends — Options Families Should Know | https://newsroom.ocfl.net/media-advisories/press-releases/2026/07/scam-alert-orange-county-neighborhood-services-division-warns-residents-about-unclaimed-life-insurance-and-inheritance-scam/ | https://blog.partingstone.com/what-is-the-average-cost-of-a-funeral/ | evergreen://term-life-policy-ends | words 662 | 647 | 628 | email sent to admin@mejorvidainsurance.com + julie@mejorvidainsurance.com (Gmail messageId 19f7c9ef84034122)
+
+2026-08-02 | window 2026-07-26 to 2026-08-01 | 3 drafts delivered in Cursor
+1) Graded benefit / waiting period (evergreen FE) ~710w | NAIC/NFDA/III
+2) Term life cost overestimate (Life Happens/LIMRA) ~700w
+3) Beneficiary mistakes (evergreen FE) ~680w | TDI/NAIC
+Published digest + full articles ES/EN; FB package weekly-2026-08-02-life

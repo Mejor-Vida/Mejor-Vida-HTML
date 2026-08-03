@@ -1,0 +1,28 @@
+{
+  "today": "2026-08-02",
+  "start": "2026-07-26",
+  "end": "2026-08-01",
+  "articles": [
+    {
+      "headline": "What a Graded Benefit or Waiting Period Means on Final Expense Insurance",
+      "category": "1 — Final expense & funeral costs (evergreen)",
+      "kind": "evergreen",
+      "url": "https://content.naic.org/consumer/life-insurance.htm",
+      "words": 712
+    },
+    {
+      "headline": "Many Families Think Term Life Costs Far More Than It Actually Does",
+      "category": "2 — Term life (news + research)",
+      "kind": "news",
+      "url": "https://lifehappens.org/research/they-dont-understand-life-insurance-and-overestimate-its-cost/",
+      "words": 698
+    },
+    {
+      "headline": "Common Mistakes When Naming Beneficiaries on Final Expense Insurance",
+      "category": "1 — Final expense & funeral costs (evergreen)",
+      "kind": "evergreen",
+      "url": "https://www.tdi.texas.gov/pubs/consumer/cb018.html",
+      "words": 684
+    }
+  ]
+}

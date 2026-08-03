@@ -43,7 +43,7 @@ module.exports = async function handler(req, res) {
         subject: preview.subject,
         html: preview.html,
         language: preview.language,
-        source_package: "FB/post-package-weekly-2026-07-19-life.json",
+        source_package: "FB/post-package-weekly-2026-08-02-life.json",
       });
     }
 
@@ -67,7 +67,7 @@ module.exports = async function handler(req, res) {
       html: preview.html,
       language: preview.language,
       stories: digest.stories || [],
-      source_package: "blog/weekly-insurance-update-2026-07-19.html (life / FE digest)",
+      source_package: "blog/weekly-insurance-update-2026-08-02.html (life / FE digest)",
     });
   }
 
