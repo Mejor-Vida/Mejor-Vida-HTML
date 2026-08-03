@@ -21,3 +21,10 @@ Update this file when Julie publishes a new guide-style article.
 ## Preferred fallback pool
 
 See Section 6.2 of `tools/weekly-blog-system-rules.md` (final expense vs prepaid funeral, graded benefits, beneficiaries, missed premiums, term end/conversion, whole life vs FE, etc.).
+
+## Added 2026-08-02 weekly
+
+| Topic | Path |
+|---|---|
+| Graded benefit / waiting period on final expense | `blog/beneficio-gradual-periodo-espera-gastos-finales-2026-08-02.html` |
+| Naming beneficiaries common mistakes | `blog/beneficiarios-seguro-gastos-finales-errores-comunes-2026-08-02.html` |
