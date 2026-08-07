@@ -44,6 +44,15 @@ How the MVS Agent (or any automation) can access your data. **Google Sheets is n
 | Make.com | `MAKE_API_TOKEN` + HTTP API |
 | ManyChat | `MANYCHAT_API_KEY` + HTTP API |
 
+### Private business tax profile (paperwork only)
+
+| Item | Detail |
+|------|--------|
+| **Table** | `staff_business_tax_profile` (migration `089`) |
+| **Contains** | Legal name, EIN, NE withholding ID, Patriot customer ID, tax mailing address, sole member, payroll/filing jsonb |
+| **Access** | `SUPABASE_SERVICE_ROLE_KEY` only — RLS enabled, **no** public/anon policies |
+| **Do not** | Expose on website, chatbot RAG, or any public API |
+
 **Note:** The agent's browser cannot see your Chrome tabs. Use the API/script methods above.
 
 ---

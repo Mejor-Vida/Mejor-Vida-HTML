@@ -12,6 +12,8 @@ const fs = require("fs");
 const path = require("path");
 const ROOT = path.join(__dirname, "..");
 const PORT = Number(process.env.PORT || 3000);
+/** Default: this Mac only (safer on public Wi‑Fi). Override with HOST=0.0.0.0 for phone/LAN testing. */
+const HOST = process.env.HOST || "127.0.0.1";
 
 function loadEnvLocal(overwrite) {
   const p = path.join(ROOT, ".env.local");
@@ -217,11 +219,12 @@ server.on("error", (err) => {
   process.exit(1);
 });
 
-server.listen(PORT, () => {
+server.listen(PORT, HOST, () => {
   const base = `http://localhost:${PORT}`;
   console.log("");
   console.log("Local dev server running");
   console.log("────────────────────────────────────────");
+  console.log(`Listening on:     ${HOST}:${PORT} (this Mac only)`);
   console.log(`Staff portal:     ${base}/staff/`);
   console.log(`Medical intake:   ${base}/medical-intake.html?t=YOUR_TOKEN`);
   console.log(`Intake builder:   ${base}/medical-intake-preview.html`);

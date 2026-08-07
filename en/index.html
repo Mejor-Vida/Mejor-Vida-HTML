@@ -649,16 +649,20 @@
       line-height: 1.14;
       background: var(--hq-pill);
       border: 1px solid rgba(255, 255, 255, 0.07);
-      border-radius: 999px;
+      /* Square left edge under logo circle; pill only on the open (right) end */
+      border-radius: 0 999px 999px 0;
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
-      margin-left: calc(var(--hq-logo) * -0.52);
-      padding: 0 0.56rem 0 calc(var(--hq-logo) * 0.48 + 0.4rem);
+      /* Tuck further under logo so the pill’s left edge stays hidden behind the circle */
+      margin-left: calc(var(--hq-logo) * -0.62);
+      padding: 0 0.56rem 0 calc(var(--hq-logo) * 0.58 + 0.4rem);
       transition: box-shadow 0.2s ease, border-color 0.2s ease;
     }
     @media (min-width: 992px) {
       .hero-quote-bubble:has(.hero-quote-logo-wrap[data-carrier="assurity"]),
       .hero-quote-bubble:has(.hero-quote-logo-wrap[data-carrier="mutual-of-omaha"]),
-      .hero-quote-bubble:has(.hero-quote-logo-wrap[data-carrier="american-amicable"]) {
+      .hero-quote-bubble:has(.hero-quote-logo-wrap[data-carrier="american-amicable"]),
+      .hero-quote-bubble:has(.hero-quote-logo-wrap[data-carrier="aetna"]),
+      .hero-quote-bubble:has(.hero-quote-logo-wrap[data-carrier="corebridge"]) {
         --hq-logo: 78px;
       }
     }
@@ -734,6 +738,79 @@
       letter-spacing: -0.06em;
       padding: 0 2px;
       box-sizing: border-box;
+    }
+    .hero-quote-logo-wrap[data-carrier="aetna"] {
+      display: grid;
+      place-items: center;
+      width: var(--hq-logo);
+      height: var(--hq-logo);
+      margin-left: -5px;
+      background: #ffffff;
+      box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.06);
+      padding: 0;
+    }
+    .hero-quote-logo-wrap[data-carrier="aetna"] .hero-quote-logo {
+      display: block !important;
+      grid-column: 1;
+      grid-row: 1;
+      width: 78% !important;
+      height: auto !important;
+      max-width: 78% !important;
+      max-height: 64% !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      box-sizing: border-box;
+      object-fit: contain !important;
+      object-position: center center !important;
+      justify-self: center;
+      align-self: center;
+    }
+    .hero-quote-logo-wrap[data-carrier="aetna"] .hero-quote-logo-fallback {
+      color: #7d3f98;
+      background: transparent;
+      margin-left: 0;
+      width: 100%;
+      height: 100%;
+      font-size: 1.1rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+    }
+
+    .hero-quote-logo-wrap[data-carrier="corebridge"] {
+      display: grid;
+      place-items: center;
+      width: var(--hq-logo);
+      height: var(--hq-logo);
+      margin-left: -5px;
+      background: #ffffff;
+      box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.06);
+      padding: 0;
+    }
+    .hero-quote-logo-wrap[data-carrier="corebridge"] .hero-quote-logo {
+      display: block !important;
+      grid-column: 1;
+      grid-row: 1;
+      width: 78% !important;
+      height: auto !important;
+      max-width: 78% !important;
+      max-height: 58% !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      box-sizing: border-box;
+      object-fit: contain !important;
+      object-position: center center !important;
+      justify-self: center;
+      align-self: center;
+    }
+    .hero-quote-logo-wrap[data-carrier="corebridge"] .hero-quote-logo-fallback {
+      color: #0033a0;
+      background: transparent;
+      margin-left: 0;
+      width: 100%;
+      height: 100%;
+      font-size: 1.05rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
     }
     .hero-quote-logo-wrap[data-carrier="mutual-of-omaha"] {
       display: grid;
@@ -823,8 +900,8 @@
         margin-right: 0;
       }
       .hero-quote-text {
-        margin-left: calc(var(--hq-logo) * -0.52);
-        padding: 0 0.65rem 0 calc(var(--hq-logo) * 0.48 + 0.35rem);
+        margin-left: calc(var(--hq-logo) * -0.62);
+        padding: 0 0.65rem 0 calc(var(--hq-logo) * 0.58 + 0.35rem);
       }
       .hero-quote-logo-wrap[data-carrier="assurity"] {
         width: 44px !important;
@@ -832,6 +909,27 @@
         margin-left: -4px !important;
       }
       .hero-quote-logo-wrap[data-carrier="assurity"] .hero-quote-logo-fallback {
+        font-size: 0.82rem;
+      }
+      .hero-quote-logo-wrap[data-carrier="aetna"] {
+        width: 44px !important;
+        height: 44px !important;
+        margin-left: -4px !important;
+      }
+      .hero-quote-logo-wrap[data-carrier="aetna"] .hero-quote-logo-fallback {
+        font-size: 0.82rem;
+      }
+      .hero-carousel--dual-bubbles .hero-quote-logo-wrap[data-carrier="aetna"] {
+        width: 36px !important;
+        height: 36px !important;
+        margin-left: -3px !important;
+      }
+      .hero-quote-logo-wrap[data-carrier="corebridge"] {
+        width: 44px !important;
+        height: 44px !important;
+        margin-left: -4px !important;
+      }
+      .hero-quote-logo-wrap[data-carrier="corebridge"] .hero-quote-logo-fallback {
         font-size: 0.82rem;
       }
       .hero-quote-logo-wrap[data-carrier="mutual-of-omaha"] {

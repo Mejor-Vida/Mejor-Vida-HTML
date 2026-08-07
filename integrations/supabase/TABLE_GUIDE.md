@@ -40,11 +40,12 @@ Legacy note: the old `fex_email_quotes` table/webhook flow has been retired and 
 | `knowledge_chunks` | **Chunks + embeddings** for search |
 | `internal_knowledge_chunks` | **Staff-only** carrier/product KB (Product Selector). Populated via `scripts/embed-internal-knowledge.js`. Not queried by public chatbot or WhatsApp RAG. |
 
-## Internal
+## Internal / staff-only
 
 | Table | Role |
 |--------|------|
 | `schema_migrations` | Tracks which **SQL migration files** ran (do not edit by hand) |
+| `staff_business_tax_profile` | **PRIVATE** business tax IDs/addresses for form prep (941, 941N). RLS on; service_role only — not public. Migration `089`. |
 
 ## Green sigma (Σ) items
 

@@ -1,0 +1,26 @@
+---
+description: Private business tax profile in Supabase — retrieve for paperwork only
+alwaysApply: true
+---
+
+# Private business tax data
+
+Mejor Vida business/tax identifiers live in Supabase table **`staff_business_tax_profile`** (migration `089_staff_business_tax_profile.sql`).
+
+## Access rules
+
+- **Private only** — RLS on, no anon/authenticated policies. Use **`SUPABASE_SERVICE_ROLE_KEY`** (server/agent scripts).
+- **Never** put EIN, Nebraska withholding ID, Patriot customer ID, or tax mailing address in public HTML, blog, chatbot knowledge, or client-side JS.
+- **Never** create a public API route that returns this table.
+
+## When to use
+
+When filling Forms 941, 941N, W-2/W-3, or similar paperwork, load the active row:
+
+```sql
+SELECT * FROM staff_business_tax_profile WHERE is_active = true LIMIT 1;
+```
+
+Or REST: `GET /rest/v1/staff_business_tax_profile?is_active=eq.true&limit=1` with service role.
+
+Update `payroll_summary` / `filing_status` jsonb when filings change.
