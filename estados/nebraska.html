@@ -16,9 +16,9 @@
 <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
 <link href="../css/quote-flow-shared.css?v=20260726-state" rel="stylesheet"/>
 <link href="../css/site-footer.css?v=20260721-lip-page" rel="stylesheet"/>
-<link href="../css/state-coverage.css?v=20260728-aetna-logo" rel="stylesheet"/>
+<link href="../css/state-coverage.css?v=20260808-carrier-score" rel="stylesheet"/>
 <link href="../css/mvi-licensing-map.css?v=20260726-state-cov" rel="stylesheet"/>
-<link href="../css/mvi-assistant-widget.css?v=20260721-chat-z" rel="stylesheet"/>
+<link href="../css/mvi-assistant-widget.css?v=20260808-chat-sm" rel="stylesheet"/>
 <link href="../css/fontawesome-mvi.min.css?v=20260723-brands-fix" rel="stylesheet"/>
 <link href="../css/site-header.css?v=20260723-ver-precios-gold" rel="stylesheet"/>
 <link href="../css/nav-questions-dropdown.css" rel="stylesheet"/>
@@ -340,90 +340,77 @@
 </section>
 
 <section class="py-5 bg-white border-bottom" id="costos">
-  <div class="container" style="max-width:60rem;">
+  <div class="container-fluid sc-cost-section-container px-3 px-md-4">
     <h2 class="h4 fw-bold mb-3" style="color:#1a365d;">¿Cuánto cuesta un funeral en Nebraska?</h2>
     <p class="text-body-secondary mb-3">Promedio del costo de los componentes del servicio funerario en Nebraska (actualizados 2026-07-26). Use estas cifras para estimar cuánta cobertura de gastos finales podría necesitar.</p>
-    <p class="small text-body-secondary mb-3">Desglose de componentes (bajo / alto / promedio), igual que en Funeralocity. Abra cada tipo de servicio para ver el detalle. Los ítems con * son promedios de mercancía (sin rango bajo/alto publicado).</p>
-<div class="sc-cost-columns" aria-hidden="true">
-  <span class="sc-cost-columns-service">Tipo de servicio</span>
-  <span class="sc-cost-columns-range">
-    <span class="sc-cost-chip sc-cost-chip--label">Bajo</span>
-    <span class="sc-cost-chip sc-cost-chip--label">Alto</span>
-    <span class="sc-cost-chip sc-cost-chip--label">Promedio</span>
-  </span>
-  <span class="sc-cost-columns-spacer" aria-hidden="true"></span>
-</div>
-<div class="sc-cost-accordion">
-<details class="sc-cost-panel" open id="sc-cost-NE-burial">
-  <summary class="sc-cost-summary">
-    <span class="sc-cost-summary-title">Entierro con servicio completo (tradicional)</span>
-    <span class="sc-cost-summary-range">
-      <span class="sc-cost-chip sc-cost-chip--low">$6,300</span>
-      <span class="sc-cost-chip sc-cost-chip--high">$12,340</span>
-      <span class="sc-cost-chip sc-cost-chip--avg">$8,620</span>
-    </span>
-  </summary>
-  <div class="sc-cost-panel-body table-responsive">
-    <table class="table table-bordered align-middle state-coverage-cost-table sc-cost-detail-table mb-0">
+    <p class="small text-body-secondary mb-3">Desglose de componentes (bajo / alto / promedio), igual que en Funeralocity. Toque un <strong>tipo de servicio</strong> para ver una explicación breve. Los ítems con * son promedios de mercancía (sin rango bajo/alto publicado).</p>
+<div class="sc-cost-tables">
+<section class="sc-cost-table-block" id="sc-cost-NE-burial">
+  <div class="sc-cost-table-heading">
+    <h3 class="sc-cost-table-title">Entierro con servicio completo (tradicional)</h3>
+    <p class="sc-cost-table-range">Total del paquete: $6,300 bajo · $12,340 alto · $8,620 promedio</p>
+  </div>
+  <div class="sc-cost-table-wrap">
+    <table class="sc-cost-table">
       <thead>
         <tr>
-          <th>Tipo de servicio</th>
-          <th class="text-end">Bajo</th>
-          <th class="text-end">Alto</th>
-          <th class="text-end">Promedio</th>
+          <th scope="col">Tipo de servicio</th>
+          <th scope="col" class="text-end">Bajo</th>
+          <th scope="col" class="text-end">Alto</th>
+          <th scope="col" class="text-end">Promedio</th>
         </tr>
       </thead>
       <tbody>
 <tr>
-  <td>Servicios básicos</td>
+  <td><button type="button" class="sc-cost-service-btn" data-sc-def-title="Servicios básicos" data-sc-def-body="Tarifa de la funeraria por coordinar el funeral: papeleo, personal y uso de las instalaciones básicas.">Servicios básicos</button></td>
   <td class="text-end">$950</td>
   <td class="text-end">$6,114</td>
   <td class="text-end fw-semibold">$2,340</td>
 </tr>
 <tr>
-  <td>Traslado a la funeraria</td>
+  <td><button type="button" class="sc-cost-service-btn" data-sc-def-title="Traslado a la funeraria" data-sc-def-body="Traslado del cuerpo desde el lugar del fallecimiento hasta la funeraria (también llamado “primera llamada”).">Traslado a la funeraria</button></td>
   <td class="text-end">$90</td>
   <td class="text-end">$575</td>
   <td class="text-end fw-semibold">$336</td>
 </tr>
 <tr>
-  <td>Embalsamado</td>
+  <td><button type="button" class="sc-cost-service-btn" data-sc-def-title="Embalsamado" data-sc-def-body="Preparación y conservación temporal del cuerpo para el velatorio o la visita (no siempre es obligatorio).">Embalsamado</button></td>
   <td class="text-end">$300</td>
   <td class="text-end">$1,500</td>
   <td class="text-end fw-semibold">$769</td>
 </tr>
 <tr>
-  <td>Vestido y colocación en ataúd</td>
+  <td><button type="button" class="sc-cost-service-btn" data-sc-def-title="Vestido y colocación en ataúd" data-sc-def-body="Vestir al fallecido y colocarlo en el ataúd de forma digna para la visita o el servicio.">Vestido y colocación en ataúd</button></td>
   <td class="text-end">$95</td>
   <td class="text-end">$550</td>
   <td class="text-end fw-semibold">$297</td>
 </tr>
 <tr>
-  <td>Velatorio / visita</td>
+  <td><button type="button" class="sc-cost-service-btn" data-sc-def-title="Velatorio / visita" data-sc-def-body="Tiempo de velatorio o visita en la funeraria para que familiares y amigos puedan despedirse.">Velatorio / visita</button></td>
   <td class="text-end">$100</td>
   <td class="text-end">$695</td>
   <td class="text-end fw-semibold">$401</td>
 </tr>
 <tr>
-  <td>Servicio funerario</td>
+  <td><button type="button" class="sc-cost-service-btn" data-sc-def-title="Servicio funerario" data-sc-def-body="Ceremonia o servicio memorial (capilla, iglesia u otro lugar) dirigido por la funeraria o el oficiante.">Servicio funerario</button></td>
   <td class="text-end">$145</td>
   <td class="text-end">$850</td>
   <td class="text-end fw-semibold">$534</td>
 </tr>
 <tr>
-  <td>Carroza</td>
+  <td><button type="button" class="sc-cost-service-btn" data-sc-def-title="Carroza" data-sc-def-body="Vehículo funerario que lleva el ataúd al cementerio o al lugar del servicio de sepultura.">Carroza</button></td>
   <td class="text-end">$120</td>
   <td class="text-end">$425</td>
   <td class="text-end fw-semibold">$283</td>
 </tr>
 <tr>
-  <td>Vehículo de servicio</td>
+  <td><button type="button" class="sc-cost-service-btn" data-sc-def-title="Vehículo de servicio" data-sc-def-body="Vehículo de apoyo (flores, sillas, equipo o familiares) que acompaña la procesión o el servicio.">Vehículo de servicio</button></td>
   <td class="text-end">$50</td>
   <td class="text-end">$495</td>
   <td class="text-end fw-semibold">$160</td>
 </tr>
 <tr>
-  <td>Ataúd de precio medio*</td>
+  <td><button type="button" class="sc-cost-service-btn" data-sc-def-title="Ataúd de precio medio*" data-sc-def-body="Costo promedio de un ataúd de precio medio. Funeralocity publica solo el promedio (sin bajo/alto).">Ataúd de precio medio*</button></td>
   <td class="text-end text-body-secondary">—</td>
   <td class="text-end text-body-secondary">—</td>
   <td class="text-end fw-semibold">$3,500</td>
@@ -431,77 +418,73 @@
       </tbody>
     </table>
   </div>
-</details>
-<details class="sc-cost-panel" id="sc-cost-NE-cremation">
-  <summary class="sc-cost-summary">
-    <span class="sc-cost-summary-title">Cremación con servicio completo</span>
-    <span class="sc-cost-summary-range">
-      <span class="sc-cost-chip sc-cost-chip--low">$3,860</span>
-      <span class="sc-cost-chip sc-cost-chip--high">$10,455</span>
-      <span class="sc-cost-chip sc-cost-chip--avg">$6,530</span>
-    </span>
-  </summary>
-  <div class="sc-cost-panel-body table-responsive">
-    <table class="table table-bordered align-middle state-coverage-cost-table sc-cost-detail-table mb-0">
+</section>
+<section class="sc-cost-table-block" id="sc-cost-NE-cremation">
+  <div class="sc-cost-table-heading">
+    <h3 class="sc-cost-table-title">Cremación con servicio completo</h3>
+    <p class="sc-cost-table-range">Total del paquete: $3,860 bajo · $10,455 alto · $6,530 promedio</p>
+  </div>
+  <div class="sc-cost-table-wrap">
+    <table class="sc-cost-table">
       <thead>
         <tr>
-          <th>Tipo de servicio</th>
-          <th class="text-end">Bajo</th>
-          <th class="text-end">Alto</th>
-          <th class="text-end">Promedio</th>
+          <th scope="col">Tipo de servicio</th>
+          <th scope="col" class="text-end">Bajo</th>
+          <th scope="col" class="text-end">Alto</th>
+          <th scope="col" class="text-end">Promedio</th>
         </tr>
       </thead>
       <tbody>
 <tr>
-  <td>Servicios básicos</td>
+  <td><button type="button" class="sc-cost-service-btn" data-sc-def-title="Servicios básicos" data-sc-def-body="Tarifa básica de la funeraria por coordinar la cremación y el servicio relacionado.">Servicios básicos</button></td>
   <td class="text-end">$950</td>
   <td class="text-end">$6,114</td>
   <td class="text-end fw-semibold">$2,340</td>
 </tr>
 <tr>
-  <td>Traslado a la funeraria</td>
+  <td><button type="button" class="sc-cost-service-btn" data-sc-def-title="Traslado a la funeraria" data-sc-def-body="Traslado del cuerpo desde el lugar del fallecimiento hasta la funeraria (también llamado “primera llamada”).">Traslado a la funeraria</button></td>
   <td class="text-end">$90</td>
   <td class="text-end">$575</td>
   <td class="text-end fw-semibold">$336</td>
 </tr>
 <tr>
-  <td>Embalsamado</td>
+  <td><button type="button" class="sc-cost-service-btn" data-sc-def-title="Embalsamado" data-sc-def-body="Preparación y conservación temporal del cuerpo para el velatorio o la visita (no siempre es obligatorio).">Embalsamado</button></td>
   <td class="text-end">$300</td>
   <td class="text-end">$1,500</td>
   <td class="text-end fw-semibold">$769</td>
 </tr>
 <tr>
-  <td>Vestido y colocación en ataúd</td>
+  <td><button type="button" class="sc-cost-service-btn" data-sc-def-title="Vestido y colocación en ataúd" data-sc-def-body="Vestir al fallecido y colocarlo en el ataúd de forma digna para la visita o el servicio.">Vestido y colocación en ataúd</button></td>
   <td class="text-end">$95</td>
   <td class="text-end">$550</td>
   <td class="text-end fw-semibold">$297</td>
 </tr>
 <tr>
-  <td>Velatorio / visita</td>
+  <td><button type="button" class="sc-cost-service-btn" data-sc-def-title="Velatorio / visita" data-sc-def-body="Tiempo de velatorio o visita en la funeraria para que familiares y amigos puedan despedirse.">Velatorio / visita</button></td>
   <td class="text-end">$100</td>
   <td class="text-end">$695</td>
   <td class="text-end fw-semibold">$401</td>
 </tr>
 <tr>
-  <td>Servicio funerario</td>
+  <td><button type="button" class="sc-cost-service-btn" data-sc-def-title="Servicio funerario" data-sc-def-body="Ceremonia o servicio memorial (capilla, iglesia u otro lugar) dirigido por la funeraria o el oficiante.">Servicio funerario</button></td>
   <td class="text-end">$145</td>
   <td class="text-end">$850</td>
   <td class="text-end fw-semibold">$534</td>
 </tr>
 <tr>
-  <td>Traslado al crematorio</td>
+  <td><button type="button" class="sc-cost-service-btn" data-sc-def-title="Traslado al crematorio" data-sc-def-body="Traslado del cuerpo desde la funeraria (o el lugar del deceso) hasta el crematorio.">Traslado al crematorio</button></td>
   <td class="text-end">$0</td>
   <td class="text-end">$535</td>
   <td class="text-end fw-semibold">$117</td>
 </tr>
 <tr>
-  <td>Tarifa de crematorio</td>
+  <td><button type="button" class="sc-cost-service-btn" data-sc-def-title="Tarifa de crematorio" data-sc-def-body="Cargo del crematorio por realizar la cremación del cuerpo.">Tarifa de crematorio</button></td>
   <td class="text-end">$250</td>
   <td class="text-end">$1,225</td>
   <td class="text-end fw-semibold">$535</td>
 </tr>
 <tr>
-  <td>Ataúd para cremación (promedio)*</td>
+  <td><button type="button" class="sc-cost-service-btn" data-sc-def-title="Ataúd para cremación (promedio)*" data-sc-def-body="Ataúd o contenedor usado para la cremación con servicio. Solo se publica el promedio.">Ataúd para cremación (promedio)*</button></td>
   <td class="text-end text-body-secondary">—</td>
   <td class="text-end text-body-secondary">—</td>
   <td class="text-end fw-semibold">$1,200</td>
@@ -509,35 +492,31 @@
       </tbody>
     </table>
   </div>
-</details>
-<details class="sc-cost-panel" id="sc-cost-NE-affordable">
-  <summary class="sc-cost-summary">
-    <span class="sc-cost-summary-title">Entierro asequible / directo</span>
-    <span class="sc-cost-summary-range">
-      <span class="sc-cost-chip sc-cost-chip--low">$3,295</span>
-      <span class="sc-cost-chip sc-cost-chip--high">$8,118</span>
-      <span class="sc-cost-chip sc-cost-chip--avg">$5,467</span>
-    </span>
-  </summary>
-  <div class="sc-cost-panel-body table-responsive">
-    <table class="table table-bordered align-middle state-coverage-cost-table sc-cost-detail-table mb-0">
+</section>
+<section class="sc-cost-table-block" id="sc-cost-NE-affordable">
+  <div class="sc-cost-table-heading">
+    <h3 class="sc-cost-table-title">Entierro asequible / directo</h3>
+    <p class="sc-cost-table-range">Total del paquete: $3,295 bajo · $8,118 alto · $5,467 promedio</p>
+  </div>
+  <div class="sc-cost-table-wrap">
+    <table class="sc-cost-table">
       <thead>
         <tr>
-          <th>Tipo de servicio</th>
-          <th class="text-end">Bajo</th>
-          <th class="text-end">Alto</th>
-          <th class="text-end">Promedio</th>
+          <th scope="col">Tipo de servicio</th>
+          <th scope="col" class="text-end">Bajo</th>
+          <th scope="col" class="text-end">Alto</th>
+          <th scope="col" class="text-end">Promedio</th>
         </tr>
       </thead>
       <tbody>
 <tr>
-  <td>Entierro inmediato</td>
+  <td><button type="button" class="sc-cost-service-btn" data-sc-def-title="Entierro inmediato" data-sc-def-body="Entierro sin embalsamado, velatorio ni ceremonia — traslado y sepultura de forma directa.">Entierro inmediato</button></td>
   <td class="text-end">$795</td>
   <td class="text-end">$5,618</td>
   <td class="text-end fw-semibold">$2,967</td>
 </tr>
 <tr>
-  <td>Ataúd básico*</td>
+  <td><button type="button" class="sc-cost-service-btn" data-sc-def-title="Ataúd básico*" data-sc-def-body="Ataúd sencillo o económico incluido en un entierro asequible. Solo se publica el promedio.">Ataúd básico*</button></td>
   <td class="text-end text-body-secondary">—</td>
   <td class="text-end text-body-secondary">—</td>
   <td class="text-end fw-semibold">$2,500</td>
@@ -545,41 +524,37 @@
       </tbody>
     </table>
   </div>
-</details>
-<details class="sc-cost-panel" id="sc-cost-NE-direct">
-  <summary class="sc-cost-summary">
-    <span class="sc-cost-summary-title">Cremación directa</span>
-    <span class="sc-cost-summary-range">
-      <span class="sc-cost-chip sc-cost-chip--low">$995</span>
-      <span class="sc-cost-chip sc-cost-chip--high">$5,100</span>
-      <span class="sc-cost-chip sc-cost-chip--avg">$2,958</span>
-    </span>
-  </summary>
-  <div class="sc-cost-panel-body table-responsive">
-    <table class="table table-bordered align-middle state-coverage-cost-table sc-cost-detail-table mb-0">
+</section>
+<section class="sc-cost-table-block" id="sc-cost-NE-direct">
+  <div class="sc-cost-table-heading">
+    <h3 class="sc-cost-table-title">Cremación directa</h3>
+    <p class="sc-cost-table-range">Total del paquete: $995 bajo · $5,100 alto · $2,958 promedio</p>
+  </div>
+  <div class="sc-cost-table-wrap">
+    <table class="sc-cost-table">
       <thead>
         <tr>
-          <th>Tipo de servicio</th>
-          <th class="text-end">Bajo</th>
-          <th class="text-end">Alto</th>
-          <th class="text-end">Promedio</th>
+          <th scope="col">Tipo de servicio</th>
+          <th scope="col" class="text-end">Bajo</th>
+          <th scope="col" class="text-end">Alto</th>
+          <th scope="col" class="text-end">Promedio</th>
         </tr>
       </thead>
       <tbody>
 <tr>
-  <td>Cremación directa</td>
+  <td><button type="button" class="sc-cost-service-btn" data-sc-def-title="Cremación directa" data-sc-def-body="Cremación sin velatorio ni servicio previo: traslado, cremación y devolución de las cenizas.">Cremación directa</button></td>
   <td class="text-end">$795</td>
   <td class="text-end">$4,755</td>
   <td class="text-end fw-semibold">$2,856</td>
 </tr>
 <tr>
-  <td>Traslado al crematorio</td>
+  <td><button type="button" class="sc-cost-service-btn" data-sc-def-title="Traslado al crematorio" data-sc-def-body="Traslado del cuerpo desde la funeraria (o el lugar del deceso) hasta el crematorio.">Traslado al crematorio</button></td>
   <td class="text-end">$0</td>
   <td class="text-end">$195</td>
   <td class="text-end fw-semibold">$7</td>
 </tr>
 <tr>
-  <td>Tarifa de crematorio</td>
+  <td><button type="button" class="sc-cost-service-btn" data-sc-def-title="Tarifa de crematorio" data-sc-def-body="Cargo del crematorio por realizar la cremación del cuerpo.">Tarifa de crematorio</button></td>
   <td class="text-end">$0</td>
   <td class="text-end">$995</td>
   <td class="text-end fw-semibold">$95</td>
@@ -587,7 +562,7 @@
       </tbody>
     </table>
   </div>
-</details>
+</section>
 </div>
 <p class="small text-muted mt-2 mb-0">* Incluye precios promedio de la industria para cierta mercancía.</p>
 <div class="sc-cost-descriptions mt-4">
@@ -608,6 +583,45 @@
   <p class="mb-0 text-body-secondary">La cremación directa incluye el traslado del fallecido desde el lugar del deceso, el traslado al crematorio y los servicios de cremación. Se incluye el costo promedio de un contenedor alternativo para cremación. Si no se compró una urna por separado, las cenizas suelen devolverse a la familia en una caja de cartón.</p>
 </div>
 </div>
+<dialog class="sc-cost-def-dialog" id="sc-cost-def-dialog" aria-labelledby="sc-cost-def-title">
+  <div class="sc-cost-def-card">
+    <div class="sc-cost-def-head">
+      <h3 id="sc-cost-def-title" class="sc-cost-def-title"></h3>
+      <button type="button" class="sc-cost-def-close" data-sc-def-close aria-label="Cerrar">×</button>
+    </div>
+    <p id="sc-cost-def-body" class="sc-cost-def-body"></p>
+    <p class="sc-cost-def-hint">Toque un tipo de servicio para ver una explicación breve.</p>
+    <button type="button" class="btn sc-cost-def-ok" data-sc-def-close>Cerrar</button>
+  </div>
+</dialog>
+<script>
+(function () {
+  var dlg = document.getElementById("sc-cost-def-dialog");
+  if (!dlg) return;
+  var titleEl = document.getElementById("sc-cost-def-title");
+  var bodyEl = document.getElementById("sc-cost-def-body");
+  document.addEventListener("click", function (e) {
+    var btn = e.target.closest(".sc-cost-service-btn");
+    if (btn) {
+      titleEl.textContent = btn.getAttribute("data-sc-def-title") || "";
+      bodyEl.textContent = btn.getAttribute("data-sc-def-body") || "";
+      if (typeof dlg.showModal === "function") dlg.showModal();
+      else dlg.setAttribute("open", "");
+      return;
+    }
+    if (e.target.closest("[data-sc-def-close]")) {
+      if (typeof dlg.close === "function") dlg.close();
+      else dlg.removeAttribute("open");
+    }
+  });
+  dlg.addEventListener("click", function (e) {
+    if (e.target === dlg) {
+      if (typeof dlg.close === "function") dlg.close();
+      else dlg.removeAttribute("open");
+    }
+  });
+})();
+</script>
     <p class="small text-muted mt-3 mb-0">Fuente: <a href="https://www.funeralocity.com/average-funeral-price/ne" rel="noopener" target="_blank">Funeralocity</a> (promedios estatales). Los precios varían por funeraria, ciudad y servicios elegidos. También puede usar nuestra <a href="../final-expense-estimator.html">calculadora de gastos finales</a>.</p>
   </div>
 </section>
@@ -616,7 +630,328 @@
   <div class="container-fluid sc-carrier-section-container px-3 px-lg-4">
     <h2 class="h4 fw-bold mb-2" style="color:#1a365d;">Aseguradoras que Julie puede comparar en Nebraska</h2>
     <p class="text-body-secondary mb-4">El detalle completo de cada aseguradora está en su página de perfil.</p>
-    <div class="table-responsive sc-carrier-table-wrap sc-carrier-table-wrap--wide">
+    <div class="sc-carrier-compare d-md-none" aria-label="Aseguradora">
+  <p class="sc-carrier-compare-hint">Toque el logo de una aseguradora para ver el detalle completo.</p>
+  <div class="sc-carrier-compare-head" aria-hidden="true">
+    <span>Aseguradora</span>
+    <span>Score</span>
+  </div>
+  <div class="sc-carrier-compare-list">
+<div class="sc-carrier-compare-row">
+  <button type="button" class="sc-carrier-compare-logo sc-carrier-compare-logo--lg sc-carrier-compare-logo--mutual-of-omaha" data-sc-carrier-open="sc-carrier-dlg-mutual-of-omaha" aria-label="Ver detalle de Mutual of Omaha">
+    <span class="sc-carrier-compare-rank" aria-hidden="true">1</span>
+    <img src="../img/opt/mutual-of-omaha-logo.png?v=20260727-align" alt="" width="322" height="62" loading="lazy" decoding="async"/>
+  </button>
+  <div class="sc-carrier-compare-rating">
+    <span class="sc-carrier-compare-rating-label">Score</span>
+    <strong class="sc-carrier-compare-fsr" aria-label="4.4 / 5">4.4<span class="sc-carrier-compare-of">/5</span></strong>
+    <div class="sc-carrier-stars sc-carrier-stars--compact sc-carrier-compare-stars"><span class="sc-star sc-star--on" aria-hidden="true">★</span><span class="sc-star sc-star--on" aria-hidden="true">★</span><span class="sc-star sc-star--on" aria-hidden="true">★</span><span class="sc-star sc-star--on" aria-hidden="true">★</span><span class="sc-star sc-star--half" aria-hidden="true">★</span></div>
+  </div>
+</div>
+<dialog class="sc-carrier-dialog" id="sc-carrier-dlg-mutual-of-omaha" aria-labelledby="sc-carrier-dlg-title-mutual-of-omaha">
+  <div class="sc-carrier-dialog-card">
+    <div class="sc-carrier-dialog-head">
+      <h3 id="sc-carrier-dlg-title-mutual-of-omaha" class="sc-carrier-dialog-title">Mutual of Omaha</h3>
+      <button type="button" class="sc-carrier-dialog-x" data-sc-carrier-close aria-label="Cerrar">×</button>
+    </div>
+    <dl class="sc-carrier-dialog-grid">
+      <div>
+        <dt>Qué la distingue</dt>
+        <dd>Living Promise® vida entera · edades 45–85 · inmediato hasta $50k</dd>
+      </div>
+      <div>
+        <dt>AM Best</dt>
+        <dd><strong>A+</strong> · Superior</dd>
+      </div>
+      <div>
+        <dt>Comdex</dt>
+        <dd><strong>90</strong> /100</dd>
+      </div>
+      <div>
+        <dt>NAIC</dt>
+        <dd><strong>0.42</strong> · <a href="https://content.naic.org/cis_refined_results.htm?TABLEAU=CIS_COMPLAINTS&amp;COCODE=69868&amp;REALM=PROD" target="_blank" rel="noopener">#69868 · CIS</a></dd>
+      </div>
+      <div>
+        <dt>J.D. Power</dt>
+        <dd><strong>#1 · 707</strong></dd>
+      </div>
+      <div>
+        <dt>Score</dt>
+        <dd>
+          <strong>4.4</strong><span class="text-body-secondary">/5</span>
+          <div class="sc-carrier-stars sc-carrier-stars--compact mt-1"><span class="sc-star sc-star--on" aria-hidden="true">★</span><span class="sc-star sc-star--on" aria-hidden="true">★</span><span class="sc-star sc-star--on" aria-hidden="true">★</span><span class="sc-star sc-star--on" aria-hidden="true">★</span><span class="sc-star sc-star--half" aria-hidden="true">★</span></div>
+        </dd>
+      </div>
+    </dl>
+    <div class="sc-carrier-dialog-actions">
+      <a class="btn sc-carrier-dialog-profile" href="../carriers/mutual-of-omaha.html">Ver detalles →</a>
+      <button type="button" class="btn sc-carrier-dialog-close" data-sc-carrier-close>Cerrar</button>
+    </div>
+  </div>
+</dialog>
+<div class="sc-carrier-compare-row">
+  <button type="button" class="sc-carrier-compare-logo sc-carrier-compare-logo--lg sc-carrier-compare-logo--corebridge" data-sc-carrier-open="sc-carrier-dlg-corebridge" aria-label="Ver detalle de Corebridge">
+    <span class="sc-carrier-compare-rank" aria-hidden="true">2</span>
+    <img src="../img/carriers/corebridge-logo.svg?v=20260727-align" alt="" width="576" height="188" loading="lazy" decoding="async"/>
+  </button>
+  <div class="sc-carrier-compare-rating">
+    <span class="sc-carrier-compare-rating-label">Score</span>
+    <strong class="sc-carrier-compare-fsr" aria-label="4.14 / 5">4.14<span class="sc-carrier-compare-of">/5</span></strong>
+    <div class="sc-carrier-stars sc-carrier-stars--compact sc-carrier-compare-stars"><span class="sc-star sc-star--on" aria-hidden="true">★</span><span class="sc-star sc-star--on" aria-hidden="true">★</span><span class="sc-star sc-star--on" aria-hidden="true">★</span><span class="sc-star sc-star--on" aria-hidden="true">★</span><span class="sc-star sc-star--off" aria-hidden="true">★</span></div>
+  </div>
+</div>
+<dialog class="sc-carrier-dialog" id="sc-carrier-dlg-corebridge" aria-labelledby="sc-carrier-dlg-title-corebridge">
+  <div class="sc-carrier-dialog-card">
+    <div class="sc-carrier-dialog-head">
+      <h3 id="sc-carrier-dlg-title-corebridge" class="sc-carrier-dialog-title">Corebridge</h3>
+      <button type="button" class="sc-carrier-dialog-x" data-sc-carrier-close aria-label="Cerrar">×</button>
+    </div>
+    <dl class="sc-carrier-dialog-grid">
+      <div>
+        <dt>Qué la distingue</dt>
+        <dd>SimpliNow Legacy® + opción GIWL · edades ~50–80</dd>
+      </div>
+      <div>
+        <dt>AM Best</dt>
+        <dd><strong>A</strong> · Excelente</dd>
+      </div>
+      <div>
+        <dt>Comdex</dt>
+        <dd><strong>82</strong> /100</dd>
+      </div>
+      <div>
+        <dt>NAIC</dt>
+        <dd><strong>0.47</strong> · <a href="https://content.naic.org/cis_refined_results.htm?TABLEAU=CIS_COMPLAINTS&amp;COCODE=60488&amp;REALM=PROD" target="_blank" rel="noopener">#60488 · CIS</a></dd>
+      </div>
+      <div>
+        <dt>J.D. Power</dt>
+        <dd><strong>#19/22 · 602</strong></dd>
+      </div>
+      <div>
+        <dt>Score</dt>
+        <dd>
+          <strong>4.14</strong><span class="text-body-secondary">/5</span>
+          <div class="sc-carrier-stars sc-carrier-stars--compact mt-1"><span class="sc-star sc-star--on" aria-hidden="true">★</span><span class="sc-star sc-star--on" aria-hidden="true">★</span><span class="sc-star sc-star--on" aria-hidden="true">★</span><span class="sc-star sc-star--on" aria-hidden="true">★</span><span class="sc-star sc-star--off" aria-hidden="true">★</span></div>
+        </dd>
+      </div>
+    </dl>
+    <div class="sc-carrier-dialog-actions">
+      <a class="btn sc-carrier-dialog-profile" href="../carriers/corebridge.html">Ver detalles →</a>
+      <button type="button" class="btn sc-carrier-dialog-close" data-sc-carrier-close>Cerrar</button>
+    </div>
+  </div>
+</dialog>
+<div class="sc-carrier-compare-row">
+  <button type="button" class="sc-carrier-compare-logo sc-carrier-compare-logo--aetna" data-sc-carrier-open="sc-carrier-dlg-aetna" aria-label="Ver detalle de Aetna">
+    <span class="sc-carrier-compare-rank" aria-hidden="true">3</span>
+    <img src="../img/carriers/aetna-logo.svg?v=20260727-align" alt="" width="512" height="98" loading="lazy" decoding="async"/>
+  </button>
+  <div class="sc-carrier-compare-rating">
+    <span class="sc-carrier-compare-rating-label">Score</span>
+    <strong class="sc-carrier-compare-fsr" aria-label="3.67 / 5">3.67<span class="sc-carrier-compare-of">/5</span></strong>
+    <div class="sc-carrier-stars sc-carrier-stars--compact sc-carrier-compare-stars"><span class="sc-star sc-star--on" aria-hidden="true">★</span><span class="sc-star sc-star--on" aria-hidden="true">★</span><span class="sc-star sc-star--on" aria-hidden="true">★</span><span class="sc-star sc-star--half" aria-hidden="true">★</span><span class="sc-star sc-star--off" aria-hidden="true">★</span></div>
+  </div>
+</div>
+<dialog class="sc-carrier-dialog" id="sc-carrier-dlg-aetna" aria-labelledby="sc-carrier-dlg-title-aetna">
+  <div class="sc-carrier-dialog-card">
+    <div class="sc-carrier-dialog-head">
+      <h3 id="sc-carrier-dlg-title-aetna" class="sc-carrier-dialog-title">Aetna</h3>
+      <button type="button" class="sc-carrier-dialog-x" data-sc-carrier-close aria-label="Cerrar">×</button>
+    </div>
+    <dl class="sc-carrier-dialog-grid">
+      <div>
+        <dt>Qué la distingue</dt>
+        <dd>Vida entera gastos finales · edades típicas hasta casi 90 · detalles pendientes</dd>
+      </div>
+      <div>
+        <dt>AM Best</dt>
+        <dd><strong>A</strong> · Excelente</dd>
+      </div>
+      <div>
+        <dt>Comdex</dt>
+        <dd><strong>77</strong> /100</dd>
+      </div>
+      <div>
+        <dt>NAIC</dt>
+        <dd><strong>0.94</strong> · <a href="https://content.naic.org/cis_refined_results.htm?TABLEAU=CIS_COMPLAINTS&amp;COCODE=60054&amp;REALM=PROD" target="_blank" rel="noopener">#60054 · CIS</a></dd>
+      </div>
+      <div>
+        <dt>J.D. Power</dt>
+        <dd><strong>N/D</strong></dd>
+      </div>
+      <div>
+        <dt>Score</dt>
+        <dd>
+          <strong>3.67</strong><span class="text-body-secondary">/5</span>
+          <div class="sc-carrier-stars sc-carrier-stars--compact mt-1"><span class="sc-star sc-star--on" aria-hidden="true">★</span><span class="sc-star sc-star--on" aria-hidden="true">★</span><span class="sc-star sc-star--on" aria-hidden="true">★</span><span class="sc-star sc-star--half" aria-hidden="true">★</span><span class="sc-star sc-star--off" aria-hidden="true">★</span></div>
+        </dd>
+      </div>
+    </dl>
+    <div class="sc-carrier-dialog-actions">
+      <a class="btn sc-carrier-dialog-profile" href="../carriers/aetna.html">Ver detalles →</a>
+      <button type="button" class="btn sc-carrier-dialog-close" data-sc-carrier-close>Cerrar</button>
+    </div>
+  </div>
+</dialog>
+<div class="sc-carrier-compare-row">
+  <button type="button" class="sc-carrier-compare-logo sc-carrier-compare-logo--assurity" data-sc-carrier-open="sc-carrier-dlg-assurity" aria-label="Ver detalle de Assurity">
+    <span class="sc-carrier-compare-rank" aria-hidden="true">4</span>
+    <img src="../img/carriers/assurity-wordmark.png?v=20260727-align" alt="" width="526" height="132" loading="lazy" decoding="async"/>
+  </button>
+  <div class="sc-carrier-compare-rating">
+    <span class="sc-carrier-compare-rating-label">Score</span>
+    <strong class="sc-carrier-compare-fsr" aria-label="3.59 / 5">3.59<span class="sc-carrier-compare-of">/5</span></strong>
+    <div class="sc-carrier-stars sc-carrier-stars--compact sc-carrier-compare-stars"><span class="sc-star sc-star--on" aria-hidden="true">★</span><span class="sc-star sc-star--on" aria-hidden="true">★</span><span class="sc-star sc-star--on" aria-hidden="true">★</span><span class="sc-star sc-star--half" aria-hidden="true">★</span><span class="sc-star sc-star--off" aria-hidden="true">★</span></div>
+  </div>
+</div>
+<dialog class="sc-carrier-dialog" id="sc-carrier-dlg-assurity" aria-labelledby="sc-carrier-dlg-title-assurity">
+  <div class="sc-carrier-dialog-card">
+    <div class="sc-carrier-dialog-head">
+      <h3 id="sc-carrier-dlg-title-assurity" class="sc-carrier-dialog-title">Assurity</h3>
+      <button type="button" class="sc-carrier-dialog-x" data-sc-carrier-close aria-label="Cerrar">×</button>
+    </div>
+    <dl class="sc-carrier-dialog-grid">
+      <div>
+        <dt>Qué la distingue</dt>
+        <dd>Protect+ / Perform+ · beneficios en vida incluidos · desde $10k</dd>
+      </div>
+      <div>
+        <dt>AM Best</dt>
+        <dd><strong>A-</strong> · Excelente</dd>
+      </div>
+      <div>
+        <dt>Comdex</dt>
+        <dd><strong>N/D</strong></dd>
+      </div>
+      <div>
+        <dt>NAIC</dt>
+        <dd><strong>0.83</strong> · <a href="https://content.naic.org/cis_refined_results.htm?TABLEAU=CIS_COMPLAINTS&amp;COCODE=71439&amp;REALM=PROD" target="_blank" rel="noopener">#71439 · CIS</a></dd>
+      </div>
+      <div>
+        <dt>J.D. Power</dt>
+        <dd><strong>N/D</strong></dd>
+      </div>
+      <div>
+        <dt>Score</dt>
+        <dd>
+          <strong>3.59</strong><span class="text-body-secondary">/5</span>
+          <div class="sc-carrier-stars sc-carrier-stars--compact mt-1"><span class="sc-star sc-star--on" aria-hidden="true">★</span><span class="sc-star sc-star--on" aria-hidden="true">★</span><span class="sc-star sc-star--on" aria-hidden="true">★</span><span class="sc-star sc-star--half" aria-hidden="true">★</span><span class="sc-star sc-star--off" aria-hidden="true">★</span></div>
+        </dd>
+      </div>
+    </dl>
+    <div class="sc-carrier-dialog-actions">
+      <a class="btn sc-carrier-dialog-profile" href="../carriers/assurity.html">Ver detalles →</a>
+      <button type="button" class="btn sc-carrier-dialog-close" data-sc-carrier-close>Cerrar</button>
+    </div>
+  </div>
+</dialog>
+<div class="sc-carrier-compare-row">
+  <button type="button" class="sc-carrier-compare-logo sc-carrier-compare-logo--lg sc-carrier-compare-logo--transamerica" data-sc-carrier-open="sc-carrier-dlg-transamerica" aria-label="Ver detalle de Transamerica">
+    <span class="sc-carrier-compare-rank" aria-hidden="true">5</span>
+    <img src="../img/opt/transamerica-logo.png?v=20260723-nobg" alt="" width="362" height="69" loading="lazy" decoding="async"/>
+  </button>
+  <div class="sc-carrier-compare-rating">
+    <span class="sc-carrier-compare-rating-label">Score</span>
+    <strong class="sc-carrier-compare-fsr" aria-label="2.9 / 5">2.9<span class="sc-carrier-compare-of">/5</span></strong>
+    <div class="sc-carrier-stars sc-carrier-stars--compact sc-carrier-compare-stars"><span class="sc-star sc-star--on" aria-hidden="true">★</span><span class="sc-star sc-star--on" aria-hidden="true">★</span><span class="sc-star sc-star--half" aria-hidden="true">★</span><span class="sc-star sc-star--off" aria-hidden="true">★</span><span class="sc-star sc-star--off" aria-hidden="true">★</span></div>
+  </div>
+</div>
+<dialog class="sc-carrier-dialog" id="sc-carrier-dlg-transamerica" aria-labelledby="sc-carrier-dlg-title-transamerica">
+  <div class="sc-carrier-dialog-card">
+    <div class="sc-carrier-dialog-head">
+      <h3 id="sc-carrier-dlg-title-transamerica" class="sc-carrier-dialog-title">Transamerica</h3>
+      <button type="button" class="sc-carrier-dialog-x" data-sc-carrier-close aria-label="Cerrar">×</button>
+    </div>
+    <dl class="sc-carrier-dialog-grid">
+      <div>
+        <dt>Qué la distingue</dt>
+        <dd>Portafolio amplio de gastos finales · edades 18–85 · hasta $100k</dd>
+      </div>
+      <div>
+        <dt>AM Best</dt>
+        <dd><strong>A</strong> · Excelente</dd>
+      </div>
+      <div>
+        <dt>Comdex</dt>
+        <dd><strong>84</strong> /100</dd>
+      </div>
+      <div>
+        <dt>NAIC</dt>
+        <dd><strong>3.20</strong> · <a href="https://content.naic.org/cis_refined_results.htm?TABLEAU=CIS_COMPLAINTS&amp;COCODE=86231&amp;REALM=PROD" target="_blank" rel="noopener">#86231 · CIS</a></dd>
+      </div>
+      <div>
+        <dt>J.D. Power</dt>
+        <dd><strong>#18/22 · 604</strong></dd>
+      </div>
+      <div>
+        <dt>Score</dt>
+        <dd>
+          <strong>2.9</strong><span class="text-body-secondary">/5</span>
+          <div class="sc-carrier-stars sc-carrier-stars--compact mt-1"><span class="sc-star sc-star--on" aria-hidden="true">★</span><span class="sc-star sc-star--on" aria-hidden="true">★</span><span class="sc-star sc-star--half" aria-hidden="true">★</span><span class="sc-star sc-star--off" aria-hidden="true">★</span><span class="sc-star sc-star--off" aria-hidden="true">★</span></div>
+        </dd>
+      </div>
+    </dl>
+    <div class="sc-carrier-dialog-actions">
+      <a class="btn sc-carrier-dialog-profile" href="../carriers/transamerica.html">Ver detalles →</a>
+      <button type="button" class="btn sc-carrier-dialog-close" data-sc-carrier-close>Cerrar</button>
+    </div>
+  </div>
+</dialog>
+<div class="sc-carrier-compare-row">
+  <button type="button" class="sc-carrier-compare-logo sc-carrier-compare-logo--lg sc-carrier-compare-logo--american-amicable" data-sc-carrier-open="sc-carrier-dlg-american-amicable" aria-label="Ver detalle de American Amicable">
+    <span class="sc-carrier-compare-rank" aria-hidden="true">6</span>
+    <img src="../img/opt/american-amicable-logo.png?v=20260727-align" alt="" width="459" height="54" loading="lazy" decoding="async"/>
+  </button>
+  <div class="sc-carrier-compare-rating">
+    <span class="sc-carrier-compare-rating-label">Score</span>
+    <strong class="sc-carrier-compare-fsr" aria-label="2.25 / 5">2.25<span class="sc-carrier-compare-of">/5</span></strong>
+    <div class="sc-carrier-stars sc-carrier-stars--compact sc-carrier-compare-stars"><span class="sc-star sc-star--on" aria-hidden="true">★</span><span class="sc-star sc-star--on" aria-hidden="true">★</span><span class="sc-star sc-star--half" aria-hidden="true">★</span><span class="sc-star sc-star--off" aria-hidden="true">★</span><span class="sc-star sc-star--off" aria-hidden="true">★</span></div>
+  </div>
+</div>
+<dialog class="sc-carrier-dialog" id="sc-carrier-dlg-american-amicable" aria-labelledby="sc-carrier-dlg-title-american-amicable">
+  <div class="sc-carrier-dialog-card">
+    <div class="sc-carrier-dialog-head">
+      <h3 id="sc-carrier-dlg-title-american-amicable" class="sc-carrier-dialog-title">American Amicable</h3>
+      <button type="button" class="sc-carrier-dialog-x" data-sc-carrier-close aria-label="Cerrar">×</button>
+    </div>
+    <dl class="sc-carrier-dialog-grid">
+      <div>
+        <dt>Qué la distingue</dt>
+        <dd>Golden Solution / Senior Choice · edades 50–85</dd>
+      </div>
+      <div>
+        <dt>AM Best</dt>
+        <dd><strong>A</strong> · Excelente</dd>
+      </div>
+      <div>
+        <dt>Comdex</dt>
+        <dd><strong>N/D</strong></dd>
+      </div>
+      <div>
+        <dt>NAIC</dt>
+        <dd><strong>6.72</strong> · <a href="https://content.naic.org/cis_refined_results.htm?TABLEAU=CIS_COMPLAINTS&amp;COCODE=68594&amp;REALM=PROD" target="_blank" rel="noopener">#68594 · CIS</a></dd>
+      </div>
+      <div>
+        <dt>J.D. Power</dt>
+        <dd><strong>N/D</strong></dd>
+      </div>
+      <div>
+        <dt>Score</dt>
+        <dd>
+          <strong>2.25</strong><span class="text-body-secondary">/5</span>
+          <div class="sc-carrier-stars sc-carrier-stars--compact mt-1"><span class="sc-star sc-star--on" aria-hidden="true">★</span><span class="sc-star sc-star--on" aria-hidden="true">★</span><span class="sc-star sc-star--half" aria-hidden="true">★</span><span class="sc-star sc-star--off" aria-hidden="true">★</span><span class="sc-star sc-star--off" aria-hidden="true">★</span></div>
+        </dd>
+      </div>
+    </dl>
+    <div class="sc-carrier-dialog-actions">
+      <a class="btn sc-carrier-dialog-profile" href="../carriers/american-amicable.html">Ver detalles →</a>
+      <button type="button" class="btn sc-carrier-dialog-close" data-sc-carrier-close>Cerrar</button>
+    </div>
+  </div>
+</dialog>
+  </div>
+</div>
+<div class="table-responsive sc-carrier-table-wrap sc-carrier-table-wrap--wide d-none d-md-block">
   <table class="table sc-carrier-table sc-carrier-table--simple sc-carrier-table--tight align-middle mb-0">
     <thead>
       <tr>
@@ -844,6 +1179,37 @@
   </table>
 </div>
 <p class="small text-muted mt-3 mb-0">Actualizado: 2026-07-27. <a href="https://content.naic.org/consumer" target="_blank" rel="noopener">Portal del consumidor NAIC</a> · <a href="https://content.naic.org/cis_consumer_information.htm" target="_blank" rel="noopener">CIS</a>.</p>
+<script>
+(function () {
+  function openDlg(id) {
+    var dlg = document.getElementById(id);
+    if (!dlg) return;
+    if (typeof dlg.showModal === "function") dlg.showModal();
+    else dlg.setAttribute("open", "");
+  }
+  function closeDlg(dlg) {
+    if (!dlg) return;
+    if (typeof dlg.close === "function") dlg.close();
+    else dlg.removeAttribute("open");
+  }
+  document.addEventListener("click", function (e) {
+    var openBtn = e.target.closest("[data-sc-carrier-open]");
+    if (openBtn) {
+      openDlg(openBtn.getAttribute("data-sc-carrier-open"));
+      return;
+    }
+    var closeBtn = e.target.closest("[data-sc-carrier-close]");
+    if (closeBtn) {
+      closeDlg(closeBtn.closest("dialog"));
+    }
+  });
+  document.querySelectorAll(".sc-carrier-dialog").forEach(function (dlg) {
+    dlg.addEventListener("click", function (e) {
+      if (e.target === dlg) closeDlg(dlg);
+    });
+  });
+})();
+</script>
   </div>
 </section>
 
@@ -879,7 +1245,6 @@
     </div>
     <div class="mvi-lic-modal-body" id="mvi-lic-modal-body"></div>
     <div class="mvi-lic-modal-foot">
-      <a class="btn btn-outline-primary" id="mvi-lic-modal-open-tab" href="#" target="_blank" rel="noopener">Abrir en pestaña</a>
       <button type="button" class="btn btn-secondary" id="mvi-lic-modal-close-2">Cerrar</button>
     </div>
   </div>
@@ -946,7 +1311,7 @@
 <script>document.getElementById('year').textContent=new Date().getFullYear();</script>
 <script defer src="../bootstrap/js/bootstrap.bundle.min.js"></script>
 <script defer src="../script.js"></script>
-<script defer src="../js/mvi-nav-questions.js"></script>
+<script defer src="../js/mvi-nav-questions.js?v=20260808-hamburger"></script>
 <script defer src="../js/mvi-licensing-map.js?v=20260726-lic-popup"></script>
 <div data-api-url="/api/website-chat" id="mvi-assistant-root"></div>
 <script defer src="../js/website-assistant-widget.js"></script>

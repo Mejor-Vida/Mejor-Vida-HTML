@@ -103,8 +103,8 @@
   background: transparent;
 }
 
-/* Narrow desktops / tablets: keep one row, slightly tighter */
-@media (max-width: 1199.98px) {
+/* Narrow desktops: keep one row, slightly tighter */
+@media (max-width: 1199.98px) and (min-width: 992px) {
   .mvi-carrier-trust-strip__logos {
     gap: clamp(0.4rem, 1.2vw, 0.9rem);
   }
@@ -120,27 +120,96 @@
   }
 }
 
-@media (max-width: 575.98px) {
+/* Tablet + phone: exactly 3 logos per row (2 rows total) */
+@media (max-width: 991.98px) {
   .mvi-carrier-trust-strip {
-    padding: 0.75rem 0.5rem 0.85rem;
+    padding: 0.75rem 0.7rem 0.85rem;
   }
 
   .mvi-carrier-trust-strip__logos {
-    gap: 0.45rem 0.55rem;
-    overflow-x: auto;
-    justify-content: flex-start;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: thin;
-    padding-bottom: 0.15rem;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.7rem 0.55rem;
+    justify-items: center;
+    align-items: center;
+    overflow: visible;
+  }
+
+  .mvi-carrier-trust-strip__logos li {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    justify-content: center;
+  }
+
+  .mvi-carrier-trust-strip__logos a,
+  .mvi-carrier-trust-strip__logos .mvi-carrier-trust-strip__mark {
+    width: 100%;
+    max-width: 100%;
   }
 
   .mvi-carrier-trust-strip__logos img {
+    height: 24px;
+    width: auto;
+    max-width: 100%;
+  }
+
+  .mvi-carrier-trust-strip__logos .mvi-carrier-trust-strip__logo--omaha img {
     height: 28px;
-    max-width: 110px;
+    max-width: 100%;
+  }
+
+  .mvi-carrier-trust-strip__logos .mvi-carrier-trust-strip__logo--amicable img {
+    height: 30px;
+    max-width: 100%;
   }
 
   .mvi-carrier-trust-strip__logos .mvi-carrier-trust-strip__logo--aetna img {
-    height: 18px;
-    max-width: 90px;
+    height: 14px;
+    max-width: 88%;
+  }
+
+  .mvi-carrier-trust-strip__logos .mvi-carrier-trust-strip__logo--corebridge img {
+    height: 26px;
+    max-width: 100%;
+  }
+
+  .mvi-carrier-trust-strip__logos .mvi-carrier-trust-strip__logo--transamerica img {
+    height: 22px;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .mvi-carrier-trust-strip {
+    padding: 0.65rem 0.55rem 0.75rem;
+  }
+
+  .mvi-carrier-trust-strip__logos {
+    gap: 0.55rem 0.4rem;
+  }
+
+  .mvi-carrier-trust-strip__logos img {
+    height: 22px;
+  }
+
+  .mvi-carrier-trust-strip__logos .mvi-carrier-trust-strip__logo--omaha img {
+    height: 26px;
+  }
+
+  .mvi-carrier-trust-strip__logos .mvi-carrier-trust-strip__logo--amicable img {
+    height: 28px;
+  }
+
+  .mvi-carrier-trust-strip__logos .mvi-carrier-trust-strip__logo--aetna img {
+    height: 13px;
+  }
+
+  .mvi-carrier-trust-strip__logos .mvi-carrier-trust-strip__logo--corebridge img {
+    height: 24px;
+  }
+
+  .mvi-carrier-trust-strip__logos .mvi-carrier-trust-strip__logo--transamerica img {
+    height: 20px;
   }
 }

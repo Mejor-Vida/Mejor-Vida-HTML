@@ -459,7 +459,6 @@
 <section class="article-col">
 <div class="blog-content">
 
-
 <p class="story-meta"><strong>Published:</strong> July 19, 2026 · <strong>Source:</strong> see links at the end of this article</p>
 <p>Many families want one simple promise. They do not want their children to face a large funeral bill alone. Some people prepay a funeral home. Others buy final expense insurance. Both ideas sound responsible. They are not the same product, and the difference matters.</p>
 <p>Final expense insurance is a type of whole life insurance meant to help with funeral and burial costs. A prepaid funeral contract is a deal with a funeral provider for specific goods and services. One pays money to people you choose. The other locks in arrangements with one business. Your family needs to understand that choice before grief arrives.</p>
@@ -475,7 +474,6 @@
 <h2 class="h4 mt-4">What this means for you</h2>
 <p>If your goal is protecting loved ones from funeral debt, ask what happens if you move. Ask what happens if prices change. Ask who gets money if plans change. Final expense insurance often answers those questions with more flexibility than a prepaid funeral contract.</p>
 <p>You do not need to guess alone. Compare the contract language with a clear insurance illustration. Focus on coverage amount, waiting periods if any, and who you name as beneficiary. Keep copies where your family can find them.</p>
-
 
 <h2 class="h4 mt-4">Frequently asked questions</h2>
 <h3 class="h6 mt-3">Is final expense better than a prepaid funeral?</h3>
@@ -584,55 +582,11 @@
 </footer>
 <script defer src="../../bootstrap/js/bootstrap.bundle.min.js"></script>
 
-<script>
-  const hamburgerBtn = document.getElementById('hamburger-btn');
-  const mobileMenu = document.getElementById('mobile-menu');
-  if (hamburgerBtn && mobileMenu) {
-    hamburgerBtn.addEventListener('click', function(e) {
-      e.stopPropagation();
-      mobileMenu.classList.toggle('active');
-      hamburgerBtn.textContent = mobileMenu.classList.contains('active') ? '✕' : '☰';
-    });
-    document.addEventListener('click', function(e) {
-      if (!mobileMenu.contains(e.target) && !hamburgerBtn.contains(e.target)) {
-        mobileMenu.classList.remove('active');
-        hamburgerBtn.textContent = '☰';
-      }
-    });
-  }
-  if (document.getElementById('year')) document.getElementById('year').textContent = new Date().getFullYear();
-</script>
 <div data-api-url="/api/website-chat" data-mvi-avatar-base="/img/mvi-chat-avatar" id="mvi-assistant-root"></div>
-<script defer src="../../js/mvi-nav-questions.js?v=20260723-mobile-menu"></script>
+<script defer src="../../js/mvi-nav-questions.js?v=20260808-hamburger"></script>
 <script defer="" src="../../js/website-assistant-widget.js?v=20260726-rate-limit"></script>
 
-  <script>
-    (function () {
-      var y = document.getElementById('year');
-      if (y) y.textContent = new Date().getFullYear();
-      var hamburgerBtn = document.getElementById('hamburger-btn');
-      var mobileMenu = document.getElementById('mobile-menu');
-      if (hamburgerBtn && mobileMenu) {
-        hamburgerBtn.addEventListener('click', function (e) {
-          e.stopPropagation();
-          mobileMenu.classList.toggle('active');
-          hamburgerBtn.textContent = mobileMenu.classList.contains('active') ? '✕' : '☰';
-        });
-        document.addEventListener('click', function (e) {
-          if (!mobileMenu.contains(e.target) && !hamburgerBtn.contains(e.target)) {
-            mobileMenu.classList.remove('active');
-            hamburgerBtn.textContent = '☰';
-          }
-        });
-        mobileMenu.querySelectorAll('a').forEach(function (link) {
-          link.addEventListener('click', function () {
-            mobileMenu.classList.remove('active');
-            hamburgerBtn.textContent = '☰';
-          });
-        });
-      }
-    })();
-  </script>
+  
 
 </body>
 </html>

@@ -459,7 +459,6 @@
 <section class="article-col">
 <div class="blog-content">
 
-
 <p class="story-meta"><strong>Published:</strong> July 19, 2026 · <strong>Sources:</strong> Insurance Information Institute (III) — see links at the end</p>
 <p>Term life insurance can feel like a perfect fit when kids are young. You pick a set number of years. You get a large death benefit for a lower monthly cost than permanent coverage. Then one day the term is almost over. Many families are surprised by what happens next.</p>
 <p>When a term life policy ends, the low rate and the large benefit do not automatically continue. You may be able to renew at a much higher price. You may convert to permanent coverage if your contract allows it. Or the coverage may simply stop. Understanding those paths early protects the people who depend on you.</p>
@@ -475,7 +474,6 @@
 <h2 class="h4 mt-4">What this means for you</h2>
 <p>Check your term end date this month if you have not looked in a while. Write down whether conversion is still open. Ask what the renewal price would be. Then decide what protection your family still needs. Large income replacement and small funeral coverage are different goals.</p>
 <p>If your term is ending soon, do not wait for the last week. Options shrink when deadlines pass. A calm review now is kinder to your family than a rushed decision later.</p>
-
 
 <h2 class="h4 mt-4">Frequently asked questions</h2>
 <h3 class="h6 mt-3">What happens when term life ends?</h3>
@@ -584,55 +582,11 @@
 </footer>
 <script defer src="../../bootstrap/js/bootstrap.bundle.min.js"></script>
 
-<script>
-  const hamburgerBtn = document.getElementById('hamburger-btn');
-  const mobileMenu = document.getElementById('mobile-menu');
-  if (hamburgerBtn && mobileMenu) {
-    hamburgerBtn.addEventListener('click', function(e) {
-      e.stopPropagation();
-      mobileMenu.classList.toggle('active');
-      hamburgerBtn.textContent = mobileMenu.classList.contains('active') ? '✕' : '☰';
-    });
-    document.addEventListener('click', function(e) {
-      if (!mobileMenu.contains(e.target) && !hamburgerBtn.contains(e.target)) {
-        mobileMenu.classList.remove('active');
-        hamburgerBtn.textContent = '☰';
-      }
-    });
-  }
-  if (document.getElementById('year')) document.getElementById('year').textContent = new Date().getFullYear();
-</script>
 <div data-api-url="/api/website-chat" data-mvi-avatar-base="/img/mvi-chat-avatar" id="mvi-assistant-root"></div>
-<script defer src="../../js/mvi-nav-questions.js?v=20260723-mobile-menu"></script>
+<script defer src="../../js/mvi-nav-questions.js?v=20260808-hamburger"></script>
 <script defer="" src="../../js/website-assistant-widget.js?v=20260726-rate-limit"></script>
 
-  <script>
-    (function () {
-      var y = document.getElementById('year');
-      if (y) y.textContent = new Date().getFullYear();
-      var hamburgerBtn = document.getElementById('hamburger-btn');
-      var mobileMenu = document.getElementById('mobile-menu');
-      if (hamburgerBtn && mobileMenu) {
-        hamburgerBtn.addEventListener('click', function (e) {
-          e.stopPropagation();
-          mobileMenu.classList.toggle('active');
-          hamburgerBtn.textContent = mobileMenu.classList.contains('active') ? '✕' : '☰';
-        });
-        document.addEventListener('click', function (e) {
-          if (!mobileMenu.contains(e.target) && !hamburgerBtn.contains(e.target)) {
-            mobileMenu.classList.remove('active');
-            hamburgerBtn.textContent = '☰';
-          }
-        });
-        mobileMenu.querySelectorAll('a').forEach(function (link) {
-          link.addEventListener('click', function () {
-            mobileMenu.classList.remove('active');
-            hamburgerBtn.textContent = '☰';
-          });
-        });
-      }
-    })();
-  </script>
+  
 
 </body>
 </html>

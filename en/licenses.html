@@ -291,7 +291,6 @@
     </div>
     <div class="mvi-lic-modal-body" id="mvi-lic-modal-body"></div>
     <div class="mvi-lic-modal-foot">
-      <a class="btn btn-outline-primary" id="mvi-lic-modal-open-tab" href="#" target="_blank" rel="noopener">Open in new tab</a>
       <button type="button" class="btn btn-secondary" id="mvi-lic-modal-close-2">Close</button>
     </div>
   </div>
@@ -357,26 +356,10 @@
 </footer>
 
 <div data-api-url="/api/website-chat" data-mvi-avatar-base="../img/mvi-chat-avatar" id="mvi-assistant-root"></div>
-<script>
-  document.getElementById('year').textContent = new Date().getFullYear();
-  (function () {
-    var hamburgerBtn = document.getElementById('hamburger-btn');
-    var mobileMenu = document.getElementById('mobile-menu');
-    if (!hamburgerBtn || !mobileMenu) return;
-    hamburgerBtn.addEventListener('click', function (e) {
-      e.stopPropagation();
-      mobileMenu.classList.toggle('active');
-    });
-    document.addEventListener('click', function (e) {
-      if (!mobileMenu.contains(e.target) && e.target !== hamburgerBtn) {
-        mobileMenu.classList.remove('active');
-      }
-    });
-  })();
-</script>
+
 <script defer src="../bootstrap/js/bootstrap.bundle.min.js"></script>
-<script defer src="../js/mvi-nav-questions.js?v=20260723-mobile-menu"></script>
+<script defer src="../js/mvi-nav-questions.js?v=20260808-hamburger"></script>
 <script defer src="../js/website-assistant-widget.js?v=20260726-rate-limit"></script>
-<script defer src="../js/mvi-licensing-map.js?v=20260712a"></script>
+<script defer src="../js/mvi-licensing-map.js?v=20260808-no-dl"></script>
 </body>
 </html>

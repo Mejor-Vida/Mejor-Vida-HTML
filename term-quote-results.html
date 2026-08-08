@@ -1292,36 +1292,9 @@
       mviInitTermQuoteResults();
     }
   </script>
-<!-- Mobile menu script -->
-<script>
-    // Mobile hamburger menu
-    const hamburgerBtn = document.getElementById('hamburger-btn');
-    const mobileMenu = document.getElementById('mobile-menu');
-    
-    hamburgerBtn.addEventListener('click', function(e) {
-      e.stopPropagation();
-      mobileMenu.classList.toggle('active');
-      hamburgerBtn.textContent = mobileMenu.classList.contains('active') ? '✕' : '☰';
-    });
-    
-    // Close menu when clicking outside
-    document.addEventListener('click', function(e) {
-      if (!mobileMenu.contains(e.target) && !hamburgerBtn.contains(e.target)) {
-        mobileMenu.classList.remove('active');
-        hamburgerBtn.textContent = '☰';
-      }
-    });
-    
-    // Close menu when clicking a link
-    mobileMenu.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', function() {
-        mobileMenu.classList.remove('active');
-        hamburgerBtn.textContent = '☰';
-      });
-    });
-  </script>
+
 <div data-api-url="/api/website-chat" id="mvi-assistant-root"></div>
-<script defer src="js/mvi-nav-questions.js?v=20260723-mobile-menu"></script>
+<script defer src="js/mvi-nav-questions.js?v=20260808-hamburger"></script>
 <script defer="" src="js/website-assistant-widget.js?v=20260726-rate-limit"></script>
 </body>
 </html>

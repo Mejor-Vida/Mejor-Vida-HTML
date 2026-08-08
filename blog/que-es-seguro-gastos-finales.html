@@ -474,60 +474,8 @@
 <script defer src="../js/mvi-ga4-funnel.js"></script>
 <script defer src="../js/fe-guide-toc.js"></script>
 <script defer src="../script.js"></script>
-<script defer src="../js/mvi-nav-questions.js?v=20260723-mobile-menu"></script>
-<script>
-  const hamburgerBtn = document.getElementById('hamburger-btn');
-  const mobileMenu = document.getElementById('mobile-menu');
-  if (hamburgerBtn && mobileMenu) {
-    hamburgerBtn.addEventListener('click', function(e) {
-      e.stopPropagation();
-      mobileMenu.classList.toggle('active');
-      hamburgerBtn.textContent = mobileMenu.classList.contains('active') ? '✕' : '☰';
-    });
-    document.addEventListener('click', function(e) {
-      if (!mobileMenu.contains(e.target) && !hamburgerBtn.contains(e.target)) {
-        mobileMenu.classList.remove('active');
-        hamburgerBtn.textContent = '☰';
-      }
-    });
-  }
-  if (document.getElementById('year')) document.getElementById('year').textContent = new Date().getFullYear();
+<script defer src="../js/mvi-nav-questions.js?v=20260808-hamburger"></script>
 
-  (function () {
-    function bindModal(btnId, backdropId, closeId) {
-      const btn = document.getElementById(btnId);
-      const backdrop = document.getElementById(backdropId);
-      const closeBtn = document.getElementById(closeId);
-      if (!btn || !backdrop || !closeBtn) return;
-
-      function openModal() {
-        backdrop.hidden = false;
-        backdrop.classList.add('is-open');
-        document.body.style.overflow = 'hidden';
-        closeBtn.focus();
-      }
-
-      function closeModal() {
-        backdrop.classList.remove('is-open');
-        backdrop.hidden = true;
-        document.body.style.overflow = '';
-        btn.focus();
-      }
-
-      btn.addEventListener('click', openModal);
-      closeBtn.addEventListener('click', closeModal);
-      backdrop.addEventListener('click', function (e) {
-        if (e.target === backdrop) closeModal();
-      });
-      document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape' && backdrop.classList.contains('is-open')) closeModal();
-      });
-    }
-
-    bindModal('fe-guide-ai-pledge-btn', 'fe-guide-ai-modal-backdrop', 'fe-guide-ai-modal-close');
-    bindModal('fe-guide-disclosures-btn', 'fe-guide-disclosures-modal-backdrop', 'fe-guide-disclosures-modal-close');
-  })();
-</script>
 <div data-api-url="/api/website-chat" data-mvi-avatar-base="/img/mvi-chat-avatar" id="mvi-assistant-root"></div>
 <script defer src="../js/website-assistant-widget.js?v=20260726-rate-limit"></script>
 </body>

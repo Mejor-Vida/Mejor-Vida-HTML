@@ -114,8 +114,8 @@
           '#toolbar=0&navpanes=0&view=FitH"></iframe>' +
           '<p class="mvi-lic-note mvi-lic-viewer-fallback">' +
           t(
-            'Si no se ve el PDF, use “Abrir en pestaña”.',
-            'If the PDF does not appear, use “Open in new tab”.'
+            "Si no se ve el PDF, pruebe el visor alternativo.",
+            "If the PDF does not appear, try the alternate viewer."
           ) +
           ' <a href="' +
           gview +
@@ -131,7 +131,6 @@
     var backdrop = document.getElementById("mvi-lic-modal");
     var title = document.getElementById("mvi-lic-modal-title");
     var body = document.getElementById("mvi-lic-modal-body");
-    var openTab = document.getElementById("mvi-lic-modal-open-tab");
     if (!backdrop || !title || !body) return;
 
     syncSelect(code);
@@ -141,10 +140,6 @@
     title.textContent = name + " — " + type + " #" + info.number;
 
     var pdfUrl = licensesBase() + info.pdf;
-    if (openTab) {
-      openTab.href = pdfUrl;
-      openTab.removeAttribute("download");
-    }
     showPdfInModal(body, name, pdfUrl, code);
     backdrop.classList.remove("hidden");
     document.body.style.overflow = "hidden";

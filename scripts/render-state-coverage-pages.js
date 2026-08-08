@@ -217,7 +217,6 @@ function money(n) {
 
 function licenseModal(lang) {
   const title = lang === "es" ? "Licencia" : "License";
-  const openTab = lang === "es" ? "Abrir en pestaña" : "Open in new tab";
   const close = lang === "es" ? "Cerrar" : "Close";
   const closeAria = lang === "es" ? "Cerrar" : "Close";
   return `<div id="mvi-lic-modal" class="mvi-lic-modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="mvi-lic-modal-title">
@@ -228,7 +227,6 @@ function licenseModal(lang) {
     </div>
     <div class="mvi-lic-modal-body" id="mvi-lic-modal-body"></div>
     <div class="mvi-lic-modal-foot">
-      <a class="btn btn-outline-primary" id="mvi-lic-modal-open-tab" href="#" target="_blank" rel="noopener">${openTab}</a>
       <button type="button" class="btn btn-secondary" id="mvi-lic-modal-close-2">${close}</button>
     </div>
   </div>
@@ -275,6 +273,36 @@ function scoreDisplay(score) {
   return Number.isInteger(n) ? String(n) : n.toFixed(2).replace(/0$/, "");
 }
 
+function carrierMetrics(c, lang) {
+  const naLabel = lang === "es" ? "N/D" : "N/A";
+  const unique = lang === "es" ? c.uniqueEs || c.productEs : c.uniqueEn || c.productEn;
+  const amDesc =
+    lang === "es"
+      ? ({ Superior: "Superior", Excellent: "Excelente" }[c.amBest.descriptor] || c.amBest.descriptor)
+      : c.amBest.descriptor;
+  const scoreNice = scoreDisplay(c.score);
+  const comdexVal =
+    c.comdex && c.comdex.score != null ? String(c.comdex.score) : naLabel;
+  const naicCode = (c.naic && c.naic.code) || "—";
+  const naicCis =
+    (c.naic && (c.naic.cisUrl || c.naic.sourceUrl)) ||
+    "https://content.naic.org/cis_consumer_information.htm";
+  const naicIdx =
+    c.naic && c.naic.complaintIndex != null
+      ? Number(c.naic.complaintIndex).toFixed(2)
+      : null;
+  const naicPrimary = naicIdx != null ? naicIdx : `#${naicCode}`;
+  const jd = c.jdPower || {};
+  let jdVal = naLabel;
+  if (jd.inStudy && jd.score != null) {
+    jdVal =
+      jd.rank != null
+        ? `#${jd.rank}${jd.of ? `/${jd.of}` : ""} · ${jd.score}`
+        : String(jd.score);
+  }
+  return { unique, amDesc, scoreNice, comdexVal, naicCode, naicCis, naicPrimary, jdVal };
+}
+
 function carriersRankedTable(lang, imgPrefix, pagePrefix) {
   const carriers = [...CARRIER_RATINGS.carriers].sort((a, b) => a.rank - b.rank);
   const thInsurer = lang === "es" ? "Aseguradora" : "Carrier";
@@ -283,49 +311,26 @@ function carriersRankedTable(lang, imgPrefix, pagePrefix) {
   const thComdex = "Comdex";
   const thNaic = "NAIC";
   const thJd = "J.D. Power";
-  const thScore = lang === "es" ? "Score" : "Score";
+  const thScore = "Score";
   const reviewLabel = lang === "es" ? "Ver detalles" : "View details";
+  const closeLabel = lang === "es" ? "Cerrar" : "Close";
+  const tapHint =
+    lang === "es"
+      ? "Toque el logo de una aseguradora para ver el detalle completo."
+      : "Tap a carrier logo to see full details.";
   const updated = CARRIER_RATINGS.updatedAt || "";
-  const naLabel = lang === "es" ? "N/D" : "N/A";
-  const cisLookup = lang === "es" ? "CIS" : "CIS";
+  const cisLookup = "CIS";
 
-  const rows = carriers
+  const desktopRows = carriers
     .map((c) => {
       const pageHref =
         lang === "es"
           ? `${imgPrefix}carriers/${c.slug}.html`
           : `${pagePrefix}carriers/${c.slug}.html`;
       const logoSrc = `${imgPrefix}${c.logo}${
-        c.slug === "transamerica"
-          ? "?v=20260723-nobg"
-          : "?v=20260727-align"
+        c.slug === "transamerica" ? "?v=20260723-nobg" : "?v=20260727-align"
       }`;
-      const unique = lang === "es" ? c.uniqueEs || c.productEs : c.uniqueEn || c.productEn;
-      const amDesc =
-        lang === "es"
-          ? ({ Superior: "Superior", Excellent: "Excelente" }[c.amBest.descriptor] || c.amBest.descriptor)
-          : c.amBest.descriptor;
-      const scoreNice = scoreDisplay(c.score);
-      const comdexVal =
-        c.comdex && c.comdex.score != null ? String(c.comdex.score) : naLabel;
-      const naicCode = (c.naic && c.naic.code) || "—";
-      const naicCis =
-        (c.naic && (c.naic.cisUrl || c.naic.sourceUrl)) ||
-        "https://content.naic.org/cis_consumer_information.htm";
-      const naicIdx =
-        c.naic && c.naic.complaintIndex != null
-          ? Number(c.naic.complaintIndex).toFixed(2)
-          : null;
-      const naicPrimary = naicIdx != null ? naicIdx : `#${naicCode}`;
-      const jd = c.jdPower || {};
-      let jdVal = naLabel;
-      if (jd.inStudy && jd.score != null) {
-        jdVal =
-          jd.rank != null
-            ? `#${jd.rank}${jd.of ? `/${jd.of}` : ""} · ${jd.score}`
-            : String(jd.score);
-      }
-
+      const m = carrierMetrics(c, lang);
       const logoLg =
         c.slug === "mutual-of-omaha" ||
         c.slug === "transamerica" ||
@@ -346,28 +351,28 @@ function carriersRankedTable(lang, imgPrefix, pagePrefix) {
     </div>
   </td>
   <td class="sc-carrier-details" data-label="${esc(thDetails)}">
-    <p class="sc-carrier-unique mb-0">${esc(unique)}</p>
+    <p class="sc-carrier-unique mb-0">${esc(m.unique)}</p>
   </td>
   <td class="sc-carrier-metric" data-label="${esc(thAmBest)}">
     <strong class="sc-carrier-fsr">${esc(c.amBest.fsr)}</strong>
-    <span class="sc-carrier-metric-sub d-block">${esc(amDesc)}</span>
+    <span class="sc-carrier-metric-sub d-block">${esc(m.amDesc)}</span>
   </td>
   <td class="sc-carrier-metric" data-label="${esc(thComdex)}">
-    <strong class="sc-carrier-metric-num">${esc(comdexVal)}</strong>
+    <strong class="sc-carrier-metric-num">${esc(m.comdexVal)}</strong>
     ${c.comdex && c.comdex.score != null ? `<span class="sc-carrier-metric-sub d-block">/100</span>` : ""}
   </td>
   <td class="sc-carrier-metric" data-label="${esc(thNaic)}">
-    <strong class="sc-carrier-metric-num">${esc(String(naicPrimary))}</strong>
+    <strong class="sc-carrier-metric-num">${esc(String(m.naicPrimary))}</strong>
     <span class="sc-carrier-metric-sub d-block"><a href="${esc(
-      naicCis
-    )}" target="_blank" rel="noopener">#${esc(String(naicCode))} · ${esc(cisLookup)}</a></span>
+      m.naicCis
+    )}" target="_blank" rel="noopener">#${esc(String(m.naicCode))} · ${esc(cisLookup)}</a></span>
   </td>
   <td class="sc-carrier-metric" data-label="${esc(thJd)}">
-    <strong class="sc-carrier-metric-num">${esc(jdVal)}</strong>
+    <strong class="sc-carrier-metric-num">${esc(m.jdVal)}</strong>
   </td>
   <td class="sc-carrier-score-cell" data-label="${esc(thScore)}">
-    <div class="sc-carrier-score-compact" aria-label="${esc(scoreNice)} / 5">
-      <strong>${esc(scoreNice)}</strong><span>/5</span>
+    <div class="sc-carrier-score-compact" aria-label="${esc(m.scoreNice)} / 5">
+      <strong>${esc(m.scoreNice)}</strong><span>/5</span>
     </div>
     <div class="sc-carrier-stars sc-carrier-stars--compact">${starsHtml(c.score)}</div>
   </td>
@@ -375,7 +380,103 @@ function carriersRankedTable(lang, imgPrefix, pagePrefix) {
     })
     .join("\n");
 
-  return `<div class="table-responsive sc-carrier-table-wrap sc-carrier-table-wrap--wide">
+  const mobileRows = carriers
+    .map((c) => {
+      const pageHref =
+        lang === "es"
+          ? `${imgPrefix}carriers/${c.slug}.html`
+          : `${pagePrefix}carriers/${c.slug}.html`;
+      const logoSrc = `${imgPrefix}${c.logo}${
+        c.slug === "transamerica" ? "?v=20260723-nobg" : "?v=20260727-align"
+      }`;
+      const m = carrierMetrics(c, lang);
+      const logoLg =
+        c.slug === "mutual-of-omaha" ||
+        c.slug === "transamerica" ||
+        c.slug === "corebridge" ||
+        c.slug === "american-amicable"
+          ? " sc-carrier-compare-logo--lg"
+          : "";
+      const logoSlugClass = ` sc-carrier-compare-logo--${c.slug}`;
+      const openLabel =
+        lang === "es"
+          ? `Ver detalle de ${c.name}`
+          : `View ${c.name} details`;
+
+      return `<div class="sc-carrier-compare-row">
+  <button type="button" class="sc-carrier-compare-logo${logoLg}${logoSlugClass}" data-sc-carrier-open="sc-carrier-dlg-${esc(c.slug)}" aria-label="${esc(openLabel)}">
+    <span class="sc-carrier-compare-rank" aria-hidden="true">${c.rank}</span>
+    <img src="${logoSrc}" alt="" width="${c.logoWidth}" height="${c.logoHeight}" loading="lazy" decoding="async"/>
+  </button>
+  <div class="sc-carrier-compare-rating">
+    <span class="sc-carrier-compare-rating-label">${esc(thScore)}</span>
+    <strong class="sc-carrier-compare-fsr" aria-label="${esc(m.scoreNice)} / 5">${esc(m.scoreNice)}<span class="sc-carrier-compare-of">/5</span></strong>
+    <div class="sc-carrier-stars sc-carrier-stars--compact sc-carrier-compare-stars">${starsHtml(c.score)}</div>
+  </div>
+</div>
+<dialog class="sc-carrier-dialog" id="sc-carrier-dlg-${esc(c.slug)}" aria-labelledby="sc-carrier-dlg-title-${esc(c.slug)}">
+  <div class="sc-carrier-dialog-card">
+    <div class="sc-carrier-dialog-head">
+      <h3 id="sc-carrier-dlg-title-${esc(c.slug)}" class="sc-carrier-dialog-title">${esc(c.name)}</h3>
+      <button type="button" class="sc-carrier-dialog-x" data-sc-carrier-close aria-label="${esc(closeLabel)}">×</button>
+    </div>
+    <dl class="sc-carrier-dialog-grid">
+      <div>
+        <dt>${esc(thDetails)}</dt>
+        <dd>${esc(m.unique)}</dd>
+      </div>
+      <div>
+        <dt>${esc(thAmBest)}</dt>
+        <dd><strong>${esc(c.amBest.fsr)}</strong> · ${esc(m.amDesc)}</dd>
+      </div>
+      <div>
+        <dt>${esc(thComdex)}</dt>
+        <dd><strong>${esc(m.comdexVal)}</strong>${c.comdex && c.comdex.score != null ? " /100" : ""}</dd>
+      </div>
+      <div>
+        <dt>${esc(thNaic)}</dt>
+        <dd><strong>${esc(String(m.naicPrimary))}</strong> · <a href="${esc(m.naicCis)}" target="_blank" rel="noopener">#${esc(String(m.naicCode))} · ${esc(cisLookup)}</a></dd>
+      </div>
+      <div>
+        <dt>${esc(thJd)}</dt>
+        <dd><strong>${esc(m.jdVal)}</strong></dd>
+      </div>
+      <div>
+        <dt>${esc(thScore)}</dt>
+        <dd>
+          <strong>${esc(m.scoreNice)}</strong><span class="text-body-secondary">/5</span>
+          <div class="sc-carrier-stars sc-carrier-stars--compact mt-1">${starsHtml(c.score)}</div>
+        </dd>
+      </div>
+    </dl>
+    <div class="sc-carrier-dialog-actions">
+      <a class="btn sc-carrier-dialog-profile" href="${pageHref}">${esc(reviewLabel)} →</a>
+      <button type="button" class="btn sc-carrier-dialog-close" data-sc-carrier-close>${esc(closeLabel)}</button>
+    </div>
+  </div>
+</dialog>`;
+    })
+    .join("\n");
+
+  const footerNote = `<p class="small text-muted mt-3 mb-0">${lang === "es" ? "Actualizado" : "Updated"}: ${esc(
+    updated
+  )}. ${
+    lang === "es"
+      ? `<a href="https://content.naic.org/consumer" target="_blank" rel="noopener">Portal del consumidor NAIC</a> · <a href="https://content.naic.org/cis_consumer_information.htm" target="_blank" rel="noopener">CIS</a>.`
+      : `<a href="https://content.naic.org/consumer" target="_blank" rel="noopener">NAIC Consumer hub</a> · <a href="https://content.naic.org/cis_consumer_information.htm" target="_blank" rel="noopener">CIS</a>.`
+  }</p>`;
+
+  return `<div class="sc-carrier-compare d-md-none" aria-label="${esc(thInsurer)}">
+  <p class="sc-carrier-compare-hint">${esc(tapHint)}</p>
+  <div class="sc-carrier-compare-head" aria-hidden="true">
+    <span>${esc(thInsurer)}</span>
+    <span>${esc(thScore)}</span>
+  </div>
+  <div class="sc-carrier-compare-list">
+${mobileRows}
+  </div>
+</div>
+<div class="table-responsive sc-carrier-table-wrap sc-carrier-table-wrap--wide d-none d-md-block">
   <table class="table sc-carrier-table sc-carrier-table--simple sc-carrier-table--tight align-middle mb-0">
     <thead>
       <tr>
@@ -389,17 +490,42 @@ function carriersRankedTable(lang, imgPrefix, pagePrefix) {
       </tr>
     </thead>
     <tbody>
-${rows}
+${desktopRows}
     </tbody>
   </table>
 </div>
-<p class="small text-muted mt-3 mb-0">${lang === "es" ? "Actualizado" : "Updated"}: ${esc(
-    updated
-  )}. ${
-    lang === "es"
-      ? `<a href="https://content.naic.org/consumer" target="_blank" rel="noopener">Portal del consumidor NAIC</a> · <a href="https://content.naic.org/cis_consumer_information.htm" target="_blank" rel="noopener">CIS</a>.`
-      : `<a href="https://content.naic.org/consumer" target="_blank" rel="noopener">NAIC Consumer hub</a> · <a href="https://content.naic.org/cis_consumer_information.htm" target="_blank" rel="noopener">CIS</a>.`
-  }</p>`;
+${footerNote}
+<script>
+(function () {
+  function openDlg(id) {
+    var dlg = document.getElementById(id);
+    if (!dlg) return;
+    if (typeof dlg.showModal === "function") dlg.showModal();
+    else dlg.setAttribute("open", "");
+  }
+  function closeDlg(dlg) {
+    if (!dlg) return;
+    if (typeof dlg.close === "function") dlg.close();
+    else dlg.removeAttribute("open");
+  }
+  document.addEventListener("click", function (e) {
+    var openBtn = e.target.closest("[data-sc-carrier-open]");
+    if (openBtn) {
+      openDlg(openBtn.getAttribute("data-sc-carrier-open"));
+      return;
+    }
+    var closeBtn = e.target.closest("[data-sc-carrier-close]");
+    if (closeBtn) {
+      closeDlg(closeBtn.closest("dialog"));
+    }
+  });
+  document.querySelectorAll(".sc-carrier-dialog").forEach(function (dlg) {
+    dlg.addEventListener("click", function (e) {
+      if (e.target === dlg) closeDlg(dlg);
+    });
+  });
+})();
+</script>`;
 }
 
 function carriersEs(prefix) {
@@ -424,19 +550,91 @@ function moneyOrDash(v) {
   return x == null ? "—" : money(x);
 }
 
-function componentRowsHtml(rows) {
+/** Brief plain-language definitions for Funeralocity line items (popup). */
+const SERVICE_COMPONENT_DEFS = {
+  basic: {
+    es: "Tarifa de la funeraria por coordinar el funeral: papeleo, personal y uso de las instalaciones básicas.",
+    en: "Funeral home fee to coordinate the funeral: paperwork, staff time, and basic facility use.",
+  },
+  transfer: {
+    es: "Traslado del cuerpo desde el lugar del fallecimiento hasta la funeraria (también llamado “primera llamada”).",
+    en: "Transporting the body from the place of death to the funeral home (also called “first call”).",
+  },
+  embalming: {
+    es: "Preparación y conservación temporal del cuerpo para el velatorio o la visita (no siempre es obligatorio).",
+    en: "Preparing and temporarily preserving the body for a viewing or visitation (not always required).",
+  },
+  dressing: {
+    es: "Vestir al fallecido y colocarlo en el ataúd de forma digna para la visita o el servicio.",
+    en: "Dressing the deceased and placing them in the casket for visitation or the service.",
+  },
+  viewing: {
+    es: "Tiempo de velatorio o visita en la funeraria para que familiares y amigos puedan despedirse.",
+    en: "Visitation or wake time at the funeral home so family and friends can pay respects.",
+  },
+  funeral: {
+    es: "Ceremonia o servicio memorial (capilla, iglesia u otro lugar) dirigido por la funeraria o el oficiante.",
+    en: "Funeral or memorial ceremony (chapel, church, or other location) led by the funeral home or officiant.",
+  },
+  hearse: {
+    es: "Vehículo funerario que lleva el ataúd al cementerio o al lugar del servicio de sepultura.",
+    en: "Funeral vehicle that carries the casket to the cemetery or graveside service.",
+  },
+  utility: {
+    es: "Vehículo de apoyo (flores, sillas, equipo o familiares) que acompaña la procesión o el servicio.",
+    en: "Support vehicle (flowers, chairs, equipment, or family) that assists the procession or service.",
+  },
+  medianCasket: {
+    es: "Costo promedio de un ataúd de precio medio. Funeralocity publica solo el promedio (sin bajo/alto).",
+    en: "Average cost of a mid-priced casket. Funeralocity publishes only the average (no low/high range).",
+  },
+  base: {
+    es: "Tarifa básica de la funeraria por coordinar la cremación y el servicio relacionado.",
+    en: "Funeral home basic fee to coordinate cremation and related services.",
+  },
+  crematory: {
+    es: "Cargo del crematorio por realizar la cremación del cuerpo.",
+    en: "Crematory charge for performing the cremation.",
+  },
+  transferCrem: {
+    es: "Traslado del cuerpo desde la funeraria (o el lugar del deceso) hasta el crematorio.",
+    en: "Transporting the body from the funeral home (or place of death) to the crematory.",
+  },
+  cremationCasket: {
+    es: "Ataúd o contenedor usado para la cremación con servicio. Solo se publica el promedio.",
+    en: "Casket or container used for a full-service cremation. Only the average is published.",
+  },
+  immediate: {
+    es: "Entierro sin embalsamado, velatorio ni ceremonia — traslado y sepultura de forma directa.",
+    en: "Burial without embalming, visitation, or ceremony — direct transfer and interment.",
+  },
+  basicCasket: {
+    es: "Ataúd sencillo o económico incluido en un entierro asequible. Solo se publica el promedio.",
+    en: "Simple or economy casket included with an affordable burial. Only the average is published.",
+  },
+  directCrem: {
+    es: "Cremación sin velatorio ni servicio previo: traslado, cremación y devolución de las cenizas.",
+    en: "Cremation without a prior visitation or service: transfer, cremation, and return of ashes.",
+  },
+};
+
+function componentRowsHtml(rows, lang) {
   return rows
-    .map(([label, min, max, avg, avgOnly]) => {
+    .map(([key, label, min, max, avg, avgOnly]) => {
+      const def = (SERVICE_COMPONENT_DEFS[key] && SERVICE_COMPONENT_DEFS[key][lang]) || "";
+      const labelCell = def
+        ? `<button type="button" class="sc-cost-service-btn" data-sc-def-title="${esc(label)}" data-sc-def-body="${esc(def)}">${esc(label)}</button>`
+        : esc(label);
       if (avgOnly) {
         return `<tr>
-  <td>${esc(label)}</td>
+  <td>${labelCell}</td>
   <td class="text-end text-body-secondary">—</td>
   <td class="text-end text-body-secondary">—</td>
   <td class="text-end fw-semibold">${moneyOrDash(avg)}</td>
 </tr>`;
       }
       return `<tr>
-  <td>${esc(label)}</td>
+  <td>${labelCell}</td>
   <td class="text-end">${moneyOrDash(min)}</td>
   <td class="text-end">${moneyOrDash(max)}</td>
   <td class="text-end fw-semibold">${moneyOrDash(avg)}</td>
@@ -445,40 +643,86 @@ function componentRowsHtml(rows) {
     .join("\n");
 }
 
-function costAccordionPanel({ id, open, title, packageMin, packageMax, packageAvg, rows, lang }) {
+function costDefModal(lang) {
+  const close = lang === "es" ? "Cerrar" : "Close";
+  const hint =
+    lang === "es"
+      ? "Toque un tipo de servicio para ver una explicación breve."
+      : "Tap a service type for a brief explanation.";
+  return `<dialog class="sc-cost-def-dialog" id="sc-cost-def-dialog" aria-labelledby="sc-cost-def-title">
+  <div class="sc-cost-def-card">
+    <div class="sc-cost-def-head">
+      <h3 id="sc-cost-def-title" class="sc-cost-def-title"></h3>
+      <button type="button" class="sc-cost-def-close" data-sc-def-close aria-label="${esc(close)}">×</button>
+    </div>
+    <p id="sc-cost-def-body" class="sc-cost-def-body"></p>
+    <p class="sc-cost-def-hint">${esc(hint)}</p>
+    <button type="button" class="btn sc-cost-def-ok" data-sc-def-close>${esc(close)}</button>
+  </div>
+</dialog>
+<script>
+(function () {
+  var dlg = document.getElementById("sc-cost-def-dialog");
+  if (!dlg) return;
+  var titleEl = document.getElementById("sc-cost-def-title");
+  var bodyEl = document.getElementById("sc-cost-def-body");
+  document.addEventListener("click", function (e) {
+    var btn = e.target.closest(".sc-cost-service-btn");
+    if (btn) {
+      titleEl.textContent = btn.getAttribute("data-sc-def-title") || "";
+      bodyEl.textContent = btn.getAttribute("data-sc-def-body") || "";
+      if (typeof dlg.showModal === "function") dlg.showModal();
+      else dlg.setAttribute("open", "");
+      return;
+    }
+    if (e.target.closest("[data-sc-def-close]")) {
+      if (typeof dlg.close === "function") dlg.close();
+      else dlg.removeAttribute("open");
+    }
+  });
+  dlg.addEventListener("click", function (e) {
+    if (e.target === dlg) {
+      if (typeof dlg.close === "function") dlg.close();
+      else dlg.removeAttribute("open");
+    }
+  });
+})();
+</script>`;
+}
+
+function costTableBlock({ id, title, packageMin, packageMax, packageAvg, rows, lang }) {
   const thService = lang === "es" ? "Tipo de servicio" : "Service type";
   const thLow = lang === "es" ? "Bajo" : "Low";
   const thHigh = lang === "es" ? "Alto" : "High";
   const thAvg = lang === "es" ? "Promedio" : "Average";
-  const openAttr = open ? " open" : "";
-  return `<details class="sc-cost-panel"${openAttr} id="${esc(id)}">
-  <summary class="sc-cost-summary">
-    <span class="sc-cost-summary-title">${esc(title)}</span>
-    <span class="sc-cost-summary-range">
-      <span class="sc-cost-chip sc-cost-chip--low">${moneyOrDash(packageMin)}</span>
-      <span class="sc-cost-chip sc-cost-chip--high">${moneyOrDash(packageMax)}</span>
-      <span class="sc-cost-chip sc-cost-chip--avg">${moneyOrDash(packageAvg)}</span>
-    </span>
-  </summary>
-  <div class="sc-cost-panel-body table-responsive">
-    <table class="table table-bordered align-middle state-coverage-cost-table sc-cost-detail-table mb-0">
+  const rangeLabel =
+    lang === "es"
+      ? `Total del paquete: ${moneyOrDash(packageMin)} bajo · ${moneyOrDash(packageMax)} alto · ${moneyOrDash(packageAvg)} promedio`
+      : `Package total: ${moneyOrDash(packageMin)} low · ${moneyOrDash(packageMax)} high · ${moneyOrDash(packageAvg)} average`;
+  return `<section class="sc-cost-table-block" id="${esc(id)}">
+  <div class="sc-cost-table-heading">
+    <h3 class="sc-cost-table-title">${esc(title)}</h3>
+    <p class="sc-cost-table-range">${rangeLabel}</p>
+  </div>
+  <div class="sc-cost-table-wrap">
+    <table class="sc-cost-table">
       <thead>
         <tr>
-          <th>${thService}</th>
-          <th class="text-end">${thLow}</th>
-          <th class="text-end">${thHigh}</th>
-          <th class="text-end">${thAvg}</th>
+          <th scope="col">${thService}</th>
+          <th scope="col" class="text-end">${thLow}</th>
+          <th scope="col" class="text-end">${thHigh}</th>
+          <th scope="col" class="text-end">${thAvg}</th>
         </tr>
       </thead>
       <tbody>
-${componentRowsHtml(rows)}
+${componentRowsHtml(rows, lang)}
       </tbody>
     </table>
   </div>
-</details>`;
+</section>`;
 }
 
-/** Funeralocity-style Low / High / Average component breakdowns (accordion). */
+/** Funeralocity-style Low / High / Average component breakdowns (always open). */
 function detailedCostPanels(code, lang) {
   const entry = DETAILED.states[code];
   if (!entry) return "";
@@ -544,44 +788,39 @@ function detailedCostPanels(code, lang) {
         };
 
   const burialRows = [
-    [L.basic, tb.Min_Basic_Services, tb.Max_Basic_Services, tb.Basic_Services],
-    [L.transfer, tb.Min_Pricing_Transfer_Home, tb.Max_Pricing_Transfer_Home, tb.Pricing_Transfer_Home],
-    [L.embalming, tb.Min_Pricing_Embaliming, tb.Max_Pricing_Embaliming, tb.Pricing_Embaliming],
-    [L.dressing, tb.Min_Pricing_Dressing_Casketing, tb.Max_Pricing_Dressing_Casketing, tb.Pricing_Dressing_Casketing],
-    [L.viewing, tb.Min_Pricing_Viewing, tb.Max_Pricing_Viewing, tb.Pricing_Viewing],
-    [L.funeral, tb.Min_Pricing_Funeral, tb.Max_Pricing_Funeral, tb.Pricing_Funeral],
-    [L.hearse, tb.Min_Pricing_Hearse, tb.Max_Pricing_Hearse, tb.Pricing_Hearse],
-    [L.utility, tb.Min_Pricing_Utility_Vehicle, tb.Max_Pricing_Utility_Vehicle, tb.Pricing_Utility_Vehicle],
-    [L.medianCasket, null, null, tb.MedianPricedCasketAverage, true],
+    ["basic", L.basic, tb.Min_Basic_Services, tb.Max_Basic_Services, tb.Basic_Services],
+    ["transfer", L.transfer, tb.Min_Pricing_Transfer_Home, tb.Max_Pricing_Transfer_Home, tb.Pricing_Transfer_Home],
+    ["embalming", L.embalming, tb.Min_Pricing_Embaliming, tb.Max_Pricing_Embaliming, tb.Pricing_Embaliming],
+    ["dressing", L.dressing, tb.Min_Pricing_Dressing_Casketing, tb.Max_Pricing_Dressing_Casketing, tb.Pricing_Dressing_Casketing],
+    ["viewing", L.viewing, tb.Min_Pricing_Viewing, tb.Max_Pricing_Viewing, tb.Pricing_Viewing],
+    ["funeral", L.funeral, tb.Min_Pricing_Funeral, tb.Max_Pricing_Funeral, tb.Pricing_Funeral],
+    ["hearse", L.hearse, tb.Min_Pricing_Hearse, tb.Max_Pricing_Hearse, tb.Pricing_Hearse],
+    ["utility", L.utility, tb.Min_Pricing_Utility_Vehicle, tb.Max_Pricing_Utility_Vehicle, tb.Pricing_Utility_Vehicle],
+    ["medianCasket", L.medianCasket, null, null, tb.MedianPricedCasketAverage, true],
   ];
 
   const cremationRows = [
-    [L.base, fc.Min_Pricing_Base_Services, fc.Max_Pricing_Base_Services, fc.Pricing_Base_Services],
-    [L.transfer, fc.Min_Pricing_Transfer_Home, fc.Max_Pricing_Transfer_Home, fc.Pricing_Transfer_Home],
-    [L.embalming, fc.Min_Pricing_Embaliming, fc.Max_Pricing_Embaliming, fc.Pricing_Embaliming],
-    [L.dressing, fc.Min_Pricing_Dressing_Casketing, fc.Max_Pricing_Dressing_Casketing, fc.Pricing_Dressing_Casketing],
-    [L.viewing, fc.Min_Pricing_Viewing, fc.Max_Pricing_Viewing, fc.Pricing_Viewing],
-    [L.funeral, fc.Min_Pricing_Funeral, fc.Max_Pricing_Funeral, fc.Pricing_Funeral],
-    [L.transferCrem, fc.Min_Pricing_Transfer_Crematory, fc.Max_Pricing_Transfer_Crematory, fc.Pricing_Transfer_Crematory],
-    [L.crematory, fc.Min_Pricing_Crematory_Fee, fc.Max_Pricing_Crematory_Fee, fc.Pricing_Crematory_Fee],
-    [L.cremationCasket, null, null, fc.CremationCasketAverage, true],
+    ["base", L.base, fc.Min_Pricing_Base_Services, fc.Max_Pricing_Base_Services, fc.Pricing_Base_Services],
+    ["transfer", L.transfer, fc.Min_Pricing_Transfer_Home, fc.Max_Pricing_Transfer_Home, fc.Pricing_Transfer_Home],
+    ["embalming", L.embalming, fc.Min_Pricing_Embaliming, fc.Max_Pricing_Embaliming, fc.Pricing_Embaliming],
+    ["dressing", L.dressing, fc.Min_Pricing_Dressing_Casketing, fc.Max_Pricing_Dressing_Casketing, fc.Pricing_Dressing_Casketing],
+    ["viewing", L.viewing, fc.Min_Pricing_Viewing, fc.Max_Pricing_Viewing, fc.Pricing_Viewing],
+    ["funeral", L.funeral, fc.Min_Pricing_Funeral, fc.Max_Pricing_Funeral, fc.Pricing_Funeral],
+    ["transferCrem", L.transferCrem, fc.Min_Pricing_Transfer_Crematory, fc.Max_Pricing_Transfer_Crematory, fc.Pricing_Transfer_Crematory],
+    ["crematory", L.crematory, fc.Min_Pricing_Crematory_Fee, fc.Max_Pricing_Crematory_Fee, fc.Pricing_Crematory_Fee],
+    ["cremationCasket", L.cremationCasket, null, null, fc.CremationCasketAverage, true],
   ];
 
   const affordableRows = [
-    [L.immediate, ab.Min_Pricing_Immediate_Burial, ab.Max_Pricing_Immediate_Burial, ab.Pricing_Immediate_Burial],
-    [L.basicCasket, null, null, ab.BasicCasket, true],
+    ["immediate", L.immediate, ab.Min_Pricing_Immediate_Burial, ab.Max_Pricing_Immediate_Burial, ab.Pricing_Immediate_Burial],
+    ["basicCasket", L.basicCasket, null, null, ab.BasicCasket, true],
   ];
 
   const directRows = [
-    [L.directCrem, dc.Min_Pricing_Direct_Cremation, dc.Max_Pricing_Direct_Cremation, dc.Pricing_Direct_Cremation],
-    [L.transferCrem, dc.Min_Pricing_Transfer_Crematory, dc.Max_Pricing_Transfer_Crematory, dc.Pricing_Transfer_Crematory],
-    [L.crematory, dc.Min_Pricing_Crematory_Fee, dc.Max_Pricing_Crematory_Fee, dc.Pricing_Crematory_Fee],
+    ["directCrem", L.directCrem, dc.Min_Pricing_Direct_Cremation, dc.Max_Pricing_Direct_Cremation, dc.Pricing_Direct_Cremation],
+    ["transferCrem", L.transferCrem, dc.Min_Pricing_Transfer_Crematory, dc.Max_Pricing_Transfer_Crematory, dc.Pricing_Transfer_Crematory],
+    ["crematory", L.crematory, dc.Min_Pricing_Crematory_Fee, dc.Max_Pricing_Crematory_Fee, dc.Pricing_Crematory_Fee],
   ];
-
-  const thService = lang === "es" ? "Tipo de servicio" : "Service type";
-  const thLow = lang === "es" ? "Bajo" : "Low";
-  const thHigh = lang === "es" ? "Alto" : "High";
-  const thAvg = lang === "es" ? "Promedio" : "Average";
 
   const descriptions =
     lang === "es"
@@ -632,18 +871,8 @@ function detailedCostPanels(code, lang) {
 
   const intro =
     lang === "es"
-      ? `<p class="small text-body-secondary mb-3">Desglose de componentes (bajo / alto / promedio), igual que en Funeralocity. Abra cada tipo de servicio para ver el detalle. Los ítems con * son promedios de mercancía (sin rango bajo/alto publicado).</p>`
-      : `<p class="small text-body-secondary mb-3">Component breakdown (low / high / average), matching Funeralocity. Open each service type for the full detail. Items marked * are merchandise averages (no published low/high range).</p>`;
-
-  const columnHeader = `<div class="sc-cost-columns" aria-hidden="true">
-  <span class="sc-cost-columns-service">${esc(thService)}</span>
-  <span class="sc-cost-columns-range">
-    <span class="sc-cost-chip sc-cost-chip--label">${esc(thLow)}</span>
-    <span class="sc-cost-chip sc-cost-chip--label">${esc(thHigh)}</span>
-    <span class="sc-cost-chip sc-cost-chip--label">${esc(thAvg)}</span>
-  </span>
-  <span class="sc-cost-columns-spacer" aria-hidden="true"></span>
-</div>`;
+      ? `<p class="small text-body-secondary mb-3">Desglose de componentes (bajo / alto / promedio), igual que en Funeralocity. Toque un <strong>tipo de servicio</strong> para ver una explicación breve. Los ítems con * son promedios de mercancía (sin rango bajo/alto publicado).</p>`
+      : `<p class="small text-body-secondary mb-3">Component breakdown (low / high / average), matching Funeralocity. Tap a <strong>service type</strong> for a brief explanation. Items marked * are merchandise averages (no published low/high range).</p>`;
 
   const footnote =
     lang === "es"
@@ -662,11 +891,9 @@ ${descriptions
 </div>`;
 
   return `${intro}
-${columnHeader}
-<div class="sc-cost-accordion">
-${costAccordionPanel({
+<div class="sc-cost-tables">
+${costTableBlock({
   id: `sc-cost-${code}-burial`,
-  open: true,
   title: titles.burial,
   packageMin: short.fullBurial && short.fullBurial.Min,
   packageMax: short.fullBurial && short.fullBurial.Max,
@@ -674,9 +901,8 @@ ${costAccordionPanel({
   rows: burialRows,
   lang,
 })}
-${costAccordionPanel({
+${costTableBlock({
   id: `sc-cost-${code}-cremation`,
-  open: false,
   title: titles.cremation,
   packageMin: short.fullCremation && short.fullCremation.Min,
   packageMax: short.fullCremation && short.fullCremation.Max,
@@ -684,9 +910,8 @@ ${costAccordionPanel({
   rows: cremationRows,
   lang,
 })}
-${costAccordionPanel({
+${costTableBlock({
   id: `sc-cost-${code}-affordable`,
-  open: false,
   title: titles.affordable,
   packageMin: short.immediateBurial && short.immediateBurial.Min,
   packageMax: short.immediateBurial && short.immediateBurial.Max,
@@ -694,9 +919,8 @@ ${costAccordionPanel({
   rows: affordableRows,
   lang,
 })}
-${costAccordionPanel({
+${costTableBlock({
   id: `sc-cost-${code}-direct`,
-  open: false,
   title: titles.direct,
   packageMin: short.directCremation && short.directCremation.Min,
   packageMax: short.directCremation && short.directCremation.Max,
@@ -706,7 +930,8 @@ ${costAccordionPanel({
 })}
 </div>
 ${footnote}
-${descHtml}`;
+${descHtml}
+${costDefModal(lang)}`;
 }
 
 function renderEs(code) {
@@ -738,9 +963,9 @@ function renderEs(code) {
 <link href="${prefix}bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
 <link href="${prefix}css/quote-flow-shared.css?v=20260726-state" rel="stylesheet"/>
 <link href="${prefix}css/site-footer.css?v=20260721-lip-page" rel="stylesheet"/>
-<link href="${prefix}css/state-coverage.css?v=20260728-aetna-logo" rel="stylesheet"/>
+<link href="${prefix}css/state-coverage.css?v=20260808-carrier-score" rel="stylesheet"/>
 <link href="${prefix}css/mvi-licensing-map.css?v=20260726-state-cov" rel="stylesheet"/>
-<link href="${prefix}css/mvi-assistant-widget.css?v=20260721-chat-z" rel="stylesheet"/>
+<link href="${prefix}css/mvi-assistant-widget.css?v=20260808-chat-sm" rel="stylesheet"/>
 <link href="${prefix}css/fontawesome-mvi.min.css?v=20260723-brands-fix" rel="stylesheet"/>
 <link href="${prefix}css/site-header.css?v=20260723-ver-precios-gold" rel="stylesheet"/>
 <link href="${prefix}css/nav-questions-dropdown.css" rel="stylesheet"/>
@@ -762,7 +987,7 @@ ${loadHeaderEs(slug)}
 ${stateHero(code, "es", prefix, prefix)}
 
 <section class="py-5 bg-white border-bottom" id="costos">
-  <div class="container" style="max-width:60rem;">
+  <div class="container-fluid sc-cost-section-container px-3 px-md-4">
     <h2 class="h4 fw-bold mb-3" style="color:#1a365d;">¿Cuánto cuesta un funeral en ${esc(name)}?</h2>
     <p class="text-body-secondary mb-3">Promedio del costo de los componentes del servicio funerario en ${esc(name)} (actualizados ${esc(CAPTURED_AT)}). Use estas cifras para estimar cuánta cobertura de gastos finales podría necesitar.</p>
     ${costTable(code, "es")}
@@ -807,7 +1032,7 @@ ${loadFooterEs()}
 <script>document.getElementById('year').textContent=new Date().getFullYear();</script>
 <script defer src="${prefix}bootstrap/js/bootstrap.bundle.min.js"></script>
 <script defer src="${prefix}script.js"></script>
-<script defer src="${prefix}js/mvi-nav-questions.js"></script>
+<script defer src="${prefix}js/mvi-nav-questions.js?v=20260808-hamburger"></script>
 <script defer src="${prefix}js/mvi-licensing-map.js?v=20260726-lic-popup"></script>
 <div data-api-url="/api/website-chat" id="mvi-assistant-root"></div>
 <script defer src="${prefix}js/website-assistant-widget.js"></script>
@@ -845,9 +1070,9 @@ function renderEn(code) {
 <link href="${root}bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
 <link href="${root}css/quote-flow-shared.css?v=20260726-state" rel="stylesheet"/>
 <link href="${root}css/site-footer.css?v=20260721-lip-page" rel="stylesheet"/>
-<link href="${root}css/state-coverage.css?v=20260728-aetna-logo" rel="stylesheet"/>
+<link href="${root}css/state-coverage.css?v=20260808-carrier-score" rel="stylesheet"/>
 <link href="${root}css/mvi-licensing-map.css?v=20260726-state-cov" rel="stylesheet"/>
-<link href="${root}css/mvi-assistant-widget.css?v=20260721-chat-z" rel="stylesheet"/>
+<link href="${root}css/mvi-assistant-widget.css?v=20260808-chat-sm" rel="stylesheet"/>
 <link href="${root}css/fontawesome-mvi.min.css?v=20260723-brands-fix" rel="stylesheet"/>
 <link href="${root}css/site-header.css?v=20260723-ver-precios-gold" rel="stylesheet"/>
 <link href="${root}css/nav-questions-dropdown.css" rel="stylesheet"/>
@@ -868,7 +1093,7 @@ ${loadHeaderEn(slug)}
 ${stateHero(code, "en", en, root)}
 
 <section class="py-5 bg-white border-bottom" id="costs">
-  <div class="container" style="max-width:60rem;">
+  <div class="container-fluid sc-cost-section-container px-3 px-md-4">
     <h2 class="h4 fw-bold mb-3" style="color:#1a365d;">How much does a funeral cost in ${esc(name)}?</h2>
     <p class="text-body-secondary mb-3">Average cost of funeral service components in ${esc(name)} (updated ${esc(CAPTURED_AT)}). Use these figures to estimate how much final expense coverage you may need.</p>
     ${costTable(code, "en")}
@@ -913,7 +1138,7 @@ ${loadFooterEn()}
 <script>document.getElementById('year').textContent=new Date().getFullYear();</script>
 <script defer src="${root}bootstrap/js/bootstrap.bundle.min.js"></script>
 <script defer src="${root}script.js"></script>
-<script defer src="${root}js/mvi-nav-questions.js"></script>
+<script defer src="${root}js/mvi-nav-questions.js?v=20260808-hamburger"></script>
 <script defer src="${root}js/mvi-licensing-map.js?v=20260726-lic-popup"></script>
 <div data-api-url="/api/website-chat" id="mvi-assistant-root"></div>
 <script defer src="${root}js/website-assistant-widget.js"></script>

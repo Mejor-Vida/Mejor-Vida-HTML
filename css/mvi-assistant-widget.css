@@ -32,9 +32,21 @@ small,
 }
 @media (max-width: 576px) {
   #mvi-assistant-root {
-    --mvi-avatar-w-compact: 5.25rem;
-    --mvi-avatar-h-compact: 7.875rem;
-    bottom: max(1rem, calc(env(safe-area-inset-bottom, 0px) + 0.75rem));
+    --mvi-avatar-w-compact: 2.65rem;
+    --mvi-avatar-h-compact: 4rem;
+    bottom: max(0.55rem, calc(env(safe-area-inset-bottom, 0px) + 0.35rem));
+    right: max(0.45rem, env(safe-area-inset-right, 0px));
+  }
+  #mvi-assistant-root .mvi-assist-fab {
+    width: 2.4rem;
+    height: 2.4rem;
+  }
+  #mvi-assistant-root .mvi-assist-fab-icon {
+    font-size: 0.95rem;
+  }
+  .mvi-assist-launcher .mvi-assist-avatar-open {
+    margin-bottom: -0.35rem;
+    transform: translate(0.2rem, -0.28rem);
   }
 }
 #mvi-assistant-root .mvi-assist-fab-wrap {
@@ -453,12 +465,6 @@ small,
 .mvi-assist-launcher .mvi-assist-fab {
   position: relative;
   z-index: 3;
-}
-@media (max-width: 576px) {
-  .mvi-assist-launcher .mvi-assist-avatar-open {
-    margin-bottom: -0.55rem;
-    transform: translate(0.5rem, -0.6rem);
-  }
 }
 .mvi-assist-avatar-open {
   display: block;

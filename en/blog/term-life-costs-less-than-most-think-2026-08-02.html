@@ -482,7 +482,6 @@
 <h3 class="h6 mt-3">Should I get a quote even if I think I cannot afford it?</h3>
 <p>Yes. A real quote is the only way to know. Many families find the number is lower than they feared.</p>
 
-
 <div class="border rounded p-4 mb-4 bg-light">
 <p class="mb-2 fw-semibold">Want to talk through your situation?</p>
 <p class="mb-3">At Mejor Vida Insurance we help families understand options clearly — no pressure. Call <a href="tel:+14024405438">1-402-440-5438</a>.</p>
@@ -583,55 +582,11 @@
 </footer>
 <script defer src="../../bootstrap/js/bootstrap.bundle.min.js"></script>
 
-<script>
-  const hamburgerBtn = document.getElementById('hamburger-btn');
-  const mobileMenu = document.getElementById('mobile-menu');
-  if (hamburgerBtn && mobileMenu) {
-    hamburgerBtn.addEventListener('click', function(e) {
-      e.stopPropagation();
-      mobileMenu.classList.toggle('active');
-      hamburgerBtn.textContent = mobileMenu.classList.contains('active') ? '✕' : '☰';
-    });
-    document.addEventListener('click', function(e) {
-      if (!mobileMenu.contains(e.target) && !hamburgerBtn.contains(e.target)) {
-        mobileMenu.classList.remove('active');
-        hamburgerBtn.textContent = '☰';
-      }
-    });
-  }
-  if (document.getElementById('year')) document.getElementById('year').textContent = new Date().getFullYear();
-</script>
 <div data-api-url="/api/website-chat" data-mvi-avatar-base="/img/mvi-chat-avatar" id="mvi-assistant-root"></div>
-<script defer src="../../js/mvi-nav-questions.js?v=20260723-mobile-menu"></script>
+<script defer src="../../js/mvi-nav-questions.js?v=20260808-hamburger"></script>
 <script defer="" src="../../js/website-assistant-widget.js?v=20260726-rate-limit"></script>
 
-  <script>
-    (function () {
-      var y = document.getElementById('year');
-      if (y) y.textContent = new Date().getFullYear();
-      var hamburgerBtn = document.getElementById('hamburger-btn');
-      var mobileMenu = document.getElementById('mobile-menu');
-      if (hamburgerBtn && mobileMenu) {
-        hamburgerBtn.addEventListener('click', function (e) {
-          e.stopPropagation();
-          mobileMenu.classList.toggle('active');
-          hamburgerBtn.textContent = mobileMenu.classList.contains('active') ? '✕' : '☰';
-        });
-        document.addEventListener('click', function (e) {
-          if (!mobileMenu.contains(e.target) && !hamburgerBtn.contains(e.target)) {
-            mobileMenu.classList.remove('active');
-            hamburgerBtn.textContent = '☰';
-          }
-        });
-        mobileMenu.querySelectorAll('a').forEach(function (link) {
-          link.addEventListener('click', function () {
-            mobileMenu.classList.remove('active');
-            hamburgerBtn.textContent = '☰';
-          });
-        });
-      }
-    })();
-  </script>
+  
 
 </body>
 </html>

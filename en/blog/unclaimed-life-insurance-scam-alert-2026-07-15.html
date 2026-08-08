@@ -459,7 +459,6 @@
 <section class="article-col">
 <div class="blog-content">
 
-
 <p class="story-meta"><strong>Published:</strong> July 15, 2026 · <strong>Source:</strong> see links at the end of this article</p>
 <p>Have you ever opened the mail and seen a letter that looked like it came from a lawyer? The letter may say you share a last name with someone who died. It may claim you can split a huge life insurance payout. That story sounds hopeful. For many families, it is also a trap.</p>
 <p>This week, local consumer officials repeated a Federal Trade Commission (FTC) warning about these letters. Scammers pretend to be lawyers. They say there is an unclaimed life insurance policy worth millions. They offer to split the money with you, a charity, and their fake firm. The goal is not to help your family. The goal is to steal your information or your money.</p>
@@ -475,7 +474,6 @@
 <h2 class="h4 mt-4">What this means for you</h2>
 <p>Treat any surprise letter about a stranger’s life insurance payout as fake until proven otherwise. Do not send money. Do not share your Social Security number or bank account. Do not keep it secret from family if you feel unsure. Talk with someone you trust before you reply to anything that promises a huge reward.</p>
 <p>Also take one positive step for your own family. Make sure the people you love know about any real final expense insurance or life insurance you already have. Write down the company name, policy number, and who to call. Real coverage helps with funeral costs and family needs. Fake letters only create risk.</p>
-
 
 <h2 class="h4 mt-4">Frequently asked questions</h2>
 <h3 class="h6 mt-3">Are letters promising unclaimed life insurance real?</h3>
@@ -583,55 +581,11 @@
 </footer>
 <script defer src="../../bootstrap/js/bootstrap.bundle.min.js"></script>
 
-<script>
-  const hamburgerBtn = document.getElementById('hamburger-btn');
-  const mobileMenu = document.getElementById('mobile-menu');
-  if (hamburgerBtn && mobileMenu) {
-    hamburgerBtn.addEventListener('click', function(e) {
-      e.stopPropagation();
-      mobileMenu.classList.toggle('active');
-      hamburgerBtn.textContent = mobileMenu.classList.contains('active') ? '✕' : '☰';
-    });
-    document.addEventListener('click', function(e) {
-      if (!mobileMenu.contains(e.target) && !hamburgerBtn.contains(e.target)) {
-        mobileMenu.classList.remove('active');
-        hamburgerBtn.textContent = '☰';
-      }
-    });
-  }
-  if (document.getElementById('year')) document.getElementById('year').textContent = new Date().getFullYear();
-</script>
 <div data-api-url="/api/website-chat" data-mvi-avatar-base="/img/mvi-chat-avatar" id="mvi-assistant-root"></div>
-<script defer src="../../js/mvi-nav-questions.js?v=20260723-mobile-menu"></script>
+<script defer src="../../js/mvi-nav-questions.js?v=20260808-hamburger"></script>
 <script defer="" src="../../js/website-assistant-widget.js?v=20260726-rate-limit"></script>
 
-  <script>
-    (function () {
-      var y = document.getElementById('year');
-      if (y) y.textContent = new Date().getFullYear();
-      var hamburgerBtn = document.getElementById('hamburger-btn');
-      var mobileMenu = document.getElementById('mobile-menu');
-      if (hamburgerBtn && mobileMenu) {
-        hamburgerBtn.addEventListener('click', function (e) {
-          e.stopPropagation();
-          mobileMenu.classList.toggle('active');
-          hamburgerBtn.textContent = mobileMenu.classList.contains('active') ? '✕' : '☰';
-        });
-        document.addEventListener('click', function (e) {
-          if (!mobileMenu.contains(e.target) && !hamburgerBtn.contains(e.target)) {
-            mobileMenu.classList.remove('active');
-            hamburgerBtn.textContent = '☰';
-          }
-        });
-        mobileMenu.querySelectorAll('a').forEach(function (link) {
-          link.addEventListener('click', function () {
-            mobileMenu.classList.remove('active');
-            hamburgerBtn.textContent = '☰';
-          });
-        });
-      }
-    })();
-  </script>
+  
 
 </body>
 </html>

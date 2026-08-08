@@ -133,7 +133,7 @@
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
-<link href="css/mvi-assistant-widget.css?v=20260721-chat-z" rel="stylesheet">
+<link href="css/mvi-assistant-widget.css?v=20260808-chat-sm" rel="stylesheet">
 <link href="css/site-footer.css?v=20260721-lip-page" rel="stylesheet">
 <link href="css/fe-guide.css?v=20260726-center-titles" rel="stylesheet">
 <link href="css/site-header.css?v=20260723-ver-precios-gold" rel="stylesheet">
@@ -141,7 +141,7 @@
 <link href="css/nav-about-mega.css?v=20260721-lip-page" rel="stylesheet">
 <link href="css/nav-funeral-resources.css?v=20260728-photo-stronger" rel="stylesheet">
 <link href="css/nav-life-insurance.css?v=20260728-map-type" rel="stylesheet">
-<link href="css/carrier-trust-strip.css?v=20260728-aetna-size" rel="stylesheet">
+<link href="css/carrier-trust-strip.css?v=20260807-mobile-3col" rel="stylesheet">
 <link href="css/mvi-licensing-map.css?v=20260726-state-cov" rel="stylesheet">
 <link href="css/mvi-home-fe-about.css?v=20260725c" rel="stylesheet">
 <style>
@@ -296,9 +296,11 @@
         object-position: center 126%;
         transform: none;
       }
+      /* Happy family (slide 3): keep smaller on mobile so it does not cover the CTA */
       .carousel-slide:nth-child(3) img,
       .carousel-slide:nth-child(3).active img {
-        transform: scale(1.54);
+        transform: scale(1.22);
+        transform-origin: center bottom;
       }
       .carousel-slide:nth-child(4) img,
       .carousel-slide:nth-child(4).active img {
@@ -429,14 +431,40 @@
         align-items: center !important;
         min-height: 0;
       }
-      #home .hero-content-overlay > .row > .col-lg-6:first-child,
+      #home .hero-content-overlay > .row > .col-lg-6:first-child {
+        align-self: auto;
+        padding-bottom: 0;
+        display: block;
+        position: relative;
+        z-index: 6;
+      }
       #home .hero-content-overlay > .row > .col-lg-6.position-relative {
         align-self: auto;
         padding-bottom: 0;
         display: block;
+        position: relative;
+        z-index: 1;
       }
       #home .carousel-container {
         max-height: min(48vw, 300px);
+        overflow: visible;
+      }
+      #home .col-lg-6 > .d-flex.flex-column.flex-sm-row {
+        align-items: flex-start;
+        margin-bottom: 0.5rem !important;
+      }
+      #home .btn-primary-gold.px-4.py-3 {
+        width: auto;
+        max-width: 100%;
+        padding: 0.45rem 0.85rem !important;
+        font-size: 0.875rem;
+        line-height: 1.2;
+        position: relative;
+        z-index: 7;
+      }
+      #home .btn-primary-gold.px-4.py-3 .fa-calendar-check {
+        font-size: 0.85em;
+        margin-right: 0.4rem !important;
       }
     }
     
@@ -867,127 +895,80 @@
       font-weight: 800;
       letter-spacing: -0.04em;
     }
-    @media (max-width: 991px) {
-      /* Horizontal elongated pill (Choice Mutual–style), not a stacked square */
-      .hero-quote-bubble-link {
-        border-radius: 999px;
-      }
+    @media (max-width: 991.98px) {
+      /* Same desktop bubble geometry — smaller scale only (no fixed logo overrides) */
       .hero-quote-bubble {
-        --hq-logo: 42px;
-        flex-direction: row;
-        align-items: center;
-        padding: 0;
-        gap: 0;
-        text-align: left;
+        --hq-logo: 48px;
       }
-      .hero-quote-logo-wrap {
-        align-self: center;
-        margin-right: 0;
+      .hero-quote-bubble:has(.hero-quote-logo-wrap[data-carrier="assurity"]),
+      .hero-quote-bubble:has(.hero-quote-logo-wrap[data-carrier="mutual-of-omaha"]),
+      .hero-quote-bubble:has(.hero-quote-logo-wrap[data-carrier="american-amicable"]),
+      .hero-quote-bubble:has(.hero-quote-logo-wrap[data-carrier="aetna"]),
+      .hero-quote-bubble:has(.hero-quote-logo-wrap[data-carrier="corebridge"]) {
+        --hq-logo: 56px;
       }
-      .hero-quote-text {
-        margin-left: calc(var(--hq-logo) * -0.62);
-        padding: 0 0.65rem 0 calc(var(--hq-logo) * 0.58 + 0.35rem);
-      }
-      .hero-quote-logo-wrap[data-carrier="assurity"] {
-        width: 44px !important;
-        height: 44px !important;
-        margin-left: -4px !important;
+      .hero-quote-logo-wrap[data-carrier="assurity"],
+      .hero-quote-logo-wrap[data-carrier="aetna"],
+      .hero-quote-logo-wrap[data-carrier="corebridge"],
+      .hero-quote-logo-wrap[data-carrier="mutual-of-omaha"],
+      .hero-quote-logo-wrap[data-carrier="american-amicable"] {
+        margin-left: -4px;
       }
       .hero-quote-logo-wrap[data-carrier="assurity"] .hero-quote-logo-fallback {
+        font-size: 1.15rem;
+      }
+      .hero-quote-logo-wrap[data-carrier="aetna"] .hero-quote-logo-fallback,
+      .hero-quote-logo-wrap[data-carrier="corebridge"] .hero-quote-logo-fallback,
+      .hero-quote-logo-wrap[data-carrier="american-amicable"] .hero-quote-logo-fallback {
         font-size: 0.82rem;
       }
-      .hero-quote-logo-wrap[data-carrier="aetna"] {
-        width: 44px !important;
-        height: 44px !important;
-        margin-left: -4px !important;
-      }
-      .hero-quote-logo-wrap[data-carrier="aetna"] .hero-quote-logo-fallback {
-        font-size: 0.82rem;
-      }
-      .hero-carousel--dual-bubbles .hero-quote-logo-wrap[data-carrier="aetna"] {
-        width: 36px !important;
-        height: 36px !important;
-        margin-left: -3px !important;
-      }
-      .hero-quote-logo-wrap[data-carrier="corebridge"] {
-        width: 44px !important;
-        height: 44px !important;
-        margin-left: -4px !important;
-      }
-      .hero-quote-logo-wrap[data-carrier="corebridge"] .hero-quote-logo-fallback {
-        font-size: 0.82rem;
-      }
-      .hero-quote-logo-wrap[data-carrier="mutual-of-omaha"] {
-        width: 44px !important;
-        height: 44px !important;
-        margin-left: -4px !important;
-      }
-      .hero-quote-logo-wrap[data-carrier="mutual-of-omaha"] .hero-quote-logo {
-        width: 100%;
-        height: 100%;
-        max-width: 100%;
-        max-height: 100%;
-        object-fit: cover;
-      }
-      .hero-carousel--dual-bubbles .hero-quote-logo-wrap[data-carrier="assurity"] {
-        width: 36px !important;
-        height: 36px !important;
-        margin-left: -3px !important;
-      }
-      .hero-carousel--dual-bubbles .hero-quote-logo-wrap[data-carrier="mutual-of-omaha"] {
-        width: 36px !important;
-        height: 36px !important;
-        margin-left: 0 !important;
-      }
-      .hero-quote-logo-wrap[data-carrier="american-amicable"] {
-        width: 44px !important;
-        height: 44px !important;
-        margin-left: -4px !important;
-      }
-      .hero-quote-logo-wrap[data-carrier="american-amicable"] .hero-quote-logo {
-        width: 70%;
-        height: 70%;
-      }
-      .hero-carousel--dual-bubbles .hero-quote-logo-wrap[data-carrier="american-amicable"] {
-        width: 36px !important;
-        height: 36px !important;
-        margin-left: -3px !important;
+      .hero-quote-logo-wrap[data-carrier="mutual-of-omaha"] .hero-quote-logo-fallback {
+        font-size: 0.58rem;
       }
       .hero-quote-text {
-        flex: 1 1 auto;
-        min-width: 0;
-        text-align: left;
-        color: #fff !important;
-        -webkit-text-fill-color: #fff;
-        padding-right: 0.15rem;
+        padding: 0 0.5rem 0 calc(var(--hq-logo) * 0.58 + 0.32rem);
       }
       .hero-quote-carrier-name,
       .hero-quote-policy-line,
       .hero-quote-rate {
-        font-size: 0.78rem;
-        color: #fff !important;
-        -webkit-text-fill-color: #fff;
-        letter-spacing: -0.03em;
+        font-size: 0.72rem;
+      }
+      .hero-quote-divider {
+        margin: 0.12rem 0 0.1rem;
       }
       .hero-quote-bubble-wrap {
         z-index: 25;
         left: 50% !important;
         right: auto !important;
         transform: translateX(-50%);
-        bottom: 44px !important;
-        max-width: min(94vw, 288px);
+        bottom: 40px !important;
+        max-width: min(92vw, 250px);
       }
       .hero-quote-bubble-wrap.is-switching {
         transform: translateX(-50%) scale(0.98);
       }
-      /* Couple slide: two pills side areas; compact logo so copy stays on one capsule row */
+      .hero-carousel--dual-bubbles .hero-quote-bubble {
+        --hq-logo: 36px;
+      }
+      .hero-carousel--dual-bubbles .hero-quote-bubble:has(.hero-quote-logo-wrap[data-carrier="aetna"]),
+      .hero-carousel--dual-bubbles .hero-quote-bubble:has(.hero-quote-logo-wrap[data-carrier="assurity"]),
+      .hero-carousel--dual-bubbles .hero-quote-bubble:has(.hero-quote-logo-wrap[data-carrier="mutual-of-omaha"]),
+      .hero-carousel--dual-bubbles .hero-quote-bubble:has(.hero-quote-logo-wrap[data-carrier="american-amicable"]),
+      .hero-carousel--dual-bubbles .hero-quote-bubble:has(.hero-quote-logo-wrap[data-carrier="corebridge"]) {
+        --hq-logo: 40px;
+      }
+      .hero-carousel--dual-bubbles .hero-quote-carrier-name,
+      .hero-carousel--dual-bubbles .hero-quote-policy-line,
+      .hero-carousel--dual-bubbles .hero-quote-rate {
+        font-size: 0.6rem;
+      }
       .hero-carousel--dual-bubbles .hero-quote-bubble-wrap {
-        max-width: min(48vw, 178px);
+        max-width: min(44vw, 152px);
         transform: none !important;
-        bottom: 46px !important;
+        bottom: 42px !important;
       }
       .hero-carousel--dual-bubbles .hero-quote-bubble-wrap--a {
-        left: 3% !important;
+        left: 1% !important;
         right: auto !important;
       }
       .hero-carousel--dual-bubbles .hero-quote-bubble-wrap--a.is-switching {
@@ -995,7 +976,7 @@
       }
       .hero-carousel--dual-bubbles .hero-quote-bubble-wrap--b {
         left: auto !important;
-        right: 3% !important;
+        right: 1% !important;
       }
       .hero-carousel--dual-bubbles .hero-quote-bubble-wrap--b.is-switching {
         transform: scale(0.98) !important;
@@ -1815,37 +1796,9 @@
 <script src="js/mvi-funnel-track.js?v=20260712a"></script>
 <script defer src="js/mvi-ga4-funnel.js?v=20260711a"></script>
 <script defer src="script.js"></script>
-<script defer src="js/mvi-nav-questions.js?v=20260723-mobile-menu"></script>
+<script defer src="js/mvi-nav-questions.js?v=20260808-hamburger"></script>
 <script defer src="js/state-coverage-costs.js?v=20260726a"></script>
-<script defer src="js/mvi-licensing-map.js?v=20260726-state-cov"></script>
-<script defer="" src="js/website-assistant-widget.js?v=20260726-rate-limit"></script>
-<!-- Mobile menu script -->
-<script>
-    // Mobile hamburger menu
-    const hamburgerBtn = document.getElementById('hamburger-btn');
-    const mobileMenu = document.getElementById('mobile-menu');
-    
-    hamburgerBtn.addEventListener('click', function(e) {
-      e.stopPropagation();
-      mobileMenu.classList.toggle('active');
-      hamburgerBtn.textContent = mobileMenu.classList.contains('active') ? '✕' : '☰';
-    });
-    
-    // Close menu when clicking outside
-    document.addEventListener('click', function(e) {
-      if (!mobileMenu.contains(e.target) && !hamburgerBtn.contains(e.target)) {
-        mobileMenu.classList.remove('active');
-        hamburgerBtn.textContent = '☰';
-      }
-    });
-    
-    // Close menu when clicking a link
-    mobileMenu.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', function() {
-        mobileMenu.classList.remove('active');
-        hamburgerBtn.textContent = '☰';
-      });
-    });
-  </script>
+<script defer src="js/mvi-licensing-map.js?v=20260808-no-dl"></script>
+<script defer src="js/website-assistant-widget.js?v=20260726-rate-limit"></script>
 </body>
 </html>

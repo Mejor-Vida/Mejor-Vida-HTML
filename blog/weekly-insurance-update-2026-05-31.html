@@ -658,26 +658,9 @@
 <script src="../js/mvi-funnel-track.js?v=20260702e"></script>
 <script defer src="../js/mvi-ga4-funnel.js"></script>
 <script defer src="../script.js"></script>
-<script>
-  const hamburgerBtn = document.getElementById('hamburger-btn');
-  const mobileMenu = document.getElementById('mobile-menu');
-  if (hamburgerBtn && mobileMenu) {
-    hamburgerBtn.addEventListener('click', function(e) {
-      e.stopPropagation();
-      mobileMenu.classList.toggle('active');
-      hamburgerBtn.textContent = mobileMenu.classList.contains('active') ? '✕' : '☰';
-    });
-    document.addEventListener('click', function(e) {
-      if (!mobileMenu.contains(e.target) && !hamburgerBtn.contains(e.target)) {
-        mobileMenu.classList.remove('active');
-        hamburgerBtn.textContent = '☰';
-      }
-    });
-  }
-  if (document.getElementById('year')) document.getElementById('year').textContent = new Date().getFullYear();
-</script>
+
 <div data-api-url="/api/website-chat" data-mvi-avatar-base="/img/mvi-chat-avatar" id="mvi-assistant-root"></div>
-<script defer src="../js/mvi-nav-questions.js?v=20260723-mobile-menu"></script>
+<script defer src="../js/mvi-nav-questions.js?v=20260808-hamburger"></script>
 <script defer="" src="../js/website-assistant-widget.js?v=20260726-rate-limit"></script>
 </body>
 </html>

@@ -157,9 +157,46 @@
     });
   }
 
+  function bindHamburgerMenu() {
+    var hamburgerBtn = document.getElementById("hamburger-btn");
+    var mobileMenu = document.getElementById("mobile-menu");
+    if (!hamburgerBtn || !mobileMenu) return;
+    if (hamburgerBtn.getAttribute("data-mvi-hamburger-bound") === "1") return;
+    hamburgerBtn.setAttribute("data-mvi-hamburger-bound", "1");
+
+    function setOpen(open) {
+      mobileMenu.classList.toggle("active", open);
+      hamburgerBtn.textContent = open ? "✕" : "☰";
+      hamburgerBtn.setAttribute("aria-expanded", open ? "true" : "false");
+    }
+
+    hamburgerBtn.addEventListener("click", function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      setOpen(!mobileMenu.classList.contains("active"));
+    });
+
+    document.addEventListener("click", function (e) {
+      if (!mobileMenu.classList.contains("active")) return;
+      if (mobileMenu.contains(e.target) || hamburgerBtn.contains(e.target)) return;
+      setOpen(false);
+    });
+
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && mobileMenu.classList.contains("active")) setOpen(false);
+    });
+
+    mobileMenu.querySelectorAll("a").forEach(function (link) {
+      link.addEventListener("click", function () {
+        setOpen(false);
+      });
+    });
+  }
+
   function init() {
     bindOpenChatTriggers();
     bindLifePanels();
+    bindHamburgerMenu();
     bindMobileAccordions();
     document.querySelectorAll(".nav-questions-dropdown-trigger").forEach(function (trigger) {
       bindDropdown(trigger, ".nav-questions-dropdown", ".nav-questions-dropdown-menu");

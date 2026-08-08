@@ -347,16 +347,9 @@
 <script defer src="bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="js/mvi-funnel-track.js?v=20260702e"></script>
 <script defer src="script.js"></script>
-<script>
-  (function(){
-    var y=document.getElementById('year'); if(y) y.textContent=new Date().getFullYear();
-    var h=document.getElementById('hamburger-btn'), m=document.getElementById('mobile-menu');
-    if(h&&m){h.addEventListener('click',function(e){e.stopPropagation();m.classList.toggle('active');h.textContent=m.classList.contains('active')?'✕':'☰';});
-    document.addEventListener('click',function(e){if(!m.contains(e.target)&&!h.contains(e.target)){m.classList.remove('active');h.textContent='☰';}});}
-  })();
-</script>
+
 <div data-api-url="/api/website-chat" id="mvi-assistant-root"></div>
-<script defer src="js/mvi-nav-questions.js?v=20260723-mobile-menu"></script>
+<script defer src="js/mvi-nav-questions.js?v=20260808-hamburger"></script>
 <script defer src="js/website-assistant-widget.js?v=20260726-rate-limit"></script>
 </body>
 </html>
