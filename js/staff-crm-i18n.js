@@ -596,6 +596,11 @@
       assistant_blurb: "Internal AI for product and underwriting questions.",
       assistant_subtitle: "Private internal AI assistant (full recommendations enabled)",
       assistant_new_convo: "New Conversation",
+      assistant_history_label: "Chats",
+      assistant_history_empty: "No chats yet. Start a new conversation.",
+      assistant_untitled_chat: "New chat",
+      assistant_delete_chat: "Delete chat",
+      assistant_delete_confirm: "Delete this chat permanently?",
       assistant_placeholder:
         "Ask about products, underwriting, case strategy, rates, compliance, and recommendations…",
       assistant_send: "Send",
@@ -1708,6 +1713,11 @@
       assistant_blurb: "IA interna para preguntas de productos y suscripción.",
       assistant_subtitle: "Asistente de IA interno privado (recomendaciones completas habilitadas)",
       assistant_new_convo: "Nueva conversación",
+      assistant_history_label: "Chats",
+      assistant_history_empty: "Aún no hay chats. Empiece una conversación nueva.",
+      assistant_untitled_chat: "Chat nuevo",
+      assistant_delete_chat: "Eliminar chat",
+      assistant_delete_confirm: "¿Eliminar este chat de forma permanente?",
       assistant_placeholder:
         "Pregunte sobre productos, suscripción, estrategia de casos, tarifas, cumplimiento y recomendaciones…",
       assistant_send: "Enviar",
