@@ -157,7 +157,7 @@ Do not mention or promote captive carriers, DTC brands, call-center/TV advertise
 
 **DTC:** Ethos, Ladder, Haven Life, Bestow, Fabric, Sproutt, Lemonade Life.
 
-**Call centers / TV:** SelectQuote, Colonial Penn, Mutual of Omaha Direct, Choice Mutual.
+**Call centers / TV:** SelectQuote, Colonial Penn, Mutual of Omaha Direct, and similar direct-response brands.
 
 **Comparison sites:** PolicyGenius.
 

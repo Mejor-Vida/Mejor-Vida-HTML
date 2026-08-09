@@ -312,7 +312,7 @@
 <div class="lic-hero-copy">
 <p class="lic-breadcrumb"><a href="index.html">Home</a> › <a href="life-insurance-cost.html">Insurance cost</a> › Whole life</p>
 <h1>Whole life insurance rates by age</h1>
-<p class="lic-hero-lead">Whole life is permanent coverage: level premiums, a guaranteed death benefit, and cash value on many plans. The tables below use the <strong>Mejor Vida quote engine</strong> (Mutual of Omaha Living Promise + American Amicable) for simplified permanent / final-expense whole life — not binding quotes.</p>
+<p class="lic-hero-lead">Whole life is permanent coverage: level premiums, a guaranteed death benefit, and cash value on many plans. Tables use the <strong>Mejor Vida quote engine</strong> (Mutual of Omaha Living Promise + American Amicable) — illustrative, not binding.</p>
 <div class="lic-byline">
 <span>Updated Aug. 2026</span>
 </div>
@@ -324,12 +324,30 @@
 <div class="lic-main">
 
 <section class="lic-section" id="rates" data-lic-product="whole" data-lic-quote-href="quote.html">
-<h2>Illustrative whole life premiums (simplified band) by age and sex</h2>
-<p>These figures are the good-health Level/Immediate <strong>low</strong> from Mejor Vida’s <strong>quote_ranges</strong> table, $10,000 base scaled to other amounts, rounded. Face amounts: <strong>$5,000–$50,000</strong>; ages 45–85. For fully underwritten whole life at higher faces ($100,000+), Julie runs a live illustration — we do not publish speculative charts outside our rate engine.</p>
-<div class="lic-face-tabs" role="tablist">
+<h2>Illustrative premiums — simplified band ($5,000–$20,000)</h2>
+<p>Mejor Vida quote engine (<code>quote_ranges</code>): Mutual of Omaha Living Promise + American Amicable, good-health Level/Immediate, non-tobacco. Scaled from a $10,000 base and rounded. <strong>Not binding quotes.</strong> Ages 45–85.</p>
+<div class="lic-face-tabs" role="tablist" aria-label="Amounts $5,000 to $20,000">
 <button type="button" class="lic-face-tab is-active" data-lic-face="5000" role="tab" aria-selected="true">$5,000</button>
 <button type="button" class="lic-face-tab" data-lic-face="10000" role="tab" aria-selected="false">$10,000</button>
-<button type="button" class="lic-face-tab" data-lic-face="25000" role="tab" aria-selected="false">$25,000</button>
+<button type="button" class="lic-face-tab" data-lic-face="15000" role="tab" aria-selected="false">$15,000</button>
+<button type="button" class="lic-face-tab" data-lic-face="20000" role="tab" aria-selected="false">$20,000</button>
+</div>
+<div class="lic-rate-wrap">
+<table class="lic-rate-table">
+<thead><tr><th scope="col">Age</th><th scope="col">Female</th><th scope="col">Male</th></tr></thead>
+<tbody data-lic-tbody></tbody>
+</table>
+</div>
+<p class="lic-rate-note" data-lic-note></p>
+</section>
+
+<section class="lic-section" id="rates-mid" data-lic-product="whole" data-lic-quote-href="quote.html">
+<h2>Illustrative premiums — simplified band ($25,000–$50,000)</h2>
+<p>Same Mejor Vida <code>quote_ranges</code> source. Use the tabs for higher faces within the simplified / final-expense whole life band.</p>
+<div class="lic-face-tabs" role="tablist" aria-label="Amounts $25,000 to $50,000">
+<button type="button" class="lic-face-tab is-active" data-lic-face="25000" role="tab" aria-selected="true">$25,000</button>
+<button type="button" class="lic-face-tab" data-lic-face="30000" role="tab" aria-selected="false">$30,000</button>
+<button type="button" class="lic-face-tab" data-lic-face="40000" role="tab" aria-selected="false">$40,000</button>
 <button type="button" class="lic-face-tab" data-lic-face="50000" role="tab" aria-selected="false">$50,000</button>
 </div>
 <div class="lic-rate-wrap">
@@ -339,154 +357,177 @@
 </table>
 </div>
 <p class="lic-rate-note" data-lic-note></p>
-<p>Mejor Vida engine example: at age 50, about <strong>$24/mo</strong> (female) or <strong>$31/mo</strong> (male) for $10,000 Level/Immediate. At age 65, about <strong>$41/$56</strong> for $10,000. Julie compares Mutual of Omaha, American Amicable, and other appointed carriers. <a href="quote.html">Get a quote</a> · <a href="final-expense-cost.html">Also on final expense cost</a>.</p>
+<p><strong>Quick read (Mejor Vida engine):</strong> at age 50, about <strong>$24/mo</strong> (female) or <strong>$31/mo</strong> (male) for $10,000. At age 65, about <strong>$41/$56</strong> for $10,000. <a href="quote.html">Get a quote</a> · <a href="final-expense-cost.html">Also see final expense cost</a>.</p>
+</section>
+
+<section class="lic-section" id="rates-high" data-lic-product="whole-trad" data-lic-quote-href="quote.html">
+<h2>Illustrative premiums — traditional whole life ($100,000–$500,000)</h2>
+<p>For larger fully underwritten faces, we show the <strong>educational preferred / non-tobacco sample</strong> from Mejor Vida’s cost hub (not the <code>quote_ranges</code> engine). Ages 40–85. Julie illustrates $750,000+ live.</p>
+<div class="lic-face-tabs" role="tablist" aria-label="Amounts $100,000 to $500,000">
+<button type="button" class="lic-face-tab is-active" data-lic-face="100000" role="tab" aria-selected="true">$100,000</button>
+<button type="button" class="lic-face-tab" data-lic-face="250000" role="tab" aria-selected="false">$250,000</button>
+<button type="button" class="lic-face-tab" data-lic-face="500000" role="tab" aria-selected="false">$500,000</button>
+</div>
+<div class="lic-rate-wrap">
+<table class="lic-rate-table">
+<thead><tr><th scope="col">Age</th><th scope="col">Female</th><th scope="col">Male</th></tr></thead>
+<tbody data-lic-tbody></tbody>
+</table>
+</div>
+<p class="lic-rate-note" data-lic-note></p>
+<p class="lic-rate-note"><a href="quote.html">Quote larger amounts ($750,000+)</a></p>
 </section>
 
 <section class="lic-section lic-guide" id="how-it-works">
-<h2>How does whole life insurance work?</h2>
-<p>Whole life is permanent coverage. As long as premiums are paid on time, the policy does not “expire” by age the way many term plans do.</p>
-<ul class="lic-factor-list">
-<li><strong>Level premiums.</strong> On most traditional and level final-expense plans, the premium does not increase after issue.</li>
-<li><strong>Guaranteed death benefit.</strong> The contracted amount pays to the beneficiary per policy terms.</li>
-<li><strong>Cash value.</strong> Part of the premium may build cash value with contractual guarantees; loans or withdrawals depend on the product — Julie explains the impact on the benefit.</li>
-</ul>
-<p>That’s why it usually costs more per dollar than term: you pay for lifelong coverage and guarantees, not just a time-limited risk period.</p>
+<h2>What whole life is — and how it works</h2>
+<p>Whole life is <strong>permanent</strong> coverage: if premiums stay current, the policy does not end just because you reach a certain age (unlike many term plans).</p>
+<p>Three pieces usually come together:</p>
+<ol class="lic-factor-list">
+<li><strong>Level premium.</strong> On most level plans (including many final-expense designs), the premium does not rise after issue.</li>
+<li><strong>Guaranteed death benefit.</strong> The contracted amount pays to the beneficiary per the contract.</li>
+<li><strong>Cash value (on many plans).</strong> Part of the premium may build value with contractual guarantees; loans or withdrawals reduce the benefit if not repaid — Julie shows the impact before you sign.</li>
+</ol>
+<p>That’s why it usually costs more per dollar than term: you pay for lifelong coverage and those guarantees, not only a limited risk period.</p>
 </section>
 
 <section class="lic-section lic-guide" id="factors">
-<h2>What factors determine the cost</h2>
-<p>Your price will not match someone else’s unless the profile is nearly identical. These variables usually matter most. Factors such as race, ethnicity, sexual orientation, marital status, credit score, and education level are <em>not</em> typically used to set premiums.</p>
+<h2>What raises (or lowers) the price</h2>
+<p>Start with these variables. Race, ethnicity, sexual orientation, marital status, credit score, and education level are <em>not</em> typically used to set premiums.</p>
 
 <div class="lic-factor-grid" aria-label="Cost factors">
 <div class="lic-factor-card">
 <span class="lic-factor-icon" aria-hidden="true"><img src="../img/icons/mvi-edad-cake.png" alt="" width="36" height="36"/></span>
 <div>
 <h3>Age</h3>
-<p>The older you are at issue, the higher the price. After issue, whole life premiums usually stay level.</p>
+<p>Older at issue means a higher price. After issue, whole life premiums usually stay level.</p>
 </div>
 </div>
 <div class="lic-factor-card">
 <span class="lic-factor-icon" aria-hidden="true"><img class="lic-factor-icon-img--wide" src="../img/icons/mvi-gender-sexo.png" alt="" width="36" height="36"/></span>
 <div>
 <h3>Gender</h3>
-<p>Women usually pay less because they live longer on average. In Montana, unisex rates can price women like men.</p>
+<p>Women usually pay less. In Montana, unisex rates can price women like men.</p>
 </div>
 </div>
 <div class="lic-factor-card">
 <span class="lic-factor-icon" aria-hidden="true"><img src="../img/icons/mvi-tabaco-pipe.png" alt="" width="36" height="36"/></span>
 <div>
 <h3>Tobacco / nicotine</h3>
-<p>Cigarettes raise the price. Pipe, chew, or e-cigarettes depend on the carrier.</p>
+<p>Cigarettes raise the price. Other forms depend on the carrier. These tables are non-tobacco.</p>
 </div>
 </div>
 <div class="lic-factor-card">
 <span class="lic-factor-icon" aria-hidden="true"><img src="../img/icons/mvi-salud-heart.png" alt="" width="36" height="36"/></span>
 <div>
 <h3>Health</h3>
-<p>Medical conditions, medications, and history can raise the price or limit the face amount.</p>
+<p>History and medications can raise the price, limit the face amount, or change the plan type.</p>
 </div>
 </div>
 <div class="lic-factor-card">
 <span class="lic-factor-icon" aria-hidden="true"><img class="lic-factor-icon-img--wide" src="../img/icons/mvi-cobertura-umbrella.png" alt="" width="36" height="36"/></span>
 <div>
-<h3>Coverage amount</h3>
-<p>More benefit = higher premium (usually proportional per $1,000).</p>
+<h3>Amount</h3>
+<p>More benefit = higher premium (almost always proportional per $1,000).</p>
 </div>
 </div>
 <div class="lic-factor-card">
 <span class="lic-factor-icon" aria-hidden="true"><img class="lic-factor-icon-img--wide" src="../img/icons/mvi-estado-usa.png" alt="" width="36" height="36"/></span>
 <div>
-<h3>State of residence</h3>
-<p>Determines which products are available. Julie serves Nebraska, Kansas, Colorado, and Nevada.</p>
+<h3>State</h3>
+<p>Drives product availability. Julie serves Nebraska, Kansas, Colorado, and Nevada.</p>
 </div>
 </div>
 </div>
 
-<h3 class="lic-factor-heading"><span class="lic-factor-icon" aria-hidden="true"><img src="../img/icons/mvi-edad-cake.png" alt="" width="36" height="36"/></span>Age</h3>
-<p>Issue age is one of the biggest cost drivers. In our engine, age 45 is about $23/$27 per month for $10,000; age 70 is about $53/$75 (female/male, Level/Immediate). Many carriers price each age separately; a few use age bands (less common).</p>
+<h3 class="lic-factor-heading"><span class="lic-factor-icon" aria-hidden="true"><img src="../img/icons/mvi-edad-cake.png" alt="" width="36" height="36"/></span>Age at issue (not afterward)</h3>
+<p>Age on the <em>application</em> drives price. In our engine, age 45 is about <strong>$23/$27</strong> per month for $10,000; age 70 is about <strong>$53/$75</strong> (female/male). After issue, most level whole life premiums do <em>not</em> rise just because you get older. Many carriers price each exact age; a few use age bands.</p>
 
 <h3 class="lic-factor-heading"><span class="lic-factor-icon" aria-hidden="true"><img class="lic-factor-icon-img--wide" src="../img/icons/mvi-gender-sexo.png" alt="" width="36" height="36"/></span>Gender</h3>
-<p>In most states, men pay more (often about 30%) because they live fewer years on average. Montana requires unisex rates on some products.</p>
+<p>In most states, men pay more (often about 30%) because they live fewer years on average. Montana requires unisex rates on some products, which can change that gap.</p>
 
 <h3 class="lic-factor-heading"><span class="lic-factor-icon" aria-hidden="true"><img src="../img/icons/mvi-tabaco-pipe.png" alt="" width="36" height="36"/></span>Tobacco and nicotine</h3>
-<p>Cigarettes usually place you in a smoker class and raise the premium. Other nicotine forms are not always treated the same — it depends on the carrier and questionnaire. This page’s tables are non-tobacco.</p>
+<p>Cigarettes usually place you in a smoker class. Pipe, chew, cigars, or e-cigarettes are not always treated the same — each carrier has its own rule. This page’s tables assume non-tobacco.</p>
 
 <h3 class="lic-factor-heading"><span class="lic-factor-icon" aria-hidden="true"><img src="../img/icons/mvi-salud-heart.png" alt="" width="36" height="36"/></span>Health</h3>
-<p>Underwriting classifies your health. Better health usually opens lower premiums (such as the Level/Immediate band in our tables) and higher face amounts. Serious conditions can mean graded plans, lower amounts, or declines.</p>
+<p>Better health usually opens the Level/Immediate band (the one in our tables) and higher face amounts. More serious conditions can mean graded plans, lower amounts, or declines. Honest answers protect a future claim.</p>
 
 <h3 class="lic-factor-heading"><span class="lic-factor-icon" aria-hidden="true"><img class="lic-factor-icon-img--wide" src="../img/icons/mvi-cobertura-umbrella.png" alt="" width="36" height="36"/></span>Coverage amount</h3>
-<p>Premium is usually set per $1,000 of benefit, then multiplied. In our engine, $25,000 costs about 2.5× a $10,000 policy for the same profile — see the tabs.</p>
+<p>Premium is usually set per $1,000, then multiplied. In our engine, $25,000 costs about 2.5× a $10,000 policy for the same profile — use the tabs to see it.</p>
 
-<h3 class="lic-factor-heading">Riders</h3>
-<p>Riders such as accelerated benefits, accidental death, or child coverage can add cost or come included by product. Julie only recommends riders that add real value to your plan.</p>
+<h3 class="lic-factor-heading">Riders (optional extras)</h3>
+<p>Accelerated benefits, accidental death, or child coverage may be included or add cost. Julie only recommends riders that clearly help your plan.</p>
 
 <h3 class="lic-factor-heading">Underwriting type</h3>
-<p>Fully underwritten (often with an exam) can unlock higher face amounts and more competitive premiums per dollar. Simplified issue (no exam) is faster — it powers the tables on this page. Guaranteed acceptance asks no health questions but is usually the most expensive and includes a waiting period.</p>
+<p>Three common paths (detail below): simplified issue with no exam (powers these tables), guaranteed acceptance (almost always with a wait), and fully underwritten with an exam (higher faces, often better cost per dollar).</p>
 
 <h3 class="lic-factor-heading">Lifestyle and alcohol</h3>
-<p>High-risk hobbies, DUI history, or heavy alcohol use can affect rating or approval. Answer the application honestly — hiding information can void a claim.</p>
+<p>High-risk hobbies, DUI history, or heavy alcohol use can affect rating. Hiding information on the application can void a claim.</p>
 
 <h3 class="lic-factor-heading"><span class="lic-factor-icon" aria-hidden="true"><img class="lic-factor-icon-img--wide" src="../img/icons/mvi-estado-usa.png" alt="" width="36" height="36"/></span>State of residence</h3>
-<p>Your state drives forms, product availability, and sometimes pricing rules (such as Montana). Julie is licensed in Nebraska, Kansas, Colorado, and Nevada.</p>
+<p>Forms, products, and sometimes pricing rules depend on where you live and sign. Julie is licensed in Nebraska, Kansas, Colorado, and Nevada.</p>
 </section>
 
 <section class="lic-section lic-guide" id="limited-pay">
-<h2>How do limited-pay whole life policies work?</h2>
-<p>Instead of paying for life, some plans become “paid up” after a set number of years or at a certain age. You pay higher premiums during that window; afterward you owe no more premiums and coverage continues (per the contract).</p>
+<h2>Lifetime-pay vs. limited-pay</h2>
+<p><strong>Lifetime pay:</strong> you pay until the policy ends (death or cancelation). Usually the lowest monthly premium.</p>
+<p><strong>Limited-pay:</strong> you pay more each month for a set window; then the policy is “paid up” and you owe no more premiums (per the contract).</p>
 <ul class="lic-factor-list">
-<li><strong>7-Pay / 10-Pay / 20-Pay.</strong> Premiums for 7, 10, or 20 years; then paid up.</li>
-<li><strong>Paid up at 65 or 80.</strong> Premiums until that age — useful if you want payments to stop in retirement.</li>
+<li><strong>7-Pay / 10-Pay / 20-Pay</strong> — premiums for 7, 10, or 20 years.</li>
+<li><strong>Paid up at 65 or 80</strong> — payments stop at that age (useful near retirement).</li>
 </ul>
-<p>Limited-pay is rarely “cheaper” overall: it concentrates cost into fewer years. Julie can illustrate lifetime-pay vs. limited-pay with the same carrier when it fits (for example Transamerica Lifetime options in her book).</p>
+<p>Limited-pay is rarely “cheaper” overall: it concentrates cost into fewer years. Julie can illustrate both options with the same carrier when it fits (for example Transamerica Lifetime products in her book).</p>
 </section>
 
 <section class="lic-section lic-guide" id="term-vs-whole">
-<h2>Term life vs. whole life</h2>
-<p><strong>Term</strong> covers a set period (10, 20, or 30 years, or to a certain age). It usually costs less per dollar because coverage ends: if you outlive the term, you typically get nothing back and may be uninsured.</p>
-<p><strong>Whole life</strong> fits permanent needs (family, lifelong debts, legacy, final expense). Level premiums and coverage that does not expire by age if kept in force — which is why monthly cost is usually higher than term for the same face amount.</p>
+<h2>Term or whole life — which fits?</h2>
+<p>Use this quick comparison:</p>
+<ul class="lic-factor-list">
+<li><strong>Term</strong> — set period (10, 20, 30 years, or to a certain age). Cheaper per dollar. When it ends, you typically get nothing back and may be uninsured.</li>
+<li><strong>Whole life</strong> — permanent need (family, lifelong debts, legacy, funeral). Level premiums and coverage that does not expire by age if kept in force.</li>
+</ul>
 <p>Many families combine both: term for the mortgage or child-raising years, and whole life (or final expense) for permanent needs. <a href="life-insurance-cost.html#term-20">See term cost charts</a>.</p>
 </section>
 
 <section class="lic-section lic-guide" id="qualify">
-<h2>Ways to qualify for whole life</h2>
+<h2>Three ways to qualify</h2>
 
-<h3 class="lic-factor-heading">Simplified issue (no exam)</h3>
-<p>You answer a health questionnaire; carriers may check prescriptions (Rx) and motor vehicle records (MVR). No blood draw or paramed visit. Typical face amounts in Julie’s book for final expense / simplified whole life often run $2,000–$50,000 (Mutual of Omaha Living Promise up to $50,000 on level; American Amicable by product). That path powers the tables on this page.</p>
+<h3 class="lic-factor-heading">1. Simplified issue (no exam)</h3>
+<p>Health questionnaire; carriers often check prescriptions (Rx) and motor vehicle records (MVR). No blood draw or paramed visit. In Julie’s book, typical final-expense / simplified whole life faces run about <strong>$2,000–$50,000</strong> (Living Promise up to $50,000 on level; American Amicable Senior Choice / Golden Solution by product). <strong>This path powers the tables on this page.</strong></p>
 
-<h3 class="lic-factor-heading">Guaranteed acceptance</h3>
-<p>No health questions or exam; you won’t be declined for medical history. There is almost always a two-year waiting period: death in that period usually returns premiums paid plus interest (often ~10%), not the full death benefit. Usually the most expensive path. See also <a href="life-insurance-cost.html#guaranteed">illustrative GI rates on the hub</a>.</p>
+<h3 class="lic-factor-heading">2. Guaranteed acceptance</h3>
+<p>No health questions or exam; you won’t be declined for medical history. Almost always a <strong>two-year waiting period</strong>: death in that window usually returns premiums paid plus interest (often ~10%), not the full death benefit. Usually the most expensive path. <a href="life-insurance-cost.html#guaranteed">See illustrative GI rates on the hub</a>.</p>
 
-<h3 class="lic-factor-heading">Fully underwritten (with exam)</h3>
-<p>The examiner typically collects health questions, urine and/or blood, blood pressure, and height/weight. Medical records may also be requested.</p>
+<h3 class="lic-factor-heading">3. Fully underwritten (with exam)</h3>
+<p>Typically includes health questions, urine and/or blood, blood pressure, and height/weight; sometimes medical records.</p>
 <ul class="lic-factor-list">
-<li><strong>Pros:</strong> often lower cost per dollar and access to higher face amounts (sometimes $100,000+ as a practical minimum on some products).</li>
+<li><strong>Pros:</strong> often better cost per dollar and higher face amounts (on some products a practical minimum near $100,000).</li>
 <li><strong>Cons:</strong> longer process; higher minimums; not everyone wants an exam.</li>
 </ul>
-<p>Fully underwritten permanent products in Julie’s book (for example Transamerica Lifetime) are illustrated case by case — we do not invent $250,000–$2,000,000 charts without rate-engine data.</p>
+<p>Fully underwritten permanent products in Julie’s book (for example Transamerica Lifetime) are illustrated case by case. We do not publish $250,000–$2,000,000 charts without real engine rates.</p>
 </section>
 
 <section class="lic-section lic-guide" id="better-price">
-<h2>How to find a better price</h2>
-<ul class="lic-factor-list">
-<li><strong>Answer the health questionnaire honestly</strong> — opens better classes (such as Level/Immediate) and protects a future claim.</li>
-<li><strong>Compare multiple carriers</strong> — none is cheapest for everyone; Julie shops on your behalf.</li>
-<li><strong>Consider limited-pay only if the budget fits</strong> — it is not a total-cost shortcut.</li>
+<h2>How to get closer to a better price</h2>
+<ol class="lic-factor-list">
+<li><strong>Answer the questionnaire honestly</strong> — opens Level/Immediate classes and protects the claim.</li>
+<li><strong>Compare multiple carriers</strong> — none is cheapest for everyone; Julie shops for you.</li>
+<li><strong>Choose limited-pay only if the monthly budget fits</strong> — it is not a total-cost shortcut.</li>
 <li><strong>Don’t overbuy</strong> — match face amount to debts, income replacement, and legacy; for funeral-only needs, $5,000–$20,000 often suffices based on local costs.</li>
 <li><strong>Work with an independent agent</strong> licensed in your state.</li>
-</ul>
+</ol>
 <p class="lic-rate-note"><a href="quote.html">Get a quote</a> · <a href="life-insurance-cost.html">All insurance costs</a> · <a href="final-expense-cost.html">Final expense cost</a></p>
 </section>
 
 <section class="lic-section lic-faq" id="faq">
 <h2>Frequently asked questions</h2>
-<details open><summary>What is the average monthly cost of whole life?</summary><p>It depends on age and face amount. With Mejor Vida’s quote_ranges engine (MOO + AmAm, Level/Immediate): at age 50 about <strong>$24/mo</strong> (female) or <strong>$31/mo</strong> (male) for $10,000; at age 65 about <strong>$41/$56</strong> for $10,000; at age 45 about <strong>$57/$68</strong> for $25,000. Quote for your real profile.</p></details>
-<details><summary>What determines the cost of whole life insurance?</summary><p>Mainly issue age, sex, tobacco/nicotine, health, face amount, riders, underwriting type, lifestyle, and state. Race, credit, and education level are not typically used to set premiums.</p></details>
-<details><summary>Does whole life get more expensive as you age?</summary><p>Age at <em>issue</em> raises the price (see how the table climbs from 45 to 85). After issue, most level whole life premiums do <em>not</em> increase with the years if you keep the policy in force.</p></details>
-<details><summary>Is a medical exam required?</summary><p>Not always. Simplified issue (the basis of our tables) and guaranteed acceptance skip the exam. Fully underwritten usually includes one: health questions, urine/blood, blood pressure, and height/weight. An exam often unlocks lower premiums per dollar and higher face amounts.</p></details>
-<details><summary>Whole life vs. universal life?</summary><p>Whole life emphasizes level premiums and, on many plans, cash-value guarantees. Universal / IUL is more flexible (and more complex): actual cost depends on funding, charges, and caps. Julie can run a UL illustration if it fits. See also the <a href="life-insurance-cost.html#universal-life">UL chart on the hub</a>.</p></details>
-<details><summary>Is there whole life for a child?</summary><p>Yes: some carriers offer juvenile whole life with limited face amounts. It can lock in early insurability and build cash value. Julie can review child options by state and carrier.</p></details>
-<details><summary>Why does state of residence matter?</summary><p>Products, forms, and pricing rules depend on the state where you live and sign. Julie is licensed in Nebraska, Kansas, Colorado, and Nevada.</p></details>
-<details><summary>How do I get whole life with no waiting period?</summary><p>Look for simplified issue or fully underwritten level-benefit plans (no wait or a short wait) — that is the Level/Immediate band in our tables. Guaranteed acceptance almost always has a two-year wait. Answering health questions honestly usually opens plans without that long wait.</p></details>
+<details open><summary>What’s a typical monthly cost?</summary><p>It depends on age and face amount. With Mejor Vida’s engine (MOO + American Amicable, Level/Immediate): at age 50 about <strong>$24/mo</strong> (female) or <strong>$31/mo</strong> (male) for $10,000; at age 65 about <strong>$41/$56</strong> for $10,000; at age 45 about <strong>$57/$68</strong> for $25,000. Quote for your real profile.</p></details>
+<details><summary>What determines the cost?</summary><p>Mainly: issue age, sex, tobacco/nicotine, health, face amount, riders, underwriting type, lifestyle, and state. Race, credit, and education are not typically used to set premiums.</p></details>
+<details><summary>Does it get more expensive just because I get older after buying?</summary><p>Age at <em>issue</em> raises the price (see the table from 45 to 85). After issue, most level whole life premiums do <em>not</em> increase with the years if you keep the policy in force.</p></details>
+<details><summary>Do I need a medical exam?</summary><p>Not always. Simplified issue (the basis of these tables) and guaranteed acceptance skip it. Fully underwritten usually includes one. An exam often unlocks lower premiums per dollar and higher face amounts.</p></details>
+<details><summary>Whole life or universal life?</summary><p>Whole life emphasizes level premiums and, on many plans, cash-value guarantees. Universal / IUL is more flexible and more complex: actual cost depends on funding and charges. Julie can illustrate UL if it fits. <a href="life-insurance-cost.html#universal-life">UL chart on the hub</a>.</p></details>
+<details><summary>Is there whole life for a child?</summary><p>Yes: some carriers offer juvenile whole life with limited face amounts, to lock in early insurability and build cash value. Julie reviews options by state and carrier.</p></details>
+<details><summary>Why does state matter?</summary><p>Products, forms, and pricing rules depend on where you live and sign. Julie is licensed in Nebraska, Kansas, Colorado, and Nevada.</p></details>
+<details><summary>How do I get coverage without a long waiting period?</summary><p>Look for simplified issue or fully underwritten level-benefit plans (no wait or a short wait) — that is the Level/Immediate band in our tables. Guaranteed acceptance almost always has a two-year wait.</p></details>
 </section>
 </div>
 </div>
@@ -557,7 +598,7 @@
 <script defer src="../js/mvi-nav-questions.js?v=20260808-hamburger"></script>
 <script defer src="../js/website-assistant-widget.js?v=20260726-rate-limit"></script>
 <script>document.getElementById('year') && (document.getElementById('year').textContent = new Date().getFullYear());</script>
-<script>window.MVI_LIC_RATES = {"whole_life":{"source":"Mejor Vida quote engine (quote_ranges) \u2014 MOO Living Promise + American Amicable, good-health low","rating":"Non-tobacco, good-health (Level/Immediate) low","as_of":"2026-08-08","note":"Illustrative monthly premiums for simplified permanent whole life (final-expense band) from Mejor Vida\u2019s quote_ranges table (Mutual of Omaha Living Promise + American Amicable). Values are the good-health (Level/Immediate) low for $10,000 face, scaled proportionally for other amounts, rounded to the nearest dollar. Ages 45\u201385. Educational only\u2014not a binding quote. Larger fully underwritten whole life ($100,000+) is illustrated live by Julie; those faces are not charted here because we do not publish speculative premiums outside our rate engine.","faces":[5000,10000,25000,50000],"tables":{"5000":[{"age":45,"female":11,"male":14},{"age":50,"female":12,"male":15},{"age":55,"female":14,"male":18},{"age":60,"female":16,"male":22},{"age":65,"female":21,"male":28},{"age":70,"female":27,"male":37},{"age":75,"female":36,"male":50},{"age":80,"female":49,"male":70},{"age":85,"female":68,"male":96}],"10000":[{"age":45,"female":23,"male":27},{"age":50,"female":24,"male":31},{"age":55,"female":28,"male":36},{"age":60,"female":33,"male":44},{"age":65,"female":41,"male":56},{"age":70,"female":53,"male":75},{"age":75,"female":72,"male":100},{"age":80,"female":98,"male":140},{"age":85,"female":136,"male":193}],"25000":[{"age":45,"female":57,"male":68},{"age":50,"female":61,"male":77},{"age":55,"female":69,"male":90},{"age":60,"female":82,"male":109},{"age":65,"female":103,"male":141},{"age":70,"female":133,"male":187},{"age":75,"female":181,"male":250},{"age":80,"female":246,"male":349},{"age":85,"female":340,"male":482}],"50000":[{"age":45,"female":113,"male":136},{"age":50,"female":122,"male":153},{"age":55,"female":139,"male":180},{"age":60,"female":164,"male":219},{"age":65,"female":205,"male":282},{"age":70,"female":266,"male":373},{"age":75,"female":362,"male":500},{"age":80,"female":492,"male":699},{"age":85,"female":680,"male":964}]}}};</script>
-<script defer src="../js/life-insurance-cost.js?v=20260809-whole-life-qr"></script>
+<script>window.MVI_LIC_RATES = {"whole_life":{"source":"Mejor Vida quote engine (quote_ranges) \u2014 MOO Living Promise + American Amicable, good-health low","rating":"Non-tobacco, good-health (Level/Immediate) low","as_of":"2026-08-08","note":"Illustrative monthly premiums for simplified permanent whole life from Mejor Vida quote_ranges. Existing $5k/$10k/$25k/$50k bands preserved; $15k/$20k/$30k/$40k scaled from the $10,000 base, rounded. Ages 45\u201385. Educational only\u2014not a binding quote.","faces":[5000,10000,15000,20000,25000,30000,40000,50000],"tables":{"5000":[{"age":45,"female":11,"male":14},{"age":50,"female":12,"male":15},{"age":55,"female":14,"male":18},{"age":60,"female":16,"male":22},{"age":65,"female":21,"male":28},{"age":70,"female":27,"male":37},{"age":75,"female":36,"male":50},{"age":80,"female":49,"male":70},{"age":85,"female":68,"male":96}],"10000":[{"age":45,"female":23,"male":27},{"age":50,"female":24,"male":31},{"age":55,"female":28,"male":36},{"age":60,"female":33,"male":44},{"age":65,"female":41,"male":56},{"age":70,"female":53,"male":75},{"age":75,"female":72,"male":100},{"age":80,"female":98,"male":140},{"age":85,"female":136,"male":193}],"15000":[{"age":45,"female":34,"male":40},{"age":50,"female":36,"male":46},{"age":55,"female":42,"male":54},{"age":60,"female":50,"male":66},{"age":65,"female":62,"male":84},{"age":70,"female":80,"male":112},{"age":75,"female":108,"male":150},{"age":80,"female":147,"male":210},{"age":85,"female":204,"male":290}],"20000":[{"age":45,"female":46,"male":54},{"age":50,"female":48,"male":62},{"age":55,"female":56,"male":72},{"age":60,"female":66,"male":88},{"age":65,"female":82,"male":112},{"age":70,"female":106,"male":150},{"age":75,"female":144,"male":200},{"age":80,"female":196,"male":280},{"age":85,"female":272,"male":386}],"25000":[{"age":45,"female":57,"male":68},{"age":50,"female":61,"male":77},{"age":55,"female":69,"male":90},{"age":60,"female":82,"male":109},{"age":65,"female":103,"male":141},{"age":70,"female":133,"male":187},{"age":75,"female":181,"male":250},{"age":80,"female":246,"male":349},{"age":85,"female":340,"male":482}],"30000":[{"age":45,"female":69,"male":81},{"age":50,"female":72,"male":93},{"age":55,"female":84,"male":108},{"age":60,"female":99,"male":132},{"age":65,"female":123,"male":168},{"age":70,"female":159,"male":225},{"age":75,"female":216,"male":300},{"age":80,"female":294,"male":420},{"age":85,"female":408,"male":579}],"40000":[{"age":45,"female":92,"male":108},{"age":50,"female":96,"male":124},{"age":55,"female":112,"male":144},{"age":60,"female":132,"male":176},{"age":65,"female":164,"male":224},{"age":70,"female":212,"male":300},{"age":75,"female":288,"male":400},{"age":80,"female":392,"male":560},{"age":85,"female":544,"male":772}],"50000":[{"age":45,"female":113,"male":136},{"age":50,"female":122,"male":153},{"age":55,"female":139,"male":180},{"age":60,"female":164,"male":219},{"age":65,"female":205,"male":282},{"age":70,"female":266,"male":373},{"age":75,"female":362,"male":500},{"age":80,"female":492,"male":699},{"age":85,"female":680,"male":964}]}},"whole_life_traditional":{"source":"Industry sample whole life rates (preferred / non-tobacco), rounded","rating":"Preferred / non-tobacco (illustrative)","as_of":"2026-03-09","note":"Illustrative traditional whole life monthly premiums for larger faces ($100,000\u2013$500,000), preferred/non-tobacco educational sample used on Mejor Vida\u2019s cost hub\u2014. Actual Julie quotes depend on carrier, health, state, and underwriting.","faces":[100000,250000,500000],"tables":{"100000":[{"age":40,"female":116,"male":132},{"age":45,"female":141,"male":163},{"age":50,"female":176,"male":202},{"age":55,"female":230,"male":257},{"age":60,"female":297,"male":334},{"age":65,"female":383,"male":434},{"age":70,"female":531,"male":594},{"age":75,"female":740,"male":834},{"age":80,"female":989,"male":1093},{"age":85,"female":1235,"male":1387}],"250000":[{"age":40,"female":279,"male":321},{"age":45,"female":341,"male":397},{"age":50,"female":432,"male":492},{"age":55,"female":565,"male":633},{"age":60,"female":734,"male":823},{"age":65,"female":947,"male":1074},{"age":70,"female":1318,"male":1477},{"age":75,"female":1841,"male":2074},{"age":80,"female":2463,"male":2722},{"age":85,"female":3078,"male":3458}],"500000":[{"age":40,"female":548,"male":631},{"age":45,"female":669,"male":779},{"age":50,"female":849,"male":969},{"age":55,"female":1111,"male":1247},{"age":60,"female":1447,"male":1624},{"age":65,"female":1869,"male":2121},{"age":70,"female":2603,"male":2918},{"age":75,"female":3639,"male":4100},{"age":80,"female":4871,"male":5478},{"age":85,"female":6089,"male":6841}]}}};</script>
+<script defer src="../js/life-insurance-cost.js?v=20260809-wl-multi-charts"></script>
 </body>
 </html>

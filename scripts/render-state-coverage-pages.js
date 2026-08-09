@@ -34,7 +34,7 @@ function avgOfBlock(block) {
 }
 
 /**
- * Choice Mutual–style state hero. Light-to-dark blue fade with right-side
+ * State hero. Light-to-dark blue fade with right-side
  * map+seal art; agent bar shows Julie’s license for that state (not authorship).
  */
 function stateHero(code, lang, prefix, imgPrefix) {

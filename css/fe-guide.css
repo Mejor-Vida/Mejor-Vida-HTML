@@ -1,4 +1,4 @@
-/* FE guide pages — editorial trust layout (Choice Mutual–style structure, MVI brand) */
+/* FE guide pages — editorial trust layout (editorial structure, MVI brand) */
 .fe-guide-hero {
   background: linear-gradient(135deg, #1a365d 0%, #2c5282 48%, #1e4a7a 100%);
   color: #fff;
@@ -473,7 +473,7 @@
 
 /* Homepage FAQ guide cards (index.html #final-expense-answers) */
 
-/* Choice Mutual–style image + title guide cards */
+/* editorial image + title guide cards */
 .fe-guide-media-grid {
   --fe-media-navy: #1a365d;
   max-width: 44rem;
@@ -670,7 +670,7 @@
   font-size: 0.95rem;
 }
 
-/* Sticky table of contents bar (Choice Mutual–style) */
+/* Sticky table of contents bar (editorial) */
 .fe-guide-toc-bar {
   position: sticky;
   top: 3.5rem;

@@ -100,7 +100,7 @@
     html.lang-es [data-lang="en"] { display: none !important; }
     html.lang-en [data-lang="es"] { display: none !important; }
 
-    /* —— Multi-step quote wizard (Choice Mutual–style) —— */
+    /* —— Multi-step quote wizard (editorial) —— */
     body.mvi-quote-wizard-page #mvi-assistant-root {
       display: none !important;
     }
@@ -260,7 +260,7 @@
       line-height: 1.3;
     }
 
-    /* Choice Mutual–style progress strip: pill bar, separate from question card */
+    /* editorial progress strip: pill bar, separate from question card */
     .mvi-quote-progress-strip {
       margin-bottom: 1.35rem;
       --mvi-progress-track: #fff6e0;

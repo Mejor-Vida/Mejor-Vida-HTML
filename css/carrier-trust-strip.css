@@ -1,4 +1,4 @@
-/* Choice Mutual–style carrier logo strip (homepage, under hero) */
+/* editorial carrier logo strip (homepage, under hero) */
 .mvi-carrier-trust-strip {
   flex-shrink: 0;
   background: #e8f2ee;
@@ -71,7 +71,7 @@
   height: clamp(26px, 3.4vw, 40px);
   max-width: min(148px, 13.5vw);
   object-fit: contain;
-  /* Monochrome charcoal look like Choice Mutual */
+  /* Monochrome charcoal look monochrome */
   filter: grayscale(1) contrast(1.08) brightness(0.42);
 }
 

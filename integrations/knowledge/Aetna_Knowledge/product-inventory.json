@@ -80,5 +80,19 @@
     "form": "CGFLP01577"
   },
   "lifeProductsComplete": true,
-  "note": "Portal life = Accendo FE + CLI Protection Series FE only (no term/GUL/IUL). Both julieInScope for NE/KS/CO/NV."
+  "note": "Portal life = Accendo FE + CLI Protection Series FE only (no term/GUL/IUL). Both julieInScope for NE/KS/CO/NV.",
+  "portalRecheck": "2026-08-09",
+  "harvest": "raw/harvest-20260809",
+  "rag": {
+    "staff_chunks_carrier": "aetna",
+    "staff_files": [
+      "MASTER_AETNA_FE_KNOWLEDGE.md",
+      "LIFE_PRODUCTS.md",
+      "MASTER_AETNA_UW_AND_AGENT.md",
+      "STATE_AVAILABILITY.md",
+      "MASTER_AETNA_DRUG_LIST.md"
+    ],
+    "public_csv": "scripts/knowledge_seed_aetna_fe.csv",
+    "public_source_name": "aetna_fe_public"
+  }
 }

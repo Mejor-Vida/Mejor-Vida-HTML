@@ -1,4 +1,4 @@
-/* Life insurance cost hub — Choice Mutual–style rates page */
+/* Life insurance cost hub — editorial rates page */
 
 .lic-page {
   --lic-navy: #0b3a7a;
@@ -745,7 +745,7 @@
   font-weight: 700;
 }
 
-/* Dedicated product cost pages — Choice Mutual–style split layout */
+/* Dedicated product cost pages — editorial split layout */
 .lic-layout--split {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(260px, 320px);

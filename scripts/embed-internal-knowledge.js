@@ -10,6 +10,7 @@
  *   node scripts/embed-internal-knowledge.js
  *   node scripts/embed-internal-knowledge.js --only=moo
  *   node scripts/embed-internal-knowledge.js --only=amam
+ *   node scripts/embed-internal-knowledge.js --only=amam --replace
  *   node scripts/embed-internal-knowledge.js --only=transamerica
  *   node scripts/embed-internal-knowledge.js --only=corebridge
  *   node scripts/embed-internal-knowledge.js --only=aetna
@@ -89,6 +90,39 @@ const DEFAULT_JOBS = [
     ),
     label: "Aetna life products inventory",
   },
+  {
+    carrier: "aetna",
+    file: path.join(
+      REPO_ROOT,
+      "integrations",
+      "knowledge",
+      "Aetna_Knowledge",
+      "MASTER_AETNA_UW_AND_AGENT.md",
+    ),
+    label: "Aetna FE underwriting & agent ops",
+  },
+  {
+    carrier: "aetna",
+    file: path.join(
+      REPO_ROOT,
+      "integrations",
+      "knowledge",
+      "Aetna_Knowledge",
+      "STATE_AVAILABILITY.md",
+    ),
+    label: "Aetna FE state availability",
+  },
+  {
+    carrier: "aetna",
+    file: path.join(
+      REPO_ROOT,
+      "integrations",
+      "knowledge",
+      "Aetna_Knowledge",
+      "MASTER_AETNA_DRUG_LIST.md",
+    ),
+    label: "Aetna Accendo FE drug list",
+  },
 ];
 
 const MAX_CHARS = 3400;
@@ -122,7 +156,7 @@ function inferCategory(title, bodySnippet) {
     return "compliance";
 
   if (
-    /\bgolden solution\b|\bfamily solution\b|\bfinal expense\b|\bprearrangement\b|\bburial\b|\bmodified whole life application\b|\bsimplinow\b|\bsiwl\b|\bgiwl\b|\bguaranteed issue whole life\b|\blegacy max\b/.test(
+    /\bgolden solution\b|\bsenior choice\b|\bfamily solution\b|\bfamily choice\b|\bfinal expense\b|\bprearrangement\b|\bburial\b|\bmodified whole life application\b|\bsimplinow\b|\bsiwl\b|\bgiwl\b|\bguaranteed issue whole life\b|\blegacy max\b/.test(
       t,
     )
   )
@@ -230,13 +264,16 @@ function splitBodyBySize(title, body, categoryHint) {
   return chunks;
 }
 
-function buildChunksFromMaster(md) {
+function buildChunksFromMaster(md, carrierLabel) {
+  const carrierLine = carrierLabel
+    ? `Carrier: ${carrierLabel}. This product/section belongs to ${carrierLabel}.\n\n`
+    : "";
   const sections = splitMarkdownSections(md);
   const out = [];
   for (const { title, body } of sections) {
     const hint = inferCategory(title, body.slice(0, 800));
     if (body.length <= MAX_CHARS) {
-      const content = `## ${title}\n\n${body}`.trim();
+      const content = `${carrierLine}## ${title}\n\n${body}`.trim();
       if (content.length >= MIN_CHARS) {
         out.push({
           product: normalizeProduct(title),
@@ -246,7 +283,11 @@ function buildChunksFromMaster(md) {
       }
       continue;
     }
-    out.push(...splitBodyBySize(title, body, hint));
+    const sized = splitBodyBySize(title, body, hint);
+    for (const c of sized) {
+      c.content = `${carrierLine}${c.content}`.trim();
+    }
+    out.push(...sized);
   }
   return out;
 }
@@ -331,8 +372,24 @@ async function countCarrierRows(baseUrl, key, carrier) {
   return Array.isArray(rows) ? rows.length : 0;
 }
 
+async function deleteCarrierChunks(baseUrl, key, carrier) {
+  const url = `${baseUrl}/rest/v1/internal_knowledge_chunks?carrier=eq.${encodeURIComponent(carrier)}`;
+  const r = await fetch(url, {
+    method: "DELETE",
+    headers: {
+      apikey: key,
+      Authorization: `Bearer ${key}`,
+      Prefer: "return=minimal",
+    },
+  });
+  if (!r.ok) {
+    const t = await r.text();
+    throw new Error(`Supabase delete internal_knowledge_chunks ${r.status}: ${t.slice(0, 400)}`);
+  }
+}
+
 function parseArgs(argv) {
-  const out = { only: null, carrier: null, file: null };
+  const out = { only: null, carrier: null, file: null, replace: false };
   for (let i = 2; i < argv.length; i++) {
     const a = argv[i];
     if (a === "--only=moo") out.only = "moo";
@@ -341,21 +398,25 @@ function parseArgs(argv) {
     else if (a === "--only=corebridge") out.only = "corebridge";
     else if (a === "--only=aetna") out.only = "aetna";
     else if (a === "--only=all" || a === "--only=both") out.only = "all";
+    else if (a === "--replace") out.replace = true;
     else if (a.startsWith("--carrier=")) out.carrier = a.slice("--carrier=".length).trim();
     else if (a.startsWith("--file=")) out.file = a.slice("--file=".length).trim();
   }
   return out;
 }
 
-async function embedJob(openaiKey, supabaseUrl, serviceKey, carrier, filePath, label) {
+async function embedJob(openaiKey, supabaseUrl, serviceKey, carrier, filePath, label, replaceAlreadyDone) {
   console.log("\n==========", label, `(${carrier})`, "==========");
   if (!fs.existsSync(filePath)) {
     console.log("SKIP — file not found:", filePath);
     return { skippedFile: true, inserted: 0, skipped: 0, byCat: {} };
   }
 
+  // `replace` is applied once per carrier in main(); do not delete again here.
+  void replaceAlreadyDone;
+
   const md = fs.readFileSync(filePath, "utf8");
-  const chunks = buildChunksFromMaster(md);
+  const chunks = buildChunksFromMaster(md, label);
   console.log("Prepared chunks:", chunks.length);
 
   let inserted = 0;
@@ -428,8 +489,22 @@ async function main() {
     jobs = jobs.filter((j) => j.carrier === "aetna");
   }
 
+  const replacedCarriers = new Set();
   for (const job of jobs) {
-    await embedJob(openaiKey, supabaseUrl, serviceKey, job.carrier, job.file, job.label);
+    if (args.replace && !replacedCarriers.has(job.carrier)) {
+      console.log("\nREPLACE — deleting existing rows for", job.carrier);
+      await deleteCarrierChunks(supabaseUrl, serviceKey, job.carrier);
+      replacedCarriers.add(job.carrier);
+    }
+    await embedJob(
+      openaiKey,
+      supabaseUrl,
+      serviceKey,
+      job.carrier,
+      job.file,
+      job.label,
+      args.replace,
+    );
   }
 
   console.log("\n========== TOTAL ROWS BY CARRIER (internal_knowledge_chunks) ==========");

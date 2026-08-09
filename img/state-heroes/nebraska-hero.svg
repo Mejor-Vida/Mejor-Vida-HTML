@@ -12,7 +12,7 @@
     </filter>
   </defs>
   <path d="M 28,78 C 120,72 280,62 420,55 C 560,48 720,42 880,38 L 972,36 L 978,118 C 982,160 985,210 988,255 C 990,295 992,330 990,358 L 982,388 L 40,402 L 28,320 L 22,220 L 24,140 Z" fill="url(#neFill)" stroke="#dbeafe" stroke-width="3" stroke-linejoin="round"/>
-  <!-- State seal (southeast-center, Choice Mutual style) -->
+  <!-- State seal (southeast-center, editorial style) -->
   <image href="nebraska-state-seal.png" x="620" y="95" width="210" height="210" opacity="0.92"/>
   <!-- Lincoln star -->
   <g transform="translate(780,285)" filter="url(#softGlow)">

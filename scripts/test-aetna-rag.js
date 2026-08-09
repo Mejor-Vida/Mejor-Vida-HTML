@@ -133,6 +133,18 @@ const CASES = [
     q: "In which states can Julie quote Aetna Accendo or Protection Series final expense?",
     must: [/Nebraska|NE/i, /Kansas|KS/i, /Colorado|CO/i, /Nevada|NV/i],
   },
+  {
+    name: "uw_quote_enroll",
+    q: "How does Aetna Quote and Enroll automated underwriting work with Milliman?",
+    must: [/Milliman|IntelliScript/i, /Approved|Declined|Additional Review|Real-Time/i],
+    staffOnly: true,
+  },
+  {
+    name: "drug_list_usage",
+    q: "How should an agent use the Accendo Final Expense drug list for Preferred vs Modified?",
+    must: [/Preferred|Standard|Modified/i, /drug|medication|unacceptable/i],
+    staffOnly: true,
+  },
 ];
 
 async function runCase(apiKey, supabaseUrl, serviceKey, c, mode) {
@@ -173,6 +185,7 @@ async function main() {
   for (const mode of ["staff", "public"]) {
     console.log(`\n===== ${mode.toUpperCase()} RAG =====`);
     for (const c of CASES) {
+      if (c.staffOnly && mode !== "staff") continue;
       const res = await runCase(apiKey, supabaseUrl, serviceKey, c, mode);
       const mark = res.ok ? "PASS" : "FAIL";
       if (!res.ok) failed++;

@@ -7,6 +7,18 @@
 
 ---
 
+## QUICK FACTS — Carrier ↔ Product (staff RAG)
+
+**Which carrier sells Senior Choice whole life?**  
+**American Amicable** (American Amicable Life Insurance Company of Texas) sells **Senior Choice®** — simplified-issue whole life / final expense for ages **50–85**. Face amounts typically **$2,500–$50,000**. Plans include Immediate, Graded, and Return of Premium. Common riders: Confined Care, Terminal Illness, Nursing Home Waiver of Premium, Grandchild (GCIA). Julie at Mejor Vida quotes Senior Choice in Nebraska, Kansas, Colorado, and Nevada when appointed.
+
+**Which carrier sells Golden Solution?**  
+Also **American Amicable**. Golden Solution® is final expense whole life ages **50–85**, typically up to **$25,000** face (same three benefit designs as Senior Choice).
+
+**American Amicable final expense product names to remember:** Senior Choice®, Golden Solution®, Family Choice®, Family Solution®.
+
+---
+
 # American Amicable — Complete Web Portal Extracted Data
 **Carrier:** American Amicable Life Insurance Company of Texas
 **Portal:** americanamicable.com (Agent 1182375)
@@ -122,9 +134,10 @@
 ---
 
 ### 6. Senior Choice (Ages 50-85)
+**Carrier:** American Amicable Life Insurance Company of Texas sells Senior Choice®.
 **Type:** Whole Life Insurance — Final Expense
 **Target Market:** Seniors ages 50-85, final expense market
-**Description:** Simplified approach to purchasing life insurance
+**Description:** Simplified approach to purchasing life insurance. Senior Choice is an American Amicable product (not Mutual of Omaha, not Transamerica, not Corebridge).
 **Available Riders:**
 - Confined Care Rider
 - Terminal Illness Accelerated Benefit Rider

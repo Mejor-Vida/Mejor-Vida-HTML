@@ -138,6 +138,7 @@
               " Rangos de edad: temporal 10 años 20–80; 20 años 20–65; 30 años 20–55 (como los cuadros de muestra habituales).",
             bucketNotePrefix: {
               whole_life: "Primas mensuales ilustrativas (redondeadas). Clasificación: ",
+              whole_life_traditional: "Primas mensuales ilustrativas (redondeadas). Clasificación: ",
               final_expense: "Primas mensuales ilustrativas (redondeadas). Banda: ",
               guaranteed: "Primas mensuales ilustrativas (redondeadas). Banda: ",
               universal_life: "Vida universal / IUL: ",
@@ -145,6 +146,8 @@
             bucketNoteSuffix: {
               whole_life:
                 ". Edades 45–85 (cada 5 años). Motor quote_ranges de Mejor Vida (MOO Living Promise + AmAm); banda permanente simplificada; no es cotización vinculante.",
+              whole_life_traditional:
+                ". Edades 40–85 (cada 5 años). Muestra educativa de vida entera tradicional del hub de Mejor Vida (preferred / no fumador)—no es el motor quote_ranges; Julie ilustra montos altos caso por caso.",
               final_expense:
                 ". Edades 45–85 (cada 5 años). Motor quote_ranges de Mejor Vida (MOO + AmAm); no es cotización vinculante.",
               guaranteed:
@@ -164,6 +167,7 @@
               " Age ranges: 10-year term 20–80; 20-year 20–65; 30-year 20–55 (matching typical published sample charts).",
             bucketNotePrefix: {
               whole_life: "Illustrative monthly premiums (rounded). Rating class: ",
+              whole_life_traditional: "Illustrative monthly premiums (rounded). Rating class: ",
               final_expense: "Illustrative monthly premiums (rounded). Band: ",
               guaranteed: "Illustrative monthly premiums (rounded). Band: ",
               universal_life: "Universal / IUL: ",
@@ -171,6 +175,8 @@
             bucketNoteSuffix: {
               whole_life:
                 ". Ages 45–85 (every 5 years). Mejor Vida quote_ranges engine (MOO Living Promise + AmAm); simplified permanent band; not a binding quote.",
+              whole_life_traditional:
+                ". Ages 40–85 (every 5 years). Educational traditional whole life sample from Mejor Vida’s cost hub (preferred / non-tobacco)—not the quote_ranges engine; Julie illustrates larger faces case by case.",
               final_expense:
                 ". Ages 45–85 (every 5 years). Mejor Vida quote_ranges engine (MOO + AmAm); not a binding quote.",
               guaranteed:
@@ -183,6 +189,8 @@
 
     var bucketByProduct = {
       whole: "whole_life",
+      "whole-trad": "whole_life_traditional",
+      "whole_traditional": "whole_life_traditional",
       fe: "final_expense",
       "final-expense": "final_expense",
       gi: "guaranteed",
