@@ -1,0 +1,209 @@
+/* Homepage — “Why Families Choose Mejor Vida” carousel (Choice Mutual–inspired layout, MVI brand) */
+
+.mvi-home-diff {
+  --mvi-diff-navy: #1a365d;
+  --mvi-diff-gold: #f5c518;
+  --mvi-diff-gold-deep: #c9920a;
+  --mvi-diff-cream: #f8f6f1;
+  --mvi-diff-ink: #334155;
+  padding: clamp(2.75rem, 5vw, 3.75rem) 0 clamp(2.5rem, 4vw, 3.25rem);
+  background: #ffffff;
+}
+
+.mvi-home-diff__inner {
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+.mvi-home-diff__title {
+  margin: 0 0 clamp(1.35rem, 3vw, 1.85rem);
+  color: var(--mvi-diff-navy);
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: clamp(1.65rem, 2.6vw, 2.35rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.mvi-home-diff__viewport {
+  position: relative;
+  margin-inline: calc(-1 * clamp(0.25rem, 2vw, 0.75rem));
+}
+
+.mvi-home-diff__track {
+  display: flex;
+  gap: clamp(0.85rem, 2vw, 1.35rem);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  padding: 0.35rem clamp(0.75rem, 3vw, 1.5rem) 1rem;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.mvi-home-diff__track::-webkit-scrollbar {
+  display: none;
+}
+
+.mvi-home-diff__card {
+  --mvi-diff-rail: #d6e6f7;
+  --mvi-diff-title: var(--mvi-diff-navy);
+  flex: 0 0 min(88vw, 40.5rem);
+  scroll-snap-align: center;
+  display: grid;
+  grid-template-columns: minmax(7.25rem, 0.34fr) minmax(0, 1fr);
+  align-items: stretch;
+  min-height: 13.5rem;
+  border-radius: 1rem;
+  overflow: hidden;
+  background: var(--mvi-diff-cream);
+  box-shadow: 0 8px 28px rgba(26, 54, 93, 0.09);
+}
+
+.mvi-home-diff__card--choice {
+  --mvi-diff-rail: #d4e4f6;
+  --mvi-diff-title: #163a66;
+}
+
+.mvi-home-diff__card--client {
+  --mvi-diff-rail: #f3e6b5;
+  --mvi-diff-title: #1a365d;
+}
+
+.mvi-home-diff__card--julie {
+  --mvi-diff-rail: #e4eef9;
+  --mvi-diff-title: #1a365d;
+}
+
+.mvi-home-diff__rail {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  padding: clamp(1.25rem, 2.5vw, 1.75rem) 0.85rem clamp(1.25rem, 2.5vw, 1.75rem) clamp(1.15rem, 2.2vw, 1.6rem);
+  background: var(--mvi-diff-rail);
+}
+
+/* Soft wavy edge into the body panel */
+.mvi-home-diff__rail::after {
+  content: "";
+  position: absolute;
+  top: -6%;
+  right: -1.65rem;
+  width: 2.35rem;
+  height: 112%;
+  background: var(--mvi-diff-rail);
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 200' preserveAspectRatio='none'%3E%3Cpath fill='%23000' d='M0 0h18c6 18 2 36 10 54s14 34 6 52-10 36 2 54c6 12 4 28 4 40H0z'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 200' preserveAspectRatio='none'%3E%3Cpath fill='%23000' d='M0 0h18c6 18 2 36 10 54s14 34 6 52-10 36 2 54c6 12 4 28 4 40H0z'/%3E%3C/svg%3E");
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  pointer-events: none;
+}
+
+.mvi-home-diff__rail h3 {
+  margin: 0;
+  max-width: 9.5rem;
+  color: var(--mvi-diff-title);
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: clamp(1.15rem, 1.7vw, 1.45rem);
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.mvi-home-diff__body {
+  position: relative;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  padding: clamp(1.2rem, 2.4vw, 1.65rem) clamp(1.2rem, 2.5vw, 1.85rem) clamp(1.2rem, 2.4vw, 1.65rem) clamp(1.6rem, 3vw, 2.15rem);
+  background: var(--mvi-diff-cream);
+}
+
+.mvi-home-diff__body p {
+  margin: 0;
+  color: var(--mvi-diff-ink);
+  font-size: clamp(0.95rem, 1.15vw, 1.05rem);
+  line-height: 1.65;
+}
+
+.mvi-home-diff__nav {
+  display: flex;
+  justify-content: center;
+  gap: 0.65rem;
+  margin-top: 0.35rem;
+}
+
+.mvi-home-diff__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  border: none;
+  border-radius: 0.55rem;
+  background: var(--mvi-diff-gold);
+  color: var(--mvi-diff-navy);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, opacity 0.15s ease;
+}
+
+.mvi-home-diff__btn:hover:not(:disabled),
+.mvi-home-diff__btn:focus-visible {
+  background: #e0b000;
+  outline: 2px solid rgba(26, 54, 93, 0.25);
+  outline-offset: 2px;
+}
+
+.mvi-home-diff__btn:disabled {
+  background: #e7eef6;
+  color: #7a8aa0;
+  cursor: default;
+  opacity: 0.85;
+}
+
+.mvi-home-diff__arrow {
+  display: block;
+  width: 1.15rem;
+  height: 1.15rem;
+}
+
+@media (max-width: 575.98px) {
+  .mvi-home-diff__card {
+    flex-basis: min(92vw, 24rem);
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+
+  .mvi-home-diff__rail {
+    padding: 1.2rem 1.25rem 1.55rem;
+    align-items: flex-start;
+  }
+
+  .mvi-home-diff__rail::after {
+    top: auto;
+    right: -4%;
+    bottom: -1.15rem;
+    left: -4%;
+    width: 108%;
+    height: 1.85rem;
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 40' preserveAspectRatio='none'%3E%3Cpath fill='%23000' d='M0 0v18c18 6 36 2 54 10s34 14 52 6 36-10 54 2c12 6 28 4 40 4V0z'/%3E%3C/svg%3E");
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 40' preserveAspectRatio='none'%3E%3Cpath fill='%23000' d='M0 0v18c18 6 36 2 54 10s34 14 52 6 36-10 54 2c12 6 28 4 40 4V0z'/%3E%3C/svg%3E");
+  }
+
+  .mvi-home-diff__rail h3 {
+    max-width: none;
+  }
+
+  .mvi-home-diff__body {
+    padding: 1.35rem 1.25rem 1.35rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mvi-home-diff__track {
+    scroll-behavior: auto;
+  }
+}
