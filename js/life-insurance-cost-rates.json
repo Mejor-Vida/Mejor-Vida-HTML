@@ -2,7 +2,7 @@
   "source": "Industry sample rates for healthy preferred non-tobacco applicants (rounded)",
   "rating": "Preferred non-tobacco (illustrative)",
   "as_of": "2026-03-09",
-  "note": "Illustrative monthly premiums for healthy preferred non-tobacco applicants, rounded, aligned with common industry term charts. Age ranges match typical published samples (10-year: 20–80; 20-year: 20–65; 30-year: 20–55). Figures are educational samples—not a carrier quote. Actual Mejor Vida prices depend on appointed carriers, health, state, and underwriting.",
+  "note": "Illustrative monthly premiums for healthy preferred non-tobacco applicants, rounded, aligned with common industry term charts. Age ranges match typical published samples (10-year: 20\u201380; 20-year: 20\u201365; 30-year: 20\u201355). Figures are educational samples\u2014not a carrier quote. Actual Mejor Vida prices depend on appointed carriers, health, state, and underwriting.",
   "faces": [
     100000,
     250000,
@@ -671,7 +671,7 @@
     "source": "Industry sample whole life rates (preferred / non-tobacco), rounded",
     "rating": "Preferred / non-tobacco (illustrative)",
     "as_of": "2026-03-09",
-    "note": "Illustrative whole life monthly premiums by age for $50,000–$500,000. Educational samples aligned with common published charts (~+5% vs public sample figures)—not a carrier quote. Actual Mejor Vida prices depend on appointed carriers, health, state, and underwriting.",
+    "note": "Illustrative whole life monthly premiums by age for $50,000\u2013$500,000. Educational samples aligned with common published charts (~+5% vs public sample figures)\u2014not a carrier quote. Actual Mejor Vida prices depend on appointed carriers, health, state, and underwriting.",
     "faces": [
       50000,
       100000,
@@ -970,10 +970,10 @@
     }
   },
   "final_expense": {
-    "source": "Industry sample final expense rates (non-tobacco), rounded",
-    "rating": "Non-tobacco (illustrative)",
-    "as_of": "2026-03-09",
-    "note": "Illustrative final expense monthly premiums for $5,000–$50,000. Educational samples aligned with common published charts (~+5% vs public sample figures)—not a carrier quote. Actual offers vary by health, tobacco, carrier, and state.",
+    "source": "Transamerica Final Expense Portfolio \u2014 Immediate (Preferred Nontobacco)",
+    "rating": "Preferred nontobacco (illustrative)",
+    "as_of": "2026-08-08",
+    "note": "Illustrative monthly EFT premiums from Transamerica Final Expense Portfolio Agent Guide rates (Immediate / Preferred Nontobacco): (rate per $1,000 \u00d7 units + $42 policy fee) \u00d7 0.086. Rounded to nearest dollar. Educational only\u2014not a binding quote. Actual Mejor Vida offers vary by carrier, health, tobacco, state, and underwriting.",
     "faces": [
       5000,
       10000,
@@ -984,279 +984,209 @@
       "5000": [
         {
           "age": 40,
-          "female": 13,
-          "male": 15
+          "female": 12,
+          "male": 14
         },
         {
           "age": 45,
-          "female": 14,
+          "female": 13,
           "male": 16
         },
         {
           "age": 50,
-          "female": 15,
-          "male": 18
+          "female": 14,
+          "male": 17
         },
         {
           "age": 55,
           "female": 16,
-          "male": 21
+          "male": 20
         },
         {
           "age": 60,
-          "female": 19,
+          "female": 18,
           "male": 24
         },
         {
           "age": 65,
-          "female": 23,
-          "male": 30
+          "female": 22,
+          "male": 29
         },
         {
           "age": 70,
-          "female": 29,
-          "male": 39
+          "female": 28,
+          "male": 37
         },
         {
           "age": 75,
-          "female": 39,
-          "male": 52
+          "female": 37,
+          "male": 50
         },
         {
           "age": 80,
           "female": 52,
-          "male": 72
+          "male": 70
         },
         {
           "age": 85,
-          "female": 71,
-          "male": 100
-        },
-        {
-          "age": 86,
-          "female": 91,
-          "male": 126
-        },
-        {
-          "age": 87,
-          "female": 110,
-          "male": 147
-        },
-        {
-          "age": 88,
-          "female": 127,
-          "male": 168
-        },
-        {
-          "age": 89,
-          "female": 138,
-          "male": 190
-        },
-        {
-          "age": 90,
-          "female": 158,
-          "male": 186
+          "female": 81,
+          "male": 109
         }
       ],
       "10000": [
         {
           "age": 40,
-          "female": 22,
-          "male": 26
+          "female": 21,
+          "male": 25
         },
         {
           "age": 45,
-          "female": 24,
+          "female": 23,
           "male": 28
         },
         {
           "age": 50,
-          "female": 25,
-          "male": 33
+          "female": 24,
+          "male": 31
         },
         {
           "age": 55,
-          "female": 29,
-          "male": 38
+          "female": 28,
+          "male": 36
         },
         {
           "age": 60,
-          "female": 35,
-          "male": 45
+          "female": 33,
+          "male": 43
         },
         {
           "age": 65,
-          "female": 43,
-          "male": 57
+          "female": 41,
+          "male": 54
         },
         {
           "age": 70,
-          "female": 56,
-          "male": 74
+          "female": 53,
+          "male": 70
         },
         {
           "age": 75,
-          "female": 75,
-          "male": 102
+          "female": 71,
+          "male": 97
         },
         {
           "age": 80,
-          "female": 103,
-          "male": 142
+          "female": 101,
+          "male": 136
         },
         {
           "age": 85,
-          "female": 143,
-          "male": 187
-        },
-        {
-          "age": 86,
-          "female": 180,
-          "male": 248
-        },
-        {
-          "age": 87,
-          "female": 216,
-          "male": 291
-        },
-        {
-          "age": 88,
-          "female": 253,
-          "male": 333
-        },
-        {
-          "age": 89,
-          "female": 273,
-          "male": 375
-        },
-        {
-          "age": 90,
-          "female": 315,
-          "male": 372
+          "female": 159,
+          "male": 214
         }
       ],
       "25000": [
         {
           "age": 40,
-          "female": 49,
-          "male": 60
+          "female": 47,
+          "male": 57
         },
         {
           "age": 45,
-          "female": 55,
-          "male": 66
+          "female": 52,
+          "male": 64
         },
         {
           "age": 50,
-          "female": 58,
-          "male": 75
+          "female": 55,
+          "male": 71
         },
         {
           "age": 55,
-          "female": 67,
-          "male": 88
+          "female": 64,
+          "male": 84
         },
         {
           "age": 60,
-          "female": 80,
-          "male": 108
+          "female": 76,
+          "male": 103
         },
         {
           "age": 65,
-          "female": 102,
-          "male": 136
+          "female": 97,
+          "male": 130
         },
         {
           "age": 70,
-          "female": 133,
-          "male": 177
+          "female": 127,
+          "male": 169
         },
         {
           "age": 75,
-          "female": 181,
-          "male": 250
+          "female": 172,
+          "male": 238
         },
         {
           "age": 80,
-          "female": 253,
-          "male": 349
+          "female": 248,
+          "male": 335
         },
         {
           "age": 85,
-          "female": 352,
-          "male": 462
-        },
-        {
-          "age": 86,
-          "female": 444,
-          "male": 614
-        },
-        {
-          "age": 87,
-          "female": 536,
-          "male": 720
-        },
-        {
-          "age": 88,
-          "female": 626,
-          "male": 827
-        },
-        {
-          "age": 89,
-          "female": 684,
-          "male": 932
+          "female": 391,
+          "male": 529
         }
       ],
       "50000": [
         {
           "age": 40,
-          "female": 96,
-          "male": 116
+          "female": 91,
+          "male": 110
         },
         {
           "age": 45,
-          "female": 105,
-          "male": 122
+          "female": 101,
+          "male": 124
         },
         {
           "age": 50,
-          "female": 112,
-          "male": 145
+          "female": 107,
+          "male": 138
         },
         {
           "age": 55,
-          "female": 130,
-          "male": 172
+          "female": 124,
+          "male": 164
         },
         {
           "age": 60,
-          "female": 160,
-          "male": 216
+          "female": 149,
+          "male": 203
         },
         {
           "age": 65,
-          "female": 202,
-          "male": 284
+          "female": 189,
+          "male": 255
         },
         {
           "age": 70,
-          "female": 266,
-          "male": 378
+          "female": 250,
+          "male": 334
         },
         {
           "age": 75,
-          "female": 366,
-          "male": 511
+          "female": 340,
+          "male": 472
         },
         {
           "age": 80,
-          "female": 503,
-          "male": 720
+          "female": 492,
+          "male": 667
         },
         {
           "age": 85,
-          "female": 700,
-          "male": 999
+          "female": 779,
+          "male": 1055
         }
       ]
     }
@@ -1265,7 +1195,7 @@
     "source": "Industry sample guaranteed-acceptance rates, rounded",
     "rating": "Guaranteed acceptance / graded (illustrative)",
     "as_of": "2026-03-09",
-    "note": "Illustrative monthly premiums for $10,000–$25,000 guaranteed acceptance. Educational samples aligned with common published charts—not a carrier quote. Actual GI / graded offers vary by carrier, state, and product.",
+    "note": "Illustrative monthly premiums for $10,000\u2013$25,000 guaranteed acceptance. Educational samples aligned with common published charts\u2014not a carrier quote. Actual GI / graded offers vary by carrier, state, and product.",
     "faces": [
       10000,
       15000,
@@ -1467,7 +1397,7 @@
     "source": "Industry sample universal life rates (preferred non-tobacco), rounded",
     "rating": "Preferred non-tobacco (illustrative)",
     "as_of": "2026-03-09",
-    "note": "Illustrative universal life monthly premiums by age for $50,000–$500,000. Educational samples (~+5% vs public sample figures)—not a carrier quote. Actual UL/IUL cost depends on funding, caps, charges, health, and underwriting; Julie can run a carrier illustration.",
+    "note": "Illustrative universal life monthly premiums by age for $50,000\u2013$500,000. Educational samples (~+5% vs public sample figures)\u2014not a carrier quote. Actual UL/IUL cost depends on funding, caps, charges, health, and underwriting; Julie can run a carrier illustration.",
     "faces": [
       50000,
       100000,

@@ -160,6 +160,14 @@
   background: #fafbfc;
 }
 
+.nav-life-options-grid--cost {
+  grid-template-columns: 1fr;
+}
+
+.nav-life-options-grid--cost a {
+  padding: 0.55rem 0.65rem;
+}
+
 .nav-life-panel[data-life-panel="cost"] .nav-life-feature--cm {
   min-height: 100%;
   height: calc(100% - 1.5rem);

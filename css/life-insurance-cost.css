@@ -469,6 +469,59 @@
   margin: 0 0 0.85rem;
 }
 
+/* Cost-factor summary grid (CM-style overview, MVI brand) */
+.lic-factor-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem 1.25rem;
+  margin: 0 0 1.5rem;
+  padding: 1.15rem 1.1rem 1.05rem;
+  background: var(--lic-soft);
+  border: 1px solid #d5e4f5;
+  border-radius: 0.55rem;
+}
+
+@media (min-width: 640px) {
+  .lic-factor-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.lic-factor-card {
+  display: grid;
+  grid-template-columns: 2.35rem 1fr;
+  gap: 0.65rem 0.85rem;
+  align-items: start;
+}
+
+.lic-factor-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.35rem;
+  height: 2.35rem;
+  border-radius: 50%;
+  background: #fff;
+  border: 1px solid #c8daf0;
+  color: var(--lic-navy);
+  font-size: 1rem;
+}
+
+.lic-factor-card h3 {
+  margin: 0 0 0.25rem;
+  color: var(--lic-navy);
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.lic-factor-card p {
+  margin: 0;
+  color: var(--lic-muted);
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
 .lic-callout {
   margin: 0 0 1rem;
   padding: 0.85rem 1rem;
@@ -631,4 +684,139 @@
 .lic-helpful a {
   color: #0b3a7a;
   font-weight: 700;
+}
+
+/* Dedicated product cost pages — Choice Mutual–style split layout */
+.lic-layout--split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 320px);
+  gap: 1.25rem;
+  align-items: start;
+  max-width: 1120px;
+}
+
+.lic-aside {
+  position: sticky;
+  top: 5.5rem;
+}
+
+.lic-quote-card {
+  background: #123a66;
+  color: #fff;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.18);
+}
+
+.lic-quote-card__head {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 1rem 1.1rem 0.75rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.lic-quote-card__head img {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 999px;
+  object-fit: cover;
+  background: #fff;
+}
+
+.lic-quote-card__head strong {
+  display: block;
+  font-size: 0.98rem;
+  line-height: 1.25;
+}
+
+.lic-quote-card__body {
+  padding: 1rem 1.1rem 1.15rem;
+}
+
+.lic-quote-card__checks {
+  margin: 0 0 1rem;
+  padding: 0;
+  list-style: none;
+}
+
+.lic-quote-card__checks li {
+  position: relative;
+  padding: 0.2rem 0 0.2rem 1.35rem;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.lic-quote-card__checks li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  top: 0.2rem;
+  color: #f5c518;
+  font-weight: 800;
+}
+
+.lic-quote-card__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  background: #f5c518;
+  color: #1a365d;
+  font-weight: 800;
+  text-decoration: none;
+  text-align: center;
+}
+
+.lic-quote-card__cta:hover,
+.lic-quote-card__cta:focus-visible {
+  background: #e0b000;
+  color: #1a365d;
+}
+
+.lic-quote-card__note {
+  margin: 0.65rem 0 0;
+  font-size: 0.78rem;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.72);
+  text-align: center;
+}
+
+.lic-byline {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.65rem 1rem;
+  margin-top: 1.15rem;
+  font-size: 0.88rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.lic-byline img {
+  width: 2.35rem;
+  height: 2.35rem;
+  border-radius: 999px;
+  object-fit: cover;
+  border: 2px solid rgba(255, 255, 255, 0.55);
+}
+
+.lic-byline a {
+  color: #fff;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+@media (max-width: 991.98px) {
+  .lic-layout--split {
+    grid-template-columns: 1fr;
+  }
+
+  .lic-aside {
+    position: static;
+    order: -1;
+  }
 }

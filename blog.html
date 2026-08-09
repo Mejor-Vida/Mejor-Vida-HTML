@@ -52,7 +52,7 @@
 <link href="css/nav-questions-dropdown.css" rel="stylesheet"/>
 <link href="css/nav-about-mega.css?v=20260721-lip-page" rel="stylesheet"/>
 <link href="css/nav-funeral-resources.css?v=20260728-photo-stronger" rel="stylesheet"/>
-<link href="css/nav-life-insurance.css?v=20260728-map-type" rel="stylesheet"/>
+<link href="css/nav-life-insurance.css?v=20260808-cost-types" rel="stylesheet"/>
 <!-- JSON-LD: Blog schema (page) -->
 <script type="application/ld+json">
   {
@@ -396,10 +396,14 @@
                 <button type="button" class="nav-life-category is-active" data-life-panel="coverage" aria-pressed="true">
                   <i class="fas fa-umbrella" aria-hidden="true"></i>
                   <span>Opciones de cobertura</span>
-              </button>
+                </button>
                 <button type="button" class="nav-life-category" data-life-panel="cost" aria-pressed="false">
                   <i class="fas fa-dollar-sign" aria-hidden="true"></i>
                   <span>Costo del seguro</span>
+                </button>
+                <button type="button" class="nav-life-category" data-life-panel="by-state" aria-pressed="false">
+                  <i class="fas fa-map-marked-alt" aria-hidden="true"></i>
+                  <span>Cobertura por estado</span>
                 </button>
               </div>
               <div class="nav-life-panel is-active" data-life-panel="coverage">
@@ -429,9 +433,19 @@
                   </picture>
                 </div>
               </a>
-            </div>
+              </div>
               <div class="nav-life-panel" data-life-panel="cost" hidden>
-              <div class="nav-life-cost-middle" data-nav-cost-slot aria-hidden="true"></div>
+              <div class="nav-life-cost-middle" data-nav-cost-slot>
+                <div class="nav-life-options">
+                  <h3>Tipos de seguro</h3>
+                  <div class="nav-life-options-grid nav-life-options-grid--cost">
+                    <a href="costo-seguro-gastos-finales.html">Seguro de gastos finales</a>
+                    <a href="costo-seguro-vida.html#term-20">Seguro de vida temporal</a>
+                    <a href="costo-seguro-vida.html#whole-life">Seguro de vida entera</a>
+                    <a href="costo-seguro-vida.html#children">Seguro de vida infantil</a>
+                  </div>
+                </div>
+              </div>
               <a class="nav-life-feature nav-life-feature--cm" href="costo-seguro-vida.html">
                 <div class="nav-life-feature-media" aria-hidden="true">
                   <picture>
@@ -445,10 +459,33 @@
                       decoding="async"
                     />
                   </picture>
-          </div>
+                </div>
                 <div class="nav-life-feature-copy">
                   <h3>Obtener cobertura asequible</h3>
                   <p>Vea cuánto cuesta el <span class="nav-life-feature-em">seguro de vida</span> según el tipo de póliza y el monto.</p>
+                </div>
+              </a>
+              </div>
+              <div class="nav-life-panel" data-life-panel="by-state" hidden>
+              <div class="nav-life-options">
+                <h3>Estados con licencia</h3>
+                <div class="nav-life-options-grid">
+                  <a href="estados/nebraska.html">Nebraska</a>
+                  <a href="estados/kansas.html">Kansas</a>
+                  <a href="estados/colorado.html">Colorado</a>
+                  <a href="estados/nevada.html">Nevada</a>
+                </div>
+              </div>
+              <a class="nav-life-feature nav-life-feature--map" href="index.html#licensing-map">
+                <div class="nav-life-feature-copy">
+                  <h3>Vea el mapa de cobertura</h3>
+                  <p>Julie está licenciada en Nebraska, Kansas, Colorado y Nevada. Elija su estado para costos y opciones locales.</p>
+                </div>
+                <div class="nav-life-feature-media" aria-hidden="true">
+                  <picture>
+                    <source type="image/webp" srcset="img/opt/usa-coverage-map.webp" />
+                    <img src="img/opt/usa-coverage-map.jpg" alt="" width="800" height="533" loading="lazy" decoding="async" />
+                  </picture>
                 </div>
               </a>
               </div>
@@ -512,7 +549,13 @@
                 </div>
               </button>
               <div class="nav-about-mega-contact">
-                <div>
+                <div class="nav-about-mega-contact-media" aria-hidden="true">
+                  <picture>
+                    <source type="image/webp" srcset="img/opt/about-help-hikers.webp" />
+                    <img src="img/opt/about-help-hikers.jpg" alt="" width="800" height="571" loading="lazy" decoding="async" />
+                  </picture>
+                </div>
+                <div class="nav-about-mega-contact-copy">
                   <h3>Estamos aquí para ayudar.</h3>
                   <p>Hable con una agente licenciada por teléfono, WhatsApp o nuestro formulario de contacto.</p>
                 </div>
@@ -547,11 +590,11 @@
           <i class="fas fa-chevron-down" aria-hidden="true"></i>
         </button>
         <div class="mobile-menu-panel" id="mm-about" role="region" aria-labelledby="mm-about-btn" hidden>
-      <a href="about-julie.html" class="mobile-menu-link">Conozca a la fundadora</a>
-      <a href="contact.html" class="mobile-menu-link">Contacto</a>
-      <a href="/schedule-julie.html" class="mobile-menu-link">Agendar una llamada</a>
-      <a href="guias-gastos-finales.html" class="mobile-menu-link">FAQs</a>
-      <a href="licencias.html" class="mobile-menu-link">Licencias</a>
+          <a href="about-julie.html" class="mobile-menu-link">Conozca a la fundadora</a>
+          <a href="contact.html" class="mobile-menu-link">Contacto</a>
+          <a href="/schedule-julie.html" class="mobile-menu-link">Agendar una llamada</a>
+          <a href="guias-gastos-finales.html" class="mobile-menu-link">FAQs</a>
+          <a href="licencias.html" class="mobile-menu-link">Licencias</a>
         </div>
       </div>
 
@@ -578,6 +621,10 @@
         <div class="mobile-menu-panel" id="mm-life" role="region" aria-labelledby="mm-life-btn" hidden>
           <a href="tipos-seguro-vida.html" class="mobile-menu-link">Tipos de seguro de vida</a>
           <a href="guias-gastos-finales.html" class="mobile-menu-link">Seguro de gastos finales</a>
+          <a href="estados/nebraska.html" class="mobile-menu-link">Cobertura en Nebraska</a>
+          <a href="estados/kansas.html" class="mobile-menu-link">Cobertura en Kansas</a>
+          <a href="estados/colorado.html" class="mobile-menu-link">Cobertura en Colorado</a>
+          <a href="estados/nevada.html" class="mobile-menu-link">Cobertura en Nevada</a>
           <a href="term-quote.html" class="mobile-menu-link">Seguro de vida temporal</a>
           <a href="costo-seguro-vida.html" class="mobile-menu-link">Costo del seguro</a>
           <a href="quote.html" class="mobile-menu-link">Seguro de vida de emisión inmediata</a>

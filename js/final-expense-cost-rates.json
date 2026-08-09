@@ -1,0 +1,224 @@
+{
+  "final_expense": {
+    "source": "Transamerica Final Expense Portfolio \u2014 Immediate (Preferred Nontobacco)",
+    "rating": "Preferred nontobacco (illustrative)",
+    "as_of": "2026-08-08",
+    "note": "Illustrative monthly EFT premiums from Transamerica Final Expense Portfolio Agent Guide rates (Immediate / Preferred Nontobacco): (rate per $1,000 \u00d7 units + $42 policy fee) \u00d7 0.086. Rounded to nearest dollar. Educational only\u2014not a binding quote. Actual Mejor Vida offers vary by carrier, health, tobacco, state, and underwriting.",
+    "faces": [
+      5000,
+      10000,
+      25000,
+      50000
+    ],
+    "tables": {
+      "5000": [
+        {
+          "age": 40,
+          "female": 12,
+          "male": 14
+        },
+        {
+          "age": 45,
+          "female": 13,
+          "male": 16
+        },
+        {
+          "age": 50,
+          "female": 14,
+          "male": 17
+        },
+        {
+          "age": 55,
+          "female": 16,
+          "male": 20
+        },
+        {
+          "age": 60,
+          "female": 18,
+          "male": 24
+        },
+        {
+          "age": 65,
+          "female": 22,
+          "male": 29
+        },
+        {
+          "age": 70,
+          "female": 28,
+          "male": 37
+        },
+        {
+          "age": 75,
+          "female": 37,
+          "male": 50
+        },
+        {
+          "age": 80,
+          "female": 52,
+          "male": 70
+        },
+        {
+          "age": 85,
+          "female": 81,
+          "male": 109
+        }
+      ],
+      "10000": [
+        {
+          "age": 40,
+          "female": 21,
+          "male": 25
+        },
+        {
+          "age": 45,
+          "female": 23,
+          "male": 28
+        },
+        {
+          "age": 50,
+          "female": 24,
+          "male": 31
+        },
+        {
+          "age": 55,
+          "female": 28,
+          "male": 36
+        },
+        {
+          "age": 60,
+          "female": 33,
+          "male": 43
+        },
+        {
+          "age": 65,
+          "female": 41,
+          "male": 54
+        },
+        {
+          "age": 70,
+          "female": 53,
+          "male": 70
+        },
+        {
+          "age": 75,
+          "female": 71,
+          "male": 97
+        },
+        {
+          "age": 80,
+          "female": 101,
+          "male": 136
+        },
+        {
+          "age": 85,
+          "female": 159,
+          "male": 214
+        }
+      ],
+      "25000": [
+        {
+          "age": 40,
+          "female": 47,
+          "male": 57
+        },
+        {
+          "age": 45,
+          "female": 52,
+          "male": 64
+        },
+        {
+          "age": 50,
+          "female": 55,
+          "male": 71
+        },
+        {
+          "age": 55,
+          "female": 64,
+          "male": 84
+        },
+        {
+          "age": 60,
+          "female": 76,
+          "male": 103
+        },
+        {
+          "age": 65,
+          "female": 97,
+          "male": 130
+        },
+        {
+          "age": 70,
+          "female": 127,
+          "male": 169
+        },
+        {
+          "age": 75,
+          "female": 172,
+          "male": 238
+        },
+        {
+          "age": 80,
+          "female": 248,
+          "male": 335
+        },
+        {
+          "age": 85,
+          "female": 391,
+          "male": 529
+        }
+      ],
+      "50000": [
+        {
+          "age": 40,
+          "female": 91,
+          "male": 110
+        },
+        {
+          "age": 45,
+          "female": 101,
+          "male": 124
+        },
+        {
+          "age": 50,
+          "female": 107,
+          "male": 138
+        },
+        {
+          "age": 55,
+          "female": 124,
+          "male": 164
+        },
+        {
+          "age": 60,
+          "female": 149,
+          "male": 203
+        },
+        {
+          "age": 65,
+          "female": 189,
+          "male": 255
+        },
+        {
+          "age": 70,
+          "female": 250,
+          "male": 334
+        },
+        {
+          "age": 75,
+          "female": 340,
+          "male": 472
+        },
+        {
+          "age": 80,
+          "female": 492,
+          "male": 667
+        },
+        {
+          "age": 85,
+          "female": 779,
+          "male": 1055
+        }
+      ]
+    }
+  }
+}

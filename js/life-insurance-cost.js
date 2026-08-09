@@ -146,7 +146,7 @@
               whole_life:
                 ". Edades de muestra 20–85. Muestras educativas (~+5% vs cuadros públicos); no es cotización de compañía.",
               final_expense:
-                ". Edades de muestra según el cuadro (hasta 85–90). Muestras educativas (~+5% vs cuadros públicos); no es cotización de compañía.",
+                ". Edades 40–85 (cada 5 años). Fórmula Transamerica Immediate Preferred no fumador; no es cotización vinculante.",
               guaranteed:
                 ". Edades de muestra 45–85. Muestras educativas; no es cotización de compañía.",
               universal_life:
@@ -172,7 +172,7 @@
               whole_life:
                 ". Sample ages 20–85. Educational samples (~+5% vs public charts); not a carrier quote.",
               final_expense:
-                ". Sample ages per chart (through 85–90). Educational samples (~+5% vs public charts); not a carrier quote.",
+                ". Ages 40–85 (every 5 years). Transamerica Immediate Preferred nontobacco formula; not a binding quote.",
               guaranteed:
                 ". Sample ages 45–85. Educational samples; not a carrier quote.",
               universal_life:
