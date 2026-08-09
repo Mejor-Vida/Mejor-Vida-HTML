@@ -23,7 +23,7 @@
 <link href="css/quote-flow-shared.css?v=20260723-mobile-menu" rel="stylesheet"/>
 <link href="css/site-header.css?v=20260723-ver-precios-gold" rel="stylesheet"/>
 <link href="css/nav-life-insurance.css?v=20260808-cost-types" rel="stylesheet"/>
-<link href="css/life-insurance-cost.css?v=20260808-fe-factors" rel="stylesheet"/>
+<link href="css/life-insurance-cost.css?v=20260808-section-gap" rel="stylesheet"/>
 <link href="css/mvi-assistant-widget.css?v=20260721-chat-z" rel="stylesheet"/>
 <link href="css/fontawesome-mvi.min.css?v=20260723-brands-fix" rel="stylesheet"/>
 <style>body { font-family: Inter, system-ui, -apple-system, sans-serif; }</style>
@@ -320,21 +320,12 @@
 </div>
 </section>
 
-<div class="lic-layout">
+<div class="lic-layout lic-layout--clear">
 <div class="lic-main">
-<div class="lic-takeaways">
-<h2>Puntos clave</h2>
-<ul>
-<li>Las pólizas con preguntas de salud suelen costar menos que la aceptación garantizada (sin preguntas de salud).</li>
-<li>Los precios de TV y anuncios suelen ser engañosos: a menudo muestran cobertura muy baja o condiciones restrictivas.</li>
-<li>La vida temporal de “entierro” que sube cada pocos años y termina cerca de los 80 suele costar menos que la vida entera de gastos finales — pero al vencerse puede dejarle sin cobertura.</li>
-<li>Como agencia independiente, Mejor Vida compara varias aseguradoras — incluida Mutual of Omaha — para buscar el mejor ajuste a su presupuesto y salud.</li>
-</ul>
-</div>
 
 <section class="lic-section" id="tarifas" data-lic-product="fe" data-lic-quote-href="quote.html">
 <h2>Costo promedio del seguro de gastos finales por edad y sexo</h2>
-<p>Abajo verá primas mensuales ilustrativas (Preferred no fumador) según tarifas de <strong>Transamerica Final Expense Portfolio — Immediate</strong> de nuestros materiales de compañía. Cambie el monto con las pestañas. Las cotizaciones reales de Mejor Vida pueden ser de Transamerica u otras aseguradoras del libro (Mutual of Omaha, American Amicable, Assurity, Corebridge, Aetna, etc.) según elegibilidad.</p>
+<p>Abajo verá primas mensuales ilustrativas (buena salud, no fumador) tomadas del <strong>motor de cotización de Mejor Vida</strong> (Mutual of Omaha Living Promise y American Amicable — prima baja Level/Immediate). Cambie el monto con las pestañas ($5,000–$50,000; base $10,000 escalada). Las cotizaciones reales pueden variar según compañía, salud, tabaco y estado.</p>
 <div class="lic-face-tabs" role="tablist">
 <button type="button" class="lic-face-tab is-active" data-lic-face="5000" role="tab" aria-selected="true">$5,000</button>
 <button type="button" class="lic-face-tab" data-lic-face="10000" role="tab" aria-selected="false">$10,000</button>
@@ -353,53 +344,53 @@
 
 <section class="lic-section lic-guide" id="factores">
 <h2>Cómo las aseguradoras fijan el precio</h2>
-<p>El costo no será igual al de otra persona (salvo que su perfil sea casi idéntico). Estas variables suelen importar más:</p>
+<p>El costo no será igual al de otra persona (salvo que su perfil sea casi idéntico). Estas variables suelen importar más. Factores como la raza, etnia, orientación sexual, estado civil, puntaje de crédito o nivel educativo <em>no</em> suelen usarse para fijar la prima.</p>
 
 <div class="lic-factor-grid" aria-label="Factores de costo">
 <div class="lic-factor-card">
-<span class="lic-factor-icon" aria-hidden="true"><i class="fas fa-user"></i></span>
+<span class="lic-factor-icon" aria-hidden="true"><img class="lic-factor-icon-img--wide" src="img/icons/mvi-gender-sexo.png" alt="" width="36" height="36"/></span>
 <div>
 <h3>Sexo</h3>
 <p>Las mujeres suelen pagar menos porque viven más años en promedio. En Montana las tarifas unisex pueden igualar el precio al de los hombres.</p>
 </div>
 </div>
 <div class="lic-factor-card">
-<span class="lic-factor-icon" aria-hidden="true"><i class="fas fa-file-invoice-dollar"></i></span>
+<span class="lic-factor-icon" aria-hidden="true"><img class="lic-factor-icon-img--wide" src="img/icons/mvi-tipo-poliza.png" alt="" width="36" height="36"/></span>
 <div>
 <h3>Tipo de póliza</h3>
 <p>La temporal suele costar menos que la vida entera porque termina cerca de los 80. Con preguntas de salud suele pagar menos que la aceptación garantizada.</p>
 </div>
 </div>
 <div class="lic-factor-card">
-<span class="lic-factor-icon" aria-hidden="true"><i class="fas fa-calendar-alt"></i></span>
+<span class="lic-factor-icon" aria-hidden="true"><img src="img/icons/mvi-edad-cake.png" alt="" width="36" height="36"/></span>
 <div>
 <h3>Edad</h3>
 <p>Cuanto mayor sea al contratar, más alto el precio. En vida entera la prima no sube después; en muchas temporales sí cada pocos años.</p>
 </div>
 </div>
 <div class="lic-factor-card">
-<span class="lic-factor-icon" aria-hidden="true"><i class="fas fa-heart"></i></span>
+<span class="lic-factor-icon" aria-hidden="true"><img src="img/icons/mvi-salud-heart.png" alt="" width="36" height="36"/></span>
 <div>
 <h3>Salud</h3>
 <p>Si busca sin período de espera, debe responder preguntas de salud. Los problemas de salud pueden subir el precio según la compañía.</p>
 </div>
 </div>
 <div class="lic-factor-card">
-<span class="lic-factor-icon" aria-hidden="true"><i class="fas fa-shield-alt"></i></span>
+<span class="lic-factor-icon" aria-hidden="true"><img src="img/icons/mvi-tabaco-pipe.png" alt="" width="36" height="36"/></span>
 <div>
 <h3>Tabaco</h3>
 <p>Fumar cigarrillos suele subir la prima. Otras formas de tabaco (pipa, masticable, electrónicos) dependen de cada aseguradora.</p>
 </div>
 </div>
 <div class="lic-factor-card">
-<span class="lic-factor-icon" aria-hidden="true"><i class="fas fa-umbrella"></i></span>
+<span class="lic-factor-icon" aria-hidden="true"><img class="lic-factor-icon-img--wide" src="img/icons/mvi-cobertura-umbrella.png" alt="" width="36" height="36"/></span>
 <div>
 <h3>Monto de cobertura</h3>
 <p>Cuanta más cobertura compre, más alta será la prima.</p>
 </div>
 </div>
 <div class="lic-factor-card">
-<span class="lic-factor-icon" aria-hidden="true"><i class="fas fa-globe"></i></span>
+<span class="lic-factor-icon" aria-hidden="true"><img class="lic-factor-icon-img--wide" src="img/icons/mvi-estado-usa.png" alt="" width="36" height="36"/></span>
 <div>
 <h3>Estado de residencia</h3>
 <p>El estado define qué productos están disponibles. Julie atiende Nebraska, Kansas, Colorado y Nevada.</p>
@@ -407,19 +398,15 @@
 </div>
 </div>
 
-<h3 class="h5 fw-bold mt-3 mb-2" style="color:#1a365d;">Sexo</h3>
+<h3 class="lic-factor-heading"><span class="lic-factor-icon" aria-hidden="true"><img class="lic-factor-icon-img--wide" src="img/icons/mvi-gender-sexo.png" alt="" width="36" height="36"/></span>Sexo</h3>
 <p>En la mayoría de los estados, los hombres pagan más (a menudo cerca de un 30%) porque, en promedio, viven menos años que las mujeres. Excepción: Montana exige tarifas unisex en algunos productos, lo que puede subir el precio para mujeres frente a otros estados.</p>
 
-<h3 class="h5 fw-bold mt-3 mb-2" style="color:#1a365d;">Edad</h3>
+<h3 class="lic-factor-heading"><span class="lic-factor-icon" aria-hidden="true"><img src="img/icons/mvi-edad-cake.png" alt="" width="36" height="36"/></span>Edad</h3>
 <p>Cuanto mayor sea al emitir la póliza, más suele costar. Muchas compañías tienen una tarifa distinta por cada edad (51, 52, 53…). Algunas usan bandas de edad (por ejemplo 50–55); es menos común, pero existe.</p>
 
-<h3 class="h5 fw-bold mt-3 mb-2" style="color:#1a365d;">Tipo de póliza: temporal vs. vida entera</h3>
+<h3 class="lic-factor-heading"><span class="lic-factor-icon" aria-hidden="true"><img class="lic-factor-icon-img--wide" src="img/icons/mvi-tipo-poliza.png" alt="" width="36" height="36"/></span>Tipo de póliza: temporal vs. vida entera</h3>
 <p>La <strong>vida temporal</strong> suele durar un plazo o hasta cierta edad (a veces cerca de los 80) y a veces sube cada pocos años. Es más barata por dólar, pero al terminar puede dejarle sin cobertura y sin devolución de primas.</p>
 <p>La <strong>vida entera</strong> de gastos finales es permanente: la cobertura no vence por edad y la prima no sube con el tiempo (si se mantiene al día). Por eso suele costar más que una temporal “de entierro”.</p>
-<aside class="lic-callout" aria-label="Importante">
-<strong>No olvide</strong>
-<p>Cuando vence una temporal, no le devuelven el dinero: simplemente queda sin esa cobertura y tendría que buscar otra póliza.</p>
-</aside>
 <p>Dentro de la vida entera de gastos finales hay dos caminos comunes:</p>
 <ul class="lic-factor-list">
 <li><strong>Emisión simplificada (con preguntas de salud, sin examen).</strong> Puede calificar para beneficio nivelado (a menudo sin espera o con espera corta) o para un plan graduado según su salud.</li>
@@ -427,7 +414,7 @@
 </ul>
 <p>Desde el punto de vista del precio, la aceptación garantizada suele basarse en edad, sexo y monto. La emisión simplificada también contempla salud y tabaco — y en la mayoría de los casos un plan nivelado sin espera cuesta menos que la aceptación garantizada.</p>
 
-<h3 class="h5 fw-bold mt-3 mb-2" style="color:#1a365d;">Salud (si busca plan sin período de espera)</h3>
+<h3 class="lic-factor-heading"><span class="lic-factor-icon" aria-hidden="true"><img src="img/icons/mvi-salud-heart.png" alt="" width="36" height="36"/></span>Salud (si busca plan sin período de espera)</h3>
 <p>Muchas compañías agrupan la salud en 1–3 clasificaciones con precios distintos. Nombres frecuentes (cada aseguradora los usa a su manera):</p>
 <ul class="lic-factor-list">
 <li><strong>Nivelado / Preferred.</strong> Suele ser el precio más bajo y sin espera; requiere salud moderada o buena.</li>
@@ -436,20 +423,16 @@
 </ul>
 <p>La salud también limita <em>cuánto</em> puede comprar. Ejemplo con Mutual of Omaha Living Promise: nivelado suele ofrecer $2,000–$50,000; graduado a menudo $2,000–$20,000.</p>
 
-<h3 class="h5 fw-bold mt-3 mb-2" style="color:#1a365d;">Tabaco</h3>
+<h3 class="lic-factor-heading"><span class="lic-factor-icon" aria-hidden="true"><img src="img/icons/mvi-tabaco-pipe.png" alt="" width="36" height="36"/></span>Tabaco</h3>
 <p>El cigarrillo reduce la esperanza de vida, así que los fumadores pagan más. Otras formas (pipa, masticable, cigarrillos electrónicos, cigarros) a veces no se tratan igual: depende de la compañía.</p>
 
-<h3 class="h5 fw-bold mt-3 mb-2" style="color:#1a365d;">Monto de cobertura</h3>
+<h3 class="lic-factor-heading"><span class="lic-factor-icon" aria-hidden="true"><img class="lic-factor-icon-img--wide" src="img/icons/mvi-cobertura-umbrella.png" alt="" width="36" height="36"/></span>Monto de cobertura</h3>
 <p>La edad, el sexo, el tabaco y la salud suelen fijar la <em>prima por cada $1,000</em> de beneficio. Luego se multiplica por el monto que elija. Es proporcional: una póliza de $25,000 cuesta aproximadamente cinco veces más que una de $5,000. A más cobertura, más alto el precio — Julie le muestra la prima exacta al cotizar.</p>
 
-<h3 class="h5 fw-bold mt-3 mb-2" style="color:#1a365d;">Estado de residencia</h3>
+<h3 class="lic-factor-heading"><span class="lic-factor-icon" aria-hidden="true"><img class="lic-factor-icon-img--wide" src="img/icons/mvi-estado-usa.png" alt="" width="36" height="36"/></span>Estado de residencia</h3>
 <p>El estado define qué compañías y productos están disponibles. Julie está licenciada en Nebraska, Kansas, Colorado y Nevada. Algunas aseguradoras no ofrecen todos sus productos en todos los estados.</p>
 <p>En Montana, la ley exige tarifas unisex en algunos productos: las mujeres suelen pagar más que mujeres en otros estados, porque se les cobra la misma tarifa que a los hombres.</p>
 
-<aside class="lic-callout" aria-label="Importante">
-<strong>Recuerde</strong>
-<p>La raza, etnia, orientación sexual, estado civil, puntaje de crédito o nivel educativo <em>no</em> suelen usarse para fijar la prima.</p>
-</aside>
 </section>
 
 <section class="lic-section lic-guide" id="tv-ads">
@@ -592,7 +575,7 @@
 <script defer src="js/mvi-nav-questions.js?v=20260808-hamburger"></script>
 <script defer src="js/website-assistant-widget.js?v=20260726-rate-limit"></script>
 <script>document.getElementById('year') && (document.getElementById('year').textContent = new Date().getFullYear());</script>
-<script>window.MVI_LIC_RATES = {"final_expense":{"source":"Transamerica Final Expense Portfolio \u2014 Immediate (Preferred Nontobacco)","rating":"Preferred nontobacco (illustrative)","as_of":"2026-08-08","note":"Illustrative monthly EFT premiums from Transamerica Final Expense Portfolio Agent Guide rates (Immediate / Preferred Nontobacco): (rate per $1,000 \u00d7 units + $42 policy fee) \u00d7 0.086. Rounded to nearest dollar. Educational only\u2014not a binding quote. Actual Mejor Vida offers vary by carrier, health, tobacco, state, and underwriting.","faces":[5000,10000,25000,50000],"tables":{"5000":[{"age":40,"female":12,"male":14},{"age":45,"female":13,"male":16},{"age":50,"female":14,"male":17},{"age":55,"female":16,"male":20},{"age":60,"female":18,"male":24},{"age":65,"female":22,"male":29},{"age":70,"female":28,"male":37},{"age":75,"female":37,"male":50},{"age":80,"female":52,"male":70},{"age":85,"female":81,"male":109}],"10000":[{"age":40,"female":21,"male":25},{"age":45,"female":23,"male":28},{"age":50,"female":24,"male":31},{"age":55,"female":28,"male":36},{"age":60,"female":33,"male":43},{"age":65,"female":41,"male":54},{"age":70,"female":53,"male":70},{"age":75,"female":71,"male":97},{"age":80,"female":101,"male":136},{"age":85,"female":159,"male":214}],"25000":[{"age":40,"female":47,"male":57},{"age":45,"female":52,"male":64},{"age":50,"female":55,"male":71},{"age":55,"female":64,"male":84},{"age":60,"female":76,"male":103},{"age":65,"female":97,"male":130},{"age":70,"female":127,"male":169},{"age":75,"female":172,"male":238},{"age":80,"female":248,"male":335},{"age":85,"female":391,"male":529}],"50000":[{"age":40,"female":91,"male":110},{"age":45,"female":101,"male":124},{"age":50,"female":107,"male":138},{"age":55,"female":124,"male":164},{"age":60,"female":149,"male":203},{"age":65,"female":189,"male":255},{"age":70,"female":250,"male":334},{"age":75,"female":340,"male":472},{"age":80,"female":492,"male":667},{"age":85,"female":779,"male":1055}]}}};</script>
-<script defer src="js/life-insurance-cost.js?v=20260808-transamerica-fe"></script>
+<script>window.MVI_LIC_RATES = {"final_expense":{"source":"Mejor Vida quote engine (quote_ranges) \u2014 MOO Living Promise + American Amicable, good-health low","rating":"Non-tobacco, good-health (Level/Immediate) low","as_of":"2026-08-08","note":"Illustrative monthly premiums from Mejor Vida\u2019s quote_ranges table (Mutual of Omaha Living Promise + American Amicable). Values are the good-health (Level/Immediate) low for $10,000 face, scaled proportionally for other amounts, rounded to the nearest dollar. Ages 45\u201385. Educational only\u2014not a binding quote. Actual offers vary by carrier, health, tobacco, state, and underwriting.","faces":[5000,10000,25000,50000],"tables":{"5000":[{"age":45,"female":11,"male":14},{"age":50,"female":12,"male":15},{"age":55,"female":14,"male":18},{"age":60,"female":16,"male":22},{"age":65,"female":21,"male":28},{"age":70,"female":27,"male":37},{"age":75,"female":36,"male":50},{"age":80,"female":49,"male":70},{"age":85,"female":68,"male":96}],"10000":[{"age":45,"female":23,"male":27},{"age":50,"female":24,"male":31},{"age":55,"female":28,"male":36},{"age":60,"female":33,"male":44},{"age":65,"female":41,"male":56},{"age":70,"female":53,"male":75},{"age":75,"female":72,"male":100},{"age":80,"female":98,"male":140},{"age":85,"female":136,"male":193}],"25000":[{"age":45,"female":57,"male":68},{"age":50,"female":61,"male":77},{"age":55,"female":69,"male":90},{"age":60,"female":82,"male":109},{"age":65,"female":103,"male":141},{"age":70,"female":133,"male":187},{"age":75,"female":181,"male":250},{"age":80,"female":246,"male":349},{"age":85,"female":340,"male":482}],"50000":[{"age":45,"female":113,"male":136},{"age":50,"female":122,"male":153},{"age":55,"female":139,"male":180},{"age":60,"female":164,"male":219},{"age":65,"female":205,"male":282},{"age":70,"female":266,"male":373},{"age":75,"female":362,"male":500},{"age":80,"female":492,"male":699},{"age":85,"female":680,"male":964}]}}};</script>
+<script defer src="js/life-insurance-cost.js?v=20260808-quote-ranges"></script>
 </body>
 </html>
