@@ -144,7 +144,7 @@
             },
             bucketNoteSuffix: {
               whole_life:
-                ". Edades de muestra 20–85. Muestras educativas (~+5% vs cuadros públicos); no es cotización de compañía.",
+                ". Edades 45–85 (cada 5 años). Motor quote_ranges de Mejor Vida (MOO Living Promise + AmAm); banda permanente simplificada; no es cotización vinculante.",
               final_expense:
                 ". Edades 45–85 (cada 5 años). Motor quote_ranges de Mejor Vida (MOO + AmAm); no es cotización vinculante.",
               guaranteed:
@@ -170,7 +170,7 @@
             },
             bucketNoteSuffix: {
               whole_life:
-                ". Sample ages 20–85. Educational samples (~+5% vs public charts); not a carrier quote.",
+                ". Ages 45–85 (every 5 years). Mejor Vida quote_ranges engine (MOO Living Promise + AmAm); simplified permanent band; not a binding quote.",
               final_expense:
                 ". Ages 45–85 (every 5 years). Mejor Vida quote_ranges engine (MOO + AmAm); not a binding quote.",
               guaranteed:
