@@ -15,6 +15,8 @@ const STATIC_PAGES = [
   { loc: "/about-julie.html", priority: "0.85" },
   { loc: "/blog.html", priority: "0.80" },
   { loc: "/seguro-gastos-finales.html", priority: "0.90" },
+  { loc: "/seguro-vida-entierro-sin-espera.html", priority: "0.88" },
+  { loc: "/seguro-vida-entierro-sin-espera.html", priority: "0.88" },
   { loc: "/guias-gastos-finales.html", priority: "0.85" },
   { loc: "/contact.html", priority: "0.75" },
   { loc: "/quote.html", priority: "0.90" },

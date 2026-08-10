@@ -98,7 +98,9 @@ function renderTransparencyModal(guide) {
 
 function renderGuide(guide, faqIndex, shell) {
   const canonical = `${BASE}/blog/${guide.slug}.html`;
-  const answerText = guide.paragraphs.join(" ");
+  const answerText = guide.paragraphs
+    .map((p) => (typeof p === "string" ? p : [p.heading, p.text].filter(Boolean).join(". ")))
+    .join(" ");
   const headline = guide.headline || guide.question;
   const pageTitle = guide.pageTitle || `${headline} — Guía de Mejor Vida`;
   const ogTitle = guide.pageTitle || headline;
@@ -108,7 +110,15 @@ function renderGuide(guide, faqIndex, shell) {
     : "";
 
   const paragraphsHtml = guide.paragraphs
-    .map((p) => `  <p>${escHtml(p)}</p>`)
+    .map((p) => {
+      if (typeof p === "string") return `  <p>${escHtml(p)}</p>`;
+      const heading = p && p.heading ? String(p.heading) : "";
+      const text = p && p.text != null ? String(p.text) : "";
+      const headingHtml = heading
+        ? `  <h2 class="h4 fw-bold mt-4 mb-2" style="color:#1a365d;">${escHtml(heading)}</h2>\n`
+        : "";
+      return `${headingHtml}  <p>${escHtml(text)}</p>`;
+    })
     .join("\n");
 
   const takeawaysHtml = (guide.keyTakeaways || [])

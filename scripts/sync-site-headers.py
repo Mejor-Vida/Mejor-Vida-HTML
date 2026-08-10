@@ -97,6 +97,8 @@ def prepare_en_header(path: Path) -> str:
                 "about-julie.html",
                 "blog.html",
                 "final-expense-estimator.html",
+                "final-expense-insurance.html",
+                "no-waiting-period-life-burial.html",
                 "contact.html",
                 "quote.html",
                 "term-quote.html",
@@ -104,6 +106,7 @@ def prepare_en_header(path: Path) -> str:
                 "life-insurance-products.html",
                 "life-insurance-cost.html",
                 "final-expense-cost.html",
+                "whole-life-cost.html",
                 "insurance-carriers.html",
             ):
                 header = header.replace(f'href="{name}#', f'href="{nest}{name}#')

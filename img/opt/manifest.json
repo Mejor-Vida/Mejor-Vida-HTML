@@ -414,12 +414,75 @@
     "keepPng": false
   },
   {
+    "src": "img/tool-funeral-calculator-ui.png",
+    "base": "tool-funeral-calculator-ui",
+    "width": 900,
+    "height": 584,
+    "webp": "img/opt/tool-funeral-calculator-ui.webp",
+    "fallback": "img/opt/tool-funeral-calculator-ui.png",
+    "keepPng": true
+  },
+  {
+    "src": "img/tool-quote-results-ui.png",
+    "base": "tool-quote-results-ui",
+    "width": 900,
+    "height": 418,
+    "webp": "img/opt/tool-quote-results-ui.webp",
+    "fallback": "img/opt/tool-quote-results-ui.png",
+    "keepPng": true
+  },
+  {
+    "src": "img/tool-chatbot-ui.png",
+    "base": "tool-chatbot-ui",
+    "width": 503,
+    "height": 720,
+    "webp": "img/opt/tool-chatbot-ui.webp",
+    "fallback": "img/opt/tool-chatbot-ui.png",
+    "keepPng": true
+  },
+  {
     "src": "img/lip-hero-sunrise.jpg",
     "base": "lip-hero-sunrise",
     "width": 1024,
     "height": 682,
     "webp": "img/opt/lip-hero-sunrise.webp",
     "fallback": "img/opt/lip-hero-sunrise.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/lic-hero-dolphin-pier.jpg",
+    "base": "lic-hero-dolphin-pier",
+    "width": 1024,
+    "height": 682,
+    "webp": "img/opt/lic-hero-dolphin-pier.webp",
+    "fallback": "img/opt/lic-hero-dolphin-pier.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/lic-hero-desert-saguaro.jpg",
+    "base": "lic-hero-desert-saguaro",
+    "width": 1024,
+    "height": 682,
+    "webp": "img/opt/lic-hero-desert-saguaro.webp",
+    "fallback": "img/opt/lic-hero-desert-saguaro.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/fep-hero-rainforest.jpg",
+    "base": "fep-hero-rainforest",
+    "width": 1024,
+    "height": 682,
+    "webp": "img/opt/fep-hero-rainforest.webp",
+    "fallback": "img/opt/fep-hero-rainforest.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/fep-hero-bus-stop-couple.jpg",
+    "base": "fep-hero-bus-stop-couple",
+    "width": 1024,
+    "height": 682,
+    "webp": "img/opt/fep-hero-bus-stop-couple.webp",
+    "fallback": "img/opt/fep-hero-bus-stop-couple.jpg",
     "keepPng": false
   },
   {
