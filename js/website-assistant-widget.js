@@ -740,4 +740,45 @@
     var root = document.getElementById("mvi-assistant-root");
     if (root) mount(root);
   });
+
+  /** Load sticky leave-a-message widget on pages that already ship this assistant script. */
+  (function ensureLeaveMessageWidget() {
+    if (window.MviLeaveMessageWidget) return;
+    if (document.querySelector('script[src*="mvi-leave-message-widget"]')) return;
+
+    var scripts = document.querySelectorAll("script[src]");
+    var base = "";
+    for (var i = 0; i < scripts.length; i++) {
+      var src = scripts[i].getAttribute("src") || "";
+      if (src.indexOf("website-assistant-widget") === -1) continue;
+      base = src.replace(/js\/website-assistant-widget\.js(\?.*)?$/i, "");
+      break;
+    }
+    if (!base) {
+      var path = String((location && location.pathname) || "");
+      if (/\/en\/blog\//i.test(path) || /\/blog\//i.test(path) || /\/carriers\//i.test(path) || /\/states\//i.test(path) || /\/estados\//i.test(path)) {
+        base = path.indexOf("/en/") === 0 ? "../../" : "../";
+      } else if (/^\/en(\/|$)/i.test(path) || /\/en\//i.test(path)) {
+        base = "../";
+      } else {
+        base = "";
+      }
+    }
+
+    function absFromBase(rel) {
+      return (base || "") + rel;
+    }
+
+    if (!document.querySelector('link[href*="mvi-leave-message-widget"]')) {
+      var link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.href = absFromBase("css/mvi-leave-message-widget.css?v=20260809-lm5");
+      document.head.appendChild(link);
+    }
+
+    var s = document.createElement("script");
+    s.defer = true;
+    s.src = absFromBase("js/mvi-leave-message-widget.js?v=20260809-lm5");
+    document.head.appendChild(s);
+  })();
 })();
