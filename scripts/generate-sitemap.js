@@ -14,6 +14,7 @@ const STATIC_PAGES = [
   { loc: "/", priority: "1.00" },
   { loc: "/about-julie.html", priority: "0.85" },
   { loc: "/blog.html", priority: "0.80" },
+  { loc: "/seguro-gastos-finales.html", priority: "0.90" },
   { loc: "/guias-gastos-finales.html", priority: "0.85" },
   { loc: "/contact.html", priority: "0.75" },
   { loc: "/quote.html", priority: "0.90" },

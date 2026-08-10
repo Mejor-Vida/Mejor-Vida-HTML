@@ -1,0 +1,223 @@
+/* Final expense product page — Mejor Vida brand (navy), product layout */
+
+.fep-page {
+  --fep-navy: #1a365d;
+  --fep-blue: #0d47a1;
+  --fep-soft: #e8f1fc;
+  --fep-ink: #1f2937;
+  --fep-muted: #475569;
+  --fep-gold: #e8a317;
+  --lic-navy: #1a365d;
+  --lic-gold: #e8a317;
+  --lic-muted: #475569;
+  color: var(--fep-ink);
+  background: #f7f9fc;
+}
+
+.fep-hero {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--fep-navy);
+  color: #fff;
+  padding: 2.25rem 0 2.5rem;
+}
+
+.fep-hero-media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.fep-hero-media picture,
+.fep-hero-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+}
+
+.fep-hero-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    #1a365d 0%,
+    #1a365d 26%,
+    rgba(26, 54, 93, 0.9) 46%,
+    rgba(13, 71, 161, 0.55) 68%,
+    rgba(13, 71, 161, 0.2) 100%
+  );
+}
+
+.fep-hero .container {
+  position: relative;
+  z-index: 1;
+  max-width: 1120px;
+}
+
+@media (max-width: 768px) {
+  .fep-hero-media {
+    opacity: 0.55;
+  }
+
+  .fep-hero-media::after {
+    background: linear-gradient(
+      180deg,
+      rgba(26, 54, 93, 0.92) 0%,
+      rgba(26, 54, 93, 0.88) 55%,
+      rgba(26, 54, 93, 0.75) 100%
+    );
+  }
+}
+
+.fep-breadcrumb {
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 0.85rem;
+  opacity: 0.9;
+}
+
+.fep-breadcrumb a {
+  color: #e2e8f0;
+  text-decoration: none;
+}
+
+.fep-breadcrumb a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+.fep-hero h1 {
+  margin: 0 0 0.75rem;
+  font-size: clamp(1.7rem, 3.6vw, 2.4rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: #fff;
+  max-width: 36rem;
+}
+
+.fep-hero-lead {
+  margin: 0;
+  max-width: 40rem;
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.fep-layout {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem;
+}
+
+.fep-main {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.75rem;
+  padding: 1.35rem 1.35rem 1.75rem;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
+}
+
+.fep-main h2 {
+  margin: 1.75rem 0 0.65rem;
+  color: var(--fep-navy);
+  font-size: 1.35rem;
+  font-weight: 800;
+  line-height: 1.3;
+}
+
+.fep-main h2:first-child {
+  margin-top: 0;
+}
+
+.fep-main p,
+.fep-main li {
+  color: var(--fep-muted);
+  font-size: 0.98rem;
+  line-height: 1.65;
+}
+
+.fep-main ul {
+  margin: 0.5rem 0 1rem;
+  padding-left: 1.2rem;
+}
+
+.fep-main a {
+  color: var(--fep-blue);
+  font-weight: 600;
+}
+
+.fep-callout {
+  margin: 1.1rem 0;
+  padding: 1rem 1.1rem;
+  border-radius: 0.65rem;
+  background: var(--fep-soft);
+  border: 1px solid #c9daf0;
+}
+
+.fep-callout strong {
+  display: block;
+  color: var(--fep-navy);
+  margin-bottom: 0.35rem;
+  font-size: 0.95rem;
+}
+
+.fep-callout p {
+  margin: 0;
+  color: var(--fep-navy);
+}
+
+.fep-faq details {
+  border-top: 1px solid #e2e8f0;
+  padding: 0.75rem 0;
+}
+
+.fep-faq summary {
+  cursor: pointer;
+  font-weight: 700;
+  color: var(--fep-navy);
+  list-style: none;
+}
+
+.fep-faq summary::-webkit-details-marker {
+  display: none;
+}
+
+.fep-faq details[open] summary {
+  margin-bottom: 0.4rem;
+}
+
+.fep-rate-block {
+  margin: 1.15rem 0 0.35rem;
+}
+
+.fep-rate-block .lic-face-tabs {
+  margin-top: 0.35rem;
+}
+
+.fep-rate-block .lic-rate-wrap {
+  max-width: min(100%, 36rem);
+}
+
+.fep-rate-block .lic-rate-table {
+  max-width: none;
+  width: 100%;
+}
+
+.fep-carrier-chart {
+  margin: 1rem 0 1.25rem;
+}
+
+.fep-carrier-chart .sc-carrier-table-wrap {
+  margin: 0;
+}
+
+.fep-page .sc-carrier-section-container {
+  padding: 0;
+}
