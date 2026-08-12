@@ -1,0 +1,221 @@
+{
+  "term_years": 10,
+  "faces": [
+    100000,
+    250000,
+    500000
+  ],
+  "ages": [
+    20,
+    25,
+    30,
+    35,
+    40,
+    45,
+    50,
+    55,
+    60
+  ],
+  "rating": "Non-tobacco illustrative (educational)",
+  "as_of": "2026-08-12",
+  "note": "Illustrative monthly premiums. Term column uses 10-year fully underwritten Preferred Best non-tobacco samples (lowest among MVI-appointed Integrity Connect quotes). Whole life column uses appointed-carrier Protect+ Preferred Plus non-tobacco where ages are available, otherwise the traditional whole-life educational sample on Mejor Vida’s whole-life cost page. Not binding quotes.",
+  "term_source": "Mejor Vida appointed-carrier rate samples (Integrity Connect FU Preferred Best NT (lowest among MVI-appointed carriers); Nebraska)",
+  "whole_source": "Assurity Whole Life Protect+ Preferred Plus non-tobacco (Pay to Age 100; $10k chart in Assurity_Knowledge, fee-aware scaled with $65 annual policy fee held constant) for ages lacking the traditional sample; Industry sample whole life rates (preferred / non-tobacco), rounded",
+  "tables": {
+    "100000": [
+      {
+        "age": 20,
+        "term_female": 7,
+        "term_male": 8,
+        "whole_female": 49,
+        "whole_male": 55
+      },
+      {
+        "age": 25,
+        "term_female": 7,
+        "term_male": 8,
+        "whole_female": 53,
+        "whole_male": 60
+      },
+      {
+        "age": 30,
+        "term_female": 7,
+        "term_male": 9,
+        "whole_female": 65,
+        "whole_male": 73
+      },
+      {
+        "age": 35,
+        "term_female": 8,
+        "term_male": 9,
+        "whole_female": 76,
+        "whole_male": 85
+      },
+      {
+        "age": 40,
+        "term_female": 8,
+        "term_male": 10,
+        "whole_female": 116,
+        "whole_male": 132
+      },
+      {
+        "age": 45,
+        "term_female": 10,
+        "term_male": 12,
+        "whole_female": 141,
+        "whole_male": 163
+      },
+      {
+        "age": 50,
+        "term_female": 14,
+        "term_male": 15,
+        "whole_female": 176,
+        "whole_male": 202
+      },
+      {
+        "age": 55,
+        "term_female": 18,
+        "term_male": 21,
+        "whole_female": 230,
+        "whole_male": 257
+      },
+      {
+        "age": 60,
+        "term_female": 25,
+        "term_male": 36,
+        "whole_female": 297,
+        "whole_male": 334
+      }
+    ],
+    "250000": [
+      {
+        "age": 20,
+        "term_female": 8,
+        "term_male": 10,
+        "whole_female": 114,
+        "whole_male": 131
+      },
+      {
+        "age": 25,
+        "term_female": 9,
+        "term_male": 10,
+        "whole_female": 126,
+        "whole_male": 143
+      },
+      {
+        "age": 30,
+        "term_female": 9,
+        "term_male": 10,
+        "whole_female": 154,
+        "whole_male": 174
+      },
+      {
+        "age": 35,
+        "term_female": 9,
+        "term_male": 10,
+        "whole_female": 182,
+        "whole_male": 205
+      },
+      {
+        "age": 40,
+        "term_female": 11,
+        "term_male": 12,
+        "whole_female": 279,
+        "whole_male": 321
+      },
+      {
+        "age": 45,
+        "term_female": 15,
+        "term_male": 17,
+        "whole_female": 341,
+        "whole_male": 397
+      },
+      {
+        "age": 50,
+        "term_female": 21,
+        "term_male": 24,
+        "whole_female": 432,
+        "whole_male": 492
+      },
+      {
+        "age": 55,
+        "term_female": 30,
+        "term_male": 38,
+        "whole_female": 565,
+        "whole_male": 633
+      },
+      {
+        "age": 60,
+        "term_female": 47,
+        "term_male": 65,
+        "whole_female": 734,
+        "whole_male": 823
+      }
+    ],
+    "500000": [
+      {
+        "age": 20,
+        "term_female": 11,
+        "term_male": 13,
+        "whole_female": 224,
+        "whole_male": 256
+      },
+      {
+        "age": 25,
+        "term_female": 11,
+        "term_male": 13,
+        "whole_female": 246,
+        "whole_male": 281
+      },
+      {
+        "age": 30,
+        "term_female": 11,
+        "term_male": 13,
+        "whole_female": 303,
+        "whole_male": 343
+      },
+      {
+        "age": 35,
+        "term_female": 11,
+        "term_male": 13,
+        "whole_female": 360,
+        "whole_male": 405
+      },
+      {
+        "age": 40,
+        "term_female": 15,
+        "term_male": 17,
+        "whole_female": 548,
+        "whole_male": 631
+      },
+      {
+        "age": 45,
+        "term_female": 23,
+        "term_male": 27,
+        "whole_female": 669,
+        "whole_male": 779
+      },
+      {
+        "age": 50,
+        "term_female": 32,
+        "term_male": 40,
+        "whole_female": 849,
+        "whole_male": 969
+      },
+      {
+        "age": 55,
+        "term_female": 50,
+        "term_male": 66,
+        "whole_female": 1111,
+        "whole_male": 1247
+      },
+      {
+        "age": 60,
+        "term_female": 72,
+        "term_male": 109,
+        "whole_female": 1447,
+        "whole_male": 1624
+      }
+    ]
+  }
+}

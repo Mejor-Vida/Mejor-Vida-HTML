@@ -1,0 +1,28 @@
+{
+  "checked_at": "2026-08-12T04:36:11.201Z",
+  "connection": "MVI Agent Bridge → Integrity Connect Simplified Term",
+  "sample": {
+    "age": 50,
+    "sex": "male",
+    "face": 250000,
+    "term": 10,
+    "state": "NE"
+  },
+  "integrity_si_lowest": {
+    "product": "Trendsetter Super - Standard Plus 10 Year $250k-$500k",
+    "monthly": 43.77
+  },
+  "integrity_si_also": [
+    "Your Term",
+    "Term Made Simple",
+    "Safecare Term",
+    "Term Life Express",
+    "Strong Foundation"
+  ],
+  "amam_easy_term_chart": {
+    "source": "js/term-life-cost-rates.json prior / Form 3350",
+    "male_10yr_250k_age50": 112,
+    "male_20yr_250k_age50": 179
+  },
+  "conclusion": "Integrity Simplified Term quick quote did not list American Amicable Easy Term in this session. Lowest SI result (Transamerica Trendsetter Super Standard Plus ~$44) is far below AmAm Easy Term chart ($112). AmAm Form 3350 chart remains valid for that product; marketplace SI/FU preferred rates are lower. Cost pages now use FU Preferred Best Integrity samples."
+}

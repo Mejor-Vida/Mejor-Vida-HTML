@@ -39,6 +39,12 @@
     "bridge:browser:status": "node tools/agent-browser-bridge/bin/mvi-bridge.mjs status",
     "bridge:browser:cmd": "node tools/agent-browser-bridge/bin/mvi-bridge.mjs",
     "term:import-spots": "node scripts/term-spot-import.mjs",
+    "term:import-integrity": "python3 scripts/import-integrity-term-premiums.py",
+    "term:import-integrity-fe": "python3 scripts/import-integrity-fe-premiums.py",
+    "fe:rebuild-quote-ranges": "python3 scripts/rebuild-quote-ranges-from-fe-harvest.py",
+    "term:harvest-integrity": "node scripts/harvest-integrity-term-quotes.mjs",
+    "term:harvest-integrity-fe": "node scripts/harvest-integrity-term-quotes.mjs --fe-grid",
+    "term:rebuild-cost-rates": "node scripts/rebuild-term-life-cost-rates.js",
     "assurity:import-spot": "node scripts/assurity-fe-spot-import.js",
     "assurity:interpolate-tobacco": "node scripts/interpolate-assurity-tobacco-from-anchors.js",
     "optimize:avatars": "node scripts/optimize-chat-avatars.js"

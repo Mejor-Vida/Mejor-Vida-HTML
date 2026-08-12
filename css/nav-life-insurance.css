@@ -168,8 +168,16 @@
   background: #fafbfc;
 }
 
-.nav-life-options-grid--cost {
-  grid-template-columns: 1fr;
+.nav-life-cost-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  column-gap: 0.85rem;
+  align-items: start;
+}
+
+/* Reserved right half of the white cost middle for future content */
+.nav-life-cost-aside {
+  min-height: 1px;
 }
 
 .nav-life-options-grid--cost a {
@@ -224,6 +232,11 @@
   grid-template-columns: repeat(2, minmax(0, 1fr));
   column-gap: 0.85rem;
   row-gap: 0;
+}
+
+/* Cost panel: single left column (must follow base grid so it wins cascade) */
+.nav-life-options-grid.nav-life-options-grid--cost {
+  grid-template-columns: 1fr;
 }
 
 .nav-life-options-grid a {

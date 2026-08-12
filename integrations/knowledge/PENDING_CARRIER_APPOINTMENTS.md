@@ -9,7 +9,7 @@ Julie noted these **new appointments** on 2026-07-19. Store for later site/RAG c
 | Corebridge     | FE public page live; Term/GUL/WL internal RAG ready | **Sells:** FE (SIWL/GIWL), Term, GUL, Whole Life. **Does not sell:** IUL or annuities/financial products. Public pages: `carriers/corebridge.html` + `en/carriers/corebridge.html`. Internal RAG in `Corebridge_Knowledge/`. Staff Product Selector UI deferred. |
 | Transamerica   | FE public page live            | FE-only pages: `carriers/transamerica.html` + `en/carriers/transamerica.html` (Express + portfolio). Term page deferred. |
 | Aetna (Accendo + CLI PS FE) | Appointed; **full FE life knowledge + public pages** | Accendo FE (40–89 Level/Modified) + Protection Series FE CLI (45–89 Level). Knowledge: `integrations/knowledge/Aetna_Knowledge/LIFE_PRODUCTS.md`. Pages: `carriers/aetna.html` + `en/carriers/aetna.html`. |
-| Americo        | Confirm appointment / portal   | Eagle Premier Level ~to age **85**; Eagle Guaranteed ~**50–80**, faces roughly **$2K–$25K** band with Corebridge GI. Named on products-guide chart; not yet a public carrier page. |
+| Americo        | **Appointed** (portal/content still pending public pages) | Eagle Premier Level ~to age **85**; Eagle Guaranteed ~**50–80**, faces roughly **$2K–$25K**. Include in Integrity FE harvest + `is_mvi_appointed`. Public carrier page / homepage card still deferred until approved copy/logo. |
 
 ## Already on the public site
 

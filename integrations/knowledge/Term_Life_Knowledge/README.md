@@ -1,14 +1,110 @@
-# Term Life rate data (Nebraska public quoter)
+# Term Life rate data (Nebraska)
 
-The term quoter reads **only** from `term_carrier_premiums.csv` → Supabase. Do not copy final expense rates or guess premiums.
+Two Supabase sources power future term quoting and marketing charts:
 
-## Source of truth
+| Table / file | Role |
+|--------------|------|
+| **`term_carrier_premiums`** | Appointed-carrier **chart** rates (today: AmAm Easy Term SI from Form 3350). Do not wipe when refreshing Integrity. |
+| **`term_integrity_premiums`** | Integrity Connect **marketplace** Quick Quote cards (FU Preferred Best NT harvest). Full competitor set via **pagination**. |
+| **`fe_integrity_premiums`** | Integrity Connect **Final Expense** Quick Quote cards (appointed-flagged). Parallel to term; does not yet drive `/api/quote-site`. |
+| `integrity-fu-term-premiums.csv` | Knowledge export of `term_integrity_premiums` (all captured cards). |
+| `integrity-fe-harvest.json` / `integrity-fe-premiums.csv` | FE harvest payload + CSV export. |
+| `integrity-term-harvest.json` | Raw term harvest payload (source for import). |
+| `js/term-life-cost-rates.json` | Static bilingual cost-page charts (**appointed-best** Preferred Best when flags present). |
+
+## Appointed vs marketplace (critical)
+
+The Integrity harvest stores **full marketplace cards** (paginated). Site cost charts and future bookable quoters should prefer **`is_mvi_appointed = true`**.
+
+**MVI appointed / contracted:** Assurity, Mutual of Omaha / United of Omaha, American Amicable, Corebridge, Transamerica, Aetna, **Americo**.
+
+**FU Preferred Best NT coverage:** Transamerica, Corebridge, and United of Omaha regularly appear. Americo / AmAm / Assurity / Aetna usually do **not** appear in FU Preferred Best (they are FE or SI products) — harvest Simplified Term + Final Expense for those.
+
+**Capture:** Integrity lists ~19–31 policies; harvester walks **all result pages** and stores every card in `all[]`, plus `appointed[]` / `appointed_best`.
+
+## Import / refresh Integrity FU charts
+
+```bash
+# Bridge + Chrome extension logged into connect.integrity.com
+npm run bridge:browser
+npm run term:harvest-integrity -- --force --fresh
+# FE (after Product Specialties allow Final Expense Quick Quote):
+npm run term:harvest-integrity-fe
+
+# Apply schema then upsert DB + refresh CSV
+python3 integrations/supabase/apply_migrations.py   # 090 term + 091 fe
+npm run term:import-integrity
+npm run term:import-integrity-fe
+
+# Refresh static cost-page JSON (appointed-best)
+npm run term:rebuild-cost-rates
+node scripts/build-term-life-cost-pages.js
+```
+
+CSV-only: `python3 scripts/import-integrity-term-premiums.py --csv-only`
+
+## Sample quoter queries
+
+Marketplace lowest (educational / “from $X” charts):
+
+```sql
+SELECT carrier_slug, product_name, monthly_premium
+FROM term_integrity_premiums
+WHERE is_best
+  AND underwriting_mode = 'fully_underwritten'
+  AND health_class = 'preferred_plus_nt'
+  AND state = 'NE' AND age = 40 AND sex = 'male' AND smoker = false
+  AND term_years = 20 AND face_amount = 500000;
+```
+
+All captured competitors for one cell (rank/compare):
+
+```sql
+SELECT rank_in_quote, carrier_slug, product_name, monthly_premium, is_mvi_appointed
+FROM term_integrity_premiums
+WHERE harvest_batch_id = '2026-08-12'
+  AND underwriting_mode = 'fully_underwritten'
+  AND health_class = 'preferred_plus_nt'
+  AND state = 'NE' AND age = 40 AND sex = 'male' AND smoker = false
+  AND term_years = 20 AND face_amount = 500000
+ORDER BY monthly_premium ASC;
+```
+
+Appointed-only best among captured cards:
+
+```sql
+SELECT carrier_slug, product_name, monthly_premium
+FROM term_integrity_appointed_best_premiums
+WHERE underwriting_mode = 'fully_underwritten'
+  AND health_class = 'preferred_plus_nt'
+  AND state = 'NE' AND age = 40 AND sex = 'male' AND smoker = false
+  AND term_years = 20 AND face_amount = 500000;
+```
+
+AmAm Easy Term SI (unchanged chart table):
+
+```sql
+SELECT age, sex, term_years, face_amount, monthly_premium
+FROM term_carrier_premiums
+WHERE carrier = 'amam' AND product = 'easy_term' AND state = 'NE'
+  AND health_class = 'standard_nt' AND smoker = false
+  AND age = 40 AND term_years = 20 AND face_amount = 250000;
+```
+
+## Path: DB → future public term quoter
+
+1. Prefer **`term_integrity_premiums`** for FU Preferred Best NT bands ($100k–$2M, terms 10/20/30, ages 20–60).
+2. Apply **`is_mvi_appointed`** (or appointed view) before showing bookable offers.
+3. Keep **`term_carrier_premiums`** for SI Easy Term and future appointed chart uploads (Transamerica WinFlex, MOO, Assurity).
+4. Static pages stay on `js/term-life-cost-rates.json` until the live quoter ships — rebuild from CSV/DB export; DB is source of truth for Integrity FU.
+
+## AmAm / appointed chart CSV (legacy quoter seed)
 
 | File | Purpose |
 |------|---------|
 | `term_carrier_premiums.csv` | Raw carrier rows: rate per $1,000 and/or fixed monthly premium |
 
-### CSV columns
+### CSV columns (`term_carrier_premiums`)
 
 | Column | Required | Notes |
 |--------|----------|--------|
@@ -37,7 +133,7 @@ The term quoter reads **only** from `term_carrier_premiums.csv` → Supabase. Do
 
 Simplified products (MOO TLE, AmAm Easy Term) may only have `standard_nt` / `standard_t` — if only one class exists, low and high match (no fabricated spread).
 
-### Where to get rates
+### Where to get appointed chart rates
 
 | Carrier | Product | Source |
 |---------|---------|--------|
@@ -101,7 +197,7 @@ node scripts/build-term-premiums-migration.js
 
 Parser imports **standard** Easy Term only (skips ROP pages). Stores monthly premiums at quoter face amounts ($100K–$500K) for ages on the chart (10yr to 70, 20yr to 65, 30yr to 55).
 
-### Build & deploy
+### Build & deploy (AmAm chart seed)
 
 ```bash
 node scripts/build-term-premiums-migration.js
@@ -113,3 +209,11 @@ python3 integrations/supabase/apply_migrations.py
 After adding rows, compare each sample cell to a manual quote in Integrity Connect / WinFlex. Log mismatches in `validation-log.md` (create as you verify).
 
 Height/weight uses MOO TLA build chart (`lib/term-build-chart.js`) to cap the **low** bound only — from MOO Underwriting Guide, not invented.
+
+## Gaps (next)
+
+- Health classes beyond Preferred Best NT (Preferred, Standard+, Standard, tobacco)
+- Appointed-only public quoter filter (schema ready via `is_mvi_appointed`)
+- Full Integrity result sets (~30 cards) — harvest currently tops out at ~10 visible DOM cards
+- Age 60 / 30-year: 12 cells had no premium (product max age)
+- WinFlex/chart fills for Transamerica/MOO/Assurity into `term_carrier_premiums` still sparse vs Integrity marketplace

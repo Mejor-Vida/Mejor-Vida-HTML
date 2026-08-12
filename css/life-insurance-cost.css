@@ -198,6 +198,13 @@
   cursor: pointer;
 }
 
+@media (max-width: 640px) {
+  .lic-face-tab {
+    font-size: 0.82rem;
+    padding: 0.45rem 0.65rem;
+  }
+}
+
 .lic-face-tab.is-active {
   background: var(--lic-gold);
   color: #1a202c;
