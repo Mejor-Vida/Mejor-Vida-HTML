@@ -190,22 +190,33 @@
     }
 
     function setOpen(next) {
+      var wasOpen = open;
       open = !!next;
       root.classList.toggle("is-open", open);
       panel.hidden = !open;
       toggle.setAttribute("aria-expanded", open ? "true" : "false");
       toggle.setAttribute("aria-label", open ? t.closeAria : t.openAria);
+      // preventScroll: focusing fixed bottom-dock controls otherwise scrolls the page to the footer
+      // (root is appended at end of <body>; browsers scroll focused nodes into view).
       if (open && nameEl) {
         try {
-          nameEl.focus();
+          nameEl.focus({ preventScroll: true });
         } catch (e) {
-          /* ignore */
+          try {
+            nameEl.focus();
+          } catch (e2) {
+            /* ignore */
+          }
         }
-      } else if (!open && toggle) {
+      } else if (!open && wasOpen && toggle) {
         try {
-          toggle.focus();
-        } catch (e2) {
-          /* ignore */
+          toggle.focus({ preventScroll: true });
+        } catch (e3) {
+          try {
+            toggle.focus();
+          } catch (e4) {
+            /* ignore */
+          }
         }
       }
     }
@@ -339,7 +350,7 @@
         });
     });
 
-    setOpen(false);
+    // Start closed without focusing the toggle (focus on init scrolled pages to the footer).
 
     window.addEventListener("mvi-site-language", function (e) {
       var code = e.detail && e.detail.code;

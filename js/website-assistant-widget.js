@@ -538,7 +538,13 @@
 
     function setOpen(open) {
       if (state.open === open) {
-        if (open) elInput.focus();
+        if (open) {
+          try {
+            elInput.focus({ preventScroll: true });
+          } catch (e) {
+            elInput.focus();
+          }
+        }
         return;
       }
       state.open = open;
@@ -561,7 +567,11 @@
       } else {
         state.unread = 0;
         badge.hidden = true;
-        elInput.focus();
+        try {
+          elInput.focus({ preventScroll: true });
+        } catch (e2) {
+          elInput.focus();
+        }
       }
     }
 
@@ -772,13 +782,13 @@
     if (!document.querySelector('link[href*="mvi-leave-message-widget"]')) {
       var link = document.createElement("link");
       link.rel = "stylesheet";
-      link.href = absFromBase("css/mvi-leave-message-widget.css?v=20260809-lm5");
+      link.href = absFromBase("css/mvi-leave-message-widget.css?v=20260812-lm-noscroll");
       document.head.appendChild(link);
     }
 
     var s = document.createElement("script");
     s.defer = true;
-    s.src = absFromBase("js/mvi-leave-message-widget.js?v=20260809-lm5");
+    s.src = absFromBase("js/mvi-leave-message-widget.js?v=20260812-lm-noscroll");
     document.head.appendChild(s);
   })();
 })();
