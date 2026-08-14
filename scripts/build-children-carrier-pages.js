@@ -962,6 +962,21 @@ function setMeta(html, lang, carrier, copy, enUrl, esUrl) {
   // Remove noindex if present (prefer indexable children pages)
   html = html.replace(/\s*<meta\s+name=["']robots["']\s+content=["'][^"']*noindex[^"']*["']\s*\/?>/i, "\n");
 
+  // Spanish pages: explicit index robots for SEO strength
+  if (lang === "es") {
+    if (!/name=["']robots["']/i.test(html)) {
+      html = html.replace(
+        /(<meta content="width=device-width[^>]*>)/i,
+        `$1\n<meta content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" name="robots"/>`
+      );
+    } else {
+      html = html.replace(
+        /<meta[^>]*name=["']robots["'][^>]*>/i,
+        `<meta content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" name="robots"/>`
+      );
+    }
+  }
+
   html = html.replace(/<title>[\s\S]*?<\/title>/, `<title>${copy.title}</title>`);
   html = html.replace(
     /<meta content="[^"]*" name="description"\/>/,
@@ -1005,6 +1020,24 @@ function setMeta(html, lang, carrier, copy, enUrl, esUrl) {
     `<meta content="${escapeAttr(copy.ogDescription)}" name="twitter:description"/>`
   );
 
+  if (lang === "es") {
+    const kidsImg = `${BASE}/img/opt/lic-hero-children-playground.jpg`;
+    html = html.replace(
+      /<meta content="https:\/\/www\.mejorvidainsurance\.com\/img\/opt\/[^"]+" property="og:image"\/>/g,
+      `<meta content="${kidsImg}" property="og:image"/>`
+    );
+    html = html.replace(
+      /<meta content="https:\/\/www\.mejorvidainsurance\.com\/img\/opt\/[^"]+" name="twitter:image"\/>/g,
+      `<meta content="${kidsImg}" name="twitter:image"/>`
+    );
+    if (!/og:site_name/.test(html)) {
+      html = html.replace(
+        /(<meta content="es_ES" property="og:locale"\/>)/,
+        `$1\n<meta content="Mejor Vida Seguros" property="og:site_name"/>\n<meta content="en_US" property="og:locale:alternate"/>`
+      );
+    }
+  }
+
   // Lang FAB → paired page
   if (lang === "en") {
     html = html.replace(
@@ -1018,25 +1051,93 @@ function setMeta(html, lang, carrier, copy, enUrl, esUrl) {
     );
   }
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    name: copy.serviceName,
-    description: copy.description,
-    url: canonical,
-    serviceType: copy.serviceType,
-    provider: {
-      "@type": "InsuranceAgency",
-      name: lang === "en" ? "Mejor Vida Insurance LLC" : "Mejor Vida Seguros LLC",
-      url: lang === "en" ? `${BASE}/en/` : `${BASE}/`,
-    },
-    brand: { "@type": "Brand", name: carrier.brand },
-    potentialAction: {
-      "@type": "CommunicateAction",
-      name: lang === "en" ? "Get a free quote" : "Obtener cotización gratis",
-      target: lang === "en" ? `${BASE}/en/quote.html` : `${BASE}/quote.html`,
-    },
-  };
+  const jsonLd =
+    lang === "es"
+      ? {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "WebPage",
+              "@id": `${canonical}#webpage`,
+              url: canonical,
+              name: copy.title,
+              description: copy.description,
+              inLanguage: "es",
+              isPartOf: {
+                "@type": "WebSite",
+                name: "Mejor Vida Seguros",
+                url: `${BASE}/`,
+              },
+              primaryImageOfPage: {
+                "@type": "ImageObject",
+                url: `${BASE}/img/opt/lic-hero-children-playground.jpg`,
+                width: 1024,
+                height: 682,
+              },
+            },
+            {
+              "@type": "BreadcrumbList",
+              itemListElement: [
+                {
+                  "@type": "ListItem",
+                  position: 1,
+                  name: "Inicio",
+                  item: `${BASE}/`,
+                },
+                {
+                  "@type": "ListItem",
+                  position: 2,
+                  name: "Costo del seguro de vida infantil",
+                  item: `${BASE}/costo-seguro-vida-infantil.html`,
+                },
+                {
+                  "@type": "ListItem",
+                  position: 3,
+                  name: carrier.brand,
+                  item: canonical,
+                },
+              ],
+            },
+            {
+              "@type": "Service",
+              name: copy.serviceName,
+              description: copy.description,
+              url: canonical,
+              serviceType: copy.serviceType,
+              provider: {
+                "@type": "InsuranceAgency",
+                name: "Mejor Vida Seguros",
+                legalName: "Mejor Vida Insurance LLC",
+                url: `${BASE}/`,
+              },
+              brand: { "@type": "Brand", name: carrier.brand },
+              potentialAction: {
+                "@type": "CommunicateAction",
+                name: "Obtener cotización gratis",
+                target: `${BASE}/quote.html`,
+              },
+            },
+          ],
+        }
+      : {
+          "@context": "https://schema.org",
+          "@type": "Service",
+          name: copy.serviceName,
+          description: copy.description,
+          url: canonical,
+          serviceType: copy.serviceType,
+          provider: {
+            "@type": "InsuranceAgency",
+            name: "Mejor Vida Insurance LLC",
+            url: `${BASE}/en/`,
+          },
+          brand: { "@type": "Brand", name: carrier.brand },
+          potentialAction: {
+            "@type": "CommunicateAction",
+            name: "Get a free quote",
+            target: `${BASE}/en/quote.html`,
+          },
+        };
 
   html = html.replace(
     /<script type="application\/ld\+json">[\s\S]*?<\/script>\s*<\/body>/,
