@@ -122,7 +122,8 @@
   }
 
   function renderBucketTable(bucketKey, face, tbody, noteEl, copy, quoteHref) {
-    var bucket = (window.MVI_LIC_RATES && window.MVI_LIC_RATES[bucketKey]) || {};
+    var meta = window.MVI_LIC_RATES || {};
+    var bucket = (meta && meta[bucketKey]) || {};
     var rows = ((bucket.tables || {})[String(face)]) || [];
     var qLabel = (copy && copy.quoteLabel) || "Get a quote";
     var notePrefix =
@@ -156,6 +157,10 @@
       })
       .join("");
     if (noteEl && bucket) {
+      if (copy && copy.preferMetaNote && meta.note) {
+        noteEl.textContent = meta.note;
+        return;
+      }
       noteEl.textContent =
         notePrefix +
         (bucket.rating || "") +
@@ -170,6 +175,9 @@
     var lang = document.documentElement.lang || "en";
     var isEs = lang.indexOf("es") === 0;
     var dedicatedTerm = !!document.body.classList.contains("lic-page--term");
+    var dedicatedChildren = !!document.body.classList.contains(
+      "lic-page--children"
+    );
     var copy = isEs
       ? {
           notePrefix: "Primas mensuales ilustrativas (redondeadas). Clasificación: ",
@@ -180,13 +188,15 @@
           ageRangeNote: dedicatedTerm
             ? " Edades cada 5 años según tarifas publicadas en nuestras tablas de compañías; sin tarifa publicada se muestra enlace a cotizar."
             : " Rangos de edad: temporal 10 años 20–80; 20 años 20–65; 30 años 20–55 (como los cuadros de muestra habituales).",
-          preferMetaNote: dedicatedTerm,
+          preferMetaNote: dedicatedTerm || dedicatedChildren,
           bucketNotePrefix: {
             whole_life: "Primas mensuales ilustrativas (redondeadas). Clasificación: ",
             whole_life_traditional: "Primas mensuales ilustrativas (redondeadas). Clasificación: ",
             final_expense: "Primas mensuales ilustrativas (redondeadas). Banda: ",
             guaranteed: "Primas mensuales ilustrativas (redondeadas). Banda: ",
             universal_life: "Vida universal / IUL: ",
+            children_si_wl:
+              "Primas mensuales ilustrativas (redondeadas). Clasificación: ",
           },
           bucketNoteSuffix: {
             whole_life:
@@ -199,6 +209,8 @@
               ". Edades de muestra 45–85. Muestras educativas; no es cotización de compañía.",
             universal_life:
               "primas mensuales ilustrativas (preferred no fumador). El costo real de UL/IUL depende del financiamiento y de la ilustración de la compañía.",
+            children_si_wl:
+              ". Bandas 0–17. Muestras educativas de compañías designadas; no es cotización vinculante.",
           },
           quoteLabel: "Cotizar →",
           femaleProfile: "Mujer, edad ",
@@ -215,13 +227,15 @@
           ageRangeNote: dedicatedTerm
             ? " Ages every 5 years where our carrier tables publish a rate; ages without a published rate show a quote link."
             : " Age ranges: 10-year term 20–80; 20-year 20–65; 30-year 20–55 (matching typical published sample charts).",
-          preferMetaNote: dedicatedTerm,
+          preferMetaNote: dedicatedTerm || dedicatedChildren,
           bucketNotePrefix: {
             whole_life: "Illustrative monthly premiums (rounded). Rating class: ",
             whole_life_traditional: "Illustrative monthly premiums (rounded). Rating class: ",
             final_expense: "Illustrative monthly premiums (rounded). Band: ",
             guaranteed: "Illustrative monthly premiums (rounded). Band: ",
             universal_life: "Universal / IUL: ",
+            children_si_wl:
+              "Illustrative monthly premiums (rounded). Rating class: ",
           },
           bucketNoteSuffix: {
             whole_life:
@@ -234,6 +248,8 @@
               ". Sample ages 45–85. Educational samples; not a carrier quote.",
             universal_life:
               "illustrative monthly premiums (preferred non-tobacco). Actual UL/IUL cost depends on funding and the carrier illustration.",
+            children_si_wl:
+              ". Age bands 0–17. Educational samples from appointed carriers; not a binding quote.",
           },
           quoteLabel: "Get a quote →",
           femaleProfile: "Female, age ",
@@ -276,6 +292,9 @@
       guaranteed: "guaranteed",
       ul: "universal_life",
       universal: "universal_life",
+      children: "children_si_wl",
+      "children-si": "children_si_wl",
+      "children_si_wl": "children_si_wl",
     };
 
     function wireFaceTabs(tabs, tbody, noteEl) {

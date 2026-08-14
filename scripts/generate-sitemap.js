@@ -27,11 +27,18 @@ const STATIC_PAGES = [
   { loc: "/costo-seguro-vida-temporal.html", priority: "0.82" },
   { loc: "/costo-seguro-vida-entera.html", priority: "0.82" },
   { loc: "/costo-seguro-gastos-finales.html", priority: "0.82" },
+  { loc: "/costo-seguro-vida-infantil.html", priority: "0.82" },
   { loc: "/final-expense-estimator.html", priority: "0.70" },
   { loc: "/carriers/assurity.html", priority: "0.70" },
   { loc: "/carriers/mutual-of-omaha.html", priority: "0.70" },
   { loc: "/carriers/american-amicable.html", priority: "0.70" },
   { loc: "/carriers/transamerica.html", priority: "0.70" },
+  { loc: "/carriers/mutual-of-omaha-infantil.html", priority: "0.72" },
+  { loc: "/carriers/assurity-infantil.html", priority: "0.72" },
+  { loc: "/carriers/transamerica-infantil.html", priority: "0.72" },
+  { loc: "/carriers/american-amicable-infantil.html", priority: "0.72" },
+  { loc: "/carriers/aetna-infantil.html", priority: "0.72" },
+  { loc: "/carriers/corebridge-infantil.html", priority: "0.72" },
 ];
 
 /** Standalone July articles redirect to the weekly digest — omit from sitemap. */

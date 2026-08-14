@@ -13,11 +13,13 @@
  *   node scripts/harvest-integrity-term-quotes.mjs --product fu --force --fresh
  *   node scripts/harvest-integrity-term-quotes.mjs --product si --spot-check
  *   node scripts/harvest-integrity-term-quotes.mjs --fe-grid --max 80
+ *   node scripts/harvest-integrity-term-quotes.mjs --child-grid --fresh
  *
  * Writes:
  *   integrations/knowledge/Term_Life_Knowledge/integrity-term-harvest.json
  *   integrations/knowledge/Term_Life_Knowledge/integrity-fu-term-premiums.csv
- *   (+ integrity-fe-harvest.json / integrity-si-term-premiums.csv for other products)
+ *   (+ integrity-fe-harvest.json / integrity-si-term-premiums.csv /
+ *      integrity-children-harvest.json for other products)
  */
 import fs from "node:fs";
 import path from "node:path";
@@ -107,6 +109,16 @@ function parseArgs(argv) {
       args.faces = [10000, 15000, 25000, 50000];
       args.terms = [0]; // FE has no term length
       args.health = ["S"]; // FE often uses Standard-style / no PP radios
+    } else if (a === "--child-grid") {
+      // Children's permanent / FE-path quotes (MOO CWL, Assurity Protect+, TA juvenile, etc.)
+      // Integrity has no separate "Children" product picker — use Final Expense flow with child ages.
+      args.product = "children";
+      args.ages = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17];
+      args.sexes = ["male", "female"];
+      args.faces = [5000, 10000, 15000, 25000, 40000, 50000];
+      args.terms = [0];
+      args.health = ["S"];
+      args.maxQuotes = Math.max(args.maxQuotes, 250);
     } else if (a === "--max" && next) {
       args.maxQuotes = Number(next);
       i++;
@@ -119,8 +131,14 @@ function parseArgs(argv) {
       args.fresh = true;
     }
   }
-  if (args.product === "fe" && args.faces[0] >= 100000) {
-    args.faces = [10000, 15000, 25000, 50000];
+  if (
+    (args.product === "fe" || args.product === "children") &&
+    args.faces[0] >= 100000
+  ) {
+    args.faces =
+      args.product === "children"
+        ? [5000, 10000, 15000, 25000, 40000, 50000]
+        : [10000, 15000, 25000, 50000];
     args.terms = [0];
   }
   return args;
@@ -128,13 +146,14 @@ function parseArgs(argv) {
 
 function productLabelFor(product) {
   if (product === "si") return "Simplified Term";
-  if (product === "fe") return "Final Expense";
+  if (product === "fe" || product === "children") return "Final Expense";
   return "Fully Underwritten Term";
 }
 
 function productTypeKey(product) {
   if (product === "si") return "simplified_term";
   if (product === "fe") return "final_expense";
+  if (product === "children") return "children_life";
   return "fully_underwritten_term";
 }
 
@@ -249,13 +268,25 @@ function parseCards() {
     let carrier = "";
     if (file.includes("americo")) carrier = "Americo";
     else if (file.includes("transamerica")) carrier = "Transamerica Life Insurance Co.";
-    else if (file.includes("united-of-omaha") || file.includes("omaha")) carrier = "United of Omaha";
-    else if (file.includes("amicable")) carrier = "American Amicable";
+    else if (file.includes("united-of-omaha") || file.includes("omaha") || file.includes("mutualofomaha") || file.includes("mutual-of-omaha")) carrier = "United of Omaha";
+    else if (file.includes("amicable") || file.includes("americanamicable")) carrier = "American Amicable";
     else if (file.includes("assurity")) carrier = "Assurity";
-    else if (file.includes("aetna") || file.includes("accendo")) carrier = "Aetna";
-    else if (file.includes("corebridge") || file.includes("american_general") || file.includes("aig")) carrier = "Corebridge Financial";
+    else if (file.includes("aetna") || file.includes("accendo") || file.includes("continental")) carrier = "Aetna";
+    else if (file.includes("corebridge") || file.includes("american_general") || file.includes("american-general") || file.includes("aig")) carrier = "Corebridge Financial";
     else if (file.includes("aflac")) carrier = "Aflac";
-    else carrier = (file.split(/[_-]/)[0] || "unknown");
+    else if (file.includes("gerber") || file.includes("globe") || file.includes("colonial") || file.includes("tristage") || file.includes("trustage") || file.includes("family-heritage") || file.includes("royal") || file.includes("liberty") || file.includes("foresters") || file.includes("baltimore") || file.includes("cica") || file.includes("guaranty")) carrier = file.split(/[_-]/)[0] || "unknown";
+    else {
+      // Product-name hints when logo filename is generic (logo_*.jpg)
+      const pl = (product || "").toLowerCase();
+      if (/children.?s?\\s*whole|childrens?\\s*whole|cwl/i.test(product || "")) carrier = "United of Omaha";
+      else if (/protect\\+|perform\\+/i.test(product || "")) carrier = "Assurity";
+      else if (/immediate solution|express premier|lifetime/i.test(product || "")) carrier = "Transamerica Life Insurance Co.";
+      else if (/living promise|term life answers/i.test(product || "")) carrier = "United of Omaha";
+      else if (/senior choice|golden solution|easy term/i.test(product || "")) carrier = "American Amicable";
+      else if (/eagle/i.test(product || "")) carrier = "Americo";
+      else if (/simplinow|select-a-term|qol/i.test(product || "")) carrier = "Corebridge Financial";
+      else carrier = (file.split(/[_-]/)[0] || "unknown");
+    }
     const monthlyM = t.match(/Monthly Premium\\s*\\$?\\s*([0-9,.]+)/i) || t.match(/\\$\\s*([0-9,.]+)\\s*\\/mo/i);
     const faceM = t.match(/Coverage Amount\\s*\\n?\\$?([0-9,]+)/i);
     const typeM = t.match(/Coverage Type:\\s*\\n?([^\\n]+)/i);
@@ -828,13 +859,17 @@ async function main() {
       ? path.join(OUT_DIR, "integrity-fe-harvest.json")
       : args.product === "si"
         ? path.join(OUT_DIR, "integrity-si-harvest.json")
-        : HARVEST_JSON;
+        : args.product === "children"
+          ? path.join(OUT_DIR, "integrity-children-harvest.json")
+          : HARVEST_JSON;
   const outCsv =
     args.product === "fe"
       ? path.join(OUT_DIR, "integrity-fe-premiums.csv")
       : args.product === "si"
         ? path.join(OUT_DIR, "integrity-si-term-premiums.csv")
-        : FU_CSV;
+        : args.product === "children"
+          ? path.join(OUT_DIR, "integrity-children-premiums.csv")
+          : FU_CSV;
 
   if (args.fresh && fs.existsSync(outJson)) {
     const bak = outJson.replace(/\.json$/i, `.bak-${Date.now()}.json`);
@@ -940,6 +975,15 @@ async function main() {
             ].includes(carrierKey(c.carrier))
           );
           rec.appointed = appointed;
+          rec.appointed_best = appointed[0] || null;
+          // Children harvest: only keep sellable/appointed products for quoter + charts
+          if (args.product === "children") {
+            rec.marketplace_all = rec.all;
+            rec.all = appointed;
+            rec.best = appointed[0] || null;
+            rec.top = appointed.slice(0, 10);
+            rec.policy_count = appointed.length;
+          }
           rec.appointed_best = appointed[0] || null;
           records.push(rec);
           seen.add(combo.key);

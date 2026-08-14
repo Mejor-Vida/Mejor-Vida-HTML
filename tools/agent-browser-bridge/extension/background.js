@@ -65,6 +65,7 @@ chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
       await heartbeat();
       ensurePolling();
       ensureKeepalive();
+      await broadcastArmed();
       sendResponse({ ok: true, armed, controlTabId });
       return;
     }
@@ -79,6 +80,46 @@ chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
   })();
   return true;
 });
+
+chrome.commands.onCommand.addListener(async (command) => {
+  if (command === "toggle-bridge") {
+    armed = !armed;
+  } else if (command === "disarm-bridge") {
+    armed = false;
+  } else {
+    return;
+  }
+  await chrome.storage.local.set({ armed });
+  if (armed) {
+    const [tab] = await chrome.tabs.query({ active: true, lastFocusedWindow: true });
+    if (tab?.id && !isPdfLikeUrl(tab.url || "")) {
+      await setControlTab(tab.id);
+    }
+  }
+  updateBadge();
+  await heartbeat();
+  ensurePolling();
+  ensureKeepalive();
+  await broadcastArmed();
+});
+
+async function broadcastArmed() {
+  try {
+    const tabs = await chrome.tabs.query({});
+    await Promise.all(
+      tabs.map(async (t) => {
+        if (!t.id) return;
+        try {
+          await chrome.tabs.sendMessage(t.id, { type: "armedChanged", armed });
+        } catch {
+          /* no content script on this tab */
+        }
+      })
+    );
+  } catch {
+    /* ignore */
+  }
+}
 
 function isPdfLikeUrl(url) {
   const u = String(url || "");

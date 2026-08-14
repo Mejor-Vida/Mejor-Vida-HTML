@@ -14,6 +14,40 @@
   var READ_MORE_AT = 420;
   var MAX_STORED_MESSAGES = 24;
 
+  /** Cost pages and other long pages were opening at the footer via history scroll restoration / bottom-dock focus. */
+  function preferTopOnFreshLoad() {
+    var hash = String((location && location.hash) || "");
+    if (hash && hash !== "#" && hash !== "#home" && hash !== "#top") return;
+    try {
+      if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+    } catch (e) {
+      /* ignore */
+    }
+    try {
+      window.scrollTo(0, 0);
+      if (document.documentElement) document.documentElement.scrollTop = 0;
+      if (document.body) document.body.scrollTop = 0;
+    } catch (e2) {
+      /* ignore */
+    }
+  }
+
+  preferTopOnFreshLoad();
+  window.addEventListener("load", preferTopOnFreshLoad);
+  window.addEventListener("pageshow", function (e) {
+    if (e && e.persisted) return;
+    preferTopOnFreshLoad();
+  });
+
+  function focusNoScroll(el) {
+    if (!el || typeof el.focus !== "function") return;
+    try {
+      el.focus({ preventScroll: true });
+    } catch (e) {
+      /* ignore */
+    }
+  }
+
   function escapeHtml(s) {
     var d = document.createElement("div");
     d.textContent = s;
@@ -538,13 +572,7 @@
 
     function setOpen(open) {
       if (state.open === open) {
-        if (open) {
-          try {
-            elInput.focus({ preventScroll: true });
-          } catch (e) {
-            elInput.focus();
-          }
-        }
+        if (open) focusNoScroll(elInput);
         return;
       }
       state.open = open;
@@ -567,11 +595,7 @@
       } else {
         state.unread = 0;
         badge.hidden = true;
-        try {
-          elInput.focus({ preventScroll: true });
-        } catch (e2) {
-          elInput.focus();
-        }
+        focusNoScroll(elInput);
       }
     }
 
@@ -782,13 +806,13 @@
     if (!document.querySelector('link[href*="mvi-leave-message-widget"]')) {
       var link = document.createElement("link");
       link.rel = "stylesheet";
-      link.href = absFromBase("css/mvi-leave-message-widget.css?v=20260812-lm-noscroll");
+      link.href = absFromBase("css/mvi-leave-message-widget.css?v=20260813-scroll-top");
       document.head.appendChild(link);
     }
 
     var s = document.createElement("script");
     s.defer = true;
-    s.src = absFromBase("js/mvi-leave-message-widget.js?v=20260812-lm-noscroll");
+    s.src = absFromBase("js/mvi-leave-message-widget.js?v=20260813-scroll-top");
     document.head.appendChild(s);
   })();
 })();

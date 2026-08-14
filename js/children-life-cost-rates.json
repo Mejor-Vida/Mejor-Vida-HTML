@@ -1,0 +1,107 @@
+{
+  "source": "Mejor Vida appointed-carrier rate samples",
+  "rating": "Illustrative sample (appointed carriers)",
+  "as_of": "2026-08-14",
+  "note": "Illustrative monthly premiums, rounded. Educational only — not a binding quote. Actual cost depends on age, health, amount, product, and state.",
+  "faces": [
+    10000,
+    25000,
+    40000,
+    50000
+  ],
+  "children_si_wl": {
+    "rating": "Illustrative sample (appointed carriers)",
+    "source": "Mejor Vida appointed-carrier rate samples",
+    "as_of": "2026-08-14",
+    "tables": {
+      "10000": [
+        {
+          "age": "0–4",
+          "female": 14,
+          "male": 15
+        },
+        {
+          "age": "5–9",
+          "female": 8,
+          "male": 9
+        },
+        {
+          "age": "10–14",
+          "female": 15,
+          "male": 17
+        },
+        {
+          "age": "15–17",
+          "female": 16,
+          "male": 19
+        }
+      ],
+      "25000": [
+        {
+          "age": "0–4",
+          "female": 19,
+          "male": 33
+        },
+        {
+          "age": "5–9",
+          "female": 13,
+          "male": 14
+        },
+        {
+          "age": "10–14",
+          "female": 32,
+          "male": 18
+        },
+        {
+          "age": "15–17",
+          "female": 34,
+          "male": 43
+        }
+      ],
+      "40000": [
+        {
+          "age": "0–4",
+          "female": 44,
+          "male": 51
+        },
+        {
+          "age": "5–9",
+          "female": 18,
+          "male": 19
+        },
+        {
+          "age": "10–14",
+          "female": 49,
+          "male": 39
+        },
+        {
+          "age": "15–17",
+          "female": 53,
+          "male": 66
+        }
+      ],
+      "50000": [
+        {
+          "age": "0–4",
+          "female": 29,
+          "male": 62
+        },
+        {
+          "age": "5–9",
+          "female": 17,
+          "male": 23
+        },
+        {
+          "age": "10–14",
+          "female": 61,
+          "male": 71
+        },
+        {
+          "age": "15–17",
+          "female": 34,
+          "male": 81
+        }
+      ]
+    }
+  }
+}

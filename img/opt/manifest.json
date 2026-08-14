@@ -468,6 +468,15 @@
     "keepPng": false
   },
   {
+    "src": "img/lic-hero-children-playground.jpg",
+    "base": "lic-hero-children-playground",
+    "width": 1024,
+    "height": 682,
+    "webp": "img/opt/lic-hero-children-playground.webp",
+    "fallback": "img/opt/lic-hero-children-playground.jpg",
+    "keepPng": false
+  },
+  {
     "src": "img/fep-hero-rainforest.jpg",
     "base": "fep-hero-rainforest",
     "width": 1024,

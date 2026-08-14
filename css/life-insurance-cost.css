@@ -36,6 +36,11 @@
   object-position: right center;
 }
 
+.lic-hero-media--children picture,
+.lic-hero-media--children img {
+  object-position: center 40%;
+}
+
 .lic-hero-media::after {
   content: "";
   position: absolute;
@@ -447,6 +452,104 @@
   object-fit: contain;
   filter: grayscale(1);
   opacity: 0.85;
+}
+
+/* Appointed-carrier list: distinct clickable cards */
+.lic-carrier-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin: 0 0 1.5rem;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  overflow: visible;
+}
+
+a.lic-carrier-row {
+  display: grid;
+  grid-template-columns: 12.5rem minmax(0, 1fr);
+  gap: 0.85rem 1.35rem;
+  align-items: center;
+  padding: 1.05rem 1.2rem;
+  background: #fff;
+  border: 1px solid #c8daf0;
+  border-radius: 0.65rem;
+  box-shadow: 0 1px 2px rgba(26, 54, 93, 0.04);
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+}
+
+a.lic-carrier-row:hover,
+a.lic-carrier-row:focus-visible {
+  border-color: #7aa7d9;
+  background: var(--lic-soft);
+  box-shadow: 0 4px 14px rgba(26, 54, 93, 0.1);
+  outline: none;
+}
+
+a.lic-carrier-row:focus-visible {
+  outline: 2px solid var(--lic-blue, #2563eb);
+  outline-offset: 2px;
+}
+
+.lic-carrier-row-logo {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 2.75rem;
+}
+
+.lic-carrier-row-logo img,
+.lic-carrier-row-logo picture {
+  display: block;
+  max-width: 100%;
+}
+
+.lic-carrier-row-logo img {
+  height: 30px;
+  width: auto;
+  max-width: 180px;
+  object-fit: contain;
+  object-position: left center;
+}
+
+/* Wordmarks with more whitespace need a larger display size */
+.lic-carrier-row-logo--lg img {
+  height: 44px;
+  max-width: 200px;
+}
+
+.lic-carrier-row-logo--name {
+  color: var(--lic-navy);
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.lic-carrier-row p {
+  margin: 0;
+  color: #334155;
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+@media (max-width: 560px) {
+  a.lic-carrier-row {
+    grid-template-columns: 1fr;
+    gap: 0.55rem;
+    padding: 0.95rem 1rem;
+  }
+
+  .lic-carrier-row-logo img {
+    height: 26px;
+  }
+
+  .lic-carrier-row-logo--lg img {
+    height: 38px;
+  }
 }
 
 .lic-fe-grid {

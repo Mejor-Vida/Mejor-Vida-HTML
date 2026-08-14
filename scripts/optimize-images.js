@@ -70,6 +70,7 @@ const JOBS = [
   { src: "img/lip-hero-sunrise.jpg", maxWidth: 1600, maxHeight: 1066, outBase: "lip-hero-sunrise" },
   { src: "img/lic-hero-dolphin-pier.jpg", maxWidth: 1600, maxHeight: 1066, outBase: "lic-hero-dolphin-pier" },
   { src: "img/lic-hero-desert-saguaro.jpg", maxWidth: 1600, maxHeight: 1066, outBase: "lic-hero-desert-saguaro" },
+  { src: "img/lic-hero-children-playground.jpg", maxWidth: 1600, maxHeight: 1066, outBase: "lic-hero-children-playground" },
   { src: "img/fep-hero-rainforest.jpg", maxWidth: 1600, maxHeight: 1066, outBase: "fep-hero-rainforest" },
   { src: "img/fep-hero-bus-stop-couple.jpg", maxWidth: 1600, maxHeight: 1066, outBase: "fep-hero-bus-stop-couple" },
   { src: "img/3-1-2026-Blog.png", maxWidth: 1200, maxHeight: 675 },

@@ -10,6 +10,40 @@
   var API_URL = "/api/contact-message";
   var ROOT_ID = "mvi-leave-message-root";
 
+  /** Keep fresh loads at the top (widgets append at end of <body>; focus/scroll restoration otherwise lands on the footer). */
+  function preferTopOnFreshLoad() {
+    var hash = String((location && location.hash) || "");
+    if (hash && hash !== "#" && hash !== "#home" && hash !== "#top") return;
+    try {
+      if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+    } catch (e) {
+      /* ignore */
+    }
+    try {
+      window.scrollTo(0, 0);
+      if (document.documentElement) document.documentElement.scrollTop = 0;
+      if (document.body) document.body.scrollTop = 0;
+    } catch (e2) {
+      /* ignore */
+    }
+  }
+
+  preferTopOnFreshLoad();
+  window.addEventListener("load", preferTopOnFreshLoad);
+  window.addEventListener("pageshow", function (e) {
+    if (e && e.persisted) return;
+    preferTopOnFreshLoad();
+  });
+
+  function focusNoScroll(el) {
+    if (!el || typeof el.focus !== "function") return;
+    try {
+      el.focus({ preventScroll: true });
+    } catch (e) {
+      /* Never fall back to focus() without preventScroll — that scrolls long pages to the footer. */
+    }
+  }
+
   var COPY = {
     es: {
       toggle: "Dejar un mensaje",
@@ -91,6 +125,11 @@
     if (existing) return existing;
     var root = document.createElement("div");
     root.id = ROOT_ID;
+    // Inline fixed positioning so the dock never participates in document flow before CSS arrives.
+    root.setAttribute(
+      "style",
+      "position:fixed;z-index:1083;left:0.85rem;bottom:0;width:auto;max-width:calc(100vw - 5.5rem);pointer-events:none;",
+    );
     document.body.appendChild(root);
     return root;
   }
@@ -99,6 +138,12 @@
     if (!root || root.getAttribute("data-mvi-lm-mounted") === "1") return;
     root.setAttribute("data-mvi-lm-mounted", "1");
     root.className = "mvi-lm-root";
+    if (!root.getAttribute("style")) {
+      root.setAttribute(
+        "style",
+        "position:fixed;z-index:1083;left:0.85rem;bottom:0;width:auto;max-width:calc(100vw - 5.5rem);pointer-events:none;",
+      );
+    }
 
     var lang = detectLang();
     var t = COPY[lang] || COPY.es;
@@ -199,25 +244,9 @@
       // preventScroll: focusing fixed bottom-dock controls otherwise scrolls the page to the footer
       // (root is appended at end of <body>; browsers scroll focused nodes into view).
       if (open && nameEl) {
-        try {
-          nameEl.focus({ preventScroll: true });
-        } catch (e) {
-          try {
-            nameEl.focus();
-          } catch (e2) {
-            /* ignore */
-          }
-        }
+        focusNoScroll(nameEl);
       } else if (!open && wasOpen && toggle) {
-        try {
-          toggle.focus({ preventScroll: true });
-        } catch (e3) {
-          try {
-            toggle.focus();
-          } catch (e4) {
-            /* ignore */
-          }
-        }
+        focusNoScroll(toggle);
       }
     }
 
@@ -351,6 +380,7 @@
     });
 
     // Start closed without focusing the toggle (focus on init scrolled pages to the footer).
+    preferTopOnFreshLoad();
 
     window.addEventListener("mvi-site-language", function (e) {
       var code = e.detail && e.detail.code;
