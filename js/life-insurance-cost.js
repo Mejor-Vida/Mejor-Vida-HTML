@@ -157,8 +157,9 @@
       })
       .join("");
     if (noteEl && bucket) {
-      if (copy && copy.preferMetaNote && meta.note) {
-        noteEl.textContent = meta.note;
+      var dedicatedNote = bucket.note || meta.note;
+      if (copy && copy.preferMetaNote && dedicatedNote) {
+        noteEl.textContent = dedicatedNote;
         return;
       }
       noteEl.textContent =
@@ -178,6 +179,7 @@
     var dedicatedChildren = !!document.body.classList.contains(
       "lic-page--children"
     );
+    var dedicatedAmount = !!document.body.classList.contains("lic-page--amount");
     var copy = isEs
       ? {
           notePrefix: "Primas mensuales ilustrativas (redondeadas). Clasificación: ",
@@ -188,7 +190,7 @@
           ageRangeNote: dedicatedTerm
             ? " Edades cada 5 años según tarifas publicadas en nuestras tablas de compañías; sin tarifa publicada se muestra enlace a cotizar."
             : " Rangos de edad: temporal 10 años 20–80; 20 años 20–65; 30 años 20–55 (como los cuadros de muestra habituales).",
-          preferMetaNote: dedicatedTerm || dedicatedChildren,
+          preferMetaNote: dedicatedTerm || dedicatedChildren || dedicatedAmount,
           bucketNotePrefix: {
             whole_life: "Primas mensuales ilustrativas (redondeadas). Clasificación: ",
             whole_life_traditional: "Primas mensuales ilustrativas (redondeadas). Clasificación: ",
@@ -227,7 +229,7 @@
           ageRangeNote: dedicatedTerm
             ? " Ages every 5 years where our carrier tables publish a rate; ages without a published rate show a quote link."
             : " Age ranges: 10-year term 20–80; 20-year 20–65; 30-year 20–55 (matching typical published sample charts).",
-          preferMetaNote: dedicatedTerm || dedicatedChildren,
+          preferMetaNote: dedicatedTerm || dedicatedChildren || dedicatedAmount,
           bucketNotePrefix: {
             whole_life: "Illustrative monthly premiums (rounded). Rating class: ",
             whole_life_traditional: "Illustrative monthly premiums (rounded). Rating class: ",
@@ -355,6 +357,16 @@
         primaryTbody,
         block.querySelector("[data-lic-note]")
       );
+      if (!allTabs.length && primaryTbody) {
+        var face = block.getAttribute("data-lic-face") || "5000";
+        var bucket = bucketByProduct[product];
+        var noteEl = block.querySelector("[data-lic-note]");
+        if (bucket) {
+          renderBucketTable(bucket, face, primaryTbody, noteEl, copy, quoteHref);
+        } else {
+          renderTermTable(term, face, primaryTbody, noteEl, copy, quoteHref);
+        }
+      }
     }
   }
 

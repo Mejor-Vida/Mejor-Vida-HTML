@@ -175,9 +175,17 @@
   align-items: start;
 }
 
-/* Reserved right half of the white cost middle for future content */
+.nav-life-cost-col,
 .nav-life-cost-aside {
   min-height: 1px;
+}
+
+.nav-life-cost-aside h3 {
+  margin: 0 0 0.45rem;
+  color: #1a365d;
+  font-size: 0.95rem;
+  font-weight: 800;
+  line-height: 1.25;
 }
 
 .nav-life-options-grid--cost a {

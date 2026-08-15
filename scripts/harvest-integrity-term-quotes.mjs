@@ -398,6 +398,10 @@ async function forceNewQuoteSession(productLabel) {
         await sleep(1300);
       }
       kind = await evalPage(`(() => { ${HELPERS} return pageKind(); })()`);
+      if (kind === "specialty_required") {
+        kind = await continuePastFeHealth();
+        console.log(`  forceNew specialties → ${kind}`);
+      }
       if (kind === "demographics" || kind === "fe_health" || kind === "preferences" || kind === "results") {
         return kind;
       }

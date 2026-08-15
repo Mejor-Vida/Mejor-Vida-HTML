@@ -28,6 +28,7 @@ const STATIC_PAGES = [
   { loc: "/costo-seguro-vida-entera.html", priority: "0.82" },
   { loc: "/costo-seguro-gastos-finales.html", priority: "0.82" },
   { loc: "/costo-seguro-vida-infantil.html", priority: "0.88" },
+  { loc: "/costo-seguro-vida-5000.html", priority: "0.86" },
   { loc: "/final-expense-estimator.html", priority: "0.70" },
   { loc: "/carriers/assurity.html", priority: "0.70" },
   { loc: "/carriers/mutual-of-omaha.html", priority: "0.70" },

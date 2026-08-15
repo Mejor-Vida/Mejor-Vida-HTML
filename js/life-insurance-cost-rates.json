@@ -972,8 +972,8 @@
   "final_expense": {
     "source": "Mejor Vida quote engine (quote_ranges) \u2014 Integrity FE appointed Level best (incl. MOO/AmAm/Americo/TA/Aetna/Corebridge where harvested)",
     "rating": "Non-tobacco, good-health (Level/Immediate) low",
-    "as_of": "2026-08-12",
-    "note": "Illustrative monthly premiums from Mejor Vida quote_ranges (Integrity Connect Final Expense appointed Level lowest at $10k, scaled). Ages 45\u201385. Educational only\u2014not a binding quote. Actual offers vary by carrier, health, tobacco, state, and underwriting.",
+    "as_of": "2026-08-15",
+    "note": "Illustrative monthly premiums from Mejor Vida quote_ranges (Integrity Connect Final Expense appointed Level lowest). $5,000 is from a direct $5,000 harvest; other faces use $10k harvest scaled. Ages 45\u201385. Educational only\u2014not a binding quote. Actual offers vary by carrier, health, tobacco, state, and underwriting.",
     "faces": [
       5000,
       10000,
@@ -984,48 +984,48 @@
       "5000": [
         {
           "age": 45,
-          "female": 11,
-          "male": 14
-        },
-        {
-          "age": 50,
-          "female": 12,
+          "female": 13,
           "male": 15
         },
         {
-          "age": 55,
-          "female": 12,
-          "male": 16
+          "age": 50,
+          "female": 14,
+          "male": 17
         },
         {
-          "age": 60,
+          "age": 55,
           "female": 15,
           "male": 20
         },
         {
+          "age": 60,
+          "female": 18,
+          "male": 23
+        },
+        {
           "age": 65,
-          "female": 19,
-          "male": 25
+          "female": 22,
+          "male": 29
         },
         {
           "age": 70,
-          "female": 25,
-          "male": 34
+          "female": 28,
+          "male": 37
         },
         {
           "age": 75,
-          "female": 34,
-          "male": 47
+          "female": 37,
+          "male": 50
         },
         {
           "age": 80,
-          "female": 48,
-          "male": 66
+          "female": 51,
+          "male": 70
         },
         {
           "age": 85,
-          "female": 66,
-          "male": 92
+          "female": 70,
+          "male": 96
         }
       ],
       "10000": [
