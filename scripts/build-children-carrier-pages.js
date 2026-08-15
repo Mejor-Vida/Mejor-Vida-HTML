@@ -38,84 +38,89 @@ const CARRIERS = [
       sections: [
         {
           h2: "At a glance",
-          cards: [
-            {
-              h: "Issue ages & face",
-              items: [
-                "Issue ages: <strong>14 days–17</strong> (age last birthday)",
-                "Face amounts: <strong>$5,000–$50,000</strong>",
-                "Underwriting class: <strong>Standard only</strong> (no table rates)",
-                "No medical exam; limited health questions",
-              ],
-            },
-            {
-              h: "Premium modes & fee",
-              items: [
-                "Annual <strong>1.00</strong> · Semi <strong>0.50</strong> · Quarterly <strong>0.25</strong> · Monthly BSP <strong>0.08333</strong>",
-                "Policy fee: <strong>$12/year</strong> (commissionable)",
-                "Rates never increase; benefits never decrease (while premiums are paid as required)",
-              ],
-            },
-            {
-              h: "Cash value & death benefit",
-              items: [
-                "Policy loans: <strong>5.66%</strong> in advance",
-                "No partial withdrawals",
-                "Death benefit guaranteed to age <strong>100</strong> while premiums are paid",
-              ],
-            },
-          ],
-        },
-        {
-          h2: "Riders on Children's Whole Life",
-          cards: [
-            {
-              h: "Guaranteed Insurability (CWL)",
-              items: [
-                "Option dates after ages <strong>25 / 30 / 35 / 40</strong>",
-                "Also on marriage/civil union, birth/adoption, and home purchase",
-                "Maximum <strong>5</strong> elections; exercise within <strong>6 months</strong>",
-                "No evidence of insurability required for eligible elections",
-                "Reminders typically <strong>60 days</strong> before age-based option dates",
-              ],
-            },
-            {
-              h: "Waiver of Premium — Death of Owner",
-              items: [
-                "One-time <strong>90-day</strong> waiver of premium after the owner's death",
-                "Available <strong>24 months</strong> after issue",
-                "Waived premiums are <strong>not</strong> deducted from the death benefit",
-              ],
-            },
-          ],
-        },
-        {
-          h2: "Application notes (CWL)",
-          list: [
-            "Up to <strong>8 children</strong> on one application; separate policy per child",
-            "Grandparents may sign without a parent signature (per CWL rules)",
-            "No conditional receipt for Children's Whole Life",
-          ],
-        },
-        {
-          h2: "Related Mutual of Omaha paths (not CWL)",
           intro:
-            "These are <strong>different</strong> from standalone Children's Whole Life — ask Mejor Vida Insurance which path fits.",
+            "In plain terms: this is lifelong coverage for a child. Premiums stay level, a cash value can grow over time, and the policy is designed to leave a set benefit for the family when it’s needed most.",
           cards: [
             {
-              h: "Fully underwritten juvenile guidelines",
+              h: "Who can be covered & for how much",
               items: [
-                "Ages generally <strong>15 days–17</strong>",
-                "Generally max face about <strong>$250,000</strong> (higher amounts need extra underwriting support)",
-                "Face typically ≤ <strong>50%</strong> of the lesser-insured parent",
-                "Not available in <strong>Washington</strong>",
+                "Available for children from <strong>14 days old through age 17</strong>",
+                "Coverage (the amount paid to beneficiaries) can be about <strong>$5,000 to $50,000</strong>",
+                "Simple health review only — <strong>no doctor visit or medical exam</strong>",
+                "One standard rate class (no higher “table” rate categories on this product)",
               ],
             },
             {
-              h: "Child Rider (on adult products)",
+              h: "How you pay",
               items: [
-                "Combined child-rider limit about <strong>$10,000 per child</strong> across products",
-                "Separate from a CWL base policy — ask for an illustration for rider pricing",
+                "You can pay <strong>yearly, twice a year, quarterly, or monthly</strong> (monthly is usually by bank draft)",
+                "There is a small extra policy fee of about <strong>$12 per year</strong>",
+                "As long as premiums are paid as required, your <strong>price does not go up</strong> and the <strong>coverage amount does not go down</strong>",
+              ],
+            },
+            {
+              h: "Cash value & payout",
+              items: [
+                "The policy can build <strong>cash value</strong> over time that the owner may borrow against (loan interest is about <strong>5.66%</strong>)",
+                "You generally <strong>cannot take partial cash withdrawals</strong> — access is through a policy loan instead",
+                "If premiums stay current, the death benefit stays in force through age <strong>100</strong>",
+              ],
+            },
+          ],
+        },
+        {
+          h2: "Optional add-ons (riders)",
+          intro:
+            "Riders are optional extras you can add to the policy. On Children’s Whole Life, two common ones help families keep coverage flexible as the child grows — and help keep the policy paid if the owner is no longer here.",
+          cards: [
+            {
+              h: "Guaranteed Insurability",
+              items: [
+                "Lets the family buy <strong>more coverage later without a new health review</strong> (no new medical exam for eligible options)",
+                "Age windows after the child turns <strong>25, 30, 35, and 40</strong>",
+                "Also available around big life moments: marriage/civil union, welcoming a child, or buying a home",
+                "Up to <strong>5</strong> times total; each option usually must be used within <strong>6 months</strong>",
+                "Mutual of Omaha typically sends a reminder about <strong>60 days</strong> before age-based windows",
+              ],
+            },
+            {
+              h: "Premium help if the owner passes away",
+              items: [
+                "If the policy owner dies, premiums can be paused for a one-time period of <strong>90 days</strong>",
+                "This help becomes available <strong>24 months</strong> after the policy starts",
+                "Those paused premiums are <strong>not taken out</strong> of the policy’s benefit amount",
+              ],
+            },
+          ],
+        },
+        {
+          h2: "How the application works",
+          list: [
+            "You can apply for up to <strong>8 children</strong> on one form — each child still gets their own policy",
+            "Grandparents may be able to sign without a parent’s signature (when product rules allow)",
+            "This product does not use a “conditional receipt” (temporary coverage paperwork some other policies use)",
+          ],
+        },
+        {
+          h2: "Other Mutual of Omaha options for kids",
+          intro:
+            "Besides the standalone Children’s Whole Life policy, Mutual of Omaha also has other ways to cover a child. These are <strong>different products</strong> — Mejor Vida Insurance can help you compare which path fits your family.",
+          cards: [
+            {
+              h: "Larger coverage with a full health review",
+              items: [
+                "Usually for children from about <strong>15 days through age 17</strong>",
+                "Higher coverage amounts are possible — often up to about <strong>$250,000</strong> (larger amounts need more review)",
+                "A child’s coverage is usually limited to about <strong>half</strong> of what the parent with less life insurance already has",
+                "This path is <strong>not available in Washington</strong>",
+              ],
+            },
+            {
+              h: "Add-on coverage on a parent’s policy",
+              items: [
+                "Instead of a separate kids policy, some adult policies can add a small <strong>child rider</strong>",
+                "Combined rider coverage is often limited to about <strong>$10,000 per child</strong>",
+                "Ask Mejor Vida Insurance for a personalized illustration — rider pricing depends on the adult policy",
               ],
             },
           ],
@@ -137,84 +142,89 @@ const CARRIERS = [
       sections: [
         {
           h2: "Resumen",
-          cards: [
-            {
-              h: "Edades y capital",
-              items: [
-                "Edades de emisión: <strong>14 días–17</strong> (edad en el último cumpleaños)",
-                "Capital asegurado: <strong>$5,000–$50,000</strong>",
-                "Clase de suscripción: solo <strong>Standard</strong> (sin tarifas de tabla)",
-                "Sin examen médico; preguntas de salud limitadas",
-              ],
-            },
-            {
-              h: "Modos de prima y cargo",
-              items: [
-                "Anual <strong>1.00</strong> · Semestral <strong>0.50</strong> · Trimestral <strong>0.25</strong> · Mensual BSP <strong>0.08333</strong>",
-                "Cargo de póliza: <strong>$12/año</strong> (comisionable)",
-                "Las primas no aumentan; los beneficios no disminuyen (mientras se paguen las primas requeridas)",
-              ],
-            },
-            {
-              h: "Valor en efectivo y beneficio por fallecimiento",
-              items: [
-                "Préstamos sobre la póliza: <strong>5.66%</strong> por adelantado",
-                "Sin retiros parciales",
-                "Beneficio por fallecimiento garantizado hasta los <strong>100</strong> años mientras se paguen las primas",
-              ],
-            },
-          ],
-        },
-        {
-          h2: "Riders en vida entera infantil",
-          cards: [
-            {
-              h: "Asegurabilidad garantizada (CWL)",
-              items: [
-                "Fechas de opción después de los <strong>25 / 30 / 35 / 40</strong> años",
-                "También por matrimonio/unión civil, nacimiento/adopción y compra de vivienda",
-                "Máximo <strong>5</strong> elecciones; ejercer dentro de <strong>6 meses</strong>",
-                "Sin evidencia de asegurabilidad en elecciones elegibles",
-                "Recordatorios típicamente <strong>60 días</strong> antes de las opciones por edad",
-              ],
-            },
-            {
-              h: "Exención de primas — fallecimiento del dueño",
-              items: [
-                "Exención única de primas por <strong>90 días</strong> tras el fallecimiento del dueño",
-                "Disponible <strong>24 meses</strong> después de la emisión",
-                "Las primas exentas <strong>no</strong> se descuentan del beneficio por fallecimiento",
-              ],
-            },
-          ],
-        },
-        {
-          h2: "Notas de solicitud (CWL)",
-          list: [
-            "Hasta <strong>8 niños</strong> en una solicitud; póliza separada por niño",
-            "Los abuelos pueden firmar sin firma del padre/madre (según reglas CWL)",
-            "Sin recibo condicional para vida entera infantil",
-          ],
-        },
-        {
-          h2: "Otras vías de Mutual of Omaha (no son CWL)",
           intro:
-            "Estas son <strong>distintas</strong> de la vida entera infantil independiente — consulte a Mejor Vida Seguros cuál conviene.",
+            "En palabras sencillas: es cobertura de por vida para un niño. Las primas se mantienen niveladas, puede acumular valor en efectivo con el tiempo y la póliza está pensada para dejar un beneficio fijo a la familia cuando más se necesite.",
           cards: [
             {
-              h: "Guías juveniles de suscripción completa",
+              h: "Quién puede cubrirse y por cuánto",
               items: [
-                "Edades generalmente <strong>15 días–17</strong>",
-                "Capital máximo generalmente cerca de <strong>$250,000</strong> (montos mayores requieren apoyo adicional de suscripción)",
-                "El capital suele ser ≤ <strong>50%</strong> del padre/madre con menor cobertura",
-                "No disponible en <strong>Washington</strong>",
+                "Disponible para niños desde los <strong>14 días hasta los 17 años</strong>",
+                "La cobertura (el monto que reciben los beneficiarios) puede ser de unos <strong>$5,000 a $50,000</strong>",
+                "Solo revisión de salud sencilla — <strong>sin examen médico ni visita al doctor</strong>",
+                "Una sola clase de tarifa estándar (sin categorías más altas de “tabla” en este producto)",
               ],
             },
             {
-              h: "Rider infantil (en productos para adultos)",
+              h: "Cómo se paga",
               items: [
-                "Límite combinado del rider infantil de unos <strong>$10,000 por niño</strong> entre productos",
-                "Es distinto de una póliza base CWL — consulte una ilustración para el precio del rider",
+                "Puede pagar <strong>anual, semestral, trimestral o mensual</strong> (lo mensual suele ser por débito bancario)",
+                "Hay un cargo adicional pequeño de póliza de unos <strong>$12 al año</strong>",
+                "Mientras se paguen las primas requeridas, el <strong>precio no sube</strong> y el <strong>monto de cobertura no baja</strong>",
+              ],
+            },
+            {
+              h: "Valor en efectivo y pago por fallecimiento",
+              items: [
+                "La póliza puede acumular <strong>valor en efectivo</strong> con el tiempo; el dueño puede pedir un préstamo sobre ese valor (interés aproximado <strong>5.66%</strong>)",
+                "Por lo general <strong>no se permiten retiros parciales</strong> de efectivo — el acceso suele ser mediante préstamo de la póliza",
+                "Si las primas se mantienen al día, el beneficio por fallecimiento permanece hasta los <strong>100</strong> años",
+              ],
+            },
+          ],
+        },
+        {
+          h2: "Complementos opcionales (riders)",
+          intro:
+            "Los riders son extras opcionales que puede agregar a la póliza. En la vida entera infantil, dos comunes ayudan a mantener la cobertura flexible a medida que el niño crece — y a facilitar el pago de la póliza si el dueño ya no está.",
+          cards: [
+            {
+              h: "Asegurabilidad garantizada",
+              items: [
+                "Permite comprar <strong>más cobertura más adelante sin una nueva revisión de salud</strong> (sin examen médico nuevo en opciones elegibles)",
+                "Ventanas de edad después de que el niño cumpla <strong>25, 30, 35 y 40</strong>",
+                "También en momentos importantes: matrimonio/unión civil, llegada de un hijo o compra de vivienda",
+                "Hasta <strong>5</strong> veces en total; cada opción suele usarse dentro de <strong>6 meses</strong>",
+                "Mutual of Omaha suele enviar un recordatorio unos <strong>60 días</strong> antes de las ventanas por edad",
+              ],
+            },
+            {
+              h: "Ayuda con primas si fallece el dueño",
+              items: [
+                "Si fallece el dueño de la póliza, las primas pueden pausarse una sola vez por <strong>90 días</strong>",
+                "Esta ayuda está disponible <strong>24 meses</strong> después de que inicie la póliza",
+                "Esas primas pausadas <strong>no se restan</strong> del monto del beneficio de la póliza",
+              ],
+            },
+          ],
+        },
+        {
+          h2: "Cómo funciona la solicitud",
+          list: [
+            "Puede solicitar hasta <strong>8 niños</strong> en un formulario — cada niño recibe su propia póliza",
+            "Los abuelos pueden firmar sin la firma de un padre/madre (cuando las reglas del producto lo permiten)",
+            "Este producto no usa un “recibo condicional” (el papeleo de cobertura temporal que usan otras pólizas)",
+          ],
+        },
+        {
+          h2: "Otras opciones de Mutual of Omaha para niños",
+          intro:
+            "Además de la póliza independiente de vida entera infantil, Mutual of Omaha también tiene otras formas de cubrir a un niño. Son <strong>productos distintos</strong> — Mejor Vida Seguros puede ayudar a comparar cuál conviene a su familia.",
+          cards: [
+            {
+              h: "Cobertura mayor con revisión completa de salud",
+              items: [
+                "Por lo general para niños desde unos <strong>15 días hasta los 17 años</strong>",
+                "Se pueden considerar montos más altos — a menudo hasta unos <strong>$250,000</strong> (montos mayores necesitan más revisión)",
+                "La cobertura del niño suele limitarse a cerca de la <strong>mitad</strong> de lo que ya tiene el padre/madre con menos seguro de vida",
+                "Esta vía <strong>no está disponible en Washington</strong>",
+              ],
+            },
+            {
+              h: "Cobertura adicional en la póliza de un adulto",
+              items: [
+                "En lugar de una póliza infantil separada, algunas pólizas de adultos pueden agregar un pequeño <strong>rider para hijos</strong>",
+                "La cobertura combinada del rider suele limitarse a unos <strong>$10,000 por niño</strong>",
+                "Consulte a Mejor Vida Seguros una ilustración personalizada — el precio del rider depende de la póliza del adulto",
               ],
             },
           ],
@@ -232,111 +242,219 @@ const CARRIERS = [
     logoEn: `<img alt="Assurity" class="d-inline-block" decoding="async" height="52" src="../../img/carriers/assurity-logo.svg" style="height:72px;width:auto;max-width:100%;" width="220" loading="eager"/>`,
     logoEs: `<img alt="Assurity" class="d-inline-block" decoding="async" height="52" src="../img/carriers/assurity-logo.svg" style="height:72px;width:auto;max-width:100%;" width="220" loading="eager"/>`,
     en: {
-      title: "Assurity — Children's / Juvenile Whole Life (Protect+ & Perform+) | Mejor Vida Insurance",
+      title: "Assurity — Children's Whole Life (Protect+ & Perform+) | Mejor Vida Insurance",
       description:
-        "Assurity Protect+ and Perform+ can issue from early childhood (15 days) with juvenile accelerated underwriting bands, ownership transfer at 25, and built-in living benefits. Educational overview from Mejor Vida Insurance.",
-      ogTitle: "Assurity juvenile whole life | Mejor Vida Insurance",
+        "Assurity Protect+ and Perform+ permanent life insurance for children from 15 days old: coverage amounts, living benefits, ownership at 25, and optional add-ons. Educational overview from Mejor Vida Insurance.",
+      ogTitle: "Assurity children's whole life | Mejor Vida Insurance",
       ogDescription:
-        "Assurity Protect+/Perform+ for juveniles — ages, living benefits, ownership transfer at 25, and optional riders. Compare with Mejor Vida Insurance.",
-      h1: "Juvenile whole life (Protect+ & Perform+)",
+        "Assurity Protect+/Perform+ for kids — ages, coverage amounts, living benefits, ownership transfer at 25, and optional add-ons. Compare with Mejor Vida Insurance.",
+      h1: "Children's whole life (Protect+ & Perform+)",
       lead:
-        "<strong>Assurity Protect+</strong> and <strong>Perform+</strong> are permanent whole life products that can cover juveniles as well as adults. Mejor Vida Insurance can help compare Assurity with other children's coverage options.",
-      serviceName: "Assurity Protect+ / Perform+ juvenile whole life",
-      serviceType: "Juvenile Whole Life Insurance",
+        "<strong>Assurity Protect+</strong> and <strong>Perform+</strong> are lifelong (permanent) life insurance plans. They can cover a child from early infancy — and the same product family also covers adults. Mejor Vida Insurance can help compare Assurity with other children's coverage options.",
+      serviceName: "Assurity Protect+ / Perform+ children's whole life",
+      serviceType: "Children's Whole Life Insurance",
       sections: [
         {
           h2: "At a glance",
+          intro:
+            "In plain terms: this is lifelong coverage that can start when a child is very young. Premiums are designed to stay on a set schedule, the policy can build cash value, and the family can leave a set benefit in place as the child grows into adulthood.",
           cards: [
             {
-              h: "Issue ages & face",
+              h: "Who can be covered & for how much",
               items: [
-                "Issue ages: <strong>15 days–85</strong>",
-                "Minimum face typically <strong>$10,000+</strong>",
-                "Accelerated underwriting juvenile band: ages <strong>15 days–17</strong>, max face <strong>$300,000</strong>",
+                "Available from <strong>15 days old through age 85</strong> (children and adults use the same product family)",
+                "Coverage usually starts at about <strong>$10,000</strong> and can go higher",
+                "For children ages <strong>15 days–17</strong>, many applications can be reviewed <strong>without a medical exam</strong> for coverage up to about <strong>$300,000</strong>",
+                "Two plan styles: <strong>Protect+</strong> leans toward more death benefit for the premium; <strong>Perform+</strong> leans toward stronger cash-value growth",
               ],
             },
             {
               h: "Ownership & living benefits",
               items: [
-                "Automatic ownership transfer at age <strong>25</strong> (no forms)",
-                "Built-in accelerated death benefits for critical / chronic / terminal illness (Form <strong>R I2422</strong>)",
-                "Chronic and critical ADB available through issue age <strong>70</strong>",
+                "On a child’s policy, ownership typically <strong>moves to the child automatically at age 25</strong> — no extra paperwork",
+                "Built-in <strong>living benefits</strong>: if a covered critical, chronic, or terminal illness qualifies, part of the death benefit may be available early (rules apply)",
+                "Critical and chronic living-benefit options are generally available when the insured is issued through age <strong>70</strong>",
               ],
             },
             {
-              h: "Availability note",
+              h: "Where it’s available",
               items: [
-                "Available in all states except <strong>California</strong> and <strong>New York</strong> (per Assurity product materials)",
-                "Features and riders still vary by state — confirm before applying",
+                "Per Assurity materials, these plans are offered in all states except <strong>California</strong> and <strong>New York</strong>",
+                "Details and optional add-ons still vary by state — confirm before applying",
+                "Payment schedules can include options like <strong>10-Pay, 20-Pay, pay to age 65, or pay to age 100</strong> (ask for an illustration)",
               ],
             },
           ],
         },
         {
-          h2: "Optional riders (names)",
+          h2: "Optional add-ons (riders)",
           intro:
-            "Exact rider amounts and premiums depend on the illustration. Ask Mejor Vida Insurance for an illustration before relying on any dollar figure.",
-          list: [
-            "Children's Term Rider — amounts <strong>unknown on this page</strong>; ask for an illustration",
-            "Payor Benefit",
-            "Guaranteed Insurability",
-            "Accidental Death Benefit",
-            "Other riders may appear on Assurity materials depending on product and state",
+            "Riders are optional extras. Exact amounts and prices depend on the illustration — ask Mejor Vida Insurance for numbers that match your family before relying on any figure.",
+          cards: [
+            {
+              h: "Children’s term add-on (on an adult’s policy)",
+              items: [
+                "Puts temporary coverage on the children named on an <strong>adult’s</strong> Protect+/Perform+ policy (a different path than buying a full kids policy)",
+                "Child ages typically <strong>15 days through 17</strong>; coverage for each child usually ends around age <strong>25</strong>",
+                "Common coverage range about <strong>$5,000–$25,000</strong> per child (confirm on an illustration)",
+                "New children born or adopted later may be added when rider rules allow",
+              ],
+            },
+            {
+              h: "Premium help for a child’s policy (Payor Benefit)",
+              items: [
+                "Can waive premiums on a <strong>child’s</strong> policy if the person paying premiums dies or becomes totally disabled (while rules still apply)",
+                "Usually for child ages <strong>15 days–17</strong>, with the premium payor ages <strong>18–55</strong>",
+                "This help generally ends by the child’s age <strong>25</strong> (or earlier under product rules)",
+              ],
+            },
+            {
+              h: "Guaranteed Insurability",
+              items: [
+                "Lets the insured buy <strong>more coverage later without a new health review</strong> (on eligible option dates)",
+                "Options are limited (Assurity materials describe up to <strong>five</strong> purchases before age <strong>40</strong>)",
+                "Useful as a child grows into adulthood and may want more protection",
+              ],
+            },
+            {
+              h: "Extra benefit for accidental death",
+              items: [
+                "An optional Accidental Death Benefit can pay an extra amount if death is caused by a covered accident",
+                "Availability and amounts vary — ask for an illustration",
+              ],
+            },
+          ],
+        },
+        {
+          h2: "Two common ways families use Assurity for kids",
+          intro:
+            "These are <strong>different paths</strong>. Mejor Vida Insurance can help you compare which one fits — a policy in the child’s name, or smaller temporary coverage attached to a parent’s plan.",
+          cards: [
+            {
+              h: "A permanent policy for the child",
+              items: [
+                "The child is the insured on Protect+ or Perform+",
+                "Coverage can last a lifetime and may build cash value",
+                "Ownership typically transfers to the child at age <strong>25</strong>",
+              ],
+            },
+            {
+              h: "A temporary add-on on a parent’s policy",
+              items: [
+                "An adult buys Protect+/Perform+ and adds the Children’s Term rider",
+                "Usually smaller dollar amounts that end around each child’s age <strong>25</strong>",
+                "Often used when the main goal is modest, short-term protection for several children on one adult plan",
+              ],
+            },
           ],
         },
       ],
     },
     es: {
-      title: "Assurity — Vida entera juvenil (Protect+ y Perform+) | Mejor Vida Seguros",
+      title: "Assurity — Vida entera infantil (Protect+ y Perform+) | Mejor Vida Seguros",
       description:
-        "Assurity Protect+ y Perform+ pueden emitirse desde la infancia (15 días), con bandas juveniles de suscripción acelerada, transferencia de propiedad a los 25 y beneficios en vida incluidos. Resumen educativo de Mejor Vida Seguros.",
-      ogTitle: "Assurity vida entera juvenil | Mejor Vida Seguros",
+        "Assurity Protect+ y Perform+ seguro de vida permanente para niños desde los 15 días: montos, beneficios en vida, propiedad a los 25 y complementos opcionales. Resumen educativo de Mejor Vida Seguros.",
+      ogTitle: "Assurity vida entera infantil | Mejor Vida Seguros",
       ogDescription:
-        "Assurity Protect+/Perform+ para menores: edades, beneficios en vida, transferencia a los 25 y riders opcionales. Compare con Mejor Vida Seguros.",
-      h1: "Vida entera juvenil (Protect+ y Perform+)",
+        "Assurity Protect+/Perform+ para niños: edades, montos, beneficios en vida, transferencia a los 25 y complementos opcionales. Compare con Mejor Vida Seguros.",
+      h1: "Vida entera infantil (Protect+ y Perform+)",
       lead:
-        "<strong>Assurity Protect+</strong> y <strong>Perform+</strong> son productos de vida entera permanentes que pueden cubrir a menores y adultos. Mejor Vida Seguros puede ayudar a comparar Assurity con otras opciones infantiles.",
-      serviceName: "Assurity Protect+ / Perform+ vida entera juvenil",
-      serviceType: "Seguro de vida entera juvenil",
+        "<strong>Assurity Protect+</strong> y <strong>Perform+</strong> son planes de seguro de vida permanente (de por vida). Pueden cubrir a un niño desde la primera infancia — y la misma familia de productos también cubre adultos. Mejor Vida Seguros puede ayudar a comparar Assurity con otras opciones infantiles.",
+      serviceName: "Assurity Protect+ / Perform+ vida entera infantil",
+      serviceType: "Seguro de vida entera infantil",
       sections: [
         {
           h2: "Resumen",
+          intro:
+            "En palabras sencillas: es cobertura de por vida que puede empezar cuando el niño es muy pequeño. Las primas siguen un calendario definido, la póliza puede acumular valor en efectivo y la familia puede dejar un beneficio fijo a medida que el niño crece.",
           cards: [
             {
-              h: "Edades y capital",
+              h: "Quién puede cubrirse y por cuánto",
               items: [
-                "Edades de emisión: <strong>15 días–85</strong>",
-                "Capital mínimo típico <strong>$10,000+</strong>",
-                "Banda juvenil de suscripción acelerada: <strong>15 días–17</strong>, capital máximo <strong>$300,000</strong>",
+                "Disponible desde los <strong>15 días hasta los 85 años</strong> (niños y adultos usan la misma familia de productos)",
+                "La cobertura suele empezar en unos <strong>$10,000</strong> y puede ser mayor",
+                "Para niños de <strong>15 días a 17 años</strong>, muchas solicitudes pueden revisarse <strong>sin examen médico</strong> por cobertura de hasta unos <strong>$300,000</strong>",
+                "Dos estilos de plan: <strong>Protect+</strong> prioriza más beneficio por fallecimiento por la prima; <strong>Perform+</strong> prioriza un crecimiento más fuerte del valor en efectivo",
               ],
             },
             {
               h: "Propiedad y beneficios en vida",
               items: [
-                "Transferencia automática de propiedad a los <strong>25</strong> años (sin formularios)",
-                "Beneficios acelerados por fallecimiento por enfermedad crítica / crónica / terminal (Formulario <strong>R I2422</strong>)",
-                "ADB crónica y crítica disponibles hasta edad de emisión <strong>70</strong>",
+                "En una póliza infantil, la propiedad suele <strong>pasar al niño automáticamente a los 25 años</strong> — sin papeleo extra",
+                "Incluye <strong>beneficios en vida</strong>: si califica una enfermedad crítica, crónica o terminal cubierta, parte del beneficio por fallecimiento puede estar disponible antes (aplican reglas)",
+                "Las opciones de beneficio en vida por enfermedad crítica y crónica suelen estar disponibles cuando el asegurado se emite hasta los <strong>70</strong> años",
               ],
             },
             {
-              h: "Disponibilidad",
+              h: "Dónde está disponible",
               items: [
-                "Disponible en todos los estados excepto <strong>California</strong> y <strong>Nueva York</strong> (según materiales de Assurity)",
-                "Características y riders varían por estado — confirme antes de solicitar",
+                "Según materiales de Assurity, estos planes se ofrecen en todos los estados excepto <strong>California</strong> y <strong>Nueva York</strong>",
+                "Los detalles y complementos opcionales aún varían por estado — confirme antes de solicitar",
+                "Los calendarios de pago pueden incluir opciones como <strong>10 pagos, 20 pagos, pagar hasta los 65 o pagar hasta los 100</strong> (pida una ilustración)",
               ],
             },
           ],
         },
         {
-          h2: "Riders opcionales (nombres)",
+          h2: "Complementos opcionales (riders)",
           intro:
-            "Los montos y primas exactos dependen de la ilustración. Consulte una ilustración con Mejor Vida Seguros antes de confiar en cualquier cifra.",
-          list: [
-            "Rider de término infantil — montos <strong>desconocidos en esta página</strong>; consulte una ilustración",
-            "Beneficio del pagador (Payor Benefit)",
-            "Asegurabilidad garantizada",
-            "Beneficio por muerte accidental",
-            "Pueden aparecer otros riders según el producto y el estado",
+            "Los riders son extras opcionales. Los montos y precios exactos dependen de la ilustración — pida a Mejor Vida Seguros cifras que correspondan a su familia antes de confiar en cualquier número.",
+          cards: [
+            {
+              h: "Complemento temporal para hijos (en la póliza de un adulto)",
+              items: [
+                "Agrega cobertura temporal a los hijos nombrados en una póliza Protect+/Perform+ de un <strong>adulto</strong> (es un camino distinto a comprar una póliza infantil completa)",
+                "Edades del niño suelen ser de <strong>15 días a 17</strong>; la cobertura de cada niño suele terminar cerca de los <strong>25</strong> años",
+                "Rango común de cobertura: unos <strong>$5,000–$25,000</strong> por niño (confirme en una ilustración)",
+                "Los hijos nacidos o adoptados después pueden agregarse cuando las reglas del rider lo permitan",
+              ],
+            },
+            {
+              h: "Ayuda con primas en una póliza infantil (Payor Benefit)",
+              items: [
+                "Puede eximir las primas de una póliza del <strong>niño</strong> si quien las paga fallece o queda totalmente discapacitado (mientras apliquen las reglas)",
+                "Suele ser para niños de <strong>15 días–17</strong>, con el pagador de primas entre <strong>18–55</strong> años",
+                "Esta ayuda generalmente termina a los <strong>25</strong> años del niño (o antes según las reglas del producto)",
+              ],
+            },
+            {
+              h: "Asegurabilidad garantizada",
+              items: [
+                "Permite comprar <strong>más cobertura más adelante sin una nueva revisión de salud</strong> (en fechas de opción elegibles)",
+                "Las opciones son limitadas (los materiales de Assurity describen hasta <strong>cinco</strong> compras antes de los <strong>40</strong> años)",
+                "Útil a medida que el niño crece y puede querer más protección",
+              ],
+            },
+            {
+              h: "Beneficio extra por muerte accidental",
+              items: [
+                "Un Beneficio por Muerte Accidental opcional puede pagar un monto adicional si el fallecimiento se debe a un accidente cubierto",
+                "La disponibilidad y los montos varían — pida una ilustración",
+              ],
+            },
+          ],
+        },
+        {
+          h2: "Dos formas comunes en que las familias usan Assurity para niños",
+          intro:
+            "Son <strong>caminos distintos</strong>. Mejor Vida Seguros puede ayudar a comparar cuál conviene — una póliza a nombre del niño, o una cobertura temporal más pequeña en el plan de un padre/madre.",
+          cards: [
+            {
+              h: "Una póliza permanente para el niño",
+              items: [
+                "El niño es el asegurado en Protect+ o Perform+",
+                "La cobertura puede durar toda la vida y puede acumular valor en efectivo",
+                "La propiedad suele transferirse al niño a los <strong>25</strong> años",
+              ],
+            },
+            {
+              h: "Un complemento temporal en la póliza de un padre/madre",
+              items: [
+                "Un adulto compra Protect+/Perform+ y agrega el rider de término infantil",
+                "Suelen ser montos más pequeños que terminan cerca de los <strong>25</strong> años de cada niño",
+                "A menudo se usa cuando la meta es una protección modesta y de corto plazo para varios hijos en un solo plan de adulto",
+              ],
+            },
           ],
         },
       ],
@@ -352,67 +470,101 @@ const CARRIERS = [
     logoEn: `<picture><source type="image/webp" srcset="../../img/opt/transamerica-logo.webp?v=20260723-nobg"/><img alt="Transamerica" class="d-inline-block" src="../../img/opt/transamerica-logo.png?v=20260723-nobg" width="480" height="114" style="height:72px;width:auto;max-width:100%;" loading="eager" decoding="async"/></picture>`,
     logoEs: `<picture><source type="image/webp" srcset="../img/opt/transamerica-logo.webp?v=20260723-nobg"/><img alt="Transamerica" class="d-inline-block" src="../img/opt/transamerica-logo.png?v=20260723-nobg" width="480" height="114" style="height:72px;width:auto;max-width:100%;" loading="eager" decoding="async"/></picture>`,
     en: {
-      title: "Transamerica — Immediate Solution Juvenile & Child/Grandchild Rider | Mejor Vida Insurance",
+      title: "Transamerica — Children's Immediate Solution & Child/Grandchild Add-on | Mejor Vida Insurance",
       description:
-        "Transamerica Immediate Solution for juveniles (ages 0–85 base product) plus Children's/Grandchildren's Benefit Rider (CGR) rules. Educational overview from Mejor Vida Insurance.",
-      ogTitle: "Transamerica juvenile Immediate Solution | Mejor Vida Insurance",
+        "Transamerica Immediate Solution for children (ages 0–85 product family) plus a child/grandchild add-on on some adult policies. Ages, coverage amounts, and plain-language overview from Mejor Vida Insurance.",
+      ogTitle: "Transamerica children's Immediate Solution | Mejor Vida Insurance",
       ogDescription:
-        "Immediate Solution juvenile classes, face limits by age, underwriting notes, and CGR rider facts. Compare with Mejor Vida Insurance.",
-      h1: "Immediate Solution (juvenile) & child/grandchild rider",
+        "Immediate Solution for kids — ages, coverage limits, eligibility notes, and child/grandchild add-on facts. Compare with Mejor Vida Insurance.",
+      h1: "Immediate Solution for kids & child/grandchild add-on",
       lead:
-        "<strong>Transamerica Immediate Solution</strong> can issue with Preferred/Standard Juvenile classes. Some adult Immediate policies can also add a <strong>Children's/Grandchildren's Benefit Rider (CGR)</strong>. Mejor Vida Insurance can help compare options.",
-      serviceName: "Transamerica Immediate Solution juvenile & CGR",
-      serviceType: "Juvenile Final Expense / Child Rider",
+        "<strong>Transamerica Immediate Solution</strong> is a permanent life insurance plan that can cover children as well as adults. On some adult Immediate Solution policies, families can also add a small <strong>child or grandchild add-on</strong>. Mejor Vida Insurance can help compare which path fits.",
+      serviceName: "Transamerica Immediate Solution for children & child/grandchild add-on",
+      serviceType: "Children's Whole Life / Child Rider",
       sections: [
         {
-          h2: "Immediate Solution — base product",
+          h2: "At a glance — Immediate Solution",
+          intro:
+            "In plain terms: Immediate Solution is lifelong coverage with a set benefit. When the policy is issued as “Immediate,” the full benefit amount is designed to be in force from day one (as long as the policy stays in force under its terms).",
           cards: [
             {
-              h: "Ages & face amounts",
+              h: "Who can be covered & for how much",
               items: [
-                "Issue ages: <strong>0–85</strong>",
-                "Minimum face: <strong>$1,000</strong>",
-                "Maximum by age: <strong>0–55 $50,000</strong> · <strong>56–65 $40,000</strong> · <strong>66–75 $30,000</strong> · <strong>76–85 $25,000</strong>",
-                "Full death benefit from day one (when issued as Immediate)",
-                "Preferred / Standard Juvenile underwriting classes",
+                "For <strong>children</strong>, coverage usually starts around <strong>$1,000</strong> and can go up to about <strong>$50,000</strong>",
+                "Immediate Solution is the <strong>same product adults can buy</strong> — so the carrier’s overall age range is <strong>0–85</strong>, not just kids",
+                "At older adult ages the company allows a smaller maximum (about <strong>$40,000</strong> at 56–65, <strong>$30,000</strong> at 66–75, and <strong>$25,000</strong> at 76–85). Those adult caps don’t change the children’s limit above",
+                "Children may qualify under preferred or standard kids rate classes (ask for an illustration)",
               ],
             },
             {
-              h: "Ownership & juvenile UW notes",
+              h: "Ownership & eligibility notes",
               items: [
-                "Ownership may differ from the insured",
-                "Not eligible if <strong>2 or more</strong> medical categories are answered yes",
-                "Childhood cancers: typically a decline",
+                "A parent or grandparent can own the policy even when the child is the person covered",
+                "If health questions show “yes” in <strong>two or more</strong> medical categories, this path is usually not available",
+                "A history of childhood cancer typically means this product is not offered — Mejor Vida Insurance can help look at other options",
+              ],
+            },
+            {
+              h: "What families often like",
+              items: [
+                "Full benefit from day one when issued as Immediate Solution",
+                "Can start coverage when a child is very young",
+                "Optional add-on for children or grandchildren on some adult policies (details below)",
               ],
             },
           ],
         },
         {
-          h2: "Children's / Grandchildren's Benefit Rider (CGR)",
-          intro: "CGR attaches to Immediate Solution only (not other TA FE designs on this page).",
+          h2: "Optional child/grandchild add-on (on an adult’s policy)",
+          intro:
+            "This add-on (sometimes called the Children’s/Grandchildren’s Benefit Rider) attaches to <strong>Immediate Solution only</strong> — not to Transamerica’s other final-expense designs on this page. Exact pricing should still be confirmed on an illustration.",
           cards: [
             {
-              h: "Pricing & parties",
+              h: "Who it covers & what it costs",
               items: [
-                "<strong>$2.00 annual</strong> per unit (<strong>$1,000</strong>) per child",
-                "Parent/grandparent owner ages <strong>18–75</strong>",
-                "Child ages <strong>15 days–18</strong>; maximum <strong>9</strong> children",
+                "Adds temporary coverage for children or grandchildren named on the rider",
+                "Premium is very low because the add-on amounts are small: about <strong>$2 per year</strong> for each <strong>$1,000</strong> of coverage, per child (example: about <strong>$10 a year</strong> for <strong>$5,000</strong> on one child)",
+                "Parent or grandparent owner ages <strong>18–75</strong>; child ages <strong>15 days through 18</strong>",
+                "Up to <strong>9</strong> children or grandchildren on one rider",
               ],
             },
             {
-              h: "Face & limits",
+              h: "How much coverage",
               items: [
-                "Rider face <strong>$1,000</strong> up to the lesser of base face or <strong>$5,000</strong>",
-                "Same face for all children on the rider",
-                "Combined limit ≤ <strong>$5,000</strong> across all Transamerica FE child/grandchild riders",
+                "Usually from <strong>$1,000</strong> up to the lesser of the adult policy’s coverage or <strong>$5,000</strong> per child",
+                "Every child on the rider gets the <strong>same</strong> coverage amount",
+                "Across Transamerica final-expense child/grandchild add-ons, total coverage is generally capped at about <strong>$5,000</strong> per child",
               ],
             },
             {
-              h: "Termination & conversion",
+              h: "When it ends & converting later",
               items: [
-                "Terminates on the rider anniversary after the child reaches age <strong>25</strong>",
-                "Convertible after <strong>2 years</strong>: ages 0–17 to juvenile standard; ages 18–25 to standard non-tobacco",
-                "Terminal illness benefit: <strong>24-month</strong> exclusion applies on the rider path",
+                "Coverage for each child typically ends on the rider anniversary after they turn <strong>25</strong>",
+                "After <strong>2 years</strong> on the rider, the family may convert to a permanent policy without a new health review (kids’ classes apply by age)",
+                "If a child already has a terminal illness expected within <strong>24 months</strong>, they usually cannot be added to this rider",
+              ],
+            },
+          ],
+        },
+        {
+          h2: "Two common ways families use Transamerica for kids",
+          intro:
+            "These are <strong>different paths</strong>. Mejor Vida Insurance can help you compare a policy in the child’s name versus a small temporary add-on on a parent’s or grandparent’s plan.",
+          cards: [
+            {
+              h: "A permanent policy for the child",
+              items: [
+                "The child is the insured on Immediate Solution",
+                "Coverage amounts follow the age-based limits above",
+                "A parent or grandparent can own the policy while the child is young",
+              ],
+            },
+            {
+              h: "A temporary add-on on an adult’s policy",
+              items: [
+                "An adult buys Immediate Solution and adds the child/grandchild rider",
+                "Usually smaller amounts (often up to about <strong>$5,000</strong> per child) that end around age <strong>25</strong>",
+                "Often used when the goal is modest short-term protection for several children or grandchildren",
               ],
             },
           ],
@@ -420,67 +572,101 @@ const CARRIERS = [
       ],
     },
     es: {
-      title: "Transamerica — Immediate Solution juvenil y rider infantil/nietos | Mejor Vida Seguros",
+      title: "Transamerica — Immediate Solution infantil y complemento hijo/nieto | Mejor Vida Seguros",
       description:
-        "Transamerica Immediate Solution para menores (producto base 0–85) y reglas del rider Children's/Grandchildren's Benefit (CGR). Resumen educativo de Mejor Vida Seguros.",
-      ogTitle: "Transamerica Immediate Solution juvenil | Mejor Vida Seguros",
+        "Transamerica Immediate Solution para niños (familia de producto 0–85) y un complemento para hijo/nieto en algunas pólizas de adultos. Edades, montos y resumen en lenguaje sencillo de Mejor Vida Seguros.",
+      ogTitle: "Transamerica Immediate Solution infantil | Mejor Vida Seguros",
       ogDescription:
-        "Clases juveniles Immediate Solution, límites de capital por edad, notas de suscripción y hechos del rider CGR. Compare con Mejor Vida Seguros.",
-      h1: "Immediate Solution (juvenil) y rider infantil/nietos",
+        "Immediate Solution para niños: edades, límites de cobertura, notas de elegibilidad y hechos del complemento hijo/nieto. Compare con Mejor Vida Seguros.",
+      h1: "Immediate Solution para niños y complemento hijo/nieto",
       lead:
-        "<strong>Transamerica Immediate Solution</strong> puede emitirse con clases Preferred/Standard Juvenile. Algunas pólizas Immediate para adultos también pueden añadir el <strong>rider Children's/Grandchildren's Benefit (CGR)</strong>. Mejor Vida Seguros puede ayudar a comparar opciones.",
-      serviceName: "Transamerica Immediate Solution juvenil y CGR",
-      serviceType: "Gastos finales juveniles / rider infantil",
+        "<strong>Transamerica Immediate Solution</strong> es un plan de seguro de vida permanente que puede cubrir a niños y también a adultos. En algunas pólizas Immediate Solution de adultos, las familias también pueden agregar un pequeño <strong>complemento para hijo o nieto</strong>. Mejor Vida Seguros puede ayudar a comparar qué camino conviene.",
+      serviceName: "Transamerica Immediate Solution infantil y complemento hijo/nieto",
+      serviceType: "Vida entera infantil / rider infantil",
       sections: [
         {
-          h2: "Immediate Solution — producto base",
+          h2: "Resumen — Immediate Solution",
+          intro:
+            "En palabras sencillas: Immediate Solution es cobertura de por vida con un beneficio fijo. Cuando la póliza se emite como “Immediate,” el monto completo del beneficio está pensado para estar en vigor desde el primer día (mientras la póliza se mantenga según sus términos).",
           cards: [
             {
-              h: "Edades y capitales",
+              h: "Quién puede cubrirse y por cuánto",
               items: [
-                "Edades de emisión: <strong>0–85</strong>",
-                "Capital mínimo: <strong>$1,000</strong>",
-                "Máximo por edad: <strong>0–55 $50,000</strong> · <strong>56–65 $40,000</strong> · <strong>66–75 $30,000</strong> · <strong>76–85 $25,000</strong>",
-                "Beneficio completo por fallecimiento desde el primer día (cuando se emite como Immediate)",
-                "Clases de suscripción Preferred / Standard Juvenile",
+                "Para <strong>niños</strong>, la cobertura suele empezar alrededor de <strong>$1,000</strong> y puede llegar hasta unos <strong>$50,000</strong>",
+                "Immediate Solution es el <strong>mismo producto que también pueden comprar los adultos</strong> — por eso el rango general de la aseguradora es <strong>0–85</strong> años, no solo niños",
+                "En edades adultas mayores, la compañía permite un máximo más bajo (unos <strong>$40,000</strong> a los 56–65, <strong>$30,000</strong> a los 66–75 y <strong>$25,000</strong> a los 76–85). Esos tope de adultos <strong>no cambian</strong> el límite infantil de arriba",
+                "Los niños pueden calificar en clases de tarifa preferente o estándar para menores (pida una ilustración)",
               ],
             },
             {
-              h: "Propiedad y notas de suscripción juvenil",
+              h: "Propiedad y notas de elegibilidad",
               items: [
-                "La propiedad puede diferir del asegurado",
-                "No elegible si se responde sí a <strong>2 o más</strong> categorías médicas",
-                "Cánceres infantiles: típicamente un rechazo",
+                "Un padre/madre o abuelo puede ser dueño de la póliza aunque el niño sea la persona cubierta",
+                "Si las preguntas de salud muestran “sí” en <strong>dos o más</strong> categorías médicas, esta vía suele no estar disponible",
+                "Un historial de cáncer infantil normalmente significa que este producto no se ofrece — Mejor Vida Seguros puede ayudar a ver otras opciones",
+              ],
+            },
+            {
+              h: "Lo que las familias suelen valorar",
+              items: [
+                "Beneficio completo desde el primer día cuando se emite como Immediate Solution",
+                "Puede empezar la cobertura cuando el niño es muy pequeño",
+                "Complemento opcional para hijos o nietos en algunas pólizas de adultos (detalles abajo)",
               ],
             },
           ],
         },
         {
-          h2: "Rider Children's / Grandchildren's Benefit (CGR)",
-          intro: "El CGR solo se adjunta a Immediate Solution (no a otros diseños FE de TA en esta página).",
+          h2: "Complemento opcional hijo/nieto (en la póliza de un adulto)",
+          intro:
+            "Este complemento (a veces llamado Children’s/Grandchildren’s Benefit Rider) solo se agrega a <strong>Immediate Solution</strong> — no a otros diseños de gastos finales de Transamerica en esta página. El precio exacto aún debe confirmarse en una ilustración.",
           cards: [
             {
-              h: "Precio y partes",
+              h: "A quién cubre y cuánto cuesta",
               items: [
-                "<strong>$2.00 anuales</strong> por unidad (<strong>$1,000</strong>) por niño",
-                "Padre/madre o abuelo dueño: edades <strong>18–75</strong>",
-                "Niño: <strong>15 días–18</strong>; máximo <strong>9</strong> niños",
+                "Agrega cobertura temporal para hijos o nietos nombrados en el complemento",
+                "La prima es muy baja porque los montos del complemento son pequeños: unos <strong>$2 al año</strong> por cada <strong>$1,000</strong> de cobertura, por niño (ejemplo: unos <strong>$10 al año</strong> por <strong>$5,000</strong> en un niño)",
+                "Dueño padre/madre o abuelo: edades <strong>18–75</strong>; niño: <strong>15 días a 18</strong> años",
+                "Hasta <strong>9</strong> hijos o nietos en un mismo complemento",
               ],
             },
             {
-              h: "Capital y límites",
+              h: "Cuánta cobertura",
               items: [
-                "Capital del rider <strong>$1,000</strong> hasta el menor entre el capital base o <strong>$5,000</strong>",
-                "Mismo capital para todos los niños en el rider",
-                "Límite combinado ≤ <strong>$5,000</strong> en todos los riders infantiles/nietos FE de Transamerica",
+                "Suele ir desde <strong>$1,000</strong> hasta el menor entre la cobertura de la póliza del adulto o <strong>$5,000</strong> por niño",
+                "Todos los niños en el complemento reciben el <strong>mismo</strong> monto de cobertura",
+                "En los complementos infantiles/nietos de gastos finales de Transamerica, el total suele toparse en unos <strong>$5,000</strong> por niño",
               ],
             },
             {
-              h: "Terminación y conversión",
+              h: "Cuándo termina y convertir después",
               items: [
-                "Termina en el aniversario del rider después de que el niño cumpla <strong>25</strong>",
-                "Convertible después de <strong>2 años</strong>: 0–17 a juvenile standard; 18–25 a standard no fumador",
-                "Beneficio por enfermedad terminal: exclusión de <strong>24 meses</strong> en la vía del rider",
+                "La cobertura de cada niño suele terminar en el aniversario del complemento después de cumplir <strong>25</strong>",
+                "Después de <strong>2 años</strong> en el complemento, la familia puede convertir a una póliza permanente sin una nueva revisión de salud (aplican clases por edad)",
+                "Si un niño ya tiene una enfermedad terminal con expectativa de <strong>24 meses</strong>, normalmente no puede agregarse a este complemento",
+              ],
+            },
+          ],
+        },
+        {
+          h2: "Dos formas comunes en que las familias usan Transamerica para niños",
+          intro:
+            "Son <strong>caminos distintos</strong>. Mejor Vida Seguros puede ayudar a comparar una póliza a nombre del niño frente a un pequeño complemento temporal en el plan de un padre/madre o abuelo.",
+          cards: [
+            {
+              h: "Una póliza permanente para el niño",
+              items: [
+                "El niño es el asegurado en Immediate Solution",
+                "Los montos de cobertura siguen los límites por edad de arriba",
+                "Un padre/madre o abuelo puede ser dueño de la póliza mientras el niño es pequeño",
+              ],
+            },
+            {
+              h: "Un complemento temporal en la póliza de un adulto",
+              items: [
+                "Un adulto compra Immediate Solution y agrega el rider hijo/nieto",
+                "Suelen ser montos más pequeños (a menudo hasta unos <strong>$5,000</strong> por niño) que terminan cerca de los <strong>25</strong> años",
+                "A menudo se usa cuando la meta es una protección modesta de corto plazo para varios hijos o nietos",
               ],
             },
           ],
@@ -498,121 +684,211 @@ const CARRIERS = [
     logoEn: `<picture><source type="image/webp" srcset="../../img/opt/american-amicable-logo.webp"/><img alt="American Amicable" class="d-inline-block" src="../../img/opt/american-amicable-logo.png" width="520" height="109" style="height:72px;width:auto;max-width:100%;" loading="eager" decoding="async"/></picture>`,
     logoEs: `<picture><source type="image/webp" srcset="../img/opt/american-amicable-logo.webp"/><img alt="American Amicable" class="d-inline-block" src="../img/opt/american-amicable-logo.png" width="520" height="109" style="height:72px;width:auto;max-width:100%;" loading="eager" decoding="async"/></picture>`,
     en: {
-      title: "American Amicable — Child & Grandchild Riders / Juvenile Guidelines | Mejor Vida Insurance",
+      title: "American Amicable — Children's & Grandchild Coverage | Mejor Vida Insurance",
       description:
-        "American Amicable GCIA grandchild rider, CIA children's agreement, juvenile application guidelines, and Family Solution / Family Choice notes. Educational overview from Mejor Vida Insurance.",
+        "American Amicable child and grandchild add-ons on some adult final-expense plans, plus Family Solution / Family Choice for younger ages (0–49). Educational overview from Mejor Vida Insurance.",
       ogTitle: "American Amicable children's coverage | Mejor Vida Insurance",
       ogDescription:
-        "GCIA, CIA, juvenile app rules, and Family Solution ages/faces. Ask Mejor Vida Insurance for an illustration — rider amounts vary.",
-      h1: "Child & grandchild coverage paths",
+        "Grandchild and child add-ons, Family Solution ages and coverage amounts, and plain-language application notes. Compare with Mejor Vida Insurance.",
+      h1: "Children’s & grandchild coverage options",
       lead:
-        "American Amicable offers <strong>child/grandchild riders</strong> on some final expense products and separate <strong>Family Solution / Family Choice</strong> designs that can include younger ages. Mejor Vida Insurance can help compare — rider dollar amounts are not listed here; ask for an illustration.",
-      serviceName: "American Amicable child & grandchild coverage",
-      serviceType: "Children's / Grandchild Life Insurance Riders",
+        "American Amicable can cover kids in a few different ways: a <strong>small add-on</strong> on some adult final-expense policies, or a <strong>Family Solution / Family Choice</strong> plan that can start at younger ages (including children). Mejor Vida Insurance can help compare — exact add-on dollar amounts need an illustration.",
+      serviceName: "American Amicable children's & grandchild coverage",
+      serviceType: "Children's / Grandchild Life Insurance",
       sections: [
         {
-          h2: "Riders on adult final expense",
+          h2: "At a glance",
+          intro:
+            "In plain terms: American Amicable is often used for adult final-expense coverage, and some of those adult plans can add a little protection for children or grandchildren. Separately, Family Solution / Family Choice can insure younger people — including kids — on their own policy.",
           cards: [
             {
-              h: "GCIA — Grandchild Rider",
+              h: "Add-on on an adult’s policy",
               items: [
-                "Available on <strong>Golden Solution</strong> and <strong>Senior Choice</strong>",
-                "Spanish form reference: <strong>3838S</strong>",
-                "Rider amounts: <strong>unknown on this page</strong> — ask for an illustration",
+                "Some adult plans can add a small amount of coverage for <strong>grandchildren</strong> or <strong>children</strong>",
+                "These are usually modest, temporary extras — not a full children’s whole-life policy by themselves",
+                "Exact coverage amounts and premiums: <strong>ask for an illustration</strong>",
               ],
             },
             {
-              h: "CIA — Children's Insurance Agreement",
+              h: "A policy for younger ages (including kids)",
               items: [
-                "Available on some final expense products",
-                "Form reference: <strong>ICC15-AA3215</strong>",
-                "Exact face and premium: ask for an illustration",
+                "<strong>Family Solution</strong> and <strong>Family Choice</strong> are whole-life style plans for ages <strong>0–49</strong>",
+                "Coverage usually starts around <strong>$10,000</strong>",
+                "For many “immediate” benefit designs, the maximum is about <strong>$35,000</strong> (ages 0–49)",
+              ],
+            },
+            {
+              h: "What to confirm with us",
+              items: [
+                "Which path fits — add-on vs. a policy in the child’s name",
+                "Current availability in your state",
+                "A personalized illustration before applying",
               ],
             },
           ],
         },
         {
-          h2: "Juvenile application guidelines",
+          h2: "Optional add-ons on adult final-expense plans",
+          intro:
+            "These extras attach to an adult’s policy. Names like “GCIA” or “CIA” are carrier form labels — what matters for families is who gets covered and that dollar amounts must be confirmed on an illustration.",
+          cards: [
+            {
+              h: "Grandchild add-on",
+              items: [
+                "Available on adult plans such as <strong>Golden Solution</strong> and <strong>Senior Choice</strong> (typically ages 50–85 for the adult)",
+                "Adds a small amount of coverage for grandchildren",
+                "Spanish materials are available for some forms",
+                "Coverage amount and price: <strong>ask Mejor Vida Insurance for an illustration</strong>",
+              ],
+            },
+            {
+              h: "Children’s add-on",
+              items: [
+                "Available on some final-expense products as a children’s insurance agreement",
+                "Puts coverage on children named under the adult’s policy",
+                "Exact coverage and premium: <strong>ask for an illustration</strong>",
+              ],
+            },
+          ],
+        },
+        {
+          h2: "Family Solution / Family Choice (younger ages)",
+          intro:
+            "These plans are designed for people under 50 — including children — rather than only seniors. They are a different path from adding a grandchild rider onto a senior final-expense policy.",
+          cards: [
+            {
+              h: "Who can be covered & for how much",
+              items: [
+                "Issue ages: <strong>0 through 49</strong>",
+                "Minimum coverage typically about <strong>$10,000</strong>",
+                "On common immediate-benefit designs: maximum about <strong>$35,000</strong> for ages 0–49",
+                "A return-of-premium style option (ages <strong>18–49</strong>) usually tops out around <strong>$20,000</strong>",
+              ],
+            },
+            {
+              h: "How families often use this",
+              items: [
+                "A permanent-style policy for a child or younger adult under one of these family plans",
+                "Useful when you want coverage in the child’s name, not only a small add-on on a grandparent’s policy",
+                "Mejor Vida Insurance can compare this with Mutual of Omaha, Assurity, Transamerica, and other appointed options",
+              ],
+            },
+          ],
+        },
+        {
+          h2: "Rules when applying for a child",
+          intro:
+            "American Amicable has some common-sense guidelines when the person covered is a child. These help keep coverage amounts realistic for the family.",
           list: [
-            "Ages <strong>0–17</strong> equally insured among siblings when applicable",
-            "Do not insure juveniles for more coverage than the parents carry",
-            "Parents must have coverage in force",
-            "Juvenile Questionnaire: <strong>ICC20-9825</strong>",
-            "Guardianship documents required if a grandparent or guardian applies",
-          ],
-        },
-        {
-          h2: "Family Solution / Family Choice",
-          cards: [
-            {
-              h: "Ages & face",
-              items: [
-                "Issue ages: <strong>0–49</strong>",
-                "Minimum face: <strong>$10,000</strong>",
-                "IMD maximum: <strong>$35,000</strong> (ages 0–49)",
-                "ROP (ages 18–49) maximum: <strong>$20,000</strong>",
-              ],
-            },
+            "Children ages <strong>0–17</strong> in the same family are generally expected to have <strong>similar</strong> coverage amounts when applicable",
+            "A child’s coverage usually should <strong>not be higher</strong> than what the parents (or legal guardians) already have",
+            "Parents or legal guardians typically must already have life insurance in force when applying for the child",
+            "If a grandparent or guardian applies, <strong>guardianship papers</strong> may be required",
           ],
         },
       ],
     },
     es: {
-      title: "American Amicable — Riders infantiles/nietos y guías juveniles | Mejor Vida Seguros",
+      title: "American Amicable — Cobertura infantil y de nietos | Mejor Vida Seguros",
       description:
-        "Rider de nietos GCIA de American Amicable, acuerdo CIA, guías de solicitud juvenil y notas de Family Solution / Family Choice. Resumen educativo de Mejor Vida Seguros.",
+        "Complementos infantiles y de nietos de American Amicable en algunos planes de gastos finales para adultos, más Family Solution / Family Choice para edades jóvenes (0–49). Resumen educativo de Mejor Vida Seguros.",
       ogTitle: "American Amicable cobertura infantil | Mejor Vida Seguros",
       ogDescription:
-        "GCIA, CIA, reglas de solicitud juvenil y edades/capitales de Family Solution. Consulte una ilustración con Mejor Vida Seguros — los montos del rider varían.",
-      h1: "Vías de cobertura infantil y de nietos",
+        "Complementos para nietos e hijos, edades y montos de Family Solution, y notas de solicitud en lenguaje sencillo. Compare con Mejor Vida Seguros.",
+      h1: "Opciones de cobertura infantil y de nietos",
       lead:
-        "American Amicable ofrece <strong>riders infantiles/nietos</strong> en algunos productos de gastos finales y diseños <strong>Family Solution / Family Choice</strong> que pueden incluir edades más jóvenes. Mejor Vida Seguros puede ayudar a comparar — los montos del rider no se listan aquí; consulte una ilustración.",
+        "American Amicable puede cubrir a los niños de varias formas: un <strong>pequeño complemento</strong> en algunas pólizas de gastos finales para adultos, o un plan <strong>Family Solution / Family Choice</strong> que puede empezar en edades más jóvenes (incluyendo niños). Mejor Vida Seguros puede ayudar a comparar — los montos exactos del complemento requieren una ilustración.",
       serviceName: "American Amicable cobertura infantil y de nietos",
-      serviceType: "Riders de seguro de vida infantil / nietos",
+      serviceType: "Seguro de vida infantil / nietos",
       sections: [
         {
-          h2: "Riders en gastos finales para adultos",
+          h2: "Resumen",
+          intro:
+            "En palabras sencillas: American Amicable se usa a menudo para gastos finales de adultos, y algunos de esos planes pueden agregar un poco de protección para hijos o nietos. Por separado, Family Solution / Family Choice puede asegurar a personas más jóvenes — incluyendo niños — con su propia póliza.",
           cards: [
             {
-              h: "GCIA — Rider de nietos",
+              h: "Complemento en la póliza de un adulto",
               items: [
-                "Disponible en <strong>Golden Solution</strong> y <strong>Senior Choice</strong>",
-                "Formulario en español: <strong>3838S</strong>",
-                "Montos del rider: <strong>desconocidos en esta página</strong> — consulte una ilustración",
+                "Algunos planes de adultos pueden agregar un monto pequeño de cobertura para <strong>nietos</strong> o <strong>hijos</strong>",
+                "Suelen ser extras modestos y temporales — no una póliza completa de vida entera infantil por sí solos",
+                "Montos y primas exactos: <strong>pida una ilustración</strong>",
               ],
             },
             {
-              h: "CIA — Children's Insurance Agreement",
+              h: "Una póliza para edades más jóvenes (incluyendo niños)",
               items: [
-                "Disponible en algunos productos de gastos finales",
-                "Formulario: <strong>ICC15-AA3215</strong>",
-                "Capital y prima exactos: consulte una ilustración",
+                "<strong>Family Solution</strong> y <strong>Family Choice</strong> son planes tipo vida entera para edades <strong>0–49</strong>",
+                "La cobertura suele empezar alrededor de <strong>$10,000</strong>",
+                "En muchos diseños de beneficio “inmediato,” el máximo es de unos <strong>$35,000</strong> (edades 0–49)",
+              ],
+            },
+            {
+              h: "Qué confirmar con nosotros",
+              items: [
+                "Qué camino conviene — complemento vs. una póliza a nombre del niño",
+                "Disponibilidad actual en su estado",
+                "Una ilustración personalizada antes de solicitar",
               ],
             },
           ],
         },
         {
-          h2: "Guías de solicitud juvenil",
+          h2: "Complementos opcionales en planes de gastos finales para adultos",
+          intro:
+            "Estos extras se agregan a la póliza de un adulto. Nombres como “GCIA” o “CIA” son etiquetas de formularios de la aseguradora — lo importante para las familias es a quién se cubre y que los montos se confirmen en una ilustración.",
+          cards: [
+            {
+              h: "Complemento para nietos",
+              items: [
+                "Disponible en planes de adultos como <strong>Golden Solution</strong> y <strong>Senior Choice</strong> (típicamente edades 50–85 para el adulto)",
+                "Agrega un monto pequeño de cobertura para nietos",
+                "Hay materiales en español para algunos formularios",
+                "Monto y precio: <strong>pida una ilustración a Mejor Vida Seguros</strong>",
+              ],
+            },
+            {
+              h: "Complemento para hijos",
+              items: [
+                "Disponible en algunos productos de gastos finales como acuerdo de seguro infantil",
+                "Pone cobertura en los hijos nombrados bajo la póliza del adulto",
+                "Cobertura y prima exactas: <strong>pida una ilustración</strong>",
+              ],
+            },
+          ],
+        },
+        {
+          h2: "Family Solution / Family Choice (edades más jóvenes)",
+          intro:
+            "Estos planes están pensados para personas menores de 50 — incluyendo niños — no solo para adultos mayores. Es un camino distinto a agregar un rider de nietos a una póliza de gastos finales de un abuelo.",
+          cards: [
+            {
+              h: "Quién puede cubrirse y por cuánto",
+              items: [
+                "Edades de emisión: <strong>0 a 49</strong>",
+                "Cobertura mínima típica: unos <strong>$10,000</strong>",
+                "En diseños comunes de beneficio inmediato: máximo de unos <strong>$35,000</strong> para edades 0–49",
+                "Una opción tipo devolución de prima (edades <strong>18–49</strong>) suele toparse alrededor de <strong>$20,000</strong>",
+              ],
+            },
+            {
+              h: "Cómo lo usan las familias",
+              items: [
+                "Una póliza tipo permanente para un niño o adulto joven bajo uno de estos planes familiares",
+                "Útil cuando quiere cobertura a nombre del niño, no solo un pequeño complemento en la póliza de un abuelo",
+                "Mejor Vida Seguros puede comparar esto con Mutual of Omaha, Assurity, Transamerica y otras opciones designadas",
+              ],
+            },
+          ],
+        },
+        {
+          h2: "Reglas al solicitar para un niño",
+          intro:
+            "American Amicable tiene algunas guías de sentido común cuando la persona cubierta es un niño. Ayudan a mantener montos realistas para la familia.",
           list: [
-            "Edades <strong>0–17</strong> asegurados de forma equitativa entre hermanos cuando aplique",
-            "No asegure a menores por más cobertura que la que tienen los padres",
-            "Los padres deben tener cobertura en vigor",
-            "Cuestionario juvenil: <strong>ICC20-9825</strong>",
-            "Documentos de tutoría requeridos si solicita un abuelo o tutor",
-          ],
-        },
-        {
-          h2: "Family Solution / Family Choice",
-          cards: [
-            {
-              h: "Edades y capital",
-              items: [
-                "Edades de emisión: <strong>0–49</strong>",
-                "Capital mínimo: <strong>$10,000</strong>",
-                "Máximo IMD: <strong>$35,000</strong> (edades 0–49)",
-                "Máximo ROP (edades 18–49): <strong>$20,000</strong>",
-              ],
-            },
+            "Los niños de <strong>0–17</strong> años en la misma familia suelen tener montos de cobertura <strong>similares</strong> cuando aplique",
+            "La cobertura de un niño normalmente <strong>no debe ser mayor</strong> que la que ya tienen los padres (o tutores legales)",
+            "Los padres o tutores legales suelen tener ya un seguro de vida en vigor al solicitar para el niño",
+            "Si solicita un abuelo o tutor, pueden pedirse <strong>documentos de tutoría</strong>",
           ],
         },
       ],
@@ -628,89 +904,157 @@ const CARRIERS = [
     logoEn: `<img alt="Aetna" class="d-inline-block" src="../../img/carriers/aetna-logo.svg" width="512" height="98" style="height:72px;width:auto;max-width:100%;" loading="eager" decoding="async"/>`,
     logoEs: `<img alt="Aetna" class="d-inline-block" src="../img/carriers/aetna-logo.svg" width="512" height="98" style="height:72px;width:auto;max-width:100%;" loading="eager" decoding="async"/>`,
     en: {
-      title: "Aetna — Child / Grandchild Term Riders on Final Expense | Mejor Vida Insurance",
+      title: "Aetna — Child & Grandchild Add-ons on Final Expense | Mejor Vida Insurance",
       description:
-        "Aetna Accendo Level and Protection Series children's / grandchild term riders typically use $2,500 units up to $10,000 per child on adult final expense. Exact ages and premiums: ask for an illustration. Mejor Vida Insurance.",
-      ogTitle: "Aetna child/grandchild term riders | Mejor Vida Insurance",
+        "Aetna Accendo Level and Protection Series can add temporary child or grandchild coverage on an adult final-expense policy — often in $2,500 steps up to about $10,000 per child. Educational overview from Mejor Vida Insurance.",
+      ogTitle: "Aetna child & grandchild add-ons | Mejor Vida Insurance",
       ogDescription:
-        "Child term riders on Accendo Level and Protection Series adult final expense. Compare with Mejor Vida Insurance — ask for an illustration for ages and premiums.",
-      h1: "Child / grandchild term riders",
+        "Temporary child/grandchild coverage on Accendo Level and Protection Series adult final expense. Compare with Mejor Vida Insurance — ask for an illustration.",
+      h1: "Child & grandchild coverage add-ons",
       lead:
-        "Aetna's appointed final expense lines are adult policies. Children's coverage here is typically a <strong>term rider</strong> on <strong>Accendo Level</strong> or <strong>Protection Series</strong> — not a standalone kids whole life. Mejor Vida Insurance can help compare.",
-      serviceName: "Aetna child/grandchild term riders",
+        "With Aetna, kids’ coverage is usually a <strong>temporary add-on</strong> on an adult final-expense policy — not a separate children’s whole-life plan. It can attach to plans like <strong>Accendo Level</strong> or <strong>Protection Series</strong>. Mejor Vida Insurance can help compare this with other appointed options.",
+      serviceName: "Aetna child & grandchild coverage add-ons",
       serviceType: "Children's Term Rider on Final Expense",
       sections: [
         {
-          h2: "Where the rider attaches",
+          h2: "At a glance",
+          intro:
+            "In plain terms: an adult buys final-expense life insurance, and the family can add a small amount of temporary coverage for children or grandchildren on that same policy.",
           cards: [
             {
-              h: "Accendo Level",
+              h: "What it is",
               items: [
-                "Base Accendo adult final expense issue ages typically <strong>40–89</strong>",
-                "Child/grandchild term rider often in <strong>$2,500</strong> units up to about <strong>$10,000 per child</strong>",
-                "Exact child ages, termination age, and premium: <strong>ask for an illustration</strong>",
+                "A <strong>temporary</strong> (term) add-on for kids or grandkids — not lifelong kids coverage by itself",
+                "Attaches to an <strong>adult</strong> final-expense policy",
+                "Often sold in steps of about <strong>$2,500</strong>, up to about <strong>$10,000 per child</strong> on Accendo Level",
               ],
             },
             {
-              h: "Protection Series (CLI)",
+              h: "What it is not",
               items: [
-                "Base Protection Series / CLI adult FE issue ages typically <strong>45–89</strong>",
-                "Children's term rider referenced on product flyer materials",
-                "Unit sizes and premiums: ask for an illustration — not published as fixed numbers on this page",
+                "Not a standalone children’s whole-life policy (unlike Mutual of Omaha Children’s Whole Life)",
+                "Not usually available on Accendo’s <strong>Modified</strong> plan — Level designs are the typical path for these add-ons",
+                "Exact child ages, when coverage ends, and the monthly price need an illustration",
+              ],
+            },
+            {
+              h: "Who this fits",
+              items: [
+                "Families who already want adult final-expense coverage and want a little extra for kids or grandkids",
+                "People looking for modest, lower-cost temporary protection — not a large permanent kids policy",
+                "Ask Mejor Vida Insurance to compare with carriers that offer a full children’s policy",
               ],
             },
           ],
         },
         {
-          h2: "What is known vs unknown",
+          h2: "Which adult plans can include it",
+          intro:
+            "The add-on rides on the adult’s policy. The adult ages below are for the person buying the final-expense plan — not the child’s age.",
+          cards: [
+            {
+              h: "Accendo Level",
+              items: [
+                "Adult final-expense plan, typically ages <strong>40–89</strong>",
+                "Child/grandchild term add-on is commonly available in <strong>$2,500</strong> units up to about <strong>$10,000 per child</strong>",
+                "Exact child ages and premium: <strong>ask for an illustration</strong>",
+              ],
+            },
+            {
+              h: "Protection Series",
+              items: [
+                "Adult final-expense plan, typically ages <strong>45–89</strong>",
+                "Product materials list a <strong>children’s term</strong> add-on",
+                "Unit sizes and premiums vary — confirm on an illustration (not fixed on this page)",
+              ],
+            },
+          ],
+        },
+        {
+          h2: "What you should confirm before applying",
           list: [
-            "Known pattern: small per-child term units on an adult FE policy",
-            "Unknown without an illustration: exact issue ages for the child, termination, conversion, and monthly premium",
-            "This is not a standalone children's whole life product on the Aetna FE portal",
+            "How much coverage per child (and how many children can be included)",
+            "What ages a child must be to start, and when the add-on ends",
+            "Whether conversion to a permanent policy later is available",
+            "The exact monthly cost on your adult policy illustration",
           ],
         },
       ],
     },
     es: {
-      title: "Aetna — Riders de término infantil/nietos en gastos finales | Mejor Vida Seguros",
+      title: "Aetna — Complementos infantil/nietos en gastos finales | Mejor Vida Seguros",
       description:
-        "Los riders de término infantil/nietos de Aetna Accendo Level y Protection Series suelen usar unidades de $2,500 hasta $10,000 por niño en pólizas adultas de gastos finales. Edades y primas exactas: consulte una ilustración. Mejor Vida Seguros.",
-      ogTitle: "Aetna riders infantiles/nietos | Mejor Vida Seguros",
+        "Aetna Accendo Level y Protection Series pueden agregar cobertura temporal para hijo o nieto en una póliza adulta de gastos finales — a menudo en pasos de $2,500 hasta unos $10,000 por niño. Resumen educativo de Mejor Vida Seguros.",
+      ogTitle: "Aetna complementos infantil/nietos | Mejor Vida Seguros",
       ogDescription:
-        "Riders de término infantil en Accendo Level y Protection Series. Compare con Mejor Vida Seguros — consulte una ilustración para edades y primas.",
-      h1: "Riders de término infantil / nietos",
+        "Cobertura temporal para hijo/nieto en Accendo Level y Protection Series. Compare con Mejor Vida Seguros — pida una ilustración.",
+      h1: "Complementos de cobertura infantil y de nietos",
       lead:
-        "Las líneas de gastos finales designadas de Aetna son pólizas para adultos. La cobertura infantil aquí suele ser un <strong>rider de término</strong> en <strong>Accendo Level</strong> o <strong>Protection Series</strong> — no una vida entera infantil independiente. Mejor Vida Seguros puede ayudar a comparar.",
-      serviceName: "Aetna riders de término infantil/nietos",
+        "Con Aetna, la cobertura para niños suele ser un <strong>complemento temporal</strong> en una póliza de gastos finales para adultos — no un plan independiente de vida entera infantil. Puede agregarse a planes como <strong>Accendo Level</strong> o <strong>Protection Series</strong>. Mejor Vida Seguros puede ayudar a comparar con otras opciones designadas.",
+      serviceName: "Aetna complementos de cobertura infantil y de nietos",
       serviceType: "Rider de término infantil en gastos finales",
       sections: [
         {
-          h2: "Dónde se adjunta el rider",
+          h2: "Resumen",
+          intro:
+            "En palabras sencillas: un adulto compra seguro de gastos finales, y la familia puede agregar un monto pequeño de cobertura temporal para hijos o nietos en esa misma póliza.",
           cards: [
             {
-              h: "Accendo Level",
+              h: "Qué es",
               items: [
-                "Edades de emisión de la póliza base Accendo adulta: típicamente <strong>40–89</strong>",
-                "Rider de término infantil/nietos a menudo en unidades de <strong>$2,500</strong> hasta unos <strong>$10,000 por niño</strong>",
-                "Edades exactas del niño, terminación y prima: <strong>consulte una ilustración</strong>",
+                "Un complemento <strong>temporal</strong> (término) para hijos o nietos — no cobertura infantil de por vida por sí solo",
+                "Se agrega a una póliza de gastos finales de un <strong>adulto</strong>",
+                "A menudo se vende en pasos de unos <strong>$2,500</strong>, hasta unos <strong>$10,000 por niño</strong> en Accendo Level",
               ],
             },
             {
-              h: "Protection Series (CLI)",
+              h: "Qué no es",
               items: [
-                "Edades de emisión de la póliza base Protection Series / CLI: típicamente <strong>45–89</strong>",
-                "Rider de término infantil mencionado en materiales del producto",
-                "Tamaños de unidad y primas: consulte una ilustración — no se publican cifras fijas en esta página",
+                "No es una póliza independiente de vida entera infantil (a diferencia de la vida entera infantil de Mutual of Omaha)",
+                "Normalmente no está disponible en el plan <strong>Modificado</strong> de Accendo — los diseños Level suelen ser la vía para estos complementos",
+                "Las edades exactas del niño, cuándo termina la cobertura y el precio mensual requieren una ilustración",
+              ],
+            },
+            {
+              h: "Para quién conviene",
+              items: [
+                "Familias que ya quieren cobertura de gastos finales para un adulto y un poco extra para hijos o nietos",
+                "Quienes buscan una protección temporal modesta y de menor costo — no una póliza infantil permanente grande",
+                "Pida a Mejor Vida Seguros comparar con aseguradoras que ofrecen una póliza infantil completa",
               ],
             },
           ],
         },
         {
-          h2: "Lo conocido frente a lo desconocido",
+          h2: "En qué planes de adultos puede incluirse",
+          intro:
+            "El complemento va en la póliza del adulto. Las edades de abajo son de la persona que compra el plan de gastos finales — no la edad del niño.",
+          cards: [
+            {
+              h: "Accendo Level",
+              items: [
+                "Plan de gastos finales para adultos, típicamente edades <strong>40–89</strong>",
+                "El complemento de término infantil/nietos suele estar disponible en unidades de <strong>$2,500</strong> hasta unos <strong>$10,000 por niño</strong>",
+                "Edades exactas del niño y prima: <strong>pida una ilustración</strong>",
+              ],
+            },
+            {
+              h: "Protection Series",
+              items: [
+                "Plan de gastos finales para adultos, típicamente edades <strong>45–89</strong>",
+                "Los materiales del producto listan un complemento de <strong>término infantil</strong>",
+                "Los tamaños de unidad y primas varían — confirme en una ilustración (no hay cifras fijas en esta página)",
+              ],
+            },
+          ],
+        },
+        {
+          h2: "Qué confirmar antes de solicitar",
           list: [
-            "Patrón conocido: unidades pequeñas de término por niño en una póliza FE adulta",
-            "Desconocido sin ilustración: edades exactas del niño, terminación, conversión y prima mensual",
-            "No es un producto de vida entera infantil independiente en el portal FE de Aetna",
+            "Cuánta cobertura por niño (y cuántos niños pueden incluirse)",
+            "Qué edades debe tener el niño para empezar, y cuándo termina el complemento",
+            "Si más adelante se puede convertir a una póliza permanente",
+            "El costo mensual exacto en la ilustración de la póliza del adulto",
           ],
         },
       ],
@@ -726,85 +1070,159 @@ const CARRIERS = [
     logoEn: `<img alt="Corebridge" class="d-inline-block" src="../../img/carriers/corebridge-logo.svg" width="576" height="188" style="height:72px;width:auto;max-width:100%;" loading="eager" decoding="async"/>`,
     logoEs: `<img alt="Corebridge" class="d-inline-block" src="../img/carriers/corebridge-logo.svg" width="576" height="188" style="height:72px;width:auto;max-width:100%;" loading="eager" decoding="async"/>`,
     en: {
-      title: "Corebridge — Child Term Riders (Select-a-Term & American Elite) | Mejor Vida Insurance",
+      title: "Corebridge — Child Coverage Add-ons (Select-a-Term & American Elite) | Mejor Vida Insurance",
       description:
-        "Corebridge Select-a-Term Child Rider ($1,000–$25,000 to age 25) and American Elite 2 Child Rider (form 16420N). Educational overview from Mejor Vida Insurance — ask for an illustration for premiums.",
-      ogTitle: "Corebridge child term riders | Mejor Vida Insurance",
+        "Corebridge children’s coverage is typically a temporary child add-on on an adult Select-a-Term or American Elite policy — often about $1,000–$25,000 through age 25. Educational overview from Mejor Vida Insurance.",
+      ogTitle: "Corebridge child coverage add-ons | Mejor Vida Insurance",
       ogDescription:
-        "Select-a-Term and American Elite child riders — faces, ages, and juvenile class notes. Compare with Mejor Vida Insurance.",
-      h1: "Child term riders",
+        "Temporary child coverage on Select-a-Term and American Elite adult policies. Compare with Mejor Vida Insurance — ask for an illustration.",
+      h1: "Child coverage add-ons",
       lead:
-        "Corebridge children's coverage on appointed lines is typically a <strong>child term rider</strong> on an adult policy (Select-a-Term or American Elite), not a standalone kids whole life. Mejor Vida Insurance can help compare options.",
-      serviceName: "Corebridge child term riders",
+        "With Corebridge, kids’ coverage on appointed lines is usually a <strong>temporary add-on</strong> on an adult policy — such as <strong>Select-a-Term</strong> or <strong>American Elite</strong> — not a separate children’s whole-life plan. Mejor Vida Insurance can help compare options.",
+      serviceName: "Corebridge child coverage add-ons",
       serviceType: "Children's Term Rider",
       sections: [
         {
-          h2: "Select-a-Term Child Rider",
+          h2: "At a glance",
+          intro:
+            "In plain terms: an adult buys a Corebridge life policy, and the family can add temporary coverage for children on that same plan. The add-on is usually modest and ends when the child reaches a set age.",
           cards: [
             {
-              h: "Coverage band",
+              h: "What it is",
               items: [
-                "Face amounts: <strong>$1,000–$25,000</strong>",
-                "Coverage to age <strong>25</strong>",
-                "Premium and exact child issue ages: ask for an illustration",
+                "A <strong>temporary</strong> (term) add-on for children on an adult’s policy",
+                "Common coverage range about <strong>$1,000–$25,000</strong> (Select-a-Term child rider)",
+                "Coverage often lasts until the child reaches age <strong>25</strong>",
+              ],
+            },
+            {
+              h: "What it is not",
+              items: [
+                "Not a standalone children’s whole-life policy",
+                "Not lifelong kids coverage by itself — it ends at a set age unless converted later (if conversion is available on your illustration)",
+                "Exact child issue ages and monthly price: <strong>ask for an illustration</strong>",
+              ],
+            },
+            {
+              h: "Who this fits",
+              items: [
+                "Families who already want an adult Corebridge policy and a little extra protection for kids",
+                "People looking for modest temporary coverage — not a large permanent kids policy",
+                "Ask Mejor Vida Insurance to compare with carriers that offer a full children’s policy",
               ],
             },
           ],
         },
         {
-          h2: "American Elite 2 Child Rider",
+          h2: "Where the add-on can attach",
+          intro:
+            "These are different adult products that can include a child add-on. Exact availability still depends on state and underwriting.",
           cards: [
             {
-              h: "Form & base product notes",
+              h: "Select-a-Term (adult term)",
               items: [
-                "Form <strong>16420N</strong>",
-                "Base product issue ages: <strong>0–99</strong>",
-                "Ages <strong>0–19</strong> juvenile: not smoker-distinct",
-                "Underwriting class: <strong>Composite (juvenile)</strong>",
+                "Child add-on coverage typically about <strong>$1,000–$25,000</strong>",
+                "Coverage generally continues to age <strong>25</strong>",
+                "Premium and exact child ages: confirm on an illustration",
               ],
             },
+            {
+              h: "American Elite (permanent adult path)",
+              items: [
+                "Can include a child add-on on eligible American Elite policies",
+                "The base American Elite product can issue across a wide age range (including younger ages on the base product itself)",
+                "For young ages, rates typically do <strong>not</strong> split smoker vs non-smoker the way adult classes do",
+                "Ask for an illustration for child coverage amounts and cost on your case",
+              ],
+            },
+          ],
+        },
+        {
+          h2: "What you should confirm before applying",
+          list: [
+            "How much coverage per child (and how many children can be included)",
+            "What ages a child must be to start, and when the add-on ends",
+            "Whether the family can convert the child’s coverage to a permanent policy later",
+            "The exact premium on your adult policy illustration",
           ],
         },
       ],
     },
     es: {
-      title: "Corebridge — Riders de término infantil (Select-a-Term y American Elite) | Mejor Vida Seguros",
+      title: "Corebridge — Complementos de cobertura infantil (Select-a-Term y American Elite) | Mejor Vida Seguros",
       description:
-        "Rider infantil Select-a-Term de Corebridge ($1,000–$25,000 hasta los 25) y American Elite 2 Child Rider (formulario 16420N). Resumen educativo de Mejor Vida Seguros — consulte una ilustración para primas.",
-      ogTitle: "Corebridge riders infantiles | Mejor Vida Seguros",
+        "La cobertura infantil de Corebridge suele ser un complemento temporal en una póliza adulta Select-a-Term o American Elite — a menudo unos $1,000–$25,000 hasta los 25 años. Resumen educativo de Mejor Vida Seguros.",
+      ogTitle: "Corebridge complementos de cobertura infantil | Mejor Vida Seguros",
       ogDescription:
-        "Riders infantiles Select-a-Term y American Elite: capitales, edades y notas de clase juvenil. Compare con Mejor Vida Seguros.",
-      h1: "Riders de término infantil",
+        "Cobertura temporal para hijos en pólizas adultas Select-a-Term y American Elite. Compare con Mejor Vida Seguros — pida una ilustración.",
+      h1: "Complementos de cobertura infantil",
       lead:
-        "La cobertura infantil de Corebridge en las líneas designadas suele ser un <strong>rider de término infantil</strong> en una póliza adulta (Select-a-Term o American Elite), no una vida entera infantil independiente. Mejor Vida Seguros puede ayudar a comparar opciones.",
-      serviceName: "Corebridge riders de término infantil",
+        "Con Corebridge, la cobertura para niños en las líneas designadas suele ser un <strong>complemento temporal</strong> en una póliza de adulto — como <strong>Select-a-Term</strong> o <strong>American Elite</strong> — no un plan independiente de vida entera infantil. Mejor Vida Seguros puede ayudar a comparar opciones.",
+      serviceName: "Corebridge complementos de cobertura infantil",
       serviceType: "Rider de término infantil",
       sections: [
         {
-          h2: "Rider infantil Select-a-Term",
+          h2: "Resumen",
+          intro:
+            "En palabras sencillas: un adulto compra una póliza de vida Corebridge, y la familia puede agregar cobertura temporal para hijos en ese mismo plan. El complemento suele ser modesto y termina cuando el niño llega a una edad definida.",
           cards: [
             {
-              h: "Banda de cobertura",
+              h: "Qué es",
               items: [
-                "Capitales: <strong>$1,000–$25,000</strong>",
-                "Cobertura hasta los <strong>25</strong> años",
-                "Prima y edades exactas de emisión del niño: consulte una ilustración",
+                "Un complemento <strong>temporal</strong> (término) para hijos en la póliza de un adulto",
+                "Rango común de cobertura: unos <strong>$1,000–$25,000</strong> (rider infantil Select-a-Term)",
+                "La cobertura a menudo dura hasta que el niño cumple <strong>25</strong> años",
+              ],
+            },
+            {
+              h: "Qué no es",
+              items: [
+                "No es una póliza independiente de vida entera infantil",
+                "No es cobertura infantil de por vida por sí sola — termina a una edad definida salvo que después se convierta (si la conversión está disponible en su ilustración)",
+                "Edades exactas de emisión del niño y precio mensual: <strong>pida una ilustración</strong>",
+              ],
+            },
+            {
+              h: "Para quién conviene",
+              items: [
+                "Familias que ya quieren una póliza Corebridge de adulto y un poco de protección extra para los hijos",
+                "Quienes buscan una cobertura temporal modesta — no una póliza infantil permanente grande",
+                "Pida a Mejor Vida Seguros comparar con aseguradoras que ofrecen una póliza infantil completa",
               ],
             },
           ],
         },
         {
-          h2: "American Elite 2 Child Rider",
+          h2: "Dónde puede agregarse el complemento",
+          intro:
+            "Son productos de adulto distintos que pueden incluir un complemento infantil. La disponibilidad exacta aún depende del estado y de la suscripción.",
           cards: [
             {
-              h: "Formulario y notas del producto base",
+              h: "Select-a-Term (término para adultos)",
               items: [
-                "Formulario <strong>16420N</strong>",
-                "Edades de emisión del producto base: <strong>0–99</strong>",
-                "Edades <strong>0–19</strong> juveniles: no distingue fumador",
-                "Clase de suscripción: <strong>Composite (juvenil)</strong>",
+                "Cobertura del complemento infantil típicamente unos <strong>$1,000–$25,000</strong>",
+                "La cobertura generalmente continúa hasta los <strong>25</strong> años",
+                "Prima y edades exactas del niño: confirme en una ilustración",
               ],
             },
+            {
+              h: "American Elite (vía permanente para adultos)",
+              items: [
+                "Puede incluir un complemento infantil en pólizas American Elite elegibles",
+                "El producto base American Elite puede emitirse en un rango amplio de edades (incluyendo edades más jóvenes en el producto base)",
+                "En edades jóvenes, las tarifas normalmente <strong>no</strong> se separan entre fumador y no fumador como en las clases de adultos",
+                "Pida una ilustración para montos y costo de la cobertura infantil en su caso",
+              ],
+            },
+          ],
+        },
+        {
+          h2: "Qué confirmar antes de solicitar",
+          list: [
+            "Cuánta cobertura por niño (y cuántos niños pueden incluirse)",
+            "Qué edades debe tener el niño para empezar, y cuándo termina el complemento",
+            "Si la familia puede convertir la cobertura del niño a una póliza permanente más adelante",
+            "La prima exacta en la ilustración de la póliza del adulto",
           ],
         },
       ],
@@ -859,7 +1277,7 @@ function renderSection(section, altBg) {
   return parts.join("\n");
 }
 
-function renderOtherCarriers(current, lang) {
+function renderOtherCarriers(current, lang, sectionCount) {
   const isEn = lang === "en";
   const h2 = isEn ? "Other children's carrier pages" : "Otras páginas de aseguradoras infantiles";
   const links = CARRIERS.filter((c) => c.id !== current.id).map((c) => {
@@ -867,7 +1285,9 @@ function renderOtherCarriers(current, lang) {
     const label = c.brand;
     return `<a class="btn btn-outline-primary btn-sm me-2 mb-2" href="${href}">${label}</a>`;
   });
-  return `<section class="py-5 bg-light border-bottom">
+  // Alternate from last content section (even index = bg-light)
+  const bg = sectionCount % 2 === 0 ? "bg-light" : "bg-white";
+  return `<section class="py-5 ${bg} border-bottom">
 <div class="container" style="max-width:60rem;">
 <h2 class="h4 fw-bold mb-3" style="color:#1a365d;">${h2}</h2>
 <div>${links.join("\n")}</div>
@@ -923,7 +1343,7 @@ ${logo}
 
 ${sectionHtml}
 
-${renderOtherCarriers(carrier, lang)}
+${renderOtherCarriers(carrier, lang, copy.sections.length)}
 
 <section class="py-5 text-white" style="background:#1a365d;">
 <div class="container text-center" style="max-width:60rem;">
@@ -1159,6 +1579,13 @@ function buildPage(carrier, lang) {
   const main = renderMain(carrier, lang);
   html = replaceBetween(html, /<main\b/, /<\/main>/, main);
   html = setMeta(html, lang, carrier, copy, enUrl, esUrl);
+  // EN pages live in en/carriers/ — avatar assets are two levels up
+  if (lang === "en") {
+    html = html.replace(
+      /data-mvi-avatar-base="(?:\.\.\/)+img\/mvi-chat-avatar"/g,
+      'data-mvi-avatar-base="../../img/mvi-chat-avatar"'
+    );
+  }
   const outPath =
     lang === "en"
       ? path.join(ROOT, "en/carriers", carrier.enFile)
