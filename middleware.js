@@ -80,9 +80,29 @@ function isStaticAssetPath(pathname) {
   );
 }
 
+function htmlTrailingSlashRedirect(url) {
+  const { pathname } = url;
+  if (pathname.length > 6 && pathname.endsWith(".html/")) {
+    url.pathname = pathname.slice(0, -1);
+    return Response.redirect(url, 308);
+  }
+  if (pathname === "/blog" || pathname === "/blog/") {
+    url.pathname = "/blog.html";
+    return Response.redirect(url, 308);
+  }
+  if (pathname === "/en/blog/") {
+    url.pathname = "/en/blog.html";
+    return Response.redirect(url, 308);
+  }
+  return null;
+}
+
 export default async function middleware(request) {
   const url = new URL(request.url);
   const { pathname } = url;
+
+  const slashRedirect = htmlTrailingSlashRedirect(url);
+  if (slashRedirect) return slashRedirect;
 
   if (isStaticAssetPath(pathname)) {
     return fetch(request);

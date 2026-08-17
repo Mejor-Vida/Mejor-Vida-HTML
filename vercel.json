@@ -58,6 +58,26 @@
       "permanent": true
     },
     {
+      "source": "/:path*.html/",
+      "destination": "/:path*.html",
+      "permanent": true
+    },
+    {
+      "source": "/blog",
+      "destination": "/blog.html",
+      "permanent": true
+    },
+    {
+      "source": "/blog/",
+      "destination": "/blog.html",
+      "permanent": true
+    },
+    {
+      "source": "/en/blog/",
+      "destination": "/en/blog.html",
+      "permanent": true
+    },
+    {
       "source": "/blog/unum-reaseguro-ltc-2026-07-06.html",
       "destination": "/blog/weekly-insurance-update-2026-07-12.html#story1",
       "permanent": false
