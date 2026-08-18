@@ -69,6 +69,8 @@ function parseArgs(argv) {
     sleepMs: 1600,
     force: false,
     fresh: false,
+    facesExplicit: false,
+    outJson: "",
   };
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
@@ -84,6 +86,7 @@ function parseArgs(argv) {
       i++;
     } else if (a === "--faces" && next) {
       args.faces = next.split(",").map(Number);
+      args.facesExplicit = true;
       i++;
     } else if (a === "--terms" && next) {
       args.terms = next.split(",").map(Number);
@@ -129,11 +132,15 @@ function parseArgs(argv) {
       args.force = true;
     } else if (a === "--fresh") {
       args.fresh = true;
+    } else if (a === "--out-json" && next) {
+      args.outJson = next;
+      i++;
     }
   }
   if (
     (args.product === "fe" || args.product === "children") &&
-    args.faces[0] >= 100000
+    args.faces[0] >= 100000 &&
+    !args.facesExplicit
   ) {
     args.faces =
       args.product === "children"
@@ -859,15 +866,17 @@ async function main() {
   console.log("Bridge armed:", status.tabUrl);
 
   const outJson =
-    args.product === "fe"
+    args.outJson ||
+    (args.product === "fe"
       ? path.join(OUT_DIR, "integrity-fe-harvest.json")
       : args.product === "si"
         ? path.join(OUT_DIR, "integrity-si-harvest.json")
         : args.product === "children"
           ? path.join(OUT_DIR, "integrity-children-harvest.json")
-          : HARVEST_JSON;
-  const outCsv =
-    args.product === "fe"
+          : HARVEST_JSON);
+  const outCsv = args.outJson
+    ? args.outJson.replace(/\.json$/i, ".csv")
+    : args.product === "fe"
       ? path.join(OUT_DIR, "integrity-fe-premiums.csv")
       : args.product === "si"
         ? path.join(OUT_DIR, "integrity-si-term-premiums.csv")
@@ -1032,8 +1041,8 @@ async function main() {
 
   const typed = records.filter((r) => (r.product_type || "") === productType);
   fs.writeFileSync(outCsv, toCsvRows(typed.length ? typed : records, productType));
-  // Keep FU CSV rebuild-compatible when harvesting FU
-  if (args.product === "fu") {
+  // Keep FU CSV rebuild-compatible when harvesting FU (never when --out-json is a spot file)
+  if (args.product === "fu" && !args.outJson) {
     fs.writeFileSync(FU_CSV, toCsvRows(typed, "fully_underwritten_term"));
   }
   console.log(`\nWrote ${outJson} (${records.length} records)`);

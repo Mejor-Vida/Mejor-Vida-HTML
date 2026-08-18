@@ -18,26 +18,21 @@
     );
   }
 
+  function pricedRows(rows) {
+    return (rows || []).filter(function (r) {
+      return r && !r.quote && (r.female != null || r.male != null);
+    });
+  }
+
   function renderTermTable(term, face, tbody, noteEl, copy, quoteHref) {
     var data = (window.MVI_LIC_RATES && window.MVI_LIC_RATES.tables) || {};
     var meta = window.MVI_LIC_RATES || {};
-    var rows = ((data[String(term)] || {})[String(face)]) || [];
+    var rows = pricedRows(((data[String(term)] || {})[String(face)]) || []);
     var estimated =
       (meta.estimated_faces || []).indexOf(Number(face)) !== -1 ||
       (meta.estimated_faces || []).indexOf(String(face)) !== -1;
-    var qLabel = (copy && copy.quoteLabel) || "Get a quote";
-    var qHref = quoteHref || "quote.html";
     tbody.innerHTML = rows
       .map(function (r) {
-        if (r.quote || (r.female == null && r.male == null)) {
-          return (
-            "<tr><td>" +
-            r.age +
-            '</td><td colspan="2" class="lic-quote-cell">' +
-            quoteCell(qHref, qLabel) +
-            "</td></tr>"
-          );
-        }
         return (
           "<tr><td>" +
           r.age +
@@ -61,12 +56,12 @@
         estimated || hasEstimatedRow
           ? copy && copy.estimatedNote
             ? " " + copy.estimatedNote
-            : " Ages or face amounts without a published carrier rate show a quote link."
+            : ""
           : "";
       var rangeNote =
         copy && copy.ageRangeNote
           ? " " + copy.ageRangeNote
-          : " Ages shown every 5 years where carrier tables publish a rate; ages without a published rate show a quote link.";
+          : " Ages shown every 5 years where Integrity Connect returned a published rate.";
       noteEl.textContent =
         (copy && copy.notePrefix ? copy.notePrefix : "") +
         (meta.rating || "") +
@@ -124,8 +119,7 @@
   function renderBucketTable(bucketKey, face, tbody, noteEl, copy, quoteHref) {
     var meta = window.MVI_LIC_RATES || {};
     var bucket = (meta && meta[bucketKey]) || {};
-    var rows = ((bucket.tables || {})[String(face)]) || [];
-    var qLabel = (copy && copy.quoteLabel) || "Get a quote";
+    var rows = pricedRows(((bucket.tables || {})[String(face)]) || []);
     var notePrefix =
       (copy && copy.bucketNotePrefix && copy.bucketNotePrefix[bucketKey]) ||
       (copy && copy.notePrefix) ||
@@ -136,15 +130,6 @@
       "";
     tbody.innerHTML = rows
       .map(function (r) {
-        if (r.quote || (r.female == null && r.male == null)) {
-          return (
-            "<tr><td>" +
-            r.age +
-            '</td><td colspan="2" class="lic-quote-cell">' +
-            quoteCell(quoteHref, qLabel) +
-            "</td></tr>"
-          );
-        }
         return (
           "<tr><td>" +
           r.age +
@@ -188,7 +173,7 @@
             ". Las cotizaciones reales de Mejor Vida varían según salud, estado, compañía y suscripción.",
           estimatedNote: "",
           ageRangeNote: dedicatedTerm
-            ? " Edades cada 5 años según tarifas publicadas en nuestras tablas de compañías; sin tarifa publicada se muestra enlace a cotizar."
+            ? " Edades cada 5 años según las tarifas que Integrity Connect devolvió para ese plazo y monto."
             : " Rangos de edad: temporal 10 años 20–80; 20 años 20–65; 30 años 20–55 (como los cuadros de muestra habituales).",
           preferMetaNote: dedicatedTerm || dedicatedChildren || dedicatedAmount,
           bucketNotePrefix: {
@@ -227,7 +212,7 @@
             ". Actual Mejor Vida quotes vary by health, state, carrier, and underwriting.",
           estimatedNote: "",
           ageRangeNote: dedicatedTerm
-            ? " Ages every 5 years where our carrier tables publish a rate; ages without a published rate show a quote link."
+            ? " Ages every 5 years where Integrity Connect returned a published rate for that term and amount."
             : " Age ranges: 10-year term 20–80; 20-year 20–65; 30-year 20–55 (matching typical published sample charts).",
           preferMetaNote: dedicatedTerm || dedicatedChildren || dedicatedAmount,
           bucketNotePrefix: {

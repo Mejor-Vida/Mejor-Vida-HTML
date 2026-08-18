@@ -50,6 +50,7 @@
     "children:harvest-carrier-rag": "node scripts/harvest-children-carrier-rag.js",
     "children:build-carrier-pages": "node scripts/build-children-carrier-pages.js",
     "term:rebuild-cost-rates": "node scripts/rebuild-term-life-cost-rates.js",
+    "build:coverage-amount-pages": "node scripts/build-coverage-amount-pages.js",
     "assurity:import-spot": "node scripts/assurity-fe-spot-import.js",
     "assurity:interpolate-tobacco": "node scripts/interpolate-assurity-tobacco-from-anchors.js",
     "optimize:avatars": "node scripts/optimize-chat-avatars.js"

@@ -25,7 +25,7 @@ const ASSURITY_CSV = path.join(
   "integrations/knowledge/Assurity_Knowledge/assurity_protect_plus_premiums_10k.csv"
 );
 
-const COMPARE_FACES = [100000, 250000, 500000].filter((f) =>
+const COMPARE_FACES = [100000].filter((f) =>
   (TERM_RATES.faces || []).includes(f)
 );
 const COMPARE_AGES = [20, 25, 30, 35, 40, 45, 50, 55, 60];
@@ -143,7 +143,7 @@ function buildCompareBundle() {
     tables[String(face)] = COMPARE_AGES.map((age) => {
       let wholeFemale = findRate(wholeRows, age, "female");
       let wholeMale = findRate(wholeRows, age, "male");
-      if (assurity10k) {
+      if (assurity10k && face <= 100000) {
         if (wholeFemale == null) {
           const m = scaleAssurityMonthly(assurity10k(age, "female"), face);
           if (m != null) {
@@ -557,7 +557,7 @@ function wrapPage(lang, mainHtml, ratesJson, compareJson) {
     )
     .replace(
       /life-insurance-cost\.js\?v=[^"]+/,
-      "life-insurance-cost.js?v=20260812-term"
+      "life-insurance-cost.js?v=20260817-priced-ages"
     );
 
   // Fix EN script paths (shell already has ../ for en)

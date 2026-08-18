@@ -35,7 +35,7 @@ const OUT_PATH = path.join(ROOT, "js/term-life-cost-rates.json");
 
 /** Preferred display faces (lower then higher band). Only kept if CSV can price them. */
 const PREFERRED_FACES_LOW = [50000, 100000, 150000, 250000, 500000];
-const PREFERRED_FACES_HIGH = [750000, 1000000, 1500000, 2000000];
+const PREFERRED_FACES_HIGH = [750000, 1000000, 1500000, 2000000, 3000000];
 const PREFERRED_TERMS = [10, 15, 20, 25, 30];
 const AGE_STEP = 5;
 const AGE_START = 20;
@@ -222,7 +222,7 @@ function buildTables(rows, terms, faces, opts) {
         const female = cheapestMonthly(rows, age, "female", term, face, opts);
         const male = cheapestMonthly(rows, age, "male", term, face, opts);
         if (female == null && male == null) {
-          faceRows.push({ age, quote: true });
+          continue;
         } else {
           const row = { age };
           if (female != null) row.female = roundPremium(female);
@@ -230,9 +230,9 @@ function buildTables(rows, terms, faces, opts) {
           faceRows.push(row);
         }
       }
-      tables[String(term)][String(face)] = faceRows.filter((r) => {
-        return r.female != null || r.male != null || r.quote;
-      });
+      tables[String(term)][String(face)] = faceRows.filter(
+        (r) => r.female != null || r.male != null
+      );
     }
   }
   return tables;
