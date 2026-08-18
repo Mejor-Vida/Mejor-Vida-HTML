@@ -46,6 +46,76 @@
   object-position: 68% 42%;
 }
 
+.lic-hero-media--corn picture,
+.lic-hero-media--corn img {
+  object-position: 78% 40%;
+}
+
+.lic-hero-media--cattle picture,
+.lic-hero-media--cattle img {
+  object-position: 52% 42%;
+}
+
+.lic-hero-media--lakes picture,
+.lic-hero-media--lakes img {
+  object-position: 50% 42%;
+}
+
+.lic-hero-media--fjord picture,
+.lic-hero-media--fjord img {
+  object-position: 50% 45%;
+}
+
+.lic-hero-media--valley picture,
+.lic-hero-media--valley img {
+  object-position: 50% 48%;
+}
+
+.lic-hero-media--terraces picture,
+.lic-hero-media--terraces img {
+  object-position: 50% 40%;
+}
+
+.lic-hero-media--ice picture,
+.lic-hero-media--ice img {
+  object-position: 50% 46%;
+}
+
+.lic-hero-media--savanna picture,
+.lic-hero-media--savanna img {
+  object-position: 50% 48%;
+}
+
+.lic-hero-media--lagoon picture,
+.lic-hero-media--lagoon img {
+  object-position: 50% 42%;
+}
+
+.lic-hero-media--cliffs picture,
+.lic-hero-media--cliffs img {
+  object-position: 42% 45%;
+}
+
+.lic-hero-media--fuji picture,
+.lic-hero-media--fuji img {
+  object-position: 42% 38%;
+}
+
+.lic-hero-media--oasis picture,
+.lic-hero-media--oasis img {
+  object-position: 52% 48%;
+}
+
+.lic-hero-media--karst picture,
+.lic-hero-media--karst img {
+  object-position: 50% 42%;
+}
+
+.lic-hero-media--andes picture,
+.lic-hero-media--andes img {
+  object-position: 50% 38%;
+}
+
 .lic-hero-media::after {
   content: "";
   position: absolute;

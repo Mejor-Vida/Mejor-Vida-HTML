@@ -971,7 +971,7 @@ function renderEs(code) {
 <link href="${prefix}css/nav-questions-dropdown.css" rel="stylesheet"/>
 <link href="${prefix}css/nav-about-mega.css?v=20260728-help-bg" rel="stylesheet"/>
 <link href="${prefix}css/nav-funeral-resources.css?v=20260728-photo-stronger" rel="stylesheet"/>
-<link href="${prefix}css/nav-life-insurance.css?v=20260809-cov-size" rel="stylesheet"/>
+<link href="${prefix}css/nav-life-insurance.css?v=20260817-tejo" rel="stylesheet"/>
 <meta property="og:type" content="website"/>
 <meta property="og:title" content="${esc(title)}"/>
 <meta property="og:description" content="${esc(desc)}"/>
@@ -1078,7 +1078,7 @@ function renderEn(code) {
 <link href="${root}css/nav-questions-dropdown.css" rel="stylesheet"/>
 <link href="${root}css/nav-about-mega.css?v=20260728-help-bg" rel="stylesheet"/>
 <link href="${root}css/nav-funeral-resources.css?v=20260728-photo-stronger" rel="stylesheet"/>
-<link href="${root}css/nav-life-insurance.css?v=20260809-cov-size" rel="stylesheet"/>
+<link href="${root}css/nav-life-insurance.css?v=20260817-tejo" rel="stylesheet"/>
 <meta property="og:type" content="website"/>
 <meta property="og:title" content="${esc(title)}"/>
 <meta property="og:description" content="${esc(desc)}"/>

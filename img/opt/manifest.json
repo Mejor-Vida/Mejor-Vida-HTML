@@ -459,6 +459,78 @@
     "keepPng": false
   },
   {
+    "src": "img/lic-hero-horse-field.jpg",
+    "base": "lic-hero-horse-field",
+    "width": 1024,
+    "height": 682,
+    "webp": "img/opt/lic-hero-horse-field.webp",
+    "fallback": "img/opt/lic-hero-horse-field.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/lic-hero-corn-windmill.jpg",
+    "base": "lic-hero-corn-windmill",
+    "width": 1024,
+    "height": 683,
+    "webp": "img/opt/lic-hero-corn-windmill.webp",
+    "fallback": "img/opt/lic-hero-corn-windmill.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/lic-hero-cattle-drive.jpg",
+    "base": "lic-hero-cattle-drive",
+    "width": 1024,
+    "height": 682,
+    "webp": "img/opt/lic-hero-cattle-drive.webp",
+    "fallback": "img/opt/lic-hero-cattle-drive.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/lic-hero-alpine-lakes.jpg",
+    "base": "lic-hero-alpine-lakes",
+    "width": 700,
+    "height": 224,
+    "webp": "img/opt/lic-hero-alpine-lakes.webp",
+    "fallback": "img/opt/lic-hero-alpine-lakes.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/lic-hero-fjord.jpg",
+    "base": "lic-hero-fjord",
+    "width": 682,
+    "height": 204,
+    "webp": "img/opt/lic-hero-fjord.webp",
+    "fallback": "img/opt/lic-hero-fjord.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/lic-hero-monument-valley.jpg",
+    "base": "lic-hero-monument-valley",
+    "width": 682,
+    "height": 198,
+    "webp": "img/opt/lic-hero-monument-valley.webp",
+    "fallback": "img/opt/lic-hero-monument-valley.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/lic-hero-rice-terraces.jpg",
+    "base": "lic-hero-rice-terraces",
+    "width": 682,
+    "height": 204,
+    "webp": "img/opt/lic-hero-rice-terraces.webp",
+    "fallback": "img/opt/lic-hero-rice-terraces.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/lic-hero-icebergs.jpg",
+    "base": "lic-hero-icebergs",
+    "width": 688,
+    "height": 214,
+    "webp": "img/opt/lic-hero-icebergs.webp",
+    "fallback": "img/opt/lic-hero-icebergs.jpg",
+    "keepPng": false
+  },
+  {
     "src": "img/lic-hero-desert-saguaro.jpg",
     "base": "lic-hero-desert-saguaro",
     "width": 1024,
@@ -1690,14 +1762,5 @@
     "webp": "img/opt/blog-generated/weekly-insurance-update-2026-08-02/story-3.webp",
     "fallback": "img/opt/blog-generated/weekly-insurance-update-2026-08-02/story-3.png",
     "keepPng": true
-  },
-  {
-    "src": "img/lic-hero-horse-field.jpg",
-    "base": "lic-hero-horse-field",
-    "width": 1024,
-    "height": 682,
-    "webp": "img/opt/lic-hero-horse-field.webp",
-    "fallback": "img/opt/lic-hero-horse-field.jpg",
-    "keepPng": false
   }
 ]

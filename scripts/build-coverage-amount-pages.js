@@ -33,6 +33,34 @@ const FE_COPY_MAX = 25000;
 const TRAD_WL_MAX = 100000;
 const COREBRIDGE_MAX = 35000;
 
+/** Per-amount hero photos. Unlisted faces keep the horse-field fallback until Julie supplies more. */
+const HERO_DEFAULT = {
+  base: "lic-hero-horse-field",
+  modifier: "horse",
+  width: 1024,
+  height: 682,
+};
+const HERO_BY_FACE = {
+  5000: { base: "lic-hero-corn-windmill", modifier: "corn", width: 1024, height: 683 },
+  10000: { base: "lic-hero-cattle-drive", modifier: "cattle", width: 1024, height: 682 },
+  15000: { base: "lic-hero-alpine-lakes", modifier: "lakes", width: 700, height: 224 },
+  20000: { base: "lic-hero-fjord", modifier: "fjord", width: 682, height: 204 },
+  25000: { base: "lic-hero-monument-valley", modifier: "valley", width: 682, height: 198 },
+  30000: { base: "lic-hero-rice-terraces", modifier: "terraces", width: 682, height: 204 },
+  40000: { base: "lic-hero-icebergs", modifier: "ice", width: 688, height: 214 },
+  50000: { base: "lic-hero-savanna-elephants", modifier: "savanna", width: 688, height: 216 },
+  75000: { base: "lic-hero-tropical-lagoon", modifier: "lagoon", width: 690, height: 210 },
+  100000: { base: "lic-hero-sea-cliffs", modifier: "cliffs", width: 682, height: 208 },
+  500000: { base: "lic-hero-fuji-sakura", modifier: "fuji", width: 682, height: 204 },
+  1000000: { base: "lic-hero-desert-oasis", modifier: "oasis", width: 682, height: 212 },
+  2000000: { base: "lic-hero-karst-river", modifier: "karst", width: 912, height: 376 },
+  3000000: { base: "lic-hero-andes-llamas", modifier: "andes", width: 908, height: 248 },
+};
+
+function heroFor(face) {
+  return HERO_BY_FACE[face] || HERO_DEFAULT;
+}
+
 /** Quote-engine GI harvest from the $5,000 page (Aug 15, 2026). */
 const GI_5000 = [
   { age: 45, female: 18, male: 20 },
@@ -581,6 +609,7 @@ function mainHtml(face, lang, prefix, payload, termMeta) {
   const home = isEs ? `${prefix}index.html` : `${prefix}index.html`;
   const estimator = `${prefix}final-expense-estimator.html`;
   const imgP = prefix;
+  const hero = heroFor(face);
 
   const feSection =
     c.feLike
@@ -717,10 +746,10 @@ ${cards}
 
   return `<main>
 <section class="lic-hero">
-<div class="lic-hero-media lic-hero-media--horse" aria-hidden="true">
+<div class="lic-hero-media lic-hero-media--${hero.modifier}" aria-hidden="true">
 <picture>
-<source srcset="${imgP}img/opt/lic-hero-horse-field.webp" type="image/webp"/>
-<img src="${imgP}img/opt/lic-hero-horse-field.jpg" alt="" width="1024" height="682" decoding="async" fetchpriority="high"/>
+<source srcset="${imgP}img/opt/${hero.base}.webp" type="image/webp"/>
+<img src="${imgP}img/opt/${hero.base}.jpg" alt="" width="${hero.width}" height="${hero.height}" decoding="async" fetchpriority="high"/>
 </picture>
 </div>
 <div class="container">
@@ -854,6 +883,8 @@ function headHtml(face, lang, prefix) {
   const enUrl = `https://www.mejorvidainsurance.com/en/${enFile(face)}`;
   const canonical = isEs ? esUrl : enUrl;
   const cssP = prefix;
+  const hero = heroFor(face);
+  const ogImg = `https://www.mejorvidainsurance.com/img/opt/${hero.base}.jpg`;
   return `<!DOCTYPE html>
 <html class="lang-${isEs ? "es" : "en"}" lang="${isEs ? "es" : "en"}">
 <head>
@@ -877,21 +908,22 @@ function headHtml(face, lang, prefix) {
 <meta content="${c.title}" property="og:title"/>
 <meta content="${c.og}" property="og:description"/>
 <meta content="${canonical}" property="og:url"/>
-<meta content="https://www.mejorvidainsurance.com/img/opt/lic-hero-horse-field.jpg" property="og:image"/>
+<meta content="${ogImg}" property="og:image"/>
 <meta content="${isEs ? "Mejor Vida Seguros" : "Mejor Vida Insurance"}" property="og:site_name"/>
 <meta content="${isEs ? "es_ES" : "en_US"}" property="og:locale"/>
 <meta content="${isEs ? "en_US" : "es_ES"}" property="og:locale:alternate"/>
 <meta content="summary_large_image" name="twitter:card"/>
 <meta content="${c.title}" name="twitter:title"/>
 <meta content="${isEs ? "Primas mensuales ilustrativas por edad y sexo. Educativo — no es cotización vinculante." : "Illustrative monthly rates by age and gender. Educational — not a binding quote."}" name="twitter:description"/>
-<meta content="https://www.mejorvidainsurance.com/img/opt/lic-hero-horse-field.jpg" name="twitter:image"/>
+<meta content="${ogImg}" name="twitter:image"/>
+<link rel="preload" as="image" href="${cssP}img/opt/${hero.base}.webp" type="image/webp" fetchpriority="high"/>
 <link href="${cssP}favicon.ico" rel="icon" type="image/x-icon"/>
 <link href="${cssP}bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
 <link href="${cssP}css/site-footer.css" rel="stylesheet"/>
 <link href="${cssP}css/quote-flow-shared.css?v=20260723-mobile-menu" rel="stylesheet"/>
 <link href="${cssP}css/site-header.css?v=20260723-ver-precios-gold" rel="stylesheet"/>
-<link href="${cssP}css/nav-life-insurance.css?v=20260817-amounts" rel="stylesheet"/>
-<link href="${cssP}css/life-insurance-cost.css?v=20260817-amounts" rel="stylesheet"/>
+<link href="${cssP}css/nav-life-insurance.css?v=20260817-tejo" rel="stylesheet"/>
+<link href="${cssP}css/life-insurance-cost.css?v=20260817-heroes3" rel="stylesheet"/>
 <link href="${cssP}css/mvi-assistant-widget.css?v=20260721-chat-z" rel="stylesheet"/>
 <link href="${cssP}css/fontawesome-mvi.min.css?v=20260723-brands-fix" rel="stylesheet"/>
 <style>body { font-family: Inter, system-ui, -apple-system, sans-serif; }</style>
@@ -948,12 +980,37 @@ function patch5000Switcher() {
     }
     html = html.replace(
       /css\/nav-life-insurance\.css\?v=[^"]+/,
-      "css/nav-life-insurance.css?v=20260817-amounts"
+      "css/nav-life-insurance.css?v=20260817-tejo"
     );
     html = html.replace(
       /css\/life-insurance-cost\.css\?v=[^"]+/,
-      "css/life-insurance-cost.css?v=20260817-amounts"
+      "css/life-insurance-cost.css?v=20260817-heroes3"
     );
+    const hero5 = heroFor(5000);
+    html = html.replace(
+      /<div class="lic-hero-media lic-hero-media--[a-z]+" aria-hidden="true">[\s\S]*?<\/div>\n<div class="container">/,
+      `<div class="lic-hero-media lic-hero-media--${hero5.modifier}" aria-hidden="true">
+<picture>
+<source srcset="${prefix}img/opt/${hero5.base}.webp" type="image/webp"/>
+<img src="${prefix}img/opt/${hero5.base}.jpg" alt="" width="${hero5.width}" height="${hero5.height}" decoding="async" fetchpriority="high"/>
+</picture>
+</div>
+<div class="container">`
+    );
+    html = html.replaceAll(
+      "https://www.mejorvidainsurance.com/img/opt/lic-hero-horse-field.jpg",
+      `https://www.mejorvidainsurance.com/img/opt/${hero5.base}.jpg`
+    );
+    html = html.replaceAll(
+      "https://www.mejorvidainsurance.com/img/opt/lic-hero-corn-windmill.jpg",
+      `https://www.mejorvidainsurance.com/img/opt/${hero5.base}.jpg`
+    );
+    if (!html.includes('rel="preload" as="image"')) {
+      html = html.replace(
+        /<link href="[^"]*favicon\.ico" rel="icon"[^>]*\/>/,
+        `<link rel="preload" as="image" href="${prefix}img/opt/${hero5.base}.webp" type="image/webp" fetchpriority="high"/>\n$&`
+      );
+    }
     if (lang === "es") {
       html = html.replace(
         'href="/en/" class="mvi-lang-fab',
