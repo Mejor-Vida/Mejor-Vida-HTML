@@ -70,6 +70,7 @@ Usage:
   mvi-bridge eval <js>
   mvi-bridge navigate <url>
   mvi-bridge click <css-selector>
+  mvi-bridge fill <css-selector> <value>
   mvi-bridge screenshot [out.png]
 
 Server: ${BASE}
@@ -133,6 +134,23 @@ async function main() {
       const selector = positional.join(" ");
       if (!selector) throw new Error("click requires CSS selector");
       console.log(JSON.stringify(await command("click", { selector }), null, 2));
+      return;
+    }
+    if (cmd === "fill") {
+      const selector = positional[0];
+      const value = positional.slice(1).join(" ");
+      if (!selector || !value) throw new Error("fill requires CSS selector and value");
+      const dataIdIdx = rest.indexOf("--data-id");
+      const dataId = dataIdIdx >= 0 ? rest[dataIdIdx + 1] : undefined;
+      const acctIdx = rest.indexOf("--account");
+      const dataSelectedAccount = acctIdx >= 0 ? rest[acctIdx + 1] : undefined;
+      console.log(
+        JSON.stringify(
+          await command("fill", { selector, value, dataId, dataSelectedAccount }),
+          null,
+          2
+        )
+      );
       return;
     }
     if (cmd === "screenshot") {

@@ -273,6 +273,10 @@ async function runCommand(cmd) {
         data = await click(args.selector);
         await refocusControlTab();
         break;
+      case "fill":
+        data = await fill(args);
+        await refocusControlTab();
+        break;
       case "screenshot":
         data = await screenshot();
         break;
@@ -389,18 +393,24 @@ async function pageLinks() {
 
 async function evaluate(code) {
   if (!code || typeof code !== "string") throw new Error("code_required");
-  // Safer than eval string across worlds: Function constructor in page context
-  const result = await inject((src) => {
-    // eslint-disable-next-line no-new-func
-    const fn = new Function(`return (${src});`);
-    const value = fn();
-    try {
-      return { value: JSON.parse(JSON.stringify(value)) };
-    } catch {
-      return { value: String(value) };
-    }
-  }, [code]);
-  return result;
+  // Isolated world: page CSP cannot block Function. DOM is still shared.
+  const tabId = await getTargetTabId();
+  const results = await chrome.scripting.executeScript({
+    target: { tabId },
+    world: "ISOLATED",
+    func: (src) => {
+      // eslint-disable-next-line no-new-func
+      const fn = new Function(`return (${src});`);
+      const value = fn();
+      try {
+        return { value: JSON.parse(JSON.stringify(value)) };
+      } catch {
+        return { value: String(value) };
+      }
+    },
+    args: [code],
+  });
+  return results?.[0]?.result;
 }
 
 async function navigate(url) {
@@ -417,14 +427,84 @@ async function click(selector) {
     const el = document.querySelector(sel);
     if (!el) return { found: false };
     el.scrollIntoView({ block: "center", inline: "center" });
-    el.click();
+    const opts = { bubbles: true, cancelable: true, view: window };
+    el.dispatchEvent(new PointerEvent("pointerdown", opts));
+    el.dispatchEvent(new MouseEvent("mousedown", opts));
+    el.dispatchEvent(new PointerEvent("pointerup", opts));
+    el.dispatchEvent(new MouseEvent("mouseup", opts));
+    el.dispatchEvent(new MouseEvent("click", opts));
+    if (typeof el.click === "function") el.click();
     return {
       found: true,
       tag: el.tagName,
-      text: (el.innerText || "").trim().slice(0, 120),
+      text: (el.innerText || el.value || "").trim().slice(0, 120),
     };
   }, [selector]);
   return clicked;
+}
+
+async function fill(args) {
+  const selector = args.selector;
+  const value = args.value;
+  if (!selector) throw new Error("selector_required");
+  if (value == null) throw new Error("value_required");
+  const extra = {
+    dataId: args.dataId || "",
+    dataSelectedAccount: args.dataSelectedAccount || "",
+  };
+  return inject((sel, val, meta) => {
+    const el = document.querySelector(sel);
+    if (!el) return { found: false };
+    el.scrollIntoView({ block: "center", inline: "center" });
+    el.focus();
+    const proto =
+      el.tagName === "SELECT"
+        ? HTMLSelectElement.prototype
+        : el.tagName === "TEXTAREA"
+          ? HTMLTextAreaElement.prototype
+          : HTMLInputElement.prototype;
+    const desc = Object.getOwnPropertyDescriptor(proto, "value");
+    if (desc && desc.set) desc.set.call(el, val);
+    else el.value = val;
+    if (meta.dataId) {
+      el.setAttribute("data-id", meta.dataId);
+      el.dataset.id = meta.dataId;
+    }
+    if (meta.dataSelectedAccount) {
+      el.setAttribute("data-selected-account", meta.dataSelectedAccount);
+    }
+    el.dispatchEvent(new Event("input", { bubbles: true }));
+    el.dispatchEvent(new Event("change", { bubbles: true }));
+    const jq = window.jQuery || window.$;
+    if (jq && jq.fn && typeof jq(el).autocomplete === "function") {
+      try {
+        const $el = jq(el);
+        $el.val(val);
+        $el.autocomplete("search", val);
+        const menu = $el.autocomplete("widget");
+        const item = menu
+          .find("li")
+          .filter((_, n) => (n.textContent || "").trim() === val)
+          .first();
+        if (item.length) {
+          item.find(".ui-menu-item-wrapper, a").first().trigger("mouseenter");
+          item.trigger("click");
+          const uiItem = item.data("ui-autocomplete-item") || item.data("uiAutocompleteItem");
+          if (uiItem) {
+            $el.data("ui-autocomplete")._trigger("select", null, { item: uiItem });
+          }
+        }
+      } catch {
+        /* page may not use jQuery UI */
+      }
+    }
+    return {
+      found: true,
+      tag: el.tagName,
+      value: el.value,
+      dataId: el.getAttribute("data-id") || "",
+    };
+  }, [selector, String(value), extra]);
 }
 
 async function screenshot() {
