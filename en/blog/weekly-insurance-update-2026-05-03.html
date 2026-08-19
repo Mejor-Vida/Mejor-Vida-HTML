@@ -43,7 +43,7 @@
 <link href="../css/nav-questions-dropdown.css" rel="stylesheet"/>
 <link href="../css/nav-about-mega.css?v=20260721-lip-page" rel="stylesheet"/>
 <link href="../css/nav-funeral-resources.css?v=20260728-photo-stronger" rel="stylesheet"/>
-<link href="../css/nav-life-insurance.css?v=20260817-tejo" rel="stylesheet"/>
+<link href="../css/nav-life-insurance.css?v=20260818-seniors" rel="stylesheet"/>
 
 <link href="../../css/site-footer.css?v=20260721-lip-page" rel="stylesheet"/>
 <link href="../../css/mvi-assistant-widget.css?v=20260721-chat-z" rel="stylesheet"/>
@@ -241,6 +241,10 @@
                   <i class="fas fa-dollar-sign" aria-hidden="true"></i>
                   <span>Insurance Cost</span>
                 </button>
+                <button type="button" class="nav-life-category" data-life-panel="seniors" aria-pressed="false">
+                  <i class="fas fa-handshake" aria-hidden="true"></i>
+                  <span>For seniors</span>
+                </button>
                 <button type="button" class="nav-life-category" data-life-panel="by-state" aria-pressed="false">
                   <img class="nav-life-usa-icon" src="../../img/icons/usa-map-icon.svg" alt="" width="18" height="11" decoding="async" aria-hidden="true" />
                   <span>Coverage by State</span>
@@ -326,6 +330,30 @@
                 <div class="nav-life-feature-copy">
                   <h3>Getting Affordable Coverage</h3>
                   <p>Learn how much <span class="nav-life-feature-em">life insurance costs</span> based on policy type and coverage amount.</p>
+                </div>
+              </a>
+              </div>
+              <div class="nav-life-panel" data-life-panel="seniors" hidden>
+              <div class="nav-life-options">
+                <h3>Guides for seniors</h3>
+                <div class="nav-life-options-grid nav-life-options-grid--seniors">
+                  <a href="../life-insurance-seniors-over-80.html">Seniors over 80</a>
+                  <a href="../life-insurance-seniors-over-80.html#over-85">Seniors over 85</a>
+                  <a href="../no-waiting-period-life-burial.html">No waiting period</a>
+                  <a href="../final-expense-insurance.html">Final expense insurance</a>
+                  <a href="../final-expense-cost.html">Final expense cost</a>
+                </div>
+              </div>
+              <a class="nav-life-feature nav-life-feature--seniors" href="../life-insurance-seniors-over-80.html">
+                <div class="nav-life-feature-copy">
+                  <h3>Burial insurance after 80</h3>
+                  <p>Clear options, appointed-company sample rates, and how to avoid an extra wait.</p>
+                </div>
+                <div class="nav-life-feature-media" aria-hidden="true">
+                  <picture>
+                    <source type="image/webp" srcset="../../img/opt/fe-about-seniors-laptop.webp" />
+                    <img src="../../img/opt/fe-about-seniors-laptop.jpg" alt="" width="1000" height="667" loading="lazy" decoding="async" />
+                  </picture>
                 </div>
               </a>
               </div>
@@ -512,6 +540,8 @@
           <a href="../contact.html" class="mobile-menu-link">Cremation Insurance</a>
           <a href="../children-life-insurance-cost.html" class="mobile-menu-link">Children's Life Insurance</a>
           <a href="../whole-life-cost.html" class="mobile-menu-link">Whole Life Insurance</a>
+          <a href="../life-insurance-seniors-over-80.html" class="mobile-menu-link">Seniors over 80</a>
+          <a href="../life-insurance-seniors-over-80.html#over-85" class="mobile-menu-link">Seniors over 85</a>
         </div>
       </div>
     </div>
@@ -702,7 +732,7 @@
 <script defer src="../../bootstrap/js/bootstrap.bundle.min.js"></script>
 
 <div data-api-url="/api/website-chat" data-mvi-avatar-base="/img/mvi-chat-avatar" id="mvi-assistant-root"></div>
-<script defer src="../../js/mvi-nav-questions.js?v=20260808-hamburger"></script>
+<script defer src="../../js/mvi-nav-questions.js?v=20260818-seniors"></script>
 <script defer="" src="../../js/website-assistant-widget.js?v=20260813-scroll-top"></script>
 
   

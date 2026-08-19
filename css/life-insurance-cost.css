@@ -46,6 +46,11 @@
   object-position: 68% 42%;
 }
 
+.lic-hero-media--coffee picture,
+.lic-hero-media--coffee img {
+  object-position: 78% 40%;
+}
+
 .lic-hero-media--corn picture,
 .lic-hero-media--corn img {
   object-position: 78% 40%;
@@ -1323,5 +1328,142 @@ a.lic-carrier-row:focus-visible {
   .lic-aside {
     position: static;
     order: -1;
+  }
+}
+
+/* Seniors over 80 page */
+.lic-toc-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem 0.85rem;
+  margin: 0 0 1.25rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.lic-toc-bar a {
+  color: #0b3a7a;
+  font-size: 0.92rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.lic-toc-bar a:hover,
+.lic-toc-bar a:focus-visible {
+  text-decoration: underline;
+}
+
+.lic-rate-tabs {
+  display: flex;
+  gap: 0;
+  margin: 0 0 0;
+}
+
+.lic-rate-tab {
+  min-width: 7.5rem;
+  padding: 0.65rem 1.1rem;
+  border: 1px solid #cbd5e1;
+  border-bottom: 0;
+  background: #f8fafc;
+  color: #334155;
+  font-weight: 800;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.lic-rate-tab:first-child {
+  border-radius: 0.4rem 0 0 0;
+}
+
+.lic-rate-tab:last-child {
+  border-radius: 0 0.4rem 0 0;
+}
+
+.lic-rate-tab.is-active {
+  background: #0b3a7a;
+  border-color: #0b3a7a;
+  color: #fff;
+}
+
+.lic-rate-wrap--tabs {
+  border-top-left-radius: 0;
+}
+
+.lic-tip {
+  margin: 1.25rem 0;
+  padding: 1rem 1.1rem 1rem 1.15rem;
+  border-left: 4px solid #c9a227;
+  background: #f4f8ff;
+  border-radius: 0 0.4rem 0.4rem 0;
+}
+
+.lic-tip h3 {
+  margin: 0 0 0.35rem;
+  color: #1a365d;
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+
+.lic-tip p {
+  margin: 0;
+  color: #1e293b;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.lic-avoid-list {
+  margin: 0.5rem 0 0;
+  padding-left: 1.15rem;
+}
+
+.lic-avoid-list li {
+  margin: 0 0 0.75rem;
+  color: #1e293b;
+  font-size: 1.02rem;
+  line-height: 1.5;
+}
+
+.lic-insurer-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.lic-insurer-table th,
+.lic-insurer-table td {
+  padding: 0.7rem 0.65rem;
+  border-bottom: 1px solid #e2e8f0;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.lic-insurer-table thead th {
+  background: #0b3a7a;
+  color: #fff;
+  font-weight: 700;
+}
+
+.lic-insurer-table .lic-co-cta {
+  display: inline-block;
+  margin: 0;
+  padding: 0.4rem 0.75rem;
+  font-size: 0.85rem;
+}
+
+@media (max-width: 700px) {
+  .lic-insurer-table thead {
+    display: none;
+  }
+
+  .lic-insurer-table tr {
+    display: block;
+    margin: 0 0 0.85rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.4rem;
+  }
+
+  .lic-insurer-table td {
+    display: block;
+    border-bottom: 0;
   }
 }

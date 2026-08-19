@@ -109,6 +109,7 @@ def prepare_en_header(path: Path) -> str:
                 "whole-life-cost.html",
                 "term-life-cost.html",
                 "children-life-insurance-cost.html",
+                "life-insurance-seniors-over-80.html",
                 "5000-life-insurance-cost.html",
                 "10000-life-insurance-cost.html",
                 "15000-life-insurance-cost.html",

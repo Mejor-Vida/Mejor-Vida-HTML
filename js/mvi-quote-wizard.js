@@ -999,6 +999,16 @@
     }
   }
 
+  function applyGenderChoice(val) {
+    if (val !== "male" && val !== "female") return;
+    state.gender = val;
+    answered.gender = true;
+    document.querySelectorAll('[data-choice-field="gender"]').forEach(function (btn) {
+      btn.classList.toggle("is-selected", btn.getAttribute("data-choice-value") === val);
+    });
+    updateSummaryBar();
+  }
+
   function applyTobaccoChoice(val) {
     if (val !== "yes" && val !== "no") return;
     state.tobacco = val;
@@ -1021,6 +1031,13 @@
   function applyLandingQueryParams() {
     try {
       var p = new URLSearchParams(location.search);
+      var gender = (p.get("gender") || "").toLowerCase();
+      if (gender !== "male" && gender !== "female") {
+        try {
+          gender = (sessionStorage.getItem("mvi_quote_gender") || "").toLowerCase();
+        } catch (eGender) {}
+      }
+      applyGenderChoice(gender);
       if (p.get("from") !== "landing") return;
       var nm = document.getElementById("ql-fullname");
       var em = document.getElementById("ql-email");

@@ -23,6 +23,7 @@ const STATIC_PAGES = [
   { loc: "/schedule-julie.html", priority: "0.75" },
   { loc: "/aseguradoras.html", priority: "0.80" },
   { loc: "/tipos-seguro-vida.html", priority: "0.80" },
+  { loc: "/seguro-vida-mayores-80.html", priority: "0.86" },
   { loc: "/costo-seguro-vida.html", priority: "0.80" },
   { loc: "/costo-seguro-vida-temporal.html", priority: "0.82" },
   { loc: "/costo-seguro-vida-entera.html", priority: "0.82" },

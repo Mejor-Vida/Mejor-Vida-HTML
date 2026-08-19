@@ -24,7 +24,7 @@
 <link href="../css/site-footer.css" rel="stylesheet"/>
 <link href="../css/quote-flow-shared.css?v=20260723-mobile-menu" rel="stylesheet"/>
 <link href="../css/site-header.css?v=20260723-ver-precios-gold" rel="stylesheet"/>
-<link href="../css/nav-life-insurance.css?v=20260817-tejo" rel="stylesheet"/>
+<link href="../css/nav-life-insurance.css?v=20260818-seniors" rel="stylesheet"/>
 <link href="../css/life-insurance-cost.css?v=20260812-term" rel="stylesheet"/>
 <link href="../css/mvi-assistant-widget.css?v=20260721-chat-z" rel="stylesheet"/>
 <link href="../css/fontawesome-mvi.min.css?v=20260723-brands-fix" rel="stylesheet"/>
@@ -57,6 +57,10 @@
                 <button type="button" class="nav-life-category" data-life-panel="cost" aria-pressed="false">
                   <i class="fas fa-dollar-sign" aria-hidden="true"></i>
                   <span>Insurance Cost</span>
+                </button>
+                <button type="button" class="nav-life-category" data-life-panel="seniors" aria-pressed="false">
+                  <i class="fas fa-handshake" aria-hidden="true"></i>
+                  <span>For seniors</span>
                 </button>
                 <button type="button" class="nav-life-category" data-life-panel="by-state" aria-pressed="false">
                   <img class="nav-life-usa-icon" src="../img/icons/usa-map-icon.svg" alt="" width="18" height="11" decoding="async" aria-hidden="true" />
@@ -143,6 +147,30 @@
                 <div class="nav-life-feature-copy">
                   <h3>Getting Affordable Coverage</h3>
                   <p>Learn how much <span class="nav-life-feature-em">life insurance costs</span> based on policy type and coverage amount.</p>
+                </div>
+              </a>
+              </div>
+              <div class="nav-life-panel" data-life-panel="seniors" hidden>
+              <div class="nav-life-options">
+                <h3>Guides for seniors</h3>
+                <div class="nav-life-options-grid nav-life-options-grid--seniors">
+                  <a href="life-insurance-seniors-over-80.html">Seniors over 80</a>
+                  <a href="life-insurance-seniors-over-80.html#over-85">Seniors over 85</a>
+                  <a href="no-waiting-period-life-burial.html">No waiting period</a>
+                  <a href="final-expense-insurance.html">Final expense insurance</a>
+                  <a href="final-expense-cost.html">Final expense cost</a>
+                </div>
+              </div>
+              <a class="nav-life-feature nav-life-feature--seniors" href="life-insurance-seniors-over-80.html">
+                <div class="nav-life-feature-copy">
+                  <h3>Burial insurance after 80</h3>
+                  <p>Clear options, appointed-company sample rates, and how to avoid an extra wait.</p>
+                </div>
+                <div class="nav-life-feature-media" aria-hidden="true">
+                  <picture>
+                    <source type="image/webp" srcset="../img/opt/fe-about-seniors-laptop.webp" />
+                    <img src="../img/opt/fe-about-seniors-laptop.jpg" alt="" width="1000" height="667" loading="lazy" decoding="async" />
+                  </picture>
                 </div>
               </a>
               </div>
@@ -329,6 +357,8 @@
           <a href="contact.html" class="mobile-menu-link">Cremation Insurance</a>
           <a href="children-life-insurance-cost.html" class="mobile-menu-link">Children's Life Insurance</a>
           <a href="whole-life-cost.html" class="mobile-menu-link">Whole Life Insurance</a>
+          <a href="life-insurance-seniors-over-80.html" class="mobile-menu-link">Seniors over 80</a>
+          <a href="life-insurance-seniors-over-80.html#over-85" class="mobile-menu-link">Seniors over 85</a>
         </div>
       </div>
     </div>
@@ -543,7 +573,7 @@
 <script defer src="../bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="../js/mvi-funnel-track.js?v=20260702e"></script>
 <div data-api-url="/api/website-chat" id="mvi-assistant-root"></div>
-<script defer src="../js/mvi-nav-questions.js?v=20260808-hamburger"></script>
+<script defer src="../js/mvi-nav-questions.js?v=20260818-seniors"></script>
 <script defer src="../js/website-assistant-widget.js?v=20260813-scroll-top"></script>
 <script>document.getElementById('year') && (document.getElementById('year').textContent = new Date().getFullYear());</script>
 <script>window.MVI_LIC_RATES = {"source":"Mejor Vida appointed-carrier rate samples (Integrity Connect marketplace FU Preferred Best NT (lowest listed sample; not appointed-only); Nebraska)","rating":"Non-tobacco, fully underwritten Preferred Best / preferred class (illustrative)","as_of":"2026-08-18","note":"Illustrative monthly premiums from Integrity Connect Fully Underwritten Term quick quotes (Preferred Best non-tobacco, Nebraska). Each cell is the lowest listed premium among returned carriers for that age/sex/term/face. Rounded to the nearest dollar. Educational samples only — not a binding quote. Carriers use age-nearest underwriting; actual offers vary by carrier, health, tobacco, state, face amount, and underwriting. Simplified-issue products (e.g. American Amicable Easy Term) are typically higher and remain available via the term quoter.","faces":[100000,250000,500000,750000,1000000,2000000,3000000],"faces_low":[100000,250000,500000],"faces_high":[750000,1000000,2000000,3000000],"terms":[10,20,30],"tables":{"10":{"100000":[{"age":20,"female":7,"male":8},{"age":25,"female":7,"male":8},{"age":30,"female":7,"male":8},{"age":35,"female":7,"male":8},{"age":40,"female":8,"male":9},{"age":45,"female":10,"male":11},{"age":50,"female":14,"male":15},{"age":55,"female":18,"male":21},{"age":60,"female":25,"male":35},{"age":65,"female":40,"male":53},{"age":70,"female":69,"male":88},{"age":75,"female":113,"male":152}],"250000":[{"age":20,"female":8,"male":10},{"age":25,"female":9,"male":10},{"age":30,"female":9,"male":10},{"age":35,"female":9,"male":10},{"age":40,"female":11,"male":12},{"age":45,"female":15,"male":17},{"age":50,"female":21,"male":24},{"age":55,"female":30,"male":38},{"age":60,"female":44,"male":64}],"500000":[{"age":20,"female":11,"male":13},{"age":25,"female":11,"male":13},{"age":30,"female":11,"male":13},{"age":35,"female":11,"male":13},{"age":40,"female":15,"male":17},{"age":45,"female":23,"male":27},{"age":50,"female":32,"male":40},{"age":55,"female":50,"male":66},{"age":60,"female":72,"male":109}],"750000":[{"age":20,"female":12,"male":16},{"age":25,"female":12,"male":16},{"age":30,"female":13,"male":16},{"age":35,"female":15,"male":18},{"age":40,"female":21,"male":24},{"age":45,"female":34,"male":39},{"age":50,"female":47,"male":58},{"age":55,"female":73,"male":98},{"age":60,"female":107,"male":162}],"1000000":[{"age":20,"female":15,"male":18},{"age":25,"female":15,"male":18},{"age":30,"female":15,"male":18},{"age":35,"female":17,"male":20},{"age":40,"female":26,"male":28},{"age":45,"female":37,"male":44},{"age":50,"female":61,"male":76},{"age":55,"female":94,"male":125},{"age":60,"female":150,"male":218}],"2000000":[{"age":20,"female":23,"male":30},{"age":25,"female":23,"male":30},{"age":30,"female":25,"male":30},{"age":35,"female":29,"male":35},{"age":40,"female":45,"male":52},{"age":45,"female":72,"male":86},{"age":50,"female":117,"male":147},{"age":55,"female":184,"male":247},{"age":60,"female":295,"male":433}],"3000000":[{"age":20,"female":32,"male":42},{"age":25,"female":32,"male":42},{"age":30,"female":34,"male":42},{"age":35,"female":40,"male":50},{"age":40,"female":65,"male":75},{"age":45,"female":107,"male":128},{"age":50,"female":172,"male":218},{"age":55,"female":273,"male":370},{"age":60,"female":436,"male":645}]},"20":{"100000":[{"age":20,"female":8,"male":8},{"age":25,"female":8,"male":8},{"age":30,"female":8,"male":9},{"age":35,"female":8,"male":9},{"age":40,"female":10,"male":11},{"age":45,"female":13,"male":16},{"age":50,"female":18,"male":22},{"age":55,"female":26,"male":35},{"age":60,"female":46,"male":61}],"250000":[{"age":20,"female":11,"male":12},{"age":25,"female":11,"male":12},{"age":30,"female":11,"male":12},{"age":35,"female":12,"male":14},{"age":40,"female":16,"male":18},{"age":45,"female":22,"male":27},{"age":50,"female":31,"male":40},{"age":55,"female":48,"male":63},{"age":60,"female":82,"male":119}],"500000":[{"age":20,"female":15,"male":18},{"age":25,"female":15,"male":18},{"age":30,"female":16,"male":18},{"age":35,"female":17,"male":20},{"age":40,"female":24,"male":28},{"age":45,"female":36,"male":45},{"age":50,"female":54,"male":69},{"age":55,"female":82,"male":112},{"age":60,"female":140,"male":199}],"750000":[{"age":20,"female":19,"male":23},{"age":25,"female":19,"male":23},{"age":30,"female":20,"male":24},{"age":35,"female":23,"male":28},{"age":40,"female":34,"male":41},{"age":45,"female":52,"male":66},{"age":50,"female":80,"male":103},{"age":55,"female":122,"male":167},{"age":60,"female":209,"male":298}],"1000000":[{"age":20,"female":22,"male":29},{"age":25,"female":22,"male":29},{"age":30,"female":23,"male":29},{"age":35,"female":28,"male":32},{"age":40,"female":40,"male":48},{"age":45,"female":65,"male":84},{"age":50,"female":96,"male":128},{"age":55,"female":166,"male":230},{"age":60,"female":304,"male":432}],"2000000":[{"age":20,"female":34,"male":50},{"age":25,"female":34,"male":52},{"age":30,"female":41,"male":53},{"age":35,"female":54,"male":62},{"age":40,"female":77,"male":94},{"age":45,"female":128,"male":166},{"age":50,"female":190,"male":254},{"age":55,"female":329,"male":458},{"age":60,"female":602,"male":858}],"3000000":[{"age":20,"female":48,"male":72},{"age":25,"female":48,"male":74},{"age":30,"female":59,"male":76},{"age":35,"female":78,"male":92},{"age":40,"female":115,"male":140},{"age":45,"female":191,"male":247},{"age":50,"female":283,"male":380},{"age":55,"female":492,"male":686},{"age":60,"female":900,"male":1283}]},"30":{"100000":[{"age":20,"female":10,"male":12},{"age":25,"female":10,"male":12},{"age":30,"female":11,"male":12},{"age":35,"female":11,"male":14},{"age":40,"female":16,"male":18},{"age":45,"female":20,"male":25},{"age":50,"female":32,"male":40},{"age":55,"female":58,"male":75}],"250000":[{"age":20,"female":14,"male":17},{"age":25,"female":15,"male":17},{"age":30,"female":16,"male":18},{"age":35,"female":19,"male":22},{"age":40,"female":24,"male":30},{"age":45,"female":36,"male":46},{"age":50,"female":58,"male":76},{"age":55,"female":109,"male":144}],"500000":[{"age":20,"female":22,"male":27},{"age":25,"female":22,"male":28},{"age":30,"female":24,"male":29},{"age":35,"female":28,"male":34},{"age":40,"female":39,"male":49},{"age":45,"female":59,"male":76},{"age":50,"female":94,"male":124},{"age":55,"female":174,"male":229}],"750000":[{"age":20,"female":30,"male":37},{"age":25,"female":30,"male":38},{"age":30,"female":34,"male":41},{"age":35,"female":41,"male":50},{"age":40,"female":57,"male":73},{"age":45,"female":87,"male":113},{"age":50,"female":139,"male":184},{"age":55,"female":259,"male":342}],"1000000":[{"age":20,"female":34,"male":46},{"age":25,"female":35,"male":46},{"age":30,"female":41,"male":52},{"age":35,"female":53,"male":66},{"age":40,"female":77,"male":98},{"age":45,"female":121,"male":157},{"age":50,"female":190,"male":260},{"age":55,"female":337,"male":486}],"2000000":[{"age":20,"female":59,"male":83},{"age":25,"female":61,"male":84},{"age":30,"female":73,"male":96},{"age":35,"female":99,"male":125},{"age":40,"female":147,"male":190},{"age":45,"female":235,"male":308},{"age":50,"female":378,"male":517},{"age":55,"female":672,"male":970}],"3000000":[{"age":20,"female":86,"male":121},{"age":25,"female":88,"male":123},{"age":30,"female":106,"male":141},{"age":35,"female":145,"male":185},{"age":40,"female":218,"male":282},{"age":45,"female":350,"male":460},{"age":50,"female":566,"male":771},{"age":55,"female":1007,"male":1454}]}}};

@@ -121,6 +121,9 @@
           activate(cat.getAttribute("data-life-panel"));
         });
       });
+
+      var path = (location.pathname || "").toLowerCase();
+      if (/mayores-80|seniors-over-80/.test(path)) activate("seniors");
     });
   }
 

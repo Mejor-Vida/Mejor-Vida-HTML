@@ -101,6 +101,10 @@
                   <i class="fas fa-dollar-sign" aria-hidden="true"></i>
                   <span>Costo del seguro</span>
                 </button>
+                <button type="button" class="nav-life-category" data-life-panel="seniors" aria-pressed="false">
+                  <i class="fas fa-handshake" aria-hidden="true"></i>
+                  <span>Para mayores</span>
+                </button>
                 <button type="button" class="nav-life-category" data-life-panel="by-state" aria-pressed="false">
                   <img class="nav-life-usa-icon" src="../img/icons/usa-map-icon.svg" alt="" width="18" height="11" decoding="async" aria-hidden="true" />
                   <span>Cobertura por estado</span>
@@ -186,6 +190,30 @@
                 <div class="nav-life-feature-copy">
                   <h3>Obtener cobertura asequible</h3>
                   <p>Vea cuánto cuesta el <span class="nav-life-feature-em">seguro de vida</span> según el tipo de póliza y el monto.</p>
+                </div>
+              </a>
+              </div>
+              <div class="nav-life-panel" data-life-panel="seniors" hidden>
+              <div class="nav-life-options">
+                <h3>Guías para personas mayores</h3>
+                <div class="nav-life-options-grid nav-life-options-grid--seniors">
+                  <a href="../seguro-vida-mayores-80.html">Mayores de 80 años</a>
+                  <a href="../seguro-vida-mayores-80.html#over-85">Mayores de 85 años</a>
+                  <a href="../seguro-vida-entierro-sin-espera.html">Sin período de espera</a>
+                  <a href="../seguro-gastos-finales.html">Seguro de gastos finales</a>
+                  <a href="../costo-seguro-gastos-finales.html">Costo de gastos finales</a>
+                </div>
+              </div>
+              <a class="nav-life-feature nav-life-feature--seniors" href="../seguro-vida-mayores-80.html">
+                <div class="nav-life-feature-copy">
+                  <h3>Seguro de entierro después de los 80</h3>
+                  <p>Opciones claras, primas de compañías designadas y cómo evitar una espera innecesaria.</p>
+                </div>
+                <div class="nav-life-feature-media" aria-hidden="true">
+                  <picture>
+                    <source type="image/webp" srcset="../img/opt/fe-about-seniors-laptop.webp" />
+                    <img src="../img/opt/fe-about-seniors-laptop.jpg" alt="" width="1000" height="667" loading="lazy" decoding="async" />
+                  </picture>
                 </div>
               </a>
               </div>
@@ -372,6 +400,8 @@
           <a href="../contact.html" class="mobile-menu-link">Seguro para cremación</a>
           <a href="../costo-seguro-vida-infantil.html" class="mobile-menu-link">Seguro de vida infantil</a>
           <a href="../costo-seguro-vida-entera.html" class="mobile-menu-link">Seguro de vida entera</a>
+          <a href="../seguro-vida-mayores-80.html" class="mobile-menu-link">Mayores de 80 años</a>
+          <a href="../seguro-vida-mayores-80.html#over-85" class="mobile-menu-link">Mayores de 85 años</a>
         </div>
       </div>
     </div>
@@ -572,7 +602,7 @@
 <script src="../js/mvi-funnel-track.js?v=20260702e"></script>
 <script defer src="../js/mvi-ga4-funnel.js"></script>
 <script defer src="../script.js"></script>
-<script defer src="../js/mvi-nav-questions.js?v=20260808-hamburger"></script>
+<script defer src="../js/mvi-nav-questions.js?v=20260818-seniors"></script>
 <script defer="" src="../js/website-assistant-widget.js?v=20260813-scroll-top"></script>
 <script type="application/ld+json">
 {
