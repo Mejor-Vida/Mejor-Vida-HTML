@@ -29,7 +29,7 @@
       "productEs": "Living Promise Nivelado",
       "productEn": "Living Promise Level",
       "ages": "45–85",
-      "death": "$2,000–$50,000",
+      "death": "$2,000–$25,000",
       "wait": false,
       "sample10k80f": 98,
       "href": "mutual-of-omaha"
@@ -53,8 +53,8 @@
       "productEn": "Immediate Solution Preferred",
       "agesEs": "Hasta los 85",
       "agesEn": "Through 85",
-      "deathEs": "Desde $1,000",
-      "deathEn": "From $1,000",
+      "deathEs": "$1,000–$25,000",
+      "deathEn": "$1,000–$25,000",
       "wait": false,
       "sample10k80f": 101,
       "href": "transamerica"

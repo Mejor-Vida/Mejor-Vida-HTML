@@ -87,6 +87,7 @@ const JOBS = [
   { src: "img/lic-hero-karst-river.jpg", maxWidth: 1600, maxHeight: 1066, outBase: "lic-hero-karst-river" },
   { src: "img/lic-hero-andes-llamas.jpg", maxWidth: 1600, maxHeight: 1066, outBase: "lic-hero-andes-llamas" },
   { src: "img/lic-hero-coffee-finca.jpg", maxWidth: 1600, maxHeight: 1066, outBase: "lic-hero-coffee-finca" },
+  { src: "img/lic-hero-futbol-barrio.png", maxWidth: 1600, maxHeight: 1066, outBase: "lic-hero-futbol-barrio" },
   { src: "img/lic-hero-desert-saguaro.jpg", maxWidth: 1600, maxHeight: 1066, outBase: "lic-hero-desert-saguaro" },
   { src: "img/lic-hero-children-playground.jpg", maxWidth: 1600, maxHeight: 1066, outBase: "lic-hero-children-playground" },
   { src: "img/fep-hero-rainforest.jpg", maxWidth: 1600, maxHeight: 1066, outBase: "fep-hero-rainforest" },

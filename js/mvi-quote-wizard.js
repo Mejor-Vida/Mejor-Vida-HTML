@@ -158,6 +158,7 @@
     var navWrap = document.getElementById("mvi-wizard-nav");
     if (prevBtn) prevBtn.hidden = i === 0;
     var stepId = STEPS[i];
+    if (stepId === "coverage") populateCoverageSelect();
     var autoAdvance = stepId === "gender" || stepId === "tobacco";
     var isContact = stepId === "contact";
     if (nextBtn) nextBtn.hidden = autoAdvance || isContact;
@@ -208,10 +209,10 @@
           "Quotes are available starting at age 18."
         );
       }
-      if (age > 85) {
+      if (age > 89) {
         return t(
-          "Las cotizaciones están disponibles hasta los 85 años.",
-          "Quotes are available up to age 85."
+          "Las cotizaciones están disponibles hasta los 89 años.",
+          "Quotes are available up to age 89."
         );
       }
       return null;
@@ -357,7 +358,7 @@
   function yearOptionsList() {
     var now = new Date();
     var maxYear = now.getFullYear() - 45;
-    var minYear = now.getFullYear() - 85;
+    var minYear = now.getFullYear() - 89;
     var list = [{ value: "", label: dobPlaceholder("year") }];
     for (var y = maxYear; y >= minYear; y--) {
       list.push({ value: String(y), label: String(y) });
@@ -663,16 +664,43 @@
     }
   }
 
+  function currentQuoteAge() {
+    if (!state.dobYear || !state.dobMonth || !state.dobDay) return null;
+    return ageFromDob(
+      parseInt(state.dobYear, 10),
+      parseInt(state.dobMonth, 10),
+      parseInt(state.dobDay, 10)
+    );
+  }
+
   function populateCoverageSelect() {
     var sel = document.getElementById("mvi-coverage");
-    if (!sel || sel.options.length > 1) return;
-    var amounts = window.MVI_COVERAGE_AMOUNTS || [];
+    if (!sel) return;
+    var age = currentQuoteAge();
+    var maxFace = age != null && age > 85 ? 25000 : 50000;
+    var amounts = (window.MVI_COVERAGE_AMOUNTS || []).filter(function (amt) {
+      return amt <= maxFace;
+    });
+    var prev = parseInt(sel.value || state.coverage, 10) || 10000;
+    sel.innerHTML = "";
+    var placeholder = document.createElement("option");
+    placeholder.value = "";
+    placeholder.textContent = t("Seleccione el monto", "Select amount");
+    sel.appendChild(placeholder);
     amounts.forEach(function (amt) {
       var o = document.createElement("option");
       o.value = String(amt);
       o.textContent = formatCoverage(amt);
       sel.appendChild(o);
     });
+    if (amounts.indexOf(prev) >= 0) {
+      sel.value = String(prev);
+    } else if (amounts.indexOf(10000) >= 0) {
+      sel.value = "10000";
+    } else if (amounts.length) {
+      sel.value = String(amounts[amounts.length - 1]);
+    }
+    state.coverage = parseInt(sel.value, 10) || 10000;
   }
 
   function bindChoiceButtons() {
@@ -802,6 +830,7 @@
           sex: sex,
           smoker: smoker,
           coverageAmount: coverage,
+          lang: L,
         }),
       });
       var data = await res.json().catch(function () {

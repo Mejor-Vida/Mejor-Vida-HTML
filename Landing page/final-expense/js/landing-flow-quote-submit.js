@@ -110,8 +110,8 @@
         setQuoteStatus("Quotes are available starting at age 18.", true);
         return Promise.resolve();
       }
-      if (age > 85) {
-        setQuoteStatus("Quotes are available up to age 85.", true);
+      if (age > 89) {
+        setQuoteStatus("Quotes are available up to age 89.", true);
         return Promise.resolve();
       }
 

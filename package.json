@@ -52,6 +52,7 @@
     "term:rebuild-cost-rates": "node scripts/rebuild-term-life-cost-rates.js",
     "build:coverage-amount-pages": "node scripts/build-coverage-amount-pages.js",
     "build:seniors-over-80": "node scripts/build-seniors-over-80-pages.js",
+    "build:seniors-over-85": "node scripts/build-seniors-over-85-pages.js",
     "assurity:import-spot": "node scripts/assurity-fe-spot-import.js",
     "assurity:interpolate-tobacco": "node scripts/interpolate-assurity-tobacco-from-anchors.js",
     "optimize:avatars": "node scripts/optimize-chat-avatars.js"

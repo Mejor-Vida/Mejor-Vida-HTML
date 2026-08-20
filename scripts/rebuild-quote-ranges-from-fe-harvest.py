@@ -1,15 +1,23 @@
 #!/usr/bin/env python3
-"""Rebuild quote_ranges (ages 45–85) from Integrity FE appointed harvest.
+"""Rebuild quoter charts from Integrity FE appointed harvests.
 
-Semantics (unchanged for the site quoter):
-  low  = cheapest appointed Level / good-health monthly at $10,000 face
-  high = cheapest appointed Graded / modified monthly at $10,000 face (fallback: low*1.35)
-  anchor = midpoint
+Reads:
+  integrations/knowledge/Term_Life_Knowledge/integrity-fe-harvest.json
+  integrations/knowledge/Term_Life_Knowledge/integrity-fe-over85.json
 
-Appointed products considered (Integrity FE logos / names):
-  Living Promise Level (MOO), Senior Choice Immediate (AmAm), Eagle Select* (Americo),
-  Immediate Solution / Express Premier (Transamerica), Accendo/Aetna Preferred,
-  SimpliNow Level (Corebridge), Assurity Protect+/Perform+ when logo maps.
+Writes:
+  js/quote-engine-fe-harvest.json
+      Exact appointed Level (low) / Graded or Accendo Standard (high)
+      monthly premiums at harvested faces — used by the live FE quoter.
+  integrations/supabase/migrations/094_quote_ranges_from_integrity_fe.sql
+      $10,000 non-smoker quote_ranges rows for harvested ages, including 86–89.
+  js/final-expense-cost-rates.json + js/life-insurance-cost-rates.json
+      Educational cost-page charts from the same harvest cells.
+
+Semantics:
+  Ages 45–85: cheapest appointed Level / Graded at that face.
+  Ages 86–89: Aetna Accendo Preferred (low) / Standard (high); max face $25,000.
+  Tobacco 86–89 is not harvested — quoter returns no_data (call).
 
 Usage:
   python3 scripts/rebuild-quote-ranges-from-fe-harvest.py
@@ -20,15 +28,27 @@ from __future__ import annotations
 
 import argparse
 import json
-import re
 import sys
 from collections import defaultdict
 from datetime import date
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-HARVEST = ROOT / "integrations/knowledge/Term_Life_Knowledge/integrity-fe-harvest.json"
-OUT_SQL = ROOT / "integrations/supabase/migrations/092_reseed_quote_ranges_from_integrity_fe.sql"
+sys.path.insert(0, str(ROOT))
+HARVESTS = [
+    ROOT / "integrations/knowledge/Term_Life_Knowledge/integrity-fe-harvest.json",
+    ROOT / "integrations/knowledge/Term_Life_Knowledge/integrity-fe-over85.json",
+]
+OUT_SQL = ROOT / "integrations/supabase/migrations/094_quote_ranges_from_integrity_fe.sql"
+ENGINE_JSON = ROOT / "js/quote-engine-fe-harvest.json"
+COST_RATES = ROOT / "js/life-insurance-cost-rates.json"
+FE_STANDALONE = ROOT / "js/final-expense-cost-rates.json"
+
+ACCENDO_MIN_AGE = 86
+ACCENDO_MAX_FACE = 25000
+QUOTE_FACE = 10000
+CHART_FACES = [5000, 10000, 15000, 20000, 25000, 30000, 40000, 50000]
+CHART_AGES_FE = list(range(45, 86, 5)) + [86, 87, 88, 89]
 
 
 def carrier_slug(card: dict) -> str | None:
@@ -58,7 +78,13 @@ def is_level(card: dict) -> bool:
     prod = (card.get("product") or "").lower()
     if "graded" in hl or "graded" in prod or "modified" in prod or "guaranteed" in prod:
         return False
-    return "level" in hl or hl in ("", "preferred") or "immediate" in prod or "preferred" in prod or "select" in prod
+    return (
+        "level" in hl
+        or hl in ("", "preferred")
+        or "immediate" in prod
+        or "preferred" in prod
+        or "select" in prod
+    )
 
 
 def is_graded(card: dict) -> bool:
@@ -67,58 +93,132 @@ def is_graded(card: dict) -> bool:
     return "graded" in hl or "graded" in prod or "modified" in prod
 
 
-def scale_to_10k(monthly: float, face: int) -> float | None:
-    if not face or face <= 0 or monthly is None:
-        return None
-    return round(monthly * (10000 / face), 2)
+def is_accendo_preferred(card: dict) -> bool:
+    return carrier_slug(card) == "aetna" and "preferred" in (card.get("product") or "").lower()
 
 
-def build_ranges(records: list[dict]) -> dict[tuple[int, str], dict]:
-    # (age, sex) -> {low, high}
-    level: dict[tuple[int, str], list[float]] = defaultdict(list)
-    graded: dict[tuple[int, str], list[float]] = defaultdict(list)
+def is_accendo_standard(card: dict) -> bool:
+    return carrier_slug(card) == "aetna" and "standard" in (card.get("product") or "").lower()
+
+
+def load_records() -> tuple[list[dict], list[str]]:
+    records: list[dict] = []
+    sources: list[str] = []
+    for path in HARVESTS:
+        if not path.exists():
+            print(f"missing {path.relative_to(ROOT)}")
+            continue
+        data = json.loads(path.read_text(encoding="utf-8"))
+        recs = data.get("records") or []
+        records.extend(recs)
+        sources.append(path.name)
+        print(f"loaded {path.name} records={len(recs)}")
+    return records, sources
+
+
+def cell_from_low_high(low: float, high: float) -> dict:
+    if high < low:
+        high = low
+    return {
+        "low": round(low, 2),
+        "high": round(high, 2),
+        "anchor": round((low + high) / 2, 2),
+    }
+
+
+def build_engine(records: list[dict]) -> dict:
+    """(age, sex, face) NT appointed cells."""
+    level: dict[tuple[int, str, int], list[float]] = defaultdict(list)
+    graded: dict[tuple[int, str, int], list[float]] = defaultdict(list)
+    accendo_pref: dict[tuple[int, str, int], list[float]] = defaultdict(list)
+    accendo_std: dict[tuple[int, str, int], list[float]] = defaultdict(list)
+
     for rec in records:
         if rec.get("tobacco"):
             continue
         face = int(rec.get("face") or 0)
         age = int(rec["age"])
         sex = rec["sex"]
-        key = (age, sex)
-        for card in rec.get("all") or []:
-            if carrier_slug(card) is None:
-                continue
+        key = (age, sex, face)
+        for card in rec.get("all") or rec.get("top") or rec.get("appointed") or []:
             m = card.get("monthly")
             if m is None:
                 continue
-            m10 = scale_to_10k(float(m), int(card.get("face_amount") or face or 0))
-            if m10 is None:
+            monthly = float(m)
+            if is_accendo_preferred(card):
+                accendo_pref[key].append(monthly)
+            elif is_accendo_standard(card):
+                accendo_std[key].append(monthly)
+            slug = carrier_slug(card)
+            if slug is None:
                 continue
             if is_graded(card):
-                graded[key].append(m10)
+                graded[key].append(monthly)
             elif is_level(card):
-                level[key].append(m10)
+                level[key].append(monthly)
+
+    cells: dict[str, dict[str, dict[str, dict[str, dict]]]] = {"female": {}, "male": {}}
+    keys = set(level) | set(accendo_pref)
+    for age, sex, face in sorted(keys):
+        key = (age, sex, face)
+        if age >= ACCENDO_MIN_AGE:
+            prefs = accendo_pref.get(key) or []
+            stds = accendo_std.get(key) or []
+            if not prefs:
+                continue
+            if face > ACCENDO_MAX_FACE:
+                continue
+            low = min(prefs)
+            high = min(stds) if stds else round(low * 1.45, 2)
+            cell = cell_from_low_high(low, high)
+            carrier = "aetna_accendo"
+        else:
+            lows = level.get(key) or []
+            if not lows:
+                continue
+            low = min(lows)
+            highs = graded.get(key) or []
+            high = min(highs) if highs else round(low * 1.35, 2)
+            cell = cell_from_low_high(low, high)
+            carrier = "appointed"
+        cell["carrier"] = carrier
+        age_bucket = cells.setdefault(sex, {}).setdefault(str(age), {}).setdefault("nt", {})
+        age_bucket[str(face)] = cell
+
+    return {
+        "as_of": date.today().isoformat(),
+        "source": "Integrity Connect Final Expense appointed harvest",
+        "tobacco": False,
+        "accendo_min_age": ACCENDO_MIN_AGE,
+        "accendo_max_age": 89,
+        "accendo_max_face": ACCENDO_MAX_FACE,
+        "quote_face": QUOTE_FACE,
+        "cells": cells,
+    }
+
+
+def ranges_at_10k(engine: dict) -> dict[tuple[int, str], dict]:
     out = {}
-    for key, lows in level.items():
-        low = min(lows)
-        highs = graded.get(key) or []
-        high = min(highs) if highs else round(low * 1.35, 2)
-        if high < low:
-            high = low
-        out[key] = {
-            "low": low,
-            "high": high,
-            "anchor": round((low + high) / 2, 2),
-        }
+    for sex, ages in engine["cells"].items():
+        for age_s, tobacco in ages.items():
+            cell = (tobacco.get("nt") or {}).get(str(QUOTE_FACE))
+            if not cell:
+                continue
+            out[(int(age_s), sex)] = {
+                "low": cell["low"],
+                "high": cell["high"],
+                "anchor": cell["anchor"],
+            }
     return out
 
 
 def write_sql(ranges: dict[tuple[int, str], dict], path: Path) -> None:
-    # Keep existing smoker rows; replace NT rows for harvested ages only via DELETE+INSERT
     ages = sorted({a for a, _ in ranges})
     lines = [
-        "-- Auto-generated from Integrity FE appointed harvest",
+        "-- Auto-generated from Integrity FE appointed harvest (incl. Accendo 86–89)",
         f"-- as_of: {date.today().isoformat()}",
         "-- Updates non-smoker quote_ranges for harvested ages; smokers unchanged.",
+        "-- Ages 86–89 are Aetna Accendo Preferred (low) / Standard (high) at $10,000.",
         "",
         "DELETE FROM quote_ranges",
         f"WHERE smoker = false AND age IN ({', '.join(str(a) for a in ages)});",
@@ -126,7 +226,7 @@ def write_sql(ranges: dict[tuple[int, str], dict], path: Path) -> None:
         "INSERT INTO quote_ranges (age, sex, smoker, low, high, anchor) VALUES",
     ]
     values = []
-    for (age, sex) in sorted(ranges):
+    for age, sex in sorted(ranges):
         r = ranges[(age, sex)]
         values.append(
             f"  ({age}, '{sex}', false, {r['low']:.2f}, {r['high']:.2f}, {r['anchor']:.2f})"
@@ -135,42 +235,132 @@ def write_sql(ranges: dict[tuple[int, str], dict], path: Path) -> None:
     path.write_text("\n".join(lines), encoding="utf-8")
 
 
+def nearest_cell(face_map: dict[str, dict], face: int) -> dict | None:
+    if str(face) in face_map:
+        return face_map[str(face)]
+    faces = sorted(int(k) for k in face_map)
+    if not faces:
+        return None
+    if face <= faces[0]:
+        src = face_map[str(faces[0])]
+        factor = face / faces[0]
+        return cell_from_low_high(src["low"] * factor, src["high"] * factor)
+    if face >= faces[-1]:
+        src = face_map[str(faces[-1])]
+        factor = face / faces[-1]
+        return cell_from_low_high(src["low"] * factor, src["high"] * factor)
+    lo = faces[0]
+    hi = faces[-1]
+    for i in range(len(faces) - 1):
+        if faces[i] <= face <= faces[i + 1]:
+            lo, hi = faces[i], faces[i + 1]
+            break
+    a = face_map[str(lo)]
+    b = face_map[str(hi)]
+    t = (face - lo) / (hi - lo)
+    return cell_from_low_high(
+        a["low"] + (b["low"] - a["low"]) * t,
+        a["high"] + (b["high"] - a["high"]) * t,
+    )
+
+
+def write_cost_charts(engine: dict) -> None:
+    tables: dict[str, list[dict]] = {}
+    for face in CHART_FACES:
+        rows = []
+        for age in CHART_AGES_FE:
+            if age >= ACCENDO_MIN_AGE and face > ACCENDO_MAX_FACE:
+                continue
+            f_map = engine["cells"].get("female", {}).get(str(age), {}).get("nt") or {}
+            m_map = engine["cells"].get("male", {}).get(str(age), {}).get("nt") or {}
+            f_cell = nearest_cell(f_map, face) if f_map else None
+            m_cell = nearest_cell(m_map, face) if m_map else None
+            if not f_cell or not m_cell:
+                continue
+            rows.append(
+                {
+                    "age": age,
+                    "female": int(round(f_cell["low"])),
+                    "male": int(round(m_cell["low"])),
+                }
+            )
+        tables[str(face)] = rows
+
+    fe = {
+        "source": "Mejor Vida quote engine — Integrity FE appointed harvest (Accendo 86–89)",
+        "rating": "Non-tobacco, good-health (Level/Immediate) low; Accendo Preferred 86–89",
+        "as_of": date.today().isoformat(),
+        "note": (
+            "Illustrative monthly premiums from Integrity Connect appointed harvests used by "
+            "the Mejor Vida quoter. Ages 45–85 are the cheapest appointed Level premium; "
+            "ages 86–89 are Aetna Accendo Preferred Level (max $25,000). Non-tobacco. "
+            "Educational only — not a binding quote."
+        ),
+        "faces": CHART_FACES,
+        "tables": tables,
+    }
+
+    if COST_RATES.exists():
+        data = json.loads(COST_RATES.read_text(encoding="utf-8"))
+    else:
+        data = {}
+    data["final_expense"] = fe
+    COST_RATES.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
+    FE_STANDALONE.write_text(json.dumps({"final_expense": fe}, indent=2) + "\n", encoding="utf-8")
+    print(f"wrote {COST_RATES.relative_to(ROOT)}")
+    print(f"wrote {FE_STANDALONE.relative_to(ROOT)}")
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--apply", action="store_true", help="Apply migration via apply_migrations.py")
+    ap.add_argument("--apply", action="store_true", help="Apply 094 via psycopg (not other pending migrations)")
     args = ap.parse_args()
 
-    if not HARVEST.exists():
-        print(f"Missing {HARVEST}")
+    records, sources = load_records()
+    if not records:
+        print("No FE harvest records found")
         return 1
-    data = json.loads(HARVEST.read_text(encoding="utf-8"))
-    ranges = build_ranges(data.get("records") or [])
+
+    engine = build_engine(records)
+    engine["source_files"] = sources
+    ENGINE_JSON.write_text(json.dumps(engine, indent=2) + "\n", encoding="utf-8")
+    print(f"wrote {ENGINE_JSON.relative_to(ROOT)}")
+
+    ranges = ranges_at_10k(engine)
     if not ranges:
-        print("No appointed FE level premiums found")
+        print("No $10,000 cells to seed quote_ranges")
         return 1
     write_sql(ranges, OUT_SQL)
     print(f"wrote {OUT_SQL.relative_to(ROOT)} cells={len(ranges)}")
-    for key in sorted(ranges)[:6]:
+    for key in sorted(ranges):
         age, sex = key
         r = ranges[key]
         print(f"  {sex} {age}: low={r['low']} high={r['high']} anchor={r['anchor']}")
-    print("  ...")
+
+    write_cost_charts(engine)
 
     if args.apply:
-        import subprocess
+        from integrations.supabase.config import get_database_url
 
-        rc = subprocess.call(
-            [sys.executable, str(ROOT / "integrations/supabase/apply_migrations.py")],
-            cwd=str(ROOT),
-        )
-        if rc != 0:
-            return rc
-        # Refresh educational FE cost JSON from new migration + legacy 014 smokers/ages
-        rebuild = ROOT / "scripts/rebuild-final-expense-rates-from-quote-ranges.py"
-        if rebuild.exists():
-            # Prefer rebuilding from live DB later; for now regenerate from 014+092 by
-            # parsing both SQL files is complex — call existing script which reads 014.
-            print("NOTE: run scripts/rebuild-final-expense-rates-from-quote-ranges.py after updating 014 or extend it to read 092.")
+        try:
+            import psycopg
+        except ImportError:
+            print("Install: pip install -r integrations/supabase/requirements.txt")
+            return 1
+        dsn = get_database_url()
+        if not dsn:
+            print("Set DATABASE_URL or SUPABASE_URL + SUPABASE_DB_PASSWORD in .env.local")
+            return 1
+        sql = OUT_SQL.read_text(encoding="utf-8")
+        with psycopg.connect(dsn) as conn:
+            with conn.cursor() as cur:
+                cur.execute(sql)
+                cur.execute(
+                    "INSERT INTO schema_migrations (filename) VALUES (%s) ON CONFLICT DO NOTHING",
+                    (OUT_SQL.name,),
+                )
+            conn.commit()
+        print(f"applied {OUT_SQL.name}")
     return 0
 
 

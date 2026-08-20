@@ -10,6 +10,7 @@
  */
 
 
+const { MIN_QUOTE_AGE, MAX_QUOTE_AGE } = require("../lib/quote-range-router");
 const { sendQuoteLeadNotification } = require("../lib/ic-lead-notify");
 const { sendMetaCapiWebsiteEvent, capiClientUserAgent, capiClientIp } = require("../lib/meta-capi");
 const {
@@ -39,7 +40,7 @@ function readJsonBody(req) {
   return req.body && typeof req.body === "object" ? req.body : {};
 }
 
-/** ISO YYYY-MM-DD → age in full years (18–85 validated separately). */
+/** ISO YYYY-MM-DD → age in full years (validated separately against quote age range). */
 function ageFromIsoDob(iso) {
   const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(iso || "").trim());
   if (!m) return null;
@@ -356,10 +357,10 @@ module.exports = async function handler(req, res) {
       }
       ageN = fromDob;
     }
-    if (!Number.isFinite(ageN) || ageN < 18 || ageN > 85) {
+    if (!Number.isFinite(ageN) || ageN < MIN_QUOTE_AGE || ageN > MAX_QUOTE_AGE) {
       return json(res, 400, {
         ok: false,
-        error: "Quotes are available for ages 18–85.",
+        error: `Quotes are available for ages ${MIN_QUOTE_AGE}–${MAX_QUOTE_AGE}.`,
       });
     }
     const sex = String(body.sex || "").toLowerCase();

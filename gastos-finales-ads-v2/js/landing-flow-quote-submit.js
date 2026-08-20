@@ -122,8 +122,8 @@
         setQuoteStatus(msg("Quotes are available starting at age 18.", "Las cotizaciones están disponibles desde los 18 años."), true);
         return Promise.resolve();
       }
-      if (age > 85) {
-        setQuoteStatus(msg("Quotes are available up to age 85.", "Las cotizaciones están disponibles hasta los 85 años."), true);
+      if (age > 89) {
+        setQuoteStatus(msg("Quotes are available up to age 89.", "Las cotizaciones están disponibles hasta los 89 años."), true);
         return Promise.resolve();
       }
 

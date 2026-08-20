@@ -127,22 +127,16 @@ function copy(lang) {
       crumbMid: "Seguro de vida",
       takeTitle: "Puntos clave",
       take1: "Si responde las preguntas de salud y califica, algunos planes <strong>pueden pagar el beneficio completo desde el primer día</strong> — incluso con condiciones médicas anteriores.",
-      take2: "La mayoría de las familias busca <strong>$5,000 a $25,000</strong> para ayudar con el funeral y cuentas pendientes, no una póliza temporal grande.",
+      take2: "La recomendación clara es un <strong>seguro de gastos finales de $5,000 a $25,000</strong> para funeral, cremación y cuentas pendientes.",
       take3: "Muchas compañías designadas aceptan solicitudes nuevas hasta los <strong>85 años</strong>. Unas pocas llegan más lejos; después de los 85 las opciones son menos.",
       optTitle: "Qué opciones hay después de los 80",
-      optLead: "El camino más común a esta edad es un seguro de gastos finales (vida entera pequeña). El temporal grande y la vida universal rara vez son el primer paso, y a menudo piden examen médico.",
+      optLead: "A esta edad, lo que suele encajar es un <strong>seguro de gastos finales</strong>: una póliza pequeña de vida entera para el funeral. Si las preguntas de salud no se pueden responder, la otra vía realista es la <strong>aceptación garantizada</strong>, con espera.",
       feTitle: "Seguro de gastos finales (entierro)",
-      feBody: "Es una póliza pequeña de vida entera — por lo general $50,000 o menos. Casi nunca hay examen médico. Hay preguntas de salud. Si califica para un plan nivelado, la cobertura puede empezar sin la espera de dos años que traen los planes de aceptación garantizada.",
+      feBody: "Es una póliza pequeña de vida entera, por lo general <strong>$5,000 a $25,000</strong>. Casi nunca hay examen médico. Hay preguntas de salud. Si califica para un plan nivelado, la cobertura puede empezar sin la espera de dos años que traen los planes de aceptación garantizada.",
       giTitle: "Aceptación garantizada",
-      giBody: "No hay examen ni preguntas de salud. La aprobación es casi segura dentro de la edad y el monto del producto. A cambio, casi siempre hay una <strong>espera de dos años</strong> por muerte natural: si fallece en esa ventana, la familia suele recibir las primas pagadas más un interés del contrato, no el beneficio completo. Suele costar más que un plan nivelado.",
-      wlTitle: "Vida entera tradicional",
-      wlBody: "Montos más altos (a menudo $50,000 o más) y, después de los 80, casi siempre con examen médico. Puede acumular valor en efectivo y la prima suele quedar fija. Para gastos de funeral, la vía de gastos finales suele ser más simple.",
-      termTitle: "Seguro de vida temporal",
-      termBody: "Dura un número fijo de años y luego termina. A los 80, un plazo de 10 años — si lo aprueban — terminaría a los 90. Suele pedir examen y montos mucho más grandes que un plan de entierro. Vea el <a href=\"costo-seguro-vida-temporal.html\">costo del seguro temporal</a> si necesita un monto alto por un tiempo limitado.",
-      ulTitle: "Vida universal",
-      ulBody: "Es permanente, pero la prima puede subir si el valor en efectivo no rinde como se esperaba. Para la mayoría de las personas mayores de 80 que quieren cubrir un funeral, no es el producto más claro.",
+      giBody: "No hay examen ni preguntas de salud. La aprobación es casi segura dentro de la edad y el monto del producto. A cambio, casi siempre hay una <strong>espera de dos años</strong> por muerte natural: si fallece en esa ventana, la familia suele recibir las primas pagadas más un interés del contrato, no el beneficio completo. Suele costar más que un plan nivelado. Es el plan B si no califica para nivelado.",
       tipTitle: "Téngalo presente",
-      tipBody: "Si la salud es frágil — tratamiento reciente de cáncer, problemas graves del corazón u otras condiciones graves — un plan de gastos finales (a veces escalonado) suele ser lo realista. Un temporal grande con examen médico casi nunca encaja.",
+      tipBody: "Si la salud es frágil — tratamiento reciente de cáncer, problemas graves del corazón u otras condiciones graves — un plan de gastos finales (a veces escalonado) suele ser lo realista. Mejor Vida Seguros compara compañías designadas para el monto que la familia realmente necesita, no para una póliza grande.",
       costTitle: "Cuánto cuesta el seguro de entierro después de los 80",
       costLead: "En las compañías designadas de Mejor Vida Seguros, una póliza nivelada de <strong>$10,000</strong> a los 80 años suele estar cerca de <strong>$95 al mes para una mujer</strong> y <strong>$133 al mes para un hombre</strong> (no fumador, buena salud). El precio sube cada año de edad al emitir. Estas cifras son educativas, no una oferta.",
       costFactors: "El precio cambia con la edad, el sexo, el tabaco, la salud y el monto. Un plan con espera de dos años puede parecer “más fácil”, pero a menudo cuesta más y cubre menos al principio.",
@@ -160,12 +154,13 @@ function copy(lang) {
       avoid2: "<strong>Comprar directo a una sola compañía sin comparar.</strong> Una aseguradora puede tener un buen anuncio y no ser la más adecuada para su edad, salud o estado. Mejor Vida Seguros compara las compañías designadas por usted.",
       avoid3: "<strong>Saltar las preguntas de salud cuando todavía puede responderlas.</strong> Si califica para un plan nivelado, suele costar menos y puede evitar la espera de dos años.",
       over85Title: "¿Se puede obtener seguro después de los 85?",
-      over85Lead: "Sí, en algunos casos. Mutual of Omaha Living Promise Nivelado y Transamerica Immediate Solution aceptan solicitudes nuevas hasta los 85. <strong>Aetna Accendo Nivelado puede emitir hasta los 89</strong> (el monto máximo baja con la edad). No suele haber examen médico; sí hay preguntas de salud. El formulario en línea cotiza hasta los 85. Después de esa edad, llame para una cifra personalizada — no publicamos una tabla aquí porque las cotizaciones varían mucho.",
+      over85Lead: "Sí, en algunos casos. Mutual of Omaha Living Promise Nivelado y Transamerica Immediate Solution aceptan solicitudes nuevas hasta los 85. <strong>Aetna Accendo Nivelado puede emitir hasta los 89</strong> (el monto máximo baja con la edad). La guía dedicada explica espera, estados y cuándo llamar a Mejor Vida Seguros.",
+      over85Cta: "Ver la guía para mayores de 85",
       over85HeadInsurer: "Compañía",
       over85HeadCov: "Cobertura típica",
       over85HeadType: "Tipo y espera (plan nivelado)",
       applyTitle: "Cómo empezar",
-      apply1: "<strong>Pida una cotización gratis</strong> — edad, tabaco y unas preguntas de salud. Mejor Vida Seguros compara compañías designadas en Nebraska, Kansas, Colorado y Nevada.",
+      apply1: "<strong>Pida una cotización gratis</strong> — edad, tabaco y unas preguntas de salud. Mejor Vida Seguros compara compañías designadas.",
       apply2: "<strong>Llame o escriba</strong> si prefiere hablarlo: <a href=\"tel:+14024405438\">402-440-5438</a> o WhatsApp.",
       apply3: "<strong>Revise la oferta</strong> — monto, cualquier espera y la prima mensual — antes de firmar. Nada en esta página es un contrato.",
       faqTitle: "Preguntas frecuentes",
@@ -201,22 +196,16 @@ function copy(lang) {
     crumbMid: "Life insurance",
     takeTitle: "Key points",
     take1: "If you answer the health questions and qualify, some plans <strong>can pay the full benefit from day one</strong> — even with prior medical conditions.",
-    take2: "Most families look at <strong>$5,000 to $25,000</strong> to help with funeral costs and leftover bills, not a large term policy.",
+    take2: "The clear recommendation is <strong>final expense insurance of $5,000 to $25,000</strong> for a funeral, cremation, and leftover bills.",
     take3: "Many appointed companies take new applications through age <strong>85</strong>. A few go higher; after 85 the list gets shorter.",
     optTitle: "What options do seniors over 80 have?",
-    optLead: "The usual path at this age is final expense insurance (small whole life). Large term and universal life are rarely the first stop, and they often need a medical exam.",
+    optLead: "At this age, the fit is usually <strong>final expense insurance</strong>: a small whole life policy for the funeral. If the health questions cannot be answered, the other realistic path is <strong>guaranteed acceptance</strong>, with a wait.",
     feTitle: "Final expense (burial) insurance",
-    feBody: "This is a small whole life policy — usually $50,000 or less. There is almost never a medical exam. There are health questions. If you qualify for a level plan, coverage can start without the two-year wait that guaranteed-acceptance plans add.",
+    feBody: "This is a small whole life policy, usually <strong>$5,000 to $25,000</strong>. There is almost never a medical exam. There are health questions. If you qualify for a level plan, coverage can start without the two-year wait that guaranteed-acceptance plans add.",
     giTitle: "Guaranteed acceptance",
-    giBody: "No exam and no health questions. Approval is nearly certain within the product’s age and amount limits. In return there is almost always a <strong>two-year wait</strong> for a natural death: if death happens in that window, the family usually receives premiums paid plus contract interest, not the full benefit. It often costs more than a level plan.",
-    wlTitle: "Traditional whole life",
-    wlBody: "Larger amounts (often $50,000 or more) and, after 80, almost always a medical exam. It can build cash value and the premium is usually fixed. For funeral costs, final expense is usually the simpler path.",
-    termTitle: "Term life insurance",
-    termBody: "It lasts a set number of years, then ends. At 80, a 10-year term — if approved — would end at 90. It usually needs an exam and much larger amounts than a burial plan. See <a href=\"term-life-cost.html\">term life cost</a> if you need a large amount for a limited time.",
-    ulTitle: "Universal life",
-    ulBody: "It is permanent, but the premium can rise if cash value does not perform as hoped. For most people over 80 who want to cover a funeral, it is not the clearest product.",
+    giBody: "No exam and no health questions. Approval is nearly certain within the product’s age and amount limits. In return there is almost always a <strong>two-year wait</strong> for a natural death: if death happens in that window, the family usually receives premiums paid plus contract interest, not the full benefit. It often costs more than a level plan. This is the backup if you do not qualify for level.",
     tipTitle: "Keep this in mind",
-    tipBody: "If health is fragile — recent cancer treatment, serious heart trouble, or other major conditions — a final expense plan (sometimes graded) is usually the realistic path. A large term policy with a medical exam almost never fits.",
+    tipBody: "If health is fragile — recent cancer treatment, serious heart trouble, or other major conditions — a final expense plan (sometimes graded) is usually the realistic path. Mejor Vida Insurance compares appointed companies for the amount the family actually needs, not a large policy.",
     costTitle: "How much does burial insurance cost after 80?",
     costLead: "With Mejor Vida Insurance appointed companies, a level <strong>$10,000</strong> policy at age 80 is often near <strong>$95 a month for a woman</strong> and <strong>$133 a month for a man</strong> (non-tobacco, good health). The price rises with each year of age at issue. These figures are educational, not an offer.",
     costFactors: "Price changes with age, sex, tobacco, health, and amount. A plan with a two-year wait can look “easier,” but it often costs more and covers less at first.",
@@ -234,12 +223,13 @@ function copy(lang) {
     avoid2: "<strong>Buying from one company without comparing.</strong> A carrier can have a familiar ad and still not be the best fit for your age, health, or state. Mejor Vida Insurance compares appointed companies for you.",
     avoid3: "<strong>Skipping the health questions when you can still answer them.</strong> If you qualify for a level plan, it usually costs less and can avoid the two-year wait.",
     over85Title: "Can you get life insurance after 85?",
-    over85Lead: "Yes, in some cases. Mutual of Omaha Living Promise Level and Transamerica Immediate Solution take new applications through 85. <strong>Aetna Accendo Level can issue through age 89</strong> (the maximum amount drops with age). There is usually no medical exam; there are still health questions. The online form quotes through age 85. After that, call for a personal figure — we do not publish a rate table here because appointed quotes vary widely.",
+    over85Lead: "Yes, in some cases. Mutual of Omaha Living Promise Level and Transamerica Immediate Solution take new applications through 85. <strong>Aetna Accendo Level can issue through age 89</strong> (the maximum amount drops with age). The dedicated guide covers waiting periods, licensed states, and when to call Mejor Vida Insurance.",
+    over85Cta: "Read the guide for seniors over 85",
     over85HeadInsurer: "Insurer",
     over85HeadCov: "Typical coverage",
     over85HeadType: "Type and wait (level plan)",
     applyTitle: "How to start",
-    apply1: "<strong>Get a free quote</strong> — age, tobacco, and a few health questions. Mejor Vida Insurance compares appointed companies in Nebraska, Kansas, Colorado, and Nevada.",
+    apply1: "<strong>Get a free quote</strong> — age, tobacco, and a few health questions. Mejor Vida Insurance compares appointed companies.",
     apply2: "<strong>Call or write</strong> if you would rather talk it through: <a href=\"tel:+14024405438\">402-440-5438</a> or WhatsApp.",
     apply3: "<strong>Review the offer</strong> — amount, any waiting period, and the monthly premium — before you sign. Nothing on this page is a contract.",
     faqTitle: "Frequently asked questions",
@@ -353,7 +343,7 @@ function mainHtml(lang) {
 <a href="#cost">${c.tocCost}</a>
 <a href="#waiting">${c.tocWait}</a>
 <a href="#companies">${c.tocCo}</a>
-<a href="#over-85">${c.toc85}</a>
+<a href="${isEs ? "seguro-vida-mayores-85.html" : "life-insurance-seniors-over-85.html"}">${c.toc85}</a>
 </nav>
 
 <div class="lic-takeaways">
@@ -371,9 +361,6 @@ function mainHtml(lang) {
 <ul>
 <li><strong>${c.feTitle}.</strong> ${c.feBody}</li>
 <li><strong>${c.giTitle}.</strong> ${c.giBody}</li>
-<li><strong>${c.wlTitle}.</strong> ${c.wlBody}</li>
-<li><strong>${c.termTitle}.</strong> ${c.termBody}</li>
-<li><strong>${c.ulTitle}.</strong> ${c.ulBody}</li>
 </ul>
 <div class="lic-tip">
 <h3>${c.tipTitle}</h3>
@@ -425,31 +412,7 @@ ${carrierCards(lang, prefix)}
 <section class="lic-section" id="over-85">
 <h2>${c.over85Title}</h2>
 <p>${c.over85Lead}</p>
-<div class="lic-rate-wrap">
-<table class="lic-insurer-table">
-<thead><tr><th scope="col">${c.over85HeadInsurer}</th><th scope="col">${c.over85HeadCov}</th><th scope="col">${c.over85HeadType}</th><th scope="col"></th></tr></thead>
-<tbody>
-<tr>
-<td>Aetna Accendo</td>
-<td>$2,000–$25,000 ${isEs ? "a los 76–89" : "at ages 76–89"}</td>
-<td>${isEs ? "Vida entera, sin espera en plan nivelado, hasta los 89" : "Whole life, no wait on level, through age 89"}</td>
-<td><a class="lic-co-cta" href="${quote}">${isEs ? "Cotizar" : "Get quotes"}</a></td>
-</tr>
-<tr>
-<td>Mutual of Omaha</td>
-<td>$2,000–$50,000 ${isEs ? "hasta los 85" : "through 85"}</td>
-<td>${isEs ? "Vida entera, sin espera en plan nivelado" : "Whole life, no wait on level"}</td>
-<td><a class="lic-co-cta" href="${quote}">${isEs ? "Cotizar" : "Get quotes"}</a></td>
-</tr>
-<tr>
-<td>Transamerica</td>
-<td>${isEs ? "Desde $1,000, hasta los 85" : "From $1,000, through 85"}</td>
-<td>${isEs ? "Vida entera, sin espera en plan Preferred" : "Whole life, no wait on Preferred"}</td>
-<td><a class="lic-co-cta" href="${quote}">${isEs ? "Cotizar" : "Get quotes"}</a></td>
-</tr>
-</tbody>
-</table>
-</div>
+<p><a class="lic-co-cta" href="${isEs ? "seguro-vida-mayores-85.html" : "life-insurance-seniors-over-85.html"}">${c.over85Cta}</a></p>
 </section>
 
 <section class="lic-section" id="apply">

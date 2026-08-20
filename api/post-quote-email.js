@@ -64,7 +64,7 @@ function isOverMaxQuoteAge(age) {
 function quoteErrorIndicatesOverMaxAge(quoteError) {
   const err = cleanWebhookField(quoteError).toLowerCase();
   if (!err) return false;
-  return /up to age 85|through age 85|available up to age 85|hasta los 85|hasta la edad de 85|m[aá]ximo.*85/.test(err);
+  return /up to age 8[59]|through age 8[59]|available up to age 8[59]|hasta los 8[59]|hasta la edad de 8[59]|m[aá]ximo.*8[59]/.test(err);
 }
 
 function quoteErrorIndicatesUnderMinAge(quoteError) {
@@ -73,7 +73,7 @@ function quoteErrorIndicatesUnderMinAge(quoteError) {
   return /starting at age 18|from age 18|desde los 18|m[ií]nimo.*18/.test(err);
 }
 
-/** True when the lead is over our automated quote max (85) — not merely missing quote fields. */
+/** True when the lead is over our automated quote max — not merely missing quote fields. */
 function shouldUseOverAgeEmail({ age, quoteStatus, quoteError, quoteLow, quoteHigh }) {
   if (isOverMaxQuoteAge(age)) return true;
 

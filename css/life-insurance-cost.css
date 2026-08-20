@@ -51,6 +51,11 @@
   object-position: 78% 40%;
 }
 
+.lic-hero-media--futbol picture,
+.lic-hero-media--futbol img {
+  object-position: 58% 42%;
+}
+
 .lic-hero-media--corn picture,
 .lic-hero-media--corn img {
   object-position: 78% 40%;
@@ -1389,6 +1394,17 @@ a.lic-carrier-row:focus-visible {
   border-top-left-radius: 0;
 }
 
+.lic-rate-block {
+  margin: 0 0 1.35rem;
+}
+
+.lic-rate-block h4 {
+  margin: 0 0 0.4rem;
+  color: #0b3a7a;
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+
 .lic-tip {
   margin: 1.25rem 0;
   padding: 1rem 1.1rem 1rem 1.15rem;
@@ -1466,4 +1482,45 @@ a.lic-carrier-row:focus-visible {
     display: block;
     border-bottom: 0;
   }
+}
+
+.lic-insurer-logo {
+  max-width: 7.5rem;
+  margin: 0 0 0.35rem;
+}
+
+.lic-insurer-logo img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  height: 1.65rem;
+  object-fit: contain;
+}
+
+.lic-insurer-product {
+  margin-top: 0.2rem;
+  font-size: 0.82rem;
+  color: #64748b;
+}
+
+.lic-call-panel {
+  margin: 1rem 0 1.35rem;
+  padding: 1rem 1.1rem;
+  background: #f4f8ff;
+  border: 1px solid #d7e3f4;
+  border-radius: 0.5rem;
+}
+
+.lic-call-panel p {
+  margin: 0 0 0.45rem;
+  color: #1e293b;
+}
+
+.lic-call-panel p:last-child {
+  margin: 0;
+}
+
+.lic-call-panel a {
+  font-weight: 800;
+  color: #0b3a7a;
 }

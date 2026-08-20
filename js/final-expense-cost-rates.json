@@ -1,9 +1,9 @@
 {
   "final_expense": {
-    "source": "Mejor Vida Insurance (appointed companies)",
-    "rating": "Non-tobacco, good-health (Level/Immediate) low",
-    "as_of": "2026-08-15",
-    "note": "Illustrative monthly premiums from appointed companies compared by Mejor Vida Insurance. $5,000 and $10,000 are published bands; $15,000 / $20,000 / $30,000 / $40,000 scale from the $10,000 band; $25,000 and $50,000 use the $10,000 band scaled in the published table. Non-tobacco, good-health (Level/Immediate) low. Ages 45–85. Educational only — not a binding quote.",
+    "source": "Mejor Vida quote engine \u2014 Integrity FE appointed harvest (Accendo 86\u201389)",
+    "rating": "Non-tobacco, good-health (Level/Immediate) low; Accendo Preferred 86\u201389",
+    "as_of": "2026-08-20",
+    "note": "Illustrative monthly premiums from Integrity Connect appointed harvests used by the Mejor Vida quoter. Ages 45\u201385 are the cheapest appointed Level premium; ages 86\u201389 are Aetna Accendo Preferred Level (max $25,000). Non-tobacco. Educational only \u2014 not a binding quote.",
     "faces": [
       5000,
       10000,
@@ -60,300 +60,400 @@
           "age": 85,
           "female": 70,
           "male": 96
+        },
+        {
+          "age": 86,
+          "female": 87,
+          "male": 120
+        },
+        {
+          "age": 87,
+          "female": 105,
+          "male": 140
+        },
+        {
+          "age": 88,
+          "female": 122,
+          "male": 160
+        },
+        {
+          "age": 89,
+          "female": 139,
+          "male": 181
         }
       ],
       "10000": [
         {
           "age": 45,
-          "female": 23,
-          "male": 27
+          "female": 26,
+          "male": 30
         },
         {
           "age": 50,
-          "female": 24,
-          "male": 31
+          "female": 28,
+          "male": 34
         },
         {
           "age": 55,
-          "female": 25,
-          "male": 33
+          "female": 28,
+          "male": 36
         },
         {
           "age": 60,
-          "female": 30,
-          "male": 40
+          "female": 33,
+          "male": 43
         },
         {
           "age": 65,
-          "female": 38,
-          "male": 50
+          "female": 41,
+          "male": 54
         },
         {
           "age": 70,
-          "female": 50,
-          "male": 68
+          "female": 53,
+          "male": 70
         },
         {
           "age": 75,
-          "female": 69,
-          "male": 94
+          "female": 71,
+          "male": 97
         },
         {
           "age": 80,
-          "female": 95,
-          "male": 133
+          "female": 98,
+          "male": 136
         },
         {
           "age": 85,
-          "female": 133,
-          "male": 185
+          "female": 136,
+          "male": 188
+        },
+        {
+          "age": 86,
+          "female": 171,
+          "male": 236
+        },
+        {
+          "age": 87,
+          "female": 206,
+          "male": 277
+        },
+        {
+          "age": 88,
+          "female": 241,
+          "male": 317
+        },
+        {
+          "age": 89,
+          "female": 275,
+          "male": 358
         }
       ],
       "15000": [
         {
           "age": 45,
-          "female": 35,
-          "male": 41
+          "female": 39,
+          "male": 45
         },
         {
           "age": 50,
-          "female": 36,
-          "male": 47
+          "female": 41,
+          "male": 51
         },
         {
           "age": 55,
-          "female": 38,
-          "male": 50
+          "female": 40,
+          "male": 52
         },
         {
           "age": 60,
-          "female": 45,
-          "male": 60
+          "female": 47,
+          "male": 63
         },
         {
           "age": 65,
-          "female": 57,
-          "male": 75
+          "female": 59,
+          "male": 79
         },
         {
           "age": 70,
-          "female": 75,
-          "male": 102
+          "female": 77,
+          "male": 103
         },
         {
           "age": 75,
           "female": 104,
-          "male": 141
+          "male": 144
         },
         {
           "age": 80,
-          "female": 143,
-          "male": 200
+          "female": 146,
+          "male": 202
         },
         {
           "age": 85,
-          "female": 200,
-          "male": 278
+          "female": 202,
+          "male": 279
+        },
+        {
+          "age": 86,
+          "female": 255,
+          "male": 353
+        },
+        {
+          "age": 87,
+          "female": 307,
+          "male": 413
+        },
+        {
+          "age": 88,
+          "female": 359,
+          "male": 474
+        },
+        {
+          "age": 89,
+          "female": 411,
+          "male": 535
         }
       ],
       "20000": [
         {
           "age": 45,
-          "female": 46,
-          "male": 54
+          "female": 52,
+          "male": 61
         },
         {
           "age": 50,
-          "female": 48,
-          "male": 62
+          "female": 55,
+          "male": 68
         },
         {
           "age": 55,
-          "female": 50,
-          "male": 66
+          "female": 52,
+          "male": 68
         },
         {
           "age": 60,
-          "female": 60,
-          "male": 80
+          "female": 62,
+          "male": 82
         },
         {
           "age": 65,
-          "female": 76,
-          "male": 100
+          "female": 78,
+          "male": 103
         },
         {
           "age": 70,
-          "female": 100,
+          "female": 102,
           "male": 136
         },
         {
           "age": 75,
           "female": 138,
-          "male": 188
+          "male": 190
         },
         {
           "age": 80,
-          "female": 190,
-          "male": 266
+          "female": 193,
+          "male": 268
         },
         {
           "age": 85,
-          "female": 266,
-          "male": 370
+          "female": 268,
+          "male": 371
+        },
+        {
+          "age": 86,
+          "female": 339,
+          "male": 469
+        },
+        {
+          "age": 87,
+          "female": 408,
+          "male": 550
+        },
+        {
+          "age": 88,
+          "female": 478,
+          "male": 631
+        },
+        {
+          "age": 89,
+          "female": 547,
+          "male": 712
         }
       ],
       "25000": [
         {
           "age": 45,
-          "female": 57,
-          "male": 68
+          "female": 64,
+          "male": 76
         },
         {
           "age": 50,
-          "female": 61,
-          "male": 77
+          "female": 69,
+          "male": 85
         },
         {
           "age": 55,
-          "female": 62,
-          "male": 82
+          "female": 64,
+          "male": 84
         },
         {
           "age": 60,
           "female": 76,
-          "male": 100
+          "male": 102
         },
         {
           "age": 65,
-          "female": 95,
-          "male": 126
+          "female": 96,
+          "male": 128
         },
         {
           "age": 70,
-          "female": 125,
+          "female": 127,
           "male": 169
         },
         {
           "age": 75,
           "female": 172,
-          "male": 235
+          "male": 237
         },
         {
           "age": 80,
-          "female": 238,
-          "male": 332
+          "female": 240,
+          "male": 334
         },
         {
           "age": 85,
-          "female": 332,
-          "male": 461
+          "female": 334,
+          "male": 463
+        },
+        {
+          "age": 86,
+          "female": 423,
+          "male": 585
+        },
+        {
+          "age": 87,
+          "female": 510,
+          "male": 686
+        },
+        {
+          "age": 88,
+          "female": 596,
+          "male": 788
+        },
+        {
+          "age": 89,
+          "female": 683,
+          "male": 889
         }
       ],
       "30000": [
         {
           "age": 45,
-          "female": 69,
-          "male": 81
+          "female": 77,
+          "male": 91
         },
         {
           "age": 50,
-          "female": 72,
-          "male": 93
+          "female": 82,
+          "male": 102
         },
         {
           "age": 55,
           "female": 75,
-          "male": 99
+          "male": 100
         },
         {
           "age": 60,
-          "female": 90,
-          "male": 120
+          "female": 91,
+          "male": 122
         },
         {
           "age": 65,
-          "female": 114,
-          "male": 150
+          "female": 115,
+          "male": 152
         },
         {
           "age": 70,
-          "female": 150,
-          "male": 204
+          "female": 151,
+          "male": 203
         },
         {
           "age": 75,
           "female": 207,
-          "male": 282
+          "male": 284
         },
         {
           "age": 80,
-          "female": 285,
-          "male": 399
+          "female": 288,
+          "male": 400
         },
         {
           "age": 85,
-          "female": 399,
+          "female": 400,
           "male": 555
         }
       ],
       "40000": [
         {
           "age": 45,
-          "female": 92,
-          "male": 108
+          "female": 103,
+          "male": 121
         },
         {
           "age": 50,
-          "female": 96,
-          "male": 124
+          "female": 110,
+          "male": 136
         },
         {
           "age": 55,
-          "female": 100,
+          "female": 99,
           "male": 132
         },
         {
           "age": 60,
-          "female": 120,
-          "male": 160
+          "female": 121,
+          "male": 161
         },
         {
           "age": 65,
           "female": 152,
-          "male": 200
+          "male": 202
         },
         {
           "age": 70,
-          "female": 200,
-          "male": 272
+          "female": 201,
+          "male": 271
         },
         {
           "age": 75,
-          "female": 276,
-          "male": 376
+          "female": 277,
+          "male": 377
         },
         {
           "age": 80,
-          "female": 380,
+          "female": 382,
           "male": 532
         },
         {
           "age": 85,
           "female": 532,
-          "male": 740
+          "male": 739
         }
       ],
       "50000": [
         {
           "age": 45,
-          "female": 113,
-          "male": 136
+          "female": 129,
+          "male": 152
         },
         {
           "age": 50,
-          "female": 122,
-          "male": 153
+          "female": 138,
+          "male": 169
         },
         {
           "age": 55,
@@ -373,11 +473,11 @@
         {
           "age": 70,
           "female": 250,
-          "male": 338
+          "male": 339
         },
         {
           "age": 75,
-          "female": 344,
+          "female": 347,
           "male": 470
         },
         {
@@ -389,256 +489,6 @@
           "age": 85,
           "female": 664,
           "male": 923
-        }
-      ]
-    }
-  },
-  "guaranteed": {
-    "source": "Mejor Vida Insurance (appointed companies) — guaranteed-acceptance lowest",
-    "rating": "Guaranteed acceptance (typical two-year wait)",
-    "as_of": "2026-08-15",
-    "note": "Illustrative monthly premiums from appointed companies compared by Mejor Vida Insurance for guaranteed-acceptance whole life. $5,000 is a published band; $10,000–$25,000 are scaled from that band. Ages 45–85. Educational only — not a binding quote.",
-    "faces": [
-      5000,
-      10000,
-      15000,
-      20000,
-      25000
-    ],
-    "tables": {
-      "5000": [
-        {
-          "age": 45,
-          "female": 18,
-          "male": 20
-        },
-        {
-          "age": 50,
-          "female": 22,
-          "male": 31
-        },
-        {
-          "age": 55,
-          "female": 26,
-          "male": 34
-        },
-        {
-          "age": 60,
-          "female": 30,
-          "male": 38
-        },
-        {
-          "age": 65,
-          "female": 37,
-          "male": 50
-        },
-        {
-          "age": 70,
-          "female": 45,
-          "male": 59
-        },
-        {
-          "age": 75,
-          "female": 64,
-          "male": 82
-        },
-        {
-          "age": 80,
-          "female": 104,
-          "male": 113
-        },
-        {
-          "age": 85,
-          "female": 133,
-          "male": 165
-        }
-      ],
-      "10000": [
-        {
-          "age": 45,
-          "female": 36,
-          "male": 40
-        },
-        {
-          "age": 50,
-          "female": 44,
-          "male": 62
-        },
-        {
-          "age": 55,
-          "female": 52,
-          "male": 68
-        },
-        {
-          "age": 60,
-          "female": 60,
-          "male": 76
-        },
-        {
-          "age": 65,
-          "female": 74,
-          "male": 100
-        },
-        {
-          "age": 70,
-          "female": 90,
-          "male": 118
-        },
-        {
-          "age": 75,
-          "female": 128,
-          "male": 164
-        },
-        {
-          "age": 80,
-          "female": 208,
-          "male": 226
-        },
-        {
-          "age": 85,
-          "female": 266,
-          "male": 330
-        }
-      ],
-      "15000": [
-        {
-          "age": 45,
-          "female": 54,
-          "male": 60
-        },
-        {
-          "age": 50,
-          "female": 66,
-          "male": 93
-        },
-        {
-          "age": 55,
-          "female": 78,
-          "male": 102
-        },
-        {
-          "age": 60,
-          "female": 90,
-          "male": 114
-        },
-        {
-          "age": 65,
-          "female": 111,
-          "male": 150
-        },
-        {
-          "age": 70,
-          "female": 135,
-          "male": 177
-        },
-        {
-          "age": 75,
-          "female": 192,
-          "male": 246
-        },
-        {
-          "age": 80,
-          "female": 312,
-          "male": 339
-        },
-        {
-          "age": 85,
-          "female": 399,
-          "male": 495
-        }
-      ],
-      "20000": [
-        {
-          "age": 45,
-          "female": 72,
-          "male": 80
-        },
-        {
-          "age": 50,
-          "female": 88,
-          "male": 124
-        },
-        {
-          "age": 55,
-          "female": 104,
-          "male": 136
-        },
-        {
-          "age": 60,
-          "female": 120,
-          "male": 152
-        },
-        {
-          "age": 65,
-          "female": 148,
-          "male": 200
-        },
-        {
-          "age": 70,
-          "female": 180,
-          "male": 236
-        },
-        {
-          "age": 75,
-          "female": 256,
-          "male": 328
-        },
-        {
-          "age": 80,
-          "female": 416,
-          "male": 452
-        },
-        {
-          "age": 85,
-          "female": 532,
-          "male": 660
-        }
-      ],
-      "25000": [
-        {
-          "age": 45,
-          "female": 90,
-          "male": 100
-        },
-        {
-          "age": 50,
-          "female": 110,
-          "male": 155
-        },
-        {
-          "age": 55,
-          "female": 130,
-          "male": 170
-        },
-        {
-          "age": 60,
-          "female": 150,
-          "male": 190
-        },
-        {
-          "age": 65,
-          "female": 185,
-          "male": 250
-        },
-        {
-          "age": 70,
-          "female": 225,
-          "male": 295
-        },
-        {
-          "age": 75,
-          "female": 320,
-          "male": 410
-        },
-        {
-          "age": 80,
-          "female": 520,
-          "male": 565
-        },
-        {
-          "age": 85,
-          "female": 665,
-          "male": 825
         }
       ]
     }

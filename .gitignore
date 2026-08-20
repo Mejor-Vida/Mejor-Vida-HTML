@@ -36,3 +36,6 @@ integrations/knowledge/Corebridge_Knowledge/raw/
 
 # Aetna Senior Supplemental PDFs/images (local extracts only; MD/JSON committed)
 integrations/knowledge/Aetna_Knowledge/raw/
+
+# Weekly Patriot accounting reviews (dollar amounts — local only)
+integrations/accounting/reviews/

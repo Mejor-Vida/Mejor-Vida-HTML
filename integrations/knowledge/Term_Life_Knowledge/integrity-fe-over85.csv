@@ -1,0 +1,31 @@
+carrier,product,state,age,sex,smoker,term_years,face_band_min,face_band_max,health_class,rate_per_thousand,policy_fee_annual,modal_monthly_factor,monthly_premium,face_amount,source_file,source_date,integrity_carrier,integrity_product,nearest_age,product_type
+cigna,primary_plan,NE,85,male,0,0,5000,5000,standard_nt,,,,94.59,5000,integrity-connect-quick-quote,2026-08-20,cigna,PRIMARY PLAN,85,final_expense
+americo,eagle_select_1,NE,85,male,0,0,10000,10000,standard_nt,,,,187.58,10000,integrity-connect-quick-quote,2026-08-20,Americo,Eagle Select 1,85,final_expense
+americo,eagle_select_1,NE,85,male,0,0,25000,25000,standard_nt,,,,463.24,25000,integrity-connect-quick-quote,2026-08-20,Americo,Eagle Select 1,85,final_expense
+aetna,preferred,NE,86,male,0,0,5000,5000,standard_nt,,,,119.88,5000,integrity-connect-quick-quote,2026-08-20,Aetna,Preferred,86,final_expense
+aetna,preferred,NE,86,male,0,0,10000,10000,standard_nt,,,,236.25,10000,integrity-connect-quick-quote,2026-08-20,Aetna,Preferred,86,final_expense
+aetna,preferred,NE,86,male,0,0,25000,25000,standard_nt,,,,585.37,25000,integrity-connect-quick-quote,2026-08-20,Aetna,Preferred,86,final_expense
+aetna,preferred,NE,87,female,0,0,5000,5000,standard_nt,,,,104.74,5000,integrity-connect-quick-quote,2026-08-20,Aetna,Preferred,87,final_expense
+aetna,preferred,NE,87,female,0,0,10000,10000,standard_nt,,,,205.98,10000,integrity-connect-quick-quote,2026-08-20,Aetna,Preferred,87,final_expense
+aetna,preferred,NE,87,female,0,0,25000,25000,standard_nt,,,,509.69,25000,integrity-connect-quick-quote,2026-08-20,Aetna,Preferred,87,final_expense
+aetna,preferred,NE,87,male,0,0,5000,5000,standard_nt,,,,140.09,5000,integrity-connect-quick-quote,2026-08-20,Aetna,Preferred,87,final_expense
+aetna,preferred,NE,87,male,0,0,10000,10000,standard_nt,,,,276.68,10000,integrity-connect-quick-quote,2026-08-20,Aetna,Preferred,87,final_expense
+aetna,preferred,NE,87,male,0,0,25000,25000,standard_nt,,,,686.44,25000,integrity-connect-quick-quote,2026-08-20,Aetna,Preferred,87,final_expense
+aetna,preferred,NE,88,female,0,0,5000,5000,standard_nt,,,,122.06,5000,integrity-connect-quick-quote,2026-08-20,Aetna,Preferred,88,final_expense
+aetna,preferred,NE,88,female,0,0,10000,10000,standard_nt,,,,240.62,10000,integrity-connect-quick-quote,2026-08-20,Aetna,Preferred,88,final_expense
+aetna,preferred,NE,88,female,0,0,25000,25000,standard_nt,,,,596.31,25000,integrity-connect-quick-quote,2026-08-20,Aetna,Preferred,88,final_expense
+aetna,preferred,NE,88,male,0,0,5000,5000,standard_nt,,,,160.3,5000,integrity-connect-quick-quote,2026-08-20,Aetna,Preferred,88,final_expense
+aetna,preferred,NE,88,male,0,0,10000,10000,standard_nt,,,,317.1,10000,integrity-connect-quick-quote,2026-08-20,Aetna,Preferred,88,final_expense
+aetna,preferred,NE,88,male,0,0,25000,25000,standard_nt,,,,787.5,25000,integrity-connect-quick-quote,2026-08-20,Aetna,Preferred,88,final_expense
+aetna,preferred,NE,89,female,0,0,5000,5000,standard_nt,,,,139.39,5000,integrity-connect-quick-quote,2026-08-20,Aetna,Preferred,89,final_expense
+aetna,preferred,NE,89,female,0,0,10000,10000,standard_nt,,,,275.28,10000,integrity-connect-quick-quote,2026-08-20,Aetna,Preferred,89,final_expense
+aetna,preferred,NE,89,female,0,0,25000,25000,standard_nt,,,,682.94,25000,integrity-connect-quick-quote,2026-08-20,Aetna,Preferred,89,final_expense
+aetna,preferred,NE,89,male,0,0,5000,5000,standard_nt,,,,180.51,5000,integrity-connect-quick-quote,2026-08-20,Aetna,Preferred,89,final_expense
+aetna,preferred,NE,89,male,0,0,10000,10000,standard_nt,,,,357.52,10000,integrity-connect-quick-quote,2026-08-20,Aetna,Preferred,89,final_expense
+aetna,preferred,NE,89,male,0,0,25000,25000,standard_nt,,,,888.56,25000,integrity-connect-quick-quote,2026-08-20,Aetna,Preferred,89,final_expense
+moo,living_promise_level,NE,85,female,0,0,5000,5000,standard_nt,,,,69.55,5000,integrity-connect-quick-quote,2026-08-20,United of Omaha,Living Promise Level,85,final_expense
+americo,eagle_select_1,NE,85,female,0,0,10000,10000,standard_nt,,,,135.89,10000,integrity-connect-quick-quote,2026-08-20,Americo,Eagle Select 1,85,final_expense
+americo,eagle_select_1,NE,85,female,0,0,25000,25000,standard_nt,,,,334.02,25000,integrity-connect-quick-quote,2026-08-20,Americo,Eagle Select 1,85,final_expense
+aetna,preferred,NE,86,female,0,0,5000,5000,standard_nt,,,,87.41,5000,integrity-connect-quick-quote,2026-08-20,Aetna,Preferred,86,final_expense
+aetna,preferred,NE,86,female,0,0,10000,10000,standard_nt,,,,171.32,10000,integrity-connect-quick-quote,2026-08-20,Aetna,Preferred,86,final_expense
+aetna,preferred,NE,86,female,0,0,25000,25000,standard_nt,,,,423.06,25000,integrity-connect-quick-quote,2026-08-20,Aetna,Preferred,86,final_expense

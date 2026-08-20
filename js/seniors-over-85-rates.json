@@ -1,0 +1,72 @@
+{
+  "source": "Mejor Vida Insurance appointed companies",
+  "as_of": "2026-08-20",
+  "harvest": "Integrity Connect Final Expense quick quote, Nebraska, non-tobacco, Standard health, Aetna Accendo Preferred Level",
+  "rating": "Aetna Accendo Preferred, non-tobacco, Level (full benefit from issue if approved)",
+  "faces": [5000, 10000, 25000],
+  "max_face_76_89": 25000,
+  "ages_published": [85, 86, 87, 88, 89],
+  "ages_issue_aetna_level": [40, 89],
+  "note": "Monthly premiums from appointed Integrity Connect quotes on Aug. 20, 2026 (Nebraska, non-tobacco, Standard). Aetna Accendo Preferred Level, rounded to the nearest dollar. Accendo Level can issue through age 89 with a $25,000 maximum at ages 76–89. Educational only — not a binding quote.",
+  "note_es": "Primas mensuales de cotizaciones designadas en Integrity Connect el 20 de ago. 2026 (Nebraska, no fumador, salud estándar). Aetna Accendo Preferred Nivelado, redondeadas al dólar. Accendo Nivelado puede emitir hasta los 89, con un máximo de $25,000 a los 76–89. Solo educativo — no es cotización vinculante.",
+  "tables": {
+    "female": [
+      { "age": 85, "5000": 70, "10000": 137, "25000": 336, "carrier": "Aetna Accendo Preferred" },
+      { "age": 86, "5000": 87, "10000": 171, "25000": 423, "carrier": "Aetna Accendo Preferred" },
+      { "age": 87, "5000": 105, "10000": 206, "25000": 510, "carrier": "Aetna Accendo Preferred" },
+      { "age": 88, "5000": 122, "10000": 241, "25000": 596, "carrier": "Aetna Accendo Preferred" },
+      { "age": 89, "5000": 139, "10000": 275, "25000": 683, "carrier": "Aetna Accendo Preferred" }
+    ],
+    "male": [
+      { "age": 85, "5000": 100, "10000": 196, "25000": 484, "carrier": "Aetna Accendo Preferred" },
+      { "age": 86, "5000": 120, "10000": 236, "25000": 585, "carrier": "Aetna Accendo Preferred" },
+      { "age": 87, "5000": 140, "10000": 277, "25000": 686, "carrier": "Aetna Accendo Preferred" },
+      { "age": 88, "5000": 160, "10000": 317, "25000": 788, "carrier": "Aetna Accendo Preferred" },
+      { "age": 89, "5000": 181, "10000": 358, "25000": 889, "carrier": "Aetna Accendo Preferred" }
+    ]
+  },
+  "carriers": [
+    {
+      "id": "aetna",
+      "name": "Aetna",
+      "productEs": "Accendo Preferred (Nivelado)",
+      "productEn": "Accendo Preferred (Level)",
+      "ages": "40–89",
+      "deathEs": "$2,000–$25,000 a los 76–89",
+      "deathEn": "$2,000–$25,000 at ages 76–89",
+      "wait": false,
+      "issuesAfter85": true,
+      "sample10k85f": 137,
+      "cta": "call",
+      "href": "aetna"
+    },
+    {
+      "id": "moo",
+      "name": "Mutual of Omaha",
+      "productEs": "Living Promise Nivelado",
+      "productEn": "Living Promise Level",
+      "ages": "45–85",
+      "death": "$2,000–$25,000",
+      "wait": false,
+      "issuesAfter85": false,
+      "sample10k85f": 136,
+      "cta": "quote",
+      "href": "mutual-of-omaha"
+    },
+    {
+      "id": "transamerica",
+      "name": "Transamerica",
+      "productEs": "Immediate Solution Preferred",
+      "productEn": "Immediate Solution Preferred",
+      "agesEs": "Hasta los 85",
+      "agesEn": "Through 85",
+      "deathEs": "$1,000–$25,000",
+      "deathEn": "$1,000–$25,000",
+      "wait": false,
+      "issuesAfter85": false,
+      "sample10k85f": 158,
+      "cta": "quote",
+      "href": "transamerica"
+    }
+  ]
+}

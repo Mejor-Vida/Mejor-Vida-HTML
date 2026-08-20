@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Import Integrity Connect Final Expense harvest into fe_integrity_premiums.
 
-Reads:
+Reads all Integrity FE harvest JSONs (45–85 plus Accendo 86–89):
   integrations/knowledge/Term_Life_Knowledge/integrity-fe-harvest.json
+  integrations/knowledge/Term_Life_Knowledge/integrity-fe-over85.json
 
 Writes:
   integrations/knowledge/Term_Life_Knowledge/integrity-fe-premiums.csv
@@ -28,6 +29,7 @@ sys.path.insert(0, str(ROOT))
 
 CANDIDATES = [
     ROOT / "integrations/knowledge/Term_Life_Knowledge/integrity-fe-harvest.json",
+    ROOT / "integrations/knowledge/Term_Life_Knowledge/integrity-fe-over85.json",
     ROOT / "integrations/knowledge/Final_Expense_Knowledge/integrity-fe-harvest.json",
 ]
 OUT_CSV = ROOT / "integrations/knowledge/Term_Life_Knowledge/integrity-fe-premiums.csv"
@@ -89,7 +91,7 @@ def harvest_batch_id(harvested_at: str) -> str:
         return date.today().isoformat()
 
 
-def expand_rows(data: dict) -> list[dict]:
+def expand_rows(data: dict, source_file: str = "integrity-fe-harvest.json") -> list[dict]:
     batch = harvest_batch_id(data.get("harvested_at") or "")
     rows: list[dict] = []
     for rec in data.get("records") or []:
@@ -127,7 +129,7 @@ def expand_rows(data: dict) -> list[dict]:
                     "marketplace_policy_count": rec.get("policy_count"),
                     "quote_scraped_at": rec.get("scraped_at"),
                     "source_url": rec.get("url"),
-                    "source_file": "integrity-fe-harvest.json",
+                    "source_file": source_file,
                     "source_date": batch,
                 }
             )
@@ -274,19 +276,30 @@ def main() -> int:
     ap.add_argument("--csv-only", action="store_true")
     args = ap.parse_args()
 
-    src = next((p for p in CANDIDATES if p.exists()), None)
-    if not src:
+    sources = [p for p in CANDIDATES if p.exists()]
+    # Keep unique paths (over85 is only under Term_Life_Knowledge)
+    seen: set[Path] = set()
+    unique_sources: list[Path] = []
+    for p in sources:
+        if p in seen:
+            continue
+        seen.add(p)
+        unique_sources.append(p)
+    if not unique_sources:
         print("Missing FE harvest JSON. Run: npm run term:harvest-integrity-fe")
         return 1
 
-    data = json.loads(src.read_text(encoding="utf-8"))
-    rows = expand_rows(data)
+    rows: list[dict] = []
+    for src in unique_sources:
+        data = json.loads(src.read_text(encoding="utf-8"))
+        part = expand_rows(data, source_file=src.name)
+        print(f"source={src.relative_to(ROOT)} rows={len(part)}")
+        rows.extend(part)
     if not rows:
         print("No FE premium rows found.")
         return 1
 
     appointed = sum(1 for r in rows if r["is_mvi_appointed"])
-    print(f"source={src.relative_to(ROOT)}")
     print(f"expanded_rows={len(rows)} appointed_rows={appointed}")
     write_csv(rows, OUT_CSV)
     print(f"wrote_csv={OUT_CSV.relative_to(ROOT)}")

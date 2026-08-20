@@ -1,0 +1,711 @@
+{
+  "as_of": "2026-08-20",
+  "source": "Integrity Connect Final Expense appointed harvest",
+  "tobacco": false,
+  "accendo_min_age": 86,
+  "accendo_max_age": 89,
+  "accendo_max_face": 25000,
+  "quote_face": 10000,
+  "cells": {
+    "female": {
+      "45": {
+        "nt": {
+          "5000": {
+            "low": 12.9,
+            "high": 14.42,
+            "anchor": 13.66,
+            "carrier": "appointed"
+          }
+        }
+      },
+      "50": {
+        "nt": {
+          "5000": {
+            "low": 13.75,
+            "high": 15.64,
+            "anchor": 14.7,
+            "carrier": "appointed"
+          }
+        }
+      },
+      "55": {
+        "nt": {
+          "5000": {
+            "low": 15.45,
+            "high": 19.18,
+            "anchor": 17.31,
+            "carrier": "appointed"
+          },
+          "10000": {
+            "low": 27.57,
+            "high": 36.49,
+            "anchor": 32.03,
+            "carrier": "appointed"
+          },
+          "15000": {
+            "low": 39.55,
+            "high": 53.42,
+            "anchor": 46.48,
+            "carrier": "appointed"
+          },
+          "25000": {
+            "low": 63.5,
+            "high": 91.59,
+            "anchor": 77.55,
+            "carrier": "appointed"
+          },
+          "50000": {
+            "low": 123.4,
+            "high": 166.59,
+            "anchor": 145.0,
+            "carrier": "appointed"
+          }
+        }
+      },
+      "60": {
+        "nt": {
+          "5000": {
+            "low": 18.03,
+            "high": 21.79,
+            "anchor": 19.91,
+            "carrier": "appointed"
+          },
+          "10000": {
+            "low": 32.67,
+            "high": 42.51,
+            "anchor": 37.59,
+            "carrier": "appointed"
+          },
+          "15000": {
+            "low": 47.2,
+            "high": 63.23,
+            "anchor": 55.22,
+            "carrier": "appointed"
+          },
+          "25000": {
+            "low": 76.26,
+            "high": 110.84,
+            "anchor": 93.55,
+            "carrier": "appointed"
+          },
+          "50000": {
+            "low": 151.52,
+            "high": 204.55,
+            "anchor": 178.04,
+            "carrier": "appointed"
+          }
+        }
+      },
+      "65": {
+        "nt": {
+          "5000": {
+            "low": 22.1,
+            "high": 25.5,
+            "anchor": 23.8,
+            "carrier": "appointed"
+          },
+          "10000": {
+            "low": 40.73,
+            "high": 49.93,
+            "anchor": 45.33,
+            "carrier": "appointed"
+          },
+          "15000": {
+            "low": 59.29,
+            "high": 74.36,
+            "anchor": 66.83,
+            "carrier": "appointed"
+          },
+          "25000": {
+            "low": 96.38,
+            "high": 143.13,
+            "anchor": 119.75,
+            "carrier": "appointed"
+          },
+          "50000": {
+            "low": 189.15,
+            "high": 255.35,
+            "anchor": 222.25,
+            "carrier": "appointed"
+          }
+        }
+      },
+      "70": {
+        "nt": {
+          "5000": {
+            "low": 28.22,
+            "high": 32.47,
+            "anchor": 30.34,
+            "carrier": "appointed"
+          },
+          "10000": {
+            "low": 52.82,
+            "high": 63.87,
+            "anchor": 58.34,
+            "carrier": "appointed"
+          },
+          "15000": {
+            "low": 77.43,
+            "high": 95.27,
+            "anchor": 86.35,
+            "carrier": "appointed"
+          },
+          "25000": {
+            "low": 126.64,
+            "high": 187.01,
+            "anchor": 156.82,
+            "carrier": "appointed"
+          },
+          "50000": {
+            "low": 250.47,
+            "high": 338.13,
+            "anchor": 294.3,
+            "carrier": "appointed"
+          }
+        }
+      },
+      "75": {
+        "nt": {
+          "5000": {
+            "low": 37.24,
+            "high": 44.77,
+            "anchor": 41.01,
+            "carrier": "appointed"
+          },
+          "10000": {
+            "low": 70.86,
+            "high": 88.47,
+            "anchor": 79.66,
+            "carrier": "appointed"
+          },
+          "15000": {
+            "low": 104.49,
+            "high": 132.17,
+            "anchor": 118.33,
+            "carrier": "appointed"
+          },
+          "25000": {
+            "low": 171.74,
+            "high": 259.41,
+            "anchor": 215.58,
+            "carrier": "appointed"
+          },
+          "50000": {
+            "low": 346.8,
+            "high": 468.18,
+            "anchor": 407.49,
+            "carrier": "appointed"
+          }
+        }
+      },
+      "80": {
+        "nt": {
+          "5000": {
+            "low": 50.82,
+            "high": 63.37,
+            "anchor": 57.09,
+            "carrier": "appointed"
+          },
+          "10000": {
+            "low": 98.42,
+            "high": 125.67,
+            "anchor": 112.05,
+            "carrier": "appointed"
+          },
+          "15000": {
+            "low": 145.73,
+            "high": 187.97,
+            "anchor": 166.85,
+            "carrier": "appointed"
+          },
+          "25000": {
+            "low": 240.35,
+            "high": 327.66,
+            "anchor": 284.0,
+            "carrier": "appointed"
+          },
+          "50000": {
+            "low": 476.9,
+            "high": 643.82,
+            "anchor": 560.36,
+            "carrier": "appointed"
+          }
+        }
+      },
+      "85": {
+        "nt": {
+          "5000": {
+            "low": 69.55,
+            "high": 106.67,
+            "anchor": 88.11,
+            "carrier": "appointed"
+          },
+          "10000": {
+            "low": 135.89,
+            "high": 210.7,
+            "anchor": 173.29,
+            "carrier": "appointed"
+          },
+          "15000": {
+            "low": 201.93,
+            "high": 314.73,
+            "anchor": 258.33,
+            "carrier": "appointed"
+          },
+          "25000": {
+            "low": 334.02,
+            "high": 549.32,
+            "anchor": 441.67,
+            "carrier": "appointed"
+          },
+          "50000": {
+            "low": 664.24,
+            "high": 896.72,
+            "anchor": 780.48,
+            "carrier": "appointed"
+          }
+        }
+      },
+      "86": {
+        "nt": {
+          "5000": {
+            "low": 87.41,
+            "high": 132.96,
+            "anchor": 110.19,
+            "carrier": "aetna_accendo"
+          },
+          "10000": {
+            "low": 171.32,
+            "high": 262.41,
+            "anchor": 216.87,
+            "carrier": "aetna_accendo"
+          },
+          "25000": {
+            "low": 423.06,
+            "high": 650.78,
+            "anchor": 536.92,
+            "carrier": "aetna_accendo"
+          }
+        }
+      },
+      "87": {
+        "nt": {
+          "5000": {
+            "low": 104.74,
+            "high": 154.17,
+            "anchor": 129.45,
+            "carrier": "aetna_accendo"
+          },
+          "10000": {
+            "low": 205.98,
+            "high": 304.85,
+            "anchor": 255.42,
+            "carrier": "aetna_accendo"
+          },
+          "25000": {
+            "low": 509.69,
+            "high": 756.88,
+            "anchor": 633.28,
+            "carrier": "aetna_accendo"
+          }
+        }
+      },
+      "88": {
+        "nt": {
+          "5000": {
+            "low": 122.06,
+            "high": 175.39,
+            "anchor": 148.72,
+            "carrier": "aetna_accendo"
+          },
+          "10000": {
+            "low": 240.62,
+            "high": 347.29,
+            "anchor": 293.96,
+            "carrier": "aetna_accendo"
+          },
+          "25000": {
+            "low": 596.31,
+            "high": 862.97,
+            "anchor": 729.64,
+            "carrier": "aetna_accendo"
+          }
+        }
+      },
+      "89": {
+        "nt": {
+          "5000": {
+            "low": 139.39,
+            "high": 196.61,
+            "anchor": 168.0,
+            "carrier": "aetna_accendo"
+          },
+          "10000": {
+            "low": 275.28,
+            "high": 389.72,
+            "anchor": 332.5,
+            "carrier": "aetna_accendo"
+          },
+          "25000": {
+            "low": 682.94,
+            "high": 969.06,
+            "anchor": 826.0,
+            "carrier": "aetna_accendo"
+          }
+        }
+      }
+    },
+    "male": {
+      "45": {
+        "nt": {
+          "5000": {
+            "low": 15.15,
+            "high": 18.69,
+            "anchor": 16.92,
+            "carrier": "appointed"
+          }
+        }
+      },
+      "50": {
+        "nt": {
+          "5000": {
+            "low": 16.94,
+            "high": 20.28,
+            "anchor": 18.61,
+            "carrier": "appointed"
+          }
+        }
+      },
+      "55": {
+        "nt": {
+          "5000": {
+            "low": 19.57,
+            "high": 23.21,
+            "anchor": 21.39,
+            "carrier": "appointed"
+          },
+          "10000": {
+            "low": 35.72,
+            "high": 45.35,
+            "anchor": 40.53,
+            "carrier": "appointed"
+          },
+          "15000": {
+            "low": 51.77,
+            "high": 67.49,
+            "anchor": 59.63,
+            "carrier": "appointed"
+          },
+          "25000": {
+            "low": 83.88,
+            "high": 117.63,
+            "anchor": 100.75,
+            "carrier": "appointed"
+          },
+          "50000": {
+            "low": 164.16,
+            "high": 221.62,
+            "anchor": 192.89,
+            "carrier": "appointed"
+          }
+        }
+      },
+      "60": {
+        "nt": {
+          "5000": {
+            "low": 23.46,
+            "high": 28.97,
+            "anchor": 26.21,
+            "carrier": "appointed"
+          },
+          "10000": {
+            "low": 43.12,
+            "high": 56.87,
+            "anchor": 49.99,
+            "carrier": "appointed"
+          },
+          "15000": {
+            "low": 62.78,
+            "high": 84.77,
+            "anchor": 73.78,
+            "carrier": "appointed"
+          },
+          "25000": {
+            "low": 102.1,
+            "high": 143.24,
+            "anchor": 122.67,
+            "carrier": "appointed"
+          },
+          "50000": {
+            "low": 200.4,
+            "high": 270.54,
+            "anchor": 235.47,
+            "carrier": "appointed"
+          }
+        }
+      },
+      "65": {
+        "nt": {
+          "5000": {
+            "low": 28.76,
+            "high": 34.76,
+            "anchor": 31.76,
+            "carrier": "appointed"
+          },
+          "10000": {
+            "low": 53.91,
+            "high": 68.44,
+            "anchor": 61.17,
+            "carrier": "appointed"
+          },
+          "15000": {
+            "low": 79.06,
+            "high": 102.13,
+            "anchor": 90.59,
+            "carrier": "appointed"
+          },
+          "25000": {
+            "low": 127.66,
+            "high": 177.85,
+            "anchor": 152.75,
+            "carrier": "appointed"
+          },
+          "50000": {
+            "low": 251.72,
+            "high": 339.82,
+            "anchor": 295.77,
+            "carrier": "appointed"
+          }
+        }
+      },
+      "70": {
+        "nt": {
+          "5000": {
+            "low": 36.66,
+            "high": 43.88,
+            "anchor": 40.27,
+            "carrier": "appointed"
+          },
+          "10000": {
+            "low": 69.7,
+            "high": 86.69,
+            "anchor": 78.19,
+            "carrier": "appointed"
+          },
+          "15000": {
+            "low": 102.75,
+            "high": 129.5,
+            "anchor": 116.12,
+            "carrier": "appointed"
+          },
+          "25000": {
+            "low": 168.84,
+            "high": 230.82,
+            "anchor": 199.83,
+            "carrier": "appointed"
+          },
+          "50000": {
+            "low": 339.48,
+            "high": 458.3,
+            "anchor": 398.89,
+            "carrier": "appointed"
+          }
+        }
+      },
+      "75": {
+        "nt": {
+          "5000": {
+            "low": 50.4,
+            "high": 57.14,
+            "anchor": 53.77,
+            "carrier": "appointed"
+          },
+          "10000": {
+            "low": 97.1,
+            "high": 113.21,
+            "anchor": 105.16,
+            "carrier": "appointed"
+          },
+          "15000": {
+            "low": 143.75,
+            "high": 169.28,
+            "anchor": 156.51,
+            "carrier": "appointed"
+          },
+          "25000": {
+            "low": 237.05,
+            "high": 300.18,
+            "anchor": 268.62,
+            "carrier": "appointed"
+          },
+          "50000": {
+            "low": 470.3,
+            "high": 634.91,
+            "anchor": 552.61,
+            "carrier": "appointed"
+          }
+        }
+      },
+      "80": {
+        "nt": {
+          "5000": {
+            "low": 69.79,
+            "high": 78.95,
+            "anchor": 74.37,
+            "carrier": "appointed"
+          },
+          "10000": {
+            "low": 135.78,
+            "high": 156.82,
+            "anchor": 146.3,
+            "carrier": "appointed"
+          },
+          "15000": {
+            "low": 201.78,
+            "high": 234.69,
+            "anchor": 218.24,
+            "carrier": "appointed"
+          },
+          "25000": {
+            "low": 333.76,
+            "high": 395.05,
+            "anchor": 364.4,
+            "carrier": "appointed"
+          },
+          "50000": {
+            "low": 663.72,
+            "high": 896.02,
+            "anchor": 779.87,
+            "carrier": "appointed"
+          }
+        }
+      },
+      "85": {
+        "nt": {
+          "5000": {
+            "low": 95.69,
+            "high": 140.07,
+            "anchor": 117.88,
+            "carrier": "appointed"
+          },
+          "10000": {
+            "low": 187.58,
+            "high": 277.51,
+            "anchor": 232.55,
+            "carrier": "appointed"
+          },
+          "15000": {
+            "low": 279.47,
+            "high": 414.94,
+            "anchor": 347.21,
+            "carrier": "appointed"
+          },
+          "25000": {
+            "low": 463.24,
+            "high": 689.81,
+            "anchor": 576.52,
+            "carrier": "appointed"
+          },
+          "50000": {
+            "low": 922.69,
+            "high": 1245.63,
+            "anchor": 1084.16,
+            "carrier": "appointed"
+          }
+        }
+      },
+      "86": {
+        "nt": {
+          "5000": {
+            "low": 119.88,
+            "high": 182.22,
+            "anchor": 151.05,
+            "carrier": "aetna_accendo"
+          },
+          "10000": {
+            "low": 236.25,
+            "high": 360.94,
+            "anchor": 298.6,
+            "carrier": "aetna_accendo"
+          },
+          "25000": {
+            "low": 585.37,
+            "high": 897.09,
+            "anchor": 741.23,
+            "carrier": "aetna_accendo"
+          }
+        }
+      },
+      "87": {
+        "nt": {
+          "5000": {
+            "low": 140.09,
+            "high": 206.59,
+            "anchor": 173.34,
+            "carrier": "aetna_accendo"
+          },
+          "10000": {
+            "low": 276.68,
+            "high": 409.68,
+            "anchor": 343.18,
+            "carrier": "aetna_accendo"
+          },
+          "25000": {
+            "low": 686.44,
+            "high": 1018.94,
+            "anchor": 852.69,
+            "carrier": "aetna_accendo"
+          }
+        }
+      },
+      "88": {
+        "nt": {
+          "5000": {
+            "low": 160.3,
+            "high": 230.96,
+            "anchor": 195.63,
+            "carrier": "aetna_accendo"
+          },
+          "10000": {
+            "low": 317.1,
+            "high": 458.41,
+            "anchor": 387.75,
+            "carrier": "aetna_accendo"
+          },
+          "25000": {
+            "low": 787.5,
+            "high": 1140.78,
+            "anchor": 964.14,
+            "carrier": "aetna_accendo"
+          }
+        }
+      },
+      "89": {
+        "nt": {
+          "5000": {
+            "low": 180.51,
+            "high": 255.32,
+            "anchor": 217.91,
+            "carrier": "aetna_accendo"
+          },
+          "10000": {
+            "low": 357.52,
+            "high": 507.15,
+            "anchor": 432.33,
+            "carrier": "aetna_accendo"
+          },
+          "25000": {
+            "low": 888.56,
+            "high": 1262.62,
+            "anchor": 1075.59,
+            "carrier": "aetna_accendo"
+          }
+        }
+      }
+    }
+  },
+  "source_files": [
+    "integrity-fe-harvest.json",
+    "integrity-fe-over85.json"
+  ]
+}

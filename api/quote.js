@@ -32,6 +32,7 @@ const {
   isQuoteAgeInRange,
   quoteAgeOutOfRangeMessage,
   fetchQuoteRangeForAge,
+  noQuoteDataMessage,
 } = require("../lib/quote-range-router");
 
 function json(res, status, payload) {
@@ -148,14 +149,11 @@ module.exports = async function handler(req, res) {
       SUPABASE_KEY,
       age,
       sex,
-      smoker
+      smoker,
+      10000
     );
 
     if (!range) {
-      const tobaccoMsg =
-        age <= 44 && smoker
-          ? "Aún no tenemos tarifas de tabaco para Assurity en línea. Julie puede cotizarle desde Agent Center."
-          : "We don't have rate data for that combination yet.";
       return json(
         res,
         200,
@@ -164,7 +162,7 @@ module.exports = async function handler(req, res) {
           quote_low: "",
           quote_high: "",
           quote_anchor: "",
-          quote_error: tobaccoMsg,
+          quote_error: noQuoteDataMessage(age, smoker, "es"),
         }),
       );
     }

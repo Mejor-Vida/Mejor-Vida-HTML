@@ -113,8 +113,8 @@
         setQuoteStatus("Las cotizaciones están disponibles desde los 18 años.", true);
         return Promise.resolve();
       }
-      if (age > 85) {
-        setQuoteStatus("Las cotizaciones están disponibles hasta los 85 años.", true);
+      if (age > 89) {
+        setQuoteStatus("Las cotizaciones están disponibles hasta los 89 años.", true);
         return Promise.resolve();
       }
 

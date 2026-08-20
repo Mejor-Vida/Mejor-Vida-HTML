@@ -123,7 +123,7 @@
       });
 
       var path = (location.pathname || "").toLowerCase();
-      if (/mayores-80|seniors-over-80/.test(path)) activate("seniors");
+      if (/mayores-80|mayores-85|seniors-over-80|seniors-over-85/.test(path)) activate("seniors");
     });
   }
 

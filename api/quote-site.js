@@ -12,8 +12,9 @@ const {
   isQuoteAgeInRange,
   quoteAgeOutOfRangeMessage,
   fetchQuoteRangeForAge,
+  noQuoteDataMessage,
 } = require("../lib/quote-range-router");
-const { scaledRangeResponse } = require("../lib/quote-range-scale");
+const { scaledRangeResponse, formatRangeResponse } = require("../lib/quote-range-scale");
 
 function applyCors(req, res) {
   const origin = String(req.headers.origin || "").trim();
@@ -91,39 +92,41 @@ module.exports = async function handler(req, res) {
       smoker = s === "yes" || s === "true" || s === "1";
     }
 
-    const { range, carrier } = await fetchQuoteRangeForAge(
-      SUPABASE_URL,
-      SUPABASE_KEY,
-      age,
-      sex,
-      smoker
+    const lang = String(body.lang || body.language || "").toLowerCase();
+    const coverageAmount = parseInt(
+      body.coverageAmount || body.coverage || 10000,
+      10
     );
+    const { range, carrier, exact, coverageAmount: usedFace, reason } =
+      await fetchQuoteRangeForAge(
+        SUPABASE_URL,
+        SUPABASE_KEY,
+        age,
+        sex,
+        smoker,
+        Number.isFinite(coverageAmount) && coverageAmount > 0
+          ? coverageAmount
+          : 10000
+      );
 
     if (!range) {
-      const tobaccoMsg =
-        age <= 44 && smoker
-          ? "Aún no tenemos tarifas de tabaco para Assurity en línea. Julie puede cotizarle desde Agent Center."
-          : "Aún no tenemos tarifas para esa combinación.";
       return json(res, 200, {
         ok: true,
         quote_status: "no_data",
         quote_low: "",
         quote_high: "",
         quote_anchor: "",
-        quote_error: tobaccoMsg,
+        quote_error: noQuoteDataMessage(age, smoker, lang),
+        quote_reason: reason || "",
       });
     }
 
-    const coverageAmount = parseInt(
-      body.coverageAmount || body.coverage || 10000,
-      10
-    );
-    const scaled = scaledRangeResponse(
-      range,
-      Number.isFinite(coverageAmount) && coverageAmount > 0
-        ? coverageAmount
-        : 10000
-    );
+    const scaled = exact
+      ? formatRangeResponse(range)
+      : scaledRangeResponse(
+          range,
+          Number.isFinite(usedFace) && usedFace > 0 ? usedFace : 10000
+        );
 
     return json(res, 200, {
       ok: true,
@@ -133,7 +136,7 @@ module.exports = async function handler(req, res) {
       quote_anchor: scaled.anchor,
       quote_error: "",
       quote_carrier: carrier || "",
-      coverage_amount: Number.isFinite(coverageAmount) ? coverageAmount : 10000,
+      coverage_amount: Number.isFinite(usedFace) ? usedFace : 10000,
     });
   } catch (err) {
     console.error("quote-site error:", err);
