@@ -1,11 +1,11 @@
 <!--
-  Reusable Blog Template (Mejor Vida Seguros)
-  How to use:
-  1) Duplicate this file for each new post and rename it with the post date slug.
-  2) Replace all {{PLACEHOLDER}} values.
-  3) Duplicate the <section class="story">...</section> block inside {{STORIES}} for each story.
-  CTA placeholders: {{CTA_WEBSITE}}, {{CTA_PHONE}}, {{CTA_QUOTE_URL}} (e.g. ../quote.html),
-  {{CTA_WHATSAPP_URL}} (full wa.me link), {{CTA_WHATSAPP_DISPLAY}} (e.g. 402-440-5438).
+ Reusable Blog Template (Mejor Vida Seguros)
+ How to use:
+ 1) Duplicate this file for each new post and rename it with the post date slug.
+ 2) Replace all {{PLACEHOLDER}} values.
+ 3) Duplicate the <section class="story">..</section> block inside {{STORIES}} for each story.
+ CTA placeholders: {{CTA_WEBSITE}}, {{CTA_PHONE}}, {{CTA_QUOTE_URL}} (e.g. ../quote.html),
+ {{CTA_WHATSAPP_URL}} (full wa.me link), {{CTA_WHATSAPP_DISPLAY}} (e.g. 402-440-5438).
 -->
 <!DOCTYPE html>
 
@@ -14,10 +14,10 @@
 <!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-K921EG6JWG"></script>
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-K921EG6JWG');
+ window.dataLayer = window.dataLayer || [];
+ function gtag(){dataLayer.push(arguments);}
+ gtag('js', new Date());
+ gtag('config', 'G-K921EG6JWG');
 </script>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
@@ -53,33 +53,33 @@
 </ol>
 </nav>
 
-            {{STORIES}}
-            <!--
-            <section class="story" id="story-1">
-              <h2>{{STORY_HEADLINE}}</h2>
-              <p class="source-line">Source: {{SOURCE}} | Published: {{PUBLISHED}}</p>
-              <h3>What Happened</h3>
-              <p>{{WHAT_HAPPENED}}</p>
-              <h3>Why It Matters</h3>
-              <p>{{WHY_IT_MATTERS}}</p>
-              <h3>What It Means for Families</h3>
-              <p>{{FAMILY_IMPACT}}</p>
-            </section>
-            -->
+      {{STORIES}}
+      <!--
+      <section class="story" id="story-1">
+       <h2>{{STORY_HEADLINE}}</h2>
+       <p class="source-line">Source: {{SOURCE}} | Published: {{PUBLISHED}}</p>
+       <h3>What Happened</h3>
+       <p>{{WHAT_HAPPENED}}</p>
+       <h3>Why It Matters</h3>
+       <p>{{WHY_IT_MATTERS}}</p>
+       <h3>What It Means for Families</h3>
+       <p>{{FAMILY_IMPACT}}</p>
+      </section>
+      -->
 <section class="what-this-means" id="what-this-means">
 <h2>What This Means for You</h2>
 <ul>
-                {{AT_A_GLANCE_BULLETS}}
-              </ul>
+        {{AT_A_GLANCE_BULLETS}}
+       </ul>
 </section>
 <section class="cta-panel" id="need-help-comparing-options">
 <h2>Need Help Comparing Options?</h2>
 <p>Start with a free quote or WhatsApp so we have your details. We schedule a call with a licensed agent when it’s a fit.</p>
 <p class="cta-meta">
-                Quote: {{CTA_WEBSITE}}<br/>
-                WhatsApp: {{CTA_WHATSAPP_DISPLAY}}<br/>
-                Office line (current clients): {{CTA_PHONE}}
-              </p>
+        Quote: {{CTA_WEBSITE}}<br/>
+        WhatsApp: {{CTA_WHATSAPP_DISPLAY}}<br/>
+        Office line (current clients): {{CTA_PHONE}}
+       </p>
 <a class="btn-primary" href="{{CTA_QUOTE_URL}}">Get a free quote</a>
 <a class="btn-primary" href="{{CTA_WHATSAPP_URL}}" rel="noopener" target="_blank">Message us on WhatsApp</a>
 <p class="small mb-0 mt-2">Prefer the office line? <a href="tel:{{CTA_PHONE}}">{{CTA_PHONE}}</a></p>
@@ -100,15 +100,15 @@
 <span class="eyebrow">This Week</span>
 <h3>This Week at a Glance</h3>
 <ul>
-              {{AT_A_GLANCE_BULLETS}}
-            </ul>
+       {{AT_A_GLANCE_BULLETS}}
+      </ul>
 </section>
 <section class="sidebar-card">
 <span class="eyebrow">Definitions</span>
 <h3>Key Terms</h3>
 <dl>
-              {{DEFINITIONS}}
-            </dl>
+       {{DEFINITIONS}}
+      </dl>
 </section>
 </aside>
 </div>
@@ -174,8 +174,8 @@
 </div>
 </footer>
 <script>
-    if (document.getElementById('year')) document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+  if (document.getElementById('year')) document.getElementById('year').textContent = new Date().getFullYear();
+ </script>
 <div data-api-url="/api/website-chat" data-mvi-avatar-base="../img/mvi-chat-avatar" id="mvi-assistant-root"></div>
 <script defer="" src="../js/website-assistant-widget.js?v=20260813-scroll-top"></script>
 </body>

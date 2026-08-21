@@ -1,357 +1,357 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Vista móvil — sitio, landing y cuestionario</title>
-  <style>
-    :root {
-      --toolbar-bg: #1a365d;
-      --toolbar-text: #f8fafc;
-      --frame-border: #334155;
-      --page-bg: #e2e8f0;
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: Inter, system-ui, -apple-system, sans-serif;
-      background: var(--page-bg);
-      color: #0f172a;
-      min-height: 100vh;
-    }
-    .toolbar {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: var(--toolbar-bg);
-      color: var(--toolbar-text);
-      padding: 0.75rem 1rem;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-    }
-    .toolbar h1 {
-      margin: 0 0 0.35rem;
-      font-size: 1rem;
-      font-weight: 700;
-    }
-    .toolbar p {
-      margin: 0 0 0.65rem;
-      font-size: 0.8rem;
-      opacity: 0.9;
-      line-height: 1.45;
-    }
-    .toolbar p code {
-      background: rgba(255, 255, 255, 0.12);
-      padding: 0.1rem 0.35rem;
-      border-radius: 4px;
-      font-size: 0.78rem;
-    }
-    .control-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      align-items: center;
-      margin-bottom: 0.5rem;
-    }
-    .control-row:last-child { margin-bottom: 0; }
-    .controls label {
-      font-size: 0.75rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      opacity: 0.85;
-      margin-right: 0.15rem;
-    }
-    .btn {
-      border: 1px solid rgba(255, 255, 255, 0.35);
-      background: rgba(255, 255, 255, 0.1);
-      color: inherit;
-      padding: 0.35rem 0.65rem;
-      border-radius: 6px;
-      font-size: 0.82rem;
-      font-weight: 600;
-      cursor: pointer;
-      text-decoration: none;
-      display: inline-block;
-    }
-    .btn:hover { background: rgba(255, 255, 255, 0.2); }
-    .btn.active {
-      background: #fec963;
-      color: #1a365d;
-      border-color: #fec963;
-    }
-    .btn-primary {
-      background: #0b3a7a;
-      border-color: #128c7e;
-      color: #fff;
-    }
-    .local-banner {
-      display: none;
-      margin-top: 0.65rem;
-      padding: 0.55rem 0.75rem;
-      border-radius: 8px;
-      background: rgba(254, 201, 99, 0.15);
-      border: 1px solid rgba(254, 201, 99, 0.45);
-      font-size: 0.78rem;
-      line-height: 1.45;
-    }
-    .local-banner.is-visible { display: block; }
-    .workspace {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 1.5rem;
-      padding: 1.5rem 1rem 2.5rem;
-    }
-    .device-wrap {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    .device-label {
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: #475569;
-      text-align: center;
-      max-width: 360px;
-    }
-    .phone {
-      background: #111;
-      border-radius: 28px;
-      padding: 12px 10px 14px;
-      box-shadow:
-        0 20px 50px rgba(0, 0, 0, 0.25),
-        inset 0 0 0 2px #333;
-    }
-    .phone-notch {
-      width: 96px;
-      height: 22px;
-      background: #111;
-      border-radius: 0 0 14px 14px;
-      margin: -4px auto 6px;
-    }
-    .phone-screen {
-      background: #fff;
-      border-radius: 18px;
-      overflow: hidden;
-      border: 2px solid var(--frame-border);
-    }
-    .phone-screen iframe {
-      display: block;
-      border: 0;
-      background: #fff;
-    }
-    .note {
-      max-width: 640px;
-      margin: 0 auto;
-      padding: 0 1rem 2rem;
-      font-size: 0.85rem;
-      color: #64748b;
-      line-height: 1.55;
-      text-align: center;
-    }
-    .note strong { color: #1a365d; }
-    .note ul {
-      text-align: left;
-      margin: 0.5rem 0 0;
-      padding-left: 1.2rem;
-    }
-    @media (max-width: 500px) {
-      .workspace { padding: 1rem 0.5rem; }
-      .phone { border-radius: 20px; padding: 8px 6px 10px; }
-    }
-  </style>
+ <meta charset="UTF-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+ <title>Vista móvil — sitio, landing y cuestionario</title>
+ <style>
+  :root {
+   --toolbar-bg: #1a365d;
+   --toolbar-text: #f8fafc;
+   --frame-border: #334155;
+   --page-bg: #e2e8f0;
+  }
+  * { box-sizing: border-box; }
+  body {
+   margin: 0;
+   font-family: Inter, system-ui, -apple-system, sans-serif;
+   background: var(--page-bg);
+   color: #0f172a;
+   min-height: 100vh;
+  }
+  .toolbar {
+   position: sticky;
+   top: 0;
+   z-index: 100;
+   background: var(--toolbar-bg);
+   color: var(--toolbar-text);
+   padding: 0.75rem 1rem;
+   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+  .toolbar h1 {
+   margin: 0 0 0.35rem;
+   font-size: 1rem;
+   font-weight: 700;
+  }
+  .toolbar p {
+   margin: 0 0 0.65rem;
+   font-size: 0.8rem;
+   opacity: 0.9;
+   line-height: 1.45;
+  }
+  .toolbar p code {
+   background: rgba(255, 255, 255, 0.12);
+   padding: 0.1rem 0.35rem;
+   border-radius: 4px;
+   font-size: 0.78rem;
+  }
+  .control-row {
+   display: flex;
+   flex-wrap: wrap;
+   gap: 0.5rem;
+   align-items: center;
+   margin-bottom: 0.5rem;
+  }
+  .control-row:last-child { margin-bottom: 0; }
+  .controls label {
+   font-size: 0.75rem;
+   font-weight: 600;
+   text-transform: uppercase;
+   letter-spacing: 0.04em;
+   opacity: 0.85;
+   margin-right: 0.15rem;
+  }
+  .btn {
+   border: 1px solid rgba(255, 255, 255, 0.35);
+   background: rgba(255, 255, 255, 0.1);
+   color: inherit;
+   padding: 0.35rem 0.65rem;
+   border-radius: 6px;
+   font-size: 0.82rem;
+   font-weight: 600;
+   cursor: pointer;
+   text-decoration: none;
+   display: inline-block;
+  }
+  .btn:hover { background: rgba(255, 255, 255, 0.2); }
+  .btn.active {
+   background: #fec963;
+   color: #1a365d;
+   border-color: #fec963;
+  }
+  .btn-primary {
+   background: #0b3a7a;
+   border-color: #128c7e;
+   color: #fff;
+  }
+  .local-banner {
+   display: none;
+   margin-top: 0.65rem;
+   padding: 0.55rem 0.75rem;
+   border-radius: 8px;
+   background: rgba(254, 201, 99, 0.15);
+   border: 1px solid rgba(254, 201, 99, 0.45);
+   font-size: 0.78rem;
+   line-height: 1.45;
+  }
+  .local-banner.is-visible { display: block; }
+  .workspace {
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: center;
+   gap: 1.5rem;
+   padding: 1.5rem 1rem 2.5rem;
+  }
+  .device-wrap {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   gap: 0.5rem;
+  }
+  .device-label {
+   font-size: 0.8rem;
+   font-weight: 600;
+   color: #475569;
+   text-align: center;
+   max-width: 360px;
+  }
+  .phone {
+   background: #111;
+   border-radius: 28px;
+   padding: 12px 10px 14px;
+   box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.25),
+    inset 0 0 0 2px #333;
+  }
+  .phone-notch {
+   width: 96px;
+   height: 22px;
+   background: #111;
+   border-radius: 0 0 14px 14px;
+   margin: -4px auto 6px;
+  }
+  .phone-screen {
+   background: #fff;
+   border-radius: 18px;
+   overflow: hidden;
+   border: 2px solid var(--frame-border);
+  }
+  .phone-screen iframe {
+   display: block;
+   border: 0;
+   background: #fff;
+  }
+  .note {
+   max-width: 640px;
+   margin: 0 auto;
+   padding: 0 1rem 2rem;
+   font-size: 0.85rem;
+   color: #64748b;
+   line-height: 1.55;
+   text-align: center;
+  }
+  .note strong { color: #1a365d; }
+  .note ul {
+   text-align: left;
+   margin: 0.5rem 0 0;
+   padding-left: 1.2rem;
+  }
+  @media (max-width: 500px) {
+   .workspace { padding: 1rem 0.5rem; }
+   .phone { border-radius: 20px; padding: 8px 6px 10px; }
+  }
+ </style>
 </head>
 <body>
 
-  <header class="toolbar">
-    <h1>Vista móvil — QA interno</h1>
-    <p>
-      Marco de teléfono para revisar el sitio en español, la landing de anuncios v2 y el cuestionario médico.
-      Edita archivos, guarda y pulsa <strong>Recargar</strong>.
-    </p>
-    <div class="control-row" role="tablist" aria-label="Página a previsualizar">
-      <label>Página</label>
-      <button type="button" class="btn target-btn active" data-target="website">Sitio web (ES)</button>
-      <button type="button" class="btn target-btn" data-target="landing">Landing ads v2</button>
-      <button type="button" class="btn target-btn" data-target="medical">Cuestionario médico</button>
-    </div>
-    <div class="control-row">
-      <button type="button" class="btn" id="btn-reload">Recargar</button>
-      <a class="btn btn-primary" id="btn-full" href="../index.html" target="_blank" rel="noopener">Página completa</a>
-      <a class="btn" id="btn-staff" href="../staff/">Staff portal</a>
-    </div>
-    <div class="control-row">
-      <label>Ancho</label>
-      <button type="button" class="btn width-btn" data-w="375">375</button>
-      <button type="button" class="btn width-btn active" data-w="390">390</button>
-      <button type="button" class="btn width-btn" data-w="414">414</button>
-      <button type="button" class="btn width-btn" data-w="430">430</button>
-      <label style="margin-left:0.5rem;">Alto</label>
-      <button type="button" class="btn height-btn" data-h="667">667</button>
-      <button type="button" class="btn height-btn active" data-h="844">844</button>
-      <button type="button" class="btn height-btn" data-h="932">932</button>
-    </div>
-    <div class="local-banner" id="local-banner" role="status">
-      <strong>Cuestionario médico en localhost:</strong> ejecuta <code>npm run dev:local</code> en otra terminal
-      (API de búsqueda y flujo completo). La landing y el sitio funcionan con el servidor estático normal.
-    </div>
-  </header>
-
-  <main class="workspace">
-    <div class="device-wrap">
-      <span class="device-label" id="size-label">390 × 844 px — Sitio web (ES)</span>
-      <div class="phone" aria-hidden="true">
-        <div class="phone-notch"></div>
-        <div class="phone-screen">
-          <iframe
-            id="preview-frame"
-            title="Vista móvil"
-            src="../index.html"
-            width="390"
-            height="844"
-            loading="eager"
-          ></iframe>
-        </div>
-      </div>
-    </div>
-  </main>
-
-  <div class="note">
-    <strong>Local:</strong>
-    <ul>
-      <li><code>npm run preview:mobile-layout</code> — abre esta vista (puerto <strong>8766</strong>)</li>
-      <li><code>npm run dev:local</code> — APIs para el cuestionario médico (búsqueda RxNorm, NPI, etc.)</li>
-      <li>Desde <code>/staff/</code> → enlace «Vista móvil — sitio, landing y cuestionario»</li>
-    </ul>
+ <header class="toolbar">
+  <h1>Vista móvil — QA interno</h1>
+  <p>
+   Marco de teléfono para revisar el sitio en español, la landing de anuncios v2 y el cuestionario médico.
+   Edita archivos, guarda y pulsa <strong>Recargar</strong>.
+  </p>
+  <div class="control-row" role="tablist" aria-label="Página a previsualizar">
+   <label>Página</label>
+   <button type="button" class="btn target-btn active" data-target="website">Sitio web (ES)</button>
+   <button type="button" class="btn target-btn" data-target="landing">Landing ads v2</button>
+   <button type="button" class="btn target-btn" data-target="medical">Cuestionario médico</button>
   </div>
+  <div class="control-row">
+   <button type="button" class="btn" id="btn-reload">Recargar</button>
+   <a class="btn btn-primary" id="btn-full" href="../index.html" target="_blank" rel="noopener">Página completa</a>
+   <a class="btn" id="btn-staff" href="../staff/">Staff portal</a>
+  </div>
+  <div class="control-row">
+   <label>Ancho</label>
+   <button type="button" class="btn width-btn" data-w="375">375</button>
+   <button type="button" class="btn width-btn active" data-w="390">390</button>
+   <button type="button" class="btn width-btn" data-w="414">414</button>
+   <button type="button" class="btn width-btn" data-w="430">430</button>
+   <label style="margin-left:0.5rem;">Alto</label>
+   <button type="button" class="btn height-btn" data-h="667">667</button>
+   <button type="button" class="btn height-btn active" data-h="844">844</button>
+   <button type="button" class="btn height-btn" data-h="932">932</button>
+  </div>
+  <div class="local-banner" id="local-banner" role="status">
+   <strong>Cuestionario médico en localhost:</strong> ejecuta <code>npm run dev:local</code> en otra terminal
+   (API de búsqueda y flujo completo). La landing y el sitio funcionan con el servidor estático normal.
+  </div>
+ </header>
 
-  <script>
-    (function () {
-      var TARGETS = {
-        website: {
-          label: "Sitio web (ES)",
-          path: "../index.html",
-          needsLocalApi: false,
-        },
-        landing: {
-          label: "Landing ads v2",
-          path: "../gastos-finales-ads-v2/",
-          needsLocalApi: false,
-        },
-        medical: {
-          label: "Cuestionario médico",
-          path: "../medical-intake-preview.html",
-          needsLocalApi: true,
-        },
-      };
+ <main class="workspace">
+  <div class="device-wrap">
+   <span class="device-label" id="size-label">390 × 844 px — Sitio web (ES)</span>
+   <div class="phone" aria-hidden="true">
+    <div class="phone-notch"></div>
+    <div class="phone-screen">
+     <iframe
+      id="preview-frame"
+      title="Vista móvil"
+      src="../index.html"
+      width="390"
+      height="844"
+      loading="eager"
+     ></iframe>
+    </div>
+   </div>
+  </div>
+ </main>
 
-      var frame = document.getElementById("preview-frame");
-      var label = document.getElementById("size-label");
-      var fullBtn = document.getElementById("btn-full");
-      var localBanner = document.getElementById("local-banner");
-      var width = 390;
-      var height = 844;
-      var targetKey = "website";
+ <div class="note">
+  <strong>Local:</strong>
+  <ul>
+   <li><code>npm run preview:mobile-layout</code> — abre esta vista (puerto <strong>8766</strong>)</li>
+   <li><code>npm run dev:local</code> — APIs para el cuestionario médico (búsqueda RxNorm, NPI, etc.)</li>
+   <li>Desde <code>/staff/</code> → enlace «Vista móvil — sitio, landing y cuestionario»</li>
+  </ul>
+ </div>
 
-      function isLocalHost() {
-        var h = window.location.hostname || "";
-        return h === "localhost" || h === "127.0.0.1";
-      }
+ <script>
+  (function () {
+   var TARGETS = {
+    website: {
+     label: "Sitio web (ES)",
+     path: "../index.html",
+     needsLocalApi: false,
+    },
+    landing: {
+     label: "Landing ads v2",
+     path: "../gastos-finales-ads-v2/",
+     needsLocalApi: false,
+    },
+    medical: {
+     label: "Cuestionario médico",
+     path: "../medical-intake-preview.html",
+     needsLocalApi: true,
+    },
+   };
 
-      function currentTarget() {
-        return TARGETS[targetKey] || TARGETS.website;
-      }
+   var frame = document.getElementById("preview-frame");
+   var label = document.getElementById("size-label");
+   var fullBtn = document.getElementById("btn-full");
+   var localBanner = document.getElementById("local-banner");
+   var width = 390;
+   var height = 844;
+   var targetKey = "website";
 
-      function updateLabel() {
-        label.textContent =
-          width + " × " + height + " px — " + currentTarget().label + " (scroll en el marco)";
-      }
+   function isLocalHost() {
+    var h = window.location.hostname || "";
+    return h === "localhost" || h === "127.0.0.1";
+   }
 
-      function setFrameSrc() {
-        var base = currentTarget().path;
-        var sep = base.indexOf("?") >= 0 ? "&" : "?";
-        frame.src = base + sep + "_=" + Date.now();
-        fullBtn.href = base;
-        localBanner.classList.toggle(
-          "is-visible",
-          currentTarget().needsLocalApi && isLocalHost()
-        );
-      }
+   function currentTarget() {
+    return TARGETS[targetKey] || TARGETS.website;
+   }
 
-      function setTarget(key) {
-        if (!TARGETS[key]) return;
-        targetKey = key;
-        document.querySelectorAll(".target-btn").forEach(function (btn) {
-          btn.classList.toggle("active", btn.getAttribute("data-target") === key);
-        });
-        updateLabel();
-        setFrameSrc();
-        try {
-          var u = new URL(window.location.href);
-          u.searchParams.set("target", key);
-          u.searchParams.set("w", String(width));
-          u.searchParams.set("h", String(height));
-          window.history.replaceState({}, "", u.pathname + u.search);
-        } catch (_e) {}
-      }
+   function updateLabel() {
+    label.textContent =
+     width + " × " + height + " px — " + currentTarget().label + " (scroll en el marco)";
+   }
 
-      function setWidth(w) {
-        width = w;
-        frame.width = w;
-        updateLabel();
-        document.querySelectorAll(".width-btn").forEach(function (btn) {
-          btn.classList.toggle("active", Number(btn.getAttribute("data-w")) === w);
-        });
-      }
+   function setFrameSrc() {
+    var base = currentTarget().path;
+    var sep = base.indexOf("?") >= 0 ? "&" : "?";
+    frame.src = base + sep + "_=" + Date.now();
+    fullBtn.href = base;
+    localBanner.classList.toggle(
+     "is-visible",
+     currentTarget().needsLocalApi && isLocalHost()
+    );
+   }
 
-      function setHeight(h) {
-        height = h;
-        frame.height = h;
-        updateLabel();
-        document.querySelectorAll(".height-btn").forEach(function (btn) {
-          btn.classList.toggle("active", Number(btn.getAttribute("data-h")) === h);
-        });
-      }
+   function setTarget(key) {
+    if (!TARGETS[key]) return;
+    targetKey = key;
+    document.querySelectorAll(".target-btn").forEach(function (btn) {
+     btn.classList.toggle("active", btn.getAttribute("data-target") === key);
+    });
+    updateLabel();
+    setFrameSrc();
+    try {
+     var u = new URL(window.location.href);
+     u.searchParams.set("target", key);
+     u.searchParams.set("w", String(width));
+     u.searchParams.set("h", String(height));
+     window.history.replaceState({}, "", u.pathname + u.search);
+    } catch (_e) {}
+   }
 
-      document.querySelectorAll(".target-btn").forEach(function (btn) {
-        btn.addEventListener("click", function () {
-          setTarget(btn.getAttribute("data-target"));
-        });
-      });
+   function setWidth(w) {
+    width = w;
+    frame.width = w;
+    updateLabel();
+    document.querySelectorAll(".width-btn").forEach(function (btn) {
+     btn.classList.toggle("active", Number(btn.getAttribute("data-w")) === w);
+    });
+   }
 
-      document.querySelectorAll(".width-btn").forEach(function (btn) {
-        btn.addEventListener("click", function () {
-          setWidth(Number(btn.getAttribute("data-w")));
-        });
-      });
+   function setHeight(h) {
+    height = h;
+    frame.height = h;
+    updateLabel();
+    document.querySelectorAll(".height-btn").forEach(function (btn) {
+     btn.classList.toggle("active", Number(btn.getAttribute("data-h")) === h);
+    });
+   }
 
-      document.querySelectorAll(".height-btn").forEach(function (btn) {
-        btn.addEventListener("click", function () {
-          setHeight(Number(btn.getAttribute("data-h")));
-        });
-      });
+   document.querySelectorAll(".target-btn").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+     setTarget(btn.getAttribute("data-target"));
+    });
+   });
 
-      document.getElementById("btn-reload").addEventListener("click", setFrameSrc);
+   document.querySelectorAll(".width-btn").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+     setWidth(Number(btn.getAttribute("data-w")));
+    });
+   });
 
-      var params = new URLSearchParams(window.location.search);
-      if (params.get("target") && TARGETS[params.get("target")]) {
-        setTarget(params.get("target"));
-      } else {
-        updateLabel();
-        localBanner.classList.toggle("is-visible", false);
-      }
-      if (params.get("w")) setWidth(Number(params.get("w")) || 390);
-      if (params.get("h")) setHeight(Number(params.get("h")) || 844);
+   document.querySelectorAll(".height-btn").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+     setHeight(Number(btn.getAttribute("data-h")));
+    });
+   });
 
-      if (targetKey === "medical" && !isLocalHost()) {
-        localBanner.classList.add("is-visible");
-        localBanner.innerHTML =
-          "<strong>Cuestionario médico:</strong> el preview del cuestionario solo funciona en localhost. " +
-          "Ejecuta <code>npm run preview:mobile-layout</code> y <code>npm run dev:local</code>, " +
-          "luego elige «Cuestionario médico».";
-      }
-    })();
-  </script>
+   document.getElementById("btn-reload").addEventListener("click", setFrameSrc);
+
+   var params = new URLSearchParams(window.location.search);
+   if (params.get("target") && TARGETS[params.get("target")]) {
+    setTarget(params.get("target"));
+   } else {
+    updateLabel();
+    localBanner.classList.toggle("is-visible", false);
+   }
+   if (params.get("w")) setWidth(Number(params.get("w")) || 390);
+   if (params.get("h")) setHeight(Number(params.get("h")) || 844);
+
+   if (targetKey === "medical" && !isLocalHost()) {
+    localBanner.classList.add("is-visible");
+    localBanner.innerHTML =
+     "<strong>Cuestionario médico:</strong> el preview del cuestionario solo funciona en localhost. " +
+     "Ejecuta <code>npm run preview:mobile-layout</code> y <code>npm run dev:local</code>, " +
+     "luego elige «Cuestionario médico».";
+   }
+  })();
+ </script>
 </body>
 </html>

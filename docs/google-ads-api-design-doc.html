@@ -1,119 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <title>Google Ads API Design Document — Mejor Vida Insurance LLC</title>
-  <style>
-    body { font-family: Georgia, "Times New Roman", serif; max-width: 720px; margin: 40px auto; line-height: 1.5; color: #111; }
-    h1 { font-size: 1.35rem; border-bottom: 2px solid #333; padding-bottom: 8px; }
-    h2 { font-size: 1.05rem; margin-top: 24px; }
-    p, li { font-size: 11pt; }
-    table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 10.5pt; }
-    th, td { border: 1px solid #ccc; padding: 8px; text-align: left; vertical-align: top; }
-    th { background: #f5f5f5; }
-    .meta { color: #444; font-size: 10.5pt; margin-bottom: 24px; }
-  </style>
+ <meta charset="utf-8" />
+ <title>Google Ads API Design Document — Mejor Vida Insurance LLC</title>
+ <style>
+  body { font-family: Georgia, "Times New Roman", serif; max-width: 720px; margin: 40px auto; line-height: 1.5; color: #111; }
+  h1 { font-size: 1.35rem; border-bottom: 2px solid #333; padding-bottom: 8px; }
+  h2 { font-size: 1.05rem; margin-top: 24px; }
+  p, li { font-size: 11pt; }
+  table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 10.5pt; }
+  th, td { border: 1px solid #ccc; padding: 8px; text-align: left; vertical-align: top; }
+  th { background: #f5f5f5; }
+  .meta { color: #444; font-size: 10.5pt; margin-bottom: 24px; }
+ </style>
 </head>
 <body>
-  <h1>Google Ads API Design Document</h1>
-  <p class="meta">
-    <strong>Company:</strong> Mejor Vida Insurance<br />
-    <strong>Website:</strong> https://www.mejorvidainsurance.com<br />
-    <strong>Manager account (MCC):</strong> 337-375-5801<br />
-    <strong>API contact:</strong> admin@mejorvidainsurance.com<br />
-    <strong>Document date:</strong> July 3, 2026
-  </p>
+ <h1>Google Ads API Design Document</h1>
+ <p class="meta">
+  <strong>Company:</strong> Mejor Vida Insurance<br />
+  <strong>Website:</strong> https://www.mejorvidainsurance.com<br />
+  <strong>Manager account (MCC):</strong> 337-375-5801<br />
+  <strong>API contact:</strong> admin@mejorvidainsurance.com<br />
+  <strong>Document date:</strong> July 3, 2026
+ </p>
 
-  <h2>1. Application overview</h2>
-  <p>
-    Mejor Vida Insurance operates a password-protected internal Staff CRM at
-    <code>https://www.mejorvidainsurance.com/staff/crm.html</code>.
-    The CRM includes a Funnel Analytics dashboard used by our employees to review
-    marketing performance for our own Google Search campaigns.
-  </p>
-  <p>
-    We are requesting Google Ads API <strong>Basic Access</strong> to add
-    <strong>read-only keyword click reporting</strong> to this internal dashboard.
-    The tool is not offered to external customers, agencies, or third parties.
-  </p>
+ <h2>1. Application overview</h2>
+ <p>
+  Mejor Vida Insurance operates a password-protected internal Staff CRM at
+  <code>https://www.mejorvidainsurance.com/staff/crm.html</code>.
+  The CRM includes a Funnel Analytics dashboard used by our employees to review
+  marketing performance for our own Google Search campaigns.
+ </p>
+ <p>
+  We are requesting Google Ads API <strong>Basic Access</strong> to add
+  <strong>read-only keyword click reporting</strong> to this internal dashboard.
+  The tool is not offered to external customers, agencies, or third parties.
+ </p>
 
-  <h2>2. Business model</h2>
-  <p>
-    Mejor Vida Insurance is a bilingual final expense life insurance agency.
-    We are the <strong>advertiser</strong> — we run Google Ads for our own business
-    to generate leads for our own products. We do not resell API access, manage
-    other companies’ accounts, or operate a SaaS product.
-  </p>
+ <h2>2. Business model</h2>
+ <p>
+  Mejor Vida Insurance is a bilingual final expense life insurance agency.
+  We are the <strong>advertiser</strong> — we run Google Ads for our own business
+  to generate leads for our own products. We do not resell API access, manage
+  other companies’ accounts, or operate a SaaS product.
+ </p>
 
-  <h2>3. Intended users</h2>
-  <p><strong>Internal users only.</strong> Access requires staff authentication to our CRM.
-    Estimated users: 1–5 Mejor Vida employees (agents and administrators).</p>
+ <h2>3. Intended users</h2>
+ <p><strong>Internal users only.</strong> Access requires staff authentication to our CRM.
+  Estimated users: 1–5 Mejor Vida employees (agents and administrators).</p>
 
-  <h2>4. Problem being solved</h2>
-  <p>
-    Our staff need to see which search keywords receive ad clicks during a selected
-    date range, alongside funnel and landing-page analytics already shown in the CRM.
-    Today, keyword-level click data is not available from our first-party site tracking
-    alone. We need read-only reporting from the Google Ads API for our own account.
-  </p>
+ <h2>4. Problem being solved</h2>
+ <p>
+  Our staff need to see which search keywords receive ad clicks during a selected
+  date range, alongside funnel and landing-page analytics already shown in the CRM.
+  Today, keyword-level click data is not available from our first-party site tracking
+  alone. We need read-only reporting from the Google Ads API for our own account.
+ </p>
 
-  <h2>5. Architecture</h2>
-  <table>
-    <tr><th>Component</th><th>Description</th></tr>
-    <tr><td>Frontend</td><td>Staff CRM web app (static HTML/JS), Funnel Analytics tab “LP Google ads”</td></tr>
-    <tr><td>Backend</td><td>Serverless API route on Vercel: <code>GET /api/staff/funnel-analytics</code></td></tr>
-    <tr><td>Google Ads integration</td><td>Node.js module calls Google Ads API REST <code>googleAds:searchStream</code></td></tr>
-    <tr><td>Auth</td><td>OAuth 2.0 refresh token (staff-initiated one-time setup); developer token in server env</td></tr>
-    <tr><td>Hosting</td><td>Vercel (mejorvidainsurance.com)</td></tr>
-  </table>
-  <p>Data flow: Staff user selects date range in CRM → backend queries Google Ads API → keyword click totals returned as JSON → displayed in dashboard table. No data is written back to Google Ads.</p>
+ <h2>5. Architecture</h2>
+ <table>
+  <tr><th>Component</th><th>Description</th></tr>
+  <tr><td>Frontend</td><td>Staff CRM web app (static HTML/JS), Funnel Analytics tab “LP Google ads”</td></tr>
+  <tr><td>Backend</td><td>Serverless API route on Vercel: <code>GET /api/staff/funnel-analytics</code></td></tr>
+  <tr><td>Google Ads integration</td><td>Node.js module calls Google Ads API REST <code>googleAds:searchStream</code></td></tr>
+  <tr><td>Auth</td><td>OAuth 2.0 refresh token (staff-initiated one-time setup); developer token in server env</td></tr>
+  <tr><td>Hosting</td><td>Vercel (mejorvidainsurance.com)</td></tr>
+ </table>
+ <p>Data flow: Staff user selects date range in CRM → backend queries Google Ads API → keyword click totals returned as JSON → displayed in dashboard table. No data is written back to Google Ads.</p>
 
-  <h2>6. Google Ads API usage</h2>
-  <p><strong>Access type:</strong> Read-only reporting.</p>
-  <p><strong>Resources / views:</strong></p>
-  <ul>
-    <li><code>keyword_view</code> — keyword text and click metrics</li>
-  </ul>
-  <p><strong>Example GAQL query:</strong></p>
-  <p><code>SELECT ad_group_criterion.keyword.text, metrics.clicks FROM keyword_view WHERE segments.date BETWEEN 'YYYY-MM-DD' AND 'YYYY-MM-DD' AND metrics.clicks &gt; 0</code></p>
-  <p><strong>Operations we do NOT perform:</strong></p>
-  <ul>
-    <li>No campaign, ad group, keyword, or bid creation or modification</li>
-    <li>No budget changes</li>
-    <li>No account linking or user management via API</li>
-    <li>No bulk mutates</li>
-  </ul>
+ <h2>6. Google Ads API usage</h2>
+ <p><strong>Access type:</strong> Read-only reporting.</p>
+ <p><strong>Resources / views:</strong></p>
+ <ul>
+  <li><code>keyword_view</code> — keyword text and click metrics</li>
+ </ul>
+ <p><strong>Example GAQL query:</strong></p>
+ <p><code>SELECT ad_group_criterion.keyword.text, metrics.clicks FROM keyword_view WHERE segments.date BETWEEN 'YYYY-MM-DD' AND 'YYYY-MM-DD' AND metrics.clicks &gt; 0</code></p>
+ <p><strong>Operations we do NOT perform:</strong></p>
+ <ul>
+  <li>No campaign, ad group, keyword, or bid creation or modification</li>
+  <li>No budget changes</li>
+  <li>No account linking or user management via API</li>
+  <li>No bulk mutates</li>
+ </ul>
 
-  <h2>7. Authentication and security</h2>
-  <ul>
-    <li>Developer token, OAuth client secret, and refresh token stored only in server environment variables (Vercel / local <code>.env</code>).</li>
-    <li>Secrets are never exposed to browsers or end users.</li>
-    <li>CRM endpoints require staff login before any analytics data is returned.</li>
-    <li>OAuth scope: <code>https://www.googleapis.com/auth/adwords</code></li>
-    <li>Google Cloud project: cursor-sheets (OAuth client used for staff authorization)</li>
-  </ul>
+ <h2>7. Authentication and security</h2>
+ <ul>
+  <li>Developer token, OAuth client secret, and refresh token stored only in server environment variables (Vercel / local <code>.env</code>).</li>
+  <li>Secrets are never exposed to browsers or end users.</li>
+  <li>CRM endpoints require staff login before any analytics data is returned.</li>
+  <li>OAuth scope: <code>https://www.googleapis.com/auth/adwords</code></li>
+  <li>Google Cloud project: cursor-sheets (OAuth client used for staff authorization)</li>
+ </ul>
 
-  <h2>8. Expected call volume</h2>
-  <p>
-    Low volume. Staff manually load the dashboard a few times per day.
-    Each page load triggers one <code>searchStream</code> request for keyword clicks
-    for the selected date range (typically 7–30 days).
-  </p>
-  <p><strong>Estimated usage:</strong> fewer than 50 API operations per day — well under Basic Access limits.</p>
+ <h2>8. Expected call volume</h2>
+ <p>
+  Low volume. Staff manually load the dashboard a few times per day.
+  Each page load triggers one <code>searchStream</code> request for keyword clicks
+  for the selected date range (typically 7–30 days).
+ </p>
+ <p><strong>Estimated usage:</strong> fewer than 50 API operations per day — well under Basic Access limits.</p>
 
-  <h2>9. Data handling and retention</h2>
-  <ul>
-    <li>Keyword click aggregates are computed at request time and returned to the authenticated staff session.</li>
-    <li>We do not store raw Google Ads API responses in a public database.</li>
-    <li>Data is used solely for internal performance review of our own advertising.</li>
-    <li>No personal user data from Google Ads is collected or resold.</li>
-  </ul>
+ <h2>9. Data handling and retention</h2>
+ <ul>
+  <li>Keyword click aggregates are computed at request time and returned to the authenticated staff session.</li>
+  <li>We do not store raw Google Ads API responses in a public database.</li>
+  <li>Data is used solely for internal performance review of our own advertising.</li>
+  <li>No personal user data from Google Ads is collected or resold.</li>
+ </ul>
 
-  <h2>10. Compliance</h2>
-  <ul>
-    <li>Tool is for Mejor Vida Insurance’s own Google Ads accounts only.</li>
-    <li>Not a third-party tool; not distributed externally.</li>
-    <li>We will comply with Google Ads API Terms and applicable policies.</li>
-  </ul>
+ <h2>10. Compliance</h2>
+ <ul>
+  <li>Tool is for Mejor Vida Insurance’s own Google Ads accounts only.</li>
+  <li>Not a third-party tool; not distributed externally.</li>
+  <li>We will comply with Google Ads API Terms and applicable policies.</li>
+ </ul>
 </body>
 </html>

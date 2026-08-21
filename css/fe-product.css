@@ -82,6 +82,57 @@
   );
 }
 
+/* Bridge hero: size to copy (not a tall photo band); fade navy left → clear photo right */
+.fep-hero:has(.fep-hero-media--bridge) {
+  min-height: 0;
+  padding: 1.75rem 0 1.9rem;
+}
+
+.fep-hero-media--bridge picture,
+.fep-hero-media--bridge img {
+  object-fit: cover;
+  object-position: 78% 40%;
+}
+
+.fep-hero-media--bridge::after {
+  background: linear-gradient(
+    90deg,
+    #1a365d 0%,
+    #1a365d 20%,
+    rgba(26, 54, 93, 0.92) 36%,
+    rgba(13, 71, 161, 0.42) 56%,
+    rgba(13, 71, 161, 0.1) 74%,
+    transparent 90%
+  );
+}
+
+@media (max-width: 768px) {
+  .fep-hero:has(.fep-hero-media--bridge) {
+    min-height: 0;
+    padding: 1.45rem 0 1.6rem;
+  }
+
+  .fep-hero:has(.fep-hero-media--bridge) .fep-hero-media {
+    opacity: 1;
+  }
+
+  .fep-hero-media--bridge picture,
+  .fep-hero-media--bridge img {
+    object-position: 70% 36%;
+  }
+
+  .fep-hero-media--bridge::after {
+    background: linear-gradient(
+      90deg,
+      #1a365d 0%,
+      rgba(26, 54, 93, 0.94) 28%,
+      rgba(26, 54, 93, 0.55) 58%,
+      rgba(13, 71, 161, 0.18) 78%,
+      transparent 94%
+    );
+  }
+}
+
 .fep-hero .container {
   position: relative;
   z-index: 1;
@@ -379,14 +430,23 @@
   border: 1px solid #e2e8f0;
   border-radius: 0.65rem;
   background: #fff;
+  color: inherit;
+  cursor: pointer;
   text-decoration: none !important;
   box-shadow: 0 4px 14px rgba(15, 23, 42, 0.04);
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
 }
 
-.fep-carrier-card:hover {
+.fep-carrier-card:hover,
+.fep-carrier-card:focus-visible {
   border-color: #93b4e0;
   box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+  transform: translateY(-2px);
+}
+
+.fep-carrier-card:focus-visible {
+  outline: 2px solid var(--fep-blue);
+  outline-offset: 2px;
 }
 
 .fep-carrier-card img {
@@ -396,6 +456,11 @@
   width: auto;
   object-fit: contain;
   object-position: left center;
+}
+
+.fep-carrier-card img.fep-carrier-card-logo--wide {
+  height: 2.9rem;
+  max-width: 15rem;
 }
 
 .fep-carrier-card p {
@@ -566,17 +631,26 @@
 
 .fep-carrier-card {
   display: block;
+  color: inherit;
+  cursor: pointer;
   text-decoration: none !important;
   border: 1px solid #e2e8f0;
   border-radius: 0.65rem;
   padding: 0.95rem 1rem;
   background: #fff;
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
 }
 
-.fep-carrier-card:hover {
+.fep-carrier-card:hover,
+.fep-carrier-card:focus-visible {
   border-color: #9bb8de;
   box-shadow: 0 6px 18px rgba(26, 54, 93, 0.08);
+  transform: translateY(-2px);
+}
+
+.fep-carrier-card:focus-visible {
+  outline: 2px solid var(--fep-blue);
+  outline-offset: 2px;
 }
 
 .fep-carrier-card strong {
@@ -594,6 +668,11 @@
   object-fit: contain;
   object-position: left center;
   margin-bottom: 0.55rem;
+}
+
+.fep-carrier-card img.fep-carrier-card-logo--wide {
+  height: 2.9rem;
+  max-width: 15rem;
 }
 
 .fep-carrier-card span {

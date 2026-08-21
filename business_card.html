@@ -1,236 +1,236 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tarjeta de Presentación - Julie Braunsroth</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --brand-blue: #1a365d;
-            --brand-yellow: #fbbf24;
-            --brand-light-blue: #f0f4f8;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tarjeta de Presentación - Julie Braunsroth</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --brand-blue: #1a365d;
+      --brand-yellow: #fbbf24;
+      --brand-light-blue: #f0f4f8;
+    }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f1f5f9;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 40px 20px;
-            gap: 40px;
-        }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f1f5f9;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+      gap: 40px;
+    }
 
-        .card {
-            width: 525px;
-            height: 300px;
-            background: white;
-            border-radius: 4px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.12);
-            position: relative;
-            overflow: hidden;
-            flex-shrink: 0;
-            display: flex;
-            transition: transform 0.3s ease;
-            border: 2px solid #fbbf24;
-        }
+    .card {
+      width: 525px;
+      height: 300px;
+      background: white;
+      border-radius: 4px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0;
+      display: flex;
+      transition: transform 0.3s ease;
+      border: 2px solid #fbbf24;
+    }
 
-        .card:hover { transform: translateY(-8px); }
+    .card:hover { transform: translateY(-8px); }
 
-        .content-side {
-            width: 55%;
-            padding: 6px 10px 14px 20px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            z-index: 10;
-        }
+    .content-side {
+      width: 55%;
+      padding: 6px 10px 14px 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      z-index: 10;
+    }
 
-        .photo-side {
-            width: 45%;
-            height: 100%;
-            background: transparent;
-            display: flex;
-            align-items: flex-end;
-            justify-content: center;
-            position: relative;
-        }
+    .photo-side {
+      width: 45%;
+      height: 100%;
+      background: transparent;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      position: relative;
+    }
 
-        .profile-img {
-            height: 85%;
-            width: 100%;
-            object-fit: cover;
-            object-position: center 10%;
-            display: block;
-        }
+    .profile-img {
+      height: 85%;
+      width: 100%;
+      object-fit: cover;
+      object-position: center 10%;
+      display: block;
+    }
 
-        .logo-container {
-            flex: 1;
-            display: flex;
-            align-items: center;
-        }
+    .logo-container {
+      flex: 1;
+      display: flex;
+      align-items: center;
+    }
 
-        .logo-img {
-            display: block;
-            width: 100% !important;
-            max-width: none !important;
-            max-height: none !important;
-            height: auto;
-        }
+    .logo-img {
+      display: block;
+      width: 100% !important;
+      max-width: none !important;
+      max-height: none !important;
+      height: auto;
+    }
 
-        .info-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 12px;
-            color: #334155;
-            margin-bottom: 4px;
-        }
+    .info-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px;
+      color: #334155;
+      margin-bottom: 4px;
+    }
 
-        .info-icon {
-            color: var(--brand-blue);
-            flex-shrink: 0;
-        }
+    .info-icon {
+      color: var(--brand-blue);
+      flex-shrink: 0;
+    }
 
-        .company-top-right {
-            position: absolute;
-            top: 14px;
-            right: 14px;
-            z-index: 10;
-            font-size: 9px;
-            font-weight: 700;
-            color: #64748b;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            white-space: nowrap;
-        }
+    .company-top-right {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      z-index: 10;
+      font-size: 9px;
+      font-weight: 700;
+      color: #64748b;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
 
-        .img-error {
-            background: #f8fafc;
-            border: 1px dashed #cbd5e1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            font-size: 10px;
-            color: #64748b;
-            padding: 10px;
-            width: 100%;
-            height: 100%;
-        }
+    .img-error {
+      background: #f8fafc;
+      border: 1px dashed #cbd5e1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-size: 10px;
+      color: #64748b;
+      padding: 10px;
+      width: 100%;
+      height: 100%;
+    }
 
-        @media print {
-            body { background: white; padding: 0; }
-            .card { box-shadow: none; border: 1px solid #eee; page-break-after: always; }
-            .no-print { display: none; }
-        }
-    </style>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link href="css/mvi-assistant-widget.css?v=20260721-chat-z" rel="stylesheet" />
+    @media print {
+      body { background: white; padding: 0; }
+      .card { box-shadow: none; border: 1px solid #eee; page-break-after: always; }
+      .no-print { display: none; }
+    }
+  </style>
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+ <link href="css/mvi-assistant-widget.css?v=20260721-chat-z" rel="stylesheet" />
 </head>
 <body>
 
-    <div class="no-print text-center mb-4">
-        <h1 class="text-2xl font-bold text-slate-800">Tarjeta de Presentación</h1>
-        <p class="text-slate-500 text-sm">Escanee el código QR para probar el enlace.</p>
-    </div>
+  <div class="no-print text-center mb-4">
+    <h1 class="text-2xl font-bold text-slate-800">Tarjeta de Presentación</h1>
+    <p class="text-slate-500 text-sm">Escanee el código QR para probar el enlace.</p>
+  </div>
 
-    <div class="card" style="background: white;">
-        <div class="content-side">
-            <div class="logo-container">
-                <picture>
+  <div class="card" style="background: white;">
+    <div class="content-side">
+      <div class="logo-container">
+        <picture>
 <source type="image/webp" srcset="img/opt/logo-spanish2.webp"/>
 <img alt="Logo" class="logo-img" style="width:100% !important; max-width:none !important; max-height:none !important; height:auto !important; transform:scale(1.8) translateX(-58px) translateY(-18px); transform-origin:0% center;" onerror="this.outerHTML='<div class=\'img-error\' src="img/opt/logo-spanish2.png" width="800" height="533" loading="lazy" decoding="async" onerror="this.outerHTML="/>
 </picture>Falta: img/logo-spanish2.png</div>'">
-            </div>
+      </div>
 
-            <div>
-                <h2 style="color: var(--brand-blue);" class="text-[23px] font-extrabold tracking-tight leading-none uppercase whitespace-nowrap">JULIE BRAUNSROTH</h2>
-                <p class="text-[9.8px] font-bold text-slate-600 uppercase tracking-widest mt-1.5 border-l-2 border-yellow-400 pl-2 whitespace-nowrap">Agente de Seguros de Vida y Salud</p>
-            </div>
+      <div>
+        <h2 style="color: var(--brand-blue);" class="text-[23px] font-extrabold tracking-tight leading-none uppercase whitespace-nowrap">JULIE BRAUNSROTH</h2>
+        <p class="text-[9.8px] font-bold text-slate-600 uppercase tracking-widest mt-1.5 border-l-2 border-yellow-400 pl-2 whitespace-nowrap">Agente de Seguros de Vida y Salud</p>
+      </div>
 
-            <div class="mt-1" style="transform: translateX(6px);">
-                <div class="info-item">
-                    <svg class="w-3.5 h-3.5 info-icon" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 005.455 5.455l.774-1.548a1 1 0 011.06-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path></svg>
-                    <span class="font-bold text-[12.5px] text-slate-800">Teléfono: (402) 440-5438</span>
-                </div>
-                <div class="info-item">
-                    <svg class="w-3.5 h-3.5 info-icon" style="color:#0b3a7a;" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10c0 3.314-3.134 6-7 6a8.11 8.11 0 01-2.86-.515L4 16l.82-3.28A5.65 5.65 0 014 10c0-3.314 3.134-6 7-6s7 2.686 7 6z" clip-rule="evenodd"></path></svg>
-                    <span class="font-bold text-[12.5px] text-slate-800">WhatsApp: (402) 440-5438</span>
-                </div>
-                <div class="info-item">
-                    <svg class="w-3.5 h-3.5 info-icon" fill="currentColor" viewBox="0 0 20 20"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg>
-                    <span class="font-medium text-[11.8px]">julie@mejorvidainsurance.com</span>
-                </div>
-                <div class="info-item">
-                    <svg class="w-3.5 h-3.5 info-icon" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM4.332 8.027a6.012 6.012 0 011.912-2.706C6.512 5.73 6.974 6 7.5 6A1.5 1.5 0 019 7.5V8a2 2 0 004 0 2 2 0 011.523-1.943A5.977 5.977 0 0116 10c0 .34-.028.675-.083 1H15a2 2 0 00-2 2v2.197A5.973 5.973 0 0110 16v-2a2 2 0 00-2-2 2 2 0 01-2-2 2 2 0 00-1.668-1.973z" clip-rule="evenodd"></path></svg>
-                    <span class="font-medium text-[12px]">www.mejorvidainsurance.com</span>
-                </div>
-            </div>
+      <div class="mt-1" style="transform: translateX(6px);">
+        <div class="info-item">
+          <svg class="w-3.5 h-3.5 info-icon" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 005.455 5.455l.774-1.548a1 1 0 011.06-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path></svg>
+          <span class="font-bold text-[12.5px] text-slate-800">Teléfono: (402) 440-5438</span>
         </div>
-
-        <div class="photo-side">
-            <img src="img/Julie.png" alt="Julie" class="profile-img" onerror="this.outerHTML='<div class=\'img-error\'>Falta:<br>img/Julie.png</div>'">
+        <div class="info-item">
+          <svg class="w-3.5 h-3.5 info-icon" style="color:#0b3a7a;" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10c0 3.314-3.134 6-7 6a8.11 8.11 0 01-2.86-.515L4 16l.82-3.28A5.65 5.65 0 014 10c0-3.314 3.134-6 7-6s7 2.686 7 6z" clip-rule="evenodd"></path></svg>
+          <span class="font-bold text-[12.5px] text-slate-800">WhatsApp: (402) 440-5438</span>
         </div>
-        <div class="company-top-right">Mejor Vida Insurance LLC</div>
-        <svg style="position:absolute; top:0; left:0; width:100%; height:100%; z-index:5; pointer-events:none;" viewBox="0 0 525 300" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0,122 Q90,112 180,118 Q280,128 360,114 Q440,100 490,106 Q515,111 525,109 L525,132 Q510,128 480,123 Q420,114 340,127 Q260,140 160,133 Q80,126 0,136 Z" fill="#3b82f6" opacity="0.20"/>
-            <path d="M0,102 Q80,88 160,98 Q260,113 340,97 Q420,79 480,88 Q510,94 525,92 L525,132 Q510,128 480,123 Q420,114 340,127 Q260,140 160,133 Q80,126 0,136 Z" fill="#1a365d" opacity="0.30"/>
-            <path d="M0,97 Q80,83 160,93 Q260,108 340,92 Q420,74 480,83 Q510,89 525,87" fill="none" stroke="#fbbf24" stroke-width="2" opacity="0.55"/>
-        </svg>
+        <div class="info-item">
+          <svg class="w-3.5 h-3.5 info-icon" fill="currentColor" viewBox="0 0 20 20"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg>
+          <span class="font-medium text-[11.8px]">julie@mejorvidainsurance.com</span>
+        </div>
+        <div class="info-item">
+          <svg class="w-3.5 h-3.5 info-icon" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM4.332 8.027a6.012 6.012 0 011.912-2.706C6.512 5.73 6.974 6 7.5 6A1.5 1.5 0 019 7.5V8a2 2 0 004 0 2 2 0 011.523-1.943A5.977 5.977 0 0116 10c0 .34-.028.675-.083 1H15a2 2 0 00-2 2v2.197A5.973 5.973 0 0110 16v-2a2 2 0 00-2-2 2 2 0 01-2-2 2 2 0 00-1.668-1.973z" clip-rule="evenodd"></path></svg>
+          <span class="font-medium text-[12px]">www.mejorvidainsurance.com</span>
+        </div>
+      </div>
     </div>
 
-    <div style="background-color: var(--brand-blue);" class="card flex-col justify-between p-6 relative">
-        <div style="background-color: var(--brand-yellow);" class="absolute top-0 left-0 w-full h-2"></div>
-        
-        <div class="pt-2 text-center">
-            <h3 class="text-white font-bold text-[20px] leading-snug mb-2 px-6">
-                Protección de seguros de vida y salud para ti y tu familia.
-            </h3>
-            <div style="background-color: var(--brand-yellow);" class="h-0.5 w-16 mx-auto mb-3"></div>
-            <div class="text-slate-300 text-[10px] leading-relaxed max-w-[360px] mx-auto space-y-0.5">
-                <p>Julie Braunsroth es una agente de seguros licenciada.</p>
-                <p>Departamento de Seguros de Nebraska | Licencia #21695431</p>
-                <p style="color: var(--brand-yellow);" class="font-bold uppercase tracking-tighter">Autorizada en Seguros de Vida y Salud.</p>
-            </div>
-        </div>
+    <div class="photo-side">
+      <img src="img/Julie.png" alt="Julie" class="profile-img" onerror="this.outerHTML='<div class=\'img-error\'>Falta:<br>img/Julie.png</div>'">
+    </div>
+    <div class="company-top-right">Mejor Vida Insurance LLC</div>
+    <svg style="position:absolute; top:0; left:0; width:100%; height:100%; z-index:5; pointer-events:none;" viewBox="0 0 525 300" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,122 Q90,112 180,118 Q280,128 360,114 Q440,100 490,106 Q515,111 525,109 L525,132 Q510,128 480,123 Q420,114 340,127 Q260,140 160,133 Q80,126 0,136 Z" fill="#3b82f6" opacity="0.20"/>
+      <path d="M0,102 Q80,88 160,98 Q260,113 340,97 Q420,79 480,88 Q510,94 525,92 L525,132 Q510,128 480,123 Q420,114 340,127 Q260,140 160,133 Q80,126 0,136 Z" fill="#1a365d" opacity="0.30"/>
+      <path d="M0,97 Q80,83 160,93 Q260,108 340,92 Q420,74 480,83 Q510,89 525,87" fill="none" stroke="#fbbf24" stroke-width="2" opacity="0.55"/>
+    </svg>
+  </div>
 
-        <div class="flex items-end justify-between gap-4 border-t border-slate-700 pt-3">
-            <div class="flex flex-col items-start gap-2">
-                <div class="flex items-center gap-3">
-                    <div class="bg-white p-2 rounded-lg shadow-xl">
-                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://www.mejorvidainsurance.com" alt="QR Code" class="w-16 h-16">
-                    </div>
-                    <div class="text-left">
-                        <p class="text-white text-xs font-black tracking-widest uppercase">ESCANÉAME</p>
-                        <p class="text-slate-300 text-[10px] leading-tight mt-1 max-w-[145px]">Para visitar nuestro sitio web y conocer más sobre nosotros.</p>
-                    </div>
-                </div>
-                <p class="text-yellow-300 text-[10px] font-semibold whitespace-nowrap">https://www.mejorvidainsurance.com</p>
-            </div>
-
-            <div class="text-slate-200 text-[10px] leading-tight space-y-0.5 pb-1">
-                <p class="font-bold text-white uppercase tracking-wide">Síguenos</p>
-                <div class="grid grid-cols-[72px_1fr] gap-x-2 gap-y-0.5 text-left">
-                    <span class="font-semibold text-white">Facebook:</span><span>facebook.com/MejorVidaInsurance</span>
-                    <span class="font-semibold text-white">Instagram:</span><span>@insurance.mejorvida</span>
-                    <span class="font-semibold text-white">Teléfono:</span><span>(402) 440-5438</span>
-                    <span class="font-semibold text-white">WhatsApp:</span><span>(402) 440-5438</span>
-                </div>
-            </div>
-        </div>
+  <div style="background-color: var(--brand-blue);" class="card flex-col justify-between p-6 relative">
+    <div style="background-color: var(--brand-yellow);" class="absolute top-0 left-0 w-full h-2"></div>
+    
+    <div class="pt-2 text-center">
+      <h3 class="text-white font-bold text-[20px] leading-snug mb-2 px-6">
+        Protección de seguros de vida y salud para ti y tu familia.
+      </h3>
+      <div style="background-color: var(--brand-yellow);" class="h-0.5 w-16 mx-auto mb-3"></div>
+      <div class="text-slate-300 text-[10px] leading-relaxed max-w-[360px] mx-auto space-y-0.5">
+        <p>Julie Braunsroth es una agente de seguros licenciada.</p>
+        <p>Departamento de Seguros de Nebraska | Licencia #21695431</p>
+        <p style="color: var(--brand-yellow);" class="font-bold uppercase tracking-tighter">Autorizada en Seguros de Vida y Salud.</p>
+      </div>
     </div>
 
-    <div class="no-print mt-4 max-w-lg text-sm text-slate-500 text-center flex flex-col items-center gap-4">
-        <button onclick="window.print()" style="background-color: var(--brand-blue);" class="px-12 py-4 text-white font-black rounded-full shadow-2xl hover:opacity-90 transition transform hover:scale-105 active:scale-95">
-            IMPRIMIR TARJETAS
-        </button>
+    <div class="flex items-end justify-between gap-4 border-t border-slate-700 pt-3">
+      <div class="flex flex-col items-start gap-2">
+        <div class="flex items-center gap-3">
+          <div class="bg-white p-2 rounded-lg shadow-xl">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://www.mejorvidainsurance.com" alt="QR Code" class="w-16 h-16">
+          </div>
+          <div class="text-left">
+            <p class="text-white text-xs font-black tracking-widest uppercase">ESCANÉAME</p>
+            <p class="text-slate-300 text-[10px] leading-tight mt-1 max-w-[145px]">Para visitar nuestro sitio web y conocer más sobre nosotros.</p>
+          </div>
+        </div>
+        <p class="text-yellow-300 text-[10px] font-semibold whitespace-nowrap">https://www.mejorvidainsurance.com</p>
+      </div>
+
+      <div class="text-slate-200 text-[10px] leading-tight space-y-0.5 pb-1">
+        <p class="font-bold text-white uppercase tracking-wide">Síguenos</p>
+        <div class="grid grid-cols-[72px_1fr] gap-x-2 gap-y-0.5 text-left">
+          <span class="font-semibold text-white">Facebook:</span><span>facebook.com/MejorVidaInsurance</span>
+          <span class="font-semibold text-white">Instagram:</span><span>@insurance.mejorvida</span>
+          <span class="font-semibold text-white">Teléfono:</span><span>(402) 440-5438</span>
+          <span class="font-semibold text-white">WhatsApp:</span><span>(402) 440-5438</span>
+        </div>
+      </div>
     </div>
+  </div>
+
+  <div class="no-print mt-4 max-w-lg text-sm text-slate-500 text-center flex flex-col items-center gap-4">
+    <button onclick="window.print()" style="background-color: var(--brand-blue);" class="px-12 py-4 text-white font-black rounded-full shadow-2xl hover:opacity-90 transition transform hover:scale-105 active:scale-95">
+      IMPRIMIR TARJETAS
+    </button>
+  </div>
 
 
-  <div id="mvi-assistant-root" data-api-url="/api/website-chat"></div>
-  <script src="js/website-assistant-widget.js?v=20260813-scroll-top" defer></script>
+ <div id="mvi-assistant-root" data-api-url="/api/website-chat"></div>
+ <script src="js/website-assistant-widget.js?v=20260813-scroll-top" defer></script>
 </body>
 </html>

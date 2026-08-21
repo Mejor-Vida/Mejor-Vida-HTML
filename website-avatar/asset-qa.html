@@ -1,994 +1,994 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>MVI Chat Avatar — Asset QA</title>
-  <style>
-    :root {
-      --bg: #0f172a;
-      --panel: #1e293b;
-      --border: #334155;
-      --text: #f1f5f9;
-      --muted: #94a3b8;
-      --ok: #22c55e;
-      --warn: #eab308;
-      --bad: #ef4444;
-      --accent: #3b82f6;
-      --guide: rgba(236, 72, 153, 0.85);
-      --guide-baseline: rgba(56, 189, 248, 0.9);
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.45;
-      min-height: 100vh;
-    }
-    header {
-      padding: 1rem 1.25rem;
-      border-bottom: 1px solid var(--border);
-      background: var(--panel);
-    }
-    header h1 {
-      margin: 0 0 0.35rem;
-      font-size: 1.15rem;
-      font-weight: 700;
-    }
-    header p {
-      margin: 0;
-      font-size: 0.8rem;
-      color: var(--muted);
-      max-width: 52rem;
-    }
-    .layout {
-      display: grid;
-      grid-template-columns: 1fr min(22rem, 92vw);
-      gap: 1rem;
-      padding: 1rem;
-      align-items: start;
-    }
-    @media (max-width: 960px) {
-      .layout { grid-template-columns: 1fr; }
-    }
-    .panel {
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 1rem;
-    }
-    .panel h2 {
-      margin: 0 0 0.75rem;
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: var(--muted);
-    }
-    .controls {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      align-items: center;
-      margin-bottom: 0.75rem;
-    }
-    .state-btns {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.35rem;
-    }
-    .state-btns button {
-      padding: 0.4rem 0.65rem;
-      border-radius: 6px;
-      border: 1px solid var(--border);
-      background: #0f172a;
-      color: var(--text);
-      cursor: pointer;
-      font-size: 0.8rem;
-      font-weight: 600;
-    }
-    .state-btns button:hover { border-color: var(--accent); }
-    .state-btns button.active {
-      background: var(--accent);
-      border-color: var(--accent);
-      color: #fff;
-    }
-    label.toggle {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      font-size: 0.8rem;
-      color: var(--muted);
-      cursor: pointer;
-      user-select: none;
-    }
-    label.toggle input { accent-color: var(--accent); }
-    .row-tools {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.75rem 1.25rem;
-      align-items: center;
-      margin-bottom: 0.75rem;
-      font-size: 0.8rem;
-      color: var(--muted);
-    }
-    .row-tools input[type="range"] { width: 120px; }
-    button.ghost {
-      padding: 0.35rem 0.6rem;
-      font-size: 0.75rem;
-      border-radius: 6px;
-      border: 1px solid var(--border);
-      background: transparent;
-      color: var(--text);
-      cursor: pointer;
-    }
-    button.ghost:hover { border-color: var(--accent); color: var(--accent); }
+ <meta charset="utf-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1" />
+ <title>MVI Chat Avatar — Asset QA</title>
+ <style>
+  :root {
+   --bg: #0f172a;
+   --panel: #1e293b;
+   --border: #334155;
+   --text: #f1f5f9;
+   --muted: #94a3b8;
+   --ok: #22c55e;
+   --warn: #eab308;
+   --bad: #ef4444;
+   --accent: #3b82f6;
+   --guide: rgba(236, 72, 153, 0.85);
+   --guide-baseline: rgba(56, 189, 248, 0.9);
+  }
+  * { box-sizing: border-box; }
+  body {
+   margin: 0;
+   font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+   background: var(--bg);
+   color: var(--text);
+   line-height: 1.45;
+   min-height: 100vh;
+  }
+  header {
+   padding: 1rem 1.25rem;
+   border-bottom: 1px solid var(--border);
+   background: var(--panel);
+  }
+  header h1 {
+   margin: 0 0 0.35rem;
+   font-size: 1.15rem;
+   font-weight: 700;
+  }
+  header p {
+   margin: 0;
+   font-size: 0.8rem;
+   color: var(--muted);
+   max-width: 52rem;
+  }
+  .layout {
+   display: grid;
+   grid-template-columns: 1fr min(22rem, 92vw);
+   gap: 1rem;
+   padding: 1rem;
+   align-items: start;
+  }
+  @media (max-width: 960px) {
+   .layout { grid-template-columns: 1fr; }
+  }
+  .panel {
+   background: var(--panel);
+   border: 1px solid var(--border);
+   border-radius: 10px;
+   padding: 1rem;
+  }
+  .panel h2 {
+   margin: 0 0 0.75rem;
+   font-size: 0.85rem;
+   text-transform: uppercase;
+   letter-spacing: 0.06em;
+   color: var(--muted);
+  }
+  .controls {
+   display: flex;
+   flex-wrap: wrap;
+   gap: 0.5rem;
+   align-items: center;
+   margin-bottom: 0.75rem;
+  }
+  .state-btns {
+   display: flex;
+   flex-wrap: wrap;
+   gap: 0.35rem;
+  }
+  .state-btns button {
+   padding: 0.4rem 0.65rem;
+   border-radius: 6px;
+   border: 1px solid var(--border);
+   background: #0f172a;
+   color: var(--text);
+   cursor: pointer;
+   font-size: 0.8rem;
+   font-weight: 600;
+  }
+  .state-btns button:hover { border-color: var(--accent); }
+  .state-btns button.active {
+   background: var(--accent);
+   border-color: var(--accent);
+   color: #fff;
+  }
+  label.toggle {
+   display: inline-flex;
+   align-items: center;
+   gap: 0.4rem;
+   font-size: 0.8rem;
+   color: var(--muted);
+   cursor: pointer;
+   user-select: none;
+  }
+  label.toggle input { accent-color: var(--accent); }
+  .row-tools {
+   display: flex;
+   flex-wrap: wrap;
+   gap: 0.75rem 1.25rem;
+   align-items: center;
+   margin-bottom: 0.75rem;
+   font-size: 0.8rem;
+   color: var(--muted);
+  }
+  .row-tools input[type="range"] { width: 120px; }
+  button.ghost {
+   padding: 0.35rem 0.6rem;
+   font-size: 0.75rem;
+   border-radius: 6px;
+   border: 1px solid var(--border);
+   background: transparent;
+   color: var(--text);
+   cursor: pointer;
+  }
+  button.ghost:hover { border-color: var(--accent); color: var(--accent); }
 
-    .stage-wrap {
-      position: relative;
-      width: 100%;
-      max-width: 420px;
-      margin: 0 auto;
-    }
-    .stage {
-      position: relative;
-      width: 100%;
-      aspect-ratio: 2 / 3;
-      background: repeating-conic-gradient(#1e293b 0% 25%, #0f172a 0% 50%) 50% / 16px 16px;
-      border-radius: 12px;
-      overflow: hidden;
-      border: 1px solid var(--border);
-    }
-    .stage-imgs {
-      position: absolute;
-      inset: 0;
-    }
-    .stage-imgs img {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      object-position: center bottom;
-      pointer-events: none;
-    }
-    .stage-imgs img.back { opacity: 1; z-index: 1; }
-    .stage-imgs img.front { opacity: 1; z-index: 2; transition: opacity 0.2s ease; }
-    .stage.overlay-on .stage-imgs img.front { opacity: 0.5; }
-    .stage.overlay-off .stage-imgs img.back { opacity: 0; visibility: hidden; }
-    .stage.overlay-off.overlay-idle .stage-imgs img.back { opacity: 0; }
+  .stage-wrap {
+   position: relative;
+   width: 100%;
+   max-width: 420px;
+   margin: 0 auto;
+  }
+  .stage {
+   position: relative;
+   width: 100%;
+   aspect-ratio: 2 / 3;
+   background: repeating-conic-gradient(#1e293b 0% 25%, #0f172a 0% 50%) 50% / 16px 16px;
+   border-radius: 12px;
+   overflow: hidden;
+   border: 1px solid var(--border);
+  }
+  .stage-imgs {
+   position: absolute;
+   inset: 0;
+  }
+  .stage-imgs img {
+   position: absolute;
+   left: 50%;
+   top: 50%;
+   transform: translate(-50%, -50%);
+   width: 100%;
+   height: 100%;
+   object-fit: contain;
+   object-position: center bottom;
+   pointer-events: none;
+  }
+  .stage-imgs img.back { opacity: 1; z-index: 1; }
+  .stage-imgs img.front { opacity: 1; z-index: 2; transition: opacity 0.2s ease; }
+  .stage.overlay-on .stage-imgs img.front { opacity: 0.5; }
+  .stage.overlay-off .stage-imgs img.back { opacity: 0; visibility: hidden; }
+  .stage.overlay-off.overlay-idle .stage-imgs img.back { opacity: 0; }
 
-    .guides {
-      position: absolute;
-      inset: 0;
-      z-index: 5;
-      pointer-events: none;
-    }
-    .guides line { stroke-width: 1.5; vector-effect: non-scaling-stroke; }
-    .guides .centerline { stroke: var(--guide); }
-    .guides .baseline { stroke: var(--guide-baseline); stroke-dasharray: 6 4; }
-    .guides.hidden { display: none; }
+  .guides {
+   position: absolute;
+   inset: 0;
+   z-index: 5;
+   pointer-events: none;
+  }
+  .guides line { stroke-width: 1.5; vector-effect: non-scaling-stroke; }
+  .guides .centerline { stroke: var(--guide); }
+  .guides .baseline { stroke: var(--guide-baseline); stroke-dasharray: 6 4; }
+  .guides.hidden { display: none; }
 
-    .drops {
-      margin-top: 1rem;
-    }
-    .drops h3 {
-      margin: 0 0 0.5rem;
-      font-size: 0.75rem;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-    .drop-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-      gap: 0.5rem;
-    }
-    .drop-zone {
-      border: 2px dashed var(--border);
-      border-radius: 8px;
-      padding: 0.5rem;
-      text-align: center;
-      font-size: 0.72rem;
-      color: var(--muted);
-      cursor: pointer;
-      min-height: 4.5rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 0.25rem;
-      transition: border-color 0.15s, background 0.15s;
-    }
-    .drop-zone strong { color: var(--text); font-size: 0.78rem; }
-    .drop-zone .meta { font-size: 0.65rem; word-break: break-all; }
-    .drop-zone.dragover { border-color: var(--accent); background: rgba(59, 130, 246, 0.12); }
-    .drop-zone.loaded { border-style: solid; border-color: #475569; }
-    .drop-zone.preview-active {
-      border-color: var(--accent);
-      background: rgba(59, 130, 246, 0.1);
-    }
-    .drop-zone .drop-replace {
-      margin-top: 0.35rem;
-      padding: 0.22rem 0.5rem;
-      font-size: 0.65rem;
-      border-radius: 4px;
-      border: 1px solid var(--border);
-      background: #0f172a;
-      color: var(--muted);
-      cursor: pointer;
-    }
-    .drop-zone .drop-replace:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-    }
+  .drops {
+   margin-top: 1rem;
+  }
+  .drops h3 {
+   margin: 0 0 0.5rem;
+   font-size: 0.75rem;
+   color: var(--muted);
+   text-transform: uppercase;
+   letter-spacing: 0.05em;
+  }
+  .drop-grid {
+   display: grid;
+   grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+   gap: 0.5rem;
+  }
+  .drop-zone {
+   border: 2px dashed var(--border);
+   border-radius: 8px;
+   padding: 0.5rem;
+   text-align: center;
+   font-size: 0.72rem;
+   color: var(--muted);
+   cursor: pointer;
+   min-height: 4.5rem;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   gap: 0.25rem;
+   transition: border-color 0.15s, background 0.15s;
+  }
+  .drop-zone strong { color: var(--text); font-size: 0.78rem; }
+  .drop-zone .meta { font-size: 0.65rem; word-break: break-all; }
+  .drop-zone.dragover { border-color: var(--accent); background: rgba(59, 130, 246, 0.12); }
+  .drop-zone.loaded { border-style: solid; border-color: #475569; }
+  .drop-zone.preview-active {
+   border-color: var(--accent);
+   background: rgba(59, 130, 246, 0.1);
+  }
+  .drop-zone .drop-replace {
+   margin-top: 0.35rem;
+   padding: 0.22rem 0.5rem;
+   font-size: 0.65rem;
+   border-radius: 4px;
+   border: 1px solid var(--border);
+   background: #0f172a;
+   color: var(--muted);
+   cursor: pointer;
+  }
+  .drop-zone .drop-replace:hover {
+   border-color: var(--accent);
+   color: var(--accent);
+  }
 
-    .checklist {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-    }
-    .checklist li {
-      display: flex;
-      gap: 0.5rem;
-      align-items: flex-start;
-      padding: 0.45rem 0;
-      border-bottom: 1px solid var(--border);
-      font-size: 0.78rem;
-    }
-    .checklist li:last-child { border-bottom: none; }
-    .badge {
-      flex-shrink: 0;
-      width: 3.25rem;
-      text-align: center;
-      font-size: 0.65rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      padding: 0.2rem 0.35rem;
-      border-radius: 4px;
-    }
-    .badge.pass { background: rgba(34, 197, 94, 0.2); color: var(--ok); }
-    .badge.fail { background: rgba(239, 68, 68, 0.2); color: var(--bad); }
-    .badge.warn { background: rgba(234, 179, 8, 0.2); color: var(--warn); }
-    .badge.na { background: #334155; color: var(--muted); }
-    .manual-row {
-      display: flex;
-      align-items: flex-start;
-      gap: 0.45rem;
-      margin-top: 0.75rem;
-      font-size: 0.78rem;
-    }
-    .manual-row input { margin-top: 0.2rem; accent-color: var(--ok); }
-    .qa-warn-note {
-      margin: 0.75rem 0 0;
-      padding: 0.65rem 0.85rem;
-      border-radius: 8px;
-      border: 1px solid rgba(234, 179, 8, 0.45);
-      background: rgba(234, 179, 8, 0.1);
-      font-size: 0.78rem;
-      color: var(--text);
-      max-width: 52rem;
-    }
-    .qa-final-result {
-      margin-top: 1rem;
-      padding: 0.75rem 1rem;
-      border-radius: 8px;
-      font-size: 0.8rem;
-      line-height: 1.5;
-    }
-    .qa-final-result.duplicates {
-      background: rgba(239, 68, 68, 0.12);
-      border: 1px solid rgba(239, 68, 68, 0.35);
-    }
-    .qa-final-result.ok {
-      background: rgba(34, 197, 94, 0.12);
-      border: 1px solid rgba(34, 197, 94, 0.35);
-    }
-    .qa-final-result.partial {
-      background: rgba(234, 179, 8, 0.12);
-      border: 1px solid rgba(234, 179, 8, 0.4);
-    }
-    .qa-final-result.wait {
-      background: #334155;
-      border: 1px solid var(--border);
-      color: var(--muted);
-    }
-  </style>
+  .checklist {
+   list-style: none;
+   margin: 0;
+   padding: 0;
+  }
+  .checklist li {
+   display: flex;
+   gap: 0.5rem;
+   align-items: flex-start;
+   padding: 0.45rem 0;
+   border-bottom: 1px solid var(--border);
+   font-size: 0.78rem;
+  }
+  .checklist li:last-child { border-bottom: none; }
+  .badge {
+   flex-shrink: 0;
+   width: 3.25rem;
+   text-align: center;
+   font-size: 0.65rem;
+   font-weight: 800;
+   text-transform: uppercase;
+   padding: 0.2rem 0.35rem;
+   border-radius: 4px;
+  }
+  .badge.pass { background: rgba(34, 197, 94, 0.2); color: var(--ok); }
+  .badge.fail { background: rgba(239, 68, 68, 0.2); color: var(--bad); }
+  .badge.warn { background: rgba(234, 179, 8, 0.2); color: var(--warn); }
+  .badge.na { background: #334155; color: var(--muted); }
+  .manual-row {
+   display: flex;
+   align-items: flex-start;
+   gap: 0.45rem;
+   margin-top: 0.75rem;
+   font-size: 0.78rem;
+  }
+  .manual-row input { margin-top: 0.2rem; accent-color: var(--ok); }
+  .qa-warn-note {
+   margin: 0.75rem 0 0;
+   padding: 0.65rem 0.85rem;
+   border-radius: 8px;
+   border: 1px solid rgba(234, 179, 8, 0.45);
+   background: rgba(234, 179, 8, 0.1);
+   font-size: 0.78rem;
+   color: var(--text);
+   max-width: 52rem;
+  }
+  .qa-final-result {
+   margin-top: 1rem;
+   padding: 0.75rem 1rem;
+   border-radius: 8px;
+   font-size: 0.8rem;
+   line-height: 1.5;
+  }
+  .qa-final-result.duplicates {
+   background: rgba(239, 68, 68, 0.12);
+   border: 1px solid rgba(239, 68, 68, 0.35);
+  }
+  .qa-final-result.ok {
+   background: rgba(34, 197, 94, 0.12);
+   border: 1px solid rgba(34, 197, 94, 0.35);
+  }
+  .qa-final-result.partial {
+   background: rgba(234, 179, 8, 0.12);
+   border: 1px solid rgba(234, 179, 8, 0.4);
+  }
+  .qa-final-result.wait {
+   background: #334155;
+   border: 1px solid var(--border);
+   color: var(--muted);
+  }
+ </style>
 </head>
 <body>
-  <header>
-    <h1>Chat avatar — asset QA</h1>
-    <p>
-      Based on <code>website-avatar/ASSET_PACK_SPEC.md</code>. Open this file via a local server from the repo root
-      (e.g. <code>npx serve .</code> → <code>/website-avatar/asset-qa.html</code>) so default paths load; or use drag-and-drop only.
-      Compare layers to <strong>idle.png</strong> with overlay mode and guides. Use the top buttons or a bottom tile to switch the preview.
-    </p>
-    <p class="qa-warn-note">
-      <strong>Note:</strong> This tool does <strong>not</strong> animate—it only swaps <strong>still PNGs</strong>. If every state looks the same when you switch, the PNGs are likely <strong>duplicate copies</strong> of one image (same export under different filenames). The checklist compares each file to <code>idle.png</code> and summarizes the result below.
-    </p>
-  </header>
+ <header>
+  <h1>Chat avatar — asset QA</h1>
+  <p>
+   Based on <code>website-avatar/ASSET_PACK_SPEC.md</code>. Open this file via a local server from the repo root
+   (e.g. <code>npx serve .</code> → <code>/website-avatar/asset-qa.html</code>) so default paths load; or use drag-and-drop only.
+   Compare layers to <strong>idle.png</strong> with overlay mode and guides. Use the top buttons or a bottom tile to switch the preview.
+  </p>
+  <p class="qa-warn-note">
+   <strong>Note:</strong> This tool does <strong>not</strong> animate—it only swaps <strong>still PNGs</strong>. If every state looks the same when you switch, the PNGs are likely <strong>duplicate copies</strong> of one image (same export under different filenames). The checklist compares each file to <code>idle.png</code> and summarizes the result below.
+  </p>
+ </header>
 
-  <div class="layout">
-    <div class="panel">
-      <h2>Preview</h2>
-      <div class="controls">
-        <div class="state-btns" id="stateBtns"></div>
-        <button type="button" class="ghost" id="btnLoadDefaults">Load repo defaults</button>
-      </div>
-      <div class="row-tools">
-        <label class="toggle"><input type="checkbox" id="chkOverlay" checked /> 50% overlay vs idle</label>
-        <label class="toggle"><input type="checkbox" id="chkCenter" checked /> Centerline</label>
-        <label class="toggle"><input type="checkbox" id="chkBaseline" checked /> Foot baseline</label>
-        <label class="toggle" title="ASSET_PACK_SPEC: ~4–7% of canvas height below feet">
-          Baseline from bottom: <span id="baselinePctLabel">5.5</span>%
-          <input type="range" id="baselinePct" min="3" max="9" step="0.1" value="5.5" />
-        </label>
-      </div>
-      <p id="stageHint" class="stage-hint" style="font-size:0.75rem;color:#94a3b8;margin:0 0 0.5rem;text-align:center;max-width:420px;margin-left:auto;margin-right:auto"></p>
-      <p id="qaPreviewStateLabel" style="font-size:0.85rem;text-align:center;margin:0 0 0.5rem;font-weight:600;color:var(--accent)">Showing: idle</p>
-      <div class="stage-wrap">
-        <div class="stage overlay-on" id="stage">
-          <div class="stage-imgs">
-            <img id="imgBack" class="back" alt="" />
-            <img id="imgFront" class="front" alt="" />
-          </div>
-          <svg class="guides" id="guidesSvg" viewBox="0 0 100 100" preserveAspectRatio="none">
-            <line class="centerline" x1="50" y1="0" x2="50" y2="100" />
-            <line class="baseline" id="baselineLine" x1="0" y1="94.5" x2="100" y2="94.5" />
-          </svg>
-        </div>
-      </div>
-
-      <div class="drops">
-        <h3>States — click tile to preview · drag PNG or Replace to swap file</h3>
-        <div class="drop-grid" id="dropGrid"></div>
-        <input type="file" id="filePicker" accept="image/png" hidden />
-      </div>
+ <div class="layout">
+  <div class="panel">
+   <h2>Preview</h2>
+   <div class="controls">
+    <div class="state-btns" id="stateBtns"></div>
+    <button type="button" class="ghost" id="btnLoadDefaults">Load repo defaults</button>
+   </div>
+   <div class="row-tools">
+    <label class="toggle"><input type="checkbox" id="chkOverlay" checked /> 50% overlay vs idle</label>
+    <label class="toggle"><input type="checkbox" id="chkCenter" checked /> Centerline</label>
+    <label class="toggle"><input type="checkbox" id="chkBaseline" checked /> Foot baseline</label>
+    <label class="toggle" title="ASSET_PACK_SPEC: ~4–7% of canvas height below feet">
+     Baseline from bottom: <span id="baselinePctLabel">5.5</span>%
+     <input type="range" id="baselinePct" min="3" max="9" step="0.1" value="5.5" />
+    </label>
+   </div>
+   <p id="stageHint" class="stage-hint" style="font-size:0.75rem;color:#94a3b8;margin:0 0 0.5rem;text-align:center;max-width:420px;margin-left:auto;margin-right:auto"></p>
+   <p id="qaPreviewStateLabel" style="font-size:0.85rem;text-align:center;margin:0 0 0.5rem;font-weight:600;color:var(--accent)">Showing: idle</p>
+   <div class="stage-wrap">
+    <div class="stage overlay-on" id="stage">
+     <div class="stage-imgs">
+      <img id="imgBack" class="back" alt="" />
+      <img id="imgFront" class="front" alt="" />
+     </div>
+     <svg class="guides" id="guidesSvg" viewBox="0 0 100 100" preserveAspectRatio="none">
+      <line class="centerline" x1="50" y1="0" x2="50" y2="100" />
+      <line class="baseline" id="baselineLine" x1="0" y1="94.5" x2="100" y2="94.5" />
+     </svg>
     </div>
+   </div>
 
-    <div class="panel">
-      <h2>Checklist</h2>
-      <ul class="checklist" id="checklist"></ul>
-      <div id="qaFinalResult" class="qa-final-result wait" role="status"></div>
-      <div class="manual-row">
-        <input type="checkbox" id="manFeet" />
-        <label for="manFeet">Manual: feet align to baseline guide in <strong>all</strong> states</label>
-      </div>
-      <div class="manual-row">
-        <input type="checkbox" id="manMid" />
-        <label for="manMid">Manual: body midline matches center guide in <strong>all</strong> states</label>
-      </div>
-      <div class="manual-row">
-        <input type="checkbox" id="manPadding" />
-        <label for="manPadding">Manual: toe room matches spec (~4–7% padding above bottom edge)</label>
-      </div>
-    </div>
+   <div class="drops">
+    <h3>States — click tile to preview · drag PNG or Replace to swap file</h3>
+    <div class="drop-grid" id="dropGrid"></div>
+    <input type="file" id="filePicker" accept="image/png" hidden />
+   </div>
   </div>
 
-  <script>
+  <div class="panel">
+   <h2>Checklist</h2>
+   <ul class="checklist" id="checklist"></ul>
+   <div id="qaFinalResult" class="qa-final-result wait" role="status"></div>
+   <div class="manual-row">
+    <input type="checkbox" id="manFeet" />
+    <label for="manFeet">Manual: feet align to baseline guide in <strong>all</strong> states</label>
+   </div>
+   <div class="manual-row">
+    <input type="checkbox" id="manMid" />
+    <label for="manMid">Manual: body midline matches center guide in <strong>all</strong> states</label>
+   </div>
+   <div class="manual-row">
+    <input type="checkbox" id="manPadding" />
+    <label for="manPadding">Manual: toe room matches spec (~4–7% padding above bottom edge)</label>
+   </div>
+  </div>
+ </div>
+
+ <script>
 (function () {
-  "use strict";
+ "use strict";
 
-  var STATES = ["idle", "blink", "happy", "thinking", "attention"];
-  /* Relative to this file (website-avatar/asset-qa.html): repo-root is one level up. Serve the repo root (not only website-avatar/) so ../img/ resolves. */
-  var DEFAULT_BASE = "../img/mvi-chat-avatar/";
-  var currentState = "idle";
-  var urls = {};
+ var STATES = ["idle", "blink", "happy", "thinking", "attention"];
+ /* Relative to this file (website-avatar/asset-qa.html): repo-root is one level up. Serve the repo root (not only website-avatar/) so ../img/ resolves. */
+ var DEFAULT_BASE = "../img/mvi-chat-avatar/";
+ var currentState = "idle";
+ var urls = {};
 
-  var imgBack = document.getElementById("imgBack");
-  var imgFront = document.getElementById("imgFront");
-  var stage = document.getElementById("stage");
-  var guidesSvg = document.getElementById("guidesSvg");
-  var baselineLine = document.getElementById("baselineLine");
-  var chkOverlay = document.getElementById("chkOverlay");
-  var chkCenter = document.getElementById("chkCenter");
-  var chkBaseline = document.getElementById("chkBaseline");
-  var baselinePct = document.getElementById("baselinePct");
-  var baselinePctLabel = document.getElementById("baselinePctLabel");
-  var checklistEl = document.getElementById("checklist");
-  var filePicker = document.getElementById("filePicker");
-  var pickTarget = null;
-  var stageHint = document.getElementById("stageHint");
-  /** Set true to log top-button / preview pipeline in the console. */
-  /** When true: logs state changes, default URL resolution, image load OK, and per-state duplicate vs idle. */
-  var ASSET_QA_DEBUG_TOP = false;
-  var _tracePreviewPipeline = false;
+ var imgBack = document.getElementById("imgBack");
+ var imgFront = document.getElementById("imgFront");
+ var stage = document.getElementById("stage");
+ var guidesSvg = document.getElementById("guidesSvg");
+ var baselineLine = document.getElementById("baselineLine");
+ var chkOverlay = document.getElementById("chkOverlay");
+ var chkCenter = document.getElementById("chkCenter");
+ var chkBaseline = document.getElementById("chkBaseline");
+ var baselinePct = document.getElementById("baselinePct");
+ var baselinePctLabel = document.getElementById("baselinePctLabel");
+ var checklistEl = document.getElementById("checklist");
+ var filePicker = document.getElementById("filePicker");
+ var pickTarget = null;
+ var stageHint = document.getElementById("stageHint");
+ /** Set true to log top-button / preview pipeline in the console. */
+ /** When true: logs state changes, default URL resolution, image load OK, and per-state duplicate vs idle. */
+ var ASSET_QA_DEBUG_TOP = false;
+ var _tracePreviewPipeline = false;
 
-  function setRevoke(state, url) {
-    if (urls[state] && urls[state].startsWith("blob:")) {
-      try { URL.revokeObjectURL(urls[state]); } catch (e) {}
-    }
-    urls[state] = url;
+ function setRevoke(state, url) {
+  if (urls[state] && urls[state].startsWith("blob:")) {
+   try { URL.revokeObjectURL(urls[state]); } catch (e) {}
   }
+  urls[state] = url;
+ }
 
-  function applySrc(img, url) {
-    if (!url) return;
-    img.src = url;
+ function applySrc(img, url) {
+  if (!url) return;
+  img.src = url;
+ }
+
+ /** @param {boolean} [withTrace] log pipeline when true (e.g. user-driven state change), not on every pool image load */
+ function updateStageImages(withTrace) {
+  _tracePreviewPipeline = !!withTrace && ASSET_QA_DEBUG_TOP;
+  if (_tracePreviewPipeline) {
+   console.log("[asset-qa] updateStageImages enter", {
+    currentState: currentState,
+    urlsCurrent: urls[currentState],
+    imgFrontBefore: imgFront ? imgFront.src : "(no imgFront)",
+    imgBackBefore: imgBack ? imgBack.src : "(no imgBack)",
+   });
   }
-
-  /** @param {boolean} [withTrace] log pipeline when true (e.g. user-driven state change), not on every pool image load */
-  function updateStageImages(withTrace) {
-    _tracePreviewPipeline = !!withTrace && ASSET_QA_DEBUG_TOP;
-    if (_tracePreviewPipeline) {
-      console.log("[asset-qa] updateStageImages enter", {
-        currentState: currentState,
-        urlsCurrent: urls[currentState],
-        imgFrontBefore: imgFront ? imgFront.src : "(no imgFront)",
-        imgBackBefore: imgBack ? imgBack.src : "(no imgBack)",
-      });
-    }
-    var idleSrc = urls.idle || "";
-    var curSrc = urls[currentState] || idleSrc;
-    applySrc(imgBack, idleSrc);
-    applySrc(imgFront, curSrc);
-    if (currentState === "idle") stage.classList.add("overlay-idle");
-    else stage.classList.remove("overlay-idle");
-    refreshChrome();
-    if (_tracePreviewPipeline) {
-      console.log("[asset-qa] updateStageImages exit", {
-        curSrc: curSrc,
-        imgFrontAfter: imgFront ? imgFront.src : null,
-        imgBackAfter: imgBack ? imgBack.src : null,
-        stageClasses: stage.className,
-      });
-    }
-    _tracePreviewPipeline = false;
+  var idleSrc = urls.idle || "";
+  var curSrc = urls[currentState] || idleSrc;
+  applySrc(imgBack, idleSrc);
+  applySrc(imgFront, curSrc);
+  if (currentState === "idle") stage.classList.add("overlay-idle");
+  else stage.classList.remove("overlay-idle");
+  refreshChrome();
+  if (_tracePreviewPipeline) {
+   console.log("[asset-qa] updateStageImages exit", {
+    curSrc: curSrc,
+    imgFrontAfter: imgFront ? imgFront.src : null,
+    imgBackAfter: imgBack ? imgBack.src : null,
+    stageClasses: stage.className,
+   });
   }
+  _tracePreviewPipeline = false;
+ }
 
-  function refreshChrome() {
-    if (_tracePreviewPipeline) {
-      console.log("[asset-qa] refreshChrome enter", { currentState: currentState });
-    }
-    var overlay = chkOverlay.checked && currentState !== "idle";
-    if (stageHint) {
-      stageHint.textContent =
-        overlay || currentState !== "idle"
-          ? ""
-          : "Tip: pick blink / happy / thinking / attention to compare over idle with overlay.";
-    }
-    stage.classList.toggle("overlay-on", overlay);
-    stage.classList.toggle("overlay-off", !overlay);
-    guidesSvg.classList.toggle("hidden", !chkCenter.checked && !chkBaseline.checked);
-    guidesSvg.querySelector(".centerline").style.display = chkCenter.checked ? "" : "none";
-    baselineLine.style.display = chkBaseline.checked ? "" : "none";
-    var pct = parseFloat(baselinePct.value, 10);
-    baselinePctLabel.textContent = String(pct);
-    var y = 100 - pct;
-    baselineLine.setAttribute("y1", y);
-    baselineLine.setAttribute("y2", y);
-    try {
-      runChecks();
-    } catch (err) {
-      console.error("[asset-qa] runChecks failed:", err);
-    }
-    if (_tracePreviewPipeline) {
-      console.log("[asset-qa] refreshChrome exit", {
-        overlay: overlay,
-        stageClasses: stage.className,
-      });
-    }
+ function refreshChrome() {
+  if (_tracePreviewPipeline) {
+   console.log("[asset-qa] refreshChrome enter", { currentState: currentState });
   }
-
-  function allLoaded() {
-    return STATES.every(function (s) {
-      var im = pool[s];
-      return im && im.complete && im.naturalWidth > 0;
-    });
+  var overlay = chkOverlay.checked && currentState !== "idle";
+  if (stageHint) {
+   stageHint.textContent =
+    overlay || currentState !== "idle"
+     ? ""
+     : "Tip: pick blink / happy / thinking / attention to compare over idle with overlay.";
   }
+  stage.classList.toggle("overlay-on", overlay);
+  stage.classList.toggle("overlay-off", !overlay);
+  guidesSvg.classList.toggle("hidden", !chkCenter.checked && !chkBaseline.checked);
+  guidesSvg.querySelector(".centerline").style.display = chkCenter.checked ? "" : "none";
+  baselineLine.style.display = chkBaseline.checked ? "" : "none";
+  var pct = parseFloat(baselinePct.value, 10);
+  baselinePctLabel.textContent = String(pct);
+  var y = 100 - pct;
+  baselineLine.setAttribute("y1", y);
+  baselineLine.setAttribute("y2", y);
+  try {
+   runChecks();
+  } catch (err) {
+   console.error("[asset-qa] runChecks failed:", err);
+  }
+  if (_tracePreviewPipeline) {
+   console.log("[asset-qa] refreshChrome exit", {
+    overlay: overlay,
+    stageClasses: stage.className,
+   });
+  }
+ }
 
-  var pool = {};
-  STATES.forEach(function (s) {
-    pool[s] = new Image();
-    pool[s].addEventListener("load", function () {
-      if (ASSET_QA_DEBUG_TOP) {
-        console.log(
-          "[asset-qa] image OK:",
-          s,
-          pool[s].naturalWidth + "×" + pool[s].naturalHeight,
-          "←",
-          pool[s].src
-        );
-      }
-      updateDropMeta(s);
-      updateStageImages();
-    });
-    pool[s].addEventListener("error", function () {
-      console.error("[asset-qa] image FAILED:", s, "←", pool[s].src);
-      updateDropMeta(s);
-      refreshChrome();
-    });
+ function allLoaded() {
+  return STATES.every(function (s) {
+   var im = pool[s];
+   return im && im.complete && im.naturalWidth > 0;
   });
+ }
 
-  function updateDropMeta(state) {
-    /* Must scope to #dropGrid: state buttons also use data-state and appear first in the document. */
-    var gridEl = document.getElementById("dropGrid");
-    if (!gridEl) return;
-    var zone = gridEl.querySelector('[data-state="' + state + '"]');
-    if (!zone) return;
-    var im = pool[state];
-    var meta = zone.querySelector(".meta");
-    if (!meta) return;
-    if (im.naturalWidth > 0) {
-      zone.classList.add("loaded");
-      meta.textContent = im.naturalWidth + "×" + im.naturalHeight + " px";
-    } else {
-      zone.classList.remove("loaded");
-      meta.textContent = "Not loaded";
-    }
-  }
+ var pool = {};
+ STATES.forEach(function (s) {
+  pool[s] = new Image();
+  pool[s].addEventListener("load", function () {
+   if (ASSET_QA_DEBUG_TOP) {
+    console.log(
+     "[asset-qa] image OK:",
+     s,
+     pool[s].naturalWidth + "×" + pool[s].naturalHeight,
+     "←",
+     pool[s].src
+    );
+   }
+   updateDropMeta(s);
+   updateStageImages();
+  });
+  pool[s].addEventListener("error", function () {
+   console.error("[asset-qa] image FAILED:", s, "←", pool[s].src);
+   updateDropMeta(s);
+   refreshChrome();
+  });
+ });
 
-  /** Corners + upper-edge samples (not center — body is opaque). Pass if most samples look transparent. */
-  function idleBackgroundTransparent(img) {
-    if (!img.complete || img.naturalWidth < 4) return { ok: null, detail: "—" };
-    var w = img.naturalWidth;
-    var h = img.naturalHeight;
-    var c = document.createElement("canvas");
-    c.width = w;
-    c.height = h;
-    var ctx = c.getContext("2d");
-    try {
-      ctx.drawImage(img, 0, 0);
-    } catch (e) {
-      return { ok: false, detail: "Canvas tainted (try local server or PNG only)" };
-    }
-    var pts = [
-      [0, 0],
-      [w - 1, 0],
-      [2, 2],
-      [w - 3, 2],
-      [0, Math.min(h - 1, Math.floor(h * 0.06))],
-      [w - 1, Math.min(h - 1, Math.floor(h * 0.06))],
-    ];
-    var transparent = 0;
-    pts.forEach(function (p) {
-      var d = ctx.getImageData(p[0], p[1], 1, 1).data;
-      if (d[3] < 12) transparent += 1;
-    });
-    var pass = transparent >= 4;
-    return {
-      ok: pass,
-      detail: transparent + "/" + pts.length + " edge samples alpha<12 (expect transparent BG)",
-    };
-  }
-
-  function dimensionsMatch() {
-    if (!allLoaded()) return { ok: null, detail: "Load all 5 images" };
-    var w0 = pool.idle.naturalWidth;
-    var h0 = pool.idle.naturalHeight;
-    var bad = [];
-    STATES.forEach(function (s) {
-      if (pool[s].naturalWidth !== w0 || pool[s].naturalHeight !== h0) {
-        bad.push(s + " " + pool[s].naturalWidth + "×" + pool[s].naturalHeight);
-      }
-    });
-    return {
-      ok: bad.length === 0,
-      detail: bad.length ? "≠ idle: " + bad.join("; ") : w0 + "×" + h0 + " (all match)",
-    };
-  }
-
-  function aspectRatioPass() {
-    if (!pool.idle.complete || pool.idle.naturalWidth < 2) return { ok: null, detail: "—" };
-    var w = pool.idle.naturalWidth;
-    var h = pool.idle.naturalHeight;
-    var r = w / h;
-    var target = 2 / 3;
-    var drift = Math.abs(r - target) / target;
-    var ok = drift <= 0.015;
-    return {
-      ok: ok,
-      detail: "w/h=" + r.toFixed(4) + " (target 0.6667, ±1.5%)",
-    };
-  }
-
-  function driftScoreVsIdle(otherKey) {
-    var a = pool.idle;
-    var b = pool[otherKey];
-    if (!a.complete || !b.complete || a.naturalWidth !== b.naturalWidth) return null;
-    var tw = 96;
-    var th = Math.round((tw * a.naturalHeight) / a.naturalWidth);
-    var c = document.createElement("canvas");
-    c.width = tw;
-    c.height = th;
-    var ctx = c.getContext("2d");
-    ctx.drawImage(a, 0, 0, tw, th);
-    var d1 = ctx.getImageData(0, 0, tw, th);
-    ctx.clearRect(0, 0, tw, th);
-    ctx.drawImage(b, 0, 0, tw, th);
-    var d2 = ctx.getImageData(0, 0, tw, th);
-    var sum = 0;
-    var wsum = 0;
-    for (var i = 0; i < d1.data.length; i += 4) {
-      var am = (d1.data[i + 3] + d2.data[i + 3]) / 510;
-      if (am < 0.05) continue;
-      sum +=
-        Math.abs(d1.data[i] - d2.data[i]) +
-        Math.abs(d1.data[i + 1] - d2.data[i + 1]) +
-        Math.abs(d1.data[i + 2] - d2.data[i + 2]);
-      wsum += 3;
-    }
-    if (!wsum) return null;
-    return sum / wsum / 255;
-  }
-
-  /** True if decoded RGBA buffers match exactly (same dimensions). */
-  function pixelsIdentical(imgA, imgB) {
-    if (!imgA.complete || !imgB.complete || imgA.naturalWidth < 1 || imgB.naturalWidth < 1) return false;
-    var w = imgA.naturalWidth;
-    var h = imgA.naturalHeight;
-    if (w !== imgB.naturalWidth || h !== imgB.naturalHeight) return false;
-    var c = document.createElement("canvas");
-    c.width = w;
-    c.height = h;
-    var ctx = c.getContext("2d");
-    var d1, d2;
-    try {
-      ctx.drawImage(imgA, 0, 0);
-      d1 = ctx.getImageData(0, 0, w, h);
-      ctx.clearRect(0, 0, w, h);
-      ctx.drawImage(imgB, 0, 0);
-      d2 = ctx.getImageData(0, 0, w, h);
-    } catch (e) {
-      return false;
-    }
-    var a = d1.data;
-    var b = d2.data;
-    for (var i = 0, n = a.length; i < n; i++) {
-      if (a[i] !== b[i]) return false;
-    }
-    return true;
-  }
-
-  /** Mean RGB drift below this (vs downsampled idle) counts as “visually identical” if not pixel-identical. */
-  var DUPLICATE_VISUAL_DRIFT_MAX = 0.001;
-
-  function duplicateCheckVsIdle(stateKey) {
-    if (stateKey === "idle") return { duplicate: false, kind: null, detail: "reference" };
-    var id = pool.idle;
-    var im = pool[stateKey];
-    if (!id.complete || !im.complete) return { duplicate: null, kind: null, detail: "not loaded" };
-    if (id.naturalWidth !== im.naturalWidth || id.naturalHeight !== im.naturalHeight) {
-      return {
-        duplicate: false,
-        kind: null,
-        detail: "dimensions differ from idle — not counted as duplicate",
-      };
-    }
-    if (pixelsIdentical(id, im)) {
-      return { duplicate: true, kind: "pixel", detail: "pixel-identical to idle (same decoded pixels)" };
-    }
-    var drift = driftScoreVsIdle(stateKey);
-    if (drift !== null && drift < DUPLICATE_VISUAL_DRIFT_MAX) {
-      return {
-        duplicate: true,
-        kind: "visual",
-        detail: "visually identical to idle (mean RGB drift " + (drift * 100).toFixed(4) + "%)",
-      };
-    }
-    return {
-      duplicate: false,
-      kind: null,
-      detail:
-        drift != null
-          ? "distinct from idle (mean RGB drift " + (drift * 100).toFixed(2) + "%)"
-          : "—",
-    };
-  }
-
-  function runChecks() {
-    var items = [];
-    var dupAnalysis = {
-      allNonIdleDuplicate: false,
-      duplicateStates: [],
-      distinctStates: [],
-    };
-
-    var dim = dimensionsMatch();
-    items.push({
-      id: "dim",
-      label: "All layers share identical width × height",
-      pass: dim.ok,
-      detail: dim.detail,
-    });
-
-    var ar = aspectRatioPass();
-    items.push({
-      id: "ar",
-      label: "Canvas aspect ratio ~ 2:3 (±1.5%)",
-      pass: ar.ok,
-      detail: ar.detail,
-    });
-
-    var alphaIdle =
-      pool.idle.complete && pool.idle.naturalWidth > 0
-        ? idleBackgroundTransparent(pool.idle)
-        : { ok: null, detail: "—" };
-    items.push({
-      id: "alpha",
-      label: "Idle: transparent background at edges (α sample)",
-      pass: alphaIdle.ok,
-      detail: alphaIdle.detail,
-    });
-
-    items.push({
-      id: "names",
-      label: "Files named idle / blink / happy / thinking / attention (.png)",
-      pass: true,
-      detail: "Use exact names in img/mvi-chat-avatar/ for production",
-    });
-
-    if (allLoaded()) {
-      var dupStates = [];
-      var distinctStates = [];
-      var perStateLines = [];
-      STATES.forEach(function (s) {
-        if (s === "idle") return;
-        var r = duplicateCheckVsIdle(s);
-        if (ASSET_QA_DEBUG_TOP) console.log("[asset-qa] duplicate check vs idle:", s, r);
-        if (r.duplicate === true) {
-          dupStates.push(s);
-          perStateLines.push(
-            s + ": " + (r.kind === "pixel" ? "pixel-identical" : "visually identical") + " to idle"
-          );
-        } else if (r.duplicate === false) {
-          distinctStates.push(s);
-          perStateLines.push(s + ": " + r.detail);
-        } else {
-          perStateLines.push(s + ": " + (r.detail || "—"));
-        }
-      });
-      var allNonIdleDup = dupStates.length === STATES.length - 1;
-      dupAnalysis.allNonIdleDuplicate = allNonIdleDup;
-      dupAnalysis.duplicateStates = dupStates;
-      dupAnalysis.distinctStates = distinctStates;
-      var passDistinct =
-        allNonIdleDup ? false : dupStates.length === 0 ? true : null;
-      items.push({
-        id: "distinct",
-        label: "Each state PNG is visually different from idle (not a duplicate export)",
-        pass: passDistinct,
-        detail: allNonIdleDup
-          ? "These files appear to be identical exports of idle (pixel-identical or visually identical). State switching works, but there is nothing new to show until you replace them with distinct art: " +
-            dupStates.join(", ") +
-            "."
-          : dupStates.length
-          ? "Duplicates vs idle: " +
-            dupStates.join(", ") +
-            ". Distinct: " +
-            distinctStates.join(", ") +
-            ". " +
-            perStateLines.join(" · ")
-          : "All non-idle states differ from idle. " + perStateLines.join(" · "),
-      });
-    }
-
-    if (currentState !== "idle" && allLoaded()) {
-      var score = driftScoreVsIdle(currentState);
-      if (score != null) {
-        var low = score < 0.035;
-        var mid = score < 0.08;
-        items.push({
-          id: "drift",
-          label: "Low visual drift vs idle (current: " + currentState + ")",
-          pass: low ? true : mid ? null : false,
-          detail: "Mean channel diff ~" + (score * 100).toFixed(2) + "% (lower better; <3.5% strong)",
-        });
-      }
-    }
-
-    var mf = document.getElementById("manFeet").checked;
-    var mm = document.getElementById("manMid").checked;
-    var mp = document.getElementById("manPadding").checked;
-    items.push({
-      id: "mfeet",
-      label: "Manual: feet on baseline guide (all states)",
-      pass: mf ? true : null,
-      detail: mf ? "Signed off" : "Check each state against blue dashed line",
-    });
-    items.push({
-      id: "mmid",
-      label: "Manual: midline vs pink center guide",
-      pass: mm ? true : null,
-      detail: mm ? "Signed off" : "Nose–belt stack on center in each state",
-    });
-    items.push({
-      id: "mpad",
-      label: "Manual: toe room ~4–7% from canvas bottom",
-      pass: mp ? true : null,
-      detail: mp ? "Signed off" : "Match ASSET_PACK_SPEC padding",
-    });
-
-    checklistEl.innerHTML = items
-      .map(function (it) {
-        var b =
-          it.pass === true ? "pass" : it.pass === false ? "fail" : it.pass == null ? "warn" : "na";
-        var lbl =
-          it.pass === true ? "Pass" : it.pass === false ? "Fail" : it.pass == null ? "Review" : "—";
-        return (
-          "<li><span class=\"badge " +
-          b +
-          "\">" +
-          lbl +
-          "</span><div><div>" +
-          it.label +
-          "</div><div style=\"color:#94a3b8;font-size:0.72rem;margin-top:0.2rem\">" +
-          (it.detail || "") +
-          "</div></div></li>"
-        );
-      })
-      .join("");
-
-    var finalEl = document.getElementById("qaFinalResult");
-    if (finalEl) {
-      if (!allLoaded()) {
-        finalEl.className = "qa-final-result wait";
-        finalEl.textContent =
-          "Load all five state PNGs (or click “Load repo defaults”) to run duplicate detection and show the final result.";
-      } else if (dupAnalysis.allNonIdleDuplicate) {
-        finalEl.className = "qa-final-result duplicates";
-        finalEl.textContent =
-          "State switching works, but avatar art files are duplicates, so no visible change can occur. Replace idle.png, blink.png, happy.png, thinking.png, and attention.png with real distinct exports; the preview will then change when you switch states.";
-      } else if (dupAnalysis.duplicateStates.length === 0) {
-        finalEl.className = "qa-final-result ok";
-        finalEl.textContent =
-          "State switching works and non-idle PNGs differ from idle — this check passes. You should see visible changes when switching states; continue with alignment and manual sign-offs above.";
-      } else {
-        finalEl.className = "qa-final-result partial";
-        finalEl.textContent =
-          "State switching works, but some files still match idle (" +
-          dupAnalysis.duplicateStates.join(", ") +
-          "). Replace those with distinct exports. Already distinct: " +
-          dupAnalysis.distinctStates.join(", ") +
-          ".";
-      }
-    }
-  }
-
-  function setPreviewState(next) {
-    if (!next || STATES.indexOf(next) < 0) return;
-    if (ASSET_QA_DEBUG_TOP) {
-      console.log("[asset-qa] setPreviewState", {
-        next: next,
-        before: currentState,
-        urlsNext: urls[next],
-        urlsIdle: urls.idle,
-      });
-    }
-    currentState = next;
-    var qaLbl = document.getElementById("qaPreviewStateLabel");
-    if (qaLbl) qaLbl.textContent = "Showing: " + next;
-    var stateBtnsEl = document.getElementById("stateBtns");
-    if (stateBtnsEl) {
-      var topBtns = stateBtnsEl.getElementsByTagName("button");
-      for (var i = 0; i < topBtns.length; i++) {
-        var btn = topBtns[i];
-        var on = btn.getAttribute("data-state") === next;
-        if (on) btn.classList.add("active");
-        else btn.classList.remove("active");
-      }
-    }
-    var gridEl = document.getElementById("dropGrid");
-    if (gridEl) {
-      var zones = gridEl.getElementsByClassName("drop-zone");
-      for (var j = 0; j < zones.length; j++) {
-        var z = zones[j];
-        var onz = z.getAttribute("data-state") === next;
-        if (onz) z.classList.add("preview-active");
-        else z.classList.remove("preview-active");
-      }
-    }
-    updateStageImages(true);
-    if (ASSET_QA_DEBUG_TOP) {
-      console.log("[asset-qa] setPreviewState after", { currentState: currentState });
-    }
-  }
-
-  /* Top state buttons: direct per-button listeners (same pattern as bottom tiles). Delegation + target walk failed in some embedded browsers. */
-  var stateBtns = document.getElementById("stateBtns");
-  if (!stateBtns) {
-    console.error("[asset-qa] #stateBtns missing; state switching disabled.");
+ function updateDropMeta(state) {
+  /* Must scope to #dropGrid: state buttons also use data-state and appear first in the document. */
+  var gridEl = document.getElementById("dropGrid");
+  if (!gridEl) return;
+  var zone = gridEl.querySelector('[data-state="' + state + '"]');
+  if (!zone) return;
+  var im = pool[state];
+  var meta = zone.querySelector(".meta");
+  if (!meta) return;
+  if (im.naturalWidth > 0) {
+   zone.classList.add("loaded");
+   meta.textContent = im.naturalWidth + "×" + im.naturalHeight + " px";
   } else {
-    STATES.forEach(function (s) {
-      var b = document.createElement("button");
-      b.type = "button";
-      b.textContent = s;
-      b.setAttribute("data-state", s);
-      b.className = s === currentState ? "active" : "";
-      b.addEventListener("click", function () {
-        if (ASSET_QA_DEBUG_TOP) console.log("[asset-qa] TOP button click:", s);
-        setPreviewState(s);
-      });
-      stateBtns.appendChild(b);
-    });
+   zone.classList.remove("loaded");
+   meta.textContent = "Not loaded";
   }
+ }
 
-  /* Drop zones */
-  var grid = document.getElementById("dropGrid");
+ /** Corners + upper-edge samples (not center — body is opaque). Pass if most samples look transparent. */
+ function idleBackgroundTransparent(img) {
+  if (!img.complete || img.naturalWidth < 4) return { ok: null, detail: "—" };
+  var w = img.naturalWidth;
+  var h = img.naturalHeight;
+  var c = document.createElement("canvas");
+  c.width = w;
+  c.height = h;
+  var ctx = c.getContext("2d");
+  try {
+   ctx.drawImage(img, 0, 0);
+  } catch (e) {
+   return { ok: false, detail: "Canvas tainted (try local server or PNG only)" };
+  }
+  var pts = [
+   [0, 0],
+   [w - 1, 0],
+   [2, 2],
+   [w - 3, 2],
+   [0, Math.min(h - 1, Math.floor(h * 0.06))],
+   [w - 1, Math.min(h - 1, Math.floor(h * 0.06))],
+  ];
+  var transparent = 0;
+  pts.forEach(function (p) {
+   var d = ctx.getImageData(p[0], p[1], 1, 1).data;
+   if (d[3] < 12) transparent += 1;
+  });
+  var pass = transparent >= 4;
+  return {
+   ok: pass,
+   detail: transparent + "/" + pts.length + " edge samples alpha<12 (expect transparent BG)",
+  };
+ }
+
+ function dimensionsMatch() {
+  if (!allLoaded()) return { ok: null, detail: "Load all 5 images" };
+  var w0 = pool.idle.naturalWidth;
+  var h0 = pool.idle.naturalHeight;
+  var bad = [];
   STATES.forEach(function (s) {
-    var z = document.createElement("div");
-    z.className = "drop-zone" + (s === currentState ? " preview-active" : "");
-    z.dataset.state = s;
-    z.innerHTML =
-      "<strong>" +
-      s +
-      ".png</strong><span class=\"meta\">Not loaded</span><button type=\"button\" class=\"drop-replace\">Replace PNG…</button>";
-    z.addEventListener("dragover", function (e) {
-      e.preventDefault();
-      z.classList.add("dragover");
-    });
-    z.addEventListener("dragleave", function () {
-      z.classList.remove("dragover");
-    });
-    z.addEventListener("drop", function (e) {
-      e.preventDefault();
-      z.classList.remove("dragover");
-      var f = e.dataTransfer.files[0];
-      if (f && f.type === "image/png") loadFileToState(s, f);
-    });
-    z.addEventListener("click", function () {
-      setPreviewState(s);
-    });
-    var rep = z.querySelector(".drop-replace");
-    if (rep) {
-      rep.addEventListener("click", function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-        pickTarget = s;
-        filePicker.click();
-      });
+   if (pool[s].naturalWidth !== w0 || pool[s].naturalHeight !== h0) {
+    bad.push(s + " " + pool[s].naturalWidth + "×" + pool[s].naturalHeight);
+   }
+  });
+  return {
+   ok: bad.length === 0,
+   detail: bad.length ? "≠ idle: " + bad.join("; ") : w0 + "×" + h0 + " (all match)",
+  };
+ }
+
+ function aspectRatioPass() {
+  if (!pool.idle.complete || pool.idle.naturalWidth < 2) return { ok: null, detail: "—" };
+  var w = pool.idle.naturalWidth;
+  var h = pool.idle.naturalHeight;
+  var r = w / h;
+  var target = 2 / 3;
+  var drift = Math.abs(r - target) / target;
+  var ok = drift <= 0.015;
+  return {
+   ok: ok,
+   detail: "w/h=" + r.toFixed(4) + " (target 0.6667, ±1.5%)",
+  };
+ }
+
+ function driftScoreVsIdle(otherKey) {
+  var a = pool.idle;
+  var b = pool[otherKey];
+  if (!a.complete || !b.complete || a.naturalWidth !== b.naturalWidth) return null;
+  var tw = 96;
+  var th = Math.round((tw * a.naturalHeight) / a.naturalWidth);
+  var c = document.createElement("canvas");
+  c.width = tw;
+  c.height = th;
+  var ctx = c.getContext("2d");
+  ctx.drawImage(a, 0, 0, tw, th);
+  var d1 = ctx.getImageData(0, 0, tw, th);
+  ctx.clearRect(0, 0, tw, th);
+  ctx.drawImage(b, 0, 0, tw, th);
+  var d2 = ctx.getImageData(0, 0, tw, th);
+  var sum = 0;
+  var wsum = 0;
+  for (var i = 0; i < d1.data.length; i += 4) {
+   var am = (d1.data[i + 3] + d2.data[i + 3]) / 510;
+   if (am < 0.05) continue;
+   sum +=
+    Math.abs(d1.data[i] - d2.data[i]) +
+    Math.abs(d1.data[i + 1] - d2.data[i + 1]) +
+    Math.abs(d1.data[i + 2] - d2.data[i + 2]);
+   wsum += 3;
+  }
+  if (!wsum) return null;
+  return sum / wsum / 255;
+ }
+
+ /** True if decoded RGBA buffers match exactly (same dimensions). */
+ function pixelsIdentical(imgA, imgB) {
+  if (!imgA.complete || !imgB.complete || imgA.naturalWidth < 1 || imgB.naturalWidth < 1) return false;
+  var w = imgA.naturalWidth;
+  var h = imgA.naturalHeight;
+  if (w !== imgB.naturalWidth || h !== imgB.naturalHeight) return false;
+  var c = document.createElement("canvas");
+  c.width = w;
+  c.height = h;
+  var ctx = c.getContext("2d");
+  var d1, d2;
+  try {
+   ctx.drawImage(imgA, 0, 0);
+   d1 = ctx.getImageData(0, 0, w, h);
+   ctx.clearRect(0, 0, w, h);
+   ctx.drawImage(imgB, 0, 0);
+   d2 = ctx.getImageData(0, 0, w, h);
+  } catch (e) {
+   return false;
+  }
+  var a = d1.data;
+  var b = d2.data;
+  for (var i = 0, n = a.length; i < n; i++) {
+   if (a[i] !== b[i]) return false;
+  }
+  return true;
+ }
+
+ /** Mean RGB drift below this (vs downsampled idle) counts as “visually identical” if not pixel-identical. */
+ var DUPLICATE_VISUAL_DRIFT_MAX = 0.001;
+
+ function duplicateCheckVsIdle(stateKey) {
+  if (stateKey === "idle") return { duplicate: false, kind: null, detail: "reference" };
+  var id = pool.idle;
+  var im = pool[stateKey];
+  if (!id.complete || !im.complete) return { duplicate: null, kind: null, detail: "not loaded" };
+  if (id.naturalWidth !== im.naturalWidth || id.naturalHeight !== im.naturalHeight) {
+   return {
+    duplicate: false,
+    kind: null,
+    detail: "dimensions differ from idle — not counted as duplicate",
+   };
+  }
+  if (pixelsIdentical(id, im)) {
+   return { duplicate: true, kind: "pixel", detail: "pixel-identical to idle (same decoded pixels)" };
+  }
+  var drift = driftScoreVsIdle(stateKey);
+  if (drift !== null && drift < DUPLICATE_VISUAL_DRIFT_MAX) {
+   return {
+    duplicate: true,
+    kind: "visual",
+    detail: "visually identical to idle (mean RGB drift " + (drift * 100).toFixed(4) + "%)",
+   };
+  }
+  return {
+   duplicate: false,
+   kind: null,
+   detail:
+    drift != null
+     ? "distinct from idle (mean RGB drift " + (drift * 100).toFixed(2) + "%)"
+     : "—",
+  };
+ }
+
+ function runChecks() {
+  var items = [];
+  var dupAnalysis = {
+   allNonIdleDuplicate: false,
+   duplicateStates: [],
+   distinctStates: [],
+  };
+
+  var dim = dimensionsMatch();
+  items.push({
+   id: "dim",
+   label: "All layers share identical width × height",
+   pass: dim.ok,
+   detail: dim.detail,
+  });
+
+  var ar = aspectRatioPass();
+  items.push({
+   id: "ar",
+   label: "Canvas aspect ratio ~ 2:3 (±1.5%)",
+   pass: ar.ok,
+   detail: ar.detail,
+  });
+
+  var alphaIdle =
+   pool.idle.complete && pool.idle.naturalWidth > 0
+    ? idleBackgroundTransparent(pool.idle)
+    : { ok: null, detail: "—" };
+  items.push({
+   id: "alpha",
+   label: "Idle: transparent background at edges (α sample)",
+   pass: alphaIdle.ok,
+   detail: alphaIdle.detail,
+  });
+
+  items.push({
+   id: "names",
+   label: "Files named idle / blink / happy / thinking / attention (.png)",
+   pass: true,
+   detail: "Use exact names in img/mvi-chat-avatar/ for production",
+  });
+
+  if (allLoaded()) {
+   var dupStates = [];
+   var distinctStates = [];
+   var perStateLines = [];
+   STATES.forEach(function (s) {
+    if (s === "idle") return;
+    var r = duplicateCheckVsIdle(s);
+    if (ASSET_QA_DEBUG_TOP) console.log("[asset-qa] duplicate check vs idle:", s, r);
+    if (r.duplicate === true) {
+     dupStates.push(s);
+     perStateLines.push(
+      s + ": " + (r.kind === "pixel" ? "pixel-identical" : "visually identical") + " to idle"
+     );
+    } else if (r.duplicate === false) {
+     distinctStates.push(s);
+     perStateLines.push(s + ": " + r.detail);
+    } else {
+     perStateLines.push(s + ": " + (r.detail || "—"));
     }
-    grid.appendChild(z);
-  });
-
-  filePicker.addEventListener("change", function () {
-    var f = filePicker.files[0];
-    if (f && pickTarget) loadFileToState(pickTarget, f);
-    pickTarget = null;
-    filePicker.value = "";
-  });
-
-  function loadFileToState(state, file) {
-    var u = URL.createObjectURL(file);
-    setRevoke(state, u);
-    pool[state].src = u;
-    setPreviewState(state);
+   });
+   var allNonIdleDup = dupStates.length === STATES.length - 1;
+   dupAnalysis.allNonIdleDuplicate = allNonIdleDup;
+   dupAnalysis.duplicateStates = dupStates;
+   dupAnalysis.distinctStates = distinctStates;
+   var passDistinct =
+    allNonIdleDup ? false : dupStates.length === 0 ? true : null;
+   items.push({
+    id: "distinct",
+    label: "Each state PNG is visually different from idle (not a duplicate export)",
+    pass: passDistinct,
+    detail: allNonIdleDup
+     ? "These files appear to be identical exports of idle (pixel-identical or visually identical). State switching works, but there is nothing new to show until you replace them with distinct art: " +
+      dupStates.join(", ") +
+      "."
+     : dupStates.length
+     ? "Duplicates vs idle: " +
+      dupStates.join(", ") +
+      ". Distinct: " +
+      distinctStates.join(", ") +
+      ". " +
+      perStateLines.join(" · ")
+     : "All non-idle states differ from idle. " + perStateLines.join(" · "),
+   });
   }
 
-  function loadDefaults() {
-    STATES.forEach(function (s) {
-      if (urls[s] && urls[s].indexOf("blob:") === 0) {
-        try {
-          URL.revokeObjectURL(urls[s]);
-        } catch (e) {}
-      }
-      var rel = DEFAULT_BASE + s + ".png";
-      if (ASSET_QA_DEBUG_TOP) {
-        var abs = new URL(rel, window.location.href).href;
-        console.log("[asset-qa] default path", s + ".png", "→", abs);
-      }
-      urls[s] = rel;
-      pool[s].src = urls[s];
+  if (currentState !== "idle" && allLoaded()) {
+   var score = driftScoreVsIdle(currentState);
+   if (score != null) {
+    var low = score < 0.035;
+    var mid = score < 0.08;
+    items.push({
+     id: "drift",
+     label: "Low visual drift vs idle (current: " + currentState + ")",
+     pass: low ? true : mid ? null : false,
+     detail: "Mean channel diff ~" + (score * 100).toFixed(2) + "% (lower better; <3.5% strong)",
     });
-    updateStageImages();
+   }
   }
 
-  document.getElementById("btnLoadDefaults").addEventListener("click", loadDefaults);
+  var mf = document.getElementById("manFeet").checked;
+  var mm = document.getElementById("manMid").checked;
+  var mp = document.getElementById("manPadding").checked;
+  items.push({
+   id: "mfeet",
+   label: "Manual: feet on baseline guide (all states)",
+   pass: mf ? true : null,
+   detail: mf ? "Signed off" : "Check each state against blue dashed line",
+  });
+  items.push({
+   id: "mmid",
+   label: "Manual: midline vs pink center guide",
+   pass: mm ? true : null,
+   detail: mm ? "Signed off" : "Nose–belt stack on center in each state",
+  });
+  items.push({
+   id: "mpad",
+   label: "Manual: toe room ~4–7% from canvas bottom",
+   pass: mp ? true : null,
+   detail: mp ? "Signed off" : "Match ASSET_PACK_SPEC padding",
+  });
 
-  chkOverlay.addEventListener("change", refreshChrome);
-  chkCenter.addEventListener("change", refreshChrome);
-  chkBaseline.addEventListener("change", refreshChrome);
-  baselinePct.addEventListener("input", refreshChrome);
+  checklistEl.innerHTML = items
+   .map(function (it) {
+    var b =
+     it.pass === true ? "pass" : it.pass === false ? "fail" : it.pass == null ? "warn" : "na";
+    var lbl =
+     it.pass === true ? "Pass" : it.pass === false ? "Fail" : it.pass == null ? "Review" : "—";
+    return (
+     "<li><span class=\"badge " +
+     b +
+     "\">" +
+     lbl +
+     "</span><div><div>" +
+     it.label +
+     "</div><div style=\"color:#94a3b8;font-size:0.72rem;margin-top:0.2rem\">" +
+     (it.detail || "") +
+     "</div></div></li>"
+    );
+   })
+   .join("");
 
-  document.getElementById("manFeet").addEventListener("change", runChecks);
-  document.getElementById("manMid").addEventListener("change", runChecks);
-  document.getElementById("manPadding").addEventListener("change", runChecks);
+  var finalEl = document.getElementById("qaFinalResult");
+  if (finalEl) {
+   if (!allLoaded()) {
+    finalEl.className = "qa-final-result wait";
+    finalEl.textContent =
+     "Load all five state PNGs (or click “Load repo defaults”) to run duplicate detection and show the final result.";
+   } else if (dupAnalysis.allNonIdleDuplicate) {
+    finalEl.className = "qa-final-result duplicates";
+    finalEl.textContent =
+     "State switching works, but avatar art files are duplicates, so no visible change can occur. Replace idle.png, blink.png, happy.png, thinking.png, and attention.png with real distinct exports; the preview will then change when you switch states.";
+   } else if (dupAnalysis.duplicateStates.length === 0) {
+    finalEl.className = "qa-final-result ok";
+    finalEl.textContent =
+     "State switching works and non-idle PNGs differ from idle — this check passes. You should see visible changes when switching states; continue with alignment and manual sign-offs above.";
+   } else {
+    finalEl.className = "qa-final-result partial";
+    finalEl.textContent =
+     "State switching works, but some files still match idle (" +
+     dupAnalysis.duplicateStates.join(", ") +
+     "). Replace those with distinct exports. Already distinct: " +
+     dupAnalysis.distinctStates.join(", ") +
+     ".";
+   }
+  }
+ }
 
-  loadDefaults();
-  setPreviewState(currentState);
+ function setPreviewState(next) {
+  if (!next || STATES.indexOf(next) < 0) return;
+  if (ASSET_QA_DEBUG_TOP) {
+   console.log("[asset-qa] setPreviewState", {
+    next: next,
+    before: currentState,
+    urlsNext: urls[next],
+    urlsIdle: urls.idle,
+   });
+  }
+  currentState = next;
+  var qaLbl = document.getElementById("qaPreviewStateLabel");
+  if (qaLbl) qaLbl.textContent = "Showing: " + next;
+  var stateBtnsEl = document.getElementById("stateBtns");
+  if (stateBtnsEl) {
+   var topBtns = stateBtnsEl.getElementsByTagName("button");
+   for (var i = 0; i < topBtns.length; i++) {
+    var btn = topBtns[i];
+    var on = btn.getAttribute("data-state") === next;
+    if (on) btn.classList.add("active");
+    else btn.classList.remove("active");
+   }
+  }
+  var gridEl = document.getElementById("dropGrid");
+  if (gridEl) {
+   var zones = gridEl.getElementsByClassName("drop-zone");
+   for (var j = 0; j < zones.length; j++) {
+    var z = zones[j];
+    var onz = z.getAttribute("data-state") === next;
+    if (onz) z.classList.add("preview-active");
+    else z.classList.remove("preview-active");
+   }
+  }
+  updateStageImages(true);
+  if (ASSET_QA_DEBUG_TOP) {
+   console.log("[asset-qa] setPreviewState after", { currentState: currentState });
+  }
+ }
+
+ /* Top state buttons: direct per-button listeners (same pattern as bottom tiles). Delegation + target walk failed in some embedded browsers. */
+ var stateBtns = document.getElementById("stateBtns");
+ if (!stateBtns) {
+  console.error("[asset-qa] #stateBtns missing; state switching disabled.");
+ } else {
+  STATES.forEach(function (s) {
+   var b = document.createElement("button");
+   b.type = "button";
+   b.textContent = s;
+   b.setAttribute("data-state", s);
+   b.className = s === currentState ? "active" : "";
+   b.addEventListener("click", function () {
+    if (ASSET_QA_DEBUG_TOP) console.log("[asset-qa] TOP button click:", s);
+    setPreviewState(s);
+   });
+   stateBtns.appendChild(b);
+  });
+ }
+
+ /* Drop zones */
+ var grid = document.getElementById("dropGrid");
+ STATES.forEach(function (s) {
+  var z = document.createElement("div");
+  z.className = "drop-zone" + (s === currentState ? " preview-active" : "");
+  z.dataset.state = s;
+  z.innerHTML =
+   "<strong>" +
+   s +
+   ".png</strong><span class=\"meta\">Not loaded</span><button type=\"button\" class=\"drop-replace\">Replace PNG…</button>";
+  z.addEventListener("dragover", function (e) {
+   e.preventDefault();
+   z.classList.add("dragover");
+  });
+  z.addEventListener("dragleave", function () {
+   z.classList.remove("dragover");
+  });
+  z.addEventListener("drop", function (e) {
+   e.preventDefault();
+   z.classList.remove("dragover");
+   var f = e.dataTransfer.files[0];
+   if (f && f.type === "image/png") loadFileToState(s, f);
+  });
+  z.addEventListener("click", function () {
+   setPreviewState(s);
+  });
+  var rep = z.querySelector(".drop-replace");
+  if (rep) {
+   rep.addEventListener("click", function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+    pickTarget = s;
+    filePicker.click();
+   });
+  }
+  grid.appendChild(z);
+ });
+
+ filePicker.addEventListener("change", function () {
+  var f = filePicker.files[0];
+  if (f && pickTarget) loadFileToState(pickTarget, f);
+  pickTarget = null;
+  filePicker.value = "";
+ });
+
+ function loadFileToState(state, file) {
+  var u = URL.createObjectURL(file);
+  setRevoke(state, u);
+  pool[state].src = u;
+  setPreviewState(state);
+ }
+
+ function loadDefaults() {
+  STATES.forEach(function (s) {
+   if (urls[s] && urls[s].indexOf("blob:") === 0) {
+    try {
+     URL.revokeObjectURL(urls[s]);
+    } catch (e) {}
+   }
+   var rel = DEFAULT_BASE + s + ".png";
+   if (ASSET_QA_DEBUG_TOP) {
+    var abs = new URL(rel, window.location.href).href;
+    console.log("[asset-qa] default path", s + ".png", "→", abs);
+   }
+   urls[s] = rel;
+   pool[s].src = urls[s];
+  });
+  updateStageImages();
+ }
+
+ document.getElementById("btnLoadDefaults").addEventListener("click", loadDefaults);
+
+ chkOverlay.addEventListener("change", refreshChrome);
+ chkCenter.addEventListener("change", refreshChrome);
+ chkBaseline.addEventListener("change", refreshChrome);
+ baselinePct.addEventListener("input", refreshChrome);
+
+ document.getElementById("manFeet").addEventListener("change", runChecks);
+ document.getElementById("manMid").addEventListener("change", runChecks);
+ document.getElementById("manPadding").addEventListener("change", runChecks);
+
+ loadDefaults();
+ setPreviewState(currentState);
 })();
-  </script>
+ </script>
 </body>
 </html>

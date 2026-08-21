@@ -1,169 +1,169 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Quote results — local preview launcher</title>
-  <style>
-    body {
-      font-family: Inter, system-ui, sans-serif;
-      max-width: 42rem;
-      margin: 2rem auto;
-      padding: 0 1.25rem;
-      color: #1f2937;
-      line-height: 1.5;
-    }
-    h1 { font-size: 1.35rem; margin-bottom: 0.35rem; }
-    p { color: #4b5563; }
-    .card {
-      border: 1px solid #e5e7eb;
-      border-radius: 0.75rem;
-      padding: 1rem 1.15rem;
-      margin: 1rem 0;
-      background: #f9fafb;
-    }
-    a.btn {
-      display: inline-block;
-      margin: 0.35rem 0.5rem 0.35rem 0;
-      padding: 0.55rem 1rem;
-      border-radius: 0.5rem;
-      background: #0d47a1;
-      color: #fff;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 0.95rem;
-    }
-    a.btn.secondary { background: #374151; }
-    a.btn.gold { background: #c9a227; color: #1a365d; }
-    code { font-size: 0.88em; background: #eef2ff; padding: 0.1em 0.35em; border-radius: 4px; }
-    ul { padding-left: 1.2rem; }
-  </style>
+ <meta charset="utf-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1" />
+ <title>Quote results — local preview launcher</title>
+ <style>
+  body {
+   font-family: Inter, system-ui, sans-serif;
+   max-width: 42rem;
+   margin: 2rem auto;
+   padding: 0 1.25rem;
+   color: #1f2937;
+   line-height: 1.5;
+  }
+  h1 { font-size: 1.35rem; margin-bottom: 0.35rem; }
+  p { color: #4b5563; }
+  .card {
+   border: 1px solid #e5e7eb;
+   border-radius: 0.75rem;
+   padding: 1rem 1.15rem;
+   margin: 1rem 0;
+   background: #f9fafb;
+  }
+  a.btn {
+   display: inline-block;
+   margin: 0.35rem 0.5rem 0.35rem 0;
+   padding: 0.55rem 1rem;
+   border-radius: 0.5rem;
+   background: #0d47a1;
+   color: #fff;
+   text-decoration: none;
+   font-weight: 600;
+   font-size: 0.95rem;
+  }
+  a.btn.secondary { background: #374151; }
+  a.btn.gold { background: #c9a227; color: #1a365d; }
+  code { font-size: 0.88em; background: #eef2ff; padding: 0.1em 0.35em; border-radius: 4px; }
+  ul { padding-left: 1.2rem; }
+ </style>
 </head>
 <body>
-  <h1>Quote results — local preview</h1>
-  <p>
-    Use the buttons below to load <code>quote-results.html</code> with sample session data
-    (same as after the quote wizard). Keep this tab open for reference while we edit the page.
-  </p>
-  <p>
-    Server: <strong id="origin-hint">http://127.0.0.1:4173</strong> —
-    run <code>npm run preview</code> from the project root if links fail.
-  </p>
+ <h1>Quote results — local preview</h1>
+ <p>
+  Use the buttons below to load <code>quote-results.html</code> with sample session data
+  (same as after the quote wizard). Keep this tab open for reference while we edit the page.
+ </p>
+ <p>
+  Server: <strong id="origin-hint">http://127.0.0.1:4173</strong> —
+  run <code>npm run preview</code> from the project root if links fail.
+ </p>
 
-  <div class="card">
-    <strong>Full results (step 2)</strong>
-    <ul>
-      <li><a class="btn" href="#" data-scenario="es">Spanish — sample quote</a></li>
-      <li><a class="btn" href="#" data-scenario="en">English — sample quote (/en/)</a></li>
-      <li><a class="btn secondary" href="#" data-scenario="es-warn">Spanish — lead save warning</a></li>
-    </ul>
-  </div>
+ <div class="card">
+  <strong>Full results (step 2)</strong>
+  <ul>
+   <li><a class="btn" href="#" data-scenario="es">Spanish — sample quote</a></li>
+   <li><a class="btn" href="#" data-scenario="en">English — sample quote (/en/)</a></li>
+   <li><a class="btn secondary" href="#" data-scenario="es-warn">Spanish — lead save warning</a></li>
+  </ul>
+ </div>
 
-  <div class="card">
-    <strong>Schedule modal (step 3)</strong>
-    <ul>
-      <li><a class="btn gold" href="#" data-scenario="es-schedule">Spanish + open scheduler</a></li>
-      <li><a class="btn gold" href="#" data-scenario="en-schedule">English (/en/) + open scheduler</a></li>
-    </ul>
-  </div>
+ <div class="card">
+  <strong>Schedule modal (step 3)</strong>
+  <ul>
+   <li><a class="btn gold" href="#" data-scenario="es-schedule">Spanish + open scheduler</a></li>
+   <li><a class="btn gold" href="#" data-scenario="en-schedule">English (/en/) + open scheduler</a></li>
+  </ul>
+ </div>
 
-  <div class="card">
-    <strong>Empty state</strong>
-    <ul>
-      <li><a class="btn secondary" href="../quote-results.html">No session data — Spanish</a></li>
-      <li><a class="btn secondary" href="../en/quote-results.html">No session data — English</a></li>
-    </ul>
-  </div>
+ <div class="card">
+  <strong>Empty state</strong>
+  <ul>
+   <li><a class="btn secondary" href="../quote-results.html">No session data — Spanish</a></li>
+   <li><a class="btn secondary" href="../en/quote-results.html">No session data — English</a></li>
+  </ul>
+ </div>
 
-  <script>
-    (function () {
-      var base = location.origin;
-      document.getElementById("origin-hint").textContent = base;
+ <script>
+  (function () {
+   var base = location.origin;
+   document.getElementById("origin-hint").textContent = base;
 
-      var samples = {
-        es: {
-          lang: "es",
-          firstName: "María",
-          quote_low: "$42.50",
-          quote_high: "$68.25",
-          quote_anchor: "$55.38",
-          age: 62,
-          sex: "female",
-          smoker: false,
-          dob: "1963-05-15",
-          dobDisplay: "15/5/1963",
-          state: "NE",
-          coverage: 15000,
-          savedAt: new Date().toISOString(),
-          leadId: "preview-local-es",
-          leadSaved: true,
-          syncError: null,
-          sessionClientId: "preview-session-local",
-        },
-        en: {
-          lang: "en",
-          firstName: "Maria",
-          quote_low: "$42.50",
-          quote_high: "$68.25",
-          quote_anchor: "$55.38",
-          age: 62,
-          sex: "female",
-          smoker: false,
-          dob: "1963-05-15",
-          dobDisplay: "05/15/1963",
-          state: "NE",
-          coverage: 15000,
-          savedAt: new Date().toISOString(),
-          leadId: "preview-local-en",
-          leadSaved: true,
-          syncError: null,
-          sessionClientId: "preview-session-local",
-        },
-        "es-warn": {
-          lang: "es",
-          firstName: "Juan",
-          quote_low: "$38.00",
-          quote_high: "$61.00",
-          quote_anchor: "$49.50",
-          age: 58,
-          sex: "male",
-          smoker: true,
-          dob: "1967-08-20",
-          dobDisplay: "20/8/1967",
-          state: "NE",
-          coverage: 10000,
-          savedAt: new Date().toISOString(),
-          leadId: null,
-          leadSaved: false,
-          syncError: "No pudimos guardar sus datos (vista previa).",
-          sessionClientId: "preview-session-local",
-        },
-      };
+   var samples = {
+    es: {
+     lang: "es",
+     firstName: "María",
+     quote_low: "$42.50",
+     quote_high: "$68.25",
+     quote_anchor: "$55.38",
+     age: 62,
+     sex: "female",
+     smoker: false,
+     dob: "1963-05-15",
+     dobDisplay: "15/5/1963",
+     state: "NE",
+     coverage: 15000,
+     savedAt: new Date().toISOString(),
+     leadId: "preview-local-es",
+     leadSaved: true,
+     syncError: null,
+     sessionClientId: "preview-session-local",
+    },
+    en: {
+     lang: "en",
+     firstName: "Maria",
+     quote_low: "$42.50",
+     quote_high: "$68.25",
+     quote_anchor: "$55.38",
+     age: 62,
+     sex: "female",
+     smoker: false,
+     dob: "1963-05-15",
+     dobDisplay: "05/15/1963",
+     state: "NE",
+     coverage: 15000,
+     savedAt: new Date().toISOString(),
+     leadId: "preview-local-en",
+     leadSaved: true,
+     syncError: null,
+     sessionClientId: "preview-session-local",
+    },
+    "es-warn": {
+     lang: "es",
+     firstName: "Juan",
+     quote_low: "$38.00",
+     quote_high: "$61.00",
+     quote_anchor: "$49.50",
+     age: 58,
+     sex: "male",
+     smoker: true,
+     dob: "1967-08-20",
+     dobDisplay: "20/8/1967",
+     state: "NE",
+     coverage: 10000,
+     savedAt: new Date().toISOString(),
+     leadId: null,
+     leadSaved: false,
+     syncError: "No pudimos guardar sus datos (vista previa).",
+     sessionClientId: "preview-session-local",
+    },
+   };
 
-      function go(scenario) {
-        var key = scenario.replace("-schedule", "");
-        var data = samples[key];
-        if (!data) return;
-        try {
-          sessionStorage.setItem("mviNebraskaQuoteResult", JSON.stringify(data));
-          sessionStorage.setItem("sessionLang", data.lang);
-        } catch (e) {
-          alert("sessionStorage blocked: " + e.message);
-          return;
-        }
-        var onEn = scenario.indexOf("en") === 0;
-        var url = base + (onEn ? "/en/quote-results.html" : "/quote-results.html");
-        if (scenario.indexOf("schedule") !== -1) url += "?schedule=1";
-        location.href = url;
-      }
+   function go(scenario) {
+    var key = scenario.replace("-schedule", "");
+    var data = samples[key];
+    if (!data) return;
+    try {
+     sessionStorage.setItem("mviNebraskaQuoteResult", JSON.stringify(data));
+     sessionStorage.setItem("sessionLang", data.lang);
+    } catch (e) {
+     alert("sessionStorage blocked: " + e.message);
+     return;
+    }
+    var onEn = scenario.indexOf("en") === 0;
+    var url = base + (onEn ? "/en/quote-results.html" : "/quote-results.html");
+    if (scenario.indexOf("schedule") !== -1) url += "?schedule=1";
+    location.href = url;
+   }
 
-      document.querySelectorAll("[data-scenario]").forEach(function (link) {
-        link.addEventListener("click", function (e) {
-          e.preventDefault();
-          go(link.getAttribute("data-scenario"));
-        });
-      });
-    })();
-  </script>
+   document.querySelectorAll("[data-scenario]").forEach(function (link) {
+    link.addEventListener("click", function (e) {
+     e.preventDefault();
+     go(link.getAttribute("data-scenario"));
+    });
+   });
+  })();
+ </script>
 </body>
 </html>

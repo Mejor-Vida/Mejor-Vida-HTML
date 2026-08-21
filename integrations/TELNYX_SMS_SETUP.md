@@ -44,7 +44,7 @@ Replace `YOUR_TELNYX_WEBHOOK_SECRET` with the same value as the Vercel env var.
 
 **Where in Telnyx:** Messaging → Phone Numbers → **+1 402 844 1199** → Messaging settings → **Webhook URL** (or Messaging Profile attached to the number).
 
-**Keywords handled:** `QUOTE` / `COTIZAR`, `CALL` / `LLAMAR`, `STOP`, email capture + nurture email, default bilingual help text.
+**Keywords handled:** `QUOTE` / `COTIZAR`, `CALL` / `LLAMAR`, `STOP`, `HELP`, email capture. Other inbound texts are **not** auto-replied — they go to the [staff SMS inbox](STAFF_SMS_INBOX.md).
 
 ---
 
@@ -58,6 +58,10 @@ Replace `YOUR_TELNYX_WEBHOOK_SECRET` with the same value as the Vercel env var.
 | `lib/phone-verify.js` | OTP codes on quote forms |
 | `api/nurture-cron.js` | Phase 2 nurture SMS (+ VCF on step 2) |
 | `api/call-scheduled-webhook.js` | VCF reminder after scheduled call |
+| `lib/staff-sms-inbox.js` | Staff SMS inbox log, email OTP, push, alerts |
+| `staff/sms-inbox.html` | Home Screen send/receive app |
+
+See **[STAFF_SMS_INBOX.md](STAFF_SMS_INBOX.md)** for install, email-code login, and WhatsApp verification on this number.
 
 ---
 

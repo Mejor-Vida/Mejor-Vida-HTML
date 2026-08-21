@@ -166,13 +166,13 @@ def universal_life_section(lang: str, quote_href: str) -> str:
         title = "Costo promedio del seguro de vida universal"
         lead = (
             "Primas mensuales ilustrativas (preferred no fumador) por edad para montos de $50,000 a $500,000. "
-            "La vida universal e indexada (IUL) también depende del financiamiento, cargos y topes — Julie puede preparar una ilustración real."
+            "La vida universal e indexada (IUL) también depende del financiamiento, cargos y topes — Mejor Vida Seguros puede preparar una ilustración real."
         )
     else:
         title = "Average cost of universal life insurance"
         lead = (
             "Illustrative monthly premiums (preferred non-tobacco) by age for coverage amounts from $50,000 to $500,000. "
-            "Universal and indexed universal life (IUL) also depend on funding, charges, and caps — Julie can run a real carrier illustration."
+            "Universal and indexed universal life (IUL) also depend on funding, charges, and caps — Mejor Vida Insurance can run a real carrier illustration."
         )
     return f"""<section class="lic-section" id="universal-life" data-lic-product="ul" data-lic-quote-href="{quote_href}">
 <h2>{title}</h2>
@@ -263,7 +263,7 @@ def guide_sections(lang: str, quote_href: str, products_href: str, est_href: str
 <section class="lic-section lic-guide" id="cuanto-necesita">
 <h2>¿Cuánto seguro de vida necesita?</h2>
 <p>Pregúntese: si falleciera hoy, ¿para qué usaría la familia el beneficio? Asígnele un valor a cada necesidad (gastos finales, reemplazo de ingreso, hipoteca, deudas, educación).</p>
-<p>Una guía práctica es la fórmula DIME: Deuda + Ingreso (años que quiere reemplazar) + Hipoteca + Educación. También puede usar nuestra <a href="{est_href}">calculadora de gastos finales</a> o <a href="{quote_href}">cotizar</a> con Julie, que compara opciones de <a href="{products_href}">tipos de seguro de vida</a>.</p>
+<p>Una guía práctica es la fórmula DIME: Deuda + Ingreso (años que quiere reemplazar) + Hipoteca + Educación. También puede usar nuestra <a href="{est_href}">calculadora de gastos finales</a> o <a href="{quote_href}">cotizar</a> con Mejor Vida Seguros, que compara opciones de <a href="{products_href}">tipos de seguro de vida</a>.</p>
 </section>
 
 <section class="lic-section lic-guide" id="consejos-ahorro">
@@ -305,7 +305,7 @@ def guide_sections(lang: str, quote_href: str, products_href: str, est_href: str
 <section class="lic-section lic-guide" id="how-much-coverage">
 <h2>How much life insurance do you need?</h2>
 <p>Ask: if you died today, what would the benefit pay for? Assign a dollar value to each need (final expenses, income replacement, mortgage, debts, education).</p>
-<p>A practical guide is the DIME formula: Debt + Income (years you want to replace) + Mortgage + Education. You can also use our <a href="{est_href}">final expense estimator</a> or <a href="{quote_href}">get a quote</a> with Julie, who compares <a href="{products_href}">life insurance product types</a>.</p>
+<p>A practical guide is the DIME formula: Debt + Income (years you want to replace) + Mortgage + Education. You can also use our <a href="{est_href}">final expense estimator</a> or <a href="{quote_href}">get a quote</a> with Mejor Vida Insurance, who compares <a href="{products_href}">life insurance product types</a>.</p>
 </section>
 
 <section class="lic-section lic-guide" id="affordable-tips">
@@ -351,7 +351,7 @@ def faq_and_meta_sections(lang: str, quote_href: str, prefix: str) -> str:
             ),
             (
                 "¿Cuesta más el seguro sin examen médico?",
-                "A menudo sí, porque la aseguradora tiene menos información. Aun así, la emisión simplificada se ha acercado en precio a muchas opciones con examen. Julie puede comparar ambas rutas.",
+                "A menudo sí, porque la aseguradora tiene menos información. Aun así, la emisión simplificada se ha acercado en precio a muchas opciones con examen. Mejor Vida Seguros puede comparar ambas rutas.",
             ),
             (
                 "¿La vida entera cuesta más que la temporal?",
@@ -388,7 +388,7 @@ def faq_and_meta_sections(lang: str, quote_href: str, prefix: str) -> str:
 <li>Vida entera ilustrativa: muestras educativas de mercado (preferred / no fumador), edades 20–85.</li>
 <li>Gastos finales ilustrativos: muestras educativas de mercado (no fumador).</li>
 <li>Esperanza de vida (contexto educativo): <a href="https://www.cdc.gov/nchs/fastats/life-expectancy.htm" rel="noopener noreferrer" target="_blank">CDC NCHS</a>.</li>
-<li>Necesidad de cobertura (DIME): prácticas de la industria; Julie adapta el análisis a su situación.</li>
+<li>Necesidad de cobertura (DIME): prácticas de la industria; Mejor Vida Seguros adapta el análisis a su situación.</li>
 </ol>
 </div>
 <div class="lic-meta-panel" data-lic-meta-panel="updates" hidden>
@@ -413,7 +413,7 @@ def faq_and_meta_sections(lang: str, quote_href: str, prefix: str) -> str:
         ),
         (
             "Does life insurance cost more if you don’t take a medical exam?",
-            "Often yes, because the insurer has less information. Simplified issue has narrowed the gap versus exam-based policies. Julie can compare both paths.",
+            "Often yes, because the insurer has less information. Simplified issue has narrowed the gap versus exam-based policies. Mejor Vida Insurance can compare both paths.",
         ),
         (
             "Does whole life insurance cost more than term life insurance?",
@@ -450,7 +450,7 @@ def faq_and_meta_sections(lang: str, quote_href: str, prefix: str) -> str:
 <li>Illustrative whole life: educational market samples (preferred / non-tobacco), ages 20–85.</li>
 <li>Illustrative final expense: educational market samples (non-tobacco).</li>
 <li>Life expectancy (educational context): <a href="https://www.cdc.gov/nchs/fastats/life-expectancy.htm" rel="noopener noreferrer" target="_blank">CDC NCHS</a>.</li>
-<li>Coverage need (DIME): industry practice; Julie tailors the analysis to your situation.</li>
+<li>Coverage need (DIME): industry practice; Mejor Vida Insurance tailors the analysis to your situation.</li>
 </ol>
 </div>
 <div class="lic-meta-panel" data-lic-meta-panel="updates" hidden>
@@ -475,9 +475,9 @@ def build(lang: str, header: str, footer: str) -> str:
         else "Life Insurance Cost In 2026 (By Age & Policy Type) | Mejor Vida"
     )
     desc = (
-        "Primas ilustrativas de vida temporal, vida entera y gastos finales por edad y monto. Cotice con Julie."
+        "Primas ilustrativas de vida temporal, vida entera y gastos finales por edad y monto. Cotice con Mejor Vida Seguros."
         if is_es
-        else "Illustrative term, whole life, and final expense premiums by age and face amount. Get a quote with Julie."
+        else "Illustrative term, whole life, and final expense premiums by age and face amount. Get a quote with Mejor Vida Insurance."
     )
     crumb = (
         f'<a href="{prefix}index.html">Inicio</a> › Costo del seguro de vida'

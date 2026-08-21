@@ -10,7 +10,7 @@
   "aiFreePledgeModalBody": "Cuando vea este distintivo en una guía de Mejor Vida, puede confiar en que nuestro equipo editorial creó el contenido con base en experiencia directa en seguros de gastos finales en Nebraska — no texto generado por inteligencia artificial. El equipo de gastos finales de Mejor Vida revisa la información antes de publicarla.",
   "disclosures": [
     "Esta guía es solo para fines educativos y no constituye asesoramiento legal, fiscal ni financiero. Los detalles de cobertura, primas, beneficios y elegibilidad varían según la compañía aseguradora, el estado donde viva y su situación personal.",
-    "Julie Braunsroth es agente de seguros con licencia en Nebraska, Kansas, Colorado y Nevada (NPN #21695431). Mejor Vida Insurance LLC es una agencia independiente que compara opciones de varias aseguradoras; no representa una sola compañía.",
+    "Julie Braunsroth es agente de seguros (NPN #21695431). Mejor Vida Insurance LLC es una agencia independiente que compara opciones de varias aseguradoras; no representa una sola compañía. Los estados con licencia están en la página de licencias.",
     "Las cotizaciones en este sitio son estimaciones. La prima final y la aprobación dependen de la solicitud completa y la decisión de la aseguradora."
   ],
   "transparencyDisclosures": {
@@ -35,7 +35,7 @@
       {
         "id": "licencias",
         "title": "Divulgación de licencias",
-        "body": "Mejor Vida Insurance LLC es una agencia de seguros independiente. Julie Braunsroth está autorizada para vender seguros en Nebraska, Kansas, Colorado y Nevada (NPN #21695431). Puede ver copias de sus licencias estatales en nuestra página de licencias.",
+        "body": "Mejor Vida Insurance LLC es una agencia de seguros independiente. Julie Braunsroth es agente de seguros (NPN #21695431). Puede ver los estados con licencia y copias de las licencias en nuestra página de licencias.",
         "learnMoreLabel": "Ver licencias estatales",
         "learnMoreAnchor": "#licencias",
         "externalUrl": "../licencias.html"

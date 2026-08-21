@@ -10,12 +10,18 @@
  *      SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, RESEND_API_KEY
  */
 
-const { sendSms } = require("../lib/sms-send");
+const { sendSms, smsFromNumber } = require("../lib/sms-send");
 const {
   handleInboundSms,
   parseTelnyxInbound,
   validateTelnyxWebhookSecret,
 } = require("../lib/sms-inbound-handler");
+const {
+  logStaffSmsMessage,
+  notifyInboxPush,
+  formatPhoneDisplay,
+  previewText,
+} = require("../lib/staff-sms-inbox");
 
 function readJsonBody(req) {
   if (Buffer.isBuffer(req.body)) {
@@ -33,6 +39,16 @@ function readJsonBody(req) {
     }
   }
   return req.body && typeof req.body === "object" ? req.body : null;
+}
+
+async function fanoutInbox(fromPhone, msgBody) {
+  const title = `SMS ${formatPhoneDisplay(fromPhone)}`;
+  const preview = previewText(msgBody, 80) || "New text message";
+  try {
+    await notifyInboxPush({ title, body: preview, phone: fromPhone });
+  } catch (err) {
+    console.error("[telnyx-sms-webhook] push failed:", err && err.message);
+  }
 }
 
 module.exports = async function handler(req, res) {
@@ -59,7 +75,7 @@ module.exports = async function handler(req, res) {
     return res.status(200).json({ ok: true, ignored: true });
   }
 
-  const { fromPhone, msgBody } = inbound;
+  const { fromPhone, toPhone, msgBody, telnyxId } = inbound;
   const supabaseUrl = process.env.SUPABASE_URL;
   const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
@@ -69,6 +85,15 @@ module.exports = async function handler(req, res) {
 
   console.log(`[telnyx-sms-webhook] From: ${fromPhone}, Body: "${msgBody}"`);
 
+  await logStaffSmsMessage({
+    direction: "inbound",
+    fromE164: fromPhone,
+    toE164: toPhone || smsFromNumber() || "+14028441199",
+    body: msgBody,
+    telnyxId: telnyxId || null,
+    meta: { source: "telnyx_inbound" },
+  });
+
   const result = await handleInboundSms({
     fromPhone,
     msgBody,
@@ -77,8 +102,10 @@ module.exports = async function handler(req, res) {
     inboundSource: "telnyx_inbound",
   });
 
+  await fanoutInbox(fromPhone, msgBody);
+
   if (result.silent || !result.reply) {
-    return res.status(200).json({ ok: true });
+    return res.status(200).json({ ok: true, inbox: true });
   }
 
   const sent = await sendSms({ to: fromPhone, body: result.reply });
@@ -97,5 +124,14 @@ module.exports = async function handler(req, res) {
     });
   }
 
-  return res.status(200).json({ ok: true, message_id: sent.sid });
+  await logStaffSmsMessage({
+    direction: "outbound",
+    fromE164: sent.from || smsFromNumber() || "+14028441199",
+    toE164: fromPhone,
+    body: result.reply,
+    telnyxId: sent.sid || null,
+    meta: { source: "keyword_auto_reply" },
+  });
+
+  return res.status(200).json({ ok: true, message_id: sent.sid, inbox: true });
 };

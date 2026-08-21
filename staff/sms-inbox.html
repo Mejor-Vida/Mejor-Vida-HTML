@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="robots" content="noindex,nofollow" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="MVI SMS" />
+  <meta name="theme-color" content="#0b1426" />
+  <title>Mejor Vida SMS</title>
+  <link rel="manifest" href="/staff/sms-inbox.webmanifest" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="icon" href="/favicon.ico" />
+  <link rel="stylesheet" href="/css/staff-sms-inbox.css" />
+</head>
+<body>
+  <div id="login-screen" class="login-wrap">
+    <section class="card">
+      <h1>Mejor Vida SMS</h1>
+      <p class="sub">Texts on 402-844-1199. Sign in with julie@ or admin@. We email a 6-digit code.</p>
+      <form id="email-form">
+        <label for="email">Email</label>
+        <input id="email" type="email" autocomplete="username" required />
+        <button class="btn" id="email-btn" type="submit">Send code</button>
+      </form>
+      <form id="code-form" class="hidden">
+        <label for="code">6-digit code</label>
+        <input id="code" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="6" required />
+        <button class="btn" id="code-btn" type="submit">Sign in</button>
+        <button class="btn secondary" id="back-email" type="button">Use a different email</button>
+      </form>
+      <p id="login-err" class="err" role="alert"></p>
+      <p id="install-hint" class="sub" style="margin-top:18px">On iPhone this must be opened in <strong>Safari</strong> (the compass icon), not Chrome or Gmail. Then tap Share → Add to Home Screen.</p>
+    </section>
+  </div>
+
+  <div id="app" class="app hidden">
+    <div id="list-view">
+      <header class="topbar">
+        <h2>Messages</h2>
+        <button type="button" class="icon-btn" id="signout-btn">Log out</button>
+      </header>
+      <div id="safari-banner" class="banner banner-warn hidden">This is not Safari. Copy the link, open the Safari app (compass icon), paste it, sign in again, then Share → Add to Home Screen. Chrome cannot add the icon or send text alerts.
+        <button type="button" class="btn" id="copy-inbox-link" style="margin-top:10px">Copy inbox link</button>
+      </div>
+      <div id="install-banner" class="banner hidden">iPhone will not alert you for texts from a Safari tab. Tap Share → <strong>Add to Home Screen</strong>, then open the new <strong>MVI SMS</strong> icon and sign in there.</div>
+      <div id="push-banner" class="banner banner-warn hidden">
+        <div id="push-banner-text">Tap below, then Allow, so lock-screen alerts fire when someone texts 402-844-1199.</div>
+        <button type="button" class="btn" id="enable-push-btn" style="margin-top:10px">Turn on text alerts</button>
+      </div>
+      <div id="thread-list" class="thread-list"></div>
+      <div class="compose-new">
+        <label for="new-phone">New text</label>
+        <input id="new-phone" type="tel" inputmode="tel" placeholder="Phone number" />
+        <button class="btn" type="button" id="new-thread-btn">Open conversation</button>
+      </div>
+    </div>
+
+    <div id="chat-view" class="chat hidden">
+      <header class="topbar">
+        <button type="button" class="icon-btn" id="back-btn">Back</button>
+        <h2 id="chat-title">Conversation</h2>
+      </header>
+      <div id="bubbles" class="bubbles"></div>
+      <form id="composer" class="composer">
+        <textarea id="reply-body" rows="1" placeholder="Text message" required></textarea>
+        <button class="btn" id="send-btn" type="submit">Send</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="/js/staff-sms-inbox.js"></script>
+</body>
+</html>

@@ -249,7 +249,7 @@
 
 .nav-life-options-grid.nav-life-options-grid--seniors {
   grid-template-columns: 1fr;
-  max-width: 16.5rem;
+  max-width: 20.5rem;
 }
 
 .nav-life-panel[data-life-panel="seniors"] .nav-life-options-grid--seniors a {

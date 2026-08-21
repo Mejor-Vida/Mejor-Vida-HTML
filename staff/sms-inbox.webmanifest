@@ -1,0 +1,23 @@
+{
+  "name": "Mejor Vida SMS",
+  "short_name": "MVI SMS",
+  "description": "Send and receive texts on 402-844-1199",
+  "start_url": "/staff/sms-inbox.html",
+  "scope": "/staff/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0b1426",
+  "theme_color": "#0b1426",
+  "icons": [
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-48x48.png",
+      "sizes": "48x48",
+      "type": "image/png"
+    }
+  ]
+}

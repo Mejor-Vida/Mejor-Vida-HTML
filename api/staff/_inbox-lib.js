@@ -6,6 +6,9 @@ function json(res, status, payload) {
 }
 
 function readJsonBody(req) {
+  if (Buffer.isBuffer(req.body)) {
+    return JSON.parse(req.body.toString("utf8") || "{}");
+  }
   if (typeof req.body === "string") return JSON.parse(req.body || "{}");
   return req.body && typeof req.body === "object" ? req.body : {};
 }

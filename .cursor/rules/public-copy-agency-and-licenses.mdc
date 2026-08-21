@@ -1,0 +1,51 @@
+---
+description: Public pages use Mejor Vida (not Julie) in body copy; list licensed states only on the licenses page
+alwaysApply: true
+---
+
+# Public copy — agency name and licensed states
+
+## Licensed states
+
+The **only** public pages that name the current licensed states (today Nebraska, Kansas, Colorado, and Nevada) are:
+
+- `licencias.html`
+- `en/licenses.html`
+
+Everywhere else (heroes, FAQs, CTAs, meta descriptions, landings, cost pages, homepage map copy, chatbot answers, email templates):
+
+- Do **not** list those four states as “where we offer insurance.”
+- Point readers to the licenses page (and NPN) instead.
+- State *content* pages (`estados/`, `en/states/`) may still exist as local guides; do not frame them as a complete license roster.
+
+When new states are added, update **only** the licenses pages (and the license map data), not site-wide boilerplate.
+
+## “Julie” vs agency
+
+On **webpage body, CTAs, FAQs, and meta descriptions**, use the agency — not the first name:
+
+| Language | Use |
+|----------|-----|
+| English | **Mejor Vida Insurance** |
+| Spanish | **Mejor Vida Seguros** |
+
+Keep **Julie** only for:
+
+- Author byline / JSON-LD `Julie Braunsroth`
+- Footer/header NPN line (“Julie is a licensed insurance agent…”)
+- Email `Julie@mejorvidainsurance.com`
+- About-the-founder page (`about-julie.html` / `en/about-julie.html`) as a biography
+- Chat widget name / `aria-label` for Julie’s assistant
+
+Examples:
+
+```html
+<!-- BAD -->
+<p>Julie compares options in Nebraska, Kansas, Colorado, and Nevada.</p>
+<p>Call Julie at 402-440-5438.</p>
+
+<!-- GOOD -->
+<p>Mejor Vida Insurance compares options based on your age, health, and state.</p>
+<p>Call Mejor Vida Insurance at 402-440-5438.</p>
+<p>Current licenses are on the <a href="licenses.html">licenses</a> page.</p>
+```

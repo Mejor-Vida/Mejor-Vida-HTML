@@ -393,24 +393,19 @@ async function pageLinks() {
 
 async function evaluate(code) {
   if (!code || typeof code !== "string") throw new Error("code_required");
-  // Isolated world: page CSP cannot block Function. DOM is still shared.
-  const tabId = await getTargetTabId();
-  const results = await chrome.scripting.executeScript({
-    target: { tabId },
-    world: "ISOLATED",
-    func: (src) => {
-      // eslint-disable-next-line no-new-func
-      const fn = new Function(`return (${src});`);
-      const value = fn();
-      try {
-        return { value: JSON.parse(JSON.stringify(value)) };
-      } catch {
-        return { value: String(value) };
-      }
-    },
-    args: [code],
-  });
-  return results?.[0]?.result;
+  // MAIN world so harvest IIFEs can read the live Integrity DOM.
+  // Always return { value } so wrap() does not collapse strings to { data }.
+  const raw = await inject((src) => {
+    // eslint-disable-next-line no-new-func
+    const fn = new Function(`return (${src});`);
+    const value = fn();
+    try {
+      return JSON.parse(JSON.stringify(value));
+    } catch {
+      return String(value);
+    }
+  }, [code]);
+  return { value: raw };
 }
 
 async function navigate(url) {

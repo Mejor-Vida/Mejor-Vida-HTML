@@ -1,11 +1,11 @@
 <!--
-  Reusable Blog Template (Mejor Vida Insurance)
-  How to use:
-  1) Duplicate this file for each new post and rename it with the post date slug.
-  2) Replace all {{PLACEHOLDER}} values.
-  3) Duplicate the <section class="story">...</section> block inside {{STORIES}} for each story.
-  CTA placeholders: {{CTA_WEBSITE}}, {{CTA_PHONE}}, {{CTA_QUOTE_URL}} (e.g. ../quote.html),
-  {{CTA_WHATSAPP_URL}} (full wa.me link), {{CTA_WHATSAPP_DISPLAY}} (e.g. 402-440-5438).
+ Reusable Blog Template (Mejor Vida Insurance)
+ How to use:
+ 1) Duplicate this file for each new post and rename it with the post date slug.
+ 2) Replace all {{PLACEHOLDER}} values.
+ 3) Duplicate the <section class="story">..</section> block inside {{STORIES}} for each story.
+ CTA placeholders: {{CTA_WEBSITE}}, {{CTA_PHONE}}, {{CTA_QUOTE_URL}} (e.g. ../quote.html),
+ {{CTA_WHATSAPP_URL}} (full wa.me link), {{CTA_WHATSAPP_DISPLAY}} (e.g. 402-440-5438).
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -13,188 +13,188 @@
 <!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-K921EG6JWG"></script>
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-K921EG6JWG');
+ window.dataLayer = window.dataLayer || [];
+ function gtag(){dataLayer.push(arguments);}
+ gtag('js', new Date());
+ gtag('config', 'G-K921EG6JWG');
 </script>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{{TITLE}} | Mejor Vida Insurance LLC</title>
-  <link rel="stylesheet" href="./blog-template.css" />
-  <link href="../../css/fontawesome-mvi.min.css?v=20260723-brands-fix" rel="stylesheet"/>
-  <link href="../css/mvi-assistant-widget.css" rel="stylesheet" />
+ <meta charset="UTF-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+ <title>{{TITLE}} | Mejor Vida Insurance LLC</title>
+ <link rel="stylesheet" href="./blog-template.css" />
+ <link href="../../css/fontawesome-mvi.min.css?v=20260723-brands-fix" rel="stylesheet"/>
+ <link href="../css/mvi-assistant-widget.css" rel="stylesheet" />
 </head>
 <body>
-  <main class="mv-news">
-    <div class="page-wrap">
-      <header class="hero">
-        <h1>{{TITLE}}</h1>
-        <p class="dek">{{DEK}}</p>
-        <p class="meta-line">{{DATE}} • {{AUTHOR}} • Reviewed by {{REVIEWER}} • {{READ_TIME}}</p>
-      </header>
+ <main class="mv-news">
+  <div class="page-wrap">
+   <header class="hero">
+    <h1>{{TITLE}}</h1>
+    <p class="dek">{{DEK}}</p>
+    <p class="meta-line">{{DATE}} • {{AUTHOR}} • Reviewed by {{REVIEWER}} • {{READ_TIME}}</p>
+   </header>
 
-      <div class="news-grid">
-        <section class="article-col">
-          <article>
-            <section class="quick-overview" aria-label="Quick overview">
-              <span class="eyebrow">Quick Overview</span>
-              <h2>What’s Happening This Week?</h2>
-              <p>{{QUICK_OVERVIEW}}</p>
-            </section>
+   <div class="news-grid">
+    <section class="article-col">
+     <article>
+      <section class="quick-overview" aria-label="Quick overview">
+       <span class="eyebrow">Quick Overview</span>
+       <h2>What’s Happening This Week?</h2>
+       <p>{{QUICK_OVERVIEW}}</p>
+      </section>
 
-            <nav class="toc" aria-label="Table of contents">
-              <h2>Table of Contents</h2>
-              <ol>
-                <li><a href="#story-1">{{STORY_HEADLINE}}</a></li>
-                <li><a href="#what-this-means">What This Means for You</a></li>
-                <li><a href="#need-help-comparing-options">Need Help Comparing Options?</a></li>
-              </ol>
-            </nav>
+      <nav class="toc" aria-label="Table of contents">
+       <h2>Table of Contents</h2>
+       <ol>
+        <li><a href="#story-1">{{STORY_HEADLINE}}</a></li>
+        <li><a href="#what-this-means">What This Means for You</a></li>
+        <li><a href="#need-help-comparing-options">Need Help Comparing Options?</a></li>
+       </ol>
+      </nav>
 
-            {{STORIES}}
-            <!--
-            <section class="story" id="story-1">
-              <h2>{{STORY_HEADLINE}}</h2>
-              <p class="source-line">Source: {{SOURCE}} | Published: {{PUBLISHED}}</p>
-              <h3>What Happened</h3>
-              <p>{{WHAT_HAPPENED}}</p>
-              <h3>Why It Matters</h3>
-              <p>{{WHY_IT_MATTERS}}</p>
-              <h3>What It Means for Families</h3>
-              <p>{{FAMILY_IMPACT}}</p>
-            </section>
-            -->
+      {{STORIES}}
+      <!--
+      <section class="story" id="story-1">
+       <h2>{{STORY_HEADLINE}}</h2>
+       <p class="source-line">Source: {{SOURCE}} | Published: {{PUBLISHED}}</p>
+       <h3>What Happened</h3>
+       <p>{{WHAT_HAPPENED}}</p>
+       <h3>Why It Matters</h3>
+       <p>{{WHY_IT_MATTERS}}</p>
+       <h3>What It Means for Families</h3>
+       <p>{{FAMILY_IMPACT}}</p>
+      </section>
+      -->
 
-            <section class="what-this-means" id="what-this-means">
-              <h2>What This Means for You</h2>
-              <ul>
-                {{AT_A_GLANCE_BULLETS}}
-              </ul>
-            </section>
+      <section class="what-this-means" id="what-this-means">
+       <h2>What This Means for You</h2>
+       <ul>
+        {{AT_A_GLANCE_BULLETS}}
+       </ul>
+      </section>
 
-            <section class="cta-panel" id="need-help-comparing-options">
-              <h2>Need Help Comparing Options?</h2>
-              <p>Start with a free quote or WhatsApp so we have your details. We schedule a call with a licensed agent when it’s a fit.</p>
-              <p class="cta-meta">
-                Quote: {{CTA_WEBSITE}}<br />
-                WhatsApp: {{CTA_WHATSAPP_DISPLAY}}<br />
-                Office line (current clients): {{CTA_PHONE}}
-              </p>
-              <a class="btn-primary" href="{{CTA_QUOTE_URL}}">Get a free quote</a>
-              <a class="btn-primary" href="{{CTA_WHATSAPP_URL}}" target="_blank" rel="noopener">Message us on WhatsApp</a>
-              <p class="small mb-0 mt-2">Prefer the office line? <a href="tel:{{CTA_PHONE}}">{{CTA_PHONE}}</a></p>
-            </section>
-          </article>
-        </section>
+      <section class="cta-panel" id="need-help-comparing-options">
+       <h2>Need Help Comparing Options?</h2>
+       <p>Start with a free quote or WhatsApp so we have your details. We schedule a call with a licensed agent when it’s a fit.</p>
+       <p class="cta-meta">
+        Quote: {{CTA_WEBSITE}}<br />
+        WhatsApp: {{CTA_WHATSAPP_DISPLAY}}<br />
+        Office line (current clients): {{CTA_PHONE}}
+       </p>
+       <a class="btn-primary" href="{{CTA_QUOTE_URL}}">Get a free quote</a>
+       <a class="btn-primary" href="{{CTA_WHATSAPP_URL}}" target="_blank" rel="noopener">Message us on WhatsApp</a>
+       <p class="small mb-0 mt-2">Prefer the office line? <a href="tel:{{CTA_PHONE}}">{{CTA_PHONE}}</a></p>
+      </section>
+     </article>
+    </section>
 
-        <aside class="sidebar" aria-label="Supporting information">
-          <section class="sidebar-card">
-            <span class="eyebrow">Contact</span>
-            <h3>Start online first</h3>
-            <p>Request a free quote or message us on WhatsApp. We review your info and schedule a call with a licensed agent when it’s a fit.</p>
-            <a class="btn-primary" href="{{CTA_QUOTE_URL}}">Get a free quote</a>
-            <a class="btn-primary" href="{{CTA_WHATSAPP_URL}}" target="_blank" rel="noopener">Message us on WhatsApp</a>
-            <p class="small mb-0 mt-2">Phone line: <a href="tel:{{CTA_PHONE}}">{{CTA_PHONE}}</a></p>
-            <div class="thumb-placeholder">{{JULIE_PHOTO}} (optional)</div>
-          </section>
+    <aside class="sidebar" aria-label="Supporting information">
+     <section class="sidebar-card">
+      <span class="eyebrow">Contact</span>
+      <h3>Start online first</h3>
+      <p>Request a free quote or message us on WhatsApp. We review your info and schedule a call with a licensed agent when it’s a fit.</p>
+      <a class="btn-primary" href="{{CTA_QUOTE_URL}}">Get a free quote</a>
+      <a class="btn-primary" href="{{CTA_WHATSAPP_URL}}" target="_blank" rel="noopener">Message us on WhatsApp</a>
+      <p class="small mb-0 mt-2">Phone line: <a href="tel:{{CTA_PHONE}}">{{CTA_PHONE}}</a></p>
+      <div class="thumb-placeholder">{{JULIE_PHOTO}} (optional)</div>
+     </section>
 
-          <section class="sidebar-card">
-            <span class="eyebrow">This Week</span>
-            <h3>This Week at a Glance</h3>
-            <ul>
-              {{AT_A_GLANCE_BULLETS}}
-            </ul>
-          </section>
+     <section class="sidebar-card">
+      <span class="eyebrow">This Week</span>
+      <h3>This Week at a Glance</h3>
+      <ul>
+       {{AT_A_GLANCE_BULLETS}}
+      </ul>
+     </section>
 
-          <section class="sidebar-card">
-            <span class="eyebrow">Definitions</span>
-            <h3>Key Terms</h3>
-            <dl>
-              {{DEFINITIONS}}
-            </dl>
-          </section>
-        </aside>
-      </div>
-    </div>
-  </main>
+     <section class="sidebar-card">
+      <span class="eyebrow">Definitions</span>
+      <h3>Key Terms</h3>
+      <dl>
+       {{DEFINITIONS}}
+      </dl>
+     </section>
+    </aside>
+   </div>
+  </div>
+ </main>
 
-  <!-- FOOTER (same structure as index.html) -->
-  <footer style="background:#1a365d; padding: 8px 0 24px 0;">
-    <div class="container">
-      <div class="text-white" style="margin:0; padding:0;">
-      <div class="d-flex flex-wrap align-items-center justify-content-center gap-3 small">
-        <picture>
+ <!-- FOOTER (same structure as index.html) -->
+ <footer style="background:#1a365d; padding: 8px 0 24px 0;">
+  <div class="container">
+   <div class="text-white" style="margin:0; padding:0;">
+   <div class="d-flex flex-wrap align-items-center justify-content-center gap-3 small">
+    <picture>
 <source id="footer-logo-webp" type="image/webp" srcset="../img/opt/logo-spanish2.webp"/>
 <img id="footer-logo" alt="Mejor Vida Insurance LLC" style="height:130px;filter:brightness(0) invert(1);margin-top:-25px;margin-bottom:-25px;" src="../img/opt/logo-spanish2.png" width="800" height="533" loading="lazy" decoding="async"/>
 </picture>
-        <a href="https://wa.me/14024405438?text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20seguro%20de%20gastos%20finales." target="_blank" rel="noopener" class="text-white text-opacity-90 text-decoration-none text-nowrap"><i class="fab fa-whatsapp me-2 opacity-90"></i>WhatsApp</a>
-        <span class="text-nowrap"><i class="fas fa-envelope me-2 opacity-75"></i><a href="mailto:Julie@mejorvidainsurance.com" class="text-white text-opacity-90 text-decoration-none">Julie@mejorvidainsurance.com</a></span>
-      </div>
-      <div class="d-flex flex-wrap align-items-center justify-content-center gap-3 small mt-1">
-        <span class="text-nowrap" data-lang="es"><i class="fas fa-phone me-2 opacity-75"></i>Teléfono: <a href="tel:+14024405438">402-440-5438</a></span>
-        <span class="text-nowrap" data-lang="en"><i class="fas fa-phone me-2 opacity-75"></i>Phone: <a href="tel:+14024405438">402-440-5438</a></span>
-        <span class="text-nowrap" data-lang="es"><i class="fas fa-comment-dots me-2 opacity-75"></i>SMS/Texto: <a href="tel:+14028441199" class="text-white text-opacity-90 text-decoration-none">402-844-1199</a></span>
-        <span class="text-nowrap" data-lang="en"><i class="fas fa-comment-dots me-2 opacity-75"></i>SMS/Text: <a href="tel:+14028441199" class="text-white text-opacity-90 text-decoration-none">402-844-1199</a></span>
-      </div>
+    <a href="https://wa.me/14024405438?text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20seguro%20de%20gastos%20finales." target="_blank" rel="noopener" class="text-white text-opacity-90 text-decoration-none text-nowrap"><i class="fab fa-whatsapp me-2 opacity-90"></i>WhatsApp</a>
+    <span class="text-nowrap"><i class="fas fa-envelope me-2 opacity-75"></i><a href="mailto:Julie@mejorvidainsurance.com" class="text-white text-opacity-90 text-decoration-none">Julie@mejorvidainsurance.com</a></span>
+   </div>
+   <div class="d-flex flex-wrap align-items-center justify-content-center gap-3 small mt-1">
+    <span class="text-nowrap" data-lang="es"><i class="fas fa-phone me-2 opacity-75"></i>Teléfono: <a href="tel:+14024405438">402-440-5438</a></span>
+    <span class="text-nowrap" data-lang="en"><i class="fas fa-phone me-2 opacity-75"></i>Phone: <a href="tel:+14024405438">402-440-5438</a></span>
+    <span class="text-nowrap" data-lang="es"><i class="fas fa-comment-dots me-2 opacity-75"></i>SMS/Texto: <a href="tel:+14028441199" class="text-white text-opacity-90 text-decoration-none">402-844-1199</a></span>
+    <span class="text-nowrap" data-lang="en"><i class="fas fa-comment-dots me-2 opacity-75"></i>SMS/Text: <a href="tel:+14028441199" class="text-white text-opacity-90 text-decoration-none">402-844-1199</a></span>
+   </div>
+  </div>
+   <div class="row g-2 pt-2 mt-2 border-top border-secondary text-white small">
+    <div class="col-12 col-md-7">
+     <h4 class="h6 fw-bold mb-2" data-lang="es">Enlaces rápidos</h4>
+     <h4 class="h6 fw-bold mb-2" data-lang="en">Quick Links</h4>
+     <div class="d-flex flex-wrap gap-2 gap-md-3">
+      <a href="../index.html#home" class="text-white text-opacity-75 text-decoration-none" data-lang="es">Inicio</a><a href="../index.html#home" class="text-white text-opacity-75 text-decoration-none" data-lang="en">Home</a>
+      <span class="text-white text-opacity-50">·</span>
+      <a href="../about-julie.html" class="text-white text-opacity-75 text-decoration-none" data-lang="es">Conozca a la fundadora</a><a href="../about-julie.html" class="text-white text-opacity-75 text-decoration-none" data-lang="en">Meet the founder</a>
+      <span class="text-white text-opacity-50">·</span>
+      <a href="../index.html#how-it-works" class="text-white text-opacity-75 text-decoration-none" data-lang="es">Cómo funciona</a><a href="../index.html#how-it-works" class="text-white text-opacity-75 text-decoration-none" data-lang="en">How It Works</a>
+      <span class="text-white text-opacity-50">·</span>
+      <a href="../aseguradoras.html" class="text-white text-opacity-75 text-decoration-none" data-lang="es">Aseguradoras</a><a href="en/insurance-carriers.html" class="text-white text-opacity-75 text-decoration-none" data-lang="en">Insurers</a>
+      <span class="text-white text-opacity-50">·</span>
+      <a href="../index.html#final-expense-answers" class="text-white text-opacity-75 text-decoration-none" data-lang="es">¿Tienes preguntas?</a><a href="../index.html#final-expense-answers" class="text-white text-opacity-75 text-decoration-none" data-lang="en">Got questions?</a>
+      <span class="text-white text-opacity-50">·</span>
+      <a href="../blog.html" class="text-white text-opacity-75 text-decoration-none">Blog</a>
+      <span class="text-white text-opacity-50">·</span>
+      <a href="../contact.html" class="text-white text-opacity-75 text-decoration-none" data-lang="es">Contacto</a><a href="../contact.html" class="text-white text-opacity-75 text-decoration-none" data-lang="en">Contact</a>
+      <span class="text-white text-opacity-50">·</span>
+      <a href="../quote.html" class="text-white text-opacity-75 text-decoration-none" data-lang="es">Cotización gratis</a><a href="../quote.html" class="text-white text-opacity-75 text-decoration-none" data-lang="en">Free Quote</a>
+     </div>
     </div>
-      <div class="row g-2 pt-2 mt-2 border-top border-secondary text-white small">
-        <div class="col-12 col-md-7">
-          <h4 class="h6 fw-bold mb-2" data-lang="es">Enlaces rápidos</h4>
-          <h4 class="h6 fw-bold mb-2" data-lang="en">Quick Links</h4>
-          <div class="d-flex flex-wrap gap-2 gap-md-3">
-            <a href="../index.html#home" class="text-white text-opacity-75 text-decoration-none" data-lang="es">Inicio</a><a href="../index.html#home" class="text-white text-opacity-75 text-decoration-none" data-lang="en">Home</a>
-            <span class="text-white text-opacity-50">·</span>
-            <a href="../about-julie.html" class="text-white text-opacity-75 text-decoration-none" data-lang="es">Conozca a la fundadora</a><a href="../about-julie.html" class="text-white text-opacity-75 text-decoration-none" data-lang="en">Meet the founder</a>
-            <span class="text-white text-opacity-50">·</span>
-            <a href="../index.html#how-it-works" class="text-white text-opacity-75 text-decoration-none" data-lang="es">Cómo funciona</a><a href="../index.html#how-it-works" class="text-white text-opacity-75 text-decoration-none" data-lang="en">How It Works</a>
-            <span class="text-white text-opacity-50">·</span>
-            <a href="../aseguradoras.html" class="text-white text-opacity-75 text-decoration-none" data-lang="es">Aseguradoras</a><a href="en/insurance-carriers.html" class="text-white text-opacity-75 text-decoration-none" data-lang="en">Insurers</a>
-            <span class="text-white text-opacity-50">·</span>
-            <a href="../index.html#final-expense-answers" class="text-white text-opacity-75 text-decoration-none" data-lang="es">¿Tienes preguntas?</a><a href="../index.html#final-expense-answers" class="text-white text-opacity-75 text-decoration-none" data-lang="en">Got questions?</a>
-            <span class="text-white text-opacity-50">·</span>
-            <a href="../blog.html" class="text-white text-opacity-75 text-decoration-none">Blog</a>
-            <span class="text-white text-opacity-50">·</span>
-            <a href="../contact.html" class="text-white text-opacity-75 text-decoration-none" data-lang="es">Contacto</a><a href="../contact.html" class="text-white text-opacity-75 text-decoration-none" data-lang="en">Contact</a>
-            <span class="text-white text-opacity-50">·</span>
-            <a href="../quote.html" class="text-white text-opacity-75 text-decoration-none" data-lang="es">Cotización gratis</a><a href="../quote.html" class="text-white text-opacity-75 text-decoration-none" data-lang="en">Free Quote</a>
-          </div>
-        </div>
-        <div class="col-12 col-md-5">
-          <h4 class="h6 fw-bold mb-2">Legal</h4>
-          <div class="d-flex flex-column gap-2 small">
-            <div>
-              <span class="text-white text-opacity-50 text-uppercase d-block mb-1" style="font-size:0.65rem;letter-spacing:0.04em;">English</span>
-              <div class="d-flex flex-wrap gap-2 gap-md-3">
-                <a href="../privacy-policy-en.html" class="text-white text-opacity-75 text-decoration-none">Privacy Policy</a>
-                <span class="text-white text-opacity-50">·</span>
-                <a href="../terms-service-en.html" class="text-white text-opacity-75 text-decoration-none">Terms of Service</a>
-              </div>
-            </div>
-            <div>
-              <span class="text-white text-opacity-50 text-uppercase d-block mb-1" style="font-size:0.65rem;letter-spacing:0.04em;">Español</span>
-              <div class="d-flex flex-wrap gap-2 gap-md-3">
-                <a href="../privacy-policy.html" class="text-white text-opacity-75 text-decoration-none">Política de privacidad</a>
-                <span class="text-white text-opacity-50">·</span>
-                <a href="../terms-service.html" class="text-white text-opacity-75 text-decoration-none">Términos de servicio</a>
-              </div>
-            </div>
-          </div>
-        </div>
+    <div class="col-12 col-md-5">
+     <h4 class="h6 fw-bold mb-2">Legal</h4>
+     <div class="d-flex flex-column gap-2 small">
+      <div>
+       <span class="text-white text-opacity-50 text-uppercase d-block mb-1" style="font-size:0.65rem;letter-spacing:0.04em;">English</span>
+       <div class="d-flex flex-wrap gap-2 gap-md-3">
+        <a href="../privacy-policy-en.html" class="text-white text-opacity-75 text-decoration-none">Privacy Policy</a>
+        <span class="text-white text-opacity-50">·</span>
+        <a href="../terms-service-en.html" class="text-white text-opacity-75 text-decoration-none">Terms of Service</a>
+       </div>
       </div>
-      <div class="border-top border-secondary mt-2 pt-2">
-        <p class="small text-center text-white text-opacity-75 mb-1" data-lang="es">Julie es una agente de seguros licenciada en Nebraska, Kansas, Colorado y Nevada. NPN #21695431. <a class="text-white text-opacity-75" href="../../licencias.html">Ver licencias</a></p>
-        <p class="small text-center text-white text-opacity-75 mb-1" data-lang="en">Julie is a licensed insurance agent in Nebraska, Kansas, Colorado, and Nevada. NPN #21695431. <a class="text-white text-opacity-75" href="../../en/licenses.html">View licenses</a></p>
-        <p class="small text-center text-white text-opacity-50 mb-0">&copy; <span id="year"></span> Mejor Vida Insurance LLC. All rights reserved.</p>
+      <div>
+       <span class="text-white text-opacity-50 text-uppercase d-block mb-1" style="font-size:0.65rem;letter-spacing:0.04em;">Español</span>
+       <div class="d-flex flex-wrap gap-2 gap-md-3">
+        <a href="../privacy-policy.html" class="text-white text-opacity-75 text-decoration-none">Política de privacidad</a>
+        <span class="text-white text-opacity-50">·</span>
+        <a href="../terms-service.html" class="text-white text-opacity-75 text-decoration-none">Términos de servicio</a>
+       </div>
       </div>
+     </div>
     </div>
-  </footer>
+   </div>
+   <div class="border-top border-secondary mt-2 pt-2">
+    <p class="small text-center text-white text-opacity-75 mb-1" data-lang="es">Julie es una agente de seguros licenciada. NPN #21695431. <a class="text-white text-opacity-75" href="../../licencias.html">Ver licencias</a></p>
+    <p class="small text-center text-white text-opacity-75 mb-1" data-lang="en">Julie is a licensed insurance agent. NPN #21695431. <a class="text-white text-opacity-75" href="../../en/licenses.html">View licenses</a></p>
+    <p class="small text-center text-white text-opacity-50 mb-0">&copy; <span id="year"></span> Mejor Vida Insurance LLC. All rights reserved.</p>
+   </div>
+  </div>
+ </footer>
 
-  <script>
-    if (document.getElementById('year')) document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+ <script>
+  if (document.getElementById('year')) document.getElementById('year').textContent = new Date().getFullYear();
+ </script>
 
-  <div id="mvi-assistant-root" data-api-url="/api/website-chat" data-mvi-avatar-base="../img/mvi-chat-avatar"></div>
-  <script src="../js/website-assistant-widget.js" defer></script>
+ <div id="mvi-assistant-root" data-api-url="/api/website-chat" data-mvi-avatar-base="../img/mvi-chat-avatar"></div>
+ <script src="../js/website-assistant-widget.js" defer></script>
 </body>
 </html>

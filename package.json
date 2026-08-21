@@ -53,12 +53,14 @@
     "build:coverage-amount-pages": "node scripts/build-coverage-amount-pages.js",
     "build:seniors-over-80": "node scripts/build-seniors-over-80-pages.js",
     "build:seniors-over-85": "node scripts/build-seniors-over-85-pages.js",
+    "build:seniors-guides": "node scripts/build-seniors-guide-pages.js",
     "assurity:import-spot": "node scripts/assurity-fe-spot-import.js",
     "assurity:interpolate-tobacco": "node scripts/interpolate-assurity-tobacco-from-anchors.js",
     "optimize:avatars": "node scripts/optimize-chat-avatars.js"
   },
   "dependencies": {
-    "googleapis": "^171.4.0"
+    "googleapis": "^171.4.0",
+    "web-push": "^3.6.7"
   },
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^7.2.0",

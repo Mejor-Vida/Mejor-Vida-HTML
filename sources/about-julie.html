@@ -4,468 +4,468 @@
 <!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-K921EG6JWG"></script>
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-K921EG6JWG');
+ window.dataLayer = window.dataLayer || [];
+ function gtag(){dataLayer.push(arguments);}
+ gtag('js', new Date());
+ gtag('config', 'G-K921EG6JWG');
 </script>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Conozca a la fundadora — Mejor Vida Insurance LLC | Meet the founder — Mejor Vida Insurance LLC</title>
-  <meta name="description" content="Historia de Julie, agente de seguros de gastos finales con licencia en Nebraska, Kansas, Colorado y Nevada. Asesoría clara en español e inglés con Mejor Vida Insurance." />
-  <link rel="icon" type="image/x-icon" href="favicon.ico" />
-  <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-  <link href="../css/quote-flow-shared.css" rel="stylesheet" />
-  <link href="css/quote-flow-shared.css" rel="stylesheet" />
-  <link href="css/mvi-assistant-widget.css" rel="stylesheet" />
-  <link href="../css/fontawesome-mvi.min.css?v=20260723-brands-fix" rel="stylesheet"/>
-  <style>
-    body { font-family: Inter, system-ui, -apple-system, sans-serif; }
-    html.lang-es [data-lang="en"] { display: none !important; }
-    html.lang-en [data-lang="es"] { display: none !important; }
-    .julie-bio-layout {
-      --julie-bio-inline-pad: clamp(0.75rem, 2.5vw, 1.5rem);
-    }
-    .julie-bio-layout .julie-bio-column {
-      max-width: 42rem;
-      width: 100%;
-    }
-    .julie-bio-row {
-      display: flex;
-      flex-direction: column;
-    }
-    .julie-bio-text-col {
-      padding-left: var(--julie-bio-inline-pad);
-      padding-right: var(--julie-bio-inline-pad);
-    }
-    .julie-bio-text-col article h2 {
-      color: #1a365d;
-      font-size: 1.25rem;
-      margin-top: 2rem;
-      margin-bottom: 0.75rem;
-    }
-    .about-julie-inline-photo {
-      max-width: min(36rem, 100%);
-      margin: 1.75rem auto 1.25rem;
-    }
-    .about-julie-inline-photo img {
-      width: 100%;
-      height: auto;
-      display: block;
-      border-radius: 0.35rem;
-      box-shadow: 0 4px 18px rgba(26, 54, 93, 0.14);
-    }
-    .about-julie-inline-photo--portrait {
-      max-width: min(17rem, 82vw);
-    }
-    .about-julie-promo .about-julie-promo-link {
-      display: block;
-      max-width: min(36rem, 100%);
-      margin-inline: auto;
-      border-radius: 0.5rem;
-      transition: transform 0.15s ease, box-shadow 0.15s ease;
-    }
-    .about-julie-promo .about-julie-promo-link:hover {
-      transform: translateY(-2px);
-    }
-    .about-julie-promo .about-julie-promo-link:focus-visible {
-      outline: 3px solid #0d6efd;
-      outline-offset: 4px;
-    }
-    .about-julie-promo .about-julie-promo-img {
-      width: 100%;
-      height: auto;
-      display: block;
-      border-radius: 0.5rem;
-      box-shadow: 0 6px 24px rgba(26, 54, 93, 0.15);
-    }
-    .about-nebraska-map-col {
-      padding-left: var(--julie-bio-inline-pad);
-      padding-right: var(--julie-bio-inline-pad);
-    }
-    @media (min-width: 992px) {
-      .julie-bio-row {
-        display: grid;
-        grid-template-columns: 1fr minmax(0, min(42rem, 92vw)) minmax(0, auto);
-        align-items: start;
-        column-gap: 0;
-      }
-      .julie-bio-text-col {
-        grid-column: 2;
-        grid-row: 1;
-        justify-self: stretch;
-        width: 100%;
-        max-width: min(42rem, 100%);
-        margin-left: auto;
-        margin-right: auto;
-        padding-left: clamp(0.5rem, 1.5vw, 1rem);
-        padding-right: clamp(0.5rem, 1.5vw, 1rem);
-      }
-      .about-nebraska-map-col {
-        grid-column: 3;
-        grid-row: 1;
-        justify-self: start;
-        align-self: start;
-        padding-left: clamp(0.5rem, 1.75vw, 1.25rem);
-        padding-right: clamp(1rem, 3vw, 2.75rem);
-        display: flex;
-        justify-content: flex-start;
-      }
-      .about-nebraska-map-col .about-nebraska-map-aside {
-        width: auto;
-        max-width: 100%;
-        margin-left: 0;
-      }
-      .about-julie-side-sticky {
-        position: sticky;
-        top: 1rem;
-      }
-    }
-    .about-nebraska-map-aside {
-      width: 100%;
-    }
-    .about-nebraska-map-figure {
-      max-width: min(14rem, 88vw);
-      margin-left: auto;
-      margin-right: auto;
-    }
-    @media (min-width: 992px) {
-      .about-nebraska-map-figure {
-        max-width: clamp(9.5rem, 16vw, 12.5rem);
-        margin-left: 0;
-        margin-right: 0;
-      }
-    }
-    .about-nebraska-map-img {
-      width: 100%;
-      height: auto;
-      display: block;
-      border-radius: 0.35rem 0 0 0.35rem;
-      box-shadow: 0 4px 18px rgba(26, 54, 93, 0.12);
-    }
-    @media (max-width: 991.98px) {
-      .about-nebraska-map-img {
-        border-radius: 0.35rem;
-      }
-    }
-    .about-julie-hero { overflow: hidden; }
-    .about-julie-hero-deco {
-      z-index: 0;
-      pointer-events: none;
-      line-height: 0;
-    }
-    .about-julie-hero-map {
-      width: clamp(76px, 20vw, 156px);
-      height: auto;
-      display: block;
-      opacity: 0.96;
-      filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.4));
-    }
-    .about-julie-hero-flag {
-      width: clamp(52px, 8.5vw, 88px);
-      height: auto;
-      display: block;
-      border-radius: 5px;
-      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
-    }
-    .about-julie-hero-flag-wrap {
-      margin-inline-end: clamp(0.4rem, 1.25vw, 0.85rem);
-      padding-right: max(0.25rem, env(safe-area-inset-right, 0px));
-      padding-top: 0.35rem;
-      padding-bottom: 0.35rem;
-    }
-    .about-julie-hero .about-julie-hero-inner {
-      position: relative;
-      z-index: 1;
-    }
-    .about-julie-hero-inner-head {
-      min-width: 0;
-      max-width: 40rem;
-      margin-inline: auto;
-      width: 100%;
-      text-align: center;
-    }
-  </style>
+ <meta charset="UTF-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+ <title>Conozca a la fundadora — Mejor Vida Insurance LLC | Meet the founder — Mejor Vida Insurance LLC</title>
+ <meta name="description" content="Historia de Julie, agente de seguros de gastos finales con licencia. Asesoría clara en español e inglés con Mejor Vida Insurance." />
+ <link rel="icon" type="image/x-icon" href="favicon.ico" />
+ <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+ <link href="../css/quote-flow-shared.css" rel="stylesheet" />
+ <link href="css/quote-flow-shared.css" rel="stylesheet" />
+ <link href="css/mvi-assistant-widget.css" rel="stylesheet" />
+ <link href="../css/fontawesome-mvi.min.css?v=20260723-brands-fix" rel="stylesheet"/>
+ <style>
+  body { font-family: Inter, system-ui, -apple-system, sans-serif; }
+  html.lang-es [data-lang="en"] { display: none !important; }
+  html.lang-en [data-lang="es"] { display: none !important; }
+  .julie-bio-layout {
+   --julie-bio-inline-pad: clamp(0.75rem, 2.5vw, 1.5rem);
+  }
+  .julie-bio-layout .julie-bio-column {
+   max-width: 42rem;
+   width: 100%;
+  }
+  .julie-bio-row {
+   display: flex;
+   flex-direction: column;
+  }
+  .julie-bio-text-col {
+   padding-left: var(--julie-bio-inline-pad);
+   padding-right: var(--julie-bio-inline-pad);
+  }
+  .julie-bio-text-col article h2 {
+   color: #1a365d;
+   font-size: 1.25rem;
+   margin-top: 2rem;
+   margin-bottom: 0.75rem;
+  }
+  .about-julie-inline-photo {
+   max-width: min(36rem, 100%);
+   margin: 1.75rem auto 1.25rem;
+  }
+  .about-julie-inline-photo img {
+   width: 100%;
+   height: auto;
+   display: block;
+   border-radius: 0.35rem;
+   box-shadow: 0 4px 18px rgba(26, 54, 93, 0.14);
+  }
+  .about-julie-inline-photo--portrait {
+   max-width: min(17rem, 82vw);
+  }
+  .about-julie-promo .about-julie-promo-link {
+   display: block;
+   max-width: min(36rem, 100%);
+   margin-inline: auto;
+   border-radius: 0.5rem;
+   transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .about-julie-promo .about-julie-promo-link:hover {
+   transform: translateY(-2px);
+  }
+  .about-julie-promo .about-julie-promo-link:focus-visible {
+   outline: 3px solid #0d6efd;
+   outline-offset: 4px;
+  }
+  .about-julie-promo .about-julie-promo-img {
+   width: 100%;
+   height: auto;
+   display: block;
+   border-radius: 0.5rem;
+   box-shadow: 0 6px 24px rgba(26, 54, 93, 0.15);
+  }
+  .about-nebraska-map-col {
+   padding-left: var(--julie-bio-inline-pad);
+   padding-right: var(--julie-bio-inline-pad);
+  }
+  @media (min-width: 992px) {
+   .julie-bio-row {
+    display: grid;
+    grid-template-columns: 1fr minmax(0, min(42rem, 92vw)) minmax(0, auto);
+    align-items: start;
+    column-gap: 0;
+   }
+   .julie-bio-text-col {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: stretch;
+    width: 100%;
+    max-width: min(42rem, 100%);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: clamp(0.5rem, 1.5vw, 1rem);
+    padding-right: clamp(0.5rem, 1.5vw, 1rem);
+   }
+   .about-nebraska-map-col {
+    grid-column: 3;
+    grid-row: 1;
+    justify-self: start;
+    align-self: start;
+    padding-left: clamp(0.5rem, 1.75vw, 1.25rem);
+    padding-right: clamp(1rem, 3vw, 2.75rem);
+    display: flex;
+    justify-content: flex-start;
+   }
+   .about-nebraska-map-col .about-nebraska-map-aside {
+    width: auto;
+    max-width: 100%;
+    margin-left: 0;
+   }
+   .about-julie-side-sticky {
+    position: sticky;
+    top: 1rem;
+   }
+  }
+  .about-nebraska-map-aside {
+   width: 100%;
+  }
+  .about-nebraska-map-figure {
+   max-width: min(14rem, 88vw);
+   margin-left: auto;
+   margin-right: auto;
+  }
+  @media (min-width: 992px) {
+   .about-nebraska-map-figure {
+    max-width: clamp(9.5rem, 16vw, 12.5rem);
+    margin-left: 0;
+    margin-right: 0;
+   }
+  }
+  .about-nebraska-map-img {
+   width: 100%;
+   height: auto;
+   display: block;
+   border-radius: 0.35rem 0 0 0.35rem;
+   box-shadow: 0 4px 18px rgba(26, 54, 93, 0.12);
+  }
+  @media (max-width: 991.98px) {
+   .about-nebraska-map-img {
+    border-radius: 0.35rem;
+   }
+  }
+  .about-julie-hero { overflow: hidden; }
+  .about-julie-hero-deco {
+   z-index: 0;
+   pointer-events: none;
+   line-height: 0;
+  }
+  .about-julie-hero-map {
+   width: clamp(76px, 20vw, 156px);
+   height: auto;
+   display: block;
+   opacity: 0.96;
+   filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.4));
+  }
+  .about-julie-hero-flag {
+   width: clamp(52px, 8.5vw, 88px);
+   height: auto;
+   display: block;
+   border-radius: 5px;
+   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+  }
+  .about-julie-hero-flag-wrap {
+   margin-inline-end: clamp(0.4rem, 1.25vw, 0.85rem);
+   padding-right: max(0.25rem, env(safe-area-inset-right, 0px));
+   padding-top: 0.35rem;
+   padding-bottom: 0.35rem;
+  }
+  .about-julie-hero .about-julie-hero-inner {
+   position: relative;
+   z-index: 1;
+  }
+  .about-julie-hero-inner-head {
+   min-width: 0;
+   max-width: 40rem;
+   margin-inline: auto;
+   width: 100%;
+   text-align: center;
+  }
+ </style>
 
 
 
-  <link rel="alternate" hreflang="es" href="https://www.mejorvidainsurance.com/about-julie.html" />
-  <link rel="alternate" hreflang="x-default" href="https://www.mejorvidainsurance.com/about-julie.html" />
+ <link rel="alternate" hreflang="es" href="https://www.mejorvidainsurance.com/about-julie.html" />
+ <link rel="alternate" hreflang="x-default" href="https://www.mejorvidainsurance.com/about-julie.html" />
 <link rel="preload" as="image" href="img/opt/logo-spanish2.webp" type="image/webp" fetchpriority="high"/>
 <link href="css/nav-life-insurance.css" rel="stylesheet"/>
 </head>
 <body class="bg-light">
-  <header class="sticky-top bg-white shadow-sm border-bottom">
-    <div class="container">
-      <div class="d-flex align-items-center justify-content-between header-inner">
-        <div class="flex-shrink-0 header-logo-wrap">
-          <a href="../index.html#home" class="d-block">
-            <picture>
-              <source id="header-logo-webp" type="image/webp" srcset="../img/opt/logo-spanish2.webp" />
-              <img id="header-logo" src="../img/opt/logo-spanish2.png" alt="Mejor Vida Insurance LLC logo" class="header-logo" width="800" height="533" fetchpriority="high" decoding="async" />
-            </picture>
-          </a>
-        </div>
-
-        <nav class="desktop-nav d-none d-lg-flex align-items-center">
-          <div class="nav-life-dropdown">
-            <button type="button" class="nav-link-cm nav-life-dropdown-trigger" aria-expanded="false" aria-haspopup="true" aria-controls="nav-life-mega">
-              <span>Life &amp; Final Expense Insurance</span> <i class="fas fa-chevron-down nav-life-caret" aria-hidden="true"></i>
-            </button>
-            <div class="nav-life-mega" id="nav-life-mega" role="region" aria-label="Life and Final Expense Insurance">
-              <div class="nav-life-categories">
-                <div class="nav-life-category is-active">
-                  <i class="fas fa-umbrella" aria-hidden="true"></i>
-                  <span>Coverage Options</span>
-                </div>
-              </div>
-              <div class="nav-life-options">
-                <h3>Policy Types</h3>
-                <div class="nav-life-options-grid">
-                  <a href="guias-gastos-finales.html">Final Expense Insurance</a>
-                  <a href="term-quote.html">Term Life Insurance</a>
-                  <a href="blog/tipos-planes-seguro-gastos-finales.html">No Waiting Period Life &amp; Burial</a>
-                  <a href="quote.html">Instant Life Insurance</a>
-                  <a href="blog/tipos-planes-seguro-gastos-finales.html">Guaranteed Acceptance</a>
-                  <a href="contact.html">Mortgage Protection Insurance</a>
-                  <a href="blog/que-es-seguro-gastos-finales.html">Cremation Insurance</a>
-                  <a href="contact.html">Children's Life Insurance</a>
-                  <a href="blog/que-es-seguro-gastos-finales.html">Whole Life Insurance</a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <a href="../about-julie.html" class="nav-link-cm nav-link-stack">Conozca a la fundadora</a>
-          <a href="../index.html#final-expense-answers" class="nav-link-cm nav-link-stack nav-link-questions-wrap" title="¿Tienes preguntas sobre gastos finales?">
-            <i class="fas fa-robot" style="font-size: 0.95em; opacity: 0.88;" aria-hidden="true"></i><span>¿Tienes preguntas?</span>
-          </a>
-          <a href="../blog.html" class="nav-link-cm">Blog</a>
-          <a href="../final-expense-estimator.html" class="nav-link-cm nav-link-fe-calc-wrap">Calculadora de gastos finales</a>
-          <a href="../contact.html" class="nav-link-cm">Contacto</a>
-          <a href="/schedule-julie.html" class="nav-link-cm nav-link-schedule-wrap">Agendar una llamada</a>
-        </nav>
-
-        <div class="d-flex align-items-center gap-2 header-actions">
-          <a href="/quote.html" class="desktop-cta d-none d-lg-inline-block btn-see-prices">Cotización gratuita</a>
-          <a href="/en/" class="d-none d-lg-inline-block nav-link-cm small text-muted text-decoration-none ms-1" title="View site in English">English</a>
-          <button class="hamburger-btn" id="hamburger-btn" type="button" aria-label="Abrir menú">☰</button>
-        </div>
-      </div>
-    </div>
-    <div class="border-top py-2 d-none d-lg-block header-office-bar" style="background:#f8fbff;">
-      <div class="container d-flex flex-wrap gap-3 align-items-center justify-content-end small">
-        <a href="https://wa.me/14024405438?text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20seguro%20de%20gastos%20finales." target="_blank" rel="noopener" class="header-whatsapp-btn text-decoration-none"><i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp</a>
-        <span><strong>Teléfono:</strong> <a href="tel:+14024405438" class="text-decoration-none">402-440-5438</a></span>
-        <span><strong>SMS/Texto:</strong> <a href="tel:+14028441199" class="text-decoration-none">402-844-1199</a></span>
-      </div>
+ <header class="sticky-top bg-white shadow-sm border-bottom">
+  <div class="container">
+   <div class="d-flex align-items-center justify-content-between header-inner">
+    <div class="flex-shrink-0 header-logo-wrap">
+     <a href="../index.html#home" class="d-block">
+      <picture>
+       <source id="header-logo-webp" type="image/webp" srcset="../img/opt/logo-spanish2.webp" />
+       <img id="header-logo" src="../img/opt/logo-spanish2.png" alt="Mejor Vida Insurance LLC logo" class="header-logo" width="800" height="533" fetchpriority="high" decoding="async" />
+      </picture>
+     </a>
     </div>
 
-    <div class="mobile-menu" id="mobile-menu">
-      <p class="mobile-menu-sublabel">Life &amp; Final Expense Insurance</p>
-      <a href="guias-gastos-finales.html" class="mobile-menu-link">Coverage Options</a>
-      <a href="../about-julie.html" class="mobile-menu-link">Conozca a la fundadora</a>
-      <a href="../index.html#final-expense-answers" class="mobile-menu-link">¿Tienes preguntas?</a>
-      <a href="../blog.html" class="mobile-menu-link">Blog</a>
-      <a href="../final-expense-estimator.html" class="mobile-menu-link fw-bold" style="color:#0D47A1;">Calculadora de gastos finales</a>
-      <a href="../contact.html" class="mobile-menu-link">Contacto</a>
-      <a href="https://wa.me/14024405438?text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20seguro%20de%20gastos%20finales." target="_blank" rel="noopener" class="mobile-menu-link fw-bold" style="color:#1D9E53;"><i class="fab fa-whatsapp me-2"></i>WhatsApp (recomendado)</a>
-      <a href="/quote.html" class="mobile-menu-link fw-bold" style="color:#0D47A1;"><i class="fas fa-file-invoice-dollar me-2"></i>Cotización gratis en línea</a>
-      <a href="/schedule-julie.html" class="mobile-menu-link fw-bold" style="color:#0D47A1;"><i class="fas fa-calendar-alt me-2"></i>Agendar una llamada</a>
-      <p class="mobile-menu-link small text-muted mb-0 px-2">¿Cliente actual? Línea de atención: <a href="tel:+14024405438">402-440-5438</a></p>
-      <p class="mobile-menu-link small text-muted mb-0 px-2">SMS/Texto: <a href="tel:+14028441199" class="text-decoration-none">402-844-1199</a></p>
+    <nav class="desktop-nav d-none d-lg-flex align-items-center">
+     <div class="nav-life-dropdown">
+      <button type="button" class="nav-link-cm nav-life-dropdown-trigger" aria-expanded="false" aria-haspopup="true" aria-controls="nav-life-mega">
+       <span>Life &amp; Final Expense Insurance</span> <i class="fas fa-chevron-down nav-life-caret" aria-hidden="true"></i>
+      </button>
+      <div class="nav-life-mega" id="nav-life-mega" role="region" aria-label="Life and Final Expense Insurance">
+       <div class="nav-life-categories">
+        <div class="nav-life-category is-active">
+         <i class="fas fa-umbrella" aria-hidden="true"></i>
+         <span>Coverage Options</span>
+        </div>
+       </div>
+       <div class="nav-life-options">
+        <h3>Policy Types</h3>
+        <div class="nav-life-options-grid">
+         <a href="guias-gastos-finales.html">Final Expense Insurance</a>
+         <a href="term-quote.html">Term Life Insurance</a>
+         <a href="blog/tipos-planes-seguro-gastos-finales.html">No Waiting Period Life &amp; Burial</a>
+         <a href="quote.html">Instant Life Insurance</a>
+         <a href="blog/tipos-planes-seguro-gastos-finales.html">Guaranteed Acceptance</a>
+         <a href="contact.html">Mortgage Protection Insurance</a>
+         <a href="blog/que-es-seguro-gastos-finales.html">Cremation Insurance</a>
+         <a href="contact.html">Children's Life Insurance</a>
+         <a href="blog/que-es-seguro-gastos-finales.html">Whole Life Insurance</a>
+        </div>
+       </div>
+      </div>
+     </div>
+     <a href="../about-julie.html" class="nav-link-cm nav-link-stack">Conozca a la fundadora</a>
+     <a href="../index.html#final-expense-answers" class="nav-link-cm nav-link-stack nav-link-questions-wrap" title="¿Tienes preguntas sobre gastos finales?">
+      <i class="fas fa-robot" style="font-size: 0.95em; opacity: 0.88;" aria-hidden="true"></i><span>¿Tienes preguntas?</span>
+     </a>
+     <a href="../blog.html" class="nav-link-cm">Blog</a>
+     <a href="../final-expense-estimator.html" class="nav-link-cm nav-link-fe-calc-wrap">Calculadora de gastos finales</a>
+     <a href="../contact.html" class="nav-link-cm">Contacto</a>
+     <a href="/schedule-julie.html" class="nav-link-cm nav-link-schedule-wrap">Agendar una llamada</a>
+    </nav>
+
+    <div class="d-flex align-items-center gap-2 header-actions">
+     <a href="/quote.html" class="desktop-cta d-none d-lg-inline-block btn-see-prices">Cotización gratuita</a>
+     <a href="/en/" class="d-none d-lg-inline-block nav-link-cm small text-muted text-decoration-none ms-1" title="View site in English">English</a>
+     <button class="hamburger-btn" id="hamburger-btn" type="button" aria-label="Abrir menú">☰</button>
     </div>
-  </header>
+   </div>
+  </div>
+  <div class="border-top py-2 d-none d-lg-block header-office-bar" style="background:#f8fbff;">
+   <div class="container d-flex flex-wrap gap-3 align-items-center justify-content-end small">
+    <a href="https://wa.me/14024405438?text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20seguro%20de%20gastos%20finales." target="_blank" rel="noopener" class="header-whatsapp-btn text-decoration-none"><i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp</a>
+    <span><strong>Teléfono:</strong> <a href="tel:+14024405438" class="text-decoration-none">402-440-5438</a></span>
+    <span><strong>SMS/Texto:</strong> <a href="tel:+14028441199" class="text-decoration-none">402-844-1199</a></span>
+   </div>
+  </div>
 
-  <main>
-    <section class="about-julie-hero py-4 py-md-5 text-white position-relative" style="background:#1a365d;">
-      <div class="about-julie-hero-deco position-absolute top-0 start-0 p-2 p-md-3">
-        <!-- Map: Colombia (orthographic projection) — Wikimedia Commons -->
-        <img src="img/colombia-map.svg" class="about-julie-hero-map" alt="" width="200" height="200" decoding="async" aria-hidden="true"  loading="lazy"/>
-        <span class="visually-hidden"><span data-lang="es">Mapa de Colombia</span><span data-lang="en">Map of Colombia</span></span>
-      </div>
-      <div class="about-julie-hero-deco about-julie-hero-flag-wrap position-absolute top-50 end-0 translate-middle-y">
-        <img src="img/colombia-flag.svg" class="about-julie-hero-flag" alt="" width="96" height="64" decoding="async" aria-hidden="true"  loading="lazy"/>
-        <span class="visually-hidden"><span data-lang="es">Bandera de Colombia</span><span data-lang="en">Flag of Colombia</span></span>
-      </div>
-      <div class="container about-julie-hero-inner px-3">
-        <div class="about-julie-hero-inner-head">
-          <h1 class="fw-bold mb-2" data-lang="es">Conozca a la fundadora</h1>
-          <h1 class="fw-bold mb-2" data-lang="en">Meet the founder</h1>
-          <p class="mb-0 mx-auto" style="max-width:36rem;" data-lang="es">Fundadora de Mejor Vida Insurance LLC</p>
-          <p class="mb-0 mx-auto" style="max-width:36rem;" data-lang="en">Founder of Mejor Vida Insurance LLC</p>
-        </div>
-      </div>
-    </section>
+  <div class="mobile-menu" id="mobile-menu">
+   <p class="mobile-menu-sublabel">Life &amp; Final Expense Insurance</p>
+   <a href="guias-gastos-finales.html" class="mobile-menu-link">Coverage Options</a>
+   <a href="../about-julie.html" class="mobile-menu-link">Conozca a la fundadora</a>
+   <a href="../index.html#final-expense-answers" class="mobile-menu-link">¿Tienes preguntas?</a>
+   <a href="../blog.html" class="mobile-menu-link">Blog</a>
+   <a href="../final-expense-estimator.html" class="mobile-menu-link fw-bold" style="color:#0D47A1;">Calculadora de gastos finales</a>
+   <a href="../contact.html" class="mobile-menu-link">Contacto</a>
+   <a href="https://wa.me/14024405438?text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20seguro%20de%20gastos%20finales." target="_blank" rel="noopener" class="mobile-menu-link fw-bold" style="color:#1D9E53;"><i class="fab fa-whatsapp me-2"></i>WhatsApp (recomendado)</a>
+   <a href="/quote.html" class="mobile-menu-link fw-bold" style="color:#0D47A1;"><i class="fas fa-file-invoice-dollar me-2"></i>Cotización gratis en línea</a>
+   <a href="/schedule-julie.html" class="mobile-menu-link fw-bold" style="color:#0D47A1;"><i class="fas fa-calendar-alt me-2"></i>Agendar una llamada</a>
+   <p class="mobile-menu-link small text-muted mb-0 px-2">¿Cliente actual? Línea de atención: <a href="tel:+14024405438">402-440-5438</a></p>
+   <p class="mobile-menu-link small text-muted mb-0 px-2">SMS/Texto: <a href="tel:+14028441199" class="text-decoration-none">402-844-1199</a></p>
+  </div>
+ </header>
 
-    <section class="py-5">
-      <div class="container-fluid julie-bio-layout px-0">
-        <div class="julie-bio-row">
-          <div class="julie-bio-column julie-bio-text-col">
-            <article class="text-body-secondary lh-lg text-center">
-              <div data-lang="es">
-                <p>Julie Braunsroth es la fundadora de Mejor Vida Insurance LLC y agente de seguros licenciada en Nebraska, Kansas, Colorado y Nevada. Nacida en Bogotá, Colombia, y radicada en Nebraska, atiende a familias hispanas y de habla inglesa con asesoría clara y sin presión.</p>
-                <p>Antes de dedicarse a los seguros, Julie trabajó en educación y servicio comunitario — incluyendo apoyo a madres hispanas, programas bilingües de alfabetización y liderazgo en MyBridge Radio Español. Esa trayectoria le dio experiencia práctica comunicando información importante en español.</p>
-                <h2>Cómo ayuda a las familias</h2>
-                <p>Hoy, Julie se especializa en seguro de vida para gastos finales. Compara opciones de varias aseguradoras, explica coberturas y costos en términos sencillos, y ayuda a cada familia a elegir un plan que se ajuste a su presupuesto y a sus necesidades.</p>
-                <p>Si busca una cotización gratuita o una conversación sin compromiso, Julie está disponible por teléfono, WhatsApp o videollamada.</p>
-              </div>
-              <div data-lang="en">
-                <p>Julie Braunsroth is the founder of Mejor Vida Insurance LLC and a licensed insurance agent in Nebraska, Kansas, Colorado, and Nevada. Born in Bogotá, Colombia, and based in Nebraska, she serves Hispanic and English-speaking families with clear, no-pressure guidance.</p>
-                <p>Before entering insurance, Julie worked in education and community service — including support for Hispanic mothers, bilingual literacy programs, and leadership with MyBridge Radio Español. That background gave her practical experience explaining important information in Spanish.</p>
-                <h2>How she helps families</h2>
-                <p>Today, Julie specializes in final expense life insurance. She compares options from multiple carriers, explains coverage and cost in plain language, and helps each family choose a plan that fits their budget and needs.</p>
-                <p>If you want a free quote or a no-obligation conversation, Julie is available by phone, WhatsApp, or video call.</p>
-              </div>
-            </article>
-            <p class="mt-4 mb-0 d-flex flex-wrap justify-content-center align-items-center gap-2">
-              <a href="quote.html" class="btn btn-primary fw-bold" data-lang="es">Cotización gratuita</a>
-              <a href="quote.html" class="btn btn-primary fw-bold" data-lang="en">Get a free quote</a>
-              <a href="index.html#about" class="btn btn-outline-primary fw-bold" data-lang="es">Volver al resumen en inicio</a>
-              <a href="index.html#about" class="btn btn-outline-primary fw-bold" data-lang="en">Back to the short bio on the home page</a>
-            </p>
-          </div>
-          <div class="about-nebraska-map-col mt-4 mt-lg-0">
-            <aside class="about-nebraska-map-aside about-julie-side-sticky">
-              <figure class="about-nebraska-map-figure mb-0">
-                <!-- Map: Nebraska highlighting Lancaster County — Wikimedia Commons; gold star marks Lincoln (capital) -->
-                <img src="img/nebraska-lancaster.svg" class="about-nebraska-map-img" alt="Mapa de Nebraska con el área de Lincoln marcada: base de Julie para atender a sus clientes." width="200" height="92" decoding="async" loading="lazy" />
-                <figcaption class="small text-muted mt-2 text-center">
-                  <span data-lang="es">Base de Julie en Lincoln, Nebraska, para atender a sus clientes.</span>
-                  <span data-lang="en">Julie’s base in Lincoln, Nebraska, for serving her clients.</span>
-                </figcaption>
-              </figure>
-            </aside>
-          </div>
-        </div>
-      </div>
-    </section>
+ <main>
+  <section class="about-julie-hero py-4 py-md-5 text-white position-relative" style="background:#1a365d;">
+   <div class="about-julie-hero-deco position-absolute top-0 start-0 p-2 p-md-3">
+    <!-- Map: Colombia (orthographic projection) — Wikimedia Commons -->
+    <img src="img/colombia-map.svg" class="about-julie-hero-map" alt="" width="200" height="200" decoding="async" aria-hidden="true" loading="lazy"/>
+    <span class="visually-hidden"><span data-lang="es">Mapa de Colombia</span><span data-lang="en">Map of Colombia</span></span>
+   </div>
+   <div class="about-julie-hero-deco about-julie-hero-flag-wrap position-absolute top-50 end-0 translate-middle-y">
+    <img src="img/colombia-flag.svg" class="about-julie-hero-flag" alt="" width="96" height="64" decoding="async" aria-hidden="true" loading="lazy"/>
+    <span class="visually-hidden"><span data-lang="es">Bandera de Colombia</span><span data-lang="en">Flag of Colombia</span></span>
+   </div>
+   <div class="container about-julie-hero-inner px-3">
+    <div class="about-julie-hero-inner-head">
+     <h1 class="fw-bold mb-2" data-lang="es">Conozca a la fundadora</h1>
+     <h1 class="fw-bold mb-2" data-lang="en">Meet the founder</h1>
+     <p class="mb-0 mx-auto" style="max-width:36rem;" data-lang="es">Fundadora de Mejor Vida Insurance LLC</p>
+     <p class="mb-0 mx-auto" style="max-width:36rem;" data-lang="en">Founder of Mejor Vida Insurance LLC</p>
+    </div>
+   </div>
+  </section>
 
-    <section class="about-julie-promo py-4 py-md-5 bg-white border-top" aria-label="Promoción">
-      <div class="container px-3 text-center">
-        <a href="https://wa.me/14024405438?text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20seguro%20de%20gastos%20finales." target="_blank" rel="noopener noreferrer" class="about-julie-promo-link text-decoration-none">
-          <picture>
+  <section class="py-5">
+   <div class="container-fluid julie-bio-layout px-0">
+    <div class="julie-bio-row">
+     <div class="julie-bio-column julie-bio-text-col">
+      <article class="text-body-secondary lh-lg text-center">
+       <div data-lang="es">
+        <p>Julie Braunsroth es la fundadora de Mejor Vida Insurance LLC y agente de seguros licenciada. Nacida en Bogotá, Colombia, y radicada en Nebraska, atiende a familias hispanas y de habla inglesa con asesoría clara y sin presión.</p>
+        <p>Antes de dedicarse a los seguros, Julie trabajó en educación y servicio comunitario — incluyendo apoyo a madres hispanas, programas bilingües de alfabetización y liderazgo en MyBridge Radio Español. Esa trayectoria le dio experiencia práctica comunicando información importante en español.</p>
+        <h2>Cómo ayuda a las familias</h2>
+        <p>Hoy, Julie se especializa en seguro de vida para gastos finales. Compara opciones de varias aseguradoras, explica coberturas y costos en términos sencillos, y ayuda a cada familia a elegir un plan que se ajuste a su presupuesto y a sus necesidades.</p>
+        <p>Si busca una cotización gratuita o una conversación sin compromiso, Julie está disponible por teléfono, WhatsApp o videollamada.</p>
+       </div>
+       <div data-lang="en">
+        <p>Julie Braunsroth is the founder of Mejor Vida Insurance LLC and a licensed insurance agent. Born in Bogotá, Colombia, and based in Nebraska, she serves Hispanic and English-speaking families with clear, no-pressure guidance.</p>
+        <p>Before entering insurance, Julie worked in education and community service — including support for Hispanic mothers, bilingual literacy programs, and leadership with MyBridge Radio Español. That background gave her practical experience explaining important information in Spanish.</p>
+        <h2>How she helps families</h2>
+        <p>Today, Julie specializes in final expense life insurance. She compares options from multiple carriers, explains coverage and cost in plain language, and helps each family choose a plan that fits their budget and needs.</p>
+        <p>If you want a free quote or a no-obligation conversation, Julie is available by phone, WhatsApp, or video call.</p>
+       </div>
+      </article>
+      <p class="mt-4 mb-0 d-flex flex-wrap justify-content-center align-items-center gap-2">
+       <a href="quote.html" class="btn btn-primary fw-bold" data-lang="es">Cotización gratuita</a>
+       <a href="quote.html" class="btn btn-primary fw-bold" data-lang="en">Get a free quote</a>
+       <a href="index.html#about" class="btn btn-outline-primary fw-bold" data-lang="es">Volver al resumen en inicio</a>
+       <a href="index.html#about" class="btn btn-outline-primary fw-bold" data-lang="en">Back to the short bio on the home page</a>
+      </p>
+     </div>
+     <div class="about-nebraska-map-col mt-4 mt-lg-0">
+      <aside class="about-nebraska-map-aside about-julie-side-sticky">
+       <figure class="about-nebraska-map-figure mb-0">
+        <!-- Map: Nebraska highlighting Lancaster County — Wikimedia Commons; gold star marks Lincoln (capital) -->
+        <img src="img/nebraska-lancaster.svg" class="about-nebraska-map-img" alt="Mapa de Nebraska con el área de Lincoln marcada: base de Julie para atender a sus clientes." width="200" height="92" decoding="async" loading="lazy" />
+        <figcaption class="small text-muted mt-2 text-center">
+         <span data-lang="es">Base de Julie en Lincoln, Nebraska, para atender a sus clientes.</span>
+         <span data-lang="en">Julie’s base in Lincoln, Nebraska, for serving her clients.</span>
+        </figcaption>
+       </figure>
+      </aside>
+     </div>
+    </div>
+   </div>
+  </section>
+
+  <section class="about-julie-promo py-4 py-md-5 bg-white border-top" aria-label="Promoción">
+   <div class="container px-3 text-center">
+    <a href="https://wa.me/14024405438?text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20seguro%20de%20gastos%20finales." target="_blank" rel="noopener noreferrer" class="about-julie-promo-link text-decoration-none">
+     <picture>
 <source type="image/webp" srcset="img/opt/julie-promo-funeral-cost.webp"/>
 <img class="about-julie-promo-img" alt="Julie, tu agente de seguros de confianza: ¿sabe cuánto cuesta un funeral hoy? Hablemos sin compromiso." src="img/opt/julie-promo-funeral-cost.png" width="900" height="900" loading="lazy" decoding="async" />
 </picture>
-        </a>
-        <p class="small text-muted mt-3 mb-0" data-lang="es">Toca el anuncio para escribirnos por WhatsApp.</p>
-        <p class="small text-muted mt-3 mb-0" data-lang="en">Tap the ad to message us on WhatsApp (Spanish graphic).</p>
-      </div>
-    </section>
-  </main>
+    </a>
+    <p class="small text-muted mt-3 mb-0" data-lang="es">Toca el anuncio para escribirnos por WhatsApp.</p>
+    <p class="small text-muted mt-3 mb-0" data-lang="en">Tap the ad to message us on WhatsApp (Spanish graphic).</p>
+   </div>
+  </section>
+ </main>
 
-  <footer style="background:#1a365d; padding: 8px 0 24px 0;">
-    <div class="container">
-      <div class="text-white" style="margin:0; padding:0;">
-      <div class="d-flex flex-wrap align-items-center justify-content-center gap-3 small">
-        <picture>
+ <footer style="background:#1a365d; padding: 8px 0 24px 0;">
+  <div class="container">
+   <div class="text-white" style="margin:0; padding:0;">
+   <div class="d-flex flex-wrap align-items-center justify-content-center gap-3 small">
+    <picture>
 <source id="footer-logo-webp" type="image/webp" srcset="img/opt/logo-spanish2.webp"/>
 <img id="footer-logo" alt="Mejor Vida Insurance LLC" style="height:130px;filter:brightness(0) invert(1);margin-top:-25px;margin-bottom:-25px;" src="img/opt/logo-spanish2.png" width="800" height="533" loading="lazy" decoding="async"/>
 </picture>
-        <a href="https://wa.me/14024405438?text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20seguro%20de%20gastos%20finales." target="_blank" rel="noopener" class="text-white text-opacity-90 text-decoration-none text-nowrap"><i class="fab fa-whatsapp me-2 opacity-90"></i>WhatsApp</a>
-        <span class="text-nowrap"><i class="fas fa-envelope me-2 opacity-75"></i><a href="mailto:Julie@mejorvidainsurance.com" class="text-white text-opacity-90 text-decoration-none">Julie@mejorvidainsurance.com</a></span>
-      </div>
-      <div class="d-flex flex-wrap align-items-center justify-content-center gap-3 small mt-1">
-        <span class="text-nowrap" data-lang="es"><i class="fas fa-phone me-2 opacity-75"></i>Teléfono: <a href="tel:+14024405438">402-440-5438</a></span>
-        <span class="text-nowrap" data-lang="en"><i class="fas fa-phone me-2 opacity-75"></i>Phone: <a href="tel:+14024405438">402-440-5438</a></span>
-        <span class="text-nowrap" data-lang="es"><i class="fas fa-comment-dots me-2 opacity-75"></i>SMS/Texto: <a href="tel:+14028441199" class="text-white text-opacity-90 text-decoration-none">402-844-1199</a></span>
-        <span class="text-nowrap" data-lang="en"><i class="fas fa-comment-dots me-2 opacity-75"></i>SMS/Text: <a href="tel:+14028441199" class="text-white text-opacity-90 text-decoration-none">402-844-1199</a></span>
-      </div>
+    <a href="https://wa.me/14024405438?text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20seguro%20de%20gastos%20finales." target="_blank" rel="noopener" class="text-white text-opacity-90 text-decoration-none text-nowrap"><i class="fab fa-whatsapp me-2 opacity-90"></i>WhatsApp</a>
+    <span class="text-nowrap"><i class="fas fa-envelope me-2 opacity-75"></i><a href="mailto:Julie@mejorvidainsurance.com" class="text-white text-opacity-90 text-decoration-none">Julie@mejorvidainsurance.com</a></span>
+   </div>
+   <div class="d-flex flex-wrap align-items-center justify-content-center gap-3 small mt-1">
+    <span class="text-nowrap" data-lang="es"><i class="fas fa-phone me-2 opacity-75"></i>Teléfono: <a href="tel:+14024405438">402-440-5438</a></span>
+    <span class="text-nowrap" data-lang="en"><i class="fas fa-phone me-2 opacity-75"></i>Phone: <a href="tel:+14024405438">402-440-5438</a></span>
+    <span class="text-nowrap" data-lang="es"><i class="fas fa-comment-dots me-2 opacity-75"></i>SMS/Texto: <a href="tel:+14028441199" class="text-white text-opacity-90 text-decoration-none">402-844-1199</a></span>
+    <span class="text-nowrap" data-lang="en"><i class="fas fa-comment-dots me-2 opacity-75"></i>SMS/Text: <a href="tel:+14028441199" class="text-white text-opacity-90 text-decoration-none">402-844-1199</a></span>
+   </div>
+  </div>
+   <div class="row g-2 pt-2 mt-2 border-top border-secondary text-white small">
+    <div class="col-12 col-md-7">
+     <h4 class="h6 fw-bold mb-2" data-lang="es">Enlaces rápidos</h4>
+     <h4 class="h6 fw-bold mb-2" data-lang="en">Quick Links</h4>
+     <div class="d-flex flex-wrap gap-2 gap-md-3">
+      <a href="index.html#home" class="text-white text-opacity-75 text-decoration-none" data-lang="es">Inicio</a><a href="index.html#home" class="text-white text-opacity-75 text-decoration-none" data-lang="en">Home</a>
+      <span class="text-white text-opacity-50">·</span>
+      <a href="about-julie.html" class="text-white text-opacity-75 text-decoration-none" data-lang="es">Conozca a la fundadora</a><a href="about-julie.html" class="text-white text-opacity-75 text-decoration-none" data-lang="en">Meet the founder</a>
+      <span class="text-white text-opacity-50">·</span>
+      <a href="index.html#how-it-works" class="text-white text-opacity-75 text-decoration-none" data-lang="es">Cómo funciona</a><a href="index.html#how-it-works" class="text-white text-opacity-75 text-decoration-none" data-lang="en">How It Works</a>
+      <span class="text-white text-opacity-50">·</span>
+      <a href="aseguradoras.html" class="text-white text-opacity-75 text-decoration-none" data-lang="es">Aseguradoras</a><a href="en/insurance-carriers.html" class="text-white text-opacity-75 text-decoration-none" data-lang="en">Insurers</a>
+      <span class="text-white text-opacity-50">·</span>
+      <a href="index.html#final-expense-answers" class="text-white text-opacity-75 text-decoration-none" data-lang="es">¿Tienes preguntas?</a><a href="index.html#final-expense-answers" class="text-white text-opacity-75 text-decoration-none" data-lang="en">Got questions?</a>
+      <span class="text-white text-opacity-50">·</span>
+      <a href="blog.html" class="text-white text-opacity-75 text-decoration-none">Blog</a>
+      <span class="text-white text-opacity-50">·</span>
+      <a href="contact.html" class="text-white text-opacity-75 text-decoration-none" data-lang="es">Contacto</a><a href="contact.html" class="text-white text-opacity-75 text-decoration-none" data-lang="en">Contact</a>
+      <span class="text-white text-opacity-50">·</span>
+      <a href="quote.html" class="text-white text-opacity-75 text-decoration-none" data-lang="es">Cotización gratuita</a><a href="quote.html" class="text-white text-opacity-75 text-decoration-none" data-lang="en">Get a Free Quote</a>
+     </div>
     </div>
-      <div class="row g-2 pt-2 mt-2 border-top border-secondary text-white small">
-        <div class="col-12 col-md-7">
-          <h4 class="h6 fw-bold mb-2" data-lang="es">Enlaces rápidos</h4>
-          <h4 class="h6 fw-bold mb-2" data-lang="en">Quick Links</h4>
-          <div class="d-flex flex-wrap gap-2 gap-md-3">
-            <a href="index.html#home" class="text-white text-opacity-75 text-decoration-none" data-lang="es">Inicio</a><a href="index.html#home" class="text-white text-opacity-75 text-decoration-none" data-lang="en">Home</a>
-            <span class="text-white text-opacity-50">·</span>
-            <a href="about-julie.html" class="text-white text-opacity-75 text-decoration-none" data-lang="es">Conozca a la fundadora</a><a href="about-julie.html" class="text-white text-opacity-75 text-decoration-none" data-lang="en">Meet the founder</a>
-            <span class="text-white text-opacity-50">·</span>
-            <a href="index.html#how-it-works" class="text-white text-opacity-75 text-decoration-none" data-lang="es">Cómo funciona</a><a href="index.html#how-it-works" class="text-white text-opacity-75 text-decoration-none" data-lang="en">How It Works</a>
-            <span class="text-white text-opacity-50">·</span>
-            <a href="aseguradoras.html" class="text-white text-opacity-75 text-decoration-none" data-lang="es">Aseguradoras</a><a href="en/insurance-carriers.html" class="text-white text-opacity-75 text-decoration-none" data-lang="en">Insurers</a>
-            <span class="text-white text-opacity-50">·</span>
-            <a href="index.html#final-expense-answers" class="text-white text-opacity-75 text-decoration-none" data-lang="es">¿Tienes preguntas?</a><a href="index.html#final-expense-answers" class="text-white text-opacity-75 text-decoration-none" data-lang="en">Got questions?</a>
-            <span class="text-white text-opacity-50">·</span>
-            <a href="blog.html" class="text-white text-opacity-75 text-decoration-none">Blog</a>
-            <span class="text-white text-opacity-50">·</span>
-            <a href="contact.html" class="text-white text-opacity-75 text-decoration-none" data-lang="es">Contacto</a><a href="contact.html" class="text-white text-opacity-75 text-decoration-none" data-lang="en">Contact</a>
-            <span class="text-white text-opacity-50">·</span>
-            <a href="quote.html" class="text-white text-opacity-75 text-decoration-none" data-lang="es">Cotización gratuita</a><a href="quote.html" class="text-white text-opacity-75 text-decoration-none" data-lang="en">Get a Free Quote</a>
-          </div>
-        </div>
-        <div class="col-12 col-md-5">
-          <h4 class="h6 fw-bold mb-2">Legal</h4>
-          <div class="d-flex flex-column gap-2 small">
-            <div>
-              <span class="text-white text-opacity-50 text-uppercase d-block mb-1" style="font-size:0.65rem;letter-spacing:0.04em;">English</span>
-              <div class="d-flex flex-wrap gap-2 gap-md-3">
-                <a href="privacy-policy-en.html" class="text-white text-opacity-75 text-decoration-none">Privacy Policy</a>
-                <span class="text-white text-opacity-50">·</span>
-                <a href="terms-service-en.html" class="text-white text-opacity-75 text-decoration-none">Terms of Service</a>
-              </div>
-            </div>
-            <div>
-              <span class="text-white text-opacity-50 text-uppercase d-block mb-1" style="font-size:0.65rem;letter-spacing:0.04em;">Español</span>
-              <div class="d-flex flex-wrap gap-2 gap-md-3">
-                <a href="privacy-policy.html" class="text-white text-opacity-75 text-decoration-none">Política de privacidad</a>
-                <span class="text-white text-opacity-50">·</span>
-                <a href="terms-service.html" class="text-white text-opacity-75 text-decoration-none">Términos de servicio</a>
-              </div>
-            </div>
-          </div>
-        </div>
+    <div class="col-12 col-md-5">
+     <h4 class="h6 fw-bold mb-2">Legal</h4>
+     <div class="d-flex flex-column gap-2 small">
+      <div>
+       <span class="text-white text-opacity-50 text-uppercase d-block mb-1" style="font-size:0.65rem;letter-spacing:0.04em;">English</span>
+       <div class="d-flex flex-wrap gap-2 gap-md-3">
+        <a href="privacy-policy-en.html" class="text-white text-opacity-75 text-decoration-none">Privacy Policy</a>
+        <span class="text-white text-opacity-50">·</span>
+        <a href="terms-service-en.html" class="text-white text-opacity-75 text-decoration-none">Terms of Service</a>
+       </div>
       </div>
-      <div class="border-top border-secondary mt-2 pt-2">
-        <p class="small text-center text-white text-opacity-75 mb-1" data-lang="es">Julie es una agente de seguros licenciada en Nebraska, Kansas, Colorado y Nevada. NPN #21695431. <a class="text-white text-opacity-75" href="../licencias.html">Ver licencias</a></p>
-        <p class="small text-center text-white text-opacity-75 mb-1" data-lang="en">Julie is a licensed insurance agent in Nebraska, Kansas, Colorado, and Nevada. NPN #21695431. <a class="text-white text-opacity-75" href="../en/licenses.html">View licenses</a></p>
-        <p class="small text-center text-white text-opacity-50 mb-0">&copy; <span id="year"></span> Mejor Vida Insurance LLC. All rights reserved.</p>
+      <div>
+       <span class="text-white text-opacity-50 text-uppercase d-block mb-1" style="font-size:0.65rem;letter-spacing:0.04em;">Español</span>
+       <div class="d-flex flex-wrap gap-2 gap-md-3">
+        <a href="privacy-policy.html" class="text-white text-opacity-75 text-decoration-none">Política de privacidad</a>
+        <span class="text-white text-opacity-50">·</span>
+        <a href="terms-service.html" class="text-white text-opacity-75 text-decoration-none">Términos de servicio</a>
+       </div>
       </div>
+     </div>
     </div>
-  </footer>
+   </div>
+   <div class="border-top border-secondary mt-2 pt-2">
+    <p class="small text-center text-white text-opacity-75 mb-1" data-lang="es">Julie es una agente de seguros licenciada. NPN #21695431. <a class="text-white text-opacity-75" href="../licencias.html">Ver licencias</a></p>
+    <p class="small text-center text-white text-opacity-75 mb-1" data-lang="en">Julie is a licensed insurance agent. NPN #21695431. <a class="text-white text-opacity-75" href="../en/licenses.html">View licenses</a></p>
+    <p class="small text-center text-white text-opacity-50 mb-0">&copy; <span id="year"></span> Mejor Vida Insurance LLC. All rights reserved.</p>
+   </div>
+  </div>
+ </footer>
 
-  <script defer src="bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="../js/mvi-funnel-track.js?v=20260702e"></script>
+ <script defer src="bootstrap/js/bootstrap.bundle.min.js"></script>
+ <script src="../js/mvi-funnel-track.js?v=20260702e"></script>
 <script defer src="../js/mvi-ga4-funnel.js"></script>
 <script defer src="script.js"></script>
-  <div id="mvi-assistant-root" data-api-url="/api/website-chat"></div>
-  <script src="js/website-assistant-widget.js" defer></script>
-  <script>
-    (function () {
-      function setLanguage(lang) {
-        document.documentElement.className = "lang-" + lang;
-        sessionStorage.setItem("sessionLang", lang);
-        var logo = document.getElementById("header-logo");
-        if (logo) logo.src = lang === "es" ? "img/logo-spanish2.png" : "img/logo-english2.png";
-        var flo = document.getElementById("footer-logo");
-        if (flo) flo.src = lang === "es" ? "img/logo-spanish2.png" : "img/logo-english2.png";
-      }
-      var current = sessionStorage.getItem("sessionLang") || "es";
-      setLanguage(current);
-      document.querySelectorAll("[data-lang-btn]").forEach(function (btn) {
-        btn.addEventListener("click", function () { setLanguage(btn.getAttribute("data-lang-btn")); });
-      });
-      document.querySelectorAll("[data-lang-btn]").forEach(function (btn) {
-        btn.classList.toggle("active", btn.getAttribute("data-lang-btn") === current);
-      });
-      var y = document.getElementById('year');
-      if (y) y.textContent = new Date().getFullYear();
-      var hamburgerBtn = document.getElementById('hamburger-btn');
-      var mobileMenu = document.getElementById('mobile-menu');
-      if (hamburgerBtn && mobileMenu) {
-        hamburgerBtn.addEventListener('click', function(e) {
-          e.stopPropagation();
-          mobileMenu.classList.toggle('active');
-          hamburgerBtn.textContent = mobileMenu.classList.contains('active') ? '✕' : '☰';
-        });
-        document.addEventListener('click', function(e) {
-          if (!mobileMenu.contains(e.target) && !hamburgerBtn.contains(e.target)) {
-            mobileMenu.classList.remove('active');
-            hamburgerBtn.textContent = '☰';
-          }
-        });
-      }
-    })();
-  </script>
+ <div id="mvi-assistant-root" data-api-url="/api/website-chat"></div>
+ <script src="js/website-assistant-widget.js" defer></script>
+ <script>
+  (function () {
+   function setLanguage(lang) {
+    document.documentElement.className = "lang-" + lang;
+    sessionStorage.setItem("sessionLang", lang);
+    var logo = document.getElementById("header-logo");
+    if (logo) logo.src = lang === "es" ? "img/logo-spanish2.png" : "img/logo-english2.png";
+    var flo = document.getElementById("footer-logo");
+    if (flo) flo.src = lang === "es" ? "img/logo-spanish2.png" : "img/logo-english2.png";
+   }
+   var current = sessionStorage.getItem("sessionLang") || "es";
+   setLanguage(current);
+   document.querySelectorAll("[data-lang-btn]").forEach(function (btn) {
+    btn.addEventListener("click", function () { setLanguage(btn.getAttribute("data-lang-btn")); });
+   });
+   document.querySelectorAll("[data-lang-btn]").forEach(function (btn) {
+    btn.classList.toggle("active", btn.getAttribute("data-lang-btn") === current);
+   });
+   var y = document.getElementById('year');
+   if (y) y.textContent = new Date().getFullYear();
+   var hamburgerBtn = document.getElementById('hamburger-btn');
+   var mobileMenu = document.getElementById('mobile-menu');
+   if (hamburgerBtn && mobileMenu) {
+    hamburgerBtn.addEventListener('click', function(e) {
+     e.stopPropagation();
+     mobileMenu.classList.toggle('active');
+     hamburgerBtn.textContent = mobileMenu.classList.contains('active') ? '✕' : '☰';
+    });
+    document.addEventListener('click', function(e) {
+     if (!mobileMenu.contains(e.target) && !hamburgerBtn.contains(e.target)) {
+      mobileMenu.classList.remove('active');
+      hamburgerBtn.textContent = '☰';
+     }
+    });
+   }
+  })();
+ </script>
 </body>
 </html>

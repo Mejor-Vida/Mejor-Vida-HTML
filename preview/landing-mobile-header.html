@@ -1,212 +1,212 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Vista previa — header móvil · landing gastos finales</title>
-  <style>
-    :root {
-      --toolbar-bg: #1a365d;
-      --toolbar-text: #f8fafc;
-      --frame-border: #334155;
-      --page-bg: #e2e8f0;
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: Inter, system-ui, -apple-system, sans-serif;
-      background: var(--page-bg);
-      color: #0f172a;
-      min-height: 100vh;
-    }
-    .toolbar {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: var(--toolbar-bg);
-      color: var(--toolbar-text);
-      padding: 0.75rem 1rem;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-    }
-    .toolbar h1 {
-      margin: 0 0 0.35rem;
-      font-size: 1rem;
-      font-weight: 700;
-    }
-    .toolbar p {
-      margin: 0 0 0.65rem;
-      font-size: 0.8rem;
-      opacity: 0.9;
-    }
-    .toolbar p code {
-      background: rgba(255, 255, 255, 0.12);
-      padding: 0.1rem 0.35rem;
-      border-radius: 4px;
-      font-size: 0.78rem;
-    }
-    .controls {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      align-items: center;
-    }
-    .controls label {
-      font-size: 0.75rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      opacity: 0.85;
-    }
-    .btn {
-      border: 1px solid rgba(255, 255, 255, 0.35);
-      background: rgba(255, 255, 255, 0.1);
-      color: inherit;
-      padding: 0.35rem 0.65rem;
-      border-radius: 6px;
-      font-size: 0.82rem;
-      font-weight: 600;
-      cursor: pointer;
-    }
-    .btn:hover { background: rgba(255, 255, 255, 0.2); }
-    .btn.active {
-      background: #fec963;
-      color: #1a365d;
-      border-color: #fec963;
-    }
-    .btn-primary {
-      background: #0b3a7a;
-      border-color: #128c7e;
-      color: #fff;
-    }
-    .workspace {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 1.5rem;
-      padding: 1.5rem 1rem 2.5rem;
-    }
-    .device-wrap {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    .device-label {
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: #475569;
-    }
-    .phone {
-      background: #111;
-      border-radius: 28px;
-      padding: 12px 10px 14px;
-      box-shadow:
-        0 20px 50px rgba(0, 0, 0, 0.25),
-        inset 0 0 0 2px #333;
-    }
-    .phone-notch {
-      width: 96px;
-      height: 22px;
-      background: #111;
-      border-radius: 0 0 14px 14px;
-      margin: -4px auto 6px;
-    }
-    .phone-screen {
-      background: #fff;
-      border-radius: 18px;
-      overflow: hidden;
-      border: 2px solid var(--frame-border);
-    }
-    .phone-screen iframe {
-      display: block;
-      border: 0;
-      background: #fff;
-    }
-    .note {
-      max-width: 420px;
-      margin: 0 auto;
-      padding: 0 1rem 2rem;
-      font-size: 0.85rem;
-      color: #64748b;
-      line-height: 1.5;
-      text-align: center;
-    }
-    .note strong { color: #1a365d; }
-    @media (max-width: 500px) {
-      .workspace { padding: 1rem 0.5rem; }
-      .phone { border-radius: 20px; padding: 8px 6px 10px; }
-    }
-  </style>
+ <meta charset="UTF-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+ <title>Vista previa — header móvil · landing gastos finales</title>
+ <style>
+  :root {
+   --toolbar-bg: #1a365d;
+   --toolbar-text: #f8fafc;
+   --frame-border: #334155;
+   --page-bg: #e2e8f0;
+  }
+  * { box-sizing: border-box; }
+  body {
+   margin: 0;
+   font-family: Inter, system-ui, -apple-system, sans-serif;
+   background: var(--page-bg);
+   color: #0f172a;
+   min-height: 100vh;
+  }
+  .toolbar {
+   position: sticky;
+   top: 0;
+   z-index: 100;
+   background: var(--toolbar-bg);
+   color: var(--toolbar-text);
+   padding: 0.75rem 1rem;
+   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+  .toolbar h1 {
+   margin: 0 0 0.35rem;
+   font-size: 1rem;
+   font-weight: 700;
+  }
+  .toolbar p {
+   margin: 0 0 0.65rem;
+   font-size: 0.8rem;
+   opacity: 0.9;
+  }
+  .toolbar p code {
+   background: rgba(255, 255, 255, 0.12);
+   padding: 0.1rem 0.35rem;
+   border-radius: 4px;
+   font-size: 0.78rem;
+  }
+  .controls {
+   display: flex;
+   flex-wrap: wrap;
+   gap: 0.5rem;
+   align-items: center;
+  }
+  .controls label {
+   font-size: 0.75rem;
+   font-weight: 600;
+   text-transform: uppercase;
+   letter-spacing: 0.04em;
+   opacity: 0.85;
+  }
+  .btn {
+   border: 1px solid rgba(255, 255, 255, 0.35);
+   background: rgba(255, 255, 255, 0.1);
+   color: inherit;
+   padding: 0.35rem 0.65rem;
+   border-radius: 6px;
+   font-size: 0.82rem;
+   font-weight: 600;
+   cursor: pointer;
+  }
+  .btn:hover { background: rgba(255, 255, 255, 0.2); }
+  .btn.active {
+   background: #fec963;
+   color: #1a365d;
+   border-color: #fec963;
+  }
+  .btn-primary {
+   background: #0b3a7a;
+   border-color: #128c7e;
+   color: #fff;
+  }
+  .workspace {
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: center;
+   gap: 1.5rem;
+   padding: 1.5rem 1rem 2.5rem;
+  }
+  .device-wrap {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   gap: 0.5rem;
+  }
+  .device-label {
+   font-size: 0.8rem;
+   font-weight: 600;
+   color: #475569;
+  }
+  .phone {
+   background: #111;
+   border-radius: 28px;
+   padding: 12px 10px 14px;
+   box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.25),
+    inset 0 0 0 2px #333;
+  }
+  .phone-notch {
+   width: 96px;
+   height: 22px;
+   background: #111;
+   border-radius: 0 0 14px 14px;
+   margin: -4px auto 6px;
+  }
+  .phone-screen {
+   background: #fff;
+   border-radius: 18px;
+   overflow: hidden;
+   border: 2px solid var(--frame-border);
+  }
+  .phone-screen iframe {
+   display: block;
+   border: 0;
+   background: #fff;
+  }
+  .note {
+   max-width: 420px;
+   margin: 0 auto;
+   padding: 0 1rem 2rem;
+   font-size: 0.85rem;
+   color: #64748b;
+   line-height: 1.5;
+   text-align: center;
+  }
+  .note strong { color: #1a365d; }
+  @media (max-width: 500px) {
+   .workspace { padding: 1rem 0.5rem; }
+   .phone { border-radius: 20px; padding: 8px 6px 10px; }
+  }
+ </style>
 </head>
 <body>
 
-  <header class="toolbar">
-    <h1>Header móvil — landing gastos finales</h1>
-    <p>Edita <code>landing-gastos-finales.html</code> (bloque <code>@media max-width: 767.98px</code> y <code>.lp-header</code>), guarda y pulsa Recargar.</p>
-    <div class="controls">
-      <label>Ancho</label>
-      <button type="button" class="btn width-btn active" data-w="375">375</button>
-      <button type="button" class="btn width-btn" data-w="390">390</button>
-      <button type="button" class="btn width-btn" data-w="414">414</button>
-      <button type="button" class="btn width-btn" data-w="430">430</button>
-      <button type="button" class="btn" id="btn-reload">Recargar</button>
-      <a class="btn" id="btn-full" href="../landing-gastos-finales.html" target="_blank" rel="noopener">Página completa</a>
+ <header class="toolbar">
+  <h1>Header móvil — landing gastos finales</h1>
+  <p>Edita <code>landing-gastos-finales.html</code> (bloque <code>@media max-width: 767.98px</code> y <code>.lp-header</code>), guarda y pulsa Recargar.</p>
+  <div class="controls">
+   <label>Ancho</label>
+   <button type="button" class="btn width-btn active" data-w="375">375</button>
+   <button type="button" class="btn width-btn" data-w="390">390</button>
+   <button type="button" class="btn width-btn" data-w="414">414</button>
+   <button type="button" class="btn width-btn" data-w="430">430</button>
+   <button type="button" class="btn" id="btn-reload">Recargar</button>
+   <a class="btn" id="btn-full" href="../landing-gastos-finales.html" target="_blank" rel="noopener">Página completa</a>
+  </div>
+ </header>
+
+ <main class="workspace">
+  <div class="device-wrap">
+   <span class="device-label" id="size-label">390 × 720 px — solo header + inicio</span>
+   <div class="phone" aria-hidden="true">
+    <div class="phone-notch"></div>
+    <div class="phone-screen">
+     <iframe
+      id="preview-frame"
+      title="Vista previa móvil landing gastos finales"
+      src="../landing-gastos-finales.html#top"
+      width="390"
+      height="720"
+      loading="eager"
+     ></iframe>
     </div>
-  </header>
+   </div>
+  </div>
+ </main>
 
-  <main class="workspace">
-    <div class="device-wrap">
-      <span class="device-label" id="size-label">390 × 720 px — solo header + inicio</span>
-      <div class="phone" aria-hidden="true">
-        <div class="phone-notch"></div>
-        <div class="phone-screen">
-          <iframe
-            id="preview-frame"
-            title="Vista previa móvil landing gastos finales"
-            src="../landing-gastos-finales.html#top"
-            width="390"
-            height="720"
-            loading="eager"
-          ></iframe>
-        </div>
-      </div>
-    </div>
-  </main>
+ <p class="note">
+  <strong>Servidor local:</strong> <code>python3 preview/serve-landing-mobile.py --page legacy</code> →
+  <code>http://127.0.0.1:8766/preview/landing-mobile-header.html</code>.
+  Para el wizard de Meta ads: <code>npm run preview:gastos-finales-ads-mobile</code>.
+ </p>
 
-  <p class="note">
-    <strong>Servidor local:</strong> <code>python3 preview/serve-landing-mobile.py --page legacy</code> →
-    <code>http://127.0.0.1:8766/preview/landing-mobile-header.html</code>.
-    Para el wizard de Meta ads: <code>npm run preview:gastos-finales-ads-mobile</code>.
-  </p>
+ <script>
+  (function () {
+   var frame = document.getElementById('preview-frame');
+   var label = document.getElementById('size-label');
+   var h = 720;
+   var base = '../landing-gastos-finales.html#top';
 
-  <script>
-    (function () {
-      var frame = document.getElementById('preview-frame');
-      var label = document.getElementById('size-label');
-      var h = 720;
-      var base = '../landing-gastos-finales.html#top';
+   function setWidth(w) {
+    frame.width = w;
+    frame.height = h;
+    label.textContent = w + ' × ' + h + ' px — header + hero (scroll dentro del marco)';
+    document.querySelectorAll('.width-btn').forEach(function (btn) {
+     btn.classList.toggle('active', Number(btn.getAttribute('data-w')) === w);
+    });
+   }
 
-      function setWidth(w) {
-        frame.width = w;
-        frame.height = h;
-        label.textContent = w + ' × ' + h + ' px — header + hero (scroll dentro del marco)';
-        document.querySelectorAll('.width-btn').forEach(function (btn) {
-          btn.classList.toggle('active', Number(btn.getAttribute('data-w')) === w);
-        });
-      }
+   document.querySelectorAll('.width-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+     setWidth(Number(btn.getAttribute('data-w')));
+    });
+   });
 
-      document.querySelectorAll('.width-btn').forEach(function (btn) {
-        btn.addEventListener('click', function () {
-          setWidth(Number(btn.getAttribute('data-w')));
-        });
-      });
+   document.getElementById('btn-reload').addEventListener('click', function () {
+    frame.src = '../landing-gastos-finales.html?_=' + Date.now() + '#top';
+   });
 
-      document.getElementById('btn-reload').addEventListener('click', function () {
-        frame.src = '../landing-gastos-finales.html?_=' + Date.now() + '#top';
-      });
-
-      setWidth(390);
-    })();
-  </script>
+   setWidth(390);
+  })();
+ </script>
 </body>
 </html>

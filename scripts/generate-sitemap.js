@@ -25,6 +25,8 @@ const STATIC_PAGES = [
   { loc: "/tipos-seguro-vida.html", priority: "0.80" },
   { loc: "/seguro-vida-mayores-80.html", priority: "0.86" },
   { loc: "/seguro-vida-mayores-85.html", priority: "0.86" },
+  { loc: "/seguro-vida-mayores-sin-examen.html", priority: "0.86" },
+  { loc: "/limite-edad-seguro-vida.html", priority: "0.86" },
   { loc: "/costo-seguro-vida.html", priority: "0.80" },
   { loc: "/costo-seguro-vida-temporal.html", priority: "0.82" },
   { loc: "/costo-seguro-vida-entera.html", priority: "0.82" },

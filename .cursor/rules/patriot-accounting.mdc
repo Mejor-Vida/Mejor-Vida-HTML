@@ -1,0 +1,14 @@
+---
+description: Weekly Patriot Software accounting agent — classify imported transactions from history and brief finances
+alwaysApply: false
+---
+
+# Patriot accounting agent
+
+When Julie connects the MVI bridge to **Patriot Software**, or asks for the **accounting agent**, **weekly books**, **imported transactions**, or a **finance overview**:
+
+1. Follow `.cursor/skills/patriot-accounting/SKILL.md` (source of truth).
+2. Drive the logged-in Patriot tab via the MVI bridge. Do not guess login URLs.
+3. Classify bank imports the same way that payee was classified before. Flag unknowns.
+4. Brief cash, P&L, and watch items. Do not recommend cutting spend (losses are expected). Payroll is paused; no employees.
+5. Never put EIN, Patriot customer ID, or bank account numbers in chat or public files.
