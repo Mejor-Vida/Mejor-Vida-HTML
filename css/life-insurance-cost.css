@@ -1289,6 +1289,73 @@ a.lic-carrier-row:focus-visible {
   font-weight: 700;
 }
 
+a.lic-co-card--link {
+  text-decoration: none;
+  color: inherit;
+  padding: 0.75rem 0.85rem 0.8rem;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+a.lic-co-card--link:hover,
+a.lic-co-card--link:focus-visible {
+  border-color: #9fc0df;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.1);
+}
+
+a.lic-co-card--link:focus-visible {
+  outline: 3px solid #63b3ed;
+  outline-offset: 2px;
+}
+
+a.lic-co-card--link .lic-co-logo {
+  min-height: 2.2rem;
+  margin: 0 0 0.35rem;
+}
+
+a.lic-co-card--link .lic-co-logo img {
+  max-height: 1.85rem;
+}
+
+a.lic-co-card--link .lic-co-logo--wide {
+  min-height: 2.75rem;
+}
+
+a.lic-co-card--link .lic-co-logo--wide img {
+  max-height: 2.75rem;
+}
+
+a.lic-co-card--link h3 {
+  font-size: 0.95rem;
+}
+
+a.lic-co-card--link .lic-co-product {
+  margin: 0 0 0.35rem;
+  font-size: 0.78rem;
+}
+
+a.lic-co-card--link .lic-co-specs {
+  margin: 0;
+  gap: 0.32rem;
+}
+
+a.lic-co-card--link .lic-co-specs div {
+  padding-top: 0.32rem;
+}
+
+a.lic-co-card--link .lic-co-specs dt {
+  font-size: 0.68rem;
+}
+
+a.lic-co-card--link .lic-co-specs dd {
+  font-size: 0.86rem;
+}
+
+@media (min-width: 900px) {
+  .lic-co-grid--click {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
 .lic-apply-list {
   margin: 0;
   padding-left: 1.15rem;
@@ -1565,4 +1632,186 @@ a.lic-carrier-row:focus-visible {
 
 .lic-product-tabs {
   margin-top: 0.75rem;
+}
+
+.lic-spec {
+  margin: 0 0 0.9rem;
+  padding: 0.7rem 0.95rem;
+  background: #eef5fb;
+  border-radius: 0.4rem;
+}
+
+.lic-spec ul {
+  margin: 0;
+  padding-left: 1.15rem;
+}
+
+.lic-spec li {
+  margin: 0 0 0.3rem;
+  color: #0f2744;
+  line-height: 1.45;
+}
+
+.lic-spec li:last-child {
+  margin: 0;
+}
+
+.lic-overview-wrap {
+  width: 100%;
+  max-width: none;
+  overflow-x: auto;
+  margin: 0.35rem 0 0.15rem;
+  border: 1px solid #dbe5f0;
+  border-radius: 0.55rem;
+  background: #fff;
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.07);
+}
+
+.lic-overview-table {
+  width: 100%;
+  min-width: 40rem;
+  max-width: none;
+  margin: 0;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.lic-overview-table th,
+.lic-overview-table td {
+  text-align: left;
+  vertical-align: top;
+  padding: 0.95rem 1.05rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.lic-overview-table thead th {
+  background: #0b3a7a;
+  color: #fff;
+  font-weight: 800;
+  font-size: 0.72rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.72rem 1.05rem;
+  white-space: nowrap;
+}
+
+.lic-overview-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.lic-overview-table tbody tr:nth-child(even) td {
+  background: #f7fafc;
+}
+
+.lic-overview-type {
+  display: block;
+  font-weight: 800;
+  color: #0f2744;
+  font-size: 1.02rem;
+}
+
+.lic-overview-sub {
+  display: block;
+  margin-top: 0.18rem;
+  color: #64748b;
+  font-size: 0.82rem;
+  font-weight: 500;
+}
+
+.lic-overview-age {
+  display: block;
+  font-weight: 800;
+  font-size: 1.28rem;
+  color: #0b3a7a;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.lic-overview-note {
+  display: block;
+  margin-top: 0.22rem;
+  color: #475569;
+  font-size: 0.8rem;
+  line-height: 1.35;
+}
+
+.lic-overview-lasts {
+  display: block;
+  font-weight: 700;
+  color: #0f2744;
+  font-size: 0.98rem;
+}
+
+.lic-overview-table td:nth-child(2) {
+  width: 22%;
+}
+
+.lic-overview-table td:nth-child(4) {
+  color: #334155;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 767.98px) {
+  .lic-overview-wrap {
+    overflow: visible;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .lic-overview-table {
+    min-width: 0;
+  }
+
+  .lic-overview-table thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+  }
+
+  .lic-overview-table,
+  .lic-overview-table tbody,
+  .lic-overview-table tr,
+  .lic-overview-table th,
+  .lic-overview-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .lic-overview-table tr {
+    margin: 0 0 0.85rem;
+    overflow: hidden;
+    border: 1px solid #dbe5f0;
+    border-radius: 0.55rem;
+    background: #fff;
+    box-shadow: 0 6px 16px rgba(15, 23, 42, 0.06);
+  }
+
+  .lic-overview-table td {
+    padding: 0.7rem 0.95rem;
+    border-bottom: 1px solid #edf2f7;
+  }
+
+  .lic-overview-table td:last-child {
+    border-bottom: 0;
+  }
+
+  .lic-overview-table td::before {
+    content: attr(data-label);
+    display: block;
+    margin-bottom: 0.25rem;
+    color: #64748b;
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .lic-overview-table tbody tr:nth-child(even) td {
+    background: transparent;
+  }
 }

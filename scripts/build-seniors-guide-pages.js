@@ -147,17 +147,30 @@ function copyExam(lang) {
       limitsH: "Límites de cobertura sin examen (compañías designadas)",
       limitsP: "Estos rangos son de productos que Mejor Vida Seguros cotiza. No son todo el mercado. El máximo real depende de la edad, el estado y la salud.",
       limH1: "Tipo de póliza",
-      limH2: "Montos típicos sin examen",
-      limH3: "Edad típica de nuevos solicitantes",
-      lim1a: "Gastos finales (emisión simplificada)",
-      lim1b: "A menudo $2,000–$50,000; a edades altas el tope puede ser $25,000",
-      lim1c: "Con frecuencia 45 o 50 hasta 85; Aetna Accendo hasta 89",
+      limH2: "Montos típicos",
+      limH3: "Edades de emisión",
+      limH4: "Qué conviene saber",
+      lim1a: "Gastos finales",
+      lim1sub: "Emisión simplificada",
+      lim1amt: "$2,000–$50,000",
+      lim1amtNote: "Tope de $25,000 a edades altas",
+      lim1age: "45–85",
+      lim1ageNote: "Accendo Level hasta 89",
+      lim1d: "Preguntas de salud; sin examen en el consultorio.",
       lim2a: "Aceptación garantizada",
-      lim2b: "Suele topar cerca de $25,000",
-      lim2c: "Cada producto fija su propio rango; espera de dos años",
-      lim3a: "Vida temporal simplificada o acelerada",
-      lim3b: "Montos más altos posibles; no es el producto típico de entierro",
-      lim3c: "Depende del plazo y del tabaco; muchos plazos cortan antes de los 80",
+      lim2sub: "Pocas o ninguna pregunta de salud",
+      lim2amt: "Cerca de $25,000",
+      lim2amtNote: "Cada producto fija el máximo",
+      lim2age: "Varía",
+      lim2ageNote: "Cada producto fija su rango",
+      lim2d: "Espera típica de dos años por muerte natural.",
+      lim3a: "Vida temporal",
+      lim3sub: "Simplificada o acelerada",
+      lim3amt: "Montos más altos",
+      lim3amtNote: "No es el producto típico de entierro",
+      lim3age: "Hasta 80",
+      lim3ageNote: "Depende del plazo y del tabaco",
+      lim3d: "Muchos plazos cortan antes de los 80.",
       coH: "Compañías designadas (planes nivelados, sin espera de dos años)",
       coP: "Estas fichas son productos de gastos finales que Mejor Vida Seguros cotiza. El precio exacto sale en la cotización. “Sin espera de 2 años” aplica al plan nivelado o inmediato, no a la aceptación garantizada.",
       coMooProduct: "Living Promise Nivelado",
@@ -257,17 +270,30 @@ function copyExam(lang) {
     limitsH: "No-exam coverage limits (appointed companies)",
     limitsP: "These ranges are from products Mejor Vida Insurance quotes. They are not the whole market. The real maximum depends on age, state, and health.",
     limH1: "Policy type",
-    limH2: "Typical amounts without an exam",
-    limH3: "Typical new-applicant ages",
-    lim1a: "Final expense (simplified issue)",
-    lim1b: "Often $2,000–$50,000; at later ages the cap may be $25,000",
-    lim1c: "Often 45 or 50 through 85; Aetna Accendo through 89",
+    limH2: "Typical amounts",
+    limH3: "Issue ages",
+    limH4: "Good to know",
+    lim1a: "Final expense",
+    lim1sub: "Simplified issue",
+    lim1amt: "$2,000–$50,000",
+    lim1amtNote: "$25,000 cap at later ages",
+    lim1age: "45–85",
+    lim1ageNote: "Accendo Level through 89",
+    lim1d: "Health questions; no in-office exam.",
     lim2a: "Guaranteed acceptance",
-    lim2b: "Usually tops out near $25,000",
-    lim2c: "Each product sets its own range; two-year wait",
-    lim3a: "Simplified or accelerated term",
-    lim3b: "Higher amounts possible; not the typical burial product",
-    lim3c: "Depends on term length and tobacco; many terms cut off before 80",
+    lim2sub: "Few or no health questions",
+    lim2amt: "Near $25,000",
+    lim2amtNote: "Each product sets the maximum",
+    lim2age: "Varies",
+    lim2ageNote: "Each product sets its range",
+    lim2d: "A two-year wait for natural death is typical.",
+    lim3a: "Term life",
+    lim3sub: "Simplified or accelerated",
+    lim3amt: "Higher amounts",
+    lim3amtNote: "Not the typical burial product",
+    lim3age: "Up to 80",
+    lim3ageNote: "Depends on term length and tobacco",
+    lim3d: "Many terms cut off before age 80.",
     coH: "Appointed companies (level plans, no two-year wait)",
     coP: "These cards are final expense products Mejor Vida Insurance quotes. Exact price comes from a quote. “No 2-year wait” applies to the level or immediate plan, not guaranteed acceptance.",
     coMooProduct: "Living Promise Level",
@@ -321,27 +347,65 @@ function copyAge(lang) {
   if (isEs) {
     return {
       title: "¿Cuál es el límite de edad para comprar un seguro de vida? (2026) | Mejor Vida Seguros",
-      desc: "No hay un único límite de edad en EE. UU. Depende del producto y de la compañía: temporal, gastos finales y emisión hasta los 85 o 89.",
+      desc: "No hay un único límite de edad en EE. UU. Depende del producto y de la compañía: gastos finales hasta 85 o 89, temporal más corto, y aceptación garantizada con espera.",
       h1: "¿Cuál es el límite de edad para comprar un seguro de vida?",
-      lead: "No existe una edad máxima universal. Cada producto y cada aseguradora fija hasta qué edad acepta solicitudes nuevas. Para gastos finales, muchas compañías designadas emiten hasta los 85; algunas llegan más lejos.",
+      lead: "No existe una edad máxima universal. Cada producto y cada aseguradora fija hasta qué edad acepta una solicitud nueva. En gastos finales, muchas compañías designadas de Mejor Vida Seguros emiten hasta los 85; Aetna Accendo puede llegar a 89.",
       crumbEnd: "Límite de edad",
       take1: "El límite depende del <strong>tipo de póliza</strong> y de la compañía — no de una sola regla federal.",
       take2: "El <strong>temporal</strong> suele cortar antes. Un plazo de 30 años no está disponible a los 80.",
-      take3: "En <strong>gastos finales</strong>, muchas compañías designadas aceptan solicitudes nuevas hasta los <strong>85</strong>. Aetna Accendo, en productos designados, puede emitir hasta los <strong>89</strong> (con un tope de monto a edades avanzadas).",
+      take3: "En <strong>gastos finales</strong>, muchas compañías designadas aceptan solicitudes nuevas hasta los <strong>85</strong>. Accendo Level puede emitir hasta los <strong>89</strong>, con un tope de $25,000 a edades avanzadas.",
+      callout: "La edad de emisión es “¿aceptan una solicitud nueva hoy?”. Una póliza de vida entera que ya tiene no se cancela solo por cumplir años, si las primas se siguen pagando.",
       s1h: "No hay un solo “tope de edad”",
       s1p: "La ley no dice “nadie puede comprar seguro de vida después de X años”. Lo que importa es la <strong>edad de emisión</strong> de cada producto: hasta qué edad la aseguradora acepta una solicitud nueva. Pasada esa edad, no hay póliza nueva con esa compañía y ese producto — aunque ya tenga una póliza en vigor.",
-      s2h: "Edades típicas de emisión (compañías designadas)",
-      s2p: "Estos rangos son de productos que Mejor Vida Seguros cotiza. No son una lista completa de todo el mercado. La disponibilidad también depende del estado y de la salud.",
-      rowH1: "Tipo de cobertura",
-      rowH2: "Edades típicas de nuevos solicitantes",
-      r1a: "Gastos finales / vida entera simplificada",
-      r1b: "A menudo 45 o 50 hasta 85",
-      r2a: "Aetna Accendo (gastos finales, plan nivelado designado)",
-      r2b: "Hasta 89 (tope de $25,000 a los 76–89)",
+      overviewH: "Resumen de edades (compañías designadas)",
+      overviewP: "Estos rangos son de productos que Mejor Vida Seguros cotiza. No son todo el mercado. El estado, el tabaco y la salud también cuentan.",
+      overviewFoot: "La cobertura permanente sigue en vigor si las primas se pagan.",
+      rowH1: "Tipo de póliza",
+      rowH2: "Edades de emisión",
+      rowH3: "Duración",
+      rowH4: "Qué conviene saber",
+      r1a: "Gastos finales",
+      r1sub: "Emisión simplificada",
+      r1age: "45–85",
+      r1ageNote: "Accendo Level hasta 89",
+      r1c: "De por vida",
+      r1d: "Preguntas de salud, sin examen en el consultorio. Accendo topea en $25,000 a los 76–89.",
+      r2a: "Aceptación garantizada",
+      r2sub: "Pocas o ninguna pregunta de salud",
+      r2age: "Varía",
+      r2ageNote: "Cada producto fija su rango",
+      r2c: "De por vida",
+      r2d: "Suele haber espera de dos años por muerte natural.",
       r3a: "Vida temporal",
-      r3b: "Depende del plazo y del tabaco; muchos plazos cortan entre los 50 y los 80",
-      r4a: "Aceptación garantizada",
-      r4b: "Límites de edad y de monto propios de cada producto; suele haber espera de dos años",
+      r3sub: "Cubre un plazo fijo",
+      r3age: "Hasta 50–80",
+      r3ageNote: "Depende del plazo y del tabaco",
+      r3c: "Hasta que termina el plazo",
+      r3d: "Un plazo de 30 años no está disponible a los 80.",
+      r4a: "Vida entera",
+      r4sub: "Montos más altos que un entierro",
+      r4age: "Según el producto",
+      r4ageNote: "Suele ser más estricta que gastos finales",
+      r4c: "De por vida",
+      r4d: "Más suscripción; se confirma en una cotización.",
+      feH: "Límite de edad del seguro de gastos finales",
+      feAge: "Edad para nuevos solicitantes: a menudo hasta 85; Accendo Level hasta 89",
+      feLasts: "Duración: toda la vida, si se pagan las primas",
+      feP: "El seguro de gastos finales es una vida entera pensada para funeral, cremación y deudas pequeñas. Mejor Vida Seguros cotiza planes simplificados (preguntas de salud, sin examen en el consultorio). Mutual of Omaha Living Promise Nivelado emite de 45 a 85. Accendo Level puede emitir más tarde, con un tope de $25,000 a los 76–89. Vea <a href=\"seguro-gastos-finales.html\">seguro de gastos finales</a> y <a href=\"seguro-vida-mayores-sin-examen.html\">sin examen médico</a>.",
+      giH: "Límite de edad de la aceptación garantizada",
+      giAge: "Edad para nuevos solicitantes: la fija cada producto",
+      giLasts: "Duración: toda la vida si se pagan las primas, con espera típica de dos años por muerte natural",
+      giP: "Hay pocas o ninguna pregunta de salud. A cambio, casi siempre hay una espera de dos años por muerte natural. Es un plan B si no califica a un plan nivelado. No es el primer camino si todavía puede responder un cuestionario.",
+      termH: "Límite de edad del seguro temporal",
+      termAge: "Edad para nuevos solicitantes: depende del plazo; un plazo de 30 años no está disponible a los 80",
+      termLasts: "Duración: hasta que termina el plazo, no “para siempre”",
+      termP: "El temporal cubre un número fijo de años. Algunos productos designados aceleran la suscripción y no piden laboratorio si califica. No es el producto típico de entierro después de los 70. Confirme plazo, tabaco y edad en la <a href=\"term-quote.html\">cotización de vida temporal</a>.",
+      wlH: "Límite de edad de la vida entera",
+      wlAge: "Edad para nuevos solicitantes: en gastos finales, suele ser la misma banda de 85 (o 89 en Accendo)",
+      wlLasts: "Duración: mientras se paguen las primas",
+      wlP: "El seguro de gastos finales <em>es</em> vida entera. Otras vidas enteras de monto alto a veces piden más suscripción y cortan antes. Para cubrir un funeral, el producto que cotizamos es gastos finales simplificado, no una póliza de cientos de miles de dólares.",
+      costH: "Cómo cambia el precio con la edad",
+      costP: "En las compañías designadas, una póliza nivelada de <strong>$10,000</strong> a los 65 años suele estar cerca de <strong>$41 al mes para una mujer</strong> y <strong>$54 al mes para un hombre</strong> (no fumador, buena salud). A los 80 esas cifras suben. Son primas educativas del cotizador de Mejor Vida Seguros (agosto 2026), no una oferta.",
       s3h: "¿Se puede comprar después de los 85?",
       s3p: "A veces sí, con menos compañías y montos más bajos. Vea <a href=\"seguro-vida-mayores-85.html\">seguro de vida para mayores de 85</a>. Si no hay emisión nueva, las opciones suelen ser ahorros propios o una póliza que ya esté en vigor.",
       s4h: "¿Y después de los 90?",
@@ -355,35 +419,82 @@ function copyAge(lang) {
       faq3a: "Algunos plazos cortos sí, otros no. El plazo de 30 años suele cortar mucho antes. Mejor Vida Seguros confirma el producto que aplica a su edad.",
       faq4q: "Si ya tengo una póliza, ¿se cancela al cumplir cierta edad?",
       faq4a: "La vida entera permanente no caduca por edad si sigue pagando. El temporal sí termina al final del plazo, no en un cumpleaños fijo.",
+      faq5q: "¿Cuál es el tipo más habitual para personas mayores?",
+      faq5a: "Para funeral y deudas pequeñas, el camino más común que cotiza Mejor Vida Seguros es gastos finales de emisión simplificada. El temporal sirve si necesita un monto más alto por un plazo fijo.",
+      faq6q: "Si ya no puedo comprar una póliza nueva, ¿cómo se paga un funeral?",
+      faq6a: "Las opciones suelen ser ahorros, una póliza que ya esté en vigor, o que la familia cubra el gasto. Mejor Vida Seguros puede revisar si todavía hay un producto a su edad antes de asumir que no hay emisión.",
       nextH: "Siguiente paso",
       nextP: `Para confirmar qué productos aplican a su edad, <a href="quote.html">obtenga una cotización gratuita</a> o llame a Mejor Vida Seguros al <a href="tel:${TEL}">${PHONE}</a>.`,
       discTitle: "Divulgación",
       discBody: "Esta página es educativa, no una oferta. Las edades de emisión cambian según compañía, producto, tabaco y estado. Mejor Vida Insurance LLC es una agencia independiente (NPN 21695431). Los estados con licencia actuales están en la página de <a href=\"licencias.html\">licencias</a>.",
+      quoteTitle: "Cotización según su edad",
+      quote1: "Confirmamos qué producto aplica a su edad.",
+      quote2: "Mejor Vida Seguros compara compañías designadas.",
+      quote3: `Hable con un agente licenciado al ${PHONE}.`,
+      quoteCta: "Ver precios",
     };
   }
   return {
     title: "What Is the Age Limit for Buying Life Insurance? (2026) | Mejor Vida Insurance",
-    desc: "There is no single U.S. age limit. It depends on the product and company: term, final expense, and issue ages through 85 or 89.",
+    desc: "There is no single U.S. age limit. It depends on the product and company: final expense through 85 or 89, shorter term cutoffs, and guaranteed acceptance with a wait.",
     h1: "What is the age limit for buying life insurance?",
-    lead: "There is no universal maximum age. Each product and each insurer sets the last age it will take a new application. For final expense, many appointed companies issue through 85; some go further.",
+    lead: "There is no universal maximum age. Each product and each insurer sets the last age it will take a new application. For final expense, many Mejor Vida Insurance appointed companies issue through 85; Aetna Accendo can go through 89.",
     crumbEnd: "Age limit",
     take1: "The limit depends on the <strong>policy type</strong> and the company — not one federal rule.",
     take2: "<strong>Term</strong> usually cuts off earlier. A 30-year term is not available at age 80.",
-    take3: "For <strong>final expense</strong>, many appointed companies take new applications through age <strong>85</strong>. Appointed Aetna Accendo can issue through age <strong>89</strong> (with a face-amount cap at later ages).",
+    take3: "For <strong>final expense</strong>, many appointed companies take new applications through age <strong>85</strong>. Accendo Level can issue through age <strong>89</strong>, with a $25,000 cap at later ages.",
+    callout: "Issue age means “will they take a new application today?” A whole life policy you already own does not cancel just because you have a birthday, if premiums stay paid.",
     s1h: "There is no single “age cap”",
     s1p: "The law does not say “nobody can buy life insurance after age X.” What matters is each product’s <strong>issue age</strong>: the last age the insurer will accept a new application. After that, there is no new policy with that company and product — even if you already own a policy that stays in force.",
-    s2h: "Typical issue ages (appointed companies)",
-    s2p: "These ranges are from products Mejor Vida Insurance quotes. They are not a complete list of the whole market. Availability also depends on state and health.",
-    rowH1: "Coverage type",
-    rowH2: "Typical new-issue ages",
-    r1a: "Final expense / simplified whole life",
-    r1b: "Often 45 or 50 through 85",
-    r2a: "Aetna Accendo (appointed level final expense)",
-    r2b: "Through 89 ($25,000 maximum at ages 76–89)",
+    overviewH: "Age overview (appointed companies)",
+    overviewP: "These ranges are from products Mejor Vida Insurance quotes. They are not the whole market. State, tobacco, and health also matter.",
+    overviewFoot: "Permanent coverage stays in force if premiums stay paid.",
+    rowH1: "Policy type",
+    rowH2: "Issue ages",
+    rowH3: "How long it lasts",
+    rowH4: "Good to know",
+    r1a: "Final expense",
+    r1sub: "Simplified issue",
+    r1age: "45–85",
+    r1ageNote: "Accendo Level through 89",
+    r1c: "For life",
+    r1d: "Health questions, no in-office exam. Accendo caps at $25,000 at ages 76–89.",
+    r2a: "Guaranteed acceptance",
+    r2sub: "Few or no health questions",
+    r2age: "Varies",
+    r2ageNote: "Each product sets its range",
+    r2c: "For life",
+    r2d: "A two-year wait for natural death is typical.",
     r3a: "Term life",
-    r3b: "Depends on term length and tobacco; many terms cut off between 50 and 80",
-    r4a: "Guaranteed acceptance",
-    r4b: "Each product has its own age and amount limits; a two-year wait is typical",
+    r3sub: "Covers a set number of years",
+    r3age: "Up to 50–80",
+    r3ageNote: "Depends on term length and tobacco",
+    r3c: "Until the term ends",
+    r3d: "A 30-year term is not available at age 80.",
+    r4a: "Whole life",
+    r4sub: "Larger amounts than burial",
+    r4age: "By product",
+    r4ageNote: "Usually stricter than final expense",
+    r4c: "For life",
+    r4d: "More underwriting; confirm with a quote.",
+    feH: "Final expense insurance age limit",
+    feAge: "New-applicant age: often through 85; Accendo Level through 89",
+    feLasts: "How long it lasts: for life, if premiums are paid",
+    feP: "Final expense is whole life meant for a funeral, cremation, and small debts. Mejor Vida Insurance quotes simplified plans (health questions, no in-office exam). Mutual of Omaha Living Promise Level issues ages 45–85. Accendo Level can issue later, with a $25,000 cap at ages 76–89. See <a href=\"final-expense-insurance.html\">final expense insurance</a> and <a href=\"life-insurance-seniors-no-medical-exam.html\">no medical exam</a>.",
+    giH: "Guaranteed acceptance age limit",
+    giAge: "New-applicant age: each product sets its own range",
+    giLasts: "How long it lasts: for life if premiums are paid, with a typical two-year wait for natural death",
+    giP: "There are few or no health questions. In return there is almost always a two-year wait for natural death. It is a Plan B if you cannot qualify for a level plan. It is not the first path if you can still answer a questionnaire.",
+    termH: "Term life insurance age limit",
+    termAge: "New-applicant age: depends on the term; a 30-year term is not available at 80",
+    termLasts: "How long it lasts: until the term ends, not “forever”",
+    termP: "Term covers a set number of years. Some appointed products accelerate underwriting and skip the lab if you qualify. It is not the typical burial product after 70. Confirm term length, tobacco, and age on the <a href=\"term-quote.html\">term life quote</a>.",
+    wlH: "Whole life insurance age limit",
+    wlAge: "New-applicant age: for final expense, usually the same 85 band (or 89 on Accendo)",
+    wlLasts: "How long it lasts: as long as premiums are paid",
+    wlP: "Final expense <em>is</em> whole life. Larger whole life amounts sometimes need more underwriting and cut off earlier. To cover a funeral, the product we quote is simplified final expense, not a six-figure whole life policy.",
+    costH: "How price changes with age",
+    costP: "On appointed companies, a level <strong>$10,000</strong> policy at age 65 is often near <strong>$41 a month for a woman</strong> and <strong>$54 a month for a man</strong> (non-tobacco, good health). Those figures rise by age 80. They are educational premiums from the Mejor Vida Insurance quoter (August 2026), not an offer.",
     s3h: "Can you buy after 85?",
     s3p: "Sometimes, with fewer companies and lower amounts. See <a href=\"life-insurance-seniors-over-85.html\">life insurance for seniors over 85</a>. If no company will issue new coverage, the remaining options are usually personal savings or a policy already in force.",
     s4h: "What about after 90?",
@@ -397,10 +508,19 @@ function copyAge(lang) {
     faq3a: "Some shorter terms yes, others no. A 30-year term usually cuts off much earlier. Mejor Vida Insurance confirms which product fits your age.",
     faq4q: "If I already have a policy, does it cancel at a certain age?",
     faq4a: "Permanent whole life does not expire by age if you keep paying. Term ends at the end of the term period, not on a fixed birthday.",
+    faq5q: "What type is most common for seniors?",
+    faq5a: "For a funeral and small debts, the path Mejor Vida Insurance quotes most often is simplified-issue final expense. Term fits if you need a larger amount for a set number of years.",
+    faq6q: "If I cannot buy a new policy, how is a funeral paid?",
+    faq6a: "The usual options are savings, a policy already in force, or family covering the cost. Mejor Vida Insurance can check whether a product still issues at your age before you assume there is no new coverage.",
     nextH: "Next step",
     nextP: `To confirm which products apply at your age, <a href="quote.html">get a free quote</a> or call Mejor Vida Insurance at <a href="tel:${TEL}">${PHONE}</a>.`,
     discTitle: "Disclosure",
     discBody: "This page is educational, not an offer. Issue ages change by company, product, tobacco, and state. Mejor Vida Insurance LLC is an independent agency (NPN 21695431). Current licensed states are on the <a href=\"licenses.html\">licenses</a> page.",
+    quoteTitle: "Quote for your age",
+    quote1: "We confirm which product fits your age.",
+    quote2: "Mejor Vida Insurance compares appointed companies.",
+    quote3: `Talk with a licensed agent at ${PHONE}.`,
+    quoteCta: "See prices",
   };
 }
 
@@ -450,7 +570,7 @@ function headHtml(lang, page, c) {
 <link href="${prefix}css/quote-flow-shared.css?v=20260723-mobile-menu" rel="stylesheet"/>
 <link href="${prefix}css/site-header.css?v=20260723-ver-precios-gold" rel="stylesheet"/>
 <link href="${prefix}css/nav-life-insurance.css?v=20260820-seniors-guides" rel="stylesheet"/>
-<link href="${prefix}css/life-insurance-cost.css?v=20260821-noexam" rel="stylesheet"/>
+<link href="${prefix}css/life-insurance-cost.css?v=20260821-logos" rel="stylesheet"/>
 <link href="${prefix}css/mvi-assistant-widget.css?v=20260721-chat-z" rel="stylesheet"/>
 <link href="${prefix}css/fontawesome-mvi.min.css?v=20260723-brands-fix" rel="stylesheet"/>
 <style>body { font-family: Inter, system-ui, -apple-system, sans-serif; }</style>
@@ -597,13 +717,35 @@ function examMain(lang, page, c) {
 <section class="lic-section" id="limits">
 <h2>${c.limitsH}</h2>
 <p>${c.limitsP}</p>
-<div class="lic-rate-wrap">
-<table class="lic-rate-table">
-<thead><tr><th scope="col">${c.limH1}</th><th scope="col">${c.limH2}</th><th scope="col">${c.limH3}</th></tr></thead>
+<div class="lic-overview-wrap">
+<table class="lic-overview-table">
+<thead>
+<tr>
+<th scope="col">${c.limH1}</th>
+<th scope="col">${c.limH2}</th>
+<th scope="col">${c.limH3}</th>
+<th scope="col">${c.limH4}</th>
+</tr>
+</thead>
 <tbody>
-<tr><td>${c.lim1a}</td><td>${c.lim1b}</td><td>${c.lim1c}</td></tr>
-<tr><td>${c.lim2a}</td><td>${c.lim2b}</td><td>${c.lim2c}</td></tr>
-<tr><td>${c.lim3a}</td><td>${c.lim3b}</td><td>${c.lim3c}</td></tr>
+<tr>
+<td data-label="${c.limH1}"><span class="lic-overview-type">${c.lim1a}</span><span class="lic-overview-sub">${c.lim1sub}</span></td>
+<td data-label="${c.limH2}"><span class="lic-overview-age">${c.lim1amt}</span><span class="lic-overview-note">${c.lim1amtNote}</span></td>
+<td data-label="${c.limH3}"><span class="lic-overview-age">${c.lim1age}</span><span class="lic-overview-note">${c.lim1ageNote}</span></td>
+<td data-label="${c.limH4}">${c.lim1d}</td>
+</tr>
+<tr>
+<td data-label="${c.limH1}"><span class="lic-overview-type">${c.lim2a}</span><span class="lic-overview-sub">${c.lim2sub}</span></td>
+<td data-label="${c.limH2}"><span class="lic-overview-age">${c.lim2amt}</span><span class="lic-overview-note">${c.lim2amtNote}</span></td>
+<td data-label="${c.limH3}"><span class="lic-overview-age">${c.lim2age}</span><span class="lic-overview-note">${c.lim2ageNote}</span></td>
+<td data-label="${c.limH4}">${c.lim2d}</td>
+</tr>
+<tr>
+<td data-label="${c.limH1}"><span class="lic-overview-type">${c.lim3a}</span><span class="lic-overview-sub">${c.lim3sub}</span></td>
+<td data-label="${c.limH2}"><span class="lic-overview-age">${c.lim3amt}</span><span class="lic-overview-note">${c.lim3amtNote}</span></td>
+<td data-label="${c.limH3}"><span class="lic-overview-age">${c.lim3age}</span><span class="lic-overview-note">${c.lim3ageNote}</span></td>
+<td data-label="${c.limH4}">${c.lim3d}</td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -620,49 +762,43 @@ function examMain(lang, page, c) {
 <section class="lic-section lic-guide" id="companies">
 <h2>${c.coH}</h2>
 <p>${c.coP}</p>
-<div class="lic-co-grid lic-co-grid--compare">
-<article class="lic-co-card lic-co-card--compare">
-<div class="lic-co-logo"><picture>
+<div class="lic-co-grid lic-co-grid--compare lic-co-grid--click">
+<a class="lic-co-card lic-co-card--compare lic-co-card--link" href="${moo}">
+<div class="lic-co-logo lic-co-logo--wide"><picture>
 <source type="image/webp" srcset="${assets}img/opt/mutual-of-omaha-logo.webp"/>
 <img src="${assets}img/opt/mutual-of-omaha-logo.png" alt="" width="400" height="94" loading="lazy" decoding="async"/>
 </picture></div>
-<h3><a href="${moo}">Mutual of Omaha</a></h3>
+<h3>Mutual of Omaha</h3>
 <p class="lic-co-product">${c.coMooProduct}</p>
 <dl class="lic-co-specs">
 <div><dt>${c.coAges}</dt><dd>${c.coMooAges}</dd></div>
 <div><dt>${c.coAmt}</dt><dd>${c.coMooAmt}</dd></div>
 <div><dt>${c.coWait}</dt><dd>${c.coWaitNo}</dd></div>
 </dl>
-<a class="lic-co-cta" href="quote.html">${c.coCta}</a>
-<a class="lic-co-more" href="${moo}">${c.coMore}</a>
-</article>
-<article class="lic-co-card lic-co-card--compare">
+</a>
+<a class="lic-co-card lic-co-card--compare lic-co-card--link" href="${aetna}">
 <div class="lic-co-logo"><img src="${assets}img/carriers/aetna-logo.svg" alt="" width="512" height="98" loading="lazy" decoding="async"/></div>
-<h3><a href="${aetna}">Aetna</a></h3>
+<h3>Aetna</h3>
 <p class="lic-co-product">${c.coAetnaProduct}</p>
 <dl class="lic-co-specs">
 <div><dt>${c.coAges}</dt><dd>${c.coAetnaAges}</dd></div>
 <div><dt>${c.coAmt}</dt><dd>${c.coAetnaAmt}</dd></div>
 <div><dt>${c.coWait}</dt><dd>${c.coWaitNo}</dd></div>
 </dl>
-<a class="lic-co-cta" href="quote.html">${c.coCta}</a>
-<a class="lic-co-more" href="${aetna}">${c.coMore}</a>
-</article>
-<article class="lic-co-card lic-co-card--compare">
-<div class="lic-co-logo"><picture>
+</a>
+<a class="lic-co-card lic-co-card--compare lic-co-card--link" href="${ta}">
+<div class="lic-co-logo lic-co-logo--wide"><picture>
 <source type="image/webp" srcset="${assets}img/opt/transamerica-logo.webp"/>
 <img src="${assets}img/opt/transamerica-logo.png" alt="" width="362" height="69" loading="lazy" decoding="async"/>
 </picture></div>
-<h3><a href="${ta}">Transamerica</a></h3>
+<h3>Transamerica</h3>
 <p class="lic-co-product">${c.coTaProduct}</p>
 <dl class="lic-co-specs">
 <div><dt>${c.coAges}</dt><dd>${c.coTaAges}</dd></div>
 <div><dt>${c.coAmt}</dt><dd>${c.coTaAmt}</dd></div>
 <div><dt>${c.coWait}</dt><dd>${c.coWaitNo}</dd></div>
 </dl>
-<a class="lic-co-cta" href="quote.html">${c.coCta}</a>
-<a class="lic-co-more" href="${ta}">${c.coMore}</a>
-</article>
+</a>
 </div>
 <p class="lic-co-footnote">${c.coFoot}</p>
 </section>
@@ -710,7 +846,9 @@ function ageMain(lang, page, c) {
   const exam = isEs ? "seguro-vida-mayores-sin-examen.html" : "life-insurance-seniors-no-medical-exam.html";
   const over80 = isEs ? "seguro-vida-mayores-80.html" : "life-insurance-seniors-over-80.html";
   const over85 = isEs ? "seguro-vida-mayores-85.html" : "life-insurance-seniors-over-85.html";
-  const about = "about-julie.html";
+  const female = isEs ? "Mujer" : "Female";
+  const male = isEs ? "Hombre" : "Male";
+  const ageCol = isEs ? "Edad" : "Age";
   return `<main>
 <section class="lic-hero">
 <div class="lic-hero-media lic-hero-media--${page.hero.modifier}" aria-hidden="true">
@@ -724,14 +862,6 @@ function ageMain(lang, page, c) {
 <p class="lic-breadcrumb"><a href="${home}">${isEs ? "Inicio" : "Home"}</a> › <a href="${mid}">${isEs ? "Seguro de vida" : "Life insurance"}</a> › ${c.crumbEnd}</p>
 <h1>${c.h1}</h1>
 <p class="lic-hero-lead">${c.lead}</p>
-<div class="lic-byline">
-<picture>
-<source type="image/webp" srcset="${assets}img/opt/julie-headshot.webp"/>
-<img src="${assets}img/opt/julie-headshot.png" alt="" width="72" height="72" decoding="async"/>
-</picture>
-<span>${isEs ? "Escrito por" : "Written by"} <a href="${about}">Julie Braunsroth</a>, ${isEs ? "agente de seguros licenciada" : "licensed insurance agent"}</span>
-<span>${isEs ? "Actualizado ago. 2026" : "Updated Aug. 2026"}</span>
-</div>
 </div>
 </div>
 </section>
@@ -739,9 +869,10 @@ function ageMain(lang, page, c) {
 <div class="lic-main">
 <nav class="lic-toc-bar" aria-label="${isEs ? "En esta página" : "On this page"}">
 <a href="#cap">${isEs ? "Sin tope único" : "No single cap"}</a>
-<a href="#ages">${isEs ? "Edades típicas" : "Typical ages"}</a>
-<a href="#after85">${isEs ? "Después de 85" : "After 85"}</a>
-<a href="${exam}">${isEs ? "Sin examen" : "No exam"}</a>
+<a href="#ages">${isEs ? "Resumen" : "Overview"}</a>
+<a href="#final-expense">${isEs ? "Gastos finales" : "Final expense"}</a>
+<a href="#cost">${isEs ? "Precios" : "Cost"}</a>
+<a href="#faq">${isEs ? "Preguntas" : "FAQ"}</a>
 </nav>
 <div class="lic-takeaways">
 <h2>${isEs ? "Puntos clave" : "Key points"}</h2>
@@ -751,23 +882,102 @@ function ageMain(lang, page, c) {
 <li>${c.take3}</li>
 </ul>
 </div>
+<div class="lic-helpful"><p>${c.callout}</p></div>
 <section class="lic-section" id="cap">
 <h2>${c.s1h}</h2>
 <p>${c.s1p}</p>
 </section>
 <section class="lic-section" id="ages">
-<h2>${c.s2h}</h2>
-<p>${c.s2p}</p>
-<div class="lic-rate-wrap">
-<table class="lic-rate-table">
-<thead><tr><th scope="col">${c.rowH1}</th><th scope="col">${c.rowH2}</th></tr></thead>
+<h2>${c.overviewH}</h2>
+<p>${c.overviewP}</p>
+<div class="lic-overview-wrap">
+<table class="lic-overview-table">
+<thead>
+<tr>
+<th scope="col">${c.rowH1}</th>
+<th scope="col">${c.rowH2}</th>
+<th scope="col">${c.rowH3}</th>
+<th scope="col">${c.rowH4}</th>
+</tr>
+</thead>
 <tbody>
-<tr><td>${c.r1a}</td><td>${c.r1b}</td></tr>
-<tr><td>${c.r2a}</td><td>${c.r2b}</td></tr>
-<tr><td>${c.r3a}</td><td>${c.r3b}</td></tr>
-<tr><td>${c.r4a}</td><td>${c.r4b}</td></tr>
+<tr>
+<td data-label="${c.rowH1}"><span class="lic-overview-type">${c.r1a}</span><span class="lic-overview-sub">${c.r1sub}</span></td>
+<td data-label="${c.rowH2}"><span class="lic-overview-age">${c.r1age}</span><span class="lic-overview-note">${c.r1ageNote}</span></td>
+<td data-label="${c.rowH3}"><span class="lic-overview-lasts">${c.r1c}</span></td>
+<td data-label="${c.rowH4}">${c.r1d}</td>
+</tr>
+<tr>
+<td data-label="${c.rowH1}"><span class="lic-overview-type">${c.r2a}</span><span class="lic-overview-sub">${c.r2sub}</span></td>
+<td data-label="${c.rowH2}"><span class="lic-overview-age">${c.r2age}</span><span class="lic-overview-note">${c.r2ageNote}</span></td>
+<td data-label="${c.rowH3}"><span class="lic-overview-lasts">${c.r2c}</span></td>
+<td data-label="${c.rowH4}">${c.r2d}</td>
+</tr>
+<tr>
+<td data-label="${c.rowH1}"><span class="lic-overview-type">${c.r3a}</span><span class="lic-overview-sub">${c.r3sub}</span></td>
+<td data-label="${c.rowH2}"><span class="lic-overview-age">${c.r3age}</span><span class="lic-overview-note">${c.r3ageNote}</span></td>
+<td data-label="${c.rowH3}"><span class="lic-overview-lasts">${c.r3c}</span></td>
+<td data-label="${c.rowH4}">${c.r3d}</td>
+</tr>
+<tr>
+<td data-label="${c.rowH1}"><span class="lic-overview-type">${c.r4a}</span><span class="lic-overview-sub">${c.r4sub}</span></td>
+<td data-label="${c.rowH2}"><span class="lic-overview-age">${c.r4age}</span><span class="lic-overview-note">${c.r4ageNote}</span></td>
+<td data-label="${c.rowH3}"><span class="lic-overview-lasts">${c.r4c}</span></td>
+<td data-label="${c.rowH4}">${c.r4d}</td>
+</tr>
 </tbody>
 </table>
+</div>
+<p class="lic-rate-note">${c.overviewFoot}</p>
+</section>
+<section class="lic-section" id="final-expense">
+<h2>${c.feH}</h2>
+<div class="lic-spec"><ul>
+<li>${c.feAge}</li>
+<li>${c.feLasts}</li>
+</ul></div>
+<p>${c.feP}</p>
+</section>
+<section class="lic-section" id="guaranteed">
+<h2>${c.giH}</h2>
+<div class="lic-spec"><ul>
+<li>${c.giAge}</li>
+<li>${c.giLasts}</li>
+</ul></div>
+<p>${c.giP}</p>
+</section>
+<section class="lic-section" id="term">
+<h2>${c.termH}</h2>
+<div class="lic-spec"><ul>
+<li>${c.termAge}</li>
+<li>${c.termLasts}</li>
+</ul></div>
+<p>${c.termP}</p>
+</section>
+<section class="lic-section" id="whole-life">
+<h2>${c.wlH}</h2>
+<div class="lic-spec"><ul>
+<li>${c.wlAge}</li>
+<li>${c.wlLasts}</li>
+</ul></div>
+<p>${c.wlP}</p>
+</section>
+<section class="lic-section" id="cost">
+<h2>${c.costH}</h2>
+<p>${c.costP}</p>
+<div class="lic-product-tabs" data-lic-product="fe" data-lic-quote-href="quote.html">
+<div class="lic-face-tabs" role="tablist">
+<button type="button" class="lic-face-tab is-active" data-lic-face="5000" role="tab" aria-selected="true">$5,000</button>
+<button type="button" class="lic-face-tab" data-lic-face="10000" role="tab" aria-selected="false">$10,000</button>
+<button type="button" class="lic-face-tab" data-lic-face="25000" role="tab" aria-selected="false">$25,000</button>
+</div>
+<div class="lic-rate-wrap">
+<table class="lic-rate-table">
+<thead><tr><th scope="col">${ageCol}</th><th scope="col">${female}</th><th scope="col">${male}</th></tr></thead>
+<tbody data-lic-tbody></tbody>
+</table>
+</div>
+<p class="lic-rate-note" data-lic-note></p>
 </div>
 </section>
 <section class="lic-section" id="after85">
@@ -784,6 +994,8 @@ function ageMain(lang, page, c) {
 <details><summary>${c.faq2q}</summary><p>${c.faq2a}</p></details>
 <details><summary>${c.faq3q}</summary><p>${c.faq3a}</p></details>
 <details><summary>${c.faq4q}</summary><p>${c.faq4a}</p></details>
+<details><summary>${c.faq5q}</summary><p>${c.faq5a}</p></details>
+<details><summary>${c.faq6q}</summary><p>${c.faq6a}</p></details>
 </section>
 <section class="lic-section" id="next">
 <h2>${c.nextH}</h2>
@@ -797,14 +1009,14 @@ function ageMain(lang, page, c) {
 </div>
 <aside class="lic-aside" aria-label="${isEs ? "Pedir cotización" : "Get a quote"}">
 <div class="lic-quote-card">
-<div class="lic-quote-card__head"><strong>${isEs ? "Cotización gratuita" : "Free quote"}</strong></div>
+<div class="lic-quote-card__head"><strong>${c.quoteTitle}</strong></div>
 <div class="lic-quote-card__body">
 <ul class="lic-quote-card__checks">
-<li>${isEs ? "Confirmamos qué producto aplica a su edad." : "We confirm which product fits your age."}</li>
-<li>${isEs ? "Mejor Vida Seguros compara compañías designadas." : "Mejor Vida Insurance compares appointed companies."}</li>
-<li>${isEs ? "Llame al " + PHONE + "." : "Call " + PHONE + "."}</li>
+<li>${c.quote1}</li>
+<li>${c.quote2}</li>
+<li>${c.quote3}</li>
 </ul>
-<a class="lic-quote-card__cta" href="quote.html">${isEs ? "Ver precios" : "See prices"}</a>
+<a class="lic-quote-card__cta" href="quote.html">${c.quoteCta}</a>
 </div>
 </div>
 </aside>
@@ -896,7 +1108,7 @@ function examRatesPayload() {
 function examRateScripts(lang) {
   const prefix = lang === "es" ? "" : "../";
   return `<script>window.MVI_LIC_RATES = ${JSON.stringify(examRatesPayload())};</script>
-<script defer src="${prefix}js/life-insurance-cost.js?v=20260821-noexam"></script>
+<script defer src="${prefix}js/life-insurance-cost.js?v=20260821-age"></script>
 `;
 }
 
@@ -909,7 +1121,7 @@ ${headerFor(lang, page)}
 ${main}
 ${jsonLd(lang, page, c)}
 ${footerFor(lang)}
-${kind === "exam" ? examRateScripts(lang) : ""}</body>
+${kind === "exam" || kind === "age" ? examRateScripts(lang) : ""}</body>
 </html>
 `;
   const out =
