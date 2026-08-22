@@ -29,6 +29,7 @@ const STATIC_PAGES = [
   { loc: "/limite-edad-seguro-vida.html", priority: "0.86" },
   { loc: "/guia-seguro-entierro-mayores.html", priority: "0.88" },
   { loc: "/guia-seguro-vida-mayores.html", priority: "0.88" },
+  { loc: "/aceptacion-garantizada.html", priority: "0.88" },
   { loc: "/costo-seguro-vida.html", priority: "0.80" },
   { loc: "/costo-seguro-vida-temporal.html", priority: "0.82" },
   { loc: "/costo-seguro-vida-entera.html", priority: "0.82" },

@@ -2,6 +2,7 @@
 /**
  * Bilingual seniors guide pages:
  *   no medical exam + age limit + burial guide + complete seniors life hub
+ *   + guaranteed acceptance
  *   node scripts/build-seniors-guide-pages.js
  */
 "use strict";
@@ -11,6 +12,7 @@ const path = require("path");
 
 const ROOT = path.join(__dirname, "..");
 const { copyHub, hubMain } = require("./seniors-life-hub-content");
+const { copyGi, giMain } = require("./guaranteed-acceptance-content");
 const { quoteRailHtml } = require("./lic-quote-rail");
 const ES_HEADER = path.join(ROOT, "includes/site-header-inner.html");
 const EN_HEADER = path.join(ROOT, "includes/en-site-header.html");
@@ -64,6 +66,17 @@ const PAGES = {
       cache: "20260822-vida",
     },
   },
+  gi: {
+    esFile: "aceptacion-garantizada.html",
+    enFile: "guaranteed-acceptance.html",
+    hero: {
+      base: "lic-hero-cattle-drive",
+      modifier: "cattle",
+      width: 1024,
+      height: 682,
+      cache: "20260822-cattle",
+    },
+  },
 };
 
 function escAttr(s) {
@@ -91,14 +104,14 @@ function footerFor(lang) {
   const extraEs = `<script defer src="bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="js/mvi-funnel-track.js?v=20260702e"></script>
 <div data-api-url="/api/website-chat" id="mvi-assistant-root"></div>
-<script defer src="js/mvi-nav-questions.js?v=20260822-seniors-hub"></script>
+<script defer src="js/mvi-nav-questions.js?v=20260822-gi"></script>
 <script defer src="js/website-assistant-widget.js?v=20260813-scroll-top"></script>
 <script>document.getElementById('year') && (document.getElementById('year').textContent = new Date().getFullYear());</script>
 `;
   const extraEn = `<script defer src="../bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="../js/mvi-funnel-track.js?v=20260702e"></script>
 <div data-api-url="/api/website-chat" id="mvi-assistant-root"></div>
-<script defer src="../js/mvi-nav-questions.js?v=20260822-seniors-hub"></script>
+<script defer src="../js/mvi-nav-questions.js?v=20260822-gi"></script>
 <script defer src="../js/website-assistant-widget.js?v=20260813-scroll-top"></script>
 <script>document.getElementById('year') && (document.getElementById('year').textContent = new Date().getFullYear());</script>
 `;
@@ -764,7 +777,9 @@ function headHtml(lang, page, c, kind) {
       ? "lic-page lic-page--seniors lic-page--burial"
       : kind === "hub"
         ? "lic-page lic-page--seniors lic-page--seniors-hub"
-        : "lic-page lic-page--seniors";
+        : kind === "gi"
+          ? "lic-page lic-page--seniors lic-page--gi"
+          : "lic-page lic-page--seniors";
   const esUrl = `https://www.mejorvidainsurance.com/${page.esFile}`;
   const enUrl = `https://www.mejorvidainsurance.com/en/${page.enFile}`;
   const canonical = isEs ? esUrl : enUrl;
@@ -1589,6 +1604,53 @@ function hubRatesPayload() {
   };
 }
 
+function parseGiwlSampleTables() {
+  const txt = fs.readFileSync(
+    path.join(
+      ROOT,
+      "integrations/knowledge/Corebridge_Knowledge/raw/pdfs/AGLC200471-GIWL-Rates.txt"
+    ),
+    "utf8"
+  );
+  const ages = new Set([50, 55, 60, 65, 70, 75, 80]);
+  const faceIdx = { 5000: 0, 10000: 1, 15000: 2, 20000: 3, 25000: 4 };
+  const tables = { 5000: [], 10000: [], 20000: [], 25000: [] };
+  txt.split(/\r?\n/).forEach((line) => {
+    const m = line.match(
+      /^(\d{2})\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)\s*$/
+    );
+    if (!m) return;
+    const age = Number(m[1]);
+    if (!ages.has(age)) return;
+    const male = [m[2], m[3], m[4], m[5], m[6]].map(Number);
+    const female = [m[7], m[8], m[9], m[10], m[11]].map(Number);
+    Object.keys(tables).forEach((face) => {
+      const i = faceIdx[face];
+      tables[face].push({
+        age,
+        female: Math.round(female[i]),
+        male: Math.round(male[i]),
+      });
+    });
+  });
+  return tables;
+}
+
+function giRatesPayload() {
+  const tables = parseGiwlSampleTables();
+  const faces = [10000, 20000, 25000];
+  return {
+    guaranteed: {
+      source: "Mejor Vida Insurance — appointed Corebridge GIWL",
+      rating: "",
+      as_of: "2026-08-22",
+      note: "Illustrative monthly premiums for appointed guaranteed-issue whole life. Ages 50–80. Health does not change this price. Includes the policy fee. Two-year wait for natural death still applies. Educational only — not a binding quote.",
+      faces,
+      tables: pickFaceTables(tables, faces),
+    },
+  };
+}
+
 function examRateScripts(lang, kind) {
   const prefix = lang === "es" ? "" : "../";
   const payload =
@@ -1596,9 +1658,11 @@ function examRateScripts(lang, kind) {
       ? burialRatesPayload()
       : kind === "hub"
         ? hubRatesPayload()
-        : examRatesPayload();
+        : kind === "gi"
+          ? giRatesPayload()
+          : examRatesPayload();
   return `<script>window.MVI_LIC_RATES = ${JSON.stringify(payload)};</script>
-<script defer src="${prefix}js/life-insurance-cost.js?v=20260822-seniors-hub"></script>
+<script defer src="${prefix}js/life-insurance-cost.js?v=20260822-gi"></script>
 `;
 }
 
@@ -1606,6 +1670,7 @@ function copyFor(kind, lang) {
   if (kind === "exam") return copyExam(lang);
   if (kind === "age") return copyAge(lang);
   if (kind === "hub") return copyHub(lang);
+  if (kind === "gi") return copyGi(lang);
   return copyBurial(lang);
 }
 
@@ -1613,6 +1678,7 @@ function mainFor(kind, lang, page, c) {
   if (kind === "exam") return examMain(lang, page, c);
   if (kind === "age") return ageMain(lang, page, c);
   if (kind === "hub") return hubMain(lang, page, c);
+  if (kind === "gi") return giMain(lang, page, c);
   return burialMain(lang, page, c);
 }
 
@@ -1644,6 +1710,8 @@ function main() {
     build("burial", "en"),
     build("hub", "es"),
     build("hub", "en"),
+    build("gi", "es"),
+    build("gi", "en"),
   ];
   console.log("Wrote", written.length, "pages");
   written.forEach((p) => console.log(" ", path.relative(ROOT, p)));

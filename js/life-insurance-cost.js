@@ -169,6 +169,7 @@
     var dedicatedSeniorsHub = !!document.body.classList.contains(
       "lic-page--seniors-hub"
     );
+    var dedicatedGi = !!document.body.classList.contains("lic-page--gi");
     var copy = isEs
       ? {
           notePrefix: "Primas mensuales ilustrativas (redondeadas). Clasificación: ",
@@ -186,7 +187,9 @@
             whole_life: "Primas mensuales ilustrativas (redondeadas). Clasificación: ",
             whole_life_traditional: "Primas mensuales ilustrativas (redondeadas). Clasificación: ",
             final_expense: "Primas mensuales ilustrativas (redondeadas). Banda: ",
-            guaranteed: "Primas mensuales ilustrativas (redondeadas). Banda: ",
+            guaranteed: dedicatedGi
+              ? ""
+              : "Primas mensuales ilustrativas (redondeadas). Banda: ",
             universal_life: "Vida universal / IUL: ",
             children_si_wl:
               "Primas mensuales ilustrativas (redondeadas). Clasificación: ",
@@ -200,7 +203,9 @@
             final_expense: dedicatedBurial || dedicatedSeniorsHub
               ? ". Edades 50 y más (compañías designadas, no fumador). Primas ilustrativas; no es cotización vinculante."
               : ". Edades 45–85 (cada 5 años). Primas ilustrativas; no es cotización vinculante.",
-            guaranteed: dedicatedSeniorsHub
+            guaranteed: dedicatedGi
+              ? "Primas mensuales ilustrativas de vida entera de aceptación garantizada (compañía designada). Edades 50–80. La salud no cambia este precio. Espera de dos años por muerte natural. No es cotización vinculante."
+              : dedicatedSeniorsHub
               ? ". Edades 50 y más. Primas ilustrativas de compañías designadas; no es cotización vinculante."
               : ". Edades 45–85. Primas ilustrativas de compañías designadas; no es cotización vinculante.",
             universal_life:
@@ -230,7 +235,9 @@
             whole_life: "Illustrative monthly premiums (rounded). Rating class: ",
             whole_life_traditional: "Illustrative monthly premiums (rounded). Rating class: ",
             final_expense: "Illustrative monthly premiums (rounded). Band: ",
-            guaranteed: "Illustrative monthly premiums (rounded). Band: ",
+            guaranteed: dedicatedGi
+              ? ""
+              : "Illustrative monthly premiums (rounded). Band: ",
             universal_life: "Universal / IUL: ",
             children_si_wl:
               "Illustrative monthly premiums (rounded). Rating class: ",
@@ -244,7 +251,9 @@
             final_expense: dedicatedBurial || dedicatedSeniorsHub
               ? ". Ages 50 and up (appointed companies, non-tobacco). Illustrative premiums; not a binding quote."
               : ". Ages 45–85 (every 5 years). Illustrative premiums; not a binding quote.",
-            guaranteed: dedicatedSeniorsHub
+            guaranteed: dedicatedGi
+              ? "Illustrative monthly premiums for appointed guaranteed-issue whole life. Ages 50–80. Health does not change this price. Two-year wait for natural death. Not a binding quote."
+              : dedicatedSeniorsHub
               ? ". Ages 50 and up. Illustrative appointed-company premiums; not a binding quote."
               : ". Ages 45–85. Illustrative appointed-company premiums; not a binding quote.",
             universal_life:

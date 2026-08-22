@@ -124,6 +124,7 @@
 
       var path = (location.pathname || "").toLowerCase();
       if (/mayores-80|mayores-85|mayores-sin-examen|limite-edad-seguro-vida|guia-seguro-entierro-mayores|guia-seguro-vida-mayores|seniors-over-80|seniors-over-85|seniors-no-medical-exam|life-insurance-age-limit|burial-insurance-seniors|life-insurance-seniors\.html/.test(path)) activate("seniors");
+      if (/aceptacion-garantizada|guaranteed-acceptance/.test(path)) activate("coverage");
     });
   }
 

@@ -1,6 +1,6 @@
 ---
 description: Seniors guide pages use a wide article plus a compact right-edge quote rail
-globs: "**/*{senior,mayores,entierro,age-limit,limite-edad,no-waiting,sin-espera}*"
+globs: "**/*{senior,mayores,entierro,age-limit,limite-edad,no-waiting,sin-espera,garantizada,guaranteed-acceptance}*"
 alwaysApply: true
 ---
 
