@@ -23,6 +23,7 @@ const ES_80 = "seguro-vida-mayores-80.html";
 const EN_80 = "life-insurance-seniors-over-80.html";
 const PHONE = "402-440-5438";
 const TEL = "+14024405438";
+const { quoteRailHtml } = require("./lic-quote-rail");
 const HERO = {
   base: "lic-hero-futbol-barrio",
   modifier: "futbol",
@@ -231,10 +232,9 @@ function copy(lang) {
       faq5a: "La tabla de esta página usa Accendo Preferred Nivelado, no fumador. A los 85, $10,000 ronda " + money(rate("female", 85, 10000)) + "/mes para una mujer y " + money(rate("male", 85, 10000)) + "/mes para un hombre. A los 89, las mismas columnas rondan " + money(rate("female", 89, 10000)) + " y " + money(rate("male", 89, 10000)) + " (20 ago. 2026, redondeado). Llame al " + PHONE + " para una cifra personal.",
       faq6q: "¿Qué es el período de impugnación?",
       faq6a: "En la mayoría de las pólizas de vida, la compañía puede revisar la solicitud durante unos dos años si hay una reclamación y sospecha de datos incompletos. Después de ese plazo, las reglas de impugnación se estrechan (salvo fraude, según el contrato y el estado). Responda las preguntas de salud con honestidad.",
-      quoteHead: "Cotización de entierro para mayores de 85",
-      quote1: "Compare compañías designadas",
-      quote2: "Planes de gastos finales hasta $25,000",
-      quote3: "Mejor Vida Seguros cotiza Accendo a los 86–89",
+      quoteHead: "Mayores de 85",
+      quote1: "Compañías designadas",
+      quote2: "Accendo hasta 89",
       quoteCta: "Ver precios",
       quoteNote: "Para una cifra a su edad, llame al " + PHONE + ".",
       updated: "Actualizado ago. 2026",
@@ -312,10 +312,9 @@ function copy(lang) {
     faq5a: "The table on this page uses Accendo Preferred Level, non-tobacco. At 85, $10,000 is about " + money(rate("female", 85, 10000)) + "/month for a woman and " + money(rate("male", 85, 10000)) + "/month for a man. At 89, the same columns are about " + money(rate("female", 89, 10000)) + " and " + money(rate("male", 89, 10000)) + " (Aug. 20, 2026, rounded). Call " + PHONE + " for a personal figure.",
     faq6q: "What is the contestability period?",
     faq6a: "On most life policies, the company may review the application for about two years if there is a claim and a concern about incomplete answers. After that window, contestability rules narrow (except fraud, per the contract and state). Answer the health questions honestly.",
-    quoteHead: "Over 85 burial insurance quote",
-    quote1: "Compare appointed companies",
-    quote2: "Final expense plans up to $25,000",
-    quote3: "Mejor Vida Insurance quotes Accendo at ages 86–89",
+    quoteHead: "Over 85",
+    quote1: "Appointed companies",
+    quote2: "Accendo through 89",
     quoteCta: "See prices",
     quoteNote: "For a figure at your age, call " + PHONE + ".",
     updated: "Updated Aug. 2026",
@@ -378,12 +377,12 @@ function headHtml(lang) {
 <link href="${prefix}css/quote-flow-shared.css?v=20260723-mobile-menu" rel="stylesheet"/>
 <link href="${prefix}css/site-header.css?v=20260723-ver-precios-gold" rel="stylesheet"/>
 <link href="${prefix}css/nav-life-insurance.css?v=20260818-seniors" rel="stylesheet"/>
-<link href="${prefix}css/life-insurance-cost.css?v=20260820-over85-full" rel="stylesheet"/>
+<link href="${prefix}css/life-insurance-cost.css?v=20260822-seniors-rail" rel="stylesheet"/>
 <link href="${prefix}css/mvi-assistant-widget.css?v=20260721-chat-z" rel="stylesheet"/>
 <link href="${prefix}css/fontawesome-mvi.min.css?v=20260723-brands-fix" rel="stylesheet"/>
 <style>body { font-family: Inter, system-ui, -apple-system, sans-serif; }</style>
 </head>
-<body class="lic-page">`;
+<body class="lic-page lic-page--seniors">`;
 }
 
 function mainHtml(lang) {
@@ -536,22 +535,7 @@ ${fullRateTablesHtml(c)}
 <p class="lic-rate-note"><a href="${over80}">${isEs ? "Seguro para mayores de 80" : "Life insurance over 80"}</a> · <a href="${isEs ? "costo-seguro-gastos-finales.html" : "final-expense-cost.html"}">${isEs ? "Costo de gastos finales" : "Final expense cost"}</a> · <a href="${isEs ? "seguro-vida-entierro-sin-espera.html" : "no-waiting-period-life-burial.html"}">${isEs ? "Sin período de espera" : "No waiting period"}</a></p>
 </div>
 
-<aside class="lic-aside" aria-label="${isEs ? "Pedir cotización" : "Get a quote"}">
-<div class="lic-quote-card">
-<div class="lic-quote-card__head">
-<strong>${c.quoteHead}</strong>
-</div>
-<div class="lic-quote-card__body">
-<ul class="lic-quote-card__checks">
-<li>${c.quote1}</li>
-<li>${c.quote2}</li>
-<li>${c.quote3}</li>
-</ul>
-<a class="lic-quote-card__cta" href="${quote}">${c.quoteCta}</a>
-<p class="lic-quote-card__note">${c.quoteNote}</p>
-</div>
-</div>
-</aside>
+${quoteRailHtml({ lang, title: c.quoteHead, line1: c.quote1, line2: c.quote2, quoteHref: "quote.html", cta: c.quoteCta })}
 </div>
 </main>`;
 }

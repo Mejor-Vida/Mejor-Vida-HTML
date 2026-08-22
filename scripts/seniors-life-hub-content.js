@@ -2,6 +2,7 @@
 
 const PHONE = "402-440-5438";
 const TEL = "+14024405438";
+const { quoteRailHtml } = require("./lic-quote-rail");
 
 function copyHub(lang) {
   const isEs = lang === "es";
@@ -464,19 +465,7 @@ function hubMain(lang, page, c) {
 </div>
 <div class="lic-helpful"><p>${c.callout}</p></div>
 </div>
-<aside class="lic-aside lic-aside--rail" aria-label="${isEs ? "Pedir cotización" : "Get a quote"}">
-<div class="lic-quote-card">
-<div class="lic-quote-card__head"><strong>${c.quoteTitle}</strong></div>
-<div class="lic-quote-card__body">
-<ul class="lic-quote-card__checks">
-<li>${c.quote1}</li>
-<li>${c.quote2}</li>
-<li><a href="tel:${TEL}">${c.quote3}</a></li>
-</ul>
-<a class="lic-quote-card__cta" href="quote.html">${c.quoteCta}</a>
-</div>
-</div>
-</aside>
+${quoteRailHtml({ lang, title: c.quoteTitle, line1: c.quote1, line2: c.quote2, cta: c.quoteCta })}
 <section class="lic-compare-band" id="types">
 <div class="lic-compare-inner">
 <h2>${c.typesH}</h2>

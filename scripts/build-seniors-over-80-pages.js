@@ -13,6 +13,7 @@ const ES_HEADER = path.join(ROOT, "includes/site-header-inner.html");
 const EN_HEADER = path.join(ROOT, "includes/en-site-header.html");
 const ES_FOOTER = path.join(ROOT, "includes/site-footer-inner.html");
 const EN_FOOTER = path.join(ROOT, "includes/en-site-footer.html");
+const { quoteRailHtml } = require("./lic-quote-rail");
 const RATES = JSON.parse(
   fs.readFileSync(path.join(ROOT, "js/seniors-over-80-rates.json"), "utf8")
 );
@@ -172,10 +173,9 @@ function copy(lang) {
       faq3a: "En la mayoría de las pólizas niveladas de vida entera de gastos finales, no — si mantiene la póliza al día. Lo que sí sube es el precio de una póliza nueva si espera más años para solicitar.",
       faq4q: "¿Puedo obtener cobertura si ya tengo problemas de salud?",
       faq4a: "A veces sí, en un plan nivelado o escalonado, según las respuestas. Si ninguna compañía nivelada puede emitir, la aceptación garantizada sigue siendo una vía, con espera de dos años.",
-      quoteHead: "Cotización de entierro para mayores de 80",
-      quote1: "Compare compañías designadas",
-      quote2: "Vea planes sin espera si califica",
-      quote3: "Cotización gratis — sin spam",
+      quoteHead: "Mayores de 80",
+      quote1: "Compañías designadas",
+      quote2: "Sin espera si califica",
       quoteCta: "Ver precios",
       quoteNote: "Las cifras de la tabla son muestras educativas, no una oferta vinculante.",
       genderQ: "¿Cuál es su sexo?",
@@ -241,10 +241,9 @@ function copy(lang) {
     faq3a: "On most level final expense whole life policies, no — if you keep the policy in force. What does go up is the price of a new policy if you wait more years to apply.",
     faq4q: "Can I get coverage if I already have health problems?",
     faq4a: "Sometimes yes, on a level or graded plan, depending on the answers. If no level company can issue, guaranteed acceptance is still a path, with a two-year wait.",
-    quoteHead: "Over 80 burial insurance quote",
-    quote1: "Compare appointed companies",
-    quote2: "See no-wait plans if you qualify",
-    quote3: "Free quote — no spam",
+    quoteHead: "Over 80",
+    quote1: "Appointed companies",
+    quote2: "No wait if you qualify",
     quoteCta: "See prices",
     quoteNote: "Table figures are educational samples, not a binding offer.",
     genderQ: "What is your gender?",
@@ -303,19 +302,18 @@ function headHtml(lang) {
 <link href="${prefix}css/quote-flow-shared.css?v=20260723-mobile-menu" rel="stylesheet"/>
 <link href="${prefix}css/site-header.css?v=20260723-ver-precios-gold" rel="stylesheet"/>
 <link href="${prefix}css/nav-life-insurance.css?v=20260818-seniors" rel="stylesheet"/>
-<link href="${prefix}css/life-insurance-cost.css?v=20260818-coffee" rel="stylesheet"/>
+<link href="${prefix}css/life-insurance-cost.css?v=20260822-seniors-rail" rel="stylesheet"/>
 <link href="${prefix}css/mvi-assistant-widget.css?v=20260721-chat-z" rel="stylesheet"/>
 <link href="${prefix}css/fontawesome-mvi.min.css?v=20260723-brands-fix" rel="stylesheet"/>
 <style>body { font-family: Inter, system-ui, -apple-system, sans-serif; }</style>
 </head>
-<body class="lic-page">`;
+<body class="lic-page lic-page--seniors">`;
 }
 
 function mainHtml(lang) {
   const c = copy(lang);
   const isEs = lang === "es";
   const prefix = isEs ? "" : "../";
-  const quote = `${prefix}quote.html`;
   const home = "index.html";
   const mid = isEs ? "seguro-gastos-finales.html" : "final-expense-insurance.html";
   return `<main>
@@ -435,22 +433,7 @@ ${carrierCards(lang, prefix)}
 <p class="lic-rate-note"><a href="${prefix}${isEs ? "costo-seguro-gastos-finales.html" : "final-expense-cost.html"}">${isEs ? "Costo de gastos finales" : "Final expense cost"}</a> · <a href="${prefix}${isEs ? "seguro-vida-entierro-sin-espera.html" : "no-waiting-period-life-burial.html"}">${isEs ? "Sin período de espera" : "No waiting period"}</a> · <a href="${prefix}${isEs ? "costo-seguro-vida.html" : "life-insurance-cost.html"}">${isEs ? "Todos los costos" : "All insurance costs"}</a></p>
 </div>
 
-<aside class="lic-aside" aria-label="${isEs ? "Pedir cotización" : "Get a quote"}">
-<div class="lic-quote-card">
-<div class="lic-quote-card__head">
-<strong>${c.quoteHead}</strong>
-</div>
-<div class="lic-quote-card__body">
-<ul class="lic-quote-card__checks">
-<li>${c.quote1}</li>
-<li>${c.quote2}</li>
-<li>${c.quote3}</li>
-</ul>
-<a class="lic-quote-card__cta" href="${quote}">${c.quoteCta}</a>
-<p class="lic-quote-card__note">${c.quoteNote}</p>
-</div>
-</div>
-</aside>
+${quoteRailHtml({ lang, title: c.quoteHead, line1: c.quote1, line2: c.quote2, quoteHref: "quote.html", cta: c.quoteCta })}
 </div>
 </main>`;
 }

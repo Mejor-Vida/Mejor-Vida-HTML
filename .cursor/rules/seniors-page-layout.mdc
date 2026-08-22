@@ -1,0 +1,31 @@
+---
+description: Seniors guide pages use a wide article plus a compact right-edge quote rail
+globs: "**/*{senior,mayores,entierro,age-limit,limite-edad,no-waiting,sin-espera}*"
+alwaysApply: true
+---
+
+# Seniors page layout (locked)
+
+The complete life-insurance-for-seniors guide is the **canonical layout** for every seniors page (ES + EN):
+
+- Wide article (no 320px sidebar column)
+- Compact quote card **fixed on the far right**, under the Español/English fab and above the chat avatar
+- Mobile: quote card in normal flow at the top, not covering text
+
+## Required markup
+
+Body class: `lic-page lic-page--seniors` (keep extra modifiers like `--burial` or `--seniors-hub` if needed).
+
+Use `scripts/lic-quote-rail.js` → `quoteRailHtml()` for the aside. Do not rebuild the large in-column quote card.
+
+CSS lives on `.lic-page--seniors` in `css/life-insurance-cost.css`. Do not scope new rail styles only to `--seniors-hub`.
+
+## Do not
+
+- Put the quote card back in a two-column grid that shrinks the article
+- Invent a different sticky CTA for a new seniors guide
+- List licensed states in the rail (licenses page only)
+
+## Builders
+
+New seniors HTML should come from `scripts/build-seniors-guide-pages.js`, `build-seniors-over-80-pages.js`, or `build-seniors-over-85-pages.js` with `lic-page--seniors` on the body. Then rebuild. Add the same class if a seniors page is hand-edited (`fep-page` no-waiting pages may combine `fep-page lic-page--seniors`).

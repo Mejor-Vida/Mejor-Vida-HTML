@@ -1830,8 +1830,10 @@ a.lic-co-card--link .lic-co-specs dd {
   }
 }
 
-/* Seniors hub — article uses the page; quote sits with the right-edge fabs */
-.lic-page--seniors-hub .lic-layout--hub {
+/* Seniors guides — wide article + compact quote rail (locked layout) */
+.lic-page--seniors .lic-layout--split,
+.lic-page--seniors .lic-layout--hub,
+.lic-page--seniors .fep-layout {
   display: block;
   width: calc(100% - 13.75rem);
   max-width: 1280px;
@@ -1839,7 +1841,7 @@ a.lic-co-card--link .lic-co-specs dd {
   margin-left: auto;
 }
 
-.lic-page--seniors-hub .lic-aside--rail {
+.lic-page--seniors .lic-aside {
   position: fixed;
   z-index: 1083;
   top: calc(81px + 6.05rem + env(safe-area-inset-top, 0px));
@@ -1851,67 +1853,75 @@ a.lic-co-card--link .lic-co-specs dd {
   overscroll-behavior: contain;
 }
 
-.lic-page--seniors-hub .lic-aside--rail .lic-quote-card {
+.lic-page--seniors .lic-quote-card {
   border-radius: 0.65rem;
 }
 
-.lic-page--seniors-hub .lic-aside--rail .lic-quote-card__head {
+.lic-page--seniors .lic-quote-card__head {
   padding: 0.55rem 0.7rem 0.4rem;
 }
 
-.lic-page--seniors-hub .lic-aside--rail .lic-quote-card__head strong {
+.lic-page--seniors .lic-quote-card__head strong {
   font-size: 0.82rem;
 }
 
-.lic-page--seniors-hub .lic-aside--rail .lic-quote-card__body {
+.lic-page--seniors .lic-quote-card__body {
   padding: 0.5rem 0.7rem 0.7rem;
 }
 
-.lic-page--seniors-hub .lic-aside--rail .lic-quote-card__checks {
+.lic-page--seniors .lic-quote-card__checks {
   margin: 0 0 0.55rem;
 }
 
-.lic-page--seniors-hub .lic-aside--rail .lic-quote-card__checks li {
+.lic-page--seniors .lic-quote-card__checks li {
   padding: 0.08rem 0 0.08rem 1.05rem;
   font-size: 0.72rem;
   line-height: 1.3;
 }
 
-.lic-page--seniors-hub .lic-aside--rail .lic-quote-card__checks li::before {
+.lic-page--seniors .lic-quote-card__checks li::before {
   top: 0.08rem;
   font-size: 0.7rem;
 }
 
-.lic-page--seniors-hub .lic-aside--rail .lic-quote-card__checks a {
+.lic-page--seniors .lic-quote-card__checks a {
   color: #fff;
   font-weight: 800;
   text-decoration: none;
   white-space: nowrap;
 }
 
-.lic-page--seniors-hub .lic-aside--rail .lic-quote-card__checks a:hover,
-.lic-page--seniors-hub .lic-aside--rail .lic-quote-card__checks a:focus-visible {
+.lic-page--seniors .lic-quote-card__checks a:hover,
+.lic-page--seniors .lic-quote-card__checks a:focus-visible {
   color: #f1b400;
   text-decoration: underline;
 }
 
-.lic-page--seniors-hub .lic-aside--rail .lic-quote-card__cta {
+.lic-page--seniors .lic-quote-card__cta {
   padding: 0.42rem 0.5rem;
   font-size: 0.8rem;
 }
 
-.lic-page--seniors-hub .lic-main--after-compare {
+.lic-page--seniors .lic-quote-card__note {
+  display: none;
+}
+
+.lic-page--seniors .lic-main--after-compare {
   max-width: none;
 }
 
 @media (max-width: 991.98px) {
-  .lic-page--seniors-hub .lic-layout--hub {
+  .lic-page--seniors .lic-layout--split,
+  .lic-page--seniors .lic-layout--hub,
+  .lic-page--seniors .fep-layout {
+    display: flex;
+    flex-direction: column;
     width: auto;
     max-width: 1080px;
     margin-right: auto;
   }
 
-  .lic-page--seniors-hub .lic-aside--rail {
+  .lic-page--seniors .lic-aside {
     position: static;
     top: auto;
     right: auto;
@@ -1919,6 +1929,7 @@ a.lic-co-card--link .lic-co-specs dd {
     width: auto;
     max-height: none;
     overflow: visible;
+    order: -1;
     margin-bottom: 1rem;
   }
 }

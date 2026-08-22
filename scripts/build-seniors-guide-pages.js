@@ -11,6 +11,7 @@ const path = require("path");
 
 const ROOT = path.join(__dirname, "..");
 const { copyHub, hubMain } = require("./seniors-life-hub-content");
+const { quoteRailHtml } = require("./lic-quote-rail");
 const ES_HEADER = path.join(ROOT, "includes/site-header-inner.html");
 const EN_HEADER = path.join(ROOT, "includes/en-site-header.html");
 const ES_FOOTER = path.join(ROOT, "includes/site-footer-inner.html");
@@ -235,9 +236,8 @@ function copyExam(lang) {
       discTitle: "Divulgación",
       discBody: "Esta página es educativa, no asesoramiento legal ni una oferta de seguro. Primas, montos y aprobación dependen de la compañía, el estado y la solicitud. Mejor Vida Insurance LLC es una agencia independiente (NPN 21695431). Los estados con licencia actuales están en la página de <a href=\"licencias.html\">licencias</a>.",
       quoteTitle: "Cotización sin examen",
-      quote1: "Compare compañías designadas, no un anuncio genérico.",
-      quote2: "Vea si un plan sin espera de dos años encaja con su salud.",
-      quote3: `Hable con un agente licenciado al ${PHONE}.`,
+      quote1: "Compañías designadas",
+      quote2: "Nivelado o con espera",
       quoteCta: "Ver precios",
     };
   }
@@ -358,9 +358,8 @@ function copyExam(lang) {
     discTitle: "Disclosure",
     discBody: "This page is educational, not legal advice, and not an offer of insurance. Premiums, amounts, and approval depend on the company, the state, and the application. Mejor Vida Insurance LLC is an independent agency (NPN 21695431). Current licensed states are on the <a href=\"licenses.html\">licenses</a> page.",
     quoteTitle: "No-exam quote",
-    quote1: "Compare appointed companies, not a generic ad.",
-    quote2: "See if a plan without a two-year wait fits your health.",
-    quote3: `Talk with a licensed agent at ${PHONE}.`,
+    quote1: "Appointed companies",
+    quote2: "Level or with a wait",
     quoteCta: "See prices",
   };
 }
@@ -451,9 +450,8 @@ function copyAge(lang) {
       discTitle: "Divulgación",
       discBody: "Esta página es educativa, no una oferta. Las edades de emisión cambian según compañía, producto, tabaco y estado. Mejor Vida Insurance LLC es una agencia independiente (NPN 21695431). Los estados con licencia actuales están en la página de <a href=\"licencias.html\">licencias</a>.",
       quoteTitle: "Cotización según su edad",
-      quote1: "Confirmamos qué producto aplica a su edad.",
-      quote2: "Mejor Vida Seguros compara compañías designadas.",
-      quote3: `Hable con un agente licenciado al ${PHONE}.`,
+      quote1: "El producto según la edad",
+      quote2: "Compañías designadas",
       quoteCta: "Ver precios",
     };
   }
@@ -540,9 +538,8 @@ function copyAge(lang) {
     discTitle: "Disclosure",
     discBody: "This page is educational, not an offer. Issue ages change by company, product, tobacco, and state. Mejor Vida Insurance LLC is an independent agency (NPN 21695431). Current licensed states are on the <a href=\"licenses.html\">licenses</a> page.",
     quoteTitle: "Quote for your age",
-    quote1: "We confirm which product fits your age.",
-    quote2: "Mejor Vida Insurance compares appointed companies.",
-    quote3: `Talk with a licensed agent at ${PHONE}.`,
+    quote1: "The product for your age",
+    quote2: "Appointed companies",
     quoteCta: "See prices",
   };
 }
@@ -648,10 +645,9 @@ function copyBurial(lang) {
       nextP: `Para ver precios según su edad y salud, <a href="quote.html">obtenga una cotización gratuita</a> o llame a Mejor Vida Seguros al <a href="tel:${TEL}">${PHONE}</a>.`,
       discTitle: "Divulgación",
       discBody: "Esta página es educativa, no una oferta. Edades, montos y primas cambian según compañía, producto, tabaco y estado. Mejor Vida Insurance LLC es una agencia independiente (NPN 21695431). Los estados con licencia actuales están en la página de <a href=\"licencias.html\">licencias</a>.",
-      quoteTitle: "Cotización de entierro",
-      quote1: "Comparamos compañías designadas.",
-      quote2: "Confirmamos si hay espera o beneficio desde el día uno.",
-      quote3: `Hable con un agente licenciado al ${PHONE}.`,
+      quoteTitle: "Cotización",
+      quote1: "Compañías designadas",
+      quote2: "Nivelado o con espera",
       quoteCta: "Ver precios",
     };
   }
@@ -753,10 +749,9 @@ function copyBurial(lang) {
     nextP: `To see prices for your age and health, <a href="quote.html">get a free quote</a> or call Mejor Vida Insurance at <a href="tel:${TEL}">${PHONE}</a>.`,
     discTitle: "Disclosure",
     discBody: "This page is educational, not an offer. Ages, amounts, and premiums change by company, product, tobacco, and state. Mejor Vida Insurance LLC is an independent agency (NPN 21695431). Current licensed states are on the <a href=\"licenses.html\">licenses</a> page.",
-    quoteTitle: "Burial insurance quote",
-    quote1: "We compare appointed companies.",
-    quote2: "We confirm whether there is a wait or day-one benefit.",
-    quote3: `Talk with a licensed agent at ${PHONE}.`,
+    quoteTitle: "Get a quote",
+    quote1: "Appointed companies",
+    quote2: "Level or with a wait",
     quoteCta: "See prices",
   };
 }
@@ -766,10 +761,10 @@ function headHtml(lang, page, c, kind) {
   const prefix = isEs ? "" : "../";
   const bodyClass =
     kind === "burial"
-      ? "lic-page lic-page--burial"
+      ? "lic-page lic-page--seniors lic-page--burial"
       : kind === "hub"
-        ? "lic-page lic-page--seniors-hub"
-        : "lic-page";
+        ? "lic-page lic-page--seniors lic-page--seniors-hub"
+        : "lic-page lic-page--seniors";
   const esUrl = `https://www.mejorvidainsurance.com/${page.esFile}`;
   const enUrl = `https://www.mejorvidainsurance.com/en/${page.enFile}`;
   const canonical = isEs ? esUrl : enUrl;
@@ -813,7 +808,7 @@ function headHtml(lang, page, c, kind) {
 <link href="${prefix}css/quote-flow-shared.css?v=20260723-mobile-menu" rel="stylesheet"/>
 <link href="${prefix}css/site-header.css?v=20260723-ver-precios-gold" rel="stylesheet"/>
 <link href="${prefix}css/nav-life-insurance.css?v=20260822-vida-buena" rel="stylesheet"/>
-<link href="${prefix}css/life-insurance-cost.css?v=20260822-quote-rail" rel="stylesheet"/>
+<link href="${prefix}css/life-insurance-cost.css?v=20260822-seniors-rail" rel="stylesheet"/>
 <link href="${prefix}css/mvi-assistant-widget.css?v=20260721-chat-z" rel="stylesheet"/>
 <link href="${prefix}css/fontawesome-mvi.min.css?v=20260723-brands-fix" rel="stylesheet"/>
 <style>body { font-family: Inter, system-ui, -apple-system, sans-serif; }</style>
@@ -1065,19 +1060,7 @@ function examMain(lang, page, c) {
 </section>
 <p class="lic-rate-note"><a href="${burial}">${isEs ? "Guía de entierro" : "Burial guide"}</a> · <a href="${over80}">${isEs ? "Mayores de 80" : "Seniors over 80"}</a> · <a href="${age}">${isEs ? "Límite de edad" : "Age limit"}</a> · <a href="${isEs ? "seguro-vida-entierro-sin-espera.html" : "no-waiting-period-life-burial.html"}">${isEs ? "Sin período de espera" : "No waiting period"}</a></p>
 </div>
-<aside class="lic-aside" aria-label="${isEs ? "Pedir cotización" : "Get a quote"}">
-<div class="lic-quote-card">
-<div class="lic-quote-card__head"><strong>${c.quoteTitle}</strong></div>
-<div class="lic-quote-card__body">
-<ul class="lic-quote-card__checks">
-<li>${c.quote1}</li>
-<li>${c.quote2}</li>
-<li>${c.quote3}</li>
-</ul>
-<a class="lic-quote-card__cta" href="quote.html">${c.quoteCta}</a>
-</div>
-</div>
-</aside>
+${quoteRailHtml({ lang, title: c.quoteTitle, line1: c.quote1, line2: c.quote2 })}
 </div>
 </main>`;
 }
@@ -1252,19 +1235,7 @@ function ageMain(lang, page, c) {
 </section>
 <p class="lic-rate-note"><a href="${burial}">${isEs ? "Guía de entierro" : "Burial guide"}</a> · <a href="${over80}">${isEs ? "Mayores de 80" : "Seniors over 80"}</a> · <a href="${over85}">${isEs ? "Mayores de 85" : "Seniors over 85"}</a> · <a href="${exam}">${isEs ? "Sin examen médico" : "No medical exam"}</a></p>
 </div>
-<aside class="lic-aside" aria-label="${isEs ? "Pedir cotización" : "Get a quote"}">
-<div class="lic-quote-card">
-<div class="lic-quote-card__head"><strong>${c.quoteTitle}</strong></div>
-<div class="lic-quote-card__body">
-<ul class="lic-quote-card__checks">
-<li>${c.quote1}</li>
-<li>${c.quote2}</li>
-<li>${c.quote3}</li>
-</ul>
-<a class="lic-quote-card__cta" href="quote.html">${c.quoteCta}</a>
-</div>
-</div>
-</aside>
+${quoteRailHtml({ lang, title: c.quoteTitle, line1: c.quote1, line2: c.quote2 })}
 </div>
 </main>`;
 }
@@ -1469,19 +1440,7 @@ ${[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
 </section>
 <p class="lic-rate-note"><a href="${isEs ? "guia-seguro-vida-mayores.html" : "life-insurance-seniors.html"}">${isEs ? "Guía de vida para mayores" : "Life insurance for seniors"}</a> · <a href="${exam}">${isEs ? "Sin examen médico" : "No medical exam"}</a> · <a href="${age}">${isEs ? "Límite de edad" : "Age limit"}</a> · <a href="${over80}">${isEs ? "Mayores de 80" : "Seniors over 80"}</a> · <a href="${over85}">${isEs ? "Mayores de 85" : "Seniors over 85"}</a></p>
 </div>
-<aside class="lic-aside" aria-label="${isEs ? "Pedir cotización" : "Get a quote"}">
-<div class="lic-quote-card">
-<div class="lic-quote-card__head"><strong>${c.quoteTitle}</strong></div>
-<div class="lic-quote-card__body">
-<ul class="lic-quote-card__checks">
-<li>${c.quote1}</li>
-<li>${c.quote2}</li>
-<li>${c.quote3}</li>
-</ul>
-<a class="lic-quote-card__cta" href="quote.html">${c.quoteCta}</a>
-</div>
-</div>
-</aside>
+${quoteRailHtml({ lang, title: c.quoteTitle, line1: c.quote1, line2: c.quote2 })}
 </div>
 </main>`;
 }
