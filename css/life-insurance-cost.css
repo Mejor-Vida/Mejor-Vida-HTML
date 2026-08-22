@@ -1524,3 +1524,45 @@ a.lic-carrier-row:focus-visible {
   font-weight: 800;
   color: #0b3a7a;
 }
+
+.lic-type-block {
+  margin: 0 0 1.35rem;
+}
+
+.lic-type-block h3 {
+  margin: 0 0 0.4rem;
+  font-size: 1.12rem;
+  color: #0f2744;
+}
+
+.lic-split-lists {
+  display: grid;
+  gap: 1rem 1.5rem;
+  margin: 0 0 1rem;
+}
+
+@media (min-width: 720px) {
+  .lic-split-lists {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.lic-split-lists h3 {
+  margin: 0 0 0.45rem;
+  font-size: 1.05rem;
+}
+
+.lic-split-lists ul {
+  margin: 0;
+  padding-left: 1.15rem;
+}
+
+.lic-split-lists li {
+  margin: 0 0 0.55rem;
+  color: var(--lic-muted);
+  line-height: 1.5;
+}
+
+.lic-product-tabs {
+  margin-top: 0.75rem;
+}

@@ -193,7 +193,7 @@
             final_expense:
               ". Edades 45–85 (cada 5 años). Primas ilustrativas; no es cotización vinculante.",
             guaranteed:
-              ". Edades de muestra 45–85. Muestras educativas; no es cotización de compañía.",
+              ". Edades 45–85. Primas ilustrativas de compañías designadas; no es cotización vinculante.",
             universal_life:
               "primas mensuales ilustrativas (preferred no fumador). El costo real de UL/IUL depende del financiamiento y de la ilustración de la compañía.",
             children_si_wl:
@@ -232,7 +232,7 @@
             final_expense:
               ". Ages 45–85 (every 5 years). Illustrative premiums; not a binding quote.",
             guaranteed:
-              ". Sample ages 45–85. Educational samples; not a carrier quote.",
+              ". Ages 45–85. Illustrative appointed-company premiums; not a binding quote.",
             universal_life:
               "illustrative monthly premiums (preferred non-tobacco). Actual UL/IUL cost depends on funding and the carrier illustration.",
             children_si_wl:
