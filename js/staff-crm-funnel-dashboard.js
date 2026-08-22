@@ -38,7 +38,9 @@
   ];
 
   function landingPagesForSource(source) {
-    return source === "organic" ? ["website"] : ["v2", "v3", "website"];
+    if (source === "organic") return ["website"];
+    if (source === "google") return ["website", "v2", "v3"];
+    return ["v2", "v3", "website"];
   }
 
   function composeViewId(source, landing) {
@@ -1194,6 +1196,9 @@
     main.querySelectorAll("[data-funnel-source]").forEach(function (btn) {
       btn.addEventListener("click", function () {
         state.sourceChannel = btn.getAttribute("data-funnel-source") || "facebook";
+        if (state.sourceChannel === "google") {
+          state.landingPage = "website";
+        }
         syncViewFromFilters();
         state.selectedNode = null;
         state.detail = null;
