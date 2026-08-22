@@ -113,6 +113,8 @@ def prepare_en_header(path: Path) -> str:
                 "life-insurance-seniors-over-85.html",
                 "life-insurance-seniors-no-medical-exam.html",
                 "life-insurance-age-limit.html",
+                "burial-insurance-seniors.html",
+                "life-insurance-seniors.html",
                 "5000-life-insurance-cost.html",
                 "10000-life-insurance-cost.html",
                 "15000-life-insurance-cost.html",

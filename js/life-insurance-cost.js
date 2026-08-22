@@ -165,6 +165,10 @@
       "lic-page--children"
     );
     var dedicatedAmount = !!document.body.classList.contains("lic-page--amount");
+    var dedicatedBurial = !!document.body.classList.contains("lic-page--burial");
+    var dedicatedSeniorsHub = !!document.body.classList.contains(
+      "lic-page--seniors-hub"
+    );
     var copy = isEs
       ? {
           notePrefix: "Primas mensuales ilustrativas (redondeadas). Clasificación: ",
@@ -172,7 +176,9 @@
           noteSuffix:
             ". Las cotizaciones reales de Mejor Vida varían según salud, estado, compañía y suscripción.",
           estimatedNote: "",
-          ageRangeNote: dedicatedTerm
+          ageRangeNote: dedicatedSeniorsHub
+            ? " Edades 50 y más. Temporal: plazo de 10 años, $100,000 y $250,000."
+            : dedicatedTerm
             ? " Edades cada 5 años según las tarifas que Integrity Connect devolvió para ese plazo y monto."
             : " Rangos de edad: temporal 10 años 20–80; 20 años 20–65; 30 años 20–55 (como los cuadros de muestra habituales).",
           preferMetaNote: dedicatedTerm || dedicatedChildren || dedicatedAmount,
@@ -186,14 +192,17 @@
               "Primas mensuales ilustrativas (redondeadas). Clasificación: ",
           },
           bucketNoteSuffix: {
-            whole_life:
-              ". Edades 45–85 (cada 5 años). Primas ilustrativas de vida entera simplificada; no es cotización vinculante.",
+            whole_life: dedicatedSeniorsHub
+              ? ". Edades 50–85 (cada 5 años). Primas ilustrativas de vida entera simplificada; no es cotización vinculante."
+              : ". Edades 45–85 (cada 5 años). Primas ilustrativas de vida entera simplificada; no es cotización vinculante.",
             whole_life_traditional:
               ". Edades 40–85 (cada 5 años). Muestra educativa preferred / no fumador; montos más altos se ilustran caso por caso.",
-            final_expense:
-              ". Edades 45–85 (cada 5 años). Primas ilustrativas; no es cotización vinculante.",
-            guaranteed:
-              ". Edades 45–85. Primas ilustrativas de compañías designadas; no es cotización vinculante.",
+            final_expense: dedicatedBurial || dedicatedSeniorsHub
+              ? ". Edades 50 y más (compañías designadas, no fumador). Primas ilustrativas; no es cotización vinculante."
+              : ". Edades 45–85 (cada 5 años). Primas ilustrativas; no es cotización vinculante.",
+            guaranteed: dedicatedSeniorsHub
+              ? ". Edades 50 y más. Primas ilustrativas de compañías designadas; no es cotización vinculante."
+              : ". Edades 45–85. Primas ilustrativas de compañías designadas; no es cotización vinculante.",
             universal_life:
               "primas mensuales ilustrativas (preferred no fumador). El costo real de UL/IUL depende del financiamiento y de la ilustración de la compañía.",
             children_si_wl:
@@ -211,7 +220,9 @@
           noteSuffix:
             ". Actual Mejor Vida quotes vary by health, state, carrier, and underwriting.",
           estimatedNote: "",
-          ageRangeNote: dedicatedTerm
+          ageRangeNote: dedicatedSeniorsHub
+            ? " Ages 50 and up. Term: 10-year, $100,000 and $250,000."
+            : dedicatedTerm
             ? " Ages every 5 years where Integrity Connect returned a published rate for that term and amount."
             : " Age ranges: 10-year term 20–80; 20-year 20–65; 30-year 20–55 (matching typical published sample charts).",
           preferMetaNote: dedicatedTerm || dedicatedChildren || dedicatedAmount,
@@ -225,14 +236,17 @@
               "Illustrative monthly premiums (rounded). Rating class: ",
           },
           bucketNoteSuffix: {
-            whole_life:
-              ". Ages 45–85 (every 5 years). Illustrative simplified whole life premiums; not a binding quote.",
+            whole_life: dedicatedSeniorsHub
+              ? ". Ages 50–85 (every 5 years). Illustrative simplified whole life premiums; not a binding quote."
+              : ". Ages 45–85 (every 5 years). Illustrative simplified whole life premiums; not a binding quote.",
             whole_life_traditional:
               ". Ages 40–85 (every 5 years). Educational preferred / non-tobacco sample; larger faces are illustrated case by case.",
-            final_expense:
-              ". Ages 45–85 (every 5 years). Illustrative premiums; not a binding quote.",
-            guaranteed:
-              ". Ages 45–85. Illustrative appointed-company premiums; not a binding quote.",
+            final_expense: dedicatedBurial || dedicatedSeniorsHub
+              ? ". Ages 50 and up (appointed companies, non-tobacco). Illustrative premiums; not a binding quote."
+              : ". Ages 45–85 (every 5 years). Illustrative premiums; not a binding quote.",
+            guaranteed: dedicatedSeniorsHub
+              ? ". Ages 50 and up. Illustrative appointed-company premiums; not a binding quote."
+              : ". Ages 45–85. Illustrative appointed-company premiums; not a binding quote.",
             universal_life:
               "illustrative monthly premiums (preferred non-tobacco). Actual UL/IUL cost depends on funding and the carrier illustration.",
             children_si_wl:
@@ -361,22 +375,22 @@
   }
 
   function initMetaTabs() {
-    var root = document.querySelector(".lic-meta");
-    if (!root) return;
-    var tabs = root.querySelectorAll("[data-lic-meta]");
-    var panels = root.querySelectorAll("[data-lic-meta-panel]");
-    tabs.forEach(function (tab) {
-      tab.addEventListener("click", function () {
-        var id = tab.getAttribute("data-lic-meta");
-        tabs.forEach(function (t) {
-          var on = t === tab;
-          t.classList.toggle("is-active", on);
-          t.setAttribute("aria-selected", on ? "true" : "false");
-        });
-        panels.forEach(function (p) {
-          var on = p.getAttribute("data-lic-meta-panel") === id;
-          p.hidden = !on;
-          p.classList.toggle("is-active", on);
+    document.querySelectorAll(".lic-meta").forEach(function (root) {
+      var tabs = root.querySelectorAll("[data-lic-meta]");
+      var panels = root.querySelectorAll("[data-lic-meta-panel]");
+      tabs.forEach(function (tab) {
+        tab.addEventListener("click", function () {
+          var id = tab.getAttribute("data-lic-meta");
+          tabs.forEach(function (t) {
+            var on = t === tab;
+            t.classList.toggle("is-active", on);
+            t.setAttribute("aria-selected", on ? "true" : "false");
+          });
+          panels.forEach(function (p) {
+            var on = p.getAttribute("data-lic-meta-panel") === id;
+            p.hidden = !on;
+            p.classList.toggle("is-active", on);
+          });
         });
       });
     });

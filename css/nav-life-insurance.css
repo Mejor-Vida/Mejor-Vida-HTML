@@ -252,6 +252,23 @@
   max-width: 20.5rem;
 }
 
+.nav-life-panel[data-life-panel="seniors"].is-active {
+  grid-template-columns: minmax(138px, 0.62fr) minmax(0, 1fr) minmax(0, 1fr);
+}
+
+.nav-life-panel[data-life-panel="seniors"] .nav-life-feature--hub {
+  margin: 0.75rem 0.4rem 0.75rem 0;
+}
+
+.nav-life-panel[data-life-panel="seniors"] .nav-life-feature--guide {
+  margin-left: 0.35rem;
+}
+
+.nav-life-feature--hub .nav-life-feature-media picture,
+.nav-life-feature--hub .nav-life-feature-media img {
+  object-position: 62% 48%;
+}
+
 .nav-life-panel[data-life-panel="seniors"] .nav-life-options-grid--seniors a {
   font-size: 0.92rem;
   font-weight: 650;
@@ -404,6 +421,11 @@
 .nav-life-feature--seniors .nav-life-feature-media picture,
 .nav-life-feature--seniors .nav-life-feature-media img {
   object-position: 50% 28%;
+}
+
+.nav-life-feature--guide .nav-life-feature-media picture,
+.nav-life-feature--guide .nav-life-feature-media img {
+  object-position: 28% 40%;
 }
 
 /* Coverage map card — keep map readable (less crop / wash) */

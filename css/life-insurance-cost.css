@@ -41,9 +41,9 @@
   object-position: center 40%;
 }
 
-.lic-hero-media--horse picture,
-.lic-hero-media--horse img {
-  object-position: 68% 42%;
+.lic-hero-media--vida picture,
+.lic-hero-media--vida img {
+  object-position: 58% 46%;
 }
 
 .lic-hero-media--coffee picture,
@@ -69,6 +69,11 @@
 .lic-hero-media--lakes picture,
 .lic-hero-media--lakes img {
   object-position: 50% 42%;
+}
+
+.lic-hero-media--fishing picture,
+.lic-hero-media--fishing img {
+  object-position: 30% 42%;
 }
 
 .lic-hero-media--fjord picture,
@@ -925,6 +930,15 @@ a.lic-carrier-row:focus-visible {
 .lic-meta-tab:focus-visible {
   outline: 3px solid #63b3ed;
   outline-offset: 2px;
+}
+
+.lic-meta--rates .lic-meta-tab.is-active {
+  background: var(--lic-gold);
+  color: #1a202c;
+}
+
+.lic-meta--rates .lic-meta-panel {
+  margin: 0;
 }
 
 .lic-meta-panel p,
@@ -1813,5 +1827,300 @@ a.lic-co-card--link .lic-co-specs dd {
 
   .lic-overview-table tbody tr:nth-child(even) td {
     background: transparent;
+  }
+}
+
+/* Seniors hub — article uses the page; quote sits with the right-edge fabs */
+.lic-page--seniors-hub .lic-layout--hub {
+  display: block;
+  width: calc(100% - 13.75rem);
+  max-width: 1280px;
+  margin-right: 13.5rem;
+  margin-left: auto;
+}
+
+.lic-page--seniors-hub .lic-aside--rail {
+  position: fixed;
+  z-index: 1083;
+  top: calc(81px + 6.05rem + env(safe-area-inset-top, 0px));
+  right: max(0.75rem, env(safe-area-inset-right, 0px));
+  bottom: calc(10.75rem + env(safe-area-inset-bottom, 0px));
+  width: 11.35rem;
+  max-height: none;
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+
+.lic-page--seniors-hub .lic-aside--rail .lic-quote-card {
+  border-radius: 0.65rem;
+}
+
+.lic-page--seniors-hub .lic-aside--rail .lic-quote-card__head {
+  padding: 0.55rem 0.7rem 0.4rem;
+}
+
+.lic-page--seniors-hub .lic-aside--rail .lic-quote-card__head strong {
+  font-size: 0.82rem;
+}
+
+.lic-page--seniors-hub .lic-aside--rail .lic-quote-card__body {
+  padding: 0.5rem 0.7rem 0.7rem;
+}
+
+.lic-page--seniors-hub .lic-aside--rail .lic-quote-card__checks {
+  margin: 0 0 0.55rem;
+}
+
+.lic-page--seniors-hub .lic-aside--rail .lic-quote-card__checks li {
+  padding: 0.08rem 0 0.08rem 1.05rem;
+  font-size: 0.72rem;
+  line-height: 1.3;
+}
+
+.lic-page--seniors-hub .lic-aside--rail .lic-quote-card__checks li::before {
+  top: 0.08rem;
+  font-size: 0.7rem;
+}
+
+.lic-page--seniors-hub .lic-aside--rail .lic-quote-card__checks a {
+  color: #fff;
+  font-weight: 800;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.lic-page--seniors-hub .lic-aside--rail .lic-quote-card__checks a:hover,
+.lic-page--seniors-hub .lic-aside--rail .lic-quote-card__checks a:focus-visible {
+  color: #f1b400;
+  text-decoration: underline;
+}
+
+.lic-page--seniors-hub .lic-aside--rail .lic-quote-card__cta {
+  padding: 0.42rem 0.5rem;
+  font-size: 0.8rem;
+}
+
+.lic-page--seniors-hub .lic-main--after-compare {
+  max-width: none;
+}
+
+@media (max-width: 991.98px) {
+  .lic-page--seniors-hub .lic-layout--hub {
+    width: auto;
+    max-width: 1080px;
+    margin-right: auto;
+  }
+
+  .lic-page--seniors-hub .lic-aside--rail {
+    position: static;
+    top: auto;
+    right: auto;
+    bottom: auto;
+    width: auto;
+    max-height: none;
+    overflow: visible;
+    margin-bottom: 1rem;
+  }
+}
+
+/* Seniors hub — full-width comparison chart (MVI navy / gold) */
+
+.lic-compare-band {
+  grid-column: 1 / -1;
+  width: 100vw;
+  margin: 0.35rem 0 1.6rem;
+  margin-left: calc(50% - 50vw);
+  padding: 2rem 0 2.15rem;
+  background:
+    radial-gradient(ellipse at 14% 20%, rgba(241, 180, 0, 0.16), transparent 42%),
+    radial-gradient(ellipse at 88% 78%, rgba(0, 95, 169, 0.45), transparent 50%),
+    linear-gradient(165deg, #003366 0%, #0b3a7a 46%, #0d47a1 100%);
+  color: #fff;
+}
+
+.lic-compare-inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.lic-compare-band h2 {
+  margin: 0 0 0.55rem;
+  color: #fff;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.45rem, 2.4vw, 1.85rem);
+  font-weight: 700;
+}
+
+.lic-compare-band > .lic-compare-inner > p {
+  margin: 0 0 0.85rem;
+  max-width: 52rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.lic-compare-scroll-hint {
+  display: none;
+  margin: 0 0 0.65rem !important;
+  color: #f1b400 !important;
+  font-size: 0.8rem !important;
+  font-weight: 700;
+}
+
+.lic-compare-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 0.28rem;
+  box-shadow: 0 14px 40px rgba(0, 20, 40, 0.35);
+  background: #fff;
+}
+
+.lic-compare-table {
+  width: 100%;
+  min-width: 980px;
+  margin: 0;
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-size: 0.86rem;
+}
+
+.lic-compare-table th,
+.lic-compare-table td {
+  padding: 0.78rem 0.62rem;
+  border: 1px solid #c5d4e8;
+  vertical-align: middle;
+}
+
+.lic-compare-table thead th {
+  background: #0d47a1;
+  color: #fff;
+  font-weight: 700;
+  text-align: center;
+  line-height: 1.25;
+  letter-spacing: 0.01em;
+  border-bottom: 3px solid #f1b400;
+}
+
+.lic-compare-table thead th:first-child {
+  width: 20%;
+  text-align: left;
+  background: #003366;
+}
+
+.lic-compare-table tbody th {
+  width: 20%;
+  background: #003366;
+  color: #fff;
+  font-weight: 700;
+  text-align: left;
+  vertical-align: top;
+}
+
+.lic-compare-table tbody th a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.lic-compare-table tbody th a:hover,
+.lic-compare-table tbody th a:focus-visible {
+  color: #f1b400;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.lic-compare-sub {
+  display: block;
+  margin-top: 0.22rem;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.72rem;
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+.lic-compare-table tbody td {
+  background: #fff;
+  color: #1e3a5f;
+  text-align: center;
+  font-weight: 650;
+  line-height: 1.3;
+}
+
+.lic-compare-table tbody tr:nth-child(even) td {
+  background: #f3f7fc;
+}
+
+.lic-compare-table tbody tr:hover td {
+  background: #fff8e6;
+}
+
+.lic-compare-age {
+  display: block;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #003366;
+  letter-spacing: -0.02em;
+}
+
+.lic-compare-age-note {
+  display: block;
+  margin-top: 0.15rem;
+  color: #64748b;
+  font-size: 0.72rem;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.lic-compare-foot {
+  margin: 0.9rem 0 0 !important;
+  max-width: 54rem;
+  color: rgba(255, 255, 255, 0.86) !important;
+  font-size: 0.8rem !important;
+  line-height: 1.45;
+}
+
+.lic-main--after-compare {
+  grid-column: 1 / -1;
+}
+
+.lic-hub-key {
+  margin: 1rem 0 0;
+  padding: 1rem 1.1rem;
+  background: #edf4fb;
+  border-radius: 0.4rem;
+  border-left: 4px solid #f1b400;
+}
+
+.lic-hub-key h3 {
+  margin: 0 0 0.55rem;
+  color: #003366;
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.lic-hub-key ul {
+  margin: 0;
+  padding-left: 1.1rem;
+}
+
+.lic-hub-key li {
+  margin: 0 0 0.4rem;
+  color: #1f2937;
+  line-height: 1.45;
+}
+
+.lic-hub-key li:last-child {
+  margin-bottom: 0;
+}
+
+@media (max-width: 991.98px) {
+  .lic-compare-scroll-hint {
+    display: block;
+  }
+
+  .lic-compare-band {
+    margin-top: 0.75rem;
   }
 }
