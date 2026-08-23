@@ -13,7 +13,7 @@
 
 **Cadence:** Every Sunday (manual run in Cursor). Always deliver **exactly 3** complete drafts. Never skip a week — use evergreen topics if news is slow.
 
-**Sunday client email:** Must use life insurance / final expense stories only (same product scope as drafts). Do not import Medicare/Medigap FB packages. Guard: `lib/crm-weekly-topic-guard.js`. Keep `lib/crm-weekly-blog-digest-email.js` and `FB/post-package.json` pointed at the current on-topic week.
+**Sunday client / staff email:** Follow `tools/weekly-newsletter/` (research last 7 days → 3 stories → send julie@ and admin@ by 6:00 a.m. Chicago). Email topics: final expense, whole life, term, IUL, annuities. Guard: `lib/crm-weekly-topic-guard.js`. The public SEO blog still prefers FE → term → whole life; do not import Medicare/Medigap packages.
 
 When rules conflict with ad-hoc chat instructions, **this document wins** unless Julie updates it.
 
@@ -147,7 +147,9 @@ These are writing and product limits — **not** “reject this publisher” rul
 
 ### 5.1 Do not promote or center these products
 
-IUL, VUL, variable life, investment-linked / market-linked products, Medicare plan sales, auto, home, or property insurance as the main story.
+- IUL / VUL as the **public SEO blog** focus (the Sunday **email** may include IUL or annuity news — see `tools/weekly-newsletter/`)
+- Variable life, investment-linked / market-linked products as the main story
+- Medicare plan sales, auto, home, or property insurance as the main story
 
 ### 5.2 Do not name competitors in drafts
 

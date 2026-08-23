@@ -1,11 +1,8 @@
 /**
  * /api/crm-newsletter-cron.js
- * Sends scheduled weekly newsletter to all eligible leads (except unsubscribed).
+ * Sunday 6:00 a.m. Chicago: research last week's news, compose the letter, email julie@ and admin@.
  */
-const {
-  sbFetch,
-  sendWeeklyNewsletterIssue,
-} = require("../lib/crm-newsletter-send");
+const { runWeeklyNewsletter } = require("../lib/weekly-newsletter-run");
 
 module.exports = async function handler(req, res) {
   if (req.headers.authorization !== `Bearer ${process.env.CRON_SECRET}`) {
@@ -18,18 +15,15 @@ module.exports = async function handler(req, res) {
     return res.status(500).json({ error: "Missing Supabase env" });
   }
 
+  const force = req.query && (req.query.force === "1" || req.query.force === "true");
+
   try {
-    const issues = await sbFetch(
+    const result = await runWeeklyNewsletter({
       supabaseUrl,
       serviceKey,
-      "/crm_newsletter_issues?status=in.(draft,scheduled)&order=created_at.desc&limit=1&select=*"
-    );
-    const issue = issues && issues[0];
-    if (!issue) {
-      return res.status(200).json({ ran_at: new Date().toISOString(), sent: 0, reason: "no_issue" });
-    }
-
-    const result = await sendWeeklyNewsletterIssue(supabaseUrl, serviceKey, issue, {});
+      fromCron: !force,
+      force,
+    });
     return res.status(200).json({ ran_at: new Date().toISOString(), ...result });
   } catch (e) {
     console.error("[crm-newsletter-cron]", e.message);

@@ -1,0 +1,18 @@
+---
+description: Sunday weekly newsletter — research last week’s FE/WL/term/IUL/annuity news and email julie@ + admin@ by 6am Chicago
+globs: tools/weekly-newsletter/**,lib/weekly-newsletter-*.js,api/crm-newsletter-cron.js,lib/crm-weekly-topic-guard.js
+alwaysApply: false
+---
+
+# Weekly newsletter automation
+
+When researching, writing, or sending the **Sunday weekly newsletter**:
+
+1. Follow **`tools/weekly-newsletter/HOW_TO_ASSEMBLE.md`** (assembly) and **`AGENT_RUNBOOK.md`** (order of operations).
+2. Topics: **final expense, whole life, term, IUL, annuities** only. Block Medicare/Medigap.
+3. Last **7 days** of reputable news; evergreen if thin; always **3** stories of **equal length**.
+4. Follow **`tools/weekly-newsletter/CONTENT_PACKAGE.md`**.
+5. 6 a.m. Sunday Chicago send: **julie@ in Spanish**, **admin@ in English**.
+6. Do not invent premiums. Do not publish the public blog until Julie asks (`newsletter-consumer-blog` rule).
+7. Client letter only. Never: writing-method narration, “a news story does not cancel your policy,” “read every question slowly,” or “we do not have that file / we will not repeat a rate we did not verify.” Julie cut those because they sound weird. Omit unverified numbers silently.
+8. After the approved blog and images are live, Facebook is automatic — `tools/weekly-newsletter/FACEBOOK_AUTOMATION.md`. Do not wait for a Tuesday/Thursday prompt.

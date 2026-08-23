@@ -15,3 +15,4 @@ When building or updating a **public weekly blog** from Julie’s newsletter / i
 5. **Never** address agents / IMOs / BGAs / producers on public pages. Topics: **final expense, term life, whole life** for families — Spanish indexed, English `noindex`.
 6. Keep SEO assets; strip prior-week schema/hreflang/preload leftovers when cloning templates.
 7. Mirror ES ↔ EN structure. **Index Spanish only** (`sitemap.xml` ES URLs; EN `noindex, follow`). No `hreflang` from ES to noindex EN. Do not sitemap/`index` off-topic archive weeks.
+8. After Julie authorizes the post, she supplies images, and the digest is **live on production**, Facebook is automatic (Sunday + Tuesday 10 a.m. + Thursday 10 a.m. Chicago). Do not wait for her to ask. See `tools/weekly-newsletter/FACEBOOK_AUTOMATION.md`.

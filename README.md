@@ -112,6 +112,8 @@ Rules: **`tools/blog-build-rules.md`**
 
 Weekly posts must keep **English and Spanish at the same depth** (paired paragraphs, dual-language `<details>` for long newsletter text, full FAQ/conclusion/sidebar in both languages). After publishing a new `blog/weekly-insurance-update-*.html`, update **`blog.html`** (summary + feed card) and **`sitemap.xml`**.
 
+Sunday **email** (research + 6 a.m. send to julie@ / admin@): **`tools/weekly-newsletter/README.md`**. Facebook after the live blog: **`tools/weekly-newsletter/FACEBOOK_AUTOMATION.md`**.
+
 ### FLUX LoRA training (fal.ai)
 
 Script: `tools/train_flux_lora_fal.py`

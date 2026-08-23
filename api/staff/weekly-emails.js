@@ -19,6 +19,13 @@ const {
 const {
   getWeeklyBlogDigestEmailPreview,
 } = require("../../lib/crm-weekly-blog-digest-email");
+const {
+  wrapNewsletterHtml,
+  sampleSpanishContact,
+  leadEmailCtaRow,
+} = require("../../lib/crm-nurture-templates");
+const { newsletterWindow } = require("../../lib/weekly-newsletter-window");
+const { importedByTag } = require("../../lib/weekly-newsletter-run");
 
 module.exports = async function handler(req, res) {
   const auth = await requireStaffAuth(req, res);
@@ -33,8 +40,43 @@ module.exports = async function handler(req, res) {
     try {
       const settings = await loadSettings(supabaseUrl, serviceKey);
       const digest = getCurrentWeeklyBlogDigest();
-      const parts = buildWeeklyBlogDigestEmailParts(digest);
-      const preview = getWeeklyBlogDigestEmailPreview(digest);
+      let parts = buildWeeklyBlogDigestEmailParts(digest);
+      let preview = getWeeklyBlogDigestEmailPreview(digest);
+      let currentStatus = "ready";
+      let researchIssue = null;
+      try {
+        const weekKey = newsletterWindow().weekKey;
+        const rows = await sbFetch(
+          supabaseUrl,
+          serviceKey,
+          `/crm_newsletter_issues?imported_by=eq.${encodeURIComponent(
+            importedByTag(weekKey)
+          )}&order=created_at.desc&limit=1&select=*`
+        );
+        researchIssue = rows && rows[0] ? rows[0] : null;
+      } catch (_) {
+        researchIssue = null;
+      }
+      if (researchIssue && researchIssue.body_html) {
+        parts = {
+          subject: researchIssue.subject,
+          heroHtml: researchIssue.hero_html || "",
+          bodyHtml: researchIssue.body_html,
+          heroSource: researchIssue.hero_source || "weekly_research",
+          blogUrl: researchIssue.blog_url,
+        };
+        currentStatus = researchIssue.scheduled_send_at ? "staff_sent" : researchIssue.status || "scheduled";
+        const sample = sampleSpanishContact();
+        preview = {
+          html: wrapNewsletterHtml(
+            parts.heroHtml || "",
+            `<p>Hola equipo,</p>${parts.bodyHtml || ""}${leadEmailCtaRow(false)}`,
+            sample,
+            settings
+          ),
+          subject: parts.subject,
+        };
+      }
       const { counts, recipients } = await listWeeklyEmailRecipients(supabaseUrl, serviceKey, settings);
       const issues = await listNewsletterIssues(supabaseUrl, serviceKey, 25);
 
@@ -60,13 +102,14 @@ module.exports = async function handler(req, res) {
 
       return json(res, 200, {
         current: {
-          post_date_iso: digest.post_date_iso,
+          post_date_iso: researchIssue ? newsletterWindow().weekKey : digest.post_date_iso,
           subject: parts.subject,
           blog_url: parts.blogUrl,
-          hero_source: "blog_digest",
+          hero_source: parts.heroSource || (researchIssue ? "weekly_research" : "blog_digest"),
           stories: digest.stories || [],
           preview_html: preview.html,
-          status: "ready",
+          status: currentStatus,
+          issue_id: researchIssue ? researchIssue.id : null,
         },
         recipient_counts: counts,
         recipients_preview: recipientsPreview,
@@ -118,7 +161,18 @@ module.exports = async function handler(req, res) {
           }
         }
       } else {
-        issue = await ensureBlogDigestIssue(supabaseUrl, serviceKey, importedBy);
+        const weekKey = newsletterWindow().weekKey;
+        const rows = await sbFetch(
+          supabaseUrl,
+          serviceKey,
+          `/crm_newsletter_issues?imported_by=eq.${encodeURIComponent(
+            importedByTag(weekKey)
+          )}&order=created_at.desc&limit=1&select=*`
+        );
+        issue = rows && rows[0] ? rows[0] : null;
+        if (!issue) {
+          issue = await ensureBlogDigestIssue(supabaseUrl, serviceKey, importedBy);
+        }
       }
 
       const result = await sendWeeklyNewsletterIssue(supabaseUrl, serviceKey, issue, {

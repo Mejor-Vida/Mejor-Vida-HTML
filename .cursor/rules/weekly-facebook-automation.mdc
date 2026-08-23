@@ -1,0 +1,15 @@
+---
+description: Weekly Facebook posts after the approved blog is live — Sunday plus Tue/Thu 10am Chicago, no extra prompt
+globs: lib/weekly-facebook-*.js,api/weekly-facebook-cron.js,facebook-post-rules.md,tools/weekly-newsletter/FACEBOOK_AUTOMATION.md
+alwaysApply: false
+---
+
+# Weekly Facebook after the blog
+
+Do **not** wait for Julie to ask for the Tuesday or Thursday posts.
+
+1. Newsletter email is Sunday **6:00 a.m. Chicago** (`api/crm-newsletter-cron.js`).
+2. Public blog HTML is written only after she reviews the letter and authorizes it. She supplies the three images.
+3. After the Spanish digest **and** `story-1/2/3.png` are live on production, `api/weekly-facebook-cron.js` queues three Spanish posts in `facebook-post-rules.md` format (no URL in the caption; blog link in the first comment).
+4. Publish: Sunday as soon as the live blog exists; **Tuesday 10:00 a.m.** Chicago; **Thursday 10:00 a.m.** Chicago.
+5. Follow `tools/weekly-newsletter/FACEBOOK_AUTOMATION.md`.

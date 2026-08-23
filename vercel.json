@@ -111,6 +111,12 @@
   "functions": {
     "api/**/*.js": {
       "maxDuration": 60
+    },
+    "api/crm-newsletter-cron.js": {
+      "maxDuration": 120
+    },
+    "api/weekly-facebook-cron.js": {
+      "maxDuration": 120
     }
   },
   "headers": [
@@ -336,7 +342,15 @@
     },
     {
       "path": "/api/crm-newsletter-cron",
-      "schedule": "0 21 * * 0"
+      "schedule": "0 11 * * 0"
+    },
+    {
+      "path": "/api/crm-newsletter-cron",
+      "schedule": "0 12 * * 0"
+    },
+    {
+      "path": "/api/weekly-facebook-cron",
+      "schedule": "*/15 * * * *"
     },
     {
       "path": "/api/staff-reminder-cron",

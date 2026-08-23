@@ -59,13 +59,32 @@ Email to julie@ and admin@ (`daily_summary.recipients`): New-stage call tasks wi
 
 ---
 
-## Weekly Facebook post email (Sunday)
+## Weekly newsletter (Sunday 6:00 a.m. Chicago)
 
-Leads receive the **same Spanish Facebook post** as that week’s social post — hero image + caption — not a separate long-form newsletter.
+The live job **searches last week’s reputable news** (final expense, whole life, term, IUL, annuities), writes a 3-story Spanish digest, and emails **julie@** and **admin@**. Playbook: [`tools/weekly-newsletter/README.md`](tools/weekly-newsletter/README.md).
 
 | When | Channel | Source |
 |------|---------|--------|
-| Sunday (configurable hour, Chicago) | Email | `crm_newsletter_issues` row imported from FB post |
+| Sunday 6:00 a.m. Chicago (`0 11 * * 0` and `0 12 * * 0` UTC) | Email to julie@ + admin@ | `lib/weekly-newsletter-run.js` via `/api/crm-newsletter-cron` |
+| After live digest + story images | Facebook: Sunday, then Tue 10am / Thu 10am Chicago | `lib/weekly-facebook-run.js` via `/api/weekly-facebook-cron` |
+
+Cron **creates** the `crm_newsletter_issues` row if none exists (`hero_source: weekly_research`). It does not wait for a Facebook import.
+
+**Client send:** not automatic from the research cron. After Julie reviews the 6 a.m. letter, Staff → Weekly emails → **Send now**. Optional: `WEEKLY_NEWSLETTER_SEND_CLIENTS=1` on Vercel to include eligible CRM leads in the same Sunday send.
+
+Facebook captions are composed automatically from the live blog; Julie does not need to ask for the Tuesday or Thursday posts.
+
+Legacy Facebook-caption import still works (`POST /api/staff/newsletter-import`) if Julie wants that week’s social post instead.
+
+---
+
+## Weekly Facebook post email (legacy import)
+
+Leads can still receive a Spanish Facebook-style caption if you import it:
+
+| When | Channel | Source |
+|------|---------|--------|
+| After staff Send now | Email | `crm_newsletter_issues` row imported from FB post |
 
 **Import before send:** `POST /api/staff/newsletter-import` with:
 
@@ -113,6 +132,8 @@ Sunday cron sends to all leads with email except `unsubscribed` / `do_not_contac
 | `RESEND_API_KEY` | Email |
 | `TELNYX_API_KEY`, `TELNYX_SMS_FROM` | SMS |
 | `CRON_SECRET` | Cron auth |
+| `WEEKLY_NEWSLETTER_SEND_CLIENTS` | Set `1` to also email eligible CRM leads at the Sunday 6 a.m. research send (default: staff inboxes only) |
+| `WEEKLY_FACEBOOK_AUTOPOST` | Set `0` to pause automatic Sunday/Tue/Thu Facebook posts |
 
 ---
 

@@ -1,0 +1,172 @@
+{
+  "timezone": "America/Chicago",
+  "staff_recipients": [
+    "julie@mejorvidainsurance.com",
+    "admin@mejorvidainsurance.com"
+  ],
+  "topics": [
+    "final_expense",
+    "whole_life",
+    "term_life",
+    "iul",
+    "annuity"
+  ],
+  "google_news_queries": [
+    "\"final expense insurance\" OR \"burial insurance\" OR \"funeral insurance\" when:7d",
+    "\"whole life insurance\" when:7d",
+    "\"term life insurance\" when:7d",
+    "\"indexed universal life\" OR IUL insurance when:7d",
+    "(annuity OR annuities) (retirement OR income OR insurance) -crypto when:7d",
+    "funeral OR burial cost (NFDA OR FTC OR \"funeral rule\") when:7d",
+    "\"life insurance\" (family OR consumer OR funeral OR burial OR term OR \"whole life\") when:7d",
+    "cremation OR burial \"average cost\" (funeral OR NFDA) when:7d"
+  ],
+  "direct_feeds": [
+    {
+      "name": "FTC press",
+      "url": "https://www.ftc.gov/feeds/press-release.xml"
+    },
+    {
+      "name": "SSA blog",
+      "url": "https://blog.ssa.gov/feed/"
+    },
+    {
+      "name": "BLS news releases",
+      "url": "https://www.bls.gov/feed/bls_latest.rss"
+    },
+    {
+      "name": "FTC consumer",
+      "url": "https://www.ftc.gov/feeds/consumer-alert.xml"
+    }
+  ],
+  "allow_host_suffixes": [
+    "ftc.gov",
+    "consumer.ftc.gov",
+    "ssa.gov",
+    "bls.gov",
+    "naic.org",
+    "nfda.org",
+    "iii.org",
+    "limra.com",
+    "lifehappens.org",
+    "acli.com",
+    "apnews.com",
+    "reuters.com",
+    "npr.org",
+    "pbs.org",
+    "wsj.com",
+    "nytimes.com",
+    "washingtonpost.com",
+    "usatoday.com",
+    "chicagotribune.com",
+    "omaha.com",
+    "denverpost.com",
+    "lasvegassun.com",
+    "reviewjournal.com",
+    "kansas.com",
+    "insurancejournal.com",
+    "thinkadvisor.com",
+    "forbes.com",
+    "cnbc.com",
+    "marketwatch.com",
+    "kiplinger.com",
+    "investopedia.com",
+    "gov"
+  ],
+  "allow_source_names": [
+    "FTC",
+    "Federal Trade Commission",
+    "SSA",
+    "Social Security",
+    "BLS",
+    "NAIC",
+    "NFDA",
+    "Associated Press",
+    "AP",
+    "Reuters",
+    "NPR",
+    "WSJ",
+    "Wall Street Journal",
+    "New York Times",
+    "Washington Post",
+    "USA Today",
+    "Forbes",
+    "CNBC",
+    "MarketWatch",
+    "Kiplinger",
+    "Investopedia",
+    "Insurance Journal",
+    "ThinkAdvisor"
+  ],
+  "title_downrank": [
+    "hiring",
+    "best annuity",
+    "best life insurance",
+    "review 2026",
+    "review 2027",
+    "compare quotes",
+    "chatgpt",
+    "insurconnect",
+    "for agents",
+    "IMO",
+    "commission"
+  ],
+  "evergreen": [
+    {
+      "category": "final_expense",
+      "title_en": "The FTC Funeral Rule still protects families shopping a funeral",
+      "source_title": "Shopping for Funeral Services",
+      "source_name": "FTC",
+      "source_url": "https://consumer.ftc.gov/articles/shopping-funeral-services",
+      "published": "evergreen"
+    },
+    {
+      "category": "final_expense",
+      "title_en": "Social Security’s lump-sum death payment is $255 — not a funeral plan",
+      "source_title": "Survivors benefits",
+      "source_name": "Social Security Administration",
+      "source_url": "https://www.ssa.gov/benefits/survivors/",
+      "published": "evergreen"
+    },
+    {
+      "category": "final_expense",
+      "title_en": "Funeral and cremation costs are why families size final expense coverage",
+      "source_title": "NFDA Statistics",
+      "source_name": "NFDA",
+      "source_url": "https://nfda.org/news/statistics",
+      "published": "evergreen"
+    },
+    {
+      "category": "term_life",
+      "title_en": "Many families overestimate what term life costs — get a real quote",
+      "source_title": "Insurance Barometer Study",
+      "source_name": "LIMRA / Life Happens",
+      "source_url": "https://lifehappens.org/research/",
+      "published": "evergreen"
+    },
+    {
+      "category": "whole_life",
+      "title_en": "Whole life vs term: cash value is savings inside the policy, not a market bet",
+      "source_title": "What is life insurance?",
+      "source_name": "Insurance Information Institute",
+      "source_url": "https://www.iii.org/article/what-life-insurance",
+      "published": "evergreen"
+    },
+    {
+      "category": "annuity",
+      "title_en": "An annuity is a contract that can turn savings into income — not a life insurance replacement",
+      "source_title": "Annuities",
+      "source_name": "Insurance Information Institute",
+      "source_url": "https://www.iii.org/article/what-annuities",
+      "published": "evergreen"
+    },
+    {
+      "category": "iul",
+      "title_en": "Indexed universal life credits interest from an index formula — it is still life insurance",
+      "source_title": "What is universal life insurance?",
+      "source_name": "Insurance Information Institute",
+      "source_url": "https://www.iii.org/article/what-are-the-principal-types-of-life-insurance",
+      "published": "evergreen"
+    }
+  ]
+}

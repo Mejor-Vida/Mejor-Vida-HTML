@@ -37,8 +37,8 @@ These Facebook posts are **not** only for traffic. They are designed to **create
 
 Weekly Facebook posts **and** the Sunday client newsletter must be about **life insurance or final expense only**:
 
-- **Allowed:** final expense / burial / funeral funding, term life, whole life, life-insurance scams/consumer protection tied to those products
-- **Not allowed as the post or email topic:** Medicare, Medigap, Medicare Advantage, Med Supp shopping, Part A/B/D news, LTC as a product line, IUL/VUL, auto/home
+- **Allowed:** final expense / burial / funeral funding, term life, whole life, IUL, annuities, and consumer-protection news tied to those products
+- **Not allowed as the post or email topic:** Medicare, Medigap, Medicare Advantage, Med Supp shopping, Part A/B/D news, LTC as a product line, auto/home
 
 Do **not** publish or import a weekly package whose caption/subject is primarily Medicare/Medigap. The import APIs reject those topics.
 
@@ -166,7 +166,7 @@ Every post must include a **separate first comment** to be posted **after** the 
 
 Configured in `facebook-posting/scripts/facebook_post_package.py` (`warm_first_comment`). WhatsApp: `whatsapp_first_comment_url` in `config/settings.json` or env `MVS_WHATSAPP_FIRST_COMMENT_URL`.
 
-**Publishing automation:** After the main post goes live, `facebook-posting/main.py` POSTs to the Make.com webhook with `id`, `post_id`, `message`, and `comment`. Make waits ~10 minutes, then posts the comment. Setup and troubleshooting: **`integrations/MAKE_COM_FB_FIRST_COMMENT.md`**.
+**Publishing automation:** After the approved weekly digest and story images are live, `api/weekly-facebook-cron.js` publishes three Spanish posts (Sunday as soon as the blog exists, Tuesday 10:00 a.m. Chicago, Thursday 10:00 a.m. Chicago) and posts the first comment about 10 minutes later. See `tools/weekly-newsletter/FACEBOOK_AUTOMATION.md`. Do not wait for a separate Tuesday/Thursday prompt. Legacy Make.com delay: **`integrations/MAKE_COM_FB_FIRST_COMMENT.md`**.
 
 ---
 

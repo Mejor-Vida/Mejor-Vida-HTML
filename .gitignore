@@ -45,3 +45,6 @@ integrations/knowledge/Americo_Knowledge/raw/
 
 # Weekly Patriot accounting reviews (dollar amounts — local only)
 integrations/accounting/reviews/
+
+# Local Sunday newsletter previews (generated; may include draft copy)
+tools/weekly-newsletter/out/
