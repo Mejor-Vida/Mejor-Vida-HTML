@@ -110,12 +110,6 @@
   ],
   "functions": {
     "api/**/*.js": {
-      "maxDuration": 60
-    },
-    "api/crm-newsletter-cron.js": {
-      "maxDuration": 120
-    },
-    "api/weekly-facebook-cron.js": {
       "maxDuration": 120
     }
   },
