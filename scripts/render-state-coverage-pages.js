@@ -77,12 +77,12 @@ function stateHero(code, lang, prefix, imgPrefix) {
     lang === "es"
       ? [
           `Un funeral tradicional en ${esc(name)} promedia cerca de <strong>${money(burialAvg)}</strong>; la cremación con servicio cerca de <strong>${money(cremationAvg)}</strong> (Funeralocity).`,
-          `Puede comparar cotizaciones de varias aseguradoras — incluidas Assurity, Mutual of Omaha, American Amicable, Corebridge y Transamerica — según su edad, salud y presupuesto.`,
+          `Puede comparar cotizaciones de varias aseguradoras — incluidas Mutual of Omaha, Corebridge, Americo, Aetna y otras — según su edad, salud y presupuesto.`,
           `Opciones de emisión simplificada o aceptación garantizada según su situación, con primas niveladas.`,
         ]
       : [
           `A traditional burial in ${esc(name)} averages about <strong>${money(burialAvg)}</strong>; full-service cremation about <strong>${money(cremationAvg)}</strong> (Funeralocity).`,
-          `Compare quotes from multiple carriers — including Assurity, Mutual of Omaha, American Amicable, Corebridge, and Transamerica — based on your age, health, and budget.`,
+          `Compare quotes from multiple carriers — including Mutual of Omaha, Corebridge, Americo, Aetna, and others — based on your age, health, and budget.`,
           `Simplified-issue or guaranteed-acceptance options when they fit, with level premiums.`,
         ];
 
@@ -291,7 +291,8 @@ function carrierMetrics(c, lang) {
     c.naic && c.naic.complaintIndex != null
       ? Number(c.naic.complaintIndex).toFixed(2)
       : null;
-  const naicPrimary = naicIdx != null ? naicIdx : `#${naicCode}`;
+  // NAIC column is the CIS complaint index (0.42, etc.). Company code stays in the CIS link.
+  const naicPrimary = naicIdx != null ? naicIdx : naLabel;
   const jd = c.jdPower || {};
   let jdVal = naLabel;
   if (jd.inStudy && jd.score != null) {
@@ -335,7 +336,8 @@ function carriersRankedTable(lang, imgPrefix, pagePrefix) {
         c.slug === "mutual-of-omaha" ||
         c.slug === "transamerica" ||
         c.slug === "corebridge" ||
-        c.slug === "american-amicable"
+        c.slug === "american-amicable" ||
+        c.slug === "americo"
           ? " sc-carrier-logo-link--lg"
           : "";
       const logoSlugClass = ` sc-carrier-logo-link--${c.slug}`;

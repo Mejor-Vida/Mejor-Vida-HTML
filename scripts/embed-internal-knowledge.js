@@ -14,6 +14,7 @@
  *   node scripts/embed-internal-knowledge.js --only=transamerica
  *   node scripts/embed-internal-knowledge.js --only=corebridge
  *   node scripts/embed-internal-knowledge.js --only=aetna
+ *   node scripts/embed-internal-knowledge.js --only=americo
  *   node scripts/embed-internal-knowledge.js --carrier american_amicable --file path/to/MASTER.md
  *   node scripts/embed-internal-knowledge.js --carrier=transamerica --file=integrations/knowledge/Transamerica_Knowledge/MASTER_TRANSAMERICA_KNOWLEDGE.md
  *
@@ -123,6 +124,72 @@ const DEFAULT_JOBS = [
     ),
     label: "Aetna Accendo FE drug list",
   },
+  {
+    carrier: "americo",
+    file: path.join(
+      REPO_ROOT,
+      "integrations",
+      "knowledge",
+      "Americo_Knowledge",
+      "MASTER_AMERICO_KNOWLEDGE.md",
+    ),
+    label: "Americo product MASTER",
+  },
+  {
+    carrier: "americo",
+    file: path.join(
+      REPO_ROOT,
+      "integrations",
+      "knowledge",
+      "Americo_Knowledge",
+      "MASTER_AMERICO_UW_AND_AGENT.md",
+    ),
+    label: "Americo underwriting & agent ops",
+  },
+  {
+    carrier: "americo",
+    file: path.join(
+      REPO_ROOT,
+      "integrations",
+      "knowledge",
+      "Americo_Knowledge",
+      "LIFE_PRODUCTS.md",
+    ),
+    label: "Americo life product inventory",
+  },
+  {
+    carrier: "americo",
+    file: path.join(
+      REPO_ROOT,
+      "integrations",
+      "knowledge",
+      "Americo_Knowledge",
+      "JULIE_PRODUCT_SCOPE.md",
+    ),
+    label: "Americo Julie product scope",
+  },
+  {
+    carrier: "americo",
+    file: path.join(
+      REPO_ROOT,
+      "integrations",
+      "knowledge",
+      "Americo_Knowledge",
+      "STATE_AVAILABILITY.md",
+    ),
+    label: "Americo state availability",
+  },
+  {
+    carrier: "americo",
+    file: path.join(
+      REPO_ROOT,
+      "integrations",
+      "knowledge",
+      "Americo_Knowledge",
+      "FORMS_AND_QUESTIONNAIRES.md",
+    ),
+    label: "Americo forms and UW questionnaires",
+  },
 ];
 
 const MAX_CHARS = 3400;
@@ -156,21 +223,21 @@ function inferCategory(title, bodySnippet) {
     return "compliance";
 
   if (
-    /\bgolden solution\b|\bsenior choice\b|\bfamily solution\b|\bfamily choice\b|\bfinal expense\b|\bprearrangement\b|\bburial\b|\bmodified whole life application\b|\bsimplinow\b|\bsiwl\b|\bgiwl\b|\bguaranteed issue whole life\b|\blegacy max\b/.test(
+    /\bgolden solution\b|\bsenior choice\b|\bfamily solution\b|\bfamily choice\b|\bfinal expense\b|\bprearrangement\b|\bburial\b|\bmodified whole life application\b|\bsimplinow\b|\bsiwl\b|\bgiwl\b|\bguaranteed issue whole life\b|\blegacy max\b|\beagle select\b|\bquit smoking advantage\b/.test(
       t,
     )
   )
     return "final_expense";
 
   if (
-    /\beasy term\b|\bterm life\b|\b10, 20, and 30-year\b|\blevel premium periods\b|\bsimplified issue term\b|\bselect-a-term\b|\bag ultra one\b|\bterm conversion\b/.test(
+    /\beasy term\b|\bterm life\b|\b10, 20, and 30-year\b|\blevel premium periods\b|\bsimplified issue term\b|\bselect-a-term\b|\bag ultra one\b|\bterm conversion\b|\bcbo 100\b|\bcbo 50\b|\bcash back option\b|\bterm 125\b|\bterm 100\b|\bcontinuation 10\b|\bcontinuation 25\b|\bpayment protector\b|\blifeterm\b|\binstant decision term\b/.test(
       t,
     )
   )
     return "term_life";
 
   if (
-    /\bexpress ul\b|\bsecure lifetime gul\b|\bguaranteed universal life\b|\bgul 3\b|\buniversal life\b|\biul\b|\bindexed universal\b|\bflexible premium adjustable universal\b/.test(
+    /\bexpress ul\b|\bsecure lifetime gul\b|\bguaranteed universal life\b|\bgul 3\b|\buniversal life\b|\biul\b|\bindexed universal\b|\bflexible premium adjustable universal\b|\binstant decision iul\b/.test(
       t,
     )
   )
@@ -178,7 +245,12 @@ function inferCategory(title, bodySnippet) {
 
   if (/\blong[-\s]?term care\b|\bltc\b|\bhome health care insurance\b/.test(t)) return "ltc";
   if (/\bcritical illness\b|\bci rider\b|\bcritical illness benefit\b/.test(t)) return "critical_illness";
-  if (/\bannuit(y|ies)\b|\bguaranteed interest rate\b|\binterest rate\b.*\bannuit/.test(t)) return "annuities";
+  if (
+    /\bannuit(y|ies)\b|\bguaranteed interest rate\b|\binterest rate\b.*\bannuit|\belite 5\b|\bplatinum assure\b|\bmyga\b/.test(
+      t,
+    )
+  )
+    return "annuities";
   if (/\briders?\b|\bwaiver of premium\b|\baccelerated benefit\b|\bterminal illness rider\b/.test(t))
     return "riders";
   if (
@@ -397,6 +469,7 @@ function parseArgs(argv) {
     else if (a === "--only=transamerica") out.only = "transamerica";
     else if (a === "--only=corebridge") out.only = "corebridge";
     else if (a === "--only=aetna") out.only = "aetna";
+    else if (a === "--only=americo") out.only = "americo";
     else if (a === "--only=all" || a === "--only=both") out.only = "all";
     else if (a === "--replace") out.replace = true;
     else if (a.startsWith("--carrier=")) out.carrier = a.slice("--carrier=".length).trim();
@@ -487,6 +560,8 @@ async function main() {
     jobs = jobs.filter((j) => j.carrier === "corebridge");
   } else if (args.only === "aetna") {
     jobs = jobs.filter((j) => j.carrier === "aetna");
+  } else if (args.only === "americo") {
+    jobs = jobs.filter((j) => j.carrier === "americo");
   }
 
   const replacedCarriers = new Set();
@@ -514,6 +589,7 @@ async function main() {
     "transamerica",
     "corebridge",
     "aetna",
+    "americo",
   ];
   for (const c of carriers) {
     const n = await countCarrierRows(supabaseUrl, serviceKey, c);

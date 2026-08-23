@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-27",
+  "updatedAt": "2026-08-22",
   "methodology": {
     "en": "Mejor Vida proprietary score (/5): convert AM Best FSR to a percent (A++=100, A+=95, A=90, A-=85, …), use Comdex as a percent (1–100) when published, convert the NAIC CIS National Complaint Index to a percent where lower is better (0→100%, 1.00→50%, 2.00→0%), average the available percents, then score = average% ÷ 100 × 5. Stars match that /5 value. J.D. Power is shown for reference and is not in the average. Ranks Julie’s appointment carriers only — not an endorsement by any rating agency.",
     "es": "Score propietario Mejor Vida (/5): convierte la FSR de AM Best a un porcentaje (A++=100, A+=95, A=90, A-=85, …), usa el Comdex como porcentaje (1–100) cuando se publica, convierte el índice nacional de quejas CIS de la NAIC a un porcentaje donde más bajo es mejor (0→100%, 1.00→50%, 2.00→0%), promedia los porcentajes disponibles y score = promedio% ÷ 100 × 5. Las estrellas coinciden con ese /5. J.D. Power se muestra como referencia y no entra en el promedio. Solo ordena las aseguradoras con cita de Julie — no es un respaldo de ninguna agencia."
@@ -224,8 +224,99 @@
       }
     },
     {
+      "id": "americo",
+      "slug": "americo",
+      "name": "Americo",
+      "hasProfilePage": true,
+      "issuerEn": "Americo Financial Life and Annuity Insurance Company",
+      "issuerEs": "Americo Financial Life and Annuity Insurance Company",
+      "logo": "img/opt/americo-logo.png",
+      "logoWidth": 398,
+      "logoHeight": 128,
+      "productEn": "Eagle Select® simplified-issue whole life",
+      "productEs": "Eagle Select® vida entera de emisión simplificada",
+      "coverageEn": "$5,000–$50,000 (tiers 1–2 ages 40–75); $5,000–$40,000 ages 76–85; tier 3 $5,000–$25,000",
+      "coverageEs": "$5,000–$50,000 (niveles 1–2, 40–75); $5,000–$40,000 (76–85); nivel 3 $5,000–$25,000",
+      "agesEn": "Applicant ages 40–85 (some nicotine / tier 3 classes stop at 75)",
+      "agesEs": "Edades 40–85 (algunas clases de nicotina / nivel 3 se detienen a los 75)",
+      "waitingEn": "Tiers 1–2: full face from issue when approved. Tier 3: graded years 1–2, full face year 3+",
+      "waitingEs": "Niveles 1–2: beneficio completo desde emisión si se aprueba. Nivel 3: escalonado años 1–2; completo desde el año 3",
+      "amBest": {
+        "fsr": "A",
+        "descriptor": "Excellent",
+        "outlook": "Stable",
+        "effective": "2026-01-01",
+        "sourceUrl": "https://www.americo.com/who-we-are/",
+        "sourceLabel": "Americo Strength Flyer 20-044-3 (06/26); A.M. Best as of 01/01/2026"
+      },
+      "otherRatings": [
+        {
+          "agency": "S&P Global",
+          "rating": "A-",
+          "noteEn": "Per industry ratings chart (Americo Financial Life & Annuity)",
+          "noteEs": "Según tabla sectorial de calificaciones (Americo Financial Life & Annuity)",
+          "sourceUrl": "https://myannuitystore.com/wp-content/uploads/2025/10/Americo.pdf"
+        },
+        {
+          "agency": "Moody’s",
+          "rating": "A3",
+          "noteEn": "Per industry ratings chart (Americo Financial Life & Annuity)",
+          "noteEs": "Según tabla sectorial de calificaciones (Americo Financial Life & Annuity)",
+          "sourceUrl": "https://myannuitystore.com/wp-content/uploads/2025/10/Americo.pdf"
+        }
+      ],
+      "comdex": {
+        "score": 74,
+        "asOf": "2025-09",
+        "noteEn": "74th percentile (Americo Financial Life & Annuity Insurance Company)",
+        "noteEs": "Percentil 74 (Americo Financial Life & Annuity Insurance Company)",
+        "sourceUrl": "https://myannuitystore.com/wp-content/uploads/2025/10/Americo.pdf",
+        "sourceLabel": "EbixExchange Comdex via industry chart (Americo profile, Oct 2025)"
+      },
+      "naicNoteEn": "NAIC company code #61999. CIS national complaint index pending a separate Tableau pull — omitted from the /5 average for now.",
+      "naicNoteEs": "Código NAIC #61999. Índice nacional CIS pendiente de una consulta aparte — omitido del promedio /5 por ahora.",
+      "scoreWhyEn": "Average of AM Best A→90%; Comdex 74%; NAIC CIS omitted pending pull = 82% → 4.1/5.",
+      "scoreWhyEs": "Promedio de AM Best A→90%; Comdex 74%; CIS NAIC omitido (pendiente) = 82% → 4.1/5.",
+      "naic": {
+        "code": "61999",
+        "complaintIndex": null,
+        "asOf": "2025",
+        "lineEn": "NAIC CIS · Americo Financial Life and Annuity",
+        "lineEs": "CIS NAIC · Americo Financial Life and Annuity",
+        "noteEn": "Company code #61999. Open the CIS report for the current national complaint index (1.00 ≈ expected; lower is better). Index not copied into this score until confirmed.",
+        "noteEs": "Código #61999. Abra el informe CIS para el índice nacional de quejas vigente (1.00 ≈ esperado; más bajo es mejor). El índice no entra en este score hasta confirmarlo.",
+        "sourceUrl": "https://content.naic.org/cis_refined_results.htm?TABLEAU=CIS_COMPLAINTS&COCODE=61999&REALM=PROD",
+        "sourceLabel": "NAIC CIS National Complaint Index Report",
+        "cisUrl": "https://content.naic.org/cis_refined_results.htm?TABLEAU=CIS_COMPLAINTS&COCODE=61999&REALM=PROD",
+        "consumerUrl": "https://content.naic.org/consumer"
+      },
+      "uniqueEn": "Eagle Select® SI whole life · ages 40–85 · $5k–$50k",
+      "uniqueEs": "Eagle Select® vida entera SI · edades 40–85 · $5k–$50k",
+      "jdPower": {
+        "inStudy": false,
+        "rank": null,
+        "of": null,
+        "score": null,
+        "study": "J.D. Power 2025 U.S. Individual Life Insurance Study",
+        "summaryEn": "Not among the largest individual life carriers profiled in the published study.",
+        "summaryEs": "No figura entre las aseguradoras de vida individual más grandes incluidas en el estudio publicado.",
+        "sourceUrl": "https://www.jdpower.com/business/insurance/individual-life-insurance-study",
+        "sourceLabel": "J.D. Power Individual Life Insurance Study (brand list)"
+      },
+      "score": 4.1,
+      "scoreBreakdown": {
+        "amBestPct": 90,
+        "comdexPct": 74,
+        "naicPct": null,
+        "avgPct": 82,
+        "score": 4.1,
+        "componentsUsed": 2
+      },
+      "rank": 3
+    },
+    {
       "id": "aetna",
-      "rank": 3,
+      "rank": 4,
       "score": 3.67,
       "slug": "aetna",
       "name": "Aetna",
@@ -325,7 +416,7 @@
     },
     {
       "id": "assurity",
-      "rank": 4,
+      "rank": 5,
       "score": 3.59,
       "slug": "assurity",
       "name": "Assurity",
@@ -402,7 +493,7 @@
     },
     {
       "id": "transamerica",
-      "rank": 5,
+      "rank": 6,
       "score": 2.9,
       "slug": "transamerica",
       "name": "Transamerica",
@@ -479,7 +570,7 @@
     },
     {
       "id": "american-amicable",
-      "rank": 6,
+      "rank": 7,
       "score": 2.25,
       "slug": "american-amicable",
       "name": "American Amicable",

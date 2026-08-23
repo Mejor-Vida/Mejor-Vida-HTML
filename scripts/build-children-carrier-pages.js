@@ -1228,6 +1228,112 @@ const CARRIERS = [
       ],
     },
   },
+  {
+    id: "americo",
+    brand: "Americo",
+    enFile: "americo-children.html",
+    esFile: "americo-infantil.html",
+    parentEn: "americo.html",
+    parentEs: "americo.html",
+    logoEn: `<picture><source type="image/webp" srcset="../../img/opt/americo-logo.webp"/><img alt="Americo" class="d-inline-block" src="../../img/opt/americo-logo.png" width="398" height="128" style="height:56px;width:auto;max-width:100%;" loading="eager" decoding="async"/></picture>`,
+    logoEs: `<picture><source type="image/webp" srcset="../img/opt/americo-logo.webp"/><img alt="Americo" class="d-inline-block" src="../img/opt/americo-logo.png" width="398" height="128" style="height:56px;width:auto;max-width:100%;" loading="eager" decoding="async"/></picture>`,
+    en: {
+      title: "Americo — Children's Whole Life (AdvantageWL) | Mejor Vida Insurance",
+      description:
+        "Americo AdvantageWL whole life for children ages 0–17, minimum $15,000. Eagle Select also offers a child/grandchild term rider on an adult policy. Educational overview from Mejor Vida Insurance.",
+      ogTitle: "Americo children's whole life | Mejor Vida Insurance",
+      ogDescription:
+        "AdvantageWL for children ages 0–17 plus an optional child/grandchild rider on Eagle Select. Compare with Mejor Vida Insurance.",
+      h1: "Children's whole life and child riders",
+      lead:
+        "<strong>Americo AdvantageWL</strong> can cover a child as the insured on a permanent whole life policy (ages <strong>0–17</strong>, minimum about <strong>$15,000</strong>). Adult Eagle Select policies can also add a <strong>child/grandchild term rider</strong>. Mejor Vida Insurance can help families compare both paths.",
+      serviceName: "Americo AdvantageWL children's whole life",
+      serviceType: "Children's Whole Life Insurance",
+      sections: [
+        {
+          h2: "At a glance",
+          intro:
+            "AdvantageWL is lifelong coverage with level premiums. It is a paper application (not Americo’s instant e-app). Eagle Select’s child rider is a smaller add-on on an adult final-expense policy.",
+          cards: [
+            {
+              h: "AdvantageWL for a child",
+              items: [
+                "Issue ages <strong>0–17</strong> (the same product also covers adults through 75)",
+                "Minimum face about <strong>$15,000</strong> for children; adults typically start at <strong>$25,000</strong>",
+                "Simplified health questions — <strong>no medical exam</strong> on typical amounts",
+                "Paper application submitted by Mejor Vida Insurance (fax or email)",
+              ],
+            },
+            {
+              h: "Child/grandchild rider on Eagle Select",
+              items: [
+                "Optional term rider on an adult Eagle Select policy",
+                "Typical ages: 15 days through under 17; limited face per child",
+                "Can cover more than one child, subject to Americo’s rider rules",
+                "This is not a standalone children’s policy",
+              ],
+            },
+          ],
+        },
+        {
+          h2: "What to confirm before applying",
+          list: [
+            "Whether a standalone AdvantageWL policy or an Eagle Select rider fits the family better",
+            "The face amount and who will own the policy",
+            "Exact monthly premium on a current illustration",
+          ],
+        },
+      ],
+    },
+    es: {
+      title: "Americo — Vida entera infantil (AdvantageWL) | Mejor Vida Seguros",
+      description:
+        "Americo AdvantageWL para niños de 0 a 17 años, mínimo $15,000. Eagle Select también ofrece un anexo temporal para hijo o nieto. Resumen educativo de Mejor Vida Seguros.",
+      ogTitle: "Americo vida entera infantil | Mejor Vida Seguros",
+      ogDescription:
+        "AdvantageWL para niños de 0 a 17 años y anexo opcional en Eagle Select. Compare con Mejor Vida Seguros.",
+      h1: "Vida entera infantil y anexos para hijos",
+      lead:
+        "<strong>Americo AdvantageWL</strong> puede cubrir a un niño como asegurado en una póliza permanente (edades <strong>0–17</strong>, mínimo unos <strong>$15,000</strong>). En Eagle Select para adultos también se puede agregar un <strong>anexo temporal para hijo o nieto</strong>. Mejor Vida Seguros ayuda a comparar ambos caminos.",
+      serviceName: "Americo AdvantageWL vida entera infantil",
+      serviceType: "Children's Whole Life Insurance",
+      sections: [
+        {
+          h2: "De un vistazo",
+          intro:
+            "AdvantageWL es cobertura de por vida con primas niveladas. La solicitud es en papel (no la app instantánea). El anexo de Eagle Select es un complemento más pequeño en la póliza de un adulto.",
+          cards: [
+            {
+              h: "AdvantageWL para un niño",
+              items: [
+                "Edades de emisión <strong>0–17</strong> (el mismo producto cubre adultos hasta 75)",
+                "Monto mínimo unos <strong>$15,000</strong> para niños; los adultos suelen empezar en <strong>$25,000</strong>",
+                "Preguntas de salud simplificadas — <strong>sin examen médico</strong> en montos típicos",
+                "Solicitud en papel que envía Mejor Vida Seguros (fax o correo)",
+              ],
+            },
+            {
+              h: "Anexo hijo/nieto en Eagle Select",
+              items: [
+                "Anexo temporal opcional en una póliza Eagle Select de un adulto",
+                "Edades típicas: 15 días hasta menores de 17; monto limitado por niño",
+                "Puede cubrir más de un niño, según reglas del anexo",
+                "No es una póliza infantil independiente",
+              ],
+            },
+          ],
+        },
+        {
+          h2: "Qué confirmar antes de solicitar",
+          list: [
+            "Si conviene AdvantageWL propia o el anexo de Eagle Select",
+            "El monto y quién será el dueño de la póliza",
+            "La prima mensual exacta en una ilustración vigente",
+          ],
+        },
+      ],
+    },
+  },
 ];
 
 function escapeAttr(s) {

@@ -9,7 +9,7 @@ Julie noted these **new appointments** on 2026-07-19. Store for later site/RAG c
 | Corebridge     | FE public page live; Term/GUL/WL internal RAG ready | **Sells:** FE (SIWL/GIWL), Term, GUL, Whole Life. **Does not sell:** IUL or annuities/financial products. Public pages: `carriers/corebridge.html` + `en/carriers/corebridge.html`. Internal RAG in `Corebridge_Knowledge/`. Staff Product Selector UI deferred. |
 | Transamerica   | FE public page live            | FE-only pages: `carriers/transamerica.html` + `en/carriers/transamerica.html` (Express + portfolio). Term page deferred. |
 | Aetna (Accendo + CLI PS FE) | Appointed; **full FE life knowledge + public pages** | Accendo FE (40–89 Level/Modified) + Protection Series FE CLI (45–89 Level). Knowledge: `integrations/knowledge/Aetna_Knowledge/LIFE_PRODUCTS.md`. Pages: `carriers/aetna.html` + `en/carriers/aetna.html`. |
-| Americo        | **Appointed** (portal/content still pending public pages) | Eagle Premier Level ~to age **85**; Eagle Guaranteed ~**50–80**, faces roughly **$2K–$25K**. Include in Integrity FE harvest + `is_mvi_appointed`. Public carrier page / homepage card still deferred until approved copy/logo. |
+| Americo        | **Public pages live** (2026-08-22) | **Sells:** Eagle Select FE (tiers 1/2/3, ages 40–85), AdvantageWL, Instant Decision IUL, Instant Decision Term Series (CBO, Term 100/125, Continuation, Payment Protector, ADB, LifeTerm), Elite 5, Platinum Assure Series. Knowledge: `integrations/knowledge/Americo_Knowledge/`. Pages: `carriers/americo.html` + `en/carriers/americo.html` (+ children: `americo-infantil.html` / `americo-children.html`). |
 
 ## Already on the public site
 
@@ -19,6 +19,7 @@ Julie noted these **new appointments** on 2026-07-19. Store for later site/RAG c
 - Corebridge (FE overview pages + homepage trust-strip links)
 - Transamerica (FE overview pages + homepage trust-strip links)
 - Homepage carrier trust strip shows **Aetna**; dedicated carrier pages live under `carriers/aetna.html`
+- Americo (FE + AdvantageWL / term / IUL overview pages + homepage trust-strip + quoter logos)
 
 ## When ready to build
 

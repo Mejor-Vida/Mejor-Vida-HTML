@@ -35,26 +35,23 @@ document.addEventListener('DOMContentLoaded', function() {
       btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
     });
 
-    // Spanish: logo-spanish2.png; English: logo-english2.png
-    // Nested pages (blog + carriers) need ../img.
-    const path = window.location.pathname.replace(/\\/g, '/');
-    const isNestedPage = path.includes('/blog/') || path.includes('/carriers/');
-    let logoBasePath = 'img/';
-    if (isEnglishSite || isNestedPage) logoBasePath = '../img/';
-    else if (window.location.protocol !== 'file:') logoBasePath = '/img/';
+    // Spanish: logo-spanish2; English: logo-english2.
+    // Keep the page's existing prefix (img/, ../img/, ../../img/, /img/) so nested
+    // English routes like /en/states/ and /en/carriers/ do not 404.
     const logoStem = lang === 'es' ? 'logo-spanish2' : 'logo-english2';
-    const headerLogo = document.getElementById('header-logo');
-    const headerLogoWebp = document.getElementById('header-logo-webp');
-    if (headerLogo) {
-      headerLogo.src = logoBasePath + 'opt/' + logoStem + '.png';
-      if (headerLogoWebp) headerLogoWebp.srcset = logoBasePath + 'opt/' + logoStem + '.webp';
-    }
-    const footerLogo = document.getElementById('footer-logo');
-    const footerLogoWebp = document.getElementById('footer-logo-webp');
-    if (footerLogo) {
-      footerLogo.src = logoBasePath + 'opt/' + logoStem + '.png';
-      if (footerLogoWebp) footerLogoWebp.srcset = logoBasePath + 'opt/' + logoStem + '.webp';
-    }
+    const withLogoStem = (url) => String(url || '').replace(/logo-(?:spanish|english)2/g, logoStem);
+    const applyLogoStem = (el, attr) => {
+      if (!el) return;
+      const current = el.getAttribute(attr) || el[attr] || '';
+      const next = withLogoStem(current);
+      if (!next || next === current) return;
+      if (attr === 'srcset') el.srcset = next;
+      else el.src = next;
+    };
+    applyLogoStem(document.getElementById('header-logo'), 'src');
+    applyLogoStem(document.getElementById('header-logo-webp'), 'srcset');
+    applyLogoStem(document.getElementById('footer-logo'), 'src');
+    applyLogoStem(document.getElementById('footer-logo-webp'), 'srcset');
 
     // Save preference for same-tab navigation (resets on reload logic below)
     sessionStorage.setItem('sessionLang', lang);

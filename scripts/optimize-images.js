@@ -55,6 +55,7 @@ const JOBS = [
   { src: "img/carriers/mutual-of-omaha-logo.png", maxWidth: 400, maxHeight: 100, keepPng: true },
   { src: "img/carriers/american-amicable-logo.png", maxWidth: 520, maxHeight: 120, keepPng: true },
   { src: "img/carriers/transamerica-logo.png", maxWidth: 480, maxHeight: 114, keepPng: true },
+  { src: "img/carriers/americo-logo.png", maxWidth: 400, maxHeight: 128, keepPng: true },
   { src: "img/mvi-promo-seguros-whatsapp.png", maxWidth: 800, maxHeight: 450 },
   { src: "img/julie-promo-funeral-cost.png", maxWidth: 900, maxHeight: 900 },
   { src: "img/funeral-calculator-menu.png", maxWidth: 720, maxHeight: 576, outBase: "funeral-calculator-menu" },

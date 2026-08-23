@@ -58,6 +58,17 @@
       "wait": false,
       "sample10k80f": 101,
       "href": "transamerica"
+    },
+    {
+      "id": "americo",
+      "name": "Americo",
+      "productEs": "Eagle Select Nivelado",
+      "productEn": "Eagle Select Level",
+      "ages": "40–85",
+      "death": "$5,000–$40,000 (76–85)",
+      "wait": false,
+      "sample10k80f": 98,
+      "href": "americo"
     }
   ]
 }

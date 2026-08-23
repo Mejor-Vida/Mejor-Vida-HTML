@@ -219,6 +219,9 @@ function copyExam(lang) {
       coTaProduct: "Immediate Solution Preferred",
       coTaAges: "Hasta los 85",
       coTaAmt: "Desde $1,000; hasta $50,000+",
+      coAmericoProduct: "Eagle Select Nivelado",
+      coAmericoAges: "40–85",
+      coAmericoAmt: "$5,000–$50,000",
       coWait: "Espera de 2 años (plan nivelado)",
       coWaitNo: "No",
       coAges: "Edades de nuevos solicitantes",
@@ -341,6 +344,9 @@ function copyExam(lang) {
     coTaProduct: "Immediate Solution Preferred",
     coTaAges: "Through 85",
     coTaAmt: "From $1,000; up to $50,000+",
+    coAmericoProduct: "Eagle Select Level",
+    coAmericoAges: "40–85",
+    coAmericoAmt: "$5,000–$50,000",
     coWait: "2-year wait (level plan)",
     coWaitNo: "No",
     coAges: "New applicant ages",
@@ -607,6 +613,9 @@ function copyBurial(lang) {
       coTaProduct: "Immediate Solution Preferred",
       coTaAges: "Hasta los 85",
       coTaAmt: "Desde $1,000; hasta $50,000+",
+      coAmericoProduct: "Eagle Select Nivelado",
+      coAmericoAges: "40–85",
+      coAmericoAmt: "$5,000–$50,000",
       coWait: "Espera de 2 años (plan nivelado)",
       coWaitNo: "No",
       coAges: "Edades de nuevos solicitantes",
@@ -711,6 +720,9 @@ function copyBurial(lang) {
     coTaProduct: "Immediate Solution Preferred",
     coTaAges: "Through 85",
     coTaAmt: "From $1,000; up to $50,000+",
+    coAmericoProduct: "Eagle Select Level",
+    coAmericoAges: "40–85",
+    coAmericoAmt: "$5,000–$50,000",
     coWait: "2-year wait (level plan)",
     coWaitNo: "No",
     coAges: "New applicant ages",
@@ -842,6 +854,7 @@ function examMain(lang, page, c) {
   const moo = isEs ? "carriers/mutual-of-omaha.html" : "carriers/mutual-of-omaha.html";
   const aetna = isEs ? "carriers/aetna.html" : "carriers/aetna.html";
   const ta = isEs ? "carriers/transamerica.html" : "carriers/transamerica.html";
+  const americo = isEs ? "carriers/americo.html" : "carriers/americo.html";
   const female = isEs ? "Mujer" : "Female";
   const male = isEs ? "Hombre" : "Male";
   const ageCol = isEs ? "Edad" : "Age";
@@ -1050,6 +1063,19 @@ function examMain(lang, page, c) {
 <dl class="lic-co-specs">
 <div><dt>${c.coAges}</dt><dd>${c.coTaAges}</dd></div>
 <div><dt>${c.coAmt}</dt><dd>${c.coTaAmt}</dd></div>
+<div><dt>${c.coWait}</dt><dd>${c.coWaitNo}</dd></div>
+</dl>
+</a>
+<a class="lic-co-card lic-co-card--compare lic-co-card--link" href="${americo}">
+<div class="lic-co-logo lic-co-logo--wide"><picture>
+<source type="image/webp" srcset="${assets}img/opt/americo-logo.webp"/>
+<img src="${assets}img/opt/americo-logo.png" alt="" width="398" height="128" loading="lazy" decoding="async"/>
+</picture></div>
+<h3>Americo</h3>
+<p class="lic-co-product">${c.coAmericoProduct}</p>
+<dl class="lic-co-specs">
+<div><dt>${c.coAges}</dt><dd>${c.coAmericoAges}</dd></div>
+<div><dt>${c.coAmt}</dt><dd>${c.coAmericoAmt}</dd></div>
 <div><dt>${c.coWait}</dt><dd>${c.coWaitNo}</dd></div>
 </dl>
 </a>
@@ -1267,6 +1293,7 @@ function burialMain(lang, page, c) {
   const moo = "carriers/mutual-of-omaha.html";
   const aetna = "carriers/aetna.html";
   const ta = "carriers/transamerica.html";
+  const americo = "carriers/americo.html";
   const female = isEs ? "Mujer" : "Female";
   const male = isEs ? "Hombre" : "Male";
   const ageCol = isEs ? "Edad" : "Age";
@@ -1429,6 +1456,19 @@ function burialMain(lang, page, c) {
 <dl class="lic-co-specs">
 <div><dt>${c.coAges}</dt><dd>${c.coTaAges}</dd></div>
 <div><dt>${c.coAmt}</dt><dd>${c.coTaAmt}</dd></div>
+<div><dt>${c.coWait}</dt><dd>${c.coWaitNo}</dd></div>
+</dl>
+</a>
+<a class="lic-co-card lic-co-card--compare lic-co-card--link" href="${americo}">
+<div class="lic-co-logo lic-co-logo--wide"><picture>
+<source type="image/webp" srcset="${assets}img/opt/americo-logo.webp"/>
+<img src="${assets}img/opt/americo-logo.png" alt="" width="398" height="128" loading="lazy" decoding="async"/>
+</picture></div>
+<h3>Americo</h3>
+<p class="lic-co-product">${c.coAmericoProduct}</p>
+<dl class="lic-co-specs">
+<div><dt>${c.coAges}</dt><dd>${c.coAmericoAges}</dd></div>
+<div><dt>${c.coAmt}</dt><dd>${c.coAmericoAmt}</dd></div>
 <div><dt>${c.coWait}</dt><dd>${c.coWaitNo}</dd></div>
 </dl>
 </a>

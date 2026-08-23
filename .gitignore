@@ -37,5 +37,11 @@ integrations/knowledge/Corebridge_Knowledge/raw/
 # Aetna Senior Supplemental PDFs/images (local extracts only; MD/JSON committed)
 integrations/knowledge/Aetna_Knowledge/raw/
 
+# Americo portal PDFs/harvest dumps (local extracts only; MD/CSV committed)
+integrations/knowledge/Americo_Knowledge/raw/
+
+# Local Cursor agent temp (screenshots, one-off scripts)
+.cursor-tmp-*/
+
 # Weekly Patriot accounting reviews (dollar amounts — local only)
 integrations/accounting/reviews/

@@ -85,6 +85,12 @@ function logoHtml(id, prefix) {
   if (id === "aetna") {
     return `<img src="${prefix}img/carriers/aetna-logo.svg" alt="" width="512" height="98" loading="lazy" decoding="async"/>`;
   }
+  if (id === "americo") {
+    return `<picture>
+<source type="image/webp" srcset="${prefix}img/opt/americo-logo.webp"/>
+<img src="${prefix}img/opt/americo-logo.png" alt="" width="398" height="128" loading="lazy" decoding="async"/>
+</picture>`;
+  }
   return `<picture>
 <source type="image/webp" srcset="${prefix}img/opt/transamerica-logo.webp"/>
 <img src="${prefix}img/opt/transamerica-logo.png" alt="" width="362" height="69" loading="lazy" decoding="async"/>
@@ -101,7 +107,7 @@ function carrierCards(lang, prefix) {
       const ages = isEs ? c.agesEs || c.ages : c.agesEn || c.ages;
       return `<article class="lic-co-card lic-co-card--compare">
 <div class="lic-co-logo">${logoHtml(c.id, prefix)}</div>
-<h3><a href="${prefix}carriers/${c.href}.html">${c.name}</a></h3>
+<h3><a href="carriers/${c.href}.html">${c.name}</a></h3>
 <p class="lic-co-product">${product}</p>
 <dl class="lic-co-specs">
 <div><dt>${isEs ? "Costo de póliza de $10,000" : "$10,000 policy cost"}</dt><dd>${money(c.sample10k80f)}/mes*</dd></div>
@@ -109,8 +115,8 @@ function carrierCards(lang, prefix) {
 <div><dt>${isEs ? "Opciones de beneficio" : "Death benefit options"}</dt><dd>${death}</dd></div>
 <div><dt>${isEs ? "Espera de 2 años (plan nivelado)" : "2-year wait (level plan)"}</dt><dd>${waitVal}</dd></div>
 </dl>
-<a class="lic-co-cta" href="${prefix}quote.html">${isEs ? "Ver precios" : "See prices"}</a>
-<a class="lic-co-more" href="${prefix}carriers/${c.href}.html">${isEs ? "Leer resumen" : "Read overview"}</a>
+<a class="lic-co-cta" href="quote.html">${isEs ? "Ver precios" : "See prices"}</a>
+<a class="lic-co-more" href="carriers/${c.href}.html">${isEs ? "Leer resumen" : "Read overview"}</a>
 </article>`;
     })
     .join("\n");

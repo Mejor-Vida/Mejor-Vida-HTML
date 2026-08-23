@@ -106,6 +106,21 @@ const CARRIERS = [
     maxFace: COREBRIDGE_MAX,
   },
   {
+    id: "americo",
+    href: "americo",
+    name: "Americo",
+    productEs: "Eagle Select Nivelado",
+    productEn: "Eagle Select Level",
+    score: "4.1/5",
+    stars: "on on on on off",
+    cost5k: 22.71,
+    ages: "40–85",
+    deathEs: "$5,000–$50,000",
+    deathEn: "$5,000–$50,000",
+    logo: "picture-americo",
+    maxFace: 50000,
+  },
+  {
     id: "aetna",
     href: "aetna",
     name: "Aetna",
@@ -431,6 +446,12 @@ function logoHtml(kind, prefix) {
   if (kind === "svg-aetna") {
     return `<img src="${prefix}img/carriers/aetna-logo.svg" alt="" width="512" height="98" loading="lazy" decoding="async"/>`;
   }
+  if (kind === "picture-americo") {
+    return `<picture>
+<source type="image/webp" srcset="${prefix}img/opt/americo-logo.webp"/>
+<img src="${prefix}img/opt/americo-logo.png" alt="" width="398" height="128" loading="lazy" decoding="async"/>
+</picture>`;
+  }
   if (kind === "picture-transamerica") {
     return `<picture>
 <source type="image/webp" srcset="${prefix}img/opt/transamerica-logo.webp"/>
@@ -460,8 +481,8 @@ function carrierCards(face, lang, prefix) {
       const waitVal = isEs ? "No" : "No";
       const cta = isEs ? "Ver precios" : "See prices";
       const more = isEs ? "Leer resumen" : "Read overview";
-      const href = `${prefix}carriers/${c.href}.html`;
-      const quote = `${prefix}quote.html`;
+      const href = `carriers/${c.href}.html`;
+      const quote = `quote.html`;
       return `<article class="lic-co-card lic-co-card--compare">
 <div class="lic-co-logo">
 ${logoHtml(c.logo, prefix)}
@@ -985,6 +1006,11 @@ function patch5000Switcher() {
     html = html.replace(
       /css\/life-insurance-cost\.css\?v=[^"]+/,
       "css/life-insurance-cost.css?v=20260817-heroes3"
+    );
+    const cards = carrierCards(5000, lang, prefix);
+    html = html.replace(
+      /<div class="lic-co-grid lic-co-grid--compare">[\s\S]*?<\/div>\n<\/section>/,
+      `<div class="lic-co-grid lic-co-grid--compare">\n${cards}\n</div>\n</section>`
     );
     const hero5 = heroFor(5000);
     html = html.replace(

@@ -54,12 +54,16 @@ const STATIC_PAGES = [
   { loc: "/carriers/mutual-of-omaha.html", priority: "0.70" },
   { loc: "/carriers/american-amicable.html", priority: "0.70" },
   { loc: "/carriers/transamerica.html", priority: "0.70" },
+  { loc: "/carriers/aetna.html", priority: "0.70" },
+  { loc: "/carriers/corebridge.html", priority: "0.70" },
+  { loc: "/carriers/americo.html", priority: "0.70" },
   { loc: "/carriers/mutual-of-omaha-infantil.html", priority: "0.78" },
   { loc: "/carriers/assurity-infantil.html", priority: "0.78" },
   { loc: "/carriers/transamerica-infantil.html", priority: "0.78" },
   { loc: "/carriers/american-amicable-infantil.html", priority: "0.78" },
   { loc: "/carriers/aetna-infantil.html", priority: "0.78" },
   { loc: "/carriers/corebridge-infantil.html", priority: "0.78" },
+  { loc: "/carriers/americo-infantil.html", priority: "0.78" },
 ];
 
 /** Standalone July articles redirect to the weekly digest — omit from sitemap. */

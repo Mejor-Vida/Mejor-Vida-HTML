@@ -768,6 +768,15 @@
   max-width: 100%;
 }
 
+.sc-carrier-logo-link--americo {
+  max-width: 10.5rem;
+}
+
+.sc-carrier-logo-link--americo img {
+  height: 1.55rem;
+  max-width: 100%;
+}
+
 .sc-carrier-profile {
   grid-column: 2;
   display: block;

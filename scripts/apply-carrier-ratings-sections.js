@@ -246,6 +246,8 @@ const PAGE_MAP = [
   ["assurity", "en/carriers/assurity.html", "en"],
   ["aetna", "carriers/aetna.html", "es"],
   ["aetna", "en/carriers/aetna.html", "en"],
+  ["americo", "carriers/americo.html", "es"],
+  ["americo", "en/carriers/americo.html", "en"],
 ];
 
 for (const [id, rel, lang] of PAGE_MAP) {
