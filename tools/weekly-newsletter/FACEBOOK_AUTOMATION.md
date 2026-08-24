@@ -45,7 +45,7 @@ npm run weekly:facebook
 
 Dry-run does not post. A real run will post **slot 1 immediately** if this week’s digest and images are already live.
 
-Public comments on those posts are answered automatically after deploy: **INFO** gets the article link, **REVISAR** is invited to WhatsApp, other comments get a short educational AI reply. Pause with `FACEBOOK_COMMENT_AI_REPLY=0`.
+Public comments on those posts are answered with the **website RAG chatbot**: a real question in the comment gets the same knowledge-base answer as the site chat (plain text for Facebook). Bare **INFO** still gets the article link; bare **REVISAR** is invited to WhatsApp. Pause with `FACEBOOK_COMMENT_AI_REPLY=0`.
 
 ## Stop switch
 

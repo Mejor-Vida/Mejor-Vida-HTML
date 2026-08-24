@@ -15,7 +15,7 @@ const {
 const { parseRssItems, pickThree } = require("../lib/weekly-newsletter-research");
 const { assertNewsletterPartsOk } = require("../lib/crm-weekly-topic-guard");
 const { latestDigestWeekFromSitemap, parseDigestStories } = require("../lib/weekly-facebook-parse");
-const { stripUrls, defaultFirstComment, HASHTAGS } = require("../lib/weekly-facebook-compose");
+const { stripUrls, defaultFirstComment, rewriteCaptionCta, HASHTAGS } = require("../lib/weekly-facebook-compose");
 
 const xml = `<?xml version="1.0"?><rss><channel>
 <item>
@@ -117,12 +117,21 @@ assert.ok(!/Leer/.test(stories[0].summary));
 assert.ok(!stripUrls("Hola https://example.com mundo").includes("http"));
 assert.ok(defaultFirstComment("https://www.mejorvidainsurance.com/blog/x.html#story1", "GINA").includes("#story1"));
 assert.ok(HASHTAGS.includes("#SeguroDeVida"));
+const { CAPTION_CTA } = require("../lib/weekly-facebook-compose");
+assert.ok(!/INFO|REVISAR/.test(CAPTION_CTA));
+assert.ok(CAPTION_CTA.includes("440-5438"));
+assert.ok(!/INFO|REVISAR/.test(rewriteCaptionCta("Cuerpo del post.\n\nComenta INFO si quieres el artículo completo, o REVISAR si quieres que revisemos tu situación. También puedes mandarnos un mensaje.\n#SeguroDeVida #GastosFinales")));
+assert.ok(rewriteCaptionCta("Cuerpo del post.\n\nComenta INFO si quieres el artículo completo.").includes("cotización gratis"));
 
-const { parseFeedCommentEvents, commentIntent } = require("../lib/facebook-comment-reply");
+const { parseFeedCommentEvents, commentIntent, isKeywordOnly, ragToFacebookText } = require("../lib/facebook-comment-reply");
 assert.strictEqual(commentIntent("INFO"), "info");
 assert.strictEqual(commentIntent("quiero info por favor"), "info");
 assert.strictEqual(commentIntent("REVISAR"), "revisar");
 assert.strictEqual(commentIntent("¿Cuánto cuesta?"), "other");
+assert.ok(isKeywordOnly("INFO", "info"));
+assert.ok(isKeywordOnly("revisar!", "revisar"));
+assert.ok(!isKeywordOnly("INFO que es GINA", "info"));
+assert.ok(ragToFacebookText("Lee [el artículo](https://example.com) y **esto**").includes("https://example.com"));
 const feed = parseFeedCommentEvents({
   object: "page",
   entry: [

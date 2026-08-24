@@ -103,28 +103,27 @@ Get readers to:
 
 ### 4. CTA (very important)
 
-Use a **dual CTA** whenever possible:
+Do **not** use “Comenta INFO” / “REVISAR”. Those words do not send the article or open a quote.
 
-- One keyword for people who want the **article / information**
-- One keyword for people who want **help with their own situation**
+**Main caption (no URLs):** one warm close + how to reach the agency. Phone is the primary ask. Invite a real comment if they have a question (the Page can reply). Then 3–5 hashtags.
 
-**Preferred keyword model:**
+**Example close:**
 
-| Keyword   | Meaning |
-|-----------|---------|
-| **INFO**  | Send article / breakdown |
-| **REVISAR** | Review their situation / coverage |
+> Si quieres el artículo, una cotización gratis, o hablar con nosotros — estamos aquí, sin presión.
+>
+> Llama, texto o WhatsApp al (402) 440-5438  
+> Correo: Julie@mejorvidainsurance.com
+>
+> Si te queda una duda, déjala en los comentarios y te respondemos.
 
-**Example CTA style:**
+**First comment (where the links go):**
 
-> Comenta “INFO” si quieres el artículo completo  
-> o “REVISAR” si quieres que veamos tu caso contigo.
+- Weekly **article** URL for that story  
+- **Quote:** https://www.mejorvidainsurance.com/quote.html  
+- **Site:** https://www.mejorvidainsurance.com/  
+- Phone / WhatsApp (402) 440-5438 and Julie@mejorvidainsurance.com  
 
-Also allow a **private-message** option (many people prefer not to comment publicly):
-
-> También puedes mandarnos mensaje directamente.
-
-If a post fits **one** keyword better, choose the one that best supports **lead intent**.
+Do not say “haz clic en el enlace” in the main caption. Facebook downranks obvious exits; the first comment is the click path.
 
 ### 5. No links in the main post
 
@@ -139,36 +138,21 @@ Every post must include a **separate first comment** to be posted **after** the 
 
 **Purpose:**
 
-- Capture people who want to learn more or contact you
-- Add the **website URL** (`https://www.mejorvidainsurance.com/`) **after** the post has had time to gain organic reach
-- Full weekly articles go through **INFO / REVISAR** (ManyChat), not the first comment link
+- Put the **article**, **quote tool**, and **website** where people can tap them, after the post has started getting reach
+- Repeat phone / WhatsApp / email for people who skip the caption
 
 **Format:**
 
-- Warm, human tone (similar spirit to our standard Make follow-up — thanks, helpful, not pushy)
-- **Adaptable** to the post: one short paragraph about the topic or tool (e.g. NAIC locator for lost policies)
-- **~8 lines** total (short paragraphs; blank line between blocks is OK)
-- Include the **Mejor Vida website link** (not the blog article URL)
-- Close with phone / WhatsApp number — **no** long `wa.me` URL in the first comment (INFO/REVISAR handles deep links)
+- Article URL for this story (own line)
+- Quote: https://www.mejorvidainsurance.com/quote.html
+- Site: https://www.mejorvidainsurance.com/
+- Phone / WhatsApp (402) 440-5438 and Julie@mejorvidainsurance.com
 
-**Example style (June 7 — lost life insurance / NAIC locator):**
-
-> ¡Gracias por tu interés!
->
-> Si comentaste INFO o quieres profundizar en pólizas que muchas familias no reclaman, visita nuestro sitio web:  
-> https://www.mejorvidainsurance.com/
->
-> Afortunadamente, existe una herramienta gratuita llamada Life Insurance Policy Locator Service (https://eapps.naic.org/life-policy-locator/#/welcome) creada por la NAIC.
->
-> En Mejor Vida nos especializamos en gastos finales, y también en seguro de vida a término y vida entera.
->
-> ¿Preguntas o cotización sin costo? Llámanos o WhatsApp al (402) 440-5438.
-
-Configured in `facebook-posting/scripts/facebook_post_package.py` (`warm_first_comment`). WhatsApp: `whatsapp_first_comment_url` in `config/settings.json` or env `MVS_WHATSAPP_FIRST_COMMENT_URL`.
+See `lib/weekly-facebook-compose.js` (`defaultFirstComment`).
 
 **Publishing automation:** After the approved weekly digest and story images are live, `api/weekly-facebook-cron.js` publishes three Spanish posts (Sunday as soon as the blog exists, Tuesday 10:00 a.m. Chicago, Thursday 10:00 a.m. Chicago) and posts the first comment about 10 minutes later. See `tools/weekly-newsletter/FACEBOOK_AUTOMATION.md`. Do not wait for a separate Tuesday/Thursday prompt.
 
-**Comment replies:** The existing Page webhook (`/api/meta-leadgen-webhook`) also watches new comments. **INFO** gets the article link; **REVISAR** is invited to WhatsApp `(402) 440-5438`; other comments get a short educational AI reply. Pause with `FACEBOOK_COMMENT_AI_REPLY=0`. The Page never replies to its own comments.
+**Comment replies:** The existing Page webhook (`/api/meta-leadgen-webhook`) watches new comments and answers with the **same public RAG chatbot** as the website (`runRagPipeline`). Bare **INFO** still gets the article link; bare **REVISAR** is invited to WhatsApp `(402) 440-5438`. Any real question in the comment is answered from the public knowledge base (Markdown stripped for Facebook). Pause with `FACEBOOK_COMMENT_AI_REPLY=0`. The Page never replies to its own comments.
 
 ---
 
@@ -211,13 +195,12 @@ Configured in `facebook-posting/scripts/facebook_post_package.py` (`warm_first_c
 
 ---
 
-## CTA / funnel (ManyChat / WhatsApp)
+## CTA / funnel
 
-- Posts are part of a **ManyChat / WhatsApp qualification** funnel
-- The post should create enough **trust** and **curiosity** for someone to comment or message
-- Comment keywords should **route** into the right automation
-- **INFO** → article / education path
-- **REVISAR** → review / help / qualification path
+- Caption: phone / WhatsApp / email so people can contact without leaving Facebook
+- First comment: article, free quote, and website
+- Real questions in the comments can be answered by the public RAG chatbot after that is turned on
+- Do not ask people to comment INFO or REVISAR
 
 ---
 
