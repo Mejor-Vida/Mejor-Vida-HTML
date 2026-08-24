@@ -118,4 +118,34 @@ assert.ok(!stripUrls("Hola https://example.com mundo").includes("http"));
 assert.ok(defaultFirstComment("https://www.mejorvidainsurance.com/blog/x.html#story1", "GINA").includes("#story1"));
 assert.ok(HASHTAGS.includes("#SeguroDeVida"));
 
+const { parseFeedCommentEvents, commentIntent } = require("../lib/facebook-comment-reply");
+assert.strictEqual(commentIntent("INFO"), "info");
+assert.strictEqual(commentIntent("quiero info por favor"), "info");
+assert.strictEqual(commentIntent("REVISAR"), "revisar");
+assert.strictEqual(commentIntent("¿Cuánto cuesta?"), "other");
+const feed = parseFeedCommentEvents({
+  object: "page",
+  entry: [
+    {
+      id: "111",
+      changes: [
+        {
+          field: "feed",
+          value: {
+            item: "comment",
+            verb: "add",
+            comment_id: "111_999",
+            post_id: "111_222",
+            sender_id: "555",
+            message: "INFO",
+          },
+        },
+      ],
+    },
+  ],
+});
+assert.strictEqual(feed.length, 1);
+assert.strictEqual(feed[0].commentId, "111_999");
+assert.strictEqual(parseFeedCommentEvents({ object: "page", entry: [] }).length, 0);
+
 console.log("weekly-newsletter tests ok");

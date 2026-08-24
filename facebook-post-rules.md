@@ -166,7 +166,9 @@ Every post must include a **separate first comment** to be posted **after** the 
 
 Configured in `facebook-posting/scripts/facebook_post_package.py` (`warm_first_comment`). WhatsApp: `whatsapp_first_comment_url` in `config/settings.json` or env `MVS_WHATSAPP_FIRST_COMMENT_URL`.
 
-**Publishing automation:** After the approved weekly digest and story images are live, `api/weekly-facebook-cron.js` publishes three Spanish posts (Sunday as soon as the blog exists, Tuesday 10:00 a.m. Chicago, Thursday 10:00 a.m. Chicago) and posts the first comment about 10 minutes later. See `tools/weekly-newsletter/FACEBOOK_AUTOMATION.md`. Do not wait for a separate Tuesday/Thursday prompt. Legacy Make.com delay: **`integrations/MAKE_COM_FB_FIRST_COMMENT.md`**.
+**Publishing automation:** After the approved weekly digest and story images are live, `api/weekly-facebook-cron.js` publishes three Spanish posts (Sunday as soon as the blog exists, Tuesday 10:00 a.m. Chicago, Thursday 10:00 a.m. Chicago) and posts the first comment about 10 minutes later. See `tools/weekly-newsletter/FACEBOOK_AUTOMATION.md`. Do not wait for a separate Tuesday/Thursday prompt.
+
+**Comment replies:** The existing Page webhook (`/api/meta-leadgen-webhook`) also watches new comments. **INFO** gets the article link; **REVISAR** is invited to WhatsApp `(402) 440-5438`; other comments get a short educational AI reply. Pause with `FACEBOOK_COMMENT_AI_REPLY=0`. The Page never replies to its own comments.
 
 ---
 

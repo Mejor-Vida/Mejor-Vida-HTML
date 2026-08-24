@@ -45,6 +45,8 @@ npm run weekly:facebook
 
 Dry-run does not post. A real run will post **slot 1 immediately** if this week’s digest and images are already live.
 
+Public comments on those posts are answered automatically after deploy: **INFO** gets the article link, **REVISAR** is invited to WhatsApp, other comments get a short educational AI reply. Pause with `FACEBOOK_COMMENT_AI_REPLY=0`.
+
 ## Stop switch
 
 Vercel env `WEEKLY_FACEBOOK_AUTOPOST=0` skips the job.

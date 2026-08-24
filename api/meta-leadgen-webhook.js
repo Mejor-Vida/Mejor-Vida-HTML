@@ -15,6 +15,7 @@ const {
   parseWebhookEntries,
   processLeadgenEvent,
 } = require("../lib/meta-leadgen");
+const { processFeedComments } = require("../lib/facebook-comment-reply");
 
 function parseJsonBody(rawBuf) {
   const text = rawBuf.toString("utf8");
@@ -82,9 +83,25 @@ async function handlePost(rawBuf, signatureHeader) {
 
   await logWebhook(supabaseUrl, serviceKey, "meta_leadgen", "/api/meta-leadgen-webhook", body, "received");
 
+  let comments = { comments: 0, results: [] };
+  try {
+    comments = await processFeedComments(body, { supabaseUrl, serviceKey });
+  } catch (e) {
+    console.error("[meta-leadgen-webhook] comment reply", e.message);
+    comments = { comments: 0, results: [{ error: e.message }] };
+  }
+
   const entries = parseWebhookEntries(body);
   if (!entries.length) {
-    return { status: 200, json: { ok: true, processed: 0, message: "No leadgen changes" } };
+    return {
+      status: 200,
+      json: {
+        ok: true,
+        processed: 0,
+        message: comments.comments ? "comments_only" : "No leadgen changes",
+        comments,
+      },
+    };
   }
 
   const results = [];
@@ -116,7 +133,7 @@ async function handlePost(rawBuf, signatureHeader) {
   }
 
   const okCount = results.filter((r) => r.ok).length;
-  return { status: 200, json: { ok: true, processed: okCount, results } };
+  return { status: 200, json: { ok: true, processed: okCount, results, comments } };
 }
 
 function handleGet(query) {
