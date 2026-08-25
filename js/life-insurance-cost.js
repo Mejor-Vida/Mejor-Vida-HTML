@@ -166,6 +166,9 @@
     );
     var dedicatedAmount = !!document.body.classList.contains("lic-page--amount");
     var dedicatedBurial = !!document.body.classList.contains("lic-page--burial");
+    var dedicatedCremation = !!document.body.classList.contains(
+      "lic-page--cremation"
+    );
     var dedicatedSeniorsHub = !!document.body.classList.contains(
       "lic-page--seniors-hub"
     );
@@ -200,7 +203,7 @@
               : ". Edades 45–85 (cada 5 años). Primas ilustrativas de vida entera simplificada; no es cotización vinculante.",
             whole_life_traditional:
               ". Edades 40–85 (cada 5 años). Muestra educativa preferred / no fumador; montos más altos se ilustran caso por caso.",
-            final_expense: dedicatedBurial || dedicatedSeniorsHub
+            final_expense: dedicatedBurial || dedicatedCremation || dedicatedSeniorsHub
               ? ". Edades 50 y más (compañías designadas, no fumador). Primas ilustrativas; no es cotización vinculante."
               : ". Edades 45–85 (cada 5 años). Primas ilustrativas; no es cotización vinculante.",
             guaranteed: dedicatedGi
@@ -248,7 +251,7 @@
               : ". Ages 45–85 (every 5 years). Illustrative simplified whole life premiums; not a binding quote.",
             whole_life_traditional:
               ". Ages 40–85 (every 5 years). Educational preferred / non-tobacco sample; larger faces are illustrated case by case.",
-            final_expense: dedicatedBurial || dedicatedSeniorsHub
+            final_expense: dedicatedBurial || dedicatedCremation || dedicatedSeniorsHub
               ? ". Ages 50 and up (appointed companies, non-tobacco). Illustrative premiums; not a binding quote."
               : ". Ages 45–85 (every 5 years). Illustrative premiums; not a binding quote.",
             guaranteed: dedicatedGi

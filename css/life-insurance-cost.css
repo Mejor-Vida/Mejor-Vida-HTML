@@ -66,6 +66,11 @@
   object-position: 52% 42%;
 }
 
+.lic-hero-media--saguaro picture,
+.lic-hero-media--saguaro img {
+  object-position: 62% 40%;
+}
+
 .lic-hero-media--lakes picture,
 .lic-hero-media--lakes img {
   object-position: 50% 42%;
@@ -1642,6 +1647,328 @@ a.lic-co-card--link .lic-co-specs dd {
   margin: 0 0 0.55rem;
   color: var(--lic-muted);
   line-height: 1.5;
+}
+
+.lic-split-lists p {
+  margin: 0;
+  color: var(--lic-muted);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.lic-fact-trio {
+  display: grid;
+  gap: 0.85rem;
+  margin: 1rem 0 0;
+}
+
+@media (min-width: 720px) {
+  .lic-fact-trio {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+.lic-fact-trio > div {
+  background: #f8fafc;
+  border: 1px solid #dbe5ef;
+  border-radius: 0.4rem;
+  padding: 0.95rem 1rem;
+}
+
+.lic-fact-trio h3 {
+  margin: 0 0 0.4rem;
+  font-size: 0.98rem;
+  color: var(--lic-navy);
+}
+
+.lic-fact-trio p {
+  margin: 0;
+  font-size: 0.92rem;
+  color: var(--lic-muted);
+  line-height: 1.45;
+}
+
+.lic-lesson-steps {
+  list-style: none;
+  margin: 0.35rem 0 0;
+  padding: 0;
+  counter-reset: lesson;
+}
+
+.lic-lesson-steps li {
+  counter-increment: lesson;
+  position: relative;
+  padding: 0.95rem 0 0.95rem 3.35rem;
+  border-bottom: 1px solid #e2e8f0;
+  color: var(--lic-muted);
+  line-height: 1.5;
+}
+
+.lic-lesson-steps li:last-child {
+  border-bottom: 0;
+}
+
+.lic-lesson-steps li::before {
+  content: counter(lesson);
+  position: absolute;
+  left: 0;
+  top: 0.9rem;
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 999px;
+  background: var(--lic-navy);
+  color: #fff;
+  font-weight: 800;
+  font-size: 0.95rem;
+  line-height: 2.2rem;
+  text-align: center;
+}
+
+.lic-lesson-steps strong {
+  display: block;
+  margin-bottom: 0.2rem;
+  color: var(--lic-navy);
+  font-size: 1.02rem;
+}
+
+.lic-rate-table--lesson {
+  max-width: none;
+}
+
+.lic-rate-table--lesson th:nth-child(2),
+.lic-rate-table--lesson td:nth-child(2),
+.lic-rate-table--lesson th:nth-child(3),
+.lic-rate-table--lesson td:nth-child(3) {
+  text-align: left;
+}
+
+.lic-rate-table--lesson tbody th {
+  font-weight: 700;
+  color: #0f2744;
+  background: #f8fafc;
+  white-space: nowrap;
+}
+
+.lic-vs-chart {
+  width: 100%;
+  max-width: none;
+  margin: 1.15rem 0 1.35rem;
+  border: 1px solid #c5d4e8;
+  border-radius: 0.55rem;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.08);
+}
+
+.lic-vs-chart__row {
+  display: grid;
+  grid-template-columns: minmax(9rem, 0.78fr) 1.15fr 1.15fr;
+}
+
+.lic-vs-chart__row + .lic-vs-chart__row {
+  border-top: 1px solid #e2e8f0;
+}
+
+.lic-vs-chart__q,
+.lic-vs-chart__ins,
+.lic-vs-chart__pre {
+  padding: 1.25rem 1.35rem;
+  font-size: 1.12rem;
+  line-height: 1.5;
+}
+
+.lic-vs-chart__q {
+  font-weight: 800;
+  color: #0b3a7a;
+  background: #eef4fb;
+}
+
+.lic-vs-chart__q--blank {
+  font-size: 0;
+  color: transparent;
+  background: #082a58;
+}
+
+.lic-vs-chart__head .lic-vs-chart__ins,
+.lic-vs-chart__head .lic-vs-chart__pre {
+  color: #fff;
+}
+
+.lic-vs-chart__head .lic-vs-chart__ins {
+  background: #0b3a7a;
+}
+
+.lic-vs-chart__head .lic-vs-chart__pre {
+  background: #3d4f66;
+}
+
+.lic-vs-chart__head strong {
+  display: block;
+  font-size: 1.32rem;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.lic-vs-chart__head span {
+  display: block;
+  margin-top: 0.28rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  opacity: 0.88;
+}
+
+.lic-vs-chart__ins {
+  color: #1f2937;
+  background: #fff;
+  border-left: 3px solid #f5a623;
+}
+
+.lic-vs-chart__pre {
+  color: #334155;
+  background: #f8fafc;
+}
+
+.lic-vs-chart__row:not(.lic-vs-chart__head):nth-child(odd) .lic-vs-chart__ins {
+  background: #fbfcfe;
+}
+
+@media (max-width: 720px) {
+  .lic-vs-chart__row {
+    grid-template-columns: 1fr;
+  }
+
+  .lic-vs-chart__q--blank {
+    display: none;
+  }
+
+  .lic-vs-chart__q,
+  .lic-vs-chart__ins,
+  .lic-vs-chart__pre {
+    padding: 0.85rem 1rem;
+  }
+
+  .lic-vs-chart__q {
+    border-top: 1px solid #dbe5ef;
+    font-size: 0.98rem;
+  }
+
+  .lic-vs-chart__head .lic-vs-chart__ins,
+  .lic-vs-chart__head .lic-vs-chart__pre {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  .lic-vs-chart__ins,
+  .lic-vs-chart__pre {
+    border-left: 0;
+  }
+
+  .lic-vs-chart__ins::before,
+  .lic-vs-chart__pre::before {
+    content: attr(data-label);
+    display: block;
+    margin-bottom: 0.25rem;
+    color: #0b3a7a;
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .lic-vs-chart__head .lic-vs-chart__ins::before,
+  .lic-vs-chart__head .lic-vs-chart__pre::before {
+    content: none;
+  }
+}
+
+.lic-choice-pair {
+  display: grid;
+  gap: 1rem;
+  margin: 1.1rem 0 0.85rem;
+}
+
+@media (min-width: 640px) {
+  .lic-choice-pair {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.lic-choice {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  padding: 1.25rem 1.35rem 1.3rem;
+  border: 1px solid #dbe5ef;
+  border-radius: 0.55rem;
+  background: #fff;
+  text-decoration: none;
+  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.06);
+}
+
+.lic-choice:hover,
+.lic-choice:focus-visible {
+  border-color: #0b3a7a;
+}
+
+.lic-choice:focus-visible {
+  outline: 3px solid #63b3ed;
+  outline-offset: 2px;
+}
+
+.lic-choice h3 {
+  margin: 0 0 0.4rem;
+  color: var(--lic-navy);
+  font-size: 1.18rem;
+}
+
+.lic-choice p {
+  margin: 0 0 1rem;
+  color: var(--lic-muted);
+  font-size: 0.98rem;
+  line-height: 1.45;
+  flex: 1;
+}
+
+.lic-choice__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 0.78rem 1rem;
+  border-radius: 0.4rem;
+  font-weight: 800;
+  font-size: 1.02rem;
+  text-align: center;
+}
+
+.lic-choice__btn--gold {
+  background: var(--lic-gold);
+  color: #1a202c;
+}
+
+.lic-choice:hover .lic-choice__btn--gold {
+  filter: brightness(0.97);
+}
+
+.lic-choice__btn--navy {
+  background: var(--lic-navy);
+  color: #fff;
+}
+
+.lic-choice-phone {
+  margin: 0;
+  color: var(--lic-muted);
+  font-size: 0.98rem;
+}
+
+.lic-choice-phone a {
+  font-weight: 800;
+  color: var(--lic-navy);
+  text-decoration: none;
+}
+
+.lic-choice-phone a:hover {
+  text-decoration: underline;
 }
 
 .lic-product-tabs {

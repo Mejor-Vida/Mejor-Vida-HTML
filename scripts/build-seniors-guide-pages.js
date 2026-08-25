@@ -2,7 +2,7 @@
 /**
  * Bilingual seniors guide pages:
  *   no medical exam + age limit + burial guide + complete seniors life hub
- *   + guaranteed acceptance
+ *   + guaranteed acceptance + cremation insurance
  *   node scripts/build-seniors-guide-pages.js
  */
 "use strict";
@@ -13,6 +13,7 @@ const path = require("path");
 const ROOT = path.join(__dirname, "..");
 const { copyHub, hubMain } = require("./seniors-life-hub-content");
 const { copyGi, giMain } = require("./guaranteed-acceptance-content");
+const { copyCrem, cremMain } = require("./cremation-insurance-content");
 const { quoteRailHtml } = require("./lic-quote-rail");
 const ES_HEADER = path.join(ROOT, "includes/site-header-inner.html");
 const EN_HEADER = path.join(ROOT, "includes/en-site-header.html");
@@ -75,6 +76,17 @@ const PAGES = {
       width: 1024,
       height: 682,
       cache: "20260822-cattle",
+    },
+  },
+  crem: {
+    esFile: "seguro-para-cremacion.html",
+    enFile: "cremation-insurance.html",
+    hero: {
+      base: "lic-hero-desert-saguaro",
+      modifier: "saguaro",
+      width: 1024,
+      height: 682,
+      cache: "20260824-saguaro",
     },
   },
 };
@@ -791,7 +803,9 @@ function headHtml(lang, page, c, kind) {
         ? "lic-page lic-page--seniors lic-page--seniors-hub"
         : kind === "gi"
           ? "lic-page lic-page--seniors lic-page--gi"
-          : "lic-page lic-page--seniors";
+          : kind === "crem"
+            ? "lic-page lic-page--seniors lic-page--cremation"
+            : "lic-page lic-page--seniors";
   const esUrl = `https://www.mejorvidainsurance.com/${page.esFile}`;
   const enUrl = `https://www.mejorvidainsurance.com/en/${page.enFile}`;
   const canonical = isEs ? esUrl : enUrl;
@@ -835,7 +849,7 @@ function headHtml(lang, page, c, kind) {
 <link href="${prefix}css/quote-flow-shared.css?v=20260723-mobile-menu" rel="stylesheet"/>
 <link href="${prefix}css/site-header.css?v=20260723-ver-precios-gold" rel="stylesheet"/>
 <link href="${prefix}css/nav-life-insurance.css?v=20260822-vida-buena" rel="stylesheet"/>
-<link href="${prefix}css/life-insurance-cost.css?v=20260822-seniors-rail" rel="stylesheet"/>
+<link href="${prefix}css/life-insurance-cost.css?v=20260824-crem-cta" rel="stylesheet"/>
 <link href="${prefix}css/mvi-assistant-widget.css?v=20260721-chat-z" rel="stylesheet"/>
 <link href="${prefix}css/fontawesome-mvi.min.css?v=20260723-brands-fix" rel="stylesheet"/>
 <style>body { font-family: Inter, system-ui, -apple-system, sans-serif; }</style>
@@ -1607,6 +1621,24 @@ function burialRatesPayload() {
   };
 }
 
+function cremRatesPayload() {
+  const faces = [5000, 10000, 15000];
+  const feFile = JSON.parse(
+    fs.readFileSync(path.join(ROOT, "js/final-expense-cost-rates.json"), "utf8")
+  );
+  const fe = feFile.final_expense || feFile;
+  return {
+    final_expense: {
+      source: fe.source,
+      rating: fe.rating,
+      as_of: fe.as_of,
+      note: fe.note,
+      faces,
+      tables: filterAges(pickFaceTables(fe.tables, faces), 50),
+    },
+  };
+}
+
 function hubRatesPayload() {
   const exam = examRatesPayload();
   const faces = [5000, 10000, 25000];
@@ -1696,13 +1728,15 @@ function examRateScripts(lang, kind) {
   const payload =
     kind === "burial"
       ? burialRatesPayload()
-      : kind === "hub"
+      : kind === "crem"
+        ? cremRatesPayload()
+        : kind === "hub"
         ? hubRatesPayload()
         : kind === "gi"
           ? giRatesPayload()
           : examRatesPayload();
   return `<script>window.MVI_LIC_RATES = ${JSON.stringify(payload)};</script>
-<script defer src="${prefix}js/life-insurance-cost.js?v=20260822-gi"></script>
+<script defer src="${prefix}js/life-insurance-cost.js?v=20260824-cremation"></script>
 `;
 }
 
@@ -1711,6 +1745,7 @@ function copyFor(kind, lang) {
   if (kind === "age") return copyAge(lang);
   if (kind === "hub") return copyHub(lang);
   if (kind === "gi") return copyGi(lang);
+  if (kind === "crem") return copyCrem(lang);
   return copyBurial(lang);
 }
 
@@ -1719,6 +1754,7 @@ function mainFor(kind, lang, page, c) {
   if (kind === "age") return ageMain(lang, page, c);
   if (kind === "hub") return hubMain(lang, page, c);
   if (kind === "gi") return giMain(lang, page, c);
+  if (kind === "crem") return cremMain(lang, page, c);
   return burialMain(lang, page, c);
 }
 
@@ -1752,6 +1788,8 @@ function main() {
     build("hub", "en"),
     build("gi", "es"),
     build("gi", "en"),
+    build("crem", "es"),
+    build("crem", "en"),
   ];
   console.log("Wrote", written.length, "pages");
   written.forEach((p) => console.log(" ", path.relative(ROOT, p)));

@@ -66,6 +66,11 @@ def sync_es_file(path: Path) -> bool:
         return False
     prefix = prefix_for(path)
     new_header = ES_TEMPLATE.replace("__PREFIX__", prefix)
+    if path.parent.name == "estados":
+        new_header = new_header.replace(
+            'href="/en/" class="mvi-lang-fab',
+            f'href="/en/states/{path.stem}.html" class="mvi-lang-fab',
+        )
     updated, n = HEADER_RE.subn(new_header.strip(), text, count=1)
     if n == 0:
         return False
@@ -84,6 +89,11 @@ def prepare_en_header(path: Path) -> str:
         up_site = "../" * (depth + 1)
         nest = "../" * depth
         header = header.replace("../img/", up_site + "img/")
+        if path.parent.name == "states":
+            header = header.replace(
+                'href="../index.html" class="mvi-lang-fab',
+                f'href="/estados/{path.stem}.html" class="mvi-lang-fab',
+            )
         header = header.replace('href="../index.html"', f'href="{up_site}index.html"')
         header = header.replace('href="index.html#home"', f'href="{nest}index.html#home"')
         header = header.replace('href="index.html"', f'href="{nest}index.html"')
@@ -116,6 +126,11 @@ def prepare_en_header(path: Path) -> str:
                 "burial-insurance-seniors.html",
                 "life-insurance-seniors.html",
                 "guaranteed-acceptance.html",
+                "cremation-insurance.html",
+                "states/nebraska.html",
+                "states/kansas.html",
+                "states/colorado.html",
+                "states/nevada.html",
                 "5000-life-insurance-cost.html",
                 "10000-life-insurance-cost.html",
                 "15000-life-insurance-cost.html",
