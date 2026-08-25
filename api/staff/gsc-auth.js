@@ -4,7 +4,7 @@
  * Redirect URIs:
  *   https://www.mejorvidainsurance.com/api/staff/gsc-callback
  */
-const { google } = require("googleapis");
+const { google } = require("../../lib/google-clients");
 const { getGa4OAuthClientConfig } = require("../../lib/ga4-oauth-config");
 const { GSC_SCOPE, getOAuthRedirectUri } = require("../../lib/gsc-data-api");
 

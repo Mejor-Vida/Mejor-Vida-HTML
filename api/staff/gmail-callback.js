@@ -1,4 +1,4 @@
-const { google } = require("googleapis");
+const { google } = require("../../lib/google-clients");
 
 const GMAIL_REDIRECT_URI = "https://www.mejorvidainsurance.com/api/staff/gmail-callback";
 

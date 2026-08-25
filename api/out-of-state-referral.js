@@ -10,7 +10,7 @@
  *             GMAIL_FROM_EMAIL (optional; default julie@mejorvidainsurance.com)
  */
 
-const { google } = require("googleapis");
+const { google } = require("../lib/google-clients");
 const { verifySiteOrigin } = require("../lib/site-origin");
 const GMAIL_REDIRECT_URI = "https://www.mejorvidainsurance.com/api/staff/gmail-callback";
 

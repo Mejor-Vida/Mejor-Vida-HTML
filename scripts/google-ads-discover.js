@@ -29,7 +29,7 @@ function loadEnvFile(filePath) {
 
 loadEnvFile(ENV_PATH);
 
-const { google } = require("googleapis");
+const { google } = require("../lib/google-clients");
 const { googleAdsConfig, getOAuthRedirectUri, googleAdsConfigStatus } = require("../lib/google-ads-api");
 
 async function main() {

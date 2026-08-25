@@ -1,6 +1,6 @@
 const fs = require("fs");
 const path = require("path");
-const { google } = require("googleapis");
+const { google } = require("../../lib/google-clients");
 const { requireStaffAuth, json, readJsonBody, serviceConfig, restPatch, restInsert } = require("./_inbox-lib");
 const { saveCanonicalLeadProfile } = require("./_lead-profile");
 const { buildStaffClientReplyHtml } = require("../../lib/staff-reply-email-body");

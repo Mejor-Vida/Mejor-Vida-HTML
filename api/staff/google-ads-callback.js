@@ -1,4 +1,4 @@
-const { google } = require("googleapis");
+const { google } = require("../../lib/google-clients");
 const { getGa4OAuthClientConfig } = require("../../lib/ga4-oauth-config");
 const { getOAuthRedirectUri } = require("../../lib/google-ads-api");
 

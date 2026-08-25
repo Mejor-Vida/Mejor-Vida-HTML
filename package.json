@@ -62,7 +62,10 @@
     "optimize:avatars": "node scripts/optimize-chat-avatars.js"
   },
   "dependencies": {
-    "googleapis": "^171.4.0",
+    "@googleapis/analyticsdata": "^5.0.1",
+    "@googleapis/gmail": "^16.1.2",
+    "@googleapis/searchconsole": "^6.0.1",
+    "google-auth-library": "^10.9.1",
     "web-push": "^3.6.7"
   },
   "devDependencies": {

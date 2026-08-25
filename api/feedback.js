@@ -20,7 +20,7 @@
  *  - SUPABASE_SERVICE_ROLE_KEY or SUPABASE_SERVICE_KEY
  */
 
-const { google } = require("googleapis");
+const { google } = require("../lib/google-clients");
 const { verifyManychatSecret, logRequest } = require("../lib/manychat-auth");
 const { sanitizeManychatTemplateField } = require("../lib/rag-pipeline");
 const { findManychatLeadBySubscriberId, findManychatLeadsByPhone } = require("../lib/supabase");

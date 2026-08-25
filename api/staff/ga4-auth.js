@@ -4,7 +4,7 @@
  *   https://www.mejorvidainsurance.com/api/staff/ga4-callback
  *   http://localhost:3000/api/staff/ga4-callback
  */
-const { google } = require("googleapis");
+const { google } = require("../../lib/google-clients");
 const { getOAuthRedirectUri } = require("../../lib/ga4-data-api");
 const { getGa4OAuthClientConfig } = require("../../lib/ga4-oauth-config");
 

@@ -1,0 +1,27 @@
+# Faster Vercel deploys: skip files the live site and serverless functions
+# never serve or import. Git still keeps them; they just are not uploaded.
+
+# Nested local apps / agent browsers (not the public site)
+mvi-ad-test-runner/
+local-browser-agent/
+tools/agent-browser-bridge/
+.cursor/
+.cursor-tmp-*/
+
+# Unused video source (landing pages use video/Julie_Whatsapp_intro.mp4 only)
+julie-wildfire-video/
+video/Julie_Avatar_-_Introduccion.mp4
+
+# Local Facebook / ad tooling (cron publishes via API + Supabase)
+facebook-posting/
+
+# Duplicate / archive HTML that is not linked from the live nav
+sources/
+Landing page/
+ninnis/
+print/
+
+# Local harvest dumps — quotes and RAG read Supabase, not these files
+integrations/knowledge/Term_Life_Knowledge/integrity-term-harvest.json
+integrations/knowledge/Term_Life_Knowledge/integrity-term-harvest*.json
+integrations/knowledge/Term_Life_Knowledge/integrity-fu-term-premiums.csv

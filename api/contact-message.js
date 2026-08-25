@@ -8,7 +8,7 @@
  *      GMAIL_CLIENT_ID, GMAIL_CLIENT_SECRET, GMAIL_REFRESH_TOKEN, GMAIL_FROM_EMAIL
  */
 
-const { google } = require("googleapis");
+const { google } = require("../lib/google-clients");
 const { verifySiteOrigin } = require("../lib/site-origin");
 const { hubspotAddNote } = require("../lib/hubspot");
 const {
