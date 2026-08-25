@@ -71,6 +71,11 @@
   object-position: 62% 40%;
 }
 
+.lic-hero-media--pier picture,
+.lic-hero-media--pier img {
+  object-position: 48% 42%;
+}
+
 .lic-hero-media--lakes picture,
 .lic-hero-media--lakes img {
   object-position: 50% 42%;
@@ -319,6 +324,22 @@
   flex-wrap: wrap;
   gap: 0.35rem;
   margin: 0 0 0.85rem;
+}
+
+.lic-page--term .lic-face-tabs {
+  row-gap: 0.45rem;
+  max-width: 36rem;
+}
+
+.lic-page--term .lic-face-tabs__break {
+  flex-basis: 100%;
+  width: 100%;
+  height: 0;
+}
+
+.lic-page--term .lic-face-tabs .lic-face-tab {
+  font-size: 0.84rem;
+  padding: 0.48rem 0.7rem;
 }
 
 .lic-face-tab {
@@ -1656,6 +1677,47 @@ a.lic-co-card--link .lic-co-specs dd {
   line-height: 1.5;
 }
 
+.lic-split-lists--cards {
+  gap: 0.85rem;
+  margin: 1rem 0 0;
+}
+
+.lic-split-lists--cards > div {
+  background: #fff;
+  border: 1px solid #c5d4e8;
+  border-radius: 0.55rem;
+  padding: 1.15rem 1.2rem 1.05rem;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
+}
+
+.lic-split-lists--cards h3 {
+  margin: 0 0 0.65rem;
+  font-size: 1.12rem;
+  color: var(--lic-navy);
+}
+
+.lic-split-lists--cards ul {
+  padding-left: 1.2rem;
+}
+
+.lic-split-lists--cards li {
+  margin: 0 0 0.7rem;
+  font-size: 0.98rem;
+  line-height: 1.5;
+}
+
+.lic-split-lists--cards li:last-child {
+  margin-bottom: 0;
+}
+
+.lic-split-lists--cards > .lic-split-lists__yes {
+  border-top: 4px solid #f5a623;
+}
+
+.lic-split-lists--cards > .lic-split-lists__no {
+  border-top: 4px solid #3d4f66;
+}
+
 .lic-fact-trio {
   display: grid;
   gap: 0.85rem;
@@ -1686,6 +1748,43 @@ a.lic-co-card--link .lic-co-specs dd {
   font-size: 0.92rem;
   color: var(--lic-muted);
   line-height: 1.45;
+}
+
+.lic-fact-trio--color > div {
+  background: #fff;
+  border: 1px solid #c5d4e8;
+  border-radius: 0.55rem;
+  padding: 1.15rem 1.15rem 1.1rem;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
+}
+
+.lic-fact-trio--color h3 {
+  margin: 0 0 0.55rem;
+  font-size: 1.18rem;
+  font-weight: 800;
+  line-height: 1.25;
+  color: #0b3a7a;
+}
+
+.lic-fact-trio--color p {
+  font-size: 0.98rem;
+  line-height: 1.5;
+  color: #334155;
+}
+
+.lic-fact-trio--color > div:nth-child(1) {
+  border-top: 4px solid #f5a623;
+  background: #fff4d9;
+}
+
+.lic-fact-trio--color > div:nth-child(2) {
+  border-top: 4px solid #0b3a7a;
+  background: #e8f0fb;
+}
+
+.lic-fact-trio--color > div:nth-child(3) {
+  border-top: 4px solid #0e7c8b;
+  background: #ddf4f5;
 }
 
 .lic-lesson-steps {
@@ -1729,6 +1828,68 @@ a.lic-co-card--link .lic-co-specs dd {
   margin-bottom: 0.2rem;
   color: var(--lic-navy);
   font-size: 1.02rem;
+}
+
+.lic-age-chart__caption {
+  margin: 0.15rem 0 0.7rem;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #0b3a7a;
+}
+
+.lic-age-chart {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0.65rem;
+  margin: 0 0 1rem;
+}
+
+.lic-age-chart__cell {
+  background: #fff;
+  border: 1px solid #c5d4e8;
+  border-radius: 0.55rem;
+  padding: 0.95rem 0.6rem 1.05rem;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
+}
+
+.lic-age-chart__term {
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #0b3a7a;
+}
+
+.lic-age-chart__age {
+  margin-top: 0.28rem;
+  font-size: clamp(1.7rem, 3vw, 2.2rem);
+  font-weight: 800;
+  line-height: 1.1;
+  color: #0b3a7a;
+  font-variant-numeric: tabular-nums;
+}
+
+.lic-age-chart__age span {
+  display: block;
+  margin-top: 0.2rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  color: #64748b;
+}
+
+@media (max-width: 800px) {
+  .lic-age-chart {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 520px) {
+  .lic-age-chart {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 .lic-rate-table--lesson {
@@ -1831,6 +1992,7 @@ a.lic-co-card--link .lic-co-specs dd {
 .lic-vs-chart__row:not(.lic-vs-chart__head):nth-child(odd) .lic-vs-chart__ins {
   background: #fbfcfe;
 }
+
 
 @media (max-width: 720px) {
   .lic-vs-chart__row {

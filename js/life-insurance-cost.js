@@ -45,8 +45,10 @@
       })
       .join("");
     if (noteEl && meta) {
-      if (meta.note && copy && copy.preferMetaNote) {
-        noteEl.textContent = meta.note;
+      if (copy && copy.preferMetaNote) {
+        var dedicated = (meta.note || "").trim();
+        noteEl.textContent = dedicated;
+        noteEl.hidden = !dedicated;
         return;
       }
       var hasEstimatedRow = rows.some(function (r) {
@@ -292,6 +294,7 @@
       var firstCmp =
         block.querySelector("[data-lic-compare-face].is-active") || cmpTabs[0];
       if (firstCmp) activateCompare(firstCmp);
+      else if (cmpBody) renderCompareTable("100000", cmpBody, cmpNote, copy, quoteHref);
       return;
     }
 
@@ -378,6 +381,36 @@
           renderTermTable(term, face, primaryTbody, noteEl, copy, quoteHref);
         }
       }
+    }
+
+    var termSetters = block.querySelectorAll("[data-lic-set-term]");
+    if (termSetters.length) {
+      termSetters.forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          term = btn.getAttribute("data-lic-set-term") || term;
+          block.setAttribute("data-lic-term", term);
+          termSetters.forEach(function (b) {
+            var on = b === btn;
+            b.classList.toggle("is-active", on);
+            b.setAttribute("aria-pressed", on ? "true" : "false");
+          });
+          var activeFace =
+            block.querySelector("[data-lic-face].is-active") ||
+            block.querySelector("[data-lic-face]");
+          if (activeFace) {
+            activeFace.click();
+          } else if (primaryTbody) {
+            renderTermTable(
+              term,
+              block.getAttribute("data-lic-face") || "100000",
+              primaryTbody,
+              block.querySelector("[data-lic-note]"),
+              copy,
+              quoteHref
+            );
+          }
+        });
+      });
     }
   }
 

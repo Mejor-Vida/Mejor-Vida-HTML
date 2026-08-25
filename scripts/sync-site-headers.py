@@ -127,6 +127,7 @@ def prepare_en_header(path: Path) -> str:
                 "life-insurance-seniors.html",
                 "guaranteed-acceptance.html",
                 "cremation-insurance.html",
+                "term-life-insurance.html",
                 "states/nebraska.html",
                 "states/kansas.html",
                 "states/colorado.html",
