@@ -1,0 +1,45 @@
+---
+description: Every agent-sent email must use the MVI branded shell (logo header + Julie signature footer) — never plain HTML
+alwaysApply: true
+---
+
+# Agent-sent email — always use MVI branding
+
+Any email **you** send on Julie's behalf (Gmail API, Resend, one-off script, carrier/upline paperwork, vendor correspondence) must use the branded MVI shell. Never hand-roll a bare `<html><body>` email.
+
+## Required wrapper
+
+```js
+const { wrapResendEmailHtml, signatureBlockEN, signatureBlockES, LOGO_EN, LOGO_ES }
+  = require("./lib/resend-email-template");
+
+const inner = bodyHtml + signatureBlockEN();      // signatureBlockES() for Spanish
+const html = wrapResendEmailHtml(inner, LOGO_EN); // LOGO_ES for Spanish
+```
+
+This gives the logo header, the white rounded card on `#f4f6f8`, and the Julie
+Braunsroth / NPN #21695431 / Mejor Vida Insurance LLC footer with phone,
+WhatsApp, site, and email.
+
+Easier path when the content is plain text: `buildStaffClientReplyHtml(text, language)`
+in `lib/staff-reply-email-body.js` returns `{ html, plainBody }` already wrapped and
+signed — use it for both the HTML and plain-text MIME parts.
+
+## Language
+
+- English → `signatureBlockEN()` + `LOGO_EN`
+- Spanish → `signatureBlockES()` + `LOGO_ES`
+
+## Still required
+
+- Send **multipart/alternative** (plain text + branded HTML), not HTML only.
+- Do not write your own Julie signature; the wrapper supplies it. Strip any
+  sign-off the draft already contains (see `stripTrailingSignature`).
+- Business / carrier / upline emails get the same branding as client emails.
+
+## Sending
+
+Gmail OAuth from `.env.local` (`GMAIL_CLIENT_ID`, `GMAIL_CLIENT_SECRET`,
+`GMAIL_REFRESH_TOKEN`, `GMAIL_FROM_EMAIL`); see `api/staff/send-email.js` for the
+raw-MIME builders, including the attachment variant. Delete one-off send scripts
+afterward and keep tax/bank PDFs out of the repo.

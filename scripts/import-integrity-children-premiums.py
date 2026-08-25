@@ -281,6 +281,12 @@ def upsert_supabase(rows: list[dict]) -> int:
                   WHERE is_mvi_appointed = true AND monthly_premium IS NOT NULL
                   ORDER BY state, age, sex, smoker, face_amount, health_class,
                            monthly_premium ASC, rank_in_quote ASC NULLS LAST;
+                -- Rate data is server-side only. Without these the table is world-writable
+                -- via the public anon key (Supabase advisor: rls_disabled_in_public).
+                ALTER TABLE child_integrity_premiums ENABLE ROW LEVEL SECURITY;
+                ALTER VIEW child_integrity_appointed_best_premiums SET (security_invoker = on);
+                REVOKE ALL ON child_integrity_premiums FROM anon, authenticated;
+                REVOKE ALL ON child_integrity_appointed_best_premiums FROM anon, authenticated;
                 """
             )
             for bid in batch_ids:
