@@ -65,7 +65,7 @@ function copyTerm(lang) {
       lim4H: "Seguir después cuesta más",
       lim4: "Renovar año a año o comprar otra póliza a la edad nueva suele ser mucho más caro. Convertir a permanente, si el contrato lo permite, usa su edad de entonces — no el precio viejo del temporal.",
       costH: "Cuánto suele costar al mes",
-      costP: "Cifras ilustrativas de suscripción completa, no fumador, mejor clase (agosto 2026). Cada celda es la prima más baja entre las compañías designadas que aparecieron. No es una oferta. Un plan simplificado (sin examen en el consultorio) suele costar más por dólar y se precifica aparte.",
+      costP: "Cifras ilustrativas de suscripción completa, no fumador, mejor clase (agosto 2026). Cada celda es la prima más baja entre las compañías designadas que aparecieron. No es una oferta. Un plan simplificado (sin examen en el consultorio) suele costar más por dólar y no es el de estas tablas.",
       needH: "Cómo pensar el monto",
       needLead: "El monto del temporal es el beneficio de muerte si usted fallece durante el plazo. No es una meta de ahorro. Es el dinero que la persona que nombró recibiría para seguir cubriendo lo que hoy paga su ingreso.",
       need1T: "Quién depende de su ingreso",

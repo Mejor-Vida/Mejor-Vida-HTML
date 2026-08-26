@@ -15,6 +15,7 @@ const { copyHub, hubMain } = require("./seniors-life-hub-content");
 const { copyGi, giMain } = require("./guaranteed-acceptance-content");
 const { copyCrem, cremMain } = require("./cremation-insurance-content");
 const { copyTerm, termMain } = require("./term-life-insurance-content");
+const { copyInstant, instantMain } = require("./instant-life-insurance-content");
 const { quoteRailHtml } = require("./lic-quote-rail");
 const ES_HEADER = path.join(ROOT, "includes/site-header-inner.html");
 const EN_HEADER = path.join(ROOT, "includes/en-site-header.html");
@@ -99,6 +100,17 @@ const PAGES = {
       width: 1024,
       height: 682,
       cache: "20260824-pier",
+    },
+  },
+  instant: {
+    esFile: "seguro-vida-emision-inmediata.html",
+    enFile: "instant-life-insurance.html",
+    hero: {
+      base: "lic-hero-horse-field",
+      modifier: "horse",
+      width: 1024,
+      height: 682,
+      cache: "20260825-horse",
     },
   },
 };
@@ -819,7 +831,9 @@ function headHtml(lang, page, c, kind) {
             ? "lic-page lic-page--seniors lic-page--cremation"
             : kind === "term"
               ? "lic-page lic-page--seniors lic-page--term"
-              : "lic-page lic-page--seniors";
+              : kind === "instant"
+                ? "lic-page lic-page--seniors lic-page--instant"
+                : "lic-page lic-page--seniors";
   const esUrl = `https://www.mejorvidainsurance.com/${page.esFile}`;
   const enUrl = `https://www.mejorvidainsurance.com/en/${page.enFile}`;
   const canonical = isEs ? esUrl : enUrl;
@@ -863,7 +877,7 @@ function headHtml(lang, page, c, kind) {
 <link href="${prefix}css/quote-flow-shared.css?v=20260723-mobile-menu" rel="stylesheet"/>
 <link href="${prefix}css/site-header.css?v=20260723-ver-precios-gold" rel="stylesheet"/>
 <link href="${prefix}css/nav-life-insurance.css?v=20260822-vida-buena" rel="stylesheet"/>
-<link href="${prefix}css/life-insurance-cost.css?v=20260824-term-faces" rel="stylesheet"/>
+<link href="${prefix}css/life-insurance-cost.css?v=20260825-instant" rel="stylesheet"/>
 <link href="${prefix}css/mvi-assistant-widget.css?v=20260721-chat-z" rel="stylesheet"/>
 <link href="${prefix}css/fontawesome-mvi.min.css?v=20260723-brands-fix" rel="stylesheet"/>
 <style>body { font-family: Inter, system-ui, -apple-system, sans-serif; }</style>
@@ -1791,6 +1805,7 @@ function copyFor(kind, lang) {
   if (kind === "gi") return copyGi(lang);
   if (kind === "crem") return copyCrem(lang);
   if (kind === "term") return copyTerm(lang);
+  if (kind === "instant") return copyInstant(lang);
   return copyBurial(lang);
 }
 
@@ -1801,6 +1816,7 @@ function mainFor(kind, lang, page, c) {
   if (kind === "gi") return giMain(lang, page, c);
   if (kind === "crem") return cremMain(lang, page, c);
   if (kind === "term") return termMain(lang, page, c);
+  if (kind === "instant") return instantMain(lang, page, c);
   return burialMain(lang, page, c);
 }
 
@@ -1838,6 +1854,8 @@ function main() {
     build("crem", "en"),
     build("term", "es"),
     build("term", "en"),
+    build("instant", "es"),
+    build("instant", "en"),
   ];
   console.log("Wrote", written.length, "pages");
   written.forEach((p) => console.log(" ", path.relative(ROOT, p)));

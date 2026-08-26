@@ -76,6 +76,11 @@
   object-position: 48% 42%;
 }
 
+.lic-hero-media--horse picture,
+.lic-hero-media--horse img {
+  object-position: 50% 45%;
+}
+
 .lic-hero-media--lakes picture,
 .lic-hero-media--lakes img {
   object-position: 50% 42%;
@@ -1993,9 +1998,38 @@ a.lic-co-card--link .lic-co-specs dd {
   background: #fbfcfe;
 }
 
+.lic-vs-chart--three .lic-vs-chart__row {
+  grid-template-columns: minmax(8.5rem, 0.72fr) 1fr 1fr 1fr;
+}
+
+.lic-vs-chart--three .lic-vs-chart__q,
+.lic-vs-chart--three .lic-vs-chart__ins,
+.lic-vs-chart--three .lic-vs-chart__mid,
+.lic-vs-chart--three .lic-vs-chart__pre {
+  padding: 1.05rem 1.1rem;
+  font-size: 1.02rem;
+  line-height: 1.45;
+}
+
+.lic-vs-chart__mid {
+  color: #334155;
+  background: #fff;
+  border-left: 3px solid #c5d4e8;
+}
+
+.lic-vs-chart__head .lic-vs-chart__mid {
+  color: #fff;
+  background: #1f4f8f;
+}
+
+.lic-vs-chart__row:not(.lic-vs-chart__head):nth-child(odd) .lic-vs-chart__mid {
+  background: #fbfcfe;
+}
+
 
 @media (max-width: 720px) {
-  .lic-vs-chart__row {
+  .lic-vs-chart__row,
+  .lic-vs-chart--three .lic-vs-chart__row {
     grid-template-columns: 1fr;
   }
 
@@ -2005,6 +2039,7 @@ a.lic-co-card--link .lic-co-specs dd {
 
   .lic-vs-chart__q,
   .lic-vs-chart__ins,
+  .lic-vs-chart__mid,
   .lic-vs-chart__pre {
     padding: 0.85rem 1rem;
   }
@@ -2021,11 +2056,13 @@ a.lic-co-card--link .lic-co-specs dd {
   }
 
   .lic-vs-chart__ins,
+  .lic-vs-chart__mid,
   .lic-vs-chart__pre {
     border-left: 0;
   }
 
   .lic-vs-chart__ins::before,
+  .lic-vs-chart__mid::before,
   .lic-vs-chart__pre::before {
     content: attr(data-label);
     display: block;
@@ -2038,8 +2075,14 @@ a.lic-co-card--link .lic-co-specs dd {
   }
 
   .lic-vs-chart__head .lic-vs-chart__ins::before,
+  .lic-vs-chart__head .lic-vs-chart__mid::before,
   .lic-vs-chart__head .lic-vs-chart__pre::before {
     content: none;
+  }
+
+  /* Three-column variant labels every cell, so the stacked header repeats itself. */
+  .lic-vs-chart--three .lic-vs-chart__head {
+    display: none;
   }
 }
 

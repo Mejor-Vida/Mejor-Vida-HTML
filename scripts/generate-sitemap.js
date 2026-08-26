@@ -32,6 +32,7 @@ const STATIC_PAGES = [
   { loc: "/aceptacion-garantizada.html", priority: "0.88" },
   { loc: "/seguro-para-cremacion.html", priority: "0.88" },
   { loc: "/seguro-vida-temporal.html", priority: "0.88" },
+  { loc: "/seguro-vida-emision-inmediata.html", priority: "0.88" },
   { loc: "/costo-seguro-vida.html", priority: "0.80" },
   { loc: "/costo-seguro-vida-temporal.html", priority: "0.82" },
   { loc: "/costo-seguro-vida-entera.html", priority: "0.82" },
