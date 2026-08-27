@@ -22,15 +22,25 @@ run() {
   # finishes, which makes a stall indistinguishable from slow work.
   # shellcheck disable=SC2086
   $H "$@" --max 4000 > "$CLASS_LOG" 2>&1
-  grep -E '^\s*\[[0-9]+\]|^Wrote|MISMATCH|skipping|logged out' "$CLASS_LOG"
+  local rc=$?
+  grep -E '^\s*\[[0-9]+\]|^Wrote|MISMATCH|skipping|logged out|not armed|Error' "$CLASS_LOG"
   date "+end   %H:%M:%S"
 
-  # A dropped Integrity login fails every remaining cell identically. Stop the
-  # whole run so it does not spend hours reporting empty sessions as success.
-  if grep -qi 'logged out' "$CLASS_LOG"; then
+  # A dropped login or a disarmed bridge fails every remaining cell the same
+  # way. Stop the run rather than spend hours reporting empty work as success.
+  local stop=""
+  grep -qi 'logged out' "$CLASS_LOG" && stop="Integrity is logged out — log back in"
+  grep -qi 'not armed' "$CLASS_LOG" && stop="the MVI Bridge is OFF — switch it ON in Chrome"
+  if [ -n "$stop" ]; then
     echo ""
-    echo "HARVEST-ABORTED-LOGGED-OUT after: $label"
+    echo "HARVEST-ABORTED after $label: $stop, then re-run to resume."
     exit 2
+  fi
+  # A class that produced nothing and exited cleanly still means something is
+  # wrong; surface it instead of printing a bare start/end pair.
+  if [ "$rc" -ne 0 ] && ! grep -q '^\s*\[[0-9]+\]' "$CLASS_LOG"; then
+    echo "WARNING: $label produced no quotes (exit $rc). Last output:"
+    tail -5 "$CLASS_LOG"
   fi
 }
 
