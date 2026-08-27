@@ -32,6 +32,11 @@ function json(res, status, payload) {
   res.send(JSON.stringify(payload));
 }
 
+/** Reads the first supplied alias, keeping a legitimate 0 (as in 6'0"). */
+function firstSupplied(...values) {
+  return values.find((v) => v !== undefined && v !== null && v !== "");
+}
+
 function readJsonBody(req) {
   if (typeof req.body === "string") return JSON.parse(req.body || "{}");
   return req.body && typeof req.body === "object" ? req.body : {};
@@ -137,9 +142,12 @@ module.exports = async function handler(req, res) {
       });
     }
 
-    const heightFt = parseInt(body.heightFt || body.height_ft, 10);
-    const heightIn = parseInt(body.heightIn || body.height_in, 10);
-    const weightLbs = parseInt(body.weightLbs || body.weight_lbs || body.weight, 10);
+    const heightFt = parseInt(firstSupplied(body.heightFt, body.height_ft), 10);
+    const heightIn = parseInt(firstSupplied(body.heightIn, body.height_in), 10);
+    const weightLbs = parseInt(
+      firstSupplied(body.weightLbs, body.weight_lbs, body.weight),
+      10
+    );
     if (
       !Number.isFinite(heightFt) ||
       !Number.isFinite(heightIn) ||
