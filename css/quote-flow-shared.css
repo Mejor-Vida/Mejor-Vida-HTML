@@ -638,10 +638,11 @@
       flex-direction: row;
       align-items: center;
       justify-content: center;
-      gap: clamp(1.25rem, 4.5vw, 2.75rem);
+      gap: clamp(1.85rem, 5.5vw, 3.75rem);
       width: 100%;
-      max-width: 46rem;
+      max-width: 56rem;
       margin: 0 auto;
+      padding-inline: 0.5rem;
     }
 
     .mvi-quote-carrier-logos > div {
@@ -653,14 +654,18 @@
     }
 
     .mvi-quote-carrier-logos .mvi-quote-carrier-logo--omaha {
-      flex: 1.2 1 0;
+      flex: 1.15 1 0;
     }
 
     .mvi-quote-carrier-logos .mvi-quote-carrier-logo--amicable {
-      flex: 1.25 1 0;
+      flex: 1.2 1 0;
     }
 
     .mvi-quote-carrier-logos .mvi-quote-carrier-logo--assurity {
+      flex: 0.9 1 0;
+    }
+
+    .mvi-quote-carrier-logos .mvi-quote-carrier-logo--americo {
       flex: 0.85 1 0;
     }
 
@@ -676,14 +681,22 @@
     .mvi-quote-carrier-logos .mvi-quote-carrier-logo--omaha img {
       height: clamp(2.65rem, 6vw, 3.85rem);
       width: auto;
-      max-width: none;
+      max-width: 100%;
       object-fit: contain;
     }
 
     .mvi-quote-carrier-logos .mvi-quote-carrier-logo--amicable img {
       height: clamp(2.9rem, 6.75vw, 4.15rem);
       width: auto;
-      max-width: none;
+      max-width: 100%;
+      object-fit: contain;
+    }
+
+    /* Americo wordmark is dense; cap height so it does not dominate the row */
+    .mvi-quote-carrier-logos .mvi-quote-carrier-logo--americo img {
+      height: clamp(1.55rem, 3.6vw, 2.2rem);
+      width: auto;
+      max-width: 100%;
       object-fit: contain;
     }
 
@@ -691,9 +704,9 @@
       .mvi-quote-carrier-logos {
         flex-direction: row;
         flex-wrap: nowrap;
-        gap: clamp(0.35rem, 2vw, 0.65rem);
+        gap: clamp(0.85rem, 4.5vw, 1.45rem);
         max-width: 100%;
-        padding-inline: 0.15rem;
+        padding-inline: 0.35rem;
       }
 
       .mvi-quote-carrier-logos .mvi-quote-carrier-logo--assurity img {
@@ -710,11 +723,16 @@
         height: clamp(1.55rem, 5vw, 1.95rem);
         max-width: 100%;
       }
+
+      .mvi-quote-carrier-logos .mvi-quote-carrier-logo--americo img {
+        height: clamp(1.05rem, 3.2vw, 1.4rem);
+        max-width: 100%;
+      }
     }
 
     @media (max-width: 380px) {
       .mvi-quote-carrier-logos {
-        gap: 0.3rem;
+        gap: 0.55rem;
       }
       .mvi-quote-carrier-logos .mvi-quote-carrier-logo--assurity img {
         height: 1.25rem;
@@ -724,6 +742,9 @@
       }
       .mvi-quote-carrier-logos .mvi-quote-carrier-logo--amicable img {
         height: 1.45rem;
+      }
+      .mvi-quote-carrier-logos .mvi-quote-carrier-logo--americo img {
+        height: 1.05rem;
       }
     }
 

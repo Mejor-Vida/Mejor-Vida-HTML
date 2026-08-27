@@ -78,6 +78,7 @@ const JOBS = [
   { src: "img/lic-hero-alpine-lakes.jpg", maxWidth: 1600, maxHeight: 1066, outBase: "lic-hero-alpine-lakes" },
   { src: "img/lic-hero-fjord.jpg", maxWidth: 1600, maxHeight: 1066, outBase: "lic-hero-fjord" },
   { src: "img/lic-hero-monument-valley.jpg", maxWidth: 1600, maxHeight: 1066, outBase: "lic-hero-monument-valley" },
+  { src: "img/lic-hero-pueblo-street.jpg", maxWidth: 1600, maxHeight: 1066, outBase: "lic-hero-pueblo-street" },
   { src: "img/lic-hero-rice-terraces.jpg", maxWidth: 1600, maxHeight: 1066, outBase: "lic-hero-rice-terraces" },
   { src: "img/lic-hero-icebergs.jpg", maxWidth: 1600, maxHeight: 1066, outBase: "lic-hero-icebergs" },
   { src: "img/lic-hero-savanna-elephants.jpg", maxWidth: 1600, maxHeight: 1066, outBase: "lic-hero-savanna-elephants" },

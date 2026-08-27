@@ -16,6 +16,7 @@ const { copyGi, giMain } = require("./guaranteed-acceptance-content");
 const { copyCrem, cremMain } = require("./cremation-insurance-content");
 const { copyTerm, termMain } = require("./term-life-insurance-content");
 const { copyInstant, instantMain } = require("./instant-life-insurance-content");
+const { copyMortgage, mortgageMain } = require("./mortgage-protection-insurance-content");
 const { quoteRailHtml } = require("./lic-quote-rail");
 const ES_HEADER = path.join(ROOT, "includes/site-header-inner.html");
 const EN_HEADER = path.join(ROOT, "includes/en-site-header.html");
@@ -111,6 +112,17 @@ const PAGES = {
       width: 1024,
       height: 682,
       cache: "20260825-horse",
+    },
+  },
+  mortgage: {
+    esFile: "seguro-proteccion-hipotecaria.html",
+    enFile: "mortgage-protection-insurance.html",
+    hero: {
+      base: "lic-hero-pueblo-street",
+      modifier: "pueblo",
+      width: 1024,
+      height: 682,
+      cache: "20260827-pueblo",
     },
   },
 };
@@ -833,7 +845,9 @@ function headHtml(lang, page, c, kind) {
               ? "lic-page lic-page--seniors lic-page--term"
               : kind === "instant"
                 ? "lic-page lic-page--seniors lic-page--instant"
-                : "lic-page lic-page--seniors";
+                : kind === "mortgage"
+                  ? "lic-page lic-page--seniors lic-page--mortgage"
+                  : "lic-page lic-page--seniors";
   const esUrl = `https://www.mejorvidainsurance.com/${page.esFile}`;
   const enUrl = `https://www.mejorvidainsurance.com/en/${page.enFile}`;
   const canonical = isEs ? esUrl : enUrl;
@@ -877,7 +891,7 @@ function headHtml(lang, page, c, kind) {
 <link href="${prefix}css/quote-flow-shared.css?v=20260723-mobile-menu" rel="stylesheet"/>
 <link href="${prefix}css/site-header.css?v=20260723-ver-precios-gold" rel="stylesheet"/>
 <link href="${prefix}css/nav-life-insurance.css?v=20260822-vida-buena" rel="stylesheet"/>
-<link href="${prefix}css/life-insurance-cost.css?v=20260825-instant" rel="stylesheet"/>
+<link href="${prefix}css/life-insurance-cost.css?v=20260827-kinds" rel="stylesheet"/>
 <link href="${prefix}css/mvi-assistant-widget.css?v=20260721-chat-z" rel="stylesheet"/>
 <link href="${prefix}css/fontawesome-mvi.min.css?v=20260723-brands-fix" rel="stylesheet"/>
 <style>body { font-family: Inter, system-ui, -apple-system, sans-serif; }</style>
@@ -1774,11 +1788,28 @@ function giRatesPayload() {
 
 function examRateScripts(lang, kind) {
   const prefix = lang === "es" ? "" : "../";
-  if (kind === "term") {
+  if (kind === "term" || kind === "mortgage") {
+    const payload = termRatesPayload();
+    if (kind === "mortgage") {
+      payload.faces = [100000, 250000, 500000];
+      payload.terms = [10, 20, 30];
+      const faces = ["100000", "250000", "500000"];
+      ["10", "20", "30"].forEach((t) => {
+        if (!payload.tables[t]) return;
+        const slim = {};
+        faces.forEach((f) => {
+          if (payload.tables[t][f]) slim[f] = payload.tables[t][f];
+        });
+        payload.tables[t] = slim;
+      });
+      return `<script>window.MVI_LIC_RATES = ${JSON.stringify(payload)};</script>
+<script defer src="${prefix}js/life-insurance-cost.js?v=20260824-term-nonote"></script>
+`;
+    }
     const compare = JSON.parse(
       fs.readFileSync(path.join(ROOT, "js/term-vs-whole-cost-rates.json"), "utf8")
     );
-    return `<script>window.MVI_LIC_RATES = ${JSON.stringify(termRatesPayload())};</script>
+    return `<script>window.MVI_LIC_RATES = ${JSON.stringify(payload)};</script>
 <script>window.MVI_LIC_COMPARE = ${JSON.stringify(compare)};</script>
 <script defer src="${prefix}js/life-insurance-cost.js?v=20260824-term-nonote"></script>
 `;
@@ -1806,6 +1837,7 @@ function copyFor(kind, lang) {
   if (kind === "crem") return copyCrem(lang);
   if (kind === "term") return copyTerm(lang);
   if (kind === "instant") return copyInstant(lang);
+  if (kind === "mortgage") return copyMortgage(lang);
   return copyBurial(lang);
 }
 
@@ -1817,6 +1849,7 @@ function mainFor(kind, lang, page, c) {
   if (kind === "crem") return cremMain(lang, page, c);
   if (kind === "term") return termMain(lang, page, c);
   if (kind === "instant") return instantMain(lang, page, c);
+  if (kind === "mortgage") return mortgageMain(lang, page, c);
   return burialMain(lang, page, c);
 }
 
@@ -1856,6 +1889,8 @@ function main() {
     build("term", "en"),
     build("instant", "es"),
     build("instant", "en"),
+    build("mortgage", "es"),
+    build("mortgage", "en"),
   ];
   console.log("Wrote", written.length, "pages");
   written.forEach((p) => console.log(" ", path.relative(ROOT, p)));
