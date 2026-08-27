@@ -15,9 +15,9 @@
     60
   ],
   "rating": "Non-tobacco illustrative (educational)",
-  "as_of": "2026-08-18",
+  "as_of": "2026-08-27",
   "note": "Illustrative monthly premiums. Term column uses 10-year fully underwritten Preferred Best non-tobacco samples (lowest among MVI-appointed Integrity Connect quotes). Whole life column uses appointed-carrier Protect+ Preferred Plus non-tobacco where ages are available, otherwise the traditional whole-life educational sample on Mejor Vida’s whole-life cost page. Not binding quotes.",
-  "term_source": "Mejor Vida appointed-carrier rate samples (Integrity Connect marketplace FU Preferred Best NT (lowest listed sample; not appointed-only); Nebraska)",
+  "term_source": "Mejor Vida appointed-carrier rate samples (Integrity Connect FU Preferred Best NT (lowest among MVI-appointed carriers); Nebraska)",
   "whole_source": "Assurity Whole Life Protect+ Preferred Plus non-tobacco (Pay to Age 100; $10k chart in Assurity_Knowledge, fee-aware scaled with $65 annual policy fee held constant) for ages lacking the traditional sample; Industry sample whole life rates (preferred / non-tobacco), rounded",
   "tables": {
     "100000": [
@@ -38,28 +38,28 @@
       {
         "age": 30,
         "term_female": 7,
-        "term_male": 8,
+        "term_male": 9,
         "whole_female": 65,
         "whole_male": 73
       },
       {
         "age": 35,
-        "term_female": 7,
-        "term_male": 8,
+        "term_female": 8,
+        "term_male": 9,
         "whole_female": 76,
         "whole_male": 85
       },
       {
         "age": 40,
         "term_female": 8,
-        "term_male": 9,
+        "term_male": 10,
         "whole_female": 116,
         "whole_male": 132
       },
       {
         "age": 45,
         "term_female": 10,
-        "term_male": 11,
+        "term_male": 12,
         "whole_female": 141,
         "whole_male": 163
       },
@@ -80,7 +80,7 @@
       {
         "age": 60,
         "term_female": 25,
-        "term_male": 35,
+        "term_male": 36,
         "whole_female": 297,
         "whole_male": 334
       }

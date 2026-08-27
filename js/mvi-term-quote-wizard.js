@@ -1018,6 +1018,7 @@
             quote_low: data.quote_low,
             quote_high: data.quote_high,
             quote_anchor: data.quote_anchor,
+            quote_carrier: data.quote_carrier || "",
             age: age,
             sex: sex,
             smoker: smoker,

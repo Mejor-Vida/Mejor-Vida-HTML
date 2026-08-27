@@ -212,8 +212,14 @@ Height/weight uses MOO TLA build chart (`lib/term-build-chart.js`) to cap the **
 
 ## Gaps (next)
 
-- Health classes beyond Preferred Best NT (Preferred, Standard+, Standard, tobacco)
-- Appointed-only public quoter filter (schema ready via `is_mvi_appointed`)
-- Full Integrity result sets (~30 cards) — harvest currently tops out at ~10 visible DOM cards
-- Age 60 / 30-year: 12 cells had no premium (product max age)
+- Terms 15 and 25 are read between the 10/20/30 grid rather than harvested directly
+- Tobacco faces above $2M (grid tops out at $1M for tobacco classes)
+- Standard+ (`standard_plus_nt`) and substandard classes not harvested
 - WinFlex/chart fills for Transamerica/MOO/Assurity into `term_carrier_premiums` still sparse vs Integrity marketplace
+
+## Done
+
+- Health classes: Preferred Best, Preferred, and Standard non-tobacco; Preferred and Standard tobacco
+- Appointed-only public quoter filter (live — the quoter reads `is_mvi_appointed` rows only)
+- Full Integrity result sets (~30 cards) via result-page pagination
+- 30-year term past roughly age 55, and 20-year past 70, return no premium — a real product max age, not a harvest miss

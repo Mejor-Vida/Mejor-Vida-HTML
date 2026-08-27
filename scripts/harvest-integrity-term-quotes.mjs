@@ -55,6 +55,24 @@ const HEALTH_LABEL = {
   SUB: "Substandard",
 };
 
+/**
+ * Carriers publish a shorter class ladder for tobacco users, so the non-tobacco
+ * slugs above do not apply to a tobacco run. Harvest PP and S only for tobacco;
+ * the intermediate codes collapse onto the same two slugs.
+ */
+const TOBACCO_HEALTH_MAP = {
+  PP: "preferred_t",
+  P: "preferred_t",
+  SP: "standard_t",
+  S: "standard_t",
+  SUB: "substandard_t",
+};
+
+function healthClassFor(code, tobacco) {
+  if (tobacco) return TOBACCO_HEALTH_MAP[code] || "standard_t";
+  return HEALTH_MAP[code] || "preferred_plus_nt";
+}
+
 function parseArgs(argv) {
   const args = {
     product: "fu", // fu | si | fe
@@ -744,11 +762,11 @@ function toCsvRows(records, productType) {
       state: rec.state || "NE",
       age,
       sex: rec.sex,
-      smoker: 0,
+      smoker: rec.tobacco ? 1 : 0,
       term_years: rec.term,
       face_band_min: rec.face,
       face_band_max: rec.face,
-      health_class: HEALTH_MAP[rec.health] || "preferred_plus_nt",
+      health_class: healthClassFor(rec.health, rec.tobacco),
       rate_per_thousand: "",
       policy_fee_annual: "",
       modal_monthly_factor: "",

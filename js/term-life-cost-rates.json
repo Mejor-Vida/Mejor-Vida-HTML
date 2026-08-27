@@ -1,8 +1,8 @@
 {
-  "source": "Mejor Vida appointed-carrier rate samples (Integrity Connect marketplace FU Preferred Best NT (lowest listed sample; not appointed-only); Nebraska)",
+  "source": "Mejor Vida appointed-carrier rate samples (Integrity Connect FU Preferred Best NT (lowest among MVI-appointed carriers); Nebraska)",
   "rating": "Non-tobacco, fully underwritten Preferred Best / preferred class (illustrative)",
-  "as_of": "2026-08-18",
-  "note": "Illustrative monthly premiums from Integrity Connect Fully Underwritten Term quick quotes (Preferred Best non-tobacco, Nebraska). Each cell is the lowest listed premium among returned carriers for that age/sex/term/face. Rounded to the nearest dollar. Educational samples only — not a binding quote. Carriers use age-nearest underwriting; actual offers vary by carrier, health, tobacco, state, face amount, and underwriting. Simplified-issue products (e.g. American Amicable Easy Term) are typically higher and remain available via the term quoter.",
+  "as_of": "2026-08-27",
+  "note": "Illustrative monthly premiums from Integrity Connect Fully Underwritten Term quick quotes (Preferred Best non-tobacco, Nebraska). Each cell is the lowest premium among MVI-appointed carriers captured for that age/sex/term/face. Rounded to the nearest dollar. Educational samples only — not a binding quote. Carriers use age-nearest underwriting; actual offers vary by carrier, health, tobacco, state, face amount, and underwriting. Simplified-issue products (e.g. American Amicable Easy Term) are typically higher and remain available via the term quoter.",
   "faces": [
     100000,
     250000,
@@ -44,22 +44,22 @@
         {
           "age": 30,
           "female": 7,
-          "male": 8
+          "male": 9
         },
         {
           "age": 35,
-          "female": 7,
-          "male": 8
-        },
-        {
-          "age": 40,
           "female": 8,
           "male": 9
         },
         {
+          "age": 40,
+          "female": 8,
+          "male": 10
+        },
+        {
           "age": 45,
           "female": 10,
-          "male": 11
+          "male": 12
         },
         {
           "age": 50,
@@ -74,11 +74,11 @@
         {
           "age": 60,
           "female": 25,
-          "male": 35
+          "male": 36
         },
         {
           "age": 65,
-          "female": 40,
+          "female": 45,
           "male": 53
         },
         {
@@ -135,8 +135,23 @@
         },
         {
           "age": 60,
-          "female": 44,
-          "male": 64
+          "female": 47,
+          "male": 65
+        },
+        {
+          "age": 65,
+          "female": 75,
+          "male": 103
+        },
+        {
+          "age": 70,
+          "female": 149,
+          "male": 181
+        },
+        {
+          "age": 75,
+          "female": 237,
+          "male": 337
         }
       ],
       "500000": [
@@ -184,27 +199,42 @@
           "age": 60,
           "female": 72,
           "male": 109
+        },
+        {
+          "age": 65,
+          "female": 135,
+          "male": 193
+        },
+        {
+          "age": 70,
+          "female": 235,
+          "male": 313
+        },
+        {
+          "age": 75,
+          "female": 475,
+          "male": 643
         }
       ],
       "750000": [
         {
           "age": 20,
-          "female": 12,
-          "male": 16
-        },
-        {
-          "age": 25,
-          "female": 12,
-          "male": 16
-        },
-        {
-          "age": 30,
           "female": 13,
           "male": 16
         },
         {
+          "age": 25,
+          "female": 13,
+          "male": 16
+        },
+        {
+          "age": 30,
+          "female": 14,
+          "male": 17
+        },
+        {
           "age": 35,
-          "female": 15,
+          "female": 16,
           "male": 18
         },
         {
@@ -251,8 +281,8 @@
         },
         {
           "age": 35,
-          "female": 17,
-          "male": 20
+          "female": 18,
+          "male": 21
         },
         {
           "age": 40,
@@ -276,19 +306,34 @@
         },
         {
           "age": 60,
-          "female": 150,
+          "female": 154,
           "male": 218
+        },
+        {
+          "age": 65,
+          "female": 241,
+          "male": 363
+        },
+        {
+          "age": 70,
+          "female": 443,
+          "male": 598
+        },
+        {
+          "age": 75,
+          "female": 773,
+          "male": 1233
         }
       ],
       "2000000": [
         {
           "age": 20,
-          "female": 23,
+          "female": 24,
           "male": 30
         },
         {
           "age": 25,
-          "female": 23,
+          "female": 25,
           "male": 30
         },
         {
@@ -298,13 +343,13 @@
         },
         {
           "age": 35,
-          "female": 29,
-          "male": 35
+          "female": 30,
+          "male": 37
         },
         {
           "age": 40,
-          "female": 45,
-          "male": 52
+          "female": 47,
+          "male": 54
         },
         {
           "age": 45,
@@ -314,44 +359,44 @@
         {
           "age": 50,
           "female": 117,
-          "male": 147
+          "male": 149
         },
         {
           "age": 55,
-          "female": 184,
+          "female": 186,
           "male": 247
         },
         {
           "age": 60,
-          "female": 295,
-          "male": 433
+          "female": 302,
+          "male": 434
         }
       ],
       "3000000": [
         {
           "age": 20,
-          "female": 32,
-          "male": 42
-        },
-        {
-          "age": 25,
-          "female": 32,
-          "male": 42
-        },
-        {
-          "age": 30,
           "female": 34,
           "male": 42
         },
         {
+          "age": 25,
+          "female": 34,
+          "male": 42
+        },
+        {
+          "age": 30,
+          "female": 35,
+          "male": 42
+        },
+        {
           "age": 35,
-          "female": 40,
-          "male": 50
+          "female": 42,
+          "male": 52
         },
         {
           "age": 40,
-          "female": 65,
-          "male": 75
+          "female": 67,
+          "male": 78
         },
         {
           "age": 45,
@@ -360,18 +405,18 @@
         },
         {
           "age": 50,
-          "female": 172,
-          "male": 218
+          "female": 173,
+          "male": 221
         },
         {
           "age": 55,
-          "female": 273,
+          "female": 277,
           "male": 370
         },
         {
           "age": 60,
-          "female": 436,
-          "male": 645
+          "female": 451,
+          "male": 650
         }
       ]
     },
@@ -379,22 +424,22 @@
       "100000": [
         {
           "age": 20,
-          "female": 8,
-          "male": 8
+          "female": 9,
+          "male": 9
         },
         {
           "age": 25,
-          "female": 8,
-          "male": 8
+          "female": 9,
+          "male": 9
         },
         {
           "age": 30,
-          "female": 8,
+          "female": 9,
           "male": 9
         },
         {
           "age": 35,
-          "female": 8,
+          "female": 9,
           "male": 9
         },
         {
@@ -419,8 +464,18 @@
         },
         {
           "age": 60,
-          "female": 46,
-          "male": 61
+          "female": 48,
+          "male": 63
+        },
+        {
+          "age": 65,
+          "female": 95,
+          "male": 112
+        },
+        {
+          "age": 70,
+          "female": 168,
+          "male": 202
         }
       ],
       "250000": [
@@ -467,7 +522,17 @@
         {
           "age": 60,
           "female": 82,
-          "male": 119
+          "male": 123
+        },
+        {
+          "age": 65,
+          "female": 188,
+          "male": 240
+        },
+        {
+          "age": 70,
+          "female": 364,
+          "male": 478
         }
       ],
       "500000": [
@@ -515,28 +580,38 @@
           "age": 60,
           "female": 140,
           "male": 199
+        },
+        {
+          "age": 65,
+          "female": 355,
+          "male": 473
+        },
+        {
+          "age": 70,
+          "female": 701,
+          "male": 924
         }
       ],
       "750000": [
         {
           "age": 20,
-          "female": 19,
-          "male": 23
-        },
-        {
-          "age": 25,
-          "female": 19,
-          "male": 23
-        },
-        {
-          "age": 30,
           "female": 20,
           "male": 24
         },
         {
+          "age": 25,
+          "female": 20,
+          "male": 24
+        },
+        {
+          "age": 30,
+          "female": 21,
+          "male": 25
+        },
+        {
           "age": 35,
-          "female": 23,
-          "male": 28
+          "female": 24,
+          "male": 29
         },
         {
           "age": 40,
@@ -607,25 +682,35 @@
         },
         {
           "age": 60,
-          "female": 304,
-          "male": 432
+          "female": 309,
+          "male": 452
+        },
+        {
+          "age": 65,
+          "female": 685,
+          "male": 856
+        },
+        {
+          "age": 70,
+          "female": 1256,
+          "male": 1648
         }
       ],
       "2000000": [
         {
           "age": 20,
-          "female": 34,
-          "male": 50
+          "female": 38,
+          "male": 52
         },
         {
           "age": 25,
-          "female": 34,
+          "female": 38,
           "male": 52
         },
         {
           "age": 30,
-          "female": 41,
-          "male": 53
+          "female": 43,
+          "male": 54
         },
         {
           "age": 35,
@@ -654,29 +739,29 @@
         },
         {
           "age": 60,
-          "female": 602,
-          "male": 858
+          "female": 612,
+          "male": 898
         }
       ],
       "3000000": [
         {
           "age": 20,
-          "female": 48,
-          "male": 72
+          "female": 54,
+          "male": 75
         },
         {
           "age": 25,
-          "female": 48,
-          "male": 74
+          "female": 54,
+          "male": 75
         },
         {
           "age": 30,
-          "female": 59,
-          "male": 76
+          "female": 61,
+          "male": 78
         },
         {
           "age": 35,
-          "female": 78,
+          "female": 79,
           "male": 92
         },
         {
@@ -701,8 +786,8 @@
         },
         {
           "age": 60,
-          "female": 900,
-          "male": 1283
+          "female": 915,
+          "male": 1344
         }
       ]
     },
@@ -710,38 +795,38 @@
       "100000": [
         {
           "age": 20,
-          "female": 10,
-          "male": 12
+          "female": 11,
+          "male": 13
         },
         {
           "age": 25,
-          "female": 10,
-          "male": 12
+          "female": 11,
+          "male": 13
         },
         {
           "age": 30,
           "female": 11,
-          "male": 12
-        },
-        {
-          "age": 35,
-          "female": 11,
           "male": 14
         },
         {
+          "age": 35,
+          "female": 12,
+          "male": 15
+        },
+        {
           "age": 40,
-          "female": 16,
-          "male": 18
+          "female": 17,
+          "male": 19
         },
         {
           "age": 45,
-          "female": 20,
+          "female": 21,
           "male": 25
         },
         {
           "age": 50,
-          "female": 32,
-          "male": 40
+          "female": 33,
+          "male": 42
         },
         {
           "age": 55,
@@ -777,18 +862,18 @@
         },
         {
           "age": 45,
-          "female": 36,
+          "female": 37,
           "male": 46
         },
         {
           "age": 50,
           "female": 58,
-          "male": 76
+          "male": 78
         },
         {
           "age": 55,
-          "female": 109,
-          "male": 144
+          "female": 113,
+          "male": 150
         }
       ],
       "500000": [
@@ -836,18 +921,18 @@
       "750000": [
         {
           "age": 20,
-          "female": 30,
-          "male": 37
-        },
-        {
-          "age": 25,
-          "female": 30,
+          "female": 31,
           "male": 38
         },
         {
+          "age": 25,
+          "female": 31,
+          "male": 39
+        },
+        {
           "age": 30,
-          "female": 34,
-          "male": 41
+          "female": 35,
+          "male": 42
         },
         {
           "age": 35,
@@ -894,7 +979,7 @@
         {
           "age": 35,
           "female": 53,
-          "male": 66
+          "male": 67
         },
         {
           "age": 40,
@@ -920,33 +1005,33 @@
       "2000000": [
         {
           "age": 20,
-          "female": 59,
-          "male": 83
+          "female": 62,
+          "male": 86
         },
         {
           "age": 25,
-          "female": 61,
-          "male": 84
+          "female": 65,
+          "male": 88
         },
         {
           "age": 30,
-          "female": 73,
-          "male": 96
+          "female": 76,
+          "male": 99
         },
         {
           "age": 35,
-          "female": 99,
-          "male": 125
+          "female": 101,
+          "male": 128
         },
         {
           "age": 40,
-          "female": 147,
-          "male": 190
+          "female": 149,
+          "male": 191
         },
         {
           "age": 45,
-          "female": 235,
-          "male": 308
+          "female": 237,
+          "male": 309
         },
         {
           "age": 50,
@@ -962,38 +1047,38 @@
       "3000000": [
         {
           "age": 20,
-          "female": 86,
-          "male": 121
+          "female": 91,
+          "male": 127
         },
         {
           "age": 25,
-          "female": 88,
-          "male": 123
+          "female": 95,
+          "male": 129
         },
         {
           "age": 30,
-          "female": 106,
-          "male": 141
+          "female": 111,
+          "male": 146
         },
         {
           "age": 35,
-          "female": 145,
-          "male": 185
+          "female": 149,
+          "male": 189
         },
         {
           "age": 40,
-          "female": 218,
-          "male": 282
+          "female": 221,
+          "male": 284
         },
         {
           "age": 45,
-          "female": 350,
-          "male": 460
+          "female": 352,
+          "male": 461
         },
         {
           "age": 50,
           "female": 566,
-          "male": 771
+          "male": 774
         },
         {
           "age": 55,

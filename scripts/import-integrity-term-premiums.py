@@ -47,6 +47,23 @@ HEALTH_MAP = {
     "SUB": "substandard_nt",
 }
 
+# Carriers publish a shorter class ladder for tobacco users, so a tobacco cell
+# cannot reuse the non-tobacco slugs above.
+TOBACCO_HEALTH_MAP = {
+    "PP": "preferred_t",
+    "P": "preferred_t",
+    "SP": "standard_t",
+    "S": "standard_t",
+    "SUB": "substandard_t",
+}
+
+
+def health_class_for(code: str, tobacco: bool) -> str:
+    code = code or "PP"
+    if tobacco:
+        return TOBACCO_HEALTH_MAP.get(code, "standard_t")
+    return HEALTH_MAP.get(code, "preferred_plus_nt")
+
 # MVI known appointed / contracted carriers (repo + public carrier pages).
 # Banner / Symetra / Protective / Prudential / Pacific / Principal are marketplace-only.
 MVI_APPOINTED_SLUGS = frozenset(
@@ -135,7 +152,8 @@ def expand_rows(data: dict) -> list[dict]:
         cards = rec.get("all") or rec.get("top") or []
         if not cards and rec.get("best"):
             cards = [rec["best"]]
-        health = HEALTH_MAP.get(rec.get("health") or "PP", "preferred_plus_nt")
+        tobacco = bool(rec.get("tobacco"))
+        health = health_class_for(rec.get("health"), tobacco)
         health_label = rec.get("health_label") or ""
         uw = underwriting_mode(rec.get("product_type") or "")
         policy_count = rec.get("policy_count")
@@ -156,7 +174,7 @@ def expand_rows(data: dict) -> list[dict]:
                     "state": rec.get("state") or "NE",
                     "age": int(rec["age"]),
                     "sex": rec["sex"],
-                    "smoker": bool(rec.get("tobacco")),
+                    "smoker": tobacco,
                     "term_years": int(rec["term"]),
                     "face_amount": int(rec["face"]),
                     "health_class": health,

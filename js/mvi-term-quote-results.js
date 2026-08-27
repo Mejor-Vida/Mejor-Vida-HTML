@@ -127,6 +127,8 @@
     var st = String(q.state || "NE").toUpperCase();
     var termYears = q.termYears || q.term_years || 20;
     var activeMode = q.underwritingMode || q.underwriting_mode || "full";
+    // Held aside because switching modes clears the live value.
+    var storedCarrier = q.quote_carrier || "";
     var coverage = snapCoverage(q.coverage || 250000, activeMode, age);
 
     if (!q.quote_low && !q.heightFt) {
@@ -192,9 +194,33 @@
       } catch (e) {}
     }
 
+    /** Names the company behind the quote when the API reports one. */
+    function policyIntroText(mode) {
+      if (mode === "simplified") {
+        return t(
+          "American Amicable Easy Term — sin examen médico, decisión rápida. Las tarifas suelen ser más altas que una póliza con suscripción completa.",
+          "American Amicable Easy Term — no medical exam, faster decision. Rates are typically higher than fully underwritten coverage."
+        );
+      }
+      var carrier = q.quote_carrier || "";
+      if (carrier) {
+        return t(
+          carrier + " — suscripción completa con examen médico o historial — las mejores tarifas si califica.",
+          carrier + " — full medical underwriting — best rates if you qualify."
+        );
+      }
+      return t(
+        "Suscripción completa con examen médico o historial — las mejores tarifas si califica.",
+        "Full medical underwriting — best rates if you qualify."
+      );
+    }
+
     function updateModeUi(mode) {
       activeMode = mode;
       q.underwritingMode = mode;
+      // The winning company differs per mode; drop the stale name until the
+      // new quote lands so the copy never credits the wrong carrier.
+      q.quote_carrier = "";
 
       if (modeToggle) {
         modeToggle.querySelectorAll("[data-mode]").forEach(function (btn) {
@@ -215,18 +241,7 @@
             ? t("Emisión simplificada", "Simplified issue")
             : t("Suscripción completa", "Fully underwritten");
       }
-      if (policyIntro) {
-        policyIntro.textContent =
-          mode === "simplified"
-            ? t(
-                "American Amicable Easy Term — sin examen médico, decisión rápida. Las tarifas suelen ser más altas que una póliza con suscripción completa.",
-                "American Amicable Easy Term — no medical exam, faster decision. Rates are typically higher than fully underwritten coverage."
-              )
-            : t(
-                "Transamerica Trendsetter Super — suscripción completa con examen médico o historial — las mejores tarifas si califica.",
-                "Transamerica Trendsetter Super — full medical underwriting — best rates if you qualify."
-              );
-      }
+      if (policyIntro) policyIntro.textContent = policyIntroText(mode);
       if (modeHint) {
         var maxFace = coverageAmountsForMode(mode, age);
         var maxAmt = maxFace[maxFace.length - 1] || 5000000;
@@ -275,15 +290,22 @@
       q.quote_high = data.quote_high;
       q.quote_anchor = data.quote_anchor;
       q.maxFace = data.max_face;
+      q.quote_carrier = data.quote_carrier || "";
+      if (policyIntro) policyIntro.textContent = policyIntroText(activeMode);
 
       if (lowLine) lowLine.textContent = data.quote_low;
       if (rangeHint) {
-        if (activeMode === "simplified" || data.quote_low === data.quote_high) {
+        if (activeMode === "simplified") {
           rangeHint.textContent =
             t(
               "Tarifa nivelada de Easy Term para su edad y cobertura.",
               "Level Easy Term rate for your age and coverage."
             );
+        } else if (data.quote_low === data.quote_high) {
+          rangeHint.textContent = t(
+            "Tarifa para su edad y cobertura si califica en la mejor clase de salud.",
+            "Rate for your age and coverage if you qualify in the best health class."
+          );
         } else {
           rangeHint.textContent = t(
             "Rango típico hasta " + data.quote_high + "/mes según aseguradora y salud.",
@@ -379,6 +401,7 @@
           quote_high: q.quote_high,
           quote_anchor: q.quote_anchor,
           max_face: q.maxFace,
+          quote_carrier: storedCarrier,
         },
         coverage
       );

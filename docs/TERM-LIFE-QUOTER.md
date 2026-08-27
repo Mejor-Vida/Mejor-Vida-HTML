@@ -47,10 +47,37 @@ Wizard tries **full** first; falls back to **simplified** when full has no data.
 | API | `POST /api/term-quote-site` |
 | Engine | `lib/term-quote-engine.js` |
 | Build chart | `lib/term-build-chart.js` (MOO TLA chart) |
-| Data | Supabase `term_carrier_premiums` |
+| Grid pricing | `lib/term-integrity-rates.js` |
+| Data — fully underwritten | Supabase `term_integrity_premiums` (appointed carriers only) |
+| Data — simplified issue | Supabase `term_carrier_premiums` (AmAm Easy Term) |
 | Lead sync | `POST /api/quote-lead-sync` (`source: nebraska_term_quote_page`) |
 
-## Rate data (required before live quotes)
+The two underwriting modes read different tables. `lib/term-quote-router.js` picks
+the table from the requested mode, so a change to one path cannot disturb the other.
+
+## Rate data — fully underwritten
+
+Quotes come from Integrity Connect marketplace harvests, restricted to carriers
+Mejor Vida is appointed with. The harvest lands on a grid of ages (5-year steps),
+terms (10/20/30), and face amounts, so `lib/term-integrity-rates.js` prices the
+exact age, term, and coverage a visitor asked for by reading between the two
+surrounding quoted points. A request outside a product's harvested range returns
+nothing for that product rather than an extrapolated guess.
+
+Health classes drive the low/high range: `preferred_plus_nt` sets the low end and
+`standard_nt` the high end. Tobacco users carry `preferred_t` / `standard_t`, and
+because carriers quote one tobacco rate rather than a class ladder, low and high
+come out equal for them.
+
+To refresh or extend the grid:
+
+1. `npm run bridge:browser` and turn the Chrome extension Bridge ON, logged into Integrity Connect
+2. `npm run term:harvest-integrity -- --health S --ages 25,30,35 --terms 10,20,30 --faces 100000,250000,500000,1000000`
+   (add `--tobacco true` for tobacco classes)
+3. `npm run term:import-integrity`
+4. `npm run term:rebuild-cost-rates` when the cost pages should pick up new ages
+
+## Rate data — simplified issue
 
 1. Add verified rows to `integrations/knowledge/Term_Life_Knowledge/term_carrier_premiums.csv`  
 2. Run `node scripts/build-term-premiums-migration.js`  
@@ -59,14 +86,23 @@ Wizard tries **full** first; falls back to **simplified** when full has no data.
 
 **Transamerica Trendsetter Super:** use `npm run harvest:winflex -- run --pilot` (see `integrations/knowledge/Term_Life_Knowledge/README.md`).
 
-**No fabricated rates.** Until CSV is populated, the API returns `no_data`.
+**No fabricated rates.** With no rows for a combination the API returns `no_data`,
+and the wizard falls back to the other underwriting mode.
 
-## Carriers (v1)
+## Carriers
 
-- **Transamerica** — Trendsetter Super (fully underwritten — WinFlex harvest)
-- **American Amicable** — Easy Term (simplified issue)
-- Mutual of Omaha — TLA/TLE (when WinFlex MOO access approved)
-- Assurity — Term Life (when Agent Center rates seeded)
+Fully underwritten (from the Integrity harvest, appointed only):
+
+- **Transamerica** — Trendsetter Super, Trendsetter LB
+- **Corebridge** — Select-a-Term, QoL Flex Term (incl. SimpliNow Choice)
+- **Mutual of Omaha** — Term Life Answers
+
+Simplified issue:
+
+- **American Amicable** — Easy Term
+
+The results page names whichever company won the quote via `quote_carrier`
+(`lib/term-carrier-names.js`), so the copy is never pinned to one carrier.
 
 ## Maximum face amounts (underwriting — Nebraska)
 

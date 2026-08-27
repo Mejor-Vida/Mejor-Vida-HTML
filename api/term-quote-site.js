@@ -16,6 +16,7 @@ const {
   maxFaceForUnderwritingMode,
   snapCoverageForMode,
 } = require("../lib/term-underwriting-mode");
+const { quoteSourceLabel } = require("../lib/term-carrier-names");
 
 function applyCors(req, res) {
   const origin = String(req.headers.origin || "").trim();
@@ -205,6 +206,7 @@ module.exports = async function handler(req, res) {
       build_cap: result.buildCap || "",
       underwriting_mode: underwritingMode,
       max_face: modeMaxFace,
+      quote_carrier: quoteSourceLabel(result.lowCarrier, result.lowProduct),
     });
   } catch (err) {
     console.error("term-quote-site error:", err);
