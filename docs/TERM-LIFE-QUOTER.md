@@ -69,13 +69,28 @@ Health classes drive the low/high range: `preferred_plus_nt` sets the low end an
 because carriers quote one tobacco rate rather than a class ladder, low and high
 come out equal for them.
 
+Only states with harvested rows are quotable. `QUOTABLE_STATES` in
+`api/term-quote-site.js` gates this — the wizard offers every licensed state, so
+a state listed there without rates would walk a shopper through the whole form
+and dead-end at the last step. Add a state to that list only after its import.
+
+Quotes read the newest `harvest_batch_id` for the requested state. Superseded
+batches stay in the table, and the engine takes the cheapest row it is handed,
+so without that scoping an old harvest could win with a retired price.
+
 To refresh or extend the grid:
 
 1. `npm run bridge:browser` and turn the Chrome extension Bridge ON, logged into Integrity Connect
-2. `npm run term:harvest-integrity -- --health S --ages 25,30,35 --terms 10,20,30 --faces 100000,250000,500000,1000000`
-   (add `--tobacco true` for tobacco classes)
+2. `npm run term:harvest-integrity -- --state NE --health S --ages 25,30,35 --terms 10,20,30 --faces 100000,250000,500000,1000000`
+   (add `--tobacco true` for tobacco classes; `--state` defaults to NE)
 3. `npm run term:import-integrity`
 4. `npm run term:rebuild-cost-rates` when the cost pages should pick up new ages
+
+`scripts/harvest-term-states.sh` walks the whole grid for several states
+(`STATES="KS CO NV" bash scripts/harvest-term-states.sh`). It aborts the moment
+Integrity logs out, because every later cell fails identically once the session
+drops. Sessions expire after a few hours, so expect to log back in and re-run;
+completed cells are keyed by state and are skipped on the next pass.
 
 ## Rate data — simplified issue
 

@@ -32,6 +32,11 @@ function json(res, status, payload) {
   res.send(JSON.stringify(payload));
 }
 
+// States with harvested rate rows behind them. The wizard offers every licensed
+// state, so anything listed here but unharvested would walk a shopper through
+// the whole form only to dead-end. Add a state once its rates are imported.
+const QUOTABLE_STATES = ["NE", "KS", "CO"];
+
 /** Reads the first supplied alias, keeping a legitimate 0 (as in 6'0"). */
 function firstSupplied(...values) {
   return values.find((v) => v !== undefined && v !== null && v !== "");
@@ -164,11 +169,11 @@ module.exports = async function handler(req, res) {
       .trim()
       .toUpperCase()
       .slice(0, 2);
-    if (state !== "NE") {
+    if (!QUOTABLE_STATES.includes(state)) {
       return json(res, 200, {
         ok: true,
         quote_status: "error",
-        quote_error: "Online term quotes are available for licensed states only (NE, KS, CO, NV).",
+        quote_error: `Online term quotes are available in ${QUOTABLE_STATES.join(", ")} right now. Call us for a quote in your state.`,
       });
     }
 

@@ -36,6 +36,9 @@ const OUT_PATH = path.join(ROOT, "js/term-life-cost-rates.json");
 /** Preferred display faces (lower then higher band). Only kept if CSV can price them. */
 const PREFERRED_FACES_LOW = [50000, 100000, 150000, 250000, 500000];
 const PREFERRED_FACES_HIGH = [750000, 1000000, 1500000, 2000000, 3000000];
+// The cost pages state Nebraska in their source note; keep the data matching.
+const COST_PAGE_STATE = "NE";
+
 const PREFERRED_TERMS = [10, 15, 20, 25, 30];
 const AGE_STEP = 5;
 const AGE_START = 20;
@@ -65,8 +68,15 @@ function loadRows() {
   for (const p of CSV_PATHS) {
     if (!fs.existsSync(p)) continue;
     const parsed = parseCsv(fs.readFileSync(p, "utf8"));
-    rows.push(...parsed);
-    console.log(`  loaded ${parsed.length} rows from ${path.basename(p)}`);
+    // The harvest CSV now carries several states. These pages quote Nebraska,
+    // so drop the rest rather than letting another state win a "lowest" cell.
+    const inState = parsed.filter(
+      (r) => !r.state || String(r.state).toUpperCase() === COST_PAGE_STATE
+    );
+    rows.push(...inState);
+    console.log(
+      `  loaded ${inState.length} of ${parsed.length} rows from ${path.basename(p)} (${COST_PAGE_STATE})`
+    );
   }
   return rows;
 }

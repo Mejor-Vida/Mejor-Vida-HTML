@@ -81,6 +81,7 @@ function parseArgs(argv) {
     faces: [100000, 250000, 500000, 750000, 1000000, 2000000],
     terms: [10, 20, 30],
     health: ["PP"],
+    state: "NE",
     tobacco: false,
     spotCheck: false,
     maxQuotes: 400,
@@ -111,6 +112,9 @@ function parseArgs(argv) {
       i++;
     } else if (a === "--health" && next) {
       args.health = next.split(",");
+      i++;
+    } else if (a === "--state" && next) {
+      args.state = String(next).trim().toUpperCase();
       i++;
     } else if (a === "--tobacco" && next) {
       args.tobacco = ["1", "true", "yes", "y"].includes(String(next).toLowerCase());
@@ -329,6 +333,7 @@ function parseCards() {
 }
 function pageKind() {
   const t = document.body.innerText || "";
+  if (/auth\\.integrity\\.com/i.test(location.host) || (/National Producer Number/i.test(t) && /Password/i.test(t))) return "login";
   if (/Product Specialties are required/i.test(t) && /Add Product Specialties/i.test(t)) return "specialty_required";
   if (/What type of Life Product\\?/.test(t)) return "product_picker";
   if (/confirm a few details/i.test(t)) return "demographics";
@@ -366,28 +371,56 @@ async function ensureQuickQuoteOpen(productLabel) {
   }
 
   if (kind === "life_wealth" || kind === "other") {
+    await waitForPage(LIFE_TILE_EXPR);
     await evalPage(`(() => {
       const life = [...document.querySelectorAll("div")].find(e => (e.textContent || "").trim() === "Life" && /_plan_/.test(String(e.className)));
       if (life) { life.click(); return true; }
       return false;
     })()`);
-    await sleep(1100);
+    await waitForPage(PRODUCT_PICKER_EXPR);
     kind = await evalPage(`(() => { ${HELPERS} return pageKind(); })()`);
   }
 
-  if (kind === "product_picker" || /What type of Life Product/.test(
-    await evalPage(`document.body.innerText`)
-  )) {
+  if (kind === "product_picker" || (await evalPage(PRODUCT_PICKER_EXPR))) {
     await evalPage(`(() => {
       ${HELPERS}
       const el = [...document.querySelectorAll("div")].find(e => (e.textContent || "").trim() === ${JSON.stringify(productLabel)} && (e.onclick || /selectItemLabel/.test(String(e.className))));
       if (el) { el.click(); return true; }
       return clickText(${JSON.stringify(productLabel)});
     })()`);
-    await sleep(1100);
+    await waitForPage(
+      `(() => { ${HELPERS} return pageKind() !== "product_picker"; })()`
+    );
   }
   return evalPage(`(() => { ${HELPERS} return pageKind(); })()`);
 }
+
+/**
+ * Polls a page expression until it reports true. The Quick Quote modal and the
+ * product picker mount well after their click, and a fixed sleep either wastes
+ * time or clicks into an empty overlay.
+ */
+async function waitForPage(expr, timeoutMs = 12000, everyMs = 400) {
+  const deadline = Date.now() + timeoutMs;
+  for (;;) {
+    try {
+      if (await evalPage(expr)) return true;
+    } catch (e) {
+      // A navigation mid-poll invalidates the context; keep waiting.
+    }
+    if (Date.now() >= deadline) return false;
+    await sleep(everyMs);
+  }
+}
+
+const LIFE_TILE_EXPR = `(() => !!([...document.querySelectorAll("div")].find(e => (e.textContent || "").trim() === "Life" && /_plan_/.test(String(e.className)))))()`;
+const PRODUCT_PICKER_EXPR = `(() => /What type of Life Product/i.test(document.body.innerText || ""))()`;
+
+/**
+ * Thrown when the Integrity session has expired. Every later cell would fail
+ * the same way, so the run stops instead of logging hours of empty sessions.
+ */
+class SessionExpiredError extends Error {}
 
 /** Force a brand-new quote session (age/gender change). */
 async function forceNewQuoteSession(productLabel) {
@@ -395,6 +428,11 @@ async function forceNewQuoteSession(productLabel) {
     url: "https://connect.integrity.com/agent/dashboard",
   });
   await sleep(2500);
+  if ((await evalPage(`(() => { ${HELPERS} return pageKind(); })()`)) === "login") {
+    throw new SessionExpiredError(
+      "Integrity Connect is logged out — log back in, then re-run to resume."
+    );
+  }
   for (let attempt = 0; attempt < 5; attempt++) {
     try {
       await evalPage(`(() => {
@@ -402,7 +440,7 @@ async function forceNewQuoteSession(productLabel) {
         if (qq) qq.click();
         return !!qq;
       })()`);
-      await sleep(1300);
+      await waitForPage(LIFE_TILE_EXPR);
       let kind = await evalPage(`(() => { ${HELPERS} return pageKind(); })()`);
       if (kind === "life_wealth" || kind === "other") {
         await evalPage(`(() => {
@@ -410,17 +448,19 @@ async function forceNewQuoteSession(productLabel) {
           if (life) life.click();
           return !!life;
         })()`);
-        await sleep(1200);
+        await waitForPage(PRODUCT_PICKER_EXPR);
         kind = await evalPage(`(() => { ${HELPERS} return pageKind(); })()`);
       }
-      if (kind === "product_picker" || /What type of Life Product/.test(await evalPage(`document.body.innerText`))) {
+      if (kind === "product_picker" || (await evalPage(PRODUCT_PICKER_EXPR))) {
         await evalPage(`(() => {
           ${HELPERS}
           const el = [...document.querySelectorAll("div")].find(e => (e.textContent || "").trim() === ${JSON.stringify(productLabel)} && (e.onclick || /selectItemLabel/.test(String(e.className))));
           if (el) el.click();
           return !!el;
         })()`);
-        await sleep(1300);
+        await waitForPage(
+          `(() => { ${HELPERS} return pageKind() !== "product_picker"; })()`
+        );
       }
       kind = await evalPage(`(() => { ${HELPERS} return pageKind(); })()`);
       if (kind === "specialty_required") {
@@ -830,6 +870,7 @@ async function startQuoteSession(args, sex, age) {
   let filled = await fillDemographics({
     sex,
     age,
+    state: args.state,
     tobacco: !!args.tobacco,
   });
   console.log("  demographics:", filled);
@@ -838,9 +879,21 @@ async function startQuoteSession(args, sex, age) {
     filled = await fillDemographics({
       sex,
       age,
+      state: args.state,
       tobacco: !!args.tobacco,
     });
     console.log("  demographics retry:", filled);
+  }
+  // A silently-ignored state pick would quote the wrong state's rates, so treat
+  // a mismatch as fatal rather than filing NE prices under another state.
+  if (
+    filled.stateText &&
+    String(filled.stateText).trim().toUpperCase() !== args.state
+  ) {
+    console.error(
+      `  STATE MISMATCH: asked for ${args.state}, form shows "${filled.stateText}"`
+    );
+    return false;
   }
   await sleep(400);
   let cont = await clickContinue();
@@ -920,10 +973,22 @@ async function main() {
     records = records.filter((r) => (r.product_type || "") !== dropType);
     console.log(`Force refresh: cleared ${dropType} records; kept ${records.length}`);
   }
+  // State belongs in the key: without it a second state's run reads the first
+  // state's rows as already harvested and quietly collects nothing.
+  const comboKey = (productType, sex, age, term, face, health, tobacco, state) =>
+    `${productType}|${sex}|${age}|${term}|${face}|${health}|${tobacco ? 1 : 0}|${state || "NE"}`;
   const seen = new Set(
-    records.map(
-      (r) =>
-        `${r.product_type || "fully_underwritten_term"}|${r.sex}|${r.age}|${r.term}|${r.face}|${r.health}|${r.tobacco ? 1 : 0}`
+    records.map((r) =>
+      comboKey(
+        r.product_type || "fully_underwritten_term",
+        r.sex,
+        r.age,
+        r.term,
+        r.face,
+        r.health,
+        r.tobacco,
+        r.state
+      )
     )
   );
 
@@ -936,7 +1001,16 @@ async function main() {
       for (const health of args.health) {
         for (const term of args.terms) {
           for (const face of args.faces) {
-            const key = `${productType}|${sex}|${age}|${term}|${face}|${health}|${args.tobacco ? 1 : 0}`;
+            const key = comboKey(
+              productType,
+              sex,
+              age,
+              term,
+              face,
+              health,
+              args.tobacco,
+              args.state
+            );
             if (!seen.has(key)) neededCombos.push({ health, term, face, key });
           }
         }
@@ -990,7 +1064,7 @@ async function main() {
             face: combo.face,
             health: combo.health,
             health_label: HEALTH_LABEL[combo.health] || combo.health,
-            state: "NE",
+            state: args.state,
             tobacco: !!args.tobacco,
           });
           rec.nearest_age = rec.best?.nearest_age || age;
@@ -1042,6 +1116,7 @@ async function main() {
           );
         }
       } catch (sessionErr) {
+        if (sessionErr instanceof SessionExpiredError) throw sessionErr;
         console.warn(
           `Session error ${sex} age ${age}:`,
           sessionErr.message || sessionErr

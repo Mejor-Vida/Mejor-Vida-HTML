@@ -212,6 +212,8 @@ Height/weight uses MOO TLA build chart (`lib/term-build-chart.js`) to cap the **
 
 ## Gaps (next)
 
+- **Nevada has no rows** — the Integrity session expired mid-run. Log in and re-run `STATES="NV" bash scripts/harvest-term-states.sh`
+- Colorado Standard-tobacco stopped at 72 of 216 cells in the same logout; re-run picks up where it left off
 - Terms 15 and 25 are read between the 10/20/30 grid rather than harvested directly
 - Tobacco faces above $2M (grid tops out at $1M for tobacco classes)
 - Standard+ (`standard_plus_nt`) and substandard classes not harvested
@@ -219,6 +221,7 @@ Height/weight uses MOO TLA build chart (`lib/term-build-chart.js`) to cap the **
 
 ## Done
 
+- States: Nebraska, Kansas, and Colorado harvested. Rates came back identical across all three for matching cells, so these carriers appear to price these products uniformly here
 - Health classes: Preferred Best, Preferred, and Standard non-tobacco; Preferred and Standard tobacco
 - Appointed-only public quoter filter (live — the quoter reads `is_mvi_appointed` rows only)
 - Full Integrity result sets (~30 cards) via result-page pagination
