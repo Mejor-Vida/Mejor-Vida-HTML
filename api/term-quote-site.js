@@ -35,7 +35,7 @@ function json(res, status, payload) {
 // States with harvested rate rows behind them. The wizard offers every licensed
 // state, so anything listed here but unharvested would walk a shopper through
 // the whole form only to dead-end. Add a state once its rates are imported.
-const QUOTABLE_STATES = ["NE", "KS", "CO"];
+const QUOTABLE_STATES = ["NE", "KS", "CO", "NV"];
 
 /** Reads the first supplied alias, keeping a legitimate 0 (as in 6'0"). */
 function firstSupplied(...values) {

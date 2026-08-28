@@ -70,9 +70,10 @@ because carriers quote one tobacco rate rather than a class ladder, low and high
 come out equal for them.
 
 Only states with harvested rows are quotable. `QUOTABLE_STATES` in
-`api/term-quote-site.js` gates this — the wizard offers every licensed state, so
-a state listed there without rates would walk a shopper through the whole form
-and dead-end at the last step. Add a state to that list only after its import.
+`api/term-quote-site.js` gates this (currently NE, KS, CO, and NV). The wizard
+offers every licensed state, so a state listed there without rates would walk a
+shopper through the whole form and dead-end at the last step. Add a state to
+that list only after its import.
 
 Quotes read the newest `harvest_batch_id` for the requested state. Superseded
 batches stay in the table, and the engine takes the cheapest row it is handed,
