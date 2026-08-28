@@ -1408,7 +1408,13 @@ function renderMain(carrier, lang) {
   const costHref = isEn
     ? "../children-life-insurance-cost.html"
     : "../costo-seguro-vida-infantil.html";
+  const guideHref = isEn
+    ? "../children-life-insurance.html"
+    : "../seguro-vida-infantil.html";
   const parentLink = isEn ? carrier.parentEn : carrier.parentEs;
+  const guideLabel = isEn
+    ? "Children's life insurance guide"
+    : "Guía de seguro de vida infantil";
   const costLabel = isEn ? "Children's life insurance cost" : "Costo del seguro de vida infantil";
   const parentLabel = isEn
     ? `${carrier.brand} carrier overview`
@@ -1443,7 +1449,7 @@ ${logo}
 </div>
 <h1 class="h2 fw-bold text-center mb-3" style="color:#1a365d;">${copy.h1}</h1>
 <p class="lead text-body-secondary text-center mb-3">${copy.lead}</p>
-<p class="text-center small mb-0"><a href="${costHref}">${costLabel}</a> · <a href="${parentLink}">${parentLabel}</a></p>
+<p class="text-center small mb-0"><a href="${guideHref}">${guideLabel}</a> · <a href="${costHref}">${costLabel}</a> · <a href="${parentLink}">${parentLabel}</a></p>
 </div>
 </section>
 

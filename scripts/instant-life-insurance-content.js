@@ -98,7 +98,7 @@ function copyInstant(lang) {
       kind5H: "Plazo con suscripción acelerada",
       kind5: "Es el camino para montos grandes sin examen. Mutual of Omaha cubre de 18 a 60 años hasta $2,000,000; Assurity no pide examen hasta $1,000,000 entre los 18 y 50 años, hasta $500,000 de 51 a 65 y hasta $100,000 de 66 a 75. Toma un poco más que una decisión instantánea, pero evita el laboratorio.",
       kind6H: "Vida infantil o nieto",
-      kind6: "Una póliza pequeña de vida entera para un menor, también simplificada. Transamerica emite Immediate Solution desde el nacimiento hasta los 17 años, con montos de $5,000 a $50,000. Ver <a href=\"costo-seguro-vida-infantil.html\">seguro de vida infantil</a>.",
+      kind6: "Una póliza pequeña de vida entera para un menor, también simplificada. Transamerica emite Immediate Solution desde el nacimiento hasta los 17 años, con montos típicos de $1,000 a $50,000. Ver la guía de <a href=\"seguro-vida-infantil.html\">seguro de vida infantil</a>.",
 
       startH: "Cuándo empieza de verdad su cobertura",
       startLead:
@@ -344,7 +344,7 @@ function copyInstant(lang) {
     kind5H: "Accelerated underwriting term",
     kind5: "This is the path to a large amount without an exam. Mutual of Omaha covers ages 18 to 60 up to $2,000,000; Assurity requires no exam up to $1,000,000 for ages 18 to 50, up to $500,000 for 51 to 65, and up to $100,000 for 66 to 75. It takes a little longer than an instant decision but skips the lab work.",
     kind6H: "A child or grandchild",
-    kind6: "A small whole life policy on a minor, also simplified. Transamerica issues Immediate Solution from birth through age 17, with amounts from $5,000 to $50,000. See <a href=\"children-life-insurance-cost.html\">children's life insurance</a>.",
+    kind6: "A small whole life policy on a minor, also simplified. Transamerica issues Immediate Solution from birth through age 17, with typical amounts from $1,000 to $50,000. See the <a href=\"children-life-insurance.html\">children's life insurance</a> guide.",
 
     startH: "When your coverage actually starts",
     startLead:
