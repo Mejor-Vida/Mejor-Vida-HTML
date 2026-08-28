@@ -100,7 +100,7 @@ function footerFor(lang) {
     const extra = `<script defer src="bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="js/mvi-funnel-track.js?v=20260702e"></script>
 <div data-api-url="/api/website-chat" id="mvi-assistant-root"></div>
-<script defer src="js/mvi-nav-questions.js?v=20260819-seniors85"></script>
+<script defer src="js/mvi-nav-questions.js?v=20260828-family"></script>
 <script defer src="js/website-assistant-widget.js?v=20260813-scroll-top"></script>
 <script>document.getElementById('year') && (document.getElementById('year').textContent = new Date().getFullYear());</script>
 `;
@@ -113,7 +113,7 @@ function footerFor(lang) {
   const extra = `<script defer src="../bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="../js/mvi-funnel-track.js?v=20260702e"></script>
 <div data-api-url="/api/website-chat" id="mvi-assistant-root"></div>
-<script defer src="../js/mvi-nav-questions.js?v=20260819-seniors85"></script>
+<script defer src="../js/mvi-nav-questions.js?v=20260828-family"></script>
 <script defer src="../js/website-assistant-widget.js?v=20260813-scroll-top"></script>
 <script>document.getElementById('year') && (document.getElementById('year').textContent = new Date().getFullYear());</script>
 `;
@@ -376,7 +376,7 @@ function headHtml(lang) {
 <link href="${prefix}css/site-footer.css" rel="stylesheet"/>
 <link href="${prefix}css/quote-flow-shared.css?v=20260723-mobile-menu" rel="stylesheet"/>
 <link href="${prefix}css/site-header.css?v=20260723-ver-precios-gold" rel="stylesheet"/>
-<link href="${prefix}css/nav-life-insurance.css?v=20260818-seniors" rel="stylesheet"/>
+<link href="${prefix}css/nav-life-insurance.css?v=20260828-findcard" rel="stylesheet"/>
 <link href="${prefix}css/life-insurance-cost.css?v=20260822-seniors-rail" rel="stylesheet"/>
 <link href="${prefix}css/mvi-assistant-widget.css?v=20260721-chat-z" rel="stylesheet"/>
 <link href="${prefix}css/fontawesome-mvi.min.css?v=20260723-brands-fix" rel="stylesheet"/>

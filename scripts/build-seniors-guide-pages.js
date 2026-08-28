@@ -19,6 +19,20 @@ const { copyInstant, instantMain } = require("./instant-life-insurance-content")
 const { copyMortgage, mortgageMain } = require("./mortgage-protection-insurance-content");
 const { copyChildren, childrenMain } = require("./children-life-insurance-content");
 const { copyGrandchildren, grandchildrenMain } = require("./grandchildren-life-insurance-content");
+const {
+  copyFamilyHub,
+  familyHubMain,
+  copyParents,
+  parentsMain,
+  copyGrandparents,
+  grandparentsMain,
+  copySiblings,
+  siblingsMain,
+  copyFamilyMembers,
+  familyMembersMain,
+  copyFindPolicy,
+  findPolicyMain,
+} = require("./family-life-insurance-content");
 const { quoteRailHtml } = require("./lic-quote-rail");
 const ES_HEADER = path.join(ROOT, "includes/site-header-inner.html");
 const EN_HEADER = path.join(ROOT, "includes/en-site-header.html");
@@ -149,6 +163,72 @@ const PAGES = {
       cache: "20260827-park",
     },
   },
+  familyHub: {
+    esFile: "seguro-vida-familia.html",
+    enFile: "family-life-insurance.html",
+    hero: {
+      base: "lic-hero-family-coast",
+      modifier: "familyhub",
+      width: 1024,
+      height: 575,
+      cache: "20260828-heroes",
+    },
+  },
+  parents: {
+    esFile: "seguro-vida-padres.html",
+    enFile: "parents-life-insurance.html",
+    hero: {
+      base: "lic-hero-family-tuscany",
+      modifier: "parents",
+      width: 1024,
+      height: 523,
+      cache: "20260828-heroes",
+    },
+  },
+  grandparents: {
+    esFile: "seguro-vida-abuelos.html",
+    enFile: "grandparents-life-insurance.html",
+    hero: {
+      base: "lic-hero-family-fuji",
+      modifier: "grandparents",
+      width: 1024,
+      height: 512,
+      cache: "20260828-heroes",
+    },
+  },
+  siblings: {
+    esFile: "seguro-vida-hermanos.html",
+    enFile: "siblings-life-insurance.html",
+    hero: {
+      base: "lic-hero-family-paine",
+      modifier: "siblings",
+      width: 1024,
+      height: 547,
+      cache: "20260828-heroes",
+    },
+  },
+  familyMembers: {
+    esFile: "seguro-vida-familiares.html",
+    enFile: "family-members-life-insurance.html",
+    hero: {
+      base: "lic-hero-family-deadvlei",
+      modifier: "members",
+      width: 1024,
+      height: 471,
+      cache: "20260828-heroes",
+    },
+  },
+  findPolicy: {
+    esFile: "buscar-poliza-vida.html",
+    enFile: "find-life-insurance-policy.html",
+    hero: {
+      base: "lic-hero-family-black-sand",
+      modifier: "findpolicy",
+      width: 1024,
+      height: 682,
+      cache: "20260828-heroes",
+    },
+  },
 };
 
 function escAttr(s) {
@@ -176,14 +256,14 @@ function footerFor(lang) {
   const extraEs = `<script defer src="bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="js/mvi-funnel-track.js?v=20260702e"></script>
 <div data-api-url="/api/website-chat" id="mvi-assistant-root"></div>
-<script defer src="js/mvi-nav-questions.js?v=20260822-gi"></script>
+<script defer src="js/mvi-nav-questions.js?v=20260828-family"></script>
 <script defer src="js/website-assistant-widget.js?v=20260813-scroll-top"></script>
 <script>document.getElementById('year') && (document.getElementById('year').textContent = new Date().getFullYear());</script>
 `;
   const extraEn = `<script defer src="../bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="../js/mvi-funnel-track.js?v=20260702e"></script>
 <div data-api-url="/api/website-chat" id="mvi-assistant-root"></div>
-<script defer src="../js/mvi-nav-questions.js?v=20260822-gi"></script>
+<script defer src="../js/mvi-nav-questions.js?v=20260828-family"></script>
 <script defer src="../js/website-assistant-widget.js?v=20260813-scroll-top"></script>
 <script>document.getElementById('year') && (document.getElementById('year').textContent = new Date().getFullYear());</script>
 `;
@@ -875,7 +955,14 @@ function headHtml(lang, page, c, kind) {
                     ? "lic-page lic-page--seniors lic-page--children"
                     : kind === "grandchildren"
                       ? "lic-page lic-page--seniors lic-page--children lic-page--grandchildren"
-                      : "lic-page lic-page--seniors";
+                      : kind === "familyHub" ||
+                          kind === "parents" ||
+                          kind === "grandparents" ||
+                          kind === "siblings" ||
+                          kind === "familyMembers" ||
+                          kind === "findPolicy"
+                        ? "lic-page lic-page--seniors lic-page--family"
+                        : "lic-page lic-page--seniors";
   const esUrl = `https://www.mejorvidainsurance.com/${page.esFile}`;
   const enUrl = `https://www.mejorvidainsurance.com/en/${page.enFile}`;
   const canonical = isEs ? esUrl : enUrl;
@@ -918,8 +1005,8 @@ function headHtml(lang, page, c, kind) {
 <link href="${prefix}css/site-footer.css" rel="stylesheet"/>
 <link href="${prefix}css/quote-flow-shared.css?v=20260723-mobile-menu" rel="stylesheet"/>
 <link href="${prefix}css/site-header.css?v=20260723-ver-precios-gold" rel="stylesheet"/>
-<link href="${prefix}css/nav-life-insurance.css?v=20260822-vida-buena" rel="stylesheet"/>
-<link href="${prefix}css/life-insurance-cost.css?v=20260827-cards2" rel="stylesheet"/>
+<link href="${prefix}css/nav-life-insurance.css?v=20260828-meal" rel="stylesheet"/>
+<link href="${prefix}css/life-insurance-cost.css?v=20260828-nextslim2" rel="stylesheet"/>
 <link href="${prefix}css/mvi-assistant-widget.css?v=20260721-chat-z" rel="stylesheet"/>
 <link href="${prefix}css/fontawesome-mvi.min.css?v=20260723-brands-fix" rel="stylesheet"/>
 <style>body { font-family: Inter, system-ui, -apple-system, sans-serif; }</style>
@@ -1816,6 +1903,7 @@ function giRatesPayload() {
 
 function examRateScripts(lang, kind) {
   const prefix = lang === "es" ? "" : "../";
+  if (kind === "findPolicy") return "";
   if (kind === "children" || kind === "grandchildren") {
     const payload = JSON.parse(
       fs.readFileSync(path.join(ROOT, "js/children-life-cost-rates.json"), "utf8")
@@ -1855,7 +1943,12 @@ function examRateScripts(lang, kind) {
 `;
   }
   const payload =
-    kind === "burial"
+    kind === "burial" ||
+    kind === "familyHub" ||
+    kind === "parents" ||
+    kind === "grandparents" ||
+    kind === "siblings" ||
+    kind === "familyMembers"
       ? burialRatesPayload()
       : kind === "crem"
         ? cremRatesPayload()
@@ -1880,6 +1973,12 @@ function copyFor(kind, lang) {
   if (kind === "mortgage") return copyMortgage(lang);
   if (kind === "children") return copyChildren(lang);
   if (kind === "grandchildren") return copyGrandchildren(lang);
+  if (kind === "familyHub") return copyFamilyHub(lang);
+  if (kind === "parents") return copyParents(lang);
+  if (kind === "grandparents") return copyGrandparents(lang);
+  if (kind === "siblings") return copySiblings(lang);
+  if (kind === "familyMembers") return copyFamilyMembers(lang);
+  if (kind === "findPolicy") return copyFindPolicy(lang);
   return copyBurial(lang);
 }
 
@@ -1894,6 +1993,12 @@ function mainFor(kind, lang, page, c) {
   if (kind === "mortgage") return mortgageMain(lang, page, c);
   if (kind === "children") return childrenMain(lang, page, c);
   if (kind === "grandchildren") return grandchildrenMain(lang, page, c);
+  if (kind === "familyHub") return familyHubMain(lang, page, c);
+  if (kind === "parents") return parentsMain(lang, page, c);
+  if (kind === "grandparents") return grandparentsMain(lang, page, c);
+  if (kind === "siblings") return siblingsMain(lang, page, c);
+  if (kind === "familyMembers") return familyMembersMain(lang, page, c);
+  if (kind === "findPolicy") return findPolicyMain(lang, page, c);
   return burialMain(lang, page, c);
 }
 
@@ -1939,6 +2044,18 @@ function main() {
     build("children", "en"),
     build("grandchildren", "es"),
     build("grandchildren", "en"),
+    build("familyHub", "es"),
+    build("familyHub", "en"),
+    build("parents", "es"),
+    build("parents", "en"),
+    build("grandparents", "es"),
+    build("grandparents", "en"),
+    build("siblings", "es"),
+    build("siblings", "en"),
+    build("familyMembers", "es"),
+    build("familyMembers", "en"),
+    build("findPolicy", "es"),
+    build("findPolicy", "en"),
   ];
   console.log("Wrote", written.length, "pages");
   written.forEach((p) => console.log(" ", path.relative(ROOT, p)));

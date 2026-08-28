@@ -36,9 +36,34 @@
   object-position: right center;
 }
 
-.lic-hero-media--children picture,
-.lic-hero-media--children img {
-  object-position: center 40%;
+.lic-hero-media--familyhub picture,
+.lic-hero-media--familyhub img {
+  object-position: 72% 42%;
+}
+
+.lic-hero-media--parents picture,
+.lic-hero-media--parents img {
+  object-position: 32% 42%;
+}
+
+.lic-hero-media--grandparents picture,
+.lic-hero-media--grandparents img {
+  object-position: 52% 38%;
+}
+
+.lic-hero-media--siblings picture,
+.lic-hero-media--siblings img {
+  object-position: 28% 42%;
+}
+
+.lic-hero-media--members picture,
+.lic-hero-media--members img {
+  object-position: 38% 48%;
+}
+
+.lic-hero-media--findpolicy picture,
+.lic-hero-media--findpolicy img {
+  object-position: 72% 40%;
 }
 
 .lic-hero-media--vida picture,
@@ -1803,6 +1828,272 @@ a.lic-co-card--link .lic-co-specs dd {
 .lic-fact-trio--color > div:nth-child(3) {
   border-top: 4px solid #0e7c8b;
   background: #ddf4f5;
+}
+
+.lic-role-ladder {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  margin: 1.25rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.lic-role-card {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 1.35rem 1.4rem 1.25rem;
+  background: #fff;
+  border: 1px solid #c5d4e8;
+  border-radius: 0.7rem;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.07);
+}
+
+@media (min-width: 640px) {
+  .lic-role-card {
+    display: grid;
+    grid-template-columns: 11.5rem minmax(0, 1fr);
+    grid-template-rows: auto auto auto 1fr;
+    column-gap: 1.35rem;
+    align-items: start;
+    padding: 1.45rem 1.55rem 1.35rem;
+  }
+
+  .lic-role-card__step {
+    grid-column: 1;
+    grid-row: 1 / -1;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.65rem;
+    margin: 0;
+    font-size: 0.82rem;
+    line-height: 1.25;
+    max-width: 10.5rem;
+  }
+
+  .lic-role-card__step span {
+    width: 2.15rem;
+    height: 2.15rem;
+    font-size: 1.05rem;
+  }
+
+  .lic-role-card h3,
+  .lic-role-card__can,
+  .lic-role-card__who,
+  .lic-role-card__people {
+    grid-column: 2;
+  }
+}
+
+.lic-role-card:nth-child(1) {
+  border-top: 5px solid #f5a623;
+  background: #fff8e8;
+}
+
+.lic-role-card:nth-child(2) {
+  border-top: 5px solid #0b3a7a;
+  background: #eef4fc;
+}
+
+.lic-role-card:nth-child(3) {
+  border-top: 5px solid #0e7c8b;
+  background: #e7f6f6;
+}
+
+.lic-role-card__step {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0 0 0.65rem;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #475569;
+}
+
+.lic-role-card__step span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.7rem;
+  height: 1.7rem;
+  border-radius: 999px;
+  background: #0b3a7a;
+  color: #fff;
+  font-size: 0.9rem;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.lic-role-card:nth-child(1) .lic-role-card__step span {
+  background: #c47d0a;
+}
+
+.lic-role-card:nth-child(3) .lic-role-card__step span {
+  background: #0e7c8b;
+}
+
+.lic-role-card h3 {
+  margin: 0 0 0.55rem;
+  font-size: 1.4rem;
+  font-weight: 800;
+  line-height: 1.25;
+  color: #0b3a7a;
+}
+
+.lic-role-card__can {
+  margin: 0 0 1rem;
+  font-size: 1.02rem;
+  line-height: 1.5;
+  color: #1f2937;
+}
+
+.lic-role-card__who {
+  margin: 0 0 0.45rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #64748b;
+}
+
+.lic-role-card__people {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.lic-role-card__people li {
+  margin: 0;
+  padding: 0.28rem 0.6rem;
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(11, 58, 122, 0.16);
+  border-radius: 999px;
+  font-size: 0.88rem;
+  line-height: 1.3;
+  color: #0b3a7a;
+  font-weight: 600;
+}
+
+.lic-next-band {
+  padding: 0;
+  background: transparent;
+  box-shadow: none;
+  overflow: visible;
+}
+
+.lic-next-band__inner {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 0.85rem 1.15rem;
+  overflow: hidden;
+  border-radius: 0.7rem;
+  background: #0b3a7a;
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(11, 58, 122, 0.18);
+}
+
+.lic-next-band__copy {
+  min-width: 0;
+}
+
+.lic-next-band h2 {
+  margin: 0 0 0.25rem;
+  color: #fff;
+  font-size: 1.22rem;
+  line-height: 1.2;
+}
+
+.lic-next-band__copy > p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.lic-next-band__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.lic-next-band__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 0.95rem;
+  border-radius: 0.45rem;
+  font-weight: 800;
+  text-decoration: none;
+  font-size: 0.9rem;
+  line-height: 1.2;
+}
+
+.lic-next-band__btn--gold {
+  background: #fec963;
+  color: #1a202c;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
+}
+
+.lic-next-band__btn--gold:hover,
+.lic-next-band__btn--gold:focus-visible {
+  background: #f5b942;
+  color: #1a202c;
+}
+
+.lic-next-band__btn--ghost {
+  background: transparent;
+  color: #fff;
+  border: 2px solid rgba(255, 255, 255, 0.78);
+}
+
+.lic-next-band__btn--ghost:hover,
+.lic-next-band__btn--ghost:focus-visible {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  border-color: #fec963;
+}
+
+.lic-next-band__more {
+  margin: 0.4rem 0 0;
+  font-size: 0.84rem;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.lic-next-band__more a {
+  color: #fec963;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.lic-next-band__more a:hover,
+.lic-next-band__more a:focus-visible {
+  text-decoration: underline;
+  color: #ffe08a;
+}
+
+@media (min-width: 720px) {
+  .lic-next-band__inner {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 0.75rem 1.25rem;
+    padding: 0.7rem 1.15rem;
+  }
+
+  .lic-next-band__copy {
+    flex: 1 1 18rem;
+    max-width: 36rem;
+  }
 }
 
 .lic-carrier-list {

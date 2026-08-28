@@ -693,6 +693,69 @@
     "keepPng": false
   },
   {
+    "src": "img/lic-hero-family-coast.jpg",
+    "base": "lic-hero-family-coast",
+    "width": 1024,
+    "height": 575,
+    "webp": "img/opt/lic-hero-family-coast.webp",
+    "fallback": "img/opt/lic-hero-family-coast.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/lic-hero-family-tuscany.jpg",
+    "base": "lic-hero-family-tuscany",
+    "width": 1024,
+    "height": 523,
+    "webp": "img/opt/lic-hero-family-tuscany.webp",
+    "fallback": "img/opt/lic-hero-family-tuscany.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/lic-hero-family-fuji.jpg",
+    "base": "lic-hero-family-fuji",
+    "width": 1024,
+    "height": 512,
+    "webp": "img/opt/lic-hero-family-fuji.webp",
+    "fallback": "img/opt/lic-hero-family-fuji.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/lic-hero-family-paine.jpg",
+    "base": "lic-hero-family-paine",
+    "width": 1024,
+    "height": 547,
+    "webp": "img/opt/lic-hero-family-paine.webp",
+    "fallback": "img/opt/lic-hero-family-paine.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/lic-hero-family-deadvlei.jpg",
+    "base": "lic-hero-family-deadvlei",
+    "width": 1024,
+    "height": 471,
+    "webp": "img/opt/lic-hero-family-deadvlei.webp",
+    "fallback": "img/opt/lic-hero-family-deadvlei.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/lic-hero-family-black-sand.jpg",
+    "base": "lic-hero-family-black-sand",
+    "width": 1024,
+    "height": 682,
+    "webp": "img/opt/lic-hero-family-black-sand.webp",
+    "fallback": "img/opt/lic-hero-family-black-sand.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/nav-family-guide-meal.jpg",
+    "base": "nav-family-guide-meal",
+    "width": 1024,
+    "height": 539,
+    "webp": "img/opt/nav-family-guide-meal.webp",
+    "fallback": "img/opt/nav-family-guide-meal.jpg",
+    "keepPng": false
+  },
+  {
     "src": "img/fep-hero-rainforest.jpg",
     "base": "fep-hero-rainforest",
     "width": 1024,

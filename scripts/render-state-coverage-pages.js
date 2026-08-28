@@ -973,7 +973,7 @@ function renderEs(code) {
 <link href="${prefix}css/nav-questions-dropdown.css" rel="stylesheet"/>
 <link href="${prefix}css/nav-about-mega.css?v=20260728-help-bg" rel="stylesheet"/>
 <link href="${prefix}css/nav-funeral-resources.css?v=20260728-photo-stronger" rel="stylesheet"/>
-<link href="${prefix}css/nav-life-insurance.css?v=20260818-seniors" rel="stylesheet"/>
+<link href="${prefix}css/nav-life-insurance.css?v=20260828-findcard" rel="stylesheet"/>
 <meta property="og:type" content="website"/>
 <meta property="og:title" content="${esc(title)}"/>
 <meta property="og:description" content="${esc(desc)}"/>
@@ -1034,7 +1034,7 @@ ${loadFooterEs()}
 <script>document.getElementById('year').textContent=new Date().getFullYear();</script>
 <script defer src="${prefix}bootstrap/js/bootstrap.bundle.min.js"></script>
 <script defer src="${prefix}script.js"></script>
-<script defer src="${prefix}js/mvi-nav-questions.js?v=20260818-seniors"></script>
+<script defer src="${prefix}js/mvi-nav-questions.js?v=20260828-family"></script>
 <script defer src="${prefix}js/mvi-licensing-map.js?v=20260726-lic-popup"></script>
 <div data-api-url="/api/website-chat" id="mvi-assistant-root"></div>
 <script defer src="${prefix}js/website-assistant-widget.js"></script>
@@ -1080,7 +1080,7 @@ function renderEn(code) {
 <link href="${root}css/nav-questions-dropdown.css" rel="stylesheet"/>
 <link href="${root}css/nav-about-mega.css?v=20260728-help-bg" rel="stylesheet"/>
 <link href="${root}css/nav-funeral-resources.css?v=20260728-photo-stronger" rel="stylesheet"/>
-<link href="${root}css/nav-life-insurance.css?v=20260818-seniors" rel="stylesheet"/>
+<link href="${root}css/nav-life-insurance.css?v=20260828-findcard" rel="stylesheet"/>
 <meta property="og:type" content="website"/>
 <meta property="og:title" content="${esc(title)}"/>
 <meta property="og:description" content="${esc(desc)}"/>
@@ -1140,7 +1140,7 @@ ${loadFooterEn()}
 <script>document.getElementById('year').textContent=new Date().getFullYear();</script>
 <script defer src="${root}bootstrap/js/bootstrap.bundle.min.js"></script>
 <script defer src="${root}script.js"></script>
-<script defer src="${root}js/mvi-nav-questions.js?v=20260818-seniors"></script>
+<script defer src="${root}js/mvi-nav-questions.js?v=20260828-family"></script>
 <script defer src="${root}js/mvi-licensing-map.js?v=20260726-lic-popup"></script>
 <div data-api-url="/api/website-chat" id="mvi-assistant-root"></div>
 <script defer src="${root}js/website-assistant-widget.js"></script>

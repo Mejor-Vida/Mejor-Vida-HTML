@@ -44,7 +44,7 @@
 <link href="../css/nav-questions-dropdown.css" rel="stylesheet"/>
 <link href="../css/nav-about-mega.css?v=20260721-lip-page" rel="stylesheet"/>
 <link href="../css/nav-funeral-resources.css?v=20260728-photo-stronger" rel="stylesheet"/>
-<link href="../css/nav-life-insurance.css?v=20260818-seniors" rel="stylesheet"/>
+<link href="../css/nav-life-insurance.css?v=20260828-family" rel="stylesheet"/>
 
 <link href="../css/site-footer.css?v=20260721-lip-page" rel="stylesheet"/>
 <link href="../css/mvi-assistant-widget.css?v=20260721-chat-z" rel="stylesheet"/>
@@ -502,6 +502,10 @@
          <i class="fas fa-handshake" aria-hidden="true"></i>
          <span>Para mayores</span>
         </button>
+        <button type="button" class="nav-life-category" data-life-panel="family" aria-pressed="false">
+         <i class="fas fa-heart" aria-hidden="true"></i>
+         <span>Para la familia</span>
+        </button>
         <button type="button" class="nav-life-category" data-life-panel="by-state" aria-pressed="false">
          <img class="nav-life-usa-icon" src="../img/icons/usa-map-icon.svg" alt="" width="18" height="11" decoding="async" aria-hidden="true" />
          <span>Cobertura por estado</span>
@@ -624,6 +628,42 @@
          <picture>
           <source type="image/webp" srcset="../img/opt/lic-hero-fly-fishing.webp" />
           <img src="../img/opt/lic-hero-fly-fishing.jpg" alt="" width="1024" height="752" loading="lazy" decoding="async" />
+         </picture>
+        </div>
+       </a>
+       </div>
+       <div class="nav-life-panel" data-life-panel="family" hidden>
+       <div class="nav-life-options">
+        <h3>Cobertura para la familia</h3>
+        <div class="nav-life-options-grid nav-life-options-grid--family">
+         <a href="../seguro-vida-padres.html">Padres</a>
+         <a href="../seguro-vida-abuelos.html">Abuelos</a>
+         <a href="../seguro-vida-hermanos.html">Hermanos</a>
+         <a href="../seguro-vida-familiares.html">Otros familiares</a>
+         <a href="../seguro-vida-nietos.html">Nietos</a>
+        </div>
+       </div>
+       <a class="nav-life-feature nav-life-feature--family-hub" href="../seguro-vida-familia.html">
+        <div class="nav-life-feature-copy">
+         <h3>Guía de seguro para la familia</h3>
+         <p>Quién firma, quién es dueño y qué producto encaja.</p>
+        </div>
+        <div class="nav-life-feature-media" aria-hidden="true">
+         <picture>
+          <source type="image/webp" srcset="../img/opt/nav-family-guide-meal.webp?v=20260828-meal" />
+          <img src="../img/opt/nav-family-guide-meal.jpg?v=20260828-meal" alt="" width="1024" height="539" loading="lazy" decoding="async" />
+         </picture>
+        </div>
+       </a>
+       <a class="nav-life-feature nav-life-feature--family-find" href="../buscar-poliza-vida.html">
+        <div class="nav-life-feature-copy">
+         <h3>Buscar una póliza</h3>
+         <p>Vea si alguien ya tenía seguro de vida.</p>
+        </div>
+        <div class="nav-life-feature-media" aria-hidden="true">
+         <picture>
+          <source type="image/webp" srcset="../img/opt/lic-hero-family-black-sand.webp?v=20260828-heroes" />
+          <img src="../img/opt/lic-hero-family-black-sand.jpg?v=20260828-heroes" alt="" width="1024" height="682" loading="lazy" decoding="async" />
          </picture>
         </div>
        </a>
@@ -812,6 +852,12 @@
      <a href="../seguro-para-cremacion.html" class="mobile-menu-link">Seguro para cremación</a>
      <a href="../seguro-vida-infantil.html" class="mobile-menu-link">Seguro de vida infantil</a>
      <a href="../seguro-vida-nietos.html" class="mobile-menu-link">Seguro de vida para nietos</a>
+     <a href="../seguro-vida-familia.html" class="mobile-menu-link">Seguro de vida para la familia</a>
+     <a href="../seguro-vida-padres.html" class="mobile-menu-link">Seguro de vida para padres</a>
+     <a href="../seguro-vida-abuelos.html" class="mobile-menu-link">Seguro de vida para abuelos</a>
+     <a href="../seguro-vida-hermanos.html" class="mobile-menu-link">Seguro de vida para hermanos</a>
+     <a href="../seguro-vida-familiares.html" class="mobile-menu-link">Seguro para otros familiares</a>
+     <a href="../buscar-poliza-vida.html" class="mobile-menu-link">Buscar si alguien tenía una póliza</a>
      <a href="../guia-seguro-vida-mayores.html" class="mobile-menu-link">Guía completa de vida para mayores</a>
      <a href="../guia-seguro-entierro-mayores.html" class="mobile-menu-link">Guía de entierro</a>
      <a href="../seguro-vida-mayores-80.html" class="mobile-menu-link">Mayores de 80 años</a>
@@ -1094,7 +1140,7 @@
 <script defer src="../script.js"></script>
 
 <div data-api-url="/api/website-chat" data-mvi-avatar-base="/img/mvi-chat-avatar" id="mvi-assistant-root"></div>
-<script defer src="../js/mvi-nav-questions.js?v=20260818-seniors"></script>
+<script defer src="../js/mvi-nav-questions.js?v=20260828-family"></script>
 <script defer="" src="../js/website-assistant-widget.js?v=20260813-scroll-top"></script>
 </body>
 </html>
