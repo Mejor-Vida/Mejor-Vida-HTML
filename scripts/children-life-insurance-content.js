@@ -73,13 +73,85 @@ function copyChildren(lang) {
 
       kindsH: "Qué productos usamos para niños",
       kindsLead:
-        "Estos nombres son de compañías con las que trabajamos. Los montos y edades son de nuestros materiales de producto, no de un anuncio genérico.",
+        "Estos nombres son de compañías con las que trabajamos. Los montos y edades son de nuestros materiales de producto, no de un anuncio genérico. Cada renglón es un producto distinto.",
       kind1H: "Vida entera a nombre del niño",
-      kind1:
-        "<strong>Mutual of Omaha Children’s Whole Life</strong>: 14 días a 17 años, unos $5,000–$50,000, sin examen. Puede incluir asegurabilidad garantizada (comprar más después sin nuevas preguntas de salud) y una pausa breve de primas si el dueño fallece (suele aplicar después de 24 meses). <strong>Transamerica Immediate Solution</strong>: el niño puede ser el asegurado; montos infantiles típicos $1,000–$50,000; beneficio completo desde el día 1 si se emite como Immediate. <strong>Assurity Protect+ / Perform+</strong>: desde 15 días; el mismo producto cubre también adultos; en niños 15 días–17 muchos casos hasta unos $300,000 sin examen. La propiedad suele pasar al hijo a los 25. <strong>Americo AdvantageWL</strong>: 0–17 años, mínimo unos $15,000. <strong>American Amicable Family Solution / Family Choice</strong>: 0–49 años, desde unos $10,000, tope típico de beneficio inmediato unos $35,000.",
+      kindPerm: [
+        [
+          "Mutual of Omaha Children’s Whole Life",
+          [
+            "14 días a 17 años",
+            "Unos $5,000–$50,000 · sin examen",
+            "Puede comprar más después sin nuevas preguntas de salud",
+            "Pausa breve de primas si el dueño fallece (después de 24 meses)",
+          ],
+        ],
+        [
+          "Transamerica Immediate Solution",
+          [
+            "El niño puede ser el asegurado",
+            "Montos infantiles típicos $1,000–$50,000",
+            "Beneficio completo desde el día 1 si se emite como Immediate",
+          ],
+        ],
+        [
+          "Assurity Protect+ / Perform+",
+          [
+            "Desde 15 días · el mismo producto cubre también adultos",
+            "Hasta unos $300,000 sin examen en muchos casos infantiles",
+            "La propiedad suele pasar al hijo a los 25",
+          ],
+        ],
+        [
+          "Americo AdvantageWL",
+          ["0–17 años", "Mínimo unos $15,000"],
+        ],
+        [
+          "American Amicable Family Solution / Family Choice",
+          [
+            "0–49 años",
+            "Desde unos $10,000",
+            "Tope típico de beneficio inmediato unos $35,000",
+          ],
+        ],
+      ],
       kind2H: "Rider en la póliza de un adulto",
-      kind2:
-        "<strong>Aetna Accendo Level</strong>: extra temporal en pasos de unos $2,500, hasta unos $10,000 por hijo. <strong>Mutual of Omaha</strong>: rider infantil a menudo limitado a unos $10,000 por hijo. <strong>Transamerica</strong>: extra hijo/nieto en Immediate Solution, dueño 18–75, hijo 15 días–18, hasta 9 menores, tope típico $5,000 por hijo, conversión posible tras 2 años. <strong>Corebridge Select-a-Term</strong>: unos $1,000–$25,000, suele durar hasta los 25. <strong>Americo Eagle Select</strong>: rider hijo/nieto, 15 días hasta menos de 17. <strong>Assurity</strong>: rider de término infantil 15 días–17, unos $5,000–$25,000, suele terminar cerca de los 25.",
+      kindTemp: [
+        [
+          "Aetna Accendo Level",
+          [
+            "Extra temporal en pasos de unos $2,500",
+            "Hasta unos $10,000 por hijo",
+          ],
+        ],
+        [
+          "Mutual of Omaha",
+          ["Rider infantil", "A menudo tope de unos $10,000 por hijo"],
+        ],
+        [
+          "Transamerica Immediate Solution",
+          [
+            "Extra hijo/nieto · dueño 18–75",
+            "Hijo 15 días–18 · hasta 9 menores",
+            "Tope típico $5,000 por hijo · conversión posible tras 2 años",
+          ],
+        ],
+        [
+          "Corebridge Select-a-Term",
+          ["Unos $1,000–$25,000", "Suele durar hasta los 25"],
+        ],
+        [
+          "Americo Eagle Select",
+          ["Rider hijo/nieto", "15 días hasta menos de 17 años"],
+        ],
+        [
+          "Assurity",
+          [
+            "Rider de término infantil 15 días–17",
+            "Unos $5,000–$25,000",
+            "Suele terminar cerca de los 25",
+          ],
+        ],
+      ],
 
       costH: "Cuánto cuesta una póliza infantil",
       costP:
@@ -130,7 +202,7 @@ function copyChildren(lang) {
         "La póliza propia que cotizamos es casi siempre vida entera. El temporal aparece como rider en la póliza de un adulto y se acaba a una edad. Si quiere que el hijo se quede con una póliza de por vida, use la vía permanente.",
       faq3q: "¿Puede un abuelo comprar?",
       faq3a:
-        "A menudo sí, si la compañía lo permite y hay interés asegurable. Mutual of Omaha y Transamerica lo contemplan en estos productos. Pida las reglas de firmas antes de aplicar.",
+        'A menudo sí, si la compañía lo permite y hay interés asegurable. Mutual of Omaha y Transamerica lo contemplan en estos productos. Las firmas no son iguales en todas las compañías. Vea la guía de <a href="seguro-vida-nietos.html">seguro de vida para nietos</a>.',
       faq4q: "¿Hay examen médico?",
       faq4a:
         "En la vida entera infantil simplificada que colocamos, casi nunca en un consultorio. Sí hay preguntas. Montos grandes pueden pedir más revisión.",
@@ -231,13 +303,85 @@ function copyChildren(lang) {
 
     kindsH: "Which products we use for children",
     kindsLead:
-      "These names are from companies we work with. Ages and amounts come from our product materials, not a generic ad.",
+      "These names are from companies we work with. Ages and amounts come from our product materials, not a generic ad. Each line is a different product.",
     kind1H: "Whole life in the child’s name",
-    kind1:
-      "<strong>Mutual of Omaha Children’s Whole Life</strong>: ages 14 days–17, about $5,000–$50,000, no exam. Can include guaranteed insurability (buy more later without new health questions) and a short premium pause if the owner dies (usually after 24 months in force). <strong>Transamerica Immediate Solution</strong>: the child can be the insured; typical kids amounts $1,000–$50,000; full benefit from day one when issued as Immediate. <strong>Assurity Protect+ / Perform+</strong>: from 15 days; the same product family also covers adults; for ages 15 days–17 many cases up to about $300,000 with no exam. Ownership typically moves to the child at 25. <strong>Americo AdvantageWL</strong>: ages 0–17, about $15,000 minimum. <strong>American Amicable Family Solution / Family Choice</strong>: ages 0–49, from about $10,000, typical immediate-benefit max about $35,000.",
+    kindPerm: [
+      [
+        "Mutual of Omaha Children’s Whole Life",
+        [
+          "Ages 14 days–17",
+          "About $5,000–$50,000 · no exam",
+          "Can buy more later without new health questions",
+          "Short premium pause if the owner dies (usually after 24 months)",
+        ],
+      ],
+      [
+        "Transamerica Immediate Solution",
+        [
+          "The child can be the insured",
+          "Typical kids amounts $1,000–$50,000",
+          "Full benefit from day one when issued as Immediate",
+        ],
+      ],
+      [
+        "Assurity Protect+ / Perform+",
+        [
+          "From 15 days · the same product family also covers adults",
+          "Many kids cases up to about $300,000 with no exam",
+          "Ownership typically moves to the child at 25",
+        ],
+      ],
+      [
+        "Americo AdvantageWL",
+        ["Ages 0–17", "About $15,000 minimum"],
+      ],
+      [
+        "American Amicable Family Solution / Family Choice",
+        [
+          "Ages 0–49",
+          "From about $10,000",
+          "Typical immediate-benefit max about $35,000",
+        ],
+      ],
+    ],
     kind2H: "A rider on an adult’s policy",
-    kind2:
-      "<strong>Aetna Accendo Level</strong>: temporary extra in about $2,500 steps, up to about $10,000 per child. <strong>Mutual of Omaha</strong>: child rider often capped near $10,000 per child. <strong>Transamerica</strong>: child/grandchild extra on Immediate Solution, owner ages 18–75, child 15 days–18, up to 9 minors, typical cap $5,000 per child, conversion may be available after 2 years. <strong>Corebridge Select-a-Term</strong>: about $1,000–$25,000, often through age 25. <strong>Americo Eagle Select</strong>: child/grandchild rider, 15 days through under 17. <strong>Assurity</strong>: children’s term rider ages 15 days–17, about $5,000–$25,000, usually ends near 25.",
+    kindTemp: [
+      [
+        "Aetna Accendo Level",
+        [
+          "Temporary extra in about $2,500 steps",
+          "Up to about $10,000 per child",
+        ],
+      ],
+      [
+        "Mutual of Omaha",
+        ["Child rider", "Often capped near $10,000 per child"],
+      ],
+      [
+        "Transamerica Immediate Solution",
+        [
+          "Child/grandchild extra · owner 18–75",
+          "Child 15 days–18 · up to 9 minors",
+          "Typical cap $5,000 per child · conversion may be available after 2 years",
+        ],
+      ],
+      [
+        "Corebridge Select-a-Term",
+        ["About $1,000–$25,000", "Often through age 25"],
+      ],
+      [
+        "Americo Eagle Select",
+        ["Child/grandchild rider", "15 days through under 17"],
+      ],
+      [
+        "Assurity",
+        [
+          "Children’s term rider ages 15 days–17",
+          "About $5,000–$25,000",
+          "Usually ends near 25",
+        ],
+      ],
+    ],
 
     costH: "What a children’s policy costs",
     costP:
@@ -288,7 +432,7 @@ function copyChildren(lang) {
       "The own-policy path we quote is almost always whole life. Term shows up as a rider on an adult policy and ends at a set age. If you want the child to keep a lifetime policy, use the permanent path.",
     faq3q: "Can a grandparent buy?",
     faq3a:
-      "Often yes, if the company allows it and there is an insurable interest. Mutual of Omaha and Transamerica provide for this on these products. Ask about signature rules before you apply.",
+      'Often yes, if the company allows it and there is an insurable interest. Mutual of Omaha and Transamerica provide for this on these products. Signature rules are not the same at every company. See the <a href="grandchildren-life-insurance.html">life insurance for grandchildren</a> guide.',
     faq4q: "Is there a medical exam?",
     faq4a:
       "On the simplified children’s whole life we place, almost never in an office. There are still questions. Larger amounts may need more review.",
@@ -320,6 +464,16 @@ function copyChildren(lang) {
     src3: "Product materials from companies we work with: Mutual of Omaha Children’s Whole Life; Assurity Protect+ / Perform+; Transamerica Immediate Solution and child/grandchild rider; American Amicable Family Solution / Family Choice and riders; Aetna Accendo Level / Protection Series; Corebridge Select-a-Term and American Elite; Americo AdvantageWL and Eagle Select.",
     src4: "Sample premiums: appointed companies, simplified-issue children’s whole life, August 2026. Educational — not binding.",
   };
+}
+
+function carrierListHtml(items) {
+  return `<ul class="lic-carrier-list">${(items || [])
+    .map(([name, facts]) => {
+      const lines = Array.isArray(facts) ? facts : [facts];
+      const inner = lines.map((line) => `<li>${line}</li>`).join("");
+      return `<li><strong>${name}</strong><ul>${inner}</ul></li>`;
+    })
+    .join("")}</ul>`;
 }
 
 function childrenMain(lang, page, c) {
@@ -438,12 +592,13 @@ ${pathRow(c.pathR5H, c.pathR5a, c.pathR5b)}
 <div>
 <p class="lic-fact-kicker">${isEs ? "Camino permanente" : "Permanent path"}</p>
 <h3>${c.kind1H}</h3>
-<p>${c.kind1} <a href="${moo}">Mutual of Omaha</a> · <a href="${ta}">Transamerica</a> · <a href="${assurity}">Assurity</a>.</p>
+${carrierListHtml(c.kindPerm)}
+<p class="lic-carrier-links"><a href="${moo}">Mutual of Omaha</a> · <a href="${ta}">Transamerica</a> · <a href="${assurity}">Assurity</a>.</p>
 </div>
 <div>
 <p class="lic-fact-kicker">${isEs ? "Camino temporal" : "Temporary path"}</p>
 <h3>${c.kind2H}</h3>
-<p>${c.kind2}</p>
+${carrierListHtml(c.kindTemp)}
 </div>
 </div>
 </section>

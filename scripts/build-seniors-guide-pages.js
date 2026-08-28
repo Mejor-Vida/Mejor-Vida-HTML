@@ -18,6 +18,7 @@ const { copyTerm, termMain } = require("./term-life-insurance-content");
 const { copyInstant, instantMain } = require("./instant-life-insurance-content");
 const { copyMortgage, mortgageMain } = require("./mortgage-protection-insurance-content");
 const { copyChildren, childrenMain } = require("./children-life-insurance-content");
+const { copyGrandchildren, grandchildrenMain } = require("./grandchildren-life-insurance-content");
 const { quoteRailHtml } = require("./lic-quote-rail");
 const ES_HEADER = path.join(ROOT, "includes/site-header-inner.html");
 const EN_HEADER = path.join(ROOT, "includes/en-site-header.html");
@@ -135,6 +136,17 @@ const PAGES = {
       width: 1024,
       height: 682,
       cache: "20260814-playground2",
+    },
+  },
+  grandchildren: {
+    esFile: "seguro-vida-nietos.html",
+    enFile: "grandchildren-life-insurance.html",
+    hero: {
+      base: "lic-hero-grandchildren-park",
+      modifier: "grandkids",
+      width: 1024,
+      height: 682,
+      cache: "20260827-park",
     },
   },
 };
@@ -861,7 +873,9 @@ function headHtml(lang, page, c, kind) {
                   ? "lic-page lic-page--seniors lic-page--mortgage"
                   : kind === "children"
                     ? "lic-page lic-page--seniors lic-page--children"
-                    : "lic-page lic-page--seniors";
+                    : kind === "grandchildren"
+                      ? "lic-page lic-page--seniors lic-page--children lic-page--grandchildren"
+                      : "lic-page lic-page--seniors";
   const esUrl = `https://www.mejorvidainsurance.com/${page.esFile}`;
   const enUrl = `https://www.mejorvidainsurance.com/en/${page.enFile}`;
   const canonical = isEs ? esUrl : enUrl;
@@ -905,7 +919,7 @@ function headHtml(lang, page, c, kind) {
 <link href="${prefix}css/quote-flow-shared.css?v=20260723-mobile-menu" rel="stylesheet"/>
 <link href="${prefix}css/site-header.css?v=20260723-ver-precios-gold" rel="stylesheet"/>
 <link href="${prefix}css/nav-life-insurance.css?v=20260822-vida-buena" rel="stylesheet"/>
-<link href="${prefix}css/life-insurance-cost.css?v=20260827-kinds" rel="stylesheet"/>
+<link href="${prefix}css/life-insurance-cost.css?v=20260827-cards2" rel="stylesheet"/>
 <link href="${prefix}css/mvi-assistant-widget.css?v=20260721-chat-z" rel="stylesheet"/>
 <link href="${prefix}css/fontawesome-mvi.min.css?v=20260723-brands-fix" rel="stylesheet"/>
 <style>body { font-family: Inter, system-ui, -apple-system, sans-serif; }</style>
@@ -1802,7 +1816,7 @@ function giRatesPayload() {
 
 function examRateScripts(lang, kind) {
   const prefix = lang === "es" ? "" : "../";
-  if (kind === "children") {
+  if (kind === "children" || kind === "grandchildren") {
     const payload = JSON.parse(
       fs.readFileSync(path.join(ROOT, "js/children-life-cost-rates.json"), "utf8")
     );
@@ -1865,6 +1879,7 @@ function copyFor(kind, lang) {
   if (kind === "instant") return copyInstant(lang);
   if (kind === "mortgage") return copyMortgage(lang);
   if (kind === "children") return copyChildren(lang);
+  if (kind === "grandchildren") return copyGrandchildren(lang);
   return copyBurial(lang);
 }
 
@@ -1878,6 +1893,7 @@ function mainFor(kind, lang, page, c) {
   if (kind === "instant") return instantMain(lang, page, c);
   if (kind === "mortgage") return mortgageMain(lang, page, c);
   if (kind === "children") return childrenMain(lang, page, c);
+  if (kind === "grandchildren") return grandchildrenMain(lang, page, c);
   return burialMain(lang, page, c);
 }
 
@@ -1921,6 +1937,8 @@ function main() {
     build("mortgage", "en"),
     build("children", "es"),
     build("children", "en"),
+    build("grandchildren", "es"),
+    build("grandchildren", "en"),
   ];
   console.log("Wrote", written.length, "pages");
   written.forEach((p) => console.log(" ", path.relative(ROOT, p)));

@@ -9,6 +9,24 @@
     "keepPng": true
   },
   {
+    "src": "img/nav-life-rana.jpg",
+    "base": "nav-life-rana",
+    "width": 1024,
+    "height": 819,
+    "webp": "img/opt/nav-life-rana.webp",
+    "fallback": "img/opt/nav-life-rana.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/nav-life-tejo.jpg",
+    "base": "nav-life-tejo",
+    "width": 1024,
+    "height": 768,
+    "webp": "img/opt/nav-life-tejo.webp",
+    "fallback": "img/opt/nav-life-tejo.jpg",
+    "keepPng": false
+  },
+  {
     "src": "img/hero-couple-embrace.png",
     "base": "hero-couple-embrace",
     "width": 681,
@@ -315,6 +333,15 @@
     "keepPng": true
   },
   {
+    "src": "img/carriers/americo-logo.png",
+    "base": "americo-logo",
+    "width": 386,
+    "height": 124,
+    "webp": "img/opt/americo-logo.webp",
+    "fallback": "img/opt/americo-logo.png",
+    "keepPng": true
+  },
+  {
     "src": "img/mvi-promo-seguros-whatsapp.png",
     "base": "mvi-promo-seguros-whatsapp",
     "width": 450,
@@ -513,6 +540,15 @@
     "keepPng": false
   },
   {
+    "src": "img/lic-hero-pueblo-street.jpg",
+    "base": "lic-hero-pueblo-street",
+    "width": 1024,
+    "height": 682,
+    "webp": "img/opt/lic-hero-pueblo-street.webp",
+    "fallback": "img/opt/lic-hero-pueblo-street.jpg",
+    "keepPng": false
+  },
+  {
     "src": "img/lic-hero-rice-terraces.jpg",
     "base": "lic-hero-rice-terraces",
     "width": 682,
@@ -529,6 +565,105 @@
     "webp": "img/opt/lic-hero-icebergs.webp",
     "fallback": "img/opt/lic-hero-icebergs.jpg",
     "keepPng": false
+  },
+  {
+    "src": "img/lic-hero-savanna-elephants.jpg",
+    "base": "lic-hero-savanna-elephants",
+    "width": 688,
+    "height": 216,
+    "webp": "img/opt/lic-hero-savanna-elephants.webp",
+    "fallback": "img/opt/lic-hero-savanna-elephants.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/lic-hero-tropical-lagoon.jpg",
+    "base": "lic-hero-tropical-lagoon",
+    "width": 690,
+    "height": 210,
+    "webp": "img/opt/lic-hero-tropical-lagoon.webp",
+    "fallback": "img/opt/lic-hero-tropical-lagoon.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/lic-hero-sea-cliffs.jpg",
+    "base": "lic-hero-sea-cliffs",
+    "width": 682,
+    "height": 208,
+    "webp": "img/opt/lic-hero-sea-cliffs.webp",
+    "fallback": "img/opt/lic-hero-sea-cliffs.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/lic-hero-fuji-sakura.jpg",
+    "base": "lic-hero-fuji-sakura",
+    "width": 682,
+    "height": 204,
+    "webp": "img/opt/lic-hero-fuji-sakura.webp",
+    "fallback": "img/opt/lic-hero-fuji-sakura.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/lic-hero-desert-oasis.jpg",
+    "base": "lic-hero-desert-oasis",
+    "width": 682,
+    "height": 212,
+    "webp": "img/opt/lic-hero-desert-oasis.webp",
+    "fallback": "img/opt/lic-hero-desert-oasis.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/lic-hero-karst-river.jpg",
+    "base": "lic-hero-karst-river",
+    "width": 912,
+    "height": 376,
+    "webp": "img/opt/lic-hero-karst-river.webp",
+    "fallback": "img/opt/lic-hero-karst-river.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/lic-hero-andes-llamas.jpg",
+    "base": "lic-hero-andes-llamas",
+    "width": 908,
+    "height": 248,
+    "webp": "img/opt/lic-hero-andes-llamas.webp",
+    "fallback": "img/opt/lic-hero-andes-llamas.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/lic-hero-fly-fishing.png",
+    "base": "lic-hero-fly-fishing",
+    "width": 1024,
+    "height": 752,
+    "webp": "img/opt/lic-hero-fly-fishing.webp",
+    "fallback": "img/opt/lic-hero-fly-fishing.png",
+    "keepPng": true
+  },
+  {
+    "src": "img/lic-hero-vida-buena.jpg",
+    "base": "lic-hero-vida-buena",
+    "width": 1024,
+    "height": 751,
+    "webp": "img/opt/lic-hero-vida-buena.webp",
+    "fallback": "img/opt/lic-hero-vida-buena.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/lic-hero-coffee-finca.jpg",
+    "base": "lic-hero-coffee-finca",
+    "width": 1536,
+    "height": 1024,
+    "webp": "img/opt/lic-hero-coffee-finca.webp",
+    "fallback": "img/opt/lic-hero-coffee-finca.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/lic-hero-futbol-barrio.png",
+    "base": "lic-hero-futbol-barrio",
+    "width": 1024,
+    "height": 576,
+    "webp": "img/opt/lic-hero-futbol-barrio.webp",
+    "fallback": "img/opt/lic-hero-futbol-barrio.png",
+    "keepPng": true
   },
   {
     "src": "img/lic-hero-desert-saguaro.jpg",
@@ -549,6 +684,15 @@
     "keepPng": false
   },
   {
+    "src": "img/lic-hero-grandchildren-park.jpg",
+    "base": "lic-hero-grandchildren-park",
+    "width": 1024,
+    "height": 682,
+    "webp": "img/opt/lic-hero-grandchildren-park.webp",
+    "fallback": "img/opt/lic-hero-grandchildren-park.jpg",
+    "keepPng": false
+  },
+  {
     "src": "img/fep-hero-rainforest.jpg",
     "base": "fep-hero-rainforest",
     "width": 1024,
@@ -564,6 +708,15 @@
     "height": 682,
     "webp": "img/opt/fep-hero-bus-stop-couple.webp",
     "fallback": "img/opt/fep-hero-bus-stop-couple.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/fep-hero-centennial-bridge.jpg",
+    "base": "fep-hero-centennial-bridge",
+    "width": 1024,
+    "height": 682,
+    "webp": "img/opt/fep-hero-centennial-bridge.webp",
+    "fallback": "img/opt/fep-hero-centennial-bridge.jpg",
     "keepPng": false
   },
   {
@@ -1761,6 +1914,60 @@
     "height": 440,
     "webp": "img/opt/blog-generated/weekly-insurance-update-2026-08-02/story-3.webp",
     "fallback": "img/opt/blog-generated/weekly-insurance-update-2026-08-02/story-3.png",
+    "keepPng": true
+  },
+  {
+    "src": "img/blog-generated/weekly-insurance-update-2026-08-23/hero-en.png",
+    "base": "hero-en",
+    "width": 1200,
+    "height": 800,
+    "webp": "img/opt/blog-generated/weekly-insurance-update-2026-08-23/hero-en.webp",
+    "fallback": "img/opt/blog-generated/weekly-insurance-update-2026-08-23/hero-en.png",
+    "keepPng": true
+  },
+  {
+    "src": "img/blog-generated/weekly-insurance-update-2026-08-23/hero-es.png",
+    "base": "hero-es",
+    "width": 1200,
+    "height": 800,
+    "webp": "img/opt/blog-generated/weekly-insurance-update-2026-08-23/hero-es.webp",
+    "fallback": "img/opt/blog-generated/weekly-insurance-update-2026-08-23/hero-es.png",
+    "keepPng": true
+  },
+  {
+    "src": "img/blog-generated/weekly-insurance-update-2026-08-23/hero.png",
+    "base": "hero",
+    "width": 1200,
+    "height": 800,
+    "webp": "img/opt/blog-generated/weekly-insurance-update-2026-08-23/hero.webp",
+    "fallback": "img/opt/blog-generated/weekly-insurance-update-2026-08-23/hero.png",
+    "keepPng": true
+  },
+  {
+    "src": "img/blog-generated/weekly-insurance-update-2026-08-23/story-1.png",
+    "base": "story-1",
+    "width": 800,
+    "height": 450,
+    "webp": "img/opt/blog-generated/weekly-insurance-update-2026-08-23/story-1.webp",
+    "fallback": "img/opt/blog-generated/weekly-insurance-update-2026-08-23/story-1.png",
+    "keepPng": true
+  },
+  {
+    "src": "img/blog-generated/weekly-insurance-update-2026-08-23/story-2.png",
+    "base": "story-2",
+    "width": 800,
+    "height": 450,
+    "webp": "img/opt/blog-generated/weekly-insurance-update-2026-08-23/story-2.webp",
+    "fallback": "img/opt/blog-generated/weekly-insurance-update-2026-08-23/story-2.png",
+    "keepPng": true
+  },
+  {
+    "src": "img/blog-generated/weekly-insurance-update-2026-08-23/story-3.png",
+    "base": "story-3",
+    "width": 800,
+    "height": 450,
+    "webp": "img/opt/blog-generated/weekly-insurance-update-2026-08-23/story-3.webp",
+    "fallback": "img/opt/blog-generated/weekly-insurance-update-2026-08-23/story-3.png",
     "keepPng": true
   }
 ]

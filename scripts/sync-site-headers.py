@@ -120,6 +120,7 @@ def prepare_en_header(path: Path) -> str:
                 "term-life-cost.html",
                 "children-life-insurance-cost.html",
                 "children-life-insurance.html",
+                "grandchildren-life-insurance.html",
                 "life-insurance-seniors-over-80.html",
                 "life-insurance-seniors-over-85.html",
                 "life-insurance-seniors-no-medical-exam.html",

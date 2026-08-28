@@ -61,6 +61,11 @@
   object-position: 78% 40%;
 }
 
+.lic-hero-media--grandkids picture,
+.lic-hero-media--grandkids img {
+  object-position: 68% 46%;
+}
+
 .lic-hero-media--cattle picture,
 .lic-hero-media--cattle img {
   object-position: 52% 42%;
@@ -1798,6 +1803,68 @@ a.lic-co-card--link .lic-co-specs dd {
 .lic-fact-trio--color > div:nth-child(3) {
   border-top: 4px solid #0e7c8b;
   background: #ddf4f5;
+}
+
+.lic-carrier-list {
+  list-style: none;
+  margin: 0.15rem 0 0;
+  padding: 0;
+}
+
+.lic-carrier-list > li {
+  margin: 0 0 0.75rem;
+  padding: 0 0 0.75rem;
+  border-bottom: 1px solid rgba(11, 58, 122, 0.12);
+}
+
+.lic-carrier-list > li:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.lic-carrier-list strong {
+  display: block;
+  margin: 0 0 0.28rem;
+  color: #0b3a7a;
+  font-size: 0.94rem;
+  line-height: 1.3;
+}
+
+.lic-carrier-list ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.lic-carrier-list ul li {
+  position: relative;
+  margin: 0 0 0.18rem;
+  padding: 0 0 0 0.85rem;
+  font-size: 0.88rem;
+  line-height: 1.4;
+  color: #334155;
+}
+
+.lic-carrier-list ul li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.52em;
+  width: 0.32rem;
+  height: 0.32rem;
+  border-radius: 50%;
+  background: #0b3a7a;
+}
+
+.lic-choice-pair.lic-fact-trio--color {
+  align-items: start;
+}
+
+.lic-carrier-links {
+  margin: 0.7rem 0 0;
+  font-size: 0.88rem;
+  line-height: 1.4;
 }
 
 .lic-fact-kicker {
