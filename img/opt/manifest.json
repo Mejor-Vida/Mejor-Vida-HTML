@@ -756,6 +756,15 @@
     "keepPng": false
   },
   {
+    "src": "img/nav-fe-preexisting-seniors.jpg",
+    "base": "nav-fe-preexisting-seniors",
+    "width": 1024,
+    "height": 543,
+    "webp": "img/opt/nav-fe-preexisting-seniors.webp",
+    "fallback": "img/opt/nav-fe-preexisting-seniors.jpg",
+    "keepPng": false
+  },
+  {
     "src": "img/fep-hero-rainforest.jpg",
     "base": "fep-hero-rainforest",
     "width": 1024,

@@ -122,14 +122,16 @@
     var meta = window.MVI_LIC_RATES || {};
     var bucket = (meta && meta[bucketKey]) || {};
     var rows = pricedRows(((bucket.tables || {})[String(face)]) || []);
+    var prefixMap = copy && copy.bucketNotePrefix;
+    var suffixMap = copy && copy.bucketNoteSuffix;
     var notePrefix =
-      (copy && copy.bucketNotePrefix && copy.bucketNotePrefix[bucketKey]) ||
-      (copy && copy.notePrefix) ||
-      "";
+      prefixMap && Object.prototype.hasOwnProperty.call(prefixMap, bucketKey)
+        ? prefixMap[bucketKey]
+        : (copy && copy.notePrefix) || "";
     var noteSuffix =
-      (copy && copy.bucketNoteSuffix && copy.bucketNoteSuffix[bucketKey]) ||
-      (copy && copy.noteSuffix) ||
-      "";
+      suffixMap && Object.prototype.hasOwnProperty.call(suffixMap, bucketKey)
+        ? suffixMap[bucketKey]
+        : (copy && copy.noteSuffix) || "";
     tbody.innerHTML = rows
       .map(function (r) {
         return (
@@ -174,7 +176,11 @@
     var dedicatedSeniorsHub = !!document.body.classList.contains(
       "lic-page--seniors-hub"
     );
-    var dedicatedGi = !!document.body.classList.contains("lic-page--gi");
+    var dedicatedGi =
+      !!document.body.classList.contains("lic-page--gi") || product === "gi";
+    var dedicatedConditions = !!document.body.classList.contains(
+      "lic-page--conditions"
+    );
     var copy = isEs
       ? {
           notePrefix: "Primas mensuales ilustrativas (redondeadas). Clasificación: ",
@@ -187,7 +193,11 @@
             : dedicatedTerm
             ? " Edades cada 5 años según las tarifas que Integrity Connect devolvió para ese plazo y monto."
             : " Rangos de edad: temporal 10 años 20–80; 20 años 20–65; 30 años 20–55 (como los cuadros de muestra habituales).",
-          preferMetaNote: dedicatedTerm || dedicatedChildren || dedicatedAmount,
+          preferMetaNote:
+            dedicatedTerm ||
+            dedicatedChildren ||
+            dedicatedAmount ||
+            (dedicatedConditions && product === "term"),
           bucketNotePrefix: {
             whole_life: "Primas mensuales ilustrativas (redondeadas). Clasificación: ",
             whole_life_traditional: "Primas mensuales ilustrativas (redondeadas). Clasificación: ",
@@ -235,7 +245,11 @@
             : dedicatedTerm
             ? " Ages every 5 years where Integrity Connect returned a published rate for that term and amount."
             : " Age ranges: 10-year term 20–80; 20-year 20–65; 30-year 20–55 (matching typical published sample charts).",
-          preferMetaNote: dedicatedTerm || dedicatedChildren || dedicatedAmount,
+          preferMetaNote:
+            dedicatedTerm ||
+            dedicatedChildren ||
+            dedicatedAmount ||
+            (dedicatedConditions && product === "term"),
           bucketNotePrefix: {
             whole_life: "Illustrative monthly premiums (rounded). Rating class: ",
             whole_life_traditional: "Illustrative monthly premiums (rounded). Rating class: ",

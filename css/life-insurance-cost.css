@@ -2290,6 +2290,154 @@ a.lic-co-card--link .lic-co-specs dd {
   white-space: nowrap;
 }
 
+.lic-flag {
+  margin: 1rem 0 1.4rem;
+  padding: 0.85rem 1rem;
+  border-left: 4px solid #c9a227;
+  background: #fffbeb;
+}
+
+.lic-flag p {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.45;
+  color: #334155;
+}
+
+.lic-factor-list {
+  display: grid;
+  gap: 0.95rem;
+  margin: 1.15rem 0 1rem;
+  counter-reset: factor;
+}
+
+.lic-factor {
+  background: #fff;
+  border: 1px solid #c5d4e8;
+  border-radius: 0.7rem;
+  overflow: hidden;
+  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.06);
+}
+
+.lic-factor h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin: 0;
+  padding: 0.9rem 1.15rem 0.75rem;
+  font-size: 1.12rem;
+  font-weight: 800;
+  line-height: 1.25;
+  color: #0b3a7a;
+  background: #eef4fb;
+  border-bottom: 1px solid #d7e4f3;
+}
+
+.lic-factor h3::before {
+  counter-increment: factor;
+  content: counter(factor, decimal-leading-zero);
+  flex: 0 0 2.1rem;
+  width: 2.1rem;
+  height: 2.1rem;
+  border-radius: 999px;
+  background: #0b3a7a;
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  line-height: 2.1rem;
+  text-align: center;
+}
+
+.lic-factor__body {
+  display: grid;
+  grid-template-columns: minmax(11rem, 30%) minmax(0, 1fr);
+  align-items: stretch;
+}
+
+.lic-factor__meaning,
+.lic-factor__verify {
+  padding: 1.05rem 1.2rem 1.2rem;
+}
+
+.lic-factor__meaning {
+  background: #e8f1fc;
+  border-right: 1px solid #c5d4e8;
+}
+
+.lic-factor__verify {
+  background: #fff;
+  border-left: 3px solid #f5a623;
+}
+
+.lic-factor__kicker {
+  margin: 0 0 0.4rem;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #0b3a7a;
+}
+
+.lic-factor__meaning p:not(.lic-factor__kicker) {
+  margin: 0;
+  color: #334155;
+  font-size: 0.98rem;
+  line-height: 1.5;
+}
+
+.lic-factor__verify ul {
+  margin: 0;
+  padding-left: 1.15rem;
+}
+
+.lic-factor__verify li {
+  margin: 0 0 0.55rem;
+  color: #1f2937;
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+
+.lic-factor__verify li::marker {
+  color: #0b3a7a;
+}
+
+.lic-factor__verify li:last-child {
+  margin-bottom: 0;
+}
+
+.lic-factor__gap {
+  margin: 0.85rem 0 0;
+  padding: 0.7rem 0.8rem;
+  border-left: 4px solid #c9a227;
+  background: #fffbeb;
+  border-radius: 0 0.35rem 0.35rem 0;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  color: #334155;
+}
+
+.lic-factor__gap a {
+  font-weight: 700;
+  color: #0b3a7a;
+}
+
+@media (max-width: 800px) {
+  .lic-factor__body {
+    grid-template-columns: 1fr;
+  }
+
+  .lic-factor__meaning {
+    border-right: 0;
+    border-bottom: 1px solid #c5d4e8;
+  }
+
+  .lic-factor__verify {
+    border-left: 0;
+    border-top: 3px solid #f5a623;
+  }
+}
+
 .lic-vs-chart {
   width: 100%;
   max-width: none;

@@ -102,6 +102,8 @@ const JOBS = [
   { src: "img/lic-hero-family-deadvlei.jpg", maxWidth: 1600, maxHeight: 1066, outBase: "lic-hero-family-deadvlei" },
   { src: "img/lic-hero-family-black-sand.jpg", maxWidth: 1600, maxHeight: 1066, outBase: "lic-hero-family-black-sand" },
   { src: "img/nav-family-guide-meal.jpg", maxWidth: 1024, maxHeight: 539, outBase: "nav-family-guide-meal" },
+  { src: "img/nav-fe-preexisting-seniors.jpg", maxWidth: 1024, maxHeight: 543, outBase: "nav-fe-preexisting-seniors" },
+  { src: "img/nav-term-preexisting-family.jpg", maxWidth: 1024, maxHeight: 484, outBase: "nav-term-preexisting-family" },
   { src: "img/fep-hero-rainforest.jpg", maxWidth: 1600, maxHeight: 1066, outBase: "fep-hero-rainforest" },
   { src: "img/fep-hero-bus-stop-couple.jpg", maxWidth: 1600, maxHeight: 1066, outBase: "fep-hero-bus-stop-couple" },
   { src: "img/fep-hero-centennial-bridge.jpg", maxWidth: 1600, maxHeight: 1066, outBase: "fep-hero-centennial-bridge" },

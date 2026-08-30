@@ -125,6 +125,7 @@
       var path = (location.pathname || "").toLowerCase();
       if (/mayores-80|mayores-85|mayores-sin-examen|limite-edad-seguro-vida|guia-seguro-entierro-mayores|guia-seguro-vida-mayores|seniors-over-80|seniors-over-85|seniors-no-medical-exam|life-insurance-age-limit|burial-insurance-seniors|life-insurance-seniors\.html/.test(path)) activate("seniors");
       if (/seguro-vida-familia|seguro-vida-padres|seguro-vida-abuelos|seguro-vida-hermanos|seguro-vida-familiares|buscar-poliza-vida|family-life-insurance|parents-life-insurance|grandparents-life-insurance|siblings-life-insurance|family-members-life-insurance|find-life-insurance-policy/.test(path)) activate("family");
+      if (/condiciones-preexistentes|seguro-vida-diabetes|seguro-vida-corazon|seguro-vida-presion-alta|seguro-vida-epoc|seguro-vida-cancer|seguro-vida-enfermedad-renal|seguro-vida-discapacidad|seguro-vida-vih|seguro-vida-derrame|pre-existing-conditions|life-insurance-diabetes|life-insurance-heart-disease|life-insurance-high-blood-pressure|life-insurance-copd|life-insurance-cancer|life-insurance-kidney-disease|life-insurance-disability|life-insurance-hiv|life-insurance-stroke/.test(path)) activate("conditions");
       if (/aceptacion-garantizada|guaranteed-acceptance/.test(path)) activate("coverage");
     });
   }

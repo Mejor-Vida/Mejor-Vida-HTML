@@ -33,6 +33,30 @@ const {
   copyFindPolicy,
   findPolicyMain,
 } = require("./family-life-insurance-content");
+const {
+  copyCondHub,
+  condHubMain,
+  copyCondTerm,
+  condTermMain,
+  copyDiabetes,
+  diabetesMain,
+  copyHeart,
+  heartMain,
+  copyHbp,
+  hbpMain,
+  copyCopd,
+  copdMain,
+  copyCancer,
+  cancerMain,
+  copyKidney,
+  kidneyMain,
+  copyDisability,
+  disabilityMain,
+  copyHiv,
+  hivMain,
+  copyStroke,
+  strokeMain,
+} = require("./preexisting-conditions-content");
 const { quoteRailHtml } = require("./lic-quote-rail");
 const ES_HEADER = path.join(ROOT, "includes/site-header-inner.html");
 const EN_HEADER = path.join(ROOT, "includes/en-site-header.html");
@@ -229,6 +253,127 @@ const PAGES = {
       cache: "20260828-heroes",
     },
   },
+  condHub: {
+    esFile: "seguro-gastos-finales-condiciones-preexistentes.html",
+    enFile: "final-expense-pre-existing-conditions.html",
+    hero: {
+      base: "lic-hero-karst-river",
+      modifier: "karst",
+      width: 912,
+      height: 376,
+      cache: "20260828-heroes",
+    },
+  },
+  condTerm: {
+    esFile: "seguro-vida-temporal-condiciones-preexistentes.html",
+    enFile: "term-life-pre-existing-conditions.html",
+    hero: {
+      base: "lic-hero-alpine-lakes",
+      modifier: "lakes",
+      width: 700,
+      height: 224,
+      cache: "20260829-termcond",
+    },
+  },
+  diabetes: {
+    esFile: "seguro-vida-diabetes.html",
+    enFile: "life-insurance-diabetes.html",
+    hero: {
+      base: "lic-hero-coffee-finca",
+      modifier: "coffee",
+      width: 1536,
+      height: 1024,
+      cache: "20260828-heroes",
+    },
+  },
+  heart: {
+    esFile: "seguro-vida-corazon.html",
+    enFile: "life-insurance-heart-disease.html",
+    hero: {
+      base: "lic-hero-desert-saguaro",
+      modifier: "saguaro",
+      width: 1024,
+      height: 682,
+      cache: "20260828-heroes",
+    },
+  },
+  hbp: {
+    esFile: "seguro-vida-presion-alta.html",
+    enFile: "life-insurance-high-blood-pressure.html",
+    hero: {
+      base: "lic-hero-desert-oasis",
+      modifier: "oasis",
+      width: 682,
+      height: 212,
+      cache: "20260828-heroes",
+    },
+  },
+  copd: {
+    esFile: "seguro-vida-epoc.html",
+    enFile: "life-insurance-copd.html",
+    hero: {
+      base: "lic-hero-sea-cliffs",
+      modifier: "cliffs",
+      width: 682,
+      height: 208,
+      cache: "20260828-heroes",
+    },
+  },
+  cancer: {
+    esFile: "seguro-vida-cancer.html",
+    enFile: "life-insurance-cancer.html",
+    hero: {
+      base: "lic-hero-rice-terraces",
+      modifier: "terraces",
+      width: 682,
+      height: 204,
+      cache: "20260828-heroes",
+    },
+  },
+  kidney: {
+    esFile: "seguro-vida-enfermedad-renal.html",
+    enFile: "life-insurance-kidney-disease.html",
+    hero: {
+      base: "lic-hero-tropical-lagoon",
+      modifier: "lagoon",
+      width: 690,
+      height: 210,
+      cache: "20260828-heroes",
+    },
+  },
+  disability: {
+    esFile: "seguro-vida-discapacidad.html",
+    enFile: "life-insurance-disability.html",
+    hero: {
+      base: "lic-hero-andes-llamas",
+      modifier: "andes",
+      width: 908,
+      height: 248,
+      cache: "20260828-heroes",
+    },
+  },
+  hiv: {
+    esFile: "seguro-vida-vih.html",
+    enFile: "life-insurance-hiv.html",
+    hero: {
+      base: "lic-hero-icebergs",
+      modifier: "ice",
+      width: 688,
+      height: 214,
+      cache: "20260828-heroes",
+    },
+  },
+  stroke: {
+    esFile: "seguro-vida-derrame-cerebral.html",
+    enFile: "life-insurance-stroke.html",
+    hero: {
+      base: "lic-hero-savanna-elephants",
+      modifier: "savanna",
+      width: 688,
+      height: 216,
+      cache: "20260828-heroes",
+    },
+  },
 };
 
 function escAttr(s) {
@@ -256,14 +401,14 @@ function footerFor(lang) {
   const extraEs = `<script defer src="bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="js/mvi-funnel-track.js?v=20260702e"></script>
 <div data-api-url="/api/website-chat" id="mvi-assistant-root"></div>
-<script defer src="js/mvi-nav-questions.js?v=20260828-family"></script>
+<script defer src="js/mvi-nav-questions.js?v=20260828-conditions"></script>
 <script defer src="js/website-assistant-widget.js?v=20260813-scroll-top"></script>
 <script>document.getElementById('year') && (document.getElementById('year').textContent = new Date().getFullYear());</script>
 `;
   const extraEn = `<script defer src="../bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="../js/mvi-funnel-track.js?v=20260702e"></script>
 <div data-api-url="/api/website-chat" id="mvi-assistant-root"></div>
-<script defer src="../js/mvi-nav-questions.js?v=20260828-family"></script>
+<script defer src="../js/mvi-nav-questions.js?v=20260828-conditions"></script>
 <script defer src="../js/website-assistant-widget.js?v=20260813-scroll-top"></script>
 <script>document.getElementById('year') && (document.getElementById('year').textContent = new Date().getFullYear());</script>
 `;
@@ -962,7 +1107,19 @@ function headHtml(lang, page, c, kind) {
                           kind === "familyMembers" ||
                           kind === "findPolicy"
                         ? "lic-page lic-page--seniors lic-page--family"
-                        : "lic-page lic-page--seniors";
+                        : kind === "condHub" ||
+                            kind === "condTerm" ||
+                            kind === "diabetes" ||
+                            kind === "heart" ||
+                            kind === "hbp" ||
+                            kind === "copd" ||
+                            kind === "cancer" ||
+                            kind === "kidney" ||
+                            kind === "disability" ||
+                            kind === "hiv" ||
+                            kind === "stroke"
+                          ? "lic-page lic-page--seniors lic-page--conditions"
+                          : "lic-page lic-page--seniors";
   const esUrl = `https://www.mejorvidainsurance.com/${page.esFile}`;
   const enUrl = `https://www.mejorvidainsurance.com/en/${page.enFile}`;
   const canonical = isEs ? esUrl : enUrl;
@@ -1005,8 +1162,8 @@ function headHtml(lang, page, c, kind) {
 <link href="${prefix}css/site-footer.css" rel="stylesheet"/>
 <link href="${prefix}css/quote-flow-shared.css?v=20260723-mobile-menu" rel="stylesheet"/>
 <link href="${prefix}css/site-header.css?v=20260723-ver-precios-gold" rel="stylesheet"/>
-<link href="${prefix}css/nav-life-insurance.css?v=20260828-meal" rel="stylesheet"/>
-<link href="${prefix}css/life-insurance-cost.css?v=20260828-nextslim2" rel="stylesheet"/>
+<link href="${prefix}css/nav-life-insurance.css?v=20260829-termcond-photo" rel="stylesheet"/>
+<link href="${prefix}css/life-insurance-cost.css?v=20260830-factor-cards2" rel="stylesheet"/>
 <link href="${prefix}css/mvi-assistant-widget.css?v=20260721-chat-z" rel="stylesheet"/>
 <link href="${prefix}css/fontawesome-mvi.min.css?v=20260723-brands-fix" rel="stylesheet"/>
 <style>body { font-family: Inter, system-ui, -apple-system, sans-serif; }</style>
@@ -1916,6 +2073,27 @@ function examRateScripts(lang, kind) {
 <script defer src="${prefix}js/life-insurance-cost.js?v=20260813-children"></script>
 `;
   }
+  if (kind === "condTerm") {
+    const payload = termRatesPayload();
+    payload.faces = [100000, 250000, 500000];
+    payload.terms = [10, 20, 30];
+    const faces = ["100000", "250000", "500000"];
+    ["10", "20", "30"].forEach((t) => {
+      if (!payload.tables[t]) return;
+      const slim = {};
+      faces.forEach((f) => {
+        if (payload.tables[t][f]) slim[f] = payload.tables[t][f];
+      });
+      payload.tables[t] = slim;
+    });
+    payload.note =
+      lang === "es"
+        ? "Primas mensuales ilustrativas de temporal de suscripción completa, Preferred Best no fumador. Cada celda es la más baja entre compañías designadas. Una condición preexistente suele impedir esa clase: el precio real suele ser Standard, con extra de tabla, o no emitir. No es cotización vinculante."
+        : "Illustrative fully underwritten term, Preferred Best non-tobacco. Each cell is the lowest among appointed companies. A pre-existing condition usually blocks that class: the real price is often Standard, a table extra, or no issue. Not a binding quote.";
+    return `<script>window.MVI_LIC_RATES = ${JSON.stringify(payload)};</script>
+<script defer src="${prefix}js/life-insurance-cost.js?v=20260829-termcond"></script>
+`;
+  }
   if (kind === "term" || kind === "mortgage") {
     const payload = termRatesPayload();
     if (kind === "mortgage") {
@@ -1948,9 +2126,20 @@ function examRateScripts(lang, kind) {
     kind === "parents" ||
     kind === "grandparents" ||
     kind === "siblings" ||
-    kind === "familyMembers"
+    kind === "familyMembers" ||
+    kind === "condHub" ||
+    kind === "diabetes" ||
+    kind === "heart" ||
+    kind === "hbp" ||
+    kind === "copd" ||
+    kind === "cancer" ||
+    kind === "kidney" ||
+    kind === "disability" ||
+    kind === "stroke"
       ? burialRatesPayload()
-      : kind === "crem"
+      : kind === "hiv"
+        ? giRatesPayload()
+        : kind === "crem"
         ? cremRatesPayload()
         : kind === "hub"
         ? hubRatesPayload()
@@ -1958,7 +2147,7 @@ function examRateScripts(lang, kind) {
           ? giRatesPayload()
           : examRatesPayload();
   return `<script>window.MVI_LIC_RATES = ${JSON.stringify(payload)};</script>
-<script defer src="${prefix}js/life-insurance-cost.js?v=20260824-term-guide"></script>
+<script defer src="${prefix}js/life-insurance-cost.js?v=20260828-gi-emptyfix"></script>
 `;
 }
 
@@ -1979,6 +2168,17 @@ function copyFor(kind, lang) {
   if (kind === "siblings") return copySiblings(lang);
   if (kind === "familyMembers") return copyFamilyMembers(lang);
   if (kind === "findPolicy") return copyFindPolicy(lang);
+  if (kind === "condHub") return copyCondHub(lang);
+  if (kind === "condTerm") return copyCondTerm(lang);
+  if (kind === "diabetes") return copyDiabetes(lang);
+  if (kind === "heart") return copyHeart(lang);
+  if (kind === "hbp") return copyHbp(lang);
+  if (kind === "copd") return copyCopd(lang);
+  if (kind === "cancer") return copyCancer(lang);
+  if (kind === "kidney") return copyKidney(lang);
+  if (kind === "disability") return copyDisability(lang);
+  if (kind === "hiv") return copyHiv(lang);
+  if (kind === "stroke") return copyStroke(lang);
   return copyBurial(lang);
 }
 
@@ -1999,6 +2199,17 @@ function mainFor(kind, lang, page, c) {
   if (kind === "siblings") return siblingsMain(lang, page, c);
   if (kind === "familyMembers") return familyMembersMain(lang, page, c);
   if (kind === "findPolicy") return findPolicyMain(lang, page, c);
+  if (kind === "condHub") return condHubMain(lang, page, c);
+  if (kind === "condTerm") return condTermMain(lang, page, c);
+  if (kind === "diabetes") return diabetesMain(lang, page, c);
+  if (kind === "heart") return heartMain(lang, page, c);
+  if (kind === "hbp") return hbpMain(lang, page, c);
+  if (kind === "copd") return copdMain(lang, page, c);
+  if (kind === "cancer") return cancerMain(lang, page, c);
+  if (kind === "kidney") return kidneyMain(lang, page, c);
+  if (kind === "disability") return disabilityMain(lang, page, c);
+  if (kind === "hiv") return hivMain(lang, page, c);
+  if (kind === "stroke") return strokeMain(lang, page, c);
   return burialMain(lang, page, c);
 }
 
@@ -2056,6 +2267,28 @@ function main() {
     build("familyMembers", "en"),
     build("findPolicy", "es"),
     build("findPolicy", "en"),
+    build("condHub", "es"),
+    build("condHub", "en"),
+    build("condTerm", "es"),
+    build("condTerm", "en"),
+    build("diabetes", "es"),
+    build("diabetes", "en"),
+    build("heart", "es"),
+    build("heart", "en"),
+    build("hbp", "es"),
+    build("hbp", "en"),
+    build("copd", "es"),
+    build("copd", "en"),
+    build("cancer", "es"),
+    build("cancer", "en"),
+    build("kidney", "es"),
+    build("kidney", "en"),
+    build("disability", "es"),
+    build("disability", "en"),
+    build("hiv", "es"),
+    build("hiv", "en"),
+    build("stroke", "es"),
+    build("stroke", "en"),
   ];
   console.log("Wrote", written.length, "pages");
   written.forEach((p) => console.log(" ", path.relative(ROOT, p)));
