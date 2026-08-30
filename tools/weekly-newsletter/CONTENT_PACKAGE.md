@@ -48,11 +48,11 @@ Adapt **all three** website features. Do not paste the full articles.
 
 - Subject line (the week, not only one story)  
 - Preview text  
-- Warm introduction (client nurture: thank them, say this letter is for families looking at life insurance. Do not narrate your writing method.)  
-- **Each story: 200–300 words** (same length for all three). Teach in this order: family situation → everyday explanation → then any official name → what it means for someone considering coverage → one calm next step.  
-- One short closing lesson for the week (optional; must not privilege one story)  
+- Warm introduction (~60–100 words; client nurture: thank them, say this letter is for families looking at life insurance. Do not narrate your writing method.)  
+- **Each story: 175–250 words** (same depth for all three). Cover: what happened that week, who reported it, verified facts, why families care, what to understand, one practical takeaway, any limitation. Explain terms the first time.  
+- One short closing lesson for the week with **one** soft Mejor Vida CTA (402-440-5438) — not after every story  
 - Per-story button **Leer el artículo completo** / **Read the full story** — only if that URL is **already live**  
-- Gentle invitation to contact Mejor Vida with questions (402-440-5438)  
+- Formal educational disclaimer at the end (template footer)
 
 Julie = Spanish. Admin = English.
 

@@ -12,12 +12,20 @@ Write for families. Never write for agents, IMOs, BGAs, or underwriters.
 
 | Name | Value |
 |------|--------|
-| `TODAY` | Sunday run date in America/Chicago |
-| `START_DATE` | `TODAY` minus 7 days |
+| `TODAY` / publication date | Sunday run date in America/Chicago |
+| `START_DATE` | `TODAY` minus 7 days (prior Sunday) |
 | `END_DATE` | `TODAY` minus 1 day (Saturday) |
 
-News stories must be published in that window. Do not use today’s articles. Evergreen fallbacks are exempt.
+Example: published Sunday **2026-08-30** covers **2026-08-23 through 2026-08-29**.
 
+The actual event must fall in that window. Do not use today’s articles as “this week’s news.” Older reports may appear only as **background**, with real dates recorded. Evergreen fallbacks are exempt from the freshness window but must not be labeled as breaking news.
+
+## 1b. Two AI stages (locked)
+
+1. **Research brief** (`lib/weekly-newsletter-research-brief.js`) — separate reasoning-model call; validate before writing.  
+2. **Newsletter writing** (`lib/weekly-newsletter-compose.js`) — separate writing-model call from the brief only.  
+
+See [TWO_STAGE_WORKFLOW.md](TWO_STAGE_WORKFLOW.md).
 ## 2. Topics (locked)
 
 Search and keep only:
@@ -32,37 +40,39 @@ Search and keep only:
 
 Julie sells IUL and annuities (including Americo). The **public SEO blog** still prefers final expense → term → whole life. The **Sunday email** may include IUL or annuity news when it helps families. Do not turn those stories into investment pitches.
 
-## 3. Find 8–12 candidates
+## 3. Find at least 8 candidates
 
-Use [SOURCES.md](SOURCES.md). Prefer `.gov`, NAIC, FTC, NFDA, III, LIMRA, Life Happens, SSA, BLS, and major U.S. newsrooms. Industry trade press is allowed **only** if you rewrite it into plain family language.
+Use [SOURCES.md](SOURCES.md). Prefer `.gov`, NAIC, FTC, NFDA, III, LIMRA, Life Happens, SSA, BLS, ACLI, and major U.S. newsrooms. Industry trade press is allowed **only** if you rewrite it into plain family language.
 
 For each candidate record:
 
-- Headline  
+- Proposed topic / headline  
+- Actual event date  
+- Source publication date  
 - Publisher  
 - URL (working)  
-- Published date  
-- One-sentence why a family would care  
+- Summary of what happened  
+- Why a family looking at life insurance would care  
+- Verified facts / figures  
+- Limitations  
+- Primary vs secondary source  
 - Category (FE / term / whole / IUL / annuity / consumer protection)
 
 Drop:
 
 - Duplicates vs last 28 days of topics / 84 days of URLs (`tools/blog-drafts/shared/`)  
-- Competitor sales pages (Ethos, PolicyGenius, Colonial Penn, Mutual of Omaha Direct, etc.) — keep the **lesson**, strip the brand  
+- Competitor sales pages (Ethos, PolicyGenius, Colonial Penn, Mutual of Omaha Direct, etc.) — keep the **lesson**, strip the brand; never cite them as the factual source  
+- Unverified market-size forecasts, “best company” lists, promotional vendor reports  
 - Agent-only tools, ChatGPT-for-producers, M&A, reinsurance  
+- Health insurance / P&C / unrelated finance  
 
-## 4. Pick exactly 3 stories
+## 4. Pick exactly 3 stories (Stage 1)
 
-Rank:
+Score each candidate 1–5 for freshness, source authority, consumer relevance, life-insurance connection, educational value, and difference from the other picks. Select the three strongest with a useful mix when possible (e.g. cost/planning; regulatory/industry; coverage/ownership). Do not pick three that teach the same lesson.
 
-1. Would a current or future Mejor Vida client want this?  
-2. Can we explain it honestly without fake prices?  
-3. Prefer final expense when quality is equal, then term, whole, IUL, annuity.  
-4. Spread categories when possible.  
-5. Licensed-state angle (NE / KS / CO / NV) is a **tie-breaker only** — never a hard filter.
+If fewer than 3 news stories survive, fill from evergreen in `sources.json` as **background**. **Always three. Never skip the week.**
 
-If fewer than 3 news stories survive, fill from evergreen in `sources.json`. **Always three. Never skip the week.**
-
+Save the validated research brief before Stage 2 writing.
 ## 5. Assemble the weekly package (not three thin teasers)
 
 Follow [CONTENT_PACKAGE.md](CONTENT_PACKAGE.md). All **three** stories get the same depth.
@@ -70,7 +80,7 @@ Follow [CONTENT_PACKAGE.md](CONTENT_PACKAGE.md). All **three** stories get the s
 | Piece | What to write |
 |------|----------------|
 | **Website (each story)** | Original **700–1,000 words**. Headlines, subtitle, what/why/who, terms, “what this could mean,” “what you can do now,” takeaway, soft CTA. |
-| **Email (6 a.m.)** | Subject + preview + warm intro + **200–300 words per story** (equal length) + soft contact line. **Do not paste the full features.** Spanish → julie@; English → admin@. |
+| **Email (6 a.m.)** | Subject + preview + warm intro (~60–100 words) + **175–250 words per story** (equal depth) + one closing lesson with a **single** soft contact line (402-440-5438). **Do not paste the full features. Do not put a sales pitch after every story.** Spanish → julie@; English → admin@. |
 | **Facebook** | Version A (~100–175 words, no link in caption) + Version B (~200–300 words), covering all three fairly. See `facebook-post-rules.md`. |
 | **Publishing** | Slug, SEO title, meta, keywords, image concept, sources, disclaimer — **for each story**. |
 

@@ -157,4 +157,109 @@ assert.strictEqual(feed.length, 1);
 assert.strictEqual(feed[0].commentId, "111_999");
 assert.strictEqual(parseFeedCommentEvents({ object: "page", entry: [] }).length, 0);
 
-console.log("weekly-newsletter tests ok");
+const { wordCount, storyLengthError } = require("../lib/weekly-newsletter-compose");
+assert.strictEqual(wordCount("one two three"), 3);
+const long = Array(220).fill("word").join(" ");
+const okStories = [{ summary: long }, { summary: long }, { summary: long }];
+assert.strictEqual(storyLengthError(okStories, okStories), null);
+assert.ok(storyLengthError([{ summary: "short" }, { summary: long }, { summary: long }], okStories));
+
+const { writeModel, FORBIDDEN_WRITE_RE } = require("../lib/weekly-newsletter-models");
+assert.ok(FORBIDDEN_WRITE_RE.test("gpt-4o-mini"));
+assert.ok(!FORBIDDEN_WRITE_RE.test("gpt-5.6"));
+process.env.WEEKLY_NEWSLETTER_WRITE_MODEL = "gpt-5.6";
+assert.strictEqual(writeModel(), "gpt-5.6");
+delete process.env.WEEKLY_NEWSLETTER_WRITE_MODEL;
+let threw = false;
+try {
+  process.env.WEEKLY_NEWSLETTER_WRITE_MODEL = "gpt-4o-mini";
+  writeModel();
+} catch (_) {
+  threw = true;
+} finally {
+  delete process.env.WEEKLY_NEWSLETTER_WRITE_MODEL;
+}
+assert.ok(threw, "mini write model must be rejected");
+
+const {
+  validateResearchBrief,
+  heuristicBriefFromCandidates,
+  normalizeSelected,
+} = require("../lib/weekly-newsletter-research-brief");
+const briefWin = newsletterWindow(new Date("2026-08-30T12:00:00Z"));
+assert.strictEqual(briefWin.startDate, "2026-08-23");
+assert.strictEqual(briefWin.endDate, "2026-08-29");
+const heuristic = heuristicBriefFromCandidates(
+  [
+    {
+      title: "NFDA funeral costs",
+      url: "https://content.nfda.org/news/statistics",
+      source_name: "NFDA",
+      published: "2026-08-25",
+      category: "final_expense",
+    },
+  ],
+  briefWin,
+  {
+    evergreen: [
+      {
+        category: "term_life",
+        title_en: "Term cost",
+        source_url: "https://www.limra.com/",
+        source_name: "LIMRA",
+        published: "evergreen",
+      },
+      {
+        category: "annuity",
+        title_en: "Annuity guide",
+        source_url: "https://content.naic.org/",
+        source_name: "NAIC",
+        published: "evergreen",
+      },
+    ],
+  }
+);
+assert.strictEqual(heuristic.selected.length, 3);
+assert.ok(heuristic.selected[0].verified_facts.length >= 5);
+
+const badBrief = {
+  window: briefWin,
+  selected: [
+    normalizeSelected({
+      working_headline: "Bad date story",
+      event_date: "2020-01-01",
+      publication_date: "2020-01-01",
+      primary_source_name: "Example",
+      primary_source_url: "https://example.com/",
+      verified_facts: ["a", "b", "c", "d", "e"],
+      why_it_matters: "x",
+      practical_takeaway: "y",
+    }),
+    normalizeSelected({
+      working_headline: "Ok evergreen",
+      publication_date: "evergreen",
+      primary_source_name: "FTC",
+      primary_source_url: "https://consumer.ftc.gov/articles/ftc-funeral-rule",
+      verified_facts: ["a", "b", "c", "d", "e"],
+      why_it_matters: "x",
+      practical_takeaway: "y",
+      is_background_evergreen: true,
+    }),
+    normalizeSelected({
+      working_headline: "Missing facts",
+      event_date: "2026-08-24",
+      publication_date: "2026-08-24",
+      primary_source_name: "LIMRA",
+      primary_source_url: "https://www.limra.com/",
+      verified_facts: ["only one"],
+      why_it_matters: "x",
+      practical_takeaway: "y",
+    }),
+  ],
+  candidates_reviewed: [],
+};
+validateResearchBrief(badBrief, { window: briefWin, harvestCount: 3 }).then((v) => {
+  assert.ok(!v.ok);
+  assert.ok(v.errors.some((e) => /news period|verified_facts/i.test(e)));
+  console.log("weekly-newsletter tests ok");
+});

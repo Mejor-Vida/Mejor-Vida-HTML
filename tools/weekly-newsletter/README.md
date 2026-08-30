@@ -1,6 +1,6 @@
 # Weekly newsletter project — Mejor Vida Insurance
 
-Sunday **6:00 a.m. Chicago** automation: search last week’s reputable news on **final expense, whole life, term, IUL, and annuities**, assemble the client-style newsletter, and email it to:
+Sunday **6:00 a.m. Chicago** automation: **two-stage AI** (research brief → writing), covering last week’s reputable news on **final expense, whole life, term, IUL, and annuities**, then email:
 
 - `julie@mejorvidainsurance.com` (Spanish)
 - `admin@mejorvidainsurance.com` (English)
@@ -9,6 +9,7 @@ This folder is the project. Follow it every week. Do not improvise a different f
 
 | File | Use |
 |------|-----|
+| [TWO_STAGE_WORKFLOW.md](TWO_STAGE_WORKFLOW.md) | **Required** — Stage 1 research vs Stage 2 writing, models, validation |
 | [CONTENT_PACKAGE.md](CONTENT_PACKAGE.md) | Quality spec: website feature, email, Facebook, publishing materials |
 | [SOURCES.md](SOURCES.md) | Reputable sites, search queries, and what to reject |
 | [AGENT_RUNBOOK.md](AGENT_RUNBOOK.md) | Step-by-step for Cursor / cron (do not skip steps) |
@@ -32,11 +33,10 @@ The in-code window is **Sunday hour 6 only** in America/Chicago:
 
 The job:
 
-1. Searches last week’s news (Google News RSS + direct reputable feeds).
-2. Picks **exactly 3** family-facing stories (evergreen if news is thin).
-3. Writes a Spanish digest (no invented premiums, no Medicare).
-4. Saves `crm_newsletter_issues` (`hero_source: weekly_research`).
-5. Emails **julie@** (Spanish) and **admin@** (English) via Resend.
+1. **Stage 1:** Searches last week’s news (Google News RSS + direct reputable feeds), scores candidates, selects **exactly 3**, saves a validated research brief (`tools/weekly-newsletter/out/research-brief-*.json`). Default research model: `o3` (`WEEKLY_NEWSLETTER_RESEARCH_MODEL`).
+2. **Stage 2:** Separate writing call from that brief only (default `gpt-5.6` via `WEEKLY_NEWSLETTER_WRITE_MODEL` — never mini/economy). Spanish + English digest; no invented premiums; no Medicare.
+3. Saves `crm_newsletter_issues` (`hero_source: weekly_research`).
+4. Emails **julie@** (Spanish) and **admin@** (English) via Resend.
 
 Client blast is **not** automatic from this research job. After Julie reviews the 6 a.m. letter, use Staff → Weekly emails → **Send now** (or set `WEEKLY_NEWSLETTER_SEND_CLIENTS=1` on Vercel if she wants clients included in the same Sunday send).
 
@@ -45,12 +45,13 @@ Facebook is automatic **after** the public digest and three story images are liv
 ## Manual run (local)
 
 ```bash
+npm run weekly:newsletter -- --research-only
 npm run weekly:newsletter -- --dry-run
 npm run weekly:newsletter
 ```
 
-`--force` re-runs even if this Sunday already sent. `--research-only` prints candidates and does not email.
+`--force` re-runs even if this Sunday already sent. `--research-only` runs Stage 1 only (brief + validation, no email).
 
 ## Never skip a Sunday
 
-If news is slow, use evergreen fallbacks in `sources.json`. The inbox must still receive three stories by 6 a.m.
+If news is slow, use evergreen fallbacks in `sources.json` as **background**, clearly labeled. The inbox must still receive three stories by 6 a.m.
