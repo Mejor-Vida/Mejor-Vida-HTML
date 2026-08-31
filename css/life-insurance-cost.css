@@ -353,6 +353,20 @@
   font-weight: 700;
 }
 
+.lic-section h3 {
+  margin: 1.15rem 0 0.4rem;
+  color: #0b3a7a;
+  font-size: 1.08rem;
+  font-weight: 800;
+}
+
+.lic-section > ul {
+  margin: 0 0 1rem;
+  padding-left: 1.2rem;
+  color: var(--lic-muted);
+  line-height: 1.5;
+}
+
 .lic-section > p {
   margin: 0 0 1rem;
   color: var(--lic-muted);
@@ -3122,6 +3136,23 @@ a.lic-co-card--link .lic-co-specs dd {
   text-align: center;
   font-weight: 650;
   line-height: 1.3;
+}
+
+.lic-compare-table--plain {
+  min-width: 40rem;
+  font-size: 0.95rem;
+}
+
+.lic-compare-table--plain thead th:first-child,
+.lic-compare-table--plain tbody th {
+  width: 26%;
+}
+
+.lic-compare-table--plain tbody td {
+  text-align: left;
+  font-weight: 500;
+  vertical-align: top;
+  line-height: 1.45;
 }
 
 .lic-compare-table tbody tr:nth-child(even) td {

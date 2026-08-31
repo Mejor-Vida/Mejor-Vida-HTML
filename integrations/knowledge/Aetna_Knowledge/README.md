@@ -1,6 +1,6 @@
 # Aetna Senior Supplemental / Accendo — knowledge harvest
 
-**Captured:** 2026-07-28 · **Portal re-check:** 2026-08-09 (`raw/harvest-20260809/`) via MVI Agent Browser Bridge (Julie session, portal `aetnaseniorproducts.com`)  
+**Captured:** 2026-07-28 · **Portal re-check:** 2026-08-30 Accendo cardiac via AQE sandbox (`raw/harvest-20260830/`); catalog 2026-08-09 (`raw/harvest-20260809/`) via MVI Agent Browser Bridge (Julie session, portal `aetnaseniorproducts.com`)  
 **Agent account:** Mejor Vida Insurance LLC (GNW5050773)
 
 ## Important scope note (Mejor Vida)
@@ -82,7 +82,8 @@ All other portal products (Med Supp, Cancer/Heart/Stroke, Hospital Indemnity Fle
 
 - [`MASTER_AETNA_FE_KNOWLEDGE.md`](./MASTER_AETNA_FE_KNOWLEDGE.md)
 - [`LIFE_PRODUCTS.md`](./LIFE_PRODUCTS.md)
-- [`MASTER_AETNA_UW_AND_AGENT.md`](./MASTER_AETNA_UW_AND_AGENT.md) — Quote & Enroll / Milliman / handbook UW
+- [`MASTER_AETNA_UW_AND_AGENT.md`](./MASTER_AETNA_UW_AND_AGENT.md) — Quote & Enroll / Milliman / handbook UW + Accendo cardiac (AQE 2026-08-30)
+- [`ACCENDO_CARDIAC_UW.md`](./ACCENDO_CARDIAC_UW.md) — human index for Accendo heart routing (embed via UW MASTER)
 - [`MASTER_AETNA_DRUG_LIST.md`](./MASTER_AETNA_DRUG_LIST.md) — staff only
 - [`STATE_AVAILABILITY.md`](./STATE_AVAILABILITY.md)
 - Public chatbot seed: `scripts/knowledge_seed_aetna_fe.csv`

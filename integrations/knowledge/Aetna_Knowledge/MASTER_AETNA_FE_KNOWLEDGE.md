@@ -48,11 +48,13 @@
 | Cash value | ACV chart `CLIFE07472_CASH_VALUE_FNLEX_120221` |
 | Julie states | NE, KS, CO, NV — Yes (CGFLP01577, eff. 05-11-26) |
 
-## App plan routing (Accendo brochure)
+## App plan routing (Accendo AQE 2026-08-30 + brochure ACCFE05984)
 
-- Part B yes → Modified  
-- Part C yes → Standard Level  
-- All no A/B/C → Preferred Level  
+- Section A yes → **not eligible** (do not submit). Includes **CHF ever**.  
+- Section B yes → **Modified**. Includes heart attack / angina / cardiomyopathy / heart or circulatory surgery **in the past year**.  
+- Section C yes → **Standard Level**. Includes the same heart items **in the past 2 years**.  
+- All no A/B/C → **Preferred Level**  
+- Rx list + Milliman can still change the decision. Staff wording: `MASTER_AETNA_UW_AND_AGENT.md`.  
 
 ## Company lineup (producer guide)
 

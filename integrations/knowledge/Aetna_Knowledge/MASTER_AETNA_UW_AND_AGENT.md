@@ -3,7 +3,7 @@
 **Carrier label for RAG:** Aetna (Accendo FE + Protection Series FE / CLI)  
 **Portal:** Aetna Senior Supplemental Insurance — `aetnaseniorproducts.com` (agent login)  
 **Audience:** Staff assistant / agents only. Do **not** paste FP manuals, drug lists, commission guides, or Quote & Enroll decision logic onto public pages or the consumer chatbot.  
-**Portal re-check:** 2026-08-09 (MVI Agent Bridge harvest `raw/harvest-20260809/`) — Reference Material still lists Producer guide, Product overview, Drug List, Underwriting FAQ, Accendo FE Sales Handbook, Accendo FE drug list, ACC & PS CLI FE commission guide. Forms & Documents still lists Accendo FE ACV chart + CLI FE ACV chart.
+**Portal re-check:** 2026-08-30 (MVI Agent Bridge — Accendo FE cardiac via Quote & Enroll **sandbox** `aqetraining`, NE). Prior catalog harvest 2026-08-09 (`raw/harvest-20260809/`). Reference Material still lists Producer guide, Product overview, Drug List, Underwriting FAQ, Accendo FE Sales Handbook, Accendo FE drug list. Forms & Documents: Accendo FE ACV chart + CLI FE ACV chart (no paper Accendo app in Forms; health questions live in AQE). NE brochure cited in AQE: **ACCFE05984**.
 
 ## Julie scope reminder
 
@@ -78,7 +78,55 @@ Agent Services: **866-272-6630**.
 | Modified DB | Accidental full immediately; non-accidental yrs 1–2 = **110% earned premium**; yr 3+ full face |
 | Policy fee | **$40** annual |
 | Level riders | Accelerated DB (up to 50%, caps/fees); Accidental death (issue 40–70); Child/grandchild term ($2,500 units up to $10,000/child typical) |
-| App routing (brochure) | Part B yes → Modified; Part C yes → Standard Level; all no A/B/C → Preferred Level |
+| App routing (AQE 2026-08-30 + brochure) | Section A yes → not eligible; Section B yes → Modified; Section C yes → Standard Level; all no A/B/C → Preferred Level |
+
+## Accendo FE — cardiac (staff)
+
+**Harvest:** 2026-08-30. Aetna Quote & Enroll **sandbox** (training; cannot submit), Nebraska, Accendo Final Expense Plan Eligibility. Matches brochure sample **ICC20-ACCFE05982** and NE brochure **ACCFE05984**. Human index: `ACCENDO_CARDIAC_UW.md`.
+
+Accendo does **not** publish a Transamerica-style Premier/Select chart by years since MI. Routing is **yes/no application sections** plus **Rx list** + Milliman.
+
+### Live Section wording (staff only — not for public HTML)
+
+**Section A —** If you answer “yes” in section A, you are not eligible. You will not be able to complete or submit this application.
+
+Cardiac-relevant A items:
+
+- 6C. Have you ever been diagnosed with, received or been advised to receive treatment or medication for **congestive heart failure**, pulmonary fibrosis, any terminal condition or end-stage disease?
+- 6D. … or **un-operated heart defects** (with cerebral palsy, cystic fibrosis, muscular dystrophy)
+
+**Section B —** If any “yes” answers in section B, you are eligible for **Modified Plan**.
+
+- 2. **Within the past year** have you been diagnosed with, received or been advised to receive treatment for:
+  - A. **angina (chest pain), heart attack, cardiomyopathy, or any type of heart or circulatory procedure or surgery?**
+  - B. stroke or TIA, aneurysm or brain tumor?
+
+**Section C —** appears after A and B are all No and **Check eligibility**. If any “yes” in section C → **Standard Level Plan**. If all “no” in A, B, and C → **Preferred Level Plan**.
+
+- 1. **Within the past 2 years** have you been diagnosed with, received or been advised to receive treatment for:
+  - A. **angina (chest pain), heart attack, cardiomyopathy, or any type of heart or circulatory procedure or surgery?**
+  - B. stroke or TIA, aneurysm or brain tumor?
+
+### Date logic (other questions no)
+
+| Timing of heart attack / angina / cardiomyopathy / heart or circulatory surgery | Typical Accendo plan |
+|-----------------------------------------------------------------------------|----------------------|
+| Less than 1 year | Modified |
+| 1–2 years | Standard Level |
+| More than 2 years | Can be Preferred Level |
+| CHF ever (Section A 6C) | Not eligible on this Accendo application |
+
+Stent, bypass, angioplasty, pacemaker, ICD: **not separate rows**. They are **heart or circulatory procedure or surgery** by date. CHF + device still hits Section A.
+
+### Heart-failure medicines
+
+Many CHF drugs are • on Preferred **and** Standard **and** Modified (full list in `MASTER_AETNA_DRUG_LIST.md`). Examples: **Entresto**, **Bidil**, **Coreg** / carvedilol, **Corlanor**, loop diuretics used for CHF. A • in all three columns means do not submit that Accendo plan for that listed condition — GIWL may still be open if age/amount fit. Many **angina** drugs are • • (Preferred and Standard blocked; Modified may still be open).
+
+Questionnaire answers do **not** override Milliman / Rx / MIB. Green / yellow / red at the end of the e-app still apply.
+
+**Public pages:** may say Accendo uses health questions (cannot issue / Modified / Standard Level / Preferred) plus a prescription check, with a one-year vs two-year vs older split for heart attack and heart procedures. Do **not** dump Section A/B/C text or the drug list. Do **not** copy FE Express Premier/Select onto Accendo.
+
+---
 
 ## Protection Series FE (CLI) — agent card
 

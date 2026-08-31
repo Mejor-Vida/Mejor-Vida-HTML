@@ -260,6 +260,33 @@
 
 **Agent Tip:** Use Graded Benefit for clients with significant health issues — no tobacco distinction means same rates regardless of tobacco use.
 
+### Living Promise® — cardiac underwriting (SPA harvest 2026-08-30)
+
+**Source (producer only):** *Simplified Issue Life Underwriting Guide — Term and Permanent Products*, form **618352_0426**, updated **April 2026**. Downloaded from Sales Professional Access → Life Insurance → Underwriting (`producer2.mutualofomaha.com/products/life/underwriting`) while logged in. Covers Term Life Express, IUL Express, **Living Promise**, and Children’s Whole Life. Do not paste this guide onto public pages.
+
+Living Promise does **not** publish a Transamerica-style single-condition class chart (Premier / Select / Preferred / Standard). Level vs Graded is the **application health questions**:
+
+- **Part One — any YES:** that person **may not be eligible for any coverage** under this application.
+- **Part Two — any YES:** eligible **only for the Graded Benefit** product.
+- **All underwriting questions NO:** eligible for the **Level Benefit** product.
+- Classes on Level: **Standard Tobacco / Nontobacco** only. Graded: **Standard** with **no tobacco distinction**.
+
+**Common impairments (all simplified products, including Living Promise)** that *may* result in an adjusted benefit or decline — guide language; not an all-inclusive list; not a class map:
+
+- Abnormal / irregular heart rhythm
+- Cardiomyopathy
+- Congestive heart failure (CHF)
+- Coronary disease including heart attack or heart surgery
+- Defibrillator
+- Heart disease or surgery
+- Pacemaker
+
+**Living Promise medication list (cardiac-relevant examples):** proposed insureds currently taking listed drugs are not eligible for Living Promise. Asterisk (*) = may still qualify for **graded**. Cardiac examples on the April 2026 list: **Amiodarone\*** (arrhythmia), **Ranexa\*** (chronic angina). This list is not all-inclusive; United of Omaha may add drugs at any time.
+
+**Automated underwriting** on Living Promise e-App (iGO): **Approved**, **Referred to Underwriting**, or **Declined**. Rx / MIB / medical data check still apply (simplified requirements chart).
+
+**Do not** copy FE Express “&lt;1 year Select / &gt;1 year Premier” windows onto Living Promise. Quote with real diagnosis names and dates.
+
 ---
 
 ### Children's Whole Life

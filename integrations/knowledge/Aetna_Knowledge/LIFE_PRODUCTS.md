@@ -29,7 +29,7 @@ Sources: Product Overview (`CGFMP08411`), Product Description Flyer (`CGFMP03457
 | Policy fee | **$40** annual |
 | Rate classes | Male/female, tobacco/non-tobacco; Preferred; **Super Preferred = 10% below Preferred** (when qualifies) |
 | Riders (Level only) | Accelerated DB (up to 50%, caps/fees); Accidental death (issue ages 40–70); Child/grandchild term ($2,500 units up to $10,000/child) |
-| App routing | Part B yes → Modified; Part C yes → Standard Level; all no → Preferred Level |
+| App routing | Section A yes → not eligible; Section B yes → Modified (heart attack / procedure **past year**); Section C yes → Standard Level (same items **past 2 years**); all no → Preferred Level. Verified AQE sandbox 2026-08-30 (NE). |
 | Billing | Can match **Social Security** deposit date; producer guide: Direct Pay after issue **not** available for FE |
 | UW | Health questions + Quote & Enroll / Milliman IntelliScript (Approved / Declined / Additional Review) |
 | Cash value | Nonforfeiture: reduced paid-up, extended term, APL; ACV chart `ACCFE06490_…` |
