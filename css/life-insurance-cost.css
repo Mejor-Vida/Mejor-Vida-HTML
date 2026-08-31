@@ -3224,6 +3224,17 @@ a.lic-co-card--link .lic-co-specs dd {
   margin-bottom: 0;
 }
 
+.lic-cost-lesson {
+  margin: 0 0 1.05rem;
+  padding: 0.95rem 1.15rem;
+  background: #eef4fb;
+  border-left: 4px solid #0b3a7a;
+  border-radius: 0 0.45rem 0.45rem 0;
+  color: #1f2937;
+  font-size: 0.98rem;
+  line-height: 1.5;
+}
+
 @media (max-width: 991.98px) {
   .lic-compare-scroll-hint {
     display: block;

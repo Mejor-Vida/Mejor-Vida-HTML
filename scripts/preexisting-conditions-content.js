@@ -1,5 +1,11 @@
 "use strict";
 
+// First-use jargon: the first time a page uses an insurance term (level plan,
+// waiting period, guaranteed acceptance), define it in plain language. Later
+// mentions on the same page do not repeat the definition. Do not use
+// carrier-specific labels (Preferred, Standard, knockout, Part One, Section A)
+// on public pages. Flag gaps instead of guessing.
+
 const { quoteRailHtml, PHONE, TEL } = require("./lic-quote-rail");
 
 const LINKS = {
@@ -90,7 +96,7 @@ function feRateBlock(c, quoteHref) {
 <tbody data-lic-tbody></tbody>
 </table>
 </div>
-<p class="lic-rate-note" data-lic-note></p>
+<p class="lic-rate-note"${c.hideJsRateNote ? " hidden" : ""} data-lic-note></p>
 </div>`;
 }
 
@@ -1155,7 +1161,7 @@ function copyDiabetes(lang) {
       h1: "¿Puede comprar gastos finales si tiene diabetes?",
       lead: "A menudo sí. La diabetes es uno de los historiales más comunes en pólizas pequeñas de entierro. La palabra “diabetes” <strong>no es un rechazo automático</strong> y <strong>no es una espera automática de dos años</strong>. Lo que la compañía revisa es el resto del archivo: el tratamiento, las complicaciones, otros diagnósticos y el tabaco.",
       crumbEnd: "Diabetes",
-      take1: "Un diagnóstico no lo encierra, por sí solo, en aceptación garantizada. Muchas personas contestan un cuestionario corto y, si esas respuestas caben, reciben un plan que puede pagar el monto completo desde el primer pago cubierto.",
+      take1: "Un diagnóstico no lo encierra, por sí solo, en aceptación garantizada. Muchas personas contestan un cuestionario corto y, si esas respuestas caben, reciben un <strong>plan nivelado</strong>: el monto completo puede pagar desde el primer pago cubierto.",
       take2: "La compañía mira el cuadro completo — tipo, insulina o pastillas, complicaciones, recetas ya surtidas y otras condiciones — no solo la palabra “diabetes.”",
       take3: "Una póliza sin preguntas de salud espera unos dos años por muerte natural y suele cubrir menos. Ese producto se llama GIWL: vida entera de emisión garantizada. Existe. No es el primer intento para una diabetes típica y controlada.",
       callout: "Las primas de muestra más abajo son de un plan nivelado si el cuestionario emite. No hay una “tarifa diabetes” aparte: el precio sigue a edad, sexo y tabaco. No es una oferta.",
@@ -1276,7 +1282,7 @@ function copyDiabetes(lang) {
     h1: "Can you buy final expense insurance if you have diabetes?",
     lead: "Often yes. Diabetes is one of the most common histories we see on burial-size whole life. The word “diabetes” is <strong>not an automatic decline</strong> and it is <strong>not an automatic two-year wait</strong>. What the company reviews is the rest of the file: treatment, complications, other diagnoses, and tobacco.",
     crumbEnd: "Diabetes",
-    take1: "A diagnosis does not, by itself, lock you into guaranteed acceptance. Many people still complete a short health questionnaire and, if those answers fit, receive a plan that can pay the full amount from the first covered payment.",
+    take1: "A diagnosis does not, by itself, lock you into guaranteed acceptance. Many people still complete a short health questionnaire and, if those answers fit, receive a <strong>level plan</strong>: the full amount can pay from the first covered payment.",
     take2: "The company looks at the whole picture — type, insulin or pills, complications, prescriptions already on file, and other conditions — not the word “diabetes” alone.",
     take3: "A policy with no health questions waits about two years for natural death and usually covers less. That product is called GIWL: guaranteed-issue whole life. It exists. It is not the first try for typical, controlled diabetes.",
     callout: "Sample premiums later on this page are for a level plan if the questionnaire issues. There is no separate “diabetes rate”: price still follows age, sex, and tobacco. Not an offer.",
@@ -1391,6 +1397,7 @@ function copyDiabetes(lang) {
 function factorCardsHtml(c) {
   const cards = [];
   for (let n = 1; n <= 8; n += 1) {
+    if (!c["f" + n + "c"]) continue;
     const items = c["f" + n + "items"] || [];
     const gap = c["f" + n + "gap"];
     cards.push(`<article class="lic-factor">
@@ -1409,6 +1416,34 @@ ${gap ? `<p class="lic-factor__gap">${gap}</p>` : ""}
 </article>`);
   }
   return `<div class="lic-factor-list">${cards.join("\n")}</div>`;
+}
+
+function planCompareHtml(c) {
+  const rows = [
+    ["vsR1H", "vsR1A", "vsR1B", "vsR1C"],
+    ["vsR2H", "vsR2A", "vsR2B", "vsR2C"],
+    ["vsR3H", "vsR3A", "vsR3B", "vsR3C"],
+    ["vsR4H", "vsR4A", "vsR4B", "vsR4C"],
+  ];
+  return `<div class="lic-vs-chart lic-vs-chart--three" role="table" aria-label="${c.vsH}">
+<div class="lic-vs-chart__row lic-vs-chart__head" role="row">
+<div class="lic-vs-chart__q lic-vs-chart__q--blank" role="columnheader"></div>
+<div class="lic-vs-chart__ins" role="columnheader"><strong>${c.vsCol1}</strong><span>${c.vsCol1Sub}</span></div>
+<div class="lic-vs-chart__mid" role="columnheader"><strong>${c.vsCol2}</strong><span>${c.vsCol2Sub}</span></div>
+<div class="lic-vs-chart__pre" role="columnheader"><strong>${c.vsCol3}</strong><span>${c.vsCol3Sub}</span></div>
+</div>
+${rows
+  .map(
+    ([h, a, b, d]) => `<div class="lic-vs-chart__row" role="row">
+<div class="lic-vs-chart__q" role="rowheader">${c[h]}</div>
+<div class="lic-vs-chart__ins" role="cell" data-label="${c.vsCol1}">${c[a]}</div>
+<div class="lic-vs-chart__mid" role="cell" data-label="${c.vsCol2}">${c[b]}</div>
+<div class="lic-vs-chart__pre" role="cell" data-label="${c.vsCol3}">${c[d]}</div>
+</div>`
+  )
+  .join("\n")}
+</div>
+<p class="lic-rate-note">${c.vsLearn}</p>`;
 }
 
 function diabetesMain(lang, page, c) {
@@ -1509,7 +1544,7 @@ function copyHeart(lang) {
       title: "Seguro de gastos finales con enfermedad del corazón (2026) | Mejor Vida Seguros",
       desc: "Un infarto antiguo o enfermedad coronaria a menudo sigue en gastos finales simplificados. Insuficiencia cardíaca, un evento reciente o un desfibrilador cambian el camino.",
       h1: "Seguro de gastos finales si tiene enfermedad del corazón",
-      lead: "El CDC sitúa las enfermedades del corazón entre las causas más frecuentes de muerte en Estados Unidos. Para gastos finales, “corazón” no es una sola casilla. Un infarto de hace diez años, con pastillas y sin internaciones nuevas, a menudo <strong>sigue en un plan nivelado</strong>. Un evento en los últimos dos años, o insuficiencia cardíaca, se mira con más cuidado.",
+      lead: "El CDC sitúa las enfermedades del corazón entre las causas más frecuentes de muerte en Estados Unidos. Para gastos finales, “corazón” no es una sola casilla. Un infarto de hace diez años, con pastillas y sin internaciones nuevas, a menudo <strong>sigue en un plan nivelado</strong> (cuestionario de salud; el monto completo puede pagar desde el primer pago cubierto). Un evento en los últimos dos años, o insuficiencia cardíaca, se mira con más cuidado.",
       crumbEnd: "Corazón",
       take1: "En el gráfico de un solo padecimiento de Transamerica, “enfermedad del corazón” puede quedar <strong>Preferred</strong>. La insuficiencia cardíaca (congestiva, diastólica) queda <strong>Standard</strong>. Un infarto se lee en esa misma familia de reglas, no como un “no” automático.",
       take2: "En el flujo interno de Mejor Vida Seguros preguntamos si hubo infarto, derrame o AIT en los <strong>últimos dos años</strong>. Ese recorte de tiempo cambia más el producto que un episodio antiguo.",
@@ -1553,7 +1588,7 @@ function copyHeart(lang) {
     title: "Final expense insurance with heart disease (2026) | Mejor Vida Insurance",
     desc: "An old heart attack or coronary disease often still qualifies for simplified final expense. Heart failure, a recent event, or a defibrillator can change the path.",
     h1: "Final expense insurance if you have heart disease",
-    lead: "The CDC lists heart disease among the most common causes of death in the United States. For final expense, “heart” is not one checkbox. A heart attack ten years ago, with pills and no new hospital stays, often <strong>still fits a level plan</strong>. An event in the last two years, or heart failure, is reviewed more carefully.",
+    lead: "The CDC lists heart disease among the most common causes of death in the United States. For final expense, “heart” is not one checkbox. A heart attack ten years ago, with pills and no new hospital stays, often <strong>still fits a level plan</strong> (a health questionnaire; the full amount can pay from the first covered payment). An event in the last two years, or heart failure, is reviewed more carefully.",
     crumbEnd: "Heart disease",
     take1: "On Transamerica’s single-condition chart, “heart disease” can be <strong>Preferred</strong>. Congestive or diastolic heart failure is <strong>Standard</strong>. A heart attack is read in that same family of rules, not as an automatic “no.”",
     take2: "In Mejor Vida Insurance’s internal flow we ask whether there was a heart attack, stroke, or TIA in the <strong>last two years</strong>. That time window changes the product more than an old episode.",
@@ -1595,9 +1630,7 @@ function copyHeart(lang) {
 function heartMain(lang, page, c) {
   const isEs = lang === "es";
   return condShell(lang, page, c, {
-    toc: isEs
-      ? [["#what", "Qué es"], ["#uw", "Suscripción"], ["#changes", "Qué cambia"], ["#cost", "Costo"], ["#companies", "Compañías"], ["#faq", "Preguntas"]]
-      : [["#what", "What it is"], ["#uw", "Underwriting"], ["#changes", "What changes"], ["#cost", "Cost"], ["#companies", "Companies"], ["#faq", "Questions"]],
+    toc: tocPair(isEs),
     inner: conditionInner(lang, c, {}),
   });
 }
@@ -1612,116 +1645,413 @@ function copyHbp(lang) {
   const b = baseCopy(lang);
   const src = sharedSources(isEs, {
     src2: isEs
-      ? '<a href="https://www.cdc.gov/high-blood-pressure/about/index.html" rel="noopener" target="_blank">CDC: presión arterial alta</a> — es frecuente; muchas personas la controlan con medicamentos.'
-      : '<a href="https://www.cdc.gov/high-blood-pressure/about/index.html" rel="noopener" target="_blank">CDC: high blood pressure</a> — it is common; many people control it with medication.',
+      ? '<a href="https://www.cdc.gov/high-blood-pressure/about/index.html" rel="noopener" target="_blank">CDC: presión arterial alta</a> — qué es, que a menudo no da síntomas y cómo se trata; no es una regla de una aseguradora.'
+      : '<a href="https://www.cdc.gov/high-blood-pressure/about/index.html" rel="noopener" target="_blank">CDC: high blood pressure</a> — what it is, that it often has no symptoms, and how it is treated; not an insurer’s rule.',
     src3: isEs
-      ? '<a href="https://www.nhlbi.nih.gov/health/high-blood-pressure" rel="noopener" target="_blank">NHLBI: presión alta</a> — qué es y por qué se trata; no es una regla de seguros.'
-      : '<a href="https://www.nhlbi.nih.gov/health/high-blood-pressure" rel="noopener" target="_blank">NHLBI: high blood pressure</a> — what it is and why it is treated; not an insurance rule.',
+      ? '<a href="https://www.nhlbi.nih.gov/health/high-blood-pressure" rel="noopener" target="_blank">NHLBI: presión arterial alta</a> — números, categorías y por qué se trata. <a href="https://www.nhlbi.nih.gov/health/pulmonary-hypertension" rel="noopener" target="_blank">NHLBI: hipertensión pulmonar</a> — una enfermedad distinta en las arterias de los pulmones.'
+      : '<a href="https://www.nhlbi.nih.gov/health/high-blood-pressure" rel="noopener" target="_blank">NHLBI: high blood pressure</a> — numbers, categories, and why it is treated. <a href="https://www.nhlbi.nih.gov/health/pulmonary-hypertension" rel="noopener" target="_blank">NHLBI: pulmonary hypertension</a> — a different disease in the lung arteries.',
+    src4: isEs
+      ? '<a href="https://www.heart.org/en/health-topics/high-blood-pressure" rel="noopener" target="_blank">American Heart Association: high blood pressure</a> — material público para el consumidor sobre presión alta y el corazón.'
+      : '<a href="https://www.heart.org/en/health-topics/high-blood-pressure" rel="noopener" target="_blank">American Heart Association: high blood pressure</a> — public consumer material on blood pressure and the heart.',
+    src5: isEs
+      ? '<a href="https://www.niddk.nih.gov/health-information/kidney-disease/high-blood-pressure" rel="noopener" target="_blank">NIDDK: presión alta y riñón</a> — cómo la presión alta se relaciona con la enfermedad renal; no sustituye el cuestionario de una póliza.'
+      : '<a href="https://www.niddk.nih.gov/health-information/kidney-disease/high-blood-pressure" rel="noopener" target="_blank">NIDDK: high blood pressure and the kidneys</a> — how high blood pressure relates to kidney disease; it does not replace a policy questionnaire.',
+    src6: "",
   });
+  src.src6 = "";
   if (isEs) {
     return {
       ...b,
       ...src,
+      hideJsRateNote: true,
+      coWait: "¿Espera de 2 años?",
+      coWaitNo: "No, si las preguntas de salud califican",
+      coMooProduct: "Living Promise",
+      coAetnaProduct: "Accendo Final Expense",
+      coTaProduct: "Immediate Solution",
+      coAmericoProduct: "Eagle Select",
+      coGiProduct: "Vida entera de aceptación garantizada",
+      coGiFoot: "Una póliza de aceptación garantizada por asegurado cada 12 meses; el total de esa compañía no supera $25,000. Educativo — no es cotización vinculante.",
       title: "Seguro de gastos finales con presión arterial alta (2026) | Mejor Vida Seguros",
-      desc: "La presión alta, sola, casi nunca empuja a aceptación garantizada. Cómo la miran las compañías designadas y cuándo otras condiciones cambian el plan.",
-      h1: "Seguro de gastos finales si tiene presión arterial alta",
-      lead: "La presión arterial alta es una de las condiciones más comunes en adultos mayores. El CDC explica que a menudo no da síntomas y se controla con medicamentos. En gastos finales, <strong>un “sí” a presión alta casi nunca es el final del camino nivelado</strong>. Lo que sí cambia el producto es un derrame, un infarto reciente, enfermedad renal avanzada u oxígeno.",
+      desc: "La presión alta, sola, casi nunca obliga a un plan sin preguntas de salud. Cómo funciona el seguro de gastos finales, qué cambia el producto y cuándo hay que decir que no lo sabemos.",
+      h1: "¿Puede comprar gastos finales si tiene presión arterial alta?",
+      lead: "A menudo sí. La presión arterial alta es una de las condiciones más comunes en adultos mayores. El CDC explica que con frecuencia no da síntomas y se trata con cambios de hábitos y medicamentos. En un seguro de entierro de monto pequeño, ese diagnóstico <strong>por sí solo</strong> casi nunca es motivo para saltarse las preguntas de salud y comprar un plan que espera dos años. Lo que sí cambia el producto es cuando la presión ya se acompañó de un derrame, un infarto reciente, insuficiencia cardíaca, diálisis u oxígeno.",
       crumbEnd: "Presión alta",
-      take1: "Tener una receta de lisinopril u otro antihipertensivo es cotidiano en estas solicitudes. No es, por sí solo, un descalificador en Living Promise, Accendo o Transamerica Immediate Solution.",
-      take2: "El precio de un plan nivelado sigue a edad, sexo y tabaco. No publicamos un recargo separado llamado “presión alta.”",
-      take3: "Si la presión alta viene con derrame, insuficiencia cardíaca o riñón en diálisis, ya no es “solo presión.” Use esas guías.",
-      callout: "No elija GIWL solo porque toma una pastilla para la presión. Cotice primero el simplificado.",
-      whatH: "Qué es la presión alta",
-      whatP1: "El CDC y el NHLBI describen la hipertensión como una fuerza demasiado alta de la sangre contra las arterias. Durante años puede no notarse. El tratamiento suele ser dieta, movimiento y medicamentos.",
-      whatP2: "El seguro de gastos finales no le pide que “esté curado.” Pregunta si hay otros daños: corazón, cerebro, riñón, internaciones.",
-      uwH: "Cómo lo miran las compañías designadas",
-      uwP: "En emisión simplificada, la presión alta controlada suele pasar el cuestionario si el resto de las respuestas son “no” a los descalificadores. Transamerica trata varios trastornos circulatorios como Preferred cuando no hay complicaciones. La presión no aparece en nuestra lista de situaciones donde el simplificado suele no emitir (esa lista incluye VIH, demencia, oxígeno por pulmón, diálisis, cáncer activo).",
-      uwNote: "Si solo tiene presión alta y colesterol, el primer producto a cotizar es nivelado, no GIWL.",
-      chH: "Qué suele cambiar la respuesta",
-      chP: "La pastilla no. Estos sí.",
-      ch1: "Derrame o AIT, sobre todo en los últimos dos años. Vea la guía de derrame.",
-      ch2: "Enfermedad del corazón con internación reciente o insuficiencia cardíaca. Vea corazón.",
-      ch3: "Daño renal con diálisis o trasplante. Vea riñón.",
-      ch4: "Tabaco: no declina por sí solo en estos productos; sí sube la tarifa de tabaco si hubo nicotina en 12 meses (regla de Transamerica en ese gráfico).",
-      costH: "Cuánto cuesta un plan nivelado",
-      costP: "Primas ilustrativas, no fumador, gastos finales nivelados. Si califica, estas filas son el punto de partida. GIWL no debería ser el primer cuadro que mire por presión alta sola.",
-      coH: "Compañías designadas (planes nivelados)",
-      coP: "Las mismas fichas de gastos finales que cotizamos para otras condiciones comunes. La presión alta rara vez es la razón de elegir GIWL.",
+      take1: "El primer producto a cotizar suele ser un <strong>plan nivelado</strong>: una póliza con un cuestionario corto de salud que puede pagar el monto completo desde el primer pago cubierto, casi siempre sin espera de dos años.",
+      take2: "El precio de ese plan sigue a la edad, el sexo y el tabaco. No hay un cargo extra con el nombre “presión alta.”",
+      take3: "Si también hay derrame, insuficiencia cardíaca o riñón en diálisis, ya no es “solo presión.” Use esas guías antes de asumir que el mismo plan aplica.",
+      callout: "No compre un plan de <strong>aceptación garantizada</strong> — sin preguntas de salud y con unos dos años de espera por muerte natural — solo porque toma una pastilla para la presión. Cotice primero un plan con preguntas de salud. No hay examen en el consultorio; sí hay que responder con honestidad.",
+      needH: "La preocupación real",
+      needP1: "Las familias buscan esta cobertura porque un funeral, el cementerio y deudas pequeñas pueden caer sobre parientes. Un seguro de gastos finales es vida permanente de monto pequeño, pensado para esa factura — no sustituye una póliza grande de ingresos.",
+      needP2: "Un diagnóstico que usted ya tiene se llama a menudo <strong>condición preexistente</strong>. Esa etiqueta no significa, por sí sola, una espera de dos años. El miedo suele ser: “¿Me van a vender solo un plan que espera, o hay un camino que paga completo desde el inicio?” El resto de la página explica esa diferencia <strong>antes</strong> de nombrar compañías.",
+      whatH: "Qué significa la presión alta para su salud",
+      whatP1: "El CDC y el NHLBI describen la presión arterial como la fuerza de la sangre contra las arterias. Se escribe con dos números, por ejemplo 120/80. El primero es cuando el corazón empuja; el segundo, entre latidos. La presión alta — también llamada hipertensión — es cuando esas lecturas se mantienen en 130/80 o más.",
+      whatP2: "A menudo no se siente. Por eso tantas personas se enteran en un control de rutina. El tratamiento suele ser menos sal, más movimiento, no fumar y, cuando el médico lo indica, medicamentos. Sin tratamiento, la presión alta puede dañar el corazón, el cerebro, los riñones y los ojos.",
+      whatP3: "Una aseguradora no trata la presión alta. Decide si el historial, como queda escrito y como aparece en las recetas ya surtidas, cabe en un producto que está dispuesta a emitir. No le pide que “esté curado.”",
+      howH: "Cómo mira el seguro de vida un historial de salud",
+      howP1: "En gastos finales el camino habitual no es un examen en el consultorio. Hay un cuestionario corto y, en la mayoría de los productos que cotizamos, una revisión de recetas. La NAIC recuerda al consumidor que las respuestas honestas importan cuando llega un reclamo: un “no” que debió ser “sí” puede frenar o anular el pago.",
+      howP2: "Si esas preguntas se pueden contestar sin chocar con lo que ese producto no puede emitir, el plan suele ser el nivelado: el monto completo puede aplicar a una muerte natural cubierta desde el primer pago. Si no puede emitir así, algunos productos pagan menos o devuelven primas en los primeros años. Si tampoco puede emitir, un plan de aceptación garantizada no hace preguntas de salud y espera unos dos años por muerte natural.",
+      howP3: "El seguro temporal con montos más altos es otro producto: a veces hay laboratorios o una visita para tomar signos vitales, incluida la presión. Esa es una conversación distinta. Si la necesidad es ingreso o hipoteca, no entierro, vea <a href=\"" + L.termCond + "\">temporal con condiciones previas</a>.",
+      pathsH: "Tres tipos de plan, comparados",
+      vsH: "Cómo se comparan los tres tipos de plan",
+      vsCol1: "Paga completo",
+      vsCol1Sub: "Plan nivelado, con preguntas",
+      vsCol2: "Paga menos al inicio",
+      vsCol2Sub: "Todavía hay preguntas",
+      vsCol3: "Sin preguntas",
+      vsCol3Sub: "Aceptación garantizada",
+      vsR1H: "¿Hay preguntas de salud?",
+      vsR1A: "Sí. Hay que calificar.",
+      vsR1B: "Sí. Las respuestas no califican al plan que paga completo.",
+      vsR1C: "No.",
+      vsR2H: "Muerte natural en el primer año",
+      vsR2A: "Puede pagar el monto completo.",
+      vsR2B: "Paga una parte o devuelve primas, según el contrato.",
+      vsR2C: "Devuelve primas con el interés del contrato. No paga el monto completo.",
+      vsR3H: "Si la presión alta es lo principal",
+      vsR3A: "Suele ser el primer intento.",
+      vsR3B: "No es el punto de partida por una pastilla para la presión.",
+      vsR3C: "Reserva para cuando el cuestionario no puede emitir.",
+      vsR4H: "Precio, en términos generales",
+      vsR4A: "Suele ser el más bajo por dólar de estos tres.",
+      vsR4B: "Varía. No inventamos una prima de muestra aquí.",
+      vsR4C: "Suele costar más por dólar, a la misma edad y monto.",
+      vsLearn: "Esta tabla enseña la diferencia entre los tres caminos. No es una cotización. La solicitud en vivo sigue decidiendo en qué columna cae usted.",
+      pathsNote: "Ninguna compañía designada que cotizamos ofrece cero preguntas y un beneficio completo por muerte natural desde el día uno. Los anuncios que mezclan las dos cosas casi siempre siguen teniendo cuestionario.",
+      considerH: "Qué ayuda, y qué no",
+      considerP: "Contestar el cuestionario suele ser la ventaja: puede abrir más monto, un precio más bajo y el beneficio completo desde el primer pago cubierto. El límite es que el mismo cuestionario puede mandarlo a una espera o a aceptación garantizada si hay daño de órgano, internaciones recientes u otros diagnósticos. Esperar a solicitar “cuando la presión baje” solo sube la edad si el tratamiento ya es estable.",
+      split1H: "Suele seguir siendo un plan con preguntas",
+      split1a: "Presión alta tratada con medicamentos, sin internación reciente por esa causa.",
+      split1b: "Colesterol alto junto con la presión, si no hay otro daño listado.",
+      split1c: "Varias pastillas para la presión, si son para la presión y no para insuficiencia cardíaca.",
+      split2H: "Suele cambiar la conversación",
+      split2a: "Derrame o un episodio breve parecido a un derrame (AIT).",
+      split2b: "Infarto reciente, insuficiencia cardíaca o procedimiento del corazón.",
+      split2c: "Diálisis, oxígeno, o un diagnóstico de hipertensión pulmonar — no es la misma enfermedad que la presión en el brazo.",
+      factorsH: "Qué puede cambiar una solicitud con presión alta",
+      factorsP: "Cada tarjeta empieza con la idea de salud. A la derecha va solo lo que podemos afirmar para los productos de entierro que cotizamos. Si no podemos verificarlo, lo decimos.",
+      factorsNote: "Estas notas no son una cotización. Edad, tabaco, peso y un segundo diagnóstico todavía pueden cambiar el resultado.",
+      fMeaning: "En lenguaje sencillo",
+      fVerify: "Lo que podemos afirmar",
+      f1c: "Los medicamentos para la presión",
+      f1w: "Una pastilla para bajar la presión es un tratamiento, no un rechazo por sí sola. El CDC y el NHLBI describen el medicamento como parte habitual del control.",
+      f1items: [
+        "En los productos de entierro que cotizamos, el tratamiento habitual de la presión no es, por sí solo, motivo para saltar a un plan sin preguntas.",
+        "La misma pastilla a veces se receta también por insuficiencia cardíaca. Eso ya no es “solo presión.” Vea la guía de corazón.",
+        "No deje un medicamento recetado para “verse más sano” en la solicitud. Las recetas ya surtidas suelen aparecer en la revisión.",
+      ],
+      f1gap: "No publicamos una lista pública de cada pastilla. Traiga los nombres al cotizar. No adivinamos para qué se las recetaron.",
+      f2c: "Otras condiciones",
+      f2w: "La presión alta puede existir sola. También puede acompañar daño en el corazón, el cerebro o el riñón.",
+      f2items: [
+        "Un derrame o AIT no se cotiza como “solo presión.” Vea <a href=\"" + L.stroke + "\">derrame cerebral</a>.",
+        "Un infarto reciente o insuficiencia cardíaca cambia el producto. Vea <a href=\"" + L.heart + "\">enfermedad del corazón</a>.",
+        "Diálisis o trasplante es un archivo de riñón, no de presión. Vea <a href=\"" + L.kidney + "\">enfermedad renal</a>.",
+      ],
+      f3c: "Tabaco",
+      f3w: "Fumar o usar nicotina suele cambiar el precio. No es lo mismo que un “no” automático.",
+      f3items: [
+        "En estos productos de entierro, el tabaco suele significar una tarifa de tabaco si el resto de las respuestas todavía califica.",
+        "Una ventana habitual es nicotina en el último año para esa tarifa más alta. No publicamos aquí una ventana distinta por cada compañía.",
+      ],
+      f4c: "Presión alta y colesterol juntos",
+      f4w: "Es una combinación muy frecuente. El colesterol alto tampoco suele sentirse.",
+      f4items: [
+        "En los productos de entierro que cotizamos, presión alta más colesterol, sin otro daño listado, suele seguir siendo un plan con preguntas — no el primer motivo para aceptación garantizada.",
+      ],
+      f5c: "Las lecturas en el consultorio",
+      f5w: "El CDC usa 130/80 como el umbral médico. El NHLBI describe etapas y una crisis cuando los números llegan a 180/120 o más.",
+      f5items: [
+        "En los planes de entierro que cotizamos no suele ir una enfermera a casa a tomarle la presión.",
+        "Hay preguntas y revisión de recetas. Una póliza temporal más grande a veces sí mide la presión; eso es otro producto.",
+      ],
+      f5gap: "No tenemos una tabla pública de entierro que suba la prima solo porque la última lectura en el consultorio fue alta. No vamos a inventar esa tabla.",
+      f6c: "Hipertensión pulmonar",
+      f6w: "El NHLBI describe la hipertensión pulmonar como presión demasiado alta en las arterias de los pulmones. No es la misma enfermedad que la presión que le toman en el brazo.",
+      f6items: [
+        "Diga las palabras exactas del diagnóstico. No la trataremos como presión alta ordinaria.",
+      ],
+      f6gap: "Las compañías no la tratan todas igual. No vamos a afirmar un “sí” o un “no” universal.",
+      f7c: "Una internación por presión muy alta",
+      f7w: "Una crisis hipertensiva es una emergencia médica. El NHLBI indica buscar atención de inmediato con lecturas de ese nivel.",
+      f7items: [
+        "Cuéntenos si lo internaron y cuándo. Eso puede cambiar qué producto cabe.",
+      ],
+      f7gap: "Un producto distinto de Mutual of Omaha (no el de entierro Living Promise que cotizamos aquí) pregunta por internación por presión alta en cinco años. No vamos a aplicar esa pregunta de cinco años a todas las compañías.",
+      costH: "Precios mensuales de muestra si emite un plan con preguntas",
+      costP: "Estas cifras son primas mensuales ilustrativas, no fumador, para un plan de gastos finales que puede pagar completo si el cuestionario emite. Léalas como el tamaño del producto por edad y sexo — no como el “precio de tener presión alta.”",
+      costLearn: "Qué debe aprender de esta tabla: a la misma cobertura, el mes sube con la edad, y los hombres suelen pagar más que las mujeres. El tabaco (no mostrado aquí) sube otra vez. Algunos montos se calculan a partir de una banda publicada. No es una oferta.",
+      costFoot: "Un plan de aceptación garantizada, a la misma edad y monto, suele costar más y espera unos dos años por muerte natural. No debería ser el primer cuadro que mire por presión alta sola.",
+      coH: "Compañías que podemos cotizar",
+      coP: "Después de entender los tres caminos, estas son compañías designadas que Mejor Vida Seguros puede cotizar cuando un plan con preguntas de salud sigue abierto. Edades y montos cambian. La aprobación no está garantizada.",
       faq1q: "Tomo tres pastillas para la presión. ¿Me van a rechazar?",
-      faq1a: "El número de pastillas no es, por sí solo, un “no.” Lo que importa es para qué son y si hay internaciones o daño de órgano. Liste los nombres.",
+      faq1a: "El número de pastillas no es, por sí solo, un “no.” Lo que importa es para qué son y si hay internaciones o daño de órgano. Liste los nombres. No adivinamos el motivo de cada receta.",
       faq2q: "¿Debo dejar el medicamento antes de solicitar?",
-      faq2a: "No. Dejar un antihipertensivo para “verse más sano” es peligroso y las recetas ya están en las bases. Siga el tratamiento de su médico.",
+      faq2a: "No. Dejar un medicamento para la presión para “verse más sano” es peligroso, y las recetas ya surtidas suelen aparecer en la revisión. Siga el tratamiento de su médico.",
       faq3q: "¿La presión alta cuenta como preexistente?",
-      faq3a: "Sí, es una condición previa. En gastos finales eso no significa espera automática. Muchos planes nivelados la aceptan.",
+      faq3a: "Sí: es un diagnóstico o tratamiento que ya existía al solicitar. En gastos finales esa etiqueta no significa espera automática. Muchos planes con preguntas de salud la aceptan cuando no hay otro daño listado.",
       faq4q: "¿Hay examen de presión en la casa?",
-      faq4a: "En estos productos simplificados, no hay enfermera en el hogar para tomar la presión. Hay preguntas y bases de datos.",
+      faq4a: "En estos productos de entierro, no. Hay preguntas y revisión de recetas. Una póliza temporal más grande a veces sí toma signos vitales; no mezclamos esas reglas aquí.",
       faq5q: "¿Puedo comprar si también fumo?",
-      faq5a: "Suele haber tarifa de tabaco, no un cierre automático, si el resto del cuestionario pasa.",
-      faq6q: "¿GIWL es más barato a mi edad?",
-      faq6a: "Casi nunca, a la misma edad y monto, porque la compañía no selecciona por salud. Cotice nivelado primero.",
-      nextLead: "Cotice un plan nivelado con su edad y tabaco. Mencione la presión y los demás diagnósticos.",
-      nextMore: `Si también hay corazón o derrame, use esas guías. Índice: <a href="${L.hub}">condiciones preexistentes</a>.`,
+      faq5a: "Suele haber un precio de tabaco, no un cierre automático, si el resto del cuestionario califica. Mencione cigarrillos, vapeo, parche o cigarro.",
+      faq6q: "¿El plan sin preguntas es más barato a mi edad?",
+      faq6a: "Casi nunca, a la misma edad y monto, porque la compañía no selecciona por salud. Cotice primero el plan con preguntas.",
+      faq7q: "Tengo presión alta y colesterol. ¿Eso me manda al plan que espera dos años?",
+      faq7a: "Por lo general, no, si esos son los únicos historiales. Sigue siendo un plan con preguntas. Un derrame, un infarto reciente o diálisis sí cambian esa respuesta.",
+      faq8q: "Mi médico dice que la presión “no está controlada.” ¿Eso cierra el plan que paga completo?",
+      faq8a: "En los productos de entierro que cotizamos no tenemos una tabla pública que convierta su última lectura en un “sí” o un “no.” No vamos a inventar ese corte. Cuéntenos las lecturas y los demás diagnósticos; no prometemos un resultado.",
+      nextLead: "Vea precios, o programe una llamada con Mejor Vida Seguros. Mencione la presión y cualquier otro diagnóstico.",
+      nextMore: `Si también hay corazón o derrame, use esas páginas. Índice: <a href="${L.hub}">condiciones preexistentes</a>.`,
+      nextSecondary: "Programar una llamada",
+      nextSecondaryHref: L.schedule,
+      coFoot: "Fichas educativas de compañías designadas. Un plan que paga menos o devuelve primas en los primeros años, o un plan de aceptación garantizada, puede añadir una espera. No es cotización vinculante.",
     };
   }
   return {
     ...b,
     ...src,
+    hideJsRateNote: true,
+    coWait: "2-year wait?",
+    coWaitNo: "No, if the health questions qualify",
+    coMooProduct: "Living Promise",
+    coAetnaProduct: "Accendo Final Expense",
+    coTaProduct: "Immediate Solution",
+    coAmericoProduct: "Eagle Select",
+    coGiProduct: "Guaranteed-acceptance whole life",
+    coGiFoot: "One guaranteed-acceptance policy per insured every 12 months; that company’s total does not exceed $25,000. Educational — not a binding quote.",
     title: "Final expense insurance with high blood pressure (2026) | Mejor Vida Insurance",
-    desc: "High blood pressure by itself almost never pushes you to guaranteed acceptance. How appointed companies treat it, and when other conditions change the plan.",
-    h1: "Final expense insurance if you have high blood pressure",
-    lead: "High blood pressure is one of the most common conditions in older adults. The CDC explains that it often has no symptoms and is managed with medication. On final expense, <strong>a “yes” to high blood pressure is almost never the end of the level path</strong>. What does change the product is a stroke, a recent heart attack, advanced kidney disease, or oxygen.",
+    desc: "High blood pressure by itself almost never forces a no-questions plan. How final expense works, what changes the product, and when we will say we do not know.",
+    h1: "Can you buy final expense insurance if you have high blood pressure?",
+    lead: "Often yes. High blood pressure is one of the most common conditions in older adults. The CDC explains that it often has no symptoms and is treated with lifestyle changes and medicine. On a small burial-size life policy, that diagnosis <strong>by itself</strong> is almost never a reason to skip the health questions and buy a plan that waits two years. What does change the product is when high blood pressure already came with a stroke, a recent heart attack, heart failure, dialysis, or oxygen.",
     crumbEnd: "High blood pressure",
-    take1: "A lisinopril (or similar) prescription is ordinary on these applications. By itself it is not a knockout on Living Promise, Accendo, or Transamerica Immediate Solution.",
-    take2: "A level plan’s price follows age, sex, and tobacco. We do not publish a separate surcharge labeled “high blood pressure.”",
-    take3: "If high blood pressure comes with a stroke, heart failure, or kidney disease on dialysis, it is no longer “blood pressure only.” Use those guides.",
-    callout: "Do not choose GIWL just because you take a blood-pressure pill. Quote simplified issue first.",
-    whatH: "What high blood pressure is",
-    whatP1: "The CDC and NHLBI describe hypertension as blood pushing too hard against the arteries. For years it may not be felt. Treatment is usually diet, movement, and medication.",
-    whatP2: "Final expense insurance does not ask you to be “cured.” It asks whether there is other damage: heart, brain, kidney, hospital stays.",
-    uwH: "How appointed companies look at it",
-    uwP: "On simplified issue, controlled high blood pressure usually clears the questionnaire if the rest of the answers are “no” to the knockouts. Transamerica treats several circulatory disorders as Preferred when there are no complications. High blood pressure is not on our list of situations where simplified issue often cannot issue (that list includes HIV, dementia, oxygen for the lungs, dialysis, active cancer).",
-    uwNote: "If you only have high blood pressure and cholesterol, the first product to quote is level, not GIWL.",
-    chH: "What usually changes the answer",
-    chP: "The pill does not. These do.",
-    ch1: "Stroke or TIA, especially in the last two years. See the stroke guide.",
-    ch2: "Heart disease with a recent hospital stay or heart failure. See heart disease.",
-    ch3: "Kidney damage with dialysis or a transplant. See kidney disease.",
-    ch4: "Tobacco: it does not decline by itself on these products; it does raise the tobacco rate if there was nicotine in 12 months (Transamerica’s rule on that chart).",
-    costH: "What a level plan costs",
-    costP: "Illustrative non-tobacco premiums for level final expense. If you qualify, these rows are the starting point. GIWL should not be the first chart you look at for high blood pressure alone.",
-    coH: "Appointed companies (level plans)",
-    coP: "The same final expense cards we quote for other common conditions. High blood pressure is rarely the reason to choose GIWL.",
-    faq1q: "I take three blood-pressure pills. Will they decline me?",
-    faq1a: "The number of pills is not, by itself, a “no.” What matters is what they are for and whether there are hospital stays or organ damage. List the names.",
+    take1: "The first product to quote is usually a <strong>level plan</strong>: a policy with a short health questionnaire that can pay the full amount from the first covered payment, usually with no two-year wait.",
+    take2: "The price of that plan follows age, sex, and tobacco. There is no extra charge labeled “high blood pressure.”",
+    take3: "If there is also a stroke, heart failure, or kidney disease on dialysis, it is no longer “blood pressure only.” Use those guides before assuming the same plan applies.",
+    callout: "Do not buy a <strong>guaranteed-acceptance</strong> plan — no health questions, and about a two-year wait for natural death — just because you take a blood-pressure pill. Quote a plan with health questions first. There is no office exam; there is an honest questionnaire.",
+    needH: "The worry people actually have",
+    needP1: "Families look for this coverage because a funeral, the cemetery, and small debts can fall on relatives. Final expense is permanent life insurance in a small amount, meant for that bill — it does not replace a large income policy.",
+    needP2: "A diagnosis you already have is often called a <strong>pre-existing condition</strong>. That label does not, by itself, mean a two-year wait. The fear is usually: “Will they only sell me a plan that waits, or is there a path that can pay in full from the start?” The rest of this page explains that difference <strong>before</strong> naming companies.",
+    whatH: "What high blood pressure means for your health",
+    whatP1: "The CDC and NHLBI describe blood pressure as the force of blood against the arteries. It is written as two numbers, such as 120/80. The first is when the heart pushes; the second is between beats. High blood pressure — also called hypertension — is when those readings stay at 130/80 or higher.",
+    whatP2: "It often is not felt. That is why so many people learn about it at a routine checkup. Treatment is usually less salt, more movement, not smoking, and, when a doctor recommends it, medication. Left untreated, high blood pressure can damage the heart, brain, kidneys, and eyes.",
+    whatP3: "An insurer does not treat high blood pressure. It decides whether the history, as it is written and as it appears in prescriptions already filled, fits a product it is willing to issue. It does not ask you to be “cured.”",
+    howH: "How life insurance reviews a health history",
+    howP1: "On final expense the usual path is not an office exam. There is a short questionnaire and, on most products we quote, a review of prescriptions. The NAIC reminds consumers that honest answers matter at claim time: a “no” that should have been “yes” can stall or void a payment.",
+    howP2: "If those questions can be answered without hitting what that product cannot issue, the plan is usually level: the full amount can apply to a covered natural death from the first payment. If it cannot issue that way, some products pay less or return premiums in the first years. If even that cannot issue, a guaranteed-acceptance plan asks no health questions and waits about two years for natural death.",
+    howP3: "Term life at larger amounts is a different product: sometimes there are labs or a visit to take vitals, including blood pressure. That is a separate conversation. If the need is income or a mortgage, not burial, see <a href=\"" + L.termCond + "\">term life with pre-existing conditions</a>.",
+    pathsH: "Three kinds of plans, compared",
+    vsH: "How the three kinds of plans compare",
+    vsCol1: "Pays in full",
+    vsCol1Sub: "Level plan, with questions",
+    vsCol2: "Pays less at first",
+    vsCol2Sub: "Still has questions",
+    vsCol3: "No questions",
+    vsCol3Sub: "Guaranteed acceptance",
+    vsR1H: "Health questions?",
+    vsR1A: "Yes. You have to qualify.",
+    vsR1B: "Yes. The answers do not qualify for the plan that pays in full.",
+    vsR1C: "None.",
+    vsR2H: "Natural death in year one",
+    vsR2A: "Can pay the full amount.",
+    vsR2B: "Pays a portion or returns premiums, per the contract.",
+    vsR2C: "Returns premiums plus contract interest. Does not pay the full amount.",
+    vsR3H: "If high blood pressure is the main history",
+    vsR3A: "Usually the first try.",
+    vsR3B: "Not the starting point because of a blood-pressure pill.",
+    vsR3C: "Held for when the questionnaire cannot issue.",
+    vsR4H: "Price, in plain terms",
+    vsR4A: "Usually the lowest per dollar of these three.",
+    vsR4B: "It varies. We will not invent a sample premium here.",
+    vsR4C: "Usually costs more per dollar, at the same age and amount.",
+    vsLearn: "This chart teaches the difference among the three paths. It is not a quote. The live application still decides which column you land in.",
+    pathsNote: "No appointed company we quote offers zero questions and a full natural-death benefit from day one. Ads that combine both almost always still have a questionnaire.",
+    considerH: "What helps, and what does not",
+    considerP: "Answering the questionnaire is usually the advantage: it can open more coverage, a lower price, and a full benefit from the first covered payment. The limitation is that the same questionnaire can send you to a wait or to guaranteed acceptance if there is organ damage, a recent hospital stay, or other diagnoses. Waiting to apply “until the pressure is lower” only raises the age if treatment is already stable.",
+    split1H: "Usually still a plan with questions",
+    split1a: "High blood pressure treated with medication, with no recent hospital stay for that reason.",
+    split1b: "High cholesterol together with high blood pressure, if no other listed damage.",
+    split1c: "Several blood-pressure pills, if they are for blood pressure and not for heart failure.",
+    split2H: "Usually changes the conversation",
+    split2a: "A stroke, or a short stroke-like episode (TIA).",
+    split2b: "A recent heart attack, heart failure, or a heart procedure.",
+    split2c: "Dialysis, oxygen, or a diagnosis of pulmonary hypertension — not the same disease as the reading on your arm.",
+    factorsH: "What can change a high-blood-pressure application",
+    factorsP: "Each card starts with the health idea. The right side lists only what we can state for the burial products we quote. If we cannot verify it, we say so.",
+    factorsNote: "These notes are not a quote. Age, tobacco, build, and a second diagnosis can still change the result.",
+    fMeaning: "In plain language",
+    fVerify: "What we can state",
+    f1c: "Blood-pressure medicine",
+    f1w: "A pill to lower blood pressure is a treatment, not a “no” by itself. The CDC and NHLBI describe medication as a usual part of control.",
+    f1items: [
+      "On the burial products we quote, ordinary blood-pressure treatment is not, by itself, a reason to jump to a no-questions plan.",
+      "The same pill is sometimes also prescribed for heart failure. That is no longer “blood pressure only.” See the heart-disease guide.",
+      "Do not stop a prescribed medicine to “look healthier” on the application. Filled prescriptions usually show up in the review.",
+    ],
+    f1gap: "We do not publish a public pill-by-pill list. Bring the names when you quote. We will not guess what each prescription is for.",
+    f2c: "Other conditions",
+    f2w: "High blood pressure can stand alone. It can also come with damage to the heart, brain, or kidneys.",
+    f2items: [
+      "A stroke or TIA is not quoted as “blood pressure only.” See <a href=\"" + L.stroke + "\">stroke</a>.",
+      "A recent heart attack or heart failure changes the product. See <a href=\"" + L.heart + "\">heart disease</a>.",
+      "Dialysis or a transplant is a kidney file, not a blood-pressure file. See <a href=\"" + L.kidney + "\">kidney disease</a>.",
+    ],
+    f3c: "Tobacco",
+    f3w: "Smoking or other nicotine usually changes the price. That is not the same as an automatic “no.”",
+    f3items: [
+      "On these burial products, tobacco usually means a tobacco price if the rest of the answers still qualify.",
+      "A common window is nicotine in the last year for that higher price. We will not publish a different window for every company here.",
+    ],
+    f4c: "High blood pressure and cholesterol together",
+    f4w: "This combination is very common. High cholesterol often has no symptoms either.",
+    f4items: [
+      "On the burial products we quote, high blood pressure plus cholesterol, with no other listed damage, is typically still a health-question plan — not the first reason for guaranteed acceptance.",
+    ],
+    f5c: "Office readings",
+    f5w: "The CDC uses 130/80 as the medical threshold. The NHLBI describes stages and a crisis when numbers reach 180/120 or higher.",
+    f5items: [
+      "On the burial plans we quote, a nurse usually does not come to the home to take your pressure.",
+      "There are questions and a prescription review. A larger term policy sometimes does measure blood pressure; that is a different product.",
+    ],
+    f5gap: "We do not have a published burial table that raises the premium solely because your last office reading was high. We will not invent that table.",
+    f6c: "Pulmonary hypertension",
+    f6w: "The NHLBI describes pulmonary hypertension as pressure that is too high in the lung arteries. It is not the same disease as the reading taken on your arm.",
+    f6items: [
+      "Tell us the exact words on the diagnosis. We will not treat it as ordinary high blood pressure.",
+    ],
+    f6gap: "Companies do not all treat it the same way. We will not claim a universal yes or no.",
+    f7c: "A hospital stay for very high blood pressure",
+    f7w: "A hypertensive crisis is a medical emergency. The NHLBI says to get care right away at readings in that range.",
+    f7items: [
+      "Tell us if you were admitted and when. That can change which product fits.",
+    ],
+    f7gap: "A different Mutual of Omaha product (not the Living Promise burial plan we quote here) asks about hospitalization for high blood pressure in five years. We will not apply that five-year question to every company.",
+    costH: "Sample monthly prices if a health-question plan issues",
+    costP: "These figures are illustrative monthly premiums, non-tobacco, for a final expense plan that can pay in full if the questionnaire issues. Read them as the size of the product by age and sex — not as the “price of having high blood pressure.”",
+    costLearn: "What you should learn from this table: at the same coverage amount, the monthly price rises with age, and men usually pay more than women. Tobacco (not shown here) raises it again. Some amounts are scaled from a published band. This is not an offer.",
+    costFoot: "A guaranteed-acceptance plan, at the same age and amount, usually costs more and waits about two years for natural death. It should not be the first chart you look at for high blood pressure alone.",
+    coH: "Companies we can quote",
+    coP: "After you understand the three paths, these are appointed companies Mejor Vida Insurance can quote when a health-question plan is still open. Ages and amounts vary. Approval is not guaranteed.",
+    faq1q: "I take three blood-pressure pills. Will they say no?",
+    faq1a: "The number of pills is not, by itself, a “no.” What matters is what they are for and whether there are hospital stays or organ damage. List the names. We will not guess the reason for each prescription.",
     faq2q: "Should I stop the medication before I apply?",
-    faq2a: "No. Stopping a blood-pressure drug to “look healthier” is dangerous, and the prescriptions are already in the databases. Keep your doctor’s treatment.",
+    faq2a: "No. Stopping a blood-pressure drug to “look healthier” is dangerous, and filled prescriptions usually show up in the review. Keep your doctor’s treatment.",
     faq3q: "Does high blood pressure count as pre-existing?",
-    faq3a: "Yes, it is a prior condition. On final expense that does not mean an automatic wait. Many level plans accept it.",
+    faq3a: "Yes: it is a diagnosis or treatment that already existed when you apply. On final expense that label does not mean an automatic wait. Many health-question plans accept it when there is no other listed damage.",
     faq4q: "Is there a home blood-pressure exam?",
-    faq4a: "On these simplified products there is no nurse in the home to take your pressure. There are questions and databases.",
+    faq4a: "On these burial products, no. There are questions and a prescription review. A larger term policy sometimes does take vitals; we will not mix those rules here.",
     faq5q: "Can I buy if I also smoke?",
-    faq5a: "There is usually a tobacco rate, not an automatic close, if the rest of the questionnaire passes.",
-    faq6q: "Is GIWL cheaper at my age?",
-    faq6a: "Almost never, at the same age and amount, because the company cannot select by health. Quote level first.",
-    nextLead: "Quote a level plan with your age and tobacco. Mention blood pressure and any other diagnoses.",
-    nextMore: `If there is also heart disease or a stroke, use those guides. Index: <a href="${L.hub}">pre-existing conditions</a>.`,
+    faq5a: "There is usually a tobacco price, not an automatic close, if the rest of the questionnaire qualifies. Mention cigarettes, vaping, a patch, or cigars.",
+    faq6q: "Is the no-questions plan cheaper at my age?",
+    faq6a: "Almost never, at the same age and amount, because the company cannot select by health. Quote the health-question plan first.",
+    faq7q: "I have high blood pressure and high cholesterol. Does that send me to the two-year wait?",
+    faq7a: "Usually no, if those are the only histories. It is still a health-question plan. A stroke, a recent heart attack, or dialysis does change that answer.",
+    faq8q: "My doctor says the pressure is “not controlled.” Does that close the plan that pays in full?",
+    faq8a: "On the burial products we quote, we do not have a public table that turns your last reading into a yes or a no. We will not invent that cutoff. Tell us the readings and the other diagnoses; we will not promise an outcome.",
+    nextLead: "See prices, or schedule a call with Mejor Vida Insurance. Mention blood pressure and any other diagnoses.",
+    nextMore: `If there is also heart disease or a stroke, use those pages. Index: <a href="${L.hub}">pre-existing conditions</a>.`,
+    nextSecondary: "Schedule a call",
+    nextSecondaryHref: L.schedule,
+    coFoot: "Educational cards for appointed companies. A plan that pays less or returns premiums in the first years, or a guaranteed-acceptance plan, may add a wait. Not a binding quote.",
   };
 }
 
 function hbpMain(lang, page, c) {
   const isEs = lang === "es";
+  const L = LINKS[lang];
+  const inner = `<section class="lic-section" id="need">
+<h2>${c.needH}</h2>
+<p>${c.needP1}</p>
+<p>${c.needP2}</p>
+</section>
+<section class="lic-section" id="what">
+<h2>${c.whatH}</h2>
+<p>${c.whatP1}</p>
+<p>${c.whatP2}</p>
+<p>${c.whatP3}</p>
+</section>
+<section class="lic-section" id="how">
+<h2>${c.howH}</h2>
+<p>${c.howP1}</p>
+<p>${c.howP2}</p>
+<p>${c.howP3}</p>
+</section>
+<section class="lic-section" id="paths">
+<h2>${c.pathsH}</h2>
+${planCompareHtml(c)}
+<p class="lic-rate-note">${c.pathsNote}</p>
+</section>
+<section class="lic-section" id="consider">
+<h2>${c.considerH}</h2>
+<p>${c.considerP}</p>
+<div class="lic-split-lists lic-split-lists--cards">
+<div>
+<h3>${c.split1H}</h3>
+<ul>
+<li>${c.split1a}</li>
+<li>${c.split1b}</li>
+<li>${c.split1c}</li>
+</ul>
+</div>
+<div>
+<h3>${c.split2H}</h3>
+<ul>
+<li>${c.split2a}</li>
+<li>${c.split2b}</li>
+<li>${c.split2c}</li>
+</ul>
+</div>
+</div>
+</section>
+<section class="lic-section" id="factors">
+<h2>${c.factorsH}</h2>
+<p>${c.factorsP}</p>
+${factorCardsHtml(c)}
+<p class="lic-rate-note">${c.factorsNote}</p>
+</section>
+<section class="lic-section lic-faq" id="faq">
+<h2>${c.faqTitle}</h2>
+${faqsHtml(c)}
+</section>
+<section class="lic-section lic-guide" id="companies">
+<h2>${c.coH}</h2>
+<p>${c.coP}</p>
+${appointedCardsHtml(lang, c)}
+${giCardHtml(lang, c)}
+</section>
+<section class="lic-section" id="cost">
+<h2>${c.costH}</h2>
+<p>${c.costP}</p>
+<p class="lic-cost-lesson">${c.costLearn}</p>
+${feRateBlock(c, L.quote)}
+<p class="lic-rate-note">${c.costFoot}</p>
+</section>`;
   return condShell(lang, page, c, {
+    omitFaq: true,
     toc: isEs
-      ? [["#what", "Qué es"], ["#uw", "Suscripción"], ["#changes", "Qué cambia"], ["#cost", "Costo"], ["#companies", "Compañías"], ["#faq", "Preguntas"]]
-      : [["#what", "What it is"], ["#uw", "Underwriting"], ["#changes", "What changes"], ["#cost", "Cost"], ["#companies", "Companies"], ["#faq", "Questions"]],
-    inner: conditionInner(lang, c, {}),
+      ? [
+          ["#need", "La preocupación"],
+          ["#how", "Cómo funciona"],
+          ["#factors", "Qué importa"],
+          ["#faq", "Preguntas"],
+          ["#companies", "Compañías"],
+          ["#cost", "Costo"],
+        ]
+      : [
+          ["#need", "The question"],
+          ["#how", "How it works"],
+          ["#factors", "What matters"],
+          ["#faq", "Questions"],
+          ["#companies", "Companies"],
+          ["#cost", "Cost"],
+        ],
+    inner,
   });
 }
 
 function tocPair(isEs) {
   return isEs
-    ? [["#what", "Qué es"], ["#uw", "Suscripción"], ["#changes", "Qué cambia"], ["#cost", "Costo"], ["#companies", "Compañías"], ["#faq", "Preguntas"]]
-    : [["#what", "What it is"], ["#uw", "Underwriting"], ["#changes", "What changes"], ["#cost", "Cost"], ["#companies", "Companies"], ["#faq", "Questions"]];
+    ? [["#what", "Qué es"], ["#uw", "Cómo lo miran"], ["#changes", "Qué cambia"], ["#cost", "Costo"], ["#companies", "Compañías"], ["#faq", "Preguntas"]]
+    : [["#what", "What it is"], ["#uw", "How they review it"], ["#changes", "What changes"], ["#cost", "Cost"], ["#companies", "Companies"], ["#faq", "Questions"]];
 }
 
 function condPageMain(lang, page, c, opts) {
@@ -1756,10 +2086,10 @@ function copyCopd(lang) {
       h1: "Seguro de gastos finales si tiene EPOC o enfisema",
       lead: "EPOC es el nombre corto de una enfermedad pulmonar que dificulta sacar el aire. El CDC y el NHLBI agrupan ahí el enfisema y la bronquitis crónica. Para gastos finales, esas tres etiquetas se tratan de forma parecida. <strong>No es un cierre automático</strong>: muchas solicitudes todavía cotizan. El tabaco y el oxígeno recetado por el pulmón son los detalles que más estrechan las opciones.",
       crumbEnd: "EPOC",
-      take1: "En el gráfico de un solo padecimiento de Transamerica, EPOC, enfisema y bronquitis crónica quedan en clase <strong>Standard</strong>. Un crédito de actividad (caminar o trabajo físico varios días a la semana) puede subir a Preferred en ese mismo gráfico.",
-      take2: "En las compañías designadas, <strong>EPOC con tabaco</strong> suele hacer que el simplificado no emita. Entonces se mira Corebridge GIWL (edades 50–80, espera de dos años por muerte natural).",
+      take1: "En el gráfico de un solo padecimiento de Transamerica, EPOC, enfisema y bronquitis crónica quedan en clase <strong>Standard</strong> (una tarifa mensual más alta que Preferred, su clase más favorable). Un crédito de actividad (caminar o trabajo físico varios días a la semana) puede subir a Preferred en ese mismo gráfico.",
+      take2: "En las compañías designadas, <strong>EPOC con tabaco</strong> suele hacer que la emisión simplificada (preguntas de salud, no examen en el consultorio) no emita. Entonces se mira Corebridge GIWL: sin preguntas de salud, edades 50–80, espera de dos años por muerte natural.",
       take3: "Oxígeno recetado por una condición pulmonar — no CPAP solo para apnea del sueño — está en nuestra lista de situaciones donde el simplificado a menudo no emite. Transamerica trata la enfermedad respiratoria crónica como Standard y el CPAP con oxígeno extra como Standard; el CPAP sin oxígeno extra puede ser Preferred.",
-      callout: "Diga si fuma o usó nicotina en 12 meses, si le recetaron tanque u oxígeno concentrador, y los inhaladores. Eso decide nivelado, Standard o GIWL — no el anuncio de “sin examen.”",
+      callout: "Diga si fuma o usó nicotina en 12 meses, si le recetaron tanque u oxígeno concentrador, y los inhaladores. Eso decide un plan nivelado (monto completo desde el día uno si califica), una clase de tarifa más alta, o GIWL — no el anuncio de “sin examen.”",
       whatH: "Qué es la EPOC, en una frase",
       whatP1: "El NHLBI explica que la EPOC daña las vías y los alvéolos, y el aire se queda atrapado. La persona se cansa al caminar, tose o usa inhaladores a diario. El enfisema y la bronquitis crónica son formas de la misma familia.",
       whatP2: "El seguro no le pide una espirometría en el consultorio de la agencia. Pregunta el diagnóstico, el oxígeno, las internaciones y el tabaco. Las recetas de Spiriva, Trelegy u otros inhaladores de EPOC aparecen en las bases de Accendo y de otras compañías.",
@@ -1800,10 +2130,10 @@ function copyCopd(lang) {
     h1: "Final expense insurance if you have COPD or emphysema",
     lead: "COPD is the short name for a lung disease that makes it hard to get air out. The CDC and NHLBI group emphysema and chronic bronchitis there. For final expense, those three labels are treated in a similar way. <strong>It is not an automatic close</strong>: many applications still quote. Tobacco and oxygen prescribed for the lungs are the details that most often narrow the options.",
     crumbEnd: "COPD",
-    take1: "On Transamerica’s single-condition chart, COPD, emphysema, and chronic bronchitis are a <strong>Standard</strong> class. An activity credit (walking or physical work several days a week) can move that to Preferred on the same chart.",
-    take2: "At appointed companies, <strong>COPD with tobacco</strong> often means simplified issue cannot issue. Then we look at Corebridge GIWL (ages 50–80, two-year wait for natural death).",
+    take1: "On Transamerica’s single-condition chart, COPD, emphysema, and chronic bronchitis are a <strong>Standard</strong> class (a higher monthly price than Preferred, their better rate). An activity credit (walking or physical work several days a week) can move that to Preferred on the same chart.",
+    take2: "At appointed companies, <strong>COPD with tobacco</strong> often means simplified issue (health questions, no office exam) cannot issue. Then we look at Corebridge GIWL: no health questions, ages 50–80, two-year wait for natural death.",
     take3: "Oxygen prescribed for a lung condition — not CPAP alone for sleep apnea — is on our list of situations where simplified issue often cannot issue. Transamerica treats chronic respiratory disease as Standard and CPAP with extra oxygen as Standard; CPAP without extra oxygen can be Preferred.",
-    callout: "Say whether you smoke or used nicotine in 12 months, whether a tank or concentrator was prescribed, and the inhalers. That decides level, Standard, or GIWL — not the “no exam” ad.",
+    callout: "Say whether you smoke or used nicotine in 12 months, whether a tank or concentrator was prescribed, and the inhalers. That decides a level plan (full amount from day one if you qualify), a higher rate class, or GIWL — not the “no exam” ad.",
     whatH: "What COPD is, in one sentence",
     whatP1: "The NHLBI explains that COPD damages the airways and air sacs, and air gets trapped. The person tires when walking, coughs, or uses daily inhalers. Emphysema and chronic bronchitis are forms of the same family.",
     whatP2: "Insurance does not ask for a spirometry test at the agency office. It asks about the diagnosis, oxygen, hospital stays, and tobacco. Prescriptions such as Spiriva, Trelegy, or other COPD inhalers show up in Accendo’s and other companies’ databases.",
@@ -1864,7 +2194,7 @@ function copyCancer(lang) {
       title: "Seguro de gastos finales con cáncer: cuándo hay espera (2026) | Mejor Vida Seguros",
       desc: "Cáncer en tratamiento activo suele ir a aceptación garantizada. Libre de cáncer y de tratamiento por un tiempo puede volver a gastos finales simplificados. Cómo lo miran las compañías designadas.",
       h1: "Seguro de gastos finales si tiene o tuvo cáncer",
-      lead: "El NCI explica que el cáncer es un grupo de enfermedades en las que las células crecen sin control. Para gastos finales, la pregunta útil no es “¿tuvo cáncer alguna vez?” sino <strong>si hay tratamiento ahora, cuándo terminó, y de qué tipo</strong>. Un cáncer de piel basal a menudo sigue en simplificado. Un tratamiento activo de mama, pulmón o colon suele impedir el plan nivelado.",
+      lead: "El NCI explica que el cáncer es un grupo de enfermedades en las que las células crecen sin control. Para gastos finales, la pregunta útil no es “¿tuvo cáncer alguna vez?” sino <strong>si hay tratamiento ahora, cuándo terminó, y de qué tipo</strong>. Un cáncer de piel basal a menudo sigue en emisión simplificada (preguntas de salud, no examen en el consultorio). Un tratamiento activo de mama, pulmón o colon suele impedir el plan nivelado: el que puede pagar el monto completo desde el primer pago cubierto.",
       crumbEnd: "Cáncer",
       take1: "En las compañías designadas, <strong>cáncer en tratamiento activo</strong> está en la lista de situaciones donde el simplificado suele no emitir. Entonces se mira GIWL (50–80, espera de dos años por muerte natural).",
       take2: "En el gráfico de Transamerica: inicio en los últimos 2 años, metastásico, recurrente, varios cánceres o ganglios: <strong>declinación</strong>. Libre de cáncer y sin tratamiento en los últimos 2 años: <strong>Standard</strong>. El basal cell no entra en esa fila de “otro que basal.”",
@@ -1908,7 +2238,7 @@ function copyCancer(lang) {
     title: "Final expense insurance with cancer: when there is a wait (2026) | Mejor Vida Insurance",
     desc: "Cancer in active treatment often goes to guaranteed acceptance. Cancer-free and off treatment for a time can return to simplified final expense. How appointed companies look at it.",
     h1: "Final expense insurance if you have or had cancer",
-    lead: "The NCI explains that cancer is a group of diseases where cells grow out of control. For final expense, the useful question is not “did you ever have cancer?” but <strong>whether treatment is happening now, when it ended, and what kind</strong>. Basal skin cancer often stays on simplified issue. Active treatment for breast, lung, or colon cancer usually blocks a level plan.",
+    lead: "The NCI explains that cancer is a group of diseases where cells grow out of control. For final expense, the useful question is not “did you ever have cancer?” but <strong>whether treatment is happening now, when it ended, and what kind</strong>. Basal skin cancer often stays on simplified issue (health questions, no office exam). Active treatment for breast, lung, or colon cancer usually blocks a level plan: the kind that can pay the full amount from the first covered payment.",
     crumbEnd: "Cancer",
     take1: "At appointed companies, <strong>cancer in active treatment</strong> is on the list of situations where simplified issue often cannot issue. Then we look at GIWL (ages 50–80, two-year wait for natural death).",
     take2: "On Transamerica’s chart: onset within 2 years, metastatic, recurrent, multiple cancers, or lymph nodes: <strong>decline</strong>. Cancer-free and no treatment in the last 2 years: <strong>Standard</strong>. Basal cell is not in that “other than basal” row.",
@@ -1974,7 +2304,7 @@ function copyKidney(lang) {
       title: "Seguro de gastos finales con enfermedad renal o diálisis (2026) | Mejor Vida Seguros",
       desc: "La etapa de la enfermedad renal y si hay diálisis o trasplante importan más que la palabra “riñón.” Cómo lo miran Living Promise, Accendo, Transamerica y GIWL.",
       h1: "Seguro de gastos finales si tiene enfermedad renal",
-      lead: "El NIDDK describe la enfermedad renal crónica como daño que se acumula con los años. A menudo viene con diabetes o presión alta. Para gastos finales, <strong>no es una sola casilla</strong>. Una etapa temprana sin diálisis puede seguir en simplificado. Diálisis, enfermedad avanzada o un trasplante de órgano están en nuestra lista de situaciones donde el simplificado a menudo no emite.",
+      lead: "El NIDDK describe la enfermedad renal crónica como daño que se acumula con los años. A menudo viene con diabetes o presión alta. Para gastos finales, <strong>no es una sola casilla</strong>. Una etapa temprana sin diálisis puede seguir en emisión simplificada: hay preguntas de salud, no un examen en el consultorio. Diálisis, enfermedad avanzada o un trasplante de órgano están en nuestra lista de situaciones donde ese cuestionario a menudo no emite.",
       crumbEnd: "Riñón",
       take1: "Living Promise, Accendo y Americo suelen no emitir un plan nivelado si hay <strong>diálisis, riñón terminal o trasplante</strong>. Entonces se mira Corebridge GIWL.",
       take2: "El gráfico de un solo padecimiento de Transamerica lista enfermedad renal crónica, fallo renal y diálisis como <strong>Standard</strong> cuando es el único factor. Un <strong>trasplante de órgano es Decline</strong> en ese mismo gráfico. El perfil completo (diabetes, peso, recetas) todavía decide.",
@@ -2018,7 +2348,7 @@ function copyKidney(lang) {
     title: "Final expense insurance with kidney disease or dialysis (2026) | Mejor Vida Insurance",
     desc: "Kidney-disease stage and whether dialysis or a transplant is in play matter more than the word “kidney.” How Living Promise, Accendo, Transamerica, and GIWL treat it.",
     h1: "Final expense insurance if you have kidney disease",
-    lead: "The NIDDK describes chronic kidney disease as damage that builds over years. It often comes with diabetes or high blood pressure. For final expense, <strong>it is not one checkbox</strong>. An early stage without dialysis can still fit simplified issue. Dialysis, end-stage kidney disease, or an organ transplant are on our list of situations where simplified issue often cannot issue.",
+    lead: "The NIDDK describes chronic kidney disease as damage that builds over years. It often comes with diabetes or high blood pressure. For final expense, <strong>it is not one checkbox</strong>. An early stage without dialysis can still fit simplified issue: health questions, no office exam. Dialysis, end-stage kidney disease, or an organ transplant are on our list of situations where that questionnaire often cannot issue.",
     crumbEnd: "Kidney disease",
     take1: "Living Promise, Accendo, and Americo often cannot issue a level plan if there is <strong>dialysis, end-stage kidney disease, or a transplant</strong>. Then we look at Corebridge GIWL.",
     take2: "Transamerica’s single-condition chart lists chronic kidney disease, kidney failure, and dialysis as <strong>Standard</strong> when that is the only factor. An <strong>organ transplant is Decline</strong> on the same chart. The full profile (diabetes, build, prescriptions) still decides.",
@@ -2087,9 +2417,9 @@ function copyDisability(lang) {
       lead: "“Discapacidad” en el Seguro Social significa que no puede trabajar por una condición grave y duradera. En gastos finales, esa palabra <strong>no es una casilla de rechazo</strong>. Lo que sí miran las compañías es si usa silla de ruedas por una enfermedad, si necesita ayuda para bañarse o vestirse, o si vive en una residencia o con enfermería en el hogar.",
       crumbEnd: "Discapacidad",
       take1: "Cobrar SSDI o SSI <strong>no equivale</strong> a un “no” en Living Promise o Accendo. El cuestionario pregunta hechos de salud y de cuidado, no si el gobierno le paga un beneficio.",
-      take2: "En nuestra lista simplificada, silla de ruedas, scooter o cama <strong>por una enfermedad</strong> (no una lesión breve) suele impedir el plan nivelado. Un hospital, residencia, hospicio o home health también.",
-      take3: "En Transamerica, silla o scooter eléctrico puede ser <strong>Preferred</strong> si no necesita asistencia; si hay ayuda de otra persona, se lee como “assisted living” y la internación actual es Decline. Esas dos reglas no son iguales: por eso cotizamos el producto, no un rumor.",
-      callout: "Diga por qué usa la silla (artritis, EPOC, un accidente de hace un mes), si alguien le ayuda a bañarse, y dónde vive. Eso decide nivelado o GIWL.",
+      take2: "En nuestra lista simplificada, silla de ruedas, scooter o cama <strong>por una enfermedad</strong> (no una lesión breve) suele impedir un plan nivelado: el cuestionario de salud que puede pagar el monto completo desde el primer pago. Un hospital, residencia, hospicio o home health también.",
+      take3: "En Transamerica, silla o scooter eléctrico puede ser <strong>Preferred</strong> (su clase de tarifa más favorable) si no necesita asistencia; si hay ayuda de otra persona, se lee como “assisted living” y la internación actual es Decline. Esas dos reglas no son iguales: por eso cotizamos el producto, no un rumor.",
+      callout: "Diga por qué usa la silla (artritis, EPOC, un accidente de hace un mes), si alguien le ayuda a bañarse, y dónde vive. Eso decide un plan nivelado o GIWL (sin preguntas de salud, unos dos años de espera por muerte natural).",
       whatH: "Por qué el Seguro Social y el seguro no hablan el mismo idioma",
       whatP1: "La SSA paga un ingreso si cumple sus reglas de trabajo y de gravedad. Una aseguradora de vida pregunta si puede firmar, si hay demencia, si hay oxígeno, si está en cama por enfermedad. Puede cobrar SSDI y aún así calificar a un plan nivelado — o no, si además hay un descalificador.",
       whatP2: "El CDC habla de discapacidad de muchas formas: movilidad, visión, audición, cognición. Una persona sorda o con una pierna protésica por un accidente antiguo no es el mismo archivo que alguien en hospicio.",
@@ -2131,9 +2461,9 @@ function copyDisability(lang) {
     lead: "“Disability” at Social Security means you cannot work because of a serious, lasting condition. On final expense, that word <strong>is not a decline checkbox</strong>. What companies do look at is whether you use a wheelchair from illness, whether you need help bathing or dressing, or whether you live in a facility or have home nursing.",
     crumbEnd: "Disability",
     take1: "Collecting SSDI or SSI <strong>does not equal</strong> a “no” on Living Promise or Accendo. The questionnaire asks health and care facts, not whether the government pays you a benefit.",
-    take2: "On our simplified list, a wheelchair, scooter, or being bedridden <strong>from illness</strong> (not a short injury) often blocks a level plan. A hospital, nursing home, hospice, or home health does too.",
-    take3: "At Transamerica, a wheelchair or electric scooter can be <strong>Preferred</strong> if you do not need assistance; if someone helps you, it is read as assisted living, and current confinement is Decline. Those two rules are not the same: that is why we quote the product, not a rumor.",
-    callout: "Say why you use the chair (arthritis, COPD, a crash a month ago), whether anyone helps you bathe, and where you live. That decides level or GIWL.",
+    take2: "On our simplified list, a wheelchair, scooter, or being bedridden <strong>from illness</strong> (not a short injury) often blocks a level plan: the health-question plan that can pay the full amount from the first payment. A hospital, nursing home, hospice, or home health does too.",
+    take3: "At Transamerica, a wheelchair or electric scooter can be <strong>Preferred</strong> (their better, usually lower, rate class) if you do not need assistance; if someone helps you, it is read as assisted living, and current confinement is Decline. Those two rules are not the same: that is why we quote the product, not a rumor.",
+    callout: "Say why you use the chair (arthritis, COPD, a crash a month ago), whether anyone helps you bathe, and where you live. That decides a level plan or GIWL (no health questions, about a two-year wait for natural death).",
     whatH: "Why Social Security and life insurance are not the same conversation",
     whatP1: "SSA pays income if you meet its work and severity rules. A life insurer asks whether you can sign, whether there is dementia, oxygen, or whether you are bedridden from illness. You can collect SSDI and still qualify for a level plan — or not, if a knockout is also present.",
     whatP2: "The CDC talks about disability in many forms: mobility, vision, hearing, cognition. A deaf person or someone with a prosthetic leg from an old accident is not the same file as someone in hospice.",
@@ -2194,7 +2524,7 @@ function copyHiv(lang) {
       title: "Seguro de gastos finales con VIH: aceptación garantizada (2026) | Mejor Vida Seguros",
       desc: "En las compañías designadas de emisión simplificada, VIH o SIDA suele ser declinación. El camino habitual es Corebridge GIWL: edades 50–80, $5,000–$25,000, espera de dos años.",
       h1: "Seguro de gastos finales si vive con VIH",
-      lead: "El CDC explica que el VIH es un virus que ataca el sistema inmune; con tratamiento muchas personas viven una vida larga. En los productos de gastos finales que cotizamos, esa mejora médica <strong>no abre el cuestionario simplificado</strong>. Un diagnóstico de VIH o SIDA suele ser declinación en Living Promise, Accendo, Americo y en el gráfico de Transamerica. El camino que sí cotizamos es aceptación garantizada.",
+      lead: "El CDC explica que el VIH es un virus que ataca el sistema inmune; con tratamiento muchas personas viven una vida larga. En los productos de gastos finales que cotizamos, esa mejora médica <strong>no abre el cuestionario simplificado</strong> (preguntas de salud, no examen en el consultorio). Un diagnóstico de VIH o SIDA suele ser declinación en Living Promise, Accendo, Americo y en el gráfico de Transamerica. El camino que sí cotizamos es <strong>aceptación garantizada</strong>: sin preguntas de salud, con unos dos años de espera por muerte natural.",
       crumbEnd: "VIH",
       take1: "Transamerica lista SIDA/VIH/ARC como <strong>Decline</strong> en el gráfico de un solo padecimiento. Nuestra lista de descalificadores simplificados incluye VIH o SIDA.",
       take2: "Corebridge GIWL no hace preguntas de salud. Edades <strong>50–80</strong>, montos <strong>$5,000–$25,000</strong>. Siempre hay espera de dos años por muerte natural: 110% de las primas pagadas. Un accidente cubierto puede pagar el monto desde el inicio.",
@@ -2238,7 +2568,7 @@ function copyHiv(lang) {
     title: "Final expense insurance with HIV: guaranteed acceptance (2026) | Mejor Vida Insurance",
     desc: "At appointed simplified-issue companies, HIV or AIDS is usually a decline. The usual path is Corebridge GIWL: ages 50–80, $5,000–$25,000, two-year wait.",
     h1: "Final expense insurance if you live with HIV",
-    lead: "The CDC explains that HIV is a virus that attacks the immune system; with treatment many people live a long life. On the final expense products we quote, that medical progress <strong>does not open the simplified questionnaire</strong>. An HIV or AIDS diagnosis is usually a decline at Living Promise, Accendo, Americo, and on Transamerica’s chart. The path we do quote is guaranteed acceptance.",
+    lead: "The CDC explains that HIV is a virus that attacks the immune system; with treatment many people live a long life. On the final expense products we quote, that medical progress <strong>does not open the simplified questionnaire</strong> (health questions, no office exam). An HIV or AIDS diagnosis is usually a decline at Living Promise, Accendo, Americo, and on Transamerica’s chart. The path we do quote is <strong>guaranteed acceptance</strong>: no health questions, and about a two-year wait for natural death.",
     crumbEnd: "HIV",
     take1: "Transamerica lists AIDS/HIV/ARC as <strong>Decline</strong> on the single-condition chart. Our simplified knockout list includes HIV or AIDS.",
     take2: "Corebridge GIWL has no health questions. Ages <strong>50–80</strong>, amounts <strong>$5,000–$25,000</strong>. There is always a two-year wait for natural death: 110% of premiums paid. A covered accident can pay the face amount from the start.",
@@ -2304,7 +2634,7 @@ function copyStroke(lang) {
       title: "Seguro de gastos finales después de un derrame o AIT (2026) | Mejor Vida Seguros",
       desc: "Un derrame o AIT de hace años a menudo sigue en gastos finales simplificados. Un evento en los últimos dos años cambia el producto. Cómo lo miran las compañías designadas.",
       h1: "Seguro de gastos finales si tuvo un derrame o un AIT",
-      lead: "El CDC explica que un derrame ocurre cuando se corta el riego al cerebro; un AIT es un episodio breve con síntomas parecidos que se resuelven. Para gastos finales, <strong>el año del evento importa más que la etiqueta</strong>. Un derrame de 2015, con recuperación y sin silla por enfermedad, a menudo sigue en simplificado. Un evento en los últimos dos años se pregunta aparte.",
+      lead: "El CDC explica que un derrame ocurre cuando se corta el riego al cerebro; un AIT es un episodio breve con síntomas parecidos que se resuelven. Para gastos finales, <strong>el año del evento importa más que la etiqueta</strong>. Un derrame de 2015, con recuperación y sin silla por enfermedad, a menudo sigue en emisión simplificada: hay preguntas de salud, no un examen en el consultorio. Un evento en los últimos dos años se pregunta aparte.",
       crumbEnd: "Derrame",
       take1: "En el gráfico de Transamerica, derrame y AIT quedan <strong>Standard</strong>; con crédito de actividad pueden subir a <strong>Preferred</strong> si es el único factor.",
       take2: "En el flujo de Mejor Vida Seguros preguntamos infarto, derrame o AIT en los <strong>últimos dos años</strong>. Esa ventana estrecha Living Promise, Accendo y otros simplificados más que un episodio antiguo.",
@@ -2348,7 +2678,7 @@ function copyStroke(lang) {
     title: "Final expense insurance after a stroke or TIA (2026) | Mejor Vida Insurance",
     desc: "A stroke or TIA from years ago often still fits simplified final expense. An event in the last two years changes the product. How appointed companies look at it.",
     h1: "Final expense insurance if you had a stroke or TIA",
-    lead: "The CDC explains that a stroke happens when blood flow to the brain is cut off; a TIA is a short episode with similar symptoms that resolve. For final expense, <strong>the year of the event matters more than the label</strong>. A 2015 stroke, with recovery and no wheelchair from illness, often stays on simplified issue. An event in the last two years is asked separately.",
+    lead: "The CDC explains that a stroke happens when blood flow to the brain is cut off; a TIA is a short episode with similar symptoms that resolve. For final expense, <strong>the year of the event matters more than the label</strong>. A 2015 stroke, with recovery and no wheelchair from illness, often stays on simplified issue: health questions, no office exam. An event in the last two years is asked separately.",
     crumbEnd: "Stroke",
     take1: "On Transamerica’s chart, stroke and TIA are <strong>Standard</strong>; with an activity credit they can move to <strong>Preferred</strong> if that is the only factor.",
     take2: "In Mejor Vida Insurance’s flow we ask about heart attack, stroke, or TIA in the <strong>last two years</strong>. That window narrows Living Promise, Accendo, and other simplified plans more than an old episode.",

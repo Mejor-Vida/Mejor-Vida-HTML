@@ -1163,7 +1163,7 @@ function headHtml(lang, page, c, kind) {
 <link href="${prefix}css/quote-flow-shared.css?v=20260723-mobile-menu" rel="stylesheet"/>
 <link href="${prefix}css/site-header.css?v=20260723-ver-precios-gold" rel="stylesheet"/>
 <link href="${prefix}css/nav-life-insurance.css?v=20260831-navicons" rel="stylesheet"/>
-<link href="${prefix}css/life-insurance-cost.css?v=20260830-factor-cards2" rel="stylesheet"/>
+<link href="${prefix}css/life-insurance-cost.css?v=20260831-hbp" rel="stylesheet"/>
 <link href="${prefix}css/mvi-assistant-widget.css?v=20260721-chat-z" rel="stylesheet"/>
 <link href="${prefix}css/fontawesome-mvi.min.css?v=20260723-brands-fix" rel="stylesheet"/>
 <style>body { font-family: Inter, system-ui, -apple-system, sans-serif; }</style>
@@ -2232,64 +2232,51 @@ ${examRateScripts(lang, kind)}</body>
 }
 
 function main() {
-  const written = [
-    build("exam", "es"),
-    build("exam", "en"),
-    build("age", "es"),
-    build("age", "en"),
-    build("burial", "es"),
-    build("burial", "en"),
-    build("hub", "es"),
-    build("hub", "en"),
-    build("gi", "es"),
-    build("gi", "en"),
-    build("crem", "es"),
-    build("crem", "en"),
-    build("term", "es"),
-    build("term", "en"),
-    build("instant", "es"),
-    build("instant", "en"),
-    build("mortgage", "es"),
-    build("mortgage", "en"),
-    build("children", "es"),
-    build("children", "en"),
-    build("grandchildren", "es"),
-    build("grandchildren", "en"),
-    build("familyHub", "es"),
-    build("familyHub", "en"),
-    build("parents", "es"),
-    build("parents", "en"),
-    build("grandparents", "es"),
-    build("grandparents", "en"),
-    build("siblings", "es"),
-    build("siblings", "en"),
-    build("familyMembers", "es"),
-    build("familyMembers", "en"),
-    build("findPolicy", "es"),
-    build("findPolicy", "en"),
-    build("condHub", "es"),
-    build("condHub", "en"),
-    build("condTerm", "es"),
-    build("condTerm", "en"),
-    build("diabetes", "es"),
-    build("diabetes", "en"),
-    build("heart", "es"),
-    build("heart", "en"),
-    build("hbp", "es"),
-    build("hbp", "en"),
-    build("copd", "es"),
-    build("copd", "en"),
-    build("cancer", "es"),
-    build("cancer", "en"),
-    build("kidney", "es"),
-    build("kidney", "en"),
-    build("disability", "es"),
-    build("disability", "en"),
-    build("hiv", "es"),
-    build("hiv", "en"),
-    build("stroke", "es"),
-    build("stroke", "en"),
+  const onlyArg = process.argv.find((a) => a.startsWith("--only="));
+  const only = onlyArg
+    ? onlyArg
+        .slice("--only=".length)
+        .split(",")
+        .map((s) => s.trim())
+        .filter(Boolean)
+    : null;
+  const kinds = only || [
+    "exam",
+    "age",
+    "burial",
+    "hub",
+    "gi",
+    "crem",
+    "term",
+    "instant",
+    "mortgage",
+    "children",
+    "grandchildren",
+    "familyHub",
+    "parents",
+    "grandparents",
+    "siblings",
+    "familyMembers",
+    "findPolicy",
+    "condHub",
+    "condTerm",
+    "diabetes",
+    "heart",
+    "hbp",
+    "copd",
+    "cancer",
+    "kidney",
+    "disability",
+    "hiv",
+    "stroke",
   ];
+  const written = [];
+  kinds.forEach((kind) => {
+    if (!PAGES[kind]) {
+      throw new Error("Unknown page kind: " + kind);
+    }
+    written.push(build(kind, "es"), build(kind, "en"));
+  });
   console.log("Wrote", written.length, "pages");
   written.forEach((p) => console.log(" ", path.relative(ROOT, p)));
 }
