@@ -1162,7 +1162,7 @@ function headHtml(lang, page, c, kind) {
 <link href="${prefix}css/site-footer.css" rel="stylesheet"/>
 <link href="${prefix}css/quote-flow-shared.css?v=20260723-mobile-menu" rel="stylesheet"/>
 <link href="${prefix}css/site-header.css?v=20260723-ver-precios-gold" rel="stylesheet"/>
-<link href="${prefix}css/nav-life-insurance.css?v=20260829-termcond-photo" rel="stylesheet"/>
+<link href="${prefix}css/nav-life-insurance.css?v=20260831-navicons" rel="stylesheet"/>
 <link href="${prefix}css/life-insurance-cost.css?v=20260830-factor-cards2" rel="stylesheet"/>
 <link href="${prefix}css/mvi-assistant-widget.css?v=20260721-chat-z" rel="stylesheet"/>
 <link href="${prefix}css/fontawesome-mvi.min.css?v=20260723-brands-fix" rel="stylesheet"/>

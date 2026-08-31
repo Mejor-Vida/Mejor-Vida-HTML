@@ -128,14 +128,17 @@
 }
 
 .nav-life-category i {
+  flex: 0 0 1.1rem;
+  width: 1.1rem;
   color: #0d47a1;
   font-size: 0.95rem;
+  text-align: center;
 }
 
 .nav-life-usa-icon {
-  flex: 0 0 auto;
-  width: 1.1rem;
-  height: auto;
+  flex: 0 0 1.65rem;
+  width: 1.65rem;
+  height: 1.05rem;
   display: block;
   object-fit: contain;
 }
