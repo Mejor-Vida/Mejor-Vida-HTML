@@ -140,7 +140,7 @@ ${bulletHtml}
       </div>
       <div class="sc-hero-agent-actions">
         <button type="button" class="btn btn-sm sc-hero-lic-btn" data-mvi-open-license="${esc(code)}">${esc(viewLic)}</button>
-        <a class="btn btn-sm sc-hero-lic-btn-outline" href="https://sbs.naic.org/solar-external-lookup/" target="_blank" rel="noopener">${esc(naic)}</a>
+        <a class="btn btn-sm sc-hero-lic-btn-outline" href="https://external-lookup-web.prod.naic.org/lookup?jurisdiction=${esc(code)}&amp;searchType=Licensee&amp;entityType=IND&amp;npn=${NPN}" target="_blank" rel="noopener">${esc(naic)}</a>
       </div>
     </div>
   </div>
