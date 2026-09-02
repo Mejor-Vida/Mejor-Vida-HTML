@@ -249,6 +249,25 @@
     return null;
   }
 
+  function persistWizardHint(key, value) {
+    if (!value) return;
+    try {
+      sessionStorage.setItem(key, String(value));
+    } catch (eStore) {}
+  }
+
+  function trackQuotePageView() {
+    if (window.__mviQuotePageViewSent) return;
+    window.__mviQuotePageViewSent = true;
+    if (window.MVIFunnelTrack && typeof window.MVIFunnelTrack.track === "function") {
+      window.MVIFunnelTrack.track({
+        tool: "quote",
+        step_name: "quote_page_view",
+        event_type: "step_view",
+      });
+    }
+  }
+
   function trackWizardStepComplete(stepId) {
     var map = {
       gender: "sex",
@@ -260,9 +279,17 @@
     var stepName = map[stepId];
     if (!stepName) return;
     var extra = {};
+    if (stepId === "gender" && state.gender) {
+      extra.answer = state.gender;
+      persistWizardHint("mviLandingSex", state.gender);
+      if (window.MVIMetaCapiEvents && typeof window.MVIMetaCapiEvents.trackViewContent === "function") {
+        window.MVIMetaCapiEvents.trackViewContent({ sex: state.gender });
+      }
+    }
     if (stepId === "state" && state.state) {
       extra.state = state.state;
       extra.answer = state.state;
+      persistWizardHint("mviLandingState", state.state);
     }
     if (window.MviGa4Funnel && window.MviGa4Funnel.trackQuoteStepCompleted) {
       window.MviGa4Funnel.trackQuoteStepCompleted(stepName, extra);
@@ -1130,6 +1157,7 @@
     bindChoiceButtons();
     bindInputs();
     applyLandingQueryParams();
+    trackQuotePageView();
 
     var prev = document.getElementById("mvi-wizard-prev");
     var next = document.getElementById("mvi-wizard-next");

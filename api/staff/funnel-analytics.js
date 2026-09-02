@@ -1,7 +1,7 @@
 /**
  * GET /api/staff/funnel-analytics
  *
- * Overview: ?view=facebook_v2|facebook_v3|google|lp_direct|website&date_from=YYYY-MM-DD&date_to=YYYY-MM-DD
+ * Overview: ?view=facebook_website|facebook_v2|facebook_v3|google|lp_direct|website&date_from=YYYY-MM-DD&date_to=YYYY-MM-DD
  * Node detail: ?action=node&view=facebook&tool=quote&step=state&date_from=...&date_to=...
  */
 const { requireStaffAuth } = require("../auth-check");
@@ -106,7 +106,7 @@ module.exports = async function handler(req, res) {
   const cfg = serviceConfig();
   if (!cfg) return json(res, 500, { error: "Server missing required configuration" });
 
-  const view = normalizeViewId(String(req.query.view || "facebook_v2").trim());
+  const view = normalizeViewId(String(req.query.view || "facebook_website").trim());
   const adPlatformView = resolveAdPlatformView(view);
   const action = String(req.query.action || "").trim();
   const range = resolveDateRange(req.query);
@@ -156,7 +156,7 @@ module.exports = async function handler(req, res) {
       return json(res, 400, { error: "ad_daily requires facebook or google view" });
     }
     try {
-      const series = await fetchAdDailySeries(adPlatformView, range.dateFrom, range.dateTo);
+      const series = await fetchAdDailySeries(view, range.dateFrom, range.dateTo);
       return json(res, 200, {
         ok: true,
         dateFrom: range.dateFrom,
@@ -240,7 +240,7 @@ module.exports = async function handler(req, res) {
   let adMetrics = { show: false };
   if (viewShowsAdMetrics(view)) {
     try {
-      adMetrics = await fetchAdPlatformMetrics(adPlatformView, range.dateFrom, range.dateTo);
+      adMetrics = await fetchAdPlatformMetrics(view, range.dateFrom, range.dateTo);
     } catch (e) {
       console.error("[funnel-analytics] ad metrics", e.message || e);
       adMetrics = {

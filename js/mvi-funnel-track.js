@@ -123,10 +123,26 @@
     }
   }
 
+  function cleanUtmValue(raw) {
+    if (raw == null || raw === "") return "";
+    var v = String(raw).trim();
+    if (!v || /\{\{/.test(v)) return "";
+    return v.slice(0, 500);
+  }
+
   function deriveSource(params) {
     var p = params || {};
     var utm = String(p.utm_source || "").toLowerCase();
-    if (p.fbclid || utm.indexOf("facebook") >= 0 || utm.indexOf("fb") === 0 || utm === "meta") {
+    var medium = String(p.utm_medium || "").toLowerCase();
+    if (
+      p.fbclid ||
+      utm.indexOf("facebook") >= 0 ||
+      utm.indexOf("fb") === 0 ||
+      utm === "meta" ||
+      utm === "ig" ||
+      utm.indexOf("instagram") >= 0 ||
+      medium === "paid_social"
+    ) {
       return "facebook";
     }
     if (p.gclid || utm.indexOf("google") >= 0) return "google";
@@ -137,30 +153,46 @@
     return "direct";
   }
 
-  function getAcquisition() {
-    try {
-      var raw = readSession(ACQ_KEY);
-      if (raw) return JSON.parse(raw);
-    } catch (e) {}
+  function readAcquisitionFromUrl() {
     var acq = { source: "direct" };
     try {
       var sp = new URLSearchParams(global.location.search);
+      var utmTerm = cleanUtmValue(sp.get("utm_term"));
       acq = {
         source: deriveSource({
           utm_source: sp.get("utm_source"),
+          utm_medium: sp.get("utm_medium"),
           fbclid: sp.get("fbclid"),
           gclid: sp.get("gclid"),
         }),
-        campaign: sp.get("utm_campaign") || "",
-        ad_set: sp.get("utm_term") || "",
-        ad_name: sp.get("utm_content") || "",
-        keyword: sp.get("utm_term") || sp.get("keyword") || "",
-        search_term: sp.get("utm_term") || "",
+        campaign: cleanUtmValue(sp.get("utm_campaign")),
+        ad_set: utmTerm,
+        ad_name: cleanUtmValue(sp.get("utm_content")),
+        keyword: utmTerm || cleanUtmValue(sp.get("keyword")),
+        search_term: utmTerm,
       };
-      Object.keys(acq).forEach(function (k) {
-        if (typeof acq[k] === "string") acq[k] = acq[k].slice(0, 500);
-      });
     } catch (e2) {}
+    return acq;
+  }
+
+  function mergeAcquisition(stored, fromUrl) {
+    var out = stored && typeof stored === "object" ? Object.assign({}, stored) : { source: "direct" };
+    if (!fromUrl || typeof fromUrl !== "object") return out;
+    if (fromUrl.source && fromUrl.source !== "direct") out.source = fromUrl.source;
+    ["campaign", "ad_set", "ad_name", "keyword", "search_term"].forEach(function (k) {
+      if (fromUrl[k] && !out[k]) out[k] = fromUrl[k];
+    });
+    return out;
+  }
+
+  function getAcquisition() {
+    var fromUrl = readAcquisitionFromUrl();
+    var stored = null;
+    try {
+      var raw = readSession(ACQ_KEY);
+      if (raw) stored = JSON.parse(raw);
+    } catch (e) {}
+    var acq = mergeAcquisition(stored, fromUrl);
     writeSession(ACQ_KEY, JSON.stringify(acq));
     return acq;
   }
@@ -330,6 +362,11 @@
 
     if (eventName === "form_started") {
       track({ tool: "quote", step_name: "form_started", event_type: "step_view", page_or_step: page });
+      return;
+    }
+
+    if (eventName === "quote_page_view") {
+      track({ tool: "quote", step_name: "quote_page_view", event_type: "step_view", page_or_step: page });
       return;
     }
 

@@ -7,8 +7,8 @@
 
   var state = {
     sourceChannel: "facebook",
-    landingPage: "v2",
-    view: "facebook_v2",
+    landingPage: "website",
+    view: "facebook_website",
     licensedState: "ALL",
     periodDays: 1,
     dateFrom: "",
@@ -40,11 +40,11 @@
   function landingPagesForSource(source) {
     if (source === "organic") return ["website"];
     if (source === "google") return ["website", "v2", "v3"];
-    return ["v2", "v3", "website"];
+    return ["website", "v2", "v3"];
   }
 
   function composeViewId(source, landing) {
-    return String(source || "facebook") + "_" + String(landing || "v2");
+    return String(source || "facebook") + "_" + String(landing || "website");
   }
 
   function syncViewFromFilters() {
@@ -1213,7 +1213,7 @@
     var landingSelect = main.querySelector("[data-funnel-landing]");
     if (landingSelect) {
       landingSelect.addEventListener("change", function () {
-        state.landingPage = landingSelect.value || "v2";
+        state.landingPage = landingSelect.value || "website";
         syncViewFromFilters();
         state.selectedNode = null;
         state.detail = null;
@@ -1360,7 +1360,7 @@
   function mount(main) {
     applyPeriodDays(1);
     state.sourceChannel = "facebook";
-    state.landingPage = "v2";
+    state.landingPage = "website";
     state.licensedState = "ALL";
     state.entryModalOpen = false;
     syncViewFromFilters();
