@@ -198,27 +198,10 @@
     return q.join("&");
   }
 
-  function landingFilterHtml() {
-    var landings = landingPagesForSource(state.sourceChannel);
-    if (landings.length < 2) return "";
+  function sourceScopeHtml() {
+    var key = "funnel_scope_" + state.sourceChannel;
     return (
-      '<label class="crm-funnel-filter crm-funnel-landing-filter">' +
-      "<span>" + esc(t("funnel_landing_page")) + "</span>" +
-      '<select data-funnel-landing>' +
-      landings
-        .map(function (lp) {
-          return (
-            '<option value="' +
-            esc(lp) +
-            '"' +
-            (state.landingPage === lp ? " selected" : "") +
-            ">" +
-            esc(t("funnel_landing_" + lp)) +
-            "</option>"
-          );
-        })
-        .join("") +
-      "</select></label>"
+      '<p class="crm-funnel-source-scope">' + esc(t(key)) + "</p>"
     );
   }
 
@@ -279,7 +262,6 @@
         );
       }).join("") +
       "</div>" +
-      landingFilterHtml() +
       '<label class="crm-funnel-filter crm-funnel-state-filter">' +
       "<span>" + esc(t("funnel_state")) + "</span>" +
       '<select data-funnel-state>' +
@@ -298,7 +280,9 @@
       '<button type="button" class="crm-funnel-entry-btn" data-funnel-entry-open>' +
       esc(t("funnel_entry_context")) +
       "</button>" +
-      "</div></div>"
+      "</div>" +
+      sourceScopeHtml() +
+      "</div>"
     );
   }
 

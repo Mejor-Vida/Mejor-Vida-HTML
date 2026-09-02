@@ -69,6 +69,13 @@
   font: inherit;
 }
 
+.crm-funnel-source-scope {
+  margin: 10px 0 0;
+  font-size: 0.84rem;
+  line-height: 1.4;
+  color: var(--crm-muted, #64748b);
+}
+
 .crm-funnel-landing-filter,
 .crm-funnel-state-filter {
   min-width: 9rem;
