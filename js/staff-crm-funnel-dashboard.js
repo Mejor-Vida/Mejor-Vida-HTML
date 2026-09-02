@@ -436,10 +436,16 @@
   }
 
   function geoCoverageLabel(row, grain) {
+    if (row.isOutsideUs) return t("funnel_geo_coverage_outside");
     if (grain === "country") {
       return row.isUs ? t("funnel_geo_country_us") : t("funnel_geo_country");
     }
     return row.licensed ? t("funnel_geo_licensed") : t("funnel_geo_out_of_area");
+  }
+
+  function geoLocationName(row) {
+    if (row.nameKey) return t(row.nameKey);
+    return row.name || "";
   }
 
   function renderGeoSummary(data) {
@@ -493,13 +499,13 @@
             '<tr class="' +
             cls.trim() +
             '"><td>' +
-            esc(row.name) +
+            esc(geoLocationName(row)) +
             "</td><td>" +
             esc(fmtNum(row.clicks)) +
             "</td><td>" +
             esc(fmtNum(row.impressions)) +
             "</td><td><span class=\"crm-funnel-geo-badge" +
-            (row.licensed ? " crm-funnel-geo-badge--licensed" : "") +
+            (row.licensed ? " crm-funnel-geo-badge--licensed" : row.isUs ? " crm-funnel-geo-badge--us" : "") +
             '">' +
             esc(geoCoverageLabel(row, grain)) +
             "</span></td></tr>"

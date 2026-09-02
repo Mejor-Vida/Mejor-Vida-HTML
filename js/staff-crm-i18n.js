@@ -209,10 +209,10 @@
         "Where Facebook says people were when they clicked your ads. Licensed states are highlighted.",
       funnel_geo_note_google:
         "Where Google Ads says people were when they clicked (location of presence). Licensed states are highlighted.",
-      funnel_geo_note_google_country:
-        "Google Ads returned country, not state, for this period. United States includes every state.",
       funnel_geo_note_organic:
-        "Google Search Console reports organic clicks by country only — not by U.S. state. United States includes every state, licensed or not.",
+        "Google Search Console reports organic clicks by country only — not by U.S. state. Other countries are grouped as Outside of the USA.",
+      funnel_geo_note_google_country:
+        "Google Ads returned country, not state, for this period. Other countries are grouped as Outside of the USA.",
       funnel_geo_note_direct:
         "Direct traffic has no ad-platform location. After someone starts a quote, the State filter shows the state they selected — not where they clicked from.",
       funnel_geo_col_location: "Location",
@@ -223,6 +223,9 @@
       funnel_geo_out_of_area: "Out of area",
       funnel_geo_country: "Country",
       funnel_geo_country_us: "United States (all states)",
+      funnel_geo_usa: "United States",
+      funnel_geo_outside_usa: "Outside of the USA",
+      funnel_geo_coverage_outside: "Outside USA",
       funnel_geo_summary_licensed: "{n} clicks in licensed states",
       funnel_geo_summary_other: "{n} clicks outside licensed states",
       funnel_geo_summary_us: "{n} clicks from the United States",
@@ -1359,9 +1362,9 @@
       funnel_geo_note_google:
         "Dónde Google Ads indica que estaban las personas al hacer clic (ubicación de presencia). Los estados con licencia aparecen destacados.",
       funnel_geo_note_google_country:
-        "Google Ads devolvió país, no estado, para este período. Estados Unidos incluye todos los estados.",
+        "Google Ads devolvió país, no estado, para este período. Los demás países se agrupan como Fuera de EE. UU.",
       funnel_geo_note_organic:
-        "Search Console reporta clics orgánicos solo por país — no por estado de EE. UU. Estados Unidos incluye todos los estados, con o sin licencia.",
+        "Search Console reporta clics orgánicos solo por país — no por estado de EE. UU. Los demás países se agrupan como Fuera de EE. UU.",
       funnel_geo_note_direct:
         "El tráfico directo no tiene ubicación de plataforma. Cuando alguien empieza una cotización, el filtro Estado muestra el estado que eligió — no de dónde hizo clic.",
       funnel_geo_col_location: "Ubicación",
@@ -1372,6 +1375,9 @@
       funnel_geo_out_of_area: "Fuera de área",
       funnel_geo_country: "País",
       funnel_geo_country_us: "Estados Unidos (todos los estados)",
+      funnel_geo_usa: "Estados Unidos",
+      funnel_geo_outside_usa: "Fuera de EE. UU.",
+      funnel_geo_coverage_outside: "Fuera de EE. UU.",
       funnel_geo_summary_licensed: "{n} clics en estados con licencia",
       funnel_geo_summary_other: "{n} clics fuera de estados con licencia",
       funnel_geo_summary_us: "{n} clics desde Estados Unidos",
