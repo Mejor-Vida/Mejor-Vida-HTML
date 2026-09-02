@@ -28,7 +28,6 @@
 
   var PERIOD_PRESETS = [1, 7, 14, 30, 90];
   var SOURCE_CHANNELS = ["facebook", "google", "direct", "organic"];
-  var LANDING_PAGES = { v2: "V2", v3: "V3", website: "Website" };
   var LICENSED_STATES = [
     { value: "ALL", labelKey: "funnel_state_all" },
     { value: "NE", labelKey: "funnel_state_ne" },
@@ -37,10 +36,8 @@
     { value: "NV", labelKey: "funnel_state_nv" },
   ];
 
-  function landingPagesForSource(source) {
-    if (source === "organic") return ["website"];
-    if (source === "google") return ["website", "v2", "v3"];
-    return ["website", "v2", "v3"];
+  function landingPagesForSource() {
+    return ["website"];
   }
 
   function composeViewId(source, landing) {
@@ -201,6 +198,30 @@
     return q.join("&");
   }
 
+  function landingFilterHtml() {
+    var landings = landingPagesForSource(state.sourceChannel);
+    if (landings.length < 2) return "";
+    return (
+      '<label class="crm-funnel-filter crm-funnel-landing-filter">' +
+      "<span>" + esc(t("funnel_landing_page")) + "</span>" +
+      '<select data-funnel-landing>' +
+      landings
+        .map(function (lp) {
+          return (
+            '<option value="' +
+            esc(lp) +
+            '"' +
+            (state.landingPage === lp ? " selected" : "") +
+            ">" +
+            esc(t("funnel_landing_" + lp)) +
+            "</option>"
+          );
+        })
+        .join("") +
+      "</select></label>"
+    );
+  }
+
   /* ── FilterBar ── */
   function FilterBar() {
     ensureDateRange();
@@ -258,23 +279,7 @@
         );
       }).join("") +
       "</div>" +
-      '<label class="crm-funnel-filter crm-funnel-landing-filter">' +
-      "<span>" + esc(t("funnel_landing_page")) + "</span>" +
-      '<select data-funnel-landing>' +
-      landingPagesForSource(state.sourceChannel)
-        .map(function (lp) {
-          return (
-            '<option value="' +
-            esc(lp) +
-            '"' +
-            (state.landingPage === lp ? " selected" : "") +
-            ">" +
-            esc(t("funnel_landing_" + lp)) +
-            "</option>"
-          );
-        })
-        .join("") +
-      "</select></label>" +
+      landingFilterHtml() +
       '<label class="crm-funnel-filter crm-funnel-state-filter">' +
       "<span>" + esc(t("funnel_state")) + "</span>" +
       '<select data-funnel-state>' +
