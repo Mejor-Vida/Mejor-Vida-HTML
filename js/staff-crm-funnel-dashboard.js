@@ -24,6 +24,10 @@
     adChartData: null,
     adChartError: null,
     entryModalOpen: false,
+    geoModalOpen: false,
+    geoLoading: false,
+    geoError: null,
+    geoData: null,
   };
 
   var PERIOD_PRESETS = [1, 7, 14, 30, 90];
@@ -277,9 +281,14 @@
         );
       }).join("") +
       "</select></label>" +
+      '<div class="crm-funnel-filter-actions">' +
       '<button type="button" class="crm-funnel-entry-btn" data-funnel-entry-open>' +
       esc(t("funnel_entry_context")) +
       "</button>" +
+      '<button type="button" class="crm-funnel-entry-btn" data-funnel-geo-open>' +
+      esc(t("funnel_geo_btn")) +
+      "</button>" +
+      "</div>" +
       "</div>" +
       sourceScopeHtml() +
       "</div>"
@@ -422,6 +431,138 @@
       '">×</button></div>' +
       '<div class="crm-funnel-ad-modal-body">' +
       EntryContextPanel(ctx) +
+      "</div></div></div>"
+    );
+  }
+
+  function geoCoverageLabel(row, grain) {
+    if (grain === "country") {
+      return row.isUs ? t("funnel_geo_country_us") : t("funnel_geo_country");
+    }
+    return row.licensed ? t("funnel_geo_licensed") : t("funnel_geo_out_of_area");
+  }
+
+  function renderGeoSummary(data) {
+    var grain = data.grain;
+    var s = data.summary || {};
+    if (grain === "none") return "";
+    if (grain === "country") {
+      return (
+        '<div class="crm-funnel-geo-summary">' +
+        '<div class="crm-funnel-geo-chip">' +
+        esc(t("funnel_geo_summary_us", { n: fmtNum(s.usClicks || 0) })) +
+        "</div>" +
+        '<div class="crm-funnel-geo-chip">' +
+        esc(t("funnel_geo_summary_intl", { n: fmtNum(s.internationalClicks || 0) })) +
+        "</div></div>"
+      );
+    }
+    return (
+      '<div class="crm-funnel-geo-summary">' +
+      '<div class="crm-funnel-geo-chip crm-funnel-geo-chip--licensed">' +
+      esc(t("funnel_geo_summary_licensed", { n: fmtNum(s.licensedClicks || 0) })) +
+      "</div>" +
+      '<div class="crm-funnel-geo-chip">' +
+      esc(t("funnel_geo_summary_other", { n: fmtNum(s.otherClicks || 0) })) +
+      "</div></div>"
+    );
+  }
+
+  function renderGeoTable(data) {
+    var rows = data.locations || [];
+    var grain = data.grain;
+    if (!rows.length) {
+      return '<p class="crm-funnel-ad-chart-empty">' + esc(t("funnel_geo_empty")) + "</p>";
+    }
+    return (
+      '<table class="crm-funnel-geo-table">' +
+      "<thead><tr>" +
+      "<th>" + esc(t("funnel_geo_col_location")) + "</th>" +
+      "<th>" + esc(t("funnel_geo_col_clicks")) + "</th>" +
+      "<th>" + esc(t("funnel_geo_col_impressions")) + "</th>" +
+      "<th>" + esc(t("funnel_geo_col_coverage")) + "</th>" +
+      "</tr></thead><tbody>" +
+      rows
+        .map(function (row) {
+          var cls = row.licensed
+            ? " is-licensed"
+            : row.isUs
+              ? " is-us"
+              : "";
+          return (
+            '<tr class="' +
+            cls.trim() +
+            '"><td>' +
+            esc(row.name) +
+            "</td><td>" +
+            esc(fmtNum(row.clicks)) +
+            "</td><td>" +
+            esc(fmtNum(row.impressions)) +
+            "</td><td><span class=\"crm-funnel-geo-badge" +
+            (row.licensed ? " crm-funnel-geo-badge--licensed" : "") +
+            '">' +
+            esc(geoCoverageLabel(row, grain)) +
+            "</span></td></tr>"
+          );
+        })
+        .join("") +
+      "</tbody></table>"
+    );
+  }
+
+  function GeoClicksModal() {
+    if (!state.geoModalOpen) return "";
+    var data = state.geoData || {};
+    var rangeLabel = fmtDateRangeLabel(state.dateFrom, state.dateTo);
+    var note = data.noteKey ? t(data.noteKey) : "";
+    var body;
+    if (state.geoLoading) {
+      body = '<p class="crm-funnel-ad-chart-empty">' + esc(t("funnel_geo_loading")) + "</p>";
+    } else if (state.geoError) {
+      body = '<p class="crm-funnel-error">' + esc(state.geoError) + "</p>";
+    } else if (data.setupHint && !data.configured) {
+      body =
+        '<p class="crm-funnel-ad-metrics-note">' +
+        esc(data.setupHint) +
+        (data.oauthAuthUrl
+          ? ' <a class="crm-funnel-gsc-connect" href="' +
+            esc(data.oauthAuthUrl) +
+            '" target="_blank" rel="noopener">' +
+            esc(t("funnel_gsc_connect_oauth")) +
+            "</a>"
+          : "") +
+        "</p>";
+    } else if (data.grain === "none") {
+      body =
+        (note ? '<p class="crm-funnel-geo-note">' + esc(note) + "</p>" : "") +
+        '<p class="crm-funnel-geo-filter-note">' +
+        esc(t("funnel_geo_state_filter_note")) +
+        "</p>";
+    } else {
+      body =
+        (note ? '<p class="crm-funnel-geo-note">' + esc(note) + "</p>" : "") +
+        '<p class="crm-funnel-geo-filter-note">' +
+        esc(t("funnel_geo_state_filter_note")) +
+        "</p>" +
+        renderGeoSummary(data) +
+        (data.error ? '<p class="crm-funnel-error">' + esc(data.error) + "</p>" : "") +
+        renderGeoTable(data);
+    }
+
+    return (
+      '<div class="crm-funnel-ad-modal-backdrop" data-funnel-geo-modal-backdrop>' +
+      '<div class="crm-funnel-ad-modal crm-funnel-ad-modal--geo" role="dialog" aria-labelledby="crm-funnel-geo-modal-title">' +
+      '<div class="crm-funnel-ad-modal-head">' +
+      '<div><h3 id="crm-funnel-geo-modal-title">' +
+      esc(t("funnel_geo_title")) +
+      "</h3>" +
+      (rangeLabel ? '<p class="crm-funnel-ad-modal-sub">' + esc(rangeLabel) + "</p>" : "") +
+      "</div>" +
+      '<button type="button" class="crm-funnel-ad-modal-close" data-funnel-geo-modal-close aria-label="' +
+      esc(t("funnel_close")) +
+      '">×</button></div>' +
+      '<div class="crm-funnel-ad-modal-body">' +
+      body +
       "</div></div></div>"
     );
   }
@@ -1037,6 +1178,7 @@
         '<p class="crm-funnel-loading">' + esc(t("funnel_loading")) + "</p>" +
         AdChartModal() +
         EntryContextModal() +
+        GeoClicksModal() +
         "</div>"
       );
     }
@@ -1051,6 +1193,7 @@
         "<p>" + esc(t("funnel_no_data_blurb")) + "</p></div>" +
         AdChartModal() +
         EntryContextModal() +
+        GeoClicksModal() +
         "</div>"
       );
     }
@@ -1069,6 +1212,7 @@
       "</div>" +
       AdChartModal() +
       EntryContextModal() +
+      GeoClicksModal() +
       "</div>"
     );
   }
@@ -1125,6 +1269,7 @@
   }
 
   function loadAdChart(main, metric) {
+    closeGeoClicks(main, { skipPaint: true });
     state.adChartMetric = metric;
     state.adChartLoading = true;
     state.adChartError = null;
@@ -1158,16 +1303,19 @@
       });
   }
 
-  function closeAdChart(main) {
+  function closeAdChart(main, opts) {
     state.adChartMetric = null;
     state.adChartLoading = false;
     state.adChartData = null;
     state.adChartError = null;
+    if (opts && opts.skipPaint) return;
     paint(main);
     wireEvents(main);
   }
 
   function openEntryModal(main) {
+    closeGeoClicks(main, { skipPaint: true });
+    closeAdChart(main, { skipPaint: true });
     state.entryModalOpen = true;
     paint(main);
     wireEvents(main);
@@ -1177,6 +1325,44 @@
     state.entryModalOpen = false;
     paint(main);
     wireEvents(main);
+  }
+
+  function closeGeoClicks(main, opts) {
+    state.geoModalOpen = false;
+    state.geoLoading = false;
+    state.geoError = null;
+    state.geoData = null;
+    if (opts && opts.skipPaint) return;
+    paint(main);
+    wireEvents(main);
+  }
+
+  function loadGeoClicks(main) {
+    state.geoModalOpen = true;
+    state.geoLoading = true;
+    state.geoError = null;
+    state.geoData = null;
+    state.entryModalOpen = false;
+    closeAdChart(main, { skipPaint: true });
+    paint(main);
+    wireEvents(main);
+    return api(
+      "/api/staff/funnel-analytics?" + queryString({ action: "geo_clicks" }),
+      { method: "GET", softAuth: true }
+    )
+      .then(function (res) {
+        state.geoData = res;
+        state.geoLoading = false;
+        state.geoError = res.error || null;
+        paint(main);
+        wireEvents(main);
+      })
+      .catch(function (err) {
+        state.geoLoading = false;
+        state.geoError = (err && err.message) || t("funnel_load_error");
+        paint(main);
+        wireEvents(main);
+      });
   }
 
   function wireEvents(main) {
@@ -1192,6 +1378,7 @@
         state.selectedNode = null;
         state.detail = null;
         state.entryModalOpen = false;
+        closeGeoClicks(main, { skipPaint: true });
         closeAdChart(main);
         paint(main);
         wireEvents(main);
@@ -1207,6 +1394,7 @@
         state.selectedNode = null;
         state.detail = null;
         state.entryModalOpen = false;
+        closeGeoClicks(main, { skipPaint: true });
         closeAdChart(main);
         loadData(main);
       });
@@ -1219,6 +1407,7 @@
         state.selectedNode = null;
         state.detail = null;
         state.entryModalOpen = false;
+        closeGeoClicks(main, { skipPaint: true });
         closeAdChart(main);
         loadData(main);
       });
@@ -1246,11 +1435,33 @@
       });
     }
 
+    var geoOpenBtn = main.querySelector("[data-funnel-geo-open]");
+    if (geoOpenBtn) {
+      geoOpenBtn.addEventListener("click", function (ev) {
+        ev.preventDefault();
+        loadGeoClicks(main);
+      });
+    }
+    var geoModalClose = main.querySelector("[data-funnel-geo-modal-close]");
+    if (geoModalClose) {
+      geoModalClose.addEventListener("click", function (ev) {
+        ev.preventDefault();
+        closeGeoClicks(main);
+      });
+    }
+    var geoModalBackdrop = main.querySelector("[data-funnel-geo-modal-backdrop]");
+    if (geoModalBackdrop) {
+      geoModalBackdrop.addEventListener("click", function (ev) {
+        if (ev.target === geoModalBackdrop) closeGeoClicks(main);
+      });
+    }
+
     main.querySelectorAll("[data-funnel-view]").forEach(function (btn) {
       btn.addEventListener("click", function () {
         state.view = btn.getAttribute("data-funnel-view");
         state.selectedNode = null;
         state.detail = null;
+        closeGeoClicks(main, { skipPaint: true });
         closeAdChart(main);
         loadData(main);
       });
@@ -1267,6 +1478,7 @@
         applyPeriodDays(Number(val));
         state.selectedNode = null;
         state.detail = null;
+        closeGeoClicks(main, { skipPaint: true });
         closeAdChart(main);
         loadData(main);
       });
@@ -1284,6 +1496,7 @@
       }
       state.selectedNode = null;
       state.detail = null;
+      closeGeoClicks(main, { skipPaint: true });
       closeAdChart(main);
       loadData(main);
     }
@@ -1318,6 +1531,7 @@
         state.selectedNode = null;
         state.detail = null;
         state.detailError = null;
+        closeGeoClicks(main, { skipPaint: true });
         closeAdChart(main);
         loadData(main);
       });
@@ -1352,6 +1566,8 @@
     state.landingPage = "website";
     state.licensedState = "ALL";
     state.entryModalOpen = false;
+    state.geoModalOpen = false;
+    state.geoData = null;
     syncViewFromFilters();
     state.selectedNode = null;
     state.detail = null;

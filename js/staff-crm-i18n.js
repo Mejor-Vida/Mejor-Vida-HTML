@@ -201,6 +201,34 @@
       funnel_view_lp_direct: "LP Direct",
       funnel_view_website: "Website Funnel",
       funnel_entry_context: "Entry context",
+      funnel_geo_btn: "Clicks by location",
+      funnel_geo_title: "Clicks by location",
+      funnel_geo_loading: "Loading locations…",
+      funnel_geo_empty: "No click location data for this period.",
+      funnel_geo_note_facebook:
+        "Where Facebook says people were when they clicked your ads. Licensed states are highlighted.",
+      funnel_geo_note_google:
+        "Where Google Ads says people were when they clicked (location of presence). Licensed states are highlighted.",
+      funnel_geo_note_google_country:
+        "Google Ads returned country, not state, for this period. United States includes every state.",
+      funnel_geo_note_organic:
+        "Google Search Console reports organic clicks by country only — not by U.S. state. United States includes every state, licensed or not.",
+      funnel_geo_note_direct:
+        "Direct traffic has no ad-platform location. After someone starts a quote, the State filter shows the state they selected — not where they clicked from.",
+      funnel_geo_col_location: "Location",
+      funnel_geo_col_clicks: "Clicks",
+      funnel_geo_col_impressions: "Impressions",
+      funnel_geo_col_coverage: "Coverage",
+      funnel_geo_licensed: "Licensed",
+      funnel_geo_out_of_area: "Out of area",
+      funnel_geo_country: "Country",
+      funnel_geo_country_us: "United States (all states)",
+      funnel_geo_summary_licensed: "{n} clicks in licensed states",
+      funnel_geo_summary_other: "{n} clicks outside licensed states",
+      funnel_geo_summary_us: "{n} clicks from the United States",
+      funnel_geo_summary_intl: "{n} clicks from other countries",
+      funnel_geo_state_filter_note:
+        "The State dropdown above filters quote answers, not click geography.",
       funnel_entry_at: "Entry: {entry}",
       funnel_entry_all_traffic: "All traffic · {n} sessions",
       funnel_entry_view_sessions: "{view} · {n} sessions",
@@ -1322,6 +1350,34 @@
       funnel_view_lp_direct: "LP Direct",
       funnel_view_website: "Embudo sitio web",
       funnel_entry_context: "Contexto de entrada",
+      funnel_geo_btn: "Clics por ubicación",
+      funnel_geo_title: "Clics por ubicación",
+      funnel_geo_loading: "Cargando ubicaciones…",
+      funnel_geo_empty: "No hay datos de ubicación de clics en este período.",
+      funnel_geo_note_facebook:
+        "Dónde Facebook indica que estaban las personas al hacer clic en tus anuncios. Los estados con licencia aparecen destacados.",
+      funnel_geo_note_google:
+        "Dónde Google Ads indica que estaban las personas al hacer clic (ubicación de presencia). Los estados con licencia aparecen destacados.",
+      funnel_geo_note_google_country:
+        "Google Ads devolvió país, no estado, para este período. Estados Unidos incluye todos los estados.",
+      funnel_geo_note_organic:
+        "Search Console reporta clics orgánicos solo por país — no por estado de EE. UU. Estados Unidos incluye todos los estados, con o sin licencia.",
+      funnel_geo_note_direct:
+        "El tráfico directo no tiene ubicación de plataforma. Cuando alguien empieza una cotización, el filtro Estado muestra el estado que eligió — no de dónde hizo clic.",
+      funnel_geo_col_location: "Ubicación",
+      funnel_geo_col_clicks: "Clics",
+      funnel_geo_col_impressions: "Impresiones",
+      funnel_geo_col_coverage: "Cobertura",
+      funnel_geo_licensed: "Con licencia",
+      funnel_geo_out_of_area: "Fuera de área",
+      funnel_geo_country: "País",
+      funnel_geo_country_us: "Estados Unidos (todos los estados)",
+      funnel_geo_summary_licensed: "{n} clics en estados con licencia",
+      funnel_geo_summary_other: "{n} clics fuera de estados con licencia",
+      funnel_geo_summary_us: "{n} clics desde Estados Unidos",
+      funnel_geo_summary_intl: "{n} clics desde otros países",
+      funnel_geo_state_filter_note:
+        "El menú Estado de arriba filtra respuestas del cotizador, no la geografía del clic.",
       funnel_entry_at: "Entrada: {entry}",
       funnel_entry_all_traffic: "Todo el tráfico · {n} sesiones",
       funnel_entry_view_sessions: "{view} · {n} sesiones",

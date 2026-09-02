@@ -225,6 +225,96 @@
   width: min(920px, 96vw);
 }
 
+.crm-funnel-ad-modal--geo {
+  width: min(720px, 96vw);
+}
+
+.crm-funnel-geo-note,
+.crm-funnel-geo-filter-note {
+  margin: 0 0 12px;
+  font-size: 0.88rem;
+  line-height: 1.45;
+  color: var(--crm-muted, #64748b);
+}
+
+.crm-funnel-geo-filter-note {
+  font-size: 0.82rem;
+}
+
+.crm-funnel-geo-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 16px;
+}
+
+.crm-funnel-geo-chip {
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: #f1f5f9;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--crm-text, #1a2b4a);
+}
+
+.crm-funnel-geo-chip--licensed {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.crm-funnel-geo-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.crm-funnel-geo-table th,
+.crm-funnel-geo-table td {
+  padding: 8px 10px;
+  text-align: left;
+  border-bottom: 1px solid var(--crm-border, #dbe3ef);
+}
+
+.crm-funnel-geo-table th {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--crm-muted, #64748b);
+}
+
+.crm-funnel-geo-table td:nth-child(2),
+.crm-funnel-geo-table td:nth-child(3),
+.crm-funnel-geo-table th:nth-child(2),
+.crm-funnel-geo-table th:nth-child(3) {
+  text-align: right;
+}
+
+.crm-funnel-geo-table tr.is-licensed {
+  background: #f0fdf4;
+}
+
+.crm-funnel-geo-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: #f1f5f9;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #475569;
+}
+
+.crm-funnel-geo-badge--licensed {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.crm-funnel-filter-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-self: end;
+}
+
 .crm-funnel-entry-btn {
   align-self: end;
   padding: 8px 14px;

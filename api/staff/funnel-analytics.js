@@ -1,8 +1,9 @@
 /**
  * GET /api/staff/funnel-analytics
  *
- * Overview: ?view=facebook_website|facebook_v2|facebook_v3|google|lp_direct|website&date_from=YYYY-MM-DD&date_to=YYYY-MM-DD
- * Node detail: ?action=node&view=facebook&tool=quote&step=state&date_from=...&date_to=...
+ * Overview: ?view=facebook_website|google_website|direct_website|organic_website&date_from=YYYY-MM-DD&date_to=YYYY-MM-DD
+ * Node detail: ?action=node&view=facebook_website&tool=quote&step=state&date_from=...&date_to=...
+ * Click geography: ?action=geo_clicks&view=facebook_website|google_website|organic_website&date_from=...&date_to=...
  */
 const { requireStaffAuth } = require("../auth-check");
 const { json, serviceConfig, restSelect } = require("./_inbox-lib");
@@ -17,6 +18,7 @@ const {
 const { fetchAdPlatformMetrics, fetchAdDailySeries } = require("../../lib/ad-platform-insights");
 const { fetchTopKeywordsByClicks } = require("../../lib/google-ads-api");
 const { fetchGscOrganicSearch, fetchGscDaily } = require("../../lib/gsc-data-api");
+const { fetchGeoClicks } = require("../../lib/geo-click-insights");
 const { fetchPoliciesSoldMetrics } = require("../../lib/crm-stage-transitions");
 
 const CHICAGO_TZ = "America/Chicago";
@@ -120,35 +122,20 @@ module.exports = async function handler(req, res) {
         ? stateFilterRaw
         : "ALL";
 
-  let events;
-  try {
-    events = await loadFunnelEvents(cfg, range.startIso, range.endExclusiveIso);
-  } catch (e) {
-    console.error("[funnel-analytics] load", e.message || e);
-    return json(res, 500, { error: "Could not load funnel events" });
-  }
-
-  const filters = {
-    view,
-    source: "all",
-    campaign: "",
-    device: "all",
-    state: stateFilter,
-    dateFrom: range.dateFrom,
-    dateTo: range.dateTo,
-  };
-
-  if (action === "node") {
-    const tool = String(req.query.tool || "").trim();
-    const step = String(req.query.step || "").trim();
-    if (!tool || !step) {
-      return json(res, 400, { error: "tool and step required for node detail" });
+  if (action === "geo_clicks") {
+    try {
+      const geo = await fetchGeoClicks(view, range.dateFrom, range.dateTo);
+      return json(res, 200, {
+        ok: true,
+        dateFrom: range.dateFrom,
+        dateTo: range.dateTo,
+        view,
+        ...geo,
+      });
+    } catch (e) {
+      console.error("[funnel-analytics] geo_clicks", e.message || e);
+      return json(res, 502, { error: e.message || "Could not load click locations" });
     }
-    const sessionsMap = groupSessions(events);
-    const sessions = filterSessions(sessionsMap, filters);
-    const detail = buildNodeDetail(sessions, tool, step, view);
-    if (!detail) return json(res, 404, { error: "Step not found" });
-    return json(res, 200, { ok: true, detail, dateFrom: range.dateFrom, dateTo: range.dateTo });
   }
 
   if (action === "ad_daily") {
@@ -210,6 +197,37 @@ module.exports = async function handler(req, res) {
       console.error("[funnel-analytics] policies_daily", e.message || e);
       return json(res, 502, { error: e.message || "Could not load policies sold daily series" });
     }
+  }
+
+  let events;
+  try {
+    events = await loadFunnelEvents(cfg, range.startIso, range.endExclusiveIso);
+  } catch (e) {
+    console.error("[funnel-analytics] load", e.message || e);
+    return json(res, 500, { error: "Could not load funnel events" });
+  }
+
+  const filters = {
+    view,
+    source: "all",
+    campaign: "",
+    device: "all",
+    state: stateFilter,
+    dateFrom: range.dateFrom,
+    dateTo: range.dateTo,
+  };
+
+  if (action === "node") {
+    const tool = String(req.query.tool || "").trim();
+    const step = String(req.query.step || "").trim();
+    if (!tool || !step) {
+      return json(res, 400, { error: "tool and step required for node detail" });
+    }
+    const sessionsMap = groupSessions(events);
+    const sessions = filterSessions(sessionsMap, filters);
+    const detail = buildNodeDetail(sessions, tool, step, view);
+    if (!detail) return json(res, 404, { error: "Step not found" });
+    return json(res, 200, { ok: true, detail, dateFrom: range.dateFrom, dateTo: range.dateTo });
   }
 
   const dashboard = buildDashboard(events, filters);
