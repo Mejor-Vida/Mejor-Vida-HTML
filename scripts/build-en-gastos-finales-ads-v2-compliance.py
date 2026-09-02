@@ -21,7 +21,8 @@ SMS_EN = (
 )
 
 STRUCTURAL_REPLACEMENTS = [
-    ('<html lang="es">', '<html lang="en">'),
+    ('<html lang="es-US">', '<html lang="en-US">'),
+    ('<html lang="es">', '<html lang="en-US">'),
     ('<meta name="robots" content="noindex, nofollow" />', '<meta name="robots" content="index, follow" />'),
     (
         'content="Tu estimado personalizado de seguro de gastos finales con Mejor Vida Insurance en Nebraska."',

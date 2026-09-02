@@ -55,7 +55,7 @@
   var nameStepPhase = "fields";
 
   var IS_EN =
-    document.documentElement.lang === "en" ||
+    String(document.documentElement.lang || "").toLowerCase().indexOf("en") === 0 ||
     document.body.getAttribute("data-lf-lang") === "en";
 
   function ui(en, es) {

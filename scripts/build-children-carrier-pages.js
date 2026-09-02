@@ -1527,8 +1527,8 @@ function setMeta(html, lang, carrier, copy, enUrl, esUrl) {
 
   // hreflang block — replace consecutive alternate links near head
   html = html.replace(
-    /<link href="https:\/\/www\.mejorvidainsurance\.com\/[^"]*" hreflang="es" rel="alternate"\/>\s*<link href="https:\/\/www\.mejorvidainsurance\.com\/[^"]*" hreflang="en" rel="alternate"\/>\s*(?:<link href="https:\/\/www\.mejorvidainsurance\.com\/[^"]*" hreflang="x-default" rel="alternate"\/>\s*)?/,
-    `<link href="${esUrl}" hreflang="es" rel="alternate"/>\n<link href="${enUrl}" hreflang="en" rel="alternate"/>\n<link href="${esUrl}" hreflang="x-default" rel="alternate"/>\n`
+    /<link href="https:\/\/www\.mejorvidainsurance\.com\/[^"]*" hreflang="es(?:-US)?" rel="alternate"\/>\s*<link href="https:\/\/www\.mejorvidainsurance\.com\/[^"]*" hreflang="en(?:-US)?" rel="alternate"\/>\s*(?:<link href="https:\/\/www\.mejorvidainsurance\.com\/[^"]*" hreflang="x-default" rel="alternate"\/>\s*)?/,
+    `<link href="${esUrl}" hreflang="es-US" rel="alternate"/>\n<link href="${enUrl}" hreflang="en-US" rel="alternate"/>\n<link href="${esUrl}" hreflang="x-default" rel="alternate"/>\n`
   );
 
   html = html.replace(
@@ -1564,7 +1564,7 @@ function setMeta(html, lang, carrier, copy, enUrl, esUrl) {
     );
     if (!/og:site_name/.test(html)) {
       html = html.replace(
-        /(<meta content="es_ES" property="og:locale"\/>)/,
+        /(<meta content="es_US" property="og:locale"\/>)/,
         `$1\n<meta content="Mejor Vida Seguros" property="og:site_name"/>\n<meta content="en_US" property="og:locale:alternate"/>`
       );
     }
@@ -1594,7 +1594,7 @@ function setMeta(html, lang, carrier, copy, enUrl, esUrl) {
               url: canonical,
               name: copy.title,
               description: copy.description,
-              inLanguage: "es",
+              inLanguage: "es-US",
               isPartOf: {
                 "@type": "WebSite",
                 name: "Mejor Vida Seguros",

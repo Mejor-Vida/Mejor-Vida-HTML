@@ -109,8 +109,8 @@ def set_meta(html: str, *, title, desc, keywords, canonical, og_title, og_desc, 
 
 def set_hreflang(html: str, url: str, en: bool) -> str:
     html = re.sub(
-        r'<link href="https://www.mejorvidainsurance.com/[^"]+" hreflang="es" rel="alternate"/>',
-        "" if en else f'<link href="{url}" hreflang="es" rel="alternate"/>',
+        r'<link href="https://www.mejorvidainsurance.com/[^"]+" hreflang="es(?:-US)?" rel="alternate"/>',
+        "" if en else f'<link href="{url}" hreflang="es-US" rel="alternate"/>',
         html,
         count=1,
     )
@@ -682,7 +682,7 @@ def json_ld_news(*, headline, desc, image, url, keywords, lang, word_count):
         "articleSection": "Insurance Education" if lang == "en" else "Educación sobre seguros",
         "keywords": keywords,
         "wordCount": word_count,
-        "inLanguage": "en-US" if lang == "en" else "es-ES",
+        "inLanguage": "en-US" if lang == "en" else "es-US",
     }
 
 
@@ -753,7 +753,7 @@ def patch_head_digest(html: str, en: bool) -> str:
             og_url=url,
             og_image=img,
             robots="index, follow",
-            locale="es_ES",
+            locale="es_US",
             tags=[],
         )
         html = html.replace("2026-08-02", "2026-08-23")
@@ -782,7 +782,7 @@ def patch_head_digest(html: str, en: bool) -> str:
         html,
         count=1,
     )
-    html = re.sub(r'<link href="https://www.mejorvidainsurance.com/blog/weekly-insurance-update-2026-08-23.html" hreflang="es" rel="alternate"/>', f'<link href="{url}" hreflang="es" rel="alternate"/>' if not en else "", html)
+    html = re.sub(r'<link href="https://www.mejorvidainsurance.com/blog/weekly-insurance-update-2026-08-23.html" hreflang="es(?:-US)?" rel="alternate"/>', f'<link href="{url}" hreflang="es-US" rel="alternate"/>' if not en else "", html)
     return html
 
 
@@ -803,7 +803,7 @@ def patch_head_article(html: str, n: int, en: bool, faq) -> str:
         og_url=url,
         og_image=img,
         robots="noindex, follow" if en else "index, follow",
-        locale="en_US" if en else "es_ES",
+        locale="en_US" if en else "es_US",
         tags=[],
     )
     html = html.replace("2026-08-02", "2026-08-23")

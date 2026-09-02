@@ -185,8 +185,8 @@ function patchContactEs(html) {
       '<meta content="https://www.mejorvidainsurance.com/img/opt/logo-spanish2.png" name="twitter:image"/>';
 
     html = html.replace(
-      /<link href="https:\/\/www\.mejorvidainsurance\.com\/contact\.html" hreflang="es"/,
-      canonical + '<link href="https://www.mejorvidainsurance.com/contact.html" hreflang="es"'
+      /<link href="https:\/\/www\.mejorvidainsurance\.com\/contact\.html" hreflang="es-US"/,
+      canonical + '<link href="https://www.mejorvidainsurance.com/contact.html" hreflang="es-US"'
     );
   }
 

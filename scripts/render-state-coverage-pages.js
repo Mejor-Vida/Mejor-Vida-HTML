@@ -948,7 +948,7 @@ function renderEs(code) {
   const desc = `Julie Braunsroth cotiza seguro de gastos finales en ${name}. Costos funerarios promedio, aseguradoras y licencia #${lic.number} (NPN #${NPN}).`;
 
   return `<!DOCTYPE html>
-<html class="lang-es" lang="es">
+<html class="lang-es" lang="es-US">
 <head>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-K921EG6JWG"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-K921EG6JWG');</script>
@@ -958,8 +958,8 @@ function renderEs(code) {
 <meta name="description" content="${esc(desc)}"/>
 <meta name="robots" content="index, follow"/>
 <link href="${canon}" rel="canonical"/>
-<link href="${canon}" hreflang="es" rel="alternate"/>
-<link href="${enCanon}" hreflang="en" rel="alternate"/>
+<link href="${canon}" hreflang="es-US" rel="alternate"/>
+<link href="${enCanon}" hreflang="en-US" rel="alternate"/>
 <link href="${canon}" hreflang="x-default" rel="alternate"/>
 <link href="${prefix}favicon.ico" rel="icon" type="image/x-icon"/>
 <link href="${prefix}bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
@@ -978,10 +978,10 @@ function renderEs(code) {
 <meta property="og:title" content="${esc(title)}"/>
 <meta property="og:description" content="${esc(desc)}"/>
 <meta property="og:url" content="${canon}"/>
-<meta property="og:locale" content="es_ES"/>
+<meta property="og:locale" content="es_US"/>
 <link rel="preload" as="image" href="${prefix}img/opt/logo-spanish2.webp" type="image/webp" fetchpriority="high"/>
 <link rel="preload" as="image" href="${prefix}img/opt/${slug}-hero.webp?v=map-seal-v11" type="image/webp"/>
-<script>(function(){document.documentElement.lang="es";document.documentElement.className="lang-es";})();</script>
+<script>(function(){document.documentElement.lang="es-US";document.documentElement.className="lang-es";})();</script>
 </head>
 <body class="bg-white state-coverage-page" data-licenses-base="${prefix}licenses/">
 ${loadHeaderEs(slug)}
@@ -1056,7 +1056,7 @@ function renderEn(code) {
   const desc = `Julie Braunsroth quotes final expense life insurance in ${name}. Average funeral costs, carriers she compares, and license #${lic.number} (NPN #${NPN}).`;
 
   return `<!DOCTYPE html>
-<html class="lang-en" lang="en">
+<html class="lang-en" lang="en-US">
 <head>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-K921EG6JWG"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-K921EG6JWG');</script>
@@ -1066,8 +1066,8 @@ function renderEn(code) {
 <meta name="description" content="${esc(desc)}"/>
 <meta name="robots" content="noindex, follow"/>
 <link href="${canon}" rel="canonical"/>
-<link href="${esCanon}" hreflang="es" rel="alternate"/>
-<link href="${canon}" hreflang="en" rel="alternate"/>
+<link href="${esCanon}" hreflang="es-US" rel="alternate"/>
+<link href="${canon}" hreflang="en-US" rel="alternate"/>
 <link href="${root}favicon.ico" rel="icon" type="image/x-icon"/>
 <link href="${root}bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
 <link href="${root}css/quote-flow-shared.css?v=20260726-state" rel="stylesheet"/>
@@ -1087,7 +1087,7 @@ function renderEn(code) {
 <meta property="og:url" content="${canon}"/>
 <link rel="preload" as="image" href="${root}img/opt/logo-english2.webp" type="image/webp" fetchpriority="high"/>
 <link rel="preload" as="image" href="${root}img/opt/${slug}-hero.webp?v=map-seal-v11" type="image/webp"/>
-<script>(function(){document.documentElement.lang="en";document.documentElement.className="lang-en";})();</script>
+<script>(function(){document.documentElement.lang="en-US";document.documentElement.className="lang-en";})();</script>
 </head>
 <body class="bg-white state-coverage-page" data-licenses-base="${root}licenses/">
 ${loadHeaderEn(slug)}

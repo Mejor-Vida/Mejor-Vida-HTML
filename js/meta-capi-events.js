@@ -15,7 +15,7 @@
   if (!isQuotePage && !isLandingPage) return;
 
   var IS_EN =
-    document.documentElement.lang === "en" ||
+    String(document.documentElement.lang || "").toLowerCase().indexOf("en") === 0 ||
     document.body.getAttribute("data-lf-lang") === "en";
   if (IS_EN && isLandingPage) return;
 
@@ -162,7 +162,7 @@
       eventId: eventId,
       sessionClientId: getSessionClientId(),
       originDetail: originDetail,
-      lang: document.documentElement.lang === "en" ? "en" : "es",
+      lang: String(document.documentElement.lang || "").toLowerCase().indexOf("en") === 0 ? "en" : "es",
       country: "us",
     };
     if (extra && typeof extra === "object") {

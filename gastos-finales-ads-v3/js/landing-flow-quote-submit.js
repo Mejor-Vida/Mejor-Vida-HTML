@@ -5,7 +5,7 @@
   "use strict";
 
   var IS_EN =
-    document.documentElement.lang === "en" ||
+    String(document.documentElement.lang || "").toLowerCase().indexOf("en") === 0 ||
     document.body.getAttribute("data-lf-lang") === "en";
   var LANG = IS_EN ? "en" : "es";
 

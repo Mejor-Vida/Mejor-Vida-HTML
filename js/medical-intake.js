@@ -903,7 +903,7 @@
     currentUiLang = lang === "es" ? "es" : "en";
     landingMeta.language = currentUiLang === "es" ? "Spanish" : "English";
     document.documentElement.className = "lang-" + currentUiLang;
-    document.documentElement.lang = currentUiLang;
+    document.documentElement.lang = currentUiLang === "es" ? "es-US" : "en-US";
     var logo = $("mi-header-logo");
     if (logo) {
       logo.src =

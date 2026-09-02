@@ -13,6 +13,8 @@
 const fs = require("fs");
 const path = require("path");
 
+const { applyUsLocaleSignals } = require("../lib/us-locale-html");
+
 const ROOT = path.join(__dirname, "..");
 const TERM_RATES = JSON.parse(
   fs.readFileSync(path.join(ROOT, "js/term-life-cost-rates.json"), "utf8")
@@ -521,12 +523,12 @@ function wrapPage(lang, mainHtml, ratesJson, compareJson) {
         : '<link href="https://www.mejorvidainsurance.com/en/term-life-cost.html" rel="canonical"/>'
     )
     .replace(
-      /<link href="https:\/\/www\.mejorvidainsurance\.com\/[^"]*" hreflang="es" rel="alternate"\/>/,
-      '<link href="https://www.mejorvidainsurance.com/costo-seguro-vida-temporal.html" hreflang="es" rel="alternate"/>'
+      /<link href="https:\/\/www\.mejorvidainsurance\.com\/[^"]*" hreflang="es(?:-US)?" rel="alternate"\/>/,
+      '<link href="https://www.mejorvidainsurance.com/costo-seguro-vida-temporal.html" hreflang="es-US" rel="alternate"/>'
     )
     .replace(
-      /<link href="https:\/\/www\.mejorvidainsurance\.com\/[^"]*" hreflang="en" rel="alternate"\/>/,
-      '<link href="https://www.mejorvidainsurance.com/en/term-life-cost.html" hreflang="en" rel="alternate"/>'
+      /<link href="https:\/\/www\.mejorvidainsurance\.com\/[^"]*" hreflang="en(?:-US)?" rel="alternate"\/>/,
+      '<link href="https://www.mejorvidainsurance.com/en/term-life-cost.html" hreflang="en-US" rel="alternate"/>'
     )
     .replace(
       /<link href="https:\/\/www\.mejorvidainsurance\.com\/[^"]*" hreflang="x-default" rel="alternate"\/>/,
@@ -570,18 +572,18 @@ function wrapPage(lang, mainHtml, ratesJson, compareJson) {
     footer = footer.replace(/src="\.\.\/\.\.\/js\//g, 'src="../js/');
   }
 
-  return (
+  return applyUsLocaleSignals(
     "<!DOCTYPE html>\n" +
-    (isEs
-      ? '<html class="lang-es" lang="es">\n'
-      : '<html class="lang-en" lang="en">\n') +
-    head +
-    '\n<body class="lic-page lic-page--term">\n' +
-    header +
-    "\n\n\n" +
-    mainHtml +
-    "\n\n\n" +
-    footer
+      (isEs
+        ? '<html class="lang-es" lang="es-US">\n'
+        : '<html class="lang-en" lang="en-US">\n') +
+      head +
+      '\n<body class="lic-page lic-page--term">\n' +
+      header +
+      "\n\n\n" +
+      mainHtml +
+      "\n\n\n" +
+      footer
   );
 }
 

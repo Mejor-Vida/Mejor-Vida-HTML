@@ -7,7 +7,7 @@
     var rawItems = options.items || [];
     var allowEmpty = !!options.allowEmpty;
     var isEn =
-      document.documentElement.lang === "en" ||
+      String(document.documentElement.lang || "").toLowerCase().indexOf("en") === 0 ||
       document.body.getAttribute("data-lf-lang") === "en";
     var placeholder = options.placeholder || (isEn ? "Select..." : "Seleccione...");
     var inputId = options.inputId || "lf-search-combobox-input";

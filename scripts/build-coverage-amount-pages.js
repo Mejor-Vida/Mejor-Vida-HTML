@@ -907,7 +907,7 @@ function headHtml(face, lang, prefix) {
   const hero = heroFor(face);
   const ogImg = `https://www.mejorvidainsurance.com/img/opt/${hero.base}.jpg`;
   return `<!DOCTYPE html>
-<html class="lang-${isEs ? "es" : "en"}" lang="${isEs ? "es" : "en"}">
+<html class="lang-${isEs ? "es" : "en"}" lang="${isEs ? "es-US" : "en-US"}">
 <head>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-K921EG6JWG"></script>
 <script>
@@ -922,8 +922,8 @@ function headHtml(face, lang, prefix) {
 <meta content="${c.desc}" name="description"/>
 <meta content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" name="robots"/>
 <link href="${canonical}" rel="canonical"/>
-<link href="${esUrl}" hreflang="es" rel="alternate"/>
-<link href="${enUrl}" hreflang="en" rel="alternate"/>
+<link href="${esUrl}" hreflang="es-US" rel="alternate"/>
+<link href="${enUrl}" hreflang="en-US" rel="alternate"/>
 <link href="${esUrl}" hreflang="x-default" rel="alternate"/>
 <meta content="website" property="og:type"/>
 <meta content="${c.title}" property="og:title"/>
@@ -931,8 +931,8 @@ function headHtml(face, lang, prefix) {
 <meta content="${canonical}" property="og:url"/>
 <meta content="${ogImg}" property="og:image"/>
 <meta content="${isEs ? "Mejor Vida Seguros" : "Mejor Vida Insurance"}" property="og:site_name"/>
-<meta content="${isEs ? "es_ES" : "en_US"}" property="og:locale"/>
-<meta content="${isEs ? "en_US" : "es_ES"}" property="og:locale:alternate"/>
+<meta content="${isEs ? "es_US" : "en_US"}" property="og:locale"/>
+<meta content="${isEs ? "en_US" : "es_US"}" property="og:locale:alternate"/>
 <meta content="summary_large_image" name="twitter:card"/>
 <meta content="${c.title}" name="twitter:title"/>
 <meta content="${isEs ? "Primas mensuales ilustrativas por edad y sexo. Educativo — no es cotización vinculante." : "Illustrative monthly rates by age and gender. Educational — not a binding quote."}" name="twitter:description"/>

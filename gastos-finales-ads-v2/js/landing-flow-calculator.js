@@ -7,7 +7,7 @@
 
   var DATA = window.MVI_FE_ESTIMATOR_DATA;
   var LANG =
-    document.documentElement.lang === "en" ||
+    String(document.documentElement.lang || "").toLowerCase().indexOf("en") === 0 ||
     document.body.getAttribute("data-lf-lang") === "en"
       ? "en"
       : "es";

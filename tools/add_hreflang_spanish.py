@@ -25,7 +25,7 @@ PAGES = {
 # Spanish-only SEO: keep EN pages for bilingual families, but do not advertise
 # them to crawlers via hreflang="en" (robots.txt Disallow: /en/ + noindex).
 HREFLANG_BLOCK = """
-  <link rel="alternate" hreflang="es" href="{es_url}" />
+  <link rel="alternate" hreflang="es-US" href="{es_url}" />
   <link rel="alternate" hreflang="x-default" href="{es_url}" />"""
 
 ENGLISH_LINK = (
@@ -39,7 +39,7 @@ def inject_hreflang(text: str, es_path: str, en_path: str) -> str:
     en_url = f"{BASE}{en_path}"
     text = re.sub(r'\s*<link[^>]+hreflang="[^"]+"[^>]*/>\s*', "\n", text)
     block = HREFLANG_BLOCK.format(es_url=es_url, en_url=en_url)
-    if 'hreflang="es"' not in text:
+    if 'hreflang="es-US"' not in text:
         text = re.sub(r"</head>", block + "\n</head>", text, count=1, flags=re.IGNORECASE)
     return text
 

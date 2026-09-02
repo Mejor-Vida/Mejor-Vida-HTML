@@ -5,6 +5,7 @@
 const fs = require("fs");
 const path = require("path");
 const { loadFaqIndex, renderTocChrome, renderHubCategoriesHtml } = require("../lib/fe-guide-catalog");
+const { applyUsLocaleSignals } = require("../lib/us-locale-html");
 
 const ROOT = path.join(__dirname, "..");
 const HEADER_SRC = path.join(ROOT, "includes/site-header-inner.html");
@@ -16,8 +17,8 @@ const data = loadFaqIndex();
 const toc = renderTocChrome({ hubPrefix: "", inBlogDir: false, includePageSections: false, includeHubLink: false, onHubPage: true, showHubBarLink: false });
 const categories = renderHubCategoriesHtml({ blogPrefix: "" });
 
-const html = `<!DOCTYPE html>
-<html class="lang-es" lang="es">
+const html = applyUsLocaleSignals(`<!DOCTYPE html>
+<html class="lang-es" lang="es-US">
 <head>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-K921EG6JWG"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-K921EG6JWG');</script>
@@ -34,7 +35,7 @@ const html = `<!DOCTYPE html>
 <link href="css/mvi-assistant-widget.css" rel="stylesheet"/>
 <link href="css/fontawesome-mvi.min.css" rel="stylesheet"/>
 <link href="css/fe-guide.css?v=20260726-wave-gold" rel="stylesheet"/>
-<script>(function(){document.documentElement.lang='es';document.documentElement.className='lang-es';})();</script>
+<script>(function(){document.documentElement.lang='es-US';document.documentElement.className='lang-es';})();</script>
 </head>
 <body style="font-family:'Inter',system-ui,sans-serif;">
 ${header}
@@ -70,7 +71,7 @@ ${footer}
 <div data-api-url="/api/website-chat" id="mvi-assistant-root"></div>
 <script defer src="js/website-assistant-widget.js"></script>
 </body>
-</html>`;
+</html>`);
 
 for (const out of ["guias-gastos-finales.html", "sources/guias-gastos-finales.html"]) {
   fs.mkdirSync(path.dirname(path.join(ROOT, out)), { recursive: true });

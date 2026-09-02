@@ -578,7 +578,7 @@ def build(lang: str, header: str, footer: str) -> str:
             quote_href,
         )
 
-    lang_attr = "es" if is_es else "en"
+    lang_attr = "es-US" if is_es else "en-US"
     lang_class = "lang-es" if is_es else "lang-en"
 
     return f"""<!DOCTYPE html>
@@ -597,7 +597,7 @@ def build(lang: str, header: str, footer: str) -> str:
 <meta content="{desc}" name="description"/>
 <meta content="{"index, follow" if is_es else "noindex, follow"}" name="robots"/>
 <link href="{canonical}" rel="canonical"/>
-{'''<link href="https://www.mejorvidainsurance.com/costo-seguro-vida.html" hreflang="es" rel="alternate"/>
+{'''<link href="https://www.mejorvidainsurance.com/costo-seguro-vida.html" hreflang="es-US" rel="alternate"/>
 <link href="https://www.mejorvidainsurance.com/costo-seguro-vida.html" hreflang="x-default" rel="alternate"/>
 ''' if is_es else ""}<link href="{prefix}favicon.ico" rel="icon" type="image/x-icon"/>
 <link href="{prefix}bootstrap/css/bootstrap.min.css" rel="stylesheet"/>

@@ -35,7 +35,7 @@ Same structure, depth, and facts in both languages. Do **not** ship a short Span
 - On-topic Spanish pages: `index, follow`; include in `sitemap.xml`.
 - English pages: `noindex, follow`; **do not** add `en/blog/…` to `sitemap.xml`.
 - Off-topic Spanish archive (older trade/Medigap weeks): `noindex, follow`; **omit from sitemap**.
-- On Spanish pages: `og:locale` = `es_ES`; do **not** `hreflang` to English noindex URLs (use `hreflang="es"` + `hreflang="x-default"` → Spanish canonical only).
+- On Spanish pages: `og:locale` = `es_US`; do **not** `hreflang` to English noindex URLs (use `hreflang="es-US"` + `hreflang="x-default"` → Spanish canonical only). This marks pages as U.S. Spanish so Google prefers USA searchers over Spain/Latin America.
 
 ---
 
@@ -98,7 +98,7 @@ When cloning last week’s HTML template, **always rewrite**:
 | Field | Must match this week |
 |---|---|
 | `<title>`, meta description, canonical, og:url, og:image | New URLs |
-| `og:locale` | `es_ES` on Spanish pages |
+| `og:locale` | `es_US` on Spanish pages |
 | `hreflang` | ES + x-default only (no EN) on Spanish pages |
 | `preload` | This week’s hero/story WebP |
 | JSON-LD dates | This week / story date |
