@@ -135,7 +135,7 @@ function termRateBlock(c, quoteHref) {
 <tbody data-lic-tbody></tbody>
 </table>
 </div>
-<p class="lic-rate-note" data-lic-note></p>
+<p class="lic-rate-note"${c.hideJsRateNote ? " hidden" : ""} data-lic-note></p>
 </div>`;
 }
 
@@ -441,27 +441,80 @@ function sharedDisc(isEs) {
   return `This page is educational, not an offer. Ages, amounts, and premiums change by company, product, tobacco, and state. Mejor Vida Insurance LLC is an independent agency (NPN 21695431). Current licensed states are on the <a href="${L.licenses}">licenses</a> page.`;
 }
 
+function pickSrc(extra, key, fallback) {
+  if (extra && Object.prototype.hasOwnProperty.call(extra, key)) return extra[key];
+  return fallback;
+}
+
 function sharedSources(isEs, extra) {
   const L = LINKS[isEs ? "es" : "en"];
   if (isEs) {
     return {
       srcTitle: "Fuentes",
-      src1: '<a href="https://content.naic.org/consumer/life-insurance.htm" rel="noopener" target="_blank">NAIC: seguro de vida para el consumidor</a> — cómo se compra una póliza, qué es el interés asegurable y por qué las respuestas de salud importan en un reclamo.',
-      src2: extra && extra.src2 ? extra.src2 : '<a href="https://www.cdc.gov/" rel="noopener" target="_blank">CDC</a> — información de salud pública sobre condiciones crónicas; no sustituye las reglas de una aseguradora.',
-      src3: extra && extra.src3 ? extra.src3 : '<a href="https://www.cancer.gov/about-cancer/understanding" rel="noopener" target="_blank">Instituto Nacional del Cáncer</a> — qué es el cáncer y cómo se describe el tratamiento.',
-      src4: extra && extra.src4 ? extra.src4 : '<a href="https://www.niddk.nih.gov/health-information" rel="noopener" target="_blank">NIDDK (NIH)</a> — enfermedad renal, diabetes y factores relacionados.',
-      src5: extra && extra.src5 ? extra.src5 : `Material de compañías designadas: Mutual of Omaha Living Promise; Accendo Final Expense (Accendo Insurance Company); Transamerica Immediate Solution / gráficos de suscripción de gastos finales; Corebridge GIWL; Americo Eagle Select. Primas de muestra: js/final-expense-cost-rates.json y Corebridge GIWL, agosto 2026.`,
-      src6: extra && extra.src6 ? extra.src6 : `Guías de Mejor Vida Seguros: <a href="${L.noWait}">sin período de espera</a> y <a href="${L.gi}">aceptación garantizada</a>.`,
+      src1: pickSrc(
+        extra,
+        "src1",
+        '<a href="https://content.naic.org/consumer/life-insurance.htm" rel="noopener" target="_blank">NAIC: seguro de vida para el consumidor</a> — cómo se compra una póliza, qué es el interés asegurable y por qué las respuestas de salud importan en un reclamo.'
+      ),
+      src2: pickSrc(
+        extra,
+        "src2",
+        '<a href="https://www.cdc.gov/" rel="noopener" target="_blank">CDC</a> — información de salud pública sobre condiciones crónicas; no sustituye las reglas de una aseguradora.'
+      ),
+      src3: pickSrc(
+        extra,
+        "src3",
+        '<a href="https://www.cancer.gov/about-cancer/understanding" rel="noopener" target="_blank">Instituto Nacional del Cáncer</a> — qué es el cáncer y cómo se describe el tratamiento.'
+      ),
+      src4: pickSrc(
+        extra,
+        "src4",
+        '<a href="https://www.niddk.nih.gov/health-information" rel="noopener" target="_blank">NIDDK (NIH)</a> — enfermedad renal, diabetes y factores relacionados.'
+      ),
+      src5: pickSrc(
+        extra,
+        "src5",
+        `Material de compañías designadas: Mutual of Omaha Living Promise; Accendo Final Expense (Accendo Insurance Company); Transamerica Immediate Solution / gráficos de suscripción de gastos finales; Corebridge GIWL; Americo Eagle Select. Primas de muestra: js/final-expense-cost-rates.json y Corebridge GIWL, agosto 2026.`
+      ),
+      src6: pickSrc(
+        extra,
+        "src6",
+        `Guías de Mejor Vida Seguros: <a href="${L.noWait}">sin período de espera</a> y <a href="${L.gi}">aceptación garantizada</a>.`
+      ),
     };
   }
   return {
     srcTitle: "Sources",
-    src1: '<a href="https://content.naic.org/consumer/life-insurance.htm" rel="noopener" target="_blank">NAIC: consumer life insurance</a> — how a policy is bought, what insurable interest means, and why health answers matter at claim time.',
-    src2: extra && extra.src2 ? extra.src2 : '<a href="https://www.cdc.gov/" rel="noopener" target="_blank">CDC</a> — public-health information on chronic conditions; it does not replace an insurer’s rules.',
-    src3: extra && extra.src3 ? extra.src3 : '<a href="https://www.cancer.gov/about-cancer/understanding" rel="noopener" target="_blank">National Cancer Institute</a> — what cancer is and how treatment is described.',
-    src4: extra && extra.src4 ? extra.src4 : '<a href="https://www.niddk.nih.gov/health-information" rel="noopener" target="_blank">NIDDK (NIH)</a> — kidney disease, diabetes, and related factors.',
-    src5: extra && extra.src5 ? extra.src5 : `Appointed-company materials: Mutual of Omaha Living Promise; Accendo Final Expense (Accendo Insurance Company); Transamerica Immediate Solution / final-expense underwriting charts; Corebridge GIWL; Americo Eagle Select. Sample premiums: js/final-expense-cost-rates.json and Corebridge GIWL, August 2026.`,
-    src6: extra && extra.src6 ? extra.src6 : `Mejor Vida Insurance guides: <a href="${L.noWait}">no waiting period</a> and <a href="${L.gi}">guaranteed acceptance</a>.`,
+    src1: pickSrc(
+      extra,
+      "src1",
+      '<a href="https://content.naic.org/consumer/life-insurance.htm" rel="noopener" target="_blank">NAIC: consumer life insurance</a> — how a policy is bought, what insurable interest means, and why health answers matter at claim time.'
+    ),
+    src2: pickSrc(
+      extra,
+      "src2",
+      '<a href="https://www.cdc.gov/" rel="noopener" target="_blank">CDC</a> — public-health information on chronic conditions; it does not replace an insurer’s rules.'
+    ),
+    src3: pickSrc(
+      extra,
+      "src3",
+      '<a href="https://www.cancer.gov/about-cancer/understanding" rel="noopener" target="_blank">National Cancer Institute</a> — what cancer is and how treatment is described.'
+    ),
+    src4: pickSrc(
+      extra,
+      "src4",
+      '<a href="https://www.niddk.nih.gov/health-information" rel="noopener" target="_blank">NIDDK (NIH)</a> — kidney disease, diabetes, and related factors.'
+    ),
+    src5: pickSrc(
+      extra,
+      "src5",
+      `Appointed-company materials: Mutual of Omaha Living Promise; Accendo Final Expense (Accendo Insurance Company); Transamerica Immediate Solution / final-expense underwriting charts; Corebridge GIWL; Americo Eagle Select. Sample premiums: js/final-expense-cost-rates.json and Corebridge GIWL, August 2026.`
+    ),
+    src6: pickSrc(
+      extra,
+      "src6",
+      `Mejor Vida Insurance guides: <a href="${L.noWait}">no waiting period</a> and <a href="${L.gi}">guaranteed acceptance</a>.`
+    ),
   };
 }
 
@@ -748,133 +801,186 @@ function copyCondTerm(lang) {
   const b = baseCopy(lang);
   const src = sharedSources(isEs, {
     src2: isEs
-      ? `<a href="${L.term}">Guía de seguro de vida temporal</a> — plazos, conversión y cómo se pide una cotización en Mejor Vida Seguros.`
-      : `<a href="${L.term}">Term life insurance guide</a> — term lengths, conversion, and how to ask Mejor Vida Insurance for a quote.`,
-    src3: isEs
-      ? "Material de compañías designadas: Transamerica Trendsetter Super (gráfico de padecimientos: clase más favorable, no una oferta); Mutual of Omaha Term Life Answers (criterio Preferred Plus: sin CAD, diabetes ni cáncer, salvo piel basal/escamoso superficial) y Term Life Express (emisión simplificada, abril 2026); Corebridge Select-a-Term (mínimo $100,000; Agile Underwriting+ a edades 20–59); American Amicable Easy Term (cuestionario, sin examen en consultorio)."
-      : "Appointed-company materials: Transamerica Trendsetter Super (impairment chart: best possible class, not an offer); Mutual of Omaha Term Life Answers (Preferred Plus: no CAD, diabetes, or cancer except basal/superficial squamous skin) and Term Life Express (simplified issue, April 2026); Corebridge Select-a-Term (minimum $100,000; Agile Underwriting+ ages 20–59); American Amicable Easy Term (questionnaire, no in-office exam).",
-    src4: isEs
-      ? "Primas ilustrativas: muestras de compañías designadas, suscripción completa Preferred Best no fumador (Integrity Connect). Cada celda es la más baja entre las que devolvieron cifra. Una condición previa suele impedir esa clase."
-      : "Illustrative premiums: appointed-company samples, fully underwritten Preferred Best non-tobacco (Integrity Connect). Each cell is the lowest among appointed carriers that returned a rate. A pre-existing condition usually blocks that class.",
-    src5: isEs
-      ? "Term Life Express: guía de emisión simplificada (abril 2026) — condiciones múltiples por encima de tabla 4 declinan; lista de medicamentos que impiden emitir (incluye antivirales de VIH)."
-      : "Term Life Express simplified-issue guide (April 2026) — multiple impairments above Table 4 decline; medication list that can stop issue (includes HIV antivirals).",
-    src6: isEs
-      ? `Guías de Mejor Vida Seguros: <a href="${L.hub}">gastos finales con condiciones preexistentes</a>, <a href="${L.term}">temporal</a> y <a href="${L.gi}">aceptación garantizada</a>.`
-      : `Mejor Vida Insurance guides: <a href="${L.hub}">final expense with pre-existing conditions</a>, <a href="${L.term}">term life</a>, and <a href="${L.gi}">guaranteed acceptance</a>.`,
+      ? '<a href="https://www.cdc.gov/chronic-disease/about/index.html" rel="noopener" target="_blank">CDC: enfermedades crónicas</a> — muchas personas viven con un diagnóstico de larga data; eso es salud pública, no la regla de una aseguradora.'
+      : '<a href="https://www.cdc.gov/chronic-disease/about/index.html" rel="noopener" target="_blank">CDC: chronic diseases</a> — many people live with a long-term diagnosis; that is public health, not an insurer’s rule.',
+    src3: "",
+    src4: "",
+    src5: "",
+    src6: "",
   });
   if (isEs) {
     return {
       ...b,
       ...src,
-      title: "Seguro de vida temporal con condiciones preexistentes (2026) | Mejor Vida Seguros",
-      desc: "No hay temporal sin preguntas. Cómo se cotiza un plazo si ya hay un diagnóstico, clases de Trendsetter y Term Life Express, y qué hacer si el temporal no emite.",
-      h1: "Seguro de vida temporal si ya tiene una condición de salud",
-      lead: "El temporal cubre un número de años: hipoteca, ingreso, deudas con fecha. Una condición preexistente <strong>no es un “no” automático</strong> a ese producto. Tampoco hay un temporal de aceptación garantizada. Hay preguntas, a menudo recetas y, en montos altos, laboratorios. El precio de las tablas de internet suele ser Preferred Best: esa clase exige un historial limpio.",
+      title: "Seguro de vida temporal con una condición de salud (2026) | Mejor Vida Seguros",
+      desc: "Una condición previa no cierra el temporal de forma automática. Qué es el temporal, cómo revisa la salud una aseguradora, cuándo suele emitir y qué hacer si no puede.",
+      h1: "¿Puede comprar seguro de vida temporal si ya tiene una condición de salud?",
+      lead: "A menudo sí, a otro precio o a un monto distinto. El <strong>seguro de vida temporal</strong> cubre un número fijo de años: si fallece dentro de ese plazo y las primas están al día, la persona que nombró recibe el monto. Una condición que ya existía al solicitar <strong>no es un “no” automático</strong>. Tampoco hay un temporal sin preguntas de salud.",
       crumbEnd: "Temporal",
-      take1: "Hay <strong>dos caminos de temporal</strong> en las compañías que cotizamos: suscripción completa (mejor precio por dólar, más preguntas) y emisión simplificada (Easy Term o Term Life Express: cuestionario, sin examen en el consultorio, suele costar más por dólar).",
-      take2: "En Trendsetter Super, presión alta puede llegar a <strong>Preferred</strong> como mejor caso. Diabetes, infarto, EPOC o un derrame suelen quedar en <strong>Standard</strong>, no en Preferred Plus. SIDA, cáncer en tratamiento, diálisis e insuficiencia cardíaca figuran como <strong>declinación</strong> en ese gráfico.",
-      take3: "Si el temporal no emite, el otro producto no es “el mismo temporal sin preguntas.” Es <a href=\"" + L.hub + "\">gastos finales</a> o, si el simplificado de entierro tampoco pasa, <a href=\"" + L.gi + "\">aceptación garantizada</a> — montos más bajos y, en GIWL, espera de dos años por muerte natural.",
-      callout: "Diga el diagnóstico, la fecha, los medicamentos y si usa tabaco. Eso decide clase, monto y si el producto sigue siendo temporal — no el anuncio de “sin examen.”",
-      pathsH: "Tres caminos, no un solo anuncio",
-      pathsP: "El nombre comercial cambia. Lo que importa es cuántas preguntas hay y qué clase de precio puede abrir.",
-      p1T: "Suscripción completa",
-      p1: "Trendsetter Super, Term Life Answers, Select-a-Term y Assurity Term Life. Más detalle; a veces labs o visita paramédica. Suele abrir el mejor precio por dólar y montos de $100,000 en adelante. Preferred Plus en Mutual of Omaha pide, entre otras cosas, sin enfermedad coronaria, sin diabetes y sin cáncer (salvo piel basal o escamoso superficial).",
-      p2T: "Emisión simplificada",
-      p2: "Easy Term (American Amicable): plazos 10, 20 y 30; mínimo $25,000; tope $300,000 después de 45. Term Life Express: desde $25,000; tope $550,000 a los 18–50, $450,000 a los 51–60, $350,000 a los 61–75; clases Standard no fumador o fumador, sin Preferred. Sigue habiendo preguntas. No es aceptación garantizada.",
-      p3T: "Cuando el temporal no emite",
-      p3: `No inventamos un temporal “sin historial.” El siguiente producto es permanente de monto menor: un plan de <a href="${L.hub}">gastos finales</a> con preguntas, o GIWL si esas preguntas tampoco pueden emitir.`,
-      mythH: "No existe temporal de aceptación garantizada",
-      mythP: "GIWL de Corebridge no pregunta salud y cubre $5,000–$25,000 a edades 50–80, con espera de dos años por muerte natural. Eso no es un temporal de $250,000. Si un anuncio promete “sin preguntas y beneficio grande desde el día uno,” no es un producto que cotizamos.",
-      chartH: "Cómo trata Trendsetter Super (mejor caso) las condiciones de esta sección",
-      chartP: "El gráfico de Transamerica muestra la <strong>clase más favorable posible</strong> si ese padecimiento es el factor. Edad, fecha, gravedad, peso, tabaco y un segundo diagnóstico pueden empeorar la oferta o declinar. No es una cotización.",
-      chartCol1: "Condición",
-      chartCol2: "Mejor clase (Trendsetter)",
-      chartCol3: "Qué suele significar",
-      r1c: "Presión arterial alta",
-      r1k: "Preferred",
-      r1n: "Sola, a menudo sigue en temporal. Preferred Plus en Term Life Answers pide control (menos de 140/85 en ese criterio) y sin CAD, diabetes ni cáncer.",
-      r2c: "Diabetes",
-      r2k: "Standard",
-      r2n: "No es Preferred Plus. En Term Life Express, diabetes después de los 45 con tabaco, con peso de tabla 2 o más, o con complicaciones, es declinación en esa guía.",
-      r3c: "Infarto o enfermedad coronaria",
-      r3k: "Standard",
-      r3n: "Un infarto antiguo puede seguir en temporal a Standard. Insuficiencia cardíaca (CHF) es declinación en el mismo gráfico.",
-      r4c: "EPOC o enfisema",
-      r4k: "Standard",
-      r4n: "Sigue en temporal en el mejor caso. Oxígeno por pulmón estrecha o cierra otros productos; dígalo.",
-      r5c: "Cáncer (órgano interno, historial)",
-      r5k: "Standard",
-      r5n: "Cáncer en tratamiento activo: declinación. Un historial ya tratado puede cotizar; la fecha y el tipo importan.",
-      r6c: "Derrame o AIT",
-      r6k: "Standard",
-      r6n: "Un evento antiguo no es lo mismo que uno reciente. La fecha y lo que quedó (silla, memoria) cambian el archivo.",
-      r7c: "Diálisis o fallo renal",
-      r7k: "Declinación",
-      r7n: "En Trendsetter, fallo renal / diálisis es Decline. Entonces se mira gastos finales o GIWL, no un temporal grande.",
-      r8c: "SIDA",
-      r8k: "Declinación",
-      r8n: "AIDS figura como Decline. No cotizamos un temporal nivelado designado para ese diagnóstico. Vea la guía de <a href=\"" + L.hiv + "\">VIH</a>.",
-      chartNote: "Assurity Term Life es suscripción completa; no publicamos un gráfico público de padecimientos para ese producto. Easy Term y Term Life Express tienen sus propios cuestionarios y, en Express, una lista de medicamentos que impiden emitir.",
-      howH: "Cómo cotizamos el temporal con un historial",
-      howP: "No hay una “compañía de temporal para diabéticos” que gane siempre. Hay un cuestionario que encaja o no.",
-      how1T: "Hechos de salud y de dinero",
-      how1: "Edad, tabaco, estatura, peso, medicamentos, fechas de diagnóstico, y el plazo y el monto que la familia aún necesita. Un $10,000 de entierro no responde la misma pregunta que un $250,000 a 20 años.",
-      how2T: "Completa primero si el archivo puede abrirla",
-      how2: "Si el historial es presión alta controlada o un evento antiguo sin complicaciones, la suscripción completa suele ser el primer intento: mejor precio por dólar. Corebridge puede usar Agile Underwriting+ (edades 20–59, hasta $1,000,000) y pedir labs si el total en vigor más lo solicitado supera $1,000,000.",
-      how3T: "Simplificada si no quiere labs o el archivo es más apretado",
-      how3: "Easy Term o Term Life Express. Más rápido. En Express, varias condiciones juntas por encima de tabla 4 declinan. Una receta de la lista de exclusión (por ejemplo antivirales de VIH o ciertos fármacos de cáncer o demencia) impide Express.",
-      knockH: "Cuándo el temporal designado suele no ser el producto",
-      knockP: "Estas situaciones, en el material que usamos, suelen sacar el archivo del temporal grande. Entonces se mira gastos finales o GIWL. No es una lista legal completa.",
-      k1: "SIDA (Decline en Trendsetter); antivirales de VIH en la lista de exclusión de Term Life Express",
-      k2: "Cáncer en tratamiento activo",
-      k3: "Diálisis o fallo renal",
-      k4: "Insuficiencia cardíaca",
-      k5: "Enfermedad terminal",
-      k6: "Diabetes con complicaciones, o diabetes después de 45 con tabaco o peso de tabla 2, en Term Life Express",
-      k7: "Varias condiciones que, juntas, superarían tabla 4 en Express",
-      knockNote: "Una declinación de temporal no “borra” gastos finales. Son contratos distintos, con montos y preguntas distintas.",
-      costH: "Qué cuestan las tablas de mejor clase (no el precio de un diagnóstico)",
-      costP: "Estas primas son temporal de suscripción completa, <strong>Preferred Best no fumador</strong>, compañías designadas. Sirven para ver el tamaño del producto si el archivo abre esa clase. Diabetes, un infarto o EPOC casi nunca pagan esta fila: pagan Standard, un extra de tabla, o no emiten. Easy Term y Term Life Express se cotizan aparte y suelen costar más por dólar.",
+      take1: "El temporal cubre una necesidad con fecha — hipoteca, años de ingreso, deudas — no un funeral para siempre. El precio bajo por dólar es la razón por la que las compañías preguntan más que en un plan pequeño de entierro.",
+      take2: "La palabra del diagnóstico no decide sola. Importan la fecha, el tratamiento, el tabaco, el peso y si hay un segundo problema. Un evento antiguo y estable no se lee igual que uno reciente o con complicaciones.",
+      take3:
+        "Si el temporal no puede emitir, el siguiente producto no es “el mismo temporal sin preguntas.” Es un plan permanente más pequeño: <a href=\"" +
+        L.hub +
+        "\">gastos finales</a> o, si ese cuestionario tampoco emite, <a href=\"" +
+        L.gi +
+        "\">aceptación garantizada</a> (sin preguntas de salud y con espera de unos dos años por muerte natural).",
+      callout: "Diga el diagnóstico, el año, los medicamentos y si usa tabaco. Eso decide el producto y el precio — no el anuncio de “sin examen.”",
+      needH: "La pregunta que la gente trae",
+      needP1: "Las familias buscan temporal cuando hay un ingreso o una deuda que todavía tiene fecha: años de hipoteca, años hasta que los hijos dejen de depender de ese sueldo. El monto suele ser mucho más alto que un plan de entierro. Por eso el miedo con un diagnóstico es concreto: “¿Todavía puedo proteger esos años, o solo me van a vender un plan pequeño?”",
+      needP2: "El resto de la página explica qué es el temporal y cómo una compañía revisa la salud. Los nombres de compañías vienen después.",
+      whatH: "Qué es el temporal, y qué cuenta como condición previa",
+      whatP1: "Usted paga una <strong>prima</strong> — la cuota regular. Si fallece mientras el contrato está al día y dentro del plazo, el <strong>beneficiario</strong> (la persona que nombró) recibe el <strong>beneficio de muerte</strong>: el monto del contrato. Cuando el plazo termina, esa cobertura termina. No es una cuenta de ahorro. La <a href=\"https://content.naic.org/consumer/life-insurance.htm\" rel=\"noopener\" target=\"_blank\">NAIC</a> describe el temporal así: cubre uno o más años y, en general, no acumula valor en efectivo.",
+      whatP2: "En el temporal habitual de estas compañías, la prima es <strong>nivelada</strong>: no sube solo porque cumpla años durante el plazo original, si paga a tiempo. Los plazos típicos son 10, 15, 20, 25 o 30 años. El monto en una cotización completa suele empezar en $100,000.",
+      whatP3: "Una condición preexistente es un diagnóstico, un tratamiento o síntomas que ya existían cuando usted solicita. El CDC recuerda que muchas personas viven años con una enfermedad crónica. Eso es salud. Una aseguradora no trata la enfermedad: decide si ese historial, como queda escrito y como aparece en recetas, cabe en un producto que está dispuesta a emitir.",
+      howH: "Cómo una aseguradora revisa la salud en el temporal",
+      howP1: "No hay temporal de “sí automático.” Siempre hay preguntas. En montos grandes, la compañía a menudo pide más detalle — recetas ya surtidas, estatura y peso, tabaco, y a veces laboratorios o una visita de enfermería. Un “no” que debió ser “sí” puede retrasar o afectar un reclamo. La NAIC recuerda al consumidor que las respuestas honestas importan cuando llega el reclamo.",
+      howP2: "El temporal vende mucho beneficio por una cuota relativamente baja. Por eso las compañías suelen ser más estrictas que en un gasto final de $10,000 o $15,000. Un diagnóstico controlado todavía puede emitir. Un evento reciente, varias condiciones juntas o un tratamiento activo pueden subir el precio, bajar el monto o cerrar este producto.",
+      howP3: "Hay dos caminos reales, y ninguno es “sin historial.” Uno pide más detalle y a veces labs; suele abrir el mejor precio por dólar. El otro usa un cuestionario más corto, sin examen en el consultorio; suele costar más por dólar y cubre montos más bajos. Si ninguno puede emitir, se mira un producto permanente distinto — no se inventa un temporal sin preguntas.",
+      pathsH: "Tres caminos, en lenguaje sencillo",
+      path1T: "Revisión más completa",
+      path1: "Más preguntas; según edad y monto, laboratorios o una visita fuera del consultorio del médico. Suele ser el mejor precio por dólar y montos de $100,000 en adelante, a veces hasta varios millones en una cotización típica. En una compañía designada, el precio más bajo que se anuncia pide, entre otras cosas, sin enfermedad de las arterias del corazón, sin diabetes y sin cáncer (salvo algunos cánceres de piel). Eso no es una promesa de que todo el mundo pague esa fila.",
+      path2T: "Cuestionario más corto, sin examen en el consultorio",
+      path2: "Sigue habiendo preguntas y revisión de recetas. Es más rápido. American Amicable Easy Term: plazos 10, 20 y 30 años; mínimo $25,000; tope $500,000 hasta los 45 y $300,000 desde los 46; edades 18–70 en 10 años y 18–55 en 30 años. Mutual of Omaha Term Life Express: desde $25,000; tope $550,000 a los 18–50, $450,000 a los 51–60 y $350,000 a los 61–75. Esos productos no ofrecen la fila de precio más baja de los anuncios; suelen tener solo clases de precio habituales (con o sin tabaco).",
+      path3T: "Cuando el temporal no puede emitir",
+      path3:
+        "No hay un temporal de aceptación garantizada. La <strong>aceptación garantizada</strong> es otro producto: vida entera de emisión garantizada (GIWL). No hace preguntas de salud. El que cotizamos cubre $5,000–$25,000 a edades 50–80 y espera unos dos años por muerte natural. Si la necesidad es un funeral, no años de ingreso, empiece por <a href=\"" +
+        L.hub +
+        "\">gastos finales</a>.",
+      pathsNote: "Ninguna compañía designada que cotizamos ofrece cero preguntas y un beneficio grande de temporal desde el día uno. Si un anuncio mezcla las dos cosas, no es un producto que cotizamos.",
+      vsH: "Qué cambia entre esos caminos",
+      vsCol1: "Revisión más completa",
+      vsCol1Sub: "Más detalle, mejor precio por dólar",
+      vsCol2: "Cuestionario corto",
+      vsCol2Sub: "Sin examen en el consultorio",
+      vsCol3: "Otro producto",
+      vsCol3Sub: "Si el temporal no emite",
+      vsR1H: "Preguntas de salud",
+      vsR1A: "Sí, con más detalle",
+      vsR1B: "Sí, más cortas",
+      vsR1C: "Gastos finales: sí. Aceptación garantizada: no",
+      vsR2H: "Examen o laboratorios",
+      vsR2A: "A veces, según edad y monto",
+      vsR2B: "No hay cita en el consultorio",
+      vsR2C: "No en estos planes pequeños",
+      vsR3H: "Montos habituales",
+      vsR3A: "Desde $100,000 en cotizaciones típicas",
+      vsR3B: "Desde $25,000; el tope baja con la edad",
+      vsR3C: "Miles, no cientos de miles",
+      vsR4H: "Si no puede emitir",
+      vsR4A: "Se intenta el cuestionario corto u otro producto",
+      vsR4B: "Se mira gastos finales o aceptación garantizada",
+      vsR4C: "Es el plan B, no el primer intento para un historial estable",
+      vsLearn: "Lea la tabla como un mapa, no como una cotización. El archivo real — fechas, recetas, tabaco — sigue decidiendo.",
+      considerH: "Qué ayuda, y qué no",
+      considerP: "Contestar con hechos suele ser la ventaja: puede abrir más monto y un precio más bajo por dólar que un plan de entierro. El límite es el mismo cuestionario: un evento reciente, tratamiento activo, varias condiciones juntas o tabaco combinado con diabetes puede cerrar el temporal. Esperar “hasta estar más sano” solo sube la edad si el diagnóstico ya está estable. Esperar sí puede importar si acaba de haber un infarto, un derrame o un cáncer en tratamiento: algunas preguntas miran ventanas de tiempo.",
+      convH: "¿Se puede pasar después a una póliza que no venza?",
+      convP1: "Algunos contratos temporales permiten <strong>convertir</strong>: pasar de ese temporal a una póliza permanente de la misma compañía, usando las respuestas de salud que ya dio, si lo hace dentro de la ventana del contrato. Paga el precio permanente a la edad en que convierte, no el precio viejo del temporal.",
+      convP2: "Eso no sustituye pedir temporal hoy con un historial real. La ventana, los productos destino y los topes están en esa póliza. Ejemplos designados: Trendsetter Super de Transamerica y Select-a-Term de Corebridge. No todos los contratos convierten igual.",
+      factorsH: "Qué puede cambiar una solicitud de temporal",
+      factorsP: "Cada tarjeta empieza con la idea de salud en lenguaje sencillo y luego lista solo lo que podemos verificar en compañías designadas. Esas notas suponen que esa condición es el único factor. El peso, el tabaco, un segundo diagnóstico o varias condiciones juntas todavía pueden cambiar el precio o impedir emitir.",
+      factorsNote: "Estas notas no son una cotización. La solicitud en vivo sigue decidiendo. No reimprimimos etiquetas internas de clase de precio: no ayudan al lector y cambian de compañía a compañía.",
+      fMeaning: "En lenguaje sencillo",
+      fVerify: "Qué podemos verificar",
+      f1c: "Presión arterial alta",
+      f1w: "La presión alta es frecuente. Controlada con pastillas, mucha gente sigue trabajando y viviendo años con ella.",
+      f1items: [
+        "Sola, el temporal a menudo sigue abierto en una revisión más completa.",
+        "El precio más bajo que se anuncia en una compañía designada pide, entre otras cosas, un control estricto y sin enfermedad coronaria, diabetes ni cáncer.",
+        "Diga si está controlada y con qué medicamentos.",
+      ],
+      f2c: "Diabetes",
+      f2w: "El cuerpo no usa bien el azúcar en la sangre. El tipo 1 y el tipo 2 son enfermedades distintas; ambos pueden tratarse con comida, pastillas o insulina.",
+      f2items: [
+        "Casi nunca paga la fila más barata de internet: esa fila, en una compañía designada, pide entre otras cosas sin diabetes.",
+        "En el temporal de cuestionario corto de Mutual of Omaha, diabetes después de los 45 junto con tabaco, un rango de peso más alto o complicaciones de circulación suele no emitir.",
+        "Un plan de entierro con preguntas sigue siendo otro producto; vea la guía de <a href=\"" + L.diabetes + "\">diabetes</a> si la necesidad es funeral, no ingreso.",
+      ],
+      f2gap: "No publicamos una sola etiqueta de precio de Transamerica para “diabetes sola”: el gráfico interno es para agentes y la oferta real depende de fecha, control y el resto del archivo.",
+      f3c: "Infarto o enfermedad del corazón",
+      f3w: "Un infarto es daño al músculo del corazón por falta de sangre. Un evento de hace diez años no es lo mismo que uno de este año.",
+      f3items: [
+        "Un infarto antiguo, sin insuficiencia cardíaca, a menudo sigue en temporal en el mejor caso de Transamerica — suele no ser el precio más bajo de los anuncios.",
+        "La insuficiencia cardíaca (el corazón no bombea bien) en ese mismo gráfico suele impedir emitir ese producto.",
+        "Un stent o un bypass reciente cambian el archivo. Dígalo con el año.",
+      ],
+      f4c: "EPOC o enfisema",
+      f4w: "La EPOC es una enfermedad pulmonar de larga duración. El enfisema es un tipo frecuente. El oxígeno en casa no es lo mismo que un inhalador.",
+      f4items: [
+        "En el mejor caso de Transamerica, EPOC o enfisema todavía pueden quedar en temporal, no en la fila más barata.",
+        "Oxígeno por pulmón estrecha o cierra otros productos; dígalo.",
+        "Tabaco junto con EPOC puede cambiar el producto más que la palabra “EPOC” sola.",
+      ],
+      f5c: "Cáncer",
+      f5w: "Cáncer en tratamiento activo no es lo mismo que un cáncer ya tratado hace años. Algunos cánceres de piel se leen distinto a un cáncer de órgano interno.",
+      f5items: [
+        "Cáncer en tratamiento activo: ese temporal de Transamerica suele no emitir.",
+        "Un historial ya tratado puede cotizar; el tipo y la fecha importan.",
+        "El precio más bajo anunciado en Term Life Answers pide, entre otras cosas, sin cáncer salvo algunos de piel.",
+      ],
+      f6c: "Derrame o AIT",
+      f6w: "Un derrame interrumpe la sangre al cerebro. Un AIT es un aviso breve. Lo que quedó — habla, marcha, memoria — importa tanto como la fecha.",
+      f6items: [
+        "Un evento antiguo no es lo mismo que uno reciente.",
+        "En Transamerica, un derrame como único factor todavía puede cotizar temporal en el mejor caso, no a la tarifa más baja de internet.",
+        "Diga el año y si quedó una limitación.",
+      ],
+      f7c: "Diálisis o fallo renal",
+      f7w: "La diálisis sustituye el trabajo de los riñones cuando ya no filtran bien. No es lo mismo que un cálculo o un riñón menos.",
+      f7items: [
+        "En Transamerica, fallo renal o diálisis suele impedir emitir ese temporal.",
+        "Entonces se mira gastos finales o aceptación garantizada, no un temporal grande.",
+        "Vea también la guía de <a href=\"" + L.kidney + "\">enfermedad renal</a> si la necesidad es entierro.",
+      ],
+      f8c: "VIH o SIDA",
+      f8w: "El VIH es el virus. El SIDA es la etapa avanzada. Los medicamentos antivirales aparecen en las recetas que las compañías ya pueden ver.",
+      f8items: [
+        "No cotizamos un temporal de plazo fijo designado para un diagnóstico de SIDA.",
+        "En Term Life Express, ciertos antivirales de esa línea están en la lista que impide emitir.",
+        "El camino habitual que cotizamos es aceptación garantizada, si hay edad y monto. Vea la guía de <a href=\"" + L.hiv + "\">VIH</a>.",
+      ],
+      f8gap: "No tenemos un gráfico público de otra compañía designada que emita temporal de plazo fijo para SIDA. No inventamos un “sí” para un archivo de VIH bien controlado en un producto que no cotizamos.",
+      faq1q: "¿Puedo comprar temporal si ya tengo un diagnóstico?",
+      faq1a: "A menudo sí, a otro precio o a un monto menor. No hay temporal sin preguntas. Cotice con la fecha, los medicamentos y el tabaco reales.",
+      faq2q: "¿Hay temporal de aceptación garantizada?",
+      faq2a: "No en las compañías que cotizamos. La aceptación garantizada es un producto permanente pequeño, con espera por muerte natural. Vea la guía de aceptación garantizada.",
+      faq3q: "¿La diabetes me deja en el precio más bajo de internet?",
+      faq3a: "Casi nunca. En una compañía designada, esa fila pide entre otras cosas sin diabetes. En el temporal de cuestionario corto de Mutual of Omaha, diabetes después de los 45 con tabaco o con complicaciones suele no emitir.",
+      faq4q: "Tuve un infarto hace años. ¿Sigue el temporal?",
+      faq4a: "Puede, si es antiguo y no hay insuficiencia cardíaca. Un evento reciente o un stent reciente cambian el archivo. Vea también la guía de corazón si la necesidad es entierro, no ingreso.",
+      faq5q: "¿Tengo que hacer examen de sangre?",
+      faq5a: "En Easy Term y Term Life Express no hay cita de laboratorio en el consultorio. En una revisión más completa, según edad y monto, sí puede haber labs. En Select-a-Term de Corebridge, si lo que ya tiene en vigor en esa compañía más lo que pide supera $1,000,000, suele pedir examen.",
+      faq6q: "El temporal no pudo emitir. ¿Se acabó el seguro?",
+      faq6a: "No. El siguiente paso es gastos finales con preguntas, o aceptación garantizada si esas tampoco emiten. Son productos distintos, no “el mismo temporal más barato.”",
+      faq7q: "¿El VIH abre un temporal de plazo fijo?",
+      faq7a: "No en lo que cotizamos para SIDA. Term Life Express excluye medicamentos de esa línea. El camino habitual es aceptación garantizada. Vea la página de VIH.",
+      faq8q: "¿El tabaco solo sube el precio o también cierra el producto?",
+      faq8a: "El tabaco suele ser una clase más cara, no un cierre por sí solo. Combinado — diabetes después de 45 y nicotina en Term Life Express, o EPOC y tabaco — sí puede impedir emitir. Diga nicotina de los últimos 12 meses.",
+      costH: "Qué cuestan las tablas de mejor precio anunciado (no el precio de un diagnóstico)",
+      costP: "Estas primas mensuales son ilustrativas de temporal con revisión más completa, no fumador, al precio más bajo que esas compañías designadas anuncian para un historial limpio. Cada celda es la más baja entre las que devolvieron cifra. Una condición previa suele impedir esa fila: el precio real suele ser más alto, o el producto no emite. Easy Term y Term Life Express se cotizan aparte y suelen costar más por dólar. No es una oferta.",
       termShow: "Muestre un plazo:",
       termFaceLabel: "Montos de temporal",
       coH: "Compañías designadas (temporal)",
-      coP: "Fichas educativas. El estado, el tabaco y el historial cambian la oferta. Licencias actuales: página de licencias.",
+      coP: "Fichas educativas. El estado, el tabaco y el historial cambian la oferta. Las licencias actuales están en la página de licencias.",
       coTaTermProduct: "Trendsetter Super",
       coTaTermAges: "18 hasta el tope del plazo (10 años: 80 no fumador)",
       coTaTermAmt: "$100,000–$5,000,000 en cotizaciones típicas",
-      coTaTermExam: "Completa (puede incluir labs)",
+      coTaTermExam: "Preguntas; labs posibles",
       coMooTermProduct: "Term Life Answers",
       coMooTermAges: "18 hasta el tope del plazo (10 años: 80 no fumador)",
       coMooTermAmt: "$100,000–$5,000,000 en cotizaciones típicas",
-      coMooTermExam: "Completa",
+      coMooTermExam: "Preguntas; labs posibles",
       coAsTermProduct: "Term Life",
       coAsTermAges: "18 hasta el tope (10 años: 80 no fumador)",
       coAsTermAmt: "$100,000–$1,000,000",
-      coAsTermExam: "Completa",
+      coAsTermExam: "Preguntas; labs posibles",
       coAmTermProduct: "Easy Term",
-      coAmTermAges: "18–75 (10 años); 18–55 (30 años)",
-      coAmTermAmt: "$25,000–$500,000 (tope $300,000 después de 45)",
-      coAmTermExam: "Simplificada (sin examen en consultorio)",
-      coTermFoot: "También hay Mutual of Omaha Term Life Express (desde $25,000; tope según edad) y Corebridge Select-a-Term (mínimo $100,000). Educativo — no es cotización vinculante.",
-      faq1q: "¿Puedo comprar temporal si ya tengo un diagnóstico?",
-      faq1a: "A menudo sí, a otra clase de precio o a un monto menor. No hay temporal sin preguntas. Cotice con la fecha, los medicamentos y el tabaco reales.",
-      faq2q: "¿Hay temporal de aceptación garantizada?",
-      faq2a: "No en las compañías que cotizamos. La aceptación garantizada es un producto permanente pequeño, con espera por muerte natural. Vea la guía de aceptación garantizada.",
-      faq3q: "¿La diabetes me deja en la tarifa más baja de internet?",
-      faq3a: "Casi nunca. Preferred Plus en Term Life Answers pide, entre otras cosas, sin diabetes. En Trendsetter, diabetes como único factor suele ser Standard como mejor caso. En Term Life Express, diabetes con tabaco o con complicaciones suele declinar.",
-      faq4q: "Tuve un infarto hace años. ¿Sigue el temporal?",
-      faq4a: "Puede, a Standard en el gráfico de Trendsetter si es el único factor. CHF es Decline. Un evento reciente, un stent reciente o insuficiencia cambian el archivo. Vea también la guía de corazón (gastos finales).",
-      faq5q: "¿Tengo que hacer examen de sangre?",
-      faq5a: "En Easy Term y Term Life Express, no hay cita de laboratorio en el consultorio. En suscripción completa, según edad y monto, sí puede haber labs. Select-a-Term pide examen si el total en Corebridge más lo solicitado supera $1,000,000.",
-      faq6q: "El temporal me rechazó. ¿Se acabó el seguro?",
-      faq6a: "No. El siguiente paso es gastos finales con preguntas, o GIWL si esas tampoco emiten. Son productos distintos, no “el mismo temporal más barato.”",
-      faq7q: "¿El VIH abre un temporal nivelado?",
-      faq7a: "No en lo que cotizamos. Trendsetter lista AIDS como Decline. Term Life Express excluye medicamentos de esa línea. El camino habitual es GIWL. Vea la página de VIH.",
-      faq8q: "¿El tabaco solo sube el precio o también cierra el producto?",
-      faq8a: "El tabaco suele ser una clase más cara, no un cierre por sí solo. Combinado — diabetes después de 45 y nicotina en Express, o EPOC y tabaco — sí puede declinar. Diga nicotina de 12 meses.",
+      coAmTermAges: "18–70 (10 años); 18–55 (30 años)",
+      coAmTermAmt: "$25,000–$500,000 (tope $300,000 desde los 46)",
+      coAmTermExam: "Preguntas; sin examen en consultorio",
+      coTermFoot: "También hay Mutual of Omaha Term Life Express (desde $25,000; tope según edad) y Corebridge Select-a-Term (mínimo $100,000; a edades 20–59 puede omitir el examen en consultorio hasta $1,000,000). Educativo — no es cotización vinculante. No publicamos un gráfico de padecimientos de Assurity: no está en un documento público que podamos citar.",
       nextLead: "Pida una cotización de temporal con su edad, tabaco, plazo y medicamentos, o llame a Mejor Vida Seguros.",
-      nextMore: `Si el monto que necesita es de entierro, no de ingreso, empiece por <a href="${L.hub}">gastos finales con condiciones preexistentes</a>.`,
+      nextMore: "Si el monto que necesita es de entierro, no de ingreso, empiece por <a href=\"" + L.hub + "\">gastos finales con una condición de salud</a>.",
       nextPrimary: "Ver precios de temporal",
       nextPrimaryHref: L.termQuote,
       quoteTitle: "Cotizar temporal",
@@ -886,114 +992,175 @@ function copyCondTerm(lang) {
   return {
     ...b,
     ...src,
-    title: "Term life insurance with pre-existing conditions (2026) | Mejor Vida Insurance",
-    desc: "There is no no-questions term. How a term quote works if you already have a diagnosis, Trendsetter and Term Life Express classes, and what to do if term will not issue.",
-    h1: "Term life insurance if you already have a health condition",
-    lead: "Term covers a set number of years: a mortgage, income, debts with a date. A pre-existing condition is <strong>not an automatic no</strong> on that product. There is also no guaranteed-acceptance term. There are questions, often prescriptions, and on larger amounts, labs. The tables you see online are usually Preferred Best: that class needs a clean history.",
+    title: "Term life insurance with a health condition (2026) | Mejor Vida Insurance",
+    desc: "A pre-existing condition is not an automatic no on term life. What term is, how an insurer reviews health, when it often still issues, and what to do if it cannot.",
+    h1: "Can you buy term life insurance if you already have a health condition?",
+    lead: "Often yes, at another price or a different amount. <strong>Term life insurance</strong> covers a set number of years: if you die during that period and premiums are current, the person you named receives the amount. A condition that already existed when you apply is <strong>not an automatic no</strong>. There is also no term policy with no health questions.",
     crumbEnd: "Term",
-    take1: "There are <strong>two term paths</strong> at the companies we quote: fully underwritten (better price per dollar, more questions) and simplified issue (Easy Term or Term Life Express: a questionnaire, no in-office exam, usually more per dollar).",
-    take2: "On Trendsetter Super, high blood pressure can reach <strong>Preferred</strong> as a best case. Diabetes, a heart attack, COPD, or a stroke usually land at <strong>Standard</strong>, not Preferred Plus. AIDS, cancer in treatment, dialysis, and congestive heart failure are <strong>Decline</strong> on that chart.",
-    take3: "If term will not issue, the other product is not “the same term with no questions.” It is <a href=\"" + L.hub + "\">final expense</a> or, if that questionnaire also fails, <a href=\"" + L.gi + "\">guaranteed acceptance</a> — smaller amounts and, on GIWL, a two-year wait for natural death.",
-    callout: "Give the diagnosis, the date, the medications, and whether you use tobacco. That decides class, amount, and whether the product is still term — not the “no exam” headline.",
-    pathsH: "Three paths, not one ad",
-    pathsP: "The brand name changes. What matters is how many questions there are and which price class can open.",
-    p1T: "Fully underwritten",
-    p1: "Trendsetter Super, Term Life Answers, Select-a-Term, and Assurity Term Life. More detail; sometimes labs or a paramedical visit. Usually the best price per dollar and amounts from $100,000 up. Preferred Plus at Mutual of Omaha asks, among other things, for no coronary disease, no diabetes, and no cancer (except basal or superficial squamous skin).",
-    p2T: "Simplified issue",
-    p2: "Easy Term (American Amicable): 10-, 20-, and 30-year terms; $25,000 minimum; $300,000 cap after age 45. Term Life Express: from $25,000; caps $550,000 at 18–50, $450,000 at 51–60, $350,000 at 61–75; Standard non-tobacco or tobacco only — no Preferred. There are still questions. It is not guaranteed acceptance.",
-    p3T: "When term will not issue",
-    p3: `We do not invent a “no-history term.” The next product is a smaller permanent plan: <a href="${L.hub}">final expense</a> with questions, or GIWL if those questions cannot issue either.`,
-    mythH: "There is no guaranteed-acceptance term",
-    mythP: "Corebridge GIWL asks no health questions and covers $5,000–$25,000 at ages 50–80, with a two-year wait for natural death. That is not $250,000 of term. If an ad promises “no questions and a large benefit from day one,” it is not a product we quote.",
-    chartH: "How Trendsetter Super (best case) treats the conditions in this section",
-    chartP: "Transamerica’s chart shows the <strong>best possible class</strong> if that impairment is the factor. Age, date, severity, build, tobacco, and a second diagnosis can worsen the offer or decline it. Not a quote.",
-    chartCol1: "Condition",
-    chartCol2: "Best class (Trendsetter)",
-    chartCol3: "What that usually means",
-    r1c: "High blood pressure",
-    r1k: "Preferred",
-    r1n: "Alone, term often stays open. Preferred Plus on Term Life Answers wants control (under 140/85 in that criterion) and no CAD, diabetes, or cancer.",
-    r2c: "Diabetes",
-    r2k: "Standard",
-    r2n: "Not Preferred Plus. On Term Life Express, diabetes after age 45 with tobacco, with Table 2 or higher build, or with complications, is a decline in that guide.",
-    r3c: "Heart attack or coronary disease",
-    r3k: "Standard",
-    r3n: "An old heart attack can still be term at Standard. Congestive heart failure is Decline on the same chart.",
-    r4c: "COPD or emphysema",
-    r4k: "Standard",
-    r4n: "Still term in the best case. Oxygen for a lung condition narrows or closes other products; say so.",
-    r5c: "Cancer (internal organ, history)",
-    r5k: "Standard",
-    r5n: "Cancer in active treatment: Decline. A treated history can still quote; the date and type matter.",
-    r6c: "Stroke or TIA",
-    r6k: "Standard",
-    r6n: "An old event is not the same as a recent one. The date and what remained (a chair, memory) change the file.",
-    r7c: "Dialysis or kidney failure",
-    r7k: "Decline",
-    r7n: "On Trendsetter, kidney failure / dialysis is Decline. Then look at final expense or GIWL, not large term.",
-    r8c: "AIDS",
-    r8k: "Decline",
-    r8n: "AIDS is listed as Decline. We do not quote an appointed level term for that diagnosis. See the <a href=\"" + L.hiv + "\">HIV</a> guide.",
-    chartNote: "Assurity Term Life is fully underwritten; we do not publish a public impairment chart for that product. Easy Term and Term Life Express have their own questionnaires and, on Express, a medication list that can stop issue.",
-    howH: "How we quote term with a history",
-    howP: "There is no “term company for people with diabetes” that always wins. There is a questionnaire that fits or does not.",
-    how1T: "Health facts and money facts",
-    how1: "Age, tobacco, height, weight, medications, diagnosis dates, and the term and amount the family still needs. A $10,000 burial plan does not answer the same question as $250,000 for 20 years.",
-    how2T: "Fully underwritten first if the file can open it",
-    how2: "If the history is controlled high blood pressure or an old event without complications, fully underwritten is usually the first try: better price per dollar. Corebridge can use Agile Underwriting+ (ages 20–59, up to $1,000,000) and require labs if in-force plus applied-for exceeds $1,000,000.",
-    how3T: "Simplified if you do not want labs or the file is tighter",
-    how3: "Easy Term or Term Life Express. Faster. On Express, several conditions together above Table 4 decline. A drug on the exclusion list (for example HIV antivirals or certain cancer or dementia drugs) stops Express.",
-    knockH: "When appointed term is usually not the product",
-    knockP: "These situations, in the material we use, usually move the file off large term. Then we look at final expense or GIWL. Not a complete legal list.",
-    k1: "AIDS (Decline on Trendsetter); HIV antivirals on the Term Life Express exclusion list",
-    k2: "Cancer in active treatment",
-    k3: "Dialysis or kidney failure",
-    k4: "Congestive heart failure",
-    k5: "Terminal illness",
-    k6: "Diabetes with complications, or diabetes after 45 with tobacco or Table 2 build, on Term Life Express",
-    k7: "Several conditions that together would exceed Table 4 on Express",
-    knockNote: "A term decline does not erase final expense. Those are different contracts, with different amounts and questions.",
-    costH: "What the best-class tables cost (not the price of a diagnosis)",
-    costP: "These premiums are fully underwritten term, <strong>Preferred Best non-tobacco</strong>, appointed companies. They show the size of the product if the file opens that class. Diabetes, a heart attack, or COPD almost never pay this row: they pay Standard, a table extra, or they do not issue. Easy Term and Term Life Express are quoted separately and usually cost more per dollar.",
-    termShow: "Show a term:",
-    termFaceLabel: "Term amounts",
-    coH: "Appointed companies (term)",
-    coP: "Educational cards. State, tobacco, and history change the offer. Current licenses: licenses page.",
-    coTaTermProduct: "Trendsetter Super",
-    coTaTermAges: "18 through the term maximum (10-year: 80 non-tobacco)",
-    coTaTermAmt: "$100,000–$5,000,000 on typical quotes",
-    coTaTermExam: "Full (may include labs)",
-    coMooTermProduct: "Term Life Answers",
-    coMooTermAges: "18 through the term maximum (10-year: 80 non-tobacco)",
-    coMooTermAmt: "$100,000–$5,000,000 on typical quotes",
-    coMooTermExam: "Full",
-    coAsTermProduct: "Term Life",
-    coAsTermAges: "18 through the maximum (10-year: 80 non-tobacco)",
-    coAsTermAmt: "$100,000–$1,000,000",
-    coAsTermExam: "Full",
-    coAmTermProduct: "Easy Term",
-    coAmTermAges: "18–75 (10-year); 18–55 (30-year)",
-    coAmTermAmt: "$25,000–$500,000 ($300,000 cap after 45)",
-    coAmTermExam: "Simplified (no in-office exam)",
-    coTermFoot: "Also Mutual of Omaha Term Life Express (from $25,000; cap by age) and Corebridge Select-a-Term ($100,000 minimum). Educational — not a binding quote.",
+    take1: "Term covers a need with a date — a mortgage, years of income, debts — not a funeral forever. The low price per dollar is why companies ask more than they do on a small burial plan.",
+    take2: "The diagnosis word does not decide alone. The date, the treatment, tobacco, weight, and a second problem matter. An old, stable event is not read the same as a recent one or one with complications.",
+    take3:
+      "If term cannot issue, the next product is not “the same term with no questions.” It is a smaller permanent plan: <a href=\"" +
+      L.hub +
+      "\">final expense</a> or, if that questionnaire also cannot issue, <a href=\"" +
+      L.gi +
+      "\">guaranteed acceptance</a> (no health questions and about a two-year wait for natural death).",
+    callout: "Give the diagnosis, the year, the medications, and whether you use tobacco. That decides the product and the price — not the “no exam” headline.",
+    needH: "The question people actually bring",
+    needP1: "Families shop term when income or a debt still has a date: years left on a mortgage, years until children no longer depend on that paycheck. The amount is usually much larger than a burial plan. So the fear with a diagnosis is concrete: “Can I still protect those years, or will I only be sold a small plan?”",
+    needP2: "The rest of this page explains what term is and how a company reviews health. Company names come later.",
+    whatH: "What term is, and what counts as a pre-existing condition",
+    whatP1: "You pay a <strong>premium</strong> — the regular bill. If you die while the contract is current and inside the term, the <strong>beneficiary</strong> (the person you named) receives the <strong>death benefit</strong>: the contract amount. When the term ends, that coverage ends. It is not a savings account. The <a href=\"https://content.naic.org/consumer/life-insurance.htm\" rel=\"noopener\" target=\"_blank\">NAIC</a> describes term this way: it covers one or more years and generally does not build cash value.",
+    whatP2: "On the usual term at these companies, the premium is <strong>level</strong>: it does not rise just because you have a birthday during the original term, if you pay on time. Typical lengths are 10, 15, 20, 25, or 30 years. Amounts on a full quote often start at $100,000.",
+    whatP3: "A pre-existing condition is a diagnosis, treatment, or symptoms that already existed when you apply. The CDC notes that many people live for years with a chronic disease. That is health. An insurer does not treat the disease. It decides whether that history, as written and as it appears in prescriptions, fits a product it is willing to issue.",
+    howH: "How an insurer reviews health on term life",
+    howP1: "There is no “automatic yes” term. There are always questions. On larger amounts, the company often wants more detail — prescriptions already filled, height and weight, tobacco, and sometimes labs or a nurse visit. A “no” that should have been “yes” can stall or affect a claim. The NAIC reminds consumers that honest answers matter at claim time.",
+    howP2: "Term sells a large benefit for a relatively small bill. That is why companies are usually stricter than they are on a $10,000 or $15,000 burial plan. A controlled diagnosis can still issue. A recent event, several conditions together, or active treatment can raise the price, lower the amount, or close this product.",
+    howP3: "There are two real paths, and neither is “no history.” One asks for more detail and sometimes labs; it usually opens the better price per dollar. The other uses a shorter questionnaire and no in-office exam; it usually costs more per dollar and covers lower amounts. If neither can issue, we look at a different permanent product — we do not invent a no-questions term.",
+    pathsH: "Three paths, in plain language",
+    path1T: "A fuller health review",
+    path1: "More questions; depending on age and amount, labs or a visit outside your doctor’s office. Usually the better price per dollar and amounts from $100,000 up, sometimes into the millions on a typical quote. At one appointed company, the lowest advertised price asks, among other things, for no coronary artery disease, no diabetes, and no cancer (except some skin cancers). That is not a promise everyone pays that row.",
+    path2T: "A shorter questionnaire, no in-office exam",
+    path2: "There are still questions and a prescription check. It is faster. American Amicable Easy Term: 10-, 20-, and 30-year terms; $25,000 minimum; $500,000 cap through age 45 and $300,000 from age 46; issue ages 18–70 on 10-year and 18–55 on 30-year. Mutual of Omaha Term Life Express: from $25,000; caps $550,000 at ages 18–50, $450,000 at 51–60, and $350,000 at 61–75. Those products do not offer the lowest advertised price row; they usually have only typical price classes (tobacco or non-tobacco).",
+    path3T: "When term cannot issue",
+    path3:
+      "There is no guaranteed-acceptance term. <strong>Guaranteed acceptance</strong> is a different product: guaranteed-issue whole life (GIWL). It asks no health questions. The one we quote covers $5,000–$25,000 at ages 50–80 and waits about two years for natural death. If the need is a funeral, not years of income, start with <a href=\"" +
+      L.hub +
+      "\">final expense</a>.",
+    pathsNote: "No appointed company we quote offers zero questions and a large term benefit from day one. If an ad combines both, it is not a product we quote.",
+    vsH: "What changes across those paths",
+    vsCol1: "Fuller review",
+    vsCol1Sub: "More detail, better price per dollar",
+    vsCol2: "Shorter questionnaire",
+    vsCol2Sub: "No in-office exam",
+    vsCol3: "A different product",
+    vsCol3Sub: "If term will not issue",
+    vsR1H: "Health questions",
+    vsR1A: "Yes, with more detail",
+    vsR1B: "Yes, shorter",
+    vsR1C: "Final expense: yes. Guaranteed acceptance: no",
+    vsR2H: "Exam or labs",
+    vsR2A: "Sometimes, by age and amount",
+    vsR2B: "No in-office lab visit",
+    vsR2C: "Not on these small plans",
+    vsR3H: "Typical amounts",
+    vsR3A: "From $100,000 on typical quotes",
+    vsR3B: "From $25,000; the cap falls with age",
+    vsR3C: "Thousands, not hundreds of thousands",
+    vsR4H: "If it cannot issue",
+    vsR4A: "Try the shorter questionnaire or another product",
+    vsR4B: "Look at final expense or guaranteed acceptance",
+    vsR4C: "This is plan B, not the first try for a stable history",
+    vsLearn: "Read the chart as a map, not a quote. The live file — dates, prescriptions, tobacco — still decides.",
+    considerH: "What helps, and what does not",
+    considerP: "Answering with facts is usually the advantage: you may open a larger amount and a lower price per dollar than a burial plan. The limitation is the same questionnaire: a recent event, active treatment, several conditions together, or tobacco combined with diabetes can close term. Waiting “until I am healthier” only raises the age if the diagnosis is already stable. Waiting can matter if there has just been a heart attack, a stroke, or cancer in treatment: some questions look at time windows.",
+    convH: "Can you later switch to a policy that does not expire?",
+    convP1: "Some term contracts allow <strong>conversion</strong>: moving from that term policy to a permanent policy at the same company, using the health answers you already gave, if you do it inside the contract window. You pay the permanent price at the age you convert, not the old term price.",
+    convP2: "That does not replace applying for term today with a real history. The window, the destination products, and the caps are in that policy. Appointed examples: Transamerica Trendsetter Super and Corebridge Select-a-Term. Not every contract converts the same way.",
+    factorsH: "What can change a term application",
+    factorsP: "Each card starts with the health idea in plain language, then lists only what we can verify at appointed companies. Those notes assume that condition is the only factor. Weight, tobacco, a second diagnosis, or several conditions together can still change the price or stop issue.",
+    factorsNote: "These notes are not a quote. A live application still decides. We do not reprint internal price-class labels: they do not help the reader and they change from company to company.",
+    fMeaning: "In plain language",
+    fVerify: "What we can verify",
+    f1c: "High blood pressure",
+    f1w: "High blood pressure is common. Controlled with pills, many people work and live with it for years.",
+    f1items: [
+      "Alone, term often stays open on a fuller review.",
+      "The lowest advertised price at one appointed company asks, among other things, for tight control and no coronary disease, diabetes, or cancer.",
+      "Say whether it is controlled and which medications you take.",
+    ],
+    f2c: "Diabetes",
+    f2w: "The body does not use blood sugar well. Type 1 and type 2 are different diseases; both may be treated with food, pills, or insulin.",
+    f2items: [
+      "It almost never pays the cheapest internet row: that row, at one appointed company, asks among other things for no diabetes.",
+      "On Mutual of Omaha’s shorter-questionnaire term, diabetes after age 45 plus tobacco, a higher weight range, or circulation complications typically will not issue.",
+      "A burial plan with questions is a different product; see the <a href=\"" + L.diabetes + "\">diabetes</a> guide if the need is a funeral, not income.",
+    ],
+    f2gap: "We do not publish one Transamerica price label for “diabetes alone”: that chart is for agents, and the live offer still depends on date, control, and the rest of the file.",
+    f3c: "Heart attack or heart disease",
+    f3w: "A heart attack is damage to the heart muscle from a lack of blood. An event ten years ago is not the same as one this year.",
+    f3items: [
+      "An old heart attack, without heart failure, can still be term in Transamerica’s best case — usually not the lowest advertised price.",
+      "Heart failure (the heart does not pump well) on that same chart typically stops that product from issuing.",
+      "A recent stent or bypass changes the file. Give the year.",
+    ],
+    f4c: "COPD or emphysema",
+    f4w: "COPD is a long-term lung disease. Emphysema is a common type. Oxygen at home is not the same as an inhaler.",
+    f4items: [
+      "In Transamerica’s best case, COPD or emphysema can still be term, not the cheapest row.",
+      "Oxygen for a lung condition narrows or closes other products; say so.",
+      "Tobacco together with COPD can change the product more than the word “COPD” alone.",
+    ],
+    f5c: "Cancer",
+    f5w: "Cancer in active treatment is not the same as cancer treated years ago. Some skin cancers are read differently from an internal-organ cancer.",
+    f5items: [
+      "Cancer in active treatment: that Transamerica term product typically will not issue.",
+      "A treated history can still quote; the type and the date matter.",
+      "The lowest advertised price on Term Life Answers asks, among other things, for no cancer except some skin cancers.",
+    ],
+    f6c: "Stroke or TIA",
+    f6w: "A stroke interrupts blood to the brain. A TIA is a brief warning. What remained — speech, walking, memory — matters as much as the date.",
+    f6items: [
+      "An old event is not the same as a recent one.",
+      "On Transamerica, a stroke as the only factor can still quote term in the best case, not at the lowest internet rate.",
+      "Give the year and whether a limitation remained.",
+    ],
+    f7c: "Dialysis or kidney failure",
+    f7w: "Dialysis replaces the work of the kidneys when they no longer filter well. It is not the same as a stone or one kidney.",
+    f7items: [
+      "On Transamerica, kidney failure or dialysis typically stops that term product from issuing.",
+      "Then look at final expense or guaranteed acceptance, not large term.",
+      "See also the <a href=\"" + L.kidney + "\">kidney disease</a> guide if the need is burial.",
+    ],
+    f8c: "HIV or AIDS",
+    f8w: "HIV is the virus. AIDS is the later stage. Antiviral medications show up in the prescriptions companies can already see.",
+    f8items: [
+      "We do not quote an appointed fixed-term plan for an AIDS diagnosis.",
+      "On Term Life Express, certain antivirals in that line are on the list that stops issue.",
+      "The usual path we quote is guaranteed acceptance, if age and amount fit. See the <a href=\"" + L.hiv + "\">HIV</a> guide.",
+    ],
+    f8gap: "We do not have a public chart from another appointed company that issues fixed-term coverage for AIDS. We will not invent a “yes” for a well-controlled HIV file on a product we do not quote.",
     faq1q: "Can I buy term if I already have a diagnosis?",
-    faq1a: "Often yes, at another price class or a smaller amount. There is no no-questions term. Quote with the real date, medications, and tobacco.",
+    faq1a: "Often yes, at another price or a smaller amount. There is no no-questions term. Quote with the real date, medications, and tobacco.",
     faq2q: "Is there guaranteed-acceptance term?",
     faq2a: "Not at the companies we quote. Guaranteed acceptance is a small permanent product with a wait for natural death. See the guaranteed-acceptance guide.",
     faq3q: "Does diabetes get me the lowest internet rate?",
-    faq3a: "Almost never. Preferred Plus on Term Life Answers asks, among other things, for no diabetes. On Trendsetter, diabetes as the only factor is usually Standard as a best case. On Term Life Express, diabetes with tobacco or with complications usually declines.",
+    faq3a: "Almost never. At one appointed company, that row asks among other things for no diabetes. On Mutual of Omaha’s shorter-questionnaire term, diabetes after age 45 with tobacco or with complications typically will not issue.",
     faq4q: "I had a heart attack years ago. Is term still open?",
-    faq4a: "It can be, at Standard on the Trendsetter chart if that is the only factor. CHF is Decline. A recent event, a recent stent, or heart failure change the file. See also the heart (final expense) guide.",
+    faq4a: "It can be, if it is old and there is no heart failure. A recent event or a recent stent changes the file. See also the heart guide if the need is burial, not income.",
     faq5q: "Do I have to do a blood test?",
-    faq5a: "On Easy Term and Term Life Express, there is no in-office lab visit. On fully underwritten, depending on age and amount, there may be labs. Select-a-Term requires an exam if Corebridge in-force plus applied-for exceeds $1,000,000.",
-    faq6q: "Term declined me. Is insurance over?",
-    faq6a: "No. The next step is final expense with questions, or GIWL if those cannot issue either. Those are different products, not “the same term cheaper.”",
-    faq7q: "Does HIV open a level term plan?",
-    faq7a: "Not on what we quote. Trendsetter lists AIDS as Decline. Term Life Express excludes medications in that line. The usual path is GIWL. See the HIV page.",
+    faq5a: "On Easy Term and Term Life Express there is no in-office lab visit. On a fuller review, depending on age and amount, there may be labs. On Corebridge Select-a-Term, if what you already have in force at that company plus what you apply for exceeds $1,000,000, an exam is usually required.",
+    faq6q: "Term could not issue. Is insurance over?",
+    faq6a: "No. The next step is final expense with questions, or guaranteed acceptance if those cannot issue either. Those are different products, not “the same term cheaper.”",
+    faq7q: "Does HIV open a fixed-term plan?",
+    faq7a: "Not on what we quote for AIDS. Term Life Express excludes medications in that line. The usual path is guaranteed acceptance. See the HIV page.",
     faq8q: "Does tobacco only raise the price, or can it close the product?",
-    faq8a: "Tobacco is usually a higher class, not a close by itself. Combined — diabetes after 45 and nicotine on Express, or COPD and tobacco — it can decline. Say nicotine in the last 12 months.",
+    faq8a: "Tobacco is usually a higher price class, not a close by itself. Combined — diabetes after 45 and nicotine on Term Life Express, or COPD and tobacco — it can stop issue. Say nicotine in the last 12 months.",
+    costH: "What the lowest advertised tables cost (not the price of a diagnosis)",
+    costP: "These monthly premiums are illustrative of term with a fuller review, non-tobacco, at the lowest price those appointed companies advertise for a clean history. Each cell is the lowest among companies that returned a figure. A pre-existing condition usually blocks that row: the real price is often higher, or the product does not issue. Easy Term and Term Life Express are quoted separately and usually cost more per dollar. Not an offer.",
+    termShow: "Show a term:",
+    termFaceLabel: "Term amounts",
+    coH: "Appointed companies (term)",
+    coP: "Educational cards. State, tobacco, and history change the offer. Current licenses are on the licenses page.",
+    coTaTermProduct: "Trendsetter Super",
+    coTaTermAges: "18 through the term maximum (10-year: 80 non-tobacco)",
+    coTaTermAmt: "$100,000–$5,000,000 on typical quotes",
+    coTaTermExam: "Questions; labs possible",
+    coMooTermProduct: "Term Life Answers",
+    coMooTermAges: "18 through the term maximum (10-year: 80 non-tobacco)",
+    coMooTermAmt: "$100,000–$5,000,000 on typical quotes",
+    coMooTermExam: "Questions; labs possible",
+    coAsTermProduct: "Term Life",
+    coAsTermAges: "18 through the maximum (10-year: 80 non-tobacco)",
+    coAsTermAmt: "$100,000–$1,000,000",
+    coAsTermExam: "Questions; labs possible",
+    coAmTermProduct: "Easy Term",
+    coAmTermAges: "18–70 (10-year); 18–55 (30-year)",
+    coAmTermAmt: "$25,000–$500,000 ($300,000 cap from age 46)",
+    coAmTermExam: "Questions; no in-office exam",
+    coTermFoot: "Also Mutual of Omaha Term Life Express (from $25,000; cap by age) and Corebridge Select-a-Term ($100,000 minimum; at ages 20–59 it may skip an in-office exam up to $1,000,000). Educational — not a binding quote. We do not publish an Assurity condition chart: it is not in a public document we can cite.",
     nextLead: "Ask for a term quote with your age, tobacco, term length, and medications, or call Mejor Vida Insurance.",
-    nextMore: `If the amount you need is burial, not income, start with <a href="${L.hub}">final expense with pre-existing conditions</a>.`,
+    nextMore: "If the amount you need is burial, not income, start with <a href=\"" + L.hub + "\">final expense with a health condition</a>.",
     nextPrimary: "See term prices",
     nextPrimaryHref: L.termQuote,
     quoteTitle: "Quote term",
@@ -1006,59 +1173,49 @@ function copyCondTerm(lang) {
 function condTermMain(lang, page, c) {
   const isEs = lang === "es";
   const L = LINKS[lang];
-  const inner = `<section class="lic-section" id="paths">
-<h2>${c.pathsH}</h2>
-<p>${c.pathsP}</p>
-<div class="lic-type-block"><h3>${c.p1T}</h3><p>${c.p1}</p></div>
-<div class="lic-type-block"><h3>${c.p2T}</h3><p>${c.p2}</p></div>
-<div class="lic-type-block"><h3>${c.p3T}</h3><p>${c.p3}</p></div>
+  const inner = `<section class="lic-section" id="need">
+<h2>${c.needH}</h2>
+<p>${c.needP1}</p>
+<p>${c.needP2}</p>
 </section>
-<section class="lic-section" id="myth">
-<h2>${c.mythH}</h2>
-<p>${c.mythP}</p>
-</section>
-<section class="lic-section" id="chart">
-<h2>${c.chartH}</h2>
-<p>${c.chartP}</p>
-<div class="lic-rate-wrap">
-<table class="lic-rate-table lic-rate-table--lesson">
-<thead><tr><th scope="col">${c.chartCol1}</th><th scope="col">${c.chartCol2}</th><th scope="col">${c.chartCol3}</th></tr></thead>
-<tbody>
-<tr><td>${c.r1c}</td><td>${c.r1k}</td><td>${c.r1n}</td></tr>
-<tr><td>${c.r2c}</td><td>${c.r2k}</td><td>${c.r2n}</td></tr>
-<tr><td>${c.r3c}</td><td>${c.r3k}</td><td>${c.r3n}</td></tr>
-<tr><td>${c.r4c}</td><td>${c.r4k}</td><td>${c.r4n}</td></tr>
-<tr><td>${c.r5c}</td><td>${c.r5k}</td><td>${c.r5n}</td></tr>
-<tr><td>${c.r6c}</td><td>${c.r6k}</td><td>${c.r6n}</td></tr>
-<tr><td>${c.r7c}</td><td>${c.r7k}</td><td>${c.r7n}</td></tr>
-<tr><td>${c.r8c}</td><td>${c.r8k}</td><td>${c.r8n}</td></tr>
-</tbody>
-</table>
-</div>
-<p class="lic-rate-note">${c.chartNote}</p>
+<section class="lic-section" id="what">
+<h2>${c.whatH}</h2>
+<p>${c.whatP1}</p>
+<p>${c.whatP2}</p>
+<p>${c.whatP3}</p>
 </section>
 <section class="lic-section" id="how">
 <h2>${c.howH}</h2>
-<p>${c.howP}</p>
-<ol class="lic-lesson-steps">
-<li><strong>${c.how1T}.</strong> ${c.how1}</li>
-<li><strong>${c.how2T}.</strong> ${c.how2}</li>
-<li><strong>${c.how3T}.</strong> ${c.how3}</li>
-</ol>
+<p>${c.howP1}</p>
+<p>${c.howP2}</p>
+<p>${c.howP3}</p>
 </section>
-<section class="lic-section" id="knockouts">
-<h2>${c.knockH}</h2>
-<p>${c.knockP}</p>
-<ul>
-<li>${c.k1}</li>
-<li>${c.k2}</li>
-<li>${c.k3}</li>
-<li>${c.k4}</li>
-<li>${c.k5}</li>
-<li>${c.k6}</li>
-<li>${c.k7}</li>
-</ul>
-<p class="lic-rate-note">${c.knockNote}</p>
+<section class="lic-section" id="paths">
+<h2>${c.pathsH}</h2>
+<div class="lic-type-block"><h3>${c.path1T}</h3><p>${c.path1}</p></div>
+<div class="lic-type-block"><h3>${c.path2T}</h3><p>${c.path2}</p></div>
+<div class="lic-type-block"><h3>${c.path3T}</h3><p>${c.path3}</p></div>
+<p class="lic-rate-note">${c.pathsNote}</p>
+${planCompareHtml(c)}
+</section>
+<section class="lic-section" id="consider">
+<h2>${c.considerH}</h2>
+<p>${c.considerP}</p>
+</section>
+<section class="lic-section" id="convert">
+<h2>${c.convH}</h2>
+<p>${c.convP1}</p>
+<p>${c.convP2}</p>
+</section>
+<section class="lic-section lic-faq" id="faq">
+<h2>${c.faqTitle}</h2>
+${faqsHtml(c)}
+</section>
+<section class="lic-section" id="factors">
+<h2>${c.factorsH}</h2>
+<p>${c.factorsP}</p>
+${factorCardsHtml(c)}
+<p class="lic-rate-note">${c.factorsNote}</p>
 </section>
 <section class="lic-section" id="cost">
 <h2>${c.costH}</h2>
@@ -1071,23 +1228,24 @@ ${termRateBlock(c, L.termQuote)}
 ${termAppointedCardsHtml(lang, c)}
 </section>`;
   return condShell(lang, page, c, {
+    omitFaq: true,
     quoteHref: L.termQuote,
     toc: isEs
       ? [
-          ["#paths", "Tipos"],
-          ["#chart", "Por condición"],
-          ["#knockouts", "Cuándo no"],
-          ["#cost", "Costo"],
-          ["#companies", "Compañías"],
+          ["#need", "La pregunta"],
+          ["#how", "Cómo funciona"],
+          ["#paths", "Caminos"],
           ["#faq", "Preguntas"],
+          ["#factors", "Qué importa"],
+          ["#cost", "Costo"],
         ]
       : [
-          ["#paths", "Types"],
-          ["#chart", "By condition"],
-          ["#knockouts", "When not"],
-          ["#cost", "Cost"],
-          ["#companies", "Companies"],
+          ["#need", "The question"],
+          ["#how", "How it works"],
+          ["#paths", "Paths"],
           ["#faq", "Questions"],
+          ["#factors", "What matters"],
+          ["#cost", "Cost"],
         ],
     inner,
   });

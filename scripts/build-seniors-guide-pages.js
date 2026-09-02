@@ -2086,10 +2086,12 @@ function examRateScripts(lang, kind) {
       });
       payload.tables[t] = slim;
     });
+    payload.source = "";
+    payload.rating = "";
     payload.note =
       lang === "es"
-        ? "Primas mensuales ilustrativas de temporal de suscripción completa, Preferred Best no fumador. Cada celda es la más baja entre compañías designadas. Una condición preexistente suele impedir esa clase: el precio real suele ser Standard, con extra de tabla, o no emitir. No es cotización vinculante."
-        : "Illustrative fully underwritten term, Preferred Best non-tobacco. Each cell is the lowest among appointed companies. A pre-existing condition usually blocks that class: the real price is often Standard, a table extra, or no issue. Not a binding quote.";
+        ? "Primas mensuales ilustrativas de temporal con revisión más completa, no fumador, al precio más bajo anunciado para un historial limpio. Cada celda es la más baja entre compañías designadas. Una condición previa suele impedir esa fila: el precio real suele ser más alto, o el producto no emite. No es cotización vinculante."
+        : "Illustrative monthly term premiums with a fuller health review, non-tobacco, at the lowest advertised price for a clean history. Each cell is the lowest among appointed companies. A pre-existing condition usually blocks that row: the real price is often higher, or the product does not issue. Not a binding quote.";
     return `<script>window.MVI_LIC_RATES = ${JSON.stringify(payload)};</script>
 <script defer src="${prefix}js/life-insurance-cost.js?v=20260829-termcond"></script>
 `;
