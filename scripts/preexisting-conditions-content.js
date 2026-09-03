@@ -535,194 +535,326 @@ function copyCondHub(lang) {
   const isEs = lang === "es";
   const L = LINKS[lang];
   const b = baseCopy(lang);
+  const src = sharedSources(isEs, {
+    src1: isEs
+      ? '<a href="https://content.naic.org/consumer/life-insurance.htm" rel="noopener" target="_blank">NAIC: seguro de vida para el consumidor</a> — cómo se compra una póliza y por qué las respuestas de salud importan en un reclamo.'
+      : '<a href="https://content.naic.org/consumer/life-insurance.htm" rel="noopener" target="_blank">NAIC: consumer life insurance</a> — how a policy is bought and why health answers matter at claim time.',
+    src2: isEs
+      ? '<a href="https://www.cdc.gov/chronic-disease/about/index.html" rel="noopener" target="_blank">CDC: enfermedades crónicas</a> — muchas personas viven con un diagnóstico de larga data; eso es salud pública, no la regla de una aseguradora.'
+      : '<a href="https://www.cdc.gov/chronic-disease/about/index.html" rel="noopener" target="_blank">CDC: chronic diseases</a> — many people live with a long-term diagnosis; that is public health, not an insurer’s rule.',
+    src3: isEs
+      ? '<a href="https://www.ssa.gov/personal-record/when-someone-dies/lump-sum-death-payment" rel="noopener" target="_blank">SSA: pago único por fallecimiento</a> — un pago de $255, si aplica; no cubre un funeral.'
+      : '<a href="https://www.ssa.gov/personal-record/when-someone-dies/lump-sum-death-payment" rel="noopener" target="_blank">SSA: lump-sum death payment</a> — a $255 payment, if it applies; it does not cover a funeral.',
+    src4: isEs
+      ? '<a href="https://consumer.ftc.gov/articles/ftc-funeral-rule" rel="noopener" target="_blank">FTC: Funeral Rule</a> — derechos al contratar un funeral; el seguro de vida no es un contrato funerario prepago.'
+      : '<a href="https://consumer.ftc.gov/articles/ftc-funeral-rule" rel="noopener" target="_blank">FTC: Funeral Rule</a> — rights when buying funeral goods and services; life insurance is not a prepaid funeral contract.',
+    src5: "",
+    src6: "",
+  });
   if (isEs) {
     return {
       ...b,
-      title: "Gastos finales con condiciones preexistentes: cómo calificar (2026) | Mejor Vida Seguros",
-      desc: "Una condición previa no cierra automáticamente el seguro de gastos finales. Cómo se comparan planes nivelados, graduales y de aceptación garantizada con compañías designadas.",
-      h1: "Cómo obtener seguro de gastos finales si ya tiene una condición de salud",
-      lead: "Una condición preexistente es un diagnóstico o tratamiento que ya existía cuando usted solicita. En gastos finales eso <strong>no significa un rechazo automático</strong>. Muchas personas con diabetes, presión alta o un infarto antiguo todavía califican a un plan nivelado: hay preguntas de salud, no un examen en el consultorio, y el beneficio completo puede aplicar desde el primer pago cubierto.",
+      ...src,
+      hideJsRateNote: true,
+      coAges: "Edades",
+      coWait: "Espera de 2 años",
+      coAetnaProduct: "Accendo Nivelado",
+      coTaProduct: "Immediate Solution",
+      coTaAmt: "Desde $1,000; tope según edad (hasta $50,000)",
+      coAmericoAmt: "$5,000–$50,000; tope $40,000 a los 76–85",
+      coGiProduct: "Aceptación garantizada (GIWL)",
+      coGiFoot: "Una póliza de aceptación garantizada por asegurado cada 12 meses; el total de esa compañía no supera $25,000. Educativo — no es cotización vinculante.",
+      title: "Gastos finales con una condición de salud (2026) | Mejor Vida Seguros",
+      desc: "Una condición previa no cierra el seguro de gastos finales. Qué es, cómo se revisa la salud, cuándo un plan puede pagar desde el primer pago y qué hacer si no puede.",
+      h1: "¿Puede comprar seguro de gastos finales si ya tiene una condición de salud?",
+      lead: "A menudo sí. El <strong>seguro de gastos finales</strong> es una póliza pequeña para funeral, cremación y deudas cortas. Una condición que ya existía al solicitar <strong>no es un “no” automático</strong>. Tampoco hay un plan sin preguntas de salud que pague el monto completo por muerte natural desde el día uno.",
       crumbEnd: "Condiciones preexistentes",
-      take1: "Hay tres caminos: un <strong>plan nivelado o inmediato</strong> (preguntas, a menudo sin espera de dos años), un plan <strong>gradual o modificado</strong> (beneficio limitado al inicio) y la <strong>aceptación garantizada</strong> (sin preguntas, siempre con espera por muerte natural).",
-      take2: "Ninguna compañía que cotizamos ofrece <strong>cero preguntas y beneficio completo por muerte natural desde el día uno</strong>. Si un anuncio dice “sin examen y sin espera”, casi siempre hay cuestionario.",
-      take3: "Mejor Vida Seguros compara compañías designadas — Mutual of Omaha Living Promise, Accendo, Transamerica Immediate Solution, Americo y, cuando hace falta, Corebridge GIWL — con su edad, tabaco y respuestas reales, no con una lista genérica de internet.",
-      callout: "Empiece por el cuestionario. La aceptación garantizada es el plan B cuando ese cuestionario no puede emitir un beneficio inmediato. No es el primer intento para diabetes o presión alta.",
-      pathsH: "Tres tipos de póliza, en lenguaje sencillo",
-      pathsP: "El nombre comercial cambia. Lo que importa es cuándo paga la compañía y qué tiene que responder usted.",
-      p1T: "Nivelado o inmediato",
-      p1: "Hay preguntas y revisión de recetas y bases de datos. Si califica, el monto completo puede aplicar por muerte natural cubierta desde el primer pago. Suele ser el precio más bajo por dólar. Living Promise Nivelado emite de 45 a 85, hasta unos $50,000. Accendo Level puede emitir hasta 89 (tope $25,000 a los 76–89). Transamerica Immediate Solution llega a 85.",
-      p2T: "Gradual o modificado",
-      p2: "Todavía hay preguntas. En los primeros años, una muerte no accidental puede pagar solo una parte del monto o devolver primas más un interés del contrato. Accendo Modificado, por ejemplo, suele devolver el 110% de primas ganadas en los años 1–2 por muerte no accidental y el monto completo desde el año 3. Accidental cubierto puede pagar entero desde el inicio.",
-      p3T: "Aceptación garantizada",
-      p3: `No hay preguntas de salud. Dentro de la edad y el monto, no se niega por historial médico. Siempre hay espera de unos dos años por muerte no accidental. Corebridge GIWL: edades 50–80, $5,000–$25,000; en la espera, 110% de las primas pagadas. Vea <a href="${L.gi}">aceptación garantizada</a>.`,
-      mythH: "No existe “aprobación garantizada sin espera”",
-      mythP: "Si la compañía no sabe nada de su salud, no puede pagar $10,000 o $25,000 después de haber cobrado unas pocas cuotas. Por eso la aceptación garantizada lleva espera. El camino al beneficio desde el día uno es un plan con preguntas que usted puede responder con “no” a los descalificadores de ese producto — o, en algunos productos, un “sí” que todavía deja un plan inmediato a otra clase de tarifa.",
-      howH: "Cómo encontramos el producto que encaja",
-      howP: "No hay una “mejor compañía para todo el mundo.” Hay una compañía cuyo cuestionario encaja con su historial. Un mismo diagnóstico puede ser nivelado en una y solo GIWL en otra.",
-      how1T: "Hechos, no rumores",
-      how1: "Edad, estatura, peso, tabaco, medicamentos, hospitalizaciones y oxígeno si lo recetaron. Una respuesta “no” que debía ser “sí” puede anular un reclamo.",
-      how2T: "Varias compañías designadas",
-      how2: "El cuestionario de Living Promise no es el de Accendo ni el de Transamerica. Por eso comparamos, en lugar de enviar una sola solicitud a ciegas.",
-      how3T: "Luego el precio",
-      how3: "El precio sigue a edad, sexo, tabaco y clase (Preferred, Standard, tabaco). La salud decide la clase y si hay espera; no inventamos un descuento aparte.",
-      dirH: "Cobertura por condición",
-      dirP: "Estas guías usan las reglas de las compañías que cotizamos. No es un directorio de 60 enfermedades: son las situaciones que más aparecen en gastos finales y de las que tenemos datos de suscripción.",
+      take1: "Hay tres caminos. Un <strong>plan nivelado</strong> (lo definimos abajo) puede pagar el monto completo desde el primer pago cubierto, con preguntas de salud. Un plan gradual o modificado limita ese pago al inicio. La aceptación garantizada no hace preguntas y espera unos dos años por muerte natural.",
+      take2: "Ninguna compañía que cotizamos ofrece <strong>cero preguntas y el monto completo por muerte natural desde el día uno</strong>. “Sin examen” no es lo mismo que “sin preguntas.”",
+      take3:
+        "Empiece por el cuestionario. La <a href=\"" +
+        L.gi +
+        "\">aceptación garantizada</a> es el plan B cuando ese cuestionario no puede emitir — no el primer intento para diabetes o presión alta.",
+      callout: "Diga el diagnóstico, el año, los medicamentos y si usa tabaco. Eso decide el producto y el precio — no el anuncio de “sin examen y sin espera.”",
+      needH: "La pregunta que la gente trae",
+      needP1: "Las familias buscan esta cobertura porque un funeral, el cementerio y deudas pequeñas pueden caer sobre parientes. El Seguro Social puede pagar un único monto de $255 si se cumplen sus reglas; eso no cubre un sepelio. El dinero de una póliza de vida va en efectivo a la persona que usted nombró. No es un contrato con una funeraria.",
+      needP2: "El miedo con un diagnóstico suele ser concreto: “¿Todavía puedo dejar algo para esa factura, o solo me van a vender un plan que espera dos años?” El resto de la página enseña cómo funciona el producto. Los nombres de compañías vienen después.",
+      whatH: "Qué es gastos finales, y qué cuenta como condición previa",
+      whatP1: "Usted paga una <strong>prima</strong> — la cuota regular. Si fallece y el contrato está al día, el <strong>beneficiario</strong> (la persona que nombró) recibe el <strong>beneficio de muerte</strong>: el monto del contrato, en efectivo. La <a href=\"https://content.naic.org/consumer/life-insurance.htm\" rel=\"noopener\" target=\"_blank\">NAIC</a> describe así el seguro de vida: no es una cuenta de ahorro del gobierno, y las respuestas de salud importan cuando llega el reclamo.",
+      whatP2: "Gastos finales, entierro y funeral, en la práctica, apuntan a lo mismo: una vida entera de monto pequeño. <strong>Vida entera</strong> significa que la cobertura no vence a los 10 o 20 años mientras se pague a tiempo. El monto en las compañías que cotizamos suele ir de unos miles hasta unos $50,000, según edad y producto. No sustituye un temporal grande para hipoteca o años de sueldo.",
+      whatP3: "Una condición preexistente es un diagnóstico, un tratamiento o síntomas que ya existían cuando usted solicita. El CDC recuerda que muchas personas viven años con una enfermedad crónica. Eso es salud. Una aseguradora no trata la enfermedad: decide si ese historial, como queda escrito y como aparece en recetas, cabe en un producto que está dispuesta a emitir.",
+      howH: "Cómo una aseguradora revisa la salud en gastos finales",
+      howP1: "En estos planes pequeños casi nunca hay una cita de laboratorio en el consultorio. Sí hay preguntas, y la compañía suele revisar recetas que usted ya surtió. Un “no” que debió ser “sí” puede retrasar o afectar un reclamo. La NAIC recuerda al consumidor que las respuestas honestas importan cuando llega el reclamo.",
+      howP2: "Un anuncio de “sin examen” no significa “sin historial.” Si la compañía no pregunta nada, no puede pagar $10,000 o $25,000 después de haber cobrado unas pocas cuotas. Por eso el camino al monto completo desde el primer pago es un plan con preguntas que su archivo puede contestar.",
+      howP3: "La misma palabra — diabetes, corazón, presión alta — no decide sola. Importan la fecha, el tratamiento, el tabaco, el peso y si hay un segundo problema. Un evento antiguo y estable no se lee igual que uno reciente o con complicaciones. Si el cuestionario no puede emitir, el siguiente producto no es “el mismo plan sin preguntas.” Es otro contrato, más pequeño, con espera.",
+      pathsH: "Tres caminos, en lenguaje sencillo",
+      path1T: "Plan nivelado (a veces lo llaman inmediato)",
+      path1: "Hay preguntas. Si la compañía emite, el monto completo puede aplicar por muerte natural cubierta desde el primer pago. Suele ser el precio más bajo por dólar de estos tres. Ejemplos designados: Mutual of Omaha Living Promise Nivelado, edades 45–85, unos $2,000–$50,000; Accendo Nivelado, edades 40–89, con un tope de $25,000 a los 76–89; Transamerica Immediate Solution, hasta 85, desde $1,000 y con un tope que baja con la edad; Americo Eagle Select Nivelado, edades 40–85, $5,000–$50,000 (tope $40,000 a los 76–85). No publicamos una emisión nueva de gastos finales a los 90.",
+      path2T: "Plan gradual o modificado",
+      path2: "Sigue habiendo preguntas. En los primeros años, una muerte no accidental puede pagar solo una parte del monto o devolver primas según el contrato. En Accendo Modificado, los años 1–2 suelen devolver el 110% de las primas ganadas por muerte no accidental; el monto completo aplica desde el año 3; un accidente cubierto puede pagar entero desde el inicio. Ese diseño emite de 40 a 75, hasta $25,000. Living Promise también tiene un plan gradual (edades 45–80, hasta unos $20,000) que limita el beneficio por muerte natural en los dos primeros años; no mezclamos esa fórmula con la de Accendo.",
+      path3T: "Aceptación garantizada",
+      path3:
+        "No hay preguntas de salud. Dentro de la edad y el monto, el historial médico no cierra la solicitud. Siempre hay espera de unos dos años por muerte no accidental. Ese producto se llama GIWL: vida entera de aceptación garantizada. El que cotizamos es Corebridge, edades 50–80, $5,000–$25,000; en la espera, 110% de las primas pagadas. Vea <a href=\"" +
+        L.gi +
+        "\">aceptación garantizada</a>.",
+      pathsNote: "Ninguna compañía designada que cotizamos ofrece cero preguntas y un beneficio completo por muerte natural desde el día uno. Si un anuncio mezcla las dos cosas, no es un producto que cotizamos.",
+      vsH: "Qué cambia entre esos caminos",
+      vsCol1: "Nivelado",
+      vsCol1Sub: "Preguntas; monto completo si emite",
+      vsCol2: "Gradual o modificado",
+      vsCol2Sub: "Preguntas; pago limitado al inicio",
+      vsCol3: "Aceptación garantizada",
+      vsCol3Sub: "Sin preguntas; espera por muerte natural",
+      vsR1H: "Preguntas de salud",
+      vsR1A: "Sí",
+      vsR1B: "Sí",
+      vsR1C: "No",
+      vsR2H: "Cuándo paga el monto completo (muerte natural)",
+      vsR2A: "Desde el primer pago cubierto, si emite",
+      vsR2B: "Después de los primeros años del contrato",
+      vsR2C: "Después de unos dos años",
+      vsR3H: "Montos habituales",
+      vsR3A: "Miles hasta unos $50,000, según edad",
+      vsR3B: "Suele ser más bajo que el nivelado",
+      vsR3C: "$5,000–$25,000 en lo que cotizamos",
+      vsR4H: "Precio, en general",
+      vsR4A: "El más bajo por dólar de estos tres",
+      vsR4B: "En el medio, si ese producto existe para su archivo",
+      vsR4C: "Suele ser el más alto: la salud no cambia esa prima",
+      vsLearn: "Lea la tabla como un mapa, no como una cotización. El archivo real — fechas, recetas, tabaco — sigue decidiendo.",
+      considerH: "Qué ayuda, y qué no",
+      considerP: "Contestar el cuestionario suele ser la ventaja: puede abrir más monto, un precio más bajo y sin espera de dos años. El límite es el mismo cuestionario: un evento reciente, tratamiento activo, varias condiciones juntas o tabaco combinado con un problema de pulmón puede cerrar el plan inmediato. Esperar “hasta estar más sano” solo sube la edad si el diagnóstico ya está estable. Esperar sí puede importar si acaba de haber un infarto, un derrame o un cáncer en tratamiento: algunas preguntas miran ventanas de tiempo.",
+      considerP2: "Un contrato funerario prepago es un acuerdo con una funeraria. La <a href=\"https://consumer.ftc.gov/articles/ftc-funeral-rule\" rel=\"noopener\" target=\"_blank\">Funeral Rule de la FTC</a> trata de cómo se compran bienes y servicios funerarios. El seguro de gastos finales es otra cosa: efectivo para quien usted nombró. No es lo mismo que “ya está pagado el funeral.”",
+      dirH: "Guías por condición",
+      dirP: "Estas páginas cubren las situaciones que más vemos en gastos finales y de las que tenemos datos verificables. No es un directorio de decenas de enfermedades. Cada guía empieza por la idea de salud y luego lista solo lo que podemos verificar.",
       d1H: "Diabetes",
-      d1: "Tipo 1 o 2, con o sin insulina, suele seguir en simplificado si no hay complicaciones graves.",
+      d1: "Tipo 1 o 2, con o sin insulina, a menudo sigue en un plan con preguntas si no hay complicaciones graves. No es, por sí sola, una espera de dos años.",
       d2H: "Enfermedad del corazón",
-      d2: "Un infarto antiguo a menudo sigue en simplificado. Insuficiencia cardíaca o un evento reciente cambian el camino.",
+      d2: "Un infarto antiguo no es lo mismo que insuficiencia cardíaca o un evento de este año. La fecha y lo que quedó importan más que la palabra “corazón.”",
       d3H: "Presión alta",
       d3: "Es de las condiciones más comunes. Sola, casi nunca empuja a aceptación garantizada.",
       d4H: "EPOC",
-      d4: "Muchos planes todavía cotizan. Tabaco y oxígeno recetado por pulmón suelen estrechar las opciones.",
+      d4: "Muchos cuestionarios todavía cotizan. Tabaco y oxígeno recetado por pulmón suelen estrechar las opciones más que la palabra “EPOC” sola.",
       d5H: "Cáncer",
-      d5: "Tratamiento activo suele ir a GIWL. Libre de cáncer y de tratamiento por un tiempo puede volver a simplificado.",
+      d5: "Tratamiento activo suele cerrar el plan con preguntas. Libre de cáncer y de tratamiento por un tiempo puede volver a cotizar. El tipo y la fecha importan.",
       d6H: "Riñón",
       d6: "La etapa y si hay diálisis importan más que la palabra “riñón.”",
       d7H: "Discapacidad",
       d7: "Un cheque del Seguro Social no es lo mismo que un “no” en el cuestionario. Silla de ruedas y ayuda para bañarse se miran aparte.",
       d8H: "VIH",
-      d8: "En las compañías designadas de emisión simplificada suele ser declinación. El camino habitual es GIWL.",
+      d8: "En las compañías con preguntas que cotizamos, este diagnóstico suele no emitir. El camino habitual es aceptación garantizada.",
       d9H: "Derrame o AIT",
-      d9: "Un evento hace años no es lo mismo que uno en los últimos dos años.",
-      knockH: "Cuándo el simplificado suele no emitir",
-      knockP: "En las compañías designadas, un plan con preguntas a menudo no se puede emitir si aplica alguna de estas situaciones. Entonces sí se mira GIWL. No es un diagnóstico ni una lista legal: una cotización confirma el producto.",
+      d9: "Un evento de hace años no es lo mismo que uno en los últimos dos años. Diga el año y si quedó una limitación.",
+      limitsH: "Cuándo un plan con preguntas a menudo no puede emitir",
+      limitsP: "En las compañías que cotizamos, un plan con cuestionario a menudo no se puede emitir si aplica alguna de estas situaciones. Entonces sí se mira aceptación garantizada. No es un diagnóstico ni una lista legal: una cotización confirma el producto.",
       k1: "VIH o SIDA",
       k2: "Alzheimer o demencia",
-      k3: "Hospital, residencia, hospicio, enfermería especializada o cuidado de salud en el hogar",
+      k3: "Hospital, residencia, hospicio, enfermería especializada o cuidado de salud en el hogar en este momento",
       k4: "Oxígeno por una condición pulmonar (no apnea del sueño)",
       k5: "Silla de ruedas, scooter o cama por una enfermedad (no una lesión breve)",
-      k6: "Cáncer en tratamiento activo (algunos cánceres de piel o etapas muy tempranas todavía pueden ir por simplificado)",
+      k6: "Cáncer en tratamiento activo",
       k7: "Abuso de alcohol o drogas, o tratamiento, en los últimos 24 meses",
       k8: "Incapacidad mental o enfermedad terminal",
       k9: "Diálisis, enfermedad renal avanzada o trasplante de órgano",
-      knockNote: "EPOC con tabaco es otro ejemplo frecuente: el simplificado designado suele declinar y GIWL puede seguir siendo una vía. Transamerica, en su gráfico de un solo padecimiento, todavía puede considerar EPOC, diabetes o enfermedad renal en clase Standard cuando es el único factor listado. El perfil completo — peso, recetas, otros diagnósticos — decide.",
-      costH: "Cuánto cuesta si califica a un plan nivelado",
-      costP: "Estas primas son ilustrativas de gastos finales nivelados, no fumador, compañías designadas. Aplican si el cuestionario da un plan inmediato. GIWL sale más caro a la misma edad y monto, y lleva espera. No es una oferta.",
-      applyH: "Cómo solicitar sin atascar el reclamo futuro",
-      applyP: "La compañía revisa lo que usted dice y lo que ya está en bases de recetas y de reclamaciones. Diga la verdad aunque tema un “sí.” Un “no” incorrecto es peor que un plan con espera.",
+      limitsNote: "Algunos cánceres de piel o etapas muy tempranas todavía pueden cotizar un plan con preguntas. No hay una sola regla pública que cubra todos los tipos y todas las compañías.",
+      limitsGap: "EPOC con tabaco: en varias compañías designadas el cuestionario a menudo no emite. En el gráfico de un solo padecimiento de Transamerica, EPOC, diabetes o enfermedad renal todavía pueden considerarse cuando ese es el único factor listado. El perfil completo — peso, recetas, otros diagnósticos — decide. No elegimos un “sí” ni un “no” universal.",
+      costH: "Qué cuesta un plan nivelado si el cuestionario puede emitir",
+      costP: "Estas primas mensuales son ilustrativas de gastos finales nivelados, no fumador, compañías designadas. Léalas como el tamaño del producto si el cuestionario emite un plan inmediato — no como “el precio de tener una condición.” Una condición previa puede impedir esa fila: el precio real puede ser más alto, o el producto no emite. La aceptación garantizada, a la misma edad y monto, suele costar más y espera unos dos años por muerte natural. No es una oferta.",
+      coH: "Compañías designadas (gastos finales)",
+      coP: "Fichas educativas. El estado, el tabaco y el historial cambian la oferta. Las licencias actuales están en la página de licencias.",
+      applyH: "Cómo solicitar sin atascar un reclamo futuro",
+      applyP: "La compañía revisa lo que usted dice y lo que ya está en bases de recetas. Diga la verdad aunque tema un “sí.” Un “no” incorrecto es peor que un plan con espera. Mejor Vida Seguros compara más de un cuestionario; no enviamos una sola solicitud a ciegas.",
       faq1q: "¿Tener una condición preexistente me impide comprar gastos finales?",
-      faq1a: "No por sí sola. La mayoría de los planes de gastos finales existen precisamente para personas mayores con historial médico. Lo que cambia es si el beneficio es inmediato, gradual o con espera de dos años.",
+      faq1a: "No por sí sola. Estos planes existen, en gran parte, para adultos con historial médico. Lo que cambia es si el monto puede pagar desde el primer pago, si hay un período limitado al inicio, o si hay espera de unos dos años.",
       faq2q: "¿Puedo comprar por internet un plan “sin examen y sin espera”?",
       faq2a: "En las compañías que cotizamos, “sin examen” sigue teniendo preguntas. La aceptación garantizada no tiene preguntas y siempre tiene espera por muerte natural. No cotizamos un producto que combine las dos cosas.",
       faq3q: "¿La diabetes o la presión alta me mandan a aceptación garantizada?",
-      faq3a: "Casi nunca, si esa es la única condición y no hay complicaciones graves. Cotice primero un plan nivelado.",
+      faq3a: "Casi nunca, si esa es la única condición y no hay complicaciones graves. Cotice primero un plan con preguntas.",
       faq4q: "¿El precio sube porque tengo una condición?",
-      faq4a: "En un plan nivelado, el precio sigue sobre todo a edad, sexo y tabaco, y a la clase (Preferred o Standard). En GIWL la salud no cambia la prima: por eso suele costar más.",
+      faq4a: "En un plan nivelado, el precio sigue sobre todo a edad, sexo y tabaco. Algunos productos tienen más de un precio si el mismo cuestionario todavía emite. En aceptación garantizada la salud no cambia la prima: por eso suele costar más.",
       faq5q: "¿Debo mencionar todos los medicamentos?",
-      faq5a: "Sí. Las compañías revisan historial de recetas. Un medicamento de cáncer, de oxígeno o de diálisis que no coincida con sus respuestas frena o anula el contrato.",
+      faq5a: "Sí. Las compañías revisan historial de recetas. Un medicamento que no coincida con sus respuestas puede frenar o anular el contrato.",
       faq6q: "¿Hasta qué edad puedo comprar?",
-      faq6a: "Depende del producto. Muchos gastos finales llegan a 85. Accendo Level puede emitir hasta 89. GIWL designada suele cortar a los 80.",
+      faq6a: "Depende del producto. Living Promise Nivelado emite de 45 a 85. Accendo Nivelado puede emitir hasta 89 (tope $25,000 a los 76–89). Immediate Solution llega a 85. Eagle Select Nivelado llega a 85; algunos diseños con tabaco o con beneficio limitado cortan antes, a menudo a los 75. La aceptación garantizada que cotizamos suele cortar a los 80. No publicamos una emisión nueva a los 90.",
+      faq7q: "¿Esto es lo mismo que un funeral prepago?",
+      faq7a: "No. El prepago es un contrato con una funeraria. Gastos finales es seguro de vida: efectivo para el beneficiario. La Funeral Rule de la FTC trata de cómo se compran servicios funerarios; no convierte una póliza en un funeral ya pagado.",
+      faq8q: "¿El Seguro Social o Medicare pagan el funeral?",
+      faq8a: "El Seguro Social puede pagar $255 una sola vez, si se cumplen sus reglas. Eso no cubre un sepelio. Medicare es seguro médico; no lo tratamos aquí como un plan funerario. El efectivo de una póliza de vida es otra cosa.",
       nextLead: "Pida una cotización con su edad, tabaco y medicamentos, o llame a Mejor Vida Seguros.",
-      nextMore: `Si ya sabe que el cuestionario no va a pasar, vaya directo a <a href="${L.gi}">aceptación garantizada</a>.`,
-      quote2: "Nivelado o con espera",
+      nextMore: "Si ya sabe que el cuestionario no va a pasar, vaya directo a <a href=\"" + L.gi + "\">aceptación garantizada</a>. Si la necesidad es hipoteca o años de ingreso, vea <a href=\"" + L.termCond + "\">temporal con una condición de salud</a>.",
+      quote2: "Según su salud y edad",
     };
   }
   return {
     ...b,
-    title: "Final expense with pre-existing conditions: how to qualify (2026) | Mejor Vida Insurance",
-    desc: "A pre-existing condition does not automatically close final expense insurance. How level, graded, and guaranteed-acceptance plans compare at appointed companies.",
-    h1: "How to get final expense insurance when you already have a health condition",
-    lead: "A pre-existing condition is a diagnosis or treatment that was already there when you apply. On final expense that <strong>does not mean an automatic decline</strong>. Many people with diabetes, high blood pressure, or an old heart attack still qualify for a level plan: there are health questions, not an in-office exam, and the full benefit can apply from the first covered payment.",
+    ...src,
+    hideJsRateNote: true,
+    coAges: "Ages",
+    coWait: "2-year wait",
+    coAetnaProduct: "Accendo Level",
+    coTaProduct: "Immediate Solution",
+    coTaAmt: "From $1,000; cap by age (up to $50,000)",
+    coAmericoAmt: "$5,000–$50,000; $40,000 cap at ages 76–85",
+    coGiProduct: "Guaranteed acceptance (GIWL)",
+    coGiFoot: "One guaranteed-acceptance policy per insured every 12 months; that company’s total does not exceed $25,000. Educational — not a binding quote.",
+    title: "Final expense insurance with a health condition (2026) | Mejor Vida Insurance",
+    desc: "A pre-existing condition does not automatically close final expense insurance. What it is, how health is reviewed, when a plan can pay from the first payment, and what to do if it cannot.",
+    h1: "Can you buy final expense insurance if you already have a health condition?",
+    lead: "Often yes. <strong>Final expense insurance</strong> is a small policy for a funeral, cremation, and short debts. A condition that already existed when you apply is <strong>not an automatic no</strong>. There is also no no-questions plan that pays the full amount for natural death from day one.",
     crumbEnd: "Pre-existing conditions",
-    take1: "There are three paths: a <strong>level or immediate plan</strong> (questions, often no two-year wait), a <strong>graded or modified</strong> plan (limited benefit at first), and <strong>guaranteed acceptance</strong> (no questions, always a wait for natural death).",
-    take2: "No company we quote offers <strong>zero questions and a full natural-death benefit from day one</strong>. Ads that say “no exam and no waiting period” almost always still have a questionnaire.",
-    take3: "Mejor Vida Insurance compares appointed companies — Mutual of Omaha Living Promise, Accendo, Transamerica Immediate Solution, Americo, and, when needed, Corebridge GIWL — using your age, tobacco, and real answers, not a generic internet list.",
-    callout: "Start with the questionnaire. Guaranteed acceptance is plan B when that questionnaire cannot issue a day-one benefit. It is not the first try for diabetes or high blood pressure.",
-    pathsH: "Three policy types, in plain language",
-    pathsP: "The brand name changes. What matters is when the company pays and what you have to answer.",
-    p1T: "Level or immediate",
-    p1: "There are questions and a review of prescriptions and databases. If you qualify, the full amount can apply for covered natural death from the first payment. It is usually the lowest price per dollar. Living Promise Level issues ages 45–85, up to about $50,000. Accendo Level can issue through 89 ($25,000 cap at 76–89). Transamerica Immediate Solution goes through 85.",
-    p2T: "Graded or modified",
-    p2: "There are still questions. In the first years, a non-accidental death may pay only part of the face amount or return premiums plus contract interest. Accendo Modified, for example, typically returns 110% of earned premiums in years 1–2 for non-accidental death and the full amount from year 3. A covered accident can pay in full from the start.",
-    p3T: "Guaranteed acceptance",
-    p3: `There are no health questions. Within the age and amount, you are not declined for medical history. There is always about a two-year wait for non-accidental death. Corebridge GIWL: ages 50–80, $5,000–$25,000; during the wait, 110% of premiums paid. See <a href="${L.gi}">guaranteed acceptance</a>.`,
-    mythH: "There is no “guaranteed approval with no waiting period”",
-    mythP: "If the company knows nothing about your health, it cannot pay $10,000 or $25,000 after collecting a few premiums. That is why guaranteed acceptance carries a wait. The path to a day-one benefit is a plan with questions you can answer without hitting that product’s knockouts — or, on some products, a “yes” that still leaves an immediate plan at another rate class.",
-    howH: "How we find the product that fits",
-    howP: "There is no “best company for everyone.” There is a company whose questionnaire matches your history. The same diagnosis can be level at one company and GIWL-only at another.",
-    how1T: "Facts, not guesses",
-    how1: "Age, height, weight, tobacco, medications, hospital stays, and oxygen if it was prescribed. A “no” that should have been “yes” can void a claim.",
-    how2T: "Several appointed companies",
-    how2: "The Living Promise questions are not Accendo’s and not Transamerica’s. That is why we compare, instead of sending one blind application.",
-    how3T: "Then the price",
-    how3: "Price follows age, sex, tobacco, and class (Preferred, Standard, tobacco). Health decides the class and whether there is a wait; we do not invent a separate discount.",
-    dirH: "Coverage by condition",
-    dirP: "These guides use the rules of the companies we quote. This is not a 60-disease directory: these are the situations that show up most on final expense and that we have underwriting data for.",
+    take1: "There are three paths. A <strong>level plan</strong> (defined below) can pay the full amount from the first covered payment, with health questions. A graded or modified plan limits that payment at first. Guaranteed acceptance asks no questions and waits about two years for natural death.",
+    take2: "No company we quote offers <strong>zero questions and a full natural-death benefit from day one</strong>. “No exam” is not the same as “no questions.”",
+    take3:
+      "Start with the questionnaire. <a href=\"" +
+      L.gi +
+      "\">Guaranteed acceptance</a> is plan B when that questionnaire cannot issue — not the first try for diabetes or high blood pressure.",
+    callout: "Give the diagnosis, the year, the medications, and whether you use tobacco. That decides the product and the price — not the “no exam and no waiting period” headline.",
+    needH: "The question people actually bring",
+    needP1: "Families shop this coverage because a funeral, the cemetery, and small debts can fall on relatives. Social Security may pay a one-time $255 amount if its rules are met; that does not cover a funeral. Life-insurance money is cash to the person you named. It is not a contract with a funeral home.",
+    needP2: "The fear with a diagnosis is usually concrete: “Can I still leave something for that bill, or will I only be sold a plan that waits two years?” The rest of this page teaches how the product works. Company names come later.",
+    whatH: "What final expense is, and what counts as a pre-existing condition",
+    whatP1: "You pay a <strong>premium</strong> — the regular bill. If you die and the contract is current, the <strong>beneficiary</strong> (the person you named) receives the <strong>death benefit</strong>: the contract amount, in cash. The <a href=\"https://content.naic.org/consumer/life-insurance.htm\" rel=\"noopener\" target=\"_blank\">NAIC</a> describes life insurance this way: it is not a government savings account, and health answers matter at claim time.",
+    whatP2: "Final expense, burial, and funeral insurance, in practice, point to the same idea: small whole life. <strong>Whole life</strong> means the coverage does not end after 10 or 20 years while you pay on time. Amounts at the companies we quote usually run from a few thousand dollars up to about $50,000, depending on age and product. It does not replace large term coverage for a mortgage or years of income.",
+    whatP3: "A pre-existing condition is a diagnosis, treatment, or symptoms that already existed when you apply. The CDC notes that many people live for years with a chronic disease. That is health. An insurer does not treat the disease. It decides whether that history, as written and as it appears in prescriptions, fits a product it is willing to issue.",
+    howH: "How an insurer reviews health on final expense",
+    howP1: "On these small plans there is almost never an in-office lab visit. There are questions, and the company usually reviews prescriptions you already filled. A “no” that should have been “yes” can stall or affect a claim. The NAIC reminds consumers that honest answers matter at claim time.",
+    howP2: "A “no exam” headline does not mean “no history.” If the company asks nothing, it cannot pay $10,000 or $25,000 after collecting a few premiums. That is why the path to a full amount from the first payment is a plan with questions your file can answer.",
+    howP3: "The diagnosis word — diabetes, heart, high blood pressure — does not decide alone. The date, the treatment, tobacco, weight, and a second problem matter. An old, stable event is not read the same as a recent one or one with complications. If the questionnaire cannot issue, the next product is not “the same plan with no questions.” It is a different, smaller contract with a wait.",
+    pathsH: "Three paths, in plain language",
+    path1T: "A level plan (sometimes called immediate)",
+    path1: "There are questions. If the company issues, the full amount can apply for covered natural death from the first payment. It is usually the lowest price per dollar of these three. Appointed examples: Mutual of Omaha Living Promise Level, ages 45–85, about $2,000–$50,000; Accendo Level, ages 40–89, with a $25,000 cap at ages 76–89; Transamerica Immediate Solution, through 85, from $1,000, with a cap that falls with age; Americo Eagle Select Level, ages 40–85, $5,000–$50,000 ($40,000 cap at ages 76–85). We do not publish a new final-expense issue at age 90.",
+    path2T: "A graded or modified plan",
+    path2: "There are still questions. In the first years, a non-accidental death may pay only part of the amount or return premiums as the contract writes it. On Accendo Modified, years 1–2 typically return 110% of earned premiums for non-accidental death; the full amount applies from year 3; a covered accident can pay in full from the start. That design issues ages 40–75, up to $25,000. Living Promise also has a graded plan (ages 45–80, up to about $20,000) that limits the natural-death benefit in the first two years; we do not mix that formula with Accendo’s.",
+    path3T: "Guaranteed acceptance",
+    path3:
+      "There are no health questions. Within the age and amount, medical history does not close the application. There is always about a two-year wait for non-accidental death. That product is called GIWL: guaranteed-acceptance whole life. The one we quote is Corebridge, ages 50–80, $5,000–$25,000; during the wait, 110% of premiums paid. See <a href=\"" +
+      L.gi +
+      "\">guaranteed acceptance</a>.",
+    pathsNote: "No appointed company we quote offers zero questions and a full natural-death benefit from day one. If an ad combines both, it is not a product we quote.",
+    vsH: "What changes across those paths",
+    vsCol1: "Level",
+    vsCol1Sub: "Questions; full amount if it issues",
+    vsCol2: "Graded or modified",
+    vsCol2Sub: "Questions; limited pay at first",
+    vsCol3: "Guaranteed acceptance",
+    vsCol3Sub: "No questions; wait for natural death",
+    vsR1H: "Health questions",
+    vsR1A: "Yes",
+    vsR1B: "Yes",
+    vsR1C: "No",
+    vsR2H: "When the full amount pays (natural death)",
+    vsR2A: "From the first covered payment, if it issues",
+    vsR2B: "After the early contract years",
+    vsR2C: "After about two years",
+    vsR3H: "Typical amounts",
+    vsR3A: "Thousands up to about $50,000, by age",
+    vsR3B: "Usually lower than the level plan",
+    vsR3C: "$5,000–$25,000 on what we quote",
+    vsR4H: "Price, in general",
+    vsR4A: "Lowest per dollar of these three",
+    vsR4B: "In the middle, if that product exists for your file",
+    vsR4C: "Usually the highest: health does not change that premium",
+    vsLearn: "Read the chart as a map, not a quote. The live file — dates, prescriptions, tobacco — still decides.",
+    considerH: "What helps, and what does not",
+    considerP: "Answering the questionnaire is usually the advantage: you may open a larger amount, a lower price, and no two-year wait. The limitation is the same questionnaire: a recent event, active treatment, several conditions together, or tobacco combined with a lung problem can close the immediate plan. Waiting “until I am healthier” only raises the age if the diagnosis is already stable. Waiting can matter if there has just been a heart attack, a stroke, or cancer in treatment: some questions look at time windows.",
+    considerP2: "A prepaid funeral is a contract with a funeral home. The <a href=\"https://consumer.ftc.gov/articles/ftc-funeral-rule\" rel=\"noopener\" target=\"_blank\">FTC Funeral Rule</a> is about how funeral goods and services are sold. Final expense insurance is different: cash for the person you named. It is not the same as “the funeral is already paid.”",
+    dirH: "Guides by condition",
+    dirP: "These pages cover the situations we see most on final expense and that we can verify. This is not a directory of dozens of diseases. Each guide starts with the health idea, then lists only what we can verify.",
     d1H: "Diabetes",
-    d1: "Type 1 or 2, with or without insulin, often stays on simplified issue if there are no severe complications.",
+    d1: "Type 1 or 2, with or without insulin, often still fits a plan with questions if there are no severe complications. By itself it is not a two-year wait.",
     d2H: "Heart disease",
-    d2: "An old heart attack often stays simplified. Heart failure or a recent event changes the path.",
+    d2: "An old heart attack is not the same as heart failure or an event this year. The date and what remained matter more than the word “heart.”",
     d3H: "High blood pressure",
     d3: "It is one of the most common conditions. By itself it almost never pushes you to guaranteed acceptance.",
     d4H: "COPD",
-    d4: "Many plans still quote. Tobacco and oxygen prescribed for the lungs usually narrow the options.",
+    d4: "Many questionnaires still quote. Tobacco and oxygen prescribed for the lungs usually narrow the options more than the word “COPD” alone.",
     d5H: "Cancer",
-    d5: "Active treatment often goes to GIWL. Cancer-free and off treatment for a time can return to simplified issue.",
+    d5: "Active treatment often closes a plan with questions. Cancer-free and off treatment for a time can quote again. The type and the date matter.",
     d6H: "Kidney",
     d6: "Stage and whether dialysis is in use matter more than the word “kidney.”",
     d7H: "Disability",
     d7: "A Social Security check is not the same as a “no” on the questionnaire. A wheelchair and help with bathing are reviewed separately.",
     d8H: "HIV",
-    d8: "On appointed simplified-issue companies this is usually a decline. The usual path is GIWL.",
+    d8: "On the questionnaire companies we quote, this diagnosis typically will not issue. The usual path is guaranteed acceptance.",
     d9H: "Stroke or TIA",
-    d9: "An event years ago is not the same as one in the last two years.",
-    knockH: "When simplified issue often cannot issue",
-    knockP: "At appointed companies, a plan with questions often cannot issue if one of these situations applies. That is when we look at GIWL. This is not a diagnosis and not a legal list — a quote confirms the product.",
+    d9: "An event years ago is not the same as one in the last two years. Give the year and whether a limitation remained.",
+    limitsH: "When a plan with questions often cannot issue",
+    limitsP: "At the companies we quote, a questionnaire plan often cannot issue if one of these situations applies. That is when we look at guaranteed acceptance. This is not a diagnosis and not a legal list — a quote confirms the product.",
     k1: "HIV or AIDS",
     k2: "Alzheimer’s or dementia",
-    k3: "Hospital, nursing home, hospice, skilled nursing, or home health care",
+    k3: "Hospital, nursing home, hospice, skilled nursing, or home health care right now",
     k4: "Oxygen for a lung condition (not sleep apnea)",
     k5: "Wheelchair, scooter, or bedridden from illness (not a short-term injury)",
-    k6: "Cancer in active treatment (some skin cancers or very early stages may still go simplified)",
+    k6: "Cancer in active treatment",
     k7: "Alcohol or drug abuse, or treatment for it, in the last 24 months",
     k8: "Mental incapacity or terminal illness",
     k9: "Dialysis, end-stage kidney disease, or an organ transplant",
-    knockNote: "COPD with tobacco is another common example: appointed simplified issue often declines, and GIWL may still be a path. Transamerica’s single-condition chart can still consider COPD, diabetes, or kidney disease at Standard when it is the only listed factor. The full profile — build, prescriptions, other diagnoses — decides.",
-    costH: "What it costs if you qualify for a level plan",
-    costP: "These premiums are illustrative level final expense, non-tobacco, appointed companies. They apply if the questionnaire issues an immediate plan. GIWL costs more at the same age and amount, and it carries a wait. Not an offer.",
+    limitsNote: "Some skin cancers or very early stages can still quote a plan with questions. There is no single public rule that covers every type at every company.",
+    limitsGap: "COPD with tobacco: at several appointed companies the questionnaire often cannot issue. On Transamerica’s single-condition chart, COPD, diabetes, or kidney disease can still be considered when that is the only listed factor. The full profile — weight, prescriptions, other diagnoses — decides. We will not pick a universal yes or no.",
+    costH: "What a level plan costs if the questionnaire can issue",
+    costP: "These monthly premiums are illustrative level final expense, non-tobacco, appointed companies. Read them as the size of the product if the questionnaire issues an immediate plan — not as “the price of having a condition.” A pre-existing condition can block that row: the real price may be higher, or the product does not issue. Guaranteed acceptance, at the same age and amount, usually costs more and waits about two years for natural death. Not an offer.",
+    coH: "Appointed companies (final expense)",
+    coP: "Educational cards. State, tobacco, and history change the offer. Current licenses are on the licenses page.",
     applyH: "How to apply without wrecking a future claim",
-    applyP: "The company reviews what you say and what is already in prescription and claims databases. Tell the truth even if you fear a “yes.” A wrong “no” is worse than a plan with a wait.",
+    applyP: "The company reviews what you say and what is already in prescription databases. Tell the truth even if you fear a “yes.” A wrong “no” is worse than a plan with a wait. Mejor Vida Insurance compares more than one questionnaire; we do not send a single blind application.",
     faq1q: "Does a pre-existing condition stop me from buying final expense?",
-    faq1a: "Not by itself. Most final expense plans exist for older adults with a medical history. What changes is whether the benefit is immediate, graded, or has a two-year wait.",
+    faq1a: "Not by itself. These plans exist, in large part, for adults with a medical history. What changes is whether the amount can pay from the first payment, whether the early years are limited, or whether there is about a two-year wait.",
     faq2q: "Can I buy an online plan with “no exam and no waiting period”?",
     faq2a: "At the companies we quote, “no exam” still has questions. Guaranteed acceptance has no questions and always has a wait for natural death. We do not quote a product that combines both.",
     faq3q: "Do diabetes or high blood pressure send me to guaranteed acceptance?",
-    faq3a: "Almost never, if that is the only condition and there are no severe complications. Quote a level plan first.",
+    faq3a: "Almost never, if that is the only condition and there are no severe complications. Quote a plan with questions first.",
     faq4q: "Does the price go up because I have a condition?",
-    faq4a: "On a level plan, price mainly follows age, sex, and tobacco, plus class (Preferred or Standard). On GIWL, health does not change the premium — that is why it usually costs more.",
+    faq4a: "On a level plan, price mainly follows age, sex, and tobacco. Some products have more than one price if the same questionnaire still issues. On guaranteed acceptance, health does not change the premium — that is why it usually costs more.",
     faq5q: "Do I have to list every medication?",
-    faq5a: "Yes. Companies review prescription history. A cancer, oxygen, or dialysis drug that does not match your answers can stall or void the contract.",
+    faq5a: "Yes. Companies review prescription history. A medication that does not match your answers can stall or void the contract.",
     faq6q: "Until what age can I buy?",
-    faq6a: "It depends on the product. Many final expense plans go through 85. Accendo Level can issue through 89. Appointed GIWL usually stops at 80.",
+    faq6a: "It depends on the product. Living Promise Level issues ages 45–85. Accendo Level can issue through 89 ($25,000 cap at ages 76–89). Immediate Solution goes through 85. Eagle Select Level goes through 85; some tobacco or limited-benefit designs stop earlier, often at 75. The guaranteed acceptance we quote usually stops at 80. We do not publish a new issue at 90.",
+    faq7q: "Is this the same as a prepaid funeral?",
+    faq7a: "No. A prepaid funeral is a contract with a funeral home. Final expense is life insurance: cash for the beneficiary. The FTC Funeral Rule is about how funeral services are sold; it does not turn a policy into a funeral that is already paid.",
+    faq8q: "Do Social Security or Medicare pay for the funeral?",
+    faq8a: "Social Security may pay $255 one time, if its rules are met. That does not cover a funeral. Medicare is medical insurance; we do not treat it here as a funeral plan. Cash from a life policy is a different thing.",
     nextLead: "Ask for a quote with your age, tobacco, and medications, or call Mejor Vida Insurance.",
-    nextMore: `If you already know the questionnaire will not pass, go straight to <a href="${L.gi}">guaranteed acceptance</a>.`,
-    quote2: "Level or with a wait",
+    nextMore: "If you already know the questionnaire will not pass, go straight to <a href=\"" + L.gi + "\">guaranteed acceptance</a>. If the need is a mortgage or years of income, see <a href=\"" + L.termCond + "\">term with a health condition</a>.",
+    quote2: "For your health and age",
   };
 }
 
 function condHubMain(lang, page, c) {
   const isEs = lang === "es";
   const L = LINKS[lang];
-  const inner = `<section class="lic-section" id="paths">
-<h2>${c.pathsH}</h2>
-<p>${c.pathsP}</p>
-<div class="lic-type-block"><h3>${c.p1T}</h3><p>${c.p1}</p></div>
-<div class="lic-type-block"><h3>${c.p2T}</h3><p>${c.p2}</p></div>
-<div class="lic-type-block"><h3>${c.p3T}</h3><p>${c.p3}</p></div>
+  const inner = `<section class="lic-section" id="need">
+<h2>${c.needH}</h2>
+<p>${c.needP1}</p>
+<p>${c.needP2}</p>
 </section>
-<section class="lic-section" id="myth">
-<h2>${c.mythH}</h2>
-<p>${c.mythP}</p>
+<section class="lic-section" id="what">
+<h2>${c.whatH}</h2>
+<p>${c.whatP1}</p>
+<p>${c.whatP2}</p>
+<p>${c.whatP3}</p>
 </section>
 <section class="lic-section" id="how">
 <h2>${c.howH}</h2>
-<p>${c.howP}</p>
-<ol class="lic-lesson-steps">
-<li><strong>${c.how1T}.</strong> ${c.how1}</li>
-<li><strong>${c.how2T}.</strong> ${c.how2}</li>
-<li><strong>${c.how3T}.</strong> ${c.how3}</li>
-</ol>
+<p>${c.howP1}</p>
+<p>${c.howP2}</p>
+<p>${c.howP3}</p>
+</section>
+<section class="lic-section" id="paths">
+<h2>${c.pathsH}</h2>
+<div class="lic-type-block"><h3>${c.path1T}</h3><p>${c.path1}</p></div>
+<div class="lic-type-block"><h3>${c.path2T}</h3><p>${c.path2}</p></div>
+<div class="lic-type-block"><h3>${c.path3T}</h3><p>${c.path3}</p></div>
+<p class="lic-rate-note">${c.pathsNote}</p>
+${planCompareHtml(c)}
+</section>
+<section class="lic-section" id="consider">
+<h2>${c.considerH}</h2>
+<p>${c.considerP}</p>
+<p>${c.considerP2}</p>
+</section>
+<section class="lic-section lic-faq" id="faq">
+<h2>${c.faqTitle}</h2>
+${faqsHtml(c)}
 </section>
 <section class="lic-section" id="directory">
 <h2>${c.dirH}</h2>
@@ -743,9 +875,9 @@ function condHubMain(lang, page, c) {
 <div><h3><a href="${L.stroke}">${c.d9H}</a></h3><p>${c.d9}</p></div>
 </div>
 </section>
-<section class="lic-section" id="knockouts">
-<h2>${c.knockH}</h2>
-<p>${c.knockP}</p>
+<section class="lic-section" id="limits">
+<h2>${c.limitsH}</h2>
+<p>${c.limitsP}</p>
 <ul>
 <li>${c.k1}</li>
 <li>${c.k2}</li>
@@ -757,12 +889,19 @@ function condHubMain(lang, page, c) {
 <li>${c.k8}</li>
 <li>${c.k9}</li>
 </ul>
-<p class="lic-rate-note">${c.knockNote}</p>
+<p class="lic-rate-note">${c.limitsNote}</p>
+<p class="lic-factor__gap">${c.limitsGap}</p>
 </section>
 <section class="lic-section" id="cost">
 <h2>${c.costH}</h2>
 <p>${c.costP}</p>
 ${feRateBlock(c, L.quote)}
+</section>
+<section class="lic-section lic-guide" id="companies">
+<h2>${c.coH}</h2>
+<p>${c.coP}</p>
+${appointedCardsHtml(lang, c)}
+${giCardHtml(lang, c)}
 </section>
 <section class="lic-section" id="apply">
 <h2>${c.applyH}</h2>
@@ -770,22 +909,23 @@ ${feRateBlock(c, L.quote)}
 </section>`;
   return condShell(lang, page, c, {
     isHub: true,
+    omitFaq: true,
     toc: isEs
       ? [
-          ["#paths", "Tipos"],
-          ["#directory", "Por condición"],
-          ["#knockouts", "Cuándo no"],
-          ["#cost", "Costo"],
-          ["#apply", "Cómo"],
+          ["#need", "La pregunta"],
+          ["#how", "Cómo funciona"],
+          ["#paths", "Caminos"],
           ["#faq", "Preguntas"],
+          ["#directory", "Por condición"],
+          ["#cost", "Costo"],
         ]
       : [
-          ["#paths", "Types"],
-          ["#directory", "By condition"],
-          ["#knockouts", "When not"],
-          ["#cost", "Cost"],
-          ["#apply", "How"],
+          ["#need", "The question"],
+          ["#how", "How it works"],
+          ["#paths", "Paths"],
           ["#faq", "Questions"],
+          ["#directory", "By condition"],
+          ["#cost", "Cost"],
         ],
     inner,
   });
