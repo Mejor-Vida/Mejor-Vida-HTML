@@ -22,8 +22,8 @@
         {
           "slug": "cuanto-cuesta-seguro-gastos-finales",
           "question": "¿Cuánto cuesta un seguro de gastos finales?",
-          "cardLabel": "Cuánto cuesta",
-          "teaser": "Rangos de precio por edad, tabaco y cobertura — con ejemplos para Nebraska.",
+          "cardLabel": "Cuánto cuesta el seguro",
+          "teaser": "Precio mensual del seguro por edad, salud, tabaco y cobertura — no la factura de la funeraria.",
           "image": "fe-guide-card-cuanto-cuesta"
         },
         {
@@ -55,9 +55,9 @@
       "title": "Costos y cobertura",
       "guides": [
         {
-          "slug": "cuanto-cuesta-funeral-nebraska",
-          "question": "¿Cuánto cuesta un funeral en Nebraska?",
-          "teaser": "Promedios locales, entierro vs cremación y cómo se relaciona con su cobertura."
+          "slug": "cuanto-cuesta-un-funeral",
+          "question": "¿Cuánto cuesta un funeral?",
+          "teaser": "Promedios nacionales de entierro y cremación, qué suele ir aparte y cómo pedir la lista de precios de la funeraria."
         },
         {
           "slug": "cuanta-cobertura-gastos-finales-necesito",

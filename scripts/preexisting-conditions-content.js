@@ -74,7 +74,7 @@ function pair(isEs, es, en) {
 }
 
 function faqsHtml(c) {
-  return [1, 2, 3, 4, 5, 6, 7, 8]
+  return [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
     .filter((n) => c["faq" + n + "q"])
     .map(
       (n, i) =>
@@ -4327,6 +4327,11 @@ function strokeMain(lang, page, c) {
 
 module.exports = {
   LINKS,
+  appointedCardsHtml,
+  giCardHtml,
+  planCompareHtml,
+  faqsHtml,
+  nextStepBandHtml,
   copyCondHub,
   condHubMain,
   copyCondTerm,

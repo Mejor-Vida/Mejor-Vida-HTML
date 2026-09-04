@@ -181,6 +181,212 @@
   object-position: 50% 38%;
 }
 
+.lic-hero-media--grandma picture,
+.lic-hero-media--grandma img {
+  object-position: center 32%;
+}
+
+.lic-page--funeral-cost .lic-fun-nfda {
+  display: grid;
+  gap: 0.9rem;
+  margin: 1rem 0 0.35rem;
+}
+
+@media (min-width: 640px) {
+  .lic-page--funeral-cost .lic-fun-nfda {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.lic-page--funeral-cost .lic-fun-nfda__card {
+  background: #fff;
+  border: 1px solid #d7e3f4;
+  border-radius: 0.85rem;
+  padding: 1.15rem 1.2rem 1.2rem;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.05);
+  border-top: 4px solid #0b3a7a;
+}
+
+.lic-page--funeral-cost .lic-fun-nfda__card--gold {
+  border-top-color: #f5a623;
+}
+
+.lic-page--funeral-cost .lic-fun-nfda__kicker {
+  margin: 0 0 0.35rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #64748b;
+}
+
+.lic-page--funeral-cost .lic-fun-nfda__amt {
+  margin: 0;
+  font-size: 2.05rem;
+  line-height: 1.1;
+  font-weight: 800;
+  color: #0b3a7a;
+  font-variant-numeric: tabular-nums;
+}
+
+.lic-page--funeral-cost .lic-fun-nfda__label {
+  margin: 0.4rem 0 0;
+  color: #334155;
+  font-size: 0.98rem;
+  line-height: 1.4;
+}
+
+.lic-page--funeral-cost .lic-fun-bars {
+  display: grid;
+  gap: 0.8rem;
+  margin: 1rem 0 0.4rem;
+}
+
+.lic-page--funeral-cost .lic-fun-bar {
+  background: #fff;
+  border: 1px solid #d7e3f4;
+  border-radius: 0.75rem;
+  padding: 0.85rem 1rem 0.95rem;
+}
+
+.lic-page--funeral-cost .lic-fun-bar__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.lic-page--funeral-cost .lic-fun-bar__label {
+  font-weight: 700;
+  color: #0b3a7a;
+  line-height: 1.3;
+}
+
+.lic-page--funeral-cost .lic-fun-bar__amt {
+  font-weight: 800;
+  color: #0b3a7a;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.lic-page--funeral-cost .lic-fun-bar__track {
+  height: 12px;
+  background: #e8f1fc;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.lic-page--funeral-cost .lic-fun-bar__fill {
+  height: 100%;
+  border-radius: 999px;
+  background: #0b3a7a;
+}
+
+.lic-page--funeral-cost .lic-fun-bar--burial-full .lic-fun-bar__fill {
+  background: linear-gradient(90deg, #0b3a7a, #163f73);
+}
+
+.lic-page--funeral-cost .lic-fun-bar--burial-direct .lic-fun-bar__fill {
+  background: linear-gradient(90deg, #3d4f66, #0b3a7a);
+}
+
+.lic-page--funeral-cost .lic-fun-bar--crem-full .lic-fun-bar__fill {
+  background: linear-gradient(90deg, #0b3a7a, #f5a623);
+}
+
+.lic-page--funeral-cost .lic-fun-bar--crem-direct .lic-fun-bar__fill {
+  background: #f5a623;
+}
+
+.lic-page--funeral-cost .lic-fun-states {
+  margin: 1.1rem 0 0;
+  background: #fff;
+  border: 1px solid #d7e3f4;
+  border-radius: 0.75rem;
+  padding: 0.35rem 0.85rem 0.85rem;
+}
+
+.lic-page--funeral-cost .lic-fun-states summary {
+  cursor: pointer;
+  font-weight: 700;
+  color: #0b3a7a;
+  padding: 0.7rem 0.2rem;
+  list-style: none;
+}
+
+.lic-page--funeral-cost .lic-fun-states summary::-webkit-details-marker {
+  display: none;
+}
+
+.lic-page--funeral-cost .lic-fun-states summary::after {
+  content: " +";
+  font-weight: 800;
+  color: #f5a623;
+}
+
+.lic-page--funeral-cost .lic-fun-states[open] summary::after {
+  content: " −";
+}
+
+.lic-page--funeral-cost .lic-fun-table-wrap {
+  overflow-x: auto;
+  margin-top: 0.35rem;
+  border-radius: 0.55rem;
+  border: 1px solid #d7e3f4;
+}
+
+.lic-page--funeral-cost .lic-fun-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 640px;
+  background: #fff;
+}
+
+.lic-page--funeral-cost .lic-fun-table caption {
+  caption-side: bottom;
+  text-align: left;
+  padding: 0.65rem 0.75rem 0.2rem;
+  color: #64748b;
+  font-size: 0.86rem;
+}
+
+.lic-page--funeral-cost .lic-fun-table th,
+.lic-page--funeral-cost .lic-fun-table td {
+  padding: 0.55rem 0.7rem;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  font-size: 0.92rem;
+  border-bottom: 1px solid #e8eef6;
+}
+
+.lic-page--funeral-cost .lic-fun-table thead th {
+  background: #0b3a7a;
+  color: #fff;
+  font-weight: 700;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.lic-page--funeral-cost .lic-fun-table thead th:first-child,
+.lic-page--funeral-cost .lic-fun-table tbody th {
+  text-align: left;
+  white-space: nowrap;
+}
+
+.lic-page--funeral-cost .lic-fun-table tbody th {
+  font-weight: 600;
+  color: #0b3a7a;
+}
+
+.lic-page--funeral-cost .lic-fun-table tbody tr:nth-child(even) {
+  background: #f4f8fd;
+}
+
+.lic-page--funeral-cost .lic-fun-table tbody tr:hover {
+  background: #eef4fb;
+}
+
 .lic-hero-media::after {
   content: "";
   position: absolute;

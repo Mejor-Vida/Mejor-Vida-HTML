@@ -57,6 +57,8 @@ const {
   copyStroke,
   strokeMain,
 } = require("./preexisting-conditions-content");
+const { copyFeProduct, feProductMain } = require("./final-expense-insurance-content");
+const { copyFuneralCost, funeralCostMain } = require("./funeral-cost-content");
 const { quoteRailHtml } = require("./lic-quote-rail");
 const ES_HEADER = path.join(ROOT, "includes/site-header-inner.html");
 const EN_HEADER = path.join(ROOT, "includes/en-site-header.html");
@@ -251,6 +253,28 @@ const PAGES = {
       width: 1024,
       height: 682,
       cache: "20260828-heroes",
+    },
+  },
+  feProduct: {
+    esFile: "seguro-gastos-finales.html",
+    enFile: "final-expense-insurance.html",
+    hero: {
+      base: "fep-hero-rainforest",
+      modifier: "rainforest",
+      width: 1024,
+      height: 682,
+      cache: "20260902-fe",
+    },
+  },
+  funeralCost: {
+    esFile: "cuanto-cuesta-un-funeral.html",
+    enFile: "how-much-does-a-funeral-cost.html",
+    hero: {
+      base: "grandma-grandson",
+      modifier: "grandma",
+      width: 1200,
+      height: 800,
+      cache: "20260903-funeral",
     },
   },
   condHub: {
@@ -1107,7 +1131,11 @@ function headHtml(lang, page, c, kind) {
                           kind === "familyMembers" ||
                           kind === "findPolicy"
                         ? "lic-page lic-page--seniors lic-page--family"
-                        : kind === "condHub" ||
+                        : kind === "feProduct"
+                          ? "lic-page lic-page--seniors lic-page--fe-product"
+                          : kind === "funeralCost"
+                            ? "lic-page lic-page--seniors lic-page--funeral-cost"
+                          : kind === "condHub" ||
                             kind === "condTerm" ||
                             kind === "diabetes" ||
                             kind === "heart" ||
@@ -1163,7 +1191,7 @@ function headHtml(lang, page, c, kind) {
 <link href="${prefix}css/quote-flow-shared.css?v=20260723-mobile-menu" rel="stylesheet"/>
 <link href="${prefix}css/site-header.css?v=20260723-ver-precios-gold" rel="stylesheet"/>
 <link href="${prefix}css/nav-life-insurance.css?v=20260831-navicons" rel="stylesheet"/>
-<link href="${prefix}css/life-insurance-cost.css?v=20260831-hbp" rel="stylesheet"/>
+<link href="${prefix}css/life-insurance-cost.css?v=20260903-funeral" rel="stylesheet"/>
 <link href="${prefix}css/mvi-assistant-widget.css?v=20260721-chat-z" rel="stylesheet"/>
 <link href="${prefix}css/fontawesome-mvi.min.css?v=20260723-brands-fix" rel="stylesheet"/>
 <style>body { font-family: Inter, system-ui, -apple-system, sans-serif; }</style>
@@ -1917,6 +1945,28 @@ function examRatesPayload() {
   };
 }
 
+function feProductRatesPayload() {
+  const faces = [5000, 10000, 25000, 50000];
+  const feFile = JSON.parse(
+    fs.readFileSync(path.join(ROOT, "js/final-expense-cost-rates.json"), "utf8")
+  );
+  const fe = feFile.final_expense || feFile;
+  const tables = pickFaceTables(fe.tables, faces);
+  Object.keys(tables).forEach((key) => {
+    tables[key] = (tables[key] || []).filter((row) => Number(row.age) <= 85);
+  });
+  return {
+    final_expense: {
+      source: "",
+      rating: "",
+      as_of: fe.as_of,
+      note: "",
+      faces,
+      tables,
+    },
+  };
+}
+
 function burialRatesPayload() {
   const faces = [10000, 15000, 25000];
   const feFile = JSON.parse(
@@ -2060,7 +2110,17 @@ function giRatesPayload() {
 
 function examRateScripts(lang, kind) {
   const prefix = lang === "es" ? "" : "../";
-  if (kind === "findPolicy") return "";
+  if (kind === "findPolicy" || kind === "funeralCost") return "";
+  if (kind === "feProduct") {
+    const payload = feProductRatesPayload();
+    payload.final_expense.note =
+      lang === "es"
+        ? "Primas mensuales ilustrativas de gastos finales nivelados, no fumador. Cada celda es la más baja entre compañías designadas. Una condición previa puede impedir esa fila. No es cotización vinculante."
+        : "Illustrative monthly level final-expense premiums, non-tobacco. Each cell is the lowest among appointed companies. A pre-existing condition can block that row. Not a binding quote.";
+    return `<script>window.MVI_LIC_RATES = ${JSON.stringify(payload)};</script>
+<script defer src="${prefix}js/life-insurance-cost.js?v=20260902-fe"></script>
+`;
+  }
   if (kind === "children" || kind === "grandchildren") {
     const payload = JSON.parse(
       fs.readFileSync(path.join(ROOT, "js/children-life-cost-rates.json"), "utf8")
@@ -2170,6 +2230,8 @@ function copyFor(kind, lang) {
   if (kind === "siblings") return copySiblings(lang);
   if (kind === "familyMembers") return copyFamilyMembers(lang);
   if (kind === "findPolicy") return copyFindPolicy(lang);
+  if (kind === "feProduct") return copyFeProduct(lang);
+  if (kind === "funeralCost") return copyFuneralCost(lang);
   if (kind === "condHub") return copyCondHub(lang);
   if (kind === "condTerm") return copyCondTerm(lang);
   if (kind === "diabetes") return copyDiabetes(lang);
@@ -2201,6 +2263,8 @@ function mainFor(kind, lang, page, c) {
   if (kind === "siblings") return siblingsMain(lang, page, c);
   if (kind === "familyMembers") return familyMembersMain(lang, page, c);
   if (kind === "findPolicy") return findPolicyMain(lang, page, c);
+  if (kind === "feProduct") return feProductMain(lang, page, c);
+  if (kind === "funeralCost") return funeralCostMain(lang, page, c);
   if (kind === "condHub") return condHubMain(lang, page, c);
   if (kind === "condTerm") return condTermMain(lang, page, c);
   if (kind === "diabetes") return diabetesMain(lang, page, c);
@@ -2260,6 +2324,8 @@ function main() {
     "siblings",
     "familyMembers",
     "findPolicy",
+    "feProduct",
+    "funeralCost",
     "condHub",
     "condTerm",
     "diabetes",

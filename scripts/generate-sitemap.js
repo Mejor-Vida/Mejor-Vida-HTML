@@ -18,6 +18,7 @@ const STATIC_PAGES = [
   { loc: "/seguro-vida-entierro-sin-espera.html", priority: "0.88" },
   { loc: "/seguro-vida-entierro-sin-espera.html", priority: "0.88" },
   { loc: "/guias-gastos-finales.html", priority: "0.85" },
+  { loc: "/cuanto-cuesta-un-funeral.html", priority: "0.88" },
   { loc: "/contact.html", priority: "0.75" },
   { loc: "/quote.html", priority: "0.90" },
   { loc: "/schedule-julie.html", priority: "0.75" },

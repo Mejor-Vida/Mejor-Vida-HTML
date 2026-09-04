@@ -9,7 +9,6 @@ const {
   loadFaqIndex,
   isGuidePublished,
   renderPublishedGuideCard,
-  escHtml,
 } = require("../lib/fe-guide-catalog");
 
 const ROOT = path.join(__dirname, "..");
@@ -18,26 +17,17 @@ const INDEX = path.join(ROOT, "index.html");
 const data = loadFaqIndex();
 
 const htmlParts = [];
-let soonCount = 0;
-for (const cat of data.categories) {
-  const published = cat.guides.filter((g) => isGuidePublished(g.slug));
-  soonCount += cat.guides.length - published.length;
-  if (!published.length) continue;
-  const hasMedia = published.some((g) => g.image);
-  // Media card grid sits under the section H2; skip redundant category labels like "Lo esencial".
-  if (!hasMedia) {
-    htmlParts.push(
-      `      <h3 class="h5 fw-bold mt-4 mb-3" style="color:#1a365d;">${escHtml(cat.title)}</h3>`
-    );
-  }
-  htmlParts.push(
-    `      <div class="row ${hasMedia ? "g-4" : "g-3"} mb-2${hasMedia ? " fe-guide-media-grid" : ""}">`
-  );
-  for (const g of published) {
-    htmlParts.push(renderPublishedGuideCard(g, { imagePrefix: "img/opt/" }));
-  }
-  htmlParts.push(`      </div>`);
+const esencial = data.categories.find((cat) => cat.id === "esencial") || { guides: [] };
+const homepageGuides = esencial.guides.filter((g) => g.image && isGuidePublished(g.slug));
+const soonCount = data.categories.reduce(
+  (n, cat) => n + cat.guides.filter((g) => !isGuidePublished(g.slug)).length,
+  0
+);
+htmlParts.push(`      <div class="row g-4 mb-2 fe-guide-media-grid">`);
+for (const g of homepageGuides) {
+  htmlParts.push(renderPublishedGuideCard(g, { imagePrefix: "img/opt/" }));
 }
+htmlParts.push(`      </div>`);
 if (soonCount > 0) {
   htmlParts.push(`      <div class="text-center mt-4 mb-1">
         <a class="fe-guide-faq-soon-btn" href="guias-gastos-finales.html">
@@ -49,20 +39,14 @@ if (soonCount > 0) {
 }
 const htmlBlock = htmlParts.join("\n");
 
-const entities = [];
-for (const cat of data.categories) {
-  for (const g of cat.guides) {
-    if (!isGuidePublished(g.slug)) continue;
-    entities.push({
-      "@type": "Question",
-      name: g.question,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: g.teaser,
-      },
-    });
-  }
-}
+const entities = homepageGuides.map((g) => ({
+  "@type": "Question",
+  name: g.question,
+  acceptedAnswer: {
+    "@type": "Answer",
+    text: g.teaser,
+  },
+}));
 const schemaBlock = `<script type="application/ld+json">
 ${JSON.stringify(
   {
@@ -108,7 +92,7 @@ if (!index.includes('fe-guide-answers--media')) {
 
 index = index.replace(
   /href="css\/fe-guide\.css(?:\?v=[^"]*)?"/,
-  'href="css/fe-guide.css?v=20260726-wave-gold"'
+  'href="css/fe-guide.css?v=20260903-guide-labels"'
 );
 
 index = index.replace(

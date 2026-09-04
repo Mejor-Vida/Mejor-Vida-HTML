@@ -15,7 +15,7 @@
 <link href="css/site-footer.css?v=20260721-funeral-mega" rel="stylesheet"/>
 <link href="css/mvi-assistant-widget.css" rel="stylesheet"/>
 <link href="css/fontawesome-mvi.min.css" rel="stylesheet"/>
-<link href="css/fe-guide.css?v=20260726-wave-gold" rel="stylesheet"/>
+<link href="css/fe-guide.css?v=20260903-guide-labels" rel="stylesheet"/>
 <script>(function(){document.documentElement.lang='es-US';document.documentElement.className='lang-es';})();</script>
 </head>
 <body style="font-family:'Inter',system-ui,sans-serif;">
@@ -50,6 +50,14 @@
          <i class="fas fa-handshake" aria-hidden="true"></i>
          <span>Para mayores</span>
         </button>
+        <button type="button" class="nav-life-category" data-life-panel="family" aria-pressed="false">
+         <i class="fas fa-heart" aria-hidden="true"></i>
+         <span>Para la familia</span>
+        </button>
+        <button type="button" class="nav-life-category" data-life-panel="conditions" aria-pressed="false">
+         <i class="fas fa-clipboard-list" aria-hidden="true"></i>
+         <span>Condiciones preexistentes</span>
+        </button>
         <button type="button" class="nav-life-category" data-life-panel="by-state" aria-pressed="false">
          <img class="nav-life-usa-icon" src="img/icons/usa-map-icon.svg?v=20260831" alt="" width="24" height="15" decoding="async" aria-hidden="true" />
          <span>Cobertura por estado</span>
@@ -60,14 +68,15 @@
         <h3>Tipos de pólizas</h3>
         <div class="nav-life-options-grid">
          <a href="seguro-gastos-finales.html">Seguro de gastos finales</a>
-         <a href="term-quote.html">Seguro de vida temporal</a>
-         <a href="seguro-vida-entierro-sin-espera.html">Vida y entierro sin período de espera</a>
          <a href="seguro-vida-emision-inmediata.html">Seguro de vida de emisión inmediata</a>
-         <a href="contact.html">Aceptación garantizada</a>
-         <a href="contact.html">Seguro de protección hipotecaria</a>
-         <a href="contact.html">Seguro para cremación</a>
-         <a href="costo-seguro-vida-infantil.html">Seguro de vida infantil</a>
          <a href="costo-seguro-vida-entera.html">Seguro de vida entera</a>
+         <a href="seguro-proteccion-hipotecaria.html">Seguro de protección hipotecaria</a>
+         <a href="seguro-vida-temporal.html">Seguro de vida temporal</a>
+         <a href="seguro-para-cremacion.html">Seguro para cremación</a>
+         <a href="aceptacion-garantizada.html">Aceptación garantizada</a>
+         <a href="seguro-vida-infantil.html">Seguro de vida infantil</a>
+         <a href="seguro-vida-entierro-sin-espera.html">Vida y entierro sin período de espera</a>
+         <a href="seguro-vida-nietos.html">Seguro de vida para nietos</a>
         </div>
        </div>
        <a class="nav-life-feature nav-life-feature--tejo" href="tipos-seguro-vida.html">
@@ -142,29 +151,118 @@
        <div class="nav-life-options">
         <h3>Guías para personas mayores</h3>
         <div class="nav-life-options-grid nav-life-options-grid--seniors">
+         <a href="guia-seguro-entierro-mayores.html">Guía de entierro</a>
          <a href="seguro-vida-mayores-80.html">Mayores de 80 años</a>
          <a href="seguro-vida-mayores-85.html">Mayores de 85 años</a>
          <a href="seguro-vida-entierro-sin-espera.html">Sin período de espera</a>
-         <a href="seguro-gastos-finales.html">Seguro de gastos finales</a>
-         <a href="costo-seguro-gastos-finales.html">Costo de gastos finales</a>
+         <a href="seguro-vida-mayores-sin-examen.html">Sin examen médico</a>
+         <a href="limite-edad-seguro-vida.html">Límite de edad</a>
         </div>
        </div>
-       <a class="nav-life-feature nav-life-feature--seniors" href="seguro-vida-mayores-80.html">
+       <a class="nav-life-feature nav-life-feature--hub" href="guia-seguro-vida-mayores.html">
         <div class="nav-life-feature-copy">
-         <h3>Seguro de entierro después de los 80</h3>
-         <p>Opciones claras, primas de compañías designadas y cómo evitar una espera innecesaria.</p>
+         <h3>Guía de seguro de vida para mayores</h3>
+         <p>Tipos, edades de emisión y precios de compañías designadas.</p>
         </div>
         <div class="nav-life-feature-media" aria-hidden="true">
          <picture>
-          <source type="image/webp" srcset="img/opt/fe-about-seniors-laptop.webp" />
-          <img src="img/opt/fe-about-seniors-laptop.jpg" alt="" width="1000" height="667" loading="lazy" decoding="async" />
+          <source type="image/webp" srcset="img/opt/lic-hero-vida-buena.webp" />
+          <img src="img/opt/lic-hero-vida-buena.jpg" alt="" width="1024" height="751" loading="lazy" decoding="async" />
+         </picture>
+        </div>
+       </a>
+       <a class="nav-life-feature nav-life-feature--guide" href="guia-seguro-entierro-mayores.html">
+        <div class="nav-life-feature-copy">
+         <h3>Guía de seguro de entierro para mayores</h3>
+         <p>Cómo funciona, qué cubre y precios de compañías designadas.</p>
+        </div>
+        <div class="nav-life-feature-media" aria-hidden="true">
+         <picture>
+          <source type="image/webp" srcset="img/opt/lic-hero-fly-fishing.webp" />
+          <img src="img/opt/lic-hero-fly-fishing.jpg" alt="" width="1024" height="752" loading="lazy" decoding="async" />
+         </picture>
+        </div>
+       </a>
+       </div>
+       <div class="nav-life-panel" data-life-panel="family" hidden>
+       <div class="nav-life-options">
+        <h3>Cobertura para la familia</h3>
+        <div class="nav-life-options-grid nav-life-options-grid--family">
+         <a href="seguro-vida-padres.html">Padres</a>
+         <a href="seguro-vida-abuelos.html">Abuelos</a>
+         <a href="seguro-vida-hermanos.html">Hermanos</a>
+         <a href="seguro-vida-familiares.html">Otros familiares</a>
+         <a href="seguro-vida-nietos.html">Nietos</a>
+        </div>
+       </div>
+       <a class="nav-life-feature nav-life-feature--family-hub" href="seguro-vida-familia.html">
+        <div class="nav-life-feature-copy">
+         <h3>Guía de seguro para la familia</h3>
+         <p>Quién firma, quién es dueño y qué producto encaja.</p>
+        </div>
+        <div class="nav-life-feature-media" aria-hidden="true">
+         <picture>
+          <source type="image/webp" srcset="img/opt/nav-family-guide-meal.webp?v=20260828-meal" />
+          <img src="img/opt/nav-family-guide-meal.jpg?v=20260828-meal" alt="" width="1024" height="539" loading="lazy" decoding="async" />
+         </picture>
+        </div>
+       </a>
+       <a class="nav-life-feature nav-life-feature--family-find" href="buscar-poliza-vida.html">
+        <div class="nav-life-feature-copy">
+         <h3>Buscar una póliza</h3>
+         <p>Vea si alguien ya tenía seguro de vida.</p>
+        </div>
+        <div class="nav-life-feature-media" aria-hidden="true">
+         <picture>
+          <source type="image/webp" srcset="img/opt/lic-hero-family-black-sand.webp?v=20260828-heroes" />
+          <img src="img/opt/lic-hero-family-black-sand.jpg?v=20260828-heroes" alt="" width="1024" height="682" loading="lazy" decoding="async" />
+         </picture>
+        </div>
+       </a>
+       </div>
+       <div class="nav-life-panel" data-life-panel="conditions" hidden>
+       <div class="nav-life-options">
+        <h3>Cobertura por condición</h3>
+        <div class="nav-life-options-grid nav-life-options-grid--conditions">
+         <a href="seguro-vida-diabetes.html">Diabetes</a>
+         <a href="seguro-vida-corazon.html">Enfermedad del corazón</a>
+         <a href="seguro-vida-presion-alta.html">Presión alta</a>
+         <a href="seguro-vida-epoc.html">EPOC</a>
+         <a href="seguro-vida-cancer.html">Cáncer</a>
+         <a href="seguro-vida-enfermedad-renal.html">Enfermedad renal</a>
+         <a href="seguro-vida-discapacidad.html">Discapacidad</a>
+         <a href="seguro-vida-vih.html">VIH</a>
+         <a href="seguro-vida-derrame-cerebral.html">Derrame cerebral</a>
+        </div>
+       </div>
+       <a class="nav-life-feature nav-life-feature--cond-term" href="seguro-vida-temporal-condiciones-preexistentes.html">
+        <div class="nav-life-feature-copy">
+         <h3>Temporal con condiciones previas</h3>
+         <p>No hay temporal sin preguntas. Cómo se cotiza si ya hay un diagnóstico.</p>
+        </div>
+        <div class="nav-life-feature-media" aria-hidden="true">
+         <picture>
+          <source type="image/webp" srcset="img/opt/nav-term-preexisting-family.webp?v=20260829-termcond-photo" />
+          <img src="img/opt/nav-term-preexisting-family.jpg?v=20260829-termcond-photo" alt="" width="1024" height="484" loading="lazy" decoding="async" />
+         </picture>
+        </div>
+       </a>
+       <a class="nav-life-feature nav-life-feature--cond-hub" href="seguro-gastos-finales-condiciones-preexistentes.html">
+        <div class="nav-life-feature-copy">
+         <h3>Gastos finales con condiciones previas</h3>
+         <p>Cómo calificar a un plan nivelado o a aceptación garantizada.</p>
+        </div>
+        <div class="nav-life-feature-media" aria-hidden="true">
+         <picture>
+          <source type="image/webp" srcset="img/opt/nav-fe-preexisting-seniors.webp?v=20260829-fecond" />
+          <img src="img/opt/nav-fe-preexisting-seniors.jpg?v=20260829-fecond" alt="" width="1024" height="543" loading="lazy" decoding="async" />
          </picture>
         </div>
        </a>
        </div>
        <div class="nav-life-panel" data-life-panel="by-state" hidden>
        <div class="nav-life-options">
-        <h3>Estados con licencia</h3>
+        <h3>Por estado</h3>
         <div class="nav-life-options-grid">
          <a href="estados/nebraska.html">Nebraska</a>
          <a href="estados/kansas.html">Kansas</a>
@@ -172,10 +270,10 @@
          <a href="estados/nevada.html">Nevada</a>
         </div>
        </div>
-       <a class="nav-life-feature nav-life-feature--map" href="index.html#licensing-map">
+       <a class="nav-life-feature nav-life-feature--map" href="licencias.html">
         <div class="nav-life-feature-copy">
-         <h3>Vea el mapa de cobertura</h3>
-         <p>Mejor Vida Seguros tiene licencia. Elija su estado para costos y opciones locales.</p>
+         <h3>Licencias y NPN</h3>
+         <p>Elija un estado para costos y opciones locales. Los estados con licencia están en la página de licencias.</p>
         </div>
         <div class="nav-life-feature-media" aria-hidden="true">
          <picture>
@@ -194,13 +292,13 @@
             <div class="nav-funeral-mega" id="nav-funeral-mega" role="region" aria-label="Recursos funerarios">
        <div class="nav-funeral-links">
         <h3>Orientación</h3>
-        <a href="blog/cuanto-cuesta-seguro-gastos-finales.html">Guía de costos funerarios</a>
+        <a href="cuanto-cuesta-un-funeral.html">Guía de costos funerarios</a>
         <a href="blog/final-expense-vs-prepagado-funerario-2026-07-19.html">Funerales prepagados</a>
         <a href="blog/medicare-paga-gastos-finales.html">Cómo pagar un funeral</a>
         <a href="guias-gastos-finales.html">Cómo planificar su funeral</a>
         <a href="aseguradoras.html">Aseguradoras de confianza</a>
        </div>
-       <a class="nav-funeral-feature" href="blog/cuanto-cuesta-seguro-gastos-finales.html">
+       <a class="nav-funeral-feature" href="cuanto-cuesta-un-funeral.html">
         <span class="nav-funeral-feature-badge">DESTACADO</span>
         <h3>¿Cuánto cuesta un funeral?</h3>
         <div class="nav-funeral-feature-media">
@@ -300,7 +398,7 @@
      <i class="fas fa-chevron-down" aria-hidden="true"></i>
     </button>
     <div class="mobile-menu-panel" id="mm-funeral" role="region" aria-labelledby="mm-funeral-btn" hidden>
-     <a href="blog/cuanto-cuesta-seguro-gastos-finales.html" class="mobile-menu-link">Guía de costos funerarios</a>
+     <a href="cuanto-cuesta-un-funeral.html" class="mobile-menu-link">Guía de costos funerarios</a>
      <a href="blog/final-expense-vs-prepagado-funerario-2026-07-19.html" class="mobile-menu-link">Funerales prepagados</a>
      <a href="blog/medicare-paga-gastos-finales.html" class="mobile-menu-link">Cómo pagar un funeral</a>
      <a href="guias-gastos-finales.html" class="mobile-menu-link">Cómo planificar su funeral</a>
@@ -317,11 +415,12 @@
     <div class="mobile-menu-panel" id="mm-life" role="region" aria-labelledby="mm-life-btn" hidden>
      <a href="tipos-seguro-vida.html" class="mobile-menu-link">Tipos de seguro de vida</a>
      <a href="seguro-gastos-finales.html" class="mobile-menu-link">Seguro de gastos finales</a>
+     <a href="costo-seguro-vida-entera.html" class="mobile-menu-link">Seguro de vida entera</a>
      <a href="estados/nebraska.html" class="mobile-menu-link">Cobertura en Nebraska</a>
      <a href="estados/kansas.html" class="mobile-menu-link">Cobertura en Kansas</a>
      <a href="estados/colorado.html" class="mobile-menu-link">Cobertura en Colorado</a>
      <a href="estados/nevada.html" class="mobile-menu-link">Cobertura en Nevada</a>
-     <a href="term-quote.html" class="mobile-menu-link">Seguro de vida temporal</a>
+     <a href="seguro-vida-temporal.html" class="mobile-menu-link">Seguro de vida temporal</a>
      <a href="costo-seguro-vida.html" class="mobile-menu-link">Costo del seguro</a>
      <a href="costo-seguro-vida.html#por-monto" class="mobile-menu-link">Costo por monto de cobertura</a>
      <a href="costo-seguro-vida-5000.html" class="mobile-menu-link">$5,000</a>
@@ -340,13 +439,34 @@
      <a href="costo-seguro-vida-3000000.html" class="mobile-menu-link">$3,000,000</a>
      <a href="seguro-vida-emision-inmediata.html" class="mobile-menu-link">Seguro de vida de emisión inmediata</a>
      <a href="seguro-vida-entierro-sin-espera.html" class="mobile-menu-link">Vida y entierro sin período de espera</a>
-     <a href="contact.html" class="mobile-menu-link">Aceptación garantizada</a>
-     <a href="contact.html" class="mobile-menu-link">Seguro de protección hipotecaria</a>
-     <a href="contact.html" class="mobile-menu-link">Seguro para cremación</a>
-     <a href="costo-seguro-vida-infantil.html" class="mobile-menu-link">Seguro de vida infantil</a>
-     <a href="costo-seguro-vida-entera.html" class="mobile-menu-link">Seguro de vida entera</a>
+     <a href="aceptacion-garantizada.html" class="mobile-menu-link">Aceptación garantizada</a>
+     <a href="seguro-proteccion-hipotecaria.html" class="mobile-menu-link">Seguro de protección hipotecaria</a>
+     <a href="seguro-para-cremacion.html" class="mobile-menu-link">Seguro para cremación</a>
+     <a href="seguro-vida-infantil.html" class="mobile-menu-link">Seguro de vida infantil</a>
+     <a href="seguro-vida-nietos.html" class="mobile-menu-link">Seguro de vida para nietos</a>
+     <a href="seguro-vida-familia.html" class="mobile-menu-link">Seguro de vida para la familia</a>
+     <a href="seguro-vida-padres.html" class="mobile-menu-link">Seguro de vida para padres</a>
+     <a href="seguro-vida-abuelos.html" class="mobile-menu-link">Seguro de vida para abuelos</a>
+     <a href="seguro-vida-hermanos.html" class="mobile-menu-link">Seguro de vida para hermanos</a>
+     <a href="seguro-vida-familiares.html" class="mobile-menu-link">Seguro para otros familiares</a>
+     <a href="buscar-poliza-vida.html" class="mobile-menu-link">Buscar si alguien tenía una póliza</a>
+     <a href="seguro-gastos-finales-condiciones-preexistentes.html" class="mobile-menu-link">Gastos finales con condiciones previas</a>
+     <a href="seguro-vida-temporal-condiciones-preexistentes.html" class="mobile-menu-link">Temporal con condiciones previas</a>
+     <a href="seguro-vida-diabetes.html" class="mobile-menu-link">Diabetes</a>
+     <a href="seguro-vida-corazon.html" class="mobile-menu-link">Enfermedad del corazón</a>
+     <a href="seguro-vida-presion-alta.html" class="mobile-menu-link">Presión alta</a>
+     <a href="seguro-vida-epoc.html" class="mobile-menu-link">EPOC</a>
+     <a href="seguro-vida-cancer.html" class="mobile-menu-link">Cáncer</a>
+     <a href="seguro-vida-enfermedad-renal.html" class="mobile-menu-link">Enfermedad renal</a>
+     <a href="seguro-vida-discapacidad.html" class="mobile-menu-link">Discapacidad</a>
+     <a href="seguro-vida-vih.html" class="mobile-menu-link">VIH</a>
+     <a href="seguro-vida-derrame-cerebral.html" class="mobile-menu-link">Derrame cerebral</a>
+     <a href="guia-seguro-vida-mayores.html" class="mobile-menu-link">Guía completa de vida para mayores</a>
+     <a href="guia-seguro-entierro-mayores.html" class="mobile-menu-link">Guía de entierro</a>
      <a href="seguro-vida-mayores-80.html" class="mobile-menu-link">Mayores de 80 años</a>
      <a href="seguro-vida-mayores-85.html" class="mobile-menu-link">Mayores de 85 años</a>
+     <a href="seguro-vida-mayores-sin-examen.html" class="mobile-menu-link">Sin examen médico</a>
+     <a href="limite-edad-seguro-vida.html" class="mobile-menu-link">Límite de edad</a>
     </div>
    </div>
   </div>
@@ -356,7 +476,7 @@
   <a href="/en/" class="mvi-lang-fab text-decoration-none" title="View site in English">English</a>
  </div>
 
-<div class="fe-guide-toc-bar" role="navigation" aria-label="Índice de contenidos"><div class="fe-guide-toc-bar-inner"><button type="button" class="fe-guide-toc-trigger" id="fe-guide-toc-open" aria-expanded="false" aria-controls="fe-guide-toc-drawer"><i class="fas fa-bars" aria-hidden="true"></i> Índice de contenidos</button></div></div><div class="fe-guide-toc-backdrop" id="fe-guide-toc-backdrop" hidden><aside class="fe-guide-toc-drawer" id="fe-guide-toc-drawer" aria-label="Índice de guías" tabindex="-1"><div class="fe-guide-toc-drawer-head"><h2 class="fe-guide-toc-drawer-title">Índice de contenidos</h2><button type="button" class="fe-guide-toc-close" id="fe-guide-toc-close" aria-label="Cerrar">×</button></div><div class="fe-guide-toc-drawer-body"><div class="fe-guide-toc-group"><p class="fe-guide-toc-group-title">En esta página</p><ul><li><a href="#fe-hub-cat-esencial">Guías principales</a></li><li><a href="#fe-hub-cat-mas">Más preguntas</a></li></ul></div><div class="fe-guide-toc-group"><p class="fe-guide-toc-group-title">Guías principales</p><ul><li><a href="blog/que-es-seguro-gastos-finales.html">Qué es el seguro</a></li><li><a href="blog/tipos-planes-seguro-gastos-finales.html">Tipos de planes</a></li><li><a href="blog/cuanto-cuesta-seguro-gastos-finales.html">Cuánto cuesta</a></li><li><a href="blog/medicare-paga-gastos-finales.html">Qué paga Medicare</a></li></ul></div><div class="fe-guide-toc-group"><p class="fe-guide-toc-group-title">Más preguntas</p><ul><li><a href="seguro-vida-mayores-80.html">Seguro de gastos finales para personas mayores de 80 años</a></li><li><a href="seguro-vida-mayores-85.html">Seguro de gastos finales para personas mayores de 85 años</a></li></ul></div></div></aside></div>
+<div class="fe-guide-toc-bar" role="navigation" aria-label="Índice de contenidos"><div class="fe-guide-toc-bar-inner"><button type="button" class="fe-guide-toc-trigger" id="fe-guide-toc-open" aria-expanded="false" aria-controls="fe-guide-toc-drawer"><i class="fas fa-bars" aria-hidden="true"></i> Índice de contenidos</button></div></div><div class="fe-guide-toc-backdrop" id="fe-guide-toc-backdrop" hidden><aside class="fe-guide-toc-drawer" id="fe-guide-toc-drawer" aria-label="Índice de guías" tabindex="-1"><div class="fe-guide-toc-drawer-head"><h2 class="fe-guide-toc-drawer-title">Índice de contenidos</h2><button type="button" class="fe-guide-toc-close" id="fe-guide-toc-close" aria-label="Cerrar">×</button></div><div class="fe-guide-toc-drawer-body"><div class="fe-guide-toc-group"><p class="fe-guide-toc-group-title">En esta página</p><ul><li><a href="#fe-hub-cat-esencial">Guías principales</a></li><li><a href="#fe-hub-cat-costos">Costos y cobertura</a></li><li><a href="#fe-hub-cat-mas">Más preguntas</a></li></ul></div><div class="fe-guide-toc-group"><p class="fe-guide-toc-group-title">Guías principales</p><ul><li><a href="blog/que-es-seguro-gastos-finales.html">Qué es el seguro</a></li><li><a href="blog/tipos-planes-seguro-gastos-finales.html">Tipos de planes</a></li><li><a href="blog/cuanto-cuesta-seguro-gastos-finales.html">Cuánto cuesta el seguro</a></li><li><a href="blog/medicare-paga-gastos-finales.html">Qué paga Medicare</a></li></ul></div><div class="fe-guide-toc-group"><p class="fe-guide-toc-group-title">Costos y cobertura</p><ul><li><a href="cuanto-cuesta-un-funeral.html">¿Cuánto cuesta un funeral?</a></li></ul></div><div class="fe-guide-toc-group"><p class="fe-guide-toc-group-title">Más preguntas</p><ul><li><a href="seguro-vida-mayores-80.html">Seguro de gastos finales para personas mayores de 80 años</a></li><li><a href="seguro-vida-mayores-85.html">Seguro de gastos finales para personas mayores de 85 años</a></li></ul></div></div></aside></div>
 <section class="fe-hub-hero" aria-label="Centro de educación sobre gastos finales">
 <div class="container">
 <nav aria-label="Breadcrumb" class="fe-guide-breadcrumb">
@@ -364,7 +484,7 @@
 <span>Guías de gastos finales</span>
 </nav>
 <h1>Seguro de gastos finales — guías de Mejor Vida Insurance</h1>
-<p class="fe-hub-hero-dek">Guías en español escritas por Mejor Vida Insurance, agencia independiente. Cada enlace abre una página dedicada con información detallada (sin contenido generado por IA).</p>
+<p class="fe-hub-hero-dek">Guías en español escritas por Mejor Vida Insurance. Cada enlace abre una página dedicada con información detallada (sin contenido generado por IA).</p>
 <p class="fe-hub-hero-note"><i class="fas fa-user-check" aria-hidden="true"></i> Compromiso de contenido sin IA · <a href="divulgaciones-editoriales.html">Divulgaciones</a></p>
 </div>
 </section>
@@ -372,12 +492,12 @@
 <p class="fe-hub-intro">Use el <strong>índice de contenidos</strong> arriba para saltar a un tema o abra cualquier guía publicada. Las páginas marcadas como «Próximamente» se publican conforme Mejor Vida las termina.</p>
 <section class="fe-hub-category" id="fe-hub-cat-esencial"><div class="row g-4 mb-2 fe-guide-media-grid"><div class="col-12 col-md-6"><a class="fe-guide-media-card" href="blog/que-es-seguro-gastos-finales.html" aria-label="Qué es el seguro"><div class="fe-guide-media-card__media" aria-hidden="true"><picture><source type="image/webp" srcset="img/opt/fe-guide-card-que-es.webp"/><img src="img/opt/fe-guide-card-que-es.jpg" alt="" width="800" height="600" loading="lazy" decoding="async"/></picture></div><div class="fe-guide-media-card__body"><h3>Qué es el seguro</h3></div></a></div>
 <div class="col-12 col-md-6"><a class="fe-guide-media-card" href="blog/tipos-planes-seguro-gastos-finales.html" aria-label="Tipos de planes"><div class="fe-guide-media-card__media" aria-hidden="true"><picture><source type="image/webp" srcset="img/opt/fe-guide-card-tipos.webp"/><img src="img/opt/fe-guide-card-tipos.jpg" alt="" width="800" height="600" loading="lazy" decoding="async"/></picture></div><div class="fe-guide-media-card__body"><h3>Tipos de planes</h3></div></a></div>
-<div class="col-12 col-md-6"><a class="fe-guide-media-card" href="blog/cuanto-cuesta-seguro-gastos-finales.html" aria-label="Cuánto cuesta"><div class="fe-guide-media-card__media" aria-hidden="true"><picture><source type="image/webp" srcset="img/opt/fe-guide-card-cuanto-cuesta.webp"/><img src="img/opt/fe-guide-card-cuanto-cuesta.jpg" alt="" width="800" height="600" loading="lazy" decoding="async"/></picture></div><div class="fe-guide-media-card__body"><h3>Cuánto cuesta</h3></div></a></div>
+<div class="col-12 col-md-6"><a class="fe-guide-media-card" href="blog/cuanto-cuesta-seguro-gastos-finales.html" aria-label="Cuánto cuesta el seguro"><div class="fe-guide-media-card__media" aria-hidden="true"><picture><source type="image/webp" srcset="img/opt/fe-guide-card-cuanto-cuesta.webp"/><img src="img/opt/fe-guide-card-cuanto-cuesta.jpg" alt="" width="800" height="600" loading="lazy" decoding="async"/></picture></div><div class="fe-guide-media-card__body"><h3>Cuánto cuesta el seguro</h3></div></a></div>
 <div class="col-12 col-md-6"><a class="fe-guide-media-card" href="blog/medicare-paga-gastos-finales.html" aria-label="Qué paga Medicare"><div class="fe-guide-media-card__media" aria-hidden="true"><picture><source type="image/webp" srcset="img/opt/fe-guide-card-medicare.webp"/><img src="img/opt/fe-guide-card-medicare.jpg" alt="" width="800" height="600" loading="lazy" decoding="async"/></picture></div><div class="fe-guide-media-card__body"><h3>Qué paga Medicare</h3></div></a></div>
 <div class="col-md-6 col-lg-4"><article class="rounded-3 p-4 h-100 fe-guide-faq-card fe-guide-faq-card--soon" aria-disabled="true"><p class="fe-guide-faq-soon-badge mb-2">Próximamente</p><h3 class="h6 fw-bold mb-2 fe-guide-faq-soon-title">¿Cuál es la diferencia entre seguro de vida y seguro de gastos finales?</h3><p class="small lh-base mb-2 fe-guide-faq-soon-teaser">Compare propósito, montos de cobertura y cuándo conviene cada uno.</p><p class="small mb-0 fe-guide-faq-soon-foot">Guía de Mejor Vida</p></article></div>
 <div class="col-md-6 col-lg-4"><article class="rounded-3 p-4 h-100 fe-guide-faq-card fe-guide-faq-card--soon" aria-disabled="true"><p class="fe-guide-faq-soon-badge mb-2">Próximamente</p><h3 class="h6 fw-bold mb-2 fe-guide-faq-soon-title">¿Qué pasa si no tengo seguro de gastos finales?</h3><p class="small lh-base mb-2 fe-guide-faq-soon-teaser">Riesgos para la familia, costos del funeral y alternativas para planificar.</p><p class="small mb-0 fe-guide-faq-soon-foot">Guía de Mejor Vida</p></article></div>
 <div class="col-md-6 col-lg-4"><article class="rounded-3 p-4 h-100 fe-guide-faq-card fe-guide-faq-card--soon" aria-disabled="true"><p class="fe-guide-faq-soon-badge mb-2">Próximamente</p><h3 class="h6 fw-bold mb-2 fe-guide-faq-soon-title">¿Qué son las pólizas de gastos finales?</h3><p class="small lh-base mb-2 fe-guide-faq-soon-teaser">Tipos de pólizas, beneficios en vida y cómo funcionan las primas niveladas.</p><p class="small mb-0 fe-guide-faq-soon-foot">Guía de Mejor Vida</p></article></div></div></section>
-<section class="fe-hub-category" id="fe-hub-cat-costos" aria-labelledby="fe-hub-cat-title-costos"><h2 class="h4 fw-bold mb-3" style="color:#1a365d;" id="fe-hub-cat-title-costos">Costos y cobertura</h2><div class="row g-3 mb-2"><div class="col-md-6 col-lg-4"><article class="rounded-3 p-4 h-100 fe-guide-faq-card fe-guide-faq-card--soon" aria-disabled="true"><p class="fe-guide-faq-soon-badge mb-2">Próximamente</p><h3 class="h6 fw-bold mb-2 fe-guide-faq-soon-title">¿Cuánto cuesta un funeral en Nebraska?</h3><p class="small lh-base mb-2 fe-guide-faq-soon-teaser">Promedios locales, entierro vs cremación y cómo se relaciona con su cobertura.</p><p class="small mb-0 fe-guide-faq-soon-foot">Guía de Mejor Vida</p></article></div>
+<section class="fe-hub-category" id="fe-hub-cat-costos" aria-labelledby="fe-hub-cat-title-costos"><h2 class="h4 fw-bold mb-3" style="color:#1a365d;" id="fe-hub-cat-title-costos">Costos y cobertura</h2><div class="row g-3 mb-2"><div class="col-md-6 col-lg-4"><article class="bg-white rounded-3 p-4 shadow-sm h-100 fe-guide-faq-card position-relative"><h3 class="h6 fw-bold mb-2" style="color:#1a365d;"><a class="text-decoration-none stretched-link" style="color:#1a365d;" href="cuanto-cuesta-un-funeral.html">¿Cuánto cuesta un funeral?</a></h3><p class="small text-body-secondary lh-base mb-2">Promedios nacionales de entierro y cremación, qué suele ir aparte y cómo pedir la lista de precios de la funeraria.</p><p class="small mb-0"><span class="text-primary fw-semibold">Guía de Mejor Vida →</span></p></article></div>
 <div class="col-md-6 col-lg-4"><article class="rounded-3 p-4 h-100 fe-guide-faq-card fe-guide-faq-card--soon" aria-disabled="true"><p class="fe-guide-faq-soon-badge mb-2">Próximamente</p><h3 class="h6 fw-bold mb-2 fe-guide-faq-soon-title">¿Cuánta cobertura de gastos finales necesito?</h3><p class="small lh-base mb-2 fe-guide-faq-soon-teaser">$5,000, $10,000 o $15,000 — cómo elegir el monto adecuado.</p><p class="small mb-0 fe-guide-faq-soon-foot">Guía de Mejor Vida</p></article></div>
 <div class="col-md-6 col-lg-4"><article class="rounded-3 p-4 h-100 fe-guide-faq-card fe-guide-faq-card--soon" aria-disabled="true"><p class="fe-guide-faq-soon-badge mb-2">Próximamente</p><h3 class="h6 fw-bold mb-2 fe-guide-faq-soon-title">¿Qué factores afectan el precio del seguro de gastos finales?</h3><p class="small lh-base mb-2 fe-guide-faq-soon-teaser">Edad, salud, tabaco, compañía y monto de beneficio explicados en sencillo.</p><p class="small mb-0 fe-guide-faq-soon-foot">Guía de Mejor Vida</p></article></div>
 <div class="col-md-6 col-lg-4"><article class="rounded-3 p-4 h-100 fe-guide-faq-card fe-guide-faq-card--soon" aria-disabled="true"><p class="fe-guide-faq-soon-badge mb-2">Próximamente</p><h3 class="h6 fw-bold mb-2 fe-guide-faq-soon-title">¿Necesito examen médico para un seguro de gastos finales?</h3><p class="small lh-base mb-2 fe-guide-faq-soon-teaser">Pólizas sin examen, cuestionarios de salud y qué esperar al aplicar.</p><p class="small mb-0 fe-guide-faq-soon-foot">Guía de Mejor Vida</p></article></div>
@@ -420,7 +540,7 @@
 <a class="text-white text-opacity-90 text-decoration-none text-nowrap" href="https://wa.me/14024405438?text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20seguro%20de%20gastos%20finales." rel="noopener" target="_blank"><i class="fab fa-whatsapp me-2 opacity-90"></i>WhatsApp</a>
 <span class="text-nowrap"><i class="fas fa-envelope me-2 opacity-75"></i><a class="text-white text-opacity-90 text-decoration-none" href="mailto:Julie@mejorvidainsurance.com">Julie@mejorvidainsurance.com</a></span>
 </div>
-<p class="small text-center text-white text-opacity-75 mb-0 mt-2 px-2">Agencia 100% telefónica y en línea — Sin oficina de atención al público.</p>
+<p class="small text-center text-white text-opacity-75 mb-0 mt-2 px-2">Agencia 100% telefónica y en línea. Sin oficina de atención al público.</p>
 <div class="d-flex flex-wrap align-items-center justify-content-center gap-3 small mt-1">
 <span class="text-nowrap"><i class="fas fa-phone me-2 opacity-75"></i>Teléfono: <a class="text-white text-opacity-90 text-decoration-none" href="tel:+14024405438" title="Phone">402-440-5438</a></span>
 <span class="text-nowrap"><i class="fas fa-comment-dots me-2 opacity-75"></i>SMS/Texto: <a class="text-white text-opacity-90 text-decoration-none" href="tel:+14028441199">402-844-1199</a></span>
