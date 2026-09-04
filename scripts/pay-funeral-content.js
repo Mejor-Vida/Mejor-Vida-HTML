@@ -510,6 +510,7 @@ function payMain(lang, page, c) {
     ? `<p class="lic-rate-note">Más en esta sección:
 <a href="cuanto-cuesta-un-funeral.html">Costo de un funeral</a> ·
 <a href="funerales-prepagados.html">Prepagado</a> ·
+<a href="como-planificar-su-funeral.html">Cómo planificar</a> ·
 <a href="${L.fe}">Seguro de gastos finales</a> ·
 <a href="blog/cuanto-cuesta-seguro-gastos-finales.html">Precio del seguro</a> ·
 <a href="blog/medicare-paga-gastos-finales.html">Medicare</a> ·
@@ -517,6 +518,7 @@ function payMain(lang, page, c) {
     : `<p class="lic-rate-note">More in this section:
 <a href="how-much-does-a-funeral-cost.html">Funeral cost</a> ·
 <a href="prepaid-funerals.html">Prepaid</a> ·
+<a href="how-to-plan-your-funeral.html">How to plan</a> ·
 <a href="${L.fe}">Final expense</a> ·
 <a href="final-expense-cost.html">Insurance cost</a> ·
 <a href="../blog/medicare-paga-gastos-finales.html">Medicare</a> ·

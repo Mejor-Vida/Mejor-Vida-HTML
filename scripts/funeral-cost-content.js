@@ -464,6 +464,7 @@ function funeralCostMain(lang, page, c) {
 <a href="blog/cuanto-cuesta-seguro-gastos-finales.html">Precio del seguro</a> ·
 <a href="funerales-prepagados.html">Prepagado</a> ·
 <a href="como-pagar-un-funeral.html">Cómo pagar</a> ·
+<a href="como-planificar-su-funeral.html">Cómo planificar</a> ·
 <a href="seguro-para-cremacion.html">Cremación</a></p>`
     : `<p class="lic-rate-note">More in this section:
 <a href="final-expense-estimator.html">Calculator</a> ·
@@ -471,6 +472,7 @@ function funeralCostMain(lang, page, c) {
 <a href="final-expense-cost.html">Insurance cost</a> ·
 <a href="prepaid-funerals.html">Prepaid</a> ·
 <a href="how-to-pay-for-a-funeral.html">How to pay</a> ·
+<a href="how-to-plan-your-funeral.html">How to plan</a> ·
 <a href="cremation-insurance.html">Cremation</a></p>`;
   return `<main>
 <section class="lic-hero">

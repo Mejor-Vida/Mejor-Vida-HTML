@@ -198,7 +198,8 @@
 
 .lic-page--funeral-cost .lic-fun-nfda,
 .lic-page--prepaid .lic-fun-nfda,
-.lic-page--pay .lic-fun-nfda {
+.lic-page--pay .lic-fun-nfda,
+.lic-page--plan .lic-fun-nfda {
   display: grid;
   gap: 0.9rem;
   margin: 1rem 0 0.35rem;
@@ -207,14 +208,16 @@
 @media (min-width: 640px) {
   .lic-page--funeral-cost .lic-fun-nfda,
   .lic-page--prepaid .lic-fun-nfda,
-  .lic-page--pay .lic-fun-nfda {
+  .lic-page--pay .lic-fun-nfda,
+  .lic-page--plan .lic-fun-nfda {
     grid-template-columns: 1fr 1fr;
   }
 }
 
 .lic-page--funeral-cost .lic-fun-nfda__card,
 .lic-page--prepaid .lic-fun-nfda__card,
-.lic-page--pay .lic-fun-nfda__card {
+.lic-page--pay .lic-fun-nfda__card,
+.lic-page--plan .lic-fun-nfda__card {
   background: #fff;
   border: 1px solid #d7e3f4;
   border-radius: 0.85rem;
@@ -225,13 +228,15 @@
 
 .lic-page--funeral-cost .lic-fun-nfda__card--gold,
 .lic-page--prepaid .lic-fun-nfda__card--gold,
-.lic-page--pay .lic-fun-nfda__card--gold {
+.lic-page--pay .lic-fun-nfda__card--gold,
+.lic-page--plan .lic-fun-nfda__card--gold {
   border-top-color: #f5a623;
 }
 
 .lic-page--funeral-cost .lic-fun-nfda__kicker,
 .lic-page--prepaid .lic-fun-nfda__kicker,
-.lic-page--pay .lic-fun-nfda__kicker {
+.lic-page--pay .lic-fun-nfda__kicker,
+.lic-page--plan .lic-fun-nfda__kicker {
   margin: 0 0 0.35rem;
   font-size: 0.78rem;
   font-weight: 700;
@@ -242,7 +247,8 @@
 
 .lic-page--funeral-cost .lic-fun-nfda__amt,
 .lic-page--prepaid .lic-fun-nfda__amt,
-.lic-page--pay .lic-fun-nfda__amt {
+.lic-page--pay .lic-fun-nfda__amt,
+.lic-page--plan .lic-fun-nfda__amt {
   margin: 0;
   font-size: 2.05rem;
   line-height: 1.1;
@@ -253,7 +259,8 @@
 
 .lic-page--funeral-cost .lic-fun-nfda__label,
 .lic-page--prepaid .lic-fun-nfda__label,
-.lic-page--pay .lic-fun-nfda__label {
+.lic-page--pay .lic-fun-nfda__label,
+.lic-page--plan .lic-fun-nfda__label {
   margin: 0.4rem 0 0;
   color: #334155;
   font-size: 0.98rem;

@@ -430,14 +430,16 @@ function prepaidMain(lang, page, c) {
 <a href="${L.fe}">Seguro de gastos finales</a> ·
 <a href="blog/cuanto-cuesta-seguro-gastos-finales.html">Precio del seguro</a> ·
 <a href="seguro-para-cremacion.html">Cremación</a> ·
-<a href="como-pagar-un-funeral.html">Cómo se paga</a></p>`
+<a href="como-pagar-un-funeral.html">Cómo se paga</a> ·
+<a href="como-planificar-su-funeral.html">Cómo planificar</a></p>`
     : `<p class="lic-rate-note">More in this section:
 <a href="how-much-does-a-funeral-cost.html">Funeral cost</a> ·
 <a href="final-expense-estimator.html">Calculator</a> ·
 <a href="${L.fe}">Final expense</a> ·
 <a href="final-expense-cost.html">Insurance cost</a> ·
 <a href="cremation-insurance.html">Cremation</a> ·
-<a href="how-to-pay-for-a-funeral.html">How it’s paid</a></p>`;
+<a href="how-to-pay-for-a-funeral.html">How it’s paid</a> ·
+<a href="how-to-plan-your-funeral.html">How to plan</a></p>`;
   return `<main>
 <section class="lic-hero">
 <div class="lic-hero-media lic-hero-media--${page.hero.modifier}" aria-hidden="true">
