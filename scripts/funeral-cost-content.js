@@ -144,7 +144,10 @@ function copyFuneralCost(lang) {
   const prepaid = isEs
     ? "funerales-prepagados.html"
     : "prepaid-funerals.html";
-  const payPage = isEs
+  const payGuide = isEs
+    ? "como-pagar-un-funeral.html"
+    : "how-to-pay-for-a-funeral.html";
+  const medicarePage = isEs
     ? "blog/medicare-paga-gastos-finales.html"
     : "../blog/medicare-paga-gastos-finales.html";
   const premiumGuide = isEs
@@ -235,7 +238,7 @@ function copyFuneralCost(lang) {
       faq6a: "Puede pagar $255 una sola vez si se cumplen sus reglas. No cubre un sepelio típico.",
       faq7q: "¿Medicare paga el funeral?",
       faq7a: "Medicare es seguro médico. No lo tratamos aquí como un plan funerario. Más detalle en la guía de <a href=\"" +
-        payPage +
+        medicarePage +
         "\">cómo se relaciona Medicare con los gastos finales</a>.",
       faq8q: "¿El VA ayuda con el entierro de un veterano?",
       faq8a: "A veces, si se cumplen las reglas del Departamento de Asuntos de Veteranos. Para una muerte no relacionada con el servicio el 1 de octubre de 2025 o después, el VA publica $1,002 de asignación de entierro y $1,002 de parcela. Si la muerte está relacionada con el servicio (desde el 11 de septiembre de 2001), el máximo de entierro que publica es $2,000. La elegibilidad no es automática. Confirme en <a href=\"https://www.va.gov/burials-memorials/veterans-burial-allowance/\" rel=\"noopener\" target=\"_blank\">la página del VA</a>.",
@@ -252,7 +255,9 @@ function copyFuneralCost(lang) {
         estimator +
         "\">calculadora</a> ayuda a dimensionar la cuenta; una cotización confirma la prima.",
       payH: "Cómo se paga esa cuenta",
-      payP: "Las familias usan ahorros, una cuenta conjunta, una colecta, un contrato ya pagado en una funeraria, beneficios de veterano si aplican, o efectivo de un seguro de vida. Ninguna de esas vías es “la correcta” para todos. Lo que cambia es quién controla el dinero y qué queda atado a un proveedor.",
+      payP: "Las familias usan ahorros, una cuenta conjunta, una colecta, un contrato ya pagado en una funeraria, beneficios de veterano si aplican, o efectivo de un seguro de vida. Ninguna de esas vías es “la correcta” para todos. La guía completa está en <a href=\"" +
+        payGuide +
+        "\">cómo pagar un funeral</a>.",
       pay1H: "Ahorros o una cuenta",
       pay1P: "Si el dinero ya está apartado y la familia puede usarlo al momento, no hace falta un producto nuevo del mismo tamaño.",
       pay2H: "Contrato en la funeraria",
@@ -381,7 +386,7 @@ function copyFuneralCost(lang) {
     faq6a: "It may pay $255 once if its rules are met. That does not cover a typical funeral.",
     faq7q: "Does Medicare pay for the funeral?",
     faq7a: "Medicare is medical insurance. We do not treat it here as a funeral plan. More detail in the guide on <a href=\"" +
-      payPage +
+      medicarePage +
       "\">how Medicare relates to final expenses</a>.",
     faq8q: "Does the VA help with a Veteran’s burial?",
     faq8a: "Sometimes, if Department of Veterans Affairs rules are met. For a non-service-connected death on or after October 1, 2025, VA publishes a $1,002 burial allowance and $1,002 for a plot. For a service-connected death (on or after September 11, 2001), the published burial maximum is $2,000. Eligibility is not automatic. Confirm on the <a href=\"https://www.va.gov/burials-memorials/veterans-burial-allowance/\" rel=\"noopener\" target=\"_blank\">VA page</a>.",
@@ -398,7 +403,9 @@ function copyFuneralCost(lang) {
       estimator +
       "\">calculator</a> helps size the bill; a quote confirms the premium.",
     payH: "How families pay that bill",
-    payP: "Families use savings, a joint account, a collection, a contract already paid at a funeral home, Veteran benefits if they apply, or cash from a life policy. None of those paths is “the right one” for everyone. What changes is who controls the money and what is tied to one provider.",
+    payP: "Families use savings, a joint account, a collection, a contract already paid at a funeral home, Veteran benefits if they apply, or cash from a life policy. None of those paths is “the right one” for everyone. The full guide is <a href=\"" +
+      payGuide +
+      "\">how to pay for a funeral</a>.",
     pay1H: "Savings or an account",
     pay1P: "If the money is already set aside and the family can use it at the time, you may not need a new product of the same size.",
     pay2H: "A funeral-home contract",
@@ -456,12 +463,14 @@ function funeralCostMain(lang, page, c) {
 <a href="${L.fe}">Seguro de gastos finales</a> ·
 <a href="blog/cuanto-cuesta-seguro-gastos-finales.html">Precio del seguro</a> ·
 <a href="funerales-prepagados.html">Prepagado</a> ·
+<a href="como-pagar-un-funeral.html">Cómo pagar</a> ·
 <a href="seguro-para-cremacion.html">Cremación</a></p>`
     : `<p class="lic-rate-note">More in this section:
 <a href="final-expense-estimator.html">Calculator</a> ·
 <a href="${L.fe}">Final expense</a> ·
 <a href="final-expense-cost.html">Insurance cost</a> ·
 <a href="prepaid-funerals.html">Prepaid</a> ·
+<a href="how-to-pay-for-a-funeral.html">How to pay</a> ·
 <a href="cremation-insurance.html">Cremation</a></p>`;
   return `<main>
 <section class="lic-hero">

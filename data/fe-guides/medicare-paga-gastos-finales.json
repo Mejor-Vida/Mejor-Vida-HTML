@@ -2,30 +2,35 @@
   "slug": "medicare-paga-gastos-finales",
   "question": "¿Se encarga Medicare de pagar los gastos finales?",
   "headline": "¿Se encarga Medicare de pagar los gastos finales?",
-  "alternateNamesLine": "Medicare, SSA y cobertura gubernamental — guía para familias en Nebraska",
+  "alternateNamesLine": "Medicare, SSA y cobertura gubernamental",
   "pageTitle": "¿Medicare paga los gastos finales? — Lo que cubre y lo que no",
-  "dek": "Medicare no paga el funeral ni las deudas que deja una persona al fallecer. Mejor Vida Insurance explica qué sí cubre Medicare (incluido el hospicio), el beneficio de $255 de la SSA y por qué muchas familias necesitan otra protección.",
-  "metaDescription": "¿Se encarga Medicare de pagar los gastos finales? Qué cubre Medicare, el beneficio de la SSA, hospicio y por qué un funeral de $8,000–$12,000 requiere planificación adicional — guía de Mejor Vida Insurance.",
+  "dek": "Medicare no paga el funeral ni las deudas que deja una persona al fallecer. Mejor Vida Seguros explica qué sí cubre Medicare (incluido el hospicio), el beneficio de $255 de la SSA y por qué muchas familias necesitan otra protección.",
+  "metaDescription": "¿Se encarga Medicare de pagar los gastos finales? Qué cubre Medicare, el hospicio, el pago de $255 del Seguro Social y por qué el sepelio suele requerir otra planificación — guía de Mejor Vida Seguros.",
   "published": "2026-07-08",
-  "modified": "2026-07-08",
+  "modified": "2026-09-03",
   "keyTakeaways": [
     "Medicare no paga los gastos finales; solo cubre gastos médicos mientras el asegurado está vivo.",
     "Medicare sí cubre el servicio de hospicio cuando hay una enfermedad terminal, mientras la persona sigue viva.",
     "La Administración del Seguro Social (SSA) puede pagar $255 al cónyuge o hijos sobrevivientes, según sus términos — caso a caso.",
-    "Un funeral puede costar de $8,000 a $12,000, sin contar deudas, créditos ni cuentas médicas pendientes.",
+    "En 2023, la NFDA publicó una mediana de $8,300 por un funeral con velatorio y entierro, y $6,280 con velatorio y cremación, del lado de la funeraria. Parcela y lápida suelen ir aparte.",
     "No hay cobertura gubernamental gratuita para gastos finales por Medicare, salvo programas de veteranos u otros beneficios específicos.",
     "Desconfíe de la publicidad que promete cobertura «gratis» del gobierno; infórmese antes de decidir."
   ],
   "paragraphs": [
+    {
+      "heading": "Esta guía es sobre Medicare, no sobre todas las formas de pagar",
+      "text": "La guía completa de ahorros, funeral prepagado, seguro de vida, el pago de $255 y las ayudas del VA está en Cómo se paga un funeral, en el menú Recursos funerarios. Aquí nos centramos en lo que Medicare cubre y lo que no."
+    },
     "No, Medicare no paga por los gastos finales. Medicare solo cubre gastos médicos mientras el asegurado está vivo. Es importante mencionar que Medicare cubre el servicio de hospicio, o sea, mientras el asegurado está vivo pero pasando por una enfermedad terminal.",
     "Hay un beneficio que se puede llegar a recibir que la Administración del Seguro Social (SSA) puede darle al cónyuge o hijos sobrevivientes. Esto es caso a caso, basado en sus términos y condiciones. El pago que se puede llegar a recibir es de $255.",
-    "Cuando pensamos en los gastos que un funeral puede tener, en realidad ese beneficio no cubre mucho. Recordemos que un funeral puede llegar a costar de $8,000 a $12,000, sin incluir deudas, créditos, cuentas médicas y otros gastos que el difunto haya dejado.",
+    "Cuando pensamos en los gastos que un funeral puede tener, en realidad ese beneficio no cubre mucho. En 2023, la NFDA publicó una mediana de $8,300 por un funeral con velatorio y entierro, y $6,280 con velatorio y cremación, del lado de la funeraria. Parcela, bóveda, lápida y deudas pendientes suelen ir aparte.",
     "También es importante saber que no hay otro tipo de cobertura que el gobierno ofrezca por medio de Medicare o que se ofrezca gratis para cubrir los gastos finales, a no ser que haga parte de un programa de veteranos o algún programa específico donde usted piense que puede obtener algún beneficio gubernamental. En ese caso, usted podría investigar qué es lo que se ofrece en su caso especial.",
     "Hay mucha publicidad que puede decir que es gratis y que el gobierno lo da, pero en realidad no es así. Es importante informarse y saber qué es verdad y qué no."
   ],
   "relatedSlugs": [
+    "como-pagar-un-funeral",
+    "cuanto-cuesta-un-funeral",
     "que-es-seguro-gastos-finales",
-    "cuanto-cuesta-seguro-gastos-finales",
-    "tipos-planes-seguro-gastos-finales"
+    "cuanto-cuesta-seguro-gastos-finales"
   ]
 }

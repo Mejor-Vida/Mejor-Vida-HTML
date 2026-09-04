@@ -65,6 +65,11 @@
           "teaser": "Cómo funciona el contrato con la funeraria, dónde queda el dinero, qué preguntar antes de firmar y cómo se diferencia del seguro."
         },
         {
+          "slug": "como-pagar-un-funeral",
+          "question": "¿Cómo se paga un funeral?",
+          "teaser": "Ahorros, prepago, seguro de vida, el pago de $255 del Seguro Social, ayudas del VA y préstamos — qué cubre cada vía y qué no."
+        },
+        {
           "slug": "cuanta-cobertura-gastos-finales-necesito",
           "question": "¿Cuánta cobertura de gastos finales necesito?",
           "teaser": "$5,000, $10,000 o $15,000 — cómo elegir el monto adecuado."
@@ -185,11 +190,6 @@
           "slug": "cremacion-vs-entierro-nebraska",
           "question": "Cremación vs entierro — ¿cuánto cuesta en Nebraska?",
           "teaser": "Compare costos y cómo influye en la cobertura que necesita."
-        },
-        {
-          "slug": "como-pagar-funeral-sin-seguro",
-          "question": "¿Cómo pagar un funeral sin seguro?",
-          "teaser": "Opciones de financiamiento, familia y por qué planificar antes ayuda."
         },
         {
           "slug": "seguro-gastos-finales-vs-prepago-funerario",

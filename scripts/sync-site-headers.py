@@ -110,6 +110,7 @@ def prepare_en_header(path: Path) -> str:
                 "final-expense-insurance.html",
                 "how-much-does-a-funeral-cost.html",
                 "prepaid-funerals.html",
+                "how-to-pay-for-a-funeral.html",
                 "no-waiting-period-life-burial.html",
                 "contact.html",
                 "quote.html",

@@ -60,6 +60,7 @@ const {
 const { copyFeProduct, feProductMain } = require("./final-expense-insurance-content");
 const { copyFuneralCost, funeralCostMain } = require("./funeral-cost-content");
 const { copyPrepaid, prepaidMain } = require("./prepaid-funeral-content");
+const { copyPay, payMain } = require("./pay-funeral-content");
 const { quoteRailHtml } = require("./lic-quote-rail");
 const ES_HEADER = path.join(ROOT, "includes/site-header-inner.html");
 const EN_HEADER = path.join(ROOT, "includes/en-site-header.html");
@@ -287,6 +288,17 @@ const PAGES = {
       width: 1024,
       height: 682,
       cache: "20260903-prepaid",
+    },
+  },
+  payFuneral: {
+    esFile: "como-pagar-un-funeral.html",
+    enFile: "how-to-pay-for-a-funeral.html",
+    hero: {
+      base: "fep-hero-bus-stop-couple",
+      modifier: "couple",
+      width: 1024,
+      height: 682,
+      cache: "20260903-pay",
     },
   },
   condHub: {
@@ -1149,6 +1161,8 @@ function headHtml(lang, page, c, kind) {
                             ? "lic-page lic-page--seniors lic-page--funeral-cost"
                           : kind === "prepaidFuneral"
                             ? "lic-page lic-page--seniors lic-page--prepaid"
+                          : kind === "payFuneral"
+                            ? "lic-page lic-page--seniors lic-page--pay"
                           : kind === "condHub" ||
                             kind === "condTerm" ||
                             kind === "diabetes" ||
@@ -1205,7 +1219,7 @@ function headHtml(lang, page, c, kind) {
 <link href="${prefix}css/quote-flow-shared.css?v=20260723-mobile-menu" rel="stylesheet"/>
 <link href="${prefix}css/site-header.css?v=20260723-ver-precios-gold" rel="stylesheet"/>
 <link href="${prefix}css/nav-life-insurance.css?v=20260831-navicons" rel="stylesheet"/>
-<link href="${prefix}css/life-insurance-cost.css?v=20260903-prepaid" rel="stylesheet"/>
+<link href="${prefix}css/life-insurance-cost.css?v=20260903-pay" rel="stylesheet"/>
 <link href="${prefix}css/mvi-assistant-widget.css?v=20260721-chat-z" rel="stylesheet"/>
 <link href="${prefix}css/fontawesome-mvi.min.css?v=20260723-brands-fix" rel="stylesheet"/>
 <style>body { font-family: Inter, system-ui, -apple-system, sans-serif; }</style>
@@ -2124,7 +2138,7 @@ function giRatesPayload() {
 
 function examRateScripts(lang, kind) {
   const prefix = lang === "es" ? "" : "../";
-  if (kind === "findPolicy" || kind === "funeralCost" || kind === "prepaidFuneral") return "";
+  if (kind === "findPolicy" || kind === "funeralCost" || kind === "prepaidFuneral" || kind === "payFuneral") return "";
   if (kind === "feProduct") {
     const payload = feProductRatesPayload();
     payload.final_expense.note =
@@ -2247,6 +2261,7 @@ function copyFor(kind, lang) {
   if (kind === "feProduct") return copyFeProduct(lang);
   if (kind === "funeralCost") return copyFuneralCost(lang);
   if (kind === "prepaidFuneral") return copyPrepaid(lang);
+  if (kind === "payFuneral") return copyPay(lang);
   if (kind === "condHub") return copyCondHub(lang);
   if (kind === "condTerm") return copyCondTerm(lang);
   if (kind === "diabetes") return copyDiabetes(lang);
@@ -2281,6 +2296,7 @@ function mainFor(kind, lang, page, c) {
   if (kind === "feProduct") return feProductMain(lang, page, c);
   if (kind === "funeralCost") return funeralCostMain(lang, page, c);
   if (kind === "prepaidFuneral") return prepaidMain(lang, page, c);
+  if (kind === "payFuneral") return payMain(lang, page, c);
   if (kind === "condHub") return condHubMain(lang, page, c);
   if (kind === "condTerm") return condTermMain(lang, page, c);
   if (kind === "diabetes") return diabetesMain(lang, page, c);
@@ -2343,6 +2359,7 @@ function main() {
     "feProduct",
     "funeralCost",
     "prepaidFuneral",
+    "payFuneral",
     "condHub",
     "condTerm",
     "diabetes",

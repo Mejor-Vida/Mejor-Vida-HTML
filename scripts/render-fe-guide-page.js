@@ -12,7 +12,7 @@ const DEFAULTS_FILE = path.join(GUIDES_DIR, "_defaults.json");
 const SHELL = path.join(ROOT, "blog/_fe-guide-shell.html");
 const HEADER_SRC = path.join(ROOT, "includes/site-header-inner.html");
 const FOOTER_SRC = path.join(ROOT, "includes/site-footer-inner.html");
-const { renderTocChrome } = require("../lib/fe-guide-catalog");
+const { renderTocChrome, guideHref, isGuidePublished } = require("../lib/fe-guide-catalog");
 const FAQ_INDEX = path.join(ROOT, "data/fe-guide-faq-index.json");
 const BASE = "https://www.mejorvidainsurance.com";
 
@@ -134,10 +134,8 @@ function renderGuide(guide, faqIndex, shell) {
     const items = guide.relatedSlugs
       .map((slug) => {
         const meta = faqIndex.get(slug);
-        const guideJson = path.join(GUIDES_DIR, `${slug}.json`);
-        const guideHtml = path.join(ROOT, "blog", `${slug}.html`);
-        if (!meta || (!fs.existsSync(guideJson) && !fs.existsSync(guideHtml))) return "";
-        return `    <li><a href="${slug}.html">${escHtml(meta.question)}</a></li>`;
+        if (!meta || !isGuidePublished(slug)) return "";
+        return `    <li><a href="${escHtml(guideHref(slug, { inBlogDir: true }))}">${escHtml(meta.question)}</a></li>`;
       })
       .filter(Boolean)
       .join("\n");
