@@ -142,8 +142,8 @@ function copyFuneralCost(lang) {
   const L = LINKS[lang];
   const estimator = "final-expense-estimator.html";
   const prepaid = isEs
-    ? "blog/final-expense-vs-prepagado-funerario-2026-07-19.html"
-    : "blog/final-expense-vs-prepaid-funeral-2026-07-19.html";
+    ? "funerales-prepagados.html"
+    : "prepaid-funerals.html";
   const payPage = isEs
     ? "blog/medicare-paga-gastos-finales.html"
     : "../blog/medicare-paga-gastos-finales.html";
@@ -455,13 +455,13 @@ function funeralCostMain(lang, page, c) {
 <a href="final-expense-estimator.html">Calculadora</a> ·
 <a href="${L.fe}">Seguro de gastos finales</a> ·
 <a href="blog/cuanto-cuesta-seguro-gastos-finales.html">Precio del seguro</a> ·
-<a href="blog/final-expense-vs-prepagado-funerario-2026-07-19.html">Prepagado</a> ·
+<a href="funerales-prepagados.html">Prepagado</a> ·
 <a href="seguro-para-cremacion.html">Cremación</a></p>`
     : `<p class="lic-rate-note">More in this section:
 <a href="final-expense-estimator.html">Calculator</a> ·
 <a href="${L.fe}">Final expense</a> ·
 <a href="final-expense-cost.html">Insurance cost</a> ·
-<a href="blog/final-expense-vs-prepaid-funeral-2026-07-19.html">Prepaid</a> ·
+<a href="prepaid-funerals.html">Prepaid</a> ·
 <a href="cremation-insurance.html">Cremation</a></p>`;
   return `<main>
 <section class="lic-hero">

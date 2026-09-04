@@ -186,19 +186,27 @@
   object-position: center 32%;
 }
 
-.lic-page--funeral-cost .lic-fun-nfda {
+.lic-hero-media--bridge picture,
+.lic-hero-media--bridge img {
+  object-position: center 42%;
+}
+
+.lic-page--funeral-cost .lic-fun-nfda,
+.lic-page--prepaid .lic-fun-nfda {
   display: grid;
   gap: 0.9rem;
   margin: 1rem 0 0.35rem;
 }
 
 @media (min-width: 640px) {
-  .lic-page--funeral-cost .lic-fun-nfda {
+  .lic-page--funeral-cost .lic-fun-nfda,
+  .lic-page--prepaid .lic-fun-nfda {
     grid-template-columns: 1fr 1fr;
   }
 }
 
-.lic-page--funeral-cost .lic-fun-nfda__card {
+.lic-page--funeral-cost .lic-fun-nfda__card,
+.lic-page--prepaid .lic-fun-nfda__card {
   background: #fff;
   border: 1px solid #d7e3f4;
   border-radius: 0.85rem;
@@ -207,11 +215,13 @@
   border-top: 4px solid #0b3a7a;
 }
 
-.lic-page--funeral-cost .lic-fun-nfda__card--gold {
+.lic-page--funeral-cost .lic-fun-nfda__card--gold,
+.lic-page--prepaid .lic-fun-nfda__card--gold {
   border-top-color: #f5a623;
 }
 
-.lic-page--funeral-cost .lic-fun-nfda__kicker {
+.lic-page--funeral-cost .lic-fun-nfda__kicker,
+.lic-page--prepaid .lic-fun-nfda__kicker {
   margin: 0 0 0.35rem;
   font-size: 0.78rem;
   font-weight: 700;
@@ -220,7 +230,8 @@
   color: #64748b;
 }
 
-.lic-page--funeral-cost .lic-fun-nfda__amt {
+.lic-page--funeral-cost .lic-fun-nfda__amt,
+.lic-page--prepaid .lic-fun-nfda__amt {
   margin: 0;
   font-size: 2.05rem;
   line-height: 1.1;
@@ -229,7 +240,8 @@
   font-variant-numeric: tabular-nums;
 }
 
-.lic-page--funeral-cost .lic-fun-nfda__label {
+.lic-page--funeral-cost .lic-fun-nfda__label,
+.lic-page--prepaid .lic-fun-nfda__label {
   margin: 0.4rem 0 0;
   color: #334155;
   font-size: 0.98rem;
@@ -3449,4 +3461,90 @@ a.lic-co-card--link .lic-co-specs dd {
   .lic-compare-band {
     margin-top: 0.75rem;
   }
+}
+
+.lic-pre-money {
+  display: grid;
+  gap: 0.9rem;
+  margin: 1rem 0 0.5rem;
+}
+
+@media (min-width: 800px) {
+  .lic-pre-money {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+.lic-pre-money__card {
+  background: #fff;
+  border: 1px solid #d7e3f4;
+  border-radius: 0.85rem;
+  padding: 1.1rem 1.15rem 1.2rem;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.05);
+  border-top: 4px solid #0b3a7a;
+}
+
+.lic-pre-money__card--gold {
+  border-top-color: #f5a623;
+}
+
+.lic-pre-money__kicker {
+  margin: 0 0 0.35rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #64748b;
+}
+
+.lic-pre-money__card h3 {
+  margin: 0 0 0.45rem;
+  color: #0b3a7a;
+  font-size: 1.08rem;
+  line-height: 1.3;
+}
+
+.lic-pre-money__card p {
+  margin: 0;
+  color: #334155;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.lic-pre-ask {
+  margin: 1rem 0 0.35rem;
+  padding: 0;
+  list-style: none;
+  counter-reset: pre-ask;
+  display: grid;
+  gap: 0.7rem;
+}
+
+.lic-pre-ask li {
+  counter-increment: pre-ask;
+  position: relative;
+  background: #fff;
+  border: 1px solid #d7e3f4;
+  border-radius: 0.75rem;
+  padding: 0.95rem 1.1rem 0.95rem 3.4rem;
+  color: #1f2937;
+  line-height: 1.5;
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.04);
+}
+
+.lic-pre-ask li::before {
+  content: counter(pre-ask);
+  position: absolute;
+  left: 0.85rem;
+  top: 0.85rem;
+  width: 1.85rem;
+  height: 1.85rem;
+  border-radius: 999px;
+  background: #0b3a7a;
+  color: #fff;
+  font-weight: 800;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
