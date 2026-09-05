@@ -26,8 +26,9 @@
  <link href="../css/fontawesome-mvi.min.css?v=20260723-brands-fix" rel="stylesheet"/>
  <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css" />
  <link rel="stylesheet" href="../css/quote-flow-shared.css?v=20260723-mobile-menu" />
- <link rel="stylesheet" href="css/landing-flow.css?v=20260707v3usted" />
+ <link rel="stylesheet" href="css/landing-flow.css?v=20260905-docks2" />
  <link rel="stylesheet" href="css/landing-quote-results.css?v=20260605b" />
+ <link rel="stylesheet" href="../css/mvi-leave-message-widget.css?v=20260904-back-scroll" />
  <link rel="preload" as="image" href="../img/opt/landing-v3-quote-cta-hero.webp?v=20260705v3hero2" type="image/webp" />
 </head>
 <body class="lf-landing lf-landing--bio-pro" data-total-steps="8" data-product-line="final-expense" data-inline-quote-results="1">
@@ -79,9 +80,6 @@
       <span class="lf-objective-chevron" aria-hidden="true"><i class="fa-solid fa-chevron-right"></i></span>
      </span>
     </button>
-   </div>
-   <div class="lf-hero-reassurance">
-    <p class="lf-hero-reassurance-local">Somos una agencia de seguros independiente y local en Lincoln, Nebraska. No somos una empresa nacional de generación de prospectos que compra ni revende su información.</p>
    </div>
   </section>
 
@@ -439,34 +437,7 @@
    <button type="button" class="lf-btn-next" id="lf-btn-next" disabled>Continuar hacia su precio →</button>
   </div>
 
-  <button type="button" class="lf-julie-card lf-julie-card--after-next lf-julie-card--clickable lf-julie-card--pro" id="lf-julie-after-next" hidden data-bs-toggle="modal" data-bs-target="#lf-julie-bio-modal" aria-label="Información profesional sobre Mejor Vida Seguros">
-<div class="lf-julie-info lf-julie-info--pro">
-    <p class="lf-julie-name">Mejor Vida Seguros</p>
-    <p class="lf-julie-title">Especialistas en seguros de gastos finales</p>
-    <p class="lf-julie-license">Nebraska · Licencia de agencia #21695431</p>
-    <p class="lf-julie-pro-link">Información profesional <span aria-hidden="true">→</span></p>
-   </div>
-  </button>
-
  </main>
-
- <div class="modal fade" id="lf-julie-bio-modal" tabindex="-1" aria-labelledby="lf-julie-bio-modal-title" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-   <div class="modal-content">
-    <div class="modal-header border-bottom-0 pb-0">
-     <h2 class="modal-title h5 fw-bold" id="lf-julie-bio-modal-title" style="color:#1a365d;">Mejor Vida Seguros</h2>
-     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-    </div>
-    <div class="modal-body pt-2 lf-julie-bio-modal-body lf-julie-bio-modal-body--pro">
-     <p class="lf-julie-bio-modal-lead">Agencia de seguros licenciada · Nebraska</p>
-     <p>Mejor Vida Seguros es una agencia de seguros licenciada, especializada en cobertura de gastos finales para familias en Nebraska y en todo Estados Unidos.</p>
-     <p>Nuestro enfoque es ayudarle a identificar exactamente lo que necesita: comparar opciones entre aseguradoras, explicar beneficios y costos con claridad, y orientarle hacia un plan que se ajuste a su situación y presupuesto — sin presión y con información objetiva.</p>
-     <p>Atención en español e inglés.</p>
-     <p class="mb-0 lf-julie-bio-modal-license">NPN #21695431. <a href="/licencias.html" rel="noopener noreferrer">Ver licencias</a></p>
-    </div>
-   </div>
-  </div>
- </div>
 
  <div class="modal fade" id="lf-policy-modal" tabindex="-1" aria-labelledby="lf-policy-modal-title" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
@@ -519,5 +490,12 @@
  <script src="/js/mvi-consent-capture.js?v=20260712i"></script>
  <script src="js/landing-flow-quote-submit.js?v=20260712i"></script>
  <script src="js/landing-flow.js?v=20260707v3noresultsbanner"></script>
+ <script defer src="../js/mvi-leave-message-widget.js?v=20260904-back-scroll"></script>
+
+ <aside class="lf-learn-more-dock" aria-label="Visite el sitio web de Mejor Vida Seguros">
+  <p class="lf-learn-more-kicker">¿Quiere saber más?</p>
+  <p class="lf-learn-more-title">Visite nuestro sitio web</p>
+  <a class="lf-learn-more-btn" href="/?utm_source=landing-v3&amp;utm_medium=sticky&amp;utm_content=learn-more" target="_blank" rel="noopener noreferrer">Haga clic aquí</a>
+ </aside>
 </body>
 </html>
