@@ -3060,8 +3060,8 @@ body.lf-landing--calc-results #lf-next-default-anchor {
   margin-top: 0.55rem;
   padding: 0.42rem 0.5rem;
   border-radius: 4px;
-  background: #0d47a1;
-  color: #fff;
+  background: #fec963;
+  color: #1a202c;
   font-size: 0.78rem;
   font-weight: 700;
   line-height: 1.2;
@@ -3071,8 +3071,8 @@ body.lf-landing--calc-results #lf-next-default-anchor {
 
 .lf-learn-more-btn:hover,
 .lf-learn-more-btn:focus-visible {
-  background: #0a3d8f;
-  color: #fff;
+  background: #f5b942;
+  color: #1a202c;
 }
 
 .lf-learn-more-btn:focus-visible {
@@ -3164,7 +3164,7 @@ body.lf-landing .mvi-lm-consent-label {
     gap: 1.85rem;
     width: 100%;
     max-width: 22rem;
-    margin: 2.4rem auto 0;
+    margin: 6.5rem auto 0;
     padding: 0 0.75rem 5.75rem;
   }
 
