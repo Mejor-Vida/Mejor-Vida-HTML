@@ -14,15 +14,31 @@
   var READ_MORE_AT = 420;
   var MAX_STORED_MESSAGES = 24;
 
-  /** Cost pages and other long pages were opening at the footer via history scroll restoration / bottom-dock focus. */
-  function preferTopOnFreshLoad() {
-    var hash = String((location && location.hash) || "");
-    if (hash && hash !== "#" && hash !== "#home" && hash !== "#top") return;
+  function isBackForwardNavigation() {
     try {
-      if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+      var nav = performance.getEntriesByType && performance.getEntriesByType("navigation")[0];
+      if (nav && nav.type === "back_forward") return true;
     } catch (e) {
       /* ignore */
     }
+    try {
+      if (performance.navigation && performance.navigation.type === 2) return true;
+    } catch (e2) {
+      /* ignore */
+    }
+    return false;
+  }
+
+  /** Fresh loads stay at the top (bottom-dock widgets can steal focus). Back/Forward keep scroll. */
+  function preferTopOnFreshLoad() {
+    try {
+      if ("scrollRestoration" in history) history.scrollRestoration = "auto";
+    } catch (e) {
+      /* ignore */
+    }
+    if (isBackForwardNavigation()) return;
+    var hash = String((location && location.hash) || "");
+    if (hash && hash !== "#" && hash !== "#home" && hash !== "#top") return;
     try {
       window.scrollTo(0, 0);
       if (document.documentElement) document.documentElement.scrollTop = 0;
@@ -806,13 +822,13 @@
     if (!document.querySelector('link[href*="mvi-leave-message-widget"]')) {
       var link = document.createElement("link");
       link.rel = "stylesheet";
-      link.href = absFromBase("css/mvi-leave-message-widget.css?v=20260813-scroll-top");
+      link.href = absFromBase("css/mvi-leave-message-widget.css?v=20260905-minimize");
       document.head.appendChild(link);
     }
 
     var s = document.createElement("script");
     s.defer = true;
-    s.src = absFromBase("js/mvi-leave-message-widget.js?v=20260813-scroll-top");
+    s.src = absFromBase("js/mvi-leave-message-widget.js?v=20260905-minimize");
     document.head.appendChild(s);
   })();
 })();

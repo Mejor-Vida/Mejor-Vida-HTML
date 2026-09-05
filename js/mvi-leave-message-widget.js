@@ -10,15 +10,31 @@
   var API_URL = "/api/contact-message";
   var ROOT_ID = "mvi-leave-message-root";
 
-  /** Keep fresh loads at the top (widgets append at end of <body>; focus/scroll restoration otherwise lands on the footer). */
-  function preferTopOnFreshLoad() {
-    var hash = String((location && location.hash) || "");
-    if (hash && hash !== "#" && hash !== "#home" && hash !== "#top") return;
+  function isBackForwardNavigation() {
     try {
-      if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+      var nav = performance.getEntriesByType && performance.getEntriesByType("navigation")[0];
+      if (nav && nav.type === "back_forward") return true;
     } catch (e) {
       /* ignore */
     }
+    try {
+      if (performance.navigation && performance.navigation.type === 2) return true;
+    } catch (e2) {
+      /* ignore */
+    }
+    return false;
+  }
+
+  /** Keep fresh loads at the top (widgets append at end of <body>). Back/Forward keep scroll. */
+  function preferTopOnFreshLoad() {
+    try {
+      if ("scrollRestoration" in history) history.scrollRestoration = "auto";
+    } catch (e) {
+      /* ignore */
+    }
+    if (isBackForwardNavigation()) return;
+    var hash = String((location && location.hash) || "");
+    if (hash && hash !== "#" && hash !== "#home" && hash !== "#top") return;
     try {
       window.scrollTo(0, 0);
       if (document.documentElement) document.documentElement.scrollTop = 0;
@@ -158,7 +174,9 @@
       '    <button type="button" class="mvi-lm-minimize" data-mvi-lm-minimize aria-label="' +
       escapeHtml(t.minimize) +
       '">' +
-      '      <i class="fas fa-minus" aria-hidden="true"></i>' +
+      '      <svg class="mvi-lm-minimize-icon" viewBox="0 0 12 12" focusable="false" aria-hidden="true">' +
+      '        <path d="M2.2 6h7.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>' +
+      "      </svg>" +
       "    </button>" +
       "  </div>" +
       '  <div class="mvi-lm-body">' +
