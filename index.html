@@ -14,16 +14,37 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
 <script>
- // Always open the homepage at the top; #home and browser restoration can
- // otherwise position the hero underneath the sticky header.
- if ("scrollRestoration" in history) history.scrollRestoration = "manual";
- if (location.hash === "#home") {
-  history.replaceState(null, "", location.pathname + location.search);
- }
- window.scrollTo(0, 0);
- window.addEventListener("pageshow", function () {
-  window.scrollTo(0, 0);
- });
+ (function () {
+  // Fresh homepage visits start at the top (#home would park the hero under
+  // the sticky header). Back/Forward keep the scroll position the visitor left.
+  if (location.hash === "#home") {
+   history.replaceState(null, "", location.pathname + location.search);
+  }
+  try {
+   if ("scrollRestoration" in history) history.scrollRestoration = "auto";
+  } catch (e) {}
+  function isBackForwardNav() {
+   try {
+    var nav = performance.getEntriesByType && performance.getEntriesByType("navigation")[0];
+    if (nav && nav.type === "back_forward") return true;
+   } catch (e1) {}
+   try {
+    if (performance.navigation && performance.navigation.type === 2) return true;
+   } catch (e2) {}
+   return false;
+  }
+  function forceHomeTopIfFresh() {
+   if (isBackForwardNav()) return;
+   var hash = location.hash || "";
+   if (hash && hash !== "#" && hash !== "#home" && hash !== "#top") return;
+   window.scrollTo(0, 0);
+  }
+  forceHomeTopIfFresh();
+  window.addEventListener("pageshow", function (e) {
+   if (e && e.persisted) return;
+   forceHomeTopIfFresh();
+  });
+ })();
 </script>
 <title>Seguro de Gastos Finales | Mejor Vida Seguros</title>
 <!-- Favicon — sun icon only (see scripts/generate-favicon-sun.js) -->
@@ -1386,6 +1407,7 @@
         <a href="funerales-prepagados.html">Funerales prepagados</a>
         <a href="como-pagar-un-funeral.html">Cómo pagar un funeral</a>
         <a href="como-planificar-su-funeral.html">Cómo planificar su funeral</a>
+        <a href="planificacion-patrimonial.html">Planificación patrimonial <span class="nav-link-gift">¡regalo gratis!</span></a>
         <a href="aseguradoras.html">Aseguradoras de confianza</a>
        </div>
        <a class="nav-funeral-feature" href="cuanto-cuesta-un-funeral.html">
@@ -1492,6 +1514,7 @@
      <a href="funerales-prepagados.html" class="mobile-menu-link">Funerales prepagados</a>
      <a href="como-pagar-un-funeral.html" class="mobile-menu-link">Cómo pagar un funeral</a>
      <a href="como-planificar-su-funeral.html" class="mobile-menu-link">Cómo planificar su funeral</a>
+     <a href="planificacion-patrimonial.html" class="mobile-menu-link">Planificación patrimonial <span class="nav-link-gift">¡regalo gratis!</span></a>
      <a href="aseguradoras.html" class="mobile-menu-link">Aseguradoras de confianza</a>
      <a href="final-expense-estimator.html" class="mobile-menu-link">Calculadora de gastos finales</a>
     </div>
@@ -2102,7 +2125,7 @@
 <script defer src="js/state-coverage-costs.js?v=20260726a"></script>
 <script defer src="js/mvi-licensing-map.js?v=20260808-no-dl"></script>
 <script defer src="js/mvi-home-difference.js?v=20260808-why"></script>
-<script defer src="js/website-assistant-widget.js?v=20260813-scroll-top"></script>
-<script defer src="js/mvi-leave-message-widget.js?v=20260813-scroll-top"></script>
+<script defer src="js/website-assistant-widget.js?v=20260904-back-scroll"></script>
+<script defer src="js/mvi-leave-message-widget.js?v=20260904-back-scroll"></script>
 </body>
 </html>

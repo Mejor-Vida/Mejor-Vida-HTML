@@ -13,16 +13,37 @@
  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
  <script>
-  // Always open the homepage at the top; #home and browser restoration can
-  // otherwise position the hero underneath the sticky header.
-  if ("scrollRestoration" in history) history.scrollRestoration = "manual";
-  if (location.hash === "#home") {
-   history.replaceState(null, "", location.pathname + location.search);
-  }
-  window.scrollTo(0, 0);
-  window.addEventListener("pageshow", function () {
-   window.scrollTo(0, 0);
-  });
+  (function () {
+   // Fresh homepage visits start at the top (#home would park the hero under
+   // the sticky header). Back/Forward keep the scroll position the visitor left.
+   if (location.hash === "#home") {
+    history.replaceState(null, "", location.pathname + location.search);
+   }
+   try {
+    if ("scrollRestoration" in history) history.scrollRestoration = "auto";
+   } catch (e) {}
+   function isBackForwardNav() {
+    try {
+     var nav = performance.getEntriesByType && performance.getEntriesByType("navigation")[0];
+     if (nav && nav.type === "back_forward") return true;
+    } catch (e1) {}
+    try {
+     if (performance.navigation && performance.navigation.type === 2) return true;
+    } catch (e2) {}
+    return false;
+   }
+   function forceHomeTopIfFresh() {
+    if (isBackForwardNav()) return;
+    var hash = location.hash || "";
+    if (hash && hash !== "#" && hash !== "#home" && hash !== "#top") return;
+    window.scrollTo(0, 0);
+   }
+   forceHomeTopIfFresh();
+   window.addEventListener("pageshow", function (e) {
+    if (e && e.persisted) return;
+    forceHomeTopIfFresh();
+   });
+  })();
  </script>
 
  <title>Seguro de Gastos Finales | Mejor Vida Insurance LLC</title>

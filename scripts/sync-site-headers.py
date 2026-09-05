@@ -27,6 +27,7 @@ SKIP_DIRS = {
     "scripts",
     "en",
     "sources",
+    "guides",
 }
 SKIP_FILES = {"blog/blog-template.html"}
 
@@ -112,6 +113,7 @@ def prepare_en_header(path: Path) -> str:
                 "prepaid-funerals.html",
                 "how-to-pay-for-a-funeral.html",
                 "how-to-plan-your-funeral.html",
+                "estate-planning.html",
                 "no-waiting-period-life-burial.html",
                 "contact.html",
                 "quote.html",

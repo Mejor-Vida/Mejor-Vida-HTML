@@ -131,6 +131,26 @@
   outline: none;
 }
 
+.nav-link-gift {
+  display: inline-block;
+  margin-left: 0.35rem;
+  padding: 0.12rem 0.4rem;
+  border-radius: 999px;
+  background: #f5a623;
+  color: #0b3a7a;
+  font-size: 0.68rem;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.nav-funeral-links a:hover .nav-link-gift,
+.nav-funeral-links a:focus-visible .nav-link-gift {
+  color: #0b3a7a;
+}
+
 .nav-funeral-chat-link i {
   width: 1rem;
   margin-right: 0.3rem;

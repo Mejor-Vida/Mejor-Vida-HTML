@@ -656,6 +656,21 @@ header.sticky-top .header-logo-wrap {
   text-decoration: underline;
 }
 
+.mobile-menu .nav-link-gift {
+  display: inline-block;
+  margin-left: 0.35rem;
+  padding: 0.12rem 0.4rem;
+  border-radius: 999px;
+  background: #f5a623;
+  color: #0b3a7a;
+  font-size: 0.68rem;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
 /* Keep floating FABs from covering the open menu */
 body:has(.mobile-menu.active) .mvi-float-stack {
   visibility: hidden;

@@ -62,6 +62,7 @@ const { copyFuneralCost, funeralCostMain } = require("./funeral-cost-content");
 const { copyPrepaid, prepaidMain } = require("./prepaid-funeral-content");
 const { copyPay, payMain } = require("./pay-funeral-content");
 const { copyPlan, planMain } = require("./plan-funeral-content");
+const { copyEstate, estateMain } = require("./estate-planning-content");
 const { quoteRailHtml } = require("./lic-quote-rail");
 const ES_HEADER = path.join(ROOT, "includes/site-header-inner.html");
 const EN_HEADER = path.join(ROOT, "includes/en-site-header.html");
@@ -311,6 +312,17 @@ const PAGES = {
       width: 1024,
       height: 576,
       cache: "20260904-plan",
+    },
+  },
+  estatePlanning: {
+    esFile: "planificacion-patrimonial.html",
+    enFile: "estate-planning.html",
+    hero: {
+      base: "lic-hero-family-tuscany",
+      modifier: "estate",
+      width: 1024,
+      height: 523,
+      cache: "20260904-estate",
     },
   },
   condHub: {
@@ -1177,6 +1189,8 @@ function headHtml(lang, page, c, kind) {
                             ? "lic-page lic-page--seniors lic-page--pay"
                           : kind === "planFuneral"
                             ? "lic-page lic-page--seniors lic-page--plan"
+                          : kind === "estatePlanning"
+                            ? "lic-page lic-page--seniors lic-page--estate"
                           : kind === "condHub" ||
                             kind === "condTerm" ||
                             kind === "diabetes" ||
@@ -1230,10 +1244,10 @@ function headHtml(lang, page, c, kind) {
 <link href="${prefix}favicon.ico" rel="icon" type="image/x-icon"/>
 <link href="${prefix}bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
 <link href="${prefix}css/site-footer.css" rel="stylesheet"/>
-<link href="${prefix}css/quote-flow-shared.css?v=20260723-mobile-menu" rel="stylesheet"/>
+<link href="${prefix}css/quote-flow-shared.css?v=20260905-gift" rel="stylesheet"/>
 <link href="${prefix}css/site-header.css?v=20260723-ver-precios-gold" rel="stylesheet"/>
 <link href="${prefix}css/nav-life-insurance.css?v=20260831-navicons" rel="stylesheet"/>
-<link href="${prefix}css/life-insurance-cost.css?v=20260904-plan" rel="stylesheet"/>
+<link href="${prefix}css/life-insurance-cost.css?v=20260905-estate" rel="stylesheet"/>
 <link href="${prefix}css/mvi-assistant-widget.css?v=20260721-chat-z" rel="stylesheet"/>
 <link href="${prefix}css/fontawesome-mvi.min.css?v=20260723-brands-fix" rel="stylesheet"/>
 <style>body { font-family: Inter, system-ui, -apple-system, sans-serif; }</style>
@@ -2152,7 +2166,7 @@ function giRatesPayload() {
 
 function examRateScripts(lang, kind) {
   const prefix = lang === "es" ? "" : "../";
-  if (kind === "findPolicy" || kind === "funeralCost" || kind === "prepaidFuneral" || kind === "payFuneral" || kind === "planFuneral") return "";
+  if (kind === "findPolicy" || kind === "funeralCost" || kind === "prepaidFuneral" || kind === "payFuneral" || kind === "planFuneral" || kind === "estatePlanning") return "";
   if (kind === "feProduct") {
     const payload = feProductRatesPayload();
     payload.final_expense.note =
@@ -2277,6 +2291,7 @@ function copyFor(kind, lang) {
   if (kind === "prepaidFuneral") return copyPrepaid(lang);
   if (kind === "payFuneral") return copyPay(lang);
   if (kind === "planFuneral") return copyPlan(lang);
+  if (kind === "estatePlanning") return copyEstate(lang);
   if (kind === "condHub") return copyCondHub(lang);
   if (kind === "condTerm") return copyCondTerm(lang);
   if (kind === "diabetes") return copyDiabetes(lang);
@@ -2313,6 +2328,7 @@ function mainFor(kind, lang, page, c) {
   if (kind === "prepaidFuneral") return prepaidMain(lang, page, c);
   if (kind === "payFuneral") return payMain(lang, page, c);
   if (kind === "planFuneral") return planMain(lang, page, c);
+  if (kind === "estatePlanning") return estateMain(lang, page, c);
   if (kind === "condHub") return condHubMain(lang, page, c);
   if (kind === "condTerm") return condTermMain(lang, page, c);
   if (kind === "diabetes") return diabetesMain(lang, page, c);
@@ -2377,6 +2393,7 @@ function main() {
     "prepaidFuneral",
     "payFuneral",
     "planFuneral",
+    "estatePlanning",
     "condHub",
     "condTerm",
     "diabetes",

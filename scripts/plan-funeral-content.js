@@ -432,6 +432,7 @@ function planMain(lang, page, c) {
 <a href="cuanto-cuesta-un-funeral.html">Costo de un funeral</a> ·
 <a href="funerales-prepagados.html">Prepagado</a> ·
 <a href="como-pagar-un-funeral.html">Cómo se paga</a> ·
+<a href="planificacion-patrimonial.html">Plan patrimonial</a> ·
 <a href="${L.fe}">Seguro de gastos finales</a> ·
 <a href="seguro-para-cremacion.html">Cremación</a> ·
 <a href="guias-gastos-finales.html">Índice de guías</a></p>`
@@ -439,6 +440,7 @@ function planMain(lang, page, c) {
 <a href="how-much-does-a-funeral-cost.html">Funeral cost</a> ·
 <a href="prepaid-funerals.html">Prepaid</a> ·
 <a href="how-to-pay-for-a-funeral.html">How it’s paid</a> ·
+<a href="estate-planning.html">Estate planning</a> ·
 <a href="${L.fe}">Final expense</a> ·
 <a href="cremation-insurance.html">Cremation</a> ·
 <a href="../guias-gastos-finales.html">Guides index</a></p>`;

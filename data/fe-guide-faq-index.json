@@ -8,29 +8,41 @@
         {
           "slug": "que-es-seguro-gastos-finales",
           "question": "¿Qué es un seguro de gastos finales?",
+          "questionEn": "What is final expense insurance?",
           "cardLabel": "Qué es el seguro",
+          "cardLabelEn": "What is the insurance",
           "teaser": "Qué cubre, para quién sirve y cómo ayuda a su familia con el funeral y deudas pequeñas.",
+          "teaserEn": "What it covers, who it is for, and how it helps your family with funeral costs and small debts.",
           "image": "fe-guide-card-que-es"
         },
         {
           "slug": "tipos-planes-seguro-gastos-finales",
           "question": "¿Qué tipos de planes existen?",
+          "questionEn": "What types of plans are there?",
           "cardLabel": "Tipos de planes",
+          "cardLabelEn": "Types of plans",
           "teaser": "Emisión simplificada, modificada y garantizada — cómo difieren en salud, espera y aprobación.",
+          "teaserEn": "Simplified issue, graded, and guaranteed acceptance — how they differ in health questions, waiting periods, and approval.",
           "image": "fe-guide-card-tipos"
         },
         {
           "slug": "cuanto-cuesta-seguro-gastos-finales",
           "question": "¿Cuánto cuesta un seguro de gastos finales?",
+          "questionEn": "How much does final expense insurance cost?",
           "cardLabel": "Cuánto cuesta el seguro",
+          "cardLabelEn": "How much the insurance costs",
           "teaser": "Precio mensual del seguro por edad, salud, tabaco y cobertura — no la factura de la funeraria.",
+          "teaserEn": "Monthly premium by age, health, tobacco, and coverage — not the funeral home bill.",
           "image": "fe-guide-card-cuanto-cuesta"
         },
         {
           "slug": "medicare-paga-gastos-finales",
           "question": "¿Se encarga Medicare de pagar los gastos finales?",
+          "questionEn": "Does Medicare pay for final expenses?",
           "cardLabel": "Qué paga Medicare",
+          "cardLabelEn": "What Medicare pays",
           "teaser": "Qué paga Medicare, qué no cubre y por qué muchas familias necesitan otra protección.",
+          "teaserEn": "What Medicare pays, what it does not cover, and why many families need another form of protection.",
           "image": "fe-guide-card-medicare"
         },
         {
@@ -73,6 +85,11 @@
           "slug": "como-planificar-su-funeral",
           "question": "¿Cómo planificar su funeral?",
           "teaser": "Deje preferencias por escrito —tipo de servicio, funeraria, cementerio y quién tiene copias— sin tener que pagar por adelantado. El prepago y el seguro son decisiones aparte."
+        },
+        {
+          "slug": "planificacion-patrimonial",
+          "question": "¿Cómo dejar un plan patrimonial y los deseos del funeral?",
+          "teaser": "Pasos para testamento, poderes, beneficiarios y un cuaderno descargable de regalo. No sustituye a un abogado."
         },
         {
           "slug": "cuanta-cobertura-gastos-finales-necesito",

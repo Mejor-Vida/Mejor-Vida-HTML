@@ -22,6 +22,7 @@ const STATIC_PAGES = [
   { loc: "/funerales-prepagados.html", priority: "0.88" },
   { loc: "/como-pagar-un-funeral.html", priority: "0.88" },
   { loc: "/como-planificar-su-funeral.html", priority: "0.88" },
+  { loc: "/planificacion-patrimonial.html", priority: "0.88" },
   { loc: "/contact.html", priority: "0.75" },
   { loc: "/quote.html", priority: "0.90" },
   { loc: "/schedule-julie.html", priority: "0.75" },

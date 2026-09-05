@@ -81,6 +81,93 @@
   object-position: 58% 42%;
 }
 
+.lic-hero-media--estate picture,
+.lic-hero-media--estate img {
+  object-position: 48% 40%;
+}
+
+.lic-kicker {
+  margin: 0 0 0.35rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #f5a623;
+}
+
+.lic-gift {
+  margin: 1.25rem 0 0;
+  padding: 1.1rem 1.2rem 1.15rem;
+  background: #0b3a7a;
+  color: #fff;
+  border-radius: 0.7rem;
+  box-shadow: 0 8px 20px rgba(11, 58, 122, 0.18);
+}
+
+.lic-gift__badge {
+  display: inline-block;
+  margin: 0 0 0.45rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  background: #f5a623;
+  color: #0b3a7a;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.lic-gift h2 {
+  margin: 0 0 0.4rem;
+  color: #fff;
+  font-size: 1.25rem;
+  line-height: 1.25;
+}
+
+.lic-gift > p {
+  margin: 0 0 0.75rem;
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+
+.lic-gift__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem 1rem;
+  align-items: center;
+  margin: 0 0 0.55rem !important;
+}
+
+.lic-gift__btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.55rem 1rem;
+  border-radius: 999px;
+  background: #f5a623;
+  color: #0b3a7a;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.lic-gift__btn:hover,
+.lic-gift__btn:focus-visible {
+  background: #ffc107;
+  color: #0b3a7a;
+}
+
+.lic-gift__print {
+  color: #fff;
+  font-weight: 650;
+  text-decoration: underline;
+}
+
+.lic-gift__note {
+  margin: 0 !important;
+  font-size: 0.82rem !important;
+  color: rgba(255, 255, 255, 0.82) !important;
+}
+
 .lic-hero-media--corn picture,
 .lic-hero-media--corn img {
   object-position: 78% 40%;

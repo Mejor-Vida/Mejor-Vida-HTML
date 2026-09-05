@@ -14,16 +14,37 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
 <script>
- // Always open the homepage at the top; #home and browser restoration can
- // otherwise position the hero underneath the sticky header.
- if ("scrollRestoration" in history) history.scrollRestoration = "manual";
- if (location.hash === "#home") {
-  history.replaceState(null, "", location.pathname + location.search);
- }
- window.scrollTo(0, 0);
- window.addEventListener("pageshow", function () {
-  window.scrollTo(0, 0);
- });
+ (function () {
+  // Fresh homepage visits start at the top (#home would park the hero under
+  // the sticky header). Back/Forward keep the scroll position the visitor left.
+  if (location.hash === "#home") {
+   history.replaceState(null, "", location.pathname + location.search);
+  }
+  try {
+   if ("scrollRestoration" in history) history.scrollRestoration = "auto";
+  } catch (e) {}
+  function isBackForwardNav() {
+   try {
+    var nav = performance.getEntriesByType && performance.getEntriesByType("navigation")[0];
+    if (nav && nav.type === "back_forward") return true;
+   } catch (e1) {}
+   try {
+    if (performance.navigation && performance.navigation.type === 2) return true;
+   } catch (e2) {}
+   return false;
+  }
+  function forceHomeTopIfFresh() {
+   if (isBackForwardNav()) return;
+   var hash = location.hash || "";
+   if (hash && hash !== "#" && hash !== "#home" && hash !== "#top") return;
+   window.scrollTo(0, 0);
+  }
+  forceHomeTopIfFresh();
+  window.addEventListener("pageshow", function (e) {
+   if (e && e.persisted) return;
+   forceHomeTopIfFresh();
+  });
+ })();
 </script>
 <title>Final Expense Insurance | Mejor Vida Insurance LLC</title>
 
@@ -161,7 +182,7 @@
 <link href="../css/mvi-home-fe-about.css?v=20260725c" rel="stylesheet"/>
 <link href="../css/mvi-home-difference.css?v=20260808-wide" rel="stylesheet"/>
 <link href="../css/mvi-helpful-tools.css?v=20260808-tools3" rel="stylesheet"/>
-<link href="../css/fe-guide.css?v=20260726-center-titles" rel="stylesheet"/>
+<link href="../css/fe-guide.css?v=20260903-guide-labels" rel="stylesheet"/>
 <style>
   /* Smooth scrolling */
   html { scroll-behavior: smooth; }
@@ -1398,6 +1419,7 @@
         <a href="prepaid-funerals.html">Prepaid funerals</a>
         <a href="how-to-pay-for-a-funeral.html">How to pay for a funeral</a>
         <a href="how-to-plan-your-funeral.html">How to plan your own funeral</a>
+        <a href="estate-planning.html">Estate planning <span class="nav-link-gift">free gift!</span></a>
         <a href="insurance-carriers.html">Trusted insurance companies</a>
        </div>
        <a class="nav-funeral-feature" href="how-much-does-a-funeral-cost.html">
@@ -1504,6 +1526,7 @@
      <a href="prepaid-funerals.html" class="mobile-menu-link">Prepaid funerals</a>
      <a href="how-to-pay-for-a-funeral.html" class="mobile-menu-link">How to pay for a funeral</a>
      <a href="how-to-plan-your-funeral.html" class="mobile-menu-link">How to plan your own funeral</a>
+     <a href="estate-planning.html" class="mobile-menu-link">Estate planning <span class="nav-link-gift">free gift!</span></a>
      <a href="insurance-carriers.html" class="mobile-menu-link">Trusted insurance companies</a>
      <a href="final-expense-estimator.html" class="mobile-menu-link">Funeral Cost Calculator</a>
     </div>
@@ -1943,6 +1966,26 @@
 <div class="bg-white rounded-3 p-4 shadow-sm"><h3 class="h6 fw-bold mb-2" style="color:#1a365d;">How long does it take to get a policy?</h3><p class="small text-body-secondary lh-base mb-0">The process can be quick. After your quote form and a review with Julie (message or call once we have your details), many policies can be approved within days, depending on the insurer and your health.</p></div>
 <div class="bg-white rounded-3 p-4 shadow-sm"><h3 class="h6 fw-bold mb-2" style="color:#1a365d;">Do you offer service in Spanish?</h3><p class="small text-body-secondary lh-base mb-0">Yes, Julie offers personalized service in both Spanish and English. We understand the importance of communicating in your preferred language so you feel comfortable and fully understand your insurance options.</p></div>
 </div>
+<div class="text-center mt-5 mb-4">
+<h2 class="h2 fw-bold mb-3" style="color:#1a365d;">Final expense insurance guides</h2>
+</div>
+<div style="max-width:52rem;margin-left:auto;margin-right:auto;">
+   <!-- FE_GUIDE_FAQ_CARDS_START -->
+      <div class="row g-4 mb-2 fe-guide-media-grid">
+<div class="col-12 col-md-6"><a class="fe-guide-media-card" href="../blog/que-es-seguro-gastos-finales.html" aria-label="What is the insurance"><div class="fe-guide-media-card__media" aria-hidden="true"><picture><source type="image/webp" srcset="../img/opt/fe-guide-card-que-es.webp"/><img src="../img/opt/fe-guide-card-que-es.jpg" alt="" width="800" height="600" loading="lazy" decoding="async"/></picture></div><div class="fe-guide-media-card__body"><h3>What is the insurance</h3></div></a></div>
+<div class="col-12 col-md-6"><a class="fe-guide-media-card" href="../blog/tipos-planes-seguro-gastos-finales.html" aria-label="Types of plans"><div class="fe-guide-media-card__media" aria-hidden="true"><picture><source type="image/webp" srcset="../img/opt/fe-guide-card-tipos.webp"/><img src="../img/opt/fe-guide-card-tipos.jpg" alt="" width="800" height="600" loading="lazy" decoding="async"/></picture></div><div class="fe-guide-media-card__body"><h3>Types of plans</h3></div></a></div>
+<div class="col-12 col-md-6"><a class="fe-guide-media-card" href="../blog/cuanto-cuesta-seguro-gastos-finales.html" aria-label="How much the insurance costs"><div class="fe-guide-media-card__media" aria-hidden="true"><picture><source type="image/webp" srcset="../img/opt/fe-guide-card-cuanto-cuesta.webp"/><img src="../img/opt/fe-guide-card-cuanto-cuesta.jpg" alt="" width="800" height="600" loading="lazy" decoding="async"/></picture></div><div class="fe-guide-media-card__body"><h3>How much the insurance costs</h3></div></a></div>
+<div class="col-12 col-md-6"><a class="fe-guide-media-card" href="../blog/medicare-paga-gastos-finales.html" aria-label="What Medicare pays"><div class="fe-guide-media-card__media" aria-hidden="true"><picture><source type="image/webp" srcset="../img/opt/fe-guide-card-medicare.webp"/><img src="../img/opt/fe-guide-card-medicare.jpg" alt="" width="800" height="600" loading="lazy" decoding="async"/></picture></div><div class="fe-guide-media-card__body"><h3>What Medicare pays</h3></div></a></div>
+      </div>
+      <div class="text-center mt-4 mb-1">
+        <a class="fe-guide-faq-soon-btn" href="../guias-gastos-finales.html">
+          <span class="fe-guide-faq-soon-badge">Coming soon</span>
+          <span class="fe-guide-faq-soon-btn-label">24 more guides on the way</span>
+        </a>
+        <p class="small text-body-secondary mt-2 mb-0">We are writing more answers. Meanwhile, see the <a href="../guias-gastos-finales.html">full guide index</a>.</p>
+      </div>
+      <!-- FE_GUIDE_FAQ_CARDS_END -->
+</div>
 </div>
 </section>
 
@@ -2093,7 +2136,7 @@
 <script defer src="../js/state-coverage-costs.js?v=20260726a"></script>
 <script defer src="../js/mvi-licensing-map.js?v=20260808-no-dl"></script>
 <script defer src="../js/mvi-home-difference.js?v=20260808-why"></script>
-<script defer src="../js/website-assistant-widget.js?v=20260813-scroll-top"></script>
-<script defer src="../js/mvi-leave-message-widget.js?v=20260813-scroll-top"></script>
+<script defer src="../js/website-assistant-widget.js?v=20260904-back-scroll"></script>
+<script defer src="../js/mvi-leave-message-widget.js?v=20260904-back-scroll"></script>
 </body>
 </html>
