@@ -141,12 +141,15 @@
     if (existing) return existing;
     var root = document.createElement("div");
     root.id = ROOT_ID;
+    var mount = document.getElementById("mvi-leave-message-mount");
     // Inline fixed positioning so the dock never participates in document flow before CSS arrives.
+    // Pages with #mvi-leave-message-mount can unstick it with CSS (ads landing, mobile).
     root.setAttribute(
       "style",
       "position:fixed;z-index:1083;left:0.85rem;bottom:0;width:auto;max-width:calc(100vw - 5.5rem);pointer-events:none;",
     );
-    document.body.appendChild(root);
+    if (mount) mount.appendChild(root);
+    else document.body.appendChild(root);
     return root;
   }
 
