@@ -9,6 +9,7 @@ const fs = require("fs");
 const path = require("path");
 
 const ROOT = path.join(__dirname, "..");
+const { waQuoteUrl } = require("../lib/whatsapp-cta");
 
 const LOGO_ES = `<picture>
 <source type="image/webp" srcset="../img/opt/americo-logo.webp"/>
@@ -426,9 +427,7 @@ function wrapMain(body, lang) {
     ? "Diga qué quiere cubrir. Mejor Vida Seguros compara Americo con otras opciones — cotización gratuita y sin compromiso."
     : "Tell us what you want covered. Mejor Vida Insurance compares Americo with other options — free quote, no obligation.";
   const ctaBtn = isEs ? "Cotización gratuita" : "Free quote";
-  const wa = isEs
-    ? "https://wa.me/14024405438?text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20el%20seguro%20de%20gastos%20finales."
-    : "https://wa.me/14024405438?text=Hello%2C%20I%20am%20interested%20in%20learning%20about%20final%20expense%20insurance.";
+  const wa = waQuoteUrl(isEs ? "es" : "en");
   const waLabel = isEs ? "Contactar por WhatsApp" : "Contact on WhatsApp";
   const note = isEs
     ? `<p class="small text-muted mb-2"><strong>Nota:</strong> Esta página resume información general de marketing sobre productos de Americo Financial Life and Annuity Insurance Company. No sustituye la póliza, cotización ni contrato. Los beneficios, anexos y montos varían por estado y plan. Americo es la única responsable de sus productos.</p>

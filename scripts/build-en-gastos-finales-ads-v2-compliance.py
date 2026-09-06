@@ -49,8 +49,8 @@ STRUCTURAL_REPLACEMENTS = [
     ('aria-label="Volver al inicio de esta página"', 'aria-label="Return to start of this page"'),
     ('<span class="lf-help-label">¿Necesitas ayuda?</span>', '<span class="lf-help-label">Need help?</span>'),
     (
-        'text=Hola%2C%20me%20interes%C3%B3%20conocer%20el%20seguro%20de%20gastos%20finales.',
-        'text=Hello%2C%20I%20am%20interested%20in%20learning%20about%20final%20expense%20insurance.',
+        'text=Hola%2C%20quiero%20una%20cotizaci%C3%B3n%20gratis%20de%20seguro%20de%20gastos%20finales.',
+        'text=Hi%2C%20I%20want%20a%20free%20final%20expense%20insurance%20quote.',
     ),
     ('aria-label="WhatsApp con Mejor Vida"', 'aria-label="WhatsApp Mejor Vida"'),
     ('aria-label="Progreso"', 'aria-label="Progress"'),

@@ -1082,8 +1082,7 @@ def build_landing() -> None:
     wa = soup.select_one('a.lp-btn-wa[href*="wa.me"]')
     if wa:
         wa["href"] = (
-            "https://wa.me/14024405438?text=Hello%2C%20I%20saw%20your%20final%20expense%20"
-            "insurance%20page%20and%20would%20like%20more%20information."
+            "https://wa.me/14024405438?text=Hi%2C%20I%20want%20a%20free%20final%20expense%20insurance%20quote."
         )
 
     actions = soup.select_one(".lp-header-actions")
