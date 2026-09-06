@@ -941,7 +941,7 @@ function headHtml(face, lang, prefix) {
 <link href="${cssP}favicon.ico" rel="icon" type="image/x-icon"/>
 <link href="${cssP}bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
 <link href="${cssP}css/site-footer.css" rel="stylesheet"/>
-<link href="${cssP}css/quote-flow-shared.css?v=20260723-mobile-menu" rel="stylesheet"/>
+<link href="${cssP}css/quote-flow-shared.css?v=20260905-search" rel="stylesheet"/>
 <link href="${cssP}css/site-header.css?v=20260723-ver-precios-gold" rel="stylesheet"/>
 <link href="${cssP}css/nav-life-insurance.css?v=20260831-navicons" rel="stylesheet"/>
 <link href="${cssP}css/life-insurance-cost.css?v=20260817-heroes3" rel="stylesheet"/>

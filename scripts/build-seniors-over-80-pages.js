@@ -305,7 +305,7 @@ function headHtml(lang) {
 <link href="${prefix}favicon.ico" rel="icon" type="image/x-icon"/>
 <link href="${prefix}bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
 <link href="${prefix}css/site-footer.css" rel="stylesheet"/>
-<link href="${prefix}css/quote-flow-shared.css?v=20260723-mobile-menu" rel="stylesheet"/>
+<link href="${prefix}css/quote-flow-shared.css?v=20260905-search" rel="stylesheet"/>
 <link href="${prefix}css/site-header.css?v=20260723-ver-precios-gold" rel="stylesheet"/>
 <link href="${prefix}css/nav-life-insurance.css?v=20260831-navicons" rel="stylesheet"/>
 <link href="${prefix}css/life-insurance-cost.css?v=20260822-seniors-rail" rel="stylesheet"/>

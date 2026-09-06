@@ -30,14 +30,7 @@
 .mvi-helpful-tools__grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(0.85rem, 2vw, 1.25rem);
-}
-
-.mvi-helpful-tools__card:nth-child(3) {
-  grid-column: 1 / -1;
-  max-width: 36rem;
-  justify-self: center;
-  width: 100%;
+  gap: clamp(0.7rem, 1.6vw, 1rem);
 }
 
 .mvi-helpful-tools__media {
@@ -49,7 +42,7 @@
   flex-direction: column;
   min-height: 0;
   width: 100%;
-  padding: clamp(1rem, 1.8vw, 1.25rem) clamp(1rem, 1.8vw, 1.25rem) clamp(0.85rem, 1.5vw, 1.05rem);
+  padding: clamp(0.85rem, 1.5vw, 1.05rem) clamp(0.85rem, 1.5vw, 1.1rem) clamp(0.7rem, 1.3vw, 0.9rem);
   border: none;
   border-radius: 0.95rem;
   background: var(--mvi-tools-cream);
@@ -85,7 +78,7 @@
 .mvi-helpful-tools__card-title {
   margin: 0;
   color: var(--mvi-tools-navy);
-  font-size: clamp(1.05rem, 1.35vw, 1.2rem);
+  font-size: clamp(0.98rem, 1.2vw, 1.08rem);
   font-weight: 700;
   line-height: 1.25;
 }
@@ -101,7 +94,7 @@
 .mvi-helpful-tools__card-copy {
   margin: 0 0 0.85rem;
   color: var(--mvi-tools-muted);
-  font-size: clamp(0.88rem, 1.05vw, 0.95rem);
+  font-size: clamp(0.82rem, 1vw, 0.9rem);
   line-height: 1.5;
 }
 
@@ -132,10 +125,6 @@
     grid-template-columns: 1fr;
     max-width: 34rem;
     margin: 0 auto;
-  }
-
-  .mvi-helpful-tools__card:nth-child(3) {
-    max-width: none;
   }
 }
 

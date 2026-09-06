@@ -963,7 +963,7 @@ function renderEs(code) {
 <link href="${canon}" hreflang="x-default" rel="alternate"/>
 <link href="${prefix}favicon.ico" rel="icon" type="image/x-icon"/>
 <link href="${prefix}bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
-<link href="${prefix}css/quote-flow-shared.css?v=20260726-state" rel="stylesheet"/>
+<link href="${prefix}css/quote-flow-shared.css?v=20260905-search" rel="stylesheet"/>
 <link href="${prefix}css/site-footer.css?v=20260721-lip-page" rel="stylesheet"/>
 <link href="${prefix}css/state-coverage.css?v=20260808-carrier-score" rel="stylesheet"/>
 <link href="${prefix}css/mvi-licensing-map.css?v=20260726-state-cov" rel="stylesheet"/>
@@ -971,7 +971,7 @@ function renderEs(code) {
 <link href="${prefix}css/fontawesome-mvi.min.css?v=20260723-brands-fix" rel="stylesheet"/>
 <link href="${prefix}css/site-header.css?v=20260723-ver-precios-gold" rel="stylesheet"/>
 <link href="${prefix}css/nav-questions-dropdown.css" rel="stylesheet"/>
-<link href="${prefix}css/nav-about-mega.css?v=20260728-help-bg" rel="stylesheet"/>
+<link href="${prefix}css/nav-about-mega.css?v=20260905-search" rel="stylesheet"/>
 <link href="${prefix}css/nav-funeral-resources.css?v=20260728-photo-stronger" rel="stylesheet"/>
 <link href="${prefix}css/nav-life-insurance.css?v=20260831-navicons" rel="stylesheet"/>
 <meta property="og:type" content="website"/>
@@ -1070,7 +1070,7 @@ function renderEn(code) {
 <link href="${canon}" hreflang="en-US" rel="alternate"/>
 <link href="${root}favicon.ico" rel="icon" type="image/x-icon"/>
 <link href="${root}bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
-<link href="${root}css/quote-flow-shared.css?v=20260726-state" rel="stylesheet"/>
+<link href="${root}css/quote-flow-shared.css?v=20260905-search" rel="stylesheet"/>
 <link href="${root}css/site-footer.css?v=20260721-lip-page" rel="stylesheet"/>
 <link href="${root}css/state-coverage.css?v=20260808-carrier-score" rel="stylesheet"/>
 <link href="${root}css/mvi-licensing-map.css?v=20260726-state-cov" rel="stylesheet"/>
@@ -1078,7 +1078,7 @@ function renderEn(code) {
 <link href="${root}css/fontawesome-mvi.min.css?v=20260723-brands-fix" rel="stylesheet"/>
 <link href="${root}css/site-header.css?v=20260723-ver-precios-gold" rel="stylesheet"/>
 <link href="${root}css/nav-questions-dropdown.css" rel="stylesheet"/>
-<link href="${root}css/nav-about-mega.css?v=20260728-help-bg" rel="stylesheet"/>
+<link href="${root}css/nav-about-mega.css?v=20260905-search" rel="stylesheet"/>
 <link href="${root}css/nav-funeral-resources.css?v=20260728-photo-stronger" rel="stylesheet"/>
 <link href="${root}css/nav-life-insurance.css?v=20260831-navicons" rel="stylesheet"/>
 <meta property="og:type" content="website"/>

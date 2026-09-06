@@ -24,6 +24,7 @@ const STATIC_PAGES = [
   { loc: "/como-planificar-su-funeral.html", priority: "0.88" },
   { loc: "/planificacion-patrimonial.html", priority: "0.88" },
   { loc: "/contact.html", priority: "0.75" },
+  { loc: "/buscar-sitio.html", priority: "0.80" },
   { loc: "/quote.html", priority: "0.90" },
   { loc: "/schedule-julie.html", priority: "0.75" },
   { loc: "/aseguradoras.html", priority: "0.80" },

@@ -174,6 +174,7 @@ def prepare_en_header(path: Path) -> str:
                 "2000000-life-insurance-cost.html",
                 "3000000-life-insurance-cost.html",
                 "insurance-carriers.html",
+                "search-website.html",
             ):
                 header = header.replace(f'href="{name}#', f'href="{nest}{name}#')
                 header = header.replace(f'href="{name}"', f'href="{nest}{name}"')

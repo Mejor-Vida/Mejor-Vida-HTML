@@ -30,6 +30,7 @@
     "build:fa-subset": "node scripts/build-fa-subset.js",
     "apply:seo-performance": "node scripts/apply-seo-performance.js",
     "generate:sitemap": "node scripts/generate-sitemap.js",
+    "build:site-search": "node scripts/build-site-search-index.js",
     "render:fe-guide-faq": "node scripts/render-fe-guide-faq-index.js",
     "render:fe-guide": "node scripts/render-fe-guide-page.js",
     "render:fe-guides-hub": "node scripts/render-fe-guides-hub.js",

@@ -437,6 +437,10 @@
       "destination": "/en/contact.html"
     },
     {
+      "source": "/en/search-website",
+      "destination": "/en/search-website.html"
+    },
+    {
       "source": "/en/blog",
       "destination": "/en/blog.html"
     },
@@ -467,6 +471,10 @@
     {
       "source": "/en/schedule-julie",
       "destination": "/en/schedule-julie.html"
+    },
+    {
+      "source": "/buscar-sitio",
+      "destination": "/buscar-sitio.html"
     },
     {
       "source": "/en/quote-out-of-state",
