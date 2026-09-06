@@ -146,7 +146,7 @@
     // Pages with #mvi-leave-message-mount can unstick it with CSS (ads landing, mobile).
     root.setAttribute(
       "style",
-      "position:fixed;z-index:1083;left:0.85rem;bottom:0;width:auto;max-width:calc(100vw - 5.5rem);pointer-events:none;",
+      "position:fixed;z-index:1083;left:0.9rem;bottom:0.95rem;width:auto;max-width:16.5rem;pointer-events:none;",
     );
     if (mount) mount.appendChild(root);
     else document.body.appendChild(root);
@@ -160,7 +160,7 @@
     if (!root.getAttribute("style")) {
       root.setAttribute(
         "style",
-        "position:fixed;z-index:1083;left:0.85rem;bottom:0;width:auto;max-width:calc(100vw - 5.5rem);pointer-events:none;",
+        "position:fixed;z-index:1083;left:0.9rem;bottom:0.95rem;width:auto;max-width:16.5rem;pointer-events:none;",
       );
     }
 

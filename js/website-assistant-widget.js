@@ -822,13 +822,13 @@
     if (!document.querySelector('link[href*="mvi-leave-message-widget"]')) {
       var link = document.createElement("link");
       link.rel = "stylesheet";
-      link.href = absFromBase("css/mvi-leave-message-widget.css?v=20260905-minimize");
+      link.href = absFromBase("css/mvi-leave-message-widget.css?v=20260905-lmblue");
       document.head.appendChild(link);
     }
 
     var s = document.createElement("script");
     s.defer = true;
-    s.src = absFromBase("js/mvi-leave-message-widget.js?v=20260905-minimize");
+    s.src = absFromBase("js/mvi-leave-message-widget.js?v=20260905-lmblue");
     document.head.appendChild(s);
   })();
 })();

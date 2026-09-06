@@ -3080,7 +3080,7 @@ body.lf-landing--calc-results #lf-next-default-anchor {
   outline-offset: 2px;
 }
 
-/* Compact leave-a-message dock (landing only; do not change the main site widget). */
+/* Compact leave-a-message dock — keep landing pinned/unstuck; visual match is in the shared widget CSS. */
 body.lf-landing .mvi-lm-root {
   left: 0.9rem !important;
   bottom: 0.95rem !important;
