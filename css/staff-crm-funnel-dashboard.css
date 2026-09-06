@@ -106,6 +106,10 @@
   background: rgba(37, 99, 235, 0.06);
 }
 
+.crm-funnel-dest-tabs {
+  width: 100%;
+}
+
 .crm-funnel-section-title {
   margin: 0 0 6px;
   font-size: 1.05rem;

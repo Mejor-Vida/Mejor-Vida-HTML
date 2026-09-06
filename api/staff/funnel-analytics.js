@@ -7,10 +7,11 @@
  */
 const { requireStaffAuth } = require("../auth-check");
 const { json, serviceConfig, restSelect } = require("./_inbox-lib");
-const { buildDashboard, buildNodeDetail, groupSessions, filterSessions } = require("../../lib/funnel-analytics");
+const { buildDashboard, applyWhatsappAdFunnel, buildNodeDetail, groupSessions, filterSessions } = require("../../lib/funnel-analytics");
 const {
   resolveAdPlatformView,
   normalizeViewId,
+  parseViewId,
   viewShowsAdMetrics,
   viewShowsGsc,
   viewShowsGoogleAdsKeywords,
@@ -84,6 +85,31 @@ function resolveDateRange(query) {
   };
 }
 
+const QUOTED_STAGES = new Set([
+  "quoted",
+  "call_scheduled",
+  "call_completed",
+  "policy_issued",
+]);
+
+async function loadManychatLeadStats(cfg, startIso, endExclusiveIso) {
+  const q =
+    "select=id,pipeline_stage,created_at" +
+    "&created_at=gte." +
+    encodeURIComponent(startIso) +
+    "&created_at=lt." +
+    encodeURIComponent(endExclusiveIso) +
+    "&order=created_at.asc&limit=5000";
+  const rows = await restSelect(cfg, "manychat_leads", q);
+  const leads = rows || [];
+  return {
+    leads: leads.length,
+    quoted: leads.filter((row) =>
+      QUOTED_STAGES.has(String(row.pipeline_stage || "").toLowerCase())
+    ).length,
+  };
+}
+
 async function loadFunnelEvents(cfg, startIso, endExclusiveIso) {
   const q =
     "select=session_id,visitor_id,visitor_type,created_at,source,campaign,ad_set,ad_name,keyword,search_term,tool,step_name,event_type,page_or_step,device,event_data" +
@@ -108,7 +134,7 @@ module.exports = async function handler(req, res) {
   const cfg = serviceConfig();
   if (!cfg) return json(res, 500, { error: "Server missing required configuration" });
 
-  const view = normalizeViewId(String(req.query.view || "facebook_website").trim());
+  const view = normalizeViewId(String(req.query.view || "facebook_landing").trim());
   const adPlatformView = resolveAdPlatformView(view);
   const action = String(req.query.action || "").trim();
   const range = resolveDateRange(req.query);
@@ -270,6 +296,21 @@ module.exports = async function handler(req, res) {
         error: e.message || "Could not load ad impressions",
       };
     }
+  }
+
+  if (parseViewId(view).landingPage === "whatsapp") {
+    let leadStats = { leads: 0, quoted: 0 };
+    try {
+      leadStats = await loadManychatLeadStats(cfg, range.startIso, range.endExclusiveIso);
+    } catch (e) {
+      console.error("[funnel-analytics] manychat leads", e.message || e);
+    }
+    applyWhatsappAdFunnel(dashboard, {
+      clicks: adMetrics && adMetrics.clicks,
+      conversations: adMetrics && adMetrics.conversations,
+      leads: leadStats.leads,
+      quoted: leadStats.quoted,
+    });
   }
 
   let organicSearch = { show: false };

@@ -7,8 +7,8 @@
 
   var state = {
     sourceChannel: "facebook",
-    landingPage: "website",
-    view: "facebook_website",
+    landingPage: "landing",
+    view: "facebook_landing",
     licensedState: "ALL",
     periodDays: 1,
     dateFrom: "",
@@ -40,12 +40,15 @@
     { value: "NV", labelKey: "funnel_state_nv" },
   ];
 
-  function landingPagesForSource() {
+  function landingPagesForSource(source) {
+    if (source === "facebook") return ["landing", "whatsapp"];
     return ["website"];
   }
 
   function composeViewId(source, landing) {
-    return String(source || "facebook") + "_" + String(landing || "website");
+    var src = String(source || "facebook");
+    var dest = String(landing || (src === "facebook" ? "landing" : "website"));
+    return src + "_" + dest;
   }
 
   function syncViewFromFilters() {
@@ -204,8 +207,37 @@
 
   function sourceScopeHtml() {
     var key = "funnel_scope_" + state.sourceChannel;
+    if (state.sourceChannel === "facebook") {
+      key =
+        state.landingPage === "whatsapp"
+          ? "funnel_scope_facebook_whatsapp"
+          : "funnel_scope_facebook_landing";
+    }
     return (
       '<p class="crm-funnel-source-scope">' + esc(t(key)) + "</p>"
+    );
+  }
+
+  function facebookDestTabsHtml() {
+    if (state.sourceChannel !== "facebook") return "";
+    return (
+      '<div class="crm-funnel-view-tabs crm-funnel-dest-tabs" role="tablist" aria-label="' +
+      esc(t("funnel_facebook_dest")) +
+      '">' +
+      ["landing", "whatsapp"]
+        .map(function (dest) {
+          return (
+            '<button type="button" class="crm-funnel-view-tab' +
+            (state.landingPage === dest ? " is-active" : "") +
+            '" data-funnel-dest="' +
+            esc(dest) +
+            '">' +
+            esc(t("funnel_dest_" + dest)) +
+            "</button>"
+          );
+        })
+        .join("") +
+      "</div>"
     );
   }
 
@@ -290,6 +322,7 @@
       "</button>" +
       "</div>" +
       "</div>" +
+      facebookDestTabsHtml() +
       sourceScopeHtml() +
       "</div>"
     );
@@ -684,6 +717,16 @@
             esc(fmtNum(metrics.clicks)) +
             "</strong></button>";
         }
+        if (state.landingPage === "whatsapp" && metrics.conversations != null) {
+          html +=
+            '<div class="crm-funnel-ad-metric">' +
+            '<span class="crm-funnel-ad-metric-label">' +
+            esc(t("funnel_ad_conversations")) +
+            "</span>" +
+            '<strong class="crm-funnel-ad-metric-value">' +
+            esc(fmtNum(metrics.conversations)) +
+            "</strong></div>";
+        }
         if (metrics.spend != null) {
           html +=
             '<button type="button" class="crm-funnel-ad-metric crm-funnel-ad-metric--clickable" data-funnel-ad-chart="spend" title="' +
@@ -1057,13 +1100,18 @@
 
   /* ── FunnelVisualization ── */
   function FunnelVisualization(branches) {
-    var order = ["quote", "calculator", "schedule", "bio", "whatsapp"];
+    var order =
+      state.landingPage === "whatsapp"
+        ? ["whatsapp"]
+        : ["quote", "calculator", "schedule", "bio", "whatsapp"];
+    var vizSub =
+      state.landingPage === "whatsapp" ? t("funnel_viz_sub_whatsapp") : t("funnel_viz_sub");
     return (
       '<section class="crm-funnel-viz">' +
       '<div class="crm-funnel-viz-head">' +
       '<div class="crm-funnel-viz-head-text">' +
       '<h2 class="crm-funnel-section-title">' + esc(t("funnel_viz_title")) + "</h2>" +
-      '<p class="crm-funnel-viz-sub">' + esc(t("funnel_viz_sub")) + "</p>" +
+      '<p class="crm-funnel-viz-sub">' + esc(vizSub) + "</p>" +
       "</div>" +
       '<button type="button" class="crm-funnel-reload" data-funnel-reload aria-label="' +
       esc(t("funnel_reload_aria")) +
@@ -1103,11 +1151,12 @@
     var d = state.detail;
     if (!d) return "";
 
-    function breakdownRows(obj, labels) {
+    function breakdownRows(obj, labels, opts) {
+      var keepZero = !!(opts && opts.keepZero);
       return Object.keys(labels)
         .map(function (k) {
           var n = obj[k] || 0;
-          if (!n) return "";
+          if (!n && !keepZero) return "";
           return (
             "<li><span>" + esc(labels[k]) + "</span><strong>" + esc(fmtNum(n)) + "</strong></li>"
           );
@@ -1146,11 +1195,15 @@
       "</ul></div>" +
       '<div class="crm-funnel-inspector-block">' +
       "<h4>" + esc(t("funnel_by_device")) + "</h4><ul>" +
-      breakdownRows(d.deviceBreakdown, {
-        mobile: t("funnel_device_mobile"),
-        tablet: t("funnel_device_tablet"),
-        desktop: t("funnel_device_desktop"),
-      }) +
+      breakdownRows(
+        d.deviceBreakdown,
+        {
+          desktop: t("funnel_device_desktop"),
+          mobile: t("funnel_device_mobile"),
+          tablet: t("funnel_device_tablet"),
+        },
+        { keepZero: true }
+      ) +
       "</ul></div>" +
       "</div>" +
       (d.campaignBreakdown && d.campaignBreakdown.length
@@ -1377,9 +1430,28 @@
     main.querySelectorAll("[data-funnel-source]").forEach(function (btn) {
       btn.addEventListener("click", function () {
         state.sourceChannel = btn.getAttribute("data-funnel-source") || "facebook";
-        if (state.sourceChannel === "google") {
+        if (state.sourceChannel === "facebook") {
+          if (landingPagesForSource("facebook").indexOf(state.landingPage) < 0) {
+            state.landingPage = "landing";
+          }
+        } else {
           state.landingPage = "website";
         }
+        syncViewFromFilters();
+        state.selectedNode = null;
+        state.detail = null;
+        state.entryModalOpen = false;
+        closeGeoClicks(main, { skipPaint: true });
+        closeAdChart(main);
+        paint(main);
+        wireEvents(main);
+        loadData(main);
+      });
+    });
+
+    main.querySelectorAll("[data-funnel-dest]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        state.landingPage = btn.getAttribute("data-funnel-dest") || "landing";
         syncViewFromFilters();
         state.selectedNode = null;
         state.detail = null;
@@ -1569,7 +1641,7 @@
   function mount(main) {
     applyPeriodDays(1);
     state.sourceChannel = "facebook";
-    state.landingPage = "website";
+    state.landingPage = "landing";
     state.licensedState = "ALL";
     state.entryModalOpen = false;
     state.geoModalOpen = false;

@@ -183,7 +183,14 @@
       funnel_landing_v2: "V2",
       funnel_landing_v3: "V3",
       funnel_landing_website: "Website",
+      funnel_facebook_dest: "Facebook destination",
+      funnel_dest_landing: "Landing page",
+      funnel_dest_whatsapp: "WhatsApp",
       funnel_scope_facebook: "Facebook ads to the quote page.",
+      funnel_scope_facebook_landing:
+        "Facebook ads to the V3 landing page (gastos-finales-ads-v3).",
+      funnel_scope_facebook_whatsapp:
+        "Facebook ads that open WhatsApp. Spend and conversations are from Ads Manager. ManyChat leads are all WhatsApp bot leads in this period, not only this ad until the bot tags the ad source.",
       funnel_scope_google: "Google Ads to any page on the site.",
       funnel_scope_direct: "Typed URL, bookmarks, or unknown source — any page.",
       funnel_scope_organic:
@@ -252,12 +259,15 @@
       funnel_kw_clicks_source: "Ad clicks from Google Ads",
       funnel_viz_title: "Funnel paths",
       funnel_viz_sub: "Behavior after entry — click any step for details",
+      funnel_viz_sub_whatsapp:
+        "WhatsApp ad clicks and conversations from Meta, then ManyChat leads in this period.",
       funnel_reload: "Reload",
       funnel_reload_aria: "Reload funnel data for the current tab",
       funnel_ad_platform_facebook: "Facebook Ads",
       funnel_ad_platform_google: "Google Ads",
       funnel_ad_impressions: "Impressions",
       funnel_ad_clicks: "Ad clicks",
+      funnel_ad_conversations: "Conversations",
       funnel_ad_spend: "Ad spend",
       funnel_ad_metrics_not_configured: "Ad platform credentials not configured for this tab.",
       funnel_period: "Period",
@@ -1335,7 +1345,14 @@
       funnel_landing_v2: "V2",
       funnel_landing_v3: "V3",
       funnel_landing_website: "Sitio web",
+      funnel_facebook_dest: "Destino de Facebook",
+      funnel_dest_landing: "Página de destino",
+      funnel_dest_whatsapp: "WhatsApp",
       funnel_scope_facebook: "Anuncios de Facebook al cotizador.",
+      funnel_scope_facebook_landing:
+        "Anuncios de Facebook a la página de destino V3 (gastos-finales-ads-v3).",
+      funnel_scope_facebook_whatsapp:
+        "Anuncios de Facebook que abren WhatsApp. El gasto y las conversaciones vienen de Ads Manager. Los leads de ManyChat son todos los del bot de WhatsApp en este período, no solo este anuncio hasta que el bot etiquete la fuente.",
       funnel_scope_google: "Google Ads a cualquier página del sitio.",
       funnel_scope_direct: "URL escrita, marcadores o fuente desconocida — cualquier página.",
       funnel_scope_organic:
@@ -1404,12 +1421,15 @@
       funnel_kw_clicks_source: "Clics en anuncios desde Google Ads",
       funnel_viz_title: "Rutas del embudo",
       funnel_viz_sub: "Comportamiento tras la entrada — haz clic en un paso para detalles",
+      funnel_viz_sub_whatsapp:
+        "Clics y conversaciones del anuncio de WhatsApp desde Meta, luego leads de ManyChat en este período.",
       funnel_reload: "Recargar",
       funnel_reload_aria: "Recargar datos del embudo en la pestaña actual",
       funnel_ad_platform_facebook: "Anuncios de Facebook",
       funnel_ad_platform_google: "Google Ads",
       funnel_ad_impressions: "Impresiones",
       funnel_ad_clicks: "Clics en anuncios",
+      funnel_ad_conversations: "Conversaciones",
       funnel_ad_spend: "Gasto en anuncios",
       funnel_ad_metrics_not_configured: "Credenciales de la plataforma de anuncios no configuradas para esta pestaña.",
       funnel_period: "Período",
