@@ -34,3 +34,22 @@ Facts that were **not** silently filled in. Editorial should confirm or keep the
 ## Editorial badge
 
 - New pages use **“Reviewed by Mejor Vida”** rather than the older “no AI” pledge, because these drafts were produced in this build. If the agency rewrites a page by hand, the badge copy can be aligned then.
+
+## 2026-09-06 editorial pass — human review
+
+Safe copy and layout edits were applied to all 28 Spanish guides and the 24 English twins. These items were **not** invented as new numbers, but a human should still confirm them:
+
+- The original four guides now have English twins (`what-is-final-expense-insurance`, `types-of-final-expense-plans`, `how-much-does-final-expense-insurance-cost`, `does-medicare-pay-for-final-expenses`) so English homepage and hub cards no longer open Spanish pages. Confirm the English copy still matches the Spanish facts.
+- **SSA $255 apply-within-two-years** now appears on the Medicare guide FAQ (aligned with the “what happens without insurance” guide). Confirm against SSA’s current lump-sum page.
+- **Proposed $255 increase is not law** is now noted on the Medicare guide as well as the sister page.
+- **Waiting-period formulas** stay on the company / graded / waiting-period pages only. The types-of-plans guide still says two to three years and “a percentage the company sets.”
+- **Accidental death during the wait** is still hedged (“depends on the contract”), not verified company-by-company.
+- **Illustrative August 2026 $10,000 premiums** were reused on age / $10,000 / coverage pages. Confirm they still match appointed tables.
+- **American Amicable face-amount caps** remain “quote,” not a published schedule.
+- **No new issue at age 90** and Accendo Level through **89** should match current appointed materials.
+- **Cancel / free-look / cash value / reinstatement** stay contract- and state-specific. No premium-refund promise.
+- **Who inherits medical bills** and **naming a hospital as beneficiary** remain practical hedges, not legal advice.
+- **$5,000 / $10,000 / $15,000** sizing table on the family-benefit guide is educational framing against NFDA medians, not a cost study.
+- **Cremation vs burial (Nebraska):** national NFDA 2023 medians only. Direct cremation “usually costs less than $6,280” is direction, not a local quote. Line-item NFDA GPL examples were softened.
+- **Assurity** may be named in company lists; health charts are still not published.
+- **Related “over 80” link** goes to the existing seniors page (`seguro-vida-mayores-80.html` / `life-insurance-seniors-over-80.html`), not a separate FE-guide JSON.

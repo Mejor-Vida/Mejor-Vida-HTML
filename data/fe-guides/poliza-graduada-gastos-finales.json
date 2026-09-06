@@ -12,27 +12,35 @@
     "aiFreePledgeLabel": "Revisado por Mejor Vida Seguros",
     "aiFreePledgeModalTitle": "Cómo se revisa esta guía",
     "aiFreePledgeModalBody": "El equipo de Mejor Vida Seguros revisa esta guía con materiales de compañías designadas y fuentes públicas. Las cotizaciones y la aprobación dependen de la aseguradora, del estado y de su solicitud.",
-    "question": "¿Qué es un plan de gastos finales con periodo de espera?",
-    "headline": "Cuando el seguro paga menos al principio: el plan con espera",
-    "dek": "Un periodo de espera es el tiempo al inicio de la póliza en el que una muerte no accidental puede pagar menos que el monto completo. No es un castigo misterioso: es el diseño del producto cuando la salud no da para un plan de beneficio inmediato.",
+    "question": "¿Qué es una póliza graduada de gastos finales?",
+    "headline": "Póliza graduada: un plan que paga menos al principio",
+    "dek": "Una póliza graduada —también llamada plan modificado o plan con periodo de espera— limita el pago en los primeros años si la muerte no es un accidente cubierto. No es un castigo: es el diseño cuando la salud no da para un plan de beneficio inmediato.",
     "pageTitle": "Planes de gastos finales con periodo de espera",
-    "metaDescription": "Cómo funciona un seguro de gastos finales con espera en los primeros años, en palabras sencillas. Guía de Mejor Vida Seguros.",
+    "metaDescription": "Qué es una póliza graduada o modificada de gastos finales y cómo funciona la espera en los primeros años. Guía de Mejor Vida Seguros.",
     "keyTakeaways": [
-      "Periodo de espera: los primeros años, una muerte por enfermedad puede no pagar el 100% del monto.",
+      "Póliza graduada o modificada: en los primeros años, una muerte por enfermedad puede no pagar el 100% del monto.",
       "Un accidente cubierto suele pagar el monto completo desde el inicio — si el contrato lo dice.",
       "Las fórmulas no son iguales: una compañía puede devolver primas más un interés; otra puede pagar un porcentaje del monto el año 1 y el año 2.",
       "Después de la espera, el fallecimiento cubierto suele pagar el monto completo mientras la póliza esté vigente."
     ],
     "cta": {
-      "title": "Vea un precio para su situación",
-      "body": "Mejor Vida Seguros compara compañías de gastos finales. Empiece con una cotización gratuita, agende una llamada o escríbanos por WhatsApp.",
+      "title": "Vea si califica a beneficio completo",
+      "body": "Mejor Vida Seguros cotiza primero el plan que paga entero cuando las respuestas lo permiten. Pida una cotización gratuita.",
       "quote": "Cotización gratuita",
       "schedule": "Agendar una llamada"
     },
     "blocks": [
       {
         "type": "p",
-        "text": "A este diseño a veces le ponen apodos de industria. En esta guía lo llamamos plan con periodo de espera o plan de beneficio limitado al inicio, para que no necesite un glosario."
+        "text": "En la industria, a este diseño le dicen póliza graduada, plan modificado o beneficio limitado al inicio. En esta guía usamos esos nombres y también “plan con periodo de espera,” para que no necesite un glosario aparte."
+      },
+      {
+        "type": "h2",
+        "text": "Graduada o modificada frente a aceptación garantizada"
+      },
+      {
+        "type": "p",
+        "text": "Una póliza graduada o modificada suele hacer preguntas de salud y, aun así, limitar el cheque al inicio. La aceptación garantizada no hace preguntas de salud y también tiene espera. No son el mismo producto. La tabla más abajo muestra fórmulas de ambos, para que no copie la regla de un logo a otro."
       },
       {
         "type": "h2",
@@ -44,7 +52,7 @@
       },
       {
         "type": "h2",
-        "text": "Cómo se siente en un reclamo"
+        "text": "Cómo se ve un reclamo de $10,000"
       },
       {
         "type": "p",
@@ -52,8 +60,8 @@
       },
       {
         "type": "table",
-        "caption": "Tres fórmulas que no debemos mezclar",
-        "lead": "La fila de su póliza es una sola. Esta tabla evita copiar la regla de un logo a otro.",
+        "caption": "Fórmulas de espera que no se mezclan",
+        "lead": "Su póliza tiene una sola fila. Esta tabla evita copiar la regla de un logo a otro.",
         "headers": [
           "Ejemplo de producto",
           "Muerte no accidental, primeros años",
@@ -85,30 +93,34 @@
       },
       {
         "type": "h2",
-        "text": "Ventajas y límites"
+        "text": "Cuándo ayuda y cuándo no"
       },
       {
         "type": "ul",
         "items": [
-          "Ventaja: hay una póliza cuando el plan de beneficio inmediato no sale.",
+          "Ayuda: hay una póliza cuando el plan de beneficio inmediato no se emite.",
+          "Ayuda: un accidente cubierto puede pagar el monto completo desde el día uno.",
           "Límite: si el fallecimiento por enfermedad ocurre pronto, el cheque puede ser pequeño frente al funeral.",
-          "Límite: suele costar más por dólar que el plan inmediato de la misma compañía.",
-          "Ventaja: el accidente cubierto puede cerrar esa brecha desde el día uno."
+          "Límite: suele costar más por dólar que el plan inmediato de la misma compañía."
         ]
       },
       {
         "type": "note",
-        "text": "Si puede calificar a un plan de beneficio completo, Mejor Vida Seguros no empuja la espera “porque sí.” Se cotiza primero el camino que paga entero cuando las respuestas lo permiten."
+        "text": "Si puede calificar a un plan de beneficio completo, Mejor Vida Seguros no empuja la espera por defecto. Se cotiza primero el camino que paga entero cuando las respuestas lo permiten."
       },
       {
         "type": "faq",
         "items": [
           {
+            "q": "¿Es lo mismo que aceptación garantizada?",
+            "a": "No. La graduada o modificada suele hacer preguntas de salud. La aceptación garantizada no las hace. Ambas pueden tener espera, pero las fórmulas no son intercambiables."
+          },
+          {
             "q": "¿La espera se aplica también al suicidio?",
             "a": "Muchas pólizas de vida tienen reglas propias para suicidio en los primeros años, aparte de la espera del producto. Eso está en el contrato; no lo generalizamos aquí."
           },
           {
-            "q": "¿Puedo “esperar” y luego cambiar a beneficio completo?",
+            "q": "¿Puedo esperar y luego cambiar a beneficio completo?",
             "a": "No automáticamente. A veces una póliza nueva, si la salud y la edad lo permiten. No es un ascenso interno garantizado."
           },
           {
@@ -123,27 +135,35 @@
     "aiFreePledgeLabel": "Reviewed by Mejor Vida Insurance",
     "aiFreePledgeModalTitle": "How this guide is reviewed",
     "aiFreePledgeModalBody": "The Mejor Vida Insurance team reviews this guide against appointed-company materials and public sources. Quotes and approval depend on the insurer, your state, and your application.",
-    "question": "What is a waiting-period final expense plan?",
-    "headline": "When insurance pays less at first: the waiting-period plan",
-    "dek": "A waiting period is the time at the start of the policy when a non-accidental death may pay less than the full amount. It is not a mysterious penalty: it is the product design when health will not support an immediate full-benefit plan.",
+    "question": "What is a modified final expense policy?",
+    "headline": "Modified final expense: a plan that pays less at first",
+    "dek": "A modified — or graded — policy limits the payout in the early years if death is not a covered accident. It is not a penalty: it is the product design when health will not support an immediate full-benefit plan.",
     "pageTitle": "Waiting-period final expense plans",
-    "metaDescription": "How a final expense plan with a waiting period works in the first years, in plain language. A guide from Mejor Vida Insurance.",
+    "metaDescription": "What a modified or graded final expense policy is and how the waiting period works in the first years. A guide from Mejor Vida Insurance.",
     "keyTakeaways": [
-      "Waiting period: in the first years, a death from illness may not pay 100% of the amount.",
+      "Modified or graded policy: in the first years, a death from illness may not pay 100% of the amount.",
       "A covered accident often pays the full amount from the start — if the contract says so.",
       "The formulas are not the same: one company may return premiums plus interest; another may pay a percentage of the amount in year 1 and year 2.",
       "After the wait, a covered death usually pays the full amount while the policy is in force."
     ],
     "cta": {
-      "title": "See a price for your situation",
-      "body": "Mejor Vida Insurance compares final expense companies. Start with a free quote, schedule a call, or message us on WhatsApp.",
+      "title": "See if you qualify for a full benefit",
+      "body": "Mejor Vida Insurance quotes the plan that pays in full first when the answers support it. Get a free quote.",
       "quote": "Get a free quote",
       "schedule": "Schedule a call"
     },
     "blocks": [
       {
         "type": "p",
-        "text": "Industry nicknames for this design can sound like a foreign language. In this guide we call it a waiting-period plan or a limited-early-benefit plan, so you do not need a glossary."
+        "text": "In the industry this design is called a modified policy, a graded policy, or a limited-early-benefit plan. This guide uses those names and also “waiting-period plan,” so you do not need a separate glossary."
+      },
+      {
+        "type": "h2",
+        "text": "Modified or graded versus guaranteed acceptance"
+      },
+      {
+        "type": "p",
+        "text": "A modified or graded policy usually asks health questions and still limits the early check. Guaranteed acceptance asks no health questions and also has a wait. They are not the same product. The table below shows formulas for both, so you do not copy one logo’s rule onto another."
       },
       {
         "type": "h2",
@@ -155,7 +175,7 @@
       },
       {
         "type": "h2",
-        "text": "How it feels at claim time"
+        "text": "How a $10,000 claim can look"
       },
       {
         "type": "p",
@@ -163,7 +183,7 @@
       },
       {
         "type": "table",
-        "caption": "Three formulas we must not mix",
+        "caption": "Waiting-period formulas we must not mix",
         "lead": "Your policy has one row. This table stops one logo’s rule from being copied onto another.",
         "headers": [
           "Product example",
@@ -196,30 +216,34 @@
       },
       {
         "type": "h2",
-        "text": "Advantages and limits"
+        "text": "When it helps and when it does not"
       },
       {
         "type": "ul",
         "items": [
-          "Advantage: there is a policy when the immediate full-benefit plan will not issue.",
+          "Helps: there is a policy when the immediate full-benefit plan will not issue.",
+          "Helps: a covered accident can pay the full amount from day one.",
           "Limit: if death from illness happens soon, the check can be small next to the funeral.",
-          "Limit: it usually costs more per dollar than the same company’s immediate plan.",
-          "Advantage: a covered accident can close that gap from day one."
+          "Limit: it usually costs more per dollar than the same company’s immediate plan."
         ]
       },
       {
         "type": "note",
-        "text": "If you can qualify for a full-benefit plan, Mejor Vida Insurance does not push a wait “just because.” We quote the path that pays in full first when the answers support it."
+        "text": "If you can qualify for a full-benefit plan, Mejor Vida Insurance does not push a wait by default. We quote the path that pays in full first when the answers support it."
       },
       {
         "type": "faq",
         "items": [
           {
+            "q": "Is this the same as guaranteed acceptance?",
+            "a": "No. A modified or graded plan usually asks health questions. Guaranteed acceptance does not. Both can have a wait, but the formulas are not interchangeable."
+          },
+          {
             "q": "Does the wait also apply to suicide?",
             "a": "Many life policies have their own suicide rules in the early years, separate from the product wait. That is in the contract; we do not generalize it here."
           },
           {
-            "q": "Can I “wait it out” and then switch to a full benefit?",
+            "q": "Can I wait it out and then switch to a full benefit?",
             "a": "Not automatically. Sometimes a new policy, if health and age allow. It is not a guaranteed internal upgrade."
           },
           {

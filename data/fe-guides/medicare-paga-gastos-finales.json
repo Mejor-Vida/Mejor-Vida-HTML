@@ -1,36 +1,304 @@
 {
   "slug": "medicare-paga-gastos-finales",
-  "question": "¿Se encarga Medicare de pagar los gastos finales?",
-  "headline": "¿Se encarga Medicare de pagar los gastos finales?",
-  "alternateNamesLine": "Medicare, SSA y cobertura gubernamental",
-  "pageTitle": "¿Medicare paga los gastos finales? — Lo que cubre y lo que no",
-  "dek": "Medicare no paga el funeral ni las deudas que deja una persona al fallecer. Mejor Vida Seguros explica qué sí cubre Medicare (incluido el hospicio), el beneficio de $255 de la SSA y por qué muchas familias necesitan otra protección.",
-  "metaDescription": "¿Se encarga Medicare de pagar los gastos finales? Qué cubre Medicare, el hospicio, el pago de $255 del Seguro Social y por qué el sepelio suele requerir otra planificación — guía de Mejor Vida Seguros.",
+  "slugEn": "does-medicare-pay-for-final-expenses",
   "published": "2026-07-08",
-  "modified": "2026-09-03",
-  "keyTakeaways": [
-    "Medicare no paga los gastos finales; solo cubre gastos médicos mientras el asegurado está vivo.",
-    "Medicare sí cubre el servicio de hospicio cuando hay una enfermedad terminal, mientras la persona sigue viva.",
-    "La Administración del Seguro Social (SSA) puede pagar $255 al cónyuge o hijos sobrevivientes, según sus términos — caso a caso.",
-    "En 2023, la NFDA publicó una mediana de $8,300 por un funeral con velatorio y entierro, y $6,280 con velatorio y cremación, del lado de la funeraria. Parcela y lápida suelen ir aparte.",
-    "No hay cobertura gubernamental gratuita para gastos finales por Medicare, salvo programas de veteranos u otros beneficios específicos.",
-    "Desconfíe de la publicidad que promete cobertura «gratis» del gobierno; infórmese antes de decidir."
-  ],
-  "paragraphs": [
-    {
-      "heading": "Esta guía es sobre Medicare, no sobre todas las formas de pagar",
-      "text": "La guía completa de ahorros, funeral prepagado, seguro de vida, el pago de $255 y las ayudas del VA está en Cómo se paga un funeral, en el menú Recursos funerarios. Aquí nos centramos en lo que Medicare cubre y lo que no."
-    },
-    "No, Medicare no paga por los gastos finales. Medicare solo cubre gastos médicos mientras el asegurado está vivo. Es importante mencionar que Medicare cubre el servicio de hospicio, o sea, mientras el asegurado está vivo pero pasando por una enfermedad terminal.",
-    "Hay un beneficio que se puede llegar a recibir que la Administración del Seguro Social (SSA) puede darle al cónyuge o hijos sobrevivientes. Esto es caso a caso, basado en sus términos y condiciones. El pago que se puede llegar a recibir es de $255.",
-    "Cuando pensamos en los gastos que un funeral puede tener, en realidad ese beneficio no cubre mucho. En 2023, la NFDA publicó una mediana de $8,300 por un funeral con velatorio y entierro, y $6,280 con velatorio y cremación, del lado de la funeraria. Parcela, bóveda, lápida y deudas pendientes suelen ir aparte.",
-    "También es importante saber que no hay otro tipo de cobertura que el gobierno ofrezca por medio de Medicare o que se ofrezca gratis para cubrir los gastos finales, a no ser que haga parte de un programa de veteranos o algún programa específico donde usted piense que puede obtener algún beneficio gubernamental. En ese caso, usted podría investigar qué es lo que se ofrece en su caso especial.",
-    "Hay mucha publicidad que puede decir que es gratis y que el gobierno lo da, pero en realidad no es así. Es importante informarse y saber qué es verdad y qué no."
-  ],
+  "modified": "2026-09-06",
   "relatedSlugs": [
     "como-pagar-un-funeral",
     "cuanto-cuesta-un-funeral",
     "que-es-seguro-gastos-finales",
     "cuanto-cuesta-seguro-gastos-finales"
-  ]
+  ],
+  "es": {
+    "question": "¿Se encarga Medicare de pagar los gastos finales?",
+    "headline": "¿Se encarga Medicare de pagar los gastos finales?",
+    "alternateNamesLine": "Medicare, SSA y cobertura gubernamental",
+    "pageTitle": "¿Medicare paga los gastos finales? — Lo que cubre y lo que no",
+    "dek": "Medicare no paga el funeral ni las deudas que deja una persona al fallecer. Mejor Vida Seguros explica qué sí cubre Medicare (incluido el hospicio), el beneficio de $255 de la SSA y por qué muchas familias necesitan otra protección.",
+    "metaDescription": "¿Se encarga Medicare de pagar los gastos finales? Qué cubre Medicare, el hospicio, el pago de $255 del Seguro Social y por qué el sepelio suele requerir otra planificación. Guía de Mejor Vida Seguros.",
+    "aiFreePledgeLabel": "Revisado por Mejor Vida Seguros",
+    "aiFreePledgeModalTitle": "Cómo se revisa esta guía",
+    "aiFreePledgeModalBody": "El equipo de Mejor Vida Seguros revisa esta guía con materiales de compañías designadas y fuentes públicas. Las cotizaciones y la aprobación dependen de la aseguradora, del estado y de su solicitud.",
+    "keyTakeaways": [
+      "Medicare no paga los gastos finales. Cubre servicios de salud que califican mientras la persona está viva.",
+      "Medicare sí cubre el hospicio —cuidado para una enfermedad terminal— mientras la persona sigue viva.",
+      "La Administración del Seguro Social (SSA) puede pagar $255 a un cónyuge o a hijos sobrevivientes que califiquen, según sus reglas. Hay que solicitarlo; no es automático.",
+      "En 2023, la National Funeral Directors Association (NFDA) publicó una mediana de $8,300 por un funeral con velatorio y entierro, y $6,280 con velatorio y cremación, del lado de la funeraria. Parcela y lápida suelen ir aparte.",
+      "No hay una cobertura gubernamental gratuita para el funeral a través de Medicare. Programas de veteranos u otros beneficios específicos tienen reglas propias.",
+      "Desconfíe de la publicidad que promete un funeral “gratis” del gobierno. Infórmese en las páginas oficiales antes de decidir."
+    ],
+    "cta": {
+      "title": "Vea un precio para su situación",
+      "body": "Mejor Vida Seguros compara compañías de gastos finales. Empiece con una cotización gratuita, agende una llamada o escríbanos por WhatsApp.",
+      "quote": "Cotización gratuita",
+      "schedule": "Agendar una llamada"
+    },
+    "blocks": [
+      {
+        "type": "h2",
+        "text": "Esta guía es sobre Medicare, no sobre todas las formas de pagar"
+      },
+      {
+        "type": "p",
+        "text": "La guía completa de ahorros, funeral prepagado, seguro de vida, el pago de $255 y las ayudas del Departamento de Asuntos de Veteranos (VA) está en Cómo se paga un funeral, en el menú Recursos funerarios. Aquí nos centramos en lo que Medicare cubre y lo que no."
+      },
+      {
+        "type": "h2",
+        "text": "La respuesta corta: Medicare no paga el funeral"
+      },
+      {
+        "type": "p",
+        "text": "No. Medicare no paga los gastos finales. Medicare es un seguro de salud federal. Cubre servicios médicos que califican mientras el asegurado está vivo. No está diseñado para el sepelio, la cremación, el cementerio ni las deudas que quedan al morir."
+      },
+      {
+        "type": "p",
+        "text": "Medicare sí cubre el hospicio cuando hay una enfermedad terminal: cuidado centrado en alivio, no en curar, mientras la persona sigue viva. Ese beneficio no se convierte en un cheque para la funeraria cuando la persona fallece."
+      },
+      {
+        "type": "h2",
+        "text": "El pago de $255 del Seguro Social no es Medicare"
+      },
+      {
+        "type": "p",
+        "text": "La Administración del Seguro Social (SSA) describe un pago único por fallecimiento de $255. Puede recibirlo un cónyuge sobreviviente que califique, o un hijo que califique si no hay cónyuge, según las reglas de la SSA. Es caso a caso. Hay que solicitarlo; no se envía solo a la funeraria."
+      },
+      {
+        "type": "note",
+        "text": "Ese $255 no se actualiza con el costo de un funeral. Ha habido propuestas de ley para subirlo; no son ley vigente. En esta guía usamos la cifra oficial actual de $255."
+      },
+      {
+        "type": "p",
+        "text": "Junto al costo de un funeral, ese pago cubre poco. En 2023, la NFDA publicó una mediana de $8,300 por un funeral con velatorio y entierro, y $6,280 con velatorio y cremación, del lado de la funeraria. Parcela, bóveda, lápida y deudas pendientes suelen ir aparte."
+      },
+      {
+        "type": "table",
+        "caption": "Quién paga qué — y quién no",
+        "lead": "Estas filas evitan confundir un seguro de salud o un pago pequeño del gobierno con la factura del sepelio.",
+        "headers": [
+          "Programa o producto",
+          "Qué hace",
+          "Qué no hace"
+        ],
+        "rows": [
+          [
+            "Medicare",
+            "Paga servicios de salud que califican, incluido el hospicio si aplica, mientras la persona vive.",
+            "No paga el funeral, la cremación, el cementerio ni las deudas que quedan al morir."
+          ],
+          [
+            "Pago único del Seguro Social",
+            "Puede pagar $255 a un sobreviviente que califique, si se solicita.",
+            "No cubre un funeral típico ni se deposita solo en la funeraria."
+          ],
+          [
+            "Ayudas del VA, si aplican",
+            "Algunos veteranos pueden tener ayudas de entierro con reglas propias del VA.",
+            "No sustituyen, por sí solas, un funeral promedio, y no pasan por Medicare."
+          ],
+          [
+            "Seguro de gastos finales",
+            "Paga efectivo al beneficiario —la persona nombrada en la póliza— si el contrato está vigente y el fallecimiento está cubierto.",
+            "No reemplaza a Medicare para la atención médica."
+          ]
+        ],
+        "foot": "Ninguna fila garantiza un monto ni una aprobación. Cada programa y cada contrato tiene sus propias reglas."
+      },
+      {
+        "type": "h2",
+        "text": "No hay un funeral “gratis” del gobierno por Medicare"
+      },
+      {
+        "type": "p",
+        "text": "Medicare no ofrece una cobertura gratuita para gastos finales. Tampoco hay, a través de Medicare, otro programa general que pague el sepelio. Si usted forma parte de un programa de veteranos o de otro beneficio específico, puede investigar qué aplica en su caso. Esas reglas no son las de Medicare."
+      },
+      {
+        "type": "p",
+        "text": "Hay publicidad que promete que “el gobierno lo da gratis.” En la práctica, eso no coincide con lo que Medicare publica para el público. Antes de firmar o de dar datos personales, compare el anuncio con las páginas oficiales de Medicare y de la SSA."
+      },
+      {
+        "type": "faq",
+        "items": [
+          {
+            "q": "¿Medicare paga algo del funeral?",
+            "a": "No. Medicare cubre salud que califica mientras la persona vive, incluido el hospicio si aplica. No está diseñado para pagar el sepelio."
+          },
+          {
+            "q": "¿El hospicio incluye el entierro?",
+            "a": "No. El hospicio es cuidado en vida para una enfermedad terminal. Cuando la persona fallece, la cuenta del funeral es aparte."
+          },
+          {
+            "q": "¿Los $255 salen de Medicare?",
+            "a": "No. Los paga la Administración del Seguro Social, si un sobreviviente califica y solicita el pago. No es un beneficio de Medicare."
+          },
+          {
+            "q": "¿Hay que pedir el pago de $255?",
+            "a": "Sí. La SSA indica que hay que solicitarlo. En general, el plazo es de dos años desde el fallecimiento."
+          }
+        ]
+      },
+      {
+        "type": "sources",
+        "items": [
+          {
+            "label": "Medicare.gov — what Medicare covers",
+            "url": "https://www.medicare.gov/what-medicare-covers"
+          },
+          {
+            "label": "Social Security Administration — lump-sum death payment",
+            "url": "https://www.ssa.gov/personal-record/when-someone-dies/lump-sum-death-payment"
+          },
+          {
+            "label": "National Funeral Directors Association — 2023 General Price List study",
+            "url": "https://content.nfda.org/news/statistics"
+          }
+        ]
+      }
+    ]
+  },
+  "en": {
+    "aiFreePledgeLabel": "Reviewed by Mejor Vida Insurance",
+    "aiFreePledgeModalTitle": "How this guide is reviewed",
+    "aiFreePledgeModalBody": "The Mejor Vida Insurance team reviews this guide against appointed-company materials and public sources. Quotes and approval depend on the insurer, your state, and your application.",
+    "question": "Does Medicare pay for final expenses?",
+    "headline": "Does Medicare pay for final expenses?",
+    "alternateNamesLine": "Medicare, SSA, and government coverage",
+    "pageTitle": "Does Medicare pay for final expenses? — What it covers and what it does not",
+    "dek": "Medicare does not pay the funeral or the debts a person leaves at death. Mejor Vida Insurance explains what Medicare does cover (including hospice), the SSA $255 payment, and why many families need other protection.",
+    "metaDescription": "Does Medicare pay for final expenses? What Medicare covers, hospice, the Social Security $255 payment, and why a funeral usually needs another plan. A guide from Mejor Vida Insurance.",
+    "keyTakeaways": [
+      "Medicare does not pay final expenses. It covers qualifying health services while the person is alive.",
+      "Medicare does cover hospice — care for a terminal illness — while the person is still living.",
+      "The Social Security Administration (SSA) may pay $255 to a qualifying spouse or surviving children, under its rules. It must be applied for; it is not automatic.",
+      "In 2023, the National Funeral Directors Association (NFDA) published a median of $8,300 for a funeral with viewing and burial, and $6,280 with viewing and cremation, on the funeral-home side. A plot and marker are usually extra.",
+      "There is no free government funeral coverage through Medicare. Veterans programs or other specific benefits have their own rules.",
+      "Be wary of ads that promise a “free” government funeral. Check official pages before you decide."
+    ],
+    "blocks": [
+      {
+        "type": "h2",
+        "text": "This guide is about Medicare, not every way to pay"
+      },
+      {
+        "type": "p",
+        "text": "The full guide to savings, a prepaid funeral, life insurance, the $255 payment, and Department of Veterans Affairs (VA) help is in How to pay for a funeral, under Funeral Resources. Here we focus on what Medicare covers and what it does not."
+      },
+      {
+        "type": "h2",
+        "text": "The short answer: Medicare does not pay the funeral"
+      },
+      {
+        "type": "p",
+        "text": "No. Medicare does not pay final expenses. Medicare is federal health insurance. It covers qualifying medical services while the insured is alive. It is not designed for the funeral, cremation, cemetery, or debts left at death."
+      },
+      {
+        "type": "p",
+        "text": "Medicare does cover hospice when there is a terminal illness: care focused on comfort, not on curing, while the person is still living. That benefit does not become a check for the funeral home when the person dies."
+      },
+      {
+        "type": "h2",
+        "text": "The Social Security $255 payment is not Medicare"
+      },
+      {
+        "type": "p",
+        "text": "The Social Security Administration (SSA) describes a one-time death payment of $255. A qualifying surviving spouse may receive it, or a qualifying child if there is no spouse, under SSA rules. It is case by case. It must be applied for; it is not sent on its own to the funeral home."
+      },
+      {
+        "type": "note",
+        "text": "That $255 does not keep up with the cost of a funeral. There have been bills to raise it; they are not current law. This guide uses the official figure of $255."
+      },
+      {
+        "type": "p",
+        "text": "Next to the cost of a funeral, that payment covers little. In 2023, NFDA published a median of $8,300 for a funeral with viewing and burial, and $6,280 with viewing and cremation, on the funeral-home side. A plot, vault, marker, and leftover debts are usually extra."
+      },
+      {
+        "type": "table",
+        "caption": "Who pays what — and who does not",
+        "lead": "These rows keep a health plan or a small government payment from being confused with the funeral bill.",
+        "headers": [
+          "Program or product",
+          "What it does",
+          "What it does not do"
+        ],
+        "rows": [
+          [
+            "Medicare",
+            "Pays qualifying health services, including hospice if it applies, while the person is living.",
+            "Does not pay the funeral, cremation, cemetery, or debts left at death."
+          ],
+          [
+            "Social Security lump-sum payment",
+            "May pay $255 to a qualifying survivor, if it is applied for.",
+            "Does not cover a typical funeral and is not deposited on its own at the funeral home."
+          ],
+          [
+            "VA help, if it applies",
+            "Some veterans may have burial help under VA rules.",
+            "Does not, by itself, replace an average funeral, and it does not run through Medicare."
+          ],
+          [
+            "Final expense insurance",
+            "Pays cash to the beneficiary — the person named on the policy — if the contract is in force and the death is covered.",
+            "Does not replace Medicare for medical care."
+          ]
+        ],
+        "foot": "No row guarantees an amount or an approval. Each program and each contract has its own rules."
+      },
+      {
+        "type": "h2",
+        "text": "There is no “free” government funeral through Medicare"
+      },
+      {
+        "type": "p",
+        "text": "Medicare does not offer free coverage for final expenses. Through Medicare there is also no general program that pays the funeral. If you belong to a veterans program or another specific benefit, you can look up what applies in your case. Those rules are not Medicare’s."
+      },
+      {
+        "type": "p",
+        "text": "Some ads promise that “the government gives it for free.” In practice, that does not match what Medicare publishes for the public. Before you sign or give personal information, compare the ad with the official Medicare and SSA pages."
+      },
+      {
+        "type": "faq",
+        "items": [
+          {
+            "q": "Does Medicare pay any of the funeral?",
+            "a": "No. Medicare covers qualifying health while the person is living, including hospice if it applies. It is not designed to pay the funeral."
+          },
+          {
+            "q": "Does hospice include burial?",
+            "a": "No. Hospice is care in life for a terminal illness. When the person dies, the funeral bill is separate."
+          },
+          {
+            "q": "Does the $255 come from Medicare?",
+            "a": "No. The Social Security Administration pays it if a survivor qualifies and applies. It is not a Medicare benefit."
+          },
+          {
+            "q": "Do you have to apply for the $255 payment?",
+            "a": "Yes. SSA says it must be requested. In general, the deadline is two years from the date of death."
+          }
+        ]
+      },
+      {
+        "type": "sources",
+        "items": [
+          {
+            "label": "Medicare.gov — what Medicare covers",
+            "url": "https://www.medicare.gov/what-medicare-covers"
+          },
+          {
+            "label": "Social Security Administration — lump-sum death payment",
+            "url": "https://www.ssa.gov/personal-record/when-someone-dies/lump-sum-death-payment"
+          },
+          {
+            "label": "National Funeral Directors Association — 2023 General Price List study",
+            "url": "https://content.nfda.org/news/statistics"
+          }
+        ]
+      }
+    ],
+    "cta": {
+      "title": "See a price for your situation",
+      "body": "Mejor Vida Insurance compares final expense companies. Start with a free quote, schedule a call, or message us on WhatsApp.",
+      "quote": "Get a free quote",
+      "schedule": "Schedule a call"
+    }
+  }
 }

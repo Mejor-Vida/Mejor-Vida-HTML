@@ -21,7 +21,7 @@
       "Alguien tiene que pagar el funeral, la cremación o el traslado. Si no hay dinero apartado, suele ser la familia.",
       "El Seguro Social puede pagar un único pago de $255 a un cónyuge sobreviviente que califique, o a un hijo que califique si no hay cónyuge. Hay que solicitarlo, en general dentro de dos años.",
       "Medicare no está pensado para pagar funerales.",
-      "No tener seguro no es ilegal. Significa que hay que usar ahorros, un contrato prepagado, ayuda de familiares o, en algunos casos, un servicio más sencillo de lo que la familia quería."
+      "No tener seguro no es ilegal. Significa usar ahorros, un contrato prepagado, ayuda de familiares o, a veces, un servicio más sencillo de lo que la familia quería."
     ],
     "cta": {
       "title": "Vea un precio para su situación",
@@ -40,11 +40,11 @@
       },
       {
         "type": "p",
-        "text": "La funeraria cobra a la persona que firma el contrato de servicios. Muchas veces es un hijo, un cónyuge o un hermano. Si esa persona no puede pagar de contado, puede usar tarjeta, un préstamo o pedir dinero a otros parientes. Eso no es un “castigo” de una ley de seguros. Es simplemente quién firmó."
+        "text": "La funeraria cobra a la persona que firma el contrato de servicios. Muchas veces es un hijo, un cónyuge o un hermano. Si esa persona no puede pagar de contado, puede usar una tarjeta, un préstamo o pedir dinero a otros parientes. Eso no es una multa de una ley de seguros. Es, simplemente, quién firmó."
       },
       {
         "type": "p",
-        "text": "Un seguro de gastos finales no borra el dolor. Cambia el momento del dinero: el beneficiario recibe un cheque de la aseguradora y puede usarlo para esa cuenta u otras deudas. Sin ese cheque, el mismo trabajo sigue existiendo."
+        "text": "Un seguro de gastos finales no borra el dolor. Cambia el momento del dinero: el beneficiario —la persona nombrada en la póliza— recibe un cheque de la aseguradora y puede usarlo para esa cuenta u otras deudas. Sin ese cheque, el mismo trabajo sigue existiendo."
       },
       {
         "type": "h2",
@@ -56,7 +56,7 @@
       },
       {
         "type": "note",
-        "text": "Ese $255 no se actualiza con el costo de un funeral. Un proyecto de ley ha propuesto subirlo; no es ley vigente. En esta guía usamos la cifra oficial actual de $255."
+        "text": "Ese $255 no se actualiza con el costo de un funeral. Ha habido propuestas de ley para subirlo; no son ley vigente. En esta guía usamos la cifra oficial actual de $255."
       },
       {
         "type": "p",
@@ -64,7 +64,7 @@
       },
       {
         "type": "p",
-        "text": "Algunos veteranos pueden tener ayudas de entierro del Departamento de Asuntos de Veteranos. Esas reglas son propias del VA y dependen del servicio y de la situación. No sustituyen, por sí solas, un funeral promedio."
+        "text": "Algunos veteranos pueden tener ayudas de entierro del Departamento de Asuntos de Veteranos (VA). Esas reglas son propias del VA y dependen del servicio y de la situación. No sustituyen, por sí solas, un funeral promedio."
       },
       {
         "type": "table",
@@ -78,28 +78,28 @@
         "rows": [
           [
             "Pago único del Seguro Social",
-            "$255 si hay un sobreviviente que califique",
-            "Hay que pedir el pago; no cubre un funeral típico"
+            "Un pago de $255 si hay un sobreviviente que califique.",
+            "Hay que solicitarlo. No cubre un funeral típico ni se deposita solo en la funeraria."
           ],
           [
             "Medicare",
-            "Seguro de salud",
-            "No está diseñado para funerales"
+            "Un seguro federal de salud.",
+            "Cubre atención que califica mientras la persona vive. No está diseñado para funerales."
           ],
           [
             "Ahorros o cuenta conjunta",
-            "Lo que la familia ya tiene",
-            "Puede no estar líquido a tiempo"
+            "El dinero que la familia ya tiene.",
+            "Puede no estar disponible a tiempo para pagar la funeraria."
           ],
           [
             "Contrato prepagado con la funeraria",
-            "Servicios pagados por adelantado según el contrato",
-            "Suele atarse a una funeraria y a un paquete concreto"
+            "Servicios pagados por adelantado, según lo que el contrato describe.",
+            "Suele atarse a una funeraria y a un paquete concreto. Parcela, lápida y flores a menudo van aparte."
           ],
           [
             "Seguro de gastos finales",
-            "Cheque al beneficiario",
-            "Solo si la póliza está vigente y el fallecimiento está cubierto"
+            "Un cheque al beneficiario si la póliza está vigente.",
+            "Solo se paga si el fallecimiento está cubierto. Un periodo de espera, si el contrato lo tiene, puede limitar el pago al inicio."
           ]
         ],
         "foot": "Ninguna fila garantiza aprobación ni un monto. Cada programa y cada contrato tiene sus propias reglas."
@@ -113,32 +113,32 @@
         "items": [
           "La familia elige un servicio más simple de lo que la persona habría querido, para bajar la factura.",
           "Varios parientes se dividen el costo y luego discuten quién puso más.",
-          "Se usa una tarjeta de crédito y la deuda queda meses después del funeral.",
+          "Se usa una tarjeta de crédito y la deuda sigue meses después del funeral.",
           "Si hay un prepago, hay que confirmar qué está incluido: parcela, lápida y flores suelen ir aparte."
         ]
       },
       {
         "type": "h2",
-        "text": "Un seguro no es la única respuesta — pero es una respuesta"
+        "text": "Ahorros, prepago o póliza: tres caminos distintos"
       },
       {
         "type": "p",
-        "text": "Algunas familias prefieren ahorrar en una cuenta aparte o firmar un prepago. Eso puede funcionar si el dinero realmente está ahí cuando se necesita y si el contrato dice con claridad qué pasa si se mudan. Un seguro de gastos finales mueve el pago a un beneficiario en efectivo. Mejor Vida Seguros compara compañías para esa vía; no le dice que ignore ahorros o un prepago si ya los tiene."
+        "text": "Algunas familias prefieren ahorrar en una cuenta aparte o firmar un prepago. Eso puede funcionar si el dinero realmente está ahí cuando se necesita y si el contrato dice con claridad qué pasa si se mudan. Un seguro de gastos finales envía efectivo a un beneficiario. Mejor Vida Seguros compara compañías para esa vía; no le dice que ignore ahorros o un prepago si ya los tiene."
       },
       {
         "type": "faq",
         "items": [
           {
             "q": "¿La funeraria puede negarse a recoger el cuerpo si no hay seguro?",
-            "a": "Las reglas de cada estado y cada funeraria varían. En la práctica, alguien debe autorizar y pagar servicios. No inventamos una regla nacional de “no recogen sin póliza.” Pregunte a la funeraria local y, si hace falta, al regulador estatal de funerarias."
+            "a": "Las reglas de cada estado y cada funeraria varían. En la práctica, alguien debe autorizar y pagar los servicios. No inventamos una regla nacional de “no recogen sin póliza.” Pregunte a la funeraria local y, si hace falta, al regulador estatal de funerarias."
           },
           {
             "q": "¿El $255 se deposita solo?",
-            "a": "No. La SSA indica que hay que solicitar el pago, en general dentro de dos años."
+            "a": "No. La Administración del Seguro Social indica que hay que solicitar el pago, en general dentro de dos años."
           },
           {
             "q": "¿Si no compro seguro, mis hijos heredan la deuda del funeral automáticamente?",
-            "a": "El que firma el contrato de la funeraria suele ser quien debe esa factura. Las deudas de una herencia siguen las reglas del estado y del caudal hereditario. Eso es tema de un abogado, no de una cotización de seguro."
+            "a": "Quien firma el contrato de la funeraria suele ser quien debe esa factura. Las deudas de una herencia siguen las reglas del estado y del caudal hereditario. Eso es tema de un abogado, no de una cotización de seguro."
           }
         ]
       },
@@ -193,15 +193,15 @@
       },
       {
         "type": "h2",
-        "text": "Who is on the hook for the bill"
+        "text": "Who is responsible for the bill"
       },
       {
         "type": "p",
-        "text": "The funeral home bills the person who signs the services contract. That is often a child, a spouse, or a sibling. If that person cannot pay in cash, they may use a card, a loan, or ask other relatives. That is not an insurance-law “penalty.” It is simply who signed."
+        "text": "The funeral home bills the person who signs the services contract. That is often a child, a spouse, or a sibling. If that person cannot pay in cash, they may use a card, a loan, or ask other relatives. That is not a fine from an insurance law. It is simply who signed."
       },
       {
         "type": "p",
-        "text": "Final expense insurance does not erase grief. It changes the timing of money: the beneficiary receives a check from the insurer and can use it for that bill or other debts. Without that check, the same work still exists."
+        "text": "Final expense insurance does not erase grief. It changes the timing of money: the beneficiary — the person named on the policy — receives a check from the insurer and can use it for that bill or other debts. Without that check, the same work still exists."
       },
       {
         "type": "h2",
@@ -213,7 +213,7 @@
       },
       {
         "type": "note",
-        "text": "That $255 is not indexed to funeral prices. A bill has been proposed to raise it; it is not current law. This guide uses the official $255 figure."
+        "text": "That $255 is not indexed to funeral prices. Bills have been proposed to raise it; they are not current law. This guide uses the official $255 figure."
       },
       {
         "type": "p",
@@ -221,7 +221,7 @@
       },
       {
         "type": "p",
-        "text": "Some veterans may have burial help from the Department of Veterans Affairs. Those rules belong to the VA and depend on service and situation. They do not, by themselves, replace an average funeral."
+        "text": "Some veterans may have burial help from the Department of Veterans Affairs (VA). Those rules belong to the VA and depend on service and situation. They do not, by themselves, replace an average funeral."
       },
       {
         "type": "table",
@@ -235,28 +235,28 @@
         "rows": [
           [
             "Social Security lump-sum",
-            "$255 if an eligible survivor qualifies",
-            "You must apply; it does not cover a typical funeral"
+            "A $255 payment if an eligible survivor qualifies.",
+            "You must apply. It does not cover a typical funeral and is not deposited automatically at the funeral home."
           ],
           [
             "Medicare",
-            "Health insurance",
-            "Not designed for funerals"
+            "Federal health insurance.",
+            "It covers qualifying care while the person is alive. It is not designed for funerals."
           ],
           [
             "Savings or a joint account",
-            "What the family already has",
-            "May not be liquid in time"
+            "Money the family already has.",
+            "It may not be available in time to pay the funeral home."
           ],
           [
             "Prepaid funeral-home contract",
-            "Services paid in advance as the contract writes them",
-            "Usually tied to one funeral home and a specific package"
+            "Services paid in advance as the contract writes them.",
+            "Usually tied to one funeral home and a specific package. Plot, marker, and flowers are often extra."
           ],
           [
             "Final expense insurance",
-            "A check to the beneficiary",
-            "Only if the policy is in force and the death is covered"
+            "A check to the beneficiary if the policy is in force.",
+            "Paid only if the death is covered. A waiting period, if the contract has one, can limit the payout at the start."
           ]
         ],
         "foot": "No row guarantees approval or an amount. Each program and contract has its own rules."
@@ -276,7 +276,7 @@
       },
       {
         "type": "h2",
-        "text": "Insurance is not the only answer — but it is one answer"
+        "text": "Savings, a prepaid funeral, or a policy: three different paths"
       },
       {
         "type": "p",
@@ -291,7 +291,7 @@
           },
           {
             "q": "Is the $255 deposited automatically?",
-            "a": "No. SSA says you must apply, generally within two years."
+            "a": "No. The Social Security Administration says you must apply, generally within two years."
           },
           {
             "q": "If I skip insurance, do my children automatically inherit the funeral debt?",

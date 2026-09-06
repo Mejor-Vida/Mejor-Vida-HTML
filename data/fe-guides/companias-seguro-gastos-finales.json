@@ -13,50 +13,54 @@
     "aiFreePledgeModalTitle": "Cómo se revisa esta guía",
     "aiFreePledgeModalBody": "El equipo de Mejor Vida Seguros revisa esta guía con materiales de compañías designadas y fuentes públicas. Las cotizaciones y la aprobación dependen de la aseguradora, del estado y de su solicitud.",
     "question": "¿Qué compañías ofrecen seguro de gastos finales?",
-    "headline": "Compañías de gastos finales: cómo comparar sin coronar a un ganador",
-    "dek": "Mejor Vida Seguros es una agencia independiente. Cotiza varias compañías designadas. La “mejor” es la que emite el plan que usted puede pagar y que encaja con su salud y edad.",
+    "headline": "Compañías de gastos finales: cómo compararlas",
+    "dek": "Mejor Vida Seguros es una agencia independiente: cotiza varias compañías designadas. La mejor oferta es la que se emite para su edad, salud y presupuesto — no un ranking para todo el mundo.",
     "pageTitle": "Compañías de seguro de gastos finales",
     "metaDescription": "Qué compañías de gastos finales puede cotizar Mejor Vida Seguros y cómo compararlas sin elegir un ganador universal. Guía educativa.",
     "keyTakeaways": [
-      "Una agencia independiente no es una sola aseguradora. Compara productos de varias compañías.",
-      "Edad máxima, monto máximo y preguntas de salud cambian por producto, no solo por el logo.",
+      "Una agencia independiente no es la aseguradora. Compara productos de varias compañías.",
+      "La edad máxima, el monto máximo y las preguntas de salud cambian por producto, no solo por el nombre de la compañía.",
       "No publicamos un ranking de “la más barata” para todos los perfiles.",
       "El producto tiene que estar disponible en el estado donde usted vive."
     ],
     "cta": {
-      "title": "Vea un precio para su situación",
-      "body": "Mejor Vida Seguros compara compañías de gastos finales. Empiece con una cotización gratuita, agende una llamada o escríbanos por WhatsApp.",
+      "title": "Compare con sus datos",
+      "body": "Mejor Vida Seguros cotiza varias compañías de gastos finales. Pida una cotización gratuita o agende una llamada.",
       "quote": "Cotización gratuita",
       "schedule": "Agendar una llamada"
     },
     "blocks": [
       {
         "type": "p",
-        "text": "Buscar “la mejor compañía de entierro” en internet suele devolver anuncios, no una tabla justa. Dos personas de 68 años no reciben la misma oferta si una fuma y la otra no, o si una tuvo un infarto el año pasado."
+        "text": "Buscar “la mejor compañía de entierro” suele devolver anuncios, no una comparación justa. Dos personas de 68 años no reciben la misma oferta si una fuma y la otra no, o si una tuvo un infarto el año pasado. Esta guía muestra qué compañías puede cotizar Mejor Vida Seguros y cómo ponerlas lado a lado."
       },
       {
         "type": "h2",
-        "text": "Qué hace una agencia independiente"
+        "text": "Qué es una agencia independiente"
       },
       {
         "type": "p",
-        "text": "Mejor Vida Seguros recibe una comisión si se emite una póliza a través de la agencia. Eso no encarece su prima frente a ir “directo.” La agencia sugiere según necesidad, no según quién pague más a la agencia. Los estados con licencia están en la página de licencias, no en esta guía."
+        "text": "Una agencia independiente no es la aseguradora. La compañía de seguros emite la póliza y paga el reclamo. “Compañía designada” significa que la agencia está autorizada a cotizar y vender productos de esa aseguradora. Mejor Vida Seguros recibe una comisión si se emite una póliza a través de la agencia; eso no sube su prima frente a comprar “directo.” La recomendación se basa en su situación, no en quién paga más a la agencia. Los estados con licencia están en la página de licencias, no en esta guía."
       },
       {
         "type": "h2",
-        "text": "Compañías que podemos poner lado a lado"
+        "text": "Compañías que podemos cotizar"
       },
       {
         "type": "p",
-        "text": "En gastos finales, las compañías designadas que aparecen con frecuencia en nuestras cotizaciones incluyen Mutual of Omaha (Living Promise), American Amicable (Golden Solution y Senior Choice), Accendo, Transamerica (Immediate Solution), Americo (Eagle Select), Assurity y Corebridge (incluida una línea de aceptación garantizada). No todas están en todos los estados ni para todas las edades."
+        "text": "En gastos finales, las compañías designadas que aparecen con frecuencia incluyen Mutual of Omaha (Living Promise), American Amicable (Golden Solution y Senior Choice), Accendo, Transamerica (Immediate Solution), Americo (Eagle Select), Assurity y Corebridge (incluida una línea de aceptación garantizada). No todas están en todos los estados ni para todas las edades."
+      },
+      {
+        "type": "p",
+        "text": "Antes de leer la tabla, dos términos: un plan de beneficio completo (a veces llamado nivelado o inmediato) puede pagar el monto desde el inicio si usted califica. Un plan con espera limita el pago en los primeros años si la muerte no es un accidente cubierto. No compare solo el precio entre esos dos diseños."
       },
       {
         "type": "table",
-        "caption": "Recortes educativos — no es una calificación de calidad",
-        "lead": "Use esta tabla para ver que los logos no ofrecen lo mismo. Luego cotice.",
+        "caption": "Resumen educativo — no es un ranking de calidad ni de precio",
+        "lead": "Los productos no ofrecen lo mismo. Use la tabla para ver las diferencias; luego cotice.",
         "headers": [
-          "Compañía / producto",
-          "Qué saber en una frase"
+          "Compañía o producto",
+          "Qué saber"
         ],
         "rows": [
           [
@@ -92,15 +96,15 @@
       },
       {
         "type": "h2",
-        "text": "Cómo comparar sin perderse"
+        "text": "Cómo comparar dos ofertas"
       },
       {
         "type": "ul",
         "items": [
-          "Mismo monto, misma clase de tabaco, misma fecha de nacimiento.",
-          "Si un plan tiene espera y el otro no, el precio más bajo no es comparable.",
-          "Lea quién es el beneficiario y si hay préstamos o extras que reduzcan el cheque.",
-          "Confirme que el producto se ofrece en su estado."
+          "Use el mismo monto, la misma clase de tabaco y la misma fecha de nacimiento.",
+          "Si un plan tiene espera y el otro paga completo desde el inicio, el precio más bajo no es comparable.",
+          "Revise quién es el beneficiario — la persona que recibe el cheque — y si hay préstamos o extras que reduzcan el pago.",
+          "Confirme que el producto se ofrece en el estado donde usted vive."
         ]
       },
       {
@@ -108,7 +112,11 @@
         "items": [
           {
             "q": "¿Cuál es la más barata?",
-            "a": "No hay un ganador único. La más baja para un no fumador de 60 puede no serlo para un fumador de 77."
+            "a": "No hay un ganador único. La más baja para un no fumador de 60 años puede no serlo para un fumador de 77. El precio sale de una cotización con sus datos."
+          },
+          {
+            "q": "¿Mejor Vida Seguros es una aseguradora?",
+            "a": "No. Es una agencia independiente. Cotiza compañías designadas; la que emite la póliza es la aseguradora."
           },
           {
             "q": "¿Debo ir directo a la compañía?",
@@ -116,7 +124,7 @@
           },
           {
             "q": "¿Más compañías en un anuncio significan mejor seguro?",
-            "a": "No. Significa más formularios que revisar. El contrato de la que emita es lo que paga."
+            "a": "No. Significa más formularios que revisar. El contrato de la compañía que emita es lo que paga."
           }
         ]
       },
@@ -136,50 +144,54 @@
     "aiFreePledgeModalTitle": "How this guide is reviewed",
     "aiFreePledgeModalBody": "The Mejor Vida Insurance team reviews this guide against appointed-company materials and public sources. Quotes and approval depend on the insurer, your state, and your application.",
     "question": "Which companies offer final expense insurance?",
-    "headline": "Final expense companies: how to compare without crowning a winner",
-    "dek": "Mejor Vida Insurance is an independent agency. It quotes several appointed companies. The “best” one is the one that issues a plan you can pay for and that fits your health and age.",
+    "headline": "Final expense companies: how to compare them",
+    "dek": "Mejor Vida Insurance is an independent agency: it quotes several appointed companies. The best offer is the one that issues for your age, health, and budget — not a ranking for everyone.",
     "pageTitle": "Final expense insurance companies",
     "metaDescription": "Which final expense companies Mejor Vida Insurance can quote and how to compare them without picking a universal winner.",
     "keyTakeaways": [
-      "An independent agency is not a single insurer. It compares products from several companies.",
-      "Maximum age, maximum amount, and health questions change by product, not only by the logo.",
+      "An independent agency is not the insurer. It compares products from several companies.",
+      "Maximum age, maximum amount, and health questions change by product, not only by the company name.",
       "We do not publish a “cheapest for everyone” ranking.",
       "The product has to be available in the state where you live."
     ],
     "cta": {
-      "title": "See a price for your situation",
-      "body": "Mejor Vida Insurance compares final expense companies. Start with a free quote, schedule a call, or message us on WhatsApp.",
+      "title": "Compare with your details",
+      "body": "Mejor Vida Insurance quotes several final expense companies. Get a free quote or schedule a call.",
       "quote": "Get a free quote",
       "schedule": "Schedule a call"
     },
     "blocks": [
       {
         "type": "p",
-        "text": "Searching “best burial insurance company” usually returns ads, not a fair table. Two 68-year-olds do not get the same offer if one smokes and the other does not, or if one had a heart attack last year."
+        "text": "Searching “best burial insurance company” usually returns ads, not a fair comparison. Two 68-year-olds do not get the same offer if one smokes and the other does not, or if one had a heart attack last year. This guide shows which companies Mejor Vida Insurance can quote and how to put them side by side."
       },
       {
         "type": "h2",
-        "text": "What an independent agency does"
+        "text": "What an independent agency is"
       },
       {
         "type": "p",
-        "text": "Mejor Vida Insurance earns a commission if a policy is issued through the agency. That does not make your premium higher than going “direct.” The agency recommends based on need, not based on who pays the agency more. Licensed states are on the licenses page, not in this guide."
+        "text": "An independent agency is not the insurer. The insurance company issues the policy and pays the claim. “Appointed company” means the agency is authorized to quote and sell that insurer’s products. Mejor Vida Insurance earns a commission if a policy is issued through the agency; that does not make your premium higher than buying “direct.” The recommendation is based on your situation, not on who pays the agency more. Licensed states are on the licenses page, not in this guide."
       },
       {
         "type": "h2",
-        "text": "Companies we can put side by side"
+        "text": "Companies we can quote"
       },
       {
         "type": "p",
-        "text": "For final expense, appointed companies that show up often in our quotes include Mutual of Omaha (Living Promise), American Amicable (Golden Solution and Senior Choice), Accendo, Transamerica (Immediate Solution), Americo (Eagle Select), Assurity, and Corebridge (including a guaranteed-acceptance line). Not every product is in every state or at every age."
+        "text": "For final expense, appointed companies that show up often include Mutual of Omaha (Living Promise), American Amicable (Golden Solution and Senior Choice), Accendo, Transamerica (Immediate Solution), Americo (Eagle Select), Assurity, and Corebridge (including a guaranteed-acceptance line). Not every product is in every state or at every age."
+      },
+      {
+        "type": "p",
+        "text": "Two terms before the table: a full-benefit plan (sometimes called level or immediate) can pay the amount from the start if you qualify. A waiting-period plan limits the payout in the early years if death is not a covered accident. Do not compare those two designs on price alone."
       },
       {
         "type": "table",
-        "caption": "Educational snapshots — not a quality ranking",
-        "lead": "Use this table to see that logos do not offer the same thing. Then get a quote.",
+        "caption": "Educational snapshot — not a quality or price ranking",
+        "lead": "The products are not the same. Use the table to see the differences, then get a quote.",
         "headers": [
-          "Company / product",
-          "One sentence to know"
+          "Company or product",
+          "What to know"
         ],
         "rows": [
           [
@@ -215,15 +227,15 @@
       },
       {
         "type": "h2",
-        "text": "How to compare without getting lost"
+        "text": "How to compare two offers"
       },
       {
         "type": "ul",
         "items": [
-          "Same amount, same tobacco class, same date of birth.",
-          "If one plan has a wait and the other does not, the lower price is not comparable.",
-          "Read who the beneficiary is and whether loans or extras reduce the check.",
-          "Confirm the product is offered in your state."
+          "Use the same amount, the same tobacco class, and the same date of birth.",
+          "If one plan has a wait and the other pays in full from the start, the lower price is not comparable.",
+          "Check who the beneficiary is — the person who receives the check — and whether loans or extras reduce the payout.",
+          "Confirm the product is offered in the state where you live."
         ]
       },
       {
@@ -231,7 +243,11 @@
         "items": [
           {
             "q": "Which is cheapest?",
-            "a": "There is no single winner. The lowest for a 60-year-old non-smoker may not be lowest for a 77-year-old smoker."
+            "a": "There is no single winner. The lowest for a 60-year-old non-smoker may not be lowest for a 77-year-old smoker. The price comes from a quote with your details."
+          },
+          {
+            "q": "Is Mejor Vida Insurance an insurance company?",
+            "a": "No. It is an independent agency. It quotes appointed companies; the company that issues the policy is the insurer."
           },
           {
             "q": "Should I go direct to the company?",

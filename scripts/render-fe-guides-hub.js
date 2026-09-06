@@ -112,7 +112,7 @@ function renderHub(lang) {
 <link href="${cssPrefix}css/site-footer.css?v=20260721-funeral-mega" rel="stylesheet"/>
 <link href="${cssPrefix}css/mvi-assistant-widget.css" rel="stylesheet"/>
 <link href="${cssPrefix}css/fontawesome-mvi.min.css" rel="stylesheet"/>
-<link href="${cssPrefix}css/fe-guide.css?v=20260906-hero3" rel="stylesheet"/>
+<link href="${cssPrefix}css/fe-guide.css?v=20260906-edit" rel="stylesheet"/>
 <script>(function(){document.documentElement.lang='${htmlLang}';document.documentElement.className='${htmlClass}';})();</script>
 </head>
 <body style="font-family:'Inter',system-ui,sans-serif;">

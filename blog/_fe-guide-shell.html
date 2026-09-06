@@ -30,7 +30,7 @@
 <link href="../css/site-footer.css?v=20260721-lip-page" rel="stylesheet"/>
 <link href="../css/mvi-assistant-widget.css?v=20260721-chat-z" rel="stylesheet"/>
 <link href="../css/fontawesome-mvi.min.css?v=20260723-brands-fix" rel="stylesheet"/>
-<link href="../css/fe-guide.css?v=20260906-hero3" rel="stylesheet"/>
+<link href="../css/fe-guide.css?v=20260906-edit" rel="stylesheet"/>
 <link href="../css/life-insurance-cost.css?v=20260906-fe-rail" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -72,11 +72,13 @@
 <article class="fe-guide-body" id="fe-guide-body">
 {{BODY_PARAGRAPHS}}
 <section class="fe-guide-cta" aria-label="Siguiente paso" id="fe-guide-cta">
-<h2 class="h5 fw-bold mb-2" style="color:#1a365d;">{{CTA_TITLE}}</h2>
-<p class="mb-3 small text-body-secondary">{{CTA_BODY}}</p>
-<a class="btn btn-primary me-2 mb-2" href="{{QUOTE_HREF}}">{{CTA_QUOTE}}</a>
-<a class="btn btn-outline-primary me-2 mb-2" href="{{SCHEDULE_HREF}}">{{CTA_SCHEDULE}}</a>
-<a class="btn fe-guide-btn-whatsapp mb-2" href="{{WHATSAPP_HREF}}" rel="noopener" target="_blank"><i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp</a>
+<h2 class="fe-guide-cta-title">{{CTA_TITLE}}</h2>
+<p class="fe-guide-cta-body">{{CTA_BODY}}</p>
+<div class="fe-guide-cta-actions">
+<a class="btn btn-primary" href="{{QUOTE_HREF}}">{{CTA_QUOTE}}</a>
+<a class="btn btn-outline-primary" href="{{SCHEDULE_HREF}}">{{CTA_SCHEDULE}}</a>
+<a class="btn fe-guide-btn-whatsapp" href="{{WHATSAPP_HREF}}" rel="noopener" target="_blank"><i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp</a>
+</div>
 </section>
 <section aria-label="Avisos legales" class="fe-guide-disclosures" id="fe-guide-disclosures">
 <h2>Divulgaciones</h2>

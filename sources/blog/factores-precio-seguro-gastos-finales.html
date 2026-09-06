@@ -33,7 +33,7 @@
 <link href="../css/site-footer.css?v=20260721-lip-page" rel="stylesheet"/>
 <link href="../css/mvi-assistant-widget.css?v=20260721-chat-z" rel="stylesheet"/>
 <link href="../css/fontawesome-mvi.min.css?v=20260723-brands-fix" rel="stylesheet"/>
-<link href="../css/fe-guide.css?v=20260906-hero3" rel="stylesheet"/>
+<link href="../css/fe-guide.css?v=20260906-edit" rel="stylesheet"/>
 <link href="../css/life-insurance-cost.css?v=20260906-fe-rail" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -41,7 +41,7 @@
 <script type="application/ld+json">{
   "@context": "https://schema.org",
   "@type": "Article",
-  "headline": "Por qué dos personas pagan distinto por el mismo monto",
+  "headline": "Por qué dos personas pagan distinto por el mismo monto de gastos finales",
   "description": "Qué hace subir o bajar la prima de un seguro de gastos finales: edad, tabaco, salud, monto y tipo de plan. Guía de Mejor Vida Seguros.",
   "author": {
     "@type": "Person",
@@ -80,7 +80,15 @@
       "name": "¿El precio sube cada año?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "En un gasto final de prima nivelada, no por edad. Puede cambiar si deja de pagar, si hay un préstamo o si el contrato lo permite por otra razón escrita. Un temporal es otro diseño."
+        "text": "En un gasto final de prima nivelada, no por edad. Puede cambiar si deja de pagar, si hay un préstamo contra la póliza o si el contrato lo permite por otra razón escrita. Un seguro temporal es otro diseño."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Si mi salud empeora después, me suben la prima?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "En un plan de prima nivelada ya emitido, un cambio de salud por sí solo no suele ser el motivo para subir ese precio acordado, si usted sigue pagando a tiempo. Un diagnóstico nuevo sí puede cambiar el precio o el tipo de una póliza nueva."
       }
     },
     {
@@ -96,7 +104,7 @@
       "name": "¿Pagar anual es más barato?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Algunas compañías dan un descuento pequeño por pagar de menos veces al año. No es universal. Hay que ver la ilustración."
+        "text": "Algunas compañías dan un descuento pequeño por pagar menos veces al año. No es universal. Hay que ver la ilustración: los números de muestra que la compañía calcula para esa póliza."
       }
     }
   ]
@@ -627,9 +635,9 @@
 <a href="../guias-gastos-finales.html">Gastos finales</a> <span aria-hidden="true">›</span>
 <span>¿Qué factores afectan el precio del seguro de gastos finales?</span>
 </nav>
-<h1>Por qué dos personas pagan distinto por el mismo monto</h1>
+<h1>Por qué dos personas pagan distinto por el mismo monto de gastos finales</h1>
 
-<p class="fe-guide-hero-dek">La edad, el tabaco, la salud, el sexo, el monto y la compañía mueven la prima. El código postal importa menos que el tipo de plan.</p>
+<p class="fe-guide-hero-dek">La prima —el precio periódico del seguro— cambia con la edad, el tabaco, la salud, el sexo, el monto y la compañía. El código postal suele importar menos que el tipo de plan.</p>
 <p class="fe-guide-updated"><strong>Actualizado el:</strong> 6 de septiembre de 2026 · <button type="button" class="fe-guide-disclosures-link" id="fe-guide-disclosures-btn" aria-haspopup="dialog" aria-controls="fe-guide-disclosures-modal">Divulgaciones</button></p>
 </div>
 </div>
@@ -647,39 +655,46 @@
 </div>
 </section>
 <article class="fe-guide-body" id="fe-guide-body">
-  <p>El precio de un seguro de gastos finales no es un impuesto fijo. Es una oferta de una compañía para una persona concreta. Por eso una cotización en línea pide edad, sexo, tabaco y estado, y luego vienen preguntas de salud.</p>
-  <h2 class="h4 fw-bold mt-4 mb-2" style="color:#1a365d;">Lo que más mueve el número</h2>
-  <p>La edad al comprar es el factor más visible. A los 50, un $10,000 ilustrativo de gastos finales (no fumador, buena salud, agosto 2026) ronda $28 al mes para mujer y $34 para hombre. A los 70, esas mismas condiciones ilustrativas suben a unos $53 y $70. No es que la compañía “castigue” a nadie: el riesgo de fallecer en los años próximos es distinto.</p>
-  <p>El monto cubierto escala el precio. $15,000 no cuesta lo mismo que $5,000. Tampoco es siempre el triple exacto, porque cada producto redondea y tiene mínimos.</p>
-  <p>El tabaco —cigarro, vapeo u otros productos según lo que pregunte el formulario— suele subir la prima. No inventamos un “30% más” universal. Cada compañía define qué cuenta como tabaco y por cuántos meses sin uso se considera no fumador.</p>
-  <h2 class="h4 fw-bold mt-4 mb-2" style="color:#1a365d;">Salud y tipo de plan</h2>
-  <p>Las preguntas de salud no existen para molestar. Deciden si la compañía puede ofrecer un plan que pague el monto completo desde el primer pago, un plan con periodo de espera, o si solo queda un plan sin preguntas y con espera. El último camino suele costar más por cada dólar de beneficio.</p>
-  <p>El sexo aparece en muchas tablas de precio de vida permanente. En las cotizaciones ilustrativas que publicamos, las mujeres pagan menos que los hombres a la misma edad y monto, en no fumador. Eso no es una opinión de la agencia; es cómo están construidas esas tablas.</p>
+  <p>El precio de un seguro de gastos finales no es una tarifa nacional igual para todos. Es la oferta de una compañía para una persona concreta: su edad, si usa tabaco, cómo responde las preguntas de salud, el monto que pide y el producto disponible donde vive. Por eso una cotización en línea pide esos datos antes de mostrar un número.</p>
+  <h2 class="fe-guide-h2">La edad al comprar suele ser el factor más visible</h2>
+  <p>A los 50, un $10,000 ilustrativo de gastos finales (no fumador, buena salud, agosto 2026) ronda $28 al mes para mujer y $34 para hombre. A los 70, esas mismas condiciones ilustrativas suben a unos $53 y $70. No es que la compañía “castigue” a nadie: el riesgo de fallecer en los años próximos es distinto. Esas cifras son ejemplos educativos, no una oferta ni un promedio nacional.</p>
 <p class="fe-guide-table-lead">Cifras ilustrativas de compañías designadas, agosto 2026. No son una oferta ni un promedio nacional.</p>
-<div class="fe-guide-table-wrap"><table class="fe-guide-table"><caption>Ejemplo educativo: $10,000 al mes, no fumador, buena salud</caption><thead><tr><th scope="col">Edad</th><th scope="col">Mujer (aprox./mes)</th><th scope="col">Hombre (aprox./mes)</th></tr></thead><tbody>
+<div class="fe-guide-table-wrap"><table class="fe-guide-table"><caption>Ejemplo educativo: cobertura de $10,000, prima mensual (no fumador, buena salud)</caption><thead><tr><th scope="col">Edad al comprar</th><th scope="col">Mujer (aprox. al mes)</th><th scope="col">Hombre (aprox. al mes)</th></tr></thead><tbody>
 <tr><td>50</td><td>$28</td><td>$34</td></tr>
 <tr><td>65</td><td>$41</td><td>$54</td></tr>
 <tr><td>70</td><td>$53</td><td>$70</td></tr>
 <tr><td>75</td><td>$71</td><td>$97</td></tr>
 </tbody></table></div>
-<p class="fe-guide-table-foot">Si hay tabaco, otro estado de salud o un plan con espera, el número cambia. Pida una cotización con sus datos.</p>
-  <aside class="fe-guide-note"><p>No nombramos una compañía “más barata” para todos. Mutual of Omaha, American Amicable, Accendo, Transamerica, Americo, Assurity y Corebridge no usan la misma tabla. El más bajo para una persona de 62 no-fumadora puede no ser el más bajo para un fumador de 74.</p></aside>
-  <h2 class="h4 fw-bold mt-4 mb-2" style="color:#1a365d;">Qué no debe confundir el precio</h2>
+<p class="fe-guide-table-foot">Si hay tabaco, otro estado de salud o un plan con periodo de espera, el número cambia. Pida una cotización con sus datos.</p>
+  <h2 class="fe-guide-h2">El monto cubierto y el tabaco también mueven la prima</h2>
+  <p>El monto cubierto es la cantidad que la compañía promete pagar a los beneficiarios si usted fallece con la póliza vigente. $15,000 no cuesta lo mismo que $5,000. Tampoco es siempre el triple exacto, porque cada producto redondea y tiene mínimos.</p>
+  <p>El tabaco —cigarro, vapeo u otros productos según lo que pregunte el formulario— suele subir la prima. Eso se llama una clase de precio más alta: la misma edad y el mismo monto, otro tarifario. No inventamos un “30% más” universal. Cada compañía define qué cuenta como tabaco y por cuántos meses sin uso se considera no fumador.</p>
+  <h2 class="fe-guide-h2">Salud, tipo de plan y sexo en las tablas</h2>
+  <p>Las preguntas de salud deciden si la compañía puede ofrecer un plan que pague el monto completo desde el primer pago, un plan con periodo de espera, o si solo queda un plan sin preguntas y con espera. El periodo de espera es el tiempo al inicio en el que una muerte no accidental puede pagar menos que el monto completo. El último camino —aceptación garantizada, es decir sin preguntas de salud— suele costar más por cada dólar de beneficio.</p>
+  <p>El sexo aparece en muchas tablas de precio de vida permanente. En las cotizaciones ilustrativas que publicamos, las mujeres pagan menos que los hombres a la misma edad y monto, en no fumador. Eso no es una opinión de la agencia; es cómo están construidas esas tablas.</p>
+  <aside class="fe-guide-note"><p>No nombramos una compañía “más barata” para todos. Mutual of Omaha, American Amicable, Accendo, Transamerica, Americo, Assurity y Corebridge no usan la misma tabla. El más bajo para una persona de 62 no fumadora puede no ser el más bajo para un fumador de 74.</p></aside>
+  <h2 class="fe-guide-h2">Tres confusiones frecuentes sobre el precio</h2>
   <ul class="fe-guide-list">
     <li>El precio del seguro no es la factura de la funeraria. Son cuentas distintas.</li>
-    <li>Un anuncio de “desde $20 al mes” casi nunca dice la edad, el monto ni si hay espera.</li>
+    <li>Un anuncio de “desde $20 al mes” casi nunca dice la edad, el monto ni si hay periodo de espera.</li>
     <li>El valor en efectivo, si el contrato lo acumula, no es un ahorro líquido igual a un banco. Pedir prestado contra la póliza reduce el beneficio si no se paga.</li>
   </ul>
-<section class="fe-guide-faq-list" aria-label="Preguntas frecuentes"><h2 class="h4 fw-bold mt-4 mb-3" style="color:#1a365d;">Preguntas frecuentes</h2>
-<div class="fe-guide-faq-item"><h3>¿El precio sube cada año?</h3><p>En un gasto final de prima nivelada, no por edad. Puede cambiar si deja de pagar, si hay un préstamo o si el contrato lo permite por otra razón escrita. Un temporal es otro diseño.</p></div>
+<section class="fe-guide-faq-list" aria-label="Preguntas frecuentes"><h2 class="fe-guide-h2">Preguntas frecuentes</h2>
+<div class="fe-guide-faq-item"><h3>¿El precio sube cada año?</h3><p>En un gasto final de prima nivelada, no por edad. Puede cambiar si deja de pagar, si hay un préstamo contra la póliza o si el contrato lo permite por otra razón escrita. Un seguro temporal es otro diseño.</p></div>
+<div class="fe-guide-faq-item"><h3>¿Si mi salud empeora después, me suben la prima?</h3><p>En un plan de prima nivelada ya emitido, un cambio de salud por sí solo no suele ser el motivo para subir ese precio acordado, si usted sigue pagando a tiempo. Un diagnóstico nuevo sí puede cambiar el precio o el tipo de una póliza nueva.</p></div>
 <div class="fe-guide-faq-item"><h3>¿El estado cambia mucho el precio?</h3><p>El producto tiene que estar disponible donde usted vive. El tipo de plan y la edad suelen mover más el número que el código postal, pero no publicamos un ranking de estados.</p></div>
-<div class="fe-guide-faq-item"><h3>¿Pagar anual es más barato?</h3><p>Algunas compañías dan un descuento pequeño por pagar de menos veces al año. No es universal. Hay que ver la ilustración.</p></div></section>
+<div class="fe-guide-faq-item"><h3>¿Pagar anual es más barato?</h3><p>Algunas compañías dan un descuento pequeño por pagar menos veces al año. No es universal. Hay que ver la ilustración: los números de muestra que la compañía calcula para esa póliza.</p></div></section>
+<section class="fe-guide-sources"><h2 class="fe-guide-h2 fe-guide-h2--small">Fuentes públicas</h2><ul>
+<li><a href="https://content.naic.org/consumer/life-insurance.htm" rel="noopener" target="_blank">NAIC — Life insurance consumer information</a></li>
+</ul></section>
 <section class="fe-guide-cta" aria-label="Siguiente paso" id="fe-guide-cta">
-<h2 class="h5 fw-bold mb-2" style="color:#1a365d;">Vea un precio para su situación</h2>
-<p class="mb-3 small text-body-secondary">Mejor Vida Seguros compara compañías de gastos finales. Empiece con una cotización gratuita, agende una llamada o escríbanos por WhatsApp.</p>
-<a class="btn btn-primary me-2 mb-2" href="../quote.html">Cotización gratuita</a>
-<a class="btn btn-outline-primary me-2 mb-2" href="../schedule-julie.html">Agendar una llamada</a>
-<a class="btn fe-guide-btn-whatsapp mb-2" href="https://wa.me/14024405438?text=Hola%2C%20quiero%20una%20cotizaci%C3%B3n%20gratis%20de%20seguro%20de%20gastos%20finales." rel="noopener" target="_blank"><i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp</a>
+<h2 class="fe-guide-cta-title">Vea un precio con sus datos</h2>
+<p class="fe-guide-cta-body">Mejor Vida Seguros compara compañías de gastos finales. Empiece con una cotización gratuita o agende una llamada.</p>
+<div class="fe-guide-cta-actions">
+<a class="btn btn-primary" href="../quote.html">Cotización gratuita</a>
+<a class="btn btn-outline-primary" href="../schedule-julie.html">Agendar una llamada</a>
+<a class="btn fe-guide-btn-whatsapp" href="https://wa.me/14024405438?text=Hola%2C%20quiero%20una%20cotizaci%C3%B3n%20gratis%20de%20seguro%20de%20gastos%20finales." rel="noopener" target="_blank"><i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp</a>
+</div>
 </section>
 <section aria-label="Avisos legales" class="fe-guide-disclosures" id="fe-guide-disclosures">
 <h2>Divulgaciones</h2>
@@ -688,7 +703,7 @@
   <p>Las cotizaciones en este sitio son estimaciones. La prima final y la aprobación dependen de la solicitud completa y la decisión de la aseguradora.</p>
 </section>
 <section class="fe-guide-related">
-<h2 class="h6 fw-bold mb-3" style="color:#1a365d;">Guías relacionadas</h2>
+<h2 class="fe-guide-h2 fe-guide-h2--small">Guías relacionadas</h2>
 <ul>
     <li><a href="cuanto-cuesta-seguro-gastos-finales.html">¿Cuánto cuesta un seguro de gastos finales?</a></li>
     <li><a href="edad-contratar-seguro-gastos-finales.html">¿A qué edad conviene contratar un seguro de gastos finales?</a></li>

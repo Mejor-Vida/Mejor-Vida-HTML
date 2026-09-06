@@ -13,53 +13,57 @@
     "aiFreePledgeModalTitle": "Cómo se revisa esta guía",
     "aiFreePledgeModalBody": "El equipo de Mejor Vida Seguros revisa esta guía con materiales de compañías designadas y fuentes públicas. Las cotizaciones y la aprobación dependen de la aseguradora, del estado y de su solicitud.",
     "question": "¿Qué es un seguro de vida entero para gastos finales?",
-    "headline": "Gastos finales es, en la práctica, vida permanente de monto pequeño",
-    "dek": "Vida entero significa que la cobertura no está hecha para vencer a los 10 o 20 años. La prima nivelada se queda igual si usted paga a tiempo. El monto es el de un funeral, no el de una hipoteca.",
+    "headline": "Qué es la vida entera en un seguro de gastos finales",
+    "dek": "Vida entero —también llamada vida permanente— significa que la cobertura no está hecha para vencer a los 10 o 20 años. La prima nivelada se queda igual si usted paga a tiempo. El monto es el de un funeral, no el de una hipoteca.",
     "pageTitle": "Seguro de vida entero para gastos finales",
     "metaDescription": "Qué es la vida entera cuando se usa para gastos finales, qué es una prima nivelada y cómo se diferencia de un temporal. Guía de Mejor Vida Seguros.",
     "keyTakeaways": [
-      "Vida entero (o vida permanente) no caduca por el calendario de un plazo de 10 o 20 años.",
+      "Vida entero (vida permanente) no caduca por el calendario de un plazo de 10 o 20 años.",
       "Prima nivelada: el precio periódico no sube solo porque usted cumpla años dentro de esa póliza.",
       "Puede haber valor en efectivo según el contrato. Un préstamo no pagado reduce el beneficio.",
       "Una vida entera de $100,000 o más es otro tamaño de producto, a menudo con más preguntas o laboratorio."
     ],
     "cta": {
-      "title": "Vea un precio para su situación",
-      "body": "Mejor Vida Seguros compara compañías de gastos finales. Empiece con una cotización gratuita, agende una llamada o escríbanos por WhatsApp.",
+      "title": "Vea un precio de vida permanente",
+      "body": "Mejor Vida Seguros cotiza gastos finales de vida entera. Pida una cotización gratuita o agende una llamada.",
       "quote": "Cotización gratuita",
       "schedule": "Agendar una llamada"
     },
     "blocks": [
       {
         "type": "p",
-        "text": "Si alguien le dice “compre vida entero para el entierro,” no está inventando un cuarto tipo de seguro. Está describiendo un contrato permanente recortado al tamaño de un funeral."
+        "text": "Un seguro de gastos finales suele ser un seguro de vida entero de monto pequeño: vida permanente recortada al tamaño de un funeral, una cremación y deudas modestas."
       },
       {
         "type": "h2",
-        "text": "Qué problema resuelve la vida permanente"
+        "text": "Vida permanente frente a seguro temporal"
       },
       {
         "type": "p",
-        "text": "Un temporal es excelente cuando hay un plazo: la hipoteca, los hijos en la universidad. El funeral no tiene fecha. Un temporal de 20 años comprado a los 62 puede terminar a los 82, justo cuando el costo del servicio sigue ahí. La vida permanente sigue, si se paga, sin ese corte de calendario."
+        "text": "Un seguro temporal (term) cubre un plazo: 10, 20 o 30 años. Sirve cuando hay una fecha —la hipoteca, los hijos en la universidad. Un funeral no tiene fecha. Un temporal de 20 años comprado a los 62 puede terminar a los 82, cuando el costo del servicio sigue ahí. La vida permanente continúa, si se paga, sin ese corte de calendario."
       },
       {
         "type": "h2",
-        "text": "Prima nivelada, otra vez, porque importa"
+        "text": "Qué significa prima nivelada"
       },
       {
         "type": "p",
-        "text": "Nivelada significa estable. Usted no recibe un aumento automático cada cumpleaños. El precio alto o bajo se fija al emitir, según edad, tabaco, salud, sexo, monto y compañía. Por eso comprar a los 58 y a los 78 no cuesta lo mismo, aunque ambas pólizas sean “niveladas” después."
+        "text": "Prima es el precio periódico del seguro. Nivelada significa estable: no sube automáticamente en cada cumpleaños. El precio alto o bajo se fija al emitir, según edad, tabaco, salud, sexo, monto y compañía. Por eso comprar a los 58 y a los 78 no cuesta lo mismo, aunque ambas pólizas sean niveladas después."
+      },
+      {
+        "type": "h2",
+        "text": "Valor en efectivo"
       },
       {
         "type": "p",
-        "text": "Algunos contratos acumulan valor en efectivo. Eso no es una cuenta de cheques. Si pide prestado contra ese valor y no lo devuelve, el cheque a la familia se reduce. No ilustramos un valor futuro en esta página porque dependería de un producto y de supuestos que no vamos a inventar."
+        "text": "Algunos contratos acumulan valor en efectivo: un valor interno del contrato, no una cuenta de cheques. Si pide prestado contra ese valor y no lo devuelve, el cheque a la familia se reduce. No ilustramos un valor futuro en esta página porque dependería de un producto y de supuestos que no vamos a inventar."
       },
       {
         "type": "table",
-        "caption": "Vida permanente pequeña vs vida permanente más grande",
-        "lead": "El mismo apellido (“vida entero”) no implica el mismo trámite ni el mismo monto.",
+        "caption": "Vida permanente pequeña frente a vida entera más grande",
+        "lead": "El mismo nombre (“vida entero”) no implica el mismo trámite ni el mismo monto.",
         "headers": [
-          "",
+          "Tema",
           "Gastos finales (vida permanente pequeña)",
           "Vida entera más grande"
         ],
@@ -72,39 +76,43 @@
           [
             "Examen en consultorio",
             "Por lo general no, en las líneas que cotizamos",
-            "A veces sí, según monto"
+            "A veces sí, según el monto"
           ],
           [
             "Edad máxima al comprar",
             "A menudo 85; algunos diseños 89",
-            "Puede cortar antes que Accendo Level"
+            "Varía por compañía y monto"
           ],
           [
-            "Trabajo principal",
+            "Uso principal",
             "Funeral, cremación, deudas pequeñas",
-            "Ingresos, impuestos, legado más amplio"
+            "Ingresos, impuestos, un legado más amplio"
           ]
         ],
         "foot": "Cifras educativas de productos designados. No es una oferta."
       },
       {
         "type": "h2",
-        "text": "Ejemplos de producto"
+        "text": "Nombres de producto que puede oír"
       },
       {
         "type": "p",
-        "text": "Living Promise, Golden Solution, Senior Choice, Accendo Level, Immediate Solution y Eagle Select son vidas permanentes de gastos finales, cada una con su edad y tope. Una vida entera tradicional de monto alto se ilustra aparte; no la disfrazamos de plan de entierro."
+        "text": "Living Promise, Golden Solution, Senior Choice, Accendo Level, Immediate Solution y Eagle Select son vidas permanentes de gastos finales. Cada una tiene su edad y su tope. Una vida entera tradicional de monto alto se ilustra aparte; no la presentamos como un plan de entierro."
       },
       {
         "type": "faq",
         "items": [
+          {
+            "q": "¿El seguro de gastos finales es vida entero?",
+            "a": "En la práctica, sí: suele ser vida permanente de monto pequeño. El nombre “gastos finales” describe el uso, no un tipo de contrato distinto."
+          },
           {
             "q": "¿La vida entero “vence” a los 100?",
             "a": "Algunos contratos programan primas hasta una edad alta (por ejemplo 100 o 110 en materiales de American Amicable). Eso no es lo mismo que un temporal de 20 años. El detalle está en la póliza."
           },
           {
             "q": "¿Es lo mismo que un prepago funerario?",
-            "a": "No. El seguro paga efectivo al beneficiario. El prepago compra servicios a una funeraria según su contrato."
+            "a": "No. El seguro paga efectivo al beneficiario — la persona que usted nombró. El prepago compra servicios a una funeraria según su contrato."
           },
           {
             "q": "¿Puedo convertir un temporal en gastos finales?",
@@ -128,8 +136,8 @@
     "aiFreePledgeModalTitle": "How this guide is reviewed",
     "aiFreePledgeModalBody": "The Mejor Vida Insurance team reviews this guide against appointed-company materials and public sources. Quotes and approval depend on the insurer, your state, and your application.",
     "question": "What is whole life insurance for final expenses?",
-    "headline": "Final expense is, in practice, small permanent whole life",
-    "dek": "Whole life means coverage is not built to expire after a 10- or 20-year term. A level premium stays the same if you pay on time. The amount is funeral-sized, not mortgage-sized.",
+    "headline": "What whole life means in final expense insurance",
+    "dek": "Whole life — also called permanent life — means coverage is not built to expire after a 10- or 20-year term. A level premium stays the same if you pay on time. The amount is funeral-sized, not mortgage-sized.",
     "pageTitle": "Whole life insurance for final expenses",
     "metaDescription": "What whole life means when it is used for final expenses, what a level premium is, and how it differs from term. A guide from Mejor Vida Insurance.",
     "keyTakeaways": [
@@ -139,42 +147,46 @@
       "Whole life of $100,000 or more is a different product size, often with more questions or a lab exam."
     ],
     "cta": {
-      "title": "See a price for your situation",
-      "body": "Mejor Vida Insurance compares final expense companies. Start with a free quote, schedule a call, or message us on WhatsApp.",
+      "title": "See a permanent-life price",
+      "body": "Mejor Vida Insurance quotes whole-life final expense plans. Get a free quote or schedule a call.",
       "quote": "Get a free quote",
       "schedule": "Schedule a call"
     },
     "blocks": [
       {
         "type": "p",
-        "text": "If someone says “buy whole life for the burial,” they are not inventing a fourth kind of insurance. They are describing a permanent contract sized for a funeral."
+        "text": "Final expense insurance is usually a small whole life policy: permanent life sized for a funeral, a cremation, and modest debts."
       },
       {
         "type": "h2",
-        "text": "What problem permanent life solves"
+        "text": "Permanent life versus term"
       },
       {
         "type": "p",
-        "text": "Term is excellent when there is a deadline: the mortgage, kids in college. A funeral has no date. A 20-year term bought at 62 can end at 82, right when the service cost is still there. Permanent life continues, if it is paid, without that calendar cut."
+        "text": "Term insurance covers a set period: 10, 20, or 30 years. It fits when there is a deadline — the mortgage, kids in college. A funeral has no date. A 20-year term bought at 62 can end at 82, when the service cost is still there. Permanent life continues, if it is paid, without that calendar cut."
       },
       {
         "type": "h2",
-        "text": "Level premium, again, because it matters"
+        "text": "What a level premium means"
       },
       {
         "type": "p",
-        "text": "Level means steady. You do not get an automatic increase on each birthday. The high or low price is set at issue, based on age, tobacco, health, sex, amount, and company. That is why buying at 58 and at 78 does not cost the same, even though both policies are “level” afterward."
+        "text": "Premium is the regular price of the insurance. Level means steady: it does not rise automatically on each birthday. The high or low price is set at issue, based on age, tobacco, health, sex, amount, and company. That is why buying at 58 and at 78 does not cost the same, even though both policies are level afterward."
+      },
+      {
+        "type": "h2",
+        "text": "Cash value"
       },
       {
         "type": "p",
-        "text": "Some contracts build cash value. That is not a checking account. If you borrow against that value and do not repay it, the check to the family shrinks. We do not illustrate a future value on this page because it would depend on a product and assumptions we will not invent."
+        "text": "Some contracts build cash value: an internal contract value, not a checking account. If you borrow against that value and do not repay it, the check to the family shrinks. We do not illustrate a future value on this page because it would depend on a product and assumptions we will not invent."
       },
       {
         "type": "table",
-        "caption": "Small permanent life vs larger whole life",
-        "lead": "The same last name (“whole life”) does not mean the same process or the same amount.",
+        "caption": "Small permanent life versus larger whole life",
+        "lead": "The same name (“whole life”) does not mean the same process or the same amount.",
         "headers": [
-          "",
+          "Topic",
           "Final expense (small permanent)",
           "Larger whole life"
         ],
@@ -187,15 +199,15 @@
           [
             "Office exam",
             "Generally no, on the lines we quote",
-            "Sometimes yes, by amount"
+            "Sometimes yes, depending on the amount"
           ],
           [
             "Maximum age to buy",
             "Often 85; some designs 89",
-            "May cut off earlier than Accendo Level"
+            "Varies by company and amount"
           ],
           [
-            "Main job",
+            "Main use",
             "Funeral, cremation, small debts",
             "Income, taxes, a larger gift"
           ]
@@ -204,22 +216,26 @@
       },
       {
         "type": "h2",
-        "text": "Product examples"
+        "text": "Product names you may hear"
       },
       {
         "type": "p",
-        "text": "Living Promise, Golden Solution, Senior Choice, Accendo Level, Immediate Solution, and Eagle Select are permanent final expense lives, each with its own age and cap. A traditional large whole life policy is illustrated separately; we do not dress it up as a burial plan."
+        "text": "Living Promise, Golden Solution, Senior Choice, Accendo Level, Immediate Solution, and Eagle Select are permanent final expense policies. Each has its own age and cap. A traditional large whole life policy is illustrated separately; we do not present it as a burial plan."
       },
       {
         "type": "faq",
         "items": [
+          {
+            "q": "Is final expense whole life?",
+            "a": "In practice, yes: it is usually small permanent life. The name “final expense” describes the use, not a different kind of contract."
+          },
           {
             "q": "Does whole life “expire” at 100?",
             "a": "Some contracts schedule premiums to a high age (for example 100 or 110 in American Amicable materials). That is not the same as a 20-year term. The detail is in the policy."
           },
           {
             "q": "Is it the same as a prepaid funeral?",
-            "a": "No. Insurance pays cash to the beneficiary. A prepay buys services from a funeral home under its contract."
+            "a": "No. Insurance pays cash to the beneficiary — the person you named. A prepay buys services from a funeral home under its contract."
           },
           {
             "q": "Can I convert term into final expense?",

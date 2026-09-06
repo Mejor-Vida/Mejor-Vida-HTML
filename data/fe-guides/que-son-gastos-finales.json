@@ -13,15 +13,15 @@
     "aiFreePledgeModalTitle": "Cómo se revisa esta guía",
     "aiFreePledgeModalBody": "El equipo de Mejor Vida Seguros revisa esta guía con materiales de compañías designadas y fuentes públicas. Las cotizaciones y la aprobación dependen de la aseguradora, del estado y de su solicitud.",
     "question": "¿Qué son los gastos finales?",
-    "headline": "Gastos finales: la lista de cuentas que aparece cuando alguien muere",
-    "dek": "No es un impuesto ni un paquete de Medicare. Son el funeral o la cremación, el cementerio, traslados, deudas pequeñas y los costos de esos días. Un seguro de gastos finales es una forma de dejar efectivo para esa lista; no es la lista misma.",
+    "headline": "Gastos finales: las cuentas que aparecen cuando alguien muere",
+    "dek": "No es un impuesto ni un paquete de Medicare. Son el funeral o la cremación, el cementerio, los traslados, deudas pequeñas y los costos de esos días. Un seguro de gastos finales es una forma de dejar efectivo para esa lista; no es la lista misma.",
     "pageTitle": "Qué son los gastos finales",
-    "metaDescription": "Qué incluye la frase gastos finales: funeral, cremación, deudas y otros costos. Guía de Mejor Vida Seguros.",
+    "metaDescription": "Qué incluye la frase gastos finales: funeral, cremación, deudas y otros costos después de un fallecimiento. Guía de Mejor Vida Seguros.",
     "keyTakeaways": [
       "Gastos finales son las cuentas ligadas a la muerte y al servicio, no un producto de seguro por sí solo.",
-      "La NFDA 2023 sitúa el lado funeraria en $8,300 (velatorio y entierro) o $6,280 (velatorio y cremación). Cementerio y flores suelen ir aparte.",
+      "La National Funeral Directors Association (NFDA) situó en 2023 el lado funeraria en $8,300 (velatorio y entierro) o $6,280 (velatorio y cremación). Cementerio y flores suelen ir aparte.",
       "Medicare no está diseñado para esas cuentas. El Seguro Social puede pagar $255 a un sobreviviente que califique.",
-      "El beneficiario de un seguro de vida decide cómo usar el cheque; no está atado a una funeraria."
+      "El beneficiario de un seguro de vida —la persona nombrada para recibir el cheque— decide cómo usarlo. No está atado a una funeraria."
     ],
     "cta": {
       "title": "Vea un precio para su situación",
@@ -32,7 +32,7 @@
     "blocks": [
       {
         "type": "p",
-        "text": "La frase se usa en dos sentidos. Uno, las facturas. Dos, el seguro que algunas familias compran para esas facturas. Esta página enseña primero las facturas, para que el seguro tenga un tamaño."
+        "text": "La frase “gastos finales” se usa en dos sentidos. El primero es una lista de facturas que aparecen después de un fallecimiento: el funeral o la cremación, el cementerio, los viajes y deudas pequeñas que no desaparecieron. El segundo es un seguro de vida de monto más pequeño que algunas familias compran para esas facturas. Esta página empieza por las facturas, para que pueda juzgar cuánta cobertura tendría sentido."
       },
       {
         "type": "h2",
@@ -41,20 +41,24 @@
       {
         "type": "ul",
         "items": [
-          "Servicios de la funeraria: traslado, velatorio, ceremonia, ataúd o urna, cremación.",
-          "Cementerio: parcela o nicho, apertura y cierre, a veces bóveda o reglas de marcador.",
-          "Gastos de esos días: flores, aviso, comida, pasajes.",
-          "Cuentas que no murieron con la persona: un saldo médico, una tarjeta, un préstamo pequeño."
+          "Servicios de la funeraria: traslado del cuerpo, velatorio, ceremonia, ataúd o urna, y cremación si se elige esa vía.",
+          "Cementerio: parcela o nicho, apertura y cierre de la tumba y, a veces, una bóveda o reglas sobre el marcador.",
+          "Gastos de esos días: flores, un aviso en el periódico, comida para quienes llegan, pasajes.",
+          "Cuentas que quedan después del fallecimiento: un saldo médico, una tarjeta de crédito, un préstamo pequeño."
         ]
       },
       {
         "type": "p",
-        "text": "La FTC explica que usted puede pedir una lista de precios general a la funeraria. Comparar es legal y razonable. Un paquete con nombre bonito puede esconder ítems que usted no quiere."
+        "text": "En 2023, la NFDA publicó una mediana nacional de $8,300 por un funeral con velatorio y entierro, y $6,280 con velatorio y cremación, del lado de la funeraria. Parcela, lápida y flores no van siempre en esa cifra. No hay un desglose oficial por estado en ese estudio; pida la lista de precios general de la funeraria local."
+      },
+      {
+        "type": "p",
+        "text": "La Comisión Federal de Comercio (FTC, por sus siglas en inglés) explica que usted puede pedir a la funeraria una lista de precios general. Comparar es legal y razonable. Un paquete con un nombre atractivo puede incluir servicios que usted no pidió."
       },
       {
         "type": "table",
-        "caption": "Quién no paga esta lista automáticamente",
-        "lead": "Estas filas evitan la esperanza de que “alguien más” se encargue.",
+        "caption": "Quién no paga esta lista de forma automática",
+        "lead": "Nada de esto sustituye, por sí solo, la factura del sepelio. Cada fila tiene un límite.",
         "headers": [
           "Programa o producto",
           "Qué hace con los gastos finales"
@@ -62,45 +66,45 @@
         "rows": [
           [
             "Medicare",
-            "Salud que califica; no el funeral"
+            "Paga servicios de salud que califican mientras la persona vive. No está diseñado para el funeral."
           ],
           [
             "Pago único del Seguro Social",
-            "$255 si hay un sobreviviente que califique y se solicita"
+            "Puede pagar $255 si hay un sobreviviente que califique y se solicita el pago. No cubre un servicio típico."
           ],
           [
             "Contrato prepagado",
-            "Los servicios que el contrato describe, en esa funeraria"
+            "Cubre los servicios que el contrato describe, en esa funeraria. Lo que no está escrito suele cobrarse aparte."
           ],
           [
             "Seguro de gastos finales",
-            "Efectivo al beneficiario, si la póliza está vigente y el fallecimiento cubierto"
+            "Paga efectivo al beneficiario si la póliza —el contrato— está vigente y el fallecimiento está cubierto. El beneficiario decide cómo usarlo."
           ]
         ],
-        "foot": "Ayudas del VA, si aplican, tienen reglas propias del Departamento de Asuntos de Veteranos."
+        "foot": "Las ayudas del Departamento de Asuntos de Veteranos (VA), si aplican, tienen reglas propias. No pasan por Medicare."
       },
       {
         "type": "h2",
-        "text": "Por qué el nombre del seguro se parece a la lista"
+        "text": "Por qué el seguro usa el mismo nombre que la lista"
       },
       {
         "type": "p",
-        "text": "Las compañías venden vida permanente de monto pequeño y la llaman gastos finales porque ese es el uso más común. El contrato sigue siendo vida. Si el beneficiario paga la universidad de un nieto con el cheque, no está “rompiendo” el seguro."
+        "text": "Las compañías venden vida permanente de monto pequeño y la llaman gastos finales porque ese es el uso más común. El contrato sigue siendo un seguro de vida. Si el beneficiario paga la universidad de un nieto con el cheque, no está “rompiendo” el seguro. Tampoco está obligado a entregar el dinero a una funeraria."
       },
       {
         "type": "faq",
         "items": [
           {
             "q": "¿Los impuestos de sucesión son gastos finales?",
-            "a": "Pueden aparecer en una herencia compleja. No son el núcleo de un plan de $10,000. Un abogado de patrimonio responde eso."
+            "a": "Pueden aparecer en una herencia compleja. No son el núcleo de un plan pensado para un funeral de unos $10,000. Un abogado de patrimonio responde esa pregunta."
           },
           {
-            "q": "¿Una mascota o un auto cuentan?",
-            "a": "Solo si usted quiere dejar dinero para ellos. No están en la mediana de la NFDA."
+            "q": "¿Cuentan una mascota o un auto?",
+            "a": "Solo si usted quiere dejar dinero para eso. Esas partidas no entran en la mediana de la funeraria de la NFDA."
           },
           {
             "q": "¿Hay que pagar todo en 24 horas?",
-            "a": "La funeraria pide decisiones pronto. No todas las facturas vencen el mismo día. Pregunte plazos al firmar."
+            "a": "La funeraria pide decisiones pronto —cremación o entierro, velatorio o no—. No todas las facturas vencen el mismo día. Pregunte los plazos al firmar."
           }
         ]
       },
@@ -132,15 +136,15 @@
     "aiFreePledgeModalTitle": "How this guide is reviewed",
     "aiFreePledgeModalBody": "The Mejor Vida Insurance team reviews this guide against appointed-company materials and public sources. Quotes and approval depend on the insurer, your state, and your application.",
     "question": "What are final expenses?",
-    "headline": "Final expenses: the list of bills that appears when someone dies",
+    "headline": "Final expenses: the bills that appear when someone dies",
     "dek": "It is not a tax and not a Medicare package. It is the funeral or cremation, the cemetery, transfers, small debts, and the costs of those days. Final expense insurance is one way to leave cash for that list; it is not the list itself.",
     "pageTitle": "What are final expenses?",
-    "metaDescription": "What the phrase final expenses includes: funeral, cremation, debts, and other costs. A guide from Mejor Vida Insurance.",
+    "metaDescription": "What the phrase final expenses includes: funeral, cremation, debts, and other costs after a death. A guide from Mejor Vida Insurance.",
     "keyTakeaways": [
       "Final expenses are the bills tied to death and the service, not an insurance product by itself.",
-      "NFDA 2023 places the funeral-home side at $8,300 (viewing and burial) or $6,280 (viewing and cremation). Cemetery and flowers are usually extra.",
+      "The National Funeral Directors Association (NFDA) in 2023 placed the funeral-home side at $8,300 (viewing and burial) or $6,280 (viewing and cremation). Cemetery and flowers are usually extra.",
       "Medicare is not designed for those bills. Social Security may pay $255 to an eligible survivor.",
-      "A life-insurance beneficiary decides how to use the check; it is not tied to a funeral home."
+      "A life-insurance beneficiary — the person named to receive the check — decides how to use it. The money is not tied to a funeral home."
     ],
     "cta": {
       "title": "See a price for your situation",
@@ -151,7 +155,7 @@
     "blocks": [
       {
         "type": "p",
-        "text": "The phrase is used in two ways. One, the bills. Two, the insurance some families buy for those bills. This page teaches the bills first, so the insurance has a size."
+        "text": "People use “final expenses” in two ways. The first is a list of bills that show up after a death: the funeral or cremation, the cemetery, travel, and small debts that did not disappear. The second is a small life-insurance policy some families buy for those bills. This page starts with the bills, so you can judge how much coverage would actually help."
       },
       {
         "type": "h2",
@@ -160,20 +164,24 @@
       {
         "type": "ul",
         "items": [
-          "Funeral-home services: transfer, viewing, ceremony, casket or urn, cremation.",
-          "Cemetery: plot or niche, opening and closing, sometimes a vault or marker rules.",
-          "Costs of those days: flowers, a notice, food, flights.",
-          "Bills that did not die with the person: a medical balance, a card, a small loan."
+          "Funeral-home services: transferring the body, a viewing, a ceremony, a casket or urn, and cremation if that is the choice.",
+          "Cemetery: a plot or niche, opening and closing the grave, and sometimes a vault or rules about the marker.",
+          "Costs of those days: flowers, a newspaper notice, food for people who travel in, flights.",
+          "Bills that remain after a death: a medical balance, a credit card, a small loan."
         ]
       },
       {
         "type": "p",
-        "text": "The FTC explains that you can ask a funeral home for a general price list. Comparing is legal and reasonable. A nicely named package can hide items you do not want."
+        "text": "In 2023, NFDA published a national median of $8,300 for a funeral with viewing and burial, and $6,280 with viewing and cremation, on the funeral-home side. A plot, a marker, and flowers are not always in that figure. That study does not publish an official state-by-state split; ask the local funeral home for its general price list."
+      },
+      {
+        "type": "p",
+        "text": "The Federal Trade Commission (FTC) explains that you can ask a funeral home for a general price list. Comparing is legal and reasonable. A package with an attractive name can include services you did not ask for."
       },
       {
         "type": "table",
         "caption": "Who does not pay this list automatically",
-        "lead": "These rows prevent the hope that “someone else” will handle it.",
+        "lead": "None of these, on its own, replaces the funeral bill. Each row has a limit.",
         "headers": [
           "Program or product",
           "What it does with final expenses"
@@ -181,45 +189,45 @@
         "rows": [
           [
             "Medicare",
-            "Qualifying health care; not the funeral"
+            "Pays qualifying health care while the person is alive. It is not designed to pay for the funeral."
           ],
           [
             "Social Security lump-sum",
-            "$255 if an eligible survivor qualifies and applies"
+            "May pay $255 if an eligible survivor qualifies and applies. It does not cover a typical service."
           ],
           [
             "Prepaid contract",
-            "The services the contract describes, at that funeral home"
+            "Covers the services the contract describes, at that funeral home. What is not written is often billed separately."
           ],
           [
             "Final expense insurance",
-            "Cash to the beneficiary, if the policy is in force and the death is covered"
+            "Pays cash to the beneficiary if the policy — the contract — is in force and the death is covered. The beneficiary decides how to use it."
           ]
         ],
-        "foot": "VA help, if it applies, has its own Department of Veterans Affairs rules."
+        "foot": "Department of Veterans Affairs (VA) help, if it applies, has its own rules. It does not flow through Medicare."
       },
       {
         "type": "h2",
-        "text": "Why the insurance name looks like the list"
+        "text": "Why the insurance uses the same name as the list"
       },
       {
         "type": "p",
-        "text": "Companies sell small permanent life and call it final expense because that is the most common use. The contract is still life insurance. If the beneficiary pays a grandchild’s tuition with the check, they are not “breaking” the insurance."
+        "text": "Companies sell small permanent life insurance and call it final expense because that is the most common use. The contract is still life insurance. If the beneficiary pays a grandchild’s tuition with the check, they are not “breaking” the insurance. They also do not have to hand the money to a funeral home."
       },
       {
         "type": "faq",
         "items": [
           {
             "q": "Are estate taxes final expenses?",
-            "a": "They can appear in a complex estate. They are not the core of a $10,000 plan. An estate attorney answers that."
+            "a": "They can appear in a complex estate. They are not the core of a plan built around a funeral of about $10,000. An estate attorney answers that question."
           },
           {
-            "q": "Do a pet or a car count?",
-            "a": "Only if you want to leave money for them. They are not in the NFDA median."
+            "q": "Do a pet or a car count as final expenses?",
+            "a": "Only if you want to leave money for them. They are not in the NFDA funeral-home median."
           },
           {
             "q": "Must everything be paid in 24 hours?",
-            "a": "The funeral home needs decisions quickly. Not every invoice is due the same day. Ask for timelines when you sign."
+            "a": "The funeral home needs decisions quickly — cremation or burial, viewing or not. Not every invoice is due the same day. Ask for timelines when you sign."
           }
         ]
       },

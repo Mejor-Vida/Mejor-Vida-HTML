@@ -13,8 +13,8 @@
     "aiFreePledgeModalTitle": "Cómo se revisa esta guía",
     "aiFreePledgeModalBody": "El equipo de Mejor Vida Seguros revisa esta guía con materiales de compañías designadas y fuentes públicas. Las cotizaciones y la aprobación dependen de la aseguradora, del estado y de su solicitud.",
     "question": "¿A qué edad conviene contratar un seguro de gastos finales?",
-    "headline": "No hay una edad “mágica”: hay un precio que sube y una puerta que se estrecha",
-    "dek": "Comprar antes suele costar menos cada mes por el mismo monto. Comprar después sigue siendo posible en muchos productos, hasta los topes de edad de cada compañía.",
+    "headline": "A qué edad comprar gastos finales: el precio sube y cada producto cierra en una edad distinta",
+    "dek": "No hay una edad oficial “mejor” para todos. Comprar antes suele costar menos cada mes por el mismo monto. Comprar después sigue siendo posible en muchos productos, hasta los topes de edad de cada compañía.",
     "pageTitle": "A qué edad contratar un seguro de gastos finales",
     "metaDescription": "Cómo la edad cambia el precio y la disponibilidad de un seguro de gastos finales. Guía de Mejor Vida Seguros.",
     "keyTakeaways": [
@@ -24,15 +24,15 @@
       "Esperar “a ver” también es una decisión: el precio sube y un diagnóstico nuevo puede cambiar el tipo de plan."
     ],
     "cta": {
-      "title": "Vea un precio para su situación",
-      "body": "Mejor Vida Seguros compara compañías de gastos finales. Empiece con una cotización gratuita, agende una llamada o escríbanos por WhatsApp.",
+      "title": "Vea un precio a su edad",
+      "body": "Mejor Vida Seguros compara compañías de gastos finales. Empiece con una cotización gratuita o agende una llamada.",
       "quote": "Cotización gratuita",
       "schedule": "Agendar una llamada"
     },
     "blocks": [
       {
         "type": "p",
-        "text": "La pregunta suena a consejo de calendario. En realidad es de presupuesto y de salud. El seguro no se “madura” como un vino. Cada año que pasa, la prima de una póliza nueva para el mismo monto suele ser más alta, y el formulario de salud puede volverse más difícil."
+        "text": "La pregunta suena a consejo de calendario. En realidad es de presupuesto y de salud. Cada año que pasa, la prima de una póliza nueva —el precio periódico— para el mismo monto suele ser más alta, y el formulario de salud puede volverse más difícil. Esperar no abarata la cobertura. No hay un cumpleaños en el que comprar de pronto se vuelva la decisión correcta."
       },
       {
         "type": "h2",
@@ -40,7 +40,7 @@
       },
       {
         "type": "p",
-        "text": "Conviene, para muchas familias, cuando ya hay un funeral o deudas pequeñas que no quieren dejar a los hijos, y la prima cabe en el mes sin dejar de pagar luz o medicinas. No conviene si la prima va a caducar a los seis meses. Una póliza caducada no paga."
+        "text": "Conviene, para muchas familias, cuando ya hay un funeral o deudas pequeñas que no quieren dejar a los hijos, y la prima cabe en el mes sin dejar de pagar luz o medicinas. No conviene si la prima va a caducar a los seis meses. Caducar significa que la póliza se cancela por falta de pago; una póliza caducada no paga."
       },
       {
         "type": "h2",
@@ -52,8 +52,40 @@
       },
       {
         "type": "table",
+        "caption": "Ejemplo educativo: cobertura de $10,000, prima mensual (no fumador, buena salud)",
+        "lead": "Cifras ilustrativas de compañías designadas, agosto 2026. No son una oferta ni un promedio nacional.",
+        "headers": [
+          "Edad al comprar",
+          "Mujer (aprox. al mes)",
+          "Hombre (aprox. al mes)"
+        ],
+        "rows": [
+          [
+            "50",
+            "$28",
+            "$34"
+          ],
+          [
+            "65",
+            "$41",
+            "$54"
+          ],
+          [
+            "80",
+            "$98",
+            "$136"
+          ]
+        ],
+        "foot": "Tabaco, otra salud o un plan con espera cambian el número. La edad al emitir fija la prima de esa póliza."
+      },
+      {
+        "type": "h2",
+        "text": "Hasta qué edad se puede comprar, según el producto"
+      },
+      {
+        "type": "table",
         "caption": "Edades de compra que vemos en productos designados",
-        "lead": "Rangos educativos. El estado y el tabaco pueden recortarlos.",
+        "lead": "Rangos educativos. El estado donde vive y el tabaco pueden recortarlos.",
         "headers": [
           "Producto (ejemplo)",
           "Edades típicas al comprar",
@@ -68,7 +100,7 @@
           [
             "Golden Solution / Senior Choice (American Amicable)",
             "50–85",
-            "Según plan y estado"
+            "Según el plan y el estado donde viva; hay que cotizar el tope."
           ],
           [
             "Accendo Level",
@@ -78,7 +110,7 @@
           [
             "Transamerica Immediate Solution",
             "Hasta 85",
-            "El tope baja con la edad"
+            "El tope baja con la edad; pida la cifra de su edad."
           ],
           [
             "Aceptación garantizada Corebridge (línea cotizada)",
@@ -86,15 +118,15 @@
             "$5,000–$25,000"
           ]
         ],
-        "foot": "Americo Eagle Select Nivelado, en materiales de producto, emite en general de 40 a 85, $5,000–$50,000, con un tope de $40,000 a los 76–85. No hay un ganador en esta tabla."
+        "foot": "Americo Eagle Select Nivelado, en materiales de producto, emite en general de 40 a 85, $5,000–$50,000, con un tope de $40,000 a los 76–85. No hay un ganador en esta tabla. No publicamos emisión nueva de gastos finales a los 90."
       },
       {
         "type": "h2",
-        "text": "Los 50, los 60 y los 70 no son el mismo problema"
+        "text": "Qué cambia entre los 50, los 70 y los 80"
       },
       {
         "type": "p",
-        "text": "En los 50, algunas personas todavía comparan un temporal para la hipoteca con un gasto final para el funeral. Son trabajos distintos. En los 70, el temporal nuevo se acorta o desaparece; el gasto final permanente es, para muchas familias, la conversación principal. En los 80 y 85 hay menos compañías y montos a veces más bajos. Esas etapas se explican en las guías de mayores de 70, 80 y 85."
+        "text": "En los 50, algunas personas todavía comparan un seguro temporal para la hipoteca con un gasto final para el funeral. Son trabajos distintos. En los 70, el temporal nuevo se acorta o desaparece; el gasto final permanente es, para muchas familias, la conversación principal. En los 80 y 85 hay menos compañías y montos a veces más bajos. Esas etapas se explican en las guías de mayores de 70, 80 y 85."
       },
       {
         "type": "note",
@@ -114,6 +146,19 @@
           {
             "q": "¿Hay una edad mínima?",
             "a": "Sí, y cambia: 40, 45 o 50 son cortes que vemos en productos de esta página. Un adulto joven suele usar otro tipo de vida."
+          },
+          {
+            "q": "¿Puedo comprar a los 85 o a los 90?",
+            "a": "Algunos productos emiten hasta 85; Accendo Level puede llegar a 89. La aceptación garantizada que cotizamos suele cortar cerca de 80. No publicamos emisión nueva de gastos finales a los 90."
+          }
+        ]
+      },
+      {
+        "type": "sources",
+        "items": [
+          {
+            "label": "NAIC — Life insurance consumer information",
+            "url": "https://content.naic.org/consumer/life-insurance.htm"
           }
         ]
       }
@@ -124,8 +169,8 @@
     "aiFreePledgeModalTitle": "How this guide is reviewed",
     "aiFreePledgeModalBody": "The Mejor Vida Insurance team reviews this guide against appointed-company materials and public sources. Quotes and approval depend on the insurer, your state, and your application.",
     "question": "What is the best age to buy final expense insurance?",
-    "headline": "There is no magic age: the price rises and the door narrows",
-    "dek": "Buying earlier usually costs less each month for the same amount. Buying later is still possible on many products, up to each company’s age cap.",
+    "headline": "The best age to buy final expense insurance: the price rises, and each product has a cutoff",
+    "dek": "There is no official “best” age for everyone. Buying earlier usually costs less each month for the same amount. Buying later is still possible on many products, up to each company’s age cap.",
     "pageTitle": "Best age to buy final expense insurance",
     "metaDescription": "How age changes the price and availability of final expense insurance. A guide from Mejor Vida Insurance.",
     "keyTakeaways": [
@@ -135,15 +180,15 @@
       "Waiting “to see” is also a decision: the price rises, and a new diagnosis can change the plan type."
     ],
     "cta": {
-      "title": "See a price for your situation",
-      "body": "Mejor Vida Insurance compares final expense companies. Start with a free quote, schedule a call, or message us on WhatsApp.",
+      "title": "See a price at your age",
+      "body": "Mejor Vida Insurance compares final expense companies. Start with a free quote or schedule a call.",
       "quote": "Get a free quote",
       "schedule": "Schedule a call"
     },
     "blocks": [
       {
         "type": "p",
-        "text": "The question sounds like calendar advice. It is really about budget and health. Insurance does not “ripen” like wine. Each year that passes, the premium on a new policy for the same amount is usually higher, and the health form can get harder."
+        "text": "The question sounds like calendar advice. It is really about budget and health. Each year that passes, the premium on a new policy — the regular price — for the same amount is usually higher, and the health form can get harder. Waiting does not make the coverage cheaper. There is no single birthday when buying suddenly becomes the right move."
       },
       {
         "type": "h2",
@@ -151,7 +196,7 @@
       },
       {
         "type": "p",
-        "text": "For many families, it is a good time when there is already a funeral or small debts they do not want to leave to their children, and the premium fits the month without crowding out utilities or medicine. It is not a good time if the premium will lapse in six months. A lapsed policy does not pay."
+        "text": "For many families, it is a good time when there is already a funeral or small debts they do not want to leave to their children, and the premium fits the month without crowding out utilities or medicine. It is not a good time if the premium will lapse in six months. Lapse means the policy cancels for nonpayment; a lapsed policy does not pay."
       },
       {
         "type": "h2",
@@ -163,8 +208,40 @@
       },
       {
         "type": "table",
+        "caption": "Educational example: $10,000 of coverage, monthly premium (non-tobacco, good health)",
+        "lead": "Illustrative figures from appointed companies, August 2026. Not an offer and not a national average.",
+        "headers": [
+          "Age at purchase",
+          "Woman (approx. per month)",
+          "Man (approx. per month)"
+        ],
+        "rows": [
+          [
+            "50",
+            "$28",
+            "$34"
+          ],
+          [
+            "65",
+            "$41",
+            "$54"
+          ],
+          [
+            "80",
+            "$98",
+            "$136"
+          ]
+        ],
+        "foot": "Tobacco, a different health picture, or a waiting-period plan changes the number. Age at issue sets that policy’s premium."
+      },
+      {
+        "type": "h2",
+        "text": "How late you can buy depends on the product"
+      },
+      {
+        "type": "table",
         "caption": "Purchase ages we see on appointed products",
-        "lead": "Educational ranges. State and tobacco can shorten them.",
+        "lead": "Educational ranges. The state where you live and tobacco use can shorten them.",
         "headers": [
           "Product (example)",
           "Typical ages to buy",
@@ -179,7 +256,7 @@
           [
             "Golden Solution / Senior Choice (American Amicable)",
             "50–85",
-            "By plan and state"
+            "By plan and the state where you live; quote the cap."
           ],
           [
             "Accendo Level",
@@ -189,7 +266,7 @@
           [
             "Transamerica Immediate Solution",
             "Through 85",
-            "The cap falls with age"
+            "The cap falls with age; ask for the figure at your age."
           ],
           [
             "Corebridge guaranteed acceptance (quoted line)",
@@ -197,15 +274,15 @@
             "$5,000–$25,000"
           ]
         ],
-        "foot": "Americo Eagle Select Level, in product materials, typically issues ages 40–85, $5,000–$50,000, with a $40,000 cap at ages 76–85. This table has no winner."
+        "foot": "Americo Eagle Select Level, in product materials, typically issues ages 40–85, $5,000–$50,000, with a $40,000 cap at ages 76–85. This table has no winner. We do not publish new final expense issue at 90."
       },
       {
         "type": "h2",
-        "text": "The 50s, 60s, and 70s are not the same problem"
+        "text": "What changes in the 50s, 70s, and 80s"
       },
       {
         "type": "p",
-        "text": "In the 50s, some people still compare term for a mortgage with final expense for a funeral. Those are different jobs. In the 70s, new term shortens or disappears; permanent final expense is, for many families, the main conversation. In the 80s and 85s there are fewer companies and sometimes lower amounts. Those stages are covered in the over-70, over-80, and over-85 guides."
+        "text": "In the 50s, some people still compare term life for a mortgage with final expense for a funeral. Those are different jobs. In the 70s, new term shortens or disappears; permanent final expense is, for many families, the main conversation. In the 80s and at 85 there are fewer companies and sometimes lower amounts. Those stages are covered in the over-70, over-80, and over-85 guides."
       },
       {
         "type": "note",
@@ -225,6 +302,19 @@
           {
             "q": "Is there a minimum age?",
             "a": "Yes, and it changes: 40, 45, or 50 are cutoffs we see on products on this page. A young adult usually uses another kind of life insurance."
+          },
+          {
+            "q": "Can I buy at 85 or at 90?",
+            "a": "Some products issue through 85; Accendo Level can go through 89. Guaranteed acceptance we quote usually stops near 80. We do not publish new final expense issue at 90."
+          }
+        ]
+      },
+      {
+        "type": "sources",
+        "items": [
+          {
+            "label": "NAIC — Life insurance consumer information",
+            "url": "https://content.naic.org/consumer/life-insurance.htm"
           }
         ]
       }

@@ -1,27 +1,250 @@
 {
   "slug": "que-es-seguro-gastos-finales",
-  "question": "¿Qué es un seguro de gastos finales?",
-  "headline": "¿Qué es un seguro de gastos finales?",
-  "alternateNamesLine": "También conocido como seguro de entierro, seguro funeral o burial insurance — guía para familias en Nebraska",
-  "pageTitle": "Seguro de gastos finales y entierro en Nebraska — ¿Qué es?",
-  "dek": "Un seguro de gastos finales — también llamado seguro de entierro o funeral — es un seguro de vida permanente para que su familia en Nebraska no enfrente sola el costo del funeral, deudas médicas y otros gastos al final de la vida. Mejor Vida Insurance explica cómo funciona.",
-  "metaDescription": "¿Qué es un seguro de gastos finales o seguro de entierro en Nebraska? Mejor Vida Insurance explica burial insurance, prima nivelada, beneficiarios y cómo protege a su familia.",
+  "slugEn": "what-is-final-expense-insurance",
   "published": "2026-06-05",
-  "modified": "2026-06-05",
-  "keyTakeaways": [
-    "Un seguro de gastos finales es un seguro de vida permanente; también se conoce como seguro de entierro o funeral.",
-    "La prima mensual se mantiene igual de por vida mientras usted pague a tiempo; si deja de pagar, la póliza se cancela.",
-    "Usted elige uno o más beneficiarios quienes reciben el beneficio en efectivo cuando usted fallezca.",
-    "El beneficiario puede usar el dinero a su discreción — no hay reglas sobre cómo gastarlo (funeral, deudas médicas, etc.)."
-  ],
-  "paragraphs": [
-    "Un seguro de gastos finales es un seguro de vida permanente. Otros nombres por los cuales este seguro puede reconocerse son, seguro de entierro o funeral. Algunas de las características de este seguro y por qué se diferencia de otros seguros de vida es que cuando se obtiene una póliza de gastos finales siempre se va a pagar lo mismo mensualmente hasta que la compañía aseguradora tenga que pagar el beneficio. Esta póliza está activa mientras los pagos no se interrumpan. Si los pagos no se hacen entonces su póliza será cancelada y el beneficio no se pagará. Con un seguro de gastos finales el asegurado está pensando en cómo dejar a su familia protegida y así su familia en los momentos más difíciles de su vida no tenga que pensar en miles de dólares para cubrir un entierro, gastos médicos, deudas etc. Con un seguro de gastos finales usted puede escoger uno o más beneficiarios quienes serían las personas que se encargan de cobrar el dinero cuando el asegurado fallezca.",
-    "El beneficiario podrá usar el monto a su discreción para cubrir todos los gastos provenientes del fallecimiento de su ser querido, no se tiene que seguir ningún reglamento de cómo usar este dinero."
-  ],
+  "modified": "2026-09-06",
   "relatedSlugs": [
     "tipos-planes-seguro-gastos-finales",
     "cuanto-cuesta-seguro-gastos-finales",
     "medicare-paga-gastos-finales",
     "diferencia-seguro-vida-y-gastos-finales"
-  ]
+  ],
+  "es": {
+    "question": "¿Qué es un seguro de gastos finales?",
+    "headline": "¿Qué es un seguro de gastos finales?",
+    "alternateNamesLine": "También conocido como seguro de entierro, seguro funeral o burial insurance — guía para familias en Nebraska",
+    "pageTitle": "Seguro de gastos finales y entierro en Nebraska — ¿Qué es?",
+    "dek": "Un seguro de gastos finales es un seguro de vida permanente pensado para que su familia pueda pagar el funeral, la cremación y otras cuentas al fallecer. Mejor Vida Seguros explica qué es la póliza, la prima y el beneficiario.",
+    "metaDescription": "¿Qué es un seguro de gastos finales o seguro de entierro en Nebraska? Cómo funciona la póliza, la prima nivelada y el beneficiario. Guía de Mejor Vida Seguros.",
+    "aiFreePledgeLabel": "Revisado por Mejor Vida Seguros",
+    "aiFreePledgeModalTitle": "Cómo se revisa esta guía",
+    "aiFreePledgeModalBody": "El equipo de Mejor Vida Seguros revisa esta guía con materiales de compañías designadas y fuentes públicas. Las cotizaciones y la aprobación dependen de la aseguradora, del estado y de su solicitud.",
+    "keyTakeaways": [
+      "Un seguro de gastos finales es un seguro de vida permanente; también se conoce como seguro de entierro o seguro funeral.",
+      "La prima —el precio que usted paga, casi siempre cada mes— suele quedarse igual de por vida si el contrato es de prima nivelada y usted paga a tiempo.",
+      "Si los pagos se detienen más allá de lo que permite el contrato, la póliza puede cancelarse y el beneficio no se paga.",
+      "Usted nombra uno o más beneficiarios. Ellos reciben el dinero en efectivo y pueden usarlo a su discreción: funeral, deudas médicas u otras necesidades."
+    ],
+    "cta": {
+      "title": "Vea un precio para su situación",
+      "body": "Mejor Vida Seguros compara compañías de gastos finales. Empiece con una cotización gratuita, agende una llamada o escríbanos por WhatsApp.",
+      "quote": "Cotización gratuita",
+      "schedule": "Agendar una llamada"
+    },
+    "blocks": [
+      {
+        "type": "p",
+        "text": "Un seguro de gastos finales es un tipo de seguro de vida permanente. Usted paga una prima —el precio periódico del seguro— y la compañía promete pagar un beneficio en efectivo a las personas que usted nombra si usted fallece mientras la póliza está vigente. La póliza es el contrato escrito: nombres, monto, prima y qué está cubierto."
+      },
+      {
+        "type": "p",
+        "text": "No es un producto distinto del seguro de vida. Es el mismo tipo de contrato, recortado al tamaño de un funeral, una cremación y deudas cercanas a la muerte. Las familias en Nebraska suelen buscarlo cuando quieren que esos días no empiecen con una factura que nadie puede pagar de contado."
+      },
+      {
+        "type": "h2",
+        "text": "Otros nombres: entierro, funeral o burial insurance"
+      },
+      {
+        "type": "p",
+        "text": "También se le llama seguro de entierro, seguro funeral o, en inglés, burial insurance. El nombre describe el uso más común, no una regla de gasto. El cheque no está atado a una funeraria."
+      },
+      {
+        "type": "h2",
+        "text": "Cómo se mantiene vigente la póliza"
+      },
+      {
+        "type": "p",
+        "text": "En el diseño más común, la prima es nivelada: el precio acordado no sube solo porque usted cumpla años o porque cambie su salud, mientras usted pague a tiempo y no cambie el contrato. La cobertura sigue mientras los pagos no se interrumpan más allá de lo que el contrato permite. Si deja de pagar, la póliza puede cancelarse y el beneficio no se pagará."
+      },
+      {
+        "type": "note",
+        "text": "No todas las pólizas pagan el monto completo desde el primer día. Algunos planes tienen un periodo de espera —un tramo al inicio en el que una muerte por enfermedad puede pagar menos. Eso depende del tipo de plan y del contrato, no de un único número nacional."
+      },
+      {
+        "type": "h2",
+        "text": "Quién cobra el dinero"
+      },
+      {
+        "type": "p",
+        "text": "El beneficiario es la persona —o las personas— que usted elige para recibir el cheque cuando usted fallezca. Puede nombrar más de uno. Ellos se encargan de cobrar el beneficio ante la aseguradora."
+      },
+      {
+        "type": "p",
+        "text": "El beneficiario puede usar el monto a su discreción. No hay un reglamento de la funeraria ni una lista de compras obligatoria. Puede cubrir el entierro o la cremación, gastos médicos pendientes, deudas u otras necesidades de esos días."
+      },
+      {
+        "type": "table",
+        "caption": "Tres palabras que aparecen en cada póliza",
+        "lead": "Si estos nombres no coinciden con lo que usted quiere, pida aclararlos antes de firmar.",
+        "headers": [
+          "Término",
+          "Qué significa"
+        ],
+        "rows": [
+          [
+            "Póliza",
+            "El contrato entre usted (o el dueño) y la compañía de seguros. Ahí está lo que se pagará y bajo qué condiciones."
+          ],
+          [
+            "Prima",
+            "El precio que usted paga, casi siempre cada mes. En un plan de prima nivelada, ese precio suele quedarse igual si paga a tiempo."
+          ],
+          [
+            "Beneficiario",
+            "Quien recibe el cheque. Puede usarlo para el funeral o para lo que la familia necesite; no está obligado a entregarlo a una funeraria."
+          ]
+        ],
+        "foot": "Los nombres legales pueden variar un poco según el formulario de cada compañía."
+      },
+      {
+        "type": "faq",
+        "items": [
+          {
+            "q": "¿Es lo mismo que un seguro de entierro?",
+            "a": "Sí: seguro de gastos finales, seguro de entierro y seguro funeral suelen describir el mismo tipo de vida permanente de monto más pequeño. El nombre no obliga a gastar el cheque en un sepelio concreto."
+          },
+          {
+            "q": "¿El beneficiario tiene que mostrar facturas de la funeraria?",
+            "a": "En un seguro de vida típico, no. El pago es en efectivo al beneficiario. Un contrato prepagado con una funeraria es otro tipo de acuerdo."
+          },
+          {
+            "q": "¿La prima sube cada año?",
+            "a": "Si el contrato es de prima nivelada y usted paga a tiempo, el precio acordado no suele subir por edad ni por un cambio de salud. Sube si usted pide más cobertura u otro cambio que el contrato permita."
+          },
+          {
+            "q": "¿Qué pasa si dejo de pagar?",
+            "a": "Tras lo que el contrato llama periodo de gracia, la póliza puede cancelarse. Sin póliza vigente, no hay beneficio. No prometemos reembolsos automáticos; eso depende de cada contrato."
+          }
+        ]
+      },
+      {
+        "type": "sources",
+        "items": [
+          {
+            "label": "NAIC — Life insurance consumer information",
+            "url": "https://content.naic.org/consumer/life-insurance.htm"
+          }
+        ]
+      }
+    ]
+  },
+  "en": {
+    "aiFreePledgeLabel": "Reviewed by Mejor Vida Insurance",
+    "aiFreePledgeModalTitle": "How this guide is reviewed",
+    "aiFreePledgeModalBody": "The Mejor Vida Insurance team reviews this guide against appointed-company materials and public sources. Quotes and approval depend on the insurer, your state, and your application.",
+    "question": "What is final expense insurance?",
+    "headline": "What is final expense insurance?",
+    "alternateNamesLine": "Also called burial insurance or funeral insurance — a guide for families in Nebraska",
+    "pageTitle": "What is final expense and burial insurance?",
+    "dek": "Final expense insurance is permanent life insurance meant so your family can pay the funeral, cremation, and other bills after a death. Mejor Vida Insurance explains the policy, the premium, and the beneficiary.",
+    "metaDescription": "What is final expense or burial insurance? How the policy, level premium, and beneficiary work. A guide from Mejor Vida Insurance.",
+    "keyTakeaways": [
+      "Final expense insurance is permanent life insurance. It is also called burial insurance or funeral insurance.",
+      "The premium — the price you pay, usually each month — often stays the same for life if the contract is level premium and you pay on time.",
+      "If payments stop beyond what the contract allows, the policy can lapse and the benefit is not paid.",
+      "You name one or more beneficiaries. They receive cash and can use it as they choose: funeral, medical bills, or other needs."
+    ],
+    "blocks": [
+      {
+        "type": "p",
+        "text": "Final expense insurance is a type of permanent life insurance. You pay a premium — the regular price of the insurance — and the company promises to pay a cash benefit to the people you name if you die while the policy is in force. The policy is the written contract: names, amount, premium, and what is covered."
+      },
+      {
+        "type": "p",
+        "text": "It is not a different product from life insurance. It is the same kind of contract, sized for a funeral, a cremation, and debts close to death. Families in Nebraska often look for it when they do not want those days to start with a bill no one can pay in cash."
+      },
+      {
+        "type": "h2",
+        "text": "Other names: burial, funeral, or burial insurance"
+      },
+      {
+        "type": "p",
+        "text": "It is also called burial insurance or funeral insurance. The name describes the most common use, not a spending rule. The check is not tied to a funeral home."
+      },
+      {
+        "type": "h2",
+        "text": "How the policy stays in force"
+      },
+      {
+        "type": "p",
+        "text": "In the most common design, the premium is level: the agreed price does not rise only because you have a birthday or because your health changes, as long as you pay on time and you do not change the contract. Coverage continues while payments are not interrupted beyond what the contract allows. If you stop paying, the policy can cancel and the benefit will not be paid."
+      },
+      {
+        "type": "note",
+        "text": "Not every policy pays the full amount from day one. Some plans have a waiting period — an early stretch when a death from illness may pay less. That depends on the type of plan and the contract, not on one national number."
+      },
+      {
+        "type": "h2",
+        "text": "Who receives the money"
+      },
+      {
+        "type": "p",
+        "text": "The beneficiary is the person — or people — you choose to receive the check when you die. You can name more than one. They claim the benefit with the insurer."
+      },
+      {
+        "type": "p",
+        "text": "The beneficiary can use the amount as they choose. There is no funeral-home rule and no required shopping list. It can cover burial or cremation, leftover medical bills, debts, or other needs in those days."
+      },
+      {
+        "type": "table",
+        "caption": "Three words that appear on every policy",
+        "lead": "If these names do not match what you want, ask to clarify them before you sign.",
+        "headers": [
+          "Term",
+          "What it means"
+        ],
+        "rows": [
+          [
+            "Policy",
+            "The contract between you (or the owner) and the insurance company. It states what will be paid and under what conditions."
+          ],
+          [
+            "Premium",
+            "The price you pay, almost always each month. On a level-premium plan, that price usually stays the same if you pay on time."
+          ],
+          [
+            "Beneficiary",
+            "Who receives the check. They can use it for the funeral or for what the family needs; they are not required to hand it to a funeral home."
+          ]
+        ],
+        "foot": "Legal names can vary a little by each company’s form."
+      },
+      {
+        "type": "faq",
+        "items": [
+          {
+            "q": "Is it the same as burial insurance?",
+            "a": "Yes: final expense, burial, and funeral insurance usually describe the same smaller permanent life product. The name does not require spending the check on a specific funeral."
+          },
+          {
+            "q": "Does the beneficiary have to show funeral invoices?",
+            "a": "On a typical life insurance policy, no. Payment is cash to the beneficiary. A prepaid contract with a funeral home is a different kind of agreement."
+          },
+          {
+            "q": "Does the premium rise every year?",
+            "a": "If the contract is level premium and you pay on time, the agreed price usually does not rise for age or a later health change. It can rise if you ask for more coverage or another change the contract allows."
+          },
+          {
+            "q": "What happens if I stop paying?",
+            "a": "After what the contract calls the grace period, the policy can cancel. With no policy in force, there is no benefit. We do not promise automatic refunds; that depends on each contract."
+          }
+        ]
+      },
+      {
+        "type": "sources",
+        "items": [
+          {
+            "label": "NAIC — Life insurance consumer information",
+            "url": "https://content.naic.org/consumer/life-insurance.htm"
+          }
+        ]
+      }
+    ],
+    "cta": {
+      "title": "See a price for your situation",
+      "body": "Mejor Vida Insurance compares final expense companies. Start with a free quote, schedule a call, or message us on WhatsApp.",
+      "quote": "Get a free quote",
+      "schedule": "Schedule a call"
+    }
+  }
 }

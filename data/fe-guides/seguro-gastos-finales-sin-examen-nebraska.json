@@ -13,70 +13,87 @@
     "aiFreePledgeModalTitle": "Cómo se revisa esta guía",
     "aiFreePledgeModalBody": "El equipo de Mejor Vida Seguros revisa esta guía con materiales de compañías designadas y fuentes públicas. Las cotizaciones y la aprobación dependen de la aseguradora, del estado y de su solicitud.",
     "question": "Seguro de gastos finales sin examen médico en Nebraska",
-    "headline": "Nebraska, sin examen en el consultorio: qué significa de verdad",
-    "dek": "En Nebraska, los gastos finales que Mejor Vida Seguros cotiza suelen resolverse con preguntas de salud, no con una visita de laboratorio. “Sin examen” no oculta diagnósticos. La lista de precios de la funeraria local sigue siendo su mejor cifra de funeral.",
+    "headline": "Gastos finales sin examen en Nebraska: sin consultorio, no sin preguntas",
+    "dek": "En Nebraska, los gastos finales que Mejor Vida Seguros cotiza suelen decidirse con preguntas de salud, no con una visita de laboratorio. “Sin examen” no oculta diagnósticos. Para el costo del funeral, pida la lista de precios general de la funeraria local: no hay una mediana NFDA solo para Nebraska.",
     "pageTitle": "Seguro de gastos finales sin examen en Nebraska",
-    "metaDescription": "Cómo funciona un seguro de gastos finales sin examen médico en Nebraska, con preguntas de salud y compañías designadas. Guía de Mejor Vida Seguros.",
+    "metaDescription": "Cómo funciona un seguro de gastos finales sin examen médico en Nebraska: preguntas de salud, espera y costo local del funeral. Guía de Mejor Vida Seguros.",
     "keyTakeaways": [
-      "Esta guía habla de comprar en Nebraska. La disponibilidad de cada producto depende de la compañía y de su solicitud.",
-      "Lo habitual en gastos finales designados es no ir a un consultorio a un examen por esa póliza. Sí hay preguntas, salvo aceptación garantizada.",
-      "No tenemos una mediana NFDA publicada solo para Nebraska. Use la lista de precios general de la funeraria (regla de la FTC) para el costo local.",
-      "Las edades y montos de Living Promise, American Amicable, Accendo, Transamerica, Americo y Corebridge son los mismos marcos que en otras guías, si el producto se ofrece en Nebraska para usted."
+      "Esta guía es para quien compra viviendo en Nebraska. Cada producto depende de la compañía y de su solicitud.",
+      "“Sin examen” significa, en lo habitual, que no hay cita de sangre en un consultorio por esa póliza. Siguen las preguntas, salvo aceptación garantizada.",
+      "No hay mediana NFDA publicada solo para Nebraska. Use la lista de precios general de la funeraria (regla de la FTC).",
+      "Living Promise, American Amicable, Accendo, Transamerica, Americo y Corebridge usan los mismos marcos de edad y monto que en otras guías, si el producto se ofrece en Nebraska para usted."
     ],
     "cta": {
-      "title": "Vea un precio para su situación",
-      "body": "Mejor Vida Seguros compara compañías de gastos finales. Empiece con una cotización gratuita, agende una llamada o escríbanos por WhatsApp.",
+      "title": "Cotice en Nebraska",
+      "body": "Mejor Vida Seguros compara gastos finales sin examen en consultorio cuando el producto lo permite. Cotización gratuita, una llamada o WhatsApp.",
       "quote": "Cotización gratuita",
       "schedule": "Agendar una llamada"
     },
     "blocks": [
       {
         "type": "p",
-        "text": "Querer un plan “sin examen en Nebraska” es una petición concreta: no quiere una cita de sangre para un seguro de entierro. En la práctica, ese es el diseño de muchos gastos finales. El paso que sí existe es decir la verdad en el formulario."
+        "text": "Pedir un plan “sin examen en Nebraska” suele querer decir: no quiere una cita de laboratorio para un seguro de entierro. Ese es el diseño de muchos gastos finales. El paso que sí existe es contestar con verdad el formulario. Si la compañía tiene el producto aprobado para venderse en Nebraska, se cotiza; si no, se cotiza otro. No afirmamos que todas las compañías nacionales emitan en cada condado."
       },
       {
         "type": "h2",
-        "text": "Qué ocurre en una solicitud de Nebraska"
+        "text": "Qué significa “sin examen”"
       },
       {
-        "type": "p",
-        "text": "La cotización pide edad, sexo, tabaco y que vive en Nebraska. Luego vienen preguntas de salud, o un camino sin preguntas con espera. La compañía tiene que tener el producto aprobado para venderse en ese estado. Si un logo no está disponible para su solicitud, se cotiza otro; no inventamos que “todas las compañías nacionales” emiten en cada condado."
+        "type": "ul",
+        "items": [
+          "Sin examen en consultorio: no es lo habitual que le saquen sangre o orina en una clínica por esa póliza de gastos finales.",
+          "Con preguntas de salud: la solicitud pregunta por hospital, oxígeno, cáncer, corazón y lo que el formulario liste. Mentir puede poner en riesgo el pago.",
+          "Aceptación garantizada: sin esas preguntas, con periodo de espera para muerte no accidental, y un tope de monto más bajo.",
+          "Disponible en Nebraska: el producto tiene que estar aprobado en el estado y ofrecido para su solicitud. Un folleto nacional no basta."
+        ]
       },
       {
         "type": "h2",
-        "text": "Funeral en Nebraska vs mediana nacional"
+        "text": "Cómo es la solicitud"
       },
       {
         "type": "p",
-        "text": "La NFDA publicó en 2023 medianas nacionales de $8,300 (velatorio y entierro) y $6,280 (velatorio y cremación) del lado de la funeraria. No hay, en esa publicación, un recorte oficial solo para Nebraska que podamos citar. Lincoln, Omaha, un pueblo pequeño o un cementerio con reglas de bóveda pueden estar por encima o por debajo. Pida la lista de precios en persona o una cotización por teléfono, como explica la FTC."
+        "text": "La cotización pide edad, sexo, tabaco y que vive en Nebraska. Después vienen las preguntas, o el camino sin preguntas con espera. La compañía revisa las respuestas y, en muchos casos, historial que usted autoriza. La aprobación es de la aseguradora, no del sitio web."
       },
       {
         "type": "table",
-        "caption": "Sin examen, con o sin preguntas",
-        "lead": "Nebraska no cambia estas definiciones; cambia si el producto se ofrece para su solicitud.",
+        "caption": "Tres caminos: examen, preguntas y espera",
+        "lead": "Nebraska no cambia estas definiciones. Cambia si el producto se ofrece para su solicitud.",
         "headers": [
           "Camino",
           "Examen en consultorio",
-          "Preguntas"
+          "Preguntas de salud",
+          "Espera típica (muerte no accidental)"
         ],
         "rows": [
           [
             "Beneficio completo si califica",
             "Por lo general no",
-            "Sí"
+            "Sí",
+            "No, si se emite así"
           ],
           [
             "Beneficio limitado al inicio",
             "Por lo general no",
-            "Sí"
+            "Sí",
+            "Suele ser de dos a tres años, según el contrato"
           ],
           [
             "Aceptación garantizada",
             "No",
-            "No"
+            "No",
+            "Unos dos años en la línea que cotizamos"
           ]
         ],
-        "foot": "Corebridge GIWL, en la línea que cotizamos, ilustra el tercer camino: típico 50–80, $5,000–$25,000, espera de unos dos años en muerte no accidental."
+        "foot": "Corebridge GIWL, en la línea que cotizamos, ilustra el tercer camino: típico 50–80, $5,000–$25,000. “Típico” no es una garantía; cada contrato tiene su fórmula."
+      },
+      {
+        "type": "h2",
+        "text": "Funeral en Nebraska: use la lista local"
+      },
+      {
+        "type": "p",
+        "text": "La NFDA publicó en 2023 medianas nacionales del lado de la funeraria: $8,300 (velatorio y entierro) y $6,280 (velatorio y cremación). En esa publicación no hay un recorte oficial solo para Nebraska. Lincoln, Omaha, un pueblo o un cementerio con reglas de bóveda pueden estar por encima o por debajo. La Comisión Federal de Comercio (FTC) explica que puede pedir la lista de precios general en persona y cotizar por teléfono. Esa lista es su cifra local."
       },
       {
         "type": "h2",
@@ -84,7 +101,7 @@
       },
       {
         "type": "p",
-        "text": "Mutual of Omaha Living Promise, American Amicable Golden Solution y Senior Choice, Accendo, Transamerica Immediate Solution, Americo Eagle Select y Assurity son nombres que Mejor Vida Seguros usa al cotizar gastos finales cuando están designados y disponibles. Un “sí” en el papel de marketing no sustituye la oferta real en Nebraska."
+        "text": "Cuando están designadas y disponibles para su solicitud, Mejor Vida Seguros cotiza nombres como Mutual of Omaha Living Promise, American Amicable Golden Solution y Senior Choice, Accendo, Transamerica Immediate Solution, Americo Eagle Select, Assurity y, en aceptación garantizada, Corebridge GIWL. Un “sí” de marketing no sustituye la oferta real en Nebraska."
       },
       {
         "type": "note",
@@ -92,14 +109,19 @@
       },
       {
         "type": "faq",
+        "heading": "Preguntas frecuentes",
         "items": [
           {
-            "q": "¿Nebraska exige un examen para vida pequeña?",
-            "a": "No conocemos una ley estatal que obligue un examen en consultorio para todo gasto final. Cada producto fija su proceso. Si aparece uno que sí pide laboratorio, se lo diremos; no es el flujo habitual que cotizamos."
+            "q": "¿Nebraska obliga a un examen para un seguro de vida pequeño?",
+            "a": "No conocemos una ley estatal que exija un examen en consultorio para todo gasto final. Cada producto fija su proceso. Si aparece uno que pide laboratorio, se lo diremos; no es el flujo habitual que cotizamos."
           },
           {
-            "q": "¿El precio es distinto en Omaha y en un pueblo?",
-            "a": "La tarifa la arma la compañía con edad, salud, tabaco y producto. No publicamos un recargo de condado. El funeral local sí cambia; por eso la lista de la funeraria importa."
+            "q": "¿Sin examen quiere decir que me aceptan sí o sí?",
+            "a": "No. Sin examen no es lo mismo que aceptación garantizada. Con preguntas, la compañía puede ofrecer beneficio completo, un plan con espera, o no emitir."
+          },
+          {
+            "q": "¿El precio del seguro cambia entre Omaha y un pueblo?",
+            "a": "La tarifa la arma la compañía con edad, salud, tabaco y producto. No publicamos un recargo por condado. El funeral local sí cambia; por eso importa la lista de la funeraria."
           },
           {
             "q": "¿Puedo cotizar en línea?",
@@ -127,70 +149,87 @@
     "aiFreePledgeModalTitle": "How this guide is reviewed",
     "aiFreePledgeModalBody": "The Mejor Vida Insurance team reviews this guide against appointed-company materials and public sources. Quotes and approval depend on the insurer, your state, and your application.",
     "question": "No-exam final expense insurance in Nebraska",
-    "headline": "Nebraska, no office exam: what that actually means",
-    "dek": "In Nebraska, the final expense plans Mejor Vida Insurance quotes are usually decided with health questions, not a lab visit. “No exam” does not hide diagnoses. Your local funeral home’s price list is still the best funeral figure.",
+    "headline": "No-exam final expense in Nebraska: no office visit, not no questions",
+    "dek": "In Nebraska, the final expense plans Mejor Vida Insurance quotes are usually decided with health questions, not a lab visit. “No exam” does not hide diagnoses. For funeral cost, ask your local funeral home for its general price list: there is no NFDA median for Nebraska alone.",
     "pageTitle": "No-exam final expense insurance in Nebraska",
-    "metaDescription": "How no-exam final expense insurance works in Nebraska, including health questions and appointed companies. A guide from Mejor Vida Insurance.",
+    "metaDescription": "How no-exam final expense insurance works in Nebraska: health questions, waiting periods, and local funeral cost. A guide from Mejor Vida Insurance.",
     "keyTakeaways": [
-      "This guide is about buying in Nebraska. Each product’s availability depends on the company and your application.",
-      "Appointed final expense usually skips an office exam for that policy. Questions still apply, except guaranteed acceptance.",
-      "We do not have an NFDA median published only for Nebraska. Use the funeral home’s general price list (FTC Funeral Rule) for local cost.",
-      "Age and amount frames for Living Promise, American Amicable, Accendo, Transamerica, Americo, and Corebridge are the same as in other guides, if the product is offered in Nebraska for you."
+      "This guide is for people buying while living in Nebraska. Each product depends on the company and your application.",
+      "“No exam” usually means no blood appointment at a clinic for that policy. Questions still apply, except guaranteed acceptance.",
+      "There is no NFDA median published only for Nebraska. Use the funeral home’s general price list (FTC Funeral Rule).",
+      "Age and amount frames for Living Promise, American Amicable, Accendo, Transamerica, Americo, and Corebridge match our other guides, if the product is offered in Nebraska for you."
     ],
     "cta": {
-      "title": "See a price for your situation",
-      "body": "Mejor Vida Insurance compares final expense companies. Start with a free quote, schedule a call, or message us on WhatsApp.",
+      "title": "Get a Nebraska quote",
+      "body": "Mejor Vida Insurance compares no-office-exam final expense when the product allows it. Free quote, a call, or WhatsApp.",
       "quote": "Get a free quote",
       "schedule": "Schedule a call"
     },
     "blocks": [
       {
         "type": "p",
-        "text": "Wanting a “no exam in Nebraska” plan is a concrete request: you do not want a blood appointment for burial insurance. In practice, that is how many final expense plans are built. The step that still exists is telling the truth on the form."
+        "text": "Asking for a “no exam in Nebraska” plan usually means you do not want a lab appointment for burial insurance. That is how many final expense plans are built. The step that still exists is answering the form truthfully. If the company has the product approved to sell in Nebraska, it is quoted; if not, another is quoted. We do not claim that every national company issues in every county."
       },
       {
         "type": "h2",
-        "text": "What a Nebraska application looks like"
+        "text": "What “no exam” means"
       },
       {
-        "type": "p",
-        "text": "The quote asks for age, sex, tobacco, and that you live in Nebraska. Then come health questions, or a no-questions path with a wait. The company must have the product approved to be sold in that state. If a logo is not available for your application, another is quoted; we do not invent that “every national company” issues in every county."
+        "type": "ul",
+        "items": [
+          "No office exam: it is not usual to give blood or urine at a clinic for that final expense policy.",
+          "Health questions still apply: the application asks about hospital stays, oxygen, cancer, heart conditions, and whatever the form lists. Lying can put the claim at risk.",
+          "Guaranteed acceptance: none of those questions, with a waiting period for non-accidental death, and a lower amount cap.",
+          "Available in Nebraska: the product must be approved in the state and offered for your application. A national brochure is not enough."
+        ]
       },
       {
         "type": "h2",
-        "text": "Funerals in Nebraska vs the national median"
+        "text": "What the application looks like"
       },
       {
         "type": "p",
-        "text": "NFDA published 2023 national medians of $8,300 (viewing and burial) and $6,280 (viewing and cremation) on the funeral-home side. That publication does not include an official Nebraska-only split we can cite. Lincoln, Omaha, a small town, or a cemetery with vault rules can sit above or below. Ask for the general price list in person or a phone quote, as the FTC explains."
+        "text": "The quote asks for age, sex, tobacco, and that you live in Nebraska. Then come the questions, or the no-questions path with a wait. The company reviews the answers and, in many cases, records you authorize. Approval belongs to the insurer, not the website."
       },
       {
         "type": "table",
-        "caption": "No exam, with or without questions",
-        "lead": "Nebraska does not change these definitions; it changes whether the product is offered for your application.",
+        "caption": "Three paths: exam, questions, and wait",
+        "lead": "Nebraska does not change these definitions. It changes whether the product is offered for your application.",
         "headers": [
           "Path",
           "Office exam",
-          "Questions"
+          "Health questions",
+          "Typical wait (non-accidental death)"
         ],
         "rows": [
           [
             "Full benefit if you qualify",
             "Generally no",
-            "Yes"
+            "Yes",
+            "No, if issued that way"
           ],
           [
             "Limited benefit at first",
             "Generally no",
-            "Yes"
+            "Yes",
+            "Often two to three years, per the contract"
           ],
           [
             "Guaranteed acceptance",
             "No",
-            "No"
+            "No",
+            "About two years on the line we quote"
           ]
         ],
-        "foot": "Corebridge GIWL, on the line we quote, illustrates the third path: typical 50–80, $5,000–$25,000, about a two-year wait on non-accidental death."
+        "foot": "Corebridge GIWL, on the line we quote, illustrates the third path: typical ages 50–80, $5,000–$25,000. “Typical” is not a guarantee; each contract has its own formula."
+      },
+      {
+        "type": "h2",
+        "text": "Funerals in Nebraska: use the local list"
+      },
+      {
+        "type": "p",
+        "text": "NFDA published 2023 national funeral-home medians: $8,300 (viewing and burial) and $6,280 (viewing and cremation). That publication has no official Nebraska-only split. Lincoln, Omaha, a small town, or a cemetery with vault rules can sit above or below. The Federal Trade Commission (FTC) explains that you can ask for the general price list in person and get prices by phone. That list is your local figure."
       },
       {
         "type": "h2",
@@ -198,7 +237,7 @@
       },
       {
         "type": "p",
-        "text": "Mutual of Omaha Living Promise, American Amicable Golden Solution and Senior Choice, Accendo, Transamerica Immediate Solution, Americo Eagle Select, and Assurity are names Mejor Vida Insurance uses when quoting final expense if they are appointed and available. A “yes” on a marketing sheet does not replace the real Nebraska offer."
+        "text": "When they are appointed and available for your application, Mejor Vida Insurance quotes names such as Mutual of Omaha Living Promise, American Amicable Golden Solution and Senior Choice, Accendo, Transamerica Immediate Solution, Americo Eagle Select, Assurity, and, for guaranteed acceptance, Corebridge GIWL. A marketing “yes” does not replace the real Nebraska offer."
       },
       {
         "type": "note",
@@ -206,13 +245,18 @@
       },
       {
         "type": "faq",
+        "heading": "Common questions",
         "items": [
           {
             "q": "Does Nebraska require an exam for small life insurance?",
-            "a": "We do not know of a state law that forces an office exam for every final expense plan. Each product sets its process. If one that does require a lab appears, we will say so; it is not the usual flow we quote."
+            "a": "We do not know of a state law that forces an office exam for every final expense plan. Each product sets its process. If one that requires a lab appears, we will say so; it is not the usual flow we quote."
           },
           {
-            "q": "Is the price different in Omaha and in a small town?",
+            "q": "Does no exam mean I am accepted no matter what?",
+            "a": "No. No exam is not the same as guaranteed acceptance. With questions, the company may offer a full benefit, a plan with a wait, or no issue."
+          },
+          {
+            "q": "Is the insurance price different in Omaha and in a small town?",
             "a": "The company builds the rate from age, health, tobacco, and product. We do not publish a county surcharge. The local funeral does change; that is why the funeral home’s list matters."
           },
           {

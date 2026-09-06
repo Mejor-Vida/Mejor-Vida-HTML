@@ -13,92 +13,130 @@
     "aiFreePledgeModalTitle": "Cómo se revisa esta guía",
     "aiFreePledgeModalBody": "El equipo de Mejor Vida Seguros revisa esta guía con materiales de compañías designadas y fuentes públicas. Las cotizaciones y la aprobación dependen de la aseguradora, del estado y de su solicitud.",
     "question": "¿Vale la pena un seguro de gastos finales con $10,000 de cobertura?",
-    "headline": "$10,000 de gastos finales: un punto de partida, no una promesa de que “alcanza”",
-    "dek": "Diez mil dólares se acerca a la mediana nacional de un funeral con velatorio y entierro del lado de la funeraria, y supera la de un velatorio con cremación. El cementerio y las deudas pueden dejarlo corto. El precio mensual, a su edad, decide si ese monto es sostenible.",
+    "headline": "¿Alcanzan $10,000 de gastos finales? Un punto de partida, no una promesa",
+    "dek": "Diez mil dólares es el beneficio por fallecimiento, no la prima. Se acerca a la mediana nacional de un velatorio con entierro del lado de la funeraria, y supera la de velatorio con cremación. Cementerio y deudas pueden dejarlo corto. Si la prima no se puede pagar, el monto no sirve.",
     "pageTitle": "¿Alcanza un seguro de gastos finales de $10,000?",
-    "metaDescription": "Si $10,000 de seguro de gastos finales es suficiente frente a costos de funeral verificados. Guía de Mejor Vida Seguros.",
+    "metaDescription": "Si $10,000 de seguro de gastos finales alcanza para un funeral, según medianas NFDA 2023 y la prima a su edad. Guía de Mejor Vida Seguros.",
     "keyTakeaways": [
-      "La NFDA, 2023: mediana nacional $8,300 con velatorio y entierro, $6,280 con velatorio y cremación, sin parcela ni lápida.",
-      "$10,000 es un punto de partida frecuente porque cabe cerca de esas medianas y deja un poco de aire — no porque sea la cifra correcta para usted.",
-      "Una cotización ilustrativa de $10,000, no fumador, buena salud (agosto 2026): 65 años, unos $41 / $54 al mes (mujer / hombre); 75 años, unos $71 / $97.",
+      "NFDA 2023, lado funeraria: mediana nacional $8,300 con velatorio y entierro; $6,280 con velatorio y cremación. Parcela y lápida suelen ir aparte.",
+      "$10,000 es un punto de partida frecuente porque queda cerca de esas medianas — no porque sea el número correcto para usted.",
+      "Ejemplo educativo de $10,000, no fumador, buena salud (agosto 2026): 65 años, unos $41 / $54 al mes (mujer / hombre); 75 años, unos $71 / $97.",
       "Si el cementerio, el traslado o las deudas suman mucho, cotice $15,000 o más, o acepte que la familia cubrirá la diferencia."
     ],
     "cta": {
-      "title": "Vea un precio para su situación",
-      "body": "Mejor Vida Seguros compara compañías de gastos finales. Empiece con una cotización gratuita, agende una llamada o escríbanos por WhatsApp.",
+      "title": "Vea el precio de $10,000",
+      "body": "Mejor Vida Seguros cotiza $10,000 y otros montos. Cotización gratuita, una llamada o WhatsApp.",
       "quote": "Cotización gratuita",
       "schedule": "Agendar una llamada"
     },
     "blocks": [
       {
         "type": "p",
-        "text": "“¿Vale la pena?” mezcla dos preguntas. Una es si $10,000 se parece a un funeral. La otra es si la prima de ese monto cabe en su mes. Puede valer la pena como fondo y no valer la pena si va a caducar."
+        "text": "“¿Vale la pena?” mezcla dos preguntas. Primera: ¿$10,000 se parece a las cuentas del funeral? Segunda: ¿la prima de ese monto cabe en su mes? Puede ser un buen fondo y, a la vez, una mala compra si va a caducar. $10,000 es lo que la compañía pagaría al beneficiario si la póliza está vigente y el fallecimiento cubierto — no lo que usted paga cada mes."
       },
       {
         "type": "h2",
-        "text": "Frente a un funeral típico de las estadísticas"
+        "text": "Frente al funeral: las medianas nacionales"
       },
       {
         "type": "p",
-        "text": "Si su idea es un velatorio con cremación cerca de la mediana nacional, $10,000 puede sobrar un poco para flores o viaje. Si su idea es un entierro con parcela nueva, bóveda y lápida, $10,000 puede quedar justo o corto. No publicamos un total de “con bóveda” de la NFDA en esta guía: la lista de la funeraria y del cementerio es la cifra que cuenta, y la guía de costo de funeral de Mejor Vida ya advirtió esa laguna."
+        "text": "Si su idea es un velatorio con cremación cerca de la mediana nacional, $10,000 puede cubrir el lado funeraria y dejar un resto. Si su idea es un entierro con parcela nueva, bóveda y lápida, $10,000 puede quedar justo o corto. No publicamos un total NFDA “con bóveda”: la lista de la funeraria y del cementerio es la cifra que cuenta. Pida la lista de precios general (FTC)."
       },
       {
         "type": "table",
-        "caption": "Cómo se siente $10,000 junto a cifras públicas",
-        "lead": "Medianas nacionales 2023, lado funeraria. No son precios de Nebraska.",
+        "caption": "$10,000 junto a cifras públicas de funeral",
+        "lead": "Medianas nacionales 2023, lado funeraria. No son precios de Nebraska ni de su ciudad.",
         "headers": [
           "Escenario",
-          "$10,000 puede…"
+          "Qué suele pasar con $10,000"
         ],
         "rows": [
           [
             "Cremación con velatorio cerca de $6,280",
-            "Cubrir el servicio y dejar un resto"
+            "Puede cubrir el servicio y dejar un resto"
           ],
           [
             "Entierro con velatorio cerca de $8,300",
-            "Cubrir el lado funeraria y dejar poco para cementerio"
+            "Puede cubrir el lado funeraria y dejar poco para cementerio"
           ],
           [
             "Entierro + parcela + marcador + deudas",
-            "Quedar corto a propósito — hay que sumar"
+            "Puede quedar corto — hay que sumar esas partidas"
           ],
           [
-            "Cremación directa muy sencilla",
-            "Sobrar; el resto es de la familia"
+            "Cremación directa, sin velatorio",
+            "Suele sobrar; el resto es de la familia"
           ]
         ],
-        "foot": "El pago de $255 del Seguro Social no mueve esta tabla de forma material."
+        "foot": "El pago de $255 del Seguro Social no cambia esta tabla de forma material. No inventamos un promedio estatal de Nebraska."
       },
       {
         "type": "h2",
-        "text": "Frente a la prima"
+        "text": "Frente a la prima: el mismo $10,000 a distintas edades"
       },
       {
         "type": "p",
-        "text": "A los 50, el mismo $10,000 ilustrativo ronda $28 / $34 al mes. A los 80, unos $98 / $136. “Vale la pena” a los 50 y a los 80 no es la misma frase. Si la prima de $10,000 no cabe, un $5,000 vigente gana a un $10,000 abandonado."
+        "text": "“Vale la pena” a los 50 y a los 80 no es la misma frase: el beneficio es igual; el costo mensual no. Si la prima de $10,000 no cabe, un $5,000 vigente gana a un $10,000 abandonado."
+      },
+      {
+        "type": "table",
+        "caption": "Ejemplo educativo: $10,000 al mes, no fumador, buena salud",
+        "lead": "Tablas educativas de compañías designadas, agosto 2026. No es una oferta. Tabaco, salud y estado cambian el número.",
+        "headers": [
+          "Edad",
+          "Mujer (aprox.)",
+          "Hombre (aprox.)"
+        ],
+        "rows": [
+          [
+            "50",
+            "$28",
+            "$34"
+          ],
+          [
+            "65",
+            "$41",
+            "$54"
+          ],
+          [
+            "75",
+            "$71",
+            "$97"
+          ],
+          [
+            "80",
+            "$98",
+            "$136"
+          ]
+        ],
+        "foot": "Un $15,000 en la misma persona costará más que estas filas."
       },
       {
         "type": "h2",
-        "text": "Topes de producto"
+        "text": "Si $10,000 cabe en los topes de producto"
       },
       {
         "type": "p",
-        "text": "$10,000 está dentro de Living Promise Nivelado (hasta unos $50,000), de Eagle Select, de Immediate Solution (con tope según edad) y, en aceptación garantizada Corebridge, dentro de $5,000–$25,000. En Accendo Level a los 76–89, $10,000 también cabe bajo el tope de $25,000. El “sí” sigue siendo de la solicitud."
+        "text": "$10,000 entra en Living Promise Nivelado (hasta unos $50,000), Eagle Select, Immediate Solution (con tope según edad) y, en aceptación garantizada Corebridge, en el rango $5,000–$25,000. En Accendo Level a los 76–89, $10,000 también cabe bajo el tope de $25,000. Que el tope exista no significa que su solicitud se apruebe."
       },
       {
         "type": "faq",
+        "heading": "Preguntas frecuentes",
         "items": [
+          {
+            "q": "¿$10,000 incluye el cementerio?",
+            "a": "El cheque no está etiquetado. Las medianas NFDA del lado funeraria, en general, no incluyen parcela ni lápida. Si va a haber cementerio, súmelo al dimensionar o acepte que la familia pague esa parte."
+          },
           {
             "q": "¿Es mejor $15,000 siempre?",
             "a": "Solo si la prima se paga. Un colchón ayuda; una caducidad no."
           },
           {
-            "q": "¿$10,000 queda obsoleto con la inflación?",
-            "a": "Los funerales pueden subir. No inventamos una mediana 2026 de la NFDA. Puede dimensionar un poco más hoy o aceptar que la familia complete."
+            "q": "¿$10,000 se queda corto con los años?",
+            "a": "Los funerales pueden subir. No inventamos una mediana NFDA de 2026. Puede cotizar un poco más hoy o aceptar que la familia complete."
           },
           {
-            "q": "¿Debo igualar $10,000 porque “todo el mundo” lo compra?",
+            "q": "¿Debo elegir $10,000 porque “todo el mundo” lo compra?",
             "a": "No. Es un punto de partida de conversación, no una norma."
           }
         ]
@@ -127,92 +165,130 @@
     "aiFreePledgeModalTitle": "How this guide is reviewed",
     "aiFreePledgeModalBody": "The Mejor Vida Insurance team reviews this guide against appointed-company materials and public sources. Quotes and approval depend on the insurer, your state, and your application.",
     "question": "Is $10,000 of final expense coverage enough?",
-    "headline": "$10,000 of final expense: a starting point, not a promise that it “covers it”",
-    "dek": "Ten thousand dollars sits near the national median for a funeral with viewing and burial on the funeral-home side, and above the median for viewing and cremation. Cemetery and debts can leave it short. The monthly price at your age decides whether that amount is sustainable.",
+    "headline": "Is $10,000 of final expense enough? A starting point, not a promise",
+    "dek": "Ten thousand dollars is the death benefit, not the premium. It sits near the national median for viewing and burial on the funeral-home side, and above the median for viewing and cremation. Cemetery and debts can leave it short. If the premium cannot be paid, the amount does not help.",
     "pageTitle": "Is $10,000 of final expense insurance enough?",
-    "metaDescription": "Whether $10,000 of final expense insurance is enough next to verified funeral costs. A guide from Mejor Vida Insurance.",
+    "metaDescription": "Whether $10,000 of final expense insurance is enough for a funeral, using 2023 NFDA medians and the premium at your age. A guide from Mejor Vida Insurance.",
     "keyTakeaways": [
-      "NFDA, 2023: U.S. median $8,300 with viewing and burial, $6,280 with viewing and cremation, without plot or marker.",
-      "$10,000 is a common starting point because it sits near those medians and leaves a little air — not because it is the right figure for you.",
-      "An illustrative $10,000 quote, non-tobacco, good health (August 2026): age 65, about $41 / $54 a month (woman / man); age 75, about $71 / $97.",
+      "NFDA 2023, funeral-home side: U.S. median $8,300 with viewing and burial; $6,280 with viewing and cremation. Plot and marker are usually extra.",
+      "$10,000 is a common starting point because it sits near those medians — not because it is the right figure for you.",
+      "Educational $10,000 example, non-tobacco, good health (August 2026): age 65, about $41 / $54 a month (woman / man); age 75, about $71 / $97.",
       "If the cemetery, transfer, or debts add a lot, quote $15,000 or more, or accept that the family will cover the gap."
     ],
     "cta": {
-      "title": "See a price for your situation",
-      "body": "Mejor Vida Insurance compares final expense companies. Start with a free quote, schedule a call, or message us on WhatsApp.",
+      "title": "See the price of $10,000",
+      "body": "Mejor Vida Insurance quotes $10,000 and other amounts. Free quote, a call, or WhatsApp.",
       "quote": "Get a free quote",
       "schedule": "Schedule a call"
     },
     "blocks": [
       {
         "type": "p",
-        "text": "“Is it worth it?” mixes two questions. One is whether $10,000 looks like a funeral. The other is whether that amount’s premium fits your month. It can be worth it as a fund and not worth it if it will lapse."
+        "text": "“Is it worth it?” mixes two questions. First: does $10,000 look like the funeral bills? Second: does that amount’s premium fit your month? It can be a sound fund and still a poor purchase if it will lapse. $10,000 is what the company would pay the beneficiary if the policy is in force and the death is covered — not what you pay each month."
       },
       {
         "type": "h2",
-        "text": "Next to a typical funeral in the statistics"
+        "text": "Against the funeral: national medians"
       },
       {
         "type": "p",
-        "text": "If your picture is a viewing and cremation near the national median, $10,000 may leave a little for flowers or travel. If your picture is a burial with a new plot, vault, and marker, $10,000 may be tight or short. We do not publish an NFDA “with vault” total in this guide: the funeral home and cemetery lists are the figures that count, and Mejor Vida’s funeral-cost guide already flagged that gap."
+        "text": "If your picture is a viewing and cremation near the national median, $10,000 may cover the funeral-home side and leave a remainder. If your picture is a burial with a new plot, vault, and marker, $10,000 may be tight or short. We do not publish an NFDA “with vault” total: the funeral home and cemetery lists are the figures that count. Ask for the general price list (FTC)."
       },
       {
         "type": "table",
-        "caption": "How $10,000 feels next to public figures",
-        "lead": "2023 national medians, funeral-home side. Not Nebraska prices.",
+        "caption": "$10,000 next to public funeral figures",
+        "lead": "2023 national medians, funeral-home side. Not Nebraska prices or your city’s prices.",
         "headers": [
           "Scenario",
-          "$10,000 may…"
+          "What $10,000 often does"
         ],
         "rows": [
           [
             "Cremation with viewing near $6,280",
-            "Cover the service and leave a remainder"
+            "May cover the service and leave a remainder"
           ],
           [
             "Burial with viewing near $8,300",
-            "Cover the funeral-home side and leave little for the cemetery"
+            "May cover the funeral-home side and leave little for the cemetery"
           ],
           [
             "Burial + plot + marker + debts",
-            "Fall short on purpose — you have to add"
+            "May fall short — those lines have to be added"
           ],
           [
-            "Very simple direct cremation",
-            "Leave extra; the rest belongs to the family"
+            "Direct cremation, no viewing",
+            "Usually leaves extra; the rest belongs to the family"
           ]
         ],
-        "foot": "Social Security’s $255 payment does not move this table in a material way."
+        "foot": "Social Security’s $255 payment does not move this table in a material way. We do not invent a Nebraska state average."
       },
       {
         "type": "h2",
-        "text": "Next to the premium"
+        "text": "Against the premium: the same $10,000 at different ages"
       },
       {
         "type": "p",
-        "text": "At 50, the same illustrative $10,000 is near $28 / $34 a month. At 80, about $98 / $136. “Worth it” at 50 and at 80 is not the same sentence. If a $10,000 premium does not fit, an in-force $5,000 beats an abandoned $10,000."
+        "text": "“Worth it” at 50 and at 80 is not the same sentence: the benefit is the same; the monthly cost is not. If a $10,000 premium does not fit, an in-force $5,000 beats an abandoned $10,000."
+      },
+      {
+        "type": "table",
+        "caption": "Educational example: $10,000 a month, non-tobacco, good health",
+        "lead": "Appointed-company educational tables, August 2026. Not an offer. Tobacco, health, and state change the number.",
+        "headers": [
+          "Age",
+          "Woman (about)",
+          "Man (about)"
+        ],
+        "rows": [
+          [
+            "50",
+            "$28",
+            "$34"
+          ],
+          [
+            "65",
+            "$41",
+            "$54"
+          ],
+          [
+            "75",
+            "$71",
+            "$97"
+          ],
+          [
+            "80",
+            "$98",
+            "$136"
+          ]
+        ],
+        "foot": "A $15,000 amount on the same person will cost more than these rows."
       },
       {
         "type": "h2",
-        "text": "Product caps"
+        "text": "Whether $10,000 fits product caps"
       },
       {
         "type": "p",
-        "text": "$10,000 sits inside Living Promise Level (up to about $50,000), Eagle Select, Immediate Solution (cap by age), and, on Corebridge guaranteed acceptance, inside $5,000–$25,000. On Accendo Level at ages 76–89, $10,000 also fits under the $25,000 cap. The “yes” still belongs to the application."
+        "text": "$10,000 sits inside Living Promise Level (up to about $50,000), Eagle Select, Immediate Solution (cap by age), and, on Corebridge guaranteed acceptance, inside $5,000–$25,000. On Accendo Level at ages 76–89, $10,000 also fits under the $25,000 cap. A cap existing is not the same as your application being approved."
       },
       {
         "type": "faq",
+        "heading": "Common questions",
         "items": [
+          {
+            "q": "Does $10,000 include the cemetery?",
+            "a": "The check is not labeled. NFDA funeral-home medians generally exclude plot and marker. If there will be a cemetery, add it when you size the policy, or accept that the family will pay that part."
+          },
           {
             "q": "Is $15,000 always better?",
             "a": "Only if the premium gets paid. A cushion helps; a lapse does not."
           },
           {
-            "q": "Does $10,000 go obsolete with inflation?",
-            "a": "Funerals can rise. We do not invent a 2026 NFDA median. You can size a little higher today or accept that the family will complete the bill."
+            "q": "Does $10,000 fall behind as years pass?",
+            "a": "Funerals can rise. We do not invent a 2026 NFDA median. You can quote a little higher today or accept that the family will complete the bill."
           },
           {
-            "q": "Should I match $10,000 because “everyone” buys it?",
+            "q": "Should I pick $10,000 because “everyone” buys it?",
             "a": "No. It is a conversation starter, not a rule."
           }
         ]

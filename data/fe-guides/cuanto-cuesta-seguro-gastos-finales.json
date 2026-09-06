@@ -1,33 +1,259 @@
 {
   "slug": "cuanto-cuesta-seguro-gastos-finales",
-  "question": "¿Cuánto cuesta un seguro de gastos finales?",
-  "headline": "¿Cuánto cuesta un seguro de gastos finales?",
-  "alternateNamesLine": "Precio mensual, factores y cobertura — guía para familias en Nebraska",
-  "pageTitle": "¿Cuánto cuesta un seguro de gastos finales? — Precio y factores",
-  "dek": "Esta guía cubre el precio mensual del seguro, no la factura de la funeraria. El precio depende de la edad, el sexo, la salud, el tabaco, el estado y la compañía. Para promedios de entierro y cremación, vea la guía de cuánto cuesta un funeral.",
-  "metaDescription": "¿Cuánto cuesta un seguro de gastos finales? Factores de precio, rangos de cobertura ($2,000–$50,000), emisión simplificada y primas niveladas explicados por Mejor Vida Insurance en Nebraska.",
+  "slugEn": "how-much-does-final-expense-insurance-cost",
   "published": "2026-07-07",
-  "modified": "2026-07-07",
-  "keyTakeaways": [
-    "Esta guía es el precio mensual del seguro. Los precios de funeraria están en la guía de cuánto cuesta un funeral.",
-    "El precio mensual depende de la edad, el sexo, el estado de salud, el uso de tabaco, el estado de residencia y la compañía aseguradora.",
-    "La cobertura suele ir de $2,000 a $50,000; entre más beneficio de fallecimiento, más alta la prima mensual.",
-    "El plan de emisión simplificada suele ser más económico que uno de emisión modificada o garantizada.",
-    "Una vez activa la póliza, la prima mensual acordada en la mayoría de casos se congela de por vida — no sube por edad ni cambios de salud.",
-    "Las mujeres suelen obtener un costo más bajo que los hombres, según las tasas de mortalidad estadísticas.",
-    "Hable con su agente para encontrar el costo según su presupuesto y situación personal."
-  ],
-  "paragraphs": [
-    "Para poder calcular cuánto cuesta un seguro de vida de gastos finales debemos mirar diferentes variables para determinar el precio mensual. Algunos de los factores que más se utilizan para calcularlo son la edad, el sexo, el estado de salud, el uso de tabaco y el estado de residencia. También un factor muy importante es la compañía aseguradora; no todas las compañías son iguales y, como cada caso de cada cliente es diferente, entonces el costo puede variar.",
-    "Los seguros de gastos finales están diseñados para la mayoría de los presupuestos. Las coberturas pueden empezar desde $2,000 hasta $50,000 dólares, dependiendo de la compañía de seguros que se escoja. Entre más beneficio de fallecimiento se desee, más cuesta la prima mensual. Por ejemplo, un beneficio de $10,000 dólares va a tener un costo mensual más alto que un beneficio de $5,000.",
-    "Como hablamos antes de los diferentes tipos de seguros de gastos finales, vimos que existe la emisión simplificada; este plan usualmente es más económico que uno de emisión modificada o garantizada.",
-    "Es importante tener en cuenta que, cuando el asegurado obtiene una póliza, el precio mensual que se acuerda cuando ya está activa, en la mayoría de casos, nunca cambia, se congela de por vida. No cambia si el estado de salud cambia o por edad. Tenga en cuenta que, entre más edad tenga, la posibilidad de que sea más costoso es más alta. Algunas de las formas en que el costo puede cambiar son si el asegurado decide aumentar la cobertura.",
-    "Es usual que las mujeres obtengan un costo más bajo que los hombres, ya que la tasa de mortalidad de las mujeres estadísticamente es más baja que la de los hombres.",
-    "En resumen, el costo varía cuando se tienen en cuenta todos los factores mencionados y dependiendo de los términos y condiciones de la compañía aseguradora. Hable con su agente hoy para encontrar el costo basado en su presupuesto y situación."
-  ],
+  "modified": "2026-09-06",
   "relatedSlugs": [
     "que-es-seguro-gastos-finales",
     "tipos-planes-seguro-gastos-finales",
     "cuanta-cobertura-gastos-finales-necesito"
-  ]
+  ],
+  "es": {
+    "question": "¿Cuánto cuesta un seguro de gastos finales?",
+    "headline": "¿Cuánto cuesta un seguro de gastos finales?",
+    "alternateNamesLine": "Precio mensual, factores y cobertura — guía para familias en Nebraska",
+    "pageTitle": "¿Cuánto cuesta un seguro de gastos finales? — Precio y factores",
+    "dek": "Esta guía cubre el precio mensual del seguro, no la factura de la funeraria. El precio depende de la edad, el sexo, la salud, el tabaco, el estado de residencia y la compañía. Mejor Vida Seguros explica esos factores.",
+    "metaDescription": "¿Cuánto cuesta un seguro de gastos finales? Factores de precio, rangos de cobertura ($2,000–$50,000), emisión simplificada y primas niveladas. Guía de Mejor Vida Seguros.",
+    "aiFreePledgeLabel": "Revisado por Mejor Vida Seguros",
+    "aiFreePledgeModalTitle": "Cómo se revisa esta guía",
+    "aiFreePledgeModalBody": "El equipo de Mejor Vida Seguros revisa esta guía con materiales de compañías designadas y fuentes públicas. Las cotizaciones y la aprobación dependen de la aseguradora, del estado y de su solicitud.",
+    "keyTakeaways": [
+      "Esta guía es el precio mensual del seguro. Los precios de funeraria están en la guía de cuánto cuesta un funeral.",
+      "El precio mensual depende de la edad, el sexo, el estado de salud, el uso de tabaco, el estado de residencia y la compañía aseguradora.",
+      "La cobertura suele ir de $2,000 a $50,000; entre más beneficio de fallecimiento, más alta la prima mensual.",
+      "El plan de emisión simplificada —preguntas de salud, sin examen físico y, en general, sin periodo de espera— suele ser más económico que uno de emisión modificada o garantizada.",
+      "Una vez activa la póliza, la prima mensual acordada, en la mayoría de los casos, se queda igual de por vida: no sube por edad ni por un cambio de salud.",
+      "Las mujeres suelen obtener un costo más bajo que los hombres, según las tasas de mortalidad que usan las tablas."
+    ],
+    "cta": {
+      "title": "Vea un precio para su situación",
+      "body": "Mejor Vida Seguros compara compañías de gastos finales. Empiece con una cotización gratuita, agende una llamada o escríbanos por WhatsApp.",
+      "quote": "Cotización gratuita",
+      "schedule": "Agendar una llamada"
+    },
+    "blocks": [
+      {
+        "type": "p",
+        "text": "No hay un precio único de seguro de gastos finales. La prima —el precio que usted paga, casi siempre cada mes— se calcula para una persona concreta. Por eso una cotización pide edad, sexo, tabaco y estado, y luego vienen preguntas de salud."
+      },
+      {
+        "type": "p",
+        "text": "Esta página no es la factura de la funeraria. Si busca el costo de un entierro o una cremación, esa es otra guía. Aquí el tema es cuánto puede costar el seguro cada mes."
+      },
+      {
+        "type": "h2",
+        "text": "Qué mueve el precio mensual"
+      },
+      {
+        "type": "table",
+        "caption": "Factores que las compañías usan para cotizar",
+        "lead": "Ninguna fila es una oferta. El número real sale de la solicitud y de la decisión de la aseguradora.",
+        "headers": [
+          "Factor",
+          "Cómo suele influir"
+        ],
+        "rows": [
+          [
+            "Edad al comprar",
+            "A mayor edad, la prima mensual suele ser más alta por el mismo monto. El riesgo de fallecer en los años próximos es distinto."
+          ],
+          [
+            "Sexo",
+            "Las mujeres suelen pagar menos que los hombres a la misma edad y monto, según las tasas de mortalidad de las tablas."
+          ],
+          [
+            "Salud",
+            "Las respuestas médicas ayudan a decidir si hay un plan de beneficio inmediato o uno con periodo de espera, y eso cambia el precio."
+          ],
+          [
+            "Tabaco",
+            "El uso de tabaco suele colocar a la persona en una clase de precio más alta. Cada compañía define qué cuenta como tabaco."
+          ],
+          [
+            "Monto cubierto",
+            "La cobertura suele ir de $2,000 a $50,000, según la compañía. Un beneficio de $10,000 cuesta más cada mes que uno de $5,000."
+          ],
+          [
+            "Compañía y estado de residencia",
+            "No todas las aseguradoras cobran igual. El estado donde usted vive también entra en el cálculo de la tarifa."
+          ]
+        ],
+        "foot": "El tipo de plan —emisión simplificada, modificada o garantizada— se suma a estos factores. No publicamos un ranking de “la más barata.”"
+      },
+      {
+        "type": "h2",
+        "text": "De $2,000 a $50,000: el tamaño del beneficio"
+      },
+      {
+        "type": "p",
+        "text": "Los seguros de gastos finales están pensados para presupuestos distintos. Las coberturas pueden empezar desde $2,000 hasta $50,000, dependiendo de la compañía que se escoja. Entre más beneficio de fallecimiento desee, más cuesta la prima mensual. Un beneficio de $10,000 tiene un costo mensual más alto que uno de $5,000."
+      },
+      {
+        "type": "h2",
+        "text": "Por qué el tipo de plan cambia el precio"
+      },
+      {
+        "type": "p",
+        "text": "La emisión simplificada hace preguntas médicas detalladas, no pide examen físico y, en este diseño, no tiene periodo de espera. Ese plan suele ser más económico que uno de emisión modificada o de emisión garantizada. Los otros dos caminos existen para quien no califica a un beneficio inmediato; suelen costar más por cada dólar de cobertura y traen espera."
+      },
+      {
+        "type": "h2",
+        "text": "Qué significa una prima “congelada”"
+      },
+      {
+        "type": "p",
+        "text": "Cuando la póliza ya está activa, el precio mensual acordado, en la mayoría de los casos, no cambia: se queda igual de por vida. No sube si el estado de salud cambia ni porque usted cumpla años dentro de esa misma póliza. Eso es una prima nivelada: el precio periódico no se recarcula cada cumpleaños."
+      },
+      {
+        "type": "p",
+        "text": "Comprar más tarde sí suele costar más desde el primer recibo. Y el costo puede cambiar si el asegurado decide aumentar la cobertura u otro cambio que el contrato permita. No prometemos que absolutamente todos los productos funcionen igual; el contrato es el que congela —o no— la prima."
+      },
+      {
+        "type": "faq",
+        "items": [
+          {
+            "q": "¿Por qué no publican un precio fijo?",
+            "a": "Porque la prima depende de la edad, el sexo, la salud, el tabaco, el monto, el estado y la compañía. Un número único sería una invención. Una cotización usa sus datos."
+          },
+          {
+            "q": "¿El precio sube cada año después de comprar?",
+            "a": "En la mayoría de las pólizas de gastos finales con prima nivelada, no: el precio acordado se queda igual si usted paga a tiempo. Sí puede cambiar si usted pide más cobertura."
+          },
+          {
+            "q": "¿Cuánta cobertura puedo comprar?",
+            "a": "Las coberturas pueden ir de $2,000 a $50,000, según la compañía. El máximo exacto depende del producto y de la edad."
+          },
+          {
+            "q": "¿Por qué una mujer suele pagar menos?",
+            "a": "Las tablas de vida permanente usan tasas de mortalidad distintas por sexo. En esas tablas, las mujeres suelen tener un costo más bajo que los hombres a la misma edad y monto. No es una opinión de la agencia."
+          }
+        ]
+      }
+    ]
+  },
+  "en": {
+    "aiFreePledgeLabel": "Reviewed by Mejor Vida Insurance",
+    "aiFreePledgeModalTitle": "How this guide is reviewed",
+    "aiFreePledgeModalBody": "The Mejor Vida Insurance team reviews this guide against appointed-company materials and public sources. Quotes and approval depend on the insurer, your state, and your application.",
+    "question": "How much does final expense insurance cost?",
+    "headline": "How much does final expense insurance cost?",
+    "alternateNamesLine": "Monthly price, factors, and coverage — a guide for families in Nebraska",
+    "pageTitle": "How much does final expense insurance cost? — Price and factors",
+    "dek": "This guide covers the monthly price of the insurance, not the funeral-home bill. The price depends on age, sex, health, tobacco, state of residence, and company. Mejor Vida Insurance explains those factors.",
+    "metaDescription": "How much does final expense insurance cost? Price factors, coverage ranges ($2,000–$50,000), simplified issue, and level premiums. A guide from Mejor Vida Insurance.",
+    "keyTakeaways": [
+      "This guide is the monthly price of the insurance. Funeral-home prices are in the funeral-cost guide.",
+      "The monthly price depends on age, sex, health, tobacco use, state of residence, and the insurance company.",
+      "Coverage usually runs from $2,000 to $50,000; the larger the death benefit, the higher the monthly premium.",
+      "A simplified-issue plan — health questions, no physical exam, and usually no waiting period — usually costs less than a modified or guaranteed-issue plan.",
+      "Once the policy is in force, the agreed monthly premium, in most cases, stays the same for life: it does not rise for age or a later health change.",
+      "Women often pay less than men at the same age and amount, according to the mortality rates in the tables."
+    ],
+    "blocks": [
+      {
+        "type": "p",
+        "text": "There is no single final expense insurance price. The premium — the price you pay, almost always each month — is calculated for one person. That is why a quote asks for age, sex, tobacco, and state, and then health questions follow."
+      },
+      {
+        "type": "p",
+        "text": "This page is not the funeral-home bill. If you want the cost of a burial or a cremation, that is a different guide. Here the subject is what the insurance can cost each month."
+      },
+      {
+        "type": "h2",
+        "text": "What moves the monthly price"
+      },
+      {
+        "type": "table",
+        "caption": "Factors companies use to quote",
+        "lead": "No row is an offer. The real number comes from the application and the insurer’s decision.",
+        "headers": [
+          "Factor",
+          "How it usually affects the price"
+        ],
+        "rows": [
+          [
+            "Age at purchase",
+            "At a higher age, the monthly premium is usually higher for the same amount. The risk of dying in the coming years is different."
+          ],
+          [
+            "Sex",
+            "Women often pay less than men at the same age and amount, according to the mortality rates in the tables."
+          ],
+          [
+            "Health",
+            "Medical answers help decide whether there is an immediate-benefit plan or one with a waiting period, and that changes the price."
+          ],
+          [
+            "Tobacco",
+            "Tobacco use usually places a person in a higher price class. Each company defines what counts as tobacco."
+          ],
+          [
+            "Coverage amount",
+            "Coverage usually runs from $2,000 to $50,000, depending on the company. A $10,000 benefit costs more each month than a $5,000 benefit."
+          ],
+          [
+            "Company and state of residence",
+            "Not every insurer charges the same. The state where you live also enters the rate calculation."
+          ]
+        ],
+        "foot": "The type of plan — simplified, modified, or guaranteed issue — is added to these factors. We do not publish a “cheapest company” ranking."
+      },
+      {
+        "type": "h2",
+        "text": "From $2,000 to $50,000: the size of the benefit"
+      },
+      {
+        "type": "p",
+        "text": "Final expense insurance is designed for different budgets. Coverage can start at $2,000 and go up to $50,000, depending on the company you choose. The larger the death benefit you want, the higher the monthly premium. A $10,000 benefit has a higher monthly cost than a $5,000 benefit."
+      },
+      {
+        "type": "h2",
+        "text": "Why the type of plan changes the price"
+      },
+      {
+        "type": "p",
+        "text": "Simplified issue asks detailed health questions, does not require a physical exam, and, in this design, has no waiting period. That plan usually costs less than modified issue or guaranteed issue. The other two paths exist for someone who does not qualify for an immediate benefit; they usually cost more per dollar of coverage and include a wait."
+      },
+      {
+        "type": "h2",
+        "text": "What a “frozen” premium means"
+      },
+      {
+        "type": "p",
+        "text": "Once the policy is already in force, the agreed monthly price, in most cases, does not change: it stays the same for life. It does not rise if health changes, and it does not rise because you have a birthday on that same policy. That is a level premium: the regular price is not recalculated each birthday."
+      },
+      {
+        "type": "p",
+        "text": "Buying later usually does cost more from the first bill. And the cost can change if the insured decides to increase coverage or another change the contract allows. We do not promise that every product works the same way; the contract is what freezes — or does not freeze — the premium."
+      },
+      {
+        "type": "faq",
+        "items": [
+          {
+            "q": "Why don’t you publish one fixed price?",
+            "a": "Because the premium depends on age, sex, health, tobacco, amount, state, and company. A single number would be invented. A quote uses your details."
+          },
+          {
+            "q": "Does the price rise every year after I buy?",
+            "a": "On most level-premium final expense policies, no: the agreed price stays the same if you pay on time. It can change if you ask for more coverage."
+          },
+          {
+            "q": "How much coverage can I buy?",
+            "a": "Coverage can run from $2,000 to $50,000, depending on the company. The exact maximum depends on the product and on age."
+          },
+          {
+            "q": "Why does a woman often pay less?",
+            "a": "Permanent-life tables use different mortality rates by sex. In those tables, women usually have a lower cost than men at the same age and amount. That is not the agency’s opinion."
+          }
+        ]
+      }
+    ],
+    "cta": {
+      "title": "See a price for your situation",
+      "body": "Mejor Vida Insurance compares final expense companies. Start with a free quote, schedule a call, or message us on WhatsApp.",
+      "quote": "Get a free quote",
+      "schedule": "Schedule a call"
+    }
+  }
 }

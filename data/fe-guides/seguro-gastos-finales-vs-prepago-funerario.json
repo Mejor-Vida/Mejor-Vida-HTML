@@ -13,43 +13,48 @@
     "aiFreePledgeModalTitle": "Cómo se revisa esta guía",
     "aiFreePledgeModalBody": "El equipo de Mejor Vida Seguros revisa esta guía con materiales de compañías designadas y fuentes públicas. Las cotizaciones y la aprobación dependen de la aseguradora, del estado y de su solicitud.",
     "question": "Seguro de gastos finales vs prepago funerario",
-    "headline": "Efectivo para la familia o un paquete en una funeraria: no son lo mismo",
-    "dek": "El prepago compra servicios en una casa concreta, según un contrato. El seguro de gastos finales envía dinero a un beneficiario. Uno no sustituye automáticamente al otro. Algunos hogares usan ambos; muchos solo necesitan uno bien entendido.",
+    "headline": "Seguro de gastos finales o funeral prepagado: efectivo para la familia, o un paquete en una casa",
+    "dek": "Un prepago compra servicios en una funeraria concreta, según un contrato. Un seguro de gastos finales paga dinero a un beneficiario si la póliza está vigente. Uno no sustituye automáticamente al otro. Algunos hogares usan ambos; muchos solo necesitan uno bien leído.",
     "pageTitle": "Seguro de gastos finales vs funeral prepagado",
-    "metaDescription": "Diferencias entre un seguro de gastos finales y un contrato de funeral prepagado. Guía de Mejor Vida Seguros.",
+    "metaDescription": "Diferencias entre un seguro de gastos finales y un contrato de funeral prepagado: quién cobra, mudanza y lista de precios FTC. Guía de Mejor Vida Seguros.",
     "keyTakeaways": [
       "Prepago: usted (o la familia) acuerda servicios con una funeraria y paga por adelantado o a plazos, según ese contrato.",
       "Seguro: la aseguradora paga efectivo al beneficiario si la póliza está vigente y el fallecimiento está cubierto.",
-      "El prepago suele atarse a una funeraria y a un paquete. El seguro viaja con la persona y deja flexibilidad.",
-      "La FTC publica cómo comparar funerarias. Un seguro no reemplaza leer el contrato de prepago (dónde está el dinero, qué pasa si se muda)."
+      "El prepago suele atarse a una casa y a un paquete. El seguro viaja con la persona y deja que el beneficiario decida.",
+      "Lea el contrato de prepago (dónde está el dinero, qué pasa si se muda). Una cotización de vida no responde esas preguntas. La FTC publica cómo comparar funerarias."
     ],
     "cta": {
-      "title": "Vea un precio para su situación",
-      "body": "Mejor Vida Seguros compara compañías de gastos finales. Empiece con una cotización gratuita, agende una llamada o escríbanos por WhatsApp.",
+      "title": "Cotice el seguro, no el prepago",
+      "body": "Mejor Vida Seguros compara gastos finales. No vendemos contratos de funeraria. Cotización gratuita, una llamada o WhatsApp.",
       "quote": "Cotización gratuita",
       "schedule": "Agendar una llamada"
     },
     "blocks": [
       {
         "type": "p",
-        "text": "Las dos ideas nacen del mismo miedo: no dejar una cuenta sorpresa. Se parecen en el objetivo y se separan en el mecanismo. Mezclarlas es cómo la gente paga dos veces o se queda atada a una casa que ya no le sirve."
+        "text": "Las dos ideas buscan lo mismo: no dejar una cuenta sorpresa. Se separan en el mecanismo. Mezclarlas es cómo se paga dos veces el mismo ataúd, o cómo una familia queda atada a una funeraria que ya no le sirve."
       },
       {
         "type": "h2",
         "text": "Qué compra cada camino"
       },
       {
-        "type": "p",
-        "text": "Con un prepago, la funeraria describe ataúd o urna, velatorio, traslado y lo que esté en el papel. Lo que no esté escrito —parcela del cementerio, lápida, flores— puede seguir siendo extra. Con un seguro, no hay ataúd en el contrato de vida: hay un número en dólares."
+        "type": "ul",
+        "items": [
+          "Funeral prepagado: un contrato con una funeraria por servicios descritos (ataúd o urna, velatorio, traslado, lo que esté en el papel). Lo no escrito —parcela, lápida, flores— puede seguir siendo extra.",
+          "Seguro de gastos finales: un contrato de vida. No hay ataúd en la póliza; hay un monto en dólares para el beneficiario.",
+          "Beneficiario: quien cobra el seguro. Dueño: quien controla la póliza. En un prepago, la “entrega” es el servicio en esa casa, no un cheque libre.",
+          "Cesión: a veces se puede asignar el seguro a una funeraria. Sigue siendo un diseño distinto al prepago."
+        ]
       },
       {
         "type": "p",
-        "text": "Si se muda de ciudad, el prepago puede ser difícil de trasladar. El seguro, si sigue vigente, no le pide que use la misma funeraria. Si quiere una casa específica y un paquete cerrado, el prepago puede encajar mejor. Si quiere que un hijo decida con calma, el seguro suele encajar mejor."
+        "text": "Si se muda de ciudad, el prepago puede ser difícil de trasladar. El seguro, si sigue vigente, no le pide la misma funeraria. Si quiere una casa específica y un paquete cerrado, el prepago puede encajar mejor. Si quiere que un hijo decida con calma, el seguro suele encajar mejor."
       },
       {
         "type": "table",
-        "caption": "Diferencias que importan el día del fallecimiento",
-        "lead": "Ninguna columna es “la correcta” para todas las familias.",
+        "caption": "Qué cambia el día del fallecimiento",
+        "lead": "Ninguna columna es la correcta para todas las familias. Lea ambos papeles.",
         "headers": [
           "Pregunta",
           "Funeral prepagado",
@@ -62,12 +67,12 @@
             "Efectivo al beneficiario"
           ],
           [
-            "¿Puede cambiar de casa?",
+            "¿Puede cambiar de funeraria?",
             "A menudo complicado",
-            "Sí; el dinero no está atado a un logo de funeraria"
+            "Sí; el dinero no está atado a un logo"
           ],
           [
-            "¿Qué pasa si el servicio cuesta menos?",
+            "¿Si el servicio cuesta menos?",
             "Depende del contrato de prepago",
             "El resto se queda en la familia"
           ],
@@ -78,43 +83,56 @@
           ],
           [
             "¿Hay espera al inicio?",
-            "No en el sentido de un seguro de vida",
+            "No como en una póliza de vida",
             "En algunos planes, sí"
           ],
           [
-            "¿Caduca si deja de pagar?",
-            "El contrato de prepago dirá qué pasa con el dinero",
-            "Sin prima, la póliza puede terminar"
+            "¿Qué pasa si deja de pagar?",
+            "El contrato de prepago dirá qué ocurre con el dinero",
+            "Sin prima, la póliza puede terminar; no prometemos reembolso de primas"
           ]
         ],
-        "foot": "Lea ambos papeles. Un verbal de un vendedor no sustituye el contrato."
+        "foot": "Un verbal de un vendedor no sustituye el contrato, ni el de la funeraria ni el de la aseguradora."
       },
       {
         "type": "h2",
-        "text": "Pueden convivir — con cuidado"
+        "text": "Cuándo encaja cada uno"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Prepago: ya eligió la casa, el paquete está escrito, y entiende dónde se guarda el dinero y qué pasa si se muda o la funeraria cierra.",
+          "Seguro: quiere flexibilidad, puede mudarse, o quiere dejar efectivo para cementerio, deudas o viajes que el paquete no cubre.",
+          "Ambos: a veces se prepaga lo básico y se compra un seguro pequeño para extras. Tiene sentido solo si no está comprando el mismo servicio dos veces."
+        ]
       },
       {
         "type": "p",
-        "text": "Algunas familias prepagan lo básico y compran un seguro pequeño para extras y deudas. Eso tiene sentido si no están comprando el mismo ataúd dos veces. Si ya hay un prepago completo, un seguro grande puede ser más legado que funeral. Mejor Vida Seguros cotiza el seguro; no vende contratos de funeraria."
+        "text": "Si ya hay un prepago completo, un seguro grande puede ser más legado que fondo de funeral. Mejor Vida Seguros cotiza el seguro; no vende contratos de funeraria."
       },
       {
         "type": "h2",
-        "text": "Dinero y protección al consumidor"
+        "text": "Derechos al comparar funerarias"
       },
       {
         "type": "p",
-        "text": "La FTC explica el derecho a una lista de precios y a no comprar un paquete entero si no lo desea. Pregunte dónde se deposita el dinero del prepago y qué ocurre si la funeraria cierra o usted se muda. Esas preguntas no se responden con una cotización de vida."
+        "text": "La FTC explica el derecho a una lista de precios general y a no comprar un paquete entero si no lo desea. Pregunte dónde se deposita el dinero del prepago y qué ocurre si la funeraria cierra o usted se muda. Esas respuestas no salen de una cotización de vida. Las medianas nacionales de funeral (NFDA 2023) ayudan a dimensionar; no sustituyen el contrato de esa casa."
       },
       {
         "type": "faq",
+        "heading": "Preguntas frecuentes",
         "items": [
           {
             "q": "¿El seguro es “mejor” que el prepago?",
-            "a": "Es distinto. Mejor en flexibilidad; el prepago puede ser mejor si quiere un paquete fijo en una casa de confianza."
+            "a": "Es distinto. Mejor en flexibilidad. El prepago puede ser mejor si quiere un paquete fijo en una casa de confianza y entiende el contrato."
           },
           {
             "q": "¿Puedo asignar el seguro a la funeraria?",
-            "a": "A veces se puede ceder o la familia paga la factura con el cheque. Sigue siendo un diseño distinto al prepago."
+            "a": "A veces se puede ceder, o la familia paga la factura con el cheque. Sigue siendo un diseño distinto al prepago: el dueño y el beneficiario importan."
+          },
+          {
+            "q": "¿Si cancelo el seguro me devuelven lo pagado, como un prepago?",
+            "a": "No lo trate como el mismo producto. Cancelar un seguro de vida no promete la devolución de primas. El prepago tiene sus propias reglas de dinero, en su contrato."
           },
           {
             "q": "¿Medicare cubre alguno de los dos?",
@@ -146,34 +164,39 @@
     "aiFreePledgeModalTitle": "How this guide is reviewed",
     "aiFreePledgeModalBody": "The Mejor Vida Insurance team reviews this guide against appointed-company materials and public sources. Quotes and approval depend on the insurer, your state, and your application.",
     "question": "Final expense insurance vs a prepaid funeral",
-    "headline": "Cash for the family or a package at one funeral home: they are not the same",
-    "dek": "A prepay buys services at a specific home, under a contract. Final expense insurance sends money to a beneficiary. One does not automatically replace the other. Some households use both; many only need one they understand.",
+    "headline": "Final expense insurance or a prepaid funeral: cash for the family, or a package at one home",
+    "dek": "A prepay buys services at a specific funeral home, under a contract. Final expense insurance pays money to a beneficiary if the policy is in force. One does not automatically replace the other. Some households use both; many only need one they have actually read.",
     "pageTitle": "Final expense insurance vs prepaid funeral",
-    "metaDescription": "Differences between final expense insurance and a prepaid funeral contract. A guide from Mejor Vida Insurance.",
+    "metaDescription": "Differences between final expense insurance and a prepaid funeral contract: who is paid, moving, and the FTC price list. A guide from Mejor Vida Insurance.",
     "keyTakeaways": [
       "Prepay: you (or the family) agree on services with a funeral home and pay in advance or on a schedule, as that contract writes it.",
       "Insurance: the insurer pays cash to the beneficiary if the policy is in force and the death is covered.",
-      "A prepay is usually tied to one funeral home and one package. Insurance travels with the person and leaves flexibility.",
-      "The FTC publishes how to shop funeral homes. Insurance does not replace reading the prepay contract (where the money sits, what happens if you move)."
+      "A prepay is usually tied to one home and one package. Insurance travels with the person and lets the beneficiary decide.",
+      "Read the prepay contract (where the money is held, what happens if you move). A life quote does not answer those questions. The FTC publishes how to shop funeral homes."
     ],
     "cta": {
-      "title": "See a price for your situation",
-      "body": "Mejor Vida Insurance compares final expense companies. Start with a free quote, schedule a call, or message us on WhatsApp.",
+      "title": "Quote the insurance, not the prepay",
+      "body": "Mejor Vida Insurance compares final expense. We do not sell funeral-home contracts. Free quote, a call, or WhatsApp.",
       "quote": "Get a free quote",
       "schedule": "Schedule a call"
     },
     "blocks": [
       {
         "type": "p",
-        "text": "Both ideas grow from the same fear: not leaving a surprise bill. They share a goal and split on mechanism. Mixing them is how people pay twice or stay tied to a home that no longer fits."
+        "text": "Both ideas aim at the same thing: not leaving a surprise bill. They split on mechanism. Mixing them is how people pay twice for the same casket, or stay tied to a funeral home that no longer fits."
       },
       {
         "type": "h2",
         "text": "What each path buys"
       },
       {
-        "type": "p",
-        "text": "With a prepay, the funeral home describes a casket or urn, viewing, transfer, and whatever is on the paper. What is not written — a cemetery plot, a marker, flowers — can still be extra. With insurance, there is no casket in the life contract: there is a dollar amount."
+        "type": "ul",
+        "items": [
+          "Prepaid funeral: a contract with a funeral home for described services (casket or urn, viewing, transfer, whatever is on the paper). What is not written — plot, marker, flowers — can still be extra.",
+          "Final expense insurance: a life contract. There is no casket in the policy; there is a dollar amount for the beneficiary.",
+          "Beneficiary: who is paid on the insurance. Owner: who controls the policy. On a prepay, what is “delivered” is the service at that home, not an unrestricted check.",
+          "Assignment: sometimes the insurance can be assigned to a funeral home. It is still a different design from a prepay."
+        ]
       },
       {
         "type": "p",
@@ -181,8 +204,8 @@
       },
       {
         "type": "table",
-        "caption": "Differences that matter on the day of death",
-        "lead": "Neither column is “correct” for every family.",
+        "caption": "What changes on the day of death",
+        "lead": "Neither column is correct for every family. Read both papers.",
         "headers": [
           "Question",
           "Prepaid funeral",
@@ -195,12 +218,12 @@
             "Cash to the beneficiary"
           ],
           [
-            "Can you change homes?",
+            "Can you change funeral homes?",
             "Often complicated",
-            "Yes; the money is not tied to a funeral-home logo"
+            "Yes; the money is not tied to a logo"
           ],
           [
-            "What if the service costs less?",
+            "If the service costs less?",
             "Depends on the prepay contract",
             "The remainder stays with the family"
           ],
@@ -211,43 +234,56 @@
           ],
           [
             "A wait at the start?",
-            "Not in the life-insurance sense",
+            "Not the way a life policy has a wait",
             "On some plans, yes"
           ],
           [
-            "Does it end if you stop paying?",
+            "If you stop paying?",
             "The prepay contract will say what happens to the money",
-            "Without premium, the policy can end"
+            "Without premium, the policy can end; we do not promise a premium refund"
           ]
         ],
-        "foot": "Read both papers. A salesperson’s verbal promise does not replace the contract."
+        "foot": "A salesperson’s verbal promise does not replace the contract — not the funeral home’s, and not the insurer’s."
       },
       {
         "type": "h2",
-        "text": "They can coexist — carefully"
+        "text": "When each one fits"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Prepay: you already chose the home, the package is in writing, and you understand where the money is held and what happens if you move or the home closes.",
+          "Insurance: you want flexibility, you may move, or you want cash for cemetery, debts, or travel the package does not cover.",
+          "Both: some families prepay the basics and buy a small policy for extras. That makes sense only if they are not buying the same service twice."
+        ]
       },
       {
         "type": "p",
-        "text": "Some families prepay the basics and buy a small policy for extras and debts. That makes sense if they are not buying the same casket twice. If a full prepay already exists, a large policy may be more of a gift than a funeral fund. Mejor Vida Insurance quotes the insurance; it does not sell funeral-home contracts."
+        "text": "If a full prepay already exists, a large policy may be more of a gift than a funeral fund. Mejor Vida Insurance quotes the insurance; it does not sell funeral-home contracts."
       },
       {
         "type": "h2",
-        "text": "Money and consumer protection"
+        "text": "Your rights when you shop funeral homes"
       },
       {
         "type": "p",
-        "text": "The FTC explains the right to a price list and not to buy a full package if you do not want it. Ask where prepay money is held and what happens if the funeral home closes or you move. Those questions are not answered by a life quote."
+        "text": "The FTC explains the right to a general price list and not to buy a full package if you do not want it. Ask where prepay money is held and what happens if the funeral home closes or you move. Those answers do not come from a life quote. National funeral medians (NFDA 2023) help you size a bill; they do not replace that home’s contract."
       },
       {
         "type": "faq",
+        "heading": "Common questions",
         "items": [
           {
             "q": "Is insurance “better” than a prepay?",
-            "a": "It is different. Better for flexibility; a prepay can be better if you want a fixed package at a home you trust."
+            "a": "It is different. Better for flexibility. A prepay can be better if you want a fixed package at a home you trust and you understand the contract."
           },
           {
             "q": "Can I assign the insurance to the funeral home?",
-            "a": "Sometimes it can be assigned, or the family pays the invoice with the check. It is still a different design from a prepay."
+            "a": "Sometimes it can be assigned, or the family pays the invoice with the check. It is still a different design from a prepay: owner and beneficiary still matter."
+          },
+          {
+            "q": "If I cancel the insurance, do I get money back the way a prepay might?",
+            "a": "Do not treat them as the same product. Canceling life insurance does not promise a refund of premiums. A prepay has its own money rules, in its contract."
           },
           {
             "q": "Does Medicare cover either one?",

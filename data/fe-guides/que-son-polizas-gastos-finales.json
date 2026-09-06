@@ -32,19 +32,19 @@
     "blocks": [
       {
         "type": "p",
-        "text": "La gente pregunta por “el seguro” y a veces no ve el documento. La póliza es ese documento: nombres, monto, prima, qué está cubierto y qué no. El agente puede explicar, pero el contrato es lo que la compañía pagará."
+        "text": "La gente pregunta por “el seguro” y a veces nunca ve el documento. La póliza es ese documento: nombres, monto, prima —el precio que usted paga— y qué está cubierto. Mejor Vida Seguros puede recorrer el formulario con usted; lo que la compañía pagará es lo que está escrito en el contrato."
       },
       {
         "type": "h2",
-        "text": "Las piezas que importan en el día a día"
+        "text": "Asegurado, dueño y beneficiario"
       },
       {
         "type": "p",
-        "text": "El asegurado es la persona cuya muerte activa el pago. El dueño es quien controla la póliza (a veces es la misma persona). El beneficiario es quien recibe el cheque. Puede haber más de un beneficiario, y se pueden cambiar según las reglas de la compañía mientras la póliza esté vigente."
+        "text": "El asegurado es la persona cuya muerte puede activar el pago. El dueño es quien controla la póliza —a veces es la misma persona—. El beneficiario es quien recibe el cheque. Puede haber más de un beneficiario, y se pueden cambiar según las reglas de la compañía mientras la póliza esté vigente."
       },
       {
         "type": "p",
-        "text": "El monto —a veces llamado valor nominal— es la cifra que la compañía promete si el fallecimiento está cubierto y la póliza está al día. En gastos finales ese número suele ser el de un funeral, no el de una casa."
+        "text": "El monto —a veces llamado valor nominal— es la cifra que la compañía promete si el fallecimiento está cubierto y la póliza está al día. En gastos finales ese número suele ser del tamaño de un funeral, no el de una casa."
       },
       {
         "type": "h2",
@@ -56,15 +56,15 @@
       },
       {
         "type": "p",
-        "text": "Si deja de pagar, la compañía no “congela” el precio para siempre. Tras el periodo de gracia que escriba el contrato, la póliza puede caducar. Caducar significa que ya no hay beneficio. No prometemos reembolsos automáticos; eso depende de cada póliza y de si hay valor en efectivo."
+        "text": "Si deja de pagar, la compañía no “congela” el precio para siempre. Tras el periodo de gracia que escriba el contrato —el tiempo extra para ponerse al día—, la póliza puede caducar. Caducar significa que ya no hay beneficio. No prometemos reembolsos automáticos; eso depende de cada póliza y de si hay valor en efectivo, un ahorro interno que algunos contratos acumulan."
       },
       {
         "type": "h2",
-        "text": "Tres formas en que un plan puede pagar"
+        "text": "Pago completo, periodo de espera o aceptación garantizada"
       },
       {
         "type": "p",
-        "text": "Un plan que paga el monto completo desde el primer pago, si usted califica, es el que muchas familias buscan primero. Un plan con periodo de espera paga menos, o devuelve primas más un interés del contrato, si la muerte no es accidental durante los primeros años. Un plan de aceptación garantizada no hace preguntas de salud y también suele tener espera. Mejor Vida Seguros explica esas vías con palabras de todos los días; el contrato de cada compañía es el que manda."
+        "text": "Un plan que paga el monto completo desde el primer pago, si usted califica, es el que muchas familias buscan primero. Un plan con periodo de espera —un tramo al inicio— paga menos, o devuelve primas más un interés del contrato, si la muerte no es accidental durante los primeros años. Un plan de aceptación garantizada no hace preguntas de salud y también suele tener espera. Mejor Vida Seguros explica esas vías con palabras de todos los días; el contrato de cada compañía es el que manda."
       },
       {
         "type": "table",
@@ -78,41 +78,69 @@
         "rows": [
           [
             "Asegurado",
-            "La persona cubierta",
-            "Su fallecimiento es el evento que puede pagar el beneficio"
+            "La persona cuya vida está cubierta por el contrato.",
+            "Su fallecimiento es el evento que puede pagar el beneficio."
           ],
           [
             "Dueño",
-            "Controla cambios y pagos",
-            "Puede no ser el asegurado (por ejemplo un hijo dueño de la póliza de un padre)"
+            "Quien controla cambios, beneficiarios y pagos.",
+            "Puede no ser el asegurado —por ejemplo, un hijo dueño de la póliza de un padre—."
           ],
           [
             "Beneficiario",
-            "Recibe el cheque",
-            "Puede usarlo para el funeral u otras necesidades; no está atado a una funeraria"
+            "Quien recibe el cheque de la aseguradora.",
+            "Puede usarlo para el funeral u otras necesidades. No está atado a una funeraria."
           ],
           [
             "Compañía",
-            "Emite y paga según el contrato",
-            "Cada producto tiene edades y montos propios"
+            "Emite la póliza y paga según el contrato.",
+            "Cada producto tiene sus propias edades de emisión y montos máximos."
           ]
         ],
         "foot": "Los nombres legales pueden variar un poco según el formulario. Pida que se los señalen en su copia."
       },
       {
         "type": "h2",
-        "text": "Ejemplos de productos, no una lista de “ganadores”"
+        "text": "Ejemplos de productos, no una lista de ganadores"
       },
       {
         "type": "p",
-        "text": "Living Promise Nivelado de Mutual of Omaha, en materiales de producto, emite de 45 a 85 y hasta unos $50,000. Golden Solution y Senior Choice de American Amicable, en general de 50 a 85, pueden estructurar el beneficio como pago completo, como un plan que aumenta el pago en los primeros años, o como un plan que en esos años devuelve primas más un interés escrito. Accendo Level puede llegar a 89 con un tope de $25,000 a edades 76–89. Esas cifras son educativas. La oferta real sale de la solicitud."
+        "text": "Las cifras de esta tabla salen de materiales de producto. Sirven para ver cómo se ve un contrato real. No son un ranking ni una oferta."
+      },
+      {
+        "type": "table",
+        "caption": "Tres productos de referencia, con cifras educativas",
+        "lead": "La oferta real sale de la solicitud y de la decisión de la aseguradora.",
+        "headers": [
+          "Producto",
+          "Edades de emisión, en materiales de producto",
+          "Monto u observación"
+        ],
+        "rows": [
+          [
+            "Living Promise Nivelado (Mutual of Omaha)",
+            "De 45 a 85 años",
+            "Hasta unos $50,000."
+          ],
+          [
+            "Golden Solution y Senior Choice (American Amicable)",
+            "En general, de 50 a 85 años",
+            "El beneficio puede estructurarse como pago completo, como un plan que aumenta el pago en los primeros años, o como un plan que en esos años devuelve primas más un interés escrito."
+          ],
+          [
+            "Accendo Level",
+            "Puede llegar a los 89 años",
+            "Tope de $25,000 a edades 76–89."
+          ]
+        ],
+        "foot": "Esas cifras son educativas. No decimos cuál “gana.” El producto que calza depende de la edad, la salud y el estado."
       },
       {
         "type": "faq",
         "items": [
           {
             "q": "¿La póliza vence a los 80?",
-            "a": "Un gasto final permanente no está diseñado para vencer por edad como un temporal. Sigue mientras se pague según el contrato. La edad máxima para comprar sí existe y cambia por producto."
+            "a": "Un gasto final permanente no está diseñado para vencer por edad como un seguro temporal. Sigue mientras se pague según el contrato. La edad máxima para comprar sí existe y cambia por producto."
           },
           {
             "q": "¿Puedo tener dos pólizas?",
@@ -159,15 +187,15 @@
     "blocks": [
       {
         "type": "p",
-        "text": "People ask about “the insurance” and sometimes never see the document. The policy is that document: names, amount, premium, what is covered, and what is not. An agent can explain, but the contract is what the company will pay."
+        "text": "People ask about “the insurance” and sometimes never see the document. The policy is that document: names, amount, premium — the price you pay — and what is covered. Mejor Vida Insurance can walk through the form with you; what the company will pay is what the contract writes."
       },
       {
         "type": "h2",
-        "text": "The parts that matter day to day"
+        "text": "Insured, owner, and beneficiary"
       },
       {
         "type": "p",
-        "text": "The insured is the person whose death can trigger the payment. The owner controls the policy (sometimes the same person). The beneficiary receives the check. You can name more than one beneficiary, and you can usually change them under company rules while the policy is in force."
+        "text": "The insured is the person whose death can trigger the payment. The owner controls the policy — sometimes the same person. The beneficiary receives the check. You can name more than one beneficiary, and you can usually change them under company rules while the policy is in force."
       },
       {
         "type": "p",
@@ -183,15 +211,15 @@
       },
       {
         "type": "p",
-        "text": "If you stop paying, the company does not freeze the price forever. After the grace period the contract writes, the policy can lapse. Lapse means there is no benefit. We do not promise automatic refunds; that depends on each policy and whether cash value exists."
+        "text": "If you stop paying, the company does not freeze the price forever. After the grace period the contract writes — extra time to catch up — the policy can lapse. Lapse means there is no benefit. We do not promise automatic refunds; that depends on each policy and whether cash value exists, an internal savings some contracts build."
       },
       {
         "type": "h2",
-        "text": "Three ways a plan can pay"
+        "text": "Full benefit, a waiting period, or guaranteed acceptance"
       },
       {
         "type": "p",
-        "text": "A plan that pays the full amount from the first payment, if you qualify, is the path many families want first. A waiting-period plan pays less, or returns premiums plus contract interest, if death is not accidental in the early years. A guaranteed-acceptance plan asks no health questions and also usually has a wait. Mejor Vida Insurance explains those paths in everyday words; each company’s contract controls."
+        "text": "A plan that pays the full amount from the first payment, if you qualify, is the path many families want first. A waiting-period plan — a stretch at the start — pays less, or returns premiums plus contract interest, if death is not accidental in the early years. A guaranteed-acceptance plan asks no health questions and also usually has a wait. Mejor Vida Insurance explains those paths in everyday words; each company’s contract controls."
       },
       {
         "type": "table",
@@ -205,23 +233,23 @@
         "rows": [
           [
             "Insured",
-            "The person covered",
-            "Their death is the event that can pay the benefit"
+            "The person whose life the contract covers.",
+            "Their death is the event that can pay the benefit."
           ],
           [
             "Owner",
-            "Controls changes and payments",
-            "May not be the insured (for example a child owning a parent’s policy)"
+            "The person who controls changes, beneficiaries, and payments.",
+            "May not be the insured — for example, a child owning a parent’s policy."
           ],
           [
             "Beneficiary",
-            "Receives the check",
-            "Can use it for the funeral or other needs; not tied to one funeral home"
+            "The person who receives the insurer’s check.",
+            "Can use it for the funeral or other needs. Not tied to one funeral home."
           ],
           [
             "Company",
-            "Issues and pays per the contract",
-            "Each product has its own ages and amounts"
+            "Issues the policy and pays per the contract.",
+            "Each product has its own issue ages and maximum amounts."
           ]
         ],
         "foot": "Legal labels can vary a little by form. Ask to have them pointed out on your copy."
@@ -232,7 +260,35 @@
       },
       {
         "type": "p",
-        "text": "Mutual of Omaha Living Promise Level, in product materials, issues ages 45–85 and up to about $50,000. American Amicable Golden Solution and Senior Choice, typically ages 50–85, can structure the benefit as full pay, as a plan that increases the payout over the first years, or as a plan that in those years returns premiums plus written interest. Accendo Level can reach age 89 with a $25,000 cap at ages 76–89. Those figures are educational. The real offer comes from the application."
+        "text": "The figures in this table come from product materials. They show what a real contract can look like. They are not a ranking and not an offer."
+      },
+      {
+        "type": "table",
+        "caption": "Three reference products, with educational figures",
+        "lead": "The real offer comes from the application and the insurer’s decision.",
+        "headers": [
+          "Product",
+          "Issue ages, in product materials",
+          "Amount or note"
+        ],
+        "rows": [
+          [
+            "Living Promise Level (Mutual of Omaha)",
+            "Ages 45–85",
+            "Up to about $50,000."
+          ],
+          [
+            "Golden Solution and Senior Choice (American Amicable)",
+            "Typically ages 50–85",
+            "The benefit can be structured as full pay, as a plan that increases the payout over the first years, or as a plan that in those years returns premiums plus written interest."
+          ],
+          [
+            "Accendo Level",
+            "Can reach age 89",
+            "$25,000 cap at ages 76–89."
+          ]
+        ],
+        "foot": "Those figures are educational. We do not say which one “wins.” The product that fits depends on age, health, and state."
       },
       {
         "type": "faq",

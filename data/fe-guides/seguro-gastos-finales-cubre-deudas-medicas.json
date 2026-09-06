@@ -14,25 +14,25 @@
     "aiFreePledgeModalBody": "El equipo de Mejor Vida Seguros revisa esta guía con materiales de compañías designadas y fuentes públicas. Las cotizaciones y la aprobación dependen de la aseguradora, del estado y de su solicitud.",
     "question": "¿El seguro de gastos finales cubre deudas médicas?",
     "headline": "El seguro no paga al hospital: paga a su beneficiario",
-    "dek": "Un seguro de gastos finales es un cheque en efectivo. No es un pagador de facturas médicas. La familia puede usar ese dinero para deudas del hospital, el funeral u otra necesidad.",
+    "dek": "Un seguro de gastos finales es un cheque en efectivo para el beneficiario — la persona que usted nombró. No es un pagador de facturas médicas. La familia puede usar ese dinero para deudas del hospital, el funeral u otra necesidad.",
     "pageTitle": "¿El seguro de gastos finales cubre deudas médicas?",
     "metaDescription": "Cómo se usa el beneficio de un seguro de gastos finales frente a facturas médicas. Guía de Mejor Vida Seguros.",
     "keyTakeaways": [
       "El beneficiario recibe efectivo. No hay una lista obligatoria de “solo funeral.”",
-      "Medicare y el seguro de salud, si aplican, son quienes tratan las cuentas médicas en vida o justo después, según sus reglas. El gasto final no sustituye a Medicare.",
-      "Una factura médica grande puede superar el monto de la póliza. El seguro no borra el resto por arte de magia.",
+      "Medicare y el seguro de salud, si aplican, son quienes tratan las cuentas médicas según sus reglas. El gasto final no sustituye a Medicare.",
+      "Una factura médica grande puede superar el monto de la póliza. El seguro no borra el resto.",
       "Quién debe una deuda médica después de un fallecimiento depende de la ley del estado y de la herencia. Eso es tema legal, no de una cotización."
     ],
     "cta": {
-      "title": "Vea un precio para su situación",
-      "body": "Mejor Vida Seguros compara compañías de gastos finales. Empiece con una cotización gratuita, agende una llamada o escríbanos por WhatsApp.",
+      "title": "Elija un monto con sus facturas en mente",
+      "body": "Mejor Vida Seguros cotiza el monto que usted necesita. Pida una cotización gratuita o agende una llamada.",
       "quote": "Cotización gratuita",
       "schedule": "Agendar una llamada"
     },
     "blocks": [
       {
         "type": "p",
-        "text": "La confusión nace del nombre. “Gastos finales” suena a un paquete que incluye hospital, farmacia y funeraria. En el contrato, casi siempre es vida: un monto fijo a una persona que usted eligió."
+        "text": "El nombre genera confusión. “Gastos finales” suena a un paquete que incluye hospital, farmacia y funeraria. En el contrato casi siempre es seguro de vida: un monto fijo pagado a la persona que usted eligió."
       },
       {
         "type": "h2",
@@ -40,24 +40,28 @@
       },
       {
         "type": "p",
-        "text": "La aseguradora paga al beneficiario (o los beneficiarios) según la póliza. Ese dinero puede ir a un saldo del hospital, a la cremación, a un vuelo o a una cuenta de ahorros. La compañía de vida no se sienta a negociar con el hospital. Tampoco “aprueba” cada factura."
-      },
-      {
-        "type": "p",
-        "text": "Medicare cubre servicios de salud que califican. No está diseñado para el funeral. Una factura que Medicare no pagó puede quedar para el caudal hereditario o para quien la firmó. El gasto final es un fondo extra, no un reemplazo de Medicare."
+        "text": "La aseguradora paga al beneficiario (o a los beneficiarios) según la póliza. Ese dinero puede ir a un saldo del hospital, a la cremación, a un vuelo o a una cuenta de ahorros. La compañía de vida no negocia con el hospital. Tampoco aprueba cada factura."
       },
       {
         "type": "h2",
-        "text": "Cómo dimensionar si hay deudas médicas"
+        "text": "Medicare es otra cuenta"
       },
       {
         "type": "p",
-        "text": "Sume un estimado honesto de facturas que no están cubiertas, más el funeral. Si el total es $18,000 y la póliza es $10,000, la familia todavía tiene $8,000 de conversación. Subir el monto, si el producto y la salud lo permiten, es una decisión de prima mensual. No prometemos que un $10,000 “cubra todas las deudas médicas.”"
+        "text": "Medicare cubre servicios de salud que califican. No está diseñado para el funeral. Una factura que Medicare no pagó puede quedar para el caudal hereditario — los bienes de la persona fallecida — o para quien la firmó. El gasto final es un fondo extra, no un reemplazo de Medicare."
+      },
+      {
+        "type": "h2",
+        "text": "Cómo elegir el monto si hay deudas médicas"
+      },
+      {
+        "type": "p",
+        "text": "Sume un estimado honesto de facturas que no están cubiertas, más el funeral. Si el total es $18,000 y la póliza es $10,000, a la familia todavía le faltan $8,000. Subir el monto, si el producto y la salud lo permiten, es una decisión de prima mensual. No prometemos que $10,000 cubra todas las deudas médicas."
       },
       {
         "type": "table",
         "caption": "Tres cuentas distintas",
-        "lead": "Mezclarlas es lo que genera expectativas imposibles.",
+        "lead": "Mezclarlas crea expectativas que el contrato no cumple.",
         "headers": [
           "Cuenta",
           "Quién suele pagarla",
@@ -84,11 +88,11 @@
       },
       {
         "type": "h2",
-        "text": "Nombre del beneficiario"
+        "text": "Quién debe figurar como beneficiario"
       },
       {
         "type": "p",
-        "text": "Si el objetivo es que un hijo pague tanto el funeral como una factura, ese hijo debe estar nombrado (o un fideicomiso, si un abogado lo diseña). Nombrar “el hospital” no es el diseño habitual de estas pólizas y puede no ser práctico. Hable de nombres concretos, no de instituciones genéricas."
+        "text": "Si el objetivo es que un hijo pague el funeral y una factura, ese hijo debe estar nombrado (o un fideicomiso, si un abogado lo diseña). Nombrar “el hospital” no es el diseño habitual de estas pólizas y puede no ser práctico. Use nombres concretos, no instituciones genéricas."
       },
       {
         "type": "faq",
@@ -96,6 +100,10 @@
           {
             "q": "¿La aseguradora envía el dinero al hospital?",
             "a": "En un gasto final típico, no. Envía el beneficio al beneficiario."
+          },
+          {
+            "q": "¿Puedo nombrar al hospital como beneficiario?",
+            "a": "No es el diseño habitual y puede no ser práctico. Lo usual es nombrar a una persona de confianza que pague las cuentas."
           },
           {
             "q": "¿Medicare paga el funeral si hay deudas médicas grandes?",
@@ -128,25 +136,25 @@
     "aiFreePledgeModalBody": "The Mejor Vida Insurance team reviews this guide against appointed-company materials and public sources. Quotes and approval depend on the insurer, your state, and your application.",
     "question": "Does final expense insurance cover medical debt?",
     "headline": "The insurance does not pay the hospital: it pays your beneficiary",
-    "dek": "Final expense insurance is a cash check. It is not a medical-bill payer. The family can use that money for hospital debt, the funeral, or another need.",
+    "dek": "Final expense insurance is a cash check to the beneficiary — the person you named. It is not a medical-bill payer. The family can use that money for hospital debt, the funeral, or another need.",
     "pageTitle": "Does final expense insurance cover medical debt?",
     "metaDescription": "How a final expense benefit works next to medical bills. A guide from Mejor Vida Insurance.",
     "keyTakeaways": [
       "The beneficiary receives cash. There is no required “funeral only” shopping list.",
-      "Medicare and health insurance, if they apply, are what handle medical accounts in life or right after, under their rules. Final expense does not replace Medicare.",
-      "A large medical bill can exceed the policy amount. Insurance does not magically erase the rest.",
+      "Medicare and health insurance, if they apply, are what handle medical accounts under their rules. Final expense does not replace Medicare.",
+      "A large medical bill can exceed the policy amount. Insurance does not erase the rest.",
       "Who owes a medical debt after a death depends on state law and the estate. That is a legal question, not a quote."
     ],
     "cta": {
-      "title": "See a price for your situation",
-      "body": "Mejor Vida Insurance compares final expense companies. Start with a free quote, schedule a call, or message us on WhatsApp.",
+      "title": "Choose an amount with bills in mind",
+      "body": "Mejor Vida Insurance quotes the amount you need. Get a free quote or schedule a call.",
       "quote": "Get a free quote",
       "schedule": "Schedule a call"
     },
     "blocks": [
       {
         "type": "p",
-        "text": "The confusion starts with the name. “Final expense” sounds like a bundle that includes hospital, pharmacy, and funeral home. In the contract, it is almost always life insurance: a set amount to a person you chose."
+        "text": "The name causes confusion. “Final expense” sounds like a bundle that includes hospital, pharmacy, and funeral home. In the contract it is almost always life insurance: a set amount paid to the person you chose."
       },
       {
         "type": "h2",
@@ -154,24 +162,28 @@
       },
       {
         "type": "p",
-        "text": "The insurer pays the beneficiary (or beneficiaries) as the policy writes it. That money can go to a hospital balance, cremation, a flight, or a savings account. The life company does not sit down to negotiate with the hospital. It also does not “approve” each invoice."
-      },
-      {
-        "type": "p",
-        "text": "Medicare covers qualifying health services. It is not designed for the funeral. A bill Medicare did not pay may remain for the estate or for the person who signed. Final expense is an extra fund, not a Medicare replacement."
+        "text": "The insurer pays the beneficiary (or beneficiaries) as the policy writes it. That money can go to a hospital balance, cremation, a flight, or a savings account. The life company does not negotiate with the hospital. It also does not approve each invoice."
       },
       {
         "type": "h2",
-        "text": "How to size coverage if there is medical debt"
+        "text": "Medicare is a separate bill"
       },
       {
         "type": "p",
-        "text": "Add an honest estimate of uncovered bills, plus the funeral. If the total is $18,000 and the policy is $10,000, the family still has an $8,000 conversation. Raising the amount, if the product and health allow it, is a monthly-premium decision. We do not promise that $10,000 “covers all medical debts.”"
+        "text": "Medicare covers qualifying health services. It is not designed for the funeral. A bill Medicare did not pay may remain for the estate — the deceased person’s assets — or for the person who signed. Final expense is an extra fund, not a Medicare replacement."
+      },
+      {
+        "type": "h2",
+        "text": "How to choose an amount if there is medical debt"
+      },
+      {
+        "type": "p",
+        "text": "Add an honest estimate of uncovered bills, plus the funeral. If the total is $18,000 and the policy is $10,000, the family is still $8,000 short. Raising the amount, if the product and health allow it, is a monthly-premium decision. We do not promise that $10,000 covers all medical debts."
       },
       {
         "type": "table",
         "caption": "Three different bills",
-        "lead": "Mixing them is what creates impossible expectations.",
+        "lead": "Mixing them creates expectations the contract does not meet.",
         "headers": [
           "Bill",
           "Who usually pays it",
@@ -198,11 +210,11 @@
       },
       {
         "type": "h2",
-        "text": "The beneficiary’s name"
+        "text": "Who should be named as beneficiary"
       },
       {
         "type": "p",
-        "text": "If the goal is for a child to pay both the funeral and a bill, that child should be named (or a trust, if an attorney designs it). Naming “the hospital” is not the usual design of these policies and may not be practical. Talk about concrete names, not generic institutions."
+        "text": "If the goal is for a child to pay the funeral and a bill, that child should be named (or a trust, if an attorney designs it). Naming “the hospital” is not the usual design of these policies and may not be practical. Use concrete names, not generic institutions."
       },
       {
         "type": "faq",
@@ -210,6 +222,10 @@
           {
             "q": "Does the insurer send money to the hospital?",
             "a": "On a typical final expense policy, no. It sends the benefit to the beneficiary."
+          },
+          {
+            "q": "Can I name the hospital as beneficiary?",
+            "a": "That is not the usual design and may not be practical. The usual path is to name a trusted person who will pay the bills."
           },
           {
             "q": "Does Medicare pay for the funeral if medical debts are large?",

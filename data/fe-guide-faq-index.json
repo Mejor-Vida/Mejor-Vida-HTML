@@ -9,6 +9,7 @@
       "guides": [
         {
           "slug": "que-es-seguro-gastos-finales",
+          "slugEn": "what-is-final-expense-insurance",
           "question": "¿Qué es un seguro de gastos finales?",
           "questionEn": "What is final expense insurance?",
           "cardLabel": "Qué es el seguro",
@@ -19,6 +20,7 @@
         },
         {
           "slug": "tipos-planes-seguro-gastos-finales",
+          "slugEn": "types-of-final-expense-plans",
           "question": "¿Qué tipos de planes existen?",
           "questionEn": "What types of plans are there?",
           "cardLabel": "Tipos de planes",
@@ -29,6 +31,7 @@
         },
         {
           "slug": "cuanto-cuesta-seguro-gastos-finales",
+          "slugEn": "how-much-does-final-expense-insurance-cost",
           "question": "¿Cuánto cuesta un seguro de gastos finales?",
           "questionEn": "How much does final expense insurance cost?",
           "cardLabel": "Cuánto cuesta el seguro",
@@ -39,6 +42,7 @@
         },
         {
           "slug": "medicare-paga-gastos-finales",
+          "slugEn": "does-medicare-pay-for-final-expenses",
           "question": "¿Se encarga Medicare de pagar los gastos finales?",
           "questionEn": "Does Medicare pay for final expenses?",
           "cardLabel": "Qué paga Medicare",

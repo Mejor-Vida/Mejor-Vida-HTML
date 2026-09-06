@@ -197,7 +197,7 @@ function renderGuide(guide, faqIndex, shell, lang) {
       .filter(Boolean)
       .join("\n");
     if (items) {
-      relatedBlock = `<section class="fe-guide-related">\n<h2 class="h6 fw-bold mb-3" style="color:#1a365d;">${relatedTitle}</h2>\n<ul>\n${items}\n  </ul>\n</section>`;
+      relatedBlock = `<section class="fe-guide-related">\n<h2 class="fe-guide-h2 fe-guide-h2--small">${relatedTitle}</h2>\n<ul>\n${items}\n  </ul>\n</section>`;
     }
   }
 

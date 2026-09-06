@@ -13,8 +13,8 @@
     "aiFreePledgeModalTitle": "Cómo se revisa esta guía",
     "aiFreePledgeModalBody": "El equipo de Mejor Vida Seguros revisa esta guía con materiales de compañías designadas y fuentes públicas. Las cotizaciones y la aprobación dependen de la aseguradora, del estado y de su solicitud.",
     "question": "¿Qué factores afectan el precio del seguro de gastos finales?",
-    "headline": "Por qué dos personas pagan distinto por el mismo monto",
-    "dek": "La edad, el tabaco, la salud, el sexo, el monto y la compañía mueven la prima. El código postal importa menos que el tipo de plan.",
+    "headline": "Por qué dos personas pagan distinto por el mismo monto de gastos finales",
+    "dek": "La prima —el precio periódico del seguro— cambia con la edad, el tabaco, la salud, el sexo, el monto y la compañía. El código postal suele importar menos que el tipo de plan.",
     "pageTitle": "Qué afecta el precio del seguro de gastos finales",
     "metaDescription": "Qué hace subir o bajar la prima de un seguro de gastos finales: edad, tabaco, salud, monto y tipo de plan. Guía de Mejor Vida Seguros.",
     "keyTakeaways": [
@@ -24,52 +24,32 @@
       "Un plan que paga completo desde el inicio suele costar menos por dólar que un plan de aceptación garantizada con espera."
     ],
     "cta": {
-      "title": "Vea un precio para su situación",
-      "body": "Mejor Vida Seguros compara compañías de gastos finales. Empiece con una cotización gratuita, agende una llamada o escríbanos por WhatsApp.",
+      "title": "Vea un precio con sus datos",
+      "body": "Mejor Vida Seguros compara compañías de gastos finales. Empiece con una cotización gratuita o agende una llamada.",
       "quote": "Cotización gratuita",
       "schedule": "Agendar una llamada"
     },
     "blocks": [
       {
         "type": "p",
-        "text": "El precio de un seguro de gastos finales no es un impuesto fijo. Es una oferta de una compañía para una persona concreta. Por eso una cotización en línea pide edad, sexo, tabaco y estado, y luego vienen preguntas de salud."
+        "text": "El precio de un seguro de gastos finales no es una tarifa nacional igual para todos. Es la oferta de una compañía para una persona concreta: su edad, si usa tabaco, cómo responde las preguntas de salud, el monto que pide y el producto disponible donde vive. Por eso una cotización en línea pide esos datos antes de mostrar un número."
       },
       {
         "type": "h2",
-        "text": "Lo que más mueve el número"
+        "text": "La edad al comprar suele ser el factor más visible"
       },
       {
         "type": "p",
-        "text": "La edad al comprar es el factor más visible. A los 50, un $10,000 ilustrativo de gastos finales (no fumador, buena salud, agosto 2026) ronda $28 al mes para mujer y $34 para hombre. A los 70, esas mismas condiciones ilustrativas suben a unos $53 y $70. No es que la compañía “castigue” a nadie: el riesgo de fallecer en los años próximos es distinto."
-      },
-      {
-        "type": "p",
-        "text": "El monto cubierto escala el precio. $15,000 no cuesta lo mismo que $5,000. Tampoco es siempre el triple exacto, porque cada producto redondea y tiene mínimos."
-      },
-      {
-        "type": "p",
-        "text": "El tabaco —cigarro, vapeo u otros productos según lo que pregunte el formulario— suele subir la prima. No inventamos un “30% más” universal. Cada compañía define qué cuenta como tabaco y por cuántos meses sin uso se considera no fumador."
-      },
-      {
-        "type": "h2",
-        "text": "Salud y tipo de plan"
-      },
-      {
-        "type": "p",
-        "text": "Las preguntas de salud no existen para molestar. Deciden si la compañía puede ofrecer un plan que pague el monto completo desde el primer pago, un plan con periodo de espera, o si solo queda un plan sin preguntas y con espera. El último camino suele costar más por cada dólar de beneficio."
-      },
-      {
-        "type": "p",
-        "text": "El sexo aparece en muchas tablas de precio de vida permanente. En las cotizaciones ilustrativas que publicamos, las mujeres pagan menos que los hombres a la misma edad y monto, en no fumador. Eso no es una opinión de la agencia; es cómo están construidas esas tablas."
+        "text": "A los 50, un $10,000 ilustrativo de gastos finales (no fumador, buena salud, agosto 2026) ronda $28 al mes para mujer y $34 para hombre. A los 70, esas mismas condiciones ilustrativas suben a unos $53 y $70. No es que la compañía “castigue” a nadie: el riesgo de fallecer en los años próximos es distinto. Esas cifras son ejemplos educativos, no una oferta ni un promedio nacional."
       },
       {
         "type": "table",
-        "caption": "Ejemplo educativo: $10,000 al mes, no fumador, buena salud",
+        "caption": "Ejemplo educativo: cobertura de $10,000, prima mensual (no fumador, buena salud)",
         "lead": "Cifras ilustrativas de compañías designadas, agosto 2026. No son una oferta ni un promedio nacional.",
         "headers": [
-          "Edad",
-          "Mujer (aprox./mes)",
-          "Hombre (aprox./mes)"
+          "Edad al comprar",
+          "Mujer (aprox. al mes)",
+          "Hombre (aprox. al mes)"
         ],
         "rows": [
           [
@@ -93,21 +73,45 @@
             "$97"
           ]
         ],
-        "foot": "Si hay tabaco, otro estado de salud o un plan con espera, el número cambia. Pida una cotización con sus datos."
-      },
-      {
-        "type": "note",
-        "text": "No nombramos una compañía “más barata” para todos. Mutual of Omaha, American Amicable, Accendo, Transamerica, Americo, Assurity y Corebridge no usan la misma tabla. El más bajo para una persona de 62 no-fumadora puede no ser el más bajo para un fumador de 74."
+        "foot": "Si hay tabaco, otro estado de salud o un plan con periodo de espera, el número cambia. Pida una cotización con sus datos."
       },
       {
         "type": "h2",
-        "text": "Qué no debe confundir el precio"
+        "text": "El monto cubierto y el tabaco también mueven la prima"
+      },
+      {
+        "type": "p",
+        "text": "El monto cubierto es la cantidad que la compañía promete pagar a los beneficiarios si usted fallece con la póliza vigente. $15,000 no cuesta lo mismo que $5,000. Tampoco es siempre el triple exacto, porque cada producto redondea y tiene mínimos."
+      },
+      {
+        "type": "p",
+        "text": "El tabaco —cigarro, vapeo u otros productos según lo que pregunte el formulario— suele subir la prima. Eso se llama una clase de precio más alta: la misma edad y el mismo monto, otro tarifario. No inventamos un “30% más” universal. Cada compañía define qué cuenta como tabaco y por cuántos meses sin uso se considera no fumador."
+      },
+      {
+        "type": "h2",
+        "text": "Salud, tipo de plan y sexo en las tablas"
+      },
+      {
+        "type": "p",
+        "text": "Las preguntas de salud deciden si la compañía puede ofrecer un plan que pague el monto completo desde el primer pago, un plan con periodo de espera, o si solo queda un plan sin preguntas y con espera. El periodo de espera es el tiempo al inicio en el que una muerte no accidental puede pagar menos que el monto completo. El último camino —aceptación garantizada, es decir sin preguntas de salud— suele costar más por cada dólar de beneficio."
+      },
+      {
+        "type": "p",
+        "text": "El sexo aparece en muchas tablas de precio de vida permanente. En las cotizaciones ilustrativas que publicamos, las mujeres pagan menos que los hombres a la misma edad y monto, en no fumador. Eso no es una opinión de la agencia; es cómo están construidas esas tablas."
+      },
+      {
+        "type": "note",
+        "text": "No nombramos una compañía “más barata” para todos. Mutual of Omaha, American Amicable, Accendo, Transamerica, Americo, Assurity y Corebridge no usan la misma tabla. El más bajo para una persona de 62 no fumadora puede no ser el más bajo para un fumador de 74."
+      },
+      {
+        "type": "h2",
+        "text": "Tres confusiones frecuentes sobre el precio"
       },
       {
         "type": "ul",
         "items": [
           "El precio del seguro no es la factura de la funeraria. Son cuentas distintas.",
-          "Un anuncio de “desde $20 al mes” casi nunca dice la edad, el monto ni si hay espera.",
+          "Un anuncio de “desde $20 al mes” casi nunca dice la edad, el monto ni si hay periodo de espera.",
           "El valor en efectivo, si el contrato lo acumula, no es un ahorro líquido igual a un banco. Pedir prestado contra la póliza reduce el beneficio si no se paga."
         ]
       },
@@ -116,7 +120,11 @@
         "items": [
           {
             "q": "¿El precio sube cada año?",
-            "a": "En un gasto final de prima nivelada, no por edad. Puede cambiar si deja de pagar, si hay un préstamo o si el contrato lo permite por otra razón escrita. Un temporal es otro diseño."
+            "a": "En un gasto final de prima nivelada, no por edad. Puede cambiar si deja de pagar, si hay un préstamo contra la póliza o si el contrato lo permite por otra razón escrita. Un seguro temporal es otro diseño."
+          },
+          {
+            "q": "¿Si mi salud empeora después, me suben la prima?",
+            "a": "En un plan de prima nivelada ya emitido, un cambio de salud por sí solo no suele ser el motivo para subir ese precio acordado, si usted sigue pagando a tiempo. Un diagnóstico nuevo sí puede cambiar el precio o el tipo de una póliza nueva."
           },
           {
             "q": "¿El estado cambia mucho el precio?",
@@ -124,7 +132,16 @@
           },
           {
             "q": "¿Pagar anual es más barato?",
-            "a": "Algunas compañías dan un descuento pequeño por pagar de menos veces al año. No es universal. Hay que ver la ilustración."
+            "a": "Algunas compañías dan un descuento pequeño por pagar menos veces al año. No es universal. Hay que ver la ilustración: los números de muestra que la compañía calcula para esa póliza."
+          }
+        ]
+      },
+      {
+        "type": "sources",
+        "items": [
+          {
+            "label": "NAIC — Life insurance consumer information",
+            "url": "https://content.naic.org/consumer/life-insurance.htm"
           }
         ]
       }
@@ -135,8 +152,8 @@
     "aiFreePledgeModalTitle": "How this guide is reviewed",
     "aiFreePledgeModalBody": "The Mejor Vida Insurance team reviews this guide against appointed-company materials and public sources. Quotes and approval depend on the insurer, your state, and your application.",
     "question": "What affects the cost of final expense insurance?",
-    "headline": "Why two people pay different prices for the same amount",
-    "dek": "Age, tobacco, health, sex, amount, and company move the premium. ZIP code matters less than the type of plan.",
+    "headline": "Why two people pay different prices for the same final expense amount",
+    "dek": "The premium — the regular price of the insurance — moves with age, tobacco, health, sex, amount, and company. ZIP code usually matters less than the type of plan.",
     "pageTitle": "What affects final expense insurance cost",
     "metaDescription": "What raises or lowers a final expense premium: age, tobacco, health, amount, and plan type. A guide from Mejor Vida Insurance.",
     "keyTakeaways": [
@@ -146,52 +163,32 @@
       "A plan that can pay in full from day one usually costs less per dollar than a guaranteed-acceptance plan with a wait."
     ],
     "cta": {
-      "title": "See a price for your situation",
-      "body": "Mejor Vida Insurance compares final expense companies. Start with a free quote, schedule a call, or message us on WhatsApp.",
+      "title": "See a price with your details",
+      "body": "Mejor Vida Insurance compares final expense companies. Start with a free quote or schedule a call.",
       "quote": "Get a free quote",
       "schedule": "Schedule a call"
     },
     "blocks": [
       {
         "type": "p",
-        "text": "The price of final expense insurance is not a flat tax. It is a company’s offer for one person. That is why an online quote asks for age, sex, tobacco, and state, and then health questions follow."
+        "text": "The price of final expense insurance is not a national sticker price. It is a company’s offer for one person: your age, whether you use tobacco, how you answer health questions, the amount you ask for, and the product available where you live. That is why an online quote asks for those facts before it shows a number."
       },
       {
         "type": "h2",
-        "text": "What moves the number most"
+        "text": "Age at purchase is usually the most visible factor"
       },
       {
         "type": "p",
-        "text": "Age at purchase is the most visible factor. At 50, an illustrative $10,000 final expense figure (non-tobacco, good health, August 2026) is near $28 a month for a woman and $34 for a man. At 70, those same educational conditions rise to about $53 and $70. The company is not “punishing” anyone: the chance of dying in the coming years is different."
-      },
-      {
-        "type": "p",
-        "text": "The coverage amount scales the price. $15,000 does not cost the same as $5,000. It is also not always an exact multiple, because each product rounds and has minimums."
-      },
-      {
-        "type": "p",
-        "text": "Tobacco — cigarettes, vaping, or other products as the form defines them — usually raises the premium. We do not invent a universal “30% more.” Each company defines what counts as tobacco and how many tobacco-free months count as non-tobacco."
-      },
-      {
-        "type": "h2",
-        "text": "Health and plan type"
-      },
-      {
-        "type": "p",
-        "text": "Health questions are not there to annoy you. They decide whether the company can offer a plan that pays the full amount from the first payment, a waiting-period plan, or only a no-questions plan with a wait. That last path usually costs more per dollar of benefit."
-      },
-      {
-        "type": "p",
-        "text": "Sex appears in many permanent-life price tables. In the illustrative quotes we publish, women pay less than men at the same age and amount, non-tobacco. That is not an agency opinion; it is how those tables are built."
+        "text": "At 50, an illustrative $10,000 final expense figure (non-tobacco, good health, August 2026) is near $28 a month for a woman and $34 for a man. At 70, those same educational conditions rise to about $53 and $70. The company is not “punishing” anyone: the chance of dying in the coming years is different. Those figures are educational examples, not an offer and not a national average."
       },
       {
         "type": "table",
-        "caption": "Educational example: $10,000 a month, non-tobacco, good health",
+        "caption": "Educational example: $10,000 of coverage, monthly premium (non-tobacco, good health)",
         "lead": "Illustrative figures from appointed companies, August 2026. Not an offer and not a national average.",
         "headers": [
-          "Age",
-          "Woman (approx./month)",
-          "Man (approx./month)"
+          "Age at purchase",
+          "Woman (approx. per month)",
+          "Man (approx. per month)"
         ],
         "rows": [
           [
@@ -218,18 +215,42 @@
         "foot": "Tobacco, a different health picture, or a waiting-period plan changes the number. Ask for a quote with your details."
       },
       {
+        "type": "h2",
+        "text": "Coverage amount and tobacco also move the premium"
+      },
+      {
+        "type": "p",
+        "text": "The coverage amount is what the company promises to pay beneficiaries if you die while the policy is in force. $15,000 does not cost the same as $5,000. It is also not always an exact multiple, because each product rounds and has minimums."
+      },
+      {
+        "type": "p",
+        "text": "Tobacco — cigarettes, vaping, or other products as the form defines them — usually raises the premium. That is a higher price class: same age and amount, a different rate table. We do not invent a universal “30% more.” Each company defines what counts as tobacco and how many tobacco-free months count as non-tobacco."
+      },
+      {
+        "type": "h2",
+        "text": "Health, plan type, and sex on the rate tables"
+      },
+      {
+        "type": "p",
+        "text": "Health questions decide whether the company can offer a plan that pays the full amount from the first payment, a waiting-period plan, or only a no-questions plan with a wait. A waiting period is the early time when a non-accidental death may pay less than the full amount. That last path — guaranteed acceptance, meaning no health questions — usually costs more per dollar of benefit."
+      },
+      {
+        "type": "p",
+        "text": "Sex appears in many permanent-life price tables. In the illustrative quotes we publish, women pay less than men at the same age and amount, non-tobacco. That is not an agency opinion; it is how those tables are built."
+      },
+      {
         "type": "note",
         "text": "We do not name one “cheapest” company for everyone. Mutual of Omaha, American Amicable, Accendo, Transamerica, Americo, Assurity, and Corebridge do not share one table. The lowest price for a 62-year-old non-smoker may not be the lowest for a 74-year-old smoker."
       },
       {
         "type": "h2",
-        "text": "What should not confuse the price"
+        "text": "Three common ways the price gets confused"
       },
       {
         "type": "ul",
         "items": [
           "The insurance price is not the funeral-home invoice. They are different bills.",
-          "An ad that says “from $20 a month” almost never states the age, amount, or whether there is a wait.",
+          "An ad that says “from $20 a month” almost never states the age, amount, or whether there is a waiting period.",
           "Cash value, if the contract builds it, is not the same as a bank savings account. A loan against the policy reduces the benefit if it is not repaid."
         ]
       },
@@ -238,7 +259,11 @@
         "items": [
           {
             "q": "Does the price rise every year?",
-            "a": "On level-premium final expense, not because of age. It can change if you stop paying, if there is a loan, or if the contract allows another written reason. Term life is a different design."
+            "a": "On level-premium final expense, not because of age. It can change if you stop paying, if there is a loan against the policy, or if the contract allows another written reason. Term life is a different design."
+          },
+          {
+            "q": "If my health gets worse later, does the premium go up?",
+            "a": "On a level-premium plan already issued, a health change by itself is usually not a reason to raise that agreed price if you keep paying on time. A new diagnosis can change the price or plan type on a new policy."
           },
           {
             "q": "Does the state change the price a lot?",
@@ -246,7 +271,16 @@
           },
           {
             "q": "Is paying annually cheaper?",
-            "a": "Some companies give a small discount for paying fewer times a year. It is not universal. Check the illustration."
+            "a": "Some companies give a small discount for paying fewer times a year. It is not universal. Check the illustration: the sample numbers the company calculates for that policy."
+          }
+        ]
+      },
+      {
+        "type": "sources",
+        "items": [
+          {
+            "label": "NAIC — Life insurance consumer information",
+            "url": "https://content.naic.org/consumer/life-insurance.htm"
           }
         ]
       }

@@ -13,7 +13,7 @@
     "aiFreePledgeModalTitle": "Cómo se revisa esta guía",
     "aiFreePledgeModalBody": "El equipo de Mejor Vida Seguros revisa esta guía con materiales de compañías designadas y fuentes públicas. Las cotizaciones y la aprobación dependen de la aseguradora, del estado y de su solicitud.",
     "question": "¿Puedo obtener seguro de gastos finales si tengo problemas de salud?",
-    "headline": "Salud imperfecta y seguro de gastos finales: qué opciones quedan",
+    "headline": "Seguro de gastos finales con problemas de salud: qué opciones suelen quedar",
     "dek": "Un diagnóstico no cierra automáticamente la puerta. Cambia el tipo de plan: beneficio completo, beneficio limitado al inicio, o un plan sin preguntas con espera.",
     "pageTitle": "Seguro de gastos finales con problemas de salud",
     "metaDescription": "Qué opciones de seguro de gastos finales existen con condiciones de salud, sin jerga técnica. Guía de Mejor Vida Seguros.",
@@ -24,31 +24,35 @@
       "No publicamos una lista de enfermedades que “siempre aprueban” o “siempre rechazan.” Eso sería inventar el resultado de su solicitud."
     ],
     "cta": {
-      "title": "Vea un precio para su situación",
-      "body": "Mejor Vida Seguros compara compañías de gastos finales. Empiece con una cotización gratuita, agende una llamada o escríbanos por WhatsApp.",
+      "title": "Cotice con lo que el médico escribió",
+      "body": "Mejor Vida Seguros compara compañías de gastos finales. Empiece con una cotización gratuita o agende una llamada.",
       "quote": "Cotización gratuita",
       "schedule": "Agendar una llamada"
     },
     "blocks": [
       {
         "type": "p",
-        "text": "La gente llega a esta pregunta con miedo: diabetes, presión alta, un infarto antiguo, EPOC, un cáncer tratado. El miedo es comprensible. El error es asumir que solo existen dos respuestas, sí o no, en una sola compañía."
+        "text": "Diabetes, presión alta, un infarto antiguo, EPOC (enfermedad pulmonar obstructiva crónica), un cáncer ya tratado: la gente llega a esta pregunta con miedo. El error es asumir que solo existen dos respuestas —sí o no— en una sola compañía. Un diagnóstico cambia el tipo de plan que la compañía puede ofrecer. No siempre cierra todas las puertas."
       },
       {
         "type": "h2",
-        "text": "Primero, el concepto: la compañía está midiendo riesgo, no moral"
+        "text": "Qué miden las preguntas de salud"
       },
       {
         "type": "p",
-        "text": "Un seguro de vida paga si usted fallece mientras el contrato está vigente. Si un diagnóstico hace más probable un fallecimiento pronto, la compañía o sube el precio, o limita el beneficio al inicio, o no emite ese producto. Eso no es un juicio sobre su carácter. Es cómo se construye el producto."
+        "text": "Un seguro de vida paga si usted fallece mientras el contrato está vigente. Si un diagnóstico hace más probable un fallecimiento pronto, la compañía o sube el precio, o limita el beneficio al inicio, o no emite ese producto. No es un juicio sobre su carácter. Es cómo se construye el producto. En gastos finales, esas decisiones suelen hacerse con el formulario, no con una cita en el consultorio."
       },
       {
         "type": "h2",
-        "text": "Tres resultados posibles, en lenguaje cotidiano"
+        "text": "Tres resultados posibles"
       },
       {
-        "type": "p",
-        "text": "Uno: califica a un plan que paga el monto completo por una muerte natural cubierta desde el primer pago. Dos: hay preguntas, pero los primeros años pagan menos o devuelven primas más un interés del contrato si la muerte no es accidental. Tres: no hay preguntas; la compañía acepta a cambio de una espera y, casi siempre, un precio más alto por dólar y un tope de monto más bajo."
+        "type": "ul",
+        "items": [
+          "Califica a un plan que paga el monto completo por una muerte natural cubierta desde el primer pago.",
+          "Hay preguntas, pero los primeros años pagan menos o devuelven primas más un interés del contrato si la muerte no es accidental. Eso es un periodo de espera: el tiempo al inicio en el que el cheque completo puede no aplicar.",
+          "No hay preguntas de salud. La compañía acepta —aceptación garantizada— a cambio de una espera y, casi siempre, un precio más alto por dólar y un tope de monto más bajo."
+        ]
       },
       {
         "type": "p",
@@ -65,19 +69,19 @@
         ],
         "rows": [
           [
-            "Estable y las preguntas se responden “no” a eventos recientes",
-            "Plan de beneficio completo",
-            "Edad máxima, monto máximo, prima"
+            "Estable, y las preguntas sobre eventos recientes se responden “no”",
+            "Un plan de beneficio completo (paga el monto desde el primer pago si se emite así).",
+            "Edad máxima para comprar, monto máximo y prima mensual."
           ],
           [
             "Hay un evento reciente o un diagnóstico que el formulario marca",
-            "Plan con espera, u otra compañía",
-            "Cuántos años dura la espera y qué paga un accidente cubierto"
+            "Un plan con periodo de espera, u otra compañía con otro cuestionario.",
+            "Cuántos años dura la espera y qué paga un accidente cubierto durante ese tiempo."
           ],
           [
             "Las preguntas de varios productos no dan emisión",
-            "Aceptación garantizada",
-            "Tope de monto, edad máxima (a menudo cerca de 80 en la línea que cotizamos) y qué pasa en los dos primeros años"
+            "Aceptación garantizada (sin preguntas de salud).",
+            "Tope de monto, edad máxima (a menudo cerca de 80 en la línea que cotizamos) y qué pasa en los dos primeros años."
           ]
         ],
         "foot": "Living Promise, Accendo, Transamerica, Americo y American Amicable no comparten un solo cuestionario."
@@ -88,11 +92,11 @@
       },
       {
         "type": "h2",
-        "text": "Compañías, después de entender los caminos"
+        "text": "Por qué cotizar más de una compañía"
       },
       {
         "type": "p",
-        "text": "Mejor Vida Seguros compara compañías designadas —entre ellas Mutual of Omaha, American Amicable, Accendo, Transamerica, Americo, Assurity y Corebridge— según edad, estado y respuestas. Corebridge de aceptación garantizada, en la línea que cotizamos, suele emitir de 50 a 80, de $5,000 a $25,000, sin preguntas de salud, con espera de unos dos años para muerte no accidental. Un accidente cubierto puede pagar el monto desde el inicio, según el contrato."
+        "text": "Mejor Vida Seguros compara compañías designadas —entre ellas Mutual of Omaha, American Amicable, Accendo, Transamerica, Americo, Assurity y Corebridge— según edad, el estado donde vive y sus respuestas. No publicamos aquí un gráfico de salud de Assurity. Corebridge de aceptación garantizada, en la línea que cotizamos, suele emitir de 50 a 80, de $5,000 a $25,000, sin preguntas de salud, con espera de unos dos años para muerte no accidental. Un accidente cubierto puede pagar el monto desde el inicio, según el contrato."
       },
       {
         "type": "faq",
@@ -110,6 +114,15 @@
             "a": "A veces un evento tiene que cumplir meses o años que el formulario pide. A veces esperar solo hace el precio más alto por edad. No hay una regla única; se mira la fecha del diagnóstico y el presupuesto."
           }
         ]
+      },
+      {
+        "type": "sources",
+        "items": [
+          {
+            "label": "NAIC — Life insurance consumer information",
+            "url": "https://content.naic.org/consumer/life-insurance.htm"
+          }
+        ]
       }
     ]
   },
@@ -118,7 +131,7 @@
     "aiFreePledgeModalTitle": "How this guide is reviewed",
     "aiFreePledgeModalBody": "The Mejor Vida Insurance team reviews this guide against appointed-company materials and public sources. Quotes and approval depend on the insurer, your state, and your application.",
     "question": "Can I get final expense insurance with health conditions?",
-    "headline": "Imperfect health and final expense insurance: what options remain",
+    "headline": "Final expense insurance with health conditions: what options usually remain",
     "dek": "A diagnosis does not automatically close the door. It changes the type of plan: full benefit, a limited benefit at first, or a no-questions plan with a wait.",
     "pageTitle": "Final expense insurance with health conditions",
     "metaDescription": "What final expense options exist with health conditions, without technical jargon. A guide from Mejor Vida Insurance.",
@@ -129,31 +142,35 @@
       "We do not publish a list of conditions that “always approve” or “always decline.” That would invent the outcome of your application."
     ],
     "cta": {
-      "title": "See a price for your situation",
-      "body": "Mejor Vida Insurance compares final expense companies. Start with a free quote, schedule a call, or message us on WhatsApp.",
+      "title": "Quote with what the doctor wrote",
+      "body": "Mejor Vida Insurance compares final expense companies. Start with a free quote or schedule a call.",
       "quote": "Get a free quote",
       "schedule": "Schedule a call"
     },
     "blocks": [
       {
         "type": "p",
-        "text": "People arrive at this question afraid: diabetes, high blood pressure, an old heart attack, COPD, treated cancer. The fear is understandable. The mistake is assuming there are only two answers, yes or no, at a single company."
+        "text": "Diabetes, high blood pressure, an old heart attack, COPD (chronic obstructive pulmonary disease), treated cancer: people arrive at this question afraid. The mistake is assuming there are only two answers — yes or no — at a single company. A diagnosis changes the type of plan a company can offer. It does not always close every door."
       },
       {
         "type": "h2",
-        "text": "First, the idea: the company is measuring risk, not character"
+        "text": "What the health questions are measuring"
       },
       {
         "type": "p",
-        "text": "Life insurance pays if you die while the contract is in force. If a diagnosis makes an early death more likely, the company may raise the price, limit the early benefit, or not issue that product. That is not a judgment of your character. It is how the product is built."
+        "text": "Life insurance pays if you die while the contract is in force. If a diagnosis makes an early death more likely, the company may raise the price, limit the early benefit, or not issue that product. That is not a judgment of your character. It is how the product is built. On final expense, those decisions are usually made from the form, not from an office exam."
       },
       {
         "type": "h2",
-        "text": "Three possible results, in everyday language"
+        "text": "Three possible results"
       },
       {
-        "type": "p",
-        "text": "One: you qualify for a plan that pays the full amount for a covered natural death from the first payment. Two: there are still questions, but the first years pay less or return premiums plus contract interest if death is not accidental. Three: there are no questions; the company accepts you in exchange for a wait and, almost always, a higher price per dollar and a lower amount cap."
+        "type": "ul",
+        "items": [
+          "You qualify for a plan that pays the full amount for a covered natural death from the first payment.",
+          "There are still questions, but the first years pay less or return premiums plus contract interest if death is not accidental. That is a waiting period: the early time when the full check may not apply.",
+          "There are no health questions. The company accepts you — guaranteed acceptance — in exchange for a wait and, almost always, a higher price per dollar and a lower amount cap."
+        ]
       },
       {
         "type": "p",
@@ -171,18 +188,18 @@
         "rows": [
           [
             "Stable, and recent-event questions are answered “no”",
-            "Full-benefit plan",
-            "Maximum age, maximum amount, premium"
+            "A full-benefit plan (pays the amount from the first payment if issued that way).",
+            "Maximum age to buy, maximum amount, and the monthly premium."
           ],
           [
             "A recent event or a diagnosis the form flags",
-            "Waiting-period plan, or another company",
-            "How many years the wait lasts and what a covered accident pays"
+            "A waiting-period plan, or another company with a different questionnaire.",
+            "How many years the wait lasts and what a covered accident pays during that time."
           ],
           [
             "Questions on several products will not issue",
-            "Guaranteed acceptance",
-            "Amount cap, maximum age (often near 80 on the line we quote), and what happens in the first two years"
+            "Guaranteed acceptance (no health questions).",
+            "Amount cap, maximum age (often near 80 on the line we quote), and what happens in the first two years."
           ]
         ],
         "foot": "Living Promise, Accendo, Transamerica, Americo, and American Amicable do not share one questionnaire."
@@ -193,11 +210,11 @@
       },
       {
         "type": "h2",
-        "text": "Companies, after the paths are clear"
+        "text": "Why quote more than one company"
       },
       {
         "type": "p",
-        "text": "Mejor Vida Insurance compares appointed companies — including Mutual of Omaha, American Amicable, Accendo, Transamerica, Americo, Assurity, and Corebridge — by age, state, and answers. Corebridge guaranteed acceptance, on the line we quote, typically issues ages 50–80, $5,000–$25,000, with no health questions, and about a two-year wait for non-accidental death. A covered accident can pay the face from the start, as the contract writes it."
+        "text": "Mejor Vida Insurance compares appointed companies — including Mutual of Omaha, American Amicable, Accendo, Transamerica, Americo, Assurity, and Corebridge — by age, the state where you live, and your answers. We do not publish an Assurity health chart here. Corebridge guaranteed acceptance, on the line we quote, typically issues ages 50–80, $5,000–$25,000, with no health questions, and about a two-year wait for non-accidental death. A covered accident can pay the face from the start, as the contract writes it."
       },
       {
         "type": "faq",
@@ -213,6 +230,15 @@
           {
             "q": "Should I wait until I am “healthier”?",
             "a": "Sometimes an event has to pass months or years the form requires. Sometimes waiting only makes the price higher because of age. There is no single rule; look at the diagnosis date and the budget."
+          }
+        ]
+      },
+      {
+        "type": "sources",
+        "items": [
+          {
+            "label": "NAIC — Life insurance consumer information",
+            "url": "https://content.naic.org/consumer/life-insurance.htm"
           }
         ]
       }

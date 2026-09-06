@@ -13,7 +13,7 @@
     "aiFreePledgeModalTitle": "Cómo se revisa esta guía",
     "aiFreePledgeModalBody": "El equipo de Mejor Vida Seguros revisa esta guía con materiales de compañías designadas y fuentes públicas. Las cotizaciones y la aprobación dependen de la aseguradora, del estado y de su solicitud.",
     "question": "¿Cuánto tiempo tarda en aprobarse una póliza de gastos finales?",
-    "headline": "De la cotización al sí: qué pasos hay y qué no prometemos",
+    "headline": "Cuánto tarda la aprobación de gastos finales: los pasos, sin reloj de 24 horas",
     "dek": "Una cotización no es una póliza. La compañía revisa la solicitud y decide. A veces es rápido. A veces pide más datos. No hay un reloj legal de “24 horas” para todos los casos.",
     "pageTitle": "Cuánto tarda la aprobación de un seguro de gastos finales",
     "metaDescription": "Qué pasos hay desde cotizar un seguro de gastos finales hasta que la compañía decide. Guía de Mejor Vida Seguros.",
@@ -24,32 +24,32 @@
       "Hasta que la póliza esté emitida y vigente según el contrato, no asuma que hay cobertura."
     ],
     "cta": {
-      "title": "Vea un precio para su situación",
-      "body": "Mejor Vida Seguros compara compañías de gastos finales. Empiece con una cotización gratuita, agende una llamada o escríbanos por WhatsApp.",
+      "title": "Empiece con una cotización gratuita",
+      "body": "Mejor Vida Seguros compara compañías de gastos finales. Vea un precio o agende una llamada para revisar la solicitud con calma.",
       "quote": "Cotización gratuita",
       "schedule": "Agendar una llamada"
     },
     "blocks": [
       {
         "type": "p",
-        "text": "La prisa es humana: un diagnóstico nuevo, un funeral reciente en la familia, un viaje. Aun así, el seguro es un contrato. La compañía tiene derecho a revisar lo que usted firmó."
+        "text": "Un diagnóstico nuevo, un funeral reciente en la familia o un viaje pueden hacer que la espera se sienta larga. Aun así, el seguro es un contrato. La compañía tiene derecho a revisar lo que usted firmó. Emitir significa que la compañía acepta la solicitud y crea la póliza; vigente significa que la cobertura ya corre en las fechas que el contrato escribe — casi siempre tras emisión y el primer pago."
       },
       {
         "type": "h2",
-        "text": "El orden real de los pasos"
+        "text": "Cuatro pasos, en orden"
       },
       {
         "type": "ul",
         "items": [
-          "Una cotización estima la prima con edad, sexo, tabaco, estado y monto.",
-          "La solicitud añade identidad, beneficiarios y preguntas de salud (salvo aceptación garantizada).",
+          "Una cotización estima la prima —el precio periódico— con edad, sexo, tabaco, estado donde vive y monto. Todavía no hay cobertura.",
+          "La solicitud añade identidad, beneficiarios y preguntas de salud (salvo aceptación garantizada, que no hace preguntas de salud).",
           "La compañía acepta, ofrece otro tipo de plan, pide más información o declina.",
           "Si acepta, hay que pagar la primera prima para que la cobertura arranque en la fecha que el contrato escribe."
         ]
       },
       {
         "type": "h2",
-        "text": "Qué puede ir rápido — y qué no"
+        "text": "Cuánto suele tardar — y qué no prometemos"
       },
       {
         "type": "p",
@@ -69,31 +69,31 @@
         ],
         "rows": [
           [
-            "Tener fechas de diagnósticos y nombres de medicamentos",
-            "La cola interna de la compañía"
+            "Tener a mano fechas de diagnósticos y nombres de medicamentos.",
+            "La cola interna de la compañía."
           ],
           [
-            "Revisar que el beneficiario y la dirección estén bien escritos",
-            "Si piden más documentos de salud"
+            "Revisar que el nombre del beneficiario y la dirección estén bien escritos.",
+            "Si piden más documentos de salud."
           ],
           [
-            "Asegurar que el pago de la primera prima se procese",
-            "Un recorte de sistema o una revisión aleatoria"
+            "Asegurar que el pago de la primera prima se procese.",
+            "Una revisión extra que usted no ve."
           ],
           [
-            "Responder el teléfono o el correo si piden una aclaración",
-            "El calendario de un médico si piden un registro"
+            "Responder el teléfono o el correo si piden una aclaración.",
+            "El calendario de un médico si piden un registro."
           ]
         ],
-        "foot": "Una solicitud de aceptación garantizada evita preguntas de salud, no evita identidad, pago y reglas del producto."
+        "foot": "Una solicitud de aceptación garantizada evita preguntas de salud. No evita identidad, pago y reglas del producto."
       },
       {
         "type": "h2",
-        "text": "Después del “sí”"
+        "text": "Después del “sí”: vigencia y pagos"
       },
       {
         "type": "p",
-        "text": "Guarde la póliza, confirme la fecha de vigencia y cómo se pagará cada mes. Si el banco rechaza un débito, puede haber un periodo de gracia; si se agota, la póliza puede caducar. El tiempo de aprobación no sirve de nada si el pago no continúa."
+        "text": "Guarde la póliza, confirme la fecha de vigencia y cómo se pagará cada mes. Si el banco rechaza un débito, puede haber un periodo de gracia —un plazo extra, escrito en el contrato, para ponerse al día antes de que la póliza caduque. Si ese plazo se agota, la póliza puede cancelarse y no pagar. El tiempo de aprobación no sirve de nada si el pago no continúa."
       },
       {
         "type": "faq",
@@ -101,6 +101,10 @@
           {
             "q": "¿Estoy cubierto el día que lleno la web?",
             "a": "Por lo general no. La cobertura sigue las fechas del contrato, casi siempre tras emisión y primer pago. Pregunte esa fecha en su caso."
+          },
+          {
+            "q": "¿Aprobado y vigente son lo mismo?",
+            "a": "No. Aprobado significa que la compañía aceptó la solicitud. Vigente significa que la cobertura ya corre según el contrato, casi siempre después del primer pago."
           },
           {
             "q": "¿Puedo acelerar pagando más?",
@@ -111,6 +115,15 @@
             "a": "En esa compañía y producto, sí para esa solicitud. Otra compañía o un plan con espera puede seguir abierto. Mejor Vida Seguros cotiza más de una vía cuando tiene sentido."
           }
         ]
+      },
+      {
+        "type": "sources",
+        "items": [
+          {
+            "label": "NAIC — Life insurance consumer information",
+            "url": "https://content.naic.org/consumer/life-insurance.htm"
+          }
+        ]
       }
     ]
   },
@@ -119,7 +132,7 @@
     "aiFreePledgeModalTitle": "How this guide is reviewed",
     "aiFreePledgeModalBody": "The Mejor Vida Insurance team reviews this guide against appointed-company materials and public sources. Quotes and approval depend on the insurer, your state, and your application.",
     "question": "How long does final expense approval take?",
-    "headline": "From quote to yes: the steps, and what we will not promise",
+    "headline": "How long final expense approval takes: the steps, with no 24-hour clock",
     "dek": "A quote is not a policy. The company reviews the application and decides. Sometimes it is fast. Sometimes it asks for more. There is no legal 24-hour clock for every case.",
     "pageTitle": "How long final expense approval takes",
     "metaDescription": "The steps from quoting final expense insurance to the company’s decision. A guide from Mejor Vida Insurance.",
@@ -130,32 +143,32 @@
       "Until the policy is issued and in force as the contract writes it, do not assume you have coverage."
     ],
     "cta": {
-      "title": "See a price for your situation",
-      "body": "Mejor Vida Insurance compares final expense companies. Start with a free quote, schedule a call, or message us on WhatsApp.",
+      "title": "Start with a free quote",
+      "body": "Mejor Vida Insurance compares final expense companies. See a price or schedule a call to walk through the application.",
       "quote": "Get a free quote",
       "schedule": "Schedule a call"
     },
     "blocks": [
       {
         "type": "p",
-        "text": "Hurry is human: a new diagnosis, a recent funeral in the family, a trip. Even so, insurance is a contract. The company has the right to review what you signed."
+        "text": "A new diagnosis, a recent funeral in the family, or a trip can make the wait feel long. Even so, insurance is a contract. The company has the right to review what you signed. Issue means the company accepts the application and creates the policy; in force means coverage has started on the dates the contract writes — almost always after issue and the first payment."
       },
       {
         "type": "h2",
-        "text": "The real order of steps"
+        "text": "Four steps, in order"
       },
       {
         "type": "ul",
         "items": [
-          "A quote estimates the premium with age, sex, tobacco, state, and amount.",
-          "The application adds identity, beneficiaries, and health questions (except guaranteed acceptance).",
+          "A quote estimates the premium — the regular price — with age, sex, tobacco, the state where you live, and amount. There is still no coverage.",
+          "The application adds identity, beneficiaries, and health questions (except guaranteed acceptance, which skips health questions).",
           "The company accepts, offers another plan type, asks for more information, or declines.",
           "If it accepts, the first premium must be paid so coverage starts on the date the contract writes."
         ]
       },
       {
         "type": "h2",
-        "text": "What can go quickly — and what cannot"
+        "text": "How long it often takes — and what we will not promise"
       },
       {
         "type": "p",
@@ -175,31 +188,31 @@
         ],
         "rows": [
           [
-            "Have diagnosis dates and medication names ready",
-            "The company’s internal queue"
+            "Have diagnosis dates and medication names ready.",
+            "The company’s internal queue."
           ],
           [
-            "Check that the beneficiary and address are spelled correctly",
-            "Whether they ask for more health documents"
+            "Check that the beneficiary name and address are spelled correctly.",
+            "Whether they ask for more health documents."
           ],
           [
-            "Make sure the first premium payment processes",
-            "A system cut or a random review"
+            "Make sure the first premium payment processes.",
+            "An extra review you cannot see."
           ],
           [
-            "Answer the phone or email if they need a clarification",
-            "A doctor’s timeline if a record is requested"
+            "Answer the phone or email if they need a clarification.",
+            "A doctor’s timeline if a record is requested."
           ]
         ],
         "foot": "A guaranteed-acceptance application skips health questions. It does not skip identity, payment, and product rules."
       },
       {
         "type": "h2",
-        "text": "After the “yes”"
+        "text": "After the “yes”: in-force date and payments"
       },
       {
         "type": "p",
-        "text": "Keep the policy, confirm the in-force date, and how each month will be paid. If the bank rejects a draft, there may be a grace period; if it runs out, the policy can lapse. Approval time is worthless if the payment does not continue."
+        "text": "Keep the policy, confirm the in-force date, and how each month will be paid. If the bank rejects a draft, there may be a grace period — extra time, written in the contract, to catch up before the policy lapses. If that time runs out, the policy can cancel and not pay. Approval time is worthless if the payment does not continue."
       },
       {
         "type": "faq",
@@ -209,12 +222,25 @@
             "a": "Usually not. Coverage follows the contract dates, almost always after issue and the first payment. Ask for that date in your case."
           },
           {
+            "q": "Are “approved” and “in force” the same?",
+            "a": "No. Approved means the company accepted the application. In force means coverage has started as the contract writes it, almost always after the first payment."
+          },
+          {
             "q": "Can I speed it up by paying more?",
             "a": "There is no VIP line. Completing the application well helps more than overpaying."
           },
           {
             "q": "If I am declined, is everything over?",
             "a": "At that company and product, yes for that application. Another company or a waiting-period plan may still be open. Mejor Vida Insurance quotes more than one path when it makes sense."
+          }
+        ]
+      },
+      {
+        "type": "sources",
+        "items": [
+          {
+            "label": "NAIC — Life insurance consumer information",
+            "url": "https://content.naic.org/consumer/life-insurance.htm"
           }
         ]
       }

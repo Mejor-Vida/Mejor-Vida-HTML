@@ -34,7 +34,7 @@ function renderFaq(block, lang) {
         `<div class="fe-guide-faq-item"><h3>${escHtml(item.q)}</h3><p>${renderInline(item.a)}</p></div>`
     )
     .join("\n");
-  return `<section class="fe-guide-faq-list" aria-label="${escHtml(title)}"><h2 class="h4 fw-bold mt-4 mb-3" style="color:#1a365d;">${escHtml(title)}</h2>\n${items}</section>`;
+  return `<section class="fe-guide-faq-list" aria-label="${escHtml(title)}"><h2 class="fe-guide-h2">${escHtml(title)}</h2>\n${items}</section>`;
 }
 
 function renderSources(block, lang) {
@@ -48,7 +48,7 @@ function renderSources(block, lang) {
       return `<li>${label}</li>`;
     })
     .join("\n");
-  return `<section class="fe-guide-sources"><h2 class="h6 fw-bold mb-2" style="color:#1a365d;">${escHtml(title)}</h2><ul>\n${items}\n</ul></section>`;
+  return `<section class="fe-guide-sources"><h2 class="fe-guide-h2 fe-guide-h2--small">${escHtml(title)}</h2><ul>\n${items}\n</ul></section>`;
 }
 
 function renderBlock(block, lang) {
@@ -57,18 +57,18 @@ function renderBlock(block, lang) {
   const type = block.type || (block.heading ? "h2p" : "p");
   if (type === "p") return `  <p>${renderInline(block.text || "")}</p>`;
   if (type === "h2") {
-    return `  <h2 class="h4 fw-bold mt-4 mb-2" style="color:#1a365d;">${escHtml(block.text)}</h2>`;
+    return `  <h2 class="fe-guide-h2">${escHtml(block.text)}</h2>`;
   }
   if (type === "h2p") {
     const heading = block.heading
-      ? `  <h2 class="h4 fw-bold mt-4 mb-2" style="color:#1a365d;">${escHtml(block.heading)}</h2>\n`
+      ? `  <h2 class="fe-guide-h2">${escHtml(block.heading)}</h2>\n`
       : "";
     return `${heading}  <p>${renderInline(block.text || "")}</p>`;
   }
   if (type === "ul") {
     const items = (block.items || []).map((item) => `    <li>${renderInline(item)}</li>`).join("\n");
     const heading = block.heading
-      ? `  <h2 class="h4 fw-bold mt-4 mb-2" style="color:#1a365d;">${escHtml(block.heading)}</h2>\n`
+      ? `  <h2 class="fe-guide-h2">${escHtml(block.heading)}</h2>\n`
       : "";
     return `${heading}  <ul class="fe-guide-list">\n${items}\n  </ul>`;
   }

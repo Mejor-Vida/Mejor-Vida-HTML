@@ -13,8 +13,8 @@
     "aiFreePledgeModalTitle": "Cómo se revisa esta guía",
     "aiFreePledgeModalBody": "El equipo de Mejor Vida Seguros revisa esta guía con materiales de compañías designadas y fuentes públicas. Las cotizaciones y la aprobación dependen de la aseguradora, del estado y de su solicitud.",
     "question": "¿Puedo obtener seguro de gastos finales si fumo?",
-    "headline": "Fumar y el seguro de gastos finales: hay opciones, a otro precio",
-    "dek": "El tabaco no suele cerrar la puerta. Cambia la clase de precio y, en algunos productos, las edades o montos máximos. Cada formulario define qué cuenta como fumar.",
+    "headline": "Fumar y el seguro de gastos finales: hay opciones, a otra clase de precio",
+    "dek": "El tabaco no suele cerrar la puerta. Cambia la clase de precio —la tarifa que aplica a la misma edad y monto— y, en algunos productos, las edades o montos máximos. Cada formulario define qué cuenta como fumar.",
     "pageTitle": "Seguro de gastos finales para fumadores",
     "metaDescription": "Cómo el tabaco afecta un seguro de gastos finales y qué opciones siguen existiendo. Guía de Mejor Vida Seguros.",
     "keyTakeaways": [
@@ -24,39 +24,63 @@
       "Hay que contestar la pregunta de tabaco como está escrita, incluyendo cigarrillo electrónico si el formulario lo incluye."
     ],
     "cta": {
-      "title": "Vea un precio para su situación",
-      "body": "Mejor Vida Seguros compara compañías de gastos finales. Empiece con una cotización gratuita, agende una llamada o escríbanos por WhatsApp.",
+      "title": "Vea un precio en su clase de tabaco",
+      "body": "Mejor Vida Seguros compara compañías de gastos finales. Empiece con una cotización gratuita —con tabaco, no con el anuncio de no fumador— o agende una llamada.",
       "quote": "Cotización gratuita",
       "schedule": "Agendar una llamada"
     },
     "blocks": [
       {
         "type": "p",
-        "text": "Un anuncio que muestra un precio bajo casi nunca es un precio de fumador. Si usted usa tabaco, compare con la clase que le corresponde. De lo contrario, el “ahorro” es ficticio."
+        "text": "Sí, en muchos casos un fumador puede comprar un seguro de gastos finales. El tabaco rara vez equivale a un “no” automático. Lo que suele cambiar es la clase de precio: la misma edad y el mismo monto, un tarifario más alto. Un anuncio que muestra un precio bajo casi nunca es un precio de fumador. Si usted usa tabaco, compare con la clase que le corresponde."
       },
       {
         "type": "h2",
-        "text": "Por qué el precio sube"
+        "text": "Qué cuenta como tabaco: lo decide el formulario"
       },
       {
         "type": "p",
-        "text": "Las compañías de vida cobran más cuando el riesgo de fallecer es más alto. El tabaco entra en esa cuenta. No necesitamos un ensayo médico en esta página: el formulario ya separa fumador y no fumador."
-      },
-      {
-        "type": "p",
-        "text": "Lo que sí varía es la definición. Un producto puede preguntar por nicotina en los últimos 12 meses. Otro puede incluir vapeo o mascar. Un tercero puede tratar el cigarrillo social igual que el diario. No unificamos esas reglas."
+        "text": "Las compañías de vida cobran más cuando el riesgo de fallecer es más alto. El tabaco entra en esa cuenta. Lo que varía es la definición. Un producto puede preguntar por nicotina en los últimos 12 meses. Otro puede incluir vapeo o mascar. Un tercero puede tratar el cigarrillo social igual que el diario. No unificamos esas reglas. Lea la pregunta tal como está escrita."
       },
       {
         "type": "h2",
-        "text": "Qué sigue abierto"
+        "text": "Fumar no equivale a “solo queda el plan sin preguntas”"
       },
       {
         "type": "p",
-        "text": "Los mismos caminos que para no fumadores: un plan de beneficio completo si las demás preguntas lo permiten, un plan con espera, o aceptación garantizada. El tabaco por sí solo no equivale a “solo queda el plan sin preguntas.” En algunos diseños, el tabaco o un beneficio limitado corta la edad máxima antes (a veces cerca de 75). Hay que ver el producto, no una regla nacional."
+        "text": "Siguen abiertos los mismos caminos que para no fumadores: un plan de beneficio completo si las demás preguntas de salud lo permiten, un plan con periodo de espera, o aceptación garantizada. El periodo de espera es el tiempo al inicio en el que una muerte no accidental puede pagar menos que el monto completo. El tabaco por sí solo no lo manda a aceptación garantizada. En algunos diseños, el tabaco o un beneficio limitado corta la edad máxima antes (a veces cerca de 75). Hay que ver el producto, no una regla nacional."
       },
       {
-        "type": "note",
-        "text": "No inventamos primas de fumador en una tabla en esta guía. Una cotización con su edad, sexo, estado y uso de tabaco es la cifra que importa. Las tablas educativas de $10,000 en otras páginas de Mejor Vida son de no fumador y buena salud."
+        "type": "table",
+        "caption": "Qué suele cambiar — y qué no inventamos",
+        "lead": "Esta tabla es conceptual. No hay un multiplicador de fumador publicado aquí porque no es el mismo en todos los productos.",
+        "headers": [
+          "Tema",
+          "Qué suele pasar si usa tabaco"
+        ],
+        "rows": [
+          [
+            "¿Puede comprar?",
+            "A menudo sí. El tabaco no suele cerrar todas las puertas por sí solo."
+          ],
+          [
+            "Prima (precio periódico)",
+            "Suele ser una clase de precio más alta para la misma edad y el mismo monto."
+          ],
+          [
+            "¿Cuánto más cara?",
+            "No publicamos un factor único. Cada producto usa su propia tabla."
+          ],
+          [
+            "Plan de beneficio completo",
+            "Sigue siendo posible si las otras preguntas de salud lo permiten."
+          ],
+          [
+            "Edad o monto máximo",
+            "En algunos diseños se recorta antes (a veces cerca de 75). Depende del producto."
+          ]
+        ],
+        "foot": "Una cotización con su edad, sexo, estado donde vive y uso de tabaco es la cifra que importa. Las tablas educativas de $10,000 en otras páginas de Mejor Vida Seguros son de no fumador y buena salud."
       },
       {
         "type": "h2",
@@ -68,11 +92,11 @@
       },
       {
         "type": "h2",
-        "text": "Compañías"
+        "text": "Cada compañía pregunta el tabaco a su manera"
       },
       {
         "type": "p",
-        "text": "Mutual of Omaha, American Amicable, Accendo, Transamerica, Americo, Assurity y Corebridge, entre las que Mejor Vida Seguros puede cotizar, tienen sus propias preguntas de tabaco. Mejor Vida no recomienda mentir para “entrar” en la clase más barata: un reclamo posterior puede revisarse contra esas respuestas."
+        "text": "Mutual of Omaha, American Amicable, Accendo, Transamerica, Americo, Assurity y Corebridge, entre las que Mejor Vida Seguros puede cotizar, tienen sus propias preguntas de tabaco. Mejor Vida Seguros no recomienda mentir para “entrar” en la clase más barata: un reclamo posterior puede revisarse contra esas respuestas."
       },
       {
         "type": "faq",
@@ -86,8 +110,21 @@
             "a": "No lo tratamos como idéntico en todas las compañías. Algunos formularios lo separan. Hay que usar el texto de esa solicitud."
           },
           {
+            "q": "¿Cuánto tiempo después de dejar de fumar paso a no fumador?",
+            "a": "Los meses que pida ese formulario, no el día que deja el cigarro. No publicamos un número nacional único."
+          },
+          {
             "q": "¿Puedo comprar y luego decir que dejé de fumar?",
             "a": "La clase se fija con las respuestas de la solicitud, salvo que el contrato permita un cambio posterior. No prometemos un descenso de prima el mes en que deja el cigarro."
+          }
+        ]
+      },
+      {
+        "type": "sources",
+        "items": [
+          {
+            "label": "NAIC — Life insurance consumer information",
+            "url": "https://content.naic.org/consumer/life-insurance.htm"
           }
         ]
       }
@@ -98,8 +135,8 @@
     "aiFreePledgeModalTitle": "How this guide is reviewed",
     "aiFreePledgeModalBody": "The Mejor Vida Insurance team reviews this guide against appointed-company materials and public sources. Quotes and approval depend on the insurer, your state, and your application.",
     "question": "Can I get final expense insurance if I smoke?",
-    "headline": "Smoking and final expense insurance: options exist, at a different price",
-    "dek": "Tobacco does not usually close the door. It changes the price class and, on some products, maximum ages or amounts. Each form defines what counts as smoking.",
+    "headline": "Smoking and final expense insurance: options exist, in a different price class",
+    "dek": "Tobacco does not usually close the door. It changes the price class — the rate table for the same age and amount — and, on some products, maximum ages or amounts. Each form defines what counts as smoking.",
     "pageTitle": "Final expense insurance for smokers",
     "metaDescription": "How tobacco affects final expense insurance and what options still exist. A guide from Mejor Vida Insurance.",
     "keyTakeaways": [
@@ -109,39 +146,63 @@
       "Answer the tobacco question as written, including e-cigarettes if the form includes them."
     ],
     "cta": {
-      "title": "See a price for your situation",
-      "body": "Mejor Vida Insurance compares final expense companies. Start with a free quote, schedule a call, or message us on WhatsApp.",
+      "title": "See a price in your tobacco class",
+      "body": "Mejor Vida Insurance compares final expense companies. Start with a free quote — in the tobacco class, not the non-smoker ad — or schedule a call.",
       "quote": "Get a free quote",
       "schedule": "Schedule a call"
     },
     "blocks": [
       {
         "type": "p",
-        "text": "An ad that shows a low price is almost never a smoker price. If you use tobacco, compare the class that applies to you. Otherwise the “savings” are fictional."
+        "text": "Yes, in many cases a smoker can buy final expense insurance. Tobacco rarely equals an automatic “no.” What usually changes is the price class: the same age and amount, a higher rate table. An ad that shows a low price is almost never a smoker price. If you use tobacco, compare the class that applies to you."
       },
       {
         "type": "h2",
-        "text": "Why the price rises"
+        "text": "What counts as tobacco: the form decides"
       },
       {
         "type": "p",
-        "text": "Life companies charge more when the chance of dying is higher. Tobacco is part of that math. We do not need a medical essay on this page: the form already splits tobacco and non-tobacco."
-      },
-      {
-        "type": "p",
-        "text": "What does vary is the definition. One product may ask about nicotine in the last 12 months. Another may include vaping or chewing. A third may treat a social cigarette like daily use. We do not flatten those rules."
+        "text": "Life companies charge more when the chance of dying is higher. Tobacco is part of that math. What varies is the definition. One product may ask about nicotine in the last 12 months. Another may include vaping or chewing. A third may treat a social cigarette like daily use. We do not flatten those rules. Read the question as written."
       },
       {
         "type": "h2",
-        "text": "What stays open"
+        "text": "Smoking does not equal “only the no-questions plan is left”"
       },
       {
         "type": "p",
-        "text": "The same paths as for non-smokers: a full-benefit plan if the other questions allow it, a waiting-period plan, or guaranteed acceptance. Tobacco alone does not equal “only the no-questions plan is left.” On some designs, tobacco or a limited benefit cuts the maximum age earlier (sometimes near 75). That is product-specific, not a national rule."
+        "text": "The same paths stay open as for non-smokers: a full-benefit plan if the other health questions allow it, a waiting-period plan, or guaranteed acceptance. A waiting period is the early time when a non-accidental death may pay less than the full amount. Tobacco alone does not send you to guaranteed acceptance. On some designs, tobacco or a limited benefit cuts the maximum age earlier (sometimes near 75). That is product-specific, not a national rule."
       },
       {
-        "type": "note",
-        "text": "We do not invent smoker premiums in a table in this guide. A quote with your age, sex, state, and tobacco use is the figure that matters. Educational $10,000 tables on other Mejor Vida pages are non-tobacco, good health."
+        "type": "table",
+        "caption": "What usually changes — and what we do not invent",
+        "lead": "This table is conceptual. We do not publish a smoker multiplier here because it is not the same on every product.",
+        "headers": [
+          "Topic",
+          "What usually happens if you use tobacco"
+        ],
+        "rows": [
+          [
+            "Can you buy?",
+            "Often yes. Tobacco does not usually close every door by itself."
+          ],
+          [
+            "Premium (regular price)",
+            "Usually a higher price class for the same age and amount."
+          ],
+          [
+            "How much higher?",
+            "We do not publish one factor. Each product uses its own table."
+          ],
+          [
+            "Full-benefit plan",
+            "Still possible if the other health questions allow it."
+          ],
+          [
+            "Maximum age or amount",
+            "On some designs it is cut earlier (sometimes near 75). It depends on the product."
+          ]
+        ],
+        "foot": "A quote with your age, sex, state where you live, and tobacco use is the figure that matters. Educational $10,000 tables on other Mejor Vida Insurance pages are non-tobacco, good health."
       },
       {
         "type": "h2",
@@ -153,11 +214,11 @@
       },
       {
         "type": "h2",
-        "text": "Companies"
+        "text": "Each company asks about tobacco in its own way"
       },
       {
         "type": "p",
-        "text": "Mutual of Omaha, American Amicable, Accendo, Transamerica, Americo, Assurity, and Corebridge, among companies Mejor Vida Insurance can quote, have their own tobacco questions. Mejor Vida does not recommend lying to “get into” the cheaper class: a later claim can be reviewed against those answers."
+        "text": "Mutual of Omaha, American Amicable, Accendo, Transamerica, Americo, Assurity, and Corebridge, among companies Mejor Vida Insurance can quote, have their own tobacco questions. Mejor Vida Insurance does not recommend lying to “get into” the cheaper class: a later claim can be reviewed against those answers."
       },
       {
         "type": "faq",
@@ -171,8 +232,21 @@
             "a": "We do not treat it as identical at every company. Some forms separate it. Use the wording on that application."
           },
           {
+            "q": "How long after quitting do I get non-tobacco rates?",
+            "a": "The months that form requires, not the day you put the cigarette down. We do not publish one national number."
+          },
+          {
             "q": "Can I buy and then say I quit?",
-            "a": "The class is set by the application answers unless the contract allows a later change. We do not promise a premium drop the month you put the cigarette down."
+            "a": "The class is set by the application answers unless the contract allows a later change. We do not promise a premium drop the month you stop."
+          }
+        ]
+      },
+      {
+        "type": "sources",
+        "items": [
+          {
+            "label": "NAIC — Life insurance consumer information",
+            "url": "https://content.naic.org/consumer/life-insurance.htm"
           }
         ]
       }

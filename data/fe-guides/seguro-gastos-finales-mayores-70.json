@@ -13,26 +13,26 @@
     "aiFreePledgeModalTitle": "Cómo se revisa esta guía",
     "aiFreePledgeModalBody": "El equipo de Mejor Vida Seguros revisa esta guía con materiales de compañías designadas y fuentes públicas. Las cotizaciones y la aprobación dependen de la aseguradora, del estado y de su solicitud.",
     "question": "Seguro de gastos finales para personas mayores de 70 años",
-    "headline": "Después de los 70: el seguro de gastos finales sigue existiendo, a otro precio",
-    "dek": "Pasar de los 70 no cierra automáticamente la puerta. Sube la prima, a veces baja el tope de monto, y un diagnóstico reciente pesa más. Varias compañías designadas todavía emiten.",
+    "headline": "Seguro de gastos finales después de los 70: todavía se emite, a otro precio y con otros topes",
+    "dek": "Cumplir 70 no cierra automáticamente la puerta. La prima sube, el tope de monto a veces baja, y un diagnóstico reciente pesa más. Varias compañías designadas siguen emitiendo. No publicamos emisión nueva de gastos finales a los 90.",
     "pageTitle": "Seguro de gastos finales después de los 70",
-    "metaDescription": "Opciones de seguro de gastos finales después de los 70 años, con edades y topes verificados de productos designados. Guía de Mejor Vida Seguros.",
+    "metaDescription": "Opciones de seguro de gastos finales después de los 70: edades de emisión, topes y ejemplos de prima. Guía de Mejor Vida Seguros.",
     "keyTakeaways": [
-      "Living Promise Nivelado y varios otros gastos finales designados emiten hasta los 85.",
-      "Accendo Level puede emitir hasta 89, con un tope de $25,000 a los 76–89.",
-      "La aceptación garantizada que cotizamos suele cortar cerca de 80.",
-      "A los 70, un $10,000 ilustrativo no fumador (agosto 2026) ronda $53 al mes (mujer) y $70 (hombre). A los 75, unos $71 y $97. Son ejemplos, no ofertas."
+      "Living Promise Nivelado y varios gastos finales designados emiten hasta los 85.",
+      "Accendo Level puede emitir hasta 89, con tope de $25,000 a los 76–89.",
+      "La aceptación garantizada que cotizamos suele cortar cerca de los 80.",
+      "A los 90 no publicamos emisión nueva de gastos finales. Un $10,000 ilustrativo no fumador (agosto 2026) ronda $53 / $70 al mes a los 70 (mujer / hombre) y $71 / $97 a los 75."
     ],
     "cta": {
-      "title": "Vea un precio para su situación",
-      "body": "Mejor Vida Seguros compara compañías de gastos finales. Empiece con una cotización gratuita, agende una llamada o escríbanos por WhatsApp.",
+      "title": "Vea un precio a su edad",
+      "body": "Mejor Vida Seguros compara gastos finales después de los 70. Cotización gratuita, una llamada o WhatsApp.",
       "quote": "Cotización gratuita",
       "schedule": "Agendar una llamada"
     },
     "blocks": [
       {
         "type": "p",
-        "text": "A los 70 muchas personas sienten que “ya es tarde.” Para un temporal largo, a menudo sí se estrecha. Para un gasto final permanente, todavía hay mostrador. El mostrador cobra más y pregunta más."
+        "text": "A los 70 mucha gente cree que “ya es tarde.” Para un seguro temporal largo, el mercado a menudo se estrecha. Para un gasto final permanente —vida entera pensada para funeral y cuentas pequeñas— todavía hay productos. Cobran más, preguntan más, y a veces limitan el monto."
       },
       {
         "type": "h2",
@@ -40,15 +40,50 @@
       },
       {
         "type": "p",
-        "text": "El precio mensual para el mismo $10,000 es más alto que a los 60. La salud acumulada —hospitalizaciones, oxígeno, un evento del corazón— decide si el plan paga completo o si hay espera. El temporal de 20 o 30 años casi no es el tema; el funeral sí."
+        "text": "Edad de emisión es la edad que la compañía usa al venderle la póliza. El mismo $10,000 cuesta más a los 70 que a los 60. La salud acumulada —hospital, oxígeno, un evento del corazón— decide si el plan paga el monto completo desde el inicio o si hay periodo de espera. El tope es el máximo que ese producto emitirá a su edad; no es lo mismo que el funeral que usted quiere."
+      },
+      {
+        "type": "p",
+        "text": "Aceptación garantizada significa sin preguntas de salud y, en la línea que cotizamos, con espera. Suele dejar de emitirse cerca de los 80. Un plan con preguntas, si califica, puede llegar más lejos en edad."
       },
       {
         "type": "table",
-        "caption": "Productos que todavía hablan con los 70 y pico",
-        "lead": "Rangos educativos. El estado y el tabaco pueden recortar.",
+        "caption": "Ejemplo educativo: $10,000 al mes, no fumador, buena salud",
+        "lead": "Cifras de tablas educativas de compañías designadas, agosto 2026. No son una oferta. Tabaco, salud y estado cambian el número.",
+        "headers": [
+          "Edad",
+          "Mujer (aprox.)",
+          "Hombre (aprox.)"
+        ],
+        "rows": [
+          [
+            "70",
+            "$53",
+            "$70"
+          ],
+          [
+            "75",
+            "$71",
+            "$97"
+          ]
+        ],
+        "foot": "Un monto más alto cuesta más. Si la prima no se puede mantener, un $10,000 vigente protege más que un $25,000 que caduca."
+      },
+      {
+        "type": "h2",
+        "text": "Productos designados que todavía emiten en los 70"
+      },
+      {
+        "type": "p",
+        "text": "Estas filas son rangos educativos. El estado y el tabaco pueden recortarlos. “Cotizar” significa que no publicamos un tope inventado."
+      },
+      {
+        "type": "table",
+        "caption": "Edad máxima para comprar y tope de monto",
+        "lead": "Compañías con las que Mejor Vida Seguros tiene contrato (designadas), cuando el producto se ofrece para su solicitud.",
         "headers": [
           "Producto",
-          "Hasta qué edad (comprar)",
+          "Hasta qué edad se puede comprar",
           "Tope de monto a tener en cuenta"
         ],
         "rows": [
@@ -92,30 +127,35 @@
       },
       {
         "type": "h2",
-        "text": "Cómo no gastar de más"
+        "text": "Elija un monto que pueda seguir pagando"
       },
       {
         "type": "p",
-        "text": "Un monto de $25,000 a los 74 puede ser correcto si hay deudas. También puede ser una prima que no se podrá pagar a los 78. Es mejor un $10,000 que se mantiene vigente que un $25,000 que caduca. Caducar a esta edad suele significar cotizar otra vez más caro, o ya no calificar al mismo plan."
+        "text": "Un $25,000 a los 74 puede ser correcto si hay deudas. También puede ser una prima que a los 78 ya no entra. Caducar a esta edad suele significar cotizar otra vez más caro, o ya no calificar al mismo plan. El funeral no se abarata por cumplir años: la mediana nacional de la funeraria sigue siendo un marco (NFDA 2023), y el pago de $255 del Seguro Social no lo cubre."
       },
       {
         "type": "note",
-        "text": "Un temporal de 10 años a veces existe a los 70 u 80; no es el mismo producto que un gasto final. No lo usamos como atajo de entierro si el plazo se acaba mientras el funeral sigue pendiente."
+        "text": "Un temporal de 10 años a veces existe a los 70 u 80. No es un gasto final: si el plazo se acaba en vida, no hay cheque para el funeral. No lo usamos como atajo de entierro."
       },
       {
         "type": "faq",
+        "heading": "Preguntas frecuentes",
         "items": [
           {
             "q": "¿A los 72 todavía hay plan sin espera?",
-            "a": "Sí, si las preguntas de salud lo permiten. No es automático."
+            "a": "Sí, si las preguntas de salud lo permiten y la compañía emite beneficio completo. No es automático."
+          },
+          {
+            "q": "¿Puedo comprar un gasto final nuevo a los 90?",
+            "a": "No publicamos emisión nueva de gastos finales a los 90. El producto más alto de esta tabla (Accendo Level) llega hasta 89, si califica y está disponible."
           },
           {
             "q": "¿El precio baja si ya cobro Seguro Social?",
-            "a": "No. El Seguro Social no fija la tarifa de vida. El pago de $255 por fallecimiento es otro programa, y no alcanza para un funeral típico."
+            "a": "No. El Seguro Social no fija la tarifa de vida. El pago único por fallecimiento es $255 si un sobreviviente califica y lo solicita; no alcanza para un funeral típico."
           },
           {
             "q": "¿Debo leer también la guía de mayores de 80?",
-            "a": "Si está cerca de 80 o ya los cumplió, sí: los topes de monto y las compañías se estrechan otra vez."
+            "a": "Si está cerca de 80 o ya los cumplió, sí: los topes y las compañías se estrechan otra vez."
           }
         ]
       },
@@ -139,26 +179,26 @@
     "aiFreePledgeModalTitle": "How this guide is reviewed",
     "aiFreePledgeModalBody": "The Mejor Vida Insurance team reviews this guide against appointed-company materials and public sources. Quotes and approval depend on the insurer, your state, and your application.",
     "question": "Final expense insurance for people over 70",
-    "headline": "After 70: final expense insurance still exists, at a different price",
-    "dek": "Turning 70 does not automatically close the door. The premium rises, the amount cap sometimes falls, and a recent diagnosis weighs more. Several appointed companies still issue.",
+    "headline": "Final expense insurance after 70: it still issues, at a different price and cap",
+    "dek": "Turning 70 does not automatically close the door. The premium rises, the amount cap sometimes falls, and a recent diagnosis weighs more. Several appointed companies still issue. We do not publish new final expense issue at age 90.",
     "pageTitle": "Final expense insurance over 70",
-    "metaDescription": "Final expense options after age 70, with verified issue ages and caps from appointed products. A guide from Mejor Vida Insurance.",
+    "metaDescription": "Final expense options after age 70: issue ages, amount caps, and sample premiums. A guide from Mejor Vida Insurance.",
     "keyTakeaways": [
-      "Living Promise Level and several other appointed final expense plans issue through 85.",
+      "Living Promise Level and several appointed final expense plans issue through 85.",
       "Accendo Level can issue through 89, with a $25,000 cap at ages 76–89.",
       "Guaranteed acceptance we quote usually stops near 80.",
-      "At 70, an illustrative non-tobacco $10,000 (August 2026) is near $53 a month (woman) and $70 (man). At 75, about $71 and $97. Examples, not offers."
+      "We do not publish new final expense issue at 90. An illustrative non-tobacco $10,000 (August 2026) is near $53 / $70 a month at 70 (woman / man) and $71 / $97 at 75."
     ],
     "cta": {
-      "title": "See a price for your situation",
-      "body": "Mejor Vida Insurance compares final expense companies. Start with a free quote, schedule a call, or message us on WhatsApp.",
+      "title": "See a price at your age",
+      "body": "Mejor Vida Insurance compares final expense after 70. Free quote, a call, or WhatsApp.",
       "quote": "Get a free quote",
       "schedule": "Schedule a call"
     },
     "blocks": [
       {
         "type": "p",
-        "text": "At 70 many people feel it is “too late.” For long term life, the door often does narrow. For permanent final expense, there is still a counter. The counter charges more and asks more."
+        "text": "At 70 many people feel it is “too late.” For a 20- or 30-year term policy, the market often narrows. For permanent final expense — whole life meant for a funeral and small bills — products still exist. They cost more, ask more, and sometimes cap the amount."
       },
       {
         "type": "h2",
@@ -166,15 +206,50 @@
       },
       {
         "type": "p",
-        "text": "The monthly price for the same $10,000 is higher than at 60. Accumulated health — hospital stays, oxygen, a heart event — decides whether the plan pays in full or there is a wait. Twenty- or 30-year term is rarely the topic; the funeral is."
+        "text": "Issue age is the age the company uses when it sells you the policy. The same $10,000 costs more at 70 than at 60. Accumulated health — a hospital stay, oxygen, a heart event — decides whether the plan pays the full amount from the start or there is a waiting period. The cap is the most that product will issue at your age; it is not the same as the funeral you want."
+      },
+      {
+        "type": "p",
+        "text": "Guaranteed acceptance means no health questions and, on the line we quote, a wait. It usually stops issuing near 80. A plan with questions, if you qualify, can go further in age."
       },
       {
         "type": "table",
-        "caption": "Products that still speak to the 70s",
-        "lead": "Educational ranges. State and tobacco can shorten them.",
+        "caption": "Educational example: $10,000 a month, non-tobacco, good health",
+        "lead": "Figures from appointed-company educational tables, August 2026. Not an offer. Tobacco, health, and state change the number.",
+        "headers": [
+          "Age",
+          "Woman (about)",
+          "Man (about)"
+        ],
+        "rows": [
+          [
+            "70",
+            "$53",
+            "$70"
+          ],
+          [
+            "75",
+            "$71",
+            "$97"
+          ]
+        ],
+        "foot": "A higher amount costs more. If the premium cannot be kept up, an in-force $10,000 protects more than a $25,000 that lapses."
+      },
+      {
+        "type": "h2",
+        "text": "Appointed products that still issue in the 70s"
+      },
+      {
+        "type": "p",
+        "text": "These rows are educational ranges. State and tobacco can shorten them. “Quote” means we do not publish an invented cap."
+      },
+      {
+        "type": "table",
+        "caption": "Maximum age to buy and amount cap",
+        "lead": "Companies Mejor Vida Insurance is appointed with, when the product is offered for your application.",
         "headers": [
           "Product",
-          "Through what age (to buy)",
+          "Through what age you can buy",
           "Amount cap to watch"
         ],
         "rows": [
@@ -218,26 +293,31 @@
       },
       {
         "type": "h2",
-        "text": "How not to overspend"
+        "text": "Pick an amount you can keep paying"
       },
       {
         "type": "p",
-        "text": "A $25,000 amount at 74 can be right if there are debts. It can also be a premium you cannot pay at 78. A $10,000 that stays in force is better than a $25,000 that lapses. Lapsing at this age usually means quoting again at a higher price, or no longer qualifying for the same plan."
+        "text": "A $25,000 amount at 74 can be right if there are debts. It can also be a premium that no longer fits at 78. Lapsing at this age usually means quoting again at a higher price, or no longer qualifying for the same plan. Funerals do not get cheaper with age: the national funeral-home median is still a scale (NFDA 2023), and Social Security’s $255 payment does not cover it."
       },
       {
         "type": "note",
-        "text": "A 10-year term sometimes exists at 70 or 80; it is not the same product as final expense. We do not use it as a burial shortcut if the term ends while the funeral is still ahead."
+        "text": "A 10-year term sometimes exists at 70 or 80. It is not final expense: if the term ends during your life, there is no check for the funeral. We do not use it as a burial shortcut."
       },
       {
         "type": "faq",
+        "heading": "Common questions",
         "items": [
           {
             "q": "At 72, is a no-wait plan still possible?",
-            "a": "Yes, if the health questions allow it. It is not automatic."
+            "a": "Yes, if the health questions allow it and the company issues a full benefit. It is not automatic."
+          },
+          {
+            "q": "Can I buy a new final expense policy at 90?",
+            "a": "We do not publish new final expense issue at 90. The highest product in this table (Accendo Level) goes through 89, if you qualify and it is available."
           },
           {
             "q": "Does the price drop if I already collect Social Security?",
-            "a": "No. Social Security does not set life-insurance rates. The $255 death payment is a different program, and it does not cover a typical funeral."
+            "a": "No. Social Security does not set life-insurance rates. The lump-sum death payment is $255 if a qualifying survivor applies; it does not cover a typical funeral."
           },
           {
             "q": "Should I also read the over-80 guide?",

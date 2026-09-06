@@ -33,7 +33,7 @@
 <link href="../css/site-footer.css?v=20260721-lip-page" rel="stylesheet"/>
 <link href="../css/mvi-assistant-widget.css?v=20260721-chat-z" rel="stylesheet"/>
 <link href="../css/fontawesome-mvi.min.css?v=20260723-brands-fix" rel="stylesheet"/>
-<link href="../css/fe-guide.css?v=20260906-hero3" rel="stylesheet"/>
+<link href="../css/fe-guide.css?v=20260906-edit" rel="stylesheet"/>
 <link href="../css/life-insurance-cost.css?v=20260906-fe-rail" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -81,6 +81,14 @@
       "acceptedAnswer": {
         "@type": "Answer",
         "text": "En un gasto final típico, no. Envía el beneficio al beneficiario."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Puedo nombrar al hospital como beneficiario?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No es el diseño habitual y puede no ser práctico. Lo usual es nombrar a una persona de confianza que pague las cuentas."
       }
     },
     {
@@ -629,7 +637,7 @@
 </nav>
 <h1>El seguro no paga al hospital: paga a su beneficiario</h1>
 
-<p class="fe-guide-hero-dek">Un seguro de gastos finales es un cheque en efectivo. No es un pagador de facturas médicas. La familia puede usar ese dinero para deudas del hospital, el funeral u otra necesidad.</p>
+<p class="fe-guide-hero-dek">Un seguro de gastos finales es un cheque en efectivo para el beneficiario — la persona que usted nombró. No es un pagador de facturas médicas. La familia puede usar ese dinero para deudas del hospital, el funeral u otra necesidad.</p>
 <p class="fe-guide-updated"><strong>Actualizado el:</strong> 6 de septiembre de 2026 · <button type="button" class="fe-guide-disclosures-link" id="fe-guide-disclosures-btn" aria-haspopup="dialog" aria-controls="fe-guide-disclosures-modal">Divulgaciones</button></p>
 </div>
 </div>
@@ -640,42 +648,46 @@
 <div class="fe-guide-takeaways-body">
 <ul>
     <li>El beneficiario recibe efectivo. No hay una lista obligatoria de “solo funeral.”</li>
-    <li>Medicare y el seguro de salud, si aplican, son quienes tratan las cuentas médicas en vida o justo después, según sus reglas. El gasto final no sustituye a Medicare.</li>
-    <li>Una factura médica grande puede superar el monto de la póliza. El seguro no borra el resto por arte de magia.</li>
+    <li>Medicare y el seguro de salud, si aplican, son quienes tratan las cuentas médicas según sus reglas. El gasto final no sustituye a Medicare.</li>
+    <li>Una factura médica grande puede superar el monto de la póliza. El seguro no borra el resto.</li>
     <li>Quién debe una deuda médica después de un fallecimiento depende de la ley del estado y de la herencia. Eso es tema legal, no de una cotización.</li>
 </ul>
 </div>
 </section>
 <article class="fe-guide-body" id="fe-guide-body">
-  <p>La confusión nace del nombre. “Gastos finales” suena a un paquete que incluye hospital, farmacia y funeraria. En el contrato, casi siempre es vida: un monto fijo a una persona que usted eligió.</p>
-  <h2 class="h4 fw-bold mt-4 mb-2" style="color:#1a365d;">Qué hace el cheque — y qué no</h2>
-  <p>La aseguradora paga al beneficiario (o los beneficiarios) según la póliza. Ese dinero puede ir a un saldo del hospital, a la cremación, a un vuelo o a una cuenta de ahorros. La compañía de vida no se sienta a negociar con el hospital. Tampoco “aprueba” cada factura.</p>
-  <p>Medicare cubre servicios de salud que califican. No está diseñado para el funeral. Una factura que Medicare no pagó puede quedar para el caudal hereditario o para quien la firmó. El gasto final es un fondo extra, no un reemplazo de Medicare.</p>
-  <h2 class="h4 fw-bold mt-4 mb-2" style="color:#1a365d;">Cómo dimensionar si hay deudas médicas</h2>
-  <p>Sume un estimado honesto de facturas que no están cubiertas, más el funeral. Si el total es $18,000 y la póliza es $10,000, la familia todavía tiene $8,000 de conversación. Subir el monto, si el producto y la salud lo permiten, es una decisión de prima mensual. No prometemos que un $10,000 “cubra todas las deudas médicas.”</p>
-<p class="fe-guide-table-lead">Mezclarlas es lo que genera expectativas imposibles.</p>
+  <p>El nombre genera confusión. “Gastos finales” suena a un paquete que incluye hospital, farmacia y funeraria. En el contrato casi siempre es seguro de vida: un monto fijo pagado a la persona que usted eligió.</p>
+  <h2 class="fe-guide-h2">Qué hace el cheque — y qué no</h2>
+  <p>La aseguradora paga al beneficiario (o a los beneficiarios) según la póliza. Ese dinero puede ir a un saldo del hospital, a la cremación, a un vuelo o a una cuenta de ahorros. La compañía de vida no negocia con el hospital. Tampoco aprueba cada factura.</p>
+  <h2 class="fe-guide-h2">Medicare es otra cuenta</h2>
+  <p>Medicare cubre servicios de salud que califican. No está diseñado para el funeral. Una factura que Medicare no pagó puede quedar para el caudal hereditario — los bienes de la persona fallecida — o para quien la firmó. El gasto final es un fondo extra, no un reemplazo de Medicare.</p>
+  <h2 class="fe-guide-h2">Cómo elegir el monto si hay deudas médicas</h2>
+  <p>Sume un estimado honesto de facturas que no están cubiertas, más el funeral. Si el total es $18,000 y la póliza es $10,000, a la familia todavía le faltan $8,000. Subir el monto, si el producto y la salud lo permiten, es una decisión de prima mensual. No prometemos que $10,000 cubra todas las deudas médicas.</p>
+<p class="fe-guide-table-lead">Mezclarlas crea expectativas que el contrato no cumple.</p>
 <div class="fe-guide-table-wrap"><table class="fe-guide-table"><caption>Tres cuentas distintas</caption><thead><tr><th scope="col">Cuenta</th><th scope="col">Quién suele pagarla</th><th scope="col">Rol del seguro de gastos finales</th></tr></thead><tbody>
 <tr><td>Factura del hospital o médico</td><td>Seguro de salud / Medicare / paciente o herencia</td><td>El beneficiario puede usar el cheque si quiere</td></tr>
 <tr><td>Funeral o cremación</td><td>Quien firma con la funeraria</td><td>Uso muy común del beneficio</td></tr>
 <tr><td>Deudas de tarjeta u otros préstamos</td><td>Según el contrato de esa deuda y la herencia</td><td>El beneficiario decide si ayuda a pagarlas</td></tr>
 </tbody></table></div>
 <p class="fe-guide-table-foot">Esta tabla no es asesoría legal ni fiscal.</p>
-  <h2 class="h4 fw-bold mt-4 mb-2" style="color:#1a365d;">Nombre del beneficiario</h2>
-  <p>Si el objetivo es que un hijo pague tanto el funeral como una factura, ese hijo debe estar nombrado (o un fideicomiso, si un abogado lo diseña). Nombrar “el hospital” no es el diseño habitual de estas pólizas y puede no ser práctico. Hable de nombres concretos, no de instituciones genéricas.</p>
-<section class="fe-guide-faq-list" aria-label="Preguntas frecuentes"><h2 class="h4 fw-bold mt-4 mb-3" style="color:#1a365d;">Preguntas frecuentes</h2>
+  <h2 class="fe-guide-h2">Quién debe figurar como beneficiario</h2>
+  <p>Si el objetivo es que un hijo pague el funeral y una factura, ese hijo debe estar nombrado (o un fideicomiso, si un abogado lo diseña). Nombrar “el hospital” no es el diseño habitual de estas pólizas y puede no ser práctico. Use nombres concretos, no instituciones genéricas.</p>
+<section class="fe-guide-faq-list" aria-label="Preguntas frecuentes"><h2 class="fe-guide-h2">Preguntas frecuentes</h2>
 <div class="fe-guide-faq-item"><h3>¿La aseguradora envía el dinero al hospital?</h3><p>En un gasto final típico, no. Envía el beneficio al beneficiario.</p></div>
+<div class="fe-guide-faq-item"><h3>¿Puedo nombrar al hospital como beneficiario?</h3><p>No es el diseño habitual y puede no ser práctico. Lo usual es nombrar a una persona de confianza que pague las cuentas.</p></div>
 <div class="fe-guide-faq-item"><h3>¿Medicare paga el funeral si hay deudas médicas grandes?</h3><p>Medicare no está diseñado para funerales, haya o no deudas médicas.</p></div>
 <div class="fe-guide-faq-item"><h3>¿Mis hijos heredan automáticamente mis facturas médicas?</h3><p>No lo afirmamos como regla nacional. Depende del estado, de quién firmó y de la herencia. Consulte a un abogado.</p></div></section>
-<section class="fe-guide-sources"><h2 class="h6 fw-bold mb-2" style="color:#1a365d;">Fuentes públicas</h2><ul>
+<section class="fe-guide-sources"><h2 class="fe-guide-h2 fe-guide-h2--small">Fuentes públicas</h2><ul>
 <li><a href="https://www.medicare.gov/what-medicare-covers" rel="noopener" target="_blank">Medicare.gov — what Medicare covers</a></li>
 <li><a href="https://content.naic.org/consumer/life-insurance.htm" rel="noopener" target="_blank">NAIC — Life insurance consumer information</a></li>
 </ul></section>
 <section class="fe-guide-cta" aria-label="Siguiente paso" id="fe-guide-cta">
-<h2 class="h5 fw-bold mb-2" style="color:#1a365d;">Vea un precio para su situación</h2>
-<p class="mb-3 small text-body-secondary">Mejor Vida Seguros compara compañías de gastos finales. Empiece con una cotización gratuita, agende una llamada o escríbanos por WhatsApp.</p>
-<a class="btn btn-primary me-2 mb-2" href="../quote.html">Cotización gratuita</a>
-<a class="btn btn-outline-primary me-2 mb-2" href="../schedule-julie.html">Agendar una llamada</a>
-<a class="btn fe-guide-btn-whatsapp mb-2" href="https://wa.me/14024405438?text=Hola%2C%20quiero%20una%20cotizaci%C3%B3n%20gratis%20de%20seguro%20de%20gastos%20finales." rel="noopener" target="_blank"><i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp</a>
+<h2 class="fe-guide-cta-title">Elija un monto con sus facturas en mente</h2>
+<p class="fe-guide-cta-body">Mejor Vida Seguros cotiza el monto que usted necesita. Pida una cotización gratuita o agende una llamada.</p>
+<div class="fe-guide-cta-actions">
+<a class="btn btn-primary" href="../quote.html">Cotización gratuita</a>
+<a class="btn btn-outline-primary" href="../schedule-julie.html">Agendar una llamada</a>
+<a class="btn fe-guide-btn-whatsapp" href="https://wa.me/14024405438?text=Hola%2C%20quiero%20una%20cotizaci%C3%B3n%20gratis%20de%20seguro%20de%20gastos%20finales." rel="noopener" target="_blank"><i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp</a>
+</div>
 </section>
 <section aria-label="Avisos legales" class="fe-guide-disclosures" id="fe-guide-disclosures">
 <h2>Divulgaciones</h2>
@@ -684,7 +696,7 @@
   <p>Las cotizaciones en este sitio son estimaciones. La prima final y la aprobación dependen de la solicitud completa y la decisión de la aseguradora.</p>
 </section>
 <section class="fe-guide-related">
-<h2 class="h6 fw-bold mb-3" style="color:#1a365d;">Guías relacionadas</h2>
+<h2 class="fe-guide-h2 fe-guide-h2--small">Guías relacionadas</h2>
 <ul>
     <li><a href="beneficio-seguro-gastos-finales-familia.html">¿Puedo dejar dinero a mi familia además del funeral?</a></li>
     <li><a href="que-son-gastos-finales.html">¿Qué son los gastos finales?</a></li>

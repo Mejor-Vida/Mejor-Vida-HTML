@@ -13,81 +13,122 @@
     "aiFreePledgeModalTitle": "Cómo se revisa esta guía",
     "aiFreePledgeModalBody": "El equipo de Mejor Vida Seguros revisa esta guía con materiales de compañías designadas y fuentes públicas. Las cotizaciones y la aprobación dependen de la aseguradora, del estado y de su solicitud.",
     "question": "¿Puedo cancelar un seguro de gastos finales?",
-    "headline": "Cancelar o dejar de pagar: qué se pierde y qué no prometemos devolver",
-    "dek": "Sí puede terminar una póliza. Cuando deja de estar vigente, el beneficio ya no se pagará. Un reembolso no es automático: depende del contrato, de un posible valor en efectivo y de las reglas de devolución de su estado.",
+    "headline": "Cancelar un seguro de gastos finales: la cobertura se acaba; un reembolso no es automático",
+    "dek": "Sí puede terminar la póliza. Cuando deja de estar vigente, esa compañía ya no pagará el beneficio. Que le devuelvan primas depende del contrato, de un posible valor en efectivo y de las reglas de su estado — no es una promesa de esta guía.",
     "pageTitle": "Cancelar un seguro de gastos finales",
-    "metaDescription": "Qué ocurre si cancela o deja de pagar un seguro de gastos finales. Guía de Mejor Vida Seguros.",
+    "metaDescription": "Qué ocurre si cancela o deja de pagar un seguro de gastos finales: cobertura, periodo de gracia, valor en efectivo y periodo de prueba. Guía de Mejor Vida Seguros.",
     "keyTakeaways": [
-      "Usted puede pedir la cancelación o simplemente dejar que la póliza caduque por falta de pago, según el contrato.",
-      "Sin póliza vigente, no hay cheque para la familia.",
-      "No prometemos que le devuelvan todas las primas. Algunos contratos tienen valor en efectivo; otros, en la práctica, muy poco al inicio.",
-      "Hay un periodo de gracia para una prima atrasada. Agotado ese tiempo, la cobertura puede terminar."
+      "Puede pedir la cancelación o dejar de pagar. Tras el periodo de gracia, la falta de pago puede caducar la póliza.",
+      "Sin póliza vigente no hay beneficio para la familia por ese contrato.",
+      "No prometemos que le devuelvan las primas. El periodo de prueba, el periodo de gracia y el valor en efectivo son del contrato y del estado.",
+      "Cancelar y comprar otra póliza reinicia salud, edad y, si aplica, el periodo de espera."
     ],
     "cta": {
-      "title": "Vea un precio para su situación",
-      "body": "Mejor Vida Seguros compara compañías de gastos finales. Empiece con una cotización gratuita, agende una llamada o escríbanos por WhatsApp.",
+      "title": "Compare antes de cancelar",
+      "body": "Mejor Vida Seguros compara gastos finales. Cotización gratuita, una llamada o WhatsApp.",
       "quote": "Cotización gratuita",
       "schedule": "Agendar una llamada"
     },
     "blocks": [
       {
         "type": "p",
-        "text": "La gente cancela porque el presupuesto cambió, porque compró otra póliza, o porque un vendedor agresivo la presionó. Antes de cortar, conviene saber qué hay del otro lado: no cobertura, y tal vez poco o nada de dinero de vuelta."
+        "text": "La gente cancela porque la prima ya no cabe, porque hay otra póliza, o porque se sintió presionada al comprar. Antes de cortar, conviene separar tres cosas: si sigue cubierto, qué pasa con el dinero ya pagado, y si una póliza nueva le deja en peor sitio (edad, salud o una espera)."
       },
       {
         "type": "h2",
-        "text": "Tres formas en que una póliza se apaga"
+        "text": "Términos que importan al cancelar"
       },
       {
         "type": "ul",
         "items": [
-          "Usted pide por escrito (o por el canal que la compañía acepte) que la cancelen.",
-          "Un débito no pasa y, tras el periodo de gracia, la póliza caduca.",
-          "En un periodo corto de “prueba” al inicio, algunas pólizas permiten devolver el contrato según la ley del estado. Eso no dura para siempre."
+          "Dueño (contratante): quien controla la póliza. El asegurado es la persona cuya vida está cubierta; a veces no es la misma persona.",
+          "Periodo de prueba (free look): una ventana corta al inicio, fijada por el estado y el contrato, en la que a veces se puede devolver la póliza. No dura todo el primer año.",
+          "Periodo de gracia: tiempo extra, escrito en el contrato, para pagar una prima atrasada antes de que la cobertura pueda caducar.",
+          "Caducidad: la póliza termina porque no se pagó a tiempo, después de esa gracia.",
+          "Valor en efectivo (valor de rescate): dinero que algunas pólizas permanentes acumulan. En muchos gastos finales de monto pequeño, al principio es poco o nulo para efectos prácticos.",
+          "Reinstalación: volver a poner en vigor una póliza caducada si el contrato lo permite, casi siempre con primas atrasadas y pruebas de salud. No es un derecho automático."
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "Tres formas en que termina la cobertura",
+        "lead": "En los tres caminos, el beneficio deja de pagarse cuando el contrato ya no está vigente. Lo que ocurre con el dinero ya pagado no es el mismo en cada fila.",
+        "headers": [
+          "Cómo termina",
+          "Qué pasa con la cobertura",
+          "Qué pasa con las primas ya pagadas"
+        ],
+        "rows": [
+          [
+            "Usted pide la cancelación",
+            "Termina cuando la compañía la registra por el canal que acepta",
+            "No hay reembolso automático de todo lo pagado"
+          ],
+          [
+            "Deja de pagar (caducidad)",
+            "Puede terminar cuando se agota el periodo de gracia",
+            "Tampoco hay reembolso automático"
+          ],
+          [
+            "Periodo de prueba al inicio",
+            "Devuelve el contrato según la ley del estado y el papel",
+            "Si hay devolución, la fija ese marco — no esta guía"
+          ]
+        ],
+        "foot": "Si el contrato tiene valor en efectivo, puede haber un valor de rescate al cancelar. No publicamos un porcentaje. Si un vendedor dijo “te devuelven todo el primer año,” pida esa frase por escrito."
+      },
+      {
+        "type": "h2",
+        "text": "El dinero ya pagado no es una cuenta de ahorros"
+      },
+      {
+        "type": "p",
+        "text": "Las primas pagaron el riesgo de esos meses: la compañía estaba obligada a pagar si usted fallecía cubierto. Eso no se convierte, por sí solo, en un saldo a devolver. Un seguro de vida no funciona como un depósito que se retira entero."
+      },
+      {
+        "type": "note",
+        "text": "Mejor Vida Seguros no promete que cancelar le devuelva primas. El periodo de prueba, la gracia y el valor en efectivo hay que leerlos en su contrato y en las reglas de su estado."
+      },
+      {
+        "type": "h2",
+        "text": "Antes de cancelar, mire el motivo"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "La prima no cabe: a veces un monto más bajo en otra póliza cuesta menos. Edad y salud actuales vuelven a contar. Un $5,000 vigente suele proteger más que un $10,000 que caduca.",
+          "Hay dos pólizas para el mismo funeral: cancelar la duplicada puede tener sentido, si la que queda está vigente y el monto le alcanza.",
+          "Está dentro de un periodo de espera: cancelar y empezar otra póliza suele reiniciar ese reloj.",
+          "Se arrepintió recién emitida: pregunte si todavía está en el periodo de prueba. Esa ventana es corta y estatal; no la alargamos en esta página."
         ]
       },
       {
         "type": "h2",
-        "text": "Qué pasa con el dinero ya pagado"
+        "text": "Cómo terminar la póliza sin dejar un hueco"
       },
       {
         "type": "p",
-        "text": "Un seguro de vida no es una cuenta de ahorros. Las primas pagaron el riesgo de esos meses. Si hay valor en efectivo, el contrato dice si puede pedir una parte al cancelar. En muchos gastos finales de monto pequeño, ese valor al principio es limitado o nulo para efectos prácticos. No inventamos un porcentaje de devolución."
-      },
-      {
-        "type": "note",
-        "text": "Si alguien le dijo “recupera todo si cancelas el primer año,” pida esa frase en el contrato. Si no está escrita, no la damos por cierta."
-      },
-      {
-        "type": "h2",
-        "text": "Antes de cancelar, compare el motivo"
-      },
-      {
-        "type": "p",
-        "text": "Si la prima no cabe, a veces se puede bajar el monto en una póliza nueva o buscar otra compañía — la salud y la edad actual cuentan otra vez. Si hay dos pólizas para el mismo funeral, cancelar la duplicada puede tener sentido. Si está dentro de una espera y ya pagó un año, cancelar reinicia el reloj en cualquier póliza nueva."
-      },
-      {
-        "type": "h2",
-        "text": "Cómo hacerlo con cuidado"
-      },
-      {
-        "type": "p",
-        "text": "Confirme con la compañía que la cancelación quedó registrada. Guarde el correo o la carta. No asuma que “no pagar un mes” es una pausa: puede ser el inicio de una caducidad. Si un agente de Mejor Vida Seguros le ayudó a emitir, puede ayudar a leer las opciones; la decisión de terminar es suya."
+        "text": "Confirme que usted es el dueño. Use el canal que la compañía acepte (a menudo por escrito). Pida confirmación y guárdela. No trate “saltar un mes” como una pausa: puede ser el inicio de una caducidad. Si un agente de Mejor Vida Seguros le ayudó a emitir, puede ayudarle a leer las opciones; decidir terminar es suyo."
       },
       {
         "type": "faq",
+        "heading": "Preguntas frecuentes",
         "items": [
           {
-            "q": "¿Me pueden impedir cancelar?",
-            "a": "Como dueño, en general puede terminar el contrato. El prestamista si hay una cesión, o un dueño distinto del asegurado, cambia el quién. Lea quién figura como dueño."
+            "q": "¿Me devuelven lo que ya pagué?",
+            "a": "No lo prometemos. Fuera del periodo de prueba, un reembolso de todas las primas no es lo habitual. Si hay valor en efectivo, el contrato dice si puede pedir un rescate. Pida números a la compañía, no a un anuncio."
           },
           {
-            "q": "¿Cancelar afecta mi crédito?",
-            "a": "No tratamos la cancelación de vida como una cuenta de tarjeta. Una funeraria impagada es otra deuda. No mezclamos esos informes."
+            "q": "¿La compañía puede impedirme cancelar?",
+            "a": "El dueño, en general, puede terminar el contrato. Si hay una cesión (por ejemplo a un prestamista) o el dueño no es el asegurado, quien firma no es cualquiera. Lea quién figura como dueño."
+          },
+          {
+            "q": "¿Cancelar daña mi crédito?",
+            "a": "La cancelación de un seguro de vida no la tratamos como una tarjeta impagada. Una factura de funeraria sin pagar es otra deuda. No mezclamos esos informes."
           },
           {
             "q": "¿Puedo reabrir la misma póliza después?",
-            "a": "A veces hay reinstalo si el contrato lo permite, con pruebas de salud y primas atrasadas. No es un derecho automático."
+            "a": "A veces hay reinstalación si el contrato lo permite, con salud y primas atrasadas. No es automático. Una póliza nueva es otra solicitud, a la edad y salud de hoy."
           }
         ]
       }
@@ -98,81 +139,122 @@
     "aiFreePledgeModalTitle": "How this guide is reviewed",
     "aiFreePledgeModalBody": "The Mejor Vida Insurance team reviews this guide against appointed-company materials and public sources. Quotes and approval depend on the insurer, your state, and your application.",
     "question": "Can I cancel final expense insurance?",
-    "headline": "Canceling or stopping payment: what you lose, and what we will not promise to refund",
-    "dek": "Yes, you can end a policy. When it is no longer in force, the benefit will not be paid. A refund is not automatic: it depends on the contract, any cash value, and your state’s return rules.",
+    "headline": "Canceling final expense insurance: coverage ends; a refund is not automatic",
+    "dek": "Yes, you can end the policy. When it is no longer in force, that company will not pay the benefit. Whether any premium comes back depends on the contract, any cash value, and your state’s rules — this guide does not promise a refund.",
     "pageTitle": "Canceling final expense insurance",
-    "metaDescription": "What happens if you cancel or stop paying final expense insurance. A guide from Mejor Vida Insurance.",
+    "metaDescription": "What happens if you cancel or stop paying final expense insurance: coverage, grace period, cash value, and free look. A guide from Mejor Vida Insurance.",
     "keyTakeaways": [
-      "You can request cancellation or simply let the policy lapse for nonpayment, as the contract allows.",
-      "With no in-force policy, there is no check for the family.",
-      "We do not promise that all premiums come back. Some contracts have cash value; others have little at the start for practical purposes.",
-      "There is a grace period for a late premium. After that time runs out, coverage can end."
+      "You can request cancellation or stop paying. After the grace period, nonpayment can lapse the policy.",
+      "With no in-force policy, that contract pays no benefit to the family.",
+      "We do not promise that premiums come back. Free look, grace period, and cash value are contract- and state-specific.",
+      "Canceling and buying a new policy restarts health, age, and any waiting period."
     ],
     "cta": {
-      "title": "See a price for your situation",
-      "body": "Mejor Vida Insurance compares final expense companies. Start with a free quote, schedule a call, or message us on WhatsApp.",
+      "title": "Compare before you cancel",
+      "body": "Mejor Vida Insurance compares final expense options. Free quote, a call, or WhatsApp.",
       "quote": "Get a free quote",
       "schedule": "Schedule a call"
     },
     "blocks": [
       {
         "type": "p",
-        "text": "People cancel because the budget changed, because they bought another policy, or because a hard sell pushed them. Before you cut it, it helps to know what is on the other side: no coverage, and maybe little or no money back."
+        "text": "People cancel because the premium no longer fits, because they have another policy, or because the sale felt like a hard push. Before you cut it, separate three questions: whether you are still covered, what happens to money already paid, and whether a new policy leaves you worse off (age, health, or a wait)."
       },
       {
         "type": "h2",
-        "text": "Three ways a policy turns off"
+        "text": "Terms that matter when you cancel"
       },
       {
         "type": "ul",
         "items": [
-          "You ask in writing (or through the channel the company accepts) to cancel.",
-          "A draft fails and, after the grace period, the policy lapses.",
-          "In a short “free look” at the start, some policies let you return the contract under state law. That window does not last forever."
+          "Owner: the person who controls the policy. The insured is the person whose life is covered; they are not always the same.",
+          "Free look: a short window at the start, set by the state and the contract, when you can sometimes return the policy. It does not last the whole first year.",
+          "Grace period: extra time, written in the contract, to pay a late premium before coverage can lapse.",
+          "Lapse: the policy ends because premiums were not paid on time, after that grace.",
+          "Cash value (surrender value): money some permanent policies build. On many small final expense plans, it is little or none at the start for practical purposes.",
+          "Reinstatement: putting a lapsed policy back in force if the contract allows it, almost always with back premiums and health proof. It is not an automatic right."
+        ]
+      },
+      {
+        "type": "table",
+        "caption": "Three ways coverage ends",
+        "lead": "In all three paths, the benefit stops when the contract is no longer in force. What happens to money already paid is not the same in every row.",
+        "headers": [
+          "How it ends",
+          "What happens to coverage",
+          "What happens to premiums already paid"
+        ],
+        "rows": [
+          [
+            "You request cancellation",
+            "It ends when the company records it through the channel it accepts",
+            "There is no automatic refund of everything paid"
+          ],
+          [
+            "You stop paying (lapse)",
+            "Coverage can end when the grace period runs out",
+            "There is no automatic refund here either"
+          ],
+          [
+            "Free look at the start",
+            "You return the contract under state law and the paper",
+            "If money comes back, that framework sets it — not this guide"
+          ]
+        ],
+        "foot": "If the contract has cash value, there may be a surrender value at cancel. We do not publish a percentage. If a salesperson said “you get everything back in year one,” ask for that sentence in writing."
+      },
+      {
+        "type": "h2",
+        "text": "Money already paid is not a savings account"
+      },
+      {
+        "type": "p",
+        "text": "Premiums paid for the risk in those months: the company was on the hook if you died covered. That does not, by itself, become a balance you withdraw. Life insurance is not a deposit you take out in full."
+      },
+      {
+        "type": "note",
+        "text": "Mejor Vida Insurance does not promise that canceling refunds premiums. Free look, grace, and cash value have to be read in your contract and your state’s rules."
+      },
+      {
+        "type": "h2",
+        "text": "Before you cancel, check the reason"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "The premium does not fit: a lower amount on a new policy sometimes costs less. Current age and health count again. An in-force $5,000 usually protects more than a $10,000 that lapses.",
+          "Two policies for the same funeral: canceling the duplicate can make sense if the one you keep is in force and the amount is enough.",
+          "You are inside a waiting period: canceling and starting another policy usually resets that clock.",
+          "You regret a brand-new issue: ask whether you are still in the free look. That window is short and state-specific; we do not stretch it on this page."
         ]
       },
       {
         "type": "h2",
-        "text": "What happens to money already paid"
+        "text": "How to end the policy without leaving a gap"
       },
       {
         "type": "p",
-        "text": "Life insurance is not a savings account. Premiums paid for the risk in those months. If there is cash value, the contract says whether you can take some of it at cancel. On many small final expense policies, that value is limited or practically none at the beginning. We do not invent a refund percentage."
-      },
-      {
-        "type": "note",
-        "text": "If someone told you “you get everything back if you cancel in year one,” ask for that sentence in the contract. If it is not written, we will not treat it as true."
-      },
-      {
-        "type": "h2",
-        "text": "Before you cancel, match the reason"
-      },
-      {
-        "type": "p",
-        "text": "If the premium does not fit, you can sometimes lower the amount on a new policy or try another company — current health and age count again. If there are two policies for the same funeral, canceling the duplicate may make sense. If you are inside a waiting period and already paid a year, canceling resets the clock on any new policy."
-      },
-      {
-        "type": "h2",
-        "text": "How to do it carefully"
-      },
-      {
-        "type": "p",
-        "text": "Confirm with the company that the cancellation was recorded. Keep the email or letter. Do not assume that “skipping a month” is a pause: it can be the start of a lapse. If a Mejor Vida Insurance agent helped you issue, they can help you read the options; ending the policy is your decision."
+        "text": "Confirm you are the owner. Use the channel the company accepts (often in writing). Ask for confirmation and keep it. Do not treat “skipping a month” as a pause: it can start a lapse. If a Mejor Vida Insurance agent helped you issue, they can help you read the options; ending the policy is your decision."
       },
       {
         "type": "faq",
+        "heading": "Common questions",
         "items": [
           {
-            "q": "Can they stop me from canceling?",
-            "a": "As owner, you can generally end the contract. A lender if there is an assignment, or an owner who is not the insured, changes who. Read who is listed as owner."
+            "q": "Do I get back what I already paid?",
+            "a": "We do not promise that. Outside the free look, a refund of all premiums is not the usual result. If there is cash value, the contract says whether you can take a surrender. Ask the company for numbers, not an advertisement."
+          },
+          {
+            "q": "Can the company stop me from canceling?",
+            "a": "The owner can generally end the contract. If there is an assignment (for example to a lender), or the owner is not the insured, the person who signs is not just anyone. Read who is listed as owner."
           },
           {
             "q": "Does canceling hurt my credit?",
-            "a": "We do not treat life-insurance cancellation like a credit-card account. An unpaid funeral home is a different debt. We do not mix those reports."
+            "a": "We do not treat life-insurance cancellation like an unpaid credit card. An unpaid funeral-home bill is a different debt. We do not mix those reports."
           },
           {
             "q": "Can I reopen the same policy later?",
-            "a": "Sometimes reinstatement is allowed if the contract says so, with health proof and back premiums. It is not an automatic right."
+            "a": "Sometimes reinstatement is allowed if the contract says so, with health proof and back premiums. It is not automatic. A new policy is a new application, at today’s age and health."
           }
         ]
       }

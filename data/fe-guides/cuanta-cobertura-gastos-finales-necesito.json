@@ -13,56 +13,49 @@
     "aiFreePledgeModalTitle": "Cómo se revisa esta guía",
     "aiFreePledgeModalBody": "El equipo de Mejor Vida Seguros revisa esta guía con materiales de compañías designadas y fuentes públicas. Las cotizaciones y la aprobación dependen de la aseguradora, del estado y de su solicitud.",
     "question": "¿Cuánta cobertura de gastos finales necesito?",
-    "headline": "Cómo elegir un monto de gastos finales sin adivinar",
-    "dek": "El monto correcto es el de sus cuentas reales, no un anuncio. Las medianas nacionales de funeral ayudan a dimensionar; la lista de precios de su funeraria es la cifra local.",
+    "headline": "Cuánta cobertura de gastos finales necesita: sume cuentas, no un anuncio",
+    "dek": "El monto de la póliza es lo que cobrará el beneficiario, no la prima. Empiece por el tipo de servicio, el cementerio si aplica y las deudas que no quiere dejar. Las medianas nacionales ayudan a dimensionar; la lista de precios de su funeraria es la cifra local.",
     "pageTitle": "Cuánta cobertura de gastos finales necesito",
-    "metaDescription": "Cómo decidir entre $5,000, $10,000 o $15,000 de seguro de gastos finales usando costos de funeral verificados. Guía de Mejor Vida Seguros.",
+    "metaDescription": "Cómo decidir entre $5,000, $10,000 o $15,000 de seguro de gastos finales con costos de funeral verificados. Guía de Mejor Vida Seguros.",
     "keyTakeaways": [
       "Sume funeral o cremación, cementerio si aplica, deudas pequeñas y un colchón para viajes o facturas médicas pendientes.",
-      "En 2023, la NFDA publicó una mediana nacional de $8,300 por funeral con velatorio y entierro, y $6,280 con velatorio y cremación, del lado de la funeraria. Parcela y lápida suelen ir aparte.",
-      "$5,000, $10,000 y $15,000 son puntos de partida comunes, no una receta universal.",
-      "Un monto más alto cuesta más cada mes. El tope también cambia por edad y producto."
+      "NFDA 2023, lado funeraria: mediana nacional $8,300 con velatorio y entierro; $6,280 con velatorio y cremación. Parcela y lápida suelen ir aparte.",
+      "$5,000, $10,000 y $15,000 son puntos de partida, no una receta. El tope del producto y la prima mensual también limitan el monto.",
+      "Un ejemplo educativo de $10,000, no fumador, buena salud (agosto 2026): unos $41 / $54 al mes a los 65 (mujer / hombre) y $71 / $97 a los 75."
     ],
     "cta": {
-      "title": "Vea un precio para su situación",
-      "body": "Mejor Vida Seguros compara compañías de gastos finales. Empiece con una cotización gratuita, agende una llamada o escríbanos por WhatsApp.",
+      "title": "Cotice el monto que está midiendo",
+      "body": "Mejor Vida Seguros compara $5,000, $10,000 y $15,000 según su caso. Cotización gratuita, una llamada o WhatsApp.",
       "quote": "Cotización gratuita",
       "schedule": "Agendar una llamada"
     },
     "blocks": [
       {
         "type": "p",
-        "text": "La pregunta “¿cuánto necesito?” no se responde con un número mágico. Se responde con una lista: qué tipo de servicio quiere, dónde será, si ya hay un lote en el cementerio y qué deudas no quiere dejar a nadie."
+        "text": "No hay un número mágico. Hay una lista: qué servicio quiere, dónde será, si ya hay parcela, y qué deudas no quiere dejar a nadie. Cobertura (o monto) es el beneficio por fallecimiento. Prima es lo que paga cada mes. Un monto que no se puede pagar no protege."
       },
       {
         "type": "h2",
-        "text": "Empiece por el servicio, no por el anuncio"
-      },
-      {
-        "type": "p",
-        "text": "Un velatorio con entierro no cuesta lo mismo que una cremación directa. La NFDA, en su estudio de listas de precios de 2023, publicó medianas nacionales del lado de la funeraria: $8,300 con velatorio y entierro, y $6,280 con velatorio y cremación. Esas cifras no incluyen, en general, parcela, bóveda, marcador ni flores."
-      },
-      {
-        "type": "p",
-        "text": "La Comisión Federal de Comercio explica que las funerarias deben dar una lista de precios general si usted la pide en persona, y cotizar por teléfono. Esa lista local gana a cualquier mediana nacional. No tenemos una mediana oficial solo para Nebraska publicada por la NFDA; para un precio de su ciudad, pida la lista."
-      },
-      {
-        "type": "h2",
-        "text": "Qué más cabe en “gastos finales”"
+        "text": "Cómo sumar el monto"
       },
       {
         "type": "ul",
         "items": [
+          "Servicio: velatorio con entierro, velatorio con cremación, o cremación directa. No cuestan lo mismo.",
+          "Cementerio, si aplica: parcela o nicho, apertura, a veces bóveda o reglas de marcador. Suele ir aparte de la mediana de la funeraria.",
           "Traslado si la persona fallece lejos de casa.",
-          "Saldo de tarjetas o una factura médica que no cubrió el seguro de salud.",
-          "Pasajes para que un hijo viaje al servicio.",
-          "Un margen si los precios suben entre hoy y el día del funeral."
+          "Deudas pequeñas: un saldo médico o una tarjeta que no quiere dejar.",
+          "Viaje de un hijo al servicio, y un margen si los precios suben entre hoy y el funeral."
         ]
       },
       {
+        "type": "p",
+        "text": "Para el renglón del servicio, la NFDA publicó en 2023 medianas nacionales del lado de la funeraria: $8,300 con velatorio y entierro, y $6,280 con velatorio y cremación. En general no incluyen parcela, bóveda, marcador ni flores. No hay una mediana oficial solo para Nebraska en esa fuente. La FTC explica que las funerarias deben dar una lista de precios general si la pide en persona, y cotizar por teléfono. Esa lista gana a cualquier mediana."
+      },
+      {
         "type": "table",
-        "caption": "Tres montos de partida y qué suelen alcanzar",
-        "lead": "Esto es un marco de conversación, no una promesa de que el funeral costará exactamente esas cifras.",
+        "caption": "Tres montos de partida",
+        "lead": "Marco de conversación, no una promesa de que el funeral costará exactamente esas cifras.",
         "headers": [
           "Monto de la póliza",
           "Puede encajar si…",
@@ -81,46 +74,47 @@
           ],
           [
             "$15,000 o más",
-            "Quiere funeral más deudas pequeñas y un colchón",
+            "Quiere funeral, deudas pequeñas y un colchón",
             "El producto o la edad no permiten ese tope — hay que cotizar"
           ]
         ],
-        "foot": "En productos que Mejor Vida Seguros cotiza, los topes típicos de gastos finales llegan hasta unos $50,000, y bajan con la edad en algunos diseños (por ejemplo Accendo Level a $25,000 a los 76–89)."
+        "foot": "En productos que Mejor Vida Seguros cotiza, los topes típicos de gastos finales llegan hasta unos $50,000. Algunos diseños bajan el tope con la edad (por ejemplo Accendo Level a $25,000 a los 76–89)."
       },
       {
         "type": "h2",
-        "text": "El precio mensual también es parte de la decisión"
+        "text": "La prima mensual también decide"
       },
       {
         "type": "p",
-        "text": "Una cotización ilustrativa de gastos finales, no fumador y buena salud, para $10,000 (agosto 2026) ronda $41 al mes para una mujer de 65 años y $54 para un hombre de 65. A los 75, esas mismas cifras ilustrativas suben a unos $71 y $97. Son ejemplos educativos, no una oferta. Un monto de $15,000 costará más que $10,000 en la misma persona."
+        "text": "Un ejemplo educativo, no fumador y buena salud, para $10,000 (agosto 2026) ronda $41 al mes para una mujer de 65 años y $54 para un hombre de 65. A los 75, unos $71 y $97. No es una oferta. Un $15,000 costará más que un $10,000 en la misma persona. Si la prima más alta no entra, baje el monto antes de comprar un plan que caducará."
       },
       {
         "type": "note",
-        "text": "No publicamos un “número correcto” único. Si sus deudas o el cementerio cambian el total, el monto de la póliza debe moverse con esa lista — o aceptar que la familia cubrirá la diferencia."
+        "text": "No publicamos un “número correcto” único. Si deudas o cementerio cambian el total, mueva el monto con esa lista — o acepte que la familia cubrirá la diferencia."
       },
       {
         "type": "h2",
-        "text": "Productos y topes, al final"
+        "text": "Lo que el producto permite emitir"
       },
       {
         "type": "p",
-        "text": "Living Promise Nivelado suele llegar hasta unos $50,000 entre los 45 y 85. Un plan de Living Promise con espera tiene un tope más bajo (hasta unos $20,000) y edades distintas. Corebridge de aceptación garantizada, en la línea que cotizamos, suele moverse entre $5,000 y $25,000. El monto que usted quiere y el monto que la compañía emitirá pueden no coincidir."
+        "text": "Living Promise Nivelado suele llegar hasta unos $50,000 entre los 45 y 85. Un Living Promise con espera tiene un tope más bajo (hasta unos $20,000) y otras edades. Corebridge de aceptación garantizada, en la línea que cotizamos, suele moverse entre $5,000 y $25,000. El monto que usted quiere y el que la compañía emitirá pueden no coincidir."
       },
       {
         "type": "faq",
+        "heading": "Preguntas frecuentes",
         "items": [
           {
             "q": "¿Debo igualar exactamente la mediana de $8,300?",
-            "a": "No. Esa cifra es nacional, de 2023, y no incluye cementerio. Úsela como escala, no como factura."
+            "a": "No. Esa cifra es nacional, de 2023, y no incluye cementerio. Úsela como escala, no como factura. Pida la lista de precios general en su funeraria."
           },
           {
             "q": "¿Puedo subir el monto después?",
-            "a": "A veces con una póliza nueva o un aumento si el producto lo permite. La salud y la edad en ese momento vuelven a contar. No asumimos que siempre se puede subir."
+            "a": "A veces con una póliza nueva o un aumento si el producto lo permite. Salud y edad en ese momento vuelven a contar. No asumimos que siempre se puede subir."
           },
           {
             "q": "¿$25,000 es demasiado para un funeral?",
-            "a": "Puede serlo si el único objetivo es un servicio sencillo. Puede no serlo si hay deudas o quiere dejar un resto a la familia. El beneficiario decide cómo usar el efectivo."
+            "a": "Puede serlo si el único objetivo es un servicio sencillo. Puede no serlo si hay deudas o quiere dejar un resto. El beneficiario decide cómo usar el efectivo."
           }
         ]
       },
@@ -144,56 +138,49 @@
     "aiFreePledgeModalTitle": "How this guide is reviewed",
     "aiFreePledgeModalBody": "The Mejor Vida Insurance team reviews this guide against appointed-company materials and public sources. Quotes and approval depend on the insurer, your state, and your application.",
     "question": "How much final expense coverage do I need?",
-    "headline": "How to pick a final expense amount without guessing",
-    "dek": "The right amount matches your real bills, not an ad. National funeral medians help you size it; your funeral home’s price list is the local figure.",
+    "headline": "How much final expense coverage you need: add bills, not an ad",
+    "dek": "The policy amount is what the beneficiary receives, not the premium. Start with the type of service, the cemetery if it applies, and the debts you do not want to leave. National medians help you size it; your funeral home’s price list is the local figure.",
     "pageTitle": "How much final expense coverage do I need?",
     "metaDescription": "How to choose among $5,000, $10,000, or $15,000 of final expense insurance using verified funeral costs. A guide from Mejor Vida Insurance.",
     "keyTakeaways": [
       "Add funeral or cremation, cemetery if it applies, small debts, and a cushion for travel or leftover medical bills.",
-      "In 2023, NFDA published a U.S. median of $8,300 for a funeral with viewing and burial, and $6,280 with viewing and cremation, on the funeral-home side. Plot and marker are usually extra.",
-      "$5,000, $10,000, and $15,000 are common starting points, not a universal recipe.",
-      "A higher amount costs more each month. The maximum also changes by age and product."
+      "NFDA 2023, funeral-home side: U.S. median $8,300 with viewing and burial; $6,280 with viewing and cremation. Plot and marker are usually extra.",
+      "$5,000, $10,000, and $15,000 are starting points, not a recipe. The product cap and the monthly premium also limit the amount.",
+      "An educational $10,000 example, non-tobacco, good health (August 2026): about $41 / $54 a month at 65 (woman / man) and $71 / $97 at 75."
     ],
     "cta": {
-      "title": "See a price for your situation",
-      "body": "Mejor Vida Insurance compares final expense companies. Start with a free quote, schedule a call, or message us on WhatsApp.",
+      "title": "Quote the amount you are sizing",
+      "body": "Mejor Vida Insurance compares $5,000, $10,000, and $15,000 for your situation. Free quote, a call, or WhatsApp.",
       "quote": "Get a free quote",
       "schedule": "Schedule a call"
     },
     "blocks": [
       {
         "type": "p",
-        "text": "“How much do I need?” is not answered with a magic number. It is answered with a list: what kind of service you want, where it will be, whether a cemetery lot already exists, and which debts you do not want to leave behind."
+        "text": "There is no magic number. There is a list: what service you want, where it will be, whether a plot already exists, and which debts you do not want to leave. Coverage (the amount) is the death benefit. Premium is what you pay each month. An amount you cannot keep paying does not protect anyone."
       },
       {
         "type": "h2",
-        "text": "Start with the service, not the advertisement"
-      },
-      {
-        "type": "p",
-        "text": "A viewing and burial does not cost the same as a direct cremation. NFDA’s 2023 General Price List study published national funeral-home medians: $8,300 with viewing and burial, and $6,280 with viewing and cremation. Those figures generally do not include plot, vault, marker, or flowers."
-      },
-      {
-        "type": "p",
-        "text": "The Federal Trade Commission explains that funeral homes must give a general price list if you ask in person, and quote prices by phone. That local list beats any national median. We do not have an NFDA median published only for Nebraska; for a price in your city, ask for the list."
-      },
-      {
-        "type": "h2",
-        "text": "What else fits inside “final expenses”"
+        "text": "How to add up the amount"
       },
       {
         "type": "ul",
         "items": [
+          "Service: viewing and burial, viewing and cremation, or direct cremation. They do not cost the same.",
+          "Cemetery, if it applies: plot or niche, opening, sometimes a vault or marker rules. Usually extra to the funeral-home median.",
           "Transfer if the person dies far from home.",
-          "A card balance or a medical bill health insurance did not cover.",
-          "Airfare so a child can attend the service.",
-          "A margin if prices rise between today and the funeral."
+          "Small debts: a medical balance or a card you do not want to leave.",
+          "Airfare so a child can attend, and a margin if prices rise between today and the funeral."
         ]
       },
       {
+        "type": "p",
+        "text": "For the service line, NFDA published 2023 national funeral-home medians: $8,300 with viewing and burial, and $6,280 with viewing and cremation. They generally exclude plot, vault, marker, and flowers. That source has no official Nebraska-only median. The FTC explains that funeral homes must give a general price list if you ask in person, and quote by phone. That list beats any median."
+      },
+      {
         "type": "table",
-        "caption": "Three starting amounts and what they often cover",
-        "lead": "This is a conversation frame, not a promise that a funeral will cost exactly these figures.",
+        "caption": "Three starting amounts",
+        "lead": "A conversation frame, not a promise that a funeral will cost exactly these figures.",
         "headers": [
           "Policy amount",
           "May fit if…",
@@ -212,27 +199,27 @@
           ],
           [
             "$15,000 or more",
-            "You want the funeral plus small debts and a cushion",
+            "You want the funeral, small debts, and a cushion",
             "The product or your age does not allow that cap — it has to be quoted"
           ]
         ],
-        "foot": "On products Mejor Vida Insurance quotes, typical final expense caps reach about $50,000, and some designs lower the cap with age (for example Accendo Level at $25,000 for ages 76–89)."
+        "foot": "On products Mejor Vida Insurance quotes, typical final expense caps reach about $50,000. Some designs lower the cap with age (for example Accendo Level at $25,000 for ages 76–89)."
       },
       {
         "type": "h2",
-        "text": "The monthly price is part of the decision too"
+        "text": "The monthly premium also decides"
       },
       {
         "type": "p",
-        "text": "An illustrative final expense quote, non-tobacco and good health, for $10,000 (August 2026) is near $41 a month for a 65-year-old woman and $54 for a 65-year-old man. At 75, those same educational figures rise to about $71 and $97. They are examples, not an offer. A $15,000 amount will cost more than $10,000 on the same person."
+        "text": "An educational example, non-tobacco and good health, for $10,000 (August 2026) is near $41 a month for a 65-year-old woman and $54 for a 65-year-old man. At 75, about $71 and $97. Not an offer. A $15,000 amount will cost more than $10,000 on the same person. If the higher premium does not fit, lower the amount before you buy a plan that will lapse."
       },
       {
         "type": "note",
-        "text": "We do not publish one “correct” number. If debts or the cemetery change the total, the policy amount should move with that list — or you accept that the family will cover the gap."
+        "text": "We do not publish one “correct” number. If debts or the cemetery change the total, move the amount with that list — or accept that the family will cover the gap."
       },
       {
         "type": "h2",
-        "text": "Products and caps, at the end"
+        "text": "What the product will actually issue"
       },
       {
         "type": "p",
@@ -240,10 +227,11 @@
       },
       {
         "type": "faq",
+        "heading": "Common questions",
         "items": [
           {
             "q": "Should I match the $8,300 median exactly?",
-            "a": "No. That figure is national, from 2023, and excludes the cemetery. Use it as a scale, not an invoice."
+            "a": "No. That figure is national, from 2023, and excludes the cemetery. Use it as a scale, not an invoice. Ask your funeral home for the general price list."
           },
           {
             "q": "Can I raise the amount later?",
@@ -251,7 +239,7 @@
           },
           {
             "q": "Is $25,000 too much for a funeral?",
-            "a": "It can be if the only goal is a simple service. It may not be if there are debts or you want to leave a remainder to the family. The beneficiary decides how to use the cash."
+            "a": "It can be if the only goal is a simple service. It may not be if there are debts or you want to leave a remainder. The beneficiary decides how to use the cash."
           }
         ]
       },

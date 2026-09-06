@@ -1,38 +1,265 @@
 {
   "slug": "tipos-planes-seguro-gastos-finales",
-  "question": "¿Qué tipos de planes existen?",
-  "headline": "¿Qué tipos de planes existen?",
-  "alternateNamesLine": "Emisión simplificada, modificada y garantizada — guía para familias en Nebraska",
-  "pageTitle": "Tipos de planes de seguro de gastos finales — ¿Cuál le conviene?",
-  "dek": "Los planes de gastos finales más conocidos son de emisión simplificada, emisión modificada y emisión garantizada. Mejor Vida Insurance explica las diferencias en preguntas médicas, periodos de espera y aprobación para familias en Nebraska.",
-  "metaDescription": "¿Qué tipos de planes de seguro de gastos finales existen? Emisión simplificada, modificada y garantizada explicadas por Mejor Vida Insurance — sin examen, periodos de espera y riders.",
+  "slugEn": "types-of-final-expense-plans",
   "published": "2026-07-03",
-  "modified": "2026-07-03",
-  "keyTakeaways": [
-    "Los tres tipos más comunes son emisión simplificada, emisión modificada y emisión garantizada.",
-    "Emisión simplificada: preguntas médicas detalladas, sin examen, sin periodo de espera y aprobación más rápida; puede incluir riders.",
-    "Emisión modificada: para quienes no califican a cobertura inmediata; suele tener periodo de espera de dos a tres años antes del beneficio completo.",
-    "Emisión garantizada: aceptación garantizada sin preguntas ni examen médico; también suele incluir periodo de espera de dos a tres años.",
-    "Si fallece por muerte natural durante la espera, muchas compañías devuelven primas pagadas más un porcentaje; en accidente a menudo pagan el beneficio completo — según la póliza."
-  ],
-  "paragraphs": [
-    "Los planes mejor conocidos son de emisión simplificada, emisión modificada y emisión garantizada.",
-    {
-      "heading": "Emisión simplificada",
-      "text": "El plan de emisión simplificada está diseñado para que el proceso de solicitud y aprobación sean más rápidas. Este plan no tiene periodo de espera, no se necesita un examen médico; sólo se hacen preguntas médicas detalladas y la aprobación es usualmente más rápida. También ofrece cláusulas adicionales de beneficio, mejor conocidas como riders. Hable con su agente acerca de la emisión simplificada si tiene dudas acerca de la cobertura."
-    },
-    {
-      "heading": "Emisión modificada",
-      "text": "El plan modificado se ofrece a personas que tienen condiciones de salud que no le permiten obtener una póliza inmediata. El plan modificado le permite al asegurado tener cobertura con un periodo de espera para tener cobertura total. Este periodo de espera puede oscilar entre dos a tres años. Una vez el periodo de espera termine, entonces el beneficio completo suele pagarse completamente. Si el asegurado muere por muerte natural, entonces se hace una devolución de primas pagadas más un porcentaje; este es estipulado por cada compañía aseguradora. La mayoría de aseguradoras pueden pagar el beneficio total si el asegurado muere por causa de accidente; todo depende de los términos y condiciones de la póliza."
-    },
-    {
-      "heading": "Emisión garantizada",
-      "text": "El plan de emisión garantizada tiene un periodo de espera que puede oscilar entre dos a tres años, dependiendo de la empresa de seguros. El plan de emisión garantizada es para personas que no pueden estar aseguradas con un plan regular por sus condiciones médicas. Como su nombre lo dice, es garantizado: no hay preguntas médicas ni exámenes médicos, es una aceptación garantizada. Como existe un periodo de espera, si durante ese tiempo el asegurado fallece por muerte natural, entonces se devuelven las primas pagadas más un porcentaje estipulado por la compañía aseguradora. Después de que el tiempo de espera termine, entonces ya el beneficio se suele pagar en su totalidad. Si el asegurado muere por muerte accidental, la mayoría de aseguradoras podrían pagar el beneficio completo. Todo está sujeto a los términos y condiciones de la póliza."
-    }
-  ],
+  "modified": "2026-09-06",
   "relatedSlugs": [
     "que-es-seguro-gastos-finales",
     "que-son-polizas-gastos-finales",
     "examen-medico-seguro-gastos-finales"
-  ]
+  ],
+  "es": {
+    "question": "¿Qué tipos de planes existen?",
+    "headline": "¿Qué tipos de planes de seguro de gastos finales existen?",
+    "alternateNamesLine": "Emisión simplificada, modificada y garantizada — guía para familias en Nebraska",
+    "pageTitle": "Tipos de planes de seguro de gastos finales — ¿Cuál le conviene?",
+    "dek": "Los planes de gastos finales más conocidos son de emisión simplificada, emisión modificada y emisión garantizada. Mejor Vida Seguros explica las diferencias en preguntas médicas, periodo de espera y cómo se aprueba la póliza.",
+    "metaDescription": "¿Qué tipos de planes de seguro de gastos finales existen? Emisión simplificada, modificada y garantizada: sin examen, periodo de espera y riders. Guía de Mejor Vida Seguros.",
+    "aiFreePledgeLabel": "Revisado por Mejor Vida Seguros",
+    "aiFreePledgeModalTitle": "Cómo se revisa esta guía",
+    "aiFreePledgeModalBody": "El equipo de Mejor Vida Seguros revisa esta guía con materiales de compañías designadas y fuentes públicas. Las cotizaciones y la aprobación dependen de la aseguradora, del estado y de su solicitud.",
+    "keyTakeaways": [
+      "Los tres tipos más comunes son emisión simplificada, emisión modificada y emisión garantizada.",
+      "Emisión simplificada: preguntas médicas detalladas, sin examen físico, sin periodo de espera y, en general, una aprobación más rápida. Puede incluir riders (cláusulas adicionales).",
+      "Emisión modificada: para quien no califica a cobertura inmediata. Suele tener un periodo de espera de dos a tres años antes del beneficio completo por muerte natural.",
+      "Emisión garantizada: aceptación sin preguntas ni examen médico. También suele incluir un periodo de espera de dos a tres años.",
+      "Si fallece por muerte natural durante la espera, muchas compañías devuelven las primas pagadas más un porcentaje. En un accidente cubierto, a menudo pagan el beneficio completo. Todo depende del contrato."
+    ],
+    "cta": {
+      "title": "Vea un precio para su situación",
+      "body": "Mejor Vida Seguros compara compañías de gastos finales. Empiece con una cotización gratuita, agende una llamada o escríbanos por WhatsApp.",
+      "quote": "Cotización gratuita",
+      "schedule": "Agendar una llamada"
+    },
+    "blocks": [
+      {
+        "type": "p",
+        "text": "No todos los seguros de gastos finales pagan igual el primer año. La diferencia suele estar en las preguntas de salud, no en el nombre comercial. Los tres caminos más conocidos son emisión simplificada, emisión modificada y emisión garantizada."
+      },
+      {
+        "type": "p",
+        "text": "Una póliza es el contrato. La prima es el precio que usted paga. El periodo de espera es el tramo al inicio de algunos planes en el que una muerte por enfermedad puede pagar menos que el monto completo —o una devolución de primas más un porcentaje que fija la compañía."
+      },
+      {
+        "type": "table",
+        "caption": "Tres tipos de plan, lado a lado",
+        "lead": "Esta tabla describe el diseño habitual. El contrato de cada compañía es el que manda.",
+        "headers": [
+          "Tipo de plan",
+          "Preguntas de salud",
+          "Periodo de espera",
+          "Para quién suele pensarse"
+        ],
+        "rows": [
+          [
+            "Emisión simplificada",
+            "Preguntas médicas detalladas. No hay examen físico.",
+            "No suele haber espera. Si la póliza está vigente, el beneficio completo puede pagarse desde el inicio.",
+            "Quienes pueden responder las preguntas y buscan una aprobación más rápida."
+          ],
+          [
+            "Emisión modificada",
+            "Hay preguntas. Las respuestas no alcanzan para un plan de beneficio inmediato.",
+            "Suele durar de dos a tres años antes del beneficio completo por muerte natural.",
+            "Quienes no califican a cobertura inmediata por su salud."
+          ],
+          [
+            "Emisión garantizada",
+            "No hay preguntas médicas ni examen. La aceptación está garantizada según el producto.",
+            "También suele durar de dos a tres años, según la aseguradora.",
+            "Quienes no pueden asegurarse con un plan que hace preguntas de salud."
+          ]
+        ],
+        "foot": "Dos a tres años es un rango habitual, no una fórmula única. Cada producto escribe su propia regla."
+      },
+      {
+        "type": "h2",
+        "text": "Emisión simplificada"
+      },
+      {
+        "type": "p",
+        "text": "La emisión simplificada está pensada para que la solicitud y la aprobación sean más rápidas que en un seguro de vida con exámenes de laboratorio. No hay periodo de espera en este diseño. No se necesita un examen médico; se responden preguntas médicas detalladas. La aprobación suele ser más rápida que en un proceso largo de suscripción."
+      },
+      {
+        "type": "p",
+        "text": "Este tipo de plan también puede ofrecer cláusulas adicionales de beneficio, conocidas como riders: extras opcionales que se añaden al contrato. Lo que cubre cada rider lo escribe la compañía. Mejor Vida Seguros puede señalar cuáles aparecen en una cotización; no sustituyen leer el formulario."
+      },
+      {
+        "type": "h2",
+        "text": "Emisión modificada"
+      },
+      {
+        "type": "p",
+        "text": "El plan modificado se ofrece a personas cuya salud no les permite obtener una póliza de beneficio inmediato. Hay cobertura, pero con un periodo de espera antes del beneficio total. Ese periodo suele oscilar entre dos y tres años. Cuando termina, el beneficio completo suele pagarse si el fallecimiento está cubierto y la póliza sigue vigente."
+      },
+      {
+        "type": "p",
+        "text": "Si el asegurado fallece por muerte natural durante la espera, muchas compañías devuelven las primas pagadas más un porcentaje. Ese porcentaje lo estipula cada aseguradora; no es el mismo en todos los contratos. Si la muerte es por un accidente que el contrato cubre, la mayoría de las aseguradoras pueden pagar el beneficio total. Todo depende de los términos de la póliza."
+      },
+      {
+        "type": "h2",
+        "text": "Emisión garantizada"
+      },
+      {
+        "type": "p",
+        "text": "La aceptación está garantizada: no hay preguntas médicas ni exámenes. Está pensada para quien no puede asegurarse con un plan regular por sus condiciones de salud. El periodo de espera también suele ser de dos a tres años, según la empresa de seguros."
+      },
+      {
+        "type": "p",
+        "text": "Durante esa espera, si el asegurado fallece por muerte natural, se suelen devolver las primas pagadas más un porcentaje que fija la compañía. Después de que termine la espera, el beneficio suele pagarse en su totalidad. Si la muerte es accidental y el contrato la cubre, la mayoría de las aseguradoras podrían pagar el beneficio completo. Siempre está sujeto a los términos de la póliza."
+      },
+      {
+        "type": "note",
+        "text": "Cada compañía escribe su propia fórmula. El porcentaje de devolución, el interés del contrato y el trato de un accidente están en su oferta, no en un promedio nacional."
+      },
+      {
+        "type": "faq",
+        "items": [
+          {
+            "q": "¿Necesito un examen médico?",
+            "a": "En emisión simplificada y en emisión garantizada, no hay examen físico. La simplificada sí hace preguntas de salud. La garantizada no hace preguntas. La modificada hace preguntas; las respuestas no alcanzan para un plan inmediato."
+          },
+          {
+            "q": "¿Qué es un periodo de espera?",
+            "a": "Es el tiempo al inicio de algunos planes en el que una muerte por enfermedad no paga el monto completo. Suele durar de dos a tres años. Un plan de emisión simplificada, en este diseño, no usa esa espera."
+          },
+          {
+            "q": "¿Qué pasa si fallezco durante la espera?",
+            "a": "Por muerte natural, muchas compañías devuelven primas más un porcentaje. Por un accidente cubierto, a menudo pagan el beneficio completo. La regla exacta está en su póliza."
+          },
+          {
+            "q": "¿Qué es un rider?",
+            "a": "Es una cláusula adicional opcional que se pega al contrato —un extra de beneficio, no el seguro de base. Lo que cubre y lo que cuesta lo escribe cada compañía."
+          }
+        ]
+      }
+    ]
+  },
+  "en": {
+    "aiFreePledgeLabel": "Reviewed by Mejor Vida Insurance",
+    "aiFreePledgeModalTitle": "How this guide is reviewed",
+    "aiFreePledgeModalBody": "The Mejor Vida Insurance team reviews this guide against appointed-company materials and public sources. Quotes and approval depend on the insurer, your state, and your application.",
+    "question": "What types of final expense plans are there?",
+    "headline": "What types of final expense insurance plans are there?",
+    "alternateNamesLine": "Simplified issue, modified, and guaranteed issue — a guide for families in Nebraska",
+    "pageTitle": "Types of final expense insurance plans — which may fit",
+    "dek": "The best-known final expense plans are simplified issue, modified issue, and guaranteed issue. Mejor Vida Insurance explains the differences in health questions, waiting periods, and how a policy is approved.",
+    "metaDescription": "What types of final expense plans exist? Simplified, modified, and guaranteed issue: no exam, waiting periods, and riders. A guide from Mejor Vida Insurance.",
+    "keyTakeaways": [
+      "The three most common types are simplified issue, modified issue, and guaranteed issue.",
+      "Simplified issue: detailed health questions, no physical exam, no waiting period, and usually a faster approval. It may include riders (optional extras).",
+      "Modified issue: for someone who does not qualify for immediate full coverage. It usually has a two-to-three-year wait before the full benefit for a natural death.",
+      "Guaranteed issue: acceptance without health questions or a medical exam. It also usually includes a two-to-three-year wait.",
+      "If you die of natural causes during the wait, many companies return premiums paid plus a percentage. On a covered accident, they often pay the full benefit. All of that depends on the contract."
+    ],
+    "blocks": [
+      {
+        "type": "p",
+        "text": "Not every final expense policy pays the same in the first year. The difference is usually in the health questions, not the brand name. The three best-known paths are simplified issue, modified issue, and guaranteed issue."
+      },
+      {
+        "type": "p",
+        "text": "A policy is the contract. The premium is the price you pay. The waiting period is the early stretch on some plans when a death from illness may pay less than the full amount — or a return of premiums plus a percentage the company sets."
+      },
+      {
+        "type": "table",
+        "caption": "Three plan types, side by side",
+        "lead": "This table describes the usual design. Each company’s contract controls.",
+        "headers": [
+          "Plan type",
+          "Health questions",
+          "Waiting period",
+          "Who it is usually for"
+        ],
+        "rows": [
+          [
+            "Simplified issue",
+            "Detailed medical questions. No physical exam.",
+            "Usually no wait. If the policy is in force, the full benefit can pay from the start.",
+            "People who can answer the questions and want a faster approval."
+          ],
+          [
+            "Modified issue",
+            "There are questions. The answers do not qualify for an immediate-benefit plan.",
+            "Usually two to three years before the full benefit for a natural death.",
+            "People whose health does not qualify for immediate coverage."
+          ],
+          [
+            "Guaranteed issue",
+            "No medical questions and no exam. Acceptance is guaranteed on that product.",
+            "Also usually two to three years, depending on the insurer.",
+            "People who cannot qualify for a plan that asks health questions."
+          ]
+        ],
+        "foot": "Two to three years is a usual range, not one formula. Each product writes its own rule."
+      },
+      {
+        "type": "h2",
+        "text": "Simplified issue"
+      },
+      {
+        "type": "p",
+        "text": "Simplified issue is designed so the application and approval are faster than life insurance with lab exams. There is no waiting period in this design. No medical exam is required; you answer detailed health questions. Approval is usually faster than a long underwriting process."
+      },
+      {
+        "type": "p",
+        "text": "This type of plan may also offer extra benefit clauses, known as riders: optional extras added to the contract. What each rider covers is written by the company. Mejor Vida Insurance can point out which ones appear on a quote; that does not replace reading the form."
+      },
+      {
+        "type": "h2",
+        "text": "Modified issue"
+      },
+      {
+        "type": "p",
+        "text": "A modified plan is offered to people whose health does not allow an immediate-benefit policy. There is coverage, but with a waiting period before the full benefit. That period usually runs two to three years. When it ends, the full benefit is usually paid if the death is covered and the policy is still in force."
+      },
+      {
+        "type": "p",
+        "text": "If the insured dies of natural causes during the wait, many companies return premiums paid plus a percentage. That percentage is set by each insurer; it is not the same on every contract. If the death is from an accident the contract covers, most insurers can pay the full benefit. All of that depends on the policy terms."
+      },
+      {
+        "type": "h2",
+        "text": "Guaranteed issue"
+      },
+      {
+        "type": "p",
+        "text": "Acceptance is guaranteed: no medical questions and no exams. It is meant for someone who cannot get a regular plan because of health conditions. The waiting period is also usually two to three years, depending on the insurance company."
+      },
+      {
+        "type": "p",
+        "text": "During that wait, if the insured dies of natural causes, premiums paid plus a percentage the company sets are usually returned. After the wait ends, the benefit is usually paid in full. If the death is accidental and the contract covers it, most insurers may pay the full benefit. It is always subject to the policy terms."
+      },
+      {
+        "type": "note",
+        "text": "Each company writes its own formula. The return percentage, contract interest, and accident treatment are in your offer, not in a national average."
+      },
+      {
+        "type": "faq",
+        "items": [
+          {
+            "q": "Do I need a medical exam?",
+            "a": "On simplified issue and guaranteed issue, there is no physical exam. Simplified issue does ask health questions. Guaranteed issue does not. Modified issue asks questions; the answers do not qualify for an immediate plan."
+          },
+          {
+            "q": "What is a waiting period?",
+            "a": "It is the time at the start of some plans when a death from illness does not pay the full amount. It usually lasts two to three years. A simplified-issue plan, in this design, does not use that wait."
+          },
+          {
+            "q": "What happens if I die during the wait?",
+            "a": "For a natural death, many companies return premiums plus a percentage. For a covered accident, they often pay the full benefit. The exact rule is in your policy."
+          },
+          {
+            "q": "What is a rider?",
+            "a": "It is an optional extra clause attached to the contract — an extra benefit, not the base insurance. What it covers and what it costs is written by each company."
+          }
+        ]
+      }
+    ],
+    "cta": {
+      "title": "See a price for your situation",
+      "body": "Mejor Vida Insurance compares final expense companies. Start with a free quote, schedule a call, or message us on WhatsApp.",
+      "quote": "Get a free quote",
+      "schedule": "Schedule a call"
+    }
+  }
 }
