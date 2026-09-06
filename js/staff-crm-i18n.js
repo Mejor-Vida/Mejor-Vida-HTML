@@ -379,7 +379,7 @@
       clients_delete: "Archive selected",
       clients_delete_confirm_title: "Archive selected contacts?",
       clients_delete_confirm_body:
-        "This archives {count} client record(s) for insurance retention, turns off SMS and voice permissions, and stops nurture automation. Records are never permanently deleted.",
+        "This archives only the {count} selected record(s). Other Active Feed rows with the same phone or email are left alone. SMS and voice on the archived record are turned off, and nurture stops. Records stay in Archive Vault — they are never permanently deleted.",
       clients_deleting: "Archiving…",
       clients_deleted: "Archived {count} client(s).",
       clients_delete_failed: "Could not archive one or more clients.",
@@ -1541,7 +1541,7 @@
       clients_delete: "Archivar seleccionados",
       clients_delete_confirm_title: "¿Archivar contactos seleccionados?",
       clients_delete_confirm_body:
-        "Esto archiva {count} registro(s) de cliente para retención de seguros, apaga permisos de SMS y voz, y detiene el nurture. Los registros nunca se eliminan permanentemente.",
+        "Esto archiva únicamente los {count} registro(s) seleccionado(s). Otras filas del Feed activo con el mismo teléfono o correo no se tocan. En el registro archivado se apagan SMS y voz, y se detiene el nurture. Quedan en el Archivo (Vault); nunca se eliminan de forma permanente.",
       clients_deleting: "Archivando…",
       clients_deleted: "Se archivaron {count} cliente(s).",
       clients_delete_failed: "No se pudo archivar uno o más clientes.",

@@ -900,8 +900,8 @@ async function hardDeleteUnifiedSourceRow(cfg, unified) {
 
 /**
  * Insert staff_hidden_leads row; ignore unique conflicts.
- * Partition-level hides must use dedupe_key = email/phone/name key with null source_*
- * so unified_leads suppresses the whole person bucket (not just one source row).
+ * Archive hides one source row (source_table + source_id). Do not use
+ * phone/email partition keys here — those hid every duplicate with that number.
  */
 async function insertStaffHiddenLead(cfg, row) {
   try {
@@ -982,9 +982,9 @@ async function findSiblingLeadRefs(cfg, { email, phone, excludeId, excludeSource
 }
 
 /**
- * Hide this source row from Active Feed. Also write partition-level keys so
- * existing duplicate rows for the same email/phone stay hidden until a *new*
- * inbound submission clears those keys (see clearActiveFeedPartitionHides).
+ * Hide this source row from Active Feed only.
+ * Do not write phone/email partition hides — those made same-number
+ * duplicates disappear together. Staff archive one selected row at a time.
  */
 async function hidePersonFromActiveFeed(cfg, { id, sourceTable, email, phone, displayName, archivedBy }) {
   const emailKey = cleanText(email).toLowerCase() || null;
@@ -1001,38 +1001,12 @@ async function hidePersonFromActiveFeed(cfg, { id, sourceTable, email, phone, di
     source_id: id,
     hidden_by: archivedBy || null,
   });
-
-  // Partition-level hides (null source_*) match unified_leads view OR-branch.
-  // View phone_key is ALL digits (may include leading 1); also hide last-10.
-  const partitionKeys = new Set();
-  if (emailKey) partitionKeys.add(emailKey);
-  if (phoneDigits) partitionKeys.add(phoneDigits);
-  if (phoneLast10) partitionKeys.add(phoneLast10);
-  if (phoneDigits && phoneDigits.length === 11 && phoneDigits.startsWith("1")) {
-    partitionKeys.add(phoneDigits.slice(1));
-  }
-  if (phoneLast10 && phoneLast10.length === 10) {
-    partitionKeys.add(`1${phoneLast10}`);
-  }
-
-  for (const key of partitionKeys) {
-    await insertStaffHiddenLead(cfg, {
-      dedupe_key: key,
-      email_key: emailKey,
-      phone_key: phoneLast10 || phoneDigits,
-      name_key: nameKey,
-      source_table: null,
-      source_id: null,
-      hidden_by: archivedBy || null,
-    });
-  }
 }
 
 /**
- * Archive lead for insurance retention: snapshot + hide from directory.
- * Source rows are preserved; nurture is cancelled.
- * Also archives/hides sibling rows for the same email/phone so duplicates
- * do not keep resurfacing in Active Feed.
+ * Archive one source row for insurance retention: snapshot + hide from directory.
+ * Source rows are preserved; nurture is cancelled for this row only.
+ * Same-phone or same-email duplicates stay on Active Feed unless archived separately.
  */
 async function archiveUnifiedLead(cfg, unified, opts = {}) {
   const id = String(unified.id || "").trim();
@@ -1274,7 +1248,9 @@ async function archiveUnifiedLead(cfg, unified, opts = {}) {
   }
 
   let siblingsArchived = 0;
-  if (!opts.skipSiblingSweep) {
+  // Opt-in only. Default is this row only so a duplicate can be archived
+  // without hiding the complete lead that shares the same phone.
+  if (opts.sweepSiblings) {
     try {
       const siblings = await findSiblingLeadRefs(cfg, {
         email,
@@ -1287,11 +1263,10 @@ async function archiveUnifiedLead(cfg, unified, opts = {}) {
           await archiveUnifiedLead(cfg, sib, {
             archivedBy: opts.archivedBy,
             reason: "staff_archive_sibling",
-            skipSiblingSweep: true,
+            sweepSiblings: false,
           });
           siblingsArchived += 1;
         } catch (e) {
-          // Still force-hide sibling source if full archive fails.
           console.warn("archiveUnifiedLead sibling", sib.source_table, sib.id, e && e.message);
           try {
             await hidePersonFromActiveFeed(cfg, {
@@ -2164,7 +2139,7 @@ module.exports = async function handler(req, res) {
         const rows = await restSelect(
           cfg,
           "crm_lead_archives",
-          "select=id,archived_at,archived_by,reason,lead_id,lead_source_table,display_name,email,phone,state_code,status,consent_ip,consent_text,consent_captured_at,consent_expires_at,registered_at&order=archived_at.desc&limit=2000"
+          "select=id,archived_at,archived_by,reason,lead_id,lead_source_table,display_name,email,phone,state_code,status,consent_ip,consent_text,consent_captured_at,consent_expires_at,registered_at&or=(status.eq.archived,status.is.null)&order=archived_at.desc&limit=2000"
         );
         const grouped = groupArchiveVaultRows(rows || []);
         return json(res, 200, { items: grouped, raw_count: (rows || []).length, view: "archive" });
