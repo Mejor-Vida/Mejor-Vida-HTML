@@ -1,7 +1,7 @@
 /**
  * GET /api/staff/drive-auth — one-time Google Drive consent for database backups.
  * Uses the production Gmail callback URI (already registered on the OAuth client).
- * Sign in as julie@mejorvidainsurance.com so files land in the Workspace Drive.
+ * Sign in as admin@mejorvidainsurance.com so files land in the company Drive.
  */
 const { DRIVE_SCOPE, DRIVE_BACKUP_STATE, driveOAuthClient } = require("../../lib/google-drive-backup");
 const { productionGmailRedirectUri } = require("../../lib/gmail-oauth-redirect");
@@ -22,11 +22,11 @@ module.exports = async function handler(req, res) {
   const oauth2Client = driveOAuthClient(redirectUri);
   const url = oauth2Client.generateAuthUrl({
     access_type: "offline",
-    prompt: "consent",
+    prompt: "select_account consent",
     include_granted_scopes: false,
     state: DRIVE_BACKUP_STATE,
     scope: [DRIVE_SCOPE],
-    login_hint: process.env.GMAIL_FROM_EMAIL || "julie@mejorvidainsurance.com",
+    login_hint: "admin@mejorvidainsurance.com",
   });
   res.redirect(url);
 };
