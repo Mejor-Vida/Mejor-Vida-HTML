@@ -1,0 +1,233 @@
+{
+  "slug": "poliza-graduada-gastos-finales",
+  "slugEn": "modified-final-expense-policies",
+  "published": "2026-09-06",
+  "modified": "2026-09-06",
+  "relatedSlugs": [
+    "periodo-carencia-seguro-gastos-finales",
+    "seguro-gastos-finales-con-problemas-salud",
+    "tipos-planes-seguro-gastos-finales"
+  ],
+  "es": {
+    "aiFreePledgeLabel": "Revisado por Mejor Vida Seguros",
+    "aiFreePledgeModalTitle": "Cómo se revisa esta guía",
+    "aiFreePledgeModalBody": "El equipo de Mejor Vida Seguros revisa esta guía con materiales de compañías designadas y fuentes públicas. Las cotizaciones y la aprobación dependen de la aseguradora, del estado y de su solicitud.",
+    "question": "¿Qué es un plan de gastos finales con periodo de espera?",
+    "headline": "Cuando el seguro paga menos al principio: el plan con espera",
+    "dek": "Un periodo de espera es el tiempo al inicio de la póliza en el que una muerte no accidental puede pagar menos que el monto completo. No es un castigo misterioso: es el diseño del producto cuando la salud no da para un plan de beneficio inmediato.",
+    "pageTitle": "Planes de gastos finales con periodo de espera",
+    "metaDescription": "Cómo funciona un seguro de gastos finales con espera en los primeros años, en palabras sencillas. Guía de Mejor Vida Seguros.",
+    "keyTakeaways": [
+      "Periodo de espera: los primeros años, una muerte por enfermedad puede no pagar el 100% del monto.",
+      "Un accidente cubierto suele pagar el monto completo desde el inicio — si el contrato lo dice.",
+      "Las fórmulas no son iguales: una compañía puede devolver primas más un interés; otra puede pagar un porcentaje del monto el año 1 y el año 2.",
+      "Después de la espera, el fallecimiento cubierto suele pagar el monto completo mientras la póliza esté vigente."
+    ],
+    "cta": {
+      "title": "Vea un precio para su situación",
+      "body": "Mejor Vida Seguros compara compañías de gastos finales. Empiece con una cotización gratuita, agende una llamada o escríbanos por WhatsApp.",
+      "quote": "Cotización gratuita",
+      "schedule": "Agendar una llamada"
+    },
+    "blocks": [
+      {
+        "type": "p",
+        "text": "A este diseño a veces le ponen apodos de industria. En esta guía lo llamamos plan con periodo de espera o plan de beneficio limitado al inicio, para que no necesite un glosario."
+      },
+      {
+        "type": "h2",
+        "text": "Por qué existe este diseño"
+      },
+      {
+        "type": "p",
+        "text": "Si la compañía no puede ofrecer un plan que pague completo desde el día uno, todavía puede ofrecer cobertura. A cambio, los primeros años no son el mismo cheque. Eso abre la puerta a personas con más historial de salud, a un precio y unas reglas distintas."
+      },
+      {
+        "type": "h2",
+        "text": "Cómo se siente en un reclamo"
+      },
+      {
+        "type": "p",
+        "text": "Imagine un monto de $10,000. Si la muerte es por un accidente que el contrato cubre, la familia puede recibir los $10,000 aunque sea el mes 4. Si la muerte es por una enfermedad en el año 1, una compañía puede devolver lo pagado más un 10%; otra puede pagar el 30% de los $10,000. En el año 3, ambas suelen pagar los $10,000. Esos ejemplos vienen de productos distintos; no se combinan en una sola póliza."
+      },
+      {
+        "type": "table",
+        "caption": "Tres fórmulas que no debemos mezclar",
+        "lead": "La fila de su póliza es una sola. Esta tabla evita copiar la regla de un logo a otro.",
+        "headers": [
+          "Ejemplo de producto",
+          "Muerte no accidental, primeros años",
+          "Después"
+        ],
+        "rows": [
+          [
+            "Living Promise con espera",
+            "Años 1–2: primas pagadas + 10%",
+            "100% del monto"
+          ],
+          [
+            "American Amicable (diseño de primeros años limitados)",
+            "Año 1: 30% del monto; año 2: 70%",
+            "100% desde el año 3"
+          ],
+          [
+            "Accendo modificado (materiales de producto)",
+            "Años 1–2: suele devolver 110% de primas ganadas",
+            "100% desde el año 3"
+          ],
+          [
+            "Corebridge aceptación garantizada (línea cotizada)",
+            "Espera de unos dos años: primas + interés contractual",
+            "100% después de la espera"
+          ]
+        ],
+        "foot": "Un accidente cubierto puede pagar 100% en todos esos diseños. Siempre según el contrato. Edades y topes también difieren (Living Promise con espera: 45–80, unos $20,000; Accendo modificado: 40–75, hasta $25,000; Corebridge GIWL: típico 50–80, $5,000–$25,000)."
+      },
+      {
+        "type": "h2",
+        "text": "Ventajas y límites"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Ventaja: hay una póliza cuando el plan de beneficio inmediato no sale.",
+          "Límite: si el fallecimiento por enfermedad ocurre pronto, el cheque puede ser pequeño frente al funeral.",
+          "Límite: suele costar más por dólar que el plan inmediato de la misma compañía.",
+          "Ventaja: el accidente cubierto puede cerrar esa brecha desde el día uno."
+        ]
+      },
+      {
+        "type": "note",
+        "text": "Si puede calificar a un plan de beneficio completo, Mejor Vida Seguros no empuja la espera “porque sí.” Se cotiza primero el camino que paga entero cuando las respuestas lo permiten."
+      },
+      {
+        "type": "faq",
+        "items": [
+          {
+            "q": "¿La espera se aplica también al suicidio?",
+            "a": "Muchas pólizas de vida tienen reglas propias para suicidio en los primeros años, aparte de la espera del producto. Eso está en el contrato; no lo generalizamos aquí."
+          },
+          {
+            "q": "¿Puedo “esperar” y luego cambiar a beneficio completo?",
+            "a": "No automáticamente. A veces una póliza nueva, si la salud y la edad lo permiten. No es un ascenso interno garantizado."
+          },
+          {
+            "q": "¿Dos años o tres?",
+            "a": "Depende del producto. Living Promise con espera usa dos años en la fórmula de primas más 10%. American Amicable usa dos años de porcentajes y el 100% en el año 3. Corebridge GIWL, en la línea cotizada, unos dos años. No hay un único número nacional."
+          }
+        ]
+      }
+    ]
+  },
+  "en": {
+    "aiFreePledgeLabel": "Reviewed by Mejor Vida Insurance",
+    "aiFreePledgeModalTitle": "How this guide is reviewed",
+    "aiFreePledgeModalBody": "The Mejor Vida Insurance team reviews this guide against appointed-company materials and public sources. Quotes and approval depend on the insurer, your state, and your application.",
+    "question": "What is a waiting-period final expense plan?",
+    "headline": "When insurance pays less at first: the waiting-period plan",
+    "dek": "A waiting period is the time at the start of the policy when a non-accidental death may pay less than the full amount. It is not a mysterious penalty: it is the product design when health will not support an immediate full-benefit plan.",
+    "pageTitle": "Waiting-period final expense plans",
+    "metaDescription": "How a final expense plan with a waiting period works in the first years, in plain language. A guide from Mejor Vida Insurance.",
+    "keyTakeaways": [
+      "Waiting period: in the first years, a death from illness may not pay 100% of the amount.",
+      "A covered accident often pays the full amount from the start — if the contract says so.",
+      "The formulas are not the same: one company may return premiums plus interest; another may pay a percentage of the amount in year 1 and year 2.",
+      "After the wait, a covered death usually pays the full amount while the policy is in force."
+    ],
+    "cta": {
+      "title": "See a price for your situation",
+      "body": "Mejor Vida Insurance compares final expense companies. Start with a free quote, schedule a call, or message us on WhatsApp.",
+      "quote": "Get a free quote",
+      "schedule": "Schedule a call"
+    },
+    "blocks": [
+      {
+        "type": "p",
+        "text": "Industry nicknames for this design can sound like a foreign language. In this guide we call it a waiting-period plan or a limited-early-benefit plan, so you do not need a glossary."
+      },
+      {
+        "type": "h2",
+        "text": "Why this design exists"
+      },
+      {
+        "type": "p",
+        "text": "If the company cannot offer a plan that pays in full from day one, it can still offer coverage. In exchange, the first years are not the same check. That opens a door for people with more health history, at a different price and a different set of rules."
+      },
+      {
+        "type": "h2",
+        "text": "How it feels at claim time"
+      },
+      {
+        "type": "p",
+        "text": "Picture a $10,000 amount. If death is from an accident the contract covers, the family may receive $10,000 even in month 4. If death is from illness in year 1, one company may return premiums plus 10%; another may pay 30% of the $10,000. In year 3, both typically pay $10,000. Those examples come from different products; they are not combined in one policy."
+      },
+      {
+        "type": "table",
+        "caption": "Three formulas we must not mix",
+        "lead": "Your policy has one row. This table stops one logo’s rule from being copied onto another.",
+        "headers": [
+          "Product example",
+          "Non-accidental death, early years",
+          "After that"
+        ],
+        "rows": [
+          [
+            "Living Promise with a wait",
+            "Years 1–2: premiums paid + 10%",
+            "100% of the amount"
+          ],
+          [
+            "American Amicable (limited-early-year design)",
+            "Year 1: 30% of amount; year 2: 70%",
+            "100% from year 3"
+          ],
+          [
+            "Accendo modified (product materials)",
+            "Years 1–2: typically return 110% of earned premiums",
+            "100% from year 3"
+          ],
+          [
+            "Corebridge guaranteed acceptance (quoted line)",
+            "About a two-year wait: premiums + contract interest",
+            "100% after the wait"
+          ]
+        ],
+        "foot": "A covered accident can pay 100% in all of those designs. Always subject to the contract. Ages and caps also differ (Living Promise with a wait: 45–80, about $20,000; Accendo modified: 40–75, up to $25,000; Corebridge GIWL: typical 50–80, $5,000–$25,000)."
+      },
+      {
+        "type": "h2",
+        "text": "Advantages and limits"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Advantage: there is a policy when the immediate full-benefit plan will not issue.",
+          "Limit: if death from illness happens soon, the check can be small next to the funeral.",
+          "Limit: it usually costs more per dollar than the same company’s immediate plan.",
+          "Advantage: a covered accident can close that gap from day one."
+        ]
+      },
+      {
+        "type": "note",
+        "text": "If you can qualify for a full-benefit plan, Mejor Vida Insurance does not push a wait “just because.” We quote the path that pays in full first when the answers support it."
+      },
+      {
+        "type": "faq",
+        "items": [
+          {
+            "q": "Does the wait also apply to suicide?",
+            "a": "Many life policies have their own suicide rules in the early years, separate from the product wait. That is in the contract; we do not generalize it here."
+          },
+          {
+            "q": "Can I “wait it out” and then switch to a full benefit?",
+            "a": "Not automatically. Sometimes a new policy, if health and age allow. It is not a guaranteed internal upgrade."
+          },
+          {
+            "q": "Two years or three?",
+            "a": "It depends on the product. Living Promise with a wait uses two years in the premiums-plus-10% formula. American Amicable uses two years of percentages and 100% in year 3. Corebridge GIWL, on the quoted line, about two years. There is no single national number."
+          }
+        ]
+      }
+    ]
+  }
+}

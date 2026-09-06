@@ -1,0 +1,193 @@
+{
+  "slug": "beneficio-seguro-gastos-finales-familia",
+  "slugEn": "leaving-money-beyond-funeral-costs",
+  "published": "2026-09-06",
+  "modified": "2026-09-06",
+  "relatedSlugs": [
+    "cuanta-cobertura-gastos-finales-necesito",
+    "seguro-gastos-finales-cubre-deudas-medicas",
+    "que-son-polizas-gastos-finales"
+  ],
+  "es": {
+    "aiFreePledgeLabel": "Revisado por Mejor Vida Seguros",
+    "aiFreePledgeModalTitle": "Cómo se revisa esta guía",
+    "aiFreePledgeModalBody": "El equipo de Mejor Vida Seguros revisa esta guía con materiales de compañías designadas y fuentes públicas. Las cotizaciones y la aprobación dependen de la aseguradora, del estado y de su solicitud.",
+    "question": "¿Puedo dejar dinero a mi familia además del funeral?",
+    "headline": "El sobrante del beneficio es de la familia, no de la funeraria",
+    "dek": "Si el cheque es mayor que el funeral, el resto no se “devuelve” a la aseguradora. El beneficiario lo guarda o lo usa en otras necesidades. Por eso el monto de la póliza es una decisión, no un paquete cerrado.",
+    "pageTitle": "Dejar dinero a la familia además del funeral",
+    "metaDescription": "Qué pasa con el dinero de un seguro de gastos finales que sobra después del funeral. Guía de Mejor Vida Seguros.",
+    "keyTakeaways": [
+      "El beneficiario recibe el monto cubierto (menos préstamos u otros descuentos del contrato), no una factura preaprobada de la funeraria.",
+      "Un resto puede ayudar con viaje, comida de los días del velorio, deudas o un pequeño legado.",
+      "Nombrar bien a los beneficiarios importa más que un eslogan de “dejar herencia.”",
+      "Un monto más alto cuesta más cada mes y puede chocar con el tope de edad del producto."
+    ],
+    "cta": {
+      "title": "Vea un precio para su situación",
+      "body": "Mejor Vida Seguros compara compañías de gastos finales. Empiece con una cotización gratuita, agende una llamada o escríbanos por WhatsApp.",
+      "quote": "Cotización gratuita",
+      "schedule": "Agendar una llamada"
+    },
+    "blocks": [
+      {
+        "type": "p",
+        "text": "Algunas personas compran exactamente “lo del ataúd.” Otras quieren que, si el servicio sale más barato o si ya hay un lote pagado, los hijos no se queden en cero. Ambas intenciones caben en el mismo tipo de póliza: cambia el número."
+      },
+      {
+        "type": "h2",
+        "text": "No hay una alcancía de la funeraria"
+      },
+      {
+        "type": "p",
+        "text": "A diferencia de un contrato prepagado, el seguro no está atado a un paquete de servicios. Si la cremación cuesta $4,000 y la póliza paga $10,000, los $6,000 restantes son del beneficiario. La aseguradora no reclama la diferencia porque el funeral fue sencillo."
+      },
+      {
+        "type": "h2",
+        "text": "Qué puede hacer ese resto"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Pasajes y hotel para quien vive en otro estado.",
+          "Comidas, flores o un aviso obituario que no estaban en la mediana de la NFDA.",
+          "Una deuda pequeña que usted no quería dejar.",
+          "Un regalo, sin trámites de testamento, si el beneficiario ya está nombrado. (Un testamento sigue siendo otra conversación.)"
+        ]
+      },
+      {
+        "type": "p",
+        "text": "La mediana NFDA 2023 de $8,300 (velatorio y entierro, lado funeraria) y $6,280 (velatorio y cremación) sirve para calibrar. Si usted compra $15,000, está eligiendo a propósito un colchón. Si compra $5,000, está eligiendo un piso más bajo."
+      },
+      {
+        "type": "h2",
+        "text": "Límites honestos"
+      },
+      {
+        "type": "p",
+        "text": "Un gasto final no es un plan de retiro ni un fondo universitario. Los topes de producto (a menudo hasta $50,000, a veces $25,000 a edades altas) no sustituyen una vida entera grande. Tampoco evitamos impuestos de herencia complejos: el beneficio de vida suele no ser ingreso gravable para el beneficiario, pero eso no es asesoría fiscal."
+      },
+      {
+        "type": "faq",
+        "items": [
+          {
+            "q": "¿Puedo poner a dos hijos a partes iguales?",
+            "a": "Por lo general sí, si el formulario lo permite. Confirme porcentajes y un contingente si alguien fallece antes."
+          },
+          {
+            "q": "¿La funeraria puede exigir el cheque?",
+            "a": "Usted puede asignar o la familia puede pagarles. El diseño habitual es pagar al beneficiario. Un prepago es el camino si quiere atar el dinero a una funeraria."
+          },
+          {
+            "q": "¿Debo decirle a mi familia el monto?",
+            "a": "Ayuda que sepan que existe una póliza y quién es el dueño. El número exacto es su decisión."
+          }
+        ]
+      },
+      {
+        "type": "sources",
+        "items": [
+          {
+            "label": "National Funeral Directors Association — 2023 General Price List study",
+            "url": "https://content.nfda.org/news/statistics"
+          },
+          {
+            "label": "NAIC — Life insurance consumer information",
+            "url": "https://content.naic.org/consumer/life-insurance.htm"
+          }
+        ]
+      }
+    ]
+  },
+  "en": {
+    "aiFreePledgeLabel": "Reviewed by Mejor Vida Insurance",
+    "aiFreePledgeModalTitle": "How this guide is reviewed",
+    "aiFreePledgeModalBody": "The Mejor Vida Insurance team reviews this guide against appointed-company materials and public sources. Quotes and approval depend on the insurer, your state, and your application.",
+    "question": "Can I leave money to my family beyond funeral costs?",
+    "headline": "Money left after the funeral belongs to the family, not the funeral home",
+    "dek": "If the check is larger than the funeral, the extra is not “returned” to the insurer. The beneficiary keeps it or uses it for other needs. That is why the policy amount is a choice, not a closed package.",
+    "pageTitle": "Leaving money beyond funeral costs",
+    "metaDescription": "What happens to final expense insurance money that remains after the funeral. A guide from Mejor Vida Insurance.",
+    "keyTakeaways": [
+      "The beneficiary receives the covered amount (minus loans or other contract reductions), not a pre-approved funeral invoice.",
+      "A remainder can help with travel, meals during viewing days, debts, or a small gift.",
+      "Naming beneficiaries correctly matters more than a slogan about “leaving an inheritance.”",
+      "A higher amount costs more each month and may hit the product’s age cap."
+    ],
+    "cta": {
+      "title": "See a price for your situation",
+      "body": "Mejor Vida Insurance compares final expense companies. Start with a free quote, schedule a call, or message us on WhatsApp.",
+      "quote": "Get a free quote",
+      "schedule": "Schedule a call"
+    },
+    "blocks": [
+      {
+        "type": "p",
+        "text": "Some people buy “just the casket.” Others want their children not to be left at zero if the service costs less or a plot is already paid. Both intentions fit the same kind of policy: the number changes."
+      },
+      {
+        "type": "h2",
+        "text": "There is no funeral-home piggy bank"
+      },
+      {
+        "type": "p",
+        "text": "Unlike a prepaid contract, insurance is not tied to a service package. If cremation costs $4,000 and the policy pays $10,000, the remaining $6,000 belongs to the beneficiary. The insurer does not claw back the difference because the funeral was simple."
+      },
+      {
+        "type": "h2",
+        "text": "What that remainder can do"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Flights and a hotel for someone who lives in another state.",
+          "Meals, flowers, or an obituary that were not inside the NFDA median.",
+          "A small debt you did not want to leave.",
+          "A gift, without probate of that check, if the beneficiary is already named. (A will is still a separate conversation.)"
+        ]
+      },
+      {
+        "type": "p",
+        "text": "NFDA’s 2023 medians of $8,300 (viewing and burial, funeral-home side) and $6,280 (viewing and cremation) help you calibrate. If you buy $15,000, you are choosing a cushion on purpose. If you buy $5,000, you are choosing a lower floor."
+      },
+      {
+        "type": "h2",
+        "text": "Honest limits"
+      },
+      {
+        "type": "p",
+        "text": "Final expense is not a retirement plan or a college fund. Product caps (often up to $50,000, sometimes $25,000 at older ages) do not replace large whole life. We also do not wave away complex estate tax questions: a life benefit is often not taxable income to the beneficiary, but that is not tax advice."
+      },
+      {
+        "type": "faq",
+        "items": [
+          {
+            "q": "Can I split two children equally?",
+            "a": "Usually yes, if the form allows it. Confirm percentages and a backup if someone dies first."
+          },
+          {
+            "q": "Can the funeral home demand the check?",
+            "a": "You can assign it or the family can pay them. The usual design pays the beneficiary. A prepay is the path if you want the money tied to a funeral home."
+          },
+          {
+            "q": "Should I tell my family the amount?",
+            "a": "It helps if they know a policy exists and who owns it. The exact number is your decision."
+          }
+        ]
+      },
+      {
+        "type": "sources",
+        "items": [
+          {
+            "label": "National Funeral Directors Association — 2023 General Price List study",
+            "url": "https://content.nfda.org/news/statistics"
+          },
+          {
+            "label": "NAIC — Life insurance consumer information",
+            "url": "https://content.naic.org/consumer/life-insurance.htm"
+          }
+        ]
+      }
+    ]
+  }
+}

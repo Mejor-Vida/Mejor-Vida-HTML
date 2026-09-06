@@ -1,16 +1,18 @@
 {
-  "intro": "Guías en español escritas por Mejor Vida Insurance. Cada enlace abre una página dedicada con información detallada (sin contenido generado por IA).",
+  "intro": "Guías en español escritas por Mejor Vida Seguros. Cada enlace abre una página dedicada con información detallada.",
+  "introEn": "Guides in English from Mejor Vida Insurance. Each link opens a dedicated page with practical detail.",
   "categories": [
     {
       "id": "esencial",
       "title": "Guías principales",
+      "titleEn": "Main guides",
       "guides": [
         {
           "slug": "que-es-seguro-gastos-finales",
           "question": "¿Qué es un seguro de gastos finales?",
           "questionEn": "What is final expense insurance?",
           "cardLabel": "Qué es el seguro",
-          "cardLabelEn": "What is the insurance",
+          "cardLabelEn": "What it is",
           "teaser": "Qué cubre, para quién sirve y cómo ayuda a su familia con el funeral y deudas pequeñas.",
           "teaserEn": "What it covers, who it is for, and how it helps your family with funeral costs and small debts.",
           "image": "fe-guide-card-que-es"
@@ -21,8 +23,8 @@
           "questionEn": "What types of plans are there?",
           "cardLabel": "Tipos de planes",
           "cardLabelEn": "Types of plans",
-          "teaser": "Emisión simplificada, modificada y garantizada — cómo difieren en salud, espera y aprobación.",
-          "teaserEn": "Simplified issue, graded, and guaranteed acceptance — how they differ in health questions, waiting periods, and approval.",
+          "teaser": "Planes que pagan completo desde el inicio, planes con espera y planes de aceptación garantizada.",
+          "teaserEn": "Plans that pay in full from day one, waiting-period plans, and guaranteed-acceptance plans.",
           "image": "fe-guide-card-tipos"
         },
         {
@@ -30,7 +32,7 @@
           "question": "¿Cuánto cuesta un seguro de gastos finales?",
           "questionEn": "How much does final expense insurance cost?",
           "cardLabel": "Cuánto cuesta el seguro",
-          "cardLabelEn": "How much the insurance costs",
+          "cardLabelEn": "How much it costs",
           "teaser": "Precio mensual del seguro por edad, salud, tabaco y cobertura — no la factura de la funeraria.",
           "teaserEn": "Monthly premium by age, health, tobacco, and coverage — not the funeral home bill.",
           "image": "fe-guide-card-cuanto-cuesta"
@@ -47,176 +49,337 @@
         },
         {
           "slug": "diferencia-seguro-vida-y-gastos-finales",
+          "slugEn": "life-insurance-vs-final-expense",
           "question": "¿Cuál es la diferencia entre seguro de vida y seguro de gastos finales?",
-          "teaser": "Compare propósito, montos de cobertura y cuándo conviene cada uno."
+          "questionEn": "What is the difference between life insurance and final expense insurance?",
+          "teaser": "Compare propósito, montos de cobertura y cuándo conviene cada uno.",
+          "teaserEn": "Compare purpose, coverage amounts, and when each type may fit.",
+          "image": "fe-guide-card-diferencia",
+          "cardLabel": "Vida vs gastos finales",
+          "cardLabelEn": "Life vs final expense"
         },
         {
           "slug": "que-pasa-sin-seguro-gastos-finales",
+          "slugEn": "what-happens-without-final-expense-insurance",
           "question": "¿Qué pasa si no tengo seguro de gastos finales?",
-          "teaser": "Riesgos para la familia, costos del funeral y alternativas para planificar."
+          "questionEn": "What happens if I do not have final expense insurance?",
+          "teaser": "Riesgos para la familia, costos del funeral y alternativas para planificar.",
+          "teaserEn": "What the family may face, funeral bills, and other ways to plan.",
+          "image": "fe-guide-card-sin-seguro",
+          "cardLabel": "Si no tiene este seguro",
+          "cardLabelEn": "If you do not have it"
         },
         {
           "slug": "que-son-polizas-gastos-finales",
+          "slugEn": "what-are-final-expense-policies",
           "question": "¿Qué son las pólizas de gastos finales?",
-          "teaser": "Tipos de pólizas, beneficios en vida y cómo funcionan las primas niveladas."
+          "questionEn": "What are final expense policies?",
+          "teaser": "Cómo funciona una póliza pequeña de vida permanente y una prima que no sube por edad.",
+          "teaserEn": "How a small permanent life policy works and what a level premium means.",
+          "image": "fe-guide-card-polizas",
+          "cardLabel": "Qué es una póliza",
+          "cardLabelEn": "What a policy is"
         }
       ]
     },
     {
       "id": "costos",
       "title": "Costos y cobertura",
+      "titleEn": "Cost and coverage",
       "guides": [
         {
           "slug": "cuanto-cuesta-un-funeral",
           "question": "¿Cuánto cuesta un funeral?",
-          "teaser": "Promedios nacionales de entierro y cremación, qué suele ir aparte y cómo pedir la lista de precios de la funeraria."
+          "questionEn": "How much does a funeral cost?",
+          "teaser": "Promedios nacionales de entierro y cremación, qué suele ir aparte y cómo pedir la lista de precios de la funeraria.",
+          "teaserEn": "National burial and cremation medians, what is usually extra, and how to ask for the funeral home price list."
         },
         {
           "slug": "funerales-prepagados",
           "question": "¿Qué es un funeral prepagado?",
-          "teaser": "Cómo funciona el contrato con la funeraria, dónde queda el dinero, qué preguntar antes de firmar y cómo se diferencia del seguro."
+          "questionEn": "What is a prepaid funeral?",
+          "teaser": "Cómo funciona el contrato con la funeraria, dónde queda el dinero, qué preguntar antes de firmar y cómo se diferencia del seguro.",
+          "teaserEn": "How a funeral-home contract works, where the money sits, what to ask before signing, and how it differs from insurance."
         },
         {
           "slug": "como-pagar-un-funeral",
           "question": "¿Cómo se paga un funeral?",
-          "teaser": "Ahorros, prepago, seguro de vida, el pago de $255 del Seguro Social, ayudas del VA y préstamos — qué cubre cada vía y qué no."
+          "questionEn": "How do you pay for a funeral?",
+          "teaser": "Ahorros, prepago, seguro de vida, el pago de $255 del Seguro Social, ayudas del VA y préstamos — qué cubre cada vía y qué no.",
+          "teaserEn": "Savings, prepay, life insurance, the $255 Social Security payment, VA help, and loans — what each path covers and what it does not."
         },
         {
           "slug": "como-planificar-su-funeral",
           "question": "¿Cómo planificar su funeral?",
-          "teaser": "Deje preferencias por escrito —tipo de servicio, funeraria, cementerio y quién tiene copias— sin tener que pagar por adelantado. El prepago y el seguro son decisiones aparte."
+          "questionEn": "How do you plan your funeral?",
+          "teaser": "Deje preferencias por escrito —tipo de servicio, funeraria, cementerio y quién tiene copias— sin tener que pagar por adelantado. El prepago y el seguro son decisiones aparte.",
+          "teaserEn": "Write down service, funeral home, cemetery, and who has copies — without having to pay in advance. Prepay and insurance are separate decisions."
         },
         {
           "slug": "planificacion-patrimonial",
           "question": "¿Cómo dejar un plan patrimonial y los deseos del funeral?",
-          "teaser": "Pasos para testamento, poderes, beneficiarios y un cuaderno descargable de regalo. No sustituye a un abogado."
+          "questionEn": "How do you leave an estate plan and funeral wishes?",
+          "teaser": "Pasos para testamento, poderes, beneficiarios y un cuaderno descargable de regalo. No sustituye a un abogado.",
+          "teaserEn": "Will, powers of attorney, beneficiaries, and a free workbook. This is not a substitute for an attorney."
         },
         {
           "slug": "cuanta-cobertura-gastos-finales-necesito",
+          "slugEn": "how-much-final-expense-coverage-do-i-need",
           "question": "¿Cuánta cobertura de gastos finales necesito?",
-          "teaser": "$5,000, $10,000 o $15,000 — cómo elegir el monto adecuado."
+          "questionEn": "How much final expense coverage do I need?",
+          "teaser": "$5,000, $10,000 o $15,000 — cómo elegir el monto adecuado.",
+          "teaserEn": "$5,000, $10,000, or $15,000 — how to choose an amount that fits.",
+          "image": "fe-guide-card-cuanta-cobertura",
+          "cardLabel": "Cuánta cobertura",
+          "cardLabelEn": "How much coverage"
         },
         {
           "slug": "factores-precio-seguro-gastos-finales",
+          "slugEn": "what-affects-final-expense-insurance-cost",
           "question": "¿Qué factores afectan el precio del seguro de gastos finales?",
-          "teaser": "Edad, salud, tabaco, compañía y monto de beneficio explicados en sencillo."
+          "questionEn": "What affects the cost of final expense insurance?",
+          "teaser": "Edad, salud, tabaco, compañía y monto de beneficio explicados en sencillo.",
+          "teaserEn": "Age, health, tobacco, company, and benefit amount in plain language.",
+          "image": "fe-guide-card-factores-precio",
+          "cardLabel": "Qué afecta el precio",
+          "cardLabelEn": "What affects the price"
         },
         {
           "slug": "examen-medico-seguro-gastos-finales",
+          "slugEn": "do-i-need-a-medical-exam-for-final-expense",
           "question": "¿Necesito examen médico para un seguro de gastos finales?",
-          "teaser": "Pólizas sin examen, cuestionarios de salud y qué esperar al aplicar."
+          "questionEn": "Do I need a medical exam for final expense insurance?",
+          "teaser": "Pólizas sin examen, cuestionarios de salud y qué esperar al aplicar.",
+          "teaserEn": "No-exam policies, health questions, and what to expect when you apply.",
+          "image": "fe-guide-card-examen-medico",
+          "cardLabel": "¿Hace falta examen?",
+          "cardLabelEn": "Do I need an exam?"
         },
         {
           "slug": "seguro-gastos-finales-con-problemas-salud",
+          "slugEn": "final-expense-insurance-with-health-conditions",
           "question": "¿Puedo obtener seguro de gastos finales si tengo problemas de salud?",
-          "teaser": "Opciones graduadas, aceptación garantizada y cómo Mejor Vida compara compañías."
+          "questionEn": "Can I get final expense insurance with health conditions?",
+          "teaser": "Opciones con espera, aceptación garantizada y cómo Mejor Vida compara compañías.",
+          "teaserEn": "Waiting-period options, guaranteed acceptance, and how Mejor Vida compares companies.",
+          "image": "fe-guide-card-problemas-salud",
+          "cardLabel": "Con problemas de salud",
+          "cardLabelEn": "With health conditions"
         },
         {
           "slug": "seguro-gastos-finales-fumadores",
+          "slugEn": "final-expense-insurance-for-smokers",
           "question": "¿Puedo obtener seguro de gastos finales si fumo?",
-          "teaser": "Cómo el tabaco afecta la prima y qué alternativas existen."
+          "questionEn": "Can I get final expense insurance if I smoke?",
+          "teaser": "Cómo el tabaco afecta la prima y qué alternativas existen.",
+          "teaserEn": "How tobacco affects the premium and what options still exist.",
+          "image": "fe-guide-card-fumadores",
+          "cardLabel": "Si fumo",
+          "cardLabelEn": "If I smoke"
         },
         {
           "slug": "edad-contratar-seguro-gastos-finales",
+          "slugEn": "best-age-to-buy-final-expense-insurance",
           "question": "¿A qué edad conviene contratar un seguro de gastos finales?",
-          "teaser": "50s, 60s, 70s y más — por qué antes suele ser más económico."
+          "questionEn": "What is the best age to buy final expense insurance?",
+          "teaser": "50s, 60s, 70s y más — por qué antes suele ser más económico.",
+          "teaserEn": "Your 50s, 60s, 70s, and later — why buying earlier often costs less.",
+          "image": "fe-guide-card-edad",
+          "cardLabel": "Mejor edad para contratar",
+          "cardLabelEn": "Best age to buy"
         },
         {
           "slug": "cuanto-tiempo-aprobacion-poliza-gastos-finales",
+          "slugEn": "how-long-final-expense-approval-takes",
           "question": "¿Cuánto tiempo tarda en aprobarse una póliza de gastos finales?",
-          "teaser": "Pasos desde la cotización hasta la emisión, y qué puede acelerar el proceso."
+          "questionEn": "How long does final expense approval take?",
+          "teaser": "Pasos desde la cotización hasta la emisión, y qué puede acelerar el proceso.",
+          "teaserEn": "Steps from quote to issue, and what can slow or speed the decision.",
+          "image": "fe-guide-card-aprobacion",
+          "cardLabel": "Tiempo de aprobación",
+          "cardLabelEn": "How long approval takes"
         }
       ]
     },
     {
       "id": "producto",
       "title": "Productos y compañías",
+      "titleEn": "Products and companies",
       "guides": [
         {
           "slug": "companias-seguro-gastos-finales",
+          "slugEn": "final-expense-insurance-companies",
           "question": "¿Qué compañías ofrecen seguro de gastos finales?",
-          "teaser": "Assurity, Mutual of Omaha, American Amicable y cómo comparar opciones."
+          "questionEn": "Which companies offer final expense insurance?",
+          "teaser": "Compañías que Mejor Vida puede cotizar y cómo comparar opciones.",
+          "teaserEn": "Companies Mejor Vida can quote and how to compare options.",
+          "image": "fe-guide-card-companias",
+          "cardLabel": "Compañías",
+          "cardLabelEn": "Insurance companies"
         },
         {
           "slug": "comparar-mutual-omaha-american-amicable",
+          "slugEn": "mutual-of-omaha-vs-american-amicable",
           "question": "Mutual of Omaha vs American Amicable — gastos finales",
-          "teaser": "Diferencias generales que Mejor Vida considera al cotizar."
+          "questionEn": "Mutual of Omaha vs American Amicable for final expense",
+          "teaser": "Diferencias generales que Mejor Vida considera al cotizar.",
+          "teaserEn": "General differences Mejor Vida considers when quoting.",
+          "image": "fe-guide-card-comparar-companias",
+          "cardLabel": "Mutual of Omaha vs Amicable",
+          "cardLabelEn": "Mutual of Omaha vs Amicable"
         },
         {
           "slug": "seguro-vida-entero-gastos-finales",
+          "slugEn": "whole-life-for-final-expenses",
           "question": "¿Qué es un seguro de vida entero para gastos finales?",
-          "teaser": "Vida entero simplificado y por qué es común en gastos finales."
+          "questionEn": "What is whole life insurance for final expenses?",
+          "teaser": "Por qué los gastos finales suelen ser un tipo de vida permanente.",
+          "teaserEn": "Why final expense is usually a form of permanent whole life.",
+          "image": "fe-guide-card-vida-entero",
+          "cardLabel": "Vida entera",
+          "cardLabelEn": "Whole life"
         },
         {
           "slug": "poliza-graduada-gastos-finales",
-          "question": "¿Qué es una póliza graduada (graded) de gastos finales?",
-          "teaser": "Beneficios parciales al inicio, aceptación y cuándo aplica."
+          "slugEn": "modified-final-expense-policies",
+          "question": "¿Qué es un plan de gastos finales con periodo de espera?",
+          "questionEn": "What is a waiting-period final expense plan?",
+          "teaser": "Cómo paga en los primeros años y cuándo suele usarse.",
+          "teaserEn": "How it pays in the first years and when it is typically used.",
+          "image": "fe-guide-card-poliza-graduada",
+          "cardLabel": "Plan con espera",
+          "cardLabelEn": "Waiting-period plans"
         },
         {
           "slug": "seguro-gastos-finales-cubre-deudas-medicas",
+          "slugEn": "does-final-expense-cover-medical-debt",
           "question": "¿El seguro de gastos finales cubre deudas médicas?",
-          "teaser": "Uso del beneficio, facturas pendientes y qué puede pagar la familia."
+          "questionEn": "Does final expense insurance cover medical debt?",
+          "teaser": "Uso del beneficio, facturas pendientes y qué puede pagar la familia.",
+          "teaserEn": "How the cash benefit works, unpaid bills, and what the family can pay.",
+          "image": "fe-guide-card-deudas-medicas",
+          "cardLabel": "Deudas médicas",
+          "cardLabelEn": "Medical debt"
         },
         {
           "slug": "beneficio-seguro-gastos-finales-familia",
+          "slugEn": "leaving-money-beyond-funeral-costs",
           "question": "¿Puedo dejar dinero a mi familia además del funeral?",
-          "teaser": "Beneficio sobrante, legado pequeño y flexibilidad del pago."
+          "questionEn": "Can I leave money to my family beyond funeral costs?",
+          "teaser": "Beneficio sobrante, legado pequeño y flexibilidad del pago.",
+          "teaserEn": "Leftover benefit, a small gift, and flexibility of the payout.",
+          "image": "fe-guide-card-beneficio-familia",
+          "cardLabel": "Dinero para la familia",
+          "cardLabelEn": "Money for the family"
         },
         {
           "slug": "periodo-carencia-seguro-gastos-finales",
-          "question": "¿Qué es el período de carencia (waiting period)?",
-          "teaser": "Primeros meses de la póliza, muerte accidental y lectura de contrato."
+          "slugEn": "final-expense-waiting-period",
+          "question": "¿Qué es el período de espera de un seguro de gastos finales?",
+          "questionEn": "What is a final expense waiting period?",
+          "teaser": "Primeros años de la póliza, muerte accidental y lectura de contrato.",
+          "teaserEn": "The first years of the policy, accidental death, and reading the contract.",
+          "image": "fe-guide-card-periodo-carencia",
+          "cardLabel": "Período de espera",
+          "cardLabelEn": "Waiting period"
         },
         {
           "slug": "cancelar-seguro-gastos-finales",
+          "slugEn": "canceling-final-expense-insurance",
           "question": "¿Puedo cancelar un seguro de gastos finales?",
-          "teaser": "Cancelación, dejar de pagar y consecuencias antes de decidir."
+          "questionEn": "Can I cancel final expense insurance?",
+          "teaser": "Cancelación, dejar de pagar y consecuencias antes de decidir.",
+          "teaserEn": "Canceling, stopping payments, and what happens before you decide.",
+          "image": "fe-guide-card-cancelar",
+          "cardLabel": "Cancelar la póliza",
+          "cardLabelEn": "Canceling a policy"
         }
       ]
     },
     {
       "id": "mas",
       "title": "Más preguntas",
+      "titleEn": "More questions",
       "guides": [
         {
           "slug": "seguro-gastos-finales-mayores-70",
+          "slugEn": "final-expense-insurance-over-70",
           "question": "Seguro de gastos finales para personas mayores de 70 años",
-          "teaser": "Opciones, precios y aceptación después de los 70."
+          "questionEn": "Final expense insurance for people over 70",
+          "teaser": "Opciones, precios y aceptación después de los 70.",
+          "teaserEn": "Options, prices, and what to expect after age 70.",
+          "image": "fe-guide-card-mayores-70",
+          "cardLabel": "Después de los 70",
+          "cardLabelEn": "Over age 70"
         },
         {
           "slug": "seguro-gastos-finales-mayores-80",
           "question": "Seguro de gastos finales para personas mayores de 80 años",
-          "teaser": "Qué compañías consideran 80+, límites de edad y expectativas realistas."
+          "questionEn": "Final expense insurance for people over 80",
+          "teaser": "Qué compañías consideran 80+, límites de edad y expectativas realistas.",
+          "teaserEn": "Which appointed companies still consider ages 80+, age limits, and realistic expectations."
         },
         {
           "slug": "seguro-gastos-finales-mayores-85",
           "question": "Seguro de gastos finales para personas mayores de 85 años",
-          "teaser": "Qué compañías designadas todavía emiten a los 86–89 y cuándo llamar a Julie."
+          "questionEn": "Final expense insurance for people over 85",
+          "teaser": "Qué compañías designadas todavía emiten a los 86–89 y cuándo pedir una revisión personal.",
+          "teaserEn": "Which appointed companies still issue at ages 86–89 and when to ask for a personal review."
         },
         {
           "slug": "seguro-gastos-finales-sin-examen-nebraska",
+          "slugEn": "no-exam-final-expense-nebraska",
           "question": "Seguro de gastos finales sin examen médico en Nebraska",
-          "teaser": "Productos sin examen disponibles en Nebraska y cómo calificar."
+          "questionEn": "No-exam final expense insurance in Nebraska",
+          "teaser": "Productos sin examen disponibles en Nebraska y cómo calificar.",
+          "teaserEn": "No-exam products available in Nebraska and how qualifying usually works.",
+          "image": "fe-guide-card-sin-examen-ne",
+          "cardLabel": "Sin examen en Nebraska",
+          "cardLabelEn": "No exam in Nebraska"
         },
         {
           "slug": "vale-pena-seguro-10000-dolares",
+          "slugEn": "is-10000-final-expense-enough",
           "question": "¿Vale la pena un seguro de gastos finales con $10,000 de cobertura?",
-          "teaser": "Por qué $10,000 es un punto de partida común y si le alcanza."
+          "questionEn": "Is $10,000 of final expense coverage enough?",
+          "teaser": "Por qué $10,000 es un punto de partida común y si le alcanza.",
+          "teaserEn": "Why $10,000 is a common starting point and whether it is enough.",
+          "image": "fe-guide-card-10000",
+          "cardLabel": "¿Alcanzan $10,000?",
+          "cardLabelEn": "Is $10,000 enough?"
         },
         {
           "slug": "que-son-gastos-finales",
+          "slugEn": "what-are-final-expenses",
           "question": "¿Qué son los gastos finales?",
-          "teaser": "Funeral, cremación, deudas y costos que la familia enfrenta."
+          "questionEn": "What are final expenses?",
+          "teaser": "Funeral, cremación, deudas y costos que la familia enfrenta.",
+          "teaserEn": "Funeral, cremation, debts, and other costs families face.",
+          "image": "fe-guide-card-que-son-gastos",
+          "cardLabel": "Qué son los gastos finales",
+          "cardLabelEn": "What final expenses are"
         },
         {
           "slug": "cremacion-vs-entierro-nebraska",
+          "slugEn": "cremation-vs-burial-nebraska",
           "question": "Cremación vs entierro — ¿cuánto cuesta en Nebraska?",
-          "teaser": "Compare costos y cómo influye en la cobertura que necesita."
+          "questionEn": "Cremation vs burial — what does it cost in Nebraska?",
+          "teaser": "Compare costos y cómo influye en la cobertura que necesita.",
+          "teaserEn": "Compare costs and how the choice affects the coverage you may need.",
+          "image": "fe-guide-card-cremacion-entierro",
+          "cardLabel": "Cremación vs entierro",
+          "cardLabelEn": "Cremation vs burial"
         },
         {
           "slug": "seguro-gastos-finales-vs-prepago-funerario",
+          "slugEn": "final-expense-vs-prepaid-funeral",
           "question": "Seguro de gastos finales vs prepago funerario",
-          "teaser": "Ventajas y límites de cada opción para su familia."
+          "questionEn": "Final expense insurance vs a prepaid funeral",
+          "teaser": "Ventajas y límites de cada opción para su familia.",
+          "teaserEn": "Advantages and limits of each option for your family.",
+          "image": "fe-guide-card-vs-prepago",
+          "cardLabel": "Seguro vs prepago",
+          "cardLabelEn": "Insurance vs prepay"
         }
       ]
     }

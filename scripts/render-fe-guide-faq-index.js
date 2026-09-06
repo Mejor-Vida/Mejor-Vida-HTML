@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Render homepage FAQ guide cards + FAQPage JSON-LD from data/fe-guide-faq-index.json
+ * Render homepage FAQ guide conveyor + JSON-LD from data/fe-guide-faq-index.json
  * Usage: node scripts/render-fe-guide-faq-index.js
  */
 const fs = require("fs");
@@ -8,11 +8,17 @@ const path = require("path");
 const {
   loadFaqIndex,
   isGuidePublished,
-  renderPublishedGuideCard,
+  homepageCarouselGuides,
+  renderHomepageConveyor,
+  guideHref,
+  guideQuestion,
+  guideTeaser,
 } = require("../lib/fe-guide-catalog");
 
 const ROOT = path.join(__dirname, "..");
-const CSS_V = "20260903-guide-labels";
+const CSS_V = "20260906-fill3";
+const JS_V = "20260906-fill";
+const SITE = "https://www.mejorvidainsurance.com";
 
 const TARGETS = [
   {
@@ -22,81 +28,100 @@ const TARGETS = [
     blogPrefix: "",
     hubHref: "guias-gastos-finales.html",
     cssHref: `css/fe-guide.css?v=${CSS_V}`,
-    containerMaxWidth: "52rem",
+    jsSrc: `js/fe-guide-conveyor.js?v=${JS_V}`,
+    containerMaxWidth: "74rem",
     cssAttr: 'href="css/fe-guide.css',
+    includeFaqPage: true,
   },
   {
     file: path.join(ROOT, "en/index.html"),
     lang: "en",
     imagePrefix: "../img/opt/",
     blogPrefix: "../",
-    hubHref: "../guias-gastos-finales.html",
+    hubHref: "final-expense-guides.html",
     cssHref: `../css/fe-guide.css?v=${CSS_V}`,
-    containerMaxWidth: null,
+    jsSrc: `../js/fe-guide-conveyor.js?v=${JS_V}`,
+    containerMaxWidth: "74rem",
     cssAttr: 'href="../css/fe-guide.css',
+    includeFaqPage: false,
+    schemaInsertBefore: '<link href="../bootstrap/css/bootstrap.min.css"',
   },
 ];
 
-function soonCopy(lang, soonCount, hubHref) {
-  if (lang === "en") {
-    return `      <div class="text-center mt-4 mb-1">
-        <a class="fe-guide-faq-soon-btn" href="${hubHref}">
-          <span class="fe-guide-faq-soon-badge">Coming soon</span>
-          <span class="fe-guide-faq-soon-btn-label">${soonCount} more guides on the way</span>
-        </a>
-        <p class="small text-body-secondary mt-2 mb-0">We are writing more answers. Meanwhile, see the <a href="${hubHref}">full guide index</a>.</p>
-      </div>`;
-  }
-  return `      <div class="text-center mt-4 mb-1">
-        <a class="fe-guide-faq-soon-btn" href="${hubHref}">
-          <span class="fe-guide-faq-soon-badge">Próximamente</span>
-          <span class="fe-guide-faq-soon-btn-label">${soonCount} guías más en camino</span>
-        </a>
-        <p class="small text-body-secondary mt-2 mb-0">Estamos escribiendo más respuestas. Mientras tanto, vea el <a href="${hubHref}">índice completo de guías</a>.</p>
-      </div>`;
+function absPageUrl(target, href) {
+  if (/^https?:/i.test(href)) return href;
+  if (href.startsWith("../")) return `${SITE}${href.slice(2)}`;
+  if (target.lang === "en") return `${SITE}/en/${href.replace(/^\//, "")}`;
+  return `${SITE}/${href.replace(/^\//, "")}`;
 }
 
-function buildCardsHtml(target, homepageGuides, soonCount) {
-  const cardOpts = {
+function buildCardsHtml(target, homepageGuides) {
+  return renderHomepageConveyor(homepageGuides, {
     imagePrefix: target.imagePrefix,
     blogPrefix: target.blogPrefix,
     lang: target.lang,
-  };
-  const htmlParts = [];
-  htmlParts.push(`      <div class="row g-4 mb-2 fe-guide-media-grid">`);
-  for (const g of homepageGuides) {
-    htmlParts.push(renderPublishedGuideCard(g, cardOpts));
-  }
-  htmlParts.push(`      </div>`);
-  if (soonCount > 0) {
-    htmlParts.push(soonCopy(target.lang, soonCount, target.hubHref));
-  }
-  return htmlParts.join("\n");
+    hubHref: target.hubHref,
+  });
 }
 
-function buildSchemaBlock(homepageGuides, lang) {
-  const entities = homepageGuides.map((g) => ({
-    "@type": "Question",
-    name: lang === "en" ? g.questionEn || g.question : g.question,
-    acceptedAnswer: {
-      "@type": "Answer",
-      text: lang === "en" ? g.teaserEn || g.teaser : g.teaser,
-    },
-  }));
-  return `<script type="application/ld+json">
-${JSON.stringify(
-  {
+function buildSchemaBlock(target, homepageGuides) {
+  const itemList = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name:
+      target.lang === "en"
+        ? "Final expense insurance guides"
+        : "Guías de seguro de gastos finales",
+    itemListOrder: "https://schema.org/ItemListOrderAscending",
+    numberOfItems: homepageGuides.length,
+    itemListElement: homepageGuides.map((g, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: guideQuestion(g, { lang: target.lang }),
+      url: absPageUrl(target, guideHref(g.slug, { lang: target.lang, blogPrefix: target.blogPrefix })),
+      image: `${SITE}/img/opt/${g.image}.jpg`,
+      description: guideTeaser(g, { lang: target.lang }),
+    })),
+  };
+
+  if (!target.includeFaqPage) {
+    return `<script type="application/ld+json">\n${JSON.stringify(itemList, null, 2)}\n</script>`;
+  }
+
+  const faq = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: entities,
-  },
-  null,
-  2
-)}
-</script>`;
+    mainEntity: homepageGuides.map((g) => ({
+      "@type": "Question",
+      name: guideQuestion(g, { lang: target.lang }),
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: guideTeaser(g, { lang: target.lang }),
+      },
+    })),
+  };
+
+  return (
+    `<script type="application/ld+json">\n${JSON.stringify(faq, null, 2)}\n</script>\n` +
+    `<script type="application/ld+json">\n${JSON.stringify(itemList, null, 2)}\n</script>`
+  );
 }
 
-function patchIndex(target, homepageGuides, soonCount) {
+function bumpConveyorScript(index, target) {
+  if (index.includes("fe-guide-conveyor.js")) {
+    return index.replace(
+      /((?:\.\.\/)?js\/fe-guide-conveyor\.js)\?v=[^"]+/g,
+      `${target.lang === "en" ? "../js/fe-guide-conveyor.js" : "js/fe-guide-conveyor.js"}?v=${JS_V}`
+    );
+  }
+  const tag = `<script defer src="${target.jsSrc}"></script>`;
+  return index.replace(
+    /(<script defer src="(?:\.\.\/)?js\/mvi-helpful-tools\.js[^"]*"><\/script>)/,
+    `$1\n${tag}`
+  );
+}
+
+function patchIndex(target, homepageGuides) {
   let index = fs.readFileSync(target.file, "utf8");
   const htmlStart = "<!-- FE_GUIDE_FAQ_CARDS_START -->";
   const htmlEnd = "<!-- FE_GUIDE_FAQ_CARDS_END -->";
@@ -108,7 +133,14 @@ function patchIndex(target, homepageGuides, soonCount) {
     process.exit(1);
   }
 
-  const htmlBlock = buildCardsHtml(target, homepageGuides, soonCount);
+  if (!index.includes(schemaStart) && target.schemaInsertBefore && index.includes(target.schemaInsertBefore)) {
+    index = index.replace(
+      target.schemaInsertBefore,
+      `${schemaStart}\n${schemaEnd}\n${target.schemaInsertBefore}`
+    );
+  }
+
+  const htmlBlock = buildCardsHtml(target, homepageGuides);
   index = index.replace(
     new RegExp(`${htmlStart}[\\s\\S]*?${htmlEnd}`, "m"),
     `${htmlStart}\n${htmlBlock}\n      ${htmlEnd}`
@@ -117,7 +149,7 @@ function patchIndex(target, homepageGuides, soonCount) {
   if (index.includes(schemaStart) && index.includes(schemaEnd)) {
     index = index.replace(
       new RegExp(`${schemaStart}[\\s\\S]*?${schemaEnd}`, "m"),
-      `${schemaStart}\n${buildSchemaBlock(homepageGuides, target.lang)}\n${schemaEnd}`
+      `${schemaStart}\n${buildSchemaBlock(target, homepageGuides)}\n${schemaEnd}`
     );
   }
 
@@ -136,24 +168,29 @@ function patchIndex(target, homepageGuides, soonCount) {
       /(<section[^>]*id="final-expense-answers"[^>]*>[\s\S]*?<div class="container") style="max-width:\d+rem;"/,
       `$1 style="max-width:${target.containerMaxWidth};"`
     );
+    index = index.replace(
+      /<div style="max-width:52rem;margin-left:auto;margin-right:auto;">(\s*<!-- FE_GUIDE_FAQ_CARDS)/,
+      `<div style="max-width:${target.containerMaxWidth};margin-left:auto;margin-right:auto;">$1`
+    );
   }
+
+  index = bumpConveyorScript(index, target);
 
   fs.writeFileSync(target.file, index, "utf8");
 }
 
 const data = loadFaqIndex();
-const esencial = data.categories.find((cat) => cat.id === "esencial") || { guides: [] };
-const homepageGuides = esencial.guides.filter((g) => g.image && isGuidePublished(g.slug));
+const homepageGuides = homepageCarouselGuides();
 const soonCount = data.categories.reduce(
   (n, cat) => n + cat.guides.filter((g) => !isGuidePublished(g.slug)).length,
   0
 );
 
 for (const target of TARGETS) {
-  patchIndex(target, homepageGuides, soonCount);
+  patchIndex(target, homepageGuides);
 }
 
 const total = data.categories.reduce((n, c) => n + c.guides.length, 0);
 console.log(
-  `Updated ES + EN homepage FAQ sections (${homepageGuides.length} published of ${total} guides, ${data.categories.length} categories).`
+  `Updated ES + EN homepage guide conveyor (${homepageGuides.length} media guides of ${total}; ${soonCount} unpublished).`
 );

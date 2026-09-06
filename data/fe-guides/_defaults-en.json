@@ -1,0 +1,45 @@
+{
+  "authorName": "Julie Braunsroth",
+  "authorTitle": "final expense specialist",
+  "authorLocation": "Nebraska",
+  "authorProfileUrl": "about-julie.html",
+  "factCheckedBy": "Final expense team, Mejor Vida Insurance",
+  "aiFreePledgeLabel": "Human-written education pledge",
+  "aiFreePledgeText": "This guide was written by the Mejor Vida Insurance editorial team. We do not use artificial intelligence to draft the editorial content of our guides.",
+  "aiFreePledgeModalTitle": "Human-written education pledge",
+  "aiFreePledgeModalBody": "When you see this badge on a Mejor Vida guide, our editorial team created the content from direct final expense experience — not AI-generated text. The Mejor Vida final expense team reviews the information before it is published.",
+  "disclosures": [
+    "This guide is for education only and is not legal, tax, or financial advice. Coverage, premiums, benefits, and eligibility vary by insurance company, the state where you live, and your personal situation.",
+    "Julie Braunsroth is an insurance agent (NPN #21695431). Mejor Vida Insurance LLC is an independent agency that compares options from multiple insurers; it does not represent only one company. Licensed states are listed on the licenses page.",
+    "Quotes on this site are estimates. The final premium and approval depend on the completed application and the insurer’s decision."
+  ],
+  "transparencyDisclosures": {
+    "heroLinkLabel": "Disclosures",
+    "modalTitle": "Disclosures",
+    "learnMorePageUrl": "../divulgaciones-editoriales.html",
+    "sections": [
+      {
+        "id": "editorial",
+        "title": "Editorial disclosure",
+        "body": "Our mission is to publish reliable content, written and reviewed by identifiable experts, to educate people like you. Content is updated regularly. We earn a commission when insurance products are sold through this site. That compensation does not change our recommendations. We suggest what is best for each client, not what pays us more.",
+        "learnMoreLabel": "More about our editorial standards",
+        "learnMoreAnchor": "#editorial"
+      },
+      {
+        "id": "compensacion",
+        "title": "Compensation disclosure",
+        "body": "As an independent insurance agency, Mejor Vida Insurance receives a commission from our insurance companies when a policy is sold. Your policy does not cost more because we helped you, and our advice is free to you. The amount we receive varies by age, health, and product. We never recommend products based on which one pays us more.",
+        "learnMoreLabel": "More about how we are paid",
+        "learnMoreAnchor": "#compensacion"
+      },
+      {
+        "id": "licencias",
+        "title": "Licensing disclosure",
+        "body": "Mejor Vida Insurance LLC is an independent insurance agency. Julie Braunsroth is an insurance agent (NPN #21695431). Current licensed states and license copies are on our licenses page.",
+        "learnMoreLabel": "View state licenses",
+        "learnMoreAnchor": "#licencias",
+        "externalUrl": "licenses.html"
+      }
+    ]
+  }
+}

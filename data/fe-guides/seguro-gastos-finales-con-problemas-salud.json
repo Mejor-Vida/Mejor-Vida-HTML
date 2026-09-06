@@ -1,0 +1,221 @@
+{
+  "slug": "seguro-gastos-finales-con-problemas-salud",
+  "slugEn": "final-expense-insurance-with-health-conditions",
+  "published": "2026-09-06",
+  "modified": "2026-09-06",
+  "relatedSlugs": [
+    "examen-medico-seguro-gastos-finales",
+    "poliza-graduada-gastos-finales",
+    "periodo-carencia-seguro-gastos-finales"
+  ],
+  "es": {
+    "aiFreePledgeLabel": "Revisado por Mejor Vida Seguros",
+    "aiFreePledgeModalTitle": "Cómo se revisa esta guía",
+    "aiFreePledgeModalBody": "El equipo de Mejor Vida Seguros revisa esta guía con materiales de compañías designadas y fuentes públicas. Las cotizaciones y la aprobación dependen de la aseguradora, del estado y de su solicitud.",
+    "question": "¿Puedo obtener seguro de gastos finales si tengo problemas de salud?",
+    "headline": "Salud imperfecta y seguro de gastos finales: qué opciones quedan",
+    "dek": "Un diagnóstico no cierra automáticamente la puerta. Cambia el tipo de plan: beneficio completo, beneficio limitado al inicio, o un plan sin preguntas con espera.",
+    "pageTitle": "Seguro de gastos finales con problemas de salud",
+    "metaDescription": "Qué opciones de seguro de gastos finales existen con condiciones de salud, sin jerga técnica. Guía de Mejor Vida Seguros.",
+    "keyTakeaways": [
+      "Muchas solicitudes de gastos finales se resuelven con preguntas, no con un examen en consultorio.",
+      "Si la compañía no puede ofrecer un plan que pague completo desde el día uno, a menudo queda un plan con periodo de espera o un plan de aceptación garantizada.",
+      "Cada compañía pregunta distinto. Un “no” en una no es un “no” en todas.",
+      "No publicamos una lista de enfermedades que “siempre aprueban” o “siempre rechazan.” Eso sería inventar el resultado de su solicitud."
+    ],
+    "cta": {
+      "title": "Vea un precio para su situación",
+      "body": "Mejor Vida Seguros compara compañías de gastos finales. Empiece con una cotización gratuita, agende una llamada o escríbanos por WhatsApp.",
+      "quote": "Cotización gratuita",
+      "schedule": "Agendar una llamada"
+    },
+    "blocks": [
+      {
+        "type": "p",
+        "text": "La gente llega a esta pregunta con miedo: diabetes, presión alta, un infarto antiguo, EPOC, un cáncer tratado. El miedo es comprensible. El error es asumir que solo existen dos respuestas, sí o no, en una sola compañía."
+      },
+      {
+        "type": "h2",
+        "text": "Primero, el concepto: la compañía está midiendo riesgo, no moral"
+      },
+      {
+        "type": "p",
+        "text": "Un seguro de vida paga si usted fallece mientras el contrato está vigente. Si un diagnóstico hace más probable un fallecimiento pronto, la compañía o sube el precio, o limita el beneficio al inicio, o no emite ese producto. Eso no es un juicio sobre su carácter. Es cómo se construye el producto."
+      },
+      {
+        "type": "h2",
+        "text": "Tres resultados posibles, en lenguaje cotidiano"
+      },
+      {
+        "type": "p",
+        "text": "Uno: califica a un plan que paga el monto completo por una muerte natural cubierta desde el primer pago. Dos: hay preguntas, pero los primeros años pagan menos o devuelven primas más un interés del contrato si la muerte no es accidental. Tres: no hay preguntas; la compañía acepta a cambio de una espera y, casi siempre, un precio más alto por dólar y un tope de monto más bajo."
+      },
+      {
+        "type": "p",
+        "text": "Un infarto o un derrame reciente, oxígeno en casa, o un cáncer en tratamiento activo estrechan el primer camino en varias compañías designadas. Un diagnóstico estable de hace muchos años puede no cerrarlo. La fecha que el médico escribió importa. No adivinamos la suya en esta página."
+      },
+      {
+        "type": "table",
+        "caption": "Cómo leer las opciones si la salud no es “perfecta”",
+        "lead": "Ninguna fila promete emisión. Sirve para saber qué preguntar en una cotización.",
+        "headers": [
+          "Si la salud es…",
+          "Qué suele explorarse primero",
+          "Qué debe preguntar"
+        ],
+        "rows": [
+          [
+            "Estable y las preguntas se responden “no” a eventos recientes",
+            "Plan de beneficio completo",
+            "Edad máxima, monto máximo, prima"
+          ],
+          [
+            "Hay un evento reciente o un diagnóstico que el formulario marca",
+            "Plan con espera, u otra compañía",
+            "Cuántos años dura la espera y qué paga un accidente cubierto"
+          ],
+          [
+            "Las preguntas de varios productos no dan emisión",
+            "Aceptación garantizada",
+            "Tope de monto, edad máxima (a menudo cerca de 80 en la línea que cotizamos) y qué pasa en los dos primeros años"
+          ]
+        ],
+        "foot": "Living Promise, Accendo, Transamerica, Americo y American Amicable no comparten un solo cuestionario."
+      },
+      {
+        "type": "note",
+        "text": "No mezclamos fórmulas: un producto puede devolver primas más 10% en los años 1–2; otro puede pagar un porcentaje del monto (por ejemplo 30% y luego 70%) antes del 100%. Un tercero puede usar otra regla. El contrato de esa póliza es la fuente, no esta tabla."
+      },
+      {
+        "type": "h2",
+        "text": "Compañías, después de entender los caminos"
+      },
+      {
+        "type": "p",
+        "text": "Mejor Vida Seguros compara compañías designadas —entre ellas Mutual of Omaha, American Amicable, Accendo, Transamerica, Americo, Assurity y Corebridge— según edad, estado y respuestas. Corebridge de aceptación garantizada, en la línea que cotizamos, suele emitir de 50 a 80, de $5,000 a $25,000, sin preguntas de salud, con espera de unos dos años para muerte no accidental. Un accidente cubierto puede pagar el monto desde el inicio, según el contrato."
+      },
+      {
+        "type": "faq",
+        "items": [
+          {
+            "q": "Tengo diabetes. ¿Me van a rechazar?",
+            "a": "No lo afirmamos para todas las compañías ni para todos los tipos de diabetes. Algunas combinaciones (por ejemplo con tabaco o con complicaciones) estrechan un producto y no otro. Hay que cotizar con lo que el médico escribió."
+          },
+          {
+            "q": "¿Un plan con espera es “malo”?",
+            "a": "Es un compromiso: hay cobertura, pero no el mismo cheque el primer año. Para algunas familias es la única vía. Para otras, conviene buscar otra compañía antes de aceptar la espera."
+          },
+          {
+            "q": "¿Debo esperar a “estar más sano”?",
+            "a": "A veces un evento tiene que cumplir meses o años que el formulario pide. A veces esperar solo hace el precio más alto por edad. No hay una regla única; se mira la fecha del diagnóstico y el presupuesto."
+          }
+        ]
+      }
+    ]
+  },
+  "en": {
+    "aiFreePledgeLabel": "Reviewed by Mejor Vida Insurance",
+    "aiFreePledgeModalTitle": "How this guide is reviewed",
+    "aiFreePledgeModalBody": "The Mejor Vida Insurance team reviews this guide against appointed-company materials and public sources. Quotes and approval depend on the insurer, your state, and your application.",
+    "question": "Can I get final expense insurance with health conditions?",
+    "headline": "Imperfect health and final expense insurance: what options remain",
+    "dek": "A diagnosis does not automatically close the door. It changes the type of plan: full benefit, a limited benefit at first, or a no-questions plan with a wait.",
+    "pageTitle": "Final expense insurance with health conditions",
+    "metaDescription": "What final expense options exist with health conditions, without technical jargon. A guide from Mejor Vida Insurance.",
+    "keyTakeaways": [
+      "Many final expense applications are decided with questions, not an office exam.",
+      "If a company cannot offer a plan that pays in full from day one, a waiting-period plan or guaranteed acceptance is often still on the table.",
+      "Each company asks different questions. A “no” at one is not a “no” at all of them.",
+      "We do not publish a list of conditions that “always approve” or “always decline.” That would invent the outcome of your application."
+    ],
+    "cta": {
+      "title": "See a price for your situation",
+      "body": "Mejor Vida Insurance compares final expense companies. Start with a free quote, schedule a call, or message us on WhatsApp.",
+      "quote": "Get a free quote",
+      "schedule": "Schedule a call"
+    },
+    "blocks": [
+      {
+        "type": "p",
+        "text": "People arrive at this question afraid: diabetes, high blood pressure, an old heart attack, COPD, treated cancer. The fear is understandable. The mistake is assuming there are only two answers, yes or no, at a single company."
+      },
+      {
+        "type": "h2",
+        "text": "First, the idea: the company is measuring risk, not character"
+      },
+      {
+        "type": "p",
+        "text": "Life insurance pays if you die while the contract is in force. If a diagnosis makes an early death more likely, the company may raise the price, limit the early benefit, or not issue that product. That is not a judgment of your character. It is how the product is built."
+      },
+      {
+        "type": "h2",
+        "text": "Three possible results, in everyday language"
+      },
+      {
+        "type": "p",
+        "text": "One: you qualify for a plan that pays the full amount for a covered natural death from the first payment. Two: there are still questions, but the first years pay less or return premiums plus contract interest if death is not accidental. Three: there are no questions; the company accepts you in exchange for a wait and, almost always, a higher price per dollar and a lower amount cap."
+      },
+      {
+        "type": "p",
+        "text": "A recent heart attack or stroke, oxygen at home, or cancer in active treatment narrows the first path at several appointed companies. A stable diagnosis from many years ago may not. The date the doctor wrote matters. We will not guess yours on this page."
+      },
+      {
+        "type": "table",
+        "caption": "How to read the options if health is not “perfect”",
+        "lead": "No row promises issue. It tells you what to ask on a quote.",
+        "headers": [
+          "If health is…",
+          "What is usually explored first",
+          "What you should ask"
+        ],
+        "rows": [
+          [
+            "Stable, and recent-event questions are answered “no”",
+            "Full-benefit plan",
+            "Maximum age, maximum amount, premium"
+          ],
+          [
+            "A recent event or a diagnosis the form flags",
+            "Waiting-period plan, or another company",
+            "How many years the wait lasts and what a covered accident pays"
+          ],
+          [
+            "Questions on several products will not issue",
+            "Guaranteed acceptance",
+            "Amount cap, maximum age (often near 80 on the line we quote), and what happens in the first two years"
+          ]
+        ],
+        "foot": "Living Promise, Accendo, Transamerica, Americo, and American Amicable do not share one questionnaire."
+      },
+      {
+        "type": "note",
+        "text": "We do not mix formulas: one product may return premiums plus 10% in years 1–2; another may pay a share of the amount (for example 30% then 70%) before 100%. A third may use a different rule. That policy’s contract is the source, not this table."
+      },
+      {
+        "type": "h2",
+        "text": "Companies, after the paths are clear"
+      },
+      {
+        "type": "p",
+        "text": "Mejor Vida Insurance compares appointed companies — including Mutual of Omaha, American Amicable, Accendo, Transamerica, Americo, Assurity, and Corebridge — by age, state, and answers. Corebridge guaranteed acceptance, on the line we quote, typically issues ages 50–80, $5,000–$25,000, with no health questions, and about a two-year wait for non-accidental death. A covered accident can pay the face from the start, as the contract writes it."
+      },
+      {
+        "type": "faq",
+        "items": [
+          {
+            "q": "I have diabetes. Will I be declined?",
+            "a": "We will not claim that for every company or every type of diabetes. Some combinations (for example with tobacco or with complications) narrow one product and not another. Quote with what the doctor wrote."
+          },
+          {
+            "q": "Is a waiting-period plan “bad”?",
+            "a": "It is a tradeoff: there is coverage, but not the same check in year one. For some families it is the only path. For others, it is worth trying another company before accepting the wait."
+          },
+          {
+            "q": "Should I wait until I am “healthier”?",
+            "a": "Sometimes an event has to pass months or years the form requires. Sometimes waiting only makes the price higher because of age. There is no single rule; look at the diagnosis date and the budget."
+          }
+        ]
+      }
+    ]
+  }
+}

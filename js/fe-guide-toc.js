@@ -41,9 +41,45 @@
     });
   }
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", bindToc);
-  } else {
+  function bindModal(openId, backdropId, closeId) {
+    var openBtn = document.getElementById(openId);
+    var backdrop = document.getElementById(backdropId);
+    var closeBtn = document.getElementById(closeId);
+    if (!openBtn || !backdrop || !closeBtn) return;
+
+    function openModal() {
+      backdrop.hidden = false;
+      backdrop.classList.add("is-open");
+    }
+
+    function closeModal() {
+      backdrop.classList.remove("is-open");
+      backdrop.hidden = true;
+      openBtn.focus();
+    }
+
+    openBtn.addEventListener("click", openModal);
+    closeBtn.addEventListener("click", closeModal);
+    backdrop.addEventListener("click", function (e) {
+      if (e.target === backdrop) closeModal();
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && backdrop.classList.contains("is-open")) closeModal();
+    });
+  }
+
+  function init() {
     bindToc();
+    bindModal(
+      "fe-guide-disclosures-btn",
+      "fe-guide-disclosures-modal-backdrop",
+      "fe-guide-disclosures-modal-close"
+    );
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
   }
 })();
