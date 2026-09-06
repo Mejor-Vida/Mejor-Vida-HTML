@@ -43,6 +43,9 @@ integrations/knowledge/Americo_Knowledge/raw/
 # Local Cursor agent temp (screenshots, one-off scripts)
 .cursor-tmp-*/
 
+# Local database dumps (PII/PHI — never commit)
+backups/
+
 # Weekly Patriot accounting reviews (dollar amounts — local only)
 integrations/accounting/reviews/
 

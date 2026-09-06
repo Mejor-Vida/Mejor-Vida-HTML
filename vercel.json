@@ -114,6 +114,9 @@
   "functions": {
     "api/**/*.js": {
       "maxDuration": 120
+    },
+    "api/supabase-backup-cron.js": {
+      "maxDuration": 300
     }
   },
   "headers": [
@@ -369,6 +372,10 @@
     {
       "path": "/api/meta-ad-token-health-cron",
       "schedule": "0 9 * * 1"
+    },
+    {
+      "path": "/api/supabase-backup-cron",
+      "schedule": "0 10 * * *"
     }
   ],
   "rewrites": [
