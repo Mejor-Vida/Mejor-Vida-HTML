@@ -52,7 +52,7 @@ async function main() {
 
   if (!hasDriveBackupCredentials()) {
     console.error(
-      "Drive is not connected. Keep the local file, then open http://localhost:3000/api/staff/drive-auth as julie@mejorvidainsurance.com."
+      "Drive is not connected. Keep the local file, then open /api/staff/drive-auth as admin@mejorvidainsurance.com."
     );
     console.error(`Local file: ${archive.filePath}`);
     process.exit(2);
