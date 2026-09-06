@@ -167,7 +167,7 @@
 <link href="css/mvi-licensing-map.css?v=20260726-state-cov" rel="stylesheet">
 <link href="css/mvi-home-fe-about.css?v=20260725c" rel="stylesheet">
 <link href="css/mvi-home-difference.css?v=20260808-wide" rel="stylesheet">
-<link href="css/mvi-helpful-tools.css?v=20260905-searchui" rel="stylesheet">
+<link href="css/mvi-helpful-tools.css?v=20260906-bigger2" rel="stylesheet">
 <style>
   /* Smooth scrolling */
   html { scroll-behavior: smooth; }
@@ -1990,8 +1990,18 @@
 <section class="mvi-helpful-tools" id="mvi-helpful-tools" aria-labelledby="mvi-helpful-tools-title">
  <div class="container">
   <div class="mvi-helpful-tools__inner">
-   <h2 class="mvi-helpful-tools__title" id="mvi-helpful-tools-title">Herramientas útiles</h2>
-   <div class="mvi-helpful-tools__grid">
+   <div class="mvi-helpful-tools__head">
+    <h2 class="mvi-helpful-tools__title" id="mvi-helpful-tools-title">Herramientas útiles</h2>
+    <div class="mvi-helpful-tools__nav">
+     <button type="button" class="mvi-helpful-tools__nav-btn" data-tools-prev aria-label="Ver herramientas anteriores">
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+     </button>
+     <button type="button" class="mvi-helpful-tools__nav-btn" data-tools-next aria-label="Ver más herramientas">
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+     </button>
+    </div>
+   </div>
+   <div class="mvi-helpful-tools__scroller">
     <a class="mvi-helpful-tools__card" href="quote.html">
      <div class="mvi-helpful-tools__card-top">
       <h3 class="mvi-helpful-tools__card-title">Calculadora de cotización</h3>
@@ -2041,6 +2051,19 @@
       <picture>
        <source type="image/webp" srcset="img/opt/tool-site-search-ui.webp"/>
        <img src="img/opt/tool-site-search-ui.jpg" alt="" width="900" height="506" loading="lazy" decoding="async"/>
+      </picture>
+     </div>
+    </a>
+    <a class="mvi-helpful-tools__card" href="term-quote.html">
+     <div class="mvi-helpful-tools__card-top">
+      <h3 class="mvi-helpful-tools__card-title">Cotización de vida temporal</h3>
+      <svg class="mvi-helpful-tools__arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h12M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+     </div>
+     <p class="mvi-helpful-tools__card-copy">Vea un rango de prima mensual según su edad, plazo y monto de cobertura.</p>
+     <div class="mvi-helpful-tools__media" aria-hidden="true">
+      <picture>
+       <source type="image/webp" srcset="img/opt/tool-term-quote-ui.webp"/>
+       <img src="img/opt/tool-term-quote-ui.jpg" alt="" width="637" height="520" loading="lazy" decoding="async"/>
       </picture>
      </div>
     </a>
@@ -2150,6 +2173,7 @@
 <script src="js/mvi-funnel-track.js?v=20260712a"></script>
 <script defer src="js/mvi-ga4-funnel.js?v=20260711a"></script>
 <script defer src="script.js"></script>
+<script defer src="js/mvi-helpful-tools.js?v=20260906-hscroll"></script>
 <script defer src="js/mvi-nav-questions.js?v=20260828-conditions"></script>
 <script defer src="js/state-coverage-costs.js?v=20260726a"></script>
 <script defer src="js/mvi-licensing-map.js?v=20260808-no-dl"></script>
