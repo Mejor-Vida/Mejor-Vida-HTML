@@ -114,9 +114,6 @@
   "functions": {
     "api/**/*.js": {
       "maxDuration": 120
-    },
-    "api/supabase-backup-cron.js": {
-      "maxDuration": 300
     }
   },
   "headers": [
