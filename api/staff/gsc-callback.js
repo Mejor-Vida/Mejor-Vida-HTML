@@ -1,14 +1,8 @@
 const { google } = require("../../lib/google-clients");
 const { getGa4OAuthClientConfig } = require("../../lib/ga4-oauth-config");
 const { getOAuthRedirectUri } = require("../../lib/gsc-data-api");
-
-function escapeHtml(s) {
-  return String(s || "")
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;");
-}
+const { DRIVE_BACKUP_STATE, PRODUCTION_DRIVE_REDIRECT_URI } = require("../../lib/google-drive-backup");
+const { sendDriveConnectedResponse, escapeHtml } = require("../../lib/google-drive-oauth-finish");
 
 module.exports = async function handler(req, res) {
   if (req.method !== "GET") {
@@ -26,9 +20,11 @@ module.exports = async function handler(req, res) {
     return res.status(500).send("Missing OAuth client configuration");
   }
 
-  let redirectUri = getOAuthRedirectUri();
+  const state = String((req.query && req.query.state) || "").trim();
+  const isDrive = state === DRIVE_BACKUP_STATE;
+  let redirectUri = isDrive ? PRODUCTION_DRIVE_REDIRECT_URI : getOAuthRedirectUri();
   const host = String(req.headers.host || "");
-  if (host.includes("localhost") || host.includes("127.0.0.1")) {
+  if (!isDrive && (host.includes("localhost") || host.includes("127.0.0.1"))) {
     redirectUri = `http://${host}/api/staff/gsc-callback`;
   }
 
@@ -39,6 +35,10 @@ module.exports = async function handler(req, res) {
       tokenRes && tokenRes.tokens && tokenRes.tokens.refresh_token
         ? String(tokenRes.tokens.refresh_token)
         : "";
+
+    if (isDrive) {
+      return sendDriveConnectedResponse(req, res, refreshToken);
+    }
 
     const html = refreshToken
       ? `<!doctype html><html><head><meta charset="utf-8"><title>Search Console refresh token</title></head><body style="font-family:system-ui,sans-serif;padding:24px;max-width:720px"><h2>Search Console refresh token</h2><p>Copy into <code>GSC_REFRESH_TOKEN</code> in <code>.env.local</code> and Vercel.</p><p>Set <code>GSC_SITE_URL</code> to your Search Console property (e.g. <code>sc-domain:mejorvidainsurance.com</code> or <code>https://www.example.com/</code>).</p><pre style="white-space:pre-wrap;word-break:break-all;background:#f1f5f9;padding:12px;border-radius:8px">${escapeHtml(

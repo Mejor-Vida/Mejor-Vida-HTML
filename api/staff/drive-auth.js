@@ -1,10 +1,16 @@
 /**
  * GET /api/staff/drive-auth — one-time Google Drive consent for database backups.
- * Uses the production Gmail callback URI (already registered on the OAuth client).
+ * Uses the cursor-sheets OAuth client (same as Search Console / GA4) so Drive API
+ * can be enabled on a Cloud project the agency can open.
  * Sign in as admin@mejorvidainsurance.com so files land in the company Drive.
  */
-const { DRIVE_SCOPE, DRIVE_BACKUP_STATE, driveOAuthClient } = require("../../lib/google-drive-backup");
-const { productionGmailRedirectUri } = require("../../lib/gmail-oauth-redirect");
+const { hasGa4OAuthClientConfig } = require("../../lib/ga4-oauth-config");
+const {
+  DRIVE_SCOPE,
+  DRIVE_BACKUP_STATE,
+  PRODUCTION_DRIVE_REDIRECT_URI,
+  driveOAuthClient,
+} = require("../../lib/google-drive-backup");
 
 module.exports = async function handler(req, res) {
   if (req.method !== "GET") {
@@ -12,14 +18,14 @@ module.exports = async function handler(req, res) {
     return res.status(405).send("Method Not Allowed");
   }
 
-  const clientId = process.env.GMAIL_CLIENT_ID;
-  const clientSecret = process.env.GMAIL_CLIENT_SECRET;
-  if (!clientId || !clientSecret) {
-    return res.status(500).send("Missing Gmail OAuth configuration");
+  if (!hasGa4OAuthClientConfig()) {
+    return res
+      .status(500)
+      .send("Missing OAuth client — set GA4_OAUTH_CLIENT_ID/SECRET or GMAIL_CLIENT_ID/SECRET");
   }
 
-  const redirectUri = productionGmailRedirectUri();
-  const oauth2Client = driveOAuthClient(redirectUri);
+  const oauth2Client = driveOAuthClient(PRODUCTION_DRIVE_REDIRECT_URI);
+
   const url = oauth2Client.generateAuthUrl({
     access_type: "offline",
     prompt: "select_account consent",
