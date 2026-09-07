@@ -87,6 +87,26 @@
   color: var(--muted-text) !important;
 }
 
+/* Square (and other) heroes: fill the title column instead of sitting at intrinsic width */
+.mv-news.hero picture {
+  display: block;
+  width: 100%;
+}
+
+.mv-news.hero picture img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  object-position: center center;
+}
+
+.mv-news.hero picture.blog-hero-photo img {
+  object-position: center 70%;
+}
+
 .mv-news .news-grid {
   display: grid;
   grid-template-columns: minmax(0, 760px) minmax(0, 320px);
