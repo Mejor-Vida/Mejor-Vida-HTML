@@ -40,8 +40,12 @@ function buildContentSecurityPolicy(nonce) {
      *
      * GA4 (gtag.js G-K921EG6JWG): script-src needs googletagmanager.com;
      * connect-src needs google-analytics.com / analytics.google.com or events never reach GA4.
+     *
+     * Teaching video embeds (js/youtube-lesson-embed.js):
+     * frame-src needs youtube.com / youtube-nocookie.com or the iframe is a blank grey box.
+     * script-src needs youtube.com and s.ytimg.com for the IFrame Player API.
      */
-    `script-src 'self' ${n} https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://cdn.tailwindcss.com https://connect.facebook.net https://www.googletagmanager.com`,
+    `script-src 'self' ${n} https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://cdn.tailwindcss.com https://connect.facebook.net https://www.googletagmanager.com https://www.youtube.com https://s.ytimg.com`,
     `style-src-elem 'self' ${n} ${styleHosts}`,
     "style-src-attr 'unsafe-inline'",
     `style-src 'self' ${n} ${styleHosts} 'unsafe-inline'`,
@@ -51,7 +55,7 @@ function buildContentSecurityPolicy(nonce) {
     "worker-src 'self'",
     "manifest-src 'self'",
     "media-src 'self' https:",
-    "frame-src 'self' blob: https://www.facebook.com https://meetings-na2.hubspot.com https://*.hubspot.com https://*.hsforms.com https://docs.google.com",
+    "frame-src 'self' blob: https://www.facebook.com https://meetings-na2.hubspot.com https://*.hubspot.com https://*.hsforms.com https://docs.google.com https://www.youtube.com https://www.youtube-nocookie.com",
     "form-action 'self' https://www.facebook.com https://meetings-na2.hubspot.com https://*.hubspot.com",
     "upgrade-insecure-requests",
   ].join("; ");
