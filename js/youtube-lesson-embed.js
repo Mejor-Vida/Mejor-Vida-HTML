@@ -1,7 +1,6 @@
 /**
  * Teaching videos already have burned-in Spanish subtitles.
- * Keep the YouTube caption track for search, but do not display it on the embed.
- * While playing, pin a mini player to the lower-right after the original slot leaves view.
+ * Pin a mini player when the in-article slot leaves view; restore it when the slot returns.
  */
 (function () {
   var iframe = document.querySelector(".lic-lesson-video iframe");
@@ -10,8 +9,8 @@
 
   var section = iframe.closest(".lic-lesson-video");
   var slot = iframe.closest(".lic-lesson-video__slot") || iframe.parentElement;
+  var frame = iframe.closest(".lic-lesson-video__frame") || iframe.parentElement;
   var playerRef = null;
-  var started = false;
   var slotVisible = true;
   var dismissed = false;
 
@@ -31,25 +30,28 @@
     } catch (e4) {}
   }
 
-  function playerState() {
-    if (!playerRef || typeof playerRef.getPlayerState !== "function") return -1;
-    try {
-      return playerRef.getPlayerState();
-    } catch (e) {
-      return -1;
-    }
+  function shouldPip() {
+    return !!(section && frame && !dismissed && !slotVisible);
   }
 
-  function shouldPip() {
-    if (!section || dismissed || !started || slotVisible) return false;
-    var state = playerState();
-    if (state === 0) return false;
-    return state === 1 || state === 2 || state === 3;
+  function restoreFrame() {
+    if (!slot || !frame) return;
+    if (frame.parentElement !== slot) slot.appendChild(frame);
+    frame.classList.remove("is-pip-float");
+  }
+
+  function floatFrame() {
+    if (!frame) return;
+    if (frame.parentElement !== document.body) document.body.appendChild(frame);
+    frame.classList.add("is-pip-float");
   }
 
   function syncPip() {
     if (!section) return;
-    section.classList.toggle("is-pip", shouldPip());
+    var on = shouldPip();
+    section.classList.toggle("is-pip", on);
+    if (on) floatFrame();
+    else restoreFrame();
   }
 
   function closePip() {
@@ -61,7 +63,6 @@
   }
 
   function ensureCloseButton() {
-    var frame = iframe.closest(".lic-lesson-video__frame") || iframe.parentElement;
     if (!frame || frame.querySelector(".lic-lesson-video__close")) return;
     var btn = document.createElement("button");
     btn.type = "button";
@@ -81,20 +82,24 @@
     if (!slot || slot.getAttribute("data-mvi-pip") === "1") return;
     slot.setAttribute("data-mvi-pip", "1");
     ensureCloseButton();
-    if (!("IntersectionObserver" in window)) return;
-    var observer = new IntersectionObserver(
-      function (entries) {
-        var entry = entries[0];
-        if (!entry) return;
-        slotVisible = entry.intersectionRatio >= 0.22;
-        if (slotVisible) dismissed = false;
-        syncPip();
-      },
-      { threshold: [0, 0.12, 0.22, 0.4, 0.75] }
-    );
-    observer.observe(slot);
+    if ("IntersectionObserver" in window) {
+      var observer = new IntersectionObserver(
+        function (entries) {
+          var entry = entries[0];
+          if (!entry) return;
+          slotVisible = entry.intersectionRatio >= 0.22;
+          if (slotVisible) dismissed = false;
+          syncPip();
+        },
+        { threshold: [0, 0.12, 0.22, 0.4, 0.75, 1] }
+      );
+      observer.observe(slot);
+    } else {
+      slotVisible = true;
+    }
     window.addEventListener("scroll", syncPip, { passive: true });
     window.addEventListener("resize", syncPip);
+    syncPip();
   }
 
   function attach() {
@@ -105,7 +110,6 @@
         onReady: function (e) {
           playerRef = e.target;
           hideCaptions(e.target);
-          bindPip();
           var n = 0;
           var id = window.setInterval(function () {
             hideCaptions(e.target);
@@ -116,9 +120,6 @@
         onStateChange: function (e) {
           hideCaptions(e.target);
           playerRef = e.target;
-          if (e.data === 1 || e.data === 3) started = true;
-          if (e.data === 0) started = false;
-          syncPip();
         },
       },
     });
@@ -151,6 +152,8 @@
     tag.src = "https://www.youtube.com/iframe_api";
     document.head.appendChild(tag);
   }
+
+  bindPip();
 
   if (iframe.getAttribute("src") !== nextSrc) {
     iframe.addEventListener("load", function onLoad() {

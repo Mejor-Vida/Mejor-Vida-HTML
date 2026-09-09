@@ -680,17 +680,20 @@
   overflow: visible;
 }
 
-.lic-lesson-video.is-pip .lic-lesson-video__frame {
+.lic-lesson-video.is-pip .lic-lesson-video__frame,
+.lic-lesson-video__frame.is-pip-float {
   position: fixed;
-  inset: auto;
+  top: auto;
+  left: auto;
   z-index: 1082;
   width: min(20rem, calc(100vw - 15.5rem));
-  height: auto;
+  height: 11.25rem;
   aspect-ratio: 16 / 9;
   right: 13.5rem;
   bottom: max(1rem, env(safe-area-inset-bottom, 0px));
   border: 2px solid #fff;
   box-shadow: 0 12px 40px rgba(15, 23, 42, 0.28);
+  overflow: hidden;
 }
 
 .lic-lesson-video__close {
@@ -713,7 +716,8 @@
   justify-content: center;
 }
 
-.lic-lesson-video.is-pip .lic-lesson-video__close {
+.lic-lesson-video.is-pip .lic-lesson-video__close,
+.lic-lesson-video__frame.is-pip-float .lic-lesson-video__close {
   display: inline-flex;
 }
 
@@ -727,15 +731,19 @@
   outline-offset: 2px;
 }
 
-body:not(.lic-page--seniors) .lic-lesson-video.is-pip .lic-lesson-video__frame {
+body:not(.lic-page--seniors) .lic-lesson-video.is-pip .lic-lesson-video__frame,
+body:not(.lic-page--seniors) .lic-lesson-video__frame.is-pip-float {
   width: min(20rem, calc(100vw - 2rem));
+  height: 11.25rem;
   right: max(1rem, env(safe-area-inset-right, 0px));
   bottom: calc(10.5rem + env(safe-area-inset-bottom, 0px));
 }
 
 @media (max-width: 991.98px) {
-  .lic-lesson-video.is-pip .lic-lesson-video__frame {
+  .lic-lesson-video.is-pip .lic-lesson-video__frame,
+  .lic-lesson-video__frame.is-pip-float {
     width: min(17.5rem, calc(100vw - 1.25rem));
+    height: 9.85rem;
     right: max(0.55rem, env(safe-area-inset-right, 0px));
     bottom: calc(5.35rem + env(safe-area-inset-bottom, 0px));
   }
