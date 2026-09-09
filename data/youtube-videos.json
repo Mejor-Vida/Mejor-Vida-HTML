@@ -1,0 +1,67 @@
+{
+  "channel_id": "UCSPWn-rbkPii6ia89ntDJLg",
+  "playlist": {
+    "id": "PLbmS8yS3_nJM",
+    "title": "Guías educativas | Mejor Vida Seguros",
+    "description": "Lecciones en español que coinciden con las guías de mejorvidainsurance.com. Una lección por tema: qué es, cómo se cotiza y qué pedir por escrito."
+  },
+  "videos": [
+    {
+      "youtube_id": "UzJ27hmUNas",
+      "slug": "cuanto-cuesta-un-funeral",
+      "page_es": "/cuanto-cuesta-un-funeral.html",
+      "page_en": "/en/how-much-does-a-funeral-cost.html",
+      "title": "¿Cuánto cuesta un funeral en Estados Unidos? (entierro, cremación y extras)",
+      "description_lead": "Una factura de funeral casi nunca es un solo cargo: funeraria, cementerio y extras. Este video explica las partes de la cuenta, por qué un promedio nacional no es la factura de su ciudad, y qué pedir por escrito antes de elegir (la lista de precios generales).",
+      "description_body": "Medicare no paga el sepelio. El Seguro Social puede pagar 255 dólares una sola vez, si se cumplen sus reglas.\n\nCifras con año (no las mezcle en un solo precio):\n• Asociación Nacional de Directores de Funerarias, 2023: mediana de 8,300 dólares con velatorio y entierro; 6,280 con velatorio y cremación (lado funeraria; parcela suele ir aparte).\n• Promedios de paquete publicados en julio de 2026 (Funeralocity): 8,532 con servicio y entierro; 5,109 sin velatorio; 6,246 con servicio y cremación; 2,217 cremación sin servicio.",
+      "duration_seconds": 191,
+      "language": "es",
+      "category_id": "27",
+      "captions_vtt": "data/teaching-videos/cuanto-cuesta-un-funeral.es.vtt",
+      "burned_in_subtitles": true,
+      "upload_date": "2026-09-09T02:49:56Z",
+      "tags": [
+        "cuánto cuesta un funeral",
+        "costo funeral Estados Unidos",
+        "cremación",
+        "entierro",
+        "gastos finales",
+        "lista de precios generales",
+        "Funeral Rule",
+        "NFDA",
+        "Mejor Vida Seguros"
+      ],
+      "hashtags": [
+        "#CostoDeUnFuneral",
+        "#GastosFinales",
+        "#Cremacion"
+      ],
+      "chapters": [
+        {
+          "t": 0,
+          "label": "Qué incluye la factura"
+        },
+        {
+          "t": 28,
+          "label": "Por qué importa (Medicare y Seguro Social)"
+        },
+        {
+          "t": 49,
+          "label": "Cómo se cotiza (lista de precios)"
+        },
+        {
+          "t": 95,
+          "label": "Cifras de 2023 y 2026"
+        },
+        {
+          "t": 154,
+          "label": "Errores comunes"
+        },
+        {
+          "t": 171,
+          "label": "Cotización gratis"
+        }
+      ]
+    }
+  ]
+}

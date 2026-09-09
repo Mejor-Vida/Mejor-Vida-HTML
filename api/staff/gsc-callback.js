@@ -3,6 +3,8 @@ const { getGa4OAuthClientConfig } = require("../../lib/ga4-oauth-config");
 const { getOAuthRedirectUri } = require("../../lib/gsc-data-api");
 const { DRIVE_BACKUP_STATE, PRODUCTION_DRIVE_REDIRECT_URI } = require("../../lib/google-drive-backup");
 const { sendDriveConnectedResponse, escapeHtml } = require("../../lib/google-drive-oauth-finish");
+const { YOUTUBE_CONNECT_STATE } = require("../../lib/youtube-api");
+const { sendYoutubeConnectedResponse } = require("../../lib/youtube-oauth-finish");
 
 module.exports = async function handler(req, res) {
   if (req.method !== "GET") {
@@ -22,9 +24,10 @@ module.exports = async function handler(req, res) {
 
   const state = String((req.query && req.query.state) || "").trim();
   const isDrive = state === DRIVE_BACKUP_STATE;
+  const isYoutube = state === YOUTUBE_CONNECT_STATE;
   let redirectUri = isDrive ? PRODUCTION_DRIVE_REDIRECT_URI : getOAuthRedirectUri();
   const host = String(req.headers.host || "");
-  if (!isDrive && (host.includes("localhost") || host.includes("127.0.0.1"))) {
+  if ((isYoutube || !isDrive) && (host.includes("localhost") || host.includes("127.0.0.1"))) {
     redirectUri = `http://${host}/api/staff/gsc-callback`;
   }
 
@@ -38,6 +41,9 @@ module.exports = async function handler(req, res) {
 
     if (isDrive) {
       return sendDriveConnectedResponse(req, res, refreshToken);
+    }
+    if (isYoutube) {
+      return sendYoutubeConnectedResponse(req, res, refreshToken);
     }
 
     const html = refreshToken

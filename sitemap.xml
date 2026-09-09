@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
 
   <url>
     <loc>https://www.mejorvidainsurance.com/</loc>
@@ -15,7 +16,7 @@
 
   <url>
     <loc>https://www.mejorvidainsurance.com/blog.html</loc>
-    <lastmod>2026-09-07T03:38:38+00:00</lastmod>
+    <lastmod>2026-09-07T04:09:03+00:00</lastmod>
     <priority>0.80</priority>
   </url>
 
@@ -45,8 +46,27 @@
 
   <url>
     <loc>https://www.mejorvidainsurance.com/cuanto-cuesta-un-funeral.html</loc>
-    <lastmod>2026-09-06T03:14:06+00:00</lastmod>
+    <lastmod>2026-09-09T03:05:27+00:00</lastmod>
     <priority>0.88</priority>
+    <video:video>
+      <video:thumbnail_loc>https://i.ytimg.com/vi/UzJ27hmUNas/maxresdefault.jpg</video:thumbnail_loc>
+      <video:title>¿Cuánto cuesta un funeral en Estados Unidos? (entierro, cremación y extras)</video:title>
+      <video:description>Una factura de funeral casi nunca es un solo cargo: funeraria, cementerio y extras. Este video explica las partes de la cuenta, por qué un promedio nacional no es la factura de su ciudad, y qué pedir por escrito antes de elegir (la lista de precios generales).</video:description>
+      <video:player_loc allow_embed="yes">https://www.youtube.com/embed/UzJ27hmUNas</video:player_loc>
+      <video:duration>191</video:duration>
+      <video:publication_date>2026-09-09T02:49:56Z</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+      <video:live>no</video:live>
+      <video:uploader info="https://www.youtube.com/@mejorvidainsurancellc">Mejor Vida Insurance LLC</video:uploader>
+      <video:tag>cuánto cuesta un funeral</video:tag>
+      <video:tag>costo funeral Estados Unidos</video:tag>
+      <video:tag>cremación</video:tag>
+      <video:tag>entierro</video:tag>
+      <video:tag>gastos finales</video:tag>
+      <video:tag>lista de precios generales</video:tag>
+      <video:tag>Funeral Rule</video:tag>
+      <video:tag>NFDA</video:tag>
+    </video:video>
   </url>
 
   <url>
@@ -561,7 +581,7 @@
 
   <url>
     <loc>https://www.mejorvidainsurance.com/blog/cotizacion-real-seguro-termino-2026-09-06.html</loc>
-    <lastmod>2026-09-07T03:42:23+00:00</lastmod>
+    <lastmod>2026-09-07T04:15:25+00:00</lastmod>
     <priority>0.85</priority>
   </url>
 
@@ -633,7 +653,7 @@
 
   <url>
     <loc>https://www.mejorvidainsurance.com/blog/lista-precios-funeral-ftc-2026-09-06.html</loc>
-    <lastmod>2026-09-07T03:42:23+00:00</lastmod>
+    <lastmod>2026-09-07T04:15:23+00:00</lastmod>
     <priority>0.85</priority>
   </url>
 
@@ -645,7 +665,7 @@
 
   <url>
     <loc>https://www.mejorvidainsurance.com/blog/monto-seguro-gastos-finales-2026-09-06.html</loc>
-    <lastmod>2026-09-07T03:42:23+00:00</lastmod>
+    <lastmod>2026-09-07T04:15:24+00:00</lastmod>
     <priority>0.85</priority>
   </url>
 
@@ -753,7 +773,7 @@
 
   <url>
     <loc>https://www.mejorvidainsurance.com/blog/weekly-insurance-update-2026-09-06.html</loc>
-    <lastmod>2026-09-07T03:38:38+00:00</lastmod>
+    <lastmod>2026-09-07T04:15:14+00:00</lastmod>
     <priority>0.70</priority>
   </url>
 

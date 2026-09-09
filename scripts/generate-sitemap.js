@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 /**
  * Spanish-first sitemap: indexable public content only (no tools, staff, EN, noindex pages).
+ * Teaching videos from data/youtube-videos.json are attached as Google video sitemap tags.
  * Usage: node scripts/generate-sitemap.js
  */
 const fs = require("fs");
@@ -163,11 +164,16 @@ function xmlEscape(s) {
   return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
 
-function buildUrlEntry(loc, priority, lastmod) {
+const { videosByPage, sitemapVideoXml } = require("../lib/youtube-packaging");
+const VIDEO_PAGES = videosByPage();
+
+function buildUrlEntry(loc, priority, lastmod, video) {
   const full = loc === "/" ? `${BASE}/` : `${BASE}${loc}`;
   let block = `  <url>\n    <loc>${xmlEscape(full)}</loc>\n`;
   if (lastmod) block += `    <lastmod>${lastmod}</lastmod>\n`;
-  block += `    <priority>${priority}</priority>\n  </url>`;
+  block += `    <priority>${priority}</priority>\n`;
+  if (video) block += sitemapVideoXml(video);
+  block += `  </url>`;
   return block;
 }
 
@@ -176,19 +182,20 @@ for (const page of STATIC_PAGES) {
   const rel = page.loc === "/" ? "index.html" : page.loc.replace(/^\//, "");
   const abs = path.join(ROOT, rel);
   const lastmod = fs.existsSync(abs) ? lastmodFromFile(abs) : null;
-  entries.push(buildUrlEntry(page.loc, page.priority, lastmod));
+  entries.push(buildUrlEntry(page.loc, page.priority, lastmod, VIDEO_PAGES.get(page.loc) || null));
 }
 
 for (const guide of feGuidePages()) {
-  entries.push(buildUrlEntry(guide.loc, guide.priority, guide.lastmod));
+  entries.push(buildUrlEntry(guide.loc, guide.priority, guide.lastmod, VIDEO_PAGES.get(guide.loc) || null));
 }
 
 for (const post of blogPosts()) {
-  entries.push(buildUrlEntry(post.loc, post.priority, post.lastmod));
+  entries.push(buildUrlEntry(post.loc, post.priority, post.lastmod, VIDEO_PAGES.get(post.loc) || null));
 }
 
 const xml = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
 
 ${entries.join("\n\n")}
 
@@ -196,4 +203,6 @@ ${entries.join("\n\n")}
 `;
 
 fs.writeFileSync(OUT, xml, "utf8");
-console.log(`Wrote ${OUT} (${entries.length} URLs, Spanish indexable content only)`);
+console.log(
+  `Wrote ${OUT} (${entries.length} URLs, ${VIDEO_PAGES.size} video pages, Spanish indexable content only)`,
+);

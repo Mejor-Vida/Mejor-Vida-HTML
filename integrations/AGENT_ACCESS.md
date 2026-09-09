@@ -43,6 +43,7 @@ How the MVS Agent (or any automation) can access your data. **Google Sheets is n
 | Supabase | Vercel serverless routes or direct Postgres (migrations in `integrations/supabase/`) |
 | Make.com | `MAKE_API_TOKEN` + HTTP API |
 | ManyChat | `MANYCHAT_API_KEY` + HTTP API |
+| YouTube | `YOUTUBE_REFRESH_TOKEN` + YouTube Data API v3 (`npm run youtube:connect`) |
 
 ### Private business tax profile (paperwork only)
 
