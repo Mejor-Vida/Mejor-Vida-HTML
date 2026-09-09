@@ -630,11 +630,19 @@
 .lic-lesson-video {
   position: relative;
   z-index: 2;
+  width: 66.666%;
   background: #fff;
   border-radius: 0.35rem;
   box-shadow: 0 6px 20px rgba(15, 23, 42, 0.05);
   padding: 1.15rem 1.25rem 1.25rem;
   margin-bottom: 1.25rem;
+}
+
+@media (max-width: 991.98px) {
+  .lic-lesson-video {
+    width: 100%;
+    max-width: none;
+  }
 }
 
 .lic-lesson-video h2 {
@@ -676,8 +684,12 @@
   border: 0;
 }
 
-.lic-lesson-video.is-pip .lic-lesson-video__slot {
-  overflow: visible;
+.lic-lesson-video.is-pip {
+  z-index: 1082;
+}
+
+body.lic-lesson-is-pip .lic-layout {
+  z-index: auto;
 }
 
 .lic-lesson-video.is-pip .lic-lesson-video__frame,

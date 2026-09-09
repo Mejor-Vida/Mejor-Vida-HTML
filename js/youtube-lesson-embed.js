@@ -1,6 +1,7 @@
 /**
  * Teaching videos already have burned-in Spanish subtitles.
  * Pin a mini player when the in-article slot leaves view; restore it when the slot returns.
+ * Do not move the iframe in the DOM — YouTube pauses if the embed is reparented.
  */
 (function () {
   var iframe = document.querySelector(".lic-lesson-video iframe");
@@ -34,24 +35,12 @@
     return !!(section && frame && !dismissed && !slotVisible);
   }
 
-  function restoreFrame() {
-    if (!slot || !frame) return;
-    if (frame.parentElement !== slot) slot.appendChild(frame);
-    frame.classList.remove("is-pip-float");
-  }
-
-  function floatFrame() {
-    if (!frame) return;
-    if (frame.parentElement !== document.body) document.body.appendChild(frame);
-    frame.classList.add("is-pip-float");
-  }
-
   function syncPip() {
     if (!section) return;
     var on = shouldPip();
     section.classList.toggle("is-pip", on);
-    if (on) floatFrame();
-    else restoreFrame();
+    if (frame) frame.classList.toggle("is-pip-float", on);
+    document.body.classList.toggle("lic-lesson-is-pip", on);
   }
 
   function closePip() {
