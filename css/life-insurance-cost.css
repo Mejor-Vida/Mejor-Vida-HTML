@@ -684,6 +684,62 @@
   border: 0;
 }
 
+.lic-lesson-video__facade {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  cursor: pointer;
+  background: #0f2744;
+}
+
+.lic-lesson-video__facade img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.lic-lesson-video__play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 4.1rem;
+  height: 4.1rem;
+  border-radius: 999px;
+  background: rgba(11, 58, 122, 0.92);
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.35);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.lic-lesson-video__play::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 54%;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0.7rem 0 0.7rem 1.15rem;
+  border-color: transparent transparent transparent #fdd04a;
+  transform: translate(-50%, -50%);
+}
+
+.lic-lesson-video__facade:hover .lic-lesson-video__play,
+.lic-lesson-video__facade:focus-visible .lic-lesson-video__play {
+  background: #0b3a7a;
+}
+
+.lic-lesson-video__facade:focus-visible {
+  outline: 2px solid #fdd04a;
+  outline-offset: 3px;
+}
+
 .lic-lesson-video.is-pip {
   z-index: 1082;
 }

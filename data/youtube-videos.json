@@ -62,6 +62,62 @@
           "label": "Cotización gratis"
         }
       ]
+    },
+    {
+      "youtube_id": "-bxWZdENMk0",
+      "slug": "funerales-prepagados",
+      "page_es": "/funerales-prepagados.html",
+      "page_en": "/en/prepaid-funerals.html",
+      "title": "¿Qué es un funeral prepagado? (contrato, dinero y qué preguntar)",
+      "description_lead": "Un funeral prepagado es un contrato con una funeraria por bienes y servicios nombrados, no un seguro de vida. Este video explica dónde queda el dinero, por qué el precio no se congela solo, y qué pedir por escrito antes de firmar.",
+      "description_body": "Medicare no paga el sepelio. El Seguro Social puede pagar 255 dólares una sola vez, si se cumplen sus reglas.\n\nLa lista de precios generales (GPL) es el menú escrito que la funeraria debe entregarle. El manejo del dinero adelantado lo pone cada estado, no una sola regla federal. Pagar ahora no congela el precio de forma automática.",
+      "duration_seconds": 284,
+      "language": "es",
+      "category_id": "27",
+      "captions_vtt": "data/teaching-videos/funerales-prepagados.es.vtt",
+      "burned_in_subtitles": false,
+      "upload_date": "2026-09-10T01:30:11Z",
+      "tags": [
+        "funeral prepagado",
+        "previsión funeraria",
+        "contrato funeraria",
+        "lista de precios generales",
+        "Funeral Rule",
+        "fideicomiso funeral",
+        "gastos finales",
+        "Mejor Vida Seguros"
+      ],
+      "hashtags": [
+        "#FuneralPrepagado",
+        "#GastosFinales",
+        "#PrevisionFuneraria"
+      ],
+      "chapters": [
+        {
+          "t": 0,
+          "label": "Qué es un funeral prepagado"
+        },
+        {
+          "t": 29,
+          "label": "Por qué importa"
+        },
+        {
+          "t": 86,
+          "label": "Cómo se arma el contrato"
+        },
+        {
+          "t": 141,
+          "label": "Dónde queda el dinero"
+        },
+        {
+          "t": 231,
+          "label": "Errores comunes"
+        },
+        {
+          "t": 250,
+          "label": "Cotización gratis"
+        }
+      ]
     }
   ]
 }

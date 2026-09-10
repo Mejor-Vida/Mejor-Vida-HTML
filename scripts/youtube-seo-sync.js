@@ -293,6 +293,10 @@ async function main() {
   const catalog = loadCatalog();
   const playlistId = await ensurePlaylist(token, catalog);
   for (const video of catalog.videos || []) {
+    if (!video.youtube_id) {
+      console.log("Skip (no youtube_id yet):", video.slug);
+      continue;
+    }
     await syncUploadDate(token, video, catalog);
     await updateVideoSnippet(token, video, playlistId);
     console.log("Updated metadata:", video.youtube_id);

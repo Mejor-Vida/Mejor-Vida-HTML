@@ -27,6 +27,7 @@
     "youtube:connect": "node scripts/connect-youtube.js",
     "youtube:status": "node scripts/connect-youtube.js --status",
     "youtube:seo": "node scripts/youtube-seo-sync.js",
+    "youtube:upload": "node scripts/youtube-upload-video.js",
     "google-ads:keywords": "node scripts/google-ads-keywords-test.js",
     "google-ads:discover": "node scripts/google-ads-discover.js",
     "apply:image-opt-html": "node scripts/apply-image-opt-html.js",
