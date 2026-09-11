@@ -79,7 +79,7 @@
       <video:description>Un funeral prepagado es un contrato con una funeraria por bienes y servicios nombrados, no un seguro de vida. Este video explica dónde queda el dinero, por qué el precio no se congela solo, y qué pedir por escrito antes de firmar.</video:description>
       <video:player_loc allow_embed="yes">https://www.youtube.com/embed/-bxWZdENMk0</video:player_loc>
       <video:duration>284</video:duration>
-      <video:publication_date>2026-09-10T01:30:11Z</video:publication_date>
+      <video:publication_date>2026-09-10T01:43:38Z</video:publication_date>
       <video:family_friendly>yes</video:family_friendly>
       <video:live>no</video:live>
       <video:uploader info="https://www.youtube.com/@mejorvidainsurancellc">Mejor Vida Insurance LLC</video:uploader>
@@ -252,8 +252,27 @@
 
   <url>
     <loc>https://www.mejorvidainsurance.com/seguro-vida-familiares.html</loc>
-    <lastmod>2026-09-06T03:14:06+00:00</lastmod>
+    <lastmod>2026-09-11T01:15:03+00:00</lastmod>
     <priority>0.86</priority>
+    <video:video>
+      <video:thumbnail_loc>https://i.ytimg.com/vi/WDH4o2vrWGA/maxresdefault.jpg</video:thumbnail_loc>
+      <video:title>Seguro de vida para otros familiares (quién es dueño, quién cobra)</video:title>
+      <video:description>Quién puede asegurar a un tío, un primo u otro familiar que no es padre, cónyuge ni hijo: interés asegurable, dueño de la póliza, beneficiario y quién tiene que firmar.</video:description>
+      <video:player_loc allow_embed="yes">https://www.youtube.com/embed/WDH4o2vrWGA</video:player_loc>
+      <video:duration>360</video:duration>
+      <video:publication_date>2026-09-10T11:00:59Z</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+      <video:live>no</video:live>
+      <video:uploader info="https://www.youtube.com/@mejorvidainsurancellc">Mejor Vida Insurance LLC</video:uploader>
+      <video:tag>seguro de vida para familiares</video:tag>
+      <video:tag>interés asegurable</video:tag>
+      <video:tag>dueño de la póliza</video:tag>
+      <video:tag>beneficiario</video:tag>
+      <video:tag>gastos finales</video:tag>
+      <video:tag>tíos y primos</video:tag>
+      <video:tag>Mutual of Omaha</video:tag>
+      <video:tag>Mejor Vida Seguros</video:tag>
+    </video:video>
   </url>
 
   <url>

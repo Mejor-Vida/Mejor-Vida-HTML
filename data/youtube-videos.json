@@ -36,6 +36,7 @@
         "#GastosFinales",
         "#Cremacion"
       ],
+      "description_disclaimer": "Esto es educación, no una cotización de una funeraria concreta.",
       "chapters": [
         {
           "t": 0,
@@ -76,7 +77,7 @@
       "category_id": "27",
       "captions_vtt": "data/teaching-videos/funerales-prepagados.es.vtt",
       "burned_in_subtitles": false,
-      "upload_date": "2026-09-10T01:30:11Z",
+      "upload_date": "2026-09-10T01:43:38Z",
       "tags": [
         "funeral prepagado",
         "previsión funeraria",
@@ -92,6 +93,7 @@
         "#GastosFinales",
         "#PrevisionFuneraria"
       ],
+      "description_disclaimer": "Esto es educación, no una cotización de una funeraria concreta.",
       "chapters": [
         {
           "t": 0,
@@ -115,6 +117,67 @@
         },
         {
           "t": 250,
+          "label": "Cotización gratis"
+        }
+      ]
+    },
+    {
+      "youtube_id": "WDH4o2vrWGA",
+      "slug": "seguro-vida-familiares",
+      "page_es": "/seguro-vida-familiares.html",
+      "page_en": "/en/family-members-life-insurance.html",
+      "title": "Seguro de vida para otros familiares (quién es dueño, quién cobra)",
+      "description_lead": "Quién puede asegurar a un tío, un primo u otro familiar que no es padre, cónyuge ni hijo: interés asegurable, dueño de la póliza, beneficiario y quién tiene que firmar.",
+      "description_body": "La persona asegurada siempre firma. Pagar la prima no lo convierte a usted en dueño. Un beneficiario contingente es solo un respaldo.\n\nEn un ejemplo de vida simplificada de Mutual of Omaha, un cónyuge, un padre o un hijo adulto a menudo puede ser dueño; tías, tíos y primos a menudo son solo un respaldo. Otras compañías escriben reglas distintas.\n\nNo firme una solicitud a nombre de otra persona. Eso puede ser un delito y anula el contrato. Cada adulto es una póliza aparte.",
+      "description_disclaimer": "Esto es educación, no una cotización de una póliza concreta.",
+      "duration_seconds": 360,
+      "language": "es",
+      "category_id": "27",
+      "captions_vtt": "data/teaching-videos/seguro-vida-familiares.es.vtt",
+      "burned_in_subtitles": false,
+      "upload_date": "2026-09-10T11:00:59Z",
+      "tags": [
+        "seguro de vida para familiares",
+        "interés asegurable",
+        "dueño de la póliza",
+        "beneficiario",
+        "gastos finales",
+        "tíos y primos",
+        "Mutual of Omaha",
+        "Mejor Vida Seguros"
+      ],
+      "hashtags": [
+        "#SeguroDeVida",
+        "#GastosFinales",
+        "#InteresAsegurable"
+      ],
+      "chapters": [
+        {
+          "t": 0,
+          "label": "Cubrir a otros familiares"
+        },
+        {
+          "t": 39,
+          "label": "Interés asegurable y dueño"
+        },
+        {
+          "t": 95,
+          "label": "Asegurado, dueño y beneficiario"
+        },
+        {
+          "t": 157,
+          "label": "Ejemplo de Mutual of Omaha"
+        },
+        {
+          "t": 222,
+          "label": "Si no puede ser dueño"
+        },
+        {
+          "t": 267,
+          "label": "Una póliza por adulto"
+        },
+        {
+          "t": 311,
           "label": "Cotización gratis"
         }
       ]
