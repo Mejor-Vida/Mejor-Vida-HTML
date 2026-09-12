@@ -224,6 +224,34 @@
    width: 100%;
    height: 100%;
   }
+  .carousel-slide .hero-customer-video {
+   position: absolute;
+   inset: 0;
+   width: 100%;
+   height: 100%;
+   object-fit: contain;
+   border-radius: 0;
+   border: none !important;
+   box-shadow: none !important;
+   outline: none !important;
+   background: transparent !important;
+   pointer-events: none;
+   opacity: 0;
+  }
+  .carousel-slide.is-video-ready .hero-customer-video {
+   opacity: 1;
+  }
+  .carousel-slide.is-video-ready picture {
+   opacity: 0;
+  }
+  @media (prefers-reduced-motion: reduce) {
+   .carousel-slide .hero-customer-video {
+    display: none !important;
+   }
+   .carousel-slide.is-video-ready picture {
+    opacity: 1;
+   }
+  }
   .carousel-slide img {
    width: 100%;
    height: 100%;
@@ -253,7 +281,8 @@
    transform-origin: center top;
   }
   /* First two slides: larger and lower to avoid head crop */
-  .carousel-slide:nth-child(1) img {
+  .carousel-slide:nth-child(1) img,
+  .carousel-slide:nth-child(1) .hero-customer-video {
    object-position: center top;
    transform: scale(1.92) translateY(-8%);
    transform-origin: center top;
@@ -294,7 +323,8 @@
    transform: scale(1.92) translateY(-8%);
    transform-origin: center top;
   }
-  .carousel-slide:nth-child(1).active img {
+  .carousel-slide:nth-child(1).active img,
+  .carousel-slide:nth-child(1).active .hero-customer-video {
    animation: none;
    object-position: center top;
    transform: scale(1.92) translateY(-8%);
@@ -315,7 +345,9 @@
     transform: scale(1.24);
    }
    .carousel-slide:nth-child(1) img,
-   .carousel-slide:nth-child(1).active img {
+   .carousel-slide:nth-child(1) .hero-customer-video,
+   .carousel-slide:nth-child(1).active img,
+   .carousel-slide:nth-child(1).active .hero-customer-video {
     object-position: center top;
     transform: scale(1.65) translateY(-6%);
    }
@@ -1560,6 +1592,10 @@
     <div class="col-lg-6 position-relative">
      <div class="carousel-container rounded-3">
       <div class="carousel-slide active">
+       <video class="hero-customer-video" width="681" height="1024" muted playsinline preload="auto" poster="img/opt/business-man.png?v=20260721-cutout" aria-hidden="true">
+        <source src="img/opt/business-man-animated.mov?v=20260912" type='video/mp4; codecs="hvc1"' />
+        <source src="img/opt/business-man-animated.webm?v=20260912" type="video/webm" />
+       </video>
        <picture>
         <source type="image/webp" srcset="img/opt/business-man.webp?v=20260721-cutout" />
         <img src="img/opt/business-man.png?v=20260721-cutout" alt="Profesional" width="681" height="1024" loading="eager" fetchpriority="high" decoding="async" />
