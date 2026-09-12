@@ -51,3 +51,7 @@ integrations/accounting/reviews/
 
 # Local Sunday newsletter previews (generated; may include draft copy)
 tools/weekly-newsletter/out/
+
+# Raw OpenArt downloads (optimize into img/ and img/opt/ before commit)
+img/openart-src/
+img/fe-guide-card-originals/
