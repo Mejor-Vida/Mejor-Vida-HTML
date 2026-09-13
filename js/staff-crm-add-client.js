@@ -115,7 +115,7 @@
       buildSelect("crm-add-marital", "add_marital", MARITAL_VALUES, false) +
       field("crm-add-dob", t("birthdate"), "date", false) +
       field("crm-add-age", t("med_age"), "number", false, { ro: true, min: 0, max: 130 }) +
-      field("crm-add-email", t("conn_email"), "email", true, { placeholder: t("add_email_ph") }) +
+      field("crm-add-email", t("conn_email"), "email", false, { placeholder: t("add_email_ph") }) +
       field("crm-add-phone", t("conn_phone"), "tel", false, { placeholder: "(###) ###-####" }) +
       '<div class="crm-add-field crm-add-field--full"><label>' +
       esc(t("add_primary_contact")) +
@@ -159,7 +159,7 @@
     if (opts.max != null) attrs += ' max="' + opts.max + '"';
     if (opts.maxLength) attrs += ' maxlength="' + opts.maxLength + '"';
     if (opts.inputMode) attrs += ' inputmode="' + opts.inputMode + '"';
-    if (required && type === "email") attrs += " required";
+    if (required) attrs += " required";
     return (
       '<div class="' +
       cls +
@@ -235,13 +235,26 @@
       if (age != null && age >= 0 && age <= 130) ageEl.value = String(age);
     }
 
+    function isValidEmail(email) {
+      return !!email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+
     function isFormValid() {
       var f = readForm(main);
       if (!f.first || !f.last) return false;
-      if (!f.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email)) return false;
+      if (f.email && !isValidEmail(f.email)) return false;
+      if (!f.email && !f.phone) return false;
       if (!primaryContact) return false;
+      if (primaryContact === "email" && !isValidEmail(f.email)) return false;
       if (primaryContact === "phone" && !f.phone) return false;
       return true;
+    }
+
+    function maybeSuggestPrimary() {
+      if (primaryContact) return;
+      var f = readForm(main);
+      if (f.phone && !f.email) setPrimaryContact("phone");
+      else if (isValidEmail(f.email) && !f.phone) setPrimaryContact("email");
     }
 
     function updateSaveButton() {
@@ -263,7 +276,7 @@
         if (f.middle) name = (f.first + " " + f.middle + " " + f.last).replace(/\s+/g, " ").trim();
         var created = await api("/api/staff/leads", {
           name: name,
-          email: f.email,
+          email: f.email || null,
           phone: f.phone || null,
           language: "English",
         });
@@ -339,7 +352,10 @@
     }
     var form = $("crm-add-form", main);
     if (form) {
-      form.addEventListener("input", updateSaveButton);
+      form.addEventListener("input", function () {
+        maybeSuggestPrimary();
+        updateSaveButton();
+      });
       form.addEventListener("change", updateSaveButton);
     }
     var marital = $("crm-add-marital", main);

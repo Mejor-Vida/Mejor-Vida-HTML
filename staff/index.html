@@ -2761,7 +2761,7 @@
                     </div>
                     <div class="meta-card">
                       <label for="lp-email">Email</label>
-                      <input id="lp-email" type="email" inputmode="email" autocomplete="off" data-lpignore="true" required />
+                      <input id="lp-email" type="email" inputmode="email" autocomplete="off" data-lpignore="true" />
                     </div>
                     <div class="meta-card">
                       <label for="lp-phone">Phone</label>
@@ -7442,8 +7442,12 @@
         closeLeadProfileSaveModal();
         var status = document.getElementById("lead-profile-status");
         var s = serializeLeadProfileFromForm();
-        if (!s.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s.email)) {
-          if (status) status.textContent = "Email is required and must be valid.";
+        if (s.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s.email)) {
+          if (status) status.textContent = "Enter a valid email, or leave it blank if you only have a phone.";
+          return;
+        }
+        if (!s.email && !s.phone) {
+          if (status) status.textContent = "Enter a phone number or an email.";
           return;
         }
         if (status) status.textContent = "Saving…";
@@ -8622,7 +8626,8 @@
               return (L2.display_name || "").trim().toLowerCase() === typedLower;
             });
             var emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(el.email.value || "").trim());
-            if (typed && !hasExact && emailOk) {
+            var phoneOk = !!(el.phone && String(el.phone.value || "").trim());
+            if (typed && !hasExact && (emailOk || phoneOk)) {
               var addBtn = document.createElement("button");
               addBtn.type = "button";
               addBtn.className = "compose-lead-row compose-lead-add";
@@ -8746,8 +8751,13 @@
         var el = getComposeEls();
         var status = el.status;
         var email = String(el.email.value || "").trim();
-        if (!email) {
-          status.textContent = "Enter an email before adding a new contact.";
+        var phone = String(el.phone.value || "").trim();
+        if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+          status.textContent = "Enter a valid email, or leave it blank if you only have a phone.";
+          return;
+        }
+        if (!email && !phone) {
+          status.textContent = "Enter a phone number or an email before adding a new contact.";
           return;
         }
         status.textContent = "Creating lead…";

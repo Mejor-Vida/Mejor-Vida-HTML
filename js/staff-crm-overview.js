@@ -343,8 +343,12 @@
   async function performSave(state) {
     closeSaveModal(state);
     var s = serializeForm(state);
-    if (!s.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s.email)) {
+    if (s.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s.email)) {
       setStatus(state, t("ov_status_invalid_email"));
+      return;
+    }
+    if (!s.email && !s.phone) {
+      setStatus(state, t("ov_status_need_email_or_phone"));
       return;
     }
     var saveBtn = $("crm-ov-save", state.root);
@@ -393,7 +397,7 @@
       field("crm-ov-id", t("ov_lead_id"), "text", { ro: true }) +
       field("crm-ov-first-name", t("conn_first_name"), "text") +
       field("crm-ov-last-name", t("conn_last_name"), "text") +
-      field("crm-ov-email", t("conn_email"), "email", { required: true }) +
+      field("crm-ov-email", t("conn_email"), "email") +
       field("crm-ov-phone", t("conn_phone"), "tel") +
       languageField() +
       field("crm-ov-state", t("ov_state"), "text", { placeholder: "e.g. NE" }) +

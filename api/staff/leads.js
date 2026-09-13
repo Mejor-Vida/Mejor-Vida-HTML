@@ -2278,11 +2278,18 @@ module.exports = async function handler(req, res) {
       return json(res, 400, { error: "Invalid JSON" });
     }
     const name = String(body.name || "").trim();
-    const email = String(body.email || "").trim().toLowerCase();
-    if (!name || !email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      return json(res, 400, { error: "name and valid email required" });
-    }
+    const emailRaw = String(body.email || "").trim().toLowerCase();
+    const email = emailRaw || null;
     const phone = String(body.phone || "").trim().slice(0, 40) || null;
+    if (!name) {
+      return json(res, 400, { error: "name required" });
+    }
+    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      return json(res, 400, { error: "Invalid email" });
+    }
+    if (!email && !phone) {
+      return json(res, 400, { error: "email or phone required" });
+    }
     const language = String(body.language || "English").trim().slice(0, 50) || "English";
     const { first_name, last_name } = splitDisplayName(name);
     if (!first_name) return json(res, 400, { error: "name required" });
