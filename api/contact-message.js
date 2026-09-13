@@ -18,6 +18,7 @@ const {
   clearActiveFeedPartitionHides,
 } = require("../lib/crm-compliance");
 const { capiClientIp, capiClientUserAgent } = require("../lib/meta-capi");
+const { autoEnrollCaptureLead } = require("../lib/crm-nurture-engine");
 
 const GMAIL_REDIRECT_URI = "https://www.mejorvidainsurance.com/api/staff/gmail-callback";
 const NOTIFY_TO = "julie@mejorvidainsurance.com, admin@mejorvidainsurance.com";
@@ -369,6 +370,18 @@ module.exports = async function handler(req, res) {
     await clearActiveFeedPartitionHides(supabaseUrl, supabaseKey, { email, phone });
   } catch (e) {
     console.warn("contact-message clear partition hides", e && e.message);
+  }
+
+  if (leadId) {
+    await autoEnrollCaptureLead(
+      { supabaseUrl, serviceKey: supabaseKey },
+      {
+        leadId,
+        leadSourceTable: "quote_lead_submissions",
+        stage: "new",
+        actor: "contact_message",
+      }
+    );
   }
 
   try {

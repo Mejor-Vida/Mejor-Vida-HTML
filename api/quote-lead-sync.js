@@ -20,6 +20,7 @@ const {
   clearActiveFeedPartitionHides,
   uploadConsentScreenshot,
 } = require("../lib/crm-compliance");
+const { autoEnrollCaptureLead } = require("../lib/crm-nurture-engine");
 
 function applyCors(req, res) {
   const origin = String(req.headers.origin || "").trim();
@@ -560,6 +561,18 @@ module.exports = async function handler(req, res) {
     } catch (e) {
       console.warn("quote-lead-sync consent screenshot", e && e.message);
     }
+  }
+
+  if (leadId) {
+    await autoEnrollCaptureLead(
+      { supabaseUrl, serviceKey: supabaseKey },
+      {
+        leadId,
+        leadSourceTable: "quote_lead_submissions",
+        stage: "new",
+        actor: "quote_lead_sync",
+      }
+    );
   }
 
   try {

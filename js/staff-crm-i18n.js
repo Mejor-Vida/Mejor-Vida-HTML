@@ -1006,7 +1006,8 @@
       conn_nurture_status_upcoming: "upcoming",
       conn_nurture_status_pending: "pending",
       pipe_title: "Nurture pipeline",
-      pipe_subtitle: "CRM nurture sequence status and delivery log (New days 0–3, Contacted long-term).",
+      pipe_subtitle:
+        "CRM nurture starts automatically for New and Contacted leads. This log shows New days 0–3 and Contacted long-term.",
       pipe_show_stopped: "Show sold / opt-out / completed",
       pipe_refresh: "Refresh",
       pipe_pause: "Pause",
@@ -1048,7 +1049,7 @@
       pipe_enroll: "Start nurture sequence",
       pipe_status_not_enrolled: "not enrolled",
       pipe_not_enrolled_notice:
-        "Not enrolled in the CRM nurture engine. New and Contacted leads auto-enroll on intake; click Start nurture sequence to enroll manually.",
+        "Not enrolled yet. New and Contacted leads start automatically from WhatsApp, the website, and Add Contact. Use Start nurture sequence only if this one was missed.",
       pipe_status_upcoming: "upcoming",
       pipe_status_missed: "missed (before enroll)",
       pipe_crm_entry: "CRM entry:",
@@ -1057,7 +1058,7 @@
       pipe_preview_unlinked:
         "No matching contacts record yet — showing the planned sequence. Save phone or email on Overview so we can link and enroll this client.",
       pipe_add_contact_hint: "Add phone or email on Overview to link this client for nurture.",
-      pipe_preview_not_enrolled: "This step sends after you enroll the client in the nurture sequence.",
+      pipe_preview_not_enrolled: "This step sends after the nurture sequence starts.",
       pipe_enrolling: "Enrolling…",
       pipe_enrolled_ok: "Nurture sequence started.",
       pipe_enroll_failed: "Could not enroll in nurture.",
@@ -2170,7 +2171,8 @@
       conn_nurture_status_upcoming: "próximo",
       conn_nurture_status_pending: "pendiente",
       pipe_title: "Pipeline de nurturing",
-      pipe_subtitle: "Secuencia CRM de nurturing: New (días 0–3) y Contacted (largo plazo).",
+      pipe_subtitle:
+        "La secuencia CRM de nurturing empieza sola en New y Contacted. Este registro muestra New (días 0–3) y Contacted (largo plazo).",
       pipe_show_stopped: "Mostrar vendido / opt-out / completado",
       pipe_refresh: "Actualizar",
       pipe_pause: "Pausar",
@@ -2212,7 +2214,7 @@
       pipe_enroll: "Iniciar secuencia de nurturing",
       pipe_status_not_enrolled: "sin inscripción",
       pipe_not_enrolled_notice:
-        "Sin inscripción en el motor CRM de nurturing. Los leads New y Contacted se inscriben al ingresar; use Iniciar secuencia para inscribir manualmente.",
+        "Aún sin inscripción. Los leads New y Contacted se inscriben solos desde WhatsApp, el sitio y Agregar contacto. Use Iniciar secuencia solo si este se omitió.",
       pipe_status_upcoming: "próximo",
       pipe_status_missed: "omitido (antes de inscribir)",
       pipe_crm_entry: "Ingreso al CRM:",
@@ -2221,7 +2223,7 @@
       pipe_preview_unlinked:
         "Aún no hay un registro en contacts — se muestra la secuencia planificada. Guarde teléfono o correo en Resumen para vincular e inscribir.",
       pipe_add_contact_hint: "Agregue teléfono o correo en Resumen para vincular este cliente.",
-      pipe_preview_not_enrolled: "Este paso se envía después de inscribir al cliente en la secuencia.",
+      pipe_preview_not_enrolled: "Este paso se envía después de que arranca la secuencia de nurturing.",
       pipe_enrolling: "Inscribiendo…",
       pipe_enrolled_ok: "Secuencia de nurturing iniciada.",
       pipe_enroll_failed: "No se pudo inscribir en nurturing.",

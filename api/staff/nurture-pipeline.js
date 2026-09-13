@@ -10,10 +10,12 @@ const { json, serviceConfig, restSelect } = require("./_inbox-lib");
 const {
   loadSettings,
   enrollLead,
+  autoEnrollCrmLead,
   cancelActiveEnrollment,
   fetchLeadContact,
   canManualEnroll,
   resolveManualEnrollStage,
+  resolveAutoEnrollStage,
   enrollmentPipelineNeedsRebuild,
   rebuildEnrollmentPipelineFromCrmEntry,
 } = require("../../lib/crm-nurture-engine");
@@ -58,6 +60,22 @@ async function loadEnrollment(cfg, leadId, leadSourceTable, includeStopped) {
   let filter = `lead_id=eq.${encodeURIComponent(leadId)}&lead_source_table=eq.${encodeURIComponent(
     leadSourceTable
   )}`;
+  if (!includeStopped) {
+    filter += "&status=in.(active,paused)";
+  }
+  const rows = await sbFetch(
+    cfg,
+    `/crm_nurture_enrollments?${filter}&select=*&order=created_at.desc&limit=5`
+  );
+  if (!rows || !rows.length) return null;
+  if (includeStopped) return rows[0];
+  const active = rows.find((r) => r.status === "active" || r.status === "paused");
+  return active || rows[0];
+}
+
+async function loadEnrollmentByContact(cfg, contactId, includeStopped) {
+  if (!contactId) return null;
+  let filter = `contact_id=eq.${encodeURIComponent(contactId)}`;
   if (!includeStopped) {
     filter += "&status=in.(active,paused)";
   }
@@ -132,40 +150,91 @@ async function buildPipelinePayload(cfg, leadId, leadSourceTable, includeStopped
     contactId
   );
 
-  const enrollment = await loadEnrollment(cfg, leadId, leadSourceTable, includeStopped);
+  let enrollment = await loadEnrollment(cfg, leadId, leadSourceTable, includeStopped);
+  if (!enrollment && contactId) {
+    enrollment = await loadEnrollmentByContact(cfg, contactId, includeStopped);
+  }
+  if (
+    (!enrollment || (enrollment.status !== "active" && enrollment.status !== "paused")) &&
+    resolveAutoEnrollStage(pipelineStage)
+  ) {
+    try {
+      await autoEnrollCrmLead(cfg, {
+        leadId,
+        leadSourceTable,
+        stage: pipelineStage,
+        contactId,
+        actor: "pipeline_refresh",
+      });
+    } catch (e) {
+      console.error("[nurture-pipeline] auto-enroll", e && e.message ? e.message : e);
+    }
+    enrollment = await loadEnrollment(cfg, leadId, leadSourceTable, includeStopped);
+    if (!enrollment && contactId) {
+      enrollment = await loadEnrollmentByContact(cfg, contactId, includeStopped);
+    }
+  }
   let tasks = enrollment ? await loadEnrollmentTasks(cfg, enrollment.id) : [];
   if (enrollment && enrollment.status === "active") {
-    const audit = await enrollmentPipelineNeedsRebuild(
-      cfg.supabaseUrl,
-      cfg.serviceKey,
-      enrollment,
-      tasks,
-      settings,
-      new Date()
-    );
-    if (audit.needs) {
-      await rebuildEnrollmentPipelineFromCrmEntry(
+    try {
+      const audit = await enrollmentPipelineNeedsRebuild(
         cfg.supabaseUrl,
         cfg.serviceKey,
         enrollment,
+        tasks,
         settings,
-        { crmEntry: audit.crm_entry }
+        new Date()
       );
-      enrollment = await loadEnrollment(cfg, leadId, leadSourceTable, includeStopped);
-      tasks = enrollment ? await loadEnrollmentTasks(cfg, enrollment.id) : [];
+      if (audit.needs) {
+        await rebuildEnrollmentPipelineFromCrmEntry(
+          cfg.supabaseUrl,
+          cfg.serviceKey,
+          enrollment,
+          settings,
+          { crmEntry: audit.crm_entry }
+        );
+        enrollment = await loadEnrollment(cfg, leadId, leadSourceTable, includeStopped);
+        if (!enrollment && contactId) {
+          enrollment = await loadEnrollmentByContact(cfg, contactId, includeStopped);
+        }
+        tasks = enrollment ? await loadEnrollmentTasks(cfg, enrollment.id) : [];
+      }
+    } catch (e) {
+      console.error("[nurture-pipeline] rebuild", e && e.message ? e.message : e);
     }
   }
   const callTasks = enrollment ? await loadCallTasks(cfg, enrollment.id) : [];
 
-  const view = buildClientPipelineView({
-    enrollment,
-    tasks,
-    callTasks,
-    settings,
-    contact,
-    pipelineStage,
-    includeStopped,
-  });
+  let view;
+  try {
+    view = buildClientPipelineView({
+      enrollment,
+      tasks,
+      callTasks,
+      settings,
+      contact,
+      pipelineStage,
+      includeStopped,
+    });
+  } catch (e) {
+    console.error("[nurture-pipeline] view", e && e.message ? e.message : e);
+    view = {
+      enrolled: !!(enrollment && (enrollment.status === "active" || enrollment.status === "paused")),
+      pipeline_stage: pipelineStage,
+      sequence_label: "",
+      nurture_enrollment: enrollment
+        ? {
+            id: enrollment.id,
+            status: enrollment.status,
+            stage: enrollment.stage,
+            enrolled_at: enrollment.enrolled_at,
+            cancelled_reason: enrollment.cancelled_reason || null,
+            next_send_at: null,
+          }
+        : null,
+      steps: [],
+    };
+  }
 
   const canEnroll = canManualEnroll(pipelineStage) && !view.enrolled;
 

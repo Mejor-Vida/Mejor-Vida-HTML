@@ -3,7 +3,7 @@
  * Processes due CRM nurture tasks + Retained/Loyal promotions.
  * vercel.json: every 5 minutes
  */
-const { processDueTasks, processRetainedLoyalPromotions } = require("../lib/crm-nurture-engine");
+const { processDueTasks, processRetainedLoyalPromotions, enrollEligibleUnenrolledLeads } = require("../lib/crm-nurture-engine");
 
 module.exports = async function handler(req, res) {
   if (req.headers.authorization !== `Bearer ${process.env.CRON_SECRET}`) {
@@ -16,10 +16,12 @@ module.exports = async function handler(req, res) {
   };
 
   try {
+    const enrollResult = await enrollEligibleUnenrolledLeads(cfg, { limit: 100, actor: "auto_enroll_cron" });
     const taskResult = await processDueTasks({ cfg });
     const promoResult = await processRetainedLoyalPromotions(cfg);
     return res.status(200).json({
       ran_at: new Date().toISOString(),
+      auto_enroll: enrollResult,
       tasks: taskResult,
       promotions: promoResult,
     });

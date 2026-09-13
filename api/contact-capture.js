@@ -20,6 +20,7 @@ const { upsertContact, upsertLeadState, insertEvent } = require("../lib/contacts
 const { hubspotAddNote } = require("../lib/hubspot");
 const { syncContactToHubspot } = require("../lib/hubspot-sync-lib");
 const { logIntegrationAudit } = require("../lib/integration-audit");
+const { autoEnrollCaptureLead } = require("../lib/crm-nurture-engine");
 
 function hubspotPipelineId() {
   return process.env.HUBSPOT_PIPELINE_ID || "default";
@@ -178,6 +179,25 @@ async function handleInitialContact(body, supabaseUrl, supabaseKey, hubspotToken
         contactId: v2ContactId,
       });
     }
+  }
+
+  const crmCfg = { supabaseUrl, serviceKey: supabaseKey };
+  if (manychatLeadId) {
+    await autoEnrollCaptureLead(crmCfg, {
+      leadId: manychatLeadId,
+      leadSourceTable: "manychat_leads",
+      stage: "new",
+      contactId: v2ContactId,
+      actor: "contact_capture",
+    });
+  } else if (v2ContactId) {
+    await autoEnrollCaptureLead(crmCfg, {
+      leadId: v2ContactId,
+      leadSourceTable: "contacts",
+      stage: "new",
+      contactId: v2ContactId,
+      actor: "contact_capture",
+    });
   }
 
   await logIntegrationAudit(supabaseUrl, supabaseKey, {

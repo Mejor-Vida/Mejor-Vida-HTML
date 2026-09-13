@@ -62,7 +62,7 @@ const { syncContactToHubspot } = require("../lib/hubspot-sync-lib");
 const { logIntegrationAudit } = require("../lib/integration-audit");
 const { fetchManychatSubscriber } = require("../lib/manychat-pull");
 const { saveCanonicalLeadProfile } = require("./staff/_lead-profile");
-const { maybeEnrollCrmLead } = require("../lib/crm-nurture-engine");
+const { autoEnrollCrmLead } = require("../lib/crm-nurture-engine");
 
 function json(res, status, payload) {
   res.status(status).setHeader("Content-Type", "application/json");
@@ -566,11 +566,12 @@ module.exports = async function handler(req, res) {
           { pipeline_stage: "new", contacts_contact_id: String(contactId), contact_id: String(contactId) },
           "lead_intake"
         );
-        await maybeEnrollCrmLead(crmCfg, {
+        await autoEnrollCrmLead(crmCfg, {
           leadId: contactId,
           leadSourceTable: "contacts",
           stage: "new",
           contactId,
+          actor: "lead_intake",
         });
       } catch (enrollErr) {
         console.error("[lead-intake] crm nurture enroll:", enrollErr.message);

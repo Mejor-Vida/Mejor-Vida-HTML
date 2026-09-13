@@ -78,6 +78,9 @@
       '<label class="crm-pipeline-show-stopped"><input type="checkbox" id="crm-pt-show-stopped" /> ' +
       esc(t("pipe_show_stopped")) +
       "</label>" +
+      '<button type="button" id="crm-pt-enroll" class="crm-btn" style="display:none">' +
+      esc(t("pipe_enroll")) +
+      "</button>" +
       '<button type="button" id="crm-pt-refresh" class="crm-btn secondary">' +
       esc(t("pipe_refresh")) +
       "</button></div></div>" +
@@ -101,9 +104,6 @@
       "</button>" +
       '<button type="button" id="crm-pt-link" class="crm-btn secondary">' +
       esc(t("pipe_link_contact")) +
-      "</button>" +
-      '<button type="button" id="crm-pt-enroll" class="crm-btn">' +
-      esc(t("pipe_enroll")) +
       "</button></div></div>" +
       '<div class="crm-pipeline-table-wrap"><table class="crm-pipeline-table" aria-label="' +
       esc(t("pipe_steps_table")) +
@@ -220,27 +220,51 @@
     var detailPanel = $("crm-pt-detail", state.root);
     var entry = state.entry;
     var notice = $("crm-pt-notice", state.root);
+    var enrollBtn = $("crm-pt-enroll", state.root);
 
-    if (!state.leadId) {
+    function showEmpty(html) {
       if (empty) {
         empty.classList.remove("hidden");
-        empty.innerHTML =
-          "<strong>" + esc(t("pipe_no_lead_title")) + "</strong>" + esc(t("pipe_no_lead_body"));
+        empty.innerHTML = html;
       }
       if (detailPanel) detailPanel.classList.add("hidden");
+    }
+
+    if (enrollBtn) {
+      var showEnroll = !state.loading && !state.enrolled && !!state.canEnroll && !state.loadError;
+      enrollBtn.style.display = showEnroll ? "inline-block" : "none";
+      enrollBtn.disabled = !showEnroll;
+    }
+
+    if (state.loading) {
+      showEmpty("<strong>" + esc(t("pipe_loading")) + "</strong>");
+      return;
+    }
+
+    if (state.loadError) {
+      showEmpty(
+        "<strong>" +
+          esc(t("pipe_load_failed")) +
+          "</strong>" +
+          esc(state.loadError)
+      );
+      return;
+    }
+
+    if (!state.leadId) {
+      showEmpty(
+        "<strong>" + esc(t("pipe_no_lead_title")) + "</strong>" + esc(t("pipe_no_lead_body"))
+      );
       return;
     }
 
     if (!entry || !entry.steps || !entry.steps.length) {
-      if (empty) {
-        empty.classList.remove("hidden");
-        empty.innerHTML =
-          "<strong>" +
+      showEmpty(
+        "<strong>" +
           esc(t("pipe_no_enrollment_title")) +
           "</strong>" +
-          esc(t("pipe_no_enrollment_body"));
-      }
-      if (detailPanel) detailPanel.classList.add("hidden");
+          esc(t("pipe_no_enrollment_body"))
+      );
       return;
     }
 
@@ -378,17 +402,27 @@
       enrollBtn.disabled = !canEnroll;
     }
 
-    renderPreview(state);
+    try {
+      renderPreview(state);
+    } catch (e) {
+      var prev = $("crm-pt-preview-inner", state.root);
+      if (prev) prev.textContent = t("pipe_no_preview");
+    }
   }
 
   async function loadPipeline(state) {
     if (!state.leadId) {
       state.entry = null;
       state.enrolled = false;
+      state.loading = false;
+      state.loadError = "";
       renderDetail(state);
       return;
     }
 
+    state.loading = true;
+    state.loadError = "";
+    renderDetail(state);
     setFoot(state, t("pipe_loading"));
     try {
       var data = await api("/api/staff/nurture-pipeline" + buildPipelineQuery(state), null, {
@@ -405,10 +439,16 @@
         steps: (data && data.steps) || [],
       };
       state.stepIndex = 0;
+      state.loading = false;
+      state.loadError = "";
       renderDetail(state);
       setFoot(state, "");
     } catch (e) {
-      setFoot(state, String((e && e.message) || t("pipe_load_failed")));
+      state.loading = false;
+      state.entry = null;
+      state.loadError = String((e && e.message) || t("pipe_load_failed"));
+      renderDetail(state);
+      setFoot(state, state.loadError);
     }
   }
 
@@ -485,6 +525,8 @@
       contactId: resolveContactId(detail),
       enrolled: false,
       canEnroll: false,
+      loading: false,
+      loadError: "",
       entry: null,
       stepIndex: 0,
     };
