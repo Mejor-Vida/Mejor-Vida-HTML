@@ -81,6 +81,8 @@
       nurture_weekly_ready_title: "This week’s email (ready to send)",
       nurture_weekly_ready_sub:
         "Condensed blog digest: short story teasers, small images, and links to each full article. Review the preview, then send to all active clients.",
+      nurture_weekly_ready_sub_research:
+        "This week’s researched letter (news from last Sunday through Saturday). The three stories below are in the email. Review the preview, then send to clients with email.",
       nurture_weekly_subject: "Subject",
       nurture_weekly_date: "Week of",
       nurture_weekly_recipients: "Active clients to receive",
@@ -1250,6 +1252,8 @@
       nurture_weekly_ready_title: "Email de esta semana (listo para enviar)",
       nurture_weekly_ready_sub:
         "Resumen del blog: teasers cortos, imágenes pequeñas y enlaces a cada artículo completo. Revise la vista previa y envíe a todos los clientes activos.",
+      nurture_weekly_ready_sub_research:
+        "Carta investigada de esta semana (noticias del domingo al sábado pasado). Las tres historias de abajo son las del correo. Revise la vista previa y envíe a los clientes con email.",
       nurture_weekly_subject: "Asunto",
       nurture_weekly_date: "Semana del",
       nurture_weekly_recipients: "Clientes activos que recibirán",

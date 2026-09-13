@@ -212,7 +212,11 @@
       esc(t("nurture_weekly_ready_title")) +
       "</h2>" +
       '<p class="crm-muted">' +
-      esc(t("nurture_weekly_ready_sub")) +
+      esc(
+        String(current.hero_source || "") === "weekly_research"
+          ? t("nurture_weekly_ready_sub_research")
+          : t("nurture_weekly_ready_sub")
+      ) +
       "</p>" +
       "<p><strong>" +
       esc(t("nurture_weekly_subject")) +

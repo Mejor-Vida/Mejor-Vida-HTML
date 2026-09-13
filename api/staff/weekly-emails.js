@@ -14,6 +14,7 @@ const {
   emailProviderReady,
   getCurrentWeeklyBlogDigest,
   buildWeeklyBlogDigestEmailParts,
+  extractResearchStoryTeasers,
   sbFetch,
 } = require("../../lib/crm-newsletter-send");
 const {
@@ -100,13 +101,21 @@ module.exports = async function handler(req, res) {
         pipeline_stage: r.pipeline_stage || "",
       }));
 
+      const researchStories =
+        researchIssue && researchIssue.body_html
+          ? extractResearchStoryTeasers(researchIssue.body_html)
+          : [];
+      const currentStories = researchIssue
+        ? researchStories
+        : digest.stories || [];
+
       return json(res, 200, {
         current: {
           post_date_iso: researchIssue ? newsletterWindow().weekKey : digest.post_date_iso,
           subject: parts.subject,
           blog_url: parts.blogUrl,
           hero_source: parts.heroSource || (researchIssue ? "weekly_research" : "blog_digest"),
-          stories: digest.stories || [],
+          stories: currentStories,
           preview_html: preview.html,
           status: currentStatus,
           issue_id: researchIssue ? researchIssue.id : null,
