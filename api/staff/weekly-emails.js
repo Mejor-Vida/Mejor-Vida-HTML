@@ -36,6 +36,37 @@ module.exports = async function handler(req, res) {
   if (!cfg) return json(res, 500, { error: "Missing Supabase config" });
   const supabaseUrl = cfg.supabaseUrl;
   const serviceKey = cfg.serviceKey;
+  const q = req.query || {};
+  const previewIssueId = String(q.issue_id || q.issueId || "").trim();
+
+  if (req.method === "GET" && previewIssueId) {
+    try {
+      const settings = await loadSettings(supabaseUrl, serviceKey);
+      const rows = await sbFetch(
+        supabaseUrl,
+        serviceKey,
+        `/crm_newsletter_issues?id=eq.${encodeURIComponent(previewIssueId)}&select=*&limit=1`
+      );
+      const issue = rows && rows[0];
+      if (!issue) return json(res, 404, { error: "Issue not found" });
+      const sample = sampleSpanishContact();
+      const html = wrapNewsletterHtml(
+        issue.hero_html || "",
+        `<p>Hola equipo,</p>${issue.body_html || ""}${leadEmailCtaRow(false)}`,
+        sample,
+        settings
+      );
+      return json(res, 200, {
+        issue_id: issue.id,
+        subject: issue.subject,
+        hero_source: issue.hero_source || null,
+        preview_html: html,
+      });
+    } catch (e) {
+      console.error("staff/weekly-emails GET preview", e);
+      return json(res, 500, { error: e.message || "Failed to load preview" });
+    }
+  }
 
   if (req.method === "GET") {
     try {

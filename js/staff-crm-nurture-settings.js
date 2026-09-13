@@ -352,43 +352,61 @@
       if (!wrap || !frame) return;
       wrap.style.display = "block";
       if (label) label.textContent = title || t("nurture_weekly_preview");
-      frame.srcdoc = html || "<p>No preview</p>";
+      var doc = html || "<p>No preview</p>";
+      try {
+        if (frame._blobUrl) URL.revokeObjectURL(frame._blobUrl);
+      } catch (e) {}
+      try {
+        var blob = new Blob([doc], { type: "text/html;charset=utf-8" });
+        var url = URL.createObjectURL(blob);
+        frame._blobUrl = url;
+        frame.removeAttribute("srcdoc");
+        frame.src = url;
+      } catch (e) {
+        frame.srcdoc = doc;
+      }
       wrap.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+
+    async function loadIssuePreview(issueId) {
+      if (!issueId) throw new Error("Missing issue id");
+      var data = await api(
+        "/api/staff/weekly-emails?issue_id=" + encodeURIComponent(issueId),
+        null,
+        { method: "GET" }
+      );
+      if (!data || !data.preview_html) throw new Error("Preview was empty");
+      return data;
     }
 
     var previewBtn = document.getElementById("ns-we-preview-current");
     if (previewBtn) {
-      previewBtn.addEventListener("click", function () {
-        showPreview(current.preview_html, current.subject || t("nurture_weekly_preview"));
+      previewBtn.addEventListener("click", async function () {
+        if (statusEl) statusEl.textContent = t("nurture_weekly_loading");
+        try {
+          if (current.preview_html) {
+            showPreview(current.preview_html, current.subject || t("nurture_weekly_preview"));
+          } else {
+            var data = await loadIssuePreview(current.issue_id);
+            showPreview(data.preview_html, data.subject || current.subject || t("nurture_weekly_preview"));
+          }
+          if (statusEl) statusEl.textContent = "";
+        } catch (e) {
+          if (statusEl) statusEl.textContent = (e && e.message) || t("load_error");
+        }
       });
     }
 
     document.querySelectorAll(".ns-we-preview-issue").forEach(function (btn) {
       btn.addEventListener("click", async function () {
         var id = btn.getAttribute("data-id");
-        statusEl.textContent = t("nurture_weekly_loading");
+        if (statusEl) statusEl.textContent = t("nurture_weekly_loading");
         try {
-          // Reuse current preview for blog digest; for stored issues show subject note
-          // Fetch full issue body via list already has no html — reload weekly emails and find
-          var data = await api("/api/staff/weekly-emails", null, { method: "GET" });
-          var issue = (data.issues || []).find(function (x) {
-            return x.id === id;
-          });
-          if (!issue) throw new Error("Issue not found");
-          // Build a simple preview shell from stored HTML
-          var inner =
-            (issue.hero_html || "") +
-            (issue.body_html || "") +
-            '<p class="crm-muted">Stored issue preview (greeting/signature applied at send time).</p>';
-          showPreview(
-            '<div style="font-family:Arial,sans-serif;padding:16px;max-width:600px">' +
-              inner +
-              "</div>",
-            issue.subject || t("nurture_weekly_preview")
-          );
-          statusEl.textContent = "";
+          var data = await loadIssuePreview(id);
+          showPreview(data.preview_html, data.subject || t("nurture_weekly_preview"));
+          if (statusEl) statusEl.textContent = "";
         } catch (e) {
-          statusEl.textContent = e.message || t("load_error");
+          if (statusEl) statusEl.textContent = (e && e.message) || t("load_error");
         }
       });
     });

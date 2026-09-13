@@ -255,7 +255,10 @@
       data = await r.json();
     } catch (e) {}
     if (!r.ok) {
-      var errMsg = (data && data.error) || "Request failed";
+      var errMsg = (data && data.error) || (data && data.message) || "Request failed";
+      if (errMsg && typeof errMsg === "object") {
+        errMsg = errMsg.message || JSON.stringify(errMsg);
+      }
       if (data && data.detail) errMsg += ": " + data.detail;
       throw new Error(errMsg);
     }
