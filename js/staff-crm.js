@@ -633,6 +633,60 @@
     patchClientsListIndicators(item.id);
   }
 
+  function renderManualContactList(people) {
+    if (!people || !people.length) {
+      return '<p class="crm-empty-state">' + esc(t("nurture_no_manual")) + "</p>";
+    }
+    var html = '<ul class="crm-task-list">';
+    people.forEach(function (row) {
+      var leadHash = "#/clients/" + encodeURIComponent(row.lead_id) + "/overview";
+      html +=
+        '<li><a href="' +
+        esc(leadHash) +
+        '">' +
+        esc(row.display_name || "Lead") +
+        "</a> — " +
+        esc(row.stage_label || row.pipeline_stage || "") +
+        (row.missing_channels ? " · " + esc(row.missing_channels) : "") +
+        (row.phone ? " · " + esc(row.phone) : "") +
+        "</li>";
+    });
+    html += "</ul>";
+    return html;
+  }
+
+  function renderScheduledNotesList(notes) {
+    if (!notes || !notes.length) {
+      return '<p class="crm-empty-state">' + esc(t("nurture_no_notes")) + "</p>";
+    }
+    var html = '<ul class="crm-task-list">';
+    notes.forEach(function (row) {
+      var when = "";
+      try {
+        when = new Date(row.scheduled_at || row.due_at).toLocaleString(undefined, {
+          month: "short",
+          day: "numeric",
+          hour: "numeric",
+          minute: "2-digit",
+        });
+      } catch (e) {
+        when = String(row.scheduled_at || "");
+      }
+      var leadHash = "#/clients/" + encodeURIComponent(row.lead_id) + "/comm-notes";
+      html +=
+        '<li><a href="' +
+        esc(leadHash) +
+        '">' +
+        esc(row.display_name || "Lead") +
+        "</a> — " +
+        esc(when) +
+        (row.message ? "<br>" + esc(row.message) : "") +
+        "</li>";
+    });
+    html += "</ul>";
+    return html;
+  }
+
   function renderCallTaskList(tasks, emptyKey) {
     if (!tasks || !tasks.length) {
       return '<p class="crm-empty-state">' + esc(t(emptyKey || "nurture_no_calls")) + "</p>";
@@ -749,6 +803,14 @@
       "</h2>" +
       "<h3>" +
       esc(t("nurture_new_calls")) +
+      "</h3>" +
+      renderManualContactList(daily && daily.manual_contact_list) +
+      "<h3>" +
+      esc(t("nurture_scheduled_notes")) +
+      "</h3>" +
+      renderScheduledNotesList(daily && daily.scheduled_notes) +
+      "<h3>" +
+      esc(t("nurture_timed_calls")) +
       "</h3>" +
       renderCallTaskList(daily && daily.new_call_tasks, "nurture_no_calls") +
       "</div>" +
@@ -2123,7 +2185,7 @@
     $("crm-login-form").addEventListener("submit", async function (e) {
       e.preventDefault();
       if (!sb) {
-        $("crm-login-err").textContent = t("login_invalid");
+        $("crm-login-err").textContent = t("login_config_err");
         return;
       }
       $("crm-login-err").textContent = "";

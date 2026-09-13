@@ -150,6 +150,18 @@ module.exports = async function handler(req, res) {
           profileMap,
           rows
         ),
+        manual_contact_list: await enrichCallTasks(
+          cfg,
+          dailySummary.manual_contact_list,
+          profileMap,
+          rows
+        ),
+        scheduled_notes: await enrichCallTasks(
+          cfg,
+          dailySummary.scheduled_notes,
+          profileMap,
+          rows
+        ),
       });
     }
 
@@ -181,7 +193,11 @@ module.exports = async function handler(req, res) {
       stage_counts: stageCounts,
       medical_pending: medicalPending,
       in_application: inApplication,
-      calls_today: dailySummary ? dailySummary.new_call_count : null,
+      calls_today: dailySummary
+        ? dailySummary.people_to_contact_count != null
+          ? dailySummary.people_to_contact_count
+          : dailySummary.new_call_count
+        : null,
       daily_summary: dailySummary,
       new_leads_in_sequence: newLeadsInSequence,
     });
