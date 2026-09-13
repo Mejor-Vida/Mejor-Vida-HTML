@@ -123,7 +123,7 @@ assert.ok(CAPTION_CTA.includes("440-5438"));
 assert.ok(!/INFO|REVISAR/.test(rewriteCaptionCta("Cuerpo del post.\n\nComenta INFO si quieres el artículo completo, o REVISAR si quieres que revisemos tu situación. También puedes mandarnos un mensaje.\n#SeguroDeVida #GastosFinales")));
 assert.ok(rewriteCaptionCta("Cuerpo del post.\n\nComenta INFO si quieres el artículo completo.").includes("cotización gratis"));
 
-const { parseFeedCommentEvents, commentIntent, isKeywordOnly, ragToFacebookText } = require("../lib/facebook-comment-reply");
+const { parseFeedCommentEvents, commentIntent, isKeywordOnly, ragToFacebookText, buildFacebookCommentNotifyEmail } = require("../lib/facebook-comment-reply");
 assert.strictEqual(commentIntent("INFO"), "info");
 assert.strictEqual(commentIntent("quiero info por favor"), "info");
 assert.strictEqual(commentIntent("REVISAR"), "revisar");
@@ -146,6 +146,7 @@ const feed = parseFeedCommentEvents({
             comment_id: "111_999",
             post_id: "111_222",
             sender_id: "555",
+            from: { id: "555", name: "Ana" },
             message: "INFO",
           },
         },
@@ -155,7 +156,29 @@ const feed = parseFeedCommentEvents({
 });
 assert.strictEqual(feed.length, 1);
 assert.strictEqual(feed[0].commentId, "111_999");
+assert.strictEqual(feed[0].senderName, "Ana");
 assert.strictEqual(parseFeedCommentEvents({ object: "page", entry: [] }).length, 0);
+const commentMail = buildFacebookCommentNotifyEmail({
+  fromName: 'Ana <script>',
+  message: '<b>hola</b>',
+  replyStatus: "replied",
+  replyText: "Gracias",
+  commentId: "111_999",
+});
+assert.ok(commentMail.to.includes("julie@mejorvidainsurance.com"));
+assert.ok(commentMail.to.includes("admin@mejorvidainsurance.com"));
+assert.ok(commentMail.subject.includes("hola"));
+assert.ok(!commentMail.subject.startsWith("[TEST]"));
+const testMail = buildFacebookCommentNotifyEmail({
+  message: "preview",
+  subjectPrefix: "[TEST]",
+});
+assert.ok(testMail.subject.startsWith("[TEST] New Facebook comment:"));
+assert.ok(!commentMail.html.includes("<b>hola</b>"));
+assert.ok(commentMail.html.includes("&lt;b&gt;hola&lt;/b&gt;"));
+assert.ok(commentMail.html.includes("Ana &lt;script&gt;"));
+assert.ok(commentMail.text.includes("The Page auto-replied."));
+assert.ok(commentMail.html.includes("Julie Braunsroth"));
 
 const { wordCount, storyLengthError } = require("../lib/weekly-newsletter-compose");
 assert.strictEqual(wordCount("one two three"), 3);
