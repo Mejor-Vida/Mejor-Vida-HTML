@@ -16,7 +16,7 @@
 
   <url>
     <loc>https://www.mejorvidainsurance.com/blog.html</loc>
-    <lastmod>2026-09-07T04:09:03+00:00</lastmod>
+    <lastmod>2026-09-14T02:45:00+00:00</lastmod>
     <priority>0.80</priority>
   </url>
 
@@ -98,6 +98,25 @@
     <loc>https://www.mejorvidainsurance.com/como-pagar-un-funeral.html</loc>
     <lastmod>2026-09-06T03:14:06+00:00</lastmod>
     <priority>0.88</priority>
+    <video:video>
+      <video:thumbnail_loc>https://i.ytimg.com/vi/_ioLUItm3ek/maxresdefault.jpg</video:thumbnail_loc>
+      <video:title>Cómo se paga un funeral (contrato, seguro y gobierno)</video:title>
+      <video:description>Cómo se paga de verdad un funeral: la cuenta no espera a la herencia, un contrato prepagado y un cheque de seguro de vida no son el mismo dinero, y Medicare más 255 dólares no cubren un funeral con velatorio.</video:description>
+      <video:player_loc allow_embed="yes">https://www.youtube.com/embed/_ioLUItm3ek</video:player_loc>
+      <video:duration>186</video:duration>
+      <video:publication_date>2026-09-11T03:02:11Z</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+      <video:live>no</video:live>
+      <video:uploader info="https://www.youtube.com/@mejorvidainsurancellc">Mejor Vida Insurance LLC</video:uploader>
+      <video:tag>cómo pagar un funeral</video:tag>
+      <video:tag>cómo se paga un funeral</video:tag>
+      <video:tag>funeral prepagado</video:tag>
+      <video:tag>seguro de vida gastos finales</video:tag>
+      <video:tag>pago funeral Seguro Social</video:tag>
+      <video:tag>Medicare funeral</video:tag>
+      <video:tag>gastos finales</video:tag>
+      <video:tag>Mejor Vida Seguros</video:tag>
+    </video:video>
   </url>
 
   <url>
@@ -260,7 +279,7 @@
       <video:description>Quién puede asegurar a un tío, un primo u otro familiar que no es padre, cónyuge ni hijo: interés asegurable, dueño de la póliza, beneficiario y quién tiene que firmar.</video:description>
       <video:player_loc allow_embed="yes">https://www.youtube.com/embed/WDH4o2vrWGA</video:player_loc>
       <video:duration>360</video:duration>
-      <video:publication_date>2026-09-10T11:00:59Z</video:publication_date>
+      <video:publication_date>2026-09-10T11:08:41Z</video:publication_date>
       <video:family_friendly>yes</video:family_friendly>
       <video:live>no</video:live>
       <video:uploader info="https://www.youtube.com/@mejorvidainsurancellc">Mejor Vida Insurance LLC</video:uploader>
@@ -690,6 +709,12 @@
   </url>
 
   <url>
+    <loc>https://www.mejorvidainsurance.com/blog/historial-manejo-seguro-vida-2026-09-13.html</loc>
+    <lastmod>2026-09-14T02:45:00+00:00</lastmod>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
     <loc>https://www.mejorvidainsurance.com/blog/lista-precios-funeral-ftc-2026-09-06.html</loc>
     <lastmod>2026-09-07T04:15:23+00:00</lastmod>
     <priority>0.85</priority>
@@ -750,6 +775,12 @@
   </url>
 
   <url>
+    <loc>https://www.mejorvidainsurance.com/blog/quien-paga-cuentas-seguro-vida-2026-09-13.html</loc>
+    <lastmod>2026-09-14T02:45:00+00:00</lastmod>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
     <loc>https://www.mejorvidainsurance.com/blog/regla-funerales-ftc-derechos-familias-2026-08-23.html</loc>
     <lastmod>2026-09-06T03:14:06+00:00</lastmod>
     <priority>0.85</priority>
@@ -798,6 +829,12 @@
   </url>
 
   <url>
+    <loc>https://www.mejorvidainsurance.com/blog/solicitudes-seguro-vida-agosto-mib-2026-09-13.html</loc>
+    <lastmod>2026-09-14T02:45:00+00:00</lastmod>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
     <loc>https://www.mejorvidainsurance.com/blog/tipos-planes-seguro-gastos-finales.html</loc>
     <lastmod>2026-09-06T15:07:00+00:00</lastmod>
     <priority>0.85</priority>
@@ -836,6 +873,12 @@
   <url>
     <loc>https://www.mejorvidainsurance.com/blog/weekly-insurance-update-2026-07-19.html</loc>
     <lastmod>2026-09-06T03:14:06+00:00</lastmod>
+    <priority>0.70</priority>
+  </url>
+
+  <url>
+    <loc>https://www.mejorvidainsurance.com/blog/weekly-insurance-update-2026-09-13.html</loc>
+    <lastmod>2026-09-14T02:45:00+00:00</lastmod>
     <priority>0.70</priority>
   </url>
 
