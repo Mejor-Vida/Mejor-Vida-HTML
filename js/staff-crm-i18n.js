@@ -195,7 +195,7 @@
       funnel_dest_whatsapp: "WhatsApp",
       funnel_scope_facebook: "Facebook ads to the quote page.",
       funnel_scope_facebook_landing:
-        "Facebook ads to the V3 landing (gastos-finales-ads-v3): contact form first, then quote questions. Calculator and schedule open from the quote result.",
+        "Facebook ads to the V3 landing (gastos-finales-ads-v3): contact form first, then quote questions. Licenses is a side path (popup). Calculator and schedule open from the quote result.",
       funnel_scope_facebook_whatsapp:
         "Facebook ads that open WhatsApp. Spend and conversations are from Ads Manager. ManyChat leads are all WhatsApp bot leads in this period, not only this ad until the bot tags the ad source.",
       funnel_scope_google: "Google Ads to any page on the site.",
@@ -1366,7 +1366,7 @@
       funnel_dest_whatsapp: "WhatsApp",
       funnel_scope_facebook: "Anuncios de Facebook al cotizador.",
       funnel_scope_facebook_landing:
-        "Anuncios de Facebook a la página V3 (gastos-finales-ads-v3): primero el formulario de contacto, luego las preguntas de cotización. La calculadora y la agenda se abren desde el resultado.",
+        "Anuncios de Facebook a la página V3 (gastos-finales-ads-v3): primero el formulario de contacto, luego las preguntas de cotización. Licencias es una ruta lateral (ventana emergente). La calculadora y la agenda se abren desde el resultado.",
       funnel_scope_facebook_whatsapp:
         "Anuncios de Facebook que abren WhatsApp. El gasto y las conversaciones vienen de Ads Manager. Los leads de ManyChat son todos los del bot de WhatsApp en este período, no solo este anuncio hasta que el bot etiquete la fuente.",
       funnel_scope_google: "Google Ads a cualquier página del sitio.",
