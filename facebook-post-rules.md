@@ -152,7 +152,7 @@ See `lib/weekly-facebook-compose.js` (`defaultFirstComment`).
 
 **Publishing automation:** After the approved weekly digest and story images are live, `api/weekly-facebook-cron.js` publishes three Spanish posts (Sunday as soon as the blog exists, Tuesday 10:00 a.m. Chicago, Thursday 10:00 a.m. Chicago) and posts the first comment about 10 minutes later. See `tools/weekly-newsletter/FACEBOOK_AUTOMATION.md`. Do not wait for a separate Tuesday/Thursday prompt.
 
-**Comment replies:** The existing Page webhook (`/api/meta-leadgen-webhook`) watches new comments and answers with the **same public RAG chatbot** as the website (`runRagPipeline`). Bare **INFO** still gets the article link; bare **REVISAR** is invited to WhatsApp `(402) 440-5438`. Any real question in the comment is answered from the public knowledge base (Markdown stripped for Facebook). Pause with `FACEBOOK_COMMENT_AI_REPLY=0`. The Page never replies to its own comments. New visitor comments also email **julie@** and **admin@** (pause with `FACEBOOK_COMMENT_NOTIFY_EMAIL=0`).
+**Comment replies:** The Page webhook (`/api/meta-leadgen-webhook`) thanks the person, says this is Mejor Vida’s automated assistant, notes that Julie was notified and will send a private message, then answers **one** question briefly if they asked one. Bare **INFO** / “information” does **not** dump a blog link. Pause with `FACEBOOK_COMMENT_AI_REPLY=0`. The Page never replies to its own comments. New visitor comments also email **julie@** and **admin@** (pause with `FACEBOOK_COMMENT_NOTIFY_EMAIL=0`).
 
 ---
 

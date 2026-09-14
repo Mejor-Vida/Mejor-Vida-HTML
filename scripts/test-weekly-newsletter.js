@@ -123,15 +123,29 @@ assert.ok(CAPTION_CTA.includes("440-5438"));
 assert.ok(!/INFO|REVISAR/.test(rewriteCaptionCta("Cuerpo del post.\n\nComenta INFO si quieres el artículo completo, o REVISAR si quieres que revisemos tu situación. También puedes mandarnos un mensaje.\n#SeguroDeVida #GastosFinales")));
 assert.ok(rewriteCaptionCta("Cuerpo del post.\n\nComenta INFO si quieres el artículo completo.").includes("cotización gratis"));
 
-const { parseFeedCommentEvents, commentIntent, isKeywordOnly, ragToFacebookText, buildFacebookCommentNotifyEmail } = require("../lib/facebook-comment-reply");
+const {
+  parseFeedCommentEvents,
+  commentIntent,
+  isKeywordOnly,
+  isInfoOnly,
+  commentOpening,
+  ragToFacebookText,
+  buildFacebookCommentNotifyEmail,
+} = require("../lib/facebook-comment-reply");
 assert.strictEqual(commentIntent("INFO"), "info");
 assert.strictEqual(commentIntent("quiero info por favor"), "info");
+assert.strictEqual(commentIntent("Information.!!!!"), "info");
 assert.strictEqual(commentIntent("REVISAR"), "revisar");
 assert.strictEqual(commentIntent("¿Cuánto cuesta?"), "other");
 assert.ok(isKeywordOnly("INFO", "info"));
 assert.ok(isKeywordOnly("revisar!", "revisar"));
 assert.ok(!isKeywordOnly("INFO que es GINA", "info"));
-assert.ok(ragToFacebookText("Lee [el artículo](https://example.com) y **esto**").includes("https://example.com"));
+assert.ok(isInfoOnly("Information.!!!!"));
+assert.ok(commentOpening("info").includes("asistente automático"));
+assert.ok(commentOpening("info").includes("Julie"));
+assert.ok(!commentOpening("info").includes("http"));
+assert.ok(!ragToFacebookText("Lee [el artículo](https://example.com) y **esto**").includes("https://example.com"));
+assert.ok(ragToFacebookText("Lee [el artículo](https://example.com) y **esto**").includes("esto"));
 const feed = parseFeedCommentEvents({
   object: "page",
   entry: [
