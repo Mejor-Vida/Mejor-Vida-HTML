@@ -152,7 +152,14 @@ See `lib/weekly-facebook-compose.js` (`defaultFirstComment`).
 
 **Publishing automation:** After the approved weekly digest and story images are live, `api/weekly-facebook-cron.js` publishes three Spanish posts (Sunday as soon as the blog exists, Tuesday 10:00 a.m. Chicago, Thursday 10:00 a.m. Chicago) and posts the first comment about 10 minutes later. See `tools/weekly-newsletter/FACEBOOK_AUTOMATION.md`. Do not wait for a separate Tuesday/Thursday prompt.
 
-**Comment replies:** First reply to a person thanks them, says this is Mejor Vida’s automated assistant, and notes that Julie was notified and will private-message. Later replies in that conversation skip the intro and only answer. Bare **INFO** / “information” does **not** dump a blog link. Pause with `FACEBOOK_COMMENT_AI_REPLY=0`. The Page never replies to its own comments. New visitor comments also email **julie@** and **admin@** (pause with `FACEBOOK_COMMENT_NOTIFY_EMAIL=0`).
+**Comment replies** (`lib/facebook-comment-reply.js` — this is the source of truth; do not reuse website-chat canned answers):
+
+- **First reply** to a person: thank them; say you are the automated assistant of Mejor Vida Seguros; Julie has been notified and will send a **private message** ASAP; then one short answer if they asked a real question.
+- **Later replies** in that conversation: skip the intro. One short **usted** answer. End with “Si tiene otra pregunta, puede escribirla aquí.”
+- Bare **INFO** / “information” / **REVISAR** as a keyword: intro only — **no** weekly blog article, no URL dump.
+- Practiced locks: who is Julie (founder + NPN, she will PM); monthly cost (not the same for everyone; personal estimate in the PM); can I buy / age (yes they can buy; some FE plans start later; Julie will say what applies in the PM); state questions without listing licensed states.
+- Never: link dumps, licensed-state roster, “call Julie” / phone / email pile, carrier shopping lists unless they named a carrier, sample price tables.
+- Pause auto-reply with `FACEBOOK_COMMENT_AI_REPLY=0`. The Page never replies to its own comments. New visitor comments also email **julie@** and **admin@** (pause with `FACEBOOK_COMMENT_NOTIFY_EMAIL=0`).
 
 ---
 

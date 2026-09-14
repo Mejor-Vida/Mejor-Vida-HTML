@@ -1,0 +1,24 @@
+---
+description: Public Facebook Page comment auto-replies — locked style, not website-chat copy
+globs: lib/facebook-comment-reply.js,lib/rag-pipeline.js,api/meta-leadgen-webhook.js,facebook-post-rules.md
+alwaysApply: false
+---
+
+# Facebook comment auto-replies
+
+Owner: `lib/facebook-comment-reply.js`. Practiced answers live in `lockedFacebookAnswer()`. Do **not** send `whoIsJulieAnswer`, `ageCarrierFitAnswer`, carrier lists, or other website-chat canned copy into a public comment.
+
+## Style
+
+- First reply: thank them; automated assistant of Mejor Vida Seguros; Julie was notified and will **private-message**; then one short answer if they asked a question.
+- Later replies: skip that intro. One short **usted** answer. “Si tiene otra pregunta, puede escribirla aquí.”
+- Bare INFO / Information / REVISAR: intro only. No blog URL.
+- No phones, emails, URLs, licensed-state roster, carrier shopping lists, or sample prices.
+
+```js
+// BAD — website chat
+"Nació en Bogotá… https://…/about-julie.html Llámala al 402-440-5438"
+
+// GOOD — Facebook comment
+"Julie Braunsroth es la fundadora de Mejor Vida Seguros y una agente de seguros licenciada (NPN #21695431). Ella es quien le enviará el mensaje privado."
+```

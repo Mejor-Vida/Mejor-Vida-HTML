@@ -12,7 +12,7 @@ When **creating**, **previewing**, or **publishing** Facebook posts for this pro
 
 2. **Non‑negotiables** (see that file for detail):
    - **No blog URL in the main caption** — link only in the **first follow-up comment** (and/or automation), not in the primary post text.
-   - **Dual CTA** when possible: **INFO** (article/education) and **REVISAR** (review/help) + option to **DM** instead of commenting.
+   - **Public comment replies** use `lib/facebook-comment-reply.js` (automated assistant + Julie will PM). Do not paste website-chat answers, phone/email dumps, or licensed-state lists into Page comments.
    - **Hook** must not read like a newsletter, report title, or “en este artículo…” blog opener.
    - Tone: human, simple Spanish, families — not agents or regulators.
    - **Compliance:** no guarantees on coverage, pricing, or outcomes; educational and trust-building only.
