@@ -22,6 +22,12 @@ const JOBS = [
   { src: "img/nav-life-tejo.jpg", maxWidth: 1024, maxHeight: 768, outBase: "nav-life-tejo" },
   { src: "img/hero-couple-embrace.png", maxWidth: 681, maxHeight: 1024 },
   { src: "img/hero-couple-embrace.png", maxWidth: 480, maxHeight: 720, outBase: "hero-couple-embrace-480" },
+  { src: "img/hero-couple-embrace-enhanced.png", maxWidth: 1362, maxHeight: 2048, keepPng: true },
+  { src: "img/hero-couple-embrace-enhanced.png", maxWidth: 681, maxHeight: 1024, keepPng: true, outBase: "hero-couple-embrace-enhanced-681" },
+  { src: "img/hero-couple-embrace-enhanced.png", maxWidth: 480, maxHeight: 720, keepPng: true, outBase: "hero-couple-embrace-enhanced-480" },
+  { src: "img/hero-couple-embrace-complete.png", maxWidth: 1362, maxHeight: 1504, keepPng: true },
+  { src: "img/hero-couple-embrace-complete.png", maxWidth: 681, maxHeight: 752, keepPng: true, outBase: "hero-couple-embrace-complete-681" },
+  { src: "img/hero-couple-embrace-complete.png", maxWidth: 480, maxHeight: 530, keepPng: true, outBase: "hero-couple-embrace-complete-480" },
   { src: "img/happy-family.png", maxWidth: 1400, maxHeight: 900 },
   { src: "img/happy-family.png", maxWidth: 800, maxHeight: 514, outBase: "happy-family-800" },
   { src: "img/fe-about-seniors-laptop.jpg", maxWidth: 1000, maxHeight: 750 },
@@ -82,6 +88,7 @@ const JOBS = [
   { src: "img/carriers/americo-logo.png", maxWidth: 400, maxHeight: 128, keepPng: true },
   { src: "img/mvi-promo-seguros-whatsapp.png", maxWidth: 800, maxHeight: 450 },
   { src: "img/julie-promo-funeral-cost.png", maxWidth: 900, maxHeight: 900 },
+  { src: "img/julie-presenter-fullbody.png", maxWidth: 720, maxHeight: 1080, outBase: "julie-presenter-fullbody" },
   { src: "img/funeral-calculator-menu.png", maxWidth: 720, maxHeight: 576, outBase: "funeral-calculator-menu" },
   { src: "img/about-help-hikers.jpg", maxWidth: 800, maxHeight: 572, outBase: "about-help-hikers" },
   { src: "img/usa-coverage-map.jpg", maxWidth: 800, maxHeight: 533, outBase: "usa-coverage-map" },
@@ -138,6 +145,8 @@ const JOBS = [
   { src: "img/2-16-2026-Blog.png", maxWidth: 1200, maxHeight: 675 },
   { src: "img/2-8-2026-Blog.png", maxWidth: 1200, maxHeight: 675 },
   { src: "img/2-1-2026-Blog.png", maxWidth: 1200, maxHeight: 675 },
+  { src: "img/facebook/mib-age-growth-fb-2026-09-13.png", maxWidth: 1080, maxHeight: 1080, keepPng: true },
+  { src: "img/blog-generated/weekly-insurance-update-2026-09-13/story-1.png", maxWidth: 1080, maxHeight: 1080, keepPng: true },
 ];
 
 function fitInside(meta, maxWidth, maxHeight) {
@@ -215,15 +224,19 @@ async function optimizeOne(job) {
 async function main() {
   fs.mkdirSync(OUT_DIR, { recursive: true });
   const results = [];
+  const only = process.argv.find((a) => a.startsWith("--only="))?.slice(7) || "";
 
   for (const job of JOBS) {
+    if (only && !job.src.includes(only) && !(job.outBase || "").includes(only)) continue;
     const r = await optimizeOne(job);
     if (r) results.push(r);
   }
 
-  const blogFiles = walkPngFiles(BLOG_SRC);
+  const blogFiles = only ? [] : walkPngFiles(BLOG_SRC);
+  const jobSrcs = new Set(JOBS.map((j) => j.src));
   for (const abs of blogFiles) {
     const rel = path.relative(ROOT, abs).split(path.sep).join("/");
+    if (jobSrcs.has(rel)) continue;
     const isHero = /hero/i.test(path.basename(rel));
     const r = await optimizeOne({
       src: rel,
@@ -234,7 +247,14 @@ async function main() {
   }
 
   const manifestPath = path.join(OUT_DIR, "manifest.json");
-  fs.writeFileSync(manifestPath, JSON.stringify(results, null, 2));
+  if (only && fs.existsSync(manifestPath)) {
+    const prev = JSON.parse(fs.readFileSync(manifestPath, "utf8"));
+    const keys = new Set(results.map((r) => r.webp));
+    const merged = prev.filter((r) => !keys.has(r.webp)).concat(results);
+    fs.writeFileSync(manifestPath, JSON.stringify(merged, null, 2));
+  } else {
+    fs.writeFileSync(manifestPath, JSON.stringify(results, null, 2));
+  }
   console.log(`\nWrote ${results.length} optimized sets to img/opt/`);
 }
 

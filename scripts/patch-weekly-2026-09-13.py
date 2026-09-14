@@ -466,7 +466,7 @@ def insert_blog_card() -> None:
 <a class="d-block h-100 text-decoration-none blog-card-thumb-link blog-card-thumb-link--contain" href="/blog/weekly-insurance-update-2026-09-13.html">
 <picture>
 <source type="image/webp" srcset="/img/opt/blog-generated/weekly-insurance-update-2026-09-13/story-1.webp"/>
-<img alt="Pareja hispana mayor revisa papeles de una solicitud de seguro de vida en casa" class="blog-card-thumb blog-card-thumb--contain" src="/img/opt/blog-generated/weekly-insurance-update-2026-09-13/story-1.png" width="600" height="600" loading="eager" fetchpriority="high" decoding="async" onerror="this.onerror=null;this.src='/img/opt/3-1-2026-Blog.png'"/>
+<img alt="Gráfico: solicitudes de seguro de vida en agosto de 2026, con el mayor crecimiento en personas de 70 años o más (MIB Life Index)" class="blog-card-thumb blog-card-thumb--contain" src="/img/opt/blog-generated/weekly-insurance-update-2026-09-13/story-1.png" width="600" height="600" loading="eager" fetchpriority="high" decoding="async" onerror="this.onerror=null;this.src='/img/opt/3-1-2026-Blog.png'"/>
 </picture>
 </a>
 </div>
@@ -493,7 +493,7 @@ def insert_blog_card() -> None:
 <a class="d-block h-100 text-decoration-none blog-card-thumb-link blog-card-thumb-link--contain" href="/en/blog/weekly-insurance-update-2026-09-13.html">
 <picture>
 <source type="image/webp" srcset="/img/opt/blog-generated/weekly-insurance-update-2026-09-13/story-1.webp"/>
-<img alt="An older Hispanic couple reviews a life insurance application at home" class="blog-card-thumb blog-card-thumb--contain" src="/img/opt/blog-generated/weekly-insurance-update-2026-09-13/story-1.png" width="600" height="600" loading="eager" fetchpriority="high" decoding="async" onerror="this.onerror=null;this.src='/img/opt/3-1-2026-Blog.png'"/>
+<img alt="Chart: August 2026 life insurance applications, with the largest growth among people 70 and older (MIB Life Index)" class="blog-card-thumb blog-card-thumb--contain" src="/img/opt/blog-generated/weekly-insurance-update-2026-09-13/story-1.png" width="600" height="600" loading="eager" fetchpriority="high" decoding="async" onerror="this.onerror=null;this.src='/img/opt/3-1-2026-Blog.png'"/>
 </picture>
 </a>
 </div>
