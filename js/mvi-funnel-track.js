@@ -431,6 +431,11 @@
       return;
     }
 
+    if (eventName === "phone_clicked") {
+      track({ tool: "phone", step_name: "phone_click", event_type: "click", page_or_step: page });
+      return;
+    }
+
     if (eventName === "schedule_click") {
       track({ tool: "schedule", step_name: "schedule_click", event_type: "click", page_or_step: page });
       return;

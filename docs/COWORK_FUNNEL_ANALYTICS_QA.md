@@ -20,7 +20,7 @@ Confirm that each landing-page step fires a `funnel_events` row and shows up cor
 
 | What | Production | Local (if dev server running) |
 |------|------------|-------------------------------|
-| Landing (Facebook attribution) | `https://mejorvidainsurance.com/gastos-finales-ads-v2/?fbclid=cowork_qa_001&utm_source=facebook&utm_campaign=cowork_funnel_qa&utm_content=FE+Video+ad+-+Copy` | `http://localhost:3000/gastos-finales-ads-v2/?fbclid=cowork_qa_001&utm_source=facebook&utm_campaign=cowork_funnel_qa&utm_content=FE+Video+ad+-+Copy` |
+| Landing (Facebook attribution) | `https://mejorvidainsurance.com/gastos-finales-ads-v3/?fbclid=cowork_qa_001&utm_source=facebook&utm_campaign=cowork_funnel_qa` | `http://localhost:3000/gastos-finales-ads-v3/?fbclid=cowork_qa_001&utm_source=facebook&utm_campaign=cowork_funnel_qa` |
 | CRM Funnel Analytics | `https://mejorvidainsurance.com/staff/crm.html#/ga4` | `http://localhost:3000/staff/crm.html#/ga4` |
 
 Use **production** unless the user tells you to test locally.
@@ -43,19 +43,17 @@ Walk through in order. After each row, check Network for `funnel-event` and note
 
 | # | User action on landing page | Expected POST payload | Expected CRM column / label |
 |---|----------------------------|------------------------|----------------------------|
-| A1 | Land on page (objective picker visible) | `tool=quote`, `step_name=landing`, `event_type=step_view`, `source=facebook` | **Get Quote** → **Landing Page View** count +1 |
-| A2 | Click **Get Quote** objective card | `step_name=get_quote_click`, `event_type=click` | **Get Quote** → **Get Quote Click** +1 |
-| A3 | Select **State** (e.g. Nebraska) and continue | `step_name=state`, `event_type=step_view` | **Get Quote** → **Step 1 — State** +1 |
-| A4 | Select **Sex** | `step_name=sex`, `event_type=step_view` | **Step 2 — Sex** +1 |
-| A5 | Enter **Date of birth** | `step_name=date_of_birth`, `event_type=step_view` | **Step 3 — Date of Birth** +1 |
-| A6 | **Tobacco** answer | `step_name=tobacco`, `event_type=step_view` | **Step 4 — Tobacco** +1 |
-| A7 | **Name** step | `step_name=name`, `event_type=step_view` | **Step 5 — Name** +1 |
-| A8 | **Email** step (qualify_lead may fire here) | `step_name=email`, `event_type=step_view`; optional conversion `qualify_lead` / `lead_submitted` mapping | **Step 6 — Email** +1 |
-| A9 | **Phone** step | `step_name=phone`, `event_type=step_view` | **Step 7 — Phone** +1 |
-| A10 | Complete quote → **results** | `step_name=quote_result`, `event_type=step_view` | **Quote Result** +1 |
-| A11 | Submit lead (if reachable without real PII, use obvious test data; stop before live SMS if unsure) | `step_name=lead_submitted`, `event_type=conversion` | **Lead Submitted** +1 |
+| A1 | Land on page (contact form visible) | `tool=quote`, `step_name=landing`, `event_type=step_view`, `source=facebook` | **Get Quote** → **Contact form** count +1 |
+| A2 | Submit name, phone, and SMS opt-in | `step_name=contact_submit` then `lead_submitted` | **Contact submit** +1, **Lead saved** +1 |
+| A3 | Continues into quote questions | `step_name=get_quote_click`, `event_type=click` | **Quote started** +1 |
+| A4 | Select **State** (e.g. Nebraska) and continue | `step_name=state` | **Step — State** +1 |
+| A5 | Select **Sex** | `step_name=sex` | **Step — Sex** +1 |
+| A6 | Enter **Date of birth** | `step_name=date_of_birth` | **Step — Date of Birth** +1 |
+| A7 | **Tobacco** answer | `step_name=tobacco` | **Step — Tobacco** +1 |
+| A8 | **Email** step | `step_name=email` | **Step — Email** +1 |
+| A9 | Complete quote → **results** | `step_name=quote_result`, `event_type=step_view` | **Quote result** +1 |
 
-**Session rule:** A1–A11 should share the **same `session_id`** in every POST body. Flag if the ID changes mid-flow.
+**Session rule:** A1–A9 should share the **same `session_id`** in every POST body. Flag if the ID changes mid-flow.
 
 **Drop-off rule:** If you completed step N but step N+1 shows 0 while your session clearly reached it, flag **tracking gap**. If you intentionally stopped early, **Dropped** on the next step should equal 1 (not a bogus number on branches you never entered).
 
@@ -67,12 +65,12 @@ Use a **new incognito window** with the same Facebook URL query string.
 
 | # | Action | Expected CRM branch / step |
 |---|--------|----------------------------|
-| B1 | Click **Calculator** objective | **FE Calculator** → **Calculator Click** +1, then calc steps |
+| B1 | After quote results, click **Calculator** | **FE Calculator** → **Calculator Click** +1, then calc steps |
 | B2 | Walk calc steps through **Results Viewed** | `calc_state`, `calc_ceremony`, `calc_funeral_costs`, `calc_household`, `calc_results` |
-| B3 | Click **Schedule** objective | **Schedule Call** → **Schedule Click** +1 |
+| B3 | Click **Schedule** from results | **Schedule Call** → **Schedule Click** +1 |
 | B4 | Open schedule modal | **Calendar Opened** +1 |
-| B5 | Click **WhatsApp** (if shown) | **WhatsApp** → **WhatsApp Click** +1 |
-| B6 | Click **agent/bio card** (if shown) | **Bio Page** → **Bio Page Click** +1 |
+| B5 | Click **WhatsApp** in the header | **WhatsApp** → **WhatsApp Click** +1 |
+| B6 | Click **¿Necesita ayuda?** / phone | **Help call** → **Phone click** +1 |
 
 ---
 

@@ -1101,9 +1101,12 @@
   /* ── FunnelVisualization ── */
   function FunnelVisualization(branches) {
     var order =
-      state.landingPage === "whatsapp"
+      (state.data && state.data.branchOrder && state.data.branchOrder.length
+        ? state.data.branchOrder
+        : null) ||
+      (state.landingPage === "whatsapp"
         ? ["whatsapp"]
-        : ["quote", "calculator", "schedule", "bio", "whatsapp"];
+        : ["quote", "calculator", "schedule", "bio", "whatsapp"]);
     var vizSub =
       state.landingPage === "whatsapp" ? t("funnel_viz_sub_whatsapp") : t("funnel_viz_sub");
     return (
