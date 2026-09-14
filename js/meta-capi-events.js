@@ -245,6 +245,20 @@
     sendViewContentCapi(leadHints);
   }
 
+  /**
+   * Website Lead for ads optimization — contact form submit
+   * (Continuar a su cotización), not quote complete.
+   * CAPI Lead is sent from /api/quote-lead-sync with the same event_id.
+   */
+  function trackLead(leadHints) {
+    var hints = collectLeadHints(leadHints);
+    var eventId = getLeadEventId();
+    if (typeof fbq === "function") {
+      fbq("track", "Lead", { currency: "USD", value: 0 }, { eventID: eventId });
+    }
+    return { eventId: eventId, hints: hints };
+  }
+
   function onLandingStep(step, activeFlow, leadHints) {
     var flow = activeFlow || "quote";
     if (flow !== "quote" && flow != null) return;
@@ -272,6 +286,7 @@
   window.MVIMetaCapiEvents = {
     trackPageView: trackPageView,
     trackViewContent: trackViewContent,
+    trackLead: trackLead,
     onLandingStep: onLandingStep,
     getPageViewEventId: getPageViewEventId,
     getViewContentEventId: getViewContentEventId,

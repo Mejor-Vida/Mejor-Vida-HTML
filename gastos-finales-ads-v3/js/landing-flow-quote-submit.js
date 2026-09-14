@@ -161,13 +161,14 @@
                   msg("We could not save your information.", "No pudimos guardar sus datos.")
               );
             }
-            if (!IS_EN && typeof fbq === "function") {
-              fbq(
-                "track",
-                "Lead",
-                { currency: "USD", value: 0 },
-                { eventID: leadEventId, ph: phone, fn: firstName, ln: lastName }
-              );
+            if (!IS_EN && window.MVIMetaCapiEvents && typeof window.MVIMetaCapiEvents.trackLead === "function") {
+              window.MVIMetaCapiEvents.trackLead({
+                phone: phone,
+                firstName: firstName,
+                lastName: lastName,
+              });
+            } else if (!IS_EN && typeof fbq === "function") {
+              fbq("track", "Lead", { currency: "USD", value: 0 }, { eventID: leadEventId });
             }
             setStatus("", false);
             if (ctx.setSubmitting) ctx.setSubmitting(false);
