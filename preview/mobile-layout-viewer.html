@@ -167,13 +167,14 @@
  <header class="toolbar">
   <h1>Vista móvil — QA interno</h1>
   <p>
-   Marco de teléfono para revisar el sitio en español, la landing de anuncios v2 y el cuestionario médico.
+   Marco de teléfono para revisar el sitio en español, las landings de anuncios v2 y v3, y el cuestionario médico.
    Edita archivos, guarda y pulsa <strong>Recargar</strong>.
   </p>
   <div class="control-row" role="tablist" aria-label="Página a previsualizar">
    <label>Página</label>
    <button type="button" class="btn target-btn active" data-target="website">Sitio web (ES)</button>
    <button type="button" class="btn target-btn" data-target="landing">Landing ads v2</button>
+   <button type="button" class="btn target-btn" data-target="landing-v3">Landing ads v3</button>
    <button type="button" class="btn target-btn" data-target="medical">Cuestionario médico</button>
   </div>
   <div class="control-row">
@@ -237,6 +238,11 @@
     landing: {
      label: "Landing ads v2",
      path: "../gastos-finales-ads-v2/",
+     needsLocalApi: false,
+    },
+    "landing-v3": {
+     label: "Landing ads v3",
+     path: "../gastos-finales-ads-v3/",
      needsLocalApi: false,
     },
     medical: {

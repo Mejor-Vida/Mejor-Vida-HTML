@@ -3425,15 +3425,44 @@ body.lf-landing .mvi-lm-consent-label {
 }
 
 @media (max-width: 767.98px) {
+  .lf-landing--contact-first .lf-header-row {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.4rem;
+    padding: 0 0.65rem 0 0;
+    overflow: visible;
+  }
+
   .lf-landing--contact-first .lf-logo {
-    margin-top: -1.35rem;
-    margin-left: 0;
+    position: relative;
+    z-index: 2;
+    flex: 0 1 auto;
+    max-width: 58%;
+    margin-top: -3.7rem;
+    margin-left: -2.85rem;
+    margin-bottom: -3.35rem;
+    overflow: visible;
   }
 
   .lf-landing--contact-first .lf-logo img {
-    height: clamp(7.25rem, 30vw, 9.25rem);
-    max-width: min(58vw, 14rem);
+    height: clamp(10.75rem, 48vw, 13.25rem);
+    max-width: none;
+    width: auto;
     transform: none;
+  }
+
+  .lf-landing--contact-first .lf-header-actions {
+    position: relative;
+    z-index: 3;
+    flex: 0 0 auto;
+    margin-left: auto;
+    max-width: 44%;
+    min-width: 8.25rem;
+    padding-top: 0.45rem;
+    padding-right: 0;
+    align-items: flex-end;
   }
 
   .lf-landing--contact-first .lf-header-tagline--ad {
