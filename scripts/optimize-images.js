@@ -147,6 +147,7 @@ const JOBS = [
   { src: "img/2-1-2026-Blog.png", maxWidth: 1200, maxHeight: 675 },
   { src: "img/facebook/mib-age-growth-fb-2026-09-13.png", maxWidth: 1080, maxHeight: 1080, keepPng: true },
   { src: "img/blog-generated/weekly-insurance-update-2026-09-13/story-1.png", maxWidth: 1080, maxHeight: 1080, keepPng: true },
+  { src: "img/blog-generated/weekly-insurance-update-2026-09-13/story-2.png", maxWidth: 1024, maxHeight: 682, keepPng: true },
 ];
 
 function fitInside(meta, maxWidth, maxHeight) {

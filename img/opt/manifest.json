@@ -2464,5 +2464,14 @@
     "webp": "img/opt/blog-generated/weekly-insurance-update-2026-09-13/story-1.webp",
     "fallback": "img/opt/blog-generated/weekly-insurance-update-2026-09-13/story-1.png",
     "keepPng": true
+  },
+  {
+    "src": "img/blog-generated/weekly-insurance-update-2026-09-13/story-2.png",
+    "base": "story-2",
+    "width": 1024,
+    "height": 682,
+    "webp": "img/opt/blog-generated/weekly-insurance-update-2026-09-13/story-2.webp",
+    "fallback": "img/opt/blog-generated/weekly-insurance-update-2026-09-13/story-2.png",
+    "keepPng": true
   }
 ]
