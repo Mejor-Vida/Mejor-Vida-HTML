@@ -22,6 +22,7 @@
     phone: null,
     phoneVerified: false,
     smsConsent: false,
+    leadId: null,
   };
 
   var progressRoot = document.querySelector(".lf-progress");
@@ -50,6 +51,7 @@
     phone: "mviLandingPhone",
     phoneVerified: "mviLandingPhoneVerified",
     smsConsent: "mviLandingSmsConsent",
+    leadId: "mviLandingLeadId",
   };
 
   var nameStepPhase = "fields";
@@ -69,14 +71,12 @@
   var CHOICE_SELECTOR = ".lf-option-btn";
 
   var stepNameMap = {
-    1: "objective_picker",
+    1: "landing_contact",
     2: "state",
     3: "sex",
     4: "date_of_birth",
     5: "tobacco",
-    11: "name",
     12: "email",
-    13: "phone",
     14: "results",
     21: "calc_state",
     22: "calc_ceremony",
@@ -85,7 +85,7 @@
     25: "calc_results",
   };
 
-  var quoteGa4StepId = { 2: 1, 3: 2, 4: 3, 5: 4, 11: 5, 12: 6, 13: 7, 14: 8 };
+  var quoteGa4StepId = { 1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 12: 6, 14: 7 };
   var calcGa4StepId = { 21: 1, 22: 2, 23: 3, 24: 4, 25: 5 };
 
   function ga4StepId(stepNum) {
@@ -143,14 +143,8 @@
     if (stepNum === 3) return selections.sex;
     if (stepNum === 4) return getAgeRangeBucket(selections.birthdate);
     if (stepNum === 5) return selections.tobacco;
-    if (stepNum === 11) {
-      if (nameStepPhase === "consent") {
-        return selections.applicantConsent ? "consent_given" : null;
-      }
-      return selections.firstName && selections.lastName ? "name_entered" : null;
-    }
+    if (stepNum === 1) return selections.leadId ? "contact_saved" : null;
     if (stepNum === 12) return selections.email ? "email_entered" : null;
-    if (stepNum === 13) return selections.smsConsent ? "sms_opt_in" : "sms_opt_out";
     if (stepNum === 21) {
       return window.MVILandingCalculator && window.MVILandingCalculator.getPrefillStateCode
         ? window.MVILandingCalculator.getPrefillStateCode()
@@ -416,7 +410,9 @@
   }
 
   function isValidLegalName(value) {
-    return /^[A-Za-z][A-Za-z\s'.-]{1,49}$/.test(String(value || "").trim());
+    var s = String(value || "").trim();
+    if (s.length < 2 || s.length > 50) return false;
+    return /^[\p{L}][\p{L}\s'.-]*$/u.test(s);
   }
 
   function isValidEmail(value) {
@@ -557,7 +553,7 @@
       return;
     }
     var step = getActiveStepEl();
-    if (currentStep === 1 && document.getElementById("lf-objective-grid")) {
+    if (currentStep === 1 && document.getElementById("lf-contact-form")) {
       nextBtn.hidden = true;
       updateProgress();
       return;
@@ -591,7 +587,7 @@
     }
     if (currentStep === 11) {
       nextBtn.textContent = nameStepPhase === "consent" ? ui("Continue", "Continuar") : (NEXT_LABELS[currentStep] || NEXT_LABELS.default);
-    } else if (currentStep === 13 && !quoteSubmitting) {
+    } else if (currentStep === 12 && !quoteSubmitting) {
       nextBtn.textContent = ui("See your estimate", "Ver su estimado");
     } else {
       nextBtn.textContent = NEXT_LABELS[currentStep] || NEXT_LABELS.default;
@@ -1001,14 +997,16 @@
       headerTagline.hidden = step !== 1 || isResults || isCalcResults;
       if (step === 1) {
         headerTagline.textContent = ui(
-          "How much would it cost to protect your family?",
-          "¿Cuánto costaría proteger a su familia?"
+          "Now see how much your coverage could cost",
+          "Ahora vea cuánto podría costar su cobertura"
         );
       } else if (isCalculatorStep(step) && !isCalcResults) {
         headerTagline.hidden = false;
         headerTagline.textContent = ui("Final expense calculator", "Calculadora de gastos finales");
       }
     }
+    var fbSource = document.getElementById("lf-fb-source");
+    if (fbSource) fbSource.hidden = step !== 1 || isResults || isCalcResults;
     if (headerHeroSub) {
       headerHeroSub.hidden = step !== 1 || isResults || isCalcResults;
     }
@@ -1173,16 +1171,16 @@
         updateNextButton();
       },
       onQuoteComplete: function (quotePayload) {
-        if (quotePayload && quotePayload.leadSaved) {
-          trackQuoteSubmitted();
-        }
+        trackGaEvent("quote_submitted", { form_source: "landing_quote_email" });
         showQuoteResultsStep(quotePayload);
       },
+      leadId: selections.leadId,
     });
   }
 
   if (backBtn) {
     backBtn.addEventListener("click", function () {
+      trackGaEvent("back_clicked", { step_name: stepNameMap[currentStep] || null });
       if (currentStep === 11 && nameStepPhase === "consent") {
         hideNameConsentPhase();
         return;
@@ -1206,6 +1204,7 @@
 
   if (nextBtn) {
     nextBtn.addEventListener("click", function () {
+      trackGaEvent("next_clicked", { step_name: stepNameMap[currentStep] || null });
       if (isCalculatorStep(currentStep)) {
         if (
           window.MVILandingCalculator &&
@@ -1246,19 +1245,9 @@
         window.location.href = oosHref + encodeURIComponent(oosCode);
         return;
       }
-      if (currentStep === 11 && nameStepPhase === "fields") {
-        showNameConsentPhase();
-        return;
-      }
-      if (currentStep === 11 && nameStepPhase === "consent") {
-        setApplicantConsent(true);
-      }
       var next = getNextStepNumber(currentStep);
       if (next !== null) {
         trackStepCompleted(currentStep, getStepAnswer(currentStep));
-        if (activeFlow === "quote" && currentStep === 12) {
-          trackQualifyLeadEarly();
-        }
         showStep(next);
         return;
       }
@@ -1559,6 +1548,8 @@
     if (savedPhone) selections.phone = savedPhone;
     if (savedPhoneVerified === "1") selections.phoneVerified = true;
     if (savedSmsConsent === "1") selections.smsConsent = true;
+    var savedLeadId = sessionStorage.getItem(STORAGE_KEYS.leadId);
+    if (savedLeadId) selections.leadId = savedLeadId;
   } catch (e) {}
 
   initStateCombobox();
@@ -1577,6 +1568,83 @@
   }
   var smsConsentCheck = document.getElementById("lf-sms-consent");
   if (smsConsentCheck) smsConsentCheck.checked = !!selections.smsConsent;
+
+  (function bindContactGate() {
+    var form = document.getElementById("lf-contact-form");
+    if (!form || form.getAttribute("data-lf-contact-bound") === "1") return;
+    form.setAttribute("data-lf-contact-bound", "1");
+    var optinScroll = form.querySelector(".lf-sms-optin-scroll");
+    if (optinScroll) {
+      optinScroll.addEventListener("pointerdown", function (e) {
+        if (e.target && e.target.closest && e.target.closest("a")) return;
+        e.preventDefault();
+      });
+    }
+    form.addEventListener("submit", function (ev) {
+      ev.preventDefault();
+      var first = document.getElementById("lf-first-name-input");
+      var last = document.getElementById("lf-last-name-input");
+      var phone = document.getElementById("lf-phone-input");
+      var sms = document.getElementById("lf-sms-consent");
+      var status = document.getElementById("lf-contact-status");
+      if (first) setNameValue("firstName", first.value);
+      if (last) setNameValue("lastName", last.value);
+      if (phone) setPhoneValue("phone", phone.value);
+      if (sms) setSmsConsent(sms.checked);
+      function showErr(msg) {
+        if (!status) return;
+        status.hidden = false;
+        status.textContent = msg;
+        status.classList.add("lf-quote-status--error");
+      }
+      if (!isValidLegalName(selections.firstName) || !isValidLegalName(selections.lastName)) {
+        showErr(ui("Enter your first and last name.", "Ingrese su nombre y apellido."));
+        return;
+      }
+      if (!isValidPhone(selections.phone)) {
+        showErr(ui("Enter a valid U.S. phone number.", "Ingrese un número de teléfono válido de EE. UU."));
+        return;
+      }
+      if (!selections.smsConsent) {
+        showErr(ui("Please check the box to continue.", "Marque la casilla para continuar."));
+        return;
+      }
+      trackGaEvent("contact_submit_clicked", { location: "landing_v3" });
+      if (selections.leadId) {
+        trackGaEvent("contact_lead_saved", { form_source: "landing_quote_early" });
+        trackGaEvent("objective_selected", { objective: "quote" });
+        activeFlow = "quote";
+        showStep(2);
+        return;
+      }
+      if (!window.MVILandingQuoteSubmit || !window.MVILandingQuoteSubmit.saveContactLead) {
+        showErr(ui("Please try again.", "Inténtelo de nuevo."));
+        return;
+      }
+      window.MVILandingQuoteSubmit.saveContactLead({
+        selections: selections,
+        isSubmitting: function () {
+          return quoteSubmitting;
+        },
+        setSubmitting: function (v) {
+          quoteSubmitting = !!v;
+          var btn = document.getElementById("lf-contact-submit");
+          if (btn) btn.disabled = !!v;
+        },
+        onSaved: function (result) {
+          selections.leadId = result && result.leadId ? String(result.leadId) : selections.leadId;
+          try {
+            if (selections.leadId) sessionStorage.setItem(STORAGE_KEYS.leadId, selections.leadId);
+          } catch (e) {}
+          trackGaEvent("contact_lead_saved", { form_source: "landing_quote_early" });
+          trackQualifyLeadEarly();
+          trackGaEvent("objective_selected", { objective: "quote" });
+          activeFlow = "quote";
+          showStep(2);
+        },
+      });
+    });
+  })();
 
   (function bindObjectiveCards() {
     var grid = document.getElementById("lf-objective-grid");
@@ -1706,15 +1774,11 @@
     }
   })();
 
-  showStep(1);
+  if (window.MVILandingLicenses && typeof window.MVILandingLicenses.bind === "function") {
+    window.MVILandingLicenses.bind();
+  }
 
-  try {
-    if (new URLSearchParams(window.location.search).get("compliance-preview") === "phone") {
-      activeFlow = "quote";
-      currentStep = 13;
-      showStep(13);
-    }
-  } catch (previewErr) {}
+  showStep(1);
 
   (function bindLogoReset() {
     var logo = document.getElementById("lf-logo-reset");

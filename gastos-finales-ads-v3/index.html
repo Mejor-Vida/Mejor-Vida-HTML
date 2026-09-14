@@ -4,7 +4,7 @@
  <meta charset="utf-8" />
  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
  <meta name="robots" content="noindex, nofollow" />
- <meta name="description" content="Su estimado personalizado de seguro de gastos finales con Mejor Vida Seguros en Nebraska." />
+ <meta name="description" content="Siguiente paso de su anuncio: cotización gratis de seguro de gastos finales con Mejor Vida Seguros, una agencia licenciada." />
  <meta name="mvi-landing-variant" content="final-expense-es-v3" />
  <!-- Meta Pixel Code -->
  <script defer src="/js/meta-pixel-landing.js"></script>
@@ -26,12 +26,10 @@
  <link href="../css/fontawesome-mvi.min.css?v=20260723-brands-fix" rel="stylesheet"/>
  <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css" />
  <link rel="stylesheet" href="../css/quote-flow-shared.css?v=20260723-mobile-menu" />
- <link rel="stylesheet" href="css/landing-flow.css?v=20260905-order" />
+ <link rel="stylesheet" href="css/landing-flow.css?v=20260913-logotop" />
  <link rel="stylesheet" href="css/landing-quote-results.css?v=20260605b" />
- <link rel="stylesheet" href="../css/mvi-leave-message-widget.css?v=20260905-lmblue" />
- <link rel="preload" as="image" href="../img/opt/landing-v3-quote-cta-hero.webp?v=20260705v3hero2" type="image/webp" />
 </head>
-<body class="lf-landing lf-landing--bio-pro" data-total-steps="8" data-product-line="final-expense" data-inline-quote-results="1">
+<body class="lf-landing lf-landing--bio-pro lf-landing--contact-first" id="lf-optin-page" data-total-steps="6" data-product-line="final-expense" data-inline-quote-results="1" data-licenses-base="../licenses/">
  <header class="lf-header">
   <div class="lf-header-row">
    <a class="lf-logo" href="./" id="lf-logo-reset" aria-label="Volver al inicio de esta página">
@@ -56,39 +54,49 @@
     <span id="lf-flow-reassurance-text">Ya casi terminamos. Su precio personalizado estará listo en aproximadamente 1 minuto.</span>
    </p>
   </div>
-  <h1 class="lf-header-tagline" id="lf-header-tagline" hidden>¿Cuánto costaría proteger a su familia?</h1>
-  <div class="lf-header-hero-sub" id="lf-header-hero-sub" hidden>
-   <p class="lf-header-hero-sub-lead">Descúbralo en aproximadamente un minuto.</p>
-   <p class="lf-header-hero-sub-trust">Sin compromiso. Sin presión. Su información permanece privada.</p>
+  <p class="lf-fb-source" id="lf-fb-source">
+   <img class="lf-fb-source-logo" src="../img/facebook/Facebook_Logo_Primary.png" width="20" height="20" alt="" decoding="async" />
+   <span>Viene de nuestro anuncio en Facebook</span>
+  </p>
+  <h1 class="lf-header-tagline lf-header-tagline--ad" id="lf-header-tagline">Ahora vea cuánto podría costar su cobertura</h1>
+  <div class="lf-header-hero-sub" id="lf-header-hero-sub">
+   <p class="lf-header-hero-sub-lead">Está en el lugar correcto. Complete sus datos para recibir una cotización gratuita y sin compromiso.</p>
   </div>
  </header>
 
  <main class="lf-main">
   <button type="button" class="lf-btn-back" id="lf-btn-back" hidden aria-label="Volver al paso anterior">← Atrás</button>
 
-  <section class="lf-step lf-step--info lf-step--objectives" data-step="1" aria-labelledby="lf-header-tagline">
-   <div class="lf-objective-grid lf-objective-grid--single" id="lf-objective-grid" role="group" aria-label="Calcular su precio en 1 minuto">
-    <button type="button" class="lf-objective-card lf-objective-card--price-cta" data-lf-objective="quote">
-     <span class="lf-objective-hero-image" aria-hidden="true">
-      <picture>
-       <source type="image/webp" srcset="../img/opt/landing-v3-quote-cta-hero.webp?v=20260705v3hero2" />
-       <img alt="" src="../img/opt/landing-v3-quote-cta-hero.jpg?v=20260705v3hero2" width="640" height="640" fetchpriority="high" decoding="async" />
-      </picture>
-     </span>
-     <span class="lf-objective-cta-bar">
-      <span class="lf-objective-title">Calcular su precio en 1 minuto</span>
-      <span class="lf-objective-chevron" aria-hidden="true"><i class="fa-solid fa-chevron-right"></i></span>
-     </span>
-    </button>
-   </div>
-   <div class="lf-secondary-cta">
-    <aside class="lf-learn-more-dock" aria-label="Visite el sitio web de Mejor Vida Seguros">
-     <p class="lf-learn-more-kicker">¿Quiere saber más?</p>
-     <p class="lf-learn-more-title">Visite nuestro sitio web</p>
-     <a class="lf-learn-more-btn" href="/?utm_source=landing-v3&amp;utm_medium=sticky&amp;utm_content=learn-more" target="_blank" rel="noopener noreferrer">Haga clic aquí</a>
-    </aside>
-    <div id="mvi-leave-message-mount"></div>
-   </div>
+  <section class="lf-step lf-step--info lf-step--contact-gate" data-step="1" id="lf-consent-capture-root" aria-labelledby="lf-header-tagline">
+   <button type="button" class="lf-licenses-btn" id="lf-licenses-open">Ver licencias</button>
+   <form class="lf-contact-card" id="lf-contact-form" novalidate>
+    <div class="lf-name-fields">
+     <div class="lf-text-field">
+      <label class="lf-select-label" for="lf-first-name-input">Nombre</label>
+      <input type="text" class="lf-text-input" id="lf-first-name-input" autocomplete="given-name" maxlength="50" required />
+     </div>
+     <div class="lf-text-field">
+      <label class="lf-select-label" for="lf-last-name-input">Apellido</label>
+      <input type="text" class="lf-text-input" id="lf-last-name-input" autocomplete="family-name" maxlength="50" required />
+     </div>
+    </div>
+    <div class="lf-text-field">
+     <label class="lf-select-label" for="lf-phone-input">Número de teléfono</label>
+     <input type="tel" class="lf-text-input" id="lf-phone-input" inputmode="tel" autocomplete="tel" placeholder="(402) 555-1234" maxlength="16" aria-describedby="lf-phone-hint" required />
+    </div>
+    <p class="lf-text-hint" id="lf-phone-hint" hidden>Ingrese un número de teléfono válido de 10 dígitos en EE. UU.</p>
+    <p class="lf-phone-guarantee">Le garantizamos: sin correo basura. Sin llamadas spam.</p>
+    <div class="lf-sms-optin">
+     <input type="checkbox" class="lf-sms-optin-check" id="lf-sms-consent" name="sms-consent" value="1" />
+     <label class="lf-sms-optin-text" for="lf-sms-consent">
+      <span class="lf-sms-optin-lead">Marque esta casilla para recibir su cotización gratis. Así podemos mostrarle sus opciones y enviársela: rápido, sin costo y sin compromiso.</span>
+      <span class="lf-sms-optin-scroll">Sí, acepto recibir llamadas, mensajes de texto (SMS) y correos de Mejor Vida Insurance LLC, incluidos seguimiento de cotización, recordatorios de citas y mensajes de servicio. Pueden aplicar tarifas de mensajes y datos. Frecuencia: hasta 1–5 mensajes por semana. Responda STOP para cancelar. Responda AYUDA para obtener ayuda. El consentimiento es necesario para continuar en esta página. Los SMS se entregan a través de proveedores autorizados, incluido Telnyx. <a href="https://www.mejorvidainsurance.com/privacy-policy.html" target="_blank" rel="noopener noreferrer">Política de Privacidad</a> · <a href="https://www.mejorvidainsurance.com/terms-service.html" target="_blank" rel="noopener noreferrer">Términos de Servicio</a> · <a href="https://www.mejorvidainsurance.com/sms-optin.html" target="_blank" rel="noopener noreferrer">Programa SMS</a>.</span>
+     </label>
+    </div>
+    <p class="lf-quote-status" id="lf-contact-status" role="status" aria-live="polite" hidden></p>
+    <button type="submit" class="lf-contact-submit" id="lf-contact-submit">Continuar a su cotización</button>
+   </form>
+   <p class="lf-fb-independence" id="lf-fb-independence">Mejor Vida Insurance LLC es una agencia de seguros independiente y no está afiliada, patrocinada ni respaldada por Facebook o Meta.</p>
   </section>
 
   <section class="lf-step lf-step--list lf-step--select lf-step--calc" data-step="21" data-lf-flow="calculator" aria-labelledby="lf-calc-step21-title" hidden>
@@ -263,69 +271,17 @@
    </div>
   </section>
 
-  <section class="lf-step lf-step--list lf-step--name" data-step="11" data-field="legalName" data-field-type="name" aria-labelledby="lf-step11-title" hidden>
-   <h1 class="lf-title" id="lf-step11-title">¿Cuál es su nombre?</h1>
-   <p class="lf-lead lf-lead--list">Esto nos ayuda a verificar su identidad para darle su estimado personalizado.<span class="lf-info-wrap"><button type="button" class="lf-info-btn" aria-expanded="false" aria-controls="lf-final-rate-info-tip" aria-label="Información sobre su estimado y tarifa final con Julie">i</button></span></p>
-
-   <div class="lf-name-fields">
-    <div class="lf-text-field lf-text-field--lock">
-     <label class="lf-select-label" for="lf-first-name-input">Nombre legal</label>
-     <div class="lf-input-wrap">
-      <input type="text" class="lf-text-input lf-text-input--lock" id="lf-first-name-input" autocomplete="given-name" maxlength="50" />
-      <span class="lf-input-lock" aria-hidden="true"><i class="fa-solid fa-lock"></i></span>
-     </div>
-    </div>
-
-    <div class="lf-text-field lf-text-field--lock">
-     <label class="lf-select-label" for="lf-last-name-input">Apellido legal</label>
-     <div class="lf-input-wrap">
-      <input type="text" class="lf-text-input lf-text-input--lock" id="lf-last-name-input" autocomplete="family-name" maxlength="50" />
-      <span class="lf-input-lock" aria-hidden="true"><i class="fa-solid fa-lock"></i></span>
-     </div>
-    </div>
-   </div>
-
-   <p class="lf-encrypt-note"><i class="fa-solid fa-lock" aria-hidden="true"></i> Usamos cifrado seguro para proteger sus datos.</p>
-
-   <div class="lf-consent-block" id="lf-name-consent" hidden>
-    <p class="lf-consent-lead">Al hacer clic en «Continuar», confirmo que soy el solicitante y que he recibido, leído y acepto:</p>
-    <p class="lf-consent-links">
-     <a href="../en/e-sign-consent.html" target="_blank" rel="noopener noreferrer">Consentimiento de firma electrónica</a>,
-     <a href="../terms-service.html" target="_blank" rel="noopener noreferrer">Términos de uso</a> y
-     <a href="../privacy-policy.html" target="_blank" rel="noopener noreferrer">Política de privacidad</a>.
-    </p>
-   </div>
-  </section>
-
   <section class="lf-step lf-step--list lf-step--email" data-step="12" data-field="email" data-field-type="email" aria-labelledby="lf-step12-title" hidden>
-   <h1 class="lf-title" id="lf-step12-title">¿Cuál es su correo electrónico?</h1>
+   <h1 class="lf-title" id="lf-step12-title">¿A qué correo le enviamos una copia de su cotización?</h1>
+   <p class="lf-lead lf-lead--list">Después de esto verá su estimado en esta página, y le mandaremos una copia.</p>
 
    <div class="lf-text-field">
     <label class="lf-select-label" for="lf-email-input">Correo electrónico</label>
     <input type="email" class="lf-text-input" id="lf-email-input" autocomplete="email" inputmode="email" maxlength="254" placeholder="su@ejemplo.com" aria-describedby="lf-email-hint" />
    </div>
    <p class="lf-text-hint" id="lf-email-hint" hidden>Ingrese un correo electrónico válido.</p>
-
-   <p class="lf-encrypt-note"><i class="fa-solid fa-lock" aria-hidden="true"></i> Usamos cifrado seguro para proteger sus datos.</p>
-  </section>
-
-  <section class="lf-step lf-step--list lf-step--phone" id="lf-consent-capture-root" data-step="13" data-field="phone" data-field-type="phone" aria-labelledby="lf-step13-title" hidden>
-   <h1 class="lf-title" id="lf-step13-title">¿Cuál es su número de teléfono?</h1>
-   <p class="lf-lead lf-lead--list">Julie usará este número para dar seguimiento a su cotización.</p>
-
-   <div class="lf-text-field">
-    <label class="lf-select-label" for="lf-phone-input">Número de teléfono</label>
-    <input type="tel" class="lf-text-input" id="lf-phone-input" inputmode="tel" autocomplete="tel" placeholder="(402) 555-1234" maxlength="16" aria-describedby="lf-phone-hint" />
-   </div>
-   <p class="lf-text-hint" id="lf-phone-hint" hidden>Ingrese un número de teléfono válido de 10 dígitos en EE. UU.</p>
-
-   <p class="lf-phone-guarantee">Le garantizamos: sin correo basura. Sin llamadas spam.</p>
-
-   <div class="lf-sms-optin">
-    <input type="checkbox" class="lf-sms-optin-check" id="lf-sms-consent" name="sms-consent" value="1" />
-    <label class="lf-sms-optin-text" for="lf-sms-consent">Sí, acepto recibir mensajes de texto (SMS) de marketing de Mejor Vida Insurance LLC, incluidos seguimiento personalizado de cotización, recordatorios de citas, actualizaciones del estado de la solicitud y mensajes de servicio al cliente. Pueden aplicar tarifas de mensajes y datos. Frecuencia: hasta 1–5 mensajes por semana. Responda STOP para cancelar. Responda AYUDA para obtener ayuda. El consentimiento no es obligatorio para obtener una cotización ni para contratar un seguro. Los SMS se entregan a través de proveedores autorizados, incluido Telnyx. <a href="https://www.mejorvidainsurance.com/privacy-policy.html" target="_blank" rel="noopener noreferrer">Política de Privacidad</a> · <a href="https://www.mejorvidainsurance.com/terms-service.html" target="_blank" rel="noopener noreferrer">Términos de Servicio</a> · <a href="https://www.mejorvidainsurance.com/sms-optin.html" target="_blank" rel="noopener noreferrer">Programa SMS</a>.</label>
-   </div>
    <p class="lf-quote-status" id="lf-quote-status" role="status" aria-live="polite" hidden></p>
+   <p class="lf-encrypt-note"><i class="fa-solid fa-lock" aria-hidden="true"></i> Usamos cifrado seguro para proteger sus datos.</p>
   </section>
 
   <section class="lf-step lf-step--results" data-step="14" data-lf-results-only hidden aria-labelledby="lf-results-hero-title">
@@ -447,6 +403,20 @@
 
  </main>
 
+ <div id="lf-lic-modal" class="lf-lic-modal-backdrop" hidden role="dialog" aria-modal="true" aria-labelledby="lf-lic-modal-title">
+  <div class="lf-lic-modal">
+   <div class="lf-lic-modal-head">
+    <button type="button" class="lf-lic-modal-back" id="lf-lic-modal-back" hidden>←</button>
+    <h2 id="lf-lic-modal-title">Licencias</h2>
+    <button type="button" class="lf-lic-modal-close" data-lf-lic-close aria-label="Cerrar">×</button>
+   </div>
+   <div class="lf-lic-modal-body" id="lf-lic-modal-body"></div>
+   <div class="lf-lic-modal-foot">
+    <button type="button" class="lf-lic-modal-foot-btn" data-lf-lic-close>Cerrar</button>
+   </div>
+  </div>
+ </div>
+
  <div class="modal fade" id="lf-policy-modal" tabindex="-1" aria-labelledby="lf-policy-modal-title" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
    <div class="modal-content">
@@ -491,13 +461,13 @@
  <script src="js/landing-flow-search-combobox.js?v=20260526"></script>
  <script src="js/landing-flow-date-mask.js?v=20260526"></script>
  <script src="js/landing-flow-calculator.js?v=20260605a"></script>
- <script src="js/landing-flow-quote-results.js?v=20260707v3company"></script>
- <script src="/js/mvi-funnel-track.js?v=20260703d"></script>
+ <script src="js/landing-flow-quote-results.js?v=20260913-genericrate"></script>
+ <script src="/js/mvi-funnel-track.js?v=20260913-contact"></script>
  <script src="/js/meta-capi-match.js?v=20260701b"></script>
  <script src="/js/meta-capi-events.js?v=20260701b"></script>
- <script src="/js/mvi-consent-capture.js?v=20260712i"></script>
- <script src="js/landing-flow-quote-submit.js?v=20260712i"></script>
- <script src="js/landing-flow.js?v=20260707v3noresultsbanner"></script>
- <script defer src="../js/mvi-leave-message-widget.js?v=20260905-lmblue"></script>
+ <script src="/js/mvi-consent-capture.js?v=20260913-optinshot"></script>
+ <script src="/js/mvi-landing-licenses.js?v=20260913a"></script>
+ <script src="js/landing-flow-quote-submit.js?v=20260913-optinshot"></script>
+ <script src="js/landing-flow.js?v=20260913-fbhero"></script>
 </body>
 </html>

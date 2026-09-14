@@ -179,6 +179,48 @@
     return wrap;
   }
 
+  function isIgnoredCaptureEl(el) {
+    if (!el || el.nodeType !== 1) return false;
+    if (el.id === "mvi-consent-proof-composite") return true;
+    if (el.hasAttribute && el.hasAttribute("hidden")) return true;
+    if (el.getAttribute && el.getAttribute("aria-hidden") === "true" && el.classList && el.classList.contains("lf-step")) {
+      return true;
+    }
+    if (el.classList && el.classList.contains("lf-step") && el.hasAttribute("hidden")) return true;
+    var cls = (el.className && String(el.className)) || "";
+    if (/mvi-chat|chat-launcher|lf-schedule-modal/.test(cls)) return true;
+    var id = el.id || "";
+    if (/^mvi-chat|chat-widget|lf-schedule-modal/.test(id)) return true;
+    return false;
+  }
+
+  function captureOptinPage(opts) {
+    var root =
+      document.getElementById("lf-optin-page") ||
+      document.querySelector("body.lf-landing") ||
+      document.body;
+    if (!root) return Promise.resolve("");
+    return loadHtml2Canvas()
+      .then(function (html2canvas) {
+        return html2canvas(root, {
+          backgroundColor: "#ffffff",
+          scale: 1,
+          useCORS: true,
+          logging: false,
+          scrollX: 0,
+          scrollY: 0,
+          windowWidth: Math.min(1200, Math.max(360, root.scrollWidth || 900)),
+          ignoreElements: isIgnoredCaptureEl,
+        });
+      })
+      .then(function (canvas) {
+        return canvasToJpegDataUrl(canvas, { maxWidth: 1000, quality: 0.68 });
+      })
+      .catch(function () {
+        return "";
+      });
+  }
+
   function canvasToJpegDataUrl(canvas, opts) {
     var maxW = (opts && opts.maxWidth) || 900;
     var out = canvas;
@@ -225,10 +267,17 @@
     opts = opts || {};
     if (typeof Promise === "undefined") return Promise.resolve("");
 
+    if (opts.mode === "optin-page") {
+      return captureOptinPage(opts).then(function (dataUrl) {
+        if (dataUrl) return dataUrl;
+        return captureVisibleRoot(opts);
+      });
+    }
+
     var useComposite =
       opts.composite === true ||
       opts.mode === "landing" ||
-      (opts.composite !== false && isLandingConsentFlow());
+      (opts.composite !== false && opts.mode !== "page" && isLandingConsentFlow());
 
     if (useComposite) {
       var composite = null;
@@ -264,12 +313,28 @@
     });
   }
 
+  function waitTwoFrames() {
+    return new Promise(function (resolve) {
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          resolve();
+        });
+      });
+    });
+  }
+
   function attachScreenshot(payload, opts) {
     payload = payload || {};
-    return captureConsentScreenshot(opts).then(function (dataUrl) {
-      if (dataUrl) payload.consentScreenshot = dataUrl;
-      return payload;
-    });
+    var capture = Promise.resolve();
+    if (opts && opts.mode === "optin-page") capture = waitTwoFrames();
+    return capture
+      .then(function () {
+        return captureConsentScreenshot(opts);
+      })
+      .then(function (dataUrl) {
+        if (dataUrl) payload.consentScreenshot = dataUrl;
+        return payload;
+      });
   }
 
   global.MVIConsentCapture = {

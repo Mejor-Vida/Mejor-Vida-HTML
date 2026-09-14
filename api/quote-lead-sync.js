@@ -20,7 +20,8 @@ const {
   clearActiveFeedPartitionHides,
   uploadConsentScreenshot,
 } = require("../lib/crm-compliance");
-const { autoEnrollCaptureLead } = require("../lib/crm-nurture-engine");
+const { autoEnrollCaptureLead, flushWelcomeAfterQuote } = require("../lib/crm-nurture-engine");
+const { saveCanonicalLeadProfile } = require("./staff/_lead-profile");
 
 function applyCors(req, res) {
   const origin = String(req.headers.origin || "").trim();
@@ -112,6 +113,48 @@ async function supabaseInsert(supabaseUrl, serviceKey, row) {
   const data = JSON.parse(text);
   const first = Array.isArray(data) ? data[0] : data;
   return first && first.id ? String(first.id) : null;
+}
+
+async function supabaseGetById(supabaseUrl, serviceKey, id) {
+  const url = `${supabaseUrl.replace(/\/$/, "")}/rest/v1/quote_lead_submissions?id=eq.${encodeURIComponent(id)}&select=*&limit=1`;
+  const r = await fetch(url, {
+    headers: {
+      apikey: serviceKey,
+      Authorization: `Bearer ${serviceKey}`,
+    },
+  });
+  const text = await r.text();
+  if (!r.ok) throw new Error(`Supabase get ${r.status}: ${text.slice(0, 300)}`);
+  const data = text ? JSON.parse(text) : [];
+  return Array.isArray(data) ? data[0] || null : data;
+}
+
+async function hubspotFindContactByPhone(token, phone) {
+  const { hubspotPhoneSearchVariants } = require("../lib/hubspot-phone-variants");
+  const variants = hubspotPhoneSearchVariants(phone);
+  for (let i = 0; i < variants.length; i++) {
+    const v = variants[i];
+    try {
+      const r = await fetch("https://api.hubapi.com/crm/v3/objects/contacts/search", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          filterGroups: [{ filters: [{ propertyName: "phone", operator: "EQ", value: v }] }],
+          limit: 1,
+          properties: ["phone", "email", "firstname", "lastname"],
+        }),
+      });
+      if (!r.ok) continue;
+      const data = await r.json();
+      if (data.results && data.results[0]) return String(data.results[0].id);
+    } catch (_) {
+      /* try next variant */
+    }
+  }
+  return null;
 }
 
 async function supabasePatch(supabaseUrl, serviceKey, id, fields) {
@@ -280,6 +323,95 @@ module.exports = async function handler(req, res) {
     return json(res, 200, { ok: true });
   }
 
+  const stage = String(body.stage || "").trim().toLowerCase();
+
+  if (stage === "update") {
+    const leadId = String(body.leadId || body.id || "").trim();
+    if (!leadId) return json(res, 400, { ok: false, error: "leadId required" });
+    let existing;
+    try {
+      existing = await supabaseGetById(supabaseUrl, supabaseKey, leadId);
+    } catch (e) {
+      console.error("quote-lead-sync get", e);
+      return json(res, 500, { ok: false, error: "Could not load lead" });
+    }
+    if (!existing) return json(res, 404, { ok: false, error: "Lead not found" });
+
+    const emailUp = String(body.email || "").trim().toLowerCase();
+    const quoteSummaryUp = String(body.quoteSummary || "").trim().slice(0, 20000);
+    const patch = {};
+    if (emailUp && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailUp)) patch.email = emailUp;
+    if (quoteSummaryUp) {
+      patch.quote_summary = quoteSummaryUp;
+      patch.quote_status = "quote_generated";
+      patch.quote_generated_at = new Date().toISOString();
+    }
+    const payload = existing.payload && typeof existing.payload === "object" ? { ...existing.payload } : {};
+    if (patch.email) payload.email = patch.email;
+    if (body.quoteLow != null) payload.quoteLow = body.quoteLow;
+    if (body.quoteHigh != null) payload.quoteHigh = body.quoteHigh;
+    if (body.quoteAnchor != null) payload.quoteAnchor = body.quoteAnchor;
+    const covUp = parseInt(String(body.coverageAmount || body.coverage || ""), 10);
+    if (Number.isFinite(covUp) && covUp > 0) payload.coverageAmount = covUp;
+    if (body.age != null) payload.age = body.age;
+    if (body.sex) payload.sex = body.sex;
+    if (body.smoker != null) payload.smoker = body.smoker;
+    if (body.state) payload.state = String(body.state).trim().slice(0, 2).toUpperCase();
+    if (body.dob || body.dateOfBirth) payload.dob = String(body.dob || body.dateOfBirth).trim().slice(0, 10);
+    patch.payload = payload;
+    if (payload.state) patch.state_code = payload.state;
+    if (payload.age != null) patch.age = payload.age;
+    if (payload.sex) patch.gender = payload.sex;
+    if (payload.smoker === true || payload.smoker === "true") patch.tobacco = "yes";
+    if (payload.smoker === false || payload.smoker === "false") patch.tobacco = "no";
+
+    try {
+      await supabasePatch(supabaseUrl, supabaseKey, leadId, patch);
+    } catch (e) {
+      console.error("quote-lead-sync update patch", e);
+      return json(res, 500, { ok: false, error: "Could not update lead" });
+    }
+
+    if (body.quoteLow != null || body.quoteHigh != null) {
+      try {
+        await flushWelcomeAfterQuote(
+          { supabaseUrl, serviceKey: supabaseKey },
+          leadId,
+          "quote_lead_submissions"
+        );
+      } catch (e) {
+        console.warn("quote-lead-sync nurture flush", e && e.message);
+      }
+    }
+
+    const hubspotToken = process.env.HUBSPOT_ACCESS_TOKEN;
+    if (hubspotToken && (patch.email || existing.hubspot_contact_id)) {
+      try {
+        const hsProps = {};
+        if (patch.email) hsProps.email = patch.email;
+        if (existing.first_name) hsProps.firstname = existing.first_name;
+        if (existing.last_name) hsProps.lastname = existing.last_name;
+        if (existing.phone) hsProps.phone = existing.phone;
+        let hsId = existing.hubspot_contact_id || null;
+        if (!hsId && patch.email) hsId = await hubspotFindContactByEmail(hubspotToken, patch.email);
+        if (!hsId && existing.phone) hsId = await hubspotFindContactByPhone(hubspotToken, existing.phone);
+        if (hsId) {
+          await hubspotUpdateContact(hubspotToken, hsId, hsProps);
+          await supabasePatch(supabaseUrl, supabaseKey, leadId, {
+            hubspot_contact_id: hsId,
+            hubspot_sync_status: "synced",
+            hubspot_last_sync_at: new Date().toISOString(),
+            crm_sync_needed: false,
+          });
+        }
+      } catch (e) {
+        console.warn("quote-lead-sync update hubspot", e && e.message);
+      }
+    }
+
+    return json(res, 200, { ok: true, id: leadId, updated: true });
+  }
+
   const email = String(body.email || "")
     .trim()
     .toLowerCase();
@@ -311,11 +443,21 @@ module.exports = async function handler(req, res) {
     }
   }
 
-  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+  const isContact = stage === "contact" || body.phoneFirst === true;
+  if (!isContact && (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))) {
     return json(res, 400, { ok: false, error: "Valid email required" });
   }
   if (!firstName || !lastName) {
     return json(res, 400, { ok: false, error: "First and last name required" });
+  }
+  if (isContact) {
+    const digits = phone.replace(/\D/g, "");
+    if (digits.length < 10) {
+      return json(res, 400, { ok: false, error: "Valid phone number required" });
+    }
+    if (!(body.consent === true || body.consent === "true")) {
+      return json(res, 400, { ok: false, error: "Communications opt-in is required" });
+    }
   }
 
   if (leadSource === "out_of_state_referral") {
@@ -402,11 +544,17 @@ module.exports = async function handler(req, res) {
     if (Number.isFinite(cov) && cov > 0) payload.coverageAmount = cov;
     const dobIso = String(body.dob || body.dateOfBirth || "").trim();
     if (dobIso) payload.dob = dobIso.slice(0, 10);
+  } else if (body.quoteLow != null || body.quoteHigh != null) {
+    payload.quoteLow = body.quoteLow;
+    payload.quoteHigh = body.quoteHigh;
+    payload.quoteAnchor = body.quoteAnchor;
+    const cov = parseInt(String(body.coverageAmount || body.coverage || ""), 10);
+    if (Number.isFinite(cov) && cov > 0) payload.coverageAmount = cov;
   }
   if (leadSource !== "out_of_state_referral") {
     payload.marketingOptIn = {
       sms: smsConsentOptIn,
-      email: true,
+      email: isContact ? smsConsentOptIn : true,
       phoneCalls: smsConsentOptIn,
     };
   }
@@ -463,12 +611,12 @@ module.exports = async function handler(req, res) {
           voiceOptIn: smsConsentOptIn,
           marketingOptIn: {
             sms: smsConsentOptIn,
-            email: true,
+            email: isContact ? smsConsentOptIn : true,
             phoneCalls: smsConsentOptIn,
             label: consentTextRaw
               ? consentTextRaw.slice(0, 500)
               : smsConsentOptIn
-                ? "User opted in to SMS via optional checkbox on quote form."
+                ? "User opted in to SMS via checkbox on landing form."
                 : "User submitted quote without SMS opt-in (optional checkbox unchecked).",
           },
           consentText: consentTextRaw || null,
@@ -485,7 +633,7 @@ module.exports = async function handler(req, res) {
     source: leadSource,
     first_name: firstName,
     last_name: lastName,
-    email,
+    email: email || null,
     phone: phone || null,
     state_code: stateCode || null,
     lang,
@@ -573,6 +721,30 @@ module.exports = async function handler(req, res) {
         actor: "quote_lead_sync",
       }
     );
+    if (consentScreenshotPath) {
+      try {
+        await saveCanonicalLeadProfile(
+          { supabaseUrl, serviceKey: supabaseKey },
+          leadId,
+          "quote_lead_submissions",
+          { consent_screenshot_path: consentScreenshotPath },
+          "quote_lead_sync"
+        );
+      } catch (e) {
+        console.warn("quote-lead-sync profile screenshot", e && e.message);
+      }
+    }
+    if (body.quoteLow != null || body.quoteHigh != null) {
+      try {
+        await flushWelcomeAfterQuote(
+          { supabaseUrl, serviceKey: supabaseKey },
+          leadId,
+          "quote_lead_submissions"
+        );
+      } catch (e) {
+        console.warn("quote-lead-sync nurture flush", e && e.message);
+      }
+    }
   }
 
   try {
@@ -673,17 +845,18 @@ module.exports = async function handler(req, res) {
   }
 
   const hsProps = {
-    email,
     firstname: firstName,
     lastname: lastName,
   };
+  if (email) hsProps.email = email;
   if (phone) hsProps.phone = phone;
   if (stateCode) hsProps.state = stateCode;
 
   let hubspotContactId = null;
   let hubspotErr = null;
   try {
-    const existingId = await hubspotFindContactByEmail(hubspotToken, email);
+    let existingId = email ? await hubspotFindContactByEmail(hubspotToken, email) : null;
+    if (!existingId && phone) existingId = await hubspotFindContactByPhone(hubspotToken, phone);
     if (existingId) {
       await hubspotUpdateContact(hubspotToken, existingId, hsProps);
       hubspotContactId = existingId;

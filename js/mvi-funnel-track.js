@@ -15,7 +15,7 @@
   var LICENSED_STATES = { NE: true, KS: true, CO: true, NV: true };
 
   var STEP_NAME_MAP = {
-    objective_picker: "landing",
+    landing_contact: "landing",
     state: "state",
     sex: "sex",
     date_of_birth: "date_of_birth",
@@ -303,10 +303,6 @@
 
     if (eventName === "step_viewed" && params && params.step_name) {
       var step = STEP_NAME_MAP[params.step_name] || params.step_name;
-      if (isLandingPage()) {
-        var funnelViewSteps = { landing: true, quote_result: true, calc_results: true };
-        if (!funnelViewSteps[step]) return;
-      }
       track({ tool: tool, step_name: step, event_type: "step_view", page_or_step: page });
       return;
     }
@@ -332,6 +328,49 @@
         event_type: "step_complete",
         page_or_step: page,
         event_data: eventData,
+      });
+      return;
+    }
+
+    if (eventName === "contact_lead_saved") {
+      markLeadConverted();
+      track({ tool: "quote", step_name: "lead_submitted", event_type: "conversion", page_or_step: page });
+      return;
+    }
+
+    if (eventName === "contact_submit_clicked") {
+      track({ tool: "quote", step_name: "contact_submit", event_type: "click", page_or_step: page });
+      return;
+    }
+
+    if (eventName === "licenses_opened") {
+      track({ tool: "quote", step_name: "licenses_open", event_type: "click", page_or_step: page });
+      return;
+    }
+
+    if (eventName === "license_state_viewed") {
+      track({
+        tool: "quote",
+        step_name: "license_state",
+        event_type: "click",
+        page_or_step: page,
+        event_data: { state: params && params.state },
+      });
+      return;
+    }
+
+    if (eventName === "licenses_closed") {
+      track({ tool: "quote", step_name: "licenses_close", event_type: "click", page_or_step: page });
+      return;
+    }
+
+    if (eventName === "back_clicked" || eventName === "next_clicked") {
+      track({
+        tool: tool,
+        step_name: eventName === "back_clicked" ? "back_click" : "next_click",
+        event_type: "click",
+        page_or_step: page,
+        event_data: { step_name: params && params.step_name },
       });
       return;
     }

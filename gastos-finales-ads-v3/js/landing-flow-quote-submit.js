@@ -16,10 +16,6 @@
   var DEFAULT_COVERAGE = 10000;
 
   function siteApiUrl(path) {
-    var origin = window.location.origin || "";
-    if (/^https?:\/\/(127\.0\.0\.1|localhost)(:\d+)?$/i.test(origin)) {
-      return "https://www.mejorvidainsurance.com" + path;
-    }
     return path;
   }
 
@@ -93,6 +89,97 @@
 
   window.MVILandingQuoteSubmit = {
     DEFAULT_COVERAGE: DEFAULT_COVERAGE,
+    saveContactLead: function (ctx) {
+      ctx = ctx || {};
+      var selections = ctx.selections || {};
+      var firstName = String(selections.firstName || "").trim();
+      var lastName = String(selections.lastName || "").trim();
+      var phone = String(selections.phone || "").trim();
+      var statusEl = document.getElementById("lf-contact-status");
+      function setStatus(message, isError) {
+        if (!statusEl) return;
+        if (!message) {
+          statusEl.hidden = true;
+          statusEl.textContent = "";
+          statusEl.classList.remove("lf-quote-status--error");
+          return;
+        }
+        statusEl.hidden = false;
+        statusEl.textContent = message;
+        statusEl.classList.toggle("lf-quote-status--error", !!isError);
+      }
+      if (ctx.isSubmitting && ctx.isSubmitting()) return Promise.resolve();
+      if (ctx.setSubmitting) ctx.setSubmitting(true);
+      setStatus(msg("Saving your information…", "Guardando sus datos…"), false);
+
+      var sessionClientId = getSessionClientId();
+      var originDetail = collectOriginDetail();
+      var leadEventId =
+        !IS_EN && window.MVIMetaCapiEvents && typeof window.MVIMetaCapiEvents.getLeadEventId === "function"
+          ? window.MVIMetaCapiEvents.getLeadEventId()
+          : sessionClientId;
+      var syncPayload = {
+        stage: "contact",
+        phoneFirst: true,
+        firstName: firstName,
+        lastName: lastName,
+        phone: phone,
+        consent: !!selections.smsConsent,
+        lang: LANG,
+        source: IS_EN ? "english_landing_gastos_finales" : "facebook_landing_gastos_finales",
+        sessionClientId: sessionClientId,
+        metaLeadEventId: leadEventId,
+        originDetail: originDetail,
+      };
+      if (window.MVIConsentCapture && typeof window.MVIConsentCapture.attachToPayload === "function") {
+        window.MVIConsentCapture.attachToPayload(syncPayload, "lf-sms-consent");
+      }
+      var shotReady = Promise.resolve(syncPayload);
+      if (window.MVIConsentCapture && typeof window.MVIConsentCapture.attachScreenshot === "function") {
+        shotReady = window.MVIConsentCapture.attachScreenshot(syncPayload, {
+          mode: "optin-page",
+          root: "#lf-consent-capture-root",
+        });
+      }
+      if (!IS_EN && window.MVIMetaCapiMatch && typeof window.MVIMetaCapiMatch.collectForLeadSync === "function") {
+        var capiMatch = window.MVIMetaCapiMatch.collectForLeadSync(originDetail);
+        if (capiMatch.metaFbp) syncPayload.metaFbp = capiMatch.metaFbp;
+        if (capiMatch.metaFbc) syncPayload.metaFbc = capiMatch.metaFbc;
+        if (capiMatch.clientUserAgent) syncPayload.clientUserAgent = capiMatch.clientUserAgent;
+      }
+
+      return shotReady.then(function () {
+        return fetch(siteApiUrl("/api/quote-lead-sync"), {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(syncPayload),
+        }).then(function (syncRes) {
+          return syncRes.json().then(function (syncData) {
+            if (!syncRes.ok || !syncData || !syncData.ok) {
+              throw new Error(
+                (syncData && syncData.error) ||
+                  msg("We could not save your information.", "No pudimos guardar sus datos.")
+              );
+            }
+            if (!IS_EN && typeof fbq === "function") {
+              fbq(
+                "track",
+                "Lead",
+                { currency: "USD", value: 0 },
+                { eventID: leadEventId, ph: phone, fn: firstName, ln: lastName }
+              );
+            }
+            setStatus("", false);
+            if (ctx.setSubmitting) ctx.setSubmitting(false);
+            if (ctx.onSaved) ctx.onSaved({ leadId: syncData.id, metaLeadEventId: leadEventId });
+            return syncData;
+          });
+        });
+      }).catch(function (err) {
+        setStatus(err.message || msg("Something went wrong. Please try again.", "Algo salió mal. Inténtelo de nuevo."), true);
+        if (ctx.setSubmitting) ctx.setSubmitting(false);
+      });
+    },
     submit: function (ctx) {
       ctx = ctx || {};
       var selections = ctx.selections || {};
@@ -216,11 +303,10 @@
           setQuoteStatus(msg("Saving your estimate…", "Guardando su estimado…"), false);
 
           var originDetail = collectOriginDetail();
-          var leadEventId =
-            !IS_EN && window.MVIMetaCapiEvents && typeof window.MVIMetaCapiEvents.getLeadEventId === "function"
-              ? window.MVIMetaCapiEvents.getLeadEventId()
-              : sessionClientId;
+          var existingLeadId = ctx.leadId || selections.leadId || null;
           var syncPayload = {
+            stage: existingLeadId ? "update" : undefined,
+            leadId: existingLeadId || undefined,
             firstName: firstName,
             lastName: lastName,
             email: email,
@@ -239,68 +325,25 @@
             lang: LANG,
             source: IS_EN ? "english_landing_gastos_finales" : "facebook_landing_gastos_finales",
             sessionClientId: sessionClientId,
-            metaLeadEventId: leadEventId,
             originDetail: originDetail,
           };
-          if (window.MVIConsentCapture && typeof window.MVIConsentCapture.attachToPayload === "function") {
-            window.MVIConsentCapture.attachToPayload(syncPayload, "lf-sms-consent");
-          } else {
-            var consentLabelEl = document.querySelector('label[for="lf-sms-consent"]');
-            if (consentLabelEl) {
-              syncPayload.consentText = String(consentLabelEl.innerText || consentLabelEl.textContent || "")
-                .replace(/\s+/g, " ")
-                .trim();
-            }
-            try {
-              syncPayload.consentUrl = String(location.href || "").slice(0, 2000);
-            } catch (e) {}
-          }
-          var consentShotReady = Promise.resolve(syncPayload);
-          if (
-            window.MVIConsentCapture &&
-            typeof window.MVIConsentCapture.attachScreenshot === "function"
-          ) {
-            consentShotReady = window.MVIConsentCapture.attachScreenshot(syncPayload, {
-              mode: "landing",
-              root: "#lf-consent-capture-root, .lf-step--phone, section.lf-step[data-field='phone']",
-            });
-          }
-          if (!IS_EN && window.MVIMetaCapiMatch && typeof window.MVIMetaCapiMatch.collectForLeadSync === "function") {
-            var capiMatch = window.MVIMetaCapiMatch.collectForLeadSync(originDetail);
-            if (capiMatch.metaFbp) syncPayload.metaFbp = capiMatch.metaFbp;
-            if (capiMatch.metaFbc) syncPayload.metaFbc = capiMatch.metaFbc;
-            if (capiMatch.clientUserAgent) syncPayload.clientUserAgent = capiMatch.clientUserAgent;
-          }
 
-          return consentShotReady.then(function () {
-            return fetch(siteApiUrl("/api/quote-lead-sync"), {
+          return fetch(siteApiUrl("/api/quote-lead-sync"), {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(syncPayload),
           }).then(function (syncRes) {
             return syncRes.json().then(function (syncData) {
-              if (!IS_EN && syncRes.ok && syncData && syncData.ok && typeof fbq === "function") {
-                var leadEventOpts = {
-                  eventID: leadEventId,
-                  em: email,
-                  ph: phone,
-                  fn: firstName,
-                  ln: lastName,
-                  ge: sex === "male" ? "m" : "f",
-                };
-                fbq("track", "Lead", { currency: "USD", value: 0 }, leadEventOpts);
-              }
               return {
                 quote: data,
                 leadSaved: syncRes.ok && syncData && syncData.ok,
-                leadId: syncData && syncData.id ? syncData.id : null,
+                leadId: (syncData && syncData.id) || existingLeadId || null,
                 syncError:
                   syncRes.ok && syncData && syncData.ok
                     ? null
                     : (syncData && syncData.error) || msg("We could not save your information.", "No pudimos guardar sus datos."),
               };
             });
-          });
           });
         })
         .then(function (result) {

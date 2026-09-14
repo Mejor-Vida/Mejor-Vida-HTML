@@ -153,8 +153,8 @@
       if (singleRate) {
         rangeHint.textContent =
           lang === "es"
-            ? "Estimado de referencia con la tarifa Assurity que tenemos en archivo. Mejor Vida Insurance confirma el precio final según salud y aseguradora."
-            : "Reference estimate from our on-file Assurity rate. Mejor Vida Insurance confirms your final price based on health and carrier.";
+            ? "Este es un estimado de referencia. Mejor Vida Seguros confirma el precio final según su salud y la aseguradora."
+            : "This is a reference estimate. Mejor Vida Insurance confirms the final price based on your health and the insurance company.";
       } else {
         rangeHint.textContent =
           lang === "es"
@@ -198,8 +198,8 @@
         if (singleRateNow) {
           rangeHint.textContent =
             lang === "es"
-              ? "Estimado de referencia con la tarifa Assurity que tenemos en archivo. Mejor Vida Insurance confirma el precio final según salud y aseguradora."
-              : "Reference estimate from our on-file Assurity rate. Mejor Vida Insurance confirms your final price based on health and carrier.";
+              ? "Este es un estimado de referencia. Mejor Vida Seguros confirma el precio final según su salud y la aseguradora."
+              : "This is a reference estimate. Mejor Vida Insurance confirms the final price based on your health and the insurance company.";
         } else {
           rangeHint.textContent =
             lang === "es"

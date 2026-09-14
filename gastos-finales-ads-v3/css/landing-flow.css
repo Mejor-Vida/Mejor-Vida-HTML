@@ -2399,11 +2399,55 @@ button.lf-julie-card--clickable:focus-visible {
 }
 
 .lf-sms-optin-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  min-width: 0;
+  flex: 1;
   font-size: 0.8125rem;
   line-height: 1.45;
   font-weight: 400;
   color: var(--lf-muted);
   cursor: pointer;
+}
+
+.lf-sms-optin-lead {
+  display: block;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--lf-heading);
+}
+
+.lf-sms-optin-scroll {
+  display: block;
+  max-height: 4.35rem;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 0.4rem 0.55rem 0.45rem;
+  border: 1px solid #d5e0ee;
+  border-radius: 8px;
+  background: #f8fafc;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  color: var(--lf-muted);
+  cursor: text;
+  scrollbar-width: thin;
+  scrollbar-color: #94a3b8 #e8eef6;
+}
+
+.lf-sms-optin-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.lf-sms-optin-scroll::-webkit-scrollbar-track {
+  background: #e8eef6;
+  border-radius: 8px;
+}
+
+.lf-sms-optin-scroll::-webkit-scrollbar-thumb {
+  background: #94a3b8;
+  border-radius: 8px;
 }
 
 .lf-sms-optin-text a {
@@ -3214,4 +3258,378 @@ body.lf-landing .mvi-lm-consent-label {
   body.lf-landing .lf-main {
     padding-bottom: 1.25rem;
   }
+}
+
+.lf-header-tagline--ad {
+  font-size: clamp(1.65rem, 3.4vw, 2.55rem);
+  max-width: min(44rem, calc(100vw - 2rem));
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 4vw, 2.5rem);
+  padding-bottom: 0.45rem;
+  text-wrap: balance;
+}
+
+.lf-fb-source {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  margin: 0 auto 0.55rem;
+  padding: 0.2rem clamp(1.25rem, 4vw, 2.5rem) 0;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.35;
+  color: #475569;
+  text-align: center;
+}
+
+.lf-fb-source[hidden] {
+  display: none !important;
+}
+
+.lf-fb-source-logo {
+  display: block;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.lf-landing--contact-first .lf-header-row {
+  position: relative;
+  align-items: flex-start;
+  padding: 0.35rem 0.5rem 0.15rem 0.75rem;
+}
+
+.lf-landing--contact-first .lf-logo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  margin-top: -2.75rem;
+  margin-left: -1.35rem;
+}
+
+.lf-landing--contact-first .lf-logo img {
+  height: clamp(9.5rem, 28vw, 13.5rem);
+  max-width: min(780px, 88vw);
+  transform: translateY(-0.35rem);
+}
+
+.lf-landing--contact-first .lf-header-actions {
+  position: relative;
+  z-index: 3;
+  padding-top: 0;
+  padding-right: 0.15rem;
+  gap: 0.28rem;
+}
+
+.lf-landing--contact-first:not(.lf-landing--in-flow) .lf-progress-wrap {
+  display: none;
+}
+
+.lf-landing--contact-first .lf-fb-source {
+  margin-bottom: 0.2rem;
+  padding-top: 0;
+}
+
+.lf-landing--contact-first .lf-header:has(.lf-header-tagline:not([hidden])) .lf-header-tagline--ad {
+  font-size: clamp(1.4rem, 2.6vw, 2.05rem);
+  padding-bottom: 0.2rem;
+  line-height: 1.12;
+}
+
+.lf-landing--contact-first .lf-header-hero-sub {
+  max-width: 36rem;
+  padding-bottom: 0.3rem;
+}
+
+.lf-landing--contact-first .lf-header-hero-sub-lead {
+  margin: 0;
+  font-size: clamp(0.875rem, 2vw, 1rem);
+  font-weight: 400;
+  color: #475569;
+}
+
+.lf-landing--contact-first:not(.lf-landing--in-flow) .lf-main {
+  padding-top: 0;
+  padding-bottom: 0.6rem;
+}
+
+.lf-landing--contact-first .lf-licenses-btn {
+  margin-bottom: 0.5rem;
+  padding: 0.38rem 1rem;
+}
+
+.lf-landing--contact-first .lf-contact-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 0.7rem 0.9rem 0.8rem;
+}
+
+.lf-landing--contact-first .lf-contact-card .lf-name-fields {
+  gap: 0.5rem;
+}
+
+.lf-landing--contact-first .lf-contact-card .lf-select-label {
+  margin-bottom: 0.22rem;
+  font-size: 0.8125rem;
+}
+
+.lf-landing--contact-first .lf-contact-card .lf-text-input {
+  padding: 0.5rem 0.7rem;
+  font-size: 1rem;
+}
+
+.lf-landing--contact-first .lf-phone-guarantee {
+  margin: 0.15rem 0 0.1rem;
+  font-size: 0.875rem;
+}
+
+.lf-landing--contact-first .lf-sms-optin {
+  margin: 0;
+}
+
+.lf-landing--contact-first .lf-sms-optin-text {
+  gap: 0.35rem;
+}
+
+.lf-landing--contact-first .lf-sms-optin-lead {
+  font-size: 0.9375rem;
+  line-height: 1.35;
+}
+
+.lf-landing--contact-first .lf-sms-optin-scroll {
+  max-height: 5.1rem;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: #334155;
+  border-color: #b7c9de;
+  background: #f1f5f9;
+}
+
+.lf-landing--contact-first .lf-contact-submit {
+  margin-top: 0.35rem;
+  padding: 0.68rem 1rem;
+}
+
+.lf-landing--contact-first .lf-fb-independence {
+  width: min(26rem, calc(100vw - 1.5rem));
+  margin: 0.4rem auto 0;
+  font-size: 0.75rem;
+  line-height: 1.35;
+  color: #475569;
+  text-align: center;
+}
+
+@media (max-width: 767.98px) {
+  .lf-landing--contact-first .lf-logo {
+    margin-top: -1.35rem;
+    margin-left: 0;
+  }
+
+  .lf-landing--contact-first .lf-logo img {
+    height: clamp(7.25rem, 30vw, 9.25rem);
+    max-width: min(58vw, 14rem);
+    transform: none;
+  }
+
+  .lf-landing--contact-first .lf-header-tagline--ad {
+    font-size: clamp(1.35rem, 6.5vw, 1.75rem);
+  }
+
+  .lf-landing--contact-first .lf-fb-independence {
+    width: calc(100vw - 1.5rem);
+    max-width: 26rem;
+    padding: 0 4.25rem 0.25rem 0.5rem;
+    text-align: left;
+  }
+
+  body.lf-landing--contact-first:not(.lf-landing--results):not(.lf-landing--in-flow) .lf-main {
+    min-height: 0;
+    justify-content: flex-start;
+    padding-top: 0.15rem;
+    padding-bottom: 4.75rem;
+  }
+}
+
+.lf-licenses-btn {
+  display: block;
+  margin: 0 auto 1.1rem;
+  padding: 0.5rem 1.15rem;
+  border: 1px solid #e0b34a;
+  border-radius: 999px;
+  background: var(--lf-gold);
+  color: #1a365d;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.lf-licenses-btn:hover,
+.lf-licenses-btn:focus-visible {
+  background: #ffd97a;
+  border-color: #d4a017;
+  color: #1a365d;
+}
+
+.lf-contact-card {
+  width: min(26rem, calc(100vw - 1.5rem));
+  margin: 0 auto;
+  padding: 1.15rem 1.15rem 1.25rem;
+  background: #fff;
+  border: 1px solid #c5d4e8;
+  border-radius: 16px;
+}
+
+.lf-contact-card .lf-name-fields {
+  display: grid;
+  gap: 0.75rem;
+}
+
+@media (min-width: 520px) {
+  .lf-contact-card .lf-name-fields {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.lf-contact-submit {
+  display: block;
+  width: 100%;
+  margin-top: 1rem;
+  padding: 0.95rem 1.15rem;
+  border: 0;
+  border-radius: 10px;
+  background: var(--lf-accent);
+  color: #fff;
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.lf-contact-submit:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
+
+.lf-lic-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  background: rgba(15, 23, 42, 0.55);
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+}
+
+.lf-lic-modal-backdrop[hidden] {
+  display: none;
+}
+
+.lf-lic-modal {
+  width: min(640px, 96vw);
+  max-height: 92vh;
+  background: #fff;
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.lf-lic-modal-head {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid #e2e8f0;
+  background: #f8fafc;
+}
+
+.lf-lic-modal-head h2 {
+  margin: 0;
+  flex: 1;
+  font-size: 1.05rem;
+  color: #1a365d;
+}
+
+.lf-lic-modal-back,
+.lf-lic-modal-close,
+.lf-lic-modal-foot-btn {
+  border: 0;
+  background: #e2e8f0;
+  color: #1a365d;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.lf-lic-modal-back,
+.lf-lic-modal-close {
+  width: 2rem;
+  height: 2rem;
+  font-size: 1.1rem;
+}
+
+.lf-lic-modal-body {
+  min-height: 220px;
+  max-height: 70vh;
+  overflow: auto;
+  padding: 0.75rem 1rem 1rem;
+}
+
+.lf-lic-state-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.lf-lic-state-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.15rem;
+  width: 100%;
+  margin: 0 0 0.5rem;
+  padding: 0.85rem 0.95rem;
+  border: 1px solid #dbe4f0;
+  border-radius: 10px;
+  background: #fff;
+  text-align: left;
+  cursor: pointer;
+}
+
+.lf-lic-state-btn:hover,
+.lf-lic-state-btn:focus-visible {
+  border-color: var(--lf-accent);
+}
+
+.lf-lic-state-name {
+  font-weight: 700;
+  color: #1a365d;
+}
+
+.lf-lic-state-meta,
+.lf-lic-npn,
+.lf-lic-loading {
+  font-size: 0.875rem;
+  color: #64748b;
+}
+
+.lf-lic-pdf-object,
+.lf-lic-pdf-frame {
+  display: block;
+  width: 100%;
+  height: min(70vh, 520px);
+  border: 0;
+}
+
+.lf-lic-modal-foot {
+  padding: 0.75rem 1rem 1rem;
+  border-top: 1px solid #e2e8f0;
+}
+
+.lf-lic-modal-foot-btn {
+  padding: 0.5rem 0.9rem;
+  font-weight: 600;
 }

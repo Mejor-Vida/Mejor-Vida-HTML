@@ -791,6 +791,21 @@ async function composeMergedLeadDetail(cfg, detail, options) {
     merged.sms_opt_in_at = detail.sms_opt_in_at;
   }
   merged.sms_opt_in_note = mergePreferCanonical(detail.sms_opt_in_note, topLevelPatch.sms_opt_in_note);
+  merged.consent_screenshot_path = mergePreferCanonical(
+    detail.consent_screenshot_path,
+    topLevelPatch.consent_screenshot_path
+  );
+  merged.consent_ip = mergePreferCanonical(detail.consent_ip, topLevelPatch.consent_ip);
+  merged.consent_text = mergePreferCanonical(detail.consent_text, topLevelPatch.consent_text);
+  merged.consent_url = mergePreferCanonical(detail.consent_url, topLevelPatch.consent_url);
+  merged.consent_captured_at = mergePreferCanonical(
+    detail.consent_captured_at,
+    topLevelPatch.consent_captured_at
+  );
+  merged.consent_expires_at = mergePreferCanonical(
+    detail.consent_expires_at,
+    topLevelPatch.consent_expires_at
+  );
 
   if (isBlankValue(merged.age) && psAugment.age != null) merged.age = psAugment.age;
   if (isBlankValue(merged.sex) && !isBlankValue(psAugment.sex)) merged.sex = psAugment.sex;
@@ -1707,6 +1722,49 @@ async function enrichLeadEmailsFromContacts(cfg, items) {
   });
 }
 
+function copyConsentFields(target, source) {
+  if (!target || !source) return target;
+  [
+    "consent_screenshot_path",
+    "consent_ip",
+    "consent_text",
+    "consent_url",
+    "consent_user_agent",
+    "consent_captured_at",
+    "consent_expires_at",
+  ].forEach((k) => {
+    if (!target[k] && source[k]) target[k] = source[k];
+  });
+  return target;
+}
+
+async function attachQuoteConsentToDetail(cfg, detail) {
+  if (!detail) return detail;
+  if (detail.consent_screenshot_path && detail.consent_text) return detail;
+  const phone = cleanText(detail.phone);
+  const email = cleanText(detail.email).toLowerCase();
+  const last10 = phoneLast10Digits(phone);
+  if (!last10 && !email) return detail;
+  let rows = [];
+  try {
+    rows = await restSelect(
+      cfg,
+      "quote_lead_submissions",
+      "select=id,phone,email,consent_screenshot_path,consent_ip,consent_text,consent_url,consent_user_agent,consent_captured_at,consent_expires_at&order=created_at.desc&limit=50"
+    );
+  } catch (_) {
+    return detail;
+  }
+  const hit = (rows || []).find((r) => {
+    if (!r) return false;
+    const emailMatch = email && cleanText(r.email).toLowerCase() === email;
+    const phoneMatch = last10 && phoneLast10Digits(r.phone) === last10;
+    return (emailMatch || phoneMatch) && (r.consent_screenshot_path || r.consent_text);
+  });
+  if (hit) copyConsentFields(detail, hit);
+  return detail;
+}
+
 async function withCompliancePayload(cfg, detail, canPhi) {
   let compliance_events = [];
   try {
@@ -1721,6 +1779,12 @@ async function withCompliancePayload(cfg, detail, canPhi) {
     }
   } catch (_) {
     compliance_events = [];
+  }
+  if (detail && !detail.consent_screenshot_path && Array.isArray(compliance_events)) {
+    const ev = compliance_events.find(
+      (e) => e && e.detail && typeof e.detail === "object" && e.detail.consent_screenshot_path
+    );
+    if (ev) detail.consent_screenshot_path = ev.detail.consent_screenshot_path;
   }
   if (detail && detail.consent_screenshot_path) {
     try {
@@ -2167,6 +2231,7 @@ module.exports = async function handler(req, res) {
             detail.phi = await readPhiMergedForLead(cfg, detailId, src, cross.alternateLeadKeys);
           }
           enrichDetailTopLevelFromPhi(detail);
+          await attachQuoteConsentToDetail(cfg, detail);
           return json(res, 200, await withCompliancePayload(cfg, detail, canPhi));
         }
         if (src === "contacts") {
@@ -2180,6 +2245,7 @@ module.exports = async function handler(req, res) {
             detail.phi = await readPhiMergedForLead(cfg, detailId, src, cross.alternateLeadKeys);
           }
           enrichDetailTopLevelFromPhi(detail);
+          await attachQuoteConsentToDetail(cfg, detail);
           return json(res, 200, await withCompliancePayload(cfg, detail, canPhi));
         }
         if (src === "quote_lead_submissions") {
@@ -2191,6 +2257,7 @@ module.exports = async function handler(req, res) {
             detail.phi = phi.payload || {};
           }
           enrichDetailTopLevelFromPhi(detail);
+          await attachQuoteConsentToDetail(cfg, detail);
           return json(res, 200, await withCompliancePayload(cfg, detail, canPhi));
         }
         const detail = {
@@ -2213,6 +2280,7 @@ module.exports = async function handler(req, res) {
         }
         const merged = await composeMergedLeadDetail(cfg, detail);
         enrichDetailTopLevelFromPhi(merged);
+        await attachQuoteConsentToDetail(cfg, merged);
         return json(res, 200, await withCompliancePayload(cfg, merged, canPhi));
       } catch (e) {
         console.error("staff/leads GET id", e);
