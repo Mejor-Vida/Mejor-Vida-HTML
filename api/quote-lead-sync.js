@@ -455,9 +455,7 @@ module.exports = async function handler(req, res) {
     if (digits.length < 10) {
       return json(res, 400, { ok: false, error: "Valid phone number required" });
     }
-    if (!(body.consent === true || body.consent === "true")) {
-      return json(res, 400, { ok: false, error: "Communications opt-in is required" });
-    }
+    // SMS / auto-text opt-in is optional. Unchecked = save the lead, do not enroll auto texts.
   }
 
   if (leadSource === "out_of_state_referral") {
@@ -721,18 +719,18 @@ module.exports = async function handler(req, res) {
         actor: "quote_lead_sync",
       }
     );
-    if (consentScreenshotPath) {
-      try {
-        await saveCanonicalLeadProfile(
-          { supabaseUrl, serviceKey: supabaseKey },
-          leadId,
-          "quote_lead_submissions",
-          { consent_screenshot_path: consentScreenshotPath },
-          "quote_lead_sync"
-        );
-      } catch (e) {
-        console.warn("quote-lead-sync profile screenshot", e && e.message);
-      }
+    try {
+      const profilePatch = { sms_opt_in: smsConsentOptIn };
+      if (consentScreenshotPath) profilePatch.consent_screenshot_path = consentScreenshotPath;
+      await saveCanonicalLeadProfile(
+        { supabaseUrl, serviceKey: supabaseKey },
+        leadId,
+        "quote_lead_submissions",
+        profilePatch,
+        "quote_lead_sync"
+      );
+    } catch (e) {
+      console.warn("quote-lead-sync profile consent", e && e.message);
     }
     if (body.quoteLow != null || body.quoteHigh != null) {
       try {

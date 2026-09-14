@@ -1605,10 +1605,6 @@
         showErr(ui("Enter a valid U.S. phone number.", "Ingrese un número de teléfono válido de EE. UU."));
         return;
       }
-      if (!selections.smsConsent) {
-        showErr(ui("Please check the box to continue.", "Marque la casilla para continuar."));
-        return;
-      }
       trackGaEvent("contact_submit_clicked", { location: "landing_v3" });
       if (selections.leadId) {
         trackGaEvent("contact_lead_saved", { form_source: "landing_quote_early" });
