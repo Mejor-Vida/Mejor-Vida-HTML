@@ -1,19 +1,19 @@
 ---
-description: Public Facebook Page comment auto-replies — locked style, not website-chat copy
-globs: lib/facebook-comment-reply.js,lib/rag-pipeline.js,api/meta-leadgen-webhook.js,facebook-post-rules.md
+description: Public Facebook Page comment auto-replies — RAG answers, simple public-facing copy
+globs: lib/facebook-comment-reply.js,lib/rag-pipeline.js,lib/openai.js,api/meta-leadgen-webhook.js,facebook-post-rules.md
 alwaysApply: false
 ---
 
 # Facebook comment auto-replies
 
-Owner: `lib/facebook-comment-reply.js`. Practiced answers live in `lockedFacebookAnswer()`. Do **not** send `whoIsJulieAnswer`, `ageCarrierFitAnswer`, carrier lists, or other website-chat canned copy into a public comment.
+Owner: `lib/facebook-comment-reply.js`. Real questions use **RAG**. Do **not** paste website-chat canned answers (`whoIsJulieAnswer`, `ageCarrierFitAnswer`, phone CTAs) into a public comment. `lockedFacebookAnswer()` is only a fallback if RAG is empty.
 
 ## Style
 
-- First reply: thank them; automated assistant of Mejor Vida Seguros; Julie was notified and will **private-message**; then one short answer if they asked a question.
-- Later replies: skip that intro. One short **usted** answer. “Si tiene otra pregunta, puede escribirla aquí.”
+- First reply: thank them; automated assistant of Mejor Vida Seguros; Julie was notified and will **private-message**; then one simple public answer.
+- Later replies: skip that intro. 1–2 short **usted** sentences. “Si tiene otra pregunta, puede escribirla aquí.”
 - Bare INFO / Information / REVISAR: intro only. No blog URL.
-- No phones, emails, URLs, licensed-state roster, carrier shopping lists, or sample prices.
+- Public-facing only: no phones, emails, URLs, licensed-state roster, mailing address, sample monthly prices, or carrier shopping lists unless they named a carrier.
 
 ```js
 // BAD — website chat

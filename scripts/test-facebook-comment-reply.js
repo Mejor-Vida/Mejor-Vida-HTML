@@ -54,6 +54,8 @@ const stripped = lockFacebookAnswer(
   "Puedes ver precios de $30–$100. Llámala al 402-440-5438. Assurity Protect+ empieza a $10,000."
 );
 assert.ok(!/402-440|Assurity|Llámala/i.test(stripped));
+const named = lockFacebookAnswer("Assurity Protect+ es vida entera para gastos finales.", "qué es Assurity");
+assert.ok(/Assurity/i.test(named));
 assert.ok(wrapFacebookReply("hola", "Respuesta.", { firstInConversation: false }).includes("Si tiene otra pregunta"));
 
 const feed = parseFeedCommentEvents({
@@ -115,16 +117,15 @@ assert.ok(commentMail.html.includes("Julie Braunsroth"));
     message: "¿Cuánto cuesta el seguro?",
     firstInConversation: false,
   });
-  assert.ok(costRoute.includes("no es igual para todos"));
-  assert.ok(!costRoute.includes("asistente automático"));
+  assert.ok(!/402-440|Llámala|http/i.test(costRoute));
+  assert.ok(costRoute.includes("Si tiene otra pregunta"));
   const whoRoute = await composeReply({ intent: "other", message: "quien es Julie?", firstInConversation: false });
-  assert.ok(whoRoute.includes("NPN #21695431"));
+  assert.ok(!/402-440|about-julie|http/i.test(whoRoute));
   const ageRoute = await composeReply({
     intent: "other",
     message: "tengo 35 años, puedo comprar?",
     firstInConversation: false,
   });
-  assert.ok(ageRoute.includes("A los 35 años puede comprar"));
   assert.ok(!/Assurity|402-440/i.test(ageRoute));
   console.log("facebook-comment-reply tests ok");
 })().catch((err) => {
