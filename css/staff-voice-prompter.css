@@ -1,0 +1,181 @@
+/* CRM Voice Prompter overlay */
+
+body.mvi-prompter-open {
+  overflow: hidden;
+}
+
+.mvi-prompter[hidden] {
+  display: none !important;
+}
+
+.mvi-prompter {
+  position: fixed;
+  inset: 0;
+  z-index: 5000;
+  display: flex;
+  flex-direction: column;
+  background: #0b1220;
+  color: #f4f7fb;
+}
+
+.mvi-prompter__bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  background: #13233c;
+  border-bottom: 1px solid #243552;
+}
+
+.mvi-prompter__title {
+  margin: 0;
+  flex: 1 1 140px;
+  min-width: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mvi-prompter__status {
+  font-size: 0.82rem;
+  color: #9db0c9;
+}
+
+.mvi-prompter__close,
+.mvi-prompter__mic {
+  border: 0;
+  border-radius: 999px;
+  padding: 8px 14px;
+  cursor: pointer;
+  font: inherit;
+}
+
+.mvi-prompter__close {
+  background: #f4f7fb;
+  color: #13233c;
+}
+
+.mvi-prompter__mic {
+  background: #1a4d8c;
+  color: #fff;
+}
+
+.mvi-prompter__mic.is-on {
+  background: #c0392b;
+}
+
+.mvi-prompter__font {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.82rem;
+  color: #9db0c9;
+}
+
+.mvi-prompter__stage {
+  flex: 1;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: stretch;
+  justify-items: stretch;
+  gap: 1.15rem;
+  min-height: 0;
+  overflow: auto;
+  padding: 0.85rem 2.5vw 0.85rem;
+  text-align: center;
+  outline: none;
+}
+
+.mvi-prompter__stage.is-shift .mvi-prompter__prev,
+.mvi-prompter__stage.is-shift .mvi-prompter__now,
+.mvi-prompter__stage.is-shift .mvi-prompter__next {
+  animation: mviPrompterShift 0.32s ease-out;
+}
+
+@keyframes mviPrompterShift {
+  from {
+    transform: translateY(18%);
+    opacity: 0.7;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+.mvi-prompter__prev,
+.mvi-prompter__next {
+  width: 100%;
+  max-width: none;
+  min-height: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 600;
+  line-height: 1.35;
+  color: #7d90a8;
+}
+
+.mvi-prompter__prev {
+  align-self: end;
+  overflow: hidden;
+  font-size: clamp(1.7rem, 3.5vw, 2.5rem);
+  padding: 0;
+}
+
+.mvi-prompter__next {
+  align-self: start;
+  overflow: visible;
+  font-size: clamp(1.55rem, 3.2vw, 2.35rem);
+  padding: 0;
+}
+
+.mvi-prompter__prev[hidden],
+.mvi-prompter__next[hidden] {
+  display: block;
+  visibility: hidden;
+}
+
+.mvi-prompter__now {
+  width: 100%;
+  max-width: none;
+  min-height: 0;
+  max-height: none;
+  overflow: visible;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 800;
+  line-height: 1.18;
+  letter-spacing: 0.01em;
+  color: #f4f7fb;
+  margin: 0;
+  padding: 0;
+}
+
+.mvi-prompter__w {
+  display: inline;
+  margin-right: 0.22em;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.mvi-prompter__now .mvi-prompter__w {
+  color: #fff;
+}
+
+.mvi-prompter__now .mvi-prompter__w.is-done {
+  color: #8b9db3;
+}
+
+.mvi-prompter__prev .mvi-prompter__w,
+.mvi-prompter__next .mvi-prompter__w {
+  color: #7d90a8;
+}
+
+.mvi-prompter__hint {
+  margin: 0;
+  padding: 6px 16px 10px;
+  font-size: 0.75rem;
+  color: #9db0c9;
+  text-align: center;
+}

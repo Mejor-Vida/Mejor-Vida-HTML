@@ -138,6 +138,9 @@
       }
       return { view: "todo" };
     }
+    if (parts[0] === "youtube") {
+      return { view: "youtube", slug: parts[1] ? decodeURIComponent(parts.slice(1).join("/")) : "" };
+    }
     if (parts[0] === "nurture-settings") return { view: "nurtureSettings" };
     return { view: "dashboard" };
   }
@@ -399,6 +402,7 @@
     else if (nav === "knowledge") navigate("#/knowledge");
     else if (nav === "ga4") navigate("#/ga4");
     else if (nav === "todo") navigate("#/todo");
+    else if (nav === "youtube") navigate("#/youtube");
     else if (nav === "nurture-settings") navigate("#/nurture-settings");
   }
 
@@ -2102,6 +2106,18 @@
             '<div class="crm-placeholder"><strong>' +
             esc(t("load_error")) +
             "</strong><p>To-Do module failed to load.</p></div>";
+        }
+        resetIdleTimer();
+        return;
+      }
+      if (route.view === "youtube") {
+        if (window.StaffCrmYoutube) {
+          await window.StaffCrmYoutube.mount(main, { slug: route.slug || "" });
+        } else {
+          main.innerHTML =
+            '<div class="crm-placeholder"><strong>' +
+            esc(t("load_error")) +
+            "</strong><p>YouTube module failed to load.</p></div>";
         }
         resetIdleTimer();
         return;
