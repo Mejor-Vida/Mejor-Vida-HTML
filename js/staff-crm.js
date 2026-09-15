@@ -141,6 +141,11 @@
     if (parts[0] === "youtube") {
       return { view: "youtube", slug: parts[1] ? decodeURIComponent(parts.slice(1).join("/")) : "" };
     }
+    if (parts[0] === "accounting") {
+      var acctPane = parts[1] || "home";
+      var acctReport = parts[2] || "pl";
+      return { view: "accounting", pane: acctPane, report: acctReport };
+    }
     if (parts[0] === "nurture-settings") return { view: "nurtureSettings" };
     return { view: "dashboard" };
   }
@@ -403,6 +408,7 @@
     else if (nav === "ga4") navigate("#/ga4");
     else if (nav === "todo") navigate("#/todo");
     else if (nav === "youtube") navigate("#/youtube");
+    else if (nav === "accounting") navigate("#/accounting");
     else if (nav === "nurture-settings") navigate("#/nurture-settings");
   }
 
@@ -2118,6 +2124,18 @@
             '<div class="crm-placeholder"><strong>' +
             esc(t("load_error")) +
             "</strong><p>YouTube module failed to load.</p></div>";
+        }
+        resetIdleTimer();
+        return;
+      }
+      if (route.view === "accounting") {
+        if (window.StaffCrmAccounting) {
+          await window.StaffCrmAccounting.mount(main, { pane: route.pane || "home", report: route.report || "pl" });
+        } else {
+          main.innerHTML =
+            '<div class="crm-placeholder"><strong>' +
+            esc(t("load_error")) +
+            "</strong><p>Accounting module failed to load.</p></div>";
         }
         resetIdleTimer();
         return;

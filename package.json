@@ -18,6 +18,7 @@
     "test:weekly-newsletter": "node scripts/test-weekly-newsletter.js",
     "test:facebook-comments": "node scripts/test-facebook-comment-reply.js",
     "test:youtube-scripts": "node scripts/test-youtube-script-pages.js",
+    "test:staff-accounting": "node scripts/test-staff-accounting.js",
     "dev:review": "node scripts/local-api-dev.cjs",
     "mint:intake-link": "node scripts/mint-medical-intake-dev-link.js",
     "preview:post-quote-email": "node scripts/preview-post-quote-email.js",

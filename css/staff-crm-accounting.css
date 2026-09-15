@@ -1,0 +1,213 @@
+/* Staff CRM Accounting — parallel books */
+
+.crm-acct-shell {
+  max-width: 1180px;
+}
+
+.crm-acct-page-title {
+  margin: 0 0 4px;
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
+.crm-acct-banner {
+  margin: 0 0 14px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: #eef4fb;
+  border: 1px solid var(--crm-border);
+  color: var(--crm-muted);
+  font-size: 0.88rem;
+  line-height: 1.45;
+}
+
+.crm-acct-subtabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  border-bottom: 2px solid var(--crm-border);
+  margin: 0 0 16px;
+}
+
+.crm-acct-subtab {
+  border: 0;
+  background: transparent;
+  padding: 10px 14px;
+  font: inherit;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--crm-muted);
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+}
+
+.crm-acct-subtab.is-active {
+  color: var(--crm-accent);
+  border-bottom-color: var(--crm-accent);
+}
+
+.crm-acct-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.crm-acct-card {
+  background: var(--crm-card-bg);
+  border: 1px solid var(--crm-border);
+  border-radius: var(--crm-radius);
+  box-shadow: var(--crm-shadow);
+  padding: 14px 16px;
+}
+
+.crm-acct-card .lbl {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--crm-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  margin-bottom: 6px;
+}
+
+.crm-acct-card .val {
+  font-size: 1.25rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.crm-acct-card .val.is-neg {
+  color: var(--crm-danger);
+}
+
+.crm-acct-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: end;
+  margin-bottom: 14px;
+}
+
+.crm-acct-toolbar label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--crm-muted);
+}
+
+.crm-acct-toolbar input,
+.crm-acct-toolbar select,
+.crm-acct-toolbar textarea,
+.crm-acct-field input,
+.crm-acct-field select,
+.crm-acct-field textarea {
+  font: inherit;
+  padding: 8px 10px;
+  border: 1px solid var(--crm-border);
+  border-radius: 8px;
+  background: #fff;
+  min-width: 140px;
+}
+
+.crm-acct-table-wrap {
+  overflow: auto;
+  background: var(--crm-card-bg);
+  border: 1px solid var(--crm-border);
+  border-radius: var(--crm-radius);
+  box-shadow: var(--crm-shadow);
+}
+
+.crm-acct-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.crm-acct-table th,
+.crm-acct-table td {
+  text-align: left;
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--crm-border);
+  vertical-align: middle;
+}
+
+.crm-acct-table th {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--crm-muted);
+  background: #f8fafc;
+}
+
+.crm-acct-table .num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.crm-acct-table tfoot td {
+  font-weight: 700;
+}
+
+.crm-acct-section {
+  margin: 22px 0 8px;
+  font-size: 1.05rem;
+}
+
+.crm-acct-status {
+  margin-top: 10px;
+  font-size: 0.88rem;
+  color: var(--crm-muted);
+}
+
+.crm-acct-status.is-error {
+  color: var(--crm-danger);
+}
+
+.crm-acct-csv {
+  width: 100%;
+  min-height: 120px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.82rem;
+}
+
+.crm-acct-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.crm-acct-gl-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  margin: 22px 0 8px;
+}
+
+.crm-acct-gl-head h3 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.crm-acct-muted {
+  color: var(--crm-muted);
+  font-size: 0.88rem;
+}
+
+.crm-acct-journal-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+@media (max-width: 700px) {
+  .crm-acct-journal-grid {
+    grid-template-columns: 1fr;
+  }
+}
