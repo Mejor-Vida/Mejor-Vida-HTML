@@ -232,6 +232,7 @@
       funnel_geo_note_direct:
         "Direct traffic has no ad-platform location. After someone starts a quote, the State filter shows the state they selected — not where they clicked from.",
       funnel_geo_col_location: "Location",
+      funnel_geo_col_country: "Country",
       funnel_geo_col_clicks: "Clicks",
       funnel_geo_col_impressions: "Impressions",
       funnel_geo_col_coverage: "Coverage",
@@ -248,6 +249,15 @@
       funnel_geo_summary_intl: "{n} clicks from other countries",
       funnel_geo_state_filter_note:
         "The State dropdown above filters quote answers, not click geography.",
+      funnel_geo_countries_hint: "Click to break this down by country",
+      funnel_geo_countries_count: "{n} countries",
+      funnel_geo_countries_title: "Countries outside the USA",
+      funnel_geo_countries_sub:
+        "{countries} countries · {clicks} clicks · {impressions} impressions",
+      funnel_geo_countries_clicked: "Countries that clicked",
+      funnel_geo_countries_no_clicks:
+        "No clicks from outside the USA in this period — impressions only.",
+      funnel_geo_countries_impr_only: "Show {n} more with impressions but no clicks",
       funnel_entry_at: "Entry: {entry}",
       funnel_entry_all_traffic: "All traffic · {n} sessions",
       funnel_entry_view_sessions: "{view} · {n} sessions",
@@ -429,6 +439,10 @@
       col_nurture_step_aria: "Nurture step {n} of {total}: {step}",
       col_nurture_step_aria_short: "Nurture step {n}: {step}",
       col_nurture_step_aria_no_name: "Nurture step {n} of {total}",
+      col_nurture_enroll: "Enroll",
+      col_nurture_enrolling: "Enrolling…",
+      col_nurture_enrolled_ok: "Nurture sequence started.",
+      col_nurture_enroll_failed: "Could not enroll in nurture.",
       col_stage_all: "All stages",
       col_stage_filter: "Filter clients by stage",
       stage_sorted_first: "Showing {stage} first",
@@ -552,6 +566,7 @@
       ov_stage_retained: "Retained",
       ov_stage_loyal: "Loyal",
       ov_stage_lost: "Lost",
+      stage_lost_archived: "Marked Lost and moved to Archive Vault.",
       ov_stage_enrolled: "Enrolled",
       cn_heading: "Communication & notes",
       cn_scheduler_title: "Schedule a reminder",
@@ -1150,7 +1165,7 @@
       conn_nurture_status_pending: "pending",
       pipe_title: "Nurture pipeline",
       pipe_subtitle:
-        "CRM nurture starts automatically for New and Contacted leads. This log shows New days 0–3 and Contacted long-term.",
+        "CRM nurture does not start automatically. Enroll a New or Contacted lead from Active Feed, or use Start nurture sequence here. This log shows New days 0–3 and Contacted long-term.",
       pipe_show_stopped: "Show sold / opt-out / completed",
       pipe_refresh: "Refresh",
       pipe_pause: "Pause",
@@ -1192,7 +1207,7 @@
       pipe_enroll: "Start nurture sequence",
       pipe_status_not_enrolled: "not enrolled",
       pipe_not_enrolled_notice:
-        "Not enrolled yet. New and Contacted leads start automatically from WhatsApp, the website, and Add Contact. Use Start nurture sequence only if this one was missed.",
+        "Not enrolled yet. Use Enroll on Active Feed, or Start nurture sequence here.",
       pipe_status_upcoming: "upcoming",
       pipe_status_missed: "missed (before enroll)",
       pipe_crm_entry: "CRM entry:",
@@ -1539,6 +1554,7 @@
       funnel_geo_note_direct:
         "El tráfico directo no tiene ubicación de plataforma. Cuando alguien empieza una cotización, el filtro Estado muestra el estado que eligió — no de dónde hizo clic.",
       funnel_geo_col_location: "Ubicación",
+      funnel_geo_col_country: "País",
       funnel_geo_col_clicks: "Clics",
       funnel_geo_col_impressions: "Impresiones",
       funnel_geo_col_coverage: "Cobertura",
@@ -1555,6 +1571,15 @@
       funnel_geo_summary_intl: "{n} clics desde otros países",
       funnel_geo_state_filter_note:
         "El menú Estado de arriba filtra respuestas del cotizador, no la geografía del clic.",
+      funnel_geo_countries_hint: "Haz clic para ver el desglose por país",
+      funnel_geo_countries_count: "{n} países",
+      funnel_geo_countries_title: "Países fuera de EE. UU.",
+      funnel_geo_countries_sub:
+        "{countries} países · {clicks} clics · {impressions} impresiones",
+      funnel_geo_countries_clicked: "Países que hicieron clic",
+      funnel_geo_countries_no_clicks:
+        "No hubo clics desde fuera de EE. UU. en este período — solo impresiones.",
+      funnel_geo_countries_impr_only: "Ver {n} más con impresiones pero sin clics",
       funnel_entry_at: "Entrada: {entry}",
       funnel_entry_all_traffic: "Todo el tráfico · {n} sesiones",
       funnel_entry_view_sessions: "{view} · {n} sesiones",
@@ -1736,6 +1761,10 @@
       col_nurture_step_aria: "Paso nurture {n} de {total}: {step}",
       col_nurture_step_aria_short: "Paso nurture {n}: {step}",
       col_nurture_step_aria_no_name: "Paso nurture {n} de {total}",
+      col_nurture_enroll: "Inscribir",
+      col_nurture_enrolling: "Inscribiendo…",
+      col_nurture_enrolled_ok: "Secuencia de nurturing iniciada.",
+      col_nurture_enroll_failed: "No se pudo inscribir en nurturing.",
       col_stage_all: "Todas las etapas",
       col_stage_filter: "Filtrar clientes por etapa",
       stage_sorted_first: "Mostrando {stage} primero",
@@ -1860,6 +1889,7 @@
       ov_stage_retained: "Retenido",
       ov_stage_loyal: "Leal",
       ov_stage_lost: "Perdido",
+      stage_lost_archived: "Marcado como Perdido y movido al Archivo.",
       ov_stage_enrolled: "Inscrito",
       cn_heading: "Comunicación y notas",
       cn_scheduler_title: "Programar recordatorio",
@@ -2458,7 +2488,7 @@
       conn_nurture_status_pending: "pendiente",
       pipe_title: "Pipeline de nurturing",
       pipe_subtitle:
-        "La secuencia CRM de nurturing empieza sola en New y Contacted. Este registro muestra New (días 0–3) y Contacted (largo plazo).",
+        "La secuencia CRM de nurturing no empieza sola. Inscriba un lead New o Contacted desde el Feed activo, o use Iniciar secuencia aquí. Este registro muestra New (días 0–3) y Contacted (largo plazo).",
       pipe_show_stopped: "Mostrar vendido / opt-out / completado",
       pipe_refresh: "Actualizar",
       pipe_pause: "Pausar",
@@ -2500,7 +2530,7 @@
       pipe_enroll: "Iniciar secuencia de nurturing",
       pipe_status_not_enrolled: "sin inscripción",
       pipe_not_enrolled_notice:
-        "Aún sin inscripción. Los leads New y Contacted se inscriben solos desde WhatsApp, el sitio y Agregar contacto. Use Iniciar secuencia solo si este se omitió.",
+        "Aún sin inscripción. Use Inscribir en el Feed activo, o Iniciar secuencia aquí.",
       pipe_status_upcoming: "próximo",
       pipe_status_missed: "omitido (antes de inscribir)",
       pipe_crm_entry: "Ingreso al CRM:",

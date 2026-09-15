@@ -28,6 +28,7 @@
     geoLoading: false,
     geoError: null,
     geoData: null,
+    geoCountryModalOpen: false,
   };
 
   var PERIOD_PRESETS = [1, 7, 14, 30, 90];
@@ -476,9 +477,45 @@
     return row.licensed ? t("funnel_geo_licensed") : t("funnel_geo_out_of_area");
   }
 
+  var regionNamesCache = {};
+
+  function regionDisplayNames() {
+    var lang =
+      (window.StaffCrmI18n && window.StaffCrmI18n.getLang && window.StaffCrmI18n.getLang()) ||
+      "en";
+    if (regionNamesCache[lang] !== undefined) return regionNamesCache[lang];
+    var fmt = null;
+    try {
+      fmt = new Intl.DisplayNames([lang], { type: "region" });
+    } catch (e) {
+      fmt = null;
+    }
+    regionNamesCache[lang] = fmt;
+    return fmt;
+  }
+
   function geoLocationName(row) {
     if (row.nameKey) return t(row.nameKey);
+    if (row.codeAlpha2) {
+      var fmt = regionDisplayNames();
+      if (fmt) {
+        try {
+          var name = fmt.of(row.codeAlpha2);
+          if (name && name !== row.codeAlpha2) return name;
+        } catch (e) {
+          /* fall back to the server-side name */
+        }
+      }
+    }
     return row.name || "";
+  }
+
+  function geoOutsideRow(data) {
+    var rows = (data && data.locations) || [];
+    for (var i = 0; i < rows.length; i += 1) {
+      if (rows[i].isOutsideUs && (rows[i].children || []).length) return rows[i];
+    }
+    return null;
   }
 
   function renderGeoSummary(data) {
@@ -528,11 +565,23 @@
             : row.isUs
               ? " is-us"
               : "";
+          var childCount = (row.children || []).length;
+          var drillable = row.isOutsideUs && childCount > 0;
+          if (drillable) cls += " is-drilldown";
+          var nameCell = drillable
+            ? '<button type="button" class="crm-funnel-geo-drill" data-funnel-geo-countries title="' +
+              esc(t("funnel_geo_countries_hint")) +
+              '">' +
+              esc(geoLocationName(row)) +
+              '<span class="crm-funnel-geo-drill-count">' +
+              esc(t("funnel_geo_countries_count", { n: fmtNum(childCount) })) +
+              "</span></button>"
+            : esc(geoLocationName(row));
           return (
             '<tr class="' +
             cls.trim() +
             '"><td>' +
-            esc(geoLocationName(row)) +
+            nameCell +
             "</td><td>" +
             esc(fmtNum(row.clicks)) +
             "</td><td>" +
@@ -602,6 +651,105 @@
       '">×</button></div>' +
       '<div class="crm-funnel-ad-modal-body">' +
       body +
+      "</div></div></div>" +
+      GeoCountryModal()
+    );
+  }
+
+  function renderGeoCountryTable(rows) {
+    var withClicks = rows.filter(function (row) {
+      return Number(row.clicks) > 0;
+    });
+    var impressionsOnly = rows.filter(function (row) {
+      return !(Number(row.clicks) > 0);
+    });
+
+    function tableFor(list, showRank) {
+      return (
+        '<table class="crm-funnel-geo-table crm-funnel-geo-table--countries">' +
+        "<thead><tr>" +
+        (showRank ? '<th class="crm-funnel-geo-rank-col">#</th>' : "") +
+        "<th>" + esc(t("funnel_geo_col_country")) + "</th>" +
+        "<th>" + esc(t("funnel_geo_col_clicks")) + "</th>" +
+        "<th>" + esc(t("funnel_geo_col_impressions")) + "</th>" +
+        "</tr></thead><tbody>" +
+        list
+          .map(function (row, i) {
+            return (
+              "<tr>" +
+              (showRank
+                ? '<td class="crm-funnel-geo-rank-col">' + esc(String(i + 1)) + "</td>"
+                : "") +
+              "<td>" +
+              esc(geoLocationName(row)) +
+              "</td><td>" +
+              esc(fmtNum(row.clicks)) +
+              "</td><td>" +
+              esc(fmtNum(row.impressions)) +
+              "</td></tr>"
+            );
+          })
+          .join("") +
+        "</tbody></table>"
+      );
+    }
+
+    var html = "";
+    if (withClicks.length) {
+      html +=
+        '<h4 class="crm-funnel-geo-subhead">' +
+        esc(t("funnel_geo_countries_clicked")) +
+        "</h4>" +
+        tableFor(withClicks, true);
+    } else {
+      html +=
+        '<p class="crm-funnel-ad-chart-empty">' +
+        esc(t("funnel_geo_countries_no_clicks")) +
+        "</p>";
+    }
+    if (impressionsOnly.length) {
+      html +=
+        '<details class="crm-funnel-geo-impr-only">' +
+        "<summary>" +
+        esc(
+          t("funnel_geo_countries_impr_only", { n: fmtNum(impressionsOnly.length) })
+        ) +
+        "</summary>" +
+        tableFor(impressionsOnly, false) +
+        "</details>";
+    }
+    return html;
+  }
+
+  function GeoCountryModal() {
+    if (!state.geoCountryModalOpen) return "";
+    var outside = geoOutsideRow(state.geoData);
+    if (!outside) return "";
+    var children = outside.children || [];
+    var clicks = Number(outside.clicks) || 0;
+    var impressions = Number(outside.impressions) || 0;
+
+    return (
+      '<div class="crm-funnel-ad-modal-backdrop crm-funnel-ad-modal-backdrop--nested" data-funnel-geo-country-backdrop>' +
+      '<div class="crm-funnel-ad-modal crm-funnel-ad-modal--geo-countries" role="dialog" aria-labelledby="crm-funnel-geo-country-title">' +
+      '<div class="crm-funnel-ad-modal-head">' +
+      '<div><h3 id="crm-funnel-geo-country-title">' +
+      esc(t("funnel_geo_countries_title")) +
+      "</h3>" +
+      '<p class="crm-funnel-ad-modal-sub">' +
+      esc(
+        t("funnel_geo_countries_sub", {
+          countries: fmtNum(children.length),
+          clicks: fmtNum(clicks),
+          impressions: fmtNum(impressions),
+        })
+      ) +
+      "</p></div>" +
+      '<button type="button" class="crm-funnel-ad-modal-close" data-funnel-geo-country-close aria-label="' +
+      esc(t("funnel_close")) +
+      '">×</button></div>' +
+      '<div class="crm-funnel-ad-modal-body">' +
+      renderGeoCountryTable(children) +
       "</div></div></div>"
     );
   }
@@ -1394,7 +1542,14 @@
     state.geoLoading = false;
     state.geoError = null;
     state.geoData = null;
+    state.geoCountryModalOpen = false;
     if (opts && opts.skipPaint) return;
+    paint(main);
+    wireEvents(main);
+  }
+
+  function closeGeoCountries(main) {
+    state.geoCountryModalOpen = false;
     paint(main);
     wireEvents(main);
   }
@@ -1404,6 +1559,7 @@
     state.geoLoading = true;
     state.geoError = null;
     state.geoData = null;
+    state.geoCountryModalOpen = false;
     state.entryModalOpen = false;
     closeAdChart(main, { skipPaint: true });
     paint(main);
@@ -1536,6 +1692,29 @@
         if (ev.target === geoModalBackdrop) closeGeoClicks(main);
       });
     }
+    var geoCountriesBtn = main.querySelector("[data-funnel-geo-countries]");
+    if (geoCountriesBtn) {
+      geoCountriesBtn.addEventListener("click", function (ev) {
+        ev.preventDefault();
+        ev.stopPropagation();
+        state.geoCountryModalOpen = true;
+        paint(main);
+        wireEvents(main);
+      });
+    }
+    var geoCountryClose = main.querySelector("[data-funnel-geo-country-close]");
+    if (geoCountryClose) {
+      geoCountryClose.addEventListener("click", function (ev) {
+        ev.preventDefault();
+        closeGeoCountries(main);
+      });
+    }
+    var geoCountryBackdrop = main.querySelector("[data-funnel-geo-country-backdrop]");
+    if (geoCountryBackdrop) {
+      geoCountryBackdrop.addEventListener("click", function (ev) {
+        if (ev.target === geoCountryBackdrop) closeGeoCountries(main);
+      });
+    }
 
     main.querySelectorAll("[data-funnel-view]").forEach(function (btn) {
       btn.addEventListener("click", function () {
@@ -1648,6 +1827,7 @@
     state.licensedState = "ALL";
     state.entryModalOpen = false;
     state.geoModalOpen = false;
+    state.geoCountryModalOpen = false;
     state.geoData = null;
     syncViewFromFilters();
     state.selectedNode = null;
