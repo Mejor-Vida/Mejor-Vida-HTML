@@ -187,6 +187,14 @@
         var Ctx = window.AudioContext || window.webkitAudioContext;
         if (!Ctx) return;
         audioCtx = new Ctx();
+        // The context is created inside the getUserMedia callback, so if the
+        // prompter opened without a click (hash navigation, autoListen) the
+        // document has no user activation and the context starts suspended —
+        // the analyser then reads pure silence and the meter sits at zero even
+        // though the mic is fine. Resume before wiring it up.
+        if (audioCtx.state === "suspended" && audioCtx.resume) {
+          try { audioCtx.resume(); } catch (e) {}
+        }
         var src = audioCtx.createMediaStreamSource(stream);
         analyser = audioCtx.createAnalyser();
         analyser.fftSize = 1024;
@@ -480,6 +488,10 @@
       transcript += event.results[i][0].transcript;
     }
     heardAt = Date.now();
+    // Chrome ends and restarts the session routinely during a long read. The
+    // restart cap is only meant to stop a failure loop, so a session that is
+    // actually transcribing must clear it or a long script dies mid-recording.
+    restartCount = 0;
     setHeard(transcript.trim().slice(-120));
     var tokens = transcript
       .toLowerCase()

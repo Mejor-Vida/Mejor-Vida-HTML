@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta name="robots" content="noindex,nofollow" />
+  <title>Prueba de micrófono — Mejor Vida</title>
+  <link rel="stylesheet" href="/css/staff-mic-check.css?v=20260915-mic-check-a" />
+</head>
+<body class="mc-body">
+  <main class="mc-wrap">
+    <header class="mc-head">
+      <div class="mc-head-text">
+        <h1 data-mc-t="h1">Prueba de micrófono y voz</h1>
+        <p class="mc-sub" data-mc-t="intro">
+          Esta página revisa tu micrófono y el reconocimiento de voz del navegador,
+          y te dice en palabras simples qué está mal y cómo arreglarlo.
+        </p>
+      </div>
+      <div class="mc-lang" role="group" aria-label="Idioma / Language">
+        <button type="button" class="mc-lang-opt is-on" data-mc-lang="es">Español</button>
+        <button type="button" class="mc-lang-opt" data-mc-lang="en">English</button>
+      </div>
+    </header>
+
+    <section class="mc-card mc-run">
+      <button type="button" id="mc-run" class="mc-btn mc-btn-run" data-mc-t="btn_run">Probar micrófono</button>
+      <p class="mc-status" id="mc-status" role="status" data-mc-t="status_idle">
+        Presiona el botón y habla en voz alta cuando te lo pida. La prueba dura unos 15 segundos.
+      </p>
+      <div class="mc-meter-wrap" id="mc-meter-wrap" hidden>
+        <span class="mc-meter" aria-hidden="true"><i id="mc-meter-fill"></i></span>
+        <span class="mc-meter-num" id="mc-meter-num">0%</span>
+      </div>
+      <p class="mc-readaloud" id="mc-readaloud" hidden></p>
+    </section>
+
+    <section class="mc-card mc-verdict-card" id="mc-headline-card" hidden>
+      <p class="mc-headline" id="mc-headline"></p>
+    </section>
+
+    <ol class="mc-rows" id="mc-rows"></ol>
+
+    <section class="mc-card mc-copy">
+      <button type="button" id="mc-copy" class="mc-btn mc-btn-copy" data-mc-t="btn_copy">Copiar resultados</button>
+      <p class="mc-status" id="mc-copy-msg"></p>
+      <details class="mc-raw">
+        <summary data-mc-t="raw_toggle">Ver el texto de los resultados</summary>
+        <pre id="mc-raw-text"></pre>
+      </details>
+    </section>
+
+    <p class="mc-foot">
+      <a href="/staff/crm.html#/youtube" data-mc-t="back_link">← Volver al CRM (pestaña YouTube)</a>
+    </p>
+  </main>
+
+  <script src="/js/staff-mic-check.js?v=20260915-mic-check-a"></script>
+</body>
+</html>
