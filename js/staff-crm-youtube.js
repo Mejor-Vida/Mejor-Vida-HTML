@@ -573,8 +573,9 @@
           return;
         }
         if (file.size > MAX_UPLOAD_BYTES) {
-          if (status) status.textContent = t("yt_file_too_big");
-          showErr(new Error(t("yt_file_too_big")));
+          var tooBig = t("yt_file_too_big", { mb: String(Math.round(file.size / (1024 * 1024))) });
+          if (status) status.textContent = tooBig;
+          showErr(new Error(tooBig));
           return;
         }
         clearErr();
