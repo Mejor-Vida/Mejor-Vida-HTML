@@ -61,6 +61,10 @@ function statusAfterRemoveRecording(current) {
   return hasScript ? "approved" : "empty";
 }
 
+function siblingAudioPath(videoPath) {
+  return String(videoPath || "").replace(/\.[^.]+$/, "") + ".audio.wav";
+}
+
 async function removeRecordingObject(cfg, path) {
   const safe = String(path || "").replace(/^\/+/, "");
   if (!safe) return;
@@ -77,6 +81,49 @@ async function removeRecordingObject(cfg, path) {
     const text = await r.text().catch(() => "");
     throw new Error(String(text || "Could not delete recording").slice(0, 200));
   }
+}
+
+async function signObjectUpload(cfg, objectPath) {
+  const r = await fetch(
+    `${cfg.supabaseUrl}/storage/v1/object/upload/sign/youtube-recordings/${objectPath}`,
+    {
+      method: "POST",
+      headers: {
+        apikey: cfg.serviceKey,
+        Authorization: `Bearer ${cfg.serviceKey}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ expiresIn: 3600 }),
+    }
+  );
+  const data = await r.json().catch(() => ({}));
+  if (!r.ok) {
+    throw new Error(String((data && (data.message || data.error)) || "Upload URL failed").slice(0, 200));
+  }
+  const token = data.token || "";
+  if (!token) throw new Error("Upload URL failed");
+  const base = String(cfg.supabaseUrl || "").replace(/\/$/, "");
+  const raw = String(data.url || data.signedUrl || "");
+  let signedUrl;
+  if (/^https?:\/\//i.test(raw)) signedUrl = raw;
+  else if (raw.indexOf("/storage/v1/") === 0) signedUrl = base + raw;
+  else if (raw.indexOf("/object/") === 0) signedUrl = base + "/storage/v1" + raw;
+  else {
+    signedUrl = `${base}/storage/v1/object/upload/sign/youtube-recordings/${objectPath}?token=${encodeURIComponent(token)}`;
+  }
+  if (signedUrl.indexOf("token=") === -1) {
+    signedUrl += (signedUrl.indexOf("?") === -1 ? "?" : "&") + "token=" + encodeURIComponent(token);
+  }
+  return { path: objectPath, token, signedUrl, bucket: "youtube-recordings" };
+}
+
+async function fetchRecordingObject(cfg, objectPath) {
+  return fetch(`${cfg.supabaseUrl}/storage/v1/object/youtube-recordings/${objectPath}`, {
+    headers: {
+      apikey: cfg.serviceKey,
+      Authorization: `Bearer ${cfg.serviceKey}`,
+    },
+  });
 }
 
 function mergeSeed(page, dbRow) {
@@ -310,41 +357,22 @@ module.exports = async function handler(req, res) {
     }
 
     if (action === "upload-url") {
-      const ext = String(body.ext || "mp4").replace(/[^a-z0-9]/gi, "").slice(0, 5) || "mp4";
-      const objectPath = `${slug}/${Date.now()}.${ext}`;
-      const r = await fetch(
-        `${cfg.supabaseUrl}/storage/v1/object/upload/sign/youtube-recordings/${objectPath}`,
-        {
-          method: "POST",
-          headers: {
-            apikey: cfg.serviceKey,
-            Authorization: `Bearer ${cfg.serviceKey}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ expiresIn: 3600 }),
+      let objectPath = String(body.path || "")
+        .trim()
+        .replace(/^\/+/, "");
+      if (objectPath) {
+        if (recordingPathForSlug(slug, objectPath) !== objectPath) {
+          return json(res, 400, { error: "Invalid path" });
         }
-      );
-      const data = await r.json().catch(() => ({}));
-      if (!r.ok) {
-        return json(res, 500, { error: String((data && (data.message || data.error)) || "Upload URL failed").slice(0, 200) });
+      } else {
+        const ext = String(body.ext || "mp4").replace(/[^a-z0-9]/gi, "").slice(0, 5) || "mp4";
+        objectPath = `${slug}/${Date.now()}.${ext}`;
       }
-      const token = data.token || "";
-      if (!token) {
-        return json(res, 500, { error: "Upload URL failed" });
+      try {
+        return json(res, 200, await signObjectUpload(cfg, objectPath));
+      } catch (e) {
+        return json(res, 500, { error: String(e.message || e).slice(0, 200) });
       }
-      const base = String(cfg.supabaseUrl || "").replace(/\/$/, "");
-      const raw = String(data.url || data.signedUrl || "");
-      let signedUrl;
-      if (/^https?:\/\//i.test(raw)) signedUrl = raw;
-      else if (raw.indexOf("/storage/v1/") === 0) signedUrl = base + raw;
-      else if (raw.indexOf("/object/") === 0) signedUrl = base + "/storage/v1" + raw;
-      else {
-        signedUrl = `${base}/storage/v1/object/upload/sign/youtube-recordings/${objectPath}?token=${encodeURIComponent(token)}`;
-      }
-      if (signedUrl.indexOf("token=") === -1) {
-        signedUrl += (signedUrl.indexOf("?") === -1 ? "?" : "&") + "token=" + encodeURIComponent(token);
-      }
-      return json(res, 200, { path: objectPath, token, signedUrl, bucket: "youtube-recordings" });
     }
 
     if (action === "recording-saved") {
@@ -376,6 +404,7 @@ module.exports = async function handler(req, res) {
       if (objectPath) {
         try {
           await removeRecordingObject(cfg, objectPath);
+          await removeRecordingObject(cfg, siblingAudioPath(objectPath));
         } catch (_) {
           /* still clear the CRM row so a new take can be uploaded */
         }
@@ -407,24 +436,34 @@ module.exports = async function handler(req, res) {
       if (!current.recording_path) return json(res, 400, { error: "Upload a recording first" });
       const spoken = extractSpoken(current.script_es);
       if (!spoken) return json(res, 400, { error: "Save the Spanish script first" });
-      const fileRes = await fetch(
-        `${cfg.supabaseUrl}/storage/v1/object/youtube-recordings/${current.recording_path}`,
-        {
-          headers: {
-            apikey: cfg.serviceKey,
-            Authorization: `Bearer ${cfg.serviceKey}`,
-          },
-        }
-      );
+      const audioPath = siblingAudioPath(current.recording_path);
+      let usedPath = audioPath;
+      let usedMime = "audio/wav";
+      let fileRes = await fetchRecordingObject(cfg, audioPath);
+      if (!fileRes.ok) {
+        usedPath = current.recording_path;
+        usedMime = current.recording_mime || "video/mp4";
+        fileRes = await fetchRecordingObject(cfg, current.recording_path);
+      }
       if (!fileRes.ok) return json(res, 500, { error: "Could not read the recording" });
+      const declared = Number(fileRes.headers.get("content-length") || 0);
+      if (declared > 26 * 1024 * 1024) {
+        return json(res, 400, {
+          error:
+            "This iPhone video is too large for comparison. Re-upload it so we can pull the audio out, or export a smaller movie.",
+        });
+      }
       const buf = Buffer.from(await fileRes.arrayBuffer());
       if (buf.length > 26 * 1024 * 1024) {
-        return json(res, 400, { error: "Recording is over 25 MB. Export a shorter take or compress, then upload again." });
+        return json(res, 400, {
+          error:
+            "This iPhone video is too large for comparison. Re-upload it so we can pull the audio out, or export a smaller movie.",
+        });
       }
       const transcript = await transcribeRecording(
         buf,
-        current.recording_path.split("/").pop() || "recording.mp4",
-        current.recording_mime
+        usedPath.split("/").pop() || "recording.mp4",
+        usedMime
       );
       const cut_plan = await buildCutPlan(spoken, transcript);
       const saved = await upsertRow(cfg, {

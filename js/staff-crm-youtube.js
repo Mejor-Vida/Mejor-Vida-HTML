@@ -14,6 +14,9 @@
     chatBusy: false,
   };
 
+  var MAX_UPLOAD_BYTES = 512 * 1024 * 1024;
+  var WHISPER_MAX_BYTES = 25 * 1024 * 1024;
+
   function t(key, vars) {
     if (window.StaffCrm && window.StaffCrm.t) return window.StaffCrm.t(key, vars);
     if (window.StaffCrmI18n) return window.StaffCrmI18n.t(key, vars);
@@ -22,6 +25,95 @@
 
   function esc(s) {
     return window.StaffCrm ? window.StaffCrm.esc(s) : String(s == null ? "" : s);
+  }
+
+  function clearErr() {
+    var note = document.getElementById("crm-yt-err");
+    if (note) note.remove();
+  }
+
+  function siblingAudioPath(videoPath) {
+    return String(videoPath || "").replace(/\.[^.]+$/, "") + ".audio.wav";
+  }
+
+  function writeWavString(view, offset, str) {
+    for (var i = 0; i < str.length; i++) view.setUint8(offset + i, str.charCodeAt(i));
+  }
+
+  function encodeWavFile(audioBuffer) {
+    var samples = audioBuffer.getChannelData(0);
+    var n = samples.length;
+    var sampleRate = audioBuffer.sampleRate || 16000;
+    var out = new ArrayBuffer(44 + n * 2);
+    var view = new DataView(out);
+    writeWavString(view, 0, "RIFF");
+    view.setUint32(4, 36 + n * 2, true);
+    writeWavString(view, 8, "WAVE");
+    writeWavString(view, 12, "fmt ");
+    view.setUint32(16, 16, true);
+    view.setUint16(20, 1, true);
+    view.setUint16(22, 1, true);
+    view.setUint32(24, sampleRate, true);
+    view.setUint32(28, sampleRate * 2, true);
+    view.setUint16(32, 2, true);
+    view.setUint16(34, 16, true);
+    writeWavString(view, 36, "data");
+    view.setUint32(40, n * 2, true);
+    for (var i = 0; i < n; i++) {
+      var s = Math.max(-1, Math.min(1, samples[i]));
+      view.setInt16(44 + i * 2, s < 0 ? s * 0x8000 : s * 0x7fff, true);
+    }
+    return new File([out], "analysis.wav", { type: "audio/wav" });
+  }
+
+  function extractAnalysisAudio(file) {
+    var AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC || typeof OfflineAudioContext === "undefined") {
+      return Promise.reject(new Error("no audio"));
+    }
+    return file.arrayBuffer().then(function (ab) {
+      var ctx = new AC();
+      var resume = ctx.resume ? ctx.resume() : Promise.resolve();
+      return resume
+        .then(function () {
+          return ctx.decodeAudioData(ab.slice(0));
+        })
+        .then(function (decoded) {
+          var sampleRate = 16000;
+          var length = Math.max(1, Math.ceil(decoded.duration * sampleRate));
+          var offline = new OfflineAudioContext(1, length, sampleRate);
+          var src = offline.createBufferSource();
+          src.buffer = decoded;
+          src.connect(offline.destination);
+          src.start(0);
+          return offline.startRendering();
+        })
+        .then(encodeWavFile)
+        .finally(function () {
+          if (ctx.close) ctx.close();
+        });
+    });
+  }
+
+  function putFile(signedUrl, file, mime, onProgress) {
+    return new Promise(function (resolve, reject) {
+      var xhr = new XMLHttpRequest();
+      xhr.open("PUT", signedUrl);
+      xhr.setRequestHeader("Content-Type", mime || "application/octet-stream");
+      if (xhr.upload && onProgress) {
+        xhr.upload.onprogress = function (e) {
+          if (e.lengthComputable) onProgress(e.loaded / e.total);
+        };
+      }
+      xhr.onload = function () {
+        if (xhr.status >= 200 && xhr.status < 300) resolve();
+        else reject(new Error("Upload failed"));
+      };
+      xhr.onerror = function () {
+        reject(new Error("Upload failed"));
+      };
+      xhr.send(file);
+    });
   }
 
   function api(path, body, opts) {
@@ -167,7 +259,7 @@
       '<p class="crm-yt-hint">' +
       esc(t("yt_upload_hint")) +
       "</p>" +
-      '<input id="crm-yt-file" type="file" accept="video/*,audio/*" />' +
+      '<input id="crm-yt-file" type="file" accept="video/*,audio/*,.mov,.mp4,.m4v,.webm" />' +
       '<div class="crm-yt-toolbar">' +
       '<button type="button" class="crm-btn" id="crm-yt-upload">' +
       esc(t("yt_upload")) +
@@ -480,47 +572,68 @@
           if (status) status.textContent = t("yt_pick_file");
           return;
         }
-        if (file.size > 50 * 1024 * 1024) {
+        if (file.size > MAX_UPLOAD_BYTES) {
           if (status) status.textContent = t("yt_file_too_big");
           showErr(new Error(t("yt_file_too_big")));
           return;
         }
+        clearErr();
         upload.disabled = true;
-        if (status) status.textContent = t("yt_uploading");
-        var ext = (file.name.split(".").pop() || "mp4").toLowerCase();
-        var mime = file.type && file.type.indexOf("video/") === 0 ? file.type : "video/mp4";
-        api("/api/staff/youtube-scripts", { action: "upload-url", slug: state.slug, ext: ext })
-          .then(function (up) {
-            var sb = window.StaffCrm.getSupabase && window.StaffCrm.getSupabase();
-            var put;
-            if (sb && sb.storage && up.token && up.path) {
-              put = sb.storage
-                .from("youtube-recordings")
-                .uploadToSignedUrl(up.path, up.token, file, { contentType: mime, upsert: true })
-                .then(function (out) {
-                  if (out.error) throw new Error(out.error.message || "Upload failed");
-                });
-            } else {
-              put = fetch(up.signedUrl, {
-                method: "PUT",
-                headers: { "Content-Type": mime },
-                body: file,
-              }).then(function (r) {
-                if (!r.ok) throw new Error("Upload failed");
-              });
+        var ext = (file.name.split(".").pop() || "mp4").toLowerCase().replace(/[^a-z0-9]/g, "") || "mp4";
+        var mime =
+          file.type && (file.type.indexOf("video/") === 0 || file.type.indexOf("audio/") === 0)
+            ? file.type
+            : ext === "mov"
+              ? "video/quicktime"
+              : "video/mp4";
+        (async function () {
+          var audioFile = null;
+          if (file.size > WHISPER_MAX_BYTES) {
+            if (status) status.textContent = t("yt_reading_audio");
+            try {
+              audioFile = await extractAnalysisAudio(file);
+              if (!audioFile || audioFile.size > WHISPER_MAX_BYTES) audioFile = null;
+            } catch (e) {
+              audioFile = null;
             }
-            return put.then(function () {
-              return api("/api/staff/youtube-scripts", {
-                action: "recording-saved",
-                slug: state.slug,
-                recording_path: up.path,
-                recording_mime: mime,
-              });
+          }
+          if (status) status.textContent = t("yt_uploading");
+          var up = await api("/api/staff/youtube-scripts", {
+            action: "upload-url",
+            slug: state.slug,
+            ext: ext,
+          });
+          await putFile(up.signedUrl, file, mime, function (pct) {
+            if (status) status.textContent = t("yt_uploading_pct", { pct: String(Math.round(pct * 100)) });
+          });
+          if (audioFile) {
+            if (status) status.textContent = t("yt_uploading_audio");
+            var audioUp = await api("/api/staff/youtube-scripts", {
+              action: "upload-url",
+              slug: state.slug,
+              path: siblingAudioPath(up.path),
+              ext: "wav",
             });
-          })
+            await putFile(audioUp.signedUrl, audioFile, "audio/wav");
+          }
+          var saved = await api("/api/staff/youtube-scripts", {
+            action: "recording-saved",
+            slug: state.slug,
+            recording_path: up.path,
+            recording_mime: mime,
+          });
+          if (!audioFile && file.size > WHISPER_MAX_BYTES) {
+            saved._audioWarn = true;
+          }
+          return saved;
+        })()
           .then(function (data) {
             state.item = data.item;
             render();
+            if (data._audioWarn) {
+              var again = document.getElementById("crm-yt-upload-status");
+              if (again) again.textContent = t("yt_audio_skip");
+            }
           })
           .catch(function (e) {
             var msg = (e && e.message) || String(e);
