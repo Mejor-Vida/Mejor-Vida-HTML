@@ -87,6 +87,23 @@
   margin-left: auto;
 }
 
+.crm-yt-file-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 8px;
+}
+
+.crm-yt-file-row p {
+  margin: 0;
+}
+
+.crm-yt-danger {
+  color: #b91c1c;
+  border-color: #fecaca;
+}
+
 .crm-yt-pane {
   flex: 1;
   min-height: 0;

@@ -43,6 +43,42 @@ async function upsertRow(cfg, payload) {
   return Array.isArray(inserted) ? inserted[0] : inserted;
 }
 
+function recordingPathForSlug(slug, path) {
+  const p = String(path || "")
+    .trim()
+    .replace(/^\/+/, "");
+  if (!p || p.includes("..") || p.includes("\\") || p.length > 240) return "";
+  if (p.indexOf(String(slug) + "/") !== 0) return "";
+  return p;
+}
+
+function statusAfterRemoveRecording(current) {
+  if (current.status === "published") return "published";
+  const hasScript = String(current.script_es || "").trim();
+  if (current.status === "draft" || current.status === "empty") {
+    return hasScript ? "draft" : "empty";
+  }
+  return hasScript ? "approved" : "empty";
+}
+
+async function removeRecordingObject(cfg, path) {
+  const safe = String(path || "").replace(/^\/+/, "");
+  if (!safe) return;
+  const r = await fetch(`${cfg.supabaseUrl}/storage/v1/object/youtube-recordings`, {
+    method: "DELETE",
+    headers: {
+      apikey: cfg.serviceKey,
+      Authorization: `Bearer ${cfg.serviceKey}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ prefixes: [safe] }),
+  });
+  if (!r.ok && r.status !== 404) {
+    const text = await r.text().catch(() => "");
+    throw new Error(String(text || "Could not delete recording").slice(0, 200));
+  }
+}
+
 function mergeSeed(page, dbRow) {
   const seed = seedFromFiles(page.slug);
   const breakdown = (dbRow && dbRow.breakdown) || seed.breakdown || "";
@@ -327,6 +363,39 @@ module.exports = async function handler(req, res) {
         status: "recorded",
         recording_path,
         recording_mime: String(body.recording_mime || "video/mp4"),
+        updated_by: auth.user && auth.user.email,
+        updated_at: new Date().toISOString(),
+      });
+      return json(res, 200, { ok: true, item: mergeSeed(page, saved) });
+    }
+
+    if (action === "remove-recording") {
+      const current = mergeSeed(page, await loadRow(cfg, slug));
+      if (!current.recording_path) return json(res, 400, { error: "No recording on file" });
+      const objectPath = recordingPathForSlug(slug, current.recording_path);
+      if (objectPath) {
+        try {
+          await removeRecordingObject(cfg, objectPath);
+        } catch (_) {
+          /* still clear the CRM row so a new take can be uploaded */
+        }
+      }
+      const saved = await upsertRow(cfg, {
+        slug,
+        title: page.title,
+        group_id: page.group,
+        url_es: page.urlEs,
+        url_en: page.urlEn || "",
+        breakdown: current.breakdown,
+        script_en: current.script_en,
+        script_es: current.script_es,
+        status: statusAfterRemoveRecording(current),
+        recording_path: "",
+        recording_mime: "",
+        transcript: "",
+        cut_plan: null,
+        review_notes: current.review_notes || "",
+        youtube_id: current.youtube_id || "",
         updated_by: auth.user && auth.user.email,
         updated_at: new Date().toISOString(),
       });

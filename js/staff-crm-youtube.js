@@ -153,7 +153,14 @@
 
   function recordPane(item) {
     var hasFile = item.recording_path
-      ? "<p>" + esc(t("yt_recording_on_file")) + " <code>" + esc(item.recording_path) + "</code></p>"
+      ? '<div class="crm-yt-file-row"><p>' +
+        esc(t("yt_recording_on_file")) +
+        " <code>" +
+        esc(item.recording_path) +
+        "</code></p>" +
+        '<button type="button" class="crm-btn secondary crm-yt-danger" id="crm-yt-remove-recording">' +
+        esc(t("yt_remove_recording")) +
+        "</button></div>"
       : "<p>" + esc(t("yt_recording_none")) + "</p>";
     return (
       hasFile +
@@ -523,6 +530,25 @@
           })
           .finally(function () {
             upload.disabled = false;
+          });
+      });
+    }
+    var removeRec = document.getElementById("crm-yt-remove-recording");
+    if (removeRec) {
+      removeRec.addEventListener("click", function () {
+        if (!window.confirm(t("yt_remove_recording_confirm"))) return;
+        removeRec.disabled = true;
+        var status = document.getElementById("crm-yt-upload-status");
+        if (status) status.textContent = t("yt_removing");
+        api("/api/staff/youtube-scripts", { action: "remove-recording", slug: state.slug })
+          .then(function (data) {
+            state.item = data.item;
+            render();
+          })
+          .catch(function (e) {
+            showErr(e);
+            removeRec.disabled = false;
+            if (status) status.textContent = (e && e.message) || String(e);
           });
       });
     }
