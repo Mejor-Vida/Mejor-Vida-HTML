@@ -19,6 +19,16 @@
   var fontSize = 64;
   var opts = {};
   var shownSent = -1;
+  var micStream = null;
+  var audioCtx = null;
+  var analyser = null;
+  var levelRaf = 0;
+  var levelData = null;
+  var peakLevel = 0;
+  var heardAt = 0;
+  var restartTimer = 0;
+  var restartCount = 0;
+  var fatalError = "";
 
   function t(key, vars) {
     if (window.StaffCrm && window.StaffCrm.t) return window.StaffCrm.t(key, vars);
@@ -112,6 +122,106 @@
     return window.SpeechRecognition || window.webkitSpeechRecognition || null;
   }
 
+  function setHeard(msg) {
+    if (!overlay) return;
+    var el = overlay.querySelector("[data-vp='heard']");
+    if (!el) return;
+    el.textContent = msg || "";
+    el.hidden = !msg;
+  }
+
+  /**
+   * Live input meter. Speech recognition captures audio on its own, but it gives
+   * no signal about whether the microphone is actually feeding it. The meter is
+   * the only way Julie can tell "mic is dead" apart from "words aren't matching".
+   */
+  function stopMeter() {
+    if (levelRaf) {
+      cancelAnimationFrame(levelRaf);
+      levelRaf = 0;
+    }
+    if (micStream) {
+      micStream.getTracks().forEach(function (tr) {
+        try { tr.stop(); } catch (e) {}
+      });
+      micStream = null;
+    }
+    if (audioCtx) {
+      try { audioCtx.close(); } catch (e) {}
+      audioCtx = null;
+    }
+    analyser = null;
+    levelData = null;
+    peakLevel = 0;
+    paintLevel(0);
+  }
+
+  function paintLevel(pct) {
+    if (!overlay) return;
+    var bar = overlay.querySelector("[data-vp='level'] i");
+    if (bar) bar.style.width = Math.max(0, Math.min(100, Math.round(pct))) + "%";
+  }
+
+  function tickLevel() {
+    if (!analyser || !levelData) return;
+    analyser.getByteTimeDomainData(levelData);
+    var peak = 0;
+    for (var i = 0; i < levelData.length; i++) {
+      var dev = Math.abs(levelData[i] - 128);
+      if (dev > peak) peak = dev;
+    }
+    // 128 is full scale for 8-bit time-domain data; boost so normal speech fills the bar.
+    var pct = Math.min(100, (peak / 128) * 300);
+    peakLevel = Math.max(peakLevel * 0.9, pct);
+    paintLevel(peakLevel);
+    if (peakLevel > 8) heardAt = Date.now();
+    levelRaf = requestAnimationFrame(tickLevel);
+  }
+
+  function startMeter() {
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) return;
+    navigator.mediaDevices
+      .getUserMedia({ audio: true })
+      .then(function (stream) {
+        micStream = stream;
+        var Ctx = window.AudioContext || window.webkitAudioContext;
+        if (!Ctx) return;
+        audioCtx = new Ctx();
+        var src = audioCtx.createMediaStreamSource(stream);
+        analyser = audioCtx.createAnalyser();
+        analyser.fftSize = 1024;
+        levelData = new Uint8Array(analyser.fftSize);
+        src.connect(analyser);
+        tickLevel();
+      })
+      .catch(function (err) {
+        // Permission problems surface here far more clearly than through
+        // SpeechRecognition's onerror, so report them from this path.
+        var name = (err && err.name) || "";
+        if (name === "NotAllowedError" || name === "SecurityError") {
+          fatalError = "vp_err_blocked";
+        } else if (name === "NotFoundError" || name === "OverconstrainedError") {
+          fatalError = "vp_err_no_mic";
+        } else if (name === "NotReadableError") {
+          fatalError = "vp_err_mic_busy";
+        }
+        if (fatalError) {
+          var key = fatalError;
+          stopRecognition();
+          fatalError = key;
+          labelBar();
+        }
+      });
+  }
+
+  function speechErrorKey(code) {
+    if (code === "not-allowed" || code === "service-not-allowed") return "vp_err_blocked";
+    if (code === "audio-capture") return "vp_err_no_mic";
+    if (code === "network") return "vp_err_network";
+    if (code === "language-not-supported") return "vp_err_lang";
+    return "";
+  }
+
   function stageHtml() {
     return (
       '<div class="mvi-prompter__prev" data-vp="prev"></div>' +
@@ -135,12 +245,15 @@
       '<button type="button" class="mvi-prompter__close" data-vp="close"></button>' +
       '<p class="mvi-prompter__title" data-vp="title"></p>' +
       '<span class="mvi-prompter__status" data-vp="status"></span>' +
+      '<span class="mvi-prompter__level" data-vp="level" aria-hidden="true"><i></i></span>' +
       '<button type="button" class="mvi-prompter__mic" data-vp="mic"></button>' +
       '<label class="mvi-prompter__font">Aa <input data-vp="font" type="range" min="48" max="96" value="64" /></label>' +
       "</div>" +
+      '<p class="mvi-prompter__error" data-vp="error" hidden></p>' +
       '<div class="mvi-prompter__stage" data-vp="stage" tabindex="0">' +
       stageHtml() +
       "</div>" +
+      '<p class="mvi-prompter__heard" data-vp="heard" hidden></p>' +
       '<p class="mvi-prompter__hint" data-vp="hint"></p>';
     document.body.appendChild(overlay);
     overlay.addEventListener("click", function (e) {
@@ -170,8 +283,18 @@
     overlay.querySelector("[data-vp='close']").textContent = t("vp_close");
     overlay.querySelector("[data-vp='mic']").textContent = listening ? t("vp_stop") : t("vp_start_mic");
     overlay.querySelector("[data-vp='hint']").textContent = t("vp_hint");
-    overlay.querySelector("[data-vp='status']").textContent = listening ? t("vp_listening") : t("vp_paused");
+    overlay.querySelector("[data-vp='status']").textContent = fatalError
+      ? t("vp_mic_problem")
+      : listening
+        ? t("vp_listening")
+        : t("vp_paused");
     overlay.querySelector("[data-vp='mic']").classList.toggle("is-on", listening);
+    overlay.querySelector("[data-vp='status']").classList.toggle("is-error", !!fatalError);
+    var errBox = overlay.querySelector("[data-vp='error']");
+    if (errBox) {
+      errBox.textContent = fatalError ? t(fatalError) : "";
+      errBox.hidden = !fatalError;
+    }
   }
 
   function escapeHtml(s) {
@@ -341,7 +464,6 @@
       }
     }
     if (!heard) return;
-    if (ptr < sent.end) ptr = nextSpoken(ptr + 1, sent.end);
     if (ptr >= sent.end) {
       var following = sentences[si + 1];
       index = following ? following.start : ptr;
@@ -357,6 +479,8 @@
     for (var i = event.resultIndex; i < event.results.length; i++) {
       transcript += event.results[i][0].transcript;
     }
+    heardAt = Date.now();
+    setHeard(transcript.trim().slice(-120));
     var tokens = transcript
       .toLowerCase()
       .replace(/[^\w\sñáéíóúü]/g, "")
@@ -371,25 +495,58 @@
   function startRecognition() {
     var Ctor = SpeechCtor();
     if (!Ctor) {
-      overlay.querySelector("[data-vp='status']").textContent = t("vp_no_speech");
+      fatalError = "vp_no_speech";
+      labelBar();
+      return;
+    }
+    if (!window.isSecureContext) {
+      fatalError = "vp_err_insecure";
+      labelBar();
       return;
     }
     stopRecognition();
+    fatalError = "";
+    restartCount = 0;
     recognition = new Ctor();
     recognition.continuous = true;
     recognition.interimResults = true;
     recognition.lang = opts.lang || "es-US";
     recognition.onresult = onResult;
-    recognition.onerror = function () {};
-    recognition.onend = function () {
-      if (wantListen) {
-        try {
-          recognition.start();
-        } catch (e) {}
-      } else {
+    recognition.onerror = function (e) {
+      var code = (e && e.error) || "";
+      // "no-speech" and "aborted" are routine; let onend restart quietly.
+      if (code === "no-speech" || code === "aborted") return;
+      var key = speechErrorKey(code);
+      if (key) {
+        fatalError = key;
+        wantListen = false;
         listening = false;
         labelBar();
       }
+    };
+    recognition.onend = function () {
+      if (!wantListen) {
+        listening = false;
+        labelBar();
+        return;
+      }
+      // Chrome ends the session every so often; restart with a small backoff so a
+      // persistent failure can't spin in a tight loop.
+      restartCount++;
+      if (restartCount > 60) {
+        wantListen = false;
+        listening = false;
+        fatalError = "vp_err_restart";
+        labelBar();
+        return;
+      }
+      clearTimeout(restartTimer);
+      restartTimer = setTimeout(function () {
+        if (!wantListen || !recognition) return;
+        try {
+          recognition.start();
+        } catch (e) {}
+      }, 250);
     };
     wantListen = true;
     listening = true;
@@ -398,20 +555,28 @@
     } catch (e) {
       listening = false;
       wantListen = false;
+      fatalError = "vp_err_restart";
     }
+    startMeter();
     labelBar();
   }
 
   function stopRecognition() {
     wantListen = false;
     listening = false;
+    clearTimeout(restartTimer);
+    restartTimer = 0;
+    restartCount = 0;
     if (recognition) {
       try {
         recognition.onend = null;
+        recognition.onerror = null;
         recognition.stop();
       } catch (e) {}
       recognition = null;
     }
+    stopMeter();
+    setHeard("");
   }
 
   function toggleListen() {
@@ -446,6 +611,8 @@
     lastMatched = "";
     shownSent = -1;
     commandArmed = true;
+    fatalError = "";
+    setHeard("");
     overlay.querySelector("[data-vp='title']").textContent = opts.title || t("vp_title");
     overlay.querySelector("[data-vp='font']").value = String(fontSize);
     overlay.removeAttribute("hidden");
