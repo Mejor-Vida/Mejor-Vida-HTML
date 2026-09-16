@@ -710,9 +710,9 @@ body.crm-body {
 
 .crm-table-clients th.crm-col-stage-num,
 .crm-table-clients td.crm-col-stage-num {
-  width: 56px;
-  min-width: 56px;
-  max-width: 56px;
+  width: 92px;
+  min-width: 92px;
+  max-width: 108px;
   text-align: center;
   padding-left: 4px;
   padding-right: 4px;
@@ -732,6 +732,34 @@ body.crm-body {
   font-weight: 700;
   font-variant-numeric: tabular-nums;
   color: var(--crm-text-muted, #5a6a7a);
+}
+
+.crm-nurture-enroll-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 4px 10px;
+  border: 0;
+  border-radius: 999px;
+  background: #1b4f72;
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.crm-nurture-enroll-btn:hover,
+.crm-nurture-enroll-btn:focus-visible {
+  background: #163b56;
+}
+
+.crm-nurture-enroll-btn:disabled {
+  opacity: 0.65;
+  cursor: wait;
 }
 
 .crm-table-clients th.crm-col-calendar,

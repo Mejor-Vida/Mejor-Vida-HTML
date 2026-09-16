@@ -33,6 +33,7 @@ const { runWeeklyNewsletter } = require("../lib/weekly-newsletter-run");
 async function main() {
   const dryRun = process.argv.includes("--dry-run");
   const researchOnly = process.argv.includes("--research-only");
+  const fromBrief = process.argv.includes("--from-brief");
   const force = process.argv.includes("--force");
   const sendClients = process.argv.includes("--send-clients");
   const resendStaff = process.argv.includes("--resend");
@@ -40,6 +41,7 @@ async function main() {
   const result = await runWeeklyNewsletter({
     dryRun,
     researchOnly,
+    fromBrief,
     force: force || resendStaff || toAdmin,
     sendClients,
     resendStaff,

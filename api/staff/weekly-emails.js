@@ -16,6 +16,7 @@ const {
   buildWeeklyBlogDigestEmailParts,
   extractResearchStoryTeasers,
   sbFetch,
+  weeklyClientGreetingHtml,
 } = require("../../lib/crm-newsletter-send");
 const {
   getWeeklyBlogDigestEmailPreview,
@@ -52,7 +53,7 @@ module.exports = async function handler(req, res) {
       const sample = sampleSpanishContact();
       const html = wrapNewsletterHtml(
         issue.hero_html || "",
-        `<p>Hola equipo,</p>${issue.body_html || ""}${leadEmailCtaRow(false)}`,
+        `${weeklyClientGreetingHtml(false)}${issue.body_html || ""}${leadEmailCtaRow(false)}`,
         sample,
         settings
       );
@@ -102,7 +103,7 @@ module.exports = async function handler(req, res) {
         preview = {
           html: wrapNewsletterHtml(
             parts.heroHtml || "",
-            `<p>Hola equipo,</p>${parts.bodyHtml || ""}${leadEmailCtaRow(false)}`,
+            `${weeklyClientGreetingHtml(false)}${parts.bodyHtml || ""}${leadEmailCtaRow(false)}`,
             sample,
             settings
           ),

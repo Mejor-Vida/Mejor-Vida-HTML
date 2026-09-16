@@ -10,12 +10,10 @@ const { json, serviceConfig, restSelect } = require("./_inbox-lib");
 const {
   loadSettings,
   enrollLead,
-  autoEnrollCrmLead,
   cancelActiveEnrollment,
   fetchLeadContact,
   canManualEnroll,
   resolveManualEnrollStage,
-  resolveAutoEnrollStage,
   enrollmentPipelineNeedsRebuild,
   rebuildEnrollmentPipelineFromCrmEntry,
 } = require("../../lib/crm-nurture-engine");
@@ -154,26 +152,6 @@ async function buildPipelinePayload(cfg, leadId, leadSourceTable, includeStopped
   if (!enrollment && contactId) {
     enrollment = await loadEnrollmentByContact(cfg, contactId, includeStopped);
   }
-  if (
-    (!enrollment || (enrollment.status !== "active" && enrollment.status !== "paused")) &&
-    resolveAutoEnrollStage(pipelineStage)
-  ) {
-    try {
-      await autoEnrollCrmLead(cfg, {
-        leadId,
-        leadSourceTable,
-        stage: pipelineStage,
-        contactId,
-        actor: "pipeline_refresh",
-      });
-    } catch (e) {
-      console.error("[nurture-pipeline] auto-enroll", e && e.message ? e.message : e);
-    }
-    enrollment = await loadEnrollment(cfg, leadId, leadSourceTable, includeStopped);
-    if (!enrollment && contactId) {
-      enrollment = await loadEnrollmentByContact(cfg, contactId, includeStopped);
-    }
-  }
   let tasks = enrollment ? await loadEnrollmentTasks(cfg, enrollment.id) : [];
   if (enrollment && enrollment.status === "active") {
     try {
@@ -288,13 +266,18 @@ module.exports = async function handler(req, res) {
         return json(res, 400, { error: "stage_no_manual_enroll", stage: pipelineStage });
       }
       const contactId = profile.contacts_contact_id || profile.contact_id || null;
+      const backdate =
+        String((req.query && req.query.backdate) || (req.body && req.body.backdate) || "")
+          .trim() !== "0";
       const result = await enrollLead(cfg, {
         leadId,
         leadSourceTable,
         stage: enrollStage,
         contactId,
-        actor: auth.email || "staff",
-        backdateToCrmEntry: true,
+        actor: (auth.user && auth.user.email) || auth.email || "staff",
+        backdateToCrmEntry: backdate,
+        skipIfAlreadyEnrolled: true,
+        skipIfContactEnrolled: true,
         manualEnroll: true,
       });
       if (!result.ok) {

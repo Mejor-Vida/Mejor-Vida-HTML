@@ -488,26 +488,42 @@
 
   function renderNurtureStepCell(L) {
     var num = L.nurture_step_number;
-    if (num == null || num === "") return "—";
-    var total = L.nurture_step_total;
-    var label = L.nurture_step_label || "";
-    var display = total ? String(num) + "/" + String(total) : String(num);
-    var title = label
-      ? total
-        ? t("col_nurture_step_aria", { n: num, total: total, step: label })
-        : t("col_nurture_step_aria_short", { n: num, step: label })
-      : total
-        ? t("col_nurture_step_aria_no_name", { n: num, total: total })
-        : String(num);
-    return (
-      '<span class="crm-stage-num" title="' +
-      esc(title) +
-      '" aria-label="' +
-      esc(title) +
-      '">' +
-      esc(display) +
-      "</span>"
-    );
+    var enrolled = L.nurture_enrolled === true || (num != null && num !== "");
+    if (enrolled) {
+      var total = L.nurture_step_total;
+      var label = L.nurture_step_label || "";
+      var display = total ? String(num) + "/" + String(total) : String(num || "—");
+      var title = label
+        ? total
+          ? t("col_nurture_step_aria", { n: num, total: total, step: label })
+          : t("col_nurture_step_aria_short", { n: num, step: label })
+        : total
+          ? t("col_nurture_step_aria_no_name", { n: num, total: total })
+          : String(num || "");
+      return (
+        '<span class="crm-stage-num" title="' +
+        esc(title) +
+        '" aria-label="' +
+        esc(title) +
+        '">' +
+        esc(display) +
+        "</span>"
+      );
+    }
+    if (L.nurture_can_enroll) {
+      return (
+        '<button type="button" class="crm-nurture-enroll-btn" data-id="' +
+        esc(L.id) +
+        '" data-source-table="' +
+        esc(L.source_table || "") +
+        '" aria-label="' +
+        esc(t("col_nurture_enroll")) +
+        '">' +
+        esc(t("col_nurture_enroll")) +
+        "</button>"
+      );
+    }
+    return "—";
   }
 
   function hasValidEmail(L) {
@@ -1364,6 +1380,54 @@
       });
     }
 
+    async function enrollLeadNurtureFromList(btn) {
+      var id = btn.getAttribute("data-id");
+      var sourceTable = btn.getAttribute("data-source-table") || "";
+      var status = $("crm-clients-status");
+      if (!id || !sourceTable) {
+        if (status) status.textContent = t("col_nurture_enroll_failed");
+        return;
+      }
+      btn.disabled = true;
+      btn.textContent = t("col_nurture_enrolling");
+      try {
+        var qs =
+          "?leadId=" +
+          encodeURIComponent(id) +
+          "&leadSourceTable=" +
+          encodeURIComponent(sourceTable) +
+          "&backdate=0";
+        var data = await authedApi("/api/staff/nurture-pipeline" + qs, null, { method: "POST" });
+        if (!data || !data.enrolled) {
+          throw new Error((data && (data.error || data.reason)) || t("col_nurture_enroll_failed"));
+        }
+        var steps = (data && data.steps) || [];
+        var next = null;
+        for (var i = 0; i < steps.length; i++) {
+          if (steps[i] && steps[i].is_next) {
+            next = steps[i];
+            break;
+          }
+        }
+        if (!next && steps[0]) next = steps[0];
+        upsertLeadListItem({
+          id: id,
+          source_table: sourceTable,
+          nurture_enrolled: !!(data && data.enrolled),
+          nurture_can_enroll: false,
+          nurture_step_number: next && next.stageNumber != null ? next.stageNumber : 1,
+          nurture_step_total: steps.length || null,
+          nurture_step_label: (next && next.name) || "",
+        });
+        if (status) status.textContent = t("col_nurture_enrolled_ok");
+        draw();
+      } catch (e) {
+        btn.disabled = false;
+        btn.textContent = t("col_nurture_enroll");
+        if (status) status.textContent = (e && e.message) || t("col_nurture_enroll_failed");
+      }
+    }
+
     function draw() {
       var tbody = $("crm-clients-tbody");
       var status = $("crm-clients-status");
@@ -1396,6 +1460,8 @@
           return (
             "<tr data-id=\"" +
             esc(L.id) +
+            "\" data-source-table=\"" +
+            esc(L.source_table || "") +
             "\"><td class=\"crm-col-check\"><input type=\"checkbox\" class=\"crm-client-check\" data-id=\"" +
             esc(L.id) +
             "\" aria-label=\"" +
@@ -1439,6 +1505,13 @@
             e.preventDefault();
             link.click();
           }
+        });
+      });
+
+      tbody.querySelectorAll(".crm-nurture-enroll-btn").forEach(function (btn) {
+        btn.addEventListener("click", function (e) {
+          e.stopPropagation();
+          enrollLeadNurtureFromList(btn);
         });
       });
 

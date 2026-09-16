@@ -276,12 +276,24 @@ function buildListItemFromRow(r, canonical) {
     if (canonical.review_request_sent_at) {
       item.review_request_sent_at = String(canonical.review_request_sent_at).trim() || null;
     }
+    if (canonical.archived_at) item.archived_at = canonical.archived_at;
+    if (canonical.status) item.status = canonical.status;
+    if (canonical.outreach_blocked_reason) {
+      item.outreach_blocked_reason = canonical.outreach_blocked_reason;
+    }
   }
   if (String(item.source_table || "") === "contacts" && item.id && !cleanText(item.contact_id)) {
     item.contact_id = String(item.id);
     item.contacts_contact_id = String(item.id);
   }
   item.pipeline_stage = normalizeIcPipelineStage(item.pipeline_stage) || "new";
+  if (
+    item.archived_at ||
+    String(item.status || "").toLowerCase() === "archived" ||
+    String(item.outreach_blocked_reason || "").toLowerCase() === "archived"
+  ) {
+    item.status = "archived";
+  }
   item.display_name = displayName({
     display_name: mergePreferCanonical(r.display_name, canonical && canonical.display_name),
     first_name: item.first_name,
@@ -349,6 +361,11 @@ async function enrichListItemsWithManychatPipeline(cfg, items) {
   return items;
 }
 
+function listItemCanNurtureEnroll(item) {
+  const stage = normalizeIcPipelineStage(item && item.pipeline_stage) || "new";
+  return stage === "new" || stage === "contacted";
+}
+
 async function enrichListItemsWithNurtureStep(cfg, items) {
   if (!Array.isArray(items) || !items.length) return items;
 
@@ -376,6 +393,8 @@ async function enrichListItemsWithNurtureStep(cfg, items) {
   const enrollmentIds = [...enrollmentByKey.values()].map((e) => e.id).filter(Boolean);
   if (!enrollmentIds.length) {
     items.forEach((item) => {
+      item.nurture_enrolled = false;
+      item.nurture_can_enroll = listItemCanNurtureEnroll(item);
       item.nurture_step_number = null;
       item.nurture_step_total = null;
       item.nurture_step_label = null;
@@ -432,6 +451,8 @@ async function enrichListItemsWithNurtureStep(cfg, items) {
     const key = `${item.id}|${item.source_table || "unknown"}`;
     const enrollment = enrollmentByKey.get(key);
     if (!enrollment) {
+      item.nurture_enrolled = false;
+      item.nurture_can_enroll = listItemCanNurtureEnroll(item);
       item.nurture_step_number = null;
       item.nurture_step_total = null;
       item.nurture_step_label = null;
@@ -444,6 +465,8 @@ async function enrichListItemsWithNurtureStep(cfg, items) {
       settings,
       pipelineStage: item.pipeline_stage,
     });
+    item.nurture_enrolled = true;
+    item.nurture_can_enroll = false;
     item.nurture_step_number = summary.nurture_step_number;
     item.nurture_step_total = summary.nurture_step_total;
     item.nurture_step_label = summary.nurture_step_label;
@@ -2758,3 +2781,5 @@ module.exports = async function handler(req, res) {
   res.setHeader("Allow", "GET, POST, PATCH, DELETE");
   return json(res, 405, { error: "Method Not Allowed" });
 };
+
+module.exports.archiveUnifiedLead = archiveUnifiedLead;
