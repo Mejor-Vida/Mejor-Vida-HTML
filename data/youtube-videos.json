@@ -135,7 +135,7 @@
       "category_id": "27",
       "captions_vtt": "data/teaching-videos/seguro-vida-familiares.es.vtt",
       "burned_in_subtitles": false,
-      "upload_date": "2026-09-10T11:00:59Z",
+      "upload_date": "2026-09-10T11:08:41Z",
       "tags": [
         "seguro de vida para familiares",
         "interés asegurable",
@@ -178,6 +178,63 @@
         },
         {
           "t": 311,
+          "label": "Cotización gratis"
+        }
+      ]
+    },
+    {
+      "youtube_id": "_ioLUItm3ek",
+      "slug": "como-pagar-un-funeral",
+      "page_es": "/como-pagar-un-funeral.html",
+      "page_en": "/en/how-to-pay-for-a-funeral.html",
+      "title": "Cómo se paga un funeral (contrato, seguro y gobierno)",
+      "description_lead": "Cómo se paga de verdad un funeral: la cuenta no espera a la herencia, un contrato prepagado y un cheque de seguro de vida no son el mismo dinero, y Medicare más 255 dólares no cubren un funeral con velatorio.",
+      "description_body": "No hay un solo cheque del gobierno que cubra el sepelio. Un funeral prepagado compra lo que el contrato nombra en esa funeraria. Una póliza de vida le paga al beneficiario, y esa persona decide cómo usar el dinero.\n\nMedicare es seguro médico para una persona viva: no paga el funeral. El Seguro Social puede pagar 255 dólares una sola vez, si se cumplen sus reglas y usted lo solicita. En 2023, la National Funeral Directors Association publicó una mediana de 8,300 dólares por un funeral con velatorio y entierro, del lado de la funeraria.",
+      "description_disclaimer": "Esto es educación, no una cotización de una funeraria concreta.",
+      "duration_seconds": 186,
+      "language": "es",
+      "category_id": "27",
+      "captions_vtt": "data/teaching-videos/como-pagar-un-funeral.es.vtt",
+      "burned_in_subtitles": false,
+      "upload_date": "2026-09-11T03:02:11Z",
+      "tags": [
+        "cómo pagar un funeral",
+        "cómo se paga un funeral",
+        "funeral prepagado",
+        "seguro de vida gastos finales",
+        "pago funeral Seguro Social",
+        "Medicare funeral",
+        "gastos finales",
+        "Mejor Vida Seguros"
+      ],
+      "hashtags": [
+        "#ComoPagarUnFuneral",
+        "#GastosFinales",
+        "#SeguroDeVida"
+      ],
+      "chapters": [
+        {
+          "t": 0,
+          "label": "Cómo se paga un funeral"
+        },
+        {
+          "t": 23,
+          "label": "Dos planes que suenan iguales"
+        },
+        {
+          "t": 51,
+          "label": "Contrato prepagado vs seguro"
+        },
+        {
+          "t": 100,
+          "label": "Medicare y 255 dólares"
+        },
+        {
+          "t": 144,
+          "label": "Recapitulación"
+        },
+        {
+          "t": 159,
           "label": "Cotización gratis"
         }
       ]

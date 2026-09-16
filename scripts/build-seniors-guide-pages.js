@@ -60,7 +60,7 @@ const {
 const { copyFeProduct, feProductMain } = require("./final-expense-insurance-content");
 const { copyFuneralCost, funeralCostMain } = require("./funeral-cost-content");
 const { copyPrepaid, prepaidMain } = require("./prepaid-funeral-content");
-const { copyPay, payMain } = require("./pay-funeral-content");
+const { copyPay, payMain, PAY_LESSON } = require("./pay-funeral-content");
 const { copyPlan, planMain } = require("./plan-funeral-content");
 const { copyEstate, estateMain } = require("./estate-planning-content");
 const { quoteRailHtml } = require("./lic-quote-rail");
@@ -469,20 +469,26 @@ function headerFor(lang, page) {
     .trim();
 }
 
-function footerFor(lang) {
+function footerFor(lang, kind) {
+  const lessonJs =
+    kind === "payFuneral"
+      ? lang === "es"
+        ? `<script defer src="js/youtube-lesson-embed.js?v=20260910-pay"></script>\n`
+        : `<script defer src="../js/youtube-lesson-embed.js?v=20260910-pay"></script>\n`
+      : "";
   const extraEs = `<script defer src="bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="js/mvi-funnel-track.js?v=20260702e"></script>
 <div data-api-url="/api/website-chat" id="mvi-assistant-root"></div>
 <script defer src="js/mvi-nav-questions.js?v=20260828-conditions"></script>
 <script defer src="js/website-assistant-widget.js?v=20260813-scroll-top"></script>
-<script>document.getElementById('year') && (document.getElementById('year').textContent = new Date().getFullYear());</script>
+${lessonJs}<script>document.getElementById('year') && (document.getElementById('year').textContent = new Date().getFullYear());</script>
 `;
   const extraEn = `<script defer src="../bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="../js/mvi-funnel-track.js?v=20260702e"></script>
 <div data-api-url="/api/website-chat" id="mvi-assistant-root"></div>
 <script defer src="../js/mvi-nav-questions.js?v=20260828-conditions"></script>
 <script defer src="../js/website-assistant-widget.js?v=20260813-scroll-top"></script>
-<script>document.getElementById('year') && (document.getElementById('year').textContent = new Date().getFullYear());</script>
+${lessonJs}<script>document.getElementById('year') && (document.getElementById('year').textContent = new Date().getFullYear());</script>
 `;
   if (lang === "es") {
     return fs.readFileSync(ES_FOOTER, "utf8").replace(/__PREFIX__/g, "").trim() + "\n" + extraEs;
@@ -1232,7 +1238,15 @@ function headHtml(lang, page, c, kind) {
 <meta content="${escAttr(c.title)}" property="og:title"/>
 <meta content="${escAttr(c.desc)}" property="og:description"/>
 <meta content="${canonical}" property="og:url"/>
-<meta content="${ogImg}" property="og:image"/>
+${
+  kind === "payFuneral"
+    ? `<meta content="https://www.youtube.com/embed/${PAY_LESSON.youtubeId}" property="og:video"/>
+<meta content="text/html" property="og:video:type"/>
+<meta content="1280" property="og:video:width"/>
+<meta content="720" property="og:video:height"/>
+`
+    : ""
+}<meta content="${ogImg}" property="og:image"/>
 <meta content="${isEs ? "Mejor Vida Seguros" : "Mejor Vida Insurance"}" property="og:site_name"/>
 <meta content="${isEs ? "es_US" : "en_US"}" property="og:locale"/>
 <meta content="${isEs ? "en_US" : "es_US"}" property="og:locale:alternate"/>
@@ -1912,7 +1926,7 @@ ${quoteRailHtml({ lang, title: c.quoteTitle, line1: c.quote1, line2: c.quote2 })
 </main>`;
 }
 
-function jsonLd(lang, page, c) {
+function jsonLd(lang, page, c, kind) {
   const isEs = lang === "es";
   const url = isEs
     ? `https://www.mejorvidainsurance.com/${page.esFile}`
@@ -1925,9 +1939,15 @@ function jsonLd(lang, page, c) {
       return `{"@type":"Question","name":"${strip(c["faq" + n + "q"])}","acceptedAnswer":{"@type":"Answer","text":"${strip(c["faq" + n + "a"])}"}}`;
     })
     .join(",\n");
+  const videoNode =
+    kind === "payFuneral"
+      ? `{"@type":"VideoObject","@id":"${url}#video","name":"${strip(PAY_LESSON.titleEs)}","description":"${strip(isEs ? PAY_LESSON.descEs : PAY_LESSON.descEn)}","thumbnailUrl":"https://i.ytimg.com/vi/${PAY_LESSON.youtubeId}/maxresdefault.jpg","uploadDate":"${PAY_LESSON.uploadDate}","duration":"${PAY_LESSON.durationIso}","embedUrl":"https://www.youtube.com/embed/${PAY_LESSON.youtubeId}","contentUrl":"https://www.youtube.com/watch?v=${PAY_LESSON.youtubeId}","inLanguage":"es","isFamilyFriendly":true,"publisher":{"@type":"Organization","name":"Mejor Vida Insurance LLC","url":"${home}","logo":{"@type":"ImageObject","url":"${home}img/opt/logo-spanish2.png"}}},`
+      : "";
+  const pageVideo = kind === "payFuneral" ? `,"video":{"@id":"${url}#video"}` : "";
   return `<script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
-{"@type":"WebPage","name":"${strip(c.h1)}","url":"${url}","inLanguage":"${isEs ? "es-US" : "en-US"}","author":{"@type":"Person","name":"Julie Braunsroth","url":"${home}about-julie.html"},"isPartOf":{"@type":"WebSite","name":"${isEs ? "Mejor Vida Seguros" : "Mejor Vida Insurance"}","url":"${home}"}},
+{"@type":"WebPage","name":"${strip(c.h1)}","url":"${url}","inLanguage":"${isEs ? "es-US" : "en-US"}","author":{"@type":"Person","name":"Julie Braunsroth","url":"${home}about-julie.html"},"isPartOf":{"@type":"WebSite","name":"${isEs ? "Mejor Vida Seguros" : "Mejor Vida Insurance"}","url":"${home}"}${pageVideo}},
+${videoNode}
 {"@type":"FAQPage","mainEntity":[
 ${faqs}
 ]}
@@ -2350,8 +2370,8 @@ function build(kind, lang) {
   const html = `${headHtml(lang, page, c, kind)}
 ${headerFor(lang, page)}
 ${main}
-${jsonLd(lang, page, c)}
-${footerFor(lang)}
+${jsonLd(lang, page, c, kind)}
+${footerFor(lang, kind)}
 ${examRateScripts(lang, kind)}</body>
 </html>
 `;

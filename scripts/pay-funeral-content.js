@@ -3,6 +3,42 @@
 const { quoteRailHtml } = require("./lic-quote-rail");
 const { LINKS, faqsHtml, nextStepBandHtml } = require("./preexisting-conditions-content");
 
+const PAY_LESSON = {
+  youtubeId: "_ioLUItm3ek",
+  titleEs: "Cómo se paga un funeral (contrato, seguro y gobierno)",
+  titleEn: "How a funeral is paid for (prepaid contract, insurance, and government)",
+  durationLabelEs: "3 minutos · en español",
+  durationLabelEn: "3 minutes · in Spanish",
+  durationIso: "PT3M6S",
+  uploadDate: "2026-09-11T03:02:11Z",
+  descEs:
+    "Cómo se paga de verdad un funeral: la cuenta no espera a la herencia, un contrato prepagado y un cheque de seguro de vida no son el mismo dinero, y Medicare más 255 dólares no cubren un funeral con velatorio.",
+  descEn:
+    "This Spanish lesson explains how a funeral bill is paid: a prepaid funeral-home contract and a life-insurance check are different kinds of money, and Medicare plus $255 do not cover a typical visitation funeral.",
+};
+
+function payLessonHtml(isEs) {
+  const id = PAY_LESSON.youtubeId;
+  const title = isEs ? PAY_LESSON.titleEs : PAY_LESSON.titleEn;
+  const heading = isEs ? "Vea esta lección" : "Watch this lesson";
+  const meta = isEs ? PAY_LESSON.durationLabelEs : PAY_LESSON.durationLabelEn;
+  const play = isEs ? "Reproducir video: " : "Play video: ";
+  return `<section class="lic-lesson-video" id="video" aria-labelledby="lesson-video-heading">
+<h2 id="lesson-video-heading">${heading}</h2>
+<p class="lic-lesson-video__meta">${meta}</p>
+<div class="lic-lesson-video__slot">
+<div class="lic-lesson-video__frame" data-youtube-id="${id}" data-youtube-title="${title}" data-youtube-captions="1">
+<button type="button" class="lic-lesson-video__facade" aria-label="${play}${title}">
+<img src="https://i.ytimg.com/vi/${id}/hqdefault.jpg" alt="" width="480" height="360" loading="lazy" decoding="async"/>
+<span class="lic-lesson-video__play" aria-hidden="true"></span>
+</button>
+<noscript><iframe id="mvi-lesson-yt" src="https://www.youtube.com/embed/${id}?rel=0&amp;modestbranding=1&amp;iv_load_policy=3&amp;playsinline=1&amp;cc_load_policy=1" title="${title}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen=""></iframe></noscript>
+</div>
+</div>
+</section>
+`;
+}
+
 function nfdaScaleHtml(c) {
   return `<div class="lic-fun-nfda">
 <div class="lic-fun-nfda__card">
@@ -544,6 +580,7 @@ function payMain(lang, page, c) {
 <div class="lic-layout lic-layout--split lic-layout--clear">
 <div class="lic-main">
 <nav class="lic-toc-bar" aria-label="${isEs ? "En esta página" : "On this page"}">
+<a href="#video">Video</a>
 <a href="#need">${isEs ? "El problema" : "The problem"}</a>
 <a href="#what">${isEs ? "Las vías" : "The paths"}</a>
 <a href="#size">${isEs ? "La cuenta" : "The bill"}</a>
@@ -551,6 +588,7 @@ function payMain(lang, page, c) {
 <a href="#faq">${isEs ? "Preguntas" : "Questions"}</a>
 <a href="#next">${isEs ? "Siguiente" : "Next"}</a>
 </nav>
+${payLessonHtml(isEs)}
 <div class="lic-takeaways">
 <h2>${isEs ? "Tres hechos para empezar" : "Three facts to start with"}</h2>
 <ul>
@@ -674,4 +712,4 @@ ${quoteRailHtml({
 </main>`;
 }
 
-module.exports = { copyPay, payMain };
+module.exports = { copyPay, payMain, PAY_LESSON };
