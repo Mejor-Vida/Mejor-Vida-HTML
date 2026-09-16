@@ -589,7 +589,7 @@
               : "video/mp4";
         (async function () {
           var audioFile = null;
-          if (file.size > WHISPER_MAX_BYTES) {
+          if (file.size > WHISPER_MAX_BYTES && file.size <= 80 * 1024 * 1024) {
             if (status) status.textContent = t("yt_reading_audio");
             try {
               audioFile = await extractAnalysisAudio(file);
