@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 /**
- * Upload a teaching MP4 to the agency YouTube channel.
+ * Upload a teaching MP4 to the agency YouTube channel, then delete the CRM
+ * holding file (youtube-recordings is temporary storage until YouTube).
  *
  *   node scripts/youtube-upload-video.js --file /tmp/video.mp4 --slug funerales-prepagados
  *
@@ -33,6 +34,7 @@ loadEnvFile(path.join(ROOT, ".env.local"));
 
 const { getYoutubeAccessToken } = require("../lib/youtube-api");
 const { loadCatalog, writeCatalog, buildDescription } = require("../lib/youtube-packaging");
+const { purgeCrmRecordingAfterYoutube } = require("../lib/youtube-recording-storage");
 
 function arg(name) {
   const i = process.argv.indexOf("--" + name);
@@ -148,6 +150,11 @@ async function main() {
   if (!video.upload_date) video.upload_date = new Date().toISOString();
   writeCatalog(catalog);
   console.log("Uploaded:", "https://www.youtube.com/watch?v=" + id);
+  try {
+    await purgeCrmRecordingAfterYoutube(slug, id);
+  } catch (e) {
+    console.log("YouTube is live; CRM holding file was not removed:", e && e.message ? e.message : e);
+  }
 }
 
 main().catch((err) => {

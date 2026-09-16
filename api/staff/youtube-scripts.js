@@ -11,6 +11,12 @@ const {
   transcribeRecording,
   buildCutPlan,
 } = require("../../lib/youtube-scripts");
+const {
+  siblingAudioPath,
+  recordingPathForSlug,
+  purgeRecordingFiles,
+  purgeCrmRecordingAfterYoutube,
+} = require("../../lib/youtube-recording-storage");
 
 function statusFromTexts(row) {
   if (row && row.status && row.status !== "empty") return row.status;
@@ -43,15 +49,6 @@ async function upsertRow(cfg, payload) {
   return Array.isArray(inserted) ? inserted[0] : inserted;
 }
 
-function recordingPathForSlug(slug, path) {
-  const p = String(path || "")
-    .trim()
-    .replace(/^\/+/, "");
-  if (!p || p.includes("..") || p.includes("\\") || p.length > 240) return "";
-  if (p.indexOf(String(slug) + "/") !== 0) return "";
-  return p;
-}
-
 function statusAfterRemoveRecording(current) {
   if (current.status === "published") return "published";
   const hasScript = String(current.script_es || "").trim();
@@ -59,28 +56,6 @@ function statusAfterRemoveRecording(current) {
     return hasScript ? "draft" : "empty";
   }
   return hasScript ? "approved" : "empty";
-}
-
-function siblingAudioPath(videoPath) {
-  return String(videoPath || "").replace(/\.[^.]+$/, "") + ".audio.wav";
-}
-
-async function removeRecordingObject(cfg, path) {
-  const safe = String(path || "").replace(/^\/+/, "");
-  if (!safe) return;
-  const r = await fetch(`${cfg.supabaseUrl}/storage/v1/object/youtube-recordings`, {
-    method: "DELETE",
-    headers: {
-      apikey: cfg.serviceKey,
-      Authorization: `Bearer ${cfg.serviceKey}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ prefixes: [safe] }),
-  });
-  if (!r.ok && r.status !== 404) {
-    const text = await r.text().catch(() => "");
-    throw new Error(String(text || "Could not delete recording").slice(0, 200));
-  }
 }
 
 async function signObjectUpload(cfg, objectPath) {
@@ -400,15 +375,7 @@ module.exports = async function handler(req, res) {
     if (action === "remove-recording") {
       const current = mergeSeed(page, await loadRow(cfg, slug));
       if (!current.recording_path) return json(res, 400, { error: "No recording on file" });
-      const objectPath = recordingPathForSlug(slug, current.recording_path);
-      if (objectPath) {
-        try {
-          await removeRecordingObject(cfg, objectPath);
-          await removeRecordingObject(cfg, siblingAudioPath(objectPath));
-        } catch (_) {
-          /* still clear the CRM row so a new take can be uploaded */
-        }
-      }
+      await purgeRecordingFiles(cfg, current.recording_path, slug);
       const saved = await upsertRow(cfg, {
         slug,
         title: page.title,
@@ -510,6 +477,14 @@ module.exports = async function handler(req, res) {
         updated_at: new Date().toISOString(),
       });
       return json(res, 200, { ok: true, item: mergeSeed(page, saved) });
+    }
+
+    if (action === "published") {
+      const youtube_id = String(body.youtube_id || "").trim();
+      if (!youtube_id) return json(res, 400, { error: "youtube_id required" });
+      const result = await purgeCrmRecordingAfterYoutube(slug, youtube_id);
+      const dbRow = await loadRow(cfg, slug);
+      return json(res, 200, { ok: true, item: mergeSeed(page, dbRow || result.item) });
     }
 
     return json(res, 400, { error: "Unknown action" });
