@@ -14,8 +14,10 @@
     chatBusy: false,
   };
 
-  var MAX_UPLOAD_BYTES = 512 * 1024 * 1024;
+  var MAX_UPLOAD_BYTES = 4 * 1024 * 1024 * 1024;
+  var HOLDING_MAX_BYTES = 40 * 1024 * 1024;
   var WHISPER_MAX_BYTES = 25 * 1024 * 1024;
+  var HOLDING_MAX_EDGE = 960;
 
   function t(key, vars) {
     if (window.StaffCrm && window.StaffCrm.t) return window.StaffCrm.t(key, vars);
@@ -92,6 +94,170 @@
         .finally(function () {
           if (ctx.close) ctx.close();
         });
+    });
+  }
+
+  function pickRecorderMime() {
+    var types = [
+      "video/webm;codecs=vp9,opus",
+      "video/webm;codecs=vp8,opus",
+      "video/webm",
+      "video/mp4",
+    ];
+    for (var i = 0; i < types.length; i++) {
+      if (typeof MediaRecorder !== "undefined" && MediaRecorder.isTypeSupported(types[i])) {
+        return types[i];
+      }
+    }
+    return "";
+  }
+
+  function fitHoldingSize(vw, vh) {
+    var w = Math.max(2, vw || 0);
+    var h = Math.max(2, vh || 0);
+    var long = Math.max(w, h);
+    if (long > HOLDING_MAX_EDGE) {
+      var scale = HOLDING_MAX_EDGE / long;
+      w = w * scale;
+      h = h * scale;
+    }
+    w = Math.max(2, Math.round(w / 2) * 2);
+    h = Math.max(2, Math.round(h / 2) * 2);
+    return { w: w, h: h };
+  }
+
+  function holdingBitrate(durationSec) {
+    var budgetBits = 36 * 1024 * 1024 * 8;
+    var audio = 96000;
+    var dur = Math.max(20, Number(durationSec) || 180);
+    return Math.max(400000, Math.min(1500000, Math.floor(budgetBits / dur) - audio));
+  }
+
+  function compressForHolding(file, onProgress) {
+    if (file.size <= HOLDING_MAX_BYTES) return Promise.resolve(file);
+    if (file.type && file.type.indexOf("audio/") === 0) return Promise.resolve(file);
+    var mime = pickRecorderMime();
+    if (!mime) return Promise.reject(new Error("compress"));
+    return new Promise(function (resolve, reject) {
+      var url = URL.createObjectURL(file);
+      var video = document.createElement("video");
+      var canvas = document.createElement("canvas");
+      var rec = null;
+      var stream = null;
+      var done = false;
+      var chunks = [];
+      function fail(err) {
+        if (done) return;
+        done = true;
+        cleanup();
+        reject(err || new Error("compress"));
+      }
+      function cleanup() {
+        try {
+          if (rec && rec.state === "recording") rec.stop();
+        } catch (e) {}
+        if (stream) {
+          stream.getTracks().forEach(function (tr) {
+            try {
+              tr.stop();
+            } catch (e2) {}
+          });
+        }
+        try {
+          video.pause();
+        } catch (e3) {}
+        if (video.parentNode) video.parentNode.removeChild(video);
+        URL.revokeObjectURL(url);
+      }
+      video.playsInline = true;
+      video.setAttribute("playsinline", "");
+      video.preload = "auto";
+      video.muted = false;
+      video.volume = 0;
+      video.controls = false;
+      video.style.cssText = "position:fixed;left:-9999px;top:0;width:4px;height:4px;opacity:0;";
+      document.body.appendChild(video);
+      video.onerror = function () {
+        fail(new Error("compress"));
+      };
+      video.onloadedmetadata = function () {
+        var size = fitHoldingSize(video.videoWidth, video.videoHeight);
+        canvas.width = size.w;
+        canvas.height = size.h;
+        var ctx = canvas.getContext("2d");
+        if (!ctx) return fail(new Error("compress"));
+        var recMime = mime;
+        var draw = function () {
+          if (done) return;
+          try {
+            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+          } catch (e4) {}
+          if (typeof video.requestVideoFrameCallback === "function") {
+            video.requestVideoFrameCallback(function () {
+              draw();
+            });
+          }
+        };
+        video.ontimeupdate = function () {
+          if (onProgress && video.duration) onProgress(video.currentTime / video.duration);
+        };
+        video.onended = function () {
+          try {
+            if (rec && rec.state === "recording") rec.stop();
+          } catch (e5) {
+            fail(new Error("compress"));
+          }
+        };
+        video
+          .play()
+          .then(function () {
+            try {
+              stream = canvas.captureStream(30);
+              var live = video.captureStream ? video.captureStream() : video.mozCaptureStream && video.mozCaptureStream();
+              if (live) {
+                live.getAudioTracks().forEach(function (tr) {
+                  stream.addTrack(tr);
+                });
+              }
+              rec = new MediaRecorder(stream, {
+                mimeType: recMime,
+                videoBitsPerSecond: holdingBitrate(video.duration),
+                audioBitsPerSecond: 96000,
+              });
+            } catch (e) {
+              return fail(new Error("compress"));
+            }
+            rec.ondataavailable = function (ev) {
+              if (ev.data && ev.data.size) chunks.push(ev.data);
+            };
+            rec.onerror = function () {
+              fail(new Error("compress"));
+            };
+            rec.onstop = function () {
+              if (done) return;
+              done = true;
+              cleanup();
+              var blob = new Blob(chunks, { type: recMime.split(";")[0] });
+              var ext = recMime.indexOf("mp4") >= 0 ? "mp4" : "webm";
+              resolve(new File([blob], "holding." + ext, { type: blob.type || recMime.split(";")[0] }));
+            };
+            rec.start(250);
+            if (typeof video.requestVideoFrameCallback === "function") draw();
+            else {
+              var loop = function () {
+                if (done) return;
+                ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+                requestAnimationFrame(loop);
+              };
+              loop();
+            }
+          })
+          .catch(function () {
+            fail(new Error("compress"));
+          });
+      };
+      video.src = url;
+      video.load();
     });
   }
 
@@ -580,21 +746,39 @@
         }
         clearErr();
         upload.disabled = true;
-        var ext = (file.name.split(".").pop() || "mp4").toLowerCase().replace(/[^a-z0-9]/g, "") || "mp4";
-        var mime =
-          file.type && (file.type.indexOf("video/") === 0 || file.type.indexOf("audio/") === 0)
-            ? file.type
-            : ext === "mov"
-              ? "video/quicktime"
-              : "video/mp4";
         (async function () {
+          var holding = file;
+          if (file.size > HOLDING_MAX_BYTES) {
+            if (status) status.textContent = t("yt_compressing", { pct: "0" });
+            try {
+              holding = await compressForHolding(file, function (pct) {
+                if (status) {
+                  status.textContent = t("yt_compressing", {
+                    pct: String(Math.min(99, Math.round(pct * 100))),
+                  });
+                }
+              });
+            } catch (e) {
+              throw new Error(t("yt_compress_failed"));
+            }
+            if (!holding || !holding.size) throw new Error(t("yt_compress_failed"));
+          }
+          var ext = (holding.name.split(".").pop() || "mp4").toLowerCase().replace(/[^a-z0-9]/g, "") || "mp4";
+          var mime =
+            holding.type && (holding.type.indexOf("video/") === 0 || holding.type.indexOf("audio/") === 0)
+              ? holding.type
+              : ext === "webm"
+                ? "video/webm"
+                : ext === "mov"
+                  ? "video/quicktime"
+                  : "video/mp4";
           var audioFile = null;
-          if (file.size > WHISPER_MAX_BYTES && file.size <= 80 * 1024 * 1024) {
+          if (holding.size > WHISPER_MAX_BYTES && holding.size <= 80 * 1024 * 1024) {
             if (status) status.textContent = t("yt_reading_audio");
             try {
-              audioFile = await extractAnalysisAudio(file);
+              audioFile = await extractAnalysisAudio(holding);
               if (!audioFile || audioFile.size > WHISPER_MAX_BYTES) audioFile = null;
-            } catch (e) {
+            } catch (e2) {
               audioFile = null;
             }
           }
@@ -604,7 +788,7 @@
             slug: state.slug,
             ext: ext,
           });
-          await putFile(up.signedUrl, file, mime, function (pct) {
+          await putFile(up.signedUrl, holding, mime, function (pct) {
             if (status) status.textContent = t("yt_uploading_pct", { pct: String(Math.round(pct * 100)) });
           });
           if (audioFile) {
@@ -623,7 +807,7 @@
             recording_path: up.path,
             recording_mime: mime,
           });
-          if (!audioFile && file.size > WHISPER_MAX_BYTES) {
+          if (!audioFile && holding.size > WHISPER_MAX_BYTES) {
             saved._audioWarn = true;
           }
           return saved;

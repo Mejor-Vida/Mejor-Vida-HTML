@@ -24,7 +24,7 @@ Skip unless the user explicitly asks: `index.html`, ad landings, privacy/terms/S
 5. Stop. Revise English until the user says it is good.
 6. **Spanish usted** for Julie on camera (Mejor Vida Seguros, mejorvidaseguros.com, opening “Hola. Soy Julie de Mejor Vida Seguros.”, locked close). Stop for approval.
 7. Copy the spoken Spanish into **Voice Prompter** (mic scrolls the words; commands go stop / go start / go back, or mouse/keyboard). Julie records herself.
-8. Upload the take in the CRM YouTube tab (temporary holding in `youtube-recordings` — not long-term storage). Compare transcript to the finalized script, propose cuts for retakes, present to Julie/Justin.
+8. Upload the take in the CRM YouTube tab. Large iPhone 4K files are shrunk in the browser to a small holding copy in `youtube-recordings` (not long-term storage). Compare transcript to the finalized script, propose cuts for retakes, present to Julie/Justin.
 9. After they approve the cut: optional office background, then upload to the agency YouTube channel and embed on the matching teaching page with `.lic-lesson-video` / `mvi-lesson-yt` (same player as the earlier HeyGen lessons). `youtube-upload-video.js` then deletes the holding files.
 
 Do not film, cut, or spend YouTube/upload steps until the current stage is accepted.
