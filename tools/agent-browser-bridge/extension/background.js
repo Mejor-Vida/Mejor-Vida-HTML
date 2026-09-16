@@ -5,11 +5,18 @@ let armed = false;
 let pollLoop = 0;
 /** Sticky portal/control tab — PDF new tabs must not steal agent commands. */
 let controlTabId = null;
+/**
+ * Explicitly pinned tab. While set, the agent keeps driving this tab even when
+ * you focus another one, so long canvas work (ManyChat, Make.com) survives you
+ * switching tabs. Cleared with unpinTab.
+ */
+let pinnedTabId = null;
 let keepaliveTimer = null;
 
-chrome.storage.local.get(["armed", "controlTabId"]).then((v) => {
+chrome.storage.local.get(["armed", "controlTabId", "pinnedTabId"]).then((v) => {
   armed = Boolean(v.armed);
   controlTabId = typeof v.controlTabId === "number" ? v.controlTabId : null;
+  pinnedTabId = typeof v.pinnedTabId === "number" ? v.pinnedTabId : null;
   updateBadge();
   heartbeat();
   ensurePolling();
@@ -24,6 +31,7 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 // If a PDF/viewer tab becomes active, keep control on the portal tab.
 chrome.tabs.onActivated.addListener(async ({ tabId }) => {
   if (!armed) return;
+  if (pinnedTabId != null) return; // pinned — your tab switching must not steal the agent's target
   try {
     const tab = await chrome.tabs.get(tabId);
     if (isPdfLikeUrl(tab.url || "") || isPdfLikeUrl(tab.pendingUrl || "")) {
@@ -43,6 +51,10 @@ chrome.tabs.onRemoved.addListener((tabId) => {
   if (tabId === controlTabId) {
     controlTabId = null;
     chrome.storage.local.remove("controlTabId");
+  }
+  if (tabId === pinnedTabId) {
+    pinnedTabId = null;
+    chrome.storage.local.remove("pinnedTabId");
   }
 });
 
@@ -141,6 +153,21 @@ function updateBadge() {
 }
 
 async function controlTabMeta() {
+  if (pinnedTabId != null) {
+    try {
+      const tab = await chrome.tabs.get(pinnedTabId);
+      if (tab?.id) {
+        return {
+          tabTitle: tab.title || "",
+          tabUrl: tab.url || tab.pendingUrl || "",
+          tabId: tab.id,
+          pinned: true,
+        };
+      }
+    } catch {
+      pinnedTabId = null;
+    }
+  }
   if (controlTabId != null) {
     try {
       const tab = await chrome.tabs.get(controlTabId);
@@ -252,6 +279,12 @@ async function runCommand(cmd) {
       case "activeTab":
         data = await controlTabMeta();
         break;
+      case "pinTab":
+        data = await pinTab(args);
+        break;
+      case "unpinTab":
+        data = await unpinTab();
+        break;
       case "pageText":
         data = await pageText(args.maxChars || 120000);
         break;
@@ -289,7 +322,37 @@ async function runCommand(cmd) {
   }
 }
 
+/**
+ * Bind the agent to one tab by id, or by matching a substring of its URL/title.
+ * Does not activate the tab — the point is to work in the background while the
+ * user keeps using other tabs.
+ */
+async function pinTab(args = {}) {
+  let tab = null;
+  if (typeof args.tabId === "number") {
+    tab = await chrome.tabs.get(args.tabId);
+  } else if (args.match) {
+    const needle = String(args.match).toLowerCase();
+    const tabs = await chrome.tabs.query({});
+    tab =
+      tabs.find((t) => String(t.url || "").toLowerCase().includes(needle)) ||
+      tabs.find((t) => String(t.title || "").toLowerCase().includes(needle)) ||
+      null;
+  }
+  if (!tab?.id) throw new Error("pin_target_not_found");
+  pinnedTabId = tab.id;
+  await chrome.storage.local.set({ pinnedTabId });
+  return { pinned: true, tabId: tab.id, tabTitle: tab.title || "", tabUrl: tab.url || "" };
+}
+
+async function unpinTab() {
+  pinnedTabId = null;
+  await chrome.storage.local.remove("pinnedTabId");
+  return { pinned: false };
+}
+
 async function refocusControlTab() {
+  if (pinnedTabId != null) return; // pinned work runs in the background; never steal focus
   if (controlTabId == null) return;
   try {
     const tab = await chrome.tabs.get(controlTabId);
@@ -312,6 +375,7 @@ async function listTabs() {
   const tabs = await chrome.tabs.query({});
   return {
     controlTabId,
+    pinnedTabId,
     tabs: tabs.map((t) => ({
       id: t.id,
       title: t.title,
@@ -319,11 +383,21 @@ async function listTabs() {
       active: t.active,
       windowId: t.windowId,
       isControl: t.id === controlTabId,
+      isPinned: t.id === pinnedTabId,
     })),
   };
 }
 
 async function getTargetTabId() {
+  if (pinnedTabId != null) {
+    try {
+      const t = await chrome.tabs.get(pinnedTabId);
+      if (t?.id) return t.id;
+    } catch {
+      pinnedTabId = null;
+      await chrome.storage.local.remove("pinnedTabId");
+    }
+  }
   if (controlTabId != null) {
     try {
       const t = await chrome.tabs.get(controlTabId);
@@ -423,6 +497,29 @@ async function click(selector) {
     if (!el) return { found: false };
     el.scrollIntoView({ block: "center", inline: "center" });
     const opts = { bubbles: true, cancelable: true, view: window };
+    // Patriot import checkboxes ignore synthetic click alone — set checked + change.
+    if (el instanceof HTMLInputElement && el.type === "checkbox") {
+      el.checked = true;
+      el.dispatchEvent(new Event("input", { bubbles: true }));
+      el.dispatchEvent(new Event("change", { bubbles: true }));
+      const jq = window.jQuery || window.$;
+      if (jq) {
+        try {
+          jq(el).prop("checked", true).trigger("change");
+        } catch {
+          /* ignore */
+        }
+      }
+      el.checked = true;
+      const row = el.closest("tr.transaction-row");
+      if (row) row.setAttribute("data-accepted", "true");
+      return {
+        found: true,
+        tag: el.tagName,
+        checked: el.checked,
+        text: (el.name || el.id || "").slice(0, 120),
+      };
+    }
     el.dispatchEvent(new PointerEvent("pointerdown", opts));
     el.dispatchEvent(new MouseEvent("mousedown", opts));
     el.dispatchEvent(new PointerEvent("pointerup", opts));
@@ -503,7 +600,17 @@ async function fill(args) {
 }
 
 async function screenshot() {
-  // captureVisibleTab needs the control tab visible
+  // captureVisibleTab can only grab a visible tab. A pinned background tab is
+  // captured from its own window without disturbing the window you are using.
+  if (pinnedTabId != null) {
+    const tab = await chrome.tabs.get(pinnedTabId);
+    const meta = await controlTabMeta();
+    if (!tab.active) {
+      return { ...meta, dataUrl: null, error: "pinned_tab_not_visible" };
+    }
+    const dataUrl = await chrome.tabs.captureVisibleTab(tab.windowId, { format: "png" });
+    return { ...meta, dataUrl };
+  }
   await refocusControlTab();
   await sleep(150);
   const dataUrl = await chrome.tabs.captureVisibleTab(undefined, {

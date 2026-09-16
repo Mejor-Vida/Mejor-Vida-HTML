@@ -4,6 +4,8 @@
  *
  *   node tools/agent-browser-bridge/bin/mvi-bridge.mjs status
  *   node tools/agent-browser-bridge/bin/mvi-bridge.mjs tabs
+ *   node tools/agent-browser-bridge/bin/mvi-bridge.mjs pin manychat
+ *   node tools/agent-browser-bridge/bin/mvi-bridge.mjs unpin
  *   node tools/agent-browser-bridge/bin/mvi-bridge.mjs active
  *   node tools/agent-browser-bridge/bin/mvi-bridge.mjs text
  *   node tools/agent-browser-bridge/bin/mvi-bridge.mjs links
@@ -63,6 +65,8 @@ function usage() {
 Usage:
   mvi-bridge status
   mvi-bridge tabs
+  mvi-bridge pin <tabId | url-or-title-substring>
+  mvi-bridge unpin
   mvi-bridge active
   mvi-bridge text [--max N]
   mvi-bridge links
@@ -100,6 +104,17 @@ async function main() {
 
     if (cmd === "tabs") {
       console.log(JSON.stringify(await command("tabs"), null, 2));
+      return;
+    }
+    if (cmd === "pin") {
+      const target = positional.join(" ");
+      if (!target) throw new Error("pin requires a tab id or a URL/title substring");
+      const args = /^\d+$/.test(target) ? { tabId: Number(target) } : { match: target };
+      console.log(JSON.stringify(await command("pinTab", args), null, 2));
+      return;
+    }
+    if (cmd === "unpin") {
+      console.log(JSON.stringify(await command("unpinTab"), null, 2));
       return;
     }
     if (cmd === "active") {

@@ -1,11 +1,12 @@
 /**
  * Sticky on-page Bridge ON/OFF control.
  * Survives page clicks (unlike the extension popup).
- * Drag the header to move; collapse to a small chip when it is in the way.
+ * Drag the header to move; X collapses to a small status dot. Click the dot to restore.
  */
 (function () {
   const HOST_ID = "mvi-bridge-sticky-root";
-  if (document.getElementById(HOST_ID)) return;
+  const existing = document.getElementById(HOST_ID);
+  if (existing) existing.remove();
 
   const POS_KEY = "mviBridgeStickyPos";
   const MIN_KEY = "mviBridgeStickyMin";
@@ -65,13 +66,14 @@
       }
       .min-btn {
         appearance: none;
-        width: 26px;
-        height: 26px;
+        width: 32px;
+        height: 32px;
         border: none;
-        border-radius: 6px;
+        border-radius: 8px;
         background: rgba(255,255,255,.16);
         color: #fff;
-        font-size: 16px;
+        font-size: 22px;
+        font-weight: 700;
         line-height: 1;
         cursor: pointer;
         pointer-events: auto;
@@ -121,14 +123,27 @@
       .force-off:active { transform: scale(0.98); }
       .panel.is-min {
         min-width: 0;
-        padding: 6px 8px 6px 10px;
+        width: 34px;
+        height: 34px;
+        padding: 0;
         gap: 0;
+        border-radius: 50%;
+        cursor: pointer;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 16px rgba(0,0,0,.35);
       }
-      .panel.is-min .hint,
-      .panel.is-min .force-off,
-      .panel.is-min .toggle { display: none; }
-      .panel.is-min .state { font-size: 11px; margin-top: 0; }
-      .panel.is-min .min-btn { font-size: 14px; }
+      .panel.is-min .row,
+      .panel.is-min .force-off { display: none; }
+      .panel.is-min::after {
+        content: "";
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: #fec963;
+        box-shadow: 0 0 0 3px rgba(255,255,255,.22);
+      }
+      .panel.is-min.is-on::after { background: #6ee7b7; }
     </style>
     <div class="panel" id="panel">
       <div class="row">
@@ -138,7 +153,7 @@
           <div class="hint">⌥⇧X = force OFF · drag to move</div>
         </div>
         <div class="tools">
-          <button class="min-btn" id="minBtn" type="button" title="Minimize" aria-label="Minimize MVI Bridge">–</button>
+          <button class="min-btn" id="minBtn" type="button" title="Hide to a small circle" aria-label="Hide MVI Bridge to a small circle">×</button>
           <button class="toggle" id="toggle" type="button" aria-pressed="false" aria-label="Toggle MVI Agent Bridge"></button>
         </div>
       </div>
@@ -163,17 +178,52 @@
     panel.classList.toggle("is-on", on);
   }
 
-  function setMinimized(next) {
+  function eventPath(e) {
+    return typeof e.composedPath === "function" ? e.composedPath() : [];
+  }
+
+  function pathHas(e, el) {
+    return eventPath(e).includes(el);
+  }
+
+  function shadowHit(e) {
+    try {
+      return shadow.elementFromPoint(e.clientX, e.clientY);
+    } catch {
+      return null;
+    }
+  }
+
+  function hitControl(e, el) {
+    if (!el) return false;
+    if (pathHas(e, el) || e.target === el) return true;
+    const inner = shadowHit(e);
+    return inner === el || (inner && el.contains(inner));
+  }
+
+  function setMinimized(next, opts) {
+    const fromUi = Boolean(opts && opts.fromUi);
+    const rect = host.getBoundingClientRect();
     minimized = Boolean(next);
     panel.classList.toggle("is-min", minimized);
-    minBtn.textContent = minimized ? "+" : "–";
-    minBtn.title = minimized ? "Expand" : "Minimize";
-    minBtn.setAttribute("aria-label", minimized ? "Expand MVI Bridge" : "Minimize MVI Bridge");
+    panel.title = minimized ? "Show MVI Bridge" : "";
+    minBtn.textContent = "×";
+    minBtn.title = "Hide to a small circle";
+    minBtn.setAttribute("aria-label", "Hide MVI Bridge to a small circle");
     try {
       chrome.storage.local.set({ [MIN_KEY]: minimized });
     } catch {
       /* ignore */
     }
+    requestAnimationFrame(() => {
+      const now = host.getBoundingClientRect();
+      if (fromUi) {
+        applyPos({ left: rect.left + rect.width - now.width, top: rect.top });
+        savePos();
+        return;
+      }
+      applyPos({ left: now.left, top: now.top });
+    });
   }
 
   function clamp(left, top) {
@@ -217,8 +267,7 @@
     let pointerId = null;
 
     function isControl(e) {
-      const path = e.composedPath ? e.composedPath() : [];
-      return path.includes(toggle) || path.includes(forceOff) || path.includes(minBtn);
+      return hitControl(e, toggle) || hitControl(e, forceOff) || hitControl(e, minBtn);
     }
 
     function onMove(e) {
@@ -239,6 +288,7 @@
 
     function onUp(e) {
       if (e.pointerId !== pointerId) return;
+      const shouldRestore = minimized && !moved;
       dragging = false;
       pointerId = null;
       panel.classList.remove("is-dragging");
@@ -246,12 +296,20 @@
       window.removeEventListener("pointerup", onUp, true);
       window.removeEventListener("pointercancel", onUp, true);
       if (moved) savePos();
+      else if (shouldRestore) setMinimized(false, { fromUi: true });
     }
 
     host.addEventListener(
       "pointerdown",
       (e) => {
         if (e.button != null && e.button !== 0) return;
+        if (hitControl(e, minBtn)) {
+          e.preventDefault();
+          e.stopPropagation();
+          e.stopImmediatePropagation();
+          setMinimized(true, { fromUi: true });
+          return;
+        }
         if (isControl(e)) return;
         e.preventDefault();
         const rect = host.getBoundingClientRect();
@@ -318,22 +376,11 @@
     true
   );
 
-  minBtn.addEventListener(
-    "click",
-    (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      e.stopImmediatePropagation();
-      setMinimized(!minimized);
-    },
-    true
-  );
-
   bindDisarm(forceOff);
   bindDrag();
 
   ["mousedown", "mouseup", "pointerdown", "pointerup", "click"].forEach((evt) => {
-    host.addEventListener(evt, (e) => e.stopPropagation(), true);
+    host.addEventListener(evt, (e) => e.stopPropagation());
   });
 
   window.addEventListener("resize", () => {

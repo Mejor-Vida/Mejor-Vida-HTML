@@ -42,7 +42,7 @@ tools/agent-browser-bridge/extension
 
 | Method | How |
 |--------|-----|
-| Sticky panel | Blue **MVI Bridge** box on the page — drag the title to move, **–** to minimize, toggle or red **OFF** to disarm |
+| Sticky panel | Blue **MVI Bridge** box on the page — drag the title to move, **×** to collapse to a small circle, click the circle to restore, toggle or red **OFF** to disarm |
 | Keyboard kill switch | **Alt+Shift+X** = force Bridge OFF immediately (works even if Chrome stole focus from Cursor) |
 | Keyboard toggle | **Alt+Shift+B** = toggle ON/OFF |
 | Extension popup | Still works, but closes when you click the page — sticky panel does not |
@@ -66,6 +66,8 @@ npm run bridge:browser:cmd -- screenshot /tmp/connext.png
 |-----|----------------|
 | `status` | Online + armed? Active tab URL/title |
 | `tabs` | List open tabs |
+| `pin <tabId \| substring>` | Lock the agent to one tab so it keeps working there while you use other tabs |
+| `unpin` | Release the pin; the agent follows your focused tab again |
 | `active` | Active tab meta |
 | `text` | Visible text from the page |
 | `html` | HTML snapshot (truncated) |
@@ -76,6 +78,22 @@ npm run bridge:browser:cmd -- screenshot /tmp/connext.png
 | `fill <css> <value>` | Set an input value (Patriot CSP blocks `eval`) |
 | `screenshot [path]` | PNG of visible tab |
 
+## Working in one tab while you use another
+
+By default the bridge follows whichever tab **you** focus, so switching tabs moves
+the agent with you and long jobs break. Pin the tab instead:
+
+```bash
+npm run bridge:browser:cmd -- pin manychat     # match by URL or title
+npm run bridge:browser:cmd -- tabs             # isPinned marks the target
+npm run bridge:browser:cmd -- unpin            # release when done
+```
+
+While pinned the agent never pulls focus to its tab, so you can keep browsing.
+`screenshot` is the one command that needs the tab visible — Chrome can only
+capture a visible tab — and returns `pinned_tab_not_visible` otherwise. Read the
+page with `text`, `html`, or `eval` instead while working in the background.
+
 ## Troubleshooting
 
 - **status says offline** → run `npm run bridge:browser`
@@ -83,7 +101,7 @@ npm run bridge:browser:cmd -- screenshot /tmp/connext.png
 - **timeout** → keep the portal tab focused; don’t sleep the laptop mid-command
 - **PDF new tabs steal focus** → fixed in extension **v1.1.0** (sticky control tab + refocus after clicks). Reload the extension after pull.
 - **Hard to turn Bridge OFF while agent is clicking** → fixed in extension **v1.2.0**: sticky on-page panel + **Alt+Shift+X** kill switch. Reload the extension after pull.
-- **Sticky panel covers page controls** → **v1.3.0**: drag the **MVI Bridge** title to move it; **–** minimizes to a chip (position is remembered). Reload the extension after pull.
+- **Sticky panel covers page controls** → **v1.3.1**: drag the **MVI Bridge** title to move it; **×** collapses to a small circle (green = ON, yellow = OFF). Click the circle to restore. Reload the extension after pull.
 - After pulling extension code updates: `chrome://extensions` → Reload on MVI Agent Browser Bridge
 - Restart the local server after `server.mjs` changes: stop and re-run `npm run bridge:browser`
 
