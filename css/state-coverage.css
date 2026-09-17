@@ -1216,6 +1216,10 @@
   display: block;
 }
 
+.sc-hero--city .sc-hero-agent-photo img {
+  object-position: center 12%;
+}
+
 .sc-hero-agent-kicker {
   font-size: 0.78rem;
   letter-spacing: 0.04em;

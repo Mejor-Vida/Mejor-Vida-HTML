@@ -13,7 +13,7 @@ const FOOTER_ES = path.join(ROOT, "includes/site-footer-inner.html");
 const FOOTER_EN = path.join(ROOT, "includes/en-site-footer.html");
 
 const NPN = "21695431";
-const CSS_VER = "20260916-omaha-city";
+const CSS_VER = "20260916-omaha-portrait";
 const HERO_VER = "bridge-v1";
 const HERO_W = 1024;
 const HERO_H = 591;
@@ -169,8 +169,8 @@ ${bullets.map((b) => `<li>${b}</li>`).join("\n")}
     <div class="container sc-hero-agentbar-inner">
       <div class="sc-hero-agent-identity">
         <picture class="sc-hero-agent-photo">
-          <source type="image/webp" srcset="${root}img/opt/julie-headshot.webp"/>
-          <img src="${root}img/opt/julie-headshot.png" alt="${esc(julieAlt)}" width="96" height="96" loading="lazy" decoding="async"/>
+          <source type="image/webp" srcset="${root}img/opt/julie-omaha-portrait.webp?v=portrait-v1"/>
+          <img src="${root}img/opt/julie-omaha-portrait.jpg?v=portrait-v1" alt="${esc(julieAlt)}" width="320" height="320" loading="lazy" decoding="async"/>
         </picture>
         <div class="sc-hero-agent-meta">
           <p class="sc-hero-agent-kicker mb-1">${esc(agentLabel)}</p>

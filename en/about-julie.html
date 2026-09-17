@@ -14,7 +14,7 @@
 <meta name="robots" content="noindex, follow"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Meet the founder | Mejor Vida Insurance LLC</title>
-<meta content="Meet the founder, a licensed final expense insurance agent serving Hispanic and English-speaking families." name="description"/>
+<meta content="Meet the founder, a licensed final expense insurance agent serving Hispanic families." name="description"/>
 <link href="../favicon.ico" rel="icon" type="image/x-icon"/>
 <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
 <link href="../css/site-footer.css" rel="stylesheet"/>
@@ -38,6 +38,23 @@
   .julie-bio-text-col {
    padding-left: var(--julie-bio-inline-pad);
    padding-right: var(--julie-bio-inline-pad);
+  }
+  .julie-bio-photo-col {
+   padding-left: var(--julie-bio-inline-pad);
+   padding-right: var(--julie-bio-inline-pad);
+   margin-bottom: 1.5rem;
+  }
+  .julie-bio-presenter {
+   max-width: min(18rem, 78vw);
+   margin-left: auto;
+   margin-right: auto;
+  }
+  .julie-bio-presenter img {
+   width: 100%;
+   height: auto;
+   display: block;
+   border-radius: 0.5rem;
+   box-shadow: 0 4px 18px rgba(26, 54, 93, 0.14);
   }
   .julie-bio-text-col article h2 {
    color: #1a365d;
@@ -87,9 +104,26 @@
   @media (min-width: 992px) {
    .julie-bio-row {
     display: grid;
-    grid-template-columns: 1fr minmax(0, min(42rem, 92vw)) minmax(0, auto);
+    grid-template-columns: minmax(0, auto) minmax(0, min(42rem, 92vw)) minmax(0, auto);
+    justify-content: center;
     align-items: start;
     column-gap: 0;
+   }
+   .julie-bio-photo-col {
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: end;
+    align-self: start;
+    margin-bottom: 0;
+    padding-left: clamp(1rem, 3vw, 2.75rem);
+    padding-right: clamp(0.5rem, 1.75vw, 1.25rem);
+    display: flex;
+    justify-content: flex-end;
+   }
+   .julie-bio-presenter {
+    max-width: clamp(12.5rem, 22vw, 17.5rem);
+    margin-left: 0;
+    margin-right: 0;
    }
    .julie-bio-text-col {
     grid-column: 2;
@@ -149,36 +183,6 @@
     border-radius: 0.35rem;
    }
   }
-  .about-julie-hero { overflow: hidden; }
-  .about-julie-hero-deco {
-   z-index: 0;
-   pointer-events: none;
-   line-height: 0;
-  }
-  .about-julie-hero-map {
-   width: clamp(76px, 20vw, 156px);
-   height: auto;
-   display: block;
-   opacity: 0.96;
-   filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.4));
-  }
-  .about-julie-hero-flag {
-   width: clamp(52px, 8.5vw, 88px);
-   height: auto;
-   display: block;
-   border-radius: 5px;
-   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
-  }
-  .about-julie-hero-flag-wrap {
-   margin-inline-end: clamp(0.4rem, 1.25vw, 0.85rem);
-   padding-right: max(0.25rem, env(safe-area-inset-right, 0px));
-   padding-top: 0.35rem;
-   padding-bottom: 0.35rem;
-  }
-  .about-julie-hero .about-julie-hero-inner {
-   position: relative;
-   z-index: 1;
-  }
   .about-julie-hero-inner-head {
    min-width: 0;
    max-width: 40rem;
@@ -189,14 +193,14 @@
  </style>
 <link href="https://www.mejorvidainsurance.com/en/about-julie.html" rel="canonical"/>
 <meta content="Meet the founder | Mejor Vida Insurance LLC" property="og:title"/>
-<meta content="Meet the founder, a licensed final expense insurance agent serving Hispanic and English-speaking families." property="og:description"/>
+<meta content="Meet the founder, a licensed final expense insurance agent serving Hispanic families." property="og:description"/>
 <meta content="https://www.mejorvidainsurance.com/en/about-julie.html" property="og:url"/>
 <meta content="profile" property="og:type"/>
 <meta content="https://www.mejorvidainsurance.com/img/opt/julie-about.jpg" property="og:image"/>
 <meta content="en_US" property="og:locale"/>
 <meta content="summary_large_image" name="twitter:card"/>
 <meta content="Meet the founder | Mejor Vida Insurance LLC" name="twitter:title"/>
-<meta content="Meet the founder, a licensed final expense insurance agent serving Hispanic and English-speaking families." name="twitter:description"/>
+<meta content="Meet the founder, a licensed final expense insurance agent serving Hispanic families." name="twitter:description"/>
 <meta content="https://www.mejorvidainsurance.com/img/opt/julie-about.jpg" name="twitter:image"/>
 <link rel="preload" as="image" href="../img/opt/logo-english2.webp" type="image/webp" fetchpriority="high"/>
 </head>
@@ -676,15 +680,7 @@
   <a href="../index.html" class="mvi-lang-fab text-decoration-none" title="Ver sitio en español">Español</a>
  </div>
 <main>
-<section class="about-julie-hero py-4 py-md-5 text-white position-relative" style="background:#1a365d;">
-<div class="about-julie-hero-deco position-absolute top-0 start-0 p-2 p-md-3">
-<img alt="" aria-hidden="true" class="about-julie-hero-map" decoding="async" height="200" src="../img/colombia-map.svg" width="200" loading="lazy"/>
-<span class="visually-hidden"><span>Map of Colombia</span></span>
-</div>
-<div class="about-julie-hero-deco about-julie-hero-flag-wrap position-absolute top-50 end-0 translate-middle-y">
-<img alt="" aria-hidden="true" class="about-julie-hero-flag" decoding="async" height="64" src="../img/colombia-flag.svg" width="96" loading="lazy"/>
-<span class="visually-hidden"><span>Flag of Colombia</span></span>
-</div>
+<section class="about-julie-hero py-4 py-md-5 text-white" style="background:#1a365d;">
 <div class="container about-julie-hero-inner px-3">
 <div class="about-julie-hero-inner-head">
 <h1 class="fw-bold mb-2">Meet the founder</h1>
@@ -695,10 +691,18 @@
 <section class="py-5">
 <div class="container-fluid julie-bio-layout px-0">
 <div class="julie-bio-row">
+<div class="julie-bio-photo-col">
+<figure class="julie-bio-presenter mb-0 about-julie-side-sticky">
+<picture>
+<source type="image/webp" srcset="../img/opt/julie-presenter-fullbody.webp?v=20260911q"/>
+<img alt="Julie Braunsroth, founder of Mejor Vida Insurance, standing." class="julie-bio-presenter-img" src="../img/opt/julie-presenter-fullbody.jpg?v=20260911q" width="720" height="1080" decoding="async" fetchpriority="high"/>
+</picture>
+</figure>
+</div>
 <div class="julie-bio-column julie-bio-text-col">
 <article class="text-body-secondary lh-lg text-center">
 <div>
-<p>Julie Braunsroth is the founder of Mejor Vida Insurance LLC and a licensed insurance agent. Born in Bogotá, Colombia, and based in Nebraska, she serves Hispanic and English-speaking families with clear, no-pressure guidance.</p>
+<p>Julie Braunsroth is the founder of Mejor Vida Insurance LLC and a licensed insurance agent. Born in Bogotá, Colombia, and based in Nebraska, she serves Hispanic families with clear, no-pressure guidance.</p>
 <p>Before entering insurance, Julie worked in education and community service — including support for Hispanic mothers, bilingual literacy programs, and leadership with MyBridge Radio Español. That background gave her practical experience explaining important information in Spanish.</p>
 <h2>How she helps families</h2>
 <p>Today, Julie specializes in final expense life insurance. She compares options from multiple carriers, explains coverage and cost in plain language, and helps each family choose a plan that fits their budget and needs.</p>
@@ -706,8 +710,8 @@
 </div>
 </article>
 <p class="mt-4 mb-0 d-flex flex-wrap justify-content-center align-items-center gap-2">
-<a class="btn btn-primary fw-bold" href="quote.html">Get a free quote</a>
-<a class="btn btn-outline-primary fw-bold" href="index.html#about">Back to the short bio on the home page</a>
+<a class="btn btn-primary-gold fw-bold px-4 py-2 rounded-pill" href="quote.html">Get a quote</a>
+<a class="btn btn-primary fw-bold px-4 py-2 rounded-pill" href="schedule-julie.html">Schedule a call</a>
 </p>
 </div>
 <div class="about-nebraska-map-col mt-4 mt-lg-0">
@@ -727,8 +731,8 @@
 <div class="container px-3 text-center">
 <a class="about-julie-promo-link text-decoration-none" href="https://wa.me/14024405438?text=Hola%2C%20quiero%20una%20cotizaci%C3%B3n%20gratis%20de%20seguro%20de%20gastos%20finales." rel="noopener noreferrer" target="_blank">
 <picture>
-<source type="image/webp" srcset="../img/opt/julie-promo-funeral-cost.webp"/>
-<img alt="Julie, your trusted insurance agent: do you know how much a funeral costs today? Let's talk with no pressure." class="about-julie-promo-img" src="../img/opt/julie-promo-funeral-cost.png" width="900" height="900" loading="lazy" decoding="async" />
+<source type="image/webp" srcset="../img/opt/julie-promo-funeral-cost.webp?v=20260911p"/>
+<img alt="Julie, your trusted insurance agent: do you know how much a funeral costs today? Let's talk with no pressure." class="about-julie-promo-img" src="../img/opt/julie-promo-funeral-cost.png?v=20260911p" width="900" height="900" loading="lazy" decoding="async" />
 </picture>
 </a>
 <p class="small text-muted mt-3 mb-0">Tap the ad to message us on WhatsApp (Spanish graphic).</p>
@@ -806,7 +810,7 @@
  "@type": "Person",
  "name": "Julie Braunsroth",
  "jobTitle": "Licensed Insurance Agent",
- "description": "Licensed final expense insurance agent, serving Hispanic and English-speaking families.",
+ "description": "Licensed final expense insurance agent serving Hispanic families.",
  "url": "https://www.mejorvidainsurance.com/en/about-julie.html",
  "image": "https://www.mejorvidainsurance.com/img/opt/julie-about.jpg",
  "worksFor": {
@@ -815,7 +819,7 @@
   "url": "https://www.mejorvidainsurance.com/en/",
   "telephone": "+14024405438"
  },
- "knowsLanguage": ["en", "es"],
+ "knowsLanguage": ["es"],
  "areaServed": [
   { "@type": "State", "name": "Nebraska" },
   { "@type": "State", "name": "Kansas" },

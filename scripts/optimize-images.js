@@ -73,6 +73,7 @@ const JOBS = [
   { src: "img/landing/como-funciona/lp-step-4-proteccion.jpg", maxWidth: 640, maxHeight: 427 },
   // Site-wide
   { src: "img/julie-headshot.png", maxWidth: 160, maxHeight: 160 },
+  { src: "img/julie-omaha-portrait.jpg", maxWidth: 320, maxHeight: 320 },
   { src: "img/julie-community-mothers-children.png", maxWidth: 1200, maxHeight: 700 },
   { src: "img/julie-parents-embrace.png", maxWidth: 681, maxHeight: 1024 },
   { src: "img/landing/legacy-safeguard-family.png", maxWidth: 800, maxHeight: 810 },

@@ -13,20 +13,20 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Conozca a la fundadora — Agente de Seguros de Gastos Finales | Mejor Vida Seguros</title>
-<meta content="Historia de Julie, agente de seguros de gastos finales con licencia. Asesoría clara en español e inglés con Mejor Vida Seguros." name="description"/>
+<meta content="Historia de Julie, agente de seguros de gastos finales con licencia. Asesoría clara con Mejor Vida Seguros." name="description"/>
 <meta content="index, follow" name="robots"/>
 <link href="https://www.mejorvidainsurance.com/about-julie.html" rel="canonical"/>
 <link href="https://www.mejorvidainsurance.com/about-julie.html" hreflang="es-US" rel="alternate"/>
 <link href="https://www.mejorvidainsurance.com/about-julie.html" hreflang="x-default" rel="alternate"/>
 <meta content="profile" property="og:type"/>
 <meta content="Conozca a la fundadora — Agente de Seguros de Gastos Finales | Mejor Vida Seguros" property="og:title"/>
-<meta content="Conozca a la fundadora, agente de seguros de gastos finales con licencia. Sirve a familias hispanas y de habla inglesa con honestidad y calor humano." property="og:description"/>
+<meta content="Conozca a la fundadora, agente de seguros de gastos finales con licencia. Sirve a familias hispanas con honestidad y calor humano." property="og:description"/>
 <meta content="https://www.mejorvidainsurance.com/about-julie.html" property="og:url"/>
 <meta content="https://www.mejorvidainsurance.com/img/opt/julie-about.jpg" property="og:image"/>
 <meta content="es_US" property="og:locale"/>
 <meta content="summary_large_image" name="twitter:card"/>
 <meta content="Conozca a la fundadora — Agente de Seguros de Gastos Finales | Mejor Vida Seguros" name="twitter:title"/>
-<meta content="Conozca a la fundadora, agente de seguros de gastos finales con licencia. Sirve a familias hispanas y de habla inglesa." name="twitter:description"/>
+<meta content="Conozca a la fundadora, agente de seguros de gastos finales con licencia. Sirve a familias hispanas." name="twitter:description"/>
 <meta content="https://www.mejorvidainsurance.com/img/opt/julie-about.jpg" name="twitter:image"/>
 <link href="favicon.ico" rel="icon" type="image/x-icon"/>
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
@@ -51,6 +51,23 @@
   .julie-bio-text-col {
    padding-left: var(--julie-bio-inline-pad);
    padding-right: var(--julie-bio-inline-pad);
+  }
+  .julie-bio-photo-col {
+   padding-left: var(--julie-bio-inline-pad);
+   padding-right: var(--julie-bio-inline-pad);
+   margin-bottom: 1.5rem;
+  }
+  .julie-bio-presenter {
+   max-width: min(18rem, 78vw);
+   margin-left: auto;
+   margin-right: auto;
+  }
+  .julie-bio-presenter img {
+   width: 100%;
+   height: auto;
+   display: block;
+   border-radius: 0.5rem;
+   box-shadow: 0 4px 18px rgba(26, 54, 93, 0.14);
   }
   .julie-bio-text-col article h2 {
    color: #1a365d;
@@ -100,9 +117,26 @@
   @media (min-width: 992px) {
    .julie-bio-row {
     display: grid;
-    grid-template-columns: 1fr minmax(0, min(42rem, 92vw)) minmax(0, auto);
+    grid-template-columns: minmax(0, auto) minmax(0, min(42rem, 92vw)) minmax(0, auto);
+    justify-content: center;
     align-items: start;
     column-gap: 0;
+   }
+   .julie-bio-photo-col {
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: end;
+    align-self: start;
+    margin-bottom: 0;
+    padding-left: clamp(1rem, 3vw, 2.75rem);
+    padding-right: clamp(0.5rem, 1.75vw, 1.25rem);
+    display: flex;
+    justify-content: flex-end;
+   }
+   .julie-bio-presenter {
+    max-width: clamp(12.5rem, 22vw, 17.5rem);
+    margin-left: 0;
+    margin-right: 0;
    }
    .julie-bio-text-col {
     grid-column: 2;
@@ -161,36 +195,6 @@
    .about-nebraska-map-img {
     border-radius: 0.35rem;
    }
-  }
-  .about-julie-hero { overflow: hidden; }
-  .about-julie-hero-deco {
-   z-index: 0;
-   pointer-events: none;
-   line-height: 0;
-  }
-  .about-julie-hero-map {
-   width: clamp(76px, 20vw, 156px);
-   height: auto;
-   display: block;
-   opacity: 0.96;
-   filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.4));
-  }
-  .about-julie-hero-flag {
-   width: clamp(52px, 8.5vw, 88px);
-   height: auto;
-   display: block;
-   border-radius: 5px;
-   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
-  }
-  .about-julie-hero-flag-wrap {
-   margin-inline-end: clamp(0.4rem, 1.25vw, 0.85rem);
-   padding-right: max(0.25rem, env(safe-area-inset-right, 0px));
-   padding-top: 0.35rem;
-   padding-bottom: 0.35rem;
-  }
-  .about-julie-hero .about-julie-hero-inner {
-   position: relative;
-   z-index: 1;
   }
   .about-julie-hero-inner-head {
    min-width: 0;
@@ -678,16 +682,7 @@
   <a href="/en/" class="mvi-lang-fab text-decoration-none" title="View site in English">English</a>
  </div>
 <main>
-<section class="about-julie-hero py-4 py-md-5 text-white position-relative" style="background:#1a365d;">
-<div class="about-julie-hero-deco position-absolute top-0 start-0 p-2 p-md-3">
-<!-- Map: Colombia (orthographic projection) — Wikimedia Commons -->
-<img alt="" aria-hidden="true" class="about-julie-hero-map" decoding="async" height="200" src="img/colombia-map.svg" width="200" loading="lazy"/>
-<span class="visually-hidden"><span>Mapa de Colombia</span></span>
-</div>
-<div class="about-julie-hero-deco about-julie-hero-flag-wrap position-absolute top-50 end-0 translate-middle-y">
-<img alt="" aria-hidden="true" class="about-julie-hero-flag" decoding="async" height="64" src="img/colombia-flag.svg" width="96" loading="lazy"/>
-<span class="visually-hidden"><span>Bandera de Colombia</span></span>
-</div>
+<section class="about-julie-hero py-4 py-md-5 text-white" style="background:#1a365d;">
 <div class="container about-julie-hero-inner px-3">
 <div class="about-julie-hero-inner-head">
 <h1 class="fw-bold mb-2">Conozca a la fundadora</h1>
@@ -700,10 +695,18 @@
 <section class="py-5">
 <div class="container-fluid julie-bio-layout px-0">
 <div class="julie-bio-row">
+<div class="julie-bio-photo-col">
+<figure class="julie-bio-presenter mb-0 about-julie-side-sticky">
+<picture>
+<source type="image/webp" srcset="img/opt/julie-presenter-fullbody.webp?v=20260911q"/>
+<img alt="Julie Braunsroth, fundadora de Mejor Vida Seguros, de pie." class="julie-bio-presenter-img" src="img/opt/julie-presenter-fullbody.jpg?v=20260911q" width="720" height="1080" decoding="async" fetchpriority="high"/>
+</picture>
+</figure>
+</div>
 <div class="julie-bio-column julie-bio-text-col">
 <article class="text-body-secondary lh-lg text-center">
 <div>
-<p>Julie Braunsroth es la fundadora de Mejor Vida Insurance LLC y agente de seguros licenciada. Nacida en Bogotá, Colombia, y radicada en Nebraska, atiende a familias hispanas y de habla inglesa con asesoría clara y sin presión.</p>
+<p>Julie Braunsroth es la fundadora de Mejor Vida Insurance LLC y agente de seguros licenciada. Nacida en Bogotá, Colombia, y radicada en Nebraska, atiende a familias hispanas con asesoría clara y sin presión.</p>
 <p>Antes de dedicarse a los seguros, Julie trabajó en educación y servicio comunitario — incluyendo apoyo a madres hispanas, programas bilingües de alfabetización y liderazgo en MyBridge Radio Español. Esa trayectoria le dio experiencia práctica comunicando información importante en español.</p>
 <h2>Cómo ayuda a las familias</h2>
 <p>Hoy, Julie se especializa en seguro de vida para gastos finales. Compara opciones de varias aseguradoras, explica coberturas y costos en términos sencillos, y ayuda a cada familia a elegir un plan que se ajuste a su presupuesto y a sus necesidades.</p>
@@ -711,10 +714,8 @@
 </div>
 </article>
 <p class="mt-4 mb-0 d-flex flex-wrap justify-content-center align-items-center gap-2">
-<a class="btn btn-primary fw-bold" href="quote.html">Cotización gratuita</a>
-
-<a class="btn btn-outline-primary fw-bold" href="index.html#about">Volver al resumen en inicio</a>
-
+<a class="btn btn-primary-gold fw-bold px-4 py-2 rounded-pill" href="quote.html">Cotización gratuita</a>
+<a class="btn btn-primary fw-bold px-4 py-2 rounded-pill" href="schedule-julie.html">Agendar una llamada</a>
 </p>
 </div>
 <div class="about-nebraska-map-col mt-4 mt-lg-0">
@@ -736,8 +737,8 @@
 <div class="container px-3 text-center">
 <a class="about-julie-promo-link text-decoration-none" href="https://wa.me/14024405438?text=Hola%2C%20quiero%20una%20cotizaci%C3%B3n%20gratis%20de%20seguro%20de%20gastos%20finales." rel="noopener noreferrer" target="_blank">
 <picture>
-<source type="image/webp" srcset="img/opt/julie-promo-funeral-cost.webp"/>
-<img alt="Julie, tu agente de seguros de confianza: ¿sabe cuánto cuesta un funeral hoy? Hablemos sin compromiso." class="about-julie-promo-img" src="img/opt/julie-promo-funeral-cost.png" width="900" height="900" loading="lazy" decoding="async" />
+<source type="image/webp" srcset="img/opt/julie-promo-funeral-cost.webp?v=20260911p"/>
+<img alt="Julie, tu agente de seguros de confianza: ¿sabe cuánto cuesta un funeral hoy? Hablemos sin compromiso." class="about-julie-promo-img" src="img/opt/julie-promo-funeral-cost.png?v=20260911p" width="900" height="900" loading="lazy" decoding="async" />
 </picture>
 </a>
 <p class="small text-muted mt-3 mb-0">Toca el anuncio para escribirnos por WhatsApp.</p>
@@ -816,7 +817,7 @@
  "@type": "Person",
  "name": "Julie Braunsroth",
  "jobTitle": "Licensed Insurance Agent",
- "description": "Agente de seguros de gastos finales con licencia. Sirve a familias hispanas y de habla inglesa en esos estados.",
+ "description": "Agente de seguros de gastos finales con licencia. Sirve a familias hispanas.",
  "url": "https://www.mejorvidainsurance.com/about-julie.html",
  "image": "https://www.mejorvidainsurance.com/img/opt/julie-about.jpg",
  "worksFor": {
@@ -825,7 +826,7 @@
   "url": "https://www.mejorvidainsurance.com/",
   "telephone": "+14024405438"
  },
- "knowsLanguage": ["es", "en"],
+ "knowsLanguage": ["es"],
  "areaServed": [
   { "@type": "State", "name": "Nebraska" },
   { "@type": "State", "name": "Kansas" },

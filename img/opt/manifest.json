@@ -2491,5 +2491,14 @@
     "webp": "img/opt/omaha-bob-kerrey-bridge-800.webp",
     "fallback": "img/opt/omaha-bob-kerrey-bridge-800.jpg",
     "keepPng": false
+  },
+  {
+    "src": "img/julie-omaha-portrait.jpg",
+    "base": "julie-omaha-portrait",
+    "width": 320,
+    "height": 320,
+    "webp": "img/opt/julie-omaha-portrait.webp",
+    "fallback": "img/opt/julie-omaha-portrait.jpg",
+    "keepPng": false
   }
 ]
