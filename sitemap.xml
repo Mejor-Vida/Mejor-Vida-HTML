@@ -4,19 +4,19 @@
 
   <url>
     <loc>https://www.mejorvidainsurance.com/</loc>
-    <lastmod>2026-09-06T15:07:00+00:00</lastmod>
+    <lastmod>2026-09-12T16:17:32+00:00</lastmod>
     <priority>1.00</priority>
   </url>
 
   <url>
     <loc>https://www.mejorvidainsurance.com/about-julie.html</loc>
-    <lastmod>2026-09-06T03:14:06+00:00</lastmod>
+    <lastmod>2026-09-12T02:43:10+00:00</lastmod>
     <priority>0.85</priority>
   </url>
 
   <url>
     <loc>https://www.mejorvidainsurance.com/blog.html</loc>
-    <lastmod>2026-09-14T02:45:00+00:00</lastmod>
+    <lastmod>2026-09-14T02:51:30+00:00</lastmod>
     <priority>0.80</priority>
   </url>
 
@@ -40,7 +40,7 @@
 
   <url>
     <loc>https://www.mejorvidainsurance.com/guias-gastos-finales.html</loc>
-    <lastmod>2026-09-06T15:07:00+00:00</lastmod>
+    <lastmod>2026-09-12T01:19:26+00:00</lastmod>
     <priority>0.85</priority>
   </url>
 
@@ -96,7 +96,7 @@
 
   <url>
     <loc>https://www.mejorvidainsurance.com/como-pagar-un-funeral.html</loc>
-    <lastmod>2026-09-06T03:14:06+00:00</lastmod>
+    <lastmod>2026-09-11T03:11:58+00:00</lastmod>
     <priority>0.88</priority>
     <video:video>
       <video:thumbnail_loc>https://i.ytimg.com/vi/_ioLUItm3ek/maxresdefault.jpg</video:thumbnail_loc>
@@ -571,6 +571,18 @@
   </url>
 
   <url>
+    <loc>https://www.mejorvidainsurance.com/estados/nebraska.html</loc>
+    <lastmod>2026-09-17T03:06:25+00:00</lastmod>
+    <priority>0.84</priority>
+  </url>
+
+  <url>
+    <loc>https://www.mejorvidainsurance.com/estados/nebraska/omaha.html</loc>
+    <lastmod>2026-09-17T03:06:25+00:00</lastmod>
+    <priority>0.86</priority>
+  </url>
+
+  <url>
     <loc>https://www.mejorvidainsurance.com/blog/adultos-jovenes-costo-seguro-termino-2026-08-30.html</loc>
     <lastmod>2026-09-06T03:14:06+00:00</lastmod>
     <priority>0.85</priority>
@@ -710,7 +722,7 @@
 
   <url>
     <loc>https://www.mejorvidainsurance.com/blog/historial-manejo-seguro-vida-2026-09-13.html</loc>
-    <lastmod>2026-09-14T02:45:00+00:00</lastmod>
+    <lastmod>2026-09-14T02:56:33+00:00</lastmod>
     <priority>0.85</priority>
   </url>
 
@@ -776,7 +788,7 @@
 
   <url>
     <loc>https://www.mejorvidainsurance.com/blog/quien-paga-cuentas-seguro-vida-2026-09-13.html</loc>
-    <lastmod>2026-09-14T02:45:00+00:00</lastmod>
+    <lastmod>2026-09-14T02:40:34+00:00</lastmod>
     <priority>0.85</priority>
   </url>
 
@@ -830,7 +842,7 @@
 
   <url>
     <loc>https://www.mejorvidainsurance.com/blog/solicitudes-seguro-vida-agosto-mib-2026-09-13.html</loc>
-    <lastmod>2026-09-14T02:45:00+00:00</lastmod>
+    <lastmod>2026-09-14T02:51:32+00:00</lastmod>
     <priority>0.85</priority>
   </url>
 
@@ -844,6 +856,12 @@
     <loc>https://www.mejorvidainsurance.com/blog/vale-pena-seguro-10000-dolares.html</loc>
     <lastmod>2026-09-06T15:07:00+00:00</lastmod>
     <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://www.mejorvidainsurance.com/blog/weekly-insurance-update-2026-09-13.html</loc>
+    <lastmod>2026-09-14T02:56:33+00:00</lastmod>
+    <priority>0.70</priority>
   </url>
 
   <url>
@@ -873,12 +891,6 @@
   <url>
     <loc>https://www.mejorvidainsurance.com/blog/weekly-insurance-update-2026-07-19.html</loc>
     <lastmod>2026-09-06T03:14:06+00:00</lastmod>
-    <priority>0.70</priority>
-  </url>
-
-  <url>
-    <loc>https://www.mejorvidainsurance.com/blog/weekly-insurance-update-2026-09-13.html</loc>
-    <lastmod>2026-09-14T02:45:00+00:00</lastmod>
     <priority>0.70</priority>
   </url>
 

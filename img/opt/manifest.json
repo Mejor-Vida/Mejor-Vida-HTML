@@ -2473,5 +2473,23 @@
     "webp": "img/opt/blog-generated/weekly-insurance-update-2026-09-13/story-2.webp",
     "fallback": "img/opt/blog-generated/weekly-insurance-update-2026-09-13/story-2.png",
     "keepPng": true
+  },
+  {
+    "src": "img/omaha-bob-kerrey-bridge.jpg",
+    "base": "omaha-bob-kerrey-bridge",
+    "width": 1024,
+    "height": 591,
+    "webp": "img/opt/omaha-bob-kerrey-bridge.webp",
+    "fallback": "img/opt/omaha-bob-kerrey-bridge.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/omaha-bob-kerrey-bridge.jpg",
+    "base": "omaha-bob-kerrey-bridge-800",
+    "width": 800,
+    "height": 462,
+    "webp": "img/opt/omaha-bob-kerrey-bridge-800.webp",
+    "fallback": "img/opt/omaha-bob-kerrey-bridge-800.jpg",
+    "keepPng": false
   }
 ]

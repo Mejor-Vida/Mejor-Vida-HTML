@@ -94,6 +94,8 @@ const STATIC_PAGES = [
   { loc: "/carriers/aetna-infantil.html", priority: "0.78" },
   { loc: "/carriers/corebridge-infantil.html", priority: "0.78" },
   { loc: "/carriers/americo-infantil.html", priority: "0.78" },
+  { loc: "/estados/nebraska.html", priority: "0.84" },
+  { loc: "/estados/nebraska/omaha.html", priority: "0.86" },
 ];
 
 /** Standalone July articles redirect to the weekly digest — omit from sitemap. */

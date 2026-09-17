@@ -1261,6 +1261,133 @@
   color: #fff;
 }
 
+/* City pages: full-bleed local photo instead of state map art */
+.sc-hero--city {
+  --sc-hero-deep: #061428;
+  --sc-hero-mid: #0a2f5c;
+  --sc-hero-map: #061428;
+  min-height: clamp(32rem, 70vh, 42rem);
+  background: #061428;
+}
+
+.sc-hero--city .sc-hero-visual {
+  inset: 0;
+  width: 100%;
+  background: #061428;
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+
+.sc-hero--city .sc-hero-visual img {
+  object-fit: cover;
+  object-position: center 40%;
+}
+
+.sc-hero--city .sc-hero-shade {
+  background: linear-gradient(
+    90deg,
+    rgba(6, 20, 40, 0.94) 0%,
+    rgba(6, 20, 40, 0.82) 28%,
+    rgba(6, 20, 40, 0.48) 52%,
+    rgba(6, 20, 40, 0.2) 74%,
+    rgba(6, 20, 40, 0.08) 100%
+  );
+}
+
+.sc-hero--city .sc-hero-title {
+  white-space: normal;
+}
+
+.sc-hero--city .sc-hero-copy {
+  max-width: min(38rem, 100%);
+}
+
+.sc-hero--city .sc-hero-caption {
+  position: relative;
+  z-index: 3;
+  margin: 0;
+  padding: 0.35rem 0 0.55rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.02em;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.sc-city-crumb {
+  font-size: 0.9rem;
+}
+
+.sc-city-crumb a {
+  color: #1a365d;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.sc-city-crumb a:hover,
+.sc-city-crumb a:focus-visible {
+  text-decoration: underline;
+}
+
+.sc-city-prose {
+  max-width: 46rem;
+}
+
+.sc-city-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sc-city-pills li {
+  background: #e8f1fb;
+  color: #0a2f5c;
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+}
+
+.sc-city-faq details {
+  border-bottom: 1px solid #d9e3ee;
+  padding: 0.85rem 0;
+}
+
+.sc-city-faq summary {
+  cursor: pointer;
+  font-weight: 650;
+  color: #1a365d;
+}
+
+.sc-city-faq details p {
+  margin: 0.6rem 0 0.15rem;
+  color: #4a5568;
+}
+
+@media (max-width: 991.98px) {
+  .sc-hero--city .sc-hero-visual {
+    width: 100%;
+    opacity: 1;
+    inset: 0;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .sc-hero--city .sc-hero-visual {
+    opacity: 1;
+  }
+
+  .sc-hero--city .sc-hero-shade {
+    background: linear-gradient(
+      180deg,
+      rgba(6, 20, 40, 0.45) 0%,
+      rgba(6, 20, 40, 0.78) 42%,
+      rgba(6, 20, 40, 0.94) 100%
+    );
+  }
+}
+
 @media (max-width: 991.98px) {
   .sc-hero {
     min-height: auto;

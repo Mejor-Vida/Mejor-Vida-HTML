@@ -67,6 +67,7 @@
     "build:seniors-over-80": "node scripts/build-seniors-over-80-pages.js",
     "build:seniors-over-85": "node scripts/build-seniors-over-85-pages.js",
     "build:seniors-guides": "node scripts/build-seniors-guide-pages.js",
+    "build:city-pages": "node scripts/render-city-coverage-pages.js",
     "assurity:import-spot": "node scripts/assurity-fe-spot-import.js",
     "assurity:interpolate-tobacco": "node scripts/interpolate-assurity-tobacco-from-anchors.js",
     "optimize:avatars": "node scripts/optimize-chat-avatars.js"

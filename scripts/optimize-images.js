@@ -20,6 +20,8 @@ const JOBS = [
   { src: "img/business-man.png", maxWidth: 681, maxHeight: 1024, keepPng: true },
   { src: "img/nav-life-rana.jpg", maxWidth: 1024, maxHeight: 819, outBase: "nav-life-rana" },
   { src: "img/nav-life-tejo.jpg", maxWidth: 1024, maxHeight: 768, outBase: "nav-life-tejo" },
+  { src: "img/omaha-bob-kerrey-bridge.jpg", maxWidth: 1600, maxHeight: 900 },
+  { src: "img/omaha-bob-kerrey-bridge.jpg", maxWidth: 800, maxHeight: 500, outBase: "omaha-bob-kerrey-bridge-800" },
   { src: "img/hero-couple-embrace.png", maxWidth: 681, maxHeight: 1024 },
   { src: "img/hero-couple-embrace.png", maxWidth: 480, maxHeight: 720, outBase: "hero-couple-embrace-480" },
   { src: "img/hero-couple-embrace-enhanced.png", maxWidth: 1362, maxHeight: 2048, keepPng: true },
