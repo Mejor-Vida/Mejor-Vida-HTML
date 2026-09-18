@@ -2500,5 +2500,23 @@
     "webp": "img/opt/julie-omaha-portrait.webp",
     "fallback": "img/opt/julie-omaha-portrait.jpg",
     "keepPng": false
+  },
+  {
+    "src": "img/lincoln-state-capitol.jpg",
+    "base": "lincoln-state-capitol",
+    "width": 1024,
+    "height": 714,
+    "webp": "img/opt/lincoln-state-capitol.webp",
+    "fallback": "img/opt/lincoln-state-capitol.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/lincoln-state-capitol.jpg",
+    "base": "lincoln-state-capitol-800",
+    "width": 717,
+    "height": 500,
+    "webp": "img/opt/lincoln-state-capitol-800.webp",
+    "fallback": "img/opt/lincoln-state-capitol-800.jpg",
+    "keepPng": false
   }
 ]

@@ -942,10 +942,10 @@ function citiesSection(code, lang) {
     return `<section class="py-5 bg-light border-bottom" id="ciudades">
   <div class="container" style="max-width:60rem;">
     <h2 class="h4 fw-bold mb-3" style="color:#1a365d;">Ciudades en Nebraska</h2>
-    <p class="text-body-secondary mb-3">Guías locales de gastos finales. Omaha es la primera. Lincoln permanece en esta página estatal hasta que merezca la suya.</p>
+    <p class="text-body-secondary mb-3">Guías locales de gastos finales. Omaha y Lincoln tienen página propia.</p>
     <ul class="mb-0">
       <li class="mb-2"><a href="nebraska/omaha.html">Omaha</a> — precios de funerarias, primas ilustrativas y licencia de Nebraska.</li>
-      <li>Lincoln — cubierto en esta guía estatal.</li>
+      <li class="mb-2"><a href="nebraska/lincoln.html">Lincoln</a> — funerarias, cementerios y primas ilustrativas.</li>
     </ul>
   </div>
 </section>
@@ -954,10 +954,10 @@ function citiesSection(code, lang) {
   return `<section class="py-5 bg-light border-bottom" id="cities">
   <div class="container" style="max-width:60rem;">
     <h2 class="h4 fw-bold mb-3" style="color:#1a365d;">Cities in Nebraska</h2>
-    <p class="text-body-secondary mb-3">Local final-expense guides. Omaha is first. Lincoln stays on this state page until it earns its own.</p>
+    <p class="text-body-secondary mb-3">Local final-expense guides. Omaha and Lincoln each have their own page.</p>
     <ul class="mb-0">
       <li class="mb-2"><a href="nebraska/omaha.html">Omaha</a> — funeral-home prices, illustrative premiums, and the Nebraska license.</li>
-      <li>Lincoln — covered on this state guide.</li>
+      <li class="mb-2"><a href="nebraska/lincoln.html">Lincoln</a> — funeral homes, cemeteries, and illustrative premiums.</li>
     </ul>
   </div>
 </section>

@@ -1287,6 +1287,10 @@
   object-position: center 40%;
 }
 
+.sc-hero--lincoln .sc-hero-visual img {
+  object-position: 82% 38%;
+}
+
 .sc-hero--city .sc-hero-shade {
   background: linear-gradient(
     90deg,
@@ -1304,6 +1308,10 @@
 
 .sc-hero--city .sc-hero-copy {
   max-width: min(38rem, 100%);
+}
+
+.sc-lincoln-guide .sc-hero--city .sc-hero-copy {
+  max-width: min(42rem, 100%);
 }
 
 .sc-hero--city .sc-hero-caption {
@@ -1436,4 +1444,435 @@
     font-size: clamp(1.45rem, 6.5vw, 1.85rem);
     white-space: normal;
   }
+}
+
+/* Lincoln guide: comparison chart, resale board, one-page calculator */
+.sc-city-prose--wide {
+  max-width: 72rem;
+}
+
+.sc-gpl-wrap {
+  overflow-x: auto;
+}
+
+.sc-gpl-table {
+  table-layout: auto;
+  min-width: 52rem;
+}
+
+.sc-gpl-table thead th {
+  white-space: normal;
+  line-height: 1.25;
+  min-width: 8.5rem;
+}
+
+.sc-gpl-table thead th:first-child,
+.sc-gpl-table tbody th {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  width: 18rem;
+  min-width: 16rem;
+  background: var(--sc-navy);
+  color: #fff;
+}
+
+.sc-gpl-table tbody th {
+  background: #1a365d;
+  font-weight: 650;
+  text-align: left;
+  padding: 0.7rem;
+}
+
+.sc-gpl-field {
+  display: block;
+  font-size: 0.95rem;
+  line-height: 1.25;
+}
+
+.sc-gpl-field-desc {
+  display: block;
+  margin-top: 0.4rem;
+  font-size: 0.72rem;
+  font-weight: 500;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.82);
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.sc-gpl-table tr.sc-gpl-section th {
+  background: #0a2f5c;
+  color: #fec963;
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  position: static;
+  width: auto;
+  min-width: 0;
+}
+
+.sc-gpl-na {
+  display: block;
+  font-size: 0.75rem;
+  line-height: 1.35;
+  color: #64748b;
+}
+
+.sc-gpl-table tbody td {
+  vertical-align: top;
+}
+
+.sc-gpl-amt {
+  display: block;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: #0a2f5c;
+  white-space: nowrap;
+}
+
+.sc-gpl-cell-note {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
+  line-height: 1.35;
+  color: #4a5568;
+}
+
+.sc-gpl-home {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: 0;
+  opacity: 0.85;
+  margin-top: 0.2rem;
+}
+
+.sc-analysis-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .sc-analysis-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.sc-analysis-card {
+  background: #fff;
+  border: 1px solid #d9e3ee;
+  border-radius: 0.5rem;
+  padding: 1rem 1.1rem;
+}
+
+.sc-analysis-card h3 {
+  font-size: 1.05rem;
+  color: #1a365d;
+  margin: 0 0 0.5rem;
+}
+
+.sc-analysis-card p {
+  margin: 0;
+  color: #4a5568;
+  font-size: 0.95rem;
+}
+
+.sc-resale-boards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin: 0 0 1.25rem;
+}
+
+.sc-resale-board-link {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  background: #0a2f5c;
+  color: #fff !important;
+  text-decoration: none;
+  font-weight: 700;
+  padding: 0.7rem 1rem;
+  border-radius: 0.45rem;
+}
+
+.sc-resale-board-link span {
+  font-weight: 500;
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.sc-resale-board-link:hover,
+.sc-resale-board-link:focus-visible {
+  background: #1a5f9e;
+}
+
+.sc-resale-grid {
+  display: grid;
+  gap: 0.85rem;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .sc-resale-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.sc-resale-card {
+  background: #fff;
+  border: 1px solid #d9e3ee;
+  border-radius: 0.5rem;
+  padding: 0.95rem 1rem;
+}
+
+.sc-resale-meta {
+  font-size: 0.78rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: #64748b;
+}
+
+.sc-resale-title {
+  font-size: 1rem;
+  margin: 0 0 0.35rem;
+}
+
+.sc-resale-title a {
+  color: #1a365d;
+}
+
+.sc-resale-price {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #0a2f5c;
+}
+
+.sc-resale-unit {
+  font-size: 0.85rem;
+  color: #4a5568;
+}
+
+.sc-resale-save {
+  display: inline-block;
+  background: #e8f6ee;
+  color: #166534;
+  font-size: 0.78rem;
+  font-weight: 650;
+  padding: 0.2rem 0.5rem;
+  border-radius: 999px;
+}
+
+.sc-calc-card {
+  background: #fff;
+  border: 1px solid #d6deea;
+  border-radius: 1.15rem;
+  box-shadow: 0 18px 40px rgba(10, 47, 92, 0.08);
+  overflow: hidden;
+}
+
+.sc-calc-section {
+  padding: 1.35rem 1.4rem 1.15rem;
+  border-bottom: 1px solid #e8eef5;
+}
+
+.sc-calc-kicker {
+  margin: 0 0 1rem;
+  font-size: 0.78rem;
+  font-weight: 750;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #c9a227;
+}
+
+.sc-calc-grid {
+  display: grid;
+  gap: 0.95rem 1.15rem;
+  grid-template-columns: 1fr;
+}
+
+.sc-calc-grid--you {
+  align-items: start;
+}
+
+@media (min-width: 768px) {
+  .sc-calc-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .sc-calc-grid--you {
+    grid-template-columns: 0.7fr 1fr 1.15fr;
+  }
+}
+
+.sc-calc-field label,
+.sc-calc-field legend {
+  display: block;
+  font-weight: 650;
+  color: #1a365d;
+  margin-bottom: 0.4rem;
+  font-size: 0.92rem;
+}
+
+.sc-calc-field legend {
+  float: none;
+  width: auto;
+  padding: 0;
+}
+
+.sc-calc-pills {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+}
+
+.sc-calc-pill-row {
+  display: flex;
+  gap: 0.45rem;
+}
+
+.sc-calc-pill {
+  flex: 1;
+  margin: 0;
+  cursor: pointer;
+}
+
+.sc-calc-pill input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.sc-calc-pill span {
+  display: block;
+  text-align: center;
+  border: 1.5px solid #c5d0de;
+  border-radius: 999px;
+  padding: 0.55rem 0.7rem;
+  font-weight: 650;
+  color: #1a365d;
+  background: #f7f9fc;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.sc-calc-pill input:focus-visible + span {
+  outline: 2px solid #1a365d;
+  outline-offset: 2px;
+}
+
+.sc-calc-pill input:checked + span {
+  background: #1a365d;
+  border-color: #1a365d;
+  color: #fff;
+}
+
+.sc-calc-field select,
+.sc-calc-field input[type="number"] {
+  width: 100%;
+  border: 1.5px solid #c5d0de;
+  border-radius: 0.7rem;
+  padding: 0.65rem 0.8rem;
+  font-size: 1rem;
+  color: #1a365d;
+  background: #fff;
+}
+
+.sc-calc-field select:focus,
+.sc-calc-field input[type="number"]:focus {
+  outline: none;
+  border-color: #1a365d;
+  box-shadow: 0 0 0 3px rgba(26, 54, 93, 0.12);
+}
+
+.sc-calc-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  margin: 0;
+  padding: 0.75rem 0.85rem;
+  border: 1.5px solid #d6deea;
+  border-radius: 0.8rem;
+  background: #f7f9fc;
+  font-size: 0.92rem;
+  color: #1a365d;
+  cursor: pointer;
+}
+
+.sc-calc-check input {
+  margin-top: 0.2rem;
+  accent-color: #1a365d;
+}
+
+.sc-calc-results {
+  background: linear-gradient(160deg, #0a2f5c 0%, #163a6b 100%);
+  color: #fff;
+  padding: 1.35rem 1.4rem 1.2rem;
+}
+
+.sc-calc-results dl {
+  display: grid;
+  gap: 0.9rem 1.25rem;
+  grid-template-columns: 1fr;
+  margin: 0 0 0.85rem;
+}
+
+@media (min-width: 576px) {
+  .sc-calc-results dl {
+    grid-template-columns: 1fr 1fr 1.15fr;
+  }
+}
+
+.sc-calc-results dt {
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.72);
+  margin: 0 0 0.25rem;
+}
+
+.sc-calc-results dd {
+  margin: 0;
+  font-size: 1.55rem;
+  font-weight: 750;
+  letter-spacing: -0.02em;
+}
+
+.sc-calc-premium {
+  padding: 0.15rem 0 0.15rem 0.9rem;
+  border-left: 3px solid #fec963;
+}
+
+@media (max-width: 575.98px) {
+  .sc-calc-premium {
+    padding-left: 0;
+    border-left: 0;
+    padding-top: 0.75rem;
+    border-top: 1px solid rgba(254, 201, 99, 0.35);
+  }
+}
+
+.sc-calc-range {
+  margin: 0.2rem 0 0;
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.sc-calc-results p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.85rem;
+}
+
+.sc-calc-actions {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.15rem 1.4rem 1.4rem;
+  background: #f7f9fc;
 }

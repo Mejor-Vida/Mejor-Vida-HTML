@@ -1,0 +1,120 @@
+{
+  "city": "lincoln",
+  "checked": "2026-09-17",
+  "checkedLabelEs": "17 sep. 2026",
+  "checkedLabelEn": "17 Sep 2026",
+  "noteEs": "Anuncios de particulares. No son precios de Mejor Vida Seguros ni la lista oficial del cementerio. La oficina debe transferir la escritura. Revise si el anuncio sigue activo.",
+  "noteEn": "Private-party ads. These are not Mejor Vida Insurance prices or the cemetery’s official list. The office must transfer the deed. Check that the listing is still active.",
+  "boards": [
+    {
+      "id": "eturnal",
+      "name": "Eturnal Rest",
+      "url": "https://eturnalrest.com/cemeteries/ne/lincoln-memorial-cemetery-lincoln/",
+      "labelEs": "Tablero en vivo · Lincoln Memorial Park",
+      "labelEn": "Live board · Lincoln Memorial Park"
+    },
+    {
+      "id": "grave-solutions",
+      "name": "Grave Solutions",
+      "url": "https://www.gravesolutions.com/for-sale/cemetery-properties/nebraska",
+      "labelEs": "Tablero en vivo · Nebraska",
+      "labelEn": "Live board · Nebraska"
+    }
+  ],
+  "cemeterySignals": [
+    {
+      "cemetery": "Lincoln Memorial Park",
+      "citedListLow": 2600,
+      "citedListHigh": 4495,
+      "typical": 4000,
+      "phone": "402-423-1515",
+      "noteEs": "Vendedores citan la lista del cementerio entre $2,600 y $4,495 por espacio. Pida la lista por escrito: 402-423-1515.",
+      "noteEn": "Sellers cite the cemetery list between $2,600 and $4,495 per space. Ask for it in writing: 402-423-1515."
+    },
+    {
+      "cemetery": "Wyuka",
+      "citedListLow": null,
+      "citedListHigh": null,
+      "typical": null,
+      "phone": "402-474-3600",
+      "noteEs": "No publican el lote en la web. Un anuncio de dos espacios a $3,600 ya aparece vendido. Llame: 402-474-3600.",
+      "noteEn": "They do not publish plot prices online. A two-space ad at $3,600 is already marked sold. Call: 402-474-3600."
+    },
+    {
+      "cemetery": "Calvary Catholic Cemetery",
+      "citedListLow": null,
+      "citedListHigh": null,
+      "typical": null,
+      "phone": "402-476-8787",
+      "noteEs": "Cementerio diocesano. Lotes, nichos y mausoleo; pida mapa y precios: 402-476-8787.",
+      "noteEn": "Diocesan cemetery. Plots, niches, and mausoleum space; ask for a map and prices: 402-476-8787."
+    }
+  ],
+  "listings": [
+    {
+      "id": "cb-004059",
+      "status": "listed",
+      "cemetery": "Lincoln Memorial Park",
+      "spaces": 1,
+      "asking": 700,
+      "obo": true,
+      "transferFee": null,
+      "citedListEach": 2975,
+      "url": "https://eturnalrest.com/products/grave-for-sale-lincoln-memorial-cemetery-lincoln-cb-004059",
+      "titleEs": "Eturnal Rest · Sec. N, lote 463, espacio 3",
+      "titleEn": "Eturnal Rest · Sec. N, lot 463, space 3"
+    },
+    {
+      "id": "cb-004051",
+      "status": "listed",
+      "cemetery": "Lincoln Memorial Park",
+      "spaces": 2,
+      "asking": 1795,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": 2600,
+      "url": "https://eturnalrest.com/products/grave-for-sale-lincoln-memorial-cemetery-lincoln-cb-004051",
+      "titleEs": "Eturnal Rest · Sec. U, lote 374, espacios 5 y 6",
+      "titleEn": "Eturnal Rest · Sec. U, lot 374, spaces 5 and 6"
+    },
+    {
+      "id": "cb-004045",
+      "status": "listed",
+      "cemetery": "Lincoln Memorial Park",
+      "spaces": 1,
+      "asking": 2250,
+      "obo": false,
+      "transferFee": 495,
+      "citedListEach": 4495,
+      "url": "https://eturnalrest.com/cemeteries/ne/lincoln-memorial-cemetery-lincoln/",
+      "titleEs": "Eturnal Rest · Sec. O, lote 147, espacio 6",
+      "titleEn": "Eturnal Rest · Sec. O, lot 147, space 6"
+    },
+    {
+      "id": "cb-004057",
+      "status": "listed",
+      "cemetery": "Lincoln Memorial Park",
+      "spaces": 2,
+      "asking": 4000,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": 4495,
+      "url": "https://eturnalrest.com/products/grave-for-sale-lincoln-memorial-cemetery-lincoln-cb-004057",
+      "titleEs": "Eturnal Rest · Sec. P, lote 11, espacios 8 y 9",
+      "titleEn": "Eturnal Rest · Sec. P, lot 11, spaces 8 and 9"
+    },
+    {
+      "id": "cb-004048",
+      "status": "listed",
+      "cemetery": "Lincoln Memorial Park",
+      "spaces": 4,
+      "asking": 10000,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": 5000,
+      "url": "https://eturnalrest.com/products/grave-for-sale-lincoln-memorial-cemetery-lincoln-cb-004048",
+      "titleEs": "Eturnal Rest · Sec. P, cuatro espacios",
+      "titleEn": "Eturnal Rest · Sec. P, four spaces"
+    }
+  ]
+}
