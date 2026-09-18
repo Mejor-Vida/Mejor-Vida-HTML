@@ -1,11 +1,14 @@
 #!/usr/bin/env node
 /**
- * Bilingual city final-expense pages (Nebraska: Omaha, Lincoln).
+ * Bilingual city final-expense pages.
+ * Lincoln layout is canonical (scripts/city-guides/{slug}.js + city-guide-html.js).
+ * Omaha stays layout: "classic" until it is rebuilt to the same format.
  * Usage: node scripts/render-city-coverage-pages.js
  */
 const fs = require("fs");
 const path = require("path");
-const { guideMain } = require("./lincoln-guide-html");
+const { guideMain } = require("./city-guide-html");
+const lincolnCity = require("./city-guides/lincoln");
 
 const ROOT = path.join(__dirname, "..");
 const HEADER_ES = path.join(ROOT, "includes/site-header-inner.html");
@@ -14,7 +17,7 @@ const FOOTER_ES = path.join(ROOT, "includes/site-footer-inner.html");
 const FOOTER_EN = path.join(ROOT, "includes/en-site-footer.html");
 
 const NPN = "21695431";
-const CSS_VER = "20260917-lincoln-calc2";
+const CSS_VER = "20260917-city-guide1";
 
 const LICENSE = {
   NE: {
@@ -28,6 +31,7 @@ const LICENSE = {
 const CITIES = [
   {
     slug: "omaha",
+    layout: "classic",
     nameEs: "Omaha",
     nameEn: "Omaha",
     stateSlug: "nebraska",
@@ -132,240 +136,7 @@ const CITIES = [
       a: "A prepaid plan is tied to one funeral home and may lock that home’s service price. Final expense insurance pays cash to your beneficiary. They can use it at Chapel of Memories, another home, or for other final bills.",
     },
   },
-  {
-    slug: "lincoln",
-    layout: "guide",
-    hideBasedIn: true,
-    nameEs: "Lincoln",
-    nameEn: "Lincoln",
-    stateSlug: "nebraska",
-    stateNameEs: "Nebraska",
-    stateNameEn: "Nebraska",
-    stateCode: "NE",
-    heroFile: "lincoln-state-capitol",
-    heroCaptionEs: "Capitolio de Nebraska, Lincoln",
-    heroCaptionEn: "Nebraska State Capitol, Lincoln",
-    heroClass: "sc-hero--lincoln",
-    heroW: 1024,
-    heroH: 714,
-    heroVer: "capitol-v1",
-    titleEs: "Seguro de gastos finales en Lincoln | Mejor Vida Seguros",
-    titleEn: "Final Expense Insurance in Lincoln | Mejor Vida Insurance",
-    descEs:
-      "Qué es el seguro de gastos finales en Lincoln, listas de funerarias lado a lado, lotes y reventa, y una calculadora de cobertura. Licencia de Nebraska, NPN #21695431.",
-    descEn:
-      "What final expense insurance is in Lincoln, side-by-side funeral-home lists, plots and resale, and a coverage calculator. Nebraska license, NPN #21695431.",
-    ctaSubEs:
-      "Abajo: qué es este seguro, las listas de funerarias, el lote aparte, y una calculadora de cobertura.",
-    ctaSubEn:
-      "Below: what this insurance is, funeral-home price lists, the plot as a separate bill, and a coverage calculator.",
-    bulletsEs: [
-      `Qué es el seguro de gastos finales y cómo se usa para el funeral.`,
-      `Una tabla de paquetes de funerarias en Lincoln, del más económico al más caro.`,
-      `Por qué el lote no entra en la lista de precios, y anuncios de reventa más baratos.`,
-      `Una calculadora para estimar el funeral, la cobertura y la prima mensual.`,
-    ],
-    bulletsEn: [
-      `What final expense insurance is, and how it pays for a funeral.`,
-      `A Lincoln funeral-home package table, from the least expensive to the most expensive.`,
-      `Why the burial plot is not on the funeral price list, plus lower-cost resale ads.`,
-      `A calculator for funeral cost, coverage, and a monthly premium.`,
-    ],
-    funeralIntroEs:
-      "No publicamos un “promedio de Lincoln” inventado. Estas cifras salen de listas generales de precios (GPL) y de paquetes publicados. Pida siempre la GPL a la funeraria. El lote, la bóveda y la lápida casi nunca van incluidos.",
-    funeralIntroEn:
-      "We do not invent an “average funeral in Lincoln.” These figures come from published General Price Lists (GPL) and packages. Always ask the home for its GPL. The cemetery plot, vault, and marker are almost never included.",
-    funeralRowsEs: [
-      {
-        source:
-          '<a href="https://www.lincolnfh.com/" rel="noopener" target="_blank">Lincoln Memorial Funeral Home</a><br/><span class="small text-body-secondary">6800 S 14th St, Lincoln · 402-423-1515</span>',
-        price:
-          "Cremación directa desde <strong>$3,910</strong>; entierro inmediato desde <strong>$4,920</strong>; paquete Tribute <strong>$11,935</strong>",
-        notes:
-          "GPL y paquetes Dignity Memorial, vigentes 6 ago. 2026. Tribute $11,935 sin bóveda; cremación Tribute $5,795. El lote no va incluido. No es un precio de Mejor Vida Seguros.",
-      },
-      {
-        source:
-          '<a href="https://lincolnalternativefuneral.com/our-services/" rel="noopener" target="_blank">Alternative Funeral and Cremation Services</a><br/><span class="small text-body-secondary">245 N 27th St, Suite B, Lincoln · 402-429-1450</span>',
-        price:
-          "Cremación directa sin servicio <strong>$1,595</strong>; con memorial $2,595; entierro inmediato $1,805",
-        notes:
-          "Revisado 17 sep. 2026 en su propia página. Atienden Lincoln. No es un precio de Mejor Vida Seguros.",
-      },
-      {
-        source: "NFDA 2023 · West North Central",
-        price:
-          "Entierro con velatorio <strong>$8,755</strong> · Cremación con velatorio <strong>$6,713</strong>",
-        notes: "Mediana regional (Nebraska comparte esta región). El cementerio es aparte.",
-      },
-    ],
-    funeralRowsEn: [
-      {
-        source:
-          '<a href="https://www.lincolnfh.com/" rel="noopener" target="_blank">Lincoln Memorial Funeral Home</a><br/><span class="small text-body-secondary">6800 S 14th St, Lincoln · 402-423-1515</span>',
-        price:
-          "Direct cremation from <strong>$3,910</strong>; immediate burial from <strong>$4,920</strong>; Tribute package <strong>$11,935</strong>",
-        notes:
-          "Dignity Memorial GPL and packages, effective 6 Aug 2026. Tribute $11,935 without a vault; Tribute cremation $5,795. Plot not included. Not a Mejor Vida Insurance price.",
-      },
-      {
-        source:
-          '<a href="https://lincolnalternativefuneral.com/our-services/" rel="noopener" target="_blank">Alternative Funeral and Cremation Services</a><br/><span class="small text-body-secondary">245 N 27th St, Suite B, Lincoln · 402-429-1450</span>',
-        price:
-          "Direct cremation without services <strong>$1,595</strong>; with memorial $2,595; immediate burial $1,805",
-        notes:
-          "Checked 17 Sep 2026 on their own site. Serves Lincoln. Not a Mejor Vida Insurance price.",
-      },
-      {
-        source: "NFDA 2023 · West North Central",
-        price:
-          "Burial with viewing <strong>$8,755</strong> · Cremation with viewing <strong>$6,713</strong>",
-        notes: "Regional median (Nebraska shares this region). Cemetery is extra.",
-      },
-    ],
-    cemeteries: [
-      {
-        sourceEs:
-          '<a href="https://www.wyuka.com/" rel="noopener" target="_blank">Wyuka Funeral Home &amp; Cemetery</a><br/><span class="small text-body-secondary">3600 O St, Lincoln · 402-474-3600</span>',
-        sourceEn:
-          '<a href="https://www.wyuka.com/" rel="noopener" target="_blank">Wyuka Funeral Home &amp; Cemetery</a><br/><span class="small text-body-secondary">3600 O St, Lincoln · 402-474-3600</span>',
-        priceEs: "Venden lotes nuevos en la oficina del cementerio",
-        priceEn: "Sells new plots at the cemetery office",
-        notesEs:
-          "No publican un precio de lote en su web. Llame para el precio actual, apertura y cierre.",
-        notesEn:
-          "They do not publish a plot price on their site. Call for current plot, opening, and closing prices.",
-      },
-      {
-        sourceEs:
-          '<a href="https://www.lincolnfh.com/" rel="noopener" target="_blank">Lincoln Memorial Park</a><br/><span class="small text-body-secondary">6800 S 14th St, Lincoln · 402-423-1515</span>',
-        sourceEn:
-          '<a href="https://www.lincolnfh.com/" rel="noopener" target="_blank">Lincoln Memorial Park</a><br/><span class="small text-body-secondary">6800 S 14th St, Lincoln · 402-423-1515</span>',
-        priceEs: "Lotes a la venta; no están en la GPL de la funeraria",
-        priceEn: "Plots for sale; not on the funeral-home GPL",
-        notesEs:
-          "Misma dirección que Lincoln Memorial Funeral Home. La GPL lista bóvedas de <strong>$1,495–$5,095</strong>, no el lote. Confirme el espacio, apertura y cierre con la oficina.",
-        notesEn:
-          "Same address as Lincoln Memorial Funeral Home. The GPL lists vaults at <strong>$1,495–$5,095</strong>, not the plot. Confirm space, opening, and closing with the office.",
-      },
-      {
-        sourceEs:
-          '<a href="https://www.calvarycatholic.com/pre-planning/" rel="noopener" target="_blank">Calvary Catholic Cemetery and Mausoleum</a><br/><span class="small text-body-secondary">3880 L St, Lincoln · 402-476-8787</span>',
-        sourceEn:
-          '<a href="https://www.calvarycatholic.com/pre-planning/" rel="noopener" target="_blank">Calvary Catholic Cemetery and Mausoleum</a><br/><span class="small text-body-secondary">3880 L St, Lincoln · 402-476-8787</span>',
-        priceEs: "Venden lotes, nichos y mausoleo; pida mapa y precios",
-        priceEn: "Sells plots, niches, and mausoleum space; ask for a map and prices",
-        notesEs:
-          "Cementerio de la diócesis. Hay planes de pago para el espacio; apertura y cierre no entran en ese plan. No publican cifras en la web.",
-        notesEn:
-          "Diocesan cemetery. Payment plans are available for the space; opening and closing are not on that plan. They do not publish figures on the website.",
-      },
-    ],
-    plotResaleIntroEs:
-      "La <strong>lista general de precios de la funeraria no incluye el lote</strong>. Tampoco la lista de paquetes Dignity. Para un espacio nuevo hay que llamar a la oficina del cementerio (en Lincoln Memorial, el mismo número de la funeraria: 402-423-1515) y pedir la lista de precios del cementerio por escrito: lote, apertura y cierre, y marcador. Wyuka: 402-474-3600. Calvary: 402-476-8787.",
-    plotResaleIntroEn:
-      "The funeral home <strong>General Price List does not include the burial plot</strong>. Neither do the Dignity packages. For a new space, call the cemetery office (at Lincoln Memorial, the same number as the funeral home: 402-423-1515) and ask for a written cemetery price list: plot, opening and closing, and marker. Wyuka: 402-474-3600. Calvary: 402-476-8787.",
-    plotResales: [
-      {
-        sourceEs:
-          '<a href="https://eturnalrest.com/products/grave-for-sale-lincoln-memorial-cemetery-lincoln-cb-004059" rel="noopener" target="_blank">Eturnal Rest · Sec. N, lote 463, espacio 3</a>',
-        sourceEn:
-          '<a href="https://eturnalrest.com/products/grave-for-sale-lincoln-memorial-cemetery-lincoln-cb-004059" rel="noopener" target="_blank">Eturnal Rest · Sec. N, lot 463, space 3</a>',
-        priceEs: "Pide <strong>$700</strong> (o mejor oferta)",
-        priceEn: "Asking <strong>$700</strong> (or best offer)",
-        notesEs: "Lincoln Memorial Park. Un espacio. El vendedor cita un avalúo de $2,975. Revise si sigue activo.",
-        notesEn: "Lincoln Memorial Park. One space. The seller cites an appraisal of $2,975. Check that it is still listed.",
-      },
-      {
-        sourceEs:
-          '<a href="https://eturnalrest.com/products/grave-for-sale-lincoln-memorial-cemetery-lincoln-cb-004051" rel="noopener" target="_blank">Eturnal Rest · Sec. U, lote 374, espacios 5 y 6</a>',
-        sourceEn:
-          '<a href="https://eturnalrest.com/products/grave-for-sale-lincoln-memorial-cemetery-lincoln-cb-004051" rel="noopener" target="_blank">Eturnal Rest · Sec. U, lot 374, spaces 5 and 6</a>',
-        priceEs: "Pide <strong>$1,795</strong> por los dos",
-        priceEn: "Asking <strong>$1,795</strong> for both",
-        notesEs: "Jardín Risen Christ. El vendedor cita lista del cementerio cerca de $2,600. No es la lista oficial.",
-        notesEn: "Risen Christ Garden. The seller cites a cemetery list around $2,600. That is not the official list.",
-      },
-      {
-        sourceEs:
-          '<a href="https://eturnalrest.com/cemeteries/ne/lincoln-memorial-cemetery-lincoln/" rel="noopener" target="_blank">Eturnal Rest · Sec. O, lote 147, espacio 6</a>',
-        sourceEn:
-          '<a href="https://eturnalrest.com/cemeteries/ne/lincoln-memorial-cemetery-lincoln/" rel="noopener" target="_blank">Eturnal Rest · Sec. O, lot 147, space 6</a>',
-        priceEs: "Pide <strong>$2,250</strong> + transferencia <strong>$495</strong>",
-        priceEn: "Asking <strong>$2,250</strong> + <strong>$495</strong> transfer",
-        notesEs: "El vendedor cita $4,495 de lista del cementerio. La transferencia se paga a la oficina.",
-        notesEn: "The seller cites a $4,495 cemetery list price. The transfer is paid to the office.",
-      },
-      {
-        sourceEs:
-          '<a href="https://eturnalrest.com/products/grave-for-sale-lincoln-memorial-cemetery-lincoln-cb-004057" rel="noopener" target="_blank">Eturnal Rest · Sec. P, lote 11, espacios 8 y 9</a>',
-        sourceEn:
-          '<a href="https://eturnalrest.com/products/grave-for-sale-lincoln-memorial-cemetery-lincoln-cb-004057" rel="noopener" target="_blank">Eturnal Rest · Sec. P, lot 11, spaces 8 and 9</a>',
-        priceEs: "Pide <strong>$4,000</strong> por los dos",
-        priceEn: "Asking <strong>$4,000</strong> for both",
-        notesEs: "El vendedor cita $4,495 por espacio en la lista del cementerio. Confirme con la oficina.",
-        notesEn: "The seller cites $4,495 per space on the cemetery list. Confirm with the office.",
-      },
-      {
-        sourceEs:
-          '<a href="https://eturnalrest.com/products/grave-for-sale-lincoln-memorial-cemetery-lincoln-cb-004048" rel="noopener" target="_blank">Eturnal Rest · Sec. P, cuatro espacios</a>',
-        sourceEn:
-          '<a href="https://eturnalrest.com/products/grave-for-sale-lincoln-memorial-cemetery-lincoln-cb-004048" rel="noopener" target="_blank">Eturnal Rest · Sec. P, four spaces</a>',
-        priceEs: "Pide <strong>$10,000</strong> por cuatro",
-        priceEn: "Asking <strong>$10,000</strong> for four",
-        notesEs: "Lotes 41 y 157. El vendedor cita unos $20,000 de lista. Apertura y marcador aparte.",
-        notesEn: "Lots 41 and 157. The seller cites about $20,000 list. Opening and marker extra.",
-      },
-    ],
-    plotResaleFootEs:
-      'Revisado 17 sep. 2026. En Eturnal Rest había <strong>11 anuncios</strong> en Lincoln Memorial Park, de <strong>$700 a $10,000</strong> (mediana de pedido $4,000). Son precios de particulares, no de Mejor Vida Seguros ni del cementerio. La oficina cobra una transferencia (anuncios citan $295–$495) y debe registrar la escritura. <a href="https://eturnalrest.com/cemeteries/ne/lincoln-memorial-cemetery-lincoln/" rel="noopener" target="_blank">Ver todos los anuncios en Eturnal Rest</a> · <a href="https://www.gravesolutions.com/for-sale/cemetery-properties/nebraska" rel="noopener" target="_blank">Nebraska en Grave Solutions</a>. Un anuncio de Wyuka a $3,600 por dos lotes ya aparece como vendido.',
-    plotResaleFootEn:
-      'Checked 17 Sep 2026. Eturnal Rest had <strong>11 ads</strong> at Lincoln Memorial Park, from <strong>$700 to $10,000</strong> (median ask $4,000). These are private asking prices, not Mejor Vida Insurance or cemetery prices. The office charges a transfer (ads cite $295–$495) and must record the deed. <a href="https://eturnalrest.com/cemeteries/ne/lincoln-memorial-cemetery-lincoln/" rel="noopener" target="_blank">See all Eturnal Rest ads</a> · <a href="https://www.gravesolutions.com/for-sale/cemetery-properties/nebraska" rel="noopener" target="_blank">Nebraska on Grave Solutions</a>. A Wyuka ad at $3,600 for two plots is already marked sold.',
-    coverageNoteEs:
-      "Para una cremación sencilla en Lincoln, $5,000 a $10,000 suele alcanzar. Un entierro tradicional en Lincoln Memorial, con lote y marcador, suele pedir $15,000 a $25,000: el paquete Tribute empieza en $11,935 y el lote va aparte. Mejor Vida Seguros compara compañías designadas; no hay garantía de emisión ni de precio. El detalle de cada aseguradora está en la <a href=\"../nebraska.html#aseguradoras\">guía de Nebraska</a>.",
-    coverageNoteEn:
-      "For a simple Lincoln cremation, $5,000 to $10,000 is often enough. A traditional burial at Lincoln Memorial, with plot and marker, often needs $15,000 to $25,000: the Tribute package starts at $11,935 and the plot is extra. Mejor Vida Insurance compares appointed companies; there is no guarantee of issue or price. Carrier detail lives on the <a href=\"../nebraska.html#carriers\">Nebraska guide</a>.",
-    metroEs: ["Lincoln", "Hickman", "Waverly", "Roca", "Bennet", "Malcolm"],
-    metroEn: ["Lincoln", "Hickman", "Waverly", "Roca", "Bennet", "Malcolm"],
-    metroTitleEs: "Área que atendemos en Lincoln",
-    metroTitleEn: "Lincoln area we serve",
-    metroNoteEs:
-      'Cotizamos por teléfono, WhatsApp y en línea a residentes de Nebraska en estas comunidades del condado Lancaster. No hay oficina de atención al público. Omaha tiene <a href="omaha.html">su propia guía</a>.',
-    metroNoteEn:
-      'We quote by phone, WhatsApp, and online for Nebraska residents in these Lancaster County communities. There is no public walk-in office. Omaha has <a href="omaha.html">its own guide</a>.',
-    faqCremationEs: {
-      q: "¿Cuánta cobertura suele alcanzar para una cremación en Lincoln?",
-      a: "Con cremación directa publicada desde $1,595 en Alternative y desde $3,910 en Lincoln Memorial, muchas familias eligen $5,000 a $10,000 para el servicio, urna, viajes y cuentas pequeñas. Un entierro tradicional en Lincoln Memorial suele necesitar más: el paquete Tribute empieza en $11,935 y el lote, la bóveda y la lápida van aparte.",
-    },
-    faqCremationEn: {
-      q: "How much coverage is usually enough for cremation in Lincoln?",
-      a: "With direct cremation published from $1,595 at Alternative and from $3,910 at Lincoln Memorial, many families choose $5,000 to $10,000 for the service, urn, travel, and small bills. A traditional burial at Lincoln Memorial often needs more: the Tribute package starts at $11,935, and the plot, vault, and marker are extra.",
-    },
-    faqPrepaidEs: {
-      q: "¿Cuál es la diferencia entre un funeral prepagado y este seguro?",
-      a: "El prepagado se ata a una funeraria o a un lote y puede fijar ese precio. El seguro de gastos finales paga efectivo a su beneficiario: puede usarlo en Lincoln Memorial, Alternative Funeral, Wyuka, Calvary, o en otros gastos finales.",
-    },
-    faqPrepaidEn: {
-      q: "What is the difference between a prepaid funeral and this insurance?",
-      a: "A prepaid plan is tied to one funeral home or plot and may lock that price. Final expense insurance pays cash to your beneficiary. They can use it at Lincoln Memorial, Alternative Funeral, Wyuka, Calvary, or for other final bills.",
-    },
-    faqPlotEs: {
-      q: "¿El funeral incluye el lote del cementerio?",
-      a: "No. El precio de la funeraria es una factura. El lote es otra. Pida la lista en la oficina del cementerio (Lincoln Memorial Park: 402-423-1515). También hay lotes de reventa más baratos; el cementerio debe cambiar la escritura.",
-    },
-    faqPlotEn: {
-      q: "Does the funeral include the cemetery plot?",
-      a: "No. The funeral home price is one bill. The plot is another. Ask the cemetery office for its list (Lincoln Memorial Park: 402-423-1515). Resale plots can cost less; the cemetery still has to change the deed.",
-    },
-    faqCalcEs: {
-      q: "¿Cómo uso la calculadora de esta página?",
-      a: "Está al final. Indique edad, sexo y si fuma. Elija el servicio y la funeraria. Verá un funeral estimado, una cobertura y una prima mensual de las tarifas de compañías designadas. Luego pida una cotización real.",
-    },
-    faqCalcEn: {
-      q: "How do I use the calculator on this page?",
-      a: "It is at the bottom. Enter age, sex, and whether you smoke. Pick the service and funeral home. You will see an estimated funeral, suggested coverage, and a monthly premium from appointed-company rate charts. Then get a real quote.",
-    },
-  },
+  lincolnCity,
 ];
 
 function esc(s) {
@@ -495,7 +266,7 @@ ${bullets.map((b) => `<li>${b}</li>`).join("\n")}
             lang === "es" ? lic.typeEs : lic.typeEn
           )} · ${lang === "es" ? "Licencia" : "License"} <strong>#${esc(lic.number)}</strong></p>
           <p class="sc-hero-agent-npn mb-0">NPN #${NPN}${
-            city.hideBasedIn ? "" : ` · ${esc(basedIn)}`
+            city.layout === "classic" && !city.hideBasedIn ? ` · ${esc(basedIn)}` : ""
           }</p>
         </div>
       </div>
@@ -518,7 +289,7 @@ function faqItems(lang, city) {
     return [
       {
         q: "¿Necesito un examen médico?",
-        a: "Muchas pólizas de gastos finales en Nebraska se emiten con preguntas de salud y sin examen. Si la salud es un obstáculo, puede haber aceptación garantizada, casi siempre con un período de espera.",
+        a: `Muchas pólizas de gastos finales en ${city.stateNameEs} se emiten con preguntas de salud y sin examen. Si la salud es un obstáculo, puede haber aceptación garantizada, casi siempre con un período de espera.`,
       },
       {
         q: "¿El seguro paga desde el primer día?",
@@ -526,8 +297,8 @@ function faqItems(lang, city) {
       },
       ...extras,
       {
-        q: "¿Están licenciados en Nebraska?",
-        a: "Sí. Mejor Vida Seguros cotiza seguro de vida en Nebraska. Julie Braunsroth es productora residente, NPN #21695431. Puede ver la licencia de Nebraska y verificarla en la NAIC. El mapa completo de estados está en la página de licencias.",
+        q: `¿Están licenciados en ${city.stateNameEs}?`,
+        a: `Sí. Mejor Vida Seguros cotiza seguro de vida en ${city.stateNameEs}. Julie Braunsroth es productora residente, NPN #21695431. Puede ver la licencia de ${city.stateNameEs} y verificarla en la NAIC. El mapa completo de estados está en la página de licencias.`,
       },
       {
         q: "¿Atienden en español?",
@@ -538,7 +309,7 @@ function faqItems(lang, city) {
   return [
     {
       q: "Do I need a medical exam?",
-      a: "Many final expense policies in Nebraska use health questions and no exam. If health is a barrier, guaranteed acceptance may be available, usually with a waiting period.",
+      a: `Many final expense policies in ${city.stateNameEn} use health questions and no exam. If health is a barrier, guaranteed acceptance may be available, usually with a waiting period.`,
     },
     {
       q: "Does the policy pay from day one?",
@@ -546,8 +317,8 @@ function faqItems(lang, city) {
     },
     ...extras,
     {
-      q: "Are you licensed in Nebraska?",
-      a: "Yes. Mejor Vida Insurance quotes life insurance in Nebraska. Julie Braunsroth is a resident producer, NPN #21695431. You can view the Nebraska license and verify it on the NAIC. The full state map is on the licenses page.",
+      q: `Are you licensed in ${city.stateNameEn}?`,
+      a: `Yes. Mejor Vida Insurance quotes life insurance in ${city.stateNameEn}. Julie Braunsroth is a resident producer, NPN #21695431. You can view the ${city.stateNameEn} license and verify it on the NAIC. The full state map is on the licenses page.`,
     },
     {
       q: "Do you work in Spanish?",
@@ -806,11 +577,11 @@ ${ogLocale}
 <script>(function(){${bootLang}})();</script>
 ${jsonLd(lang, canon, city)}
 </head>
-<body class="bg-white state-coverage-page sc-lincoln-guide" data-licenses-base="${root}licenses/">
+<body class="bg-white state-coverage-page sc-city-guide" data-licenses-base="${root}licenses/">
 ${header}
 <main class="state-coverage-readability">
 ${cityHero(lang, root, quoteHref, city)}
-${guideMain(lang, city, { root, quoteHref, stateHref, en })}
+${guideMain(lang, city, { root, quoteHref, stateHref, en, npn: NPN, license: LICENSE[city.stateCode] })}
 <section class="py-5 bg-light border-bottom sc-city-faq" id="${faqId}">
   <div class="container sc-city-prose">
     <h2 class="h4 fw-bold mb-3" style="color:#1a365d;">${esc(faqTitle)}</h2>
@@ -835,7 +606,7 @@ ${footer}
 <script defer src="${root}script.js"></script>
 <script defer src="${root}js/mvi-nav-questions.js?v=20260828-family"></script>
 <script defer src="${root}js/mvi-licensing-map.js?v=20260726-lic-popup"></script>
-<script defer src="${root}js/lincoln-city-guide.js?v=${CSS_VER}"></script>
+<script defer src="${root}js/city-guide.js?v=${CSS_VER}"></script>
 <div data-api-url="/api/website-chat" id="mvi-assistant-root"></div>
 <script defer src="${root}js/website-assistant-widget.js"></script>
 </body>
@@ -844,7 +615,7 @@ ${footer}
 }
 
 function documentEs(city) {
-  if (city.layout === "guide") return documentGuide("es", city);
+  if (city.layout !== "classic") return documentGuide("es", city);
   const root = "../../";
   const quoteHref = `${root}quote.html`;
   const canon = `https://www.mejorvidainsurance.com/estados/${city.stateSlug}/${city.slug}.html`;
@@ -1028,7 +799,7 @@ ${loadFooterEs()}
 }
 
 function documentEn(city) {
-  if (city.layout === "guide") return documentGuide("en", city);
+  if (city.layout !== "classic") return documentGuide("en", city);
   const root = "../../../";
   const en = "../../";
   const quoteHref = `${en}quote.html`;

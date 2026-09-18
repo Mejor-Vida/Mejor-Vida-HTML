@@ -1,5 +1,7 @@
 /**
- * Alias of js/city-guide.js so older Lincoln cache-bust URLs still load.
+ * Canonical city guide: plot resale board + funeral/coverage calculator.
+ * Config comes from #city-guide-config (written by scripts/city-guide-html.js).
+ * Do not add a second calculator style — see .cursor/rules/city-page-layout.mdc.
  */
 (function () {
   var lang = document.documentElement.classList.contains("lang-en") ? "en" : "es";

@@ -1,0 +1,43 @@
+---
+description: Lincoln city guide is the locked layout for every new city page (ES + EN)
+globs: "{estados,en/states}/**/*.html,scripts/{render-city-coverage-pages,city-guide-html,lincoln-guide-html}.js,scripts/city-guides/**,js/{city-guide,lincoln-city-guide}.js,css/state-coverage.css"
+alwaysApply: true
+---
+
+# City page layout (locked)
+
+Lincoln (`estados/nebraska/lincoln.html` + `en/states/nebraska/lincoln.html`) is the **canonical city page**. Every new city uses this format. Do not invent a new section order, chart style, or calculator.
+
+Omaha is a **legacy** layout (`layout: "classic"`). Do not copy Omaha for new cities. Do not restyle Lincoln to match Omaha.
+
+## Section order (do not reorder)
+
+1. Local photo hero — **no prices or premiums** in the H1 or bullets
+2. Breadcrumb (state / city)
+3. What final expense insurance is
+4. Funeral-home **packages**, cheapest to most expensive, with estimator-field descriptions under each name
+5. What changes from one home to another (analysis cards)
+6. The burial plot is a **separate bill**, then where to call, then resale ads
+7. Calculator: age, sex, smoker → appointed-company monthly premium
+8. Metro towns
+9. License for **this page’s state only** (full roster stays on licencias/licenses)
+10. FAQs
+11. Navy quote band
+
+## Builders
+
+- Data: `scripts/city-guides/{slug}.js` (copy Lincoln; fill local homes, packages, cemeteries)
+- Template: `scripts/city-guide-html.js`
+- Shell: `scripts/render-city-coverage-pages.js` — new cities omit `layout` or set `layout: "guide"`
+- JS: `js/city-guide.js` + `data/{slug}-plot-resales.json`
+- CSS: `.sc-city-guide` in `css/state-coverage.css` — do not scope new styles only to Lincoln
+- Then `npm run build:city-pages`. Mirror ES + EN. Spanish indexable; English `noindex`.
+
+## Do not
+
+- Put costs in the hero
+- Use Omaha’s source/price/notes table or the static $10,000 premium grid
+- Add a comparable-funeral “added up” row, or an estimator line-item grid with empty cells
+- List the four licensed states, Iowa, or “based in Lincoln” on the city page body
+- Use Julie’s first name in body copy (agency name only)
+- Hand-edit the generated HTML; change the builder and rebuild

@@ -1310,6 +1310,7 @@
   max-width: min(38rem, 100%);
 }
 
+.sc-city-guide .sc-hero--city .sc-hero-copy,
 .sc-lincoln-guide .sc-hero--city .sc-hero-copy {
   max-width: min(42rem, 100%);
 }
@@ -1451,6 +1452,7 @@
   max-width: 72rem;
 }
 
+/* City guide package chart + calculator — locked; see .cursor/rules/city-page-layout.mdc */
 .sc-gpl-wrap {
   overflow-x: auto;
 }
