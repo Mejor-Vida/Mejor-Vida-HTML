@@ -1,0 +1,133 @@
+{
+  "city": "omaha",
+  "checked": "2026-09-17",
+  "checkedLabelEs": "17 sep. 2026",
+  "checkedLabelEn": "17 Sep 2026",
+  "noteEs": "Anuncios de particulares. No son precios de Mejor Vida Seguros ni la lista oficial del cementerio. La oficina debe transferir la escritura. Revise si el anuncio sigue activo.",
+  "noteEn": "Private-party ads. These are not Mejor Vida Insurance prices or the cemetery’s official list. The office must transfer the deed. Check that the listing is still active.",
+  "boards": [
+    {
+      "id": "eturnal",
+      "name": "Eturnal Rest",
+      "url": "https://eturnalrest.com/cemeteries/ne/westlawn-hillcrest-memorial-park-omaha/",
+      "labelEs": "Tablero en vivo · Westlawn-Hillcrest",
+      "labelEn": "Live board · Westlawn-Hillcrest"
+    },
+    {
+      "id": "grave-solutions",
+      "name": "Grave Solutions",
+      "url": "https://www.gravesolutions.com/for-sale/cemetery-properties/nebraska",
+      "labelEs": "Tablero en vivo · Nebraska",
+      "labelEn": "Live board · Nebraska"
+    }
+  ],
+  "cemeterySignals": [
+    {
+      "cemetery": "Westlawn-Hillcrest Memorial Park",
+      "citedListLow": 2495,
+      "citedListHigh": 4995,
+      "typical": 2495,
+      "phone": "402-556-2500",
+      "noteEs": "Dignity publica el terreno desde $2,495. Pida la lista por escrito: 402-556-2500.",
+      "noteEn": "Dignity publishes ground burial property from $2,495. Ask for it in writing: 402-556-2500."
+    },
+    {
+      "cemetery": "Forest Lawn Memorial Park",
+      "citedListLow": null,
+      "citedListHigh": null,
+      "typical": null,
+      "phone": "402-451-1000",
+      "noteEs": "No publican el lote en la web. Llame: 402-451-1000.",
+      "noteEn": "They do not publish plot prices online. Call: 402-451-1000."
+    },
+    {
+      "cemetery": "Catholic Cemeteries of the Archdiocese of Omaha",
+      "citedListLow": null,
+      "citedListHigh": null,
+      "typical": null,
+      "phone": "402-391-3711",
+      "noteEs": "Calvary, Resurrection y otros. Pida mapa y precios: 402-391-3711.",
+      "noteEn": "Calvary, Resurrection, and others. Ask for a map and prices: 402-391-3711."
+    }
+  ],
+  "listings": [
+    {
+      "id": "cb-004062",
+      "status": "listed",
+      "cemetery": "Westlawn-Hillcrest Memorial Park",
+      "spaces": 1,
+      "asking": 1800,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": 3800,
+      "url": "https://eturnalrest.com/products/grave-for-sale-westlawn-hillcrest-memorial-park-omaha-cb-004062",
+      "titleEs": "Eturnal Rest · Rest Haven, lote 46-A, espacio 5",
+      "titleEn": "Eturnal Rest · Rest Haven, lot 46-A, space 5"
+    },
+    {
+      "id": "cb-004065",
+      "status": "listed",
+      "cemetery": "Westlawn-Hillcrest Memorial Park",
+      "spaces": 2,
+      "asking": 3000,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": 2500,
+      "url": "https://eturnalrest.com/products/grave-for-sale-westlawn-hillcrest-memorial-park-omaha-cb-004065",
+      "titleEs": "Eturnal Rest · Sec. 21, lote 93, espacios 2 y 3",
+      "titleEn": "Eturnal Rest · Sec. 21, lot 93, spaces 2–3"
+    },
+    {
+      "id": "cb-004071",
+      "status": "listed",
+      "cemetery": "Westlawn-Hillcrest Memorial Park",
+      "spaces": 2,
+      "asking": 3000,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": 2100,
+      "url": "https://eturnalrest.com/products/grave-for-sale-westlawn-hillcrest-memorial-park-omaha-cb-004071",
+      "titleEs": "Eturnal Rest · Garden of Hope, dos espacios con bóvedas",
+      "titleEn": "Eturnal Rest · Garden of Hope, two spaces with vaults"
+    },
+    {
+      "id": "cb-004072",
+      "status": "listed",
+      "cemetery": "Westlawn-Hillcrest Memorial Park",
+      "spaces": 1,
+      "asking": 3600,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": 7000,
+      "url": "https://eturnalrest.com/products/grave-for-sale-westlawn-hillcrest-memorial-park-omaha-cb-004072",
+      "titleEs": "Eturnal Rest · Garden of Meditation, cripta doble",
+      "titleEn": "Eturnal Rest · Garden of Meditation, double-depth crypt"
+    },
+    {
+      "id": "cb-004075",
+      "status": "listed",
+      "cemetery": "Westlawn-Hillcrest Memorial Park",
+      "spaces": 4,
+      "asking": 7000,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": 1478,
+      "url": "https://eturnalrest.com/products/grave-for-sale-westlawn-hillcrest-memorial-park-omaha-cb-004075",
+      "titleEs": "Eturnal Rest · Sunrise Garden, cuatro espacios",
+      "titleEn": "Eturnal Rest · Sunrise Garden, four spaces"
+    },
+    {
+      "id": "cb-004063",
+      "status": "sold",
+      "cemetery": "Westlawn-Hillcrest Memorial Park",
+      "spaces": 2,
+      "asking": 3000,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": 3000,
+      "url": "https://eturnalrest.com/products/grave-for-sale-westlawn-hillcrest-memorial-park-omaha-cb-004063",
+      "titleEs": "Eturnal Rest · Crestview, lote 165 (vendido)",
+      "titleEn": "Eturnal Rest · Crestview, lot 165 (sold)"
+    }
+  ]
+}

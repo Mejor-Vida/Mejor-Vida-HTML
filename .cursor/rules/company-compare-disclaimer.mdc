@@ -1,0 +1,17 @@
+---
+description: Legal comparison notice under any table that names or prices competing companies
+globs: "{estados,en/states}/**/*.html,scripts/{city-guide-html,render-city-coverage-pages,render-state-coverage-pages}.js,lib/company-compare-disclaimer.js"
+alwaysApply: false
+---
+
+# Company comparison — legal note
+
+Any chart or table that names competing funeral homes, cemeteries, or insurance companies, or that republishes their prices or ratings side by side, must have a **comparison notice** directly under it.
+
+Use `lib/company-compare-disclaimer.js`:
+
+- Funeral-home GPL / package columns → `funeralHomeCompareNote(lang)`
+- Appointed-carrier list or scores → `appointedCarrierCompareNote(lang)`
+- Third-party funeral averages (Funeralocity, NFDA) → `thirdPartyFuneralAverageNote(lang)`
+
+Do not invent a shorter substitute. Keep ES and EN. Source dates stay on the line above the notice.

@@ -1,21 +1,21 @@
 ---
-description: Lincoln city guide is the locked layout for every new city page (ES + EN)
-globs: "{estados,en/states}/**/*.html,scripts/{render-city-coverage-pages,city-guide-html,lincoln-guide-html}.js,scripts/city-guides/**,js/{city-guide,lincoln-city-guide}.js,css/state-coverage.css"
+description: Lincoln city guide is the locked layout for every city page (ES + EN)
+globs: "{estados,en/states}/**/*.html,scripts/{render-city-coverage-pages,city-guide-html,lincoln-guide-html}.js,scripts/city-guides/**,js/{city-guide,lincoln-city-guide}.js,css/state-coverage.css,lib/company-compare-disclaimer.js"
 alwaysApply: true
 ---
 
 # City page layout (locked)
 
-Lincoln (`estados/nebraska/lincoln.html` + `en/states/nebraska/lincoln.html`) is the **canonical city page**. Every new city uses this format. Do not invent a new section order, chart style, or calculator.
+Lincoln (`estados/nebraska/lincoln.html` + `en/states/nebraska/lincoln.html`) is the **canonical city page**. Omaha and every new city use this format. Do not invent a new section order, chart style, or calculator.
 
-Omaha is a **legacy** layout (`layout: "classic"`). Do not copy Omaha for new cities. Do not restyle Lincoln to match Omaha.
+Do not bring back Omaha’s old source/price/notes table or the static $10,000 premium grid.
 
 ## Section order (do not reorder)
 
 1. Local photo hero — **no prices or premiums** in the H1 or bullets
 2. Breadcrumb (state / city)
 3. What final expense insurance is
-4. Funeral-home **packages**, cheapest to most expensive, with estimator-field descriptions under each name
+4. Funeral-home **packages**, cheapest to most expensive, with estimator-field descriptions under each name, then the source line **and** the comparison legal note (`funeralHomeCompareNote` in `lib/company-compare-disclaimer.js`)
 5. What changes from one home to another (analysis cards)
 6. The burial plot is a **separate bill**, then where to call, then resale ads
 7. Calculator: age, sex, smoker → appointed-company monthly premium
@@ -24,20 +24,49 @@ Omaha is a **legacy** layout (`layout: "classic"`). Do not copy Omaha for new ci
 10. FAQs
 11. Navy quote band
 
+## Locked copy (use these wordings)
+
+- Hero plot bullet EN: `The burial plot is a separate cemetery bill, with resale listings that often cost less.`
+- Hero plot bullet ES: `El lote es una factura aparte del cementerio, con anuncios de reventa que suelen costar menos.`
+- Metro: official quotes are **by phone** (no walk-in office). Do not add WhatsApp or online as the official quote path.
+- Analysis card 2 heading EN: `The same package name does not include the same items`
+- Analysis card 2 heading ES: `El mismo nombre de paquete no incluye lo mismo`
+- Do not write “cart” / “carrito” in that heading.
+
+## Package chart (required)
+
+- Three **local funeral homes** plus the estimator column.
+- Every home must **bury and cremate**, and must publish a **complete first-party GPL or package list** (the home’s own site or PDF). No Funeralocity figures in named-home columns.
+- Every cell has a dollar amount. Do not use cremation-only homes that leave burial cells blank.
+- Package **row** order, cheapest to most expensive: direct cremation → immediate burial → cremation with memorial → traditional funeral with visitation.
+- Source line under the table names each GPL’s effective date. Then the comparison legal note. Do not invent a shorter substitute.
+
+## Calculator (required)
+
+Lives in `scripts/city-guide-html.js` + `js/city-guide.js`. Do not rebuild it.
+
+- Vault checkbox includes the locked why-text (`vaultWhy`): most cemeteries require a vault for ground burial so the grave does not sink; it is almost never in the funeral-home package.
+- Hide the vault block unless the service is immediate burial or traditional funeral.
+- Hide the extra-casket checkbox when that home’s package already includes a casket (`homeIncludesCasket`).
+
 ## Builders
 
 - Data: `scripts/city-guides/{slug}.js` (copy Lincoln; fill local homes, packages, cemeteries)
 - Template: `scripts/city-guide-html.js`
-- Shell: `scripts/render-city-coverage-pages.js` — new cities omit `layout` or set `layout: "guide"`
+- Legal note: `lib/company-compare-disclaimer.js`
+- Shell: `scripts/render-city-coverage-pages.js` — add the city to `CITIES`; omit `layout` or set `layout: "guide"`
 - JS: `js/city-guide.js` + `data/{slug}-plot-resales.json`
-- CSS: `.sc-city-guide` in `css/state-coverage.css` — do not scope new styles only to Lincoln
+- CSS: `.sc-city-guide` in `css/state-coverage.css` — do not scope new styles only to one city
 - Then `npm run build:city-pages`. Mirror ES + EN. Spanish indexable; English `noindex`.
 
 ## Do not
 
 - Put costs in the hero
-- Use Omaha’s source/price/notes table or the static $10,000 premium grid
 - Add a comparable-funeral “added up” row, or an estimator line-item grid with empty cells
 - List the four licensed states, Iowa, or “based in Lincoln” on the city page body
 - Use Julie’s first name in body copy (agency name only)
 - Hand-edit the generated HTML; change the builder and rebuild
+- Omit the comparison legal note under the funeral-home package table
+- Fill a home column from Funeralocity
+- Invent unpublished burial packages
+- Skip the vault explanation, or show the vault checkbox on cremation

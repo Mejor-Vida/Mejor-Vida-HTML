@@ -1,6 +1,10 @@
 /**
  * Lincoln city-guide data. Copy this file for a new city; do not invent a new layout.
  * Canonical format: .cursor/rules/city-page-layout.mdc
+ *
+ * Locked with the template: complete first-party GPLs (burial + cremation, no blank
+ * cells), analysis heading “same package name does not include the same items”,
+ * phone-only official quotes, comparison legal note, and vault why-text on the calculator.
  */
 const NPN = "21695431";
 
@@ -36,13 +40,13 @@ module.exports = {
   bulletsEs: [
     `Qué es el seguro de gastos finales y cómo se usa para el funeral.`,
     `Una tabla de paquetes de funerarias en Lincoln, del más económico al más caro.`,
-    `Por qué el lote no entra en la lista de precios, y anuncios de reventa más baratos.`,
+    `El lote es una factura aparte del cementerio, con anuncios de reventa que suelen costar menos.`,
     `Una calculadora para estimar el funeral, la cobertura y la prima mensual.`,
   ],
   bulletsEn: [
     `What final expense insurance is, and how it pays for a funeral.`,
     `A Lincoln funeral-home package table, from the least expensive to the most expensive.`,
-    `Why the burial plot is not on the funeral price list, plus lower-cost resale ads.`,
+    `The burial plot is a separate cemetery bill, with resale listings that often cost less.`,
     `A calculator for funeral cost, coverage, and a monthly premium.`,
   ],
   metroEs: ["Lincoln", "Hickman", "Waverly", "Roca", "Bennet", "Malcolm"],
@@ -50,9 +54,9 @@ module.exports = {
   metroTitleEs: "Área que atendemos en Lincoln",
   metroTitleEn: "Lincoln area we serve",
   metroNoteEs:
-    'Cotizamos por teléfono, WhatsApp y en línea a residentes de Nebraska en estas comunidades del condado Lancaster. No hay oficina de atención al público. Omaha tiene <a href="omaha.html">su propia guía</a>.',
+    'Las cotizaciones oficiales son por teléfono para residentes de Nebraska en estas comunidades del condado Lancaster. No hay oficina de atención al público. Omaha tiene <a href="omaha.html">su propia guía</a>.',
   metroNoteEn:
-    'We quote by phone, WhatsApp, and online for Nebraska residents in these Lancaster County communities. There is no public walk-in office. Omaha has <a href="omaha.html">its own guide</a>.',
+    'Official quotes are by phone for Nebraska residents in these Lancaster County communities. There is no public walk-in office. Omaha has <a href="omaha.html">its own guide</a>.',
   faqCremationEs: {
     q: "¿Cuánta cobertura suele alcanzar para una cremación en Lincoln?",
     a: "Con cremación directa publicada desde $1,595 en Alternative y desde $3,910 en Lincoln Memorial, muchas familias eligen $5,000 a $10,000 para el servicio, urna, viajes y cuentas pequeñas. Un entierro tradicional en Lincoln Memorial suele necesitar más: el paquete Tribute empieza en $11,935 y el lote, la bóveda y la lápida van aparte.",
@@ -79,11 +83,11 @@ module.exports = {
   },
   faqCalcEs: {
     q: "¿Cómo uso la calculadora de esta página?",
-    a: "Está al final. Indique edad, sexo y si fuma. Elija el servicio y la funeraria. Verá un funeral estimado, una cobertura y una prima mensual de las tarifas de compañías designadas. Luego pida una cotización real.",
+    a: "Está al final. Indique edad, sexo y si fuma. Elija el servicio y la funeraria. Verá un funeral estimado, una cobertura y una prima mensual de las tarifas de compañías designadas. Luego llame para una cotización oficial.",
   },
   faqCalcEn: {
     q: "How do I use the calculator on this page?",
-    a: "It is at the bottom. Enter age, sex, and whether you smoke. Pick the service and funeral home. You will see an estimated funeral, suggested coverage, and a monthly premium from appointed-company rate charts. Then get a real quote.",
+    a: "It is at the bottom. Enter age, sex, and whether you smoke. Pick the service and funeral home. You will see an estimated funeral, suggested coverage, and a monthly premium from appointed-company rate charts. Then call for an official quote.",
   },
   guide: {
     resaleJson: "data/lincoln-plot-resales.json",
@@ -118,7 +122,7 @@ module.exports = {
         p: "La cremación directa es el atajo más barato que publican: <strong>$1,595</strong> en Alternative, <strong>$3,285</strong> en Wyuka y <strong>$3,910</strong> en Lincoln Memorial. El estimador usa <strong>$2,958</strong> para Nebraska. Ese número es solo gastos de funeraria: urna, flores y certificados van aparte.",
       },
       {
-        h: "El mismo nombre de paquete no trae el mismo carrito",
+        h: "El mismo nombre de paquete no incluye lo mismo",
         p: "El funeral tradicional de Alternative (<strong>$3,155</strong>) y el de Wyuka (<strong>$5,800</strong>) son servicios, sin ataúd. El Tribute de Lincoln Memorial (<strong>$11,935</strong>) ya mete un ataúd de $2,795. El promedio de entierro completo de Nebraska (<strong>$8,620</strong>) también suele incluir ataúd.",
       },
       {
@@ -136,7 +140,7 @@ module.exports = {
         p: "Direct cremation is the cheapest published shortcut: <strong>$1,595</strong> at Alternative, <strong>$3,285</strong> at Wyuka, and <strong>$3,910</strong> at Lincoln Memorial. The estimator uses <strong>$2,958</strong> for Nebraska. That number is funeral home expenses only: urn, flowers, and death certificates are extra.",
       },
       {
-        h: "The same package name is not the same cart",
+        h: "The same package name does not include the same items",
         p: "Alternative’s traditional funeral (<strong>$3,155</strong>) and Wyuka’s (<strong>$5,800</strong>) are services, with no casket. Lincoln Memorial Tribute (<strong>$11,935</strong>) already puts in a $2,795 casket. Nebraska’s full-burial average (<strong>$8,620</strong>) usually includes a casket too.",
       },
       {

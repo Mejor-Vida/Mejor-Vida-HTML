@@ -3,6 +3,8 @@
  * .cursor/rules/city-page-layout.mdc. City-specific facts live in
  * scripts/city-guides/{slug}.js.
  */
+const { funeralHomeCompareNote } = require("../lib/company-compare-disclaimer");
+
 function esc(s) {
   return String(s)
     .replace(/&/g, "&amp;")
@@ -120,6 +122,8 @@ function calcFields(lang, calc) {
       plotNew: `Nuevo, oficina del cementerio (unos ${plotNew})`,
       plotResale: `Reventa de un particular (unos ${plotResale})`,
       vault: `Sumar una bóveda típica (${vault})`,
+      vaultWhy:
+        "La mayoría de los cementerios exigen una bóveda para un entierro en tierra: una caja de concreto o plástico alrededor del ataúd, para que la tumba no se hunda al asentar el ataúd. Casi nunca va en el paquete de la funeraria.",
       casket: `Sumar un ataúd típico (${casket}) si el paquete no lo trae`,
       extra: "Otros gastos (médicos, viajes, certificados)",
       funeral: "Funeral estimado",
@@ -151,6 +155,8 @@ function calcFields(lang, calc) {
     plotNew: `New, from the cemetery office (about ${plotNew})`,
     plotResale: `Private-party resale (about ${plotResale})`,
     vault: `Add a typical vault (${vault})`,
+    vaultWhy:
+      "Most cemeteries require a vault for a burial in the ground: a concrete or plastic box around the casket so the grave does not sink as the casket settles. It is almost never in the funeral-home package.",
     casket: `Add a typical casket (${casket}) if the package does not include one`,
     extra: "Other bills (medical, travel, certificates)",
     funeral: "Estimated funeral",
@@ -166,10 +172,13 @@ function calcFormHtml(lang, city, ctx) {
   const guide = city.guide;
   const L = calcFields(lang, guide.calc);
   const scheduleHref = lang === "es" ? "/schedule-julie.html" : "/en/schedule-julie.html";
+  const defaultService = guide.calc.defaultService || "traditional";
+  const defaultHome = guide.calc.defaultHome || ((guide.homes || [])[0] && guide.homes[0].id);
+  const sel = (id, cur) => (id === cur ? " selected" : "");
   const homes = (guide.homes || [])
     .map((h) => {
       const name = h.name || (lang === "es" ? h.nameEs : h.nameEn);
-      return `                <option value="${esc(h.id)}">${esc(name)}</option>`;
+      return `                <option value="${esc(h.id)}"${sel(h.id, defaultHome)}>${esc(name)}</option>`;
     })
     .join("\n");
   const config = {
@@ -225,10 +234,10 @@ function calcFormHtml(lang, city, ctx) {
             <div class="sc-calc-field">
               <label for="city-service">${esc(L.service)}</label>
               <select id="city-service" name="service">
-                <option value="directCremation">${esc(L.direct)}</option>
-                <option value="memorialCremation">${esc(L.memorial)}</option>
-                <option value="immediateBurial">${esc(L.immediate)}</option>
-                <option value="traditional" selected>${esc(L.traditional)}</option>
+                <option value="directCremation"${sel("directCremation", defaultService)}>${esc(L.direct)}</option>
+                <option value="memorialCremation"${sel("memorialCremation", defaultService)}>${esc(L.memorial)}</option>
+                <option value="immediateBurial"${sel("immediateBurial", defaultService)}>${esc(L.immediate)}</option>
+                <option value="traditional"${sel("traditional", defaultService)}>${esc(L.traditional)}</option>
               </select>
             </div>
             <div class="sc-calc-field">
@@ -253,10 +262,13 @@ ${homes}
               <input id="city-casket" name="casket" type="checkbox" checked/>
               <span>${esc(L.casket)}</span>
             </label>
-            <label class="sc-calc-check">
-              <input id="city-vault" name="vault" type="checkbox"/>
-              <span>${esc(L.vault)}</span>
-            </label>
+            <div class="sc-calc-check-block" data-vault-wrap>
+              <label class="sc-calc-check">
+                <input id="city-vault" name="vault" type="checkbox"/>
+                <span>${esc(L.vault)}</span>
+              </label>
+              <p class="sc-calc-hint">${esc(L.vaultWhy)}</p>
+            </div>
           </div>
         </div>
         <div class="sc-calc-results" aria-live="polite">
@@ -303,6 +315,11 @@ function guideMain(lang, city, ctx) {
   const licensesHref = lang === "es" ? `${root}licencias.html` : `${ctx.en}licenses.html`;
   const jsonRel = `${root}${guide.resaleJson}`;
   const offices = lang === "es" ? guide.officesEs : guide.officesEn;
+  const officesNote =
+    (lang === "es" ? guide.officesNoteEs : guide.officesNoteEn) ||
+    (lang === "es"
+      ? "Ninguno publica los precios del lote en internet. Hay que llamar y pedir la lista por escrito."
+      : "None of them post plot prices on the website. Call and ask for the current list in writing.");
   const tableFoot = lang === "es" ? guide.tableFootEs : guide.tableFootEn;
   const compareLead = lang === "es" ? guide.compareLeadEs : guide.compareLeadEn;
   const newList = lang === "es" ? guide.newListEs : guide.newListEn;
@@ -363,7 +380,8 @@ function guideMain(lang, city, ctx) {
       stateName
     )} que usa el estimador. El lote no va en ninguno.</p>
     ${packageTable("es", guide, estimatorHref)}
-    <p class="small text-muted mt-3 mb-0">${tableFoot} <a href="${funeralHref}">Guía de costos funerarios</a> · <a href="${estimatorHref}">Estimador de gastos finales</a>.</p>
+    <p class="small text-muted mt-3 mb-2">${tableFoot} <a href="${funeralHref}">Guía de costos funerarios</a> · <a href="${estimatorHref}">Estimador de gastos finales</a>.</p>
+    ${funeralHomeCompareNote("es")}
   </div>
 </section>
 
@@ -391,7 +409,7 @@ function guideMain(lang, city, ctx) {
     <ul class="text-body-secondary ps-3 mb-3">
 ${(offices || []).map((o) => `      <li class="mb-2">${o}</li>`).join("\n")}
     </ul>
-    <p class="text-body-secondary mb-3">Ninguno publica los precios del lote en internet. Hay que llamar y pedir la lista por escrito.</p>
+    <p class="text-body-secondary mb-3">${officesNote}</p>
     <p class="text-body-secondary mb-4">${newList}</p>
 
     <h3 class="h5 fw-bold mb-3" style="color:#1a365d;">Comprar un lote de reventa (suele salir más barato)</h3>
@@ -480,7 +498,8 @@ ${(offices || []).map((o) => `      <li class="mb-2">${o}</li>`).join("\n")}
     stateName
   )} average the estimator uses. The burial plot is in none of them.</p>
     ${packageTable("en", guide, estimatorHref)}
-    <p class="small text-muted mt-3 mb-0">${tableFoot} <a href="${funeralHref}">Funeral cost guide</a> · <a href="${estimatorHref}">Final expense estimator</a>.</p>
+    <p class="small text-muted mt-3 mb-2">${tableFoot} <a href="${funeralHref}">Funeral cost guide</a> · <a href="${estimatorHref}">Final expense estimator</a>.</p>
+    ${funeralHomeCompareNote("en")}
   </div>
 </section>
 
@@ -508,7 +527,7 @@ ${(offices || []).map((o) => `      <li class="mb-2">${o}</li>`).join("\n")}
     <ul class="text-body-secondary ps-3 mb-3">
 ${(offices || []).map((o) => `      <li class="mb-2">${o}</li>`).join("\n")}
     </ul>
-    <p class="text-body-secondary mb-3">None of them post plot prices on the website. Call and ask for the current list in writing.</p>
+    <p class="text-body-secondary mb-3">${officesNote}</p>
     <p class="text-body-secondary mb-4">${newList}</p>
 
     <h3 class="h5 fw-bold mb-3" style="color:#1a365d;">Buying a resale plot (usually cheaper)</h3>

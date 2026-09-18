@@ -6,6 +6,7 @@
 const fs = require("fs");
 const path = require("path");
 
+const { appointedCarrierCompareNote, thirdPartyFuneralAverageNote } = require("../lib/company-compare-disclaimer");
 const ROOT = path.join(__dirname, "..");
 const HEADER_ES = path.join(ROOT, "includes/site-header-inner.html");
 const HEADER_EN = path.join(ROOT, "includes/en-site-header.html");
@@ -497,6 +498,7 @@ ${desktopRows}
   </table>
 </div>
 ${footerNote}
+${appointedCarrierCompareNote(lang)}
 <script>
 (function () {
   function openDlg(id) {
@@ -993,7 +995,7 @@ function renderEs(code) {
 <link href="${prefix}bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
 <link href="${prefix}css/quote-flow-shared.css?v=20260905-search" rel="stylesheet"/>
 <link href="${prefix}css/site-footer.css?v=20260721-lip-page" rel="stylesheet"/>
-<link href="${prefix}css/state-coverage.css?v=20260808-carrier-score" rel="stylesheet"/>
+<link href="${prefix}css/state-coverage.css?v=20260917-compare-legal" rel="stylesheet"/>
 <link href="${prefix}css/mvi-licensing-map.css?v=20260726-state-cov" rel="stylesheet"/>
 <link href="${prefix}css/mvi-assistant-widget.css?v=20260808-chat-sm" rel="stylesheet"/>
 <link href="${prefix}css/fontawesome-mvi.min.css?v=20260723-brands-fix" rel="stylesheet"/>
@@ -1021,13 +1023,14 @@ ${stateHero(code, "es", prefix, prefix)}
     <h2 class="h4 fw-bold mb-3" style="color:#1a365d;">¿Cuánto cuesta un funeral en ${esc(name)}?</h2>
     <p class="text-body-secondary mb-3">Promedio del costo de los componentes del servicio funerario en ${esc(name)} (actualizados ${esc(CAPTURED_AT)}). Use estas cifras para estimar cuánta cobertura de gastos finales podría necesitar.</p>
     ${costTable(code, "es")}
-    <p class="small text-muted mt-3 mb-0">Fuente: <a href="${esc(st.sourceUrl)}" rel="noopener" target="_blank">Funeralocity</a> (promedios estatales). Los precios varían por funeraria, ciudad y servicios elegidos. También puede usar nuestra <a href="${prefix}final-expense-estimator.html">calculadora de gastos finales</a>.</p>
+    <p class="small text-muted mt-3 mb-2">Fuente: <a href="${esc(st.sourceUrl)}" rel="noopener" target="_blank">Funeralocity</a> (promedios estatales). Los precios varían por funeraria, ciudad y servicios elegidos. También puede usar nuestra <a href="${prefix}final-expense-estimator.html">calculadora de gastos finales</a>.</p>
+    ${thirdPartyFuneralAverageNote("es")}
   </div>
 </section>
 
 <section class="py-5 bg-light border-bottom" id="aseguradoras">
   <div class="container-fluid sc-carrier-section-container px-3 px-lg-4">
-    <h2 class="h4 fw-bold mb-2" style="color:#1a365d;">Aseguradoras que Julie puede comparar en ${esc(name)}</h2>
+    <h2 class="h4 fw-bold mb-2" style="color:#1a365d;">Aseguradoras que Mejor Vida Seguros puede comparar en ${esc(name)}</h2>
     <p class="text-body-secondary mb-4">El detalle completo de cada aseguradora está en su página de perfil.</p>
     ${carriersEs(prefix)}
   </div>
@@ -1102,7 +1105,7 @@ function renderEn(code) {
 <link href="${root}bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
 <link href="${root}css/quote-flow-shared.css?v=20260905-search" rel="stylesheet"/>
 <link href="${root}css/site-footer.css?v=20260721-lip-page" rel="stylesheet"/>
-<link href="${root}css/state-coverage.css?v=20260808-carrier-score" rel="stylesheet"/>
+<link href="${root}css/state-coverage.css?v=20260917-compare-legal" rel="stylesheet"/>
 <link href="${root}css/mvi-licensing-map.css?v=20260726-state-cov" rel="stylesheet"/>
 <link href="${root}css/mvi-assistant-widget.css?v=20260808-chat-sm" rel="stylesheet"/>
 <link href="${root}css/fontawesome-mvi.min.css?v=20260723-brands-fix" rel="stylesheet"/>
@@ -1129,13 +1132,14 @@ ${stateHero(code, "en", en, root)}
     <h2 class="h4 fw-bold mb-3" style="color:#1a365d;">How much does a funeral cost in ${esc(name)}?</h2>
     <p class="text-body-secondary mb-3">Average cost of funeral service components in ${esc(name)} (updated ${esc(CAPTURED_AT)}). Use these figures to estimate how much final expense coverage you may need.</p>
     ${costTable(code, "en")}
-    <p class="small text-muted mt-3 mb-0">Source: <a href="${esc(st.sourceUrl)}" rel="noopener" target="_blank">Funeralocity</a> (state averages). Prices vary by funeral home, city, and services chosen. You can also use our <a href="${en}final-expense-estimator.html">final expense estimator</a>.</p>
+    <p class="small text-muted mt-3 mb-2">Source: <a href="${esc(st.sourceUrl)}" rel="noopener" target="_blank">Funeralocity</a> (state averages). Prices vary by funeral home, city, and services chosen. You can also use our <a href="${en}final-expense-estimator.html">final expense estimator</a>.</p>
+    ${thirdPartyFuneralAverageNote("en")}
   </div>
 </section>
 
 <section class="py-5 bg-light border-bottom" id="carriers">
   <div class="container-fluid sc-carrier-section-container px-3 px-lg-4">
-    <h2 class="h4 fw-bold mb-2" style="color:#1a365d;">Carriers Julie can compare in ${esc(name)}</h2>
+    <h2 class="h4 fw-bold mb-2" style="color:#1a365d;">Carriers Mejor Vida Insurance can compare in ${esc(name)}</h2>
     <p class="text-body-secondary mb-4">Full detail for each carrier lives on its profile page.</p>
     ${carriersEn(root, en)}
   </div>

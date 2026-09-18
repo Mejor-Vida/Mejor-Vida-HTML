@@ -233,6 +233,7 @@
     var outRange = form.querySelector("[data-out-range]");
     var outNote = form.querySelector("[data-out-note]");
     var casketWrap = form.querySelector("[data-casket-wrap]");
+    var vaultWrap = form.querySelector("[data-vault-wrap]");
     var quoteTimer = null;
     var quoteSeq = 0;
     var PLOT_NEW = Number(CONFIG.plotNew) || 0;
@@ -247,10 +248,13 @@
       var vaultOn = form.vault.checked;
       var extra = Number(form.extra.value) || 0;
       var gpl = CONFIG.gpl[home] || CONFIG.gpl.us || {};
-      var funeral = gpl[service] || 0;
+      var funeral = Object.prototype.hasOwnProperty.call(gpl, service)
+        ? gpl[service]
+        : (CONFIG.gpl.us && CONFIG.gpl.us[service]) || 0;
       var needsCasket = service === "immediateBurial" || service === "traditional";
       var bundled = homeIncludesCasket(home, service);
       if (casketWrap) casketWrap.hidden = !needsCasket || bundled;
+      if (vaultWrap) vaultWrap.hidden = !needsCasket;
       if (needsCasket && !bundled && form.casket.checked) funeral += CASKET_TYPICAL;
       if (plot === "new") funeral += PLOT_NEW;
       if (plot === "resale") funeral += PLOT_RESALE;

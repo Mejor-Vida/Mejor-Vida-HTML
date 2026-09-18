@@ -1551,6 +1551,29 @@
   margin-top: 0.2rem;
 }
 
+.sc-compare-legal {
+  margin: 0.85rem 0 0;
+  padding: 0.85rem 1rem;
+  border: 1px solid #d9e3ee;
+  border-radius: 0.45rem;
+  background: #f7fafc;
+  font-size: 0.8rem;
+  line-height: 1.45;
+  color: #4a5568;
+}
+
+.sc-compare-legal p {
+  margin: 0 0 0.65rem;
+}
+
+.sc-compare-legal p:last-child {
+  margin-bottom: 0;
+}
+
+.sc-compare-legal strong {
+  color: #1a365d;
+}
+
 .sc-analysis-grid {
   display: grid;
   gap: 1rem;
@@ -1806,6 +1829,17 @@
 .sc-calc-check input {
   margin-top: 0.2rem;
   accent-color: #1a365d;
+}
+
+.sc-calc-check-block {
+  grid-column: 1 / -1;
+}
+
+.sc-calc-hint {
+  margin: 0.45rem 0.15rem 0;
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: #5a6a7d;
 }
 
 .sc-calc-results {

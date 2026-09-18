@@ -1,5 +1,7 @@
 /**
- * Alias of js/city-guide.js so older Lincoln cache-bust URLs still load.
+ * Canonical city guide: plot resale board + funeral/coverage calculator.
+ * Config comes from #city-guide-config (written by scripts/city-guide-html.js).
+ * Do not add a second calculator style — see .cursor/rules/city-page-layout.mdc.
  */
 (function () {
   var lang = document.documentElement.classList.contains("lang-en") ? "en" : "es";
@@ -245,7 +247,9 @@
       var vaultOn = form.vault.checked;
       var extra = Number(form.extra.value) || 0;
       var gpl = CONFIG.gpl[home] || CONFIG.gpl.us || {};
-      var funeral = gpl[service] || 0;
+      var funeral = Object.prototype.hasOwnProperty.call(gpl, service)
+        ? gpl[service]
+        : (CONFIG.gpl.us && CONFIG.gpl.us[service]) || 0;
       var needsCasket = service === "immediateBurial" || service === "traditional";
       var bundled = homeIncludesCasket(home, service);
       if (casketWrap) casketWrap.hidden = !needsCasket || bundled;

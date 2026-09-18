@@ -2,13 +2,13 @@
 /**
  * Bilingual city final-expense pages.
  * Lincoln layout is canonical (scripts/city-guides/{slug}.js + city-guide-html.js).
- * Omaha stays layout: "classic" until it is rebuilt to the same format.
  * Usage: node scripts/render-city-coverage-pages.js
  */
 const fs = require("fs");
 const path = require("path");
 const { guideMain } = require("./city-guide-html");
 const lincolnCity = require("./city-guides/lincoln");
+const omahaCity = require("./city-guides/omaha");
 
 const ROOT = path.join(__dirname, "..");
 const HEADER_ES = path.join(ROOT, "includes/site-header-inner.html");
@@ -17,7 +17,7 @@ const FOOTER_ES = path.join(ROOT, "includes/site-footer-inner.html");
 const FOOTER_EN = path.join(ROOT, "includes/en-site-footer.html");
 
 const NPN = "21695431";
-const CSS_VER = "20260917-city-guide1";
+const CSS_VER = "20260917-omaha-guide5";
 
 const LICENSE = {
   NE: {
@@ -29,113 +29,7 @@ const LICENSE = {
 };
 
 const CITIES = [
-  {
-    slug: "omaha",
-    layout: "classic",
-    nameEs: "Omaha",
-    nameEn: "Omaha",
-    stateSlug: "nebraska",
-    stateNameEs: "Nebraska",
-    stateNameEn: "Nebraska",
-    stateCode: "NE",
-    heroFile: "omaha-bob-kerrey-bridge",
-    heroCaptionEs: "Puente peatonal Bob Kerrey, Omaha",
-    heroCaptionEn: "Bob Kerrey Pedestrian Bridge, Omaha",
-    heroClass: "",
-    heroW: 1024,
-    heroH: 591,
-    heroVer: "bridge-v1",
-    titleEs: "Seguro de gastos finales en Omaha | Mejor Vida Seguros",
-    titleEn: "Final Expense Insurance in Omaha | Mejor Vida Insurance",
-    descEs:
-      "Mejor Vida Seguros compara seguro de gastos finales en Omaha. Precios de funerarias locales, primas ilustrativas y licencia de Nebraska (NPN #21695431).",
-    descEn:
-      "Mejor Vida Insurance compares final expense coverage in Omaha. Local funeral-home prices, illustrative premiums, and Nebraska licensing (NPN #21695431).",
-    bulletsEs: [
-      `Cremación directa publicada en Omaha desde <strong>$995</strong> (Chapel of Memories). Un entierro con velatorio en la región ronda <strong>$8,755</strong> (NFDA 2023).`,
-      `Mejor Vida Seguros compara compañías designadas según su edad, salud y presupuesto.`,
-      `Licenciados para vender seguro de vida en Nebraska. NPN #${NPN}.`,
-    ],
-    bulletsEn: [
-      `Direct cremation in Omaha is published from <strong>$995</strong> (Chapel of Memories). A funeral with viewing in the region is about <strong>$8,755</strong> (NFDA 2023).`,
-      `Mejor Vida Insurance compares appointed companies based on your age, health, and budget.`,
-      `Licensed to sell life insurance in Nebraska. NPN #${NPN}.`,
-    ],
-    funeralIntroEs:
-      "No publicamos un “promedio de Omaha” inventado. Estas cifras salen de funerarias que publican su lista o de tableros que citan esas listas. Pida siempre la <strong>lista general de precios (GPL)</strong> a la funeraria. El lote, la bóveda y la lápida casi nunca van incluidos.",
-    funeralIntroEn:
-      "We do not invent an “average funeral in Omaha.” These figures come from funeral homes that publish a list, or from boards that cite those lists. Always ask the home for its <strong>General Price List (GPL)</strong>. The cemetery plot, vault, and marker are almost never included.",
-    funeralRowsEs: [
-      {
-        source:
-          '<a href="https://chapelofmemories.com/" rel="noopener" target="_blank">Chapel of Memories</a><br/><span class="small text-body-secondary">4712 S 82nd St, Omaha · 402-551-1011</span>',
-        price: "Cremación directa desde <strong>$995</strong>",
-        notes:
-          "Revisado 16 sep. 2026. Atienden Omaha y el condado Douglas. No es un precio de Mejor Vida Seguros.",
-      },
-      {
-        source:
-          '<a href="https://www.funeralocity.com/search/ne/omaha/" rel="noopener" target="_blank">Funeralocity · Omaha</a>',
-        price: "Cremación directa listada cerca de <strong>$995–$1,760</strong>",
-        notes: "Tablero de varias funerarias, no una mediana. Los precios cambian; pida la GPL.",
-      },
-      {
-        source: "NFDA 2023 · West North Central",
-        price:
-          "Entierro con velatorio <strong>$8,755</strong> · Cremación con velatorio <strong>$6,713</strong>",
-        notes: "Mediana regional (Nebraska comparte esta región). El cementerio es aparte.",
-      },
-    ],
-    funeralRowsEn: [
-      {
-        source:
-          '<a href="https://chapelofmemories.com/" rel="noopener" target="_blank">Chapel of Memories</a><br/><span class="small text-body-secondary">4712 S 82nd St, Omaha · 402-551-1011</span>',
-        price: "Direct cremation from <strong>$995</strong>",
-        notes: "Checked 16 Sep 2026. Serves Omaha and Douglas County. Not a Mejor Vida Insurance price.",
-      },
-      {
-        source:
-          '<a href="https://www.funeralocity.com/search/ne/omaha/" rel="noopener" target="_blank">Funeralocity · Omaha</a>',
-        price: "Direct cremation listed around <strong>$995–$1,760</strong>",
-        notes: "A board of several homes, not a median. Prices change; ask for the GPL.",
-      },
-      {
-        source: "NFDA 2023 · West North Central",
-        price:
-          "Burial with viewing <strong>$8,755</strong> · Cremation with viewing <strong>$6,713</strong>",
-        notes: "Regional median (Nebraska shares this region). Cemetery is extra.",
-      },
-    ],
-    cemeteries: null,
-    coverageNoteEs:
-      "Para una cremación sencilla en Omaha, $5,000 a $10,000 suele alcanzar. Un entierro tradicional, con lote y marcador, suele pedir $10,000 a $20,000. Mejor Vida Seguros compara compañías designadas; no hay garantía de emisión ni de precio. El detalle de cada aseguradora está en la <a href=\"../nebraska.html#aseguradoras\">guía de Nebraska</a>.",
-    coverageNoteEn:
-      "For a simple Omaha cremation, $5,000 to $10,000 is often enough. A traditional burial, with plot and marker, often needs $10,000 to $20,000. Mejor Vida Insurance compares appointed companies; there is no guarantee of issue or price. Carrier detail lives on the <a href=\"../nebraska.html#carriers\">Nebraska guide</a>.",
-    metroEs: ["Omaha", "Bellevue", "Papillion", "La Vista", "Ralston", "Elkhorn"],
-    metroEn: ["Omaha", "Bellevue", "Papillion", "La Vista", "Ralston", "Elkhorn"],
-    metroTitleEs: "Área que atendemos en el metro de Omaha",
-    metroTitleEn: "Omaha metro we serve",
-    metroNoteEs:
-      'Cotizamos por teléfono, WhatsApp y en línea a residentes de Nebraska en estas comunidades. No hay oficina de atención al público. Lincoln tiene <a href="lincoln.html">su propia guía</a>.',
-    metroNoteEn:
-      'We quote by phone, WhatsApp, and online for Nebraska residents in these communities. There is no public walk-in office. Lincoln has <a href="lincoln.html">its own guide</a>.',
-    faqCremationEs: {
-      q: "¿Cuánta cobertura suele alcanzar para una cremación en Omaha?",
-      a: "Con cremación directa publicada desde $995, muchas familias eligen $5,000 a $10,000 para el servicio, urna, viajes y cuentas pequeñas. Un entierro tradicional suele necesitar más, a menudo $10,000 a $20,000, porque el lote, la bóveda y la lápida no van en el paquete de la funeraria.",
-    },
-    faqCremationEn: {
-      q: "How much coverage is usually enough for cremation in Omaha?",
-      a: "With direct cremation published from $995, many families choose $5,000 to $10,000 for the service, urn, travel, and small bills. A traditional burial often needs more, commonly $10,000 to $20,000, because the plot, vault, and marker are not in the funeral-home package.",
-    },
-    faqPrepaidEs: {
-      q: "¿Cuál es la diferencia entre un funeral prepagado y este seguro?",
-      a: "El prepagado se ata a una funeraria y puede fijar el precio del servicio. El seguro de gastos finales paga efectivo a su beneficiario: puede usarlo en Chapel of Memories, en otra funeraria, o en otros gastos finales.",
-    },
-    faqPrepaidEn: {
-      q: "What is the difference between a prepaid funeral and this insurance?",
-      a: "A prepaid plan is tied to one funeral home and may lock that home’s service price. Final expense insurance pays cash to your beneficiary. They can use it at Chapel of Memories, another home, or for other final bills.",
-    },
-  },
+  omahaCity,
   lincolnCity,
 ];
 
@@ -302,7 +196,7 @@ function faqItems(lang, city) {
       },
       {
         q: "¿Atienden en español?",
-        a: "Sí. Puede cotizar y hablar en español por teléfono, WhatsApp o el formulario en línea.",
+        a: "Sí. Atendemos en español. Las cotizaciones oficiales son por teléfono.",
       },
     ];
   }
@@ -322,7 +216,7 @@ function faqItems(lang, city) {
     },
     {
       q: "Do you work in Spanish?",
-      a: "Yes. You can quote and speak in Spanish by phone, WhatsApp, or the online form.",
+      a: "Yes. We work in Spanish. Official quotes are by phone.",
     },
   ];
 }
@@ -521,8 +415,8 @@ function documentGuide(lang, city) {
     ? `Cotice gastos finales en ${city.nameEs}`
     : `Get a final expense quote in ${city.nameEn}`;
   const ctaP = isEs
-    ? "Cotización gratuita. Mejor Vida Seguros compara opciones según su edad, salud y presupuesto. No es una cotización oficial hasta que una aseguradora la confirme."
-    : "Free quote. Mejor Vida Insurance compares options based on your age, health, and budget. It is not an official quote until a carrier confirms it.";
+    ? "Cotización gratuita. Mejor Vida Seguros compara opciones según su edad, salud y presupuesto. La cotización oficial es por teléfono."
+    : "Free quote. Mejor Vida Insurance compares options based on your age, health, and budget. Official quotes are by phone.";
   const ctaQuote = isEs ? "Cotización gratuita" : "Free quote";
   const ctaCall = isEs ? "Agendar una llamada" : "Schedule a call";
   const scheduleHref = isEs ? "/schedule-julie.html" : "/en/schedule-julie.html";
