@@ -17,6 +17,25 @@ function money(n) {
   return "$" + Number(n).toLocaleString("en-US");
 }
 
+function joinTowns(towns, lang) {
+  const list = (towns || []).map((n) => String(n || "").trim()).filter(Boolean);
+  if (!list.length) return "";
+  if (list.length === 1) return list[0];
+  const last = list[list.length - 1];
+  const rest = list.slice(0, -1).join(", ");
+  return lang === "es" ? `${rest} y ${last}` : `${rest}, and ${last}`;
+}
+
+function metroServeLine(lang, city) {
+  const towns = lang === "es" ? city.metroEs : city.metroEn;
+  const places = joinTowns(towns, lang);
+  if (!places) return "";
+  const stateName = lang === "es" ? city.stateNameEs : city.stateNameEn;
+  return lang === "es"
+    ? `Mejor Vida Seguros cotiza seguro de gastos finales y de entierro por teléfono para residentes de ${stateName} en ${places}.`
+    : `Mejor Vida Insurance quotes final expense and burial insurance by phone for ${stateName} residents in ${places}.`;
+}
+
 function withEstimator(html, href) {
   return String(html || "").replace(/__ESTIMATOR_HREF__/g, href);
 }
@@ -79,6 +98,38 @@ ${body}
         </tbody>
       </table>
     </div>`;
+}
+
+function unpublishedHomesHtml(lang, guide, cityName) {
+  const homes = guide.unpublishedHomes || [];
+  if (!homes.length) return "";
+  const title =
+    lang === "es" ? `Funerarias en ${cityName}` : `Funeral homes in ${cityName}`;
+  const custom = lang === "es" ? guide.unpublishedLeadEs : guide.unpublishedLeadEn;
+  const lead =
+    custom ||
+    (lang === "es"
+      ? `Estas funerarias de ${esc(
+          cityName
+        )} no publican una lista general de precios en internet. Llame y pida la lista general de precios vigente de los servicios.`
+      : `These ${esc(
+          cityName
+        )} funeral homes do not publish a general price list online. Call and ask for the current general price list for services.`);
+  const items = homes
+    .map((h) => {
+      const label = esc(h.name);
+      const name = h.href
+        ? `<a href="${esc(h.href)}" rel="noopener" target="_blank">${label}</a>`
+        : label;
+      const phone = lang === "es" ? `Teléfono ${esc(h.phone)}` : `Phone ${esc(h.phone)}`;
+      return `      <li class="mb-2"><strong>${name}</strong> — ${esc(h.addr)}. ${phone}.</li>`;
+    })
+    .join("\n");
+  return `<h3 class="h5 fw-bold mt-4 mb-3" style="color:#1a365d;">${esc(title)}</h3>
+    <p class="text-body-secondary mb-3">${lead}</p>
+    <ul class="text-body-secondary ps-3 mb-0">
+${items}
+    </ul>`;
 }
 
 function analysisCards(lang, guide, estimatorHref) {
@@ -365,6 +416,7 @@ function guideMain(lang, city, ctx) {
   <div class="container sc-city-prose">
     <h2 class="h4 fw-bold mb-3" style="color:#1a365d;">Qué es el seguro de gastos finales</h2>
     <p class="text-body-secondary mb-3">Es un <strong>seguro de vida entera</strong> de monto modesto ($5,000 a $25,000 es habitual). El beneficio se paga en <strong>efectivo a su beneficiario</strong>. Sirve para funeral, cremación, deudas médicas y cuentas pequeñas. No es un funeral prepagado: no queda atado a una funeraria ni a un lote.</p>
+    <p class="text-body-secondary mb-3">También se le llama <strong>seguro de entierro</strong> o <strong>seguro funeral</strong>. Es el mismo producto; el nombre no obliga a gastar el cheque en un sepelio concreto. <a href="${root}blog/que-es-seguro-gastos-finales.html">Qué es este seguro</a>.</p>
     <ul class="text-body-secondary ps-3 mb-0">
       <li class="mb-2"><strong>Emisión simplificada:</strong> preguntas de salud, sin examen. Si lo aprueban, el beneficio suele ser completo desde el primer día.</li>
       <li class="mb-2"><strong>Aceptación garantizada:</strong> sin preguntas de salud, con un período de espera de dos o tres años.</li>
@@ -390,6 +442,7 @@ function guideMain(lang, city, ctx) {
     <h2 class="h4 fw-bold mb-3" style="color:#1a365d;">Qué cambia de una funeraria a otra</h2>
     <p class="text-body-secondary mb-4">${esc(compareLead)}</p>
     ${analysisCards("es", guide, estimatorHref)}
+    ${unpublishedHomesHtml("es", guide, name)}
   </div>
 </section>
 
@@ -442,6 +495,7 @@ ${(offices || []).map((o) => `      <li class="mb-2">${o}</li>`).join("\n")}
 <section class="py-5 bg-light border-bottom" id="metro">
   <div class="container sc-city-prose">
     <h2 class="h4 fw-bold mb-3" style="color:#1a365d;">${esc(city.metroTitleEs)}</h2>
+    ${metroServeLine("es", city) ? `<p class="text-body-secondary mb-3">${esc(metroServeLine("es", city))}</p>` : ""}
     <p class="text-body-secondary mb-3">${city.metroNoteEs}</p>
     <ul class="sc-city-pills">${city.metroEs.map((n) => `<li>${esc(n)}</li>`).join("")}</ul>
   </div>
@@ -483,6 +537,7 @@ ${(offices || []).map((o) => `      <li class="mb-2">${o}</li>`).join("\n")}
   <div class="container sc-city-prose">
     <h2 class="h4 fw-bold mb-3" style="color:#1a365d;">What final expense insurance is</h2>
     <p class="text-body-secondary mb-3">It is <strong>whole life insurance</strong> in a modest amount ($5,000 to $25,000 is typical). The benefit is paid in <strong>cash to your beneficiary</strong>. It can cover a funeral, cremation, medical bills, and small debts. It is not a prepaid funeral: it is not tied to one funeral home or one plot.</p>
+    <p class="text-body-secondary mb-3">It is also called <strong>burial insurance</strong> or <strong>funeral insurance</strong>. That is the same smaller permanent life product; the name does not require spending the check on a specific funeral. <a href="${ctx.en}what-is-final-expense-insurance.html">What this insurance is</a>.</p>
     <ul class="text-body-secondary ps-3 mb-0">
       <li class="mb-2"><strong>Simplified issue:</strong> health questions, no exam. If approved, the full benefit usually pays from day one.</li>
       <li class="mb-2"><strong>Guaranteed acceptance:</strong> no health questions, with a two- or three-year waiting period.</li>
@@ -508,6 +563,7 @@ ${(offices || []).map((o) => `      <li class="mb-2">${o}</li>`).join("\n")}
     <h2 class="h4 fw-bold mb-3" style="color:#1a365d;">What changes from one funeral home to another</h2>
     <p class="text-body-secondary mb-4">${esc(compareLead)}</p>
     ${analysisCards("en", guide, estimatorHref)}
+    ${unpublishedHomesHtml("en", guide, name)}
   </div>
 </section>
 
@@ -560,6 +616,7 @@ ${(offices || []).map((o) => `      <li class="mb-2">${o}</li>`).join("\n")}
 <section class="py-5 bg-light border-bottom" id="metro">
   <div class="container sc-city-prose">
     <h2 class="h4 fw-bold mb-3" style="color:#1a365d;">${esc(city.metroTitleEn)}</h2>
+    ${metroServeLine("en", city) ? `<p class="text-body-secondary mb-3">${esc(metroServeLine("en", city))}</p>` : ""}
     <p class="text-body-secondary mb-3">${city.metroNoteEn}</p>
     <ul class="sc-city-pills">${city.metroEn.map((n) => `<li>${esc(n)}</li>`).join("")}</ul>
   </div>
@@ -586,4 +643,4 @@ ${(offices || []).map((o) => `      <li class="mb-2">${o}</li>`).join("\n")}
 `;
 }
 
-module.exports = { guideMain };
+module.exports = { guideMain, joinTowns, metroServeLine };

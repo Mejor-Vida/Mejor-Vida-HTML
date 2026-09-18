@@ -26,6 +26,7 @@ const STATIC_PAGES = [
   { loc: "/planificacion-patrimonial.html", priority: "0.88" },
   { loc: "/contact.html", priority: "0.75" },
   { loc: "/buscar-sitio.html", priority: "0.80" },
+  { loc: "/funerarias-cementerios.html", priority: "0.84" },
   { loc: "/quote.html", priority: "0.90" },
   { loc: "/schedule-julie.html", priority: "0.75" },
   { loc: "/aseguradoras.html", priority: "0.80" },
@@ -154,6 +155,32 @@ function feGuidePages() {
     .sort((a, b) => a.loc.localeCompare(b.loc));
 }
 
+function funeralDirectoryPages() {
+  const dir = path.join(ROOT, "funerarias-cementerios");
+  if (!fs.existsSync(dir)) return [];
+  const out = [];
+  function walk(abs, urlBase) {
+    for (const name of fs.readdirSync(abs)) {
+      const child = path.join(abs, name);
+      const st = fs.statSync(child);
+      if (st.isDirectory()) {
+        walk(child, `${urlBase}/${name}`);
+        continue;
+      }
+      if (!name.endsWith(".html")) continue;
+      const html = fs.readFileSync(child, "utf8");
+      if (isNoindex(html)) continue;
+      out.push({
+        loc: `${urlBase}/${name}`,
+        priority: urlBase.split("/").length > 2 ? "0.78" : "0.82",
+        lastmod: lastmodFromFile(child),
+      });
+    }
+  }
+  walk(dir, "/funerarias-cementerios");
+  return out.sort((a, b) => a.loc.localeCompare(b.loc));
+}
+
 function blogPosts() {
   const dir = path.join(ROOT, "blog");
   if (!fs.existsSync(dir)) return [];
@@ -201,6 +228,10 @@ for (const page of STATIC_PAGES) {
 
 for (const guide of feGuidePages()) {
   entries.push(buildUrlEntry(guide.loc, guide.priority, guide.lastmod, VIDEO_PAGES.get(guide.loc) || null));
+}
+
+for (const page of funeralDirectoryPages()) {
+  entries.push(buildUrlEntry(page.loc, page.priority, page.lastmod, VIDEO_PAGES.get(page.loc) || null));
 }
 
 for (const post of blogPosts()) {

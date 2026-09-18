@@ -2,9 +2,14 @@
  * Shared Kansas city-guide builder. Same locked layout as Lincoln.
  * Canonical format: .cursor/rules/city-page-layout.mdc
  *
- * Named-home dollars are first-party GPLs or GPL figures transcribed in the
- * FCA-GKC 2025 survey. The estimator column is Kansas Funeralocity averages
- * (captured 26 Jul 2026). Do not copy Nebraska funeral-home or cemetery names.
+ * Named-home columns only when that home publishes a first-party general price
+ * list (or FCA-GKC 2025 survey figures from that list) for all four package
+ * rows. Do not reuse the standard-funeral figure as cremation-with-memorial:
+ * the FCA survey has no memorial row. If no local home has a complete
+ * four-package list, the chart is estimator-only. Do not put Funeralocity
+ * averages in a named-home column. The estimator column is Kansas Funeralocity
+ * averages (captured 26 Jul 2026). Do not copy Nebraska funeral-home or
+ * cemetery names.
  */
 const KS_AVG = {
   directCremation: 2553,
@@ -61,20 +66,23 @@ function cell(amt, es, en) {
   return { amt, es, en };
 }
 
-function fcaMem(stdAmt) {
-  return cell(
-    stdAmt,
-    "Funeral estándar de esa GPL (encuesta FCA-GKC). No publican un memorial aparte en la encuesta.",
-    "Standard funeral from that GPL (FCA-GKC survey). The survey has no separate memorial row."
-  );
+function joinTowns(towns, lang) {
+  const list = (towns || []).map((n) => String(n || "").trim()).filter(Boolean);
+  if (!list.length) return "";
+  if (list.length === 1) return list[0];
+  const last = list[list.length - 1];
+  const rest = list.slice(0, -1).join(", ");
+  return lang === "es" ? `${rest} y ${last}` : `${rest}, and ${last}`;
 }
 
-function fcaTr(stdAmt) {
-  return cell(
-    stdAmt,
-    "Funeral estándar de esa GPL (encuesta FCA-GKC). Suele incluir ataúd.",
-    "Standard funeral from that GPL (FCA-GKC survey). A casket is typically included."
-  );
+function nearbyForMeta(metro, cityName) {
+  const primary = String(cityName || "").toLowerCase();
+  return (metro || [])
+    .filter((n) => {
+      const a = String(n || "").toLowerCase();
+      return a && a !== primary && !primary.startsWith(a + ",") && !primary.startsWith(a + " (");
+    })
+    .slice(0, 3);
 }
 
 function ownGuideLinks(lang, others) {
@@ -88,41 +96,58 @@ function ownGuideLinks(lang, others) {
   return bits ? `${bits}.` : "";
 }
 
+function namedHomeCells(homes, pick) {
+  const cells = {};
+  for (const h of homes) cells[h.id] = pick(h);
+  return cells;
+}
+
+function joinListEs(items) {
+  if (!items.length) return "";
+  if (items.length === 1) return items[0];
+  return items.slice(0, -1).join(", ") + " y " + items[items.length - 1];
+}
+
+function joinListEn(items) {
+  if (!items.length) return "";
+  if (items.length === 1) return items[0];
+  if (items.length === 2) return items[0] + " and " + items[1];
+  return items.slice(0, -1).join(", ") + ", and " + items[items.length - 1];
+}
+
 function makeCity(spec) {
   const name = spec.nameEn;
   const nameEs = spec.nameEs || spec.nameEn;
-  const homes = spec.homes;
-  const dcs = homes.map((h) => ({ name: h.name, amt: h.dc }));
-  dcs.sort((a, b) => a.amt - b.amt);
+  const homes = spec.homes || [];
+  const dcs = homes.map((h) => ({ name: h.name, amt: h.dc })).sort((a, b) => a.amt - b.amt);
   const trads = homes.map((h) => ({ name: h.name, amt: h.trad, casket: h.casketTrad }));
-  const h0 = homes[0];
-  const h1 = homes[1];
-  const h2 = homes[2];
   const others = spec.nearbyGuides || [];
+  const nearEs = joinTowns(nearbyForMeta(spec.metroEs, nameEs), "es");
+  const nearEn = joinTowns(nearbyForMeta(spec.metroEn, name), "en");
+  const dcBitsEs = joinListEs(dcs.map((d) => `<strong>${money(d.amt)}</strong> en ${d.name}`));
+  const dcBitsEn = joinListEn(dcs.map((d) => `<strong>${money(d.amt)}</strong> at ${d.name}`));
+  const prepaidWhereEs = homes.length
+    ? homes.map((h) => h.name).join(", ")
+    : `cualquier funeraria de ${nameEs}`;
+  const prepaidWhereEn = homes.length
+    ? homes.map((h) => h.name).join(", ")
+    : `any funeral home in ${name}`;
 
   const packages = [
     line("Cremación directa", "Direct cremation", PKG_DC_ES, PKG_DC_EN, {
-      [h0.id]: cell(h0.dc, h0.dcEs, h0.dcEn),
-      [h1.id]: cell(h1.dc, h1.dcEs, h1.dcEn),
-      [h2.id]: cell(h2.dc, h2.dcEs, h2.dcEn),
+      ...namedHomeCells(homes, (h) => cell(h.dc, h.dcEs, h.dcEn)),
       us: cell(KS_AVG.directCremation, AVG_NOTE.dc.es, AVG_NOTE.dc.en),
     }),
     line("Entierro inmediato", "Immediate burial", PKG_IB_ES, PKG_IB_EN, {
-      [h0.id]: cell(h0.ib, h0.ibEs, h0.ibEn),
-      [h1.id]: cell(h1.ib, h1.ibEs, h1.ibEn),
-      [h2.id]: cell(h2.ib, h2.ibEs, h2.ibEn),
+      ...namedHomeCells(homes, (h) => cell(h.ib, h.ibEs, h.ibEn)),
       us: cell(KS_AVG.immediateBurial, AVG_NOTE.ib.es, AVG_NOTE.ib.en),
     }),
     line("Cremación con memorial", "Cremation with memorial", PKG_MEM_ES, PKG_MEM_EN, {
-      [h0.id]: h0.memCell,
-      [h1.id]: h1.memCell,
-      [h2.id]: h2.memCell,
+      ...namedHomeCells(homes, (h) => h.memCell),
       us: cell(KS_AVG.memorialCremation, AVG_NOTE.mem.es, AVG_NOTE.mem.en),
     }),
     line("Funeral tradicional con velatorio", "Traditional funeral with visitation", PKG_TR_ES, PKG_TR_EN, {
-      [h0.id]: h0.trCell,
-      [h1.id]: h1.trCell,
-      [h2.id]: h2.trCell,
+      ...namedHomeCells(homes, (h) => h.trCell),
       us: cell(KS_AVG.traditional, AVG_NOTE.tr.es, AVG_NOTE.tr.en),
     }),
   ];
@@ -167,26 +192,28 @@ function makeCity(spec) {
     heroW: spec.heroW,
     heroH: spec.heroH,
     heroVer: spec.heroVer || "v1",
-    titleEs: `Seguro de gastos finales en ${nameEs} | Mejor Vida Seguros`,
-    titleEn: `Final Expense Insurance in ${name} | Mejor Vida Insurance`,
-    descEs: `Qué es el seguro de gastos finales en ${nameEs}, listas de funerarias lado a lado, lotes y reventa, y una calculadora de cobertura. Licencia de Kansas, NPN #21695431.`,
-    descEn: `What final expense insurance is in ${name}, side-by-side funeral-home lists, plots and resale, and a coverage calculator. Kansas license, NPN #21695431.`,
+    titleEs: `Seguro de gastos finales y de entierro en ${nameEs} | Mejor Vida Seguros`,
+    titleEn: `Final expense and burial insurance in ${name} | Mejor Vida Insurance`,
+    descEs: `Seguro de gastos finales, de entierro o funeral en ${nameEs}${nearEs ? `, ${nearEs}` : ""}: funerarias, lotes y cotización por teléfono. Licencia de Kansas, NPN #21695431.`,
+    descEn: `Final expense, burial, or funeral insurance in ${name}${nearEn ? `, ${nearEn}` : ""}: funeral-home lists, plots, and a phone quote. Kansas license, NPN #21695431.`,
     ctaSubEs:
       "Abajo: qué es este seguro, las listas de funerarias, el lote aparte, y una calculadora de cobertura.",
     ctaSubEn:
       "Below: what this insurance is, funeral-home price lists, the plot as a separate bill, and a coverage calculator.",
     bulletsEs: [
-      "Qué es el seguro de gastos finales y cómo se usa para el funeral.",
+      "Qué es el seguro de gastos finales — también llamado de entierro o funeral — y cómo se usa para el funeral.",
       `Una tabla de paquetes de funerarias en ${nameEs}, del más económico al más caro.`,
       "El lote es una factura aparte del cementerio, con anuncios de reventa que suelen costar menos.",
       "Una calculadora para estimar el funeral, la cobertura y la prima mensual.",
     ],
     bulletsEn: [
-      "What final expense insurance is, and how it pays for a funeral.",
+      "What final expense insurance is — also called burial or funeral insurance — and how it pays for a funeral.",
       `${/^[AEIOU]/i.test(name) ? "An" : "A"} ${name} funeral-home package table, from the least expensive to the most expensive.`,
       "The burial plot is a separate cemetery bill, with resale listings that often cost less.",
       "A calculator for funeral cost, coverage, and a monthly premium.",
     ],
+    countyEs: spec.countyEs || "",
+    countyEn: spec.countyEn || "",
     metroEs: spec.metroEs,
     metroEn: spec.metroEn,
     metroTitleEs: spec.metroTitleEs,
@@ -199,31 +226,35 @@ function makeCity(spec) {
     } communities. There is no public walk-in office. ${ownGuideLinks("en", others)}`,
     faqCremationEs: {
       q: `¿Cuánta cobertura suele alcanzar para una cremación en ${nameEs}?`,
-      a: `Con cremación directa publicada desde ${money(dcs[0].amt)} en ${dcs[0].name}, ${money(
-        dcs[1].amt
-      )} en ${dcs[1].name} y ${money(dcs[2].amt)} en ${dcs[2].name}, muchas familias eligen $5,000 a $10,000 para el servicio, urna, viajes y cuentas pequeñas. Un entierro tradicional suele necesitar más: el paquete de ${
-        trads[0].name
-      } está en ${money(trads[0].amt)}${trads[0].casket ? "" : " sin ataúd"}, y el lote, la bóveda y la lápida van aparte.`,
+      a:
+        spec.faqCremationAEs ||
+        (dcs.length
+          ? `Con cremación directa publicada desde ${joinListEs(
+              dcs.map((d) => `${money(d.amt)} en ${d.name}`)
+            )}, muchas familias eligen $5,000 a $10,000 para el servicio, urna, viajes y cuentas pequeñas. Un entierro tradicional suele necesitar más: el paquete de ${
+              trads[0].name
+            } está en ${money(trads[0].amt)}${trads[0].casket ? "" : " sin ataúd"}, y el lote, la bóveda y la lápida van aparte.`
+          : `Ninguna funeraria de ${nameEs} publica una lista general de precios en internet. El estimador usa $2,553 como promedio de Kansas para cremación directa; ese número no es el precio de una casa. Muchas familias eligen $5,000 a $10,000 para el servicio, urna, viajes y cuentas pequeñas. Un entierro tradicional suele necesitar más: el promedio de Kansas es $8,640, y el lote, la bóveda y la lápida van aparte.`),
     },
     faqCremationEn: {
       q: `How much coverage is usually enough for cremation in ${name}?`,
-      a: `With direct cremation published from ${money(dcs[0].amt)} at ${dcs[0].name}, ${money(
-        dcs[1].amt
-      )} at ${dcs[1].name}, and ${money(dcs[2].amt)} at ${dcs[2].name}, many families choose $5,000 to $10,000 for the service, urn, travel, and small bills. A traditional burial often needs more: ${
-        trads[0].name
-      }’s traditional package is ${money(trads[0].amt)}${trads[0].casket ? "" : " with no casket"}, and the plot, vault, and marker are extra.`,
+      a:
+        spec.faqCremationAEn ||
+        (dcs.length
+          ? `With direct cremation published from ${joinListEn(
+              dcs.map((d) => `${money(d.amt)} at ${d.name}`)
+            )}, many families choose $5,000 to $10,000 for the service, urn, travel, and small bills. A traditional burial often needs more: ${
+              trads[0].name
+            }’s traditional package is ${money(trads[0].amt)}${trads[0].casket ? "" : " with no casket"}, and the plot, vault, and marker are extra.`
+          : `No funeral home in ${name} publishes a general price list online. The estimator uses $2,553 as the Kansas average for direct cremation; that figure is not one home’s price. Many families choose $5,000 to $10,000 for the service, urn, travel, and small bills. A traditional burial often needs more: the Kansas average is $8,640, and the plot, vault, and marker are extra.`),
     },
     faqPrepaidEs: {
       q: "¿Cuál es la diferencia entre un funeral prepagado y este seguro?",
-      a: `El prepagado se ata a una funeraria o a un lote y puede fijar ese precio. El seguro de gastos finales paga efectivo a su beneficiario: puede usarlo en ${homes
-        .map((h) => h.name)
-        .join(", ")}, ${spec.prepaidCemEs}, o en otros gastos finales.`,
+      a: `El prepagado se ata a una funeraria o a un lote y puede fijar ese precio. El seguro de gastos finales paga efectivo a su beneficiario: puede usarlo en ${prepaidWhereEs}, ${spec.prepaidCemEs}, o en otros gastos finales.`,
     },
     faqPrepaidEn: {
       q: "What is the difference between a prepaid funeral and this insurance?",
-      a: `A prepaid plan is tied to one funeral home or plot and may lock that price. Final expense insurance pays cash to your beneficiary. They can use it at ${homes
-        .map((h) => h.name)
-        .join(", ")}, ${spec.prepaidCemEn}, or for other final bills.`,
+      a: `A prepaid plan is tied to one funeral home or plot and may lock that price. Final expense insurance pays cash to your beneficiary. They can use it at ${prepaidWhereEn}, ${spec.prepaidCemEn}, or for other final bills.`,
     },
     faqPlotEs: {
       q: "¿El funeral incluye el lote del cementerio?",
@@ -263,11 +294,11 @@ function makeCity(spec) {
       analysisEs: [
         {
           h: "Empiece por el paquete más barato",
-          p: `La cremación directa es el atajo más barato que publican: <strong>${money(
-            dcs[0].amt
-          )}</strong> en ${dcs[0].name}, <strong>${money(dcs[1].amt)}</strong> en ${dcs[1].name} y <strong>${money(
-            dcs[2].amt
-          )}</strong> en ${dcs[2].name}. El estimador usa <strong>$2,553</strong> para Kansas. Ese número es solo gastos de funeraria: urna, flores y certificados van aparte.`,
+          p:
+            spec.analysisCheapEs ||
+            (dcs.length
+              ? `La cremación directa es el atajo más barato que publican: ${dcBitsEs}. El estimador usa <strong>$2,553</strong> para Kansas. Ese número es solo gastos de funeraria: urna, flores y certificados van aparte.`
+              : `Ninguna funeraria de ${nameEs} publica una lista general de precios en internet, así que esta tabla no las nombra. El estimador usa <strong>$2,553</strong> como promedio de Kansas para cremación directa. Ese número no es el precio de una casa. Pida la lista vigente por teléfono. Urna, flores y certificados van aparte.`),
         },
         {
           h: "El mismo nombre de paquete no incluye lo mismo",
@@ -285,11 +316,11 @@ function makeCity(spec) {
       analysisEn: [
         {
           h: "Start with the least expensive package",
-          p: `Direct cremation is the cheapest published shortcut: <strong>${money(
-            dcs[0].amt
-          )}</strong> at ${dcs[0].name}, <strong>${money(dcs[1].amt)}</strong> at ${dcs[1].name}, and <strong>${money(
-            dcs[2].amt
-          )}</strong> at ${dcs[2].name}. The estimator uses <strong>$2,553</strong> for Kansas. That number is funeral home expenses only: urn, flowers, and death certificates are extra.`,
+          p:
+            spec.analysisCheapEn ||
+            (dcs.length
+              ? `Direct cremation is the cheapest published shortcut: ${dcBitsEn}. The estimator uses <strong>$2,553</strong> for Kansas. That number is funeral home expenses only: urn, flowers, and death certificates are extra.`
+              : `No funeral home in ${name} publishes a general price list online, so this table does not name them. The estimator uses <strong>$2,553</strong> as the Kansas average for direct cremation. That figure is not one home’s price. Ask for the current list by phone. Urn, flowers, and death certificates are extra.`),
         },
         {
           h: "The same package name does not include the same items",
@@ -321,9 +352,12 @@ function makeCity(spec) {
         },
       ],
       packages,
+      unpublishedHomes: spec.unpublishedHomes || [],
+      unpublishedLeadEs: spec.unpublishedLeadEs || "",
+      unpublishedLeadEn: spec.unpublishedLeadEn || "",
       calc: {
         defaultService: "directCremation",
-        defaultHome: homes[0].id,
+        defaultHome: homes[0] ? homes[0].id : "us",
         plotNew: spec.plotNew,
         plotResale: spec.plotResale,
         vault: 1495,
@@ -347,4 +381,4 @@ function jocoNear(except) {
   return JOCO_NEAR.filter((x) => x.slug !== except);
 }
 
-module.exports = { KS_AVG, makeCity, cell, fcaMem, fcaTr, jocoNear };
+module.exports = { KS_AVG, makeCity, cell, jocoNear };

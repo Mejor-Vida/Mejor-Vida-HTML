@@ -35,11 +35,12 @@ Do not bring back Omaha’s old source/price/notes table or the static $10,000 p
 
 ## Package chart (required)
 
-- Three **local funeral homes** plus the estimator column.
-- Every home must **bury and cremate**, and must publish a **complete first-party GPL or package list** (the home’s own site or PDF). No Funeralocity figures in named-home columns.
-- Every cell has a dollar amount. Do not use cremation-only homes that leave burial cells blank.
+- Named-home **columns only** for funeral homes that publish a **complete first-party general price list** (the home’s own site or PDF, or figures transcribed from that list). Plus the estimator column.
+- If no funeral home **in that city** publishes prices, use published lists from homes already named in that page’s **service area** (metro towns). Do not invent a named column from Funeralocity or a state average. If the service area also has no published list, the chart is **estimator-only**.
+- When the chart uses service-area homes, **list the city’s own funeral homes below the analysis cards** and tell readers to call for the current general price list. Do not put those homes on the price chart.
+- Every named home must **bury and cremate**. Every cell in a named-home column has a dollar amount from that home’s list. Do not use cremation-only homes that leave burial cells blank.
 - Package **row** order, cheapest to most expensive: direct cremation → immediate burial → cremation with memorial → traditional funeral with visitation.
-- Source line under the table names each GPL’s effective date. Then the comparison legal note. Do not invent a shorter substitute.
+- Source line under the table names each list’s effective date, or states that local homes do not publish a list. Then the comparison legal note. Do not invent a shorter substitute.
 
 ## Calculator (required)
 
@@ -57,7 +58,7 @@ Lives in `scripts/city-guide-html.js` + `js/city-guide.js`. Do not rebuild it.
 - Shell: `scripts/render-city-coverage-pages.js` — add the city to `CITIES`; omit `layout` or set `layout: "guide"`
 - JS: `js/city-guide.js` + `data/{slug}-plot-resales.json`
 - CSS: `.sc-city-guide` in `css/state-coverage.css` — do not scope new styles only to one city
-- Then `npm run build:city-pages`. Mirror ES + EN. Spanish indexable; English `noindex`.
+- Then `npm run build:city-pages`. Mirror ES + EN. Spanish indexable; English `noindex`. That rebuild also refreshes `data/funeral-resources.json`. Run `npm run build:funeral-resources` to emit crawlable `/funerarias-cementerios/{state}/{city}.html` pages (hubs, extra cities, and nearby towns) that link back to the teaching guide.
 
 ## Do not
 
@@ -68,5 +69,6 @@ Lives in `scripts/city-guide-html.js` + `js/city-guide.js`. Do not rebuild it.
 - Hand-edit the generated HTML; change the builder and rebuild
 - Omit the comparison legal note under the funeral-home package table
 - Fill a home column from Funeralocity
+- List a funeral home on the price chart if it does not publish prices
 - Invent unpublished burial packages
 - Skip the vault explanation, or show the vault checkbox on cremation

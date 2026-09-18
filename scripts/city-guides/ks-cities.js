@@ -1,23 +1,18 @@
-const { makeCity, cell, fcaMem, fcaTr, jocoNear } = require("./ks-factory");
+const { makeCity, cell, jocoNear } = require("./ks-factory");
 
 const GRAVE_KS = "https://www.gravesolutions.com/for-sale/cemetery-properties/kansas";
-const fcaDc = "Cremación directa de esa GPL (encuesta FCA-GKC). Urna aparte.";
-const fcaDcEn = "Direct cremation from that GPL (FCA-GKC survey). Urn extra.";
-const fcaIb = "Entierro inmediato de esa GPL (encuesta FCA-GKC). Ataúd y lote aparte.";
-const fcaIbEn = "Immediate burial from that GPL (FCA-GKC survey). Casket and plot extra.";
-
-function fcaHome(p) {
-  return {
-    ...p,
-    dcEs: p.dcEs || fcaDc,
-    dcEn: p.dcEn || fcaDcEn,
-    ibEs: p.ibEs || fcaIb,
-    ibEn: p.ibEn || fcaIbEn,
-    memCell: p.memCell || fcaMem(p.trad),
-    trCell: p.trCell || fcaTr(p.trad),
-    casketTrad: p.casketTrad !== false,
-  };
-}
+const FCA_NO_MEM_LEAD_ES =
+  "Estas funerarias tienen una lista general de precios (encuesta FCA-GKC 2025: cremación directa, entierro inmediato y funeral estándar). Esa encuesta no incluye un paquete de memorial después de cremación, así que no van en la tabla. Llame y pida la lista general de precios vigente.";
+const FCA_NO_MEM_LEAD_EN =
+  "These funeral homes have a general price list (FCA-GKC 2025 survey: direct cremation, immediate burial, and a standard funeral). That survey has no cremation-with-memorial package, so they are not on the chart. Call and ask for the current general price list.";
+const FCA_NO_MEM_CHEAP_ES =
+  "La encuesta FCA-GKC 2025 transcribió cremación directa, entierro inmediato y funeral estándar, pero no un memorial después de cremación. Esta tabla no nombra esas casas. El estimador usa <strong>$2,553</strong> como promedio de Kansas para cremación directa. Ese número no es el precio de una casa. Pida la lista vigente por teléfono.";
+const FCA_NO_MEM_CHEAP_EN =
+  "The FCA-GKC 2025 survey transcribed direct cremation, immediate burial, and a standard funeral, but not a memorial after cremation. This table does not name those homes. The estimator uses <strong>$2,553</strong> as the Kansas average for direct cremation. That figure is not one home’s price. Ask for the current list by phone.";
+const FCA_NO_MEM_FAQ_ES =
+  "La encuesta FCA-GKC 2025 no incluye un paquete de memorial después de cremación, así que esta tabla no nombra funerarias. El estimador usa $2,553 como promedio de Kansas para cremación directa; ese número no es el precio de una casa. Muchas familias eligen $5,000 a $10,000 para el servicio, urna, viajes y cuentas pequeñas. Un entierro tradicional suele necesitar más: el promedio de Kansas es $8,640, y el lote, la bóveda y la lápida van aparte.";
+const FCA_NO_MEM_FAQ_EN =
+  "The FCA-GKC 2025 survey has no cremation-with-memorial package, so this table does not name funeral homes. The estimator uses $2,553 as the Kansas average for direct cremation; that figure is not one home’s price. Many families choose $5,000 to $10,000 for the service, urn, travel, and small bills. A traditional burial often needs more: the Kansas average is $8,640, and the plot, vault, and marker are extra.";
 
 const wichita = makeCity({
   slug: "wichita",
@@ -154,9 +149,9 @@ const overlandPark = makeCity({
   faqPlotEn:
     "No. The funeral home price is one bill. The plot is another. Ask Johnson County Memorial Gardens (913-451-1860) for its list. Resale plots can cost less; the cemetery still has to change the deed.",
   tableFootEs:
-    "Cifras de cada GPL transcritas en la encuesta FCA-GKC 2025: McGilley & Hoge ago. 2024; Johnson County Funeral Chapel oct. 2024; Overland Park Funeral Chapel oct. 2024. Estimador: promedios Funeralocity de Kansas. Pida siempre la lista actual. No son precios de Mejor Vida Seguros.",
+    "La encuesta FCA-GKC 2025 transcribió las GPL de McGilley & Hoge (ago. 2024), Johnson County Funeral Chapel (oct. 2024) y Overland Park Funeral Chapel (oct. 2024): cremación directa, entierro inmediato y funeral estándar. No incluye un memorial después de cremación, así que esta tabla no las nombra. Estimador: promedios Funeralocity de Kansas. Pida siempre la lista actual. No son precios de Mejor Vida Seguros.",
   tableFootEn:
-    "GPL figures transcribed in the FCA-GKC 2025 survey: McGilley & Hoge Aug 2024; Johnson County Funeral Chapel Oct 2024; Overland Park Funeral Chapel Oct 2024. Estimator: Kansas Funeralocity averages. Always ask for the current list. These are not Mejor Vida Insurance prices.",
+    "The FCA-GKC 2025 survey transcribed GPLs for McGilley & Hoge (Aug 2024), Johnson County Funeral Chapel (Oct 2024), and Overland Park Funeral Chapel (Oct 2024): direct cremation, immediate burial, and a standard funeral. It has no memorial-after-cremation package, so this table does not name them. Estimator: Kansas Funeralocity averages. Always ask for the current list. These are not Mejor Vida Insurance prices.",
   officesNoteEs:
     "Johnson County Memorial Gardens comparte oficina con Johnson County Funeral Chapel. Pleasant Valley no publica el lote en la web. Llame y pida la lista actual por escrito.",
   officesNoteEn:
@@ -175,10 +170,16 @@ const overlandPark = makeCity({
     "<strong>Pleasant Valley Cemetery</strong> — 8100 Mission Rd. Ask the cemetery office for the list.",
     "<strong>Antioch Pioneer Cemetery</strong> — historic Overland Park cemetery. Ask city hall whether spaces are still sold.",
   ],
+  analysisCheapEs: FCA_NO_MEM_CHEAP_ES,
+  analysisCheapEn: FCA_NO_MEM_CHEAP_EN,
+  faqCremationAEs: FCA_NO_MEM_FAQ_ES,
+  faqCremationAEn: FCA_NO_MEM_FAQ_EN,
+  unpublishedLeadEs: FCA_NO_MEM_LEAD_ES,
+  unpublishedLeadEn: FCA_NO_MEM_LEAD_EN,
   analysisSameEs:
-    "El funeral estándar de McGilley & Hoge (<strong>$10,735</strong>), el de Johnson County Funeral Chapel (<strong>$9,155</strong>) y el de Overland Park Funeral Chapel (<strong>$8,455</strong>) son el funeral completo de cada GPL; la encuesta suele incluir ataúd. El promedio de Kansas (<strong>$8,640</strong>) también suele incluir ataúd.",
+    "La encuesta no tiene un memorial después de cremación, así que McGilley & Hoge, Johnson County Funeral Chapel y Overland Park Funeral Chapel no van en la tabla. El funeral estándar de esa encuesta (con ataúd, en muchas casas) no es el mismo paquete que un memorial. El promedio de Kansas (<strong>$8,640</strong>) suele incluir ataúd.",
   analysisSameEn:
-    "McGilley & Hoge’s standard funeral (<strong>$10,735</strong>), Johnson County Funeral Chapel’s (<strong>$9,155</strong>), and Overland Park Funeral Chapel’s (<strong>$8,455</strong>) are each home’s complete-funeral GPL figure; the survey typically includes a casket. Kansas’s average (<strong>$8,640</strong>) usually includes a casket too.",
+    "The survey has no memorial-after-cremation package, so McGilley & Hoge, Johnson County Funeral Chapel, and Overland Park Funeral Chapel are not on the chart. That survey’s standard funeral (often with a casket) is not the same package as a memorial. Kansas’s average (<strong>$8,640</strong>) usually includes a casket.",
   analysisPlotEs:
     "Ninguna cifra de la tabla es propiedad en cementerio ni apertura/cierre. En Johnson County Memorial Gardens llame al <strong>913-451-1860</strong>.",
   analysisPlotEn:
@@ -186,34 +187,26 @@ const overlandPark = makeCity({
   resaleHref: GRAVE_KS,
   plotNew: 4000,
   plotResale: 1800,
-  homes: [
-    fcaHome({
-      id: "mcgilley",
+  homes: [],
+  unpublishedHomes: [
+    {
       name: "McGilley & Hoge",
       href: "https://www.dignitymemorial.com/funeral-homes/overland-park-ks/mcgilley-hoge-johnson-county-memorial-chapel/4976",
-      addr: "8024 Santa Fe Dr · 913-642-3565",
-      dc: 2755,
-      ib: 5445,
-      trad: 10735,
-    }),
-    fcaHome({
-      id: "joco",
+      addr: "8024 Santa Fe Dr",
+      phone: "913-642-3565",
+    },
+    {
       name: "Johnson County Funeral Chapel",
       href: "https://www.johnsoncountyfuneralchapel.com/",
-      addr: "11200 Metcalf Ave · 913-451-1860",
-      dc: 3180,
-      ib: 4995,
-      trad: 9155,
-    }),
-    fcaHome({
-      id: "opchapel",
+      addr: "11200 Metcalf Ave",
+      phone: "913-451-1860",
+    },
+    {
       name: "Overland Park Funeral Chapel",
       href: "https://www.overlandparkfuneralchapel.com/",
-      addr: "8201 Metcalf Ave · 913-648-6224",
-      dc: 2990,
-      ib: 4995,
-      trad: 8455,
-    }),
+      addr: "8201 Metcalf Ave",
+      phone: "913-648-6224",
+    },
   ],
 });
 
@@ -243,9 +236,9 @@ const kansasCity = makeCity({
   faqPlotEn:
     "No. The funeral home price is one bill. The plot is another. Ask Maple Hill (913-831-3345) or Highland Park (913-371-0699) for its list. Resale plots can cost less; the cemetery still has to change the deed.",
   tableFootEs:
-    "Cifras de cada GPL transcritas en la encuesta FCA-GKC 2025: Chapel Hill-Butler ago. 2024; Porter ene. 2025; Highland Park ene. 2025. Estimador: promedios Funeralocity de Kansas. Pida siempre la lista actual. No son precios de Mejor Vida Seguros.",
+    "La encuesta FCA-GKC 2025 transcribió las GPL de Chapel Hill-Butler (ago. 2024), Porter (ene. 2025) y Highland Park (ene. 2025): cremación directa, entierro inmediato y funeral estándar. No incluye un memorial después de cremación, así que esta tabla no las nombra. Estimador: promedios Funeralocity de Kansas. Pida siempre la lista actual. No son precios de Mejor Vida Seguros.",
   tableFootEn:
-    "GPL figures transcribed in the FCA-GKC 2025 survey: Chapel Hill-Butler Aug 2024; Porter Jan 2025; Highland Park Jan 2025. Estimator: Kansas Funeralocity averages. Always ask for the current list. These are not Mejor Vida Insurance prices.",
+    "The FCA-GKC 2025 survey transcribed GPLs for Chapel Hill-Butler (Aug 2024), Porter (Jan 2025), and Highland Park (Jan 2025): direct cremation, immediate burial, and a standard funeral. It has no memorial-after-cremation package, so this table does not name them. Estimator: Kansas Funeralocity averages. Always ask for the current list. These are not Mejor Vida Insurance prices.",
   officesNoteEs:
     "Maple Hill y Highland Park tienen funeraria y cementerio en el mismo terreno. Quindaro no publica el lote en la web. Llame y pida la lista actual por escrito.",
   officesNoteEn:
@@ -264,10 +257,16 @@ const kansasCity = makeCity({
     "<strong>Highland Park Funeral Home & Crematory</strong> — 4101 State Ave. Phone 913-371-0699.",
     "<strong>Quindaro Cemetery</strong> — historic Kansas City, Kansas cemetery. Ask Wyandotte County whether spaces are still sold.",
   ],
+  analysisCheapEs: FCA_NO_MEM_CHEAP_ES,
+  analysisCheapEn: FCA_NO_MEM_CHEAP_EN,
+  faqCremationAEs: FCA_NO_MEM_FAQ_ES,
+  faqCremationAEn: FCA_NO_MEM_FAQ_EN,
+  unpublishedLeadEs: FCA_NO_MEM_LEAD_ES,
+  unpublishedLeadEn: FCA_NO_MEM_LEAD_EN,
   analysisSameEs:
-    "El funeral estándar de Chapel Hill-Butler (<strong>$9,735</strong>), el de Porter (<strong>$8,306</strong>) y el de Highland Park (<strong>$6,500</strong>) son el funeral completo de cada GPL. Highland Park publica cremación directa a <strong>$850</strong>, muy por debajo de las otras. El promedio de Kansas (<strong>$8,640</strong>) suele incluir ataúd.",
+    "La encuesta no tiene un memorial después de cremación, así que Chapel Hill-Butler, Porter y Highland Park no van en la tabla. El funeral estándar de esa encuesta no es el mismo paquete que un memorial. El promedio de Kansas (<strong>$8,640</strong>) suele incluir ataúd.",
   analysisSameEn:
-    "Chapel Hill-Butler’s standard funeral (<strong>$9,735</strong>), Porter’s (<strong>$8,306</strong>), and Highland Park’s (<strong>$6,500</strong>) are each home’s complete-funeral GPL figure. Highland Park publishes direct cremation at <strong>$850</strong>, far below the others. Kansas’s average (<strong>$8,640</strong>) usually includes a casket.",
+    "The survey has no memorial-after-cremation package, so Chapel Hill-Butler, Porter, and Highland Park are not on the chart. That survey’s standard funeral is not the same package as a memorial. Kansas’s average (<strong>$8,640</strong>) usually includes a casket.",
   analysisPlotEs:
     "Ninguna cifra de la tabla es propiedad en cementerio ni apertura/cierre. En Maple Hill llame al <strong>913-831-3345</strong>.",
   analysisPlotEn:
@@ -275,34 +274,26 @@ const kansasCity = makeCity({
   resaleHref: GRAVE_KS,
   plotNew: 2800,
   plotResale: 1000,
-  homes: [
-    fcaHome({
-      id: "chapelhill",
+  homes: [],
+  unpublishedHomes: [
+    {
       name: "Chapel Hill-Butler",
       href: "https://www.dignitymemorial.com/funeral-homes/kansas-city-ks/chapel-hill-butler-funeral-home/4969",
-      addr: "701 N 94th St · 913-334-3366",
-      dc: 2355,
-      ib: 4845,
-      trad: 9735,
-    }),
-    fcaHome({
-      id: "porterkck",
+      addr: "701 N 94th St",
+      phone: "913-334-3366",
+    },
+    {
       name: "Porter Funeral Home",
       href: "https://www.porterfuneralhome.com/",
-      addr: "1835 Minnesota Ave · 913-621-6400",
-      dc: 2697,
-      ib: 3596,
-      trad: 8306,
-    }),
-    fcaHome({
-      id: "highland",
+      addr: "1835 Minnesota Ave",
+      phone: "913-621-6400",
+    },
+    {
       name: "Highland Park",
       href: "https://www.highlandparkfh.com/",
-      addr: "4101 State Ave · 913-371-0699",
-      dc: 850,
-      ib: 1985,
-      trad: 6500,
-    }),
+      addr: "4101 State Ave",
+      phone: "913-371-0699",
+    },
   ],
 });
 
@@ -330,9 +321,9 @@ const olathe = makeCity({
   faqPlotEn:
     "No. The funeral home price is one bill. The plot is another. Ask Olathe Memorial Cemetery (913-971-5226) for its list. Resale plots can cost less; the cemetery still has to change the deed.",
   tableFootEs:
-    "Cifras de cada GPL transcritas en la encuesta FCA-GKC 2025: Penwell-Gabel Olathe mar. 2025; McGilley & Frye feb. 2023; Bruce Gardner feb. 2022. Estimador: promedios Funeralocity de Kansas. Pida siempre la lista actual. No son precios de Mejor Vida Seguros.",
+    "Penwell-Gabel Olathe: GPL Newcomer vigente 15 sep. 2026 (cremación directa del comprador $2,045; entierro inmediato $3,270; memorial $4,905; funeral $6,195). McGilley & Frye y Bruce Gardner aparecen en la encuesta FCA-GKC 2025 sin un paquete de memorial, así que no van en la tabla. Estimador: promedios Funeralocity de Kansas. Pida siempre la lista actual. No son precios de Mejor Vida Seguros.",
   tableFootEn:
-    "GPL figures transcribed in the FCA-GKC 2025 survey: Penwell-Gabel Olathe Mar 2025; McGilley & Frye Feb 2023; Bruce Gardner Feb 2022. Estimator: Kansas Funeralocity averages. Always ask for the current list. These are not Mejor Vida Insurance prices.",
+    "Penwell-Gabel Olathe: Newcomer GPL effective 15 Sep 2026 (purchaser direct cremation $2,045; immediate burial $3,270; memorial $4,905; funeral $6,195). McGilley & Frye and Bruce Gardner appear in the FCA-GKC 2025 survey with no memorial package, so they are not on the chart. Estimator: Kansas Funeralocity averages. Always ask for the current list. These are not Mejor Vida Insurance prices.",
   officesNoteEs:
     "Olathe Memorial Cemetery es municipal y publica teléfono. No publican el lote en la web. Llame y pida la lista actual por escrito.",
   officesNoteEn:
@@ -344,17 +335,19 @@ const olathe = makeCity({
   officesEs: [
     "<strong>Olathe Memorial Cemetery</strong> — 738 N Chestnut St. Oficina 730 N Chestnut. Teléfono 913-971-5226.",
     "<strong>Penwell-Gabel Olathe</strong> — 14275 S Blackbob Rd. Pregunte en la funeraria por terrenos que ellos administren.",
-    "<strong>Gardner Cemetery</strong> — para familias del sur del condado. Pida la lista en el ayuntamiento de Gardner.",
+    "<strong>Cementerio de Gardner</strong> — para familias del sur del condado. Pida la lista en el ayuntamiento de Gardner.",
   ],
   officesEn: [
     "<strong>Olathe Memorial Cemetery</strong> — 738 N Chestnut St. Office 730 N Chestnut. Phone 913-971-5226.",
     "<strong>Penwell-Gabel Olathe</strong> — 14275 S Blackbob Rd. Ask the funeral home about grounds they manage.",
     "<strong>Gardner Cemetery</strong> — for families in southern Johnson County. Ask Gardner city hall for the list.",
   ],
+  unpublishedLeadEs: FCA_NO_MEM_LEAD_ES,
+  unpublishedLeadEn: FCA_NO_MEM_LEAD_EN,
   analysisSameEs:
-    "El funeral estándar de Penwell-Gabel Olathe (<strong>$6,540</strong>) queda por debajo de McGilley & Frye (<strong>$9,310</strong>) y de Bruce en Gardner (<strong>$6,690</strong>). Esas cifras de la encuesta suelen incluir ataúd. El promedio de Kansas (<strong>$8,640</strong>) también.",
+    "Penwell-Gabel Olathe publica planes simplificados: funeral <strong>$6,195</strong> y memorial después de cremación <strong>$4,905</strong>, sin ataúd. McGilley & Frye y Bruce en Gardner no van en la tabla: la encuesta FCA no tiene memorial. El promedio de Kansas (<strong>$8,640</strong>) suele incluir ataúd.",
   analysisSameEn:
-    "Penwell-Gabel Olathe’s standard funeral (<strong>$6,540</strong>) sits below McGilley & Frye (<strong>$9,310</strong>) and Bruce in Gardner (<strong>$6,690</strong>). Those survey figures typically include a casket. Kansas’s average (<strong>$8,640</strong>) does too.",
+    "Penwell-Gabel Olathe publishes simplified plans: funeral <strong>$6,195</strong> and memorial after cremation <strong>$4,905</strong>, with no casket. McGilley & Frye and Bruce in Gardner are not on the chart: the FCA survey has no memorial. Kansas’s average (<strong>$8,640</strong>) usually includes a casket.",
   analysisPlotEs:
     "Ninguna cifra de la tabla es propiedad en cementerio ni apertura/cierre. En Olathe Memorial Cemetery llame al <strong>913-971-5226</strong>.",
   analysisPlotEn:
@@ -363,33 +356,43 @@ const olathe = makeCity({
   plotNew: 3500,
   plotResale: 1500,
   homes: [
-    fcaHome({
+    {
       id: "penwellol",
       name: "Penwell-Gabel Olathe",
       href: "https://www.penwellgabelolathe.com/",
       addr: "14275 S Blackbob Rd · 913-768-6777",
-      dc: 2170,
-      ib: 3220,
-      trad: 6540,
-    }),
-    fcaHome({
-      id: "frye",
+      dc: 2045,
+      ib: 3270,
+      trad: 6195,
+      dcEs: "Cremación directa, contenedor del comprador.",
+      dcEn: "Direct cremation, purchaser container.",
+      ibEs: "Entierro inmediato, ataúd del comprador.",
+      ibEn: "Immediate burial, purchaser casket.",
+      memCell: cell(
+        4905,
+        "Plan simplificado: memorial con celebración después de cremación. Urna aparte.",
+        "Simplified plan: memorial with a gathering after cremation. Urn extra."
+      ),
+      trCell: cell(
+        6195,
+        "Plan simplificado: funeral con velatorio el día anterior. Ataúd y lote aparte.",
+        "Simplified plan: funeral with viewing the day before. Casket and plot extra."
+      ),
+    },
+  ],
+  unpublishedHomes: [
+    {
       name: "McGilley & Frye",
       href: "https://www.dignitymemorial.com/funeral-homes/olathe-ks/mcgilley-frye-funeral-home/5220",
-      addr: "105 E Loula St · 913-782-0582",
-      dc: 2355,
-      ib: 4845,
-      trad: 9310,
-    }),
-    fcaHome({
-      id: "bruceg",
-      name: "Bruce Gardner",
+      addr: "105 E Loula St",
+      phone: "913-782-0582",
+    },
+    {
+      name: "Bruce Funeral Home (Gardner)",
       href: "https://www.brucefuneralhomes.com/",
-      addr: "106 S Center St, Gardner · 913-856-7111",
-      dc: 3345,
-      ib: 3745,
-      trad: 6690,
-    }),
+      addr: "106 S Center St, Gardner",
+      phone: "913-856-7111",
+    },
   ],
 });
 
@@ -524,9 +527,9 @@ const lawrence = makeCity({
   faqPlotEn:
     "No. The funeral home price is one bill. The plot is another. Ask the city cemeteries (785-832-3451) for the list. Resale plots can cost less; the cemetery still has to change the deed.",
   tableFootEs:
-    "Warren-McElwain Lawrence y Eudora: la misma GPL 31 ago. 2026. Rumsey-Yost: ítems de GPL compilados de directorios que citan esa lista (cremación directa $3,000; entierro inmediato $5,500). Estimador: promedios Funeralocity de Kansas. Pida siempre la lista actual. No son precios de Mejor Vida Seguros.",
+    "Warren-McElwain Lawrence y Eudora: la misma GPL 31 ago. 2026. Rumsey-Yost no publica una lista general de precios completa; no va en la tabla. Estimador: promedios Funeralocity de Kansas. Pida siempre la lista actual. No son precios de Mejor Vida Seguros.",
     tableFootEn:
-    "Warren-McElwain Lawrence and Eudora: the same GPL 31 Aug 2026. Rumsey-Yost: compiled GPL items from directories that cite that list (direct cremation $3,000; immediate burial $5,500). Estimator: Kansas Funeralocity averages. Always ask for the current list. These are not Mejor Vida Insurance prices.",
+    "Warren-McElwain Lawrence and Eudora: the same GPL 31 Aug 2026. Rumsey-Yost does not publish a complete general price list, so it is not on the chart. Estimator: Kansas Funeralocity averages. Always ask for the current list. These are not Mejor Vida Insurance prices.",
   officesNoteEs:
     "Oak Hill, Maple Grove y Memorial Park son municipales. Llame al 785-832-3451 y pida la lista actual por escrito.",
   officesNoteEn:
@@ -546,9 +549,9 @@ const lawrence = makeCity({
     "<strong>Maple Grove Cemetery</strong> — 1710 N 3rd St. Phone 785-832-3451.",
   ],
   analysisSameEs:
-    "Lawrence y Eudora de Warren-McElwain publican la misma GPL: funeral <strong>$6,890</strong> y memorial <strong>$5,040</strong>, sin ataúd. Rumsey-Yost no publica un paquete en la web; la cifra de funeral es la suma de ítems de GPL citados. El promedio de Kansas (<strong>$8,640</strong>) suele incluir ataúd.",
+    "Lawrence y Eudora de Warren-McElwain publican la misma GPL: funeral <strong>$6,890</strong> y memorial <strong>$5,040</strong>, sin ataúd. Rumsey-Yost no publica una lista completa, así que no va en la tabla. El promedio de Kansas (<strong>$8,640</strong>) suele incluir ataúd.",
     analysisSameEn:
-    "Warren-McElwain’s Lawrence and Eudora chapels publish the same GPL: funeral <strong>$6,890</strong> and memorial <strong>$5,040</strong>, with no casket. Rumsey-Yost does not post a package online; the funeral figure is a sum of cited GPL items. Kansas’s average (<strong>$8,640</strong>) usually includes a casket.",
+    "Warren-McElwain’s Lawrence and Eudora chapels publish the same GPL: funeral <strong>$6,890</strong> and memorial <strong>$5,040</strong>, with no casket. Rumsey-Yost does not publish a complete list, so it is not on the chart. Kansas’s average (<strong>$8,640</strong>) usually includes a casket.",
   analysisPlotEs:
     "Ninguna cifra de la tabla es propiedad en cementerio ni apertura/cierre. En los cementerios municipales llame al <strong>785-832-3451</strong>.",
   analysisPlotEn:
@@ -573,21 +576,6 @@ const lawrence = makeCity({
       trCell: cell(6890, "Plan simplificado: funeral. Ataúd y lote aparte.", "Simplified plan: funeral. Casket and plot extra."),
     },
     {
-      id: "rumsey",
-      name: "Rumsey-Yost",
-      href: "https://rumsey-yost.com/",
-      addr: "601 Indiana St · 785-843-5111",
-      dc: 3000,
-      ib: 5500,
-      trad: 5120,
-      dcEs: "Cremación directa citada de esa GPL. Urna aparte.",
-      dcEn: "Direct cremation cited from that GPL. Urn extra.",
-      ibEs: "Entierro inmediato citado de esa GPL. Ataúd y lote aparte.",
-      ibEn: "Immediate burial cited from that GPL. Casket and plot extra.",
-      memCell: cell(3495, "Cremación directa más uso de local para memorial, suma de ítems citados.", "Direct cremation plus memorial-facility item, sum of cited lines."),
-      trCell: cell(5120, "Suma de servicios citados (sin ataúd). Pida la GPL actual.", "Sum of cited service items (no casket). Ask for the current GPL."),
-    },
-    {
       id: "warreneu",
       name: "Warren-McElwain Eudora",
       href: "https://www.warrenmcelwain.com/",
@@ -601,6 +589,14 @@ const lawrence = makeCity({
       ibEn: "Same GPL as Lawrence. Immediate burial, purchaser casket.",
       memCell: cell(5040, "Misma GPL: memorial después de cremación. Urna aparte.", "Same GPL: memorial after cremation. Urn extra."),
       trCell: cell(6890, "Misma GPL: funeral. Ataúd y lote aparte.", "Same GPL: funeral. Casket and plot extra."),
+    },
+  ],
+  unpublishedHomes: [
+    {
+      name: "Rumsey-Yost",
+      href: "https://rumsey-yost.com/",
+      addr: "601 Indiana St",
+      phone: "785-843-5111",
     },
   ],
 });
@@ -622,73 +618,71 @@ const shawnee = makeCity({
   metroEn: ["Shawnee", "Merriam", "De Soto", "Lake Quivira"],
   metroTitleEs: "Área que atendemos en Shawnee",
   metroTitleEn: "Shawnee area we serve",
-  prepaidCemEs: "Pleasant Valley",
-  prepaidCemEn: "Pleasant Valley",
+  prepaidCemEs: "Pleasant View",
+  prepaidCemEn: "Pleasant View",
   faqPlotEs:
-    "No. El precio de la funeraria es una factura. El lote es otra. Pida la lista en el cementerio. También hay lotes de reventa más baratos; el cementerio debe cambiar la escritura.",
+    "No. El precio de la funeraria es una factura. El lote es otra. Pida la lista en Pleasant View o en el cementerio de Shawnee (913-631-5200). También hay lotes de reventa más baratos; el cementerio debe cambiar la escritura.",
   faqPlotEn:
-    "No. The funeral home price is one bill. The plot is another. Ask the cemetery for its list. Resale plots can cost less; the cemetery still has to change the deed.",
+    "No. The funeral home price is one bill. The plot is another. Ask Pleasant View or Shawnee Cemetery (913-631-5200) for its list. Resale plots can cost less; the cemetery still has to change the deed.",
   tableFootEs:
-    "Cifras de cada GPL transcritas en la encuesta FCA-GKC 2025: Amos Family oct. 2024; Charter Shawnee Mission nov. 2024; Cedar Crest De Soto ene. 2025. Estimador: promedios Funeralocity de Kansas. Pida siempre la lista actual. No son precios de Mejor Vida Seguros.",
+    "La encuesta FCA-GKC 2025 transcribió las GPL de Amos Family (oct. 2024), Charter Shawnee Mission (nov. 2024) y Cedar Crest De Soto (ene. 2025): cremación directa, entierro inmediato y funeral estándar. No incluye un memorial después de cremación, así que esta tabla no las nombra. Estimador: promedios Funeralocity de Kansas. Pida siempre la lista actual. No son precios de Mejor Vida Seguros.",
   tableFootEn:
-    "GPL figures transcribed in the FCA-GKC 2025 survey: Amos Family Oct 2024; Charter Shawnee Mission Nov 2024; Cedar Crest De Soto Jan 2025. Estimator: Kansas Funeralocity averages. Always ask for the current list. These are not Mejor Vida Insurance prices.",
+    "The FCA-GKC 2025 survey transcribed GPLs for Amos Family (Oct 2024), Charter Shawnee Mission (Nov 2024), and Cedar Crest De Soto (Jan 2025): direct cremation, immediate burial, and a standard funeral. It has no memorial-after-cremation package, so this table does not name them. Estimator: Kansas Funeralocity averages. Always ask for the current list. These are not Mejor Vida Insurance prices.",
   officesNoteEs:
-    "Los cementerios de Shawnee no publican el lote en la web. Llame y pida la lista actual por escrito.",
+    "Los cementerios municipales de Shawnee los administra Parques y Recreación. No publican el lote en la web. Llame al 913-631-5200 y pida la lista actual por escrito.",
   officesNoteEn:
-    "Shawnee cemeteries do not post plot prices online. Call and ask for the current list in writing.",
+    "Shawnee city cemeteries are run by Parks and Recreation. They do not post plot prices online. Call 913-631-5200 and ask for the current list in writing.",
   newListEs:
-    "Estos cementerios no publican un precio de partida del lote en la web. Abrir y cerrar, bóveda y lápida siguen aparte. Pida la lista en la oficina.",
+    "Pleasant View y el cementerio de Shawnee no publican un precio de partida del lote en la web. Abrir y cerrar, bóveda y lápida siguen aparte. Pida la lista: 913-631-5200.",
   newListEn:
-    "These cemeteries do not publish a starting plot price online. Opening and closing, the vault, and the marker are still extra. Ask the office for the list.",
+    "Pleasant View and Shawnee Cemetery do not publish a starting plot price online. Opening and closing, the vault, and the marker are still extra. Ask for the list: 913-631-5200.",
   officesEs: [
-    "<strong>Pleasant Valley Cemetery</strong> — 8100 Mission Rd. Pida la lista en la oficina del cementerio.",
-    "<strong>Shawnee Indian Mission</strong> — sitio histórico; no vende lotes nuevos. Pregunte en el cementerio de la ciudad.",
-    "<strong>De Soto Cemetery</strong> — para familias al oeste. Pida la lista en el ayuntamiento de De Soto.",
+    "<strong>Pleasant View Cemetery</strong> — 6025 Quivira Rd. Teléfono 913-631-5200.",
+    "<strong>Cementerio de Shawnee</strong> — 11810 W 61st Terrace. El mismo teléfono de Parques: 913-631-5200.",
+    "<strong>Cementerio de De Soto</strong> — para familias al oeste. Pida la lista en el ayuntamiento de De Soto.",
   ],
   officesEn: [
-    "<strong>Pleasant Valley Cemetery</strong> — 8100 Mission Rd. Ask the cemetery office for the list.",
-    "<strong>Shawnee Indian Mission</strong> — historic site; it does not sell new plots. Ask the city cemetery.",
+    "<strong>Pleasant View Cemetery</strong> — 6025 Quivira Rd. Phone 913-631-5200.",
+    "<strong>Shawnee Cemetery</strong> — 11810 W 61st Terrace. Same Parks number: 913-631-5200.",
     "<strong>De Soto Cemetery</strong> — for families to the west. Ask De Soto city hall for the list.",
   ],
+  analysisCheapEs: FCA_NO_MEM_CHEAP_ES,
+  analysisCheapEn: FCA_NO_MEM_CHEAP_EN,
+  faqCremationAEs: FCA_NO_MEM_FAQ_ES,
+  faqCremationAEn: FCA_NO_MEM_FAQ_EN,
+  unpublishedLeadEs: FCA_NO_MEM_LEAD_ES,
+  unpublishedLeadEn: FCA_NO_MEM_LEAD_EN,
   analysisSameEs:
-    "El funeral estándar de Amos Family (<strong>$7,345</strong>) queda entre Charter (<strong>$5,640</strong>) y Cedar Crest (<strong>$9,445</strong>). Charter está en Merriam, en Shawnee Mission Parkway. El promedio de Kansas (<strong>$8,640</strong>) suele incluir ataúd.",
+    "La encuesta no tiene un memorial después de cremación, así que Amos Family, Charter (Merriam) y Cedar Crest (De Soto) no van en la tabla. El funeral estándar de esa encuesta no es el mismo paquete que un memorial. El promedio de Kansas (<strong>$8,640</strong>) suele incluir ataúd.",
   analysisSameEn:
-    "Amos Family’s standard funeral (<strong>$7,345</strong>) sits between Charter (<strong>$5,640</strong>) and Cedar Crest (<strong>$9,445</strong>). Charter is in Merriam, on Shawnee Mission Parkway. Kansas’s average (<strong>$8,640</strong>) usually includes a casket.",
+    "The survey has no memorial-after-cremation package, so Amos Family, Charter (Merriam), and Cedar Crest (De Soto) are not on the chart. That survey’s standard funeral is not the same package as a memorial. Kansas’s average (<strong>$8,640</strong>) usually includes a casket.",
   analysisPlotEs:
-    "Ninguna cifra de la tabla es propiedad en cementerio ni apertura/cierre. Eso se pide en la oficina del cementerio.",
+    "Ninguna cifra de la tabla es propiedad en cementerio ni apertura/cierre. En Pleasant View llame al <strong>913-631-5200</strong>.",
   analysisPlotEn:
-    "None of the figures in the table are cemetery property or opening/closing. Ask the cemetery office.",
+    "None of the figures in the table are cemetery property or opening/closing. At Pleasant View call <strong>913-631-5200</strong>.",
   resaleHref: GRAVE_KS,
   plotNew: 3800,
   plotResale: 1600,
-  homes: [
-    fcaHome({
-      id: "amos",
+  homes: [],
+  unpublishedHomes: [
+    {
       name: "Amos Family",
       href: "https://www.amosfamily.com/",
-      addr: "10901 Johnson Dr · 913-631-5566",
-      dc: 2955,
-      ib: 3875,
-      trad: 7345,
-    }),
-    fcaHome({
-      id: "charter",
+      addr: "10901 Johnson Dr",
+      phone: "913-631-5566",
+    },
+    {
       name: "Charter Shawnee Mission",
       href: "https://www.charterfunerals.com/",
-      addr: "10250 Shawnee Mission Pkwy, Merriam · 816-921-5555",
-      dc: 1270,
-      ib: 2295,
-      trad: 5640,
-    }),
-    fcaHome({
-      id: "cedar",
+      addr: "10250 Shawnee Mission Pkwy, Merriam",
+      phone: "816-921-5555",
+    },
+    {
       name: "Cedar Crest",
       href: "https://www.cedarcrestmemorial.com/",
-      addr: "32665 Lexington Ave, De Soto · 913-583-1002",
-      dc: 2495,
-      ib: 3950,
-      trad: 9445,
-    }),
+      addr: "32665 Lexington Ave, De Soto",
+      phone: "913-583-1002",
+    },
   ],
 });
 
@@ -716,9 +710,9 @@ const lenexa = makeCity({
   faqPlotEn:
     "No. The funeral home price is one bill. The plot is another. Porter is in Lenexa; you buy the plot from the cemetery. Resale plots can cost less; the cemetery still has to change the deed.",
   tableFootEs:
-    "Cifras de cada GPL transcritas en la encuesta FCA-GKC 2025: Porter Lenexa ene. 2025; Bruce Spring Hill feb. 2022; Dengel Louisburg ago. 2024. Estimador: promedios Funeralocity de Kansas. Pida siempre la lista actual. No son precios de Mejor Vida Seguros.",
+    "La encuesta FCA-GKC 2025 transcribió la GPL de Porter Lenexa (ene. 2025): cremación directa, entierro inmediato y funeral estándar. No incluye un memorial después de cremación, así que esta tabla no la nombra. Bruce (Spring Hill) y Dengel (Louisburg) no están en el área de servicio de esta página. Estimador: promedios Funeralocity de Kansas. Pida siempre la lista actual. No son precios de Mejor Vida Seguros.",
   tableFootEn:
-    "GPL figures transcribed in the FCA-GKC 2025 survey: Porter Lenexa Jan 2025; Bruce Spring Hill Feb 2022; Dengel Louisburg Aug 2024. Estimator: Kansas Funeralocity averages. Always ask for the current list. These are not Mejor Vida Insurance prices.",
+    "The FCA-GKC 2025 survey transcribed Porter Lenexa’s GPL (Jan 2025): direct cremation, immediate burial, and a standard funeral. It has no memorial-after-cremation package, so this table does not name that home. Bruce (Spring Hill) and Dengel (Louisburg) are not in this page’s service area. Estimator: Kansas Funeralocity averages. Always ask for the current list. These are not Mejor Vida Insurance prices.",
   officesNoteEs:
     "Lenexa no tiene un cementerio municipal grande que publique precios. Llame a Porter o al cementerio que elija y pida la lista actual por escrito.",
   officesNoteEn:
@@ -730,17 +724,23 @@ const lenexa = makeCity({
   officesEs: [
     "<strong>Porter Funeral Home & Crematory</strong> — 8535 Monrovia St. Teléfono 913-438-6444. Pregunte qué cementerios atienden.",
     "<strong>De Soto Cemetery</strong> — al oeste de Lenexa. Pida la lista en el ayuntamiento de De Soto.",
-    "<strong>Spring Hill Cemetery</strong> — al sur. Pida la lista en el ayuntamiento de Spring Hill.",
+    "<strong>Cementerio de Shawnee / Pleasant View</strong> — al este, en Shawnee. Teléfono 913-631-5200.",
   ],
   officesEn: [
     "<strong>Porter Funeral Home & Crematory</strong> — 8535 Monrovia St. Phone 913-438-6444. Ask which cemeteries they serve.",
     "<strong>De Soto Cemetery</strong> — west of Lenexa. Ask De Soto city hall for the list.",
-    "<strong>Spring Hill Cemetery</strong> — to the south. Ask Spring Hill city hall for the list.",
+    "<strong>Shawnee Cemetery / Pleasant View</strong> — east in Shawnee. Phone 913-631-5200.",
   ],
+  analysisCheapEs: FCA_NO_MEM_CHEAP_ES,
+  analysisCheapEn: FCA_NO_MEM_CHEAP_EN,
+  faqCremationAEs: FCA_NO_MEM_FAQ_ES,
+  faqCremationAEn: FCA_NO_MEM_FAQ_EN,
+  unpublishedLeadEs: FCA_NO_MEM_LEAD_ES,
+  unpublishedLeadEn: FCA_NO_MEM_LEAD_EN,
   analysisSameEs:
-    "Porter en Lenexa publica funeral estándar a <strong>$8,306</strong>. Bruce en Spring Hill (<strong>$6,690</strong>) y Dengel en Louisburg (<strong>$6,995</strong>) están más al sur; no son casas de Overland Park ni de Shawnee. El promedio de Kansas (<strong>$8,640</strong>) suele incluir ataúd.",
+    "La encuesta no tiene un memorial después de cremación, así que Porter no va en la tabla. Bruce en Spring Hill y Dengel en Louisburg tampoco: no están en el área de servicio de Lenexa. El promedio de Kansas (<strong>$8,640</strong>) suele incluir ataúd.",
   analysisSameEn:
-    "Porter in Lenexa publishes a standard funeral at <strong>$8,306</strong>. Bruce in Spring Hill (<strong>$6,690</strong>) and Dengel in Louisburg (<strong>$6,995</strong>) sit farther south; they are not Overland Park or Shawnee homes. Kansas’s average (<strong>$8,640</strong>) usually includes a casket.",
+    "The survey has no memorial-after-cremation package, so Porter is not on the chart. Bruce in Spring Hill and Dengel in Louisburg are not on it either: they are not in Lenexa’s service area. Kansas’s average (<strong>$8,640</strong>) usually includes a casket.",
   analysisPlotEs:
     "Ninguna cifra de la tabla es propiedad en cementerio ni apertura/cierre. En Porter llame al <strong>913-438-6444</strong> y pregunte el cementerio.",
   analysisPlotEn:
@@ -748,34 +748,14 @@ const lenexa = makeCity({
   resaleHref: GRAVE_KS,
   plotNew: 3800,
   plotResale: 1600,
-  homes: [
-    fcaHome({
-      id: "porterlx",
-      name: "Porter Lenexa",
+  homes: [],
+  unpublishedHomes: [
+    {
+      name: "Porter Funeral Home & Crematory",
       href: "https://www.porterfuneralhome.com/",
-      addr: "8535 Monrovia St · 913-438-6444",
-      dc: 2697,
-      ib: 3596,
-      trad: 8306,
-    }),
-    fcaHome({
-      id: "brucesh",
-      name: "Bruce Spring Hill",
-      href: "https://www.brucefuneralhomes.com/",
-      addr: "712 S Webster St, Spring Hill · 913-592-2244",
-      dc: 3345,
-      ib: 3745,
-      trad: 6690,
-    }),
-    fcaHome({
-      id: "dengel",
-      name: "Dengel Louisburg",
-      href: "https://www.dengelfuneralhome.com/",
-      addr: "1 Aquatic Dr, Louisburg · 913-837-4310",
-      dc: 2920,
-      ib: 2995,
-      trad: 6995,
-    }),
+      addr: "8535 Monrovia St",
+      phone: "913-438-6444",
+    },
   ],
 });
 
@@ -803,9 +783,9 @@ const manhattan = makeCity({
   faqPlotEn:
     "No. The funeral home price is one bill. The plot is another. Ask Sunrise Cemetery (785-587-2780) for its list. Sunset no longer sells new lots. Resale plots can cost less; the cemetery still has to change the deed.",
   tableFootEs:
-    "Yorgensen-Meloan-Londeen, Irvin-Parkview y Johnson & Mass-Hinitt (Junction City) no publican GPL en la web. Pida la lista: 785-539-7481, 785-537-2110 y 785-762-3131. Hasta que publiquen, esas columnas usan el promedio de Kansas del estimador, no un precio de esa casa. Estimador: promedios Funeralocity de Kansas. No son precios de Mejor Vida Seguros.",
+    "Las funerarias de Manhattan no publican una lista general de precios. Esta tabla usa listas del área de servicio: Johnson & Mass-Hinitt, Junction City, vigente 15 sep. 2026 (cremación directa del comprador $2,845; entierro inmediato $3,220; memorial $4,855; funeral $6,195); Campanella & Stewart, Wamego, vigente 1 nov. 2025 (cremación directa $4,320; entierro inmediato $3,745; memorial $4,955; funeral $6,195). Pida la lista en Manhattan: Yorgensen-Meloan-Londeen 785-539-7481; Irvin-Parkview 785-537-2110. Estimador: promedios Funeralocity de Kansas. No son precios de Mejor Vida Seguros.",
   tableFootEn:
-    "Yorgensen-Meloan-Londeen, Irvin-Parkview, and Johnson & Mass-Hinitt (Junction City) do not post a GPL online. Ask for the list: 785-539-7481, 785-537-2110, and 785-762-3131. Until they publish, those columns use the estimator’s Kansas average, not that home’s price. Estimator: Kansas Funeralocity averages. These are not Mejor Vida Insurance prices.",
+    "Manhattan funeral homes do not publish a general price list. This table uses lists from the service area: Johnson & Mass-Hinitt, Junction City, effective 15 Sep 2026 (purchaser direct cremation $2,845; immediate burial $3,220; memorial $4,855; funeral $6,195); Campanella & Stewart, Wamego, effective 1 Nov 2025 (direct cremation $4,320; immediate burial $3,745; memorial $4,955; funeral $6,195). Ask in Manhattan: Yorgensen-Meloan-Londeen 785-539-7481; Irvin-Parkview 785-537-2110. Estimator: Kansas Funeralocity averages. These are not Mejor Vida Insurance prices.",
   officesNoteEs:
     "Sunrise aún vende lotes. Sunset está agotado para terrenos nuevos. Llame al sexton: 785-587-2780.",
   officesNoteEn:
@@ -817,7 +797,7 @@ const manhattan = makeCity({
   officesEs: [
     "<strong>Sunrise Cemetery</strong> — 2901 Stagg Hill Rd. Teléfono 785-587-2780. Aún hay lotes.",
     "<strong>Sunset Cemetery</strong> — 301 Sunset Ave. Todos los lotes están vendidos. Teléfono 785-587-2780.",
-    "<strong>Junction City cemeteries</strong> — para familias al oeste, hacia Fort Riley. Pida la lista en el ayuntamiento de Junction City.",
+    "<strong>Cementerios de Junction City</strong> — para familias al oeste, hacia Fort Riley. Pida la lista en el ayuntamiento de Junction City.",
   ],
   officesEn: [
     "<strong>Sunrise Cemetery</strong> — 2901 Stagg Hill Rd. Phone 785-587-2780. Lots are still sold.",
@@ -825,9 +805,9 @@ const manhattan = makeCity({
     "<strong>Junction City cemeteries</strong> — for families west toward Fort Riley. Ask Junction City hall for the list.",
   ],
   analysisSameEs:
-    "Las dos funerarias de Manhattan no publican GPL. Las cifras de la tabla en esas columnas son el promedio de Kansas, no un precio de YML ni de Irvin-Parkview. Pida la lista. El promedio de entierro completo de Kansas es <strong>$8,640</strong>.",
+    "Las dos casas de Manhattan no publican lista. Johnson & Mass-Hinitt (Junction City) y Campanella & Stewart (Wamego) sí. El funeral simplificado sale <strong>$6,195</strong> en ambas, sin ataúd; la cremación directa no: <strong>$2,845</strong> en Junction City y <strong>$4,320</strong> en Wamego. El promedio de entierro completo de Kansas (<strong>$8,640</strong>) suele incluir ataúd.",
   analysisSameEn:
-    "Manhattan’s two funeral homes do not post a GPL. The figures in those columns are the Kansas average, not a YML or Irvin-Parkview price. Ask for the list. Kansas’s full-burial average is <strong>$8,640</strong>.",
+    "Manhattan’s two homes do not publish a list. Johnson & Mass-Hinitt (Junction City) and Campanella & Stewart (Wamego) do. The simplified funeral is <strong>$6,195</strong> at both, with no casket; direct cremation is not: <strong>$2,845</strong> in Junction City and <strong>$4,320</strong> in Wamego. Kansas’s full-burial average (<strong>$8,640</strong>) usually includes a casket.",
   analysisPlotEs:
     "Ninguna cifra de la tabla es propiedad en cementerio ni apertura/cierre. En Sunrise llame al <strong>785-587-2780</strong>.",
   analysisPlotEn:
@@ -835,60 +815,62 @@ const manhattan = makeCity({
   resaleHref: GRAVE_KS,
   plotNew: 2800,
   plotResale: 1000,
-  homes: [
+  unpublishedHomes: [
     {
-      id: "yml",
       name: "Yorgensen-Meloan-Londeen",
       href: "https://www.ymlfuneralhome.com/",
-      addr: "1616 Poyntz Ave · 785-539-7481",
-      dc: 2553,
-      ib: 5374,
-      trad: 8640,
-      dcEs: "No publican GPL. Promedio de Kansas, no el precio de esa casa.",
-      dcEn: "They do not post a GPL. Kansas average, not that home’s price.",
-      ibEs: "No publican GPL. Promedio de Kansas, no el precio de esa casa.",
-      ibEn: "They do not post a GPL. Kansas average, not that home’s price.",
-      memCell: cell(6452, "No publican GPL. Promedio de Kansas, no el precio de esa casa.", "They do not post a GPL. Kansas average, not that home’s price."),
-      trCell: cell(8640, "No publican GPL. Promedio de Kansas, no el precio de esa casa.", "They do not post a GPL. Kansas average, not that home’s price."),
-      casketTrad: true,
-      casketMem: true,
-      casketIb: true,
+      addr: "1616 Poyntz Ave",
+      phone: "785-539-7481",
     },
     {
-      id: "irvin",
       name: "Irvin-Parkview",
       href: "https://www.irvinparkview.com/",
-      addr: "1317 Poyntz Ave · 785-537-2110",
-      dc: 2553,
-      ib: 5374,
-      trad: 8640,
-      dcEs: "No publican GPL. Promedio de Kansas, no el precio de esa casa.",
-      dcEn: "They do not post a GPL. Kansas average, not that home’s price.",
-      ibEs: "No publican GPL. Promedio de Kansas, no el precio de esa casa.",
-      ibEn: "They do not post a GPL. Kansas average, not that home’s price.",
-      memCell: cell(6452, "No publican GPL. Promedio de Kansas, no el precio de esa casa.", "They do not post a GPL. Kansas average, not that home’s price."),
-      trCell: cell(8640, "No publican GPL. Promedio de Kansas, no el precio de esa casa.", "They do not post a GPL. Kansas average, not that home’s price."),
-      casketTrad: true,
-      casketMem: true,
-      casketIb: true,
+      addr: "1317 Poyntz Ave",
+      phone: "785-537-2110",
     },
+  ],
+  homes: [
     {
       id: "jmh",
       name: "Johnson & Mass-Hinitt (Junction City)",
       href: "https://www.jmhcares.com/",
       addr: "203 N Washington St, Junction City · 785-762-3131",
-      dc: 2553,
-      ib: 5374,
-      trad: 8640,
-      dcEs: "No publican GPL. Promedio de Kansas, no el precio de esa casa.",
-      dcEn: "They do not post a GPL. Kansas average, not that home’s price.",
-      ibEs: "No publican GPL. Promedio de Kansas, no el precio de esa casa.",
-      ibEn: "They do not post a GPL. Kansas average, not that home’s price.",
-      memCell: cell(6452, "No publican GPL. Promedio de Kansas, no el precio de esa casa.", "They do not post a GPL. Kansas average, not that home’s price."),
-      trCell: cell(8640, "No publican GPL. Promedio de Kansas, no el precio de esa casa.", "They do not post a GPL. Kansas average, not that home’s price."),
-      casketTrad: true,
-      casketMem: true,
-      casketIb: true,
+      dc: 2845,
+      ib: 3220,
+      trad: 6195,
+      dcEs: "Cremación directa, contenedor del comprador. Lista 15 sep. 2026.",
+      dcEn: "Direct cremation, purchaser container. List 15 Sep 2026.",
+      ibEs: "Entierro inmediato, ataúd del comprador.",
+      ibEn: "Immediate burial, purchaser casket.",
+      memCell: cell(
+        4855,
+        "Plan simplificado: memorial después de cremación. Urna aparte.",
+        "Simplified plan: memorial after cremation. Urn extra."
+      ),
+      trCell: cell(6195, "Plan simplificado: funeral. Ataúd y lote aparte.", "Simplified plan: funeral. Casket and plot extra."),
+    },
+    {
+      id: "campanella",
+      name: "Campanella & Stewart (Wamego)",
+      href: "https://www.campanellastewart.com/",
+      addr: "4370 Salzer Rd, Wamego · 785-456-2233",
+      dc: 4320,
+      ib: 3745,
+      trad: 6195,
+      dcEs: "Cremación directa, sin servicio. Lista 1 nov. 2025. Contenedor aparte.",
+      dcEn: "Direct cremation, no service. List 1 Nov 2025. Container extra.",
+      ibEs: "Entierro inmediato, ataúd del comprador.",
+      ibEn: "Immediate burial, purchaser casket.",
+      memCell: cell(
+        4955,
+        "Servicio de recuerdo después de cremación. Urna aparte.",
+        "Service of remembrance after cremation. Urn extra."
+      ),
+      trCell: cell(
+        6195,
+        "Funeral tradicional. Ataúd y lote aparte. Incluye carroza.",
+        "Traditional burial services. Casket and plot extra. Hearse included."
+      ),
     },
   ],
 });

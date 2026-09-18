@@ -944,17 +944,17 @@ function citiesSection(code, lang) {
       return `<section class="py-5 bg-light border-bottom" id="ciudades">
   <div class="container" style="max-width:60rem;">
     <h2 class="h4 fw-bold mb-3" style="color:#1a365d;">Ciudades en Kansas</h2>
-    <p class="text-body-secondary mb-3">Guías locales de gastos finales para las ciudades de más de 50,000 residentes.</p>
+    <p class="text-body-secondary mb-3">Guías locales de seguro de gastos finales y de entierro para las ciudades de más de 50,000 residentes.</p>
     <ul class="mb-0">
-      <li class="mb-2"><a href="kansas/wichita.html">Wichita</a> — funerarias, cementerios y primas ilustrativas.</li>
-      <li class="mb-2"><a href="kansas/overland-park.html">Overland Park</a> — funerarias, cementerios y primas ilustrativas.</li>
-      <li class="mb-2"><a href="kansas/kansas-city.html">Kansas City, Kansas</a> — funerarias, cementerios y primas ilustrativas.</li>
-      <li class="mb-2"><a href="kansas/olathe.html">Olathe</a> — funerarias, cementerios y primas ilustrativas.</li>
-      <li class="mb-2"><a href="kansas/topeka.html">Topeka</a> — funerarias, cementerios y primas ilustrativas.</li>
-      <li class="mb-2"><a href="kansas/lawrence.html">Lawrence</a> — funerarias, cementerios y primas ilustrativas.</li>
-      <li class="mb-2"><a href="kansas/shawnee.html">Shawnee</a> — funerarias, cementerios y primas ilustrativas.</li>
-      <li class="mb-2"><a href="kansas/lenexa.html">Lenexa</a> — funerarias, cementerios y primas ilustrativas.</li>
-      <li class="mb-2"><a href="kansas/manhattan.html">Manhattan</a> — funerarias, cementerios y primas ilustrativas.</li>
+      <li class="mb-2"><a href="kansas/wichita.html">Wichita</a> — seguro de gastos finales y de entierro, funerarias y lotes.</li>
+      <li class="mb-2"><a href="kansas/overland-park.html">Overland Park</a> — seguro de gastos finales y de entierro, funerarias y lotes.</li>
+      <li class="mb-2"><a href="kansas/kansas-city.html">Kansas City, Kansas</a> — seguro de gastos finales y de entierro, funerarias y lotes.</li>
+      <li class="mb-2"><a href="kansas/olathe.html">Olathe</a> — seguro de gastos finales y de entierro, funerarias y lotes.</li>
+      <li class="mb-2"><a href="kansas/topeka.html">Topeka</a> — seguro de gastos finales y de entierro, funerarias y lotes.</li>
+      <li class="mb-2"><a href="kansas/lawrence.html">Lawrence</a> — seguro de gastos finales y de entierro, funerarias y lotes.</li>
+      <li class="mb-2"><a href="kansas/shawnee.html">Shawnee</a> — seguro de gastos finales y de entierro, funerarias y lotes.</li>
+      <li class="mb-2"><a href="kansas/lenexa.html">Lenexa</a> — seguro de gastos finales y de entierro, funerarias y lotes.</li>
+      <li class="mb-2"><a href="kansas/manhattan.html">Manhattan</a> — seguro de gastos finales y de entierro, funerarias y lotes.</li>
     </ul>
   </div>
 </section>
@@ -963,17 +963,17 @@ function citiesSection(code, lang) {
     return `<section class="py-5 bg-light border-bottom" id="cities">
   <div class="container" style="max-width:60rem;">
     <h2 class="h4 fw-bold mb-3" style="color:#1a365d;">Cities in Kansas</h2>
-    <p class="text-body-secondary mb-3">Local final-expense guides for cities with more than 50,000 residents.</p>
+    <p class="text-body-secondary mb-3">Local final expense and burial insurance guides for cities with more than 50,000 residents.</p>
     <ul class="mb-0">
-      <li class="mb-2"><a href="kansas/wichita.html">Wichita</a> — funeral homes, cemeteries, and illustrative premiums.</li>
-      <li class="mb-2"><a href="kansas/overland-park.html">Overland Park</a> — funeral homes, cemeteries, and illustrative premiums.</li>
-      <li class="mb-2"><a href="kansas/kansas-city.html">Kansas City, Kansas</a> — funeral homes, cemeteries, and illustrative premiums.</li>
-      <li class="mb-2"><a href="kansas/olathe.html">Olathe</a> — funeral homes, cemeteries, and illustrative premiums.</li>
-      <li class="mb-2"><a href="kansas/topeka.html">Topeka</a> — funeral homes, cemeteries, and illustrative premiums.</li>
-      <li class="mb-2"><a href="kansas/lawrence.html">Lawrence</a> — funeral homes, cemeteries, and illustrative premiums.</li>
-      <li class="mb-2"><a href="kansas/shawnee.html">Shawnee</a> — funeral homes, cemeteries, and illustrative premiums.</li>
-      <li class="mb-2"><a href="kansas/lenexa.html">Lenexa</a> — funeral homes, cemeteries, and illustrative premiums.</li>
-      <li class="mb-2"><a href="kansas/manhattan.html">Manhattan</a> — funeral homes, cemeteries, and illustrative premiums.</li>
+      <li class="mb-2"><a href="kansas/wichita.html">Wichita</a> — final expense and burial insurance, funeral homes, and plots.</li>
+      <li class="mb-2"><a href="kansas/overland-park.html">Overland Park</a> — final expense and burial insurance, funeral homes, and plots.</li>
+      <li class="mb-2"><a href="kansas/kansas-city.html">Kansas City, Kansas</a> — final expense and burial insurance, funeral homes, and plots.</li>
+      <li class="mb-2"><a href="kansas/olathe.html">Olathe</a> — final expense and burial insurance, funeral homes, and plots.</li>
+      <li class="mb-2"><a href="kansas/topeka.html">Topeka</a> — final expense and burial insurance, funeral homes, and plots.</li>
+      <li class="mb-2"><a href="kansas/lawrence.html">Lawrence</a> — final expense and burial insurance, funeral homes, and plots.</li>
+      <li class="mb-2"><a href="kansas/shawnee.html">Shawnee</a> — final expense and burial insurance, funeral homes, and plots.</li>
+      <li class="mb-2"><a href="kansas/lenexa.html">Lenexa</a> — final expense and burial insurance, funeral homes, and plots.</li>
+      <li class="mb-2"><a href="kansas/manhattan.html">Manhattan</a> — final expense and burial insurance, funeral homes, and plots.</li>
     </ul>
   </div>
 </section>
@@ -984,11 +984,11 @@ function citiesSection(code, lang) {
     return `<section class="py-5 bg-light border-bottom" id="ciudades">
   <div class="container" style="max-width:60rem;">
     <h2 class="h4 fw-bold mb-3" style="color:#1a365d;">Ciudades en Nebraska</h2>
-    <p class="text-body-secondary mb-3">Guías locales de gastos finales. Omaha, Lincoln y Grand Island tienen página propia.</p>
+    <p class="text-body-secondary mb-3">Guías locales de seguro de gastos finales y de entierro. Omaha, Lincoln y Grand Island tienen página propia.</p>
     <ul class="mb-0">
-      <li class="mb-2"><a href="nebraska/omaha.html">Omaha</a> — precios de funerarias, primas ilustrativas y licencia de Nebraska.</li>
-      <li class="mb-2"><a href="nebraska/lincoln.html">Lincoln</a> — funerarias, cementerios y primas ilustrativas.</li>
-      <li class="mb-2"><a href="nebraska/grand-island.html">Grand Island</a> — funerarias, cementerios y primas ilustrativas.</li>
+      <li class="mb-2"><a href="nebraska/omaha.html">Omaha</a> — seguro de gastos finales y de entierro, funerarias y lotes.</li>
+      <li class="mb-2"><a href="nebraska/lincoln.html">Lincoln</a> — seguro de gastos finales y de entierro, funerarias y lotes.</li>
+      <li class="mb-2"><a href="nebraska/grand-island.html">Grand Island</a> — seguro de gastos finales y de entierro, funerarias y lotes.</li>
     </ul>
   </div>
 </section>
@@ -997,11 +997,11 @@ function citiesSection(code, lang) {
   return `<section class="py-5 bg-light border-bottom" id="cities">
   <div class="container" style="max-width:60rem;">
     <h2 class="h4 fw-bold mb-3" style="color:#1a365d;">Cities in Nebraska</h2>
-    <p class="text-body-secondary mb-3">Local final-expense guides. Omaha, Lincoln, and Grand Island each have their own page.</p>
+    <p class="text-body-secondary mb-3">Local final expense and burial insurance guides. Omaha, Lincoln, and Grand Island each have their own page.</p>
     <ul class="mb-0">
-      <li class="mb-2"><a href="nebraska/omaha.html">Omaha</a> — funeral-home prices, illustrative premiums, and the Nebraska license.</li>
-      <li class="mb-2"><a href="nebraska/lincoln.html">Lincoln</a> — funeral homes, cemeteries, and illustrative premiums.</li>
-      <li class="mb-2"><a href="nebraska/grand-island.html">Grand Island</a> — funeral homes, cemeteries, and illustrative premiums.</li>
+      <li class="mb-2"><a href="nebraska/omaha.html">Omaha</a> — final expense and burial insurance, funeral homes, and plots.</li>
+      <li class="mb-2"><a href="nebraska/lincoln.html">Lincoln</a> — final expense and burial insurance, funeral homes, and plots.</li>
+      <li class="mb-2"><a href="nebraska/grand-island.html">Grand Island</a> — final expense and burial insurance, funeral homes, and plots.</li>
     </ul>
   </div>
 </section>

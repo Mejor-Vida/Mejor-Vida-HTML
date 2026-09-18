@@ -534,12 +534,14 @@
    position: absolute;
    inset: 0;
    overflow: visible;
-   transform: scale(1.5) translateY(18%);
+   transform: none;
    transform-origin: center bottom;
   }
   .carousel-slide:nth-child(2) .hero-couple-slide-frame img {
-   object-position: center 133%;
-   transform: none;
+   object-fit: contain;
+   object-position: center bottom;
+   transform: scale(1.16);
+   transform-origin: center bottom;
   }
   /* Expand-in effect: each slide starts small and expands to full size when active */
   @keyframes heroCarouselExpand {
@@ -575,12 +577,14 @@
   }
   .carousel-slide:nth-child(2).active .hero-couple-slide-frame {
    animation: none;
-   transform: scale(1.5) translateY(18%);
+   transform: none;
    transform-origin: center bottom;
   }
   .carousel-slide:nth-child(2).active .hero-couple-slide-frame img {
-   object-position: center 133%;
-   transform: none;
+   object-fit: contain;
+   object-position: center bottom;
+   transform: scale(1.16);
+   transform-origin: center bottom;
   }
   @media (max-width: 991px) {
    .carousel-slide img {
@@ -596,13 +600,15 @@
    }
    .carousel-slide:nth-child(2) .hero-couple-slide-frame,
    .carousel-slide:nth-child(2).active .hero-couple-slide-frame {
-    transform: scale(1.34) translateY(13%);
+    transform: none;
     transform-origin: center bottom;
    }
    .carousel-slide:nth-child(2) .hero-couple-slide-frame img,
    .carousel-slide:nth-child(2).active .hero-couple-slide-frame img {
-    object-position: center 126%;
-    transform: none;
+    object-fit: contain;
+    object-position: center bottom;
+    transform: scale(1.12);
+    transform-origin: center bottom;
    }
    /* Happy family (slide 3): keep smaller on mobile so it does not cover the CTA */
    .carousel-slide:nth-child(3) img,
@@ -1684,6 +1690,7 @@
             <div class="nav-funeral-mega" id="nav-funeral-mega" role="region" aria-label="Funeral Resources">
        <div class="nav-funeral-links">
         <h3>Planning Guidance</h3>
+        <a href="funeral-homes-cemeteries.html">Funeral homes and cemeteries</a>
         <a href="how-much-does-a-funeral-cost.html">Funeral cost guide</a>
         <a href="prepaid-funerals.html">Prepaid funerals</a>
         <a href="how-to-pay-for-a-funeral.html">How to pay for a funeral</a>
@@ -1807,6 +1814,7 @@
      <i class="fas fa-chevron-down" aria-hidden="true"></i>
     </button>
     <div class="mobile-menu-panel" id="mm-funeral" role="region" aria-labelledby="mm-funeral-btn" hidden>
+     <a href="funeral-homes-cemeteries.html" class="mobile-menu-link">Funeral homes and cemeteries</a>
      <a href="how-much-does-a-funeral-cost.html" class="mobile-menu-link">Funeral cost guide</a>
      <a href="prepaid-funerals.html" class="mobile-menu-link">Prepaid funerals</a>
      <a href="how-to-pay-for-a-funeral.html" class="mobile-menu-link">How to pay for a funeral</a>
@@ -1926,8 +1934,8 @@
 <div class="carousel-slide" data-hero-couple="true">
 <div class="hero-couple-slide-frame">
 <picture>
-<source srcset="../img/opt/hero-couple-embrace-480.webp 480w, ../img/opt/hero-couple-embrace.webp 681w" sizes="(max-width: 991px) 92vw, 540px" type="image/webp"/>
-<img alt="Los padres de Julie, abrazados" decoding="async" height="1024" loading="lazy" src="../img/opt/hero-couple-embrace.jpg" width="681"/>
+<source srcset="../img/opt/hero-couple-embrace-complete-480.webp?v=20260912-complete 480w, ../img/opt/hero-couple-embrace-complete-681.webp?v=20260912-complete 680w, ../img/opt/hero-couple-embrace-complete.webp?v=20260912-complete 1189w" sizes="(max-width: 991px) 92vw, 540px" type="image/webp"/>
+<img alt="Julie's parents, embracing" decoding="async" height="752" loading="lazy" src="../img/opt/hero-couple-embrace-complete-681.png?v=20260912-complete" width="680"/>
 </picture>
 </div>
 </div>

@@ -25,28 +25,30 @@ module.exports = {
   heroW: 1024,
   heroH: 591,
   heroVer: "bridge-v1",
-  titleEs: "Seguro de gastos finales en Omaha | Mejor Vida Seguros",
-  titleEn: "Final Expense Insurance in Omaha | Mejor Vida Insurance",
+  titleEs: "Seguro de gastos finales y de entierro en Omaha | Mejor Vida Seguros",
+  titleEn: "Final expense and burial insurance in Omaha | Mejor Vida Insurance",
   descEs:
-    "Qué es el seguro de gastos finales en Omaha, listas de funerarias lado a lado, lotes y reventa, y una calculadora de cobertura. Licencia de Nebraska, NPN #21695431.",
+    "Seguro de gastos finales, de entierro o funeral en Omaha, Bellevue, Papillion y La Vista: funerarias, lotes y cotización por teléfono. Licencia de Nebraska, NPN #21695431.",
   descEn:
-    "What final expense insurance is in Omaha, side-by-side funeral-home lists, plots and resale, and a coverage calculator. Nebraska license, NPN #21695431.",
+    "Final expense, burial, or funeral insurance in Omaha, Bellevue, Papillion, and La Vista: funeral-home lists, plots, and a phone quote. Nebraska license, NPN #21695431.",
   ctaSubEs:
     "Abajo: qué es este seguro, las listas de funerarias, el lote aparte, y una calculadora de cobertura.",
   ctaSubEn:
     "Below: what this insurance is, funeral-home price lists, the plot as a separate bill, and a coverage calculator.",
   bulletsEs: [
-    `Qué es el seguro de gastos finales y cómo se usa para el funeral.`,
+    `Qué es el seguro de gastos finales — también llamado de entierro o funeral — y cómo se usa para el funeral.`,
     `Una tabla de paquetes de funerarias en Omaha, del más económico al más caro.`,
     `El lote es una factura aparte del cementerio, con anuncios de reventa que suelen costar menos.`,
     `Una calculadora para estimar el funeral, la cobertura y la prima mensual.`,
   ],
   bulletsEn: [
-    `What final expense insurance is, and how it pays for a funeral.`,
+    `What final expense insurance is — also called burial or funeral insurance — and how it pays for a funeral.`,
     `An Omaha funeral-home package table, from the least expensive to the most expensive.`,
     `The burial plot is a separate cemetery bill, with resale listings that often cost less.`,
     `A calculator for funeral cost, coverage, and a monthly premium.`,
   ],
+  countyEs: "metro de Omaha",
+  countyEn: "Omaha metro",
   metroEs: ["Omaha", "Bellevue", "Papillion", "La Vista", "Ralston", "Elkhorn"],
   metroEn: ["Omaha", "Bellevue", "Papillion", "La Vista", "Ralston", "Elkhorn"],
   metroTitleEs: "Área que atendemos en el metro de Omaha",

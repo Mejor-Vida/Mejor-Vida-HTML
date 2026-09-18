@@ -27,28 +27,30 @@ module.exports = {
   heroW: 1024,
   heroH: 714,
   heroVer: "capitol-v1",
-  titleEs: "Seguro de gastos finales en Lincoln | Mejor Vida Seguros",
-  titleEn: "Final Expense Insurance in Lincoln | Mejor Vida Insurance",
+  titleEs: "Seguro de gastos finales y de entierro en Lincoln | Mejor Vida Seguros",
+  titleEn: "Final expense and burial insurance in Lincoln | Mejor Vida Insurance",
   descEs:
-    "Qué es el seguro de gastos finales en Lincoln, listas de funerarias lado a lado, lotes y reventa, y una calculadora de cobertura. Licencia de Nebraska, NPN #21695431.",
+    "Seguro de gastos finales, de entierro o funeral en Lincoln, Hickman, Waverly y Roca: funerarias, lotes y cotización por teléfono. Licencia de Nebraska, NPN #21695431.",
   descEn:
-    "What final expense insurance is in Lincoln, side-by-side funeral-home lists, plots and resale, and a coverage calculator. Nebraska license, NPN #21695431.",
+    "Final expense, burial, or funeral insurance in Lincoln, Hickman, Waverly, and Roca: funeral-home lists, plots, and a phone quote. Nebraska license, NPN #21695431.",
   ctaSubEs:
     "Abajo: qué es este seguro, las listas de funerarias, el lote aparte, y una calculadora de cobertura.",
   ctaSubEn:
     "Below: what this insurance is, funeral-home price lists, the plot as a separate bill, and a coverage calculator.",
   bulletsEs: [
-    `Qué es el seguro de gastos finales y cómo se usa para el funeral.`,
+    `Qué es el seguro de gastos finales — también llamado de entierro o funeral — y cómo se usa para el funeral.`,
     `Una tabla de paquetes de funerarias en Lincoln, del más económico al más caro.`,
     `El lote es una factura aparte del cementerio, con anuncios de reventa que suelen costar menos.`,
     `Una calculadora para estimar el funeral, la cobertura y la prima mensual.`,
   ],
   bulletsEn: [
-    `What final expense insurance is, and how it pays for a funeral.`,
+    `What final expense insurance is — also called burial or funeral insurance — and how it pays for a funeral.`,
     `A Lincoln funeral-home package table, from the least expensive to the most expensive.`,
     `The burial plot is a separate cemetery bill, with resale listings that often cost less.`,
     `A calculator for funeral cost, coverage, and a monthly premium.`,
   ],
+  countyEs: "condado Lancaster",
+  countyEn: "Lancaster County",
   metroEs: ["Lincoln", "Hickman", "Waverly", "Roca", "Bennet", "Malcolm"],
   metroEn: ["Lincoln", "Hickman", "Waverly", "Roca", "Bennet", "Malcolm"],
   metroTitleEs: "Área que atendemos en Lincoln",

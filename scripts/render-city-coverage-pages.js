@@ -6,7 +6,7 @@
  */
 const fs = require("fs");
 const path = require("path");
-const { guideMain } = require("./city-guide-html");
+const { guideMain, joinTowns } = require("./city-guide-html");
 const lincolnCity = require("./city-guides/lincoln");
 const omahaCity = require("./city-guides/omaha");
 const grandIslandCity = require("./city-guides/grand-island");
@@ -19,7 +19,7 @@ const FOOTER_ES = path.join(ROOT, "includes/site-footer-inner.html");
 const FOOTER_EN = path.join(ROOT, "includes/en-site-footer.html");
 
 const NPN = "21695431";
-const CSS_VER = "20260918-ks-guide4";
+const CSS_VER = "20260918-ks-seo2";
 
 const LICENSE = {
   NE: {
@@ -105,8 +105,8 @@ function cityHero(lang, root, quoteHref, city) {
   const lic = LICENSE[city.stateCode];
   const title =
     lang === "es"
-      ? `Seguro de gastos finales en ${city.nameEs}`
-      : `Final Expense Insurance in ${city.nameEn}`;
+      ? `Seguro de gastos finales y de entierro en ${city.nameEs}`
+      : `Final expense and burial insurance in ${city.nameEn}`;
   const bullets = lang === "es" ? city.bulletsEs : city.bulletsEn;
   const ctaLabel = lang === "es" ? "Cotización gratuita" : "Free quote";
   const ctaSub =
@@ -178,14 +178,51 @@ ${bullets.map((b) => `<li>${b}</li>`).join("\n")}
 </section>`;
 }
 
+function samePlace(town, cityName) {
+  const a = String(town || "").toLowerCase();
+  const b = String(cityName || "").toLowerCase();
+  return (
+    a === b ||
+    b.startsWith(a + ",") ||
+    b.startsWith(a + " (") ||
+    a.startsWith(b + ",") ||
+    a.startsWith(b + " (")
+  );
+}
+
+function metroFaq(lang, city) {
+  const towns = lang === "es" ? city.metroEs : city.metroEn;
+  const cityName = lang === "es" ? city.nameEs : city.nameEn;
+  const nearby = (towns || []).filter((n) => !samePlace(n, cityName));
+  const places = joinTowns(towns, lang);
+  if (!nearby.length || !places) return null;
+  const first = nearby[0];
+  if (lang === "es") {
+    return {
+      q: `¿Atienden en ${first} y otras ciudades cerca de ${cityName}?`,
+      a: `Sí. Las cotizaciones oficiales son por teléfono para residentes de ${city.stateNameEs} en ${places}. No hay oficina de atención al público.`,
+    };
+  }
+  return {
+    q: `Do you serve ${first} and other towns near ${cityName}?`,
+    a: `Yes. Official quotes are by phone for ${city.stateNameEn} residents in ${places}. There is no public walk-in office.`,
+  };
+}
+
 function faqItems(lang, city) {
   const extras = (
     lang === "es"
       ? [city.faqCremationEs, city.faqPrepaidEs, city.faqPlotEs, city.faqCalcEs]
       : [city.faqCremationEn, city.faqPrepaidEn, city.faqPlotEn, city.faqCalcEn]
   ).filter(Boolean);
+  const areaQ = metroFaq(lang, city);
   if (lang === "es") {
     return [
+      {
+        q: "¿Es lo mismo que un seguro de entierro o un seguro funeral?",
+        a: `Sí. Seguro de gastos finales, seguro de entierro y seguro funeral suelen describir el mismo seguro de vida permanente de monto más pequeño. En ${city.nameEs} el cheque se paga en efectivo al beneficiario; no está atado a una funeraria ni a un lote.`,
+      },
+      ...(areaQ ? [areaQ] : []),
       {
         q: "¿Necesito un examen médico?",
         a: `Muchas pólizas de gastos finales en ${city.stateNameEs} se emiten con preguntas de salud y sin examen. Si la salud es un obstáculo, puede haber aceptación garantizada, casi siempre con un período de espera.`,
@@ -208,6 +245,11 @@ function faqItems(lang, city) {
     ];
   }
   return [
+    {
+      q: "Is it the same as burial or funeral insurance?",
+      a: `Yes. Final expense, burial, and funeral insurance usually describe the same smaller permanent life policy. In ${city.nameEn} the check is paid in cash to your beneficiary; it is not tied to one funeral home or one plot.`,
+    },
+    ...(areaQ ? [areaQ] : []),
     {
       q: "Do I need a medical exam?",
       a: `Many final expense policies in ${city.stateNameEn} use health questions and no exam. If health is a barrier, guaranteed acceptance may be available, usually with a waiting period.`,
@@ -250,8 +292,14 @@ function jsonLd(lang, canon, city) {
   const stateName = lang === "es" ? city.stateNameEs : city.stateNameEn;
   const pageName =
     lang === "es"
-      ? `Seguro de gastos finales en ${city.nameEs}`
-      : `Final Expense Insurance in ${city.nameEn}`;
+      ? `Seguro de gastos finales y de entierro en ${city.nameEs}`
+      : `Final expense and burial insurance in ${city.nameEn}`;
+  const towns = lang === "es" ? city.metroEs : city.metroEn;
+  const areaServed = (towns || []).map((n) => ({
+    "@type": "City",
+    name: n,
+    containedInPlace: { "@type": "AdministrativeArea", name: stateName },
+  }));
   return `<script type="application/ld+json">${JSON.stringify({
     "@context": "https://schema.org",
     "@graph": [
@@ -260,6 +308,26 @@ function jsonLd(lang, canon, city) {
         name: pageName,
         url: canon,
         inLanguage: lang === "es" ? "es-US" : "en-US",
+      },
+      {
+        "@type": "Service",
+        name: pageName,
+        url: canon,
+        serviceType:
+          lang === "es"
+            ? ["seguro de gastos finales", "seguro de entierro", "seguro funeral"]
+            : ["final expense insurance", "burial insurance", "funeral insurance"],
+        areaServed,
+        provider: {
+          "@type": "InsuranceAgency",
+          name: lang === "es" ? "Mejor Vida Seguros" : "Mejor Vida Insurance",
+          legalName: "Mejor Vida Insurance LLC",
+          url:
+            lang === "es"
+              ? "https://www.mejorvidainsurance.com/"
+              : "https://www.mejorvidainsurance.com/en/",
+          telephone: "+1-402-440-5438",
+        },
       },
       {
         "@type": "BreadcrumbList",
@@ -421,8 +489,8 @@ function documentGuide(lang, city) {
   const faqId = isEs ? "preguntas" : "faq";
   const faqTitle = isEs ? `Preguntas frecuentes en ${city.nameEs}` : `${city.nameEn} FAQs`;
   const ctaTitle = isEs
-    ? `Cotice gastos finales en ${city.nameEs}`
-    : `Get a final expense quote in ${city.nameEn}`;
+    ? `Cotice gastos finales o de entierro en ${city.nameEs}`
+    : `Get a final expense or burial insurance quote in ${city.nameEn}`;
   const ctaP = isEs
     ? "Cotización gratuita. Mejor Vida Seguros compara opciones según su edad, salud y presupuesto. La cotización oficial es por teléfono."
     : "Free quote. Mejor Vida Insurance compares options based on your age, health, and budget. Official quotes are by phone.";
