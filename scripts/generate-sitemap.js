@@ -97,6 +97,17 @@ const STATIC_PAGES = [
   { loc: "/estados/nebraska.html", priority: "0.84" },
   { loc: "/estados/nebraska/omaha.html", priority: "0.86" },
   { loc: "/estados/nebraska/lincoln.html", priority: "0.86" },
+  { loc: "/estados/nebraska/grand-island.html", priority: "0.86" },
+  { loc: "/estados/kansas.html", priority: "0.84" },
+  { loc: "/estados/kansas/wichita.html", priority: "0.86" },
+  { loc: "/estados/kansas/overland-park.html", priority: "0.86" },
+  { loc: "/estados/kansas/kansas-city.html", priority: "0.86" },
+  { loc: "/estados/kansas/olathe.html", priority: "0.86" },
+  { loc: "/estados/kansas/topeka.html", priority: "0.86" },
+  { loc: "/estados/kansas/lawrence.html", priority: "0.86" },
+  { loc: "/estados/kansas/shawnee.html", priority: "0.86" },
+  { loc: "/estados/kansas/lenexa.html", priority: "0.86" },
+  { loc: "/estados/kansas/manhattan.html", priority: "0.86" },
 ];
 
 /** Standalone July articles redirect to the weekly digest — omit from sitemap. */

@@ -1,0 +1,131 @@
+{
+  "city": "overland-park",
+  "checked": "2026-09-17",
+  "checkedLabelEs": "17 sep. 2026",
+  "checkedLabelEn": "17 Sep 2026",
+  "noteEs": "Anuncios de particulares. No son precios de Mejor Vida Seguros ni la lista oficial del cementerio. La oficina debe transferir la escritura. Revise si el anuncio sigue activo.",
+  "noteEn": "Private-party ads. These are not Mejor Vida Insurance prices or the cemetery’s official list. The office must transfer the deed. Check that the listing is still active.",
+  "boards": [
+    {
+      "id": "grave-solutions-city",
+      "name": "Grave Solutions",
+      "url": "https://www.gravesolutions.com/search?SiteState=KS&SiteCity=Overland%20Park",
+      "labelEs": "Tablero en vivo · Overland Park",
+      "labelEn": "Live board · Overland Park"
+    },
+    {
+      "id": "grave-solutions",
+      "name": "Grave Solutions",
+      "url": "https://www.gravesolutions.com/for-sale/cemetery-properties/kansas",
+      "labelEs": "Tablero en vivo · Kansas",
+      "labelEn": "Live board · Kansas"
+    }
+  ],
+  "cemeterySignals": [],
+  "listings": [
+    {
+      "id": "gs-314565",
+      "status": "listed",
+      "cemetery": "Johnson County Memorial Gardens",
+      "spaces": 2,
+      "asking": 2000,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": null,
+      "url": "https://www.gravesolutions.com/for-sale/johnson-county-memorial-gardens-cemetery-overland-park-ks-burial-plot-314565-1",
+      "titleEs": "Grave Solutions · Garden of Apostles, lote 246, dos espacios a $1,000 c/u",
+      "titleEn": "Grave Solutions · Garden of Apostles, lot 246, two spaces at $1,000 each"
+    },
+    {
+      "id": "gs-dc33a8",
+      "status": "listed",
+      "cemetery": "Johnson County Memorial Gardens",
+      "spaces": 2,
+      "asking": 2500,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": null,
+      "url": "https://www.gravesolutions.com/for-sale/johnson-county-memorial-gardens-overland-park-ks-cemetery-plot-dc33a8",
+      "titleEs": "Grave Solutions · Garden of Peace, lote 117, espacios 3 y 4",
+      "titleEn": "Grave Solutions · Garden of Peace, lot 117, spaces 3 and 4"
+    },
+    {
+      "id": "gs-67c708",
+      "status": "listed",
+      "cemetery": "Johnson County Memorial Gardens",
+      "spaces": 4,
+      "asking": 4295,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": null,
+      "url": "https://www.gravesolutions.com/for-sale/johnson-county-memorial-gardens-cemetery-overland-park-ks-burial-plot-67c708-1",
+      "titleEs": "Grave Solutions · Old Rugged Cross, cuatro lotes juntos",
+      "titleEn": "Grave Solutions · Old Rugged Cross, four adjoining plots"
+    },
+    {
+      "id": "gs-1e0d43",
+      "status": "listed",
+      "cemetery": "Johnson County Memorial Gardens",
+      "spaces": 2,
+      "asking": 4400,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": 2950,
+      "url": "https://www.gravesolutions.com/for-sale/johnson-memorial-gardens-overland-park-ks-cemetery-plot-1e0d43",
+      "titleEs": "Grave Solutions · Garden of Peace, lote 156, dos espacios a $2,200 c/u",
+      "titleEn": "Grave Solutions · Garden of Peace, lot 156, two spaces at $2,200 each"
+    },
+    {
+      "id": "gs-a855c9",
+      "status": "listed",
+      "cemetery": "Johnson County Memorial Gardens",
+      "spaces": 4,
+      "asking": 8000,
+      "obo": false,
+      "transferFee": 250,
+      "citedListEach": null,
+      "url": "https://www.gravesolutions.com/for-sale/johnson-county-memorial-gardens-overland-park-ks-cemetery-plot-a855c9",
+      "titleEs": "Grave Solutions · Garden of Peace, cuatro espacios a $2,000 c/u",
+      "titleEn": "Grave Solutions · Garden of Peace, four spaces at $2,000 each"
+    },
+    {
+      "id": "gs-f06d76",
+      "status": "listed",
+      "cemetery": "Johnson County Memorial Gardens",
+      "spaces": 2,
+      "asking": 8632,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": null,
+      "url": "https://www.gravesolutions.com/for-sale/johnson-county-memorial-gardens-cemetery-overland-park-ks-burial-plot-f06d76",
+      "titleEs": "Grave Solutions · Garden of Peace, lote 63, dos espacios",
+      "titleEn": "Grave Solutions · Garden of Peace, lot 63, two spaces"
+    },
+    {
+      "id": "gs-5abdf5",
+      "status": "listed",
+      "cemetery": "Johnson County Memorial Gardens",
+      "spaces": 2,
+      "asking": 10000,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": null,
+      "url": "https://www.gravesolutions.com/for-sale/johnson-county-memorial-gardens-overland-park-ks-mausoleum-5abdf5",
+      "titleEs": "Grave Solutions · Tranquility, cripta True Companion, lote 4",
+      "titleEn": "Grave Solutions · Tranquility True Companion crypt, lot 4"
+    },
+    {
+      "id": "gs-cc0618",
+      "status": "listed",
+      "cemetery": "Johnson County Memorial Gardens",
+      "spaces": 2,
+      "asking": 14000,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": null,
+      "url": "https://www.gravesolutions.com/for-sale/johnson-county-memorial-gardens-overland-park-ks-mausoleum-cc0618",
+      "titleEs": "Grave Solutions · mausoleo interior True Companion, dos ataúdes",
+      "titleEn": "Grave Solutions · indoor True Companion mausoleum, two caskets"
+    }
+  ]
+}

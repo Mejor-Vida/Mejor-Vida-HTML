@@ -1,0 +1,40 @@
+{
+  "city": "lenexa",
+  "checked": "2026-09-17",
+  "checkedLabelEs": "17 sep. 2026",
+  "checkedLabelEn": "17 Sep 2026",
+  "noteEs": "Anuncios de particulares. No son precios de Mejor Vida Seguros ni la lista oficial del cementerio. La oficina debe transferir la escritura. Revise si el anuncio sigue activo.",
+  "noteEn": "Private-party ads. These are not Mejor Vida Insurance prices or the cemetery’s official list. The office must transfer the deed. Check that the listing is still active.",
+  "boards": [
+    {
+      "id": "grave-solutions-city",
+      "name": "Grave Solutions",
+      "url": "https://www.gravesolutions.com/search?SiteState=KS&SiteCity=Lenexa",
+      "labelEs": "Tablero en vivo · Lenexa",
+      "labelEn": "Live board · Lenexa"
+    },
+    {
+      "id": "grave-solutions",
+      "name": "Grave Solutions",
+      "url": "https://www.gravesolutions.com/for-sale/cemetery-properties/kansas",
+      "labelEs": "Tablero en vivo · Kansas",
+      "labelEn": "Live board · Kansas"
+    }
+  ],
+  "cemeterySignals": [],
+  "listings": [
+    {
+        "id": "gs-12c1f1",
+        "status": "sold",
+      "cemetery": "Resurrection Catholic Cemetery",
+      "spaces": 2,
+      "asking": 8265,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": 4593,
+      "url": "https://www.gravesolutions.com/for-sale/resurrection-catholic-cemetery-lenexa-ks-cemetery-plot-12c1f1",
+      "titleEs": "Grave Solutions · Veterans Garden, dos espacios (paquete $9,185)",
+      "titleEn": "Grave Solutions · Veterans Garden, two spaces (package listed $9,185)"
+    }
+  ]
+}

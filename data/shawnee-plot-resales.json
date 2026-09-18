@@ -1,0 +1,40 @@
+{
+  "city": "shawnee",
+  "checked": "2026-09-17",
+  "checkedLabelEs": "17 sep. 2026",
+  "checkedLabelEn": "17 Sep 2026",
+  "noteEs": "Anuncios de particulares. No son precios de Mejor Vida Seguros ni la lista oficial del cementerio. La oficina debe transferir la escritura. Revise si el anuncio sigue activo.",
+  "noteEn": "Private-party ads. These are not Mejor Vida Insurance prices or the cemetery’s official list. The office must transfer the deed. Check that the listing is still active.",
+  "boards": [
+    {
+      "id": "grave-solutions-city",
+      "name": "Grave Solutions",
+      "url": "https://www.gravesolutions.com/search?SiteState=KS&SiteCity=Shawnee%20Mission",
+      "labelEs": "Tablero en vivo · Shawnee Mission",
+      "labelEn": "Live board · Shawnee Mission"
+    },
+    {
+      "id": "grave-solutions",
+      "name": "Grave Solutions",
+      "url": "https://www.gravesolutions.com/for-sale/cemetery-properties/kansas",
+      "labelEs": "Tablero en vivo · Kansas",
+      "labelEn": "Live board · Kansas"
+    }
+  ],
+  "cemeterySignals": [],
+  "listings": [
+    {
+      "id": "gs-794ccf",
+      "status": "listed",
+      "cemetery": "Shawnee Mission Memory Gardens",
+      "spaces": 2,
+      "asking": 1295,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": null,
+      "url": "https://www.gravesolutions.com/for-sale/shawnee-mission-memory-gardens-overland-park-ks-cemetery-plot-794ccf",
+      "titleEs": "Grave Solutions · Christus, lote 303, cripta doble de césped",
+      "titleEn": "Grave Solutions · Christus, lot 303, double-depth lawn crypt"
+    }
+  ]
+}

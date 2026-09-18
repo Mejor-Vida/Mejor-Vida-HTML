@@ -9,6 +9,8 @@ const path = require("path");
 const { guideMain } = require("./city-guide-html");
 const lincolnCity = require("./city-guides/lincoln");
 const omahaCity = require("./city-guides/omaha");
+const grandIslandCity = require("./city-guides/grand-island");
+const kansasCities = require("./city-guides/ks-cities");
 
 const ROOT = path.join(__dirname, "..");
 const HEADER_ES = path.join(ROOT, "includes/site-header-inner.html");
@@ -17,7 +19,7 @@ const FOOTER_ES = path.join(ROOT, "includes/site-footer-inner.html");
 const FOOTER_EN = path.join(ROOT, "includes/en-site-footer.html");
 
 const NPN = "21695431";
-const CSS_VER = "20260917-omaha-guide5";
+const CSS_VER = "20260918-ks-guide4";
 
 const LICENSE = {
   NE: {
@@ -26,12 +28,15 @@ const LICENSE = {
     number: "21695431",
     code: "NE",
   },
+  KS: {
+    typeEs: "Productora no residente",
+    typeEn: "Non-resident producer",
+    number: "21695431",
+    code: "KS",
+  },
 };
 
-const CITIES = [
-  omahaCity,
-  lincolnCity,
-];
+const CITIES = [omahaCity, lincolnCity, grandIslandCity, ...kansasCities];
 
 function esc(s) {
   return String(s)
@@ -192,7 +197,9 @@ function faqItems(lang, city) {
       ...extras,
       {
         q: `¿Están licenciados en ${city.stateNameEs}?`,
-        a: `Sí. Mejor Vida Seguros cotiza seguro de vida en ${city.stateNameEs}. Julie Braunsroth es productora residente, NPN #21695431. Puede ver la licencia de ${city.stateNameEs} y verificarla en la NAIC. El mapa completo de estados está en la página de licencias.`,
+        a: `Sí. Mejor Vida Seguros cotiza seguro de vida en ${city.stateNameEs}. Julie Braunsroth es ${String(
+          (LICENSE[city.stateCode] && LICENSE[city.stateCode].typeEs) || "productora residente"
+        ).toLowerCase()}, NPN #21695431. Puede ver la licencia de ${city.stateNameEs} y verificarla en la NAIC. El mapa completo de estados está en la página de licencias.`,
       },
       {
         q: "¿Atienden en español?",
@@ -212,7 +219,9 @@ function faqItems(lang, city) {
     ...extras,
     {
       q: `Are you licensed in ${city.stateNameEn}?`,
-      a: `Yes. Mejor Vida Insurance quotes life insurance in ${city.stateNameEn}. Julie Braunsroth is a resident producer, NPN #21695431. You can view the ${city.stateNameEn} license and verify it on the NAIC. The full state map is on the licenses page.`,
+      a: `Yes. Mejor Vida Insurance quotes life insurance in ${city.stateNameEn}. Julie Braunsroth is a ${String(
+        (LICENSE[city.stateCode] && LICENSE[city.stateCode].typeEn) || "resident producer"
+      ).toLowerCase()}, NPN #21695431. You can view the ${city.stateNameEn} license and verify it on the NAIC. The full state map is on the licenses page.`,
     },
     {
       q: "Do you work in Spanish?",

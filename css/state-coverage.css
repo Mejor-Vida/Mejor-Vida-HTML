@@ -1280,6 +1280,7 @@
   background: #061428;
   -webkit-mask-image: none;
   mask-image: none;
+  overflow: hidden;
 }
 
 .sc-hero--city .sc-hero-visual img {
@@ -1289,6 +1290,46 @@
 
 .sc-hero--lincoln .sc-hero-visual img {
   object-position: 82% 38%;
+}
+
+.sc-hero--grand-island .sc-hero-visual img {
+  object-position: center 42%;
+}
+
+.sc-hero--wichita .sc-hero-visual img {
+  object-position: 55% 48%;
+}
+
+.sc-hero--overland-park .sc-hero-visual img {
+  object-position: center 40%;
+}
+
+.sc-hero--kansas-city .sc-hero-visual img {
+  object-position: center 28%;
+}
+
+.sc-hero--olathe .sc-hero-visual img {
+  object-position: center 45%;
+}
+
+.sc-hero--topeka .sc-hero-visual img {
+  object-position: center 35%;
+}
+
+.sc-hero--lawrence .sc-hero-visual img {
+  object-position: center 20%;
+}
+
+.sc-hero--shawnee .sc-hero-visual img {
+  object-position: center 50%;
+}
+
+.sc-hero--lenexa .sc-hero-visual img {
+  object-position: center 40%;
+}
+
+.sc-hero--manhattan .sc-hero-visual img {
+  object-position: center 30%;
 }
 
 .sc-hero--city .sc-hero-shade {

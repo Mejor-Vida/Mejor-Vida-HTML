@@ -1,0 +1,68 @@
+{
+  "city": "grand-island",
+  "checked": "2026-09-17",
+  "checkedLabelEs": "17 sep. 2026",
+  "checkedLabelEn": "17 Sep 2026",
+  "noteEs": "Anuncios de particulares. No son precios de Mejor Vida Seguros ni la lista oficial del cementerio. La oficina debe transferir la escritura. Revise si el anuncio sigue activo.",
+  "noteEn": "Private-party ads. These are not Mejor Vida Insurance prices or the cemetery’s official list. The office must transfer the deed. Check that the listing is still active.",
+  "boards": [
+    {
+      "id": "eturnal",
+      "name": "Eturnal Rest",
+      "url": "https://eturnalrest.com/cemeteries/ne/westlawn-memorial-park-grand-island/",
+      "labelEs": "Tablero en vivo · Westlawn Memorial Park",
+      "labelEn": "Live board · Westlawn Memorial Park"
+    },
+    {
+      "id": "grave-solutions",
+      "name": "Grave Solutions",
+      "url": "https://www.gravesolutions.com/for-sale/cemetery-properties/nebraska",
+      "labelEs": "Tablero en vivo · Nebraska",
+      "labelEn": "Live board · Nebraska"
+    }
+  ],
+  "cemeterySignals": [
+    {
+      "cemetery": "Westlawn Memorial Park",
+      "citedListLow": 2150,
+      "citedListHigh": 3950,
+      "typical": 3000,
+      "phone": "308-381-2420",
+      "noteEs": "No publican el lote en la web. Estimaciones de terceros: $2,150 a $3,950 por espacio. Pida la lista por escrito: 308-381-2420.",
+      "noteEn": "They do not publish plot prices online. Third-party estimates: $2,150 to $3,950 per space. Ask for it in writing: 308-381-2420."
+    },
+    {
+      "cemetery": "Grand Island City Cemetery",
+      "citedListLow": null,
+      "citedListHigh": null,
+      "typical": null,
+      "phone": "308-385-5359",
+      "noteEs": "Cementerio municipal. No publican el lote en la web. Llame: 308-385-5359.",
+      "noteEn": "City cemetery. They do not publish plot prices online. Call: 308-385-5359."
+    },
+    {
+      "cemetery": "Nebraska Veterans Cemetery at Grand Island",
+      "citedListLow": 0,
+      "citedListHigh": 0,
+      "typical": 0,
+      "phone": "308-661-1987",
+      "noteEs": "No hay cuotas para veteranos y dependientes que califican. 3270 W Capital Ave, 308-661-1987.",
+      "noteEn": "There are no fees for eligible veterans and dependents. 3270 W Capital Ave, 308-661-1987."
+    }
+  ],
+  "listings": [
+    {
+      "id": "cb-004061",
+      "status": "sold",
+      "cemetery": "Westlawn Memorial Park",
+      "spaces": 2,
+      "asking": 1000,
+      "obo": true,
+      "transferFee": null,
+      "citedListEach": 685,
+      "url": "https://eturnalrest.com/products/grave-for-sale-westlawn-memorial-park-grand-island-cb-004061",
+      "titleEs": "Eturnal Rest · Sec. I Gethsemane, lote 232, espacios 1 y 2 (agotado)",
+      "titleEn": "Eturnal Rest · Sec. I Gethsemane, lot 232, spaces 1 and 2 (sold)"
+    }
+  ]
+}

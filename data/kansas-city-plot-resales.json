@@ -1,0 +1,53 @@
+{
+  "city": "kansas-city",
+  "checked": "2026-09-17",
+  "checkedLabelEs": "17 sep. 2026",
+  "checkedLabelEn": "17 Sep 2026",
+  "noteEs": "Anuncios de particulares. No son precios de Mejor Vida Seguros ni la lista oficial del cementerio. La oficina debe transferir la escritura. Revise si el anuncio sigue activo.",
+  "noteEn": "Private-party ads. These are not Mejor Vida Insurance prices or the cemetery’s official list. The office must transfer the deed. Check that the listing is still active.",
+  "boards": [
+    {
+      "id": "grave-solutions-city",
+      "name": "Grave Solutions",
+      "url": "https://www.gravesolutions.com/search?SiteState=KS&SiteCity=Kansas%20City",
+      "labelEs": "Tablero en vivo · Kansas City, KS",
+      "labelEn": "Live board · Kansas City, KS"
+    },
+    {
+      "id": "grave-solutions",
+      "name": "Grave Solutions",
+      "url": "https://www.gravesolutions.com/for-sale/cemetery-properties/kansas",
+      "labelEs": "Tablero en vivo · Kansas",
+      "labelEn": "Live board · Kansas"
+    }
+  ],
+  "cemeterySignals": [],
+  "listings": [
+    {
+      "id": "gs-13dc72",
+      "status": "listed",
+      "cemetery": "Chapel Hill Memorial Gardens",
+      "spaces": 2,
+      "asking": 7000,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": null,
+      "url": "https://www.gravesolutions.com/for-sale/chapel-hill-memorial-gardens-kansas-city-ks-cemetery-plot-13dc72",
+      "titleEs": "Grave Solutions · Garden of Meditation, lote 119, dos espacios",
+      "titleEn": "Grave Solutions · Garden of Meditation, lot 119, two spaces"
+    },
+    {
+      "id": "gs-84fe76",
+      "status": "listed",
+      "cemetery": "Chapel Hill Memorial Gardens",
+      "spaces": 2,
+      "asking": 16000,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": null,
+      "url": "https://www.gravesolutions.com/for-sale/chapel-hilll-memorial-gardens-kansas-city-ks-burial-plot-84fe76",
+      "titleEs": "Grave Solutions · Old Rugged Cross, bloque A, lote 161, dos espacios",
+      "titleEn": "Grave Solutions · Old Rugged Cross, block A, lot 161, two spaces"
+    }
+  ]
+}

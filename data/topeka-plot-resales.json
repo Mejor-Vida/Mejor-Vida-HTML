@@ -1,0 +1,79 @@
+{
+  "city": "topeka",
+  "checked": "2026-09-17",
+  "checkedLabelEs": "17 sep. 2026",
+  "checkedLabelEn": "17 Sep 2026",
+  "noteEs": "Anuncios de particulares. No son precios de Mejor Vida Seguros ni la lista oficial del cementerio. La oficina debe transferir la escritura. Revise si el anuncio sigue activo.",
+  "noteEn": "Private-party ads. These are not Mejor Vida Insurance prices or the cemetery’s official list. The office must transfer the deed. Check that the listing is still active.",
+  "boards": [
+    {
+      "id": "grave-solutions-city",
+      "name": "Grave Solutions",
+      "url": "https://www.gravesolutions.com/search?SiteState=KS&SiteCity=Topeka",
+      "labelEs": "Tablero en vivo · Topeka",
+      "labelEn": "Live board · Topeka"
+    },
+    {
+      "id": "grave-solutions",
+      "name": "Grave Solutions",
+      "url": "https://www.gravesolutions.com/for-sale/cemetery-properties/kansas",
+      "labelEs": "Tablero en vivo · Kansas",
+      "labelEn": "Live board · Kansas"
+    }
+  ],
+  "cemeterySignals": [],
+  "listings": [
+    {
+      "id": "gs-a45c11",
+      "status": "listed",
+      "cemetery": "Mount Hope Cemetery",
+      "spaces": 1,
+      "asking": 1400,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": null,
+      "url": "https://www.gravesolutions.com/for-sale/mount-hope-topeka-ks-cemetery-plot-a45c11",
+      "titleEs": "Grave Solutions · sección Lincoln, un espacio",
+      "titleEn": "Grave Solutions · Lincoln section, one space"
+    },
+    {
+      "id": "gs-1b4e30",
+      "status": "listed",
+      "cemetery": "Memorial Park Cemetery",
+      "spaces": 1,
+      "asking": 2000,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": null,
+      "url": "https://www.gravesolutions.com/for-sale/memorial-park-cemetery-topeka-ks-cemetery-plot-1b4e30",
+      "titleEs": "Grave Solutions · A-Acacia, $2,000 por espacio (varios juntos)",
+      "titleEn": "Grave Solutions · A-Acacia, $2,000 per space (several adjoining)"
+    },
+    {
+      "id": "gs-a188da",
+      "status": "listed",
+      "cemetery": "Mount Hope Cemetery",
+      "spaces": 2,
+      "asking": 4000,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": 2700,
+      "url": "https://www.gravesolutions.com/for-sale/mount-hope-cemetery-topeka-ks-cemetery-plot-a188da",
+      "titleEs": "Grave Solutions · Lincoln Garden, lote 415, dos espacios a $2,000 c/u",
+      "titleEn": "Grave Solutions · Lincoln Garden, lot 415, two spaces at $2,000 each"
+    },
+    {
+      "id": "gs-281bea",
+      "status": "listed",
+      "cemetery": "Memorial Park Cemetery",
+      "spaces": 3,
+      "asking": 6000,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": null,
+      "url": "https://www.gravesolutions.com/for-sale/memorial-park-cemetery-topeka-ks-cemetery-plot-281bea",
+      "titleEs": "Grave Solutions · Garden of Peace, lote 9, tres espacios a $2,000 c/u",
+      "titleEn": "Grave Solutions · Garden of Peace, lot 9, three spaces at $2,000 each"
+    }
+  ]
+}

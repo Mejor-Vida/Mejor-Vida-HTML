@@ -1,0 +1,40 @@
+{
+  "city": "lawrence",
+  "checked": "2026-09-17",
+  "checkedLabelEs": "17 sep. 2026",
+  "checkedLabelEn": "17 Sep 2026",
+  "noteEs": "Anuncios de particulares. No son precios de Mejor Vida Seguros ni la lista oficial del cementerio. La oficina debe transferir la escritura. Revise si el anuncio sigue activo.",
+  "noteEn": "Private-party ads. These are not Mejor Vida Insurance prices or the cemetery’s official list. The office must transfer the deed. Check that the listing is still active.",
+  "boards": [
+    {
+      "id": "grave-solutions-city",
+      "name": "Grave Solutions",
+      "url": "https://www.gravesolutions.com/search?SiteState=KS&SiteCity=Lawrence",
+      "labelEs": "Tablero en vivo · Lawrence",
+      "labelEn": "Live board · Lawrence"
+    },
+    {
+      "id": "grave-solutions",
+      "name": "Grave Solutions",
+      "url": "https://www.gravesolutions.com/for-sale/cemetery-properties/kansas",
+      "labelEs": "Tablero en vivo · Kansas",
+      "labelEn": "Live board · Kansas"
+    }
+  ],
+  "cemeterySignals": [],
+  "listings": [
+    {
+      "id": "gs-51834c",
+      "status": "listed",
+      "cemetery": "Oak Hill Cemetery",
+      "spaces": 1,
+      "asking": 60000,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": null,
+      "url": "https://www.gravesolutions.com/for-sale/oakhill-cemetery-lawrence-ks-mausoleum-51834c",
+      "titleEs": "Grave Solutions · mausoleo de 14 nichos, 13th Street",
+      "titleEn": "Grave Solutions · 14-capacity mausoleum, 13th Street"
+    }
+  ]
+}

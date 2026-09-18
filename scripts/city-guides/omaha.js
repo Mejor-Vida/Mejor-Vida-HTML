@@ -52,9 +52,9 @@ module.exports = {
   metroTitleEs: "Área que atendemos en el metro de Omaha",
   metroTitleEn: "Omaha metro we serve",
   metroNoteEs:
-    'Las cotizaciones oficiales son por teléfono para residentes de Nebraska en estas comunidades. No hay oficina de atención al público. Lincoln tiene <a href="lincoln.html">su propia guía</a>.',
+    'Las cotizaciones oficiales son por teléfono para residentes de Nebraska en estas comunidades. No hay oficina de atención al público. Lincoln tiene <a href="lincoln.html">su propia guía</a>. Grand Island tiene <a href="grand-island.html">su propia guía</a>.',
   metroNoteEn:
-    'Official quotes are by phone for Nebraska residents in these communities. There is no public walk-in office. Lincoln has <a href="lincoln.html">its own guide</a>.',
+    'Official quotes are by phone for Nebraska residents in these communities. There is no public walk-in office. Lincoln has <a href="lincoln.html">its own guide</a>. Grand Island has <a href="grand-island.html">its own guide</a>.',
   faqCremationEs: {
     q: "¿Cuánta cobertura suele alcanzar para una cremación en Omaha?",
     a: "Con cremación directa publicada desde $1,755 en Braman, $2,795 en Kahler-Dolce y $2,870 en John A. Gentleman, muchas familias eligen $5,000 a $10,000 para el servicio, urna, viajes y cuentas pequeñas. Un entierro tradicional suele necesitar más: la GPL de Braman pone el paquete de funeral tradicional en $5,235, sin ataúd, y el lote, la bóveda y la lápida van aparte.",

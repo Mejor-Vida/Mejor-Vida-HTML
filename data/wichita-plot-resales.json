@@ -1,0 +1,131 @@
+{
+  "city": "wichita",
+  "checked": "2026-09-17",
+  "checkedLabelEs": "17 sep. 2026",
+  "checkedLabelEn": "17 Sep 2026",
+  "noteEs": "Anuncios de particulares. No son precios de Mejor Vida Seguros ni la lista oficial del cementerio. La oficina debe transferir la escritura. Revise si el anuncio sigue activo.",
+  "noteEn": "Private-party ads. These are not Mejor Vida Insurance prices or the cemetery’s official list. The office must transfer the deed. Check that the listing is still active.",
+  "boards": [
+    {
+      "id": "grave-solutions-city",
+      "name": "Grave Solutions",
+      "url": "https://www.gravesolutions.com/search?SiteState=KS&SiteCity=Wichita",
+      "labelEs": "Tablero en vivo · Wichita",
+      "labelEn": "Live board · Wichita"
+    },
+    {
+      "id": "grave-solutions",
+      "name": "Grave Solutions",
+      "url": "https://www.gravesolutions.com/for-sale/cemetery-properties/kansas",
+      "labelEs": "Tablero en vivo · Kansas",
+      "labelEn": "Live board · Kansas"
+    }
+  ],
+  "cemeterySignals": [],
+  "listings": [
+    {
+      "id": "gs-018130",
+      "status": "listed",
+      "cemetery": "Old Mission Cemetery",
+      "spaces": 2,
+      "asking": 6000,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": null,
+      "url": "https://www.gravesolutions.com/for-sale/old-mission-wichita-ks-burial-plot-018130",
+      "titleEs": "Grave Solutions · dos lotes juntos, 3424 E 21st St N",
+      "titleEn": "Grave Solutions · two plots side by side, 3424 E 21st St N"
+    },
+    {
+      "id": "gs-4cf736",
+      "status": "listed",
+      "cemetery": "Old Mission Cemetery",
+      "spaces": 2,
+      "asking": 5000,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": null,
+      "url": "https://www.gravesolutions.com/for-sale/old-mission-wichita-ks-cemetery-plot-4cf736",
+      "titleEs": "Grave Solutions · dos espacios a $2,500 c/u, 5424 E 21st St N",
+      "titleEn": "Grave Solutions · two spaces at $2,500 each, 5424 E 21st St N"
+    },
+    {
+      "id": "gs-bfca3c",
+      "status": "listed",
+      "cemetery": "Old Mission Cemetery",
+      "spaces": 2,
+      "asking": 5000,
+      "obo": true,
+      "transferFee": null,
+      "citedListEach": null,
+      "url": "https://www.gravesolutions.com/for-sale/old-mission-wichita-ks-wichita-ks-cemetery-plot-bfca3c",
+      "titleEs": "Grave Solutions · dos lotes a $2,500 c/u, o mejor oferta",
+      "titleEn": "Grave Solutions · two lots at $2,500 each, or best offer"
+    },
+    {
+      "id": "gs-730e04",
+      "status": "listed",
+      "cemetery": "White Chapel Memorial Gardens",
+      "spaces": 4,
+      "asking": 6796,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": null,
+      "url": "https://www.gravesolutions.com/for-sale/white-chapel-memorial-gardens-wichita-ks-cemetery-plot-730e04",
+      "titleEs": "Grave Solutions · Nativity, lote 211-B, cuatro espacios a $1,699 c/u",
+      "titleEn": "Grave Solutions · Nativity, lot 211-B, four spaces at $1,699 each"
+    },
+    {
+      "id": "gs-b397c5",
+      "status": "listed",
+      "cemetery": "White Chapel Memorial Gardens",
+      "spaces": 4,
+      "asking": 4800,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": 1899,
+      "url": "https://www.gravesolutions.com/for-sale/white-chapel-memorial-gardens-wichita-ks-cemetery-plot-b397c5",
+      "titleEs": "Grave Solutions · Nativity, cuatro espacios a $1,200 c/u",
+      "titleEn": "Grave Solutions · Nativity, four spaces at $1,200 each"
+    },
+    {
+      "id": "gs-be6182",
+      "status": "listed",
+      "cemetery": "Resthaven Gardens of Memory",
+      "spaces": 2,
+      "asking": 8500,
+      "obo": false,
+      "transferFee": 0,
+      "citedListEach": null,
+      "url": "https://www.gravesolutions.com/for-sale/resthaven-cemetery-wichita-ks-cemetery-plot-be6182",
+      "titleEs": "Grave Solutions · Sermon on the Mount, lote 12B, par con bóvedas",
+      "titleEn": "Grave Solutions · Sermon on the Mount, lot 12B, pair with vaults"
+    },
+    {
+      "id": "gs-3148a9",
+      "status": "listed",
+      "cemetery": "Resthaven Gardens of Memory",
+      "spaces": 2,
+      "asking": 10000,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": null,
+      "url": "https://www.gravesolutions.com/for-sale/resthaven-cemetery-wichita-ks-cemetery-plot-3148a9",
+      "titleEs": "Grave Solutions · Garden of Bruce Newton, lote 40-A, dos espacios y bóvedas",
+      "titleEn": "Grave Solutions · Garden of Bruce Newton, lot 40-A, two spaces and vaults"
+    },
+    {
+      "id": "gs-691aa5",
+      "status": "listed",
+      "cemetery": "Resthaven Gardens of Memory",
+      "spaces": 4,
+      "asking": 20000,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": null,
+      "url": "https://www.gravesolutions.com/for-sale/resthaven-gardens-of-memory-wichita-ks-burial-plot-691aa5-1",
+      "titleEs": "Grave Solutions · Bruce Newton, jardín masónico, cuatro espacios",
+      "titleEn": "Grave Solutions · Bruce Newton, Masonic Garden, four spaces"
+    }
+  ]
+}

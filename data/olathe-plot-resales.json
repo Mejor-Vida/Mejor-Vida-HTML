@@ -1,0 +1,79 @@
+{
+  "city": "olathe",
+  "checked": "2026-09-17",
+  "checkedLabelEs": "17 sep. 2026",
+  "checkedLabelEn": "17 Sep 2026",
+  "noteEs": "Anuncios de particulares. No son precios de Mejor Vida Seguros ni la lista oficial del cementerio. La oficina debe transferir la escritura. Revise si el anuncio sigue activo.",
+  "noteEn": "Private-party ads. These are not Mejor Vida Insurance prices or the cemetery’s official list. The office must transfer the deed. Check that the listing is still active.",
+  "boards": [
+    {
+      "id": "grave-solutions-city",
+      "name": "Grave Solutions",
+      "url": "https://www.gravesolutions.com/search?SiteState=KS&SiteCity=Olathe",
+      "labelEs": "Tablero en vivo · Olathe",
+      "labelEn": "Live board · Olathe"
+    },
+    {
+      "id": "grave-solutions",
+      "name": "Grave Solutions",
+      "url": "https://www.gravesolutions.com/for-sale/cemetery-properties/kansas",
+      "labelEs": "Tablero en vivo · Kansas",
+      "labelEn": "Live board · Kansas"
+    }
+  ],
+  "cemeterySignals": [],
+  "listings": [
+    {
+      "id": "gs-007244",
+      "status": "listed",
+      "cemetery": "Oak Lawn Memorial Gardens",
+      "spaces": 2,
+      "asking": 2500,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": null,
+      "url": "https://www.gravesolutions.com/for-sale/oak-lawn-memorial-garden-olathe-ks-cemetery-plot-007244",
+      "titleEs": "Grave Solutions · Lawn Crypt Garden, bloque 9, cripta doble con bóveda",
+      "titleEn": "Grave Solutions · Lawn Crypt Garden, block 9, double crypt with vault"
+    },
+    {
+        "id": "gs-0e0311",
+        "status": "sold",
+      "cemetery": "Oak Lawn Memorial Gardens",
+      "spaces": 2,
+      "asking": 3995,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": null,
+      "url": "https://www.gravesolutions.com/for-sale/oak-lawn-memorial-gardens-olathe-ks-cemetery-plot-0e0311",
+      "titleEs": "Grave Solutions · cripta de césped, dos enterramientos, bóvedas y memorial",
+      "titleEn": "Grave Solutions · lawn crypt, two interments, vaults and memorial"
+    },
+    {
+      "id": "gs-4afafe",
+      "status": "listed",
+      "cemetery": "Oak Lawn Memorial Gardens",
+      "spaces": 2,
+      "asking": 7000,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": null,
+      "url": "https://www.gravesolutions.com/for-sale/oak-lawn-memorial-garden-olathe-ks-mausoleum-4afafe",
+      "titleEs": "Grave Solutions · Way of the Cross, nivel 2, criptas 2A y 2B",
+      "titleEn": "Grave Solutions · Way of the Cross, tier 2, crypts 2A and 2B"
+    },
+    {
+      "id": "gs-373338",
+      "status": "listed",
+      "cemetery": "Oak Lawn Memorial Gardens",
+      "spaces": 2,
+      "asking": 8000,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": null,
+      "url": "https://www.gravesolutions.com/for-sale/dw-newcomers-sons-oak-lawn-memorial-garden-olathe-ks-mausoleum-373338",
+      "titleEs": "Grave Solutions · Way of the Cross, criptas 2-A y 2-B",
+      "titleEn": "Grave Solutions · Way of the Cross, crypts 2-A and 2-B"
+    }
+  ]
+}
