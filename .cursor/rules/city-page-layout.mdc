@@ -20,9 +20,10 @@ Do not bring back Omaha’s old source/price/notes table or the static $10,000 p
 6. The burial plot is a **separate bill**, then where to call, then resale ads
 7. Calculator: age, sex, smoker → appointed-company monthly premium
 8. Metro towns
-9. License for **this page’s state only** (full roster stays on licencias/licenses)
-10. FAQs
-11. Navy quote band
+9. FAQs
+10. Navy quote band
+
+License proof stays in the **hero agent bar** only (this page’s state, NPN, Ver licencia / NAIC). Do not add a second license section in the body. Full roster stays on licencias/licenses.
 
 ## Locked copy (use these wordings)
 
@@ -64,6 +65,7 @@ Lives in `scripts/city-guide-html.js` + `js/city-guide.js`. Do not rebuild it.
 
 - Put costs in the hero
 - Add a comparable-funeral “added up” row, or an estimator line-item grid with empty cells
+- Repeat the hero license bar as a later body section
 - List the four licensed states, Iowa, or “based in Lincoln” on the city page body
 - Use Julie’s first name in body copy (agency name only)
 - Hand-edit the generated HTML; change the builder and rebuild

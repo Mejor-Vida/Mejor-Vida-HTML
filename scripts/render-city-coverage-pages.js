@@ -236,7 +236,7 @@ function faqItems(lang, city) {
         q: `¿Están licenciados en ${city.stateNameEs}?`,
         a: `Sí. Mejor Vida Seguros cotiza seguro de vida en ${city.stateNameEs}. Julie Braunsroth es ${String(
           (LICENSE[city.stateCode] && LICENSE[city.stateCode].typeEs) || "productora residente"
-        ).toLowerCase()}, NPN #21695431. Puede ver la licencia de ${city.stateNameEs} y verificarla en la NAIC. El mapa completo de estados está en la página de licencias.`,
+        ).toLowerCase()}, NPN #21695431. Puede ver la licencia de ${city.stateNameEs} y verificarla en la NAIC.`,
       },
       {
         q: "¿Atienden en español?",
@@ -263,7 +263,7 @@ function faqItems(lang, city) {
       q: `Are you licensed in ${city.stateNameEn}?`,
       a: `Yes. Mejor Vida Insurance quotes life insurance in ${city.stateNameEn}. Julie Braunsroth is a ${String(
         (LICENSE[city.stateCode] && LICENSE[city.stateCode].typeEn) || "resident producer"
-      ).toLowerCase()}, NPN #21695431. You can view the ${city.stateNameEn} license and verify it on the NAIC. The full state map is on the licenses page.`,
+      ).toLowerCase()}, NPN #21695431. You can view the ${city.stateNameEn} license and verify it on the NAIC.`,
     },
     {
       q: "Do you work in Spanish?",
@@ -552,7 +552,7 @@ ${jsonLd(lang, canon, city)}
 ${header}
 <main class="state-coverage-readability">
 ${cityHero(lang, root, quoteHref, city)}
-${guideMain(lang, city, { root, quoteHref, stateHref, en, npn: NPN, license: LICENSE[city.stateCode] })}
+${guideMain(lang, city, { root, quoteHref, stateHref, en })}
 <section class="py-5 bg-light border-bottom sc-city-faq" id="${faqId}">
   <div class="container sc-city-prose">
     <h2 class="h4 fw-bold mb-3" style="color:#1a365d;">${esc(faqTitle)}</h2>
@@ -597,7 +597,6 @@ function documentEs(city) {
   const coverageBg = city.cemeteries ? "bg-white" : "bg-light";
   const premiumsBg = city.cemeteries ? "bg-light" : "bg-white";
   const metroBg = city.cemeteries ? "bg-white" : "bg-light";
-  const licenseBg = city.cemeteries ? "bg-light" : "bg-white";
   const faqBg = city.cemeteries ? "bg-white" : "bg-light";
 
   return `<!DOCTYPE html>
@@ -726,17 +725,6 @@ ${rateRows()
   </div>
 </section>
 
-<section class="py-5 ${licenseBg} border-bottom" id="licencia-nebraska">
-  <div class="container sc-city-prose">
-    <h2 class="h4 fw-bold mb-3" style="color:#1a365d;">Licencia en Nebraska</h2>
-    <p class="text-body-secondary mb-3">Mejor Vida Seguros está autorizado a cotizar y vender seguro de vida en <strong>Nebraska</strong>. Julie Braunsroth es productora residente, NPN #${NPN}, con sede en Lincoln. Esta página no lista otros estados: el mapa y las copias están en <a href="${root}licencias.html">licencias</a>.</p>
-    <div class="d-flex flex-wrap gap-2">
-      <a class="btn btn-outline-primary" href="#licencia">Ver licencia de Nebraska</a>
-      <a class="btn btn-outline-secondary" href="https://external-lookup-web.prod.naic.org/lookup?jurisdiction=NE&amp;searchType=Licensee&amp;entityType=IND&amp;npn=${NPN}" target="_blank" rel="noopener">Verificar en la NAIC</a>
-    </div>
-  </div>
-</section>
-
 <section class="py-5 ${faqBg} border-bottom sc-city-faq" id="preguntas">
   <div class="container sc-city-prose">
     <h2 class="h4 fw-bold mb-3" style="color:#1a365d;">Preguntas frecuentes en ${esc(city.nameEs)}</h2>
@@ -782,7 +770,6 @@ function documentEn(city) {
   const coverageBg = city.cemeteries ? "bg-white" : "bg-light";
   const premiumsBg = city.cemeteries ? "bg-light" : "bg-white";
   const metroBg = city.cemeteries ? "bg-white" : "bg-light";
-  const licenseBg = city.cemeteries ? "bg-light" : "bg-white";
   const faqBg = city.cemeteries ? "bg-white" : "bg-light";
 
   return `<!DOCTYPE html>
@@ -906,17 +893,6 @@ ${rateRows()
     <h2 class="h4 fw-bold mb-3" style="color:#1a365d;">${esc(city.metroTitleEn)}</h2>
     <p class="text-body-secondary mb-3">${city.metroNoteEn}</p>
     <ul class="sc-city-pills">${metro}</ul>
-  </div>
-</section>
-
-<section class="py-5 ${licenseBg} border-bottom" id="nebraska-license">
-  <div class="container sc-city-prose">
-    <h2 class="h4 fw-bold mb-3" style="color:#1a365d;">Nebraska license</h2>
-    <p class="text-body-secondary mb-3">Mejor Vida Insurance is authorized to quote and sell life insurance in <strong>Nebraska</strong>. Julie Braunsroth is a resident producer, NPN #${NPN}, based in Lincoln. This page does not list other states: the map and copies are on the <a href="${en}licenses.html">licenses</a> page.</p>
-    <div class="d-flex flex-wrap gap-2">
-      <a class="btn btn-outline-primary" href="#license">View Nebraska license</a>
-      <a class="btn btn-outline-secondary" href="https://external-lookup-web.prod.naic.org/lookup?jurisdiction=NE&amp;searchType=Licensee&amp;entityType=IND&amp;npn=${NPN}" target="_blank" rel="noopener">Verify on the NAIC</a>
-    </div>
   </div>
 </section>
 

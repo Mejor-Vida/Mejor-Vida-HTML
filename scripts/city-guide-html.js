@@ -363,7 +363,6 @@ function guideMain(lang, city, ctx) {
     lang === "es" ? `${root}cuanto-cuesta-un-funeral.html` : `${ctx.en}how-much-does-a-funeral-cost.html`;
   const estimatorHref =
     lang === "es" ? `${root}final-expense-estimator.html` : `${ctx.en}final-expense-estimator.html`;
-  const licensesHref = lang === "es" ? `${root}licencias.html` : `${ctx.en}licenses.html`;
   const jsonRel = `${root}${guide.resaleJson}`;
   const offices = lang === "es" ? guide.officesEs : guide.officesEn;
   const officesNote =
@@ -375,9 +374,6 @@ function guideMain(lang, city, ctx) {
   const compareLead = lang === "es" ? guide.compareLeadEs : guide.compareLeadEn;
   const newList = lang === "es" ? guide.newListEs : guide.newListEn;
   const resaleFoot = lang === "es" ? guide.resaleFootEs : guide.resaleFootEn;
-  const lic = ctx.license || {};
-  const licType = lang === "es" ? lic.typeEs : lic.typeEn;
-  const npn = ctx.npn || "21695431";
 
   const ids =
     lang === "es"
@@ -387,8 +383,6 @@ function guideMain(lang, city, ctx) {
           compare: "comparar",
           cem: "cementerios",
           calc: "calculadora",
-          lic: `licencia-${city.stateSlug}`,
-          licJump: "#licencia",
         }
       : {
           fe: "coverage",
@@ -396,8 +390,6 @@ function guideMain(lang, city, ctx) {
           compare: "compare",
           cem: "cemeteries",
           calc: "calculator",
-          lic: `${city.stateSlug}-license`,
-          licJump: "#license",
         };
 
   if (lang === "es") {
@@ -500,25 +492,6 @@ ${(offices || []).map((o) => `      <li class="mb-2">${o}</li>`).join("\n")}
     <ul class="sc-city-pills">${city.metroEs.map((n) => `<li>${esc(n)}</li>`).join("")}</ul>
   </div>
 </section>
-
-<section class="py-5 bg-white border-bottom" id="${ids.lic}">
-  <div class="container sc-city-prose">
-    <h2 class="h4 fw-bold mb-3" style="color:#1a365d;">Licencia en ${esc(stateName)}</h2>
-    <p class="text-body-secondary mb-3">Mejor Vida Seguros está autorizado a cotizar y vender seguro de vida en <strong>${esc(
-      stateName
-    )}</strong>. Julie Braunsroth es ${esc(
-      String(licType || "productora residente").toLowerCase()
-    )}, NPN #${esc(
-      npn
-    )}. Esta página no lista otros estados: el mapa y las copias están en <a href="${licensesHref}">licencias</a>.</p>
-    <div class="d-flex flex-wrap gap-2">
-      <a class="btn btn-outline-primary" href="${ids.licJump}">Ver licencia de ${esc(stateName)}</a>
-      <a class="btn btn-outline-secondary" href="https://external-lookup-web.prod.naic.org/lookup?jurisdiction=${esc(
-        city.stateCode
-      )}&amp;searchType=Licensee&amp;entityType=IND&amp;npn=${esc(npn)}" target="_blank" rel="noopener">Verificar en la NAIC</a>
-    </div>
-  </div>
-</section>
 `;
   }
 
@@ -619,25 +592,6 @@ ${(offices || []).map((o) => `      <li class="mb-2">${o}</li>`).join("\n")}
     ${metroServeLine("en", city) ? `<p class="text-body-secondary mb-3">${esc(metroServeLine("en", city))}</p>` : ""}
     <p class="text-body-secondary mb-3">${city.metroNoteEn}</p>
     <ul class="sc-city-pills">${city.metroEn.map((n) => `<li>${esc(n)}</li>`).join("")}</ul>
-  </div>
-</section>
-
-<section class="py-5 bg-white border-bottom" id="${ids.lic}">
-  <div class="container sc-city-prose">
-    <h2 class="h4 fw-bold mb-3" style="color:#1a365d;">${esc(stateName)} license</h2>
-    <p class="text-body-secondary mb-3">Mejor Vida Insurance is authorized to quote and sell life insurance in <strong>${esc(
-      stateName
-    )}</strong>. Julie Braunsroth is a ${esc(
-      String(licType || "resident producer").toLowerCase()
-    )}, NPN #${esc(
-    npn
-  )}. This page does not list other states: the map and copies are on the <a href="${licensesHref}">licenses</a> page.</p>
-    <div class="d-flex flex-wrap gap-2">
-      <a class="btn btn-outline-primary" href="${ids.licJump}">View ${esc(stateName)} license</a>
-      <a class="btn btn-outline-secondary" href="https://external-lookup-web.prod.naic.org/lookup?jurisdiction=${esc(
-        city.stateCode
-      )}&amp;searchType=Licensee&amp;entityType=IND&amp;npn=${esc(npn)}" target="_blank" rel="noopener">Verify on the NAIC</a>
-    </div>
   </div>
 </section>
 `;
