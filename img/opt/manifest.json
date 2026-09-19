@@ -243,6 +243,258 @@
     "keepPng": false
   },
   {
+    "src": "img/denver-union-station.jpg",
+    "base": "denver-union-station",
+    "width": 1349,
+    "height": 900,
+    "webp": "img/opt/denver-union-station.webp",
+    "fallback": "img/opt/denver-union-station.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/denver-union-station.jpg",
+    "base": "denver-union-station-800",
+    "width": 749,
+    "height": 500,
+    "webp": "img/opt/denver-union-station-800.webp",
+    "fallback": "img/opt/denver-union-station-800.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/aurora-municipal-center.jpg",
+    "base": "aurora-municipal-center",
+    "width": 1600,
+    "height": 793,
+    "webp": "img/opt/aurora-municipal-center.webp",
+    "fallback": "img/opt/aurora-municipal-center.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/aurora-municipal-center.jpg",
+    "base": "aurora-municipal-center-800",
+    "width": 800,
+    "height": 397,
+    "webp": "img/opt/aurora-municipal-center-800.webp",
+    "fallback": "img/opt/aurora-municipal-center-800.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/colorado-springs-garden-of-the-gods.jpg",
+    "base": "colorado-springs-garden-of-the-gods",
+    "width": 1350,
+    "height": 900,
+    "webp": "img/opt/colorado-springs-garden-of-the-gods.webp",
+    "fallback": "img/opt/colorado-springs-garden-of-the-gods.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/colorado-springs-garden-of-the-gods.jpg",
+    "base": "colorado-springs-garden-of-the-gods-800",
+    "width": 750,
+    "height": 500,
+    "webp": "img/opt/colorado-springs-garden-of-the-gods-800.webp",
+    "fallback": "img/opt/colorado-springs-garden-of-the-gods-800.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/fort-collins-old-town.jpg",
+    "base": "fort-collins-old-town",
+    "width": 1200,
+    "height": 900,
+    "webp": "img/opt/fort-collins-old-town.webp",
+    "fallback": "img/opt/fort-collins-old-town.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/fort-collins-old-town.jpg",
+    "base": "fort-collins-old-town-800",
+    "width": 667,
+    "height": 500,
+    "webp": "img/opt/fort-collins-old-town-800.webp",
+    "fallback": "img/opt/fort-collins-old-town-800.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/pueblo-riverwalk.jpg",
+    "base": "pueblo-riverwalk",
+    "width": 1350,
+    "height": 900,
+    "webp": "img/opt/pueblo-riverwalk.webp",
+    "fallback": "img/opt/pueblo-riverwalk.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/pueblo-riverwalk.jpg",
+    "base": "pueblo-riverwalk-800",
+    "width": 750,
+    "height": 500,
+    "webp": "img/opt/pueblo-riverwalk-800.webp",
+    "fallback": "img/opt/pueblo-riverwalk-800.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/boulder-flatirons.jpg",
+    "base": "boulder-flatirons",
+    "width": 1600,
+    "height": 865,
+    "webp": "img/opt/boulder-flatirons.webp",
+    "fallback": "img/opt/boulder-flatirons.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/boulder-flatirons.jpg",
+    "base": "boulder-flatirons-800",
+    "width": 800,
+    "height": 432,
+    "webp": "img/opt/boulder-flatirons-800.webp",
+    "fallback": "img/opt/boulder-flatirons-800.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/greeley-downtown.jpg",
+    "base": "greeley-downtown",
+    "width": 1350,
+    "height": 900,
+    "webp": "img/opt/greeley-downtown.webp",
+    "fallback": "img/opt/greeley-downtown.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/greeley-downtown.jpg",
+    "base": "greeley-downtown-800",
+    "width": 750,
+    "height": 500,
+    "webp": "img/opt/greeley-downtown-800.webp",
+    "fallback": "img/opt/greeley-downtown-800.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/grand-junction-independence-monument.jpg",
+    "base": "grand-junction-independence-monument",
+    "width": 1600,
+    "height": 886,
+    "webp": "img/opt/grand-junction-independence-monument.webp",
+    "fallback": "img/opt/grand-junction-independence-monument.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/grand-junction-independence-monument.jpg",
+    "base": "grand-junction-independence-monument-800",
+    "width": 800,
+    "height": 443,
+    "webp": "img/opt/grand-junction-independence-monument-800.webp",
+    "fallback": "img/opt/grand-junction-independence-monument-800.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/las-vegas-welcome-sign.jpg",
+    "base": "las-vegas-welcome-sign",
+    "width": 1350,
+    "height": 900,
+    "webp": "img/opt/las-vegas-welcome-sign.webp",
+    "fallback": "img/opt/las-vegas-welcome-sign.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/las-vegas-welcome-sign.jpg",
+    "base": "las-vegas-welcome-sign-800",
+    "width": 750,
+    "height": 500,
+    "webp": "img/opt/las-vegas-welcome-sign-800.webp",
+    "fallback": "img/opt/las-vegas-welcome-sign-800.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/henderson-water-street.jpg",
+    "base": "henderson-water-street",
+    "width": 1200,
+    "height": 900,
+    "webp": "img/opt/henderson-water-street.webp",
+    "fallback": "img/opt/henderson-water-street.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/henderson-water-street.jpg",
+    "base": "henderson-water-street-800",
+    "width": 667,
+    "height": 500,
+    "webp": "img/opt/henderson-water-street-800.webp",
+    "fallback": "img/opt/henderson-water-street-800.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/north-las-vegas-craig-ranch.jpg",
+    "base": "north-las-vegas-craig-ranch",
+    "width": 1200,
+    "height": 900,
+    "webp": "img/opt/north-las-vegas-craig-ranch.webp",
+    "fallback": "img/opt/north-las-vegas-craig-ranch.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/north-las-vegas-craig-ranch.jpg",
+    "base": "north-las-vegas-craig-ranch-800",
+    "width": 667,
+    "height": 500,
+    "webp": "img/opt/north-las-vegas-craig-ranch-800.webp",
+    "fallback": "img/opt/north-las-vegas-craig-ranch-800.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/reno-arch.jpg",
+    "base": "reno-arch",
+    "width": 1200,
+    "height": 900,
+    "webp": "img/opt/reno-arch.webp",
+    "fallback": "img/opt/reno-arch.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/reno-arch.jpg",
+    "base": "reno-arch-800",
+    "width": 667,
+    "height": 500,
+    "webp": "img/opt/reno-arch-800.webp",
+    "fallback": "img/opt/reno-arch-800.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/sparks-victorian-square.jpg",
+    "base": "sparks-victorian-square",
+    "width": 1200,
+    "height": 900,
+    "webp": "img/opt/sparks-victorian-square.webp",
+    "fallback": "img/opt/sparks-victorian-square.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/sparks-victorian-square.jpg",
+    "base": "sparks-victorian-square-800",
+    "width": 667,
+    "height": 500,
+    "webp": "img/opt/sparks-victorian-square-800.webp",
+    "fallback": "img/opt/sparks-victorian-square-800.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/carson-city-capitol.jpg",
+    "base": "carson-city-capitol",
+    "width": 1216,
+    "height": 900,
+    "webp": "img/opt/carson-city-capitol.webp",
+    "fallback": "img/opt/carson-city-capitol.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/carson-city-capitol.jpg",
+    "base": "carson-city-capitol-800",
+    "width": 676,
+    "height": 500,
+    "webp": "img/opt/carson-city-capitol-800.webp",
+    "fallback": "img/opt/carson-city-capitol-800.jpg",
+    "keepPng": false
+  },
+  {
     "src": "img/hero-couple-embrace.png",
     "base": "hero-couple-embrace",
     "width": 681,
@@ -2734,149 +2986,5 @@
     "webp": "img/opt/blog-generated/weekly-insurance-update-2026-09-13/story-3.webp",
     "fallback": "img/opt/blog-generated/weekly-insurance-update-2026-09-13/story-3.png",
     "keepPng": true
-  },
-  {
-    "src": "img/denver-union-station.jpg",
-    "base": "denver-union-station",
-    "width": 1349,
-    "height": 900,
-    "webp": "img/opt/denver-union-station.webp",
-    "fallback": "img/opt/denver-union-station.jpg",
-    "keepPng": false
-  },
-  {
-    "src": "img/denver-union-station.jpg",
-    "base": "denver-union-station-800",
-    "width": 749,
-    "height": 500,
-    "webp": "img/opt/denver-union-station-800.webp",
-    "fallback": "img/opt/denver-union-station-800.jpg",
-    "keepPng": false
-  },
-  {
-    "src": "img/aurora-municipal-center.jpg",
-    "base": "aurora-municipal-center",
-    "width": 1600,
-    "height": 793,
-    "webp": "img/opt/aurora-municipal-center.webp",
-    "fallback": "img/opt/aurora-municipal-center.jpg",
-    "keepPng": false
-  },
-  {
-    "src": "img/aurora-municipal-center.jpg",
-    "base": "aurora-municipal-center-800",
-    "width": 800,
-    "height": 397,
-    "webp": "img/opt/aurora-municipal-center-800.webp",
-    "fallback": "img/opt/aurora-municipal-center-800.jpg",
-    "keepPng": false
-  },
-  {
-    "src": "img/colorado-springs-garden-of-the-gods.jpg",
-    "base": "colorado-springs-garden-of-the-gods",
-    "width": 1350,
-    "height": 900,
-    "webp": "img/opt/colorado-springs-garden-of-the-gods.webp",
-    "fallback": "img/opt/colorado-springs-garden-of-the-gods.jpg",
-    "keepPng": false
-  },
-  {
-    "src": "img/colorado-springs-garden-of-the-gods.jpg",
-    "base": "colorado-springs-garden-of-the-gods-800",
-    "width": 750,
-    "height": 500,
-    "webp": "img/opt/colorado-springs-garden-of-the-gods-800.webp",
-    "fallback": "img/opt/colorado-springs-garden-of-the-gods-800.jpg",
-    "keepPng": false
-  },
-  {
-    "src": "img/fort-collins-old-town.jpg",
-    "base": "fort-collins-old-town",
-    "width": 1200,
-    "height": 900,
-    "webp": "img/opt/fort-collins-old-town.webp",
-    "fallback": "img/opt/fort-collins-old-town.jpg",
-    "keepPng": false
-  },
-  {
-    "src": "img/fort-collins-old-town.jpg",
-    "base": "fort-collins-old-town-800",
-    "width": 667,
-    "height": 500,
-    "webp": "img/opt/fort-collins-old-town-800.webp",
-    "fallback": "img/opt/fort-collins-old-town-800.jpg",
-    "keepPng": false
-  },
-  {
-    "src": "img/pueblo-riverwalk.jpg",
-    "base": "pueblo-riverwalk",
-    "width": 1350,
-    "height": 900,
-    "webp": "img/opt/pueblo-riverwalk.webp",
-    "fallback": "img/opt/pueblo-riverwalk.jpg",
-    "keepPng": false
-  },
-  {
-    "src": "img/pueblo-riverwalk.jpg",
-    "base": "pueblo-riverwalk-800",
-    "width": 750,
-    "height": 500,
-    "webp": "img/opt/pueblo-riverwalk-800.webp",
-    "fallback": "img/opt/pueblo-riverwalk-800.jpg",
-    "keepPng": false
-  },
-  {
-    "src": "img/boulder-flatirons.jpg",
-    "base": "boulder-flatirons",
-    "width": 1600,
-    "height": 865,
-    "webp": "img/opt/boulder-flatirons.webp",
-    "fallback": "img/opt/boulder-flatirons.jpg",
-    "keepPng": false
-  },
-  {
-    "src": "img/boulder-flatirons.jpg",
-    "base": "boulder-flatirons-800",
-    "width": 800,
-    "height": 432,
-    "webp": "img/opt/boulder-flatirons-800.webp",
-    "fallback": "img/opt/boulder-flatirons-800.jpg",
-    "keepPng": false
-  },
-  {
-    "src": "img/greeley-downtown.jpg",
-    "base": "greeley-downtown",
-    "width": 1350,
-    "height": 900,
-    "webp": "img/opt/greeley-downtown.webp",
-    "fallback": "img/opt/greeley-downtown.jpg",
-    "keepPng": false
-  },
-  {
-    "src": "img/greeley-downtown.jpg",
-    "base": "greeley-downtown-800",
-    "width": 750,
-    "height": 500,
-    "webp": "img/opt/greeley-downtown-800.webp",
-    "fallback": "img/opt/greeley-downtown-800.jpg",
-    "keepPng": false
-  },
-  {
-    "src": "img/grand-junction-independence-monument.jpg",
-    "base": "grand-junction-independence-monument",
-    "width": 1600,
-    "height": 886,
-    "webp": "img/opt/grand-junction-independence-monument.webp",
-    "fallback": "img/opt/grand-junction-independence-monument.jpg",
-    "keepPng": false
-  },
-  {
-    "src": "img/grand-junction-independence-monument.jpg",
-    "base": "grand-junction-independence-monument-800",
-    "width": 800,
-    "height": 443,
-    "webp": "img/opt/grand-junction-independence-monument-800.webp",
-    "fallback": "img/opt/grand-junction-independence-monument-800.jpg",
-    "keepPng": false
   }
 ]

@@ -1364,6 +1364,26 @@
   object-position: center 40%;
 }
 
+.sc-hero--las-vegas .sc-hero-visual img {
+  object-position: center 42%;
+}
+
+.sc-hero--henderson .sc-hero-visual img {
+  object-position: center 40%;
+}
+
+.sc-hero--reno .sc-hero-visual img {
+  object-position: center 35%;
+}
+
+.sc-hero--sparks .sc-hero-visual img {
+  object-position: center 40%;
+}
+
+.sc-hero--carson-city .sc-hero-visual img {
+  object-position: center 38%;
+}
+
 .sc-hero--city .sc-hero-shade {
   background: linear-gradient(
     90deg,
@@ -1532,7 +1552,7 @@
 
 .sc-gpl-table {
   table-layout: auto;
-  min-width: 52rem;
+  min-width: 64rem;
 }
 
 .sc-gpl-table thead th {

@@ -1017,6 +1017,38 @@ function citiesSection(code, lang) {
 </section>
 `;
   }
+  if (code === "NV") {
+    if (lang === "es") {
+      return `<section class="py-5 bg-light border-bottom" id="ciudades">
+  <div class="container" style="max-width:60rem;">
+    <h2 class="h4 fw-bold mb-3" style="color:#1a365d;">Ciudades en Nevada</h2>
+    <p class="text-body-secondary mb-3">Guías locales de seguro de gastos finales y de entierro. Las Vegas, Henderson, Reno, Sparks y Carson City tienen página propia. North Las Vegas va en la guía de Las Vegas.</p>
+    <ul class="mb-0">
+      <li class="mb-2"><a href="nevada/las-vegas.html">Las Vegas</a> — seguro de gastos finales y de entierro, funerarias y lotes. Incluye North Las Vegas.</li>
+      <li class="mb-2"><a href="nevada/henderson.html">Henderson</a> — seguro de gastos finales y de entierro, funerarias y lotes.</li>
+      <li class="mb-2"><a href="nevada/reno.html">Reno</a> — seguro de gastos finales y de entierro, funerarias y lotes.</li>
+      <li class="mb-2"><a href="nevada/sparks.html">Sparks</a> — seguro de gastos finales y de entierro, funerarias y lotes.</li>
+      <li class="mb-2"><a href="nevada/carson-city.html">Carson City</a> — seguro de gastos finales y de entierro, funerarias y lotes.</li>
+    </ul>
+  </div>
+</section>
+`;
+    }
+    return `<section class="py-5 bg-light border-bottom" id="cities">
+  <div class="container" style="max-width:60rem;">
+    <h2 class="h4 fw-bold mb-3" style="color:#1a365d;">Cities in Nevada</h2>
+    <p class="text-body-secondary mb-3">Local final expense and burial insurance guides. Las Vegas, Henderson, Reno, Sparks, and Carson City have their own pages. North Las Vegas is on the Las Vegas guide.</p>
+    <ul class="mb-0">
+      <li class="mb-2"><a href="nevada/las-vegas.html">Las Vegas</a> — final expense and burial insurance, funeral homes, and plots. Includes North Las Vegas.</li>
+      <li class="mb-2"><a href="nevada/henderson.html">Henderson</a> — final expense and burial insurance, funeral homes, and plots.</li>
+      <li class="mb-2"><a href="nevada/reno.html">Reno</a> — final expense and burial insurance, funeral homes, and plots.</li>
+      <li class="mb-2"><a href="nevada/sparks.html">Sparks</a> — final expense and burial insurance, funeral homes, and plots.</li>
+      <li class="mb-2"><a href="nevada/carson-city.html">Carson City</a> — final expense and burial insurance, funeral homes, and plots.</li>
+    </ul>
+  </div>
+</section>
+`;
+  }
   if (code !== "NE") return "";
   if (lang === "es") {
     return `<section class="py-5 bg-light border-bottom" id="ciudades">

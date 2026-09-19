@@ -24,6 +24,14 @@
       "nameEn": "Colorado",
       "pathEs": "/funerarias-cementerios/colorado.html",
       "pathEn": "/en/funeral-homes-cemeteries/colorado.html"
+    },
+    {
+      "code": "NV",
+      "slug": "nevada",
+      "nameEs": "Nevada",
+      "nameEn": "Nevada",
+      "pathEs": "/funerarias-cementerios/nevada.html",
+      "pathEn": "/en/funeral-homes-cemeteries/nevada.html"
     }
   ],
   "places": [
@@ -3639,6 +3647,750 @@
           "nameEs": "Anuncios de reventa de lotes",
           "nameEn": "Private plot resale ads",
           "href": "https://www.gravesolutions.com/for-sale/cemetery-properties/colorado"
+        }
+      ]
+    },
+    {
+      "slug": "las-vegas",
+      "kind": "hub",
+      "stateCode": "NV",
+      "stateSlug": "nevada",
+      "stateNameEs": "Nevada",
+      "stateNameEn": "Nevada",
+      "nameEs": "Las Vegas",
+      "nameEn": "Las Vegas",
+      "aliases": [
+        "Las Vegas",
+        "North Las Vegas",
+        "Sunrise Manor",
+        "Paradise",
+        "Spring Valley",
+        "Summerlin",
+        "Enterprise",
+        "condado Clark",
+        "Clark County",
+        "Clark"
+      ],
+      "countyEs": "condado Clark",
+      "countyEn": "Clark County",
+      "metroEs": [
+        "Las Vegas",
+        "North Las Vegas",
+        "Sunrise Manor",
+        "Paradise",
+        "Spring Valley",
+        "Summerlin",
+        "Enterprise"
+      ],
+      "metroEn": [
+        "Las Vegas",
+        "North Las Vegas",
+        "Sunrise Manor",
+        "Paradise",
+        "Spring Valley",
+        "Summerlin",
+        "Enterprise"
+      ],
+      "guideEs": "/estados/nevada/las-vegas.html",
+      "guideEn": "/en/states/nevada/las-vegas.html",
+      "sourceLineEs": "Bunker's Eden Vale: GPL y paquetes, 2 feb. 2026 (cremación directa $2,365 y entierro inmediato $4,140, contenedor o ataúd del comprador). Memorial Basic Cremation $5,535 (incluye urna hasta $395). Funeral Simple Burial $9,900 (incluye ataúd sugerido). Palm Southwest: GPL y paquetes Dignity, 5 ago. 2026. Estimador: promedios Funeralocity de Nevada. Pida siempre la lista actual. No son precios de Mejor Vida Seguros.",
+      "sourceLineEn": "Bunker's Eden Vale: GPL and packages, 2 Feb 2026 (direct cremation $2,365 and immediate burial $4,140, purchaser container or casket). Basic Cremation memorial $5,535 (urn allowance up to $395). Simple Burial funeral $9,900 (suggested casket included). Palm Southwest: Dignity GPL and package list, 5 Aug 2026. Estimator: Nevada Funeralocity averages. Always ask for the current list. These are not Mejor Vida Insurance prices.",
+      "officesNoteEs": "Palm Eastern y Palm Downtown venden lotes. Ninguno publica el precio de partida en la web. Llame y pida la lista actual por escrito.",
+      "officesNoteEn": "Palm Eastern and Palm Downtown sell plots. Neither publishes a starting plot price online. Call and ask for the current list in writing.",
+      "homes": [
+        {
+          "id": "bunkers",
+          "name": "Bunker's Eden Vale",
+          "href": "https://www.bunkerslv.com/general-price-list",
+          "address": "925 Las Vegas Blvd N",
+          "phone": "702-385-1441",
+          "sourceEs": "Bunker's Eden Vale: lista general de precios y paquetes, 2 feb. 2026 (cremación directa $2,365 y entierro inmediato $4,140, contenedor o ataúd del comprador). Memorial Basic Cremation $5,535 (incluye urna hasta $395). Funeral Simple Burial $9,900 (incluye ataúd sugerido)",
+          "sourceEn": "Bunker's Eden Vale: general price list and packages, 2 Feb 2026 (direct cremation $2,365 and immediate burial $4,140, purchaser container or casket). Basic Cremation memorial $5,535 (urn allowance up to $395). Simple Burial funeral $9,900 (suggested casket included)",
+          "gplDateEs": "2 feb. 2026",
+          "gplDateEn": "2 Feb 2026",
+          "gplKind": "gpl",
+          "packages": [
+            {
+              "id": "directCremation",
+              "labelEs": "Cremación directa",
+              "labelEn": "Direct cremation",
+              "amt": 2365,
+              "noteEs": "Cremación directa, contenedor del comprador (GPL 2 feb. 2026). Crematorio incluido.",
+              "noteEn": "Direct cremation, purchaser container (GPL 2 Feb 2026). Crematory included."
+            },
+            {
+              "id": "immediateBurial",
+              "labelEs": "Entierro inmediato",
+              "labelEn": "Immediate burial",
+              "amt": 4140,
+              "noteEs": "Entierro inmediato, ataúd del comprador. Lote aparte.",
+              "noteEn": "Immediate burial, purchaser casket. Plot extra."
+            },
+            {
+              "id": "memorialCremation",
+              "labelEs": "Cremación con memorial",
+              "labelEn": "Cremation with memorial",
+              "amt": 5535,
+              "noteEs": "Paquete Basic Cremation: memorial, contenedor Novato y urna hasta $395. Sin velatorio con cuerpo.",
+              "noteEn": "Basic Cremation package: memorial, Novato container, and urn allowance up to $395. No body present."
+            },
+            {
+              "id": "traditional",
+              "labelEs": "Funeral tradicional con velatorio",
+              "labelEn": "Traditional funeral with visitation",
+              "amt": 9900,
+              "noteEs": "Paquete Simple Burial: velatorio y ceremonia. Incluye ataúd sugerido. Lote aparte.",
+              "noteEn": "Simple Burial package: visitation and ceremony. Includes a suggested casket. Plot extra."
+            }
+          ]
+        },
+        {
+          "id": "palmsw",
+          "name": "Palm Southwest",
+          "href": "https://www.dignitymemorial.com/funeral-homes/nevada/las-vegas/palm-southwest-mortuary/5260/funeral-price-list",
+          "address": "7979 W Warm Springs Rd",
+          "phone": "702-260-0770",
+          "sourceEs": "Palm Southwest: lista general de precios y paquetes Dignity, 5 ago. 2026",
+          "sourceEn": "Palm Southwest: Dignity general price list and package list, 5 Aug 2026",
+          "gplDateEs": "5 ago. 2026",
+          "gplDateEn": "5 Aug 2026",
+          "gplKind": "gpl",
+          "packages": [
+            {
+              "id": "directCremation",
+              "labelEs": "Cremación directa",
+              "labelEn": "Direct cremation",
+              "amt": 2875,
+              "noteEs": "Cremación directa, contenedor del comprador (GPL 5 ago. 2026).",
+              "noteEn": "Direct cremation, purchaser container (GPL 5 Aug 2026)."
+            },
+            {
+              "id": "immediateBurial",
+              "labelEs": "Entierro inmediato",
+              "labelEn": "Immediate burial",
+              "amt": 4970,
+              "noteEs": "Entierro inmediato, ataúd del comprador. Lote aparte.",
+              "noteEn": "Immediate burial, purchaser casket. Plot extra."
+            },
+            {
+              "id": "memorialCremation",
+              "labelEs": "Cremación con memorial",
+              "labelEn": "Cremation with memorial",
+              "amt": 5260,
+              "noteEs": "Paquete Tribute de cremación: reunión sencilla, urna y contenedor Trayview. Sin velatorio con cuerpo.",
+              "noteEn": "Tribute cremation package: simple gathering, urn, and Trayview container. No body present."
+            },
+            {
+              "id": "traditional",
+              "labelEs": "Funeral tradicional con velatorio",
+              "labelEn": "Traditional funeral with visitation",
+              "amt": 16360,
+              "noteEs": "Paquete Tribute de funeral con velatorio. Incluye ataúd recomendado. Sin bóveda. Lote aparte.",
+              "noteEn": "Tribute funeral package with visitation. Includes a recommended casket. No vault. Plot extra."
+            }
+          ]
+        },
+        {
+          "id": "palm-eastern-mortuary",
+          "name": "Palm Eastern Mortuary",
+          "href": "https://www.dignitymemorial.com/funeral-homes/nevada/las-vegas/palm-eastern-mortuary/1009",
+          "address": "7600 S Eastern Ave",
+          "phone": "702-464-8500",
+          "sourceEs": "",
+          "sourceEn": "",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "none",
+          "packages": []
+        },
+        {
+          "id": "palm-northwest-mortuary",
+          "name": "Palm Northwest Mortuary",
+          "href": "https://www.dignitymemorial.com/funeral-homes/nevada/las-vegas/palm-northwest-mortuary/1011",
+          "address": "6701 N Jones Blvd",
+          "phone": "702-464-8460",
+          "sourceEs": "",
+          "sourceEn": "",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "none",
+          "packages": []
+        },
+        {
+          "id": "palm-downtown-mortuary",
+          "name": "Palm Downtown Mortuary",
+          "href": "https://www.dignitymemorial.com/funeral-homes/nevada/las-vegas/palm-downtown-mortuary",
+          "address": "1325 N Main St",
+          "phone": "702-464-8300",
+          "sourceEs": "",
+          "sourceEn": "",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "none",
+          "packages": []
+        },
+        {
+          "id": "palm-south-jones-mortuary",
+          "name": "Palm South Jones Mortuary",
+          "href": "https://www.dignitymemorial.com/funeral-homes/nevada/las-vegas/palm-south-jones-mortuary/1012",
+          "address": "1600 S Jones Blvd",
+          "phone": "702-464-8420",
+          "sourceEs": "",
+          "sourceEn": "",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "none",
+          "packages": []
+        },
+        {
+          "id": "palm-cheyenne-mortuary",
+          "name": "Palm Cheyenne Mortuary",
+          "href": "https://www.dignitymemorial.com/funeral-homes/nevada/las-vegas/palm-cheyenne-mortuary",
+          "address": "7400 W Cheyenne Ave",
+          "phone": "702-464-8480",
+          "sourceEs": "",
+          "sourceEn": "",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "none",
+          "packages": []
+        }
+      ],
+      "cemeteries": [
+        {
+          "name": "Palm Eastern Mortuary &amp; Cemetery",
+          "address": "7600 S Eastern Ave.",
+          "phone": "702-464-8500",
+          "noteEs": "Palm Eastern Mortuary & Cemetery — 7600 S Eastern Ave",
+          "noteEn": "Palm Eastern Mortuary & Cemetery — 7600 S Eastern Ave"
+        },
+        {
+          "name": "Palm Downtown Mortuary",
+          "address": "1325 N Main St.",
+          "phone": "702-464-8300",
+          "noteEs": "1325 N Main St",
+          "noteEn": "1325 N Main St"
+        }
+      ],
+      "other": [
+        {
+          "type": "plotResale",
+          "nameEs": "Anuncios de reventa de lotes",
+          "nameEn": "Private plot resale ads",
+          "href": "https://www.gravesolutions.com/for-sale/cemetery-properties/nevada"
+        }
+      ]
+    },
+    {
+      "slug": "henderson",
+      "kind": "hub",
+      "stateCode": "NV",
+      "stateSlug": "nevada",
+      "stateNameEs": "Nevada",
+      "stateNameEn": "Nevada",
+      "nameEs": "Henderson",
+      "nameEn": "Henderson",
+      "aliases": [
+        "Henderson",
+        "Boulder City",
+        "Whitney",
+        "condado Clark",
+        "Clark County",
+        "Clark"
+      ],
+      "countyEs": "condado Clark",
+      "countyEn": "Clark County",
+      "metroEs": [
+        "Henderson",
+        "Boulder City",
+        "Whitney"
+      ],
+      "metroEn": [
+        "Henderson",
+        "Boulder City",
+        "Whitney"
+      ],
+      "guideEs": "/estados/nevada/henderson.html",
+      "guideEn": "/en/states/nevada/henderson.html",
+      "sourceLineEs": "Palm Boulder Highway publica en Dignity precios de partida de salón, lote, catering, urnas y ataúdes; no abre en internet la lista general con los cuatro paquetes. Estimador: promedios Funeralocity de Nevada. Pida siempre la lista actual. No son precios de Mejor Vida Seguros.",
+      "sourceLineEn": "Palm Boulder Highway’s Dignity page posts starting prices for venues, plots, catering, urns, and caskets; it does not open a general price list with the four packages. Estimator: Nevada Funeralocity averages. Always ask for the current list. These are not Mejor Vida Insurance prices.",
+      "officesNoteEs": "Palm Boulder Highway vende lotes. En su página Dignity, césped y jardines parten de $5,495 (18 sep. 2026). Mausoleo desde $7,995. Abrir y cerrar, bóveda y lápida siguen aparte. Pida la lista actual por escrito.",
+      "officesNoteEn": "Palm Boulder Highway sells plots. Its Dignity page lists lawn and garden spaces from $5,495 (18 Sep 2026). Mausoleums from $7,995. Opening and closing, the vault, and the marker are still extra. Ask for the current list in writing.",
+      "homes": [
+        {
+          "id": "palm-boulder-highway-mortuary",
+          "name": "Palm Boulder Highway Mortuary",
+          "href": "https://www.dignitymemorial.com/funeral-homes/nevada/henderson/palm-boulder-highway-mortuary/1010",
+          "address": "800 S Boulder Hwy",
+          "phone": "702-464-8440",
+          "sourceEs": "",
+          "sourceEn": "",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "none",
+          "packages": []
+        },
+        {
+          "id": "metz-mortuary-henderson-henderson",
+          "name": "Metz Mortuary - Henderson",
+          "href": "https://metzmortuary.com/",
+          "address": "1048 North Main",
+          "phone": "402-362-3351",
+          "sourceEs": "Pida la lista general de precios vigente. La funeraria es la única fuente oficial.",
+          "sourceEn": "Ask the funeral home for its current general price list. That list is the only official price.",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "none",
+          "packages": []
+        }
+      ],
+      "cemeteries": [
+        {
+          "name": "Palm Boulder Highway Mortuary &amp; Cemetery",
+          "address": "",
+          "phone": "702-464-8440",
+          "noteEs": "Palm Boulder Highway Mortuary & Cemetery — 800 S Boulder Hwy. . Césped y jardines desde $5,495",
+          "noteEn": "Palm Boulder Highway Mortuary & Cemetery — 800 S Boulder Hwy. . Lawn and garden spaces from $5,495"
+        }
+      ],
+      "other": [
+        {
+          "type": "plotResale",
+          "nameEs": "Anuncios de reventa de lotes",
+          "nameEn": "Private plot resale ads",
+          "href": "https://www.gravesolutions.com/for-sale/cemetery-properties/nevada"
+        }
+      ]
+    },
+    {
+      "slug": "reno",
+      "kind": "hub",
+      "stateCode": "NV",
+      "stateSlug": "nevada",
+      "stateNameEs": "Nevada",
+      "stateNameEn": "Nevada",
+      "nameEs": "Reno",
+      "nameEn": "Reno",
+      "aliases": [
+        "Reno",
+        "Verdi",
+        "condado Washoe",
+        "Washoe County",
+        "Washoe"
+      ],
+      "countyEs": "condado Washoe",
+      "countyEn": "Washoe County",
+      "metroEs": [
+        "Reno",
+        "Verdi"
+      ],
+      "metroEn": [
+        "Reno",
+        "Verdi"
+      ],
+      "guideEs": "/estados/nevada/reno.html",
+      "guideEn": "/en/states/nevada/reno.html",
+      "sourceLineEs": "Mountain View Mortuary: GPL 16 sep. 2026 (cremación directa $1,455 y entierro inmediato $2,695, contenedor o ataúd del comprador; el crematorio figura aparte a $350). No publica paquetes de memorial ni funeral tradicional. Walton’s Sierra Chapel, O’Brien Rogers & Crosby y Ross, Burke & Knobel: GPL de 6 páginas, 26 feb. 2026 (cremación directa $1,695 y entierro inmediato $2,995). Paquetes Walton: memorial $3,480 y funeral tradicional $6,915, sin urna ni ataúd. Estimador: promedios Funeralocity de Nevada. Pida siempre la lista actual. No son precios de Mejor Vida Seguros.",
+      "sourceLineEn": "Mountain View Mortuary: GPL 16 Sep 2026 (direct cremation $1,455 and immediate burial $2,695, purchaser container or casket; crematory listed separately at $350). It does not publish memorial or traditional packages. Walton’s Sierra Chapel, O’Brien Rogers & Crosby, and Ross, Burke & Knobel: 6-page GPL, 26 Feb 2026 (direct cremation $1,695 and immediate burial $2,995). Walton packages: memorial $3,480 and traditional funeral $6,915, with no urn or casket. Estimator: Nevada Funeralocity averages. Always ask for the current list. These are not Mejor Vida Insurance prices.",
+      "officesNoteEs": "Mountain View vende lotes. No publica el precio de partida en la web. Llame y pida la lista por escrito.",
+      "officesNoteEn": "Mountain View sells plots. It does not post a starting plot price online. Call and ask for the list in writing.",
+      "homes": [
+        {
+          "id": "sierra",
+          "name": "Walton’s Sierra Chapel",
+          "href": "https://www.waltonsfuneralhomes.com/waltons-sierra-chapel-price-list/",
+          "address": "875 W Second St",
+          "phone": "775-323-7189",
+          "sourceEs": "Walton’s Sierra Chapel, O’Brien Rogers &amp; Crosby y Ross, Burke &amp; Knobel: lista general de precios de 6 páginas, 26 feb. 2026 (cremación directa $1,695 y entierro inmediato $2,995). Paquetes Walton: memorial $3,480 y funeral tradicional $6,915, sin urna ni ataúd",
+          "sourceEn": "Walton’s Sierra Chapel, O’Brien Rogers &amp; Crosby, and Ross, Burke &amp; Knobel: 6-page general price list, 26 Feb 2026 (direct cremation $1,695 and immediate burial $2,995). Walton packages: memorial $3,480 and traditional funeral $6,915, with no urn or casket",
+          "gplDateEs": "26 feb. 2026",
+          "gplDateEn": "26 Feb 2026",
+          "gplKind": "gpl",
+          "packages": [
+            {
+              "id": "directCremation",
+              "labelEs": "Cremación directa",
+              "labelEn": "Direct cremation",
+              "amt": 1695,
+              "noteEs": "Cremación directa, contenedor del comprador (GPL 26 feb. 2026).",
+              "noteEn": "Direct cremation, purchaser container (GPL 26 Feb 2026)."
+            },
+            {
+              "id": "immediateBurial",
+              "labelEs": "Entierro inmediato",
+              "labelEn": "Immediate burial",
+              "amt": 2995,
+              "noteEs": "Entierro inmediato, ataúd del comprador. Lote aparte.",
+              "noteEn": "Immediate burial, purchaser casket. Plot extra."
+            },
+            {
+              "id": "memorialCremation",
+              "labelEs": "Cremación con memorial",
+              "labelEn": "Cremation with memorial",
+              "amt": 3480,
+              "noteEs": "Paquete Walton Memorial Service & Celebration of Life. Crematorio incluido. Urna aparte.",
+              "noteEn": "Walton Memorial Service & Celebration of Life package. Crematory included. Urn extra."
+            },
+            {
+              "id": "traditional",
+              "labelEs": "Funeral tradicional con velatorio",
+              "labelEn": "Traditional funeral with visitation",
+              "amt": 6915,
+              "noteEs": "Paquete Walton Traditional Funeral Service: velatorio y ceremonia. Ataúd y lote aparte.",
+              "noteEn": "Walton Traditional Funeral Service package: visitation and ceremony. Casket and plot extra."
+            }
+          ]
+        },
+        {
+          "id": "obrien",
+          "name": "Walton’s O’Brien Rogers & Crosby",
+          "href": "https://www.waltonsfuneralhomes.com/waltons-obrien-rogers-crosby-price-list/",
+          "address": "600 W Second St",
+          "phone": "775-323-6191",
+          "sourceEs": "Walton’s Sierra Chapel, O’Brien Rogers &amp; Crosby y Ross, Burke &amp; Knobel: lista general de precios de 6 páginas, 26 feb. 2026 (cremación directa $1,695 y entierro inmediato $2,995). Paquetes Walton: memorial $3,480 y funeral tradicional $6,915, sin urna ni ataúd",
+          "sourceEn": "Walton’s Sierra Chapel, O’Brien Rogers &amp; Crosby, and Ross, Burke &amp; Knobel: 6-page general price list, 26 Feb 2026 (direct cremation $1,695 and immediate burial $2,995). Walton packages: memorial $3,480 and traditional funeral $6,915, with no urn or casket",
+          "gplDateEs": "26 feb. 2026",
+          "gplDateEn": "26 Feb 2026",
+          "gplKind": "gpl",
+          "packages": [
+            {
+              "id": "directCremation",
+              "labelEs": "Cremación directa",
+              "labelEn": "Direct cremation",
+              "amt": 1695,
+              "noteEs": "Cremación directa, contenedor del comprador (GPL 26 feb. 2026).",
+              "noteEn": "Direct cremation, purchaser container (GPL 26 Feb 2026)."
+            },
+            {
+              "id": "immediateBurial",
+              "labelEs": "Entierro inmediato",
+              "labelEn": "Immediate burial",
+              "amt": 2995,
+              "noteEs": "Entierro inmediato, ataúd del comprador. Lote aparte.",
+              "noteEn": "Immediate burial, purchaser casket. Plot extra."
+            },
+            {
+              "id": "memorialCremation",
+              "labelEs": "Cremación con memorial",
+              "labelEn": "Cremation with memorial",
+              "amt": 3480,
+              "noteEs": "Paquete Walton Memorial Service & Celebration of Life. Crematorio incluido. Urna aparte.",
+              "noteEn": "Walton Memorial Service & Celebration of Life package. Crematory included. Urn extra."
+            },
+            {
+              "id": "traditional",
+              "labelEs": "Funeral tradicional con velatorio",
+              "labelEn": "Traditional funeral with visitation",
+              "amt": 6915,
+              "noteEs": "Paquete Walton Traditional Funeral Service: velatorio y ceremonia. Ataúd y lote aparte.",
+              "noteEn": "Walton Traditional Funeral Service package: visitation and ceremony. Casket and plot extra."
+            }
+          ]
+        },
+        {
+          "id": "rbk",
+          "name": "Ross, Burke & Knobel",
+          "href": "https://www.waltonsfuneralhomes.com/waltons-ross-burke-knobel-price-list/",
+          "address": "2155 Kietzke Ln",
+          "phone": "775-323-4154",
+          "sourceEs": "Ross, Burke &amp; Knobel: lista general de precios de 6 páginas, 26 feb. 2026 (cremación directa $1,695 y entierro inmediato $2,995). Paquetes Walton: memorial $3,480 y funeral tradicional $6,915, sin urna ni ataúd",
+          "sourceEn": "Ross, Burke &amp; Knobel: 6-page general price list, 26 Feb 2026 (direct cremation $1,695 and immediate burial $2,995). Walton packages: memorial $3,480 and traditional funeral $6,915, with no urn or casket",
+          "gplDateEs": "26 feb. 2026",
+          "gplDateEn": "26 Feb 2026",
+          "gplKind": "gpl",
+          "packages": [
+            {
+              "id": "directCremation",
+              "labelEs": "Cremación directa",
+              "labelEn": "Direct cremation",
+              "amt": 1695,
+              "noteEs": "Cremación directa, contenedor del comprador (GPL 26 feb. 2026).",
+              "noteEn": "Direct cremation, purchaser container (GPL 26 Feb 2026)."
+            },
+            {
+              "id": "immediateBurial",
+              "labelEs": "Entierro inmediato",
+              "labelEn": "Immediate burial",
+              "amt": 2995,
+              "noteEs": "Entierro inmediato, ataúd del comprador. Lote aparte.",
+              "noteEn": "Immediate burial, purchaser casket. Plot extra."
+            },
+            {
+              "id": "memorialCremation",
+              "labelEs": "Cremación con memorial",
+              "labelEn": "Cremation with memorial",
+              "amt": 3480,
+              "noteEs": "Paquete Walton Memorial Service & Celebration of Life. Crematorio incluido. Urna aparte.",
+              "noteEn": "Walton Memorial Service & Celebration of Life package. Crematory included. Urn extra."
+            },
+            {
+              "id": "traditional",
+              "labelEs": "Funeral tradicional con velatorio",
+              "labelEn": "Traditional funeral with visitation",
+              "amt": 6915,
+              "noteEs": "Paquete Walton Traditional Funeral Service: velatorio y ceremonia. Ataúd y lote aparte.",
+              "noteEn": "Walton Traditional Funeral Service package: visitation and ceremony. Casket and plot extra."
+            }
+          ]
+        },
+        {
+          "id": "mtnview",
+          "name": "Mountain View Mortuary",
+          "href": "https://www.mountainviewmortuary.net/services/pricing",
+          "address": "425 Stoker Ave",
+          "phone": "775-788-2199",
+          "sourceEs": "Mountain View Mortuary: lista general de precios 16 sep. 2026 (cremación directa $1,455 y entierro inmediato $2,695, contenedor o ataúd del comprador; el crematorio figura aparte a $350). No publica paquetes de memorial ni funeral tradicional",
+          "sourceEn": "Mountain View Mortuary: general price list 16 Sep 2026 (direct cremation $1,455 and immediate burial $2,695, purchaser container or casket; crematory listed separately at $350). It does not publish memorial or traditional packages",
+          "gplDateEs": "16 sep. 2026",
+          "gplDateEn": "16 Sep 2026",
+          "gplKind": "gpl",
+          "packages": [
+            {
+              "id": "directCremation",
+              "labelEs": "Cremación directa",
+              "labelEn": "Direct cremation",
+              "amt": 1455,
+              "noteEs": "Cremación directa, contenedor del comprador (GPL 16 sep. 2026). Crematorio aparte, $350.",
+              "noteEn": "Direct cremation, purchaser container (GPL 16 Sep 2026). Crematory extra, $350."
+            },
+            {
+              "id": "immediateBurial",
+              "labelEs": "Entierro inmediato",
+              "labelEn": "Immediate burial",
+              "amt": 2695,
+              "noteEs": "Entierro inmediato, ataúd del comprador. Lote aparte.",
+              "noteEn": "Immediate burial, purchaser casket. Plot extra."
+            },
+            {
+              "id": "memorialCremation",
+              "labelEs": "Cremación con memorial",
+              "labelEn": "Cremation with memorial",
+              "amt": 0,
+              "noteEs": "No figura en su lista publicada. Pida la lista vigente.",
+              "noteEn": "Not on their published list. Ask for the current list."
+            },
+            {
+              "id": "traditional",
+              "labelEs": "Funeral tradicional con velatorio",
+              "labelEn": "Traditional funeral with visitation",
+              "amt": 0,
+              "noteEs": "No figura en su lista publicada. Pida la lista vigente.",
+              "noteEn": "Not on their published list. Ask for the current list."
+            }
+          ]
+        }
+      ],
+      "cemeteries": [
+        {
+          "name": "Mountain View Cemetery",
+          "address": "435 Stoker Ave.",
+          "phone": "775-329-9231",
+          "noteEs": "435 Stoker Ave",
+          "noteEn": "435 Stoker Ave"
+        }
+      ],
+      "other": [
+        {
+          "type": "plotResale",
+          "nameEs": "Anuncios de reventa de lotes",
+          "nameEn": "Private plot resale ads",
+          "href": "https://www.gravesolutions.com/for-sale/cemetery-properties/nevada"
+        }
+      ]
+    },
+    {
+      "slug": "sparks",
+      "kind": "hub",
+      "stateCode": "NV",
+      "stateSlug": "nevada",
+      "stateNameEs": "Nevada",
+      "stateNameEn": "Nevada",
+      "nameEs": "Sparks",
+      "nameEn": "Sparks",
+      "aliases": [
+        "Sparks",
+        "Spanish Springs",
+        "condado Washoe",
+        "Washoe County",
+        "Washoe"
+      ],
+      "countyEs": "condado Washoe",
+      "countyEn": "Washoe County",
+      "metroEs": [
+        "Sparks",
+        "Spanish Springs"
+      ],
+      "metroEn": [
+        "Sparks",
+        "Spanish Springs"
+      ],
+      "guideEs": "/estados/nevada/sparks.html",
+      "guideEn": "/en/states/nevada/sparks.html",
+      "sourceLineEs": "Walton’s Sparks: GPL 26 feb. 2026 (cremación directa $1,695 y entierro inmediato $2,995, contenedor o ataúd del comprador). Paquetes Walton: memorial $3,480 y funeral tradicional $6,915, sin urna ni ataúd. Estimador: promedios Funeralocity de Nevada. Pida siempre la lista actual. No son precios de Mejor Vida Seguros.",
+      "sourceLineEn": "Walton’s Sparks: GPL 26 Feb 2026 (direct cremation $1,695 and immediate burial $2,995, purchaser container or casket). Walton packages: memorial $3,480 and traditional funeral $6,915, with no urn or casket. Estimator: Nevada Funeralocity averages. Always ask for the current list. These are not Mejor Vida Insurance prices.",
+      "officesNoteEs": "Mountain View, en Reno, vende lotes que usan muchas familias de Sparks. No publica el precio de partida en la web. Llame y pida la lista por escrito.",
+      "officesNoteEn": "Mountain View, in Reno, sells plots that many Sparks families use. It does not post a starting plot price online. Call and ask for the list in writing.",
+      "homes": [
+        {
+          "id": "waltonsparks",
+          "name": "Walton’s Sparks",
+          "href": "https://www.waltonsfuneralhomes.com/waltons-sparks-price-list/",
+          "address": "1745 Sullivan Ln",
+          "phone": "775-359-2210",
+          "sourceEs": "Walton’s Sparks: lista general de precios 26 feb. 2026 (cremación directa $1,695 y entierro inmediato $2,995, contenedor o ataúd del comprador). Paquetes Walton: memorial $3,480 y funeral tradicional $6,915, sin urna ni ataúd",
+          "sourceEn": "Walton’s Sparks: general price list 26 Feb 2026 (direct cremation $1,695 and immediate burial $2,995, purchaser container or casket). Walton packages: memorial $3,480 and traditional funeral $6,915, with no urn or casket",
+          "gplDateEs": "26 feb. 2026",
+          "gplDateEn": "26 Feb 2026",
+          "gplKind": "gpl",
+          "packages": [
+            {
+              "id": "directCremation",
+              "labelEs": "Cremación directa",
+              "labelEn": "Direct cremation",
+              "amt": 1695,
+              "noteEs": "Cremación directa, contenedor del comprador (GPL 26 feb. 2026).",
+              "noteEn": "Direct cremation, purchaser container (GPL 26 Feb 2026)."
+            },
+            {
+              "id": "immediateBurial",
+              "labelEs": "Entierro inmediato",
+              "labelEn": "Immediate burial",
+              "amt": 2995,
+              "noteEs": "Entierro inmediato, ataúd del comprador. Lote aparte.",
+              "noteEn": "Immediate burial, purchaser casket. Plot extra."
+            },
+            {
+              "id": "memorialCremation",
+              "labelEs": "Cremación con memorial",
+              "labelEn": "Cremation with memorial",
+              "amt": 3480,
+              "noteEs": "Paquete Walton Memorial Service & Celebration of Life. Crematorio incluido. Urna aparte.",
+              "noteEn": "Walton Memorial Service & Celebration of Life package. Crematory included. Urn extra."
+            },
+            {
+              "id": "traditional",
+              "labelEs": "Funeral tradicional con velatorio",
+              "labelEn": "Traditional funeral with visitation",
+              "amt": 6915,
+              "noteEs": "Paquete Walton Traditional Funeral Service: velatorio y ceremonia. Ataúd y lote aparte.",
+              "noteEn": "Walton Traditional Funeral Service package: visitation and ceremony. Casket and plot extra."
+            }
+          ]
+        }
+      ],
+      "cemeteries": [
+        {
+          "name": "Mountain View Cemetery",
+          "address": "435 Stoker Ave",
+          "phone": "775-329-9231",
+          "noteEs": "Reno",
+          "noteEn": "Reno"
+        }
+      ],
+      "other": [
+        {
+          "type": "plotResale",
+          "nameEs": "Anuncios de reventa de lotes",
+          "nameEn": "Private plot resale ads",
+          "href": "https://www.gravesolutions.com/for-sale/cemetery-properties/nevada"
+        }
+      ]
+    },
+    {
+      "slug": "carson-city",
+      "kind": "hub",
+      "stateCode": "NV",
+      "stateSlug": "nevada",
+      "stateNameEs": "Nevada",
+      "stateNameEn": "Nevada",
+      "nameEs": "Carson City",
+      "nameEn": "Carson City",
+      "aliases": [
+        "Carson City",
+        "Dayton",
+        "Minden"
+      ],
+      "countyEs": "",
+      "countyEn": "",
+      "metroEs": [
+        "Carson City",
+        "Dayton",
+        "Minden"
+      ],
+      "metroEn": [
+        "Carson City",
+        "Dayton",
+        "Minden"
+      ],
+      "guideEs": "/estados/nevada/carson-city.html",
+      "guideEn": "/en/states/nevada/carson-city.html",
+      "sourceLineEs": "Walton’s Chapel of the Valley: GPL 26 feb. 2026 (cremación directa $1,695 y entierro inmediato $2,995, contenedor o ataúd del comprador). Paquetes Walton: memorial $3,480 y funeral tradicional $6,915, sin urna ni ataúd. Estimador: promedios Funeralocity de Nevada. Pida siempre la lista actual. No son precios de Mejor Vida Seguros.",
+      "sourceLineEn": "Walton’s Chapel of the Valley: GPL 26 Feb 2026 (direct cremation $1,695 and immediate burial $2,995, purchaser container or casket). Walton packages: memorial $3,480 and traditional funeral $6,915, with no urn or casket. Estimator: Nevada Funeralocity averages. Always ask for the current list. These are not Mejor Vida Insurance prices.",
+      "officesNoteEs": "Lone Mountain es municipal. No publica el precio de partida en la web. Llame y pida la lista por escrito.",
+      "officesNoteEn": "Lone Mountain is municipal. It does not post a starting plot price online. Call and ask for the list in writing.",
+      "homes": [
+        {
+          "id": "valley",
+          "name": "Walton’s Chapel of the Valley",
+          "href": "https://www.waltonsfuneralhomes.com/waltons-chapel-of-the-valley-price-list/",
+          "address": "1281 N Roop St",
+          "phone": "775-882-4965",
+          "sourceEs": "Walton’s Chapel of the Valley: lista general de precios 26 feb. 2026 (cremación directa $1,695 y entierro inmediato $2,995, contenedor o ataúd del comprador). Paquetes Walton: memorial $3,480 y funeral tradicional $6,915, sin urna ni ataúd",
+          "sourceEn": "Walton’s Chapel of the Valley: general price list 26 Feb 2026 (direct cremation $1,695 and immediate burial $2,995, purchaser container or casket). Walton packages: memorial $3,480 and traditional funeral $6,915, with no urn or casket",
+          "gplDateEs": "26 feb. 2026",
+          "gplDateEn": "26 Feb 2026",
+          "gplKind": "gpl",
+          "packages": [
+            {
+              "id": "directCremation",
+              "labelEs": "Cremación directa",
+              "labelEn": "Direct cremation",
+              "amt": 1695,
+              "noteEs": "Cremación directa, contenedor del comprador (GPL 26 feb. 2026).",
+              "noteEn": "Direct cremation, purchaser container (GPL 26 Feb 2026)."
+            },
+            {
+              "id": "immediateBurial",
+              "labelEs": "Entierro inmediato",
+              "labelEn": "Immediate burial",
+              "amt": 2995,
+              "noteEs": "Entierro inmediato, ataúd del comprador. Lote aparte.",
+              "noteEn": "Immediate burial, purchaser casket. Plot extra."
+            },
+            {
+              "id": "memorialCremation",
+              "labelEs": "Cremación con memorial",
+              "labelEn": "Cremation with memorial",
+              "amt": 3480,
+              "noteEs": "Paquete Walton Memorial Service & Celebration of Life. Crematorio incluido. Urna aparte.",
+              "noteEn": "Walton Memorial Service & Celebration of Life package. Crematory included. Urn extra."
+            },
+            {
+              "id": "traditional",
+              "labelEs": "Funeral tradicional con velatorio",
+              "labelEn": "Traditional funeral with visitation",
+              "amt": 6915,
+              "noteEs": "Paquete Walton Traditional Funeral Service: velatorio y ceremonia. Ataúd y lote aparte.",
+              "noteEn": "Walton Traditional Funeral Service package: visitation and ceremony. Casket and plot extra."
+            }
+          ]
+        }
+      ],
+      "cemeteries": [
+        {
+          "name": "Lone Mountain Cemetery",
+          "address": "1044 Beverly Dr.",
+          "phone": "775-887-2111",
+          "noteEs": "1044 Beverly Dr",
+          "noteEn": "1044 Beverly Dr"
+        }
+      ],
+      "other": [
+        {
+          "type": "plotResale",
+          "nameEs": "Anuncios de reventa de lotes",
+          "nameEn": "Private plot resale ads",
+          "href": "https://www.gravesolutions.com/for-sale/cemetery-properties/nevada"
         }
       ]
     },
@@ -7601,50 +8353,6 @@
           "href": "https://www.batesgould.com/",
           "address": "523 Shoshone Avenue",
           "phone": "308-762-1755",
-          "sourceEs": "Pida la lista general de precios vigente. La funeraria es la única fuente oficial.",
-          "sourceEn": "Ask the funeral home for its current general price list. That list is the only official price.",
-          "gplDateEs": "",
-          "gplDateEn": "",
-          "gplKind": "none",
-          "packages": []
-        }
-      ],
-      "cemeteries": [],
-      "other": []
-    },
-    {
-      "slug": "henderson",
-      "kind": "extra",
-      "stateCode": "NE",
-      "stateSlug": "nebraska",
-      "stateNameEs": "Nebraska",
-      "stateNameEn": "Nebraska",
-      "nameEs": "Henderson",
-      "nameEn": "Henderson",
-      "aliases": [
-        "Henderson"
-      ],
-      "countyEs": "",
-      "countyEn": "",
-      "metroEs": [
-        "Henderson"
-      ],
-      "metroEn": [
-        "Henderson"
-      ],
-      "guideEs": "",
-      "guideEn": "",
-      "sourceLineEs": "",
-      "sourceLineEn": "",
-      "officesNoteEs": "",
-      "officesNoteEn": "",
-      "homes": [
-        {
-          "id": "metz-mortuary-henderson-henderson",
-          "name": "Metz Mortuary - Henderson",
-          "href": "https://metzmortuary.com/",
-          "address": "1048 North Main",
-          "phone": "402-362-3351",
           "sourceEs": "Pida la lista general de precios vigente. La funeraria es la única fuente oficial.",
           "sourceEn": "Ask the funeral home for its current general price list. That list is the only official price.",
           "gplDateEs": "",
@@ -26117,48 +26825,6 @@
       "other": []
     },
     {
-      "slug": "henderson",
-      "kind": "extra",
-      "parentSlug": null,
-      "parentNameEs": "",
-      "parentNameEn": "",
-      "stateCode": "NE",
-      "stateSlug": "nebraska",
-      "stateNameEs": "Nebraska",
-      "stateNameEn": "Nebraska",
-      "nameEs": "Henderson",
-      "nameEn": "Henderson",
-      "aliases": [
-        "Henderson",
-        "Henderson"
-      ],
-      "pathEs": "/funerarias-cementerios/nebraska/henderson.html",
-      "pathEn": "/en/funeral-homes-cemeteries/nebraska/henderson.html",
-      "guideEs": "",
-      "guideEn": "",
-      "sourceLineEs": "",
-      "sourceLineEn": "",
-      "localHomes": [
-        {
-          "id": "metz-mortuary-henderson-henderson",
-          "name": "Metz Mortuary - Henderson",
-          "href": "https://metzmortuary.com/",
-          "address": "1048 North Main",
-          "phone": "402-362-3351",
-          "sourceEs": "Pida la lista general de precios vigente. La funeraria es la única fuente oficial.",
-          "sourceEn": "Ask the funeral home for its current general price list. That list is the only official price.",
-          "gplDateEs": "",
-          "gplDateEn": "",
-          "gplKind": "none",
-          "packages": []
-        }
-      ],
-      "nearbyHomes": [],
-      "localCemeteries": [],
-      "nearbyCemeteries": [],
-      "other": []
-    },
-    {
       "slug": "hildreth",
       "kind": "extra",
       "parentSlug": null,
@@ -34306,6 +34972,2488 @@
           "nameEs": "Anuncios de reventa de lotes",
           "nameEn": "Private plot resale ads",
           "href": "https://eturnalrest.com/cemeteries/ne/westlawn-hillcrest-memorial-park-omaha/"
+        }
+      ]
+    },
+    {
+      "slug": "boulder-city",
+      "kind": "town",
+      "parentSlug": "henderson",
+      "parentNameEs": "Henderson",
+      "parentNameEn": "Henderson",
+      "stateCode": "NV",
+      "stateSlug": "nevada",
+      "stateNameEs": "Nevada",
+      "stateNameEn": "Nevada",
+      "nameEs": "Boulder City",
+      "nameEn": "Boulder City",
+      "aliases": [
+        "Boulder City",
+        "Boulder City"
+      ],
+      "pathEs": "/funerarias-cementerios/nevada/boulder-city.html",
+      "pathEn": "/en/funeral-homes-cemeteries/nevada/boulder-city.html",
+      "guideEs": "/estados/nevada/henderson.html",
+      "guideEn": "/en/states/nevada/henderson.html",
+      "sourceLineEs": "Palm Boulder Highway publica en Dignity precios de partida de salón, lote, catering, urnas y ataúdes; no abre en internet la lista general con los cuatro paquetes. Estimador: promedios Funeralocity de Nevada. Pida siempre la lista actual. No son precios de Mejor Vida Seguros.",
+      "sourceLineEn": "Palm Boulder Highway’s Dignity page posts starting prices for venues, plots, catering, urns, and caskets; it does not open a general price list with the four packages. Estimator: Nevada Funeralocity averages. Always ask for the current list. These are not Mejor Vida Insurance prices.",
+      "localHomes": [],
+      "nearbyHomes": [
+        {
+          "id": "palm-boulder-highway-mortuary",
+          "name": "Palm Boulder Highway Mortuary",
+          "href": "https://www.dignitymemorial.com/funeral-homes/nevada/henderson/palm-boulder-highway-mortuary/1010",
+          "address": "800 S Boulder Hwy",
+          "phone": "702-464-8440",
+          "sourceEs": "",
+          "sourceEn": "",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "none",
+          "packages": []
+        },
+        {
+          "id": "metz-mortuary-henderson-henderson",
+          "name": "Metz Mortuary - Henderson",
+          "href": "https://metzmortuary.com/",
+          "address": "1048 North Main",
+          "phone": "402-362-3351",
+          "sourceEs": "Pida la lista general de precios vigente. La funeraria es la única fuente oficial.",
+          "sourceEn": "Ask the funeral home for its current general price list. That list is the only official price.",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "none",
+          "packages": []
+        }
+      ],
+      "localCemeteries": [],
+      "nearbyCemeteries": [
+        {
+          "name": "Palm Boulder Highway Mortuary &amp; Cemetery",
+          "address": "",
+          "phone": "702-464-8440",
+          "noteEs": "Palm Boulder Highway Mortuary & Cemetery — 800 S Boulder Hwy. . Césped y jardines desde $5,495",
+          "noteEn": "Palm Boulder Highway Mortuary & Cemetery — 800 S Boulder Hwy. . Lawn and garden spaces from $5,495"
+        }
+      ],
+      "other": [
+        {
+          "type": "plotResale",
+          "nameEs": "Anuncios de reventa de lotes",
+          "nameEn": "Private plot resale ads",
+          "href": "https://www.gravesolutions.com/for-sale/cemetery-properties/nevada"
+        }
+      ]
+    },
+    {
+      "slug": "dayton",
+      "kind": "town",
+      "parentSlug": "carson-city",
+      "parentNameEs": "Carson City",
+      "parentNameEn": "Carson City",
+      "stateCode": "NV",
+      "stateSlug": "nevada",
+      "stateNameEs": "Nevada",
+      "stateNameEn": "Nevada",
+      "nameEs": "Dayton",
+      "nameEn": "Dayton",
+      "aliases": [
+        "Dayton",
+        "Dayton"
+      ],
+      "pathEs": "/funerarias-cementerios/nevada/dayton.html",
+      "pathEn": "/en/funeral-homes-cemeteries/nevada/dayton.html",
+      "guideEs": "/estados/nevada/carson-city.html",
+      "guideEn": "/en/states/nevada/carson-city.html",
+      "sourceLineEs": "Walton’s Chapel of the Valley: GPL 26 feb. 2026 (cremación directa $1,695 y entierro inmediato $2,995, contenedor o ataúd del comprador). Paquetes Walton: memorial $3,480 y funeral tradicional $6,915, sin urna ni ataúd. Estimador: promedios Funeralocity de Nevada. Pida siempre la lista actual. No son precios de Mejor Vida Seguros.",
+      "sourceLineEn": "Walton’s Chapel of the Valley: GPL 26 Feb 2026 (direct cremation $1,695 and immediate burial $2,995, purchaser container or casket). Walton packages: memorial $3,480 and traditional funeral $6,915, with no urn or casket. Estimator: Nevada Funeralocity averages. Always ask for the current list. These are not Mejor Vida Insurance prices.",
+      "localHomes": [],
+      "nearbyHomes": [
+        {
+          "id": "valley",
+          "name": "Walton’s Chapel of the Valley",
+          "href": "https://www.waltonsfuneralhomes.com/waltons-chapel-of-the-valley-price-list/",
+          "address": "1281 N Roop St",
+          "phone": "775-882-4965",
+          "sourceEs": "Walton’s Chapel of the Valley: lista general de precios 26 feb. 2026 (cremación directa $1,695 y entierro inmediato $2,995, contenedor o ataúd del comprador). Paquetes Walton: memorial $3,480 y funeral tradicional $6,915, sin urna ni ataúd",
+          "sourceEn": "Walton’s Chapel of the Valley: general price list 26 Feb 2026 (direct cremation $1,695 and immediate burial $2,995, purchaser container or casket). Walton packages: memorial $3,480 and traditional funeral $6,915, with no urn or casket",
+          "gplDateEs": "26 feb. 2026",
+          "gplDateEn": "26 Feb 2026",
+          "gplKind": "gpl",
+          "packages": [
+            {
+              "id": "directCremation",
+              "labelEs": "Cremación directa",
+              "labelEn": "Direct cremation",
+              "amt": 1695,
+              "noteEs": "Cremación directa, contenedor del comprador (GPL 26 feb. 2026).",
+              "noteEn": "Direct cremation, purchaser container (GPL 26 Feb 2026)."
+            },
+            {
+              "id": "immediateBurial",
+              "labelEs": "Entierro inmediato",
+              "labelEn": "Immediate burial",
+              "amt": 2995,
+              "noteEs": "Entierro inmediato, ataúd del comprador. Lote aparte.",
+              "noteEn": "Immediate burial, purchaser casket. Plot extra."
+            },
+            {
+              "id": "memorialCremation",
+              "labelEs": "Cremación con memorial",
+              "labelEn": "Cremation with memorial",
+              "amt": 3480,
+              "noteEs": "Paquete Walton Memorial Service & Celebration of Life. Crematorio incluido. Urna aparte.",
+              "noteEn": "Walton Memorial Service & Celebration of Life package. Crematory included. Urn extra."
+            },
+            {
+              "id": "traditional",
+              "labelEs": "Funeral tradicional con velatorio",
+              "labelEn": "Traditional funeral with visitation",
+              "amt": 6915,
+              "noteEs": "Paquete Walton Traditional Funeral Service: velatorio y ceremonia. Ataúd y lote aparte.",
+              "noteEn": "Walton Traditional Funeral Service package: visitation and ceremony. Casket and plot extra."
+            }
+          ]
+        }
+      ],
+      "localCemeteries": [],
+      "nearbyCemeteries": [
+        {
+          "name": "Lone Mountain Cemetery",
+          "address": "1044 Beverly Dr.",
+          "phone": "775-887-2111",
+          "noteEs": "1044 Beverly Dr",
+          "noteEn": "1044 Beverly Dr"
+        }
+      ],
+      "other": [
+        {
+          "type": "plotResale",
+          "nameEs": "Anuncios de reventa de lotes",
+          "nameEn": "Private plot resale ads",
+          "href": "https://www.gravesolutions.com/for-sale/cemetery-properties/nevada"
+        }
+      ]
+    },
+    {
+      "slug": "enterprise",
+      "kind": "town",
+      "parentSlug": "las-vegas",
+      "parentNameEs": "Las Vegas",
+      "parentNameEn": "Las Vegas",
+      "stateCode": "NV",
+      "stateSlug": "nevada",
+      "stateNameEs": "Nevada",
+      "stateNameEn": "Nevada",
+      "nameEs": "Enterprise",
+      "nameEn": "Enterprise",
+      "aliases": [
+        "Enterprise",
+        "Enterprise"
+      ],
+      "pathEs": "/funerarias-cementerios/nevada/enterprise.html",
+      "pathEn": "/en/funeral-homes-cemeteries/nevada/enterprise.html",
+      "guideEs": "/estados/nevada/las-vegas.html",
+      "guideEn": "/en/states/nevada/las-vegas.html",
+      "sourceLineEs": "Bunker's Eden Vale: GPL y paquetes, 2 feb. 2026 (cremación directa $2,365 y entierro inmediato $4,140, contenedor o ataúd del comprador). Memorial Basic Cremation $5,535 (incluye urna hasta $395). Funeral Simple Burial $9,900 (incluye ataúd sugerido). Palm Southwest: GPL y paquetes Dignity, 5 ago. 2026. Estimador: promedios Funeralocity de Nevada. Pida siempre la lista actual. No son precios de Mejor Vida Seguros.",
+      "sourceLineEn": "Bunker's Eden Vale: GPL and packages, 2 Feb 2026 (direct cremation $2,365 and immediate burial $4,140, purchaser container or casket). Basic Cremation memorial $5,535 (urn allowance up to $395). Simple Burial funeral $9,900 (suggested casket included). Palm Southwest: Dignity GPL and package list, 5 Aug 2026. Estimator: Nevada Funeralocity averages. Always ask for the current list. These are not Mejor Vida Insurance prices.",
+      "localHomes": [],
+      "nearbyHomes": [
+        {
+          "id": "bunkers",
+          "name": "Bunker's Eden Vale",
+          "href": "https://www.bunkerslv.com/general-price-list",
+          "address": "925 Las Vegas Blvd N",
+          "phone": "702-385-1441",
+          "sourceEs": "Bunker's Eden Vale: lista general de precios y paquetes, 2 feb. 2026 (cremación directa $2,365 y entierro inmediato $4,140, contenedor o ataúd del comprador). Memorial Basic Cremation $5,535 (incluye urna hasta $395). Funeral Simple Burial $9,900 (incluye ataúd sugerido)",
+          "sourceEn": "Bunker's Eden Vale: general price list and packages, 2 Feb 2026 (direct cremation $2,365 and immediate burial $4,140, purchaser container or casket). Basic Cremation memorial $5,535 (urn allowance up to $395). Simple Burial funeral $9,900 (suggested casket included)",
+          "gplDateEs": "2 feb. 2026",
+          "gplDateEn": "2 Feb 2026",
+          "gplKind": "gpl",
+          "packages": [
+            {
+              "id": "directCremation",
+              "labelEs": "Cremación directa",
+              "labelEn": "Direct cremation",
+              "amt": 2365,
+              "noteEs": "Cremación directa, contenedor del comprador (GPL 2 feb. 2026). Crematorio incluido.",
+              "noteEn": "Direct cremation, purchaser container (GPL 2 Feb 2026). Crematory included."
+            },
+            {
+              "id": "immediateBurial",
+              "labelEs": "Entierro inmediato",
+              "labelEn": "Immediate burial",
+              "amt": 4140,
+              "noteEs": "Entierro inmediato, ataúd del comprador. Lote aparte.",
+              "noteEn": "Immediate burial, purchaser casket. Plot extra."
+            },
+            {
+              "id": "memorialCremation",
+              "labelEs": "Cremación con memorial",
+              "labelEn": "Cremation with memorial",
+              "amt": 5535,
+              "noteEs": "Paquete Basic Cremation: memorial, contenedor Novato y urna hasta $395. Sin velatorio con cuerpo.",
+              "noteEn": "Basic Cremation package: memorial, Novato container, and urn allowance up to $395. No body present."
+            },
+            {
+              "id": "traditional",
+              "labelEs": "Funeral tradicional con velatorio",
+              "labelEn": "Traditional funeral with visitation",
+              "amt": 9900,
+              "noteEs": "Paquete Simple Burial: velatorio y ceremonia. Incluye ataúd sugerido. Lote aparte.",
+              "noteEn": "Simple Burial package: visitation and ceremony. Includes a suggested casket. Plot extra."
+            }
+          ]
+        },
+        {
+          "id": "palmsw",
+          "name": "Palm Southwest",
+          "href": "https://www.dignitymemorial.com/funeral-homes/nevada/las-vegas/palm-southwest-mortuary/5260/funeral-price-list",
+          "address": "7979 W Warm Springs Rd",
+          "phone": "702-260-0770",
+          "sourceEs": "Palm Southwest: lista general de precios y paquetes Dignity, 5 ago. 2026",
+          "sourceEn": "Palm Southwest: Dignity general price list and package list, 5 Aug 2026",
+          "gplDateEs": "5 ago. 2026",
+          "gplDateEn": "5 Aug 2026",
+          "gplKind": "gpl",
+          "packages": [
+            {
+              "id": "directCremation",
+              "labelEs": "Cremación directa",
+              "labelEn": "Direct cremation",
+              "amt": 2875,
+              "noteEs": "Cremación directa, contenedor del comprador (GPL 5 ago. 2026).",
+              "noteEn": "Direct cremation, purchaser container (GPL 5 Aug 2026)."
+            },
+            {
+              "id": "immediateBurial",
+              "labelEs": "Entierro inmediato",
+              "labelEn": "Immediate burial",
+              "amt": 4970,
+              "noteEs": "Entierro inmediato, ataúd del comprador. Lote aparte.",
+              "noteEn": "Immediate burial, purchaser casket. Plot extra."
+            },
+            {
+              "id": "memorialCremation",
+              "labelEs": "Cremación con memorial",
+              "labelEn": "Cremation with memorial",
+              "amt": 5260,
+              "noteEs": "Paquete Tribute de cremación: reunión sencilla, urna y contenedor Trayview. Sin velatorio con cuerpo.",
+              "noteEn": "Tribute cremation package: simple gathering, urn, and Trayview container. No body present."
+            },
+            {
+              "id": "traditional",
+              "labelEs": "Funeral tradicional con velatorio",
+              "labelEn": "Traditional funeral with visitation",
+              "amt": 16360,
+              "noteEs": "Paquete Tribute de funeral con velatorio. Incluye ataúd recomendado. Sin bóveda. Lote aparte.",
+              "noteEn": "Tribute funeral package with visitation. Includes a recommended casket. No vault. Plot extra."
+            }
+          ]
+        },
+        {
+          "id": "palm-eastern-mortuary",
+          "name": "Palm Eastern Mortuary",
+          "href": "https://www.dignitymemorial.com/funeral-homes/nevada/las-vegas/palm-eastern-mortuary/1009",
+          "address": "7600 S Eastern Ave",
+          "phone": "702-464-8500",
+          "sourceEs": "",
+          "sourceEn": "",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "none",
+          "packages": []
+        },
+        {
+          "id": "palm-northwest-mortuary",
+          "name": "Palm Northwest Mortuary",
+          "href": "https://www.dignitymemorial.com/funeral-homes/nevada/las-vegas/palm-northwest-mortuary/1011",
+          "address": "6701 N Jones Blvd",
+          "phone": "702-464-8460",
+          "sourceEs": "",
+          "sourceEn": "",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "none",
+          "packages": []
+        },
+        {
+          "id": "palm-downtown-mortuary",
+          "name": "Palm Downtown Mortuary",
+          "href": "https://www.dignitymemorial.com/funeral-homes/nevada/las-vegas/palm-downtown-mortuary",
+          "address": "1325 N Main St",
+          "phone": "702-464-8300",
+          "sourceEs": "",
+          "sourceEn": "",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "none",
+          "packages": []
+        },
+        {
+          "id": "palm-south-jones-mortuary",
+          "name": "Palm South Jones Mortuary",
+          "href": "https://www.dignitymemorial.com/funeral-homes/nevada/las-vegas/palm-south-jones-mortuary/1012",
+          "address": "1600 S Jones Blvd",
+          "phone": "702-464-8420",
+          "sourceEs": "",
+          "sourceEn": "",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "none",
+          "packages": []
+        },
+        {
+          "id": "palm-cheyenne-mortuary",
+          "name": "Palm Cheyenne Mortuary",
+          "href": "https://www.dignitymemorial.com/funeral-homes/nevada/las-vegas/palm-cheyenne-mortuary",
+          "address": "7400 W Cheyenne Ave",
+          "phone": "702-464-8480",
+          "sourceEs": "",
+          "sourceEn": "",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "none",
+          "packages": []
+        }
+      ],
+      "localCemeteries": [],
+      "nearbyCemeteries": [
+        {
+          "name": "Palm Eastern Mortuary &amp; Cemetery",
+          "address": "7600 S Eastern Ave.",
+          "phone": "702-464-8500",
+          "noteEs": "Palm Eastern Mortuary & Cemetery — 7600 S Eastern Ave",
+          "noteEn": "Palm Eastern Mortuary & Cemetery — 7600 S Eastern Ave"
+        },
+        {
+          "name": "Palm Downtown Mortuary",
+          "address": "1325 N Main St.",
+          "phone": "702-464-8300",
+          "noteEs": "1325 N Main St",
+          "noteEn": "1325 N Main St"
+        }
+      ],
+      "other": [
+        {
+          "type": "plotResale",
+          "nameEs": "Anuncios de reventa de lotes",
+          "nameEn": "Private plot resale ads",
+          "href": "https://www.gravesolutions.com/for-sale/cemetery-properties/nevada"
+        }
+      ]
+    },
+    {
+      "slug": "north-las-vegas",
+      "kind": "town",
+      "parentSlug": "las-vegas",
+      "parentNameEs": "Las Vegas",
+      "parentNameEn": "Las Vegas",
+      "stateCode": "NV",
+      "stateSlug": "nevada",
+      "stateNameEs": "Nevada",
+      "stateNameEn": "Nevada",
+      "nameEs": "North Las Vegas",
+      "nameEn": "North Las Vegas",
+      "aliases": [
+        "North Las Vegas",
+        "North Las Vegas"
+      ],
+      "pathEs": "/funerarias-cementerios/nevada/north-las-vegas.html",
+      "pathEn": "/en/funeral-homes-cemeteries/nevada/north-las-vegas.html",
+      "guideEs": "/estados/nevada/las-vegas.html",
+      "guideEn": "/en/states/nevada/las-vegas.html",
+      "sourceLineEs": "Bunker's Eden Vale: GPL y paquetes, 2 feb. 2026 (cremación directa $2,365 y entierro inmediato $4,140, contenedor o ataúd del comprador). Memorial Basic Cremation $5,535 (incluye urna hasta $395). Funeral Simple Burial $9,900 (incluye ataúd sugerido). Palm Southwest: GPL y paquetes Dignity, 5 ago. 2026. Estimador: promedios Funeralocity de Nevada. Pida siempre la lista actual. No son precios de Mejor Vida Seguros.",
+      "sourceLineEn": "Bunker's Eden Vale: GPL and packages, 2 Feb 2026 (direct cremation $2,365 and immediate burial $4,140, purchaser container or casket). Basic Cremation memorial $5,535 (urn allowance up to $395). Simple Burial funeral $9,900 (suggested casket included). Palm Southwest: Dignity GPL and package list, 5 Aug 2026. Estimator: Nevada Funeralocity averages. Always ask for the current list. These are not Mejor Vida Insurance prices.",
+      "localHomes": [],
+      "nearbyHomes": [
+        {
+          "id": "bunkers",
+          "name": "Bunker's Eden Vale",
+          "href": "https://www.bunkerslv.com/general-price-list",
+          "address": "925 Las Vegas Blvd N",
+          "phone": "702-385-1441",
+          "sourceEs": "Bunker's Eden Vale: lista general de precios y paquetes, 2 feb. 2026 (cremación directa $2,365 y entierro inmediato $4,140, contenedor o ataúd del comprador). Memorial Basic Cremation $5,535 (incluye urna hasta $395). Funeral Simple Burial $9,900 (incluye ataúd sugerido)",
+          "sourceEn": "Bunker's Eden Vale: general price list and packages, 2 Feb 2026 (direct cremation $2,365 and immediate burial $4,140, purchaser container or casket). Basic Cremation memorial $5,535 (urn allowance up to $395). Simple Burial funeral $9,900 (suggested casket included)",
+          "gplDateEs": "2 feb. 2026",
+          "gplDateEn": "2 Feb 2026",
+          "gplKind": "gpl",
+          "packages": [
+            {
+              "id": "directCremation",
+              "labelEs": "Cremación directa",
+              "labelEn": "Direct cremation",
+              "amt": 2365,
+              "noteEs": "Cremación directa, contenedor del comprador (GPL 2 feb. 2026). Crematorio incluido.",
+              "noteEn": "Direct cremation, purchaser container (GPL 2 Feb 2026). Crematory included."
+            },
+            {
+              "id": "immediateBurial",
+              "labelEs": "Entierro inmediato",
+              "labelEn": "Immediate burial",
+              "amt": 4140,
+              "noteEs": "Entierro inmediato, ataúd del comprador. Lote aparte.",
+              "noteEn": "Immediate burial, purchaser casket. Plot extra."
+            },
+            {
+              "id": "memorialCremation",
+              "labelEs": "Cremación con memorial",
+              "labelEn": "Cremation with memorial",
+              "amt": 5535,
+              "noteEs": "Paquete Basic Cremation: memorial, contenedor Novato y urna hasta $395. Sin velatorio con cuerpo.",
+              "noteEn": "Basic Cremation package: memorial, Novato container, and urn allowance up to $395. No body present."
+            },
+            {
+              "id": "traditional",
+              "labelEs": "Funeral tradicional con velatorio",
+              "labelEn": "Traditional funeral with visitation",
+              "amt": 9900,
+              "noteEs": "Paquete Simple Burial: velatorio y ceremonia. Incluye ataúd sugerido. Lote aparte.",
+              "noteEn": "Simple Burial package: visitation and ceremony. Includes a suggested casket. Plot extra."
+            }
+          ]
+        },
+        {
+          "id": "palmsw",
+          "name": "Palm Southwest",
+          "href": "https://www.dignitymemorial.com/funeral-homes/nevada/las-vegas/palm-southwest-mortuary/5260/funeral-price-list",
+          "address": "7979 W Warm Springs Rd",
+          "phone": "702-260-0770",
+          "sourceEs": "Palm Southwest: lista general de precios y paquetes Dignity, 5 ago. 2026",
+          "sourceEn": "Palm Southwest: Dignity general price list and package list, 5 Aug 2026",
+          "gplDateEs": "5 ago. 2026",
+          "gplDateEn": "5 Aug 2026",
+          "gplKind": "gpl",
+          "packages": [
+            {
+              "id": "directCremation",
+              "labelEs": "Cremación directa",
+              "labelEn": "Direct cremation",
+              "amt": 2875,
+              "noteEs": "Cremación directa, contenedor del comprador (GPL 5 ago. 2026).",
+              "noteEn": "Direct cremation, purchaser container (GPL 5 Aug 2026)."
+            },
+            {
+              "id": "immediateBurial",
+              "labelEs": "Entierro inmediato",
+              "labelEn": "Immediate burial",
+              "amt": 4970,
+              "noteEs": "Entierro inmediato, ataúd del comprador. Lote aparte.",
+              "noteEn": "Immediate burial, purchaser casket. Plot extra."
+            },
+            {
+              "id": "memorialCremation",
+              "labelEs": "Cremación con memorial",
+              "labelEn": "Cremation with memorial",
+              "amt": 5260,
+              "noteEs": "Paquete Tribute de cremación: reunión sencilla, urna y contenedor Trayview. Sin velatorio con cuerpo.",
+              "noteEn": "Tribute cremation package: simple gathering, urn, and Trayview container. No body present."
+            },
+            {
+              "id": "traditional",
+              "labelEs": "Funeral tradicional con velatorio",
+              "labelEn": "Traditional funeral with visitation",
+              "amt": 16360,
+              "noteEs": "Paquete Tribute de funeral con velatorio. Incluye ataúd recomendado. Sin bóveda. Lote aparte.",
+              "noteEn": "Tribute funeral package with visitation. Includes a recommended casket. No vault. Plot extra."
+            }
+          ]
+        },
+        {
+          "id": "palm-eastern-mortuary",
+          "name": "Palm Eastern Mortuary",
+          "href": "https://www.dignitymemorial.com/funeral-homes/nevada/las-vegas/palm-eastern-mortuary/1009",
+          "address": "7600 S Eastern Ave",
+          "phone": "702-464-8500",
+          "sourceEs": "",
+          "sourceEn": "",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "none",
+          "packages": []
+        },
+        {
+          "id": "palm-northwest-mortuary",
+          "name": "Palm Northwest Mortuary",
+          "href": "https://www.dignitymemorial.com/funeral-homes/nevada/las-vegas/palm-northwest-mortuary/1011",
+          "address": "6701 N Jones Blvd",
+          "phone": "702-464-8460",
+          "sourceEs": "",
+          "sourceEn": "",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "none",
+          "packages": []
+        },
+        {
+          "id": "palm-downtown-mortuary",
+          "name": "Palm Downtown Mortuary",
+          "href": "https://www.dignitymemorial.com/funeral-homes/nevada/las-vegas/palm-downtown-mortuary",
+          "address": "1325 N Main St",
+          "phone": "702-464-8300",
+          "sourceEs": "",
+          "sourceEn": "",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "none",
+          "packages": []
+        },
+        {
+          "id": "palm-south-jones-mortuary",
+          "name": "Palm South Jones Mortuary",
+          "href": "https://www.dignitymemorial.com/funeral-homes/nevada/las-vegas/palm-south-jones-mortuary/1012",
+          "address": "1600 S Jones Blvd",
+          "phone": "702-464-8420",
+          "sourceEs": "",
+          "sourceEn": "",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "none",
+          "packages": []
+        },
+        {
+          "id": "palm-cheyenne-mortuary",
+          "name": "Palm Cheyenne Mortuary",
+          "href": "https://www.dignitymemorial.com/funeral-homes/nevada/las-vegas/palm-cheyenne-mortuary",
+          "address": "7400 W Cheyenne Ave",
+          "phone": "702-464-8480",
+          "sourceEs": "",
+          "sourceEn": "",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "none",
+          "packages": []
+        }
+      ],
+      "localCemeteries": [],
+      "nearbyCemeteries": [
+        {
+          "name": "Palm Eastern Mortuary &amp; Cemetery",
+          "address": "7600 S Eastern Ave.",
+          "phone": "702-464-8500",
+          "noteEs": "Palm Eastern Mortuary & Cemetery — 7600 S Eastern Ave",
+          "noteEn": "Palm Eastern Mortuary & Cemetery — 7600 S Eastern Ave"
+        },
+        {
+          "name": "Palm Downtown Mortuary",
+          "address": "1325 N Main St.",
+          "phone": "702-464-8300",
+          "noteEs": "1325 N Main St",
+          "noteEn": "1325 N Main St"
+        }
+      ],
+      "other": [
+        {
+          "type": "plotResale",
+          "nameEs": "Anuncios de reventa de lotes",
+          "nameEn": "Private plot resale ads",
+          "href": "https://www.gravesolutions.com/for-sale/cemetery-properties/nevada"
+        }
+      ]
+    },
+    {
+      "slug": "paradise",
+      "kind": "town",
+      "parentSlug": "las-vegas",
+      "parentNameEs": "Las Vegas",
+      "parentNameEn": "Las Vegas",
+      "stateCode": "NV",
+      "stateSlug": "nevada",
+      "stateNameEs": "Nevada",
+      "stateNameEn": "Nevada",
+      "nameEs": "Paradise",
+      "nameEn": "Paradise",
+      "aliases": [
+        "Paradise",
+        "Paradise"
+      ],
+      "pathEs": "/funerarias-cementerios/nevada/paradise.html",
+      "pathEn": "/en/funeral-homes-cemeteries/nevada/paradise.html",
+      "guideEs": "/estados/nevada/las-vegas.html",
+      "guideEn": "/en/states/nevada/las-vegas.html",
+      "sourceLineEs": "Bunker's Eden Vale: GPL y paquetes, 2 feb. 2026 (cremación directa $2,365 y entierro inmediato $4,140, contenedor o ataúd del comprador). Memorial Basic Cremation $5,535 (incluye urna hasta $395). Funeral Simple Burial $9,900 (incluye ataúd sugerido). Palm Southwest: GPL y paquetes Dignity, 5 ago. 2026. Estimador: promedios Funeralocity de Nevada. Pida siempre la lista actual. No son precios de Mejor Vida Seguros.",
+      "sourceLineEn": "Bunker's Eden Vale: GPL and packages, 2 Feb 2026 (direct cremation $2,365 and immediate burial $4,140, purchaser container or casket). Basic Cremation memorial $5,535 (urn allowance up to $395). Simple Burial funeral $9,900 (suggested casket included). Palm Southwest: Dignity GPL and package list, 5 Aug 2026. Estimator: Nevada Funeralocity averages. Always ask for the current list. These are not Mejor Vida Insurance prices.",
+      "localHomes": [],
+      "nearbyHomes": [
+        {
+          "id": "bunkers",
+          "name": "Bunker's Eden Vale",
+          "href": "https://www.bunkerslv.com/general-price-list",
+          "address": "925 Las Vegas Blvd N",
+          "phone": "702-385-1441",
+          "sourceEs": "Bunker's Eden Vale: lista general de precios y paquetes, 2 feb. 2026 (cremación directa $2,365 y entierro inmediato $4,140, contenedor o ataúd del comprador). Memorial Basic Cremation $5,535 (incluye urna hasta $395). Funeral Simple Burial $9,900 (incluye ataúd sugerido)",
+          "sourceEn": "Bunker's Eden Vale: general price list and packages, 2 Feb 2026 (direct cremation $2,365 and immediate burial $4,140, purchaser container or casket). Basic Cremation memorial $5,535 (urn allowance up to $395). Simple Burial funeral $9,900 (suggested casket included)",
+          "gplDateEs": "2 feb. 2026",
+          "gplDateEn": "2 Feb 2026",
+          "gplKind": "gpl",
+          "packages": [
+            {
+              "id": "directCremation",
+              "labelEs": "Cremación directa",
+              "labelEn": "Direct cremation",
+              "amt": 2365,
+              "noteEs": "Cremación directa, contenedor del comprador (GPL 2 feb. 2026). Crematorio incluido.",
+              "noteEn": "Direct cremation, purchaser container (GPL 2 Feb 2026). Crematory included."
+            },
+            {
+              "id": "immediateBurial",
+              "labelEs": "Entierro inmediato",
+              "labelEn": "Immediate burial",
+              "amt": 4140,
+              "noteEs": "Entierro inmediato, ataúd del comprador. Lote aparte.",
+              "noteEn": "Immediate burial, purchaser casket. Plot extra."
+            },
+            {
+              "id": "memorialCremation",
+              "labelEs": "Cremación con memorial",
+              "labelEn": "Cremation with memorial",
+              "amt": 5535,
+              "noteEs": "Paquete Basic Cremation: memorial, contenedor Novato y urna hasta $395. Sin velatorio con cuerpo.",
+              "noteEn": "Basic Cremation package: memorial, Novato container, and urn allowance up to $395. No body present."
+            },
+            {
+              "id": "traditional",
+              "labelEs": "Funeral tradicional con velatorio",
+              "labelEn": "Traditional funeral with visitation",
+              "amt": 9900,
+              "noteEs": "Paquete Simple Burial: velatorio y ceremonia. Incluye ataúd sugerido. Lote aparte.",
+              "noteEn": "Simple Burial package: visitation and ceremony. Includes a suggested casket. Plot extra."
+            }
+          ]
+        },
+        {
+          "id": "palmsw",
+          "name": "Palm Southwest",
+          "href": "https://www.dignitymemorial.com/funeral-homes/nevada/las-vegas/palm-southwest-mortuary/5260/funeral-price-list",
+          "address": "7979 W Warm Springs Rd",
+          "phone": "702-260-0770",
+          "sourceEs": "Palm Southwest: lista general de precios y paquetes Dignity, 5 ago. 2026",
+          "sourceEn": "Palm Southwest: Dignity general price list and package list, 5 Aug 2026",
+          "gplDateEs": "5 ago. 2026",
+          "gplDateEn": "5 Aug 2026",
+          "gplKind": "gpl",
+          "packages": [
+            {
+              "id": "directCremation",
+              "labelEs": "Cremación directa",
+              "labelEn": "Direct cremation",
+              "amt": 2875,
+              "noteEs": "Cremación directa, contenedor del comprador (GPL 5 ago. 2026).",
+              "noteEn": "Direct cremation, purchaser container (GPL 5 Aug 2026)."
+            },
+            {
+              "id": "immediateBurial",
+              "labelEs": "Entierro inmediato",
+              "labelEn": "Immediate burial",
+              "amt": 4970,
+              "noteEs": "Entierro inmediato, ataúd del comprador. Lote aparte.",
+              "noteEn": "Immediate burial, purchaser casket. Plot extra."
+            },
+            {
+              "id": "memorialCremation",
+              "labelEs": "Cremación con memorial",
+              "labelEn": "Cremation with memorial",
+              "amt": 5260,
+              "noteEs": "Paquete Tribute de cremación: reunión sencilla, urna y contenedor Trayview. Sin velatorio con cuerpo.",
+              "noteEn": "Tribute cremation package: simple gathering, urn, and Trayview container. No body present."
+            },
+            {
+              "id": "traditional",
+              "labelEs": "Funeral tradicional con velatorio",
+              "labelEn": "Traditional funeral with visitation",
+              "amt": 16360,
+              "noteEs": "Paquete Tribute de funeral con velatorio. Incluye ataúd recomendado. Sin bóveda. Lote aparte.",
+              "noteEn": "Tribute funeral package with visitation. Includes a recommended casket. No vault. Plot extra."
+            }
+          ]
+        },
+        {
+          "id": "palm-eastern-mortuary",
+          "name": "Palm Eastern Mortuary",
+          "href": "https://www.dignitymemorial.com/funeral-homes/nevada/las-vegas/palm-eastern-mortuary/1009",
+          "address": "7600 S Eastern Ave",
+          "phone": "702-464-8500",
+          "sourceEs": "",
+          "sourceEn": "",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "none",
+          "packages": []
+        },
+        {
+          "id": "palm-northwest-mortuary",
+          "name": "Palm Northwest Mortuary",
+          "href": "https://www.dignitymemorial.com/funeral-homes/nevada/las-vegas/palm-northwest-mortuary/1011",
+          "address": "6701 N Jones Blvd",
+          "phone": "702-464-8460",
+          "sourceEs": "",
+          "sourceEn": "",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "none",
+          "packages": []
+        },
+        {
+          "id": "palm-downtown-mortuary",
+          "name": "Palm Downtown Mortuary",
+          "href": "https://www.dignitymemorial.com/funeral-homes/nevada/las-vegas/palm-downtown-mortuary",
+          "address": "1325 N Main St",
+          "phone": "702-464-8300",
+          "sourceEs": "",
+          "sourceEn": "",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "none",
+          "packages": []
+        },
+        {
+          "id": "palm-south-jones-mortuary",
+          "name": "Palm South Jones Mortuary",
+          "href": "https://www.dignitymemorial.com/funeral-homes/nevada/las-vegas/palm-south-jones-mortuary/1012",
+          "address": "1600 S Jones Blvd",
+          "phone": "702-464-8420",
+          "sourceEs": "",
+          "sourceEn": "",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "none",
+          "packages": []
+        },
+        {
+          "id": "palm-cheyenne-mortuary",
+          "name": "Palm Cheyenne Mortuary",
+          "href": "https://www.dignitymemorial.com/funeral-homes/nevada/las-vegas/palm-cheyenne-mortuary",
+          "address": "7400 W Cheyenne Ave",
+          "phone": "702-464-8480",
+          "sourceEs": "",
+          "sourceEn": "",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "none",
+          "packages": []
+        }
+      ],
+      "localCemeteries": [],
+      "nearbyCemeteries": [
+        {
+          "name": "Palm Eastern Mortuary &amp; Cemetery",
+          "address": "7600 S Eastern Ave.",
+          "phone": "702-464-8500",
+          "noteEs": "Palm Eastern Mortuary & Cemetery — 7600 S Eastern Ave",
+          "noteEn": "Palm Eastern Mortuary & Cemetery — 7600 S Eastern Ave"
+        },
+        {
+          "name": "Palm Downtown Mortuary",
+          "address": "1325 N Main St.",
+          "phone": "702-464-8300",
+          "noteEs": "1325 N Main St",
+          "noteEn": "1325 N Main St"
+        }
+      ],
+      "other": [
+        {
+          "type": "plotResale",
+          "nameEs": "Anuncios de reventa de lotes",
+          "nameEn": "Private plot resale ads",
+          "href": "https://www.gravesolutions.com/for-sale/cemetery-properties/nevada"
+        }
+      ]
+    },
+    {
+      "slug": "spanish-springs",
+      "kind": "town",
+      "parentSlug": "sparks",
+      "parentNameEs": "Sparks",
+      "parentNameEn": "Sparks",
+      "stateCode": "NV",
+      "stateSlug": "nevada",
+      "stateNameEs": "Nevada",
+      "stateNameEn": "Nevada",
+      "nameEs": "Spanish Springs",
+      "nameEn": "Spanish Springs",
+      "aliases": [
+        "Spanish Springs",
+        "Spanish Springs"
+      ],
+      "pathEs": "/funerarias-cementerios/nevada/spanish-springs.html",
+      "pathEn": "/en/funeral-homes-cemeteries/nevada/spanish-springs.html",
+      "guideEs": "/estados/nevada/sparks.html",
+      "guideEn": "/en/states/nevada/sparks.html",
+      "sourceLineEs": "Walton’s Sparks: GPL 26 feb. 2026 (cremación directa $1,695 y entierro inmediato $2,995, contenedor o ataúd del comprador). Paquetes Walton: memorial $3,480 y funeral tradicional $6,915, sin urna ni ataúd. Estimador: promedios Funeralocity de Nevada. Pida siempre la lista actual. No son precios de Mejor Vida Seguros.",
+      "sourceLineEn": "Walton’s Sparks: GPL 26 Feb 2026 (direct cremation $1,695 and immediate burial $2,995, purchaser container or casket). Walton packages: memorial $3,480 and traditional funeral $6,915, with no urn or casket. Estimator: Nevada Funeralocity averages. Always ask for the current list. These are not Mejor Vida Insurance prices.",
+      "localHomes": [],
+      "nearbyHomes": [
+        {
+          "id": "waltonsparks",
+          "name": "Walton’s Sparks",
+          "href": "https://www.waltonsfuneralhomes.com/waltons-sparks-price-list/",
+          "address": "1745 Sullivan Ln",
+          "phone": "775-359-2210",
+          "sourceEs": "Walton’s Sparks: lista general de precios 26 feb. 2026 (cremación directa $1,695 y entierro inmediato $2,995, contenedor o ataúd del comprador). Paquetes Walton: memorial $3,480 y funeral tradicional $6,915, sin urna ni ataúd",
+          "sourceEn": "Walton’s Sparks: general price list 26 Feb 2026 (direct cremation $1,695 and immediate burial $2,995, purchaser container or casket). Walton packages: memorial $3,480 and traditional funeral $6,915, with no urn or casket",
+          "gplDateEs": "26 feb. 2026",
+          "gplDateEn": "26 Feb 2026",
+          "gplKind": "gpl",
+          "packages": [
+            {
+              "id": "directCremation",
+              "labelEs": "Cremación directa",
+              "labelEn": "Direct cremation",
+              "amt": 1695,
+              "noteEs": "Cremación directa, contenedor del comprador (GPL 26 feb. 2026).",
+              "noteEn": "Direct cremation, purchaser container (GPL 26 Feb 2026)."
+            },
+            {
+              "id": "immediateBurial",
+              "labelEs": "Entierro inmediato",
+              "labelEn": "Immediate burial",
+              "amt": 2995,
+              "noteEs": "Entierro inmediato, ataúd del comprador. Lote aparte.",
+              "noteEn": "Immediate burial, purchaser casket. Plot extra."
+            },
+            {
+              "id": "memorialCremation",
+              "labelEs": "Cremación con memorial",
+              "labelEn": "Cremation with memorial",
+              "amt": 3480,
+              "noteEs": "Paquete Walton Memorial Service & Celebration of Life. Crematorio incluido. Urna aparte.",
+              "noteEn": "Walton Memorial Service & Celebration of Life package. Crematory included. Urn extra."
+            },
+            {
+              "id": "traditional",
+              "labelEs": "Funeral tradicional con velatorio",
+              "labelEn": "Traditional funeral with visitation",
+              "amt": 6915,
+              "noteEs": "Paquete Walton Traditional Funeral Service: velatorio y ceremonia. Ataúd y lote aparte.",
+              "noteEn": "Walton Traditional Funeral Service package: visitation and ceremony. Casket and plot extra."
+            }
+          ]
+        }
+      ],
+      "localCemeteries": [],
+      "nearbyCemeteries": [
+        {
+          "name": "Mountain View Cemetery",
+          "address": "435 Stoker Ave",
+          "phone": "775-329-9231",
+          "noteEs": "Reno",
+          "noteEn": "Reno"
+        }
+      ],
+      "other": [
+        {
+          "type": "plotResale",
+          "nameEs": "Anuncios de reventa de lotes",
+          "nameEn": "Private plot resale ads",
+          "href": "https://www.gravesolutions.com/for-sale/cemetery-properties/nevada"
+        }
+      ]
+    },
+    {
+      "slug": "spring-valley",
+      "kind": "town",
+      "parentSlug": "las-vegas",
+      "parentNameEs": "Las Vegas",
+      "parentNameEn": "Las Vegas",
+      "stateCode": "NV",
+      "stateSlug": "nevada",
+      "stateNameEs": "Nevada",
+      "stateNameEn": "Nevada",
+      "nameEs": "Spring Valley",
+      "nameEn": "Spring Valley",
+      "aliases": [
+        "Spring Valley",
+        "Spring Valley"
+      ],
+      "pathEs": "/funerarias-cementerios/nevada/spring-valley.html",
+      "pathEn": "/en/funeral-homes-cemeteries/nevada/spring-valley.html",
+      "guideEs": "/estados/nevada/las-vegas.html",
+      "guideEn": "/en/states/nevada/las-vegas.html",
+      "sourceLineEs": "Bunker's Eden Vale: GPL y paquetes, 2 feb. 2026 (cremación directa $2,365 y entierro inmediato $4,140, contenedor o ataúd del comprador). Memorial Basic Cremation $5,535 (incluye urna hasta $395). Funeral Simple Burial $9,900 (incluye ataúd sugerido). Palm Southwest: GPL y paquetes Dignity, 5 ago. 2026. Estimador: promedios Funeralocity de Nevada. Pida siempre la lista actual. No son precios de Mejor Vida Seguros.",
+      "sourceLineEn": "Bunker's Eden Vale: GPL and packages, 2 Feb 2026 (direct cremation $2,365 and immediate burial $4,140, purchaser container or casket). Basic Cremation memorial $5,535 (urn allowance up to $395). Simple Burial funeral $9,900 (suggested casket included). Palm Southwest: Dignity GPL and package list, 5 Aug 2026. Estimator: Nevada Funeralocity averages. Always ask for the current list. These are not Mejor Vida Insurance prices.",
+      "localHomes": [],
+      "nearbyHomes": [
+        {
+          "id": "bunkers",
+          "name": "Bunker's Eden Vale",
+          "href": "https://www.bunkerslv.com/general-price-list",
+          "address": "925 Las Vegas Blvd N",
+          "phone": "702-385-1441",
+          "sourceEs": "Bunker's Eden Vale: lista general de precios y paquetes, 2 feb. 2026 (cremación directa $2,365 y entierro inmediato $4,140, contenedor o ataúd del comprador). Memorial Basic Cremation $5,535 (incluye urna hasta $395). Funeral Simple Burial $9,900 (incluye ataúd sugerido)",
+          "sourceEn": "Bunker's Eden Vale: general price list and packages, 2 Feb 2026 (direct cremation $2,365 and immediate burial $4,140, purchaser container or casket). Basic Cremation memorial $5,535 (urn allowance up to $395). Simple Burial funeral $9,900 (suggested casket included)",
+          "gplDateEs": "2 feb. 2026",
+          "gplDateEn": "2 Feb 2026",
+          "gplKind": "gpl",
+          "packages": [
+            {
+              "id": "directCremation",
+              "labelEs": "Cremación directa",
+              "labelEn": "Direct cremation",
+              "amt": 2365,
+              "noteEs": "Cremación directa, contenedor del comprador (GPL 2 feb. 2026). Crematorio incluido.",
+              "noteEn": "Direct cremation, purchaser container (GPL 2 Feb 2026). Crematory included."
+            },
+            {
+              "id": "immediateBurial",
+              "labelEs": "Entierro inmediato",
+              "labelEn": "Immediate burial",
+              "amt": 4140,
+              "noteEs": "Entierro inmediato, ataúd del comprador. Lote aparte.",
+              "noteEn": "Immediate burial, purchaser casket. Plot extra."
+            },
+            {
+              "id": "memorialCremation",
+              "labelEs": "Cremación con memorial",
+              "labelEn": "Cremation with memorial",
+              "amt": 5535,
+              "noteEs": "Paquete Basic Cremation: memorial, contenedor Novato y urna hasta $395. Sin velatorio con cuerpo.",
+              "noteEn": "Basic Cremation package: memorial, Novato container, and urn allowance up to $395. No body present."
+            },
+            {
+              "id": "traditional",
+              "labelEs": "Funeral tradicional con velatorio",
+              "labelEn": "Traditional funeral with visitation",
+              "amt": 9900,
+              "noteEs": "Paquete Simple Burial: velatorio y ceremonia. Incluye ataúd sugerido. Lote aparte.",
+              "noteEn": "Simple Burial package: visitation and ceremony. Includes a suggested casket. Plot extra."
+            }
+          ]
+        },
+        {
+          "id": "palmsw",
+          "name": "Palm Southwest",
+          "href": "https://www.dignitymemorial.com/funeral-homes/nevada/las-vegas/palm-southwest-mortuary/5260/funeral-price-list",
+          "address": "7979 W Warm Springs Rd",
+          "phone": "702-260-0770",
+          "sourceEs": "Palm Southwest: lista general de precios y paquetes Dignity, 5 ago. 2026",
+          "sourceEn": "Palm Southwest: Dignity general price list and package list, 5 Aug 2026",
+          "gplDateEs": "5 ago. 2026",
+          "gplDateEn": "5 Aug 2026",
+          "gplKind": "gpl",
+          "packages": [
+            {
+              "id": "directCremation",
+              "labelEs": "Cremación directa",
+              "labelEn": "Direct cremation",
+              "amt": 2875,
+              "noteEs": "Cremación directa, contenedor del comprador (GPL 5 ago. 2026).",
+              "noteEn": "Direct cremation, purchaser container (GPL 5 Aug 2026)."
+            },
+            {
+              "id": "immediateBurial",
+              "labelEs": "Entierro inmediato",
+              "labelEn": "Immediate burial",
+              "amt": 4970,
+              "noteEs": "Entierro inmediato, ataúd del comprador. Lote aparte.",
+              "noteEn": "Immediate burial, purchaser casket. Plot extra."
+            },
+            {
+              "id": "memorialCremation",
+              "labelEs": "Cremación con memorial",
+              "labelEn": "Cremation with memorial",
+              "amt": 5260,
+              "noteEs": "Paquete Tribute de cremación: reunión sencilla, urna y contenedor Trayview. Sin velatorio con cuerpo.",
+              "noteEn": "Tribute cremation package: simple gathering, urn, and Trayview container. No body present."
+            },
+            {
+              "id": "traditional",
+              "labelEs": "Funeral tradicional con velatorio",
+              "labelEn": "Traditional funeral with visitation",
+              "amt": 16360,
+              "noteEs": "Paquete Tribute de funeral con velatorio. Incluye ataúd recomendado. Sin bóveda. Lote aparte.",
+              "noteEn": "Tribute funeral package with visitation. Includes a recommended casket. No vault. Plot extra."
+            }
+          ]
+        },
+        {
+          "id": "palm-eastern-mortuary",
+          "name": "Palm Eastern Mortuary",
+          "href": "https://www.dignitymemorial.com/funeral-homes/nevada/las-vegas/palm-eastern-mortuary/1009",
+          "address": "7600 S Eastern Ave",
+          "phone": "702-464-8500",
+          "sourceEs": "",
+          "sourceEn": "",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "none",
+          "packages": []
+        },
+        {
+          "id": "palm-northwest-mortuary",
+          "name": "Palm Northwest Mortuary",
+          "href": "https://www.dignitymemorial.com/funeral-homes/nevada/las-vegas/palm-northwest-mortuary/1011",
+          "address": "6701 N Jones Blvd",
+          "phone": "702-464-8460",
+          "sourceEs": "",
+          "sourceEn": "",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "none",
+          "packages": []
+        },
+        {
+          "id": "palm-downtown-mortuary",
+          "name": "Palm Downtown Mortuary",
+          "href": "https://www.dignitymemorial.com/funeral-homes/nevada/las-vegas/palm-downtown-mortuary",
+          "address": "1325 N Main St",
+          "phone": "702-464-8300",
+          "sourceEs": "",
+          "sourceEn": "",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "none",
+          "packages": []
+        },
+        {
+          "id": "palm-south-jones-mortuary",
+          "name": "Palm South Jones Mortuary",
+          "href": "https://www.dignitymemorial.com/funeral-homes/nevada/las-vegas/palm-south-jones-mortuary/1012",
+          "address": "1600 S Jones Blvd",
+          "phone": "702-464-8420",
+          "sourceEs": "",
+          "sourceEn": "",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "none",
+          "packages": []
+        },
+        {
+          "id": "palm-cheyenne-mortuary",
+          "name": "Palm Cheyenne Mortuary",
+          "href": "https://www.dignitymemorial.com/funeral-homes/nevada/las-vegas/palm-cheyenne-mortuary",
+          "address": "7400 W Cheyenne Ave",
+          "phone": "702-464-8480",
+          "sourceEs": "",
+          "sourceEn": "",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "none",
+          "packages": []
+        }
+      ],
+      "localCemeteries": [],
+      "nearbyCemeteries": [
+        {
+          "name": "Palm Eastern Mortuary &amp; Cemetery",
+          "address": "7600 S Eastern Ave.",
+          "phone": "702-464-8500",
+          "noteEs": "Palm Eastern Mortuary & Cemetery — 7600 S Eastern Ave",
+          "noteEn": "Palm Eastern Mortuary & Cemetery — 7600 S Eastern Ave"
+        },
+        {
+          "name": "Palm Downtown Mortuary",
+          "address": "1325 N Main St.",
+          "phone": "702-464-8300",
+          "noteEs": "1325 N Main St",
+          "noteEn": "1325 N Main St"
+        }
+      ],
+      "other": [
+        {
+          "type": "plotResale",
+          "nameEs": "Anuncios de reventa de lotes",
+          "nameEn": "Private plot resale ads",
+          "href": "https://www.gravesolutions.com/for-sale/cemetery-properties/nevada"
+        }
+      ]
+    },
+    {
+      "slug": "summerlin",
+      "kind": "town",
+      "parentSlug": "las-vegas",
+      "parentNameEs": "Las Vegas",
+      "parentNameEn": "Las Vegas",
+      "stateCode": "NV",
+      "stateSlug": "nevada",
+      "stateNameEs": "Nevada",
+      "stateNameEn": "Nevada",
+      "nameEs": "Summerlin",
+      "nameEn": "Summerlin",
+      "aliases": [
+        "Summerlin",
+        "Summerlin"
+      ],
+      "pathEs": "/funerarias-cementerios/nevada/summerlin.html",
+      "pathEn": "/en/funeral-homes-cemeteries/nevada/summerlin.html",
+      "guideEs": "/estados/nevada/las-vegas.html",
+      "guideEn": "/en/states/nevada/las-vegas.html",
+      "sourceLineEs": "Bunker's Eden Vale: GPL y paquetes, 2 feb. 2026 (cremación directa $2,365 y entierro inmediato $4,140, contenedor o ataúd del comprador). Memorial Basic Cremation $5,535 (incluye urna hasta $395). Funeral Simple Burial $9,900 (incluye ataúd sugerido). Palm Southwest: GPL y paquetes Dignity, 5 ago. 2026. Estimador: promedios Funeralocity de Nevada. Pida siempre la lista actual. No son precios de Mejor Vida Seguros.",
+      "sourceLineEn": "Bunker's Eden Vale: GPL and packages, 2 Feb 2026 (direct cremation $2,365 and immediate burial $4,140, purchaser container or casket). Basic Cremation memorial $5,535 (urn allowance up to $395). Simple Burial funeral $9,900 (suggested casket included). Palm Southwest: Dignity GPL and package list, 5 Aug 2026. Estimator: Nevada Funeralocity averages. Always ask for the current list. These are not Mejor Vida Insurance prices.",
+      "localHomes": [],
+      "nearbyHomes": [
+        {
+          "id": "bunkers",
+          "name": "Bunker's Eden Vale",
+          "href": "https://www.bunkerslv.com/general-price-list",
+          "address": "925 Las Vegas Blvd N",
+          "phone": "702-385-1441",
+          "sourceEs": "Bunker's Eden Vale: lista general de precios y paquetes, 2 feb. 2026 (cremación directa $2,365 y entierro inmediato $4,140, contenedor o ataúd del comprador). Memorial Basic Cremation $5,535 (incluye urna hasta $395). Funeral Simple Burial $9,900 (incluye ataúd sugerido)",
+          "sourceEn": "Bunker's Eden Vale: general price list and packages, 2 Feb 2026 (direct cremation $2,365 and immediate burial $4,140, purchaser container or casket). Basic Cremation memorial $5,535 (urn allowance up to $395). Simple Burial funeral $9,900 (suggested casket included)",
+          "gplDateEs": "2 feb. 2026",
+          "gplDateEn": "2 Feb 2026",
+          "gplKind": "gpl",
+          "packages": [
+            {
+              "id": "directCremation",
+              "labelEs": "Cremación directa",
+              "labelEn": "Direct cremation",
+              "amt": 2365,
+              "noteEs": "Cremación directa, contenedor del comprador (GPL 2 feb. 2026). Crematorio incluido.",
+              "noteEn": "Direct cremation, purchaser container (GPL 2 Feb 2026). Crematory included."
+            },
+            {
+              "id": "immediateBurial",
+              "labelEs": "Entierro inmediato",
+              "labelEn": "Immediate burial",
+              "amt": 4140,
+              "noteEs": "Entierro inmediato, ataúd del comprador. Lote aparte.",
+              "noteEn": "Immediate burial, purchaser casket. Plot extra."
+            },
+            {
+              "id": "memorialCremation",
+              "labelEs": "Cremación con memorial",
+              "labelEn": "Cremation with memorial",
+              "amt": 5535,
+              "noteEs": "Paquete Basic Cremation: memorial, contenedor Novato y urna hasta $395. Sin velatorio con cuerpo.",
+              "noteEn": "Basic Cremation package: memorial, Novato container, and urn allowance up to $395. No body present."
+            },
+            {
+              "id": "traditional",
+              "labelEs": "Funeral tradicional con velatorio",
+              "labelEn": "Traditional funeral with visitation",
+              "amt": 9900,
+              "noteEs": "Paquete Simple Burial: velatorio y ceremonia. Incluye ataúd sugerido. Lote aparte.",
+              "noteEn": "Simple Burial package: visitation and ceremony. Includes a suggested casket. Plot extra."
+            }
+          ]
+        },
+        {
+          "id": "palmsw",
+          "name": "Palm Southwest",
+          "href": "https://www.dignitymemorial.com/funeral-homes/nevada/las-vegas/palm-southwest-mortuary/5260/funeral-price-list",
+          "address": "7979 W Warm Springs Rd",
+          "phone": "702-260-0770",
+          "sourceEs": "Palm Southwest: lista general de precios y paquetes Dignity, 5 ago. 2026",
+          "sourceEn": "Palm Southwest: Dignity general price list and package list, 5 Aug 2026",
+          "gplDateEs": "5 ago. 2026",
+          "gplDateEn": "5 Aug 2026",
+          "gplKind": "gpl",
+          "packages": [
+            {
+              "id": "directCremation",
+              "labelEs": "Cremación directa",
+              "labelEn": "Direct cremation",
+              "amt": 2875,
+              "noteEs": "Cremación directa, contenedor del comprador (GPL 5 ago. 2026).",
+              "noteEn": "Direct cremation, purchaser container (GPL 5 Aug 2026)."
+            },
+            {
+              "id": "immediateBurial",
+              "labelEs": "Entierro inmediato",
+              "labelEn": "Immediate burial",
+              "amt": 4970,
+              "noteEs": "Entierro inmediato, ataúd del comprador. Lote aparte.",
+              "noteEn": "Immediate burial, purchaser casket. Plot extra."
+            },
+            {
+              "id": "memorialCremation",
+              "labelEs": "Cremación con memorial",
+              "labelEn": "Cremation with memorial",
+              "amt": 5260,
+              "noteEs": "Paquete Tribute de cremación: reunión sencilla, urna y contenedor Trayview. Sin velatorio con cuerpo.",
+              "noteEn": "Tribute cremation package: simple gathering, urn, and Trayview container. No body present."
+            },
+            {
+              "id": "traditional",
+              "labelEs": "Funeral tradicional con velatorio",
+              "labelEn": "Traditional funeral with visitation",
+              "amt": 16360,
+              "noteEs": "Paquete Tribute de funeral con velatorio. Incluye ataúd recomendado. Sin bóveda. Lote aparte.",
+              "noteEn": "Tribute funeral package with visitation. Includes a recommended casket. No vault. Plot extra."
+            }
+          ]
+        },
+        {
+          "id": "palm-eastern-mortuary",
+          "name": "Palm Eastern Mortuary",
+          "href": "https://www.dignitymemorial.com/funeral-homes/nevada/las-vegas/palm-eastern-mortuary/1009",
+          "address": "7600 S Eastern Ave",
+          "phone": "702-464-8500",
+          "sourceEs": "",
+          "sourceEn": "",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "none",
+          "packages": []
+        },
+        {
+          "id": "palm-northwest-mortuary",
+          "name": "Palm Northwest Mortuary",
+          "href": "https://www.dignitymemorial.com/funeral-homes/nevada/las-vegas/palm-northwest-mortuary/1011",
+          "address": "6701 N Jones Blvd",
+          "phone": "702-464-8460",
+          "sourceEs": "",
+          "sourceEn": "",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "none",
+          "packages": []
+        },
+        {
+          "id": "palm-downtown-mortuary",
+          "name": "Palm Downtown Mortuary",
+          "href": "https://www.dignitymemorial.com/funeral-homes/nevada/las-vegas/palm-downtown-mortuary",
+          "address": "1325 N Main St",
+          "phone": "702-464-8300",
+          "sourceEs": "",
+          "sourceEn": "",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "none",
+          "packages": []
+        },
+        {
+          "id": "palm-south-jones-mortuary",
+          "name": "Palm South Jones Mortuary",
+          "href": "https://www.dignitymemorial.com/funeral-homes/nevada/las-vegas/palm-south-jones-mortuary/1012",
+          "address": "1600 S Jones Blvd",
+          "phone": "702-464-8420",
+          "sourceEs": "",
+          "sourceEn": "",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "none",
+          "packages": []
+        },
+        {
+          "id": "palm-cheyenne-mortuary",
+          "name": "Palm Cheyenne Mortuary",
+          "href": "https://www.dignitymemorial.com/funeral-homes/nevada/las-vegas/palm-cheyenne-mortuary",
+          "address": "7400 W Cheyenne Ave",
+          "phone": "702-464-8480",
+          "sourceEs": "",
+          "sourceEn": "",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "none",
+          "packages": []
+        }
+      ],
+      "localCemeteries": [],
+      "nearbyCemeteries": [
+        {
+          "name": "Palm Eastern Mortuary &amp; Cemetery",
+          "address": "7600 S Eastern Ave.",
+          "phone": "702-464-8500",
+          "noteEs": "Palm Eastern Mortuary & Cemetery — 7600 S Eastern Ave",
+          "noteEn": "Palm Eastern Mortuary & Cemetery — 7600 S Eastern Ave"
+        },
+        {
+          "name": "Palm Downtown Mortuary",
+          "address": "1325 N Main St.",
+          "phone": "702-464-8300",
+          "noteEs": "1325 N Main St",
+          "noteEn": "1325 N Main St"
+        }
+      ],
+      "other": [
+        {
+          "type": "plotResale",
+          "nameEs": "Anuncios de reventa de lotes",
+          "nameEn": "Private plot resale ads",
+          "href": "https://www.gravesolutions.com/for-sale/cemetery-properties/nevada"
+        }
+      ]
+    },
+    {
+      "slug": "sunrise-manor",
+      "kind": "town",
+      "parentSlug": "las-vegas",
+      "parentNameEs": "Las Vegas",
+      "parentNameEn": "Las Vegas",
+      "stateCode": "NV",
+      "stateSlug": "nevada",
+      "stateNameEs": "Nevada",
+      "stateNameEn": "Nevada",
+      "nameEs": "Sunrise Manor",
+      "nameEn": "Sunrise Manor",
+      "aliases": [
+        "Sunrise Manor",
+        "Sunrise Manor"
+      ],
+      "pathEs": "/funerarias-cementerios/nevada/sunrise-manor.html",
+      "pathEn": "/en/funeral-homes-cemeteries/nevada/sunrise-manor.html",
+      "guideEs": "/estados/nevada/las-vegas.html",
+      "guideEn": "/en/states/nevada/las-vegas.html",
+      "sourceLineEs": "Bunker's Eden Vale: GPL y paquetes, 2 feb. 2026 (cremación directa $2,365 y entierro inmediato $4,140, contenedor o ataúd del comprador). Memorial Basic Cremation $5,535 (incluye urna hasta $395). Funeral Simple Burial $9,900 (incluye ataúd sugerido). Palm Southwest: GPL y paquetes Dignity, 5 ago. 2026. Estimador: promedios Funeralocity de Nevada. Pida siempre la lista actual. No son precios de Mejor Vida Seguros.",
+      "sourceLineEn": "Bunker's Eden Vale: GPL and packages, 2 Feb 2026 (direct cremation $2,365 and immediate burial $4,140, purchaser container or casket). Basic Cremation memorial $5,535 (urn allowance up to $395). Simple Burial funeral $9,900 (suggested casket included). Palm Southwest: Dignity GPL and package list, 5 Aug 2026. Estimator: Nevada Funeralocity averages. Always ask for the current list. These are not Mejor Vida Insurance prices.",
+      "localHomes": [],
+      "nearbyHomes": [
+        {
+          "id": "bunkers",
+          "name": "Bunker's Eden Vale",
+          "href": "https://www.bunkerslv.com/general-price-list",
+          "address": "925 Las Vegas Blvd N",
+          "phone": "702-385-1441",
+          "sourceEs": "Bunker's Eden Vale: lista general de precios y paquetes, 2 feb. 2026 (cremación directa $2,365 y entierro inmediato $4,140, contenedor o ataúd del comprador). Memorial Basic Cremation $5,535 (incluye urna hasta $395). Funeral Simple Burial $9,900 (incluye ataúd sugerido)",
+          "sourceEn": "Bunker's Eden Vale: general price list and packages, 2 Feb 2026 (direct cremation $2,365 and immediate burial $4,140, purchaser container or casket). Basic Cremation memorial $5,535 (urn allowance up to $395). Simple Burial funeral $9,900 (suggested casket included)",
+          "gplDateEs": "2 feb. 2026",
+          "gplDateEn": "2 Feb 2026",
+          "gplKind": "gpl",
+          "packages": [
+            {
+              "id": "directCremation",
+              "labelEs": "Cremación directa",
+              "labelEn": "Direct cremation",
+              "amt": 2365,
+              "noteEs": "Cremación directa, contenedor del comprador (GPL 2 feb. 2026). Crematorio incluido.",
+              "noteEn": "Direct cremation, purchaser container (GPL 2 Feb 2026). Crematory included."
+            },
+            {
+              "id": "immediateBurial",
+              "labelEs": "Entierro inmediato",
+              "labelEn": "Immediate burial",
+              "amt": 4140,
+              "noteEs": "Entierro inmediato, ataúd del comprador. Lote aparte.",
+              "noteEn": "Immediate burial, purchaser casket. Plot extra."
+            },
+            {
+              "id": "memorialCremation",
+              "labelEs": "Cremación con memorial",
+              "labelEn": "Cremation with memorial",
+              "amt": 5535,
+              "noteEs": "Paquete Basic Cremation: memorial, contenedor Novato y urna hasta $395. Sin velatorio con cuerpo.",
+              "noteEn": "Basic Cremation package: memorial, Novato container, and urn allowance up to $395. No body present."
+            },
+            {
+              "id": "traditional",
+              "labelEs": "Funeral tradicional con velatorio",
+              "labelEn": "Traditional funeral with visitation",
+              "amt": 9900,
+              "noteEs": "Paquete Simple Burial: velatorio y ceremonia. Incluye ataúd sugerido. Lote aparte.",
+              "noteEn": "Simple Burial package: visitation and ceremony. Includes a suggested casket. Plot extra."
+            }
+          ]
+        },
+        {
+          "id": "palmsw",
+          "name": "Palm Southwest",
+          "href": "https://www.dignitymemorial.com/funeral-homes/nevada/las-vegas/palm-southwest-mortuary/5260/funeral-price-list",
+          "address": "7979 W Warm Springs Rd",
+          "phone": "702-260-0770",
+          "sourceEs": "Palm Southwest: lista general de precios y paquetes Dignity, 5 ago. 2026",
+          "sourceEn": "Palm Southwest: Dignity general price list and package list, 5 Aug 2026",
+          "gplDateEs": "5 ago. 2026",
+          "gplDateEn": "5 Aug 2026",
+          "gplKind": "gpl",
+          "packages": [
+            {
+              "id": "directCremation",
+              "labelEs": "Cremación directa",
+              "labelEn": "Direct cremation",
+              "amt": 2875,
+              "noteEs": "Cremación directa, contenedor del comprador (GPL 5 ago. 2026).",
+              "noteEn": "Direct cremation, purchaser container (GPL 5 Aug 2026)."
+            },
+            {
+              "id": "immediateBurial",
+              "labelEs": "Entierro inmediato",
+              "labelEn": "Immediate burial",
+              "amt": 4970,
+              "noteEs": "Entierro inmediato, ataúd del comprador. Lote aparte.",
+              "noteEn": "Immediate burial, purchaser casket. Plot extra."
+            },
+            {
+              "id": "memorialCremation",
+              "labelEs": "Cremación con memorial",
+              "labelEn": "Cremation with memorial",
+              "amt": 5260,
+              "noteEs": "Paquete Tribute de cremación: reunión sencilla, urna y contenedor Trayview. Sin velatorio con cuerpo.",
+              "noteEn": "Tribute cremation package: simple gathering, urn, and Trayview container. No body present."
+            },
+            {
+              "id": "traditional",
+              "labelEs": "Funeral tradicional con velatorio",
+              "labelEn": "Traditional funeral with visitation",
+              "amt": 16360,
+              "noteEs": "Paquete Tribute de funeral con velatorio. Incluye ataúd recomendado. Sin bóveda. Lote aparte.",
+              "noteEn": "Tribute funeral package with visitation. Includes a recommended casket. No vault. Plot extra."
+            }
+          ]
+        },
+        {
+          "id": "palm-eastern-mortuary",
+          "name": "Palm Eastern Mortuary",
+          "href": "https://www.dignitymemorial.com/funeral-homes/nevada/las-vegas/palm-eastern-mortuary/1009",
+          "address": "7600 S Eastern Ave",
+          "phone": "702-464-8500",
+          "sourceEs": "",
+          "sourceEn": "",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "none",
+          "packages": []
+        },
+        {
+          "id": "palm-northwest-mortuary",
+          "name": "Palm Northwest Mortuary",
+          "href": "https://www.dignitymemorial.com/funeral-homes/nevada/las-vegas/palm-northwest-mortuary/1011",
+          "address": "6701 N Jones Blvd",
+          "phone": "702-464-8460",
+          "sourceEs": "",
+          "sourceEn": "",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "none",
+          "packages": []
+        },
+        {
+          "id": "palm-downtown-mortuary",
+          "name": "Palm Downtown Mortuary",
+          "href": "https://www.dignitymemorial.com/funeral-homes/nevada/las-vegas/palm-downtown-mortuary",
+          "address": "1325 N Main St",
+          "phone": "702-464-8300",
+          "sourceEs": "",
+          "sourceEn": "",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "none",
+          "packages": []
+        },
+        {
+          "id": "palm-south-jones-mortuary",
+          "name": "Palm South Jones Mortuary",
+          "href": "https://www.dignitymemorial.com/funeral-homes/nevada/las-vegas/palm-south-jones-mortuary/1012",
+          "address": "1600 S Jones Blvd",
+          "phone": "702-464-8420",
+          "sourceEs": "",
+          "sourceEn": "",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "none",
+          "packages": []
+        },
+        {
+          "id": "palm-cheyenne-mortuary",
+          "name": "Palm Cheyenne Mortuary",
+          "href": "https://www.dignitymemorial.com/funeral-homes/nevada/las-vegas/palm-cheyenne-mortuary",
+          "address": "7400 W Cheyenne Ave",
+          "phone": "702-464-8480",
+          "sourceEs": "",
+          "sourceEn": "",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "none",
+          "packages": []
+        }
+      ],
+      "localCemeteries": [],
+      "nearbyCemeteries": [
+        {
+          "name": "Palm Eastern Mortuary &amp; Cemetery",
+          "address": "7600 S Eastern Ave.",
+          "phone": "702-464-8500",
+          "noteEs": "Palm Eastern Mortuary & Cemetery — 7600 S Eastern Ave",
+          "noteEn": "Palm Eastern Mortuary & Cemetery — 7600 S Eastern Ave"
+        },
+        {
+          "name": "Palm Downtown Mortuary",
+          "address": "1325 N Main St.",
+          "phone": "702-464-8300",
+          "noteEs": "1325 N Main St",
+          "noteEn": "1325 N Main St"
+        }
+      ],
+      "other": [
+        {
+          "type": "plotResale",
+          "nameEs": "Anuncios de reventa de lotes",
+          "nameEn": "Private plot resale ads",
+          "href": "https://www.gravesolutions.com/for-sale/cemetery-properties/nevada"
+        }
+      ]
+    },
+    {
+      "slug": "verdi",
+      "kind": "town",
+      "parentSlug": "reno",
+      "parentNameEs": "Reno",
+      "parentNameEn": "Reno",
+      "stateCode": "NV",
+      "stateSlug": "nevada",
+      "stateNameEs": "Nevada",
+      "stateNameEn": "Nevada",
+      "nameEs": "Verdi",
+      "nameEn": "Verdi",
+      "aliases": [
+        "Verdi",
+        "Verdi"
+      ],
+      "pathEs": "/funerarias-cementerios/nevada/verdi.html",
+      "pathEn": "/en/funeral-homes-cemeteries/nevada/verdi.html",
+      "guideEs": "/estados/nevada/reno.html",
+      "guideEn": "/en/states/nevada/reno.html",
+      "sourceLineEs": "Mountain View Mortuary: GPL 16 sep. 2026 (cremación directa $1,455 y entierro inmediato $2,695, contenedor o ataúd del comprador; el crematorio figura aparte a $350). No publica paquetes de memorial ni funeral tradicional. Walton’s Sierra Chapel, O’Brien Rogers & Crosby y Ross, Burke & Knobel: GPL de 6 páginas, 26 feb. 2026 (cremación directa $1,695 y entierro inmediato $2,995). Paquetes Walton: memorial $3,480 y funeral tradicional $6,915, sin urna ni ataúd. Estimador: promedios Funeralocity de Nevada. Pida siempre la lista actual. No son precios de Mejor Vida Seguros.",
+      "sourceLineEn": "Mountain View Mortuary: GPL 16 Sep 2026 (direct cremation $1,455 and immediate burial $2,695, purchaser container or casket; crematory listed separately at $350). It does not publish memorial or traditional packages. Walton’s Sierra Chapel, O’Brien Rogers & Crosby, and Ross, Burke & Knobel: 6-page GPL, 26 Feb 2026 (direct cremation $1,695 and immediate burial $2,995). Walton packages: memorial $3,480 and traditional funeral $6,915, with no urn or casket. Estimator: Nevada Funeralocity averages. Always ask for the current list. These are not Mejor Vida Insurance prices.",
+      "localHomes": [],
+      "nearbyHomes": [
+        {
+          "id": "sierra",
+          "name": "Walton’s Sierra Chapel",
+          "href": "https://www.waltonsfuneralhomes.com/waltons-sierra-chapel-price-list/",
+          "address": "875 W Second St",
+          "phone": "775-323-7189",
+          "sourceEs": "Walton’s Sierra Chapel, O’Brien Rogers &amp; Crosby y Ross, Burke &amp; Knobel: lista general de precios de 6 páginas, 26 feb. 2026 (cremación directa $1,695 y entierro inmediato $2,995). Paquetes Walton: memorial $3,480 y funeral tradicional $6,915, sin urna ni ataúd",
+          "sourceEn": "Walton’s Sierra Chapel, O’Brien Rogers &amp; Crosby, and Ross, Burke &amp; Knobel: 6-page general price list, 26 Feb 2026 (direct cremation $1,695 and immediate burial $2,995). Walton packages: memorial $3,480 and traditional funeral $6,915, with no urn or casket",
+          "gplDateEs": "26 feb. 2026",
+          "gplDateEn": "26 Feb 2026",
+          "gplKind": "gpl",
+          "packages": [
+            {
+              "id": "directCremation",
+              "labelEs": "Cremación directa",
+              "labelEn": "Direct cremation",
+              "amt": 1695,
+              "noteEs": "Cremación directa, contenedor del comprador (GPL 26 feb. 2026).",
+              "noteEn": "Direct cremation, purchaser container (GPL 26 Feb 2026)."
+            },
+            {
+              "id": "immediateBurial",
+              "labelEs": "Entierro inmediato",
+              "labelEn": "Immediate burial",
+              "amt": 2995,
+              "noteEs": "Entierro inmediato, ataúd del comprador. Lote aparte.",
+              "noteEn": "Immediate burial, purchaser casket. Plot extra."
+            },
+            {
+              "id": "memorialCremation",
+              "labelEs": "Cremación con memorial",
+              "labelEn": "Cremation with memorial",
+              "amt": 3480,
+              "noteEs": "Paquete Walton Memorial Service & Celebration of Life. Crematorio incluido. Urna aparte.",
+              "noteEn": "Walton Memorial Service & Celebration of Life package. Crematory included. Urn extra."
+            },
+            {
+              "id": "traditional",
+              "labelEs": "Funeral tradicional con velatorio",
+              "labelEn": "Traditional funeral with visitation",
+              "amt": 6915,
+              "noteEs": "Paquete Walton Traditional Funeral Service: velatorio y ceremonia. Ataúd y lote aparte.",
+              "noteEn": "Walton Traditional Funeral Service package: visitation and ceremony. Casket and plot extra."
+            }
+          ]
+        },
+        {
+          "id": "obrien",
+          "name": "Walton’s O’Brien Rogers & Crosby",
+          "href": "https://www.waltonsfuneralhomes.com/waltons-obrien-rogers-crosby-price-list/",
+          "address": "600 W Second St",
+          "phone": "775-323-6191",
+          "sourceEs": "Walton’s Sierra Chapel, O’Brien Rogers &amp; Crosby y Ross, Burke &amp; Knobel: lista general de precios de 6 páginas, 26 feb. 2026 (cremación directa $1,695 y entierro inmediato $2,995). Paquetes Walton: memorial $3,480 y funeral tradicional $6,915, sin urna ni ataúd",
+          "sourceEn": "Walton’s Sierra Chapel, O’Brien Rogers &amp; Crosby, and Ross, Burke &amp; Knobel: 6-page general price list, 26 Feb 2026 (direct cremation $1,695 and immediate burial $2,995). Walton packages: memorial $3,480 and traditional funeral $6,915, with no urn or casket",
+          "gplDateEs": "26 feb. 2026",
+          "gplDateEn": "26 Feb 2026",
+          "gplKind": "gpl",
+          "packages": [
+            {
+              "id": "directCremation",
+              "labelEs": "Cremación directa",
+              "labelEn": "Direct cremation",
+              "amt": 1695,
+              "noteEs": "Cremación directa, contenedor del comprador (GPL 26 feb. 2026).",
+              "noteEn": "Direct cremation, purchaser container (GPL 26 Feb 2026)."
+            },
+            {
+              "id": "immediateBurial",
+              "labelEs": "Entierro inmediato",
+              "labelEn": "Immediate burial",
+              "amt": 2995,
+              "noteEs": "Entierro inmediato, ataúd del comprador. Lote aparte.",
+              "noteEn": "Immediate burial, purchaser casket. Plot extra."
+            },
+            {
+              "id": "memorialCremation",
+              "labelEs": "Cremación con memorial",
+              "labelEn": "Cremation with memorial",
+              "amt": 3480,
+              "noteEs": "Paquete Walton Memorial Service & Celebration of Life. Crematorio incluido. Urna aparte.",
+              "noteEn": "Walton Memorial Service & Celebration of Life package. Crematory included. Urn extra."
+            },
+            {
+              "id": "traditional",
+              "labelEs": "Funeral tradicional con velatorio",
+              "labelEn": "Traditional funeral with visitation",
+              "amt": 6915,
+              "noteEs": "Paquete Walton Traditional Funeral Service: velatorio y ceremonia. Ataúd y lote aparte.",
+              "noteEn": "Walton Traditional Funeral Service package: visitation and ceremony. Casket and plot extra."
+            }
+          ]
+        },
+        {
+          "id": "rbk",
+          "name": "Ross, Burke & Knobel",
+          "href": "https://www.waltonsfuneralhomes.com/waltons-ross-burke-knobel-price-list/",
+          "address": "2155 Kietzke Ln",
+          "phone": "775-323-4154",
+          "sourceEs": "Ross, Burke &amp; Knobel: lista general de precios de 6 páginas, 26 feb. 2026 (cremación directa $1,695 y entierro inmediato $2,995). Paquetes Walton: memorial $3,480 y funeral tradicional $6,915, sin urna ni ataúd",
+          "sourceEn": "Ross, Burke &amp; Knobel: 6-page general price list, 26 Feb 2026 (direct cremation $1,695 and immediate burial $2,995). Walton packages: memorial $3,480 and traditional funeral $6,915, with no urn or casket",
+          "gplDateEs": "26 feb. 2026",
+          "gplDateEn": "26 Feb 2026",
+          "gplKind": "gpl",
+          "packages": [
+            {
+              "id": "directCremation",
+              "labelEs": "Cremación directa",
+              "labelEn": "Direct cremation",
+              "amt": 1695,
+              "noteEs": "Cremación directa, contenedor del comprador (GPL 26 feb. 2026).",
+              "noteEn": "Direct cremation, purchaser container (GPL 26 Feb 2026)."
+            },
+            {
+              "id": "immediateBurial",
+              "labelEs": "Entierro inmediato",
+              "labelEn": "Immediate burial",
+              "amt": 2995,
+              "noteEs": "Entierro inmediato, ataúd del comprador. Lote aparte.",
+              "noteEn": "Immediate burial, purchaser casket. Plot extra."
+            },
+            {
+              "id": "memorialCremation",
+              "labelEs": "Cremación con memorial",
+              "labelEn": "Cremation with memorial",
+              "amt": 3480,
+              "noteEs": "Paquete Walton Memorial Service & Celebration of Life. Crematorio incluido. Urna aparte.",
+              "noteEn": "Walton Memorial Service & Celebration of Life package. Crematory included. Urn extra."
+            },
+            {
+              "id": "traditional",
+              "labelEs": "Funeral tradicional con velatorio",
+              "labelEn": "Traditional funeral with visitation",
+              "amt": 6915,
+              "noteEs": "Paquete Walton Traditional Funeral Service: velatorio y ceremonia. Ataúd y lote aparte.",
+              "noteEn": "Walton Traditional Funeral Service package: visitation and ceremony. Casket and plot extra."
+            }
+          ]
+        },
+        {
+          "id": "mtnview",
+          "name": "Mountain View Mortuary",
+          "href": "https://www.mountainviewmortuary.net/services/pricing",
+          "address": "425 Stoker Ave",
+          "phone": "775-788-2199",
+          "sourceEs": "Mountain View Mortuary: lista general de precios 16 sep. 2026 (cremación directa $1,455 y entierro inmediato $2,695, contenedor o ataúd del comprador; el crematorio figura aparte a $350). No publica paquetes de memorial ni funeral tradicional",
+          "sourceEn": "Mountain View Mortuary: general price list 16 Sep 2026 (direct cremation $1,455 and immediate burial $2,695, purchaser container or casket; crematory listed separately at $350). It does not publish memorial or traditional packages",
+          "gplDateEs": "16 sep. 2026",
+          "gplDateEn": "16 Sep 2026",
+          "gplKind": "gpl",
+          "packages": [
+            {
+              "id": "directCremation",
+              "labelEs": "Cremación directa",
+              "labelEn": "Direct cremation",
+              "amt": 1455,
+              "noteEs": "Cremación directa, contenedor del comprador (GPL 16 sep. 2026). Crematorio aparte, $350.",
+              "noteEn": "Direct cremation, purchaser container (GPL 16 Sep 2026). Crematory extra, $350."
+            },
+            {
+              "id": "immediateBurial",
+              "labelEs": "Entierro inmediato",
+              "labelEn": "Immediate burial",
+              "amt": 2695,
+              "noteEs": "Entierro inmediato, ataúd del comprador. Lote aparte.",
+              "noteEn": "Immediate burial, purchaser casket. Plot extra."
+            },
+            {
+              "id": "memorialCremation",
+              "labelEs": "Cremación con memorial",
+              "labelEn": "Cremation with memorial",
+              "amt": 0,
+              "noteEs": "No figura en su lista publicada. Pida la lista vigente.",
+              "noteEn": "Not on their published list. Ask for the current list."
+            },
+            {
+              "id": "traditional",
+              "labelEs": "Funeral tradicional con velatorio",
+              "labelEn": "Traditional funeral with visitation",
+              "amt": 0,
+              "noteEs": "No figura en su lista publicada. Pida la lista vigente.",
+              "noteEn": "Not on their published list. Ask for the current list."
+            }
+          ]
+        }
+      ],
+      "localCemeteries": [],
+      "nearbyCemeteries": [
+        {
+          "name": "Mountain View Cemetery",
+          "address": "435 Stoker Ave.",
+          "phone": "775-329-9231",
+          "noteEs": "435 Stoker Ave",
+          "noteEn": "435 Stoker Ave"
+        }
+      ],
+      "other": [
+        {
+          "type": "plotResale",
+          "nameEs": "Anuncios de reventa de lotes",
+          "nameEn": "Private plot resale ads",
+          "href": "https://www.gravesolutions.com/for-sale/cemetery-properties/nevada"
+        }
+      ]
+    },
+    {
+      "slug": "whitney",
+      "kind": "town",
+      "parentSlug": "henderson",
+      "parentNameEs": "Henderson",
+      "parentNameEn": "Henderson",
+      "stateCode": "NV",
+      "stateSlug": "nevada",
+      "stateNameEs": "Nevada",
+      "stateNameEn": "Nevada",
+      "nameEs": "Whitney",
+      "nameEn": "Whitney",
+      "aliases": [
+        "Whitney",
+        "Whitney"
+      ],
+      "pathEs": "/funerarias-cementerios/nevada/whitney.html",
+      "pathEn": "/en/funeral-homes-cemeteries/nevada/whitney.html",
+      "guideEs": "/estados/nevada/henderson.html",
+      "guideEn": "/en/states/nevada/henderson.html",
+      "sourceLineEs": "Palm Boulder Highway publica en Dignity precios de partida de salón, lote, catering, urnas y ataúdes; no abre en internet la lista general con los cuatro paquetes. Estimador: promedios Funeralocity de Nevada. Pida siempre la lista actual. No son precios de Mejor Vida Seguros.",
+      "sourceLineEn": "Palm Boulder Highway’s Dignity page posts starting prices for venues, plots, catering, urns, and caskets; it does not open a general price list with the four packages. Estimator: Nevada Funeralocity averages. Always ask for the current list. These are not Mejor Vida Insurance prices.",
+      "localHomes": [],
+      "nearbyHomes": [
+        {
+          "id": "palm-boulder-highway-mortuary",
+          "name": "Palm Boulder Highway Mortuary",
+          "href": "https://www.dignitymemorial.com/funeral-homes/nevada/henderson/palm-boulder-highway-mortuary/1010",
+          "address": "800 S Boulder Hwy",
+          "phone": "702-464-8440",
+          "sourceEs": "",
+          "sourceEn": "",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "none",
+          "packages": []
+        },
+        {
+          "id": "metz-mortuary-henderson-henderson",
+          "name": "Metz Mortuary - Henderson",
+          "href": "https://metzmortuary.com/",
+          "address": "1048 North Main",
+          "phone": "402-362-3351",
+          "sourceEs": "Pida la lista general de precios vigente. La funeraria es la única fuente oficial.",
+          "sourceEn": "Ask the funeral home for its current general price list. That list is the only official price.",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "none",
+          "packages": []
+        }
+      ],
+      "localCemeteries": [],
+      "nearbyCemeteries": [
+        {
+          "name": "Palm Boulder Highway Mortuary &amp; Cemetery",
+          "address": "",
+          "phone": "702-464-8440",
+          "noteEs": "Palm Boulder Highway Mortuary & Cemetery — 800 S Boulder Hwy. . Césped y jardines desde $5,495",
+          "noteEn": "Palm Boulder Highway Mortuary & Cemetery — 800 S Boulder Hwy. . Lawn and garden spaces from $5,495"
+        }
+      ],
+      "other": [
+        {
+          "type": "plotResale",
+          "nameEs": "Anuncios de reventa de lotes",
+          "nameEn": "Private plot resale ads",
+          "href": "https://www.gravesolutions.com/for-sale/cemetery-properties/nevada"
+        }
+      ]
+    },
+    {
+      "slug": "carson-city",
+      "kind": "hub",
+      "parentSlug": null,
+      "parentNameEs": "",
+      "parentNameEn": "",
+      "stateCode": "NV",
+      "stateSlug": "nevada",
+      "stateNameEs": "Nevada",
+      "stateNameEn": "Nevada",
+      "nameEs": "Carson City",
+      "nameEn": "Carson City",
+      "aliases": [
+        "Carson City",
+        "Carson City"
+      ],
+      "pathEs": "/funerarias-cementerios/nevada/carson-city.html",
+      "pathEn": "/en/funeral-homes-cemeteries/nevada/carson-city.html",
+      "guideEs": "/estados/nevada/carson-city.html",
+      "guideEn": "/en/states/nevada/carson-city.html",
+      "sourceLineEs": "Walton’s Chapel of the Valley: GPL 26 feb. 2026 (cremación directa $1,695 y entierro inmediato $2,995, contenedor o ataúd del comprador). Paquetes Walton: memorial $3,480 y funeral tradicional $6,915, sin urna ni ataúd. Estimador: promedios Funeralocity de Nevada. Pida siempre la lista actual. No son precios de Mejor Vida Seguros.",
+      "sourceLineEn": "Walton’s Chapel of the Valley: GPL 26 Feb 2026 (direct cremation $1,695 and immediate burial $2,995, purchaser container or casket). Walton packages: memorial $3,480 and traditional funeral $6,915, with no urn or casket. Estimator: Nevada Funeralocity averages. Always ask for the current list. These are not Mejor Vida Insurance prices.",
+      "localHomes": [
+        {
+          "id": "valley",
+          "name": "Walton’s Chapel of the Valley",
+          "href": "https://www.waltonsfuneralhomes.com/waltons-chapel-of-the-valley-price-list/",
+          "address": "1281 N Roop St",
+          "phone": "775-882-4965",
+          "sourceEs": "Walton’s Chapel of the Valley: lista general de precios 26 feb. 2026 (cremación directa $1,695 y entierro inmediato $2,995, contenedor o ataúd del comprador). Paquetes Walton: memorial $3,480 y funeral tradicional $6,915, sin urna ni ataúd",
+          "sourceEn": "Walton’s Chapel of the Valley: general price list 26 Feb 2026 (direct cremation $1,695 and immediate burial $2,995, purchaser container or casket). Walton packages: memorial $3,480 and traditional funeral $6,915, with no urn or casket",
+          "gplDateEs": "26 feb. 2026",
+          "gplDateEn": "26 Feb 2026",
+          "gplKind": "gpl",
+          "packages": [
+            {
+              "id": "directCremation",
+              "labelEs": "Cremación directa",
+              "labelEn": "Direct cremation",
+              "amt": 1695,
+              "noteEs": "Cremación directa, contenedor del comprador (GPL 26 feb. 2026).",
+              "noteEn": "Direct cremation, purchaser container (GPL 26 Feb 2026)."
+            },
+            {
+              "id": "immediateBurial",
+              "labelEs": "Entierro inmediato",
+              "labelEn": "Immediate burial",
+              "amt": 2995,
+              "noteEs": "Entierro inmediato, ataúd del comprador. Lote aparte.",
+              "noteEn": "Immediate burial, purchaser casket. Plot extra."
+            },
+            {
+              "id": "memorialCremation",
+              "labelEs": "Cremación con memorial",
+              "labelEn": "Cremation with memorial",
+              "amt": 3480,
+              "noteEs": "Paquete Walton Memorial Service & Celebration of Life. Crematorio incluido. Urna aparte.",
+              "noteEn": "Walton Memorial Service & Celebration of Life package. Crematory included. Urn extra."
+            },
+            {
+              "id": "traditional",
+              "labelEs": "Funeral tradicional con velatorio",
+              "labelEn": "Traditional funeral with visitation",
+              "amt": 6915,
+              "noteEs": "Paquete Walton Traditional Funeral Service: velatorio y ceremonia. Ataúd y lote aparte.",
+              "noteEn": "Walton Traditional Funeral Service package: visitation and ceremony. Casket and plot extra."
+            }
+          ]
+        }
+      ],
+      "nearbyHomes": [],
+      "localCemeteries": [
+        {
+          "name": "Lone Mountain Cemetery",
+          "address": "1044 Beverly Dr.",
+          "phone": "775-887-2111",
+          "noteEs": "1044 Beverly Dr",
+          "noteEn": "1044 Beverly Dr"
+        }
+      ],
+      "nearbyCemeteries": [],
+      "other": [
+        {
+          "type": "plotResale",
+          "nameEs": "Anuncios de reventa de lotes",
+          "nameEn": "Private plot resale ads",
+          "href": "https://www.gravesolutions.com/for-sale/cemetery-properties/nevada"
+        }
+      ]
+    },
+    {
+      "slug": "henderson",
+      "kind": "hub",
+      "parentSlug": null,
+      "parentNameEs": "",
+      "parentNameEn": "",
+      "stateCode": "NV",
+      "stateSlug": "nevada",
+      "stateNameEs": "Nevada",
+      "stateNameEn": "Nevada",
+      "nameEs": "Henderson",
+      "nameEn": "Henderson",
+      "aliases": [
+        "Henderson",
+        "Henderson"
+      ],
+      "pathEs": "/funerarias-cementerios/nevada/henderson.html",
+      "pathEn": "/en/funeral-homes-cemeteries/nevada/henderson.html",
+      "guideEs": "/estados/nevada/henderson.html",
+      "guideEn": "/en/states/nevada/henderson.html",
+      "sourceLineEs": "Palm Boulder Highway publica en Dignity precios de partida de salón, lote, catering, urnas y ataúdes; no abre en internet la lista general con los cuatro paquetes. Estimador: promedios Funeralocity de Nevada. Pida siempre la lista actual. No son precios de Mejor Vida Seguros.",
+      "sourceLineEn": "Palm Boulder Highway’s Dignity page posts starting prices for venues, plots, catering, urns, and caskets; it does not open a general price list with the four packages. Estimator: Nevada Funeralocity averages. Always ask for the current list. These are not Mejor Vida Insurance prices.",
+      "localHomes": [
+        {
+          "id": "palm-boulder-highway-mortuary",
+          "name": "Palm Boulder Highway Mortuary",
+          "href": "https://www.dignitymemorial.com/funeral-homes/nevada/henderson/palm-boulder-highway-mortuary/1010",
+          "address": "800 S Boulder Hwy",
+          "phone": "702-464-8440",
+          "sourceEs": "",
+          "sourceEn": "",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "none",
+          "packages": []
+        },
+        {
+          "id": "metz-mortuary-henderson-henderson",
+          "name": "Metz Mortuary - Henderson",
+          "href": "https://metzmortuary.com/",
+          "address": "1048 North Main",
+          "phone": "402-362-3351",
+          "sourceEs": "Pida la lista general de precios vigente. La funeraria es la única fuente oficial.",
+          "sourceEn": "Ask the funeral home for its current general price list. That list is the only official price.",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "none",
+          "packages": []
+        }
+      ],
+      "nearbyHomes": [],
+      "localCemeteries": [
+        {
+          "name": "Palm Boulder Highway Mortuary &amp; Cemetery",
+          "address": "",
+          "phone": "702-464-8440",
+          "noteEs": "Palm Boulder Highway Mortuary & Cemetery — 800 S Boulder Hwy. . Césped y jardines desde $5,495",
+          "noteEn": "Palm Boulder Highway Mortuary & Cemetery — 800 S Boulder Hwy. . Lawn and garden spaces from $5,495"
+        }
+      ],
+      "nearbyCemeteries": [],
+      "other": [
+        {
+          "type": "plotResale",
+          "nameEs": "Anuncios de reventa de lotes",
+          "nameEn": "Private plot resale ads",
+          "href": "https://www.gravesolutions.com/for-sale/cemetery-properties/nevada"
+        }
+      ]
+    },
+    {
+      "slug": "las-vegas",
+      "kind": "hub",
+      "parentSlug": null,
+      "parentNameEs": "",
+      "parentNameEn": "",
+      "stateCode": "NV",
+      "stateSlug": "nevada",
+      "stateNameEs": "Nevada",
+      "stateNameEn": "Nevada",
+      "nameEs": "Las Vegas",
+      "nameEn": "Las Vegas",
+      "aliases": [
+        "Las Vegas",
+        "Las Vegas"
+      ],
+      "pathEs": "/funerarias-cementerios/nevada/las-vegas.html",
+      "pathEn": "/en/funeral-homes-cemeteries/nevada/las-vegas.html",
+      "guideEs": "/estados/nevada/las-vegas.html",
+      "guideEn": "/en/states/nevada/las-vegas.html",
+      "sourceLineEs": "Bunker's Eden Vale: GPL y paquetes, 2 feb. 2026 (cremación directa $2,365 y entierro inmediato $4,140, contenedor o ataúd del comprador). Memorial Basic Cremation $5,535 (incluye urna hasta $395). Funeral Simple Burial $9,900 (incluye ataúd sugerido). Palm Southwest: GPL y paquetes Dignity, 5 ago. 2026. Estimador: promedios Funeralocity de Nevada. Pida siempre la lista actual. No son precios de Mejor Vida Seguros.",
+      "sourceLineEn": "Bunker's Eden Vale: GPL and packages, 2 Feb 2026 (direct cremation $2,365 and immediate burial $4,140, purchaser container or casket). Basic Cremation memorial $5,535 (urn allowance up to $395). Simple Burial funeral $9,900 (suggested casket included). Palm Southwest: Dignity GPL and package list, 5 Aug 2026. Estimator: Nevada Funeralocity averages. Always ask for the current list. These are not Mejor Vida Insurance prices.",
+      "localHomes": [
+        {
+          "id": "bunkers",
+          "name": "Bunker's Eden Vale",
+          "href": "https://www.bunkerslv.com/general-price-list",
+          "address": "925 Las Vegas Blvd N",
+          "phone": "702-385-1441",
+          "sourceEs": "Bunker's Eden Vale: lista general de precios y paquetes, 2 feb. 2026 (cremación directa $2,365 y entierro inmediato $4,140, contenedor o ataúd del comprador). Memorial Basic Cremation $5,535 (incluye urna hasta $395). Funeral Simple Burial $9,900 (incluye ataúd sugerido)",
+          "sourceEn": "Bunker's Eden Vale: general price list and packages, 2 Feb 2026 (direct cremation $2,365 and immediate burial $4,140, purchaser container or casket). Basic Cremation memorial $5,535 (urn allowance up to $395). Simple Burial funeral $9,900 (suggested casket included)",
+          "gplDateEs": "2 feb. 2026",
+          "gplDateEn": "2 Feb 2026",
+          "gplKind": "gpl",
+          "packages": [
+            {
+              "id": "directCremation",
+              "labelEs": "Cremación directa",
+              "labelEn": "Direct cremation",
+              "amt": 2365,
+              "noteEs": "Cremación directa, contenedor del comprador (GPL 2 feb. 2026). Crematorio incluido.",
+              "noteEn": "Direct cremation, purchaser container (GPL 2 Feb 2026). Crematory included."
+            },
+            {
+              "id": "immediateBurial",
+              "labelEs": "Entierro inmediato",
+              "labelEn": "Immediate burial",
+              "amt": 4140,
+              "noteEs": "Entierro inmediato, ataúd del comprador. Lote aparte.",
+              "noteEn": "Immediate burial, purchaser casket. Plot extra."
+            },
+            {
+              "id": "memorialCremation",
+              "labelEs": "Cremación con memorial",
+              "labelEn": "Cremation with memorial",
+              "amt": 5535,
+              "noteEs": "Paquete Basic Cremation: memorial, contenedor Novato y urna hasta $395. Sin velatorio con cuerpo.",
+              "noteEn": "Basic Cremation package: memorial, Novato container, and urn allowance up to $395. No body present."
+            },
+            {
+              "id": "traditional",
+              "labelEs": "Funeral tradicional con velatorio",
+              "labelEn": "Traditional funeral with visitation",
+              "amt": 9900,
+              "noteEs": "Paquete Simple Burial: velatorio y ceremonia. Incluye ataúd sugerido. Lote aparte.",
+              "noteEn": "Simple Burial package: visitation and ceremony. Includes a suggested casket. Plot extra."
+            }
+          ]
+        },
+        {
+          "id": "palmsw",
+          "name": "Palm Southwest",
+          "href": "https://www.dignitymemorial.com/funeral-homes/nevada/las-vegas/palm-southwest-mortuary/5260/funeral-price-list",
+          "address": "7979 W Warm Springs Rd",
+          "phone": "702-260-0770",
+          "sourceEs": "Palm Southwest: lista general de precios y paquetes Dignity, 5 ago. 2026",
+          "sourceEn": "Palm Southwest: Dignity general price list and package list, 5 Aug 2026",
+          "gplDateEs": "5 ago. 2026",
+          "gplDateEn": "5 Aug 2026",
+          "gplKind": "gpl",
+          "packages": [
+            {
+              "id": "directCremation",
+              "labelEs": "Cremación directa",
+              "labelEn": "Direct cremation",
+              "amt": 2875,
+              "noteEs": "Cremación directa, contenedor del comprador (GPL 5 ago. 2026).",
+              "noteEn": "Direct cremation, purchaser container (GPL 5 Aug 2026)."
+            },
+            {
+              "id": "immediateBurial",
+              "labelEs": "Entierro inmediato",
+              "labelEn": "Immediate burial",
+              "amt": 4970,
+              "noteEs": "Entierro inmediato, ataúd del comprador. Lote aparte.",
+              "noteEn": "Immediate burial, purchaser casket. Plot extra."
+            },
+            {
+              "id": "memorialCremation",
+              "labelEs": "Cremación con memorial",
+              "labelEn": "Cremation with memorial",
+              "amt": 5260,
+              "noteEs": "Paquete Tribute de cremación: reunión sencilla, urna y contenedor Trayview. Sin velatorio con cuerpo.",
+              "noteEn": "Tribute cremation package: simple gathering, urn, and Trayview container. No body present."
+            },
+            {
+              "id": "traditional",
+              "labelEs": "Funeral tradicional con velatorio",
+              "labelEn": "Traditional funeral with visitation",
+              "amt": 16360,
+              "noteEs": "Paquete Tribute de funeral con velatorio. Incluye ataúd recomendado. Sin bóveda. Lote aparte.",
+              "noteEn": "Tribute funeral package with visitation. Includes a recommended casket. No vault. Plot extra."
+            }
+          ]
+        },
+        {
+          "id": "palm-eastern-mortuary",
+          "name": "Palm Eastern Mortuary",
+          "href": "https://www.dignitymemorial.com/funeral-homes/nevada/las-vegas/palm-eastern-mortuary/1009",
+          "address": "7600 S Eastern Ave",
+          "phone": "702-464-8500",
+          "sourceEs": "",
+          "sourceEn": "",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "none",
+          "packages": []
+        },
+        {
+          "id": "palm-northwest-mortuary",
+          "name": "Palm Northwest Mortuary",
+          "href": "https://www.dignitymemorial.com/funeral-homes/nevada/las-vegas/palm-northwest-mortuary/1011",
+          "address": "6701 N Jones Blvd",
+          "phone": "702-464-8460",
+          "sourceEs": "",
+          "sourceEn": "",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "none",
+          "packages": []
+        },
+        {
+          "id": "palm-downtown-mortuary",
+          "name": "Palm Downtown Mortuary",
+          "href": "https://www.dignitymemorial.com/funeral-homes/nevada/las-vegas/palm-downtown-mortuary",
+          "address": "1325 N Main St",
+          "phone": "702-464-8300",
+          "sourceEs": "",
+          "sourceEn": "",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "none",
+          "packages": []
+        },
+        {
+          "id": "palm-south-jones-mortuary",
+          "name": "Palm South Jones Mortuary",
+          "href": "https://www.dignitymemorial.com/funeral-homes/nevada/las-vegas/palm-south-jones-mortuary/1012",
+          "address": "1600 S Jones Blvd",
+          "phone": "702-464-8420",
+          "sourceEs": "",
+          "sourceEn": "",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "none",
+          "packages": []
+        },
+        {
+          "id": "palm-cheyenne-mortuary",
+          "name": "Palm Cheyenne Mortuary",
+          "href": "https://www.dignitymemorial.com/funeral-homes/nevada/las-vegas/palm-cheyenne-mortuary",
+          "address": "7400 W Cheyenne Ave",
+          "phone": "702-464-8480",
+          "sourceEs": "",
+          "sourceEn": "",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "none",
+          "packages": []
+        }
+      ],
+      "nearbyHomes": [],
+      "localCemeteries": [
+        {
+          "name": "Palm Eastern Mortuary &amp; Cemetery",
+          "address": "7600 S Eastern Ave.",
+          "phone": "702-464-8500",
+          "noteEs": "Palm Eastern Mortuary & Cemetery — 7600 S Eastern Ave",
+          "noteEn": "Palm Eastern Mortuary & Cemetery — 7600 S Eastern Ave"
+        },
+        {
+          "name": "Palm Downtown Mortuary",
+          "address": "1325 N Main St.",
+          "phone": "702-464-8300",
+          "noteEs": "1325 N Main St",
+          "noteEn": "1325 N Main St"
+        }
+      ],
+      "nearbyCemeteries": [],
+      "other": [
+        {
+          "type": "plotResale",
+          "nameEs": "Anuncios de reventa de lotes",
+          "nameEn": "Private plot resale ads",
+          "href": "https://www.gravesolutions.com/for-sale/cemetery-properties/nevada"
+        }
+      ]
+    },
+    {
+      "slug": "reno",
+      "kind": "hub",
+      "parentSlug": null,
+      "parentNameEs": "",
+      "parentNameEn": "",
+      "stateCode": "NV",
+      "stateSlug": "nevada",
+      "stateNameEs": "Nevada",
+      "stateNameEn": "Nevada",
+      "nameEs": "Reno",
+      "nameEn": "Reno",
+      "aliases": [
+        "Reno",
+        "Reno"
+      ],
+      "pathEs": "/funerarias-cementerios/nevada/reno.html",
+      "pathEn": "/en/funeral-homes-cemeteries/nevada/reno.html",
+      "guideEs": "/estados/nevada/reno.html",
+      "guideEn": "/en/states/nevada/reno.html",
+      "sourceLineEs": "Mountain View Mortuary: GPL 16 sep. 2026 (cremación directa $1,455 y entierro inmediato $2,695, contenedor o ataúd del comprador; el crematorio figura aparte a $350). No publica paquetes de memorial ni funeral tradicional. Walton’s Sierra Chapel, O’Brien Rogers & Crosby y Ross, Burke & Knobel: GPL de 6 páginas, 26 feb. 2026 (cremación directa $1,695 y entierro inmediato $2,995). Paquetes Walton: memorial $3,480 y funeral tradicional $6,915, sin urna ni ataúd. Estimador: promedios Funeralocity de Nevada. Pida siempre la lista actual. No son precios de Mejor Vida Seguros.",
+      "sourceLineEn": "Mountain View Mortuary: GPL 16 Sep 2026 (direct cremation $1,455 and immediate burial $2,695, purchaser container or casket; crematory listed separately at $350). It does not publish memorial or traditional packages. Walton’s Sierra Chapel, O’Brien Rogers & Crosby, and Ross, Burke & Knobel: 6-page GPL, 26 Feb 2026 (direct cremation $1,695 and immediate burial $2,995). Walton packages: memorial $3,480 and traditional funeral $6,915, with no urn or casket. Estimator: Nevada Funeralocity averages. Always ask for the current list. These are not Mejor Vida Insurance prices.",
+      "localHomes": [
+        {
+          "id": "sierra",
+          "name": "Walton’s Sierra Chapel",
+          "href": "https://www.waltonsfuneralhomes.com/waltons-sierra-chapel-price-list/",
+          "address": "875 W Second St",
+          "phone": "775-323-7189",
+          "sourceEs": "Walton’s Sierra Chapel, O’Brien Rogers &amp; Crosby y Ross, Burke &amp; Knobel: lista general de precios de 6 páginas, 26 feb. 2026 (cremación directa $1,695 y entierro inmediato $2,995). Paquetes Walton: memorial $3,480 y funeral tradicional $6,915, sin urna ni ataúd",
+          "sourceEn": "Walton’s Sierra Chapel, O’Brien Rogers &amp; Crosby, and Ross, Burke &amp; Knobel: 6-page general price list, 26 Feb 2026 (direct cremation $1,695 and immediate burial $2,995). Walton packages: memorial $3,480 and traditional funeral $6,915, with no urn or casket",
+          "gplDateEs": "26 feb. 2026",
+          "gplDateEn": "26 Feb 2026",
+          "gplKind": "gpl",
+          "packages": [
+            {
+              "id": "directCremation",
+              "labelEs": "Cremación directa",
+              "labelEn": "Direct cremation",
+              "amt": 1695,
+              "noteEs": "Cremación directa, contenedor del comprador (GPL 26 feb. 2026).",
+              "noteEn": "Direct cremation, purchaser container (GPL 26 Feb 2026)."
+            },
+            {
+              "id": "immediateBurial",
+              "labelEs": "Entierro inmediato",
+              "labelEn": "Immediate burial",
+              "amt": 2995,
+              "noteEs": "Entierro inmediato, ataúd del comprador. Lote aparte.",
+              "noteEn": "Immediate burial, purchaser casket. Plot extra."
+            },
+            {
+              "id": "memorialCremation",
+              "labelEs": "Cremación con memorial",
+              "labelEn": "Cremation with memorial",
+              "amt": 3480,
+              "noteEs": "Paquete Walton Memorial Service & Celebration of Life. Crematorio incluido. Urna aparte.",
+              "noteEn": "Walton Memorial Service & Celebration of Life package. Crematory included. Urn extra."
+            },
+            {
+              "id": "traditional",
+              "labelEs": "Funeral tradicional con velatorio",
+              "labelEn": "Traditional funeral with visitation",
+              "amt": 6915,
+              "noteEs": "Paquete Walton Traditional Funeral Service: velatorio y ceremonia. Ataúd y lote aparte.",
+              "noteEn": "Walton Traditional Funeral Service package: visitation and ceremony. Casket and plot extra."
+            }
+          ]
+        },
+        {
+          "id": "obrien",
+          "name": "Walton’s O’Brien Rogers & Crosby",
+          "href": "https://www.waltonsfuneralhomes.com/waltons-obrien-rogers-crosby-price-list/",
+          "address": "600 W Second St",
+          "phone": "775-323-6191",
+          "sourceEs": "Walton’s Sierra Chapel, O’Brien Rogers &amp; Crosby y Ross, Burke &amp; Knobel: lista general de precios de 6 páginas, 26 feb. 2026 (cremación directa $1,695 y entierro inmediato $2,995). Paquetes Walton: memorial $3,480 y funeral tradicional $6,915, sin urna ni ataúd",
+          "sourceEn": "Walton’s Sierra Chapel, O’Brien Rogers &amp; Crosby, and Ross, Burke &amp; Knobel: 6-page general price list, 26 Feb 2026 (direct cremation $1,695 and immediate burial $2,995). Walton packages: memorial $3,480 and traditional funeral $6,915, with no urn or casket",
+          "gplDateEs": "26 feb. 2026",
+          "gplDateEn": "26 Feb 2026",
+          "gplKind": "gpl",
+          "packages": [
+            {
+              "id": "directCremation",
+              "labelEs": "Cremación directa",
+              "labelEn": "Direct cremation",
+              "amt": 1695,
+              "noteEs": "Cremación directa, contenedor del comprador (GPL 26 feb. 2026).",
+              "noteEn": "Direct cremation, purchaser container (GPL 26 Feb 2026)."
+            },
+            {
+              "id": "immediateBurial",
+              "labelEs": "Entierro inmediato",
+              "labelEn": "Immediate burial",
+              "amt": 2995,
+              "noteEs": "Entierro inmediato, ataúd del comprador. Lote aparte.",
+              "noteEn": "Immediate burial, purchaser casket. Plot extra."
+            },
+            {
+              "id": "memorialCremation",
+              "labelEs": "Cremación con memorial",
+              "labelEn": "Cremation with memorial",
+              "amt": 3480,
+              "noteEs": "Paquete Walton Memorial Service & Celebration of Life. Crematorio incluido. Urna aparte.",
+              "noteEn": "Walton Memorial Service & Celebration of Life package. Crematory included. Urn extra."
+            },
+            {
+              "id": "traditional",
+              "labelEs": "Funeral tradicional con velatorio",
+              "labelEn": "Traditional funeral with visitation",
+              "amt": 6915,
+              "noteEs": "Paquete Walton Traditional Funeral Service: velatorio y ceremonia. Ataúd y lote aparte.",
+              "noteEn": "Walton Traditional Funeral Service package: visitation and ceremony. Casket and plot extra."
+            }
+          ]
+        },
+        {
+          "id": "rbk",
+          "name": "Ross, Burke & Knobel",
+          "href": "https://www.waltonsfuneralhomes.com/waltons-ross-burke-knobel-price-list/",
+          "address": "2155 Kietzke Ln",
+          "phone": "775-323-4154",
+          "sourceEs": "Ross, Burke &amp; Knobel: lista general de precios de 6 páginas, 26 feb. 2026 (cremación directa $1,695 y entierro inmediato $2,995). Paquetes Walton: memorial $3,480 y funeral tradicional $6,915, sin urna ni ataúd",
+          "sourceEn": "Ross, Burke &amp; Knobel: 6-page general price list, 26 Feb 2026 (direct cremation $1,695 and immediate burial $2,995). Walton packages: memorial $3,480 and traditional funeral $6,915, with no urn or casket",
+          "gplDateEs": "26 feb. 2026",
+          "gplDateEn": "26 Feb 2026",
+          "gplKind": "gpl",
+          "packages": [
+            {
+              "id": "directCremation",
+              "labelEs": "Cremación directa",
+              "labelEn": "Direct cremation",
+              "amt": 1695,
+              "noteEs": "Cremación directa, contenedor del comprador (GPL 26 feb. 2026).",
+              "noteEn": "Direct cremation, purchaser container (GPL 26 Feb 2026)."
+            },
+            {
+              "id": "immediateBurial",
+              "labelEs": "Entierro inmediato",
+              "labelEn": "Immediate burial",
+              "amt": 2995,
+              "noteEs": "Entierro inmediato, ataúd del comprador. Lote aparte.",
+              "noteEn": "Immediate burial, purchaser casket. Plot extra."
+            },
+            {
+              "id": "memorialCremation",
+              "labelEs": "Cremación con memorial",
+              "labelEn": "Cremation with memorial",
+              "amt": 3480,
+              "noteEs": "Paquete Walton Memorial Service & Celebration of Life. Crematorio incluido. Urna aparte.",
+              "noteEn": "Walton Memorial Service & Celebration of Life package. Crematory included. Urn extra."
+            },
+            {
+              "id": "traditional",
+              "labelEs": "Funeral tradicional con velatorio",
+              "labelEn": "Traditional funeral with visitation",
+              "amt": 6915,
+              "noteEs": "Paquete Walton Traditional Funeral Service: velatorio y ceremonia. Ataúd y lote aparte.",
+              "noteEn": "Walton Traditional Funeral Service package: visitation and ceremony. Casket and plot extra."
+            }
+          ]
+        },
+        {
+          "id": "mtnview",
+          "name": "Mountain View Mortuary",
+          "href": "https://www.mountainviewmortuary.net/services/pricing",
+          "address": "425 Stoker Ave",
+          "phone": "775-788-2199",
+          "sourceEs": "Mountain View Mortuary: lista general de precios 16 sep. 2026 (cremación directa $1,455 y entierro inmediato $2,695, contenedor o ataúd del comprador; el crematorio figura aparte a $350). No publica paquetes de memorial ni funeral tradicional",
+          "sourceEn": "Mountain View Mortuary: general price list 16 Sep 2026 (direct cremation $1,455 and immediate burial $2,695, purchaser container or casket; crematory listed separately at $350). It does not publish memorial or traditional packages",
+          "gplDateEs": "16 sep. 2026",
+          "gplDateEn": "16 Sep 2026",
+          "gplKind": "gpl",
+          "packages": [
+            {
+              "id": "directCremation",
+              "labelEs": "Cremación directa",
+              "labelEn": "Direct cremation",
+              "amt": 1455,
+              "noteEs": "Cremación directa, contenedor del comprador (GPL 16 sep. 2026). Crematorio aparte, $350.",
+              "noteEn": "Direct cremation, purchaser container (GPL 16 Sep 2026). Crematory extra, $350."
+            },
+            {
+              "id": "immediateBurial",
+              "labelEs": "Entierro inmediato",
+              "labelEn": "Immediate burial",
+              "amt": 2695,
+              "noteEs": "Entierro inmediato, ataúd del comprador. Lote aparte.",
+              "noteEn": "Immediate burial, purchaser casket. Plot extra."
+            },
+            {
+              "id": "memorialCremation",
+              "labelEs": "Cremación con memorial",
+              "labelEn": "Cremation with memorial",
+              "amt": 0,
+              "noteEs": "No figura en su lista publicada. Pida la lista vigente.",
+              "noteEn": "Not on their published list. Ask for the current list."
+            },
+            {
+              "id": "traditional",
+              "labelEs": "Funeral tradicional con velatorio",
+              "labelEn": "Traditional funeral with visitation",
+              "amt": 0,
+              "noteEs": "No figura en su lista publicada. Pida la lista vigente.",
+              "noteEn": "Not on their published list. Ask for the current list."
+            }
+          ]
+        }
+      ],
+      "nearbyHomes": [],
+      "localCemeteries": [
+        {
+          "name": "Mountain View Cemetery",
+          "address": "435 Stoker Ave.",
+          "phone": "775-329-9231",
+          "noteEs": "435 Stoker Ave",
+          "noteEn": "435 Stoker Ave"
+        }
+      ],
+      "nearbyCemeteries": [],
+      "other": [
+        {
+          "type": "plotResale",
+          "nameEs": "Anuncios de reventa de lotes",
+          "nameEn": "Private plot resale ads",
+          "href": "https://www.gravesolutions.com/for-sale/cemetery-properties/nevada"
+        }
+      ]
+    },
+    {
+      "slug": "sparks",
+      "kind": "hub",
+      "parentSlug": null,
+      "parentNameEs": "",
+      "parentNameEn": "",
+      "stateCode": "NV",
+      "stateSlug": "nevada",
+      "stateNameEs": "Nevada",
+      "stateNameEn": "Nevada",
+      "nameEs": "Sparks",
+      "nameEn": "Sparks",
+      "aliases": [
+        "Sparks",
+        "Sparks"
+      ],
+      "pathEs": "/funerarias-cementerios/nevada/sparks.html",
+      "pathEn": "/en/funeral-homes-cemeteries/nevada/sparks.html",
+      "guideEs": "/estados/nevada/sparks.html",
+      "guideEn": "/en/states/nevada/sparks.html",
+      "sourceLineEs": "Walton’s Sparks: GPL 26 feb. 2026 (cremación directa $1,695 y entierro inmediato $2,995, contenedor o ataúd del comprador). Paquetes Walton: memorial $3,480 y funeral tradicional $6,915, sin urna ni ataúd. Estimador: promedios Funeralocity de Nevada. Pida siempre la lista actual. No son precios de Mejor Vida Seguros.",
+      "sourceLineEn": "Walton’s Sparks: GPL 26 Feb 2026 (direct cremation $1,695 and immediate burial $2,995, purchaser container or casket). Walton packages: memorial $3,480 and traditional funeral $6,915, with no urn or casket. Estimator: Nevada Funeralocity averages. Always ask for the current list. These are not Mejor Vida Insurance prices.",
+      "localHomes": [
+        {
+          "id": "waltonsparks",
+          "name": "Walton’s Sparks",
+          "href": "https://www.waltonsfuneralhomes.com/waltons-sparks-price-list/",
+          "address": "1745 Sullivan Ln",
+          "phone": "775-359-2210",
+          "sourceEs": "Walton’s Sparks: lista general de precios 26 feb. 2026 (cremación directa $1,695 y entierro inmediato $2,995, contenedor o ataúd del comprador). Paquetes Walton: memorial $3,480 y funeral tradicional $6,915, sin urna ni ataúd",
+          "sourceEn": "Walton’s Sparks: general price list 26 Feb 2026 (direct cremation $1,695 and immediate burial $2,995, purchaser container or casket). Walton packages: memorial $3,480 and traditional funeral $6,915, with no urn or casket",
+          "gplDateEs": "26 feb. 2026",
+          "gplDateEn": "26 Feb 2026",
+          "gplKind": "gpl",
+          "packages": [
+            {
+              "id": "directCremation",
+              "labelEs": "Cremación directa",
+              "labelEn": "Direct cremation",
+              "amt": 1695,
+              "noteEs": "Cremación directa, contenedor del comprador (GPL 26 feb. 2026).",
+              "noteEn": "Direct cremation, purchaser container (GPL 26 Feb 2026)."
+            },
+            {
+              "id": "immediateBurial",
+              "labelEs": "Entierro inmediato",
+              "labelEn": "Immediate burial",
+              "amt": 2995,
+              "noteEs": "Entierro inmediato, ataúd del comprador. Lote aparte.",
+              "noteEn": "Immediate burial, purchaser casket. Plot extra."
+            },
+            {
+              "id": "memorialCremation",
+              "labelEs": "Cremación con memorial",
+              "labelEn": "Cremation with memorial",
+              "amt": 3480,
+              "noteEs": "Paquete Walton Memorial Service & Celebration of Life. Crematorio incluido. Urna aparte.",
+              "noteEn": "Walton Memorial Service & Celebration of Life package. Crematory included. Urn extra."
+            },
+            {
+              "id": "traditional",
+              "labelEs": "Funeral tradicional con velatorio",
+              "labelEn": "Traditional funeral with visitation",
+              "amt": 6915,
+              "noteEs": "Paquete Walton Traditional Funeral Service: velatorio y ceremonia. Ataúd y lote aparte.",
+              "noteEn": "Walton Traditional Funeral Service package: visitation and ceremony. Casket and plot extra."
+            }
+          ]
+        }
+      ],
+      "nearbyHomes": [],
+      "localCemeteries": [
+        {
+          "name": "Mountain View Cemetery",
+          "address": "435 Stoker Ave",
+          "phone": "775-329-9231",
+          "noteEs": "Reno",
+          "noteEn": "Reno"
+        }
+      ],
+      "nearbyCemeteries": [],
+      "other": [
+        {
+          "type": "plotResale",
+          "nameEs": "Anuncios de reventa de lotes",
+          "nameEn": "Private plot resale ads",
+          "href": "https://www.gravesolutions.com/for-sale/cemetery-properties/nevada"
         }
       ]
     }

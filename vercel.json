@@ -109,6 +109,16 @@
       "source": "/en/blog/naifa-life-settlement-alert-2026-07-11.html",
       "destination": "/en/blog/weekly-insurance-update-2026-07-12.html#story3",
       "permanent": false
+    },
+    {
+      "source": "/estados/nevada/north-las-vegas.html",
+      "destination": "/estados/nevada/las-vegas.html",
+      "permanent": true
+    },
+    {
+      "source": "/en/states/nevada/north-las-vegas.html",
+      "destination": "/en/states/nevada/las-vegas.html",
+      "permanent": true
     }
   ],
   "functions": {

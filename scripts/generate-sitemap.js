@@ -118,6 +118,12 @@ const STATIC_PAGES = [
   { loc: "/estados/colorado/boulder.html", priority: "0.86" },
   { loc: "/estados/colorado/greeley.html", priority: "0.86" },
   { loc: "/estados/colorado/grand-junction.html", priority: "0.86" },
+  { loc: "/estados/nevada.html", priority: "0.84" },
+  { loc: "/estados/nevada/las-vegas.html", priority: "0.86" },
+  { loc: "/estados/nevada/henderson.html", priority: "0.86" },
+  { loc: "/estados/nevada/reno.html", priority: "0.86" },
+  { loc: "/estados/nevada/sparks.html", priority: "0.86" },
+  { loc: "/estados/nevada/carson-city.html", priority: "0.86" },
 ];
 
 /** Standalone July articles redirect to the weekly digest — omit from sitemap. */

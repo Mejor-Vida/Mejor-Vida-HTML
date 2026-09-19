@@ -140,6 +140,47 @@ assert.ok(/Callahan/i.test(callahanDc), callahanDc);
 assert.ok(callahanDc.includes("$1,785"), callahanDc);
 assert.ok(!callahanDc.includes("$12,840"), callahanDc);
 
+const lasVegas = answerFuneralCostQuestion("How much does a funeral cost in Las Vegas?", {
+  isSpanish: false,
+});
+assert.ok(lasVegas, lasVegas);
+assert.ok(/Palm Southwest/i.test(lasVegas), lasVegas);
+assert.ok(/Bunker/i.test(lasVegas), lasVegas);
+assert.ok(lasVegas.includes("$2,365"), lasVegas);
+assert.ok(lasVegas.includes("$4,140"), lasVegas);
+assert.ok(lasVegas.includes("$2,875"), lasVegas);
+assert.ok(lasVegas.includes("$4,970"), lasVegas);
+assert.ok(lasVegas.includes("$5,260"), lasVegas);
+assert.ok(lasVegas.includes("$16,360"), lasVegas);
+assert.ok(/5 Aug 2026/i.test(lasVegas), lasVegas);
+assert.ok(!/Palm Eastern[\s\S]*\$2,875/.test(lasVegas));
+
+const northLasVegas = answerFuneralCostQuestion("How much does a funeral cost in North Las Vegas?", {
+  isSpanish: false,
+});
+assert.ok(northLasVegas, northLasVegas);
+assert.ok(/Bunker/i.test(northLasVegas) || /Palm Southwest/i.test(northLasVegas), northLasVegas);
+assert.ok(northLasVegas.includes("$2,365") || northLasVegas.includes("$2,875"), northLasVegas);
+
+const reno = answerFuneralCostQuestion("How much does a funeral cost in Reno?", { isSpanish: false });
+assert.ok(reno, reno);
+assert.ok(/Sierra Chapel/i.test(reno), reno);
+assert.ok(/Mountain View/i.test(reno), reno);
+assert.ok(reno.includes("$1,455"), reno);
+assert.ok(reno.includes("$1,695"), reno);
+assert.ok(reno.includes("$2,695"), reno);
+assert.ok(reno.includes("$2,995"), reno);
+assert.ok(/16 Sep 2026/i.test(reno), reno);
+assert.ok(/26 Feb 2026/i.test(reno), reno);
+
+const sparks = answerFuneralCostQuestion("How much is direct cremation in Sparks Nevada?", {
+  isSpanish: false,
+});
+assert.ok(sparks, sparks);
+assert.ok(/Walton/i.test(sparks), sparks);
+assert.ok(sparks.includes("$1,695"), sparks);
+assert.ok(!sparks.includes("$16,360"), sparks);
+
 const noCity = answerFuneralCostQuestion("How much does a funeral cost?", { isSpanish: false });
 assert.ok(/Which city/i.test(noCity), noCity);
 assert.ok(/funeral-homes-cemeteries/.test(noCity));
