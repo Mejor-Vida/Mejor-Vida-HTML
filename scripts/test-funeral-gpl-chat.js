@@ -60,6 +60,86 @@ assert.ok(lincoln, lincoln);
 assert.ok(/\$1,595|\$1,755|\$3,910|\$3,285/.test(lincoln), lincoln);
 assert.ok(/lincoln\.html/.test(lincoln));
 
+const denver = answerFuneralCostQuestion("How much does a funeral cost in Denver?", { isSpanish: false });
+assert.ok(denver, denver);
+assert.ok(/Newcomer West Metro/i.test(denver), denver);
+assert.ok(denver.includes("$1,690"), denver);
+assert.ok(/Olinger Hampden/i.test(denver), denver);
+assert.ok(denver.includes("$2,545"), denver);
+assert.ok(/denver\.html/.test(denver));
+assert.ok(!/Horan[\s\S]*\$1,/.test(denver));
+
+const pueblo = answerFuneralCostQuestion("How much is a funeral in Pueblo Colorado?", { isSpanish: false });
+assert.ok(pueblo, pueblo);
+assert.ok(/do not put named funeral-home prices|do not publish/i.test(pueblo), pueblo);
+assert.ok(/Montgomery/i.test(pueblo), pueblo);
+assert.ok(!pueblo.includes("$1,690"));
+
+const greeley = answerFuneralCostQuestion("How much does a funeral cost in Greeley?", { isSpanish: false });
+assert.ok(greeley, greeley);
+assert.ok(/Allnutt/i.test(greeley), greeley);
+assert.ok(greeley.includes("$3,875"), greeley);
+assert.ok(greeley.includes("$4,020"), greeley);
+assert.ok(greeley.includes("$6,105"), greeley);
+assert.ok(greeley.includes("$11,840"), greeley);
+assert.ok(/25 Jun 2026/i.test(greeley), greeley);
+assert.ok(!/Adamson[\s\S]*\$/.test(greeley));
+
+const fortCollins = answerFuneralCostQuestion("How much does a funeral cost in Fort Collins?", {
+  isSpanish: false,
+});
+assert.ok(fortCollins, fortCollins);
+assert.ok(/Goes Funeral Care/i.test(fortCollins), fortCollins);
+assert.ok(/Allnutt Drake/i.test(fortCollins), fortCollins);
+assert.ok(fortCollins.includes("$2,400"), fortCollins);
+assert.ok(fortCollins.includes("$3,905"), fortCollins);
+assert.ok(/25 Jun 2026/i.test(fortCollins), fortCollins);
+
+const coloradoSprings = answerFuneralCostQuestion("How much does a funeral cost in Colorado Springs?", {
+  isSpanish: false,
+});
+assert.ok(coloradoSprings, coloradoSprings);
+assert.ok(/All Veterans/i.test(coloradoSprings), coloradoSprings);
+assert.ok(coloradoSprings.includes("$1,595"), coloradoSprings);
+assert.ok(coloradoSprings.includes("$2,995"), coloradoSprings);
+assert.ok(/Evergreen/i.test(coloradoSprings), coloradoSprings);
+assert.ok(/3 Jun 2026/i.test(coloradoSprings), coloradoSprings);
+assert.ok(!/Shrine[\s\S]*\$/.test(coloradoSprings));
+
+const springsHome = answerFuneralCostQuestion("The Springs funeral prices", { isSpanish: false });
+assert.ok(springsHome, springsHome);
+assert.ok(/The Springs/i.test(springsHome), springsHome);
+assert.ok(/719-328-1793/.test(springsHome), springsHome);
+assert.ok(!springsHome.includes("$1,595"), springsHome);
+
+const aurora = answerFuneralCostQuestion("How much does a funeral cost in Aurora Colorado?", {
+  isSpanish: false,
+});
+assert.ok(aurora, aurora);
+assert.ok(/Newcomer East Metro/i.test(aurora), aurora);
+assert.ok(/Olinger Chapel Hill/i.test(aurora), aurora);
+assert.ok(aurora.includes("$3,045"), aurora);
+
+const grandJunction = answerFuneralCostQuestion("How much does a funeral cost in Grand Junction?", {
+  isSpanish: false,
+});
+assert.ok(grandJunction, grandJunction);
+assert.ok(/Callahan/i.test(grandJunction), grandJunction);
+assert.ok(/Martin Mortuary/i.test(grandJunction), grandJunction);
+assert.ok(grandJunction.includes("$1,785"), grandJunction);
+assert.ok(grandJunction.includes("$4,390"), grandJunction);
+assert.ok(grandJunction.includes("$3,915"), grandJunction);
+assert.ok(grandJunction.includes("$12,840"), grandJunction);
+assert.ok(/26 Feb 2026/i.test(grandJunction), grandJunction);
+
+const callahanDc = answerFuneralCostQuestion("How much is direct cremation in Grand Junction?", {
+  isSpanish: false,
+});
+assert.ok(callahanDc, callahanDc);
+assert.ok(/Callahan/i.test(callahanDc), callahanDc);
+assert.ok(callahanDc.includes("$1,785"), callahanDc);
+assert.ok(!callahanDc.includes("$12,840"), callahanDc);
+
 const noCity = answerFuneralCostQuestion("How much does a funeral cost?", { isSpanish: false });
 assert.ok(/Which city/i.test(noCity), noCity);
 assert.ok(/funeral-homes-cemeteries/.test(noCity));

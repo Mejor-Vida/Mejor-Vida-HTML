@@ -979,6 +979,44 @@ function citiesSection(code, lang) {
 </section>
 `;
   }
+  if (code === "CO") {
+    if (lang === "es") {
+      return `<section class="py-5 bg-light border-bottom" id="ciudades">
+  <div class="container" style="max-width:60rem;">
+    <h2 class="h4 fw-bold mb-3" style="color:#1a365d;">Ciudades en Colorado</h2>
+    <p class="text-body-secondary mb-3">Guías locales de seguro de gastos finales y de entierro. Denver, Aurora, Colorado Springs, Fort Collins, Pueblo, Boulder, Greeley y Grand Junction tienen página propia.</p>
+    <ul class="mb-0">
+      <li class="mb-2"><a href="colorado/denver.html">Denver</a> — seguro de gastos finales y de entierro, funerarias y lotes.</li>
+      <li class="mb-2"><a href="colorado/aurora.html">Aurora</a> — seguro de gastos finales y de entierro, funerarias y lotes.</li>
+      <li class="mb-2"><a href="colorado/colorado-springs.html">Colorado Springs</a> — seguro de gastos finales y de entierro, funerarias y lotes.</li>
+      <li class="mb-2"><a href="colorado/fort-collins.html">Fort Collins</a> — seguro de gastos finales y de entierro, funerarias y lotes.</li>
+      <li class="mb-2"><a href="colorado/pueblo.html">Pueblo</a> — seguro de gastos finales y de entierro, funerarias y lotes.</li>
+      <li class="mb-2"><a href="colorado/boulder.html">Boulder</a> — seguro de gastos finales y de entierro, funerarias y lotes.</li>
+      <li class="mb-2"><a href="colorado/greeley.html">Greeley</a> — seguro de gastos finales y de entierro, funerarias y lotes.</li>
+      <li class="mb-2"><a href="colorado/grand-junction.html">Grand Junction</a> — seguro de gastos finales y de entierro, funerarias y lotes.</li>
+    </ul>
+  </div>
+</section>
+`;
+    }
+    return `<section class="py-5 bg-light border-bottom" id="cities">
+  <div class="container" style="max-width:60rem;">
+    <h2 class="h4 fw-bold mb-3" style="color:#1a365d;">Cities in Colorado</h2>
+    <p class="text-body-secondary mb-3">Local final expense and burial insurance guides. Denver, Aurora, Colorado Springs, Fort Collins, Pueblo, Boulder, Greeley, and Grand Junction have their own pages.</p>
+    <ul class="mb-0">
+      <li class="mb-2"><a href="colorado/denver.html">Denver</a> — final expense and burial insurance, funeral homes, and plots.</li>
+      <li class="mb-2"><a href="colorado/aurora.html">Aurora</a> — final expense and burial insurance, funeral homes, and plots.</li>
+      <li class="mb-2"><a href="colorado/colorado-springs.html">Colorado Springs</a> — final expense and burial insurance, funeral homes, and plots.</li>
+      <li class="mb-2"><a href="colorado/fort-collins.html">Fort Collins</a> — final expense and burial insurance, funeral homes, and plots.</li>
+      <li class="mb-2"><a href="colorado/pueblo.html">Pueblo</a> — final expense and burial insurance, funeral homes, and plots.</li>
+      <li class="mb-2"><a href="colorado/boulder.html">Boulder</a> — final expense and burial insurance, funeral homes, and plots.</li>
+      <li class="mb-2"><a href="colorado/greeley.html">Greeley</a> — final expense and burial insurance, funeral homes, and plots.</li>
+      <li class="mb-2"><a href="colorado/grand-junction.html">Grand Junction</a> — final expense and burial insurance, funeral homes, and plots.</li>
+    </ul>
+  </div>
+</section>
+`;
+  }
   if (code !== "NE") return "";
   if (lang === "es") {
     return `<section class="py-5 bg-light border-bottom" id="ciudades">

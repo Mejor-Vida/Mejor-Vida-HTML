@@ -36,10 +36,10 @@ License proof stays in the **hero agent bar** only (this page’s state, NPN, Ve
 
 ## Package chart (required)
 
-- Named-home **columns only** for funeral homes that publish a **complete first-party general price list** (the home’s own site or PDF, or figures transcribed from that list). Plus the estimator column.
-- If no funeral home **in that city** publishes prices, use published lists from homes already named in that page’s **service area** (metro towns). Do not invent a named column from Funeralocity or a state average. If the service area also has no published list, the chart is **estimator-only**.
+- Named-home **columns** for funeral homes that publish a **first-party** general price list or package sheet (the home’s own site or PDF). Fill only the package rows that list publishes. Blank cells are allowed when that home does not publish that package. Plus the estimator column.
+- If no funeral home **in that city** publishes any of those four packages, use published lists from homes already named in that page’s **service area** (metro towns). Do not invent a named column from Funeralocity or a state average. If the service area also has no published list, the chart is **estimator-only**.
 - When the chart uses service-area homes, **list the city’s own funeral homes below the analysis cards** and tell readers to call for the current general price list. Do not put those homes on the price chart.
-- Every named home must **bury and cremate**. Every cell in a named-home column has a dollar amount from that home’s list. Do not use cremation-only homes that leave burial cells blank.
+- Every named home must **bury and cremate**. Do not invent a dollar amount for a blank cell. Do not use cremation-only homes as if they published burial packages.
 - Package **row** order, cheapest to most expensive: direct cremation → immediate burial → cremation with memorial → traditional funeral with visitation.
 - Source line under the table names each list’s effective date, or states that local homes do not publish a list. Then the comparison legal note. Do not invent a shorter substitute.
 

@@ -1332,6 +1332,38 @@
   object-position: center 30%;
 }
 
+.sc-hero--denver .sc-hero-visual img {
+  object-position: center 42%;
+}
+
+.sc-hero--aurora .sc-hero-visual img {
+  object-position: center 45%;
+}
+
+.sc-hero--colorado-springs .sc-hero-visual img {
+  object-position: center 40%;
+}
+
+.sc-hero--fort-collins .sc-hero-visual img {
+  object-position: center 35%;
+}
+
+.sc-hero--pueblo .sc-hero-visual img {
+  object-position: center 40%;
+}
+
+.sc-hero--boulder .sc-hero-visual img {
+  object-position: center 55%;
+}
+
+.sc-hero--greeley .sc-hero-visual img {
+  object-position: center 40%;
+}
+
+.sc-hero--grand-junction .sc-hero-visual img {
+  object-position: center 40%;
+}
+
 .sc-hero--city .sc-hero-shade {
   background: linear-gradient(
     90deg,

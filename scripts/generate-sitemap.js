@@ -109,6 +109,15 @@ const STATIC_PAGES = [
   { loc: "/estados/kansas/shawnee.html", priority: "0.86" },
   { loc: "/estados/kansas/lenexa.html", priority: "0.86" },
   { loc: "/estados/kansas/manhattan.html", priority: "0.86" },
+  { loc: "/estados/colorado.html", priority: "0.84" },
+  { loc: "/estados/colorado/denver.html", priority: "0.86" },
+  { loc: "/estados/colorado/aurora.html", priority: "0.86" },
+  { loc: "/estados/colorado/colorado-springs.html", priority: "0.86" },
+  { loc: "/estados/colorado/fort-collins.html", priority: "0.86" },
+  { loc: "/estados/colorado/pueblo.html", priority: "0.86" },
+  { loc: "/estados/colorado/boulder.html", priority: "0.86" },
+  { loc: "/estados/colorado/greeley.html", priority: "0.86" },
+  { loc: "/estados/colorado/grand-junction.html", priority: "0.86" },
 ];
 
 /** Standalone July articles redirect to the weekly digest — omit from sitemap. */

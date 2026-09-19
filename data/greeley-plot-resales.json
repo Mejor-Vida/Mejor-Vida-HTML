@@ -1,0 +1,26 @@
+{
+  "city": "greeley",
+  "checked": "2026-09-18",
+  "checkedLabelEs": "18 sep. 2026",
+  "checkedLabelEn": "18 Sep 2026",
+  "noteEs": "Anuncios de particulares. No son precios de Mejor Vida Seguros ni la lista oficial del cementerio. La oficina debe transferir la escritura. Revise si el anuncio sigue activo.",
+  "noteEn": "Private-party ads. These are not Mejor Vida Insurance prices or the cemetery’s official list. The office must transfer the deed. Check that the listing is still active.",
+  "boards": [
+    {
+      "id": "grave-solutions-city",
+      "name": "Grave Solutions",
+      "url": "https://www.gravesolutions.com/search?SiteState=CO&SiteCity=Greeley",
+      "labelEs": "Tablero en vivo · Greeley",
+      "labelEn": "Live board · Greeley"
+    },
+    {
+      "id": "grave-solutions",
+      "name": "Grave Solutions",
+      "url": "https://www.gravesolutions.com/for-sale/cemetery-properties/colorado",
+      "labelEs": "Tablero en vivo · Colorado",
+      "labelEn": "Live board · Colorado"
+    }
+  ],
+  "cemeterySignals": [],
+  "listings": []
+}

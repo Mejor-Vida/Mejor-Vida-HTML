@@ -11,6 +11,7 @@ const lincolnCity = require("./city-guides/lincoln");
 const omahaCity = require("./city-guides/omaha");
 const grandIslandCity = require("./city-guides/grand-island");
 const kansasCities = require("./city-guides/ks-cities");
+const coloradoCities = require("./city-guides/co-cities");
 
 const ROOT = path.join(__dirname, "..");
 const HEADER_ES = path.join(ROOT, "includes/site-header-inner.html");
@@ -19,7 +20,7 @@ const FOOTER_ES = path.join(ROOT, "includes/site-footer-inner.html");
 const FOOTER_EN = path.join(ROOT, "includes/en-site-footer.html");
 
 const NPN = "21695431";
-const CSS_VER = "20260918-ks-seo2";
+const CSS_VER = "20260918-co-allvets";
 
 const LICENSE = {
   NE: {
@@ -34,9 +35,15 @@ const LICENSE = {
     number: "21695431",
     code: "KS",
   },
+  CO: {
+    typeEs: "Productora no residente",
+    typeEn: "Non-resident producer",
+    number: "955378",
+    code: "CO",
+  },
 };
 
-const CITIES = [omahaCity, lincolnCity, grandIslandCity, ...kansasCities];
+const CITIES = [omahaCity, lincolnCity, grandIslandCity, ...kansasCities, ...coloradoCities];
 
 function esc(s) {
   return String(s)

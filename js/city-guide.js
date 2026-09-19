@@ -248,8 +248,9 @@
       var vaultOn = form.vault.checked;
       var extra = Number(form.extra.value) || 0;
       var gpl = CONFIG.gpl[home] || CONFIG.gpl.us || {};
-      var funeral = Object.prototype.hasOwnProperty.call(gpl, service)
-        ? gpl[service]
+      var hasPkg = Object.prototype.hasOwnProperty.call(gpl, service) && gpl[service] != null;
+      var funeral = hasPkg
+        ? Number(gpl[service])
         : (CONFIG.gpl.us && CONFIG.gpl.us[service]) || 0;
       var needsCasket = service === "immediateBurial" || service === "traditional";
       var bundled = homeIncludesCasket(home, service);

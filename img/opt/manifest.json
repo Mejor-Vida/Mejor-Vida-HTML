@@ -27,6 +27,222 @@
     "keepPng": false
   },
   {
+    "src": "img/omaha-bob-kerrey-bridge.jpg",
+    "base": "omaha-bob-kerrey-bridge",
+    "width": 1024,
+    "height": 591,
+    "webp": "img/opt/omaha-bob-kerrey-bridge.webp",
+    "fallback": "img/opt/omaha-bob-kerrey-bridge.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/omaha-bob-kerrey-bridge.jpg",
+    "base": "omaha-bob-kerrey-bridge-800",
+    "width": 800,
+    "height": 462,
+    "webp": "img/opt/omaha-bob-kerrey-bridge-800.webp",
+    "fallback": "img/opt/omaha-bob-kerrey-bridge-800.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/lincoln-state-capitol.jpg",
+    "base": "lincoln-state-capitol",
+    "width": 1024,
+    "height": 714,
+    "webp": "img/opt/lincoln-state-capitol.webp",
+    "fallback": "img/opt/lincoln-state-capitol.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/lincoln-state-capitol.jpg",
+    "base": "lincoln-state-capitol-800",
+    "width": 717,
+    "height": 500,
+    "webp": "img/opt/lincoln-state-capitol-800.webp",
+    "fallback": "img/opt/lincoln-state-capitol-800.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/grand-island-welcome-sign.jpg",
+    "base": "grand-island-welcome-sign",
+    "width": 1024,
+    "height": 633,
+    "webp": "img/opt/grand-island-welcome-sign.webp",
+    "fallback": "img/opt/grand-island-welcome-sign.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/grand-island-welcome-sign.jpg",
+    "base": "grand-island-welcome-sign-800",
+    "width": 800,
+    "height": 495,
+    "webp": "img/opt/grand-island-welcome-sign-800.webp",
+    "fallback": "img/opt/grand-island-welcome-sign-800.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/wichita-keeper-of-the-plains.jpg",
+    "base": "wichita-keeper-of-the-plains",
+    "width": 882,
+    "height": 900,
+    "webp": "img/opt/wichita-keeper-of-the-plains.webp",
+    "fallback": "img/opt/wichita-keeper-of-the-plains.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/wichita-keeper-of-the-plains.jpg",
+    "base": "wichita-keeper-of-the-plains-800",
+    "width": 490,
+    "height": 500,
+    "webp": "img/opt/wichita-keeper-of-the-plains-800.webp",
+    "fallback": "img/opt/wichita-keeper-of-the-plains-800.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/overland-park-deanna-rose.jpg",
+    "base": "overland-park-deanna-rose",
+    "width": 1200,
+    "height": 900,
+    "webp": "img/opt/overland-park-deanna-rose.webp",
+    "fallback": "img/opt/overland-park-deanna-rose.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/overland-park-deanna-rose.jpg",
+    "base": "overland-park-deanna-rose-800",
+    "width": 667,
+    "height": 500,
+    "webp": "img/opt/overland-park-deanna-rose-800.webp",
+    "fallback": "img/opt/overland-park-deanna-rose-800.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/kansas-city-ks-rosedale-arch.jpg",
+    "base": "kansas-city-ks-rosedale-arch",
+    "width": 600,
+    "height": 900,
+    "webp": "img/opt/kansas-city-ks-rosedale-arch.webp",
+    "fallback": "img/opt/kansas-city-ks-rosedale-arch.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/kansas-city-ks-rosedale-arch.jpg",
+    "base": "kansas-city-ks-rosedale-arch-800",
+    "width": 333,
+    "height": 500,
+    "webp": "img/opt/kansas-city-ks-rosedale-arch-800.webp",
+    "fallback": "img/opt/kansas-city-ks-rosedale-arch-800.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/olathe-mahaffie.jpg",
+    "base": "olathe-mahaffie",
+    "width": 1351,
+    "height": 900,
+    "webp": "img/opt/olathe-mahaffie.webp",
+    "fallback": "img/opt/olathe-mahaffie.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/olathe-mahaffie.jpg",
+    "base": "olathe-mahaffie-800",
+    "width": 751,
+    "height": 500,
+    "webp": "img/opt/olathe-mahaffie-800.webp",
+    "fallback": "img/opt/olathe-mahaffie-800.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/topeka-kansas-capitol.jpg",
+    "base": "topeka-kansas-capitol",
+    "width": 1600,
+    "height": 900,
+    "webp": "img/opt/topeka-kansas-capitol.webp",
+    "fallback": "img/opt/topeka-kansas-capitol.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/topeka-kansas-capitol.jpg",
+    "base": "topeka-kansas-capitol-800",
+    "width": 800,
+    "height": 450,
+    "webp": "img/opt/topeka-kansas-capitol-800.webp",
+    "fallback": "img/opt/topeka-kansas-capitol-800.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/lawrence-ku-campanile.jpg",
+    "base": "lawrence-ku-campanile",
+    "width": 602,
+    "height": 900,
+    "webp": "img/opt/lawrence-ku-campanile.webp",
+    "fallback": "img/opt/lawrence-ku-campanile.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/lawrence-ku-campanile.jpg",
+    "base": "lawrence-ku-campanile-800",
+    "width": 334,
+    "height": 500,
+    "webp": "img/opt/lawrence-ku-campanile-800.webp",
+    "fallback": "img/opt/lawrence-ku-campanile-800.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/shawnee-johnson-county-museum.jpg",
+    "base": "shawnee-johnson-county-museum",
+    "width": 1200,
+    "height": 900,
+    "webp": "img/opt/shawnee-johnson-county-museum.webp",
+    "fallback": "img/opt/shawnee-johnson-county-museum.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/shawnee-johnson-county-museum.jpg",
+    "base": "shawnee-johnson-county-museum-800",
+    "width": 667,
+    "height": 500,
+    "webp": "img/opt/shawnee-johnson-county-museum-800.webp",
+    "fallback": "img/opt/shawnee-johnson-county-museum-800.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/lenexa-city-center.jpg",
+    "base": "lenexa-city-center",
+    "width": 1600,
+    "height": 900,
+    "webp": "img/opt/lenexa-city-center.webp",
+    "fallback": "img/opt/lenexa-city-center.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/lenexa-city-center.jpg",
+    "base": "lenexa-city-center-800",
+    "width": 800,
+    "height": 450,
+    "webp": "img/opt/lenexa-city-center-800.webp",
+    "fallback": "img/opt/lenexa-city-center-800.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/manhattan-anderson-hall.jpg",
+    "base": "manhattan-anderson-hall",
+    "width": 825,
+    "height": 900,
+    "webp": "img/opt/manhattan-anderson-hall.webp",
+    "fallback": "img/opt/manhattan-anderson-hall.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/manhattan-anderson-hall.jpg",
+    "base": "manhattan-anderson-hall-800",
+    "width": 458,
+    "height": 500,
+    "webp": "img/opt/manhattan-anderson-hall-800.webp",
+    "fallback": "img/opt/manhattan-anderson-hall-800.jpg",
+    "keepPng": false
+  },
+  {
     "src": "img/hero-couple-embrace.png",
     "base": "hero-couple-embrace",
     "width": 681,
@@ -42,6 +258,60 @@
     "height": 720,
     "webp": "img/opt/hero-couple-embrace-480.webp",
     "fallback": "img/opt/hero-couple-embrace-480.png",
+    "keepPng": true
+  },
+  {
+    "src": "img/hero-couple-embrace-enhanced.png",
+    "base": "hero-couple-embrace-enhanced",
+    "width": 1362,
+    "height": 1652,
+    "webp": "img/opt/hero-couple-embrace-enhanced.webp",
+    "fallback": "img/opt/hero-couple-embrace-enhanced.png",
+    "keepPng": true
+  },
+  {
+    "src": "img/hero-couple-embrace-enhanced.png",
+    "base": "hero-couple-embrace-enhanced-681",
+    "width": 681,
+    "height": 826,
+    "webp": "img/opt/hero-couple-embrace-enhanced-681.webp",
+    "fallback": "img/opt/hero-couple-embrace-enhanced-681.png",
+    "keepPng": true
+  },
+  {
+    "src": "img/hero-couple-embrace-enhanced.png",
+    "base": "hero-couple-embrace-enhanced-480",
+    "width": 480,
+    "height": 582,
+    "webp": "img/opt/hero-couple-embrace-enhanced-480.webp",
+    "fallback": "img/opt/hero-couple-embrace-enhanced-480.png",
+    "keepPng": true
+  },
+  {
+    "src": "img/hero-couple-embrace-complete.png",
+    "base": "hero-couple-embrace-complete",
+    "width": 1189,
+    "height": 1314,
+    "webp": "img/opt/hero-couple-embrace-complete.webp",
+    "fallback": "img/opt/hero-couple-embrace-complete.png",
+    "keepPng": true
+  },
+  {
+    "src": "img/hero-couple-embrace-complete.png",
+    "base": "hero-couple-embrace-complete-681",
+    "width": 680,
+    "height": 752,
+    "webp": "img/opt/hero-couple-embrace-complete-681.webp",
+    "fallback": "img/opt/hero-couple-embrace-complete-681.png",
+    "keepPng": true
+  },
+  {
+    "src": "img/hero-couple-embrace-complete.png",
+    "base": "hero-couple-embrace-complete-480",
+    "width": 480,
+    "height": 530,
+    "webp": "img/opt/hero-couple-embrace-complete-480.webp",
+    "fallback": "img/opt/hero-couple-embrace-complete-480.png",
     "keepPng": true
   },
   {
@@ -74,8 +344,8 @@
   {
     "src": "img/fe-guide-card-que-es.jpg",
     "base": "fe-guide-card-que-es",
-    "width": 800,
-    "height": 600,
+    "width": 1200,
+    "height": 900,
     "webp": "img/opt/fe-guide-card-que-es.webp",
     "fallback": "img/opt/fe-guide-card-que-es.jpg",
     "keepPng": false
@@ -83,8 +353,8 @@
   {
     "src": "img/fe-guide-card-tipos.jpg",
     "base": "fe-guide-card-tipos",
-    "width": 800,
-    "height": 600,
+    "width": 1200,
+    "height": 900,
     "webp": "img/opt/fe-guide-card-tipos.webp",
     "fallback": "img/opt/fe-guide-card-tipos.jpg",
     "keepPng": false
@@ -92,8 +362,8 @@
   {
     "src": "img/fe-guide-card-cuanto-cuesta.jpg",
     "base": "fe-guide-card-cuanto-cuesta",
-    "width": 800,
-    "height": 600,
+    "width": 1200,
+    "height": 900,
     "webp": "img/opt/fe-guide-card-cuanto-cuesta.webp",
     "fallback": "img/opt/fe-guide-card-cuanto-cuesta.jpg",
     "keepPng": false
@@ -101,8 +371,8 @@
   {
     "src": "img/fe-guide-card-medicare.jpg",
     "base": "fe-guide-card-medicare",
-    "width": 800,
-    "height": 600,
+    "width": 1200,
+    "height": 900,
     "webp": "img/opt/fe-guide-card-medicare.webp",
     "fallback": "img/opt/fe-guide-card-medicare.jpg",
     "keepPng": false
@@ -110,8 +380,8 @@
   {
     "src": "img/fe-guide-card-diferencia.jpg",
     "base": "fe-guide-card-diferencia",
-    "width": 800,
-    "height": 600,
+    "width": 1200,
+    "height": 900,
     "webp": "img/opt/fe-guide-card-diferencia.webp",
     "fallback": "img/opt/fe-guide-card-diferencia.jpg",
     "keepPng": false
@@ -119,8 +389,8 @@
   {
     "src": "img/fe-guide-card-sin-seguro.jpg",
     "base": "fe-guide-card-sin-seguro",
-    "width": 800,
-    "height": 600,
+    "width": 1200,
+    "height": 900,
     "webp": "img/opt/fe-guide-card-sin-seguro.webp",
     "fallback": "img/opt/fe-guide-card-sin-seguro.jpg",
     "keepPng": false
@@ -128,8 +398,8 @@
   {
     "src": "img/fe-guide-card-polizas.jpg",
     "base": "fe-guide-card-polizas",
-    "width": 800,
-    "height": 600,
+    "width": 1200,
+    "height": 900,
     "webp": "img/opt/fe-guide-card-polizas.webp",
     "fallback": "img/opt/fe-guide-card-polizas.jpg",
     "keepPng": false
@@ -137,8 +407,8 @@
   {
     "src": "img/fe-guide-card-cuanta-cobertura.jpg",
     "base": "fe-guide-card-cuanta-cobertura",
-    "width": 800,
-    "height": 600,
+    "width": 1200,
+    "height": 900,
     "webp": "img/opt/fe-guide-card-cuanta-cobertura.webp",
     "fallback": "img/opt/fe-guide-card-cuanta-cobertura.jpg",
     "keepPng": false
@@ -146,8 +416,8 @@
   {
     "src": "img/fe-guide-card-factores-precio.jpg",
     "base": "fe-guide-card-factores-precio",
-    "width": 800,
-    "height": 600,
+    "width": 1200,
+    "height": 900,
     "webp": "img/opt/fe-guide-card-factores-precio.webp",
     "fallback": "img/opt/fe-guide-card-factores-precio.jpg",
     "keepPng": false
@@ -155,8 +425,8 @@
   {
     "src": "img/fe-guide-card-examen-medico.jpg",
     "base": "fe-guide-card-examen-medico",
-    "width": 800,
-    "height": 600,
+    "width": 1200,
+    "height": 900,
     "webp": "img/opt/fe-guide-card-examen-medico.webp",
     "fallback": "img/opt/fe-guide-card-examen-medico.jpg",
     "keepPng": false
@@ -164,8 +434,8 @@
   {
     "src": "img/fe-guide-card-problemas-salud.jpg",
     "base": "fe-guide-card-problemas-salud",
-    "width": 800,
-    "height": 600,
+    "width": 1200,
+    "height": 900,
     "webp": "img/opt/fe-guide-card-problemas-salud.webp",
     "fallback": "img/opt/fe-guide-card-problemas-salud.jpg",
     "keepPng": false
@@ -173,8 +443,8 @@
   {
     "src": "img/fe-guide-card-fumadores.jpg",
     "base": "fe-guide-card-fumadores",
-    "width": 800,
-    "height": 600,
+    "width": 1200,
+    "height": 900,
     "webp": "img/opt/fe-guide-card-fumadores.webp",
     "fallback": "img/opt/fe-guide-card-fumadores.jpg",
     "keepPng": false
@@ -182,8 +452,8 @@
   {
     "src": "img/fe-guide-card-edad.jpg",
     "base": "fe-guide-card-edad",
-    "width": 800,
-    "height": 600,
+    "width": 1200,
+    "height": 900,
     "webp": "img/opt/fe-guide-card-edad.webp",
     "fallback": "img/opt/fe-guide-card-edad.jpg",
     "keepPng": false
@@ -191,8 +461,8 @@
   {
     "src": "img/fe-guide-card-aprobacion.jpg",
     "base": "fe-guide-card-aprobacion",
-    "width": 800,
-    "height": 600,
+    "width": 1200,
+    "height": 900,
     "webp": "img/opt/fe-guide-card-aprobacion.webp",
     "fallback": "img/opt/fe-guide-card-aprobacion.jpg",
     "keepPng": false
@@ -200,8 +470,8 @@
   {
     "src": "img/fe-guide-card-companias.jpg",
     "base": "fe-guide-card-companias",
-    "width": 800,
-    "height": 600,
+    "width": 1200,
+    "height": 900,
     "webp": "img/opt/fe-guide-card-companias.webp",
     "fallback": "img/opt/fe-guide-card-companias.jpg",
     "keepPng": false
@@ -209,8 +479,8 @@
   {
     "src": "img/fe-guide-card-comparar-companias.jpg",
     "base": "fe-guide-card-comparar-companias",
-    "width": 800,
-    "height": 600,
+    "width": 1200,
+    "height": 900,
     "webp": "img/opt/fe-guide-card-comparar-companias.webp",
     "fallback": "img/opt/fe-guide-card-comparar-companias.jpg",
     "keepPng": false
@@ -218,8 +488,8 @@
   {
     "src": "img/fe-guide-card-vida-entero.jpg",
     "base": "fe-guide-card-vida-entero",
-    "width": 800,
-    "height": 600,
+    "width": 1200,
+    "height": 900,
     "webp": "img/opt/fe-guide-card-vida-entero.webp",
     "fallback": "img/opt/fe-guide-card-vida-entero.jpg",
     "keepPng": false
@@ -227,8 +497,8 @@
   {
     "src": "img/fe-guide-card-poliza-graduada.jpg",
     "base": "fe-guide-card-poliza-graduada",
-    "width": 800,
-    "height": 600,
+    "width": 1200,
+    "height": 900,
     "webp": "img/opt/fe-guide-card-poliza-graduada.webp",
     "fallback": "img/opt/fe-guide-card-poliza-graduada.jpg",
     "keepPng": false
@@ -236,8 +506,8 @@
   {
     "src": "img/fe-guide-card-deudas-medicas.jpg",
     "base": "fe-guide-card-deudas-medicas",
-    "width": 800,
-    "height": 600,
+    "width": 1200,
+    "height": 900,
     "webp": "img/opt/fe-guide-card-deudas-medicas.webp",
     "fallback": "img/opt/fe-guide-card-deudas-medicas.jpg",
     "keepPng": false
@@ -245,8 +515,8 @@
   {
     "src": "img/fe-guide-card-beneficio-familia.jpg",
     "base": "fe-guide-card-beneficio-familia",
-    "width": 800,
-    "height": 600,
+    "width": 1200,
+    "height": 900,
     "webp": "img/opt/fe-guide-card-beneficio-familia.webp",
     "fallback": "img/opt/fe-guide-card-beneficio-familia.jpg",
     "keepPng": false
@@ -254,8 +524,8 @@
   {
     "src": "img/fe-guide-card-periodo-carencia.jpg",
     "base": "fe-guide-card-periodo-carencia",
-    "width": 800,
-    "height": 600,
+    "width": 1200,
+    "height": 900,
     "webp": "img/opt/fe-guide-card-periodo-carencia.webp",
     "fallback": "img/opt/fe-guide-card-periodo-carencia.jpg",
     "keepPng": false
@@ -263,8 +533,8 @@
   {
     "src": "img/fe-guide-card-cancelar.jpg",
     "base": "fe-guide-card-cancelar",
-    "width": 800,
-    "height": 600,
+    "width": 1200,
+    "height": 900,
     "webp": "img/opt/fe-guide-card-cancelar.webp",
     "fallback": "img/opt/fe-guide-card-cancelar.jpg",
     "keepPng": false
@@ -272,8 +542,8 @@
   {
     "src": "img/fe-guide-card-mayores-70.jpg",
     "base": "fe-guide-card-mayores-70",
-    "width": 800,
-    "height": 600,
+    "width": 1200,
+    "height": 900,
     "webp": "img/opt/fe-guide-card-mayores-70.webp",
     "fallback": "img/opt/fe-guide-card-mayores-70.jpg",
     "keepPng": false
@@ -281,8 +551,8 @@
   {
     "src": "img/fe-guide-card-sin-examen-ne.jpg",
     "base": "fe-guide-card-sin-examen-ne",
-    "width": 800,
-    "height": 600,
+    "width": 1200,
+    "height": 900,
     "webp": "img/opt/fe-guide-card-sin-examen-ne.webp",
     "fallback": "img/opt/fe-guide-card-sin-examen-ne.jpg",
     "keepPng": false
@@ -290,8 +560,8 @@
   {
     "src": "img/fe-guide-card-10000.jpg",
     "base": "fe-guide-card-10000",
-    "width": 800,
-    "height": 600,
+    "width": 1200,
+    "height": 900,
     "webp": "img/opt/fe-guide-card-10000.webp",
     "fallback": "img/opt/fe-guide-card-10000.jpg",
     "keepPng": false
@@ -299,8 +569,8 @@
   {
     "src": "img/fe-guide-card-que-son-gastos.jpg",
     "base": "fe-guide-card-que-son-gastos",
-    "width": 800,
-    "height": 600,
+    "width": 1200,
+    "height": 900,
     "webp": "img/opt/fe-guide-card-que-son-gastos.webp",
     "fallback": "img/opt/fe-guide-card-que-son-gastos.jpg",
     "keepPng": false
@@ -308,8 +578,8 @@
   {
     "src": "img/fe-guide-card-cremacion-entierro.jpg",
     "base": "fe-guide-card-cremacion-entierro",
-    "width": 800,
-    "height": 600,
+    "width": 1200,
+    "height": 900,
     "webp": "img/opt/fe-guide-card-cremacion-entierro.webp",
     "fallback": "img/opt/fe-guide-card-cremacion-entierro.jpg",
     "keepPng": false
@@ -317,8 +587,8 @@
   {
     "src": "img/fe-guide-card-vs-prepago.jpg",
     "base": "fe-guide-card-vs-prepago",
-    "width": 800,
-    "height": 600,
+    "width": 1200,
+    "height": 900,
     "webp": "img/opt/fe-guide-card-vs-prepago.webp",
     "fallback": "img/opt/fe-guide-card-vs-prepago.jpg",
     "keepPng": false
@@ -421,6 +691,15 @@
     "webp": "img/opt/julie-headshot.webp",
     "fallback": "img/opt/julie-headshot.png",
     "keepPng": true
+  },
+  {
+    "src": "img/julie-omaha-portrait.jpg",
+    "base": "julie-omaha-portrait",
+    "width": 320,
+    "height": 320,
+    "webp": "img/opt/julie-omaha-portrait.webp",
+    "fallback": "img/opt/julie-omaha-portrait.jpg",
+    "keepPng": false
   },
   {
     "src": "img/julie-community-mothers-children.png",
@@ -573,6 +852,15 @@
     "height": 900,
     "webp": "img/opt/julie-promo-funeral-cost.webp",
     "fallback": "img/opt/julie-promo-funeral-cost.png",
+    "keepPng": true
+  },
+  {
+    "src": "img/julie-presenter-fullbody.png",
+    "base": "julie-presenter-fullbody",
+    "width": 720,
+    "height": 1080,
+    "webp": "img/opt/julie-presenter-fullbody.webp",
+    "fallback": "img/opt/julie-presenter-fullbody.png",
     "keepPng": true
   },
   {
@@ -1077,6 +1365,33 @@
     "height": 675,
     "webp": "img/opt/2-1-2026-Blog.webp",
     "fallback": "img/opt/2-1-2026-Blog.png",
+    "keepPng": true
+  },
+  {
+    "src": "img/facebook/mib-age-growth-fb-2026-09-13.png",
+    "base": "mib-age-growth-fb-2026-09-13",
+    "width": 1080,
+    "height": 1080,
+    "webp": "img/opt/mib-age-growth-fb-2026-09-13.webp",
+    "fallback": "img/opt/mib-age-growth-fb-2026-09-13.png",
+    "keepPng": true
+  },
+  {
+    "src": "img/blog-generated/weekly-insurance-update-2026-09-13/story-1.png",
+    "base": "story-1",
+    "width": 1080,
+    "height": 1080,
+    "webp": "img/opt/blog-generated/weekly-insurance-update-2026-09-13/story-1.webp",
+    "fallback": "img/opt/blog-generated/weekly-insurance-update-2026-09-13/story-1.png",
+    "keepPng": true
+  },
+  {
+    "src": "img/blog-generated/weekly-insurance-update-2026-09-13/story-2.png",
+    "base": "story-2",
+    "width": 1024,
+    "height": 682,
+    "webp": "img/opt/blog-generated/weekly-insurance-update-2026-09-13/story-2.webp",
+    "fallback": "img/opt/blog-generated/weekly-insurance-update-2026-09-13/story-2.png",
     "keepPng": true
   },
   {
@@ -2394,129 +2709,174 @@
     "keepPng": true
   },
   {
-    "src": "img/hero-couple-embrace-enhanced.png",
-    "base": "hero-couple-embrace-enhanced",
-    "width": 1362,
-    "height": 1652,
-    "webp": "img/opt/hero-couple-embrace-enhanced.webp",
-    "fallback": "img/opt/hero-couple-embrace-enhanced.png",
-    "keepPng": true
-  },
-  {
-    "src": "img/hero-couple-embrace-enhanced.png",
-    "base": "hero-couple-embrace-enhanced-681",
-    "width": 681,
-    "height": 826,
-    "webp": "img/opt/hero-couple-embrace-enhanced-681.webp",
-    "fallback": "img/opt/hero-couple-embrace-enhanced-681.png",
-    "keepPng": true
-  },
-  {
-    "src": "img/hero-couple-embrace-enhanced.png",
-    "base": "hero-couple-embrace-enhanced-480",
-    "width": 480,
-    "height": 582,
-    "webp": "img/opt/hero-couple-embrace-enhanced-480.webp",
-    "fallback": "img/opt/hero-couple-embrace-enhanced-480.png",
-    "keepPng": true
-  },
-  {
-    "src": "img/hero-couple-embrace-complete.png",
-    "base": "hero-couple-embrace-complete",
-    "width": 1189,
-    "height": 1314,
-    "webp": "img/opt/hero-couple-embrace-complete.webp",
-    "fallback": "img/opt/hero-couple-embrace-complete.png",
-    "keepPng": true
-  },
-  {
-    "src": "img/hero-couple-embrace-complete.png",
-    "base": "hero-couple-embrace-complete-681",
-    "width": 680,
-    "height": 752,
-    "webp": "img/opt/hero-couple-embrace-complete-681.webp",
-    "fallback": "img/opt/hero-couple-embrace-complete-681.png",
-    "keepPng": true
-  },
-  {
-    "src": "img/hero-couple-embrace-complete.png",
-    "base": "hero-couple-embrace-complete-480",
-    "width": 480,
-    "height": 530,
-    "webp": "img/opt/hero-couple-embrace-complete-480.webp",
-    "fallback": "img/opt/hero-couple-embrace-complete-480.png",
-    "keepPng": true
-  },
-  {
-    "src": "img/facebook/mib-age-growth-fb-2026-09-13.png",
-    "base": "mib-age-growth-fb-2026-09-13",
-    "width": 1080,
-    "height": 1080,
-    "webp": "img/opt/mib-age-growth-fb-2026-09-13.webp",
-    "fallback": "img/opt/mib-age-growth-fb-2026-09-13.png",
-    "keepPng": true
-  },
-  {
-    "src": "img/blog-generated/weekly-insurance-update-2026-09-13/story-1.png",
-    "base": "story-1",
-    "width": 1080,
-    "height": 1080,
-    "webp": "img/opt/blog-generated/weekly-insurance-update-2026-09-13/story-1.webp",
-    "fallback": "img/opt/blog-generated/weekly-insurance-update-2026-09-13/story-1.png",
-    "keepPng": true
-  },
-  {
-    "src": "img/blog-generated/weekly-insurance-update-2026-09-13/story-2.png",
-    "base": "story-2",
-    "width": 1024,
-    "height": 682,
-    "webp": "img/opt/blog-generated/weekly-insurance-update-2026-09-13/story-2.webp",
-    "fallback": "img/opt/blog-generated/weekly-insurance-update-2026-09-13/story-2.png",
-    "keepPng": true
-  },
-  {
-    "src": "img/omaha-bob-kerrey-bridge.jpg",
-    "base": "omaha-bob-kerrey-bridge",
-    "width": 1024,
-    "height": 591,
-    "webp": "img/opt/omaha-bob-kerrey-bridge.webp",
-    "fallback": "img/opt/omaha-bob-kerrey-bridge.jpg",
-    "keepPng": false
-  },
-  {
-    "src": "img/omaha-bob-kerrey-bridge.jpg",
-    "base": "omaha-bob-kerrey-bridge-800",
+    "src": "img/blog-generated/weekly-insurance-update-2026-09-13/hero-en.png",
+    "base": "hero-en",
     "width": 800,
-    "height": 462,
-    "webp": "img/opt/omaha-bob-kerrey-bridge-800.webp",
-    "fallback": "img/opt/omaha-bob-kerrey-bridge-800.jpg",
+    "height": 800,
+    "webp": "img/opt/blog-generated/weekly-insurance-update-2026-09-13/hero-en.webp",
+    "fallback": "img/opt/blog-generated/weekly-insurance-update-2026-09-13/hero-en.png",
+    "keepPng": true
+  },
+  {
+    "src": "img/blog-generated/weekly-insurance-update-2026-09-13/hero-es.png",
+    "base": "hero-es",
+    "width": 800,
+    "height": 800,
+    "webp": "img/opt/blog-generated/weekly-insurance-update-2026-09-13/hero-es.webp",
+    "fallback": "img/opt/blog-generated/weekly-insurance-update-2026-09-13/hero-es.png",
+    "keepPng": true
+  },
+  {
+    "src": "img/blog-generated/weekly-insurance-update-2026-09-13/story-3.png",
+    "base": "story-3",
+    "width": 600,
+    "height": 600,
+    "webp": "img/opt/blog-generated/weekly-insurance-update-2026-09-13/story-3.webp",
+    "fallback": "img/opt/blog-generated/weekly-insurance-update-2026-09-13/story-3.png",
+    "keepPng": true
+  },
+  {
+    "src": "img/denver-union-station.jpg",
+    "base": "denver-union-station",
+    "width": 1349,
+    "height": 900,
+    "webp": "img/opt/denver-union-station.webp",
+    "fallback": "img/opt/denver-union-station.jpg",
     "keepPng": false
   },
   {
-    "src": "img/julie-omaha-portrait.jpg",
-    "base": "julie-omaha-portrait",
-    "width": 320,
-    "height": 320,
-    "webp": "img/opt/julie-omaha-portrait.webp",
-    "fallback": "img/opt/julie-omaha-portrait.jpg",
-    "keepPng": false
-  },
-  {
-    "src": "img/lincoln-state-capitol.jpg",
-    "base": "lincoln-state-capitol",
-    "width": 1024,
-    "height": 714,
-    "webp": "img/opt/lincoln-state-capitol.webp",
-    "fallback": "img/opt/lincoln-state-capitol.jpg",
-    "keepPng": false
-  },
-  {
-    "src": "img/lincoln-state-capitol.jpg",
-    "base": "lincoln-state-capitol-800",
-    "width": 717,
+    "src": "img/denver-union-station.jpg",
+    "base": "denver-union-station-800",
+    "width": 749,
     "height": 500,
-    "webp": "img/opt/lincoln-state-capitol-800.webp",
-    "fallback": "img/opt/lincoln-state-capitol-800.jpg",
+    "webp": "img/opt/denver-union-station-800.webp",
+    "fallback": "img/opt/denver-union-station-800.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/aurora-municipal-center.jpg",
+    "base": "aurora-municipal-center",
+    "width": 1600,
+    "height": 793,
+    "webp": "img/opt/aurora-municipal-center.webp",
+    "fallback": "img/opt/aurora-municipal-center.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/aurora-municipal-center.jpg",
+    "base": "aurora-municipal-center-800",
+    "width": 800,
+    "height": 397,
+    "webp": "img/opt/aurora-municipal-center-800.webp",
+    "fallback": "img/opt/aurora-municipal-center-800.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/colorado-springs-garden-of-the-gods.jpg",
+    "base": "colorado-springs-garden-of-the-gods",
+    "width": 1350,
+    "height": 900,
+    "webp": "img/opt/colorado-springs-garden-of-the-gods.webp",
+    "fallback": "img/opt/colorado-springs-garden-of-the-gods.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/colorado-springs-garden-of-the-gods.jpg",
+    "base": "colorado-springs-garden-of-the-gods-800",
+    "width": 750,
+    "height": 500,
+    "webp": "img/opt/colorado-springs-garden-of-the-gods-800.webp",
+    "fallback": "img/opt/colorado-springs-garden-of-the-gods-800.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/fort-collins-old-town.jpg",
+    "base": "fort-collins-old-town",
+    "width": 1200,
+    "height": 900,
+    "webp": "img/opt/fort-collins-old-town.webp",
+    "fallback": "img/opt/fort-collins-old-town.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/fort-collins-old-town.jpg",
+    "base": "fort-collins-old-town-800",
+    "width": 667,
+    "height": 500,
+    "webp": "img/opt/fort-collins-old-town-800.webp",
+    "fallback": "img/opt/fort-collins-old-town-800.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/pueblo-riverwalk.jpg",
+    "base": "pueblo-riverwalk",
+    "width": 1350,
+    "height": 900,
+    "webp": "img/opt/pueblo-riverwalk.webp",
+    "fallback": "img/opt/pueblo-riverwalk.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/pueblo-riverwalk.jpg",
+    "base": "pueblo-riverwalk-800",
+    "width": 750,
+    "height": 500,
+    "webp": "img/opt/pueblo-riverwalk-800.webp",
+    "fallback": "img/opt/pueblo-riverwalk-800.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/boulder-flatirons.jpg",
+    "base": "boulder-flatirons",
+    "width": 1600,
+    "height": 865,
+    "webp": "img/opt/boulder-flatirons.webp",
+    "fallback": "img/opt/boulder-flatirons.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/boulder-flatirons.jpg",
+    "base": "boulder-flatirons-800",
+    "width": 800,
+    "height": 432,
+    "webp": "img/opt/boulder-flatirons-800.webp",
+    "fallback": "img/opt/boulder-flatirons-800.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/greeley-downtown.jpg",
+    "base": "greeley-downtown",
+    "width": 1350,
+    "height": 900,
+    "webp": "img/opt/greeley-downtown.webp",
+    "fallback": "img/opt/greeley-downtown.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/greeley-downtown.jpg",
+    "base": "greeley-downtown-800",
+    "width": 750,
+    "height": 500,
+    "webp": "img/opt/greeley-downtown-800.webp",
+    "fallback": "img/opt/greeley-downtown-800.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/grand-junction-independence-monument.jpg",
+    "base": "grand-junction-independence-monument",
+    "width": 1600,
+    "height": 886,
+    "webp": "img/opt/grand-junction-independence-monument.webp",
+    "fallback": "img/opt/grand-junction-independence-monument.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/grand-junction-independence-monument.jpg",
+    "base": "grand-junction-independence-monument-800",
+    "width": 800,
+    "height": 443,
+    "webp": "img/opt/grand-junction-independence-monument-800.webp",
+    "fallback": "img/opt/grand-junction-independence-monument-800.jpg",
     "keepPng": false
   }
 ]
