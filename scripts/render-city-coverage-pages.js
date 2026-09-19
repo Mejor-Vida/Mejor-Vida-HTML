@@ -21,7 +21,7 @@ const FOOTER_ES = path.join(ROOT, "includes/site-footer-inner.html");
 const FOOTER_EN = path.join(ROOT, "includes/en-site-footer.html");
 
 const NPN = "21695431";
-const CSS_VER = "20260918-nlv-fold";
+const CSS_VER = "20260919-nv-hero";
 
 const LICENSE = {
   NE: {
