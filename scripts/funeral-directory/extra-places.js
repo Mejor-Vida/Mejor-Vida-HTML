@@ -1,14 +1,14 @@
 /**
  * Directory-only cities (no full city-guide page yet).
- * Kansas is generated from the Kansas Board of Mortuary Arts roster.
- * Nebraska is generated from the NFDA member directory.
- * Colorado is generated from the DORA funeral establishment (FES) roster.
- * Nevada is generated from the Funeral Board EST/DC licensee PDFs.
+ * Generated *-places.js files from official/association harvests.
  * Do not invent GPL dollars.
  */
-const kansasPlaces = require("./kansas-places");
-const nebraskaPlaces = require("./nebraska-places");
-const coloradoPlaces = require("./colorado-places");
-const nevadaPlaces = require("./nevada-places");
+const fs = require("fs");
+const path = require("path");
 
-module.exports = [...kansasPlaces, ...nebraskaPlaces, ...coloradoPlaces, ...nevadaPlaces];
+const files = fs
+  .readdirSync(__dirname)
+  .filter((f) => /-places\.js$/.test(f) && !f.startsWith("build-") && f !== "extra-places.js")
+  .sort();
+
+module.exports = files.flatMap((file) => require(`./${file.replace(/\.js$/, "")}`));

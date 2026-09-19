@@ -10,18 +10,18 @@ const path = require("path");
 
 const ROOT = path.join(__dirname, "../..");
 const STATE = String(process.argv[2] || "").toLowerCase();
-const PLACE_FILES = {
-  kansas: "./kansas-places",
-  nebraska: "./nebraska-places",
-  colorado: "./colorado-places",
-  nevada: "./nevada-places",
-};
-if (!PLACE_FILES[STATE]) {
-  console.error("Usage: node scripts/funeral-directory/probe-gpls.js kansas|nebraska|colorado|nevada");
+const placeFile = path.join(__dirname, `${STATE}-places.js`);
+if (!STATE || !fs.existsSync(placeFile)) {
+  const known = fs
+    .readdirSync(__dirname)
+    .filter((f) => /-places\.js$/.test(f) && !f.startsWith("build-") && f !== "extra-places.js")
+    .map((f) => f.replace(/-places\.js$/, ""))
+    .join("|");
+  console.error(`Usage: node scripts/funeral-directory/probe-gpls.js ${known || "<state>"}`);
   process.exit(1);
 }
 
-const places = require(PLACE_FILES[STATE]);
+const places = require(`./${STATE}-places`);
 const OUT = path.join(ROOT, "data", `${STATE}-gpl-probe.json`);
 
 const UA =

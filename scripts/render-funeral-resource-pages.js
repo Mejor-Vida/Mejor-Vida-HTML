@@ -10,7 +10,7 @@ const { writeFuneralResourceIndex } = require("../lib/funeral-resource-index");
 const html = require("../lib/funeral-directory-html");
 
 const ROOT = path.join(__dirname, "..");
-const CSS_VER = "20260919-dir15";
+const CSS_VER = "20260919-dir17";
 const HEADER_ES = path.join(ROOT, "includes/site-header-inner.html");
 const HEADER_EN = path.join(ROOT, "includes/en-site-header.html");
 const FOOTER_ES = path.join(ROOT, "includes/site-footer-inner.html");
