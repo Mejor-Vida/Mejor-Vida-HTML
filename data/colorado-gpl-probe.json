@@ -1,0 +1,1116 @@
+{
+  "updated": "2026-09-19",
+  "sites": 48,
+  "promising": 11,
+  "withHints": 5,
+  "results": [
+    {
+      "host": "bowinfuneralhome.com",
+      "href": "https://www.bowinfuneralhome.com/",
+      "names": [
+        "Bowin Funeral Homes Inc"
+      ],
+      "ids": [
+        "bowin-funeral-homes-inc-akron"
+      ],
+      "cities": [
+        "Akron"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.bowinfuneralhome.com/",
+      "links": [
+        {
+          "href": "https://www.bowinfuneralhome.com/gpl",
+          "text": "General Price List"
+        }
+      ],
+      "followed": "https://www.bowinfuneralhome.com/gpl",
+      "mentionsGpl": true,
+      "hints": []
+    },
+    {
+      "host": "coloradocrematory.com",
+      "href": "https://www.coloradocrematory.com",
+      "names": [
+        "Malesich and Shirey Funeral Home"
+      ],
+      "ids": [
+        "malesich-and-shirey-funeral-home-arvada"
+      ],
+      "cities": [
+        "Arvada"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.malesichandshirey.com/",
+      "links": [
+        {
+          "href": "https://www.malesichandshirey.com/pricing",
+          "text": "Pricing"
+        },
+        {
+          "href": "https://www.malesichandshirey.com/services/general-price-list",
+          "text": "General Price List"
+        }
+      ],
+      "followed": "https://www.malesichandshirey.com/services/general-price-list",
+      "mentionsGpl": true,
+      "hints": []
+    },
+    {
+      "host": "neptunesociety.com",
+      "href": "https://www.neptunesociety.com/location/denver-cremation?utm_source=gmb&amp;utm_medium=organic&amp;utm_campaign=web-button-1903",
+      "names": [
+        "Neptune Society"
+      ],
+      "ids": [
+        "neptune-society-arvada"
+      ],
+      "cities": [
+        "Arvada"
+      ],
+      "status": 403,
+      "error": "",
+      "finalUrl": "https://www.neptunesociety.com/location/denver-cremation?utm_source=gmb&amp;utm_medium=organic&amp;utm_campaign=web-button-1903",
+      "links": [],
+      "followed": "",
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "abbottfuneralservices.com",
+      "href": "https://www.abbottfuneralservices.com",
+      "names": [
+        "Abbott Funeral Services"
+      ],
+      "ids": [
+        "abbott-funeral-services-aurora"
+      ],
+      "cities": [
+        "Aurora"
+      ],
+      "status": 403,
+      "error": "",
+      "finalUrl": "https://www.abbottfuneralservices.com/",
+      "links": [],
+      "followed": "",
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "harrisfuneraldirectors.com",
+      "href": "https://www.harrisfuneraldirectors.com",
+      "names": [
+        "Harris Funeral Directors"
+      ],
+      "ids": [
+        "harris-funeral-directors-aurora"
+      ],
+      "cities": [
+        "Aurora"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.harrisfuneraldirectors.com/",
+      "links": [
+        {
+          "href": "https://www.harrisfuneraldirectors.com/pricing---packages",
+          "text": "PRICING &amp; PACKAGES"
+        }
+      ],
+      "followed": "https://www.harrisfuneraldirectors.com/pricing---packages",
+      "mentionsGpl": true,
+      "hints": [
+        "Direct Cremation $995",
+        "Direct cremation with alternative container provided by purchaser $1,625",
+        "Immediate burial with casket provided by the purchaser $3,500"
+      ]
+    },
+    {
+      "host": "dignitymemorial.com",
+      "href": "https://www.dignitymemorial.com",
+      "names": [
+        "Crist Mortuary",
+        "Olinger Andrews Caldwell Gibson Funeral Home",
+        "Olinger Chapel Hill Mortuary and Cemetary",
+        "Advantage Funeral & Cremation/Chapel of Memories",
+        "Mountain View Mortuary",
+        "Swan-Law Funeral Directors",
+        "Grant Mortuary Inc.",
+        "Dove-Witt Family Mortuary",
+        "Martin Mortuary and Crematory",
+        "Allnutt Funeral Service",
+        "Stoddard Funeral Home",
+        "Western Colorado Funeral Service LLC dba Grant Mortuary",
+        "Olinger Highland Mortuary & Cemetery"
+      ],
+      "ids": [
+        "crist-mortuary-boulder",
+        "olinger-andrews-caldwell-gibson-funeral-home-cas",
+        "olinger-chapel-hill-mortuary-and-cemetary-centen",
+        "advantage-funeral-cremation-chapel-of-memories-c",
+        "mountain-view-mortuary-colorado-springs",
+        "swan-law-funeral-directors-colorado-springs",
+        "grant-mortuary-inc-craig",
+        "dove-witt-family-mortuary-fountain",
+        "martin-mortuary-and-crematory-grand-junction",
+        "allnutt-funeral-service-greeley",
+        "stoddard-funeral-home-greeley",
+        "western-colorado-funeral-service-llc-dba-grant-m",
+        "olinger-highland-mortuary-cemetery-thornton"
+      ],
+      "cities": [
+        "Boulder",
+        "Castle Rock",
+        "Centennial",
+        "Colorado Springs",
+        "Craig",
+        "Fountain",
+        "Grand Junction",
+        "Greeley",
+        "Meeker",
+        "Thornton"
+      ],
+      "status": 403,
+      "error": "",
+      "finalUrl": "https://www.dignitymemorial.com/",
+      "links": [],
+      "followed": "",
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "murphyfuneraldirectors.com",
+      "href": "https://www.murphyfuneraldirectors.com/",
+      "names": [
+        "M.P. Murphy & Associates Funeral Directors"
+      ],
+      "ids": [
+        "m-p-murphy-associates-funeral-directors-boulder"
+      ],
+      "cities": [
+        "Boulder"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.murphyfuneraldirectors.com/",
+      "links": [],
+      "followed": "",
+      "mentionsGpl": true,
+      "hints": []
+    },
+    {
+      "host": "rundus.com",
+      "href": "https://www.rundus.com",
+      "names": [
+        "Rundus Funeral Home & Crematory"
+      ],
+      "ids": [
+        "rundus-funeral-home-crematory-broomfield"
+      ],
+      "cities": [
+        "Broomfield"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.rundus.com/",
+      "links": [],
+      "followed": "",
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "brownfuneraldirectors.com",
+      "href": "https://www.brownfuneraldirectors.com",
+      "names": [
+        "Brown Funeral Home"
+      ],
+      "ids": [
+        "brown-funeral-home-burlington",
+        "brown-funeral-home-cheyenne-wells",
+        "brown-funeral-home-eads"
+      ],
+      "cities": [
+        "Burlington",
+        "Cheyenne Wells",
+        "Eads"
+      ],
+      "status": 403,
+      "error": "",
+      "finalUrl": "https://www.brownfuneraldirectors.com/",
+      "links": [],
+      "followed": "",
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "lovefuneralhomes.com",
+      "href": "https://lovefuneralhomes.com/",
+      "names": [
+        "Love Funeral Home, Inc."
+      ],
+      "ids": [
+        "love-funeral-home-inc-burlington"
+      ],
+      "cities": [
+        "Burlington"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.lovefuneralhomes.com/",
+      "links": [],
+      "followed": "",
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "harwoodfunerals.com",
+      "href": "https://www.harwoodfunerals.com",
+      "names": [
+        "Harwood Cremation and Funeral Service"
+      ],
+      "ids": [
+        "harwood-cremation-and-funeral-service-canon-city"
+      ],
+      "cities": [
+        "Cañon City"
+      ],
+      "status": 403,
+      "error": "",
+      "finalUrl": "https://www.harwoodfunerals.com/",
+      "links": [],
+      "followed": "",
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "holtfamilyfuneralhome.com",
+      "href": "https://www.holtfamilyfuneralhome.com",
+      "names": [
+        "Holt Family Funeral Home",
+        "Holt Family Funeral Home DBA: Wilson Funeral Home",
+        "Florence Mortuary"
+      ],
+      "ids": [
+        "holt-family-funeral-home-canon-city",
+        "holt-family-funeral-home-dba-wilson-funeral-home",
+        "florence-mortuary-florence"
+      ],
+      "cities": [
+        "Cañon City",
+        "Florence"
+      ],
+      "status": 403,
+      "error": "",
+      "finalUrl": "https://www.holtfamilyfuneralhome.com/",
+      "links": [],
+      "followed": "",
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "crematecolorado.com",
+      "href": "https://www.crematecolorado.com/colorado/",
+      "names": [
+        "Alternative Cremations, LLC",
+        "Affordable Crematory"
+      ],
+      "ids": [
+        "alternative-cremations-llc-colorado-springs",
+        "affordable-crematory-colorado-springs"
+      ],
+      "cities": [
+        "Colorado Springs"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://crematecolorado.com/colorado/",
+      "links": [
+        {
+          "href": "https://crematecolorado.com/wp-content/uploads/urn-flyer.pdf",
+          "text": "PDF"
+        },
+        {
+          "href": "https://crematecolorado.com/wp-content/uploads/prayer-card-21.pdf",
+          "text": "PDF"
+        },
+        {
+          "href": "https://crematecolorado.com/wp-content/uploads/servcie-folder.pdf",
+          "text": "PDF"
+        },
+        {
+          "href": "https://crematecolorado.com/wp-content/uploads/Crescent-Memorial.pdf",
+          "text": "PDF"
+        },
+        {
+          "href": "https://crematecolorado.com/wp-content/uploads/jewelry-flyer.pdf",
+          "text": "PDF"
+        }
+      ],
+      "followed": "https://crematecolorado.com/wp-content/uploads/urn-flyer.pdf",
+      "mentionsGpl": true,
+      "hints": [
+        "Direct Cremation but includes 2 Death Certificates and 1 504",
+        "Memorial Service Packages Memorial Service $2,100",
+        "Memorial Service with Reception $3,100",
+        "followed link is PDF"
+      ]
+    },
+    {
+      "host": "shrineofremembrance.com",
+      "href": "https://www.shrineofremembrance.com/",
+      "names": [
+        "Shrine of Remembrance"
+      ],
+      "ids": [
+        "shrine-of-remembrance-colorado-springs"
+      ],
+      "cities": [
+        "Colorado Springs"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.shrineofremembrance.com/",
+      "links": [
+        {
+          "href": "https://www.shrineofremembrance.com/our-services/general-price-list/",
+          "text": "General Price List"
+        }
+      ],
+      "followed": "https://www.shrineofremembrance.com/our-services/general-price-list/",
+      "mentionsGpl": true,
+      "hints": []
+    },
+    {
+      "host": "angelusfuneraldirectors.com",
+      "href": "https://www.angelusfuneraldirectors.com",
+      "names": [
+        "Angelus Funeral Directors, Inc."
+      ],
+      "ids": [
+        "angelus-funeral-directors-inc-colorado-springs"
+      ],
+      "cities": [
+        "Colorado Springs"
+      ],
+      "status": 403,
+      "error": "",
+      "finalUrl": "https://www.angelusfuneraldirectors.com/",
+      "links": [],
+      "followed": "",
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "evergreenfuneralhome.com",
+      "href": "https://www.evergreenfuneralhome.com",
+      "names": [
+        "Evergreen Funeral Home"
+      ],
+      "ids": [
+        "evergreen-funeral-home-colorado-springs"
+      ],
+      "cities": [
+        "Colorado Springs"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.evergreenfuneralhome.com/",
+      "links": [],
+      "followed": "",
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "bing.com",
+      "href": "https://www.bing.com/search?q=simply+cremation+colorado+springs&amp;cvid=11ec0160b0f4438d97dfb3b0f934db32&amp;aqs=edge.0.69i59j0j69i57j69i59j0l5.3534j0j1&amp;pglt=515&amp;FORM=ANNTA1&amp;PC=U531",
+      "names": [
+        "Simply Cremation and Funeral Services"
+      ],
+      "ids": [
+        "simply-cremation-and-funeral-services-colorado-s"
+      ],
+      "cities": [
+        "Colorado Springs"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.bing.com/search?q=simply+cremation+colorado+springs&amp;cvid=11ec0160b0f4438d97dfb3b0f934db32&amp;aqs=edge.0.69i59j0j69i57j69i59j0l5.3534j0j1&amp;pglt=515&amp;FORM=ANNTA1&amp;PC=U531",
+      "links": [],
+      "followed": "",
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "cfcscolorado.org",
+      "href": "https://www.cfcscolorado.org",
+      "names": [
+        "The Archdiocese of Denver Mortuary at Mount Olivet, Inc."
+      ],
+      "ids": [
+        "the-archdiocese-of-denver-mortuary-at-mount-oliv"
+      ],
+      "cities": [
+        "Denver"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.cfcscolorado.org/",
+      "links": [],
+      "followed": "",
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "abplace-funeral-cremation.com",
+      "href": "https://www.abplace-funeral-cremation.com/",
+      "names": [
+        "A Better Place Funeral"
+      ],
+      "ids": [
+        "a-better-place-funeral-denver"
+      ],
+      "cities": [
+        "Denver"
+      ],
+      "status": 403,
+      "error": "",
+      "finalUrl": "https://www.abplace-funeral-cremation.com/",
+      "links": [],
+      "followed": "",
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "ballardfamilymortuaryllc.com",
+      "href": "https://www.ballardfamilymortuaryllc.com/",
+      "names": [
+        "Ballard Family Mortuary"
+      ],
+      "ids": [
+        "ballard-family-mortuary-denver"
+      ],
+      "cities": [
+        "Denver"
+      ],
+      "status": 403,
+      "error": "",
+      "finalUrl": "https://www.ballardfamilymortuaryllc.com/",
+      "links": [],
+      "followed": "",
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "beatreecremation.com",
+      "href": "https://www.beatreecremation.com/",
+      "names": [
+        "Be a Tree Cremation, LLC"
+      ],
+      "ids": [
+        "be-a-tree-cremation-llc-denver"
+      ],
+      "cities": [
+        "Denver"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.beatreecremation.com/",
+      "links": [
+        {
+          "href": "https://www.beatreecremation.com/pricing",
+          "text": "PRICING"
+        }
+      ],
+      "followed": "https://www.beatreecremation.com/pricing",
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "coloradomortuaryservices.com",
+      "href": "https://www.coloradomortuaryservices.com/",
+      "names": [
+        "Colorado Mortuary Services"
+      ],
+      "ids": [
+        "colorado-mortuary-services-denver"
+      ],
+      "cities": [
+        "Denver"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.coloradomortuaryservices.com/",
+      "links": [],
+      "followed": "",
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "coloradomuslimsociety.org",
+      "href": "https://coloradomuslimsociety.org/janazah/",
+      "names": [
+        "Colorado Muslim Society"
+      ],
+      "ids": [
+        "colorado-muslim-society-denver"
+      ],
+      "cities": [
+        "Denver"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://coloradomuslimsociety.org/janazah/",
+      "links": [],
+      "followed": "",
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "feldmanmortuary.com",
+      "href": "https://www.feldmanmortuary.com",
+      "names": [
+        "Feldman Mortuary, Inc."
+      ],
+      "ids": [
+        "feldman-mortuary-inc-denver"
+      ],
+      "cities": [
+        "Denver"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://feldmanmortuary.com/home/",
+      "links": [],
+      "followed": "",
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "tworiverscremation.com",
+      "href": "https://www.tworiverscremation.com/",
+      "names": [
+        "Two Rivers Cremation"
+      ],
+      "ids": [
+        "two-rivers-cremation-denver"
+      ],
+      "cities": [
+        "Denver"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.tworiverscremation.com/",
+      "links": [],
+      "followed": "",
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "evergreenmemorailpark.com",
+      "href": "https://www.evergreenmemorailpark.com",
+      "names": [
+        "Evergreen Memorial Park, Inc."
+      ],
+      "ids": [
+        "evergreen-memorial-park-inc-evergreen"
+      ],
+      "cities": [
+        "Evergreen"
+      ],
+      "status": 0,
+      "error": "fetch failed",
+      "finalUrl": "",
+      "links": [],
+      "followed": "",
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "farnumholtfuneralhome.com",
+      "href": "https://www.farnumholtfuneralhome.com",
+      "names": [
+        "Farnum Holt Funeral Home"
+      ],
+      "ids": [
+        "farnum-holt-funeral-home-glenwood-springs"
+      ],
+      "cities": [
+        "Glenwood Springs"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.farnumholtfuneralhome.com/",
+      "links": [],
+      "followed": "",
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "foothillsfuneral.com",
+      "href": "https://www.foothillsfuneral.com",
+      "names": [
+        "Foothills Cremation and Funeral Service"
+      ],
+      "ids": [
+        "foothills-cremation-and-funeral-service-golden"
+      ],
+      "cities": [
+        "Golden"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.foothillsfuneral.com/",
+      "links": [
+        {
+          "href": "https://www.foothillsfuneral.com/community-links",
+          "text": "Price Lists"
+        }
+      ],
+      "followed": "https://www.foothillsfuneral.com/community-links",
+      "mentionsGpl": true,
+      "hints": []
+    },
+    {
+      "host": "cofuneralhomes.com",
+      "href": "https://www.cofuneralhomes.com",
+      "names": [
+        "Colorado Funeral Homes - IFP LLC"
+      ],
+      "ids": [
+        "colorado-funeral-homes-ifp-llc-highlands-ranch"
+      ],
+      "cities": [
+        "Highlands Ranch"
+      ],
+      "status": 0,
+      "error": "fetch failed",
+      "finalUrl": "",
+      "links": [],
+      "followed": "",
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "yumafuneralhome.com",
+      "href": "https://www.yumafuneralhome.com/holyoke",
+      "names": [
+        "Baucke Funeral Home"
+      ],
+      "ids": [
+        "baucke-funeral-home-holyoke",
+        "baucke-funeral-home-yuma"
+      ],
+      "cities": [
+        "Holyoke",
+        "Yuma"
+      ],
+      "status": 403,
+      "error": "",
+      "finalUrl": "https://www.yumafuneralhome.com/holyoke",
+      "links": [],
+      "followed": "",
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "prariehillsfuneralhome.com",
+      "href": "https://www.prariehillsfuneralhome.com",
+      "names": [
+        "Prairie Hills Funeral Group, LLC dba Prairie Hills Funeral Home"
+      ],
+      "ids": [
+        "prairie-hills-funeral-group-llc-dba-prairie-hill"
+      ],
+      "cities": [
+        "Julesburg"
+      ],
+      "status": 0,
+      "error": "fetch failed",
+      "finalUrl": "",
+      "links": [],
+      "followed": "",
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "peacockfuneralhome.com",
+      "href": "https://www.peacockfuneralhome.com",
+      "names": [
+        "Perez & Peacock Funeral Home and Crematory, Inc.",
+        "Peacock Funeral Home"
+      ],
+      "ids": [
+        "perez-peacock-funeral-home-and-crematory-inc-la-",
+        "peacock-funeral-home-lamar"
+      ],
+      "cities": [
+        "La Junta",
+        "Lamar"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.peacockfuneralhome.com/",
+      "links": [],
+      "followed": "",
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "darrellhowemortuary.com",
+      "href": "https://www.darrellhowemortuary.com",
+      "names": [
+        "Darrell Howe Mortuary"
+      ],
+      "ids": [
+        "darrell-howe-mortuary-lafayette"
+      ],
+      "cities": [
+        "Lafayette"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.darrellhowemortuary.com/",
+      "links": [],
+      "followed": "",
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "thenaturalfuneral.com",
+      "href": "https://www.thenaturalfuneral.com",
+      "names": [
+        "The Natural Funeral Co",
+        "The Natural Funeral"
+      ],
+      "ids": [
+        "the-natural-funeral-co-lafayette",
+        "the-natural-funeral-loveland"
+      ],
+      "cities": [
+        "Lafayette",
+        "Loveland"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.thenaturalfuneral.com/",
+      "links": [
+        {
+          "href": "https://www.thenaturalfuneral.com/pricing/",
+          "text": "Pricing"
+        }
+      ],
+      "followed": "https://www.thenaturalfuneral.com/pricing/",
+      "mentionsGpl": true,
+      "hints": [
+        "Immediate burial Flame Cremation $3,500"
+      ]
+    },
+    {
+      "host": "limon.lovefuneralhomes.com",
+      "href": "https://www.limon.lovefuneralhomes.com",
+      "names": [
+        "Love-IFP LLC DBA: Love Funeral Home; Love Funeral Homes & Monuments"
+      ],
+      "ids": [
+        "love-ifp-llc-dba-love-funeral-home-love-funeral-"
+      ],
+      "cities": [
+        "Limon"
+      ],
+      "status": 0,
+      "error": "fetch failed",
+      "finalUrl": "",
+      "links": [],
+      "followed": "",
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "drinkwinemortuary.com",
+      "href": "https://www.drinkwinemortuary.com/",
+      "names": [
+        "Drinkwine Family Mortuary Inc"
+      ],
+      "ids": [
+        "drinkwine-family-mortuary-inc-littleton"
+      ],
+      "cities": [
+        "Littleton"
+      ],
+      "status": 403,
+      "error": "",
+      "finalUrl": "https://www.drinkwinemortuary.com/",
+      "links": [],
+      "followed": "",
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "ellisfamilyservices.com",
+      "href": "https://www.ellisfamilyservices.com",
+      "names": [
+        "Ellis Family Services LLC, Funeral and Memorial Care"
+      ],
+      "ids": [
+        "ellis-family-services-llc-funeral-and-memorial-c"
+      ],
+      "cities": [
+        "Littleton"
+      ],
+      "status": 403,
+      "error": "",
+      "finalUrl": "https://www.ellisfamilyservices.com/",
+      "links": [],
+      "followed": "",
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "masjidkhlas.org",
+      "href": "https://www.masjidkhlas.org",
+      "names": [
+        "Metropolitan Denver North Islamic Center"
+      ],
+      "ids": [
+        "metropolitan-denver-north-islamic-center-northgl"
+      ],
+      "cities": [
+        "Northglenn"
+      ],
+      "status": 0,
+      "error": "fetch failed",
+      "finalUrl": "",
+      "links": [],
+      "followed": "",
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "pfh-co.com",
+      "href": "https://www.pfh-co.com",
+      "names": [
+        "Parker Funeral Home Inc"
+      ],
+      "ids": [
+        "parker-funeral-home-inc-parker"
+      ],
+      "cities": [
+        "Parker"
+      ],
+      "status": 403,
+      "error": "",
+      "finalUrl": "https://www.pfh-co.com/",
+      "links": [],
+      "followed": "",
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "legacy.com",
+      "href": "https://www.legacy.com",
+      "names": [
+        "Imperial Funeral Home",
+        "Mullare-Murphy Funeral Home Inc"
+      ],
+      "ids": [
+        "imperial-funeral-home-pueblo",
+        "mullare-murphy-funeral-home-inc-trinidad"
+      ],
+      "cities": [
+        "Pueblo",
+        "Trinidad"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.legacy.com/",
+      "links": [],
+      "followed": "",
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "pueblowestfuneralhome.com",
+      "href": "https://www.pueblowestfuneralhome.com",
+      "names": [
+        "Pueblo West Funeral Home and Crematory"
+      ],
+      "ids": [
+        "pueblo-west-funeral-home-and-crematory-pueblo-we"
+      ],
+      "cities": [
+        "Pueblo West"
+      ],
+      "status": 403,
+      "error": "",
+      "finalUrl": "https://www.pueblowestfuneralhome.com/",
+      "links": [],
+      "followed": "",
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "riflefuneralhome.com",
+      "href": "https://www.riflefuneralhome.com",
+      "names": [
+        "Rifle Funeral Home"
+      ],
+      "ids": [
+        "rifle-funeral-home-rifle"
+      ],
+      "cities": [
+        "Rifle"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.riflefuneralhome.com/",
+      "links": [
+        {
+          "href": "https://www.riflefuneralhome.com/general-price-list",
+          "text": "General Price List"
+        }
+      ],
+      "followed": "https://www.riflefuneralhome.com/general-price-list",
+      "mentionsGpl": true,
+      "hints": [
+        "Traditional Funeral Services Learn More Cremation Options Learn More Memorial Services Learn More 365",
+        "Memorial Services Learn More 365",
+        "memorial service Automotive, Other Equipment, Other Services and Other Charges $475",
+        "memorial service (additional) &nbsp; $500",
+        "memorial service (additional) $1000",
+        "memorial service ( additional) $250"
+      ]
+    },
+    {
+      "host": "lewiandglenn.com",
+      "href": "https://www.lewiandglenn.com",
+      "names": [
+        "Lewis and Glenn Funeral Home, Inc"
+      ],
+      "ids": [
+        "lewis-and-glenn-funeral-home-inc-salida"
+      ],
+      "cities": [
+        "Salida"
+      ],
+      "status": 0,
+      "error": "fetch failed",
+      "finalUrl": "",
+      "links": [],
+      "followed": "",
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "maltbiefuneralservices.com",
+      "href": "https://www.maltbiefuneralservices.com",
+      "names": [
+        "Maltbie Funeral Services"
+      ],
+      "ids": [
+        "maltbie-funeral-services-springfield"
+      ],
+      "cities": [
+        "Springfield"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.maltbiefuneralservices.com/",
+      "links": [
+        {
+          "href": "https://www.maltbiefuneralservices.com/services/general-price-list",
+          "text": "General Price List"
+        }
+      ],
+      "followed": "https://www.maltbiefuneralservices.com/services/general-price-list",
+      "mentionsGpl": true,
+      "hints": [
+        "Direct Cremation (No Service) &ndash; $2,350",
+        "direct cremation or immediate burial Special Care (Autopsy/Donation) &ndash; $200",
+        "immediate burial Special Care (Autopsy/Donation) &ndash; $200",
+        "memorial services cannot exceed $2,500"
+      ]
+    },
+    {
+      "host": "tennantfuneralhomes.com",
+      "href": "https://www.tennantfuneralhomes.com/",
+      "names": [
+        "Tennant Funeral Home & Crematory"
+      ],
+      "ids": [
+        "tennant-funeral-home-crematory-sterling"
+      ],
+      "cities": [
+        "Sterling"
+      ],
+      "status": 403,
+      "error": "",
+      "finalUrl": "https://www.tennantfuneralhomes.com/",
+      "links": [],
+      "followed": "",
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "shannonmalonefuneralhome.net",
+      "href": "https://www.shannonmalonefuneralhome.net/",
+      "names": [
+        "Shannon & Malone Chapel Of Peace Funeral Home and Cremation Services LLC"
+      ],
+      "ids": [
+        "shannon-malone-chapel-of-peace-funeral-home-and-"
+      ],
+      "cities": [
+        "Superior"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.shannonmalonefuneralhome.net/",
+      "links": [],
+      "followed": "",
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "comifuneralhome.com",
+      "href": "https://www.comifuneralhome.com",
+      "names": [
+        "Comi Funeral Home Inc"
+      ],
+      "ids": [
+        "comi-funeral-home-inc-trinidad"
+      ],
+      "cities": [
+        "Trinidad"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.comifuneralhome.com/",
+      "links": [],
+      "followed": "",
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "dykesmemorialchapel.com",
+      "href": "https://www.dykesmemorialchapel.com/",
+      "names": [
+        "Dykes Funeral Services"
+      ],
+      "ids": [
+        "dykes-funeral-services-walsh"
+      ],
+      "cities": [
+        "Walsh"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.dykesmemorialchapel.com/",
+      "links": [],
+      "followed": "",
+      "mentionsGpl": false,
+      "hints": []
+    }
+  ]
+}

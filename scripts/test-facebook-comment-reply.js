@@ -10,6 +10,8 @@ const {
   lockedFacebookAnswer,
   lockFacebookAnswer,
   composeReply,
+  isHostileOrComplaintComment,
+  commentFirstName,
   buildFacebookCommentNotifyEmail,
 } = require("../lib/facebook-comment-reply");
 
@@ -57,6 +59,15 @@ assert.ok(!/402-440|Assurity|Llámala/i.test(stripped));
 const named = lockFacebookAnswer("Assurity Protect+ es vida entera para gastos finales.", "qué es Assurity");
 assert.ok(/Assurity/i.test(named));
 assert.ok(wrapFacebookReply("hola", "Respuesta.", { firstInConversation: false }).includes("Si tiene otra pregunta"));
+
+assert.ok(isHostileOrComplaintComment("esto es una estafa"));
+assert.ok(isHostileOrComplaintComment("This is a scam. Don’t buy it."));
+assert.ok(!isHostileOrComplaintComment("¿Cuánto cuesta el seguro?"));
+assert.ok(!isHostileOrComplaintComment("info"));
+assert.strictEqual(commentFirstName("Víctor Pérez"), "Víctor");
+assert.strictEqual(commentFirstName("Facebook User"), "");
+assert.ok(commentOpening("estafa", { senderName: "Víctor Pérez" }).includes("Gracias por su comentario, Víctor."));
+assert.ok(!/precisamente|planificar con anticipación/i.test(commentOpening("estafa", { senderName: "Víctor" })));
 
 const feed = parseFeedCommentEvents({
   object: "page",
@@ -127,6 +138,30 @@ assert.ok(commentMail.html.includes("Julie Braunsroth"));
     firstInConversation: false,
   });
   assert.ok(!/Assurity|402-440/i.test(ageRoute));
+  const complaintFirst = await composeReply({
+    intent: "other",
+    message: "esto es una estafa, nadie debería comprar esto",
+    firstInConversation: true,
+    senderName: "Víctor Pérez",
+  });
+  assert.ok(complaintFirst.includes("Gracias por su comentario, Víctor."));
+  assert.ok(complaintFirst.includes("asistente automático"));
+  assert.ok(!/precisamente|planificar con anticipación|gotcha|sarcas/i.test(complaintFirst));
+  assert.ok(!/no es una estafa|no somos una estafa/i.test(complaintFirst));
+  const complaintLater = await composeReply({
+    intent: "other",
+    message: "this is a scam",
+    firstInConversation: false,
+  });
+  assert.ok(complaintLater.includes("Julie will write you privately"));
+  assert.ok(!/exactly why|plan ahead/i.test(complaintLater));
+  const complaintWithCost = await composeReply({
+    intent: "other",
+    message: "esto es una estafa cuanto cuesta el seguro",
+    firstInConversation: false,
+  });
+  assert.ok(complaintWithCost.includes("no es igual para todos"));
+  assert.ok(!/precisamente|planificar con anticipación/i.test(complaintWithCost));
   console.log("facebook-comment-reply tests ok");
 })().catch((err) => {
   console.error(err);

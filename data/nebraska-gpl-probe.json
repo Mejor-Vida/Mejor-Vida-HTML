@@ -1,0 +1,2492 @@
+{
+  "updated": "2026-09-18",
+  "sites": 114,
+  "promising": 9,
+  "results": [
+    {
+      "host": "foxfuneralhome.net",
+      "href": "https://foxfuneralhome.net/",
+      "names": [
+        "Fox Funeral Home & Cremation Services - Adams",
+        "Fox Funeral Home & Cremation Services - Beatrice",
+        "Zink-Fox Funeral Home & Cremation Services"
+      ],
+      "ids": [
+        "fox-funeral-home-cremation-services-adams-adams",
+        "fox-funeral-home-cremation-services-beatrice-bea",
+        "zink-fox-funeral-home-cremation-services-sterlin"
+      ],
+      "cities": [
+        "Adams",
+        "Beatrice",
+        "Sterling"
+      ],
+      "status": 403,
+      "error": "",
+      "finalUrl": "https://foxfuneralhome.net/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "ghchapel.com",
+      "href": "https://ghchapel.com/",
+      "names": [
+        "Griffiths-Hovendick Chapel - Adams",
+        "Griffiths-Hovendick Chapel - Beatrice",
+        "Venrick-Griffiths-Hovendick Chapel",
+        "Laughlin-Hoevet Funeral Home"
+      ],
+      "ids": [
+        "griffiths-hovendick-chapel-adams-adams",
+        "griffiths-hovendick-chapel-beatrice-beatrice",
+        "venrick-griffiths-hovendick-chapel-dewitt",
+        "laughlin-hoevet-funeral-home-wymore"
+      ],
+      "cities": [
+        "Adams",
+        "Beatrice",
+        "DeWitt",
+        "Wymore"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://ghchapel.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "hochfuneralhome.com",
+      "href": "https://hochfuneralhome.com/",
+      "names": [
+        "Hoch Funeral Homes, Inc. - Ainsworth",
+        "Hoch Funeral Homes, Inc. - Bassett"
+      ],
+      "ids": [
+        "hoch-funeral-homes-inc-ainsworth-ainsworth",
+        "hoch-funeral-homes-inc-bassett-bassett"
+      ],
+      "cities": [
+        "Ainsworth",
+        "Bassett"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.hochfuneralhome.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "levanderfuneralhome.com",
+      "href": "https://levanderfuneralhome.com/",
+      "names": [
+        "Levander Funeral Home, Inc.",
+        "Levander Funeral Home of Elgin",
+        "Levander Funeral Home of Newman Grove",
+        "Levander Funeral Home of Spalding",
+        "Miller - Levander Funeral Home"
+      ],
+      "ids": [
+        "levander-funeral-home-inc-albion",
+        "levander-funeral-home-of-elgin-elgin",
+        "levander-funeral-home-of-newman-grove-newman-gro",
+        "levander-funeral-home-of-spalding-spalding",
+        "miller-levander-funeral-home-st-edward"
+      ],
+      "cities": [
+        "Albion",
+        "Elgin",
+        "Newman Grove",
+        "Spalding",
+        "St. Edward"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.levanderfuneralhome.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "batesgould.com",
+      "href": "https://www.batesgould.com/",
+      "names": [
+        "Bates-Gould Funeral Home - Alliance",
+        "Bates-Gould Funeral Home - Hemingford"
+      ],
+      "ids": [
+        "bates-gould-funeral-home-alliance-alliance",
+        "bates-gould-funeral-home-hemingford-hemingford"
+      ],
+      "cities": [
+        "Alliance",
+        "Hemingford"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.batesgould.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "nelsonbauerfh.com",
+      "href": "https://www.nelsonbauerfh.com/",
+      "names": [
+        "Bauer-Torrey & Mach Funeral Home - Alma",
+        "Nelson-Bauer Funeral Home",
+        "Mitchell-Nelson-Bauer Funeral Home",
+        "Bauer-Torrey & Mach Funeral Home - Wilcox"
+      ],
+      "ids": [
+        "bauer-torrey-mach-funeral-home-alma-alma",
+        "nelson-bauer-funeral-home-holdrege",
+        "mitchell-nelson-bauer-funeral-home-oxford",
+        "bauer-torrey-mach-funeral-home-wilcox-wilcox"
+      ],
+      "cities": [
+        "Alma",
+        "Holdrege",
+        "Oxford",
+        "Wilcox"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.nelsonbauerfh.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "wenburgfuneralhome.com",
+      "href": "https://wenburgfuneralhome.com/",
+      "names": [
+        "Garey Funeral Home - Arapahoe",
+        "Garey Funeral Home - Beaver City"
+      ],
+      "ids": [
+        "garey-funeral-home-arapahoe-arapahoe",
+        "garey-funeral-home-beaver-city-beaver-city"
+      ],
+      "cities": [
+        "Arapahoe",
+        "Beaver City"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.gareyfuneralhome.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "mosermemorialchapels.com",
+      "href": "https://mosermemorialchapels.com/",
+      "names": [
+        "Reckmeyer-Moser Funeral Home",
+        "Moser Memorial Chapel Funeral & Cremation Services - Fremont",
+        "Moser Memorial Chapel Funeral & Cremation Services - North Bend"
+      ],
+      "ids": [
+        "reckmeyer-moser-funeral-home-arlington",
+        "moser-memorial-chapel-funeral-cremation-services"
+      ],
+      "cities": [
+        "Arlington",
+        "Fremont",
+        "North Bend"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.mosermemorialchapels.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "govierbrothers.com",
+      "href": "https://govierbrothers.com/",
+      "names": [
+        "Arnold Funeral Home",
+        "Govier Brothers Mortuary & Crematory"
+      ],
+      "ids": [
+        "arnold-funeral-home-arnold",
+        "govier-brothers-mortuary-crematory-broken-bow"
+      ],
+      "cities": [
+        "Arnold",
+        "Broken Bow"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.govierbrothers.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "marcysvoboda.com",
+      "href": "https://marcysvoboda.com/",
+      "names": [
+        "Marcy Mortuary",
+        "Svoboda Funeral Home -Wahoo"
+      ],
+      "ids": [
+        "marcy-mortuary-ashland",
+        "svoboda-funeral-home-wahoo-wahoo"
+      ],
+      "cities": [
+        "Ashland",
+        "Wahoo"
+      ],
+      "status": 0,
+      "error": "fetch failed",
+      "finalUrl": "",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "segerfuneralhome.net",
+      "href": "https://www.segerfuneralhome.net/",
+      "names": [
+        "Seger Funeral Home, Inc. - Atkinson",
+        "Seger Funeral Home, Inc. - Stuart"
+      ],
+      "ids": [
+        "seger-funeral-home-inc-atkinson-atkinson",
+        "seger-funeral-home-inc-stuart-stuart"
+      ],
+      "cities": [
+        "Atkinson",
+        "Stuart"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.segerfuneralhome.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "hallfuneral.net",
+      "href": "https://hallfuneral.net/",
+      "names": [
+        "Hall Funeral Chapel - Auburn",
+        "Hall Funeral Chapel - Falls City"
+      ],
+      "ids": [
+        "hall-funeral-chapel-auburn-auburn",
+        "hall-funeral-chapel-falls-city-falls-city"
+      ],
+      "cities": [
+        "Auburn",
+        "Falls City"
+      ],
+      "status": 403,
+      "error": "",
+      "finalUrl": "https://www.hallfuneral.net/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "hemmingsenfuneralhome.com",
+      "href": "https://hemmingsenfuneralhome.com/",
+      "names": [
+        "Hemmingsen Funeral Home - Auburn"
+      ],
+      "ids": [
+        "hemmingsen-funeral-home-auburn-auburn"
+      ],
+      "cities": [
+        "Auburn"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.hemmingsenfuneralhome.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "higbymortuary.com",
+      "href": "https://higbymortuary.com/",
+      "names": [
+        "Higby-McQuiston Mortuary"
+      ],
+      "ids": [
+        "higby-mcquiston-mortuary-aurora"
+      ],
+      "cities": [
+        "Aurora"
+      ],
+      "status": 403,
+      "error": "",
+      "finalUrl": "https://higbymortuary.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "homeforfuneralsinc.com",
+      "href": "https://homeforfuneralsinc.com/",
+      "names": [
+        "Steffen Mortuary",
+        "Resseguie Funeral Home, Inc",
+        "Home for Funerals, Inc.",
+        "Home for Funerals - Randolph",
+        "Home for Funerals - Stanton"
+      ],
+      "ids": [
+        "steffen-mortuary-battle-creek",
+        "resseguie-funeral-home-inc-madison",
+        "home-for-funerals-inc-norfolk",
+        "home-for-funerals-randolph-randolph",
+        "home-for-funerals-stanton-stanton"
+      ],
+      "cities": [
+        "Battle Creek",
+        "Madison",
+        "Norfolk",
+        "Randolph",
+        "Stanton"
+      ],
+      "status": 403,
+      "error": "",
+      "finalUrl": "https://www.homeforfuneralsinc.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "harmanwrightmortuary.com",
+      "href": "https://harmanwrightmortuary.com/",
+      "names": [
+        "Harman-Wright Mortuary and Crematory - Beatrice",
+        "Harman-Wright Mortuary - Plymouth"
+      ],
+      "ids": [
+        "harman-wright-mortuary-and-crematory-beatrice-be",
+        "harman-wright-mortuary-plymouth-plymouth"
+      ],
+      "cities": [
+        "Beatrice",
+        "Plymouth"
+      ],
+      "status": 403,
+      "error": "",
+      "finalUrl": "https://www.harmanwrightmortuary.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "bellevuefuneralchapel.com",
+      "href": "https://www.bellevuefuneralchapel.com/",
+      "names": [
+        "Heafey-Hoffmann-Dworak-Cutler Bellevue Memorial Chapel"
+      ],
+      "ids": [
+        "heafey-hoffmann-dworak-cutler-bellevue-memorial-"
+      ],
+      "cities": [
+        "Bellevue"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.bellevuefuneralchapel.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "liewerfuneralhome.com",
+      "href": "https://liewerfuneralhome.com/",
+      "names": [
+        "Benkelman Memorial Chapel",
+        "Liewer Funeral Home - Imperial",
+        "Liewer Funeral Home - Wauneta"
+      ],
+      "ids": [
+        "benkelman-memorial-chapel-benkelman",
+        "liewer-funeral-home-imperial-imperial",
+        "liewer-funeral-home-wauneta-wauneta"
+      ],
+      "cities": [
+        "Benkelman",
+        "Imperial",
+        "Wauneta"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.liewerfuneralhome.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "reichmuthfuneralhomes.com",
+      "href": "https://reichmuthfuneralhomes.com/",
+      "names": [
+        "Hadan-Golden-Reichmuth",
+        "Reichmuth Funeral Home - Elkhorn",
+        "Reichmuth Funeral Home - Yutan"
+      ],
+      "ids": [
+        "hadan-golden-reichmuth-bennington",
+        "reichmuth-funeral-home-elkhorn-elkhorn",
+        "reichmuth-funeral-home-yutan-yutan"
+      ],
+      "cities": [
+        "Bennington",
+        "Elkhorn",
+        "Yutan"
+      ],
+      "status": 403,
+      "error": "",
+      "finalUrl": "https://www.reichmuthfuneralhomes.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "campbellaman.com",
+      "href": "https://campbellaman.com/",
+      "names": [
+        "Campbell-Aman Funeral Home"
+      ],
+      "ids": [
+        "campbell-aman-funeral-home-blair"
+      ],
+      "cities": [
+        "Blair"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://campbellaman.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "brockhausfuneralhome.com",
+      "href": "https://brockhausfuneralhome.com/",
+      "names": [
+        "Brockhaus Funeral Home - Bloomfield",
+        "Brockhaus Funeral Home - Creighton",
+        "Brockhaus Funeral Home - Niobrara",
+        "Brockhaus-Howser-Fillmer Funeral Home - Norfolk",
+        "Brockhaus-Thenhaus Funeral Home - Spencer",
+        "Brockhaus Funeral Home - Tilden",
+        "Brockhaus Funeral Home - Verdigre",
+        "Brockhaus-Scott Funeral Home - Wausa"
+      ],
+      "ids": [
+        "brockhaus-funeral-home-bloomfield-bloomfield",
+        "brockhaus-funeral-home-creighton-creighton",
+        "brockhaus-funeral-home-niobrara-niobrara",
+        "brockhaus-howser-fillmer-funeral-home-norfolk-no",
+        "brockhaus-thenhaus-funeral-home-spencer-spencer",
+        "brockhaus-funeral-home-tilden-tilden",
+        "brockhaus-funeral-home-verdigre-verdigre",
+        "brockhaus-scott-funeral-home-wausa-wausa"
+      ],
+      "cities": [
+        "Bloomfield",
+        "Creighton",
+        "Niobrara",
+        "Norfolk",
+        "Spencer",
+        "Tilden",
+        "Verdigre",
+        "Wausa"
+      ],
+      "status": 403,
+      "error": "",
+      "finalUrl": "https://brockhausfuneralhome.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "mertenbutlermortuary.com",
+      "href": "https://mertenbutlermortuary.com/",
+      "names": [
+        "Merten-Butler Mortuary, Inc.",
+        "Campbell Funeral Home"
+      ],
+      "ids": [
+        "merten-butler-mortuary-inc-blue-hill",
+        "campbell-funeral-home-campbell"
+      ],
+      "cities": [
+        "Blue Hill",
+        "Campbell"
+      ],
+      "status": 403,
+      "error": "",
+      "finalUrl": "https://www.mertenbutlermortuary.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "bridgeportmemorialchapel.com",
+      "href": "https://www.bridgeportmemorialchapel.com/",
+      "names": [
+        "Bridgeport Memorial Chapel and Cremation Services"
+      ],
+      "ids": [
+        "bridgeport-memorial-chapel-and-cremation-service"
+      ],
+      "cities": [
+        "Bridgeport"
+      ],
+      "status": 403,
+      "error": "",
+      "finalUrl": "https://www.dignitymemorial.com/funeral-homes/bridgeport-ne/bridgeport-memorial-chapel/8279",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "stillwatersfuneralparlor.com",
+      "href": "https://www.stillwatersfuneralparlor.com/",
+      "names": [
+        "Still Waters Funeral Parlor"
+      ],
+      "ids": [
+        "still-waters-funeral-parlor-burwell"
+      ],
+      "cities": [
+        "Burwell"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.stillwatersfuneralparlor.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "reynoldslovefuneralhome.com",
+      "href": "https://reynoldslovefuneralhome.com/",
+      "names": [
+        "Timm-Reynolds-Love Funeral Home",
+        "Reynolds-Love Funeral Home",
+        "Overton Funeral Home"
+      ],
+      "ids": [
+        "timm-reynolds-love-funeral-home-callaway",
+        "reynolds-love-funeral-home-lexington",
+        "overton-funeral-home-overton"
+      ],
+      "cities": [
+        "Callaway",
+        "Lexington",
+        "Overton"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.reynoldslovefuneralhome.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "lockenour.com",
+      "href": "https://lockenour.com/",
+      "names": [
+        "Lockenour-Jones Mortuary"
+      ],
+      "ids": [
+        "lockenour-jones-mortuary-cambridge"
+      ],
+      "cities": [
+        "Cambridge"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.herrmannfh.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "soltwagnerfuneral.com",
+      "href": "https://soltwagnerfuneral.com/",
+      "names": [
+        "Solt-Wagner Funeral Home - Central City",
+        "Solt-Wagner Funeral Home - Polk"
+      ],
+      "ids": [
+        "solt-wagner-funeral-home-central-city-central-ci",
+        "solt-wagner-funeral-home-polk-polk"
+      ],
+      "cities": [
+        "Central City",
+        "Polk"
+      ],
+      "status": 403,
+      "error": "",
+      "finalUrl": "https://www.soltwagnerfuneral.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "bondegardfunerals.com",
+      "href": "https://bondegardfunerals.com/",
+      "names": [
+        "Holechek-Bondegard Funeral Homes and Cremations - Chappell",
+        "Holechek-Bondegard Funeral Homes and Cremations - Oshkosh"
+      ],
+      "ids": [
+        "holechek-bondegard-funeral-homes-and-cremations-"
+      ],
+      "cities": [
+        "Chappell",
+        "Oshkosh"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.bondegardfunerals.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "bachelor-suber.com",
+      "href": "https://bachelor-suber.com/",
+      "names": [
+        "Bachelor-Faulkner-Dart-Surber FH Inc"
+      ],
+      "ids": [
+        "bachelor-faulkner-dart-surber-fh-inc-chester"
+      ],
+      "cities": [
+        "Chester"
+      ],
+      "status": 0,
+      "error": "fetch failed",
+      "finalUrl": "",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "millersfh.com",
+      "href": "https://millersfh.com/",
+      "names": [
+        "Miller Funeral Home"
+      ],
+      "ids": [
+        "miller-funeral-home-clarkson"
+      ],
+      "cities": [
+        "Clarkson"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.frontporchcafeonline.com/kill-devil-blends/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "suttonmemorial.com",
+      "href": "https://suttonmemorial.com/",
+      "names": [
+        "McLaughlin Funeral Chapel",
+        "Sutton Memorial Chapel"
+      ],
+      "ids": [
+        "mclaughlin-funeral-chapel-clay-center",
+        "sutton-memorial-chapel-sutton"
+      ],
+      "cities": [
+        "Clay Center",
+        "Sutton"
+      ],
+      "status": 403,
+      "error": "",
+      "finalUrl": "https://www.suttonmemorial.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "snidermemorial.com",
+      "href": "https://www.snidermemorial.com/",
+      "names": [
+        "Snider Memorial Funeral Home - Clearwater",
+        "Snider Memorial Funeral Home -Elgin",
+        "Beyer Snider Memorial Funeral Home",
+        "Snider Memorial Funeral Home - Orchard",
+        "Snider Memorial Funeral Home - Plainview"
+      ],
+      "ids": [
+        "snider-memorial-funeral-home-clearwater-clearwat",
+        "snider-memorial-funeral-home-elgin-elgin",
+        "beyer-snider-memorial-funeral-home-neligh",
+        "snider-memorial-funeral-home-orchard-orchard",
+        "snider-memorial-funeral-home-plainview-plainview"
+      ],
+      "cities": [
+        "Clearwater",
+        "Elgin",
+        "Neligh",
+        "Orchard",
+        "Plainview"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.snidermemorialfh.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "wintzrayfuneralhome.com",
+      "href": "https://wintzrayfuneralhome.com/",
+      "names": [
+        "Wintz Funeral Home - Coleridge",
+        "Wintz Funeral Home - Crofton",
+        "Wintz Funeral Home - Hartington",
+        "Wintz Funeral Home - Laurel"
+      ],
+      "ids": [
+        "wintz-funeral-home-coleridge-coleridge",
+        "wintz-funeral-home-crofton-crofton",
+        "wintz-funeral-home-hartington-hartington",
+        "wintz-funeral-home-laurel-laurel"
+      ],
+      "cities": [
+        "Coleridge",
+        "Crofton",
+        "Hartington",
+        "Laurel"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.wintzrayfuneralhome.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "gasshaneyfh.com",
+      "href": "https://gasshaneyfh.com/",
+      "names": [
+        "Gass-Haney Funeral Home, Inc"
+      ],
+      "ids": [
+        "gass-haney-funeral-home-inc-columbus"
+      ],
+      "cities": [
+        "Columbus"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://gasshaneyfh.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "mckownfuneralhome.com",
+      "href": "https://mckownfuneralhome.com/",
+      "names": [
+        "McKown Funeral Home, Inc. - Columbus",
+        "McKown - Rice Funeral Home - Genoa",
+        "McKown Funeral Home - Silver Creek"
+      ],
+      "ids": [
+        "mckown-funeral-home-inc-columbus-columbus",
+        "mckown-rice-funeral-home-genoa-genoa",
+        "mckown-funeral-home-silver-creek-silver-creek"
+      ],
+      "cities": [
+        "Columbus",
+        "Genoa",
+        "Silver Creek"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.mckownfuneralhome.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "berrymanfuneralhome.com",
+      "href": "https://berrymanfuneralhome.com/",
+      "names": [
+        "Berryman Funeral Home"
+      ],
+      "ids": [
+        "berryman-funeral-home-cozad"
+      ],
+      "cities": [
+        "Cozad"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.berrymanfuneralhome.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "kunclfh.com",
+      "href": "https://www.kunclfh.com/",
+      "names": [
+        "Kuncl Funeral Home, Inc. - Crete",
+        "Kuncl Funeral Home, Inc. - Western",
+        "Kuncl Funeral Home, Inc. - Wilber"
+      ],
+      "ids": [
+        "kuncl-funeral-home-inc-crete-crete",
+        "kuncl-funeral-home-inc-western-western",
+        "kuncl-funeral-home-inc-wilber-wilber"
+      ],
+      "cities": [
+        "Crete",
+        "Western",
+        "Wilber"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.kunclfh.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "blasestrauser.com",
+      "href": "https://blasestrauser.com/",
+      "names": [
+        "Blase-Wetzel-Strauser Memorial Chapel",
+        "Blase-Strauser Memorial Chapel"
+      ],
+      "ids": [
+        "blase-wetzel-strauser-memorial-chapel-curtis",
+        "blase-strauser-memorial-chapel-gothenburg"
+      ],
+      "cities": [
+        "Curtis",
+        "Gothenburg"
+      ],
+      "status": 403,
+      "error": "",
+      "finalUrl": "https://blasestrauser.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "priceurbauerahrendts.com",
+      "href": "https://priceurbauerahrendts.com/",
+      "names": [
+        "Urbauer Funeral Home",
+        "Ahrendts Funeral Home",
+        "Price Funeral Home"
+      ],
+      "ids": [
+        "urbauer-funeral-home-davenport",
+        "ahrendts-funeral-home-deshler",
+        "price-funeral-home-hebron"
+      ],
+      "cities": [
+        "Davenport",
+        "Deshler",
+        "Hebron"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.priceurbauerahrendts.com/",
+      "links": [
+        {
+          "href": "https://irp.cdn-website.com/d2de6cf2/files/uploaded/GPL-2025+-+Hebron.pdf",
+          "text": "GENERAL PRICE LIST"
+        }
+      ],
+      "mentionsGpl": true,
+      "hints": []
+    },
+    {
+      "host": "revbluejeans.com",
+      "href": "https://revbluejeans.com/",
+      "names": [
+        "Kracl Funeral Chapel - David City",
+        "Leigh Memorial Funeral Chapel, Inc.",
+        "Kracl Funeral Chapel -Schuyler"
+      ],
+      "ids": [
+        "kracl-funeral-chapel-david-city-david-city",
+        "leigh-memorial-funeral-chapel-inc-leigh",
+        "kracl-funeral-chapel-schuyler-schuyler"
+      ],
+      "cities": [
+        "David City",
+        "Leigh",
+        "Schuyler"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.revbluejeans.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "chermokfuneralhome.com",
+      "href": "https://www.chermokfuneralhome.com/",
+      "names": [
+        "Moravec Johnson Mortuary"
+      ],
+      "ids": [
+        "moravec-johnson-mortuary-david-city"
+      ],
+      "cities": [
+        "David City"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.moravecjohnson.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "kroll-masseyfh.com",
+      "href": "https://www.kroll-masseyfh.com/",
+      "names": [
+        "Kroll-Massey Funeral Home - Deshler",
+        "Kroll-Massey Funeral Home - Hebron"
+      ],
+      "ids": [
+        "kroll-massey-funeral-home-deshler-deshler",
+        "kroll-massey-funeral-home-hebron-hebron"
+      ],
+      "cities": [
+        "Deshler",
+        "Hebron"
+      ],
+      "status": 403,
+      "error": "",
+      "finalUrl": "https://www.kroll-masseyfh.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "minnickfuneralserviceinc.com",
+      "href": "https://minnickfuneralserviceinc.com/",
+      "names": [
+        "Minnick Funeral Chapel - Dodge",
+        "Minnick Funeral Home - West Point",
+        "Minnick Funeral Home - Wisner"
+      ],
+      "ids": [
+        "minnick-funeral-chapel-dodge-dodge",
+        "minnick-funeral-home-west-point-west-point",
+        "minnick-funeral-home-wisner-wisner"
+      ],
+      "cities": [
+        "Dodge",
+        "West Point",
+        "Wisner"
+      ],
+      "status": 403,
+      "error": "",
+      "finalUrl": "https://minnickfuneralserviceinc.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "stokelyfuneralhome.com",
+      "href": "https://stokelyfuneralhome.com/",
+      "names": [
+        "Stokely Funeral Home - Dodge",
+        "Stokely Funeral Home - West Point"
+      ],
+      "ids": [
+        "stokely-funeral-home-dodge-dodge",
+        "stokely-funeral-home-west-point-west-point"
+      ],
+      "cities": [
+        "Dodge",
+        "West Point"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://stokelyfuneralhome.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "wmsfh.com",
+      "href": "https://wmsfh.com/",
+      "names": [
+        "Williams & Kuehn Funeral Home (Edgar)"
+      ],
+      "ids": [
+        "williams-kuehn-funeral-home-edgar-edgar"
+      ],
+      "cities": [
+        "Edgar"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://wkfuneralhomes.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "osafh.com",
+      "href": "https://osafh.com/",
+      "names": [
+        "O'Brien-Straatmann-Redinger Funeral Home - Elm Creek Chapel"
+      ],
+      "ids": [
+        "o-brien-straatmann-redinger-funeral-home-elm-cre"
+      ],
+      "cities": [
+        "Elm Creek"
+      ],
+      "status": 403,
+      "error": "",
+      "finalUrl": "https://www.osrfh.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "fusselmanallenharvey.com",
+      "href": "https://www.fusselmanallenharvey.com/",
+      "names": [
+        "Fusselman-Allen-Harvey Funeral Home - Elmwood",
+        "Fusselman-Allen-Harvey Funeral Home - Louisville",
+        "Fusselman-Allen-Harvey Funeral Home - Syracuse",
+        "Fusselman-Allen-Harvey Funeral Home - Weeping Water"
+      ],
+      "ids": [
+        "fusselman-allen-harvey-funeral-home-elmwood-elmw",
+        "fusselman-allen-harvey-funeral-home-louisville-l",
+        "fusselman-allen-harvey-funeral-home-syracuse-syr",
+        "fusselman-allen-harvey-funeral-home-weeping-wate"
+      ],
+      "cities": [
+        "Elmwood",
+        "Louisville",
+        "Syracuse",
+        "Weeping Water"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.fusselmanallenharvey.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "elwoodfuneralhome.com",
+      "href": "https://elwoodfuneralhome.com/",
+      "names": [
+        "Elwood Funeral Home, Inc"
+      ],
+      "ids": [
+        "elwood-funeral-home-inc-elwood"
+      ],
+      "cities": [
+        "Elwood"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.elwoodfuneralhome.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "farmerandsonfuneralhome.com",
+      "href": "https://farmerandsonfuneralhome.com/",
+      "names": [
+        "Farmer Funeral Home - Exeter",
+        "Farmer & Son Funeral Homes, Inc. - Geneva",
+        "Farmer & Son Funeral Homes - Kotas Chapel - Milligan"
+      ],
+      "ids": [
+        "farmer-funeral-home-exeter-exeter",
+        "farmer-son-funeral-homes-inc-geneva-geneva",
+        "farmer-son-funeral-homes-kotas-chapel-milligan-m"
+      ],
+      "cities": [
+        "Exeter",
+        "Geneva",
+        "Milligan"
+      ],
+      "status": 403,
+      "error": "",
+      "finalUrl": "https://www.farmerandsonfuneralhome.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "gerdesmeyerfh.com",
+      "href": "https://gerdesmeyerfh.com/",
+      "names": [
+        "Gerdes-Meyer Funeral Home"
+      ],
+      "ids": [
+        "gerdes-meyer-funeral-home-fairbury"
+      ],
+      "cities": [
+        "Fairbury"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.gerdesmeyerfh.com/",
+      "links": [
+        {
+          "href": "https://irp.cdn-website.com/8d6ae62d/files/uploaded/GPL-2025+-+FBY+ODELL.pdf",
+          "text": "General Price List"
+        }
+      ],
+      "mentionsGpl": true,
+      "hints": []
+    },
+    {
+      "host": "dorrandclark.com",
+      "href": "https://dorrandclark.com/",
+      "names": [
+        "Dorr & Clark Funeral Home LLC"
+      ],
+      "ids": [
+        "dorr-clark-funeral-home-llc-falls-city"
+      ],
+      "cities": [
+        "Falls City"
+      ],
+      "status": 403,
+      "error": "",
+      "finalUrl": "https://www.dorrandclark.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "metcalffuneralservices.com",
+      "href": "https://metcalffuneralservices.com/",
+      "names": [
+        "Metcalf Funeral Home, Inc. - Firth",
+        "Metcalf Funeral and Memorial Services"
+      ],
+      "ids": [
+        "metcalf-funeral-home-inc-firth-firth",
+        "metcalf-funeral-and-memorial-services-lincoln"
+      ],
+      "cities": [
+        "Firth",
+        "Lincoln"
+      ],
+      "status": 0,
+      "error": "fetch failed",
+      "finalUrl": "",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "sievers-sprickfuneralhome.com",
+      "href": "https://sievers-sprickfuneralhome.com/",
+      "names": [
+        "Sievers-Sprick Funeral Home"
+      ],
+      "ids": [
+        "sievers-sprick-funeral-home-fort-calhoun"
+      ],
+      "cities": [
+        "Fort Calhoun"
+      ],
+      "status": 403,
+      "error": "",
+      "finalUrl": "https://www.sievers-sprickfuneralhome.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "hutchinsfh.com",
+      "href": "https://hutchinsfh.com/",
+      "names": [
+        "Hutchins Funeral Home"
+      ],
+      "ids": [
+        "hutchins-funeral-home-franklin"
+      ],
+      "cities": [
+        "Franklin"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.hutchinsfh.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "ludvigsenmortuary.com",
+      "href": "https://ludvigsenmortuary.com/",
+      "names": [
+        "Ludvigsen Mortuary",
+        "Hooper Funeral Chapel",
+        "Scribner Funeral Chapel"
+      ],
+      "ids": [
+        "ludvigsen-mortuary-fremont",
+        "hooper-funeral-chapel-hooper",
+        "scribner-funeral-chapel-scribner"
+      ],
+      "cities": [
+        "Fremont",
+        "Hooper",
+        "Scribner"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://ludvigsenmortuary.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "lauberfh.com",
+      "href": "https://lauberfh.com/",
+      "names": [
+        "Lauber Funeral and Cremation Services - Friend",
+        "Lauber Funeral and Cremation Services - Milford"
+      ],
+      "ids": [
+        "lauber-funeral-and-cremation-services-friend-fri",
+        "lauber-funeral-and-cremation-services-milford-mi"
+      ],
+      "cities": [
+        "Friend",
+        "Milford"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://lauberfh.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "palmersantinfh.com",
+      "href": "https://palmersantinfh.com/",
+      "names": [
+        "Palmer-Santin Funeral Home"
+      ],
+      "ids": [
+        "palmer-santin-funeral-home-fullerton"
+      ],
+      "cities": [
+        "Fullerton"
+      ],
+      "status": 403,
+      "error": "",
+      "finalUrl": "https://palmersantinfh.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "ramaekersfh.com",
+      "href": "https://ramaekersfh.com/",
+      "names": [
+        "Ramaekers Patrick Funeral Chapel, Inc"
+      ],
+      "ids": [
+        "ramaekers-patrick-funeral-chapel-inc-genoa"
+      ],
+      "cities": [
+        "Genoa"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.gasshaney.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "geringchapel.com",
+      "href": "https://www.geringchapel.com/",
+      "names": [
+        "Gering Memorial Chapel"
+      ],
+      "ids": [
+        "gering-memorial-chapel-gering"
+      ],
+      "cities": [
+        "Gering"
+      ],
+      "status": 403,
+      "error": "",
+      "finalUrl": "https://www.dignitymemorial.com/funeral-homes/gering-ne/gering-memorial-chapel/8278",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "osrfh.com",
+      "href": "https://osrfh.com/",
+      "names": [
+        "O'Brien-Straatmann-Redinger Funeral Home - Miller Godberson Chapel",
+        "O'Brien-Straatmann-Redinger Funeral Homes and Cremations - Kearney"
+      ],
+      "ids": [
+        "o-brien-straatmann-redinger-funeral-home-miller-",
+        "o-brien-straatmann-redinger-funeral-homes-and-cr"
+      ],
+      "cities": [
+        "Gibbon",
+        "Kearney"
+      ],
+      "status": 403,
+      "error": "",
+      "finalUrl": "https://www.osrfh.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "giallfaiths.com",
+      "href": "https://www.giallfaiths.com/",
+      "names": [
+        "All Faiths Funeral Home"
+      ],
+      "ids": [
+        "all-faiths-funeral-home-grand-island"
+      ],
+      "cities": [
+        "Grand Island"
+      ],
+      "status": 403,
+      "error": "",
+      "finalUrl": "https://www.giallfaiths.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "curranfuneralchapel.com",
+      "href": "https://curranfuneralchapel.com/",
+      "names": [
+        "Curran Funeral Chapel"
+      ],
+      "ids": [
+        "curran-funeral-chapel-grand-island"
+      ],
+      "cities": [
+        "Grand Island"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.curranfuneralchapel.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "livson.com",
+      "href": "https://www.livson.com/",
+      "names": [
+        "Livingston-Sondermann Funeral & Cemetery Services"
+      ],
+      "ids": [
+        "livingston-sondermann-funeral-cemetery-services-"
+      ],
+      "cities": [
+        "Grand Island"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.livson.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "bullocklongfuneralhome.com",
+      "href": "https://bullocklongfuneralhome.com/",
+      "names": [
+        "Bullock-Long Funeral Home"
+      ],
+      "ids": [
+        "bullock-long-funeral-home-grant"
+      ],
+      "cities": [
+        "Grant"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.bullocklongfuneralhome.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "ordmemorialchapel.com",
+      "href": "https://ordmemorialchapel.com/",
+      "names": [
+        "T.J. Finn & Sons Funeral Home",
+        "Ord Memorial Chapel, Inc"
+      ],
+      "ids": [
+        "t-j-finn-sons-funeral-home-greeley",
+        "ord-memorial-chapel-inc-ord"
+      ],
+      "cities": [
+        "Greeley",
+        "Ord"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.ordmemorialchapel.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "roedermortuary.com",
+      "href": "https://roedermortuary.com/",
+      "names": [
+        "Roeder Mortuary - Gretna Chapel",
+        "Roeder Mortuary - 108th Chapel",
+        "Roeder Mortuary - Ames Ave Chapel"
+      ],
+      "ids": [
+        "roeder-mortuary-gretna-chapel-gretna",
+        "roeder-mortuary-108th-chapel-omaha",
+        "roeder-mortuary-ames-ave-chapel-omaha"
+      ],
+      "cities": [
+        "Gretna",
+        "Omaha"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://roedermortuary.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "dewittfuneral.com",
+      "href": "https://dewittfuneral.com/",
+      "names": [
+        "DeWitt Funeral Home and Cremation Services"
+      ],
+      "ids": [
+        "dewitt-funeral-home-and-cremation-services-hasti"
+      ],
+      "cities": [
+        "Hastings"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://dewittfuneral.com/",
+      "links": [
+        {
+          "href": "https://my.gather.app/gpl/dewitt-funeral-home-cremation-services",
+          "text": "View Products"
+        }
+      ],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "livingstonbutlervolland.com",
+      "href": "https://www.livingstonbutlervolland.com/",
+      "names": [
+        "Livingston Butler Volland"
+      ],
+      "ids": [
+        "livingston-butler-volland-hastings"
+      ],
+      "cities": [
+        "Hastings"
+      ],
+      "status": 403,
+      "error": "",
+      "finalUrl": "https://www.livingstonbutlervolland.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "metzmortuary.com",
+      "href": "https://metzmortuary.com/",
+      "names": [
+        "Metz Mortuary - Henderson",
+        "Metz Mortuary - York"
+      ],
+      "ids": [
+        "metz-mortuary-henderson-henderson",
+        "metz-mortuary-york-york"
+      ],
+      "cities": [
+        "Henderson",
+        "York"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://metzmortuary.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "craigfunerals.com",
+      "href": "https://craigfunerals.com/",
+      "names": [
+        "Craig Funeral Home - Jelden Chapel",
+        "Craig Funeral Home"
+      ],
+      "ids": [
+        "craig-funeral-home-jelden-chapel-hildreth",
+        "craig-funeral-home-minden"
+      ],
+      "cities": [
+        "Hildreth",
+        "Minden"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.craigfunerals.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "wherrymortuary.com",
+      "href": "https://wherrymortuary.com/",
+      "names": [
+        "Wherry Mortuary - Humboldt",
+        "Wherry Mortuary - Pawnee City",
+        "Wherry Mortuary - Tecumseh"
+      ],
+      "ids": [
+        "wherry-mortuary-humboldt-humboldt",
+        "wherry-mortuary-pawnee-city-pawnee-city",
+        "wherry-mortuary-tecumseh-tecumseh"
+      ],
+      "cities": [
+        "Humboldt",
+        "Pawnee City",
+        "Tecumseh"
+      ],
+      "status": 403,
+      "error": "",
+      "finalUrl": "https://www.wherrymortuary.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "duesmanfc.com",
+      "href": "https://duesmanfc.com/",
+      "names": [
+        "Duesman Funeral Chapel"
+      ],
+      "ids": [
+        "duesman-funeral-chapel-humphrey"
+      ],
+      "cities": [
+        "Humphrey"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.gasshaney.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "hlmkfuneral.com",
+      "href": "https://hlmkfuneral.com/",
+      "names": [
+        "Horner Lieske McBride & Kuhl Funeral and Cremation Services"
+      ],
+      "ids": [
+        "horner-lieske-mcbride-kuhl-funeral-and-cremation"
+      ],
+      "cities": [
+        "Kearney"
+      ],
+      "status": 403,
+      "error": "",
+      "finalUrl": "https://www.hlmkfuneral.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "lincolnalternativefuneral.com",
+      "href": "https://lincolnalternativefuneral.com/",
+      "names": [
+        "Alternative Funeral & Cremation"
+      ],
+      "ids": [
+        "alternative-funeral-cremation-lincoln"
+      ],
+      "cities": [
+        "Lincoln"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://lincolnalternativefuneral.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": [
+        "direct cremation option, with no funeral or memorial services for $1,595",
+        "Memorial Service $2,595",
+        "memorial services for $1,805",
+        "memorial services for $1,595"
+      ]
+    },
+    {
+      "host": "aspenaftercare.com",
+      "href": "https://aspenaftercare.com/",
+      "names": [
+        "Aspen Aftercare, Inc"
+      ],
+      "ids": [
+        "aspen-aftercare-inc-lincoln"
+      ],
+      "cities": [
+        "Lincoln"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://aspenaftercare.com/",
+      "links": [
+        {
+          "href": "https://aspenaftercare.com/prices/",
+          "text": "Options &#038; Pricing"
+        }
+      ],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "lincolnccfh.com",
+      "href": "https://lincolnccfh.com/",
+      "names": [
+        "Colonial Chapel Funeral Home"
+      ],
+      "ids": [
+        "colonial-chapel-funeral-home-lincoln"
+      ],
+      "cities": [
+        "Lincoln"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://lincolnccfh.com/",
+      "links": [
+        {
+          "href": "https://my.gather.app/gpl/colonial-chapel-funeral-home",
+          "text": "Pricing"
+        }
+      ],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "lincolnffc.com",
+      "href": "https://lincolnffc.com/",
+      "names": [
+        "Lincoln Family Funeral Care"
+      ],
+      "ids": [
+        "lincoln-family-funeral-care-lincoln"
+      ],
+      "cities": [
+        "Lincoln"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://lincolnffc.com/",
+      "links": [
+        {
+          "href": "https://my.gather.app/gpl/lincoln-family-funeral-care",
+          "text": "Pricing"
+        }
+      ],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "lincolnfh.com",
+      "href": "https://lincolnfh.com/",
+      "names": [
+        "Lincoln Memorial Funeral Home & Cemetery"
+      ],
+      "ids": [
+        "lincoln-memorial-funeral-home-cemetery-lincoln"
+      ],
+      "cities": [
+        "Lincoln"
+      ],
+      "status": 403,
+      "error": "",
+      "finalUrl": "https://www.dignitymemorial.com/funeral-homes/lincoln-ne/lincoln-memorial-funeral-home/9841",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "roperandsons.com",
+      "href": "https://roperandsons.com/",
+      "names": [
+        "Roper & Sons South Lincoln Chapel",
+        "Roper & Sons, Midtown Chapel",
+        "Roper & Sons Chapel"
+      ],
+      "ids": [
+        "roper-sons-south-lincoln-chapel-lincoln",
+        "roper-sons-midtown-chapel-lincoln",
+        "roper-sons-chapel-waverly"
+      ],
+      "cities": [
+        "Lincoln",
+        "Waverly"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.roperandsons.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "wyuka.com",
+      "href": "https://wyuka.com/",
+      "names": [
+        "Wyuka Funeral Home & Cemetery"
+      ],
+      "ids": [
+        "wyuka-funeral-home-cemetery-lincoln"
+      ],
+      "cities": [
+        "Lincoln"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.wyuka.com/",
+      "links": [
+        {
+          "href": "https://www.wyuka.com/service-pricing/",
+          "text": "SERVICE PRICING"
+        }
+      ],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "higginsfuneralhomelc.com",
+      "href": "https://higginsfuneralhomelc.com/",
+      "names": [
+        "Higgins Funeral Home"
+      ],
+      "ids": [
+        "higgins-funeral-home-loup-city"
+      ],
+      "cities": [
+        "Loup City"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.higginsfuneralhomelc.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "pelanfuneralservices.com",
+      "href": "https://pelanfuneralservices.com/",
+      "names": [
+        "Pelan Funeral Services Lyons",
+        "Pelan Funeral Services Oakland",
+        "Pelan Funeral Services Tekamah"
+      ],
+      "ids": [
+        "pelan-funeral-services-lyons-lyons",
+        "pelan-funeral-services-oakland-oakland",
+        "pelan-funeral-services-tekamah-tekamah"
+      ],
+      "cities": [
+        "Lyons",
+        "Oakland",
+        "Tekamah"
+      ],
+      "status": 403,
+      "error": "",
+      "finalUrl": "https://pelanfuneralservices.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "carpenterbreland.com",
+      "href": "https://carpenterbreland.com/",
+      "names": [
+        "Carpenter-Breland FH of McCook"
+      ],
+      "ids": [
+        "carpenter-breland-fh-of-mccook-mccook"
+      ],
+      "cities": [
+        "McCook"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.carpenterbreland.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "herrmannfh.com",
+      "href": "https://herrmannfh.com/",
+      "names": [
+        "Herrmann-Jones Funeral Chapel of McCook"
+      ],
+      "ids": [
+        "herrmann-jones-funeral-chapel-of-mccook-mccook"
+      ],
+      "cities": [
+        "McCook"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.herrmannfh.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "bridgmanfuneralhome.com",
+      "href": "https://www.bridgmanfuneralhome.com/",
+      "names": [
+        "Jones Mortuary",
+        "Bridgman Funeral Home - Scottsbluff"
+      ],
+      "ids": [
+        "jones-mortuary-mitchell",
+        "bridgman-funeral-home-scottsbluff-scottsbluff"
+      ],
+      "cities": [
+        "Mitchell",
+        "Scottsbluff"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.bridgmanfuneralhome.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "marshallfuneral.com",
+      "href": "https://www.marshallfuneral.com/",
+      "names": [
+        "Marshall Funeral Chapel"
+      ],
+      "ids": [
+        "marshall-funeral-chapel-nebraska-city"
+      ],
+      "cities": [
+        "Nebraska City"
+      ],
+      "status": 403,
+      "error": "",
+      "finalUrl": "https://www.marshallfuneral.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "pricefuneralhomes.com",
+      "href": "https://pricefuneralhomes.com/",
+      "names": [
+        "Klawitter-Price Funeral Home",
+        "Megrue-Price Funeral Home"
+      ],
+      "ids": [
+        "klawitter-price-funeral-home-nelson",
+        "megrue-price-funeral-home-superior"
+      ],
+      "cities": [
+        "Nelson",
+        "Superior"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.pricefuneralhomes.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "stonacekfuneralchapel.com",
+      "href": "https://stonacekfuneralchapel.com/",
+      "names": [
+        "Stonacek Funeral Chapel - Norfolk",
+        "Stonacek Memorial Chapel - Osmond",
+        "Stonacek Memorial Chapel - Pierce",
+        "Stonacek Funeral Chapel - Randolph"
+      ],
+      "ids": [
+        "stonacek-funeral-chapel-norfolk-norfolk",
+        "stonacek-memorial-chapel-osmond-osmond",
+        "stonacek-memorial-chapel-pierce-pierce",
+        "stonacek-funeral-chapel-randolph-randolph"
+      ],
+      "cities": [
+        "Norfolk",
+        "Osmond",
+        "Pierce",
+        "Randolph"
+      ],
+      "status": 403,
+      "error": "",
+      "finalUrl": "https://www.stonacekfuneralchapel.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "odeanchapel.com",
+      "href": "https://odeanchapel.com/",
+      "names": [
+        "Odean Colonial Chapel at C & Sycamore"
+      ],
+      "ids": [
+        "odean-colonial-chapel-at-c-sycamore-north-platte"
+      ],
+      "cities": [
+        "North Platte"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.odeanchapel.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "biglinsmortuary.com",
+      "href": "https://biglinsmortuary.com/",
+      "names": [
+        "Biglin's Mortuary, Inc"
+      ],
+      "ids": [
+        "biglin-s-mortuary-inc-o-neill"
+      ],
+      "cities": [
+        "O'Neill"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.biglinsmortuary.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "drauckerfh.com",
+      "href": "https://www.drauckerfh.com/",
+      "names": [
+        "Draucker Funeral Home"
+      ],
+      "ids": [
+        "draucker-funeral-home-ogallala"
+      ],
+      "cities": [
+        "Ogallala"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.drauckerfh.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "prairiehillsfuneralhome.com",
+      "href": "https://prairiehillsfuneralhome.com/",
+      "names": [
+        "Prairie Hills Funeral Home"
+      ],
+      "ids": [
+        "prairie-hills-funeral-home-ogallala"
+      ],
+      "cities": [
+        "Ogallala"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.prairiehillsfuneralhome.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "forestlawnomaha.com",
+      "href": "https://forestlawnomaha.com/",
+      "names": [
+        "Forest Lawn Funeral Home"
+      ],
+      "ids": [
+        "forest-lawn-funeral-home-omaha"
+      ],
+      "cities": [
+        "Omaha"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.forestlawnomaha.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "heafeyheafey.com",
+      "href": "https://www.heafeyheafey.com/",
+      "names": [
+        "Heafey - Hoffmann - Dworak & Cutler Dworak Chapel",
+        "Heafey - Hoffmann - Dworak & Cutler Mortuaries & Crematory"
+      ],
+      "ids": [
+        "heafey-hoffmann-dworak-cutler-dworak-chapel-omah",
+        "heafey-hoffmann-dworak-cutler-mortuaries-cremato"
+      ],
+      "cities": [
+        "Omaha"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.heafeyheafey.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "johnagentleman.com",
+      "href": "https://www.johnagentleman.com/",
+      "names": [
+        "John A Gentleman Mortuaries and Crematory"
+      ],
+      "ids": [
+        "john-a-gentleman-mortuaries-and-crematory-omaha"
+      ],
+      "cities": [
+        "Omaha"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.johnagentleman.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "klsfuneralhome.com",
+      "href": "https://klsfuneralhome.com/",
+      "names": [
+        "Korisko-Larkin-Staskiewicz Funeral Home"
+      ],
+      "ids": [
+        "korisko-larkin-staskiewicz-funeral-home-omaha"
+      ],
+      "cities": [
+        "Omaha"
+      ],
+      "status": 403,
+      "error": "",
+      "finalUrl": "https://klsfuneralhome.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "dubasfuneralhome.com",
+      "href": "https://dubasfuneralhome.com/",
+      "names": [
+        "Dubas Funeral Home - Osceola",
+        "Dubas Funeral Home - Stromsburg"
+      ],
+      "ids": [
+        "dubas-funeral-home-osceola-osceola",
+        "dubas-funeral-home-stromsburg-stromsburg"
+      ],
+      "cities": [
+        "Osceola",
+        "Stromsburg"
+      ],
+      "status": 403,
+      "error": "",
+      "finalUrl": "https://www.dubasfuneralhome.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "ashburnfh.com",
+      "href": "https://ashburnfh.com/",
+      "names": [
+        "Ashburn Funeral Home - Osmond"
+      ],
+      "ids": [
+        "ashburn-funeral-home-osmond-osmond"
+      ],
+      "cities": [
+        "Osmond"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.snidermemorialfh.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "munderlohfuneralhome.com",
+      "href": "https://munderlohfuneralhome.com/",
+      "names": [
+        "Munderloh-Smith Funeral Home",
+        "Munderloh-Smith Funeral Home - Wakefield"
+      ],
+      "ids": [
+        "munderloh-smith-funeral-home-pender",
+        "munderloh-smith-funeral-home-wakefield-wakefield"
+      ],
+      "cities": [
+        "Pender",
+        "Wakefield"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.munderlohsmith.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "bpharveyfuneralhome.com",
+      "href": "https://www.bpharveyfuneralhome.com/",
+      "names": [
+        "Brian P. Harvey Funeral Home"
+      ],
+      "ids": [
+        "brian-p-harvey-funeral-home-plattsmouth"
+      ],
+      "cities": [
+        "Plattsmouth"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.bpharveyfuneralhome.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "robyfuneralhome.com",
+      "href": "https://robyfuneralhome.com/",
+      "names": [
+        "Roby Funeral Home"
+      ],
+      "ids": [
+        "roby-funeral-home-plattsmouth"
+      ],
+      "cities": [
+        "Plattsmouth"
+      ],
+      "status": 403,
+      "error": "",
+      "finalUrl": "https://www.robyfuneralhome.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "meyerbrothersfuneralhome.com",
+      "href": "https://meyerbrothersfuneralhome.com/",
+      "names": [
+        "Mohr Funeral Home, Inc.",
+        "Mohr and Becker-Hunt Funeral Home"
+      ],
+      "ids": [
+        "mohr-funeral-home-inc-ponca",
+        "mohr-and-becker-hunt-funeral-home-south-sioux-ci"
+      ],
+      "cities": [
+        "Ponca",
+        "South Sioux City"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.meyerbroschapels.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "moravecjohnson.com",
+      "href": "https://www.moravecjohnson.com/",
+      "names": [
+        "Svoboda Moravec Johnson Mortuary"
+      ],
+      "ids": [
+        "svoboda-moravec-johnson-mortuary-schuyler"
+      ],
+      "cities": [
+        "Schuyler"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.moravecjohnson.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "dugankramer.com",
+      "href": "https://www.dugankramer.com/",
+      "names": [
+        "Dugan-Kramer Funeral Home & Crematory"
+      ],
+      "ids": [
+        "dugan-kramer-funeral-home-crematory-scottsbluff"
+      ],
+      "cities": [
+        "Scottsbluff"
+      ],
+      "status": 403,
+      "error": "",
+      "finalUrl": "https://www.dignitymemorial.com/funeral-homes/scottsbluff-ne/dugan-kramer-funeral-home-crematory/8276",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "reverencefuneralparlor.com",
+      "href": "https://www.reverencefuneralparlor.com/",
+      "names": [
+        "Reverence Funeral Parlor"
+      ],
+      "ids": [
+        "reverence-funeral-parlor-scottsbluff"
+      ],
+      "cities": [
+        "Scottsbluff"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.reverencefuneralparlor.com/",
+      "links": [
+        {
+          "href": "https://www.reverencefuneralparlor.com/general-price-list",
+          "text": "General Price List"
+        }
+      ],
+      "mentionsGpl": true,
+      "hints": []
+    },
+    {
+      "host": "volzkefuneralhome.com",
+      "href": "https://volzkefuneralhome.com/",
+      "names": [
+        "Volzke Funeral Home"
+      ],
+      "ids": [
+        "volzke-funeral-home-seward"
+      ],
+      "cities": [
+        "Seward"
+      ],
+      "status": 403,
+      "error": "",
+      "finalUrl": "https://volzkefuneralhome.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "zabkafuneralhome.com",
+      "href": "https://zabkafuneralhome.com/",
+      "names": [
+        "Zabka-Perdue Funeral Home - Seward"
+      ],
+      "ids": [
+        "zabka-perdue-funeral-home-seward-seward"
+      ],
+      "cities": [
+        "Seward"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.zabkaperduefuneralhome.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "gehrigstittchapel.com",
+      "href": "https://www.gehrigstittchapel.com/",
+      "names": [
+        "Gehrig-Stitt Chapel"
+      ],
+      "ids": [
+        "gehrig-stitt-chapel-sidney"
+      ],
+      "cities": [
+        "Sidney"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.gehrigstittchapel.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "jacobsengreenway.com",
+      "href": "https://www.jacobsengreenway.com/",
+      "names": [
+        "Jacobsen-Greenway-Dietz Funeral Home"
+      ],
+      "ids": [
+        "jacobsen-greenway-dietz-funeral-home-st-paul"
+      ],
+      "cities": [
+        "St. Paul"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.jacobsengreenway.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "petersfuneralhome.net",
+      "href": "https://petersfuneralhome.net/",
+      "names": [
+        "Peters Funeral Home"
+      ],
+      "ids": [
+        "peters-funeral-home-st-paul"
+      ],
+      "cities": [
+        "St. Paul"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.petersfuneralhome.net/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "holmesfh.com",
+      "href": "https://holmesfh.com/",
+      "names": [
+        "Holmes Funeral Home, Inc"
+      ],
+      "ids": [
+        "holmes-funeral-home-inc-valentine"
+      ],
+      "cities": [
+        "Valentine"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.holmesfh.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "sandozfuneralhome.com",
+      "href": "https://sandozfuneralhome.com/",
+      "names": [
+        "Sandoz Chapel of the Pines"
+      ],
+      "ids": [
+        "sandoz-chapel-of-the-pines-valentine"
+      ],
+      "cities": [
+        "Valentine"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.sandozfuneralhome.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "hasemannfuneralhome.com",
+      "href": "https://hasemannfuneralhome.com/",
+      "names": [
+        "Hasemann Funeral Home"
+      ],
+      "ids": [
+        "hasemann-funeral-home-wayne"
+      ],
+      "cities": [
+        "Wayne"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.hasemannfuneralhome.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "hammonsfs.com",
+      "href": "https://hammonsfs.com/",
+      "names": [
+        "Hammons Family Funeral Services"
+      ],
+      "ids": [
+        "hammons-family-funeral-services-weeping-water"
+      ],
+      "cities": [
+        "Weeping Water"
+      ],
+      "status": 403,
+      "error": "",
+      "finalUrl": "https://hammonsfs.com/",
+      "links": [],
+      "mentionsGpl": false,
+      "hints": []
+    }
+  ]
+}

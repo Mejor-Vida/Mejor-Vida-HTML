@@ -14,6 +14,7 @@ Owner: `lib/facebook-comment-reply.js`. Real questions use **RAG**. Do **not** p
 - Later replies: skip that intro. 1–2 short **usted** sentences. “Si tiene otra pregunta, puede escribirla aquí.”
 - Bare INFO / Information / REVISAR: intro only. No blog URL.
 - Public-facing only: no phones, emails, URLs, licensed-state roster, mailing address, sample monthly prices, or carrier shopping lists unless they named a carrier.
+- Negative / hostile comments (scam, insult, “don’t buy this,” rant with no product question): **skip RAG**. Thank them (first name if Facebook sent it). Do not argue, joke, lecture, or say “that’s why you should plan.” Julie will private-message. If they also asked a cost / eligibility / who-is-Julie question, answer that locked line only.
 
 ```js
 // BAD — website chat

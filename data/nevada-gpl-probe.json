@@ -1,0 +1,141 @@
+{
+  "updated": "2026-09-19",
+  "sites": 3,
+  "promising": 2,
+  "withHints": 1,
+  "results": [
+    {
+      "host": "dignitymemorial.com",
+      "href": "https://www.dignitymemorial.com/funeral-homes/nevada/henderson/palm-boulder-highway-mortuary/1010",
+      "names": [
+        "Palm Boulder Highway Mortuary",
+        "Palm Cheyenne Mortuary",
+        "Palm Downtown Mortuary",
+        "Palm Eastern Mortuary",
+        "Palm Northwest Mortuary",
+        "Palm South Jones Mortuary",
+        "Palm Southwest Mortuary"
+      ],
+      "ids": [
+        "palm-boulder-highway-mortuary-henderson",
+        "palm-cheyenne-mortuary-las-vegas",
+        "palm-downtown-mortuary-las-vegas",
+        "palm-eastern-mortuary-las-vegas",
+        "palm-northwest-mortuary-las-vegas",
+        "palm-south-jones-mortuary-las-vegas",
+        "palm-southwest-mortuary-las-vegas"
+      ],
+      "cities": [
+        "Henderson",
+        "Las Vegas"
+      ],
+      "status": 403,
+      "error": "",
+      "finalUrl": "https://www.dignitymemorial.com/funeral-homes/nevada/henderson/palm-boulder-highway-mortuary/1010",
+      "links": [],
+      "followed": "",
+      "mentionsGpl": false,
+      "hints": []
+    },
+    {
+      "host": "bunkerslv.com",
+      "href": "https://www.bunkerslv.com/general-price-list",
+      "names": [
+        "Bunker's Eden Vale Mortuary"
+      ],
+      "ids": [
+        "bunker-s-eden-vale-mortuary-las-vegas"
+      ],
+      "cities": [
+        "Las Vegas"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.bunkerslv.com/general-price-list",
+      "links": [
+        {
+          "href": "https://www.bunkerslv.com/general-price-list#",
+          "text": "LOCATIONS"
+        },
+        {
+          "href": "https://irp.cdn-website.com/70441e3b/files/uploaded/Bunkers-Combined-GPL-CPL-10132025.pdf",
+          "text": "DOWNLOAD GPL"
+        },
+        {
+          "href": "https://irp.cdn-website.com/70441e3b/files/uploaded/snst99841bunkersfuneralhome1UPDATED.pdf",
+          "text": "PDF"
+        }
+      ],
+      "followed": "https://www.bunkerslv.com/general-price-list#",
+      "mentionsGpl": true,
+      "hints": []
+    },
+    {
+      "host": "waltonsfuneralhomes.com",
+      "href": "https://www.waltonsfuneralhomes.com/waltons-ross-burke-knobel-price-list/",
+      "names": [
+        "Walton's Funerals & Cremations - Ross, Burke & Knobel"
+      ],
+      "ids": [
+        "walton-s-funerals-cremations-ross-burke-knobel-r"
+      ],
+      "cities": [
+        "Reno"
+      ],
+      "status": 200,
+      "error": "",
+      "finalUrl": "https://www.waltonsfuneralhomes.com/waltons-ross-burke-knobel-price-list/",
+      "links": [
+        {
+          "href": "https://www.waltonsfuneralhomes.com/package-pricing/",
+          "text": "Service Packages"
+        },
+        {
+          "href": "https://www.waltonsfuneralhomes.com/general-price-list/",
+          "text": "General Price List"
+        },
+        {
+          "href": "https://www.waltonsfuneralhomes.com/waltons-sierra-chapel-price-list/",
+          "text": "Sierra Chapel"
+        },
+        {
+          "href": "https://www.waltonsfuneralhomes.com/waltons-obrien-rogers-crosby-price-list/",
+          "text": "O’Brien-Rogers &#038; Crosby"
+        },
+        {
+          "href": "https://www.waltonsfuneralhomes.com/waltons-ross-burke-knobel-price-list/",
+          "text": "Ross, Burke &#038; Knobel"
+        },
+        {
+          "href": "https://www.waltonsfuneralhomes.com/waltons-sparks-price-list/",
+          "text": "Sparks"
+        },
+        {
+          "href": "https://www.waltonsfuneralhomes.com/waltons-chapel-of-the-valley-price-list/",
+          "text": "Chapel of the Valley"
+        },
+        {
+          "href": "https://www.waltonsfuneralhomes.com/waltons-gardnerville-price-list/",
+          "text": "Gardnerville"
+        },
+        {
+          "href": "https://www.waltonsfuneralhomes.com/wp-content/uploads/2026/02/RBKR-21-GPL-02-26-2026.pdf",
+          "text": "RBKR-21-GPL-02-26-2026"
+        },
+        {
+          "href": "https://www.waltonsfuneralhomes.com/wp-content/uploads/2026/03/Waltons_Urn-Digital-Catalog_2026.pdf",
+          "text": "PDF"
+        },
+        {
+          "href": "https://www.waltonsfuneralhomes.com/wp-content/uploads/2025/05/Urn-Catalog-11.8.24.pdf",
+          "text": "PDF"
+        }
+      ],
+      "followed": "https://www.waltonsfuneralhomes.com/general-price-list/",
+      "mentionsGpl": true,
+      "hints": [
+        "Memorial Service in Reno by Walton&#039;s Funerals and Cremations 775-323-7189"
+      ]
+    }
+  ]
+}

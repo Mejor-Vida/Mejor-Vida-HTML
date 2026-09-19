@@ -10,7 +10,7 @@ const { writeFuneralResourceIndex } = require("../lib/funeral-resource-index");
 const html = require("../lib/funeral-directory-html");
 
 const ROOT = path.join(__dirname, "..");
-const CSS_VER = "20260918-dir8";
+const CSS_VER = "20260919-dir15";
 const HEADER_ES = path.join(ROOT, "includes/site-header-inner.html");
 const HEADER_EN = path.join(ROOT, "includes/en-site-header.html");
 const FOOTER_ES = path.join(ROOT, "includes/site-footer-inner.html");
@@ -63,6 +63,25 @@ function quoteHref(lang, depth) {
 
 function scheduleHref(lang, depth) {
   return `${"../".repeat(depth)}schedule-julie.html`;
+}
+
+function contactCtx(lang, depth) {
+  const p = "../".repeat(depth);
+  const isEn = lang === "en";
+  return {
+    quoteHref: `${p}quote.html`,
+    scheduleHref: `${p}schedule-julie.html`,
+    estimatorHref: `${p}final-expense-estimator.html`,
+    contactHref: `${p}contact.html`,
+    whatsappHref: isEn
+      ? "https://wa.me/14024405438?text=Hi%2C%20I%20want%20a%20free%20final%20expense%20insurance%20quote."
+      : "https://wa.me/14024405438?text=Hola%2C%20quiero%20una%20cotizaci%C3%B3n%20gratis%20de%20seguro%20de%20gastos%20finales.",
+    smsHref: isEn
+      ? "sms:+14028441199?body=Hi%20Julie%2C%20I%20have%20questions%20about%20my%20quote."
+      : "sms:+14028441199?body=Hola%20Julie%2C%20tengo%20preguntas%20sobre%20mi%20cotizaci%C3%B3n.",
+    phoneHref: "tel:+14024405438",
+    asset: assetPrefix(lang, depth),
+  };
 }
 
 function wrapPage({
@@ -169,21 +188,15 @@ function hubPage(lang, data) {
   const desc = isEn
     ? "Look up funeral homes, cemeteries, and published general price list figures by city. Smaller towns open the nearest resource list."
     : "Busque funerarias, cementerios y listas generales de precios publicadas por ciudad. Los pueblos más pequeños abren la lista de recursos más cercana.";
-  const h1 = isEn ? "Funeral homes and cemeteries" : "Funerarias y cementerios";
-  const lead = isEn
-    ? "This is a contact directory, not a teaching page. Search a city — including smaller towns — to open that city’s resource page with phone numbers, websites, and any general price list we have copied from the funeral home."
-    : "Esto es un directorio de contactos, no una página de enseñanza. Busque una ciudad — también un pueblo más pequeño — para abrir su página de recursos con teléfonos, sitios web y la lista general de precios que hayamos copiado de la funeraria.";
-  const body = `<section class="mvi-fhdir" data-mvi-fhdir data-lang="${isEn ? "en" : "es"}" data-src="/data/funeral-resources.json">
-  <div class="mvi-fhdir__hero">
-    <div class="container">
-      <h1>${h1}</h1>
-      <p>${lead}</p>
-    </div>
-  </div>
-  ${html.searchPanel(isEn, "fhdir-q")}
+  const h1 = isEn
+    ? "Find funeral homes and prices near you"
+    : "Encuentre funerarias y precios cerca de usted";
+  const ctx = contactCtx(lang, 0);
+  const body = `<section class="mvi-fhdir" data-mvi-fhdir data-fhdir-lang="${isEn ? "en" : "es"}" data-src="/data/funeral-resources.json">
+  ${html.funeralSearchHero(isEn, { inputId: "fhdir-q", headingLevel: 1 })}
   <div class="mvi-fhdir__results" data-fhdir-results></div>
+  ${html.funeralInsuranceCTA(isEn, ctx)}
   ${html.legalHtml(isEn)}
-  ${html.ctaHtml(isEn, quoteHref(lang, 0), scheduleHref(lang, 0))}
 </section>`;
   return wrapPage({
     lang,
@@ -223,23 +236,17 @@ function statePage(lang, state, data) {
   const desc = isEn
     ? `City-by-city funeral home and cemetery contacts in ${name}, with published general price list figures where Mejor Vida Insurance has copied them.`
     : `Contactos de funerarias y cementerios ciudad por ciudad en ${name}, con listas generales de precios publicadas donde Mejor Vida Seguros las ha copiado.`;
-  const h1 = isEn
-    ? `Funeral homes and cemeteries in ${name}`
-    : `Funerarias y cementerios en ${name}`;
+  const h1 = isEn ? `Funeral homes in ${name}` : `Funerarias en ${name}`;
   const hubHref = isEn ? "../funeral-homes-cemeteries.html" : "../funerarias-cementerios.html";
-  const body = `<section class="mvi-fhdir" data-mvi-fhdir data-lang="${isEn ? "en" : "es"}" data-src="/data/funeral-resources.json">
-  <div class="mvi-fhdir__hero">
-    <div class="container">
-      <h1>${h1}</h1>
-    </div>
-  </div>
-  ${html.searchPanel(isEn, `fhdir-q-${state.slug}`)}
+  const ctx = { ...contactCtx(lang, 1), updated: data.updated };
+  const body = `<section class="mvi-fhdir" data-mvi-fhdir data-fhdir-lang="${isEn ? "en" : "es"}" data-src="/data/funeral-resources.json" data-state="${state.code}" data-state-name="${name}">
+  ${html.funeralSearchHero(isEn, { inputId: `fhdir-q-${state.slug}`, headingLevel: 0, stateCode: state.code })}
   <div class="mvi-fhdir__place">
-    ${html.stateBody(state, listings, isEn, hubHref)}
+    ${html.stateBody(state, listings, isEn, hubHref, ctx)}
   </div>
   <div class="mvi-fhdir__results" data-fhdir-results></div>
+  ${html.funeralInsuranceCTA(isEn, ctx)}
   ${html.legalHtml(isEn)}
-  ${html.ctaHtml(isEn, quoteHref(lang, 1), scheduleHref(lang, 1))}
 </section>`;
   return wrapPage({
     lang,
@@ -263,7 +270,7 @@ function statePage(lang, state, data) {
   });
 }
 
-function cityPage(lang, listing) {
+function cityPage(lang, listing, data) {
   const isEn = lang === "en";
   const city = isEn ? listing.nameEn : listing.nameEs;
   const state = isEn ? listing.stateNameEn : listing.stateNameEs;
@@ -276,11 +283,11 @@ function cityPage(lang, listing) {
     : `https://www.mejorvidainsurance.com${listing.pathEn}`;
   const h1 = near
     ? isEn
-      ? `Funeral homes and cemeteries near ${city}, ${state}`
-      : `Funerarias y cementerios cerca de ${city}, ${state}`
+      ? `Funeral homes near ${city}, ${state}`
+      : `Funerarias cerca de ${city}, ${state}`
     : isEn
-      ? `Funeral homes and cemeteries in ${city}, ${state}`
-      : `Funerarias y cementerios en ${city}, ${state}`;
+      ? `Funeral homes in ${city}, ${state}`
+      : `Funerarias en ${city}, ${state}`;
   const title = `${h1} | ${isEn ? "Mejor Vida Insurance" : "Mejor Vida Seguros"}`;
   const desc = isEn
     ? `Funeral home phone numbers, websites, and published general price list figures for ${city}, ${state}. Resource list from Mejor Vida Insurance.`
@@ -288,23 +295,20 @@ function cityPage(lang, listing) {
   const hubHref = isEn
     ? "../../funeral-homes-cemeteries.html"
     : "../../funerarias-cementerios.html";
-  const stateHref = isEn
-    ? `../${listing.stateSlug}.html`
-    : `../${listing.stateSlug}.html`;
-  const body = `<section class="mvi-fhdir" data-mvi-fhdir data-lang="${isEn ? "en" : "es"}" data-src="/data/funeral-resources.json">
-  <div class="mvi-fhdir__hero">
-    <div class="container">
-      <h1>${h1}</h1>
-    </div>
-  </div>
-  ${html.searchPanel(isEn, `fhdir-q-${listing.slug}`)}
+  const stateHref = `../${listing.stateSlug}.html`;
+  const ctx = { ...contactCtx(lang, 2), updated: data.updated };
+  const body = `<section class="mvi-fhdir" data-mvi-fhdir data-fhdir-lang="${isEn ? "en" : "es"}" data-src="/data/funeral-resources.json" data-state="${html.esc(listing.stateCode)}" data-state-name="${html.esc(state)}" data-city="${html.esc(city)}">
+  ${html.funeralSearchHero(isEn, {
+    inputId: `fhdir-q-${listing.slug}`,
+    headingLevel: 0,
+    stateCode: listing.stateCode,
+    cityName: city,
+  })}
   <div class="mvi-fhdir__place">
-    ${html.listingBody(listing, isEn, hubHref, stateHref, {
-      quoteHref: quoteHref(lang, 2),
-      scheduleHref: scheduleHref(lang, 2),
-    })}
+    ${html.listingBody(listing, isEn, hubHref, stateHref, ctx)}
   </div>
   <div class="mvi-fhdir__results" data-fhdir-results></div>
+  ${html.funeralInsuranceCTA(isEn, ctx)}
   ${html.legalHtml(isEn)}
 </section>`;
   return wrapPage({
@@ -350,8 +354,8 @@ data.listings.forEach((listing) => {
   writeBoth(
     listing.pathEs.replace(/^\//, ""),
     listing.pathEn.replace(/^\//, ""),
-    cityPage("es", listing),
-    cityPage("en", listing)
+    cityPage("es", listing, data),
+    cityPage("en", listing, data)
   );
 });
 
