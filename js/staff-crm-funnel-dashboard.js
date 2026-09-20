@@ -170,7 +170,10 @@
   }
 
   function fmtChartValue(metric, val) {
+    var kind = gscMetricKind(metric);
     if (metric === "spend") return fmtCurrency(val);
+    if (kind === "gsc_ctr") return fmtPctRate(val);
+    if (kind === "gsc_position") return fmtPosition(val);
     return fmtNum(val);
   }
 
@@ -936,23 +939,65 @@
     } else {
       html += '<div class="crm-funnel-ad-metrics-grid">';
       html +=
-        '<button type="button" class="crm-funnel-ad-metric crm-funnel-ad-metric--clickable" data-funnel-ad-chart="gsc_clicks">' +
+        '<button type="button" class="crm-funnel-ad-metric crm-funnel-ad-metric--clickable" data-funnel-ad-chart="gsc_clicks" title="' +
+        esc(t("funnel_ad_chart_hint")) +
+        '">' +
         '<span class="crm-funnel-ad-metric-label">' + esc(t("funnel_gsc_clicks")) + "</span>" +
         '<strong class="crm-funnel-ad-metric-value">' + esc(fmtNum(metrics.clicks)) + "</strong>" +
         '<span class="crm-funnel-ad-metric-hint">' + esc(t("funnel_ad_chart_hint")) + "</span></button>";
       html +=
-        '<button type="button" class="crm-funnel-ad-metric crm-funnel-ad-metric--clickable" data-funnel-ad-chart="gsc_impressions">' +
+        '<button type="button" class="crm-funnel-ad-metric crm-funnel-ad-metric--clickable" data-funnel-ad-chart="gsc_impressions" title="' +
+        esc(t("funnel_ad_chart_hint")) +
+        '">' +
         '<span class="crm-funnel-ad-metric-label">' + esc(t("funnel_gsc_impressions")) + "</span>" +
         '<strong class="crm-funnel-ad-metric-value">' + esc(fmtNum(metrics.impressions)) + "</strong>" +
         '<span class="crm-funnel-ad-metric-hint">' + esc(t("funnel_ad_chart_hint")) + "</span></button>";
       html +=
-        '<div class="crm-funnel-ad-metric">' +
+        '<button type="button" class="crm-funnel-ad-metric crm-funnel-ad-metric--clickable" data-funnel-ad-chart="gsc_ctr" title="' +
+        esc(t("funnel_ad_chart_hint")) +
+        '">' +
         '<span class="crm-funnel-ad-metric-label">' + esc(t("funnel_gsc_ctr")) + "</span>" +
-        '<strong class="crm-funnel-ad-metric-value">' + esc(fmtPctRate(metrics.ctr)) + "</strong></div>";
+        '<strong class="crm-funnel-ad-metric-value">' + esc(fmtPctRate(metrics.ctr)) + "</strong>" +
+        '<span class="crm-funnel-ad-metric-hint">' + esc(t("funnel_ad_chart_hint")) + "</span></button>";
       html +=
-        '<div class="crm-funnel-ad-metric">' +
+        '<button type="button" class="crm-funnel-ad-metric crm-funnel-ad-metric--clickable" data-funnel-ad-chart="gsc_position" title="' +
+        esc(t("funnel_ad_chart_hint")) +
+        '">' +
         '<span class="crm-funnel-ad-metric-label">' + esc(t("funnel_gsc_position")) + "</span>" +
-        '<strong class="crm-funnel-ad-metric-value">' + esc(fmtPosition(metrics.position)) + "</strong></div>";
+        '<strong class="crm-funnel-ad-metric-value">' + esc(fmtPosition(metrics.position)) + "</strong>" +
+        '<span class="crm-funnel-ad-metric-hint">' + esc(t("funnel_ad_chart_hint")) + "</span></button>";
+      var home = metrics.home || {};
+      html +=
+        '<button type="button" class="crm-funnel-ad-metric crm-funnel-ad-metric--clickable crm-funnel-ad-metric--home" data-funnel-ad-chart="gsc_home_position" title="' +
+        esc(t("funnel_gsc_main_page_hint")) +
+        '">' +
+        '<span class="crm-funnel-ad-metric-label">' + esc(t("funnel_gsc_main_page")) + "</span>" +
+        '<strong class="crm-funnel-ad-metric-value">' + esc(fmtPosition(home.position)) + "</strong>" +
+        '<span class="crm-funnel-ad-metric-home-stats">' +
+        esc(
+          t("funnel_gsc_main_page_stats", {
+            clicks: fmtNum(home.clicks),
+            impr: fmtNum(home.impressions),
+            ctr: fmtPctRate(home.ctr),
+          })
+        ) +
+        "</span></button>";
+      var cities = metrics.cities || {};
+      html +=
+        '<button type="button" class="crm-funnel-ad-metric crm-funnel-ad-metric--clickable crm-funnel-ad-metric--home" data-funnel-ad-chart="gsc_city_position" title="' +
+        esc(t("funnel_gsc_city_pages_hint")) +
+        '">' +
+        '<span class="crm-funnel-ad-metric-label">' + esc(t("funnel_gsc_city_pages")) + "</span>" +
+        '<strong class="crm-funnel-ad-metric-value">' + esc(fmtPosition(cities.position)) + "</strong>" +
+        '<span class="crm-funnel-ad-metric-home-stats">' +
+        esc(
+          t("funnel_gsc_main_page_stats", {
+            clicks: fmtNum(cities.clicks),
+            impr: fmtNum(cities.impressions),
+            ctr: fmtPctRate(cities.ctr),
+          })
+        ) +
+        "</span></button>";
       html += "</div>";
 
       if (metrics.firstIncompleteDate && metrics.dateTo >= metrics.firstIncompleteDate) {
@@ -1006,6 +1051,162 @@
     );
   }
 
+  function chicagoTodayYmd() {
+    return new Intl.DateTimeFormat("en-CA", {
+      timeZone: "America/Chicago",
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    }).format(new Date());
+  }
+
+  function gscIncompleteFrom() {
+    var meta = (state.adChartData && state.adChartData.firstIncompleteDate) || "";
+    var today = chicagoTodayYmd();
+    if (meta && meta < today) return meta;
+    return today;
+  }
+
+  function gscCompleteDaily(daily) {
+    var cutoff = gscIncompleteFrom();
+    return (daily || []).filter(function (d) {
+      if (!d || !d.date || d.date >= cutoff) return false;
+      return (Number(d.impressions) || 0) > 0;
+    });
+  }
+
+  function fmtSignedPct(n) {
+    var v = Number(n);
+    if (!isFinite(v)) return "—";
+    var digits = Math.abs(v) < 10 ? 1 : 0;
+    var body = Math.abs(v).toFixed(digits);
+    if (Object.is(v, -0) || v === 0) return "0";
+    return (v > 0 ? "+" : "−") + body;
+  }
+
+  function gscMetricKind(metric) {
+    var m = String(metric || "");
+    if (m.indexOf("gsc_home_") === 0) return "gsc_" + m.slice("gsc_home_".length);
+    if (m.indexOf("gsc_city_") === 0) return "gsc_" + m.slice("gsc_city_".length);
+    return m;
+  }
+
+  function gscChartScope(metric) {
+    var m = String(metric || "");
+    if (m.indexOf("gsc_home_") === 0) return "home";
+    if (m.indexOf("gsc_city_") === 0) return "city";
+    return "";
+  }
+
+  function isGscChartMetric(metric) {
+    return String(metric || "").indexOf("gsc_") === 0;
+  }
+
+  function gscPeriodValue(metric, rows) {
+    var kind = gscMetricKind(metric);
+    var clicks = 0;
+    var impressions = 0;
+    var posW = 0;
+    (rows || []).forEach(function (d) {
+      var c = Number(d.clicks) || 0;
+      var i = Number(d.impressions) || 0;
+      var p = Number(d.position) || 0;
+      clicks += c;
+      impressions += i;
+      if (i > 0 && p > 0) posW += p * i;
+    });
+    if (kind === "gsc_clicks") return clicks;
+    if (kind === "gsc_impressions") return impressions;
+    if (kind === "gsc_ctr") return impressions > 0 ? clicks / impressions : null;
+    if (kind === "gsc_position") return impressions > 0 ? posW / impressions : null;
+    return null;
+  }
+
+  function gscTrendScore(metric, daily) {
+    var rows = gscCompleteDaily(daily);
+    if (rows.length < 4) return { ok: false };
+    var mid = Math.floor(rows.length / 2);
+    var first = gscPeriodValue(metric, rows.slice(0, mid));
+    var second = gscPeriodValue(metric, rows.slice(mid));
+    if (first == null || second == null) return { ok: false };
+    var kind = gscMetricKind(metric);
+    var periodPct;
+    if (kind === "gsc_position") {
+      if (!(first > 0)) return { ok: false };
+      periodPct = ((first - second) / first) * 100;
+    } else if (first === 0 && second === 0) {
+      periodPct = 0;
+    } else if (first === 0) {
+      periodPct = second > 0 ? 100 : 0;
+    } else {
+      periodPct = ((second - first) / first) * 100;
+    }
+    var daysBetweenCenters = Math.max(1, rows.length / 2);
+    var dailyRate = periodPct / daysBetweenCenters;
+    var abs = Math.abs(periodPct);
+    var direction = abs < 3 ? "flat" : periodPct > 0 ? "up" : "down";
+    return {
+      ok: true,
+      direction: direction,
+      periodPct: periodPct,
+      dailyRate: dailyRate,
+      first: first,
+      second: second,
+      cutoff: gscIncompleteFrom(),
+    };
+  }
+
+  function fmtGscTrendValue(metric, val) {
+    var kind = gscMetricKind(metric);
+    if (kind === "gsc_ctr") return fmtPctRate(val);
+    if (kind === "gsc_position") return fmtPosition(val);
+    return fmtNum(val);
+  }
+
+  function renderGscTrendScore(metric, daily) {
+    var trend = gscTrendScore(metric, daily);
+    if (!trend.ok) {
+      return (
+        '<p class="crm-funnel-gsc-trend crm-funnel-gsc-trend--flat">' +
+        esc(t("funnel_gsc_trend_need_days")) +
+        "</p>"
+      );
+    }
+    var label =
+      trend.direction === "up"
+        ? t("funnel_gsc_trend_improving")
+        : trend.direction === "down"
+          ? t("funnel_gsc_trend_worsening")
+          : t("funnel_gsc_trend_steady");
+    var signedPeriod = fmtSignedPct(trend.periodPct);
+    var signedRate = fmtSignedPct(trend.dailyRate);
+    return (
+      '<div class="crm-funnel-gsc-trend crm-funnel-gsc-trend--' +
+      esc(trend.direction) +
+      '">' +
+      '<p class="crm-funnel-gsc-trend-kicker">' +
+      esc(label) +
+      "</p>" +
+      '<p class="crm-funnel-gsc-trend-score">' +
+      esc(t("funnel_gsc_trend_period", { n: signedPeriod })) +
+      "</p>" +
+      '<p class="crm-funnel-gsc-trend-rate">' +
+      esc(t("funnel_gsc_trend_rate", { n: signedRate })) +
+      "</p>" +
+      '<p class="crm-funnel-gsc-trend-compare">' +
+      esc(
+        t("funnel_gsc_trend_compare", {
+          first: fmtGscTrendValue(metric, trend.first),
+          second: fmtGscTrendValue(metric, trend.second),
+        })
+      ) +
+      "</p>" +
+      '<p class="crm-funnel-gsc-trend-compare">' +
+      esc(t("funnel_gsc_trend_incomplete", { date: trend.cutoff })) +
+      "</p></div>"
+    );
+  }
+
   function chooseChartBucketDays(dayCount) {
     if (dayCount <= 31) return 1;
     if (dayCount <= 120) return 7;
@@ -1022,6 +1223,8 @@
           clicks: Number(d.clicks) || 0,
           impressions: Number(d.impressions) || 0,
           spend: Number(d.spend) || 0,
+          ctr: Number(d.ctr) || 0,
+          position: Number(d.position) || 0,
           label: fmtShortDate(d.date),
         };
       });
@@ -1031,12 +1234,25 @@
       var chunk = daily.slice(i, i + bucketDays);
       var start = chunk[0].date;
       var end = chunk[chunk.length - 1].date;
-      var agg = { date: start, endDate: end, clicks: 0, impressions: 0, spend: 0 };
+      var agg = {
+        date: start,
+        endDate: end,
+        clicks: 0,
+        impressions: 0,
+        spend: 0,
+        positionWeighted: 0,
+      };
       chunk.forEach(function (d) {
-        agg.clicks += Number(d.clicks) || 0;
-        agg.impressions += Number(d.impressions) || 0;
+        var clicks = Number(d.clicks) || 0;
+        var impressions = Number(d.impressions) || 0;
+        var position = Number(d.position) || 0;
+        agg.clicks += clicks;
+        agg.impressions += impressions;
         agg.spend += Number(d.spend) || 0;
+        if (impressions > 0 && position > 0) agg.positionWeighted += position * impressions;
       });
+      agg.ctr = agg.impressions > 0 ? agg.clicks / agg.impressions : 0;
+      agg.position = agg.impressions > 0 ? agg.positionWeighted / agg.impressions : 0;
       agg.label =
         start === end
           ? fmtShortDate(start)
@@ -1057,22 +1273,42 @@
     if (!daily || !daily.length) {
       return '<p class="crm-funnel-ad-chart-empty">' + esc(t("funnel_ad_no_daily")) + "</p>";
     }
+    var kind = gscMetricKind(metric);
     var key =
       metric === "policies_sold"
         ? "sold"
-        : metric === "clicks" || metric === "gsc_clicks"
+        : metric === "clicks" || kind === "gsc_clicks"
         ? "clicks"
         : metric === "spend"
           ? "spend"
-          : metric === "gsc_impressions"
+          : kind === "gsc_impressions"
             ? "impressions"
-            : "impressions";
+            : kind === "gsc_ctr"
+              ? "ctr"
+              : kind === "gsc_position"
+                ? "position"
+                : "impressions";
     var bucketDays = chooseChartBucketDays(daily.length);
     var series = bucketDailySeries(daily, bucketDays);
     var max = 1;
+    var minPos = null;
+    var maxPos = null;
+    var invertPosition = kind === "gsc_position";
     series.forEach(function (d) {
-      if ((d[key] || 0) > max) max = d[key];
+      var v = d[key] || 0;
+      if (invertPosition) {
+        if (v > 0) {
+          if (minPos == null || v < minPos) minPos = v;
+          if (maxPos == null || v > maxPos) maxPos = v;
+        }
+      } else if (v > max) {
+        max = v;
+      }
     });
+    if (invertPosition) {
+      maxPos = maxPos == null ? 1 : maxPos;
+      minPos = minPos == null ? maxPos : minPos;
+    }
     var fitChart = bucketDays > 1 || series.length <= 45;
     var denseDaily = bucketDays === 1 && series.length > 14;
     var bucketNote = chartBucketNote(bucketDays);
@@ -1095,7 +1331,18 @@
       series
         .map(function (d, i) {
           var val = d[key] || 0;
-          var h = Math.max(4, Math.round((val / max) * 100));
+          var h;
+          if (invertPosition) {
+            var span = maxPos - minPos;
+            h =
+              val <= 0
+                ? 4
+                : span < 0.05
+                  ? 55
+                  : Math.max(8, Math.round(((maxPos - val) / span) * 92) + 8);
+          } else {
+            h = Math.max(4, Math.round((val / max) * 100));
+          }
           var showLabel =
             bucketDays > 1 || !denseDaily || i % 2 === 0 || i === series.length - 1;
           var tip =
@@ -1124,22 +1371,64 @@
     );
   }
 
+  function gscChartTitle(metric) {
+    var titles = {
+      gsc_clicks: "funnel_gsc_clicks_daily",
+      gsc_impressions: "funnel_gsc_impressions_daily",
+      gsc_ctr: "funnel_gsc_ctr_daily",
+      gsc_position: "funnel_gsc_position_daily",
+      gsc_home_clicks: "funnel_gsc_home_clicks_daily",
+      gsc_home_impressions: "funnel_gsc_home_impressions_daily",
+      gsc_home_ctr: "funnel_gsc_home_ctr_daily",
+      gsc_home_position: "funnel_gsc_home_position_daily",
+      gsc_city_clicks: "funnel_gsc_city_clicks_daily",
+      gsc_city_impressions: "funnel_gsc_city_impressions_daily",
+      gsc_city_ctr: "funnel_gsc_city_ctr_daily",
+      gsc_city_position: "funnel_gsc_city_position_daily",
+    };
+    return titles[metric] ? t(titles[metric]) : "";
+  }
+
+  function renderGscScopeMetricTabs(scope, active) {
+    var prefix = scope === "city" ? "gsc_city_" : "gsc_home_";
+    var tabs = [
+      [prefix + "position", "funnel_gsc_position"],
+      [prefix + "clicks", "funnel_gsc_clicks"],
+      [prefix + "impressions", "funnel_gsc_impressions"],
+      [prefix + "ctr", "funnel_gsc_ctr"],
+    ];
+    return (
+      '<div class="crm-funnel-gsc-home-tabs" role="tablist">' +
+      tabs
+        .map(function (pair) {
+          return (
+            '<button type="button" class="crm-funnel-gsc-home-tab' +
+            (active === pair[0] ? " is-active" : "") +
+            '" data-funnel-ad-chart="' +
+            esc(pair[0]) +
+            '">' +
+            esc(t(pair[1])) +
+            "</button>"
+          );
+        })
+        .join("") +
+      "</div>"
+    );
+  }
+
   function AdChartModal() {
     if (!state.adChartMetric) return "";
     var metric = state.adChartMetric;
+    var scope = gscChartScope(metric);
     var title =
       metric === "policies_sold"
         ? t("funnel_policies_sold_daily")
         : metric === "clicks"
         ? t("funnel_ad_clicks_daily")
-        : metric === "gsc_clicks"
-          ? t("funnel_gsc_clicks_daily")
-          : metric === "gsc_impressions"
-            ? t("funnel_gsc_impressions_daily")
-            : metric === "spend"
-              ? t("funnel_ad_spend_daily")
-              : t("funnel_ad_impressions_daily");
+        : gscChartTitle(metric) ||
+          (metric === "spend" ? t("funnel_ad_spend_daily") : t("funnel_ad_impressions_daily"));
     var daily = (state.adChartData && state.adChartData.daily) || [];
+    var chartDaily = isGscChartMetric(metric) ? gscCompleteDaily(daily) : daily;
     var rangeLabel = fmtDateRangeLabel(state.dateFrom, state.dateTo);
 
     return (
@@ -1160,7 +1449,22 @@
         : state.adChartError
           ? '<p class="crm-funnel-error">' + esc(state.adChartError) + "</p>"
           : (metric === "spend" ? renderSpendChartSummary(daily) : "") +
-            renderAdDailyChart(metric, daily)) +
+            (scope
+              ? '<p class="crm-funnel-ad-modal-sub">' +
+                esc(t(scope === "city" ? "funnel_gsc_city_goal" : "funnel_gsc_home_goal")) +
+                "</p>" +
+                renderGscScopeMetricTabs(scope, metric) +
+                '<p class="crm-funnel-gsc-trend-compare">' +
+                esc(t(scope === "city" ? "funnel_gsc_city_track_note" : "funnel_gsc_home_track_note")) +
+                "</p>"
+              : "") +
+            (isGscChartMetric(metric) ? renderGscTrendScore(metric, daily) : "") +
+            (gscMetricKind(metric) === "gsc_position"
+              ? '<p class="crm-funnel-ad-chart-scroll-hint">' +
+                esc(t("funnel_gsc_position_chart_note")) +
+                "</p>"
+              : "") +
+            renderAdDailyChart(metric, chartDaily)) +
       "</div></div></div>"
     );
   }
@@ -1480,24 +1784,37 @@
 
   function loadAdChart(main, metric) {
     closeGeoClicks(main, { skipPaint: true });
+    var scope = gscChartScope(metric);
+    if (
+      scope &&
+      state.adChartData &&
+      state.adChartData.page === scope &&
+      !state.adChartLoading
+    ) {
+      state.adChartMetric = metric;
+      paint(main);
+      wireEvents(main);
+      return Promise.resolve();
+    }
     state.adChartMetric = metric;
     state.adChartLoading = true;
     state.adChartError = null;
     state.adChartData = null;
     paint(main);
     wireEvents(main);
-    return api(
-      "/api/staff/funnel-analytics?" +
-        queryString({
-          action:
-            metric === "policies_sold"
-              ? "policies_daily"
-              : metric.indexOf("gsc_") === 0
-                ? "gsc_daily"
-                : "ad_daily",
-        }),
-      { method: "GET", softAuth: true }
-    )
+    var extra = {
+      action:
+        metric === "policies_sold"
+          ? "policies_daily"
+          : isGscChartMetric(metric)
+            ? "gsc_daily"
+            : "ad_daily",
+    };
+    if (scope) extra.page = scope;
+    return api("/api/staff/funnel-analytics?" + queryString(extra), {
+      method: "GET",
+      softAuth: true,
+    })
       .then(function (res) {
         state.adChartData = res;
         state.adChartLoading = false;

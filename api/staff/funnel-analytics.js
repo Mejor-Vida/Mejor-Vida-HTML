@@ -187,12 +187,15 @@ module.exports = async function handler(req, res) {
       return json(res, 400, { error: "gsc_daily requires organic website view" });
     }
     try {
-      const series = await fetchGscDaily(range.dateFrom, range.dateTo);
+      const raw = String(req.query.page || "").trim();
+      const page = raw === "home" || raw === "city" ? raw : "site";
+      const series = await fetchGscDaily(range.dateFrom, range.dateTo, { page });
       return json(res, 200, {
         ok: true,
         dateFrom: range.dateFrom,
         dateTo: range.dateTo,
         platform: "gsc",
+        page,
         ...series,
       });
     } catch (e) {
