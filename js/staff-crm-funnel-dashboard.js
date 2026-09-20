@@ -29,7 +29,10 @@
     geoError: null,
     geoData: null,
     geoCountryModalOpen: false,
+    gscGroup: "home",
   };
+
+  var GSC_PAGE_GROUP_IDS = ["home", "city", "blogs"];
 
   var PERIOD_PRESETS = [1, 7, 14, 30, 90];
   var SOURCE_CHANNELS = ["facebook", "google", "direct", "organic"];
@@ -966,39 +969,8 @@
         '<span class="crm-funnel-ad-metric-label">' + esc(t("funnel_gsc_position")) + "</span>" +
         '<strong class="crm-funnel-ad-metric-value">' + esc(fmtPosition(metrics.position)) + "</strong>" +
         '<span class="crm-funnel-ad-metric-hint">' + esc(t("funnel_ad_chart_hint")) + "</span></button>";
-      var home = metrics.home || {};
-      html +=
-        '<button type="button" class="crm-funnel-ad-metric crm-funnel-ad-metric--clickable crm-funnel-ad-metric--home" data-funnel-ad-chart="gsc_home_position" title="' +
-        esc(t("funnel_gsc_main_page_hint")) +
-        '">' +
-        '<span class="crm-funnel-ad-metric-label">' + esc(t("funnel_gsc_main_page")) + "</span>" +
-        '<strong class="crm-funnel-ad-metric-value">' + esc(fmtPosition(home.position)) + "</strong>" +
-        '<span class="crm-funnel-ad-metric-home-stats">' +
-        esc(
-          t("funnel_gsc_main_page_stats", {
-            clicks: fmtNum(home.clicks),
-            impr: fmtNum(home.impressions),
-            ctr: fmtPctRate(home.ctr),
-          })
-        ) +
-        "</span></button>";
-      var cities = metrics.cities || {};
-      html +=
-        '<button type="button" class="crm-funnel-ad-metric crm-funnel-ad-metric--clickable crm-funnel-ad-metric--home" data-funnel-ad-chart="gsc_city_position" title="' +
-        esc(t("funnel_gsc_city_pages_hint")) +
-        '">' +
-        '<span class="crm-funnel-ad-metric-label">' + esc(t("funnel_gsc_city_pages")) + "</span>" +
-        '<strong class="crm-funnel-ad-metric-value">' + esc(fmtPosition(cities.position)) + "</strong>" +
-        '<span class="crm-funnel-ad-metric-home-stats">' +
-        esc(
-          t("funnel_gsc_main_page_stats", {
-            clicks: fmtNum(cities.clicks),
-            impr: fmtNum(cities.impressions),
-            ctr: fmtPctRate(cities.ctr),
-          })
-        ) +
-        "</span></button>";
       html += "</div>";
+      html += renderGscGroupBar(metrics);
 
       if (metrics.firstIncompleteDate && metrics.dateTo >= metrics.firstIncompleteDate) {
         html +=
@@ -1084,17 +1056,77 @@
     return (v > 0 ? "+" : "−") + body;
   }
 
+  function gscGroupLabel(id) {
+    return t("funnel_gsc_group_" + id);
+  }
+
+  function gscGroupStats(metrics, id) {
+    var groups = (metrics && metrics.groups) || {};
+    if (groups[id]) return groups[id];
+    if (id === "home") return (metrics && metrics.home) || {};
+    if (id === "city") return (metrics && metrics.cities) || {};
+    return {};
+  }
+
+  function renderGscGroupBar(metrics) {
+    var id = GSC_PAGE_GROUP_IDS.indexOf(state.gscGroup) >= 0 ? state.gscGroup : "home";
+    var stats = gscGroupStats(metrics, id);
+    var options = GSC_PAGE_GROUP_IDS.map(function (gid) {
+      return (
+        '<option value="' +
+        esc(gid) +
+        '"' +
+        (gid === id ? " selected" : "") +
+        ">" +
+        esc(gscGroupLabel(gid)) +
+        "</option>"
+      );
+    }).join("");
+    return (
+      '<div class="crm-funnel-gsc-group-bar">' +
+      '<label class="crm-funnel-gsc-group-label">' +
+      "<span>" +
+      esc(t("funnel_gsc_group_picker")) +
+      "</span>" +
+      '<select class="crm-funnel-gsc-group-select" data-gsc-group-select aria-label="' +
+      esc(t("funnel_gsc_group_picker")) +
+      '" title="' +
+      esc(t("funnel_gsc_group_" + id + "_hint")) +
+      '">' +
+      options +
+      "</select></label>" +
+      '<button type="button" class="crm-funnel-gsc-group-open" data-funnel-ad-chart="gsc_' +
+      esc(id) +
+      '_position" title="' +
+      esc(t("funnel_gsc_group_" + id + "_hint")) +
+      '">' +
+      '<strong class="crm-funnel-ad-metric-value">' +
+      esc(fmtPosition(stats.position)) +
+      "</strong>" +
+      '<span class="crm-funnel-ad-metric-home-stats">' +
+      esc(
+        t("funnel_gsc_main_page_stats", {
+          clicks: fmtNum(stats.clicks),
+          impr: fmtNum(stats.impressions),
+          ctr: fmtPctRate(stats.ctr),
+        })
+      ) +
+      "</span></button></div>"
+    );
+  }
+
   function gscMetricKind(metric) {
-    var m = String(metric || "");
-    if (m.indexOf("gsc_home_") === 0) return "gsc_" + m.slice("gsc_home_".length);
-    if (m.indexOf("gsc_city_") === 0) return "gsc_" + m.slice("gsc_city_".length);
-    return m;
+    var scope = gscChartScope(metric);
+    if (scope) return "gsc_" + String(metric).slice(("gsc_" + scope + "_").length);
+    return String(metric || "");
   }
 
   function gscChartScope(metric) {
     var m = String(metric || "");
-    if (m.indexOf("gsc_home_") === 0) return "home";
-    if (m.indexOf("gsc_city_") === 0) return "city";
+    for (var i = 0; i < GSC_PAGE_GROUP_IDS.length; i++) {
+      var id = GSC_PAGE_GROUP_IDS[i];
+      if (m.indexOf("gsc_" + id + "_") === 0) return id;
+    }
     return "";
   }
 
@@ -1377,20 +1409,23 @@
       gsc_impressions: "funnel_gsc_impressions_daily",
       gsc_ctr: "funnel_gsc_ctr_daily",
       gsc_position: "funnel_gsc_position_daily",
-      gsc_home_clicks: "funnel_gsc_home_clicks_daily",
-      gsc_home_impressions: "funnel_gsc_home_impressions_daily",
-      gsc_home_ctr: "funnel_gsc_home_ctr_daily",
-      gsc_home_position: "funnel_gsc_home_position_daily",
-      gsc_city_clicks: "funnel_gsc_city_clicks_daily",
-      gsc_city_impressions: "funnel_gsc_city_impressions_daily",
-      gsc_city_ctr: "funnel_gsc_city_ctr_daily",
-      gsc_city_position: "funnel_gsc_city_position_daily",
     };
+    var scope = gscChartScope(metric);
+    if (scope) {
+      var kind = gscMetricKind(metric);
+      var kindKey = {
+        gsc_clicks: "funnel_gsc_group_clicks_daily",
+        gsc_impressions: "funnel_gsc_group_impressions_daily",
+        gsc_ctr: "funnel_gsc_group_ctr_daily",
+        gsc_position: "funnel_gsc_group_position_daily",
+      }[kind];
+      if (kindKey) return t(kindKey, { group: gscGroupLabel(scope) });
+    }
     return titles[metric] ? t(titles[metric]) : "";
   }
 
   function renderGscScopeMetricTabs(scope, active) {
-    var prefix = scope === "city" ? "gsc_city_" : "gsc_home_";
+    var prefix = "gsc_" + scope + "_";
     var tabs = [
       [prefix + "position", "funnel_gsc_position"],
       [prefix + "clicks", "funnel_gsc_clicks"],
@@ -1451,11 +1486,11 @@
           : (metric === "spend" ? renderSpendChartSummary(daily) : "") +
             (scope
               ? '<p class="crm-funnel-ad-modal-sub">' +
-                esc(t(scope === "city" ? "funnel_gsc_city_goal" : "funnel_gsc_home_goal")) +
+                esc(t("funnel_gsc_group_" + scope + "_goal")) +
                 "</p>" +
                 renderGscScopeMetricTabs(scope, metric) +
                 '<p class="crm-funnel-gsc-trend-compare">' +
-                esc(t(scope === "city" ? "funnel_gsc_city_track_note" : "funnel_gsc_home_track_note")) +
+                esc(t("funnel_gsc_group_" + scope + "_track_note")) +
                 "</p>"
               : "") +
             (isGscChartMetric(metric) ? renderGscTrendScore(metric, daily) : "") +
@@ -2111,6 +2146,24 @@
         closeGeoClicks(main, { skipPaint: true });
         closeAdChart(main);
         loadData(main);
+      });
+    }
+
+    var groupSelect = main.querySelector("[data-gsc-group-select]");
+    if (groupSelect) {
+      groupSelect.addEventListener("change", function () {
+        var next = groupSelect.value;
+        if (GSC_PAGE_GROUP_IDS.indexOf(next) < 0) return;
+        var prev = state.gscGroup;
+        state.gscGroup = next;
+        var openScope = gscChartScope(state.adChartMetric);
+        if (openScope && openScope === prev) {
+          var kind = gscMetricKind(state.adChartMetric).replace(/^gsc_/, "");
+          loadAdChart(main, "gsc_" + next + "_" + kind);
+          return;
+        }
+        paint(main);
+        wireEvents(main);
       });
     }
 

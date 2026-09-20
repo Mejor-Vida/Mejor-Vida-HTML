@@ -190,6 +190,59 @@
   padding: 6px 12px 7px;
 }
 
+.crm-funnel-gsc-group-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 12px 20px;
+  margin: 12px 0 4px;
+  padding: 10px 12px;
+  background: #f8fafc;
+  border: 1px solid var(--crm-border, #dbe3ef);
+  border-radius: 14px;
+}
+
+.crm-funnel-gsc-group-label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: min(100%, 22rem);
+  flex: 1 1 16rem;
+}
+
+.crm-funnel-gsc-group-label span {
+  font-size: 0.72rem;
+  color: var(--crm-muted, #64748b);
+}
+
+.crm-funnel-gsc-group-select {
+  width: 100%;
+  min-height: 40px;
+  padding: 8px 12px;
+  border: 1px solid var(--crm-border, #dbe3ef);
+  border-radius: 8px;
+  background: #fff;
+  font: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--crm-text, #1a2b4a);
+  cursor: pointer;
+}
+
+.crm-funnel-gsc-group-open {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  margin: 0;
+  padding: 4px 2px 2px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+  font: inherit;
+}
+
 .crm-funnel-ad-metric-home-stats {
   font-size: 0.68rem;
   color: var(--crm-muted, #64748b);

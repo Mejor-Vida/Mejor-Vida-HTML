@@ -18,7 +18,7 @@ const {
 } = require("../../lib/funnel-analytics-config");
 const { fetchAdPlatformMetrics, fetchAdDailySeries } = require("../../lib/ad-platform-insights");
 const { fetchTopKeywordsByClicks } = require("../../lib/google-ads-api");
-const { fetchGscOrganicSearch, fetchGscDaily } = require("../../lib/gsc-data-api");
+const { fetchGscOrganicSearch, fetchGscDaily, isGscPageGroup } = require("../../lib/gsc-data-api");
 const { fetchGeoClicks } = require("../../lib/geo-click-insights");
 const { fetchPoliciesSoldMetrics } = require("../../lib/crm-stage-transitions");
 
@@ -188,7 +188,7 @@ module.exports = async function handler(req, res) {
     }
     try {
       const raw = String(req.query.page || "").trim();
-      const page = raw === "home" || raw === "city" ? raw : "site";
+      const page = isGscPageGroup(raw) ? raw : "site";
       const series = await fetchGscDaily(range.dateFrom, range.dateTo, { page });
       return json(res, 200, {
         ok: true,

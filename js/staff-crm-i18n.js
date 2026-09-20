@@ -315,10 +315,26 @@
       funnel_gsc_main_page: "Main Page",
       funnel_gsc_main_page_hint: "Spanish homepage — clicks, impressions, CTR, and average position",
       funnel_gsc_main_page_stats: "{clicks} clicks · {impr} impr. · {ctr} CTR",
+      funnel_gsc_group_picker: "Search category",
+      funnel_gsc_group_home: "Main Page",
+      funnel_gsc_group_city: "City pages",
+      funnel_gsc_group_blogs: "Blogs",
+      funnel_gsc_group_home_hint: "Spanish homepage — clicks, impressions, CTR, and average position",
+      funnel_gsc_group_city_hint:
+        "All Spanish city guides under /estados/ — combined clicks, impressions, CTR, and average position",
+      funnel_gsc_group_blogs_hint:
+        "All Spanish blog pages under /blog — combined clicks, impressions, CTR, and average position",
+      funnel_gsc_group_clicks_daily: "{group} daily clicks",
+      funnel_gsc_group_impressions_daily: "{group} daily impressions",
+      funnel_gsc_group_ctr_daily: "{group} daily CTR",
+      funnel_gsc_group_position_daily: "{group} daily average position",
       funnel_gsc_home_clicks_daily: "Homepage daily clicks",
       funnel_gsc_home_impressions_daily: "Homepage daily impressions",
       funnel_gsc_home_ctr_daily: "Homepage daily CTR",
       funnel_gsc_home_position_daily: "Homepage daily average position",
+      funnel_gsc_group_home_goal: "Goal: first page of Google (average position under 10) for /",
+      funnel_gsc_group_home_track_note:
+        "This is only mejorvidainsurance.com/ — not /en/. Search Console keeps daily history, so if a launch hurts the homepage you will see it here.",
       funnel_gsc_home_goal: "Goal: first page of Google (average position under 10) for /",
       funnel_gsc_home_track_note:
         "This is only mejorvidainsurance.com/ — not /en/. Search Console keeps daily history, so if a launch hurts the homepage you will see it here.",
@@ -329,6 +345,12 @@
       funnel_gsc_city_impressions_daily: "City pages daily impressions",
       funnel_gsc_city_ctr_daily: "City pages daily CTR",
       funnel_gsc_city_position_daily: "City pages daily average position",
+      funnel_gsc_group_city_goal: "All city teaching pages together (Lincoln, Omaha, Denver, Las Vegas, and the rest under /estados/).",
+      funnel_gsc_group_city_track_note:
+        "State hub pages such as /estados/nebraska.html are not included. Combined numbers show whether the city-page strategy is earning search, not which city is winning.",
+      funnel_gsc_group_blogs_goal: "All Spanish blog articles and the blog hub together.",
+      funnel_gsc_group_blogs_track_note:
+        "English /en/blog pages are not included. Combined numbers show whether the blogs as a group are earning search, and whether that is getting better or worse.",
       funnel_gsc_city_goal: "All city teaching pages together (Lincoln, Omaha, Denver, Las Vegas, and the rest under /estados/).",
       funnel_gsc_city_track_note:
         "State hub pages such as /estados/nebraska.html are not included. Combined numbers show whether the city-page strategy is earning search, not which city is winning.",
@@ -1708,10 +1730,26 @@
       funnel_gsc_main_page: "Página principal",
       funnel_gsc_main_page_hint: "Inicio en español — clics, impresiones, CTR y posición promedio",
       funnel_gsc_main_page_stats: "{clicks} clics · {impr} impr. · {ctr} CTR",
+      funnel_gsc_group_picker: "Categoría de búsqueda",
+      funnel_gsc_group_home: "Página principal",
+      funnel_gsc_group_city: "Páginas de ciudad",
+      funnel_gsc_group_blogs: "Blogs",
+      funnel_gsc_group_home_hint: "Inicio en español — clics, impresiones, CTR y posición promedio",
+      funnel_gsc_group_city_hint:
+        "Todas las guías de ciudad en /estados/ — clics, impresiones, CTR y posición promedio juntos",
+      funnel_gsc_group_blogs_hint:
+        "Todas las páginas de blog en /blog — clics, impresiones, CTR y posición promedio juntos",
+      funnel_gsc_group_clicks_daily: "Clics diarios de {group}",
+      funnel_gsc_group_impressions_daily: "Impresiones diarias de {group}",
+      funnel_gsc_group_ctr_daily: "CTR diario de {group}",
+      funnel_gsc_group_position_daily: "Posición promedio diaria de {group}",
       funnel_gsc_home_clicks_daily: "Clics diarios de la página principal",
       funnel_gsc_home_impressions_daily: "Impresiones diarias de la página principal",
       funnel_gsc_home_ctr_daily: "CTR diario de la página principal",
       funnel_gsc_home_position_daily: "Posición promedio diaria de la página principal",
+      funnel_gsc_group_home_goal: "Meta: primera página de Google (posición promedio menor a 10) para /",
+      funnel_gsc_group_home_track_note:
+        "Solo mejorvidainsurance.com/ — no /en/. Search Console guarda el historial diario, así que si un cambio daña el inicio lo verás aquí.",
       funnel_gsc_home_goal: "Meta: primera página de Google (posición promedio menor a 10) para /",
       funnel_gsc_home_track_note:
         "Solo mejorvidainsurance.com/ — no /en/. Search Console guarda el historial diario, así que si un cambio daña el inicio lo verás aquí.",
@@ -1722,6 +1760,12 @@
       funnel_gsc_city_impressions_daily: "Impresiones diarias de páginas de ciudad",
       funnel_gsc_city_ctr_daily: "CTR diario de páginas de ciudad",
       funnel_gsc_city_position_daily: "Posición promedio diaria de páginas de ciudad",
+      funnel_gsc_group_city_goal: "Todas las páginas de ciudad juntas (Lincoln, Omaha, Denver, Las Vegas y el resto en /estados/).",
+      funnel_gsc_group_city_track_note:
+        "No incluye las páginas del estado como /estados/nebraska.html. Las cifras combinadas muestran si la estrategia de ciudades está funcionando, no qué ciudad gana.",
+      funnel_gsc_group_blogs_goal: "Todos los artículos del blog en español y la página del blog juntos.",
+      funnel_gsc_group_blogs_track_note:
+        "No incluye /en/blog. Las cifras combinadas muestran si los blogs en conjunto están ganando búsqueda, y si eso mejora o empeora.",
       funnel_gsc_city_goal: "Todas las páginas de ciudad juntas (Lincoln, Omaha, Denver, Las Vegas y el resto en /estados/).",
       funnel_gsc_city_track_note:
         "No incluye las páginas del estado como /estados/nebraska.html. Las cifras combinadas muestran si la estrategia de ciudades está funcionando, no qué ciudad gana.",
