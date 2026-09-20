@@ -223,7 +223,7 @@
   }
 
   function recState(r) {
-    return lang === "es" ? r.stateNameEs : r.stateNameEn;
+    return r.stateNameEn || r.stateNameEs || "";
   }
 
   function recHref(r) {
@@ -263,7 +263,7 @@
 
   function stateLabel(code) {
     var match = resolveStateObj(code);
-    if (match) return lang === "es" ? match.nameEs : match.nameEn;
+    if (match) return match.nameEn || match.nameEs;
     var rec = records().filter(function (r) {
       return String(r.stateCode || "").toUpperCase() === String(code || "").toUpperCase();
     })[0];
