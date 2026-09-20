@@ -55,8 +55,8 @@ function dirUrl(place, lang) {
   const city = place.slug || "";
   if (!slug || !city) return lang === "es" ? `${SITE}/funerarias-cementerios.html` : `${SITE}/en/funeral-homes-cemeteries.html`;
   return lang === "es"
-    ? `${SITE}/funerarias-cementerios/${slug}/${city}.html`
-    : `${SITE}/en/funeral-homes-cemeteries/${slug}/${city}.html`;
+    ? `${SITE}/funerarias-cementerios.html?estado=${encodeURIComponent(place.stateSlug || "")}&ciudad=${encodeURIComponent(city)}`
+    : `${SITE}/en/funeral-homes-cemeteries.html?estado=${encodeURIComponent(place.stateSlug || "")}&ciudad=${encodeURIComponent(city)}`;
 }
 
 function homeBlock(home, lang) {
@@ -168,7 +168,7 @@ function buildChunks(data) {
         `Funeral home directory cities in ${st.nameEn || st.code}.`,
         "Mejor Vida Insurance lists funeral homes by city for research. These are not insurance quotes.",
         `Cities: ${cities.join(", ")}.`,
-        `Directory: ${SITE}/en/funeral-homes-cemeteries/${st.slug}.html`,
+        `Directory: ${SITE}/en/funeral-homes-cemeteries.html?estado=${encodeURIComponent(st.slug)}`,
       ].join("\n"),
       metadata: {
         topic: "funeral_directory",
@@ -183,7 +183,7 @@ function buildChunks(data) {
         `Ciudades del directorio de funerarias en ${st.nameEs || st.code}.`,
         "Mejor Vida Seguros lista funerarias por ciudad para investigar. No son cotizaciones de seguro.",
         `Ciudades: ${cities.join(", ")}.`,
-        `Directorio: ${SITE}/funerarias-cementerios/${st.slug}.html`,
+        `Directorio: ${SITE}/funerarias-cementerios.html?estado=${encodeURIComponent(st.slug)}`,
       ].join("\n"),
       metadata: {
         topic: "funeral_directory",

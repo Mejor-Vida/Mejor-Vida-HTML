@@ -256,8 +256,48 @@
       color: #0d47a1;
       font-size: clamp(1.5rem, 4vw, 2.1rem);
       text-align: center;
-      margin-bottom: 1.25rem;
+      margin-bottom: 0.65rem;
       line-height: 1.3;
+    }
+
+    .mvi-quote-wizard-lead {
+      text-align: center;
+      color: #374151;
+      font-size: 0.98rem;
+      line-height: 1.5;
+      max-width: 38rem;
+      margin: 0 auto 1.25rem;
+    }
+
+    .mvi-quote-seo-faq {
+      margin: 2rem 0 0.5rem;
+      color: #1f2937;
+    }
+
+    .mvi-quote-seo-faq h2 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #0d47a1;
+      margin-bottom: 0.75rem;
+    }
+
+    .mvi-quote-seo-faq details {
+      border-top: 1px solid #e5e7eb;
+      padding: 0.65rem 0;
+    }
+
+    .mvi-quote-seo-faq details:last-child {
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .mvi-quote-seo-faq summary {
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .mvi-quote-seo-faq details p {
+      margin: 0.4rem 0 0;
+      color: #4b5563;
     }
 
     /* editorial progress strip: pill bar, separate from question card */

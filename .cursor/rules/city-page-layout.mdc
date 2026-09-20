@@ -59,7 +59,7 @@ Lives in `scripts/city-guide-html.js` + `js/city-guide.js`. Do not rebuild it.
 - Shell: `scripts/render-city-coverage-pages.js` — add the city to `CITIES`; omit `layout` or set `layout: "guide"`
 - JS: `js/city-guide.js` + `data/{slug}-plot-resales.json`
 - CSS: `.sc-city-guide` in `css/state-coverage.css` — do not scope new styles only to one city
-- Then `npm run build:city-pages`. Mirror ES + EN. Spanish indexable; English `noindex`. That rebuild also refreshes `data/funeral-resources.json`. Run `npm run build:funeral-resources` to emit crawlable `/funerarias-cementerios/{state}/{city}.html` pages (hubs, extra cities, and nearby towns) that link back to the teaching guide.
+- Then `npm run build:city-pages`. Mirror ES + EN. Spanish indexable; English `noindex`. That rebuild also refreshes `data/funeral-resources.json`. Funeral-home lookup is **one** Spanish URL (`/funerarias-cementerios.html`); do not emit a directory page per city.
 
 ## Do not
 

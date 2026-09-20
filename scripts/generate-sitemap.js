@@ -17,7 +17,6 @@ const STATIC_PAGES = [
   { loc: "/blog.html", priority: "0.80" },
   { loc: "/seguro-gastos-finales.html", priority: "0.90" },
   { loc: "/seguro-vida-entierro-sin-espera.html", priority: "0.88" },
-  { loc: "/seguro-vida-entierro-sin-espera.html", priority: "0.88" },
   { loc: "/guias-gastos-finales.html", priority: "0.85" },
   { loc: "/cuanto-cuesta-un-funeral.html", priority: "0.88" },
   { loc: "/funerales-prepagados.html", priority: "0.88" },
@@ -171,29 +170,8 @@ function feGuidePages() {
 }
 
 function funeralDirectoryPages() {
-  const dir = path.join(ROOT, "funerarias-cementerios");
-  if (!fs.existsSync(dir)) return [];
-  const out = [];
-  function walk(abs, urlBase) {
-    for (const name of fs.readdirSync(abs)) {
-      const child = path.join(abs, name);
-      const st = fs.statSync(child);
-      if (st.isDirectory()) {
-        walk(child, `${urlBase}/${name}`);
-        continue;
-      }
-      if (!name.endsWith(".html")) continue;
-      const html = fs.readFileSync(child, "utf8");
-      if (isNoindex(html)) continue;
-      out.push({
-        loc: `${urlBase}/${name}`,
-        priority: urlBase.split("/").length > 2 ? "0.78" : "0.82",
-        lastmod: lastmodFromFile(child),
-      });
-    }
-  }
-  walk(dir, "/funerarias-cementerios");
-  return out.sort((a, b) => a.loc.localeCompare(b.loc));
+  /* Nested /funerarias-cementerios/{state}/{city} pages are not published. One lookup URL only. */
+  return [];
 }
 
 function blogPosts() {

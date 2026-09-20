@@ -1,0 +1,1432 @@
+{
+  "source": "https://hsapps.azdhs.gov/ls/sod/Provider.aspx",
+  "sourceName": "Arizona Department of Health Services licensed FS Facility lookup",
+  "harvested": "2026-09-19",
+  "stateCode": "AZ",
+  "homes": [
+    {
+      "name": "Douglass Funeral Home",
+      "street": "11 West Pajaro Street",
+      "city": "Ajo",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Abrazo Funeral Home",
+      "street": "1075 S Idaho Ave",
+      "city": "Apache Junction",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "At Season's End Mortuary",
+      "street": "861 W Superstition Blvd",
+      "city": "Apache Junction",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Superstition Cremation and Funeral Services",
+      "street": "398 E. Old West Highway",
+      "city": "Apache Junction",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Avenidas Funeral Chapel",
+      "street": "522 E Western Ave",
+      "city": "Avondale",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Holy Cross Catholic Cemetery and Funeral Home",
+      "street": "9925 W Thomas Rd",
+      "city": "Avondale",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Richardson Benson Mortuary",
+      "street": "725 E 4th St",
+      "city": "Benson",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Alex Espinosa Bisbee Funeral Home",
+      "street": "1094 West Highway 92",
+      "city": "Bisbee",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Buckeye Funeral Home",
+      "street": "104 E Baseline Rd",
+      "city": "Buckeye",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Dimond & Sons Silver Bell Chapel",
+      "street": "2620 Silver Creek Rd",
+      "city": "Bullhead City",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Mohave Cremation Service",
+      "street": "2620 Silver Creek Rd",
+      "city": "Bullhead City",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Bueler Camp Verde Funeral Home",
+      "street": "143 W Arnold St",
+      "city": "Camp Verde",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Angels in Waiting Funeral Services",
+      "street": "917 North Pinal Avenue",
+      "city": "Casa Grande",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Heritage Casa Grande Funeral Home & Cremation Society of AZ",
+      "street": "1575 E Florence Blvd",
+      "city": "Casa Grande",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "J. Warren Funeral Services Cole & Maud The Gardens Chapel",
+      "street": "525 North Peart Road",
+      "city": "Casa Grande",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "J. Warren Funeral Services Mountain View Chapel & Crematorium",
+      "street": "15506 West Skyway Avenue",
+      "city": "Casa Grande",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "J. Warren Funeral Services Mountain View Crematorium",
+      "street": "15506 West Skyway Avenue",
+      "city": "Casa Grande",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "A Legacy Funeral Home Chandler",
+      "street": "1374 N Arizona Ave",
+      "city": "Chandler",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Valley of the Sun Mortuary & Cemetery",
+      "street": "10940 E Chandler Heights Rd",
+      "city": "Chandler",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Whitney & Murphy Bueler Mortuary",
+      "street": "14 W. Hulet Dr.",
+      "city": "Chandler",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Chino Valley Funeral Home",
+      "street": "480 W Palomino Rd",
+      "city": "Chino Valley",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Heritage Coolidge Funeral Home",
+      "street": "410 W Roosevelt Ave",
+      "city": "Coolidge",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "J. Warren Funeral Services Cole & Maud Coolidge Chapel",
+      "street": "541 West Coolidge Avenue",
+      "city": "Coolidge",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Bueler Cottonwood Funeral Home",
+      "street": "255 S 6th St",
+      "city": "Cottonwood",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Westcott Funeral Home",
+      "street": "1013 East Mingus Avenue",
+      "city": "Cottonwood",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Brown Page Mortuary",
+      "street": "910 F Ave",
+      "city": "Douglas",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Burnham Mortuary - Eagar",
+      "street": "535 North Main Street",
+      "city": "Eagar",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Cremation Society of Arizona LLC.",
+      "street": "12525 NW Grand Ave",
+      "city": "El Mirage",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Sunwest Funeral Home",
+      "street": "12525 NW Grand Ave",
+      "city": "El Mirage",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "J. Warren Funeral Services Valley Chapel",
+      "street": "601 N C St",
+      "city": "Eloy",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Aspen Cremation",
+      "street": "914 E Route 66",
+      "city": "Flagstaff",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Lozano's Flagstaff Mortuary & Crematory",
+      "street": "2545 N 4th St",
+      "city": "Flagstaff",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Norvel Owens Mortuary of Flagstaff",
+      "street": "914 E. Route 66",
+      "city": "Flagstaff",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Heritage Florence Funeral Home",
+      "street": "360 N. Park St.",
+      "city": "Florence",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Dimond & Sons Valley View Funeral Home",
+      "street": "1427 E Corona Rd",
+      "city": "Fort Mohave",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Messinger Fountain Hills Mortuary",
+      "street": "12065 N. Saguaro Blvd.",
+      "city": "Fountain Hills",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Falconer Funeral Home",
+      "street": "251 W Juniper Ave",
+      "city": "Gilbert",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Gilbert Memorial Park",
+      "street": "2100 E Queen Creek Rd",
+      "city": "Gilbert",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Chapel of the Chimes Mortuary",
+      "street": "7924 N 59th Ave",
+      "city": "Glendale",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Heritage Arrowhead Funeral Center",
+      "street": "7545 W. Rose Garden Ln",
+      "city": "Glendale",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "West Resthaven Funeral Home",
+      "street": "6450 W Northern Ave",
+      "city": "Glendale",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Bulman Miles Funeral Services Globe",
+      "street": "237 S Sutherland St",
+      "city": "Globe",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Lamont Mortuary Of Globe",
+      "street": "328 South Hill Street",
+      "city": "Globe",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Thompson Funeral Chapel",
+      "street": "926 South Litchfield Road",
+      "city": "Goodyear",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Owens Livingston Mortuary Holbrook Chapel",
+      "street": "409 North 1st Avenue",
+      "city": "Holbrook",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Griffith Mortuary",
+      "street": "101 N Johnston Dr",
+      "city": "Kearny",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Desert View Funeral Chapel",
+      "street": "2215 E Northern Ave",
+      "city": "Kingman",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Lietz-Fraze Funeral Home & Crematory",
+      "street": "1701 N Stockton Hill Rd",
+      "city": "Kingman",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Sutton Memorial Funeral Home",
+      "street": "1701 Sycamore Ave",
+      "city": "Kingman",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Bradbury Memorial Center",
+      "street": "3317 Highway 95 N",
+      "city": "Lake Havasu City",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Lietz-Fraze Funeral Home & Crematory",
+      "street": "21 Riviera Blvd",
+      "city": "Lake Havasu City",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "A Legacy Funeral Home Rose Chapel",
+      "street": "1130 S Horne Street",
+      "city": "Mesa",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "A Wise Choice Desert View Chapel",
+      "street": "9702 E Main St",
+      "city": "Mesa",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Advantage Funeral & Cremation Services- Melcher Roses",
+      "street": "43 S Stapley Dr",
+      "city": "Mesa",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "After.com Cremation",
+      "street": "3960 East Palm Street",
+      "city": "Mesa",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Angels Cremation & Burial",
+      "street": "422 W McLellan Rd",
+      "city": "Mesa",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Ascend Cremations",
+      "street": "1008 South Center Street",
+      "city": "Mesa",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Bunker's Garden Chapel",
+      "street": "33 N Centennial Way",
+      "city": "Mesa",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Bunker's University Chapel",
+      "street": "3529 E University Dr",
+      "city": "Mesa",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Family Burial and Cremation Center",
+      "street": "237 S Sirrine Ste 1",
+      "city": "Mesa",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Horizon Funeral Care",
+      "street": "7510 E Main St",
+      "city": "Mesa",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Lakeshore Mortuary",
+      "street": "1815 S Dobson Rd",
+      "city": "Mesa",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Mariposa Gardens Memorial Park & Funeral Care",
+      "street": "400 S Power Rd",
+      "city": "Mesa",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Meldrum Mortuary",
+      "street": "52 N Macdonald",
+      "city": "Mesa",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Mountain View Funeral Home & Cemetery LLC.",
+      "street": "7900 E Main St",
+      "city": "Mesa",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Queen of Heaven Catholic Cemetery & Funeral Home",
+      "street": "1562 E Baseline Rd",
+      "city": "Mesa",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Red Mountain Funeral Home LLC",
+      "street": "456 N Mesa Dr",
+      "city": "Mesa",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Sunflower Cremation and Burial LLC",
+      "street": "5650 E Main St",
+      "city": "Mesa",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Wyman Cremation & Burial Chapel",
+      "street": "115 S Country Club Dr",
+      "city": "Mesa",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Bulman Miles Funeral Services Miami",
+      "street": "309 W Live Oak St",
+      "city": "Miami",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Adair's Carroon Mortuary",
+      "street": "1191 N Grand Ave",
+      "city": "Nogales",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Martinez Funeral Chapels-Nogales",
+      "street": "891 W Mariposa Rd",
+      "city": "Nogales",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Vistoso Memorial Chapel LLC",
+      "street": "2285 E Rancho Vistoso Blvd",
+      "city": "Oro Valley",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Parker Funeral Home",
+      "street": "1704 Ocotillo Ave",
+      "city": "Parker",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Messinger Payson Funeral Home Inc.",
+      "street": "901 S Westerly Rd",
+      "city": "Payson",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Mt. Meadows Memorial Park Crematory",
+      "street": "355 W Round Valley Rd",
+      "city": "Payson",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Best Funeral Services",
+      "street": "9380 W Peoria Ave",
+      "city": "Peoria",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Heritage Funeral Chapel",
+      "street": "6830 W Thunderbird Rd",
+      "city": "Peoria",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Abel Funeral Services",
+      "street": "1627 N 51st Ave",
+      "city": "Phoenix",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Accu-Care Cremation & Funerals",
+      "street": "2926 W Virginia Ave Unit 100",
+      "city": "Phoenix",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Advantage Funeral & Cremation Services (Maryvale Chapel)",
+      "street": "6901 W Indian School Rd",
+      "city": "Phoenix",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Arizona Cremation And Burial Services",
+      "street": "748 W Hatcher Rd",
+      "city": "Phoenix",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Best Funeral Services Inc.- North Central Chapel",
+      "street": "501 E Dunlap Ave",
+      "city": "Phoenix",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Complete Care Mortuary Services",
+      "street": "2324 W Holly St",
+      "city": "Phoenix",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Cremation Center of Arizona",
+      "street": "1544 W Grant St",
+      "city": "Phoenix",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Deca Cremation Services Inc.",
+      "street": "2139 S 15th St",
+      "city": "Phoenix",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Eastlake Mortuary",
+      "street": "1715 E Jefferson St",
+      "city": "Phoenix",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Family First Funeral Services",
+      "street": "1912 W Campbell Ave",
+      "city": "Phoenix",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Funeraria del Angel Greer-Wilson Chapel",
+      "street": "5921 W Thomas Rd",
+      "city": "Phoenix",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Greenwood Memory Lawn Mortuary",
+      "street": "719 N 27th Ave",
+      "city": "Phoenix",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Hansen Mortuary",
+      "street": "8314 N 7th St",
+      "city": "Phoenix",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Lowmans Arizona Funeral Home",
+      "street": "717 W Dobbins Rd",
+      "city": "Phoenix",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Meadow Memorials",
+      "street": "2345 East Thomas Road",
+      "city": "Phoenix",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "National Cremation Society",
+      "street": "4460 E Thomas Rd",
+      "city": "Phoenix",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Peace Chapel Funeral Home",
+      "street": "3209 E Pinchot Ave",
+      "city": "Phoenix",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Phoenix Cremation Society, LLC",
+      "street": "4832 E Indian School Rd",
+      "city": "Phoenix",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Phoenix Funeral & Cremation Service",
+      "street": "1327 East McDowell Road",
+      "city": "Phoenix",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Phoenix Memorial Park and Mortuary",
+      "street": "200 W Beardsley Rd",
+      "city": "Phoenix",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Preston Funeral Home",
+      "street": "3800 S Central Ave",
+      "city": "Phoenix",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Resthaven Carr-Tenney Mortuary & Memorial Gardens",
+      "street": "4310 E Southern Ave",
+      "city": "Phoenix",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Rose Manor Funeral Home",
+      "street": "2454 East Broadway Road",
+      "city": "Phoenix",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Samaritan Funeral Home and Cremation Services",
+      "street": "1505 East McDowell Road",
+      "city": "Phoenix",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Samaritan Funeral Home and Cremation Services - Ahwatukee",
+      "street": "4647 E Chandler Blvd Ste 6",
+      "city": "Phoenix",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Serenity Mortuary Services Inc.",
+      "street": "2514 S 6th Ave",
+      "city": "Phoenix",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Shadow Mountain Mortuary",
+      "street": "2350 E Greenway Rd",
+      "city": "Phoenix",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Sinai Mortuary of Arizona",
+      "street": "4538 N 16th St",
+      "city": "Phoenix",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Smart Cremation of Arizona LLC",
+      "street": "2926 W Virginia Avenue #110",
+      "city": "Phoenix",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Universal South Mountain Mortuary",
+      "street": "7007 S. Central Avenue",
+      "city": "Phoenix",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Whitney & Murphy Funeral Home",
+      "street": "4800 E Indian School Rd",
+      "city": "Phoenix",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Silver Creek Mortuary Pinetop",
+      "street": "440 E White Mountain Blvd",
+      "city": "Pinetop",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Advanced Cremation Care",
+      "street": "407 N. Arizona Ave.",
+      "city": "Prescott",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Hampton Funeral Home",
+      "street": "240 S Cortez St",
+      "city": "Prescott",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Heritage Memory Mortuary Inc.",
+      "street": "131 Grove Ave",
+      "city": "Prescott",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Ruffner-Wakelin Prescott Chapel",
+      "street": "303 S Cortez St",
+      "city": "Prescott",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Ruffner-Wakelin Bradshaw Chapel",
+      "street": "8480 E. Valley Rd",
+      "city": "Prescott Valley",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Sunrise Funeral Home & Crematory",
+      "street": "8167 E. Hwy 69",
+      "city": "Prescott Valley",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "San Tan Mountain View Funeral Home and Advance Planning Center",
+      "street": "21809 S Ellsworth Rd",
+      "city": "Queen Creek",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "McDougal Caldwell Funerals & Cremations",
+      "street": "112 E Main St",
+      "city": "Safford",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Vining Funeral Home",
+      "street": "1940 S 20th Ave",
+      "city": "Safford",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Green Valley Mortuary & Cemetery Inc.",
+      "street": "18751 S La Canada Dr",
+      "city": "Sahuarita",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Burnham Mortuary - Saint Johns",
+      "street": "20 South Washington Street",
+      "city": "Saint Johns",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Green Meadows Funeral Home LLC",
+      "street": "346A Highway 264",
+      "city": "Saint Michaels",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Hansen Desert Hills Mortuary Memorial Park",
+      "street": "6500 E Bell Rd",
+      "city": "Scottsdale",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Messinger Indian School Mortuary",
+      "street": "7601 E Indian School Rd",
+      "city": "Scottsdale",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Messinger Pinnacle Peak Mortuary",
+      "street": "8555 E Pinnacle Peak Rd",
+      "city": "Scottsdale",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Paradise Memorial Crematory Inc.",
+      "street": "9300 E Shea Blvd",
+      "city": "Scottsdale",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Greer's Mortuary and Crematory of Sedona",
+      "street": "2725 W State Route 89A",
+      "city": "Sedona",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Owens Livingston Mortuary White Mountain Chapel",
+      "street": "320 North 9th Street",
+      "city": "Show Low",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Hatfield Funeral Home",
+      "street": "830 S Highway 92",
+      "city": "Sierra Vista",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Jensen's Sierra Vista Mortuary",
+      "street": "5515 S Highway 92",
+      "city": "Sierra Vista",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Owens Livingston Mortuary Heritage Chapel",
+      "street": "84 E. 19 South",
+      "city": "Snowflake",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Desert Valley Mortuary",
+      "street": "138 N. Avenue B",
+      "city": "Somerton",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Desert Valley Mortuary and Crematory",
+      "street": "138 N. Avenue B",
+      "city": "Somerton",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Menke Funeral & Cremation Center",
+      "street": "12420 N 103rd Ave",
+      "city": "Sun City",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Online Cremations, LLC",
+      "street": "10307 W Coggins Dr",
+      "city": "Sun City",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Palm Valley Funeral Home L.L.C.",
+      "street": "10761 Grand Ave",
+      "city": "Sun City",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Regency Mortuary and Cremation",
+      "street": "9850 West Thunderbird Blvd",
+      "city": "Sun City",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Sunland Mortuary & Cremation Center",
+      "street": "15826 N Del Webb Blvd",
+      "city": "Sun City",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Camino del Sol Funeral Chapel & Cremation",
+      "street": "13738 W Camino Del Sol",
+      "city": "Sun City West",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Superior Funeral Home",
+      "street": "379 Ray Road",
+      "city": "Superior",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Simply Cremation and Funeral Arrangements",
+      "street": "16952 West Bell Road",
+      "city": "Surprise",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Surprise Funeral Care",
+      "street": "16063 W Bell Rd",
+      "city": "Surprise",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Silver Creek Mortuary",
+      "street": "745 Paper Mill Road",
+      "city": "Taylor",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "All Options Funeral Home",
+      "street": "1525 W University Dr Ste 102",
+      "city": "Tempe",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Tempe Mortuary",
+      "street": "405 E Southern Ave",
+      "city": "Tempe",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Advantage Crystal Rose Funeral Home",
+      "street": "9155 W Van Buren St",
+      "city": "Tolleson",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Valley Ridge Mortuary",
+      "street": "123 West Moenave Road",
+      "city": "Tuba City",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Adair Funeral Home Avalon",
+      "street": "8090 N Northern Ave",
+      "city": "Tucson",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Adair Funeral Home Dodge",
+      "street": "1050 N Dodge Blvd",
+      "city": "Tucson",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Angel Valley Funeral Home",
+      "street": "2545 N Tucson Blvd",
+      "city": "Tucson",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Avenidas Cremation & Burial",
+      "street": "1376 W Saint Marys Rd",
+      "city": "Tucson",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Avenidas Mortuary Services",
+      "street": "1316 E 21st St",
+      "city": "Tucson",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Bring's Broadway Chapel",
+      "street": "6910 East Broadway",
+      "city": "Tucson",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Carrillo's Tucson Mortuary",
+      "street": "204 S Stone Ave",
+      "city": "Tucson",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Desert Rose Heather Cremation & Burial",
+      "street": "1040 N Columbus Blvd",
+      "city": "Tucson",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Desert Sunset Funeral Home",
+      "street": "3081 W Orange Grove Rd",
+      "city": "Tucson",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "East Lawn Palms Mortuary",
+      "street": "5801 E Grant Rd",
+      "city": "Tucson",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "El Encanto Memorial Crematory Avalon",
+      "street": "8090 N Northern Ave",
+      "city": "Tucson",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Evergreen Mortuary, Cemetery and Crematory",
+      "street": "3015 N Oracle Rd",
+      "city": "Tucson",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Martinez Funeral Chapels",
+      "street": "2580 S 6th Ave",
+      "city": "Tucson",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Oasis Cremation & Funeral Care",
+      "street": "1687 W Prince Rd #101",
+      "city": "Tucson",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Ramirez Funeral Home",
+      "street": "2470 North Jackrabbit Avenue",
+      "city": "Tucson",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Sensible Funerals & Cremation",
+      "street": "109 W Grant Rd",
+      "city": "Tucson",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Swan Burial & Cremation LLC",
+      "street": "1335 South Swan Road",
+      "city": "Tucson",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Tucson Cremation",
+      "street": "4275 South Randolph Avenue",
+      "city": "Tucson",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Tucson Cremation Services",
+      "street": "4275 S Randolph Ave.",
+      "city": "Tucson",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Tulip Cremation",
+      "street": "1687 W. Prince Road #151",
+      "city": "Tucson",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "David's Desert Chapel Funeral Home",
+      "street": "325 W Yavapai St",
+      "city": "Wickenburg",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Wickenburg Funeral Home and Crematory",
+      "street": "187 N Adams Street",
+      "city": "Wickenburg",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Westlawn Chapel and Mortuary",
+      "street": "105 S Arizona Ave",
+      "city": "Willcox",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Winslow Funeral Home",
+      "street": "1505 W Third St",
+      "city": "Winslow",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Advantage Funeral & Cremation Services (Golden Door Chapel)",
+      "street": "11211 W Michigan Ave",
+      "city": "Youngtown",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "All Saints Cremation & Memorial Chapel",
+      "street": "170 E 17th Place",
+      "city": "Yuma",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Desert Lawn Memorial Park",
+      "street": "1415 S 1st Ave",
+      "city": "Yuma",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Johnson Mortuary and Desert Lawn Memorial Park",
+      "street": "1415 S 1st Ave",
+      "city": "Yuma",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Sanchez Dombrowski Funeral Home",
+      "street": "3880 S 4th Ave",
+      "city": "Yuma",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Sunset Vista Funeral Home and Cemetery",
+      "street": "11357 E. 40th Street",
+      "city": "Yuma",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    },
+    {
+      "name": "Yuma Mortuary & Crematory",
+      "street": "775 S 5th Ave",
+      "city": "Yuma",
+      "region": "AZ",
+      "phone": "",
+      "website": ""
+    }
+  ]
+}

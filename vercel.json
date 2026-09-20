@@ -10,8 +10,33 @@
       "permanent": true
     },
     {
-      "source": "/quote-screen",
-      "destination": "/quote.html",
+      "source": "/funerarias-cementerios/:state/:city.html",
+      "destination": "/funerarias-cementerios.html?estado=:state&ciudad=:city",
+      "permanent": true
+    },
+    {
+      "source": "/funerarias-cementerios/:state/:city",
+      "destination": "/funerarias-cementerios.html?estado=:state&ciudad=:city",
+      "permanent": true
+    },
+    {
+      "source": "/funerarias-cementerios/:state.html",
+      "destination": "/funerarias-cementerios.html?estado=:state",
+      "permanent": true
+    },
+    {
+      "source": "/en/funeral-homes-cemeteries/:state/:city.html",
+      "destination": "/en/funeral-homes-cemeteries.html?estado=:state&ciudad=:city",
+      "permanent": true
+    },
+    {
+      "source": "/en/funeral-homes-cemeteries/:state/:city",
+      "destination": "/en/funeral-homes-cemeteries.html?estado=:state&ciudad=:city",
+      "permanent": true
+    },
+    {
+      "source": "/en/funeral-homes-cemeteries/:state.html",
+      "destination": "/en/funeral-homes-cemeteries.html?estado=:state",
       "permanent": true
     },
     {

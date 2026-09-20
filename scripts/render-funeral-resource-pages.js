@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
- * Funeral home + cemetery directory: hub, state, and city URLs (ES + EN).
- * Data: data/funeral-resources.json
+ * Funeral home + cemetery directory: one lookup URL per language (ES + EN).
+ * City/state directory HTML is not published. Data: data/funeral-resources.json
  */
 const fs = require("fs");
 const path = require("path");
@@ -10,7 +10,7 @@ const { writeFuneralResourceIndex } = require("../lib/funeral-resource-index");
 const html = require("../lib/funeral-directory-html");
 
 const ROOT = path.join(__dirname, "..");
-const CSS_VER = "20260919-dir17";
+const CSS_VER = "20260920-lookup1";
 const HEADER_ES = path.join(ROOT, "includes/site-header-inner.html");
 const HEADER_EN = path.join(ROOT, "includes/en-site-header.html");
 const FOOTER_ES = path.join(ROOT, "includes/site-footer-inner.html");
@@ -186,8 +186,8 @@ function hubPage(lang, data) {
     ? "Funeral homes and cemeteries | Mejor Vida Insurance"
     : "Funerarias y cementerios | Mejor Vida Seguros";
   const desc = isEn
-    ? "Look up funeral homes, cemeteries, and published general price list figures by city. Smaller towns open the nearest resource list."
-    : "Busque funerarias, cementerios y listas generales de precios publicadas por ciudad. Los pueblos más pequeños abren la lista de recursos más cercana.";
+    ? "Look up funeral homes, contact details, and published general price lists. One search page — not a separate URL for every city."
+    : "Busque funerarias, contactos y listas generales de precios publicadas. Una sola página de búsqueda, no una URL por ciudad.";
   const h1 = isEn
     ? "Find funeral homes and prices near you"
     : "Encuentre funerarias y precios cerca de usted";
@@ -341,24 +341,6 @@ writeBoth(
   hubPage("en", data)
 );
 
-data.states.forEach((state) => {
-  writeBoth(
-    `funerarias-cementerios/${state.slug}.html`,
-    `en/funeral-homes-cemeteries/${state.slug}.html`,
-    statePage("es", state, data),
-    statePage("en", state, data)
-  );
-});
-
-data.listings.forEach((listing) => {
-  writeBoth(
-    listing.pathEs.replace(/^\//, ""),
-    listing.pathEn.replace(/^\//, ""),
-    cityPage("es", listing, data),
-    cityPage("en", listing, data)
-  );
-});
-
 console.log(
-  `wrote funeral directory (${written.places} cities, ${written.listings} listings, ${written.homes} homes)`
+  `wrote funeral lookup (${written.places} cities, ${written.listings} listings, ${written.homes} homes) — hub only`
 );
