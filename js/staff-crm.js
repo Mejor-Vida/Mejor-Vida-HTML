@@ -267,7 +267,11 @@
       if (errMsg && typeof errMsg === "object") {
         errMsg = errMsg.message || JSON.stringify(errMsg);
       }
-      if (data && data.detail) errMsg += ": " + data.detail;
+      if (data && data.reason && String(data.reason) !== String(errMsg)) {
+        errMsg += " (" + data.reason + ")";
+      } else if (data && data.detail && typeof data.detail !== "object") {
+        errMsg += ": " + data.detail;
+      }
       throw new Error(errMsg);
     }
     return data;
@@ -1382,7 +1386,9 @@
 
     async function enrollLeadNurtureFromList(btn) {
       var id = btn.getAttribute("data-id");
-      var sourceTable = btn.getAttribute("data-source-table") || "";
+      var tr = btn.closest("tr");
+      var sourceTable =
+        btn.getAttribute("data-source-table") || (tr && tr.getAttribute("data-source-table")) || "";
       var status = $("crm-clients-status");
       if (!id || !sourceTable) {
         if (status) status.textContent = t("col_nurture_enroll_failed");
@@ -1398,7 +1404,7 @@
           encodeURIComponent(sourceTable) +
           "&backdate=0";
         var data = await authedApi("/api/staff/nurture-pipeline" + qs, null, { method: "POST" });
-        if (!data || !data.enrolled) {
+        if (!data || (!data.enrolled && !data.ok)) {
           throw new Error((data && (data.error || data.reason)) || t("col_nurture_enroll_failed"));
         }
         var steps = (data && data.steps) || [];
@@ -1413,7 +1419,7 @@
         upsertLeadListItem({
           id: id,
           source_table: sourceTable,
-          nurture_enrolled: !!(data && data.enrolled),
+          nurture_enrolled: !!(data && (data.enrolled || data.ok)),
           nurture_can_enroll: false,
           nurture_step_number: next && next.stageNumber != null ? next.stageNumber : 1,
           nurture_step_total: steps.length || null,

@@ -265,7 +265,29 @@ module.exports = async function handler(req, res) {
       if (!enrollStage) {
         return json(res, 400, { error: "stage_no_manual_enroll", stage: pipelineStage });
       }
-      const contactId = profile.contacts_contact_id || profile.contact_id || null;
+      let contactId = profile.contacts_contact_id || profile.contact_id || null;
+      if (!contactId) {
+        try {
+          const { loadUnifiedLead } = require("./_lead-contact");
+          const { linkLeadToContacts } = require("./_contact-link");
+          const unified = await loadUnifiedLead(cfg, leadId);
+          const link = await linkLeadToContacts(cfg, {
+            leadId,
+            leadSourceTable,
+            phone: (unified && unified.phone) || profile.phone,
+            email: (unified && unified.email) || profile.email,
+            first_name: (unified && unified.first_name) || profile.first_name,
+            last_name: (unified && unified.last_name) || profile.last_name,
+            language: (unified && unified.language) || profile.language,
+            manychat_subscriber_id: profile.manychat_subscriber_id,
+            pipeline_stage: pipelineStage,
+            updatedBy: (auth.user && auth.user.email) || auth.email || "staff",
+          });
+          contactId = link.contactId || null;
+        } catch (linkErr) {
+          console.error("[staff/nurture-pipeline] contact-link", linkErr);
+        }
+      }
       const backdate =
         String((req.query && req.query.backdate) || (req.body && req.body.backdate) || "")
           .trim() !== "0";

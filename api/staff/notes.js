@@ -51,9 +51,62 @@ module.exports = async function handler(req, res) {
     const resolved = await resolveContactForStaffLead(cfg, leadId);
     if (resolved.error) return json(res, resolved.status || 400, { error: resolved.error });
 
-    const contactId = resolved.contactId;
+    let contactId = resolved.contactId;
     if (!contactId) {
-      return json(res, 400, { error: "Link this client to a contact before saving notes." });
+      try {
+        const { linkLeadToContacts } = require("./_contact-link");
+        const u = resolved.unified || {};
+        const p = resolved.profile || {};
+        const link = await linkLeadToContacts(cfg, {
+          leadId,
+          leadSourceTable: resolved.sourceTable,
+          phone: u.phone || p.phone,
+          email: u.email || p.email,
+          first_name: u.first_name || p.first_name,
+          last_name: u.last_name || p.last_name,
+          language: u.language || p.language,
+          manychat_subscriber_id: p.manychat_subscriber_id,
+          pipeline_stage: p.pipeline_stage,
+          updatedBy: auth.user && auth.user.email ? auth.user.email : "julie",
+        });
+        contactId = link.contactId || null;
+      } catch (linkErr) {
+        console.error("staff/notes POST contact-link", linkErr);
+      }
+    }
+    if (!contactId) {
+      try {
+        const crypto = require("crypto");
+        const { insertContact } = require("../../lib/contacts-db");
+        const { saveContactIdsOnStaffProfile } = require("./_contact-link");
+        const u = resolved.unified || {};
+        const p = resolved.profile || {};
+        const h = crypto.createHash("sha256").update(String(leadId)).digest("hex");
+        const suffix = String(parseInt(h.slice(0, 8), 16) % 10000000).padStart(7, "0");
+        const row = await insertContact(cfg.supabaseUrl, cfg.serviceKey, {
+          phone: `+1997${suffix}`,
+          first_name: String(u.first_name || p.first_name || "").trim() || null,
+          last_name: String(u.last_name || p.last_name || "").trim() || null,
+          email: String(u.email || p.email || "").trim() || null,
+          source: "staff_crm_notes",
+        });
+        if (row && row.id) {
+          contactId = String(row.id);
+          await saveContactIdsOnStaffProfile(
+            cfg,
+            leadId,
+            resolved.sourceTable,
+            contactId,
+            auth.user && auth.user.email ? auth.user.email : "julie",
+            { pipeline_stage: p.pipeline_stage }
+          );
+        }
+      } catch (createErr) {
+        console.error("staff/notes POST create contact", createErr);
+      }
+    }
+    if (!contactId) {
+      return json(res, 400, { error: "Could not save notes for this client. Add a phone or email on Overview, then try again." });
     }
 
     const createdBy = auth.user && auth.user.email ? auth.user.email : "julie";
