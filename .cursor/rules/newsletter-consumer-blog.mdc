@@ -1,5 +1,5 @@
 ---
-description: Transform Julie's weekly insurance newsletter into a consumer weekly blog digest (families, not agents)
+description: Transform Julie's weekly insurance newsletter into a consumer weekly blog digest (families, teaching language, not agents)
 globs: tools/newsletter-to-consumer-blog-prompt.md,tools/blog-build-rules.md,blog/weekly-insurance-update-*.html,en/blog/weekly-insurance-update-*.html
 alwaysApply: false
 ---
@@ -13,6 +13,7 @@ When building or updating a **public weekly blog** from Julie’s newsletter / i
 3. Each digest story: image + headline → fresh summary → CTA to a **separate** full-article page.
 4. Full articles = **email-draft length (~600–900 words)**, rewritten for families — not a short teaser and not a paste of the digest. Include FAQ + pillar internal links + bottom **Fuentes / Sources** box with live **primary-authority** URLs (FTC, NFDA, III, BLS, `.gov`, major press — not unknown blogs or vendor sites; no self-only citations; cut unsourced claims).
 5. **Never** address agents / IMOs / BGAs / producers on public pages. Topics: **final expense, term life, whole life** for families — Spanish indexed, English `noindex`.
-6. Keep SEO assets; strip prior-week schema/hreflang/preload leftovers when cloning templates.
-7. Mirror ES ↔ EN structure. **Index Spanish only** (`sitemap.xml` ES URLs; EN `noindex, follow`). No `hreflang` from ES to noindex EN. Do not sitemap/`index` off-topic archive weeks.
-8. After Julie authorizes the post, she supplies images, and the digest is **live on production**, Facebook is automatic (Sunday + Tuesday 10 a.m. + Thursday 10 a.m. Chicago). Do not wait for her to ask. See `tools/weekly-newsletter/FACEBOOK_AUTOMATION.md`.
+6. **Teaching:** these pages teach families. Define every new term in the same paragraph in kitchen-table language. Spell out abbreviations and clipped names (Re, H.R., BMI, DOI) before using them. See `tools/newsletter-to-consumer-blog-prompt.md` — Teaching language.
+7. Keep SEO assets; strip prior-week schema/hreflang/preload leftovers when cloning templates.
+8. Mirror ES ↔ EN structure. **Index Spanish only** (`sitemap.xml` ES URLs; EN `noindex, follow`). No `hreflang` from ES to noindex EN. Do not sitemap/`index` off-topic archive weeks.
+9. After Julie authorizes the post, she supplies images, and the digest is **live on production**, Facebook is automatic (Sunday + Tuesday 10 a.m. + Thursday 10 a.m. Chicago). Do not wait for her to ask. See `tools/weekly-newsletter/FACEBOOK_AUTOMATION.md`.

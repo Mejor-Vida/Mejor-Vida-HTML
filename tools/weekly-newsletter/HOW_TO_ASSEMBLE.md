@@ -8,6 +8,8 @@ Recipients of the **6 a.m. Sunday send:**
 
 Write for families. Never write for agents, IMOs, BGAs, or underwriters.
 
+**Teaching:** the letter and the later public blog teach. Define terms on first use. Spell out abbreviations. See `CONTENT_PACKAGE.md` and `tools/newsletter-to-consumer-blog-prompt.md` — Teaching language.
+
 ## 1. Date window (every run)
 
 | Name | Value |
@@ -94,6 +96,7 @@ Agency vs Julie: body copy uses **Mejor Vida Insurance / Seguros**. Julie is fin
 
 - [ ] No research-narration (“we do not have that file,” “we will not repeat a rate we did not verify”)  
 - [ ] Each story explains the idea in kitchen-table language **before** using an official name (GINA, FTC, annuity, etc.)  
+- [ ] Every new term is defined on first use; no unexplained abbreviations or clipped names (Re, H.R., BMI, DOI)  
 - [ ] Three stories, **same length** (email 200–300 words each; website 700–1,000 each)  
 - [ ] Each story has a real source URL (or evergreen primary URL)  
 - [ ] No invented prices  

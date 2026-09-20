@@ -18,7 +18,7 @@ This folder is the project. Follow it every week. Do not improvise a different f
 
 **Related (do not replace this project):**
 
-- Public blog HTML after Julie picks stories: `tools/newsletter-to-consumer-blog-prompt.md`, `tools/blog-build-rules.md`
+- Public blog HTML after Julie picks stories: `tools/newsletter-to-consumer-blog-prompt.md` (includes **Teaching language**), `tools/blog-build-rules.md`
 - Long English drafts (optional, after the email): `tools/weekly-blog-system-rules.md`
 - Topic guard in code: `lib/crm-weekly-topic-guard.js`
 

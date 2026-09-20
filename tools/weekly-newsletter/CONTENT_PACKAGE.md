@@ -6,9 +6,11 @@ Research finds **exactly 3** stories. Give them the **same depth**. Do not make 
 
 **Languages:** website and Julie’s email in **Spanish**; admin email in **English**; Facebook in **Spanish**. Same facts in every version.
 
-**Audience:** Working individuals and families—especially Hispanic and bilingual families—with limited insurance knowledge. Explain clearly without talking down. The email is a **client nurture letter**, not a staff briefing or a news dump.
+**Audience:** Working individuals and families—especially Hispanic and bilingual families—with limited insurance knowledge. These pieces **teach**. Explain clearly without talking down. The email is a **client nurture letter**, not a staff briefing or a news dump.
 
 **How to explain:** Situation first, everyday words second, official name last. Never open with GINA, FTC, HHS, III, or another acronym. Tell the reader why a family looking at life insurance should care.
+
+**Teaching language (required in email and later blog):** On first use, define the term in the same paragraph. Spell out abbreviations and clipped names before any short form (Southern Atlantic Reinsurance, not “Re”; body-mass index, not “BMI”; House bill, not “H.R.” until explained). If you name a process (rehabilitation, underwriting, surrender), say what kind of process it is in kitchen-table words. Full blog rules: `tools/newsletter-to-consumer-blog-prompt.md` — Teaching language.
 
 **Do not put in the letter** (Julie cut these; they sound weird to clients):
 - Narrating the writing (“you do not need insurance language,” “we use everyday words first”)

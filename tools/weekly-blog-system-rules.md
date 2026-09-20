@@ -3,7 +3,7 @@
 **Source of truth** for researching and drafting the weekly consumer blog posts. Adapted from Abacus *Mejor_Vida_Blog_System_Rules.docx* (effective July 19, 2026) and updated for Julie’s SEO and licensing goals.
 
 **Audience of this document:** Cursor AI / automation agents.  
-**Audience of the posts:** Spanish-speaking families and future clients who need clear information about **final expense**, **term life**, and **whole life** only (drafts in **English**; Spanish when publishing).
+**Audience of the posts:** Spanish-speaking families and future clients. These articles **teach**. Need clear information about **final expense**, **term life**, and **whole life** only (drafts in **English**; Spanish when publishing). Define every new term on first use. See `tools/newsletter-to-consumer-blog-prompt.md` — Teaching language.
 
 **Hard focus (Julie — locked):**
 - **Consumer only** — never write for agents, IMOs, BGAs, underwriters, or producers.
@@ -265,11 +265,13 @@ Clear, simple (≈6th-grade readable). Prefer SEO keywords in this order when th
 
 ### Style
 
-- Reading level: 8th grade or below (aim 6th–7th)  
-- Spell out acronyms on first use  
-- Max **15–20 words** per sentence; max **3–4 sentences** per paragraph  
-- Conversational “you” / “your family”; define insurance terms on first use  
-- English only for drafts  
+- These pieces **teach families** — not agents. Everyday words first, official name second.
+- Reading level: 8th grade or below (aim 6th–7th)
+- Spell out acronyms **and clipped names** on first use (Reinsurance, not “Re”; House bill, not “H.R.” until explained)
+- Max **15–20 words** per sentence; max **3–4 sentences** per paragraph
+- Conversational “you” / “your family”; define insurance terms on first use in the same paragraph
+- English only for drafts
+- Full teaching rules: `tools/newsletter-to-consumer-blog-prompt.md`  
 
 ### Do not write
 
@@ -314,7 +316,7 @@ Do **not** publish to the live site until Julie chooses an article and asks to p
 - [ ] Source URL real and working (or evergreen sources cited)  
 - [ ] Answers who, what, when, where, why (for news)  
 - [ ] At least one concrete real-world example with numbers  
-- [ ] Zero unexplained acronyms  
+- [ ] Zero unexplained acronyms or clipped names; every new term defined on first use  
 - [ ] Sentences ≤20 words; paragraphs ≤4 sentences  
 - [ ] Reading level ≤8th grade  
 - [ ] CTA includes `1-402-440-5438`  

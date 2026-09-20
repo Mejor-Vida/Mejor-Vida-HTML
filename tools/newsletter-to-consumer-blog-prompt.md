@@ -24,20 +24,47 @@ Do **NOT** write for:
 
 Assume an **8th–10th grade** reading level.
 
+These pages **teach**. A reader should understand every term without already knowing insurance.
+
+---
+
+## Teaching language (required)
+
+The digest, each full article, and the Sunday newsletter are **teaching pieces for families**, not trade notes. When you introduce a new word, abbreviation, or company-name fragment, **define it in the same paragraph** in kitchen-table language. Do not assume the reader knows the field.
+
+**On first use:**
+
+1. Say what the thing **is** in everyday words.
+2. Then you may use the official name.
+3. **Do not use an abbreviation or a clipped name until you have spelled out the full words.** Examples: write **Southern Atlantic Reinsurance** and explain that reinsurance is insurance one insurance company buys from another to share risk — never “Southern Atlantic Re” alone. Write **body-mass index**, not “BMI,” until that number has been named in full. Write **House bill 10234**, not “H.R. 10234,” until the bill has been introduced as a House of Representatives bill.
+
+**Define when you first mention** (plain sentence, not a glossary dump):
+
+- Product types (annuity, fixed annuity, index-linked annuity, variable life, term, whole life)
+- Processes (underwriting, rehabilitation as a **court takeover of a struggling insurer**, surrender, contestability period)
+- Institutions (state department of insurance, **state guaranty association** = that state’s backup fund if a company cannot pay, up to a dollar limit)
+- Paperwork (legal booklet vs short summary, registration/filing only if you also say it is a short summary of costs, risks, and main rules)
+
+Do **not** drop unexplained jargon: prospectus, rehabilitator, table rating, preferred/standard class, market index, reinsurance.
+
+You still **must not** dump actuarial mechanics (RBC ratios, reserve transfers) if the story does not need them. If the story **does** use a term, teach it. Prefer “a judge can put a person chosen by the state in charge of the company” over “court-supervised process” with no kind of process named.
+
+Listing-card bullets and the digest “this week” line must also name the news in plain language (who did what), not industry shorthand.
+
 ---
 
 ## Purpose
 
-The page goal is **not** to teach insurance.
+The pages **teach families enough to understand the news**. That is not a course for agents. It is classroom-clear writing for people who have never heard the terms.
 
-The goal is to:
+Also:
 
 1. Build trust
 2. Keep clients informed
 3. Show that Mejor Vida Insurance stays current on important insurance news
 4. Encourage readers to click into the **full article**
 
-The weekly page should feel like a **modern online news digest**.
+The weekly page should feel like a **modern online news digest** that **teaches** families what the news means.
 
 ---
 
@@ -82,13 +109,11 @@ The weekly page should feel like a **modern online news digest**.
 
 ## Rewrite style
 
-Do **NOT** explain (unless a one-line plain gloss is essential):
+Do **not** dump actuarial mechanics the story does not need (RBC ratios, reserve transfers, accounting).
 
-- actuarial corrections, reserve transfers, RBC ratios
-- reinsurance structures, underwriting mechanics
-- regulatory technicalities, accounting details
+Do **teach** every term you use (see Teaching language). If you mention reinsurance, underwriting, or a court process, define it in everyday words.
 
-Instead explain:
+Also answer:
 
 - Why should I care?
 - Does this affect me?
@@ -149,6 +174,8 @@ Convert the following insurance newsletter into:
 Follow `tools/newsletter-to-consumer-blog-prompt.md` and `.cursor/rules/newsletter-consumer-blog.mdc`.
 
 Do not write for agents. No “what this means for agents.” No IMOs/BGAs.
+
+**Teaching:** define every new term and spell out abbreviations on first use (`tools/newsletter-to-consumer-blog-prompt.md` — Teaching language).
 
 ### Newsletter / briefing to convert
 

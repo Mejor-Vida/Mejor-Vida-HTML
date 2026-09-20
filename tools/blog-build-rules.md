@@ -11,6 +11,7 @@ Rules for authoring **public weekly digest** posts (`blog/weekly-insurance-updat
 ## 0. Audience (public weekly pages)
 
 - Write for **families** (Hispanic households, seniors, adult children) — **not** agents, IMOs, BGAs, underwriters, or producers.
+- These pages **teach**. Define every new term on first use in kitchen-table language. Spell out abbreviations and clipped company names (for example Southern Atlantic **Reinsurance**, not “Re” alone) before using a short form. See `tools/newsletter-to-consumer-blog-prompt.md` — Teaching language.
 - **Spanish-first SEO.** Topics only: **final expense**, **term life**, **whole life** (and consumer scams tied to those). No Medigap/Medicare shopping, IUL/VUL, LTC deals, or industry trade digests as indexed content.
 - Weekly page = **condensed news digest** (150–250 word preview per story + CTA to full article).
 - Full story body lives on **individual article pages** at **full draft length** (see §2.4).
@@ -77,6 +78,7 @@ Same structure, depth, and facts in both languages. Do **not** ship a short Span
 
 ## 3. QA before merge
 
+- [ ] Every new term is defined on first use; no unexplained abbreviations or clipped names (Teaching language)
 - [ ] Digest summaries are 150–250 words each (condensed)
 - [ ] Full articles are ~600–900 words (email-draft depth), not short teaser clones
 - [ ] Full articles are not copy-pastes of the digest

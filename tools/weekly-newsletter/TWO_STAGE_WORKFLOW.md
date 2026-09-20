@@ -35,7 +35,9 @@ Saved under `tools/weekly-newsletter/out/`:
 - `research-brief-YYYY-MM-DD.json`
 - `current-research-brief.json`
 
-Each selected story includes working headline, event/publication dates, primary (+ confirming) sources, 5–10 verified facts, context, why it matters, takeaway, terms to explain, limitations, claims not to make, internal links, image concept.
+Each selected story includes working headline, event/publication dates, primary (+ confirming) sources, 5–10 verified facts, context, why it matters, takeaway, **terms to explain** (every jargon word Stage 2 must teach on first use), limitations, claims not to make, internal links, image concept.
+
+**Teaching (both stages):** the letter and later blog are for families. Stage 1 must fill `terms_to_explain`. Stage 2 must define those terms in kitchen-table language before using abbreviations or clipped names. Full rules: `tools/newsletter-to-consumer-blog-prompt.md` — Teaching language.
 
 Validation before Stage 2:
 
@@ -51,7 +53,7 @@ If a selected story fails, Stage 1 replaces it with the next-highest eligible ca
 
 ## Stage 2 outputs
 
-Writes from the brief only (no new news search). Email stories are about **175–250 words** each language. One phone CTA in the closing lesson only. Formal educational disclaimer stays in the email template footer.
+Writes from the brief only (no new news search). Email stories are about **175–250 words** each language. One phone CTA in the closing lesson only. Formal educational disclaimer stays in the email template footer. Define every new term on first use; spell out abbreviations.
 
 Issue preview still at `tools/weekly-newsletter/out/issue-YYYY-MM-DD.json` and `current-issue.json` (includes `research_brief_path`).
 

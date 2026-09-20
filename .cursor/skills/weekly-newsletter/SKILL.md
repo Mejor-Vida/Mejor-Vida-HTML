@@ -34,6 +34,7 @@ Do not start Stage 2 until the brief passes validation (dates in news period, UR
 - News period: prior Sunday through Saturday America/Chicago (`TODAY−7` … `TODAY−1`).
 - Reputable sources only (prefer primary: FTC, NFDA, NAIC, LIMRA, `.gov`, major U.S. press).
 - Exactly **3** family-facing stories, **same depth** (website features 700–1,000 words; email **175–250 words** each).
+- **Teaching:** define every new term on first use; spell out abbreviations and clipped names. See `CONTENT_PACKAGE.md` and `tools/newsletter-to-consumer-blog-prompt.md` — Teaching language.
 - Spanish → julie@; English → admin@. Facebook in Spanish (`facebook-post-rules.md`).
 - No Medicare. No invented premiums. No agent-manual paste.
 - One phone CTA near the end of the letter — not after every story.

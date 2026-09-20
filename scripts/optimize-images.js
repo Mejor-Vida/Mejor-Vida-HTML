@@ -201,6 +201,12 @@ const JOBS = [
   { src: "img/facebook/mib-age-growth-fb-2026-09-13.png", maxWidth: 1080, maxHeight: 1080, keepPng: true },
   { src: "img/blog-generated/weekly-insurance-update-2026-09-13/story-1.png", maxWidth: 1080, maxHeight: 1080, keepPng: true },
   { src: "img/blog-generated/weekly-insurance-update-2026-09-13/story-2.png", maxWidth: 1024, maxHeight: 682, keepPng: true },
+  { src: "img/blog-generated/weekly-insurance-update-2026-09-20/thumb.png", maxWidth: 1600, maxHeight: 900, keepPng: true },
+  { src: "img/blog-generated/weekly-insurance-update-2026-09-20/hero-es.png", maxWidth: 1080, maxHeight: 1080, keepPng: true },
+  { src: "img/blog-generated/weekly-insurance-update-2026-09-20/hero-en.png", maxWidth: 1080, maxHeight: 1080, keepPng: true },
+  { src: "img/blog-generated/weekly-insurance-update-2026-09-20/story-1.png", maxWidth: 1024, maxHeight: 1024, keepPng: true },
+  { src: "img/blog-generated/weekly-insurance-update-2026-09-20/story-2.png", maxWidth: 1024, maxHeight: 1024, keepPng: true },
+  { src: "img/blog-generated/weekly-insurance-update-2026-09-20/story-3.png", maxWidth: 1024, maxHeight: 1024, keepPng: true },
 ];
 
 function fitInside(meta, maxWidth, maxHeight) {
