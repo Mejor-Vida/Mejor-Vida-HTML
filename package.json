@@ -79,6 +79,7 @@
     "@googleapis/gmail": "^16.1.2",
     "@googleapis/searchconsole": "^6.0.1",
     "google-auth-library": "^10.9.1",
+    "pdfjs-dist": "^4.10.38",
     "web-push": "^3.6.7"
   },
   "devDependencies": {

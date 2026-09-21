@@ -14,6 +14,7 @@ Julie connects the **MVI Agent Browser Bridge** to Patriot Software about once a
 3. If the bridge is off or the tab is wrong, stop. Tell Julie to open Patriot, turn **Bridge ON**, and say when ready.
 4. Read [vendor-map.md](vendor-map.md) before touching transactions.
 5. Screenshot + `text` after each important screen. Discover menus from what you see.
+6. **Always keep Staff CRM Accounting in step.** Same session: classify/dismiss/post in Patriot, then post (or ignore) the matching rows on `#/accounting`. Never leave Patriot posted and the CRM books behind. Follow `.cursor/skills/mvi-accounting/SKILL.md`.
 
 Bridge commands: `tools/agent-browser-bridge/README.md`.
 
@@ -59,7 +60,8 @@ Common traps:
 
 - Payroll tax / 941 / Nebraska withholding payments are **liability payments**, not a new expense.
 - Owner draw / distribution is not wages.
-- Credit-card payments are **transfers**, not double-counted expenses if the charges were already categorized.
+- Credit-card payments are **transfers**, not double-counted expenses.
+- **Chase duplicate imports:** Patriot often lists the same FACEBK/Canva/Vercel/payment twice. Dismiss the extra. If it is already posted twice on the General Ledger, void one copy — do not “match” CRM to the doubled totals.
 - Refunds go to the original expense/income account.
 
 ### 2. After the feed is clean
@@ -118,5 +120,6 @@ If `vendor-map.md` is empty, spend the first session **learning**: open recent c
 - Log into Patriot yourself or reset passwords
 - File payroll or tax forms unless explicitly asked
 - Change chart of accounts, payroll employees, or bank connections
+- Add a live bank feed to Staff CRM Accounting (statement PDFs only)
 - Touch the public website, chatbot knowledge, or Meta/Google ads as part of this job
 - Classify a transaction “to get through the list”

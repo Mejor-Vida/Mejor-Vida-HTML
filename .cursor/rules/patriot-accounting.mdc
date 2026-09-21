@@ -11,4 +11,5 @@ When Julie connects the MVI bridge to **Patriot Software**, or asks for the **ac
 2. Drive the logged-in Patriot tab via the MVI bridge. Do not guess login URLs.
 3. Classify bank imports the same way that payee was classified before. Flag unknowns.
 4. Brief cash, P&L, and watch items. Do not recommend cutting spend (losses are expected). Payroll is paused; no employees.
-5. Never put EIN, Patriot customer ID, or bank account numbers in chat or public files.
+5. Always mirror the same work on Staff CRM **Accounting** (`#/accounting`) in the same session. See `.cursor/skills/mvi-accounting/SKILL.md`.
+6. Never put EIN, Patriot customer ID, or bank account numbers in chat or public files.

@@ -15,9 +15,12 @@ const {
   profitAndLoss,
   balanceSheet,
   openingLines,
+  isClosedDate,
+  accountRegister,
   VENDORS,
   CHART,
 } = require("../lib/staff-accounting");
+const { parseStatementText, detectKind } = require("../lib/staff-statement-parse");
 
 function assert(cond, msg) {
   if (!cond) throw new Error(msg);
@@ -87,5 +90,33 @@ assert(bs.balanced, "balance sheet equation");
 
 const open = openingLines(accounts, { "1000": 115019, "1010": 10200, "2000": 144715 });
 assert(validateLines(open).ok, "opening balances");
+
+assert(isClosedDate("2026-08-23", "2026-08-23"), "closed includes end date");
+assert(!isClosedDate("2026-08-23", "2026-08-24"), "open after close");
+const checkingAcct = accounts.find((a) => a.code === "1000");
+const reg = accountRegister(checkingAcct, posted, "2026-09-01", "2026-09-30");
+assert(reg.opening_cents === 7540, "register opening after August deposit");
+assert(reg.rows.length === 0, "no checking activity in September sample");
+
+const chk = `Institution Name Cornhusker Bank
+01/01/2026 Beginning Balance $1,762.90
+2 Credit(s) This Period $1,480.00
+2 Debit(s) This Period $1,564.15
+01/30/2026 Ending Balance $1,678.75
+Other Credits
+Date Description Amount
+01/05/2026 ECORP TRANSFER FROM E-CHECKING $1,000.00
+Other Debits
+Date Description Amount
+01/20/2026 CHASE CREDIT CRD AUTOPAYBUS $1,084.15
+01/20/2026 Patriot Software PAYROLL $480.00
+Daily Balances
+Date Amount
+01/05/2026 $2,762.90`;
+assert(detectKind(chk) === "cornhusker_checking", "detect checking");
+const parsedChk = parseStatementText(chk);
+assert(!parsedChk.error, parsedChk.error);
+assert(parsedChk.txns.length === 3, "checking txns");
+assert(parsedChk.summary.new_balance_cents === 167875, "checking ending");
 
 console.log("ok", { vendors: VENDORS.length, accounts: CHART.length });

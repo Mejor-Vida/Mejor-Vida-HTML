@@ -1,6 +1,9 @@
 const { requireStaffAuth } = require("../auth-check");
 const { json, readJsonBody, serviceConfig, restSelect, restPatch, restInsert } = require("./_inbox-lib");
 const A = require("../../lib/staff-accounting");
+const { parseStatementText } = require("../../lib/staff-statement-parse");
+const { pdfBufferToText } = require("../../lib/staff-statement-pdf");
+const { fileSha, postParsedStatement } = require("../../lib/staff-statement-import");
 
 function emailOf(auth) {
   return (auth && auth.user && auth.user.email) || null;
@@ -13,6 +16,22 @@ function byCode(accounts) {
     m[a.id] = a;
   });
   return m;
+}
+
+function findRegisterAccount(accounts, id) {
+  const list = accounts || [];
+  return (
+    list.find((a) => a.id === id || a.code === id) ||
+    list.find((a) => a.code === "1000") ||
+    list[0] ||
+    null
+  );
+}
+
+function closedError(res, e) {
+  const msg = (e && e.message) || "";
+  if (/closed period/i.test(msg)) return json(res, 400, { error: msg });
+  return null;
 }
 
 async function loadAccounts(cfg) {
@@ -32,8 +51,10 @@ async function loadVendors(cfg) {
 }
 
 async function loadSettings(cfg) {
-  const rows = await restSelect(cfg, "staff_acct_settings", "select=id,books_name,basis,opening_date,updated_at&id=eq.1");
-  return rows && rows[0] ? rows[0] : { books_name: "Mejor Vida Insurance LLC", basis: "modified_cash", opening_date: null };
+  const rows = await restSelect(cfg, "staff_acct_settings", "select=id,books_name,basis,opening_date,closed_through,updated_at&id=eq.1");
+  return rows && rows[0]
+    ? rows[0]
+    : { books_name: "Mejor Vida Insurance LLC", basis: "modified_cash", opening_date: null, closed_through: null };
 }
 
 async function ensureSeeded(cfg) {
@@ -107,6 +128,10 @@ async function loadPostedLines(cfg, start, end) {
 }
 
 async function postEntry(cfg, { date, memo, payee, source, lines, importId, createdBy, voidOf }) {
+  const settings = await loadSettings(cfg);
+  if (A.isClosedDate(settings.closed_through, date) && source !== "void") {
+    throw new Error("That date is in a closed period.");
+  }
   const check = A.validateLines(lines);
   if (!check.ok) throw new Error(check.error);
   const inserted = await restInsert(cfg, "staff_acct_entries", [
@@ -137,6 +162,39 @@ async function postEntry(cfg, { date, memo, payee, source, lines, importId, crea
     }))
   );
   return entry;
+}
+
+async function alreadyPostedSimilar(cfg, { date, amountCents, description, register, counterpart }) {
+  const abs = Math.abs(Number(amountCents) || 0);
+  const day = A.isoDate(date);
+  if (!day || !abs) return null;
+  const rows = await restSelect(
+    cfg,
+    "staff_acct_entries",
+    `select=id,payee,source,status&entry_date=eq.${encodeURIComponent(day)}&status=eq.posted&limit=80`
+  );
+  const needle = A.normalizePayee(description);
+  const transferLike =
+    register &&
+    counterpart &&
+    ((register.subtype === "credit_card" && (counterpart.subtype === "bank" || counterpart.code === "1000")) ||
+      (register.subtype === "bank" && counterpart.subtype === "credit_card"));
+  for (const e of rows || []) {
+    const lines = await restSelect(
+      cfg,
+      "staff_acct_lines",
+      `select=amount_cents,account_id&entry_id=eq.${encodeURIComponent(e.id)}&limit=12`
+    );
+    if (!(lines || []).some((ln) => Math.abs(Number(ln.amount_cents) || 0) === abs)) continue;
+    const pay = A.normalizePayee(e.payee);
+    if (needle && pay && (pay.includes(needle.slice(0, 10)) || needle.includes(pay.slice(0, 10)))) {
+      return { id: e.id, reason: "same_payee_date_amount" };
+    }
+    if (transferLike && /AUTOMATIC PAYMENT|CREDIT CRD AUTOPAY|THANK YOU/i.test(String(e.payee || "") + " " + description)) {
+      return { id: e.id, reason: "same_card_payment" };
+    }
+  }
+  return null;
 }
 
 function hydrateImportLines(register, counterpart, amountCents, accounts) {
@@ -216,6 +274,68 @@ module.exports = async function handler(req, res) {
       }
       if (view === "vendors") return json(res, 200, { accounts, vendors, settings });
       if (view === "accounts") return json(res, 200, { accounts, vendors, settings });
+      if (view === "statements") {
+        const rows = await restSelect(
+          cfg,
+          "staff_acct_statements",
+          "select=id,file_name,kind,period_start,period_end,begin_cents,end_cents,status,posted_count,skipped_count,needs_julie,error,created_at&order=created_at.desc&limit=80"
+        );
+        return json(res, 200, { accounts, vendors, settings, statements: rows || [] });
+      }
+      if (view === "register") {
+        const account = findRegisterAccount(accounts, url.searchParams.get("accountId"));
+        if (!account) return json(res, 400, { error: "Choose Checking, Savings, or Credit Card." });
+        const lines = await loadPostedLines(cfg, null, end);
+        const voids = await restSelect(
+          cfg,
+          "staff_acct_entries",
+          "select=id,entry_date,payee,memo,voided_at,status&status=eq.voided&order=voided_at.desc&limit=40"
+        );
+        return json(res, 200, {
+          accounts,
+          vendors,
+          settings,
+          report: A.accountRegister(account, lines, start, end),
+          voids: voids || [],
+        });
+      }
+      if (view === "reconcile") {
+        const account = findRegisterAccount(accounts, url.searchParams.get("accountId"));
+        if (!account) return json(res, 400, { error: "Choose Checking, Savings, or Credit Card." });
+        const stmtDate = end;
+        const lines = await loadPostedLines(cfg, null, stmtDate);
+        const report = A.accountRegister(account, lines, null, stmtDate);
+        const marks = await restSelect(
+          cfg,
+          "staff_acct_recon_marks",
+          `select=line_id,recon_id&account_id=eq.${encodeURIComponent(account.id)}`
+        );
+        const recs = await restSelect(
+          cfg,
+          "staff_acct_reconciliations",
+          `select=id,account_id,statement_date,statement_cents,difference_cents,status,created_at&account_id=eq.${encodeURIComponent(account.id)}&order=statement_date.desc&limit=12`
+        );
+        const kind = account.code === "2000" ? "chase_card" : account.code === "1000" ? "cornhusker_checking" : "";
+        let suggested_cents = null;
+        if (kind) {
+          const stmts = await restSelect(
+            cfg,
+            "staff_acct_statements",
+            `select=end_cents,period_end,kind&kind=eq.${encodeURIComponent(kind)}&status=eq.processed&order=period_end.desc&limit=8`
+          );
+          const match = (stmts || []).find((s) => s.period_end === stmtDate) || (stmts && stmts[0]);
+          if (match && match.end_cents != null) suggested_cents = match.end_cents;
+        }
+        return json(res, 200, {
+          accounts,
+          vendors,
+          settings,
+          report,
+          markedLineIds: (marks || []).map((m) => m.line_id),
+          reconciliations: recs || [],
+          suggested_cents,
+        });
+      }
       if (view === "report") {
         const asOf = end;
         const histStart = report === "bs" || report === "tb" ? null : start;
@@ -329,6 +449,28 @@ module.exports = async function handler(req, res) {
           errors.push({ id: item.id, error: "Could not build the journal." });
           continue;
         }
+        const dup = await alreadyPostedSimilar(cfg, {
+          date: item.txn_date,
+          amountCents: item.amount_cents,
+          description: item.description,
+          register,
+          counterpart,
+        });
+        if (dup) {
+          await restPatch(cfg, "staff_acct_imports", `id=eq.${encodeURIComponent(item.id)}`, {
+            status: "ignored",
+          });
+          errors.push({
+            id: item.id,
+            error: "Skipped duplicate — already on the books (" + dup.reason + ").",
+          });
+          continue;
+        }
+        const settingsNow = await loadSettings(cfg);
+        if (A.isClosedDate(settingsNow.closed_through, item.txn_date)) {
+          errors.push({ id: item.id, error: "That date is in a closed period." });
+          continue;
+        }
         const entry = await postEntry(cfg, {
           date: item.txn_date,
           memo: "Imported transaction",
@@ -414,6 +556,10 @@ module.exports = async function handler(req, res) {
       );
       const orig = entries && entries[0];
       if (!orig || orig.status !== "posted") return json(res, 400, { error: "Entry is not posted." });
+      const lock = await loadSettings(cfg);
+      if (A.isClosedDate(lock.closed_through, orig.entry_date)) {
+        return json(res, 400, { error: "That date is in a closed period." });
+      }
       const origLines = await restSelect(
         cfg,
         "staff_acct_lines",
@@ -441,6 +587,116 @@ module.exports = async function handler(req, res) {
       return json(res, 200, { ok: true });
     }
 
+    if (action === "statement-upload") {
+      const fileName = String(body.fileName || "statement.pdf").replace(/[^A-Za-z0-9._ -]+/g, "-").slice(0, 120);
+      let b64 = String(body.contentBase64 || "").trim();
+      const comma = b64.indexOf(",");
+      if (b64.startsWith("data:") && comma >= 0) b64 = b64.slice(comma + 1);
+      if (!b64) return json(res, 400, { error: "Choose a PDF statement." });
+      let bytes;
+      try {
+        bytes = Buffer.from(b64, "base64");
+      } catch (e) {
+        return json(res, 400, { error: "Could not read that PDF." });
+      }
+      if (bytes.length < 80 || bytes.length > 12 * 1024 * 1024) {
+        return json(res, 400, { error: "That PDF is empty or too large (12 MB max)." });
+      }
+      const sha = fileSha(bytes);
+      const existing = await restSelect(
+        cfg,
+        "staff_acct_statements",
+        `select=id,file_name,kind,status,posted_count,skipped_count,needs_julie,error,period_end&file_sha256=eq.${encodeURIComponent(sha)}&limit=1`
+      );
+      if (existing && existing[0]) {
+        return json(res, 200, {
+          duplicate: true,
+          statement: existing[0],
+          posted: 0,
+          skipped: existing[0].skipped_count || 0,
+        });
+      }
+      let text = "";
+      let parsed = { error: "Could not read PDF text." };
+      try {
+        text = await pdfBufferToText(bytes);
+        parsed = parseStatementText(text);
+      } catch (e) {
+        parsed = { error: "Could not read that PDF." };
+      }
+      const objectPath = `${A.todayIso().slice(0, 7)}/${sha.slice(0, 16)}-${fileName.replace(/\s+/g, "-")}`;
+      try {
+        const up = await fetch(`${cfg.supabaseUrl}/storage/v1/object/staff-acct-statements/${objectPath}`, {
+          method: "POST",
+          headers: {
+            apikey: cfg.serviceKey,
+            Authorization: `Bearer ${cfg.serviceKey}`,
+            "Content-Type": "application/pdf",
+            "x-upsert": "true",
+          },
+          body: bytes,
+        });
+        if (!up.ok) {
+          const errText = await up.text();
+          console.error("statement storage", up.status, String(errText || "").slice(0, 180));
+        }
+      } catch (e) {
+        console.error("statement storage", e.message || e);
+      }
+      if (parsed.error) {
+        const failed = await restInsert(cfg, "staff_acct_statements", [
+          {
+            file_name: fileName,
+            kind: parsed.kind || "unknown",
+            storage_path: objectPath,
+            file_sha256: sha,
+            status: "failed",
+            error: String(parsed.error).slice(0, 400),
+            uploaded_by: createdBy || "",
+          },
+        ]);
+        return json(res, 400, { error: parsed.error, statement: Array.isArray(failed) ? failed[0] : failed });
+      }
+      const result = await postParsedStatement(cfg, {
+        parsed,
+        vendors,
+        accounts,
+        restSelect,
+        postEntry,
+        createdBy,
+        closedThrough: (await loadSettings(cfg)).closed_through,
+      });
+      const sum = parsed.summary || {};
+      const inserted = await restInsert(cfg, "staff_acct_statements", [
+        {
+          file_name: fileName,
+          kind: parsed.kind,
+          period_start: sum.open || null,
+          period_end: sum.close || null,
+          begin_cents: sum.previous_cents != null ? sum.previous_cents : null,
+          end_cents: sum.new_balance_cents != null ? sum.new_balance_cents : null,
+          storage_path: objectPath,
+          file_sha256: sha,
+          status: "processed",
+          posted_count: result.posted,
+          skipped_count: result.skipped,
+          needs_julie: (result.needsJulie || []).join("\n").slice(0, 2000),
+          error: "",
+          uploaded_by: createdBy || "",
+        },
+      ]);
+      return json(res, 200, {
+        statement: Array.isArray(inserted) ? inserted[0] : inserted,
+        posted: result.posted,
+        skipped: result.skipped,
+        total: result.total,
+        needsJulie: result.needsJulie || [],
+        kind: parsed.kind,
+        periodEnd: sum.close || null,
+        endingCents: sum.new_balance_cents != null ? sum.new_balance_cents : null,
+      });
+    }
+
     if (action === "save-vendor") {
       const name = String(body.name || "").trim();
       const match_pattern = String(body.match_pattern || name).trim();
@@ -462,8 +718,72 @@ module.exports = async function handler(req, res) {
       return json(res, 200, { ok: true });
     }
 
+    if (action === "close-period") {
+      const date = A.isoDate(body.date);
+      if (!date) return json(res, 400, { error: "Choose a close date." });
+      await restPatch(cfg, "staff_acct_settings", "id=eq.1", {
+        closed_through: date,
+        updated_at: new Date().toISOString(),
+        updated_by: createdBy,
+      });
+      return json(res, 200, { ok: true, closed_through: date });
+    }
+
+    if (action === "recon-complete") {
+      const account = findRegisterAccount(accounts, body.accountId);
+      if (!account || (account.subtype !== "bank" && account.subtype !== "credit_card")) {
+        return json(res, 400, { error: "Choose Checking, Savings, or Credit Card." });
+      }
+      const statementDate = A.isoDate(body.statementDate);
+      if (!statementDate) return json(res, 400, { error: "Choose the statement ending date." });
+      const statementCents = A.toCents(body.statementAmount);
+      const lineIds = Array.isArray(body.lineIds) ? body.lineIds.map(String).filter(Boolean) : [];
+      const lines = await loadPostedLines(cfg, null, statementDate);
+      const report = A.accountRegister(account, lines, null, statementDate);
+      const allowed = new Set(report.rows.map((r) => String(r.id)));
+      const chosen = lineIds.filter((id) => allowed.has(id));
+      if (!chosen.length) return json(res, 400, { error: "Check off the lines that are on the statement." });
+      let cleared = 0;
+      report.rows.forEach((r) => {
+        if (chosen.indexOf(String(r.id)) >= 0) cleared += Number(r.delta_cents) || 0;
+      });
+      const difference = statementCents - cleared;
+      if (difference !== 0) {
+        return json(res, 400, {
+          error: "Statement balance must match the checked lines before you finish.",
+          difference_cents: difference,
+          cleared_cents: cleared,
+          statement_cents: statementCents,
+        });
+      }
+      const rec = await restInsert(cfg, "staff_acct_reconciliations", [
+        {
+          account_id: account.id,
+          statement_date: statementDate,
+          statement_cents: statementCents,
+          difference_cents: 0,
+          status: "completed",
+          created_by: createdBy || "",
+        },
+      ]);
+      const recRow = Array.isArray(rec) ? rec[0] : rec;
+      if (!recRow || !recRow.id) throw new Error("Could not save the reconciliation.");
+      const existing = await restSelect(
+        cfg,
+        "staff_acct_recon_marks",
+        `select=line_id&account_id=eq.${encodeURIComponent(account.id)}`
+      );
+      const have = new Set((existing || []).map((m) => String(m.line_id)));
+      const marks = chosen
+        .filter((id) => !have.has(id))
+        .map((line_id) => ({ line_id, recon_id: recRow.id, account_id: account.id }));
+      if (marks.length) await restInsert(cfg, "staff_acct_recon_marks", marks);
+      return json(res, 200, { ok: true, reconciliation: recRow });
+    }
+
     return json(res, 400, { error: "Unknown action" });
   } catch (e) {
+    if (closedError(res, e)) return;
     console.error("staff/accounting POST", e);
     return json(res, 500, { error: e.message || "Accounting save failed" });
   }

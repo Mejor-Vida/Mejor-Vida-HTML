@@ -1,0 +1,12 @@
+---
+description: CRM Accounting is statement-only — never add a live bank feed
+alwaysApply: false
+---
+
+# CRM Accounting — no live bank feed
+
+Staff CRM Accounting is **statement-based only**. Do not add Plaid, Yodlee, Finexer, or any live Chase/Cornhusker bank connection.
+
+Patriot’s live import posts the same Chase charge twice. CRM posts from uploaded PDFs (and optional CSV) **one of each** date+payee+amount. Card autopay is one transfer, not a second expense.
+
+If Julie asks to “link the bank like Patriot,” remind her we use statement upload instead.
