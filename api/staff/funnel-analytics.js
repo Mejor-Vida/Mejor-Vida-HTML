@@ -212,7 +212,8 @@ module.exports = async function handler(req, res) {
         range.startIso,
         range.endExclusiveIso,
         range.dateFrom,
-        range.dateTo
+        range.dateTo,
+        { facebookVariant: parseFacebookViewVariant(view) }
       );
       return json(res, 200, {
         ok: true,
@@ -311,7 +312,9 @@ module.exports = async function handler(req, res) {
     }
     let scheduledCount = 0;
     try {
-      const ql = await loadQualityLeadMetrics(cfg, range.startIso, range.endExclusiveIso, range.dateFrom, range.dateTo);
+      const ql = await loadQualityLeadMetrics(cfg, range.startIso, range.endExclusiveIso, range.dateFrom, range.dateTo, {
+        facebookVariant: parseFacebookViewVariant(view),
+      });
       scheduledCount = ql.count || 0;
     } catch (e) {
       console.error("[funnel-analytics] quality leads", e.message || e);
@@ -346,7 +349,8 @@ module.exports = async function handler(req, res) {
       range.startIso,
       range.endExclusiveIso,
       range.dateFrom,
-      range.dateTo
+      range.dateTo,
+      { facebookVariant: parseFacebookViewVariant(view) }
     );
   } catch (e) {
     console.error("[funnel-analytics] policies sold", e.message || e);
@@ -366,7 +370,8 @@ module.exports = async function handler(req, res) {
       range.startIso,
       range.endExclusiveIso,
       range.dateFrom,
-      range.dateTo
+      range.dateTo,
+      { facebookVariant: parseFacebookViewVariant(view) }
     );
     const fbVariant = parseFacebookViewVariant(view);
     if (viewShowsAdMetrics(view) && fbVariant) {

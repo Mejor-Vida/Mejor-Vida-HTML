@@ -292,7 +292,7 @@
       funnel_cost_per_quality_lead: "Cost per scheduled-call lead",
       funnel_cost_per_sale: "Cost per sale",
       funnel_quality_leads_note:
-        "A quality lead is a CRM client with a scheduled call with Julie — not a WhatsApp start or quote. Cost per lead uses the date they entered the CRM, not the day you marked the call. A sale is a client moved to Client status.",
+        "A quality lead is a CRM client with a scheduled call with Julie — not a WhatsApp start or quote. This tab only counts people who entered through this path (WhatsApp vs website/landing). Cost per lead uses the date they entered the CRM, not the day you marked the call. A sale is a client moved to Client status.",
       funnel_quality_by_state: "By state",
       funnel_quality_by_campaign: "Ad spend by campaign",
       funnel_quality_campaign_note:
@@ -387,7 +387,7 @@
       funnel_policies_sold: "Policies sold",
       funnel_policies_sold_daily: "Daily policies sold",
       funnel_policies_note:
-        "Counted when a client’s status is changed to Client. The change date is the sold date.",
+        "Counted when a client’s status is changed to Client. Listed only on the tab that matches how they entered the CRM (WhatsApp vs website/landing). The change date is the sold date.",
       funnel_policies_recent: "Recent sales in this period",
       funnel_ad_chart_loading: "Loading daily chart…",
       funnel_ad_no_daily: "No daily data for this period.",
@@ -1810,7 +1810,7 @@
       funnel_cost_per_quality_lead: "Costo por lead de llamada programada",
       funnel_cost_per_sale: "Costo por venta",
       funnel_quality_leads_note:
-        "Un lead de calidad es un cliente del CRM con una llamada programada con Julie — no el inicio de WhatsApp ni una cotización. El costo por lead usa la fecha en que entraron al CRM, no el día en que marcó la llamada. Una venta es un cliente pasado a estado Cliente.",
+        "Un lead de calidad es un cliente del CRM con una llamada programada con Julie — no el inicio de WhatsApp ni una cotización. Esta pestaña solo cuenta a quienes entraron por este camino (WhatsApp o web/landing). El costo por lead usa la fecha en que entraron al CRM, no el día en que marcó la llamada. Una venta es un cliente pasado a estado Cliente.",
       funnel_quality_by_state: "Por estado",
       funnel_quality_by_campaign: "Gasto por campaña",
       funnel_quality_campaign_note:
@@ -1905,7 +1905,7 @@
       funnel_policies_sold: "Pólizas vendidas",
       funnel_policies_sold_daily: "Pólizas vendidas por día",
       funnel_policies_note:
-        "Se cuenta cuando el estado del cliente cambia a Cliente. La fecha del cambio es la fecha de venta.",
+        "Se cuenta cuando el estado del cliente cambia a Cliente. Solo aparece en la pestaña que coincide con cómo entró al CRM (WhatsApp o web/landing). La fecha del cambio es la fecha de venta.",
       funnel_policies_recent: "Ventas recientes en este período",
       funnel_ad_chart_loading: "Cargando gráfico diario…",
       funnel_ad_no_daily: "Sin datos diarios en este período.",
