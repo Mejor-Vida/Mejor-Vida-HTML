@@ -2703,47 +2703,57 @@ module.exports = async function handler(req, res) {
       }
 
       if (!scheduledParse.skip) {
-        let linkedProfile = await loadCanonicalLeadProfile(cfg, id, src || "unknown");
-        let contactId = cleanText(linkedProfile.contacts_contact_id || linkedProfile.contact_id);
-        if (!contactId && src === "contacts") contactId = String(id);
-        if (!contactId) {
-          try {
-            const linked = await linkLeadToContacts(cfg, {
-              leadId: id,
-              leadSourceTable: src || "unknown",
-              phone: mergePreferCanonical(unified.phone, canonicalAfterSave.phone),
-              email: mergePreferCanonical(String(unified.email || "").trim(), canonicalAfterSave.email),
-              first_name: mergePreferCanonical(unified.first_name, canonicalAfterSave.first_name),
-              last_name: mergePreferCanonical(unified.last_name, canonicalAfterSave.last_name),
-              language: mergePreferCanonical(unified.language, canonicalAfterSave.language),
-              manychat_subscriber_id: mergePreferCanonical(
-                unified.manychat_subscriber_id,
-                canonicalAfterSave.manychat_subscriber_id
-              ),
-              pipeline_stage: mergePreferCanonical(unified.pipeline_stage, canonicalAfterSave.pipeline_stage),
-              profile_ext:
-                canonicalAfterSave.profile_ext && typeof canonicalAfterSave.profile_ext === "object"
-                  ? canonicalAfterSave.profile_ext
-                  : {},
-              source: unified.source || canonicalAfterSave.source || "staff_compose",
-              updatedBy: auth.user && auth.user.email ? auth.user.email : null,
-            });
-            contactId = linked && linked.contactId ? String(linked.contactId) : "";
-          } catch (e) {
-            console.error("staff/leads PATCH scheduled-call contact-link", e);
-          }
+        const linkHints = {
+          leadId: id,
+          leadSourceTable: src || "unknown",
+          phone: mergePreferCanonical(unified.phone, canonicalAfterSave.phone),
+          email: mergePreferCanonical(String(unified.email || "").trim(), canonicalAfterSave.email),
+          first_name: mergePreferCanonical(unified.first_name, canonicalAfterSave.first_name),
+          last_name: mergePreferCanonical(unified.last_name, canonicalAfterSave.last_name),
+          language: mergePreferCanonical(unified.language, canonicalAfterSave.language),
+          manychat_subscriber_id: mergePreferCanonical(
+            unified.manychat_subscriber_id,
+            canonicalAfterSave.manychat_subscriber_id
+          ),
+          pipeline_stage: mergePreferCanonical(unified.pipeline_stage, canonicalAfterSave.pipeline_stage),
+          profile_ext:
+            canonicalAfterSave.profile_ext && typeof canonicalAfterSave.profile_ext === "object"
+              ? canonicalAfterSave.profile_ext
+              : {},
+          source: unified.source || canonicalAfterSave.source || "staff_compose",
+          updatedBy: auth.user && auth.user.email ? auth.user.email : null,
+        };
+        if (src === "contacts") {
+          linkHints.contactId = id;
+          linkHints.contacts_contact_id = id;
         }
+        let contactId = "";
+        try {
+          const linked = await linkLeadToContacts(cfg, linkHints);
+          contactId = linked && linked.contactId ? String(linked.contactId) : "";
+        } catch (e) {
+          console.error("staff/leads PATCH scheduled-call contact-link", e);
+        }
+        if (!contactId && src === "contacts") contactId = String(id);
         if (!contactId) {
           return json(res, 400, {
             error: "Add a phone or email on this client before marking a scheduled call.",
           });
         }
-        await markStaffScheduledCall(cfg, {
-          contactId,
-          quoteLeadId: src === "quote_lead_submissions" ? id : "",
-          at: scheduledParse.at,
-          actor: auth.user && auth.user.email ? auth.user.email : null,
-        });
+        try {
+          await markStaffScheduledCall(cfg, {
+            contactId,
+            quoteLeadId: src === "quote_lead_submissions" ? id : "",
+            at: scheduledParse.at,
+            actor: auth.user && auth.user.email ? auth.user.email : null,
+          });
+        } catch (markErr) {
+          console.error("staff/leads PATCH scheduled-call", markErr);
+          return json(res, 500, {
+            error: "Failed to update lead",
+            detail: markErr && markErr.message ? String(markErr.message) : "scheduled call save failed",
+          });
+        }
         if (scheduledParse.at) {
           const currentStage = normalizeIcPipelineStage(canonicalAfterSave.pipeline_stage) || "new";
           if ((CRM_STAGE_RANK[currentStage] || 0) < 1) {
@@ -2830,7 +2840,10 @@ module.exports = async function handler(req, res) {
       return json(res, 200, { item: one, detail: mergedDetail, can_access_phi: canPhi });
     } catch (e) {
       console.error("staff/leads PATCH", e);
-      return json(res, 500, { error: "Failed to update lead" });
+      return json(res, 500, {
+        error: "Failed to update lead",
+        detail: e && e.message ? String(e.message).slice(0, 400) : "",
+      });
     }
   }
 
