@@ -12,6 +12,7 @@
     "review",
     "ledger",
     "reports",
+    "tax",
     "journal",
     "vendors",
     "accounts",
@@ -33,6 +34,8 @@
     reconciliations: [],
     suggestedCents: null,
     accountId: "",
+    taxYear: String(new Date().getFullYear()),
+    business: null,
     start: "",
     end: "",
     loading: false,
@@ -114,6 +117,7 @@
 
   function paneHash(pane, report) {
     if (pane === "reports") return "#/accounting/reports/" + (report || state.report || "pl");
+    if (pane === "tax") return "#/accounting/tax/" + (report || state.taxYear);
     if (pane === "home") return "#/accounting";
     return "#/accounting/" + pane;
   }
@@ -231,6 +235,9 @@
         "</button>" +
         '<button type="button" class="crm-btn secondary" data-acct-pane="reconcile">' +
         esc(t("acct_tab_reconcile")) +
+        "</button>" +
+        '<button type="button" class="crm-btn secondary" data-acct-pane="tax">' +
+        esc(t("acct_tab_tax")) +
         "</button>" +
         '<button type="button" class="crm-btn secondary" data-acct-pane="review">' +
         esc(t("acct_go_review")) +
@@ -894,6 +901,206 @@
     );
   }
 
+  function taxGroupLabel(group) {
+    var key = "acct_tax_group_" + group;
+    var label = t(key);
+    return label === key ? group : label;
+  }
+
+  function taxHtml() {
+    var r = state.reportData || {};
+    var b = state.business || {};
+    var pl = r.profit_and_loss || {};
+    var bs = r.balance_sheet || {};
+    var owner = r.owner || {};
+    var months = r.months || {};
+    var y = r.year || state.taxYear;
+    var thisY = new Date().getFullYear();
+    var years = [];
+    for (var yr = thisY; yr >= 2026; yr--) years.push(yr);
+    if (years.indexOf(Number(y)) < 0) years.unshift(Number(y));
+    var yearOpts = years
+      .map(function (yr) {
+        return (
+          '<option value="' +
+          yr +
+          '"' +
+          (String(yr) === String(y) ? " selected" : "") +
+          ">" +
+          yr +
+          "</option>"
+        );
+      })
+      .join("");
+    var entityKey = "acct_tax_entity_" + (b.entity_type || "");
+    var entityLabel = t(entityKey);
+    if (entityLabel === entityKey) entityLabel = b.entity_type || "";
+    var work = (r.worksheet || [])
+      .map(function (row) {
+        return (
+          "<tr><td>" +
+          esc(taxGroupLabel(row.group)) +
+          '</td><td class="num">' +
+          esc(money(row.amount_cents)) +
+          "</td></tr>"
+        );
+      })
+      .join("");
+    var payees = (r.payees_over_600 || [])
+      .map(function (p) {
+        return (
+          "<tr><td>" +
+          esc(p.payee) +
+          '</td><td class="num">' +
+          esc(money(p.amount_cents)) +
+          "</td></tr>"
+        );
+      })
+      .join("");
+    var missing = (months.missing || []).join(", ");
+    var stmtRows = (state.statements || [])
+      .map(function (s) {
+        return (
+          "<tr><td>" +
+          esc(s.period_end || "") +
+          "</td><td>" +
+          esc(kindLabel(s.kind)) +
+          '</td><td class="num">' +
+          (s.end_cents != null ? esc(money(s.end_cents)) : "") +
+          "</td></tr>"
+        );
+      })
+      .join("");
+    var bsRows = (bs.assets || [])
+      .concat(bs.liabilities || [])
+      .concat(bs.equity || [])
+      .filter(function (row) {
+        return row.balance_cents;
+      })
+      .map(function (row) {
+        return (
+          "<tr><td>" +
+          esc(row.code) +
+          "</td><td>" +
+          esc(row.name) +
+          '</td><td class="num">' +
+          esc(money(row.balance_cents)) +
+          "</td></tr>"
+        );
+      })
+      .join("");
+    return shell(
+      '<p class="crm-acct-muted">' +
+        esc(t("acct_tax_help")) +
+        "</p>" +
+        '<div class="crm-acct-toolbar"><label>' +
+        esc(t("acct_tax_year")) +
+        '<select id="crm-acct-tax-year">' +
+        yearOpts +
+        "</select></label>" +
+        '<button type="button" class="crm-btn" id="crm-acct-tax-run">' +
+        esc(t("acct_run")) +
+        "</button>" +
+        '<button type="button" class="crm-btn secondary" id="crm-acct-csv-dl">' +
+        esc(t("acct_tax_download")) +
+        "</button></div>" +
+        '<div class="crm-acct-cards">' +
+        card(t("acct_income"), pl.income_cents) +
+        card(t("acct_expenses"), pl.expense_cents) +
+        card(t("acct_net"), pl.net_cents) +
+        card(t("acct_tax_wages"), r.wages_cents) +
+        "</div>" +
+        '<p class="crm-acct-muted">' +
+        esc(b.legal_name || "") +
+        (entityLabel ? " · " + entityLabel : "") +
+        " · " +
+        esc(t("acct_tax_basis")) +
+        (b.last_pay_date ? " · " + t("acct_tax_last_pay", { date: b.last_pay_date }) : "") +
+        "</p>" +
+        (b.payroll_paused
+          ? '<p class="crm-acct-muted">' + esc(t("acct_tax_payroll_paused")) + "</p>"
+          : "") +
+        (missing
+          ? '<p class="crm-acct-status is-error">' +
+            esc(t("acct_tax_missing_months", { months: missing })) +
+            "</p>"
+          : "") +
+        "<h3 class=\"crm-acct-section\">" +
+        esc(t("acct_tax_worksheet")) +
+        "</h3>" +
+        '<div class="crm-acct-table-wrap"><table class="crm-acct-table"><thead><tr><th>' +
+        esc(t("acct_category")) +
+        '</th><th class="num">' +
+        esc(t("acct_amount")) +
+        "</th></tr></thead><tbody>" +
+        (work ||
+          '<tr><td colspan="2" class="crm-acct-muted">' +
+          esc(t("acct_tax_empty")) +
+          "</td></tr>") +
+        '</tbody><tfoot><tr><td>' +
+        esc(t("acct_net")) +
+        '</td><td class="num">' +
+        esc(money(pl.net_cents)) +
+        "</td></tr></tfoot></table></div>" +
+        "<h3 class=\"crm-acct-section\">" +
+        esc(t("acct_tax_year_end")) +
+        "</h3>" +
+        '<div class="crm-acct-table-wrap"><table class="crm-acct-table"><thead><tr><th>' +
+        esc(t("acct_code")) +
+        "</th><th>" +
+        esc(t("acct_account")) +
+        '</th><th class="num">' +
+        esc(t("acct_amount")) +
+        "</th></tr></thead><tbody>" +
+        (bsRows ||
+          '<tr><td colspan="3" class="crm-acct-muted">' +
+          esc(t("acct_tax_empty")) +
+          "</td></tr>") +
+        "</tbody></table></div>" +
+        "<h3 class=\"crm-acct-section\">" +
+        esc(t("acct_tax_owner")) +
+        "</h3>" +
+        '<p class="crm-acct-muted">' +
+        esc(t("acct_tax_owner_help")) +
+        "</p>" +
+        '<div class="crm-acct-cards">' +
+        card(t("acct_tax_contributions"), owner.contribution_cents) +
+        card(t("acct_tax_draws"), owner.draw_cents) +
+        "</div>" +
+        "<h3 class=\"crm-acct-section\">" +
+        esc(t("acct_tax_payees")) +
+        "</h3>" +
+        '<p class="crm-acct-muted">' +
+        esc(t("acct_tax_payees_help")) +
+        "</p>" +
+        '<div class="crm-acct-table-wrap"><table class="crm-acct-table"><thead><tr><th>' +
+        esc(t("acct_payee")) +
+        '</th><th class="num">' +
+        esc(t("acct_amount")) +
+        "</th></tr></thead><tbody>" +
+        (payees ||
+          '<tr><td colspan="2" class="crm-acct-muted">' +
+          esc(t("acct_tax_payees_none")) +
+          "</td></tr>") +
+        "</tbody></table></div>" +
+        "<h3 class=\"crm-acct-section\">" +
+        esc(t("acct_tax_statements")) +
+        "</h3>" +
+        '<div class="crm-acct-table-wrap"><table class="crm-acct-table"><thead><tr><th>' +
+        esc(t("acct_end")) +
+        "</th><th>" +
+        esc(t("acct_stmt_kind")) +
+        '</th><th class="num">' +
+        esc(t("acct_stmt_ending")) +
+        "</th></tr></thead><tbody>" +
+        (stmtRows ||
+          '<tr><td colspan="3" class="crm-acct-muted">' +
+          esc(t("acct_stmt_empty")) +
+          "</td></tr>") +
+        "</tbody></table></div>"
+    );
+  }
+
   function render(main) {
     if (!main) return;
     if (state.pane === "statements") main.innerHTML = statementsHtml();
@@ -906,6 +1113,7 @@
     } else if (state.pane === "journal") main.innerHTML = journalHtml();
     else if (state.pane === "vendors") main.innerHTML = vendorsHtml();
     else if (state.pane === "accounts") main.innerHTML = accountsHtml();
+    else if (state.pane === "tax") main.innerHTML = taxHtml();
     else main.innerHTML = homeHtml();
     wire(main);
   }
@@ -932,6 +1140,20 @@
         state.end = ($("crm-acct-end") && $("crm-acct-end").value) || todayIso();
         if ($("crm-acct-reg-account")) state.accountId = $("crm-acct-reg-account").value;
         reload();
+      });
+    }
+    var taxRun = $("crm-acct-tax-run");
+    if (taxRun) {
+      taxRun.addEventListener("click", function () {
+        var sel = $("crm-acct-tax-year");
+        if (sel && sel.value) state.taxYear = sel.value;
+        navigate(paneHash("tax", state.taxYear));
+      });
+    }
+    var taxYear = $("crm-acct-tax-year");
+    if (taxYear) {
+      taxYear.addEventListener("change", function () {
+        state.taxYear = taxYear.value;
       });
     }
     var csvBtn = $("crm-acct-csv-dl");
@@ -1289,6 +1511,20 @@
       (r.rows || []).forEach(function (ln) {
         rows.push([ln.entry_date, ln.payee || ln.memo, money(ln.delta_cents), money(ln.running_cents)]);
       });
+    } else if (state.pane === "tax") {
+      var pl = r.profit_and_loss || {};
+      rows.push(["section", "item", "amount"]);
+      (r.worksheet || []).forEach(function (row) {
+        rows.push(["worksheet", taxGroupLabel(row.group), money(row.amount_cents)]);
+      });
+      rows.push(["totals", t("acct_income"), money(pl.income_cents)]);
+      rows.push(["totals", t("acct_expenses"), money(pl.expense_cents)]);
+      rows.push(["totals", t("acct_net"), money(pl.net_cents)]);
+      rows.push(["owner", t("acct_tax_contributions"), money((r.owner || {}).contribution_cents)]);
+      rows.push(["owner", t("acct_tax_draws"), money((r.owner || {}).draw_cents)]);
+      (r.payees_over_600 || []).forEach(function (p) {
+        rows.push(["payee", p.payee, money(p.amount_cents)]);
+      });
     } else if (state.report === "pl") {
       rows.push(["code", "name", "amount"]);
       (r.income || []).concat(r.expense || []).forEach(function (row) {
@@ -1338,7 +1574,14 @@
     var blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
     var a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
-    a.download = "mvi-" + (state.pane === "register" ? "register" : state.report || "report") + ".csv";
+    a.download =
+      "mvi-" +
+      (state.pane === "register"
+        ? "register"
+        : state.pane === "tax"
+          ? "tax-" + (state.taxYear || "")
+          : state.report || "report") +
+      ".csv";
     a.click();
     URL.revokeObjectURL(a.href);
   }
@@ -1352,6 +1595,7 @@
     else if (state.pane === "reconcile") view = "reconcile";
     else if (state.pane === "vendors") view = "vendors";
     else if (state.pane === "accounts") view = "accounts";
+    else if (state.pane === "tax") view = "tax";
     else if (state.pane === "reports" || state.pane === "ledger") {
       view = "report";
       if (state.pane === "ledger") state.report = "gl";
@@ -1385,6 +1629,9 @@
         "&end=" +
         encodeURIComponent(state.end);
     }
+    if (view === "tax") {
+      url += "&year=" + encodeURIComponent(state.taxYear || String(new Date().getFullYear()));
+    }
     return api(url, null, { method: "GET" }).then(function (data) {
       state.accounts = data.accounts || [];
       state.vendors = data.vendors || [];
@@ -1396,7 +1643,9 @@
       state.voids = data.voids || [];
       state.markedLineIds = data.markedLineIds || [];
       state.reconciliations = data.reconciliations || [];
+      state.business = data.business || state.business || null;
       if (data.suggested_cents != null) state.suggestedCents = data.suggested_cents;
+      if (data.report && data.report.year) state.taxYear = String(data.report.year);
       if (!state.accountId) state.accountId = defaultRegisterId();
     });
   }
@@ -1407,6 +1656,7 @@
     state.pane = PANES.indexOf(opts.pane) >= 0 ? opts.pane : "home";
     state.report = REPORTS.indexOf(opts.report) >= 0 ? opts.report : "pl";
     if (state.pane === "ledger") state.report = "gl";
+    if (state.pane === "tax" && /^\d{4}$/.test(String(opts.report || ""))) state.taxYear = String(opts.report);
     main.innerHTML = '<p class="crm-empty-state">' + esc(t("loading")) + "</p>";
     try {
       await load();

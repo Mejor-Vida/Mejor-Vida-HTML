@@ -17,6 +17,7 @@ const {
   openingLines,
   isClosedDate,
   accountRegister,
+  taxPacket,
   VENDORS,
   CHART,
 } = require("../lib/staff-accounting");
@@ -97,6 +98,13 @@ const checkingAcct = accounts.find((a) => a.code === "1000");
 const reg = accountRegister(checkingAcct, posted, "2026-09-01", "2026-09-30");
 assert(reg.opening_cents === 7540, "register opening after August deposit");
 assert(reg.rows.length === 0, "no checking activity in September sample");
+
+const tax = taxPacket(accounts, posted, 2026);
+assert(!tax.error, "tax packet");
+assert(tax.profit_and_loss.income_cents === 7540, "tax income");
+assert(tax.wages_cents === 0, "tax wages");
+assert(Array.isArray(tax.payees_over_600) && tax.payees_over_600.length === 0, "sample payees under 600");
+assert(tax.worksheet.some((w) => w.group === "gross_receipts" && w.amount_cents === 7540), "tax worksheet income");
 
 const chk = `Institution Name Cornhusker Bank
 01/01/2026 Beginning Balance $1,762.90

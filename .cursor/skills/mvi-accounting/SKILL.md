@@ -17,6 +17,7 @@ Modified-cash double-entry modeled on Patriot Accounting Premium (not payroll, n
 - **Upload Chase card or Cornhusker checking PDFs** on Accounting → Statements (also on Home). Posts unique lines automatically. Same PDF will not double-post.
 - Journal, opening balances, **close period**, **bank/card reconcile** (check off PDF lines — **no Plaid or live feed**)
 - Register with running balance, CSV export, void log
+- **Tax** year packet (P&L worksheet, Dec 31 balances, payees over $600 for review, CSV). Not a filed return. Never send EIN to the browser.
 - P&L, Balance Sheet, Trial Balance, General Ledger
 
 ## Do

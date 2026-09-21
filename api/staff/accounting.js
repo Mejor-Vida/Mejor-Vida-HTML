@@ -34,6 +34,42 @@ function closedError(res, e) {
   return null;
 }
 
+async function loadTaxProfileSafe(cfg) {
+  try {
+    const rows = await restSelect(
+      cfg,
+      "staff_business_tax_profile",
+      "select=legal_name,trade_name,entity_type,sole_member_title,payroll_summary,is_active&is_active=eq.true&limit=1"
+    );
+    const row = rows && rows[0];
+    if (!row) {
+      return {
+        legal_name: "Mejor Vida Insurance LLC",
+        entity_type: "single_member_llc",
+        last_pay_date: null,
+        payroll_paused: true,
+      };
+    }
+    const ps = row.payroll_summary && typeof row.payroll_summary === "object" ? row.payroll_summary : {};
+    return {
+      legal_name: row.legal_name || "Mejor Vida Insurance LLC",
+      trade_name: row.trade_name || "",
+      entity_type: row.entity_type || "single_member_llc",
+      sole_member_title: row.sole_member_title || "",
+      last_pay_date: ps.last_pay_date || null,
+      payroll_paused: ps.no_more_employees_rest_of_2026 !== false,
+    };
+  } catch (e) {
+    console.error("staff/accounting tax profile", e.message || e);
+    return {
+      legal_name: "Mejor Vida Insurance LLC",
+      entity_type: "single_member_llc",
+      last_pay_date: null,
+      payroll_paused: true,
+    };
+  }
+}
+
 async function loadAccounts(cfg) {
   return restSelect(
     cfg,
@@ -334,6 +370,30 @@ module.exports = async function handler(req, res) {
           markedLineIds: (marks || []).map((m) => m.line_id),
           reconciliations: recs || [],
           suggested_cents,
+        });
+      }
+      if (view === "tax") {
+        const yearParam = url.searchParams.get("year") || String(new Date().getFullYear());
+        const range = A.taxYearRange(yearParam);
+        if (!range) return json(res, 400, { error: "Choose a tax year." });
+        const lines = await loadPostedLines(cfg, null, range.end);
+        const stmts = await restSelect(
+          cfg,
+          "staff_acct_statements",
+          "select=id,file_name,kind,period_start,period_end,end_cents,status&status=eq.processed&order=period_end.asc&limit=80"
+        );
+        const yearStmts = (stmts || []).filter((s) => {
+          const d = s.period_end || s.period_start || "";
+          return d >= range.start && d <= range.end;
+        });
+        const business = await loadTaxProfileSafe(cfg);
+        return json(res, 200, {
+          accounts,
+          vendors,
+          settings,
+          report: A.taxPacket(accounts, lines, range.year),
+          statements: yearStmts,
+          business,
         });
       }
       if (view === "report") {
