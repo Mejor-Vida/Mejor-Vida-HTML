@@ -242,12 +242,10 @@
   .crm-table-clients .crm-col-email,
   .crm-table-clients .crm-col-phone,
   .crm-table-clients .crm-col-review,
-  .crm-table-clients .crm-col-calendar,
   .crm-table-clients .crm-col-date,
   .crm-table-clients th.crm-col-email,
   .crm-table-clients th.crm-col-phone,
   .crm-table-clients th.crm-col-review,
-  .crm-table-clients th.crm-col-calendar,
   .crm-table-clients th.crm-col-date {
     display: none;
   }

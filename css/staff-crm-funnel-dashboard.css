@@ -675,6 +675,28 @@
   margin-top: 14px;
 }
 
+.crm-funnel-quality {
+  margin-top: 18px;
+}
+
+.crm-funnel-quality-title {
+  margin: 0 0 6px;
+  font-size: 1rem;
+}
+
+.crm-funnel-quality h4 {
+  margin: 14px 0 6px;
+  font-size: 0.88rem;
+}
+
+.crm-funnel-quality-grid {
+  margin: 8px 0 12px;
+}
+
+.crm-funnel-quality-table {
+  font-size: 0.85rem;
+}
+
 .crm-funnel-ad-metric--policies .crm-funnel-ad-metric-value {
   color: #166534;
 }

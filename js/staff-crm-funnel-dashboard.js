@@ -793,10 +793,109 @@
     );
   }
 
-  function AdPlatformMetrics(metrics, policiesSold) {
+  function qualityStateLabel(code) {
+    if (!code || code === "UNKNOWN") return t("funnel_quality_unknown");
+    return code;
+  }
+
+  function renderQualityLeadMetrics(qualityLeads) {
+    if (!qualityLeads || qualityLeads.show === false) return "";
+    var html =
+      '<div class="crm-funnel-quality">' +
+      '<h3 class="crm-funnel-quality-title">' +
+      esc(t("funnel_quality_leads")) +
+      "</h3>" +
+      '<p class="crm-funnel-ad-metrics-note">' +
+      esc(t("funnel_quality_leads_note")) +
+      "</p>";
+    if (qualityLeads.error) {
+      html += '<p class="crm-funnel-ad-metrics-note crm-funnel-error">' + esc(qualityLeads.error) + "</p>";
+    }
+    html += '<div class="crm-funnel-ad-metrics-grid crm-funnel-quality-grid">';
+    html +=
+      '<div class="crm-funnel-ad-metric">' +
+      '<span class="crm-funnel-ad-metric-label">' +
+      esc(t("funnel_quality_leads")) +
+      "</span>" +
+      '<strong class="crm-funnel-ad-metric-value">' +
+      esc(fmtNum(qualityLeads.count || 0)) +
+      "</strong></div>";
+    if (qualityLeads.costPerLead != null) {
+      html +=
+        '<div class="crm-funnel-ad-metric">' +
+        '<span class="crm-funnel-ad-metric-label">' +
+        esc(t("funnel_cost_per_quality_lead")) +
+        "</span>" +
+        '<strong class="crm-funnel-ad-metric-value">' +
+        esc(fmtCurrency(qualityLeads.costPerLead)) +
+        "</strong></div>";
+    }
+    html += "</div>";
+
+    var byState = qualityLeads.byState || [];
+    if (byState.length) {
+      html +=
+        "<h4>" +
+        esc(t("funnel_quality_by_state")) +
+        '</h4><div class="crm-table-wrap"><table class="crm-table crm-funnel-quality-table"><thead><tr>' +
+        "<th>" +
+        esc(t("funnel_quality_col_state")) +
+        "</th><th>" +
+        esc(t("funnel_quality_col_leads")) +
+        "</th><th>" +
+        esc(t("funnel_quality_col_spend")) +
+        "</th><th>" +
+        esc(t("funnel_quality_col_cpl")) +
+        "</th></tr></thead><tbody>";
+      byState.forEach(function (row) {
+        html +=
+          "<tr><td>" +
+          esc(qualityStateLabel(row.state)) +
+          "</td><td>" +
+          esc(fmtNum(row.count || 0)) +
+          "</td><td>" +
+          esc(row.spend != null ? fmtCurrency(row.spend) : "—") +
+          "</td><td>" +
+          esc(row.costPerLead != null ? fmtCurrency(row.costPerLead) : "—") +
+          "</td></tr>";
+      });
+      html += "</tbody></table></div>";
+    }
+
+    var campaigns = qualityLeads.campaigns || [];
+    if (campaigns.length) {
+      html +=
+        "<h4>" +
+        esc(t("funnel_quality_by_campaign")) +
+        "</h4><p class=\"crm-funnel-ad-metrics-note\">" +
+        esc(t("funnel_quality_campaign_note")) +
+        '</p><div class="crm-table-wrap"><table class="crm-table crm-funnel-quality-table"><thead><tr>' +
+        "<th>" +
+        esc(t("funnel_quality_col_campaign")) +
+        "</th><th>" +
+        esc(t("funnel_quality_col_spend")) +
+        "</th><th>" +
+        esc(t("funnel_quality_col_leads")) +
+        "</th></tr></thead><tbody>";
+      campaigns.forEach(function (row) {
+        html +=
+          "<tr><td>" +
+          esc(row.name || "") +
+          "</td><td>" +
+          esc(fmtCurrency(row.spend || 0)) +
+          "</td><td>—</td></tr>";
+      });
+      html += "</tbody></table></div>";
+    }
+    html += "</div>";
+    return html;
+  }
+
+  function AdPlatformMetrics(metrics, policiesSold, qualityLeads) {
     var hasAds = metrics && metrics.show;
     var hasPolicies = policiesSold && policiesSold.show;
-    if (!hasAds && !hasPolicies) return "";
+    var hasQuality = qualityLeads && qualityLeads.show !== false;
+    if (!hasAds && !hasPolicies && !hasQuality) return "";
 
     var platformLabel =
       metrics && metrics.platform === "google"
@@ -897,11 +996,15 @@
       html += renderPoliciesSoldMetric(policiesSold);
       html += "</div>";
       html += renderPoliciesSoldRecent(policiesSold);
+      html += renderQualityLeadMetrics(qualityLeads);
     } else if (hasPolicies && policiesSold.error && !policiesSold.configured) {
       html += '<p class="crm-funnel-ad-metrics-note crm-funnel-error">' + esc(policiesSold.error) + "</p>";
       if (policiesSold.setupHint) {
         html += '<p class="crm-funnel-setup-hint">' + esc(policiesSold.setupHint) + "</p>";
       }
+      html += renderQualityLeadMetrics(qualityLeads);
+    } else {
+      html += renderQualityLeadMetrics(qualityLeads);
     }
 
     html += "</section>";
@@ -1735,7 +1838,11 @@
       return (
         '<div class="crm-funnel-page">' +
         FilterBar() +
-        AdPlatformMetrics(state.data && state.data.adMetrics, state.data && state.data.policiesSold) +
+        AdPlatformMetrics(
+          state.data && state.data.adMetrics,
+          state.data && state.data.policiesSold,
+          state.data && state.data.qualityLeads
+        ) +
         OrganicSearchMetrics(state.data && state.data.organicSearch) +
         '<div class="crm-funnel-empty">' +
         "<strong>" + esc(t("funnel_no_data_title")) + "</strong>" +
@@ -1753,7 +1860,7 @@
       "<h1>" + esc(t("funnel_title")) + "</h1>" +
       "<p>" + esc(t("funnel_subtitle")) + "</p></header>" +
       FilterBar() +
-      AdPlatformMetrics(state.data.adMetrics, state.data.policiesSold) +
+      AdPlatformMetrics(state.data.adMetrics, state.data.policiesSold, state.data.qualityLeads) +
       OrganicSearchMetrics(state.data.organicSearch) +
       '<div class="crm-funnel-main">' +
       FunnelVisualization(state.data.branches || {}) +

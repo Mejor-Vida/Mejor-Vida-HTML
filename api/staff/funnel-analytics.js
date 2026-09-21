@@ -16,11 +16,12 @@ const {
   viewShowsGsc,
   viewShowsGoogleAdsKeywords,
 } = require("../../lib/funnel-analytics-config");
-const { fetchAdPlatformMetrics, fetchAdDailySeries } = require("../../lib/ad-platform-insights");
+const { fetchAdPlatformMetrics, fetchAdDailySeries, fetchMetaClicksByRegion, fetchMetaSpendByCampaign, parseFacebookViewVariant } = require("../../lib/ad-platform-insights");
 const { fetchTopKeywordsByClicks } = require("../../lib/google-ads-api");
 const { fetchGscOrganicSearch, fetchGscDaily, isGscPageGroup } = require("../../lib/gsc-data-api");
 const { fetchGeoClicks } = require("../../lib/geo-click-insights");
 const { fetchPoliciesSoldMetrics } = require("../../lib/crm-stage-transitions");
+const { loadQualityLeadMetrics, mergeSpendByState, costPerLead } = require("../../lib/crm-quality-leads");
 
 const CHICAGO_TZ = "America/Chicago";
 
@@ -308,11 +309,18 @@ module.exports = async function handler(req, res) {
     } catch (e) {
       console.error("[funnel-analytics] manychat leads", e.message || e);
     }
+    let scheduledCount = 0;
+    try {
+      const ql = await loadQualityLeadMetrics(cfg, range.startIso, range.endExclusiveIso, range.dateFrom, range.dateTo);
+      scheduledCount = ql.count || 0;
+    } catch (e) {
+      console.error("[funnel-analytics] quality leads", e.message || e);
+    }
     applyWhatsappAdFunnel(dashboard, {
       clicks: adMetrics && adMetrics.clicks,
       conversations: adMetrics && adMetrics.conversations,
-      leads: leadStats.leads,
       quoted: leadStats.quoted,
+      scheduledCalls: scheduledCount,
     });
   }
 
@@ -351,12 +359,53 @@ module.exports = async function handler(req, res) {
     };
   }
 
+  let qualityLeads = { show: true, count: 0, byState: [], campaigns: [] };
+  try {
+    qualityLeads = await loadQualityLeadMetrics(
+      cfg,
+      range.startIso,
+      range.endExclusiveIso,
+      range.dateFrom,
+      range.dateTo
+    );
+    const fbVariant = parseFacebookViewVariant(view);
+    if (viewShowsAdMetrics(view) && fbVariant) {
+      try {
+        const geo = await fetchMetaClicksByRegion(range.dateFrom, range.dateTo, { adSetVariant: fbVariant });
+        qualityLeads.byState = mergeSpendByState(qualityLeads.byState || [], geo.locations || []);
+      } catch (e) {
+        console.error("[funnel-analytics] quality lead region spend", e.message || e);
+      }
+      try {
+        const camp = await fetchMetaSpendByCampaign(range.dateFrom, range.dateTo, { adSetVariant: fbVariant });
+        qualityLeads.campaigns = camp.campaigns || [];
+        qualityLeads.campaignsError = camp.error || null;
+      } catch (e) {
+        console.error("[funnel-analytics] quality lead campaign spend", e.message || e);
+      }
+    }
+    const spend = adMetrics && adMetrics.spend != null ? Number(adMetrics.spend) : null;
+    qualityLeads.costPerLead = costPerLead(spend, qualityLeads.count);
+    qualityLeads.spend = spend;
+  } catch (e) {
+    console.error("[funnel-analytics] quality leads", e.message || e);
+    qualityLeads = {
+      show: true,
+      configured: false,
+      count: 0,
+      byState: [],
+      campaigns: [],
+      error: e.message || "Could not load scheduled-call leads",
+    };
+  }
+
   return json(res, 200, {
     ok: true,
     ...dashboard,
     adMetrics,
     organicSearch,
     policiesSold,
+    qualityLeads,
     googleAdsKeywords,
     dateFrom: range.dateFrom,
     dateTo: range.dateTo,

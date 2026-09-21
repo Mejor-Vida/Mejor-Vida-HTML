@@ -8,6 +8,7 @@ const { linkLeadToContacts } = require("./_contact-link");
 const { saveCanonicalLeadProfile } = require("./_lead-profile");
 const { onStageChange, loadSettings } = require("../../lib/crm-nurture-engine");
 const { resolveNurtureStepSummary } = require("../../lib/crm-nurture-pipeline-view");
+const { markStaffScheduledCall } = require("../../lib/crm-quality-leads");
 
 function isUuid(s) {
   return /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(String(s || ""));
@@ -243,6 +244,32 @@ function normalizeIcPipelineStage(raw) {
   };
   return legacy[s] || "";
 }
+
+function parseCallScheduledAtBody(body) {
+  if (!Object.prototype.hasOwnProperty.call(body, "call_scheduled_at")) {
+    return { skip: true, at: undefined };
+  }
+  const v = body.call_scheduled_at;
+  if (v === null || v === false || v === "") return { skip: false, at: null };
+  if (v === true || String(v).trim().toLowerCase() === "now") {
+    return { skip: false, at: new Date().toISOString() };
+  }
+  const d = new Date(String(v).trim());
+  if (Number.isNaN(d.getTime())) return { skip: false, error: "Invalid call_scheduled_at" };
+  return { skip: false, at: d.toISOString() };
+}
+
+const CRM_STAGE_RANK = {
+  "": 0,
+  new: 0,
+  lost: 0,
+  contacted: 1,
+  engaged: 2,
+  client: 3,
+  retained: 4,
+  loyal: 5,
+  enrolled: 6,
+};
 
 function buildListItemFromRow(r, canonical) {
   const item = {
@@ -2485,6 +2512,7 @@ module.exports = async function handler(req, res) {
       "manychat_subscriber_id",
       "phi",
       "profile_ext",
+      "call_scheduled_at",
     ];
     const touched = patchKeys.filter((k) => Object.prototype.hasOwnProperty.call(body, k));
     if (!touched.length) {
@@ -2495,6 +2523,11 @@ module.exports = async function handler(req, res) {
     const emailIn = hasEmailKey ? String(body.email || "").trim().toLowerCase() : null;
     if (hasEmailKey && emailIn && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailIn)) {
       return json(res, 400, { error: "Invalid email" });
+    }
+
+    const scheduledParse = parseCallScheduledAtBody(body);
+    if (scheduledParse.error) {
+      return json(res, 400, { error: scheduledParse.error });
     }
 
     const now = new Date().toISOString();
@@ -2666,6 +2699,74 @@ module.exports = async function handler(req, res) {
           });
         } catch (linkErr) {
           console.error("staff/leads PATCH contact-link", linkErr);
+        }
+      }
+
+      if (!scheduledParse.skip) {
+        let linkedProfile = await loadCanonicalLeadProfile(cfg, id, src || "unknown");
+        let contactId = cleanText(linkedProfile.contacts_contact_id || linkedProfile.contact_id);
+        if (!contactId && src === "contacts") contactId = String(id);
+        if (!contactId) {
+          try {
+            const linked = await linkLeadToContacts(cfg, {
+              leadId: id,
+              leadSourceTable: src || "unknown",
+              phone: mergePreferCanonical(unified.phone, canonicalAfterSave.phone),
+              email: mergePreferCanonical(String(unified.email || "").trim(), canonicalAfterSave.email),
+              first_name: mergePreferCanonical(unified.first_name, canonicalAfterSave.first_name),
+              last_name: mergePreferCanonical(unified.last_name, canonicalAfterSave.last_name),
+              language: mergePreferCanonical(unified.language, canonicalAfterSave.language),
+              manychat_subscriber_id: mergePreferCanonical(
+                unified.manychat_subscriber_id,
+                canonicalAfterSave.manychat_subscriber_id
+              ),
+              pipeline_stage: mergePreferCanonical(unified.pipeline_stage, canonicalAfterSave.pipeline_stage),
+              profile_ext:
+                canonicalAfterSave.profile_ext && typeof canonicalAfterSave.profile_ext === "object"
+                  ? canonicalAfterSave.profile_ext
+                  : {},
+              source: unified.source || canonicalAfterSave.source || "staff_compose",
+              updatedBy: auth.user && auth.user.email ? auth.user.email : null,
+            });
+            contactId = linked && linked.contactId ? String(linked.contactId) : "";
+          } catch (e) {
+            console.error("staff/leads PATCH scheduled-call contact-link", e);
+          }
+        }
+        if (!contactId) {
+          return json(res, 400, {
+            error: "Add a phone or email on this client before marking a scheduled call.",
+          });
+        }
+        await markStaffScheduledCall(cfg, {
+          contactId,
+          quoteLeadId: src === "quote_lead_submissions" ? id : "",
+          at: scheduledParse.at,
+          actor: auth.user && auth.user.email ? auth.user.email : null,
+        });
+        if (scheduledParse.at) {
+          const currentStage = normalizeIcPipelineStage(canonicalAfterSave.pipeline_stage) || "new";
+          if ((CRM_STAGE_RANK[currentStage] || 0) < 1) {
+            try {
+              await saveCanonicalLeadProfile(
+                cfg,
+                id,
+                src || "unknown",
+                { pipeline_stage: "contacted" },
+                auth.user && auth.user.email ? auth.user.email : null
+              );
+              await onStageChange(cfg, {
+                leadId: id,
+                leadSourceTable: src || "unknown",
+                oldStage: currentStage || "new",
+                newStage: "contacted",
+                contactId,
+                actor: auth.user && auth.user.email ? auth.user.email : null,
+              });
+            } catch (stageErr) {
+              console.error("staff/leads PATCH scheduled-call stage", stageErr);
+            }
+          }
         }
       }
 

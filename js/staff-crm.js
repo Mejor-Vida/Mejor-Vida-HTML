@@ -654,6 +654,8 @@
     if (emailCell) emailCell.innerHTML = renderEmailIndicator(L);
     if (phoneCell) phoneCell.innerHTML = renderPhoneIndicator(L);
     if (reviewCell) reviewCell.innerHTML = renderReviewIndicator(L);
+    var calCell = tr.querySelector(".crm-col-calendar");
+    if (calCell) calCell.innerHTML = renderCalendarCell(L);
   }
 
   function upsertLeadListItem(item) {
@@ -1100,22 +1102,37 @@
       }
     }
 
-    function openApptPopover(btn, atIso) {
+    function openApptPopover(btn, atIso, leadId) {
       closeApptPopover();
       var pop = $("crm-appointment-popover");
       if (!pop || !btn) return;
-      var body = atIso
+      var scheduled = !!atIso;
+      var body = scheduled
         ? "<strong>" +
           esc(t("calendar_scheduled_title")) +
           "</strong><p>" +
           esc(t("calendar_scheduled_at", { datetime: fmtAppointment(atIso) })) +
+          "</p><p class=\"crm-appointment-hint\">" +
+          esc(t("calendar_quality_hint")) +
           "</p>"
-        : "<p>" + esc(t("calendar_no_appointment")) + "</p>";
+        : "<p>" +
+          esc(t("calendar_no_appointment")) +
+          "</p><p class=\"crm-appointment-hint\">" +
+          esc(t("calendar_quality_hint")) +
+          "</p>";
+      var actionBtn = scheduled
+        ? '<button type="button" class="crm-btn secondary crm-appointment-action" data-action="clear">' +
+          esc(t("calendar_unmark_btn")) +
+          "</button>"
+        : '<button type="button" class="crm-btn crm-appointment-action" data-action="mark">' +
+          esc(t("calendar_mark_btn")) +
+          "</button>";
       pop.innerHTML =
         '<button type="button" class="crm-appointment-popover-close" aria-label="' +
         esc(t("close")) +
         '">&times;</button>' +
-        body;
+        body +
+        actionBtn;
       pop.classList.remove("hidden");
       var rect = btn.getBoundingClientRect();
       pop.style.position = "fixed";
@@ -1123,6 +1140,15 @@
       pop.style.left = Math.max(8, rect.left - 40) + "px";
       var closeBtn = pop.querySelector(".crm-appointment-popover-close");
       if (closeBtn) closeBtn.addEventListener("click", closeApptPopover);
+      var act = pop.querySelector(".crm-appointment-action");
+      if (act) {
+        act.addEventListener("click", function (e) {
+          e.stopPropagation();
+          var action = act.getAttribute("data-action");
+          closeApptPopover();
+          saveScheduledCall(leadId, action === "mark");
+        });
+      }
       apptPopoverCloser = function (e) {
         if (pop.contains(e.target) || btn.contains(e.target)) return;
         closeApptPopover();
@@ -1130,6 +1156,23 @@
       setTimeout(function () {
         document.addEventListener("click", apptPopoverCloser);
       }, 0);
+    }
+
+    async function saveScheduledCall(leadId, mark) {
+      var status = $("crm-clients-status");
+      if (!leadId) return;
+      try {
+        var data = await authedApi(
+          "/api/staff/leads",
+          { id: leadId, call_scheduled_at: mark ? "now" : null },
+          { method: "PATCH" }
+        );
+        if (data && data.item) upsertLeadListItem(data.item);
+        if (status) status.textContent = mark ? t("calendar_marked") : t("calendar_cleared");
+        draw();
+      } catch (e) {
+        if (status) status.textContent = (e && e.message) || t("calendar_mark_failed");
+      }
     }
 
     function resetStageMenuPosition(menu) {
@@ -1351,6 +1394,10 @@
       rowMenuLeadId = leadId;
       var menu = $("crm-row-menu");
       if (!menu || !anchorBtn) return;
+      var row = leadsCache.find(function (x) {
+        return x.id === leadId;
+      });
+      var alreadyScheduled = !!(row && row.call_scheduled_at);
       menu.innerHTML =
         '<button type="button" data-action="view">' +
         esc(t("menu_view_client")) +
@@ -1363,6 +1410,11 @@
         "</button>" +
         '<button type="button" data-action="reminder">' +
         esc(t("menu_add_reminder")) +
+        "</button>" +
+        '<button type="button" data-action="' +
+        (alreadyScheduled ? "clear-call" : "schedule-call") +
+        '">' +
+        esc(alreadyScheduled ? t("calendar_unmark_btn") : t("calendar_mark_btn")) +
         "</button>";
       menu.classList.remove("hidden");
       anchorBtn.setAttribute("aria-expanded", "true");
@@ -1380,6 +1432,8 @@
           else if (action === "quote") navigate("#/clients/" + encodeURIComponent(id) + "/products");
           else if (action === "contact") navigate("#/clients/" + encodeURIComponent(id) + "/connect");
           else if (action === "reminder") navigate("#/clients/" + encodeURIComponent(id) + "/comm-notes");
+          else if (action === "schedule-call") saveScheduledCall(id, true);
+          else if (action === "clear-call") saveScheduledCall(id, false);
         });
       });
     }
@@ -1585,7 +1639,7 @@
       tbody.querySelectorAll(".crm-calendar-bell").forEach(function (btn) {
         btn.addEventListener("click", function (e) {
           e.stopPropagation();
-          openApptPopover(btn, btn.getAttribute("data-at") || "");
+          openApptPopover(btn, btn.getAttribute("data-at") || "", btn.getAttribute("data-id") || "");
         });
       });
 
