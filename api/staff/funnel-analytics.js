@@ -21,7 +21,7 @@ const { fetchTopKeywordsByClicks } = require("../../lib/google-ads-api");
 const { fetchGscOrganicSearch, fetchGscDaily, isGscPageGroup } = require("../../lib/gsc-data-api");
 const { fetchGeoClicks } = require("../../lib/geo-click-insights");
 const { fetchPoliciesSoldMetrics } = require("../../lib/crm-stage-transitions");
-const { loadQualityLeadMetrics, mergeSpendByState, costPerLead } = require("../../lib/crm-quality-leads");
+const { loadQualityLeadMetrics, mergeSpendByState, costPerLead, attachSalesToByState } = require("../../lib/crm-quality-leads");
 
 const CHICAGO_TZ = "America/Chicago";
 
@@ -386,7 +386,12 @@ module.exports = async function handler(req, res) {
     }
     const spend = adMetrics && adMetrics.spend != null ? Number(adMetrics.spend) : null;
     qualityLeads.costPerLead = costPerLead(spend, qualityLeads.count);
+    qualityLeads.salesCount = policiesSold && policiesSold.configured ? policiesSold.count : null;
+    qualityLeads.costPerSale = costPerLead(spend, qualityLeads.salesCount);
     qualityLeads.spend = spend;
+    if (policiesSold && policiesSold.byState) {
+      qualityLeads.byState = attachSalesToByState(qualityLeads.byState || [], policiesSold.byState);
+    }
   } catch (e) {
     console.error("[funnel-analytics] quality leads", e.message || e);
     qualityLeads = {

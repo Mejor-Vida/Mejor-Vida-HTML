@@ -830,6 +830,14 @@
         esc(fmtCurrency(qualityLeads.costPerLead)) +
         "</strong></div>";
     }
+    html +=
+      '<div class="crm-funnel-ad-metric">' +
+      '<span class="crm-funnel-ad-metric-label">' +
+      esc(t("funnel_cost_per_sale")) +
+      "</span>" +
+      '<strong class="crm-funnel-ad-metric-value">' +
+      esc(qualityLeads.costPerSale != null ? fmtCurrency(qualityLeads.costPerSale) : "—") +
+      "</strong></div>";
     html += "</div>";
 
     var byState = qualityLeads.byState || [];
@@ -846,6 +854,10 @@
         esc(t("funnel_quality_col_spend")) +
         "</th><th>" +
         esc(t("funnel_quality_col_cpl")) +
+        "</th><th>" +
+        esc(t("funnel_quality_col_sales")) +
+        "</th><th>" +
+        esc(t("funnel_quality_col_cps")) +
         "</th></tr></thead><tbody>";
       byState.forEach(function (row) {
         html +=
@@ -857,6 +869,10 @@
           esc(row.spend != null ? fmtCurrency(row.spend) : "—") +
           "</td><td>" +
           esc(row.costPerLead != null ? fmtCurrency(row.costPerLead) : "—") +
+          "</td><td>" +
+          esc(fmtNum(row.sales || 0)) +
+          "</td><td>" +
+          esc(row.costPerSale != null ? fmtCurrency(row.costPerSale) : "—") +
           "</td></tr>";
       });
       html += "</tbody></table></div>";

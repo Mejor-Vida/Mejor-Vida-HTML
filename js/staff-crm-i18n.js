@@ -290,8 +290,9 @@
       funnel_ad_spend: "Ad spend",
       funnel_quality_leads: "Scheduled-call leads",
       funnel_cost_per_quality_lead: "Cost per scheduled-call lead",
+      funnel_cost_per_sale: "Cost per sale",
       funnel_quality_leads_note:
-        "A quality lead is a CRM client with a scheduled call with Julie — not a WhatsApp start or quote. Use this count with Meta spend.",
+        "A quality lead is a CRM client with a scheduled call with Julie — not a WhatsApp start or quote. A sale is a client moved to Client status. Use both counts with Meta spend.",
       funnel_quality_by_state: "By state",
       funnel_quality_by_campaign: "Ad spend by campaign",
       funnel_quality_campaign_note:
@@ -300,6 +301,8 @@
       funnel_quality_col_leads: "Leads",
       funnel_quality_col_spend: "Spend",
       funnel_quality_col_cpl: "Cost / lead",
+      funnel_quality_col_sales: "Sales",
+      funnel_quality_col_cps: "Cost / sale",
       funnel_quality_col_campaign: "Campaign",
       funnel_quality_unknown: "Unknown",
       funnel_ad_metrics_not_configured: "Ad platform credentials not configured for this tab.",
@@ -1805,8 +1808,9 @@
       funnel_ad_spend: "Gasto en anuncios",
       funnel_quality_leads: "Leads de llamada programada",
       funnel_cost_per_quality_lead: "Costo por lead de llamada programada",
+      funnel_cost_per_sale: "Costo por venta",
       funnel_quality_leads_note:
-        "Un lead de calidad es un cliente del CRM con una llamada programada con Julie — no el inicio de WhatsApp ni una cotización. Use este recuento con el gasto de Meta.",
+        "Un lead de calidad es un cliente del CRM con una llamada programada con Julie — no el inicio de WhatsApp ni una cotización. Una venta es un cliente pasado a estado Cliente. Use ambos recuentos con el gasto de Meta.",
       funnel_quality_by_state: "Por estado",
       funnel_quality_by_campaign: "Gasto por campaña",
       funnel_quality_campaign_note:
@@ -1815,6 +1819,8 @@
       funnel_quality_col_leads: "Leads",
       funnel_quality_col_spend: "Gasto",
       funnel_quality_col_cpl: "Costo / lead",
+      funnel_quality_col_sales: "Ventas",
+      funnel_quality_col_cps: "Costo / venta",
       funnel_quality_col_campaign: "Campaña",
       funnel_quality_unknown: "Desconocido",
       funnel_ad_metrics_not_configured: "Credenciales de la plataforma de anuncios no configuradas para esta pestaña.",
