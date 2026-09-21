@@ -107,7 +107,7 @@ const JULIE_VCF_CONTENT = fs.readFileSync(path.join(__dirname, '..', 'julie.vcf'
 const JULIE_VCF_BASE64 = Buffer.from(JULIE_VCF_CONTENT, 'utf8').toString('base64');
 
 const CONTACT_SELECT =
-  'id,email,phone,first_name,last_name,full_name,language,idioma,vcf_sent_at,manychat_subscriber_id,whatsapp_id';
+  'id,email,phone,first_name,last_name,full_name,language,idioma,vcf_sent_at,manychat_subscriber_id,whatsapp_id,updated_at,created_at';
 
 const POST_QUOTE_PHASE = 0;
 const POST_QUOTE_STEP = 1;
@@ -166,9 +166,50 @@ async function restContacts(base, key, query) {
   return Array.isArray(rows) ? rows : [];
 }
 
+function rowRecency(row) {
+  const t = Date.parse((row && (row.updated_at || row.created_at)) || 0);
+  return Number.isFinite(t) ? t : 0;
+}
+
 /**
- * Resolve canonical contacts row. Never uses body.email.
- * Order: contact_id → subscriber id → phone string variants (unique by id) → phone_last_10 (exactly one row).
+ * When duplicate CRM rows share a subscriber or phone, pick the one that
+ * matches webhook email / WhatsApp digits. Do not refuse to send.
+ */
+function pickBestContact(rows, { webhookEmail, phone, subscriberId } = {}) {
+  const list = (rows || []).filter((row) => row && row.id);
+  if (list.length === 0) return null;
+  if (list.length === 1) return list[0];
+
+  const email = isValidEmail(webhookEmail);
+  const last10 = phoneLast10Digits(phone);
+  const sub = String(subscriberId || '').trim();
+
+  let best = list[0];
+  let bestScore = -1;
+  let bestTime = -1;
+  for (const row of list) {
+    let score = 0;
+    const rowEmail = emailFromContactRow(row);
+    if (email && rowEmail === email) score += 100;
+    if (rowEmail) score += 20;
+    if (last10 && phoneLast10Digits(row.phone) === last10) score += 40;
+    if (last10 && phoneLast10Digits(row.whatsapp_id) === last10) score += 25;
+    if (sub && String(row.manychat_subscriber_id || '').trim() === sub) score += 15;
+    if (sub && String(row.whatsapp_id || '').trim() === sub) score += 8;
+    const time = rowRecency(row);
+    if (score > bestScore || (score === bestScore && time > bestTime)) {
+      best = row;
+      bestScore = score;
+      bestTime = time;
+    }
+  }
+  return best;
+}
+
+/**
+ * Resolve canonical contacts row.
+ * Order: contact_id → subscriber id → phone string variants → phone_last_10.
+ * Duplicates are disambiguated with webhook email / phone (not skipped).
  */
 async function resolveContact(base, key, body, phone) {
   const byId = new Map();
@@ -177,6 +218,14 @@ async function resolveContact(base, key, body, phone) {
     for (const row of rows) {
       if (row && row.id) byId.set(String(row.id), row);
     }
+  };
+
+  const hint = {
+    webhookEmail: emailFromWebhookBody(body),
+    phone,
+    subscriberId: String(
+      body.manychat_subscriber_id || body.subscriber_id || body.subscriberId || '',
+    ).trim(),
   };
 
   const cid = String(body.contact_id || body.contactId || '').trim();
@@ -189,9 +238,7 @@ async function resolveContact(base, key, body, phone) {
     if (rows[0]) return { contact: rows[0], reason: null };
   }
 
-  const sub = String(
-    body.manychat_subscriber_id || body.subscriber_id || body.subscriberId || '',
-  ).trim();
+  const sub = hint.subscriberId;
   if (sub) {
     const enc = encodeURIComponent(sub);
     const rows = await restContacts(
@@ -199,8 +246,8 @@ async function resolveContact(base, key, body, phone) {
       key,
       `or=(manychat_subscriber_id.eq.${enc},whatsapp_id.eq.${enc})&select=${CONTACT_SELECT}&limit=10`,
     );
-    if (rows.length > 1) return { contact: null, reason: 'ambiguous_subscriber' };
-    if (rows.length === 1) return { contact: rows[0], reason: null };
+    const picked = pickBestContact(rows, hint);
+    if (picked) return { contact: picked, reason: null };
   }
 
   if (phone) {
@@ -209,12 +256,12 @@ async function resolveContact(base, key, body, phone) {
       const rows = await restContacts(
         base,
         key,
-        `phone=eq.${encodeURIComponent(v)}&select=${CONTACT_SELECT}&limit=1`,
+        `phone=eq.${encodeURIComponent(v)}&select=${CONTACT_SELECT}&limit=5`,
       );
       pushRows(rows);
     }
-    if (byId.size > 1) return { contact: null, reason: 'ambiguous_phone_variants' };
-    if (byId.size === 1) return { contact: [...byId.values()][0], reason: null };
+    const fromVariants = pickBestContact([...byId.values()], hint);
+    if (fromVariants) return { contact: fromVariants, reason: null };
 
     const last10 = phoneLast10Digits(phone);
     if (last10 && last10.length === 10) {
@@ -223,8 +270,8 @@ async function resolveContact(base, key, body, phone) {
         key,
         `phone_last_10=eq.${encodeURIComponent(last10)}&select=${CONTACT_SELECT}&limit=10`,
       );
-      if (rows.length > 1) return { contact: null, reason: 'ambiguous_phone_last_10' };
-      if (rows.length === 1) return { contact: rows[0], reason: null };
+      const picked = pickBestContact(rows, hint);
+      if (picked) return { contact: picked, reason: null };
     }
   }
 
