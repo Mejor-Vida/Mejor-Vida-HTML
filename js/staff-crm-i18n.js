@@ -197,7 +197,7 @@
       funnel_dest_whatsapp: "WhatsApp",
       funnel_scope_facebook: "Facebook ads to the quote page.",
       funnel_scope_facebook_landing:
-        "Facebook ads to the V3 landing (gastos-finales-ads-v3): contact form first, then quote questions. Licenses is a side path (popup). Calculator and schedule open from the quote result.",
+        "All Facebook ads in the connected ad account except WhatsApp click-to-chat. Includes every campaign, ad set, and ad that spent in this period (V3 landing, quote page, retargeting, and unnamed ads). WhatsApp ads are on the WhatsApp tab.",
       funnel_scope_facebook_whatsapp:
         "Facebook ads that open WhatsApp. Spend and conversations are from Ads Manager. ManyChat leads are all WhatsApp bot leads in this period, not only this ad until the bot tags the ad source.",
       funnel_scope_google: "Google Ads to any page on the site.",
@@ -296,7 +296,7 @@
       funnel_quality_by_state: "By state",
       funnel_quality_by_campaign: "Ad spend by campaign",
       funnel_quality_campaign_note:
-        "Campaign spend is from Meta. Scheduled-call leads are counted in the CRM; cost per lead below is spend for this tab divided by those CRM leads.",
+        "Every campaign that spent in the connected Facebook ad account in this period, except WhatsApp ads. Spend here is the full campaign total for this tab, not a hand-picked ad set. Cost per lead uses this tab’s spend divided by CRM scheduled-call leads.",
       funnel_quality_col_state: "State",
       funnel_quality_col_leads: "Leads",
       funnel_quality_col_spend: "Spend",
@@ -1715,7 +1715,7 @@
       funnel_dest_whatsapp: "WhatsApp",
       funnel_scope_facebook: "Anuncios de Facebook al cotizador.",
       funnel_scope_facebook_landing:
-        "Anuncios de Facebook a la página V3 (gastos-finales-ads-v3): primero el formulario de contacto, luego las preguntas de cotización. Licencias es una ruta lateral (ventana emergente). La calculadora y la agenda se abren desde el resultado.",
+        "Todos los anuncios de Facebook de la cuenta conectada, excepto WhatsApp. Incluye cada campaña, conjunto y anuncio con gasto en este período (página V3, cotizador, retargeting y anuncios sin nombre especial). Los de WhatsApp están en la pestaña WhatsApp.",
       funnel_scope_facebook_whatsapp:
         "Anuncios de Facebook que abren WhatsApp. El gasto y las conversaciones vienen de Ads Manager. Los leads de ManyChat son todos los del bot de WhatsApp en este período, no solo este anuncio hasta que el bot etiquete la fuente.",
       funnel_scope_google: "Google Ads a cualquier página del sitio.",
@@ -1814,7 +1814,7 @@
       funnel_quality_by_state: "Por estado",
       funnel_quality_by_campaign: "Gasto por campaña",
       funnel_quality_campaign_note:
-        "El gasto por campaña viene de Meta. Los leads de llamada programada se cuentan en el CRM; el costo por lead es el gasto de esta pestaña dividido entre esos leads.",
+        "Cada campaña con gasto en la cuenta de Facebook conectada en este período, excepto WhatsApp. El gasto es el total de la campaña en esta pestaña, no un conjunto elegido a mano. El costo por lead usa el gasto de esta pestaña dividido entre las llamadas programadas del CRM.",
       funnel_quality_col_state: "Estado",
       funnel_quality_col_leads: "Leads",
       funnel_quality_col_spend: "Gasto",
