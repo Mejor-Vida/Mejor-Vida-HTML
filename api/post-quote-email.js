@@ -20,7 +20,9 @@
  *                      When true, send is skipped (HubSpot admin@ sends confirmation).
  *   call_datetime    ISO datetime of scheduled call (optional)
  *
- * Never uses an email address from the webhook body — only contacts.email after DB lookup.
+ * Recipient is contacts.email. If that is empty, a valid email from the ManyChat
+ * body or ManyChat pull is saved onto the contact and used (WhatsApp asks for
+ * email after lead-intake, so the first CRM row often has no email yet).
  *
  * Env: SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY,
  *      RESEND_API_KEY, MANYCHAT_WEBHOOK_SECRET, MANYCHAT_API_KEY (optional pull fallback)
@@ -39,6 +41,7 @@ const {
 const { MIN_QUOTE_AGE, MAX_QUOTE_AGE } = require('../lib/quote-range-router');
 const { logContactCommunication, htmlToPlain } = require('../lib/contact-communications');
 const { fetchManychatSubscriber, _internal: manychatInternal } = require('../lib/manychat-pull');
+const { updateContact } = require('../lib/contacts-db');
 
 const { parseLanguage } = manychatInternal;
 
@@ -123,11 +126,26 @@ function isUuid(s) {
   return /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(String(s || ''));
 }
 
+function isValidEmail(raw) {
+  const em = String(raw || '').trim().toLowerCase();
+  if (!em || !em.includes('@')) return null;
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)) return null;
+  return em.slice(0, 500);
+}
+
 /** Non-empty trimmed email from contacts row only. */
 function emailFromContactRow(row) {
-  const em = String((row && row.email) || '').trim();
-  if (!em || !em.includes('@')) return null;
-  return em;
+  return isValidEmail(row && row.email);
+}
+
+function emailFromWebhookBody(body) {
+  const b = body && typeof body === 'object' ? body : {};
+  return (
+    isValidEmail(cleanWebhookField(b.email)) ||
+    isValidEmail(cleanWebhookField(b.user_email)) ||
+    isValidEmail(cleanWebhookField(b.correo)) ||
+    isValidEmail(cleanWebhookField(b.correo_electronico))
+  );
 }
 
 async function restContacts(base, key, query) {
@@ -411,7 +429,22 @@ module.exports = async function handler(req, res) {
   }
 
   const contactId = contactRow.id;
-  const email = emailFromContactRow(contactRow);
+  let email = emailFromContactRow(contactRow);
+  if (!email) {
+    email = emailFromWebhookBody(body);
+    if (!email) {
+      const pulled = await pullManychatQuoteSignals(body, contactRow);
+      if (pulled && pulled.email) email = isValidEmail(pulled.email);
+    }
+    if (email) {
+      try {
+        await updateContact(base, supabaseKey, contactId, { email });
+        contactRow.email = email;
+      } catch (err) {
+        console.warn('[post-quote-email] could not save email onto contact:', err.message);
+      }
+    }
+  }
 
   // HubSpot admin@ sends client confirmation after booking. Never duplicate with julie@ Resend.
   if (await leadStateHasScheduledCall(base, supabaseKey, contactId)) {

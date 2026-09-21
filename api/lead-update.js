@@ -32,6 +32,7 @@ const {
   getContactByPhone,
   getLeadState,
   updateLeadState,
+  updateContact,
   insertEvent,
   logWebhook,
 } = require("../lib/contacts-db");
@@ -204,6 +205,16 @@ module.exports = async function handler(req, res) {
       updates.quote_generated_at = updates.quote_generated_at || new Date().toISOString();
     }
 
+    const emailRaw = cleanMcField(
+      firstNonEmpty(body, ["email", "user_email", "correo", "correo_electronico"]) || ""
+    ).toLowerCase();
+    const email =
+      emailRaw && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailRaw) ? emailRaw.slice(0, 500) : "";
+    if (email) {
+      await updateContact(supabaseUrl, supabaseKey, contact.id, { email });
+      eventData.email_saved = true;
+    }
+
     if (body.coverage_amount !== undefined && body.coverage_amount !== "") {
       const amt = parseInt(body.coverage_amount, 10);
       if (Number.isFinite(amt)) {
@@ -227,8 +238,17 @@ module.exports = async function handler(req, res) {
     if (body.policy_issued_at) updates.policy_issued_at = body.policy_issued_at;
     if (body.whatsapp_drop_off) updates.whatsapp_drop_off = String(body.whatsapp_drop_off).trim();
 
-    if (Object.keys(updates).length === 0) {
+    if (Object.keys(updates).length === 0 && !email) {
       return json(res, 400, { success: false, error: "No valid fields to update" });
+    }
+
+    if (Object.keys(updates).length === 0 && email) {
+      await insertEvent(supabaseUrl, supabaseKey, contact.id, "lead_updated", eventData);
+      return json(res, 200, {
+        success: true,
+        contact_id: contact.id,
+        pipeline_stage: (currentState && currentState.pipeline_stage) || null,
+      });
     }
 
     // 4. Compute the correct stage
