@@ -1374,6 +1374,7 @@
           clicks: Number(d.clicks) || 0,
           impressions: Number(d.impressions) || 0,
           spend: Number(d.spend) || 0,
+          sold: Number(d.sold) || 0,
           ctr: Number(d.ctr) || 0,
           position: Number(d.position) || 0,
           label: fmtShortDate(d.date),
@@ -1391,6 +1392,7 @@
         clicks: 0,
         impressions: 0,
         spend: 0,
+        sold: 0,
         positionWeighted: 0,
       };
       chunk.forEach(function (d) {
@@ -1400,6 +1402,7 @@
         agg.clicks += clicks;
         agg.impressions += impressions;
         agg.spend += Number(d.spend) || 0;
+        agg.sold += Number(d.sold) || 0;
         if (impressions > 0 && position > 0) agg.positionWeighted += position * impressions;
       });
       agg.ctr = agg.impressions > 0 ? agg.clicks / agg.impressions : 0;
