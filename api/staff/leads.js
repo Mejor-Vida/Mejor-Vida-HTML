@@ -399,10 +399,8 @@ function contactKeysForItem(item) {
   if (phone && phone.length >= 10) keys.push("p:" + phone);
   const email = normalizeEmail(item && item.email);
   if (email) keys.push("e:" + email);
-  const sub = cleanText(
-    (item && (item.manychat_subscriber_id || item.whatsapp_id || item.contacts_contact_id)) || ""
-  );
-  if (sub && sub.length >= 6) keys.push("s:" + sub.toLowerCase());
+  const sub = cleanText((item && (item.manychat_subscriber_id || item.whatsapp_id)) || "");
+  if (sub && sub.length >= 6 && !/^[0-9a-f-]{36}$/i.test(sub)) keys.push("s:" + sub.toLowerCase());
   return keys;
 }
 
@@ -417,87 +415,18 @@ function markPossibleDuplicates(items) {
   });
   list.forEach((item) => {
     const others = [];
-    const reasons = new Set();
     const seen = new Set([String(item.id)]);
     contactKeysForItem(item).forEach((key) => {
       (byKey.get(key) || []).forEach((other) => {
         if (!other || seen.has(String(other.id))) return;
         seen.add(String(other.id));
         others.push(displayName(other) || "Client");
-        if (key.startsWith("p:")) reasons.add("phone");
-        else if (key.startsWith("e:")) reasons.add("email");
-        else reasons.add("whatsapp");
       });
     });
     item.possible_duplicate = others.length > 0;
     item.duplicate_matches = others.slice(0, 6);
-    item.duplicate_reasons = [...reasons];
   });
   return list;
-}
-
-async function loadSharedContactReviewRows(cfg, items) {
-  const list = Array.isArray(items) ? items : [];
-  const existing = new Set(list.map((row) => String(row.id)));
-  const tables = [
-    {
-      table: "contacts",
-      select:
-        "id,first_name,last_name,email,phone,source,whatsapp_id,manychat_subscriber_id,created_at,updated_at",
-    },
-    {
-      table: "manychat_leads",
-      select:
-        "id,first_name,last_name,email,phone,source,manychat_subscriber_id,created_at,updated_at",
-    },
-    {
-      table: "quote_lead_submissions",
-      select: "id,first_name,last_name,email,phone,source,created_at",
-    },
-  ];
-  const extras = [];
-  for (const spec of tables) {
-    let rows = [];
-    try {
-      rows = await restSelect(cfg, spec.table, `select=${spec.select}&limit=5000`);
-    } catch (e) {
-      try {
-        rows = await restSelect(
-          cfg,
-          spec.table,
-          `select=id,first_name,last_name,email,phone,source,created_at&limit=5000`
-        );
-      } catch (e2) {
-        console.error("[staff/leads] duplicate scan", spec.table, e2 && e2.message);
-        continue;
-      }
-    }
-    (rows || []).forEach((row) => {
-      if (!row || !row.id || existing.has(String(row.id))) return;
-      extras.push(
-        Object.assign(
-          buildListItemFromRow(
-            {
-              id: row.id,
-              first_name: row.first_name || "",
-              last_name: row.last_name || "",
-              email: row.email || "",
-              phone: row.phone || "",
-              source: row.source || spec.table,
-              source_table: spec.table,
-              created_at: row.created_at || null,
-              updated_at: row.updated_at || row.created_at || null,
-              manychat_subscriber_id: row.manychat_subscriber_id || row.whatsapp_id || "",
-              whatsapp_id: row.whatsapp_id || "",
-            },
-            null
-          ),
-          { duplicate_review_only: true }
-        )
-      );
-    });
-  }
-  return extras;
 }
 
 function listItemCanNurtureEnroll(item) {
@@ -1474,63 +1403,46 @@ async function archiveUnifiedLead(cfg, unified, opts = {}) {
 }
 
 /** Same scoring idea as staff/questions — match lead phone to contacts.whatsapp_id / phone / subscriber. */
-function bestContactEmailForPhone(phoneField, contacts) {
+function scoreContactAgainstPhone(phoneField, c) {
   const qPhoneText = cleanText(phoneField);
   const qPhoneDigits = digitsOnly(qPhoneText);
   const qLast10 = phoneLast10Digits(qPhoneText);
-  if (!contacts || !contacts.length || !qPhoneText) return "";
+  if (!c || !qPhoneText) return 0;
+  const cPhone = cleanText(c.phone);
+  const cWhatsAppId = cleanText(c.whatsapp_id);
+  const cSubscriberId = cleanText(c.manychat_subscriber_id);
+  const cPhoneDigits = digitsOnly(cPhone);
+  const cLast10 = phoneLast10Digits(cPhone);
+  let identity = 0;
+  if (qLast10 && cLast10 && qLast10 === cLast10) identity += 100;
+  else if (qPhoneDigits && cPhoneDigits && qPhoneDigits === cPhoneDigits) identity += 100;
+  if (qPhoneText && qPhoneText === cWhatsAppId) identity += 40;
+  if (qPhoneText && qPhoneText === cSubscriberId) identity += 35;
+  if (!identity) return 0;
+  let score = identity;
+  if (cleanText(c.email)) score += 12;
+  if (cSubscriberId) score += 8;
+  if (cWhatsAppId) score += 5;
+  return score;
+}
 
+function bestContactEmailForPhone(phoneField, contacts) {
+  if (!contacts || !contacts.length || !cleanText(phoneField)) return "";
   const scored = contacts
-    .map((c) => {
-      const cPhone = cleanText(c.phone);
-      const cWhatsAppId = cleanText(c.whatsapp_id);
-      const cSubscriberId = cleanText(c.manychat_subscriber_id);
-      const cPhoneDigits = digitsOnly(cPhone);
-      const cLast10 = phoneLast10Digits(cPhone);
-      const cEmail = cleanText(c.email);
-      let score = 0;
-      if (qLast10 && cLast10 && qLast10 === cLast10) score += 100;
-      else if (qPhoneDigits && cPhoneDigits && qPhoneDigits === cPhoneDigits) score += 100;
-      if (qPhoneText && qPhoneText === cWhatsAppId) score += 40;
-      if (qPhoneText && qPhoneText === cSubscriberId) score += 35;
-      if (cEmail) score += 12;
-      if (cSubscriberId) score += 8;
-      if (cWhatsAppId) score += 5;
-      return { c, score };
-    })
+    .map((c) => ({ c, score: scoreContactAgainstPhone(phoneField, c) }))
     .filter((x) => x.score > 0)
     .sort((a, b) => b.score - a.score);
-
   const top = scored.length ? scored[0].c : null;
   return top ? cleanText(top.email) : "";
 }
 
 function bestContactRowForPhone(phoneField, contacts) {
-  const qPhoneText = cleanText(phoneField);
-  const qPhoneDigits = digitsOnly(qPhoneText);
-  const qLast10 = phoneLast10Digits(qPhoneText);
-  if (!contacts || !contacts.length || !qPhoneText) return null;
+  if (!contacts || !contacts.length || !cleanText(phoneField)) return null;
   const scored = contacts
-    .map((c) => {
-      const cPhone = cleanText(c.phone);
-      const cWhatsAppId = cleanText(c.whatsapp_id);
-      const cSubscriberId = cleanText(c.manychat_subscriber_id);
-      const cPhoneDigits = digitsOnly(cPhone);
-      const cLast10 = phoneLast10Digits(cPhone);
-      let score = 0;
-      if (qLast10 && cLast10 && qLast10 === cLast10) score += 100;
-      else if (qPhoneDigits && cPhoneDigits && qPhoneDigits === cPhoneDigits) score += 100;
-      if (qPhoneText && qPhoneText === cWhatsAppId) score += 40;
-      if (qPhoneText && qPhoneText === cSubscriberId) score += 35;
-      if (cleanText(c.email)) score += 12;
-      if (cSubscriberId) score += 8;
-      if (cWhatsAppId) score += 5;
-      return { c, score };
-    })
+    .map((c) => ({ c, score: scoreContactAgainstPhone(phoneField, c) }))
     .filter((x) => x.score > 0)
     .sort((a, b) => b.score - a.score);
-  const top = scored.length ? scored[0].c : null;
-  return top || null;
+  return scored.length ? scored[0].c : null;
 }
 
 function pgInListQuoted(values) {
@@ -2494,14 +2406,7 @@ module.exports = async function handler(req, res) {
       } catch (e) {
         console.error("staff/leads GET enrichListItemsWithNurtureStep", e);
       }
-      try {
-        const extras = await loadSharedContactReviewRows(cfg, items);
-        if (extras.length) items = items.concat(extras);
-      } catch (e) {
-        console.error("staff/leads GET loadSharedContactReviewRows", e);
-      }
       markPossibleDuplicates(items);
-      items = items.filter((row) => !row.duplicate_review_only || row.possible_duplicate);
       items.sort((x, y) => sortKey(x).localeCompare(sortKey(y)));
       return json(res, 200, { items });
     } catch (e) {
