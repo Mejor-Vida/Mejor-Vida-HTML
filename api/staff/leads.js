@@ -287,6 +287,7 @@ function buildListItemFromRow(r, canonical) {
     contacts_contact_id: "",
     call_scheduled_at: null,
     review_request_sent_at: null,
+    manychat_subscriber_id: r.manychat_subscriber_id || r.whatsapp_id || "",
     created_at: r.created_at || null,
     updated_at: r.updated_at || null,
   };
@@ -300,6 +301,10 @@ function buildListItemFromRow(r, canonical) {
     item.tag = mergePreferCanonical(item.tag, canonical.tag);
     item.contact_id = mergePreferCanonical(item.contact_id, canonical.contact_id);
     item.contacts_contact_id = mergePreferCanonical(item.contacts_contact_id, canonical.contacts_contact_id);
+    item.manychat_subscriber_id = mergePreferCanonical(
+      item.manychat_subscriber_id,
+      canonical.manychat_subscriber_id || canonical.whatsapp_id
+    );
     if (canonical.review_request_sent_at) {
       item.review_request_sent_at = String(canonical.review_request_sent_at).trim() || null;
     }
@@ -388,40 +393,111 @@ async function enrichListItemsWithManychatPipeline(cfg, items) {
   return items;
 }
 
+function contactKeysForItem(item) {
+  const keys = [];
+  const phone = phoneLast10Digits(item && item.phone);
+  if (phone && phone.length >= 10) keys.push("p:" + phone);
+  const email = normalizeEmail(item && item.email);
+  if (email) keys.push("e:" + email);
+  const sub = cleanText(
+    (item && (item.manychat_subscriber_id || item.whatsapp_id || item.contacts_contact_id)) || ""
+  );
+  if (sub && sub.length >= 6) keys.push("s:" + sub.toLowerCase());
+  return keys;
+}
+
 function markPossibleDuplicates(items) {
   const list = Array.isArray(items) ? items : [];
-  const byPhone = new Map();
-  const byEmail = new Map();
+  const byKey = new Map();
   list.forEach((item) => {
-    const phone = phoneLast10Digits(item && item.phone);
-    const email = normalizeEmail(item && item.email);
-    if (phone && phone.length === 10) {
-      if (!byPhone.has(phone)) byPhone.set(phone, []);
-      byPhone.get(phone).push(item);
-    }
-    if (email) {
-      if (!byEmail.has(email)) byEmail.set(email, []);
-      byEmail.get(email).push(item);
-    }
+    contactKeysForItem(item).forEach((key) => {
+      if (!byKey.has(key)) byKey.set(key, []);
+      byKey.get(key).push(item);
+    });
   });
   list.forEach((item) => {
-    const phone = phoneLast10Digits(item && item.phone);
-    const email = normalizeEmail(item && item.email);
     const others = [];
+    const reasons = new Set();
     const seen = new Set([String(item.id)]);
-    function addHits(hits) {
-      (hits || []).forEach((other) => {
+    contactKeysForItem(item).forEach((key) => {
+      (byKey.get(key) || []).forEach((other) => {
         if (!other || seen.has(String(other.id))) return;
         seen.add(String(other.id));
         others.push(displayName(other) || "Client");
+        if (key.startsWith("p:")) reasons.add("phone");
+        else if (key.startsWith("e:")) reasons.add("email");
+        else reasons.add("whatsapp");
       });
-    }
-    if (phone) addHits(byPhone.get(phone));
-    if (email) addHits(byEmail.get(email));
+    });
     item.possible_duplicate = others.length > 0;
-    item.duplicate_matches = others.slice(0, 4);
+    item.duplicate_matches = others.slice(0, 6);
+    item.duplicate_reasons = [...reasons];
   });
   return list;
+}
+
+async function loadSharedContactReviewRows(cfg, items) {
+  const list = Array.isArray(items) ? items : [];
+  const existing = new Set(list.map((row) => String(row.id)));
+  const tables = [
+    {
+      table: "contacts",
+      select:
+        "id,first_name,last_name,email,phone,source,whatsapp_id,manychat_subscriber_id,created_at,updated_at",
+    },
+    {
+      table: "manychat_leads",
+      select:
+        "id,first_name,last_name,email,phone,source,manychat_subscriber_id,created_at,updated_at",
+    },
+    {
+      table: "quote_lead_submissions",
+      select: "id,first_name,last_name,email,phone,source,created_at",
+    },
+  ];
+  const extras = [];
+  for (const spec of tables) {
+    let rows = [];
+    try {
+      rows = await restSelect(cfg, spec.table, `select=${spec.select}&limit=5000`);
+    } catch (e) {
+      try {
+        rows = await restSelect(
+          cfg,
+          spec.table,
+          `select=id,first_name,last_name,email,phone,source,created_at&limit=5000`
+        );
+      } catch (e2) {
+        console.error("[staff/leads] duplicate scan", spec.table, e2 && e2.message);
+        continue;
+      }
+    }
+    (rows || []).forEach((row) => {
+      if (!row || !row.id || existing.has(String(row.id))) return;
+      extras.push(
+        Object.assign(
+          buildListItemFromRow(
+            {
+              id: row.id,
+              first_name: row.first_name || "",
+              last_name: row.last_name || "",
+              email: row.email || "",
+              phone: row.phone || "",
+              source: row.source || spec.table,
+              source_table: spec.table,
+              created_at: row.created_at || null,
+              updated_at: row.updated_at || row.created_at || null,
+              manychat_subscriber_id: row.manychat_subscriber_id || row.whatsapp_id || "",
+              whatsapp_id: row.whatsapp_id || "",
+            },
+            null
+          ),
+          { duplicate_review_only: true }
+        )
+      );
+    });
+  }
+  return extras;
 }
 
 function listItemCanNurtureEnroll(item) {
@@ -2302,7 +2378,17 @@ module.exports = async function handler(req, res) {
     const detailId = String((req.query && req.query.id) || "").trim();
     if (detailId && isUuid(detailId)) {
       try {
-        const unified = await selectUnifiedLeadById(cfg, detailId);
+        let unified = await selectUnifiedLeadById(cfg, detailId);
+        if (!unified) {
+          const resolved = await resolveLeadRowForDelete(cfg, detailId);
+          if (resolved && resolved.source_table) {
+            unified = {
+              id: detailId,
+              source_table: resolved.source_table,
+              source: resolved.source_table,
+            };
+          }
+        }
         if (!unified) return json(res, 404, { error: "Lead not found" });
         const src = String(unified.source_table || "");
         if (src === "manychat_leads") {
@@ -2408,7 +2494,14 @@ module.exports = async function handler(req, res) {
       } catch (e) {
         console.error("staff/leads GET enrichListItemsWithNurtureStep", e);
       }
+      try {
+        const extras = await loadSharedContactReviewRows(cfg, items);
+        if (extras.length) items = items.concat(extras);
+      } catch (e) {
+        console.error("staff/leads GET loadSharedContactReviewRows", e);
+      }
       markPossibleDuplicates(items);
+      items = items.filter((row) => !row.duplicate_review_only || row.possible_duplicate);
       items.sort((x, y) => sortKey(x).localeCompare(sortKey(y)));
       return json(res, 200, { items });
     } catch (e) {

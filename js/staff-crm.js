@@ -1270,6 +1270,7 @@
           if (window.StaffCrmStages.normalizeStage(L.pipeline_stage) !== stageFilter) return false;
         }
         if (duplicateFilter && !L.possible_duplicate) return false;
+        if (!duplicateFilter && L.duplicate_review_only) return false;
         if (!ql) return true;
         var hay = (displayName(L) + " " + (L.email || "") + " " + (L.phone || "")).toLowerCase();
         return hay.indexOf(ql) !== -1;
@@ -1885,6 +1886,15 @@
 
   async function renderClientDetail(main, route) {
     var d = currentDetail;
+    if (d && leadsCache.length) {
+      var listed = leadsCache.find(function (x) {
+        return String(x.id) === String(d.id);
+      });
+      if (listed) {
+        d.possible_duplicate = !!listed.possible_duplicate;
+        d.duplicate_matches = listed.duplicate_matches || [];
+      }
+    }
     if (!d) {
       main.innerHTML =
         '<div class="crm-placeholder"><strong>' +
@@ -1949,6 +1959,14 @@
       "</h1>" +
       (meta.length ? "<p>" + esc(meta.join(" | ")) + "</p>" : "") +
       "</div></div>" +
+      (d && d.possible_duplicate
+        ? '<p class="crm-dup-review-banner">' +
+          esc(t("clients_dup_review_banner")) +
+          ((d.duplicate_matches || []).length
+            ? " " + esc((d.duplicate_matches || []).join(" · "))
+            : "") +
+          "</p>"
+        : "") +
       '<div class="crm-tab-panel">' +
       panel +
       "</div></div>";

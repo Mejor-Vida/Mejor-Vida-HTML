@@ -1680,10 +1680,14 @@ body.crm-body {
   cursor: pointer;
 }
 
-.crm-dup-filter-btn.is-active {
-  border-color: #d97706;
+.crm-dup-review-banner {
+  margin: 0 0 12px;
+  padding: 10px 14px;
+  border-radius: 10px;
   background: #fef3c7;
   color: #92400e;
+  font-size: 0.92rem;
+  font-weight: 600;
 }
 
 /* Client detail */
