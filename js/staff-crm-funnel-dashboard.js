@@ -908,9 +908,10 @@
   }
 
   function AdPlatformMetrics(metrics, policiesSold, qualityLeads) {
+    var facebookAds = state.sourceChannel === "facebook";
     var hasAds = metrics && metrics.show;
-    var hasPolicies = policiesSold && policiesSold.show;
-    var hasQuality = qualityLeads && qualityLeads.show !== false;
+    var hasPolicies = facebookAds && policiesSold && policiesSold.show;
+    var hasQuality = facebookAds && qualityLeads && qualityLeads.show !== false;
     if (!hasAds && !hasPolicies && !hasQuality) return "";
 
     var platformLabel =

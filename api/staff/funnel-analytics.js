@@ -342,7 +342,9 @@ module.exports = async function handler(req, res) {
     }
   }
 
-  let policiesSold = { show: true };
+  const facebookAdsView = !!parseFacebookViewVariant(view);
+  let policiesSold = { show: false };
+  if (facebookAdsView) {
   try {
     policiesSold = await fetchPoliciesSoldMetrics(
       cfg,
@@ -362,8 +364,10 @@ module.exports = async function handler(req, res) {
       error: e.message || "Could not load policies sold",
     };
   }
+  }
 
-  let qualityLeads = { show: true, count: 0, byState: [], campaigns: [] };
+  let qualityLeads = { show: false, count: 0, byState: [], campaigns: [] };
+  if (facebookAdsView) {
   try {
     qualityLeads = await loadQualityLeadMetrics(
       cfg,
@@ -407,6 +411,7 @@ module.exports = async function handler(req, res) {
       campaigns: [],
       error: e.message || "Could not load scheduled-call leads",
     };
+  }
   }
 
   return json(res, 200, {
