@@ -9,6 +9,7 @@ const { saveCanonicalLeadProfile } = require("./_lead-profile");
 const { onStageChange, loadSettings } = require("../../lib/crm-nurture-engine");
 const { resolveNurtureStepSummary } = require("../../lib/crm-nurture-pipeline-view");
 const { markStaffScheduledCall } = require("../../lib/crm-quality-leads");
+const { normalizeUsStateAbbr, stateFromRecord } = require("../../lib/us-state-timezone");
 
 function isUuid(s) {
   return /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(String(s || ""));
@@ -290,6 +291,7 @@ function buildListItemFromRow(r, canonical) {
     manychat_subscriber_id: r.manychat_subscriber_id || r.whatsapp_id || "",
     created_at: r.created_at || null,
     updated_at: r.updated_at || null,
+    us_state: normalizeUsStateAbbr(r.us_state || r.state_code || r.state) || "",
   };
   if (canonical && typeof canonical === "object") {
     item.first_name = mergePreferCanonical(item.first_name, canonical.first_name);
@@ -313,6 +315,8 @@ function buildListItemFromRow(r, canonical) {
     if (canonical.outreach_blocked_reason) {
       item.outreach_blocked_reason = canonical.outreach_blocked_reason;
     }
+    const fromProfile = stateFromRecord(canonical);
+    if (fromProfile) item.us_state = fromProfile;
   }
   if (String(item.source_table || "") === "contacts" && item.id && !cleanText(item.contact_id)) {
     item.contact_id = String(item.id);
@@ -1739,6 +1743,137 @@ function ensureManychatLeadDetail(row) {
   return o;
 }
 
+async function enrichListItemsWithUsState(cfg, items) {
+  const list = Array.isArray(items) ? items : [];
+  if (!list.length) return list;
+
+  list.forEach((item) => {
+    if (!item) return;
+    const already = normalizeUsStateAbbr(item.us_state);
+    item.us_state = already || "";
+  });
+
+  const contactIds = [];
+  const quoteIds = [];
+  list.forEach((item) => {
+    if (!item || item.us_state) return;
+    const cid = String(item.contact_id || item.contacts_contact_id || "").trim();
+    if (cid) contactIds.push(cid);
+    else if (String(item.source_table || "") === "contacts" && item.id) {
+      contactIds.push(String(item.id));
+    }
+    if (String(item.source_table || "") === "quote_lead_submissions" && item.id) {
+      quoteIds.push(String(item.id));
+    }
+  });
+
+  const contactMap = new Map();
+  const leadStateMap = new Map();
+  const uniqueContacts = Array.from(new Set(contactIds));
+  for (let i = 0; i < uniqueContacts.length; i += 80) {
+    const chunk = uniqueContacts.slice(i, i + 80);
+    const inList = pgInListQuoted(chunk);
+    if (!inList) continue;
+    try {
+      const contacts = await restSelect(
+        cfg,
+        "contacts",
+        `select=id,us_state&id=in.(${inList})&limit=400`
+      );
+      (contacts || []).forEach((c) => {
+        if (c && c.id) contactMap.set(String(c.id), normalizeUsStateAbbr(c.us_state));
+      });
+    } catch (e) {
+      console.error("staff/leads enrichListItemsWithUsState contacts", e);
+    }
+    try {
+      const states = await restSelect(
+        cfg,
+        "lead_state",
+        `select=contact_id,us_state&contact_id=in.(${inList})&limit=400`
+      );
+      (states || []).forEach((s) => {
+        if (s && s.contact_id) {
+          leadStateMap.set(String(s.contact_id), normalizeUsStateAbbr(s.us_state));
+        }
+      });
+    } catch (e) {
+      console.error("staff/leads enrichListItemsWithUsState lead_state", e);
+    }
+  }
+
+  const quoteMap = new Map();
+  const uniqueQuotes = Array.from(new Set(quoteIds));
+  for (let i = 0; i < uniqueQuotes.length; i += 80) {
+    const chunk = uniqueQuotes.slice(i, i + 80);
+    const inList = pgInListQuoted(chunk);
+    if (!inList) continue;
+    try {
+      const quotes = await restSelect(
+        cfg,
+        "quote_lead_submissions",
+        `select=id,state_code,payload&id=in.(${inList})&limit=400`
+      );
+      (quotes || []).forEach((q) => {
+        if (!q || !q.id) return;
+        const p = q.payload && typeof q.payload === "object" ? q.payload : {};
+        quoteMap.set(
+          String(q.id),
+          normalizeUsStateAbbr(q.state_code || p.state || p.state_code || p.us_state)
+        );
+      });
+    } catch (e) {
+      console.error("staff/leads enrichListItemsWithUsState quotes", e);
+    }
+  }
+
+  list.forEach((item) => {
+    if (!item || item.us_state) return;
+    const cid = String(item.contact_id || item.contacts_contact_id || "").trim()
+      || (String(item.source_table || "") === "contacts" && item.id ? String(item.id) : "");
+    const fromContact = cid ? contactMap.get(cid) : "";
+    const fromLeadState = cid ? leadStateMap.get(cid) : "";
+    const fromQuote =
+      String(item.source_table || "") === "quote_lead_submissions"
+        ? quoteMap.get(String(item.id))
+        : "";
+    item.us_state = fromContact || fromLeadState || fromQuote || "";
+  });
+
+  const stillMissing = list.filter((item) => item && !item.us_state && phoneLast10Digits(item.phone));
+  if (stillMissing.length) {
+    const last10s = Array.from(
+      new Set(stillMissing.map((item) => phoneLast10Digits(item.phone)).filter(Boolean))
+    );
+    const byPhone = new Map();
+    for (let i = 0; i < last10s.length; i += 80) {
+      const chunk = last10s.slice(i, i + 80);
+      const inList = pgInListQuoted(chunk);
+      if (!inList) continue;
+      try {
+        const contacts = await restSelect(
+          cfg,
+          "contacts",
+          `select=phone_last_10,us_state,created_at&phone_last_10=in.(${inList})&order=created_at.asc&limit=400`
+        );
+        (contacts || []).forEach((c) => {
+          const key = String(c.phone_last_10 || "");
+          const st = normalizeUsStateAbbr(c.us_state);
+          if (key && st && !byPhone.has(key)) byPhone.set(key, st);
+        });
+      } catch (e) {
+        console.error("staff/leads enrichListItemsWithUsState phone", e);
+      }
+    }
+    stillMissing.forEach((item) => {
+      const st = byPhone.get(phoneLast10Digits(item.phone));
+      if (st) item.us_state = st;
+    });
+  }
+
+  return list;
+}
+
 async function enrichLeadEmailsFromContacts(cfg, items) {
   const phonesNeedingEmail = Array.from(
     new Set(
@@ -2395,6 +2530,11 @@ module.exports = async function handler(req, res) {
         await enrichLeadEmailsFromContacts(cfg, items);
       } catch (e) {
         console.error("staff/leads GET enrichLeadEmailsFromContacts", e);
+      }
+      try {
+        items = await enrichListItemsWithUsState(cfg, items);
+      } catch (e) {
+        console.error("staff/leads GET enrichListItemsWithUsState", e);
       }
       try {
         items = await enrichListItemsWithAppointments(cfg, items);

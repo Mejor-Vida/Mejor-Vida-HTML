@@ -651,9 +651,11 @@
     var emailCell = tr.querySelector(".crm-col-email");
     var phoneCell = tr.querySelector(".crm-col-phone");
     var reviewCell = tr.querySelector(".crm-col-review");
+    var stateCell = tr.querySelector(".crm-col-state");
     if (emailCell) emailCell.innerHTML = renderEmailIndicator(L);
     if (phoneCell) phoneCell.innerHTML = renderPhoneIndicator(L);
     if (reviewCell) reviewCell.innerHTML = renderReviewIndicator(L);
+    if (stateCell) stateCell.textContent = String(L.us_state || "").trim().toUpperCase() || "—";
     var calCell = tr.querySelector(".crm-col-calendar");
     if (calCell) calCell.innerHTML = renderCalendarCell(L);
   }
@@ -666,6 +668,17 @@
     if (idx >= 0) leadsCache[idx] = Object.assign({}, leadsCache[idx], item);
     else leadsCache.push(item);
     patchClientsListIndicators(item.id);
+  }
+
+  function locationBits(row) {
+    var loc = String((row && row.location_label) || "").trim();
+    if (loc) return " · " + loc;
+    var st = String((row && row.us_state) || "").trim();
+    var tz = String((row && row.timezone_label) || "").trim();
+    if (st && tz) return " · " + st + " · " + tz;
+    if (st) return " · " + st;
+    if (tz) return " · " + tz;
+    return "";
   }
 
   function renderManualContactList(people) {
@@ -684,6 +697,7 @@
         esc(row.stage_label || row.pipeline_stage || "") +
         (row.missing_channels ? " · " + esc(row.missing_channels) : "") +
         (row.phone ? " · " + esc(row.phone) : "") +
+        esc(locationBits(row)) +
         "</li>";
     });
     html += "</ul>";
@@ -715,6 +729,7 @@
         esc(row.display_name || "Lead") +
         "</a> — " +
         esc(when) +
+        esc(locationBits(row)) +
         (row.message ? "<br>" + esc(row.message) : "") +
         "</li>";
     });
@@ -747,6 +762,7 @@
         esc(t("nurture_attempt", { n: task.attempt_number || 1 })) +
         " · " +
         esc(when) +
+        esc(locationBits(task)) +
         "</li>";
     });
     html += "</ul>";
@@ -1044,6 +1060,8 @@
       '<button type="button" class="crm-sort-th-btn" id="crm-sort-name" aria-sort="none">' +
       esc(t("col_name")) +
       ' <span class="crm-sort-icon" aria-hidden="true">↕</span></button>' +
+      '</th><th class="crm-col-state" scope="col">' +
+      esc(t("col_state")) +
       '</th><th class="crm-col-indicator crm-col-email" scope="col">' +
       esc(t("col_email")) +
       '</th><th class="crm-col-indicator crm-col-phone" scope="col">' +
@@ -1272,7 +1290,7 @@
         if (duplicateFilter && !L.possible_duplicate) return false;
         if (!duplicateFilter && L.duplicate_review_only) return false;
         if (!ql) return true;
-        var hay = (displayName(L) + " " + (L.email || "") + " " + (L.phone || "")).toLowerCase();
+        var hay = (displayName(L) + " " + (L.email || "") + " " + (L.phone || "") + " " + (L.us_state || "")).toLowerCase();
         return hay.indexOf(ql) !== -1;
       });
     }
@@ -1548,6 +1566,8 @@
                 esc(t("clients_possible_duplicate")) +
                 "</span>"
               : "") +
+            '</td><td class="crm-col-state">' +
+            esc(String(L.us_state || "").trim().toUpperCase() || "—") +
             '</td><td class="crm-col-indicator crm-col-email">' +
             renderEmailIndicator(L) +
             '</td><td class="crm-col-indicator crm-col-phone">' +

@@ -651,7 +651,17 @@ body.crm-body {
 }
 
 .crm-table-clients .crm-col-name {
-  width: 16%;
+  width: 14%;
+}
+
+.crm-table-clients .crm-col-state {
+  width: 52px;
+  min-width: 48px;
+  max-width: 56px;
+  white-space: nowrap;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--crm-muted);
 }
 
 .crm-table-clients .crm-col-email,
