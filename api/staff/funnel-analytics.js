@@ -16,12 +16,12 @@ const {
   viewShowsGsc,
   viewShowsGoogleAdsKeywords,
 } = require("../../lib/funnel-analytics-config");
-const { fetchAdPlatformMetrics, fetchAdDailySeries, fetchMetaClicksByRegion, fetchMetaSpendByCampaign, parseFacebookViewVariant } = require("../../lib/ad-platform-insights");
+const { fetchAdPlatformMetrics, fetchAdDailySeries, fetchMetaClicksByRegion, fetchMetaRegionDaily, fetchMetaSpendByCampaign, parseFacebookViewVariant } = require("../../lib/ad-platform-insights");
 const { fetchTopKeywordsByClicks } = require("../../lib/google-ads-api");
 const { fetchGscOrganicSearch, fetchGscDaily, isGscPageGroup } = require("../../lib/gsc-data-api");
 const { fetchGeoClicks } = require("../../lib/geo-click-insights");
 const { fetchPoliciesSoldMetrics } = require("../../lib/crm-stage-transitions");
-const { loadQualityLeadMetrics, mergeSpendByState, costPerLead, attachSalesToByState } = require("../../lib/crm-quality-leads");
+const { loadQualityLeadMetrics, loadQualityLeadDailyByState, mergeSpendByState, costPerLead, attachSalesToByState, LICENSED_STATES } = require("../../lib/crm-quality-leads");
 
 const CHICAGO_TZ = "America/Chicago";
 
@@ -227,6 +227,72 @@ module.exports = async function handler(req, res) {
     } catch (e) {
       console.error("[funnel-analytics] policies_daily", e.message || e);
       return json(res, 502, { error: e.message || "Could not load policies sold daily series" });
+    }
+  }
+
+  if (action === "quality_state_daily") {
+    const qualityState = String(req.query.quality_state || "").trim().toUpperCase();
+    const allowed = qualityState === "UNKNOWN" || LICENSED_STATES.includes(qualityState);
+    if (!allowed) {
+      return json(res, 400, { error: "quality_state_daily requires quality_state (NE, KS, CO, NV)" });
+    }
+    try {
+      const fbVariant = parseFacebookViewVariant(view);
+      const [leadsPack, spendPack, policies] = await Promise.all([
+        loadQualityLeadDailyByState(
+          cfg,
+          range.startIso,
+          range.endExclusiveIso,
+          range.dateFrom,
+          range.dateTo,
+          qualityState,
+          { facebookVariant: fbVariant }
+        ),
+        fetchMetaRegionDaily(range.dateFrom, range.dateTo, {
+          adSetVariant: fbVariant,
+          stateCode: qualityState,
+        }),
+        fetchPoliciesSoldMetrics(
+          cfg,
+          range.startIso,
+          range.endExclusiveIso,
+          range.dateFrom,
+          range.dateTo,
+          { facebookVariant: fbVariant, stateCode: qualityState }
+        ),
+      ]);
+      const leadByDate = new Map((leadsPack.daily || []).map((row) => [row.date, Number(row.leads) || 0]));
+      const spendByDate = new Map((spendPack.daily || []).map((row) => [row.date, Number(row.spend) || 0]));
+      const soldByDate = new Map((policies.daily || []).map((row) => [row.date, Number(row.sold) || 0]));
+      const daily = [];
+      let cur = range.dateFrom;
+      while (cur <= range.dateTo) {
+        const leads = leadByDate.get(cur) || 0;
+        const spend = spendByDate.get(cur) || 0;
+        const sold = soldByDate.get(cur) || 0;
+        daily.push({
+          date: cur,
+          leads,
+          spend,
+          sold,
+          costPerLead: leads > 0 ? spend / leads : null,
+          costPerSale: sold > 0 ? spend / sold : null,
+        });
+        cur = addDaysYmd(cur, 1);
+      }
+      const err = leadsPack.error || spendPack.error || policies.error || null;
+      return json(res, 200, {
+        ok: true,
+        dateFrom: range.dateFrom,
+        dateTo: range.dateTo,
+        platform: "quality_state",
+        state: qualityState,
+        daily,
+        error: err,
+      });
+    } catch (e) {
+      console.error("[funnel-analytics] quality_state_daily", e.message || e);
+      return json(res, 502, { error: e.message || "Could not load state daily series" });
     }
   }
 

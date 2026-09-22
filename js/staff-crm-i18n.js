@@ -197,7 +197,7 @@
       funnel_dest_whatsapp: "WhatsApp",
       funnel_scope_facebook: "Facebook ads to the quote page.",
       funnel_scope_facebook_landing:
-        "All Facebook ads in the connected ad account except WhatsApp click-to-chat. Includes every campaign, ad set, and ad that spent in this period (V3 landing, quote page, retargeting, and unnamed ads). WhatsApp ads are on the WhatsApp tab.",
+        "Facebook ads that are not WhatsApp click-to-chat (landing, quote page, Instant Form, retargeting). Scheduled-call leads and sales on this tab are only people whose CRM source is a landing or quote — not WhatsApp chat and not a contact Julie added by hand.",
       funnel_scope_facebook_whatsapp:
         "Facebook ads that open WhatsApp. Spend and conversations are from Ads Manager. ManyChat leads are all WhatsApp bot leads in this period, not only this ad until the bot tags the ad source.",
       funnel_scope_google: "Google Ads to any page on the site.",
@@ -292,7 +292,7 @@
       funnel_cost_per_quality_lead: "Cost per scheduled-call lead",
       funnel_cost_per_sale: "Cost per sale",
       funnel_quality_leads_note:
-        "A quality lead is a CRM client with a scheduled call with Julie — not a WhatsApp start or quote. This tab only counts people who entered through this path (WhatsApp vs website/landing). Cost per lead uses the date they entered the CRM, not the day you marked the call. A sale is a client moved to Client status.",
+        "A quality lead is a CRM client with a scheduled call with Julie — not a WhatsApp start or quote. Duplicate cards that share a phone, email, or WhatsApp ID count as one person. This tab only counts people who entered through this path (WhatsApp vs website/landing). Cost per lead uses the date they entered the CRM, not the day you marked the call. A sale is a client moved to Client status.",
       funnel_quality_by_state: "By state",
       funnel_quality_by_campaign: "Ad spend by campaign",
       funnel_quality_campaign_note:
@@ -305,6 +305,11 @@
       funnel_quality_col_cps: "Cost / sale",
       funnel_quality_col_campaign: "Campaign",
       funnel_quality_unknown: "Unknown",
+      funnel_quality_chart_leads: "{state} · Leads",
+      funnel_quality_chart_spend: "{state} · Spend",
+      funnel_quality_chart_cpl: "{state} · Cost / lead",
+      funnel_quality_chart_sales: "{state} · Sales",
+      funnel_quality_chart_cps: "{state} · Cost / sale",
       funnel_ad_metrics_not_configured: "Ad platform credentials not configured for this tab.",
       funnel_period: "Period",
       funnel_period_today: "Today",
@@ -1720,7 +1725,7 @@
       funnel_dest_whatsapp: "WhatsApp",
       funnel_scope_facebook: "Anuncios de Facebook al cotizador.",
       funnel_scope_facebook_landing:
-        "Todos los anuncios de Facebook de la cuenta conectada, excepto WhatsApp. Incluye cada campaña, conjunto y anuncio con gasto en este período (página V3, cotizador, retargeting y anuncios sin nombre especial). Los de WhatsApp están en la pestaña WhatsApp.",
+        "Anuncios de Facebook que no son WhatsApp (landing, cotizador, formulario instantáneo, retargeting). Los leads de llamada y las ventas de esta pestaña son solo quienes tienen fuente de landing o cotización en el CRM — no el chat de WhatsApp ni un contacto agregado a mano.",
       funnel_scope_facebook_whatsapp:
         "Anuncios de Facebook que abren WhatsApp. El gasto y las conversaciones vienen de Ads Manager. Los leads de ManyChat son todos los del bot de WhatsApp en este período, no solo este anuncio hasta que el bot etiquete la fuente.",
       funnel_scope_google: "Google Ads a cualquier página del sitio.",
@@ -1815,7 +1820,7 @@
       funnel_cost_per_quality_lead: "Costo por lead de llamada programada",
       funnel_cost_per_sale: "Costo por venta",
       funnel_quality_leads_note:
-        "Un lead de calidad es un cliente del CRM con una llamada programada con Julie — no el inicio de WhatsApp ni una cotización. Esta pestaña solo cuenta a quienes entraron por este camino (WhatsApp o web/landing). El costo por lead usa la fecha en que entraron al CRM, no el día en que marcó la llamada. Una venta es un cliente pasado a estado Cliente.",
+        "Un lead de calidad es un cliente del CRM con una llamada programada con Julie — no el inicio de WhatsApp ni una cotización. Las fichas duplicadas que comparten teléfono, correo o WhatsApp cuentan como una persona. Esta pestaña solo cuenta a quienes entraron por este camino (WhatsApp o web/landing). El costo por lead usa la fecha en que entraron al CRM, no el día en que marcó la llamada. Una venta es un cliente pasado a estado Cliente.",
       funnel_quality_by_state: "Por estado",
       funnel_quality_by_campaign: "Gasto por campaña",
       funnel_quality_campaign_note:
@@ -1828,6 +1833,11 @@
       funnel_quality_col_cps: "Costo / venta",
       funnel_quality_col_campaign: "Campaña",
       funnel_quality_unknown: "Desconocido",
+      funnel_quality_chart_leads: "{state} · Leads",
+      funnel_quality_chart_spend: "{state} · Gasto",
+      funnel_quality_chart_cpl: "{state} · Costo / lead",
+      funnel_quality_chart_sales: "{state} · Ventas",
+      funnel_quality_chart_cps: "{state} · Costo / venta",
       funnel_ad_metrics_not_configured: "Credenciales de la plataforma de anuncios no configuradas para esta pestaña.",
       funnel_period: "Período",
       funnel_period_today: "Hoy",

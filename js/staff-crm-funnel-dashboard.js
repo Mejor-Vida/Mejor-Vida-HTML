@@ -7,8 +7,8 @@
 
   var state = {
     sourceChannel: "facebook",
-    landingPage: "landing",
-    view: "facebook_landing",
+    landingPage: "whatsapp",
+    view: "facebook_whatsapp",
     licensedState: "ALL",
     periodDays: 1,
     dateFrom: "",
@@ -20,6 +20,7 @@
     detailLoading: false,
     detailError: null,
     adChartMetric: null,
+    adChartQualityState: null,
     adChartLoading: false,
     adChartData: null,
     adChartError: null,
@@ -45,13 +46,13 @@
   ];
 
   function landingPagesForSource(source) {
-    if (source === "facebook") return ["landing", "whatsapp"];
+    if (source === "facebook") return ["whatsapp", "landing"];
     return ["website"];
   }
 
   function composeViewId(source, landing) {
     var src = String(source || "facebook");
-    var dest = String(landing || (src === "facebook" ? "landing" : "website"));
+    var dest = String(landing || (src === "facebook" ? "whatsapp" : "website"));
     return src + "_" + dest;
   }
 
@@ -174,10 +175,22 @@
 
   function fmtChartValue(metric, val) {
     var kind = gscMetricKind(metric);
-    if (metric === "spend") return fmtCurrency(val);
+    if (
+      metric === "spend" ||
+      metric === "state_spend" ||
+      metric === "state_cpl" ||
+      metric === "state_cps"
+    ) {
+      if (val == null || !isFinite(Number(val))) return "—";
+      return fmtCurrency(val);
+    }
     if (kind === "gsc_ctr") return fmtPctRate(val);
     if (kind === "gsc_position") return fmtPosition(val);
     return fmtNum(val);
+  }
+
+  function isQualityStateMetric(metric) {
+    return String(metric || "").indexOf("state_") === 0;
   }
 
   function fmtPct(n) {
@@ -231,7 +244,7 @@
       '<div class="crm-funnel-view-tabs crm-funnel-dest-tabs" role="tablist" aria-label="' +
       esc(t("funnel_facebook_dest")) +
       '">' +
-      ["landing", "whatsapp"]
+      ["whatsapp", "landing"]
         .map(function (dest) {
           return (
             '<button type="button" class="crm-funnel-view-tab' +
@@ -795,7 +808,23 @@
 
   function qualityStateLabel(code) {
     if (!code || code === "UNKNOWN") return t("funnel_quality_unknown");
-    return code;
+    var key = "funnel_state_" + String(code).toLowerCase();
+    var named = t(key);
+    return named && named !== key ? named : code;
+  }
+
+  function qualityCellButton(stateCode, metric, text) {
+    return (
+      '<button type="button" class="crm-funnel-quality-cell" data-funnel-quality-chart="' +
+      esc(metric) +
+      '" data-state="' +
+      esc(stateCode) +
+      '" title="' +
+      esc(t("funnel_ad_chart_hint")) +
+      '">' +
+      esc(text) +
+      "</button>"
+    );
   }
 
   function renderQualityLeadMetrics(qualityLeads) {
@@ -860,19 +889,20 @@
         esc(t("funnel_quality_col_cps")) +
         "</th></tr></thead><tbody>";
       byState.forEach(function (row) {
+        var st = row.state || "UNKNOWN";
         html +=
           "<tr><td>" +
-          esc(qualityStateLabel(row.state)) +
+          esc(qualityStateLabel(st)) +
           "</td><td>" +
-          esc(fmtNum(row.count || 0)) +
+          qualityCellButton(st, "leads", fmtNum(row.count || 0)) +
           "</td><td>" +
-          esc(row.spend != null ? fmtCurrency(row.spend) : "—") +
+          qualityCellButton(st, "spend", row.spend != null ? fmtCurrency(row.spend) : "—") +
           "</td><td>" +
-          esc(row.costPerLead != null ? fmtCurrency(row.costPerLead) : "—") +
+          qualityCellButton(st, "cpl", row.costPerLead != null ? fmtCurrency(row.costPerLead) : "—") +
           "</td><td>" +
-          esc(fmtNum(row.sales || 0)) +
+          qualityCellButton(st, "sales", fmtNum(row.sales || 0)) +
           "</td><td>" +
-          esc(row.costPerSale != null ? fmtCurrency(row.costPerSale) : "—") +
+          qualityCellButton(st, "cps", row.costPerSale != null ? fmtCurrency(row.costPerSale) : "—") +
           "</td></tr>";
       });
       html += "</tbody></table></div>";
@@ -1376,6 +1406,9 @@
           impressions: Number(d.impressions) || 0,
           spend: Number(d.spend) || 0,
           sold: Number(d.sold) || 0,
+          leads: Number(d.leads) || 0,
+          costPerLead: d.costPerLead == null ? null : Number(d.costPerLead),
+          costPerSale: d.costPerSale == null ? null : Number(d.costPerSale),
           ctr: Number(d.ctr) || 0,
           position: Number(d.position) || 0,
           label: fmtShortDate(d.date),
@@ -1430,27 +1463,35 @@
     }
     var kind = gscMetricKind(metric);
     var key =
-      metric === "policies_sold"
+      metric === "policies_sold" || metric === "state_sales"
         ? "sold"
-        : metric === "clicks" || kind === "gsc_clicks"
-        ? "clicks"
-        : metric === "spend"
-          ? "spend"
-          : kind === "gsc_impressions"
-            ? "impressions"
-            : kind === "gsc_ctr"
-              ? "ctr"
-              : kind === "gsc_position"
-                ? "position"
-                : "impressions";
-    var bucketDays = chooseChartBucketDays(daily.length);
+        : metric === "state_leads"
+        ? "leads"
+        : metric === "state_cpl"
+          ? "costPerLead"
+          : metric === "state_cps"
+            ? "costPerSale"
+            : metric === "clicks" || kind === "gsc_clicks"
+              ? "clicks"
+              : metric === "spend" || metric === "state_spend"
+                ? "spend"
+                : kind === "gsc_impressions"
+                  ? "impressions"
+                  : kind === "gsc_ctr"
+                    ? "ctr"
+                    : kind === "gsc_position"
+                      ? "position"
+                      : "impressions";
+    var bucketDays = isQualityStateMetric(metric) ? 1 : chooseChartBucketDays(daily.length);
     var series = bucketDailySeries(daily, bucketDays);
     var max = 1;
     var minPos = null;
     var maxPos = null;
     var invertPosition = kind === "gsc_position";
     series.forEach(function (d) {
-      var v = d[key] || 0;
+      var v = d[key];
+      if (v == null || !isFinite(Number(v))) return;
+      v = Number(v);
       if (invertPosition) {
         if (v > 0) {
           if (minPos == null || v < minPos) minPos = v;
@@ -1485,18 +1526,19 @@
           '">') +
       series
         .map(function (d, i) {
-          var val = d[key] || 0;
+          var val = d[key];
+          var numeric = val == null || !isFinite(Number(val)) ? 0 : Number(val);
           var h;
           if (invertPosition) {
             var span = maxPos - minPos;
             h =
-              val <= 0
+              numeric <= 0
                 ? 4
                 : span < 0.05
                   ? 55
-                  : Math.max(8, Math.round(((maxPos - val) / span) * 92) + 8);
+                  : Math.max(8, Math.round(((maxPos - numeric) / span) * 92) + 8);
           } else {
-            h = Math.max(4, Math.round((val / max) * 100));
+            h = Math.max(4, Math.round((numeric / max) * 100));
           }
           var showLabel =
             bucketDays > 1 || !denseDaily || i % 2 === 0 || i === series.length - 1;
@@ -1578,8 +1620,16 @@
     if (!state.adChartMetric) return "";
     var metric = state.adChartMetric;
     var scope = gscChartScope(metric);
-    var title =
-      metric === "policies_sold"
+    var qualityTitleKey = {
+      state_leads: "funnel_quality_chart_leads",
+      state_spend: "funnel_quality_chart_spend",
+      state_cpl: "funnel_quality_chart_cpl",
+      state_sales: "funnel_quality_chart_sales",
+      state_cps: "funnel_quality_chart_cps",
+    }[metric];
+    var title = qualityTitleKey
+      ? t(qualityTitleKey, { state: qualityStateLabel(state.adChartQualityState) })
+      : metric === "policies_sold"
         ? t("funnel_policies_sold_daily")
         : metric === "clicks"
         ? t("funnel_ad_clicks_daily")
@@ -1606,7 +1656,7 @@
         ? '<p class="crm-funnel-ad-chart-empty">' + esc(t("funnel_ad_chart_loading")) + "</p>"
         : state.adChartError
           ? '<p class="crm-funnel-error">' + esc(state.adChartError) + "</p>"
-          : (metric === "spend" ? renderSpendChartSummary(daily) : "") +
+          : (metric === "spend" || metric === "state_spend" ? renderSpendChartSummary(daily) : "") +
             (scope
               ? '<p class="crm-funnel-ad-modal-sub">' +
                 esc(t("funnel_gsc_group_" + scope + "_goal")) +
@@ -1992,8 +2042,39 @@
       });
   }
 
+  function loadQualityStateChart(main, cellMetric, stateCode) {
+    closeGeoClicks(main, { skipPaint: true });
+    var metric = "state_" + cellMetric;
+    state.adChartMetric = metric;
+    state.adChartQualityState = stateCode;
+    state.adChartLoading = true;
+    state.adChartError = null;
+    state.adChartData = null;
+    paint(main);
+    wireEvents(main);
+    return api(
+      "/api/staff/funnel-analytics?" +
+        queryString({ action: "quality_state_daily", quality_state: stateCode }),
+      { method: "GET", softAuth: true }
+    )
+      .then(function (res) {
+        state.adChartData = res;
+        state.adChartLoading = false;
+        state.adChartError = res.error || null;
+        paint(main);
+        wireEvents(main);
+      })
+      .catch(function (err) {
+        state.adChartLoading = false;
+        state.adChartError = (err && err.message) || t("funnel_load_error");
+        paint(main);
+        wireEvents(main);
+      });
+  }
+
   function closeAdChart(main, opts) {
     state.adChartMetric = null;
+    state.adChartQualityState = null;
     state.adChartLoading = false;
     state.adChartData = null;
     state.adChartError = null;
@@ -2070,7 +2151,7 @@
         state.sourceChannel = btn.getAttribute("data-funnel-source") || "facebook";
         if (state.sourceChannel === "facebook") {
           if (landingPagesForSource("facebook").indexOf(state.landingPage) < 0) {
-            state.landingPage = "landing";
+            state.landingPage = "whatsapp";
           }
         } else {
           state.landingPage = "website";
@@ -2089,7 +2170,7 @@
 
     main.querySelectorAll("[data-funnel-dest]").forEach(function (btn) {
       btn.addEventListener("click", function () {
-        state.landingPage = btn.getAttribute("data-funnel-dest") || "landing";
+        state.landingPage = btn.getAttribute("data-funnel-dest") || "whatsapp";
         syncViewFromFilters();
         state.selectedNode = null;
         state.detail = null;
@@ -2302,6 +2383,16 @@
       });
     });
 
+    main.querySelectorAll("[data-funnel-quality-chart]").forEach(function (btn) {
+      btn.addEventListener("click", function (ev) {
+        ev.preventDefault();
+        ev.stopPropagation();
+        var metric = btn.getAttribute("data-funnel-quality-chart");
+        var st = btn.getAttribute("data-state");
+        if (metric && st) loadQualityStateChart(main, metric, st);
+      });
+    });
+
     var adModalClose = main.querySelector("[data-funnel-ad-modal-close]");
     if (adModalClose) {
       adModalClose.addEventListener("click", function (ev) {
@@ -2320,7 +2411,7 @@
   function mount(main) {
     applyPeriodDays(1);
     state.sourceChannel = "facebook";
-    state.landingPage = "landing";
+    state.landingPage = "whatsapp";
     state.licensedState = "ALL";
     state.entryModalOpen = false;
     state.geoModalOpen = false;
