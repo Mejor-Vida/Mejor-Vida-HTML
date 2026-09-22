@@ -1655,6 +1655,37 @@ body.crm-body {
   cursor: pointer;
 }
 
+.crm-dup-badge {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 1px 7px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: #92400e;
+  background: #fef3c7;
+  vertical-align: middle;
+}
+
+.crm-dup-filter-btn {
+  flex: 0 0 auto;
+  margin-left: auto;
+  border: 1px solid var(--crm-border);
+  background: #fff;
+  color: var(--crm-text);
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.crm-dup-filter-btn.is-active {
+  border-color: #d97706;
+  background: #fef3c7;
+  color: #92400e;
+}
+
 /* Client detail */
 .crm-main:has(.crm-client-detail) {
   padding-top: 12px;

@@ -1019,6 +1019,9 @@
       "</button>" +
       "</div>" +
       '<div class="crm-clients-head-actions">' +
+      '<button type="button" id="crm-filter-duplicates" class="crm-dup-filter-btn" aria-pressed="false">' +
+      esc(t("clients_filter_duplicates")) +
+      "</button>" +
       '<button type="button" id="crm-add-client-btn" class="crm-btn crm-btn-pill">' +
       '<span class="crm-btn-icon" aria-hidden="true">+</span>' +
       esc(t("add_new")) +
@@ -1089,6 +1092,7 @@
     var rowMenuLeadId = null;
     var sortState = { column: "date", dir: "desc" };
     var apptPopoverCloser = null;
+    var duplicateFilter = false;
 
     function closeApptPopover() {
       var pop = $("crm-appointment-popover");
@@ -1265,6 +1269,7 @@
         if (stageFilter && window.StaffCrmStages) {
           if (window.StaffCrmStages.normalizeStage(L.pipeline_stage) !== stageFilter) return false;
         }
+        if (duplicateFilter && !L.possible_duplicate) return false;
         if (!ql) return true;
         var hay = (displayName(L) + " " + (L.email || "") + " " + (L.phone || "")).toLowerCase();
         return hay.indexOf(ql) !== -1;
@@ -1530,7 +1535,19 @@
             checked +
             " /></td><td><span class=\"name-link\" role=\"link\" tabindex=\"0\">" +
             esc(displayName(L)) +
-            '</span></td><td class="crm-col-indicator crm-col-email">' +
+            "</span>" +
+            (L.possible_duplicate
+              ? ' <span class="crm-dup-badge" title="' +
+                esc(
+                  t("clients_possible_duplicate_hint", {
+                    names: (L.duplicate_matches || []).join(", ") || t("clients_possible_duplicate"),
+                  })
+                ) +
+                '">' +
+                esc(t("clients_possible_duplicate")) +
+                "</span>"
+              : "") +
+            '</td><td class="crm-col-indicator crm-col-email">' +
             renderEmailIndicator(L) +
             '</td><td class="crm-col-indicator crm-col-phone">' +
             renderPhoneIndicator(L) +
@@ -1708,6 +1725,21 @@
       search.addEventListener("input", function () {
         q = search.value || "";
         draw();
+      });
+    }
+    var dupBtn = $("crm-filter-duplicates");
+    if (dupBtn) {
+      dupBtn.addEventListener("click", function () {
+        duplicateFilter = !duplicateFilter;
+        dupBtn.classList.toggle("is-active", duplicateFilter);
+        dupBtn.setAttribute("aria-pressed", duplicateFilter ? "true" : "false");
+        draw();
+        if (duplicateFilter) {
+          var st = $("crm-clients-status");
+          if (st) {
+            st.textContent = t("clients_filter_duplicates_on") + " · " + (st.textContent || "");
+          }
+        }
       });
     }
 

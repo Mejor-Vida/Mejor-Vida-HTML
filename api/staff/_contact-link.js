@@ -137,6 +137,7 @@ async function ensureContactRecord(cfg, hints) {
 
   const { supabaseUrl, serviceKey } = cfg;
   const contactPatch = buildContactPatch(hints);
+  if (hints.created_at) contactPatch.created_at = hints.created_at;
 
   const existing = await resolveContactForPipeline(cfg, {
     contactId: hints.contactId || hints.contacts_contact_id,
@@ -145,7 +146,17 @@ async function ensureContactRecord(cfg, hints) {
     manychatSubscriberId: subscriberId,
   });
   if (existing && existing.id) {
-    await updateContact(supabaseUrl, serviceKey, existing.id, contactPatch);
+    const patch = { ...contactPatch };
+    if (hints.created_at && existing.created_at) {
+      const keepTime = Date.parse(hints.created_at);
+      const haveTime = Date.parse(existing.created_at);
+      if (Number.isFinite(keepTime) && (!Number.isFinite(haveTime) || keepTime < haveTime)) {
+        patch.created_at = hints.created_at;
+      } else {
+        delete patch.created_at;
+      }
+    }
+    await updateContact(supabaseUrl, serviceKey, existing.id, patch);
     return { contactId: existing.id, created: false };
   }
 

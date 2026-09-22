@@ -388,6 +388,42 @@ async function enrichListItemsWithManychatPipeline(cfg, items) {
   return items;
 }
 
+function markPossibleDuplicates(items) {
+  const list = Array.isArray(items) ? items : [];
+  const byPhone = new Map();
+  const byEmail = new Map();
+  list.forEach((item) => {
+    const phone = phoneLast10Digits(item && item.phone);
+    const email = normalizeEmail(item && item.email);
+    if (phone && phone.length === 10) {
+      if (!byPhone.has(phone)) byPhone.set(phone, []);
+      byPhone.get(phone).push(item);
+    }
+    if (email) {
+      if (!byEmail.has(email)) byEmail.set(email, []);
+      byEmail.get(email).push(item);
+    }
+  });
+  list.forEach((item) => {
+    const phone = phoneLast10Digits(item && item.phone);
+    const email = normalizeEmail(item && item.email);
+    const others = [];
+    const seen = new Set([String(item.id)]);
+    function addHits(hits) {
+      (hits || []).forEach((other) => {
+        if (!other || seen.has(String(other.id))) return;
+        seen.add(String(other.id));
+        others.push(displayName(other) || "Client");
+      });
+    }
+    if (phone) addHits(byPhone.get(phone));
+    if (email) addHits(byEmail.get(email));
+    item.possible_duplicate = others.length > 0;
+    item.duplicate_matches = others.slice(0, 4);
+  });
+  return list;
+}
+
 function listItemCanNurtureEnroll(item) {
   const stage = normalizeIcPipelineStage(item && item.pipeline_stage) || "new";
   return stage === "new" || stage === "contacted";
@@ -2372,6 +2408,7 @@ module.exports = async function handler(req, res) {
       } catch (e) {
         console.error("staff/leads GET enrichListItemsWithNurtureStep", e);
       }
+      markPossibleDuplicates(items);
       items.sort((x, y) => sortKey(x).localeCompare(sortKey(y)));
       return json(res, 200, { items });
     } catch (e) {
@@ -2695,6 +2732,7 @@ module.exports = async function handler(req, res) {
                 ? canonicalAfterSave.profile_ext
                 : {},
             source: unified.source || canonicalAfterSave.source || "staff_compose",
+            created_at: unified.created_at || null,
             updatedBy: auth.user && auth.user.email ? auth.user.email : null,
           });
         } catch (linkErr) {
@@ -2721,6 +2759,7 @@ module.exports = async function handler(req, res) {
               ? canonicalAfterSave.profile_ext
               : {},
           source: unified.source || canonicalAfterSave.source || "staff_compose",
+          created_at: unified.created_at || null,
           updatedBy: auth.user && auth.user.email ? auth.user.email : null,
         };
         if (src === "contacts") {
