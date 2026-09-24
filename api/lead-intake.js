@@ -25,7 +25,7 @@
  *   first_name, last_name, full_name, name
  *   email
  *   language       english | spanish (defaults to english if pull also empty)
- *   us_state       (defaults to NE)
+ *   us_state       two-letter code or full state name; omitted when unknown
  *   edad | age
  *   sexo | gender | sex
  *   tabaco | tobacco | smoker | is_smoker
@@ -61,6 +61,7 @@ const {
 const { syncContactToHubspot } = require("../lib/hubspot-sync-lib");
 const { logIntegrationAudit } = require("../lib/integration-audit");
 const { fetchManychatSubscriber } = require("../lib/manychat-pull");
+const { normalizeUsStateAbbr } = require("../lib/us-state-timezone");
 const { saveCanonicalLeadProfile } = require("./staff/_lead-profile");
 const { autoEnrollCrmLead } = require("../lib/crm-nurture-engine");
 
@@ -399,8 +400,8 @@ module.exports = async function handler(req, res) {
   lastName = lastName || null;
 
   // ── State, age, gender, smoker, quotes ───────────────────────────────────
-  const usStateBody = cleanManychatValue(body.us_state).toUpperCase();
-  const usState = (usStateBody || pull.us_state || "NE").toString().slice(0, 5);
+  const usStateBody = cleanManychatValue(body.us_state);
+  const usState = normalizeUsStateAbbr(usStateBody || pull.us_state || "");
 
   let age = null;
   const ageRaw = bodyAlias(body, ["edad", "age"]);
@@ -472,9 +473,14 @@ module.exports = async function handler(req, res) {
       language,
       ...(whatsappId ? { whatsapp_id: whatsappId } : {}),
       ...(manychatSubscriberId ? { manychat_subscriber_id: manychatSubscriberId } : {}),
-      us_state: usState,
+      ...(usState ? { us_state: usState } : {}),
       source: "whatsapp",
     };
+    const metaAdRaw =
+      bodyAlias(body, ["meta_ad_id", "ad_id", "fb_ad_id", "facebook_ad_id", "source_ad_id"]) ||
+      (pull.meta_ad_id ? String(pull.meta_ad_id) : "");
+    const metaAdId = String(metaAdRaw || "").replace(/\D/g, "");
+    if (metaAdId.length >= 8 && metaAdId.length <= 24) contactPatch.meta_ad_id = metaAdId;
 
     const { contactId, created } = await upsertContact(supabaseUrl, supabaseKey, phone, contactPatch);
     const updated = !created;
@@ -503,7 +509,7 @@ module.exports = async function handler(req, res) {
 
     await insertEvent(supabaseUrl, supabaseKey, contactId, "language_picked", {
       language,
-      us_state: usState,
+      ...(usState ? { us_state: usState } : {}),
       ...(age != null ? { age } : {}),
       ...(gender ? { gender } : {}),
       ...(isSmoker !== null ? { is_smoker: isSmoker } : {}),

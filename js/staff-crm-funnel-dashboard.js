@@ -31,6 +31,17 @@
     geoData: null,
     geoCountryModalOpen: false,
     gscGroup: "home",
+    creativeOpen: false,
+    creativeCampaignId: "",
+    creativeCampaignName: "",
+    creativeAdsetId: "",
+    creativeAdsetName: "",
+    creativeCampaigns: [],
+    creativeAdsets: [],
+    creativeAds: [],
+    creativeCostsReady: true,
+    creativeLoading: false,
+    creativeError: "",
   };
 
   var GSC_PAGE_GROUP_IDS = ["home", "city", "blogs"];
@@ -332,7 +343,15 @@
           "</option>"
         );
       }).join("") +
-      "</select></label>" +
+      "</select>" +
+      (state.sourceChannel === "facebook"
+        ? '<button type="button" class="crm-funnel-creative-btn' +
+          (state.creativeOpen ? " is-active" : "") +
+          '" data-creative-toggle>' +
+          esc(t("creative_testing")) +
+          "</button>"
+        : "") +
+      "</label>" +
       '<div class="crm-funnel-filter-actions">' +
       '<button type="button" class="crm-funnel-entry-btn" data-funnel-entry-open>' +
       esc(t("funnel_entry_context")) +
@@ -342,8 +361,7 @@
       "</button>" +
       "</div>" +
       "</div>" +
-      facebookDestTabsHtml() +
-      sourceScopeHtml() +
+      (state.creativeOpen ? "" : facebookDestTabsHtml() + sourceScopeHtml()) +
       "</div>"
     );
   }
@@ -1892,6 +1910,161 @@
     );
   }
 
+  function creativeStatusLabel(status) {
+    var s = String(status || "").toUpperCase();
+    if (s === "ACTIVE") return t("creative_status_on");
+    if (!s) return "";
+    return t("creative_status_off");
+  }
+
+  function creativeMetric(label, value) {
+    return (
+      '<div class="crm-creative-metric"><span>' +
+      esc(label) +
+      "</span><strong>" +
+      esc(value) +
+      "</strong></div>"
+    );
+  }
+
+  function creativeList(rows, kind) {
+    if (!rows.length) {
+      return '<p class="crm-funnel-empty-list">' + esc(t("creative_empty")) + "</p>";
+    }
+    return (
+      '<ul class="crm-creative-list">' +
+      rows
+        .map(function (row) {
+          return (
+            '<li><button type="button" class="crm-creative-pick" data-creative-open="' +
+            esc(kind) +
+            '" data-creative-id="' +
+            esc(row.id) +
+            '" data-creative-name="' +
+            esc(row.name) +
+            '"><span>' +
+            esc(row.name) +
+            '</span><em>' +
+            esc(creativeStatusLabel(row.status)) +
+            "</em></button></li>"
+          );
+        })
+        .join("") +
+      "</ul>"
+    );
+  }
+
+  function creativeAdCard(ad) {
+    var badge = "";
+    if (ad.turnOff) badge = '<span class="crm-creative-flag is-stop">' + esc(t("creative_turn_off")) + "</span>";
+    else if (ad.nearStop) badge = '<span class="crm-creative-flag">' + esc(t("creative_near_stop")) + "</span>";
+    var thumb = ad.thumbnail
+      ? '<img src="' + esc(ad.thumbnail) + '" alt="" loading="lazy">'
+      : '<span class="crm-creative-thumb-empty"></span>';
+    return (
+      '<article class="crm-creative-card' +
+      (ad.decision ? " is-" + esc(ad.decision) : "") +
+      '">' +
+      '<div class="crm-creative-thumb">' +
+      thumb +
+      "</div>" +
+      "<h3>" +
+      esc(ad.name) +
+      "</h3>" +
+      '<p class="crm-creative-status">' +
+      esc(creativeStatusLabel(ad.status)) +
+      badge +
+      "</p>" +
+      '<div class="crm-creative-metrics">' +
+      creativeMetric(t("creative_female"), ad.femalePct != null ? fmtPct(ad.femalePct) : "—") +
+      creativeMetric(t("creative_age55"), ad.age55Pct != null ? fmtPct(ad.age55Pct) : "—") +
+      creativeMetric(t("creative_ctr"), ad.ctr != null ? fmtPctRate(ad.ctr) : "—") +
+      creativeMetric(t("creative_ctr_all"), ad.ctrAll != null ? fmtPctRate(ad.ctrAll) : "—") +
+      creativeMetric(t("creative_impressions"), fmtNum(ad.impressions || 0)) +
+      creativeMetric(t("creative_conversations"), fmtNum(ad.conversations || 0)) +
+      creativeMetric(t("creative_cpl"), ad.costPerLead != null ? fmtCurrency(ad.costPerLead) : "—") +
+      creativeMetric(t("creative_cps"), ad.costPerSale != null ? fmtCurrency(ad.costPerSale) : "—") +
+      "</div>" +
+      '<div class="crm-creative-actions">' +
+      '<button type="button" data-creative-decision="keep" data-ad-id="' +
+      esc(ad.id) +
+      '"' +
+      (ad.decision === "keep" ? " class=\"is-on\"" : "") +
+      ">" +
+      esc(t("creative_keep")) +
+      "</button>" +
+      '<button type="button" data-creative-decision="remove" data-ad-id="' +
+      esc(ad.id) +
+      '"' +
+      (ad.decision === "remove" ? " class=\"is-on\"" : "") +
+      ">" +
+      esc(t("creative_remove")) +
+      "</button></div></article>"
+    );
+  }
+
+  function CreativePanel() {
+    var crumb =
+      '<div class="crm-creative-crumb">' +
+      '<button type="button" data-creative-back="campaigns"' +
+      (state.creativeCampaignId ? "" : " disabled") +
+      ">" +
+      esc(t("creative_campaigns")) +
+      "</button>";
+    if (state.creativeCampaignId) {
+      crumb +=
+        '<button type="button" data-creative-back="adsets">' +
+        esc(state.creativeCampaignName || t("creative_adsets")) +
+        "</button>";
+    }
+    if (state.creativeAdsetId) {
+      crumb += "<span>" + esc(state.creativeAdsetName || t("creative_ads")) + "</span>";
+    }
+    crumb += "</div>";
+    var body = "";
+    if (state.creativeLoading) {
+      body = '<p class="crm-funnel-loading">' + esc(t("funnel_loading")) + "</p>";
+    } else if (state.creativeError) {
+      body = '<p class="crm-funnel-ad-metrics-note crm-funnel-error">' + esc(state.creativeError) + "</p>";
+    } else if (state.creativeAdsetId) {
+      body =
+        (state.creativeCostsReady
+          ? ""
+          : '<p class="crm-funnel-ad-metrics-note">' + esc(t("creative_cost_pending")) + "</p>") +
+        '<div class="crm-creative-grid">' +
+        (state.creativeAds || []).map(creativeAdCard).join("") +
+        "</div>";
+      if (!(state.creativeAds || []).length) {
+        body = '<p class="crm-funnel-empty-list">' + esc(t("creative_empty_ads")) + "</p>";
+      }
+    } else if (state.creativeCampaignId) {
+      body = creativeList(state.creativeAdsets || [], "adset");
+    } else {
+      body = creativeList(state.creativeCampaigns || [], "campaign");
+    }
+    return (
+      '<section class="crm-creative">' +
+      '<p class="crm-creative-guide">' +
+      esc(t("creative_guide")) +
+      "</p>" +
+      crumb +
+      body +
+      "</section>"
+    );
+  }
+
+  function funnelBody() {
+    if (state.creativeOpen) return CreativePanel();
+    return (
+      AdPlatformMetrics(state.data.adMetrics, state.data.policiesSold, state.data.qualityLeads) +
+      OrganicSearchMetrics(state.data.organicSearch) +
+      '<div class="crm-funnel-main">' +
+      FunnelVisualization(state.data.branches || {}) +
+      DetailInspectorPanel() +
+      "</div>"
+    );
+  }
+
   /* ── FunnelDashboardPage ── */
   function FunnelDashboardPage() {
     if (state.loading) {
@@ -1908,15 +2081,21 @@
       return (
         '<div class="crm-funnel-page">' +
         FilterBar() +
-        AdPlatformMetrics(
-          state.data && state.data.adMetrics,
-          state.data && state.data.policiesSold,
-          state.data && state.data.qualityLeads
-        ) +
-        OrganicSearchMetrics(state.data && state.data.organicSearch) +
-        '<div class="crm-funnel-empty">' +
-        "<strong>" + esc(t("funnel_no_data_title")) + "</strong>" +
-        "<p>" + esc(t("funnel_no_data_blurb")) + "</p></div>" +
+        (state.creativeOpen
+          ? CreativePanel()
+          : AdPlatformMetrics(
+              state.data && state.data.adMetrics,
+              state.data && state.data.policiesSold,
+              state.data && state.data.qualityLeads
+            ) +
+            OrganicSearchMetrics(state.data && state.data.organicSearch) +
+            '<div class="crm-funnel-empty">' +
+            "<strong>" +
+            esc(t("funnel_no_data_title")) +
+            "</strong>" +
+            "<p>" +
+            esc(t("funnel_no_data_blurb")) +
+            "</p></div>") +
         AdChartModal() +
         EntryContextModal() +
         GeoClicksModal() +
@@ -1930,12 +2109,7 @@
       "<h1>" + esc(t("funnel_title")) + "</h1>" +
       "<p>" + esc(t("funnel_subtitle")) + "</p></header>" +
       FilterBar() +
-      AdPlatformMetrics(state.data.adMetrics, state.data.policiesSold, state.data.qualityLeads) +
-      OrganicSearchMetrics(state.data.organicSearch) +
-      '<div class="crm-funnel-main">' +
-      FunnelVisualization(state.data.branches || {}) +
-      DetailInspectorPanel() +
-      "</div>" +
+      funnelBody() +
       AdChartModal() +
       EntryContextModal() +
       GeoClicksModal() +
@@ -1947,13 +2121,130 @@
     main.innerHTML = FunnelDashboardPage();
   }
 
-  function loadData(main) {
-    state.loading = true;
+  function creativeQuery(action, extra) {
+    ensureDateRange();
+    var q = ["action=" + encodeURIComponent(action)];
+    if (action === "ads") {
+      q.push("date_from=" + encodeURIComponent(state.dateFrom));
+      q.push("date_to=" + encodeURIComponent(state.dateTo));
+    }
+    if (extra) Object.keys(extra).forEach(function (k) {
+      q.push(encodeURIComponent(k) + "=" + encodeURIComponent(extra[k]));
+    });
+    return q.join("&");
+  }
+
+  function showCreative(main, patch) {
+    Object.keys(patch || {}).forEach(function (k) {
+      state[k] = patch[k];
+    });
+    state.creativeLoading = false;
     paint(main);
+    wireEvents(main);
+  }
+
+  function loadCreativeCampaigns(main) {
+    state.creativeOpen = true;
+    state.creativeCampaignId = "";
+    state.creativeCampaignName = "";
+    state.creativeAdsetId = "";
+    state.creativeAdsetName = "";
+    state.creativeAdsets = [];
+    state.creativeAds = [];
+    state.creativeLoading = true;
+    state.creativeError = "";
+    paint(main);
+    wireEvents(main);
+    return api("/api/staff/creative-testing?" + creativeQuery("campaigns"))
+      .then(function (data) {
+        if (data && data.configured === false) {
+          showCreative(main, { creativeError: data.setupHint || t("funnel_load_error"), creativeCampaigns: [] });
+          return;
+        }
+        showCreative(main, { creativeCampaigns: (data && data.campaigns) || [] });
+      })
+      .catch(function (err) {
+        showCreative(main, { creativeError: (err && err.message) || t("funnel_load_error"), creativeCampaigns: [] });
+      });
+  }
+
+  function loadCreativeAdsets(main, id, name) {
+    state.creativeCampaignId = id;
+    state.creativeCampaignName = name || state.creativeCampaignName;
+    state.creativeAdsetId = "";
+    state.creativeAdsetName = "";
+    state.creativeAds = [];
+    state.creativeLoading = true;
+    state.creativeError = "";
+    paint(main);
+    wireEvents(main);
+    return api("/api/staff/creative-testing?" + creativeQuery("adsets", { campaign_id: id }))
+      .then(function (data) {
+        showCreative(main, { creativeAdsets: (data && data.adsets) || [] });
+      })
+      .catch(function (err) {
+        showCreative(main, { creativeError: (err && err.message) || t("funnel_load_error") });
+      });
+  }
+
+  function loadCreativeAds(main, id, name) {
+    if (id) state.creativeAdsetId = id;
+    if (name) state.creativeAdsetName = name;
+    if (!state.creativeAdsetId) return;
+    state.creativeLoading = true;
+    state.creativeError = "";
+    paint(main);
+    wireEvents(main);
+    return api("/api/staff/creative-testing?" + creativeQuery("ads", { adset_id: state.creativeAdsetId }))
+      .then(function (data) {
+        showCreative(main, {
+          creativeAds: (data && data.ads) || [],
+          creativeCostsReady: !data || data.costsReady !== false,
+        });
+      })
+      .catch(function (err) {
+        showCreative(main, { creativeError: (err && err.message) || t("funnel_load_error") });
+      });
+  }
+
+  function saveCreativeDecision(main, adId, decision) {
+    var current = (state.creativeAds || []).filter(function (ad) { return ad.id === adId; })[0];
+    var next = current && current.decision === decision ? "" : decision;
+    if (!window.StaffCrm || !window.StaffCrm.authedApi) return;
+    window.StaffCrm.authedApi(
+      "/api/staff/creative-testing",
+      { adId: adId, decision: next },
+      { method: "POST" }
+    ).then(function () {
+      state.creativeAds = (state.creativeAds || []).map(function (ad) {
+        if (ad.id !== adId) return ad;
+        var copy = {};
+        Object.keys(ad).forEach(function (k) { copy[k] = ad[k]; });
+        copy.decision = next || null;
+        return copy;
+      });
+      paint(main);
+      wireEvents(main);
+    }).catch(function (err) {
+      state.creativeError = (err && err.message) || t("funnel_load_error");
+      paint(main);
+      wireEvents(main);
+    });
+  }
+
+  function loadData(main) {
+    if (!state.creativeOpen) {
+      state.loading = true;
+      paint(main);
+    }
     return api("/api/staff/funnel-analytics?" + queryString())
       .then(function (data) {
         state.data = data;
         state.loading = false;
+        if (state.creativeOpen && state.creativeAdsetId) {
+          loadCreativeAds(main);
+          return;
+        }
         paint(main);
         wireEvents(main);
       })
@@ -2146,6 +2437,47 @@
   function wireEvents(main) {
     if (!main) return;
 
+    var creativeToggle = main.querySelector("[data-creative-toggle]");
+    if (creativeToggle) {
+      creativeToggle.addEventListener("click", function () {
+        if (state.creativeOpen) {
+          state.creativeOpen = false;
+          paint(main);
+          wireEvents(main);
+          return;
+        }
+        loadCreativeCampaigns(main);
+      });
+    }
+    main.querySelectorAll("[data-creative-open]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var kind = btn.getAttribute("data-creative-open");
+        var id = btn.getAttribute("data-creative-id");
+        var name = btn.getAttribute("data-creative-name");
+        if (kind === "campaign") loadCreativeAdsets(main, id, name);
+        else loadCreativeAds(main, id, name);
+      });
+    });
+    main.querySelectorAll("[data-creative-back]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        if (btn.disabled) return;
+        var level = btn.getAttribute("data-creative-back");
+        if (level === "campaigns") loadCreativeCampaigns(main);
+        else {
+          state.creativeAdsetId = "";
+          state.creativeAdsetName = "";
+          state.creativeAds = [];
+          paint(main);
+          wireEvents(main);
+        }
+      });
+    });
+    main.querySelectorAll("[data-creative-decision]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        saveCreativeDecision(main, btn.getAttribute("data-ad-id"), btn.getAttribute("data-creative-decision"));
+      });
+    });
+
     main.querySelectorAll("[data-funnel-source]").forEach(function (btn) {
       btn.addEventListener("click", function () {
         state.sourceChannel = btn.getAttribute("data-funnel-source") || "facebook";
@@ -2155,6 +2487,7 @@
           }
         } else {
           state.landingPage = "website";
+          state.creativeOpen = false;
         }
         syncViewFromFilters();
         state.selectedNode = null;
