@@ -70,7 +70,7 @@ module.exports = async function handler(req, res) {
   }
 
   try {
-    const out = await runRagPipeline(body, { hubspotNotePrefix: "WhatsApp RAG" });
+    const out = await runRagPipeline(body, { hubspotNotePrefix: "WhatsApp RAG", strictAnswer: true });
     if (out.error) {
       return json(res, out.statusCode || 500, { status: "error", error: out.error });
     }
