@@ -211,6 +211,42 @@
       funnel_state_co: "Colorado",
       funnel_state_nv: "Nevada",
       creative_testing: "Creative testing",
+      ad_builder: "Ad Builder",
+      ad_builder_stage1: "Stage 1 — Images",
+      ad_builder_stage2: "Stage 2 — Hooks",
+      ad_builder_stage3: "Stage 3 — Wording",
+      ad_builder_guide_1:
+        "Stage 1 tests the picture. Select up to 20 images, one hook, and one wording, then Generate. The new words cover the bottom of the picture. Words already at the top of a kept ad can still show, so prefer photos over headline cards.",
+      ad_builder_guide_2:
+        "Stage 2 tests the hook. Select one image, up to 20 hooks, and up to 20 wording lines. Generate makes one picture for each hook and wording pair.",
+      ad_builder_guide_3:
+        "Stage 3 tests the wording under the hook. Select one image, one hook, and up to 20 wording lines.",
+      ad_builder_diagram:
+        "All 29 static-ad concepts stay here. Each image has a hook, a body, and a call to action. Stack two or three. Green can be tested. Amber only if the line is true. The other amber marks are ideas to discuss before they are used.",
+      ad_builder_fit_use: "Test",
+      ad_builder_fit_careful: "Only if true",
+      ad_builder_fit_discuss: "To discuss",
+      ad_builder_fit_avoid: "To discuss",
+      ad_builder_no_line: "No kept line in this concept yet.",
+      ad_builder_research:
+        "Published notes from 2026, not a sales ranking. Classes that teach this: Insurance Funnels FE Facebook Bootcamp, and Branning Group Facebook Ads Fast Track (final expense kit).",
+      ad_builder_working:
+        "Writers at FexAds and Elevarus say the lines that still get through are age, no medical exam, and a rate that stays fixed. A real person or a calm photo beats a fear headline. Government, Medicare, and a price in the headline get rejected more often.",
+      ad_builder_letter:
+        "The ads you kept use a very large bold headline, about twice the size of the line under it. Price cards are condensed sans, all caps. The cremation photos use a green serif on a cream background.",
+      ad_builder_images: "Images",
+      ad_builder_hooks: "Hooks",
+      ad_builder_wordings: "Wording",
+      ad_builder_select: "Use in testing",
+      ad_builder_selected: "Selected",
+      ad_builder_generate: "Generate",
+      ad_builder_need_1: "Stage 1 needs 1 to 20 images, 1 hook, and 1 wording.",
+      ad_builder_need_2: "Stage 2 needs 1 image, 1 to 20 hooks, and 1 to 20 wording lines.",
+      ad_builder_need_3: "Stage 3 needs 1 image, 1 hook, and 1 to 20 wording lines.",
+      ad_builder_saving: "Saving the pictures…",
+      ad_builder_saving_n: "Saving {done} of {total}…",
+      ad_builder_saved: "Saved {count} pictures in {folder}. Choose that folder on the Desktop if it is not already there.",
+      ad_builder_save_failed: "The folder was not saved. Use Chrome, and pick a folder on the Desktop when asked.",
       creative_guide:
         "Stage 1 tests the image. Stage 2 tests the hook on the winning image. Stage 3 tests the information under that hook. Run the ads together and turn each one off around 2,000 impressions. Keep and Remove choose what goes into the next stage. Cost per sale is too thin at 2,000 impressions to pick the winner. The numbers use the dates above.",
       creative_campaigns: "Campaigns",
@@ -362,9 +398,12 @@
       funnel_gsc_main_page_stats: "{clicks} clicks · {impr} impr. · {ctr} CTR",
       funnel_gsc_group_picker: "Search category",
       funnel_gsc_group_home: "Main Page",
+      funnel_gsc_group_state: "State pages",
       funnel_gsc_group_city: "City pages",
       funnel_gsc_group_blogs: "Blogs",
       funnel_gsc_group_home_hint: "Spanish homepage — clicks, impressions, CTR, and average position",
+      funnel_gsc_group_state_hint:
+        "All Spanish state guides under /estados/ — combined clicks, impressions, CTR, and average position",
       funnel_gsc_group_city_hint:
         "All Spanish city guides under /estados/ — combined clicks, impressions, CTR, and average position",
       funnel_gsc_group_blogs_hint:
@@ -390,6 +429,10 @@
       funnel_gsc_city_impressions_daily: "City pages daily impressions",
       funnel_gsc_city_ctr_daily: "City pages daily CTR",
       funnel_gsc_city_position_daily: "City pages daily average position",
+      funnel_gsc_group_state_goal:
+        "All state teaching pages together (Ohio, Nebraska, Kansas, Colorado, Nevada, and the rest at /estados/{state}.html).",
+      funnel_gsc_group_state_track_note:
+        "City pages such as /estados/ohio/columbus.html are not included. English /en/states/ pages are not included. Combined numbers show whether the state pages as a group are earning search.",
       funnel_gsc_group_city_goal: "All city teaching pages together (Lincoln, Omaha, Denver, Las Vegas, and the rest under /estados/).",
       funnel_gsc_group_city_track_note:
         "State hub pages such as /estados/nebraska.html are not included. Combined numbers show whether the city-page strategy is earning search, not which city is winning.",
@@ -1763,6 +1806,42 @@
       funnel_state_co: "Colorado",
       funnel_state_nv: "Nevada",
       creative_testing: "Prueba de creativos",
+      ad_builder: "Creador de anuncios",
+      ad_builder_stage1: "Etapa 1 — Imágenes",
+      ad_builder_stage2: "Etapa 2 — Ganchos",
+      ad_builder_stage3: "Etapa 3 — Texto",
+      ad_builder_guide_1:
+        "La etapa 1 prueba la imagen. Elija hasta 20 imágenes, un gancho y un texto, y luego Generar. Las palabras nuevas cubren la parte de abajo. El texto que ya está arriba en un anuncio guardado puede seguir viéndose; prefiera fotos, no tarjetas que son solo título.",
+      ad_builder_guide_2:
+        "La etapa 2 prueba el gancho. Elija una imagen, hasta 20 ganchos y hasta 20 textos. Generar hace una imagen por cada par de gancho y texto.",
+      ad_builder_guide_3:
+        "La etapa 3 prueba el texto debajo del gancho. Elija una imagen, un gancho y hasta 20 textos.",
+      ad_builder_diagram:
+        "Los 29 conceptos de anuncios estáticos siguen aquí. Cada imagen tiene un gancho, un cuerpo y una llamada a la acción. Combine dos o tres. Verde se puede probar. Ámbar solo si la línea es verdadera. Las otras marcas ámbar son ideas para conversar antes de usarlas.",
+      ad_builder_fit_use: "Probar",
+      ad_builder_fit_careful: "Solo si es verdad",
+      ad_builder_fit_discuss: "Por conversar",
+      ad_builder_fit_avoid: "Por conversar",
+      ad_builder_no_line: "Todavía no hay una línea guardada en este concepto.",
+      ad_builder_research:
+        "Notas publicadas en 2026, no un ranking de ventas. Cursos que enseñan esto: Insurance Funnels FE Facebook Bootcamp y Branning Group Facebook Ads Fast Track (kit de gastos finales).",
+      ad_builder_working:
+        "FexAds y Elevarus dicen que las líneas que todavía pasan son la edad, sin examen médico y una tarifa que no sube. Una persona real o una foto tranquila rinde más que un título de miedo. Gobierno, Medicare y un precio en el título se rechazan más.",
+      ad_builder_letter:
+        "Los anuncios que usted guardó usan un título muy grande, como el doble de la línea de abajo. Las tarjetas de precio son sans condensada, en mayúsculas. Las fotos de cremación usan una serif verde sobre crema.",
+      ad_builder_images: "Imágenes",
+      ad_builder_hooks: "Ganchos",
+      ad_builder_wordings: "Texto",
+      ad_builder_select: "Usar en la prueba",
+      ad_builder_selected: "Elegido",
+      ad_builder_generate: "Generar",
+      ad_builder_need_1: "La etapa 1 necesita de 1 a 20 imágenes, 1 gancho y 1 texto.",
+      ad_builder_need_2: "La etapa 2 necesita 1 imagen, de 1 a 20 ganchos y de 1 a 20 textos.",
+      ad_builder_need_3: "La etapa 3 necesita 1 imagen, 1 gancho y de 1 a 20 textos.",
+      ad_builder_saving: "Guardando las imágenes…",
+      ad_builder_saving_n: "Guardando {done} de {total}…",
+      ad_builder_saved: "Se guardaron {count} imágenes en {folder}. Elija esa carpeta en el escritorio si todavía no está ahí.",
+      ad_builder_save_failed: "No se guardó la carpeta. Use Chrome y elija una carpeta en el escritorio cuando se lo pida.",
       creative_guide:
         "La etapa 1 prueba la imagen. La etapa 2 prueba el gancho con la imagen ganadora. La etapa 3 prueba la información debajo de ese gancho. Los anuncios corren juntos y cada uno se apaga cerca de 2,000 impresiones. Conservar y Quitar eligen lo que pasa a la siguiente etapa. El costo por venta es muy bajo a 2,000 impresiones para elegir al ganador. Las cifras usan las fechas de arriba.",
       creative_campaigns: "Campañas",
@@ -1914,9 +1993,12 @@
       funnel_gsc_main_page_stats: "{clicks} clics · {impr} impr. · {ctr} CTR",
       funnel_gsc_group_picker: "Categoría de búsqueda",
       funnel_gsc_group_home: "Página principal",
+      funnel_gsc_group_state: "Páginas de estado",
       funnel_gsc_group_city: "Páginas de ciudad",
       funnel_gsc_group_blogs: "Blogs",
       funnel_gsc_group_home_hint: "Inicio en español — clics, impresiones, CTR y posición promedio",
+      funnel_gsc_group_state_hint:
+        "Todas las guías de estado en /estados/ — clics, impresiones, CTR y posición promedio juntos",
       funnel_gsc_group_city_hint:
         "Todas las guías de ciudad en /estados/ — clics, impresiones, CTR y posición promedio juntos",
       funnel_gsc_group_blogs_hint:
@@ -1942,6 +2024,10 @@
       funnel_gsc_city_impressions_daily: "Impresiones diarias de páginas de ciudad",
       funnel_gsc_city_ctr_daily: "CTR diario de páginas de ciudad",
       funnel_gsc_city_position_daily: "Posición promedio diaria de páginas de ciudad",
+      funnel_gsc_group_state_goal:
+        "Todas las páginas de estado juntas (Ohio, Nebraska, Kansas, Colorado, Nevada y el resto en /estados/).",
+      funnel_gsc_group_state_track_note:
+        "No incluye las páginas de ciudad como /estados/ohio/columbus.html ni las páginas en inglés /en/states/. Las cifras combinadas muestran si las páginas de estado, juntas, están ganando búsqueda.",
       funnel_gsc_group_city_goal: "Todas las páginas de ciudad juntas (Lincoln, Omaha, Denver, Las Vegas y el resto en /estados/).",
       funnel_gsc_group_city_track_note:
         "No incluye las páginas del estado como /estados/nebraska.html. Las cifras combinadas muestran si la estrategia de ciudades está funcionando, no qué ciudad gana.",

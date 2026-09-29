@@ -32,6 +32,10 @@
     geoCountryModalOpen: false,
     gscGroup: "home",
     creativeOpen: false,
+    adBuilderOpen: false,
+    adBuilderStage: 1,
+    adBuilderPicks: null,
+    adBuilderStatus: "",
     creativeCampaignId: "",
     creativeCampaignName: "",
     creativeAdsetId: "",
@@ -44,7 +48,7 @@
     creativeError: "",
   };
 
-  var GSC_PAGE_GROUP_IDS = ["home", "city", "blogs"];
+  var GSC_PAGE_GROUP_IDS = ["home", "state", "city", "blogs"];
 
   var PERIOD_PRESETS = [1, 7, 14, 30, 90];
   var SOURCE_CHANNELS = ["facebook", "google", "direct", "organic"];
@@ -2007,7 +2011,7 @@
     var crumb =
       '<div class="crm-creative-crumb">' +
       '<button type="button" data-creative-back="campaigns"' +
-      (state.creativeCampaignId ? "" : " disabled") +
+      (state.creativeCampaignId || state.adBuilderOpen ? "" : " disabled") +
       ">" +
       esc(t("creative_campaigns")) +
       "</button>";
@@ -2020,9 +2024,23 @@
     if (state.creativeAdsetId) {
       crumb += "<span>" + esc(state.creativeAdsetName || t("creative_ads")) + "</span>";
     }
-    crumb += "</div>";
+    crumb +=
+      '<button type="button" data-ad-builder' +
+      (state.adBuilderOpen ? ' class="is-on"' : "") +
+      ">" +
+      esc(t("ad_builder")) +
+      "</button></div>";
     var body = "";
-    if (state.creativeLoading) {
+    if (state.adBuilderOpen && window.MviAdBuilder) {
+      if (!state.adBuilderPicks) state.adBuilderPicks = window.MviAdBuilder.loadPicks();
+      body = window.MviAdBuilder.render({
+        stage: state.adBuilderStage,
+        picks: state.adBuilderPicks,
+        status: state.adBuilderStatus,
+        t: t,
+        esc: esc,
+      });
+    } else if (state.creativeLoading) {
       body = '<p class="crm-funnel-loading">' + esc(t("funnel_loading")) + "</p>";
     } else if (state.creativeError) {
       body = '<p class="crm-funnel-ad-metrics-note crm-funnel-error">' + esc(state.creativeError) + "</p>";
@@ -2145,6 +2163,7 @@
 
   function loadCreativeCampaigns(main) {
     state.creativeOpen = true;
+    state.adBuilderOpen = false;
     state.creativeCampaignId = "";
     state.creativeCampaignName = "";
     state.creativeAdsetId = "";
@@ -2442,6 +2461,7 @@
       creativeToggle.addEventListener("click", function () {
         if (state.creativeOpen) {
           state.creativeOpen = false;
+          state.adBuilderOpen = false;
           paint(main);
           wireEvents(main);
           return;
@@ -2477,6 +2497,71 @@
         saveCreativeDecision(main, btn.getAttribute("data-ad-id"), btn.getAttribute("data-creative-decision"));
       });
     });
+    var adBuilderBtn = main.querySelector("[data-ad-builder]");
+    if (adBuilderBtn) {
+      adBuilderBtn.addEventListener("click", function () {
+        state.adBuilderOpen = true;
+        state.adBuilderStatus = "";
+        if (window.MviAdBuilder && !state.adBuilderPicks) {
+          state.adBuilderPicks = window.MviAdBuilder.loadPicks();
+        }
+        paint(main);
+        wireEvents(main);
+      });
+    }
+    main.querySelectorAll("[data-adbuild-stage]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        state.adBuilderStage = Number(btn.getAttribute("data-adbuild-stage")) || 1;
+        state.adBuilderStatus = "";
+        paint(main);
+        wireEvents(main);
+      });
+    });
+    main.querySelectorAll("[data-adbuild-toggle]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        if (!window.MviAdBuilder) return;
+        if (!state.adBuilderPicks) state.adBuilderPicks = window.MviAdBuilder.loadPicks();
+        state.adBuilderPicks = window.MviAdBuilder.toggle(
+          state.adBuilderPicks,
+          btn.getAttribute("data-adbuild-toggle"),
+          btn.getAttribute("data-adbuild-id"),
+          state.adBuilderStage
+        );
+        window.MviAdBuilder.savePicks(state.adBuilderPicks);
+        state.adBuilderStatus = "";
+        paint(main);
+        wireEvents(main);
+      });
+    });
+    var generateBtn = main.querySelector("[data-adbuild-generate]");
+    if (generateBtn) {
+      generateBtn.addEventListener("click", function () {
+        if (!window.MviAdBuilder || generateBtn.disabled) return;
+        state.adBuilderStatus = t("ad_builder_saving");
+        paint(main);
+        wireEvents(main);
+        window.MviAdBuilder.generate(state.adBuilderPicks, state.adBuilderStage, function (done, total) {
+          state.adBuilderStatus = t("ad_builder_saving_n", { done: done, total: total });
+        })
+          .then(function (result) {
+            state.adBuilderStatus = t("ad_builder_saved", {
+              count: result.count,
+              folder: result.folder,
+            });
+            paint(main);
+            wireEvents(main);
+          })
+          .catch(function (err) {
+            if (err && err.name === "AbortError") {
+              state.adBuilderStatus = "";
+            } else {
+              state.adBuilderStatus = t("ad_builder_save_failed");
+            }
+            paint(main);
+            wireEvents(main);
+          });
+      });
+    }
 
     main.querySelectorAll("[data-funnel-source]").forEach(function (btn) {
       btn.addEventListener("click", function () {
