@@ -338,11 +338,78 @@
   color: var(--crm-text, #1a2b4a);
 }
 
-.crm-funnel-seo-stats span {
+.crm-funnel-seo-stats span,
+.crm-funnel-seo-stats em {
   display: block;
   margin-top: 2px;
   font-size: 0.72rem;
+  font-style: normal;
   color: var(--crm-muted, #64748b);
+}
+
+.crm-funnel-seo-stats em {
+  color: #1d4ed8;
+  font-weight: 600;
+}
+
+.crm-funnel-seo-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0 0 8px;
+}
+
+.crm-funnel-seo-bar-row {
+  display: grid;
+  grid-template-columns: minmax(8.5rem, 11rem) 1fr auto;
+  gap: 8px;
+  align-items: center;
+}
+
+.crm-funnel-seo-bar-label,
+.crm-funnel-seo-bar-value {
+  font-size: 0.75rem;
+  color: var(--crm-text, #1a2b4a);
+}
+
+.crm-funnel-seo-bar-value {
+  min-width: 4.5rem;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+.crm-funnel-seo-bar-track {
+  position: relative;
+  height: 10px;
+  background: #e8eef6;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.crm-funnel-seo-bar-fill {
+  display: block;
+  height: 100%;
+  background: #2563eb;
+  border-radius: 999px;
+}
+
+.crm-funnel-seo-bar-fill.is-page1 {
+  background: #15803d;
+}
+
+.crm-funnel-seo-bar-fill.is-deep {
+  background: #b45309;
+}
+
+.crm-funnel-seo-pos-chart .crm-funnel-seo-bar-track::after {
+  content: "";
+  position: absolute;
+  top: -3px;
+  bottom: -3px;
+  left: 18.9%;
+  width: 1px;
+  background: #15803d;
 }
 
 .crm-funnel-seo-table-wrap {

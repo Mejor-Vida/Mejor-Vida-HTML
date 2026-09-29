@@ -1648,6 +1648,33 @@
     return lang === "es" ? es : en;
   }
 
+  function seoBars(rows, max) {
+    return (
+      '<div class="crm-funnel-seo-bars">' +
+      rows
+        .map(function (row) {
+          var width = max > 0 ? Math.max(row.value > 0 ? 2 : 0, Math.min(100, (row.value / max) * 100)) : 0;
+          return (
+            '<div class="crm-funnel-seo-bar-row">' +
+            '<span class="crm-funnel-seo-bar-label">' +
+            esc(row.label) +
+            "</span>" +
+            '<span class="crm-funnel-seo-bar-track">' +
+            '<span class="crm-funnel-seo-bar-fill' +
+            (row.tone ? " is-" + row.tone : "") +
+            '" style="width:' +
+            width.toFixed(1) +
+            '%"></span></span>' +
+            '<span class="crm-funnel-seo-bar-value">' +
+            esc(row.valueText) +
+            "</span></div>"
+          );
+        })
+        .join("") +
+      "</div>"
+    );
+  }
+
   function seoTable(headers, rows) {
     return (
       '<div class="crm-funnel-seo-table-wrap"><table class="crm-funnel-seo-table"><thead><tr>' +
@@ -1704,16 +1731,20 @@
       '<div class="crm-funnel-seo-stats">' +
       '<div><strong>91</strong><span>' +
       h("Clicks, last 28 days", "Clics, últimos 28 días") +
-      "</span></div>" +
+      "</span><em>+379%</em></div>" +
       '<div><strong>19</strong><span>' +
       h("Clicks, prior 28 days", "Clics, 28 días anteriores") +
       "</span></div>" +
+      '<div><strong>0.83%</strong><span>' +
+      h("Click rate now", "Tasa de clics ahora") +
+      "</span><em>" +
+      h("was 0.39%", "antes 0.39%") +
+      "</em></div>" +
       '<div><strong>20.4</strong><span>' +
       h("Avg. position now", "Posición prom. ahora") +
-      "</span></div>" +
-      '<div><strong>30.3</strong><span>' +
-      h("Avg. position before", "Posición prom. antes") +
-      "</span></div></div>" +
+      "</span><em>" +
+      h("was 30.3", "antes 30.3") +
+      "</em></div></div>" +
       '<p class="crm-funnel-seo-note">' +
       h(
         "Google is ranking pages that answer one clear question: a policy lookup, a smoker article, a funeral-cost lesson, a carrier page. Searches that mean “quote me a life policy” still land on the homepage and the general cost page, around positions 46–53, with no clicks.",
@@ -1721,28 +1752,61 @@
       ) +
       "</p>" +
       "<h4>" +
-      h("Clicks and position by section", "Clics y posición por sección") +
+      h("Clicks by section", "Clics por sección") +
       "</h4>" +
-      seoTable(
-        [
-          seoText("Section", "Sección"),
-          seoText("Clicks", "Clics"),
-          seoText("Avg. position", "Posición prom."),
-        ],
-        [
-          [seoText("Product explainers", "Explicaciones de producto"), "18", "23.3"],
-          [seoText("Video lessons", "Lecciones en video"), "15", "12.6"],
-          [seoText("Price pages", "Páginas de precio"), "15", "25.7"],
-          [seoText("Policy lookup", "Búsqueda de póliza"), "14", "9.6"],
-          [seoText("Blogs", "Blogs"), "13", "13.9"],
-          [seoText("Carrier pages", "Páginas de aseguradoras"), "8", "12.9"],
-          [seoText("Homepage", "Inicio"), "4", "50.9"],
-          [seoText("State pages", "Páginas de estado"), "2", "8.5"],
-          [seoText("City pages", "Páginas de ciudad"), "1", "9.2"],
-          [seoText("Funeral directories", "Directorios funerarios"), "1", "13.3"],
-          [seoText("Quote tools", "Herramientas de cotización"), "0", "53.0"],
-        ]
+      '<p class="crm-funnel-seo-caption">' +
+      h(
+        "Organic clicks, Sep 1–28, 2026. The percent is that section’s share of 91 clicks.",
+        "Clics orgánicos, 1–28 sep 2026. El porcentaje es la parte de esa sección sobre 91 clics."
       ) +
+      "</p>" +
+      seoBars(
+        [
+          [seoText("Product explainers", "Explicaciones de producto"), 18, "18 · 20%"],
+          [seoText("Video lessons", "Lecciones en video"), 15, "15 · 16%"],
+          [seoText("Price pages", "Páginas de precio"), 15, "15 · 16%"],
+          [seoText("Policy lookup", "Búsqueda de póliza"), 14, "14 · 15%"],
+          [seoText("Blogs", "Blogs"), 13, "13 · 14%"],
+          [seoText("Carrier pages", "Páginas de aseguradoras"), 8, "8 · 9%"],
+          [seoText("Homepage", "Inicio"), 4, "4 · 4%"],
+          [seoText("State pages", "Páginas de estado"), 2, "2 · 2%"],
+          [seoText("City pages", "Páginas de ciudad"), 1, "1 · 1%"],
+          [seoText("Funeral directories", "Directorios funerarios"), 1, "1 · 1%"],
+          [seoText("Quote tools", "Herramientas de cotización"), 0, "0 · 0%"],
+        ].map(function (row) {
+          return { label: row[0], value: row[1], valueText: row[2], tone: "clicks" };
+        }),
+        18
+      ) +
+      "<h4>" +
+      h("Average position by section", "Posición promedio por sección") +
+      "</h4>" +
+      '<p class="crm-funnel-seo-caption">' +
+      h(
+        "Lower is closer to the top. The mark at 10 is the end of page 1. Sep 1–28, 2026.",
+        "Más bajo está más cerca del primer resultado. La marca en 10 es el final de la primera página. 1–28 sep 2026."
+      ) +
+      "</p>" +
+      '<div class="crm-funnel-seo-pos-chart">' +
+      seoBars(
+        [
+          [seoText("State pages", "Páginas de estado"), 8.5, "8.5"],
+          [seoText("City pages", "Páginas de ciudad"), 9.2, "9.2"],
+          [seoText("Policy lookup", "Búsqueda de póliza"), 9.6, "9.6"],
+          [seoText("Video lessons", "Lecciones en video"), 12.6, "12.6"],
+          [seoText("Carrier pages", "Páginas de aseguradoras"), 12.9, "12.9"],
+          [seoText("Funeral directories", "Directorios funerarios"), 13.3, "13.3"],
+          [seoText("Blogs", "Blogs"), 13.9, "13.9"],
+          [seoText("Product explainers", "Explicaciones de producto"), 23.3, "23.3"],
+          [seoText("Price pages", "Páginas de precio"), 25.7, "25.7"],
+          [seoText("Homepage", "Inicio"), 50.9, "50.9"],
+          [seoText("Quote tools", "Herramientas de cotización"), 53, "53.0"],
+        ].map(function (row) {
+          return { label: row[0], value: row[1], valueText: row[2], tone: row[1] <= 10 ? "page1" : "deep" };
+        }),
+        53
+      ) +
+      "</div>" +
       '<p class="crm-funnel-seo-caption">' +
       h(
         "A lower position is closer to the top. Page 1 ends at position 10. City pages are at 9.2 on 39 impressions. Ohio was submitted after this window.",
@@ -1831,8 +1895,25 @@
       "</h4>" +
       "<p>" +
       h(
-        "Several amount pages that were on page 1 in August fell off it in September. The $1,000,000 page moved up. Google is keeping one page in that cluster and dropping the near-duplicates.",
-        "Varias páginas por monto que estaban en la primera página en agosto se salieron en septiembre. La página de $1,000,000 subió. Google se queda con una página de ese grupo y baja las casi duplicadas."
+        "The August positions for $15,000, $25,000, and $75,000 came from 6 to 20 impressions. In September Google also showed those pages for the broad search “precio seguro vida,” around position 67, and those extra impressions pulled the average down. The $1,000,000 page had only 6 impressions in August. In September it had 70 impressions, position 5.8, and 3 clicks. The $100,000, $10,000, $20,000, and $40,000 pages stayed around positions 5 to 8.",
+        "Las posiciones de agosto para $15,000, $25,000 y $75,000 salieron de 6 a 20 impresiones. En septiembre Google también mostró esas páginas para la búsqueda amplia “precio seguro vida”, cerca de la posición 67, y esas impresiones extra bajaron el promedio. La página de $1,000,000 tuvo solo 6 impresiones en agosto. En septiembre tuvo 70 impresiones, posición 5.8 y 3 clics. Las páginas de $100,000, $10,000, $20,000 y $40,000 se quedaron cerca de las posiciones 5 a 8."
+      ) +
+      "</p>" +
+      seoBars(
+        [
+          ["$75,000", 50.5, "50.5"],
+          ["$15,000", 34.7, "34.7"],
+          ["$25,000", 24.8, "24.8"],
+          ["$1,000,000", 5.8, "5.8"],
+        ].map(function (row) {
+          return { label: row[0], value: row[1], valueText: row[2], tone: row[1] <= 10 ? "page1" : "deep" };
+        }),
+        50.5
+      ) +
+      '<p class="crm-funnel-seo-caption">' +
+      h(
+        "September average position. Lower is closer to the top.",
+        "Posición promedio de septiembre. Más bajo está más cerca del primer resultado."
       ) +
       "</p>" +
       seoTable(
