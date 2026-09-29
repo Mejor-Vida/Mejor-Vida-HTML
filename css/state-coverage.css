@@ -1288,6 +1288,22 @@
   object-position: center 40%;
 }
 
+.sc-hero--santa-fe .sc-hero-visual img {
+  object-position: center 22%;
+}
+
+.sc-hero--las-cruces .sc-hero-visual img {
+  object-position: center 62%;
+}
+
+.sc-hero--charleston .sc-hero-visual img {
+  object-position: center 28%;
+}
+
+.sc-hero--toledo .sc-hero-visual img {
+  object-position: center 32%;
+}
+
 .sc-hero--lincoln .sc-hero-visual img {
   object-position: 82% 38%;
 }

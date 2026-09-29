@@ -51,6 +51,17 @@
       fullCremation: 6095,
       directCremation: 1467,
     },
+    OH: {
+      code: "OH",
+      slug: "ohio",
+      nameEn: "Ohio",
+      nameEs: "Ohio",
+      sourceUrl: "https://www.funeralocity.com/average-funeral-price/oh",
+      fullBurial: 8018,
+      immediateBurial: 4949,
+      fullCremation: 5666,
+      directCremation: 2056,
+    },
   };
 
   var LICENSE = {
@@ -77,6 +88,12 @@
       typeEs: "Productora no residente",
       number: "4237259",
       pdf: "julie-license-nv.pdf",
+    },
+    OH: {
+      typeEn: "Non-resident producer",
+      typeEs: "Productora no residente",
+      number: "1777665",
+      pdf: "julie-license-oh.pdf?v=20260928-cert",
     },
   };
 

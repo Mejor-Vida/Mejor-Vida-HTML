@@ -37,6 +37,14 @@
       number: "4237259",
       pdf: "julie-license-nv.pdf",
     },
+    OH: {
+      nameEn: "Ohio",
+      nameEs: "Ohio",
+      typeEn: "Non-resident producer",
+      typeEs: "Productora no residente",
+      number: "1777665",
+      pdf: "julie-license-oh.pdf?v=20260928-cert",
+    },
   };
 
   function isEs() {

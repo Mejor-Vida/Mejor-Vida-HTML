@@ -4,6 +4,7 @@
  * scripts/city-guides/{slug}.js.
  */
 const { funeralHomeCompareNote } = require("../lib/company-compare-disclaimer");
+const AFTER_DEATH = require("./city-guides/after-death");
 
 function esc(s) {
   return String(s)
@@ -147,8 +148,10 @@ ${(cards || [])
 }
 
 function calcFields(lang, calc) {
-  const plotNew = money(calc.plotNew);
-  const plotResale = money(calc.plotResale);
+  const hasNew = calc.plotNew != null && calc.plotNew !== "";
+  const hasResale = calc.plotResale != null && calc.plotResale !== "";
+  const plotNew = hasNew ? money(calc.plotNew) : "";
+  const plotResale = hasResale ? money(calc.plotResale) : "";
   const vault = money(calc.vault);
   const casket = money(calc.casketTypical);
   if (lang === "es") {
@@ -170,7 +173,9 @@ function calcFields(lang, calc) {
       home: "Funeraria",
       plot: "Lote del cementerio",
       plotNone: "Sin lote (cremación, o ya tiene espacio)",
-      plotNew: `Nuevo, oficina del cementerio (unos ${plotNew})`,
+      showPlotNew: hasNew,
+      showPlotResale: hasResale,
+      plotNew: calc.plotNewLabelEs || `Nuevo, oficina del cementerio (unos ${plotNew})`,
       plotResale: `Reventa de un particular (unos ${plotResale})`,
       vault: `Sumar una bóveda típica (${vault})`,
       vaultWhy:
@@ -201,10 +206,12 @@ function calcFields(lang, calc) {
     immediate: "Immediate burial",
     traditional: "Traditional funeral with visitation",
     home: "Funeral home",
-    plot: "Cemetery plot",
-    plotNone: "No plot (cremation, or you already have a space)",
-    plotNew: `New, from the cemetery office (about ${plotNew})`,
-    plotResale: `Private-party resale (about ${plotResale})`,
+      plot: "Cemetery plot",
+      plotNone: "No plot (cremation, or you already have a space)",
+      showPlotNew: hasNew,
+      showPlotResale: hasResale,
+      plotNew: calc.plotNewLabelEn || `New, from the cemetery office (about ${plotNew})`,
+      plotResale: `Private-party resale (about ${plotResale})`,
     vault: `Add a typical vault (${vault})`,
     vaultWhy:
       "Most cemeteries require a vault for a burial in the ground: a concrete or plastic box around the casket so the grave does not sink as the casket settles. It is almost never in the funeral-home package.",
@@ -301,8 +308,8 @@ ${homes}
               <label for="city-plot">${esc(L.plot)}</label>
               <select id="city-plot" name="plot">
                 <option value="none">${esc(L.plotNone)}</option>
-                <option value="new">${esc(L.plotNew)}</option>
-                <option value="resale">${esc(L.plotResale)}</option>
+                ${L.showPlotNew ? `<option value="new">${esc(L.plotNew)}</option>` : ""}
+                ${L.showPlotResale ? `<option value="resale">${esc(L.plotResale)}</option>` : ""}
               </select>
             </div>
             <div class="sc-calc-field">
@@ -347,6 +354,97 @@ ${homes}
       </div>
     </form>
     <script type="application/json" id="city-guide-config">${JSON.stringify(config)}</script>`;
+}
+
+function afterDeathSection(lang, city) {
+  const rec = AFTER_DEATH[city.stateCode];
+  if (!rec) return "";
+  const es = lang === "es";
+  const id = es ? "despues" : "after-a-death";
+  const shops = (city.guide && city.guide.monuments) || [];
+  const note = es ? city.guide.monumentNoteEs : city.guide.monumentNoteEn;
+  const shopItems = shops
+    .map((s) => {
+      const name = esc(s.name);
+      const label = s.href
+        ? `<a href="${esc(s.href)}" rel="noopener" target="_blank">${name}</a>`
+        : name;
+      return `      <li class="mb-2">${label}. ${esc(s.addr || "")}</li>`;
+    })
+    .join("\n");
+  const shopBlock = shops.length
+    ? es
+      ? `<p class="text-body-secondary mb-3">Estas casas publican un local. No es la lista completa y no es un ranking.</p>
+    <ul class="text-body-secondary ps-3 mb-4">
+${shopItems}
+    </ul>`
+      : `<p class="text-body-secondary mb-3">These companies publish a showroom. This is not every monument company, and it is not a ranking.</p>
+    <ul class="text-body-secondary ps-3 mb-4">
+${shopItems}
+    </ul>`
+    : es
+      ? `<p class="text-body-secondary mb-4">Pida al cementerio de arriba el reglamento del marcador y la tarifa de colocación. Esta página no nombra una casa de monumentos si esa casa no publica su dirección.</p>`
+      : `<p class="text-body-secondary mb-4">Ask the cemetery offices above for the marker rules and the setting fee. This page does not name a monument company unless that company publishes its own address.</p>`;
+  const defaultNote = es
+    ? "La lápida, el marcador al ras o un monumento se compran aparte del funeral y del lote. El cementerio tiene que aprobar el tamaño y el material, y cobra por colocarlo. El Departamento de Asuntos de Veteranos puede dar un marcador si la persona era veterana."
+    : "A headstone, a flush marker, or another monument is bought separately from the funeral and from the plot. The cemetery has to approve the size and material, and it charges to set the stone. The Department of Veterans Affairs may provide a marker if the person was a veteran.";
+  return `
+<section class="py-5 bg-white border-bottom" id="${id}">
+  <div class="container sc-city-prose sc-city-prose--wide">
+    <h2 class="h4 fw-bold mb-3" style="color:#1a365d;">${
+      es ? "Qué más hay que arreglar después de la muerte" : "What else to arrange after a death"
+    }</h2>
+    <p class="text-body-secondary mb-4">${
+      es
+        ? "El paquete de la funeraria no incluye la lápida, el certificado de defunción ni los trámites de Seguro Social."
+        : "The funeral-home package does not include the grave marker, the death certificate copies, or the Social Security paperwork."
+    }</p>
+
+    <h3 class="h5 fw-bold mb-3" style="color:#1a365d;">${
+      es ? "Dónde comprar una lápida o un monumento" : "Where to buy a headstone or other monument"
+    }</h3>
+    <p class="text-body-secondary mb-3">${note || defaultNote}</p>
+    ${shopBlock}
+
+    <h3 class="h5 fw-bold mb-3" style="color:#1a365d;">${
+      es ? "Certificado de defunción" : "Death certificate"
+    }</h3>
+    <p class="text-body-secondary mb-4">${es ? rec.detailEs : rec.detailEn} <a href="${esc(
+      rec.url
+    )}" rel="noopener" target="_blank">${esc(es ? rec.officeEs : rec.officeEn)}</a>.</p>
+
+    <h3 class="h5 fw-bold mb-3" style="color:#1a365d;">${
+      es ? "Seguro Social" : "Social Security"
+    }</h3>
+    <p class="text-body-secondary mb-4">${
+      es
+        ? "La funeraria suele avisar la muerte al Seguro Social. Si no lo hace, llame al 1-800-772-1213 (TTY 1-800-325-0778). Un cónyuge puede recibir un pago único de $255. Si no hay cónyuge, algunos hijos pueden calificar. Hay beneficios mensuales para ciertos familiares. El Seguro Social no paga el mes de la muerte: hay que devolver el pago de ese mes. <a href=\"https://www.ssa.gov/personal-record/when-someone-dies\" rel=\"noopener\" target=\"_blank\">Qué hacer cuando alguien muere</a>."
+        : "The funeral home usually reports the death to Social Security. If it does not, call 1-800-772-1213 (TTY 1-800-325-0778). A spouse may get a one-time payment of $255. If there is no spouse, some children may qualify. Monthly survivor benefits are available for certain family members. Social Security does not pay the benefit for the month of death, so that payment has to be returned. <a href=\"https://www.ssa.gov/personal-record/when-someone-dies\" rel=\"noopener\" target=\"_blank\">What to do when someone dies</a>."
+    }</p>
+
+    <h3 class="h5 fw-bold mb-3" style="color:#1a365d;">${
+      es ? "Veteranos, el seguro y el juzgado" : "Veterans, the insurance, and the court"
+    }</h3>
+    <ul class="text-body-secondary ps-3 mb-0">
+      <li class="mb-2">${
+        es
+          ? "Si la persona era veterana, el Departamento de Asuntos de Veteranos puede ayudar con el entierro y con un marcador. Empiece en <a href=\"https://www.va.gov/burials-memorials/\" rel=\"noopener\" target=\"_blank\">entierros y memoriales de VA</a>."
+          : "If the person was a veteran, the Department of Veterans Affairs can help with the burial and with a marker. Start at <a href=\"https://www.va.gov/burials-memorials/\" rel=\"noopener\" target=\"_blank\">VA burials and memorials</a>."
+      }</li>
+      <li class="mb-2">${
+        es
+          ? "El beneficiario de un seguro de vida pide el pago con una copia certificada del certificado de defunción. El cheque del seguro de gastos finales no está atado a una funeraria."
+          : "A life insurance beneficiary files the claim with a certified death certificate. A final expense check is not tied to one funeral home."
+      }</li>
+      <li class="mb-2">${
+        es
+          ? "El tribunal de sucesiones del condado donde vivía la persona tramita el testamento y la herencia. El banco y ese tribunal piden copias certificadas."
+          : "The probate court in the county where the person lived handles the will and the estate. The bank and that court ask for certified copies."
+      }</li>
+    </ul>
+  </div>
+</section>
+`;
 }
 
 function guideMain(lang, city, ctx) {
@@ -475,7 +573,7 @@ ${(offices || []).map((o) => `      <li class="mb-2">${o}</li>`).join("\n")}
     </div>
   </div>
 </section>
-
+${afterDeathSection("es", city)}
 <section class="py-5 bg-white border-bottom" id="${ids.calc}">
   <div class="container sc-city-prose sc-city-prose--wide">
     <h2 class="h4 fw-bold mb-3" style="color:#1a365d;">Calcule el funeral, la cobertura y la prima</h2>
@@ -577,7 +675,7 @@ ${(offices || []).map((o) => `      <li class="mb-2">${o}</li>`).join("\n")}
     </div>
   </div>
 </section>
-
+${afterDeathSection("en", city)}
 <section class="py-5 bg-white border-bottom" id="${ids.calc}">
   <div class="container sc-city-prose sc-city-prose--wide">
     <h2 class="h4 fw-bold mb-3" style="color:#1a365d;">Estimate the funeral, the coverage, and the premium</h2>

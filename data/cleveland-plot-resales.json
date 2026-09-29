@@ -1,0 +1,47 @@
+{
+  "city": "cleveland",
+  "checked": "2026-09-28",
+  "checkedLabelEs": "28 sep. 2026",
+  "checkedLabelEn": "28 Sep 2026",
+  "noteEs": "Anuncios de particulares. No son precios de Mejor Vida Seguros ni la lista oficial del cementerio. La oficina debe transferir la escritura. Revise si el anuncio sigue activo.",
+  "noteEn": "Private-party ads. These are not Mejor Vida Insurance prices or the cemetery’s official list. The office must transfer the deed. Check that the listing is still active.",
+  "boards": [
+    {
+      "id": "grave-solutions",
+      "name": "Grave Solutions",
+      "url": "https://www.gravesolutions.com/for-sale/cemetery-properties/ohio",
+      "labelEs": "Tablero en vivo · Ohio",
+      "labelEn": "Live board · Ohio"
+    }
+  ],
+  "cemeterySignals": [
+    {
+      "cemetery": "City of Cleveland cemeteries",
+      "citedListLow": 743,
+      "citedListHigh": 873,
+      "typical": 743,
+      "phone": "",
+      "noteEs": "Tarifa de la ciudad: $743 marcador al ras y $873 marcador elevado. West Park Cemetery, Cleveland Memorial Gardens y la oficina de Highland Park.",
+      "noteEn": "City fee: $743 flush marker and $873 raised marker. West Park Cemetery, Cleveland Memorial Gardens, and the Highland Park office."
+    },
+    {
+      "cemetery": "Lake View Cemetery",
+      "citedListLow": 2195,
+      "citedListHigh": null,
+      "typical": 2195,
+      "phone": "216-421-2665",
+      "noteEs": "Lote estándar en tierra desde $2,195. Abrir y cerrar: $1,795 a $3,295. 12316 Euclid Ave.",
+      "noteEn": "Standard in-ground lot from $2,195. Opening and closing: $1,795 to $3,295. 12316 Euclid Ave."
+    },
+    {
+      "cemetery": "Lakewood Park Cemetery",
+      "citedListLow": 3000,
+      "citedListHigh": 3000,
+      "typical": 3000,
+      "phone": "440-333-1922",
+      "noteEs": "Tumba completa $3,000, secciones 1 a 18. Tumba de cremación $2,000. Lista vigente el 1 de septiembre de 2023. Rocky River.",
+      "noteEn": "Full grave $3,000, sections 1 through 18. Cremation grave $2,000. List effective September 1, 2023. Rocky River."
+    }
+  ],
+  "listings": []
+}

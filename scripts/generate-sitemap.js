@@ -123,6 +123,13 @@ const STATIC_PAGES = [
   { loc: "/estados/nevada/reno.html", priority: "0.86" },
   { loc: "/estados/nevada/sparks.html", priority: "0.86" },
   { loc: "/estados/nevada/carson-city.html", priority: "0.86" },
+  { loc: "/estados/ohio.html", priority: "0.84" },
+  { loc: "/estados/ohio/columbus.html", priority: "0.86" },
+  { loc: "/estados/ohio/cleveland.html", priority: "0.86" },
+  { loc: "/estados/ohio/cincinnati.html", priority: "0.86" },
+  { loc: "/estados/ohio/toledo.html", priority: "0.86" },
+  { loc: "/estados/ohio/akron.html", priority: "0.86" },
+  { loc: "/estados/ohio/dayton.html", priority: "0.86" },
 ];
 
 /** Standalone July articles redirect to the weekly digest — omit from sitemap. */
