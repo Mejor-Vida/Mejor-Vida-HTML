@@ -48,7 +48,7 @@
     creativeError: "",
   };
 
-  var GSC_PAGE_GROUP_IDS = ["home", "state", "city", "blogs"];
+  var GSC_PAGE_GROUP_IDS = ["home", "state", "city", "blogs", "video"];
 
   var PERIOD_PRESETS = [1, 7, 14, 30, 90];
   var SOURCE_CHANNELS = ["facebook", "google", "direct", "organic"];

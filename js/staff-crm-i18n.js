@@ -401,6 +401,7 @@
       funnel_gsc_group_state: "State pages",
       funnel_gsc_group_city: "City pages",
       funnel_gsc_group_blogs: "Blogs",
+      funnel_gsc_group_video: "Video pages",
       funnel_gsc_group_home_hint: "Spanish homepage — clicks, impressions, CTR, and average position",
       funnel_gsc_group_state_hint:
         "All Spanish state guides under /estados/ — combined clicks, impressions, CTR, and average position",
@@ -408,6 +409,8 @@
         "All Spanish city guides under /estados/ — combined clicks, impressions, CTR, and average position",
       funnel_gsc_group_blogs_hint:
         "All Spanish blog pages under /blog — combined clicks, impressions, CTR, and average position",
+      funnel_gsc_group_video_hint:
+        "The four Spanish pages with an embedded YouTube lesson — combined clicks, impressions, CTR, and average position",
       funnel_gsc_group_clicks_daily: "{group} daily clicks",
       funnel_gsc_group_impressions_daily: "{group} daily impressions",
       funnel_gsc_group_ctr_daily: "{group} daily CTR",
@@ -439,6 +442,10 @@
       funnel_gsc_group_blogs_goal: "All Spanish blog articles and the blog hub together.",
       funnel_gsc_group_blogs_track_note:
         "English /en/blog pages are not included. Combined numbers show whether the blogs as a group are earning search, and whether that is getting better or worse.",
+      funnel_gsc_group_video_goal:
+        "The four lesson pages together: funeral cost, prepaid funerals, how a funeral is paid, and life insurance for other relatives.",
+      funnel_gsc_group_video_track_note:
+        "Only /cuanto-cuesta-un-funeral.html, /funerales-prepagados.html, /como-pagar-un-funeral.html, and /seguro-vida-familiares.html. The English copies of those lessons are not included.",
       funnel_gsc_city_goal: "All city teaching pages together (Lincoln, Omaha, Denver, Las Vegas, and the rest under /estados/).",
       funnel_gsc_city_track_note:
         "State hub pages such as /estados/nebraska.html are not included. Combined numbers show whether the city-page strategy is earning search, not which city is winning.",
@@ -1996,6 +2003,7 @@
       funnel_gsc_group_state: "Páginas de estado",
       funnel_gsc_group_city: "Páginas de ciudad",
       funnel_gsc_group_blogs: "Blogs",
+      funnel_gsc_group_video: "Páginas de video",
       funnel_gsc_group_home_hint: "Inicio en español — clics, impresiones, CTR y posición promedio",
       funnel_gsc_group_state_hint:
         "Todas las guías de estado en /estados/ — clics, impresiones, CTR y posición promedio juntos",
@@ -2003,6 +2011,8 @@
         "Todas las guías de ciudad en /estados/ — clics, impresiones, CTR y posición promedio juntos",
       funnel_gsc_group_blogs_hint:
         "Todas las páginas de blog en /blog — clics, impresiones, CTR y posición promedio juntos",
+      funnel_gsc_group_video_hint:
+        "Las cuatro páginas en español con un video de YouTube — clics, impresiones, CTR y posición promedio juntos",
       funnel_gsc_group_clicks_daily: "Clics diarios de {group}",
       funnel_gsc_group_impressions_daily: "Impresiones diarias de {group}",
       funnel_gsc_group_ctr_daily: "CTR diario de {group}",
@@ -2034,6 +2044,10 @@
       funnel_gsc_group_blogs_goal: "Todos los artículos del blog en español y la página del blog juntos.",
       funnel_gsc_group_blogs_track_note:
         "No incluye /en/blog. Las cifras combinadas muestran si los blogs en conjunto están ganando búsqueda, y si eso mejora o empeora.",
+      funnel_gsc_group_video_goal:
+        "Las cuatro lecciones juntas: costo del funeral, funerales prepagados, cómo se paga un funeral y seguro de vida para otros familiares.",
+      funnel_gsc_group_video_track_note:
+        "Solo /cuanto-cuesta-un-funeral.html, /funerales-prepagados.html, /como-pagar-un-funeral.html y /seguro-vida-familiares.html. Las copias en inglés de esas lecciones no van incluidas.",
       funnel_gsc_city_goal: "Todas las páginas de ciudad juntas (Lincoln, Omaha, Denver, Las Vegas y el resto en /estados/).",
       funnel_gsc_city_track_note:
         "No incluye las páginas del estado como /estados/nebraska.html. Las cifras combinadas muestran si la estrategia de ciudades está funcionando, no qué ciudad gana.",
