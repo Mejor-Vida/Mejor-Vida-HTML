@@ -1141,6 +1141,11 @@
         '<span class="crm-funnel-ad-metric-label">' + esc(t("funnel_gsc_position")) + "</span>" +
         '<strong class="crm-funnel-ad-metric-value">' + esc(fmtPosition(metrics.position)) + "</strong>" +
         '<span class="crm-funnel-ad-metric-hint">' + esc(t("funnel_ad_chart_hint")) + "</span></button>";
+      html +=
+        '<button type="button" class="crm-funnel-ad-metric crm-funnel-ad-metric--clickable' +
+        (state.adChartMetric === "seo_ranking" ? " is-active" : "") +
+        '" data-funnel-ad-chart="seo_ranking">' +
+        '<span class="crm-funnel-ad-metric-label">' + esc(t("funnel_gsc_seo_ranking")) + "</span></button>";
       html += "</div>";
       html += renderGscGroupBar(metrics);
 
@@ -1638,8 +1643,230 @@
     );
   }
 
+  function seoText(en, es) {
+    var lang = window.StaffCrmI18n && window.StaffCrmI18n.getLang ? window.StaffCrmI18n.getLang() : "en";
+    return lang === "es" ? es : en;
+  }
+
+  function seoTable(headers, rows) {
+    return (
+      '<div class="crm-funnel-seo-table-wrap"><table class="crm-funnel-seo-table"><thead><tr>' +
+      headers
+        .map(function (h) {
+          return "<th>" + esc(h) + "</th>";
+        })
+        .join("") +
+      "</tr></thead><tbody>" +
+      rows
+        .map(function (row) {
+          return (
+            "<tr>" +
+            row
+              .map(function (cell) {
+                return "<td>" + esc(cell) + "</td>";
+              })
+              .join("") +
+            "</tr>"
+          );
+        })
+        .join("") +
+      "</tbody></table></div>"
+    );
+  }
+
+  function renderSeoRankingModal() {
+    var h = function (en, es) {
+      return esc(seoText(en, es));
+    };
+    return (
+      '<div class="crm-funnel-ad-modal-backdrop" data-funnel-ad-modal-backdrop>' +
+      '<div class="crm-funnel-ad-modal crm-funnel-ad-modal--seo" role="dialog" aria-labelledby="crm-funnel-ad-modal-title">' +
+      '<div class="crm-funnel-ad-modal-head">' +
+      '<div><h3 id="crm-funnel-ad-modal-title">' +
+      h("What is moving search ranking", "Qué está moviendo el ranking") +
+      "</h3>" +
+      '<p class="crm-funnel-ad-modal-sub">' +
+      h(
+        "Google Search Console · Sep 1–28, 2026 vs Aug 4–31, 2026",
+        "Google Search Console · 1–28 sep 2026 frente a 4–31 ago 2026"
+      ) +
+      "</p></div>" +
+      '<button type="button" class="crm-funnel-ad-modal-close" data-funnel-ad-modal-close aria-label="' +
+      esc(t("funnel_close")) +
+      '">×</button></div>' +
+      '<div class="crm-funnel-ad-modal-body crm-funnel-seo-body">' +
+      "<p>" +
+      h(
+        "Search clicks rose from 19 to 91, and the average position moved from 30.3 to 20.4. Specific Spanish answers are earning the visits. The homepage and the quote searches are still around position 50.",
+        "Los clics de búsqueda subieron de 19 a 91, y la posición promedio pasó de 30.3 a 20.4. Las respuestas concretas en español están ganando las visitas. El inicio y las búsquedas de cotización siguen cerca de la posición 50."
+      ) +
+      "</p>" +
+      '<div class="crm-funnel-seo-stats">' +
+      '<div><strong>91</strong><span>' +
+      h("Clicks, last 28 days", "Clics, últimos 28 días") +
+      "</span></div>" +
+      '<div><strong>19</strong><span>' +
+      h("Clicks, prior 28 days", "Clics, 28 días anteriores") +
+      "</span></div>" +
+      '<div><strong>20.4</strong><span>' +
+      h("Avg. position now", "Posición prom. ahora") +
+      "</span></div>" +
+      '<div><strong>30.3</strong><span>' +
+      h("Avg. position before", "Posición prom. antes") +
+      "</span></div></div>" +
+      '<p class="crm-funnel-seo-note">' +
+      h(
+        "Google is ranking pages that answer one clear question: a policy lookup, a smoker article, a funeral-cost lesson, a carrier page. Searches that mean “quote me a life policy” still land on the homepage and the general cost page, around positions 46–53, with no clicks.",
+        "Google está posicionando páginas que responden una pregunta clara: buscar una póliza, un artículo de fumadores, una lección del costo del funeral, una página de aseguradora. Las búsquedas de “cotízame un seguro de vida” siguen cayendo en el inicio y en la página general de costo, cerca de las posiciones 46–53, sin clics."
+      ) +
+      "</p>" +
+      "<h4>" +
+      h("Clicks and position by section", "Clics y posición por sección") +
+      "</h4>" +
+      seoTable(
+        [
+          seoText("Section", "Sección"),
+          seoText("Clicks", "Clics"),
+          seoText("Avg. position", "Posición prom."),
+        ],
+        [
+          [seoText("Product explainers", "Explicaciones de producto"), "18", "23.3"],
+          [seoText("Video lessons", "Lecciones en video"), "15", "12.6"],
+          [seoText("Price pages", "Páginas de precio"), "15", "25.7"],
+          [seoText("Policy lookup", "Búsqueda de póliza"), "14", "9.6"],
+          [seoText("Blogs", "Blogs"), "13", "13.9"],
+          [seoText("Carrier pages", "Páginas de aseguradoras"), "8", "12.9"],
+          [seoText("Homepage", "Inicio"), "4", "50.9"],
+          [seoText("State pages", "Páginas de estado"), "2", "8.5"],
+          [seoText("City pages", "Páginas de ciudad"), "1", "9.2"],
+          [seoText("Funeral directories", "Directorios funerarios"), "1", "13.3"],
+          [seoText("Quote tools", "Herramientas de cotización"), "0", "53.0"],
+        ]
+      ) +
+      '<p class="crm-funnel-seo-caption">' +
+      h(
+        "A lower position is closer to the top. Page 1 ends at position 10. City pages are at 9.2 on 39 impressions. Ohio was submitted after this window.",
+        "Una posición más baja está más cerca del primer resultado. La primera página termina en la posición 10. Las páginas de ciudad están en 9.2 con 39 impresiones. Ohio se envió después de este periodo."
+      ) +
+      "</p>" +
+      "<h4>" +
+      h("Pages that are helping", "Páginas que están ayudando") +
+      "</h4>" +
+      "<p>" +
+      h(
+        "The smoker article is the clearest win: “seguro de vida para fumadores” has 8 clicks, an 11% click rate, and position 7.8.",
+        "El artículo de fumadores es la señal más clara: “seguro de vida para fumadores” tiene 8 clics, 11% de clics y posición 7.8."
+      ) +
+      "</p>" +
+      seoTable(
+        [
+          seoText("Page", "Página"),
+          seoText("Clicks", "Clics"),
+          seoText("Impressions", "Impresiones"),
+          "CTR",
+          seoText("Position", "Posición"),
+          seoText("Prior position", "Posición anterior"),
+        ],
+        [
+          ["/buscar-poliza-vida.html", "14", "514", "2.7%", "9.6", "9.9"],
+          ["/blog/seguro-gastos-finales-fumadores.html", "8", "150", "5.3%", "7.6", seoText("New", "Nueva")],
+          ["/cuanto-cuesta-un-funeral.html", "6", "1,718", "0.35%", "13.3", seoText("New", "Nueva")],
+          ["/seguro-vida-familiares.html", "6", "263", "2.3%", "8.1", "8.3"],
+          ["/carriers/americo.html", "3", "151", "2.0%", "7.3", "22"],
+          ["/costo-seguro-vida-1000000.html", "3", "70", "4.3%", "5.8", "28"],
+          ["/estados/colorado.html", "1", "34", "2.9%", "5.0", "40.5"],
+        ]
+      ) +
+      "<h4>" +
+      h("Phones rank higher than desktops", "Los teléfonos rankean más alto que las computadoras") +
+      "</h4>" +
+      seoTable(
+        [
+          seoText("Device", "Dispositivo"),
+          seoText("Clicks", "Clics"),
+          seoText("Impressions", "Impresiones"),
+          "CTR",
+          seoText("Avg. position", "Posición prom."),
+        ],
+        [
+          [seoText("Mobile", "Móvil"), "60", "5,035", "1.19%", "11.0"],
+          [seoText("Desktop", "Computadora"), "30", "5,469", "0.55%", "26.7"],
+          [seoText("Tablet", "Tableta"), "0", "72", "0%", "9.2"],
+        ]
+      ) +
+      "<h4>" +
+      h("What is holding the average down", "Qué está bajando el promedio") +
+      "</h4>" +
+      "<p>" +
+      h(
+        "These pages are being shown, and almost nobody clicks them. The homepage has 623 impressions at position 50.9. Its searches include “cotizar seguro de vida” (position 46) and “contratar seguro de vida online” (position 60).",
+        "Estas páginas se muestran, y casi nadie hace clic. El inicio tiene 623 impresiones en la posición 50.9. Sus búsquedas incluyen “cotizar seguro de vida” (posición 46) y “contratar seguro de vida online” (posición 60)."
+      ) +
+      "</p>" +
+      seoTable(
+        [
+          seoText("Page", "Página"),
+          seoText("Clicks", "Clics"),
+          seoText("Impressions", "Impresiones"),
+          seoText("Position", "Posición"),
+          seoText("What Google is matching", "Qué está emparejando Google"),
+        ],
+        [
+          [
+            "/cuanto-cuesta-un-funeral.html",
+            "6",
+            "1,718",
+            "13.3",
+            seoText("Funeral and cremation prices. 0.35% CTR.", "Precios de funeral y cremación. 0.35% de clics."),
+          ],
+          ["/", "4", "623", "50.9", seoText("Quote and “best life insurance” searches.", "Cotización y “mejor seguro de vida”.")],
+          ["/costo-seguro-vida.html", "0", "203", "52.3", seoText("“Cuanto cuesta un seguro de vida.”", "“Cuanto cuesta un seguro de vida.”")],
+          ["/seguro-vida-temporal.html", "0", "237", "36.2", seoText("Term life, still deep.", "Seguro temporal, todavía lejos.")],
+          ["/seguro-gastos-finales.html", "0", "135", "52.2", seoText("The main final-expense page.", "La página principal de gastos finales.")],
+          ["/quote.html", "0", "48", "57.9", seoText("Was 37.7 last month.", "Estaba en 37.7 el mes pasado.")],
+        ]
+      ) +
+      "<h4>" +
+      h("Lookalike price pages that slipped", "Páginas de precio parecidas que bajaron") +
+      "</h4>" +
+      "<p>" +
+      h(
+        "Several amount pages that were on page 1 in August fell off it in September. The $1,000,000 page moved up. Google is keeping one page in that cluster and dropping the near-duplicates.",
+        "Varias páginas por monto que estaban en la primera página en agosto se salieron en septiembre. La página de $1,000,000 subió. Google se queda con una página de ese grupo y baja las casi duplicadas."
+      ) +
+      "</p>" +
+      seoTable(
+        [
+          seoText("Page", "Página"),
+          seoText("August position", "Posición en agosto"),
+          seoText("September position", "Posición en septiembre"),
+          seoText("September impressions", "Impresiones en septiembre"),
+        ],
+        [
+          ["/costo-seguro-vida-75000.html", "8.5", "50.5", "25"],
+          ["/costo-seguro-vida-15000.html", "5.0", "34.7", "21"],
+          ["/costo-seguro-vida-25000.html", "5.2", "24.8", "38"],
+          ["/costo-seguro-vida-1000000.html", "28", "5.8", "70"],
+        ]
+      ) +
+      '<p class="crm-funnel-seo-note">' +
+      h(
+        "47 funeral-home directory pages picked up 201 impressions and 1 click, often for a funeral home’s own name. Burwell, Nebraska, is at position 7.3 with 112 impressions and no clicks.",
+        "47 páginas del directorio de funerarias recibieron 201 impresiones y 1 clic, a menudo por el nombre de la funeraria. Burwell, Nebraska, está en la posición 7.3 con 112 impresiones y ningún clic."
+      ) +
+      "</p>" +
+      '<p class="crm-funnel-seo-caption">' +
+      h(
+        "The sitemap was downloaded again on Sep 29, 2026: 178 web URLs and 4 video URLs, with 0 errors. 211 URLs already have impressions in this window. No search in this window was for the agency name.",
+        "El mapa del sitio se volvió a descargar el 29 sep 2026: 178 URLs web y 4 URLs de video, con 0 errores. 211 URLs ya tienen impresiones en este periodo. Ninguna búsqueda de este periodo fue por el nombre de la agencia."
+      ) +
+      "</p></div></div></div>"
+    );
+  }
+
   function AdChartModal() {
     if (!state.adChartMetric) return "";
+    if (state.adChartMetric === "seo_ranking") return renderSeoRankingModal();
     var metric = state.adChartMetric;
     var scope = gscChartScope(metric);
     var qualityTitleKey = {
@@ -2305,6 +2532,16 @@
   }
 
   function loadAdChart(main, metric) {
+    if (metric === "seo_ranking") {
+      closeGeoClicks(main, { skipPaint: true });
+      state.adChartMetric = "seo_ranking";
+      state.adChartLoading = false;
+      state.adChartError = null;
+      state.adChartData = null;
+      paint(main);
+      wireEvents(main);
+      return Promise.resolve();
+    }
     closeGeoClicks(main, { skipPaint: true });
     var scope = gscChartScope(metric);
     if (

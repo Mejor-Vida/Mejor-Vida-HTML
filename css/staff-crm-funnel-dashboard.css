@@ -283,10 +283,100 @@
   transition: border-color 0.15s, box-shadow 0.15s;
 }
 
-.crm-funnel-ad-metric--clickable:hover {
+.crm-funnel-ad-metric--clickable:hover,
+.crm-funnel-ad-metric--clickable.is-active {
   border-color: var(--crm-primary, #2563eb);
   box-shadow: 0 1px 4px rgba(37, 99, 235, 0.12);
 }
+
+.crm-funnel-ad-modal--seo {
+  width: min(980px, 96vw);
+}
+
+.crm-funnel-seo-body h4 {
+  margin: 18px 0 8px;
+  font-size: 0.95rem;
+  color: var(--crm-text, #1a2b4a);
+}
+
+.crm-funnel-seo-body p {
+  margin: 0 0 10px;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  color: var(--crm-text, #1a2b4a);
+}
+
+.crm-funnel-seo-note {
+  padding: 10px 12px;
+  background: #f8fafc;
+  border: 1px solid var(--crm-border, #dbe3ef);
+  border-radius: 10px;
+}
+
+.crm-funnel-seo-caption {
+  color: var(--crm-muted, #64748b) !important;
+  font-size: 0.78rem !important;
+}
+
+.crm-funnel-seo-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  margin: 0 0 12px;
+}
+
+.crm-funnel-seo-stats div {
+  padding: 8px 10px;
+  background: #f8fafc;
+  border: 1px solid var(--crm-border, #dbe3ef);
+  border-radius: 10px;
+}
+
+.crm-funnel-seo-stats strong {
+  display: block;
+  font-size: 1.15rem;
+  color: var(--crm-text, #1a2b4a);
+}
+
+.crm-funnel-seo-stats span {
+  display: block;
+  margin-top: 2px;
+  font-size: 0.72rem;
+  color: var(--crm-muted, #64748b);
+}
+
+.crm-funnel-seo-table-wrap {
+  overflow-x: auto;
+  margin: 0 0 8px;
+}
+
+.crm-funnel-seo-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+}
+
+.crm-funnel-seo-table th,
+.crm-funnel-seo-table td {
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--crm-border, #dbe3ef);
+  text-align: left;
+  vertical-align: top;
+}
+
+.crm-funnel-seo-table th {
+  font-size: 0.72rem;
+  color: var(--crm-muted, #64748b);
+  font-weight: 600;
+}
+
+@media (max-width: 720px) {
+  .crm-funnel-seo-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+
 
 .crm-funnel-quality-cell {
   appearance: none;
