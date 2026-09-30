@@ -13,6 +13,20 @@ const grandIslandCity = require("./city-guides/grand-island");
 const kansasCities = require("./city-guides/ks-cities");
 const coloradoCities = require("./city-guides/co-cities");
 const nevadaCities = require("./city-guides/nv-cities");
+const ohioCities = require("./city-guides/oh-cities");
+
+function loadCityGuides(rel) {
+  try {
+    return require(rel);
+  } catch (err) {
+    if (err.code === "MODULE_NOT_FOUND") return [];
+    throw err;
+  }
+}
+
+const newMexicoCities = loadCityGuides("./city-guides/nm-cities");
+const southCarolinaCities = loadCityGuides("./city-guides/sc-cities");
+const southDakotaCities = loadCityGuides("./city-guides/sd-cities");
 
 const ROOT = path.join(__dirname, "..");
 const HEADER_ES = path.join(ROOT, "includes/site-header-inner.html");
@@ -21,7 +35,7 @@ const FOOTER_ES = path.join(ROOT, "includes/site-footer-inner.html");
 const FOOTER_EN = path.join(ROOT, "includes/en-site-footer.html");
 
 const NPN = "21695431";
-const CSS_VER = "20260919-nv-hero";
+const CSS_VER = "20260929-gpl-name";
 
 const LICENSE = {
   NE: {
@@ -48,9 +62,44 @@ const LICENSE = {
     number: "4237259",
     code: "NV",
   },
+  OH: {
+    typeEs: "Productora no residente",
+    typeEn: "Non-resident producer",
+    number: "1777665",
+    code: "OH",
+  },
+  NM: {
+    typeEs: "Productora no residente",
+    typeEn: "Non-resident producer",
+    number: "21695431",
+    code: "NM",
+  },
+  SC: {
+    typeEs: "Productora no residente",
+    typeEn: "Non-resident producer",
+    number: "21695431",
+    code: "SC",
+  },
+  SD: {
+    typeEs: "Productora no residente",
+    typeEn: "Non-resident producer",
+    number: "21695431",
+    code: "SD",
+  },
 };
 
-const CITIES = [omahaCity, lincolnCity, grandIslandCity, ...kansasCities, ...coloradoCities, ...nevadaCities];
+const CITIES = [
+  omahaCity,
+  lincolnCity,
+  grandIslandCity,
+  ...kansasCities,
+  ...coloradoCities,
+  ...nevadaCities,
+  ...ohioCities,
+  ...newMexicoCities,
+  ...southCarolinaCities,
+  ...southDakotaCities,
+];
 
 function esc(s) {
   return String(s)
@@ -132,7 +181,20 @@ function cityHero(lang, root, quoteHref, city) {
   const agentLabel =
     lang === "es" ? `Agente licenciada en ${city.stateNameEs}` : `Licensed agent in ${city.stateNameEn}`;
   const viewLic = lang === "es" ? `Ver licencia (${city.stateCode})` : `View license (${city.stateCode})`;
-  const naic = lang === "es" ? "Verificar en NAIC" : "Verify on NAIC";
+  const ohio = city.stateCode === "OH";
+  const facebookPhoto = ohio || city.stateCode === "NM" || city.stateCode === "SC" || city.stateCode === "SD";
+  const naic = ohio
+    ? lang === "es"
+      ? "Verificar en Ohio"
+      : "Verify in Ohio"
+    : lang === "es"
+      ? "Verificar en NAIC"
+      : "Verify on NAIC";
+  const verifyHref = ohio
+    ? "https://gateway.insurance.ohio.gov/UI/ODI.Agent.Public.UI/AgentSearch.mvc/DisplaySearch"
+    : `https://external-lookup-web.prod.naic.org/lookup?jurisdiction=${esc(city.stateCode)}&amp;searchType=Licensee&amp;entityType=IND&amp;npn=${NPN}`;
+  const photoBase = facebookPhoto ? "julie-facebook-headshot" : "julie-omaha-portrait";
+  const photoVer = facebookPhoto ? "20260928" : "portrait-v1";
   const basedIn = lang === "es" ? "Con sede en Lincoln, NE" : "Based in Lincoln, NE";
   const julieAlt =
     lang === "es" ? "Julie Braunsroth, agente de seguros" : "Julie Braunsroth, insurance agent";
@@ -170,8 +232,8 @@ ${bullets.map((b) => `<li>${b}</li>`).join("\n")}
     <div class="container sc-hero-agentbar-inner">
       <div class="sc-hero-agent-identity">
         <picture class="sc-hero-agent-photo">
-          <source type="image/webp" srcset="${root}img/opt/julie-omaha-portrait.webp?v=portrait-v1"/>
-          <img src="${root}img/opt/julie-omaha-portrait.jpg?v=portrait-v1" alt="${esc(julieAlt)}" width="320" height="320" loading="lazy" decoding="async"/>
+          <source type="image/webp" srcset="${root}img/opt/${photoBase}.webp?v=${photoVer}"/>
+          <img src="${root}img/opt/${photoBase}.jpg?v=${photoVer}" alt="${esc(julieAlt)}" width="320" height="320" loading="lazy" decoding="async"/>
         </picture>
         <div class="sc-hero-agent-meta">
           <p class="sc-hero-agent-kicker mb-1">${esc(agentLabel)}</p>
@@ -185,7 +247,7 @@ ${bullets.map((b) => `<li>${b}</li>`).join("\n")}
       </div>
       <div class="sc-hero-agent-actions">
         <button type="button" class="btn btn-sm sc-hero-lic-btn" data-mvi-open-license="${esc(city.stateCode)}">${esc(viewLic)}</button>
-        <a class="btn btn-sm sc-hero-lic-btn-outline" href="https://external-lookup-web.prod.naic.org/lookup?jurisdiction=${esc(city.stateCode)}&amp;searchType=Licensee&amp;entityType=IND&amp;npn=${NPN}" target="_blank" rel="noopener">${esc(naic)}</a>
+        <a class="btn btn-sm sc-hero-lic-btn-outline" href="${verifyHref}" target="_blank" rel="noopener">${esc(naic)}</a>
       </div>
     </div>
   </div>
@@ -250,7 +312,11 @@ function faqItems(lang, city) {
         q: `¿Están licenciados en ${city.stateNameEs}?`,
         a: `Sí. Mejor Vida Seguros cotiza seguro de vida en ${city.stateNameEs}. Julie Braunsroth es ${String(
           (LICENSE[city.stateCode] && LICENSE[city.stateCode].typeEs) || "productora residente"
-        ).toLowerCase()}, NPN #21695431. Puede ver la licencia de ${city.stateNameEs} y verificarla en la NAIC.`,
+        ).toLowerCase()}, NPN #21695431. ${
+          city.stateCode === "OH"
+            ? "Puede ver la licencia de Ohio y verificarla en el Departamento de Seguros de Ohio."
+            : `Puede ver la licencia de ${city.stateNameEs} y verificarla en la NAIC.`
+        }`,
       },
       {
         q: "¿Atienden en español?",
@@ -277,7 +343,11 @@ function faqItems(lang, city) {
       q: `Are you licensed in ${city.stateNameEn}?`,
       a: `Yes. Mejor Vida Insurance quotes life insurance in ${city.stateNameEn}. Julie Braunsroth is a ${String(
         (LICENSE[city.stateCode] && LICENSE[city.stateCode].typeEn) || "resident producer"
-      ).toLowerCase()}, NPN #21695431. You can view the ${city.stateNameEn} license and verify it on the NAIC.`,
+      ).toLowerCase()}, NPN #21695431. ${
+        city.stateCode === "OH"
+          ? "You can view the Ohio license and verify it with the Ohio Department of Insurance."
+          : `You can view the ${city.stateNameEn} license and verify it on the NAIC.`
+      }`,
     },
     {
       q: "Do you work in Spanish?",
@@ -590,7 +660,7 @@ ${footer}
 <script defer src="${root}bootstrap/js/bootstrap.bundle.min.js"></script>
 <script defer src="${root}script.js"></script>
 <script defer src="${root}js/mvi-nav-questions.js?v=20260828-family"></script>
-<script defer src="${root}js/mvi-licensing-map.js?v=20260726-lic-popup"></script>
+<script defer src="${root}js/mvi-licensing-map.js?v=20260928-oh-cert"></script>
 <script defer src="${root}js/city-guide.js?v=${CSS_VER}"></script>
 <div data-api-url="/api/website-chat" id="mvi-assistant-root"></div>
 <script defer src="${root}js/website-assistant-widget.js"></script>
@@ -763,7 +833,7 @@ ${loadFooterEs()}
 <script defer src="${root}bootstrap/js/bootstrap.bundle.min.js"></script>
 <script defer src="${root}script.js"></script>
 <script defer src="${root}js/mvi-nav-questions.js?v=20260828-family"></script>
-<script defer src="${root}js/mvi-licensing-map.js?v=20260726-lic-popup"></script>
+<script defer src="${root}js/mvi-licensing-map.js?v=20260928-oh-cert"></script>
 <div data-api-url="/api/website-chat" id="mvi-assistant-root"></div>
 <script defer src="${root}js/website-assistant-widget.js"></script>
 </body>
@@ -934,7 +1004,7 @@ ${loadFooterEn()}
 <script defer src="${root}bootstrap/js/bootstrap.bundle.min.js"></script>
 <script defer src="${root}script.js"></script>
 <script defer src="${root}js/mvi-nav-questions.js?v=20260828-family"></script>
-<script defer src="${root}js/mvi-licensing-map.js?v=20260726-lic-popup"></script>
+<script defer src="${root}js/mvi-licensing-map.js?v=20260928-oh-cert"></script>
 <div data-api-url="/api/website-chat" id="mvi-assistant-root"></div>
 <script defer src="${root}js/website-assistant-widget.js"></script>
 </body>

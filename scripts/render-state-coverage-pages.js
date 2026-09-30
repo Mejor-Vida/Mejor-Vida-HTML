@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Render bilingual state coverage pages for NE, KS, CO, NV.
+ * Render bilingual state coverage pages for NE, KS, CO, NV, OH.
  * Usage: node scripts/render-state-coverage-pages.js
  */
 const fs = require("fs");
@@ -42,13 +42,13 @@ function stateHero(code, lang, prefix, imgPrefix) {
   const st = DATA.states[code];
   const lic = LICENSE[code];
   const slug = SLUGS[code];
-  const name = st.name;
+  const name = stateName(code, lang);
   const short = (DETAILED.states[code] && DETAILED.states[code].short) || {};
   const burialAvg = avgOfBlock(short.fullBurial);
   const cremationAvg = avgOfBlock(short.fullCremation);
   const quoteHref = `${prefix}quote.html`;
   const scheduleHref = lang === "es" ? "/schedule-julie.html" : "/en/schedule-julie.html";
-  const heroVer = "map-seal-v11";
+  const heroVer = heroVersion(slug);
   const heroWebp = `${imgPrefix}img/opt/${slug}-hero.webp?v=${heroVer}`;
   const heroJpg = `${imgPrefix}img/opt/${slug}-hero.jpg?v=${heroVer}`;
   const heroPng = `${imgPrefix}img/opt/${slug}-hero.png?v=${heroVer}`;
@@ -96,7 +96,16 @@ function stateHero(code, lang, prefix, imgPrefix) {
   const agentLabel =
     lang === "es" ? `Agente licenciada en ${name}` : `Licensed agent in ${name}`;
   const viewLic = lang === "es" ? `Ver licencia (${code})` : `View license (${code})`;
-  const naic = lang === "es" ? "Verificar en NAIC" : "Verify on NAIC";
+  const naic = lic.verifyLabel
+    ? lang === "es"
+      ? lic.verifyLabel.es
+      : lic.verifyLabel.en
+    : lang === "es"
+      ? "Verificar en NAIC"
+      : "Verify on NAIC";
+  const verifyHref = lic.verifyUrl
+    ? lic.verifyUrl
+    : `https://external-lookup-web.prod.naic.org/lookup?jurisdiction=${esc(code)}&amp;searchType=Licensee&amp;entityType=IND&amp;npn=${NPN}`;
   const basedIn = lang === "es" ? "Con sede en Lincoln, NE" : "Based in Lincoln, NE";
   const julieAlt =
     lang === "es" ? "Julie Braunsroth, agente de seguros" : "Julie Braunsroth, insurance agent";
@@ -128,8 +137,8 @@ ${bulletHtml}
     <div class="container sc-hero-agentbar-inner">
       <div class="sc-hero-agent-identity">
         <picture class="sc-hero-agent-photo">
-          <source type="image/webp" srcset="${imgPrefix}img/opt/julie-headshot.webp"/>
-          <img src="${imgPrefix}img/opt/julie-headshot.png" alt="${esc(julieAlt)}" width="96" height="96" loading="lazy" decoding="async"/>
+          <source type="image/webp" srcset="${imgPrefix}img/opt/julie-facebook-headshot.webp?v=20260928"/>
+          <img src="${imgPrefix}img/opt/julie-facebook-headshot.jpg?v=20260928" alt="${esc(julieAlt)}" width="96" height="96" loading="lazy" decoding="async"/>
         </picture>
         <div class="sc-hero-agent-meta">
           <p class="sc-hero-agent-kicker mb-1">${esc(agentLabel)}</p>
@@ -141,7 +150,7 @@ ${bulletHtml}
       </div>
       <div class="sc-hero-agent-actions">
         <button type="button" class="btn btn-sm sc-hero-lic-btn" data-mvi-open-license="${esc(code)}">${esc(viewLic)}</button>
-        <a class="btn btn-sm sc-hero-lic-btn-outline" href="https://external-lookup-web.prod.naic.org/lookup?jurisdiction=${esc(code)}&amp;searchType=Licensee&amp;entityType=IND&amp;npn=${NPN}" target="_blank" rel="noopener">${esc(naic)}</a>
+        <a class="btn btn-sm sc-hero-lic-btn-outline" href="${verifyHref}" target="_blank" rel="noopener">${esc(naic)}</a>
       </div>
     </div>
   </div>
@@ -201,6 +210,17 @@ const LICENSE = {
   KS: { typeEs: "Productora no residente", typeEn: "Non-resident producer", number: "21695431", pdf: "julie-license-ks.pdf" },
   CO: { typeEs: "Productora no residente", typeEn: "Non-resident producer", number: "955378", pdf: "julie-license-co.pdf" },
   NV: { typeEs: "Productora no residente", typeEn: "Non-resident producer", number: "4237259", pdf: "julie-license-nv.pdf" },
+  OH: {
+    typeEs: "Productora no residente",
+    typeEn: "Non-resident producer",
+    number: "1777665",
+    pdf: "julie-license-oh.pdf?v=20260928-cert",
+    verifyUrl: "https://gateway.insurance.ohio.gov/UI/ODI.Agent.Public.UI/AgentSearch.mvc/DisplaySearch",
+    verifyLabel: { es: "Verificar en Ohio", en: "Verify in Ohio" },
+  },
+  NM: { typeEs: "Productora no residente", typeEn: "Non-resident producer", number: "21695431", pdf: "julie-license-nm.pdf?v=20260928-cert" },
+  SC: { typeEs: "Productora no residente", typeEn: "Non-resident producer", number: "21695431", pdf: "julie-license-sc.pdf?v=20260928-cert" },
+  SD: { typeEs: "Productora no residente", typeEn: "Non-resident producer", number: "21695431", pdf: "julie-license-sd.pdf?v=20260928-cert" },
 };
 
 const SLUGS = {
@@ -208,7 +228,28 @@ const SLUGS = {
   KS: "kansas",
   CO: "colorado",
   NV: "nevada",
+  OH: "ohio",
+  NM: "new-mexico",
+  SC: "south-carolina",
+  SD: "south-dakota",
 };
+
+const NAME_ES = {
+  NM: "Nuevo México",
+  SC: "Carolina del Sur",
+  SD: "Dakota del Sur",
+};
+
+function stateName(code, lang) {
+  if (lang === "es" && NAME_ES[code]) return NAME_ES[code];
+  return DATA.states[code].name;
+}
+
+function heroVersion(slug) {
+  if (slug === "ohio") return "map-seal-v12";
+  if (slug === "new-mexico" || slug === "south-carolina" || slug === "south-dakota") return "map-seal-v1";
+  return "map-seal-v11";
+}
 
 const NPN = "21695431";
 
@@ -246,7 +287,7 @@ function stateLinks(lang, currentSlug, prefix) {
   return Object.keys(SLUGS)
     .map((code) => {
       const slug = SLUGS[code];
-      const name = DATA.states[code].name;
+      const name = stateName(code, lang);
       const href =
         lang === "es"
           ? `${prefix}${slug}.html`
@@ -726,6 +767,187 @@ ${componentRowsHtml(rows, lang)}
 </section>`;
 }
 
+/**
+ * Published grave-space prices only. These are not a statewide average.
+ * Opening/closing, a vault, and a marker are extra and are not in these cells.
+ */
+const PLOT_EXAMPLES = {
+  OH: [
+    {
+      name: "Columbiana Cemetery",
+      resident: "$800",
+      residentNote: { es: "veteranos $600", en: "veterans $600" },
+      nonres: "$900",
+      asOf: { es: "10 de junio de 2025", en: "June 10, 2025" },
+      url: "https://columbianaohio.gov/firestone-park/cemetery-rates/",
+    },
+    {
+      name: "Germantown Union Cemetery",
+      resident: "$750–$1,100",
+      residentNote: { es: "según la sección", en: "by section" },
+      nonres: { es: "esos precios más $400", en: "those prices plus $400" },
+      asOf: { es: "1 de enero de 2025", en: "January 1, 2025" },
+      url: "https://germantowncemeteryoh.gov/wp-content/uploads/2026/03/Germantown-Union-Cemetery-Price-Sheet-Foundations-2025.pdf",
+    },
+    {
+      name: "Wellington Union Cemetery",
+      resident: "$500",
+      nonres: "$650",
+      asOf: { es: "1 de enero de 2026", en: "January 1, 2026" },
+      url: "https://www.wellingtontownshipohio.gov/_files/ugd/fdcfcb_fcfeeae9cade47ad809278999a13f218.pdf",
+    },
+  ],
+};
+
+/**
+ * Private-party asking prices from Grave Solutions recent listings, read 28 Sep 2026.
+ * Not a state average. Sold and expired ads are omitted. What the ad includes is stated.
+ */
+const RESALE_LOTS = {
+  NE: {
+    board: "https://www.gravesolutions.com/for-sale/cemetery-properties/nebraska",
+    rows: [
+      { cemetery: "Evergreen Memorial Park, Omaha", what: { es: "1 espacio", en: "1 space" }, asking: "$1,800" },
+      { cemetery: "Lincoln Memorial Cemetery", what: { es: "1 espacio", en: "1 space" }, asking: "$2,500" },
+      { cemetery: "Westlawn-Hillcrest, Omaha", what: { es: "2 espacios, $2,500 cada uno", en: "2 spaces, $2,500 each" }, asking: "$2,500 each" },
+      { cemetery: "Forest Lawn, Omaha", what: { es: "2 espacios, $3,000 cada uno", en: "2 spaces, $3,000 each" }, asking: "$3,000 each" },
+      { cemetery: "Calvary, Omaha", what: { es: "2 espacios juntos", en: "2 spaces together" }, asking: "$4,000" },
+    ],
+  },
+  KS: {
+    board: "https://www.gravesolutions.com/for-sale/cemetery-properties/kansas",
+    rows: [
+      { cemetery: "White Chapel Memorial Gardens, Wichita", what: { es: "4 espacios, $1,200 cada uno", en: "4 spaces, $1,200 each" }, asking: "$1,200 each" },
+      { cemetery: "White Chapel Memorial Gardens, Wichita", what: { es: "4 espacios, $1,699 cada uno", en: "4 spaces, $1,699 each" }, asking: "$1,699 each" },
+      { cemetery: "Memorial Park Cemetery, Topeka", what: { es: "6 espacios, $2,000 cada uno; incluye cuidado perpetuo", en: "6 spaces, $2,000 each; perpetual care included" }, asking: "$2,000 each" },
+      { cemetery: "Mount Hope Cemetery, Topeka", what: { es: "2 espacios, $2,000 cada uno", en: "2 spaces, $2,000 each" }, asking: "$2,000 each" },
+      { cemetery: "Old Mission, Wichita", what: { es: "2 espacios, $2,500 cada uno", en: "2 spaces, $2,500 each" }, asking: "$2,500 each" },
+    ],
+  },
+  CO: {
+    board: "https://www.gravesolutions.com/for-sale/cemetery-properties/colorado",
+    rows: [
+      { cemetery: "Roselawn Cemetery, Pueblo", what: { es: "1 espacio", en: "1 space" }, asking: "$2,000" },
+      { cemetery: "Crown Hill, Wheat Ridge", what: { es: "2 espacios juntos", en: "2 spaces together" }, asking: "$3,200" },
+      { cemetery: "Fairmount Cemetery, Denver", what: { es: "1 espacio; el vendedor paga el traspaso", en: "1 space; seller pays the transfer" }, asking: "$7,800" },
+      { cemetery: "Highland Cemetery, Thornton", what: { es: "2 espacios; el traspaso va incluido", en: "2 spaces; transfer fee included" }, asking: "$8,000" },
+      { cemetery: "Crown Hill, Wheat Ridge", what: { es: "2 espacios, $7,600 cada uno", en: "2 spaces, $7,600 each" }, asking: "$7,600 each" },
+    ],
+  },
+  NV: {
+    board: "https://www.gravesolutions.com/for-sale/cemetery-properties/nevada",
+    rows: [
+      { cemetery: "Palm Eastern, Las Vegas", what: { es: "1 espacio en Garden of Devotion", en: "1 space in the Garden of Devotion" }, asking: "$3,800" },
+      { cemetery: "Palm Memorial Park Northwest, Las Vegas", what: { es: "1 espacio", en: "1 space" }, asking: "$4,500" },
+      { cemetery: "Mountain View Cemetery, Reno", what: { es: "1 cripta; incluye marcador y apertura", en: "1 crypt; marker and opening included" }, asking: "$4,900" },
+      { cemetery: "Palm Mortuary, Las Vegas", what: { es: "cripta doble para 2; incluye 2 bóvedas", en: "double lawn crypt for 2; 2 vaults included" }, asking: "$7,500" },
+    ],
+  },
+  OH: {
+    board: "https://www.gravesolutions.com/for-sale/cemetery-properties/ohio",
+    rows: [
+      { cemetery: "Forest Lawn Memorial Park, Youngstown", what: { es: "2 espacios juntos", en: "2 spaces together" }, asking: "$1,000" },
+      { cemetery: "Floral Hills Memory Gardens, Lancaster", what: { es: "1 entierro de adulto más 1 cremación, o 2 cremaciones", en: "1 adult burial plus 1 cremation, or 2 cremations" }, asking: "$1,100" },
+      { cemetery: "Hillside Memorial Gardens, Akron", what: { es: "2 espacios juntos", en: "2 spaces together" }, asking: "$2,000" },
+      { cemetery: "Glen Haven Memorial Gardens, New Carlisle", what: { es: "3 espacios, $2,000 cada uno", en: "3 spaces, $2,000 each" }, asking: "$2,000 each" },
+      { cemetery: "Crown Hill Cemetery, Twinsburg", what: { es: "2 espacios juntos", en: "2 spaces together" }, asking: "$4,000" },
+    ],
+  },
+  NM: {
+    board: "https://www.gravesolutions.com/for-sale/cemetery-properties/new-mexico",
+    rows: [
+      { cemetery: "Memory Gardens of the Valley, Santa Teresa", what: { es: "2 espacios, $4,000 cada uno", en: "2 spaces, $4,000 each" }, asking: "$4,000 each" },
+      { cemetery: "Hillcrest Memorial Gardens, Las Cruces", what: { es: "2 espacios juntos", en: "2 spaces together" }, asking: "$10,000" },
+      { cemetery: "Hillcrest Memorial Gardens, Las Cruces", what: { es: "2 espacios juntos, Garden of Gethsemane", en: "2 spaces together, Garden of Gethsemane" }, asking: "$11,500" },
+    ],
+  },
+  SC: {
+    board: "https://www.gravesolutions.com/for-sale/cemetery-properties/south-carolina",
+    rows: [
+      { cemetery: "Greenlawn Memorial Park, Columbia", what: { es: "2 espacios, $2,250 cada uno", en: "2 spaces, $2,250 each" }, asking: "$2,250 each" },
+      { cemetery: "Greenlawn Memorial Park, Columbia", what: { es: "2 lotes con bóvedas", en: "2 lots with vaults" }, asking: "$9,840" },
+      { cemetery: "Greenville Memorial Gardens, Piedmont", what: { es: "cripta de césped de doble profundidad, con 2 aperturas", en: "double-depth lawn crypt, with 2 openings" }, asking: "$10,000" },
+      { cemetery: "Greenlawn Memorial Gardens, Greenville", what: { es: "cripta de césped de doble profundidad, con 2 aperturas", en: "double-depth lawn crypt, with 2 openings" }, asking: "$12,284" },
+    ],
+  },
+  SD: {
+    board: "https://www.gravesolutions.com/for-sale/cemetery-properties/south-dakota",
+    rows: [
+      { cemetery: "Hills of Rest Cemetery, Sioux Falls", what: { es: "1 nicho de columbario de granito", en: "1 granite columbarium niche" }, asking: "$2,200" },
+    ],
+  },
+};
+
+function resaleBlock(code, lang) {
+  const pack = RESALE_LOTS[code];
+  if (!pack) return "";
+  const es = lang === "es";
+  const askLabel = es ? "Piden" : "Asking";
+  const body = pack.rows
+    .map(
+      (row) => `<article class="sc-plot-card">
+      <p class="sc-plot-name">${esc(row.cemetery)}</p>
+      <p class="sc-plot-price"><span>${askLabel}</span> ${esc(row.asking)}</p>
+      <p class="sc-plot-note">${esc(row.what[lang])}</p>
+    </article>`
+    )
+    .join("\n");
+  const intro = es
+    ? "Si alguien ya tiene el lote y no lo va a usar, lo puede revender. Estos son anuncios de particulares en Grave Solutions, leídos el 28 de septiembre de 2026. No son la lista del cementerio ni un promedio del estado. El cementerio tiene que pasar la escritura. Confirme que el anuncio sigue activo."
+    : "If someone already owns a plot and will not use it, they can resell it. These are private-party ads on Grave Solutions, read on September 28, 2026. They are not the cemetery’s list and not a statewide average. The cemetery still has to transfer the deed. Confirm the ad is still active.";
+  return `<h3 class="h5 fw-bold mt-4 mb-3" style="color:#1a365d;">${es ? "Precios de reventa (particulares)" : "Resale asking prices (private sellers)"}</h3>
+    <p class="text-body-secondary mb-3">${intro}</p>
+    <div class="sc-plot-cards">
+          ${body}
+    </div>
+    <p class="small text-muted mb-0"><a href="${esc(pack.board)}" rel="noopener" target="_blank">${es ? "Ver anuncios actuales en Grave Solutions" : "See current ads on Grave Solutions"}</a></p>`;
+}
+
+function plotSection(code, lang) {
+  const rows = PLOT_EXAMPLES[code] || [];
+  const es = lang === "es";
+  const intro = es
+    ? "Las tablas de arriba son promedios de la funeraria. <strong>No incluyen el lote</strong> (el espacio de la tumba). Ese cargo lo cobra el cementerio, en otra cuenta. La mediana de 2023 de la NFDA para un funeral con velatorio y entierro ($8,300) tampoco incluye la sepultura en el cementerio, el monumento ni la lápida."
+    : "The tables above are funeral-home averages. <strong>They do not include the burial plot</strong> (the grave space). The cemetery bills that separately. The NFDA’s 2023 median for a funeral with viewing and burial ($8,300) also leaves out cemetery interment, a monument, and a grave marker.";
+  const extra = es
+    ? "Abrir y cerrar la tumba, la bóveda y el marcador siguen siendo cargos aparte. No hay un precio único del lote para todo el estado."
+    : "Opening and closing the grave, a vault, and a marker are still separate charges. There is no single plot price for the whole state.";
+  const residentLabel = es ? "Residente" : "Resident";
+  const nonresLabel = es ? "No residente" : "Non-resident";
+  const asOfLabel = es ? "Vigente" : "As of";
+  const listTable = rows.length
+    ? `<p class="text-body-secondary mb-3">${extra} ${es ? "Estos son precios publicados del espacio de la tumba:" : "These are published grave-space prices:"}</p>
+    <div class="sc-plot-cards">
+          ${rows
+            .map((row) => {
+              const note = row.residentNote
+                ? `<p class="sc-plot-note">${esc(row.residentNote[lang])}</p>`
+                : "";
+              const nonres = typeof row.nonres === "string" ? row.nonres : row.nonres[lang];
+              return `<article class="sc-plot-card">
+      <p class="sc-plot-name"><a href="${esc(row.url)}" rel="noopener" target="_blank">${esc(row.name)}</a></p>
+      <p class="sc-plot-price"><span>${residentLabel}</span> ${esc(row.resident)}</p>
+      ${note}
+      <dl class="sc-plot-facts">
+        <div><dt>${nonresLabel}</dt><dd>${esc(nonres)}</dd></div>
+        <div><dt>${asOfLabel}</dt><dd>${esc(row.asOf[lang])}</dd></div>
+      </dl>
+    </article>`;
+            })
+            .join("\n")}
+    </div>
+    <p class="small text-muted mb-0">${es ? "Estos cementerios públicos publican el precio del lote. No son un promedio del estado y no son el precio de un cementerio privado." : "These public cemeteries publish a grave-space price. They are not a statewide average, and they are not a private cemetery’s price."}</p>`
+    : `<p class="text-body-secondary mb-0">${extra}</p>`;
+  return `<section class="py-5 bg-light border-bottom" id="${es ? "lote" : "burial-plot"}">
+  <div class="container" style="max-width:60rem;">
+    <h2 class="h4 fw-bold mb-3" style="color:#1a365d;">${es ? "El lote del cementerio no está en el precio del funeral" : "The cemetery plot is not in the funeral price"}</h2>
+    <p class="text-body-secondary mb-3">${intro}</p>
+    ${listTable}
+    ${resaleBlock(code, lang)}
+  </div>
+</section>`;
+}
+
 /** Funeralocity-style Low / High / Average component breakdowns (always open). */
 function detailedCostPanels(code, lang) {
   const entry = DETAILED.states[code];
@@ -1049,6 +1271,130 @@ function citiesSection(code, lang) {
 </section>
 `;
   }
+  if (code === "OH") {
+    if (lang === "es") {
+      return `<section class="py-5 bg-light border-bottom" id="ciudades">
+  <div class="container" style="max-width:60rem;">
+    <h2 class="h4 fw-bold mb-3" style="color:#1a365d;">Ciudades en Ohio</h2>
+    <p class="text-body-secondary mb-3">Guías locales de seguro de gastos finales y de entierro. Columbus, Cleveland, Cincinnati, Toledo, Akron y Dayton tienen página propia.</p>
+    <ul class="mb-0">
+      <li class="mb-2"><a href="ohio/columbus.html">Columbus</a> — seguro de gastos finales y de entierro, funerarias y lotes.</li>
+      <li class="mb-2"><a href="ohio/cleveland.html">Cleveland</a> — seguro de gastos finales y de entierro, funerarias y lotes.</li>
+      <li class="mb-2"><a href="ohio/cincinnati.html">Cincinnati</a> — seguro de gastos finales y de entierro, funerarias y lotes.</li>
+      <li class="mb-2"><a href="ohio/toledo.html">Toledo</a> — seguro de gastos finales y de entierro, funerarias y lotes.</li>
+      <li class="mb-2"><a href="ohio/akron.html">Akron</a> — seguro de gastos finales y de entierro, funerarias y lotes.</li>
+      <li class="mb-2"><a href="ohio/dayton.html">Dayton</a> — seguro de gastos finales y de entierro, funerarias y lotes.</li>
+    </ul>
+  </div>
+</section>
+`;
+    }
+    return `<section class="py-5 bg-light border-bottom" id="cities">
+  <div class="container" style="max-width:60rem;">
+    <h2 class="h4 fw-bold mb-3" style="color:#1a365d;">Cities in Ohio</h2>
+    <p class="text-body-secondary mb-3">Local final expense and burial insurance guides. Columbus, Cleveland, Cincinnati, Toledo, Akron, and Dayton have their own pages.</p>
+    <ul class="mb-0">
+      <li class="mb-2"><a href="ohio/columbus.html">Columbus</a> — final expense and burial insurance, funeral homes, and plots.</li>
+      <li class="mb-2"><a href="ohio/cleveland.html">Cleveland</a> — final expense and burial insurance, funeral homes, and plots.</li>
+      <li class="mb-2"><a href="ohio/cincinnati.html">Cincinnati</a> — final expense and burial insurance, funeral homes, and plots.</li>
+      <li class="mb-2"><a href="ohio/toledo.html">Toledo</a> — final expense and burial insurance, funeral homes, and plots.</li>
+      <li class="mb-2"><a href="ohio/akron.html">Akron</a> — final expense and burial insurance, funeral homes, and plots.</li>
+      <li class="mb-2"><a href="ohio/dayton.html">Dayton</a> — final expense and burial insurance, funeral homes, and plots.</li>
+    </ul>
+  </div>
+</section>
+`;
+  }
+  if (code === "NM") {
+    if (lang === "es") {
+      return `<section class="py-5 bg-light border-bottom" id="ciudades">
+  <div class="container" style="max-width:60rem;">
+    <h2 class="h4 fw-bold mb-3" style="color:#1a365d;">Ciudades en Nuevo México</h2>
+    <p class="text-body-secondary mb-3">Guías locales de seguro de gastos finales y de entierro. Albuquerque, Las Cruces, Rio Rancho y Santa Fe tienen página propia.</p>
+    <ul class="mb-0">
+      <li class="mb-2"><a href="new-mexico/albuquerque.html">Albuquerque</a> — seguro de gastos finales y de entierro, funerarias y lotes.</li>
+      <li class="mb-2"><a href="new-mexico/las-cruces.html">Las Cruces</a> — seguro de gastos finales y de entierro, funerarias y lotes.</li>
+      <li class="mb-2"><a href="new-mexico/rio-rancho.html">Rio Rancho</a> — seguro de gastos finales y de entierro, funerarias y lotes.</li>
+      <li class="mb-2"><a href="new-mexico/santa-fe.html">Santa Fe</a> — seguro de gastos finales y de entierro, funerarias y lotes.</li>
+    </ul>
+  </div>
+</section>
+`;
+    }
+    return `<section class="py-5 bg-light border-bottom" id="cities">
+  <div class="container" style="max-width:60rem;">
+    <h2 class="h4 fw-bold mb-3" style="color:#1a365d;">Cities in New Mexico</h2>
+    <p class="text-body-secondary mb-3">Local final expense and burial insurance guides. Albuquerque, Las Cruces, Rio Rancho, and Santa Fe have their own pages.</p>
+    <ul class="mb-0">
+      <li class="mb-2"><a href="new-mexico/albuquerque.html">Albuquerque</a> — final expense and burial insurance, funeral homes, and plots.</li>
+      <li class="mb-2"><a href="new-mexico/las-cruces.html">Las Cruces</a> — final expense and burial insurance, funeral homes, and plots.</li>
+      <li class="mb-2"><a href="new-mexico/rio-rancho.html">Rio Rancho</a> — final expense and burial insurance, funeral homes, and plots.</li>
+      <li class="mb-2"><a href="new-mexico/santa-fe.html">Santa Fe</a> — final expense and burial insurance, funeral homes, and plots.</li>
+    </ul>
+  </div>
+</section>
+`;
+  }
+  if (code === "SC") {
+    if (lang === "es") {
+      return `<section class="py-5 bg-light border-bottom" id="ciudades">
+  <div class="container" style="max-width:60rem;">
+    <h2 class="h4 fw-bold mb-3" style="color:#1a365d;">Ciudades en Carolina del Sur</h2>
+    <p class="text-body-secondary mb-3">Guías locales de seguro de gastos finales y de entierro. Charleston, Columbia, North Charleston, Mount Pleasant, Rock Hill y Greenville tienen página propia.</p>
+    <ul class="mb-0">
+      <li class="mb-2"><a href="south-carolina/charleston.html">Charleston</a> — seguro de gastos finales y de entierro, funerarias y lotes.</li>
+      <li class="mb-2"><a href="south-carolina/columbia.html">Columbia</a> — seguro de gastos finales y de entierro, funerarias y lotes.</li>
+      <li class="mb-2"><a href="south-carolina/north-charleston.html">North Charleston</a> — seguro de gastos finales y de entierro, funerarias y lotes.</li>
+      <li class="mb-2"><a href="south-carolina/mount-pleasant.html">Mount Pleasant</a> — seguro de gastos finales y de entierro, funerarias y lotes.</li>
+      <li class="mb-2"><a href="south-carolina/rock-hill.html">Rock Hill</a> — seguro de gastos finales y de entierro, funerarias y lotes.</li>
+      <li class="mb-2"><a href="south-carolina/greenville.html">Greenville</a> — seguro de gastos finales y de entierro, funerarias y lotes.</li>
+    </ul>
+  </div>
+</section>
+`;
+    }
+    return `<section class="py-5 bg-light border-bottom" id="cities">
+  <div class="container" style="max-width:60rem;">
+    <h2 class="h4 fw-bold mb-3" style="color:#1a365d;">Cities in South Carolina</h2>
+    <p class="text-body-secondary mb-3">Local final expense and burial insurance guides. Charleston, Columbia, North Charleston, Mount Pleasant, Rock Hill, and Greenville have their own pages.</p>
+    <ul class="mb-0">
+      <li class="mb-2"><a href="south-carolina/charleston.html">Charleston</a> — final expense and burial insurance, funeral homes, and plots.</li>
+      <li class="mb-2"><a href="south-carolina/columbia.html">Columbia</a> — final expense and burial insurance, funeral homes, and plots.</li>
+      <li class="mb-2"><a href="south-carolina/north-charleston.html">North Charleston</a> — final expense and burial insurance, funeral homes, and plots.</li>
+      <li class="mb-2"><a href="south-carolina/mount-pleasant.html">Mount Pleasant</a> — final expense and burial insurance, funeral homes, and plots.</li>
+      <li class="mb-2"><a href="south-carolina/rock-hill.html">Rock Hill</a> — final expense and burial insurance, funeral homes, and plots.</li>
+      <li class="mb-2"><a href="south-carolina/greenville.html">Greenville</a> — final expense and burial insurance, funeral homes, and plots.</li>
+    </ul>
+  </div>
+</section>
+`;
+  }
+  if (code === "SD") {
+    if (lang === "es") {
+      return `<section class="py-5 bg-light border-bottom" id="ciudades">
+  <div class="container" style="max-width:60rem;">
+    <h2 class="h4 fw-bold mb-3" style="color:#1a365d;">Ciudades en Dakota del Sur</h2>
+    <p class="text-body-secondary mb-3">Guías locales de seguro de gastos finales y de entierro. Sioux Falls y Rapid City tienen página propia.</p>
+    <ul class="mb-0">
+      <li class="mb-2"><a href="south-dakota/sioux-falls.html">Sioux Falls</a> — seguro de gastos finales y de entierro, funerarias y lotes.</li>
+      <li class="mb-2"><a href="south-dakota/rapid-city.html">Rapid City</a> — seguro de gastos finales y de entierro, funerarias y lotes.</li>
+    </ul>
+  </div>
+</section>
+`;
+    }
+    return `<section class="py-5 bg-light border-bottom" id="cities">
+  <div class="container" style="max-width:60rem;">
+    <h2 class="h4 fw-bold mb-3" style="color:#1a365d;">Cities in South Dakota</h2>
+    <p class="text-body-secondary mb-3">Local final expense and burial insurance guides. Sioux Falls and Rapid City have their own pages.</p>
+    <ul class="mb-0">
+      <li class="mb-2"><a href="south-dakota/sioux-falls.html">Sioux Falls</a> — final expense and burial insurance, funeral homes, and plots.</li>
+      <li class="mb-2"><a href="south-dakota/rapid-city.html">Rapid City</a> — final expense and burial insurance, funeral homes, and plots.</li>
+    </ul>
+  </div>
+</section>
+`;
+  }
   if (code !== "NE") return "";
   if (lang === "es") {
     return `<section class="py-5 bg-light border-bottom" id="ciudades">
@@ -1082,7 +1428,7 @@ function renderEs(code) {
   const st = DATA.states[code];
   const lic = LICENSE[code];
   const slug = SLUGS[code];
-  const name = st.name;
+  const name = stateName(code, "es");
   const prefix = "../";
   const canon = `https://www.mejorvidainsurance.com/estados/${slug}.html`;
   const enCanon = `https://www.mejorvidainsurance.com/en/states/${slug}.html`;
@@ -1107,7 +1453,7 @@ function renderEs(code) {
 <link href="${prefix}bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
 <link href="${prefix}css/quote-flow-shared.css?v=20260905-search" rel="stylesheet"/>
 <link href="${prefix}css/site-footer.css?v=20260721-lip-page" rel="stylesheet"/>
-<link href="${prefix}css/state-coverage.css?v=20260917-compare-legal" rel="stylesheet"/>
+<link href="${prefix}css/state-coverage.css?v=20260929-plot-cards" rel="stylesheet"/>
 <link href="${prefix}css/mvi-licensing-map.css?v=20260726-state-cov" rel="stylesheet"/>
 <link href="${prefix}css/mvi-assistant-widget.css?v=20260808-chat-sm" rel="stylesheet"/>
 <link href="${prefix}css/fontawesome-mvi.min.css?v=20260723-brands-fix" rel="stylesheet"/>
@@ -1122,7 +1468,7 @@ function renderEs(code) {
 <meta property="og:url" content="${canon}"/>
 <meta property="og:locale" content="es_US"/>
 <link rel="preload" as="image" href="${prefix}img/opt/logo-spanish2.webp" type="image/webp" fetchpriority="high"/>
-<link rel="preload" as="image" href="${prefix}img/opt/${slug}-hero.webp?v=map-seal-v11" type="image/webp"/>
+<link rel="preload" as="image" href="${prefix}img/opt/${slug}-hero.webp?v=${heroVersion(slug)}" type="image/webp"/>
 <script>(function(){document.documentElement.lang="es-US";document.documentElement.className="lang-es";})();</script>
 </head>
 <body class="bg-white state-coverage-page" data-licenses-base="${prefix}licenses/">
@@ -1139,6 +1485,8 @@ ${stateHero(code, "es", prefix, prefix)}
     ${thirdPartyFuneralAverageNote("es")}
   </div>
 </section>
+
+${plotSection(code, "es")}
 
 <section class="py-5 bg-light border-bottom" id="aseguradoras">
   <div class="container-fluid sc-carrier-section-container px-3 px-lg-4">
@@ -1161,8 +1509,6 @@ ${stateHero(code, "es", prefix, prefix)}
   </div>
 </section>
 
-${citiesSection(code, "es")}
-
 <section class="py-5 text-white" style="background:#1a365d;">
   <div class="container text-center" style="max-width:60rem;">
     <h2 class="h3 fw-bold mb-3">Cotice gastos finales en ${esc(name)}</h2>
@@ -1173,6 +1519,8 @@ ${citiesSection(code, "es")}
     </div>
   </div>
 </section>
+
+${citiesSection(code, "es")}
 </main>
 ${licenseModal("es")}
 ${loadFooterEs()}
@@ -1180,7 +1528,7 @@ ${loadFooterEs()}
 <script defer src="${prefix}bootstrap/js/bootstrap.bundle.min.js"></script>
 <script defer src="${prefix}script.js"></script>
 <script defer src="${prefix}js/mvi-nav-questions.js?v=20260828-family"></script>
-<script defer src="${prefix}js/mvi-licensing-map.js?v=20260726-lic-popup"></script>
+<script defer src="${prefix}js/mvi-licensing-map.js?v=20260928-oh-cert"></script>
 <div data-api-url="/api/website-chat" id="mvi-assistant-root"></div>
 <script defer src="${prefix}js/website-assistant-widget.js"></script>
 </body>
@@ -1217,7 +1565,7 @@ function renderEn(code) {
 <link href="${root}bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
 <link href="${root}css/quote-flow-shared.css?v=20260905-search" rel="stylesheet"/>
 <link href="${root}css/site-footer.css?v=20260721-lip-page" rel="stylesheet"/>
-<link href="${root}css/state-coverage.css?v=20260917-compare-legal" rel="stylesheet"/>
+<link href="${root}css/state-coverage.css?v=20260929-plot-cards" rel="stylesheet"/>
 <link href="${root}css/mvi-licensing-map.css?v=20260726-state-cov" rel="stylesheet"/>
 <link href="${root}css/mvi-assistant-widget.css?v=20260808-chat-sm" rel="stylesheet"/>
 <link href="${root}css/fontawesome-mvi.min.css?v=20260723-brands-fix" rel="stylesheet"/>
@@ -1231,7 +1579,7 @@ function renderEn(code) {
 <meta property="og:description" content="${esc(desc)}"/>
 <meta property="og:url" content="${canon}"/>
 <link rel="preload" as="image" href="${root}img/opt/logo-english2.webp" type="image/webp" fetchpriority="high"/>
-<link rel="preload" as="image" href="${root}img/opt/${slug}-hero.webp?v=map-seal-v11" type="image/webp"/>
+<link rel="preload" as="image" href="${root}img/opt/${slug}-hero.webp?v=${heroVersion(slug)}" type="image/webp"/>
 <script>(function(){document.documentElement.lang="en-US";document.documentElement.className="lang-en";})();</script>
 </head>
 <body class="bg-white state-coverage-page" data-licenses-base="${root}licenses/">
@@ -1248,6 +1596,8 @@ ${stateHero(code, "en", en, root)}
     ${thirdPartyFuneralAverageNote("en")}
   </div>
 </section>
+
+${plotSection(code, "en")}
 
 <section class="py-5 bg-light border-bottom" id="carriers">
   <div class="container-fluid sc-carrier-section-container px-3 px-lg-4">
@@ -1270,8 +1620,6 @@ ${stateHero(code, "en", en, root)}
   </div>
 </section>
 
-${citiesSection(code, "en")}
-
 <section class="py-5 text-white" style="background:#1a365d;">
   <div class="container text-center" style="max-width:60rem;">
     <h2 class="h3 fw-bold mb-3">Get a final expense quote in ${esc(name)}</h2>
@@ -1282,6 +1630,8 @@ ${citiesSection(code, "en")}
     </div>
   </div>
 </section>
+
+${citiesSection(code, "en")}
 </main>
 ${licenseModal("en")}
 ${loadFooterEn()}
@@ -1289,7 +1639,7 @@ ${loadFooterEn()}
 <script defer src="${root}bootstrap/js/bootstrap.bundle.min.js"></script>
 <script defer src="${root}script.js"></script>
 <script defer src="${root}js/mvi-nav-questions.js?v=20260828-family"></script>
-<script defer src="${root}js/mvi-licensing-map.js?v=20260726-lic-popup"></script>
+<script defer src="${root}js/mvi-licensing-map.js?v=20260928-oh-cert"></script>
 <div data-api-url="/api/website-chat" id="mvi-assistant-root"></div>
 <script defer src="${root}js/website-assistant-widget.js"></script>
 </body>

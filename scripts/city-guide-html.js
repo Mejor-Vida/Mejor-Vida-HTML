@@ -76,7 +76,10 @@ function packageTable(lang, guide, estimatorHref) {
       const label = lang === "es" ? row.labelEs : row.labelEn;
       const desc = lang === "es" ? row.descEs : row.descEn;
       const cells = homes
-        .map((h) => `            <td>${cellHtml(row.cells[h.id], lang)}</td>`)
+        .map((h) => {
+          const homeName = h.name || (lang === "es" ? h.nameEs : h.nameEn);
+          return `            <td data-home="${esc(homeName)}">${cellHtml(row.cells[h.id], lang)}</td>`;
+        })
         .join("\n");
       return `          <tr>
             <th scope="row"><span class="sc-gpl-field">${esc(label)}</span>${
