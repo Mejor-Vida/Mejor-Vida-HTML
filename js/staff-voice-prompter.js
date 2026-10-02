@@ -354,6 +354,22 @@
       nowBox.style.fontSize = fontSize + "px";
       requestAnimationFrame(fitNow);
     }
+    requestAnimationFrame(pinReadingLine);
+  }
+
+  function pinReadingLine() {
+    var stage = overlay.querySelector("[data-vp='stage']");
+    if (!stage) return;
+    var word = null;
+    var i;
+    for (i = index; i < words.length; i++) {
+      word = stage.querySelector('.mvi-prompter__now [data-wi="' + i + '"]');
+      if (word) break;
+    }
+    if (!word) return;
+    var topGap = word.getBoundingClientRect().top - stage.getBoundingClientRect().top;
+    var line = Math.max(word.getBoundingClientRect().height, fontSize * 0.8);
+    if (topGap > line * 0.45) stage.scrollTop += topGap - 6;
   }
 
   function fitNow() {
