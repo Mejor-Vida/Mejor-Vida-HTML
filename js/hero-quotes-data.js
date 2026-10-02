@@ -27,7 +27,7 @@ window.HERO_CAROUSEL_QUOTES = [
     "age": 58,
     "health": "good",
     "smoker": false,
-    "rateSource": "Illustrative good-health Level (not Corebridge GIWL): Accendo FE Super Preferred NS annual/$1k 35.60 ×15 + $40 fee ÷12 (Brochure 2025)",
+    "rateSource": "Illustrative good-health Level, age 58 female, $15,000",
     "position": {
       "bottom": "26%",
       "left": "40%",

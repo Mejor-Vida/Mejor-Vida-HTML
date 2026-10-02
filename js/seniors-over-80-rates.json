@@ -35,18 +35,6 @@
       "href": "mutual-of-omaha"
     },
     {
-      "id": "aetna",
-      "name": "Aetna",
-      "productEs": "Accendo Preferred (Nivelado)",
-      "productEn": "Accendo Preferred (Level)",
-      "ages": "40–89",
-      "deathEs": "$2,000–$25,000 después de los 75",
-      "deathEn": "$2,000–$25,000 after 75",
-      "wait": false,
-      "sample10k80f": 101,
-      "href": "aetna"
-    },
-    {
       "id": "transamerica",
       "name": "Transamerica",
       "productEs": "Immediate Solution Preferred",

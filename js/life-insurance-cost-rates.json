@@ -970,10 +970,10 @@
     }
   },
   "final_expense": {
-    "source": "Mejor Vida quote engine \u2014 Integrity FE appointed harvest (Accendo 86\u201389)",
-    "rating": "Non-tobacco, good-health (Level/Immediate) low; Accendo Preferred 86\u201389",
+    "source": "Mejor Vida quote engine",
+    "rating": "Non-tobacco, good-health (Level/Immediate) low",
     "as_of": "2026-08-20",
-    "note": "Illustrative monthly premiums from Integrity Connect appointed harvests used by the Mejor Vida quoter. Ages 45\u201385 are the cheapest appointed Level premium; ages 86\u201389 are Aetna Accendo Preferred Level (max $25,000). Non-tobacco. Educational only \u2014 not a binding quote.",
+    "note": "Illustrative monthly premiums from Integrity Connect appointed harvests used by the Mejor Vida quoter. Ages 45\u201385. Non-tobacco. Educational only \u2014 not a binding quote.",
     "faces": [
       5000,
       10000,
@@ -1030,26 +1030,6 @@
           "age": 85,
           "female": 70,
           "male": 96
-        },
-        {
-          "age": 86,
-          "female": 87,
-          "male": 120
-        },
-        {
-          "age": 87,
-          "female": 105,
-          "male": 140
-        },
-        {
-          "age": 88,
-          "female": 122,
-          "male": 160
-        },
-        {
-          "age": 89,
-          "female": 139,
-          "male": 181
         }
       ],
       "10000": [
@@ -1097,26 +1077,6 @@
           "age": 85,
           "female": 136,
           "male": 188
-        },
-        {
-          "age": 86,
-          "female": 171,
-          "male": 236
-        },
-        {
-          "age": 87,
-          "female": 206,
-          "male": 277
-        },
-        {
-          "age": 88,
-          "female": 241,
-          "male": 317
-        },
-        {
-          "age": 89,
-          "female": 275,
-          "male": 358
         }
       ],
       "15000": [
@@ -1164,26 +1124,6 @@
           "age": 85,
           "female": 202,
           "male": 279
-        },
-        {
-          "age": 86,
-          "female": 255,
-          "male": 353
-        },
-        {
-          "age": 87,
-          "female": 307,
-          "male": 413
-        },
-        {
-          "age": 88,
-          "female": 359,
-          "male": 474
-        },
-        {
-          "age": 89,
-          "female": 411,
-          "male": 535
         }
       ],
       "20000": [
@@ -1231,26 +1171,6 @@
           "age": 85,
           "female": 268,
           "male": 371
-        },
-        {
-          "age": 86,
-          "female": 339,
-          "male": 469
-        },
-        {
-          "age": 87,
-          "female": 408,
-          "male": 550
-        },
-        {
-          "age": 88,
-          "female": 478,
-          "male": 631
-        },
-        {
-          "age": 89,
-          "female": 547,
-          "male": 712
         }
       ],
       "25000": [
@@ -1298,26 +1218,6 @@
           "age": 85,
           "female": 334,
           "male": 463
-        },
-        {
-          "age": 86,
-          "female": 423,
-          "male": 585
-        },
-        {
-          "age": 87,
-          "female": 510,
-          "male": 686
-        },
-        {
-          "age": 88,
-          "female": 596,
-          "male": 788
-        },
-        {
-          "age": 89,
-          "female": 683,
-          "male": 889
         }
       ],
       "30000": [
