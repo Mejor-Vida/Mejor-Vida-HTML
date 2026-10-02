@@ -481,6 +481,18 @@ module.exports = async function handler(req, res) {
       (pull.meta_ad_id ? String(pull.meta_ad_id) : "");
     const metaAdId = String(metaAdRaw || "").replace(/\D/g, "");
     if (metaAdId.length >= 8 && metaAdId.length <= 24) contactPatch.meta_ad_id = metaAdId;
+    const ctwaRaw =
+      bodyAlias(body, [
+        "meta_ctwa_clid",
+        "ctwa_clid",
+        "click_to_whatsapp_clid",
+        "wa_ctwa_clid",
+        "whatsapp_ctwa_clid",
+      ]) || (pull.meta_ctwa_clid ? String(pull.meta_ctwa_clid) : "");
+    const ctwa = String(ctwaRaw || "").trim();
+    if (ctwa.length >= 8 && ctwa.length <= 512 && /^[A-Za-z0-9._~+/=-]+$/.test(ctwa)) {
+      contactPatch.meta_ctwa_clid = ctwa;
+    }
 
     const { contactId, created } = await upsertContact(supabaseUrl, supabaseKey, phone, contactPatch);
     const updated = !created;

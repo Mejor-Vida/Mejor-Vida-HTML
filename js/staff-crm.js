@@ -1137,17 +1137,20 @@
           "</p><p class=\"crm-appointment-hint\">" +
           esc(t("calendar_quality_hint")) +
           "</p>"
-        : "<p>" +
-          esc(t("calendar_no_appointment")) +
-          "</p><p class=\"crm-appointment-hint\">" +
-          esc(t("calendar_quality_hint")) +
+        : "<p><strong>" +
+          esc(t("calendar_meta_confirm")) +
+          "</strong></p><p class=\"crm-appointment-hint\">" +
+          esc(t("calendar_meta_confirm_hint")) +
           "</p>";
       var actionBtn = scheduled
         ? '<button type="button" class="crm-btn secondary crm-appointment-action" data-action="clear">' +
           esc(t("calendar_unmark_btn")) +
           "</button>"
         : '<button type="button" class="crm-btn crm-appointment-action" data-action="mark">' +
-          esc(t("calendar_mark_btn")) +
+          esc(t("calendar_meta_send_btn")) +
+          "</button>" +
+          '<button type="button" class="crm-btn secondary crm-appointment-action" data-action="cancel">' +
+          esc(t("calendar_meta_cancel_btn")) +
           "</button>";
       pop.innerHTML =
         '<button type="button" class="crm-appointment-popover-close" aria-label="' +
@@ -1162,15 +1165,15 @@
       pop.style.left = Math.max(8, rect.left - 40) + "px";
       var closeBtn = pop.querySelector(".crm-appointment-popover-close");
       if (closeBtn) closeBtn.addEventListener("click", closeApptPopover);
-      var act = pop.querySelector(".crm-appointment-action");
-      if (act) {
+      pop.querySelectorAll(".crm-appointment-action").forEach(function (act) {
         act.addEventListener("click", function (e) {
           e.stopPropagation();
           var action = act.getAttribute("data-action");
           closeApptPopover();
-          saveScheduledCall(leadId, action === "mark");
+          if (action === "cancel") return;
+          saveScheduledCall(leadId, action === "mark", true);
         });
-      }
+      });
       apptPopoverCloser = function (e) {
         if (pop.contains(e.target) || btn.contains(e.target)) return;
         closeApptPopover();
@@ -1180,9 +1183,10 @@
       }, 0);
     }
 
-    async function saveScheduledCall(leadId, mark) {
+    async function saveScheduledCall(leadId, mark, alreadyConfirmed) {
       var status = $("crm-clients-status");
       if (!leadId) return;
+      if (mark && !alreadyConfirmed && !window.confirm(t("calendar_meta_confirm"))) return;
       try {
         var data = await authedApi(
           "/api/staff/leads",
