@@ -16,7 +16,7 @@
   var index = 0;
   var lastMatched = "";
   var commandArmed = true;
-  var fontSize = 64;
+  var fontSize = 92;
   var opts = {};
   var shownSent = -1;
   var micStream = null;
@@ -255,7 +255,7 @@
       '<span class="mvi-prompter__status" data-vp="status"></span>' +
       '<span class="mvi-prompter__level" data-vp="level" aria-hidden="true"><i></i></span>' +
       '<button type="button" class="mvi-prompter__mic" data-vp="mic"></button>' +
-      '<label class="mvi-prompter__font">Aa <input data-vp="font" type="range" min="48" max="96" value="64" /></label>' +
+      '<label class="mvi-prompter__font">Aa <input data-vp="font" type="range" min="64" max="140" value="92" /></label>' +
       "</div>" +
       '<p class="mvi-prompter__error" data-vp="error" hidden></p>' +
       '<div class="mvi-prompter__stage" data-vp="stage" tabindex="0">' +
@@ -273,7 +273,7 @@
     });
     overlay.addEventListener("input", function (e) {
       if (e.target.getAttribute("data-vp") === "font") {
-        fontSize = Number(e.target.value) || 64;
+        fontSize = Number(e.target.value) || 92;
         shownSent = -1;
         if (overlay && !overlay.hasAttribute("hidden")) renderWords();
       }
@@ -357,17 +357,9 @@
   }
 
   function fitNow() {
-    var stage = overlay.querySelector("[data-vp='stage']");
     var box = overlay.querySelector("[data-vp='now']");
-    if (!box || !stage || !stage.clientHeight) return;
-    var size = fontSize;
-    box.style.fontSize = size + "px";
-    var guard = 0;
-    while (stage.scrollHeight > stage.clientHeight + 2 && size > 32 && guard < 40) {
-      size -= 2;
-      box.style.fontSize = size + "px";
-      guard++;
-    }
+    if (!box) return;
+    box.style.fontSize = fontSize + "px";
   }
 
   function jumpTo(i) {
