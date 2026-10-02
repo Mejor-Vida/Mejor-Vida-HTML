@@ -196,16 +196,6 @@ function appointedCardsHtml(lang, c) {
 <div><dt>${c.coWait}</dt><dd>${c.coWaitNo}</dd></div>
 </dl>
 </a>
-<a class="lic-co-card lic-co-card--compare lic-co-card--link" href="${L.aetna}">
-<div class="lic-co-logo"><img src="${assets}img/carriers/aetna-logo.svg" alt="" width="512" height="98" loading="lazy" decoding="async"/></div>
-<h3>Aetna</h3>
-<p class="lic-co-product">${c.coAetnaProduct}</p>
-<dl class="lic-co-specs">
-<div><dt>${c.coAges}</dt><dd>${c.coAetnaAges}</dd></div>
-<div><dt>${c.coAmt}</dt><dd>${c.coAetnaAmt}</dd></div>
-<div><dt>${c.coWait}</dt><dd>${c.coWaitNo}</dd></div>
-</dl>
-</a>
 <a class="lic-co-card lic-co-card--compare lic-co-card--link" href="${L.ta}">
 <div class="lic-co-logo lic-co-logo--wide"><picture>
 <source type="image/webp" srcset="${assets}img/opt/transamerica-logo.webp"/>

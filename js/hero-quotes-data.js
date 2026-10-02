@@ -18,44 +18,6 @@ window.HERO_CAROUSEL_QUOTES = [
     }
   },
   {
-    "bubbles": [
-      {
-        "carrierKey": "aetna",
-        "logo": "img/carriers/aetna-logo.svg",
-        "logoAlt": "Aetna",
-        "coverage": "$15,000",
-        "rate": "50.96",
-        "gender": "female",
-        "age": 60,
-        "health": "good",
-        "smoker": false,
-        "rateSource": "Accendo FE Super Preferred NS annual/$1k 38.10 ×15 + $40 fee ÷12 (Brochure 2025)",
-        "position": {
-          "bottom": "26%",
-          "left": "5%",
-          "right": "auto"
-        }
-      },
-      {
-        "carrierKey": "aetna",
-        "logo": "img/carriers/aetna-logo.svg",
-        "logoAlt": "Aetna",
-        "coverage": "$10,000",
-        "rate": "44.17",
-        "gender": "male",
-        "age": 60,
-        "health": "good",
-        "smoker": false,
-        "rateSource": "Accendo FE Super Preferred NS annual/$1k 49.00 ×10 + $40 fee ÷12 (Brochure 2025)",
-        "position": {
-          "bottom": "20%",
-          "right": "4%",
-          "left": "auto"
-        }
-      }
-    ]
-  },
-  {
     "carrierKey": "corebridge",
     "logo": "img/carriers/corebridge-logo.svg",
     "logoAlt": "Corebridge",

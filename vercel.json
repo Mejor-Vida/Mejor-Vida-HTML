@@ -3,6 +3,10 @@
   "installCommand": "npm ci --omit=dev",
   "buildCommand": "",
   "redirects": [
+    { "source": "/carriers/aetna.html", "destination": "/", "permanent": false },
+    { "source": "/carriers/aetna-infantil.html", "destination": "/", "permanent": false },
+    { "source": "/en/carriers/aetna.html", "destination": "/en/", "permanent": false },
+    { "source": "/en/carriers/aetna-children.html", "destination": "/en/", "permanent": false },
     {
       "source": "/:path*",
       "has": [{ "type": "host", "value": "mejorvidainsurance.com" }],

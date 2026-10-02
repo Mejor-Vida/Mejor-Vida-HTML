@@ -78,12 +78,12 @@ function stateHero(code, lang, prefix, imgPrefix) {
     lang === "es"
       ? [
           `Un funeral tradicional en ${esc(name)} promedia cerca de <strong>${money(burialAvg)}</strong>; la cremación con servicio cerca de <strong>${money(cremationAvg)}</strong> (Funeralocity).`,
-          `Puede comparar cotizaciones de varias aseguradoras — incluidas Mutual of Omaha, Corebridge, Americo, Aetna y otras — según su edad, salud y presupuesto.`,
+          `Puede comparar cotizaciones de varias aseguradoras — incluidas Mutual of Omaha, Corebridge, Americo y otras — según su edad, salud y presupuesto.`,
           `Opciones de emisión simplificada o aceptación garantizada según su situación, con primas niveladas.`,
         ]
       : [
           `A traditional burial in ${esc(name)} averages about <strong>${money(burialAvg)}</strong>; full-service cremation about <strong>${money(cremationAvg)}</strong> (Funeralocity).`,
-          `Compare quotes from multiple carriers — including Mutual of Omaha, Corebridge, Americo, Aetna, and others — based on your age, health, and budget.`,
+          `Compare quotes from multiple carriers — including Mutual of Omaha, Corebridge, Americo, and others — based on your age, health, and budget.`,
           `Simplified-issue or guaranteed-acceptance options when they fit, with level premiums.`,
         ];
 
@@ -347,7 +347,11 @@ function carrierMetrics(c, lang) {
 }
 
 function carriersRankedTable(lang, imgPrefix, pagePrefix) {
-  const carriers = [...CARRIER_RATINGS.carriers].sort((a, b) => a.rank - b.rank);
+  // Aetna Senior Supplemental appointments end 2026-10-16. Keep the ratings
+  // record, but do not show Aetna on public pages until it is reappointed.
+  const carriers = [...CARRIER_RATINGS.carriers]
+    .filter((c) => c.slug !== "aetna")
+    .sort((a, b) => a.rank - b.rank);
   const thInsurer = lang === "es" ? "Aseguradora" : "Carrier";
   const thDetails = lang === "es" ? "Qué la distingue" : "What stands out";
   const thAmBest = "AM Best";
