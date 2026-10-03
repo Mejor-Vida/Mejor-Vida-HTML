@@ -83,7 +83,7 @@ module.exports = async function handler(req, res) {
 
   const firstName = clean(body.first_name || body.firstName || body.nombre);
   const phone = clean(body.phone || body.whatsapp_phone);
-  const subject = "Tu cuaderno gratis de Mejor Vida Seguros";
+  const subject = "Tu cuaderno de deseos funerarios";
   const html = buildHtml(firstName);
 
   let emailId;
@@ -92,7 +92,7 @@ module.exports = async function handler(req, res) {
       method: "POST",
       headers: { Authorization: `Bearer ${resendKey}`, "Content-Type": "application/json" },
       body: JSON.stringify({
-        from: "Mejor Vida Seguros <julie@mejorvidainsurance.com>",
+        from: "Julie from Mejor Vida Insurance <julie@mejorvidainsurance.com>",
         to: email,
         subject,
         html,
