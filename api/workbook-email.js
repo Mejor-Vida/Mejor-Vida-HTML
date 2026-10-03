@@ -14,6 +14,7 @@ const path = require("path");
 const { verifyManychatSecret, logRequest } = require("../lib/manychat-auth");
 const { upsertContact } = require("../lib/contacts-db");
 const { logContactCommunication, htmlToPlain } = require("../lib/contact-communications");
+const { wrapResendEmailHtml, signatureBlockES, LOGO_ES } = require("../lib/resend-email-template");
 
 const PDF_PATH = path.join(__dirname, "..", "guides", "guia-planificacion-funeral-mejor-vida.pdf");
 const PDF_BASE64 = fs.readFileSync(PDF_PATH).toString("base64");
@@ -52,10 +53,13 @@ function escapeHtml(s) {
 function buildHtml(firstName) {
   const name = clean(firstName);
   const hello = name ? `Hola ${escapeHtml(name)},` : "Hola,";
-  return `<p>${hello}</p>
+  return wrapResendEmailHtml(
+    `<p>${hello}</p>
 <p>Aquí está tu <strong>Cuaderno de deseos funerarios y papeles</strong>. Ábrelo, escribe las respuestas y guarda una copia donde tu familia pueda encontrarla el mismo día.</p>
 <p>Un testamento dice quién hereda la casa y el auto, pero casi siempre se lee después del sepelio. Este cuaderno es para los deseos del funeral, a quién avisar y dónde están los papeles. No sustituye un testamento ni un poder notarial.</p>
-<p>Mejor Vida Seguros<br>402-440-5438</p>`;
+${signatureBlockES()}`,
+    LOGO_ES,
+  );
 }
 
 module.exports = async function handler(req, res) {
