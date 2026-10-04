@@ -187,6 +187,19 @@
       ]
     },
     {
+      "source": "/staff/crm-call-drop.vcf",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/vcard; charset=utf-8"
+        },
+        {
+          "key": "Content-Disposition",
+          "value": "attachment; filename=\"crm-call-drop.vcf\""
+        }
+      ]
+    },
+    {
       "source": "/staff",
       "headers": [
         {

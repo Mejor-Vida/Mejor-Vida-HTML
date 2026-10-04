@@ -66,6 +66,7 @@ assert(isStaffCallDropPhone("402-440-5438") === true, "staff phone match");
 assert(isStaffCallDropPhone("4025550100") === false, "non-staff");
 delete process.env.CALL_INTAKE_STAFF_PHONES;
 assert(isStaffCallDropPhone("402-440-5438") === false, "staff phones unset");
+assert(isStaffCallDropPhone("402-440-5438", ["+14024405438"]) === true, "extra phones");
 
 assert(
   isAudioMedia({ url: "https://example.com/a.m4a", contentType: "application/octet-stream" }),

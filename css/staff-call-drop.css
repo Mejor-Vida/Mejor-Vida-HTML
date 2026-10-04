@@ -65,7 +65,14 @@ h3 { font-size: 16px; }
   line-height: 1.5;
 }
 
-.how { margin: 0 0 16px; }
+.steps {
+  margin: 0 0 14px;
+  padding-left: 22px;
+  color: var(--text);
+  line-height: 1.55;
+  font-size: 15px;
+}
+.steps li { margin: 0 0 8px; }
 
 .sub a { color: var(--accent); }
 

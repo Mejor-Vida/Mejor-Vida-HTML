@@ -261,6 +261,20 @@
     }
   }
 
+  function renderPhones(phones) {
+    var status = document.getElementById("phone-status");
+    var input = document.getElementById("my-phone");
+    if (!status) return;
+    if (!phones || !phones.length) {
+      status.textContent = "Not saved yet. Save this iPhone’s number so Share → Messages works.";
+      return;
+    }
+    status.textContent =
+      "Saved. After a call, Share the Note to CRM Call Drop. This phone: …" +
+      String(phones[0].phone_last10 || "").slice(-4);
+    if (input && phones[0].e164 && !input.value) input.placeholder = phones[0].e164;
+  }
+
   function formatWhen(iso) {
     if (!iso) return "";
     var d = new Date(iso);
@@ -271,6 +285,7 @@
   async function loadList() {
     try {
       var data = await api("/api/staff/call-intake");
+      renderPhones(data.phones || []);
       var items = data.items || [];
       if (!items.length) {
         listEl.innerHTML = '<p class="sub">No calls dropped yet.</p>';
@@ -425,6 +440,21 @@
   document.getElementById("signout-btn").addEventListener("click", signOut);
   document.getElementById("paste-btn").addEventListener("click", pasteTranscript);
   document.getElementById("refresh-btn").addEventListener("click", loadList);
+  document.getElementById("save-phone-btn").addEventListener("click", async function () {
+    var phone = String(document.getElementById("my-phone").value || "").trim();
+    var status = document.getElementById("phone-status");
+    if (!phone) {
+      status.textContent = "Type this iPhone’s number first.";
+      return;
+    }
+    status.textContent = "Saving…";
+    try {
+      var data = await api("/api/staff/call-intake", { action: "save-phone", phone: phone });
+      renderPhones(data.phones || []);
+    } catch (e) {
+      status.textContent = e.message || "Could not save";
+    }
+  });
   document.getElementById("file").addEventListener("change", function (ev) {
     var file = ev.target.files && ev.target.files[0];
     uploadFile(file);

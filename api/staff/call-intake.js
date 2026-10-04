@@ -13,6 +13,9 @@ const {
   applyIntake,
   getIntake,
   publicRow,
+  listStaffCallDropPhones,
+  saveStaffCallDropPhone,
+  deleteStaffCallDropPhone,
 } = require("../../lib/staff-call-intake");
 
 const ALLOWED_EXT = {
@@ -73,7 +76,8 @@ module.exports = async function handler(req, res) {
       if (status) query = `status=eq.${encodeURIComponent(status)}&` + query;
       if (leadId) query = `matched_lead_id=eq.${encodeURIComponent(leadId)}&` + query;
       const items = await restSelect(cfg, "staff_call_intakes", query);
-      return json(res, 200, { items: items || [] });
+      const phones = await listStaffCallDropPhones(cfg);
+      return json(res, 200, { items: items || [], phones });
     }
 
     if (req.method !== "POST") {
@@ -173,6 +177,18 @@ module.exports = async function handler(req, res) {
       });
       const row = Array.isArray(patched) && patched[0] ? patched[0] : await getIntake(cfg, id);
       return json(res, 200, { ok: true, item: publicRow(row) });
+    }
+
+    if (action === "save-phone") {
+      const saved = await saveStaffCallDropPhone(cfg, body.phone, actor);
+      const phones = await listStaffCallDropPhones(cfg);
+      return json(res, 200, { ok: true, phone: saved, phones });
+    }
+
+    if (action === "remove-phone") {
+      await deleteStaffCallDropPhone(cfg, body.phone);
+      const phones = await listStaffCallDropPhones(cfg);
+      return json(res, 200, { ok: true, phones });
     }
 
     return json(res, 400, { error: "Unknown action" });
