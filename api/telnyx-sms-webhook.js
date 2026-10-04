@@ -22,6 +22,7 @@ const {
   formatPhoneDisplay,
   previewText,
 } = require("../lib/staff-sms-inbox");
+const { maybeIngestTelnyxCallDrop } = require("../lib/staff-call-intake");
 
 function readJsonBody(req) {
   if (Buffer.isBuffer(req.body)) {
@@ -75,7 +76,7 @@ module.exports = async function handler(req, res) {
     return res.status(200).json({ ok: true, ignored: true });
   }
 
-  const { fromPhone, toPhone, msgBody, telnyxId } = inbound;
+  const { fromPhone, toPhone, msgBody, telnyxId, mediaUrls } = inbound;
   const supabaseUrl = process.env.SUPABASE_URL;
   const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
@@ -91,8 +92,27 @@ module.exports = async function handler(req, res) {
     toE164: toPhone || smsFromNumber() || "+14028441199",
     body: msgBody,
     telnyxId: telnyxId || null,
-    meta: { source: "telnyx_inbound" },
+    meta: {
+      source: "telnyx_inbound",
+      media_count: Array.isArray(mediaUrls) ? mediaUrls.length : 0,
+    },
   });
+
+  let callIntake = null;
+  try {
+    callIntake = await maybeIngestTelnyxCallDrop({
+      fromPhone,
+      msgBody,
+      mediaUrls,
+      telnyxId,
+    });
+  } catch (err) {
+    console.error("[telnyx-sms-webhook] call intake", err && err.message);
+  }
+  if (callIntake && callIntake.started) {
+    await fanoutInbox(fromPhone, msgBody || "Call recording received");
+    return res.status(200).json({ ok: true, inbox: true, call_intake: true, id: callIntake.id || null });
+  }
 
   const result = await handleInboundSms({
     fromPhone,

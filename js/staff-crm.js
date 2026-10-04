@@ -129,6 +129,7 @@
       return { view: "licensing", licTab: validLic[licTab] ? licTab : "overview" };
     }
     if (parts[0] === "mailbox") return { view: "mailbox" };
+    if (parts[0] === "call-intake") return { view: "call-intake" };
     if (parts[0] === "knowledge") return { view: "knowledge" };
     if (parts[0] === "ga4") return { view: "ga4" };
     if (parts[0] === "todo") {
@@ -408,6 +409,7 @@
     else if (nav === "oos") navigate("#/oos");
     else if (nav === "licensing") navigate("#/licensing/overview");
     else if (nav === "mailbox") navigate("#/mailbox");
+    else if (nav === "call-intake") navigate("#/call-intake");
     else if (nav === "knowledge") navigate("#/knowledge");
     else if (nav === "ga4") navigate("#/ga4");
     else if (nav === "todo") navigate("#/todo");
@@ -2295,6 +2297,18 @@
             '<div class="crm-placeholder"><strong>' +
             esc(t("load_error")) +
             "</strong><p>Mailbox module failed to load.</p></div>";
+        }
+        resetIdleTimer();
+        return;
+      }
+      if (route.view === "call-intake") {
+        if (window.StaffCrmCallIntake) {
+          await window.StaffCrmCallIntake.mount(main);
+        } else {
+          main.innerHTML =
+            '<div class="crm-placeholder"><strong>' +
+            esc(t("load_error")) +
+            "</strong><p>Call Drop module failed to load.</p></div>";
         }
         resetIdleTimer();
         return;

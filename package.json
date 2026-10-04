@@ -19,6 +19,7 @@
     "test:facebook-comments": "node scripts/test-facebook-comment-reply.js",
     "test:youtube-scripts": "node scripts/test-youtube-script-pages.js",
     "test:staff-accounting": "node scripts/test-staff-accounting.js",
+    "test:staff-call-intake": "node scripts/test-staff-call-intake.js",
     "dev:review": "node scripts/local-api-dev.cjs",
     "mint:intake-link": "node scripts/mint-medical-intake-dev-link.js",
     "preview:post-quote-email": "node scripts/preview-post-quote-email.js",

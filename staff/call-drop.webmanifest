@@ -1,0 +1,23 @@
+{
+  "name": "Mejor Vida Call Drop",
+  "short_name": "Call Drop",
+  "description": "Send a recorded call or transcript into the CRM",
+  "start_url": "/staff/call-drop.html",
+  "scope": "/staff/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0b1426",
+  "theme_color": "#0b1426",
+  "icons": [
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-48x48.png",
+      "sizes": "48x48",
+      "type": "image/png"
+    }
+  ]
+}
