@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="robots" content="noindex,nofollow" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Call Drop" />
+  <meta name="theme-color" content="#0b1426" />
+  <title>Mejor Vida Call Drop</title>
+  <link rel="manifest" href="/staff/call-drop.webmanifest" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="icon" href="/favicon.ico" />
+  <link rel="stylesheet" href="/css/staff-call-drop.css?v=20261004-notes-share" />
+</head>
+<body>
+  <div id="login-screen" class="login-wrap">
+    <section class="card">
+      <h1>Call Drop</h1>
+      <p class="sub">You do not drop the Notes file into Grok. After a call, you <strong>Share</strong> the Note as a text to one contact. Sign in once (julie@ or admin@). We email a 6-digit code.</p>
+      <form id="email-form">
+        <label for="email">Email</label>
+        <input id="email" type="email" autocomplete="username" required />
+        <button class="btn" id="email-btn" type="submit">Send code</button>
+      </form>
+      <form id="code-form" class="hidden">
+        <label for="code">6-digit code</label>
+        <input id="code" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="6" required />
+        <button class="btn" id="code-btn" type="submit">Sign in</button>
+        <button class="btn secondary" id="back-email" type="button">Use a different email</button>
+      </form>
+      <p id="login-err" class="err" role="alert"></p>
+      <p class="sub" style="margin-top:18px">Open this in <strong>Safari</strong>, then Share → Add to Home Screen.</p>
+    </section>
+  </div>
+
+  <div id="app" class="app hidden">
+    <header class="topbar">
+      <h2>Call Drop</h2>
+      <button type="button" class="icon-btn" id="signout-btn">Log out</button>
+    </header>
+
+    <p id="install-banner" class="banner hidden">Add this to the Home Screen: Share → Add to Home Screen.</p>
+
+    <section class="card">
+      <h3>The easy way (from Notes)</h3>
+      <ol class="steps">
+        <li>Do this <strong>once</strong>: add the contact below, and save this iPhone’s number.</li>
+        <li>After each call, open the Note.</li>
+        <li>Tap the <strong>Share</strong> button (square with an arrow).</li>
+        <li>Tap <strong>Messages</strong>, send it to <strong>CRM Call Drop</strong>.</li>
+      </ol>
+      <p class="how">That text is the whole move. You do not copy the file into Grok. If the Note has the written transcript, share the text. If it is only a sound file, share the file — a long recording may be too big for a text, so use the backup below.</p>
+      <p><a class="btn" href="/staff/crm-call-drop.vcf">Add “CRM Call Drop” to Contacts</a></p>
+      <label for="my-phone">This iPhone’s number (one time)</label>
+      <input id="my-phone" type="tel" inputmode="tel" placeholder="Your cell number" />
+      <button class="btn secondary" id="save-phone-btn" type="button">Save my iPhone number</button>
+      <p id="phone-status" class="status"></p>
+    </section>
+
+    <section class="card drop-card">
+      <h3>Backup if Share did not work</h3>
+      <label for="hint-phone">Client phone (optional)</label>
+      <input id="hint-phone" type="tel" inputmode="tel" placeholder="(402) 555-0100" />
+      <label for="transcript">Paste the Notes transcript</label>
+      <textarea id="transcript" rows="7" placeholder="Paste the words from the Note here"></textarea>
+      <button class="btn" id="paste-btn" type="button">Fill CRM from this transcript</button>
+      <div class="or">or</div>
+      <label class="btn secondary file-btn">
+        Upload the recording file
+        <input id="file" type="file" accept="audio/*,video/mp4,video/quicktime,.m4a,.mp3,.wav,.caf,.mov" hidden />
+      </label>
+      <p id="status" class="status" role="status"></p>
+    </section>
+
+    <section id="result" class="card result hidden"></section>
+
+    <section class="card">
+      <div class="row-head">
+        <h3>Recent calls</h3>
+        <button type="button" class="icon-btn" id="refresh-btn">Refresh</button>
+      </div>
+      <div id="list" class="list"></div>
+      <p class="sub"><a href="/staff/crm.html#/call-intake">Open in CRM</a></p>
+    </section>
+  </div>
+
+  <script src="/js/staff-call-drop.js?v=20261004-notes-share"></script>
+</body>
+</html>

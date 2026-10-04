@@ -1,0 +1,183 @@
+/* Staff Call Drop — mobile Home Screen app */
+:root {
+  --bg: #0b1426;
+  --panel: #10203b;
+  --text: #ecf2ff;
+  --muted: #a7b7d8;
+  --accent: #d7b46a;
+  --blue: #3b82f6;
+  --border: rgba(255, 255, 255, 0.12);
+  --danger: #ff7b7b;
+  --ok: #65d19a;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  min-height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, Inter, Segoe UI, Roboto, Arial, sans-serif;
+}
+
+.hidden { display: none !important; }
+
+.login-wrap {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+}
+
+.card {
+  width: 100%;
+  max-width: 520px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 22px;
+  margin: 0 auto 16px;
+}
+
+.app {
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 0 14px 40px;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 4px 8px;
+}
+
+h1, h2, h3 { margin: 0; }
+h1 { font-size: 22px; margin-bottom: 6px; }
+h2 { font-size: 20px; }
+h3 { font-size: 16px; }
+
+.sub, .how {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.steps {
+  margin: 0 0 14px;
+  padding-left: 22px;
+  color: var(--text);
+  line-height: 1.55;
+  font-size: 15px;
+}
+.steps li { margin: 0 0 8px; }
+
+.sub a { color: var(--accent); }
+
+label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  margin: 12px 0 6px;
+}
+
+input, textarea {
+  width: 100%;
+  border: 1px solid var(--border);
+  background: #0b1426;
+  color: var(--text);
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 16px;
+}
+
+button, .file-btn {
+  font: inherit;
+  cursor: pointer;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-top: 12px;
+  border: 0;
+  border-radius: 12px;
+  padding: 14px 16px;
+  background: var(--accent);
+  color: #1a1408;
+  font-weight: 700;
+}
+
+.btn.secondary, .file-btn {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+.icon-btn {
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  padding: 8px;
+}
+
+.err { color: var(--danger); min-height: 1.2em; }
+.err.ok { color: var(--ok); }
+.status { min-height: 1.3em; color: var(--muted); font-size: 14px; margin: 10px 0 0; }
+.or { text-align: center; color: var(--muted); margin: 14px 0 4px; font-size: 13px; }
+
+.banner {
+  background: #1a2c4d;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px 14px;
+  font-size: 14px;
+  margin: 0 0 14px;
+}
+
+.row-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.list button, .result-actions button {
+  width: 100%;
+}
+
+.item {
+  display: block;
+  text-align: left;
+  width: 100%;
+  border: 1px solid var(--border);
+  background: #0b1426;
+  color: var(--text);
+  border-radius: 12px;
+  padding: 12px;
+  margin: 8px 0;
+}
+
+.item .meta { color: var(--muted); font-size: 12px; margin-top: 4px; }
+
+.fields {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.fields li {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 14px;
+}
+
+.fields span { color: var(--muted); }
+.summary { white-space: pre-wrap; font-size: 14px; line-height: 1.45; color: var(--text); }
