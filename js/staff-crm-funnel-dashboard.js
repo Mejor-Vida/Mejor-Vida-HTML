@@ -54,10 +54,19 @@
   var SOURCE_CHANNELS = ["facebook", "google", "direct", "organic"];
   var LICENSED_STATES = [
     { value: "ALL", labelKey: "funnel_state_all" },
-    { value: "NE", labelKey: "funnel_state_ne" },
-    { value: "KS", labelKey: "funnel_state_ks" },
+    { value: "AZ", labelKey: "funnel_state_az" },
+    { value: "CA", labelKey: "funnel_state_ca" },
     { value: "CO", labelKey: "funnel_state_co" },
+    { value: "KS", labelKey: "funnel_state_ks" },
+    { value: "MI", labelKey: "funnel_state_mi" },
+    { value: "NE", labelKey: "funnel_state_ne" },
     { value: "NV", labelKey: "funnel_state_nv" },
+    { value: "NM", labelKey: "funnel_state_nm" },
+    { value: "OH", labelKey: "funnel_state_oh" },
+    { value: "SC", labelKey: "funnel_state_sc" },
+    { value: "SD", labelKey: "funnel_state_sd" },
+    { value: "TX", labelKey: "funnel_state_tx" },
+    { value: "VA", labelKey: "funnel_state_va" },
   ];
 
   function landingPagesForSource(source) {

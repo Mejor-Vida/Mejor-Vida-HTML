@@ -2338,6 +2338,49 @@ async function loadArchiveHistoryBundle(cfg, leadKeys, personHints) {
   };
 }
 
+async function listStaffLeadItems(cfg) {
+  try {
+    await selectManychatLeadsForStaff(cfg);
+  } catch (probeErr) {
+    console.error("staff/leads GET manychat probe", probeErr && probeErr.message);
+  }
+  const rows = await selectUnifiedLeadsForStaff(cfg);
+  let items = rows || [];
+  try {
+    items = await enrichListItemsWithStaffProfiles(cfg, items);
+  } catch (e) {
+    console.error("staff/leads GET enrichListItemsWithStaffProfiles", e);
+  }
+  try {
+    items = await enrichListItemsWithManychatPipeline(cfg, items);
+  } catch (e) {
+    console.error("staff/leads GET enrichListItemsWithManychatPipeline", e);
+  }
+  try {
+    await enrichLeadEmailsFromContacts(cfg, items);
+  } catch (e) {
+    console.error("staff/leads GET enrichLeadEmailsFromContacts", e);
+  }
+  try {
+    items = await enrichListItemsWithUsState(cfg, items);
+  } catch (e) {
+    console.error("staff/leads GET enrichListItemsWithUsState", e);
+  }
+  try {
+    items = await enrichListItemsWithAppointments(cfg, items);
+  } catch (e) {
+    console.error("staff/leads GET enrichListItemsWithAppointments", e);
+  }
+  try {
+    items = await enrichListItemsWithNurtureStep(cfg, items);
+  } catch (e) {
+    console.error("staff/leads GET enrichListItemsWithNurtureStep", e);
+  }
+  markPossibleDuplicates(items);
+  items.sort((x, y) => sortKey(x).localeCompare(sortKey(y)));
+  return items;
+}
+
 module.exports = async function handler(req, res) {
   const auth = await requireStaffAuth(req, res);
   if (!auth.valid) return;
@@ -2508,46 +2551,7 @@ module.exports = async function handler(req, res) {
     }
 
     try {
-      // Schema probe: must not block unified_leads if manychat_leads errors for unrelated reasons.
-      try {
-        await selectManychatLeadsForStaff(cfg);
-      } catch (probeErr) {
-        console.error("staff/leads GET manychat probe", probeErr && probeErr.message);
-      }
-      const rows = await selectUnifiedLeadsForStaff(cfg);
-      let items = rows || [];
-      try {
-        items = await enrichListItemsWithStaffProfiles(cfg, items);
-      } catch (e) {
-        console.error("staff/leads GET enrichListItemsWithStaffProfiles", e);
-      }
-      try {
-        items = await enrichListItemsWithManychatPipeline(cfg, items);
-      } catch (e) {
-        console.error("staff/leads GET enrichListItemsWithManychatPipeline", e);
-      }
-      try {
-        await enrichLeadEmailsFromContacts(cfg, items);
-      } catch (e) {
-        console.error("staff/leads GET enrichLeadEmailsFromContacts", e);
-      }
-      try {
-        items = await enrichListItemsWithUsState(cfg, items);
-      } catch (e) {
-        console.error("staff/leads GET enrichListItemsWithUsState", e);
-      }
-      try {
-        items = await enrichListItemsWithAppointments(cfg, items);
-      } catch (e) {
-        console.error("staff/leads GET enrichListItemsWithAppointments", e);
-      }
-      try {
-        items = await enrichListItemsWithNurtureStep(cfg, items);
-      } catch (e) {
-        console.error("staff/leads GET enrichListItemsWithNurtureStep", e);
-      }
-      markPossibleDuplicates(items);
-      items.sort((x, y) => sortKey(x).localeCompare(sortKey(y)));
+      const items = await listStaffLeadItems(cfg);
       return json(res, 200, { items });
     } catch (e) {
       console.error("staff/leads GET", e);
@@ -2845,6 +2849,25 @@ module.exports = async function handler(req, res) {
       }
 
       const canonicalAfterSave = await loadCanonicalLeadProfile(cfg, id, src || "unknown");
+      const staffState = stateFromRecord(canonicalAfterSave);
+      if (
+        staffState &&
+        body.profile_ext &&
+        Object.prototype.hasOwnProperty.call(body.profile_ext, "state")
+      ) {
+        const contactId =
+          cleanText(canonicalAfterSave.contacts_contact_id || canonicalAfterSave.contact_id) ||
+          (src === "contacts" ? id : "");
+        if (contactId) {
+          try {
+            await restPatch(cfg, "contacts", `id=eq.${encodeURIComponent(contactId)}`, {
+              us_state: staffState,
+            });
+          } catch (stateErr) {
+            console.error("staff/leads PATCH contact state", stateErr);
+          }
+        }
+      }
       const linkFieldTouched = ["email", "phone", "manychat_subscriber_id", "first_name", "last_name"].some((k) =>
         touched.includes(k)
       );
@@ -3074,3 +3097,4 @@ module.exports = async function handler(req, res) {
 };
 
 module.exports.archiveUnifiedLead = archiveUnifiedLead;
+module.exports.listStaffLeadItems = listStaffLeadItems;

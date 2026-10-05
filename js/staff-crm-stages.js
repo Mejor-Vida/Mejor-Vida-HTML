@@ -9,10 +9,7 @@
     { key: "contacted", color: "#e67e22" },
     { key: "engaged", color: "#5dade2" },
     { key: "client", color: "#1a5276" },
-    { key: "retained", color: "#5b2c6f" },
-    { key: "loyal", color: "#c9a227" },
     { key: "lost", color: "#95a5a6" },
-    { key: "enrolled", color: "#2980b9" },
   ];
 
   var LEGACY_MAP = {

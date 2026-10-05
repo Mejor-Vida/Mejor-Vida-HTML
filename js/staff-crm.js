@@ -11,6 +11,7 @@
   var FAIL_KEY = "mvi_staff_fail_count";
 
   var leadsCache = [];
+  var clientNotesCache = {};
   var currentDetail = null;
   var clientsRowMenuCloser = null;
   var clientsListGlobalWired = false;
@@ -103,7 +104,10 @@
       return { view: "dashboard" };
     }
     if (parts[0] === "clients") {
-      if (parts.length === 1) return { view: "clients", feed: "active" };
+      if (parts.length === 1) return { view: "clients", feed: "all" };
+      if (parts[1] === "stage-1") return { view: "clients", feed: "stage1" };
+      if (parts[1] === "stage-2") return { view: "clients", feed: "stage2" };
+      if (parts[1] === "engaging") return { view: "clients", feed: "engaging" };
       if (parts[1] === "new") return { view: "clientNew" };
       var id = parts[1];
       var tab = parts[2] || "overview";
@@ -605,9 +609,48 @@
     return renderIndicatorCell("email", on, on ? t("indicator_email_on") : t("indicator_email_off"));
   }
 
+  function areaCodeFromPhone(phone) {
+    var digits = String(phone || "").replace(/\D/g, "");
+    if (digits.length === 11 && digits.charAt(0) === "1") return digits.slice(1, 4);
+    if (digits.length === 10) return digits.slice(0, 3);
+    if (digits.length > 10) return digits.slice(-10, -7);
+    return "";
+  }
+
+  function phoneAreaState(L) {
+    var npa = areaCodeFromPhone(L && L.phone);
+    var map = window.MVI_NPA_STATE || {};
+    return npa && map[npa] ? map[npa] : "";
+  }
+
   function renderPhoneIndicator(L) {
     var on = hasValidPhone(L);
-    return renderIndicatorCell("phone", on, on ? t("indicator_phone_on") : t("indicator_phone_off"));
+    var guess = phoneAreaState(L);
+    var label = on ? t("indicator_phone_on") : t("indicator_phone_off");
+    if (guess) label = t("indicator_phone_area_state", { state: guess });
+    var icon = renderIndicatorCell("phone", on, label);
+    if (!guess) return icon;
+    return (
+      '<span class="crm-phone-with-area">' +
+      icon +
+      '<span class="crm-phone-area-state">' +
+      esc(guess) +
+      "</span></span>"
+    );
+  }
+
+  function renderNotesButton(L) {
+    var name = displayName(L);
+    return (
+      '<button type="button" class="crm-notes-btn" data-id="' +
+      esc(L.id) +
+      '" aria-label="' +
+      esc(t("notes_for_client", { name: name })) +
+      '">' +
+      '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false">' +
+      '<path fill="currentColor" d="M6 2h8.5L20 7.5V20a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm8 1.8V8h4.2L14 3.8zM8 11.5h8V13H8v-1.5zm0 3.5h8V16.5H8V15z"/>' +
+      "</svg></button>"
+    );
   }
 
   function renderReviewIndicator(L) {
@@ -784,7 +827,7 @@
     var daily = dash && dash.daily_summary ? dash.daily_summary : null;
     var newInSeq = (dash && dash.new_leads_in_sequence) || [];
 
-    var stageListHtml = ["new", "contacted", "engaged", "client", "enrolled"]
+    var stageListHtml = ["new", "contacted", "engaged", "client", "lost"]
       .map(function (key) {
         var labelKey = key === "enrolled" ? "stage_enrolled" : "stage_" + key;
         if (key === "engaged" || key === "client") labelKey = "ov_stage_" + key;
@@ -896,8 +939,50 @@
       "</div></div>";
   }
 
+  function clientFeedTabs(feed) {
+    function tab(id, labelKey) {
+      var on = feed === id;
+      return (
+        '<button type="button" class="crm-feed-tab' +
+        (on ? " active" : "") +
+        '" data-feed="' +
+        id +
+        '" role="tab" aria-selected="' +
+        (on ? "true" : "false") +
+        '">' +
+        esc(t(labelKey)) +
+        "</button>"
+      );
+    }
+    return (
+      '<div class="crm-feed-tabs" role="tablist">' +
+      tab("archive", "clients_feed_archive") +
+      tab("all", "clients_feed_all") +
+      tab("stage1", "clients_feed_stage1") +
+      tab("stage2", "clients_feed_stage2") +
+      tab("engaging", "clients_feed_engaging") +
+      "</div>"
+    );
+  }
+
+  function bindClientFeedTabs(root) {
+    root.querySelectorAll(".crm-feed-tab").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var f = btn.getAttribute("data-feed");
+        if (f === "archive") navigate("#/archive");
+        else if (f === "stage1") navigate("#/clients/stage-1");
+        else if (f === "stage2") navigate("#/clients/stage-2");
+        else if (f === "engaging") navigate("#/clients/engaging");
+        else navigate("#/clients");
+      });
+    });
+  }
+
   function renderClientsList(main, feed) {
-    feed = feed === "archive" ? "archive" : "active";
+    feed =
+      feed === "archive" || feed === "stage1" || feed === "stage2" || feed === "engaging"
+        ? feed
+        : "all";
     var stageFilter = "";
 
     function renderStageFilterHeaderCell() {
@@ -906,22 +991,7 @@
       return stages.renderStageFilterHeader(stageFilter, esc);
     }
 
-    var feedTabs =
-      '<div class="crm-feed-tabs" role="tablist">' +
-      '<button type="button" class="crm-feed-tab' +
-      (feed === "active" ? " active" : "") +
-      '" data-feed="active" role="tab" aria-selected="' +
-      (feed === "active" ? "true" : "false") +
-      '">' +
-      esc(t("clients_feed_active")) +
-      "</button>" +
-      '<button type="button" class="crm-feed-tab' +
-      (feed === "archive" ? " active" : "") +
-      '" data-feed="archive" role="tab" aria-selected="' +
-      (feed === "archive" ? "true" : "false") +
-      '">' +
-      esc(t("clients_feed_archive")) +
-      "</button></div>";
+    var feedTabs = clientFeedTabs(feed);
 
     if (feed === "archive") {
       main.innerHTML =
@@ -951,12 +1021,7 @@
         "</th></tr></thead><tbody id=\"crm-archive-tbody\"></tbody></table></div>" +
         '<p id="crm-clients-status" class="crm-empty-state"></p>';
 
-      main.querySelectorAll(".crm-feed-tab").forEach(function (btn) {
-        btn.addEventListener("click", function () {
-          var f = btn.getAttribute("data-feed");
-          navigate(f === "archive" ? "#/archive" : "#/clients");
-        });
-      });
+      bindClientFeedTabs(main);
 
       var status = $("crm-clients-status");
       var tbody = $("crm-archive-tbody");
@@ -1044,6 +1109,13 @@
       "</button>" +
       "</div></div>" +
       feedTabs +
+      (feed === "stage1"
+        ? '<p class="crm-page-sub">' + esc(t("clients_stage1_blurb")) + "</p>"
+        : feed === "stage2"
+          ? '<p class="crm-page-sub">' + esc(t("clients_stage2_blurb")) + "</p>"
+          : feed === "engaging"
+            ? '<p class="crm-page-sub">' + esc(t("clients_engaging_blurb")) + "</p>"
+            : "") +
       '<div class="crm-table-wrap">' +
       '<div class="crm-clients-search-row">' +
       '<span class="crm-col-check-spacer" aria-hidden="true"></span>' +
@@ -1068,6 +1140,8 @@
       esc(t("col_phone")) +
       '</th><th class="crm-col-indicator crm-col-review" scope="col">' +
       esc(t("col_review_sent")) +
+      '</th><th class="crm-col-notes" scope="col">' +
+      esc(t("col_notes")) +
       '</th><th class="crm-col-stage-num" scope="col">' +
       esc(t("col_nurture_step")) +
       '</th><th class="crm-col-stage">' +
@@ -1078,10 +1152,9 @@
       '<button type="button" class="crm-sort-th-btn is-active" id="crm-sort-date" aria-sort="descending">' +
       esc(t("col_date_added")) +
       ' <span class="crm-sort-icon" aria-hidden="true">↓</span></button>' +
-      '</th><th class="crm-col-menu"><span class="hidden">' +
-      esc(t("clients_row_actions")) +
-      "</span></th></tr></thead><tbody id=\"crm-clients-tbody\"></tbody></table></div>" +
+      "</th></tr></thead><tbody id=\"crm-clients-tbody\"></tbody></table></div>" +
       '<div id="crm-appointment-popover" class="crm-appointment-popover hidden" role="dialog" aria-modal="false"></div>' +
+      '<div id="crm-notes-popover" class="crm-notes-popover hidden" role="dialog" aria-modal="false"></div>' +
       '<p id="crm-clients-status" class="crm-empty-state"></p>' +
       '<div id="crm-row-menu" class="crm-row-menu hidden" role="menu"></div>' +
       '<div id="crm-clients-delete-modal" class="crm-modal-backdrop hidden" role="dialog" aria-modal="true">' +
@@ -1098,18 +1171,15 @@
       esc(t("clients_delete")) +
       "</button></div></div></div>";
 
-    main.querySelectorAll(".crm-feed-tab").forEach(function (btn) {
-      btn.addEventListener("click", function () {
-        var f = btn.getAttribute("data-feed");
-        navigate(f === "archive" ? "#/archive" : "#/clients");
-      });
-    });
+    bindClientFeedTabs(main);
 
     var q = "";
     var selectedIds = new Set();
     var rowMenuLeadId = null;
     var sortState = { column: "date", dir: "desc" };
     var apptPopoverCloser = null;
+    var notesPopoverCloser = null;
+    var notesPopoverLeadId = null;
     var duplicateFilter = false;
 
     function closeApptPopover() {
@@ -1126,6 +1196,7 @@
 
     function openApptPopover(btn, atIso, leadId) {
       closeApptPopover();
+      closeNotesPopover();
       var pop = $("crm-appointment-popover");
       if (!pop || !btn) return;
       var scheduled = !!atIso;
@@ -1288,6 +1359,12 @@
     function visibleRows() {
       var ql = q.trim().toLowerCase();
       return leadsCache.filter(function (L) {
+        if (feed === "stage1" || feed === "stage2" || feed === "engaging") {
+          if (!window.CrmStage1) return false;
+          if (feed === "stage1" && !window.CrmStage1.isStage1Lead(L)) return false;
+          if (feed === "stage2" && !window.CrmStage1.isStage2Lead(L)) return false;
+          if (feed === "engaging" && !window.CrmStage1.isEngagingLead(L)) return false;
+        }
         if (stageFilter && window.StaffCrmStages) {
           if (window.StaffCrmStages.normalizeStage(L.pipeline_stage) !== stageFilter) return false;
         }
@@ -1417,53 +1494,145 @@
       });
     }
 
-    function openRowMenu(leadId, anchorBtn) {
+    function closeNotesPopover() {
+      var pop = $("crm-notes-popover");
+      if (pop) {
+        pop.classList.add("hidden");
+        pop.innerHTML = "";
+      }
+      notesPopoverLeadId = null;
+      if (notesPopoverCloser) {
+        document.removeEventListener("click", notesPopoverCloser);
+        notesPopoverCloser = null;
+      }
+    }
+
+    function notesPopoverHtml(name, bodyHtml) {
+      return (
+        '<button type="button" class="crm-notes-popover-close" aria-label="' +
+        esc(t("close")) +
+        '">&times;</button>' +
+        "<h3>" +
+        esc(t("notes_for_client", { name: name || t("col_notes") })) +
+        "</h3>" +
+        '<div class="crm-notes-popover-body">' +
+        bodyHtml +
+        "</div>"
+      );
+    }
+
+    function renderNotesPopoverItems(items) {
+      if (!items || !items.length) {
+        return '<p class="crm-notes-empty">' + esc(t("cn_no_notes")) + "</p>";
+      }
+      return (
+        "<ul>" +
+        items
+          .map(function (n) {
+            var when = formatIndicatorWhen(n.created_at) || "";
+            return (
+              "<li>" +
+              (when ? '<div class="crm-notes-popover-date">' + esc(when) + "</div>" : "") +
+              '<div class="crm-notes-popover-text">' +
+              esc(n.note || "") +
+              "</div></li>"
+            );
+          })
+          .join("") +
+        "</ul>"
+      );
+    }
+
+    function positionNotesPopover(pop, btn) {
+      var rect = btn.getBoundingClientRect();
+      var margin = 12;
+      var gap = 6;
+      var width = Math.min(340, window.innerWidth - margin * 2);
+      var left = rect.left;
+      if (left + width > window.innerWidth - margin) left = window.innerWidth - width - margin;
+      var spaceBelow = Math.max(0, window.innerHeight - rect.bottom - gap - margin);
+      var spaceAbove = Math.max(0, rect.top - gap - margin);
+      var placeAbove = spaceBelow < 180 && spaceAbove > spaceBelow;
+      var maxH = Math.floor(placeAbove ? spaceAbove : spaceBelow);
+      if (maxH < 48) {
+        placeAbove = spaceAbove > spaceBelow;
+        maxH = Math.floor(Math.max(spaceAbove, spaceBelow, 48));
+      }
+      pop.style.width = width + "px";
+      pop.style.maxHeight = maxH + "px";
+      pop.style.left = Math.max(margin, left) + "px";
+      if (placeAbove) {
+        pop.style.top = "auto";
+        pop.style.bottom = window.innerHeight - rect.top + gap + "px";
+      } else {
+        pop.style.bottom = "auto";
+        pop.style.top = rect.bottom + gap + "px";
+      }
+    }
+
+    function fillNotesPopover(leadId, name, btn) {
+      var pop = $("crm-notes-popover");
+      if (!pop || notesPopoverLeadId !== leadId) return;
+      var cached = clientNotesCache[leadId];
+      pop.innerHTML = notesPopoverHtml(name, renderNotesPopoverItems(cached && cached.items));
+      positionNotesPopover(pop, btn);
+      var closeBtn = pop.querySelector(".crm-notes-popover-close");
+      if (closeBtn) {
+        closeBtn.addEventListener("click", function (e) {
+          e.stopPropagation();
+          closeNotesPopover();
+        });
+      }
+    }
+
+    async function openNotesPopover(btn, leadId) {
+      closeNotesPopover();
+      closeApptPopover();
       closeRowMenu();
-      rowMenuLeadId = leadId;
-      var menu = $("crm-row-menu");
-      if (!menu || !anchorBtn) return;
+      closeAllStageMenus();
+      var pop = $("crm-notes-popover");
+      if (!pop || !btn || !leadId) return;
       var row = leadsCache.find(function (x) {
         return x.id === leadId;
       });
-      var alreadyScheduled = !!(row && row.call_scheduled_at);
-      menu.innerHTML =
-        '<button type="button" data-action="view">' +
-        esc(t("menu_view_client")) +
-        "</button>" +
-        '<button type="button" data-action="quote">' +
-        esc(t("menu_start_quote")) +
-        "</button>" +
-        '<button type="button" data-action="contact">' +
-        esc(t("menu_contact")) +
-        "</button>" +
-        '<button type="button" data-action="reminder">' +
-        esc(t("menu_add_reminder")) +
-        "</button>" +
-        '<button type="button" data-action="' +
-        (alreadyScheduled ? "clear-call" : "schedule-call") +
-        '">' +
-        esc(alreadyScheduled ? t("calendar_unmark_btn") : t("calendar_mark_btn")) +
-        "</button>";
-      menu.classList.remove("hidden");
-      anchorBtn.setAttribute("aria-expanded", "true");
-      var rect = anchorBtn.getBoundingClientRect();
-      menu.style.top = rect.bottom + 6 + "px";
-      menu.style.left = Math.max(8, rect.right - 190) + "px";
-      menu.querySelectorAll("button[data-action]").forEach(function (btn) {
-        btn.addEventListener("click", function (e) {
+      var name = displayName(row);
+      notesPopoverLeadId = leadId;
+      pop.innerHTML = notesPopoverHtml(name, '<p class="crm-notes-empty">' + esc(t("cn_loading")) + "</p>");
+      pop.classList.remove("hidden");
+      positionNotesPopover(pop, btn);
+      var closeBtn = pop.querySelector(".crm-notes-popover-close");
+      if (closeBtn) {
+        closeBtn.addEventListener("click", function (e) {
           e.stopPropagation();
-          var action = btn.getAttribute("data-action");
-          var id = rowMenuLeadId;
-          closeRowMenu();
-          if (!id) return;
-          if (action === "view") navigate("#/clients/" + encodeURIComponent(id) + "/overview");
-          else if (action === "quote") navigate("#/clients/" + encodeURIComponent(id) + "/products");
-          else if (action === "contact") navigate("#/clients/" + encodeURIComponent(id) + "/connect");
-          else if (action === "reminder") navigate("#/clients/" + encodeURIComponent(id) + "/comm-notes");
-          else if (action === "schedule-call") saveScheduledCall(id, true);
-          else if (action === "clear-call") saveScheduledCall(id, false);
+          closeNotesPopover();
         });
-      });
+      }
+      notesPopoverCloser = function (e) {
+        if (pop.contains(e.target) || btn.contains(e.target)) return;
+        closeNotesPopover();
+      };
+      setTimeout(function () {
+        document.addEventListener("click", notesPopoverCloser);
+      }, 0);
+      if (clientNotesCache[leadId]) {
+        fillNotesPopover(leadId, name, btn);
+        return;
+      }
+      try {
+        var data = await authedApi("/api/staff/notes?leadId=" + encodeURIComponent(leadId), null, {
+          method: "GET",
+        });
+        clientNotesCache[leadId] = { items: (data && data.items) || [] };
+      } catch (e) {
+        if (notesPopoverLeadId !== leadId) return;
+        pop.innerHTML = notesPopoverHtml(
+          name,
+          '<p class="crm-notes-empty">' + esc((e && e.message) || t("notes_load_failed")) + "</p>"
+        );
+        positionNotesPopover(pop, btn);
+        return;
+      }
+      fillNotesPopover(leadId, name, btn);
     }
 
     async function enrollLeadNurtureFromList(btn) {
@@ -1522,24 +1691,41 @@
       if (!tbody) return;
       closeRowMenu();
       closeApptPopover();
+      closeNotesPopover();
       closeAllStageMenus();
       var rows = sortedRows();
       if (!rows.length) {
         tbody.innerHTML = "";
-        if (status) status.textContent = q.trim() ? t("no_matches") : t("no_clients");
+        if (status) {
+          status.textContent = q.trim()
+            ? t("no_matches")
+            : feed === "stage1"
+              ? t("stage1_empty")
+              : feed === "stage2"
+                ? t("stage2_empty")
+                : feed === "engaging"
+                  ? t("engaging_empty")
+                  : t("no_clients");
+        }
         updateBulkBar();
         return;
       }
-      if (status && !status.textContent) {
-        status.textContent = t("showing_clients", { shown: rows.length, total: leadsCache.length });
-      } else if (status) {
+      if (status) {
+        var listTotal = leadsCache.length;
+        if (window.CrmStage1 && (feed === "stage1" || feed === "stage2" || feed === "engaging")) {
+          listTotal = leadsCache.filter(function (L) {
+            if (feed === "stage1") return window.CrmStage1.isStage1Lead(L);
+            if (feed === "stage2") return window.CrmStage1.isStage2Lead(L);
+            return window.CrmStage1.isEngagingLead(L);
+          }).length;
+        }
         if (stageFilter && window.StaffCrmStages) {
           status.textContent =
             t("stage_filtered", { stage: window.StaffCrmStages.stageLabel(stageFilter) }) +
             " · " +
-            t("showing_clients", { shown: rows.length, total: leadsCache.length });
+            t("showing_clients", { shown: rows.length, total: listTotal });
         } else {
-          status.textContent = t("showing_clients", { shown: rows.length, total: leadsCache.length });
+          status.textContent = t("showing_clients", { shown: rows.length, total: listTotal });
         }
       }
       tbody.innerHTML = rows
@@ -1559,6 +1745,16 @@
             " /></td><td><span class=\"name-link\" role=\"link\" tabindex=\"0\">" +
             esc(displayName(L)) +
             "</span>" +
+            (function () {
+              if ((feed !== "stage1" && feed !== "stage2") || !window.CrmStage1) return "";
+              var day = window.CrmStage1.stage1DayNumber(L);
+              if (!day) return "";
+              return (
+                ' <span class="crm-stage1-day">' +
+                esc(t("stage1_day", { day: day })) +
+                "</span>"
+              );
+            })() +
             (L.possible_duplicate
               ? ' <span class="crm-dup-badge" title="' +
                 esc(
@@ -1578,6 +1774,8 @@
             renderPhoneIndicator(L) +
             '</td><td class="crm-col-indicator crm-col-review">' +
             renderReviewIndicator(L) +
+            '</td><td class="crm-col-notes">' +
+            renderNotesButton(L) +
             '</td><td class="crm-col-stage-num">' +
             renderNurtureStepCell(L) +
             '</td><td class="crm-col-stage">' +
@@ -1586,11 +1784,7 @@
             renderCalendarCell(L) +
             '</td><td class="crm-col-date">' +
             esc(formatDateAdded(L.created_at)) +
-            '</td><td class="crm-col-menu"><button type="button" class="crm-row-menu-btn" data-id="' +
-            esc(L.id) +
-            '" aria-label="' +
-            esc(t("clients_row_actions")) +
-            '" aria-haspopup="true" aria-expanded="false">&#8942;</button></td></tr>'
+            "</td></tr>"
           );
         })
         .join("");
@@ -1630,16 +1824,16 @@
         });
       });
 
-      tbody.querySelectorAll(".crm-row-menu-btn").forEach(function (btn) {
+      tbody.querySelectorAll(".crm-notes-btn").forEach(function (btn) {
         btn.addEventListener("click", function (e) {
           e.stopPropagation();
           var id = btn.getAttribute("data-id");
           if (!id) return;
-          if (rowMenuLeadId === id && !$("crm-row-menu").classList.contains("hidden")) {
-            closeRowMenu();
+          if (notesPopoverLeadId === id && !$("crm-notes-popover").classList.contains("hidden")) {
+            closeNotesPopover();
             return;
           }
-          openRowMenu(id, btn);
+          openNotesPopover(btn, id);
         });
       });
 
@@ -1653,6 +1847,7 @@
           closeAllStageMenus();
           closeRowMenu();
           closeApptPopover();
+          closeNotesPopover();
           if (open) {
             menu.classList.add("hidden");
             resetStageMenuPosition(menu);
@@ -2218,7 +2413,12 @@
           renderClientsList(main, "archive");
         } else {
           await refreshLeads();
-          renderClientsList(main, "active");
+          renderClientsList(
+            main,
+            route.feed === "stage1" || route.feed === "stage2" || route.feed === "engaging"
+              ? route.feed
+              : "all"
+          );
         }
         resetIdleTimer();
         return;

@@ -24,10 +24,7 @@
     "contacted",
     "engaged",
     "client",
-    "retained",
-    "loyal",
     "lost",
-    "enrolled",
   ];
 
   var SOURCE_OPTIONS = [

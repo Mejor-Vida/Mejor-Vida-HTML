@@ -145,7 +145,7 @@ module.exports = async function handler(req, res) {
   const stateFilter =
     stateFilterRaw === "ALL" || !stateFilterRaw
       ? "ALL"
-      : ["NE", "KS", "CO", "NV"].includes(stateFilterRaw)
+      : LICENSED_STATES.includes(stateFilterRaw)
         ? stateFilterRaw
         : "ALL";
 
@@ -234,7 +234,7 @@ module.exports = async function handler(req, res) {
     const qualityState = String(req.query.quality_state || "").trim().toUpperCase();
     const allowed = qualityState === "UNKNOWN" || LICENSED_STATES.includes(qualityState);
     if (!allowed) {
-      return json(res, 400, { error: "quality_state_daily requires quality_state (NE, KS, CO, NV)" });
+      return json(res, 400, { error: "quality_state_daily requires a licensed state or UNKNOWN" });
     }
     try {
       const fbVariant = parseFacebookViewVariant(view);
