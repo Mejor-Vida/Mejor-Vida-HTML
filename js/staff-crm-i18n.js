@@ -560,6 +560,13 @@
       clients_deleting: "Archiving…",
       clients_deleted: "Archived {count} client(s).",
       clients_delete_failed: "Could not archive one or more clients.",
+      clients_integrity_send: "Send to Integrity",
+      clients_integrity_confirm_title: "Send to Integrity Connect?",
+      clients_integrity_confirm_body:
+        "Create {count} selected client(s) in Integrity Connect using their CRM name, phone, email, and profile details.",
+      clients_integrity_sending: "Sending to Integrity Connect…",
+      clients_integrity_result: "Integrity Connect: sent {sent}, skipped {skipped}, failed {failed}.",
+      clients_integrity_failed: "Could not send clients to Integrity Connect.",
       clients_feed_active: "Active Feed",
       clients_feed_all: "All clients",
       clients_feed_stage1: "Stage 1",
@@ -2195,6 +2202,14 @@
       clients_deleting: "Archivando…",
       clients_deleted: "Se archivaron {count} cliente(s).",
       clients_delete_failed: "No se pudo archivar uno o más clientes.",
+      clients_integrity_send: "Enviar a Integrity",
+      clients_integrity_confirm_title: "¿Enviar a Integrity Connect?",
+      clients_integrity_confirm_body:
+        "Se crearán {count} cliente(s) seleccionado(s) en Integrity Connect con su nombre, teléfono, correo y datos del perfil del CRM.",
+      clients_integrity_sending: "Enviando a Integrity Connect…",
+      clients_integrity_result:
+        "Integrity Connect: enviados {sent}, omitidos {skipped}, fallidos {failed}.",
+      clients_integrity_failed: "No se pudieron enviar los clientes a Integrity Connect.",
       clients_feed_active: "Feed activo",
       clients_feed_all: "Todos los clientes",
       clients_feed_stage1: "Etapa 1",

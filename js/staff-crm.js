@@ -1098,6 +1098,13 @@
       '">' +
       esc(t("clients_delete")) +
       "</button>" +
+      '<button type="button" id="crm-clients-integrity" class="crm-btn secondary" disabled title="' +
+      esc(t("clients_integrity_send")) +
+      '" aria-label="' +
+      esc(t("clients_integrity_send")) +
+      '">' +
+      esc(t("clients_integrity_send")) +
+      "</button>" +
       "</div>" +
       '<div class="crm-clients-head-actions">' +
       '<button type="button" id="crm-filter-duplicates" class="crm-dup-filter-btn" aria-pressed="false">' +
@@ -1169,6 +1176,19 @@
       "</button>" +
       '<button type="button" id="crm-clients-delete-confirm" class="crm-btn">' +
       esc(t("clients_delete")) +
+      "</button></div></div></div>" +
+      '<div id="crm-clients-integrity-modal" class="crm-modal-backdrop hidden" role="dialog" aria-modal="true">' +
+      '<div class="crm-modal">' +
+      "<h2 id=\"crm-clients-integrity-title\">" +
+      esc(t("clients_integrity_confirm_title")) +
+      "</h2>" +
+      '<p id="crm-clients-integrity-body"></p>' +
+      '<div class="crm-modal-actions">' +
+      '<button type="button" id="crm-clients-integrity-cancel" class="crm-btn secondary">' +
+      esc(t("conn_no")) +
+      "</button>" +
+      '<button type="button" id="crm-clients-integrity-confirm" class="crm-btn">' +
+      esc(t("clients_integrity_send")) +
       "</button></div></div></div>";
 
     bindClientFeedTabs(main);
@@ -1473,6 +1493,8 @@
     function updateBulkBar() {
       var delBtn = $("crm-clients-delete");
       if (delBtn) delBtn.disabled = selectedIds.size === 0;
+      var icBtn = $("crm-clients-integrity");
+      if (icBtn) icBtn.disabled = selectedIds.size === 0;
       var selAll = $("crm-clients-select-all");
       var rows = visibleRows();
       if (!selAll) return;
@@ -1926,6 +1948,50 @@
       updateBulkBar();
     }
 
+    function openIntegrityModal() {
+      if (!selectedIds.size) return;
+      var mod = $("crm-clients-integrity-modal");
+      var body = $("crm-clients-integrity-body");
+      if (body) body.textContent = t("clients_integrity_confirm_body", { count: selectedIds.size });
+      if (mod) mod.classList.remove("hidden");
+    }
+
+    function closeIntegrityModal() {
+      var mod = $("crm-clients-integrity-modal");
+      if (mod) mod.classList.add("hidden");
+    }
+
+    async function sendSelectedToIntegrity() {
+      closeIntegrityModal();
+      var ids = Array.from(selectedIds);
+      if (!ids.length) return;
+      var status = $("crm-clients-status");
+      var icBtn = $("crm-clients-integrity");
+      var delBtn = $("crm-clients-delete");
+      if (status) status.textContent = t("clients_integrity_sending");
+      if (icBtn) icBtn.disabled = true;
+      if (delBtn) delBtn.disabled = true;
+      try {
+        var data = await authedApi("/api/staff/integrity-push", { ids: ids }, { method: "POST" });
+        var sent = Number((data && data.sent) || 0);
+        var skipped = Number((data && data.skipped) || 0);
+        var failed = Number((data && data.failed) || 0);
+        if (status) {
+          status.textContent = t("clients_integrity_result", {
+            sent: sent,
+            skipped: skipped,
+            failed: failed,
+          });
+        }
+      } catch (e) {
+        if (status) {
+          status.textContent =
+            (e && e.message) || t("clients_integrity_failed");
+        }
+      }
+      updateBulkBar();
+    }
+
     var sortNameBtn = $("crm-sort-name");
     if (sortNameBtn) {
       sortNameBtn.addEventListener("click", function () {
@@ -1994,6 +2060,23 @@
     if (delMod) {
       delMod.addEventListener("click", function (e) {
         if (e.target === delMod) closeDeleteModal();
+      });
+    }
+
+    var icBtn = $("crm-clients-integrity");
+    if (icBtn) icBtn.addEventListener("click", openIntegrityModal);
+    var icCancel = $("crm-clients-integrity-cancel");
+    if (icCancel) icCancel.addEventListener("click", closeIntegrityModal);
+    var icConfirm = $("crm-clients-integrity-confirm");
+    if (icConfirm) {
+      icConfirm.addEventListener("click", function () {
+        void sendSelectedToIntegrity();
+      });
+    }
+    var icMod = $("crm-clients-integrity-modal");
+    if (icMod) {
+      icMod.addEventListener("click", function (e) {
+        if (e.target === icMod) closeIntegrityModal();
       });
     }
 
