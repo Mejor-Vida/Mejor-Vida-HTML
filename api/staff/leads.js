@@ -149,17 +149,41 @@ function mergePreferSource(base, canonicalPatch) {
   return out;
 }
 
-/** Merge staff profile_data blobs: fill blanks in `a` from `b` (shallow + profile_ext). */
+/**
+ * Merge staff profile blobs. Keys already present on the primary profile
+ * (including explicit null clears) are kept; only missing keys fill from `b`.
+ */
 function mergeStaffProfileData(a, b) {
-  const out = mergePreferSource(a || {}, b || {});
-  const ae = out && out.profile_ext && typeof out.profile_ext === "object" ? out.profile_ext : {};
-  const be = b && b.profile_ext && typeof b.profile_ext === "object" ? b.profile_ext : {};
-  if (Object.keys(be).length || Object.keys(ae).length) out.profile_ext = mergePreferSource(ae, be);
+  const out = Object.assign({}, a || {});
+  const patch = b && typeof b === "object" ? b : {};
+  Object.keys(patch).forEach((k) => {
+    if (k === "profile_ext") return;
+    if (Object.prototype.hasOwnProperty.call(out, k)) return;
+    out[k] = patch[k];
+  });
+  const ae = out.profile_ext && typeof out.profile_ext === "object" ? out.profile_ext : {};
+  const be = patch.profile_ext && typeof patch.profile_ext === "object" ? patch.profile_ext : {};
+  if (Object.keys(be).length || Object.keys(ae).length) {
+    out.profile_ext = mergePreferSource(ae, be);
+  }
   return out;
 }
 
 function mergePreferCanonical(sourceValue, canonicalValue) {
   return isBlankValue(canonicalValue) ? sourceValue : canonicalValue;
+}
+
+/**
+ * Prefer a staff-saved profile field when the key exists, even if blank.
+ * Clearing last name (or email) must not fall back to the WhatsApp/source value.
+ */
+function mergePreferCanonicalKey(sourceValue, canonicalObj, key) {
+  if (canonicalObj && Object.prototype.hasOwnProperty.call(canonicalObj, key)) {
+    const v = canonicalObj[key];
+    if (v === false || v === 0) return v;
+    return isBlankValue(v) ? "" : v;
+  }
+  return sourceValue;
 }
 
 function normalizeCitizenshipStatus(v) {
@@ -294,10 +318,10 @@ function buildListItemFromRow(r, canonical) {
     us_state: normalizeUsStateAbbr(r.us_state || r.state_code || r.state) || "",
   };
   if (canonical && typeof canonical === "object") {
-    item.first_name = mergePreferCanonical(item.first_name, canonical.first_name);
-    item.last_name = mergePreferCanonical(item.last_name, canonical.last_name);
-    item.email = mergePreferCanonical(item.email, canonical.email);
-    item.phone = mergePreferCanonical(item.phone, canonical.phone);
+    item.first_name = mergePreferCanonicalKey(item.first_name, canonical, "first_name");
+    item.last_name = mergePreferCanonicalKey(item.last_name, canonical, "last_name");
+    item.email = mergePreferCanonicalKey(item.email, canonical, "email");
+    item.phone = mergePreferCanonicalKey(item.phone, canonical, "phone");
     item.language = mergePreferCanonical(item.language, canonical.language);
     item.pipeline_stage = mergePreferCanonical(item.pipeline_stage, canonical.pipeline_stage);
     item.tag = mergePreferCanonical(item.tag, canonical.tag);
@@ -863,10 +887,10 @@ async function composeMergedLeadDetail(cfg, detail, options) {
   const merged = Object.assign({}, detail);
   const topLevelPatch = Object.assign({}, canonical);
   delete topLevelPatch.profile_ext;
-  merged.first_name = mergePreferCanonical(detail.first_name, topLevelPatch.first_name);
-  merged.last_name = mergePreferCanonical(detail.last_name, topLevelPatch.last_name);
-  merged.email = mergePreferCanonical(detail.email, topLevelPatch.email);
-  merged.phone = mergePreferCanonical(detail.phone, topLevelPatch.phone);
+  merged.first_name = mergePreferCanonicalKey(detail.first_name, canonical, "first_name");
+  merged.last_name = mergePreferCanonicalKey(detail.last_name, canonical, "last_name");
+  merged.email = mergePreferCanonicalKey(detail.email, canonical, "email");
+  merged.phone = mergePreferCanonicalKey(detail.phone, canonical, "phone");
   merged.language = mergePreferCanonical(detail.language, topLevelPatch.language);
   merged.age = mergePreferCanonical(detail.age, topLevelPatch.age);
   merged.sex = mergePreferCanonical(detail.sex, topLevelPatch.sex);
@@ -2878,10 +2902,10 @@ module.exports = async function handler(req, res) {
           await linkLeadToContacts(cfg, {
             leadId: id,
             leadSourceTable: src || "unknown",
-            phone: mergePreferCanonical(unified.phone, canonicalAfterSave.phone),
-            email: mergePreferCanonical(String(unified.email || "").trim(), canonicalAfterSave.email),
-            first_name: mergePreferCanonical(unified.first_name, canonicalAfterSave.first_name),
-            last_name: mergePreferCanonical(unified.last_name, canonicalAfterSave.last_name),
+            phone: mergePreferCanonicalKey(unified.phone, canonicalAfterSave, "phone"),
+            email: mergePreferCanonicalKey(String(unified.email || "").trim(), canonicalAfterSave, "email"),
+            first_name: mergePreferCanonicalKey(unified.first_name, canonicalAfterSave, "first_name"),
+            last_name: mergePreferCanonicalKey(unified.last_name, canonicalAfterSave, "last_name"),
             language: mergePreferCanonical(unified.language, canonicalAfterSave.language),
             manychat_subscriber_id: mergePreferCanonical(
               unified.manychat_subscriber_id,
@@ -2905,10 +2929,10 @@ module.exports = async function handler(req, res) {
         const linkHints = {
           leadId: id,
           leadSourceTable: src || "unknown",
-          phone: mergePreferCanonical(unified.phone, canonicalAfterSave.phone),
-          email: mergePreferCanonical(String(unified.email || "").trim(), canonicalAfterSave.email),
-          first_name: mergePreferCanonical(unified.first_name, canonicalAfterSave.first_name),
-          last_name: mergePreferCanonical(unified.last_name, canonicalAfterSave.last_name),
+          phone: mergePreferCanonicalKey(unified.phone, canonicalAfterSave, "phone"),
+          email: mergePreferCanonicalKey(String(unified.email || "").trim(), canonicalAfterSave, "email"),
+          first_name: mergePreferCanonicalKey(unified.first_name, canonicalAfterSave, "first_name"),
+          last_name: mergePreferCanonicalKey(unified.last_name, canonicalAfterSave, "last_name"),
           language: mergePreferCanonical(unified.language, canonicalAfterSave.language),
           manychat_subscriber_id: mergePreferCanonical(
             unified.manychat_subscriber_id,
