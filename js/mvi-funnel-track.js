@@ -12,7 +12,21 @@
   var recentTrackKeys = {};
   var DEDUPE_MS = 600;
 
-  var LICENSED_STATES = { NE: true, KS: true, CO: true, NV: true };
+  var LICENSED_STATES = {
+    AZ: true,
+    CA: true,
+    CO: true,
+    KS: true,
+    MI: true,
+    NE: true,
+    NV: true,
+    NM: true,
+    OH: true,
+    SC: true,
+    SD: true,
+    TX: true,
+    VA: true,
+  };
 
   var STEP_NAME_MAP = {
     landing_contact: "landing",

@@ -1,0 +1,21 @@
+---
+description: Reference only for Facebook ad budget, testing order, and metrics questions. Do not change the built Ad Builder, hooks, or photos to match this guide unless Julie asks.
+alwaysApply: false
+---
+
+# Facebook ads low-budget guide (reference only)
+
+Source: `Mejor_Vida_FB_Ads_Low_Budget_Guide.pdf` (Sergio Cardenas video, adapted for Mejor Vida, September 25, 2026). Use this when Julie asks how a test, metric, or budget change should be handled. Do not rebuild the live system from it.
+
+## The built system stays
+
+Ad Builder stages, `hooks.json`, and `ad-photos.json` stay as already built. Stage 1 is many images with one hook and one wording. Stage 2 is one image with many hooks and many wordings. Stage 3 is one image, one hook, and many wordings. Do not shrink those stages to the guide’s 3–4 live ads unless she asks.
+
+## Reference rules
+
+- Creative first, then WhatsApp destination, then audience, then budget. Change one of those at a time.
+- At about $20/day, the guide prefers 3–4 live ads with a reason for each, and comparable exposure (about 1,000 impressions as a checkpoint, not a winner).
+- Do not name a winner from CTR (all) or CPM. Order is: compliance, comparable delivery, cost per messaging conversation and link CTR, qualified chats and appointments, then applications and placed policies.
+- A WhatsApp click is not a lead. A started chat is not yet qualified. ManyChat completion teaches Meta only if that event is sent back.
+- Keep a control running. Test challengers separately. Raise a $20 budget by about $3–$5, then watch.
+- One hostile comment is not a verdict. Repeated confusion or a misleading claim is a reason to revise.

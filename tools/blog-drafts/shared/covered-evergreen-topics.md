@@ -22,6 +22,16 @@ Update this file when Julie publishes a new guide-style article.
 
 See Section 6.2 of `tools/weekly-blog-system-rules.md` (final expense vs prepaid funeral, graded benefits, beneficiaries, missed premiums, term end/conversion, whole life vs FE, etc.).
 
+## Added 2026-09-27 weekly letter (not yet a public blog page)
+
+| Topic | Path |
+|---|---|
+| Late final expense premium, grace period, lapse | newsletter only |
+| Cash value on a small whole life policy | newsletter only |
+| Convertible term life | newsletter only |
+
+Do not reuse height/weight, Atlantic Coast Life, or “illustrations are not guarantees” — those ideas are already on the site or in the 2026-09-20 and 2026-06-21 letters.
+
 ## Added 2026-08-02 weekly
 
 | Topic | Path |

@@ -46,6 +46,30 @@
       number: "1777665",
       pdf: "julie-license-oh.pdf?v=20260928-cert",
     },
+    NM: {
+      nameEs: "Nuevo México",
+      nameEn: "New Mexico",
+      typeEs: "Productora no residente",
+      typeEn: "Non-resident producer",
+      number: "21695431",
+      pdf: "julie-license-nm.pdf?v=20260928-cert",
+    },
+    SC: {
+      nameEs: "Carolina del Sur",
+      nameEn: "South Carolina",
+      typeEs: "Productora no residente",
+      typeEn: "Non-resident producer",
+      number: "21695431",
+      pdf: "julie-license-sc.pdf?v=20260928-cert",
+    },
+    SD: {
+      nameEs: "Dakota del Sur",
+      nameEn: "South Dakota",
+      typeEs: "Productora no residente",
+      typeEn: "Non-resident producer",
+      number: "21695431",
+      pdf: "julie-license-sd.pdf?v=20260928-cert",
+    },
   };
 
   var objectUrlCache = {};

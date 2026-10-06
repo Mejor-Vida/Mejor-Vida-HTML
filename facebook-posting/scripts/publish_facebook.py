@@ -59,11 +59,37 @@ def _mime_for_path(path: Path) -> str:
     return "image/png"
 
 
+def publish_video(message: str, video_path: Path, *, title: str = "") -> dict:
+    """Upload a local video to the Page feed. Caption is Graph ``description``."""
+    config = _load_config()
+    page_id = config["page_id"]
+    token = config["page_access_token"]
+    path = Path(video_path)
+    if not path.is_file():
+        raise FileNotFoundError(f"Video file not found: {path}")
+    url = f"https://graph.facebook.com/v21.0/{page_id}/videos"
+    data = {
+        "description": message,
+        "access_token": token,
+        "published": "true",
+    }
+    if str(title).strip():
+        data["title"] = str(title).strip()
+    with path.open("rb") as fp:
+        files = {"source": (path.name, fp, "video/mp4")}
+        resp = requests.post(url, data=data, files=files, timeout=600, verify=certifi.where())
+    if not resp.ok:
+        snippet = (resp.text or "")[:800]
+        raise requests.HTTPError(f"{resp.status_code} {resp.reason} — {snippet}", response=resp)
+    return resp.json()
+
+
 def publish_post(
     message: str,
     image_url: Optional[str] = None,
     *,
     image_path: Optional[Path] = None,
+    video_path: Optional[Path] = None,
 ) -> dict:
     """
     Publish a post to the Facebook Page.
@@ -72,13 +98,13 @@ def publish_post(
         message: The post caption/text
         image_url: Optional public URL of image to attach (Graph fetches it).
         image_path: Optional local image file; uploaded as multipart ``source`` (no public URL needed).
+        video_path: Optional local MP4; uploaded to ``/{page-id}/videos``.
 
     Returns:
         API response dict with post id, etc.
-
-    Raises:
-        requests.HTTPError: If the API returns an error
     """
+    if video_path is not None:
+        return publish_video(message, Path(video_path))
     config = _load_config()
     page_id = config["page_id"]
     token = config["page_access_token"]
@@ -211,11 +237,12 @@ def publish_post_package(
     image_url: Optional[str] = None,
     *,
     image_path: Optional[Path] = None,
+    video_path: Optional[Path] = None,
     first_comment_mode: str = "graph",
     first_comment_delay_sec: int = 0,
 ) -> dict[str, Any]:
     """
-    Publish main_caption (+ optional image), then schedule/post the first follow-up comment.
+    Publish main_caption (+ optional image or video), then schedule/post the first follow-up comment.
 
     ``first_comment_mode``:
     - ``graph`` (default): post comment via Graph API after optional delay (blocks until done).
@@ -225,7 +252,12 @@ def publish_post_package(
     Aligns with facebook-post-rules.md (link in comment, not main caption).
     """
     result: dict[str, Any] = dict(
-        publish_post(package.main_caption, image_url=image_url, image_path=image_path)
+        publish_post(
+            package.main_caption,
+            image_url=image_url,
+            image_path=image_path,
+            video_path=video_path,
+        )
     )
     pid = _graph_post_id(result)
     comment = package.first_comment.strip()

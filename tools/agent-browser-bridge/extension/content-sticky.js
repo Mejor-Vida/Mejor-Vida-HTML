@@ -150,7 +150,7 @@
         <div class="drag" id="drag" title="Drag to move">
           <div class="title">MVI Bridge</div>
           <div class="state" id="state">OFF</div>
-          <div class="hint">⌥⇧X = force OFF · drag to move</div>
+          <div class="hint" id="hint">⌥⇧X = force OFF · drag to move</div>
         </div>
         <div class="tools">
           <button class="min-btn" id="minBtn" type="button" title="Hide to a small circle" aria-label="Hide MVI Bridge to a small circle">×</button>
@@ -163,11 +163,11 @@
 
   const panel = shadow.getElementById("panel");
   const stateEl = shadow.getElementById("state");
+  const hint = shadow.getElementById("hint");
   const toggle = shadow.getElementById("toggle");
   const forceOff = shadow.getElementById("forceOff");
   const minBtn = shadow.getElementById("minBtn");
 
-  let busy = false;
   let minimized = false;
 
   function paint(armed) {
@@ -176,6 +176,7 @@
     stateEl.textContent = on ? "ON" : "OFF";
     stateEl.classList.toggle("on", on);
     panel.classList.toggle("is-on", on);
+    if (on) hint.textContent = "⌥⇧X = force OFF · drag to move";
   }
 
   function eventPath(e) {
@@ -328,18 +329,13 @@
     );
   }
 
-  async function setArmed(next) {
-    if (busy) return;
-    busy = true;
+  function setArmed(next) {
+    const on = Boolean(next);
+    paint(on);
     try {
-      paint(next);
-      const res = await chrome.runtime.sendMessage({ type: "setArmed", armed: next });
-      paint(Boolean(res?.armed ?? next));
-    } catch (err) {
-      paint(false);
-      console.warn("[mvi-bridge-sticky] setArmed failed", err);
-    } finally {
-      busy = false;
+      chrome.storage.local.set({ armed: on });
+    } catch {
+      /* storage is the switch; the background reads it when it wakes */
     }
   }
 
@@ -388,18 +384,16 @@
     applyPos({ left: rect.left, top: rect.top });
   });
 
-  chrome.runtime.onMessage.addListener((msg) => {
-    if (msg?.type === "armedChanged") paint(msg.armed);
+  chrome.storage.onChanged.addListener((changes, area) => {
+    if (area !== "local" || !changes.armed) return;
+    paint(Boolean(changes.armed.newValue));
   });
 
-  chrome.runtime
-    .sendMessage({ type: "getState" })
-    .then((s) => paint(Boolean(s?.armed)))
-    .catch(() => paint(false));
-
-  chrome.storage.local.get([POS_KEY, MIN_KEY], (s) => {
-    if (s && s[POS_KEY]) applyPos(s[POS_KEY]);
-    if (s && s[MIN_KEY]) setMinimized(true);
+  chrome.storage.local.get(["armed", POS_KEY, MIN_KEY], (s) => {
+    if (chrome.runtime.lastError || !s) return;
+    paint(Boolean(s.armed));
+    if (s[POS_KEY]) applyPos(s[POS_KEY]);
+    if (s[MIN_KEY]) setMinimized(true);
   });
 
   document.documentElement.appendChild(host);

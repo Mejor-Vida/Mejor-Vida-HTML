@@ -7,14 +7,14 @@ alwaysApply: true
 
 ## Licensed states
 
-The **only** public pages that name the current licensed states (today Nebraska, Kansas, Colorado, and Nevada) are:
+The **only** public pages that name the current licensed states (today Nebraska, Kansas, Colorado, Nevada, Ohio, New Mexico, South Carolina, and South Dakota) are:
 
 - `licencias.html`
 - `en/licenses.html`
 
 Everywhere else (heroes, FAQs, CTAs, meta descriptions, landings, cost pages, homepage map copy, chatbot answers, email templates):
 
-- Do **not** list those four states as “where we offer insurance.”
+- Do **not** list those states as “where we offer insurance.”
 - Point readers to the licenses page (and NPN) instead.
 - State *content* pages (`estados/`, `en/states/`) may still exist as local guides; do not frame them as a complete license roster.
 

@@ -1,0 +1,28 @@
+---
+description: Use OpenArt MCP to generate or replace website images, then optimize them
+alwaysApply: true
+---
+
+# OpenArt MCP — website images
+
+When Julie asks to create, replace, or update **webpage images** (heroes, blog art, landing photos, illustrations), use the **OpenArt MCP** (`openart` server at `https://mcp.openart.ai/mcp`). Do not invent a local image generator or send her to the OpenArt website unless the MCP is unavailable.
+
+## Workflow
+
+1. Discover OpenArt tools, then generate (or edit) the image through MCP.
+2. Save the file into the right `img/` path.
+3. Follow **image-optimization-workflow**: register in `scripts/optimize-images.js`, run `npm run optimize:images`, wire `<picture>` on both ES and EN pages.
+4. Do not put raw OpenArt downloads straight into HTML.
+
+## Auth
+
+Sign in to OpenArt as **admin@mejorvidainsurance.com** (the agency admin account). If the `openart` namespace is `needsAuth`, call `mcp_auth` and wait for that login in the browser. No API key is stored in the repo. Do not use Julie’s personal OpenArt login.
+
+## Julie photoreal identity
+
+When creating a **photograph of Julie**, use `img/julie-identity/` (skill `julie-photo-identity`): approved **face** + **look**, plus the full-body photos in `img/julie-identity/body/` for size and shape. Pass face + look + body-front as OpenArt `visualReferences` (add more body angles if the model allows). Keep her face and real body build. Change pose only when she gives a pose prompt. Never overwrite those lock files. Cartoon/`img/julie-master/` and HeyGen Beatriz are different identities.
+
+## Do not
+
+- Spend OpenArt credits on extras she did not ask for (video, extra variants, extra models).
+- Touch `img/mvi-chat-avatar/`.

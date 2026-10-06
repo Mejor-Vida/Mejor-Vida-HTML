@@ -18,10 +18,11 @@ Do not bring back Omaha’s old source/price/notes table or the static $10,000 p
 4. Funeral-home **packages**, cheapest to most expensive, with estimator-field descriptions under each name, then the source line **and** the comparison legal note (`funeralHomeCompareNote` in `lib/company-compare-disclaimer.js`)
 5. What changes from one home to another (analysis cards)
 6. The burial plot is a **separate bill**, then where to call, then resale ads
-7. Calculator: age, sex, smoker → appointed-company monthly premium
-8. Metro towns
-9. FAQs
-10. Navy quote band
+7. After the death: grave marker, death certificate, Social Security, veterans, and the estate (`afterDeathSection` in `scripts/city-guide-html.js`). State facts come from `scripts/city-guides/after-death.js`. Do not invent a fee, an office address, or a monument company.
+8. Calculator: age, sex, smoker → appointed-company monthly premium
+9. Metro towns
+10. FAQs
+11. Navy quote band
 
 License proof stays in the **hero agent bar** only (this page’s state, NPN, Ver licencia / NAIC). Do not add a second license section in the body. Full roster stays on licencias/licenses.
 

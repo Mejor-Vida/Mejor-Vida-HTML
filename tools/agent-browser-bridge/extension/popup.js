@@ -10,9 +10,15 @@ function paint(armed) {
 }
 
 async function refresh() {
-  const state = await chrome.runtime.sendMessage({ type: "getState" });
-  const armed = Boolean(state?.armed);
+  const stored = await chrome.storage.local.get(["armed"]);
+  const armed = Boolean(stored?.armed);
   paint(armed);
+  let state = { armed, controlTabId: null };
+  try {
+    state = await chrome.runtime.sendMessage({ type: "getState" });
+  } catch {
+    /* background asleep; the stored switch still shows the right ON/OFF */
+  }
 
   try {
     const status = await chrome.runtime.sendMessage({ type: "pingServer" });
@@ -51,8 +57,8 @@ async function refresh() {
 
 armToggle.addEventListener("click", async () => {
   const next = armToggle.getAttribute("aria-pressed") !== "true";
-  await chrome.runtime.sendMessage({ type: "setArmed", armed: next });
   paint(next);
+  await chrome.storage.local.set({ armed: next });
   refresh();
 });
 

@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "MVI Agent Browser Bridge",
-  "version": "1.4.0",
+  "version": "1.4.3",
   "description": "Toggle-on localhost bridge for Cursor. Tab pinning for background work, sticky on-page TURN BRIDGE OFF + Option+Shift+X kill switch.",
   "permissions": [
     "activeTab",
@@ -16,8 +16,7 @@
     "<all_urls>"
   ],
   "background": {
-    "service_worker": "background.js",
-    "type": "module"
+    "service_worker": "background.js"
   },
   "content_scripts": [
     {

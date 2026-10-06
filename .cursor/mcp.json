@@ -2,6 +2,14 @@
   "mcpServers": {
     "vercel": {
       "url": "https://mcp.vercel.com"
+    },
+    "heygen": {
+      "type": "http",
+      "url": "https://mcp.heygen.com/mcp/v1/"
+    },
+    "openart": {
+      "type": "http",
+      "url": "https://mcp.openart.ai/mcp"
     }
   }
 }

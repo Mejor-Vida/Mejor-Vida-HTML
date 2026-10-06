@@ -1,0 +1,45 @@
+{
+  "role": "julie_assistant",
+  "display_name": "Asistente de Mejor Vida Seguros",
+  "heygen_name": "Beatriz",
+  "group_id": "bb87f79778184501a7ae1b50bcce4dd2",
+  "engine": "avatar_iii",
+  "engine_note": "LOCKED 2026-09-09: Avatar III only. Do not use Avatar IV or Avatar V. A 7-minute V test billed 289 credits and left 221 until 2026-10-08. Quote the credit estimate and wait before every generate, including III.",
+  "default_look": "office_1",
+  "looks": {
+    "office_1": "07bce34c28c14d0ba5aa5f810a11ec39",
+    "office_2": "5e65c3f002a84daf8e45000d22ec06b5",
+    "office_10": "b9645c2a87364e1c933518caa4c28a06",
+    "office_12": "caa3c84b35a14a1e96e9c9d07a0210e8",
+    "office_15": "0e5179026eca42c68ad56f8e8c8e6987",
+    "kitchen_1": "b4f251a99fe14eddba7075c3ee9ed1f3"
+  },
+  "fit_note": "cover crops (close-up). contain keeps the full look. Kitchen 1 is already 16:9 waist-up; use contain so Avatar III does not crop into a head shot.",
+  "voice": {
+    "id": "0f3be0bc527846d78b5e88b04c439d5f",
+    "name": "Jhenny",
+    "locked": true,
+    "language": "es",
+    "register": "usted",
+    "note": "Locked after Avatar III side-by-side. Do not spend credits on Camila or other voices."
+  },
+  "rejected_voices": [
+    "Camila Vega Friendly",
+    "Salome"
+  ],
+  "persona_doc": "AVATAR-JULIE-ASSISTANT.md",
+  "script_skill": ".cursor/skills/teaching-page-video/SKILL.md",
+  "script_voice": ".cursor/skills/teaching-page-video/building-style.md",
+  "on_camera_rules": [
+    "Do not say I am Julie.",
+    "Speak as the educational assistant for Mejor Vida Seguros.",
+    "Use Mejor Vida Seguros as the agency name.",
+    "Spanish with usted; no slang or newsletter openers.",
+    "Do not invent credentials, premiums, or licensed-state lists.",
+    "Talking-head only: no references to charts or graphics.",
+    "Hands on the table or out of frame; no pockets.",
+    "Teach first; recap this lesson; then the locked close (mejorvidaseguros.com + WhatsApp 402-440-5438). Do not invent a custom CTA.",
+    "Do not spend extra credits unless Julie asks.",
+    "Engine is Avatar III only. Never Avatar IV or V."
+  ]
+}

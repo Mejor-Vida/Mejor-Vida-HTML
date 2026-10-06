@@ -2874,8 +2874,9 @@ module.exports = async function handler(req, res) {
 
       const canonicalAfterSave = await loadCanonicalLeadProfile(cfg, id, src || "unknown");
       const staffState = stateFromRecord(canonicalAfterSave);
+      /* Sync residence both ways: set when staff enters a state, clear when they blank it.
+         Previously only truthy states were written, so a bad leftover like NE stayed on contacts. */
       if (
-        staffState &&
         body.profile_ext &&
         Object.prototype.hasOwnProperty.call(body.profile_ext, "state")
       ) {
@@ -2885,7 +2886,7 @@ module.exports = async function handler(req, res) {
         if (contactId) {
           try {
             await restPatch(cfg, "contacts", `id=eq.${encodeURIComponent(contactId)}`, {
-              us_state: staffState,
+              us_state: staffState || null,
             });
           } catch (stateErr) {
             console.error("staff/leads PATCH contact state", stateErr);

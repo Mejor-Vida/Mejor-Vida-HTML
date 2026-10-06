@@ -13,6 +13,60 @@ let controlTabId = null;
 let pinnedTabId = null;
 let keepaliveTimer = null;
 
+function replyState() {
+  return { ok: true, armed, controlTabId };
+}
+
+function applyArmed(next) {
+  armed = Boolean(next);
+  try {
+    updateBadge();
+  } catch (err) {
+    console.warn("[mvi-bridge] badge update failed", err);
+  }
+  const saved = chrome.storage.local.set({ armed });
+  if (saved && typeof saved.catch === "function") {
+    saved.catch((err) => {
+      console.warn("[mvi-bridge] could not save armed state", err);
+    });
+  }
+  if (armed) {
+    chrome.tabs
+      .query({ active: true, lastFocusedWindow: true })
+      .then(async ([tab]) => {
+        if (tab?.id && !isPdfLikeUrl(tab.url || "")) await setControlTab(tab.id);
+      })
+      .catch(() => {});
+  }
+  ensurePolling();
+  ensureKeepalive();
+  heartbeat();
+  broadcastArmed();
+}
+
+// The on-page switch writes `armed` itself. This wakes the worker.
+chrome.storage.onChanged.addListener((changes, area) => {
+  if (area !== "local" || !changes.armed) return;
+  const next = Boolean(changes.armed.newValue);
+  if (next === armed) return;
+  applyArmed(next);
+});
+
+// Answer the on-page switch even when the worker was asleep.
+chrome.runtime.onConnect.addListener((port) => {
+  if (port.name !== "mvi-sticky") return;
+  port.onMessage.addListener((msg) => {
+    if (!msg || msg.type === "getState") {
+      port.postMessage(replyState());
+      return;
+    }
+    if (msg.type === "setArmed") {
+      applyArmed(msg.armed);
+      port.postMessage(replyState());
+    }
+  });
+});
+
 chrome.storage.local.get(["armed", "controlTabId", "pinnedTabId"]).then((v) => {
   armed = Boolean(v.armed);
   controlTabId = typeof v.controlTabId === "number" ? v.controlTabId : null;
@@ -21,9 +75,15 @@ chrome.storage.local.get(["armed", "controlTabId", "pinnedTabId"]).then((v) => {
   heartbeat();
   ensurePolling();
   ensureKeepalive();
+}).catch((err) => {
+  console.warn("[mvi-bridge] storage read failed", err);
 });
 
-chrome.alarms.create("mvi-bridge-heartbeat", { periodInMinutes: 1 });
+try {
+  chrome.alarms.create("mvi-bridge-heartbeat", { periodInMinutes: 1 });
+} catch (err) {
+  console.warn("[mvi-bridge] heartbeat alarm unavailable", err);
+}
 chrome.alarms.onAlarm.addListener((alarm) => {
   if (alarm.name === "mvi-bridge-heartbeat") heartbeat();
 });
@@ -65,20 +125,8 @@ chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
       return;
     }
     if (msg.type === "setArmed") {
-      armed = Boolean(msg.armed);
-      await chrome.storage.local.set({ armed });
-      if (armed) {
-        const [tab] = await chrome.tabs.query({ active: true, lastFocusedWindow: true });
-        if (tab?.id && !isPdfLikeUrl(tab.url || "")) {
-          await setControlTab(tab.id);
-        }
-      }
-      updateBadge();
-      await heartbeat();
-      ensurePolling();
-      ensureKeepalive();
-      await broadcastArmed();
-      sendResponse({ ok: true, armed, controlTabId });
+      applyArmed(msg.armed);
+      sendResponse(replyState());
       return;
     }
     if (msg.type === "pingServer") {
@@ -234,7 +282,7 @@ async function poll() {
   pollLoop = 0;
   if (!armed) return;
   try {
-    const res = await fetch(`${BRIDGE}/v1/pending?wait=25000`, {
+    const res = await fetch(`${BRIDGE}/v1/pending?wait=2000`, {
       headers: { "X-MVI-Bridge-Token": TOKEN },
     });
     const data = await res.json();

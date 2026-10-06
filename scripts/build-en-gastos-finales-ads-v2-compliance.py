@@ -70,7 +70,7 @@ STRUCTURAL_REPLACEMENTS = [
     (
         'data-src-es="https://meetings-na2.hubspot.com/julie-braunsroth" title="Agendar con Julie"',
         'data-src-es="https://meetings-na2.hubspot.com/julie-braunsroth" '
-        'data-src-en="https://meetings-na2.hubspot.com/julie-braunsroth/insurance-consultation-mejor-vida-insurance" '
+        'data-src-en="https://meetings-na2.hubspot.com/julie-braunsroth" '
         'title="Schedule with Julie"',
     ),
 ]

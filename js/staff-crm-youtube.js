@@ -12,6 +12,17 @@
     loading: false,
     saving: false,
     chatBusy: false,
+    playUrl: "",
+    playMime: "",
+    playSlug: "",
+    playPath: "",
+    playRow: -1,
+    playUntil: null,
+    playOpen: false,
+    cutting: false,
+    fixJobs: {},
+    fixTicker: 0,
+    fixPoll: 0,
   };
 
   var MAX_UPLOAD_BYTES = 4 * 1024 * 1024 * 1024;
@@ -440,8 +451,877 @@
     );
   }
 
+  function formatTs(sec) {
+    if (sec == null || sec === "" || !isFinite(Number(sec))) return "";
+    var s = Math.max(0, Number(sec));
+    var m = Math.floor(s / 60);
+    var rem = s - m * 60;
+    var whole = Math.floor(rem);
+    var tenth = Math.round((rem - whole) * 10);
+    if (tenth === 10) {
+      whole += 1;
+      tenth = 0;
+    }
+    if (whole === 60) {
+      m += 1;
+      whole = 0;
+    }
+    return m + ":" + (whole < 10 ? "0" : "") + whole + "." + tenth;
+  }
+
+  function tsRange(start, end) {
+    var a = formatTs(start);
+    var b = formatTs(end);
+    if (a && b) return a + " – " + b;
+    return a || b;
+  }
+
+  function tokenizeWords(s) {
+    return String(s || "")
+      .trim()
+      .split(/\s+/)
+      .filter(Boolean);
+  }
+
+  function normalizeWord(w) {
+    return String(w || "")
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/^[¡¿]+/, "")
+      .replace(/[.,;:!?…"'«»”’]+$/g, "")
+      .replace(/[^a-z0-9ñü$]/gi, "");
+  }
+
+  function wordsMatch(a, b) {
+    var x = normalizeWord(a);
+    var y = normalizeWord(b);
+    return !!(x && y && x === y);
+  }
+
+  function alignWords(script, spoken) {
+    var A = tokenizeWords(script);
+    var B = tokenizeWords(spoken);
+    var n = A.length;
+    var m = B.length;
+    var dp = [];
+    var i;
+    var j;
+    for (i = 0; i <= n; i++) {
+      dp[i] = [];
+      for (j = 0; j <= m; j++) dp[i][j] = 0;
+    }
+    for (i = n - 1; i >= 0; i--) {
+      for (j = m - 1; j >= 0; j--) {
+        dp[i][j] = wordsMatch(A[i], B[j])
+          ? 1 + dp[i + 1][j + 1]
+          : Math.max(dp[i + 1][j], dp[i][j + 1]);
+      }
+    }
+    var raw = [];
+    i = 0;
+    j = 0;
+    while (i < n && j < m) {
+      if (wordsMatch(A[i], B[j])) {
+        raw.push({ script: A[i], spoken: B[j], match: true });
+        i += 1;
+        j += 1;
+      } else if (dp[i + 1][j] >= dp[i][j + 1]) {
+        raw.push({ script: A[i], spoken: "", match: false });
+        i += 1;
+      } else {
+        raw.push({ script: "", spoken: B[j], match: false });
+        j += 1;
+      }
+    }
+    while (i < n) {
+      raw.push({ script: A[i], spoken: "", match: false });
+      i += 1;
+    }
+    while (j < m) {
+      raw.push({ script: "", spoken: B[j], match: false });
+      j += 1;
+    }
+    var pairs = [];
+    for (var k = 0; k < raw.length; k++) {
+      var p = raw[k];
+      var nxt = raw[k + 1];
+      if (
+        nxt &&
+        !p.match &&
+        !nxt.match &&
+        p.script &&
+        !p.spoken &&
+        nxt.spoken &&
+        !nxt.script
+      ) {
+        pairs.push({ script: p.script, spoken: nxt.spoken, match: false });
+        k += 1;
+      } else {
+        pairs.push(p);
+      }
+    }
+    return pairs;
+  }
+
+  function wordCellHtml(pair) {
+    var off = !pair.match;
+    return (
+      '<span class="crm-yt-word' +
+      (off ? " is-off" : "") +
+      '"><span class="crm-yt-word-script' +
+      (pair.script ? "" : " is-empty") +
+      '">' +
+      (pair.script ? esc(pair.script) : "&nbsp;") +
+      '</span><span class="crm-yt-word-spoken' +
+      (pair.spoken ? "" : " is-empty") +
+      '">' +
+      (pair.spoken ? esc(pair.spoken) : "&nbsp;") +
+      "</span></span>"
+    );
+  }
+
+  function speechTokens(s) {
+    return String(s || "")
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[^a-z0-9ñü\s]/gi, " ")
+      .split(/\s+/)
+      .filter(function (w) {
+        return w.length > 1;
+      });
+  }
+
+  function tokenOverlap(a, b) {
+    var A = speechTokens(a);
+    var B = speechTokens(b);
+    if (!A.length || !B.length) return 0;
+    var set = {};
+    A.forEach(function (w) {
+      set[w] = true;
+    });
+    var hit = 0;
+    B.forEach(function (w) {
+      if (set[w]) hit += 1;
+    });
+    return hit / Math.max(A.length, B.length);
+  }
+
+  function splitScriptRows(script) {
+    var text = String(script || "").replace(/\r/g, "").trim();
+    if (!text) return [];
+    var paras = text
+      .split(/\n\s*\n/)
+      .map(function (p) {
+        return p.replace(/\s+/g, " ").trim();
+      })
+      .filter(Boolean);
+    var rows = [];
+    paras.forEach(function (p) {
+    var parts = p.match(/[^.!?…]+(?:[.!?…]+|$)/g);
+    var sentences = (parts || [p]).map(function (s) {
+      return s.trim();
+    }).filter(Boolean);
+    if (sentences.length > 1 && p.length > 80) rows.push.apply(rows, sentences);
+    else rows.push(p);
+    });
+    return rows;
+  }
+
+  function describeDeviation(script, spoken) {
+    var a = speechTokens(script);
+    var b = speechTokens(spoken);
+    if (!a.length) return spoken ? t("yt_dev_not_in_script") : "";
+    if (!b.length) return t("yt_dev_not_heard");
+    var overlap = tokenOverlap(script, spoken);
+    if (overlap >= 0.78 && Math.abs(a.length - b.length) <= 3) return "";
+    if (b.length > a.length + 4) return t("yt_dev_extra");
+    if (a.length > b.length + 4) return t("yt_dev_skipped");
+    if (overlap < 0.55) return t("yt_dev_wording");
+    if (overlap < 0.78) return t("yt_dev_small");
+    return "";
+  }
+
+  function alignScriptToSegments(scriptEs, segments) {
+    var rows = splitScriptRows(scriptEs);
+    var segs = (segments || []).filter(function (s) {
+      return s && String(s.text || "").trim();
+    });
+    if (!rows.length) {
+      return segs.map(function (s) {
+        return {
+          script: "",
+          spoken: s.text,
+          start: s.start,
+          end: s.end,
+          deviation: t("yt_dev_not_in_script"),
+        };
+      });
+    }
+    var assigned = rows.map(function () {
+      return [];
+    });
+    var extras = rows.map(function () {
+      return [];
+    });
+    var before = [];
+    var i = 0;
+    segs.forEach(function (seg) {
+      var thisScore = tokenOverlap(seg.text, rows[i] || "");
+      var nextScore = i + 1 < rows.length ? tokenOverlap(seg.text, rows[i + 1]) : 0;
+      var extraRow = {
+        script: "",
+        spoken: seg.text,
+        start: seg.start,
+        end: seg.end,
+        deviation: t("yt_dev_not_in_script"),
+      };
+      if (Math.max(thisScore, nextScore) < 0.18) {
+        if (!assigned[i] || !assigned[i].length) before.push(extraRow);
+        else extras[i].push(extraRow);
+        return;
+      }
+      if (nextScore > thisScore + 0.06 && nextScore >= 0.22) i += 1;
+      assigned[Math.min(i, rows.length - 1)].push(seg);
+    });
+    var out = before.slice();
+    rows.forEach(function (script, r) {
+      var group = assigned[r];
+      var spoken = group
+        .map(function (s) {
+          return s.text;
+        })
+        .join(" ")
+        .replace(/\s+/g, " ")
+        .trim();
+      out.push({
+        script: script,
+        spoken: spoken,
+        start: group.length ? group[0].start : null,
+        end: group.length ? group[group.length - 1].end : null,
+        deviation: describeDeviation(script, spoken) || null,
+      });
+      extras[r].forEach(function (row) {
+        out.push(row);
+      });
+    });
+    return out;
+  }
+
+  function alignmentRows(item) {
+    var plan = item.cut_plan || {};
+    var script = item.spoken || item.script_es || "";
+    if (Array.isArray(plan.rows) && plan.rows.length) {
+      return plan.rows.map(function (row) {
+        var line = String((row && row.script) || "").trim();
+        var spoken = String((row && row.spoken) || "").trim();
+        return {
+          script: line,
+          spoken: spoken,
+          start: row && row.start,
+          end: row && row.end,
+          deviation: describeDeviation(line, spoken) || null,
+        };
+      });
+    }
+    var segs = Array.isArray(plan.segments) ? plan.segments : [];
+    if (segs.length) return alignScriptToSegments(script, segs);
+    if (item.transcript) {
+      var fake = splitScriptRows(item.transcript).map(function (text) {
+        return { start: null, end: null, text: text };
+      });
+      return alignScriptToSegments(script, fake);
+    }
+    if (script) {
+      return splitScriptRows(script).map(function (line) {
+        return {
+          script: line,
+          spoken: "",
+          start: null,
+          end: null,
+          deviation: t("yt_dev_not_heard"),
+        };
+      });
+    }
+    return [];
+  }
+
+  function expectedSpeechSec(text) {
+    var n = speechTokens(text).length;
+    if (!n) return 0;
+    return Math.max(1.1, n / 2.15);
+  }
+
+  function offScriptIssues(item) {
+    var plan = (item && item.cut_plan) || {};
+    if (Array.isArray(plan.issues) && plan.issues.length) return plan.issues;
+    var rows = alignmentRows(item);
+    var cuts = Array.isArray(plan.cut) ? plan.cut : [];
+    var issues = [];
+    var first = null;
+    rows.forEach(function (r) {
+      if (!first && r && String(r.script || "").trim() && isFinite(Number(r.start)) && isFinite(Number(r.end))) {
+        first = r;
+      }
+      if (r && !String(r.script || "").trim() && String(r.spoken || "").trim() && isFinite(Number(r.start))) {
+        issues.push({
+          start: Number(r.start),
+          end: Number(r.end),
+          kind: "extra_speech",
+          label: t("yt_offscript_extra"),
+          spoken: String(r.spoken).trim(),
+          status: "open",
+        });
+      }
+    });
+    if (first) {
+      var dur = Number(first.end) - Number(first.start);
+      var exp = expectedSpeechSec(first.script);
+      if (dur > exp + 1.15) {
+        issues.unshift({
+          start: Number(first.start),
+          end: Math.round((Number(first.start) + (dur - exp)) * 10) / 10,
+          kind: "before_script",
+          label: t("yt_offscript_before"),
+          spoken: "",
+          status: "open",
+        });
+      }
+    }
+    cuts.forEach(function (c) {
+      var reason = String((c && c.reason) || "").trim();
+      issues.push({
+        start: Number(c.start),
+        end: Number(c.end),
+        kind: /retake|restart|go back/i.test(reason) ? "retake" : "off_script",
+        label: reason || t("yt_offscript_extra"),
+        spoken: "",
+        status: "open",
+      });
+    });
+    return issues.filter(function (x) {
+      return isFinite(x.start) && isFinite(x.end) && x.end - x.start >= 0.25;
+    });
+  }
+
+  function issueLabel(issue) {
+    if (!issue) return t("yt_offscript_extra");
+    if (issue.kind === "before_script") return t("yt_offscript_before");
+    if (issue.kind === "retake") return issue.label || t("yt_offscript_retake");
+    return issue.label || t("yt_offscript_extra");
+  }
+
+  function issueKey(issue) {
+    return Number(issue.start).toFixed(1) + "-" + Number(issue.end).toFixed(1);
+  }
+
+  function formatFixElapsed(ms) {
+    var s = Math.max(0, Math.floor(Number(ms) / 1000));
+    var m = Math.floor(s / 60);
+    s = s % 60;
+    return m + ":" + (s < 10 ? "0" : "") + s;
+  }
+
+  function anyFixWorking() {
+    return Object.keys(state.fixJobs || {}).some(function (key) {
+      return state.fixJobs[key] && state.fixJobs[key].status === "working";
+    });
+  }
+
+  function startFixTicker() {
+    if (state.fixTicker) return;
+    state.fixTicker = window.setInterval(function () {
+      var any = false;
+      Object.keys(state.fixJobs || {}).forEach(function (key) {
+        var job = state.fixJobs[key];
+        if (!job || job.status !== "working") return;
+        any = true;
+        var el = document.querySelector('[data-yt-fix-timer="' + key + '"]');
+        if (el) el.textContent = formatFixElapsed(Date.now() - job.startedAt);
+      });
+      if (!any) {
+        window.clearInterval(state.fixTicker);
+        state.fixTicker = 0;
+      }
+    }, 250);
+  }
+
+  function markFixDone(key, item) {
+    var job = state.fixJobs[key];
+    if (!job) return;
+    var recChanged =
+      item && item.recording_path && item.recording_path !== (state.item && state.item.recording_path);
+    if (item) {
+      if (recChanged) {
+        closeFloatPlayer();
+        state.playUrl = "";
+        state.playSlug = "";
+        state.playPath = "";
+      }
+      state.item = item;
+    }
+    if (job.status === "done") {
+      if (recChanged) render();
+      return;
+    }
+    job.status = "done";
+    job.finishedAt = Date.now();
+    render();
+    window.setTimeout(function () {
+      if (state.fixJobs[key] && state.fixJobs[key].status === "done") {
+        delete state.fixJobs[key];
+        render();
+      }
+    }, 4500);
+  }
+
+  function startFixPoll() {
+    if (state.fixPoll) return;
+    state.fixPoll = window.setInterval(function () {
+      if (!anyFixWorking()) {
+        window.clearInterval(state.fixPoll);
+        state.fixPoll = 0;
+        return;
+      }
+      api("/api/staff/youtube-scripts?slug=" + encodeURIComponent(state.slug), null, { method: "GET" })
+        .then(function (data) {
+          var fresh = data && data.slug ? data : data && data.item;
+          if (!fresh) return;
+          var still = {};
+          offScriptIssues(fresh).forEach(function (iss) {
+            still[issueKey(iss)] = iss;
+          });
+          Object.keys(state.fixJobs).forEach(function (key) {
+            var job = state.fixJobs[key];
+            if (!job || job.status !== "working") return;
+            var iss = still[key];
+            if (!iss || iss.status === "fixed") markFixDone(key, fresh);
+          });
+        })
+        .catch(function () {});
+    }, 2000);
+  }
+
+  function ensureFixJobsFromItem(item) {
+    if (!state.fixJobs) state.fixJobs = {};
+    offScriptIssues(item).forEach(function (iss) {
+      if (iss.status !== "requested" && iss.status !== "working") return;
+      var key = issueKey(iss);
+      if (state.fixJobs[key]) return;
+      var started = Date.parse(iss.requested_at);
+      if (!isFinite(started)) started = Date.now();
+      state.fixJobs[key] = {
+        start: iss.start,
+        end: iss.end,
+        kind: iss.kind,
+        label: issueLabel(iss),
+        spoken: iss.spoken || "",
+        status: "working",
+        startedAt: started,
+      };
+    });
+    if (anyFixWorking()) {
+      startFixTicker();
+      startFixPoll();
+    }
+  }
+
+  function issuesForView(item) {
+    var issues = offScriptIssues(item).slice();
+    Object.keys(state.fixJobs || {}).forEach(function (key) {
+      var job = state.fixJobs[key];
+      if (!job || (job.status !== "working" && job.status !== "done")) return;
+      var found = issues.some(function (iss) {
+        return issueKey(iss) === key;
+      });
+      if (!found) {
+        issues.push({
+          start: job.start,
+          end: job.end,
+          kind: job.kind,
+          label: job.label,
+          spoken: job.spoken || "",
+          status: job.status === "done" ? "fixed" : "requested",
+        });
+      }
+    });
+    return issues;
+  }
+
+  function fixActionHtml(issue) {
+    var key = issueKey(issue);
+    var job = state.fixJobs[key];
+    if (job && job.status === "done") {
+      return (
+        '<div class="crm-yt-fix-progress is-done" data-yt-fix-key="' +
+        esc(key) +
+        '">' +
+        esc(t("yt_fix_complete_time", { time: formatFixElapsed(job.finishedAt - job.startedAt) })) +
+        "</div>"
+      );
+    }
+    if ((job && job.status === "working") || issue.status === "requested") {
+      var started = job ? job.startedAt : Date.now();
+      return (
+        '<div class="crm-yt-fix-progress is-working" data-yt-fix-key="' +
+        esc(key) +
+        '" role="status">' +
+        '<span class="crm-yt-fix-pulse" aria-hidden="true"></span>' +
+        '<span class="crm-yt-fix-status">' +
+        esc(t("yt_fix_working_label")) +
+        "</span>" +
+        '<span class="crm-yt-fix-timer" data-yt-fix-timer="' +
+        esc(key) +
+        '">' +
+        esc(formatFixElapsed(Date.now() - started)) +
+        "</span>" +
+        "</div>"
+      );
+    }
+    var busy = anyFixWorking();
+    return (
+      '<button type="button" class="crm-btn crm-yt-fix-btn" data-yt-fix-start="' +
+      esc(String(issue.start)) +
+      '" data-yt-fix-end="' +
+      esc(String(issue.end)) +
+      '" data-yt-fix-kind="' +
+      esc(issue.kind || "off_script") +
+      '" data-yt-fix-reason="' +
+      esc(issueLabel(issue)) +
+      '"' +
+      (busy ? " disabled" : "") +
+      ">" +
+      esc(t("yt_fix_remotion")) +
+      "</button>"
+    );
+  }
+
+  function issuesHtml(item) {
+    ensureFixJobsFromItem(item);
+    var issues = issuesForView(item);
+    if (!issues.length) return "";
+    return (
+      '<section class="crm-yt-issues">' +
+      "<h3>" +
+      esc(t("yt_offscript_title")) +
+      "</h3>" +
+      issues
+        .map(function (issue, i) {
+          var times = tsRange(issue.start, issue.end);
+          var job = state.fixJobs[issueKey(issue)];
+          var rowClass =
+            job && job.status === "done" ? " is-done" : job && job.status === "working" ? " is-working" : "";
+          return (
+            '<div class="crm-yt-issue' +
+            rowClass +
+            '" data-yt-issue-start="' +
+            esc(String(issue.start)) +
+            '" data-yt-issue-end="' +
+            esc(String(issue.end)) +
+            '">' +
+            '<span class="crm-yt-issue-num">' +
+            esc(String(i + 1)) +
+            "</span>" +
+            '<div class="crm-yt-issue-body">' +
+            '<p class="crm-yt-issue-time">' +
+            esc(times) +
+            "</p>" +
+            "<p>" +
+            esc(issueLabel(issue)) +
+            (issue.spoken ? " — " + esc(issue.spoken) : "") +
+            "</p>" +
+            "</div>" +
+            fixActionHtml(issue) +
+            "</div>"
+          );
+        })
+        .join("") +
+      "</section>"
+    );
+  }
+
+  function playerHtml(item) {
+    if (!item || !item.recording_path) return "";
+    return (
+      '<div class="crm-yt-player-launch">' +
+      '<button type="button" class="crm-btn" id="crm-yt-play-open">' +
+      esc(t("yt_play_open")) +
+      "</button>" +
+      '<p class="crm-yt-hint">' +
+      esc(t("yt_play_hint")) +
+      "</p>" +
+      "</div>"
+    );
+  }
+
+  function closeFloatPlayer() {
+    var media = document.getElementById("crm-yt-media");
+    if (media) {
+      try {
+        media.pause();
+      } catch (e) {}
+    }
+    var box = document.getElementById("crm-yt-float");
+    if (box) box.remove();
+    state.playOpen = false;
+    state.playUntil = null;
+    state.playRow = -1;
+    document.querySelectorAll(".crm-yt-align-row.is-playing").forEach(function (el) {
+      el.classList.remove("is-playing");
+    });
+  }
+
+  function floatPlayerHtml() {
+    var mime = state.playMime || (state.item && state.item.recording_mime) || "video/mp4";
+    var isVideo = mime.indexOf("audio/") !== 0;
+    var src = state.playUrl || "";
+    var tag = isVideo ? "video" : "audio";
+    return (
+      '<div class="crm-yt-float-head">' +
+      "<span>" +
+      esc(t("yt_play_open")) +
+      "</span>" +
+      '<button type="button" class="crm-yt-float-close" id="crm-yt-float-close">' +
+      esc(t("yt_play_close")) +
+      "</button>" +
+      "</div><" +
+      tag +
+      ' id="crm-yt-media" class="crm-yt-float-media" controls playsinline' +
+      (src ? ' src="' + esc(src) + '"' : "") +
+      "></" +
+      tag +
+      ">"
+    );
+  }
+
+  function bindFloatMedia() {
+    var close = document.getElementById("crm-yt-float-close");
+    if (close) close.addEventListener("click", closeFloatPlayer);
+    var media = document.getElementById("crm-yt-media");
+    if (media) {
+      media.addEventListener("timeupdate", highlightPlaying);
+      media.addEventListener("play", highlightPlaying);
+      media.addEventListener("seeked", highlightPlaying);
+    }
+  }
+
+  function openFloatPlayer() {
+    if (!state.item || !state.item.recording_path) return;
+    if (state.playOpen && document.getElementById("crm-yt-media")) {
+      var existing = document.getElementById("crm-yt-media");
+      existing.currentTime = 0;
+      var replay = existing.play();
+      if (replay && replay.catch) replay.catch(function () {});
+      return;
+    }
+    state.playOpen = true;
+    state.playUntil = null;
+    ensurePlayUrl()
+      .then(function () {
+        if (!state.playOpen) return;
+        var box = document.getElementById("crm-yt-float");
+        if (!box) {
+          box = document.createElement("div");
+          box.id = "crm-yt-float";
+          box.className = "crm-yt-float";
+          document.body.appendChild(box);
+        }
+        box.innerHTML = floatPlayerHtml();
+        bindFloatMedia();
+        var media = document.getElementById("crm-yt-media");
+        if (media) {
+          media.currentTime = 0;
+          var play = media.play();
+          if (play && play.catch) play.catch(function () {});
+        }
+      })
+      .catch(showErr);
+  }
+
+  function highlightPlaying() {
+    var media = document.getElementById("crm-yt-media");
+    if (!media) return;
+    var t = media.currentTime;
+    if (state.playUntil != null && t >= state.playUntil - 0.04) {
+      media.pause();
+      media.currentTime = state.playUntil;
+      state.playUntil = null;
+      t = media.currentTime;
+    }
+    var rows = document.querySelectorAll(".crm-yt-align-row[data-yt-start]");
+    var current = null;
+    var currentIdx = -1;
+    rows.forEach(function (el, i) {
+      var start = Number(el.getAttribute("data-yt-start"));
+      var endRaw = el.getAttribute("data-yt-end");
+      var end = endRaw !== "" && endRaw != null ? Number(endRaw) : NaN;
+      var next = rows[i + 1];
+      var stop =
+        Number.isFinite(end) && end > start
+          ? end
+          : next
+            ? Number(next.getAttribute("data-yt-start"))
+            : Number.isFinite(media.duration)
+              ? media.duration
+              : start + 999;
+      var on = Number.isFinite(start) && t >= start - 0.08 && t < stop;
+      el.classList.toggle("is-playing", on);
+      if (on) {
+        current = el;
+        currentIdx = i;
+      }
+    });
+    if (current && !media.paused && currentIdx !== state.playRow) {
+      state.playRow = currentIdx;
+      var pane = document.querySelector(".crm-yt-pane--review");
+      if (pane) {
+        var r = current.getBoundingClientRect();
+        var p = pane.getBoundingClientRect();
+        if (r.top < p.top + 90 || r.bottom > p.bottom - 16) {
+          current.scrollIntoView({ block: "nearest", behavior: "smooth" });
+        }
+      }
+    }
+    if (media.paused) state.playRow = -1;
+  }
+
+  function ensurePlayUrl() {
+    if (!state.item || !state.item.recording_path) return Promise.resolve();
+    if (state.playSlug === state.slug && state.playPath === state.item.recording_path && state.playUrl) {
+      return Promise.resolve();
+    }
+    return api("/api/staff/youtube-scripts", { action: "play-url", slug: state.slug }).then(function (data) {
+      state.playUrl = data.url || "";
+      state.playMime = data.mime || "";
+      state.playSlug = state.slug;
+      state.playPath = state.item.recording_path || "";
+    });
+  }
+
+  function bindPlayer() {
+    var openBtn = document.getElementById("crm-yt-play-open");
+    if (openBtn) {
+      openBtn.addEventListener("click", openFloatPlayer);
+    }
+    document.querySelectorAll(".crm-yt-align-row[data-yt-start]").forEach(function (el) {
+      function jump() {
+        if (!state.playOpen) return;
+        var media = document.getElementById("crm-yt-media");
+        if (!media) return;
+        var start = Number(el.getAttribute("data-yt-start"));
+        var end = Number(el.getAttribute("data-yt-end"));
+        if (!isFinite(start)) return;
+        state.playUntil = isFinite(end) && end > start ? end : null;
+        media.currentTime = Math.max(0, start - 0.12);
+        media.play();
+      }
+      el.addEventListener("click", jump);
+      el.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          jump();
+        }
+      });
+    });
+    document.querySelectorAll(".crm-yt-issue").forEach(function (el) {
+      el.addEventListener("click", function (e) {
+        if (e.target && e.target.closest(".crm-yt-fix-btn, .crm-yt-fix-progress")) return;
+        if (!state.playOpen) return;
+        var media = document.getElementById("crm-yt-media");
+        var start = Number(el.getAttribute("data-yt-issue-start"));
+        if (!media || !isFinite(start)) return;
+        media.currentTime = start;
+        media.play();
+      });
+    });
+    document.querySelectorAll(".crm-yt-fix-btn").forEach(function (btn) {
+      btn.addEventListener("click", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        if (btn.disabled) return;
+        var start = Number(btn.getAttribute("data-yt-fix-start"));
+        var end = Number(btn.getAttribute("data-yt-fix-end"));
+        var kind = btn.getAttribute("data-yt-fix-kind") || "off_script";
+        var reason = btn.getAttribute("data-yt-fix-reason") || "";
+        var key = issueKey({ start: start, end: end });
+        state.fixJobs[key] = {
+          start: start,
+          end: end,
+          kind: kind,
+          label: reason,
+          spoken: "",
+          status: "working",
+          startedAt: Date.now(),
+        };
+        render();
+        startFixTicker();
+        startFixPoll();
+        api("/api/staff/youtube-scripts", {
+          action: "request-fix",
+          slug: state.slug,
+          start: start,
+          end: end,
+          kind: kind,
+          reason: reason,
+        })
+          .then(function (data) {
+            if (data.applied) {
+              markFixDone(key, data.item);
+              return;
+            }
+            if (data.item) state.item = data.item;
+            render();
+            startFixTicker();
+            startFixPoll();
+          })
+          .catch(function (err) {
+            if (state.fixJobs[key]) delete state.fixJobs[key];
+            showErr(err);
+            render();
+          });
+      });
+    });
+  }
+
+  function alignRowHtml(row, index) {
+    var spoken = String((row && row.spoken) || "").trim();
+    var script = String((row && row.script) || "").trim();
+    var times = tsRange(row && row.start, row && row.end);
+    var pairs = alignWords(script, spoken);
+    var off = pairs.some(function (p) {
+      return !p.match;
+    });
+    var num = String((index || 0) + 1);
+    var start =
+      row && row.start != null && row.start !== "" && isFinite(Number(row.start)) ? Number(row.start) : "";
+    var end = row && row.end != null && row.end !== "" && isFinite(Number(row.end)) ? Number(row.end) : "";
+    return (
+      '<article class="crm-yt-align-row' +
+      (off ? " is-off" : "") +
+      '"' +
+      (start !== ""
+        ? ' data-yt-start="' +
+          start +
+          '" data-yt-end="' +
+          end +
+          '" role="button" tabindex="0"'
+        : "") +
+      ">" +
+      '<span class="crm-yt-align-num">' +
+      esc(num) +
+      "</span>" +
+      '<div class="crm-yt-words">' +
+      pairs.map(wordCellHtml).join("") +
+      "</div>" +
+      (times ? '<span class="crm-yt-ts">' + esc(times) + "</span>" : "") +
+      "</article>"
+    );
+  }
+
   function reviewPane(item) {
     var plan = item.cut_plan || {};
+    var rows = alignmentRows(item);
     var cuts = Array.isArray(plan.cut) ? plan.cut : [];
     var keeps = Array.isArray(plan.keep) ? plan.keep : [];
     var cutHtml = cuts.length
@@ -450,10 +1330,8 @@
           .map(function (c) {
             return (
               "<li>" +
-              esc(String(c.start)) +
-              "–" +
-              esc(String(c.end)) +
-              "s · " +
+              esc(tsRange(c.start, c.end) || String(c.start) + "–" + String(c.end)) +
+              " · " +
               esc(c.reason || "") +
               "</li>"
             );
@@ -467,10 +1345,8 @@
           .map(function (c) {
             return (
               "<li>" +
-              esc(String(c.start)) +
-              "–" +
-              esc(String(c.end)) +
-              "s · " +
+              esc(tsRange(c.start, c.end) || String(c.start) + "–" + String(c.end)) +
+              " · " +
               esc(c.note || "") +
               "</li>"
             );
@@ -479,7 +1355,7 @@
         "</ul>"
       : "";
     var yt = item.youtube_id
-      ? '<p>' +
+      ? "<p>" +
         esc(t("yt_published")) +
         ' <a href="https://www.youtube.com/watch?v=' +
         esc(item.youtube_id) +
@@ -487,10 +1363,22 @@
         esc(item.youtube_id) +
         "</a></p>"
       : '<p class="crm-yt-hint">' + esc(t("yt_publish_hint")) + "</p>";
+    var alignHtml = rows.length
+      ? '<div class="crm-yt-align">' + rows.map(alignRowHtml).join("") + "</div>"
+      : '<p class="crm-yt-hint">' + esc(t("yt_review_empty")) + "</p>";
     return (
-      "<p><strong>" +
-      esc(plan.summary || t("yt_review_empty")) +
-      "</strong></p>" +
+      playerHtml(item) +
+      issuesHtml(item) +
+      (plan.summary && !/^one sentence$/i.test(String(plan.summary).trim())
+        ? '<p class="crm-yt-lead"><strong>' + esc(plan.summary) + "</strong></p>"
+        : "") +
+      alignHtml +
+      '<details class="crm-yt-timeline">' +
+      "<summary>" +
+      esc(t("yt_cut_list")) +
+      " / " +
+      esc(t("yt_keep_list")) +
+      "</summary>" +
       "<h3>" +
       esc(t("yt_cut_list")) +
       "</h3>" +
@@ -499,18 +1387,7 @@
       esc(t("yt_keep_list")) +
       "</h3>" +
       keepHtml +
-      "<label class=\"crm-field-label\">" +
-      esc(t("yt_transcript")) +
-      "</label>" +
-      '<textarea class="crm-input crm-yt-area" rows="8" readonly>' +
-      esc(item.transcript || "") +
-      "</textarea>" +
-      "<label class=\"crm-field-label\">" +
-      esc(t("yt_review_notes")) +
-      "</label>" +
-      '<textarea id="crm-yt-review-notes" class="crm-input crm-yt-area" rows="4">' +
-      esc(item.review_notes || "") +
-      "</textarea>" +
+      "</details>" +
       '<div class="crm-yt-toolbar">' +
       '<button type="button" class="crm-btn" id="crm-yt-approve">' +
       esc(t("yt_approve_cuts")) +
@@ -589,6 +1466,7 @@
       "</div></div>" +
       '<div class="crm-yt-pane' +
       (state.tab === "script" && item ? " crm-yt-pane--script" : "") +
+      (state.tab === "review" && item ? " crm-yt-pane--review" : "") +
       '">' +
       body +
       "</div>"
@@ -640,6 +1518,15 @@
     state.slug = slug;
     state.loading = true;
     var data = await api("/api/staff/youtube-scripts?slug=" + encodeURIComponent(slug), null, { method: "GET" });
+    var pathChanged = state.playPath && state.playPath !== (data.recording_path || "");
+    if (state.playSlug !== slug || pathChanged) {
+      closeFloatPlayer();
+      state.playUrl = "";
+      state.playMime = "";
+      state.playSlug = "";
+      state.playPath = "";
+      state.playRow = -1;
+    }
     state.item = data;
     state.loading = false;
     if (!state.item.script_es && !state.item.breakdown) state.tab = "script";
@@ -875,7 +1762,6 @@
           action: "review",
           slug: state.slug,
           decision: "approved",
-          review_notes: (document.getElementById("crm-yt-review-notes") || {}).value || "",
         })
           .then(function (data) {
             state.item = data.item;
@@ -891,7 +1777,6 @@
           action: "review",
           slug: state.slug,
           decision: "changes",
-          review_notes: (document.getElementById("crm-yt-review-notes") || {}).value || "",
         })
           .then(function (data) {
             state.item = data.item;
@@ -900,6 +1785,7 @@
           .catch(showErr);
       });
     }
+    bindPlayer();
   }
 
   function showErr(e) {
@@ -936,6 +1822,7 @@
 
   async function mount(main, opts) {
     opts = opts || {};
+    closeFloatPlayer();
     main.innerHTML = '<div id="crm-yt-root" class="crm-yt-shell"></div>';
     await loadList();
     if (opts.slug) {

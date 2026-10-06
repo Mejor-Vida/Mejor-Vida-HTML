@@ -1,0 +1,42 @@
+{
+  "name": "Julie Braunsroth photoreal identity lock",
+  "lockedAt": "2026-09-11",
+  "doNotOverwrite": true,
+  "source": {
+    "approvedAd": "img/julie-promo-funeral-cost.png",
+    "enhancedCrop": "OpenArt Grok Imagine Image 2.0 image2image, historyId uzqgrOPVTPZCrmAtdU8K",
+    "note": "Approved Facebook funeral-cost ad photo: sharper Julie, white blouse, black blazer, same identity."
+  },
+  "files": {
+    "look": "img/julie-identity/julie-photo-lock.png",
+    "face": "img/julie-identity/julie-photo-lock-face.png",
+    "bodyFront": "img/julie-identity/body/julie-body-front.jpg",
+    "bodyFront34": "img/julie-identity/body/julie-body-front-34.jpg",
+    "bodyFrontHandsBack": "img/julie-identity/body/julie-body-front-hands-back.jpg",
+    "bodySide34": "img/julie-identity/body/julie-body-side-34.jpg",
+    "bodySideHandsBack": "img/julie-identity/body/julie-body-side-hands-back.jpg"
+  },
+  "openArtReferences": {
+    "always": ["face", "look", "bodyFront"],
+    "ifModelAllowsMore": ["bodyFront34", "bodySide34"],
+    "note": "Grok Imagine Image 2.0 max 3 refs: use face + look + bodyFront. Nano Banana / GPT Image can take more body angles."
+  },
+  "use": "Pass face + look + at least one full-body photo as OpenArt image2image visualReferences. Face and makeup from the approved lock. Body size and shape from the full-body set. Change pose only when she gives a pose prompt. Never overwrite lock files.",
+  "bodyLock": {
+    "height": "Average adult woman; not fashion-model tall, not petite.",
+    "shoulders": "Medium width; not narrow, not athletic-broad.",
+    "arms": "Soft, fuller upper arms. Do not thin the arms.",
+    "torso": "Natural midlife build. Soft, rounded midsection. Waist is present but not cinched. Not an hourglass cartoon and not a slim straight column.",
+    "chest": "Medium-full, natural. Do not enlarge or reduce.",
+    "hips": "Moderate, in proportion to the torso. Not very wide, not boyish-narrow.",
+    "legs": "Average length and volume. Some source photos were shot from slightly above, which shortens the legs in the frame — do not lock in short legs, and do not lengthen into model proportions.",
+    "overall": "Realistic professional woman. Keep this build in every new pose. Do not slim, tone, fitness-model, or fashion-edit the body.",
+    "promptBlock": "Keep her exact real body size and shape from the full-body reference photos: medium shoulders, soft fuller upper arms, natural rounded midsection, moderate hips, average height and leg length. Do not slim her waist, arms, or face. Do not make her taller, thinner, or more athletic. Same woman, new pose only."
+  },
+  "clothingDefault": "Generated ads: black blazer + solid white blouse from the look lock, unless she asks otherwise. The full-body photos show a blue patterned top — that is for body shape only, not the default outfit.",
+  "notThisLock": [
+    "img/julie-master/ (cartoon)",
+    "img/julie-avatar-reference.json (3D Pixar chatbot avatar)",
+    "HeyGen Beatriz / teaching presenter"
+  ]
+}

@@ -12,6 +12,7 @@ const {
   upsertLeadState,
 } = require("../../lib/contacts-db");
 const { autoEnrollCrmLead, resolveAutoEnrollStage } = require("../../lib/crm-nurture-engine");
+const { normalizeUsStateAbbr } = require("../../lib/us-state-timezone");
 
 const UNRESOLVED_TEMPLATE = /^\{\{[\s\S]*\}\}$/;
 
@@ -104,10 +105,11 @@ function buildContactPatch(hints) {
   const patch = {
     source: cleanText(hints.source) || "staff_crm",
     language: mapStaffLanguage(hints.language),
-    us_state: cleanText(hints.us_state || (hints.profile_ext && hints.profile_ext.state) || "NE")
-      .toUpperCase()
-      .slice(0, 2) || "NE",
   };
+  const state = normalizeUsStateAbbr(
+    hints.us_state || (hints.profile_ext && hints.profile_ext.state) || ""
+  );
+  if (state) patch.us_state = state;
   const fn = cleanText(hints.first_name);
   const ln = cleanText(hints.last_name);
   const em = normalizeEmail(hints.email);

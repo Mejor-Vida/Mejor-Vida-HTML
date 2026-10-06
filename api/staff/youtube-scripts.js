@@ -10,6 +10,7 @@ const {
   openaiChat,
   transcribeRecording,
   buildCutPlan,
+  collectOffScriptIssues,
 } = require("../../lib/youtube-scripts");
 const {
   siblingAudioPath,
@@ -17,6 +18,7 @@ const {
   purgeRecordingFiles,
   purgeCrmRecordingAfterYoutube,
 } = require("../../lib/youtube-recording-storage");
+const { hasFfmpeg, applyRequestedFixes } = require("../../lib/youtube-apply-requested-fixes");
 
 function statusFromTexts(row) {
   if (row && row.status && row.status !== "empty") return row.status;
@@ -90,6 +92,28 @@ async function signObjectUpload(cfg, objectPath) {
     signedUrl += (signedUrl.indexOf("?") === -1 ? "?" : "&") + "token=" + encodeURIComponent(token);
   }
   return { path: objectPath, token, signedUrl, bucket: "youtube-recordings" };
+}
+
+async function signObjectDownload(cfg, objectPath, expiresIn) {
+  const path = String(objectPath || "").replace(/^\/+/, "");
+  const r = await fetch(`${cfg.supabaseUrl}/storage/v1/object/sign/youtube-recordings/${path}`, {
+    method: "POST",
+    headers: {
+      apikey: cfg.serviceKey,
+      Authorization: `Bearer ${cfg.serviceKey}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ expiresIn: expiresIn || 3600 }),
+  });
+  const data = await r.json().catch(() => ({}));
+  if (!r.ok) {
+    throw new Error(String((data && (data.message || data.error)) || "Playback URL failed").slice(0, 200));
+  }
+  const signed = data.signedURL || data.signedUrl || data.url || "";
+  if (!signed) throw new Error("Playback URL failed");
+  const base = String(cfg.supabaseUrl || "").replace(/\/$/, "");
+  if (/^https?:\/\//i.test(signed)) return signed;
+  return `${base}/storage/v1${signed.indexOf("/") === 0 ? "" : "/"}${signed}`;
 }
 
 async function fetchRecordingObject(cfg, objectPath) {
@@ -350,6 +374,22 @@ module.exports = async function handler(req, res) {
       }
     }
 
+    if (action === "play-url") {
+      const current = mergeSeed(page, await loadRow(cfg, slug));
+      const objectPath = recordingPathForSlug(slug, current.recording_path);
+      if (!objectPath) return json(res, 400, { error: "Upload a recording first" });
+      try {
+        const url = await signObjectDownload(cfg, objectPath, 3600);
+        return json(res, 200, {
+          ok: true,
+          url,
+          mime: current.recording_mime || "video/mp4",
+        });
+      } catch (e) {
+        return json(res, 500, { error: String(e.message || e).slice(0, 200) });
+      }
+    }
+
     if (action === "recording-saved") {
       const recording_path = String(body.recording_path || "").trim();
       if (!recording_path) return json(res, 400, { error: "recording_path required" });
@@ -472,6 +512,101 @@ module.exports = async function handler(req, res) {
         transcript: current.transcript,
         cut_plan: current.cut_plan,
         review_notes: String(body.review_notes || current.review_notes || ""),
+        youtube_id: current.youtube_id,
+        updated_by: auth.user && auth.user.email,
+        updated_at: new Date().toISOString(),
+      });
+      return json(res, 200, { ok: true, item: mergeSeed(page, saved) });
+    }
+
+    if (action === "request-fix") {
+      const current = mergeSeed(page, await loadRow(cfg, slug));
+      const plan = current.cut_plan && typeof current.cut_plan === "object" ? { ...current.cut_plan } : {};
+      const start = Number(body.start);
+      const end = Number(body.end);
+      if (!Number.isFinite(start) || !Number.isFinite(end) || end <= start) {
+        return json(res, 400, { error: "Need a time range to fix" });
+      }
+      let issues = Array.isArray(plan.issues) ? plan.issues.slice() : [];
+      if (!issues.length) {
+        issues = collectOffScriptIssues({
+          scriptEs: extractSpoken(current.script_es),
+          words: plan.words,
+          cuts: plan.cut,
+          rows: plan.rows,
+        });
+      }
+      let hit = issues.find(
+        (x) => Math.abs(Number(x.start) - start) < 0.35 && Math.abs(Number(x.end) - end) < 0.35
+      );
+      if (!hit) {
+        hit = {
+          id: `iss-${start.toFixed(2)}-${end.toFixed(2)}`,
+          start,
+          end,
+          kind: String(body.kind || "off_script"),
+          label: String(body.reason || "Sound that is not the script"),
+          spoken: String(body.spoken || ""),
+        };
+        issues.push(hit);
+      }
+      hit.status = "requested";
+      hit.requested_at = new Date().toISOString();
+      hit.tool = "ffmpeg";
+      plan.issues = issues;
+      const dbRow = await loadRow(cfg, slug);
+      if (hasFfmpeg() && dbRow && dbRow.recording_path) {
+        try {
+          const result = await applyRequestedFixes(cfg, {
+            slug,
+            row: { ...dbRow, cut_plan: plan },
+            extraCut: {
+              start,
+              end,
+              kind: hit.kind,
+              label: hit.label,
+              spoken: hit.spoken,
+            },
+          });
+          const savedCut = await upsertRow(cfg, {
+            slug,
+            title: page.title,
+            group_id: page.group,
+            url_es: page.urlEs,
+            url_en: page.urlEn || "",
+            breakdown: current.breakdown,
+            script_en: current.script_en,
+            script_es: current.script_es,
+            status: current.status,
+            recording_path: result.recording_path,
+            recording_mime: current.recording_mime || "video/mp4",
+            transcript: current.transcript,
+            cut_plan: result.cut_plan,
+            youtube_id: current.youtube_id,
+            updated_by: auth.user && auth.user.email,
+            updated_at: new Date().toISOString(),
+          });
+          return json(res, 200, { ok: true, applied: true, item: mergeSeed(page, savedCut) });
+        } catch (err) {
+          return json(res, 500, {
+            error: "Could not cut the take: " + String((err && err.message) || err).slice(0, 220),
+          });
+        }
+      }
+      const saved = await upsertRow(cfg, {
+        slug,
+        title: page.title,
+        group_id: page.group,
+        url_es: page.urlEs,
+        url_en: page.urlEn || "",
+        breakdown: current.breakdown,
+        script_en: current.script_en,
+        script_es: current.script_es,
+        status: current.status,
+        recording_path: current.recording_path,
+        recording_mime: current.recording_mime,
+        transcript: current.transcript,
+        cut_plan: plan,
         youtube_id: current.youtube_id,
         updated_by: auth.user && auth.user.email,
         updated_at: new Date().toISOString(),

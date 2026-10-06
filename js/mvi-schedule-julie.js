@@ -3,9 +3,7 @@
  * Share page: /schedule-julie.html
  */
 (function () {
-  var HUBSPOT_ES = "https://meetings-na2.hubspot.com/julie-braunsroth";
-  var HUBSPOT_EN =
-    "https://meetings-na2.hubspot.com/julie-braunsroth/insurance-consultation-mejor-vida-insurance";
+  var HUBSPOT_MEETING = "https://meetings-na2.hubspot.com/julie-braunsroth";
 
   function pageShareUrl() {
     var path = "/schedule-julie.html";
@@ -19,14 +17,14 @@
     return document.documentElement.classList.contains("lang-en") ? "en" : "es";
   }
 
-  function hubspotUrl(lang) {
-    return lang === "en" ? HUBSPOT_EN : HUBSPOT_ES;
+  function hubspotUrl() {
+    return HUBSPOT_MEETING;
   }
 
   function syncIframe() {
     var iframe = document.getElementById("julie-schedule-iframe");
     if (!iframe) return;
-    var url = hubspotUrl(currentLang());
+    var url = hubspotUrl();
     if (iframe.getAttribute("src") !== url) {
       iframe.setAttribute("src", url);
     }

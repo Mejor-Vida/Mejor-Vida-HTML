@@ -1,0 +1,23 @@
+---
+description: Rules for building Mejor Vida static ads. Use when creating, generating, or laying out an ad image, hook, or CTA.
+alwaysApply: false
+---
+
+# Static ad creation
+
+Stage 1 uses one hook on every image. Finished ads go in `img/local-ads/`. Ad #1 is `img/local-ads/stage1-ad1-family-burden.png`. View them at http://127.0.0.1:8772/ (`python3 scripts/local-ad-viewer.py`).
+
+Hook, three lines, unchanged on each new ad:
+
+```
+NO DEJE
+A SU FAMILIA
+CON LA CARGA.
+```
+
+- 4:5, 1080 × 1350. Lots of open space. One idea.
+- The hook is the only large type. Bold, dark charcoal, centered in the upper and middle area, big enough to pass the squint test.
+- Small Mejor Vida logo at the bottom left. A larger green chat bubble at the bottom right, with the word WhatsApp in white inside it and no phone icon. That bubble is the only CTA.
+- No button, CTA phrase, price, phone number, or extra body text on the image.
+- Extra explanation stays in the Facebook main text, off the image.
+- Stage 1 still pairs many images with this one hook. Change the picture. Do not change the hook.

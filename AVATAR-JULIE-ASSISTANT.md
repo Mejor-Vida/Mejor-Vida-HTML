@@ -2,7 +2,7 @@
 
 HeyGen stock presenter used on Mejor Vida instructional videos. This is **not** Julie Braunsroth. On camera she is the agency’s educational assistant. Spoken brand: **Mejor Vida Seguros**.
 
-Scripts for teaching-page videos: `.cursor/skills/teaching-page-video/SKILL.md`.
+Scripts for teaching-page videos: `.cursor/skills/teaching-page-video/SKILL.md`. First-draft voice: `.cursor/skills/teaching-page-video/building-style.md`.
 
 ## Appearance
 - Age: adult
@@ -29,8 +29,8 @@ Scripts for teaching-page videos: `.cursor/skills/teaching-page-video/SKILL.md`.
 - Voice Designed: false
 - Voice Seed:
 - Looks: landscape (Office 1)=07bce34c28c14d0ba5aa5f810a11ec39
-- Engine: **avatar_iii** (locked for credit cost). Avatar IV had slightly more mouth expression; revisit later if we can spend the credits.
-- Last Synced: 2026-09-09T00:02:00Z
+- Engine: **avatar_iii only** (locked 2026-09-09). Do **not** use Avatar IV or Avatar V. A long V test billed 289 credits. Quote the credit estimate and wait before every generate.
+- Last Synced: 2026-09-10T03:03:00Z
 
 Look IDs can change; resolve from Group ID at runtime if a generate fails. Default website/YouTube videos use **Beatriz Office 1** (16:9). Skip kitchen and living-room looks.
 
@@ -188,7 +188,7 @@ Apply these on every script. They override the persona if anything conflicts.
 
 **Language**
 - Spanish videos: clear Latin American Spanish, **usted**, no slang, no Spanglish, no newsletter openers (“hoy les traigo,” “en esta guía completa”).
-- Agency name in speech: **Mejor Vida Seguros**. Spoken site on Spanish videos: **mejorvidaseguros.com** (that host opens the main site). English videos later: **Mejor Vida Insurance** and **mejorvidainsurance.com**.
+- Agency name in speech: **Mejor Vida Seguros** on Spanish videos; **Mejor Vida Insurance** on English approval drafts. Spoken site on **every** teaching video: **mejorvidaseguros.com** (that host opens the main site). Do not say mejorvidainsurance.com on camera.
 - Do not list licensed states except on the licenses-page video. Point to the licenses page instead.
 
 **Insurance / YMYL**
@@ -205,8 +205,22 @@ Apply these on every script. They override the persona if anything conflicts.
 - Hands stay on the table or out of frame. No pockets.
 
 **Close (every video)**
-- Teach first. Recap. Then a spoken bridge into one natural next step: free quote at **mejorvidaseguros.com** (Spanish videos) or **mejorvidainsurance.com** (English videos later), plus phone / WhatsApp `(402) 440-5438`.
-- That close is help, not a commercial.
+- Teach first. Short recap of **this** lesson. Then the locked close below, verbatim. Do not invent a custom CTA. Do not say “we do not sell funeral-home contracts.”
+- Spanish (production):
+
+Esperamos que esta información le ayude a entender mejor sus opciones de seguro de vida.
+
+Si desea saber cuánto podría costar su cobertura, visite mejorvidaseguros.com o escríbanos por WhatsApp al 402-440-5438. Puede recibir una cotización gratuita y sin compromiso.
+
+Estamos aquí para ayudarle a encontrar una opción que se ajuste a sus necesidades y a su presupuesto.
+
+- English (approval drafts / English videos later), verbatim:
+
+We hope this information helps you better understand your life insurance options.
+
+If you would like to know how much your coverage could cost, visit mejorvidaseguros.com or write us on WhatsApp at 402-440-5438. You can receive a free quote with no obligation.
+
+We are here to help you find an option that fits your needs and your budget.
 
 **Do not use this avatar for**
 - The ads landing WhatsApp intro (`landing-gastos-finales.html` / `video/Julie_Whatsapp_intro.mp4`).

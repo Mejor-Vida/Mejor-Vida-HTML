@@ -62,6 +62,39 @@
       fullCremation: 5666,
       directCremation: 2056,
     },
+    NM: {
+      code: "NM",
+      slug: "new-mexico",
+      nameEn: "New Mexico",
+      nameEs: "Nuevo México",
+      sourceUrl: "https://www.funeralocity.com/average-funeral-price/nm",
+      fullBurial: 7829,
+      immediateBurial: 4757,
+      fullCremation: 5588,
+      directCremation: 1935,
+    },
+    SC: {
+      code: "SC",
+      slug: "south-carolina",
+      nameEn: "South Carolina",
+      nameEs: "Carolina del Sur",
+      sourceUrl: "https://www.funeralocity.com/average-funeral-price/sc",
+      fullBurial: 8270,
+      immediateBurial: 4926,
+      fullCremation: 6017,
+      directCremation: 1911,
+    },
+    SD: {
+      code: "SD",
+      slug: "south-dakota",
+      nameEn: "South Dakota",
+      nameEs: "Dakota del Sur",
+      sourceUrl: "https://www.funeralocity.com/average-funeral-price/sd",
+      fullBurial: 8614,
+      immediateBurial: 5164,
+      fullCremation: 6689,
+      directCremation: 2826,
+    },
   };
 
   var LICENSE = {
@@ -94,6 +127,24 @@
       typeEs: "Productora no residente",
       number: "1777665",
       pdf: "julie-license-oh.pdf?v=20260928-cert",
+    },
+    NM: {
+      typeEn: "Non-resident producer",
+      typeEs: "Productora no residente",
+      number: "21695431",
+      pdf: "julie-license-nm.pdf?v=20260928-cert",
+    },
+    SC: {
+      typeEn: "Non-resident producer",
+      typeEs: "Productora no residente",
+      number: "21695431",
+      pdf: "julie-license-sc.pdf?v=20260928-cert",
+    },
+    SD: {
+      typeEn: "Non-resident producer",
+      typeEs: "Productora no residente",
+      number: "21695431",
+      pdf: "julie-license-sd.pdf?v=20260928-cert",
     },
   };
 

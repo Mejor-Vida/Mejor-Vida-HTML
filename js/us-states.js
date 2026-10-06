@@ -54,7 +54,7 @@ window.MVS_US_STATES = [
 ];
 
 /** States where Julie can quote online (producer licenses). */
-window.MVS_LICENSED_STATE_CODES = ['NE', 'KS', 'CO', 'NV', 'OH'];
+window.MVS_LICENSED_STATE_CODES = ['NE', 'KS', 'CO', 'NV', 'OH', 'NM', 'SC', 'SD'];
 
 /**
  * Quote / landing residence picker: licensed states + Other.
@@ -66,6 +66,9 @@ window.MVS_QUOTE_STATES = [
   { c: 'CO', n: 'Colorado' },
   { c: 'NV', n: 'Nevada' },
   { c: 'OH', n: 'Ohio' },
+  { c: 'NM', n: 'New Mexico' },
+  { c: 'SC', n: 'South Carolina' },
+  { c: 'SD', n: 'South Dakota' },
   { c: 'OTHER', n: 'Other state', nEs: 'Otro estado' },
 ];
 

@@ -1,0 +1,126 @@
+{
+  "step": "Stage 1 uses these pictures with one hook. The hook does not change from ad to ad.",
+  "stage1": {
+    "hook": "NO DEJE\nA SU FAMILIA\nCON LA CARGA."
+    "ad1": "/img/local-ads/stage1-ad1-family-burden.png",
+    "background": "/img/ad-photo-library/yours/stage1-ad1-burst.png",
+    "format": "1080x1350"
+  },
+  "addNext": "New pictures Julie creates go in img/ad-photo-library/yours and get added to this list.",
+  "groups": [
+    {
+      "id": "open-background",
+      "name": "Open background",
+      "photos": [
+        {
+          "id": "yours-burst-orange",
+          "file": "/img/ad-builder/yours-burst-orange.jpg",
+          "from": "Orange burst",
+          "source": "Your photo"
+        },
+        {
+          "id": "yours-burst-pink",
+          "file": "/img/ad-builder/yours-burst-pink.jpg",
+          "from": "Pink burst",
+          "source": "Your photo"
+        },
+        {
+          "id": "yours-burst-green",
+          "file": "/img/ad-builder/yours-burst-green.jpg",
+          "from": "Green burst",
+          "source": "Your photo"
+        },
+        {
+          "id": "yours-burst-red",
+          "file": "/img/ad-builder/yours-burst-red.jpg",
+          "from": "Red burst",
+          "source": "Your photo"
+        }
+      ]
+    },
+    {
+      "id": "senior-couple",
+      "name": "Senior couple",
+      "photos": []
+    },
+    {
+      "id": "senior-woman",
+      "name": "Senior woman",
+      "photos": []
+    },
+    {
+      "id": "family",
+      "name": "Family",
+      "photos": [
+        {
+          "id": "0033-usaa-1972476630098841",
+          "file": "/img/ad-photo-library/yours/bg-0033-usaa-1972476630098841.jpg",
+          "from": "USAA",
+          "source": "Kept ad"
+        }
+      ]
+    },
+    {
+      "id": "person-on-camera",
+      "name": "Person on camera",
+      "photos": [
+        {
+          "id": "julie-funeral-cost",
+          "file": "/img/ad-builder/julie-funeral-cost.jpg",
+          "from": "Your ad",
+          "source": "Your ad"
+        },
+        {
+          "id": "julie-spanish-fe-v4",
+          "file": "/img/ad-builder/julie-spanish-fe-v4.jpg",
+          "from": "Your ad",
+          "source": "Your ad"
+        }
+      ]
+    },
+    {
+      "id": "cemetery-or-funeral",
+      "name": "Cemetery or funeral",
+      "photos": [
+        {
+          "id": "0028-seniorquotesnow-com-2061516557899276",
+          "file": "/img/ad-photo-library/yours/bg-0028-seniorquotesnow-com-2061516557899276.jpg",
+          "from": "Seniorquotesnow.com",
+          "source": "Kept ad"
+        }
+      ]
+    },
+    {
+      "id": "casket-or-urn",
+      "name": "Casket or urn",
+      "photos": []
+    },
+    {
+      "id": "price-or-age-card",
+      "name": "Price or age card",
+      "photos": []
+    },
+    {
+      "id": "text-graphic",
+      "name": "Text graphic",
+      "photos": []
+    },
+    {
+      "id": "logo",
+      "name": "Logo",
+      "photos": [
+        {
+          "id": "julie-instant-form",
+          "file": "/img/ad-builder/julie-instant-form.jpg",
+          "from": "Your ad",
+          "source": "Your ad"
+        }
+      ]
+    }
+  ],
+  "rules": [
+    "Lots of open space. One idea on the ad.",
+    "The hook is large and bold. It has to pass the squint test.",
+    "Small Mejor Vida logo at the bottom left. A larger green chat bubble at the bottom right with the word WhatsApp inside it and no phone icon. That bubble is the only CTA. No button, price, or phone number."
+  ]
+}

@@ -1539,7 +1539,23 @@
         "</h3>" +
         '<div class="crm-notes-popover-body">' +
         bodyHtml +
-        "</div>"
+        "</div>" +
+        '<div class="crm-notes-popover-footer">' +
+        '<button type="button" class="crm-btn secondary crm-notes-add-btn" aria-expanded="false">' +
+        esc(t("notes_add")) +
+        "</button>" +
+        '<div class="crm-notes-composer hidden">' +
+        '<textarea class="crm-notes-composer-input" rows="3" aria-label="' +
+        esc(t("notes_add")) +
+        '" placeholder="' +
+        esc(t("cn_notes_ph")) +
+        '"></textarea>' +
+        '<div class="crm-notes-composer-actions">' +
+        '<button type="button" class="crm-btn crm-notes-submit-btn">' +
+        esc(t("cn_notes_submit")) +
+        "</button></div>" +
+        '<p class="crm-notes-composer-status" aria-live="polite"></p>' +
+        "</div></div>"
       );
     }
 
@@ -1574,7 +1590,10 @@
       if (left + width > window.innerWidth - margin) left = window.innerWidth - width - margin;
       var spaceBelow = Math.max(0, window.innerHeight - rect.bottom - gap - margin);
       var spaceAbove = Math.max(0, rect.top - gap - margin);
-      var placeAbove = spaceBelow < 180 && spaceAbove > spaceBelow;
+      var composer = pop.querySelector(".crm-notes-composer");
+      var composerOpen = !!(composer && !composer.classList.contains("hidden"));
+      var minNeed = composerOpen ? 280 : 180;
+      var placeAbove = spaceBelow < minNeed && spaceAbove > spaceBelow;
       var maxH = Math.floor(placeAbove ? spaceAbove : spaceBelow);
       if (maxH < 48) {
         placeAbove = spaceAbove > spaceBelow;
@@ -1592,18 +1611,110 @@
       }
     }
 
-    function fillNotesPopover(leadId, name, btn) {
-      var pop = $("crm-notes-popover");
-      if (!pop || notesPopoverLeadId !== leadId) return;
-      var cached = clientNotesCache[leadId];
-      pop.innerHTML = notesPopoverHtml(name, renderNotesPopoverItems(cached && cached.items));
-      positionNotesPopover(pop, btn);
+    function wireNotesPopover(pop, leadId, name, btn) {
       var closeBtn = pop.querySelector(".crm-notes-popover-close");
       if (closeBtn) {
         closeBtn.addEventListener("click", function (e) {
           e.stopPropagation();
           closeNotesPopover();
         });
+      }
+      var addBtn = pop.querySelector(".crm-notes-add-btn");
+      var composer = pop.querySelector(".crm-notes-composer");
+      var input = pop.querySelector(".crm-notes-composer-input");
+      var submitBtn = pop.querySelector(".crm-notes-submit-btn");
+      if (addBtn && composer) {
+        addBtn.addEventListener("click", function (e) {
+          e.stopPropagation();
+          composer.classList.remove("hidden");
+          addBtn.setAttribute("aria-expanded", "true");
+          positionNotesPopover(pop, btn);
+          if (input) input.focus();
+        });
+      }
+      if (submitBtn) {
+        submitBtn.addEventListener("click", function (e) {
+          e.stopPropagation();
+          submitNotesPopoverNote(leadId, name, btn);
+        });
+      }
+      if (input) {
+        input.addEventListener("keydown", function (e) {
+          if ((e.metaKey || e.ctrlKey) && e.key === "Enter") {
+            e.preventDefault();
+            submitNotesPopoverNote(leadId, name, btn);
+          }
+        });
+      }
+    }
+
+    function fillNotesPopover(leadId, name, btn, opts) {
+      opts = opts || {};
+      var pop = $("crm-notes-popover");
+      if (!pop || notesPopoverLeadId !== leadId) return;
+      var existingInput = pop.querySelector(".crm-notes-composer-input");
+      var existingComposer = pop.querySelector(".crm-notes-composer");
+      var draft = opts.draft != null ? opts.draft : existingInput ? existingInput.value : "";
+      var composerOpen =
+        opts.composerOpen === true ||
+        (opts.composerOpen !== false &&
+          existingComposer &&
+          !existingComposer.classList.contains("hidden"));
+      var cached = clientNotesCache[leadId];
+      pop.innerHTML = notesPopoverHtml(name, renderNotesPopoverItems(cached && cached.items));
+      var nextComposer = pop.querySelector(".crm-notes-composer");
+      var nextInput = pop.querySelector(".crm-notes-composer-input");
+      var addBtn = pop.querySelector(".crm-notes-add-btn");
+      if (composerOpen && nextComposer) {
+        nextComposer.classList.remove("hidden");
+        if (addBtn) addBtn.setAttribute("aria-expanded", "true");
+      }
+      if (nextInput) {
+        nextInput.value = opts.statusText ? "" : draft;
+      }
+      var status = pop.querySelector(".crm-notes-composer-status");
+      if (status && opts.statusText) status.textContent = opts.statusText;
+      positionNotesPopover(pop, btn);
+      wireNotesPopover(pop, leadId, name, btn);
+    }
+
+    async function submitNotesPopoverNote(leadId, name, btn) {
+      var pop = $("crm-notes-popover");
+      if (!pop || notesPopoverLeadId !== leadId) return;
+      var input = pop.querySelector(".crm-notes-composer-input");
+      var status = pop.querySelector(".crm-notes-composer-status");
+      var submitBtn = pop.querySelector(".crm-notes-submit-btn");
+      var note = input ? String(input.value || "").trim() : "";
+      if (!note) {
+        if (status) status.textContent = t("cn_notes_ph");
+        if (input) input.focus();
+        return;
+      }
+      if (submitBtn) submitBtn.disabled = true;
+      if (status) status.textContent = t("cn_loading");
+      try {
+        var data = await authedApi("/api/staff/notes", { lead_id: leadId, note: note }, { method: "POST" });
+        var items = (clientNotesCache[leadId] && clientNotesCache[leadId].items) || [];
+        if (data && data.item) {
+          items = [data.item].concat(
+            items.filter(function (n) {
+              return n.id !== data.item.id;
+            })
+          );
+        } else {
+          var refreshed = await authedApi("/api/staff/notes?leadId=" + encodeURIComponent(leadId), null, {
+            method: "GET",
+          });
+          items = (refreshed && refreshed.items) || items;
+        }
+        clientNotesCache[leadId] = { items: items };
+        fillNotesPopover(leadId, name, btn, { composerOpen: true, statusText: t("cn_note_saved") });
+        var nextInput = pop.querySelector(".crm-notes-composer-input");
+        if (nextInput) nextInput.focus();
+      } catch (e) {
+        if (notesPopoverLeadId !== leadId) return;
+        if (status) status.textContent = (e && e.message) || t("cn_note_failed");
+        if (submitBtn) submitBtn.disabled = false;
       }
     }
 
@@ -1622,13 +1733,7 @@
       pop.innerHTML = notesPopoverHtml(name, '<p class="crm-notes-empty">' + esc(t("cn_loading")) + "</p>");
       pop.classList.remove("hidden");
       positionNotesPopover(pop, btn);
-      var closeBtn = pop.querySelector(".crm-notes-popover-close");
-      if (closeBtn) {
-        closeBtn.addEventListener("click", function (e) {
-          e.stopPropagation();
-          closeNotesPopover();
-        });
-      }
+      wireNotesPopover(pop, leadId, name, btn);
       notesPopoverCloser = function (e) {
         if (pop.contains(e.target) || btn.contains(e.target)) return;
         closeNotesPopover();
@@ -1652,6 +1757,7 @@
           '<p class="crm-notes-empty">' + esc((e && e.message) || t("notes_load_failed")) + "</p>"
         );
         positionNotesPopover(pop, btn);
+        wireNotesPopover(pop, leadId, name, btn);
         return;
       }
       fillNotesPopover(leadId, name, btn);

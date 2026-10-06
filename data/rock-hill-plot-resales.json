@@ -1,0 +1,19 @@
+{
+  "city": "rock-hill",
+  "checked": "2026-09-28",
+  "checkedLabelEs": "28 sep. 2026",
+  "checkedLabelEn": "28 Sep 2026",
+  "noteEs": "Anuncios de particulares. No son precios de Mejor Vida Seguros ni la lista oficial del cementerio. La oficina debe transferir la escritura. Revise si el anuncio sigue activo.",
+  "noteEn": "Private-party ads. These are not Mejor Vida Insurance prices or the cemetery’s official list. The office must transfer the deed. Check that the listing is still active.",
+  "boards": [
+    {
+      "id": "grave-solutions",
+      "name": "Grave Solutions",
+      "url": "https://www.gravesolutions.com/for-sale/cemetery-properties/south-carolina",
+      "labelEs": "Tablero en vivo · South Carolina",
+      "labelEn": "Live board · South Carolina"
+    }
+  ],
+  "cemeterySignals": [],
+  "listings": []
+}

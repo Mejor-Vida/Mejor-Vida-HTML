@@ -114,6 +114,30 @@
   "evergreen": [
     {
       "category": "final_expense",
+      "title_en": "What happens if a final expense premium is paid late",
+      "source_title": "What is life insurance?",
+      "source_name": "Insurance Information Institute",
+      "source_url": "https://www.iii.org/article/what-life-insurance",
+      "published": "evergreen"
+    },
+    {
+      "category": "whole_life",
+      "title_en": "Cash value on a small whole life policy — what it is and is not",
+      "source_title": "What are the principal types of life insurance?",
+      "source_name": "Insurance Information Institute",
+      "source_url": "https://www.iii.org/article/what-are-the-principal-types-of-life-insurance",
+      "published": "evergreen"
+    },
+    {
+      "category": "term_life",
+      "title_en": "Convertible term life in plain English — why it matters later",
+      "source_title": "What are the principal types of life insurance?",
+      "source_name": "Insurance Information Institute",
+      "source_url": "https://www.iii.org/article/what-are-the-principal-types-of-life-insurance",
+      "published": "evergreen"
+    },
+    {
+      "category": "final_expense",
       "title_en": "The FTC Funeral Rule still protects families shopping a funeral",
       "source_title": "Shopping for Funeral Services",
       "source_name": "FTC",

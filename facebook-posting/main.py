@@ -81,9 +81,11 @@ def main() -> int:
         help="Upload this image file with the post (repo-relative or absolute). Overrides auto-detect from JSON filename.",
     )
     parser.add_argument(
-        "--no-image",
-        action="store_true",
-        help="Publish text-only (feed); skip photo upload even if image_url or local file exists",
+        "--local-video",
+        type=str,
+        default="",
+        metavar="PATH",
+        help="Upload this MP4 with the post (repo-relative or absolute). Skips photo upload.",
     )
     args = parser.parse_args()
 
@@ -247,7 +249,16 @@ Comenta “INFO” para el artículo o “REVISAR” para tu caso. También por 
     delay_sec = 0 if args.first_comment_now else args.first_comment_delay_seconds
 
     image_path_publish: Path | None = None
-    if args.no_image:
+    video_path_publish: Path | None = None
+    publish_image_url = None
+    if args.local_video.strip():
+        lv = Path(args.local_video.strip())
+        video_path_publish = lv if lv.is_absolute() else repo_root / lv
+        if not video_path_publish.is_file():
+            print(f"Publish failed: --local-video not found: {video_path_publish}", file=sys.stderr)
+            return 1
+        print(f"Publishing with local video upload: {video_path_publish}", flush=True)
+    elif args.no_image:
         image_path_publish = None
         publish_image_url = None
     elif args.local_image.strip():
@@ -259,7 +270,7 @@ Comenta “INFO” para el artículo o “REVISAR” para tu caso. También por 
     else:
         image_path_publish = _local_image_for_url(blog.get("image_url"))
 
-    if not args.no_image:
+    if video_path_publish is None and not args.no_image:
         publish_image_url = None if image_path_publish is not None else blog.get("image_url")
         if image_path_publish is not None:
             print(f"Publishing with local image upload: {image_path_publish}", flush=True)
@@ -269,6 +280,7 @@ Comenta “INFO” para el artículo o “REVISAR” para tu caso. También por 
             package,
             image_url=publish_image_url,
             image_path=image_path_publish,
+            video_path=video_path_publish,
             first_comment_mode=first_comment_mode,
             first_comment_delay_sec=delay_sec,
         )

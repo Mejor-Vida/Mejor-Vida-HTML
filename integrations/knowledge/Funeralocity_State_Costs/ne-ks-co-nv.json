@@ -114,6 +114,58 @@
         "Max": 2370,
         "Rank": 50
       }
+    },
+    "OH": {
+      "name": "Ohio",
+      "sourceUrl": "https://www.funeralocity.com/average-funeral-price/oh",
+      "fullBurial": {
+        "Average": 8018,
+        "Min": 5285,
+        "Max": 11335,
+        "Rank": 42
+      },
+      "immediateBurial": {
+        "Average": 4949,
+        "Min": 2830,
+        "Max": 7908,
+        "Rank": 34
+      },
+      "fullCremation": {
+        "Average": 5666,
+        "Min": 3335,
+        "Max": 9185,
+        "Rank": 44
+      },
+      "directCremation": {
+        "Average": 2056,
+        "Min": 575,
+        "Max": 4375,
+        "Rank": 30
+      }
+    },
+    "NM": {
+      "name": "New Mexico",
+      "sourceUrl": "https://www.funeralocity.com/average-funeral-price/nm",
+      "fullBurial": { "Average": 7829, "Min": 6070, "Max": 9760, "Rank": 45 },
+      "immediateBurial": { "Average": 4757, "Min": 3465, "Max": 6495, "Rank": 42 },
+      "fullCremation": { "Average": 5588, "Min": 3790, "Max": 7325, "Rank": 45 },
+      "directCremation": { "Average": 1935, "Min": 725, "Max": 3700, "Rank": 37 }
+    },
+    "SC": {
+      "name": "South Carolina",
+      "sourceUrl": "https://www.funeralocity.com/average-funeral-price/sc",
+      "fullBurial": { "Average": 8270, "Min": 5735, "Max": 12675, "Rank": 33 },
+      "immediateBurial": { "Average": 4926, "Min": 3060, "Max": 7880, "Rank": 35 },
+      "fullCremation": { "Average": 6017, "Min": 3385, "Max": 9985, "Rank": 32 },
+      "directCremation": { "Average": 1911, "Min": 275, "Max": 4590, "Rank": 39 }
+    },
+    "SD": {
+      "name": "South Dakota",
+      "sourceUrl": "https://www.funeralocity.com/average-funeral-price/sd",
+      "fullBurial": { "Average": 8614, "Min": 6385, "Max": 10305, "Rank": 23 },
+      "immediateBurial": { "Average": 5164, "Min": 3775, "Max": 7135, "Rank": 23 },
+      "fullCremation": { "Average": 6689, "Min": 3955, "Max": 8380, "Rank": 13 },
+      "directCremation": { "Average": 2826, "Min": 1170, "Max": 4450, "Rank": 7 }
     }
   }
 }
