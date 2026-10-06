@@ -415,6 +415,10 @@
       "schedule": "0 */6 * * *"
     },
     {
+      "path": "/api/gsc-sync-cron",
+      "schedule": "15 */6 * * *"
+    },
+    {
       "path": "/api/meta-ad-token-health-cron",
       "schedule": "0 9 * * 1"
     },
