@@ -44,6 +44,8 @@ How the MVS Agent (or any automation) can access your data. **Google Sheets is n
 | Make.com | `MAKE_API_TOKEN` + HTTP API |
 | ManyChat | `MANYCHAT_API_KEY` + HTTP API |
 | YouTube | `YOUTUBE_REFRESH_TOKEN` + YouTube Data API v3 (`npm run youtube:connect`) |
+| GA4 funnel (cached) | Supabase table `ga4_funnel_cache` (cron `/api/ga4-sync-cron`) — no GA4 MCP needed |
+| Search Console (cached) | Supabase table `gsc_search_cache` (cron `/api/gsc-sync-cron`) — top queries/pages + `query_deltas` vs prior 28 days; no GSC MCP needed |
 
 ### Private business tax profile (paperwork only)
 
