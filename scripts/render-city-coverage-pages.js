@@ -584,9 +584,9 @@ function documentGuide(lang, city) {
   const header = isEs ? loadHeaderEs(city) : loadHeaderEn(city);
   const footer = isEs ? loadFooterEs() : loadFooterEn();
   const robots = isEs ? "index, follow" : "noindex, follow";
+  // Spanish is indexable; English /en/ is noindex — do not advertise EN via hreflang on ES.
   const hreflang = isEs
     ? `<link href="${canon}" hreflang="es-US" rel="alternate"/>
-<link href="${altCanon}" hreflang="en-US" rel="alternate"/>
 <link href="${canon}" hreflang="x-default" rel="alternate"/>`
     : `<link href="${altCanon}" hreflang="es-US" rel="alternate"/>
 <link href="${canon}" hreflang="en-US" rel="alternate"/>`;
@@ -695,7 +695,6 @@ function documentEs(city) {
 <meta name="robots" content="index, follow"/>
 <link href="${canon}" rel="canonical"/>
 <link href="${canon}" hreflang="es-US" rel="alternate"/>
-<link href="${enCanon}" hreflang="en-US" rel="alternate"/>
 <link href="${canon}" hreflang="x-default" rel="alternate"/>
 <link href="${root}favicon.ico" rel="icon" type="image/x-icon"/>
 <link href="${root}bootstrap/css/bootstrap.min.css" rel="stylesheet"/>

@@ -107,7 +107,6 @@ function wrapPage({
     ? `<link href="${alt}" hreflang="es-US" rel="alternate"/>
 <link href="${canonical}" hreflang="en-US" rel="alternate"/>`
     : `<link href="${canonical}" hreflang="es-US" rel="alternate"/>
-<link href="${alt}" hreflang="en-US" rel="alternate"/>
 <link href="${canonical}" hreflang="x-default" rel="alternate"/>`;
   const json = typeof jsonLd === "string" ? jsonLd : JSON.stringify(jsonLd);
   return applyUsLocaleSignals(`<!DOCTYPE html>

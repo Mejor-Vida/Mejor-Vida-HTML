@@ -1490,6 +1490,7 @@ function replaceBetween(html, startRe, endRe, replacement) {
 
 function setMeta(html, lang, carrier, copy, enUrl, esUrl) {
  const canonical = lang === "en" ? enUrl : esUrl;
+ const isEs = lang === "es";
 
  // Remove noindex if present (prefer indexable children pages)
  html = html.replace(/\s*<meta\s+name=["']robots["']\s+content=["'][^"']*noindex[^"']*["']\s*\/?>/i, "\n");
@@ -1525,10 +1526,12 @@ function setMeta(html, lang, carrier, copy, enUrl, esUrl) {
  `<link href="${canonical}" rel="canonical"/>`
  );
 
- // hreflang block — replace consecutive alternate links near head
+ // hreflang block — Spanish is indexable; EN carrier pages are noindex.
  html = html.replace(
  /<link href="https:\/\/www\.mejorvidainsurance\.com\/[^"]*" hreflang="es(?:-US)?" rel="alternate"\/>\s*<link href="https:\/\/www\.mejorvidainsurance\.com\/[^"]*" hreflang="en(?:-US)?" rel="alternate"\/>\s*(?:<link href="https:\/\/www\.mejorvidainsurance\.com\/[^"]*" hreflang="x-default" rel="alternate"\/>\s*)?/,
- `<link href="${esUrl}" hreflang="es-US" rel="alternate"/>\n<link href="${enUrl}" hreflang="en-US" rel="alternate"/>\n<link href="${esUrl}" hreflang="x-default" rel="alternate"/>\n`
+ isEs
+  ? `<link href="${esUrl}" hreflang="es-US" rel="alternate"/>\n<link href="${esUrl}" hreflang="x-default" rel="alternate"/>\n`
+  : `<link href="${esUrl}" hreflang="es-US" rel="alternate"/>\n<link href="${enUrl}" hreflang="en-US" rel="alternate"/>\n<link href="${esUrl}" hreflang="x-default" rel="alternate"/>\n`
  );
 
  html = html.replace(

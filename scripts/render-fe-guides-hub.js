@@ -103,9 +103,14 @@ function renderHub(lang) {
 <meta name="description" content="${desc}"/>
 <meta name="robots" content="index, follow"/>
 <link rel="canonical" href="${canonical}"/>
-<link rel="alternate" hreflang="es" href="${isEn ? alt : canonical}"/>
-<link rel="alternate" hreflang="en" href="${isEn ? canonical : alt}"/>
-<link rel="alternate" hreflang="x-default" href="${isEn ? alt : canonical}"/>
+${
+  isEn
+    ? `<link rel="alternate" hreflang="es" href="${alt}"/>
+<link rel="alternate" hreflang="en" href="${canonical}"/>
+<link rel="alternate" hreflang="x-default" href="${alt}"/>`
+    : `<link rel="alternate" hreflang="es" href="${canonical}"/>
+<link rel="alternate" hreflang="x-default" href="${canonical}"/>`
+}
 <link href="${assetRoot}favicon.ico" rel="icon" type="image/x-icon"/>
 <link href="${cssPrefix}bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
 <link href="${cssPrefix}css/quote-flow-shared.css" rel="stylesheet"/>

@@ -527,8 +527,10 @@ function wrapPage(lang, mainHtml, ratesJson, compareJson) {
       '<link href="https://www.mejorvidainsurance.com/costo-seguro-vida-temporal.html" hreflang="es-US" rel="alternate"/>'
     )
     .replace(
-      /<link href="https:\/\/www\.mejorvidainsurance\.com\/[^"]*" hreflang="en(?:-US)?" rel="alternate"\/>/,
-      '<link href="https://www.mejorvidainsurance.com/en/term-life-cost.html" hreflang="en-US" rel="alternate"/>'
+      /<link href="https:\/\/www\.mejorvidainsurance\.com\/[^"]*" hreflang="en(?:-US)?" rel="alternate"\/>\s*/,
+      isEs
+        ? ""
+        : '<link href="https://www.mejorvidainsurance.com/en/term-life-cost.html" hreflang="en-US" rel="alternate"/>\n'
     )
     .replace(
       /<link href="https:\/\/www\.mejorvidainsurance\.com\/[^"]*" hreflang="x-default" rel="alternate"\/>/,
