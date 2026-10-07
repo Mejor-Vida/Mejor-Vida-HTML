@@ -178,6 +178,7 @@
     setSelectOrCustom(state.root, "crm-ov-pipeline-stage", window.StaffCrmStages ? window.StaffCrmStages.normalizeStage(detail.pipeline_stage) : detail.pipeline_stage);
     setv("crm-ov-policy-sold-at", detail.policy_sold_at ? String(detail.policy_sold_at).slice(0, 10) : "");
     setSelectOrCustom(state.root, "crm-ov-source", detail.source);
+    setv("crm-ov-meta-ad-id", detail.meta_ad_id || "");
     var doff = $("crm-ov-drop-off", state.root);
     if (doff) doff.checked = !!detail.drop_off;
     setSelectOrCustom(state.root, "crm-ov-drop-off-stage", detail.drop_off_stage);
@@ -454,6 +455,10 @@
         buildSelectOptions("ov_source", SOURCE_OPTIONS, ""),
         t("ov_source_hint")
       ) +
+      field("crm-ov-meta-ad-id", t("ov_meta_ad_id"), "text", {
+        ro: true,
+        placeholder: t("ov_meta_ad_id_ph"),
+      }) +
       checkboxField("crm-ov-drop-off", t("ov_drop_off"), t("ov_drop_off_hint")) +
       selectField(
         "crm-ov-drop-off-stage",

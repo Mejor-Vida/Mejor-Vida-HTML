@@ -215,6 +215,33 @@ module.exports = async function handler(req, res) {
       eventData.email_saved = true;
     }
 
+    const metaAdRaw =
+      cleanMcField(
+        firstNonEmpty(body, ["meta_ad_id", "ad_id", "fb_ad_id", "facebook_ad_id", "source_ad_id"]) || ""
+      ) || "";
+    const metaAdId = String(metaAdRaw).replace(/\D/g, "");
+    const contactAttribution = {};
+    if (metaAdId.length >= 8 && metaAdId.length <= 24) {
+      contactAttribution.meta_ad_id = metaAdId;
+      eventData.meta_ad_id = metaAdId;
+    }
+    const ctwaRaw = cleanMcField(
+      firstNonEmpty(body, [
+        "meta_ctwa_clid",
+        "ctwa_clid",
+        "click_to_whatsapp_clid",
+        "wa_ctwa_clid",
+        "whatsapp_ctwa_clid",
+      ]) || ""
+    );
+    if (ctwaRaw.length >= 8 && ctwaRaw.length <= 512 && /^[A-Za-z0-9._~+/=-]+$/.test(ctwaRaw)) {
+      contactAttribution.meta_ctwa_clid = ctwaRaw;
+      eventData.meta_ctwa_clid_saved = true;
+    }
+    if (Object.keys(contactAttribution).length) {
+      await updateContact(supabaseUrl, supabaseKey, contact.id, contactAttribution);
+    }
+
     if (body.coverage_amount !== undefined && body.coverage_amount !== "") {
       const amt = parseInt(body.coverage_amount, 10);
       if (Number.isFinite(amt)) {
@@ -238,11 +265,13 @@ module.exports = async function handler(req, res) {
     if (body.policy_issued_at) updates.policy_issued_at = body.policy_issued_at;
     if (body.whatsapp_drop_off) updates.whatsapp_drop_off = String(body.whatsapp_drop_off).trim();
 
-    if (Object.keys(updates).length === 0 && !email) {
+    const contactOnly =
+      email || contactAttribution.meta_ad_id || contactAttribution.meta_ctwa_clid;
+    if (Object.keys(updates).length === 0 && !contactOnly) {
       return json(res, 400, { success: false, error: "No valid fields to update" });
     }
 
-    if (Object.keys(updates).length === 0 && email) {
+    if (Object.keys(updates).length === 0 && contactOnly) {
       await insertEvent(supabaseUrl, supabaseKey, contact.id, "lead_updated", eventData);
       return json(res, 200, {
         success: true,

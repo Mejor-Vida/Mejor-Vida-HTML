@@ -844,7 +844,7 @@ async function selectContactsLeadDetailById(cfg, id) {
   const rows = await restSelect(
     cfg,
     "contacts",
-    `select=id,first_name,last_name,email,phone,language,idioma,source,whatsapp_id,manychat_subscriber_id,us_state,created_at,updated_at&limit=1&id=eq.${encodeURIComponent(id)}`
+    `select=id,first_name,last_name,email,phone,language,idioma,source,whatsapp_id,manychat_subscriber_id,meta_ad_id,us_state,created_at,updated_at&limit=1&id=eq.${encodeURIComponent(id)}`
   );
   const row = Array.isArray(rows) && rows[0] ? rows[0] : null;
   if (!row) return null;
@@ -895,6 +895,7 @@ async function selectContactsLeadDetailById(cfg, id) {
     opt_in: false,
     opt_in_at: null,
     manychat_subscriber_id: row.manychat_subscriber_id || row.whatsapp_id || null,
+    meta_ad_id: row.meta_ad_id || null,
     created_at: row.created_at || null,
     updated_at: row.updated_at || null,
     staff_hidden_at: null,

@@ -30,6 +30,8 @@
  *   sexo | gender | sex
  *   tabaco | tobacco | smoker | is_smoker
  *   quote_low | quoteLow, quote_high | quoteHigh
+ *   meta_ad_id | ad_id | fb_ad_id   (Meta ad that started CTWA; also read from ManyChat custom field)
+ *   meta_ctwa_clid | ctwa_clid      (Click-to-WhatsApp click id when available)
  *
  * Response:
  *   {
@@ -64,6 +66,7 @@ const { fetchManychatSubscriber } = require("../lib/manychat-pull");
 const { normalizeUsStateAbbr } = require("../lib/us-state-timezone");
 const { saveCanonicalLeadProfile } = require("./staff/_lead-profile");
 const { autoEnrollCrmLead } = require("../lib/crm-nurture-engine");
+const { mergePendingAttributionForContact } = require("../lib/meta-whatsapp-attribution");
 
 function json(res, status, payload) {
   res.status(status).setHeader("Content-Type", "application/json");
@@ -496,6 +499,16 @@ module.exports = async function handler(req, res) {
 
     const { contactId, created } = await upsertContact(supabaseUrl, supabaseKey, phone, contactPatch);
     const updated = !created;
+
+    try {
+      await mergePendingAttributionForContact(
+        { supabaseUrl, serviceKey: supabaseKey },
+        contactId,
+        { phone, whatsappId }
+      );
+    } catch (e) {
+      console.error("[lead-intake] ctwa pending merge", e.message || e);
+    }
 
     const existingState = await getLeadState(supabaseUrl, supabaseKey, contactId);
     const inferred = inferStageFromIntakePayload({ age, gender, isSmoker, quoteLow, quoteHigh });
