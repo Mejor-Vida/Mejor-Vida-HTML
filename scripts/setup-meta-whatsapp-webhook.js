@@ -51,7 +51,7 @@ async function graph(method, url, body) {
 
 async function main() {
   const subscribeWaba = process.argv.includes("--subscribe-waba");
-  const appId = String(process.env.FACEBOOK_APP_ID || "").trim();
+  const appId = String(process.env.FACEBOOK_APP_ID || "1319755636638842").trim();
   const appSecret = String(process.env.FACEBOOK_APP_SECRET || "").trim();
   const verify = String(process.env.META_WHATSAPP_VERIFY_TOKEN || "").trim();
   const wabaId = String(process.env.META_WHATSAPP_BUSINESS_ACCOUNT_ID || "").trim();
