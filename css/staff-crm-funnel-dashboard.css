@@ -293,6 +293,25 @@
   width: min(980px, 96vw);
 }
 
+.crm-funnel-seo-page-link {
+  border: 0;
+  padding: 0;
+  background: none;
+  font: inherit;
+  color: var(--crm-primary, #2563eb);
+  text-align: left;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.crm-funnel-seo-page-link:hover {
+  color: #1d4ed8;
+}
+
+.crm-funnel-seo-page-row:hover td {
+  background: #f8fafc;
+}
+
 .crm-funnel-seo-body h4 {
   margin: 18px 0 8px;
   font-size: 0.95rem;
@@ -435,6 +454,17 @@
   font-size: 0.72rem;
   color: var(--crm-muted, #64748b);
   font-weight: 600;
+}
+
+.crm-funnel-seo-table th.num,
+.crm-funnel-seo-table td.num {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.crm-funnel-seo-body h4 {
+  margin: 1.1rem 0 0.35rem;
+  font-size: 0.95rem;
 }
 
 @media (max-width: 720px) {

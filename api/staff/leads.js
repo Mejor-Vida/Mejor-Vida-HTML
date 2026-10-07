@@ -26,11 +26,60 @@ function splitDisplayName(name) {
   };
 }
 
+function looksLikePersonName(v) {
+  const s = String(v || "").trim();
+  if (!s || /^unknown$/i.test(s)) return false;
+  try {
+    return /[\p{L}]/u.test(s);
+  } catch (e) {
+    return /[A-Za-z\u00C0-\u024F]/.test(s);
+  }
+}
+
+function inferLastName(firstName, display) {
+  const first = String(firstName || "").trim();
+  const d = String(display || "").trim();
+  if (!d || /^unknown$/i.test(d)) return "";
+  let inferred = "";
+  if (first) {
+    const escaped = first.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const m = d.match(new RegExp("^" + escaped + "\\s+(.+)$", "i"));
+    if (m) inferred = String(m[1] || "").trim();
+  }
+  if (!inferred) {
+    const parts = d.split(/\s+/).filter(Boolean);
+    if (parts.length >= 2) inferred = parts.slice(1).join(" ");
+  }
+  return looksLikePersonName(inferred) ? inferred : "";
+}
+
 function displayName(row) {
   const a = String((row && row.first_name) || "").trim();
   const b = String((row && row.last_name) || "").trim();
-  const full = [a, b].filter(Boolean).join(" ").trim();
-  return full || a || b || "Unknown";
+  const stored = String((row && row.display_name) || "").trim();
+  if (looksLikePersonName(b)) {
+    return [a, b].filter(Boolean).join(" ").trim() || stored || "Unknown";
+  }
+  const inferred = inferLastName(a, stored);
+  if (a && inferred) return (a + " " + inferred).trim();
+  if (a) return a;
+  if (looksLikePersonName(stored)) return stored;
+  return a || "Unknown";
+}
+
+function policySoldYmd(v) {
+  const s = String(v == null ? "" : v).trim();
+  if (!s) return "";
+  const m = s.match(/^(\d{4})-(\d{2})-(\d{2})/);
+  if (m) return `${m[1]}-${m[2]}-${m[3]}`;
+  const d = new Date(s);
+  if (Number.isNaN(d.getTime())) return "";
+  return new Intl.DateTimeFormat("en-CA", {
+    timeZone: "America/Chicago",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).format(d);
 }
 
 function sortKey(row) {
@@ -284,6 +333,17 @@ function parseCallScheduledAtBody(body) {
   return { skip: false, at: d.toISOString() };
 }
 
+function parsePolicySoldAtBody(body) {
+  if (!Object.prototype.hasOwnProperty.call(body, "policy_sold_at")) {
+    return { skip: true, at: undefined };
+  }
+  const v = body.policy_sold_at;
+  if (v === null || v === false || v === "") return { skip: false, at: null };
+  const ymd = policySoldYmd(v);
+  if (!ymd) return { skip: false, error: "Invalid policy_sold_at" };
+  return { skip: false, at: ymd };
+}
+
 const CRM_STAGE_RANK = {
   "": 0,
   new: 0,
@@ -311,6 +371,7 @@ function buildListItemFromRow(r, canonical) {
     contact_id: "",
     contacts_contact_id: "",
     call_scheduled_at: null,
+    policy_sold_at: null,
     review_request_sent_at: null,
     manychat_subscriber_id: r.manychat_subscriber_id || r.whatsapp_id || "",
     created_at: r.created_at || null,
@@ -320,6 +381,7 @@ function buildListItemFromRow(r, canonical) {
   if (canonical && typeof canonical === "object") {
     item.first_name = mergePreferCanonicalKey(item.first_name, canonical, "first_name");
     item.last_name = mergePreferCanonicalKey(item.last_name, canonical, "last_name");
+    if (!looksLikePersonName(item.last_name)) item.last_name = "";
     item.email = mergePreferCanonicalKey(item.email, canonical, "email");
     item.phone = mergePreferCanonicalKey(item.phone, canonical, "phone");
     item.language = mergePreferCanonical(item.language, canonical.language);
@@ -331,6 +393,8 @@ function buildListItemFromRow(r, canonical) {
       item.manychat_subscriber_id,
       canonical.manychat_subscriber_id || canonical.whatsapp_id
     );
+    const soldYmd = policySoldYmd(canonical.policy_sold_at);
+    if (soldYmd) item.policy_sold_at = soldYmd;
     if (canonical.review_request_sent_at) {
       item.review_request_sent_at = String(canonical.review_request_sent_at).trim() || null;
     }
@@ -354,12 +418,65 @@ function buildListItemFromRow(r, canonical) {
   ) {
     item.status = "archived";
   }
+  const storedDisplay = mergePreferCanonical(r.display_name, canonical && canonical.display_name);
+  const canonicalHasLast =
+    canonical && typeof canonical === "object" && Object.prototype.hasOwnProperty.call(canonical, "last_name");
+  if (!String(item.last_name || "").trim() && !canonicalHasLast) {
+    item.last_name = inferLastName(item.first_name, storedDisplay);
+  }
+  if (!looksLikePersonName(item.last_name)) item.last_name = "";
   item.display_name = displayName({
-    display_name: mergePreferCanonical(r.display_name, canonical && canonical.display_name),
+    display_name: storedDisplay,
     first_name: item.first_name,
     last_name: item.last_name,
   });
   return item;
+}
+
+function fillMissingLastNames(items, profileMap) {
+  const list = Array.isArray(items) ? items : [];
+  const byKey = new Map();
+  list.forEach((item) => {
+    contactKeysForItem(item).forEach((key) => {
+      if (!byKey.has(key)) byKey.set(key, []);
+      byKey.get(key).push(item);
+    });
+  });
+  list.forEach((item) => {
+    if (String((item && item.last_name) || "").trim()) return;
+    const inferred = inferLastName(item.first_name, item.display_name);
+    if (looksLikePersonName(inferred)) {
+      item.last_name = inferred;
+      item.display_name = displayName(item);
+      return;
+    }
+    for (const key of contactKeysForItem(item)) {
+      const group = byKey.get(key) || [];
+      for (const other of group) {
+        const ln = String((other && other.last_name) || "").trim();
+        if (looksLikePersonName(ln)) {
+          item.last_name = ln;
+          item.display_name = displayName(item);
+          return;
+        }
+      }
+    }
+    if (!profileMap || typeof profileMap.forEach !== "function") return;
+    const phone = phoneLast10Digits(item.phone);
+    const email = normalizeEmail(item.email);
+    profileMap.forEach((pd) => {
+      if (String((item && item.last_name) || "").trim()) return;
+      const ln = String((pd && pd.last_name) || "").trim();
+      if (!looksLikePersonName(ln)) return;
+      const samePhone = phone && phone === phoneLast10Digits(pd.phone);
+      const sameEmail = email && email === normalizeEmail(pd.email);
+      if (samePhone || sameEmail) {
+        item.last_name = ln;
+        item.display_name = displayName(item);
+      }
+    });
+  });
+  return list;
 }
 
 async function loadStaffProfileMap(cfg) {
@@ -386,11 +503,13 @@ async function enrichListItemsWithStaffProfiles(cfg, items) {
     console.error("staff/leads enrichListItemsWithStaffProfiles", e);
     return items;
   }
-  return items.map((item) => {
+  const mapped = items.map((item) => {
     const key = `${item.id}|${item.source_table}`;
     const canonical = profileMap.get(key);
     return buildListItemFromRow(item, canonical);
   });
+  fillMissingLastNames(mapped, profileMap);
+  return mapped;
 }
 
 /** Backfill stage from manychat_leads when staff profile has none. */
@@ -889,6 +1008,7 @@ async function composeMergedLeadDetail(cfg, detail, options) {
   delete topLevelPatch.profile_ext;
   merged.first_name = mergePreferCanonicalKey(detail.first_name, canonical, "first_name");
   merged.last_name = mergePreferCanonicalKey(detail.last_name, canonical, "last_name");
+  if (!looksLikePersonName(merged.last_name)) merged.last_name = "";
   merged.email = mergePreferCanonicalKey(detail.email, canonical, "email");
   merged.phone = mergePreferCanonicalKey(detail.phone, canonical, "phone");
   merged.language = mergePreferCanonical(detail.language, topLevelPatch.language);
@@ -939,6 +1059,14 @@ async function composeMergedLeadDetail(cfg, detail, options) {
     merged.profile_ext.citizenship_status = normalizeCitizenshipStatus(merged.profile_ext.citizenship_status) || null;
   }
   merged.pipeline_stage = normalizeIcPipelineStage(merged.pipeline_stage) || "new";
+  merged.policy_sold_at =
+    policySoldYmd(topLevelPatch.policy_sold_at) || policySoldYmd(detail.policy_sold_at) || null;
+  const canonicalHasLast =
+    canonical && typeof canonical === "object" && Object.prototype.hasOwnProperty.call(canonical, "last_name");
+  if (!String(merged.last_name || "").trim() && !canonicalHasLast) {
+    merged.last_name = inferLastName(merged.first_name, merged.display_name || detail.display_name);
+  }
+  if (!looksLikePersonName(merged.last_name)) merged.last_name = "";
   merged.display_name = displayName(merged);
   return merged;
 }
@@ -2716,6 +2844,7 @@ module.exports = async function handler(req, res) {
       "phi",
       "profile_ext",
       "call_scheduled_at",
+      "policy_sold_at",
     ];
     const touched = patchKeys.filter((k) => Object.prototype.hasOwnProperty.call(body, k));
     if (!touched.length) {
@@ -2732,6 +2861,10 @@ module.exports = async function handler(req, res) {
     if (scheduledParse.error) {
       return json(res, 400, { error: scheduledParse.error });
     }
+    const soldParse = parsePolicySoldAtBody(body);
+    if (soldParse.error) {
+      return json(res, 400, { error: soldParse.error });
+    }
 
     const now = new Date().toISOString();
     const payload = { updated_at: now };
@@ -2747,7 +2880,7 @@ module.exports = async function handler(req, res) {
       payload.first_name = String(body.first_name || "").trim().slice(0, 200) || null;
     }
     if (Object.prototype.hasOwnProperty.call(body, "last_name")) {
-      payload.last_name = String(body.last_name || "").trim().slice(0, 200) || null;
+      payload.last_name = String(body.last_name || "").trim().slice(0, 200);
     }
     if (Object.prototype.hasOwnProperty.call(body, "age")) {
       const v = body.age;
@@ -2840,6 +2973,9 @@ module.exports = async function handler(req, res) {
           citizenship_status: normalizeCitizenshipStatus(body.profile_ext.citizenship_status) || null,
         });
       }
+      if (!soldParse.skip) {
+        canonicalPatch.policy_sold_at = soldParse.at;
+      }
       const canonicalBeforeSave = await loadCanonicalLeadProfile(cfg, id, src || "unknown");
       const oldPipelineStage = normalizeIcPipelineStage(canonicalBeforeSave.pipeline_stage) || "new";
 
@@ -2873,6 +3009,30 @@ module.exports = async function handler(req, res) {
       }
 
       const canonicalAfterSave = await loadCanonicalLeadProfile(cfg, id, src || "unknown");
+      if (Object.prototype.hasOwnProperty.call(body, "last_name")) {
+        const lnOut = String(payload.last_name || "").trim() || null;
+        try {
+          if (src === "contacts") {
+            await restPatch(cfg, "contacts", `id=eq.${encodeURIComponent(id)}`, { last_name: lnOut });
+          } else if (src === "manychat_leads") {
+            await restPatch(cfg, "manychat_leads", `id=eq.${encodeURIComponent(id)}`, { last_name: lnOut });
+          }
+        } catch (nameErr) {
+          console.error("staff/leads PATCH source last_name", nameErr);
+        }
+        const siblingContactId = cleanText(
+          canonicalAfterSave.contacts_contact_id || canonicalAfterSave.contact_id
+        );
+        if (siblingContactId && src !== "contacts") {
+          try {
+            await restPatch(cfg, "contacts", `id=eq.${encodeURIComponent(siblingContactId)}`, {
+              last_name: lnOut,
+            });
+          } catch (nameErr) {
+            console.error("staff/leads PATCH sibling contact last_name", nameErr);
+          }
+        }
+      }
       const staffState = stateFromRecord(canonicalAfterSave);
       /* Sync residence both ways: set when staff enters a state, clear when they blank it.
          Previously only truthy states were written, so a bad leftover like NE stayed on contacts. */

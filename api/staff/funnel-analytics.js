@@ -18,7 +18,7 @@ const {
 } = require("../../lib/funnel-analytics-config");
 const { fetchAdPlatformMetrics, fetchAdDailySeries, fetchMetaClicksByRegion, fetchMetaRegionDaily, fetchMetaSpendByCampaign, parseFacebookViewVariant } = require("../../lib/ad-platform-insights");
 const { fetchTopKeywordsByClicks } = require("../../lib/google-ads-api");
-const { fetchGscOrganicSearch, fetchGscDaily, isGscPageGroup } = require("../../lib/gsc-data-api");
+const { fetchGscOrganicSearch, fetchGscDaily, fetchGscPageLists, fetchGscPageDetail, isGscPageGroup } = require("../../lib/gsc-data-api");
 const { fetchGeoClicks } = require("../../lib/geo-click-insights");
 const { fetchPoliciesSoldMetrics } = require("../../lib/crm-stage-transitions");
 const { loadQualityLeadMetrics, loadQualityLeadDailyByState, mergeSpendByState, costPerLead, attachSalesToByState, LICENSED_STATES } = require("../../lib/crm-quality-leads");
@@ -202,6 +202,48 @@ module.exports = async function handler(req, res) {
     } catch (e) {
       console.error("[funnel-analytics] gsc_daily", e.message || e);
       return json(res, 502, { error: e.message || "Could not load Search Console daily series" });
+    }
+  }
+
+  if (action === "gsc_page_lists") {
+    if (!viewShowsGsc(view)) {
+      return json(res, 400, { error: "gsc_page_lists requires organic website view" });
+    }
+    try {
+      const lists = await fetchGscPageLists(range.dateFrom, range.dateTo);
+      return json(res, 200, {
+        ok: true,
+        dateFrom: range.dateFrom,
+        dateTo: range.dateTo,
+        platform: "gsc",
+        ...lists,
+      });
+    } catch (e) {
+      console.error("[funnel-analytics] gsc_page_lists", e.message || e);
+      return json(res, 502, { error: e.message || "Could not load Search Console pages" });
+    }
+  }
+
+  if (action === "gsc_page_detail") {
+    if (!viewShowsGsc(view)) {
+      return json(res, 400, { error: "gsc_page_detail requires organic website view" });
+    }
+    const pageUrl = String(req.query.page_url || req.query.pageUrl || "").trim();
+    if (!pageUrl) {
+      return json(res, 400, { error: "page_url required" });
+    }
+    try {
+      const detail = await fetchGscPageDetail(range.dateFrom, range.dateTo, pageUrl);
+      return json(res, 200, {
+        ok: true,
+        dateFrom: range.dateFrom,
+        dateTo: range.dateTo,
+        platform: "gsc",
+        ...detail,
+      });
+    } catch (e) {
+      console.error("[funnel-analytics] gsc_page_detail", e.message || e);
+      return json(res, 502, { error: e.message || "Could not load page search detail" });
     }
   }
 

@@ -24,6 +24,10 @@
     adChartLoading: false,
     adChartData: null,
     adChartError: null,
+    adChartPageLists: null,
+    adChartSelectedPage: null,
+    adChartPageDetail: null,
+    adChartPageDetailLoading: false,
     entryModalOpen: false,
     geoModalOpen: false,
     geoLoading: false,
@@ -230,8 +234,9 @@
   }
 
   function fmtPosition(n) {
+    if (n == null || n === "") return "—";
     var v = Number(n);
-    if (!isFinite(v)) return "—";
+    if (!isFinite(v) || v <= 0) return "—";
     return v.toFixed(1);
   }
 
@@ -1153,8 +1158,24 @@
       html +=
         '<button type="button" class="crm-funnel-ad-metric crm-funnel-ad-metric--clickable' +
         (state.adChartMetric === "seo_ranking" ? " is-active" : "") +
-        '" data-funnel-ad-chart="seo_ranking">' +
+        '" data-funnel-ad-chart="seo_ranking" title="' +
+        esc(t("funnel_gsc_seo_ranking_snapshot")) +
+        '">' +
         '<span class="crm-funnel-ad-metric-label">' + esc(t("funnel_gsc_seo_ranking")) + "</span></button>";
+      html +=
+        '<button type="button" class="crm-funnel-ad-metric crm-funnel-ad-metric--clickable' +
+        (state.adChartMetric === "seo_top_pages" ? " is-active" : "") +
+        '" data-funnel-ad-chart="seo_top_pages" title="' +
+        esc(t("funnel_gsc_top_rated_intro")) +
+        '">' +
+        '<span class="crm-funnel-ad-metric-label">' + esc(t("funnel_gsc_top_rated")) + "</span></button>";
+      html +=
+        '<button type="button" class="crm-funnel-ad-metric crm-funnel-ad-metric--clickable' +
+        (state.adChartMetric === "seo_worst_pages" ? " is-active" : "") +
+        '" data-funnel-ad-chart="seo_worst_pages" title="' +
+        esc(t("funnel_gsc_worst_intro")) +
+        '">' +
+        '<span class="crm-funnel-ad-metric-label">' + esc(t("funnel_gsc_worst")) + "</span></button>";
       html += "</div>";
       html += renderGscGroupBar(metrics);
 
@@ -1726,6 +1747,9 @@
         "Google Search Console · Sep 1–28, 2026 vs Aug 4–31, 2026",
         "Google Search Console · 1–28 sep 2026 frente a 4–31 ago 2026"
       ) +
+      "</p>" +
+      '<p class="crm-funnel-seo-caption">' +
+      esc(t("funnel_gsc_seo_ranking_snapshot")) +
       "</p></div>" +
       '<button type="button" class="crm-funnel-ad-modal-close" data-funnel-ad-modal-close aria-label="' +
       esc(t("funnel_close")) +
@@ -1954,9 +1978,247 @@
     );
   }
 
+  function isSeoPageListMetric(metric) {
+    return metric === "seo_top_pages" || metric === "seo_worst_pages";
+  }
+
+  function seoPageReviewNote(row) {
+    var notes = [];
+    if (row.tooNew) {
+      notes.push(
+        t("funnel_gsc_page_review_too_new", {
+          days: row.ageDays == null ? "—" : row.ageDays,
+          need: row.minAgeDays || 30,
+        })
+      );
+      return notes.join(" ");
+    }
+    if (row.unseen || !Number(row.impressions)) {
+      notes.push(t("funnel_gsc_page_review_unseen"));
+      return notes.join(" ");
+    }
+    if (Number(row.position) >= 40) notes.push(t("funnel_gsc_page_review_deep"));
+    if (!Number(row.clicks)) notes.push(t("funnel_gsc_page_review_noclick"));
+    return notes.join(" ");
+  }
+
+  function seoPageClassLabel(row) {
+    var cls = row && row.pageClass;
+    if (cls === "service") return t("funnel_gsc_page_class_service");
+    if (cls === "teaching") return t("funnel_gsc_page_class_teaching");
+    if (cls === "other") return t("funnel_gsc_page_class_other");
+    return "";
+  }
+
+  function seoPageAgeLabel(row) {
+    if (row.ageDays == null) return "—";
+    return t("funnel_gsc_age_days", { n: row.ageDays });
+  }
+
+  function renderSeoPageTable(rows, withMeta) {
+    var head =
+      "<th>" +
+      esc(t("funnel_gsc_col_page")) +
+      "</th>" +
+      (withMeta
+        ? "<th>" +
+          esc(t("funnel_gsc_col_type")) +
+          "</th><th class='num'>" +
+          esc(t("funnel_gsc_col_age")) +
+          "</th>"
+        : "") +
+      "<th class='num'>" +
+      esc(t("funnel_gsc_col_clicks")) +
+      "</th><th class='num'>" +
+      esc(t("funnel_gsc_col_impr")) +
+      "</th><th class='num'>" +
+      esc(t("funnel_gsc_col_ctr")) +
+      "</th><th class='num'>" +
+      esc(t("funnel_gsc_col_position")) +
+      "</th>";
+    return (
+      '<div class="crm-funnel-seo-table-wrap"><table class="crm-funnel-seo-table"><thead><tr>' +
+      head +
+      "</tr></thead><tbody>" +
+      rows
+        .map(function (row) {
+          return (
+            '<tr class="crm-funnel-seo-page-row">' +
+            "<td><button type='button' class='crm-funnel-seo-page-link' data-seo-open-page='" +
+            esc(row.page) +
+            "'>" +
+            esc(row.path || row.page) +
+            "</button></td>" +
+            (withMeta
+              ? "<td>" +
+                esc(seoPageClassLabel(row)) +
+                "</td><td>" +
+                esc(seoPageAgeLabel(row)) +
+                "</td>"
+              : "") +
+            "<td>" +
+            esc(fmtNum(row.clicks)) +
+            "</td><td>" +
+            esc(fmtNum(row.impressions)) +
+            "</td><td>" +
+            esc(fmtPctRate(row.ctr)) +
+            "</td><td>" +
+            esc(fmtPosition(row.position)) +
+            "</td></tr>"
+          );
+        })
+        .join("") +
+      "</tbody></table></div>"
+    );
+  }
+
+  function renderSeoPageListModal() {
+    var worst = state.adChartMetric === "seo_worst_pages";
+    var title = worst ? t("funnel_gsc_worst_title") : t("funnel_gsc_top_rated_title");
+    var intro = worst ? t("funnel_gsc_worst_intro") : t("funnel_gsc_top_rated_intro");
+    var rangeLabel = fmtDateRangeLabel(state.dateFrom, state.dateTo);
+    var selected = state.adChartSelectedPage;
+    var lists = state.adChartPageLists;
+    var rows = ((lists && (worst ? lists.worst : lists.topRated)) || []).slice();
+    var body;
+
+    if (state.adChartLoading) {
+      body = '<p class="crm-funnel-ad-chart-empty">' + esc(t("funnel_ad_chart_loading")) + "</p>";
+    } else if (lists && lists.configured === false) {
+      body =
+        '<p class="crm-funnel-setup-hint">' +
+        esc(lists.setupHint || t("funnel_gsc_not_configured")) +
+        "</p>";
+    } else if (state.adChartError) {
+      body = '<p class="crm-funnel-error">' + esc(state.adChartError) + "</p>";
+    } else if (selected) {
+      var detail = state.adChartPageDetail;
+      var review = seoPageReviewNote(selected);
+      var openHref = selected.path
+        ? "https://www.mejorvidainsurance.com" + selected.path
+        : selected.page;
+      body =
+        '<p><button type="button" class="crm-funnel-gsc-home-tab" data-seo-page-back>' +
+        esc(t("funnel_gsc_page_back")) +
+        "</button></p>" +
+        "<h4>" +
+        esc(selected.path || selected.page) +
+        "</h4>" +
+        '<p><a href="' +
+        esc(openHref) +
+        '" target="_blank" rel="noopener">' +
+        esc(t("funnel_gsc_page_open")) +
+        "</a></p>" +
+        '<div class="crm-funnel-seo-stats">' +
+        "<div><strong>" +
+        esc(fmtNum(selected.clicks)) +
+        "</strong><span>" +
+        esc(t("funnel_gsc_col_clicks")) +
+        "</span></div>" +
+        "<div><strong>" +
+        esc(fmtNum(selected.impressions)) +
+        "</strong><span>" +
+        esc(t("funnel_gsc_col_impr")) +
+        "</span></div>" +
+        "<div><strong>" +
+        esc(fmtPctRate(selected.ctr)) +
+        "</strong><span>" +
+        esc(t("funnel_gsc_col_ctr")) +
+        "</span></div>" +
+        "<div><strong>" +
+        esc(fmtPosition(selected.position)) +
+        "</strong><span>" +
+        esc(t("funnel_gsc_col_position")) +
+        "</span></div>" +
+        "<div><strong>" +
+        esc(seoPageAgeLabel(selected)) +
+        "</strong><span>" +
+        esc(t("funnel_gsc_col_age")) +
+        "</span></div>" +
+        (seoPageClassLabel(selected)
+          ? "<div><strong>" +
+            esc(seoPageClassLabel(selected)) +
+            "</strong><span>" +
+            esc(t("funnel_gsc_col_type")) +
+            "</span></div>"
+          : "") +
+        "</div>" +
+        (review ? '<p class="crm-funnel-seo-note">' + esc(review) + "</p>" : "") +
+        (state.adChartPageDetailLoading
+          ? '<p class="crm-funnel-ad-chart-empty">' + esc(t("funnel_ad_chart_loading")) + "</p>"
+          : detail && detail.error
+            ? '<p class="crm-funnel-error">' + esc(detail.error) + "</p>"
+            : "<h4>" +
+              esc(t("funnel_gsc_page_queries")) +
+              "</h4>" +
+              seoTable(
+                [
+                  seoText("Query", "Búsqueda"),
+                  t("funnel_gsc_col_clicks"),
+                  t("funnel_gsc_col_impr"),
+                  t("funnel_gsc_col_ctr"),
+                  t("funnel_gsc_col_position"),
+                ],
+                ((detail && detail.queries) || []).map(function (q) {
+                  return [
+                    q.query,
+                    fmtNum(q.clicks),
+                    fmtNum(q.impressions),
+                    fmtPctRate(q.ctr),
+                    fmtPosition(q.position),
+                  ];
+                })
+              ) +
+              ((detail && detail.queries && detail.queries.length)
+                ? ""
+                : '<p class="crm-funnel-empty-list">' + esc(t("funnel_no_acq_data")) + "</p>") +
+              (detail && detail.daily && detail.daily.length
+                ? renderAdDailyChart("gsc_clicks", detail.daily)
+                : ""));
+    } else {
+      var tooNewRows = worst ? ((lists && lists.tooNew) || []).slice() : [];
+      body = "<p>" + esc(intro) + "</p>";
+      if (!rows.length) {
+        body +=
+          '<p class="crm-funnel-empty-list">' +
+          esc(t(worst && tooNewRows.length ? "funnel_gsc_worst_none_ready" : "funnel_gsc_page_empty")) +
+          "</p>";
+      } else {
+        body += renderSeoPageTable(rows, worst);
+      }
+      if (tooNewRows.length) {
+        body +=
+          "<h4>" +
+          esc(t("funnel_gsc_too_new_title")) +
+          "</h4><p>" +
+          esc(t("funnel_gsc_too_new_intro")) +
+          "</p>" +
+          renderSeoPageTable(tooNewRows, true);
+      }
+    }
+
+    return (
+      '<div class="crm-funnel-ad-modal-backdrop" data-funnel-ad-modal-backdrop>' +
+      '<div class="crm-funnel-ad-modal crm-funnel-ad-modal--seo" role="dialog" aria-labelledby="crm-funnel-ad-modal-title">' +
+      '<div class="crm-funnel-ad-modal-head">' +
+      "<div><h3 id='crm-funnel-ad-modal-title'>" +
+      esc(title) +
+      "</h3>" +
+      (rangeLabel ? '<p class="crm-funnel-ad-modal-sub">' + esc(rangeLabel) + "</p>" : "") +
+      "</div>" +
+      '<button type="button" class="crm-funnel-ad-modal-close" data-funnel-ad-modal-close aria-label="' +
+      esc(t("funnel_close")) +
+      '">×</button></div>' +
+      '<div class="crm-funnel-ad-modal-body crm-funnel-seo-body">' +
+      body +
+      "</div></div></div>"
+    );
+  }
+
   function AdChartModal() {
     if (!state.adChartMetric) return "";
     if (state.adChartMetric === "seo_ranking") return renderSeoRankingModal();
+    if (isSeoPageListMetric(state.adChartMetric)) return renderSeoPageListModal();
     var metric = state.adChartMetric;
     var scope = gscChartScope(metric);
     var qualityTitleKey = {
@@ -2573,6 +2835,9 @@
       state.loading = true;
       paint(main);
     }
+    if (isSeoPageListMetric(state.adChartMetric)) {
+      state.adChartPageLists = null;
+    }
     return api("/api/staff/funnel-analytics?" + queryString())
       .then(function (data) {
         state.data = data;
@@ -2583,6 +2848,9 @@
         }
         paint(main);
         wireEvents(main);
+        if (isSeoPageListMetric(state.adChartMetric)) {
+          loadAdChart(main, state.adChartMetric);
+        }
       })
       .catch(function () {
         state.loading = false;
@@ -2628,9 +2896,53 @@
       state.adChartLoading = false;
       state.adChartError = null;
       state.adChartData = null;
+      state.adChartSelectedPage = null;
+      state.adChartPageDetail = null;
       paint(main);
       wireEvents(main);
       return Promise.resolve();
+    }
+    if (isSeoPageListMetric(metric)) {
+      closeGeoClicks(main, { skipPaint: true });
+      state.adChartMetric = metric;
+      state.adChartSelectedPage = null;
+      state.adChartPageDetail = null;
+      state.adChartPageDetailLoading = false;
+      var cached = state.adChartPageLists;
+      if (
+        cached &&
+        cached.dateFrom === state.dateFrom &&
+        cached.dateTo === state.dateTo &&
+        !cached.error
+      ) {
+        state.adChartLoading = false;
+        state.adChartError = null;
+        paint(main);
+        wireEvents(main);
+        return Promise.resolve();
+      }
+      state.adChartLoading = true;
+      state.adChartError = null;
+      state.adChartPageLists = null;
+      paint(main);
+      wireEvents(main);
+      return api("/api/staff/funnel-analytics?" + queryString({ action: "gsc_page_lists" }), {
+        method: "GET",
+        softAuth: true,
+      })
+        .then(function (res) {
+          state.adChartPageLists = res;
+          state.adChartLoading = false;
+          state.adChartError = res.error || null;
+          paint(main);
+          wireEvents(main);
+        })
+        .catch(function (err) {
+          state.adChartLoading = false;
+          state.adChartError = (err && err.message) || t("funnel_load_error");
+          paint(main);
+          wireEvents(main);
+        });
     }
     closeGeoClicks(main, { skipPaint: true });
     var scope = gscChartScope(metric);
@@ -2715,9 +3027,44 @@
     state.adChartLoading = false;
     state.adChartData = null;
     state.adChartError = null;
+    state.adChartPageLists = null;
+    state.adChartSelectedPage = null;
+    state.adChartPageDetail = null;
+    state.adChartPageDetailLoading = false;
     if (opts && opts.skipPaint) return;
     paint(main);
     wireEvents(main);
+  }
+
+  function openSeoPageDetail(main, pageUrl) {
+    var lists = state.adChartPageLists || {};
+    var pool = (lists.topRated || []).concat(lists.worst || []).concat(lists.tooNew || []);
+    var row = pool.filter(function (item) {
+      return item.page === pageUrl;
+    })[0];
+    if (!row) return;
+    state.adChartSelectedPage = row;
+    state.adChartPageDetail = null;
+    state.adChartPageDetailLoading = true;
+    paint(main);
+    wireEvents(main);
+    return api(
+      "/api/staff/funnel-analytics?" +
+        queryString({ action: "gsc_page_detail", page_url: row.page }),
+      { method: "GET", softAuth: true }
+    )
+      .then(function (res) {
+        state.adChartPageDetail = res;
+        state.adChartPageDetailLoading = false;
+        paint(main);
+        wireEvents(main);
+      })
+      .catch(function (err) {
+        state.adChartPageDetail = { error: (err && err.message) || t("funnel_load_error") };
+        state.adChartPageDetailLoading = false;
+        paint(main);
+        wireEvents(main);
+      });
   }
 
   function openEntryModal(main) {
@@ -3149,6 +3496,25 @@
     if (adModalBackdrop) {
       adModalBackdrop.addEventListener("click", function (ev) {
         if (ev.target === adModalBackdrop) closeAdChart(main);
+      });
+    }
+
+    main.querySelectorAll("[data-seo-open-page]").forEach(function (btn) {
+      btn.addEventListener("click", function (ev) {
+        ev.preventDefault();
+        var pageUrl = btn.getAttribute("data-seo-open-page");
+        if (pageUrl) openSeoPageDetail(main, pageUrl);
+      });
+    });
+    var seoBack = main.querySelector("[data-seo-page-back]");
+    if (seoBack) {
+      seoBack.addEventListener("click", function (ev) {
+        ev.preventDefault();
+        state.adChartSelectedPage = null;
+        state.adChartPageDetail = null;
+        state.adChartPageDetailLoading = false;
+        paint(main);
+        wireEvents(main);
       });
     }
   }

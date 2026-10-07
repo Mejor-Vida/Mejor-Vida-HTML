@@ -176,6 +176,7 @@
     setv("crm-ov-weight", pe.weight != null && pe.weight !== "" ? String(pe.weight) : "");
     setSelectOrCustom(state.root, "crm-ov-tag", detail.tag);
     setSelectOrCustom(state.root, "crm-ov-pipeline-stage", window.StaffCrmStages ? window.StaffCrmStages.normalizeStage(detail.pipeline_stage) : detail.pipeline_stage);
+    setv("crm-ov-policy-sold-at", detail.policy_sold_at ? String(detail.policy_sold_at).slice(0, 10) : "");
     setSelectOrCustom(state.root, "crm-ov-source", detail.source);
     var doff = $("crm-ov-drop-off", state.root);
     if (doff) doff.checked = !!detail.drop_off;
@@ -213,6 +214,9 @@
       pipeline_stage: String(
         ($("crm-ov-pipeline-stage", state.root) && $("crm-ov-pipeline-stage", state.root).value) || ""
       ).trim(),
+      policy_sold_at: String(
+        ($("crm-ov-policy-sold-at", state.root) && $("crm-ov-policy-sold-at", state.root).value) || ""
+      ).trim(),
       source: String(($("crm-ov-source", state.root) && $("crm-ov-source", state.root).value) || "").trim(),
       drop_off: !!($("crm-ov-drop-off", state.root) && $("crm-ov-drop-off", state.root).checked),
       drop_off_stage: String(
@@ -246,6 +250,7 @@
       tobacco: s.tobacco,
       tag: s.tag || null,
       pipeline_stage: s.pipeline_stage || null,
+      policy_sold_at: s.policy_sold_at || null,
       source: s.source || null,
       drop_off: s.drop_off,
       drop_off_stage: s.drop_off_stage || null,
@@ -442,6 +447,7 @@
         buildSelectOptions("ov_stage", PIPELINE_OPTIONS, ""),
         t("ov_pipeline_hint")
       ) +
+      field("crm-ov-policy-sold-at", t("ov_policy_sold_at"), "date") +
       selectField(
         "crm-ov-source",
         t("source"),

@@ -900,8 +900,8 @@ body.crm-body {
 }
 
 .crm-table-clients .crm-col-stage {
-  width: 15%;
-  min-width: 130px;
+  width: 12%;
+  min-width: 148px;
 }
 
 .crm-table-clients th.crm-col-stage-num,
@@ -972,6 +972,23 @@ body.crm-body {
   font-size: 0.68rem;
   letter-spacing: 0.02em;
   white-space: nowrap;
+}
+
+.crm-table-clients th.crm-col-sold,
+.crm-table-clients td.crm-col-sold {
+  width: 88px;
+  min-width: 80px;
+  max-width: 96px;
+  text-align: center;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+.crm-table-clients th.crm-col-sold {
+  font-size: 0.68rem;
+  letter-spacing: 0.02em;
+  white-space: normal;
+  line-height: 1.15;
 }
 
 .crm-table-clients th.crm-col-date,
@@ -1124,6 +1141,44 @@ body.crm-body {
 
 .crm-calendar-bell:hover {
   background: rgba(41, 128, 185, 0.08);
+}
+
+.crm-sold-btn {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  border: 0;
+  border-radius: 6px;
+  background: #dce3ec;
+  color: #7d8b9a;
+  cursor: pointer;
+  line-height: 0;
+}
+
+.crm-sold-btn.is-sold {
+  background: #1a7a4c;
+  color: #fff;
+}
+
+.crm-sold-btn:hover {
+  background: #c9d3de;
+}
+
+.crm-sold-btn.is-sold:hover {
+  background: #14643e;
+}
+
+.crm-sold-popover-date {
+  width: 100%;
+  margin: 8px 0 10px;
+  padding: 6px 8px;
+  border: 1px solid var(--crm-border);
+  border-radius: 6px;
+  font: inherit;
 }
 
 .crm-appointment-popover {

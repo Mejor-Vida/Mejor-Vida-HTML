@@ -304,12 +304,29 @@
     return t("good_evening");
   }
 
+  function looksLikePersonName(v) {
+    var s = String(v || "").trim();
+    if (!s || /^unknown$/i.test(s)) return false;
+    try {
+      return /[\p{L}]/u.test(s);
+    } catch (e) {
+      return /[A-Za-z\u00C0-\u024F]/.test(s);
+    }
+  }
+
   function displayName(lead) {
-    return (
-      String((lead && lead.display_name) || "").trim() ||
-      [lead && lead.first_name, lead && lead.last_name].filter(Boolean).join(" ").trim() ||
-      "Unknown"
-    );
+    var fn = String((lead && lead.first_name) || "").trim();
+    var ln = String((lead && lead.last_name) || "").trim();
+    if (looksLikePersonName(ln)) {
+      return [fn, ln].filter(Boolean).join(" ").trim();
+    }
+    var stored = String((lead && lead.display_name) || "").trim();
+    if (fn && stored.toLowerCase().indexOf(fn.toLowerCase()) === 0) {
+      var rest = stored.slice(fn.length).trim();
+      if (!looksLikePersonName(rest)) return fn;
+    }
+    if (fn) return fn;
+    return looksLikePersonName(stored) ? stored : fn || "Unknown";
   }
 
   function sortLocale() {
@@ -331,6 +348,29 @@
   function formatDateAdded(iso) {
     if (!iso) return "—";
     var d = new Date(iso);
+    if (isNaN(d.getTime())) return "—";
+    var lang = window.StaffCrmI18n ? window.StaffCrmI18n.getLang() : "en";
+    var locale = lang === "es" ? "es-US" : "en-US";
+    return d.toLocaleDateString(locale, { year: "numeric", month: "short", day: "numeric" });
+  }
+
+  function chicagoYmdToday() {
+    try {
+      return new Intl.DateTimeFormat("en-CA", {
+        timeZone: "America/Chicago",
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+      }).format(new Date());
+    } catch (e) {
+      return new Date().toISOString().slice(0, 10);
+    }
+  }
+
+  function formatSoldYmd(ymd) {
+    var m = String(ymd || "").trim().match(/^(\d{4})-(\d{2})-(\d{2})/);
+    if (!m) return "—";
+    var d = new Date(Number(m[1]), Number(m[2]) - 1, Number(m[3]));
     if (isNaN(d.getTime())) return "—";
     var lang = window.StaffCrmI18n ? window.StaffCrmI18n.getLang() : "en";
     var locale = lang === "es" ? "es-US" : "en-US";
@@ -467,6 +507,7 @@
       contact_id: detail.contact_id || detail.contacts_contact_id || "",
       contacts_contact_id: detail.contacts_contact_id || detail.contact_id || "",
       call_scheduled_at: detail.call_scheduled_at || null,
+      policy_sold_at: detail.policy_sold_at || null,
       created_at: detail.created_at || null,
       updated_at: detail.updated_at || null,
     };
@@ -683,6 +724,30 @@
     );
   }
 
+  function renderSoldPolicyCell(L) {
+    var ymd = String((L && L.policy_sold_at) || "").trim().slice(0, 10);
+    var cls = ymd ? "crm-sold-btn is-sold" : "crm-sold-btn is-empty";
+    var label = ymd
+      ? t("sold_policy_on", { date: formatSoldYmd(ymd) })
+      : t("sold_policy_none");
+    return (
+      '<button type="button" class="' +
+      cls +
+      '" data-id="' +
+      esc(L.id) +
+      '" data-sold="' +
+      esc(ymd) +
+      '" aria-label="' +
+      esc(label) +
+      '" title="' +
+      esc(label) +
+      '">' +
+      '<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false">' +
+      '<path fill="currentColor" d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>' +
+      "</svg></button>"
+    );
+  }
+
   function patchClientsListIndicators(leadId) {
     if (!leadId) return;
     var L = leadsCache.find(function (x) {
@@ -701,6 +766,8 @@
     if (stateCell) stateCell.textContent = String(L.us_state || "").trim().toUpperCase() || "—";
     var calCell = tr.querySelector(".crm-col-calendar");
     if (calCell) calCell.innerHTML = renderCalendarCell(L);
+    var soldCell = tr.querySelector(".crm-col-sold");
+    if (soldCell) soldCell.innerHTML = renderSoldPolicyCell(L);
   }
 
   function upsertLeadListItem(item) {
@@ -1155,12 +1222,15 @@
       renderStageFilterHeaderCell() +
       '</th><th class="crm-col-calendar">' +
       esc(t("col_calendar")) +
+      '</th><th class="crm-col-sold">' +
+      esc(t("col_sold_policy")) +
       '</th><th class="crm-col-date">' +
       '<button type="button" class="crm-sort-th-btn is-active" id="crm-sort-date" aria-sort="descending">' +
       esc(t("col_date_added")) +
       ' <span class="crm-sort-icon" aria-hidden="true">↓</span></button>' +
       "</th></tr></thead><tbody id=\"crm-clients-tbody\"></tbody></table></div>" +
       '<div id="crm-appointment-popover" class="crm-appointment-popover hidden" role="dialog" aria-modal="false"></div>' +
+      '<div id="crm-sold-popover" class="crm-appointment-popover hidden" role="dialog" aria-modal="false"></div>' +
       '<div id="crm-notes-popover" class="crm-notes-popover hidden" role="dialog" aria-modal="false"></div>' +
       '<p id="crm-clients-status" class="crm-empty-state"></p>' +
       '<div id="crm-row-menu" class="crm-row-menu hidden" role="menu"></div>' +
@@ -1198,6 +1268,7 @@
     var rowMenuLeadId = null;
     var sortState = { column: "date", dir: "desc" };
     var apptPopoverCloser = null;
+    var soldPopoverCloser = null;
     var notesPopoverCloser = null;
     var notesPopoverLeadId = null;
     var duplicateFilter = false;
@@ -1214,8 +1285,21 @@
       }
     }
 
+    function closeSoldPopover() {
+      var pop = $("crm-sold-popover");
+      if (pop) {
+        pop.classList.add("hidden");
+        pop.innerHTML = "";
+      }
+      if (soldPopoverCloser) {
+        document.removeEventListener("click", soldPopoverCloser);
+        soldPopoverCloser = null;
+      }
+    }
+
     function openApptPopover(btn, atIso, leadId) {
       closeApptPopover();
+      closeSoldPopover();
       closeNotesPopover();
       var pop = $("crm-appointment-popover");
       if (!pop || !btn) return;
@@ -1250,10 +1334,7 @@
         body +
         actionBtn;
       pop.classList.remove("hidden");
-      var rect = btn.getBoundingClientRect();
-      pop.style.position = "fixed";
-      pop.style.top = rect.bottom + 6 + "px";
-      pop.style.left = Math.max(8, rect.left - 40) + "px";
+      positionFixedPopover(pop, btn);
       var closeBtn = pop.querySelector(".crm-appointment-popover-close");
       if (closeBtn) closeBtn.addEventListener("click", closeApptPopover);
       pop.querySelectorAll(".crm-appointment-action").forEach(function (act) {
@@ -1289,6 +1370,126 @@
         draw();
       } catch (e) {
         if (status) status.textContent = (e && e.message) || t("calendar_mark_failed");
+      }
+    }
+
+    function positionFixedPopover(pop, btn) {
+      if (!pop || !btn) return;
+      var rect = btn.getBoundingClientRect();
+      var gap = 6;
+      pop.style.position = "fixed";
+      pop.style.visibility = "hidden";
+      pop.style.top = "0px";
+      pop.style.left = "0px";
+      pop.style.bottom = "auto";
+      var popW = Math.min(Math.max(pop.offsetWidth || 260, 220), window.innerWidth - 16);
+      var popH = pop.offsetHeight || 240;
+      var left = Math.max(8, Math.min(rect.right - popW, window.innerWidth - popW - 8));
+      var spaceBelow = window.innerHeight - rect.bottom - gap;
+      var spaceAbove = rect.top - gap;
+      var openUp = popH + 8 > spaceBelow && spaceAbove > spaceBelow;
+      pop.style.left = left + "px";
+      pop.style.maxHeight = Math.max(160, (openUp ? spaceAbove : spaceBelow) - 4) + "px";
+      pop.style.overflowY = "auto";
+      if (openUp) {
+        pop.style.top = "auto";
+        pop.style.bottom = window.innerHeight - rect.top + gap + "px";
+      } else {
+        pop.style.bottom = "auto";
+        var top = rect.bottom + gap;
+        if (top + popH > window.innerHeight - 8) {
+          top = Math.max(8, window.innerHeight - popH - 8);
+        }
+        pop.style.top = top + "px";
+      }
+      pop.style.visibility = "";
+    }
+
+    function openSoldPopover(btn, soldYmd, leadId) {
+      closeSoldPopover();
+      closeApptPopover();
+      closeNotesPopover();
+      var pop = $("crm-sold-popover");
+      if (!pop || !btn) return;
+      var current = String(soldYmd || "").trim().slice(0, 10);
+      var initial = current || chicagoYmdToday();
+      pop.innerHTML =
+        '<button type="button" class="crm-appointment-popover-close" aria-label="' +
+        esc(t("close")) +
+        '">&times;</button>' +
+        "<strong>" +
+        esc(t("sold_policy_title")) +
+        "</strong><p class=\"crm-appointment-hint\">" +
+        esc(t("sold_policy_hint")) +
+        "</p>" +
+        '<label class="crm-sold-popover-label" for="crm-sold-date-input">' +
+        esc(t("sold_policy_title")) +
+        "</label>" +
+        '<input type="date" id="crm-sold-date-input" class="crm-sold-popover-date" value="' +
+        esc(initial) +
+        '" />' +
+        '<button type="button" class="crm-btn crm-appointment-action" data-action="save">' +
+        esc(t("sold_policy_save")) +
+        "</button>" +
+        (current
+          ? '<button type="button" class="crm-btn secondary crm-appointment-action" data-action="clear">' +
+            esc(t("sold_policy_clear")) +
+            "</button>"
+          : "") +
+        '<button type="button" class="crm-btn secondary crm-appointment-action" data-action="cancel">' +
+        esc(t("calendar_meta_cancel_btn")) +
+        "</button>";
+      pop.classList.remove("hidden");
+      positionFixedPopover(pop, btn);
+      var closeBtn = pop.querySelector(".crm-appointment-popover-close");
+      if (closeBtn) closeBtn.addEventListener("click", closeSoldPopover);
+      var dateInput = pop.querySelector("#crm-sold-date-input");
+      pop.querySelectorAll(".crm-appointment-action").forEach(function (act) {
+        act.addEventListener("click", function (e) {
+          e.stopPropagation();
+          var action = act.getAttribute("data-action");
+          if (action === "cancel") {
+            closeSoldPopover();
+            return;
+          }
+          if (action === "clear") {
+            closeSoldPopover();
+            savePolicySold(leadId, null);
+            return;
+          }
+          var ymd = dateInput && dateInput.value ? String(dateInput.value).trim() : chicagoYmdToday();
+          closeSoldPopover();
+          savePolicySold(leadId, ymd);
+        });
+      });
+      soldPopoverCloser = function (e) {
+        if (pop.contains(e.target) || btn.contains(e.target)) return;
+        closeSoldPopover();
+      };
+      setTimeout(function () {
+        document.addEventListener("click", soldPopoverCloser);
+      }, 0);
+      if (dateInput) {
+        try {
+          dateInput.focus();
+        } catch (e) {}
+      }
+    }
+
+    async function savePolicySold(leadId, ymd) {
+      var status = $("crm-clients-status");
+      if (!leadId) return;
+      try {
+        var data = await authedApi(
+          "/api/staff/leads",
+          { id: leadId, policy_sold_at: ymd || null },
+          { method: "PATCH" }
+        );
+        if (data && data.item) upsertLeadListItem(data.item);
+        if (status) status.textContent = ymd ? t("sold_policy_saved") : t("sold_policy_cleared");
+        draw();
+      } catch (e) {
+        if (status) status.textContent = (e && e.message) || t("sold_policy_failed");
       }
     }
 
@@ -1721,6 +1922,7 @@
     async function openNotesPopover(btn, leadId) {
       closeNotesPopover();
       closeApptPopover();
+      closeSoldPopover();
       closeRowMenu();
       closeAllStageMenus();
       var pop = $("crm-notes-popover");
@@ -1819,6 +2021,7 @@
       if (!tbody) return;
       closeRowMenu();
       closeApptPopover();
+      closeSoldPopover();
       closeNotesPopover();
       closeAllStageMenus();
       var rows = sortedRows();
@@ -1910,6 +2113,8 @@
             renderStageCell(L) +
             '</td><td class="crm-col-calendar">' +
             renderCalendarCell(L) +
+            '</td><td class="crm-col-sold">' +
+            renderSoldPolicyCell(L) +
             '</td><td class="crm-col-date">' +
             esc(formatDateAdded(L.created_at)) +
             "</td></tr>"
@@ -1975,6 +2180,7 @@
           closeAllStageMenus();
           closeRowMenu();
           closeApptPopover();
+          closeSoldPopover();
           closeNotesPopover();
           if (open) {
             menu.classList.add("hidden");
@@ -2005,6 +2211,13 @@
         btn.addEventListener("click", function (e) {
           e.stopPropagation();
           openApptPopover(btn, btn.getAttribute("data-at") || "", btn.getAttribute("data-id") || "");
+        });
+      });
+
+      tbody.querySelectorAll(".crm-sold-btn").forEach(function (btn) {
+        btn.addEventListener("click", function (e) {
+          e.stopPropagation();
+          openSoldPopover(btn, btn.getAttribute("data-sold") || "", btn.getAttribute("data-id") || "");
         });
       });
 
@@ -2224,6 +2437,7 @@
         closeAllStageMenus();
         closeRowMenu();
         closeApptPopover();
+        closeSoldPopover();
         if (open) {
           menu.classList.add("hidden");
           resetStageMenuPosition(menu);

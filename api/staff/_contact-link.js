@@ -115,7 +115,11 @@ function buildContactPatch(hints) {
   const em = normalizeEmail(hints.email);
   const sub = cleanText(hints.manychat_subscriber_id || hints.manychatSubscriberId);
   if (fn) patch.first_name = fn;
-  if (ln) patch.last_name = ln;
+  if (Object.prototype.hasOwnProperty.call(hints, "last_name")) {
+    patch.last_name = ln || null;
+  } else if (ln) {
+    patch.last_name = ln;
+  }
   if (em) patch.email = em;
   if (sub) {
     patch.manychat_subscriber_id = sub;
