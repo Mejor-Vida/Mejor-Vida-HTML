@@ -360,7 +360,9 @@
       funnel_cost_per_quality_lead: "Cost per scheduled-call lead",
       funnel_cost_per_sale: "Cost per sale",
       funnel_quality_leads_note:
-        "A quality lead is a CRM client you marked with the Scheduled call bell on Clients — not a WhatsApp start or quote. Duplicate cards that share a phone, email, or WhatsApp ID count as one person. This tab only counts people who entered through this path (WhatsApp vs website/landing). Cost per lead uses the date they entered the CRM, not the day you marked the bell. A sale is a client moved to Client status.",
+        "A quality lead is a CRM client you marked with the Scheduled call bell on Clients — not a WhatsApp start or quote. Duplicate cards that share a phone, email, or WhatsApp ID count as one person. Cost per lead uses the date they entered the CRM, not the day you marked the bell. A sale is a client moved to Client status.",
+      funnel_quality_leads_period:
+        "Showing bell-marked leads whose CRM entry date falls in {from}. Widen the period above if someone marked today entered the CRM earlier.",
       funnel_quality_by_state: "By state",
       funnel_quality_by_campaign: "Ad spend by campaign",
       funnel_quality_campaign_note:
@@ -2052,7 +2054,9 @@
       funnel_cost_per_quality_lead: "Costo por lead de llamada programada",
       funnel_cost_per_sale: "Costo por venta",
       funnel_quality_leads_note:
-        "Un lead de calidad es un cliente del CRM que marcó con la campana Llamada programada en Clientes — no el inicio de WhatsApp ni una cotización. Las fichas duplicadas que comparten teléfono, correo o WhatsApp cuentan como una persona. Esta pestaña solo cuenta a quienes entraron por este camino (WhatsApp o web/landing). El costo por lead usa la fecha en que entraron al CRM, no el día en que marcó la campana. Una venta es un cliente pasado a estado Cliente.",
+        "Un lead de calidad es un cliente del CRM que marcó con la campana Llamada programada en Clientes — no el inicio de WhatsApp ni una cotización. Las fichas duplicadas que comparten teléfono, correo o WhatsApp cuentan como una persona. El costo por lead usa la fecha en que entraron al CRM, no el día en que marcó la campana. Una venta es un cliente pasado a estado Cliente.",
+      funnel_quality_leads_period:
+        "Leads marcados cuya fecha de alta en el CRM cae en {from}. Amplíe el período arriba si marcó hoy a alguien que entró antes.",
       funnel_quality_by_state: "Por estado",
       funnel_quality_by_campaign: "Gasto por campaña",
       funnel_quality_campaign_note:

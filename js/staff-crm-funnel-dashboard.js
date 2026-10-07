@@ -10,7 +10,7 @@
     landingPage: "whatsapp",
     view: "facebook_whatsapp",
     licensedState: "ALL",
-    periodDays: 1,
+    periodDays: 7,
     dateFrom: "",
     dateTo: "",
     data: null,
@@ -873,6 +873,16 @@
       '<p class="crm-funnel-ad-metrics-note">' +
       esc(t("funnel_quality_leads_note")) +
       "</p>";
+    if (qualityLeads.dateFrom && qualityLeads.dateTo) {
+      html +=
+        '<p class="crm-funnel-ad-metrics-note">' +
+        esc(
+          t("funnel_quality_leads_period", {
+            from: fmtDateRangeLabel(qualityLeads.dateFrom, qualityLeads.dateTo),
+          })
+        ) +
+        "</p>";
+    }
     if (qualityLeads.error) {
       html += '<p class="crm-funnel-ad-metrics-note crm-funnel-error">' + esc(qualityLeads.error) + "</p>";
     }
@@ -3520,7 +3530,7 @@
   }
 
   function mount(main) {
-    applyPeriodDays(1);
+    applyPeriodDays(7);
     state.sourceChannel = "facebook";
     state.landingPage = "whatsapp";
     state.licensedState = "ALL";
