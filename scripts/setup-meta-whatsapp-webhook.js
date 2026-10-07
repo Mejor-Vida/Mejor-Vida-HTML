@@ -6,7 +6,7 @@
  *   node scripts/setup-meta-whatsapp-webhook.js           # app subscription only (triggers GET verify)
  *   node scripts/setup-meta-whatsapp-webhook.js --subscribe-waba
  *
- * Env (.env.local): FACEBOOK_APP_ID, FACEBOOK_APP_SECRET, META_WHATSAPP_VERIFY_TOKEN,
+ * Env (.env.local): FACEBOOK_APP_ID, META_WHATSAPP_APP_SECRET, META_WHATSAPP_VERIFY_TOKEN,
  *   META_WHATSAPP_BUSINESS_ACCOUNT_ID, META_WHATSAPP_ACCESS_TOKEN (short-lived OK for setup)
  * Never prints secrets.
  */
@@ -52,12 +52,12 @@ async function graph(method, url, body) {
 async function main() {
   const subscribeWaba = process.argv.includes("--subscribe-waba");
   const appId = String(process.env.FACEBOOK_APP_ID || "1319755636638842").trim();
-  const appSecret = String(process.env.FACEBOOK_APP_SECRET || "").trim();
+  const appSecret = String(process.env.META_WHATSAPP_APP_SECRET || "").trim();
   const verify = String(process.env.META_WHATSAPP_VERIFY_TOKEN || "").trim();
   const wabaId = String(process.env.META_WHATSAPP_BUSINESS_ACCOUNT_ID || "").trim();
   const userToken = String(process.env.META_WHATSAPP_ACCESS_TOKEN || "").trim();
 
-  if (!appId || !appSecret) throw new Error("Missing FACEBOOK_APP_ID or FACEBOOK_APP_SECRET");
+  if (!appId || !appSecret) throw new Error("Missing FACEBOOK_APP_ID or META_WHATSAPP_APP_SECRET");
   if (!verify) throw new Error("Missing META_WHATSAPP_VERIFY_TOKEN");
 
   const appToken = `${appId}|${appSecret}`;

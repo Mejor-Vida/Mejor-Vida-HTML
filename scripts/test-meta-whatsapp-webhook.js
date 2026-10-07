@@ -237,7 +237,7 @@ async function invokePost(handler, rawBuf, signatureHeader) {
 
 async function run() {
   process.env.META_WHATSAPP_VERIFY_TOKEN = VERIFY_TOKEN;
-  process.env.FACEBOOK_APP_SECRET = APP_SECRET;
+  process.env.META_WHATSAPP_APP_SECRET = APP_SECRET;
   process.env.META_WHATSAPP_PHONE_NUMBER_ID = PHONE_ID;
   process.env.SUPABASE_URL = SUPABASE_URL;
   process.env.SUPABASE_SERVICE_ROLE_KEY = SERVICE_KEY;

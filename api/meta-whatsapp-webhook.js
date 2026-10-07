@@ -4,7 +4,7 @@
  * Meta WhatsApp Cloud API webhooks for CTWA attribution only.
  * Does not send messages; does not affect ManyChat delivery.
  *
- * Env: FACEBOOK_APP_SECRET, META_WHATSAPP_VERIFY_TOKEN, META_WHATSAPP_PHONE_NUMBER_ID,
+ * Env: META_WHATSAPP_APP_SECRET, META_WHATSAPP_VERIFY_TOKEN, META_WHATSAPP_PHONE_NUMBER_ID,
  *      SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY
  */
 
@@ -42,10 +42,10 @@ async function handlePost(rawBuf, signatureHeader) {
   }
 
   const skipSig = String(process.env.META_WHATSAPP_SKIP_SIGNATURE || "").trim() === "1";
-  const appSecret = String(process.env.FACEBOOK_APP_SECRET || process.env.META_APP_SECRET || "").trim();
+  const appSecret = String(process.env.META_WHATSAPP_APP_SECRET || "").trim();
   if (!skipSig) {
     if (!appSecret) {
-      return { status: 500, json: { ok: false, error: "FACEBOOK_APP_SECRET not configured" } };
+      return { status: 500, json: { ok: false, error: "META_WHATSAPP_APP_SECRET not configured" } };
     }
     const sigCheck = verifyHubSignature(rawBuf, signatureHeader, appSecret);
     if (!sigCheck.ok) {
