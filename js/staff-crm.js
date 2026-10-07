@@ -1313,19 +1313,19 @@
           esc(t("calendar_quality_hint")) +
           "</p>"
         : "<p><strong>" +
-          esc(t("calendar_meta_confirm")) +
+          esc(t("calendar_mark_prompt")) +
           "</strong></p><p class=\"crm-appointment-hint\">" +
-          esc(t("calendar_meta_confirm_hint")) +
+          esc(t("calendar_mark_prompt_hint")) +
           "</p>";
       var actionBtn = scheduled
         ? '<button type="button" class="crm-btn secondary crm-appointment-action" data-action="clear">' +
           esc(t("calendar_unmark_btn")) +
           "</button>"
         : '<button type="button" class="crm-btn crm-appointment-action" data-action="mark">' +
-          esc(t("calendar_meta_send_btn")) +
+          esc(t("calendar_mark_btn")) +
           "</button>" +
           '<button type="button" class="crm-btn secondary crm-appointment-action" data-action="cancel">' +
-          esc(t("calendar_meta_cancel_btn")) +
+          esc(t("calendar_cancel_btn")) +
           "</button>";
       pop.innerHTML =
         '<button type="button" class="crm-appointment-popover-close" aria-label="' +
@@ -1343,7 +1343,7 @@
           var action = act.getAttribute("data-action");
           closeApptPopover();
           if (action === "cancel") return;
-          saveScheduledCall(leadId, action === "mark", true);
+          saveScheduledCall(leadId, action === "mark");
         });
       });
       apptPopoverCloser = function (e) {
@@ -1355,10 +1355,9 @@
       }, 0);
     }
 
-    async function saveScheduledCall(leadId, mark, alreadyConfirmed) {
+    async function saveScheduledCall(leadId, mark) {
       var status = $("crm-clients-status");
       if (!leadId) return;
-      if (mark && !alreadyConfirmed && !window.confirm(t("calendar_meta_confirm"))) return;
       try {
         var data = await authedApi(
           "/api/staff/leads",
@@ -1437,7 +1436,7 @@
             "</button>"
           : "") +
         '<button type="button" class="crm-btn secondary crm-appointment-action" data-action="cancel">' +
-        esc(t("calendar_meta_cancel_btn")) +
+        esc(t("calendar_cancel_btn")) +
         "</button>";
       pop.classList.remove("hidden");
       positionFixedPopover(pop, btn);
