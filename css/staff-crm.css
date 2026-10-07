@@ -960,18 +960,19 @@ body.crm-body {
 
 .crm-table-clients th.crm-col-calendar,
 .crm-table-clients td.crm-col-calendar {
-  width: 72px;
-  min-width: 72px;
-  max-width: 72px;
+  width: 88px;
+  min-width: 80px;
+  max-width: 96px;
   text-align: center;
-  padding-left: 6px;
-  padding-right: 6px;
+  padding-left: 4px;
+  padding-right: 4px;
 }
 
 .crm-table-clients th.crm-col-calendar {
   font-size: 0.68rem;
   letter-spacing: 0.02em;
-  white-space: nowrap;
+  white-space: normal;
+  line-height: 1.15;
 }
 
 .crm-table-clients th.crm-col-sold,
