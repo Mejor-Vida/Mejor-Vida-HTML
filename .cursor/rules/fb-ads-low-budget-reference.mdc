@@ -14,7 +14,7 @@ Ad Builder stages, `hooks.json`, and `ad-photos.json` stay as already built. Sta
 ## Reference rules
 
 - Creative first, then WhatsApp destination, then audience, then budget. Change one of those at a time.
-- Current practice (October 2026): about **$50/day** to get a read faster. Turn each test ad off around **1,000 impressions**. Julie may turn one off earlier if it is clearly good or bad. Cost per sale is too thin at 1,000 impressions to name a winner.
+- Current practice (October 2026): about **$50/day** to get a read faster. Each Stage 1/2/3 test ad **auto-pauses in Meta at 750 lifetime impressions** (CRM warns near 600). Julie may turn one off earlier if it is clearly good or bad. Cost per sale is too thin at 750 impressions to name a winner.
 - The original low-budget guide used about $20/day and 3–4 live ads. Do not drop back to $20 unless she asks.
 - Do not name a winner from CTR (all) or CPM. Order is: compliance, comparable delivery, cost per messaging conversation and link CTR, qualified chats and appointments, then applications and placed policies.
 - A WhatsApp click is not a lead. A started chat is not yet qualified. ManyChat completion teaches Meta only if that event is sent back.

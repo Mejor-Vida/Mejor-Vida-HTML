@@ -2573,7 +2573,14 @@
       creativeMetric(t("creative_age55"), ad.age55Pct != null ? fmtPct(ad.age55Pct) : "—") +
       creativeMetric(t("creative_ctr"), ad.ctr != null ? fmtPctRate(ad.ctr) : "—") +
       creativeMetric(t("creative_ctr_all"), ad.ctrAll != null ? fmtPctRate(ad.ctrAll) : "—") +
-      creativeMetric(t("creative_impressions"), fmtNum(ad.impressions || 0)) +
+      creativeMetric(
+        t("creative_impressions"),
+        fmtNum(
+          ad.lifetimeImpressions != null && ad.lifetimeImpressions !== ""
+            ? ad.lifetimeImpressions
+            : ad.impressions || 0
+        )
+      ) +
       creativeMetric(t("creative_conversations"), fmtNum(ad.conversations || 0)) +
       creativeMetric(t("creative_cpl"), ad.costPerLead != null ? fmtCurrency(ad.costPerLead) : "—") +
       creativeMetric(t("creative_cps"), ad.costPerSale != null ? fmtCurrency(ad.costPerSale) : "—") +

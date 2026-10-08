@@ -423,6 +423,10 @@
       "schedule": "0 9 * * 1"
     },
     {
+      "path": "/api/creative-testing-impression-cap-cron",
+      "schedule": "*/15 * * * *"
+    },
+    {
       "path": "/api/supabase-backup-cron",
       "schedule": "0 10 * * *"
     }
