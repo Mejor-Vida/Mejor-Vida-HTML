@@ -15,6 +15,29 @@ Env and migration: see `.env.example` (`META_WHATSAPP_*`) and `integrations/supa
 
 Do **not** put temporary Graph Explorer tokens on Vercel.
 
+### Intent Lead — Actions #13 (both Condition #10 paths)
+
+Green and red branches both hit the **same** External Request. Use `action: "intent_lead"` (not `email_optin`).
+
+```json
+{
+  "action": "intent_lead",
+  "phone": "{{phone}}",
+  "first_name": "{{first_name}}",
+  "last_name": "{{last_name}}",
+  "whatsapp_id": "{{WhatsApp ID}}",
+  "subscriber_id": "{{Contact Id}}",
+  "estado": "{{estado}}",
+  "meta_ad_id": "{{meta_ad_id}}",
+  "meta_ctwa_clid": "{{meta_ctwa_clid}}",
+  "language": "Spanish"
+}
+```
+
+`estado` is stored verbatim (city, typo, or abbreviation). One Meta **Lead** CAPI event per contact (`lead_state.intent_lead_at`).
+
+Stage 2 Meta ad set (**Lead** performance goal) is documented in `integrations/META_STAGE2_LEAD_OPTIMIZATION.md` — Stage 1 stays on **conversations**.
+
 ---
 
 Staff CRM **Funnel → creative testing** counts **scheduled-call (bell) leads** per Meta ad when `contacts.meta_ad_id` is set. Meta **messaging conversations** on each ad card are separate (Ads API only).

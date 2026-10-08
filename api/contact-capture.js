@@ -6,7 +6,11 @@
  *    Fires when a contact first messages on WhatsApp.
  *    Creates lead in Supabase + HubSpot with just name & phone.
  *
- * 2. action: "email_optin"
+ * 2. action: "intent_lead"
+ *    Fires at ManyChat Actions #13 after the state question (any non-empty estado).
+ *    Creates Intent Lead + one deduplicated Meta CAPI Lead (business_messaging).
+ *
+ * 3. action: "email_optin"
  *    Fires when contact clicks Nebraska or Other-State "Yes" button.
  *    Upserts email, last_name, opt_in consent + syncs HubSpot.
  *    Pass lead_type: "nebraska" | "referral" to set pipeline stage.
@@ -21,6 +25,7 @@ const { hubspotAddNote } = require("../lib/hubspot");
 const { syncContactToHubspot } = require("../lib/hubspot-sync-lib");
 const { logIntegrationAudit } = require("../lib/integration-audit");
 const { autoEnrollCaptureLead } = require("../lib/crm-nurture-engine");
+const { processIntentLead } = require("../lib/intent-lead");
 
 function hubspotPipelineId() {
   return process.env.HUBSPOT_PIPELINE_ID || "default";
@@ -385,6 +390,83 @@ async function handleEmailOptin(body, supabaseUrl, supabaseKey, hubspotToken, re
   });
 }
 
+/* ── Intent Lead (state question answered) ─────────────────────── */
+async function handleIntentLead(body, supabaseUrl, supabaseKey, res) {
+  const phone = (
+    resolveManyChat(String(body.phone || "").trim()) ||
+    resolveManyChat(String(body.whatsapp_phone || "").trim()) ||
+    resolveManyChat(String(body.whatsapp_id || "").trim())
+  ).slice(0, 40);
+  const estado = resolveManyChat(String(body.estado || body.estado_response || "").trim());
+
+  if (!phone) {
+    await logIntegrationAudit(supabaseUrl, supabaseKey, {
+      stage: "contact_capture_intent_lead_validation",
+      endpoint: "/api/contact-capture",
+      outcome: "error",
+      message: "phone required",
+    });
+    return json(res, 400, { success: false, error: "phone required" });
+  }
+  if (!estado) {
+    await logIntegrationAudit(supabaseUrl, supabaseKey, {
+      stage: "contact_capture_intent_lead_validation",
+      endpoint: "/api/contact-capture",
+      outcome: "error",
+      phone,
+      message: "estado required",
+    });
+    return json(res, 400, { success: false, error: "estado required" });
+  }
+
+  await logIntegrationAudit(supabaseUrl, supabaseKey, {
+    stage: "contact_capture_intent_lead_begin",
+    endpoint: "/api/contact-capture",
+    outcome: "ok",
+    phone,
+    detail: { estado_len: estado.length },
+  });
+
+  const cfg = { supabaseUrl, serviceKey: supabaseKey };
+  const result = await processIntentLead(cfg, {
+    phone,
+    estado,
+    estado_response: estado,
+    first_name: cleanManychatNameField(body.first_name || body.firstName || ""),
+    last_name: cleanManychatNameField(body.last_name || body.lastName || ""),
+    whatsapp_id: resolveManyChat(String(body.whatsapp_id || "").trim()) || null,
+    subscriber_id: resolveManyChat(String(body.subscriber_id || body.manychat_id || "").trim()) || null,
+    email: resolveManyChat(String(body.email || "").trim().toLowerCase()) || null,
+    meta_ad_id: resolveManyChat(String(body.meta_ad_id || "").trim()) || null,
+    meta_ctwa_clid: resolveManyChat(String(body.meta_ctwa_clid || "").trim()) || null,
+  });
+
+  await logIntegrationAudit(supabaseUrl, supabaseKey, {
+    stage: "contact_capture_intent_lead_complete",
+    endpoint: "/api/contact-capture",
+    outcome: result.ok ? "ok" : "error",
+    phone,
+    contactId: result.contact_id,
+    message: result.error || null,
+    detail: {
+      intent_lead_duplicate: result.intent_lead_duplicate,
+      meta_capi: result.meta_capi,
+    },
+  });
+
+  if (!result.ok) {
+    return json(res, result.status || 500, { success: false, error: result.error || "intent_lead failed" });
+  }
+
+  return json(res, 200, {
+    success: true,
+    contact_id: result.contact_id,
+    intent_lead_duplicate: result.intent_lead_duplicate,
+    meta_capi: result.meta_capi,
+    estado_response: result.estado_response,
+  });
+}
+
 /* ── Main handler ──────────────────────────────────────────────── */
 module.exports = async function handler(req, res) {
   logRequest("contact-capture");
@@ -438,6 +520,10 @@ module.exports = async function handler(req, res) {
     phone: probePhone || undefined,
     detail: { action },
   });
+
+  if (action === "intent_lead") {
+    return handleIntentLead(body, supabaseUrl, supabaseKey, res);
+  }
 
   if (action === "email_optin") {
     return handleEmailOptin(body, supabaseUrl, supabaseKey, hubspotToken, res);
