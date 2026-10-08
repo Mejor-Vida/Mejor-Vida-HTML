@@ -411,6 +411,10 @@
       "schedule": "*/5 * * * *"
     },
     {
+      "path": "/api/scheduler-staff-reminder-cron",
+      "schedule": "*/5 * * * *"
+    },
+    {
       "path": "/api/ga4-sync-cron",
       "schedule": "0 */6 * * *"
     },

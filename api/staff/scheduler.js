@@ -13,9 +13,10 @@ async function listAppointments(cfg, query) {
   const from = String(query.from || "").trim();
   const to = String(query.to || "").trim();
   const status = String(query.status || "scheduled").trim();
+  const orderAsc = String(query.order || "").toLowerCase() === "asc";
   let q =
-    `select=id,contact_id,starts_at,ends_at,booker_timezone,host_timezone,status,first_name,last_name,phone,email,language,google_event_id,created_at` +
-    `&order=starts_at.desc&limit=200`;
+    `select=id,contact_id,starts_at,ends_at,booker_timezone,host_timezone,status,first_name,last_name,phone,email,language,google_event_id,created_at,marketing_opt_in` +
+    `&order=starts_at.${orderAsc ? "asc" : "desc"}&limit=200`;
   if (status && status !== "all") q += `&status=eq.${encodeURIComponent(status)}`;
   if (from) q += `&starts_at=gte.${encodeURIComponent(from)}`;
   if (to) q += `&starts_at=lte.${encodeURIComponent(to)}`;
@@ -66,7 +67,8 @@ module.exports = async function handler(req, res) {
       const integration = getSchedulerConfig(config);
       const appointments = await listAppointments(cfg, {
         status: "scheduled",
-        from: new Date(Date.now() - 86400000).toISOString(),
+        from: new Date().toISOString(),
+        order: "asc",
       });
       return json(res, 200, {
         config,

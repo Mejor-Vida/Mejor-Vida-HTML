@@ -37,28 +37,116 @@
   margin: 0 0 1rem;
 }
 
-.mvi-scheduler__days {
-  display: flex;
-  gap: 0.5rem;
-  overflow-x: auto;
-  padding-bottom: 0.35rem;
+.mvi-scheduler__hint--strong {
+  font-weight: 600;
+  color: #334155;
+  margin-bottom: 0.5rem;
+}
+
+.mvi-scheduler__calendar {
   margin-bottom: 1rem;
 }
 
-.mvi-scheduler__day {
-  flex: 0 0 auto;
-  border: 1px solid #cbd5e1;
-  background: #f8fafc;
-  border-radius: 0.5rem;
-  padding: 0.45rem 0.65rem;
-  font-size: 0.8rem;
-  cursor: pointer;
+.mvi-scheduler__cal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.65rem;
 }
 
-.mvi-scheduler__day.is-active {
-  border-color: #0d47a1;
-  background: #e3f2fd;
+.mvi-scheduler__cal-title {
+  font-weight: 700;
+  font-size: 1rem;
+  color: #0d47a1;
+  text-transform: capitalize;
+}
+
+.mvi-scheduler__cal-nav {
+  border: 1px solid #cbd5e1;
+  background: #fff;
+  border-radius: 0.45rem;
+  width: 2.25rem;
+  height: 2.25rem;
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: pointer;
+  color: #0d47a1;
+}
+
+.mvi-scheduler__cal-dow {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.25rem;
+  margin-bottom: 0.35rem;
+}
+
+.mvi-scheduler__cal-dow-cell {
+  text-align: center;
+  font-size: 0.7rem;
   font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
+}
+
+.mvi-scheduler__cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.35rem;
+}
+
+.mvi-scheduler__cal-cell {
+  aspect-ratio: 1;
+  min-height: 2.35rem;
+  border: 1px solid #e2e8f0;
+  background: #f8fafc;
+  border-radius: 0.45rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #0d47a1;
+  cursor: pointer;
+  padding: 0;
+}
+
+.mvi-scheduler__cal-cell--empty {
+  border: none;
+  background: transparent;
+  cursor: default;
+}
+
+.mvi-scheduler__cal-cell.is-disabled,
+.mvi-scheduler__cal-cell:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  color: #94a3b8;
+  background: #f1f5f9;
+}
+
+.mvi-scheduler__cal-cell.is-active:not(:disabled) {
+  border-color: #0d47a1;
+  background: #0d47a1;
+  color: #fff;
+}
+
+.mvi-scheduler__details {
+  border-top: 1px solid #e2e8f0;
+  margin-top: 1rem;
+  padding-top: 1rem;
+}
+
+.mvi-scheduler__form-title {
+  font-size: 1rem;
+  margin: 0 0 0.75rem;
+  color: #0d47a1;
+}
+
+.mvi-scheduler__details .mvi-sms-consent-block {
+  margin-top: 0.25rem;
+}
+
+.mvi-scheduler__confirm--success {
+  font-size: 1rem;
+  text-align: center;
+  padding: 1.5rem;
 }
 
 .mvi-scheduler__slots {

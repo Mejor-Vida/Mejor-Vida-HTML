@@ -41,6 +41,9 @@ module.exports = async function handler(req, res) {
         email: body.email,
         language: body.language || body.lang,
         usState: body.usState || body.us_state || body.state,
+        marketingOptIn: body.marketingOptIn === true || body.marketing_opt_in === true,
+        consentText: body.consentText || body.consent_text,
+        consentUrl: body.consentUrl || body.consent_url,
       },
       { supabaseUrl, serviceKey }
     );

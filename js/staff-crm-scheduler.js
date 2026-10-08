@@ -250,11 +250,33 @@
       '<div style="margin:16px 0"><button type="button" class="crm-btn" id="sch-save">' +
       esc(t("scheduler_save")) +
       '</button><span id="sch-save-status" class="crm-muted" style="margin-left:12px"></span></div>' +
-      '<div class="crm-card crm-scheduler-grid--full"><h2>' +
-      esc(t("scheduler_upcoming")) +
-      '</h2><div id="sch-appt-list">' +
+      '<div class="crm-card crm-scheduler-grid--full" id="sch-scheduled-calls">' +
+      '<div class="crm-scheduler-calls-head">' +
+      '<h2>' +
+      esc(t("scheduler_scheduled_calls")) +
+      "</h2>" +
+      '<button type="button" class="crm-btn crm-btn--secondary" id="sch-refresh-calls">' +
+      esc(t("scheduler_scheduled_calls_btn")) +
+      "</button></div>" +
+      '<p class="crm-muted">' +
+      esc(t("scheduler_scheduled_calls_hint")) +
+      '</p><div id="sch-appt-list">' +
       renderAppointments(data.appointments) +
       "</div></div>";
+
+    document.getElementById("sch-refresh-calls").addEventListener("click", async function () {
+      var list = document.getElementById("sch-appt-list");
+      list.innerHTML = '<p class="crm-muted">' + esc(t("loading")) + "</p>";
+      try {
+        var apptData = await api(
+          "/api/staff/scheduler?view=appointments&status=scheduled&order=asc&from=" +
+            encodeURIComponent(new Date().toISOString())
+        );
+        list.innerHTML = renderAppointments(apptData.appointments || []);
+      } catch (e) {
+        list.innerHTML = '<p class="crm-muted">' + esc(e.message || "Error") + "</p>";
+      }
+    });
 
     wireWorkHourToggles(main);
 

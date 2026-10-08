@@ -29,6 +29,19 @@
   max-width: 7rem;
 }
 
+.crm-scheduler-calls-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.crm-scheduler-calls-head h2 {
+  margin: 0;
+}
+
 .crm-scheduler-appt-table {
   width: 100%;
   border-collapse: collapse;
