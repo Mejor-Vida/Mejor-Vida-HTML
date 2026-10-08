@@ -32,6 +32,7 @@
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
 <link href="css/site-footer.css" rel="stylesheet"/>
 <link href="css/quote-flow-shared.css?v=20260905-search" rel="stylesheet"/>
+<link href="css/mvi-scheduler.css?v=20261012" rel="stylesheet"/>
 <link href="css/site-footer.css?v=20260721-lip-page" rel="stylesheet"/>
 <link href="css/mvi-assistant-widget.css?v=20260721-chat-z" rel="stylesheet"/>
 <!-- Font Awesome -->
@@ -561,10 +562,11 @@
     padding: 0.42rem 0.65rem;
    }
   }
-  .schedule-modal-iframe-wrap iframe {
+  .schedule-modal-iframe-wrap iframe,
+  .schedule-modal-iframe-wrap #mvi-scheduler-modal-root {
    display: block;
    width: 100%;
-   height: min(70vh, 700px);
+   min-height: min(70vh, 700px);
    border: 0;
    background: #f8fafc;
   }
@@ -1347,7 +1349,7 @@
 </div>
 </div>
 </div>
-<!-- HubSpot scheduling (ES/EN URLs; matches quote.html) -->
+<!-- MVI scheduler (same as schedule-julie.html) -->
 <div aria-hidden="true" aria-labelledby="scheduleModalLabel" class="modal fade" id="scheduleModal" tabindex="-1">
 <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
 <div class="modal-content">
@@ -1359,7 +1361,7 @@
 <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
 </div>
 <div class="modal-body pt-2 schedule-modal-iframe-wrap">
-<iframe data-src-en="https://meetings-na2.hubspot.com/julie-braunsroth" data-src-es="https://meetings-na2.hubspot.com/julie-braunsroth" height="700" id="schedule-iframe" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Schedule a call — HubSpot" width="100%"></iframe>
+<div id="mvi-scheduler-modal-root" data-lang="es" data-thanks-url="schedule-thank-you.html" role="region" aria-label="Agendar una llamada"></div>
 </div>
 </div>
 </div>
@@ -1434,35 +1436,24 @@ window.addEventListener('DOMContentLoaded', function () {
  }
 });
 </script>
-<script src="js/mvi-hubspot-meeting-sync.js?v=20260701a"></script>
+<script src="js/mvi-scheduler.js?v=20261012"></script>
+<script src="js/mvi-schedule-modal.js?v=20261012"></script>
 <!-- Scripts -->
 <script>
   (function () {
-   function setScheduleIframeSrc() {
-    var iframe = document.getElementById('schedule-iframe');
-    if (!iframe) return;
-    var lang = 'es';
-    var url = lang === 'es' ? iframe.getAttribute('data-src-es') : iframe.getAttribute('data-src-en');
-    if (url) iframe.setAttribute('src', url);
-    iframe.setAttribute('title', lang === 'es' ? 'Agendar cita con Julie' : 'Book an appointment with Julie');
-   }
    window.openScheduleModalMejorVida = function () {
     var el = document.getElementById('scheduleModal');
     if (!el || typeof bootstrap === 'undefined') return;
-    setScheduleIframeSrc();
+    if (window.MviScheduleModal) {
+     MviScheduleModal.mountInto(document.getElementById('mvi-scheduler-modal-root'));
+    }
     bootstrap.Modal.getOrCreateInstance(el).show();
    };
-   var modalEl = document.getElementById('scheduleModal');
-   if (modalEl) {
-    modalEl.addEventListener('show.bs.modal', setScheduleIframeSrc);
-    modalEl.addEventListener('show.bs.modal', function () {
-     document.body.classList.add('mvi-schedule-modal-open');
-    });
-    modalEl.addEventListener('hidden.bs.modal', function () {
-     document.body.classList.remove('mvi-schedule-modal-open');
+   if (window.MviScheduleModal) {
+    MviScheduleModal.bind('scheduleModal', 'mvi-scheduler-modal-root', {
+     bodyClass: 'mvi-schedule-modal-open',
     });
    }
-   });
    window.addEventListener('load', function () {
     try {
      if (new URLSearchParams(location.search).get('schedule') === '1' || location.hash === '#schedule') {

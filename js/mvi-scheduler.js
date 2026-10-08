@@ -436,6 +436,7 @@
 
   function mount(container) {
     if (!container) return;
+    if (container.getAttribute("data-mvi-scheduler-mounted") === "1") return;
     state.lang = container.getAttribute("data-lang") === "en" ? "en" : "es";
     state.thanksPath = container.getAttribute("data-thanks-url") || "schedule-thank-you.html";
 
@@ -484,7 +485,11 @@
       .catch(function () {
         root.querySelector(".mvi-scheduler__slots").textContent = "Scheduler unavailable.";
       });
+
+    container.setAttribute("data-mvi-scheduler-mounted", "1");
   }
+
+  window.MviScheduler = { mount: mount };
 
   document.addEventListener("DOMContentLoaded", function () {
     mount(document.getElementById("mvi-scheduler-root"));

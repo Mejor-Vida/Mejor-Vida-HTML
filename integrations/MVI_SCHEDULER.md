@@ -1,6 +1,6 @@
 # MVI scheduler (Google Workspace + dual timezone)
 
-Replaces the HubSpot iframe on `schedule-julie.html` / `en/schedule-julie.html`.
+Replaces HubSpot Meetings across the public site: `schedule-julie.html`, quote/term results modals, final-expense landings, and ad landing flows. Bookings use `/api/scheduler/*` with CRM source `mvi_scheduler`.
 
 ## Behavior
 

@@ -32,6 +32,7 @@
 <link href="css/site-footer.css" rel="stylesheet"/>
 <link href="css/site-footer.css?v=20260721-lip-page" rel="stylesheet"/>
 <link href="css/fontawesome-mvi.min.css?v=20260723-brands-fix" rel="stylesheet"/>
+<link href="css/mvi-scheduler.css?v=20261012" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
@@ -252,8 +253,7 @@
    border: 0;
    background: #fff;
   }
-  #hubspot-schedule-iframe {
-   height: min(720px, 82vh);
+  #panel-agendar #mvi-scheduler-root {
    min-height: 520px;
   }
   #panel-agendar.lp-schedule-section {
@@ -2382,13 +2382,13 @@
 </article>
 </div>
 </section>
-<!-- HubSpot scheduler — bottom of page (FAB + header scroll here) -->
+<!-- MVI scheduler — bottom of page (FAB + header scroll here) -->
 <section aria-labelledby="agenda-title" class="lp-section lp-schedule-section" id="panel-agendar">
 <div class="lp-schedule-wrap">
 <h2 class="h4 fw-bold mb-2" id="agenda-title" style="color:var(--mvi-navy);">📅 Agenda una llamada con Julie</h2>
 <p class="small text-muted mb-3">Elige fecha y hora en el calendario. Sin obligación de comprar.</p>
 <div class="lp-schedule-embed rounded overflow-hidden border shadow-sm" style="border-color:var(--mvi-border)!important;background:#fff;">
-<iframe class="lp-hubspot-iframe" id="hubspot-schedule-iframe" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://meetings-na2.hubspot.com/julie-braunsroth" title="Agendar llamada con Julie — HubSpot"></iframe>
+<div id="mvi-scheduler-root" data-lang="es" data-thanks-url="schedule-thank-you.html" role="region" aria-label="Agendar una llamada"></div>
 </div>
 </div>
 </section>
@@ -2512,7 +2512,7 @@
 </template>
 <script defer src="bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="js/mvi-funnel-track.js?v=20260702e"></script>
-<script src="js/mvi-hubspot-meeting-sync.js?v=20260701a"></script>
+<script src="js/mvi-scheduler.js?v=20261012"></script>
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
 

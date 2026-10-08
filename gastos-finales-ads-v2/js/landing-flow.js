@@ -1629,20 +1629,13 @@
 
   (function bindScheduleModalFromObjectives() {
     var modalEl = document.getElementById("lf-schedule-modal");
-    var iframe = document.getElementById("lf-schedule-iframe");
+    var root = document.getElementById("lf-scheduler-modal-root");
     if (!modalEl || modalEl.getAttribute("data-lf-schedule-bound") === "1") return;
     modalEl.setAttribute("data-lf-schedule-bound", "1");
 
-    function setScheduleIframeSrc() {
-      if (!iframe) return;
-      var url = IS_EN
-        ? iframe.getAttribute("data-src-en") || iframe.getAttribute("data-src-es")
-        : iframe.getAttribute("data-src-es") || iframe.getAttribute("data-src-en");
-      if (url) iframe.setAttribute("src", url);
-      iframe.setAttribute("title", ui("Schedule a call with Julie", "Agendar cita con Julie"));
-    }
-
-    modalEl.addEventListener("show.bs.modal", setScheduleIframeSrc);
+    modalEl.addEventListener("show.bs.modal", function () {
+      if (window.MviScheduleModal && root) MviScheduleModal.mountInto(root);
+    });
     modalEl.addEventListener("show.bs.modal", function (ev) {
       var trigger = ev.relatedTarget;
       if (!trigger || trigger.getAttribute("data-lf-schedule-trigger") !== "1") return;

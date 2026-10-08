@@ -242,15 +242,7 @@
     <p class="small mb-0 mt-2 text-muted" id="julie-schedule-copy-status" aria-live="polite"></p>
    </details>
 
-   <div class="julie-schedule-embed">
-    <iframe
-     id="julie-schedule-iframe"
-     src="https://meetings-na2.hubspot.com/julie-braunsroth"
-     title="Agendar una llamada — Mejor Vida Insurance"
-     loading="lazy"
-     referrerpolicy="no-referrer-when-downgrade"
-    ></iframe>
-   </div>
+   <div class="julie-schedule-embed" id="mvi-scheduler-root" data-lang="es" data-thanks-url="schedule-thank-you.html" role="region" aria-label="Agendar una llamada"></div>
   </div>
  </section>
 
@@ -269,10 +261,11 @@
 
  <div id="mvi-assistant-root" data-api-url="/api/website-chat" data-mvi-avatar-base="img/mvi-chat-avatar"></div>
  <script defer src="bootstrap/js/bootstrap.bundle.min.js"></script>
+ <link href="css/mvi-scheduler.css?v=20261012" rel="stylesheet"/>
  <script src="js/mvi-schedule-julie.js"></script>
+ <script src="js/mvi-scheduler.js?v=20261012"></script>
  <script src="js/mvi-funnel-track.js?v=20260712a"></script>
  <script defer src="js/mvi-ga4-funnel.js?v=20260711a"></script>
- <script src="js/mvi-hubspot-meeting-sync.js?v=20260701a"></script>
  <script src="js/website-assistant-widget.js" defer></script>
  <script>
   (function () {

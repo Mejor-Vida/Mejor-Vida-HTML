@@ -65,26 +65,9 @@
   }
 
   function bindScheduleModal() {
-    var modalEl = document.getElementById("lf-schedule-modal");
-    var iframe = document.getElementById("lf-schedule-iframe");
-    if (!modalEl || modalEl.getAttribute("data-lf-schedule-bound") === "1") return;
-    modalEl.setAttribute("data-lf-schedule-bound", "1");
-
-    function setScheduleIframeSrc() {
-      if (!iframe) return;
-      var url = IS_EN
-        ? iframe.getAttribute("data-src-en") || iframe.getAttribute("data-src-es")
-        : iframe.getAttribute("data-src-es") || iframe.getAttribute("data-src-en");
-      if (url) iframe.setAttribute("src", url);
-      iframe.setAttribute("title", ui("Schedule a call with Julie", "Agendar cita con Julie"));
-    }
-
-    modalEl.addEventListener("show.bs.modal", setScheduleIframeSrc);
-    modalEl.addEventListener("show.bs.modal", function () {
-      document.body.classList.add("lf-schedule-modal-open");
-    });
-    modalEl.addEventListener("hidden.bs.modal", function () {
-      document.body.classList.remove("lf-schedule-modal-open");
+    if (!window.MviScheduleModal) return;
+    MviScheduleModal.bind("lf-schedule-modal", "lf-scheduler-modal-root", {
+      bodyClass: "lf-schedule-modal-open",
     });
   }
 

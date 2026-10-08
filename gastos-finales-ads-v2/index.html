@@ -28,6 +28,7 @@
  <link rel="stylesheet" href="../css/quote-flow-shared.css?v=20260723-mobile-menu" />
  <link rel="stylesheet" href="css/landing-flow.css?v=20260606b" />
  <link rel="stylesheet" href="css/landing-quote-results.css?v=20260605b" />
+ <link href="/css/mvi-scheduler.css?v=20261012" rel="stylesheet" />
 </head>
 <body class="lf-landing" data-total-steps="8" data-product-line="final-expense" data-inline-quote-results="1">
  <header class="lf-header">
@@ -545,7 +546,7 @@
      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
     </div>
     <div class="modal-body pt-2 lf-schedule-modal-iframe-wrap">
-     <iframe id="lf-schedule-iframe" data-src-es="https://meetings-na2.hubspot.com/julie-braunsroth" title="Agendar una llamada" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+     <div id="lf-scheduler-modal-root" data-lang="es" data-thanks-url="../schedule-thank-you.html" role="region" aria-label="Agendar una llamada"></div>
     </div>
    </div>
   </div>
@@ -553,7 +554,8 @@
 
  <script src="../js/us-states.js?v=20260709f"></script>
  <script defer src="../bootstrap/js/bootstrap.bundle.min.js"></script>
- <script src="../js/mvi-hubspot-meeting-sync.js?v=20260701a"></script>
+ <script src="/js/mvi-scheduler.js?v=20261012"></script>
+ <script src="/js/mvi-schedule-modal.js?v=20261012"></script>
  <script src="../js/final-expense-state-costs.js"></script>
  <script src="../js/final-expense-estimator-data.js"></script>
  <script src="js/landing-flow-search-combobox.js?v=20260526"></script>
