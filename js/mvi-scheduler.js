@@ -101,7 +101,8 @@
   function mapBookError(code) {
     var c = String(code || "").toLowerCase();
     if (c === "slot_unavailable" || c === "invalid slot") return t("err_slot");
-    if (c === "request_failed" || c === "book_failed") return t("err_network");
+    if (c === "request_failed") return t("err_network");
+    if (c === "book_failed") return t("err_generic");
     return t("err_generic");
   }
 
