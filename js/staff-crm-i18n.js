@@ -47,7 +47,8 @@
       scheduler_cal_missing: "Not on Google Calendar — reconnect Calendar or re-book after connecting.",
       scheduler_col_actions: "Actions",
       scheduler_cancel: "Cancel",
-      scheduler_cancel_confirm: "Cancel this scheduled call? The client will not be emailed automatically.",
+      scheduler_cancel_confirm:
+        "Cancel this scheduled call? The client and julie@ will receive a cancellation email.",
       scheduler_connect_google: "Connect Google Calendar",
       scheduler_public_link: "Public booking page",
       scheduler_timing: "Timing",
@@ -1788,7 +1789,8 @@
       scheduler_cal_missing: "No esta en Google Calendar — reconecte Calendar o vuelva a agendar.",
       scheduler_col_actions: "Acciones",
       scheduler_cancel: "Cancelar",
-      scheduler_cancel_confirm: "¿Cancelar esta llamada? No se enviara correo automatico al cliente.",
+      scheduler_cancel_confirm:
+        "¿Cancelar esta llamada? El cliente y julie@ recibiran un correo de cancelacion.",
       scheduler_connect_google: "Conectar Google Calendar",
       scheduler_public_link: "Página pública de citas",
       scheduler_timing: "Tiempos",
