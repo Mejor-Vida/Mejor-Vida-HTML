@@ -1,0 +1,53 @@
+.crm-scheduler-grid {
+  display: grid;
+  gap: 16px;
+}
+
+@media (min-width: 960px) {
+  .crm-scheduler-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .crm-scheduler-grid--full {
+    grid-column: 1 / -1;
+  }
+}
+
+.crm-scheduler-hours {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+
+.crm-scheduler-hours th,
+.crm-scheduler-hours td {
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--crm-border, #e2e8f0);
+  text-align: left;
+}
+
+.crm-scheduler-hours input[type="time"] {
+  max-width: 7rem;
+}
+
+.crm-scheduler-appt-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+
+.crm-scheduler-appt-table th,
+.crm-scheduler-appt-table td {
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--crm-border, #e2e8f0);
+  vertical-align: top;
+}
+
+.crm-scheduler-status-ok {
+  color: #15803d;
+  font-weight: 600;
+}
+
+.crm-scheduler-status-warn {
+  color: #b45309;
+  font-weight: 600;
+}

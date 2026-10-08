@@ -1,0 +1,137 @@
+.mvi-scheduler {
+  max-width: 42rem;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 0.75rem;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 8px 28px rgba(13, 71, 161, 0.1);
+  padding: 1.25rem 1.35rem 1.5rem;
+}
+
+.mvi-scheduler__tz {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.75rem;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  color: #334155;
+}
+
+.mvi-scheduler__tz label {
+  font-weight: 600;
+  margin: 0;
+}
+
+.mvi-scheduler__tz select {
+  flex: 1 1 12rem;
+  min-width: 0;
+  padding: 0.4rem 0.55rem;
+  border-radius: 0.45rem;
+  border: 1px solid #cbd5e1;
+}
+
+.mvi-scheduler__hint {
+  font-size: 0.8rem;
+  color: #64748b;
+  margin: 0 0 1rem;
+}
+
+.mvi-scheduler__days {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding-bottom: 0.35rem;
+  margin-bottom: 1rem;
+}
+
+.mvi-scheduler__day {
+  flex: 0 0 auto;
+  border: 1px solid #cbd5e1;
+  background: #f8fafc;
+  border-radius: 0.5rem;
+  padding: 0.45rem 0.65rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.mvi-scheduler__day.is-active {
+  border-color: #0d47a1;
+  background: #e3f2fd;
+  font-weight: 600;
+}
+
+.mvi-scheduler__slots {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(9.5rem, 1fr));
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  min-height: 4rem;
+}
+
+.mvi-scheduler__slot {
+  border: 1px solid #0d47a1;
+  color: #0d47a1;
+  background: #fff;
+  border-radius: 0.45rem;
+  padding: 0.5rem 0.35rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.mvi-scheduler__slot.is-selected {
+  background: #0d47a1;
+  color: #fff;
+}
+
+.mvi-scheduler__form label {
+  display: block;
+  font-weight: 600;
+  font-size: 0.85rem;
+  margin-bottom: 0.25rem;
+}
+
+.mvi-scheduler__form input {
+  width: 100%;
+  margin-bottom: 0.75rem;
+  padding: 0.45rem 0.55rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 0.45rem;
+}
+
+.mvi-scheduler__confirm {
+  background: #f0fdf4;
+  border: 1px solid #86efac;
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+.mvi-scheduler__error {
+  color: #b91c1c;
+  font-size: 0.85rem;
+  margin-bottom: 0.75rem;
+}
+
+.mvi-scheduler__submit {
+  width: 100%;
+  padding: 0.65rem 1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 0.5rem;
+  background: #0d47a1;
+  color: #fff;
+}
+
+.mvi-scheduler__submit:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.mvi-scheduler__loading {
+  text-align: center;
+  color: #64748b;
+  padding: 1.5rem;
+}

@@ -151,6 +151,7 @@
       return { view: "accounting", pane: acctPane, report: acctReport };
     }
     if (parts[0] === "nurture-settings") return { view: "nurtureSettings" };
+    if (parts[0] === "scheduler") return { view: "scheduler" };
     return { view: "dashboard" };
   }
 
@@ -409,7 +410,9 @@
           ? "dashboard"
           : route.view === "nurtureSettings"
             ? "nurture-settings"
-            : route.view;
+            : route.view === "scheduler"
+              ? "scheduler"
+              : route.view;
     document.querySelectorAll(".crm-nav-item").forEach(function (btn) {
       btn.classList.toggle("active", btn.getAttribute("data-nav") === active);
     });
@@ -458,6 +461,7 @@
     else if (nav === "youtube") navigate("#/youtube");
     else if (nav === "accounting") navigate("#/accounting");
     else if (nav === "nurture-settings") navigate("#/nurture-settings");
+    else if (nav === "scheduler") navigate("#/scheduler");
   }
 
   async function ensureLeads(force) {
@@ -707,7 +711,10 @@
   function renderCalendarCell(L) {
     var scheduled = !!(L.call_scheduled_at);
     var cls = scheduled ? " crm-calendar-bell is-scheduled" : " crm-calendar-bell is-empty";
-    var label = scheduled ? t("calendar_scheduled_title") : t("calendar_no_appointment");
+    var when = String(L.appointment_display || L.call_scheduled_at || "").trim();
+    var label = scheduled
+      ? when || t("calendar_scheduled_title")
+      : t("calendar_no_appointment");
     return (
       '<button type="button" class="' +
       cls.trim() +
@@ -715,6 +722,8 @@
       esc(L.id) +
       '" data-at="' +
       esc(L.call_scheduled_at || "") +
+      '" title="' +
+      esc(when) +
       '" aria-label="' +
       esc(label) +
       '">' +
@@ -2969,6 +2978,18 @@
             '<div class="crm-placeholder"><strong>' +
             esc(t("load_error")) +
             "</strong><p>Nurture settings module failed to load.</p></div>";
+        }
+        resetIdleTimer();
+        return;
+      }
+      if (route.view === "scheduler") {
+        if (window.StaffCrmScheduler) {
+          await window.StaffCrmScheduler.mount(main);
+        } else {
+          main.innerHTML =
+            '<div class="crm-placeholder"><strong>' +
+            esc(t("load_error")) +
+            "</strong><p>Scheduler module failed to load.</p></div>";
         }
         resetIdleTimer();
         return;

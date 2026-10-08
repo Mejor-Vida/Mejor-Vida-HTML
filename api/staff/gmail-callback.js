@@ -1,6 +1,8 @@
 const { productionGmailRedirectUri } = require("../../lib/gmail-oauth-redirect");
 const { google } = require("../../lib/google-clients");
 const { DRIVE_BACKUP_STATE } = require("../../lib/google-drive-backup");
+
+const CALENDAR_STATE = "mvi_calendar";
 const { sendDriveConnectedResponse, escapeHtml } = require("../../lib/google-drive-oauth-finish");
 
 module.exports = async function handler(req, res) {
@@ -16,6 +18,7 @@ module.exports = async function handler(req, res) {
 
   const state = String((req.query && req.query.state) || "").trim();
   const isDrive = state === DRIVE_BACKUP_STATE;
+  const isCalendar = state === CALENDAR_STATE;
 
   const clientId = process.env.GMAIL_CLIENT_ID;
   const clientSecret = process.env.GMAIL_CLIENT_SECRET;
@@ -34,6 +37,16 @@ module.exports = async function handler(req, res) {
 
     if (isDrive) {
       return sendDriveConnectedResponse(req, res, refreshToken);
+    }
+
+    if (isCalendar) {
+      const html = refreshToken
+        ? `<!doctype html><html><head><meta charset="utf-8"><title>Calendar refresh token</title></head><body style="font-family:system-ui,sans-serif;padding:24px"><h2>Google Calendar refresh token</h2><p>Copy into <code>GOOGLE_CALENDAR_REFRESH_TOKEN</code> on Vercel:</p><pre>${escapeHtml(
+            refreshToken
+          )}</pre></body></html>`
+        : `<!doctype html><html><body style="font-family:system-ui,sans-serif;padding:24px"><h2>No refresh token</h2><p>Revoke app access and open <a href="/api/staff/calendar-auth">/api/staff/calendar-auth</a> again.</p></body></html>`;
+      res.status(200).setHeader("Content-Type", "text/html; charset=utf-8");
+      return res.send(html);
     }
 
     const html = refreshToken

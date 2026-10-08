@@ -717,24 +717,36 @@ async function enrichListItemsWithAppointments(cfg, items) {
     stateRows = await restSelect(
       cfg,
       "lead_state",
-      `select=contact_id,call_scheduled_at&contact_id=in.(${idList})`
+      `select=contact_id,call_scheduled_at,appointment_booker_timezone&contact_id=in.(${idList})`
     );
   } catch (e) {
     console.error("staff/leads enrichListItemsWithAppointments", e);
     return items;
   }
 
+  const { dualAppointmentLabel } = require("../../lib/scheduler/timezone");
+  const hostTz = String(process.env.SCHEDULER_HOST_TIMEZONE || "America/Chicago").trim();
+
   const apptByContact = new Map();
   (stateRows || []).forEach((row) => {
     if (!row || !row.contact_id) return;
     const at = row.call_scheduled_at || null;
-    if (at) apptByContact.set(String(row.contact_id), at);
+    if (!at) return;
+    const cid = String(row.contact_id);
+    apptByContact.set(cid, {
+      at,
+      bookerTz: row.appointment_booker_timezone || null,
+      label: dualAppointmentLabel(at, row.appointment_booker_timezone, hostTz),
+    });
   });
 
   items.forEach((item, idx) => {
     const cid = contactIdByItem.get(idx);
     if (!cid) return;
-    item.call_scheduled_at = apptByContact.get(cid) || null;
+    const appt = apptByContact.get(cid);
+    item.call_scheduled_at = appt ? appt.at : null;
+    item.appointment_booker_timezone = appt ? appt.bookerTz : null;
+    item.appointment_display = appt ? appt.label : null;
   });
 
   return items;
