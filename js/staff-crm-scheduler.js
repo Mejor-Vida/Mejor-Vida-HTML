@@ -163,6 +163,48 @@
     });
   }
 
+  /** List HTML is replaced on refresh — delegate clicks so Cancel/Sync keep working. */
+  function wireApptListActions(main) {
+    var list = main.querySelector("#sch-appt-list");
+    if (!list) return;
+    if (list.getAttribute("data-appt-actions") === "1") return;
+    list.setAttribute("data-appt-actions", "1");
+    list.addEventListener("click", function (ev) {
+      var syncBtn = ev.target && ev.target.closest ? ev.target.closest(".crm-scheduler-sync") : null;
+      var cancelBtn = ev.target && ev.target.closest ? ev.target.closest(".crm-scheduler-cancel") : null;
+      var btn = syncBtn || cancelBtn;
+      if (!btn || btn.disabled) return;
+      var apptId = btn.getAttribute("data-appt-id");
+      if (!apptId) return;
+
+      if (syncBtn) {
+        btn.disabled = true;
+        api("/api/staff/scheduler", { action: "sync_calendar", appointmentId: apptId }, { method: "POST" })
+          .then(function () {
+            var refresh = document.getElementById("sch-refresh-calls");
+            if (refresh) refresh.click();
+          })
+          .catch(function (e) {
+            btn.disabled = false;
+            window.alert(e.message || "Error");
+          });
+        return;
+      }
+
+      if (!window.confirm(t("scheduler_cancel_confirm"))) return;
+      btn.disabled = true;
+      api("/api/staff/scheduler", { action: "cancel", appointmentId: apptId }, { method: "POST" })
+        .then(function () {
+          var refresh = document.getElementById("sch-refresh-calls");
+          if (refresh) refresh.click();
+        })
+        .catch(function (e) {
+          btn.disabled = false;
+          window.alert(e.message || "Error");
+        });
+    });
+  }
+
   async function mount(main) {
     main.innerHTML = '<div class="crm-placeholder">' + esc(t("loading")) + "</div>";
     var data = await api("/api/staff/scheduler");
@@ -316,41 +358,7 @@
     });
 
     wireWorkHourToggles(main);
-
-    main.querySelectorAll(".crm-scheduler-sync").forEach(function (btn) {
-      btn.addEventListener("click", async function () {
-        var apptId = btn.getAttribute("data-appt-id");
-        if (!apptId) return;
-        btn.disabled = true;
-        try {
-          await api(
-            "/api/staff/scheduler",
-            { action: "sync_calendar", appointmentId: apptId },
-            { method: "POST" }
-          );
-          document.getElementById("sch-refresh-calls").click();
-        } catch (e) {
-          btn.disabled = false;
-          window.alert(e.message || "Error");
-        }
-      });
-    });
-
-    main.querySelectorAll(".crm-scheduler-cancel").forEach(function (btn) {
-      btn.addEventListener("click", async function () {
-        var apptId = btn.getAttribute("data-appt-id");
-        if (!apptId) return;
-        if (!window.confirm(t("scheduler_cancel_confirm"))) return;
-        btn.disabled = true;
-        try {
-          await api("/api/staff/scheduler", { action: "cancel", appointmentId: apptId }, { method: "POST" });
-          document.getElementById("sch-refresh-calls").click();
-        } catch (e) {
-          btn.disabled = false;
-          window.alert(e.message || "Error");
-        }
-      });
-    });
+    wireApptListActions(main);
 
     document.getElementById("sch-save").addEventListener("click", async function () {
       var status = document.getElementById("sch-save-status");
