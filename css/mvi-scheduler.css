@@ -203,14 +203,20 @@
   margin-bottom: 0.75rem;
 }
 
-.mvi-scheduler__submit {
+.mvi-scheduler__form .mvi-scheduler__submit {
   width: 100%;
+  margin-top: 0.5rem;
   padding: 0.65rem 1rem;
   font-weight: 700;
   border: none;
   border-radius: 0.5rem;
   background: #0d47a1;
   color: #fff;
+  cursor: pointer;
+}
+
+.mvi-scheduler__form .mvi-scheduler__error {
+  margin-top: 0.5rem;
 }
 
 .mvi-scheduler__submit:disabled {

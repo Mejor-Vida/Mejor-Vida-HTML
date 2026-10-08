@@ -45,6 +45,11 @@
       prev_month: "Mes anterior",
       next_month: "Mes siguiente",
       enter_details: "Sus datos de contacto",
+      submitting: "Confirmando…",
+      err_fields: "Complete todos los campos.",
+      err_network: "No se pudo conectar. Compruebe su internet e intente de nuevo.",
+      err_slot: "Ese horario ya no está disponible. Elija otra hora.",
+      err_generic: "No se pudo confirmar la cita. Llame al 402-440-5438.",
     };
     var en = {
       tz_label: "Times shown in:",
@@ -62,6 +67,11 @@
       prev_month: "Previous month",
       next_month: "Next month",
       enter_details: "Your contact details",
+      submitting: "Confirming…",
+      err_fields: "Please fill in all fields.",
+      err_network: "Could not connect. Check your internet and try again.",
+      err_slot: "That time is no longer available. Please pick another.",
+      err_generic: "Could not confirm your appointment. Please call 402-440-5438.",
     };
     var dict = state.lang === "en" ? en : es;
     return dict[key] || key;
@@ -82,13 +92,50 @@
     }
   }
 
+  function thankYouUrl(whenLabel) {
+    var base = state.thanksPath || "schedule-thank-you.html";
+    var q = whenLabel ? "?when=" + encodeURIComponent(whenLabel) : "";
+    return base + q;
+  }
+
+  function mapBookError(code) {
+    var c = String(code || "").toLowerCase();
+    if (c === "slot_unavailable" || c === "invalid slot") return t("err_slot");
+    if (c === "request_failed" || c === "book_failed") return t("err_network");
+    return t("err_generic");
+  }
+
   function fetchJson(url, opts) {
     return fetch(url, opts).then(function (r) {
-      return r.json().then(function (j) {
+      return r.text().then(function (text) {
+        var j = {};
+        try {
+          j = text ? JSON.parse(text) : {};
+        } catch (_e) {
+          if (!r.ok) throw new Error("request_failed");
+        }
         if (!r.ok) throw new Error((j && j.error) || "request_failed");
         return j;
       });
     });
+  }
+
+  function readContactFields(form) {
+    var first = form.querySelector('[name="firstName"]');
+    var phone = form.querySelector('[name="phone"]');
+    var email = form.querySelector('[name="email"]');
+    return {
+      firstName: first ? String(first.value || "").trim() : "",
+      phone: phone ? String(phone.value || "").trim() : "",
+      email: email ? String(email.value || "").trim() : "",
+    };
+  }
+
+  function showError(errEl, message) {
+    if (!errEl) return;
+    errEl.textContent = message;
+    errEl.hidden = false;
+    errEl.scrollIntoView({ behavior: "smooth", block: "nearest" });
   }
 
   function groupDays(slots) {
@@ -312,7 +359,8 @@
   }
 
   function buildForm(detailsRoot) {
-    var form = el("div", "mvi-scheduler__form");
+    var form = el("form", "mvi-scheduler__form");
+    form.setAttribute("novalidate", "novalidate");
     form.innerHTML =
       "<h3 class=\"mvi-scheduler__form-title\">" +
       t("enter_details") +
@@ -326,36 +374,33 @@
       "<label>" +
       t("email") +
       '</label><input name="email" type="email" required autocomplete="email" />' +
-      consentHtml();
-    var err = el("p", "mvi-scheduler__error");
-    err.hidden = true;
-    var submit = el("button", "mvi-scheduler__submit", t("confirm"));
-    submit.type = "button";
-    submit.addEventListener("click", function () {
-      var root = detailsRoot.closest(".mvi-scheduler");
-      var mountRoot = root.parentElement;
+      consentHtml() +
+      '<p class="mvi-scheduler__error" hidden></p>' +
+      '<button type="submit" class="mvi-scheduler__submit">' +
+      t("confirm") +
+      "</button>";
+    var err = form.querySelector(".mvi-scheduler__error");
+    var submit = form.querySelector(".mvi-scheduler__submit");
+
+    form.addEventListener("submit", function (ev) {
+      ev.preventDefault();
       err.hidden = true;
       if (!state.selected) {
-        err.textContent = t("pick_time");
-        err.hidden = false;
+        showError(err, t("pick_time"));
         return;
       }
-      var fd = new FormData(form);
-      var firstName = String(fd.get("firstName") || "").trim();
-      var phone = String(fd.get("phone") || "").trim();
-      var email = String(fd.get("email") || "").trim();
-      if (!firstName || !phone || !email) {
-        err.textContent = state.lang === "en" ? "Please fill in all fields." : "Complete todos los campos.";
-        err.hidden = false;
+      var fields = readContactFields(form);
+      if (!fields.firstName || !fields.phone || !fields.email) {
+        showError(err, t("err_fields"));
         return;
       }
       var payload = {
         startUtc: state.selected.startUtc,
         endUtc: state.selected.endUtc,
         bookerTimezone: state.bookerTz,
-        firstName: firstName,
-        phone: phone,
-        email: email,
+        firstName: fields.firstName,
+        phone: fields.phone,
+        email: fields.email,
         language: state.lang === "en" ? "english" : "spanish",
         marketingOptIn: !!document.getElementById("sch-sms-consent") && document.getElementById("sch-sms-consent").checked,
       };
@@ -363,36 +408,35 @@
         window.MVIConsentCapture.attachToPayload(payload, "sch-sms-consent");
       }
       submit.disabled = true;
+      submit.textContent = t("submitting");
       fetchJson(API.book, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       })
         .then(function (res) {
-          mountRoot.innerHTML =
-            '<div class="mvi-scheduler__confirm mvi-scheduler__confirm--success">' +
-            t("success") +
-            "<br><br>" +
-            (res.labels && res.labels.booker ? res.labels.booker : "") +
-            "</div>";
           if (typeof gtag === "function") {
             gtag("event", "appointment_booked", { location: "mvi_scheduler" });
           }
+          var whenLabel =
+            (res.labels && res.labels.booker) ||
+            (state.selected && state.selected.labelBooker) ||
+            "";
+          window.location.href = thankYouUrl(whenLabel);
         })
         .catch(function (e) {
-          err.textContent = e.message || "Error";
-          err.hidden = false;
+          showError(err, mapBookError(e && e.message));
           submit.disabled = false;
+          submit.textContent = t("confirm");
         });
     });
     detailsRoot.appendChild(form);
-    detailsRoot.appendChild(err);
-    detailsRoot.appendChild(submit);
   }
 
   function mount(container) {
     if (!container) return;
     state.lang = container.getAttribute("data-lang") === "en" ? "en" : "es";
+    state.thanksPath = container.getAttribute("data-thanks-url") || "schedule-thank-you.html";
 
     var root = el("div", "mvi-scheduler");
     var tzRow = el("div", "mvi-scheduler__tz");
