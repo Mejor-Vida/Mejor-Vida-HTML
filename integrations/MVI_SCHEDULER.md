@@ -18,10 +18,11 @@ API: `GET/PATCH /api/staff/scheduler`
 ## Setup (one-time)
 
 1. **Supabase:** apply migration `109_mvi_scheduler.sql`.
-2. **Google Calendar OAuth:** while signed in as Julie, open  
+2. **Google Cloud Console** (same project as `GMAIL_CLIENT_ID`): enable **[Google Calendar API](https://console.cloud.google.com/apis/library/calendar-json.googleapis.com)**. Without this, OAuth succeeds but every `create_event` returns 403 and CRM shows **No GCal**.
+3. **Google Calendar OAuth:** while signed in as Julie, open  
    `https://www.mejorvidainsurance.com/api/staff/calendar-auth`  
    Copy refresh token → Vercel **`GOOGLE_CALENDAR_REFRESH_TOKEN`** (same OAuth client as Gmail).
-3. **Optional env (Vercel):**
+4. **Optional env (Vercel):**
    - `SCHEDULER_HOST_TIMEZONE` — default `America/Chicago`
    - `GOOGLE_CALENDAR_ID` — default `primary`
    - `SCHEDULER_SLOT_MINUTES` — default `30`

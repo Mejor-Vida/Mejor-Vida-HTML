@@ -40,6 +40,10 @@
       scheduler_google_ok: "Connected — free/busy and new events use your Workspace calendar.",
       scheduler_google_missing:
         "Calendar writes disabled — open Connect Google Calendar below (Gmail-only token cannot create events).",
+      scheduler_google_api_disabled:
+        "Refresh token is set, but Google Calendar API is disabled in Cloud Console. Enable it (link below), wait a few minutes, then use Sync to GCal on each call or book again.",
+      scheduler_google_enable_api: "Enable Google Calendar API in Cloud Console",
+      scheduler_sync_gcal: "Sync to GCal",
       scheduler_cal_missing: "Not on Google Calendar — reconnect Calendar or re-book after connecting.",
       scheduler_col_actions: "Actions",
       scheduler_cancel: "Cancel",
@@ -1777,6 +1781,10 @@
       scheduler_google_ok: "Conectado — el calendario de Workspace controla ocupado y nuevas citas.",
       scheduler_google_missing:
         "Sin escritura en Calendar — use Conectar Google Calendar abajo (el token de Gmail no crea eventos).",
+      scheduler_google_api_disabled:
+        "El token esta configurado, pero la API de Google Calendar esta desactivada en Cloud Console. Activela (enlace abajo), espere unos minutos y use Sincronizar con GCal o reserve de nuevo.",
+      scheduler_google_enable_api: "Activar Google Calendar API en Cloud Console",
+      scheduler_sync_gcal: "Sincronizar con GCal",
       scheduler_cal_missing: "No esta en Google Calendar — reconecte Calendar o vuelva a agendar.",
       scheduler_col_actions: "Acciones",
       scheduler_cancel: "Cancelar",

@@ -116,9 +116,16 @@
       var calHint = row.calendar_synced
         ? '<span class="crm-muted" title="Google Calendar">GCal</span>'
         : '<span class="crm-scheduler-cal-miss" title="' + esc(t("scheduler_cal_missing")) + '">No GCal</span>';
-      var cancelBtn =
+      var actions =
         row.status === "scheduled"
-          ? '<button type="button" class="crm-btn crm-btn--sm crm-scheduler-cancel" data-appt-id="' +
+          ? (!row.calendar_synced
+              ? '<button type="button" class="crm-btn crm-btn--sm crm-scheduler-sync" data-appt-id="' +
+                esc(row.id) +
+                '">' +
+                esc(t("scheduler_sync_gcal")) +
+                "</button> "
+              : "") +
+            '<button type="button" class="crm-btn crm-btn--sm crm-scheduler-cancel" data-appt-id="' +
             esc(row.id) +
             '">' +
             esc(t("scheduler_cancel")) +
@@ -138,7 +145,7 @@
         "</span></td><td>" +
         esc(row.booker_timezone || "") +
         "</td><td>" +
-        cancelBtn +
+        actions +
         "</td></tr>";
     });
     html += "</tbody></table>";
@@ -162,8 +169,21 @@
     var cfg = data.config || {};
     var integ = data.integration || {};
 
+    var calHealth = integ.calendarHealth || {};
     var googleCls = integ.googleCalendar ? "crm-scheduler-status-ok" : "crm-scheduler-status-warn";
-    var googleTxt = integ.googleCalendar ? t("scheduler_google_ok") : t("scheduler_google_missing");
+    var googleTxt = integ.googleCalendar
+      ? t("scheduler_google_ok")
+      : calHealth.reason === "calendar_api_disabled"
+        ? t("scheduler_google_api_disabled")
+        : calHealth.message || t("scheduler_google_missing");
+    var enableLink =
+      calHealth.enableUrl
+        ? '<p><a href="' +
+          esc(calHealth.enableUrl) +
+          '" target="_blank" rel="noopener">' +
+          esc(t("scheduler_google_enable_api")) +
+          "</a></p>"
+        : "";
 
     main.innerHTML =
       '<div class="crm-page-head"><h1>' +
@@ -178,7 +198,9 @@
       googleCls +
       '">' +
       esc(googleTxt) +
-      '</p><p><a href="' +
+      "</p>" +
+      enableLink +
+      '<p><a href="' +
       esc(integ.calendarAuthUrl || "/api/staff/calendar-auth") +
       '" target="_blank" rel="noopener">' +
       esc(t("scheduler_connect_google")) +
@@ -294,6 +316,25 @@
     });
 
     wireWorkHourToggles(main);
+
+    main.querySelectorAll(".crm-scheduler-sync").forEach(function (btn) {
+      btn.addEventListener("click", async function () {
+        var apptId = btn.getAttribute("data-appt-id");
+        if (!apptId) return;
+        btn.disabled = true;
+        try {
+          await api(
+            "/api/staff/scheduler",
+            { action: "sync_calendar", appointmentId: apptId },
+            { method: "POST" }
+          );
+          document.getElementById("sch-refresh-calls").click();
+        } catch (e) {
+          btn.disabled = false;
+          window.alert(e.message || "Error");
+        }
+      });
+    });
 
     main.querySelectorAll(".crm-scheduler-cancel").forEach(function (btn) {
       btn.addEventListener("click", async function () {

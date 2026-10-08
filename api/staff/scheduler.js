@@ -9,6 +9,8 @@ const { loadSchedulerSettings, saveSchedulerSettings } = require("../../lib/sche
 const { getSchedulerConfig } = require("../../lib/scheduler/config");
 const { dualAppointmentLabel } = require("../../lib/scheduler/timezone");
 const { cancelAppointment } = require("../../lib/scheduler/cancel-appointment");
+const { checkGoogleCalendarHealth } = require("../../lib/scheduler/calendar-health");
+const { syncAppointmentToCalendar } = require("../../lib/scheduler/sync-appointment-calendar");
 
 async function listAppointments(cfg, query) {
   const from = String(query.from || "").trim();
@@ -67,6 +69,7 @@ module.exports = async function handler(req, res) {
     try {
       const config = await loadSchedulerSettings(cfg.supabaseUrl, cfg.serviceKey, { noCache: true });
       const integration = getSchedulerConfig(config);
+      const calendarHealth = await checkGoogleCalendarHealth();
       const appointments = await listAppointments(cfg, {
         status: "scheduled",
         from: new Date().toISOString(),
@@ -76,8 +79,9 @@ module.exports = async function handler(req, res) {
         config,
         defaults: defaultSchedulerConfig(),
         integration: {
-          googleCalendar: integration.googleCalendarWriteReady,
+          googleCalendar: integration.googleCalendarWriteReady && calendarHealth.ok,
           googleCalendarWriteReady: integration.googleCalendarWriteReady,
+          calendarHealth,
           calendarAuthUrl: "/api/staff/calendar-auth",
           publicScheduleUrl: "/schedule-julie.html",
         },
@@ -97,6 +101,18 @@ module.exports = async function handler(req, res) {
       return json(res, 400, { error: "Invalid JSON" });
     }
     const action = String(body.action || "").trim().toLowerCase();
+    if (action === "sync_calendar") {
+      const appointmentId = body.appointmentId || body.appointment_id;
+      if (!appointmentId) return json(res, 400, { error: "appointmentId required" });
+      try {
+        const result = await syncAppointmentToCalendar(cfg, appointmentId);
+        if (!result.ok) return json(res, result.status || 400, { error: result.error, detail: result.detail });
+        return json(res, 200, { ok: true, ...result });
+      } catch (e) {
+        console.error("staff/scheduler sync_calendar", e);
+        return json(res, 500, { error: "Failed to sync calendar" });
+      }
+    }
     if (action === "cancel") {
       const appointmentId = body.appointmentId || body.appointment_id;
       if (!appointmentId) return json(res, 400, { error: "appointmentId required" });
