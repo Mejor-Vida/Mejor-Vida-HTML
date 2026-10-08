@@ -42,6 +42,17 @@
   margin: 0;
 }
 
+.crm-scheduler-cal-miss {
+  color: #b45309;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.crm-btn--sm {
+  font-size: 0.8rem;
+  padding: 0.35rem 0.65rem;
+}
+
 .crm-scheduler-appt-table {
   width: 100%;
   border-collapse: collapse;

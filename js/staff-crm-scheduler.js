@@ -106,24 +106,39 @@
       esc(t("scheduler_col_client")) +
       "</th><th>" +
       esc(t("scheduler_col_tz")) +
-      "</th><th></th></tr></thead><tbody>";
+      "</th><th>" +
+      esc(t("scheduler_col_actions")) +
+      "</th></tr></thead><tbody>";
     rows.forEach(function (row) {
       var clientLink = row.contact_id
         ? '<a href="#/clients/' + encodeURIComponent(row.contact_id) + '/overview">' + esc(row.name) + "</a>"
         : esc(row.name);
+      var calHint = row.calendar_synced
+        ? '<span class="crm-muted" title="Google Calendar">GCal</span>'
+        : '<span class="crm-scheduler-cal-miss" title="' + esc(t("scheduler_cal_missing")) + '">No GCal</span>';
+      var cancelBtn =
+        row.status === "scheduled"
+          ? '<button type="button" class="crm-btn crm-btn--sm crm-scheduler-cancel" data-appt-id="' +
+            esc(row.id) +
+            '">' +
+            esc(t("scheduler_cancel")) +
+            "</button>"
+          : esc(row.status || "");
       html +=
         "<tr><td><strong>" +
         esc(row.host_label || row.starts_at) +
         "</strong><br><span class=\"crm-muted\">" +
         esc(row.client_label || "") +
-        "</span></td><td>" +
+        "</span><br>" +
+        calHint +
+        "</td><td>" +
         clientLink +
         "<br><span class=\"crm-muted\">" +
         esc(row.phone || "") +
         "</span></td><td>" +
         esc(row.booker_timezone || "") +
         "</td><td>" +
-        esc(row.status || "") +
+        cancelBtn +
         "</td></tr>";
     });
     html += "</tbody></table>";
@@ -279,6 +294,22 @@
     });
 
     wireWorkHourToggles(main);
+
+    main.querySelectorAll(".crm-scheduler-cancel").forEach(function (btn) {
+      btn.addEventListener("click", async function () {
+        var apptId = btn.getAttribute("data-appt-id");
+        if (!apptId) return;
+        if (!window.confirm(t("scheduler_cancel_confirm"))) return;
+        btn.disabled = true;
+        try {
+          await api("/api/staff/scheduler", { action: "cancel", appointmentId: apptId }, { method: "POST" });
+          document.getElementById("sch-refresh-calls").click();
+        } catch (e) {
+          btn.disabled = false;
+          window.alert(e.message || "Error");
+        }
+      });
+    });
 
     document.getElementById("sch-save").addEventListener("click", async function () {
       var status = document.getElementById("sch-save-status");

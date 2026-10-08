@@ -8,6 +8,7 @@ const { defaultSchedulerConfig } = require("../../lib/scheduler/defaults");
 const { loadSchedulerSettings, saveSchedulerSettings } = require("../../lib/scheduler/settings-store");
 const { getSchedulerConfig } = require("../../lib/scheduler/config");
 const { dualAppointmentLabel } = require("../../lib/scheduler/timezone");
+const { cancelAppointment } = require("../../lib/scheduler/cancel-appointment");
 
 async function listAppointments(cfg, query) {
   const from = String(query.from || "").trim();
@@ -37,6 +38,7 @@ async function listAppointments(cfg, query) {
       host_label: dualAppointmentLabel(row.starts_at, row.booker_timezone, row.host_timezone || hostTz),
       client_label: dualAppointmentLabel(row.starts_at, row.booker_timezone, row.booker_timezone),
       google_event_id: row.google_event_id,
+      calendar_synced: !!row.google_event_id,
       created_at: row.created_at,
     };
   });
@@ -74,7 +76,8 @@ module.exports = async function handler(req, res) {
         config,
         defaults: defaultSchedulerConfig(),
         integration: {
-          googleCalendar: integration.googleConfigured,
+          googleCalendar: integration.googleCalendarWriteReady,
+          googleCalendarWriteReady: integration.googleCalendarWriteReady,
           calendarAuthUrl: "/api/staff/calendar-auth",
           publicScheduleUrl: "/schedule-julie.html",
         },
@@ -84,6 +87,32 @@ module.exports = async function handler(req, res) {
       console.error("staff/scheduler GET", e);
       return json(res, 500, { error: "Failed to load scheduler" });
     }
+  }
+
+  if (req.method === "POST") {
+    let body;
+    try {
+      body = typeof req.body === "string" ? JSON.parse(req.body || "{}") : req.body || {};
+    } catch (e) {
+      return json(res, 400, { error: "Invalid JSON" });
+    }
+    const action = String(body.action || "").trim().toLowerCase();
+    if (action === "cancel") {
+      const appointmentId = body.appointmentId || body.appointment_id;
+      if (!appointmentId) return json(res, 400, { error: "appointmentId required" });
+      try {
+        const result = await cancelAppointment(cfg, {
+          appointmentId,
+          actor: "staff",
+        });
+        if (!result.ok) return json(res, result.status || 400, { error: result.error });
+        return json(res, 200, { ok: true, cancelled: true });
+      } catch (e) {
+        console.error("staff/scheduler cancel", e);
+        return json(res, 500, { error: "Failed to cancel" });
+      }
+    }
+    return json(res, 400, { error: "Unknown action" });
   }
 
   if (req.method === "PATCH") {
@@ -108,6 +137,6 @@ module.exports = async function handler(req, res) {
     }
   }
 
-  res.setHeader("Allow", "GET, PATCH");
+  res.setHeader("Allow", "GET, POST, PATCH");
   return json(res, 405, { error: "Method Not Allowed" });
 };
