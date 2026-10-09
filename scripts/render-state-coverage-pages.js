@@ -231,6 +231,7 @@ const LICENSE = {
     typeEs: "Productora no residente",
     typeEn: "Non-resident producer",
     number: "3561085",
+    pdf: "julie-license-tx.pdf?v=20261009-cert",
     verifyUrl: "https://www.tdi.texas.gov/agent/index.html",
     verifyLabel: { es: "Verificar en Texas (TDI)", en: "Verify in Texas (TDI)" },
   },
@@ -1687,7 +1688,7 @@ function renderEs(code) {
 <link href="${prefix}css/quote-flow-shared.css?v=20260905-search" rel="stylesheet"/>
 <link href="${prefix}css/site-footer.css?v=20260721-lip-page" rel="stylesheet"/>
 <link href="${prefix}css/state-coverage.css?v=20261009-expense-links" rel="stylesheet"/>
-<link href="${prefix}css/mvi-licensing-map.css?v=20261009-tx" rel="stylesheet"/>
+<link href="${prefix}css/mvi-licensing-map.css?v=20261009-tx-cert" rel="stylesheet"/>
 <link href="${prefix}css/mvi-assistant-widget.css?v=20260808-chat-sm" rel="stylesheet"/>
 <link href="${prefix}css/fontawesome-mvi.min.css?v=20260723-brands-fix" rel="stylesheet"/>
 <link href="${prefix}css/site-header.css?v=20260723-ver-precios-gold" rel="stylesheet"/>
@@ -1751,7 +1752,7 @@ ${loadFooterEs()}
 <script defer src="${prefix}bootstrap/js/bootstrap.bundle.min.js"></script>
 <script defer src="${prefix}script.js"></script>
 <script defer src="${prefix}js/mvi-nav-questions.js?v=20260828-family"></script>
-<script defer src="${prefix}js/mvi-licensing-map.js?v=20261009-tx"></script>
+<script defer src="${prefix}js/mvi-licensing-map.js?v=20261009-tx-cert"></script>
 <div data-api-url="/api/website-chat" id="mvi-assistant-root"></div>
 <script defer src="${prefix}js/website-assistant-widget.js"></script>
 </body>
@@ -1789,7 +1790,7 @@ function renderEn(code) {
 <link href="${root}css/quote-flow-shared.css?v=20260905-search" rel="stylesheet"/>
 <link href="${root}css/site-footer.css?v=20260721-lip-page" rel="stylesheet"/>
 <link href="${root}css/state-coverage.css?v=20261009-expense-links" rel="stylesheet"/>
-<link href="${root}css/mvi-licensing-map.css?v=20261009-tx" rel="stylesheet"/>
+<link href="${root}css/mvi-licensing-map.css?v=20261009-tx-cert" rel="stylesheet"/>
 <link href="${root}css/mvi-assistant-widget.css?v=20260808-chat-sm" rel="stylesheet"/>
 <link href="${root}css/fontawesome-mvi.min.css?v=20260723-brands-fix" rel="stylesheet"/>
 <link href="${root}css/site-header.css?v=20260723-ver-precios-gold" rel="stylesheet"/>
@@ -1852,7 +1853,7 @@ ${loadFooterEn()}
 <script defer src="${root}bootstrap/js/bootstrap.bundle.min.js"></script>
 <script defer src="${root}script.js"></script>
 <script defer src="${root}js/mvi-nav-questions.js?v=20260828-family"></script>
-<script defer src="${root}js/mvi-licensing-map.js?v=20261009-tx"></script>
+<script defer src="${root}js/mvi-licensing-map.js?v=20261009-tx-cert"></script>
 <div data-api-url="/api/website-chat" id="mvi-assistant-root"></div>
 <script defer src="${root}js/website-assistant-widget.js"></script>
 </body>
