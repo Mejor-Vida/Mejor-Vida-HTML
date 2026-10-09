@@ -53,7 +53,7 @@ function stateHero(code, lang, prefix, imgPrefix) {
     kansas: [1400, 900],
     colorado: [1400, 900],
     nevada: [680, 1000],
-    california: [620, 851],
+    california: [323, 473],
     texas: [596, 482],
   }[slug] || [1400, 900];
   const [heroW, heroH] = heroDims;
@@ -247,6 +247,12 @@ const LICENSE = {
 
 /** Shown under the agent bar verify button when the state lookup needs extra steps. */
 const LICENSE_VERIFY_HINT = {
+  CA: {
+    en:
+      "On CDI’s license status page, search by license number 4586251 or the name Julie Braunsroth.",
+    es:
+      "En la página de estado de licencia del CDI, busque por el número de licencia 4586251 o el nombre Julie Braunsroth.",
+  },
   TX: {
     en:
       "On TDI’s site, open Search for an individual (not business). Enter Julie Braunsroth and Texas license #3561085.",
@@ -282,7 +288,7 @@ function stateName(code, lang) {
 function heroVersion(slug) {
   if (slug === "ohio") return "map-seal-v12";
   if (slug === "new-mexico" || slug === "south-carolina" || slug === "south-dakota") return "map-seal-v1";
-  if (slug === "california") return "map-seal-v3";
+  if (slug === "california") return "map-seal-v4";
   if (slug === "texas") return "map-seal-v5";
   return "map-seal-v11";
 }
@@ -1090,6 +1096,24 @@ const WHY_FINAL_EXPENSE_TOC = {
 
 /** State-specific “why final expense” body copy (probate / paying before the estate is open). */
 const WHY_FINAL_EXPENSE = {
+  CA: {
+    en: {
+      paragraphs: [
+        "When someone dies in California, money in bank accounts and other assets that were only in that person’s name often cannot be used by the family right away. In many cases a personal representative must be appointed through probate in the county where the person lived, and that court process often takes months—not a few days.",
+        "Funeral homes and cemeteries typically need payment around the time of service. Many families pay those bills out of pocket while they wait for the estate to move through probate.",
+        "Final expense whole life insurance pays the named beneficiary after the carrier approves the claim. That payment does not have to wait on probate, so the family can use it for the funeral, travel, unpaid bills, or other costs that cannot wait.",
+      ],
+      cta: "Get a free quote",
+    },
+    es: {
+      paragraphs: [
+        "Cuando alguien fallece en California, el dinero en cuentas bancarias y otros bienes que estaban solo a su nombre por lo general no puede usarlos la familia de inmediato. En muchos casos tiene que nombrarse un representante personal por el proceso de sucesión (probate) en el condado donde vivía la persona, y ese trámite judicial suele tardar meses, no unos días.",
+        "Las funerarias y los cementerios normalmente cobran cerca de la fecha del servicio. Muchas familias pagan esas facturas de su bolsillo mientras esperan que avance la sucesión.",
+        "El seguro de gastos finales (vida entera) paga al beneficiario designado después de que la aseguradora aprueba el reclamo. Ese pago no tiene que esperar a la sucesión, así que la familia puede usarlo para el funeral, viajes, cuentas pendientes u otros gastos que no pueden esperar.",
+      ],
+      cta: "Cotización gratuita",
+    },
+  },
   TX: {
     en: {
       paragraphs: [

@@ -18,6 +18,7 @@ const BLOG_SRC = path.join(ROOT, "img", "blog-generated");
 const JOBS = [
   // Homepage (existing)
   { src: "img/state-heroes/texas-hero.png", maxWidth: 596, maxHeight: 482, keepPng: true, outBase: "texas-hero" },
+  { src: "img/state-heroes/california-hero.png", maxWidth: 620, maxHeight: 851, keepPng: true, outBase: "california-hero" },
   { src: "img/business-man.png", maxWidth: 681, maxHeight: 1024, keepPng: true },
   { src: "img/nav-life-rana.jpg", maxWidth: 1024, maxHeight: 819, outBase: "nav-life-rana" },
   { src: "img/nav-life-tejo.jpg", maxWidth: 1024, maxHeight: 768, outBase: "nav-life-tejo" },

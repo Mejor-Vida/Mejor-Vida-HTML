@@ -3301,5 +3301,14 @@
     "webp": "img/opt/texas-hero.webp",
     "fallback": "img/opt/texas-hero.png",
     "keepPng": true
+  },
+  {
+    "src": "img/state-heroes/california-hero.png",
+    "base": "california-hero",
+    "width": 323,
+    "height": 473,
+    "webp": "img/opt/california-hero.webp",
+    "fallback": "img/opt/california-hero.png",
+    "keepPng": true
   }
 ]
