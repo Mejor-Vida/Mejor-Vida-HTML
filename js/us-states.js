@@ -53,22 +53,29 @@ window.MVS_US_STATES = [
   { c: 'WY', n: 'Wyoming' },
 ];
 
-/** States where Julie can quote online (producer licenses). */
-window.MVS_LICENSED_STATE_CODES = ['NE', 'KS', 'CO', 'NV', 'OH', 'NM', 'SC', 'SD'];
+/** States where Mejor Vida can quote online (active producer licenses). */
+window.MVS_LICENSED_STATE_CODES = [
+  'AZ', 'CA', 'CO', 'KS', 'MI', 'NE', 'NV', 'NM', 'OH', 'SC', 'SD', 'TX', 'VA',
+];
 
 /**
  * Quote / landing residence picker: licensed states + Other.
  * Prefer this over MVS_US_STATES for public quote flows.
  */
 window.MVS_QUOTE_STATES = [
-  { c: 'NE', n: 'Nebraska' },
-  { c: 'KS', n: 'Kansas' },
+  { c: 'AZ', n: 'Arizona' },
+  { c: 'CA', n: 'California' },
   { c: 'CO', n: 'Colorado' },
+  { c: 'KS', n: 'Kansas' },
+  { c: 'MI', n: 'Michigan' },
+  { c: 'NE', n: 'Nebraska' },
   { c: 'NV', n: 'Nevada' },
-  { c: 'OH', n: 'Ohio' },
   { c: 'NM', n: 'New Mexico' },
+  { c: 'OH', n: 'Ohio' },
   { c: 'SC', n: 'South Carolina' },
   { c: 'SD', n: 'South Dakota' },
+  { c: 'TX', n: 'Texas' },
+  { c: 'VA', n: 'Virginia' },
   { c: 'OTHER', n: 'Other state', nEs: 'Otro estado' },
 ];
 
@@ -79,12 +86,5 @@ window.MVS_isLicensedQuoteState = function (code) {
 
 window.MVS_isOutOfStateQuoteSelection = function (code) {
   var c = String(code || '').trim().toUpperCase();
-  if (!c) return false;
-  return !window.MVS_isLicensedQuoteState(c);
-};
-
-window.MVS_quoteStateLabel = function (row, lang) {
-  if (!row) return '';
-  if (row.c === 'OTHER' && lang === 'es' && row.nEs) return row.nEs;
-  return row.n || row.c || '';
+  return c === 'OTHER' || (!!c && !window.MVS_isLicensedQuoteState(c));
 };

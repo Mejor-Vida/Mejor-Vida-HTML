@@ -3,60 +3,60 @@
   "capturedAt": "2026-10-09",
   "note": "State.Average figures for coverage pages + map tooltips.",
   "states": {
-    "NE": {
-      "name": "Nebraska",
-      "sourceUrl": "https://www.funeralocity.com/average-funeral-price/ne",
+    "AZ": {
+      "name": "Arizona",
+      "sourceUrl": "https://www.funeralocity.com/average-funeral-price/az",
       "fullBurial": {
-        "Average": 8620,
-        "Min": 6300,
-        "Max": 12340,
-        "Rank": 22
+        "Average": 7784,
+        "Min": 5580,
+        "Max": 10600,
+        "Rank": 46
       },
       "immediateBurial": {
-        "Average": 5467,
+        "Average": 4480,
         "Min": 3295,
-        "Max": 8118,
-        "Rank": 9
+        "Max": 6500,
+        "Rank": 49
       },
       "fullCremation": {
-        "Average": 6530,
-        "Min": 3860,
-        "Max": 10455,
-        "Rank": 16
+        "Average": 5372,
+        "Min": 3060,
+        "Max": 8035,
+        "Rank": 49
       },
       "directCremation": {
-        "Average": 2958,
-        "Min": 995,
-        "Max": 5100,
-        "Rank": 4
+        "Average": 1490,
+        "Min": 400,
+        "Max": 2895,
+        "Rank": 49
       }
     },
-    "KS": {
-      "name": "Kansas",
-      "sourceUrl": "https://www.funeralocity.com/average-funeral-price/ks",
+    "CA": {
+      "name": "California",
+      "sourceUrl": "https://www.funeralocity.com/average-funeral-price/ca",
       "fullBurial": {
-        "Average": 8640,
-        "Min": 5935,
-        "Max": 21475,
-        "Rank": 21
+        "Average": 8050,
+        "Min": 5545,
+        "Max": 12845,
+        "Rank": 40
       },
       "immediateBurial": {
-        "Average": 5374,
-        "Min": 2950,
-        "Max": 8360,
-        "Rank": 13
+        "Average": 4709,
+        "Min": 2900,
+        "Max": 9300,
+        "Rank": 44
       },
       "fullCremation": {
-        "Average": 6452,
-        "Min": 3635,
-        "Max": 19300,
-        "Rank": 19
+        "Average": 5547,
+        "Min": 3070,
+        "Max": 9955,
+        "Rank": 46
       },
       "directCremation": {
-        "Average": 2553,
-        "Min": 695,
-        "Max": 7245,
-        "Rank": 12
+        "Average": 1647,
+        "Min": 438,
+        "Max": 4450,
+        "Rank": 46
       }
     },
     "CO": {
@@ -87,6 +87,90 @@
         "Rank": 41
       }
     },
+    "KS": {
+      "name": "Kansas",
+      "sourceUrl": "https://www.funeralocity.com/average-funeral-price/ks",
+      "fullBurial": {
+        "Average": 8640,
+        "Min": 5935,
+        "Max": 21475,
+        "Rank": 21
+      },
+      "immediateBurial": {
+        "Average": 5374,
+        "Min": 2950,
+        "Max": 8360,
+        "Rank": 13
+      },
+      "fullCremation": {
+        "Average": 6452,
+        "Min": 3635,
+        "Max": 19300,
+        "Rank": 19
+      },
+      "directCremation": {
+        "Average": 2553,
+        "Min": 695,
+        "Max": 7245,
+        "Rank": 12
+      }
+    },
+    "MI": {
+      "name": "Michigan",
+      "sourceUrl": "https://www.funeralocity.com/average-funeral-price/mi",
+      "fullBurial": {
+        "Average": 8950,
+        "Min": 5915,
+        "Max": 12105,
+        "Rank": 13
+      },
+      "immediateBurial": {
+        "Average": 5004,
+        "Min": 3395,
+        "Max": 8800,
+        "Rank": 31
+      },
+      "fullCremation": {
+        "Average": 6548,
+        "Min": 3705,
+        "Max": 9870,
+        "Rank": 14
+      },
+      "directCremation": {
+        "Average": 2264,
+        "Min": 695,
+        "Max": 4495,
+        "Rank": 25
+      }
+    },
+    "NE": {
+      "name": "Nebraska",
+      "sourceUrl": "https://www.funeralocity.com/average-funeral-price/ne",
+      "fullBurial": {
+        "Average": 8620,
+        "Min": 6300,
+        "Max": 12340,
+        "Rank": 22
+      },
+      "immediateBurial": {
+        "Average": 5467,
+        "Min": 3295,
+        "Max": 8118,
+        "Rank": 9
+      },
+      "fullCremation": {
+        "Average": 6530,
+        "Min": 3860,
+        "Max": 10455,
+        "Rank": 16
+      },
+      "directCremation": {
+        "Average": 2958,
+        "Min": 995,
+        "Max": 5100,
+        "Rank": 4
+      }
+    },
     "NV": {
       "name": "Nevada",
       "sourceUrl": "https://www.funeralocity.com/average-funeral-price/nv",
@@ -115,34 +199,6 @@
         "Rank": 50
       }
     },
-    "OH": {
-      "name": "Ohio",
-      "sourceUrl": "https://www.funeralocity.com/average-funeral-price/oh",
-      "fullBurial": {
-        "Average": 8018,
-        "Min": 5285,
-        "Max": 11335,
-        "Rank": 42
-      },
-      "immediateBurial": {
-        "Average": 4949,
-        "Min": 2830,
-        "Max": 7908,
-        "Rank": 34
-      },
-      "fullCremation": {
-        "Average": 5666,
-        "Min": 3335,
-        "Max": 9185,
-        "Rank": 44
-      },
-      "directCremation": {
-        "Average": 2056,
-        "Min": 575,
-        "Max": 4375,
-        "Rank": 30
-      }
-    },
     "NM": {
       "name": "New Mexico",
       "sourceUrl": "https://www.funeralocity.com/average-funeral-price/nm",
@@ -169,6 +225,34 @@
         "Min": 725,
         "Max": 3700,
         "Rank": 37
+      }
+    },
+    "OH": {
+      "name": "Ohio",
+      "sourceUrl": "https://www.funeralocity.com/average-funeral-price/oh",
+      "fullBurial": {
+        "Average": 8018,
+        "Min": 5285,
+        "Max": 11335,
+        "Rank": 42
+      },
+      "immediateBurial": {
+        "Average": 4949,
+        "Min": 2830,
+        "Max": 7908,
+        "Rank": 34
+      },
+      "fullCremation": {
+        "Average": 5666,
+        "Min": 3335,
+        "Max": 9185,
+        "Rank": 44
+      },
+      "directCremation": {
+        "Average": 2056,
+        "Min": 575,
+        "Max": 4375,
+        "Rank": 30
       }
     },
     "SC": {
@@ -227,34 +311,6 @@
         "Rank": 7
       }
     },
-    "CA": {
-      "name": "California",
-      "sourceUrl": "https://www.funeralocity.com/average-funeral-price/ca",
-      "fullBurial": {
-        "Average": 8050,
-        "Min": 5545,
-        "Max": 12845,
-        "Rank": 40
-      },
-      "immediateBurial": {
-        "Average": 4709,
-        "Min": 2900,
-        "Max": 9300,
-        "Rank": 44
-      },
-      "fullCremation": {
-        "Average": 5547,
-        "Min": 3070,
-        "Max": 9955,
-        "Rank": 46
-      },
-      "directCremation": {
-        "Average": 1647,
-        "Min": 438,
-        "Max": 4450,
-        "Rank": 46
-      }
-    },
     "TX": {
       "name": "Texas",
       "sourceUrl": "https://www.funeralocity.com/average-funeral-price/tx",
@@ -283,32 +339,32 @@
         "Rank": 29
       }
     },
-    "AZ": {
-      "name": "Arizona",
-      "sourceUrl": "https://www.funeralocity.com/average-funeral-price/az",
+    "VA": {
+      "name": "Virginia",
+      "sourceUrl": "https://www.funeralocity.com/average-funeral-price/va",
       "fullBurial": {
-        "Average": 7784,
-        "Min": 5580,
-        "Max": 10600,
-        "Rank": 46
+        "Average": 8321,
+        "Min": 5790,
+        "Max": 14045,
+        "Rank": 30
       },
       "immediateBurial": {
-        "Average": 4480,
+        "Average": 5176,
         "Min": 3295,
-        "Max": 6500,
-        "Rank": 49
+        "Max": 9300,
+        "Rank": 22
       },
       "fullCremation": {
-        "Average": 5372,
-        "Min": 3060,
-        "Max": 8035,
-        "Rank": 49
+        "Average": 6128,
+        "Min": 3625,
+        "Max": 11450,
+        "Rank": 28
       },
       "directCremation": {
-        "Average": 1490,
-        "Min": 400,
-        "Max": 2895,
-        "Rank": 49
+        "Average": 2515,
+        "Min": 775,
+        "Max": 5480,
+        "Rank": 15
       }
     }
   }

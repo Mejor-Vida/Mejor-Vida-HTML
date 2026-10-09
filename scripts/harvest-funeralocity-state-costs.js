@@ -7,6 +7,7 @@ const fs = require("fs");
 const path = require("path");
 
 const ROOT = path.join(__dirname, "..");
+const { LICENSED_STATE_CODES } = require("../lib/licensed-states");
 const OUT_DIR = path.join(ROOT, "integrations/knowledge/Funeralocity_State_Costs");
 const OUT_JSON = path.join(OUT_DIR, "all-states-detailed.json");
 const OUT_JS = path.join(ROOT, "js/final-expense-state-costs.js");
@@ -230,7 +231,7 @@ async function main() {
   fs.writeFileSync(OUT_JSON, JSON.stringify(all, null, 2));
   writeEstimatorJs(estimator);
   // Keep licensed-state summary for coverage pages + map tooltips
-  const licensed = { NE: 1, KS: 1, CO: 1, NV: 1, OH: 1, NM: 1, SC: 1, SD: 1, CA: 1, TX: 1, AZ: 1 };
+  const licensed = Object.fromEntries(LICENSED_STATE_CODES.map((code) => [code, 1]));
   const summary = {
     source: "Funeralocity API",
     capturedAt: all.capturedAt.slice(0, 10),

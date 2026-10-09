@@ -101,6 +101,29 @@
       verifyLabelEn: "Verify in Arizona (NAIC)",
       verifyLabelEs: "Verificar en Arizona (NAIC)",
     },
+    MI: {
+      nameEn: "Michigan",
+      nameEs: "Michigan",
+      typeEn: "Non-resident producer",
+      typeEs: "Productora no residente",
+      number: "1507864",
+      pdfPending: true,
+      verifyUrl: "https://difs.state.mi.us/locators?searchtype=Insurance",
+      verifyLabelEn: "Verify in Michigan (DIFS)",
+      verifyLabelEs: "Verificar en Michigan (DIFS)",
+    },
+    VA: {
+      nameEn: "Virginia",
+      nameEs: "Virginia",
+      typeEn: "Non-resident producer",
+      typeEs: "Productora no residente",
+      number: "21695431",
+      pdfPending: true,
+      verifyUrl:
+        "https://www.scc.virginia.gov/boi/consumerinquiry/search.aspx?searchType=agent",
+      verifyLabelEn: "Verify in Virginia (SCC)",
+      verifyLabelEs: "Verificar en Virginia (SCC)",
+    },
   };
 
   function isEs() {

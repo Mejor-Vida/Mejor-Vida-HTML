@@ -3312,12 +3312,30 @@
     "keepPng": true
   },
   {
+    "src": "img/state-heroes/michigan-hero.png",
+    "base": "michigan-hero",
+    "width": 1400,
+    "height": 900,
+    "webp": "img/opt/michigan-hero.webp",
+    "fallback": "img/opt/michigan-hero.jpg",
+    "keepPng": false
+  },
+  {
     "src": "img/state-heroes/arizona-hero.png",
     "base": "arizona-hero",
     "width": 1400,
     "height": 900,
     "webp": "img/opt/arizona-hero.webp",
     "fallback": "img/opt/arizona-hero.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/state-heroes/virginia-hero.png",
+    "base": "virginia-hero",
+    "width": 1400,
+    "height": 900,
+    "webp": "img/opt/virginia-hero.webp",
+    "fallback": "img/opt/virginia-hero.jpg",
     "keepPng": false
   }
 ]

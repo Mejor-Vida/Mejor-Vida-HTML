@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
- * Nebraska-style AZ hero: wide blue gradient + county map + seal (opaque JPG asset).
- * Usage: node scripts/build-arizona-map-svg.js && node scripts/build-arizona-state-hero.js
+ * @deprecated Use node scripts/build-county-map-seal-hero.js arizona
+ * Nebraska-style AZ hero: full-bleed county map + seal (opaque asset).
  */
 const fs = require("fs");
 const path = require("path");

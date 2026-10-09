@@ -128,6 +128,28 @@
       fullCremation: 5372,
       directCremation: 1490,
     },
+    MI: {
+      code: "MI",
+      slug: "michigan",
+      nameEn: "Michigan",
+      nameEs: "Michigan",
+      sourceUrl: "https://www.funeralocity.com/average-funeral-price/mi",
+      fullBurial: 8950,
+      immediateBurial: 5004,
+      fullCremation: 6548,
+      directCremation: 2264,
+    },
+    VA: {
+      code: "VA",
+      slug: "virginia",
+      nameEn: "Virginia",
+      nameEs: "Virginia",
+      sourceUrl: "https://www.funeralocity.com/average-funeral-price/va",
+      fullBurial: 8321,
+      immediateBurial: 5176,
+      fullCremation: 6128,
+      directCremation: 2515,
+    },
   };
 
   var LICENSE = {
@@ -196,6 +218,16 @@
       typeEs: "Productora no residente",
       number: "21695431",
       pdf: "julie-license-az.pdf?v=20261009",
+    },
+    MI: {
+      typeEn: "Non-resident producer",
+      typeEs: "Productora no residente",
+      number: "1507864",
+    },
+    VA: {
+      typeEn: "Non-resident producer",
+      typeEs: "Productora no residente",
+      number: "21695431",
     },
   };
 

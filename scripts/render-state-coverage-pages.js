@@ -253,6 +253,21 @@ const LICENSE = {
       "https://external-lookup-web.prod.naic.org/lookup?jurisdiction=AZ&searchType=Licensee&entityType=IND&npn=21695431",
     verifyLabel: { es: "Verificar en Arizona (NAIC)", en: "Verify in Arizona (NAIC)" },
   },
+  MI: {
+    typeEs: "Productora no residente",
+    typeEn: "Non-resident producer",
+    number: "1507864",
+    verifyUrl: "https://difs.state.mi.us/locators?searchtype=Insurance",
+    verifyLabel: { es: "Verificar en Michigan (DIFS)", en: "Verify in Michigan (DIFS)" },
+  },
+  VA: {
+    typeEs: "Productora no residente",
+    typeEn: "Non-resident producer",
+    number: "21695431",
+    verifyUrl:
+      "https://www.scc.virginia.gov/boi/consumerinquiry/search.aspx?searchType=agent",
+    verifyLabel: { es: "Verificar en Virginia (SCC)", en: "Verify in Virginia (SCC)" },
+  },
 };
 
 /** Shown under the agent bar verify button when the state lookup needs extra steps. */
@@ -279,6 +294,14 @@ const LICENSE_VERIFY_HINT = {
     es:
       "En la búsqueda pública de la NAIC (no License Manager), jurisdicción Arizona · tipo Licensee · Individual. Use NPN 21695431 o apellido Braunsroth — no llene nombre, NPN y número de licencia a la vez.",
   },
+  MI: {
+    en: "On Michigan DIFS, search for Julie Braunsroth or license number 1507864.",
+    es: "En DIFS de Michigan, busque Julie Braunsroth o el número de licencia 1507864.",
+  },
+  VA: {
+    en: "On Virginia SCC agent search, look up Julie Braunsroth or NPN 21695431.",
+    es: "En la búsqueda de agentes de Virginia (SCC), busque Julie Braunsroth o NPN 21695431.",
+  },
 };
 
 const SLUGS = {
@@ -293,6 +316,8 @@ const SLUGS = {
   CA: "california",
   TX: "texas",
   AZ: "arizona",
+  MI: "michigan",
+  VA: "virginia",
 };
 
 const NAME_ES = {
@@ -311,7 +336,9 @@ function heroVersion(slug) {
   if (slug === "new-mexico" || slug === "south-carolina" || slug === "south-dakota") return "map-seal-v1";
   if (slug === "california") return "map-seal-v4";
   if (slug === "texas") return "map-seal-v5";
-  if (slug === "arizona") return "map-seal-v3";
+  if (slug === "arizona") return "map-seal-v5";
+  if (slug === "michigan") return "map-seal-v3";
+  if (slug === "virginia") return "map-seal-v4";
   return "map-seal-v11";
 }
 
@@ -1778,8 +1805,8 @@ function renderEs(code) {
 <link href="${prefix}bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
 <link href="${prefix}css/quote-flow-shared.css?v=20260905-search" rel="stylesheet"/>
 <link href="${prefix}css/site-footer.css?v=20260721-lip-page" rel="stylesheet"/>
-<link href="${prefix}css/state-coverage.css?v=20261009-expense-links" rel="stylesheet"/>
-<link href="${prefix}css/mvi-licensing-map.css?v=20261009-tx-cert" rel="stylesheet"/>
+<link href="${prefix}css/state-coverage.css?v=20261009-hero-bleed" rel="stylesheet"/>
+<link href="${prefix}css/mvi-licensing-map.css?v=20261009-mi-va" rel="stylesheet"/>
 <link href="${prefix}css/mvi-assistant-widget.css?v=20260808-chat-sm" rel="stylesheet"/>
 <link href="${prefix}css/fontawesome-mvi.min.css?v=20260723-brands-fix" rel="stylesheet"/>
 <link href="${prefix}css/site-header.css?v=20260723-ver-precios-gold" rel="stylesheet"/>
@@ -1843,7 +1870,7 @@ ${loadFooterEs()}
 <script defer src="${prefix}bootstrap/js/bootstrap.bundle.min.js"></script>
 <script defer src="${prefix}script.js"></script>
 <script defer src="${prefix}js/mvi-nav-questions.js?v=20260828-family"></script>
-<script defer src="${prefix}js/mvi-licensing-map.js?v=20261009-tx-cert"></script>
+<script defer src="${prefix}js/mvi-licensing-map.js?v=20261009-mi-va"></script>
 <div data-api-url="/api/website-chat" id="mvi-assistant-root"></div>
 <script defer src="${prefix}js/website-assistant-widget.js"></script>
 </body>
@@ -1880,8 +1907,8 @@ function renderEn(code) {
 <link href="${root}bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
 <link href="${root}css/quote-flow-shared.css?v=20260905-search" rel="stylesheet"/>
 <link href="${root}css/site-footer.css?v=20260721-lip-page" rel="stylesheet"/>
-<link href="${root}css/state-coverage.css?v=20261009-expense-links" rel="stylesheet"/>
-<link href="${root}css/mvi-licensing-map.css?v=20261009-tx-cert" rel="stylesheet"/>
+<link href="${root}css/state-coverage.css?v=20261009-hero-bleed" rel="stylesheet"/>
+<link href="${root}css/mvi-licensing-map.css?v=20261009-mi-va" rel="stylesheet"/>
 <link href="${root}css/mvi-assistant-widget.css?v=20260808-chat-sm" rel="stylesheet"/>
 <link href="${root}css/fontawesome-mvi.min.css?v=20260723-brands-fix" rel="stylesheet"/>
 <link href="${root}css/site-header.css?v=20260723-ver-precios-gold" rel="stylesheet"/>
@@ -1944,7 +1971,7 @@ ${loadFooterEn()}
 <script defer src="${root}bootstrap/js/bootstrap.bundle.min.js"></script>
 <script defer src="${root}script.js"></script>
 <script defer src="${root}js/mvi-nav-questions.js?v=20260828-family"></script>
-<script defer src="${root}js/mvi-licensing-map.js?v=20261009-tx-cert"></script>
+<script defer src="${root}js/mvi-licensing-map.js?v=20261009-mi-va"></script>
 <div data-api-url="/api/website-chat" id="mvi-assistant-root"></div>
 <script defer src="${root}js/website-assistant-widget.js"></script>
 </body>

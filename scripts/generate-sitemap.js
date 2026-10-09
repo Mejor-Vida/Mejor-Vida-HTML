@@ -134,6 +134,8 @@ const STATIC_PAGES = [
   { loc: "/estados/arizona.html", priority: "0.84" },
   { loc: "/estados/california.html", priority: "0.84" },
   { loc: "/estados/texas.html", priority: "0.84" },
+  { loc: "/estados/michigan.html", priority: "0.84" },
+  { loc: "/estados/virginia.html", priority: "0.84" },
 ];
 
 /** Standalone July articles redirect to the weekly digest — omit from sitemap. */

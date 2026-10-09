@@ -1205,13 +1205,13 @@
   position: absolute;
   /* Full hero height so the top strip behind WhatsApp matches the map blue */
   inset: 0 0 0 auto;
-  width: min(58%, 44rem);
+  width: min(62%, 48rem);
   pointer-events: none;
   z-index: 1;
   background: var(--sc-hero-map);
   /* Fade image out toward the left into the darker blue */
-  -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.15) 18%, #000 48%, #000 100%);
-  mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.15) 18%, #000 48%, #000 100%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.12) 14%, #000 42%, #000 100%);
+  mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.12) 14%, #000 42%, #000 100%);
 }
 
 .sc-hero-visual picture,
@@ -1219,7 +1219,7 @@
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
   object-position: right center;
 }
 
