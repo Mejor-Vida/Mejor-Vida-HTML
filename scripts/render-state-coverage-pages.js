@@ -259,6 +259,10 @@ const LICENSE_VERIFY_HINT = {
     es:
       "En el sitio de TDI, abra Buscar una persona (no empresa). Ingrese Julie Braunsroth y la licencia de Texas #3561085.",
   },
+  OH: {
+    en: "On Ohio’s agent search, look up Julie Braunsroth or license number 1777665.",
+    es: "En la búsqueda de agentes de Ohio, busque Julie Braunsroth o el número de licencia 1777665.",
+  },
 };
 
 const SLUGS = {
@@ -1094,6 +1098,28 @@ const WHY_FINAL_EXPENSE_TOC = {
   es: "la forma más sencilla de proteger a su familia",
 };
 
+/** Default 4th-bucket copy — state name swapped; CA/TX keep hand-tuned openings below. */
+function whyFinalExpenseDefaultPack(nameEn, nameEs) {
+  return {
+    en: {
+      paragraphs: [
+        `When someone dies in ${nameEn}, money in bank accounts and other assets that were only in that person’s name usually cannot be spent by the family right away. An executor or administrator must be appointed through probate in the county where the person lived, and that court process often takes months—not a few days.`,
+        "Funeral homes and cemeteries typically need payment around the time of service. Many families pay those bills out of pocket while they wait for the estate to move through probate.",
+        "Final expense whole life insurance pays the named beneficiary after the carrier approves the claim. That payment does not have to wait on probate, so the family can use it for the funeral, travel, unpaid bills, or other costs that cannot wait.",
+      ],
+      cta: "Get a free quote",
+    },
+    es: {
+      paragraphs: [
+        `Cuando alguien fallece en ${nameEs}, el dinero en cuentas bancarias y otros bienes que estaban solo a su nombre por lo general no puede usarlos la familia de inmediato. Tiene que nombrarse un albacea o administrador por el proceso de sucesión (probate) en el condado donde vivía la persona, y ese trámite judicial suele tardar meses, no unos días.`,
+        "Las funerarias y los cementerios normalmente cobran cerca de la fecha del servicio. Muchas familias pagan esas facturas de su bolsillo mientras esperan que avance la sucesión.",
+        "El seguro de gastos finales (vida entera) paga al beneficiario designado después de que la aseguradora aprueba el reclamo. Ese pago no tiene que esperar a la sucesión, así que la familia puede usarlo para el funeral, viajes, cuentas pendientes u otros gastos que no pueden esperar.",
+      ],
+      cta: "Cotización gratuita",
+    },
+  };
+}
+
 /** State-specific “why final expense” body copy (probate / paying before the estate is open). */
 const WHY_FINAL_EXPENSE = {
   CA: {
@@ -1133,6 +1159,11 @@ const WHY_FINAL_EXPENSE = {
     },
   },
 };
+
+for (const code of Object.keys(SLUGS)) {
+  if (WHY_FINAL_EXPENSE[code]) continue;
+  WHY_FINAL_EXPENSE[code] = whyFinalExpenseDefaultPack(stateName(code, "en"), stateName(code, "es"));
+}
 
 function whyFinalExpenseBlock(code, lang, prefix) {
   const pack = WHY_FINAL_EXPENSE[code];

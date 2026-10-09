@@ -6,7 +6,7 @@ alwaysApply: true
 
 # State coverage page layout (locked)
 
-California (`estados/california.html` + `en/states/california.html`) is the **canonical state page** — including expense buckets (three by default, **four** when `WHY_FINAL_EXPENSE` is set for that state), large package totals after charts, and stacked deep-dive links. Every licensed-state coverage page uses this format. Texas (`estados/texas.html`) is the reference for the optional fourth bucket.
+California (`estados/california.html` + `en/states/california.html`) is the **canonical state page** — including **four** expense buckets (funeral home → cemetery → other → why final expense), large package totals after charts, and stacked deep-dive links. Every licensed-state coverage page uses this format. `WHY_FINAL_EXPENSE` in `render-state-coverage-pages.js` fills all states in `SLUGS` (CA/TX hand-tuned openings; others use `whyFinalExpenseDefaultPack`).
 
 Do not invent a denser hero, put package totals above the charts, widen the cost tables, inline link pairs with `·`, or repeat the same outbound teaching-page URL in more than one bucket.
 
@@ -14,7 +14,7 @@ Do not invent a denser hero, put package totals above the charts, widen the cost
 
 1. **Older-Adult-First hero** (`sc-hero--answer-first`) — H1, one short lead, **two** bullets max, one CTA. No cost numbers, carrier lists, or long how-it-works in the hero.
 2. **Hero agent bar** — this state’s license only (photo, name, license #, NPN, View license, Verify). Full roster stays on `licencias.html` / `en/licenses.html`.
-3. **Funeral / final expense costs** — one H2 with **three expense buckets**, plus an optional **fourth** (see below)
+3. **Funeral / final expense costs** — one H2 with **four expense buckets** (see below)
 4. **Carriers** Mejor Vida can compare in that state
 5. **How final expense works** (short bullets)
 6. **Navy quote band**
@@ -38,11 +38,11 @@ Built by `expenseCostSections()` + `whyFinalExpenseBlock()` in `scripts/render-s
 
 Under **How much does a funeral cost in {state}?** / **¿Cuánto cuesta un funeral en {state}?**:
 
-0. **Overview TOC** — short line that the bill has more than one part, then an ordered list linking to each bucket (**three** or **four** items when `WHY_FINAL_EXPENSE[code]` exists)
+0. **Overview TOC** — short line that the bill has more than one part, then an ordered list linking to each of the **four** buckets
 1. **Funeral home costs** — statewide Funeralocity package charts; package total **after** each table in large type; source + third-party note; then **one** stacked link list (`.sc-expense-links`) to the funeral-cost guide **and** the estimator
 2. **Cemetery: plot, vault, and marker** — brief plain-language definitions of each; opening/closing called out as separate; published plot examples / resale cards when we have state data. **No** second link to the funeral-cost guide
 3. **Other expenses** — short list (credit cards, mortgage/rent, medical bills, small loans); then a stacked `.sc-expense-links` list to `blog/que-son-gastos-finales.html` / `en/what-are-final-expenses.html` and the coverage-sizing page — do **not** expand into a full essay here
-4. **Why final expense insurance** (only when `WHY_FINAL_EXPENSE[code]` is defined) — `.sc-expense-block--why`, id `why-final-expense` / `por-que-gastos-finales`. Short state-specific copy (probate delay, funeral due at time of service, beneficiary payment vs waiting on the estate). **One** primary CTA button to `quote.html` (`.sc-expense-why-cta`). Do not turn this into a long article.
+4. **Why final expense insurance** — `.sc-expense-block--why`, id `why-final-expense` / `por-que-gastos-finales`. Short state-specific copy (probate delay, funeral due at time of service, beneficiary payment vs waiting on the estate). **One** primary CTA button to `quote.html` (`.sc-expense-why-cta`). Do not turn this into a long article.
 
 ### Fourth bucket — locked TOC labels (family protection, not probate in the TOC)
 
