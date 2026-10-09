@@ -108,6 +108,11 @@ function stateHero(code, lang, prefix, imgPrefix) {
   const verifyHref = lic.verifyUrl
     ? lic.verifyUrl
     : `https://external-lookup-web.prod.naic.org/lookup?jurisdiction=${esc(code)}&amp;searchType=Licensee&amp;entityType=IND&amp;npn=${NPN}`;
+  const verifyHintPack = LICENSE_VERIFY_HINT[code];
+  const verifyHint = verifyHintPack ? (lang === "es" ? verifyHintPack.es : verifyHintPack.en) : "";
+  const verifyHintHtml = verifyHint
+    ? `<p class="sc-hero-verify-hint">${esc(verifyHint)}</p>`
+    : "";
   const julieAlt =
     lang === "es" ? "Julie Braunsroth, agente de seguros" : "Julie Braunsroth, insurance agent";
   const agentBarId = lang === "es" ? "licencia" : "license";
@@ -146,9 +151,12 @@ ${bulletHtml}
           <p class="sc-hero-agent-npn mb-0">NPN #${NPN}</p>
         </div>
       </div>
-      <div class="sc-hero-agent-actions">
-        <button type="button" class="btn btn-sm sc-hero-lic-btn" data-mvi-open-license="${esc(code)}">${esc(viewLic)}</button>
-        <a class="btn btn-sm sc-hero-lic-btn-outline" href="${verifyHref}" target="_blank" rel="noopener">${esc(naic)}</a>
+      <div class="sc-hero-agent-actions-col">
+        <div class="sc-hero-agent-actions">
+          <button type="button" class="btn btn-sm sc-hero-lic-btn" data-mvi-open-license="${esc(code)}">${esc(viewLic)}</button>
+          <a class="btn btn-sm sc-hero-lic-btn-outline" href="${verifyHref}" target="_blank" rel="noopener"${verifyHint ? ` title="${esc(verifyHint)}"` : ""}>${esc(naic)}</a>
+        </div>
+        ${verifyHintHtml}
       </div>
     </div>
   </div>
@@ -234,6 +242,16 @@ const LICENSE = {
     pdf: "julie-license-tx.pdf?v=20261009-sircon",
     verifyUrl: "https://appscenter.tdi.texas.gov/reports/p/sirconReport",
     verifyLabel: { es: "Verificar en Texas (TDI)", en: "Verify in Texas (TDI)" },
+  },
+};
+
+/** Shown under the agent bar verify button when the state lookup needs extra steps. */
+const LICENSE_VERIFY_HINT = {
+  TX: {
+    en:
+      "On TDI’s site, open Search for an individual (not business). Enter Julie Braunsroth and Texas license #3561085.",
+    es:
+      "En el sitio de TDI, abra Buscar una persona (no empresa). Ingrese Julie Braunsroth y la licencia de Texas #3561085.",
   },
 };
 

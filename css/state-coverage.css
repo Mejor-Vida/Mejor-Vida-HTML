@@ -1502,10 +1502,27 @@
   color: rgba(255, 255, 255, 0.95);
 }
 
+.sc-hero-agent-actions-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.4rem;
+  max-width: min(100%, 22rem);
+}
+
 .sc-hero-agent-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
+  justify-content: flex-end;
+}
+
+.sc-hero-verify-hint {
+  margin: 0;
+  font-size: 0.78rem;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.78);
+  text-align: right;
 }
 
 .sc-hero-lic-btn {
