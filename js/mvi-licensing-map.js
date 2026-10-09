@@ -85,9 +85,9 @@
       typeEs: "Productora no residente",
       number: "3561085",
       pdf: "julie-license-tx.pdf?v=20261009-sircon",
-      verifyUrl: "https://www.sircon.com/ComplianceExpress/Inquiry/consumerInquiry.do",
-      verifyLabelEn: "Verify on Sircon (Texas)",
-      verifyLabelEs: "Verificar en Sircon (Texas)",
+      verifyUrl: "https://appscenter.tdi.texas.gov/reports/p/sirconReport",
+      verifyLabelEn: "Verify in Texas (TDI)",
+      verifyLabelEs: "Verificar en Texas (TDI)",
     },
   };
 
