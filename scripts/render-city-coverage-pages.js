@@ -36,7 +36,7 @@ const FOOTER_ES = path.join(ROOT, "includes/site-footer-inner.html");
 const FOOTER_EN = path.join(ROOT, "includes/en-site-footer.html");
 
 const NPN = "21695431";
-const CSS_VER = "20260929-gpl-name";
+const CSS_VER = "20261009-calc-coverage";
 
 const LICENSE = {
   NE: {
@@ -68,6 +68,9 @@ const LICENSE = {
     typeEn: "Non-resident producer",
     number: "1777665",
     code: "OH",
+    verifyUrl:
+      "https://gateway.insurance.ohio.gov/UI/ODI.Agent.Public.UI/AgentSearch.mvc/DisplaySearch",
+    verifyLabel: { es: "Verificar en Ohio", en: "Verify in Ohio" },
   },
   NM: {
     typeEs: "Productora no residente",
@@ -92,6 +95,21 @@ const LICENSE = {
     typeEn: "Non-resident producer",
     number: "4586251",
     code: "CA",
+    verifyUrl: "https://www.insurance.ca.gov/license-status/",
+    verifyLabel: { es: "Verificar en California (CDI)", en: "Verify in California (CDI)" },
+  },
+};
+
+const LICENSE_VERIFY_HINT = {
+  CA: {
+    en:
+      "On CDI’s license status page, search by license number 4586251 or the name Julie Braunsroth.",
+    es:
+      "En la página de estado de licencia del CDI, busque por el número de licencia 4586251 o el nombre Julie Braunsroth.",
+  },
+  OH: {
+    en: "On Ohio’s agent search, look up Julie Braunsroth or license number 1777665.",
+    es: "En la búsqueda de agentes de Ohio, busque Julie Braunsroth o el número de licencia 1777665.",
   },
 };
 
@@ -174,36 +192,48 @@ function licenseModal(lang) {
 
 function cityHero(lang, root, quoteHref, city) {
   const lic = LICENSE[city.stateCode];
+  const stateName = lang === "es" ? city.stateNameEs : city.stateNameEn;
+  const cityName = lang === "es" ? city.nameEs : city.nameEn;
   const title =
     lang === "es"
-      ? `Seguro de gastos finales y de entierro en ${city.nameEs}`
-      : `Final expense and burial insurance in ${city.nameEn}`;
-  const bullets = lang === "es" ? city.bulletsEs : city.bulletsEn;
-  const ctaLabel = lang === "es" ? "Cotización gratuita" : "Free quote";
-  const ctaSub =
-    (lang === "es" ? city.ctaSubEs : city.ctaSubEn) ||
-    (lang === "es"
-      ? "Compare precios de varias compañías. La tabla de primas es ilustrativa, no una cotización oficial."
-      : "Compare prices from multiple companies. The premium table is illustrative, not an official quote.");
-  const scheduleHref = lang === "es" ? "/schedule-julie.html" : "/en/schedule-julie.html";
+      ? `Seguro de gastos finales y de entierro en ${cityName}`
+      : `Final expense and burial insurance in ${cityName}`;
+
+  const lead =
+    lang === "es"
+      ? `Mejor Vida Seguros cotiza seguro de vida entera para funeral, cremación y deudas finales a residentes de ${esc(cityName)}.`
+      : `Mejor Vida Insurance quotes whole life coverage for funeral, cremation, and final bills for residents of ${esc(cityName)}.`;
+
+  const heroBullets =
+    lang === "es"
+      ? [
+          "Cotización gratuita según su edad, salud y presupuesto.",
+          `Licenciada en ${esc(stateName)} · NPN #${NPN}.`,
+        ]
+      : [
+          "Free quote based on your age, health, and budget.",
+          `Licensed in ${esc(stateName)} · NPN #${NPN}.`,
+        ];
+
+  const ctaLabel = lang === "es" ? "Cotización gratuita" : "Get a free quote";
   const agentLabel =
-    lang === "es" ? `Agente licenciada en ${city.stateNameEs}` : `Licensed agent in ${city.stateNameEn}`;
+    lang === "es" ? `Agente licenciada en ${stateName}` : `Licensed agent in ${stateName}`;
   const viewLic = lang === "es" ? `Ver licencia (${city.stateCode})` : `View license (${city.stateCode})`;
-  const ohio = city.stateCode === "OH";
-  const facebookPhoto = ohio || city.stateCode === "NM" || city.stateCode === "SC" || city.stateCode === "SD";
-  const naic = ohio
+  const naic = lic.verifyLabel
     ? lang === "es"
-      ? "Verificar en Ohio"
-      : "Verify in Ohio"
+      ? lic.verifyLabel.es
+      : lic.verifyLabel.en
     : lang === "es"
       ? "Verificar en NAIC"
       : "Verify on NAIC";
-  const verifyHref = ohio
-    ? "https://gateway.insurance.ohio.gov/UI/ODI.Agent.Public.UI/AgentSearch.mvc/DisplaySearch"
+  const verifyHref = lic.verifyUrl
+    ? lic.verifyUrl
     : `https://external-lookup-web.prod.naic.org/lookup?jurisdiction=${esc(city.stateCode)}&amp;searchType=Licensee&amp;entityType=IND&amp;npn=${NPN}`;
-  const photoBase = facebookPhoto ? "julie-facebook-headshot" : "julie-omaha-portrait";
-  const photoVer = facebookPhoto ? "20260928" : "portrait-v1";
-  const basedIn = lang === "es" ? "Con sede en Lincoln, NE" : "Based in Lincoln, NE";
+  const verifyHintPack = LICENSE_VERIFY_HINT[city.stateCode];
+  const verifyHint = verifyHintPack ? (lang === "es" ? verifyHintPack.es : verifyHintPack.en) : "";
+  const verifyHintHtml = verifyHint
+    ? `<p class="sc-hero-verify-hint">${esc(verifyHint)}</p>`
+    : "";
   const julieAlt =
     lang === "es" ? "Julie Braunsroth, agente de seguros" : "Julie Braunsroth, insurance agent";
   const agentBarId = lang === "es" ? "licencia" : "license";
@@ -211,51 +241,49 @@ function cityHero(lang, root, quoteHref, city) {
   const heroJpg = `${root}img/opt/${city.heroFile}.jpg?v=${city.heroVer}`;
   const caption = lang === "es" ? city.heroCaptionEs : city.heroCaptionEn;
   const extraClass = city.heroClass ? ` ${city.heroClass}` : "";
+  const bulletHtml = heroBullets.map((b) => `<li>${b}</li>`).join("\n");
 
-  return `<section class="sc-hero sc-hero--city${extraClass}" aria-label="${esc(title)}">
+  return `<section class="sc-hero sc-hero--answer-first sc-hero--city${extraClass}" aria-label="${esc(title)}">
   <div class="sc-hero-visual" aria-hidden="true">
     <picture>
       <source type="image/webp" srcset="${heroWebp}"/>
-      <img src="${heroJpg}" alt="" width="${city.heroW}" height="${city.heroH}" decoding="async" fetchpriority="high"/>
+      <img src="${heroJpg}" alt="${esc(caption)}" width="${city.heroW}" height="${city.heroH}" decoding="async" fetchpriority="high"/>
     </picture>
   </div>
   <div class="sc-hero-shade" aria-hidden="true"></div>
   <div class="container sc-hero-inner">
     <div class="sc-hero-copy">
       <h1 class="sc-hero-title">${esc(title)}</h1>
-      <ul class="sc-hero-bullets">
-${bullets.map((b) => `<li>${b}</li>`).join("\n")}
+      <p class="sc-hero-lead">${lead}</p>
+      <ul class="sc-hero-bullets sc-hero-bullets--short">
+${bulletHtml}
       </ul>
-      <p class="sc-hero-cta-note">${ctaSub}</p>
       <div class="sc-hero-cta-row">
         <a class="btn sc-hero-cta" href="${quoteHref}">${esc(ctaLabel)}</a>
-        <a class="btn sc-hero-cta-secondary" href="${scheduleHref}">${
-    lang === "es" ? "Agendar una llamada" : "Schedule a call"
-  }</a>
       </div>
-      <p class="sc-hero-caption">${esc(caption)}</p>
     </div>
   </div>
   <div class="sc-hero-agentbar" id="${agentBarId}">
     <div class="container sc-hero-agentbar-inner">
       <div class="sc-hero-agent-identity">
         <picture class="sc-hero-agent-photo">
-          <source type="image/webp" srcset="${root}img/opt/${photoBase}.webp?v=${photoVer}"/>
-          <img src="${root}img/opt/${photoBase}.jpg?v=${photoVer}" alt="${esc(julieAlt)}" width="320" height="320" loading="lazy" decoding="async"/>
+          <source type="image/webp" srcset="${root}img/opt/julie-facebook-headshot.webp?v=20260928"/>
+          <img src="${root}img/opt/julie-facebook-headshot.jpg?v=20260928" alt="${esc(julieAlt)}" width="96" height="96" loading="lazy" decoding="async"/>
         </picture>
         <div class="sc-hero-agent-meta">
           <p class="sc-hero-agent-kicker mb-1">${esc(agentLabel)}</p>
           <p class="sc-hero-agent-name mb-1"><strong>Julie Braunsroth</strong> · ${esc(
             lang === "es" ? lic.typeEs : lic.typeEn
           )} · ${lang === "es" ? "Licencia" : "License"} <strong>#${esc(lic.number)}</strong></p>
-          <p class="sc-hero-agent-npn mb-0">NPN #${NPN}${
-            city.layout === "classic" && !city.hideBasedIn ? ` · ${esc(basedIn)}` : ""
-          }</p>
+          <p class="sc-hero-agent-npn mb-0">NPN #${NPN}</p>
         </div>
       </div>
-      <div class="sc-hero-agent-actions">
-        <button type="button" class="btn btn-sm sc-hero-lic-btn" data-mvi-open-license="${esc(city.stateCode)}">${esc(viewLic)}</button>
-        <a class="btn btn-sm sc-hero-lic-btn-outline" href="${verifyHref}" target="_blank" rel="noopener">${esc(naic)}</a>
+      <div class="sc-hero-agent-actions-col">
+        <div class="sc-hero-agent-actions">
+          <button type="button" class="btn btn-sm sc-hero-lic-btn" data-mvi-open-license="${esc(city.stateCode)}">${esc(viewLic)}</button>
+          <a class="btn btn-sm sc-hero-lic-btn-outline" href="${verifyHref}" target="_blank" rel="noopener"${verifyHint ? ` title="${esc(verifyHint)}"` : ""}>${esc(naic)}</a>
+        </div>
+        ${verifyHintHtml}
       </div>
     </div>
   </div>
@@ -622,7 +650,7 @@ ${hreflang}
 <link href="${root}css/quote-flow-shared.css?v=20260905-search" rel="stylesheet"/>
 <link href="${root}css/site-footer.css?v=20260721-lip-page" rel="stylesheet"/>
 <link href="${root}css/state-coverage.css?v=${CSS_VER}" rel="stylesheet"/>
-<link href="${root}css/mvi-licensing-map.css?v=20260726-state-cov" rel="stylesheet"/>
+<link href="${root}css/mvi-licensing-map.css?v=20261009-mobile-pdf" rel="stylesheet"/>
 <link href="${root}css/mvi-assistant-widget.css?v=20260808-chat-sm" rel="stylesheet"/>
 <link href="${root}css/fontawesome-mvi.min.css?v=20260723-brands-fix" rel="stylesheet"/>
 <link href="${root}css/site-header.css?v=20260723-ver-precios-gold" rel="stylesheet"/>
@@ -710,7 +738,7 @@ function documentEs(city) {
 <link href="${root}css/quote-flow-shared.css?v=20260905-search" rel="stylesheet"/>
 <link href="${root}css/site-footer.css?v=20260721-lip-page" rel="stylesheet"/>
 <link href="${root}css/state-coverage.css?v=${CSS_VER}" rel="stylesheet"/>
-<link href="${root}css/mvi-licensing-map.css?v=20260726-state-cov" rel="stylesheet"/>
+<link href="${root}css/mvi-licensing-map.css?v=20261009-mobile-pdf" rel="stylesheet"/>
 <link href="${root}css/mvi-assistant-widget.css?v=20260808-chat-sm" rel="stylesheet"/>
 <link href="${root}css/fontawesome-mvi.min.css?v=20260723-brands-fix" rel="stylesheet"/>
 <link href="${root}css/site-header.css?v=20260723-ver-precios-gold" rel="stylesheet"/>
@@ -882,7 +910,7 @@ function documentEn(city) {
 <link href="${root}css/quote-flow-shared.css?v=20260905-search" rel="stylesheet"/>
 <link href="${root}css/site-footer.css?v=20260721-lip-page" rel="stylesheet"/>
 <link href="${root}css/state-coverage.css?v=${CSS_VER}" rel="stylesheet"/>
-<link href="${root}css/mvi-licensing-map.css?v=20260726-state-cov" rel="stylesheet"/>
+<link href="${root}css/mvi-licensing-map.css?v=20261009-mobile-pdf" rel="stylesheet"/>
 <link href="${root}css/mvi-assistant-widget.css?v=20260808-chat-sm" rel="stylesheet"/>
 <link href="${root}css/fontawesome-mvi.min.css?v=20260723-brands-fix" rel="stylesheet"/>
 <link href="${root}css/site-header.css?v=20260723-ver-precios-gold" rel="stylesheet"/>

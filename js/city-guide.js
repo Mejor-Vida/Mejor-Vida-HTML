@@ -214,8 +214,13 @@
   var QUOTE_ENDPOINTS = ["/api/quote-site", "https://www.mejorvidainsurance.com/api/quote-site"];
 
   function roundCoverage(total) {
-    var n = Math.ceil(total / 1000) * 1000;
-    return Math.max(5000, Math.min(25000, n));
+    var funeral = Math.max(0, Number(total) || 0);
+    var n = Math.ceil(funeral / 1000) * 1000;
+    n = Math.max(5000, Math.min(50000, n));
+    if (n < funeral) {
+      n = Math.min(50000, Math.ceil(funeral / 1000) * 1000);
+    }
+    return n;
   }
 
   function radioValue(form, name) {

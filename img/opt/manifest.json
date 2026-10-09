@@ -1,5 +1,50 @@
 [
   {
+    "src": "img/state-heroes/texas-hero.png",
+    "base": "texas-hero",
+    "width": 596,
+    "height": 482,
+    "webp": "img/opt/texas-hero.webp",
+    "fallback": "img/opt/texas-hero.png",
+    "keepPng": true
+  },
+  {
+    "src": "img/state-heroes/california-hero.png",
+    "base": "california-hero",
+    "width": 323,
+    "height": 473,
+    "webp": "img/opt/california-hero.webp",
+    "fallback": "img/opt/california-hero.png",
+    "keepPng": true
+  },
+  {
+    "src": "img/state-heroes/arizona-hero.png",
+    "base": "arizona-hero",
+    "width": 1400,
+    "height": 900,
+    "webp": "img/opt/arizona-hero.webp",
+    "fallback": "img/opt/arizona-hero.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/state-heroes/michigan-hero.png",
+    "base": "michigan-hero",
+    "width": 1400,
+    "height": 900,
+    "webp": "img/opt/michigan-hero.webp",
+    "fallback": "img/opt/michigan-hero.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/state-heroes/virginia-hero.png",
+    "base": "virginia-hero",
+    "width": 1400,
+    "height": 900,
+    "webp": "img/opt/virginia-hero.webp",
+    "fallback": "img/opt/virginia-hero.jpg",
+    "keepPng": false
+  },
+  {
     "src": "img/business-man.png",
     "base": "business-man",
     "width": 681,
@@ -492,6 +537,222 @@
     "height": 500,
     "webp": "img/opt/carson-city-capitol-800.webp",
     "fallback": "img/opt/carson-city-capitol-800.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/columbus-ohio-statehouse.jpg",
+    "base": "columbus-ohio-statehouse",
+    "width": 1567,
+    "height": 900,
+    "webp": "img/opt/columbus-ohio-statehouse.webp",
+    "fallback": "img/opt/columbus-ohio-statehouse.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/cleveland-rock-hall.jpg",
+    "base": "cleveland-rock-hall",
+    "width": 1381,
+    "height": 900,
+    "webp": "img/opt/cleveland-rock-hall.webp",
+    "fallback": "img/opt/cleveland-rock-hall.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/cincinnati-roebling-bridge.jpg",
+    "base": "cincinnati-roebling-bridge",
+    "width": 1229,
+    "height": 900,
+    "webp": "img/opt/cincinnati-roebling-bridge.webp",
+    "fallback": "img/opt/cincinnati-roebling-bridge.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/toledo-glass-city-skyway.jpg",
+    "base": "toledo-glass-city-skyway",
+    "width": 1353,
+    "height": 900,
+    "webp": "img/opt/toledo-glass-city-skyway.webp",
+    "fallback": "img/opt/toledo-glass-city-skyway.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/akron-stan-hywet.jpg",
+    "base": "akron-stan-hywet",
+    "width": 1600,
+    "height": 900,
+    "webp": "img/opt/akron-stan-hywet.webp",
+    "fallback": "img/opt/akron-stan-hywet.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/dayton-skyline.jpg",
+    "base": "dayton-skyline",
+    "width": 1350,
+    "height": 900,
+    "webp": "img/opt/dayton-skyline.webp",
+    "fallback": "img/opt/dayton-skyline.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/albuquerque-sandia-tram.jpg",
+    "base": "albuquerque-sandia-tram",
+    "width": 1200,
+    "height": 900,
+    "webp": "img/opt/albuquerque-sandia-tram.webp",
+    "fallback": "img/opt/albuquerque-sandia-tram.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/las-cruces-organ-mountains.jpg",
+    "base": "las-cruces-organ-mountains",
+    "width": 1600,
+    "height": 690,
+    "webp": "img/opt/las-cruces-organ-mountains.webp",
+    "fallback": "img/opt/las-cruces-organ-mountains.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/rio-rancho-welcome-sign.jpg",
+    "base": "rio-rancho-welcome-sign",
+    "width": 1600,
+    "height": 900,
+    "webp": "img/opt/rio-rancho-welcome-sign.webp",
+    "fallback": "img/opt/rio-rancho-welcome-sign.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/santa-fe-palace.jpg",
+    "base": "santa-fe-palace",
+    "width": 1448,
+    "height": 900,
+    "webp": "img/opt/santa-fe-palace.webp",
+    "fallback": "img/opt/santa-fe-palace.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/los-angeles-hollywood-sign.jpg",
+    "base": "los-angeles-hollywood-sign",
+    "width": 1280,
+    "height": 800,
+    "webp": "img/opt/los-angeles-hollywood-sign.webp",
+    "fallback": "img/opt/los-angeles-hollywood-sign.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/san-diego-coronado-bridge.jpg",
+    "base": "san-diego-coronado-bridge",
+    "width": 1200,
+    "height": 900,
+    "webp": "img/opt/san-diego-coronado-bridge.webp",
+    "fallback": "img/opt/san-diego-coronado-bridge.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/san-jose-downtown.jpg",
+    "base": "san-jose-downtown",
+    "width": 1200,
+    "height": 900,
+    "webp": "img/opt/san-jose-downtown.webp",
+    "fallback": "img/opt/san-jose-downtown.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/san-francisco-golden-gate.jpg",
+    "base": "san-francisco-golden-gate",
+    "width": 1200,
+    "height": 900,
+    "webp": "img/opt/san-francisco-golden-gate.webp",
+    "fallback": "img/opt/san-francisco-golden-gate.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/fresno-water-tower.jpg",
+    "base": "fresno-water-tower",
+    "width": 1200,
+    "height": 900,
+    "webp": "img/opt/fresno-water-tower.webp",
+    "fallback": "img/opt/fresno-water-tower.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/sacramento-state-capitol.jpg",
+    "base": "sacramento-state-capitol",
+    "width": 1200,
+    "height": 900,
+    "webp": "img/opt/sacramento-state-capitol.webp",
+    "fallback": "img/opt/sacramento-state-capitol.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/charleston-rainbow-row.jpg",
+    "base": "charleston-rainbow-row",
+    "width": 1200,
+    "height": 900,
+    "webp": "img/opt/charleston-rainbow-row.webp",
+    "fallback": "img/opt/charleston-rainbow-row.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/columbia-state-house.jpg",
+    "base": "columbia-state-house",
+    "width": 1144,
+    "height": 900,
+    "webp": "img/opt/columbia-state-house.webp",
+    "fallback": "img/opt/columbia-state-house.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/north-charleston-coliseum.jpg",
+    "base": "north-charleston-coliseum",
+    "width": 1200,
+    "height": 900,
+    "webp": "img/opt/north-charleston-coliseum.webp",
+    "fallback": "img/opt/north-charleston-coliseum.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/mount-pleasant-ravenel-bridge.jpg",
+    "base": "mount-pleasant-ravenel-bridge",
+    "width": 1125,
+    "height": 900,
+    "webp": "img/opt/mount-pleasant-ravenel-bridge.webp",
+    "fallback": "img/opt/mount-pleasant-ravenel-bridge.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/rock-hill-winthrop.jpg",
+    "base": "rock-hill-winthrop",
+    "width": 1494,
+    "height": 895,
+    "webp": "img/opt/rock-hill-winthrop.webp",
+    "fallback": "img/opt/rock-hill-winthrop.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/greenville-falls-park.jpg",
+    "base": "greenville-falls-park",
+    "width": 1353,
+    "height": 900,
+    "webp": "img/opt/greenville-falls-park.webp",
+    "fallback": "img/opt/greenville-falls-park.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/sioux-falls-falls-park.jpg",
+    "base": "sioux-falls-falls-park",
+    "width": 1200,
+    "height": 900,
+    "webp": "img/opt/sioux-falls-falls-park.webp",
+    "fallback": "img/opt/sioux-falls-falls-park.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/rapid-city-dinosaur-park.jpg",
+    "base": "rapid-city-dinosaur-park",
+    "width": 1181,
+    "height": 900,
+    "webp": "img/opt/rapid-city-dinosaur-park.webp",
+    "fallback": "img/opt/rapid-city-dinosaur-park.jpg",
     "keepPng": false
   },
   {
@@ -1638,6 +1899,15 @@
     "keepPng": true
   },
   {
+    "src": "img/blog-generated/weekly-insurance-update-2026-09-13/story-2.png",
+    "base": "story-2",
+    "width": 1024,
+    "height": 682,
+    "webp": "img/opt/blog-generated/weekly-insurance-update-2026-09-13/story-2.webp",
+    "fallback": "img/opt/blog-generated/weekly-insurance-update-2026-09-13/story-2.png",
+    "keepPng": true
+  },
+  {
     "src": "img/blog-generated/weekly-insurance-update-2026-09-20/thumb.png",
     "base": "thumb",
     "width": 1600,
@@ -1674,12 +1944,102 @@
     "keepPng": true
   },
   {
+    "src": "img/blog-generated/weekly-insurance-update-2026-09-20/story-2.png",
+    "base": "story-2",
+    "width": 1024,
+    "height": 1024,
+    "webp": "img/opt/blog-generated/weekly-insurance-update-2026-09-20/story-2.webp",
+    "fallback": "img/opt/blog-generated/weekly-insurance-update-2026-09-20/story-2.png",
+    "keepPng": true
+  },
+  {
     "src": "img/blog-generated/weekly-insurance-update-2026-09-20/story-3.png",
     "base": "story-3",
     "width": 1024,
     "height": 1024,
     "webp": "img/opt/blog-generated/weekly-insurance-update-2026-09-20/story-3.webp",
     "fallback": "img/opt/blog-generated/weekly-insurance-update-2026-09-20/story-3.png",
+    "keepPng": true
+  },
+  {
+    "src": "img/blog-generated/weekly-insurance-update-2026-09-27/thumb.jpg",
+    "base": "thumb",
+    "width": 819,
+    "height": 1024,
+    "webp": "img/opt/blog-generated/weekly-insurance-update-2026-09-27/thumb.webp",
+    "fallback": "img/opt/blog-generated/weekly-insurance-update-2026-09-27/thumb.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/blog-generated/weekly-insurance-update-2026-09-27/story-1.png",
+    "base": "story-1",
+    "width": 819,
+    "height": 1024,
+    "webp": "img/opt/blog-generated/weekly-insurance-update-2026-09-27/story-1.webp",
+    "fallback": "img/opt/blog-generated/weekly-insurance-update-2026-09-27/story-1.png",
+    "keepPng": true
+  },
+  {
+    "src": "img/blog-generated/weekly-insurance-update-2026-09-27/story-2.png",
+    "base": "story-2",
+    "width": 819,
+    "height": 1024,
+    "webp": "img/opt/blog-generated/weekly-insurance-update-2026-09-27/story-2.webp",
+    "fallback": "img/opt/blog-generated/weekly-insurance-update-2026-09-27/story-2.png",
+    "keepPng": true
+  },
+  {
+    "src": "img/blog-generated/weekly-insurance-update-2026-09-27/story-3.png",
+    "base": "story-3",
+    "width": 819,
+    "height": 1024,
+    "webp": "img/opt/blog-generated/weekly-insurance-update-2026-09-27/story-3.webp",
+    "fallback": "img/opt/blog-generated/weekly-insurance-update-2026-09-27/story-3.png",
+    "keepPng": true
+  },
+  {
+    "src": "img/blog-generated/weekly-insurance-update-2026-10-04/hero.jpg",
+    "base": "hero",
+    "width": 819,
+    "height": 1024,
+    "webp": "img/opt/blog-generated/weekly-insurance-update-2026-10-04/hero.webp",
+    "fallback": "img/opt/blog-generated/weekly-insurance-update-2026-10-04/hero.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/blog-generated/weekly-insurance-update-2026-10-04/thumb.jpg",
+    "base": "thumb",
+    "width": 819,
+    "height": 1024,
+    "webp": "img/opt/blog-generated/weekly-insurance-update-2026-10-04/thumb.webp",
+    "fallback": "img/opt/blog-generated/weekly-insurance-update-2026-10-04/thumb.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/blog-generated/weekly-insurance-update-2026-10-04/story-1.jpg",
+    "base": "story-1",
+    "width": 819,
+    "height": 1024,
+    "webp": "img/opt/blog-generated/weekly-insurance-update-2026-10-04/story-1.webp",
+    "fallback": "img/opt/blog-generated/weekly-insurance-update-2026-10-04/story-1.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/blog-generated/weekly-insurance-update-2026-10-04/story-2.png",
+    "base": "story-2",
+    "width": 819,
+    "height": 1024,
+    "webp": "img/opt/blog-generated/weekly-insurance-update-2026-10-04/story-2.webp",
+    "fallback": "img/opt/blog-generated/weekly-insurance-update-2026-10-04/story-2.png",
+    "keepPng": true
+  },
+  {
+    "src": "img/blog-generated/weekly-insurance-update-2026-10-04/story-3.png",
+    "base": "story-3",
+    "width": 819,
+    "height": 1024,
+    "webp": "img/opt/blog-generated/weekly-insurance-update-2026-10-04/story-3.webp",
+    "fallback": "img/opt/blog-generated/weekly-insurance-update-2026-10-04/story-3.png",
     "keepPng": true
   },
   {
@@ -3031,311 +3391,5 @@
     "webp": "img/opt/blog-generated/weekly-insurance-update-2026-09-20/hero.webp",
     "fallback": "img/opt/blog-generated/weekly-insurance-update-2026-09-20/hero.png",
     "keepPng": true
-  },
-  {
-    "src": "img/blog-generated/weekly-insurance-update-2026-09-27/story-1.png",
-    "base": "story-1",
-    "width": 819,
-    "height": 1024,
-    "webp": "img/opt/blog-generated/weekly-insurance-update-2026-09-27/story-1.webp",
-    "fallback": "img/opt/blog-generated/weekly-insurance-update-2026-09-27/story-1.png",
-    "keepPng": true
-  },
-  {
-    "src": "img/blog-generated/weekly-insurance-update-2026-09-27/thumb.jpg",
-    "base": "thumb",
-    "width": 819,
-    "height": 1024,
-    "webp": "img/opt/blog-generated/weekly-insurance-update-2026-09-27/thumb.webp",
-    "fallback": "img/opt/blog-generated/weekly-insurance-update-2026-09-27/thumb.jpg",
-    "keepPng": false
-  },
-  {
-    "src": "img/blog-generated/weekly-insurance-update-2026-09-27/story-3.png",
-    "base": "story-3",
-    "width": 819,
-    "height": 1024,
-    "webp": "img/opt/blog-generated/weekly-insurance-update-2026-09-27/story-3.webp",
-    "fallback": "img/opt/blog-generated/weekly-insurance-update-2026-09-27/story-3.png",
-    "keepPng": true
-  },
-  {
-    "src": "img/columbus-ohio-statehouse.jpg",
-    "base": "columbus-ohio-statehouse",
-    "width": 1567,
-    "height": 900,
-    "webp": "img/opt/columbus-ohio-statehouse.webp",
-    "fallback": "img/opt/columbus-ohio-statehouse.jpg",
-    "keepPng": false
-  },
-  {
-    "src": "img/cleveland-rock-hall.jpg",
-    "base": "cleveland-rock-hall",
-    "width": 1381,
-    "height": 900,
-    "webp": "img/opt/cleveland-rock-hall.webp",
-    "fallback": "img/opt/cleveland-rock-hall.jpg",
-    "keepPng": false
-  },
-  {
-    "src": "img/cincinnati-roebling-bridge.jpg",
-    "base": "cincinnati-roebling-bridge",
-    "width": 1229,
-    "height": 900,
-    "webp": "img/opt/cincinnati-roebling-bridge.webp",
-    "fallback": "img/opt/cincinnati-roebling-bridge.jpg",
-    "keepPng": false
-  },
-  {
-    "src": "img/toledo-glass-city-skyway.jpg",
-    "base": "toledo-glass-city-skyway",
-    "width": 1353,
-    "height": 900,
-    "webp": "img/opt/toledo-glass-city-skyway.webp",
-    "fallback": "img/opt/toledo-glass-city-skyway.jpg",
-    "keepPng": false
-  },
-  {
-    "src": "img/akron-stan-hywet.jpg",
-    "base": "akron-stan-hywet",
-    "width": 1600,
-    "height": 900,
-    "webp": "img/opt/akron-stan-hywet.webp",
-    "fallback": "img/opt/akron-stan-hywet.jpg",
-    "keepPng": false
-  },
-  {
-    "src": "img/dayton-skyline.jpg",
-    "base": "dayton-skyline",
-    "width": 1350,
-    "height": 900,
-    "webp": "img/opt/dayton-skyline.webp",
-    "fallback": "img/opt/dayton-skyline.jpg",
-    "keepPng": false
-  },
-  {
-    "src": "img/albuquerque-sandia-tram.jpg",
-    "base": "albuquerque-sandia-tram",
-    "width": 1200,
-    "height": 900,
-    "webp": "img/opt/albuquerque-sandia-tram.webp",
-    "fallback": "img/opt/albuquerque-sandia-tram.jpg",
-    "keepPng": false
-  },
-  {
-    "src": "img/las-cruces-organ-mountains.jpg",
-    "base": "las-cruces-organ-mountains",
-    "width": 1600,
-    "height": 690,
-    "webp": "img/opt/las-cruces-organ-mountains.webp",
-    "fallback": "img/opt/las-cruces-organ-mountains.jpg",
-    "keepPng": false
-  },
-  {
-    "src": "img/rio-rancho-welcome-sign.jpg",
-    "base": "rio-rancho-welcome-sign",
-    "width": 1600,
-    "height": 900,
-    "webp": "img/opt/rio-rancho-welcome-sign.webp",
-    "fallback": "img/opt/rio-rancho-welcome-sign.jpg",
-    "keepPng": false
-  },
-  {
-    "src": "img/santa-fe-palace.jpg",
-    "base": "santa-fe-palace",
-    "width": 1448,
-    "height": 900,
-    "webp": "img/opt/santa-fe-palace.webp",
-    "fallback": "img/opt/santa-fe-palace.jpg",
-    "keepPng": false
-  },
-  {
-    "src": "img/charleston-rainbow-row.jpg",
-    "base": "charleston-rainbow-row",
-    "width": 1200,
-    "height": 900,
-    "webp": "img/opt/charleston-rainbow-row.webp",
-    "fallback": "img/opt/charleston-rainbow-row.jpg",
-    "keepPng": false
-  },
-  {
-    "src": "img/columbia-state-house.jpg",
-    "base": "columbia-state-house",
-    "width": 1144,
-    "height": 900,
-    "webp": "img/opt/columbia-state-house.webp",
-    "fallback": "img/opt/columbia-state-house.jpg",
-    "keepPng": false
-  },
-  {
-    "src": "img/north-charleston-coliseum.jpg",
-    "base": "north-charleston-coliseum",
-    "width": 1200,
-    "height": 900,
-    "webp": "img/opt/north-charleston-coliseum.webp",
-    "fallback": "img/opt/north-charleston-coliseum.jpg",
-    "keepPng": false
-  },
-  {
-    "src": "img/mount-pleasant-ravenel-bridge.jpg",
-    "base": "mount-pleasant-ravenel-bridge",
-    "width": 1125,
-    "height": 900,
-    "webp": "img/opt/mount-pleasant-ravenel-bridge.webp",
-    "fallback": "img/opt/mount-pleasant-ravenel-bridge.jpg",
-    "keepPng": false
-  },
-  {
-    "src": "img/rock-hill-winthrop.jpg",
-    "base": "rock-hill-winthrop",
-    "width": 1494,
-    "height": 895,
-    "webp": "img/opt/rock-hill-winthrop.webp",
-    "fallback": "img/opt/rock-hill-winthrop.jpg",
-    "keepPng": false
-  },
-  {
-    "src": "img/greenville-falls-park.jpg",
-    "base": "greenville-falls-park",
-    "width": 1353,
-    "height": 900,
-    "webp": "img/opt/greenville-falls-park.webp",
-    "fallback": "img/opt/greenville-falls-park.jpg",
-    "keepPng": false
-  },
-  {
-    "src": "img/sioux-falls-falls-park.jpg",
-    "base": "sioux-falls-falls-park",
-    "width": 1200,
-    "height": 900,
-    "webp": "img/opt/sioux-falls-falls-park.webp",
-    "fallback": "img/opt/sioux-falls-falls-park.jpg",
-    "keepPng": false
-  },
-  {
-    "src": "img/rapid-city-dinosaur-park.jpg",
-    "base": "rapid-city-dinosaur-park",
-    "width": 1181,
-    "height": 900,
-    "webp": "img/opt/rapid-city-dinosaur-park.webp",
-    "fallback": "img/opt/rapid-city-dinosaur-park.jpg",
-    "keepPng": false
-  },
-  {
-    "src": "img/blog-generated/weekly-insurance-update-2026-10-04/hero.jpg",
-    "base": "hero",
-    "width": 819,
-    "height": 1024,
-    "webp": "img/opt/blog-generated/weekly-insurance-update-2026-10-04/hero.webp",
-    "fallback": "img/opt/blog-generated/weekly-insurance-update-2026-10-04/hero.jpg",
-    "keepPng": false
-  },
-  {
-    "src": "img/blog-generated/weekly-insurance-update-2026-10-04/thumb.jpg",
-    "base": "thumb",
-    "width": 819,
-    "height": 1024,
-    "webp": "img/opt/blog-generated/weekly-insurance-update-2026-10-04/thumb.webp",
-    "fallback": "img/opt/blog-generated/weekly-insurance-update-2026-10-04/thumb.jpg",
-    "keepPng": false
-  },
-  {
-    "src": "img/blog-generated/weekly-insurance-update-2026-10-04/story-1.jpg",
-    "base": "story-1",
-    "width": 819,
-    "height": 1024,
-    "webp": "img/opt/blog-generated/weekly-insurance-update-2026-10-04/story-1.webp",
-    "fallback": "img/opt/blog-generated/weekly-insurance-update-2026-10-04/story-1.jpg",
-    "keepPng": false
-  },
-  {
-    "src": "img/blog-generated/weekly-insurance-update-2026-09-13/story-2.png",
-    "base": "story-2",
-    "width": 1024,
-    "height": 682,
-    "webp": "img/opt/blog-generated/weekly-insurance-update-2026-09-13/story-2.webp",
-    "fallback": "img/opt/blog-generated/weekly-insurance-update-2026-09-13/story-2.png",
-    "keepPng": true
-  },
-  {
-    "src": "img/blog-generated/weekly-insurance-update-2026-09-20/story-2.png",
-    "base": "story-2",
-    "width": 1024,
-    "height": 1024,
-    "webp": "img/opt/blog-generated/weekly-insurance-update-2026-09-20/story-2.webp",
-    "fallback": "img/opt/blog-generated/weekly-insurance-update-2026-09-20/story-2.png",
-    "keepPng": true
-  },
-  {
-    "src": "img/blog-generated/weekly-insurance-update-2026-09-27/story-2.png",
-    "base": "story-2",
-    "width": 819,
-    "height": 1024,
-    "webp": "img/opt/blog-generated/weekly-insurance-update-2026-09-27/story-2.webp",
-    "fallback": "img/opt/blog-generated/weekly-insurance-update-2026-09-27/story-2.png",
-    "keepPng": true
-  },
-  {
-    "src": "img/blog-generated/weekly-insurance-update-2026-10-04/story-2.png",
-    "base": "story-2",
-    "width": 819,
-    "height": 1024,
-    "webp": "img/opt/blog-generated/weekly-insurance-update-2026-10-04/story-2.webp",
-    "fallback": "img/opt/blog-generated/weekly-insurance-update-2026-10-04/story-2.png",
-    "keepPng": true
-  },
-  {
-    "src": "img/blog-generated/weekly-insurance-update-2026-10-04/story-3.png",
-    "base": "story-3",
-    "width": 819,
-    "height": 1024,
-    "webp": "img/opt/blog-generated/weekly-insurance-update-2026-10-04/story-3.webp",
-    "fallback": "img/opt/blog-generated/weekly-insurance-update-2026-10-04/story-3.png",
-    "keepPng": true
-  },
-  {
-    "src": "img/state-heroes/texas-hero.png",
-    "base": "texas-hero",
-    "width": 596,
-    "height": 482,
-    "webp": "img/opt/texas-hero.webp",
-    "fallback": "img/opt/texas-hero.png",
-    "keepPng": true
-  },
-  {
-    "src": "img/state-heroes/california-hero.png",
-    "base": "california-hero",
-    "width": 323,
-    "height": 473,
-    "webp": "img/opt/california-hero.webp",
-    "fallback": "img/opt/california-hero.png",
-    "keepPng": true
-  },
-  {
-    "src": "img/state-heroes/michigan-hero.png",
-    "base": "michigan-hero",
-    "width": 1400,
-    "height": 900,
-    "webp": "img/opt/michigan-hero.webp",
-    "fallback": "img/opt/michigan-hero.jpg",
-    "keepPng": false
-  },
-  {
-    "src": "img/state-heroes/arizona-hero.png",
-    "base": "arizona-hero",
-    "width": 1400,
-    "height": 900,
-    "webp": "img/opt/arizona-hero.webp",
-    "fallback": "img/opt/arizona-hero.jpg",
-    "keepPng": false
-  },
-  {
-    "src": "img/state-heroes/virginia-hero.png",
-    "base": "virginia-hero",
-    "width": 1400,
-    "height": 900,
-    "webp": "img/opt/virginia-hero.webp",
-    "fallback": "img/opt/virginia-hero.jpg",
-    "keepPng": false
   }
 ]

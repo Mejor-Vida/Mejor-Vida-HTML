@@ -1688,6 +1688,15 @@
   object-position: center 38%;
 }
 
+.sc-hero--los-angeles .sc-hero-visual img,
+.sc-hero--san-diego .sc-hero-visual img,
+.sc-hero--san-jose .sc-hero-visual img,
+.sc-hero--san-francisco .sc-hero-visual img,
+.sc-hero--fresno .sc-hero-visual img,
+.sc-hero--sacramento .sc-hero-visual img {
+  object-position: center 40%;
+}
+
 .sc-hero--city .sc-hero-shade {
   background: linear-gradient(
     90deg,
@@ -1710,6 +1719,257 @@
 .sc-city-guide .sc-hero--city .sc-hero-copy,
 .sc-lincoln-guide .sc-hero--city .sc-hero-copy {
   max-width: min(42rem, 100%);
+}
+
+.sc-city-guide .sc-hero--answer-first .sc-hero-copy,
+.sc-lincoln-guide .sc-hero--answer-first .sc-hero-copy {
+  max-width: min(32rem, 100%);
+}
+
+/* City guide: scannable “what’s on this page” map (older-adult friendly) */
+.sc-city-intro {
+  background: linear-gradient(180deg, #eef4fb 0%, #f8fafc 55%, #fff 100%);
+}
+
+.sc-city-page-map {
+  margin-top: 1.25rem;
+  padding: 1.35rem 1.25rem 1.5rem;
+  background: #fff;
+  border: 1px solid #c5d5e8;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 18px rgba(26, 54, 93, 0.07);
+}
+
+.sc-city-map-heading {
+  margin: 0 0 0.35rem;
+  font-size: clamp(1.35rem, 2.8vw, 1.65rem);
+  font-weight: 800;
+  line-height: 1.25;
+  color: var(--sc-navy, #1a365d);
+}
+
+.sc-city-map-lead {
+  margin: 0 0 1.15rem;
+  font-size: 1.05rem;
+  color: #475569;
+  line-height: 1.5;
+}
+
+.sc-city-map-grid {
+  display: grid;
+  gap: 0.85rem;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 640px) {
+  .sc-city-map-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.sc-city-map-card {
+  display: grid;
+  grid-template-columns: auto auto 1fr auto;
+  gap: 0.65rem 0.75rem;
+  align-items: start;
+  padding: 1rem 1rem 1rem 0.85rem;
+  text-decoration: none;
+  color: inherit;
+  background: #f8fafc;
+  border: 1px solid #d9e3ee;
+  border-radius: 0.65rem;
+  border-left-width: 5px;
+  transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.sc-city-map-card:hover,
+.sc-city-map-card:focus-visible {
+  background: #fff;
+  border-color: #94a3b8;
+  box-shadow: 0 6px 16px rgba(26, 54, 93, 0.1);
+  outline: none;
+}
+
+.sc-city-map-card--fe {
+  border-left-color: #2563eb;
+}
+.sc-city-map-card--homes {
+  border-left-color: #1a365d;
+}
+.sc-city-map-card--plot {
+  border-left-color: #0d9488;
+}
+.sc-city-map-card--calc {
+  border-left-color: #c9a227;
+}
+
+.sc-city-map-card__num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #fff;
+  background: var(--sc-navy, #1a365d);
+  border-radius: 50%;
+  line-height: 1;
+}
+
+.sc-city-map-card--fe .sc-city-map-card__num {
+  background: #2563eb;
+}
+.sc-city-map-card--homes .sc-city-map-card__num {
+  background: #1a365d;
+}
+.sc-city-map-card--plot .sc-city-map-card__num {
+  background: #0d9488;
+}
+.sc-city-map-card--calc .sc-city-map-card__num {
+  background: #b8921f;
+  color: #1a202c;
+}
+
+.sc-city-map-card__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.5rem;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  color: var(--sc-navy, #1a365d);
+}
+
+.sc-city-map-card--fe .sc-city-map-card__icon {
+  color: #2563eb;
+  background: #eff6ff;
+  border-color: #bfdbfe;
+}
+.sc-city-map-card--homes .sc-city-map-card__icon {
+  background: #e8f0f8;
+  border-color: #c5d5e8;
+}
+.sc-city-map-card--plot .sc-city-map-card__icon {
+  color: #0d9488;
+  background: #ecfdf5;
+  border-color: #99f6e4;
+}
+.sc-city-map-card--calc .sc-city-map-card__icon {
+  color: #92400e;
+  background: #fffbeb;
+  border-color: #fde68a;
+}
+
+.sc-city-map-card__body {
+  min-width: 0;
+}
+
+.sc-city-map-card__title {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: 1.08rem;
+  font-weight: 800;
+  line-height: 1.3;
+  color: var(--sc-navy, #1a365d);
+}
+
+.sc-city-map-card__teaser {
+  display: block;
+  font-size: 0.98rem;
+  line-height: 1.5;
+  color: #475569;
+}
+
+.sc-city-map-card__teaser strong {
+  color: #1e293b;
+  font-weight: 800;
+}
+
+.sc-city-map-card__go {
+  align-self: center;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #64748b;
+  line-height: 1;
+}
+
+.sc-city-intro .sc-city-crumb {
+  max-width: 46rem;
+}
+
+/* City guide — final expense approval paths (health / age / cost) */
+.sc-fe-types-heading {
+  padding-top: 0.25rem;
+  border-top: 3px solid #c9a227;
+}
+
+.sc-fe-type-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .sc-fe-type-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.1rem 1.25rem;
+  }
+}
+
+.sc-fe-type-card {
+  margin: 0;
+  padding: 1.1rem 1.15rem 1.15rem;
+  background: #f8fafc;
+  border: 1px solid #d9e3ee;
+  border-radius: 0.65rem;
+  border-left: 5px solid #94a3b8;
+}
+
+.sc-fe-type-card--simplified {
+  border-left-color: #2563eb;
+  background: linear-gradient(135deg, #f8fafc 0%, #eff6ff 100%);
+}
+
+.sc-fe-type-card--graded {
+  border-left-color: #7c3aed;
+  background: linear-gradient(135deg, #f8fafc 0%, #f5f3ff 100%);
+}
+
+.sc-fe-type-card--guaranteed {
+  border-left-color: #0d9488;
+  background: linear-gradient(135deg, #f8fafc 0%, #ecfdf5 100%);
+}
+
+.sc-fe-type-card--whole {
+  border-left-color: #c9a227;
+  background: linear-gradient(135deg, #f8fafc 0%, #fffbeb 100%);
+}
+
+.sc-fe-type-card__title {
+  margin: 0 0 0.65rem;
+  font-size: 1.12rem;
+  font-weight: 800;
+  color: var(--sc-navy, #1a365d);
+}
+
+.sc-fe-type-card p {
+  margin: 0 0 0.65rem;
+  font-size: 1rem;
+  line-height: 1.55;
+  color: #475569;
+}
+
+.sc-fe-type-card p:last-child {
+  margin-bottom: 0;
+}
+
+.sc-fe-type-card strong {
+  color: #1e293b;
+  font-weight: 800;
 }
 
 .sc-hero--city .sc-hero-caption {
@@ -1849,9 +2109,200 @@
   max-width: 72rem;
 }
 
+/* City guide — funeral-home price section (older-adult scan) */
+.sc-city-gpl-section {
+  background: linear-gradient(180deg, #eef4fb 0%, #f1f5f9 40%, #f8fafc 100%);
+}
+
+.sc-gpl-section-title {
+  font-size: clamp(1.35rem, 2.8vw, 1.65rem);
+}
+
+.sc-gpl-section-lead {
+  font-size: 1.08rem;
+  line-height: 1.55;
+  color: #334155;
+  margin-bottom: 1rem;
+  max-width: 52rem;
+}
+
+.sc-gpl-key-points {
+  list-style: none;
+  margin: 0 0 1.25rem;
+  padding: 1rem 1.1rem;
+  background: #fff;
+  border: 1px solid #c5d5e8;
+  border-radius: 0.65rem;
+  border-left: 5px solid #c9a227;
+  max-width: 52rem;
+}
+
+.sc-gpl-key-points li {
+  margin: 0 0 0.55rem;
+  font-size: 1.02rem;
+  line-height: 1.5;
+  color: #475569;
+}
+
+.sc-gpl-key-points li:last-child {
+  margin-bottom: 0;
+}
+
+.sc-gpl-key-points strong {
+  color: #1a365d;
+}
+
+.sc-gpl-quick {
+  margin-bottom: 1.35rem;
+}
+
+.sc-gpl-quick-heading {
+  margin: 0 0 0.85rem;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #1a365d;
+}
+
+.sc-gpl-quick-grid {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 640px) {
+  .sc-gpl-quick-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 1024px) {
+  .sc-gpl-quick-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.sc-gpl-quick-card {
+  display: block;
+  padding: 0.95rem 1rem;
+  text-decoration: none;
+  color: inherit;
+  background: #fff;
+  border: 1px solid #d9e3ee;
+  border-radius: 0.65rem;
+  border-left: 5px solid #64748b;
+  box-shadow: 0 2px 10px rgba(26, 54, 93, 0.06);
+  transition: box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+.sc-gpl-quick-card:hover,
+.sc-gpl-quick-card:focus-visible {
+  box-shadow: 0 6px 18px rgba(26, 54, 93, 0.12);
+  transform: translateY(-1px);
+  outline: none;
+}
+
+.sc-gpl-quick-card--dc {
+  border-left-color: #0d9488;
+}
+.sc-gpl-quick-card--ib {
+  border-left-color: #1a365d;
+}
+.sc-gpl-quick-card--mem {
+  border-left-color: #2563eb;
+}
+.sc-gpl-quick-card--tr {
+  border-left-color: #c9a227;
+}
+
+.sc-gpl-quick-card__num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.65rem;
+  height: 1.65rem;
+  margin-bottom: 0.45rem;
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #fff;
+  background: #1a365d;
+  border-radius: 50%;
+}
+
+.sc-gpl-quick-card--dc .sc-gpl-quick-card__num {
+  background: #0d9488;
+}
+.sc-gpl-quick-card--mem .sc-gpl-quick-card__num {
+  background: #2563eb;
+}
+.sc-gpl-quick-card--tr .sc-gpl-quick-card__num {
+  background: #b8921f;
+  color: #1a202c;
+}
+
+.sc-gpl-quick-card__label {
+  display: block;
+  font-size: 1.02rem;
+  font-weight: 800;
+  line-height: 1.3;
+  color: #1a365d;
+  margin-bottom: 0.25rem;
+}
+
+.sc-gpl-quick-card__tag {
+  display: block;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  color: #64748b;
+  margin-bottom: 0.5rem;
+}
+
+.sc-gpl-quick-card__price {
+  display: block;
+  font-size: 1rem;
+  color: #334155;
+}
+
+.sc-gpl-quick-card__price strong {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #0a2f5c;
+}
+
+.sc-gpl-quick-card__home {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 0.88rem;
+  color: #64748b;
+}
+
+.sc-gpl-quick-note {
+  margin: 0.85rem 0 0;
+  font-size: 0.98rem;
+  line-height: 1.5;
+  color: #475569;
+  max-width: 52rem;
+}
+
+.sc-gpl-scroll-hint {
+  margin: 0 0 0.5rem;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #64748b;
+}
+
+@media (min-width: 992px) {
+  .sc-gpl-scroll-hint {
+    display: none;
+  }
+}
+
 /* City guide package chart + calculator — locked; see .cursor/rules/city-page-layout.mdc */
 .sc-gpl-wrap {
   overflow-x: auto;
+  background: #fff;
+  border: 1px solid #c5d5e8;
+  border-radius: 0.65rem;
+  box-shadow: 0 4px 16px rgba(26, 54, 93, 0.06);
 }
 
 .sc-gpl-table {
@@ -1880,24 +2331,77 @@
   background: #1a365d;
   font-weight: 650;
   text-align: left;
-  padding: 0.7rem;
+  padding: 0.85rem 0.75rem;
+  vertical-align: top;
+}
+
+.sc-gpl-row--dc th {
+  background: linear-gradient(90deg, #0f766e 0%, #1a365d 28%);
+}
+.sc-gpl-row--ib th {
+  background: linear-gradient(90deg, #1e3a5f 0%, #1a365d 28%);
+}
+.sc-gpl-row--mem th {
+  background: linear-gradient(90deg, #1d4ed8 0%, #1a365d 32%);
+}
+.sc-gpl-row--tr th {
+  background: linear-gradient(90deg, #b8921f 0%, #1a365d 32%);
+}
+
+.sc-gpl-row-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  margin-bottom: 0.4rem;
+  font-size: 1rem;
+  font-weight: 800;
+  color: #1a365d;
+  background: #fec963;
+  border-radius: 50%;
+  line-height: 1;
 }
 
 .sc-gpl-field {
   display: block;
-  font-size: 0.95rem;
-  line-height: 1.25;
+  font-size: 1.05rem;
+  line-height: 1.3;
+  font-weight: 800;
+}
+
+.sc-gpl-field-tag {
+  display: block;
+  margin-top: 0.35rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.sc-gpl-field-details {
+  margin-top: 0.55rem;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.sc-gpl-field-details summary {
+  cursor: pointer;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 0.12em;
+}
+
+.sc-gpl-field-details p {
+  margin: 0.45rem 0 0;
+  line-height: 1.45;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.85);
 }
 
 .sc-gpl-field-desc {
-  display: block;
-  margin-top: 0.4rem;
-  font-size: 0.72rem;
-  font-weight: 500;
-  line-height: 1.4;
-  color: rgba(255, 255, 255, 0.82);
-  text-transform: none;
-  letter-spacing: 0;
+  display: none;
 }
 
 .sc-gpl-table tr.sc-gpl-section th {
@@ -1924,17 +2428,25 @@
 
 .sc-gpl-amt {
   display: block;
-  font-weight: 700;
-  font-size: 1.05rem;
+  font-weight: 800;
+  font-size: 1.25rem;
   color: #0a2f5c;
   white-space: nowrap;
 }
 
+.sc-gpl-col-estimator {
+  background: #f1f5f9 !important;
+}
+
+.sc-gpl-table thead th.sc-gpl-col-estimator {
+  background: #475569 !important;
+}
+
 .sc-gpl-cell-note {
   display: block;
-  margin-top: 0.25rem;
-  font-size: 0.75rem;
-  line-height: 1.35;
+  margin-top: 0.35rem;
+  font-size: 0.82rem;
+  line-height: 1.4;
   color: #4a5568;
 }
 
@@ -2070,22 +2582,486 @@
 }
 
 .sc-analysis-card {
+  position: relative;
   background: #fff;
   border: 1px solid #d9e3ee;
-  border-radius: 0.5rem;
-  padding: 1rem 1.1rem;
+  border-radius: 0.65rem;
+  padding: 1.1rem 1.15rem 1.15rem 1.1rem;
+  border-left: 5px solid #94a3b8;
+}
+
+.sc-analysis-card--blue {
+  border-left-color: #2563eb;
+  background: linear-gradient(135deg, #fff 0%, #eff6ff 100%);
+}
+.sc-analysis-card--gold {
+  border-left-color: #c9a227;
+  background: linear-gradient(135deg, #fff 0%, #fffbeb 100%);
+}
+.sc-analysis-card--teal {
+  border-left-color: #0d9488;
+  background: linear-gradient(135deg, #fff 0%, #ecfdf5 100%);
+}
+.sc-analysis-card--violet {
+  border-left-color: #7c3aed;
+  background: linear-gradient(135deg, #fff 0%, #f5f3ff 100%);
+}
+
+.sc-analysis-card__num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.65rem;
+  height: 1.65rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #fff;
+  background: #1a365d;
+  border-radius: 50%;
 }
 
 .sc-analysis-card h3 {
-  font-size: 1.05rem;
+  font-size: 1.1rem;
+  font-weight: 800;
   color: #1a365d;
-  margin: 0 0 0.5rem;
+  margin: 0 0 0.55rem;
+  line-height: 1.35;
 }
 
 .sc-analysis-card p {
   margin: 0;
-  color: #4a5568;
+  color: #475569;
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+.sc-analysis-card p strong {
+  color: #1e293b;
+  font-weight: 800;
+}
+
+/* City guide — burial plot section (older-adult scan) */
+.sc-city-plot-section {
+  background: linear-gradient(180deg, #f8fafc 0%, #eef6f4 45%, #f1f5f9 100%);
+}
+
+.sc-plot-section-title {
+  font-size: clamp(1.35rem, 2.8vw, 1.65rem);
+  color: #1a365d;
+}
+
+.sc-plot-callout {
+  padding: 1rem 1.15rem;
+  background: #fff;
+  border: 1px solid #a7d4c8;
+  border-left: 6px solid #0d9488;
+  border-radius: 0.65rem;
+  box-shadow: 0 2px 12px rgba(13, 148, 136, 0.08);
+  font-size: 1.08rem;
+  line-height: 1.55;
+  color: #334155;
+  max-width: 52rem;
+}
+
+.sc-plot-callout strong {
+  color: #1a365d;
+}
+
+.sc-plot-subhead {
+  margin: 0 0 0.5rem;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #1a365d;
+}
+
+.sc-plot-sublead {
+  margin: 0 0 1rem;
+  font-size: 1.02rem;
+  line-height: 1.55;
+  color: #475569;
+  max-width: 52rem;
+}
+
+.sc-plot-bill-grid {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: 1fr;
+  margin: 0.75rem 0 0.5rem;
+}
+
+@media (min-width: 640px) {
+  .sc-plot-bill-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 1024px) {
+  .sc-plot-bill-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.sc-plot-bill-card {
+  background: #fff;
+  border: 1px solid #d9e3ee;
+  border-radius: 0.65rem;
+  padding: 0.95rem 1rem;
+  border-top: 4px solid #94a3b8;
+  min-height: 100%;
+}
+
+.sc-plot-bill-card--space {
+  border-top-color: #0d9488;
+}
+.sc-plot-bill-card--open {
+  border-top-color: #2563eb;
+}
+.sc-plot-bill-card--vault {
+  border-top-color: #1a365d;
+}
+.sc-plot-bill-card--marker {
+  border-top-color: #c9a227;
+}
+
+.sc-plot-bill-card__num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.6rem;
+  height: 1.6rem;
+  margin-bottom: 0.45rem;
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: #fff;
+  background: #1a365d;
+  border-radius: 50%;
+}
+
+.sc-plot-bill-card--space .sc-plot-bill-card__num {
+  background: #0d9488;
+}
+
+.sc-plot-bill-card__title {
+  margin: 0 0 0.4rem;
+  font-size: 1.02rem;
+  font-weight: 800;
+  line-height: 1.3;
+  color: #1a365d;
+}
+
+.sc-plot-bill-card__body {
+  margin: 0;
   font-size: 0.95rem;
+  line-height: 1.5;
+  color: #475569;
+}
+
+.sc-plot-bill-foot {
+  margin: 0.75rem 0 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #64748b;
+}
+
+.sc-plot-context {
+  margin: 1.15rem 0 0;
+  font-size: 1.02rem;
+  line-height: 1.55;
+  color: #334155;
+  max-width: 52rem;
+}
+
+.sc-plot-context--muted {
+  color: #64748b;
+  font-size: 0.98rem;
+}
+
+.sc-plot-published {
+  margin-top: 1.35rem;
+}
+
+.sc-plot-card--published {
+  border-top-color: #0d9488;
+}
+
+.sc-plot-source {
+  margin: 0.65rem 0 0;
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+.sc-plot-source a {
+  color: #1a365d;
+  text-decoration: underline;
+  text-underline-offset: 0.12em;
+}
+
+.sc-plot-range {
+  margin-top: 1.35rem;
+}
+
+.sc-plot-range-grid {
+  display: grid;
+  gap: 0.85rem;
+  grid-template-columns: 1fr;
+  margin: 0.75rem 0 0;
+}
+
+@media (min-width: 640px) {
+  .sc-plot-range-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.sc-plot-range-card {
+  background: #fff;
+  border: 1px solid #d9e3ee;
+  border-radius: 0.65rem;
+  padding: 1.1rem 1rem 1rem;
+  text-align: center;
+  border-top: 5px solid #94a3b8;
+  box-shadow: 0 2px 12px rgba(26, 54, 93, 0.06);
+}
+
+.sc-plot-range-card--low {
+  border-top-color: #0d9488;
+}
+
+.sc-plot-range-card--mid {
+  border-top-color: #c9a227;
+}
+
+.sc-plot-range-card--high {
+  border-top-color: #1a365d;
+}
+
+.sc-plot-range-card__tier {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #64748b;
+  margin-bottom: 0.35rem;
+}
+
+.sc-plot-range-card__price {
+  margin: 0 0 0.4rem;
+  font-size: clamp(1.75rem, 4vw, 2.15rem);
+  font-weight: 800;
+  line-height: 1.1;
+  color: #0a2f5c;
+}
+
+.sc-plot-range-card--mid .sc-plot-range-card__price {
+  color: #1a365d;
+}
+
+.sc-plot-range-card__label {
+  margin: 0 0 0.45rem;
+  font-size: 1.02rem;
+  font-weight: 800;
+  line-height: 1.35;
+  color: #1a365d;
+}
+
+.sc-plot-range-card__note {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  color: #64748b;
+  text-align: left;
+}
+
+.sc-plot-range-foot {
+  margin: 1rem 0 0;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: #64748b;
+  max-width: 52rem;
+}
+
+.sc-plot-range-foot a {
+  color: #1a365d;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 0.12em;
+}
+
+.sc-plot-compare {
+  margin-top: 1.35rem;
+}
+
+.sc-plot-compare-wrap {
+  overflow-x: auto;
+  background: #fff;
+  border: 1px solid #c5d5e8;
+  border-radius: 0.65rem;
+  box-shadow: 0 4px 16px rgba(26, 54, 93, 0.06);
+}
+
+.sc-plot-compare-table {
+  width: 100%;
+  min-width: 44rem;
+  border-collapse: collapse;
+  font-size: 0.98rem;
+}
+
+.sc-plot-compare-table thead th {
+  background: #1a365d;
+  color: #fff;
+  font-weight: 700;
+  text-align: left;
+  padding: 0.75rem 0.65rem;
+  font-size: 0.88rem;
+  letter-spacing: 0.02em;
+}
+
+.sc-plot-compare-table tbody th {
+  background: #f8fafc;
+  color: #1a365d;
+  font-weight: 800;
+  text-align: left;
+  padding: 0.85rem 0.65rem;
+  vertical-align: top;
+  border-top: 1px solid #e2e8f0;
+  min-width: 10rem;
+}
+
+.sc-plot-compare-table tbody th a {
+  color: #1a365d;
+  text-decoration: underline;
+  text-underline-offset: 0.12em;
+}
+
+.sc-plot-compare-table tbody td {
+  padding: 0.85rem 0.65rem;
+  vertical-align: top;
+  border-top: 1px solid #e2e8f0;
+  color: #475569;
+  line-height: 1.45;
+}
+
+.sc-plot-compare-table tbody tr:nth-child(even) td,
+.sc-plot-compare-table tbody tr:nth-child(even) th {
+  background: #fafbfc;
+}
+
+.sc-plot-compare-price {
+  white-space: nowrap;
+  font-size: 1.1rem;
+  color: #0a2f5c;
+}
+
+.sc-plot-compare-src {
+  font-size: 0.9rem;
+  min-width: 9rem;
+}
+
+.sc-plot-compare-src a {
+  color: #1a365d;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 0.12em;
+}
+
+.sc-plot-compare-foot {
+  margin: 0.85rem 0 0;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: #64748b;
+  max-width: 52rem;
+}
+
+.sc-plot-office-grid {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: 1fr;
+  margin-top: 0.75rem;
+}
+
+@media (min-width: 768px) {
+  .sc-plot-office-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.sc-plot-office-card {
+  background: #fff;
+  border: 1px solid #c5d5e8;
+  border-radius: 0.65rem;
+  padding: 1rem 1.05rem;
+  border-left: 5px solid #1a365d;
+}
+
+.sc-plot-office-card__name {
+  margin: 0 0 0.4rem;
+  font-size: 1.02rem;
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+.sc-plot-office-card__name a {
+  color: #1a365d;
+  text-decoration: underline;
+  text-underline-offset: 0.12em;
+}
+
+.sc-plot-office-card__addr {
+  margin: 0 0 0.35rem;
+  font-size: 0.95rem;
+  color: #475569;
+  line-height: 1.45;
+}
+
+.sc-plot-office-card__phone {
+  margin: 0 0 0.35rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.sc-plot-office-card__phone a {
+  color: #0a2f5c;
+  text-decoration: none;
+}
+
+.sc-plot-office-card__note {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  color: #64748b;
+}
+
+.sc-plot-office-list {
+  background: #fff;
+  border: 1px solid #d9e3ee;
+  border-radius: 0.65rem;
+  padding: 1rem 1.1rem 1rem 2rem;
+  max-width: 52rem;
+}
+
+.sc-plot-resale-panel {
+  margin-top: 1.75rem;
+  padding: 1.15rem 1.2rem 1.2rem;
+  background: #fff;
+  border: 1px solid #d9e3ee;
+  border-radius: 0.65rem;
+  box-shadow: 0 4px 16px rgba(26, 54, 93, 0.06);
+}
+
+.sc-resale-stats-line {
+  margin: 0 0 0.75rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #475569;
+}
+
+.sc-resale-foot {
+  margin: 1rem 0 0;
+  font-size: 0.92rem;
+  color: #64748b;
+  line-height: 1.45;
 }
 
 .sc-plot-cards {

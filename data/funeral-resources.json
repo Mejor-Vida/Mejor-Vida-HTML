@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-29",
+  "updated": "2026-10-09",
   "states": [
     {
       "code": "NE",
@@ -7105,8 +7105,8 @@
       "guideEn": "/en/states/ohio/cleveland.html",
       "sourceLineEs": "Vito-Nero: precios de paquetes en su sitio, leídos el 28 de septiembre de 2026; el sitio no imprime fecha de vigencia. No publica un entierro inmediato. Cleveland Cremation (Parma): lista general vigente el 17 de noviembre de 2025. No publica cremación con memorial ni funeral con velatorio. Martens: lista general vigente el 1 de enero de 2025. La cremación directa de $1,700 no incluye la tarifa del crematorio de $350. Cummings & Davis: lista de paquetes vigente el 20 de enero de 2026. No publica cremación directa ni entierro inmediato; el paquete de cremación más bajo incluye una reunión. La columna del estimador son promedios de Ohio de Funeralocity (26 jul. 2026). Esos promedios y las listas son de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida.",
       "sourceLineEn": "Vito-Nero: package prices on their site, read September 28, 2026; the site does not print an effective date. It does not publish an immediate burial. Cleveland Cremation (Parma): general price list effective November 17, 2025. It does not publish cremation with a memorial or a funeral with visitation. Martens: general price list effective January 1, 2025. The $1,700 direct cremation does not include the $350 crematory fee. Cummings & Davis: package list effective January 20, 2026. It does not publish a direct cremation or an immediate burial; its lowest cremation package includes a gathering. The estimator column is Ohio Funeralocity averages (26 Jul 2026). Those averages and the lists are funeral-home charges. They do not include the plot, opening and closing, the vault, or the marker.",
-      "officesNoteEs": "El precio de $743 es solo el espacio en una sección de marcador al ras de un cementerio de la ciudad. No es el funeral y no incluye abrir y cerrar.",
-      "officesNoteEn": "The $743 price is only the space in a city-cemetery flush-marker section. It is not the funeral, and it does not include opening and closing.",
+      "officesNoteEs": "Esos precios son solo el espacio. No son el funeral. Abrir y cerrar, la bóveda y la lápida van aparte. El tablero de Ohio de Grave Solutions no tenía un anuncio activo de un cementerio de Cleveland el 28 de septiembre de 2026.",
+      "officesNoteEn": "Those prices are only the space. They are not the funeral. Opening and closing, the vault, and the marker are extra. The Ohio Grave Solutions board had no active ad for a Cleveland cemetery on September 28, 2026.",
       "homes": [
         {
           "id": "vito",
@@ -7295,11 +7295,39 @@
       ],
       "cemeteries": [
         {
-          "name": "Highland Park Cemetery, 21400 Chagrin Blvd. City grave: $743 flush or $873 raise",
+          "name": "West Park Cemetery, 3942 Ridge Rd, Cleveland. City grave: $743 flush or $873 rai",
+          "address": "3942 Ridge Rd",
+          "phone": "",
+          "noteEs": "West Park Cemetery, 3942 Ridge Rd, Cleveland. Tumba de la ciudad: $743 al ras o $873 con marcador elevado. Abrir y cerrar: en la oficina",
+          "noteEn": "West Park Cemetery, 3942 Ridge Rd, Cleveland. City grave: $743 flush or $873 raised marker. Opening and closing: at the office"
+        },
+        {
+          "name": "Cleveland Memorial Gardens, 4324 Green Rd, Cleveland. Same city fee: $743 flush ",
+          "address": "4324 Green Rd",
+          "phone": "",
+          "noteEs": "Cleveland Memorial Gardens, 4324 Green Rd, Cleveland. La misma tarifa de la ciudad: $743 al ras o $873 con marcador elevado",
+          "noteEn": "Cleveland Memorial Gardens, 4324 Green Rd, Cleveland. Same city fee: $743 flush or $873 raised marker"
+        },
+        {
+          "name": "Highland Park Cemetery, 21400 Chagrin Blvd. The city also names this office for ",
           "address": "21400 Chagrin Blvd.",
           "phone": "",
-          "noteEs": "Highland Park Cemetery, 21400 Chagrin Blvd. Espacio de la ciudad: $743 al ras o $873 con marcador elevado. Abrir y cerrar: en la oficina",
-          "noteEn": "Highland Park Cemetery, 21400 Chagrin Blvd. City grave: $743 flush or $873 raised marker. Opening and closing: at the office"
+          "noteEs": "Highland Park Cemetery, 21400 Chagrin Blvd. La ciudad también nombra esta oficina para comprar una tumba a esa tarifa",
+          "noteEn": "Highland Park Cemetery, 21400 Chagrin Blvd. The city also names this office for buying a grave at that fee"
+        },
+        {
+          "name": "Lake View Cemetery, 12316 Euclid Ave, Cleveland. Standard in-ground lot from $2,",
+          "address": "12316 Euclid Ave",
+          "phone": "216-421-2665",
+          "noteEs": "Lake View Cemetery, 12316 Euclid Ave, Cleveland. Lote estándar en tierra desde $2,195. Abrir y cerrar: $1,795 a $3,295",
+          "noteEn": "Lake View Cemetery, 12316 Euclid Ave, Cleveland. Standard in-ground lot from $2,195. Opening and closing: $1,795 to $3,295"
+        },
+        {
+          "name": "Lakewood Park Cemetery, 22025 Detroit Rd, Rocky River. Full grave, sections 1 th",
+          "address": "22025 Detroit Rd",
+          "phone": "440-333-1922",
+          "noteEs": "Lakewood Park Cemetery, 22025 Detroit Rd, Rocky River. Tumba completa, secciones 1 a 18: $3,000. Tumba de cremación, secciones 3, 8 y 15: $2,000. Abrir y cerrar entre semana antes de las 3 p.m.: $1,600. Lista vigente el 1 de septiembre de 2023",
+          "noteEn": "Lakewood Park Cemetery, 22025 Detroit Rd, Rocky River. Full grave, sections 1 through 18: $3,000. Cremation grave, sections 3, 8, and 15: $2,000. Weekday opening and closing before 3 p.m.: $1,600. List effective September 1, 2023"
         }
       ],
       "other": [
@@ -7345,8 +7373,8 @@
       ],
       "guideEs": "/estados/ohio/cincinnati.html",
       "guideEn": "/en/states/ohio/cincinnati.html",
-      "sourceLineEs": "Spring Grove: cremación directa de Spring Grove Cremation Society, vigente el 5 de marzo de 2026. Los ejemplos de memorial y de entierro con velorio son de springgrove.org, vigentes el 15 de enero de 2026. No publica un entierro inmediato. La columna del estimador son promedios de Ohio de Funeralocity (26 jul. 2026). Esos promedios y los ejemplos son de funeraria. No incluyen el lote de cuerpo completo, abrir y cerrar la tumba, la bóveda ni la lápida.",
-      "sourceLineEn": "Spring Grove: direct cremation from Spring Grove Cremation Society, effective March 5, 2026. The memorial and visitation-burial examples are from springgrove.org, effective January 15, 2026. It does not publish an immediate burial. The estimator column is Ohio Funeralocity averages (26 Jul 2026). Those averages and the examples are funeral-home charges. They do not include a full-body plot, opening and closing, the vault, or the marker.",
+      "sourceLineEs": "Spring Grove: cremación directa de Spring Grove Cremation Society, vigente el 5 de marzo de 2026. Los ejemplos de memorial y de entierro con velorio son de springgrove.org, vigentes el 15 de enero de 2026. No publica un entierro inmediato. Newcomer, capilla West Side: lista general vigente el 8 de octubre de 2024. Hodapp, capilla de Carthage; la misma lista cubre College Hill: vigente el 1 de julio de 2026. La columna del estimador son promedios de Ohio de Funeralocity (26 jul. 2026). Esos promedios y las listas son de funeraria. No incluyen el lote de cuerpo completo, abrir y cerrar la tumba, la bóveda ni la lápida.",
+      "sourceLineEn": "Spring Grove: direct cremation from Spring Grove Cremation Society, effective March 5, 2026. The memorial and visitation-burial examples are from springgrove.org, effective January 15, 2026. It does not publish an immediate burial. Newcomer, West Side Chapel: general price list effective October 8, 2024. Hodapp, Carthage chapel; the same list covers College Hill: effective July 1, 2026. The estimator column is Ohio Funeralocity averages (26 Jul 2026). Those averages and the lists are funeral-home charges. They do not include a full-body plot, opening and closing, the vault, or the marker.",
       "officesNoteEs": "Los $900 son un espacio individual para residentes de Montgomery, no de Cincinnati, y no son el funeral. Spring Grove no publica el precio del lote. Teléfono de Spring Grove: 513-681-7526.",
       "officesNoteEn": "The $900 figure is an individual gravesite for a Montgomery resident, not a Cincinnati resident, and it is not the funeral. Spring Grove does not publish the lot price. Spring Grove’s phone is 513-681-7526.",
       "homes": [
@@ -7356,10 +7384,10 @@
           "href": "https://www.springgrove.org/pricing-options/",
           "address": "Spring Grove Cemetery & Arboretum, Cincinnati",
           "phone": "",
-          "sourceEs": "Spring Grove: cremación directa de Spring Grove Cremation Society, vigente el 5 de marzo de 2026. Los ejemplos de memorial y de entierro con velorio son de springgrove.org, vigentes el 15 de enero de 2026. No publica un entierro inmediato. La columna del estimador son promedios de Ohio de Funeralocity (26 jul. 2026). Esos promedios y los ejemplos son de funeraria. No incluyen el lote de cuerpo completo, abrir y cerrar la tumba, la bóveda ni la lápida",
-          "sourceEn": "Spring Grove: direct cremation from Spring Grove Cremation Society, effective March 5, 2026. The memorial and visitation-burial examples are from springgrove.org, effective January 15, 2026. It does not publish an immediate burial. The estimator column is Ohio Funeralocity averages (26 Jul 2026). Those averages and the examples are funeral-home charges. They do not include a full-body plot, opening and closing, the vault, or the marker",
-          "gplDateEs": "26 jul. 2026",
-          "gplDateEn": "26 Jul 2026",
+          "sourceEs": "Spring Grove: cremación directa de Spring Grove Cremation Society, vigente el 5 de marzo de 2026. Los ejemplos de memorial y de entierro con velorio son de springgrove.org, vigentes el 15 de enero de 2026. No publica un entierro inmediato",
+          "sourceEn": "Spring Grove: direct cremation from Spring Grove Cremation Society, effective March 5, 2026. The memorial and visitation-burial examples are from springgrove.org, effective January 15, 2026. It does not publish an immediate burial",
+          "gplDateEs": "",
+          "gplDateEn": "",
           "gplKind": "published",
           "packages": [
             {
@@ -7393,6 +7421,98 @@
               "amt": 6620,
               "noteEs": "Ejemplo de entierro con velorio el mismo día, vigente el 15 de enero de 2026. En ese ejemplo el ataúd y la bóveda van aparte. El lote no va incluido.",
               "noteEn": "Same-day visitation burial example, effective January 15, 2026. In that example the casket and vault are extra. The plot is not included."
+            }
+          ]
+        },
+        {
+          "id": "newcomer",
+          "name": "Newcomer",
+          "href": "https://cdn.newcomer.com/prod/pLists/price-list-Cincinnati.pdf",
+          "address": "3300 Parkcrest Ln, Cincinnati",
+          "phone": "513-661-7283",
+          "sourceEs": "Newcomer, capilla West Side: lista general vigente el 8 de octubre de 2024",
+          "sourceEn": "Newcomer, West Side Chapel: general price list effective October 8, 2024",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "published",
+          "packages": [
+            {
+              "id": "directCremation",
+              "labelEs": "Cremación directa",
+              "labelEn": "Direct cremation",
+              "amt": 1370,
+              "noteEs": "Cremación directa con contenedor de cartón, lista general vigente el 8 de octubre de 2024. Con contenedor del comprador es $1,195. No incluye urna. El lote no va incluido.",
+              "noteEn": "Direct cremation with a cardboard container, general price list effective October 8, 2024. With a container from the purchaser it is $1,195. No urn. The plot is not included."
+            },
+            {
+              "id": "immediateBurial",
+              "labelEs": "Entierro inmediato",
+              "labelEn": "Immediate burial",
+              "amt": 2200,
+              "noteEs": "Entierro inmediato con ataúd del comprador, misma lista. No incluye el ataúd, velatorio, ceremonia ni servicio de pie de tumba. El lote no va incluido.",
+              "noteEn": "Immediate burial with a casket from the purchaser, same list. It does not include the casket, visitation, a ceremony, or a graveside service. The plot is not included."
+            },
+            {
+              "id": "memorialCremation",
+              "labelEs": "Cremación con memorial",
+              "labelEn": "Cremation with memorial",
+              "amt": 2695,
+              "noteEs": "Plan “Memorial Ceremony After Cremation”, vigente el 8 de octubre de 2024. Reunión y ceremonia el mismo día, después de la cremación. No incluye contenedor ni urna. El lote no va incluido.",
+              "noteEn": "“Memorial Ceremony After Cremation” plan, effective October 8, 2024. Same-day gathering and ceremony after cremation. It does not include a container or an urn. The plot is not included."
+            },
+            {
+              "id": "traditional",
+              "labelEs": "Funeral tradicional con velatorio",
+              "labelEn": "Traditional funeral with visitation",
+              "amt": 3195,
+              "noteEs": "Plan “Funeral Ceremony”, vigente el 8 de octubre de 2024. Velatorio el día anterior y ceremonia. No incluye ataúd ni bóveda. Si visita y servicio son el mismo día, la lista cobra $3,095. El lote no va incluido.",
+              "noteEn": "“Funeral Ceremony” plan, effective October 8, 2024. Visitation the day before and a ceremony. It does not include a casket or vault. If the visit and service are the same day, the list charges $3,095. The plot is not included."
+            }
+          ]
+        },
+        {
+          "id": "hodapp",
+          "name": "Hodapp",
+          "href": "https://www.hodappfuneralhome.com/resources/general-price-list",
+          "address": "7401 Vine St, Cincinnati",
+          "phone": "513-821-0805",
+          "sourceEs": "Hodapp, capilla de Carthage; la misma lista cubre College Hill: vigente el 1 de julio de 2026. La columna del estimador son promedios de Ohio de Funeralocity (26 jul. 2026). Esos promedios y las listas son de funeraria. No incluyen el lote de cuerpo completo, abrir y cerrar la tumba, la bóveda ni la lápida",
+          "sourceEn": "Hodapp, Carthage chapel; the same list covers College Hill: effective July 1, 2026. The estimator column is Ohio Funeralocity averages (26 Jul 2026). Those averages and the lists are funeral-home charges. They do not include a full-body plot, opening and closing, the vault, or the marker",
+          "gplDateEs": "26 jul. 2026",
+          "gplDateEn": "26 Jul 2026",
+          "gplKind": "published",
+          "packages": [
+            {
+              "id": "directCremation",
+              "labelEs": "Cremación directa",
+              "labelEn": "Direct cremation",
+              "amt": 2300,
+              "noteEs": "Paquete “Direct Cremation No Services”, lista vigente el 1 de julio de 2026. Incluye el cargo de servicio de $2,150 y un ataúd de cremación de $150, y entrega las cenizas en una urna temporal. Con contenedor del comprador, la cremación directa es $2,150. No hay velatorio. El lote no va incluido.",
+              "noteEn": "“Direct Cremation No Services” package, list effective July 1, 2026. It includes the $2,150 service charge and a $150 cremation casket, and returns the ashes in a temporary urn. With a container from the purchaser, direct cremation is $2,150. No visitation. The plot is not included."
+            },
+            {
+              "id": "immediateBurial",
+              "labelEs": "Entierro inmediato",
+              "labelEn": "Immediate burial",
+              "amt": 2150,
+              "noteEs": "Entierro inmediato con contenedor del comprador, misma lista. No incluye ataúd, velatorio ni ceremonia. Con ataúd forrado de tela, la lista cobra $3,320. El lote no va incluido.",
+              "noteEn": "Immediate burial with a container from the purchaser, same list. It does not include a casket, visitation, or a ceremony. With a cloth-covered casket, the list charges $3,320. The plot is not included."
+            },
+            {
+              "id": "memorialCremation",
+              "labelEs": "Cremación con memorial",
+              "labelEn": "Cremation with memorial",
+              "amt": 3550,
+              "noteEs": "Cremación directa con memorial en horario de oficina, vigente el 1 de julio de 2026. Incluye el cargo de servicio, el memorial y un contenedor de cartón. No incluye urna. De noche entre semana es $3,800. El lote no va incluido.",
+              "noteEn": "Direct cremation with a memorial during business hours, effective July 1, 2026. It includes the service charge, the memorial, and a corrugated container. It does not include an urn. A weekday evening is $3,800. The plot is not included."
+            },
+            {
+              "id": "traditional",
+              "labelEs": "Funeral tradicional con velatorio",
+              "labelEn": "Traditional funeral with visitation",
+              "amt": 4995,
+              "noteEs": "Paquete “Traditional Funeral”, vigente el 1 de julio de 2026. Velatorio por la noche y funeral con entierro al día siguiente. No incluye ataúd ni bóveda. El funeral de un solo día (“Conventional”) es $4,495. El lote no va incluido.",
+              "noteEn": "“Traditional Funeral” package, effective July 1, 2026. Evening visitation, then a funeral and burial the next day. It does not include a casket or vault. The one-day “Conventional” funeral is $4,495. The plot is not included."
             }
           ]
         }
@@ -7458,8 +7578,8 @@
       "guideEn": "/en/states/ohio/toledo.html",
       "sourceLineEs": "Newcomer Toledo: lista general vigente el 11 de septiembre de 2026. Hay capillas en Laskey Road, Heatherdowns y King Road. La columna del estimador son promedios de Ohio de Funeralocity (26 jul. 2026). Esos promedios y la lista son de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida.",
       "sourceLineEn": "Newcomer Toledo: general price list effective September 11, 2026. Chapels are on Laskey Road, Heatherdowns, and King Road. The estimator column is Ohio Funeralocity averages (26 Jul 2026). Those averages and the list are funeral-home charges. They do not include the plot, opening and closing, the vault, or the marker.",
-      "officesNoteEs": "Woodlawn no publica el precio del lote en internet. Los $250 y $150 son recargos por aviso corto, no el precio del espacio. Un anuncio de cripta en Waterville no es un lote en tierra.",
-      "officesNoteEn": "Woodlawn does not publish the lot price online. The $250 and $150 figures are short-notice fees, not the space price. A crypt ad in Waterville is not an in-ground lot.",
+      "officesNoteEs": "Los $2,495 son el precio inicial que Ottawa Hills publica para propiedad de entierro y de cremación. No es el funeral y no incluye abrir y cerrar. Woodlawn no publica el precio del lote. Los $250 y $150 son recargos por aviso corto, no el precio del espacio.",
+      "officesNoteEn": "The $2,495 figure is Ottawa Hills’ published starting price for burial and cremation property. It is not the funeral, and it does not include opening and closing. Woodlawn does not publish the lot price. The $250 and $150 figures are short-notice fees, not the space price.",
       "homes": [
         {
           "id": "newcomer",
@@ -7509,6 +7629,13 @@
         }
       ],
       "cemeteries": [
+        {
+          "name": "Ottawa Hills Memorial Park, 4210 West Central Avenue, Toledo. Burial and cremati",
+          "address": "4210 West Central Ave",
+          "phone": "419-536-8321",
+          "noteEs": "Ottawa Hills Memorial Park, 4210 West Central Avenue, Toledo. Propiedad de entierro y de cremación desde $2,495. Abrir y cerrar: en la oficina",
+          "noteEn": "Ottawa Hills Memorial Park, 4210 West Central Avenue, Toledo. Burial and cremation property from $2,495. Opening and closing: at the office"
+        },
         {
           "name": "Historic Woodlawn Cemetery, 1502 West Central Avenue, Toledo. Lot: ask for the l",
           "address": "1502 West Central Ave",
@@ -110166,14 +110293,43 @@
           ]
         }
       ],
-      "localCemeteries": [],
+      "localCemeteries": [
+        {
+          "name": "Lake View Cemetery, 12316 Euclid Ave, Cleveland. Standard in-ground lot from $2,",
+          "address": "12316 Euclid Ave",
+          "phone": "216-421-2665",
+          "noteEs": "Lake View Cemetery, 12316 Euclid Ave, Cleveland. Lote estándar en tierra desde $2,195. Abrir y cerrar: $1,795 a $3,295",
+          "noteEn": "Lake View Cemetery, 12316 Euclid Ave, Cleveland. Standard in-ground lot from $2,195. Opening and closing: $1,795 to $3,295"
+        }
+      ],
       "nearbyCemeteries": [
         {
-          "name": "Highland Park Cemetery, 21400 Chagrin Blvd. City grave: $743 flush or $873 raise",
+          "name": "West Park Cemetery, 3942 Ridge Rd, Cleveland. City grave: $743 flush or $873 rai",
+          "address": "3942 Ridge Rd",
+          "phone": "",
+          "noteEs": "West Park Cemetery, 3942 Ridge Rd, Cleveland. Tumba de la ciudad: $743 al ras o $873 con marcador elevado. Abrir y cerrar: en la oficina",
+          "noteEn": "West Park Cemetery, 3942 Ridge Rd, Cleveland. City grave: $743 flush or $873 raised marker. Opening and closing: at the office"
+        },
+        {
+          "name": "Cleveland Memorial Gardens, 4324 Green Rd, Cleveland. Same city fee: $743 flush ",
+          "address": "4324 Green Rd",
+          "phone": "",
+          "noteEs": "Cleveland Memorial Gardens, 4324 Green Rd, Cleveland. La misma tarifa de la ciudad: $743 al ras o $873 con marcador elevado",
+          "noteEn": "Cleveland Memorial Gardens, 4324 Green Rd, Cleveland. Same city fee: $743 flush or $873 raised marker"
+        },
+        {
+          "name": "Highland Park Cemetery, 21400 Chagrin Blvd. The city also names this office for ",
           "address": "21400 Chagrin Blvd.",
           "phone": "",
-          "noteEs": "Highland Park Cemetery, 21400 Chagrin Blvd. Espacio de la ciudad: $743 al ras o $873 con marcador elevado. Abrir y cerrar: en la oficina",
-          "noteEn": "Highland Park Cemetery, 21400 Chagrin Blvd. City grave: $743 flush or $873 raised marker. Opening and closing: at the office"
+          "noteEs": "Highland Park Cemetery, 21400 Chagrin Blvd. La ciudad también nombra esta oficina para comprar una tumba a esa tarifa",
+          "noteEn": "Highland Park Cemetery, 21400 Chagrin Blvd. The city also names this office for buying a grave at that fee"
+        },
+        {
+          "name": "Lakewood Park Cemetery, 22025 Detroit Rd, Rocky River. Full grave, sections 1 th",
+          "address": "22025 Detroit Rd",
+          "phone": "440-333-1922",
+          "noteEs": "Lakewood Park Cemetery, 22025 Detroit Rd, Rocky River. Tumba completa, secciones 1 a 18: $3,000. Tumba de cremación, secciones 3, 8 y 15: $2,000. Abrir y cerrar entre semana antes de las 3 p.m.: $1,600. Lista vigente el 1 de septiembre de 2023",
+          "noteEn": "Lakewood Park Cemetery, 22025 Detroit Rd, Rocky River. Full grave, sections 1 through 18: $3,000. Cremation grave, sections 3, 8, and 15: $2,000. Weekday opening and closing before 3 p.m.: $1,600. List effective September 1, 2023"
         }
       ],
       "other": [
@@ -110205,8 +110361,8 @@
       "pathEn": "/en/funeral-homes-cemeteries.html?estado=ohio&ciudad=forest-park",
       "guideEs": "/estados/ohio/cincinnati.html",
       "guideEn": "/en/states/ohio/cincinnati.html",
-      "sourceLineEs": "Spring Grove: cremación directa de Spring Grove Cremation Society, vigente el 5 de marzo de 2026. Los ejemplos de memorial y de entierro con velorio son de springgrove.org, vigentes el 15 de enero de 2026. No publica un entierro inmediato. La columna del estimador son promedios de Ohio de Funeralocity (26 jul. 2026). Esos promedios y los ejemplos son de funeraria. No incluyen el lote de cuerpo completo, abrir y cerrar la tumba, la bóveda ni la lápida.",
-      "sourceLineEn": "Spring Grove: direct cremation from Spring Grove Cremation Society, effective March 5, 2026. The memorial and visitation-burial examples are from springgrove.org, effective January 15, 2026. It does not publish an immediate burial. The estimator column is Ohio Funeralocity averages (26 Jul 2026). Those averages and the examples are funeral-home charges. They do not include a full-body plot, opening and closing, the vault, or the marker.",
+      "sourceLineEs": "Spring Grove: cremación directa de Spring Grove Cremation Society, vigente el 5 de marzo de 2026. Los ejemplos de memorial y de entierro con velorio son de springgrove.org, vigentes el 15 de enero de 2026. No publica un entierro inmediato. Newcomer, capilla West Side: lista general vigente el 8 de octubre de 2024. Hodapp, capilla de Carthage; la misma lista cubre College Hill: vigente el 1 de julio de 2026. La columna del estimador son promedios de Ohio de Funeralocity (26 jul. 2026). Esos promedios y las listas son de funeraria. No incluyen el lote de cuerpo completo, abrir y cerrar la tumba, la bóveda ni la lápida.",
+      "sourceLineEn": "Spring Grove: direct cremation from Spring Grove Cremation Society, effective March 5, 2026. The memorial and visitation-burial examples are from springgrove.org, effective January 15, 2026. It does not publish an immediate burial. Newcomer, West Side Chapel: general price list effective October 8, 2024. Hodapp, Carthage chapel; the same list covers College Hill: effective July 1, 2026. The estimator column is Ohio Funeralocity averages (26 Jul 2026). Those averages and the lists are funeral-home charges. They do not include a full-body plot, opening and closing, the vault, or the marker.",
       "localHomes": [],
       "nearbyHomes": [
         {
@@ -110215,10 +110371,10 @@
           "href": "https://www.springgrove.org/pricing-options/",
           "address": "Spring Grove Cemetery & Arboretum, Cincinnati",
           "phone": "",
-          "sourceEs": "Spring Grove: cremación directa de Spring Grove Cremation Society, vigente el 5 de marzo de 2026. Los ejemplos de memorial y de entierro con velorio son de springgrove.org, vigentes el 15 de enero de 2026. No publica un entierro inmediato. La columna del estimador son promedios de Ohio de Funeralocity (26 jul. 2026). Esos promedios y los ejemplos son de funeraria. No incluyen el lote de cuerpo completo, abrir y cerrar la tumba, la bóveda ni la lápida",
-          "sourceEn": "Spring Grove: direct cremation from Spring Grove Cremation Society, effective March 5, 2026. The memorial and visitation-burial examples are from springgrove.org, effective January 15, 2026. It does not publish an immediate burial. The estimator column is Ohio Funeralocity averages (26 Jul 2026). Those averages and the examples are funeral-home charges. They do not include a full-body plot, opening and closing, the vault, or the marker",
-          "gplDateEs": "26 jul. 2026",
-          "gplDateEn": "26 Jul 2026",
+          "sourceEs": "Spring Grove: cremación directa de Spring Grove Cremation Society, vigente el 5 de marzo de 2026. Los ejemplos de memorial y de entierro con velorio son de springgrove.org, vigentes el 15 de enero de 2026. No publica un entierro inmediato",
+          "sourceEn": "Spring Grove: direct cremation from Spring Grove Cremation Society, effective March 5, 2026. The memorial and visitation-burial examples are from springgrove.org, effective January 15, 2026. It does not publish an immediate burial",
+          "gplDateEs": "",
+          "gplDateEn": "",
           "gplKind": "published",
           "packages": [
             {
@@ -110252,6 +110408,98 @@
               "amt": 6620,
               "noteEs": "Ejemplo de entierro con velorio el mismo día, vigente el 15 de enero de 2026. En ese ejemplo el ataúd y la bóveda van aparte. El lote no va incluido.",
               "noteEn": "Same-day visitation burial example, effective January 15, 2026. In that example the casket and vault are extra. The plot is not included."
+            }
+          ]
+        },
+        {
+          "id": "newcomer",
+          "name": "Newcomer",
+          "href": "https://cdn.newcomer.com/prod/pLists/price-list-Cincinnati.pdf",
+          "address": "3300 Parkcrest Ln, Cincinnati",
+          "phone": "513-661-7283",
+          "sourceEs": "Newcomer, capilla West Side: lista general vigente el 8 de octubre de 2024",
+          "sourceEn": "Newcomer, West Side Chapel: general price list effective October 8, 2024",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "published",
+          "packages": [
+            {
+              "id": "directCremation",
+              "labelEs": "Cremación directa",
+              "labelEn": "Direct cremation",
+              "amt": 1370,
+              "noteEs": "Cremación directa con contenedor de cartón, lista general vigente el 8 de octubre de 2024. Con contenedor del comprador es $1,195. No incluye urna. El lote no va incluido.",
+              "noteEn": "Direct cremation with a cardboard container, general price list effective October 8, 2024. With a container from the purchaser it is $1,195. No urn. The plot is not included."
+            },
+            {
+              "id": "immediateBurial",
+              "labelEs": "Entierro inmediato",
+              "labelEn": "Immediate burial",
+              "amt": 2200,
+              "noteEs": "Entierro inmediato con ataúd del comprador, misma lista. No incluye el ataúd, velatorio, ceremonia ni servicio de pie de tumba. El lote no va incluido.",
+              "noteEn": "Immediate burial with a casket from the purchaser, same list. It does not include the casket, visitation, a ceremony, or a graveside service. The plot is not included."
+            },
+            {
+              "id": "memorialCremation",
+              "labelEs": "Cremación con memorial",
+              "labelEn": "Cremation with memorial",
+              "amt": 2695,
+              "noteEs": "Plan “Memorial Ceremony After Cremation”, vigente el 8 de octubre de 2024. Reunión y ceremonia el mismo día, después de la cremación. No incluye contenedor ni urna. El lote no va incluido.",
+              "noteEn": "“Memorial Ceremony After Cremation” plan, effective October 8, 2024. Same-day gathering and ceremony after cremation. It does not include a container or an urn. The plot is not included."
+            },
+            {
+              "id": "traditional",
+              "labelEs": "Funeral tradicional con velatorio",
+              "labelEn": "Traditional funeral with visitation",
+              "amt": 3195,
+              "noteEs": "Plan “Funeral Ceremony”, vigente el 8 de octubre de 2024. Velatorio el día anterior y ceremonia. No incluye ataúd ni bóveda. Si visita y servicio son el mismo día, la lista cobra $3,095. El lote no va incluido.",
+              "noteEn": "“Funeral Ceremony” plan, effective October 8, 2024. Visitation the day before and a ceremony. It does not include a casket or vault. If the visit and service are the same day, the list charges $3,095. The plot is not included."
+            }
+          ]
+        },
+        {
+          "id": "hodapp",
+          "name": "Hodapp",
+          "href": "https://www.hodappfuneralhome.com/resources/general-price-list",
+          "address": "7401 Vine St, Cincinnati",
+          "phone": "513-821-0805",
+          "sourceEs": "Hodapp, capilla de Carthage; la misma lista cubre College Hill: vigente el 1 de julio de 2026. La columna del estimador son promedios de Ohio de Funeralocity (26 jul. 2026). Esos promedios y las listas son de funeraria. No incluyen el lote de cuerpo completo, abrir y cerrar la tumba, la bóveda ni la lápida",
+          "sourceEn": "Hodapp, Carthage chapel; the same list covers College Hill: effective July 1, 2026. The estimator column is Ohio Funeralocity averages (26 Jul 2026). Those averages and the lists are funeral-home charges. They do not include a full-body plot, opening and closing, the vault, or the marker",
+          "gplDateEs": "26 jul. 2026",
+          "gplDateEn": "26 Jul 2026",
+          "gplKind": "published",
+          "packages": [
+            {
+              "id": "directCremation",
+              "labelEs": "Cremación directa",
+              "labelEn": "Direct cremation",
+              "amt": 2300,
+              "noteEs": "Paquete “Direct Cremation No Services”, lista vigente el 1 de julio de 2026. Incluye el cargo de servicio de $2,150 y un ataúd de cremación de $150, y entrega las cenizas en una urna temporal. Con contenedor del comprador, la cremación directa es $2,150. No hay velatorio. El lote no va incluido.",
+              "noteEn": "“Direct Cremation No Services” package, list effective July 1, 2026. It includes the $2,150 service charge and a $150 cremation casket, and returns the ashes in a temporary urn. With a container from the purchaser, direct cremation is $2,150. No visitation. The plot is not included."
+            },
+            {
+              "id": "immediateBurial",
+              "labelEs": "Entierro inmediato",
+              "labelEn": "Immediate burial",
+              "amt": 2150,
+              "noteEs": "Entierro inmediato con contenedor del comprador, misma lista. No incluye ataúd, velatorio ni ceremonia. Con ataúd forrado de tela, la lista cobra $3,320. El lote no va incluido.",
+              "noteEn": "Immediate burial with a container from the purchaser, same list. It does not include a casket, visitation, or a ceremony. With a cloth-covered casket, the list charges $3,320. The plot is not included."
+            },
+            {
+              "id": "memorialCremation",
+              "labelEs": "Cremación con memorial",
+              "labelEn": "Cremation with memorial",
+              "amt": 3550,
+              "noteEs": "Cremación directa con memorial en horario de oficina, vigente el 1 de julio de 2026. Incluye el cargo de servicio, el memorial y un contenedor de cartón. No incluye urna. De noche entre semana es $3,800. El lote no va incluido.",
+              "noteEn": "Direct cremation with a memorial during business hours, effective July 1, 2026. It includes the service charge, the memorial, and a corrugated container. It does not include an urn. A weekday evening is $3,800. The plot is not included."
+            },
+            {
+              "id": "traditional",
+              "labelEs": "Funeral tradicional con velatorio",
+              "labelEn": "Traditional funeral with visitation",
+              "amt": 4995,
+              "noteEs": "Paquete “Traditional Funeral”, vigente el 1 de julio de 2026. Velatorio por la noche y funeral con entierro al día siguiente. No incluye ataúd ni bóveda. El funeral de un solo día (“Conventional”) es $4,495. El lote no va incluido.",
+              "noteEn": "“Traditional Funeral” package, effective July 1, 2026. Evening visitation, then a funeral and burial the next day. It does not include a casket or vault. The one-day “Conventional” funeral is $4,495. The plot is not included."
             }
           ]
         }
@@ -110834,6 +111082,13 @@
       "localCemeteries": [],
       "nearbyCemeteries": [
         {
+          "name": "Ottawa Hills Memorial Park, 4210 West Central Avenue, Toledo. Burial and cremati",
+          "address": "4210 West Central Ave",
+          "phone": "419-536-8321",
+          "noteEs": "Ottawa Hills Memorial Park, 4210 West Central Avenue, Toledo. Propiedad de entierro y de cremación desde $2,495. Abrir y cerrar: en la oficina",
+          "noteEn": "Ottawa Hills Memorial Park, 4210 West Central Avenue, Toledo. Burial and cremation property from $2,495. Opening and closing: at the office"
+        },
+        {
           "name": "Historic Woodlawn Cemetery, 1502 West Central Avenue, Toledo. Lot: ask for the l",
           "address": "1502 West Central Ave",
           "phone": "419-472-2186",
@@ -110870,8 +111125,8 @@
       "pathEn": "/en/funeral-homes-cemeteries.html?estado=ohio&ciudad=norwood",
       "guideEs": "/estados/ohio/cincinnati.html",
       "guideEn": "/en/states/ohio/cincinnati.html",
-      "sourceLineEs": "Spring Grove: cremación directa de Spring Grove Cremation Society, vigente el 5 de marzo de 2026. Los ejemplos de memorial y de entierro con velorio son de springgrove.org, vigentes el 15 de enero de 2026. No publica un entierro inmediato. La columna del estimador son promedios de Ohio de Funeralocity (26 jul. 2026). Esos promedios y los ejemplos son de funeraria. No incluyen el lote de cuerpo completo, abrir y cerrar la tumba, la bóveda ni la lápida.",
-      "sourceLineEn": "Spring Grove: direct cremation from Spring Grove Cremation Society, effective March 5, 2026. The memorial and visitation-burial examples are from springgrove.org, effective January 15, 2026. It does not publish an immediate burial. The estimator column is Ohio Funeralocity averages (26 Jul 2026). Those averages and the examples are funeral-home charges. They do not include a full-body plot, opening and closing, the vault, or the marker.",
+      "sourceLineEs": "Spring Grove: cremación directa de Spring Grove Cremation Society, vigente el 5 de marzo de 2026. Los ejemplos de memorial y de entierro con velorio son de springgrove.org, vigentes el 15 de enero de 2026. No publica un entierro inmediato. Newcomer, capilla West Side: lista general vigente el 8 de octubre de 2024. Hodapp, capilla de Carthage; la misma lista cubre College Hill: vigente el 1 de julio de 2026. La columna del estimador son promedios de Ohio de Funeralocity (26 jul. 2026). Esos promedios y las listas son de funeraria. No incluyen el lote de cuerpo completo, abrir y cerrar la tumba, la bóveda ni la lápida.",
+      "sourceLineEn": "Spring Grove: direct cremation from Spring Grove Cremation Society, effective March 5, 2026. The memorial and visitation-burial examples are from springgrove.org, effective January 15, 2026. It does not publish an immediate burial. Newcomer, West Side Chapel: general price list effective October 8, 2024. Hodapp, Carthage chapel; the same list covers College Hill: effective July 1, 2026. The estimator column is Ohio Funeralocity averages (26 Jul 2026). Those averages and the lists are funeral-home charges. They do not include a full-body plot, opening and closing, the vault, or the marker.",
       "localHomes": [],
       "nearbyHomes": [
         {
@@ -110880,10 +111135,10 @@
           "href": "https://www.springgrove.org/pricing-options/",
           "address": "Spring Grove Cemetery & Arboretum, Cincinnati",
           "phone": "",
-          "sourceEs": "Spring Grove: cremación directa de Spring Grove Cremation Society, vigente el 5 de marzo de 2026. Los ejemplos de memorial y de entierro con velorio son de springgrove.org, vigentes el 15 de enero de 2026. No publica un entierro inmediato. La columna del estimador son promedios de Ohio de Funeralocity (26 jul. 2026). Esos promedios y los ejemplos son de funeraria. No incluyen el lote de cuerpo completo, abrir y cerrar la tumba, la bóveda ni la lápida",
-          "sourceEn": "Spring Grove: direct cremation from Spring Grove Cremation Society, effective March 5, 2026. The memorial and visitation-burial examples are from springgrove.org, effective January 15, 2026. It does not publish an immediate burial. The estimator column is Ohio Funeralocity averages (26 Jul 2026). Those averages and the examples are funeral-home charges. They do not include a full-body plot, opening and closing, the vault, or the marker",
-          "gplDateEs": "26 jul. 2026",
-          "gplDateEn": "26 Jul 2026",
+          "sourceEs": "Spring Grove: cremación directa de Spring Grove Cremation Society, vigente el 5 de marzo de 2026. Los ejemplos de memorial y de entierro con velorio son de springgrove.org, vigentes el 15 de enero de 2026. No publica un entierro inmediato",
+          "sourceEn": "Spring Grove: direct cremation from Spring Grove Cremation Society, effective March 5, 2026. The memorial and visitation-burial examples are from springgrove.org, effective January 15, 2026. It does not publish an immediate burial",
+          "gplDateEs": "",
+          "gplDateEn": "",
           "gplKind": "published",
           "packages": [
             {
@@ -110917,6 +111172,98 @@
               "amt": 6620,
               "noteEs": "Ejemplo de entierro con velorio el mismo día, vigente el 15 de enero de 2026. En ese ejemplo el ataúd y la bóveda van aparte. El lote no va incluido.",
               "noteEn": "Same-day visitation burial example, effective January 15, 2026. In that example the casket and vault are extra. The plot is not included."
+            }
+          ]
+        },
+        {
+          "id": "newcomer",
+          "name": "Newcomer",
+          "href": "https://cdn.newcomer.com/prod/pLists/price-list-Cincinnati.pdf",
+          "address": "3300 Parkcrest Ln, Cincinnati",
+          "phone": "513-661-7283",
+          "sourceEs": "Newcomer, capilla West Side: lista general vigente el 8 de octubre de 2024",
+          "sourceEn": "Newcomer, West Side Chapel: general price list effective October 8, 2024",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "published",
+          "packages": [
+            {
+              "id": "directCremation",
+              "labelEs": "Cremación directa",
+              "labelEn": "Direct cremation",
+              "amt": 1370,
+              "noteEs": "Cremación directa con contenedor de cartón, lista general vigente el 8 de octubre de 2024. Con contenedor del comprador es $1,195. No incluye urna. El lote no va incluido.",
+              "noteEn": "Direct cremation with a cardboard container, general price list effective October 8, 2024. With a container from the purchaser it is $1,195. No urn. The plot is not included."
+            },
+            {
+              "id": "immediateBurial",
+              "labelEs": "Entierro inmediato",
+              "labelEn": "Immediate burial",
+              "amt": 2200,
+              "noteEs": "Entierro inmediato con ataúd del comprador, misma lista. No incluye el ataúd, velatorio, ceremonia ni servicio de pie de tumba. El lote no va incluido.",
+              "noteEn": "Immediate burial with a casket from the purchaser, same list. It does not include the casket, visitation, a ceremony, or a graveside service. The plot is not included."
+            },
+            {
+              "id": "memorialCremation",
+              "labelEs": "Cremación con memorial",
+              "labelEn": "Cremation with memorial",
+              "amt": 2695,
+              "noteEs": "Plan “Memorial Ceremony After Cremation”, vigente el 8 de octubre de 2024. Reunión y ceremonia el mismo día, después de la cremación. No incluye contenedor ni urna. El lote no va incluido.",
+              "noteEn": "“Memorial Ceremony After Cremation” plan, effective October 8, 2024. Same-day gathering and ceremony after cremation. It does not include a container or an urn. The plot is not included."
+            },
+            {
+              "id": "traditional",
+              "labelEs": "Funeral tradicional con velatorio",
+              "labelEn": "Traditional funeral with visitation",
+              "amt": 3195,
+              "noteEs": "Plan “Funeral Ceremony”, vigente el 8 de octubre de 2024. Velatorio el día anterior y ceremonia. No incluye ataúd ni bóveda. Si visita y servicio son el mismo día, la lista cobra $3,095. El lote no va incluido.",
+              "noteEn": "“Funeral Ceremony” plan, effective October 8, 2024. Visitation the day before and a ceremony. It does not include a casket or vault. If the visit and service are the same day, the list charges $3,095. The plot is not included."
+            }
+          ]
+        },
+        {
+          "id": "hodapp",
+          "name": "Hodapp",
+          "href": "https://www.hodappfuneralhome.com/resources/general-price-list",
+          "address": "7401 Vine St, Cincinnati",
+          "phone": "513-821-0805",
+          "sourceEs": "Hodapp, capilla de Carthage; la misma lista cubre College Hill: vigente el 1 de julio de 2026. La columna del estimador son promedios de Ohio de Funeralocity (26 jul. 2026). Esos promedios y las listas son de funeraria. No incluyen el lote de cuerpo completo, abrir y cerrar la tumba, la bóveda ni la lápida",
+          "sourceEn": "Hodapp, Carthage chapel; the same list covers College Hill: effective July 1, 2026. The estimator column is Ohio Funeralocity averages (26 Jul 2026). Those averages and the lists are funeral-home charges. They do not include a full-body plot, opening and closing, the vault, or the marker",
+          "gplDateEs": "26 jul. 2026",
+          "gplDateEn": "26 Jul 2026",
+          "gplKind": "published",
+          "packages": [
+            {
+              "id": "directCremation",
+              "labelEs": "Cremación directa",
+              "labelEn": "Direct cremation",
+              "amt": 2300,
+              "noteEs": "Paquete “Direct Cremation No Services”, lista vigente el 1 de julio de 2026. Incluye el cargo de servicio de $2,150 y un ataúd de cremación de $150, y entrega las cenizas en una urna temporal. Con contenedor del comprador, la cremación directa es $2,150. No hay velatorio. El lote no va incluido.",
+              "noteEn": "“Direct Cremation No Services” package, list effective July 1, 2026. It includes the $2,150 service charge and a $150 cremation casket, and returns the ashes in a temporary urn. With a container from the purchaser, direct cremation is $2,150. No visitation. The plot is not included."
+            },
+            {
+              "id": "immediateBurial",
+              "labelEs": "Entierro inmediato",
+              "labelEn": "Immediate burial",
+              "amt": 2150,
+              "noteEs": "Entierro inmediato con contenedor del comprador, misma lista. No incluye ataúd, velatorio ni ceremonia. Con ataúd forrado de tela, la lista cobra $3,320. El lote no va incluido.",
+              "noteEn": "Immediate burial with a container from the purchaser, same list. It does not include a casket, visitation, or a ceremony. With a cloth-covered casket, the list charges $3,320. The plot is not included."
+            },
+            {
+              "id": "memorialCremation",
+              "labelEs": "Cremación con memorial",
+              "labelEn": "Cremation with memorial",
+              "amt": 3550,
+              "noteEs": "Cremación directa con memorial en horario de oficina, vigente el 1 de julio de 2026. Incluye el cargo de servicio, el memorial y un contenedor de cartón. No incluye urna. De noche entre semana es $3,800. El lote no va incluido.",
+              "noteEn": "Direct cremation with a memorial during business hours, effective July 1, 2026. It includes the service charge, the memorial, and a corrugated container. It does not include an urn. A weekday evening is $3,800. The plot is not included."
+            },
+            {
+              "id": "traditional",
+              "labelEs": "Funeral tradicional con velatorio",
+              "labelEn": "Traditional funeral with visitation",
+              "amt": 4995,
+              "noteEs": "Paquete “Traditional Funeral”, vigente el 1 de julio de 2026. Velatorio por la noche y funeral con entierro al día siguiente. No incluye ataúd ni bóveda. El funeral de un solo día (“Conventional”) es $4,495. El lote no va incluido.",
+              "noteEn": "“Traditional Funeral” package, effective July 1, 2026. Evening visitation, then a funeral and burial the next day. It does not include a casket or vault. The one-day “Conventional” funeral is $4,495. The plot is not included."
             }
           ]
         }
@@ -111020,6 +111367,13 @@
       ],
       "localCemeteries": [],
       "nearbyCemeteries": [
+        {
+          "name": "Ottawa Hills Memorial Park, 4210 West Central Avenue, Toledo. Burial and cremati",
+          "address": "4210 West Central Ave",
+          "phone": "419-536-8321",
+          "noteEs": "Ottawa Hills Memorial Park, 4210 West Central Avenue, Toledo. Propiedad de entierro y de cremación desde $2,495. Abrir y cerrar: en la oficina",
+          "noteEn": "Ottawa Hills Memorial Park, 4210 West Central Avenue, Toledo. Burial and cremation property from $2,495. Opening and closing: at the office"
+        },
         {
           "name": "Historic Woodlawn Cemetery, 1502 West Central Avenue, Toledo. Lot: ask for the l",
           "address": "1502 West Central Ave",
@@ -111250,11 +111604,39 @@
       "localCemeteries": [],
       "nearbyCemeteries": [
         {
-          "name": "Highland Park Cemetery, 21400 Chagrin Blvd. City grave: $743 flush or $873 raise",
+          "name": "West Park Cemetery, 3942 Ridge Rd, Cleveland. City grave: $743 flush or $873 rai",
+          "address": "3942 Ridge Rd",
+          "phone": "",
+          "noteEs": "West Park Cemetery, 3942 Ridge Rd, Cleveland. Tumba de la ciudad: $743 al ras o $873 con marcador elevado. Abrir y cerrar: en la oficina",
+          "noteEn": "West Park Cemetery, 3942 Ridge Rd, Cleveland. City grave: $743 flush or $873 raised marker. Opening and closing: at the office"
+        },
+        {
+          "name": "Cleveland Memorial Gardens, 4324 Green Rd, Cleveland. Same city fee: $743 flush ",
+          "address": "4324 Green Rd",
+          "phone": "",
+          "noteEs": "Cleveland Memorial Gardens, 4324 Green Rd, Cleveland. La misma tarifa de la ciudad: $743 al ras o $873 con marcador elevado",
+          "noteEn": "Cleveland Memorial Gardens, 4324 Green Rd, Cleveland. Same city fee: $743 flush or $873 raised marker"
+        },
+        {
+          "name": "Highland Park Cemetery, 21400 Chagrin Blvd. The city also names this office for ",
           "address": "21400 Chagrin Blvd.",
           "phone": "",
-          "noteEs": "Highland Park Cemetery, 21400 Chagrin Blvd. Espacio de la ciudad: $743 al ras o $873 con marcador elevado. Abrir y cerrar: en la oficina",
-          "noteEn": "Highland Park Cemetery, 21400 Chagrin Blvd. City grave: $743 flush or $873 raised marker. Opening and closing: at the office"
+          "noteEs": "Highland Park Cemetery, 21400 Chagrin Blvd. La ciudad también nombra esta oficina para comprar una tumba a esa tarifa",
+          "noteEn": "Highland Park Cemetery, 21400 Chagrin Blvd. The city also names this office for buying a grave at that fee"
+        },
+        {
+          "name": "Lake View Cemetery, 12316 Euclid Ave, Cleveland. Standard in-ground lot from $2,",
+          "address": "12316 Euclid Ave",
+          "phone": "216-421-2665",
+          "noteEs": "Lake View Cemetery, 12316 Euclid Ave, Cleveland. Lote estándar en tierra desde $2,195. Abrir y cerrar: $1,795 a $3,295",
+          "noteEn": "Lake View Cemetery, 12316 Euclid Ave, Cleveland. Standard in-ground lot from $2,195. Opening and closing: $1,795 to $3,295"
+        },
+        {
+          "name": "Lakewood Park Cemetery, 22025 Detroit Rd, Rocky River. Full grave, sections 1 th",
+          "address": "22025 Detroit Rd",
+          "phone": "440-333-1922",
+          "noteEs": "Lakewood Park Cemetery, 22025 Detroit Rd, Rocky River. Tumba completa, secciones 1 a 18: $3,000. Tumba de cremación, secciones 3, 8 y 15: $2,000. Abrir y cerrar entre semana antes de las 3 p.m.: $1,600. Lista vigente el 1 de septiembre de 2023",
+          "noteEn": "Lakewood Park Cemetery, 22025 Detroit Rd, Rocky River. Full grave, sections 1 through 18: $3,000. Cremation grave, sections 3, 8, and 15: $2,000. Weekday opening and closing before 3 p.m.: $1,600. List effective September 1, 2023"
         }
       ],
       "other": [
@@ -111494,8 +111876,8 @@
       "pathEn": "/en/funeral-homes-cemeteries.html?estado=ohio&ciudad=springdale",
       "guideEs": "/estados/ohio/cincinnati.html",
       "guideEn": "/en/states/ohio/cincinnati.html",
-      "sourceLineEs": "Spring Grove: cremación directa de Spring Grove Cremation Society, vigente el 5 de marzo de 2026. Los ejemplos de memorial y de entierro con velorio son de springgrove.org, vigentes el 15 de enero de 2026. No publica un entierro inmediato. La columna del estimador son promedios de Ohio de Funeralocity (26 jul. 2026). Esos promedios y los ejemplos son de funeraria. No incluyen el lote de cuerpo completo, abrir y cerrar la tumba, la bóveda ni la lápida.",
-      "sourceLineEn": "Spring Grove: direct cremation from Spring Grove Cremation Society, effective March 5, 2026. The memorial and visitation-burial examples are from springgrove.org, effective January 15, 2026. It does not publish an immediate burial. The estimator column is Ohio Funeralocity averages (26 Jul 2026). Those averages and the examples are funeral-home charges. They do not include a full-body plot, opening and closing, the vault, or the marker.",
+      "sourceLineEs": "Spring Grove: cremación directa de Spring Grove Cremation Society, vigente el 5 de marzo de 2026. Los ejemplos de memorial y de entierro con velorio son de springgrove.org, vigentes el 15 de enero de 2026. No publica un entierro inmediato. Newcomer, capilla West Side: lista general vigente el 8 de octubre de 2024. Hodapp, capilla de Carthage; la misma lista cubre College Hill: vigente el 1 de julio de 2026. La columna del estimador son promedios de Ohio de Funeralocity (26 jul. 2026). Esos promedios y las listas son de funeraria. No incluyen el lote de cuerpo completo, abrir y cerrar la tumba, la bóveda ni la lápida.",
+      "sourceLineEn": "Spring Grove: direct cremation from Spring Grove Cremation Society, effective March 5, 2026. The memorial and visitation-burial examples are from springgrove.org, effective January 15, 2026. It does not publish an immediate burial. Newcomer, West Side Chapel: general price list effective October 8, 2024. Hodapp, Carthage chapel; the same list covers College Hill: effective July 1, 2026. The estimator column is Ohio Funeralocity averages (26 Jul 2026). Those averages and the lists are funeral-home charges. They do not include a full-body plot, opening and closing, the vault, or the marker.",
       "localHomes": [],
       "nearbyHomes": [
         {
@@ -111504,10 +111886,10 @@
           "href": "https://www.springgrove.org/pricing-options/",
           "address": "Spring Grove Cemetery & Arboretum, Cincinnati",
           "phone": "",
-          "sourceEs": "Spring Grove: cremación directa de Spring Grove Cremation Society, vigente el 5 de marzo de 2026. Los ejemplos de memorial y de entierro con velorio son de springgrove.org, vigentes el 15 de enero de 2026. No publica un entierro inmediato. La columna del estimador son promedios de Ohio de Funeralocity (26 jul. 2026). Esos promedios y los ejemplos son de funeraria. No incluyen el lote de cuerpo completo, abrir y cerrar la tumba, la bóveda ni la lápida",
-          "sourceEn": "Spring Grove: direct cremation from Spring Grove Cremation Society, effective March 5, 2026. The memorial and visitation-burial examples are from springgrove.org, effective January 15, 2026. It does not publish an immediate burial. The estimator column is Ohio Funeralocity averages (26 Jul 2026). Those averages and the examples are funeral-home charges. They do not include a full-body plot, opening and closing, the vault, or the marker",
-          "gplDateEs": "26 jul. 2026",
-          "gplDateEn": "26 Jul 2026",
+          "sourceEs": "Spring Grove: cremación directa de Spring Grove Cremation Society, vigente el 5 de marzo de 2026. Los ejemplos de memorial y de entierro con velorio son de springgrove.org, vigentes el 15 de enero de 2026. No publica un entierro inmediato",
+          "sourceEn": "Spring Grove: direct cremation from Spring Grove Cremation Society, effective March 5, 2026. The memorial and visitation-burial examples are from springgrove.org, effective January 15, 2026. It does not publish an immediate burial",
+          "gplDateEs": "",
+          "gplDateEn": "",
           "gplKind": "published",
           "packages": [
             {
@@ -111541,6 +111923,98 @@
               "amt": 6620,
               "noteEs": "Ejemplo de entierro con velorio el mismo día, vigente el 15 de enero de 2026. En ese ejemplo el ataúd y la bóveda van aparte. El lote no va incluido.",
               "noteEn": "Same-day visitation burial example, effective January 15, 2026. In that example the casket and vault are extra. The plot is not included."
+            }
+          ]
+        },
+        {
+          "id": "newcomer",
+          "name": "Newcomer",
+          "href": "https://cdn.newcomer.com/prod/pLists/price-list-Cincinnati.pdf",
+          "address": "3300 Parkcrest Ln, Cincinnati",
+          "phone": "513-661-7283",
+          "sourceEs": "Newcomer, capilla West Side: lista general vigente el 8 de octubre de 2024",
+          "sourceEn": "Newcomer, West Side Chapel: general price list effective October 8, 2024",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "published",
+          "packages": [
+            {
+              "id": "directCremation",
+              "labelEs": "Cremación directa",
+              "labelEn": "Direct cremation",
+              "amt": 1370,
+              "noteEs": "Cremación directa con contenedor de cartón, lista general vigente el 8 de octubre de 2024. Con contenedor del comprador es $1,195. No incluye urna. El lote no va incluido.",
+              "noteEn": "Direct cremation with a cardboard container, general price list effective October 8, 2024. With a container from the purchaser it is $1,195. No urn. The plot is not included."
+            },
+            {
+              "id": "immediateBurial",
+              "labelEs": "Entierro inmediato",
+              "labelEn": "Immediate burial",
+              "amt": 2200,
+              "noteEs": "Entierro inmediato con ataúd del comprador, misma lista. No incluye el ataúd, velatorio, ceremonia ni servicio de pie de tumba. El lote no va incluido.",
+              "noteEn": "Immediate burial with a casket from the purchaser, same list. It does not include the casket, visitation, a ceremony, or a graveside service. The plot is not included."
+            },
+            {
+              "id": "memorialCremation",
+              "labelEs": "Cremación con memorial",
+              "labelEn": "Cremation with memorial",
+              "amt": 2695,
+              "noteEs": "Plan “Memorial Ceremony After Cremation”, vigente el 8 de octubre de 2024. Reunión y ceremonia el mismo día, después de la cremación. No incluye contenedor ni urna. El lote no va incluido.",
+              "noteEn": "“Memorial Ceremony After Cremation” plan, effective October 8, 2024. Same-day gathering and ceremony after cremation. It does not include a container or an urn. The plot is not included."
+            },
+            {
+              "id": "traditional",
+              "labelEs": "Funeral tradicional con velatorio",
+              "labelEn": "Traditional funeral with visitation",
+              "amt": 3195,
+              "noteEs": "Plan “Funeral Ceremony”, vigente el 8 de octubre de 2024. Velatorio el día anterior y ceremonia. No incluye ataúd ni bóveda. Si visita y servicio son el mismo día, la lista cobra $3,095. El lote no va incluido.",
+              "noteEn": "“Funeral Ceremony” plan, effective October 8, 2024. Visitation the day before and a ceremony. It does not include a casket or vault. If the visit and service are the same day, the list charges $3,095. The plot is not included."
+            }
+          ]
+        },
+        {
+          "id": "hodapp",
+          "name": "Hodapp",
+          "href": "https://www.hodappfuneralhome.com/resources/general-price-list",
+          "address": "7401 Vine St, Cincinnati",
+          "phone": "513-821-0805",
+          "sourceEs": "Hodapp, capilla de Carthage; la misma lista cubre College Hill: vigente el 1 de julio de 2026. La columna del estimador son promedios de Ohio de Funeralocity (26 jul. 2026). Esos promedios y las listas son de funeraria. No incluyen el lote de cuerpo completo, abrir y cerrar la tumba, la bóveda ni la lápida",
+          "sourceEn": "Hodapp, Carthage chapel; the same list covers College Hill: effective July 1, 2026. The estimator column is Ohio Funeralocity averages (26 Jul 2026). Those averages and the lists are funeral-home charges. They do not include a full-body plot, opening and closing, the vault, or the marker",
+          "gplDateEs": "26 jul. 2026",
+          "gplDateEn": "26 Jul 2026",
+          "gplKind": "published",
+          "packages": [
+            {
+              "id": "directCremation",
+              "labelEs": "Cremación directa",
+              "labelEn": "Direct cremation",
+              "amt": 2300,
+              "noteEs": "Paquete “Direct Cremation No Services”, lista vigente el 1 de julio de 2026. Incluye el cargo de servicio de $2,150 y un ataúd de cremación de $150, y entrega las cenizas en una urna temporal. Con contenedor del comprador, la cremación directa es $2,150. No hay velatorio. El lote no va incluido.",
+              "noteEn": "“Direct Cremation No Services” package, list effective July 1, 2026. It includes the $2,150 service charge and a $150 cremation casket, and returns the ashes in a temporary urn. With a container from the purchaser, direct cremation is $2,150. No visitation. The plot is not included."
+            },
+            {
+              "id": "immediateBurial",
+              "labelEs": "Entierro inmediato",
+              "labelEn": "Immediate burial",
+              "amt": 2150,
+              "noteEs": "Entierro inmediato con contenedor del comprador, misma lista. No incluye ataúd, velatorio ni ceremonia. Con ataúd forrado de tela, la lista cobra $3,320. El lote no va incluido.",
+              "noteEn": "Immediate burial with a container from the purchaser, same list. It does not include a casket, visitation, or a ceremony. With a cloth-covered casket, the list charges $3,320. The plot is not included."
+            },
+            {
+              "id": "memorialCremation",
+              "labelEs": "Cremación con memorial",
+              "labelEn": "Cremation with memorial",
+              "amt": 3550,
+              "noteEs": "Cremación directa con memorial en horario de oficina, vigente el 1 de julio de 2026. Incluye el cargo de servicio, el memorial y un contenedor de cartón. No incluye urna. De noche entre semana es $3,800. El lote no va incluido.",
+              "noteEn": "Direct cremation with a memorial during business hours, effective July 1, 2026. It includes the service charge, the memorial, and a corrugated container. It does not include an urn. A weekday evening is $3,800. The plot is not included."
+            },
+            {
+              "id": "traditional",
+              "labelEs": "Funeral tradicional con velatorio",
+              "labelEn": "Traditional funeral with visitation",
+              "amt": 4995,
+              "noteEs": "Paquete “Traditional Funeral”, vigente el 1 de julio de 2026. Velatorio por la noche y funeral con entierro al día siguiente. No incluye ataúd ni bóveda. El funeral de un solo día (“Conventional”) es $4,495. El lote no va incluido.",
+              "noteEn": "“Traditional Funeral” package, effective July 1, 2026. Evening visitation, then a funeral and burial the next day. It does not include a casket or vault. The one-day “Conventional” funeral is $4,495. The plot is not included."
             }
           ]
         }
@@ -111754,6 +112228,13 @@
       ],
       "localCemeteries": [],
       "nearbyCemeteries": [
+        {
+          "name": "Ottawa Hills Memorial Park, 4210 West Central Avenue, Toledo. Burial and cremati",
+          "address": "4210 West Central Ave",
+          "phone": "419-536-8321",
+          "noteEs": "Ottawa Hills Memorial Park, 4210 West Central Avenue, Toledo. Propiedad de entierro y de cremación desde $2,495. Abrir y cerrar: en la oficina",
+          "noteEn": "Ottawa Hills Memorial Park, 4210 West Central Avenue, Toledo. Burial and cremation property from $2,495. Opening and closing: at the office"
+        },
         {
           "name": "Historic Woodlawn Cemetery, 1502 West Central Avenue, Toledo. Lot: ask for the l",
           "address": "1502 West Central Ave",
@@ -112109,8 +112590,8 @@
       "pathEn": "/en/funeral-homes-cemeteries.html?estado=ohio&ciudad=cincinnati",
       "guideEs": "/estados/ohio/cincinnati.html",
       "guideEn": "/en/states/ohio/cincinnati.html",
-      "sourceLineEs": "Spring Grove: cremación directa de Spring Grove Cremation Society, vigente el 5 de marzo de 2026. Los ejemplos de memorial y de entierro con velorio son de springgrove.org, vigentes el 15 de enero de 2026. No publica un entierro inmediato. La columna del estimador son promedios de Ohio de Funeralocity (26 jul. 2026). Esos promedios y los ejemplos son de funeraria. No incluyen el lote de cuerpo completo, abrir y cerrar la tumba, la bóveda ni la lápida.",
-      "sourceLineEn": "Spring Grove: direct cremation from Spring Grove Cremation Society, effective March 5, 2026. The memorial and visitation-burial examples are from springgrove.org, effective January 15, 2026. It does not publish an immediate burial. The estimator column is Ohio Funeralocity averages (26 Jul 2026). Those averages and the examples are funeral-home charges. They do not include a full-body plot, opening and closing, the vault, or the marker.",
+      "sourceLineEs": "Spring Grove: cremación directa de Spring Grove Cremation Society, vigente el 5 de marzo de 2026. Los ejemplos de memorial y de entierro con velorio son de springgrove.org, vigentes el 15 de enero de 2026. No publica un entierro inmediato. Newcomer, capilla West Side: lista general vigente el 8 de octubre de 2024. Hodapp, capilla de Carthage; la misma lista cubre College Hill: vigente el 1 de julio de 2026. La columna del estimador son promedios de Ohio de Funeralocity (26 jul. 2026). Esos promedios y las listas son de funeraria. No incluyen el lote de cuerpo completo, abrir y cerrar la tumba, la bóveda ni la lápida.",
+      "sourceLineEn": "Spring Grove: direct cremation from Spring Grove Cremation Society, effective March 5, 2026. The memorial and visitation-burial examples are from springgrove.org, effective January 15, 2026. It does not publish an immediate burial. Newcomer, West Side Chapel: general price list effective October 8, 2024. Hodapp, Carthage chapel; the same list covers College Hill: effective July 1, 2026. The estimator column is Ohio Funeralocity averages (26 Jul 2026). Those averages and the lists are funeral-home charges. They do not include a full-body plot, opening and closing, the vault, or the marker.",
       "localHomes": [
         {
           "id": "springgrove",
@@ -112118,10 +112599,10 @@
           "href": "https://www.springgrove.org/pricing-options/",
           "address": "Spring Grove Cemetery & Arboretum, Cincinnati",
           "phone": "",
-          "sourceEs": "Spring Grove: cremación directa de Spring Grove Cremation Society, vigente el 5 de marzo de 2026. Los ejemplos de memorial y de entierro con velorio son de springgrove.org, vigentes el 15 de enero de 2026. No publica un entierro inmediato. La columna del estimador son promedios de Ohio de Funeralocity (26 jul. 2026). Esos promedios y los ejemplos son de funeraria. No incluyen el lote de cuerpo completo, abrir y cerrar la tumba, la bóveda ni la lápida",
-          "sourceEn": "Spring Grove: direct cremation from Spring Grove Cremation Society, effective March 5, 2026. The memorial and visitation-burial examples are from springgrove.org, effective January 15, 2026. It does not publish an immediate burial. The estimator column is Ohio Funeralocity averages (26 Jul 2026). Those averages and the examples are funeral-home charges. They do not include a full-body plot, opening and closing, the vault, or the marker",
-          "gplDateEs": "26 jul. 2026",
-          "gplDateEn": "26 Jul 2026",
+          "sourceEs": "Spring Grove: cremación directa de Spring Grove Cremation Society, vigente el 5 de marzo de 2026. Los ejemplos de memorial y de entierro con velorio son de springgrove.org, vigentes el 15 de enero de 2026. No publica un entierro inmediato",
+          "sourceEn": "Spring Grove: direct cremation from Spring Grove Cremation Society, effective March 5, 2026. The memorial and visitation-burial examples are from springgrove.org, effective January 15, 2026. It does not publish an immediate burial",
+          "gplDateEs": "",
+          "gplDateEn": "",
           "gplKind": "published",
           "packages": [
             {
@@ -112155,6 +112636,98 @@
               "amt": 6620,
               "noteEs": "Ejemplo de entierro con velorio el mismo día, vigente el 15 de enero de 2026. En ese ejemplo el ataúd y la bóveda van aparte. El lote no va incluido.",
               "noteEn": "Same-day visitation burial example, effective January 15, 2026. In that example the casket and vault are extra. The plot is not included."
+            }
+          ]
+        },
+        {
+          "id": "newcomer",
+          "name": "Newcomer",
+          "href": "https://cdn.newcomer.com/prod/pLists/price-list-Cincinnati.pdf",
+          "address": "3300 Parkcrest Ln, Cincinnati",
+          "phone": "513-661-7283",
+          "sourceEs": "Newcomer, capilla West Side: lista general vigente el 8 de octubre de 2024",
+          "sourceEn": "Newcomer, West Side Chapel: general price list effective October 8, 2024",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "published",
+          "packages": [
+            {
+              "id": "directCremation",
+              "labelEs": "Cremación directa",
+              "labelEn": "Direct cremation",
+              "amt": 1370,
+              "noteEs": "Cremación directa con contenedor de cartón, lista general vigente el 8 de octubre de 2024. Con contenedor del comprador es $1,195. No incluye urna. El lote no va incluido.",
+              "noteEn": "Direct cremation with a cardboard container, general price list effective October 8, 2024. With a container from the purchaser it is $1,195. No urn. The plot is not included."
+            },
+            {
+              "id": "immediateBurial",
+              "labelEs": "Entierro inmediato",
+              "labelEn": "Immediate burial",
+              "amt": 2200,
+              "noteEs": "Entierro inmediato con ataúd del comprador, misma lista. No incluye el ataúd, velatorio, ceremonia ni servicio de pie de tumba. El lote no va incluido.",
+              "noteEn": "Immediate burial with a casket from the purchaser, same list. It does not include the casket, visitation, a ceremony, or a graveside service. The plot is not included."
+            },
+            {
+              "id": "memorialCremation",
+              "labelEs": "Cremación con memorial",
+              "labelEn": "Cremation with memorial",
+              "amt": 2695,
+              "noteEs": "Plan “Memorial Ceremony After Cremation”, vigente el 8 de octubre de 2024. Reunión y ceremonia el mismo día, después de la cremación. No incluye contenedor ni urna. El lote no va incluido.",
+              "noteEn": "“Memorial Ceremony After Cremation” plan, effective October 8, 2024. Same-day gathering and ceremony after cremation. It does not include a container or an urn. The plot is not included."
+            },
+            {
+              "id": "traditional",
+              "labelEs": "Funeral tradicional con velatorio",
+              "labelEn": "Traditional funeral with visitation",
+              "amt": 3195,
+              "noteEs": "Plan “Funeral Ceremony”, vigente el 8 de octubre de 2024. Velatorio el día anterior y ceremonia. No incluye ataúd ni bóveda. Si visita y servicio son el mismo día, la lista cobra $3,095. El lote no va incluido.",
+              "noteEn": "“Funeral Ceremony” plan, effective October 8, 2024. Visitation the day before and a ceremony. It does not include a casket or vault. If the visit and service are the same day, the list charges $3,095. The plot is not included."
+            }
+          ]
+        },
+        {
+          "id": "hodapp",
+          "name": "Hodapp",
+          "href": "https://www.hodappfuneralhome.com/resources/general-price-list",
+          "address": "7401 Vine St, Cincinnati",
+          "phone": "513-821-0805",
+          "sourceEs": "Hodapp, capilla de Carthage; la misma lista cubre College Hill: vigente el 1 de julio de 2026. La columna del estimador son promedios de Ohio de Funeralocity (26 jul. 2026). Esos promedios y las listas son de funeraria. No incluyen el lote de cuerpo completo, abrir y cerrar la tumba, la bóveda ni la lápida",
+          "sourceEn": "Hodapp, Carthage chapel; the same list covers College Hill: effective July 1, 2026. The estimator column is Ohio Funeralocity averages (26 Jul 2026). Those averages and the lists are funeral-home charges. They do not include a full-body plot, opening and closing, the vault, or the marker",
+          "gplDateEs": "26 jul. 2026",
+          "gplDateEn": "26 Jul 2026",
+          "gplKind": "published",
+          "packages": [
+            {
+              "id": "directCremation",
+              "labelEs": "Cremación directa",
+              "labelEn": "Direct cremation",
+              "amt": 2300,
+              "noteEs": "Paquete “Direct Cremation No Services”, lista vigente el 1 de julio de 2026. Incluye el cargo de servicio de $2,150 y un ataúd de cremación de $150, y entrega las cenizas en una urna temporal. Con contenedor del comprador, la cremación directa es $2,150. No hay velatorio. El lote no va incluido.",
+              "noteEn": "“Direct Cremation No Services” package, list effective July 1, 2026. It includes the $2,150 service charge and a $150 cremation casket, and returns the ashes in a temporary urn. With a container from the purchaser, direct cremation is $2,150. No visitation. The plot is not included."
+            },
+            {
+              "id": "immediateBurial",
+              "labelEs": "Entierro inmediato",
+              "labelEn": "Immediate burial",
+              "amt": 2150,
+              "noteEs": "Entierro inmediato con contenedor del comprador, misma lista. No incluye ataúd, velatorio ni ceremonia. Con ataúd forrado de tela, la lista cobra $3,320. El lote no va incluido.",
+              "noteEn": "Immediate burial with a container from the purchaser, same list. It does not include a casket, visitation, or a ceremony. With a cloth-covered casket, the list charges $3,320. The plot is not included."
+            },
+            {
+              "id": "memorialCremation",
+              "labelEs": "Cremación con memorial",
+              "labelEn": "Cremation with memorial",
+              "amt": 3550,
+              "noteEs": "Cremación directa con memorial en horario de oficina, vigente el 1 de julio de 2026. Incluye el cargo de servicio, el memorial y un contenedor de cartón. No incluye urna. De noche entre semana es $3,800. El lote no va incluido.",
+              "noteEn": "Direct cremation with a memorial during business hours, effective July 1, 2026. It includes the service charge, the memorial, and a corrugated container. It does not include an urn. A weekday evening is $3,800. The plot is not included."
+            },
+            {
+              "id": "traditional",
+              "labelEs": "Funeral tradicional con velatorio",
+              "labelEn": "Traditional funeral with visitation",
+              "amt": 4995,
+              "noteEs": "Paquete “Traditional Funeral”, vigente el 1 de julio de 2026. Velatorio por la noche y funeral con entierro al día siguiente. No incluye ataúd ni bóveda. El funeral de un solo día (“Conventional”) es $4,495. El lote no va incluido.",
+              "noteEn": "“Traditional Funeral” package, effective July 1, 2026. Evening visitation, then a funeral and burial the next day. It does not include a casket or vault. The one-day “Conventional” funeral is $4,495. The plot is not included."
             }
           ]
         }
@@ -112397,11 +112970,39 @@
       "nearbyHomes": [],
       "localCemeteries": [
         {
-          "name": "Highland Park Cemetery, 21400 Chagrin Blvd. City grave: $743 flush or $873 raise",
+          "name": "West Park Cemetery, 3942 Ridge Rd, Cleveland. City grave: $743 flush or $873 rai",
+          "address": "3942 Ridge Rd",
+          "phone": "",
+          "noteEs": "West Park Cemetery, 3942 Ridge Rd, Cleveland. Tumba de la ciudad: $743 al ras o $873 con marcador elevado. Abrir y cerrar: en la oficina",
+          "noteEn": "West Park Cemetery, 3942 Ridge Rd, Cleveland. City grave: $743 flush or $873 raised marker. Opening and closing: at the office"
+        },
+        {
+          "name": "Cleveland Memorial Gardens, 4324 Green Rd, Cleveland. Same city fee: $743 flush ",
+          "address": "4324 Green Rd",
+          "phone": "",
+          "noteEs": "Cleveland Memorial Gardens, 4324 Green Rd, Cleveland. La misma tarifa de la ciudad: $743 al ras o $873 con marcador elevado",
+          "noteEn": "Cleveland Memorial Gardens, 4324 Green Rd, Cleveland. Same city fee: $743 flush or $873 raised marker"
+        },
+        {
+          "name": "Highland Park Cemetery, 21400 Chagrin Blvd. The city also names this office for ",
           "address": "21400 Chagrin Blvd.",
           "phone": "",
-          "noteEs": "Highland Park Cemetery, 21400 Chagrin Blvd. Espacio de la ciudad: $743 al ras o $873 con marcador elevado. Abrir y cerrar: en la oficina",
-          "noteEn": "Highland Park Cemetery, 21400 Chagrin Blvd. City grave: $743 flush or $873 raised marker. Opening and closing: at the office"
+          "noteEs": "Highland Park Cemetery, 21400 Chagrin Blvd. La ciudad también nombra esta oficina para comprar una tumba a esa tarifa",
+          "noteEn": "Highland Park Cemetery, 21400 Chagrin Blvd. The city also names this office for buying a grave at that fee"
+        },
+        {
+          "name": "Lake View Cemetery, 12316 Euclid Ave, Cleveland. Standard in-ground lot from $2,",
+          "address": "12316 Euclid Ave",
+          "phone": "216-421-2665",
+          "noteEs": "Lake View Cemetery, 12316 Euclid Ave, Cleveland. Lote estándar en tierra desde $2,195. Abrir y cerrar: $1,795 a $3,295",
+          "noteEn": "Lake View Cemetery, 12316 Euclid Ave, Cleveland. Standard in-ground lot from $2,195. Opening and closing: $1,795 to $3,295"
+        },
+        {
+          "name": "Lakewood Park Cemetery, 22025 Detroit Rd, Rocky River. Full grave, sections 1 th",
+          "address": "22025 Detroit Rd",
+          "phone": "440-333-1922",
+          "noteEs": "Lakewood Park Cemetery, 22025 Detroit Rd, Rocky River. Tumba completa, secciones 1 a 18: $3,000. Tumba de cremación, secciones 3, 8 y 15: $2,000. Abrir y cerrar entre semana antes de las 3 p.m.: $1,600. Lista vigente el 1 de septiembre de 2023",
+          "noteEn": "Lakewood Park Cemetery, 22025 Detroit Rd, Rocky River. Full grave, sections 1 through 18: $3,000. Cremation grave, sections 3, 8, and 15: $2,000. Weekday opening and closing before 3 p.m.: $1,600. List effective September 1, 2023"
         }
       ],
       "nearbyCemeteries": [],
@@ -112784,6 +113385,13 @@
       ],
       "nearbyHomes": [],
       "localCemeteries": [
+        {
+          "name": "Ottawa Hills Memorial Park, 4210 West Central Avenue, Toledo. Burial and cremati",
+          "address": "4210 West Central Ave",
+          "phone": "419-536-8321",
+          "noteEs": "Ottawa Hills Memorial Park, 4210 West Central Avenue, Toledo. Propiedad de entierro y de cremación desde $2,495. Abrir y cerrar: en la oficina",
+          "noteEn": "Ottawa Hills Memorial Park, 4210 West Central Avenue, Toledo. Burial and cremation property from $2,495. Opening and closing: at the office"
+        },
         {
           "name": "Historic Woodlawn Cemetery, 1502 West Central Avenue, Toledo. Lot: ask for the l",
           "address": "1502 West Central Ave",

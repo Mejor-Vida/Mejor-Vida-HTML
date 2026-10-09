@@ -75,4 +75,13 @@ module.exports = {
     detailEs:
       "La búsqueda cuesta $15 por certificado. Se pide en persona o por correo en 221 West Capitol Avenue, Pierre, o en el Register of Deeds del condado. Teléfono 605-773-4961. La funeraria suele presentar el certificado.",
   },
+  CA: {
+    officeEn: "California Department of Public Health, Vital Records",
+    officeEs: "Departamento de Salud Pública de California, registros vitales",
+    url: "https://www.cdph.ca.gov/Programs/CHSI/Pages/Vital-Records-Obtaining-Certified-Copies-of-Death-Records.aspx",
+    detailEn:
+      "Order a certified California death certificate from CDPH Vital Records. The current fee is on that page. The funeral home usually files the certificate.",
+    detailEs:
+      "Pida una copia certificada del certificado de defunción de California en CDPH Vital Records. La tarifa vigente está en esa página. La funeraria suele presentar el certificado.",
+  },
 };

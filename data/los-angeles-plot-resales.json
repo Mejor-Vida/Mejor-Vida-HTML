@@ -1,0 +1,87 @@
+{
+  "city": "los-angeles",
+  "checked": "2026-10-09",
+  "checkedLabelEs": "9 oct. 2026",
+  "checkedLabelEn": "9 Oct 2026",
+  "noteEs": "Anuncios de particulares. No son precios de Mejor Vida Seguros ni la lista oficial del cementerio. La oficina debe transferir la escritura. Revise si el anuncio sigue activo.",
+  "noteEn": "Private-party ads. These are not Mejor Vida Insurance prices or the cemetery’s official list. The office must transfer the deed. Check that the listing is still active.",
+  "boards": [
+    {
+      "id": "grave-solutions-ca",
+      "name": "Grave Solutions",
+      "url": "https://www.gravesolutions.com/for-sale/cemetery-properties/california",
+      "labelEs": "Tablero en vivo · California",
+      "labelEn": "Live board · California"
+    }
+  ],
+  "cemeterySignals": [
+    {
+      "cemetery": "Forest Lawn — Hollywood Hills",
+      "citedListLow": 17538,
+      "citedListHigh": null,
+      "typical": 17538,
+      "phone": "888-204-3131",
+      "noteEs": "GPL LA/OC (mar. 2025): propiedad de entierro desde $17,537.50; abrir/cerrar $2,425. El precio sube por sección.",
+      "noteEn": "LA/OC GPL (Mar 2025): interment property from $17,537.50; opening/closing $2,425. Price rises by section."
+    },
+    {
+      "cemetery": "Inglewood Park Cemetery",
+      "citedListLow": null,
+      "citedListHigh": null,
+      "typical": null,
+      "phone": "310-412-6500",
+      "noteEs": "No publica el lote en la web. Los anuncios de reventa en 2026 pedían unos $7,500–$29,000 según tipo (lote o cripta).",
+      "noteEn": "They do not publish plot prices online. Resale ads in 2026 asked about $7,500–$29,000 depending on type (ground plot or crypt)."
+    },
+    {
+      "cemetery": "Pierce Brothers Westwood Village",
+      "citedListLow": null,
+      "citedListHigh": null,
+      "typical": null,
+      "phone": "310-474-1579",
+      "noteEs": "Cementerio histórico en Westwood. Pida mapa y lista por teléfono.",
+      "noteEn": "Historic Westwood cemetery. Ask for a map and the price list by phone."
+    }
+  ],
+  "listings": [
+    {
+      "id": "gs-inglewood-14k",
+      "status": "listed",
+      "cemetery": "Inglewood Park Cemetery",
+      "spaces": 1,
+      "asking": 14000,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": null,
+      "url": "https://eturnalrest.com/cemeteries/ca/inglewood-park-cemetery-inglewood/",
+      "titleEs": "Grave Solutions / Eturnal Rest · lote en Inglewood Park",
+      "titleEn": "Grave Solutions / Eturnal Rest · plot at Inglewood Park"
+    },
+    {
+      "id": "gs-rose-hills-12k",
+      "status": "listed",
+      "cemetery": "Rose Hills Memorial Park (Whittier)",
+      "spaces": 1,
+      "asking": 12000,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": null,
+      "url": "https://www.gravesolutions.com/for-sale/cemetery-properties/california",
+      "titleEs": "Grave Solutions · Carnation Lawn, 1 espacio",
+      "titleEn": "Grave Solutions · Carnation Lawn, 1 space"
+    },
+    {
+      "id": "gs-inglewood-7500",
+      "status": "listed",
+      "cemetery": "Inglewood Park Cemetery",
+      "spaces": 1,
+      "asking": 7500,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": 18000,
+      "url": "https://thecemeteryexchange.com/tce-inglewood-ca.htm",
+      "titleEs": "The Cemetery Exchange · cripta en mausoleo (no es lote en tierra)",
+      "titleEn": "The Cemetery Exchange · mausoleum crypt (not a ground plot)"
+    }
+  ]
+}
