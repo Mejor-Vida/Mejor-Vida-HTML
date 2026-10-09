@@ -179,13 +179,50 @@
 
   function monthTitle(y, m) {
     try {
-      return new Intl.DateTimeFormat(state.lang === "en" ? "en-US" : "es-US", {
+      var title = new Intl.DateTimeFormat(state.lang === "en" ? "en-US" : "es-US", {
         month: "long",
         year: "numeric",
         timeZone: state.bookerTz || "UTC",
       }).format(new Date(Date.UTC(y, m - 1, 15, 12)));
+      return title.charAt(0).toUpperCase() + title.slice(1);
     } catch (_e) {
       return y + "-" + m;
+    }
+  }
+
+  var TZ_LABELS_ES = {
+    "America/New_York": "Este (ET)",
+    "America/Chicago": "Centro (CT)",
+    "America/Denver": "Montaña (MT)",
+    "America/Phoenix": "Arizona (sin horario de verano)",
+    "America/Los_Angeles": "Pacífico (PT)",
+    "America/Anchorage": "Alaska",
+    "Pacific/Honolulu": "Hawái",
+  };
+
+  function slotLabel(slot) {
+    if (state.lang === "en" || !slot || !slot.startUtc) return (slot && slot.labelBooker) || "";
+    try {
+      var parts = new Intl.DateTimeFormat("es-US", {
+        weekday: "short",
+        day: "numeric",
+        month: "short",
+        hour: "numeric",
+        minute: "2-digit",
+        hour12: true,
+        timeZone: state.bookerTz || "America/Chicago",
+      }).formatToParts(new Date(slot.startUtc));
+      var p = {};
+      parts.forEach(function (x) {
+        p[x.type] = x.value;
+      });
+      var wd = String(p.weekday || "").replace(".", "");
+      wd = wd.charAt(0).toUpperCase() + wd.slice(1);
+      var mon = String(p.month || "").replace(".", "");
+      var ampm = /p/i.test(p.dayPeriod || "") ? "p. m." : "a. m.";
+      return wd + " " + p.day + " " + mon + " · " + p.hour + ":" + p.minute + " " + ampm;
+    } catch (_e) {
+      return slot.labelBooker || "";
     }
   }
 
@@ -243,6 +280,7 @@
         cell.disabled = true;
         cell.classList.add("is-disabled");
       } else {
+        cell.classList.add("is-available");
         if (ymd === state.selectedYmd) cell.classList.add("is-active");
         cell.addEventListener("click", function (picked) {
           return function () {
@@ -297,7 +335,7 @@
     var conf = root.querySelector(".mvi-scheduler__confirm");
     if (conf) {
       conf.hidden = false;
-      conf.textContent = t("your_time") + " " + slot.labelBooker;
+      conf.textContent = t("your_time") + " " + slotLabel(slot);
     }
     if (details) details.hidden = false;
   }
@@ -333,7 +371,7 @@
       return;
     }
     day.slots.forEach(function (slot) {
-      var btn = el("button", "mvi-scheduler__slot", slot.labelBooker);
+      var btn = el("button", "mvi-scheduler__slot", slotLabel(slot));
       btn.type = "button";
       if (state.selected && state.selected.startUtc === slot.startUtc) {
         btn.classList.add("is-selected");
@@ -420,9 +458,9 @@
             gtag("event", "appointment_booked", { location: "mvi_scheduler" });
           }
           var whenLabel =
-            (res.labels && res.labels.booker) ||
-            (state.selected && state.selected.labelBooker) ||
-            "";
+            state.lang === "en"
+              ? (res.labels && res.labels.booker) || (state.selected && state.selected.labelBooker) || ""
+              : slotLabel(state.selected) || (res.labels && res.labels.booker) || "";
           window.location.href = thankYouUrl(whenLabel);
         })
         .catch(function (e) {
@@ -469,7 +507,7 @@
         (cfg.timezoneOptions || []).forEach(function (opt) {
           var o = document.createElement("option");
           o.value = opt.id;
-          o.textContent = opt.label;
+          o.textContent = (state.lang !== "en" && TZ_LABELS_ES[opt.id]) || opt.label;
           select.appendChild(o);
         });
         state.bookerTz = cfg.suggestedBookerTimezone || browserTz() || "America/Chicago";
@@ -483,7 +521,8 @@
         return loadSlots(root);
       })
       .catch(function () {
-        root.querySelector(".mvi-scheduler__slots").textContent = "Scheduler unavailable.";
+        root.querySelector(".mvi-scheduler__slots").textContent =
+          state.lang === "en" ? "Scheduler unavailable." : "El calendario no está disponible. Llámenos al 402-440-5438.";
       });
 
     container.setAttribute("data-mvi-scheduler-mounted", "1");
