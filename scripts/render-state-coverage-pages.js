@@ -1839,7 +1839,7 @@ function renderEs(code) {
 <link href="${prefix}css/quote-flow-shared.css?v=20260905-search" rel="stylesheet"/>
 <link href="${prefix}css/site-footer.css?v=20260721-lip-page" rel="stylesheet"/>
 <link href="${prefix}css/state-coverage.css?v=20261009-hero-bleed" rel="stylesheet"/>
-<link href="${prefix}css/mvi-licensing-map.css?v=20261009-mi-va" rel="stylesheet"/>
+<link href="${prefix}css/mvi-licensing-map.css?v=20261009-mobile-pdf" rel="stylesheet"/>
 <link href="${prefix}css/mvi-assistant-widget.css?v=20260808-chat-sm" rel="stylesheet"/>
 <link href="${prefix}css/fontawesome-mvi.min.css?v=20260723-brands-fix" rel="stylesheet"/>
 <link href="${prefix}css/site-header.css?v=20260723-ver-precios-gold" rel="stylesheet"/>
@@ -1941,7 +1941,7 @@ function renderEn(code) {
 <link href="${root}css/quote-flow-shared.css?v=20260905-search" rel="stylesheet"/>
 <link href="${root}css/site-footer.css?v=20260721-lip-page" rel="stylesheet"/>
 <link href="${root}css/state-coverage.css?v=20261009-hero-bleed" rel="stylesheet"/>
-<link href="${root}css/mvi-licensing-map.css?v=20261009-mi-va" rel="stylesheet"/>
+<link href="${root}css/mvi-licensing-map.css?v=20261009-mobile-pdf" rel="stylesheet"/>
 <link href="${root}css/mvi-assistant-widget.css?v=20260808-chat-sm" rel="stylesheet"/>
 <link href="${root}css/fontawesome-mvi.min.css?v=20260723-brands-fix" rel="stylesheet"/>
 <link href="${root}css/site-header.css?v=20260723-ver-precios-gold" rel="stylesheet"/>
