@@ -178,7 +178,7 @@
       typeEn: "Non-resident producer",
       typeEs: "Productora no residente",
       number: "3561085",
-      pdf: "julie-license-tx.pdf?v=20261009-cert",
+      pdf: "julie-license-tx.pdf?v=20261009-sircon",
     },
   };
 

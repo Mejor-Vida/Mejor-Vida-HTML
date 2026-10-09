@@ -231,7 +231,7 @@ const LICENSE = {
     typeEs: "Productora no residente",
     typeEn: "Non-resident producer",
     number: "3561085",
-    pdf: "julie-license-tx.pdf?v=20261009-cert",
+    pdf: "julie-license-tx.pdf?v=20261009-sircon",
     verifyUrl: "https://www.tdi.texas.gov/agent/index.html",
     verifyLabel: { es: "Verificar en Texas (TDI)", en: "Verify in Texas (TDI)" },
   },

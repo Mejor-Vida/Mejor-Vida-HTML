@@ -84,7 +84,7 @@
       typeEn: "Non-resident producer",
       typeEs: "Productora no residente",
       number: "3561085",
-      pdf: "julie-license-tx.pdf?v=20261009-cert",
+      pdf: "julie-license-tx.pdf?v=20261009-sircon",
       verifyUrl: "https://www.tdi.texas.gov/agent/index.html",
       verifyLabelEn: "Verify in Texas (TDI)",
       verifyLabelEs: "Verificar en Texas (TDI)",
