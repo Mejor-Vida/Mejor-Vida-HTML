@@ -203,7 +203,53 @@
       "</div>";
   }
 
+  function pdfAbsUrl(pdfUrl) {
+    return new URL(pdfUrl, window.location.href).href;
+  }
+
+  /** iOS/Android often render a blank box for blob: PDFs inside object/iframe. */
+  function preferDirectPdfEmbed() {
+    var ua = navigator.userAgent || "";
+    var ios =
+      /iPad|iPhone|iPod/i.test(ua) ||
+      (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+    if (ios) return true;
+    if (/Android/i.test(ua) && window.matchMedia("(max-width: 768px)").matches) {
+      return true;
+    }
+    return false;
+  }
+
+  function pdfOpenLinkHtml(abs) {
+    return (
+      '<p class="mvi-lic-note mvi-lic-viewer-fallback">' +
+      '<a class="btn btn-primary mvi-lic-pdf-open" href="' +
+      abs +
+      '" target="_blank" rel="noopener">' +
+      t("Abrir PDF", "Open PDF") +
+      "</a></p>"
+    );
+  }
+
+  function renderDirectPdfInModal(body, name, abs) {
+    var safeName = name.replace(/"/g, "");
+    body.innerHTML =
+      '<iframe class="mvi-lic-pdf-frame" title="' +
+      safeName +
+      '" src="' +
+      abs +
+      '#toolbar=0&navpanes=0&view=FitH"></iframe>' +
+      pdfOpenLinkHtml(abs);
+  }
+
   function showPdfInModal(body, name, pdfUrl, code) {
+    var abs = pdfAbsUrl(pdfUrl);
+
+    if (preferDirectPdfEmbed()) {
+      renderDirectPdfInModal(body, name, abs);
+      return;
+    }
+
     body.innerHTML =
       '<div class="mvi-lic-viewer-loading">' +
       t("Cargando licencia…", "Loading license…") +
@@ -233,30 +279,11 @@
           '" src="' +
           objectUrl +
           '#toolbar=0&navpanes=0&view=FitH"></iframe>' +
-          "</object>";
+          "</object>" +
+          pdfOpenLinkHtml(abs);
       })
       .catch(function () {
-        // Same-origin iframe first; Google Docs viewer as last resort.
-        var safeName = name.replace(/"/g, "");
-        var abs = new URL(pdfUrl, window.location.href).href;
-        var gview =
-          "https://docs.google.com/gview?embedded=1&url=" + encodeURIComponent(abs);
-        body.innerHTML =
-          '<iframe class="mvi-lic-pdf-frame" title="' +
-          safeName +
-          '" src="' +
-          abs +
-          '#toolbar=0&navpanes=0&view=FitH"></iframe>' +
-          '<p class="mvi-lic-note mvi-lic-viewer-fallback">' +
-          t(
-            "Si no se ve el PDF, pruebe el visor alternativo.",
-            "If the PDF does not appear, try the alternate viewer."
-          ) +
-          ' <a href="' +
-          gview +
-          '" target="_blank" rel="noopener">' +
-          t("Visor alternativo", "Alternate viewer") +
-          "</a></p>";
+        renderDirectPdfInModal(body, name, abs);
       });
   }
 

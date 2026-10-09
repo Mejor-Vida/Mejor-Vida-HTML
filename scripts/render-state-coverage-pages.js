@@ -1511,8 +1511,41 @@ ${costDefModal(lang)}`;
 }
 
 function citiesSection(code, lang) {
-  // California city guides are not built yet — omit the cities block.
-  if (code === "CA" || code === "AZ") return "";
+  if (code === "AZ") return "";
+  if (code === "CA") {
+    if (lang === "es") {
+      return `<section class="py-5 bg-light border-bottom" id="ciudades">
+  <div class="container" style="max-width:60rem;">
+    <h2 class="h4 fw-bold mb-3" style="color:#1a365d;">Ciudades en California</h2>
+    <p class="text-body-secondary mb-3">Guías locales de seguro de gastos finales y de entierro para las ciudades más grandes del estado.</p>
+    <ul class="mb-0">
+      <li class="mb-2"><a href="california/los-angeles.html">Los Ángeles</a> — seguro de gastos finales y de entierro, funerarias y lotes.</li>
+      <li class="mb-2"><a href="california/san-diego.html">San Diego</a> — seguro de gastos finales y de entierro, funerarias y lotes.</li>
+      <li class="mb-2"><a href="california/san-jose.html">San José</a> — seguro de gastos finales y de entierro, funerarias y lotes.</li>
+      <li class="mb-2"><a href="california/san-francisco.html">San Francisco</a> — seguro de gastos finales y de entierro, funerarias y lotes.</li>
+      <li class="mb-2"><a href="california/fresno.html">Fresno</a> — seguro de gastos finales y de entierro, funerarias y lotes.</li>
+      <li class="mb-2"><a href="california/sacramento.html">Sacramento</a> — seguro de gastos finales y de entierro, funerarias y lotes.</li>
+    </ul>
+  </div>
+</section>
+`;
+    }
+    return `<section class="py-5 bg-light border-bottom" id="cities">
+  <div class="container" style="max-width:60rem;">
+    <h2 class="h4 fw-bold mb-3" style="color:#1a365d;">Cities in California</h2>
+    <p class="text-body-secondary mb-3">Local final expense and burial insurance guides for California’s largest cities.</p>
+    <ul class="mb-0">
+      <li class="mb-2"><a href="california/los-angeles.html">Los Angeles</a> — final expense and burial insurance, funeral homes, and plots.</li>
+      <li class="mb-2"><a href="california/san-diego.html">San Diego</a> — final expense and burial insurance, funeral homes, and plots.</li>
+      <li class="mb-2"><a href="california/san-jose.html">San Jose</a> — final expense and burial insurance, funeral homes, and plots.</li>
+      <li class="mb-2"><a href="california/san-francisco.html">San Francisco</a> — final expense and burial insurance, funeral homes, and plots.</li>
+      <li class="mb-2"><a href="california/fresno.html">Fresno</a> — final expense and burial insurance, funeral homes, and plots.</li>
+      <li class="mb-2"><a href="california/sacramento.html">Sacramento</a> — final expense and burial insurance, funeral homes, and plots.</li>
+    </ul>
+  </div>
+</section>
+`;
+  }
   if (code === "KS") {
     if (lang === "es") {
       return `<section class="py-5 bg-light border-bottom" id="ciudades">
@@ -1870,7 +1903,7 @@ ${loadFooterEs()}
 <script defer src="${prefix}bootstrap/js/bootstrap.bundle.min.js"></script>
 <script defer src="${prefix}script.js"></script>
 <script defer src="${prefix}js/mvi-nav-questions.js?v=20260828-family"></script>
-<script defer src="${prefix}js/mvi-licensing-map.js?v=20261009-mi-va"></script>
+<script defer src="${prefix}js/mvi-licensing-map.js?v=20261009-mobile-pdf"></script>
 <div data-api-url="/api/website-chat" id="mvi-assistant-root"></div>
 <script defer src="${prefix}js/website-assistant-widget.js"></script>
 </body>
@@ -1971,7 +2004,7 @@ ${loadFooterEn()}
 <script defer src="${root}bootstrap/js/bootstrap.bundle.min.js"></script>
 <script defer src="${root}script.js"></script>
 <script defer src="${root}js/mvi-nav-questions.js?v=20260828-family"></script>
-<script defer src="${root}js/mvi-licensing-map.js?v=20261009-mi-va"></script>
+<script defer src="${root}js/mvi-licensing-map.js?v=20261009-mobile-pdf"></script>
 <div data-api-url="/api/website-chat" id="mvi-assistant-root"></div>
 <script defer src="${root}js/website-assistant-widget.js"></script>
 </body>

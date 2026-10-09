@@ -14,6 +14,7 @@ const kansasCities = require("./city-guides/ks-cities");
 const coloradoCities = require("./city-guides/co-cities");
 const nevadaCities = require("./city-guides/nv-cities");
 const ohioCities = require("./city-guides/oh-cities");
+const californiaCities = require("./city-guides/ca-cities");
 
 function loadCityGuides(rel) {
   try {
@@ -86,6 +87,12 @@ const LICENSE = {
     number: "21695431",
     code: "SD",
   },
+  CA: {
+    typeEs: "Productora no residente",
+    typeEn: "Non-resident producer",
+    number: "4586251",
+    code: "CA",
+  },
 };
 
 const CITIES = [
@@ -99,6 +106,7 @@ const CITIES = [
   ...newMexicoCities,
   ...southCarolinaCities,
   ...southDakotaCities,
+  ...californiaCities,
 ];
 
 function esc(s) {
@@ -660,7 +668,7 @@ ${footer}
 <script defer src="${root}bootstrap/js/bootstrap.bundle.min.js"></script>
 <script defer src="${root}script.js"></script>
 <script defer src="${root}js/mvi-nav-questions.js?v=20260828-family"></script>
-<script defer src="${root}js/mvi-licensing-map.js?v=20260928-oh-cert"></script>
+<script defer src="${root}js/mvi-licensing-map.js?v=20261009-mobile-pdf"></script>
 <script defer src="${root}js/city-guide.js?v=${CSS_VER}"></script>
 <div data-api-url="/api/website-chat" id="mvi-assistant-root"></div>
 <script defer src="${root}js/website-assistant-widget.js"></script>
@@ -833,7 +841,7 @@ ${loadFooterEs()}
 <script defer src="${root}bootstrap/js/bootstrap.bundle.min.js"></script>
 <script defer src="${root}script.js"></script>
 <script defer src="${root}js/mvi-nav-questions.js?v=20260828-family"></script>
-<script defer src="${root}js/mvi-licensing-map.js?v=20260928-oh-cert"></script>
+<script defer src="${root}js/mvi-licensing-map.js?v=20261009-mobile-pdf"></script>
 <div data-api-url="/api/website-chat" id="mvi-assistant-root"></div>
 <script defer src="${root}js/website-assistant-widget.js"></script>
 </body>
@@ -1004,7 +1012,7 @@ ${loadFooterEn()}
 <script defer src="${root}bootstrap/js/bootstrap.bundle.min.js"></script>
 <script defer src="${root}script.js"></script>
 <script defer src="${root}js/mvi-nav-questions.js?v=20260828-family"></script>
-<script defer src="${root}js/mvi-licensing-map.js?v=20260928-oh-cert"></script>
+<script defer src="${root}js/mvi-licensing-map.js?v=20261009-mobile-pdf"></script>
 <div data-api-url="/api/website-chat" id="mvi-assistant-root"></div>
 <script defer src="${root}js/website-assistant-widget.js"></script>
 </body>
