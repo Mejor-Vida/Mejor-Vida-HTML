@@ -131,6 +131,7 @@ const STATIC_PAGES = [
   { loc: "/estados/new-mexico.html", priority: "0.84" },
   { loc: "/estados/south-carolina.html", priority: "0.84" },
   { loc: "/estados/south-dakota.html", priority: "0.84" },
+  { loc: "/estados/arizona.html", priority: "0.84" },
   { loc: "/estados/california.html", priority: "0.84" },
   { loc: "/estados/texas.html", priority: "0.84" },
 ];

@@ -29,6 +29,7 @@ Do not invent a denser hero, put package totals above the charts, widen the cost
 - Transparent cutout heroes (like CA/NV/**TX**) keep the same thin answer-first copy — do not refill the hero with costs
 - **Texas hero art:** `node scripts/build-texas-state-hero.js` → `img/state-heroes/texas-hero.png` → `npm run optimize:images` (map from state GeoJSON + official seal SVG). CSS: `.sc-hero--tx` in `css/state-coverage.css`. Bump `heroVersion("texas")` after asset changes.
 - **California hero art:** `node scripts/build-california-state-hero.js` → `img/state-heroes/california-hero.png` → `npm run optimize:images`. CSS: `.sc-hero--ca`. Bump `heroVersion("california")` after asset changes.
+- **Arizona hero art:** Nebraska-style opaque county map — `node scripts/build-arizona-map-svg.js` → `node scripts/build-arizona-state-hero.js` → `npm run optimize:images` (JPG/WebP like NE). Default `.sc-hero-visual` mask. Bump `heroVersion("arizona")` after asset changes.
 - **License PDF pending address:** If the state certificate PDF must not be public yet, omit `pdf` in `LICENSE` / `js/mvi-licensing-map.js` and use `pdfPending: true` + `verifyUrl` (modal shows verify panel, not a PDF).
 - **Texas verify (locked):** `verifyUrl` is `https://appscenter.tdi.texas.gov/reports/p/sirconReport` (not bare `sircon.com` — redirect loop). Add `LICENSE_VERIFY_HINT.TX` copy: **Search for an individual** (not business), then name + Texas license #. Do not link the old Sircon Consumer Inquiry URL on public pages.
 

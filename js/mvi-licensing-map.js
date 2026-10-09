@@ -89,6 +89,18 @@
       verifyLabelEn: "Verify in Texas (TDI)",
       verifyLabelEs: "Verificar en Texas (TDI)",
     },
+    AZ: {
+      nameEn: "Arizona",
+      nameEs: "Arizona",
+      typeEn: "Non-resident producer",
+      typeEs: "Productora no residente",
+      number: "21695431",
+      pdf: "julie-license-az.pdf?v=20261009",
+      verifyUrl:
+        "https://external-lookup-web.prod.naic.org/lookup?jurisdiction=AZ&searchType=Licensee&entityType=IND&npn=21695431",
+      verifyLabelEn: "Verify in Arizona (NAIC)",
+      verifyLabelEs: "Verificar en Arizona (NAIC)",
+    },
   };
 
   function isEs() {

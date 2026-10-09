@@ -282,6 +282,34 @@
         "Max": 6595,
         "Rank": 29
       }
+    },
+    "AZ": {
+      "name": "Arizona",
+      "sourceUrl": "https://www.funeralocity.com/average-funeral-price/az",
+      "fullBurial": {
+        "Average": 7784,
+        "Min": 5580,
+        "Max": 10600,
+        "Rank": 46
+      },
+      "immediateBurial": {
+        "Average": 4480,
+        "Min": 3295,
+        "Max": 6500,
+        "Rank": 49
+      },
+      "fullCremation": {
+        "Average": 5372,
+        "Min": 3060,
+        "Max": 8035,
+        "Rank": 49
+      },
+      "directCremation": {
+        "Average": 1490,
+        "Min": 400,
+        "Max": 2895,
+        "Rank": 49
+      }
     }
   }
 }

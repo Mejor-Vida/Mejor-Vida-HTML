@@ -1240,7 +1240,9 @@
 }
 
 
-/* California / Texas: transparent state cutout + seal (same treatment as Nevada) */
+/* California / Texas / Arizona: transparent state cutout + seal (same treatment as Nevada) */
+/* Arizona uses default NE-style hero visual (county map + seal on blue gradient). */
+
 .sc-hero--tx .sc-hero-visual {
   width: min(62%, 44rem);
   inset: 0 0 0 auto;

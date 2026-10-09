@@ -19,6 +19,13 @@ const JOBS = [
   // Homepage (existing)
   { src: "img/state-heroes/texas-hero.png", maxWidth: 596, maxHeight: 482, keepPng: true, outBase: "texas-hero" },
   { src: "img/state-heroes/california-hero.png", maxWidth: 620, maxHeight: 851, keepPng: true, outBase: "california-hero" },
+  {
+    src: "img/state-heroes/arizona-hero.png",
+    maxWidth: 1400,
+    maxHeight: 900,
+    keepPng: false,
+    outBase: "arizona-hero",
+  },
   { src: "img/business-man.png", maxWidth: 681, maxHeight: 1024, keepPng: true },
   { src: "img/nav-life-rana.jpg", maxWidth: 1024, maxHeight: 819, outBase: "nav-life-rana" },
   { src: "img/nav-life-tejo.jpg", maxWidth: 1024, maxHeight: 768, outBase: "nav-life-tejo" },
@@ -283,7 +290,8 @@ async function optimizeOne(job) {
   const webpOut = path.join(outSubdir, `${base}.webp`);
   await pipeline.clone().webp({ quality: 86, effort: 4 }).toFile(webpOut);
 
-  const keepPng = job.keepPng || /\.png$/i.test(job.src);
+  const keepPng =
+    job.keepPng === true ? true : job.keepPng === false ? false : /\.png$/i.test(job.src);
   const fallbackOut = path.join(outSubdir, `${base}.${keepPng ? "png" : "jpg"}`);
   if (keepPng) {
     await pipeline.clone().png({ compressionLevel: 9, palette: false }).toFile(fallbackOut);

@@ -117,6 +117,17 @@
       fullCremation: 6462,
       directCremation: 2135,
     },
+    AZ: {
+      code: "AZ",
+      slug: "arizona",
+      nameEn: "Arizona",
+      nameEs: "Arizona",
+      sourceUrl: "https://www.funeralocity.com/average-funeral-price/az",
+      fullBurial: 7784,
+      immediateBurial: 4480,
+      fullCremation: 5372,
+      directCremation: 1490,
+    },
   };
 
   var LICENSE = {
@@ -179,6 +190,12 @@
       typeEs: "Productora no residente",
       number: "3561085",
       pdf: "julie-license-tx.pdf?v=20261009-sircon",
+    },
+    AZ: {
+      typeEn: "Non-resident producer",
+      typeEs: "Productora no residente",
+      number: "21695431",
+      pdf: "julie-license-az.pdf?v=20261009",
     },
   };
 

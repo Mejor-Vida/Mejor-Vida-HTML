@@ -55,9 +55,10 @@ function stateHero(code, lang, prefix, imgPrefix) {
     nevada: [680, 1000],
     california: [323, 473],
     texas: [596, 482],
+    arizona: [1400, 900],
   }[slug] || [1400, 900];
   const [heroW, heroH] = heroDims;
-  // Nevada uses transparent cutout; Colorado/others use opaque NE-style county maps
+  // Nevada / CA / TX use transparent cutout; Colorado and others use opaque NE-style county maps
   const useTransparentHero = slug === "nevada" || slug === "california" || slug === "texas";
   const heroPicture = useTransparentHero
     ? `<picture>
@@ -243,6 +244,15 @@ const LICENSE = {
     verifyUrl: "https://appscenter.tdi.texas.gov/reports/p/sirconReport",
     verifyLabel: { es: "Verificar en Texas (TDI)", en: "Verify in Texas (TDI)" },
   },
+  AZ: {
+    typeEs: "Productora no residente",
+    typeEn: "Non-resident producer",
+    number: "21695431",
+    pdf: "julie-license-az.pdf?v=20261009",
+    verifyUrl:
+      "https://external-lookup-web.prod.naic.org/lookup?jurisdiction=AZ&searchType=Licensee&entityType=IND&npn=21695431",
+    verifyLabel: { es: "Verificar en Arizona (NAIC)", en: "Verify in Arizona (NAIC)" },
+  },
 };
 
 /** Shown under the agent bar verify button when the state lookup needs extra steps. */
@@ -263,6 +273,12 @@ const LICENSE_VERIFY_HINT = {
     en: "On Ohio’s agent search, look up Julie Braunsroth or license number 1777665.",
     es: "En la búsqueda de agentes de Ohio, busque Julie Braunsroth o el número de licencia 1777665.",
   },
+  AZ: {
+    en:
+      "On NAIC’s public lookup (not License Manager), jurisdiction Arizona · Search type Licensee · Individual. Use NPN 21695431 or last name Braunsroth — do not fill name, NPN, and license number all at once.",
+    es:
+      "En la búsqueda pública de la NAIC (no License Manager), jurisdicción Arizona · tipo Licensee · Individual. Use NPN 21695431 o apellido Braunsroth — no llene nombre, NPN y número de licencia a la vez.",
+  },
 };
 
 const SLUGS = {
@@ -276,6 +292,7 @@ const SLUGS = {
   SD: "south-dakota",
   CA: "california",
   TX: "texas",
+  AZ: "arizona",
 };
 
 const NAME_ES = {
@@ -294,6 +311,7 @@ function heroVersion(slug) {
   if (slug === "new-mexico" || slug === "south-carolina" || slug === "south-dakota") return "map-seal-v1";
   if (slug === "california") return "map-seal-v4";
   if (slug === "texas") return "map-seal-v5";
+  if (slug === "arizona") return "map-seal-v3";
   return "map-seal-v11";
 }
 
@@ -1467,7 +1485,7 @@ ${costDefModal(lang)}`;
 
 function citiesSection(code, lang) {
   // California city guides are not built yet — omit the cities block.
-  if (code === "CA") return "";
+  if (code === "CA" || code === "AZ") return "";
   if (code === "KS") {
     if (lang === "es") {
       return `<section class="py-5 bg-light border-bottom" id="ciudades">

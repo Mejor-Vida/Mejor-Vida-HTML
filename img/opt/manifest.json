@@ -3310,5 +3310,14 @@
     "webp": "img/opt/california-hero.webp",
     "fallback": "img/opt/california-hero.png",
     "keepPng": true
+  },
+  {
+    "src": "img/state-heroes/arizona-hero.png",
+    "base": "arizona-hero",
+    "width": 1400,
+    "height": 900,
+    "webp": "img/opt/arizona-hero.webp",
+    "fallback": "img/opt/arizona-hero.jpg",
+    "keepPng": false
   }
 ]
