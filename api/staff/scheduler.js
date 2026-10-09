@@ -11,6 +11,7 @@ const { dualAppointmentLabel } = require("../../lib/scheduler/timezone");
 const { cancelAppointment } = require("../../lib/scheduler/cancel-appointment");
 const { checkGoogleCalendarHealth } = require("../../lib/scheduler/calendar-health");
 const { syncAppointmentToCalendar } = require("../../lib/scheduler/sync-appointment-calendar");
+const { updateCalendarEventEnd } = require("../../lib/scheduler/google-calendar");
 
 async function listAppointments(cfg, query) {
   const from = String(query.from || "").trim();
@@ -32,6 +33,7 @@ async function listAppointments(cfg, query) {
       contact_id: row.contact_id,
       starts_at: row.starts_at,
       ends_at: row.ends_at,
+      duration_minutes: Math.round((Date.parse(row.ends_at) - Date.parse(row.starts_at)) / 60000),
       status: row.status,
       name: name || "Client",
       phone: row.phone,
@@ -111,6 +113,41 @@ module.exports = async function handler(req, res) {
       } catch (e) {
         console.error("staff/scheduler sync_calendar", e);
         return json(res, 500, { error: "Failed to sync calendar" });
+      }
+    }
+    if (action === "set_duration") {
+      const appointmentId = String(body.appointmentId || body.appointment_id || "").trim();
+      const minutes = parseInt(body.minutes, 10);
+      if (!appointmentId) return json(res, 400, { error: "appointmentId required" });
+      if (!Number.isFinite(minutes) || minutes < 15 || minutes > 480) {
+        return json(res, 400, { error: "minutes must be 15–480" });
+      }
+      try {
+        const rows = await restSelect(
+          cfg,
+          "scheduler_appointments",
+          `select=id,starts_at,google_event_id&id=eq.${encodeURIComponent(appointmentId)}&limit=1`
+        );
+        const row = rows && rows[0];
+        if (!row) return json(res, 404, { error: "Appointment not found" });
+        const endsAt = new Date(Date.parse(row.starts_at) + minutes * 60000).toISOString();
+        const base = cfg.supabaseUrl.replace(/\/$/, "") + "/rest/v1";
+        const r = await fetch(`${base}/scheduler_appointments?id=eq.${encodeURIComponent(row.id)}`, {
+          method: "PATCH",
+          headers: {
+            apikey: cfg.serviceKey,
+            Authorization: `Bearer ${cfg.serviceKey}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ ends_at: endsAt, updated_at: new Date().toISOString() }),
+        });
+        if (!r.ok) throw new Error(`patch ${r.status}`);
+        let calendar = { skipped: true };
+        if (row.google_event_id) calendar = await updateCalendarEventEnd(row.google_event_id, endsAt);
+        return json(res, 200, { ok: true, ends_at: endsAt, minutes, calendar });
+      } catch (e) {
+        console.error("staff/scheduler set_duration", e);
+        return json(res, 500, { error: "Failed to update duration" });
       }
     }
     if (action === "cancel") {

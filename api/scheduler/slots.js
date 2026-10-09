@@ -39,7 +39,7 @@ module.exports = async function handler(req, res) {
       const max = new Date(now.getTime() + cfg.horizonDays * 86400000).toISOString();
       const q =
         `scheduler_appointments?select=starts_at,ends_at&status=eq.scheduled` +
-        `&starts_at=gte.${encodeURIComponent(now.toISOString())}` +
+        `&ends_at=gt.${encodeURIComponent(now.toISOString())}` +
         `&starts_at=lte.${encodeURIComponent(max)}`;
       const r = await fetch(`${base}/${q}`, {
         headers: { apikey: serviceKey, Authorization: `Bearer ${serviceKey}` },

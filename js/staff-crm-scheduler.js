@@ -95,6 +95,32 @@
     return out;
   }
 
+  var DURATION_OPTIONS = [30, 45, 60, 75, 90, 120, 150, 180];
+
+  function durationLabel(min) {
+    if (min < 60) return min + " min";
+    var h = Math.floor(min / 60);
+    var m = min % 60;
+    return h + " h" + (m ? " " + m + " min" : "");
+  }
+
+  function durationSelect(row) {
+    var cur = parseInt(row.duration_minutes, 10) || 30;
+    var opts = DURATION_OPTIONS.indexOf(cur) === -1 ? DURATION_OPTIONS.concat([cur]).sort(function (a, b) { return a - b; }) : DURATION_OPTIONS;
+    if (row.status !== "scheduled") return esc(durationLabel(cur));
+    return (
+      '<select class="crm-input crm-scheduler-duration" data-appt-id="' +
+      esc(row.id) +
+      '">' +
+      opts
+        .map(function (m) {
+          return '<option value="' + m + '"' + (m === cur ? " selected" : "") + ">" + esc(durationLabel(m)) + "</option>";
+        })
+        .join("") +
+      '</select><span class="crm-muted crm-scheduler-duration-status"></span>'
+    );
+  }
+
   function renderAppointments(rows) {
     if (!rows || !rows.length) {
       return '<p class="crm-muted">' + esc(t("scheduler_no_appts")) + "</p>";
@@ -106,6 +132,8 @@
       esc(t("scheduler_col_client")) +
       "</th><th>" +
       esc(t("scheduler_col_tz")) +
+      "</th><th>" +
+      esc(t("scheduler_col_duration")) +
       "</th><th>" +
       esc(t("scheduler_col_actions")) +
       "</th></tr></thead><tbody>";
@@ -145,6 +173,8 @@
         "</span></td><td>" +
         esc(row.booker_timezone || "") +
         "</td><td>" +
+        durationSelect(row) +
+        "</td><td>" +
         actions +
         "</td></tr>";
     });
@@ -169,6 +199,27 @@
     if (!list) return;
     if (list.getAttribute("data-appt-actions") === "1") return;
     list.setAttribute("data-appt-actions", "1");
+    list.addEventListener("change", function (ev) {
+      var sel = ev.target && ev.target.closest ? ev.target.closest(".crm-scheduler-duration") : null;
+      if (!sel) return;
+      var status = sel.parentNode.querySelector(".crm-scheduler-duration-status");
+      sel.disabled = true;
+      if (status) status.textContent = " " + t("saving");
+      api(
+        "/api/staff/scheduler",
+        { action: "set_duration", appointmentId: sel.getAttribute("data-appt-id"), minutes: parseInt(sel.value, 10) },
+        { method: "POST" }
+      )
+        .then(function () {
+          if (status) status.textContent = " " + t("scheduler_saved");
+        })
+        .catch(function (e) {
+          if (status) status.textContent = " " + (e.message || "Error");
+        })
+        .then(function () {
+          sel.disabled = false;
+        });
+    });
     list.addEventListener("click", function (ev) {
       var syncBtn = ev.target && ev.target.closest ? ev.target.closest(".crm-scheduler-sync") : null;
       var cancelBtn = ev.target && ev.target.closest ? ev.target.closest(".crm-scheduler-cancel") : null;
