@@ -1451,7 +1451,6 @@ function renderEs(code) {
 <meta name="robots" content="index, follow"/>
 <link href="${canon}" rel="canonical"/>
 <link href="${canon}" hreflang="es-US" rel="alternate"/>
-<link href="${enCanon}" hreflang="en-US" rel="alternate"/>
 <link href="${canon}" hreflang="x-default" rel="alternate"/>
 <link href="${prefix}favicon.ico" rel="icon" type="image/x-icon"/>
 <link href="${prefix}bootstrap/css/bootstrap.min.css" rel="stylesheet"/>

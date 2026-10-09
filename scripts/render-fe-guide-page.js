@@ -257,8 +257,11 @@ function renderGuide(guide, faqIndex, shell, lang) {
   const cta = { ...defaultCta(lang), ...(guide.cta || {}) };
   const quoteHref = isEn ? "quote.html" : "../quote.html";
   const scheduleHref = isEn ? "schedule-julie.html" : "../schedule-julie.html";
+  // Spanish indexable; English blog mirrors are noindex — omit en hreflang on ES.
   const hreflang = altUrl
-    ? `<link rel="alternate" hreflang="es" href="${isEn ? altUrl : canonical}"/>\n<link rel="alternate" hreflang="en" href="${isEn ? canonical : altUrl}"/>\n<link rel="alternate" hreflang="x-default" href="${isEn ? altUrl : canonical}"/>`
+    ? isEn
+      ? `<link rel="alternate" hreflang="es" href="${altUrl}"/>\n<link rel="alternate" hreflang="en" href="${canonical}"/>\n<link rel="alternate" hreflang="x-default" href="${altUrl}"/>`
+      : `<link rel="alternate" hreflang="es" href="${canonical}"/>\n<link rel="alternate" hreflang="x-default" href="${canonical}"/>`
     : "";
 
   let header;

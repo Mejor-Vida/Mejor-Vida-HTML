@@ -14,6 +14,7 @@ const OUT = path.join(ROOT, "sitemap.xml");
 const STATIC_PAGES = [
   { loc: "/", priority: "1.00" },
   { loc: "/about-julie.html", priority: "0.85" },
+  { loc: "/licencias.html", priority: "0.85" },
   { loc: "/blog.html", priority: "0.80" },
   { loc: "/seguro-gastos-finales.html", priority: "0.90" },
   { loc: "/seguro-vida-entierro-sin-espera.html", priority: "0.88" },
@@ -128,6 +129,21 @@ const STATIC_PAGES = [
   { loc: "/estados/ohio/toledo.html", priority: "0.86" },
   { loc: "/estados/ohio/akron.html", priority: "0.86" },
   { loc: "/estados/ohio/dayton.html", priority: "0.86" },
+  { loc: "/estados/new-mexico.html", priority: "0.84" },
+  { loc: "/estados/new-mexico/albuquerque.html", priority: "0.86" },
+  { loc: "/estados/new-mexico/las-cruces.html", priority: "0.86" },
+  { loc: "/estados/new-mexico/rio-rancho.html", priority: "0.86" },
+  { loc: "/estados/new-mexico/santa-fe.html", priority: "0.86" },
+  { loc: "/estados/south-carolina.html", priority: "0.84" },
+  { loc: "/estados/south-carolina/charleston.html", priority: "0.86" },
+  { loc: "/estados/south-carolina/columbia.html", priority: "0.86" },
+  { loc: "/estados/south-carolina/greenville.html", priority: "0.86" },
+  { loc: "/estados/south-carolina/mount-pleasant.html", priority: "0.86" },
+  { loc: "/estados/south-carolina/north-charleston.html", priority: "0.86" },
+  { loc: "/estados/south-carolina/rock-hill.html", priority: "0.86" },
+  { loc: "/estados/south-dakota.html", priority: "0.84" },
+  { loc: "/estados/south-dakota/sioux-falls.html", priority: "0.86" },
+  { loc: "/estados/south-dakota/rapid-city.html", priority: "0.86" },
 ];
 
 /** Standalone July articles redirect to the weekly digest — omit from sitemap. */

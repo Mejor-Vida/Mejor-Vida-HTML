@@ -286,9 +286,14 @@ function headHtml(lang) {
 <meta content="${c.desc}" name="description"/>
 <meta content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" name="robots"/>
 <link href="${canonical}" rel="canonical"/>
-<link href="${esUrl}" hreflang="es-US" rel="alternate"/>
+${
+ isEs
+  ? `<link href="${esUrl}" hreflang="es-US" rel="alternate"/>
+<link href="${esUrl}" hreflang="x-default" rel="alternate"/>`
+  : `<link href="${esUrl}" hreflang="es-US" rel="alternate"/>
 <link href="${enUrl}" hreflang="en-US" rel="alternate"/>
-<link href="${esUrl}" hreflang="x-default" rel="alternate"/>
+<link href="${esUrl}" hreflang="x-default" rel="alternate"/>`
+}
 <meta content="website" property="og:type"/>
 <meta content="${c.title}" property="og:title"/>
 <meta content="${c.desc}" property="og:description"/>
