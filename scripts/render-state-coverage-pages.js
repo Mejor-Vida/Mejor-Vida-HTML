@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 /**
- * Render bilingual state coverage pages for NE, KS, CO, NV, OH.
+ * Render bilingual state coverage pages (licensed states in SLUGS).
+ * Layout locked: .cursor/rules/state-page-layout.mdc
  * Usage: node scripts/render-state-coverage-pages.js
  */
 const fs = require("fs");
@@ -47,12 +48,17 @@ function stateHero(code, lang, prefix, imgPrefix) {
   const heroWebp = `${imgPrefix}img/opt/${slug}-hero.webp?v=${heroVer}`;
   const heroJpg = `${imgPrefix}img/opt/${slug}-hero.jpg?v=${heroVer}`;
   const heroPng = `${imgPrefix}img/opt/${slug}-hero.png?v=${heroVer}`;
-  const heroDims = { nebraska: [1400, 909], kansas: [1400, 900], colorado: [1400, 900], nevada: [680, 1000], california: [620, 851] }[slug] || [
-    1400, 900,
-  ];
+  const heroDims = {
+    nebraska: [1400, 909],
+    kansas: [1400, 900],
+    colorado: [1400, 900],
+    nevada: [680, 1000],
+    california: [620, 851],
+    texas: [596, 482],
+  }[slug] || [1400, 900];
   const [heroW, heroH] = heroDims;
   // Nevada uses transparent cutout; Colorado/others use opaque NE-style county maps
-  const useTransparentHero = slug === "nevada" || slug === "california";
+  const useTransparentHero = slug === "nevada" || slug === "california" || slug === "texas";
   const heroPicture = useTransparentHero
     ? `<picture>
       <source type="image/webp" srcset="${heroWebp}"/>
@@ -221,6 +227,13 @@ const LICENSE = {
     verifyUrl: "https://www.insurance.ca.gov/license-status/",
     verifyLabel: { es: "Verificar en California (CDI)", en: "Verify in California (CDI)" },
   },
+  TX: {
+    typeEs: "Productora no residente",
+    typeEn: "Non-resident producer",
+    number: "3561085",
+    verifyUrl: "https://www.tdi.texas.gov/agent/index.html",
+    verifyLabel: { es: "Verificar en Texas (TDI)", en: "Verify in Texas (TDI)" },
+  },
 };
 
 const SLUGS = {
@@ -233,6 +246,7 @@ const SLUGS = {
   SC: "south-carolina",
   SD: "south-dakota",
   CA: "california",
+  TX: "texas",
 };
 
 const NAME_ES = {
@@ -250,6 +264,7 @@ function heroVersion(slug) {
   if (slug === "ohio") return "map-seal-v12";
   if (slug === "new-mexico" || slug === "south-carolina" || slug === "south-dakota") return "map-seal-v1";
   if (slug === "california") return "map-seal-v3";
+  if (slug === "texas") return "map-seal-v5";
   return "map-seal-v11";
 }
 
@@ -1045,7 +1060,56 @@ ${items.map((t) => `      <li class="mb-1">${esc(t)}</li>`).join("\n")}
 }
 
 /**
- * Locked cost area: H2 + three expense buckets (funeral home → cemetery → other).
+ * Optional 4th cost bucket — see .cursor/rules/state-page-layout.mdc
+ * TOC sublines (locked): EN “the easiest way to protect your family” /
+ * ES “la forma más sencilla de proteger a su familia”.
+ */
+const WHY_FINAL_EXPENSE_TOC = {
+  en: "the easiest way to protect your family",
+  es: "la forma más sencilla de proteger a su familia",
+};
+
+/** State-specific “why final expense” body copy (probate / paying before the estate is open). */
+const WHY_FINAL_EXPENSE = {
+  TX: {
+    en: {
+      paragraphs: [
+        "When someone dies in Texas, money in bank accounts and other assets that were only in that person’s name usually cannot be spent by the family right away. An executor or administrator must be appointed through probate in the county where the person lived, and that court process often takes months—not a few days.",
+        "Funeral homes and cemeteries typically need payment around the time of service. Many families pay those bills out of pocket while they wait for the estate to move through probate.",
+        "Final expense whole life insurance pays the named beneficiary after the carrier approves the claim. That payment does not have to wait on probate, so the family can use it for the funeral, travel, unpaid bills, or other costs that cannot wait.",
+      ],
+      cta: "Get a free quote",
+    },
+    es: {
+      paragraphs: [
+        "Cuando alguien fallece en Texas, el dinero en cuentas bancarias y otros bienes que estaban solo a su nombre por lo general no puede usarlos la familia de inmediato. Tiene que nombrarse un albacea o administrador por el proceso de sucesión (probate) en el condado donde vivía la persona, y ese trámite judicial suele tardar meses, no unos días.",
+        "Las funerarias y los cementerios normalmente cobran cerca de la fecha del servicio. Muchas familias pagan esas facturas de su bolsillo mientras esperan que avance la sucesión.",
+        "El seguro de gastos finales (vida entera) paga al beneficiario designado después de que la aseguradora aprueba el reclamo. Ese pago no tiene que esperar a la sucesión, así que la familia puede usarlo para el funeral, viajes, cuentas pendientes u otros gastos que no pueden esperar.",
+      ],
+      cta: "Cotización gratuita",
+    },
+  },
+};
+
+function whyFinalExpenseBlock(code, lang, prefix) {
+  const pack = WHY_FINAL_EXPENSE[code];
+  if (!pack) return "";
+  const es = lang === "es";
+  const copy = es ? pack.es : pack.en;
+  const quoteHref = `${prefix}quote.html`;
+  const sectionId = es ? "por-que-gastos-finales" : "why-final-expense";
+  const body = copy.paragraphs.map((p) => `<p class="text-body-secondary mb-3">${esc(p)}</p>`).join("\n");
+  return `<div class="sc-expense-block sc-expense-block--why" id="${sectionId}">
+  <div class="container sc-expense-block-inner">
+    <h3 class="h5 fw-bold mb-3" style="color:#1a365d;">${es ? "4. Por qué un seguro de gastos finales" : "4. Why final expense insurance"}</h3>
+    ${body}
+    <p class="sc-expense-why-cta mb-0"><a class="btn btn-primary btn-lg" href="${esc(quoteHref)}">${esc(copy.cta)}</a></p>
+  </div>
+</div>`;
+}
+
+/**
+ * Locked cost area: H2 + expense buckets (funeral home → cemetery → other [→ why FEP when set]).
  * California template — every state page uses this structure.
  */
 function expenseCostSections(code, lang, prefix) {
@@ -1056,20 +1120,26 @@ function expenseCostSections(code, lang, prefix) {
   const funeralHomeId = es ? "costos-funeraria" : "funeral-home-costs";
   const funeralGuide = es ? `${prefix}cuanto-cuesta-un-funeral.html` : `${prefix}how-much-does-a-funeral-cost.html`;
   const estimator = `${prefix}final-expense-estimator.html`;
+  const hasWhy = Boolean(WHY_FINAL_EXPENSE[code]);
+  const whyId = es ? "por-que-gastos-finales" : "why-final-expense";
+  const whyTocEs =
+    `<li><a href="#${whyId}">Por qué un seguro de gastos finales</a> — ${WHY_FINAL_EXPENSE_TOC.es}</li>`;
+  const whyTocEn =
+    `<li><a href="#${whyId}">Why final expense insurance</a> — ${WHY_FINAL_EXPENSE_TOC.en}</li>`;
   const toc = es
     ? `<ol class="sc-cost-toc">
       <li><a href="#${funeralHomeId}">Costos de la funeraria</a> — paquetes con total bajo, alto y promedio</li>
       <li><a href="#lote">Cementerio: lote, bóveda y marcador</a> — factura aparte</li>
-      <li><a href="#otros-gastos">Otros gastos</a> — tarjetas, hipoteca y deudas similares</li>
+      <li><a href="#otros-gastos">Otros gastos</a> — tarjetas, hipoteca y deudas similares</li>${hasWhy ? `\n      ${whyTocEs}` : ""}
     </ol>`
     : `<ol class="sc-cost-toc">
       <li><a href="#${funeralHomeId}">Funeral home costs</a> — packages with low, high, and average totals</li>
       <li><a href="#burial-plot">Cemetery: plot, vault, and marker</a> — billed separately</li>
-      <li><a href="#other-expenses">Other expenses</a> — credit cards, mortgage, and similar bills</li>
+      <li><a href="#other-expenses">Other expenses</a> — credit cards, mortgage, and similar bills</li>${hasWhy ? `\n      ${whyTocEn}` : ""}
     </ol>`;
   const overview = es
-    ? `<p class="text-body-secondary mb-3">La cuenta al fallecer suele tener <strong>más de una parte</strong>. En esta página verá tres grupos, en orden:</p>${toc}`
-    : `<p class="text-body-secondary mb-3">The bill after a death usually has <strong>more than one part</strong>. This page walks through three groups, in order:</p>${toc}`;
+    ? `<p class="text-body-secondary mb-3">La cuenta al fallecer suele tener <strong>más de una parte</strong>. En esta página verá ${hasWhy ? "cuatro" : "tres"} grupos, en orden:</p>${toc}`
+    : `<p class="text-body-secondary mb-3">The bill after a death usually has <strong>more than one part</strong>. This page walks through ${hasWhy ? "four" : "three"} groups, in order:</p>${toc}`;
   const fhIntro = es
     ? `<p class="text-body-secondary mb-3">Estos son promedios estatales de paquetes de funeraria en ${esc(name)}. Cada tabla lista los servicios del paquete y, al final, el <strong>total del paquete</strong> — bajo, alto y promedio. Datos actualizados ${esc(CAPTURED_AT)}.</p>`
     : `<p class="text-body-secondary mb-3">These are statewide funeral-home package averages for ${esc(name)}. Each chart lists the services in that package, then shows the <strong>package total</strong> — low, high, and average. Updated ${esc(CAPTURED_AT)}.</p>`;
@@ -1105,6 +1175,7 @@ function expenseCostSections(code, lang, prefix) {
 
   ${cemeteryExpenseBlock(code, lang)}
   ${otherExpenseBlock(lang, prefix)}
+  ${whyFinalExpenseBlock(code, lang, prefix)}
 </section>`;
 }
 
@@ -1616,7 +1687,7 @@ function renderEs(code) {
 <link href="${prefix}css/quote-flow-shared.css?v=20260905-search" rel="stylesheet"/>
 <link href="${prefix}css/site-footer.css?v=20260721-lip-page" rel="stylesheet"/>
 <link href="${prefix}css/state-coverage.css?v=20261009-expense-links" rel="stylesheet"/>
-<link href="${prefix}css/mvi-licensing-map.css?v=20261009-ca" rel="stylesheet"/>
+<link href="${prefix}css/mvi-licensing-map.css?v=20261009-tx" rel="stylesheet"/>
 <link href="${prefix}css/mvi-assistant-widget.css?v=20260808-chat-sm" rel="stylesheet"/>
 <link href="${prefix}css/fontawesome-mvi.min.css?v=20260723-brands-fix" rel="stylesheet"/>
 <link href="${prefix}css/site-header.css?v=20260723-ver-precios-gold" rel="stylesheet"/>
@@ -1680,7 +1751,7 @@ ${loadFooterEs()}
 <script defer src="${prefix}bootstrap/js/bootstrap.bundle.min.js"></script>
 <script defer src="${prefix}script.js"></script>
 <script defer src="${prefix}js/mvi-nav-questions.js?v=20260828-family"></script>
-<script defer src="${prefix}js/mvi-licensing-map.js?v=20261009-ca"></script>
+<script defer src="${prefix}js/mvi-licensing-map.js?v=20261009-tx"></script>
 <div data-api-url="/api/website-chat" id="mvi-assistant-root"></div>
 <script defer src="${prefix}js/website-assistant-widget.js"></script>
 </body>
@@ -1718,7 +1789,7 @@ function renderEn(code) {
 <link href="${root}css/quote-flow-shared.css?v=20260905-search" rel="stylesheet"/>
 <link href="${root}css/site-footer.css?v=20260721-lip-page" rel="stylesheet"/>
 <link href="${root}css/state-coverage.css?v=20261009-expense-links" rel="stylesheet"/>
-<link href="${root}css/mvi-licensing-map.css?v=20261009-ca" rel="stylesheet"/>
+<link href="${root}css/mvi-licensing-map.css?v=20261009-tx" rel="stylesheet"/>
 <link href="${root}css/mvi-assistant-widget.css?v=20260808-chat-sm" rel="stylesheet"/>
 <link href="${root}css/fontawesome-mvi.min.css?v=20260723-brands-fix" rel="stylesheet"/>
 <link href="${root}css/site-header.css?v=20260723-ver-precios-gold" rel="stylesheet"/>
@@ -1781,7 +1852,7 @@ ${loadFooterEn()}
 <script defer src="${root}bootstrap/js/bootstrap.bundle.min.js"></script>
 <script defer src="${root}script.js"></script>
 <script defer src="${root}js/mvi-nav-questions.js?v=20260828-family"></script>
-<script defer src="${root}js/mvi-licensing-map.js?v=20261009-ca"></script>
+<script defer src="${root}js/mvi-licensing-map.js?v=20261009-tx"></script>
 <div data-api-url="/api/website-chat" id="mvi-assistant-root"></div>
 <script defer src="${root}js/website-assistant-widget.js"></script>
 </body>

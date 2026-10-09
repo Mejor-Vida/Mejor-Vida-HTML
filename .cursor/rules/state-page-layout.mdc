@@ -6,7 +6,7 @@ alwaysApply: true
 
 # State coverage page layout (locked)
 
-California (`estados/california.html` + `en/states/california.html`) is the **canonical state page** — including the three expense buckets, large package totals after charts, and stacked deep-dive links. Every licensed-state coverage page uses this format.
+California (`estados/california.html` + `en/states/california.html`) is the **canonical state page** — including expense buckets (three by default, **four** when `WHY_FINAL_EXPENSE` is set for that state), large package totals after charts, and stacked deep-dive links. Every licensed-state coverage page uses this format. Texas (`estados/texas.html`) is the reference for the optional fourth bucket.
 
 Do not invent a denser hero, put package totals above the charts, widen the cost tables, inline link pairs with `·`, or repeat the same outbound teaching-page URL in more than one bucket.
 
@@ -14,7 +14,7 @@ Do not invent a denser hero, put package totals above the charts, widen the cost
 
 1. **Older-Adult-First hero** (`sc-hero--answer-first`) — H1, one short lead, **two** bullets max, one CTA. No cost numbers, carrier lists, or long how-it-works in the hero.
 2. **Hero agent bar** — this state’s license only (photo, name, license #, NPN, View license, Verify). Full roster stays on `licencias.html` / `en/licenses.html`.
-3. **Funeral / final expense costs** — one H2 with **three expense buckets** (see below)
+3. **Funeral / final expense costs** — one H2 with **three expense buckets**, plus an optional **fourth** (see below)
 4. **Carriers** Mejor Vida can compare in that state
 5. **How final expense works** (short bullets)
 6. **Navy quote band**
@@ -26,18 +26,32 @@ Do not invent a denser hero, put package totals above the charts, widen the cost
 - Lead names the **agency** (Mejor Vida Insurance / Mejor Vida Seguros), not Julie’s first name in body CTAs
 - Bullets: free quote by age/health/budget + licensed in **this state** · NPN only (do not list other licensed states)
 - One gold CTA to quote; license proof lives in the agent bar under the hero
-- Transparent cutout heroes (like CA/NV) keep the same thin answer-first copy — do not refill the hero with costs
+- Transparent cutout heroes (like CA/NV/**TX**) keep the same thin answer-first copy — do not refill the hero with costs
+- **Texas hero art:** `node scripts/build-texas-state-hero.js` → `img/state-heroes/texas-hero.png` → `npm run optimize:images` (map from state GeoJSON + official seal SVG). CSS: `.sc-hero--tx` in `css/state-coverage.css`. Bump `heroVersion("texas")` after asset changes.
+- **License PDF pending address:** If the state certificate PDF must not be public yet, omit `pdf` in `LICENSE` / `js/mvi-licensing-map.js` and use `pdfPending: true` + `verifyUrl` (modal shows verify panel, not a PDF).
 
-## Cost section — three expense buckets (locked)
+## Cost section — expense buckets (locked)
 
-Built by `expenseCostSections()` in `scripts/render-state-coverage-pages.js`.
+Built by `expenseCostSections()` + `whyFinalExpenseBlock()` in `scripts/render-state-coverage-pages.js`.
 
 Under **How much does a funeral cost in {state}?** / **¿Cuánto cuesta un funeral en {state}?**:
 
-0. **Overview TOC** — short line that the bill has more than one part, then an ordered list linking to the three buckets
+0. **Overview TOC** — short line that the bill has more than one part, then an ordered list linking to each bucket (**three** or **four** items when `WHY_FINAL_EXPENSE[code]` exists)
 1. **Funeral home costs** — statewide Funeralocity package charts; package total **after** each table in large type; source + third-party note; then **one** stacked link list (`.sc-expense-links`) to the funeral-cost guide **and** the estimator
 2. **Cemetery: plot, vault, and marker** — brief plain-language definitions of each; opening/closing called out as separate; published plot examples / resale cards when we have state data. **No** second link to the funeral-cost guide
 3. **Other expenses** — short list (credit cards, mortgage/rent, medical bills, small loans); then a stacked `.sc-expense-links` list to `blog/que-son-gastos-finales.html` / `en/what-are-final-expenses.html` and the coverage-sizing page — do **not** expand into a full essay here
+4. **Why final expense insurance** (only when `WHY_FINAL_EXPENSE[code]` is defined) — `.sc-expense-block--why`, id `why-final-expense` / `por-que-gastos-finales`. Short state-specific copy (probate delay, funeral due at time of service, beneficiary payment vs waiting on the estate). **One** primary CTA button to `quote.html` (`.sc-expense-why-cta`). Do not turn this into a long article.
+
+### Fourth bucket — locked TOC labels (family protection, not probate in the TOC)
+
+When the fourth bucket is present, the overview says **four** groups and the TOC fourth line uses **only** these sublines (do not swap to “probate” wording in the TOC):
+
+| Language | TOC line |
+|----------|----------|
+| EN | `Why final expense insurance` — **the easiest way to protect your family** |
+| ES | `Por qué un seguro de gastos finales` — **la forma más sencilla de proteger a su familia** |
+
+Add or edit body copy in the `WHY_FINAL_EXPENSE` object in `render-state-coverage-pages.js` (ES + EN `paragraphs` + `cta`). Texas (`TX`) is the first entry; copy other states from that pattern with accurate local probate facts — no invented timelines or court fees.
 
 Keep each bucket short. Deep detail lives on the linked teaching pages.
 
@@ -71,7 +85,8 @@ Do **not** put package totals above the chart. Do **not** merge cemetery or othe
 
 ## Builders
 
-- Template: `scripts/render-state-coverage-pages.js` — add the state to `SLUGS` + `LICENSE`, then rebuild
+- Template: `scripts/render-state-coverage-pages.js` — add the state to `SLUGS` + `LICENSE`, optional `WHY_FINAL_EXPENSE[code]`, then rebuild
+- Map + license modal: `js/state-coverage-costs.js`, `js/mvi-licensing-map.js`; harvest licensed states in `scripts/harvest-funeralocity-state-costs.js` (`ne-ks-co-nv.json`)
 - After cost or layout changes: `node scripts/render-state-coverage-pages.js` (ES + EN)
 - Do **not** hand-edit generated state HTML for layout; change the builder and rebuild
 - Mirror ES + EN. Spanish indexable; English `noindex` (existing pattern)
@@ -84,6 +99,7 @@ Do **not** put package totals above the chart. Do **not** merge cemetery or othe
 - Widen cost tables past the locked ~42rem column
 - Inline deep-dive links side by side (use stacked `.sc-expense-links`)
 - Duplicate the funeral-cost guide link under the cemetery bucket
-- Turn the cemetery or “other expenses” buckets into long articles — link out instead
+- Turn the cemetery, “other expenses”, or “why final expense” buckets into long articles — link out instead
+- Change the locked fourth-bucket TOC subline to probate/legal jargon (protection framing stays in the TOC; probate detail stays in the bucket body only)
 - Use Julie’s first name in body CTAs (agency name only; Julie stays in the agent bar / license line)
 - Invent Funeralocity numbers — harvest or cite the stored harvest

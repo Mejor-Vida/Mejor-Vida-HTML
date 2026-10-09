@@ -78,6 +78,17 @@
       pdf: "julie-license-ca.pdf?v=20261009",
       verifyUrl: "https://www.insurance.ca.gov/license-status/",
     },
+    TX: {
+      nameEn: "Texas",
+      nameEs: "Texas",
+      typeEn: "Non-resident producer",
+      typeEs: "Productora no residente",
+      number: "3561085",
+      verifyUrl: "https://www.tdi.texas.gov/agent/index.html",
+      verifyLabelEn: "Verify in Texas (TDI)",
+      verifyLabelEs: "Verificar en Texas (TDI)",
+      pdfPending: true,
+    },
   };
 
   function isEs() {
@@ -107,6 +118,54 @@
       } catch (e) {}
       delete objectUrlCache[code];
     }
+  }
+
+  function verifyLabelFor(info) {
+    if (isEs() && info.verifyLabelEs) return info.verifyLabelEs;
+    if (!isEs() && info.verifyLabelEn) return info.verifyLabelEn;
+    return t("Verificar en línea", "Verify online");
+  }
+
+  function showVerifyOnlyInModal(body, info, code) {
+    var name = isEs() ? info.nameEs : info.nameEn;
+    var type = isEs() ? info.typeEs : info.typeEn;
+    var verifyUrl =
+      info.verifyUrl ||
+      "https://external-lookup-web.prod.naic.org/lookup?jurisdiction=" +
+        encodeURIComponent(code) +
+        "&searchType=Licensee&entityType=IND&npn=21695431";
+    var note = info.pdfPending
+      ? t(
+          "La copia en PDF de la licencia se publicará aquí cuando el certificado actualizado esté disponible. Mientras tanto, puede verificar el estado activo en el sitio oficial del estado.",
+          "The license PDF will be posted here once the updated certificate is available. Until then, you can verify active status on the state’s official site."
+        )
+      : t(
+          "Use el enlace oficial del estado para verificar esta licencia.",
+          "Use the state’s official link to verify this license."
+        );
+    body.innerHTML =
+      '<div class="mvi-lic-verify-panel">' +
+      '<p class="mvi-lic-verify-lead"><strong>' +
+      name +
+      "</strong> · " +
+      type +
+      " #" +
+      info.number +
+      "</p>" +
+      '<p class="mvi-lic-verify-meta">' +
+      t("NPN", "NPN") +
+      " #21695431</p>" +
+      '<p class="mvi-lic-note">' +
+      note +
+      "</p>" +
+      '<p class="mvi-lic-verify-actions">' +
+      '<a class="btn btn-primary" href="' +
+      verifyUrl +
+      '" target="_blank" rel="noopener">' +
+      verifyLabelFor(info) +
+      "</a>" +
+      "</p>" +
+      "</div>";
   }
 
   function showPdfInModal(body, name, pdfUrl, code) {
@@ -180,8 +239,12 @@
     var type = isEs() ? info.typeEs : info.typeEn;
     title.textContent = name + " — " + type + " #" + info.number;
 
-    var pdfUrl = licensesBase() + info.pdf;
-    showPdfInModal(body, name, pdfUrl, code);
+    if (!info.pdf) {
+      showVerifyOnlyInModal(body, info, code);
+    } else {
+      var pdfUrl = licensesBase() + info.pdf;
+      showPdfInModal(body, name, pdfUrl, code);
+    }
     backdrop.classList.remove("hidden");
     document.body.style.overflow = "hidden";
   }

@@ -3292,5 +3292,14 @@
     "webp": "img/opt/blog-generated/weekly-insurance-update-2026-10-04/story-3.webp",
     "fallback": "img/opt/blog-generated/weekly-insurance-update-2026-10-04/story-3.png",
     "keepPng": true
+  },
+  {
+    "src": "img/state-heroes/texas-hero.png",
+    "base": "texas-hero",
+    "width": 596,
+    "height": 482,
+    "webp": "img/opt/texas-hero.webp",
+    "fallback": "img/opt/texas-hero.png",
+    "keepPng": true
   }
 ]

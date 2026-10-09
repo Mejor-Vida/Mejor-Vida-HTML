@@ -251,6 +251,27 @@
   line-height: 1.45;
 }
 
+.mvi-lic-verify-panel {
+  padding: 0.25rem 0 0.5rem;
+}
+
+.mvi-lic-verify-lead {
+  margin: 0 0 0.35rem;
+  font-size: 1.05rem;
+  color: #1a365d;
+  line-height: 1.4;
+}
+
+.mvi-lic-verify-meta {
+  margin: 0 0 1rem;
+  font-size: 0.92rem;
+  color: #475569;
+}
+
+.mvi-lic-verify-actions {
+  margin: 0;
+}
+
 .mvi-lic-modal-backdrop {
   position: fixed;
   inset: 0;

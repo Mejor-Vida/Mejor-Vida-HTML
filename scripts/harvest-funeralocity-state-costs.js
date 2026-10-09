@@ -230,7 +230,7 @@ async function main() {
   fs.writeFileSync(OUT_JSON, JSON.stringify(all, null, 2));
   writeEstimatorJs(estimator);
   // Keep licensed-state summary for coverage pages + map tooltips
-  const licensed = { NE: 1, KS: 1, CO: 1, NV: 1, OH: 1, NM: 1, SC: 1, SD: 1, CA: 1 };
+  const licensed = { NE: 1, KS: 1, CO: 1, NV: 1, OH: 1, NM: 1, SC: 1, SD: 1, CA: 1, TX: 1 };
   const summary = {
     source: "Funeralocity API",
     capturedAt: all.capturedAt.slice(0, 10),

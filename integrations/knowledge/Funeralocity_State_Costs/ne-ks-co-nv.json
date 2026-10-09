@@ -254,6 +254,34 @@
         "Max": 4450,
         "Rank": 46
       }
+    },
+    "TX": {
+      "name": "Texas",
+      "sourceUrl": "https://www.funeralocity.com/average-funeral-price/tx",
+      "fullBurial": {
+        "Average": 8792,
+        "Min": 4885,
+        "Max": 16660,
+        "Rank": 18
+      },
+      "immediateBurial": {
+        "Average": 5262,
+        "Min": 3165,
+        "Max": 10220,
+        "Rank": 17
+      },
+      "fullCremation": {
+        "Average": 6462,
+        "Min": 2695,
+        "Max": 14360,
+        "Rank": 17
+      },
+      "directCremation": {
+        "Average": 2135,
+        "Min": 500,
+        "Max": 6595,
+        "Rank": 29
+      }
     }
   }
 }

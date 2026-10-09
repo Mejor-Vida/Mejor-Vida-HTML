@@ -106,6 +106,17 @@
       fullCremation: 5547,
       directCremation: 1647,
     },
+    TX: {
+      code: "TX",
+      slug: "texas",
+      nameEn: "Texas",
+      nameEs: "Texas",
+      sourceUrl: "https://www.funeralocity.com/average-funeral-price/tx",
+      fullBurial: 8792,
+      immediateBurial: 5262,
+      fullCremation: 6462,
+      directCremation: 2135,
+    },
   };
 
   var LICENSE = {
@@ -162,6 +173,11 @@
       typeEs: "Productora no residente",
       number: "4586251",
       pdf: "julie-license-ca.pdf?v=20261009",
+    },
+    TX: {
+      typeEn: "Non-resident producer",
+      typeEs: "Productora no residente",
+      number: "3561085",
     },
   };
 
