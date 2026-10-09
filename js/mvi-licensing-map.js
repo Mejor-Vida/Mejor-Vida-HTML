@@ -69,6 +69,15 @@
       number: "21695431",
       pdf: "julie-license-sd.pdf?v=20260928-cert",
     },
+    CA: {
+      nameEn: "California",
+      nameEs: "California",
+      typeEn: "Non-resident producer",
+      typeEs: "Productora no residente",
+      number: "4586251",
+      pdf: "julie-license-ca.pdf?v=20261009",
+      verifyUrl: "https://www.insurance.ca.gov/license-status/",
+    },
   };
 
   function isEs() {
@@ -256,14 +265,16 @@
       el.setAttribute("role", "link");
       var info = LICENSED[code];
       var name = es ? info.nameEs : info.nameEn;
-      var href = costsApi && costsApi.pageHref
-        ? costsApi.pageHref(code, es)
-        : es
-          ? "/estados/" + name.toLowerCase() + ".html"
-          : "/en/states/" + name.toLowerCase() + ".html";
-      // Prefer slug from costs module
-      if (costsApi && costsApi.costs && costsApi.costs[code]) {
-        href = costsApi.pageHref(code, es);
+      var href =
+        costsApi && costsApi.pageHref ? costsApi.pageHref(code, es) : null;
+      if (!href) {
+        var fallbackSlug = String(name || code)
+          .toLowerCase()
+          .replace(/\s+/g, "-")
+          .replace(/[^a-z0-9-]/g, "");
+        href = es
+          ? "/estados/" + fallbackSlug + ".html"
+          : "/en/states/" + fallbackSlug + ".html";
       }
       el.setAttribute("aria-label", name + " — " + t("Ver cobertura", "View coverage"));
       el.style.cursor = "pointer";
@@ -305,6 +316,7 @@
       }
 
       function go() {
+        if (!href || href === "null" || href.indexOf("/null") !== -1) return;
         window.location.href = href;
       }
 

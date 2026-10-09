@@ -39,25 +39,20 @@ function avgOfBlock(block) {
  * map+seal art; agent bar shows Julie’s license for that state (not authorship).
  */
 function stateHero(code, lang, prefix, imgPrefix) {
-  const st = DATA.states[code];
   const lic = LICENSE[code];
   const slug = SLUGS[code];
   const name = stateName(code, lang);
-  const short = (DETAILED.states[code] && DETAILED.states[code].short) || {};
-  const burialAvg = avgOfBlock(short.fullBurial);
-  const cremationAvg = avgOfBlock(short.fullCremation);
   const quoteHref = `${prefix}quote.html`;
-  const scheduleHref = lang === "es" ? "/schedule-julie.html" : "/en/schedule-julie.html";
   const heroVer = heroVersion(slug);
   const heroWebp = `${imgPrefix}img/opt/${slug}-hero.webp?v=${heroVer}`;
   const heroJpg = `${imgPrefix}img/opt/${slug}-hero.jpg?v=${heroVer}`;
   const heroPng = `${imgPrefix}img/opt/${slug}-hero.png?v=${heroVer}`;
-  const heroDims = { nebraska: [1400, 909], kansas: [1400, 900], colorado: [1400, 900], nevada: [680, 1000] }[slug] || [
+  const heroDims = { nebraska: [1400, 909], kansas: [1400, 900], colorado: [1400, 900], nevada: [680, 1000], california: [620, 851] }[slug] || [
     1400, 900,
   ];
   const [heroW, heroH] = heroDims;
   // Nevada uses transparent cutout; Colorado/others use opaque NE-style county maps
-  const useTransparentHero = slug === "nevada";
+  const useTransparentHero = slug === "nevada" || slug === "california";
   const heroPicture = useTransparentHero
     ? `<picture>
       <source type="image/webp" srcset="${heroWebp}"/>
@@ -74,24 +69,25 @@ function stateHero(code, lang, prefix, imgPrefix) {
       ? `Seguro de gastos finales en ${name}`
       : `Final Expense Insurance in ${name}`;
 
+  // Older-Adult-First Layer 1: answer + 2 short points + one CTA.
+  // Costs, carriers, and how-it-works stay in sections below.
+  const lead =
+    lang === "es"
+      ? `Mejor Vida Seguros cotiza seguro de vida entera para funeral, cremación y deudas finales a residentes de ${esc(name)}.`
+      : `Mejor Vida Insurance quotes whole life coverage for funeral, cremation, and final bills for residents of ${esc(name)}.`;
+
   const bullets =
     lang === "es"
       ? [
-          `Un funeral tradicional en ${esc(name)} promedia cerca de <strong>${money(burialAvg)}</strong>; la cremación con servicio cerca de <strong>${money(cremationAvg)}</strong> (Funeralocity).`,
-          `Puede comparar cotizaciones de varias aseguradoras — incluidas Mutual of Omaha, Corebridge, Americo y otras — según su edad, salud y presupuesto.`,
-          `Opciones de emisión simplificada o aceptación garantizada según su situación, con primas niveladas.`,
+          `Cotización gratuita según su edad, salud y presupuesto.`,
+          `Licenciada en ${esc(name)} · NPN #${NPN}.`,
         ]
       : [
-          `A traditional burial in ${esc(name)} averages about <strong>${money(burialAvg)}</strong>; full-service cremation about <strong>${money(cremationAvg)}</strong> (Funeralocity).`,
-          `Compare quotes from multiple carriers — including Mutual of Omaha, Corebridge, Americo, and others — based on your age, health, and budget.`,
-          `Simplified-issue or guaranteed-acceptance options when they fit, with level premiums.`,
+          `Free quote based on your age, health, and budget.`,
+          `Licensed in ${esc(name)} · NPN #${NPN}.`,
         ];
 
-  const ctaLabel = lang === "es" ? "Cotización gratuita" : "Get Quotes";
-  const ctaSub =
-    lang === "es"
-      ? `Compare precios de varias compañías en ${name} para encontrar la póliza adecuada.`
-      : `Compare prices from multiple companies in ${name} to find the best policy.`;
+  const ctaLabel = lang === "es" ? "Cotización gratuita" : "Get a free quote";
 
   const agentLabel =
     lang === "es" ? `Agente licenciada en ${name}` : `Licensed agent in ${name}`;
@@ -106,14 +102,13 @@ function stateHero(code, lang, prefix, imgPrefix) {
   const verifyHref = lic.verifyUrl
     ? lic.verifyUrl
     : `https://external-lookup-web.prod.naic.org/lookup?jurisdiction=${esc(code)}&amp;searchType=Licensee&amp;entityType=IND&amp;npn=${NPN}`;
-  const basedIn = lang === "es" ? "Con sede en Lincoln, NE" : "Based in Lincoln, NE";
   const julieAlt =
     lang === "es" ? "Julie Braunsroth, agente de seguros" : "Julie Braunsroth, insurance agent";
   const agentBarId = lang === "es" ? "licencia" : "license";
 
   const bulletHtml = bullets.map((b) => `<li>${b}</li>`).join("\n");
 
-  return `<section class="sc-hero sc-hero--${code.toLowerCase()}" aria-label="${esc(title)}">
+  return `<section class="sc-hero sc-hero--answer-first sc-hero--${code.toLowerCase()}" aria-label="${esc(title)}">
   <div class="sc-hero-visual" aria-hidden="true">
     ${heroPicture}
   </div>
@@ -121,15 +116,12 @@ function stateHero(code, lang, prefix, imgPrefix) {
   <div class="container sc-hero-inner">
     <div class="sc-hero-copy">
       <h1 class="sc-hero-title">${esc(title)}</h1>
-      <ul class="sc-hero-bullets">
+      <p class="sc-hero-lead">${lead}</p>
+      <ul class="sc-hero-bullets sc-hero-bullets--short">
 ${bulletHtml}
       </ul>
-      <p class="sc-hero-cta-note">${esc(ctaSub)}</p>
       <div class="sc-hero-cta-row">
         <a class="btn sc-hero-cta" href="${quoteHref}">${esc(ctaLabel)}</a>
-        <a class="btn sc-hero-cta-secondary" href="${scheduleHref}">${
-    lang === "es" ? "Agendar una llamada" : "Schedule a call"
-  }</a>
       </div>
     </div>
   </div>
@@ -145,7 +137,7 @@ ${bulletHtml}
           <p class="sc-hero-agent-name mb-1"><strong>Julie Braunsroth</strong> · ${esc(
             lang === "es" ? lic.typeEs : lic.typeEn
           )} · ${lang === "es" ? "Licencia" : "License"} <strong>#${esc(lic.number)}</strong></p>
-          <p class="sc-hero-agent-npn mb-0">NPN #${NPN} · ${esc(basedIn)}</p>
+          <p class="sc-hero-agent-npn mb-0">NPN #${NPN}</p>
         </div>
       </div>
       <div class="sc-hero-agent-actions">
@@ -221,6 +213,14 @@ const LICENSE = {
   NM: { typeEs: "Productora no residente", typeEn: "Non-resident producer", number: "21695431", pdf: "julie-license-nm.pdf?v=20260928-cert" },
   SC: { typeEs: "Productora no residente", typeEn: "Non-resident producer", number: "21695431", pdf: "julie-license-sc.pdf?v=20260928-cert" },
   SD: { typeEs: "Productora no residente", typeEn: "Non-resident producer", number: "21695431", pdf: "julie-license-sd.pdf?v=20260928-cert" },
+  CA: {
+    typeEs: "Productora no residente",
+    typeEn: "Non-resident producer",
+    number: "4586251",
+    pdf: "julie-license-ca.pdf?v=20261009",
+    verifyUrl: "https://www.insurance.ca.gov/license-status/",
+    verifyLabel: { es: "Verificar en California (CDI)", en: "Verify in California (CDI)" },
+  },
 };
 
 const SLUGS = {
@@ -232,6 +232,7 @@ const SLUGS = {
   NM: "new-mexico",
   SC: "south-carolina",
   SD: "south-dakota",
+  CA: "california",
 };
 
 const NAME_ES = {
@@ -248,6 +249,7 @@ function stateName(code, lang) {
 function heroVersion(slug) {
   if (slug === "ohio") return "map-seal-v12";
   if (slug === "new-mexico" || slug === "south-carolina" || slug === "south-dakota") return "map-seal-v1";
+  if (slug === "california") return "map-seal-v3";
   return "map-seal-v11";
 }
 
@@ -744,14 +746,10 @@ function costTableBlock({ id, title, packageMin, packageMax, packageAvg, rows, l
   const thLow = lang === "es" ? "Bajo" : "Low";
   const thHigh = lang === "es" ? "Alto" : "High";
   const thAvg = lang === "es" ? "Promedio" : "Average";
-  const rangeLabel =
-    lang === "es"
-      ? `Total del paquete: ${moneyOrDash(packageMin)} bajo · ${moneyOrDash(packageMax)} alto · ${moneyOrDash(packageAvg)} promedio`
-      : `Package total: ${moneyOrDash(packageMin)} low · ${moneyOrDash(packageMax)} high · ${moneyOrDash(packageAvg)} average`;
+  const totalLabel = lang === "es" ? "Total del paquete" : "Package total";
   return `<section class="sc-cost-table-block" id="${esc(id)}">
   <div class="sc-cost-table-heading">
     <h3 class="sc-cost-table-title">${esc(title)}</h3>
-    <p class="sc-cost-table-range">${rangeLabel}</p>
   </div>
   <div class="sc-cost-table-wrap">
     <table class="sc-cost-table">
@@ -767,6 +765,23 @@ function costTableBlock({ id, title, packageMin, packageMax, packageAvg, rows, l
 ${componentRowsHtml(rows, lang)}
       </tbody>
     </table>
+  </div>
+  <div class="sc-cost-package-total" aria-label="${esc(totalLabel)}">
+    <p class="sc-cost-package-total__label">${esc(totalLabel)}</p>
+    <div class="sc-cost-package-total__grid">
+      <div class="sc-cost-package-total__item">
+        <span class="sc-cost-package-total__key">${esc(thLow)}</span>
+        <span class="sc-cost-package-total__val">${moneyOrDash(packageMin)}</span>
+      </div>
+      <div class="sc-cost-package-total__item">
+        <span class="sc-cost-package-total__key">${esc(thHigh)}</span>
+        <span class="sc-cost-package-total__val">${moneyOrDash(packageMax)}</span>
+      </div>
+      <div class="sc-cost-package-total__item sc-cost-package-total__item--avg">
+        <span class="sc-cost-package-total__key">${esc(thAvg)}</span>
+        <span class="sc-cost-package-total__val">${moneyOrDash(packageAvg)}</span>
+      </div>
+    </div>
   </div>
 </section>`;
 }
@@ -907,18 +922,58 @@ function resaleBlock(code, lang) {
     <p class="small text-muted mb-0"><a href="${esc(pack.board)}" rel="noopener" target="_blank">${es ? "Ver anuncios actuales en Grave Solutions" : "See current ads on Grave Solutions"}</a></p>`;
 }
 
-function plotSection(code, lang) {
+/**
+ * Cemetery plot + vault + marker block (expense bucket 2 under the funeral-cost H2).
+ * Keeps published plot examples and resale cards when we have them for the state.
+ */
+function cemeteryExpenseBlock(code, lang) {
   const rows = PLOT_EXAMPLES[code] || [];
   const es = lang === "es";
-  const intro = es
-    ? "Las tablas de arriba son promedios de la funeraria. <strong>No incluyen el lote</strong> (el espacio de la tumba). Ese cargo lo cobra el cementerio, en otra cuenta. La mediana de 2023 de la NFDA para un funeral con velatorio y entierro ($8,300) tampoco incluye la sepultura en el cementerio, el monumento ni la lápida."
-    : "The tables above are funeral-home averages. <strong>They do not include the burial plot</strong> (the grave space). The cemetery bills that separately. The NFDA’s 2023 median for a funeral with viewing and burial ($8,300) also leaves out cemetery interment, a monument, and a grave marker.";
-  const extra = es
-    ? "Abrir y cerrar la tumba, la bóveda y el marcador siguen siendo cargos aparte. No hay un precio único del lote para todo el estado."
-    : "Opening and closing the grave, a vault, and a marker are still separate charges. There is no single plot price for the whole state.";
   const residentLabel = es ? "Residente" : "Resident";
   const nonresLabel = es ? "No residente" : "Non-resident";
   const asOfLabel = es ? "Vigente" : "As of";
+  const defs = es
+    ? [
+        {
+          title: "Lote (parcela)",
+          body: "El espacio de la tumba en el cementerio. Lo cobra el cementerio en una cuenta aparte; no viene en el paquete de la funeraria.",
+        },
+        {
+          title: "Bóveda (contenedor exterior)",
+          body: "La mayoría de los cementerios exigen una bóveda para un entierro en tierra: una caja de concreto o plástico alrededor del ataúd, para que la tumba no se hunda. Casi nunca va en el paquete de la funeraria.",
+        },
+        {
+          title: "Marcador o lápida",
+          body: "La placa o monumento que identifica la tumba. El cementerio suele aprobar el tamaño y el material, y cobra por colocarlo.",
+        },
+      ]
+    : [
+        {
+          title: "Burial plot",
+          body: "The grave space at the cemetery. The cemetery bills it separately; it is not in the funeral-home package.",
+        },
+        {
+          title: "Vault (outer burial container)",
+          body: "Most cemeteries require a vault for ground burial: a concrete or plastic box around the casket so the grave does not sink. It is almost never in the funeral-home package.",
+        },
+        {
+          title: "Marker or headstone",
+          body: "The plaque or monument that marks the grave. The cemetery usually must approve size and material, and charges to set it.",
+        },
+      ];
+  const defsHtml = `<dl class="sc-expense-defs">
+${defs
+  .map(
+    (d) => `  <div class="sc-expense-def">
+    <dt>${esc(d.title)}</dt>
+    <dd>${esc(d.body)}</dd>
+  </div>`
+  )
+  .join("\n")}
+</dl>`;
+  const extra = es
+    ? "Abrir y cerrar la tumba también es un cargo aparte. No hay un precio único del lote para todo el estado."
+    : "Opening and closing the grave is another separate charge. There is no single plot price for the whole state.";
   const listTable = rows.length
     ? `<p class="text-body-secondary mb-3">${extra} ${es ? "Estos son precios publicados del espacio de la tumba:" : "These are published grave-space prices:"}</p>
     <div class="sc-plot-cards">
@@ -942,13 +997,114 @@ function plotSection(code, lang) {
     </div>
     <p class="small text-muted mb-0">${es ? "Estos cementerios públicos publican el precio del lote. No son un promedio del estado y no son el precio de un cementerio privado." : "These public cemeteries publish a grave-space price. They are not a statewide average, and they are not a private cemetery’s price."}</p>`
     : `<p class="text-body-secondary mb-0">${extra}</p>`;
-  return `<section class="py-5 bg-light border-bottom" id="${es ? "lote" : "burial-plot"}">
-  <div class="container" style="max-width:60rem;">
-    <h2 class="h4 fw-bold mb-3" style="color:#1a365d;">${es ? "El lote del cementerio no está en el precio del funeral" : "The cemetery plot is not in the funeral price"}</h2>
-    <p class="text-body-secondary mb-3">${intro}</p>
+  return `<div class="sc-expense-block sc-expense-block--cemetery" id="${es ? "lote" : "burial-plot"}">
+  <div class="container sc-expense-block-inner">
+    <h3 class="h5 fw-bold mb-3" style="color:#1a365d;">${es ? "2. Cementerio: lote, bóveda y marcador" : "2. Cemetery: plot, vault, and marker"}</h3>
+    <p class="text-body-secondary mb-3">${es ? "Las tablas de la funeraria <strong>no incluyen</strong> estos cargos. El cementerio los factura por separado." : "The funeral-home tables <strong>do not include</strong> these charges. The cemetery bills them separately."}</p>
+    ${defsHtml}
     ${listTable}
     ${resaleBlock(code, lang)}
   </div>
+</div>`;
+}
+
+/** Other bills after death (expense bucket 3) — keep short; deep dive on existing guides. */
+function otherExpenseBlock(lang, prefix) {
+  const es = lang === "es";
+  const guide = es ? `${prefix}blog/que-son-gastos-finales.html` : `${prefix}what-are-final-expenses.html`;
+  const coverage = es
+    ? `${prefix}blog/cuanta-cobertura-gastos-finales-necesito.html`
+    : `${prefix}is-10000-final-expense-enough.html`;
+  const items = es
+    ? [
+        "Saldos de tarjeta de crédito",
+        "Pagos de hipoteca o renta que sigan pendientes",
+        "Facturas médicas que no cubrió el seguro de salud",
+        "Préstamos pequeños u otras deudas del hogar",
+      ]
+    : [
+        "Credit card balances",
+        "Mortgage or rent payments that are still due",
+        "Medical bills health insurance did not cover",
+        "Small loans or other household debts",
+      ];
+  return `<div class="sc-expense-block sc-expense-block--other" id="${es ? "otros-gastos" : "other-expenses"}">
+  <div class="container sc-expense-block-inner">
+    <h3 class="h5 fw-bold mb-3" style="color:#1a365d;">${es ? "3. Otros gastos que la familia a menudo sigue debiendo" : "3. Other expenses families often still owe"}</h3>
+    <p class="text-body-secondary mb-3">${es ? "Además del funeral y el cementerio, muchas familias usan el beneficio de un seguro de gastos finales para cuentas que no desaparecen al fallecer:" : "Besides the funeral and the cemetery, many families use a final expense benefit for bills that do not disappear when someone dies:"}</p>
+    <ul class="text-body-secondary ps-3 mb-3">
+${items.map((t) => `      <li class="mb-1">${esc(t)}</li>`).join("\n")}
+    </ul>
+    <p class="text-body-secondary mb-3">${es ? "El monto exacto depende de cada hogar. Un promedio de funeral no incluye estas deudas." : "The exact amount depends on each household. A funeral average does not include these debts."}</p>
+    <ul class="sc-expense-links">
+      <li><a href="${esc(guide)}">${es ? "Qué son los gastos finales →" : "What are final expenses? →"}</a></li>
+      <li><a href="${esc(coverage)}">${es ? "Cuánta cobertura podría necesitar →" : "How much coverage may be enough →"}</a></li>
+    </ul>
+  </div>
+</div>`;
+}
+
+/**
+ * Locked cost area: H2 + three expense buckets (funeral home → cemetery → other).
+ * California template — every state page uses this structure.
+ */
+function expenseCostSections(code, lang, prefix) {
+  const st = DATA.states[code];
+  const name = stateName(code, lang);
+  const es = lang === "es";
+  const sectionId = es ? "costos" : "costs";
+  const funeralHomeId = es ? "costos-funeraria" : "funeral-home-costs";
+  const funeralGuide = es ? `${prefix}cuanto-cuesta-un-funeral.html` : `${prefix}how-much-does-a-funeral-cost.html`;
+  const estimator = `${prefix}final-expense-estimator.html`;
+  const toc = es
+    ? `<ol class="sc-cost-toc">
+      <li><a href="#${funeralHomeId}">Costos de la funeraria</a> — paquetes con total bajo, alto y promedio</li>
+      <li><a href="#lote">Cementerio: lote, bóveda y marcador</a> — factura aparte</li>
+      <li><a href="#otros-gastos">Otros gastos</a> — tarjetas, hipoteca y deudas similares</li>
+    </ol>`
+    : `<ol class="sc-cost-toc">
+      <li><a href="#${funeralHomeId}">Funeral home costs</a> — packages with low, high, and average totals</li>
+      <li><a href="#burial-plot">Cemetery: plot, vault, and marker</a> — billed separately</li>
+      <li><a href="#other-expenses">Other expenses</a> — credit cards, mortgage, and similar bills</li>
+    </ol>`;
+  const overview = es
+    ? `<p class="text-body-secondary mb-3">La cuenta al fallecer suele tener <strong>más de una parte</strong>. En esta página verá tres grupos, en orden:</p>${toc}`
+    : `<p class="text-body-secondary mb-3">The bill after a death usually has <strong>more than one part</strong>. This page walks through three groups, in order:</p>${toc}`;
+  const fhIntro = es
+    ? `<p class="text-body-secondary mb-3">Estos son promedios estatales de paquetes de funeraria en ${esc(name)}. Cada tabla lista los servicios del paquete y, al final, el <strong>total del paquete</strong> — bajo, alto y promedio. Datos actualizados ${esc(CAPTURED_AT)}.</p>`
+    : `<p class="text-body-secondary mb-3">These are statewide funeral-home package averages for ${esc(name)}. Each chart lists the services in that package, then shows the <strong>package total</strong> — low, high, and average. Updated ${esc(CAPTURED_AT)}.</p>`;
+  const fhMore = es
+    ? `<ul class="sc-expense-links">
+      <li><a href="${esc(funeralGuide)}">Guía completa: cuánto cuesta un funeral →</a></li>
+      <li><a href="${esc(estimator)}">Calculadora de gastos finales →</a></li>
+    </ul>`
+    : `<ul class="sc-expense-links">
+      <li><a href="${esc(funeralGuide)}">Full guide: how much a funeral costs →</a></li>
+      <li><a href="${esc(estimator)}">Final expense estimator →</a></li>
+    </ul>`;
+  const source = es
+    ? `<p class="small text-muted mt-3 mb-2">Fuente: <a href="${esc(st.sourceUrl)}" rel="noopener" target="_blank">Funeralocity</a> (promedios estatales). Los precios varían por funeraria, ciudad y servicios elegidos.</p>`
+    : `<p class="small text-muted mt-3 mb-2">Source: <a href="${esc(st.sourceUrl)}" rel="noopener" target="_blank">Funeralocity</a> (state averages). Prices vary by funeral home, city, and services chosen.</p>`;
+
+  return `<section class="py-5 bg-white border-bottom" id="${sectionId}">
+  <div class="container sc-expense-overview px-3 px-md-4">
+    <h2 class="h4 fw-bold mb-3" style="color:#1a365d;">${es ? `¿Cuánto cuesta un funeral en ${esc(name)}?` : `How much does a funeral cost in ${esc(name)}?`}</h2>
+    ${overview}
+  </div>
+
+  <div class="sc-expense-block sc-expense-block--funeral" id="${funeralHomeId}">
+    <div class="container-fluid sc-cost-section-container px-3 px-md-4">
+      <h3 class="h5 fw-bold mb-3" style="color:#1a365d;">${es ? "1. Costos de la funeraria" : "1. Funeral home costs"}</h3>
+      ${fhIntro}
+      ${costTable(code, lang)}
+      ${source}
+      ${thirdPartyFuneralAverageNote(lang)}
+      ${fhMore}
+    </div>
+  </div>
+
+  ${cemeteryExpenseBlock(code, lang)}
+  ${otherExpenseBlock(lang, prefix)}
 </section>`;
 }
 
@@ -1101,8 +1257,8 @@ function detailedCostPanels(code, lang) {
 
   const intro =
     lang === "es"
-      ? `<p class="small text-body-secondary mb-3">Desglose de componentes (bajo / alto / promedio), igual que en Funeralocity. Toque un <strong>tipo de servicio</strong> para ver una explicación breve. Los ítems con * son promedios de mercancía (sin rango bajo/alto publicado).</p>`
-      : `<p class="small text-body-secondary mb-3">Component breakdown (low / high / average), matching Funeralocity. Tap a <strong>service type</strong> for a brief explanation. Items marked * are merchandise averages (no published low/high range).</p>`;
+      ? `<p class="small text-body-secondary mb-3">Toque un <strong>tipo de servicio</strong> para una explicación breve. Los ítems con * son promedios de mercancía (sin rango bajo/alto publicado).</p>`
+      : `<p class="small text-body-secondary mb-3">Tap a <strong>service type</strong> for a short explanation. Items marked * are merchandise averages (no published low/high range).</p>`;
 
   const footnote =
     lang === "es"
@@ -1165,6 +1321,8 @@ ${costDefModal(lang)}`;
 }
 
 function citiesSection(code, lang) {
+  // California city guides are not built yet — omit the cities block.
+  if (code === "CA") return "";
   if (code === "KS") {
     if (lang === "es") {
       return `<section class="py-5 bg-light border-bottom" id="ciudades">
@@ -1437,7 +1595,7 @@ function renderEs(code) {
   const canon = `https://www.mejorvidainsurance.com/estados/${slug}.html`;
   const enCanon = `https://www.mejorvidainsurance.com/en/states/${slug}.html`;
   const title = `Seguro de gastos finales en ${name} | Mejor Vida Seguros`;
-  const desc = `Julie Braunsroth cotiza seguro de gastos finales en ${name}. Costos funerarios promedio, aseguradoras y licencia #${lic.number} (NPN #${NPN}).`;
+  const desc = `Mejor Vida Seguros cotiza seguro de gastos finales en ${name}. Costos funerarios promedio, aseguradoras y licencia #${lic.number} (NPN #${NPN}).`;
 
   return `<!DOCTYPE html>
 <html class="lang-es" lang="es-US">
@@ -1457,8 +1615,8 @@ function renderEs(code) {
 <link href="${prefix}bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
 <link href="${prefix}css/quote-flow-shared.css?v=20260905-search" rel="stylesheet"/>
 <link href="${prefix}css/site-footer.css?v=20260721-lip-page" rel="stylesheet"/>
-<link href="${prefix}css/state-coverage.css?v=20260929-plot-cards" rel="stylesheet"/>
-<link href="${prefix}css/mvi-licensing-map.css?v=20260726-state-cov" rel="stylesheet"/>
+<link href="${prefix}css/state-coverage.css?v=20261009-expense-links" rel="stylesheet"/>
+<link href="${prefix}css/mvi-licensing-map.css?v=20261009-ca" rel="stylesheet"/>
 <link href="${prefix}css/mvi-assistant-widget.css?v=20260808-chat-sm" rel="stylesheet"/>
 <link href="${prefix}css/fontawesome-mvi.min.css?v=20260723-brands-fix" rel="stylesheet"/>
 <link href="${prefix}css/site-header.css?v=20260723-ver-precios-gold" rel="stylesheet"/>
@@ -1480,17 +1638,7 @@ ${loadHeaderEs(slug)}
 <main class="state-coverage-readability">
 ${stateHero(code, "es", prefix, prefix)}
 
-<section class="py-5 bg-white border-bottom" id="costos">
-  <div class="container-fluid sc-cost-section-container px-3 px-md-4">
-    <h2 class="h4 fw-bold mb-3" style="color:#1a365d;">¿Cuánto cuesta un funeral en ${esc(name)}?</h2>
-    <p class="text-body-secondary mb-3">Promedio del costo de los componentes del servicio funerario en ${esc(name)} (actualizados ${esc(CAPTURED_AT)}). Use estas cifras para estimar cuánta cobertura de gastos finales podría necesitar.</p>
-    ${costTable(code, "es")}
-    <p class="small text-muted mt-3 mb-2">Fuente: <a href="${esc(st.sourceUrl)}" rel="noopener" target="_blank">Funeralocity</a> (promedios estatales). Los precios varían por funeraria, ciudad y servicios elegidos. También puede usar nuestra <a href="${prefix}final-expense-estimator.html">calculadora de gastos finales</a>.</p>
-    ${thirdPartyFuneralAverageNote("es")}
-  </div>
-</section>
-
-${plotSection(code, "es")}
+${expenseCostSections(code, "es", prefix)}
 
 <section class="py-5 bg-light border-bottom" id="aseguradoras">
   <div class="container-fluid sc-carrier-section-container px-3 px-lg-4">
@@ -1507,7 +1655,7 @@ ${plotSection(code, "es")}
       <li class="mb-2">Es un <strong>seguro de vida entera</strong> pensado para funeral, cremación y deudas finales — no un funeral prepagado.</li>
       <li class="mb-2">Muchas pólizas usan <strong>suscripción simplificada</strong> (preguntas de salud, sin examen) o <strong>aceptación garantizada</strong>.</li>
       <li class="mb-2">Las primas suelen ser <strong>niveladas</strong> si se pagan a tiempo; el beneficio va a sus beneficiarios en efectivo.</li>
-      <li class="mb-2">Julie atiende por teléfono, WhatsApp y cotización en línea a residentes de ${esc(name)}.</li>
+      <li class="mb-2">Mejor Vida Seguros atiende por teléfono, WhatsApp y cotización en línea a residentes de ${esc(name)}.</li>
     </ul>
     <p class="mb-0"><a href="${prefix}blog/que-es-seguro-gastos-finales.html">Qué es el seguro de gastos finales →</a></p>
   </div>
@@ -1516,7 +1664,7 @@ ${plotSection(code, "es")}
 <section class="py-5 text-white" style="background:#1a365d;">
   <div class="container text-center" style="max-width:60rem;">
     <h2 class="h3 fw-bold mb-3">Cotice gastos finales en ${esc(name)}</h2>
-    <p class="mb-4 text-white-50">Cotización gratuita. Julie compara opciones según su edad, salud y presupuesto.</p>
+    <p class="mb-4 text-white-50">Cotización gratuita. Mejor Vida Seguros compara opciones según su edad, salud y presupuesto.</p>
     <div class="d-flex flex-column flex-sm-row justify-content-center gap-2">
       <a class="btn btn-primary-gold px-4 py-3 rounded fw-bold" href="${prefix}quote.html">Cotización gratuita</a>
       <a class="btn px-4 py-3 rounded fw-bold text-white" style="background:#0b3a7a;" href="/schedule-julie.html">Agendar una llamada</a>
@@ -1532,7 +1680,7 @@ ${loadFooterEs()}
 <script defer src="${prefix}bootstrap/js/bootstrap.bundle.min.js"></script>
 <script defer src="${prefix}script.js"></script>
 <script defer src="${prefix}js/mvi-nav-questions.js?v=20260828-family"></script>
-<script defer src="${prefix}js/mvi-licensing-map.js?v=20260928-oh-cert"></script>
+<script defer src="${prefix}js/mvi-licensing-map.js?v=20261009-ca"></script>
 <div data-api-url="/api/website-chat" id="mvi-assistant-root"></div>
 <script defer src="${prefix}js/website-assistant-widget.js"></script>
 </body>
@@ -1550,7 +1698,7 @@ function renderEn(code) {
   const canon = `https://www.mejorvidainsurance.com/en/states/${slug}.html`;
   const esCanon = `https://www.mejorvidainsurance.com/estados/${slug}.html`;
   const title = `Final Expense Insurance in ${name} | Mejor Vida Insurance`;
-  const desc = `Julie Braunsroth quotes final expense life insurance in ${name}. Average funeral costs, carriers she compares, and license #${lic.number} (NPN #${NPN}).`;
+  const desc = `Mejor Vida Insurance quotes final expense life insurance in ${name}. Average funeral costs, carriers we compare, and license #${lic.number} (NPN #${NPN}).`;
 
   return `<!DOCTYPE html>
 <html class="lang-en" lang="en-US">
@@ -1569,8 +1717,8 @@ function renderEn(code) {
 <link href="${root}bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
 <link href="${root}css/quote-flow-shared.css?v=20260905-search" rel="stylesheet"/>
 <link href="${root}css/site-footer.css?v=20260721-lip-page" rel="stylesheet"/>
-<link href="${root}css/state-coverage.css?v=20260929-plot-cards" rel="stylesheet"/>
-<link href="${root}css/mvi-licensing-map.css?v=20260726-state-cov" rel="stylesheet"/>
+<link href="${root}css/state-coverage.css?v=20261009-expense-links" rel="stylesheet"/>
+<link href="${root}css/mvi-licensing-map.css?v=20261009-ca" rel="stylesheet"/>
 <link href="${root}css/mvi-assistant-widget.css?v=20260808-chat-sm" rel="stylesheet"/>
 <link href="${root}css/fontawesome-mvi.min.css?v=20260723-brands-fix" rel="stylesheet"/>
 <link href="${root}css/site-header.css?v=20260723-ver-precios-gold" rel="stylesheet"/>
@@ -1591,17 +1739,7 @@ ${loadHeaderEn(slug)}
 <main class="state-coverage-readability">
 ${stateHero(code, "en", en, root)}
 
-<section class="py-5 bg-white border-bottom" id="costs">
-  <div class="container-fluid sc-cost-section-container px-3 px-md-4">
-    <h2 class="h4 fw-bold mb-3" style="color:#1a365d;">How much does a funeral cost in ${esc(name)}?</h2>
-    <p class="text-body-secondary mb-3">Average cost of funeral service components in ${esc(name)} (updated ${esc(CAPTURED_AT)}). Use these figures to estimate how much final expense coverage you may need.</p>
-    ${costTable(code, "en")}
-    <p class="small text-muted mt-3 mb-2">Source: <a href="${esc(st.sourceUrl)}" rel="noopener" target="_blank">Funeralocity</a> (state averages). Prices vary by funeral home, city, and services chosen. You can also use our <a href="${en}final-expense-estimator.html">final expense estimator</a>.</p>
-    ${thirdPartyFuneralAverageNote("en")}
-  </div>
-</section>
-
-${plotSection(code, "en")}
+${expenseCostSections(code, "en", en)}
 
 <section class="py-5 bg-light border-bottom" id="carriers">
   <div class="container-fluid sc-carrier-section-container px-3 px-lg-4">
@@ -1618,7 +1756,7 @@ ${plotSection(code, "en")}
       <li class="mb-2">It is <strong>whole life insurance</strong> meant for funeral, cremation, and final bills — not a prepaid funeral contract.</li>
       <li class="mb-2">Many policies use <strong>simplified underwriting</strong> (health questions, no exam) or <strong>guaranteed acceptance</strong>.</li>
       <li class="mb-2">Premiums are typically <strong>level</strong> when paid on time; the death benefit pays cash to your beneficiaries.</li>
-      <li class="mb-2">Julie serves ${esc(name)} residents by phone, WhatsApp, and online quote.</li>
+      <li class="mb-2">Mejor Vida Insurance serves ${esc(name)} residents by phone, WhatsApp, and online quote.</li>
     </ul>
     <p class="mb-0"><a href="${root}blog/que-es-seguro-gastos-finales.html">What is final expense insurance →</a></p>
   </div>
@@ -1627,7 +1765,7 @@ ${plotSection(code, "en")}
 <section class="py-5 text-white" style="background:#1a365d;">
   <div class="container text-center" style="max-width:60rem;">
     <h2 class="h3 fw-bold mb-3">Get a final expense quote in ${esc(name)}</h2>
-    <p class="mb-4 text-white-50">Free quote. Julie compares options based on your age, health, and budget.</p>
+    <p class="mb-4 text-white-50">Free quote. Mejor Vida Insurance compares options based on your age, health, and budget.</p>
     <div class="d-flex flex-column flex-sm-row justify-content-center gap-2">
       <a class="btn btn-primary-gold px-4 py-3 rounded fw-bold" href="${en}quote.html">Free quote</a>
       <a class="btn px-4 py-3 rounded fw-bold text-white" style="background:#0b3a7a;" href="/en/schedule-julie.html">Schedule a call</a>
@@ -1643,7 +1781,7 @@ ${loadFooterEn()}
 <script defer src="${root}bootstrap/js/bootstrap.bundle.min.js"></script>
 <script defer src="${root}script.js"></script>
 <script defer src="${root}js/mvi-nav-questions.js?v=20260828-family"></script>
-<script defer src="${root}js/mvi-licensing-map.js?v=20260928-oh-cert"></script>
+<script defer src="${root}js/mvi-licensing-map.js?v=20261009-ca"></script>
 <div data-api-url="/api/website-chat" id="mvi-assistant-root"></div>
 <script defer src="${root}js/website-assistant-widget.js"></script>
 </body>

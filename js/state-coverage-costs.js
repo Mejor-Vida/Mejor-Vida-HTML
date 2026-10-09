@@ -1,7 +1,7 @@
 /**
  * Funeralocity state averages for Julie's licensed states.
  * Source: integrations/knowledge/Funeralocity_State_Costs/ne-ks-co-nv.json
- * Captured 2026-07-26 from Funeralocity average/full/short API.
+ * Captured 2026-10-09 from Funeralocity average/full/short API.
  */
 (function (global) {
   "use strict";
@@ -35,9 +35,9 @@
       nameEn: "Colorado",
       nameEs: "Colorado",
       sourceUrl: "https://www.funeralocity.com/average-funeral-price/co",
-      fullBurial: 8162,
-      immediateBurial: 4864,
-      fullCremation: 5840,
+      fullBurial: 8158,
+      immediateBurial: 4862,
+      fullCremation: 5833,
       directCremation: 1730,
     },
     NV: {
@@ -95,6 +95,17 @@
       fullCremation: 6689,
       directCremation: 2826,
     },
+    CA: {
+      code: "CA",
+      slug: "california",
+      nameEn: "California",
+      nameEs: "California",
+      sourceUrl: "https://www.funeralocity.com/average-funeral-price/ca",
+      fullBurial: 8050,
+      immediateBurial: 4709,
+      fullCremation: 5547,
+      directCremation: 1647,
+    },
   };
 
   var LICENSE = {
@@ -146,6 +157,12 @@
       number: "21695431",
       pdf: "julie-license-sd.pdf?v=20260928-cert",
     },
+    CA: {
+      typeEn: "Non-resident producer",
+      typeEs: "Productora no residente",
+      number: "4586251",
+      pdf: "julie-license-ca.pdf?v=20261009",
+    },
   };
 
   var NPN = "21695431";
@@ -173,7 +190,7 @@
     npn: NPN,
     money: money,
     pageHref: pageHref,
-    capturedAt: "2026-07-26",
+    capturedAt: "2026-10-09",
     sourceLabel: "Funeralocity",
   };
 })(typeof window !== "undefined" ? window : globalThis);

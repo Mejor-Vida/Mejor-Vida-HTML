@@ -128,6 +128,10 @@ const STATIC_PAGES = [
   { loc: "/estados/ohio/toledo.html", priority: "0.86" },
   { loc: "/estados/ohio/akron.html", priority: "0.86" },
   { loc: "/estados/ohio/dayton.html", priority: "0.86" },
+  { loc: "/estados/new-mexico.html", priority: "0.84" },
+  { loc: "/estados/south-carolina.html", priority: "0.84" },
+  { loc: "/estados/south-dakota.html", priority: "0.84" },
+  { loc: "/estados/california.html", priority: "0.84" },
 ];
 
 /** Standalone July articles redirect to the weekly digest — omit from sitemap. */

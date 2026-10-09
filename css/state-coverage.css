@@ -1,4 +1,4 @@
-/* State coverage pages (NE / KS / CO / NV) */
+/* State coverage pages — California is the locked canonical template (see .cursor/rules/state-page-layout.mdc) */
 
 .state-coverage-page {
   --sc-navy: #1a365d;
@@ -16,9 +16,106 @@
   line-height: 1.5;
 }
 
+/* Cost area: three expense buckets under the funeral-cost H2 (locked template) */
+.sc-expense-overview {
+  max-width: 42rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.sc-cost-toc {
+  margin: 0 0 0.5rem;
+  padding-left: 1.25rem;
+  color: #475569;
+  line-height: 1.55;
+}
+
+.sc-cost-toc li {
+  margin-bottom: 0.45rem;
+}
+
+.sc-cost-toc a {
+  font-weight: 700;
+  color: var(--sc-navy);
+  text-decoration: underline;
+  text-underline-offset: 0.12em;
+}
+
+.sc-expense-block {
+  padding-top: 2rem;
+  padding-bottom: 0.25rem;
+}
+
+.sc-expense-block--cemetery,
+.sc-expense-block--other {
+  margin-top: 1.75rem;
+  padding-top: 2rem;
+  padding-bottom: 0.5rem;
+  border-top: 1px solid #e2e8f0;
+}
+
+.sc-expense-block-inner {
+  max-width: 42rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.sc-expense-defs {
+  margin: 0 0 1.25rem;
+}
+
+.sc-expense-def {
+  margin-bottom: 0.85rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid #eef2f7;
+}
+
+.sc-expense-def:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.sc-expense-def dt {
+  margin: 0 0 0.2rem;
+  color: var(--sc-navy);
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.sc-expense-def dd {
+  margin: 0;
+  color: #475569;
+  line-height: 1.55;
+}
+
+/* Stacked deep-dive links — readable on phone; never inline · pairs */
+.sc-expense-links {
+  list-style: none;
+  margin: 1rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.sc-expense-links li {
+  margin: 0;
+}
+
+.sc-expense-links a {
+  display: inline-block;
+  font-weight: 700;
+  line-height: 1.4;
+  text-decoration: underline;
+  text-underline-offset: 0.14em;
+}
+
 /* editorial always-open funeral cost tables (MVI: navy / blue / gold / white) */
 .sc-cost-section-container {
-  max-width: 78rem;
+  max-width: 42rem;
   margin-left: auto;
   margin-right: auto;
 }
@@ -46,6 +143,81 @@
   color: #64748b;
   font-size: 0.84rem;
   line-height: 1.35;
+}
+
+.sc-cost-package-total {
+  margin-top: 0.85rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid #94a3b8;
+  border-top: 3px solid #fec963;
+  border-radius: 2px;
+  background: #f8fbff;
+}
+
+.sc-cost-package-total__label {
+  margin: 0 0 0.65rem;
+  color: var(--sc-navy);
+  font-size: clamp(1.05rem, 1.6vw, 1.2rem);
+  font-weight: 800;
+  letter-spacing: 0.01em;
+}
+
+.sc-cost-package-total__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.65rem;
+}
+
+.sc-cost-package-total__item {
+  text-align: center;
+  padding: 0.35rem 0.25rem;
+}
+
+.sc-cost-package-total__key {
+  display: block;
+  margin-bottom: 0.2rem;
+  color: #64748b;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.sc-cost-package-total__val {
+  display: block;
+  color: var(--sc-navy);
+  font-size: clamp(1.55rem, 3.2vw, 2.15rem);
+  font-weight: 800;
+  line-height: 1.15;
+  font-variant-numeric: tabular-nums;
+}
+
+.sc-cost-package-total__item--avg .sc-cost-package-total__val {
+  color: #0d47a1;
+}
+
+@media (max-width: 575.98px) {
+  .sc-cost-package-total__grid {
+    grid-template-columns: 1fr;
+    gap: 0.45rem;
+  }
+
+  .sc-cost-package-total__item {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    text-align: left;
+    padding: 0.35rem 0;
+    border-top: 1px solid #dbe7f5;
+  }
+
+  .sc-cost-package-total__item:first-child {
+    border-top: none;
+  }
+
+  .sc-cost-package-total__key {
+    margin-bottom: 0;
+  }
 }
 
 .sc-cost-table-wrap {
@@ -104,7 +276,7 @@
 
 .sc-cost-table th:first-child,
 .sc-cost-table td:first-child {
-  width: 40%;
+  width: 46%;
 }
 
 .sc-cost-table th:nth-child(2),
@@ -113,7 +285,7 @@
 .sc-cost-table td:nth-child(3),
 .sc-cost-table th:nth-child(4),
 .sc-cost-table td:nth-child(4) {
-  width: 20%;
+  width: 18%;
 }
 
 .sc-cost-service-btn {
@@ -1061,6 +1233,33 @@
   object-position: 70% center;
 }
 
+
+/* California: transparent state cutout + seal (same treatment as Nevada) */
+.sc-hero--ca .sc-hero-visual {
+  width: min(52%, 37rem);
+  inset: 0 2.5% 0 auto;
+  background: var(--sc-hero-map);
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+
+.sc-hero--ca .sc-hero-visual img {
+  object-fit: contain;
+  object-position: 70% center;
+}
+
+.sc-hero--ca .sc-hero-shade {
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(10, 47, 92, 0.94) 0%,
+    rgba(10, 47, 92, 0.78) 38%,
+    rgba(10, 47, 92, 0.35) 55%,
+    rgba(30, 95, 150, 0.12) 68%,
+    transparent 80%
+  );
+}
+
 .sc-hero--nv .sc-hero-shade {
   inset: 0;
   background: linear-gradient(
@@ -1108,10 +1307,26 @@
   font-size: clamp(1.85rem, 3.6vw, 2.85rem);
   font-weight: 800;
   line-height: 1.12;
-  margin: 0 0 1.1rem;
+  margin: 0 0 0.75rem;
   color: #fff;
   letter-spacing: -0.02em;
   white-space: nowrap;
+}
+
+.sc-hero--ca .sc-hero-title,
+.sc-hero--sc .sc-hero-title,
+.sc-hero--sd .sc-hero-title,
+.sc-hero--nm .sc-hero-title {
+  white-space: normal;
+}
+
+.sc-hero-lead {
+  margin: 0 0 1.15rem;
+  max-width: 32rem;
+  font-size: clamp(1.125rem, 1.7vw, 1.3rem);
+  line-height: 1.5;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.96);
 }
 
 .sc-hero-bullets {
@@ -1122,8 +1337,18 @@
   color: rgba(255, 255, 255, 0.94);
 }
 
+.sc-hero-bullets--short {
+  margin: 0 0 1.5rem;
+  font-size: clamp(1.05rem, 1.5vw, 1.2rem);
+  line-height: 1.5;
+}
+
 .sc-hero-bullets li + li {
   margin-top: 0.55rem;
+}
+
+.sc-hero-bullets--short li + li {
+  margin-top: 0.7rem;
 }
 
 .sc-hero-cta-note {
@@ -1144,8 +1369,17 @@
   color: #0a2f5c;
   font-weight: 700;
   border: none;
-  padding: 0.7rem 1.35rem;
-  border-radius: 0.4rem;
+  min-height: 48px;
+  padding: 0.85rem 1.6rem;
+  border-radius: 0.45rem;
+  font-size: 1.05rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sc-hero--answer-first .sc-hero-copy {
+  max-width: min(32rem, 100%);
 }
 
 .sc-hero-cta:hover,
