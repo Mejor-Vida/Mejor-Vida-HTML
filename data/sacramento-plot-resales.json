@@ -1,0 +1,87 @@
+{
+  "city": "sacramento",
+  "checked": "2026-10-09",
+  "checkedLabelEs": "9 oct. 2026",
+  "checkedLabelEn": "9 Oct 2026",
+  "noteEs": "Anuncios de particulares. No son precios de Mejor Vida Seguros ni la lista oficial del cementerio. La oficina debe transferir la escritura. Revise si el anuncio sigue activo.",
+  "noteEn": "Private-party ads. These are not Mejor Vida Insurance prices or the cemetery’s official list. The office must transfer the deed. Check that the listing is still active.",
+  "boards": [
+    {
+      "id": "grave-solutions-ca",
+      "name": "Grave Solutions",
+      "url": "https://www.gravesolutions.com/for-sale/cemetery-properties/california",
+      "labelEs": "Tablero en vivo · California",
+      "labelEn": "Live board · California"
+    }
+  ],
+  "cemeterySignals": [
+    {
+      "cemetery": "East Lawn Memorial Park",
+      "citedListLow": 6400,
+      "citedListHigh": 10000,
+      "typical": 8500,
+      "phone": "916-732-2000",
+      "noteEs": "No publica el lote en la web. Anuncios de reventa en 2010–2026 citaron unos $6,400 (Briggs Addition, lista ~$9,950) hasta $10,000 por espacio en South Terrace.",
+      "noteEn": "They do not publish plot prices online. Resale ads in 2010–2026 cited about $6,400 (Briggs Addition, list ~$9,950) to $10,000 per space in South Terrace."
+    },
+    {
+      "cemetery": "East Lawn Sierra Hills Memorial Park",
+      "citedListLow": 5200,
+      "citedListHigh": 9000,
+      "typical": 6750,
+      "phone": "916-732-2020",
+      "noteEs": "No publica el precio del lote en internet. Anuncios de reventa citaron unos $5,200–$6,750 por espacio con precio de lista del cementerio hasta $9,000.",
+      "noteEn": "Does not publish plot prices online. Resale ads cited about $5,200 to $6,750 per space with cemetery list prices up to $9,000."
+    },
+    {
+      "cemetery": "St. Mary’s Catholic Cemetery",
+      "citedListLow": null,
+      "citedListHigh": null,
+      "typical": null,
+      "phone": "916-452-6864",
+      "noteEs": "Cementerio diocesano. La tarifa vigente está en la oficina de cementerios, no en internet.",
+      "noteEn": "Diocesan cemetery. Current fees are at the cemeteries office, not online."
+    }
+  ],
+  "listings": [
+    {
+      "id": "gs-eastlawn-south-terrace",
+      "status": "sold",
+      "cemetery": "East Lawn Memorial Park",
+      "spaces": 1,
+      "asking": 10000,
+      "obo": true,
+      "transferFee": null,
+      "citedListEach": null,
+      "url": "https://www.gravesolutions.com/for-sale/east-lawn-memorial-park-sacramento-ca-cemetery-plot-f2a17f",
+      "titleEs": "Grave Solutions · South Terrace (anuncio histórico)",
+      "titleEn": "Grave Solutions · South Terrace (historical ad)"
+    },
+    {
+      "id": "broker-briggs-6400",
+      "status": "listed",
+      "cemetery": "East Lawn Memorial Park",
+      "spaces": 1,
+      "asking": 6400,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": 9950,
+      "url": "https://www.awhisperedgrace.net/cemetery-resale-services.html",
+      "titleEs": "Briggs Addition, fila 10 · lista citada $9,950",
+      "titleEn": "Briggs Addition, row 10 · cited list $9,950"
+    },
+    {
+      "id": "broker-sierra-meadows",
+      "status": "listed",
+      "cemetery": "East Lawn Sierra Hills Memorial Park",
+      "spaces": 1,
+      "asking": 5200,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": 8500,
+      "url": "https://www.awhisperedgrace.net/cemetery-resale-services.html",
+      "titleEs": "Sierra Meadows, fila 8 · lista citada $8,500",
+      "titleEn": "Sierra Meadows, row 8 · cited list $8,500"
+    }
+  ]
+}

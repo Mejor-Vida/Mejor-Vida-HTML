@@ -9,6 +9,7 @@ const sanDiego = require("./san-diego");
 const sanJose = require("./san-jose");
 const sanFrancisco = require("./san-francisco");
 const fresno = require("./fresno");
+const sacramento = require("./sacramento");
 
 const HERO = { heroVer: "landmark-v1" };
 
@@ -93,10 +94,11 @@ const CITY_META = [
     slug: "sacramento",
     nameEn: "Sacramento",
     nameEs: "Sacramento",
-    heroFile: "sacramento-state-capitol",
+    heroFile: "sacramento-tower-bridge-aerial",
+    heroVer: "tower-bridge-aerial-v1",
     heroClass: "sc-hero--sacramento",
-    heroCaptionEs: "Capitolio del estado, Sacramento",
-    heroCaptionEn: "California State Capitol, Sacramento",
+    heroCaptionEs: "Vista aérea del Tower Bridge y el río Sacramento",
+    heroCaptionEn: "Aerial view of the Tower Bridge and Sacramento River",
     countyEs: "condado de Sacramento",
     countyEn: "Sacramento County",
     metroEs: ["Sacramento", "Elk Grove", "Roseville", "Folsom", "Citrus Heights", "Rancho Cordova"],
@@ -156,6 +158,7 @@ module.exports = CITY_META.map((meta) => {
   if (meta.slug === "san-jose") return sanJose;
   if (meta.slug === "san-francisco") return sanFrancisco;
   if (meta.slug === "fresno") return fresno;
+  if (meta.slug === "sacramento") return sacramento;
   const plot = plotCopy(meta.nameEs, meta.nameEn);
   return makeCity({
     ...shared,

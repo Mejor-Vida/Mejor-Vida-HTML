@@ -693,6 +693,15 @@
     "keepPng": false
   },
   {
+    "src": "img/sacramento-tower-bridge-aerial.jpg",
+    "base": "sacramento-tower-bridge-aerial",
+    "width": 1600,
+    "height": 900,
+    "webp": "img/opt/sacramento-tower-bridge-aerial.webp",
+    "fallback": "img/opt/sacramento-tower-bridge-aerial.jpg",
+    "keepPng": false
+  },
+  {
     "src": "img/charleston-rainbow-row.jpg",
     "base": "charleston-rainbow-row",
     "width": 1200,
