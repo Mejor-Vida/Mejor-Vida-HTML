@@ -1,0 +1,87 @@
+{
+  "city": "san-diego",
+  "checked": "2026-10-09",
+  "checkedLabelEs": "9 oct. 2026",
+  "checkedLabelEn": "9 Oct 2026",
+  "noteEs": "Anuncios de particulares. No son precios de Mejor Vida Seguros ni la lista oficial del cementerio. La oficina debe transferir la escritura. Revise si el anuncio sigue activo.",
+  "noteEn": "Private-party ads. These are not Mejor Vida Insurance prices or the cemetery’s official list. The office must transfer the deed. Check that the listing is still active.",
+  "boards": [
+    {
+      "id": "grave-solutions-ca",
+      "name": "Grave Solutions",
+      "url": "https://www.gravesolutions.com/for-sale/cemetery-properties/california",
+      "labelEs": "Tablero en vivo · California",
+      "labelEn": "Live board · California"
+    }
+  ],
+  "cemeterySignals": [
+    {
+      "cemetery": "Mount Hope Cemetery",
+      "citedListLow": 2985,
+      "citedListHigh": null,
+      "typical": 2985,
+      "phone": "619-527-3400",
+      "noteEs": "Tarifa municipal (1 jul. 2025): lote de entierro para residentes $2,985; abrir/cerrar $581. No incluye bóveda ni lápida.",
+      "noteEn": "City fee schedule (1 Jul 2025): resident burial lot $2,985; opening/closing $581. Does not include a vault or marker."
+    },
+    {
+      "cemetery": "El Camino Memorial Park",
+      "citedListLow": 7500,
+      "citedListHigh": 20000,
+      "typical": 10000,
+      "phone": "858-453-2121",
+      "noteEs": "No publica el lote en la web. Anuncios de reventa en 2025–2026 citaron unos $7,500–$20,000 como precio de venta del cementerio, según la sección.",
+      "noteEn": "They do not publish plot prices online. Resale ads in 2025–2026 cited about $7,500 to $20,000 as the cemetery’s retail price, depending on section."
+    },
+    {
+      "cemetery": "Greenwood Memorial Park",
+      "citedListLow": null,
+      "citedListHigh": null,
+      "typical": null,
+      "phone": "619-264-3131",
+      "noteEs": "No publica el lote en la web. Los anuncios de reventa en 2026 pedían unos $2,500–$20,000 según el espacio.",
+      "noteEn": "They do not publish plot prices online. Resale ads in 2026 asked about $2,500 to $20,000 depending on the space."
+    }
+  ],
+  "listings": [
+    {
+      "id": "gs-elcamino-15k",
+      "status": "listed",
+      "cemetery": "El Camino Memorial Park",
+      "spaces": 1,
+      "asking": 15000,
+      "obo": true,
+      "transferFee": null,
+      "citedListEach": 20000,
+      "url": "https://www.buriallink.com/cemeteries/el-camino-memorial-park/plot_listings/2558",
+      "titleEs": "BurialLink · Freedom Terrace, 1 espacio",
+      "titleEn": "BurialLink · Freedom Terrace, 1 space"
+    },
+    {
+      "id": "gs-elcamino-7k",
+      "status": "listed",
+      "cemetery": "El Camino Memorial Park",
+      "spaces": 1,
+      "asking": 7000,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": 7500,
+      "url": "https://www.gravesolutions.com/for-sale/el-camino-memorial-park-san-diego-ca-cemetery-plot-10fd2e",
+      "titleEs": "Grave Solutions · Vista Del Sol, urn garden",
+      "titleEn": "Grave Solutions · Vista Del Sol, urn garden"
+    },
+    {
+      "id": "gs-greenwood-75k",
+      "status": "listed",
+      "cemetery": "Greenwood Memorial Park",
+      "spaces": 1,
+      "asking": 7500,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": null,
+      "url": "https://eturnalrest.com/cemeteries/ca/greenwood-memorial-park-and-mortuary-san-diego/",
+      "titleEs": "Eturnal Rest · ejemplo de anuncio en Greenwood",
+      "titleEn": "Eturnal Rest · sample Greenwood listing"
+    }
+  ]
+}

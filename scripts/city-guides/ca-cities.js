@@ -5,6 +5,7 @@
  */
 const { makeCity } = require("./ca-factory");
 const losAngeles = require("./los-angeles");
+const sanDiego = require("./san-diego");
 
 const HERO = { heroVer: "landmark-v1" };
 
@@ -148,6 +149,7 @@ function plotCopy(cityNameEs, cityNameEn) {
 
 module.exports = CITY_META.map((meta) => {
   if (meta.slug === "los-angeles") return losAngeles;
+  if (meta.slug === "san-diego") return sanDiego;
   const plot = plotCopy(meta.nameEs, meta.nameEn);
   return makeCity({
     ...shared,

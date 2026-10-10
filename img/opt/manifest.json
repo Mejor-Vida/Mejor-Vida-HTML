@@ -641,7 +641,7 @@
   {
     "src": "img/san-diego-coronado-bridge.jpg",
     "base": "san-diego-coronado-bridge",
-    "width": 1200,
+    "width": 1600,
     "height": 900,
     "webp": "img/opt/san-diego-coronado-bridge.webp",
     "fallback": "img/opt/san-diego-coronado-bridge.jpg",
