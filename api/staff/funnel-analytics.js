@@ -22,6 +22,7 @@ const { fetchGscOrganicSearch, fetchGscDaily, fetchGscPageLists, fetchGscPageDet
 const { fetchGeoClicks } = require("../../lib/geo-click-insights");
 const { fetchPoliciesSoldMetrics } = require("../../lib/crm-stage-transitions");
 const { loadQualityLeadMetrics, loadQualityLeadDailyByState, mergeSpendByState, costPerLead, attachSalesToByState, LICENSED_STATES } = require("../../lib/crm-quality-leads");
+const { fetchMetaMessagingConversationHoursReport } = require("../../lib/ad-platform-insights");
 
 const CHICAGO_TZ = "America/Chicago";
 
@@ -162,6 +163,28 @@ module.exports = async function handler(req, res) {
     } catch (e) {
       console.error("[funnel-analytics] geo_clicks", e.message || e);
       return json(res, 502, { error: e.message || "Could not load click locations" });
+    }
+  }
+
+  if (action === "whatsapp_conversation_hours") {
+    const parsed = parseViewId(view);
+    if (parsed.source !== "facebook" || parsed.landingPage !== "whatsapp") {
+      return json(res, 400, { error: "whatsapp_conversation_hours requires facebook WhatsApp view" });
+    }
+    try {
+      const report = await fetchMetaMessagingConversationHoursReport(range.dateFrom, range.dateTo, {
+        adSetVariant: "whatsapp",
+      });
+      return json(res, 200, {
+        ok: true,
+        dateFrom: range.dateFrom,
+        dateTo: range.dateTo,
+        view,
+        ...report,
+      });
+    } catch (e) {
+      console.error("[funnel-analytics] whatsapp_conversation_hours", e.message || e);
+      return json(res, 502, { error: e.message || "Could not load conversation hours" });
     }
   }
 

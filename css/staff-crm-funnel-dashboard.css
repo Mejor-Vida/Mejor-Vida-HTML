@@ -999,6 +999,70 @@
   letter-spacing: -0.02em;
 }
 
+.crm-funnel-wa-hours-chart {
+  display: flex;
+  align-items: flex-end;
+  flex-wrap: nowrap;
+  gap: 2px;
+  height: 200px;
+  width: 100%;
+  padding-bottom: 4px;
+  overflow-x: auto;
+}
+
+.crm-funnel-wa-hours-chart .crm-funnel-ad-bar-col {
+  flex: 1 1 0;
+  min-width: 22px;
+  max-width: 40px;
+}
+
+.crm-funnel-wa-hours-intro,
+.crm-funnel-wa-hours-total,
+.crm-funnel-wa-hours-peak,
+.crm-funnel-wa-hours-state-note {
+  margin: 0 0 10px;
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: var(--crm-muted, #64748b);
+}
+
+.crm-funnel-wa-hours-total strong {
+  color: var(--crm-text, #1a2b4a);
+  font-size: 1.1rem;
+}
+
+.crm-funnel-wa-hours-state-title {
+  margin: 18px 0 6px;
+  font-size: 0.95rem;
+  color: var(--crm-text, #1a2b4a);
+}
+
+.crm-funnel-wa-hours-state-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+}
+
+.crm-funnel-wa-hours-state-table th,
+.crm-funnel-wa-hours-state-table td {
+  padding: 8px 10px;
+  border-bottom: 1px solid #e2e8f0;
+  text-align: left;
+}
+
+.crm-funnel-wa-hours-state-table th {
+  font-weight: 600;
+  color: var(--crm-muted, #64748b);
+}
+
+.crm-funnel-ad-bar-value--zero {
+  visibility: hidden;
+}
+
+.crm-funnel-ad-modal--wa-hours {
+  max-width: 920px;
+}
+
 .crm-funnel-ad-chart-empty {
   margin: 0;
   font-size: 0.88rem;

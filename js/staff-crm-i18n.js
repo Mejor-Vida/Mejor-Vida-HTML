@@ -402,6 +402,29 @@
       funnel_ad_impressions: "Impressions",
       funnel_ad_clicks: "Ad clicks",
       funnel_ad_conversations: "Conversations",
+      funnel_wa_hours_btn: "Conversation times",
+      funnel_wa_hours_chart_hint: "View when ad conversations start by local time of day",
+      funnel_wa_hours_chart_hint_short: "By time of day",
+      funnel_wa_hours_title: "WhatsApp ad conversations by time of day",
+      funnel_wa_hours_intro:
+        "Same metric as Ads Manager → Results → Messaging conversations started, for your WhatsApp click-to-chat ad sets in this date range. Each bar is how many conversations started in that hour bucket.",
+      funnel_wa_hours_with_ad_id: "{n} with Meta ad id",
+      funnel_wa_hours_axis_note: "Hour buckets from Meta insights.",
+      funnel_wa_hours_axis_note_audience:
+        "Hours use Meta’s audience time zone breakdown (each person’s local hour; 6 PM in Florida and 6 PM in California share the same slot).",
+      funnel_wa_hours_axis_note_advertiser:
+        "Hours use your ad account time zone (Meta advertiser time zone breakdown).",
+      funnel_wa_hours_tracked: "messaging conversations started (Ads Manager)",
+      funnel_wa_hours_peak: "Busiest hour: {time} ({n} conversations)",
+      funnel_wa_hours_no_data: "No messaging conversations started in this period for WhatsApp ad sets.",
+      funnel_wa_hours_by_state: "By state",
+      funnel_wa_hours_state_note:
+        "State totals use Meta’s region breakdown (first reply). Meta does not expose conversation-start hour by state; peak hour is only shown for the account-wide chart.",
+      funnel_wa_hours_col_conversations: "Starts",
+      funnel_wa_hours_col_peak: "Peak hour",
+      funnel_wa_hours_state_empty: "No regional breakdown for messaging conversations in this period.",
+      funnel_wa_hours_migration_hint:
+        "Run Supabase migration 112_whatsapp_conversation_starts.sql to persist history; showing live CTWA data until then.",
       funnel_ad_spend: "Ad spend",
       funnel_quality_leads: "Scheduled-call leads",
       funnel_cost_per_quality_lead: "Cost per scheduled-call lead",
@@ -2145,6 +2168,30 @@
       funnel_ad_impressions: "Impresiones",
       funnel_ad_clicks: "Clics en anuncios",
       funnel_ad_conversations: "Conversaciones",
+      funnel_wa_hours_btn: "Horarios de conversación",
+      funnel_wa_hours_chart_hint: "Ver a qué hora local empiezan las conversaciones de anuncios",
+      funnel_wa_hours_chart_hint_short: "Por hora del día",
+      funnel_wa_hours_title: "Conversaciones de anuncios de WhatsApp por hora",
+      funnel_wa_hours_intro:
+        "La misma métrica que Administrador de anuncios → Resultados → Conversaciones de mensajes iniciadas, para sus conjuntos de anuncios de WhatsApp en este rango de fechas. Cada barra es cuántas conversaciones empezaron en esa hora.",
+      funnel_wa_hours_with_ad_id: "{n} con id de anuncio Meta",
+      funnel_wa_hours_axis_note: "Bloques de hora desde los informes de Meta.",
+      funnel_wa_hours_axis_note_audience:
+        "Las horas usan la zona horaria del público en Meta (hora local de cada persona; 6 PM en Florida y 6 PM en California van en el mismo bloque).",
+      funnel_wa_hours_axis_note_advertiser:
+        "Las horas usan la zona horaria de su cuenta publicitaria (desglose por zona del anunciante en Meta).",
+      funnel_wa_hours_tracked: "conversaciones de mensajes iniciadas (Administrador de anuncios)",
+      funnel_wa_hours_peak: "Hora con más actividad: {time} ({n} conversaciones)",
+      funnel_wa_hours_no_data:
+        "No hubo conversaciones de mensajes iniciadas en este periodo para conjuntos de anuncios de WhatsApp.",
+      funnel_wa_hours_by_state: "Por estado",
+      funnel_wa_hours_state_note:
+        "Los totales por estado usan el desglose regional de Meta (primera respuesta). Meta no expone la hora de inicio por estado; la hora pico solo aplica al gráfico general.",
+      funnel_wa_hours_col_conversations: "Inicios",
+      funnel_wa_hours_col_peak: "Hora pico",
+      funnel_wa_hours_state_empty: "No hay desglose regional de conversaciones en este periodo.",
+      funnel_wa_hours_migration_hint:
+        "Ejecute la migración 112_whatsapp_conversation_starts.sql en Supabase para guardar el historial; hasta entonces se muestran datos CTWA en vivo.",
       funnel_ad_spend: "Gasto en anuncios",
       funnel_quality_leads: "Leads de llamada programada",
       funnel_cost_per_quality_lead: "Costo por lead de llamada programada",

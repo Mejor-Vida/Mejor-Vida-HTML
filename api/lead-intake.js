@@ -67,6 +67,7 @@ const { normalizeUsStateAbbr } = require("../lib/us-state-timezone");
 const { saveCanonicalLeadProfile } = require("./staff/_lead-profile");
 const { autoEnrollCrmLead } = require("../lib/crm-nurture-engine");
 const { mergePendingAttributionForContact } = require("../lib/meta-whatsapp-attribution");
+const { recordWhatsappConversationStart } = require("../lib/whatsapp-conversation-hours");
 
 function json(res, status, payload) {
   res.status(status).setHeader("Content-Type", "application/json");
@@ -508,6 +509,23 @@ module.exports = async function handler(req, res) {
       );
     } catch (e) {
       console.error("[lead-intake] ctwa pending merge", e.message || e);
+    }
+
+    const adIdForConversation = contactPatch.meta_ad_id || (metaAdId.length >= 8 ? metaAdId : "");
+    if (adIdForConversation) {
+      recordWhatsappConversationStart(
+        { supabaseUrl, serviceKey: supabaseKey },
+        {
+          startedAt: new Date().toISOString(),
+          phone,
+          waId: whatsappId,
+          usState: usState,
+          metaAdId: adIdForConversation,
+          source: "lead_intake",
+        }
+      ).catch((err) => {
+        console.error("[lead-intake] conversation hour", err.message || err);
+      });
     }
 
     const existingState = await getLeadState(supabaseUrl, supabaseKey, contactId);

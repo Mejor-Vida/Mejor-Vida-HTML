@@ -371,9 +371,13 @@
         : "") +
       "</label>" +
       '<div class="crm-funnel-filter-actions">' +
-      '<button type="button" class="crm-funnel-entry-btn" data-funnel-entry-open>' +
-      esc(t("funnel_entry_context")) +
-      "</button>" +
+      (state.sourceChannel === "facebook" && state.landingPage === "whatsapp"
+        ? '<button type="button" class="crm-funnel-entry-btn" data-funnel-wa-hours-open title="' +
+          esc(t("funnel_wa_hours_chart_hint")) +
+          '">' +
+          esc(t("funnel_wa_hours_btn")) +
+          "</button>"
+        : "") +
       '<button type="button" class="crm-funnel-entry-btn" data-funnel-geo-open>' +
       esc(t("funnel_geo_btn")) +
       "</button>" +
@@ -1065,13 +1069,17 @@
         }
         if (state.landingPage === "whatsapp" && metrics.conversations != null) {
           html +=
-            '<div class="crm-funnel-ad-metric">' +
+            '<button type="button" class="crm-funnel-ad-metric crm-funnel-ad-metric--clickable" data-funnel-ad-chart="whatsapp_conversation_hours" title="' +
+            esc(t("funnel_wa_hours_chart_hint")) +
+            '">' +
             '<span class="crm-funnel-ad-metric-label">' +
             esc(t("funnel_ad_conversations")) +
             "</span>" +
             '<strong class="crm-funnel-ad-metric-value">' +
             esc(fmtNum(metrics.conversations)) +
-            "</strong></div>";
+            '</strong><span class="crm-funnel-ad-metric-hint">' +
+            esc(t("funnel_wa_hours_chart_hint_short")) +
+            "</span></button>";
         }
         if (metrics.spend != null) {
           html +=
@@ -1551,10 +1559,12 @@
                       : "impressions";
     var bucketDays = isQualityStateMetric(metric) ? 1 : chooseChartBucketDays(daily.length);
     var series = bucketDailySeries(daily, bucketDays);
-    var max = 1;
+    var max = 0;
+    var minVal = null;
     var minPos = null;
     var maxPos = null;
     var invertPosition = kind === "gsc_position";
+    var useRangeScale = kind === "gsc_ctr";
     series.forEach(function (d) {
       var v = d[key];
       if (v == null || !isFinite(Number(v))) return;
@@ -1564,14 +1574,33 @@
           if (minPos == null || v < minPos) minPos = v;
           if (maxPos == null || v > maxPos) maxPos = v;
         }
-      } else if (v > max) {
-        max = v;
+      } else {
+        if (v > max) max = v;
+        if (useRangeScale && (minVal == null || v < minVal)) minVal = v;
       }
     });
+    var positionScaleMax = maxPos;
     if (invertPosition) {
       maxPos = maxPos == null ? 1 : maxPos;
       minPos = minPos == null ? maxPos : minPos;
+      positionScaleMax = maxPos;
+      var ranks = [];
+      series.forEach(function (d) {
+        var p = Number(d[key]);
+        if (p > 0) ranks.push(p);
+      });
+      ranks.sort(function (a, b) {
+        return a - b;
+      });
+      if (ranks.length >= 5) {
+        var capIdx = Math.min(ranks.length - 1, Math.ceil(ranks.length * 0.9) - 1);
+        var cap = ranks[Math.max(0, capIdx)];
+        if (cap < maxPos && maxPos - cap >= 8) positionScaleMax = cap;
+      }
+    } else if (max <= 0) {
+      max = 1;
     }
+    if (useRangeScale && minVal == null) minVal = 0;
     var fitChart = bucketDays > 1 || series.length <= 45;
     var denseDaily = bucketDays === 1 && series.length > 14;
     var bucketNote = chartBucketNote(bucketDays);
@@ -1597,13 +1626,22 @@
           var numeric = val == null || !isFinite(Number(val)) ? 0 : Number(val);
           var h;
           if (invertPosition) {
-            var span = maxPos - minPos;
+            var span = positionScaleMax - minPos;
+            var rankForBar = numeric <= 0 ? positionScaleMax : Math.min(numeric, positionScaleMax);
             h =
               numeric <= 0
                 ? 4
                 : span < 0.05
                   ? 55
-                  : Math.max(8, Math.round(((maxPos - numeric) / span) * 92) + 8);
+                  : Math.max(8, Math.round(((positionScaleMax - rankForBar) / span) * 92) + 8);
+          } else if (useRangeScale) {
+            var ctrSpan = max - minVal;
+            h =
+              ctrSpan < 1e-9
+                ? numeric > 0
+                  ? 55
+                  : 4
+                : Math.max(8, Math.round(((numeric - minVal) / ctrSpan) * 92) + 8);
           } else {
             h = Math.max(4, Math.round((numeric / max) * 100));
           }
@@ -2225,8 +2263,141 @@
     );
   }
 
+  function renderWhatsappConversationHourChart(byHour) {
+    byHour = byHour || [];
+    var max = 1;
+    byHour.forEach(function (b) {
+      if (b.count > max) max = b.count;
+    });
+    return (
+      '<div class="crm-funnel-wa-hours-chart">' +
+      byHour
+        .map(function (b) {
+          var h = max > 0 ? Math.max(4, Math.round((b.count / max) * 100)) : 4;
+          return (
+            '<div class="crm-funnel-ad-bar-col" title="' +
+            esc(b.label + ": " + fmtNum(b.count)) +
+            '">' +
+            (b.count > 0
+              ? '<span class="crm-funnel-ad-bar-value">' + esc(String(b.count)) + "</span>"
+              : '<span class="crm-funnel-ad-bar-value crm-funnel-ad-bar-value--zero" aria-hidden="true">·</span>') +
+            '<div class="crm-funnel-ad-bar" style="height:' +
+            h +
+            '%"></div>' +
+            '<span class="crm-funnel-ad-bar-label">' +
+            esc(b.label) +
+            "</span></div>"
+          );
+        })
+        .join("") +
+      "</div>"
+    );
+  }
+
+  function renderWhatsappConversationHoursStateTable(byState) {
+    byState = byState || [];
+    if (!byState.length) {
+      return '<p class="crm-funnel-ad-chart-empty">' + esc(t("funnel_wa_hours_state_empty")) + "</p>";
+    }
+    return (
+      '<table class="crm-funnel-wa-hours-state-table"><thead><tr>' +
+      "<th>" +
+      esc(t("funnel_quality_col_state")) +
+      "</th><th>" +
+      esc(t("funnel_wa_hours_col_conversations")) +
+      "</th><th>" +
+      esc(t("funnel_wa_hours_col_peak")) +
+      "</th></tr></thead><tbody>" +
+      byState
+        .map(function (row) {
+          var peak =
+            row.peakCount > 0
+              ? esc(row.peakLabel) + " (" + esc(fmtNum(row.peakCount)) + ")"
+              : "—";
+          return (
+            "<tr><td>" +
+            esc(qualityStateLabel(row.state)) +
+            "</td><td>" +
+            esc(fmtNum(row.total)) +
+            "</td><td>" +
+            peak +
+            "</td></tr>"
+          );
+        })
+        .join("") +
+      "</tbody></table>"
+    );
+  }
+
+  function renderWhatsappConversationHoursModal() {
+    var data = state.adChartData || {};
+    var rangeLabel = fmtDateRangeLabel(state.dateFrom, state.dateTo);
+    var body = "";
+    if (state.adChartLoading) {
+      body = '<p class="crm-funnel-ad-chart-empty">' + esc(t("funnel_ad_chart_loading")) + "</p>";
+    } else if (state.adChartError) {
+      body = '<p class="crm-funnel-error">' + esc(state.adChartError) + "</p>";
+    } else {
+      var peakNote =
+        data.peakCount > 0
+          ? t("funnel_wa_hours_peak", { time: data.peakLabel, n: fmtNum(data.peakCount) })
+          : t("funnel_wa_hours_no_data");
+      var tzNote =
+        data.timezoneMode === "audience"
+          ? t("funnel_wa_hours_axis_note_audience")
+          : data.timezoneMode === "advertiser"
+            ? t("funnel_wa_hours_axis_note_advertiser")
+            : t("funnel_wa_hours_axis_note");
+      body =
+        '<p class="crm-funnel-wa-hours-intro">' +
+        esc(t("funnel_wa_hours_intro")) +
+        "</p>" +
+        (data.error
+          ? '<p class="crm-funnel-setup-hint">' + esc(data.error) + "</p>"
+          : data.tableMissing
+            ? '<p class="crm-funnel-setup-hint">' + esc(t("funnel_wa_hours_migration_hint")) + "</p>"
+            : "") +
+        '<p class="crm-funnel-wa-hours-total"><strong>' +
+        esc(fmtNum(data.total || 0)) +
+        "</strong> " +
+        esc(t("funnel_wa_hours_tracked")) +
+        "</p>" +
+        '<p class="crm-funnel-wa-hours-peak">' +
+        esc(peakNote) +
+        "</p>" +
+        '<p class="crm-funnel-ad-chart-scroll-hint">' +
+        esc(tzNote) +
+        "</p>" +
+        renderWhatsappConversationHourChart(data.byHour) +
+        "<h4 class=\"crm-funnel-wa-hours-state-title\">" +
+        esc(t("funnel_wa_hours_by_state")) +
+        "</h4>" +
+        '<p class="crm-funnel-wa-hours-state-note">' +
+        esc(t("funnel_wa_hours_state_note")) +
+        "</p>" +
+        renderWhatsappConversationHoursStateTable(data.byState);
+    }
+    return (
+      '<div class="crm-funnel-ad-modal-backdrop" data-funnel-ad-modal-backdrop>' +
+      '<div class="crm-funnel-ad-modal crm-funnel-ad-modal--chart crm-funnel-ad-modal--wa-hours" role="dialog" aria-labelledby="crm-funnel-ad-modal-title">' +
+      '<div class="crm-funnel-ad-modal-head">' +
+      '<div><h3 id="crm-funnel-ad-modal-title">' +
+      esc(t("funnel_wa_hours_title")) +
+      "</h3>" +
+      (rangeLabel ? '<p class="crm-funnel-ad-modal-sub">' + esc(rangeLabel) + "</p>" : "") +
+      "</div>" +
+      '<button type="button" class="crm-funnel-ad-modal-close" data-funnel-ad-modal-close aria-label="' +
+      esc(t("funnel_close")) +
+      '">×</button></div>' +
+      '<div class="crm-funnel-ad-modal-body">' +
+      body +
+      "</div></div></div>"
+    );
+  }
+
   function AdChartModal() {
     if (!state.adChartMetric) return "";
+    if (state.adChartMetric === "whatsapp_conversation_hours") return renderWhatsappConversationHoursModal();
     if (state.adChartMetric === "seo_ranking") return renderSeoRankingModal();
     if (isSeoPageListMetric(state.adChartMetric)) return renderSeoPageListModal();
     var metric = state.adChartMetric;
@@ -2982,11 +3153,13 @@
     wireEvents(main);
     var extra = {
       action:
-        metric === "policies_sold"
-          ? "policies_daily"
-          : isGscChartMetric(metric)
-            ? "gsc_daily"
-            : "ad_daily",
+        metric === "whatsapp_conversation_hours"
+          ? "whatsapp_conversation_hours"
+          : metric === "policies_sold"
+            ? "policies_daily"
+            : isGscChartMetric(metric)
+              ? "gsc_daily"
+              : "ad_daily",
     };
     if (scope) extra.page = scope;
     return api("/api/staff/funnel-analytics?" + queryString(extra), {
@@ -3319,14 +3492,6 @@
       });
     }
 
-    var entryOpenBtn = main.querySelector("[data-funnel-entry-open]");
-    if (entryOpenBtn) {
-      entryOpenBtn.addEventListener("click", function (ev) {
-        ev.preventDefault();
-        openEntryModal(main);
-      });
-    }
-
     var entryModalClose = main.querySelector("[data-funnel-entry-modal-close]");
     if (entryModalClose) {
       entryModalClose.addEventListener("click", function (ev) {
@@ -3338,6 +3503,14 @@
     if (entryModalBackdrop) {
       entryModalBackdrop.addEventListener("click", function (ev) {
         if (ev.target === entryModalBackdrop) closeEntryModal(main);
+      });
+    }
+
+    var waHoursBtn = main.querySelector("[data-funnel-wa-hours-open]");
+    if (waHoursBtn) {
+      waHoursBtn.addEventListener("click", function (ev) {
+        ev.preventDefault();
+        loadAdChart(main, "whatsapp_conversation_hours");
       });
     }
 
