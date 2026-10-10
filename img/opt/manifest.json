@@ -650,7 +650,7 @@
   {
     "src": "img/san-jose-downtown.jpg",
     "base": "san-jose-downtown",
-    "width": 1200,
+    "width": 900,
     "height": 900,
     "webp": "img/opt/san-jose-downtown.webp",
     "fallback": "img/opt/san-jose-downtown.jpg",

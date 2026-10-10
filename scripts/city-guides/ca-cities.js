@@ -6,6 +6,7 @@
 const { makeCity } = require("./ca-factory");
 const losAngeles = require("./los-angeles");
 const sanDiego = require("./san-diego");
+const sanJose = require("./san-jose");
 
 const HERO = { heroVer: "landmark-v1" };
 
@@ -47,8 +48,8 @@ const CITY_META = [
     nameEs: "San José",
     heroFile: "san-jose-downtown",
     heroClass: "sc-hero--san-jose",
-    heroCaptionEs: "Centro de San José, Silicon Valley",
-    heroCaptionEn: "Downtown San Jose, Silicon Valley",
+    heroCaptionEs: "Costa cerca de San José, California",
+    heroCaptionEn: "Coast near San Jose, California",
     countyEs: "condado de Santa Clara",
     countyEn: "Santa Clara County",
     metroEs: ["San José", "Sunnyvale", "Santa Clara", "Mountain View", "Milpitas", "Campbell"],
@@ -150,6 +151,7 @@ function plotCopy(cityNameEs, cityNameEn) {
 module.exports = CITY_META.map((meta) => {
   if (meta.slug === "los-angeles") return losAngeles;
   if (meta.slug === "san-diego") return sanDiego;
+  if (meta.slug === "san-jose") return sanJose;
   const plot = plotCopy(meta.nameEs, meta.nameEn);
   return makeCity({
     ...shared,

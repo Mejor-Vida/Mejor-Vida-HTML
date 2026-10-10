@@ -1,0 +1,87 @@
+{
+  "city": "san-jose",
+  "checked": "2026-10-09",
+  "checkedLabelEs": "9 oct. 2026",
+  "checkedLabelEn": "9 Oct 2026",
+  "noteEs": "Anuncios de particulares. No son precios de Mejor Vida Seguros ni la lista oficial del cementerio. La oficina debe transferir la escritura. Revise si el anuncio sigue activo.",
+  "noteEn": "Private-party ads. These are not Mejor Vida Insurance prices or the cemetery’s official list. The office must transfer the deed. Check that the listing is still active.",
+  "boards": [
+    {
+      "id": "grave-solutions-ca",
+      "name": "Grave Solutions",
+      "url": "https://www.gravesolutions.com/for-sale/cemetery-properties/california",
+      "labelEs": "Tablero en vivo · California",
+      "labelEn": "Live board · California"
+    }
+  ],
+  "cemeterySignals": [
+    {
+      "cemetery": "Oak Hill Memorial Park",
+      "citedListLow": 12600,
+      "citedListHigh": 18000,
+      "typical": 15000,
+      "phone": "408-297-2447",
+      "noteEs": "No publica el lote en la web. Anuncios de reventa en 2025–2026 citaron unos $12,600 (doble profundidad) hasta $18,000 por espacio en secciones como Apostles o Hillside.",
+      "noteEn": "They do not publish plot prices online. Resale ads in 2025–2026 cited about $12,600 (double depth) to $18,000 per space in sections such as Apostles or Hillside."
+    },
+    {
+      "cemetery": "Mission City Memorial Park",
+      "citedListLow": null,
+      "citedListHigh": null,
+      "typical": null,
+      "phone": "408-615-3790",
+      "noteEs": "Cementerio municipal de Santa Clara. La tarifa vigente está en la oficina o en el folleto de la ciudad, no en internet.",
+      "noteEn": "City of Santa Clara cemetery. Current fees are at the office or on the city flyer, not online."
+    },
+    {
+      "cemetery": "Los Gatos Memorial Park",
+      "citedListLow": null,
+      "citedListHigh": null,
+      "typical": null,
+      "phone": "408-379-9200",
+      "noteEs": "No publica el precio del lote en la web. Pida la lista por escrito.",
+      "noteEn": "Does not publish plot prices online. Ask for the list in writing."
+    }
+  ],
+  "listings": [
+    {
+      "id": "gs-oakhill-8k",
+      "status": "listed",
+      "cemetery": "Oak Hill Memorial Park",
+      "spaces": 1,
+      "asking": 8000,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": 12600,
+      "url": "https://www.gravesolutions.com/for-sale/oak-hill-memorial-park-san-jose-ca-cemetery-plot-237d59",
+      "titleEs": "Grave Solutions · Hillside, doble profundidad",
+      "titleEn": "Grave Solutions · Hillside, double depth"
+    },
+    {
+      "id": "tce-oakhill-apostles",
+      "status": "listed",
+      "cemetery": "Oak Hill Memorial Park",
+      "spaces": 1,
+      "asking": 18000,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": null,
+      "url": "https://thecemeteryexchange.com/25-0728-5-featuredlisting-ca.htm",
+      "titleEs": "The Cemetery Exchange · Garden of the Apostles",
+      "titleEn": "The Cemetery Exchange · Garden of the Apostles"
+    },
+    {
+      "id": "tce-oakhill-section-i",
+      "status": "listed",
+      "cemetery": "Oak Hill Memorial Park",
+      "spaces": 1,
+      "asking": 15000,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": null,
+      "url": "https://thecemeteryexchange.com/25-0612-3-featuredlisting-ca.htm",
+      "titleEs": "The Cemetery Exchange · Section I, doble profundidad",
+      "titleEn": "The Cemetery Exchange · Section I, double depth"
+    }
+  ]
+}
