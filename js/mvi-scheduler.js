@@ -34,6 +34,7 @@
       tz_hint: "Detectamos su zona por su conexión. Cámbiela si no es correcta.",
       pick_day: "Elija un día del calendario",
       pick_time: "Elija una hora",
+      more_times: "Deslice para ver más horarios",
       no_slots: "No hay horarios ese día. Pruebe otro día.",
       first_name: "Nombre",
       phone: "Teléfono",
@@ -56,6 +57,7 @@
       tz_hint: "We guessed your zone from your connection. Change it if needed.",
       pick_day: "Pick a day on the calendar",
       pick_time: "Pick a time",
+      more_times: "Slide for more times",
       no_slots: "No times that day. Try another day.",
       first_name: "First name",
       phone: "Phone",
@@ -357,10 +359,21 @@
     });
   }
 
+  function updateSlotScrollHint(container) {
+    var more = container.parentElement && container.parentElement.querySelector(".mvi-scheduler__more");
+    if (!more) return;
+    var canScroll = container.scrollHeight > container.clientHeight + 8;
+    var atEnd = container.scrollTop + container.clientHeight >= container.scrollHeight - 8;
+    more.classList.toggle("is-visible", canScroll && !atEnd);
+    more.hidden = !(canScroll && !atEnd);
+  }
+
   function renderSlots(container) {
+    var keepScroll = container.scrollTop || 0;
     container.innerHTML = "";
     if (!state.selectedYmd) {
       container.appendChild(el("p", "mvi-scheduler__hint", t("pick_day")));
+      updateSlotScrollHint(container);
       return;
     }
     var day = state.days.find(function (d) {
@@ -368,6 +381,7 @@
     });
     if (!day || !day.slots.length) {
       container.appendChild(el("p", "mvi-scheduler__hint", t("no_slots")));
+      updateSlotScrollHint(container);
       return;
     }
     day.slots.forEach(function (slot) {
@@ -383,6 +397,8 @@
       });
       container.appendChild(btn);
     });
+    container.scrollTop = keepScroll;
+    updateSlotScrollHint(container);
   }
 
   function consentHtml() {
@@ -489,7 +505,21 @@
     root.appendChild(el("p", "mvi-scheduler__hint mvi-scheduler__hint--strong", t("pick_day")));
     root.appendChild(el("div", "mvi-scheduler__calendar"));
     root.appendChild(el("p", "mvi-scheduler__hint mvi-scheduler__hint--strong", t("pick_time")));
-    root.appendChild(el("div", "mvi-scheduler__slots"));
+    var slotsBox = el("div", "mvi-scheduler__slots");
+    slotsBox.setAttribute("tabindex", "0");
+    slotsBox.setAttribute("role", "region");
+    slotsBox.setAttribute("aria-label", t("pick_time"));
+    slotsBox.addEventListener("scroll", function () {
+      updateSlotScrollHint(slotsBox);
+    });
+    root.appendChild(slotsBox);
+    var more = el("button", "mvi-scheduler__more", t("more_times"));
+    more.type = "button";
+    more.hidden = true;
+    more.addEventListener("click", function () {
+      slotsBox.scrollBy({ top: Math.max(80, slotsBox.clientHeight * 0.8), behavior: "smooth" });
+    });
+    root.appendChild(more);
     root.appendChild(el("div", "mvi-scheduler__confirm"));
     var details = el("div", "mvi-scheduler__details");
     details.hidden = true;
