@@ -675,6 +675,15 @@
     "keepPng": false
   },
   {
+    "src": "img/fresno-van-ness-arch.jpg",
+    "base": "fresno-van-ness-arch",
+    "width": 1024,
+    "height": 674,
+    "webp": "img/opt/fresno-van-ness-arch.webp",
+    "fallback": "img/opt/fresno-van-ness-arch.jpg",
+    "keepPng": false
+  },
+  {
     "src": "img/sacramento-state-capitol.jpg",
     "base": "sacramento-state-capitol",
     "width": 1200,

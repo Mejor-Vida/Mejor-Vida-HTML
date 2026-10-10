@@ -110,6 +110,7 @@ const JOBS = [
   { src: "img/san-jose-downtown.jpg", maxWidth: 1600, maxHeight: 900 },
   { src: "img/san-francisco-golden-gate.jpg", maxWidth: 1600, maxHeight: 900 },
   { src: "img/fresno-water-tower.jpg", maxWidth: 1600, maxHeight: 900 },
+  { src: "img/fresno-van-ness-arch.jpg", maxWidth: 1280, maxHeight: 840 },
   { src: "img/sacramento-state-capitol.jpg", maxWidth: 1600, maxHeight: 900 },
   { src: "img/charleston-rainbow-row.jpg", maxWidth: 1600, maxHeight: 900 },
   { src: "img/columbia-state-house.jpg", maxWidth: 1600, maxHeight: 900 },

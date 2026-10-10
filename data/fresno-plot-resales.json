@@ -1,0 +1,87 @@
+{
+  "city": "fresno",
+  "checked": "2026-10-09",
+  "checkedLabelEs": "9 oct. 2026",
+  "checkedLabelEn": "9 Oct 2026",
+  "noteEs": "Anuncios de particulares. No son precios de Mejor Vida Seguros ni la lista oficial del cementerio. La oficina debe transferir la escritura. Revise si el anuncio sigue activo.",
+  "noteEn": "Private-party ads. These are not Mejor Vida Insurance prices or the cemetery’s official list. The office must transfer the deed. Check that the listing is still active.",
+  "boards": [
+    {
+      "id": "grave-solutions-ca",
+      "name": "Grave Solutions",
+      "url": "https://www.gravesolutions.com/for-sale/cemetery-properties/california",
+      "labelEs": "Tablero en vivo · California",
+      "labelEn": "Live board · California"
+    }
+  ],
+  "cemeterySignals": [
+    {
+      "cemetery": "Belmont Memorial Park",
+      "citedListLow": 1800,
+      "citedListHigh": 5000,
+      "typical": 5000,
+      "phone": "559-237-6185",
+      "noteEs": "No publica el lote en la web. Anuncios de reventa en 2017–2026 citaron unos $1,295–$1,800 por espacio y hasta $5,000 por doble profundidad en secciones como Garden of the Apostles.",
+      "noteEn": "They do not publish plot prices online. Resale ads in 2017–2026 cited about $1,295 to $1,800 per space and up to $5,000 for double depth in sections such as Garden of the Apostles."
+    },
+    {
+      "cemetery": "Fresno Memorial Gardens",
+      "citedListLow": null,
+      "citedListHigh": null,
+      "typical": null,
+      "phone": "559-268-7823",
+      "noteEs": "Cementerio Dignity en Fresno. La tarifa vigente está en la oficina, no en internet.",
+      "noteEn": "Dignity cemetery in Fresno. Current fees are at the office, not online."
+    },
+    {
+      "cemetery": "Clovis Cemetery",
+      "citedListLow": null,
+      "citedListHigh": null,
+      "typical": null,
+      "phone": "559-299-6057",
+      "noteEs": "Cementerio municipal de Clovis. Pida la tarifa en la oficina de parques de la ciudad.",
+      "noteEn": "City of Clovis cemetery. Ask the parks office for the current fee schedule."
+    }
+  ],
+  "listings": [
+    {
+      "id": "gs-belmont-1295",
+      "status": "listed",
+      "cemetery": "Belmont Memorial Park",
+      "spaces": 1,
+      "asking": 1295,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": 1800,
+      "url": "https://www.gravesolutions.com/for-sale/belmont-memorial-park-fresno-ca-cemetery-plot-dc39fb",
+      "titleEs": "Grave Solutions · 2 espacios, sección 2511",
+      "titleEn": "Grave Solutions · 2 spaces, section 2511"
+    },
+    {
+      "id": "belmont-craigslist-2k",
+      "status": "listed",
+      "cemetery": "Belmont Memorial Park",
+      "spaces": 1,
+      "asking": 2000,
+      "obo": false,
+      "transferFee": 250,
+      "citedListEach": null,
+      "url": "https://fresno.craigslist.org/for/d/fresno-belmont-memorial-park-cemetery/7827109445.html",
+      "titleEs": "Craigslist · lote simple, área suroeste de la torre",
+      "titleEn": "Craigslist · single plot, southwest of tower"
+    },
+    {
+      "id": "belmont-shoppok-1795",
+      "status": "listed",
+      "cemetery": "Belmont Memorial Park",
+      "spaces": 1,
+      "asking": 1795,
+      "obo": false,
+      "transferFee": 250,
+      "citedListEach": null,
+      "url": "https://www.shoppok.com/fresno/a,35,351919,Cemetery-Burial-Plot---Belmont-Memorial-Park--1-795.htm",
+      "titleEs": "Shoppok · sección 17",
+      "titleEn": "Shoppok · section 17"
+    }
+  ]
+}

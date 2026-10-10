@@ -8,6 +8,7 @@ const losAngeles = require("./los-angeles");
 const sanDiego = require("./san-diego");
 const sanJose = require("./san-jose");
 const sanFrancisco = require("./san-francisco");
+const fresno = require("./fresno");
 
 const HERO = { heroVer: "landmark-v1" };
 
@@ -77,10 +78,10 @@ const CITY_META = [
     slug: "fresno",
     nameEn: "Fresno",
     nameEs: "Fresno",
-    heroFile: "fresno-water-tower",
+    heroFile: "fresno-van-ness-arch",
     heroClass: "sc-hero--fresno",
-    heroCaptionEs: "Fresno, Valle Central de California",
-    heroCaptionEn: "Fresno, California’s Central Valley",
+    heroCaptionEs: "Arco histórico de Fresno en Van Ness Avenue",
+    heroCaptionEn: "Historic Fresno arch on Van Ness Avenue",
     countyEs: "condado de Fresno",
     countyEn: "Fresno County",
     metroEs: ["Fresno", "Clovis", "Madera", "Selma", "Reedley"],
@@ -154,6 +155,7 @@ module.exports = CITY_META.map((meta) => {
   if (meta.slug === "san-diego") return sanDiego;
   if (meta.slug === "san-jose") return sanJose;
   if (meta.slug === "san-francisco") return sanFrancisco;
+  if (meta.slug === "fresno") return fresno;
   const plot = plotCopy(meta.nameEs, meta.nameEn);
   return makeCity({
     ...shared,

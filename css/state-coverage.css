@@ -1688,11 +1688,14 @@
   object-position: center 38%;
 }
 
+.sc-hero--fresno .sc-hero-visual img {
+  object-position: center 22%;
+}
+
 .sc-hero--los-angeles .sc-hero-visual img,
 .sc-hero--san-diego .sc-hero-visual img,
 .sc-hero--san-jose .sc-hero-visual img,
 .sc-hero--san-francisco .sc-hero-visual img,
-.sc-hero--fresno .sc-hero-visual img,
 .sc-hero--sacramento .sc-hero-visual img {
   object-position: center 40%;
 }
