@@ -54,9 +54,9 @@ module.exports = {
   metroTitleEs: "Área que atendemos en Grand Island",
   metroTitleEn: "Grand Island area we serve",
   metroNoteEs:
-    'Las cotizaciones oficiales son por teléfono para residentes de Nebraska en estas comunidades del condado Hall. No hay oficina de atención al público. Lincoln tiene <a href="lincoln.html">su propia guía</a>. Omaha tiene <a href="omaha.html">su propia guía</a>.',
+    'Las cotizaciones oficiales son por teléfono para residentes de Nebraska en estas comunidades del condado Hall. No hay oficina de atención al público. <a href="lincoln.html">Lincoln</a> tiene su propia guía. <a href="omaha.html">Omaha</a> tiene su propia guía.',
   metroNoteEn:
-    'Official quotes are by phone for Nebraska residents in these Hall County communities. There is no public walk-in office. Lincoln has <a href="lincoln.html">its own guide</a>. Omaha has <a href="omaha.html">its own guide</a>.',
+    'Official quotes are by phone for Nebraska residents in these Hall County communities. There is no public walk-in office. <a href="lincoln.html">Lincoln</a> has its own guide. <a href="omaha.html">Omaha</a> has its own guide.',
   faqCremationEs: {
     q: "¿Cuánta cobertura suele alcanzar para una cremación en Grand Island?",
     a: "Con cremación directa publicada desde $1,840 en Livingston-Sondermann, $2,270 en All Faiths y $3,000 en Apfel, muchas familias eligen $5,000 a $10,000 para el servicio, urna, viajes y cuentas pequeñas. Un entierro tradicional suele necesitar más: el paquete de All Faiths está en $3,845 sin ataúd, y el lote, la bóveda y la lápida van aparte.",

@@ -56,9 +56,9 @@ module.exports = {
   metroTitleEs: "Área que atendemos en Lincoln",
   metroTitleEn: "Lincoln area we serve",
   metroNoteEs:
-    'Las cotizaciones oficiales son por teléfono para residentes de Nebraska en estas comunidades del condado Lancaster. No hay oficina de atención al público. Omaha tiene <a href="omaha.html">su propia guía</a>. Grand Island tiene <a href="grand-island.html">su propia guía</a>.',
+    'Las cotizaciones oficiales son por teléfono para residentes de Nebraska en estas comunidades del condado Lancaster. No hay oficina de atención al público. <a href="omaha.html">Omaha</a> tiene su propia guía. <a href="grand-island.html">Grand Island</a> tiene su propia guía.',
   metroNoteEn:
-    'Official quotes are by phone for Nebraska residents in these Lancaster County communities. There is no public walk-in office. Omaha has <a href="omaha.html">its own guide</a>. Grand Island has <a href="grand-island.html">its own guide</a>.',
+    'Official quotes are by phone for Nebraska residents in these Lancaster County communities. There is no public walk-in office. <a href="omaha.html">Omaha</a> has its own guide. <a href="grand-island.html">Grand Island</a> has its own guide.',
   faqCremationEs: {
     q: "¿Cuánta cobertura suele alcanzar para una cremación en Lincoln?",
     a: "Con cremación directa publicada desde $1,595 en Alternative y desde $3,910 en Lincoln Memorial, muchas familias eligen $5,000 a $10,000 para el servicio, urna, viajes y cuentas pequeñas. Un entierro tradicional en Lincoln Memorial suele necesitar más: el paquete Tribute empieza en $11,935 y el lote, la bóveda y la lápida van aparte.",

@@ -1,0 +1,87 @@
+{
+  "city": "san-francisco",
+  "checked": "2026-10-09",
+  "checkedLabelEs": "9 oct. 2026",
+  "checkedLabelEn": "9 Oct 2026",
+  "noteEs": "Anuncios de particulares. No son precios de Mejor Vida Seguros ni la lista oficial del cementerio. La oficina debe transferir la escritura. Revise si el anuncio sigue activo.",
+  "noteEn": "Private-party ads. These are not Mejor Vida Insurance prices or the cemetery’s official list. The office must transfer the deed. Check that the listing is still active.",
+  "boards": [
+    {
+      "id": "grave-solutions-ca",
+      "name": "Grave Solutions",
+      "url": "https://www.gravesolutions.com/for-sale/cemetery-properties/california",
+      "labelEs": "Tablero en vivo · California",
+      "labelEn": "Live board · California"
+    }
+  ],
+  "cemeterySignals": [
+    {
+      "cemetery": "Cypress Lawn Memorial Park",
+      "citedListLow": 4500,
+      "citedListHigh": 15000,
+      "typical": 8750,
+      "phone": "650-550-8808",
+      "noteEs": "No publica el lote en la web. Anuncios de reventa citaron unos $4,500 (nicho) hasta $8,750+ (espacio de entierro), según la sección.",
+      "noteEn": "They do not publish plot prices online. Resale ads cited about $4,500 (niche) to $8,750+ (burial space), depending on section."
+    },
+    {
+      "cemetery": "Greenlawn Memorial Park",
+      "citedListLow": null,
+      "citedListHigh": null,
+      "typical": 6800,
+      "phone": "650-755-0322",
+      "noteEs": "No publica el lote en la web. Un anuncio en Grave Solutions pidió $6,800 por espacio en 2023.",
+      "noteEn": "They do not publish plot prices online. A Grave Solutions ad asked $6,800 per space in 2023."
+    },
+    {
+      "cemetery": "Holy Cross Catholic Cemetery",
+      "citedListLow": null,
+      "citedListHigh": null,
+      "typical": null,
+      "phone": "650-756-2060",
+      "noteEs": "No publica el precio del lote en internet. Pida la lista por escrito.",
+      "noteEn": "Does not publish plot prices online. Ask for the list in writing."
+    }
+  ],
+  "listings": [
+    {
+      "id": "gs-cypress-8750",
+      "status": "listed",
+      "cemetery": "Cypress Lawn Memorial Park",
+      "spaces": 1,
+      "asking": 8750,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": null,
+      "url": "https://www.gravesolutions.com/for-sale/cemetery-properties/california",
+      "titleEs": "Grave Solutions · Cypress Lawn, lote 652",
+      "titleEn": "Grave Solutions · Cypress Lawn, lot 652"
+    },
+    {
+      "id": "gs-greenlawn-6800",
+      "status": "listed",
+      "cemetery": "Greenlawn Memorial Park",
+      "spaces": 1,
+      "asking": 6800,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": null,
+      "url": "https://www.gravesolutions.com/for-sale/greenlawn-memorial-park-colma-ca-cemetery-plot-5c8d94",
+      "titleEs": "Grave Solutions · Greenlawn, sección G/5",
+      "titleEn": "Grave Solutions · Greenlawn, section G/5"
+    },
+    {
+      "id": "broker-cypress-niche",
+      "status": "listed",
+      "cemetery": "Cypress Lawn Memorial Park",
+      "spaces": 1,
+      "asking": 3500,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": 4500,
+      "url": "https://www.gravesolutions.com/for-sale/cemetery-properties/california",
+      "titleEs": "Corredor del área · nicho doble K3 (lista $4,500)",
+      "titleEn": "Area broker · double niche K3 (list $4,500)"
+    }
+  ]
+}

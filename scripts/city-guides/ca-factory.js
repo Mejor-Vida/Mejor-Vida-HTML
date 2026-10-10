@@ -92,8 +92,8 @@ function ownGuideLinks(lang, others) {
   const bits = others
     .map((o) =>
       lang === "es"
-        ? `${o.name} tiene <a href="${o.slug}.html">su propia guía</a>`
-        : `${o.name} has <a href="${o.slug}.html">its own guide</a>`
+        ? `<a href="${o.slug}.html">${o.name}</a> tiene su propia guía`
+        : `<a href="${o.slug}.html">${o.name}</a> has its own guide`
     )
     .join(". ");
   return bits ? `${bits}.` : "";

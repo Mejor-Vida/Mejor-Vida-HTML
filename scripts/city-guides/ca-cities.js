@@ -7,6 +7,7 @@ const { makeCity } = require("./ca-factory");
 const losAngeles = require("./los-angeles");
 const sanDiego = require("./san-diego");
 const sanJose = require("./san-jose");
+const sanFrancisco = require("./san-francisco");
 
 const HERO = { heroVer: "landmark-v1" };
 
@@ -152,6 +153,7 @@ module.exports = CITY_META.map((meta) => {
   if (meta.slug === "los-angeles") return losAngeles;
   if (meta.slug === "san-diego") return sanDiego;
   if (meta.slug === "san-jose") return sanJose;
+  if (meta.slug === "san-francisco") return sanFrancisco;
   const plot = plotCopy(meta.nameEs, meta.nameEn);
   return makeCity({
     ...shared,
