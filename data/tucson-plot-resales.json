@@ -1,0 +1,65 @@
+{
+  "city": "tucson",
+  "checked": "2026-10-11",
+  "checkedLabelEs": "11 oct. 2026",
+  "checkedLabelEn": "11 Oct 2026",
+  "noteEs": "Anuncios de particulares. No son precios de Mejor Vida Seguros ni la lista oficial del cementerio. La oficina debe transferir la escritura. Revise si el anuncio sigue activo.",
+  "noteEn": "Private-party ads. These are not Mejor Vida Insurance prices or the cemetery’s official list. The office must transfer the deed. Check that the listing is still active.",
+  "boards": [
+    {
+      "id": "grave-solutions-az",
+      "name": "Grave Solutions",
+      "url": "https://www.gravesolutions.com/for-sale/cemetery-properties/arizona",
+      "labelEs": "Tablero en vivo · Arizona",
+      "labelEn": "Live board · Arizona"
+    }
+  ],
+  "cemeterySignals": [
+    {
+      "cemetery": "East Lawn Palms Memorial Park",
+      "citedListLow": 10000,
+      "citedListHigh": 10000,
+      "typical": 5000,
+      "phone": "520-745-3711",
+      "noteEs": "No publica el lote en la web. Anuncios citaron unos $4,500 por dos espacios y compararon con más de $10,000 en la lista del cementerio.",
+      "noteEn": "They do not publish plot prices online. Ads cited about $4,500 for two spaces and compared to more than $10,000 on the cemetery list."
+    },
+    {
+      "cemetery": "Evergreen Mortuary & Cemetery",
+      "citedListLow": null,
+      "citedListHigh": null,
+      "typical": null,
+      "phone": "520-888-7470",
+      "noteEs": "Cementerio en el mismo campus que la funeraria Evergreen. Pida la lista de propiedad en la oficina.",
+      "noteEn": "Cemetery on the same campus as Evergreen funeral home. Ask for the property list at the office."
+    }
+  ],
+  "listings": [
+    {
+      "id": "gs-eastlawn-4500",
+      "status": "listed",
+      "cemetery": "East Lawn Palms Memorial Park",
+      "spaces": 2,
+      "asking": 4500,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": null,
+      "url": "https://www.gravesolutions.com/for-sale/east-lawn-tucson-az-cemetery-plot-a65eb7",
+      "titleEs": "Grave Solutions · Garden of David, dos espacios",
+      "titleEn": "Grave Solutions · Garden of David, two spaces"
+    },
+    {
+      "id": "gs-eastlawn-gethsemane",
+      "status": "listed",
+      "cemetery": "East Lawn Palms Memorial Park",
+      "spaces": 2,
+      "asking": 4500,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": null,
+      "url": "https://www.gravesolutions.com/for-sale/east-lawn-tucson-az-cemetery-plot-481adc",
+      "titleEs": "Grave Solutions · Garden of Gethsemane",
+      "titleEn": "Grave Solutions · Garden of Gethsemane"
+    }
+  ]
+}

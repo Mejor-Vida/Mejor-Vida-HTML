@@ -1,0 +1,65 @@
+{
+  "city": "mesa",
+  "checked": "2026-10-11",
+  "checkedLabelEs": "11 oct. 2026",
+  "checkedLabelEn": "11 Oct 2026",
+  "noteEs": "Anuncios de particulares. No son precios de Mejor Vida Seguros ni la lista oficial del cementerio. La oficina debe transferir la escritura. Revise si el anuncio sigue activo.",
+  "noteEn": "Private-party ads. These are not Mejor Vida Insurance prices or the cemetery’s official list. The office must transfer the deed. Check that the listing is still active.",
+  "boards": [
+    {
+      "id": "grave-solutions-az",
+      "name": "Grave Solutions",
+      "url": "https://www.gravesolutions.com/for-sale/cemetery-properties/arizona",
+      "labelEs": "Tablero en vivo · Arizona",
+      "labelEn": "Live board · Arizona"
+    }
+  ],
+  "cemeterySignals": [
+    {
+      "cemetery": "Queen of Heaven Catholic Cemetery",
+      "citedListLow": null,
+      "citedListHigh": null,
+      "typical": null,
+      "phone": "480-832-3030",
+      "noteEs": "Anuncios muestran paquetes prepagados completos (lote, bóveda, marcador), no solo el espacio. Pida la lista en la oficina.",
+      "noteEn": "Ads show full pre-need packages (plot, vault, marker), not space only. Ask for the list at the office."
+    },
+    {
+      "cemetery": "Greenwood Memory Lawn",
+      "citedListLow": 3995,
+      "citedListHigh": 3995,
+      "typical": 4000,
+      "phone": "623-846-1212",
+      "noteEs": "Cementerio en Phoenix; anuncios citaron unos $3,995 en la lista y $2,400 en reventa.",
+      "noteEn": "Phoenix cemetery; ads cited about $3,995 on the list and $2,400 on resale."
+    }
+  ],
+  "listings": [
+    {
+      "id": "gs-queen-heaven-package",
+      "status": "listed",
+      "cemetery": "Queen of Heaven Catholic Cemetery",
+      "spaces": 1,
+      "asking": 13500,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": null,
+      "url": "https://www.gravesolutions.com/for-sale/queen-of-heaven-catholic-cemetery-mesa-az-burial-plot-10828b",
+      "titleEs": "Grave Solutions · paquete prepagado St. Ann’s (plot, bóveda, marcador)",
+      "titleEn": "Grave Solutions · St. Ann’s pre-need package (plot, vault, marker)"
+    },
+    {
+      "id": "gs-greenwood-mesa-ref",
+      "status": "listed",
+      "cemetery": "Greenwood Memory Lawn",
+      "spaces": 1,
+      "asking": 2400,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": 3995,
+      "url": "https://www.gravesolutions.com/for-sale/greenwood-memory-lawn-phoenix-az-cemetery-plot-fdd18f",
+      "titleEs": "Grave Solutions · Greenwood (Phoenix)",
+      "titleEn": "Grave Solutions · Greenwood (Phoenix)"
+    }
+  ]
+}

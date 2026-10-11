@@ -406,6 +406,12 @@
       funnel_wa_hours_chart_hint: "View when ad conversations start by local time of day",
       funnel_wa_hours_chart_hint_short: "By time of day",
       funnel_wa_hours_title: "WhatsApp ad conversations by time of day",
+      funnel_wa_hours_title_state: "{state} — conversations by time of day",
+      funnel_wa_hours_back_all: "← All states",
+      funnel_wa_hours_intro_state:
+        "Hourly breakdown for this state. Totals match Meta’s regional reporting; hours use Meta’s audience local-time pattern for that state’s share.",
+      funnel_wa_hours_axis_note_state:
+        "State hours use Meta’s audience time zone breakdown, scaled to this state’s regional total (same method as the peak hour in the table).",
       funnel_wa_hours_intro:
         "Same metric as Ads Manager → Results → Messaging conversations started, for your WhatsApp click-to-chat ad sets in this date range. Each bar is how many conversations started in that hour bucket.",
       funnel_wa_hours_with_ad_id: "{n} with Meta ad id",
@@ -419,7 +425,7 @@
       funnel_wa_hours_no_data: "No messaging conversations started in this period for WhatsApp ad sets.",
       funnel_wa_hours_by_state: "By state",
       funnel_wa_hours_state_note:
-        "State totals use Meta’s region breakdown (first reply). Meta does not expose conversation-start hour by state; peak hour is only shown for the account-wide chart.",
+        "Click a state for its hourly chart. State totals are from Meta’s region breakdown; peak hour uses audience local time scaled to that state’s total.",
       funnel_wa_hours_col_conversations: "Starts",
       funnel_wa_hours_col_peak: "Peak hour",
       funnel_wa_hours_state_empty: "No regional breakdown for messaging conversations in this period.",
@@ -2172,6 +2178,12 @@
       funnel_wa_hours_chart_hint: "Ver a qué hora local empiezan las conversaciones de anuncios",
       funnel_wa_hours_chart_hint_short: "Por hora del día",
       funnel_wa_hours_title: "Conversaciones de anuncios de WhatsApp por hora",
+      funnel_wa_hours_title_state: "{state} — conversaciones por hora",
+      funnel_wa_hours_back_all: "← Todos los estados",
+      funnel_wa_hours_intro_state:
+        "Desglose por hora para este estado. Los totales coinciden con el informe regional de Meta; las horas usan el patrón de hora local del público en Meta para la parte de ese estado.",
+      funnel_wa_hours_axis_note_state:
+        "Las horas del estado usan la zona horaria del público en Meta, escaladas al total regional de ese estado (igual que la hora pico en la tabla).",
       funnel_wa_hours_intro:
         "La misma métrica que Administrador de anuncios → Resultados → Conversaciones de mensajes iniciadas, para sus conjuntos de anuncios de WhatsApp en este rango de fechas. Cada barra es cuántas conversaciones empezaron en esa hora.",
       funnel_wa_hours_with_ad_id: "{n} con id de anuncio Meta",
@@ -2186,7 +2198,7 @@
         "No hubo conversaciones de mensajes iniciadas en este periodo para conjuntos de anuncios de WhatsApp.",
       funnel_wa_hours_by_state: "Por estado",
       funnel_wa_hours_state_note:
-        "Los totales por estado usan el desglose regional de Meta (primera respuesta). Meta no expone la hora de inicio por estado; la hora pico solo aplica al gráfico general.",
+        "Haga clic en un estado para ver su gráfico por hora. Los totales vienen del desglose regional de Meta; la hora pico usa la hora local del público escalada al total de ese estado.",
       funnel_wa_hours_col_conversations: "Inicios",
       funnel_wa_hours_col_peak: "Hora pico",
       funnel_wa_hours_state_empty: "No hay desglose regional de conversaciones en este periodo.",

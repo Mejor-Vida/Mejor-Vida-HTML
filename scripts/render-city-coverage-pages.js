@@ -15,6 +15,7 @@ const coloradoCities = require("./city-guides/co-cities");
 const nevadaCities = require("./city-guides/nv-cities");
 const ohioCities = require("./city-guides/oh-cities");
 const californiaCities = require("./city-guides/ca-cities");
+const arizonaCities = require("./city-guides/az-cities");
 
 function loadCityGuides(rel) {
   try {
@@ -36,7 +37,7 @@ const FOOTER_ES = path.join(ROOT, "includes/site-footer-inner.html");
 const FOOTER_EN = path.join(ROOT, "includes/en-site-footer.html");
 
 const NPN = "21695431";
-const CSS_VER = "20261009-calc-coverage";
+const CSS_VER = "20261011-tempe-gpl";
 
 const LICENSE = {
   NE: {
@@ -98,6 +99,15 @@ const LICENSE = {
     verifyUrl: "https://www.insurance.ca.gov/license-status/",
     verifyLabel: { es: "Verificar en California (CDI)", en: "Verify in California (CDI)" },
   },
+  AZ: {
+    typeEs: "Productora no residente",
+    typeEn: "Non-resident producer",
+    number: "21695431",
+    code: "AZ",
+    verifyUrl:
+      "https://external-lookup-web.prod.naic.org/lookup?jurisdiction=AZ&searchType=Licensee&entityType=IND&npn=21695431",
+    verifyLabel: { es: "Verificar en Arizona (NAIC)", en: "Verify in Arizona (NAIC)" },
+  },
 };
 
 const LICENSE_VERIFY_HINT = {
@@ -110,6 +120,12 @@ const LICENSE_VERIFY_HINT = {
   OH: {
     en: "On Ohio’s agent search, look up Julie Braunsroth or license number 1777665.",
     es: "En la búsqueda de agentes de Ohio, busque Julie Braunsroth o el número de licencia 1777665.",
+  },
+  AZ: {
+    en:
+      "On NAIC’s public lookup (not License Manager), jurisdiction Arizona · Search type Licensee · Individual. Use NPN 21695431 or last name Braunsroth — do not fill name, NPN, and license number all at once.",
+    es:
+      "En la búsqueda pública de la NAIC (no License Manager), jurisdicción Arizona · tipo Licensee · Individual. Use NPN 21695431 o apellido Braunsroth — no llene nombre, NPN y número de licencia a la vez.",
   },
 };
 
@@ -125,6 +141,7 @@ const CITIES = [
   ...southCarolinaCities,
   ...southDakotaCities,
   ...californiaCities,
+  ...arizonaCities,
 ];
 
 function esc(s) {
@@ -587,6 +604,19 @@ ${tableRows(
 `;
 }
 
+function cityQuoteBandSection({ title, lead, quoteHref, scheduleHref, quoteLabel, scheduleLabel }) {
+  return `<section class="py-5 sc-city-quote-band" aria-labelledby="sc-city-quote-heading">
+  <div class="container text-center sc-city-quote-band__inner">
+    <h2 class="h3 fw-bold mb-3" id="sc-city-quote-heading">${esc(title)}</h2>
+    <p class="mb-4 sc-city-quote-band__lead">${esc(lead)}</p>
+    <div class="d-flex flex-column flex-sm-row justify-content-center gap-2">
+      <a class="btn btn-primary-gold px-4 py-3 rounded fw-bold" href="${quoteHref}">${esc(quoteLabel)}</a>
+      <a class="btn px-4 py-3 rounded fw-bold sc-city-quote-band__btn-secondary" href="${scheduleHref}">${esc(scheduleLabel)}</a>
+    </div>
+  </div>
+</section>`;
+}
+
 function guideAssets(lang, city) {
   const isEs = lang === "es";
   const root = isEs ? "../../" : "../../../";
@@ -679,16 +709,14 @@ ${guideMain(lang, city, { root, quoteHref, stateHref, en })}
     ${faqHtml(lang, city)}
   </div>
 </section>
-<section class="py-5 text-white" style="background:#1a365d;">
-  <div class="container text-center" style="max-width:60rem;">
-    <h2 class="h3 fw-bold mb-3">${esc(ctaTitle)}</h2>
-    <p class="mb-4 text-white-50">${esc(ctaP)}</p>
-    <div class="d-flex flex-column flex-sm-row justify-content-center gap-2">
-      <a class="btn btn-primary-gold px-4 py-3 rounded fw-bold" href="${quoteHref}">${esc(ctaQuote)}</a>
-      <a class="btn px-4 py-3 rounded fw-bold text-white" style="background:#0b3a7a;" href="${scheduleHref}">${esc(ctaCall)}</a>
-    </div>
-  </div>
-</section>
+${cityQuoteBandSection({
+  title: ctaTitle,
+  lead: ctaP,
+  quoteHref,
+  scheduleHref,
+  quoteLabel: ctaQuote,
+  scheduleLabel: ctaCall,
+})}
 </main>
 ${licenseModal(lang)}
 ${footer}
@@ -852,16 +880,15 @@ ${rateRows()
   </div>
 </section>
 
-<section class="py-5 text-white" style="background:#1a365d;">
-  <div class="container text-center" style="max-width:60rem;">
-    <h2 class="h3 fw-bold mb-3">Cotice gastos finales en ${esc(city.nameEs)}</h2>
-    <p class="mb-4 text-white-50">Cotización gratuita. Mejor Vida Seguros compara opciones según su edad, salud y presupuesto. No es una cotización oficial hasta que una aseguradora la confirme.</p>
-    <div class="d-flex flex-column flex-sm-row justify-content-center gap-2">
-      <a class="btn btn-primary-gold px-4 py-3 rounded fw-bold" href="${quoteHref}">Cotización gratuita</a>
-      <a class="btn px-4 py-3 rounded fw-bold text-white" style="background:#0b3a7a;" href="/schedule-julie.html">Agendar una llamada</a>
-    </div>
-  </div>
-</section>
+${cityQuoteBandSection({
+  title: `Cotice gastos finales en ${city.nameEs}`,
+  lead:
+    "Cotización gratuita. Mejor Vida Seguros compara opciones según su edad, salud y presupuesto. No es una cotización oficial hasta que una aseguradora la confirme.",
+  quoteHref,
+  scheduleHref: "/schedule-julie.html",
+  quoteLabel: "Cotización gratuita",
+  scheduleLabel: "Agendar una llamada",
+})}
 </main>
 ${licenseModal("es")}
 ${loadFooterEs()}
@@ -1023,16 +1050,15 @@ ${rateRows()
   </div>
 </section>
 
-<section class="py-5 text-white" style="background:#1a365d;">
-  <div class="container text-center" style="max-width:60rem;">
-    <h2 class="h3 fw-bold mb-3">Get a final expense quote in ${esc(city.nameEn)}</h2>
-    <p class="mb-4 text-white-50">Free quote. Mejor Vida Insurance compares options based on your age, health, and budget. It is not an official quote until a carrier confirms it.</p>
-    <div class="d-flex flex-column flex-sm-row justify-content-center gap-2">
-      <a class="btn btn-primary-gold px-4 py-3 rounded fw-bold" href="${quoteHref}">Free quote</a>
-      <a class="btn px-4 py-3 rounded fw-bold text-white" style="background:#0b3a7a;" href="/en/schedule-julie.html">Schedule a call</a>
-    </div>
-  </div>
-</section>
+${cityQuoteBandSection({
+  title: `Get a final expense quote in ${city.nameEn}`,
+  lead:
+    "Free quote. Mejor Vida Insurance compares options based on your age, health, and budget. It is not an official quote until a carrier confirms it.",
+  quoteHref,
+  scheduleHref: "/en/schedule-julie.html",
+  quoteLabel: "Free quote",
+  scheduleLabel: "Schedule a call",
+})}
 </main>
 ${licenseModal("en")}
 ${loadFooterEn()}

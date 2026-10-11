@@ -1703,6 +1703,45 @@
   object-position: 58% center;
 }
 
+.sc-hero--tucson .sc-hero-visual img {
+  object-position: center 72%;
+}
+
+.sc-hero--mesa .sc-hero-visual img {
+  object-position: center 55%;
+}
+
+.sc-hero--chandler .sc-hero-visual img {
+  object-position: center 45%;
+}
+
+.sc-hero--scottsdale .sc-hero-visual img {
+  object-position: center 40%;
+}
+
+.sc-hero--glendale .sc-hero-visual img {
+  object-position: center 38%;
+}
+
+.sc-hero--gilbert .sc-hero-visual img {
+  object-position: center 42%;
+}
+
+.sc-hero--tempe .sc-hero-visual img {
+  object-position: center 48%;
+}
+
+.sc-hero--tucson .sc-hero-shade {
+  background: linear-gradient(
+    90deg,
+    rgba(6, 20, 40, 0.96) 0%,
+    rgba(6, 20, 40, 0.88) 32%,
+    rgba(6, 20, 40, 0.55) 55%,
+    rgba(6, 20, 40, 0.28) 78%,
+    rgba(6, 20, 40, 0.12) 100%
+  );
+}
+
 .sc-hero--city .sc-hero-shade {
   background: linear-gradient(
     90deg,
@@ -2039,6 +2078,35 @@
 .sc-city-faq details p {
   margin: 0.6rem 0 0.15rem;
   color: #4a5568;
+}
+
+/* City guide — quote band above footer (not the same block as site footer #1a365d) */
+.sc-city-quote-band {
+  background: linear-gradient(168deg, #2563a8 0%, #1a4d7c 38%, #153a5c 100%);
+  color: #fff;
+  border-bottom: 4px solid var(--sc-gold);
+  box-shadow: 0 4px 24px rgba(15, 35, 58, 0.18);
+}
+
+.sc-city-quote-band__inner {
+  max-width: 60rem;
+}
+
+.sc-city-quote-band__lead {
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.sc-city-quote-band__btn-secondary {
+  background: rgba(255, 255, 255, 0.12);
+  border: 2px solid rgba(255, 255, 255, 0.45);
+  color: #fff;
+}
+
+.sc-city-quote-band__btn-secondary:hover,
+.sc-city-quote-band__btn-secondary:focus {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.55);
+  color: #fff;
 }
 
 @media (max-width: 991.98px) {

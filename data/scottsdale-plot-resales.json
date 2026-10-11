@@ -1,0 +1,65 @@
+{
+  "city": "scottsdale",
+  "checked": "2026-10-11",
+  "checkedLabelEs": "11 oct. 2026",
+  "checkedLabelEn": "11 Oct 2026",
+  "noteEs": "Anuncios de particulares. No son precios de Mejor Vida Seguros ni la lista oficial del cementerio. La oficina debe transferir la escritura. Revise si el anuncio sigue activo.",
+  "noteEn": "Private-party ads. These are not Mejor Vida Insurance prices or the cemetery’s official list. The office must transfer the deed. Check that the listing is still active.",
+  "boards": [
+    {
+      "id": "grave-solutions-az",
+      "name": "Grave Solutions",
+      "url": "https://www.gravesolutions.com/for-sale/cemetery-properties/arizona",
+      "labelEs": "Tablero en vivo · Arizona",
+      "labelEn": "Live board · Arizona"
+    }
+  ],
+  "cemeterySignals": [
+    {
+      "cemetery": "Greenwood Memory Lawn",
+      "citedListLow": 3995,
+      "citedListHigh": 3995,
+      "typical": 4000,
+      "phone": "623-846-1212",
+      "noteEs": "Anuncios citaron unos $3,995 en la lista del cementerio y $2,400 pedidos por espacio.",
+      "noteEn": "Ads cited about $3,995 on the cemetery list and $2,400 asking per space."
+    },
+    {
+      "cemetery": "Paradise Memorial Gardens",
+      "citedListLow": null,
+      "citedListHigh": null,
+      "typical": null,
+      "phone": "480-945-7371",
+      "noteEs": "No publica el precio del lote en internet. Pida la lista por escrito.",
+      "noteEn": "Does not publish plot prices online. Ask for the list in writing."
+    }
+  ],
+  "listings": [
+    {
+      "id": "gs-greenwood-scottsdale-ref",
+      "status": "listed",
+      "cemetery": "Greenwood Memory Lawn",
+      "spaces": 1,
+      "asking": 2400,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": 3995,
+      "url": "https://www.gravesolutions.com/for-sale/greenwood-memory-lawn-phoenix-az-cemetery-plot-fdd18f",
+      "titleEs": "Grave Solutions · Greenwood (Phoenix)",
+      "titleEn": "Grave Solutions · Greenwood (Phoenix)"
+    },
+    {
+      "id": "gs-resthaven-scottsdale-ref",
+      "status": "listed",
+      "cemetery": "Resthaven / Carr-Tenney Memorial Gardens",
+      "spaces": 2,
+      "asking": 15500,
+      "obo": false,
+      "transferFee": 695,
+      "citedListEach": null,
+      "url": "https://www.gravesolutions.com/for-sale/resthaven-carr-tenney-mortuary-memorial-gardens-phoenix-az-burial-plot-6f993e",
+      "titleEs": "Grave Solutions · dos espacios con bóvedas",
+      "titleEn": "Grave Solutions · two spaces with vaults"
+    }
+  ]
+}

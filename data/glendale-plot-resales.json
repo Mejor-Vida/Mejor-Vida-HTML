@@ -1,0 +1,65 @@
+{
+  "city": "glendale",
+  "checked": "2026-10-11",
+  "checkedLabelEs": "11 oct. 2026",
+  "checkedLabelEn": "11 Oct 2026",
+  "noteEs": "Anuncios de particulares. No son precios de Mejor Vida Seguros ni la lista oficial del cementerio. La oficina debe transferir la escritura. Revise si el anuncio sigue activo.",
+  "noteEn": "Private-party ads. These are not Mejor Vida Insurance prices or the cemetery’s official list. The office must transfer the deed. Check that the listing is still active.",
+  "boards": [
+    {
+      "id": "grave-solutions-az",
+      "name": "Grave Solutions",
+      "url": "https://www.gravesolutions.com/for-sale/cemetery-properties/arizona",
+      "labelEs": "Tablero en vivo · Arizona",
+      "labelEn": "Live board · Arizona"
+    }
+  ],
+  "cemeterySignals": [
+    {
+      "cemetery": "Resthaven Park West",
+      "citedListLow": 5500,
+      "citedListHigh": 5500,
+      "typical": 4000,
+      "phone": "623-939-4900",
+      "noteEs": "Anuncio citó $5,500 en la lista del cementerio y $4,000 pedidos (oct. 2026).",
+      "noteEn": "Ad cited $5,500 on the cemetery list and $4,000 asking (Oct 2026)."
+    },
+    {
+      "cemetery": "West Resthaven Cemetery",
+      "citedListLow": 3500,
+      "citedListHigh": 6500,
+      "typical": 3500,
+      "phone": "623-939-4900",
+      "noteEs": "Anuncios pidieron unos $3,500 por espacio o $6,500 por dos en sección antigua.",
+      "noteEn": "Ads asked about $3,500 per space or $6,500 for two in an older section."
+    }
+  ],
+  "listings": [
+    {
+      "id": "gs-resthaven-park-west",
+      "status": "listed",
+      "cemetery": "Resthaven Park West",
+      "spaces": 1,
+      "asking": 4000,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": 5500,
+      "url": "https://www.gravesolutions.com/for-sale/resthaven-cemetery-park-west-glendale-az-cemetery-plot-db4fdb",
+      "titleEs": "Grave Solutions · Isaiah, sección 16",
+      "titleEn": "Grave Solutions · Isaiah, section 16"
+    },
+    {
+      "id": "gs-west-resthaven",
+      "status": "listed",
+      "cemetery": "West Resthaven Cemetery",
+      "spaces": 1,
+      "asking": 3500,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": null,
+      "url": "https://www.gravesolutions.com/for-sale/west-resthaven-cemetery-glendale-az-burial-plot-77722c",
+      "titleEs": "Grave Solutions · sección 1",
+      "titleEn": "Grave Solutions · section 1"
+    }
+  ]
+}

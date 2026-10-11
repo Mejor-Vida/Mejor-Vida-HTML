@@ -774,6 +774,78 @@
     "keepPng": false
   },
   {
+    "src": "img/phoenix-skyline.jpg",
+    "base": "phoenix-skyline",
+    "width": 1024,
+    "height": 682,
+    "webp": "img/opt/phoenix-skyline.webp",
+    "fallback": "img/opt/phoenix-skyline.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/tucson-saguaro-park.jpg",
+    "base": "tucson-saguaro-park",
+    "width": 682,
+    "height": 212,
+    "webp": "img/opt/tucson-saguaro-park.webp",
+    "fallback": "img/opt/tucson-saguaro-park.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/mesa-superstition.jpg",
+    "base": "mesa-superstition",
+    "width": 1024,
+    "height": 682,
+    "webp": "img/opt/mesa-superstition.webp",
+    "fallback": "img/opt/mesa-superstition.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/chandler-downtown.jpg",
+    "base": "chandler-downtown",
+    "width": 682,
+    "height": 212,
+    "webp": "img/opt/chandler-downtown.webp",
+    "fallback": "img/opt/chandler-downtown.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/scottsdale-old-town.jpg",
+    "base": "scottsdale-old-town",
+    "width": 1024,
+    "height": 682,
+    "webp": "img/opt/scottsdale-old-town.webp",
+    "fallback": "img/opt/scottsdale-old-town.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/glendale-downtown.jpg",
+    "base": "glendale-downtown",
+    "width": 682,
+    "height": 212,
+    "webp": "img/opt/glendale-downtown.webp",
+    "fallback": "img/opt/glendale-downtown.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/gilbert-water-tower.jpg",
+    "base": "gilbert-water-tower",
+    "width": 1024,
+    "height": 682,
+    "webp": "img/opt/gilbert-water-tower.webp",
+    "fallback": "img/opt/gilbert-water-tower.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/tempe-town-lake.jpg",
+    "base": "tempe-town-lake",
+    "width": 682,
+    "height": 212,
+    "webp": "img/opt/tempe-town-lake.webp",
+    "fallback": "img/opt/tempe-town-lake.jpg",
+    "keepPng": false
+  },
+  {
     "src": "img/hero-couple-embrace.png",
     "base": "hero-couple-embrace",
     "width": 681,
@@ -3409,5 +3481,68 @@
     "webp": "img/opt/blog-generated/weekly-insurance-update-2026-09-20/hero.webp",
     "fallback": "img/opt/blog-generated/weekly-insurance-update-2026-09-20/hero.png",
     "keepPng": true
+  },
+  {
+    "src": "img/tucson-skyline.jpg",
+    "base": "tucson-skyline",
+    "width": 1600,
+    "height": 893,
+    "webp": "img/opt/tucson-skyline.webp",
+    "fallback": "img/opt/tucson-skyline.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/mesa-monument-valley.jpg",
+    "base": "mesa-monument-valley",
+    "width": 1600,
+    "height": 893,
+    "webp": "img/opt/mesa-monument-valley.webp",
+    "fallback": "img/opt/mesa-monument-valley.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/chandler-aerial.jpg",
+    "base": "chandler-aerial",
+    "width": 1600,
+    "height": 893,
+    "webp": "img/opt/chandler-aerial.webp",
+    "fallback": "img/opt/chandler-aerial.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/scottsdale-horse-fountain.jpg",
+    "base": "scottsdale-horse-fountain",
+    "width": 1600,
+    "height": 893,
+    "webp": "img/opt/scottsdale-horse-fountain.webp",
+    "fallback": "img/opt/scottsdale-horse-fountain.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/glendale-capitol.jpg",
+    "base": "glendale-capitol",
+    "width": 1600,
+    "height": 893,
+    "webp": "img/opt/glendale-capitol.webp",
+    "fallback": "img/opt/glendale-capitol.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/gilbert-temple.jpg",
+    "base": "gilbert-temple",
+    "width": 1600,
+    "height": 893,
+    "webp": "img/opt/gilbert-temple.webp",
+    "fallback": "img/opt/gilbert-temple.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/tempe-mill-bridge.jpg",
+    "base": "tempe-mill-bridge",
+    "width": 1600,
+    "height": 893,
+    "webp": "img/opt/tempe-mill-bridge.webp",
+    "fallback": "img/opt/tempe-mill-bridge.jpg",
+    "keepPng": false
   }
 ]

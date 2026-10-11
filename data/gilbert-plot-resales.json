@@ -1,0 +1,52 @@
+{
+  "city": "gilbert",
+  "checked": "2026-10-11",
+  "checkedLabelEs": "11 oct. 2026",
+  "checkedLabelEn": "11 Oct 2026",
+  "noteEs": "Anuncios de particulares. No son precios de Mejor Vida Seguros ni la lista oficial del cementerio. La oficina debe transferir la escritura. Revise si el anuncio sigue activo.",
+  "noteEn": "Private-party ads. These are not Mejor Vida Insurance prices or the cemetery’s official list. The office must transfer the deed. Check that the listing is still active.",
+  "boards": [
+    {
+      "id": "grave-solutions-az",
+      "name": "Grave Solutions",
+      "url": "https://www.gravesolutions.com/for-sale/cemetery-properties/arizona",
+      "labelEs": "Tablero en vivo · Arizona",
+      "labelEn": "Live board · Arizona"
+    }
+  ],
+  "cemeterySignals": [
+    {
+      "cemetery": "Gilbert Memorial Park",
+      "citedListLow": null,
+      "citedListHigh": null,
+      "typical": null,
+      "phone": "480-935-5858",
+      "noteEs": "Cementerio municipal de Gilbert. Pida la lista de propiedad en la oficina.",
+      "noteEn": "Gilbert municipal cemetery. Ask for the property list at the office."
+    },
+    {
+      "cemetery": "Queen of Heaven Catholic Cemetery",
+      "citedListLow": null,
+      "citedListHigh": null,
+      "typical": null,
+      "phone": "480-832-3030",
+      "noteEs": "En Mesa. Anuncios de paquetes prepagados completos en Grave Solutions.",
+      "noteEn": "In Mesa. Full pre-need package ads on Grave Solutions."
+    }
+  ],
+  "listings": [
+    {
+      "id": "gs-queen-heaven-gilbert-ref",
+      "status": "listed",
+      "cemetery": "Queen of Heaven Catholic Cemetery",
+      "spaces": 1,
+      "asking": 13500,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": null,
+      "url": "https://www.gravesolutions.com/for-sale/queen-of-heaven-catholic-cemetery-mesa-az-burial-plot-10828b",
+      "titleEs": "Grave Solutions · Queen of Heaven (Mesa)",
+      "titleEn": "Grave Solutions · Queen of Heaven (Mesa)"
+    }
+  ]
+}

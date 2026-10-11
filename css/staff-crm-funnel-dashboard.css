@@ -1055,6 +1055,44 @@
   color: var(--crm-muted, #64748b);
 }
 
+.crm-funnel-wa-hours-state-btn {
+  appearance: none;
+  border: none;
+  background: none;
+  padding: 0;
+  font: inherit;
+  color: var(--crm-link, #1d6fd8);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+}
+
+.crm-funnel-wa-hours-state-btn:hover {
+  color: var(--crm-text, #1a2b4a);
+}
+
+.crm-funnel-wa-hours-state-row--active .crm-funnel-wa-hours-state-btn {
+  font-weight: 600;
+  color: var(--crm-text, #1a2b4a);
+  text-decoration: none;
+}
+
+.crm-funnel-wa-hours-back-wrap {
+  margin: 0 0 10px;
+}
+
+.crm-funnel-wa-hours-back {
+  appearance: none;
+  border: none;
+  background: none;
+  padding: 0;
+  font-size: 0.82rem;
+  color: var(--crm-link, #1d6fd8);
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
 .crm-funnel-ad-bar-value--zero {
   visibility: hidden;
 }

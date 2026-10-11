@@ -75,6 +75,15 @@ module.exports = {
     detailEs:
       "La búsqueda cuesta $15 por certificado. Se pide en persona o por correo en 221 West Capitol Avenue, Pierre, o en el Register of Deeds del condado. Teléfono 605-773-4961. La funeraria suele presentar el certificado.",
   },
+  AZ: {
+    officeEn: "Arizona Department of Health Services, Bureau of Vital Records",
+    officeEs: "Departamento de Salud de Arizona, Bureau of Vital Records",
+    url: "https://www.azdhs.gov/vital-records",
+    detailEn:
+      "A certified death certificate costs $20 through the state Bureau of Vital Records ($19 fee plus a $1 surcharge). Mail to PO Box 6018, Phoenix, AZ 85005, or visit 150 North 18th Ave., Ste. 120, Phoenix. Phone 602-364-1300. County offices may charge different fees. The funeral home usually files the certificate.",
+    detailEs:
+      "Una copia certificada cuesta $20 en la oficina estatal ($19 más un recargo de $1). Por correo: PO Box 6018, Phoenix, AZ 85005, o en persona: 150 North 18th Ave., Ste. 120, Phoenix. Teléfono 602-364-1300. Las oficinas del condado pueden cobrar otra tarifa. La funeraria suele presentar el certificado.",
+  },
   CA: {
     officeEn: "California Department of Public Health, Vital Records",
     officeEs: "Departamento de Salud Pública de California, registros vitales",

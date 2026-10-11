@@ -21,6 +21,7 @@
     detailError: null,
     adChartMetric: null,
     adChartQualityState: null,
+    adChartWaHoursState: null,
     adChartLoading: false,
     adChartData: null,
     adChartError: null,
@@ -2294,7 +2295,29 @@
     );
   }
 
-  function renderWhatsappConversationHoursStateTable(byState) {
+  function waHoursViewData(raw) {
+    raw = raw || {};
+    var scope = state.adChartWaHoursState;
+    if (!scope) return raw;
+    var row = (raw.byState || []).filter(function (s) {
+      return s.state === scope;
+    })[0];
+    if (!row) return raw;
+    return {
+      scopeState: row.state,
+      total: row.total,
+      byHour: row.byHour,
+      peakHour: row.peakHour,
+      peakLabel: row.peakLabel,
+      peakCount: row.peakCount,
+      timezoneMode: "audience",
+      stateHourMode: true,
+      byState: raw.byState,
+      source: raw.source,
+    };
+  }
+
+  function renderWhatsappConversationHoursStateTable(byState, selectedState) {
     byState = byState || [];
     if (!byState.length) {
       return '<p class="crm-funnel-ad-chart-empty">' + esc(t("funnel_wa_hours_state_empty")) + "</p>";
@@ -2314,10 +2337,15 @@
             row.peakCount > 0
               ? esc(row.peakLabel) + " (" + esc(fmtNum(row.peakCount)) + ")"
               : "—";
+          var active = selectedState && row.state === selectedState ? " crm-funnel-wa-hours-state-row--active" : "";
           return (
-            "<tr><td>" +
+            '<tr class="crm-funnel-wa-hours-state-row' +
+            active +
+            '"><td><button type="button" class="crm-funnel-wa-hours-state-btn" data-funnel-wa-hours-state="' +
+            esc(row.state) +
+            '">' +
             esc(qualityStateLabel(row.state)) +
-            "</td><td>" +
+            "</button></td><td>" +
             esc(fmtNum(row.total)) +
             "</td><td>" +
             peak +
@@ -2330,9 +2358,13 @@
   }
 
   function renderWhatsappConversationHoursModal() {
-    var data = state.adChartData || {};
+    var raw = state.adChartData || {};
+    var data = waHoursViewData(raw);
     var rangeLabel = fmtDateRangeLabel(state.dateFrom, state.dateTo);
     var body = "";
+    var modalTitle = data.scopeState
+      ? t("funnel_wa_hours_title_state", { state: qualityStateLabel(data.scopeState) })
+      : t("funnel_wa_hours_title");
     if (state.adChartLoading) {
       body = '<p class="crm-funnel-ad-chart-empty">' + esc(t("funnel_ad_chart_loading")) + "</p>";
     } else if (state.adChartError) {
@@ -2342,15 +2374,21 @@
         data.peakCount > 0
           ? t("funnel_wa_hours_peak", { time: data.peakLabel, n: fmtNum(data.peakCount) })
           : t("funnel_wa_hours_no_data");
-      var tzNote =
-        data.timezoneMode === "audience"
+      var tzNote = data.stateHourMode
+        ? t("funnel_wa_hours_axis_note_state")
+        : data.timezoneMode === "audience"
           ? t("funnel_wa_hours_axis_note_audience")
           : data.timezoneMode === "advertiser"
             ? t("funnel_wa_hours_axis_note_advertiser")
             : t("funnel_wa_hours_axis_note");
       body =
+        (data.scopeState
+          ? '<p class="crm-funnel-wa-hours-back-wrap"><button type="button" class="crm-funnel-wa-hours-back" data-funnel-wa-hours-all>' +
+            esc(t("funnel_wa_hours_back_all")) +
+            "</button></p>"
+          : "") +
         '<p class="crm-funnel-wa-hours-intro">' +
-        esc(t("funnel_wa_hours_intro")) +
+        esc(data.scopeState ? t("funnel_wa_hours_intro_state") : t("funnel_wa_hours_intro")) +
         "</p>" +
         (data.error
           ? '<p class="crm-funnel-setup-hint">' + esc(data.error) + "</p>"
@@ -2375,14 +2413,14 @@
         '<p class="crm-funnel-wa-hours-state-note">' +
         esc(t("funnel_wa_hours_state_note")) +
         "</p>" +
-        renderWhatsappConversationHoursStateTable(data.byState);
+        renderWhatsappConversationHoursStateTable(raw.byState, data.scopeState || state.adChartWaHoursState);
     }
     return (
       '<div class="crm-funnel-ad-modal-backdrop" data-funnel-ad-modal-backdrop>' +
       '<div class="crm-funnel-ad-modal crm-funnel-ad-modal--chart crm-funnel-ad-modal--wa-hours" role="dialog" aria-labelledby="crm-funnel-ad-modal-title">' +
       '<div class="crm-funnel-ad-modal-head">' +
       '<div><h3 id="crm-funnel-ad-modal-title">' +
-      esc(t("funnel_wa_hours_title")) +
+      esc(modalTitle) +
       "</h3>" +
       (rangeLabel ? '<p class="crm-funnel-ad-modal-sub">' + esc(rangeLabel) + "</p>" : "") +
       "</div>" +
@@ -3149,6 +3187,7 @@
     state.adChartLoading = true;
     state.adChartError = null;
     state.adChartData = null;
+    if (metric === "whatsapp_conversation_hours") state.adChartWaHoursState = null;
     paint(main);
     wireEvents(main);
     var extra = {
@@ -3214,6 +3253,7 @@
   function closeAdChart(main, opts) {
     state.adChartMetric = null;
     state.adChartQualityState = null;
+    state.adChartWaHoursState = null;
     state.adChartLoading = false;
     state.adChartData = null;
     state.adChartError = null;
@@ -3511,6 +3551,25 @@
       waHoursBtn.addEventListener("click", function (ev) {
         ev.preventDefault();
         loadAdChart(main, "whatsapp_conversation_hours");
+      });
+    }
+    main.querySelectorAll("[data-funnel-wa-hours-state]").forEach(function (btn) {
+      btn.addEventListener("click", function (ev) {
+        ev.preventDefault();
+        var st = btn.getAttribute("data-funnel-wa-hours-state");
+        if (!st) return;
+        state.adChartWaHoursState = st;
+        paint(main);
+        wireEvents(main);
+      });
+    });
+    var waHoursAllBtn = main.querySelector("[data-funnel-wa-hours-all]");
+    if (waHoursAllBtn) {
+      waHoursAllBtn.addEventListener("click", function (ev) {
+        ev.preventDefault();
+        state.adChartWaHoursState = null;
+        paint(main);
+        wireEvents(main);
       });
     }
 

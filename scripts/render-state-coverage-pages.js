@@ -1511,7 +1511,44 @@ ${costDefModal(lang)}`;
 }
 
 function citiesSection(code, lang) {
-  if (code === "AZ") return "";
+  if (code === "AZ") {
+    if (lang === "es") {
+      return `<section class="py-5 bg-light border-bottom" id="ciudades">
+  <div class="container" style="max-width:60rem;">
+    <h2 class="h4 fw-bold mb-3" style="color:#1a365d;">Ciudades en Arizona</h2>
+    <p class="text-body-secondary mb-3">Guías locales de seguro de gastos finales y de entierro para las ciudades más grandes del estado.</p>
+    <ul class="mb-0">
+      <li class="mb-2"><a href="arizona/phoenix.html">Phoenix</a> — seguro de gastos finales y de entierro, funerarias y lotes.</li>
+      <li class="mb-2"><a href="arizona/tucson.html">Tucson</a> — seguro de gastos finales y de entierro, funerarias y lotes.</li>
+      <li class="mb-2"><a href="arizona/mesa.html">Mesa</a> — seguro de gastos finales y de entierro, funerarias y lotes.</li>
+      <li class="mb-2"><a href="arizona/chandler.html">Chandler</a> — seguro de gastos finales y de entierro, funerarias y lotes.</li>
+      <li class="mb-2"><a href="arizona/scottsdale.html">Scottsdale</a> — seguro de gastos finales y de entierro, funerarias y lotes.</li>
+      <li class="mb-2"><a href="arizona/glendale.html">Glendale</a> — seguro de gastos finales y de entierro, funerarias y lotes.</li>
+      <li class="mb-2"><a href="arizona/gilbert.html">Gilbert</a> — seguro de gastos finales y de entierro, funerarias y lotes.</li>
+      <li class="mb-2"><a href="arizona/tempe.html">Tempe</a> — seguro de gastos finales y de entierro, funerarias y lotes.</li>
+    </ul>
+  </div>
+</section>
+`;
+    }
+    return `<section class="py-5 bg-light border-bottom" id="cities">
+  <div class="container" style="max-width:60rem;">
+    <h2 class="h4 fw-bold mb-3" style="color:#1a365d;">Cities in Arizona</h2>
+    <p class="text-body-secondary mb-3">Local final expense and burial insurance guides for Arizona’s largest cities.</p>
+    <ul class="mb-0">
+      <li class="mb-2"><a href="arizona/phoenix.html">Phoenix</a> — final expense and burial insurance, funeral homes, and plots.</li>
+      <li class="mb-2"><a href="arizona/tucson.html">Tucson</a> — final expense and burial insurance, funeral homes, and plots.</li>
+      <li class="mb-2"><a href="arizona/mesa.html">Mesa</a> — final expense and burial insurance, funeral homes, and plots.</li>
+      <li class="mb-2"><a href="arizona/chandler.html">Chandler</a> — final expense and burial insurance, funeral homes, and plots.</li>
+      <li class="mb-2"><a href="arizona/scottsdale.html">Scottsdale</a> — final expense and burial insurance, funeral homes, and plots.</li>
+      <li class="mb-2"><a href="arizona/glendale.html">Glendale</a> — final expense and burial insurance, funeral homes, and plots.</li>
+      <li class="mb-2"><a href="arizona/gilbert.html">Gilbert</a> — final expense and burial insurance, funeral homes, and plots.</li>
+      <li class="mb-2"><a href="arizona/tempe.html">Tempe</a> — final expense and burial insurance, funeral homes, and plots.</li>
+    </ul>
+  </div>
+</section>
+`;
+  }
   if (code === "CA") {
     if (lang === "es") {
       return `<section class="py-5 bg-light border-bottom" id="ciudades">
