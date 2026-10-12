@@ -1,8 +1,8 @@
 {
   "city": "albuquerque",
-  "checked": "2026-09-28",
-  "checkedLabelEs": "28 sep. 2026",
-  "checkedLabelEn": "28 Sep 2026",
+  "checked": "2026-10-11",
+  "checkedLabelEs": "11 oct. 2026",
+  "checkedLabelEn": "11 Oct 2026",
   "noteEs": "Anuncios de particulares. No son precios de Mejor Vida Seguros ni la lista oficial del cementerio. La oficina debe transferir la escritura. Revise si el anuncio sigue activo.",
   "noteEn": "Private-party ads. These are not Mejor Vida Insurance prices or the cemetery’s official list. The office must transfer the deed. Check that the listing is still active.",
   "boards": [
@@ -14,6 +14,39 @@
       "labelEn": "Live board · New Mexico"
     }
   ],
-  "cemeterySignals": [],
-  "listings": []
+  "cemeterySignals": [
+    {
+      "cemetery": "Sandia Memory Gardens",
+      "citedListLow": null,
+      "citedListHigh": null,
+      "typical": null,
+      "phone": "505-821-0010",
+      "noteEs": "No publica el lote en la web. Anuncio del 9 de enero de 2025: $1,600 por espacio ($3,200 por dos).",
+      "noteEn": "They do not publish plot prices online. Ad listed January 9, 2025: $1,600 per space ($3,200 for two)."
+    },
+    {
+      "cemetery": "Sunset Memorial Park",
+      "citedListLow": null,
+      "citedListHigh": null,
+      "typical": null,
+      "phone": "505-345-3536",
+      "noteEs": "No publica el precio del lote en internet. Pida la lista por escrito.",
+      "noteEn": "Does not publish a lot price online. Ask for the list in writing."
+    }
+  ],
+  "listings": [
+    {
+      "id": "gs-sandia-3200",
+      "status": "listed",
+      "cemetery": "Sandia Memory Gardens",
+      "spaces": 2,
+      "asking": 3200,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": null,
+      "url": "https://www.gravesolutions.com/for-sale/sandia-memory-gardens-albuquerque-nm-cemetery-plot-99db08",
+      "titleEs": "Grave Solutions · Nativity, dos espacios a $1,600 cada uno",
+      "titleEn": "Grave Solutions · Nativity, two spaces at $1,600 each"
+    }
+  ]
 }

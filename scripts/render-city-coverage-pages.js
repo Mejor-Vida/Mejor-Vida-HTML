@@ -37,7 +37,7 @@ const FOOTER_ES = path.join(ROOT, "includes/site-footer-inner.html");
 const FOOTER_EN = path.join(ROOT, "includes/en-site-footer.html");
 
 const NPN = "21695431";
-const CSS_VER = "20261011-tempe-gpl";
+const CSS_VER = "20261011-santa-fe-hero2";
 
 const LICENSE = {
   NE: {

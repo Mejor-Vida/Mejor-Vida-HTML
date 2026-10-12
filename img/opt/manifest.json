@@ -3589,5 +3589,41 @@
     "webp": "img/opt/blog-generated/weekly-insurance-update-2026-10-11/story-3.webp",
     "fallback": "img/opt/blog-generated/weekly-insurance-update-2026-10-11/story-3.jpg",
     "keepPng": false
+  },
+  {
+    "src": "img/albuquerque-balloon-fiesta.jpg",
+    "base": "albuquerque-balloon-fiesta",
+    "width": 836,
+    "height": 477,
+    "webp": "img/opt/albuquerque-balloon-fiesta.webp",
+    "fallback": "img/opt/albuquerque-balloon-fiesta.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/las-cruces-organ-mountains-hero.jpg",
+    "base": "las-cruces-organ-mountains-hero",
+    "width": 1024,
+    "height": 548,
+    "webp": "img/opt/las-cruces-organ-mountains-hero.webp",
+    "fallback": "img/opt/las-cruces-organ-mountains-hero.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/rio-rancho-rio-grande.jpg",
+    "base": "rio-rancho-rio-grande",
+    "width": 774,
+    "height": 938,
+    "webp": "img/opt/rio-rancho-rio-grande.webp",
+    "fallback": "img/opt/rio-rancho-rio-grande.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/santa-fe-skyline.jpg",
+    "base": "santa-fe-skyline",
+    "width": 1024,
+    "height": 590,
+    "webp": "img/opt/santa-fe-skyline.webp",
+    "fallback": "img/opt/santa-fe-skyline.jpg",
+    "keepPng": false
   }
 ]

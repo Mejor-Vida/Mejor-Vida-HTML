@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-11",
+  "updated": "2026-10-12",
   "states": [
     {
       "code": "NE",
@@ -7915,30 +7915,174 @@
       ],
       "guideEs": "/estados/new-mexico/albuquerque.html",
       "guideEn": "/en/states/new-mexico/albuquerque.html",
-      "sourceLineEs": "La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida.",
-      "sourceLineEn": "The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker.",
-      "officesNoteEs": "Estas cifras serían del cementerio, no de la funeraria. No hay un precio de lote nuevo publicado para Albuquerque en esta página.",
-      "officesNoteEn": "These figures would come from the cemetery, not the funeral home. This page does not have a published new-lot price for Albuquerque.",
+      "sourceLineEs": "Director’s Choice: GPL 1 may. 2025 — cremación simple en persona $1,215 (en línea $995) con contenedor estándar; entierro inmediato $2,395 sin ataúd; memorial con cremación $3,895; paquete tradicional A $4,195 con ataúd de calibre 20. El permiso del OMI de $230 va aparte. French Funerals: GPL 1 jul. 2025, misma lista en sus cinco capillas — cremación directa $3,375 y entierro inmediato $3,175 con contenedor del comprador. El permiso del OMI de $236.79 no va incluido. French no publica un total de memorial ni de funeral con velatorio. La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida.",
+      "sourceLineEn": "Director’s Choice: GPL 1 May 2025 — in-person simple cremation $1,215 (online $995) with the standard container; immediate burial $2,395 with no casket; cremation memorial $3,895; traditional package A $4,195 with a 20-gauge casket. The $230 OMI permit is extra. French Funerals: GPL 1 Jul 2025, the same list at all five chapels — direct cremation $3,375 and immediate burial $3,175 with a purchaser container. The $236.79 OMI permit is not included. French does not publish a memorial total or a visitation-funeral total. The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker.",
+      "officesNoteEs": "Sandia no publica el lote nuevo en la web. El anuncio de reventa no es la lista de la oficina. Sunset tampoco publica el precio del lote.",
+      "officesNoteEn": "Sandia does not publish a new-lot price online. The resale ad is not the office list. Sunset does not publish a lot price either.",
       "homes": [
         {
-          "id": "direct-funeral-cremation-services-albuquerque",
-          "name": "Direct Funeral & Cremation Services",
-          "href": "https://www.directfuneralservicesabq.com/",
-          "address": "",
-          "phone": "",
-          "sourceEs": "Pida la lista general de precios vigente. La funeraria es la única fuente oficial.",
-          "sourceEn": "Ask the funeral home for its current general price list. That list is the only official price.",
+          "id": "directors",
+          "name": "Director’s Choice",
+          "href": "https://www.nmcremation.com/GPL.pdf",
+          "address": "9316 Susan Ave SE, Albuquerque",
+          "phone": "505-275-6524",
+          "sourceEs": "Director’s Choice: lista general de precios 1 may. 2025 — cremación simple en persona $1,215 (en línea $995) con contenedor estándar; entierro inmediato $2,395 sin ataúd; memorial con cremación $3,895; paquete tradicional A $4,195 con ataúd de calibre 20. El permiso del OMI de $230 va aparte",
+          "sourceEn": "Director’s Choice: general price list 1 May 2025 — in-person simple cremation $1,215 (online $995) with the standard container; immediate burial $2,395 with no casket; cremation memorial $3,895; traditional package A $4,195 with a 20-gauge casket. The $230 OMI permit is extra",
+          "gplDateEs": "1 may. 2025",
+          "gplDateEn": "1 May 2025",
+          "gplKind": "gpl",
+          "packages": [
+            {
+              "id": "directCremation",
+              "labelEs": "Cremación directa",
+              "labelEn": "Direct cremation",
+              "amt": 1215,
+              "noteEs": "Cremación simple en persona o por teléfono, con contenedor estándar (GPL 1 may. 2025). En línea está en $995. El permiso del OMI de $230 va aparte.",
+              "noteEn": "In-person or phone simple cremation, with the standard container (GPL 1 May 2025). Online arrangements are $995. The $230 OMI permit is extra."
+            },
+            {
+              "id": "immediateBurial",
+              "labelEs": "Entierro inmediato",
+              "labelEn": "Immediate burial",
+              "amt": 2395,
+              "noteEs": "Entierro inmediato sin ataúd (GPL 1 may. 2025). Lote aparte.",
+              "noteEn": "Immediate burial with no casket (GPL 1 May 2025). Plot extra."
+            },
+            {
+              "id": "memorialCremation",
+              "labelEs": "Cremación con memorial",
+              "labelEn": "Cremation with memorial",
+              "amt": 3895,
+              "noteEs": "Servicio memorial con cremación: capilla, vista privada para la familia, carroza y contenedor estándar (GPL 1 may. 2025). Lote aparte.",
+              "noteEn": "Cremation memorial service: chapel, private family viewing, hearse, and standard container (GPL 1 May 2025). Plot extra."
+            },
+            {
+              "id": "traditional",
+              "labelEs": "Funeral tradicional con velatorio",
+              "labelEn": "Traditional funeral with visitation",
+              "amt": 4195,
+              "noteEs": "Paquete tradicional A: velatorio de un día, rosario, ceremonia y ataúd de calibre 20 sin sellar (GPL 1 may. 2025). Lote aparte.",
+              "noteEn": "Traditional package A: one-day visitation, rosary, ceremony, and a 20-gauge non-sealer casket (GPL 1 May 2025). Plot extra."
+            }
+          ]
+        },
+        {
+          "id": "french",
+          "name": "French Funerals",
+          "href": "https://irp.cdn-website.com/68ab9c76/files/uploaded/FRENCH+GPL+2025+-+July.pdf",
+          "address": "1111 University Blvd NE, Albuquerque",
+          "phone": "505-843-6333",
+          "sourceEs": "French Funerals: lista general de precios 1 jul. 2025, misma lista en sus cinco capillas — cremación directa $3,375 y entierro inmediato $3,175 con contenedor del comprador. El permiso del OMI de $236.79 no va incluido. French no publica un total de memorial ni de funeral con velatorio. La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida",
+          "sourceEn": "French Funerals: general price list 1 Jul 2025, the same list at all five chapels — direct cremation $3,375 and immediate burial $3,175 with a purchaser container. The $236.79 OMI permit is not included. French does not publish a memorial total or a visitation-funeral total. The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker",
+          "gplDateEs": "1 jul. 2025",
+          "gplDateEn": "1 Jul 2025",
+          "gplKind": "gpl",
+          "packages": [
+            {
+              "id": "directCremation",
+              "labelEs": "Cremación directa",
+              "labelEn": "Direct cremation",
+              "amt": 3375,
+              "noteEs": "Cremación directa, contenedor del comprador (GPL 1 jul. 2025). El permiso del OMI de $236.79 no va incluido.",
+              "noteEn": "Direct cremation, purchaser container (GPL 1 Jul 2025). The $236.79 OMI permit is not included."
+            },
+            {
+              "id": "immediateBurial",
+              "labelEs": "Entierro inmediato",
+              "labelEn": "Immediate burial",
+              "amt": 3175,
+              "noteEs": "Entierro inmediato, contenedor del comprador. Sin ceremonia. Lote aparte.",
+              "noteEn": "Immediate burial, purchaser container. No ceremony. Plot extra."
+            },
+            {
+              "id": "memorialCremation",
+              "labelEs": "Cremación con memorial",
+              "labelEn": "Cremation with memorial",
+              "amt": 0,
+              "noteEs": "No figura en su lista publicada. Pida la lista vigente.",
+              "noteEn": "Not on their published list. Ask for the current list."
+            },
+            {
+              "id": "traditional",
+              "labelEs": "Funeral tradicional con velatorio",
+              "labelEn": "Traditional funeral with visitation",
+              "amt": 0,
+              "noteEs": "No figura en su lista publicada. Pida la lista vigente.",
+              "noteEn": "Not on their published list. Ask for the current list."
+            }
+          ]
+        },
+        {
+          "id": "daniels-family-carlisle-chapel",
+          "name": "Daniels Family — Carlisle Chapel",
+          "href": "https://www.danielsfuneral.com/",
+          "address": "3113 Carlisle Blvd NE",
+          "phone": "505-884-1188",
+          "sourceEs": "",
+          "sourceEn": "",
           "gplDateEs": "",
           "gplDateEn": "",
           "gplKind": "none",
           "packages": []
         },
         {
-          "id": "french-funerals-cremations-albuquerque",
-          "name": "French Funerals & Cremations",
-          "href": "https://www.frenchfunerals.com/",
-          "address": "1111 University Blvd NE",
-          "phone": "505-843-6333",
+          "id": "daniels-family-wyoming-chapel",
+          "name": "Daniels Family — Wyoming Chapel",
+          "href": "https://www.danielsfuneral.com/",
+          "address": "7601 Wyoming Blvd NE",
+          "phone": "505-821-0010",
+          "sourceEs": "",
+          "sourceEn": "",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "none",
+          "packages": []
+        },
+        {
+          "id": "alameda-mortuary",
+          "name": "Alameda Mortuary",
+          "href": "https://www.danielsfuneral.com/",
+          "address": "9420 4th St NW",
+          "phone": "505-898-3160",
+          "sourceEs": "",
+          "sourceEn": "",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "none",
+          "packages": []
+        },
+        {
+          "id": "garcia-mortuary",
+          "name": "Garcia Mortuary",
+          "href": "https://www.danielsfuneral.com/",
+          "address": "717 Stover Ave SW",
+          "phone": "505-243-5222",
+          "sourceEs": "",
+          "sourceEn": "",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "none",
+          "packages": []
+        },
+        {
+          "id": "strong-thorne-mortuary",
+          "name": "Strong-Thorne Mortuary",
+          "href": "https://www.danielsfuneral.com/",
+          "address": "1100 Coal Ave SE",
+          "phone": "505-842-8800",
+          "sourceEs": "",
+          "sourceEn": "",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "none",
+          "packages": []
+        },
+        {
+          "id": "direct-funeral-cremation-services-albuquerque",
+          "name": "Direct Funeral & Cremation Services",
+          "href": "https://www.directfuneralservicesabq.com/",
+          "address": "",
+          "phone": "",
           "sourceEs": "Pida la lista general de precios vigente. La funeraria es la única fuente oficial.",
           "sourceEn": "Ask the funeral home for its current general price list. That list is the only official price.",
           "gplDateEs": "",
@@ -7975,11 +8119,18 @@
       ],
       "cemeteries": [
         {
-          "name": "Albuquerque. New lot: ask the cemetery you choose for the list.",
-          "address": "",
-          "phone": "",
-          "noteEs": "Albuquerque. Lote nuevo: pida la lista en el cementerio que elija",
-          "noteEn": "Albuquerque. New lot: ask the cemetery you choose for the list"
+          "name": "$1,600",
+          "address": "9500 San Pedro Dr",
+          "phone": "505-821-0010",
+          "noteEs": "Sandia Memory Gardens, 9500 San Pedro Dr NE. . Reventa vista el 9 de enero de 2025: por espacio. Lote nuevo: pida la lista; no está en la web",
+          "noteEn": "Sandia Memory Gardens, 9500 San Pedro Dr NE. . Resale seen January 9, 2025: per space. New lot: ask for the list; it is not on the website"
+        },
+        {
+          "name": "Sunset Memorial Park, 924 Menaul Blvd NE. Phone 505-345-3536. They do not publis",
+          "address": "924 Menaul Blvd",
+          "phone": "505-345-3536",
+          "noteEs": "Sunset Memorial Park, 924 Menaul Blvd NE. . No publica el precio del lote en internet",
+          "noteEn": "Sunset Memorial Park, 924 Menaul Blvd NE. . They do not publish a lot price online"
         }
       ],
       "other": [
@@ -8029,14 +8180,28 @@
       "sourceLineEn": "The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker.",
       "officesNoteEs": "Esas cifras son anuncios de particulares para dos espacios juntos. No son un precio de lote nuevo del cementerio.",
       "officesNoteEn": "Those figures are private ads for two spaces together. They are not a new-lot price from the cemetery.",
-      "homes": [],
+      "homes": [
+        {
+          "id": "baca-s-funeral-chapels-sunset-crematory",
+          "name": "Baca’s Funeral Chapels & Sunset Crematory",
+          "href": "https://www.bacasfuneralchapelslascruces.com/",
+          "address": "300 East Boutz",
+          "phone": "575-527-2222",
+          "sourceEs": "",
+          "sourceEn": "",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "none",
+          "packages": []
+        }
+      ],
       "cemeteries": [
         {
-          "name": "Hillcrest Memorial Gardens, Las Cruces. Resale seen September 28, 2026: $10,000 ",
-          "address": "",
+          "name": "Hillcrest Memorial Gardens, 5140 W Picacho Ave, Las Cruces. Resale on the board ",
+          "address": "5140 W Picacho Ave",
           "phone": "",
-          "noteEs": "Hillcrest Memorial Gardens, Las Cruces. Reventa vista el 28 de septiembre de 2026: $10,000 o $11,500 por dos espacios juntos. Lote nuevo: pida la lista en la oficina",
-          "noteEn": "Hillcrest Memorial Gardens, Las Cruces. Resale seen September 28, 2026: $10,000 or $11,500 for two spaces together. New lot: ask the office for the list"
+          "noteEs": "Hillcrest Memorial Gardens, 5140 W Picacho Ave, Las Cruces. Reventa en el tablero el 11 de octubre de 2026: $10,000 o $11,500 por dos espacios juntos. Lote nuevo: pida la lista en la oficina",
+          "noteEn": "Hillcrest Memorial Gardens, 5140 W Picacho Ave, Las Cruces. Resale on the board October 11, 2026: $10,000 or $11,500 for two spaces together. New lot: ask the office for the list"
         }
       ],
       "other": [
@@ -8082,18 +8247,91 @@
       ],
       "guideEs": "/estados/new-mexico/rio-rancho.html",
       "guideEn": "/en/states/new-mexico/rio-rancho.html",
-      "sourceLineEs": "La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida.",
-      "sourceLineEn": "The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker.",
-      "officesNoteEs": "Estas cifras serían del cementerio, no de la funeraria. No hay un precio de lote nuevo publicado para Rio Rancho en esta página.",
-      "officesNoteEn": "These figures would come from the cemetery, not the funeral home. This page does not have a published new-lot price for Rio Rancho.",
-      "homes": [],
+      "sourceLineEs": "French Funerals, capilla de Rio Rancho: GPL 1 jul. 2025, la misma lista que en Albuquerque — cremación directa $3,375 y entierro inmediato $3,175 con contenedor del comprador. El permiso del OMI de $236.79 no va incluido. French no publica un total de memorial ni de funeral con velatorio. La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida.",
+      "sourceLineEn": "French Funerals, Rio Rancho chapel: GPL 1 Jul 2025, the same list as Albuquerque — direct cremation $3,375 and immediate burial $3,175 with a purchaser container. The $236.79 OMI permit is not included. French does not publish a memorial total or a visitation-funeral total. The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker.",
+      "officesNoteEs": "El anuncio de 2015 no es la lista vigente de la oficina. Vista Verde no publica el lote nuevo en la web.",
+      "officesNoteEn": "The 2015 ad is not the office’s current list. Vista Verde does not publish a new-lot price online.",
+      "homes": [
+        {
+          "id": "french",
+          "name": "French Funerals",
+          "href": "https://irp.cdn-website.com/68ab9c76/files/uploaded/FRENCH+GPL+2025+-+July.pdf",
+          "address": "1275 Unser Blvd NE, Rio Rancho",
+          "phone": "505-338-2000",
+          "sourceEs": "French Funerals, capilla de Rio Rancho: lista general de precios 1 jul. 2025, la misma lista que en Albuquerque — cremación directa $3,375 y entierro inmediato $3,175 con contenedor del comprador. El permiso del OMI de $236.79 no va incluido. French no publica un total de memorial ni de funeral con velatorio. La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida",
+          "sourceEn": "French Funerals, Rio Rancho chapel: general price list 1 Jul 2025, the same list as Albuquerque — direct cremation $3,375 and immediate burial $3,175 with a purchaser container. The $236.79 OMI permit is not included. French does not publish a memorial total or a visitation-funeral total. The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker",
+          "gplDateEs": "1 jul. 2025",
+          "gplDateEn": "1 Jul 2025",
+          "gplKind": "gpl",
+          "packages": [
+            {
+              "id": "directCremation",
+              "labelEs": "Cremación directa",
+              "labelEn": "Direct cremation",
+              "amt": 3375,
+              "noteEs": "Cremación directa, contenedor del comprador (GPL 1 jul. 2025). El permiso del OMI de $236.79 no va incluido.",
+              "noteEn": "Direct cremation, purchaser container (GPL 1 Jul 2025). The $236.79 OMI permit is not included."
+            },
+            {
+              "id": "immediateBurial",
+              "labelEs": "Entierro inmediato",
+              "labelEn": "Immediate burial",
+              "amt": 3175,
+              "noteEs": "Entierro inmediato, contenedor del comprador. Sin ceremonia. Lote aparte.",
+              "noteEn": "Immediate burial, purchaser container. No ceremony. Plot extra."
+            },
+            {
+              "id": "memorialCremation",
+              "labelEs": "Cremación con memorial",
+              "labelEn": "Cremation with memorial",
+              "amt": 0,
+              "noteEs": "No figura en su lista publicada. Pida la lista vigente.",
+              "noteEn": "Not on their published list. Ask for the current list."
+            },
+            {
+              "id": "traditional",
+              "labelEs": "Funeral tradicional con velatorio",
+              "labelEn": "Traditional funeral with visitation",
+              "amt": 0,
+              "noteEs": "No figura en su lista publicada. Pida la lista vigente.",
+              "noteEn": "Not on their published list. Ask for the current list."
+            }
+          ]
+        },
+        {
+          "id": "daniels-family-sara-road-chapel",
+          "name": "Daniels Family — Sara Road Chapel",
+          "href": "https://www.danielsfuneral.com/sara-road-chapel",
+          "address": "4310 Sara Rd",
+          "phone": "505-892-9920",
+          "sourceEs": "",
+          "sourceEn": "",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "none",
+          "packages": []
+        },
+        {
+          "id": "daniels-family-southern-chapel",
+          "name": "Daniels Family — Southern Chapel",
+          "href": "https://www.danielsfuneral.com/",
+          "address": "2400 Southern Blvd SE",
+          "phone": "505-891-9192",
+          "sourceEs": "",
+          "sourceEn": "",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "none",
+          "packages": []
+        }
+      ],
       "cemeteries": [
         {
-          "name": "Rio Rancho. New lot: ask the cemetery you choose for the list.",
-          "address": "",
-          "phone": "",
-          "noteEs": "Rio Rancho. Lote nuevo: pida la lista en el cementerio que elija",
-          "noteEn": "Rio Rancho. New lot: ask the cemetery you choose for the list"
+          "name": "Vista Verde Memorial Park, 4310 Sara Rd SE. Resale: ad listed November 30, 2015,",
+          "address": "4310 Sara Rd",
+          "phone": "505-892-9920",
+          "noteEs": "Vista Verde Memorial Park, 4310 Sara Rd SE. Reventa: anuncio del 30 de noviembre de 2015, aún en el tablero el 11 de octubre de 2026, a $1,595 por espacio. Lote nuevo: pida la lista. Daniels Family, capilla Sara Road, está en esa dirección",
+          "noteEn": "Vista Verde Memorial Park, 4310 Sara Rd SE. Resale: ad listed November 30, 2015, still on the board October 11, 2026, at $1,595 per space. New lot: ask for the list. Daniels Family’s Sara Road Chapel is at that address"
         }
       ],
       "other": [
@@ -8138,11 +8376,57 @@
       ],
       "guideEs": "/estados/new-mexico/santa-fe.html",
       "guideEn": "/en/states/new-mexico/santa-fe.html",
-      "sourceLineEs": "La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida.",
-      "sourceLineEn": "The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker.",
-      "officesNoteEs": "Estas cifras serían del cementerio, no de la funeraria. No hay un precio de lote nuevo publicado para Santa Fe en esta página.",
-      "officesNoteEn": "These figures would come from the cemetery, not the funeral home. This page does not have a published new-lot price for Santa Fe.",
+      "sourceLineEs": "Riverside Funeral Home, Santa Fe: precios publicados en su sitio, leídos el 11 de octubre de 2026 — cremación directa $1,435 con urna temporal y sin ceremonia; entierro sin velatorio $2,170, sin ataúd, bóveda ni cementerio. No publica un total de cremación con memorial ni de funeral con velatorio. Certificados de defunción aparte. La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida.",
+      "sourceLineEn": "Riverside Funeral Home, Santa Fe: prices on its site, read October 11, 2026 — direct cremation $1,435 with a temporary urn and no ceremony; burial with no visitation $2,170, with no casket, vault, or cemetery costs. It does not publish a cremation-with-memorial total or a visitation-funeral total. Death certificates are extra. The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker.",
+      "officesNoteEs": "Memorial Gardens no tiene un anuncio vigente con precio. El cementerio nacional no es una lista de lote privado.",
+      "officesNoteEn": "Memorial Gardens has no current priced ad. The national cemetery is not a private-lot price list.",
       "homes": [
+        {
+          "id": "riverside",
+          "name": "Riverside Funeral Home",
+          "href": "https://sfprod.altogetherfuneral.com/funeral-cremation/new-mexico/santa-fe/riverside-funeral-home-santa-fe/nmrfs.html",
+          "address": "1607 Saint Michaels Dr, Santa Fe",
+          "phone": "505-240-6663",
+          "sourceEs": "Riverside Funeral Home, Santa Fe: precios publicados en su sitio, leídos el 11 de octubre de 2026 — cremación directa $1,435 con urna temporal y sin ceremonia; entierro sin velatorio $2,170, sin ataúd, bóveda ni cementerio. No publica un total de cremación con memorial ni de funeral con velatorio. Certificados de defunción aparte. La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida",
+          "sourceEn": "Riverside Funeral Home, Santa Fe: prices on its site, read October 11, 2026 — direct cremation $1,435 with a temporary urn and no ceremony; burial with no visitation $2,170, with no casket, vault, or cemetery costs. It does not publish a cremation-with-memorial total or a visitation-funeral total. Death certificates are extra. The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker",
+          "gplDateEs": "26 jul. 2026",
+          "gplDateEn": "26 Jul 2026",
+          "gplKind": "published",
+          "packages": [
+            {
+              "id": "directCremation",
+              "labelEs": "Cremación directa",
+              "labelEn": "Direct cremation",
+              "amt": 1435,
+              "noteEs": "Cremación directa con urna temporal, sin velatorio ni ceremonia (precio publicado en su sitio, leído el 11 oct. 2026). Certificados de defunción aparte.",
+              "noteEn": "Direct cremation with a temporary urn, no visitation or ceremony (price on their site, read 11 Oct 2026). Death certificates extra."
+            },
+            {
+              "id": "immediateBurial",
+              "labelEs": "Entierro inmediato",
+              "labelEn": "Immediate burial",
+              "amt": 2170,
+              "noteEs": "Entierro sin velatorio ni ceremonia. No incluye ataúd, bóveda ni cementerio.",
+              "noteEn": "Burial with no visitation or ceremony. Does not include a casket, vault, or cemetery costs."
+            },
+            {
+              "id": "memorialCremation",
+              "labelEs": "Cremación con memorial",
+              "labelEn": "Cremation with memorial",
+              "amt": 0,
+              "noteEs": "No figura en su lista publicada. Pida la lista vigente.",
+              "noteEn": "Not on their published list. Ask for the current list."
+            },
+            {
+              "id": "traditional",
+              "labelEs": "Funeral tradicional con velatorio",
+              "labelEn": "Traditional funeral with visitation",
+              "amt": 0,
+              "noteEs": "No figura en su lista publicada. Pida la lista vigente.",
+              "noteEn": "Not on their published list. Ask for the current list."
+            }
+          ]
+        },
         {
           "id": "berardinelli-family-funeral-service-santa-fe",
           "name": "Berardinelli Family Funeral Service",
@@ -8172,11 +8456,18 @@
       ],
       "cemeteries": [
         {
-          "name": "Santa Fe. New lot: ask the cemetery you choose for the list.",
-          "address": "",
+          "name": "Memorial Gardens of Santa Fe, 417 East Rodeo Dr. The Grave Solutions ad is sold.",
+          "address": "417 East Rodeo Dr.",
           "phone": "",
-          "noteEs": "Santa Fe. Lote nuevo: pida la lista en el cementerio que elija",
-          "noteEn": "Santa Fe. New lot: ask the cemetery you choose for the list"
+          "noteEs": "Memorial Gardens of Santa Fe, 417 East Rodeo Dr. El anuncio de Grave Solutions está vendido. Lote nuevo: pida la lista; no hay un precio publicado en esta guía",
+          "noteEn": "Memorial Gardens of Santa Fe, 417 East Rodeo Dr. The Grave Solutions ad is sold. New lot: ask for the list; this guide does not have a published price"
+        },
+        {
+          "name": "Santa Fe National Cemetery, 501 N Guadalupe St. Phone 505-988-6400. Space is ava",
+          "address": "501 N Guadalupe St.",
+          "phone": "505-988-6400",
+          "noteEs": "Cementerio nacional de Santa Fe, 501 N Guadalupe St. . Hay espacio para restos con ataúd y cremados. Confirme la elegibilidad; no es un precio de lote privado",
+          "noteEn": "Santa Fe National Cemetery, 501 N Guadalupe St. . Space is available for casketed and cremated remains. Confirm eligibility; this is not a private-lot price"
         }
       ],
       "other": [
@@ -106197,10 +106488,56 @@
       "pathEn": "/en/funeral-homes-cemeteries.html?estado=new-mexico&ciudad=agua-fria",
       "guideEs": "/estados/new-mexico/santa-fe.html",
       "guideEn": "/en/states/new-mexico/santa-fe.html",
-      "sourceLineEs": "La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida.",
-      "sourceLineEn": "The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker.",
+      "sourceLineEs": "Riverside Funeral Home, Santa Fe: precios publicados en su sitio, leídos el 11 de octubre de 2026 — cremación directa $1,435 con urna temporal y sin ceremonia; entierro sin velatorio $2,170, sin ataúd, bóveda ni cementerio. No publica un total de cremación con memorial ni de funeral con velatorio. Certificados de defunción aparte. La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida.",
+      "sourceLineEn": "Riverside Funeral Home, Santa Fe: prices on its site, read October 11, 2026 — direct cremation $1,435 with a temporary urn and no ceremony; burial with no visitation $2,170, with no casket, vault, or cemetery costs. It does not publish a cremation-with-memorial total or a visitation-funeral total. Death certificates are extra. The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker.",
       "localHomes": [],
       "nearbyHomes": [
+        {
+          "id": "riverside",
+          "name": "Riverside Funeral Home",
+          "href": "https://sfprod.altogetherfuneral.com/funeral-cremation/new-mexico/santa-fe/riverside-funeral-home-santa-fe/nmrfs.html",
+          "address": "1607 Saint Michaels Dr, Santa Fe",
+          "phone": "505-240-6663",
+          "sourceEs": "Riverside Funeral Home, Santa Fe: precios publicados en su sitio, leídos el 11 de octubre de 2026 — cremación directa $1,435 con urna temporal y sin ceremonia; entierro sin velatorio $2,170, sin ataúd, bóveda ni cementerio. No publica un total de cremación con memorial ni de funeral con velatorio. Certificados de defunción aparte. La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida",
+          "sourceEn": "Riverside Funeral Home, Santa Fe: prices on its site, read October 11, 2026 — direct cremation $1,435 with a temporary urn and no ceremony; burial with no visitation $2,170, with no casket, vault, or cemetery costs. It does not publish a cremation-with-memorial total or a visitation-funeral total. Death certificates are extra. The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker",
+          "gplDateEs": "26 jul. 2026",
+          "gplDateEn": "26 Jul 2026",
+          "gplKind": "published",
+          "packages": [
+            {
+              "id": "directCremation",
+              "labelEs": "Cremación directa",
+              "labelEn": "Direct cremation",
+              "amt": 1435,
+              "noteEs": "Cremación directa con urna temporal, sin velatorio ni ceremonia (precio publicado en su sitio, leído el 11 oct. 2026). Certificados de defunción aparte.",
+              "noteEn": "Direct cremation with a temporary urn, no visitation or ceremony (price on their site, read 11 Oct 2026). Death certificates extra."
+            },
+            {
+              "id": "immediateBurial",
+              "labelEs": "Entierro inmediato",
+              "labelEn": "Immediate burial",
+              "amt": 2170,
+              "noteEs": "Entierro sin velatorio ni ceremonia. No incluye ataúd, bóveda ni cementerio.",
+              "noteEn": "Burial with no visitation or ceremony. Does not include a casket, vault, or cemetery costs."
+            },
+            {
+              "id": "memorialCremation",
+              "labelEs": "Cremación con memorial",
+              "labelEn": "Cremation with memorial",
+              "amt": 0,
+              "noteEs": "No figura en su lista publicada. Pida la lista vigente.",
+              "noteEn": "Not on their published list. Ask for the current list."
+            },
+            {
+              "id": "traditional",
+              "labelEs": "Funeral tradicional con velatorio",
+              "labelEn": "Traditional funeral with visitation",
+              "amt": 0,
+              "noteEs": "No figura en su lista publicada. Pida la lista vigente.",
+              "noteEn": "Not on their published list. Ask for the current list."
+            }
+          ]
+        },
         {
           "id": "berardinelli-family-funeral-service-santa-fe",
           "name": "Berardinelli Family Funeral Service",
@@ -106231,11 +106568,18 @@
       "localCemeteries": [],
       "nearbyCemeteries": [
         {
-          "name": "Santa Fe. New lot: ask the cemetery you choose for the list.",
-          "address": "",
+          "name": "Memorial Gardens of Santa Fe, 417 East Rodeo Dr. The Grave Solutions ad is sold.",
+          "address": "417 East Rodeo Dr.",
           "phone": "",
-          "noteEs": "Santa Fe. Lote nuevo: pida la lista en el cementerio que elija",
-          "noteEn": "Santa Fe. New lot: ask the cemetery you choose for the list"
+          "noteEs": "Memorial Gardens of Santa Fe, 417 East Rodeo Dr. El anuncio de Grave Solutions está vendido. Lote nuevo: pida la lista; no hay un precio publicado en esta guía",
+          "noteEn": "Memorial Gardens of Santa Fe, 417 East Rodeo Dr. The Grave Solutions ad is sold. New lot: ask for the list; this guide does not have a published price"
+        },
+        {
+          "name": "Santa Fe National Cemetery, 501 N Guadalupe St. Phone 505-988-6400. Space is ava",
+          "address": "501 N Guadalupe St.",
+          "phone": "505-988-6400",
+          "noteEs": "Cementerio nacional de Santa Fe, 501 N Guadalupe St. . Hay espacio para restos con ataúd y cremados. Confirme la elegibilidad; no es un precio de lote privado",
+          "noteEn": "Santa Fe National Cemetery, 501 N Guadalupe St. . Space is available for casketed and cremated remains. Confirm eligibility; this is not a private-lot price"
         }
       ],
       "other": [
@@ -106267,18 +106611,91 @@
       "pathEn": "/en/funeral-homes-cemeteries.html?estado=new-mexico&ciudad=bernalillo",
       "guideEs": "/estados/new-mexico/rio-rancho.html",
       "guideEn": "/en/states/new-mexico/rio-rancho.html",
-      "sourceLineEs": "La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida.",
-      "sourceLineEn": "The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker.",
+      "sourceLineEs": "French Funerals, capilla de Rio Rancho: GPL 1 jul. 2025, la misma lista que en Albuquerque — cremación directa $3,375 y entierro inmediato $3,175 con contenedor del comprador. El permiso del OMI de $236.79 no va incluido. French no publica un total de memorial ni de funeral con velatorio. La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida.",
+      "sourceLineEn": "French Funerals, Rio Rancho chapel: GPL 1 Jul 2025, the same list as Albuquerque — direct cremation $3,375 and immediate burial $3,175 with a purchaser container. The $236.79 OMI permit is not included. French does not publish a memorial total or a visitation-funeral total. The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker.",
       "localHomes": [],
-      "nearbyHomes": [],
+      "nearbyHomes": [
+        {
+          "id": "french",
+          "name": "French Funerals",
+          "href": "https://irp.cdn-website.com/68ab9c76/files/uploaded/FRENCH+GPL+2025+-+July.pdf",
+          "address": "1275 Unser Blvd NE, Rio Rancho",
+          "phone": "505-338-2000",
+          "sourceEs": "French Funerals, capilla de Rio Rancho: lista general de precios 1 jul. 2025, la misma lista que en Albuquerque — cremación directa $3,375 y entierro inmediato $3,175 con contenedor del comprador. El permiso del OMI de $236.79 no va incluido. French no publica un total de memorial ni de funeral con velatorio. La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida",
+          "sourceEn": "French Funerals, Rio Rancho chapel: general price list 1 Jul 2025, the same list as Albuquerque — direct cremation $3,375 and immediate burial $3,175 with a purchaser container. The $236.79 OMI permit is not included. French does not publish a memorial total or a visitation-funeral total. The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker",
+          "gplDateEs": "1 jul. 2025",
+          "gplDateEn": "1 Jul 2025",
+          "gplKind": "gpl",
+          "packages": [
+            {
+              "id": "directCremation",
+              "labelEs": "Cremación directa",
+              "labelEn": "Direct cremation",
+              "amt": 3375,
+              "noteEs": "Cremación directa, contenedor del comprador (GPL 1 jul. 2025). El permiso del OMI de $236.79 no va incluido.",
+              "noteEn": "Direct cremation, purchaser container (GPL 1 Jul 2025). The $236.79 OMI permit is not included."
+            },
+            {
+              "id": "immediateBurial",
+              "labelEs": "Entierro inmediato",
+              "labelEn": "Immediate burial",
+              "amt": 3175,
+              "noteEs": "Entierro inmediato, contenedor del comprador. Sin ceremonia. Lote aparte.",
+              "noteEn": "Immediate burial, purchaser container. No ceremony. Plot extra."
+            },
+            {
+              "id": "memorialCremation",
+              "labelEs": "Cremación con memorial",
+              "labelEn": "Cremation with memorial",
+              "amt": 0,
+              "noteEs": "No figura en su lista publicada. Pida la lista vigente.",
+              "noteEn": "Not on their published list. Ask for the current list."
+            },
+            {
+              "id": "traditional",
+              "labelEs": "Funeral tradicional con velatorio",
+              "labelEn": "Traditional funeral with visitation",
+              "amt": 0,
+              "noteEs": "No figura en su lista publicada. Pida la lista vigente.",
+              "noteEn": "Not on their published list. Ask for the current list."
+            }
+          ]
+        },
+        {
+          "id": "daniels-family-sara-road-chapel",
+          "name": "Daniels Family — Sara Road Chapel",
+          "href": "https://www.danielsfuneral.com/sara-road-chapel",
+          "address": "4310 Sara Rd",
+          "phone": "505-892-9920",
+          "sourceEs": "",
+          "sourceEn": "",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "none",
+          "packages": []
+        },
+        {
+          "id": "daniels-family-southern-chapel",
+          "name": "Daniels Family — Southern Chapel",
+          "href": "https://www.danielsfuneral.com/",
+          "address": "2400 Southern Blvd SE",
+          "phone": "505-891-9192",
+          "sourceEs": "",
+          "sourceEn": "",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "none",
+          "packages": []
+        }
+      ],
       "localCemeteries": [],
       "nearbyCemeteries": [
         {
-          "name": "Rio Rancho. New lot: ask the cemetery you choose for the list.",
-          "address": "",
-          "phone": "",
-          "noteEs": "Rio Rancho. Lote nuevo: pida la lista en el cementerio que elija",
-          "noteEn": "Rio Rancho. New lot: ask the cemetery you choose for the list"
+          "name": "Vista Verde Memorial Park, 4310 Sara Rd SE. Resale: ad listed November 30, 2015,",
+          "address": "4310 Sara Rd",
+          "phone": "505-892-9920",
+          "noteEs": "Vista Verde Memorial Park, 4310 Sara Rd SE. Reventa: anuncio del 30 de noviembre de 2015, aún en el tablero el 11 de octubre de 2026, a $1,595 por espacio. Lote nuevo: pida la lista. Daniels Family, capilla Sara Road, está en esa dirección",
+          "noteEn": "Vista Verde Memorial Park, 4310 Sara Rd SE. Resale: ad listed November 30, 2015, still on the board October 11, 2026, at $1,595 per space. New lot: ask for the list. Daniels Family’s Sara Road Chapel is at that address"
         }
       ],
       "other": [
@@ -106310,18 +106727,91 @@
       "pathEn": "/en/funeral-homes-cemeteries.html?estado=new-mexico&ciudad=corrales",
       "guideEs": "/estados/new-mexico/rio-rancho.html",
       "guideEn": "/en/states/new-mexico/rio-rancho.html",
-      "sourceLineEs": "La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida.",
-      "sourceLineEn": "The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker.",
+      "sourceLineEs": "French Funerals, capilla de Rio Rancho: GPL 1 jul. 2025, la misma lista que en Albuquerque — cremación directa $3,375 y entierro inmediato $3,175 con contenedor del comprador. El permiso del OMI de $236.79 no va incluido. French no publica un total de memorial ni de funeral con velatorio. La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida.",
+      "sourceLineEn": "French Funerals, Rio Rancho chapel: GPL 1 Jul 2025, the same list as Albuquerque — direct cremation $3,375 and immediate burial $3,175 with a purchaser container. The $236.79 OMI permit is not included. French does not publish a memorial total or a visitation-funeral total. The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker.",
       "localHomes": [],
-      "nearbyHomes": [],
+      "nearbyHomes": [
+        {
+          "id": "french",
+          "name": "French Funerals",
+          "href": "https://irp.cdn-website.com/68ab9c76/files/uploaded/FRENCH+GPL+2025+-+July.pdf",
+          "address": "1275 Unser Blvd NE, Rio Rancho",
+          "phone": "505-338-2000",
+          "sourceEs": "French Funerals, capilla de Rio Rancho: lista general de precios 1 jul. 2025, la misma lista que en Albuquerque — cremación directa $3,375 y entierro inmediato $3,175 con contenedor del comprador. El permiso del OMI de $236.79 no va incluido. French no publica un total de memorial ni de funeral con velatorio. La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida",
+          "sourceEn": "French Funerals, Rio Rancho chapel: general price list 1 Jul 2025, the same list as Albuquerque — direct cremation $3,375 and immediate burial $3,175 with a purchaser container. The $236.79 OMI permit is not included. French does not publish a memorial total or a visitation-funeral total. The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker",
+          "gplDateEs": "1 jul. 2025",
+          "gplDateEn": "1 Jul 2025",
+          "gplKind": "gpl",
+          "packages": [
+            {
+              "id": "directCremation",
+              "labelEs": "Cremación directa",
+              "labelEn": "Direct cremation",
+              "amt": 3375,
+              "noteEs": "Cremación directa, contenedor del comprador (GPL 1 jul. 2025). El permiso del OMI de $236.79 no va incluido.",
+              "noteEn": "Direct cremation, purchaser container (GPL 1 Jul 2025). The $236.79 OMI permit is not included."
+            },
+            {
+              "id": "immediateBurial",
+              "labelEs": "Entierro inmediato",
+              "labelEn": "Immediate burial",
+              "amt": 3175,
+              "noteEs": "Entierro inmediato, contenedor del comprador. Sin ceremonia. Lote aparte.",
+              "noteEn": "Immediate burial, purchaser container. No ceremony. Plot extra."
+            },
+            {
+              "id": "memorialCremation",
+              "labelEs": "Cremación con memorial",
+              "labelEn": "Cremation with memorial",
+              "amt": 0,
+              "noteEs": "No figura en su lista publicada. Pida la lista vigente.",
+              "noteEn": "Not on their published list. Ask for the current list."
+            },
+            {
+              "id": "traditional",
+              "labelEs": "Funeral tradicional con velatorio",
+              "labelEn": "Traditional funeral with visitation",
+              "amt": 0,
+              "noteEs": "No figura en su lista publicada. Pida la lista vigente.",
+              "noteEn": "Not on their published list. Ask for the current list."
+            }
+          ]
+        },
+        {
+          "id": "daniels-family-sara-road-chapel",
+          "name": "Daniels Family — Sara Road Chapel",
+          "href": "https://www.danielsfuneral.com/sara-road-chapel",
+          "address": "4310 Sara Rd",
+          "phone": "505-892-9920",
+          "sourceEs": "",
+          "sourceEn": "",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "none",
+          "packages": []
+        },
+        {
+          "id": "daniels-family-southern-chapel",
+          "name": "Daniels Family — Southern Chapel",
+          "href": "https://www.danielsfuneral.com/",
+          "address": "2400 Southern Blvd SE",
+          "phone": "505-891-9192",
+          "sourceEs": "",
+          "sourceEn": "",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "none",
+          "packages": []
+        }
+      ],
       "localCemeteries": [],
       "nearbyCemeteries": [
         {
-          "name": "Rio Rancho. New lot: ask the cemetery you choose for the list.",
-          "address": "",
-          "phone": "",
-          "noteEs": "Rio Rancho. Lote nuevo: pida la lista en el cementerio que elija",
-          "noteEn": "Rio Rancho. New lot: ask the cemetery you choose for the list"
+          "name": "Vista Verde Memorial Park, 4310 Sara Rd SE. Resale: ad listed November 30, 2015,",
+          "address": "4310 Sara Rd",
+          "phone": "505-892-9920",
+          "noteEs": "Vista Verde Memorial Park, 4310 Sara Rd SE. Reventa: anuncio del 30 de noviembre de 2015, aún en el tablero el 11 de octubre de 2026, a $1,595 por espacio. Lote nuevo: pida la lista. Daniels Family, capilla Sara Road, está en esa dirección",
+          "noteEn": "Vista Verde Memorial Park, 4310 Sara Rd SE. Resale: ad listed November 30, 2015, still on the board October 11, 2026, at $1,595 per space. New lot: ask for the list. Daniels Family’s Sara Road Chapel is at that address"
         }
       ],
       "other": [
@@ -106353,10 +106843,56 @@
       "pathEn": "/en/funeral-homes-cemeteries.html?estado=new-mexico&ciudad=eldorado",
       "guideEs": "/estados/new-mexico/santa-fe.html",
       "guideEn": "/en/states/new-mexico/santa-fe.html",
-      "sourceLineEs": "La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida.",
-      "sourceLineEn": "The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker.",
+      "sourceLineEs": "Riverside Funeral Home, Santa Fe: precios publicados en su sitio, leídos el 11 de octubre de 2026 — cremación directa $1,435 con urna temporal y sin ceremonia; entierro sin velatorio $2,170, sin ataúd, bóveda ni cementerio. No publica un total de cremación con memorial ni de funeral con velatorio. Certificados de defunción aparte. La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida.",
+      "sourceLineEn": "Riverside Funeral Home, Santa Fe: prices on its site, read October 11, 2026 — direct cremation $1,435 with a temporary urn and no ceremony; burial with no visitation $2,170, with no casket, vault, or cemetery costs. It does not publish a cremation-with-memorial total or a visitation-funeral total. Death certificates are extra. The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker.",
       "localHomes": [],
       "nearbyHomes": [
+        {
+          "id": "riverside",
+          "name": "Riverside Funeral Home",
+          "href": "https://sfprod.altogetherfuneral.com/funeral-cremation/new-mexico/santa-fe/riverside-funeral-home-santa-fe/nmrfs.html",
+          "address": "1607 Saint Michaels Dr, Santa Fe",
+          "phone": "505-240-6663",
+          "sourceEs": "Riverside Funeral Home, Santa Fe: precios publicados en su sitio, leídos el 11 de octubre de 2026 — cremación directa $1,435 con urna temporal y sin ceremonia; entierro sin velatorio $2,170, sin ataúd, bóveda ni cementerio. No publica un total de cremación con memorial ni de funeral con velatorio. Certificados de defunción aparte. La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida",
+          "sourceEn": "Riverside Funeral Home, Santa Fe: prices on its site, read October 11, 2026 — direct cremation $1,435 with a temporary urn and no ceremony; burial with no visitation $2,170, with no casket, vault, or cemetery costs. It does not publish a cremation-with-memorial total or a visitation-funeral total. Death certificates are extra. The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker",
+          "gplDateEs": "26 jul. 2026",
+          "gplDateEn": "26 Jul 2026",
+          "gplKind": "published",
+          "packages": [
+            {
+              "id": "directCremation",
+              "labelEs": "Cremación directa",
+              "labelEn": "Direct cremation",
+              "amt": 1435,
+              "noteEs": "Cremación directa con urna temporal, sin velatorio ni ceremonia (precio publicado en su sitio, leído el 11 oct. 2026). Certificados de defunción aparte.",
+              "noteEn": "Direct cremation with a temporary urn, no visitation or ceremony (price on their site, read 11 Oct 2026). Death certificates extra."
+            },
+            {
+              "id": "immediateBurial",
+              "labelEs": "Entierro inmediato",
+              "labelEn": "Immediate burial",
+              "amt": 2170,
+              "noteEs": "Entierro sin velatorio ni ceremonia. No incluye ataúd, bóveda ni cementerio.",
+              "noteEn": "Burial with no visitation or ceremony. Does not include a casket, vault, or cemetery costs."
+            },
+            {
+              "id": "memorialCremation",
+              "labelEs": "Cremación con memorial",
+              "labelEn": "Cremation with memorial",
+              "amt": 0,
+              "noteEs": "No figura en su lista publicada. Pida la lista vigente.",
+              "noteEn": "Not on their published list. Ask for the current list."
+            },
+            {
+              "id": "traditional",
+              "labelEs": "Funeral tradicional con velatorio",
+              "labelEn": "Traditional funeral with visitation",
+              "amt": 0,
+              "noteEs": "No figura en su lista publicada. Pida la lista vigente.",
+              "noteEn": "Not on their published list. Ask for the current list."
+            }
+          ]
+        },
         {
           "id": "berardinelli-family-funeral-service-santa-fe",
           "name": "Berardinelli Family Funeral Service",
@@ -106387,11 +106923,18 @@
       "localCemeteries": [],
       "nearbyCemeteries": [
         {
-          "name": "Santa Fe. New lot: ask the cemetery you choose for the list.",
-          "address": "",
+          "name": "Memorial Gardens of Santa Fe, 417 East Rodeo Dr. The Grave Solutions ad is sold.",
+          "address": "417 East Rodeo Dr.",
           "phone": "",
-          "noteEs": "Santa Fe. Lote nuevo: pida la lista en el cementerio que elija",
-          "noteEn": "Santa Fe. New lot: ask the cemetery you choose for the list"
+          "noteEs": "Memorial Gardens of Santa Fe, 417 East Rodeo Dr. El anuncio de Grave Solutions está vendido. Lote nuevo: pida la lista; no hay un precio publicado en esta guía",
+          "noteEn": "Memorial Gardens of Santa Fe, 417 East Rodeo Dr. The Grave Solutions ad is sold. New lot: ask for the list; this guide does not have a published price"
+        },
+        {
+          "name": "Santa Fe National Cemetery, 501 N Guadalupe St. Phone 505-988-6400. Space is ava",
+          "address": "501 N Guadalupe St.",
+          "phone": "505-988-6400",
+          "noteEs": "Cementerio nacional de Santa Fe, 501 N Guadalupe St. . Hay espacio para restos con ataúd y cremados. Confirme la elegibilidad; no es un precio de lote privado",
+          "noteEn": "Santa Fe National Cemetery, 501 N Guadalupe St. . Space is available for casketed and cremated remains. Confirm eligibility; this is not a private-lot price"
         }
       ],
       "other": [
@@ -106423,10 +106966,56 @@
       "pathEn": "/en/funeral-homes-cemeteries.html?estado=new-mexico&ciudad=la-cienega",
       "guideEs": "/estados/new-mexico/santa-fe.html",
       "guideEn": "/en/states/new-mexico/santa-fe.html",
-      "sourceLineEs": "La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida.",
-      "sourceLineEn": "The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker.",
+      "sourceLineEs": "Riverside Funeral Home, Santa Fe: precios publicados en su sitio, leídos el 11 de octubre de 2026 — cremación directa $1,435 con urna temporal y sin ceremonia; entierro sin velatorio $2,170, sin ataúd, bóveda ni cementerio. No publica un total de cremación con memorial ni de funeral con velatorio. Certificados de defunción aparte. La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida.",
+      "sourceLineEn": "Riverside Funeral Home, Santa Fe: prices on its site, read October 11, 2026 — direct cremation $1,435 with a temporary urn and no ceremony; burial with no visitation $2,170, with no casket, vault, or cemetery costs. It does not publish a cremation-with-memorial total or a visitation-funeral total. Death certificates are extra. The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker.",
       "localHomes": [],
       "nearbyHomes": [
+        {
+          "id": "riverside",
+          "name": "Riverside Funeral Home",
+          "href": "https://sfprod.altogetherfuneral.com/funeral-cremation/new-mexico/santa-fe/riverside-funeral-home-santa-fe/nmrfs.html",
+          "address": "1607 Saint Michaels Dr, Santa Fe",
+          "phone": "505-240-6663",
+          "sourceEs": "Riverside Funeral Home, Santa Fe: precios publicados en su sitio, leídos el 11 de octubre de 2026 — cremación directa $1,435 con urna temporal y sin ceremonia; entierro sin velatorio $2,170, sin ataúd, bóveda ni cementerio. No publica un total de cremación con memorial ni de funeral con velatorio. Certificados de defunción aparte. La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida",
+          "sourceEn": "Riverside Funeral Home, Santa Fe: prices on its site, read October 11, 2026 — direct cremation $1,435 with a temporary urn and no ceremony; burial with no visitation $2,170, with no casket, vault, or cemetery costs. It does not publish a cremation-with-memorial total or a visitation-funeral total. Death certificates are extra. The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker",
+          "gplDateEs": "26 jul. 2026",
+          "gplDateEn": "26 Jul 2026",
+          "gplKind": "published",
+          "packages": [
+            {
+              "id": "directCremation",
+              "labelEs": "Cremación directa",
+              "labelEn": "Direct cremation",
+              "amt": 1435,
+              "noteEs": "Cremación directa con urna temporal, sin velatorio ni ceremonia (precio publicado en su sitio, leído el 11 oct. 2026). Certificados de defunción aparte.",
+              "noteEn": "Direct cremation with a temporary urn, no visitation or ceremony (price on their site, read 11 Oct 2026). Death certificates extra."
+            },
+            {
+              "id": "immediateBurial",
+              "labelEs": "Entierro inmediato",
+              "labelEn": "Immediate burial",
+              "amt": 2170,
+              "noteEs": "Entierro sin velatorio ni ceremonia. No incluye ataúd, bóveda ni cementerio.",
+              "noteEn": "Burial with no visitation or ceremony. Does not include a casket, vault, or cemetery costs."
+            },
+            {
+              "id": "memorialCremation",
+              "labelEs": "Cremación con memorial",
+              "labelEn": "Cremation with memorial",
+              "amt": 0,
+              "noteEs": "No figura en su lista publicada. Pida la lista vigente.",
+              "noteEn": "Not on their published list. Ask for the current list."
+            },
+            {
+              "id": "traditional",
+              "labelEs": "Funeral tradicional con velatorio",
+              "labelEn": "Traditional funeral with visitation",
+              "amt": 0,
+              "noteEs": "No figura en su lista publicada. Pida la lista vigente.",
+              "noteEn": "Not on their published list. Ask for the current list."
+            }
+          ]
+        },
         {
           "id": "berardinelli-family-funeral-service-santa-fe",
           "name": "Berardinelli Family Funeral Service",
@@ -106457,11 +107046,18 @@
       "localCemeteries": [],
       "nearbyCemeteries": [
         {
-          "name": "Santa Fe. New lot: ask the cemetery you choose for the list.",
-          "address": "",
+          "name": "Memorial Gardens of Santa Fe, 417 East Rodeo Dr. The Grave Solutions ad is sold.",
+          "address": "417 East Rodeo Dr.",
           "phone": "",
-          "noteEs": "Santa Fe. Lote nuevo: pida la lista en el cementerio que elija",
-          "noteEn": "Santa Fe. New lot: ask the cemetery you choose for the list"
+          "noteEs": "Memorial Gardens of Santa Fe, 417 East Rodeo Dr. El anuncio de Grave Solutions está vendido. Lote nuevo: pida la lista; no hay un precio publicado en esta guía",
+          "noteEn": "Memorial Gardens of Santa Fe, 417 East Rodeo Dr. The Grave Solutions ad is sold. New lot: ask for the list; this guide does not have a published price"
+        },
+        {
+          "name": "Santa Fe National Cemetery, 501 N Guadalupe St. Phone 505-988-6400. Space is ava",
+          "address": "501 N Guadalupe St.",
+          "phone": "505-988-6400",
+          "noteEs": "Cementerio nacional de Santa Fe, 501 N Guadalupe St. . Hay espacio para restos con ataúd y cremados. Confirme la elegibilidad; no es un precio de lote privado",
+          "noteEn": "Santa Fe National Cemetery, 501 N Guadalupe St. . Space is available for casketed and cremated remains. Confirm eligibility; this is not a private-lot price"
         }
       ],
       "other": [
@@ -106493,29 +107089,173 @@
       "pathEn": "/en/funeral-homes-cemeteries.html?estado=new-mexico&ciudad=los-ranchos",
       "guideEs": "/estados/new-mexico/albuquerque.html",
       "guideEn": "/en/states/new-mexico/albuquerque.html",
-      "sourceLineEs": "La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida.",
-      "sourceLineEn": "The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker.",
+      "sourceLineEs": "Director’s Choice: GPL 1 may. 2025 — cremación simple en persona $1,215 (en línea $995) con contenedor estándar; entierro inmediato $2,395 sin ataúd; memorial con cremación $3,895; paquete tradicional A $4,195 con ataúd de calibre 20. El permiso del OMI de $230 va aparte. French Funerals: GPL 1 jul. 2025, misma lista en sus cinco capillas — cremación directa $3,375 y entierro inmediato $3,175 con contenedor del comprador. El permiso del OMI de $236.79 no va incluido. French no publica un total de memorial ni de funeral con velatorio. La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida.",
+      "sourceLineEn": "Director’s Choice: GPL 1 May 2025 — in-person simple cremation $1,215 (online $995) with the standard container; immediate burial $2,395 with no casket; cremation memorial $3,895; traditional package A $4,195 with a 20-gauge casket. The $230 OMI permit is extra. French Funerals: GPL 1 Jul 2025, the same list at all five chapels — direct cremation $3,375 and immediate burial $3,175 with a purchaser container. The $236.79 OMI permit is not included. French does not publish a memorial total or a visitation-funeral total. The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker.",
       "localHomes": [],
       "nearbyHomes": [
         {
-          "id": "direct-funeral-cremation-services-albuquerque",
-          "name": "Direct Funeral & Cremation Services",
-          "href": "https://www.directfuneralservicesabq.com/",
-          "address": "",
-          "phone": "",
-          "sourceEs": "Pida la lista general de precios vigente. La funeraria es la única fuente oficial.",
-          "sourceEn": "Ask the funeral home for its current general price list. That list is the only official price.",
+          "id": "directors",
+          "name": "Director’s Choice",
+          "href": "https://www.nmcremation.com/GPL.pdf",
+          "address": "9316 Susan Ave SE, Albuquerque",
+          "phone": "505-275-6524",
+          "sourceEs": "Director’s Choice: lista general de precios 1 may. 2025 — cremación simple en persona $1,215 (en línea $995) con contenedor estándar; entierro inmediato $2,395 sin ataúd; memorial con cremación $3,895; paquete tradicional A $4,195 con ataúd de calibre 20. El permiso del OMI de $230 va aparte",
+          "sourceEn": "Director’s Choice: general price list 1 May 2025 — in-person simple cremation $1,215 (online $995) with the standard container; immediate burial $2,395 with no casket; cremation memorial $3,895; traditional package A $4,195 with a 20-gauge casket. The $230 OMI permit is extra",
+          "gplDateEs": "1 may. 2025",
+          "gplDateEn": "1 May 2025",
+          "gplKind": "gpl",
+          "packages": [
+            {
+              "id": "directCremation",
+              "labelEs": "Cremación directa",
+              "labelEn": "Direct cremation",
+              "amt": 1215,
+              "noteEs": "Cremación simple en persona o por teléfono, con contenedor estándar (GPL 1 may. 2025). En línea está en $995. El permiso del OMI de $230 va aparte.",
+              "noteEn": "In-person or phone simple cremation, with the standard container (GPL 1 May 2025). Online arrangements are $995. The $230 OMI permit is extra."
+            },
+            {
+              "id": "immediateBurial",
+              "labelEs": "Entierro inmediato",
+              "labelEn": "Immediate burial",
+              "amt": 2395,
+              "noteEs": "Entierro inmediato sin ataúd (GPL 1 may. 2025). Lote aparte.",
+              "noteEn": "Immediate burial with no casket (GPL 1 May 2025). Plot extra."
+            },
+            {
+              "id": "memorialCremation",
+              "labelEs": "Cremación con memorial",
+              "labelEn": "Cremation with memorial",
+              "amt": 3895,
+              "noteEs": "Servicio memorial con cremación: capilla, vista privada para la familia, carroza y contenedor estándar (GPL 1 may. 2025). Lote aparte.",
+              "noteEn": "Cremation memorial service: chapel, private family viewing, hearse, and standard container (GPL 1 May 2025). Plot extra."
+            },
+            {
+              "id": "traditional",
+              "labelEs": "Funeral tradicional con velatorio",
+              "labelEn": "Traditional funeral with visitation",
+              "amt": 4195,
+              "noteEs": "Paquete tradicional A: velatorio de un día, rosario, ceremonia y ataúd de calibre 20 sin sellar (GPL 1 may. 2025). Lote aparte.",
+              "noteEn": "Traditional package A: one-day visitation, rosary, ceremony, and a 20-gauge non-sealer casket (GPL 1 May 2025). Plot extra."
+            }
+          ]
+        },
+        {
+          "id": "french",
+          "name": "French Funerals",
+          "href": "https://irp.cdn-website.com/68ab9c76/files/uploaded/FRENCH+GPL+2025+-+July.pdf",
+          "address": "1111 University Blvd NE, Albuquerque",
+          "phone": "505-843-6333",
+          "sourceEs": "French Funerals: lista general de precios 1 jul. 2025, misma lista en sus cinco capillas — cremación directa $3,375 y entierro inmediato $3,175 con contenedor del comprador. El permiso del OMI de $236.79 no va incluido. French no publica un total de memorial ni de funeral con velatorio. La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida",
+          "sourceEn": "French Funerals: general price list 1 Jul 2025, the same list at all five chapels — direct cremation $3,375 and immediate burial $3,175 with a purchaser container. The $236.79 OMI permit is not included. French does not publish a memorial total or a visitation-funeral total. The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker",
+          "gplDateEs": "1 jul. 2025",
+          "gplDateEn": "1 Jul 2025",
+          "gplKind": "gpl",
+          "packages": [
+            {
+              "id": "directCremation",
+              "labelEs": "Cremación directa",
+              "labelEn": "Direct cremation",
+              "amt": 3375,
+              "noteEs": "Cremación directa, contenedor del comprador (GPL 1 jul. 2025). El permiso del OMI de $236.79 no va incluido.",
+              "noteEn": "Direct cremation, purchaser container (GPL 1 Jul 2025). The $236.79 OMI permit is not included."
+            },
+            {
+              "id": "immediateBurial",
+              "labelEs": "Entierro inmediato",
+              "labelEn": "Immediate burial",
+              "amt": 3175,
+              "noteEs": "Entierro inmediato, contenedor del comprador. Sin ceremonia. Lote aparte.",
+              "noteEn": "Immediate burial, purchaser container. No ceremony. Plot extra."
+            },
+            {
+              "id": "memorialCremation",
+              "labelEs": "Cremación con memorial",
+              "labelEn": "Cremation with memorial",
+              "amt": 0,
+              "noteEs": "No figura en su lista publicada. Pida la lista vigente.",
+              "noteEn": "Not on their published list. Ask for the current list."
+            },
+            {
+              "id": "traditional",
+              "labelEs": "Funeral tradicional con velatorio",
+              "labelEn": "Traditional funeral with visitation",
+              "amt": 0,
+              "noteEs": "No figura en su lista publicada. Pida la lista vigente.",
+              "noteEn": "Not on their published list. Ask for the current list."
+            }
+          ]
+        },
+        {
+          "id": "daniels-family-carlisle-chapel",
+          "name": "Daniels Family — Carlisle Chapel",
+          "href": "https://www.danielsfuneral.com/",
+          "address": "3113 Carlisle Blvd NE",
+          "phone": "505-884-1188",
+          "sourceEs": "",
+          "sourceEn": "",
           "gplDateEs": "",
           "gplDateEn": "",
           "gplKind": "none",
           "packages": []
         },
         {
-          "id": "french-funerals-cremations-albuquerque",
-          "name": "French Funerals & Cremations",
-          "href": "https://www.frenchfunerals.com/",
-          "address": "1111 University Blvd NE",
-          "phone": "505-843-6333",
+          "id": "daniels-family-wyoming-chapel",
+          "name": "Daniels Family — Wyoming Chapel",
+          "href": "https://www.danielsfuneral.com/",
+          "address": "7601 Wyoming Blvd NE",
+          "phone": "505-821-0010",
+          "sourceEs": "",
+          "sourceEn": "",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "none",
+          "packages": []
+        },
+        {
+          "id": "alameda-mortuary",
+          "name": "Alameda Mortuary",
+          "href": "https://www.danielsfuneral.com/",
+          "address": "9420 4th St NW",
+          "phone": "505-898-3160",
+          "sourceEs": "",
+          "sourceEn": "",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "none",
+          "packages": []
+        },
+        {
+          "id": "garcia-mortuary",
+          "name": "Garcia Mortuary",
+          "href": "https://www.danielsfuneral.com/",
+          "address": "717 Stover Ave SW",
+          "phone": "505-243-5222",
+          "sourceEs": "",
+          "sourceEn": "",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "none",
+          "packages": []
+        },
+        {
+          "id": "strong-thorne-mortuary",
+          "name": "Strong-Thorne Mortuary",
+          "href": "https://www.danielsfuneral.com/",
+          "address": "1100 Coal Ave SE",
+          "phone": "505-842-8800",
+          "sourceEs": "",
+          "sourceEn": "",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "none",
+          "packages": []
+        },
+        {
+          "id": "direct-funeral-cremation-services-albuquerque",
+          "name": "Direct Funeral & Cremation Services",
+          "href": "https://www.directfuneralservicesabq.com/",
+          "address": "",
+          "phone": "",
           "sourceEs": "Pida la lista general de precios vigente. La funeraria es la única fuente oficial.",
           "sourceEn": "Ask the funeral home for its current general price list. That list is the only official price.",
           "gplDateEs": "",
@@ -106553,11 +107293,18 @@
       "localCemeteries": [],
       "nearbyCemeteries": [
         {
-          "name": "Albuquerque. New lot: ask the cemetery you choose for the list.",
-          "address": "",
-          "phone": "",
-          "noteEs": "Albuquerque. Lote nuevo: pida la lista en el cementerio que elija",
-          "noteEn": "Albuquerque. New lot: ask the cemetery you choose for the list"
+          "name": "$1,600",
+          "address": "9500 San Pedro Dr",
+          "phone": "505-821-0010",
+          "noteEs": "Sandia Memory Gardens, 9500 San Pedro Dr NE. . Reventa vista el 9 de enero de 2025: por espacio. Lote nuevo: pida la lista; no está en la web",
+          "noteEn": "Sandia Memory Gardens, 9500 San Pedro Dr NE. . Resale seen January 9, 2025: per space. New lot: ask for the list; it is not on the website"
+        },
+        {
+          "name": "Sunset Memorial Park, 924 Menaul Blvd NE. Phone 505-345-3536. They do not publis",
+          "address": "924 Menaul Blvd",
+          "phone": "505-345-3536",
+          "noteEs": "Sunset Memorial Park, 924 Menaul Blvd NE. . No publica el precio del lote en internet",
+          "noteEn": "Sunset Memorial Park, 924 Menaul Blvd NE. . They do not publish a lot price online"
         }
       ],
       "other": [
@@ -106592,15 +107339,29 @@
       "sourceLineEs": "La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida.",
       "sourceLineEn": "The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker.",
       "localHomes": [],
-      "nearbyHomes": [],
+      "nearbyHomes": [
+        {
+          "id": "baca-s-funeral-chapels-sunset-crematory",
+          "name": "Baca’s Funeral Chapels & Sunset Crematory",
+          "href": "https://www.bacasfuneralchapelslascruces.com/",
+          "address": "300 East Boutz",
+          "phone": "575-527-2222",
+          "sourceEs": "",
+          "sourceEn": "",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "none",
+          "packages": []
+        }
+      ],
       "localCemeteries": [],
       "nearbyCemeteries": [
         {
-          "name": "Hillcrest Memorial Gardens, Las Cruces. Resale seen September 28, 2026: $10,000 ",
-          "address": "",
+          "name": "Hillcrest Memorial Gardens, 5140 W Picacho Ave, Las Cruces. Resale on the board ",
+          "address": "5140 W Picacho Ave",
           "phone": "",
-          "noteEs": "Hillcrest Memorial Gardens, Las Cruces. Reventa vista el 28 de septiembre de 2026: $10,000 o $11,500 por dos espacios juntos. Lote nuevo: pida la lista en la oficina",
-          "noteEn": "Hillcrest Memorial Gardens, Las Cruces. Resale seen September 28, 2026: $10,000 or $11,500 for two spaces together. New lot: ask the office for the list"
+          "noteEs": "Hillcrest Memorial Gardens, 5140 W Picacho Ave, Las Cruces. Reventa en el tablero el 11 de octubre de 2026: $10,000 o $11,500 por dos espacios juntos. Lote nuevo: pida la lista en la oficina",
+          "noteEn": "Hillcrest Memorial Gardens, 5140 W Picacho Ave, Las Cruces. Resale on the board October 11, 2026: $10,000 or $11,500 for two spaces together. New lot: ask the office for the list"
         }
       ],
       "other": [
@@ -106632,29 +107393,173 @@
       "pathEn": "/en/funeral-homes-cemeteries.html?estado=new-mexico&ciudad=north-valley",
       "guideEs": "/estados/new-mexico/albuquerque.html",
       "guideEn": "/en/states/new-mexico/albuquerque.html",
-      "sourceLineEs": "La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida.",
-      "sourceLineEn": "The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker.",
+      "sourceLineEs": "Director’s Choice: GPL 1 may. 2025 — cremación simple en persona $1,215 (en línea $995) con contenedor estándar; entierro inmediato $2,395 sin ataúd; memorial con cremación $3,895; paquete tradicional A $4,195 con ataúd de calibre 20. El permiso del OMI de $230 va aparte. French Funerals: GPL 1 jul. 2025, misma lista en sus cinco capillas — cremación directa $3,375 y entierro inmediato $3,175 con contenedor del comprador. El permiso del OMI de $236.79 no va incluido. French no publica un total de memorial ni de funeral con velatorio. La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida.",
+      "sourceLineEn": "Director’s Choice: GPL 1 May 2025 — in-person simple cremation $1,215 (online $995) with the standard container; immediate burial $2,395 with no casket; cremation memorial $3,895; traditional package A $4,195 with a 20-gauge casket. The $230 OMI permit is extra. French Funerals: GPL 1 Jul 2025, the same list at all five chapels — direct cremation $3,375 and immediate burial $3,175 with a purchaser container. The $236.79 OMI permit is not included. French does not publish a memorial total or a visitation-funeral total. The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker.",
       "localHomes": [],
       "nearbyHomes": [
         {
-          "id": "direct-funeral-cremation-services-albuquerque",
-          "name": "Direct Funeral & Cremation Services",
-          "href": "https://www.directfuneralservicesabq.com/",
-          "address": "",
-          "phone": "",
-          "sourceEs": "Pida la lista general de precios vigente. La funeraria es la única fuente oficial.",
-          "sourceEn": "Ask the funeral home for its current general price list. That list is the only official price.",
+          "id": "directors",
+          "name": "Director’s Choice",
+          "href": "https://www.nmcremation.com/GPL.pdf",
+          "address": "9316 Susan Ave SE, Albuquerque",
+          "phone": "505-275-6524",
+          "sourceEs": "Director’s Choice: lista general de precios 1 may. 2025 — cremación simple en persona $1,215 (en línea $995) con contenedor estándar; entierro inmediato $2,395 sin ataúd; memorial con cremación $3,895; paquete tradicional A $4,195 con ataúd de calibre 20. El permiso del OMI de $230 va aparte",
+          "sourceEn": "Director’s Choice: general price list 1 May 2025 — in-person simple cremation $1,215 (online $995) with the standard container; immediate burial $2,395 with no casket; cremation memorial $3,895; traditional package A $4,195 with a 20-gauge casket. The $230 OMI permit is extra",
+          "gplDateEs": "1 may. 2025",
+          "gplDateEn": "1 May 2025",
+          "gplKind": "gpl",
+          "packages": [
+            {
+              "id": "directCremation",
+              "labelEs": "Cremación directa",
+              "labelEn": "Direct cremation",
+              "amt": 1215,
+              "noteEs": "Cremación simple en persona o por teléfono, con contenedor estándar (GPL 1 may. 2025). En línea está en $995. El permiso del OMI de $230 va aparte.",
+              "noteEn": "In-person or phone simple cremation, with the standard container (GPL 1 May 2025). Online arrangements are $995. The $230 OMI permit is extra."
+            },
+            {
+              "id": "immediateBurial",
+              "labelEs": "Entierro inmediato",
+              "labelEn": "Immediate burial",
+              "amt": 2395,
+              "noteEs": "Entierro inmediato sin ataúd (GPL 1 may. 2025). Lote aparte.",
+              "noteEn": "Immediate burial with no casket (GPL 1 May 2025). Plot extra."
+            },
+            {
+              "id": "memorialCremation",
+              "labelEs": "Cremación con memorial",
+              "labelEn": "Cremation with memorial",
+              "amt": 3895,
+              "noteEs": "Servicio memorial con cremación: capilla, vista privada para la familia, carroza y contenedor estándar (GPL 1 may. 2025). Lote aparte.",
+              "noteEn": "Cremation memorial service: chapel, private family viewing, hearse, and standard container (GPL 1 May 2025). Plot extra."
+            },
+            {
+              "id": "traditional",
+              "labelEs": "Funeral tradicional con velatorio",
+              "labelEn": "Traditional funeral with visitation",
+              "amt": 4195,
+              "noteEs": "Paquete tradicional A: velatorio de un día, rosario, ceremonia y ataúd de calibre 20 sin sellar (GPL 1 may. 2025). Lote aparte.",
+              "noteEn": "Traditional package A: one-day visitation, rosary, ceremony, and a 20-gauge non-sealer casket (GPL 1 May 2025). Plot extra."
+            }
+          ]
+        },
+        {
+          "id": "french",
+          "name": "French Funerals",
+          "href": "https://irp.cdn-website.com/68ab9c76/files/uploaded/FRENCH+GPL+2025+-+July.pdf",
+          "address": "1111 University Blvd NE, Albuquerque",
+          "phone": "505-843-6333",
+          "sourceEs": "French Funerals: lista general de precios 1 jul. 2025, misma lista en sus cinco capillas — cremación directa $3,375 y entierro inmediato $3,175 con contenedor del comprador. El permiso del OMI de $236.79 no va incluido. French no publica un total de memorial ni de funeral con velatorio. La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida",
+          "sourceEn": "French Funerals: general price list 1 Jul 2025, the same list at all five chapels — direct cremation $3,375 and immediate burial $3,175 with a purchaser container. The $236.79 OMI permit is not included. French does not publish a memorial total or a visitation-funeral total. The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker",
+          "gplDateEs": "1 jul. 2025",
+          "gplDateEn": "1 Jul 2025",
+          "gplKind": "gpl",
+          "packages": [
+            {
+              "id": "directCremation",
+              "labelEs": "Cremación directa",
+              "labelEn": "Direct cremation",
+              "amt": 3375,
+              "noteEs": "Cremación directa, contenedor del comprador (GPL 1 jul. 2025). El permiso del OMI de $236.79 no va incluido.",
+              "noteEn": "Direct cremation, purchaser container (GPL 1 Jul 2025). The $236.79 OMI permit is not included."
+            },
+            {
+              "id": "immediateBurial",
+              "labelEs": "Entierro inmediato",
+              "labelEn": "Immediate burial",
+              "amt": 3175,
+              "noteEs": "Entierro inmediato, contenedor del comprador. Sin ceremonia. Lote aparte.",
+              "noteEn": "Immediate burial, purchaser container. No ceremony. Plot extra."
+            },
+            {
+              "id": "memorialCremation",
+              "labelEs": "Cremación con memorial",
+              "labelEn": "Cremation with memorial",
+              "amt": 0,
+              "noteEs": "No figura en su lista publicada. Pida la lista vigente.",
+              "noteEn": "Not on their published list. Ask for the current list."
+            },
+            {
+              "id": "traditional",
+              "labelEs": "Funeral tradicional con velatorio",
+              "labelEn": "Traditional funeral with visitation",
+              "amt": 0,
+              "noteEs": "No figura en su lista publicada. Pida la lista vigente.",
+              "noteEn": "Not on their published list. Ask for the current list."
+            }
+          ]
+        },
+        {
+          "id": "daniels-family-carlisle-chapel",
+          "name": "Daniels Family — Carlisle Chapel",
+          "href": "https://www.danielsfuneral.com/",
+          "address": "3113 Carlisle Blvd NE",
+          "phone": "505-884-1188",
+          "sourceEs": "",
+          "sourceEn": "",
           "gplDateEs": "",
           "gplDateEn": "",
           "gplKind": "none",
           "packages": []
         },
         {
-          "id": "french-funerals-cremations-albuquerque",
-          "name": "French Funerals & Cremations",
-          "href": "https://www.frenchfunerals.com/",
-          "address": "1111 University Blvd NE",
-          "phone": "505-843-6333",
+          "id": "daniels-family-wyoming-chapel",
+          "name": "Daniels Family — Wyoming Chapel",
+          "href": "https://www.danielsfuneral.com/",
+          "address": "7601 Wyoming Blvd NE",
+          "phone": "505-821-0010",
+          "sourceEs": "",
+          "sourceEn": "",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "none",
+          "packages": []
+        },
+        {
+          "id": "alameda-mortuary",
+          "name": "Alameda Mortuary",
+          "href": "https://www.danielsfuneral.com/",
+          "address": "9420 4th St NW",
+          "phone": "505-898-3160",
+          "sourceEs": "",
+          "sourceEn": "",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "none",
+          "packages": []
+        },
+        {
+          "id": "garcia-mortuary",
+          "name": "Garcia Mortuary",
+          "href": "https://www.danielsfuneral.com/",
+          "address": "717 Stover Ave SW",
+          "phone": "505-243-5222",
+          "sourceEs": "",
+          "sourceEn": "",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "none",
+          "packages": []
+        },
+        {
+          "id": "strong-thorne-mortuary",
+          "name": "Strong-Thorne Mortuary",
+          "href": "https://www.danielsfuneral.com/",
+          "address": "1100 Coal Ave SE",
+          "phone": "505-842-8800",
+          "sourceEs": "",
+          "sourceEn": "",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "none",
+          "packages": []
+        },
+        {
+          "id": "direct-funeral-cremation-services-albuquerque",
+          "name": "Direct Funeral & Cremation Services",
+          "href": "https://www.directfuneralservicesabq.com/",
+          "address": "",
+          "phone": "",
           "sourceEs": "Pida la lista general de precios vigente. La funeraria es la única fuente oficial.",
           "sourceEn": "Ask the funeral home for its current general price list. That list is the only official price.",
           "gplDateEs": "",
@@ -106692,11 +107597,18 @@
       "localCemeteries": [],
       "nearbyCemeteries": [
         {
-          "name": "Albuquerque. New lot: ask the cemetery you choose for the list.",
-          "address": "",
-          "phone": "",
-          "noteEs": "Albuquerque. Lote nuevo: pida la lista en el cementerio que elija",
-          "noteEn": "Albuquerque. New lot: ask the cemetery you choose for the list"
+          "name": "$1,600",
+          "address": "9500 San Pedro Dr",
+          "phone": "505-821-0010",
+          "noteEs": "Sandia Memory Gardens, 9500 San Pedro Dr NE. . Reventa vista el 9 de enero de 2025: por espacio. Lote nuevo: pida la lista; no está en la web",
+          "noteEn": "Sandia Memory Gardens, 9500 San Pedro Dr NE. . Resale seen January 9, 2025: per space. New lot: ask for the list; it is not on the website"
+        },
+        {
+          "name": "Sunset Memorial Park, 924 Menaul Blvd NE. Phone 505-345-3536. They do not publis",
+          "address": "924 Menaul Blvd",
+          "phone": "505-345-3536",
+          "noteEs": "Sunset Memorial Park, 924 Menaul Blvd NE. . No publica el precio del lote en internet",
+          "noteEn": "Sunset Memorial Park, 924 Menaul Blvd NE. . They do not publish a lot price online"
         }
       ],
       "other": [
@@ -106728,18 +107640,91 @@
       "pathEn": "/en/funeral-homes-cemeteries.html?estado=new-mexico&ciudad=placitas",
       "guideEs": "/estados/new-mexico/rio-rancho.html",
       "guideEn": "/en/states/new-mexico/rio-rancho.html",
-      "sourceLineEs": "La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida.",
-      "sourceLineEn": "The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker.",
+      "sourceLineEs": "French Funerals, capilla de Rio Rancho: GPL 1 jul. 2025, la misma lista que en Albuquerque — cremación directa $3,375 y entierro inmediato $3,175 con contenedor del comprador. El permiso del OMI de $236.79 no va incluido. French no publica un total de memorial ni de funeral con velatorio. La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida.",
+      "sourceLineEn": "French Funerals, Rio Rancho chapel: GPL 1 Jul 2025, the same list as Albuquerque — direct cremation $3,375 and immediate burial $3,175 with a purchaser container. The $236.79 OMI permit is not included. French does not publish a memorial total or a visitation-funeral total. The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker.",
       "localHomes": [],
-      "nearbyHomes": [],
+      "nearbyHomes": [
+        {
+          "id": "french",
+          "name": "French Funerals",
+          "href": "https://irp.cdn-website.com/68ab9c76/files/uploaded/FRENCH+GPL+2025+-+July.pdf",
+          "address": "1275 Unser Blvd NE, Rio Rancho",
+          "phone": "505-338-2000",
+          "sourceEs": "French Funerals, capilla de Rio Rancho: lista general de precios 1 jul. 2025, la misma lista que en Albuquerque — cremación directa $3,375 y entierro inmediato $3,175 con contenedor del comprador. El permiso del OMI de $236.79 no va incluido. French no publica un total de memorial ni de funeral con velatorio. La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida",
+          "sourceEn": "French Funerals, Rio Rancho chapel: general price list 1 Jul 2025, the same list as Albuquerque — direct cremation $3,375 and immediate burial $3,175 with a purchaser container. The $236.79 OMI permit is not included. French does not publish a memorial total or a visitation-funeral total. The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker",
+          "gplDateEs": "1 jul. 2025",
+          "gplDateEn": "1 Jul 2025",
+          "gplKind": "gpl",
+          "packages": [
+            {
+              "id": "directCremation",
+              "labelEs": "Cremación directa",
+              "labelEn": "Direct cremation",
+              "amt": 3375,
+              "noteEs": "Cremación directa, contenedor del comprador (GPL 1 jul. 2025). El permiso del OMI de $236.79 no va incluido.",
+              "noteEn": "Direct cremation, purchaser container (GPL 1 Jul 2025). The $236.79 OMI permit is not included."
+            },
+            {
+              "id": "immediateBurial",
+              "labelEs": "Entierro inmediato",
+              "labelEn": "Immediate burial",
+              "amt": 3175,
+              "noteEs": "Entierro inmediato, contenedor del comprador. Sin ceremonia. Lote aparte.",
+              "noteEn": "Immediate burial, purchaser container. No ceremony. Plot extra."
+            },
+            {
+              "id": "memorialCremation",
+              "labelEs": "Cremación con memorial",
+              "labelEn": "Cremation with memorial",
+              "amt": 0,
+              "noteEs": "No figura en su lista publicada. Pida la lista vigente.",
+              "noteEn": "Not on their published list. Ask for the current list."
+            },
+            {
+              "id": "traditional",
+              "labelEs": "Funeral tradicional con velatorio",
+              "labelEn": "Traditional funeral with visitation",
+              "amt": 0,
+              "noteEs": "No figura en su lista publicada. Pida la lista vigente.",
+              "noteEn": "Not on their published list. Ask for the current list."
+            }
+          ]
+        },
+        {
+          "id": "daniels-family-sara-road-chapel",
+          "name": "Daniels Family — Sara Road Chapel",
+          "href": "https://www.danielsfuneral.com/sara-road-chapel",
+          "address": "4310 Sara Rd",
+          "phone": "505-892-9920",
+          "sourceEs": "",
+          "sourceEn": "",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "none",
+          "packages": []
+        },
+        {
+          "id": "daniels-family-southern-chapel",
+          "name": "Daniels Family — Southern Chapel",
+          "href": "https://www.danielsfuneral.com/",
+          "address": "2400 Southern Blvd SE",
+          "phone": "505-891-9192",
+          "sourceEs": "",
+          "sourceEn": "",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "none",
+          "packages": []
+        }
+      ],
       "localCemeteries": [],
       "nearbyCemeteries": [
         {
-          "name": "Rio Rancho. New lot: ask the cemetery you choose for the list.",
-          "address": "",
-          "phone": "",
-          "noteEs": "Rio Rancho. Lote nuevo: pida la lista en el cementerio que elija",
-          "noteEn": "Rio Rancho. New lot: ask the cemetery you choose for the list"
+          "name": "Vista Verde Memorial Park, 4310 Sara Rd SE. Resale: ad listed November 30, 2015,",
+          "address": "4310 Sara Rd",
+          "phone": "505-892-9920",
+          "noteEs": "Vista Verde Memorial Park, 4310 Sara Rd SE. Reventa: anuncio del 30 de noviembre de 2015, aún en el tablero el 11 de octubre de 2026, a $1,595 por espacio. Lote nuevo: pida la lista. Daniels Family, capilla Sara Road, está en esa dirección",
+          "noteEn": "Vista Verde Memorial Park, 4310 Sara Rd SE. Resale: ad listed November 30, 2015, still on the board October 11, 2026, at $1,595 per space. New lot: ask for the list. Daniels Family’s Sara Road Chapel is at that address"
         }
       ],
       "other": [
@@ -106771,29 +107756,173 @@
       "pathEn": "/en/funeral-homes-cemeteries.html?estado=new-mexico&ciudad=south-valley",
       "guideEs": "/estados/new-mexico/albuquerque.html",
       "guideEn": "/en/states/new-mexico/albuquerque.html",
-      "sourceLineEs": "La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida.",
-      "sourceLineEn": "The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker.",
+      "sourceLineEs": "Director’s Choice: GPL 1 may. 2025 — cremación simple en persona $1,215 (en línea $995) con contenedor estándar; entierro inmediato $2,395 sin ataúd; memorial con cremación $3,895; paquete tradicional A $4,195 con ataúd de calibre 20. El permiso del OMI de $230 va aparte. French Funerals: GPL 1 jul. 2025, misma lista en sus cinco capillas — cremación directa $3,375 y entierro inmediato $3,175 con contenedor del comprador. El permiso del OMI de $236.79 no va incluido. French no publica un total de memorial ni de funeral con velatorio. La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida.",
+      "sourceLineEn": "Director’s Choice: GPL 1 May 2025 — in-person simple cremation $1,215 (online $995) with the standard container; immediate burial $2,395 with no casket; cremation memorial $3,895; traditional package A $4,195 with a 20-gauge casket. The $230 OMI permit is extra. French Funerals: GPL 1 Jul 2025, the same list at all five chapels — direct cremation $3,375 and immediate burial $3,175 with a purchaser container. The $236.79 OMI permit is not included. French does not publish a memorial total or a visitation-funeral total. The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker.",
       "localHomes": [],
       "nearbyHomes": [
         {
-          "id": "direct-funeral-cremation-services-albuquerque",
-          "name": "Direct Funeral & Cremation Services",
-          "href": "https://www.directfuneralservicesabq.com/",
-          "address": "",
-          "phone": "",
-          "sourceEs": "Pida la lista general de precios vigente. La funeraria es la única fuente oficial.",
-          "sourceEn": "Ask the funeral home for its current general price list. That list is the only official price.",
+          "id": "directors",
+          "name": "Director’s Choice",
+          "href": "https://www.nmcremation.com/GPL.pdf",
+          "address": "9316 Susan Ave SE, Albuquerque",
+          "phone": "505-275-6524",
+          "sourceEs": "Director’s Choice: lista general de precios 1 may. 2025 — cremación simple en persona $1,215 (en línea $995) con contenedor estándar; entierro inmediato $2,395 sin ataúd; memorial con cremación $3,895; paquete tradicional A $4,195 con ataúd de calibre 20. El permiso del OMI de $230 va aparte",
+          "sourceEn": "Director’s Choice: general price list 1 May 2025 — in-person simple cremation $1,215 (online $995) with the standard container; immediate burial $2,395 with no casket; cremation memorial $3,895; traditional package A $4,195 with a 20-gauge casket. The $230 OMI permit is extra",
+          "gplDateEs": "1 may. 2025",
+          "gplDateEn": "1 May 2025",
+          "gplKind": "gpl",
+          "packages": [
+            {
+              "id": "directCremation",
+              "labelEs": "Cremación directa",
+              "labelEn": "Direct cremation",
+              "amt": 1215,
+              "noteEs": "Cremación simple en persona o por teléfono, con contenedor estándar (GPL 1 may. 2025). En línea está en $995. El permiso del OMI de $230 va aparte.",
+              "noteEn": "In-person or phone simple cremation, with the standard container (GPL 1 May 2025). Online arrangements are $995. The $230 OMI permit is extra."
+            },
+            {
+              "id": "immediateBurial",
+              "labelEs": "Entierro inmediato",
+              "labelEn": "Immediate burial",
+              "amt": 2395,
+              "noteEs": "Entierro inmediato sin ataúd (GPL 1 may. 2025). Lote aparte.",
+              "noteEn": "Immediate burial with no casket (GPL 1 May 2025). Plot extra."
+            },
+            {
+              "id": "memorialCremation",
+              "labelEs": "Cremación con memorial",
+              "labelEn": "Cremation with memorial",
+              "amt": 3895,
+              "noteEs": "Servicio memorial con cremación: capilla, vista privada para la familia, carroza y contenedor estándar (GPL 1 may. 2025). Lote aparte.",
+              "noteEn": "Cremation memorial service: chapel, private family viewing, hearse, and standard container (GPL 1 May 2025). Plot extra."
+            },
+            {
+              "id": "traditional",
+              "labelEs": "Funeral tradicional con velatorio",
+              "labelEn": "Traditional funeral with visitation",
+              "amt": 4195,
+              "noteEs": "Paquete tradicional A: velatorio de un día, rosario, ceremonia y ataúd de calibre 20 sin sellar (GPL 1 may. 2025). Lote aparte.",
+              "noteEn": "Traditional package A: one-day visitation, rosary, ceremony, and a 20-gauge non-sealer casket (GPL 1 May 2025). Plot extra."
+            }
+          ]
+        },
+        {
+          "id": "french",
+          "name": "French Funerals",
+          "href": "https://irp.cdn-website.com/68ab9c76/files/uploaded/FRENCH+GPL+2025+-+July.pdf",
+          "address": "1111 University Blvd NE, Albuquerque",
+          "phone": "505-843-6333",
+          "sourceEs": "French Funerals: lista general de precios 1 jul. 2025, misma lista en sus cinco capillas — cremación directa $3,375 y entierro inmediato $3,175 con contenedor del comprador. El permiso del OMI de $236.79 no va incluido. French no publica un total de memorial ni de funeral con velatorio. La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida",
+          "sourceEn": "French Funerals: general price list 1 Jul 2025, the same list at all five chapels — direct cremation $3,375 and immediate burial $3,175 with a purchaser container. The $236.79 OMI permit is not included. French does not publish a memorial total or a visitation-funeral total. The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker",
+          "gplDateEs": "1 jul. 2025",
+          "gplDateEn": "1 Jul 2025",
+          "gplKind": "gpl",
+          "packages": [
+            {
+              "id": "directCremation",
+              "labelEs": "Cremación directa",
+              "labelEn": "Direct cremation",
+              "amt": 3375,
+              "noteEs": "Cremación directa, contenedor del comprador (GPL 1 jul. 2025). El permiso del OMI de $236.79 no va incluido.",
+              "noteEn": "Direct cremation, purchaser container (GPL 1 Jul 2025). The $236.79 OMI permit is not included."
+            },
+            {
+              "id": "immediateBurial",
+              "labelEs": "Entierro inmediato",
+              "labelEn": "Immediate burial",
+              "amt": 3175,
+              "noteEs": "Entierro inmediato, contenedor del comprador. Sin ceremonia. Lote aparte.",
+              "noteEn": "Immediate burial, purchaser container. No ceremony. Plot extra."
+            },
+            {
+              "id": "memorialCremation",
+              "labelEs": "Cremación con memorial",
+              "labelEn": "Cremation with memorial",
+              "amt": 0,
+              "noteEs": "No figura en su lista publicada. Pida la lista vigente.",
+              "noteEn": "Not on their published list. Ask for the current list."
+            },
+            {
+              "id": "traditional",
+              "labelEs": "Funeral tradicional con velatorio",
+              "labelEn": "Traditional funeral with visitation",
+              "amt": 0,
+              "noteEs": "No figura en su lista publicada. Pida la lista vigente.",
+              "noteEn": "Not on their published list. Ask for the current list."
+            }
+          ]
+        },
+        {
+          "id": "daniels-family-carlisle-chapel",
+          "name": "Daniels Family — Carlisle Chapel",
+          "href": "https://www.danielsfuneral.com/",
+          "address": "3113 Carlisle Blvd NE",
+          "phone": "505-884-1188",
+          "sourceEs": "",
+          "sourceEn": "",
           "gplDateEs": "",
           "gplDateEn": "",
           "gplKind": "none",
           "packages": []
         },
         {
-          "id": "french-funerals-cremations-albuquerque",
-          "name": "French Funerals & Cremations",
-          "href": "https://www.frenchfunerals.com/",
-          "address": "1111 University Blvd NE",
-          "phone": "505-843-6333",
+          "id": "daniels-family-wyoming-chapel",
+          "name": "Daniels Family — Wyoming Chapel",
+          "href": "https://www.danielsfuneral.com/",
+          "address": "7601 Wyoming Blvd NE",
+          "phone": "505-821-0010",
+          "sourceEs": "",
+          "sourceEn": "",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "none",
+          "packages": []
+        },
+        {
+          "id": "alameda-mortuary",
+          "name": "Alameda Mortuary",
+          "href": "https://www.danielsfuneral.com/",
+          "address": "9420 4th St NW",
+          "phone": "505-898-3160",
+          "sourceEs": "",
+          "sourceEn": "",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "none",
+          "packages": []
+        },
+        {
+          "id": "garcia-mortuary",
+          "name": "Garcia Mortuary",
+          "href": "https://www.danielsfuneral.com/",
+          "address": "717 Stover Ave SW",
+          "phone": "505-243-5222",
+          "sourceEs": "",
+          "sourceEn": "",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "none",
+          "packages": []
+        },
+        {
+          "id": "strong-thorne-mortuary",
+          "name": "Strong-Thorne Mortuary",
+          "href": "https://www.danielsfuneral.com/",
+          "address": "1100 Coal Ave SE",
+          "phone": "505-842-8800",
+          "sourceEs": "",
+          "sourceEn": "",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "none",
+          "packages": []
+        },
+        {
+          "id": "direct-funeral-cremation-services-albuquerque",
+          "name": "Direct Funeral & Cremation Services",
+          "href": "https://www.directfuneralservicesabq.com/",
+          "address": "",
+          "phone": "",
           "sourceEs": "Pida la lista general de precios vigente. La funeraria es la única fuente oficial.",
           "sourceEn": "Ask the funeral home for its current general price list. That list is the only official price.",
           "gplDateEs": "",
@@ -106831,11 +107960,18 @@
       "localCemeteries": [],
       "nearbyCemeteries": [
         {
-          "name": "Albuquerque. New lot: ask the cemetery you choose for the list.",
-          "address": "",
-          "phone": "",
-          "noteEs": "Albuquerque. Lote nuevo: pida la lista en el cementerio que elija",
-          "noteEn": "Albuquerque. New lot: ask the cemetery you choose for the list"
+          "name": "$1,600",
+          "address": "9500 San Pedro Dr",
+          "phone": "505-821-0010",
+          "noteEs": "Sandia Memory Gardens, 9500 San Pedro Dr NE. . Reventa vista el 9 de enero de 2025: por espacio. Lote nuevo: pida la lista; no está en la web",
+          "noteEn": "Sandia Memory Gardens, 9500 San Pedro Dr NE. . Resale seen January 9, 2025: per space. New lot: ask for the list; it is not on the website"
+        },
+        {
+          "name": "Sunset Memorial Park, 924 Menaul Blvd NE. Phone 505-345-3536. They do not publis",
+          "address": "924 Menaul Blvd",
+          "phone": "505-345-3536",
+          "noteEs": "Sunset Memorial Park, 924 Menaul Blvd NE. . No publica el precio del lote en internet",
+          "noteEn": "Sunset Memorial Park, 924 Menaul Blvd NE. . They do not publish a lot price online"
         }
       ],
       "other": [
@@ -106870,15 +108006,29 @@
       "sourceLineEs": "La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida.",
       "sourceLineEn": "The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker.",
       "localHomes": [],
-      "nearbyHomes": [],
+      "nearbyHomes": [
+        {
+          "id": "baca-s-funeral-chapels-sunset-crematory",
+          "name": "Baca’s Funeral Chapels & Sunset Crematory",
+          "href": "https://www.bacasfuneralchapelslascruces.com/",
+          "address": "300 East Boutz",
+          "phone": "575-527-2222",
+          "sourceEs": "",
+          "sourceEn": "",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "none",
+          "packages": []
+        }
+      ],
       "localCemeteries": [],
       "nearbyCemeteries": [
         {
-          "name": "Hillcrest Memorial Gardens, Las Cruces. Resale seen September 28, 2026: $10,000 ",
-          "address": "",
+          "name": "Hillcrest Memorial Gardens, 5140 W Picacho Ave, Las Cruces. Resale on the board ",
+          "address": "5140 W Picacho Ave",
           "phone": "",
-          "noteEs": "Hillcrest Memorial Gardens, Las Cruces. Reventa vista el 28 de septiembre de 2026: $10,000 o $11,500 por dos espacios juntos. Lote nuevo: pida la lista en la oficina",
-          "noteEn": "Hillcrest Memorial Gardens, Las Cruces. Resale seen September 28, 2026: $10,000 or $11,500 for two spaces together. New lot: ask the office for the list"
+          "noteEs": "Hillcrest Memorial Gardens, 5140 W Picacho Ave, Las Cruces. Reventa en el tablero el 11 de octubre de 2026: $10,000 o $11,500 por dos espacios juntos. Lote nuevo: pida la lista en la oficina",
+          "noteEn": "Hillcrest Memorial Gardens, 5140 W Picacho Ave, Las Cruces. Resale on the board October 11, 2026: $10,000 or $11,500 for two spaces together. New lot: ask the office for the list"
         }
       ],
       "other": [
@@ -106910,28 +108060,172 @@
       "pathEn": "/en/funeral-homes-cemeteries.html?estado=new-mexico&ciudad=albuquerque",
       "guideEs": "/estados/new-mexico/albuquerque.html",
       "guideEn": "/en/states/new-mexico/albuquerque.html",
-      "sourceLineEs": "La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida.",
-      "sourceLineEn": "The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker.",
+      "sourceLineEs": "Director’s Choice: GPL 1 may. 2025 — cremación simple en persona $1,215 (en línea $995) con contenedor estándar; entierro inmediato $2,395 sin ataúd; memorial con cremación $3,895; paquete tradicional A $4,195 con ataúd de calibre 20. El permiso del OMI de $230 va aparte. French Funerals: GPL 1 jul. 2025, misma lista en sus cinco capillas — cremación directa $3,375 y entierro inmediato $3,175 con contenedor del comprador. El permiso del OMI de $236.79 no va incluido. French no publica un total de memorial ni de funeral con velatorio. La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida.",
+      "sourceLineEn": "Director’s Choice: GPL 1 May 2025 — in-person simple cremation $1,215 (online $995) with the standard container; immediate burial $2,395 with no casket; cremation memorial $3,895; traditional package A $4,195 with a 20-gauge casket. The $230 OMI permit is extra. French Funerals: GPL 1 Jul 2025, the same list at all five chapels — direct cremation $3,375 and immediate burial $3,175 with a purchaser container. The $236.79 OMI permit is not included. French does not publish a memorial total or a visitation-funeral total. The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker.",
       "localHomes": [
         {
-          "id": "direct-funeral-cremation-services-albuquerque",
-          "name": "Direct Funeral & Cremation Services",
-          "href": "https://www.directfuneralservicesabq.com/",
-          "address": "",
-          "phone": "",
-          "sourceEs": "Pida la lista general de precios vigente. La funeraria es la única fuente oficial.",
-          "sourceEn": "Ask the funeral home for its current general price list. That list is the only official price.",
+          "id": "directors",
+          "name": "Director’s Choice",
+          "href": "https://www.nmcremation.com/GPL.pdf",
+          "address": "9316 Susan Ave SE, Albuquerque",
+          "phone": "505-275-6524",
+          "sourceEs": "Director’s Choice: lista general de precios 1 may. 2025 — cremación simple en persona $1,215 (en línea $995) con contenedor estándar; entierro inmediato $2,395 sin ataúd; memorial con cremación $3,895; paquete tradicional A $4,195 con ataúd de calibre 20. El permiso del OMI de $230 va aparte",
+          "sourceEn": "Director’s Choice: general price list 1 May 2025 — in-person simple cremation $1,215 (online $995) with the standard container; immediate burial $2,395 with no casket; cremation memorial $3,895; traditional package A $4,195 with a 20-gauge casket. The $230 OMI permit is extra",
+          "gplDateEs": "1 may. 2025",
+          "gplDateEn": "1 May 2025",
+          "gplKind": "gpl",
+          "packages": [
+            {
+              "id": "directCremation",
+              "labelEs": "Cremación directa",
+              "labelEn": "Direct cremation",
+              "amt": 1215,
+              "noteEs": "Cremación simple en persona o por teléfono, con contenedor estándar (GPL 1 may. 2025). En línea está en $995. El permiso del OMI de $230 va aparte.",
+              "noteEn": "In-person or phone simple cremation, with the standard container (GPL 1 May 2025). Online arrangements are $995. The $230 OMI permit is extra."
+            },
+            {
+              "id": "immediateBurial",
+              "labelEs": "Entierro inmediato",
+              "labelEn": "Immediate burial",
+              "amt": 2395,
+              "noteEs": "Entierro inmediato sin ataúd (GPL 1 may. 2025). Lote aparte.",
+              "noteEn": "Immediate burial with no casket (GPL 1 May 2025). Plot extra."
+            },
+            {
+              "id": "memorialCremation",
+              "labelEs": "Cremación con memorial",
+              "labelEn": "Cremation with memorial",
+              "amt": 3895,
+              "noteEs": "Servicio memorial con cremación: capilla, vista privada para la familia, carroza y contenedor estándar (GPL 1 may. 2025). Lote aparte.",
+              "noteEn": "Cremation memorial service: chapel, private family viewing, hearse, and standard container (GPL 1 May 2025). Plot extra."
+            },
+            {
+              "id": "traditional",
+              "labelEs": "Funeral tradicional con velatorio",
+              "labelEn": "Traditional funeral with visitation",
+              "amt": 4195,
+              "noteEs": "Paquete tradicional A: velatorio de un día, rosario, ceremonia y ataúd de calibre 20 sin sellar (GPL 1 may. 2025). Lote aparte.",
+              "noteEn": "Traditional package A: one-day visitation, rosary, ceremony, and a 20-gauge non-sealer casket (GPL 1 May 2025). Plot extra."
+            }
+          ]
+        },
+        {
+          "id": "french",
+          "name": "French Funerals",
+          "href": "https://irp.cdn-website.com/68ab9c76/files/uploaded/FRENCH+GPL+2025+-+July.pdf",
+          "address": "1111 University Blvd NE, Albuquerque",
+          "phone": "505-843-6333",
+          "sourceEs": "French Funerals: lista general de precios 1 jul. 2025, misma lista en sus cinco capillas — cremación directa $3,375 y entierro inmediato $3,175 con contenedor del comprador. El permiso del OMI de $236.79 no va incluido. French no publica un total de memorial ni de funeral con velatorio. La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida",
+          "sourceEn": "French Funerals: general price list 1 Jul 2025, the same list at all five chapels — direct cremation $3,375 and immediate burial $3,175 with a purchaser container. The $236.79 OMI permit is not included. French does not publish a memorial total or a visitation-funeral total. The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker",
+          "gplDateEs": "1 jul. 2025",
+          "gplDateEn": "1 Jul 2025",
+          "gplKind": "gpl",
+          "packages": [
+            {
+              "id": "directCremation",
+              "labelEs": "Cremación directa",
+              "labelEn": "Direct cremation",
+              "amt": 3375,
+              "noteEs": "Cremación directa, contenedor del comprador (GPL 1 jul. 2025). El permiso del OMI de $236.79 no va incluido.",
+              "noteEn": "Direct cremation, purchaser container (GPL 1 Jul 2025). The $236.79 OMI permit is not included."
+            },
+            {
+              "id": "immediateBurial",
+              "labelEs": "Entierro inmediato",
+              "labelEn": "Immediate burial",
+              "amt": 3175,
+              "noteEs": "Entierro inmediato, contenedor del comprador. Sin ceremonia. Lote aparte.",
+              "noteEn": "Immediate burial, purchaser container. No ceremony. Plot extra."
+            },
+            {
+              "id": "memorialCremation",
+              "labelEs": "Cremación con memorial",
+              "labelEn": "Cremation with memorial",
+              "amt": 0,
+              "noteEs": "No figura en su lista publicada. Pida la lista vigente.",
+              "noteEn": "Not on their published list. Ask for the current list."
+            },
+            {
+              "id": "traditional",
+              "labelEs": "Funeral tradicional con velatorio",
+              "labelEn": "Traditional funeral with visitation",
+              "amt": 0,
+              "noteEs": "No figura en su lista publicada. Pida la lista vigente.",
+              "noteEn": "Not on their published list. Ask for the current list."
+            }
+          ]
+        },
+        {
+          "id": "daniels-family-carlisle-chapel",
+          "name": "Daniels Family — Carlisle Chapel",
+          "href": "https://www.danielsfuneral.com/",
+          "address": "3113 Carlisle Blvd NE",
+          "phone": "505-884-1188",
+          "sourceEs": "",
+          "sourceEn": "",
           "gplDateEs": "",
           "gplDateEn": "",
           "gplKind": "none",
           "packages": []
         },
         {
-          "id": "french-funerals-cremations-albuquerque",
-          "name": "French Funerals & Cremations",
-          "href": "https://www.frenchfunerals.com/",
-          "address": "1111 University Blvd NE",
-          "phone": "505-843-6333",
+          "id": "daniels-family-wyoming-chapel",
+          "name": "Daniels Family — Wyoming Chapel",
+          "href": "https://www.danielsfuneral.com/",
+          "address": "7601 Wyoming Blvd NE",
+          "phone": "505-821-0010",
+          "sourceEs": "",
+          "sourceEn": "",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "none",
+          "packages": []
+        },
+        {
+          "id": "alameda-mortuary",
+          "name": "Alameda Mortuary",
+          "href": "https://www.danielsfuneral.com/",
+          "address": "9420 4th St NW",
+          "phone": "505-898-3160",
+          "sourceEs": "",
+          "sourceEn": "",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "none",
+          "packages": []
+        },
+        {
+          "id": "garcia-mortuary",
+          "name": "Garcia Mortuary",
+          "href": "https://www.danielsfuneral.com/",
+          "address": "717 Stover Ave SW",
+          "phone": "505-243-5222",
+          "sourceEs": "",
+          "sourceEn": "",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "none",
+          "packages": []
+        },
+        {
+          "id": "strong-thorne-mortuary",
+          "name": "Strong-Thorne Mortuary",
+          "href": "https://www.danielsfuneral.com/",
+          "address": "1100 Coal Ave SE",
+          "phone": "505-842-8800",
+          "sourceEs": "",
+          "sourceEn": "",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "none",
+          "packages": []
+        },
+        {
+          "id": "direct-funeral-cremation-services-albuquerque",
+          "name": "Direct Funeral & Cremation Services",
+          "href": "https://www.directfuneralservicesabq.com/",
+          "address": "",
+          "phone": "",
           "sourceEs": "Pida la lista general de precios vigente. La funeraria es la única fuente oficial.",
           "sourceEn": "Ask the funeral home for its current general price list. That list is the only official price.",
           "gplDateEs": "",
@@ -106969,11 +108263,18 @@
       "nearbyHomes": [],
       "localCemeteries": [
         {
-          "name": "Albuquerque. New lot: ask the cemetery you choose for the list.",
-          "address": "",
-          "phone": "",
-          "noteEs": "Albuquerque. Lote nuevo: pida la lista en el cementerio que elija",
-          "noteEn": "Albuquerque. New lot: ask the cemetery you choose for the list"
+          "name": "$1,600",
+          "address": "9500 San Pedro Dr",
+          "phone": "505-821-0010",
+          "noteEs": "Sandia Memory Gardens, 9500 San Pedro Dr NE. . Reventa vista el 9 de enero de 2025: por espacio. Lote nuevo: pida la lista; no está en la web",
+          "noteEn": "Sandia Memory Gardens, 9500 San Pedro Dr NE. . Resale seen January 9, 2025: per space. New lot: ask for the list; it is not on the website"
+        },
+        {
+          "name": "Sunset Memorial Park, 924 Menaul Blvd NE. Phone 505-345-3536. They do not publis",
+          "address": "924 Menaul Blvd",
+          "phone": "505-345-3536",
+          "noteEs": "Sunset Memorial Park, 924 Menaul Blvd NE. . No publica el precio del lote en internet",
+          "noteEn": "Sunset Memorial Park, 924 Menaul Blvd NE. . They do not publish a lot price online"
         }
       ],
       "nearbyCemeteries": [],
@@ -107008,15 +108309,29 @@
       "guideEn": "/en/states/new-mexico/las-cruces.html",
       "sourceLineEs": "La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida.",
       "sourceLineEn": "The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker.",
-      "localHomes": [],
+      "localHomes": [
+        {
+          "id": "baca-s-funeral-chapels-sunset-crematory",
+          "name": "Baca’s Funeral Chapels & Sunset Crematory",
+          "href": "https://www.bacasfuneralchapelslascruces.com/",
+          "address": "300 East Boutz",
+          "phone": "575-527-2222",
+          "sourceEs": "",
+          "sourceEn": "",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "none",
+          "packages": []
+        }
+      ],
       "nearbyHomes": [],
       "localCemeteries": [
         {
-          "name": "Hillcrest Memorial Gardens, Las Cruces. Resale seen September 28, 2026: $10,000 ",
-          "address": "",
+          "name": "Hillcrest Memorial Gardens, 5140 W Picacho Ave, Las Cruces. Resale on the board ",
+          "address": "5140 W Picacho Ave",
           "phone": "",
-          "noteEs": "Hillcrest Memorial Gardens, Las Cruces. Reventa vista el 28 de septiembre de 2026: $10,000 o $11,500 por dos espacios juntos. Lote nuevo: pida la lista en la oficina",
-          "noteEn": "Hillcrest Memorial Gardens, Las Cruces. Resale seen September 28, 2026: $10,000 or $11,500 for two spaces together. New lot: ask the office for the list"
+          "noteEs": "Hillcrest Memorial Gardens, 5140 W Picacho Ave, Las Cruces. Reventa en el tablero el 11 de octubre de 2026: $10,000 o $11,500 por dos espacios juntos. Lote nuevo: pida la lista en la oficina",
+          "noteEn": "Hillcrest Memorial Gardens, 5140 W Picacho Ave, Las Cruces. Resale on the board October 11, 2026: $10,000 or $11,500 for two spaces together. New lot: ask the office for the list"
         }
       ],
       "nearbyCemeteries": [],
@@ -107049,17 +108364,90 @@
       "pathEn": "/en/funeral-homes-cemeteries.html?estado=new-mexico&ciudad=rio-rancho",
       "guideEs": "/estados/new-mexico/rio-rancho.html",
       "guideEn": "/en/states/new-mexico/rio-rancho.html",
-      "sourceLineEs": "La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida.",
-      "sourceLineEn": "The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker.",
-      "localHomes": [],
+      "sourceLineEs": "French Funerals, capilla de Rio Rancho: GPL 1 jul. 2025, la misma lista que en Albuquerque — cremación directa $3,375 y entierro inmediato $3,175 con contenedor del comprador. El permiso del OMI de $236.79 no va incluido. French no publica un total de memorial ni de funeral con velatorio. La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida.",
+      "sourceLineEn": "French Funerals, Rio Rancho chapel: GPL 1 Jul 2025, the same list as Albuquerque — direct cremation $3,375 and immediate burial $3,175 with a purchaser container. The $236.79 OMI permit is not included. French does not publish a memorial total or a visitation-funeral total. The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker.",
+      "localHomes": [
+        {
+          "id": "french",
+          "name": "French Funerals",
+          "href": "https://irp.cdn-website.com/68ab9c76/files/uploaded/FRENCH+GPL+2025+-+July.pdf",
+          "address": "1275 Unser Blvd NE, Rio Rancho",
+          "phone": "505-338-2000",
+          "sourceEs": "French Funerals, capilla de Rio Rancho: lista general de precios 1 jul. 2025, la misma lista que en Albuquerque — cremación directa $3,375 y entierro inmediato $3,175 con contenedor del comprador. El permiso del OMI de $236.79 no va incluido. French no publica un total de memorial ni de funeral con velatorio. La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida",
+          "sourceEn": "French Funerals, Rio Rancho chapel: general price list 1 Jul 2025, the same list as Albuquerque — direct cremation $3,375 and immediate burial $3,175 with a purchaser container. The $236.79 OMI permit is not included. French does not publish a memorial total or a visitation-funeral total. The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker",
+          "gplDateEs": "1 jul. 2025",
+          "gplDateEn": "1 Jul 2025",
+          "gplKind": "gpl",
+          "packages": [
+            {
+              "id": "directCremation",
+              "labelEs": "Cremación directa",
+              "labelEn": "Direct cremation",
+              "amt": 3375,
+              "noteEs": "Cremación directa, contenedor del comprador (GPL 1 jul. 2025). El permiso del OMI de $236.79 no va incluido.",
+              "noteEn": "Direct cremation, purchaser container (GPL 1 Jul 2025). The $236.79 OMI permit is not included."
+            },
+            {
+              "id": "immediateBurial",
+              "labelEs": "Entierro inmediato",
+              "labelEn": "Immediate burial",
+              "amt": 3175,
+              "noteEs": "Entierro inmediato, contenedor del comprador. Sin ceremonia. Lote aparte.",
+              "noteEn": "Immediate burial, purchaser container. No ceremony. Plot extra."
+            },
+            {
+              "id": "memorialCremation",
+              "labelEs": "Cremación con memorial",
+              "labelEn": "Cremation with memorial",
+              "amt": 0,
+              "noteEs": "No figura en su lista publicada. Pida la lista vigente.",
+              "noteEn": "Not on their published list. Ask for the current list."
+            },
+            {
+              "id": "traditional",
+              "labelEs": "Funeral tradicional con velatorio",
+              "labelEn": "Traditional funeral with visitation",
+              "amt": 0,
+              "noteEs": "No figura en su lista publicada. Pida la lista vigente.",
+              "noteEn": "Not on their published list. Ask for the current list."
+            }
+          ]
+        },
+        {
+          "id": "daniels-family-sara-road-chapel",
+          "name": "Daniels Family — Sara Road Chapel",
+          "href": "https://www.danielsfuneral.com/sara-road-chapel",
+          "address": "4310 Sara Rd",
+          "phone": "505-892-9920",
+          "sourceEs": "",
+          "sourceEn": "",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "none",
+          "packages": []
+        },
+        {
+          "id": "daniels-family-southern-chapel",
+          "name": "Daniels Family — Southern Chapel",
+          "href": "https://www.danielsfuneral.com/",
+          "address": "2400 Southern Blvd SE",
+          "phone": "505-891-9192",
+          "sourceEs": "",
+          "sourceEn": "",
+          "gplDateEs": "",
+          "gplDateEn": "",
+          "gplKind": "none",
+          "packages": []
+        }
+      ],
       "nearbyHomes": [],
       "localCemeteries": [
         {
-          "name": "Rio Rancho. New lot: ask the cemetery you choose for the list.",
-          "address": "",
-          "phone": "",
-          "noteEs": "Rio Rancho. Lote nuevo: pida la lista en el cementerio que elija",
-          "noteEn": "Rio Rancho. New lot: ask the cemetery you choose for the list"
+          "name": "Vista Verde Memorial Park, 4310 Sara Rd SE. Resale: ad listed November 30, 2015,",
+          "address": "4310 Sara Rd",
+          "phone": "505-892-9920",
+          "noteEs": "Vista Verde Memorial Park, 4310 Sara Rd SE. Reventa: anuncio del 30 de noviembre de 2015, aún en el tablero el 11 de octubre de 2026, a $1,595 por espacio. Lote nuevo: pida la lista. Daniels Family, capilla Sara Road, está en esa dirección",
+          "noteEn": "Vista Verde Memorial Park, 4310 Sara Rd SE. Resale: ad listed November 30, 2015, still on the board October 11, 2026, at $1,595 per space. New lot: ask for the list. Daniels Family’s Sara Road Chapel is at that address"
         }
       ],
       "nearbyCemeteries": [],
@@ -107092,9 +108480,55 @@
       "pathEn": "/en/funeral-homes-cemeteries.html?estado=new-mexico&ciudad=santa-fe",
       "guideEs": "/estados/new-mexico/santa-fe.html",
       "guideEn": "/en/states/new-mexico/santa-fe.html",
-      "sourceLineEs": "La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida.",
-      "sourceLineEn": "The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker.",
+      "sourceLineEs": "Riverside Funeral Home, Santa Fe: precios publicados en su sitio, leídos el 11 de octubre de 2026 — cremación directa $1,435 con urna temporal y sin ceremonia; entierro sin velatorio $2,170, sin ataúd, bóveda ni cementerio. No publica un total de cremación con memorial ni de funeral con velatorio. Certificados de defunción aparte. La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida.",
+      "sourceLineEn": "Riverside Funeral Home, Santa Fe: prices on its site, read October 11, 2026 — direct cremation $1,435 with a temporary urn and no ceremony; burial with no visitation $2,170, with no casket, vault, or cemetery costs. It does not publish a cremation-with-memorial total or a visitation-funeral total. Death certificates are extra. The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker.",
       "localHomes": [
+        {
+          "id": "riverside",
+          "name": "Riverside Funeral Home",
+          "href": "https://sfprod.altogetherfuneral.com/funeral-cremation/new-mexico/santa-fe/riverside-funeral-home-santa-fe/nmrfs.html",
+          "address": "1607 Saint Michaels Dr, Santa Fe",
+          "phone": "505-240-6663",
+          "sourceEs": "Riverside Funeral Home, Santa Fe: precios publicados en su sitio, leídos el 11 de octubre de 2026 — cremación directa $1,435 con urna temporal y sin ceremonia; entierro sin velatorio $2,170, sin ataúd, bóveda ni cementerio. No publica un total de cremación con memorial ni de funeral con velatorio. Certificados de defunción aparte. La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida",
+          "sourceEn": "Riverside Funeral Home, Santa Fe: prices on its site, read October 11, 2026 — direct cremation $1,435 with a temporary urn and no ceremony; burial with no visitation $2,170, with no casket, vault, or cemetery costs. It does not publish a cremation-with-memorial total or a visitation-funeral total. Death certificates are extra. The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker",
+          "gplDateEs": "26 jul. 2026",
+          "gplDateEn": "26 Jul 2026",
+          "gplKind": "published",
+          "packages": [
+            {
+              "id": "directCremation",
+              "labelEs": "Cremación directa",
+              "labelEn": "Direct cremation",
+              "amt": 1435,
+              "noteEs": "Cremación directa con urna temporal, sin velatorio ni ceremonia (precio publicado en su sitio, leído el 11 oct. 2026). Certificados de defunción aparte.",
+              "noteEn": "Direct cremation with a temporary urn, no visitation or ceremony (price on their site, read 11 Oct 2026). Death certificates extra."
+            },
+            {
+              "id": "immediateBurial",
+              "labelEs": "Entierro inmediato",
+              "labelEn": "Immediate burial",
+              "amt": 2170,
+              "noteEs": "Entierro sin velatorio ni ceremonia. No incluye ataúd, bóveda ni cementerio.",
+              "noteEn": "Burial with no visitation or ceremony. Does not include a casket, vault, or cemetery costs."
+            },
+            {
+              "id": "memorialCremation",
+              "labelEs": "Cremación con memorial",
+              "labelEn": "Cremation with memorial",
+              "amt": 0,
+              "noteEs": "No figura en su lista publicada. Pida la lista vigente.",
+              "noteEn": "Not on their published list. Ask for the current list."
+            },
+            {
+              "id": "traditional",
+              "labelEs": "Funeral tradicional con velatorio",
+              "labelEn": "Traditional funeral with visitation",
+              "amt": 0,
+              "noteEs": "No figura en su lista publicada. Pida la lista vigente.",
+              "noteEn": "Not on their published list. Ask for the current list."
+            }
+          ]
+        },
         {
           "id": "berardinelli-family-funeral-service-santa-fe",
           "name": "Berardinelli Family Funeral Service",
@@ -107125,11 +108559,18 @@
       "nearbyHomes": [],
       "localCemeteries": [
         {
-          "name": "Santa Fe. New lot: ask the cemetery you choose for the list.",
-          "address": "",
+          "name": "Memorial Gardens of Santa Fe, 417 East Rodeo Dr. The Grave Solutions ad is sold.",
+          "address": "417 East Rodeo Dr.",
           "phone": "",
-          "noteEs": "Santa Fe. Lote nuevo: pida la lista en el cementerio que elija",
-          "noteEn": "Santa Fe. New lot: ask the cemetery you choose for the list"
+          "noteEs": "Memorial Gardens of Santa Fe, 417 East Rodeo Dr. El anuncio de Grave Solutions está vendido. Lote nuevo: pida la lista; no hay un precio publicado en esta guía",
+          "noteEn": "Memorial Gardens of Santa Fe, 417 East Rodeo Dr. The Grave Solutions ad is sold. New lot: ask for the list; this guide does not have a published price"
+        },
+        {
+          "name": "Santa Fe National Cemetery, 501 N Guadalupe St. Phone 505-988-6400. Space is ava",
+          "address": "501 N Guadalupe St.",
+          "phone": "505-988-6400",
+          "noteEs": "Cementerio nacional de Santa Fe, 501 N Guadalupe St. . Hay espacio para restos con ataúd y cremados. Confirme la elegibilidad; no es un precio de lote privado",
+          "noteEn": "Santa Fe National Cemetery, 501 N Guadalupe St. . Space is available for casketed and cremated remains. Confirm eligibility; this is not a private-lot price"
         }
       ],
       "nearbyCemeteries": [],

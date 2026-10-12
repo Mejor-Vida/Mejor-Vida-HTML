@@ -1,10 +1,10 @@
 {
   "city": "santa-fe",
-  "checked": "2026-09-28",
-  "checkedLabelEs": "28 sep. 2026",
-  "checkedLabelEn": "28 Sep 2026",
-  "noteEs": "Anuncios de particulares. No son precios de Mejor Vida Seguros ni la lista oficial del cementerio. La oficina debe transferir la escritura. Revise si el anuncio sigue activo.",
-  "noteEn": "Private-party ads. These are not Mejor Vida Insurance prices or the cemetery’s official list. The office must transfer the deed. Check that the listing is still active.",
+  "checked": "2026-10-11",
+  "checkedLabelEs": "11 oct. 2026",
+  "checkedLabelEn": "11 Oct 2026",
+  "noteEs": "Anuncios de particulares. No son precios de Mejor Vida Seguros ni la lista oficial del cementerio. El anuncio de Memorial Gardens of Santa Fe está vendido y no se usa como precio.",
+  "noteEn": "Private-party ads. These are not Mejor Vida Insurance prices or the cemetery’s official list. The Memorial Gardens of Santa Fe ad is sold and is not used as a price.",
   "boards": [
     {
       "id": "grave-solutions",
@@ -14,6 +14,25 @@
       "labelEn": "Live board · New Mexico"
     }
   ],
-  "cemeterySignals": [],
+  "cemeterySignals": [
+    {
+      "cemetery": "Memorial Gardens of Santa Fe",
+      "citedListLow": null,
+      "citedListHigh": null,
+      "typical": null,
+      "phone": null,
+      "noteEs": "El anuncio de Grave Solutions está marcado como vendido. No hay un precio de lote nuevo publicado en esta guía.",
+      "noteEn": "The Grave Solutions ad is marked sold. This guide does not have a published new-lot price."
+    },
+    {
+      "cemetery": "Santa Fe National Cemetery",
+      "citedListLow": null,
+      "citedListHigh": null,
+      "typical": null,
+      "phone": "505-988-6400",
+      "noteEs": "Cementerio de VA en 501 N Guadalupe St. Hay espacio para restos con ataúd y cremados. Confirme la elegibilidad. No es un precio de lote privado.",
+      "noteEn": "VA cemetery at 501 N Guadalupe St. Space is available for casketed and cremated remains. Confirm eligibility. This is not a private-lot price."
+    }
+  ],
   "listings": []
 }

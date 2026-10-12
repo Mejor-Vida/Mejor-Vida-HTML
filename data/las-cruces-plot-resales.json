@@ -1,10 +1,10 @@
 {
   "city": "las-cruces",
-  "checked": "2026-09-28",
-  "checkedLabelEs": "28 sep. 2026",
-  "checkedLabelEn": "28 Sep 2026",
-  "noteEs": "Anuncios de particulares. No son precios de Mejor Vida Seguros ni la lista oficial del cementerio. La oficina debe transferir la escritura. Revise si el anuncio sigue activo.",
-  "noteEn": "Private-party ads. These are not Mejor Vida Insurance prices or the cemetery’s official list. The office must transfer the deed. Check that the listing is still active.",
+  "checked": "2026-10-11",
+  "checkedLabelEs": "11 oct. 2026",
+  "checkedLabelEn": "11 Oct 2026",
+  "noteEs": "Anuncios de particulares. No son precios de Mejor Vida Seguros ni la lista oficial del cementerio. Cada cifra es por dos espacios juntos, no por un lote. La oficina debe transferir la escritura.",
+  "noteEn": "Private-party ads. These are not Mejor Vida Insurance prices or the cemetery’s official list. Each figure is for two spaces together, not one lot. The office must transfer the deed.",
   "boards": [
     {
       "id": "grave-solutions",
@@ -14,6 +14,43 @@
       "labelEn": "Live board · New Mexico"
     }
   ],
-  "cemeterySignals": [],
-  "listings": []
+  "cemeterySignals": [
+    {
+      "cemetery": "Hillcrest Memorial Gardens",
+      "citedListLow": null,
+      "citedListHigh": null,
+      "typical": null,
+      "phone": null,
+      "noteEs": "No publica el lote en la web. El 11 de octubre de 2026 el tablero pedía $10,000 y $11,500, cada anuncio por dos espacios juntos.",
+      "noteEn": "They do not publish plot prices online. On October 11, 2026 the board asked $10,000 and $11,500, each ad for two spaces together."
+    }
+  ],
+  "listings": [
+    {
+      "id": "gs-hillcrest-10000",
+      "status": "listed",
+      "cemetery": "Hillcrest Memorial Gardens",
+      "spaces": 2,
+      "asking": 10000,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": null,
+      "url": "https://www.gravesolutions.com/for-sale/cemetery-properties/new-mexico",
+      "titleEs": "Grave Solutions · lote 62, dos espacios juntos",
+      "titleEn": "Grave Solutions · lot 62, two spaces together"
+    },
+    {
+      "id": "gs-hillcrest-11500",
+      "status": "listed",
+      "cemetery": "Hillcrest Memorial Gardens",
+      "spaces": 2,
+      "asking": 11500,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": null,
+      "url": "https://www.gravesolutions.com/for-sale/cemetery-properties/new-mexico",
+      "titleEs": "Grave Solutions · Garden of Gethsemane, dos espacios juntos",
+      "titleEn": "Grave Solutions · Garden of Gethsemane, two spaces together"
+    }
+  ]
 }

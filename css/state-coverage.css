@@ -1577,11 +1577,15 @@
 }
 
 .sc-hero--santa-fe .sc-hero-visual img {
-  object-position: center 22%;
+  object-position: center 32%;
 }
 
 .sc-hero--las-cruces .sc-hero-visual img {
-  object-position: center 62%;
+  object-position: center 36%;
+}
+
+.sc-hero--rio-rancho .sc-hero-visual img {
+  object-position: center 42%;
 }
 
 .sc-hero--charleston .sc-hero-visual img {

@@ -1,10 +1,10 @@
 {
   "city": "rio-rancho",
-  "checked": "2026-09-28",
-  "checkedLabelEs": "28 sep. 2026",
-  "checkedLabelEn": "28 Sep 2026",
-  "noteEs": "Anuncios de particulares. No son precios de Mejor Vida Seguros ni la lista oficial del cementerio. La oficina debe transferir la escritura. Revise si el anuncio sigue activo.",
-  "noteEn": "Private-party ads. These are not Mejor Vida Insurance prices or the cemetery’s official list. The office must transfer the deed. Check that the listing is still active.",
+  "checked": "2026-10-11",
+  "checkedLabelEs": "11 oct. 2026",
+  "checkedLabelEn": "11 Oct 2026",
+  "noteEs": "Anuncios de particulares. No son precios de Mejor Vida Seguros ni la lista oficial de hoy. El anuncio de Vista Verde se listó el 30 de noviembre de 2015 y seguía en el tablero el 11 de octubre de 2026. Confirme que sigue activo. La cifra de lista que cita el vendedor es de esa fecha.",
+  "noteEn": "Private-party ads. These are not Mejor Vida Insurance prices or today’s official list. The Vista Verde ad was listed November 30, 2015 and was still on the board October 11, 2026. Confirm it is still active. The list price the seller cites is from that listing date.",
   "boards": [
     {
       "id": "grave-solutions",
@@ -14,6 +14,30 @@
       "labelEn": "Live board · New Mexico"
     }
   ],
-  "cemeterySignals": [],
-  "listings": []
+  "cemeterySignals": [
+    {
+      "cemetery": "Vista Verde Memorial Park",
+      "citedListLow": null,
+      "citedListHigh": null,
+      "typical": null,
+      "phone": "505-892-9920",
+      "noteEs": "No publica el lote en la web. Anuncio del 30 nov. 2015, aún visible el 11 oct. 2026: $1,595 por espacio. El vendedor citaba unos $1,995 de lista en esa fecha, no como precio de hoy.",
+      "noteEn": "They do not publish plot prices online. Ad listed 30 Nov 2015, still visible 11 Oct 2026: $1,595 per space. The seller cited about $1,995 on the list as of that date, not as today’s price."
+    }
+  ],
+  "listings": [
+    {
+      "id": "gs-vista-verde-1595",
+      "status": "listed",
+      "cemetery": "Vista Verde Memorial Park",
+      "spaces": 2,
+      "asking": 3190,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": null,
+      "url": "https://www.gravesolutions.com/for-sale/vista-verde-memorial-park-rio-rancho-nm-cemetery-plot-0bd263",
+      "titleEs": "Grave Solutions · anuncio del 30 nov. 2015, $1,595 por espacio",
+      "titleEn": "Grave Solutions · ad listed 30 Nov 2015, $1,595 per space"
+    }
+  ]
 }
