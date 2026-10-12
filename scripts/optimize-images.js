@@ -280,6 +280,11 @@ const JOBS = [
   { src: "img/blog-generated/weekly-insurance-update-2026-10-04/story-1.jpg", maxWidth: 1080, maxHeight: 1350 },
   { src: "img/blog-generated/weekly-insurance-update-2026-10-04/story-2.png", maxWidth: 1080, maxHeight: 1350, keepPng: true },
   { src: "img/blog-generated/weekly-insurance-update-2026-10-04/story-3.png", maxWidth: 1080, maxHeight: 1350, keepPng: true },
+  { src: "img/blog-generated/weekly-insurance-update-2026-10-11/hero.jpg", maxWidth: 1080, maxHeight: 1350 },
+  { src: "img/blog-generated/weekly-insurance-update-2026-10-11/thumb.jpg", maxWidth: 819, maxHeight: 1024 },
+  { src: "img/blog-generated/weekly-insurance-update-2026-10-11/story-1.jpg", maxWidth: 1080, maxHeight: 1350 },
+  { src: "img/blog-generated/weekly-insurance-update-2026-10-11/story-2.jpg", maxWidth: 1080, maxHeight: 1350 },
+  { src: "img/blog-generated/weekly-insurance-update-2026-10-11/story-3.jpg", maxWidth: 1080, maxHeight: 1350 },
 ];
 
 function fitInside(meta, maxWidth, maxHeight) {

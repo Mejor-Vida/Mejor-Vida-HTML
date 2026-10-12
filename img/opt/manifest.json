@@ -3544,5 +3544,50 @@
     "webp": "img/opt/tempe-mill-bridge.webp",
     "fallback": "img/opt/tempe-mill-bridge.jpg",
     "keepPng": false
+  },
+  {
+    "src": "img/blog-generated/weekly-insurance-update-2026-10-11/story-1.jpg",
+    "base": "story-1",
+    "width": 1024,
+    "height": 682,
+    "webp": "img/opt/blog-generated/weekly-insurance-update-2026-10-11/story-1.webp",
+    "fallback": "img/opt/blog-generated/weekly-insurance-update-2026-10-11/story-1.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/blog-generated/weekly-insurance-update-2026-10-11/story-2.jpg",
+    "base": "story-2",
+    "width": 1024,
+    "height": 682,
+    "webp": "img/opt/blog-generated/weekly-insurance-update-2026-10-11/story-2.webp",
+    "fallback": "img/opt/blog-generated/weekly-insurance-update-2026-10-11/story-2.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/blog-generated/weekly-insurance-update-2026-10-11/thumb.jpg",
+    "base": "thumb",
+    "width": 819,
+    "height": 545,
+    "webp": "img/opt/blog-generated/weekly-insurance-update-2026-10-11/thumb.webp",
+    "fallback": "img/opt/blog-generated/weekly-insurance-update-2026-10-11/thumb.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/blog-generated/weekly-insurance-update-2026-10-11/hero.jpg",
+    "base": "hero",
+    "width": 864,
+    "height": 1152,
+    "webp": "img/opt/blog-generated/weekly-insurance-update-2026-10-11/hero.webp",
+    "fallback": "img/opt/blog-generated/weekly-insurance-update-2026-10-11/hero.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/blog-generated/weekly-insurance-update-2026-10-11/story-3.jpg",
+    "base": "story-3",
+    "width": 1024,
+    "height": 682,
+    "webp": "img/opt/blog-generated/weekly-insurance-update-2026-10-11/story-3.webp",
+    "fallback": "img/opt/blog-generated/weekly-insurance-update-2026-10-11/story-3.jpg",
+    "keepPng": false
   }
 ]
