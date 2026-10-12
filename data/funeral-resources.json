@@ -7915,8 +7915,8 @@
       ],
       "guideEs": "/estados/new-mexico/albuquerque.html",
       "guideEn": "/en/states/new-mexico/albuquerque.html",
-      "sourceLineEs": "Director’s Choice: GPL 1 may. 2025 — cremación simple en persona $1,215 (en línea $995) con contenedor estándar; entierro inmediato $2,395 sin ataúd; memorial con cremación $3,895; paquete tradicional A $4,195 con ataúd de calibre 20. El permiso del OMI de $230 va aparte. French Funerals: GPL 1 jul. 2025, misma lista en sus cinco capillas — cremación directa $3,375 y entierro inmediato $3,175 con contenedor del comprador. El permiso del OMI de $236.79 no va incluido. French no publica un total de memorial ni de funeral con velatorio. La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida.",
-      "sourceLineEn": "Director’s Choice: GPL 1 May 2025 — in-person simple cremation $1,215 (online $995) with the standard container; immediate burial $2,395 with no casket; cremation memorial $3,895; traditional package A $4,195 with a 20-gauge casket. The $230 OMI permit is extra. French Funerals: GPL 1 Jul 2025, the same list at all five chapels — direct cremation $3,375 and immediate burial $3,175 with a purchaser container. The $236.79 OMI permit is not included. French does not publish a memorial total or a visitation-funeral total. The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker.",
+      "sourceLineEs": "Director’s Choice: GPL 1 may. 2025 — cremación simple en persona $1,215 (en línea $995) con contenedor estándar; entierro inmediato $2,395 sin ataúd; memorial con cremación $3,895; paquete tradicional A $4,195 con ataúd de calibre 20. El permiso del OMI de $230 va aparte. French Funerals: GPL 1 jul. 2025, misma lista en sus cinco capillas — cremación directa $3,375 y entierro inmediato $3,175 con contenedor del comprador. El permiso del OMI de $236.79 no va incluido. French no publica un total de memorial ni de funeral con velatorio. Daniels Family: GPL 1 oct. 2026, la misma lista en Alameda, Carlisle, Wyoming, Sara y Southern — cremación directa $3,785 y entierro inmediato $3,995 con contenedor del comprador. Daniels no publica un total de memorial ni de funeral con velatorio. La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida.",
+      "sourceLineEn": "Director’s Choice: GPL 1 May 2025 — in-person simple cremation $1,215 (online $995) with the standard container; immediate burial $2,395 with no casket; cremation memorial $3,895; traditional package A $4,195 with a 20-gauge casket. The $230 OMI permit is extra. French Funerals: GPL 1 Jul 2025, the same list at all five chapels — direct cremation $3,375 and immediate burial $3,175 with a purchaser container. The $236.79 OMI permit is not included. French does not publish a memorial total or a visitation-funeral total. Daniels Family: GPL 1 Oct 2026, the same list at Alameda, Carlisle, Wyoming, Sara, and Southern — direct cremation $3,785 and immediate burial $3,995 with a purchaser container. Daniels does not publish a memorial total or a visitation-funeral total. The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker.",
       "officesNoteEs": "Sandia no publica el lote nuevo en la web. El anuncio de reventa no es la lista de la oficina. Sunset tampoco publica el precio del lote.",
       "officesNoteEn": "Sandia does not publish a new-lot price online. The resale ad is not the office list. Sunset does not publish a lot price either.",
       "homes": [
@@ -7972,8 +7972,8 @@
           "href": "https://irp.cdn-website.com/68ab9c76/files/uploaded/FRENCH+GPL+2025+-+July.pdf",
           "address": "1111 University Blvd NE, Albuquerque",
           "phone": "505-843-6333",
-          "sourceEs": "French Funerals: lista general de precios 1 jul. 2025, misma lista en sus cinco capillas — cremación directa $3,375 y entierro inmediato $3,175 con contenedor del comprador. El permiso del OMI de $236.79 no va incluido. French no publica un total de memorial ni de funeral con velatorio. La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida",
-          "sourceEn": "French Funerals: general price list 1 Jul 2025, the same list at all five chapels — direct cremation $3,375 and immediate burial $3,175 with a purchaser container. The $236.79 OMI permit is not included. French does not publish a memorial total or a visitation-funeral total. The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker",
+          "sourceEs": "French Funerals: lista general de precios 1 jul. 2025, misma lista en sus cinco capillas — cremación directa $3,375 y entierro inmediato $3,175 con contenedor del comprador. El permiso del OMI de $236.79 no va incluido. French no publica un total de memorial ni de funeral con velatorio",
+          "sourceEn": "French Funerals: general price list 1 Jul 2025, the same list at all five chapels — direct cremation $3,375 and immediate burial $3,175 with a purchaser container. The $236.79 OMI permit is not included. French does not publish a memorial total or a visitation-funeral total",
           "gplDateEs": "1 jul. 2025",
           "gplDateEn": "1 Jul 2025",
           "gplKind": "gpl",
@@ -8013,43 +8013,50 @@
           ]
         },
         {
-          "id": "daniels-family-carlisle-chapel",
-          "name": "Daniels Family — Carlisle Chapel",
-          "href": "https://www.danielsfuneral.com/",
-          "address": "3113 Carlisle Blvd NE",
+          "id": "daniels",
+          "name": "Daniels Family",
+          "href": "https://irp.cdn-website.com/74068d93/files/uploaded/2026.10.01+Daniels+GPL.pdf",
+          "address": "3113 Carlisle Blvd NE, Albuquerque",
           "phone": "505-884-1188",
-          "sourceEs": "",
-          "sourceEn": "",
-          "gplDateEs": "",
-          "gplDateEn": "",
-          "gplKind": "none",
-          "packages": []
-        },
-        {
-          "id": "daniels-family-wyoming-chapel",
-          "name": "Daniels Family — Wyoming Chapel",
-          "href": "https://www.danielsfuneral.com/",
-          "address": "7601 Wyoming Blvd NE",
-          "phone": "505-821-0010",
-          "sourceEs": "",
-          "sourceEn": "",
-          "gplDateEs": "",
-          "gplDateEn": "",
-          "gplKind": "none",
-          "packages": []
-        },
-        {
-          "id": "alameda-mortuary",
-          "name": "Alameda Mortuary",
-          "href": "https://www.danielsfuneral.com/",
-          "address": "9420 4th St NW",
-          "phone": "505-898-3160",
-          "sourceEs": "",
-          "sourceEn": "",
-          "gplDateEs": "",
-          "gplDateEn": "",
-          "gplKind": "none",
-          "packages": []
+          "sourceEs": "Daniels Family: lista general de precios 1 oct. 2026, la misma lista en Alameda, Carlisle, Wyoming, Sara y Southern — cremación directa $3,785 y entierro inmediato $3,995 con contenedor del comprador. Daniels no publica un total de memorial ni de funeral con velatorio. La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida",
+          "sourceEn": "Daniels Family: general price list 1 Oct 2026, the same list at Alameda, Carlisle, Wyoming, Sara, and Southern — direct cremation $3,785 and immediate burial $3,995 with a purchaser container. Daniels does not publish a memorial total or a visitation-funeral total. The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker",
+          "gplDateEs": "1 oct. 2026",
+          "gplDateEn": "1 Oct 2026",
+          "gplKind": "gpl",
+          "packages": [
+            {
+              "id": "directCremation",
+              "labelEs": "Cremación directa",
+              "labelEn": "Direct cremation",
+              "amt": 3785,
+              "noteEs": "Cremación directa, contenedor del comprador (GPL 1 oct. 2026). La misma lista en Alameda, Carlisle, Sara, Southern y Wyoming. No incluye velatorio ni ceremonia.",
+              "noteEn": "Direct cremation, purchaser container (GPL 1 Oct 2026). The same list at Alameda, Carlisle, Sara, Southern, and Wyoming. No visitation or ceremony."
+            },
+            {
+              "id": "immediateBurial",
+              "labelEs": "Entierro inmediato",
+              "labelEn": "Immediate burial",
+              "amt": 3995,
+              "noteEs": "Entierro inmediato, ataúd del comprador (GPL 1 oct. 2026). Con su ataúd mínimo está en $5,440. Lote aparte.",
+              "noteEn": "Immediate burial, purchaser casket (GPL 1 Oct 2026). With their minimum casket it is $5,440. Plot extra."
+            },
+            {
+              "id": "memorialCremation",
+              "labelEs": "Cremación con memorial",
+              "labelEn": "Cremation with memorial",
+              "amt": 0,
+              "noteEs": "No figura en su lista publicada. Pida la lista vigente.",
+              "noteEn": "Not on their published list. Ask for the current list."
+            },
+            {
+              "id": "traditional",
+              "labelEs": "Funeral tradicional con velatorio",
+              "labelEn": "Traditional funeral with visitation",
+              "amt": 0,
+              "noteEs": "No figura en su lista publicada. Pida la lista vigente.",
+              "noteEn": "Not on their published list. Ask for the current list."
+            }
+          ]
         },
         {
           "id": "garcia-mortuary",
@@ -8247,8 +8254,8 @@
       ],
       "guideEs": "/estados/new-mexico/rio-rancho.html",
       "guideEn": "/en/states/new-mexico/rio-rancho.html",
-      "sourceLineEs": "French Funerals, capilla de Rio Rancho: GPL 1 jul. 2025, la misma lista que en Albuquerque — cremación directa $3,375 y entierro inmediato $3,175 con contenedor del comprador. El permiso del OMI de $236.79 no va incluido. French no publica un total de memorial ni de funeral con velatorio. La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida.",
-      "sourceLineEn": "French Funerals, Rio Rancho chapel: GPL 1 Jul 2025, the same list as Albuquerque — direct cremation $3,375 and immediate burial $3,175 with a purchaser container. The $236.79 OMI permit is not included. French does not publish a memorial total or a visitation-funeral total. The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker.",
+      "sourceLineEs": "French Funerals, capilla de Rio Rancho: GPL 1 jul. 2025, la misma lista que en Albuquerque — cremación directa $3,375 y entierro inmediato $3,175 con contenedor del comprador. El permiso del OMI de $236.79 no va incluido. French no publica un total de memorial ni de funeral con velatorio. Daniels Family: GPL 1 oct. 2026, la misma lista en Sara Road y Southern — cremación directa $3,785 y entierro inmediato $3,995 con contenedor del comprador. Daniels no publica un total de memorial ni de funeral con velatorio. La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida.",
+      "sourceLineEn": "French Funerals, Rio Rancho chapel: GPL 1 Jul 2025, the same list as Albuquerque — direct cremation $3,375 and immediate burial $3,175 with a purchaser container. The $236.79 OMI permit is not included. French does not publish a memorial total or a visitation-funeral total. Daniels Family: GPL 1 Oct 2026, the same list at Sara Road and Southern — direct cremation $3,785 and immediate burial $3,995 with a purchaser container. Daniels does not publish a memorial total or a visitation-funeral total. The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker.",
       "officesNoteEs": "El anuncio de 2015 no es la lista vigente de la oficina. Vista Verde no publica el lote nuevo en la web.",
       "officesNoteEn": "The 2015 ad is not the office’s current list. Vista Verde does not publish a new-lot price online.",
       "homes": [
@@ -8258,8 +8265,8 @@
           "href": "https://irp.cdn-website.com/68ab9c76/files/uploaded/FRENCH+GPL+2025+-+July.pdf",
           "address": "1275 Unser Blvd NE, Rio Rancho",
           "phone": "505-338-2000",
-          "sourceEs": "French Funerals, capilla de Rio Rancho: lista general de precios 1 jul. 2025, la misma lista que en Albuquerque — cremación directa $3,375 y entierro inmediato $3,175 con contenedor del comprador. El permiso del OMI de $236.79 no va incluido. French no publica un total de memorial ni de funeral con velatorio. La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida",
-          "sourceEn": "French Funerals, Rio Rancho chapel: general price list 1 Jul 2025, the same list as Albuquerque — direct cremation $3,375 and immediate burial $3,175 with a purchaser container. The $236.79 OMI permit is not included. French does not publish a memorial total or a visitation-funeral total. The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker",
+          "sourceEs": "French Funerals, capilla de Rio Rancho: lista general de precios 1 jul. 2025, la misma lista que en Albuquerque — cremación directa $3,375 y entierro inmediato $3,175 con contenedor del comprador. El permiso del OMI de $236.79 no va incluido. French no publica un total de memorial ni de funeral con velatorio",
+          "sourceEn": "French Funerals, Rio Rancho chapel: general price list 1 Jul 2025, the same list as Albuquerque — direct cremation $3,375 and immediate burial $3,175 with a purchaser container. The $236.79 OMI permit is not included. French does not publish a memorial total or a visitation-funeral total",
           "gplDateEs": "1 jul. 2025",
           "gplDateEn": "1 Jul 2025",
           "gplKind": "gpl",
@@ -8299,39 +8306,59 @@
           ]
         },
         {
-          "id": "daniels-family-sara-road-chapel",
-          "name": "Daniels Family — Sara Road Chapel",
-          "href": "https://www.danielsfuneral.com/sara-road-chapel",
-          "address": "4310 Sara Rd",
+          "id": "daniels",
+          "name": "Daniels Family",
+          "href": "https://irp.cdn-website.com/74068d93/files/uploaded/2026.10.01+Daniels+GPL.pdf",
+          "address": "4310 Sara Rd SE, Rio Rancho",
           "phone": "505-892-9920",
-          "sourceEs": "",
-          "sourceEn": "",
-          "gplDateEs": "",
-          "gplDateEn": "",
-          "gplKind": "none",
-          "packages": []
-        },
-        {
-          "id": "daniels-family-southern-chapel",
-          "name": "Daniels Family — Southern Chapel",
-          "href": "https://www.danielsfuneral.com/",
-          "address": "2400 Southern Blvd SE",
-          "phone": "505-891-9192",
-          "sourceEs": "",
-          "sourceEn": "",
-          "gplDateEs": "",
-          "gplDateEn": "",
-          "gplKind": "none",
-          "packages": []
+          "sourceEs": "Daniels Family: lista general de precios 1 oct. 2026, la misma lista en Sara Road y Southern — cremación directa $3,785 y entierro inmediato $3,995 con contenedor del comprador. Daniels no publica un total de memorial ni de funeral con velatorio. La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida",
+          "sourceEn": "Daniels Family: general price list 1 Oct 2026, the same list at Sara Road and Southern — direct cremation $3,785 and immediate burial $3,995 with a purchaser container. Daniels does not publish a memorial total or a visitation-funeral total. The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker",
+          "gplDateEs": "1 oct. 2026",
+          "gplDateEn": "1 Oct 2026",
+          "gplKind": "gpl",
+          "packages": [
+            {
+              "id": "directCremation",
+              "labelEs": "Cremación directa",
+              "labelEn": "Direct cremation",
+              "amt": 3785,
+              "noteEs": "Cremación directa, contenedor del comprador (GPL 1 oct. 2026). La misma lista en Alameda, Carlisle, Sara, Southern y Wyoming. No incluye velatorio ni ceremonia.",
+              "noteEn": "Direct cremation, purchaser container (GPL 1 Oct 2026). The same list at Alameda, Carlisle, Sara, Southern, and Wyoming. No visitation or ceremony."
+            },
+            {
+              "id": "immediateBurial",
+              "labelEs": "Entierro inmediato",
+              "labelEn": "Immediate burial",
+              "amt": 3995,
+              "noteEs": "Entierro inmediato, ataúd del comprador (GPL 1 oct. 2026). Con su ataúd mínimo está en $5,440. Lote aparte.",
+              "noteEn": "Immediate burial, purchaser casket (GPL 1 Oct 2026). With their minimum casket it is $5,440. Plot extra."
+            },
+            {
+              "id": "memorialCremation",
+              "labelEs": "Cremación con memorial",
+              "labelEn": "Cremation with memorial",
+              "amt": 0,
+              "noteEs": "No figura en su lista publicada. Pida la lista vigente.",
+              "noteEn": "Not on their published list. Ask for the current list."
+            },
+            {
+              "id": "traditional",
+              "labelEs": "Funeral tradicional con velatorio",
+              "labelEn": "Traditional funeral with visitation",
+              "amt": 0,
+              "noteEs": "No figura en su lista publicada. Pida la lista vigente.",
+              "noteEn": "Not on their published list. Ask for the current list."
+            }
+          ]
         }
       ],
       "cemeteries": [
         {
-          "name": "Vista Verde Memorial Park, 4310 Sara Rd SE. Resale: ad listed November 30, 2015,",
+          "name": "Vista Verde Memorial Park, 4310 Sara Rd SE. Cemetery phone on the Daniels GPL of",
           "address": "4310 Sara Rd",
-          "phone": "505-892-9920",
-          "noteEs": "Vista Verde Memorial Park, 4310 Sara Rd SE. Reventa: anuncio del 30 de noviembre de 2015, aún en el tablero el 11 de octubre de 2026, a $1,595 por espacio. Lote nuevo: pida la lista. Daniels Family, capilla Sara Road, está en esa dirección",
-          "noteEn": "Vista Verde Memorial Park, 4310 Sara Rd SE. Resale: ad listed November 30, 2015, still on the board October 11, 2026, at $1,595 per space. New lot: ask for the list. Daniels Family’s Sara Road Chapel is at that address"
+          "phone": "505-338-1309",
+          "noteEs": "Vista Verde Memorial Park, 4310 Sara Rd SE. del cementerio en la GPL de Daniels del 1 de octubre de 2026: . Reventa: anuncio del 30 de noviembre de 2015, aún en el tablero el 11 de octubre de 2026, a $1,595 por espacio. Lote nuevo: pida la lista. La capilla Daniels de Sara Road está en esa dirección: 505-892-9920",
+          "noteEn": "Vista Verde Memorial Park, 4310 Sara Rd SE. Cemetery on the Daniels GPL of October 1, 2026: . Resale: ad listed November 30, 2015, still on the board October 11, 2026, at $1,595 per space. New lot: ask for the list. Daniels’ Sara Road Chapel is at that address: 505-892-9920"
         }
       ],
       "other": [
@@ -106611,8 +106638,8 @@
       "pathEn": "/en/funeral-homes-cemeteries.html?estado=new-mexico&ciudad=bernalillo",
       "guideEs": "/estados/new-mexico/rio-rancho.html",
       "guideEn": "/en/states/new-mexico/rio-rancho.html",
-      "sourceLineEs": "French Funerals, capilla de Rio Rancho: GPL 1 jul. 2025, la misma lista que en Albuquerque — cremación directa $3,375 y entierro inmediato $3,175 con contenedor del comprador. El permiso del OMI de $236.79 no va incluido. French no publica un total de memorial ni de funeral con velatorio. La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida.",
-      "sourceLineEn": "French Funerals, Rio Rancho chapel: GPL 1 Jul 2025, the same list as Albuquerque — direct cremation $3,375 and immediate burial $3,175 with a purchaser container. The $236.79 OMI permit is not included. French does not publish a memorial total or a visitation-funeral total. The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker.",
+      "sourceLineEs": "French Funerals, capilla de Rio Rancho: GPL 1 jul. 2025, la misma lista que en Albuquerque — cremación directa $3,375 y entierro inmediato $3,175 con contenedor del comprador. El permiso del OMI de $236.79 no va incluido. French no publica un total de memorial ni de funeral con velatorio. Daniels Family: GPL 1 oct. 2026, la misma lista en Sara Road y Southern — cremación directa $3,785 y entierro inmediato $3,995 con contenedor del comprador. Daniels no publica un total de memorial ni de funeral con velatorio. La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida.",
+      "sourceLineEn": "French Funerals, Rio Rancho chapel: GPL 1 Jul 2025, the same list as Albuquerque — direct cremation $3,375 and immediate burial $3,175 with a purchaser container. The $236.79 OMI permit is not included. French does not publish a memorial total or a visitation-funeral total. Daniels Family: GPL 1 Oct 2026, the same list at Sara Road and Southern — direct cremation $3,785 and immediate burial $3,995 with a purchaser container. Daniels does not publish a memorial total or a visitation-funeral total. The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker.",
       "localHomes": [],
       "nearbyHomes": [
         {
@@ -106621,8 +106648,8 @@
           "href": "https://irp.cdn-website.com/68ab9c76/files/uploaded/FRENCH+GPL+2025+-+July.pdf",
           "address": "1275 Unser Blvd NE, Rio Rancho",
           "phone": "505-338-2000",
-          "sourceEs": "French Funerals, capilla de Rio Rancho: lista general de precios 1 jul. 2025, la misma lista que en Albuquerque — cremación directa $3,375 y entierro inmediato $3,175 con contenedor del comprador. El permiso del OMI de $236.79 no va incluido. French no publica un total de memorial ni de funeral con velatorio. La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida",
-          "sourceEn": "French Funerals, Rio Rancho chapel: general price list 1 Jul 2025, the same list as Albuquerque — direct cremation $3,375 and immediate burial $3,175 with a purchaser container. The $236.79 OMI permit is not included. French does not publish a memorial total or a visitation-funeral total. The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker",
+          "sourceEs": "French Funerals, capilla de Rio Rancho: lista general de precios 1 jul. 2025, la misma lista que en Albuquerque — cremación directa $3,375 y entierro inmediato $3,175 con contenedor del comprador. El permiso del OMI de $236.79 no va incluido. French no publica un total de memorial ni de funeral con velatorio",
+          "sourceEn": "French Funerals, Rio Rancho chapel: general price list 1 Jul 2025, the same list as Albuquerque — direct cremation $3,375 and immediate burial $3,175 with a purchaser container. The $236.79 OMI permit is not included. French does not publish a memorial total or a visitation-funeral total",
           "gplDateEs": "1 jul. 2025",
           "gplDateEn": "1 Jul 2025",
           "gplKind": "gpl",
@@ -106662,40 +106689,60 @@
           ]
         },
         {
-          "id": "daniels-family-sara-road-chapel",
-          "name": "Daniels Family — Sara Road Chapel",
-          "href": "https://www.danielsfuneral.com/sara-road-chapel",
-          "address": "4310 Sara Rd",
+          "id": "daniels",
+          "name": "Daniels Family",
+          "href": "https://irp.cdn-website.com/74068d93/files/uploaded/2026.10.01+Daniels+GPL.pdf",
+          "address": "4310 Sara Rd SE, Rio Rancho",
           "phone": "505-892-9920",
-          "sourceEs": "",
-          "sourceEn": "",
-          "gplDateEs": "",
-          "gplDateEn": "",
-          "gplKind": "none",
-          "packages": []
-        },
-        {
-          "id": "daniels-family-southern-chapel",
-          "name": "Daniels Family — Southern Chapel",
-          "href": "https://www.danielsfuneral.com/",
-          "address": "2400 Southern Blvd SE",
-          "phone": "505-891-9192",
-          "sourceEs": "",
-          "sourceEn": "",
-          "gplDateEs": "",
-          "gplDateEn": "",
-          "gplKind": "none",
-          "packages": []
+          "sourceEs": "Daniels Family: lista general de precios 1 oct. 2026, la misma lista en Sara Road y Southern — cremación directa $3,785 y entierro inmediato $3,995 con contenedor del comprador. Daniels no publica un total de memorial ni de funeral con velatorio. La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida",
+          "sourceEn": "Daniels Family: general price list 1 Oct 2026, the same list at Sara Road and Southern — direct cremation $3,785 and immediate burial $3,995 with a purchaser container. Daniels does not publish a memorial total or a visitation-funeral total. The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker",
+          "gplDateEs": "1 oct. 2026",
+          "gplDateEn": "1 Oct 2026",
+          "gplKind": "gpl",
+          "packages": [
+            {
+              "id": "directCremation",
+              "labelEs": "Cremación directa",
+              "labelEn": "Direct cremation",
+              "amt": 3785,
+              "noteEs": "Cremación directa, contenedor del comprador (GPL 1 oct. 2026). La misma lista en Alameda, Carlisle, Sara, Southern y Wyoming. No incluye velatorio ni ceremonia.",
+              "noteEn": "Direct cremation, purchaser container (GPL 1 Oct 2026). The same list at Alameda, Carlisle, Sara, Southern, and Wyoming. No visitation or ceremony."
+            },
+            {
+              "id": "immediateBurial",
+              "labelEs": "Entierro inmediato",
+              "labelEn": "Immediate burial",
+              "amt": 3995,
+              "noteEs": "Entierro inmediato, ataúd del comprador (GPL 1 oct. 2026). Con su ataúd mínimo está en $5,440. Lote aparte.",
+              "noteEn": "Immediate burial, purchaser casket (GPL 1 Oct 2026). With their minimum casket it is $5,440. Plot extra."
+            },
+            {
+              "id": "memorialCremation",
+              "labelEs": "Cremación con memorial",
+              "labelEn": "Cremation with memorial",
+              "amt": 0,
+              "noteEs": "No figura en su lista publicada. Pida la lista vigente.",
+              "noteEn": "Not on their published list. Ask for the current list."
+            },
+            {
+              "id": "traditional",
+              "labelEs": "Funeral tradicional con velatorio",
+              "labelEn": "Traditional funeral with visitation",
+              "amt": 0,
+              "noteEs": "No figura en su lista publicada. Pida la lista vigente.",
+              "noteEn": "Not on their published list. Ask for the current list."
+            }
+          ]
         }
       ],
       "localCemeteries": [],
       "nearbyCemeteries": [
         {
-          "name": "Vista Verde Memorial Park, 4310 Sara Rd SE. Resale: ad listed November 30, 2015,",
+          "name": "Vista Verde Memorial Park, 4310 Sara Rd SE. Cemetery phone on the Daniels GPL of",
           "address": "4310 Sara Rd",
-          "phone": "505-892-9920",
-          "noteEs": "Vista Verde Memorial Park, 4310 Sara Rd SE. Reventa: anuncio del 30 de noviembre de 2015, aún en el tablero el 11 de octubre de 2026, a $1,595 por espacio. Lote nuevo: pida la lista. Daniels Family, capilla Sara Road, está en esa dirección",
-          "noteEn": "Vista Verde Memorial Park, 4310 Sara Rd SE. Resale: ad listed November 30, 2015, still on the board October 11, 2026, at $1,595 per space. New lot: ask for the list. Daniels Family’s Sara Road Chapel is at that address"
+          "phone": "505-338-1309",
+          "noteEs": "Vista Verde Memorial Park, 4310 Sara Rd SE. del cementerio en la GPL de Daniels del 1 de octubre de 2026: . Reventa: anuncio del 30 de noviembre de 2015, aún en el tablero el 11 de octubre de 2026, a $1,595 por espacio. Lote nuevo: pida la lista. La capilla Daniels de Sara Road está en esa dirección: 505-892-9920",
+          "noteEn": "Vista Verde Memorial Park, 4310 Sara Rd SE. Cemetery on the Daniels GPL of October 1, 2026: . Resale: ad listed November 30, 2015, still on the board October 11, 2026, at $1,595 per space. New lot: ask for the list. Daniels’ Sara Road Chapel is at that address: 505-892-9920"
         }
       ],
       "other": [
@@ -106727,8 +106774,8 @@
       "pathEn": "/en/funeral-homes-cemeteries.html?estado=new-mexico&ciudad=corrales",
       "guideEs": "/estados/new-mexico/rio-rancho.html",
       "guideEn": "/en/states/new-mexico/rio-rancho.html",
-      "sourceLineEs": "French Funerals, capilla de Rio Rancho: GPL 1 jul. 2025, la misma lista que en Albuquerque — cremación directa $3,375 y entierro inmediato $3,175 con contenedor del comprador. El permiso del OMI de $236.79 no va incluido. French no publica un total de memorial ni de funeral con velatorio. La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida.",
-      "sourceLineEn": "French Funerals, Rio Rancho chapel: GPL 1 Jul 2025, the same list as Albuquerque — direct cremation $3,375 and immediate burial $3,175 with a purchaser container. The $236.79 OMI permit is not included. French does not publish a memorial total or a visitation-funeral total. The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker.",
+      "sourceLineEs": "French Funerals, capilla de Rio Rancho: GPL 1 jul. 2025, la misma lista que en Albuquerque — cremación directa $3,375 y entierro inmediato $3,175 con contenedor del comprador. El permiso del OMI de $236.79 no va incluido. French no publica un total de memorial ni de funeral con velatorio. Daniels Family: GPL 1 oct. 2026, la misma lista en Sara Road y Southern — cremación directa $3,785 y entierro inmediato $3,995 con contenedor del comprador. Daniels no publica un total de memorial ni de funeral con velatorio. La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida.",
+      "sourceLineEn": "French Funerals, Rio Rancho chapel: GPL 1 Jul 2025, the same list as Albuquerque — direct cremation $3,375 and immediate burial $3,175 with a purchaser container. The $236.79 OMI permit is not included. French does not publish a memorial total or a visitation-funeral total. Daniels Family: GPL 1 Oct 2026, the same list at Sara Road and Southern — direct cremation $3,785 and immediate burial $3,995 with a purchaser container. Daniels does not publish a memorial total or a visitation-funeral total. The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker.",
       "localHomes": [],
       "nearbyHomes": [
         {
@@ -106737,8 +106784,8 @@
           "href": "https://irp.cdn-website.com/68ab9c76/files/uploaded/FRENCH+GPL+2025+-+July.pdf",
           "address": "1275 Unser Blvd NE, Rio Rancho",
           "phone": "505-338-2000",
-          "sourceEs": "French Funerals, capilla de Rio Rancho: lista general de precios 1 jul. 2025, la misma lista que en Albuquerque — cremación directa $3,375 y entierro inmediato $3,175 con contenedor del comprador. El permiso del OMI de $236.79 no va incluido. French no publica un total de memorial ni de funeral con velatorio. La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida",
-          "sourceEn": "French Funerals, Rio Rancho chapel: general price list 1 Jul 2025, the same list as Albuquerque — direct cremation $3,375 and immediate burial $3,175 with a purchaser container. The $236.79 OMI permit is not included. French does not publish a memorial total or a visitation-funeral total. The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker",
+          "sourceEs": "French Funerals, capilla de Rio Rancho: lista general de precios 1 jul. 2025, la misma lista que en Albuquerque — cremación directa $3,375 y entierro inmediato $3,175 con contenedor del comprador. El permiso del OMI de $236.79 no va incluido. French no publica un total de memorial ni de funeral con velatorio",
+          "sourceEn": "French Funerals, Rio Rancho chapel: general price list 1 Jul 2025, the same list as Albuquerque — direct cremation $3,375 and immediate burial $3,175 with a purchaser container. The $236.79 OMI permit is not included. French does not publish a memorial total or a visitation-funeral total",
           "gplDateEs": "1 jul. 2025",
           "gplDateEn": "1 Jul 2025",
           "gplKind": "gpl",
@@ -106778,40 +106825,60 @@
           ]
         },
         {
-          "id": "daniels-family-sara-road-chapel",
-          "name": "Daniels Family — Sara Road Chapel",
-          "href": "https://www.danielsfuneral.com/sara-road-chapel",
-          "address": "4310 Sara Rd",
+          "id": "daniels",
+          "name": "Daniels Family",
+          "href": "https://irp.cdn-website.com/74068d93/files/uploaded/2026.10.01+Daniels+GPL.pdf",
+          "address": "4310 Sara Rd SE, Rio Rancho",
           "phone": "505-892-9920",
-          "sourceEs": "",
-          "sourceEn": "",
-          "gplDateEs": "",
-          "gplDateEn": "",
-          "gplKind": "none",
-          "packages": []
-        },
-        {
-          "id": "daniels-family-southern-chapel",
-          "name": "Daniels Family — Southern Chapel",
-          "href": "https://www.danielsfuneral.com/",
-          "address": "2400 Southern Blvd SE",
-          "phone": "505-891-9192",
-          "sourceEs": "",
-          "sourceEn": "",
-          "gplDateEs": "",
-          "gplDateEn": "",
-          "gplKind": "none",
-          "packages": []
+          "sourceEs": "Daniels Family: lista general de precios 1 oct. 2026, la misma lista en Sara Road y Southern — cremación directa $3,785 y entierro inmediato $3,995 con contenedor del comprador. Daniels no publica un total de memorial ni de funeral con velatorio. La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida",
+          "sourceEn": "Daniels Family: general price list 1 Oct 2026, the same list at Sara Road and Southern — direct cremation $3,785 and immediate burial $3,995 with a purchaser container. Daniels does not publish a memorial total or a visitation-funeral total. The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker",
+          "gplDateEs": "1 oct. 2026",
+          "gplDateEn": "1 Oct 2026",
+          "gplKind": "gpl",
+          "packages": [
+            {
+              "id": "directCremation",
+              "labelEs": "Cremación directa",
+              "labelEn": "Direct cremation",
+              "amt": 3785,
+              "noteEs": "Cremación directa, contenedor del comprador (GPL 1 oct. 2026). La misma lista en Alameda, Carlisle, Sara, Southern y Wyoming. No incluye velatorio ni ceremonia.",
+              "noteEn": "Direct cremation, purchaser container (GPL 1 Oct 2026). The same list at Alameda, Carlisle, Sara, Southern, and Wyoming. No visitation or ceremony."
+            },
+            {
+              "id": "immediateBurial",
+              "labelEs": "Entierro inmediato",
+              "labelEn": "Immediate burial",
+              "amt": 3995,
+              "noteEs": "Entierro inmediato, ataúd del comprador (GPL 1 oct. 2026). Con su ataúd mínimo está en $5,440. Lote aparte.",
+              "noteEn": "Immediate burial, purchaser casket (GPL 1 Oct 2026). With their minimum casket it is $5,440. Plot extra."
+            },
+            {
+              "id": "memorialCremation",
+              "labelEs": "Cremación con memorial",
+              "labelEn": "Cremation with memorial",
+              "amt": 0,
+              "noteEs": "No figura en su lista publicada. Pida la lista vigente.",
+              "noteEn": "Not on their published list. Ask for the current list."
+            },
+            {
+              "id": "traditional",
+              "labelEs": "Funeral tradicional con velatorio",
+              "labelEn": "Traditional funeral with visitation",
+              "amt": 0,
+              "noteEs": "No figura en su lista publicada. Pida la lista vigente.",
+              "noteEn": "Not on their published list. Ask for the current list."
+            }
+          ]
         }
       ],
       "localCemeteries": [],
       "nearbyCemeteries": [
         {
-          "name": "Vista Verde Memorial Park, 4310 Sara Rd SE. Resale: ad listed November 30, 2015,",
+          "name": "Vista Verde Memorial Park, 4310 Sara Rd SE. Cemetery phone on the Daniels GPL of",
           "address": "4310 Sara Rd",
-          "phone": "505-892-9920",
-          "noteEs": "Vista Verde Memorial Park, 4310 Sara Rd SE. Reventa: anuncio del 30 de noviembre de 2015, aún en el tablero el 11 de octubre de 2026, a $1,595 por espacio. Lote nuevo: pida la lista. Daniels Family, capilla Sara Road, está en esa dirección",
-          "noteEn": "Vista Verde Memorial Park, 4310 Sara Rd SE. Resale: ad listed November 30, 2015, still on the board October 11, 2026, at $1,595 per space. New lot: ask for the list. Daniels Family’s Sara Road Chapel is at that address"
+          "phone": "505-338-1309",
+          "noteEs": "Vista Verde Memorial Park, 4310 Sara Rd SE. del cementerio en la GPL de Daniels del 1 de octubre de 2026: . Reventa: anuncio del 30 de noviembre de 2015, aún en el tablero el 11 de octubre de 2026, a $1,595 por espacio. Lote nuevo: pida la lista. La capilla Daniels de Sara Road está en esa dirección: 505-892-9920",
+          "noteEn": "Vista Verde Memorial Park, 4310 Sara Rd SE. Cemetery on the Daniels GPL of October 1, 2026: . Resale: ad listed November 30, 2015, still on the board October 11, 2026, at $1,595 per space. New lot: ask for the list. Daniels’ Sara Road Chapel is at that address: 505-892-9920"
         }
       ],
       "other": [
@@ -107089,8 +107156,8 @@
       "pathEn": "/en/funeral-homes-cemeteries.html?estado=new-mexico&ciudad=los-ranchos",
       "guideEs": "/estados/new-mexico/albuquerque.html",
       "guideEn": "/en/states/new-mexico/albuquerque.html",
-      "sourceLineEs": "Director’s Choice: GPL 1 may. 2025 — cremación simple en persona $1,215 (en línea $995) con contenedor estándar; entierro inmediato $2,395 sin ataúd; memorial con cremación $3,895; paquete tradicional A $4,195 con ataúd de calibre 20. El permiso del OMI de $230 va aparte. French Funerals: GPL 1 jul. 2025, misma lista en sus cinco capillas — cremación directa $3,375 y entierro inmediato $3,175 con contenedor del comprador. El permiso del OMI de $236.79 no va incluido. French no publica un total de memorial ni de funeral con velatorio. La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida.",
-      "sourceLineEn": "Director’s Choice: GPL 1 May 2025 — in-person simple cremation $1,215 (online $995) with the standard container; immediate burial $2,395 with no casket; cremation memorial $3,895; traditional package A $4,195 with a 20-gauge casket. The $230 OMI permit is extra. French Funerals: GPL 1 Jul 2025, the same list at all five chapels — direct cremation $3,375 and immediate burial $3,175 with a purchaser container. The $236.79 OMI permit is not included. French does not publish a memorial total or a visitation-funeral total. The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker.",
+      "sourceLineEs": "Director’s Choice: GPL 1 may. 2025 — cremación simple en persona $1,215 (en línea $995) con contenedor estándar; entierro inmediato $2,395 sin ataúd; memorial con cremación $3,895; paquete tradicional A $4,195 con ataúd de calibre 20. El permiso del OMI de $230 va aparte. French Funerals: GPL 1 jul. 2025, misma lista en sus cinco capillas — cremación directa $3,375 y entierro inmediato $3,175 con contenedor del comprador. El permiso del OMI de $236.79 no va incluido. French no publica un total de memorial ni de funeral con velatorio. Daniels Family: GPL 1 oct. 2026, la misma lista en Alameda, Carlisle, Wyoming, Sara y Southern — cremación directa $3,785 y entierro inmediato $3,995 con contenedor del comprador. Daniels no publica un total de memorial ni de funeral con velatorio. La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida.",
+      "sourceLineEn": "Director’s Choice: GPL 1 May 2025 — in-person simple cremation $1,215 (online $995) with the standard container; immediate burial $2,395 with no casket; cremation memorial $3,895; traditional package A $4,195 with a 20-gauge casket. The $230 OMI permit is extra. French Funerals: GPL 1 Jul 2025, the same list at all five chapels — direct cremation $3,375 and immediate burial $3,175 with a purchaser container. The $236.79 OMI permit is not included. French does not publish a memorial total or a visitation-funeral total. Daniels Family: GPL 1 Oct 2026, the same list at Alameda, Carlisle, Wyoming, Sara, and Southern — direct cremation $3,785 and immediate burial $3,995 with a purchaser container. Daniels does not publish a memorial total or a visitation-funeral total. The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker.",
       "localHomes": [],
       "nearbyHomes": [
         {
@@ -107145,8 +107212,8 @@
           "href": "https://irp.cdn-website.com/68ab9c76/files/uploaded/FRENCH+GPL+2025+-+July.pdf",
           "address": "1111 University Blvd NE, Albuquerque",
           "phone": "505-843-6333",
-          "sourceEs": "French Funerals: lista general de precios 1 jul. 2025, misma lista en sus cinco capillas — cremación directa $3,375 y entierro inmediato $3,175 con contenedor del comprador. El permiso del OMI de $236.79 no va incluido. French no publica un total de memorial ni de funeral con velatorio. La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida",
-          "sourceEn": "French Funerals: general price list 1 Jul 2025, the same list at all five chapels — direct cremation $3,375 and immediate burial $3,175 with a purchaser container. The $236.79 OMI permit is not included. French does not publish a memorial total or a visitation-funeral total. The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker",
+          "sourceEs": "French Funerals: lista general de precios 1 jul. 2025, misma lista en sus cinco capillas — cremación directa $3,375 y entierro inmediato $3,175 con contenedor del comprador. El permiso del OMI de $236.79 no va incluido. French no publica un total de memorial ni de funeral con velatorio",
+          "sourceEn": "French Funerals: general price list 1 Jul 2025, the same list at all five chapels — direct cremation $3,375 and immediate burial $3,175 with a purchaser container. The $236.79 OMI permit is not included. French does not publish a memorial total or a visitation-funeral total",
           "gplDateEs": "1 jul. 2025",
           "gplDateEn": "1 Jul 2025",
           "gplKind": "gpl",
@@ -107186,43 +107253,50 @@
           ]
         },
         {
-          "id": "daniels-family-carlisle-chapel",
-          "name": "Daniels Family — Carlisle Chapel",
-          "href": "https://www.danielsfuneral.com/",
-          "address": "3113 Carlisle Blvd NE",
+          "id": "daniels",
+          "name": "Daniels Family",
+          "href": "https://irp.cdn-website.com/74068d93/files/uploaded/2026.10.01+Daniels+GPL.pdf",
+          "address": "3113 Carlisle Blvd NE, Albuquerque",
           "phone": "505-884-1188",
-          "sourceEs": "",
-          "sourceEn": "",
-          "gplDateEs": "",
-          "gplDateEn": "",
-          "gplKind": "none",
-          "packages": []
-        },
-        {
-          "id": "daniels-family-wyoming-chapel",
-          "name": "Daniels Family — Wyoming Chapel",
-          "href": "https://www.danielsfuneral.com/",
-          "address": "7601 Wyoming Blvd NE",
-          "phone": "505-821-0010",
-          "sourceEs": "",
-          "sourceEn": "",
-          "gplDateEs": "",
-          "gplDateEn": "",
-          "gplKind": "none",
-          "packages": []
-        },
-        {
-          "id": "alameda-mortuary",
-          "name": "Alameda Mortuary",
-          "href": "https://www.danielsfuneral.com/",
-          "address": "9420 4th St NW",
-          "phone": "505-898-3160",
-          "sourceEs": "",
-          "sourceEn": "",
-          "gplDateEs": "",
-          "gplDateEn": "",
-          "gplKind": "none",
-          "packages": []
+          "sourceEs": "Daniels Family: lista general de precios 1 oct. 2026, la misma lista en Alameda, Carlisle, Wyoming, Sara y Southern — cremación directa $3,785 y entierro inmediato $3,995 con contenedor del comprador. Daniels no publica un total de memorial ni de funeral con velatorio. La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida",
+          "sourceEn": "Daniels Family: general price list 1 Oct 2026, the same list at Alameda, Carlisle, Wyoming, Sara, and Southern — direct cremation $3,785 and immediate burial $3,995 with a purchaser container. Daniels does not publish a memorial total or a visitation-funeral total. The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker",
+          "gplDateEs": "1 oct. 2026",
+          "gplDateEn": "1 Oct 2026",
+          "gplKind": "gpl",
+          "packages": [
+            {
+              "id": "directCremation",
+              "labelEs": "Cremación directa",
+              "labelEn": "Direct cremation",
+              "amt": 3785,
+              "noteEs": "Cremación directa, contenedor del comprador (GPL 1 oct. 2026). La misma lista en Alameda, Carlisle, Sara, Southern y Wyoming. No incluye velatorio ni ceremonia.",
+              "noteEn": "Direct cremation, purchaser container (GPL 1 Oct 2026). The same list at Alameda, Carlisle, Sara, Southern, and Wyoming. No visitation or ceremony."
+            },
+            {
+              "id": "immediateBurial",
+              "labelEs": "Entierro inmediato",
+              "labelEn": "Immediate burial",
+              "amt": 3995,
+              "noteEs": "Entierro inmediato, ataúd del comprador (GPL 1 oct. 2026). Con su ataúd mínimo está en $5,440. Lote aparte.",
+              "noteEn": "Immediate burial, purchaser casket (GPL 1 Oct 2026). With their minimum casket it is $5,440. Plot extra."
+            },
+            {
+              "id": "memorialCremation",
+              "labelEs": "Cremación con memorial",
+              "labelEn": "Cremation with memorial",
+              "amt": 0,
+              "noteEs": "No figura en su lista publicada. Pida la lista vigente.",
+              "noteEn": "Not on their published list. Ask for the current list."
+            },
+            {
+              "id": "traditional",
+              "labelEs": "Funeral tradicional con velatorio",
+              "labelEn": "Traditional funeral with visitation",
+              "amt": 0,
+              "noteEs": "No figura en su lista publicada. Pida la lista vigente.",
+              "noteEn": "Not on their published list. Ask for the current list."
+            }
+          ]
         },
         {
           "id": "garcia-mortuary",
@@ -107393,8 +107467,8 @@
       "pathEn": "/en/funeral-homes-cemeteries.html?estado=new-mexico&ciudad=north-valley",
       "guideEs": "/estados/new-mexico/albuquerque.html",
       "guideEn": "/en/states/new-mexico/albuquerque.html",
-      "sourceLineEs": "Director’s Choice: GPL 1 may. 2025 — cremación simple en persona $1,215 (en línea $995) con contenedor estándar; entierro inmediato $2,395 sin ataúd; memorial con cremación $3,895; paquete tradicional A $4,195 con ataúd de calibre 20. El permiso del OMI de $230 va aparte. French Funerals: GPL 1 jul. 2025, misma lista en sus cinco capillas — cremación directa $3,375 y entierro inmediato $3,175 con contenedor del comprador. El permiso del OMI de $236.79 no va incluido. French no publica un total de memorial ni de funeral con velatorio. La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida.",
-      "sourceLineEn": "Director’s Choice: GPL 1 May 2025 — in-person simple cremation $1,215 (online $995) with the standard container; immediate burial $2,395 with no casket; cremation memorial $3,895; traditional package A $4,195 with a 20-gauge casket. The $230 OMI permit is extra. French Funerals: GPL 1 Jul 2025, the same list at all five chapels — direct cremation $3,375 and immediate burial $3,175 with a purchaser container. The $236.79 OMI permit is not included. French does not publish a memorial total or a visitation-funeral total. The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker.",
+      "sourceLineEs": "Director’s Choice: GPL 1 may. 2025 — cremación simple en persona $1,215 (en línea $995) con contenedor estándar; entierro inmediato $2,395 sin ataúd; memorial con cremación $3,895; paquete tradicional A $4,195 con ataúd de calibre 20. El permiso del OMI de $230 va aparte. French Funerals: GPL 1 jul. 2025, misma lista en sus cinco capillas — cremación directa $3,375 y entierro inmediato $3,175 con contenedor del comprador. El permiso del OMI de $236.79 no va incluido. French no publica un total de memorial ni de funeral con velatorio. Daniels Family: GPL 1 oct. 2026, la misma lista en Alameda, Carlisle, Wyoming, Sara y Southern — cremación directa $3,785 y entierro inmediato $3,995 con contenedor del comprador. Daniels no publica un total de memorial ni de funeral con velatorio. La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida.",
+      "sourceLineEn": "Director’s Choice: GPL 1 May 2025 — in-person simple cremation $1,215 (online $995) with the standard container; immediate burial $2,395 with no casket; cremation memorial $3,895; traditional package A $4,195 with a 20-gauge casket. The $230 OMI permit is extra. French Funerals: GPL 1 Jul 2025, the same list at all five chapels — direct cremation $3,375 and immediate burial $3,175 with a purchaser container. The $236.79 OMI permit is not included. French does not publish a memorial total or a visitation-funeral total. Daniels Family: GPL 1 Oct 2026, the same list at Alameda, Carlisle, Wyoming, Sara, and Southern — direct cremation $3,785 and immediate burial $3,995 with a purchaser container. Daniels does not publish a memorial total or a visitation-funeral total. The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker.",
       "localHomes": [],
       "nearbyHomes": [
         {
@@ -107449,8 +107523,8 @@
           "href": "https://irp.cdn-website.com/68ab9c76/files/uploaded/FRENCH+GPL+2025+-+July.pdf",
           "address": "1111 University Blvd NE, Albuquerque",
           "phone": "505-843-6333",
-          "sourceEs": "French Funerals: lista general de precios 1 jul. 2025, misma lista en sus cinco capillas — cremación directa $3,375 y entierro inmediato $3,175 con contenedor del comprador. El permiso del OMI de $236.79 no va incluido. French no publica un total de memorial ni de funeral con velatorio. La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida",
-          "sourceEn": "French Funerals: general price list 1 Jul 2025, the same list at all five chapels — direct cremation $3,375 and immediate burial $3,175 with a purchaser container. The $236.79 OMI permit is not included. French does not publish a memorial total or a visitation-funeral total. The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker",
+          "sourceEs": "French Funerals: lista general de precios 1 jul. 2025, misma lista en sus cinco capillas — cremación directa $3,375 y entierro inmediato $3,175 con contenedor del comprador. El permiso del OMI de $236.79 no va incluido. French no publica un total de memorial ni de funeral con velatorio",
+          "sourceEn": "French Funerals: general price list 1 Jul 2025, the same list at all five chapels — direct cremation $3,375 and immediate burial $3,175 with a purchaser container. The $236.79 OMI permit is not included. French does not publish a memorial total or a visitation-funeral total",
           "gplDateEs": "1 jul. 2025",
           "gplDateEn": "1 Jul 2025",
           "gplKind": "gpl",
@@ -107490,43 +107564,50 @@
           ]
         },
         {
-          "id": "daniels-family-carlisle-chapel",
-          "name": "Daniels Family — Carlisle Chapel",
-          "href": "https://www.danielsfuneral.com/",
-          "address": "3113 Carlisle Blvd NE",
+          "id": "daniels",
+          "name": "Daniels Family",
+          "href": "https://irp.cdn-website.com/74068d93/files/uploaded/2026.10.01+Daniels+GPL.pdf",
+          "address": "3113 Carlisle Blvd NE, Albuquerque",
           "phone": "505-884-1188",
-          "sourceEs": "",
-          "sourceEn": "",
-          "gplDateEs": "",
-          "gplDateEn": "",
-          "gplKind": "none",
-          "packages": []
-        },
-        {
-          "id": "daniels-family-wyoming-chapel",
-          "name": "Daniels Family — Wyoming Chapel",
-          "href": "https://www.danielsfuneral.com/",
-          "address": "7601 Wyoming Blvd NE",
-          "phone": "505-821-0010",
-          "sourceEs": "",
-          "sourceEn": "",
-          "gplDateEs": "",
-          "gplDateEn": "",
-          "gplKind": "none",
-          "packages": []
-        },
-        {
-          "id": "alameda-mortuary",
-          "name": "Alameda Mortuary",
-          "href": "https://www.danielsfuneral.com/",
-          "address": "9420 4th St NW",
-          "phone": "505-898-3160",
-          "sourceEs": "",
-          "sourceEn": "",
-          "gplDateEs": "",
-          "gplDateEn": "",
-          "gplKind": "none",
-          "packages": []
+          "sourceEs": "Daniels Family: lista general de precios 1 oct. 2026, la misma lista en Alameda, Carlisle, Wyoming, Sara y Southern — cremación directa $3,785 y entierro inmediato $3,995 con contenedor del comprador. Daniels no publica un total de memorial ni de funeral con velatorio. La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida",
+          "sourceEn": "Daniels Family: general price list 1 Oct 2026, the same list at Alameda, Carlisle, Wyoming, Sara, and Southern — direct cremation $3,785 and immediate burial $3,995 with a purchaser container. Daniels does not publish a memorial total or a visitation-funeral total. The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker",
+          "gplDateEs": "1 oct. 2026",
+          "gplDateEn": "1 Oct 2026",
+          "gplKind": "gpl",
+          "packages": [
+            {
+              "id": "directCremation",
+              "labelEs": "Cremación directa",
+              "labelEn": "Direct cremation",
+              "amt": 3785,
+              "noteEs": "Cremación directa, contenedor del comprador (GPL 1 oct. 2026). La misma lista en Alameda, Carlisle, Sara, Southern y Wyoming. No incluye velatorio ni ceremonia.",
+              "noteEn": "Direct cremation, purchaser container (GPL 1 Oct 2026). The same list at Alameda, Carlisle, Sara, Southern, and Wyoming. No visitation or ceremony."
+            },
+            {
+              "id": "immediateBurial",
+              "labelEs": "Entierro inmediato",
+              "labelEn": "Immediate burial",
+              "amt": 3995,
+              "noteEs": "Entierro inmediato, ataúd del comprador (GPL 1 oct. 2026). Con su ataúd mínimo está en $5,440. Lote aparte.",
+              "noteEn": "Immediate burial, purchaser casket (GPL 1 Oct 2026). With their minimum casket it is $5,440. Plot extra."
+            },
+            {
+              "id": "memorialCremation",
+              "labelEs": "Cremación con memorial",
+              "labelEn": "Cremation with memorial",
+              "amt": 0,
+              "noteEs": "No figura en su lista publicada. Pida la lista vigente.",
+              "noteEn": "Not on their published list. Ask for the current list."
+            },
+            {
+              "id": "traditional",
+              "labelEs": "Funeral tradicional con velatorio",
+              "labelEn": "Traditional funeral with visitation",
+              "amt": 0,
+              "noteEs": "No figura en su lista publicada. Pida la lista vigente.",
+              "noteEn": "Not on their published list. Ask for the current list."
+            }
+          ]
         },
         {
           "id": "garcia-mortuary",
@@ -107640,8 +107721,8 @@
       "pathEn": "/en/funeral-homes-cemeteries.html?estado=new-mexico&ciudad=placitas",
       "guideEs": "/estados/new-mexico/rio-rancho.html",
       "guideEn": "/en/states/new-mexico/rio-rancho.html",
-      "sourceLineEs": "French Funerals, capilla de Rio Rancho: GPL 1 jul. 2025, la misma lista que en Albuquerque — cremación directa $3,375 y entierro inmediato $3,175 con contenedor del comprador. El permiso del OMI de $236.79 no va incluido. French no publica un total de memorial ni de funeral con velatorio. La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida.",
-      "sourceLineEn": "French Funerals, Rio Rancho chapel: GPL 1 Jul 2025, the same list as Albuquerque — direct cremation $3,375 and immediate burial $3,175 with a purchaser container. The $236.79 OMI permit is not included. French does not publish a memorial total or a visitation-funeral total. The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker.",
+      "sourceLineEs": "French Funerals, capilla de Rio Rancho: GPL 1 jul. 2025, la misma lista que en Albuquerque — cremación directa $3,375 y entierro inmediato $3,175 con contenedor del comprador. El permiso del OMI de $236.79 no va incluido. French no publica un total de memorial ni de funeral con velatorio. Daniels Family: GPL 1 oct. 2026, la misma lista en Sara Road y Southern — cremación directa $3,785 y entierro inmediato $3,995 con contenedor del comprador. Daniels no publica un total de memorial ni de funeral con velatorio. La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida.",
+      "sourceLineEn": "French Funerals, Rio Rancho chapel: GPL 1 Jul 2025, the same list as Albuquerque — direct cremation $3,375 and immediate burial $3,175 with a purchaser container. The $236.79 OMI permit is not included. French does not publish a memorial total or a visitation-funeral total. Daniels Family: GPL 1 Oct 2026, the same list at Sara Road and Southern — direct cremation $3,785 and immediate burial $3,995 with a purchaser container. Daniels does not publish a memorial total or a visitation-funeral total. The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker.",
       "localHomes": [],
       "nearbyHomes": [
         {
@@ -107650,8 +107731,8 @@
           "href": "https://irp.cdn-website.com/68ab9c76/files/uploaded/FRENCH+GPL+2025+-+July.pdf",
           "address": "1275 Unser Blvd NE, Rio Rancho",
           "phone": "505-338-2000",
-          "sourceEs": "French Funerals, capilla de Rio Rancho: lista general de precios 1 jul. 2025, la misma lista que en Albuquerque — cremación directa $3,375 y entierro inmediato $3,175 con contenedor del comprador. El permiso del OMI de $236.79 no va incluido. French no publica un total de memorial ni de funeral con velatorio. La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida",
-          "sourceEn": "French Funerals, Rio Rancho chapel: general price list 1 Jul 2025, the same list as Albuquerque — direct cremation $3,375 and immediate burial $3,175 with a purchaser container. The $236.79 OMI permit is not included. French does not publish a memorial total or a visitation-funeral total. The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker",
+          "sourceEs": "French Funerals, capilla de Rio Rancho: lista general de precios 1 jul. 2025, la misma lista que en Albuquerque — cremación directa $3,375 y entierro inmediato $3,175 con contenedor del comprador. El permiso del OMI de $236.79 no va incluido. French no publica un total de memorial ni de funeral con velatorio",
+          "sourceEn": "French Funerals, Rio Rancho chapel: general price list 1 Jul 2025, the same list as Albuquerque — direct cremation $3,375 and immediate burial $3,175 with a purchaser container. The $236.79 OMI permit is not included. French does not publish a memorial total or a visitation-funeral total",
           "gplDateEs": "1 jul. 2025",
           "gplDateEn": "1 Jul 2025",
           "gplKind": "gpl",
@@ -107691,40 +107772,60 @@
           ]
         },
         {
-          "id": "daniels-family-sara-road-chapel",
-          "name": "Daniels Family — Sara Road Chapel",
-          "href": "https://www.danielsfuneral.com/sara-road-chapel",
-          "address": "4310 Sara Rd",
+          "id": "daniels",
+          "name": "Daniels Family",
+          "href": "https://irp.cdn-website.com/74068d93/files/uploaded/2026.10.01+Daniels+GPL.pdf",
+          "address": "4310 Sara Rd SE, Rio Rancho",
           "phone": "505-892-9920",
-          "sourceEs": "",
-          "sourceEn": "",
-          "gplDateEs": "",
-          "gplDateEn": "",
-          "gplKind": "none",
-          "packages": []
-        },
-        {
-          "id": "daniels-family-southern-chapel",
-          "name": "Daniels Family — Southern Chapel",
-          "href": "https://www.danielsfuneral.com/",
-          "address": "2400 Southern Blvd SE",
-          "phone": "505-891-9192",
-          "sourceEs": "",
-          "sourceEn": "",
-          "gplDateEs": "",
-          "gplDateEn": "",
-          "gplKind": "none",
-          "packages": []
+          "sourceEs": "Daniels Family: lista general de precios 1 oct. 2026, la misma lista en Sara Road y Southern — cremación directa $3,785 y entierro inmediato $3,995 con contenedor del comprador. Daniels no publica un total de memorial ni de funeral con velatorio. La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida",
+          "sourceEn": "Daniels Family: general price list 1 Oct 2026, the same list at Sara Road and Southern — direct cremation $3,785 and immediate burial $3,995 with a purchaser container. Daniels does not publish a memorial total or a visitation-funeral total. The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker",
+          "gplDateEs": "1 oct. 2026",
+          "gplDateEn": "1 Oct 2026",
+          "gplKind": "gpl",
+          "packages": [
+            {
+              "id": "directCremation",
+              "labelEs": "Cremación directa",
+              "labelEn": "Direct cremation",
+              "amt": 3785,
+              "noteEs": "Cremación directa, contenedor del comprador (GPL 1 oct. 2026). La misma lista en Alameda, Carlisle, Sara, Southern y Wyoming. No incluye velatorio ni ceremonia.",
+              "noteEn": "Direct cremation, purchaser container (GPL 1 Oct 2026). The same list at Alameda, Carlisle, Sara, Southern, and Wyoming. No visitation or ceremony."
+            },
+            {
+              "id": "immediateBurial",
+              "labelEs": "Entierro inmediato",
+              "labelEn": "Immediate burial",
+              "amt": 3995,
+              "noteEs": "Entierro inmediato, ataúd del comprador (GPL 1 oct. 2026). Con su ataúd mínimo está en $5,440. Lote aparte.",
+              "noteEn": "Immediate burial, purchaser casket (GPL 1 Oct 2026). With their minimum casket it is $5,440. Plot extra."
+            },
+            {
+              "id": "memorialCremation",
+              "labelEs": "Cremación con memorial",
+              "labelEn": "Cremation with memorial",
+              "amt": 0,
+              "noteEs": "No figura en su lista publicada. Pida la lista vigente.",
+              "noteEn": "Not on their published list. Ask for the current list."
+            },
+            {
+              "id": "traditional",
+              "labelEs": "Funeral tradicional con velatorio",
+              "labelEn": "Traditional funeral with visitation",
+              "amt": 0,
+              "noteEs": "No figura en su lista publicada. Pida la lista vigente.",
+              "noteEn": "Not on their published list. Ask for the current list."
+            }
+          ]
         }
       ],
       "localCemeteries": [],
       "nearbyCemeteries": [
         {
-          "name": "Vista Verde Memorial Park, 4310 Sara Rd SE. Resale: ad listed November 30, 2015,",
+          "name": "Vista Verde Memorial Park, 4310 Sara Rd SE. Cemetery phone on the Daniels GPL of",
           "address": "4310 Sara Rd",
-          "phone": "505-892-9920",
-          "noteEs": "Vista Verde Memorial Park, 4310 Sara Rd SE. Reventa: anuncio del 30 de noviembre de 2015, aún en el tablero el 11 de octubre de 2026, a $1,595 por espacio. Lote nuevo: pida la lista. Daniels Family, capilla Sara Road, está en esa dirección",
-          "noteEn": "Vista Verde Memorial Park, 4310 Sara Rd SE. Resale: ad listed November 30, 2015, still on the board October 11, 2026, at $1,595 per space. New lot: ask for the list. Daniels Family’s Sara Road Chapel is at that address"
+          "phone": "505-338-1309",
+          "noteEs": "Vista Verde Memorial Park, 4310 Sara Rd SE. del cementerio en la GPL de Daniels del 1 de octubre de 2026: . Reventa: anuncio del 30 de noviembre de 2015, aún en el tablero el 11 de octubre de 2026, a $1,595 por espacio. Lote nuevo: pida la lista. La capilla Daniels de Sara Road está en esa dirección: 505-892-9920",
+          "noteEn": "Vista Verde Memorial Park, 4310 Sara Rd SE. Cemetery on the Daniels GPL of October 1, 2026: . Resale: ad listed November 30, 2015, still on the board October 11, 2026, at $1,595 per space. New lot: ask for the list. Daniels’ Sara Road Chapel is at that address: 505-892-9920"
         }
       ],
       "other": [
@@ -107756,8 +107857,8 @@
       "pathEn": "/en/funeral-homes-cemeteries.html?estado=new-mexico&ciudad=south-valley",
       "guideEs": "/estados/new-mexico/albuquerque.html",
       "guideEn": "/en/states/new-mexico/albuquerque.html",
-      "sourceLineEs": "Director’s Choice: GPL 1 may. 2025 — cremación simple en persona $1,215 (en línea $995) con contenedor estándar; entierro inmediato $2,395 sin ataúd; memorial con cremación $3,895; paquete tradicional A $4,195 con ataúd de calibre 20. El permiso del OMI de $230 va aparte. French Funerals: GPL 1 jul. 2025, misma lista en sus cinco capillas — cremación directa $3,375 y entierro inmediato $3,175 con contenedor del comprador. El permiso del OMI de $236.79 no va incluido. French no publica un total de memorial ni de funeral con velatorio. La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida.",
-      "sourceLineEn": "Director’s Choice: GPL 1 May 2025 — in-person simple cremation $1,215 (online $995) with the standard container; immediate burial $2,395 with no casket; cremation memorial $3,895; traditional package A $4,195 with a 20-gauge casket. The $230 OMI permit is extra. French Funerals: GPL 1 Jul 2025, the same list at all five chapels — direct cremation $3,375 and immediate burial $3,175 with a purchaser container. The $236.79 OMI permit is not included. French does not publish a memorial total or a visitation-funeral total. The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker.",
+      "sourceLineEs": "Director’s Choice: GPL 1 may. 2025 — cremación simple en persona $1,215 (en línea $995) con contenedor estándar; entierro inmediato $2,395 sin ataúd; memorial con cremación $3,895; paquete tradicional A $4,195 con ataúd de calibre 20. El permiso del OMI de $230 va aparte. French Funerals: GPL 1 jul. 2025, misma lista en sus cinco capillas — cremación directa $3,375 y entierro inmediato $3,175 con contenedor del comprador. El permiso del OMI de $236.79 no va incluido. French no publica un total de memorial ni de funeral con velatorio. Daniels Family: GPL 1 oct. 2026, la misma lista en Alameda, Carlisle, Wyoming, Sara y Southern — cremación directa $3,785 y entierro inmediato $3,995 con contenedor del comprador. Daniels no publica un total de memorial ni de funeral con velatorio. La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida.",
+      "sourceLineEn": "Director’s Choice: GPL 1 May 2025 — in-person simple cremation $1,215 (online $995) with the standard container; immediate burial $2,395 with no casket; cremation memorial $3,895; traditional package A $4,195 with a 20-gauge casket. The $230 OMI permit is extra. French Funerals: GPL 1 Jul 2025, the same list at all five chapels — direct cremation $3,375 and immediate burial $3,175 with a purchaser container. The $236.79 OMI permit is not included. French does not publish a memorial total or a visitation-funeral total. Daniels Family: GPL 1 Oct 2026, the same list at Alameda, Carlisle, Wyoming, Sara, and Southern — direct cremation $3,785 and immediate burial $3,995 with a purchaser container. Daniels does not publish a memorial total or a visitation-funeral total. The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker.",
       "localHomes": [],
       "nearbyHomes": [
         {
@@ -107812,8 +107913,8 @@
           "href": "https://irp.cdn-website.com/68ab9c76/files/uploaded/FRENCH+GPL+2025+-+July.pdf",
           "address": "1111 University Blvd NE, Albuquerque",
           "phone": "505-843-6333",
-          "sourceEs": "French Funerals: lista general de precios 1 jul. 2025, misma lista en sus cinco capillas — cremación directa $3,375 y entierro inmediato $3,175 con contenedor del comprador. El permiso del OMI de $236.79 no va incluido. French no publica un total de memorial ni de funeral con velatorio. La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida",
-          "sourceEn": "French Funerals: general price list 1 Jul 2025, the same list at all five chapels — direct cremation $3,375 and immediate burial $3,175 with a purchaser container. The $236.79 OMI permit is not included. French does not publish a memorial total or a visitation-funeral total. The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker",
+          "sourceEs": "French Funerals: lista general de precios 1 jul. 2025, misma lista en sus cinco capillas — cremación directa $3,375 y entierro inmediato $3,175 con contenedor del comprador. El permiso del OMI de $236.79 no va incluido. French no publica un total de memorial ni de funeral con velatorio",
+          "sourceEn": "French Funerals: general price list 1 Jul 2025, the same list at all five chapels — direct cremation $3,375 and immediate burial $3,175 with a purchaser container. The $236.79 OMI permit is not included. French does not publish a memorial total or a visitation-funeral total",
           "gplDateEs": "1 jul. 2025",
           "gplDateEn": "1 Jul 2025",
           "gplKind": "gpl",
@@ -107853,43 +107954,50 @@
           ]
         },
         {
-          "id": "daniels-family-carlisle-chapel",
-          "name": "Daniels Family — Carlisle Chapel",
-          "href": "https://www.danielsfuneral.com/",
-          "address": "3113 Carlisle Blvd NE",
+          "id": "daniels",
+          "name": "Daniels Family",
+          "href": "https://irp.cdn-website.com/74068d93/files/uploaded/2026.10.01+Daniels+GPL.pdf",
+          "address": "3113 Carlisle Blvd NE, Albuquerque",
           "phone": "505-884-1188",
-          "sourceEs": "",
-          "sourceEn": "",
-          "gplDateEs": "",
-          "gplDateEn": "",
-          "gplKind": "none",
-          "packages": []
-        },
-        {
-          "id": "daniels-family-wyoming-chapel",
-          "name": "Daniels Family — Wyoming Chapel",
-          "href": "https://www.danielsfuneral.com/",
-          "address": "7601 Wyoming Blvd NE",
-          "phone": "505-821-0010",
-          "sourceEs": "",
-          "sourceEn": "",
-          "gplDateEs": "",
-          "gplDateEn": "",
-          "gplKind": "none",
-          "packages": []
-        },
-        {
-          "id": "alameda-mortuary",
-          "name": "Alameda Mortuary",
-          "href": "https://www.danielsfuneral.com/",
-          "address": "9420 4th St NW",
-          "phone": "505-898-3160",
-          "sourceEs": "",
-          "sourceEn": "",
-          "gplDateEs": "",
-          "gplDateEn": "",
-          "gplKind": "none",
-          "packages": []
+          "sourceEs": "Daniels Family: lista general de precios 1 oct. 2026, la misma lista en Alameda, Carlisle, Wyoming, Sara y Southern — cremación directa $3,785 y entierro inmediato $3,995 con contenedor del comprador. Daniels no publica un total de memorial ni de funeral con velatorio. La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida",
+          "sourceEn": "Daniels Family: general price list 1 Oct 2026, the same list at Alameda, Carlisle, Wyoming, Sara, and Southern — direct cremation $3,785 and immediate burial $3,995 with a purchaser container. Daniels does not publish a memorial total or a visitation-funeral total. The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker",
+          "gplDateEs": "1 oct. 2026",
+          "gplDateEn": "1 Oct 2026",
+          "gplKind": "gpl",
+          "packages": [
+            {
+              "id": "directCremation",
+              "labelEs": "Cremación directa",
+              "labelEn": "Direct cremation",
+              "amt": 3785,
+              "noteEs": "Cremación directa, contenedor del comprador (GPL 1 oct. 2026). La misma lista en Alameda, Carlisle, Sara, Southern y Wyoming. No incluye velatorio ni ceremonia.",
+              "noteEn": "Direct cremation, purchaser container (GPL 1 Oct 2026). The same list at Alameda, Carlisle, Sara, Southern, and Wyoming. No visitation or ceremony."
+            },
+            {
+              "id": "immediateBurial",
+              "labelEs": "Entierro inmediato",
+              "labelEn": "Immediate burial",
+              "amt": 3995,
+              "noteEs": "Entierro inmediato, ataúd del comprador (GPL 1 oct. 2026). Con su ataúd mínimo está en $5,440. Lote aparte.",
+              "noteEn": "Immediate burial, purchaser casket (GPL 1 Oct 2026). With their minimum casket it is $5,440. Plot extra."
+            },
+            {
+              "id": "memorialCremation",
+              "labelEs": "Cremación con memorial",
+              "labelEn": "Cremation with memorial",
+              "amt": 0,
+              "noteEs": "No figura en su lista publicada. Pida la lista vigente.",
+              "noteEn": "Not on their published list. Ask for the current list."
+            },
+            {
+              "id": "traditional",
+              "labelEs": "Funeral tradicional con velatorio",
+              "labelEn": "Traditional funeral with visitation",
+              "amt": 0,
+              "noteEs": "No figura en su lista publicada. Pida la lista vigente.",
+              "noteEn": "Not on their published list. Ask for the current list."
+            }
+          ]
         },
         {
           "id": "garcia-mortuary",
@@ -108060,8 +108168,8 @@
       "pathEn": "/en/funeral-homes-cemeteries.html?estado=new-mexico&ciudad=albuquerque",
       "guideEs": "/estados/new-mexico/albuquerque.html",
       "guideEn": "/en/states/new-mexico/albuquerque.html",
-      "sourceLineEs": "Director’s Choice: GPL 1 may. 2025 — cremación simple en persona $1,215 (en línea $995) con contenedor estándar; entierro inmediato $2,395 sin ataúd; memorial con cremación $3,895; paquete tradicional A $4,195 con ataúd de calibre 20. El permiso del OMI de $230 va aparte. French Funerals: GPL 1 jul. 2025, misma lista en sus cinco capillas — cremación directa $3,375 y entierro inmediato $3,175 con contenedor del comprador. El permiso del OMI de $236.79 no va incluido. French no publica un total de memorial ni de funeral con velatorio. La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida.",
-      "sourceLineEn": "Director’s Choice: GPL 1 May 2025 — in-person simple cremation $1,215 (online $995) with the standard container; immediate burial $2,395 with no casket; cremation memorial $3,895; traditional package A $4,195 with a 20-gauge casket. The $230 OMI permit is extra. French Funerals: GPL 1 Jul 2025, the same list at all five chapels — direct cremation $3,375 and immediate burial $3,175 with a purchaser container. The $236.79 OMI permit is not included. French does not publish a memorial total or a visitation-funeral total. The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker.",
+      "sourceLineEs": "Director’s Choice: GPL 1 may. 2025 — cremación simple en persona $1,215 (en línea $995) con contenedor estándar; entierro inmediato $2,395 sin ataúd; memorial con cremación $3,895; paquete tradicional A $4,195 con ataúd de calibre 20. El permiso del OMI de $230 va aparte. French Funerals: GPL 1 jul. 2025, misma lista en sus cinco capillas — cremación directa $3,375 y entierro inmediato $3,175 con contenedor del comprador. El permiso del OMI de $236.79 no va incluido. French no publica un total de memorial ni de funeral con velatorio. Daniels Family: GPL 1 oct. 2026, la misma lista en Alameda, Carlisle, Wyoming, Sara y Southern — cremación directa $3,785 y entierro inmediato $3,995 con contenedor del comprador. Daniels no publica un total de memorial ni de funeral con velatorio. La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida.",
+      "sourceLineEn": "Director’s Choice: GPL 1 May 2025 — in-person simple cremation $1,215 (online $995) with the standard container; immediate burial $2,395 with no casket; cremation memorial $3,895; traditional package A $4,195 with a 20-gauge casket. The $230 OMI permit is extra. French Funerals: GPL 1 Jul 2025, the same list at all five chapels — direct cremation $3,375 and immediate burial $3,175 with a purchaser container. The $236.79 OMI permit is not included. French does not publish a memorial total or a visitation-funeral total. Daniels Family: GPL 1 Oct 2026, the same list at Alameda, Carlisle, Wyoming, Sara, and Southern — direct cremation $3,785 and immediate burial $3,995 with a purchaser container. Daniels does not publish a memorial total or a visitation-funeral total. The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker.",
       "localHomes": [
         {
           "id": "directors",
@@ -108115,8 +108223,8 @@
           "href": "https://irp.cdn-website.com/68ab9c76/files/uploaded/FRENCH+GPL+2025+-+July.pdf",
           "address": "1111 University Blvd NE, Albuquerque",
           "phone": "505-843-6333",
-          "sourceEs": "French Funerals: lista general de precios 1 jul. 2025, misma lista en sus cinco capillas — cremación directa $3,375 y entierro inmediato $3,175 con contenedor del comprador. El permiso del OMI de $236.79 no va incluido. French no publica un total de memorial ni de funeral con velatorio. La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida",
-          "sourceEn": "French Funerals: general price list 1 Jul 2025, the same list at all five chapels — direct cremation $3,375 and immediate burial $3,175 with a purchaser container. The $236.79 OMI permit is not included. French does not publish a memorial total or a visitation-funeral total. The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker",
+          "sourceEs": "French Funerals: lista general de precios 1 jul. 2025, misma lista en sus cinco capillas — cremación directa $3,375 y entierro inmediato $3,175 con contenedor del comprador. El permiso del OMI de $236.79 no va incluido. French no publica un total de memorial ni de funeral con velatorio",
+          "sourceEn": "French Funerals: general price list 1 Jul 2025, the same list at all five chapels — direct cremation $3,375 and immediate burial $3,175 with a purchaser container. The $236.79 OMI permit is not included. French does not publish a memorial total or a visitation-funeral total",
           "gplDateEs": "1 jul. 2025",
           "gplDateEn": "1 Jul 2025",
           "gplKind": "gpl",
@@ -108156,43 +108264,50 @@
           ]
         },
         {
-          "id": "daniels-family-carlisle-chapel",
-          "name": "Daniels Family — Carlisle Chapel",
-          "href": "https://www.danielsfuneral.com/",
-          "address": "3113 Carlisle Blvd NE",
+          "id": "daniels",
+          "name": "Daniels Family",
+          "href": "https://irp.cdn-website.com/74068d93/files/uploaded/2026.10.01+Daniels+GPL.pdf",
+          "address": "3113 Carlisle Blvd NE, Albuquerque",
           "phone": "505-884-1188",
-          "sourceEs": "",
-          "sourceEn": "",
-          "gplDateEs": "",
-          "gplDateEn": "",
-          "gplKind": "none",
-          "packages": []
-        },
-        {
-          "id": "daniels-family-wyoming-chapel",
-          "name": "Daniels Family — Wyoming Chapel",
-          "href": "https://www.danielsfuneral.com/",
-          "address": "7601 Wyoming Blvd NE",
-          "phone": "505-821-0010",
-          "sourceEs": "",
-          "sourceEn": "",
-          "gplDateEs": "",
-          "gplDateEn": "",
-          "gplKind": "none",
-          "packages": []
-        },
-        {
-          "id": "alameda-mortuary",
-          "name": "Alameda Mortuary",
-          "href": "https://www.danielsfuneral.com/",
-          "address": "9420 4th St NW",
-          "phone": "505-898-3160",
-          "sourceEs": "",
-          "sourceEn": "",
-          "gplDateEs": "",
-          "gplDateEn": "",
-          "gplKind": "none",
-          "packages": []
+          "sourceEs": "Daniels Family: lista general de precios 1 oct. 2026, la misma lista en Alameda, Carlisle, Wyoming, Sara y Southern — cremación directa $3,785 y entierro inmediato $3,995 con contenedor del comprador. Daniels no publica un total de memorial ni de funeral con velatorio. La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida",
+          "sourceEn": "Daniels Family: general price list 1 Oct 2026, the same list at Alameda, Carlisle, Wyoming, Sara, and Southern — direct cremation $3,785 and immediate burial $3,995 with a purchaser container. Daniels does not publish a memorial total or a visitation-funeral total. The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker",
+          "gplDateEs": "1 oct. 2026",
+          "gplDateEn": "1 Oct 2026",
+          "gplKind": "gpl",
+          "packages": [
+            {
+              "id": "directCremation",
+              "labelEs": "Cremación directa",
+              "labelEn": "Direct cremation",
+              "amt": 3785,
+              "noteEs": "Cremación directa, contenedor del comprador (GPL 1 oct. 2026). La misma lista en Alameda, Carlisle, Sara, Southern y Wyoming. No incluye velatorio ni ceremonia.",
+              "noteEn": "Direct cremation, purchaser container (GPL 1 Oct 2026). The same list at Alameda, Carlisle, Sara, Southern, and Wyoming. No visitation or ceremony."
+            },
+            {
+              "id": "immediateBurial",
+              "labelEs": "Entierro inmediato",
+              "labelEn": "Immediate burial",
+              "amt": 3995,
+              "noteEs": "Entierro inmediato, ataúd del comprador (GPL 1 oct. 2026). Con su ataúd mínimo está en $5,440. Lote aparte.",
+              "noteEn": "Immediate burial, purchaser casket (GPL 1 Oct 2026). With their minimum casket it is $5,440. Plot extra."
+            },
+            {
+              "id": "memorialCremation",
+              "labelEs": "Cremación con memorial",
+              "labelEn": "Cremation with memorial",
+              "amt": 0,
+              "noteEs": "No figura en su lista publicada. Pida la lista vigente.",
+              "noteEn": "Not on their published list. Ask for the current list."
+            },
+            {
+              "id": "traditional",
+              "labelEs": "Funeral tradicional con velatorio",
+              "labelEn": "Traditional funeral with visitation",
+              "amt": 0,
+              "noteEs": "No figura en su lista publicada. Pida la lista vigente.",
+              "noteEn": "Not on their published list. Ask for the current list."
+            }
+          ]
         },
         {
           "id": "garcia-mortuary",
@@ -108364,8 +108479,8 @@
       "pathEn": "/en/funeral-homes-cemeteries.html?estado=new-mexico&ciudad=rio-rancho",
       "guideEs": "/estados/new-mexico/rio-rancho.html",
       "guideEn": "/en/states/new-mexico/rio-rancho.html",
-      "sourceLineEs": "French Funerals, capilla de Rio Rancho: GPL 1 jul. 2025, la misma lista que en Albuquerque — cremación directa $3,375 y entierro inmediato $3,175 con contenedor del comprador. El permiso del OMI de $236.79 no va incluido. French no publica un total de memorial ni de funeral con velatorio. La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida.",
-      "sourceLineEn": "French Funerals, Rio Rancho chapel: GPL 1 Jul 2025, the same list as Albuquerque — direct cremation $3,375 and immediate burial $3,175 with a purchaser container. The $236.79 OMI permit is not included. French does not publish a memorial total or a visitation-funeral total. The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker.",
+      "sourceLineEs": "French Funerals, capilla de Rio Rancho: GPL 1 jul. 2025, la misma lista que en Albuquerque — cremación directa $3,375 y entierro inmediato $3,175 con contenedor del comprador. El permiso del OMI de $236.79 no va incluido. French no publica un total de memorial ni de funeral con velatorio. Daniels Family: GPL 1 oct. 2026, la misma lista en Sara Road y Southern — cremación directa $3,785 y entierro inmediato $3,995 con contenedor del comprador. Daniels no publica un total de memorial ni de funeral con velatorio. La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida.",
+      "sourceLineEn": "French Funerals, Rio Rancho chapel: GPL 1 Jul 2025, the same list as Albuquerque — direct cremation $3,375 and immediate burial $3,175 with a purchaser container. The $236.79 OMI permit is not included. French does not publish a memorial total or a visitation-funeral total. Daniels Family: GPL 1 Oct 2026, the same list at Sara Road and Southern — direct cremation $3,785 and immediate burial $3,995 with a purchaser container. Daniels does not publish a memorial total or a visitation-funeral total. The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker.",
       "localHomes": [
         {
           "id": "french",
@@ -108373,8 +108488,8 @@
           "href": "https://irp.cdn-website.com/68ab9c76/files/uploaded/FRENCH+GPL+2025+-+July.pdf",
           "address": "1275 Unser Blvd NE, Rio Rancho",
           "phone": "505-338-2000",
-          "sourceEs": "French Funerals, capilla de Rio Rancho: lista general de precios 1 jul. 2025, la misma lista que en Albuquerque — cremación directa $3,375 y entierro inmediato $3,175 con contenedor del comprador. El permiso del OMI de $236.79 no va incluido. French no publica un total de memorial ni de funeral con velatorio. La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida",
-          "sourceEn": "French Funerals, Rio Rancho chapel: general price list 1 Jul 2025, the same list as Albuquerque — direct cremation $3,375 and immediate burial $3,175 with a purchaser container. The $236.79 OMI permit is not included. French does not publish a memorial total or a visitation-funeral total. The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker",
+          "sourceEs": "French Funerals, capilla de Rio Rancho: lista general de precios 1 jul. 2025, la misma lista que en Albuquerque — cremación directa $3,375 y entierro inmediato $3,175 con contenedor del comprador. El permiso del OMI de $236.79 no va incluido. French no publica un total de memorial ni de funeral con velatorio",
+          "sourceEn": "French Funerals, Rio Rancho chapel: general price list 1 Jul 2025, the same list as Albuquerque — direct cremation $3,375 and immediate burial $3,175 with a purchaser container. The $236.79 OMI permit is not included. French does not publish a memorial total or a visitation-funeral total",
           "gplDateEs": "1 jul. 2025",
           "gplDateEn": "1 Jul 2025",
           "gplKind": "gpl",
@@ -108414,40 +108529,60 @@
           ]
         },
         {
-          "id": "daniels-family-sara-road-chapel",
-          "name": "Daniels Family — Sara Road Chapel",
-          "href": "https://www.danielsfuneral.com/sara-road-chapel",
-          "address": "4310 Sara Rd",
+          "id": "daniels",
+          "name": "Daniels Family",
+          "href": "https://irp.cdn-website.com/74068d93/files/uploaded/2026.10.01+Daniels+GPL.pdf",
+          "address": "4310 Sara Rd SE, Rio Rancho",
           "phone": "505-892-9920",
-          "sourceEs": "",
-          "sourceEn": "",
-          "gplDateEs": "",
-          "gplDateEn": "",
-          "gplKind": "none",
-          "packages": []
-        },
-        {
-          "id": "daniels-family-southern-chapel",
-          "name": "Daniels Family — Southern Chapel",
-          "href": "https://www.danielsfuneral.com/",
-          "address": "2400 Southern Blvd SE",
-          "phone": "505-891-9192",
-          "sourceEs": "",
-          "sourceEn": "",
-          "gplDateEs": "",
-          "gplDateEn": "",
-          "gplKind": "none",
-          "packages": []
+          "sourceEs": "Daniels Family: lista general de precios 1 oct. 2026, la misma lista en Sara Road y Southern — cremación directa $3,785 y entierro inmediato $3,995 con contenedor del comprador. Daniels no publica un total de memorial ni de funeral con velatorio. La columna del estimador son promedios de Nuevo México de Funeralocity (26 jul. 2026). Esos promedios son de paquetes de funeraria. No incluyen el lote, abrir y cerrar la tumba, la bóveda ni la lápida",
+          "sourceEn": "Daniels Family: general price list 1 Oct 2026, the same list at Sara Road and Southern — direct cremation $3,785 and immediate burial $3,995 with a purchaser container. Daniels does not publish a memorial total or a visitation-funeral total. The estimator column is New Mexico Funeralocity averages (26 Jul 2026). Those averages are funeral-home packages. They do not include the plot, opening and closing, the vault, or the marker",
+          "gplDateEs": "1 oct. 2026",
+          "gplDateEn": "1 Oct 2026",
+          "gplKind": "gpl",
+          "packages": [
+            {
+              "id": "directCremation",
+              "labelEs": "Cremación directa",
+              "labelEn": "Direct cremation",
+              "amt": 3785,
+              "noteEs": "Cremación directa, contenedor del comprador (GPL 1 oct. 2026). La misma lista en Alameda, Carlisle, Sara, Southern y Wyoming. No incluye velatorio ni ceremonia.",
+              "noteEn": "Direct cremation, purchaser container (GPL 1 Oct 2026). The same list at Alameda, Carlisle, Sara, Southern, and Wyoming. No visitation or ceremony."
+            },
+            {
+              "id": "immediateBurial",
+              "labelEs": "Entierro inmediato",
+              "labelEn": "Immediate burial",
+              "amt": 3995,
+              "noteEs": "Entierro inmediato, ataúd del comprador (GPL 1 oct. 2026). Con su ataúd mínimo está en $5,440. Lote aparte.",
+              "noteEn": "Immediate burial, purchaser casket (GPL 1 Oct 2026). With their minimum casket it is $5,440. Plot extra."
+            },
+            {
+              "id": "memorialCremation",
+              "labelEs": "Cremación con memorial",
+              "labelEn": "Cremation with memorial",
+              "amt": 0,
+              "noteEs": "No figura en su lista publicada. Pida la lista vigente.",
+              "noteEn": "Not on their published list. Ask for the current list."
+            },
+            {
+              "id": "traditional",
+              "labelEs": "Funeral tradicional con velatorio",
+              "labelEn": "Traditional funeral with visitation",
+              "amt": 0,
+              "noteEs": "No figura en su lista publicada. Pida la lista vigente.",
+              "noteEn": "Not on their published list. Ask for the current list."
+            }
+          ]
         }
       ],
       "nearbyHomes": [],
       "localCemeteries": [
         {
-          "name": "Vista Verde Memorial Park, 4310 Sara Rd SE. Resale: ad listed November 30, 2015,",
+          "name": "Vista Verde Memorial Park, 4310 Sara Rd SE. Cemetery phone on the Daniels GPL of",
           "address": "4310 Sara Rd",
-          "phone": "505-892-9920",
-          "noteEs": "Vista Verde Memorial Park, 4310 Sara Rd SE. Reventa: anuncio del 30 de noviembre de 2015, aún en el tablero el 11 de octubre de 2026, a $1,595 por espacio. Lote nuevo: pida la lista. Daniels Family, capilla Sara Road, está en esa dirección",
-          "noteEn": "Vista Verde Memorial Park, 4310 Sara Rd SE. Resale: ad listed November 30, 2015, still on the board October 11, 2026, at $1,595 per space. New lot: ask for the list. Daniels Family’s Sara Road Chapel is at that address"
+          "phone": "505-338-1309",
+          "noteEs": "Vista Verde Memorial Park, 4310 Sara Rd SE. del cementerio en la GPL de Daniels del 1 de octubre de 2026: . Reventa: anuncio del 30 de noviembre de 2015, aún en el tablero el 11 de octubre de 2026, a $1,595 por espacio. Lote nuevo: pida la lista. La capilla Daniels de Sara Road está en esa dirección: 505-892-9920",
+          "noteEn": "Vista Verde Memorial Park, 4310 Sara Rd SE. Cemetery on the Daniels GPL of October 1, 2026: . Resale: ad listed November 30, 2015, still on the board October 11, 2026, at $1,595 per space. New lot: ask for the list. Daniels’ Sara Road Chapel is at that address: 505-892-9920"
         }
       ],
       "nearbyCemeteries": [],

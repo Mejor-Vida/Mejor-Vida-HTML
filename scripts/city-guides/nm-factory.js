@@ -8,7 +8,8 @@
  * publishes any of the four packages, the chart is estimator-only. The
  * estimator column is New Mexico Funeralocity averages (captured 26 Jul 2026).
  * Named columns are first-party lists only (French GPL 1 Jul 2025,
- * Director’s Choice GPL 1 May 2025, Riverside Santa Fe site prices).
+ * Director’s Choice GPL 1 May 2025, Daniels Family GPL 1 Oct 2026,
+ * Riverside Santa Fe site prices).
  */
 const OH_AVG = {
   directCremation: 1935,
@@ -305,6 +306,9 @@ function makeCity(spec) {
       newListEn: spec.newListEn,
       officesEs: spec.officesEs,
       officesEn: spec.officesEn,
+      plotPriceRange: spec.plotPriceRange || null,
+      plotPublished: spec.plotPublished || [],
+      plotOffices: spec.plotOffices || null,
       resaleFootEs:
         "Son precios pedidos, no una oferta de Mejor Vida Seguros. Revise si el anuncio sigue activo.",
       resaleFootEn:
