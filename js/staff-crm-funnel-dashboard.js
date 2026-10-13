@@ -2791,8 +2791,18 @@
         )
       ) +
       creativeMetric(t("creative_conversations"), fmtNum(ad.conversations || 0)) +
-      creativeMetric(t("creative_cpl"), ad.costPerLead != null ? fmtCurrency(ad.costPerLead) : "—") +
-      creativeMetric(t("creative_cps"), ad.costPerSale != null ? fmtCurrency(ad.costPerSale) : "—") +
+      creativeMetric(
+        t("creative_cost_per_conversation"),
+        ad.costPerConversation != null
+          ? fmtCurrency(ad.costPerConversation)
+          : ad.conversations > 0 && ad.spend != null
+            ? fmtCurrency(Number(ad.spend) / Number(ad.conversations))
+            : "—"
+      ) +
+      creativeMetric(
+        t("creative_leads"),
+        ad.becameLead == null ? "—" : fmtNum(ad.leadCount || 0)
+      ) +
       "</div>" +
       '<div class="crm-creative-actions">' +
       '<button type="button" data-creative-decision="keep" data-ad-id="' +
