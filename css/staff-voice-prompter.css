@@ -113,14 +113,16 @@ body.mvi-prompter-open {
   flex: 1;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 0.85rem;
+  align-items: stretch;
+  justify-content: center;
+  gap: 0;
   min-height: 0;
   overflow: auto;
-  padding: 0.35rem 1rem 1.5rem;
+  padding: 1.5rem 4vw 2rem;
   text-align: center;
   outline: none;
+  user-select: none;
+  cursor: default;
 }
 
 .mvi-prompter__stage.is-shift .mvi-prompter__prev,
@@ -142,13 +144,7 @@ body.mvi-prompter-open {
 
 .mvi-prompter__prev,
 .mvi-prompter__next {
-  width: min(34rem, 92vw);
-  max-width: 34rem;
-  min-height: 0;
-  font-family: Arial, Helvetica, sans-serif;
-  font-weight: 600;
-  line-height: 1.28;
-  color: #7d90a8;
+  display: none !important;
 }
 
 .mvi-prompter__prev {
@@ -165,15 +161,9 @@ body.mvi-prompter-open {
   padding: 0;
 }
 
-.mvi-prompter__prev[hidden],
-.mvi-prompter__next[hidden] {
-  display: block;
-  visibility: hidden;
-}
-
 .mvi-prompter__now {
-  width: min(34rem, 92vw);
-  max-width: 34rem;
+  width: 100%;
+  max-width: none;
   min-height: 0;
   max-height: none;
   overflow: visible;

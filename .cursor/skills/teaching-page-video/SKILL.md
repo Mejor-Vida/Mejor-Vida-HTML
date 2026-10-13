@@ -23,7 +23,7 @@ Skip unless the user explicitly asks: `index.html`, ad landings, privacy/terms/S
 4. **English script** from the approved breakdown only: a standalone YouTube lesson (facts from the page, never “this page”). Write it clear the first time (class then examples, jobs before labels, full contrasts, no telegram cuts). Stop for approval.
 5. Stop. Revise English until the user says it is good.
 6. **Spanish usted** for Julie on camera (Mejor Vida Seguros, mejorvidaseguros.com, opening “Hola. Soy Julie de Mejor Vida Seguros.”, locked close). Stop for approval.
-7. Copy the spoken Spanish into **Voice Prompter** (mic scrolls the words; commands go stop / go start / go back, or mouse/keyboard). Julie records herself.
+7. Copy the spoken Spanish into **Voice Prompter**. One sentence fills the screen. Left mouse button goes back, right mouse button goes forward, so a pause between sentences can be cut later. Voice commands: go stop / go start / go back / go next. Julie records herself.
 8. Upload the take in the CRM YouTube tab. Large iPhone 4K files are shrunk in the browser to a small holding copy in `youtube-recordings` (not long-term storage). Compare transcript to the finalized script, propose cuts for retakes, present to Julie/Justin.
 9. After they approve the cut: optional office background, then upload to the agency YouTube channel and embed on the matching teaching page with `.lic-lesson-video` / `mvi-lesson-yt` (same player as the earlier HeyGen lessons). `youtube-upload-video.js` then deletes the holding files.
 

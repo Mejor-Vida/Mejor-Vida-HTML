@@ -19,6 +19,7 @@
   var fontSize = 92;
   var opts = {};
   var shownSent = -1;
+  var sentLock = 0;
   var micStream = null;
   var audioCtx = null;
   var analyser = null;
@@ -65,36 +66,29 @@
     return out;
   }
 
-  function spokenCount(slice) {
-    var n = 0;
-    for (var i = 0; i < slice.length; i++) {
-      if (!slice[i].skip) n++;
-    }
-    return n;
-  }
-
   function assignSentences(list) {
     var groups = [];
     var cur = [];
     function pushCur() {
+      var spoken = false;
+      var i;
       if (!cur.length) return;
-      groups.push(cur);
+      for (i = 0; i < cur.length; i++) {
+        if (!cur[i].skip && !cur[i].br) spoken = true;
+      }
+      if (spoken) groups.push(cur);
       cur = [];
     }
     list.forEach(function (w) {
+      if (w.br) {
+        pushCur();
+        return;
+      }
       cur.push(w);
-      if (w.br || endsSentence(w.display)) pushCur();
+      if (endsSentence(w.display)) pushCur();
     });
     pushCur();
-    var merged = [];
-    for (var i = 0; i < groups.length; i++) {
-      var g = groups[i];
-      while (i < groups.length - 1 && spokenCount(g) < 4) {
-        i++;
-        g = g.concat(groups[i]);
-      }
-      merged.push(g);
-    }
+    var merged = groups;
     sentences = merged.map(function (g) {
       var start = list.indexOf(g[0]);
       var end = list.indexOf(g[g.length - 1]) + 1;
@@ -112,10 +106,10 @@
   }
 
   function currentSentIndex() {
-    if (!words.length || !sentences.length) return 0;
-    if (index >= words.length) return sentences.length - 1;
-    var w = words[Math.min(index, words.length - 1)];
-    return w && w.sent != null ? w.sent : 0;
+    if (!sentences.length) return 0;
+    if (sentLock < 0) sentLock = 0;
+    if (sentLock >= sentences.length) sentLock = sentences.length - 1;
+    return sentLock;
   }
 
   function SpeechCtor() {
@@ -278,10 +272,19 @@
         if (overlay && !overlay.hasAttribute("hidden")) renderWords();
       }
     });
-    overlay.addEventListener("click", function (e) {
-      var word = e.target.closest("[data-wi]");
-      if (!word) return;
-      jumpTo(Number(word.getAttribute("data-wi")));
+    overlay.addEventListener("mousedown", function (e) {
+      if (e.target.closest(".mvi-prompter__bar, button, input, label, a")) return;
+      if (e.button === 0) {
+        e.preventDefault();
+        goBack();
+      } else if (e.button === 2) {
+        e.preventDefault();
+        goNext();
+      }
+    });
+    overlay.addEventListener("contextmenu", function (e) {
+      if (e.target.closest(".mvi-prompter__bar")) return;
+      e.preventDefault();
     });
     document.addEventListener("keydown", onKey);
     return overlay;
@@ -336,14 +339,12 @@
     var nextBox = overlay.querySelector("[data-vp='next']");
     var si = currentSentIndex();
     var shifted = shownSent >= 0 && si !== shownSent;
-    var prev = sentences[si - 1];
     var now = sentences[si];
-    var next = sentences[si + 1];
-    prevBox.innerHTML = sentenceHtml(prev, "prev");
-    prevBox.hidden = !prev;
+    prevBox.innerHTML = "";
+    prevBox.hidden = true;
     nowBox.innerHTML = sentenceHtml(now, "now");
-    nextBox.innerHTML = sentenceHtml(next, "next");
-    nextBox.hidden = !next;
+    nextBox.innerHTML = "";
+    nextBox.hidden = true;
     if (shifted) {
       stage.classList.remove("is-shift");
       void stage.offsetWidth;
@@ -386,13 +387,22 @@
   }
 
   function goStart() {
-    jumpTo(0);
+    sentLock = 0;
+    jumpTo(sentences[0] ? sentences[0].start : 0);
   }
 
   function goBack() {
     var si = currentSentIndex();
-    var prev = sentences[Math.max(0, si - 1)];
-    jumpTo(prev ? prev.start : 0);
+    if (si <= 0) return;
+    sentLock = si - 1;
+    jumpTo(sentences[sentLock].start);
+  }
+
+  function goNext() {
+    var si = currentSentIndex();
+    if (si >= sentences.length - 1) return;
+    sentLock = si + 1;
+    jumpTo(sentences[sentLock].start);
   }
 
   function goStop() {
@@ -431,11 +441,7 @@
     if (pair === "go start") goStart();
     else if (pair === "go back") goBack();
     else if (pair === "go stop") goStop();
-    else if (pair === "go next") {
-      var si = currentSentIndex();
-      var next = sentences[Math.min(sentences.length - 1, si + 1)];
-      jumpTo(next ? next.start : index);
-    }
+    else if (pair === "go next") goNext();
     return true;
   }
 
@@ -452,11 +458,7 @@
     var si = currentSentIndex();
     var sent = sentences[si];
     if (!sent) return;
-    if (index >= sent.end) {
-      var after = sentences[si + 1];
-      jumpTo(after ? after.start : index);
-      return;
-    }
+    if (index >= sent.end) return;
     var ptr = index;
     var heard = false;
     for (var s = 0; s < recent.length; s++) {
@@ -480,13 +482,8 @@
       }
     }
     if (!heard) return;
-    if (ptr >= sent.end) {
-      var following = sentences[si + 1];
-      index = following ? following.start : ptr;
-      lastMatched = "";
-    } else {
-      index = ptr;
-    }
+    index = ptr >= sent.end ? sent.end : ptr;
+    if (ptr >= sent.end) lastMatched = "";
     renderWords();
   }
 
@@ -619,6 +616,9 @@
     } else if (e.key === "ArrowLeft") {
       e.preventDefault();
       goBack();
+    } else if (e.key === "ArrowRight") {
+      e.preventDefault();
+      goNext();
     }
   }
 
@@ -628,6 +628,7 @@
     words = tokenize(opts.script || "");
     assignSentences(words);
     index = 0;
+    sentLock = 0;
     lastMatched = "";
     shownSent = -1;
     commandArmed = true;
