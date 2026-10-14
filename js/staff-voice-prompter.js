@@ -16,7 +16,7 @@
   var index = 0;
   var lastMatched = "";
   var commandArmed = true;
-  var fontSize = 92;
+  var fontSize = 48;
   var opts = {};
   var shownSent = -1;
   var sentLock = 0;
@@ -249,7 +249,7 @@
       '<span class="mvi-prompter__status" data-vp="status"></span>' +
       '<span class="mvi-prompter__level" data-vp="level" aria-hidden="true"><i></i></span>' +
       '<button type="button" class="mvi-prompter__mic" data-vp="mic"></button>' +
-      '<label class="mvi-prompter__font">Aa <input data-vp="font" type="range" min="64" max="140" value="92" /></label>' +
+      '<label class="mvi-prompter__font">Aa <input data-vp="font" type="range" min="28" max="80" value="48" /></label>' +
       "</div>" +
       '<p class="mvi-prompter__error" data-vp="error" hidden></p>' +
       '<div class="mvi-prompter__stage" data-vp="stage" tabindex="0">' +
@@ -267,7 +267,7 @@
     });
     overlay.addEventListener("input", function (e) {
       if (e.target.getAttribute("data-vp") === "font") {
-        fontSize = Number(e.target.value) || 92;
+        fontSize = Number(e.target.value) || 48;
         shownSent = -1;
         if (overlay && !overlay.hasAttribute("hidden")) renderWords();
       }
@@ -287,6 +287,10 @@
       e.preventDefault();
     });
     document.addEventListener("keydown", onKey);
+    window.addEventListener("resize", function () {
+      if (!overlay || overlay.hasAttribute("hidden")) return;
+      fitNow();
+    });
     return overlay;
   }
 
@@ -350,33 +354,25 @@
       void stage.offsetWidth;
       stage.classList.add("is-shift");
     }
-    if (shownSent !== si) {
-      shownSent = si;
-      nowBox.style.fontSize = fontSize + "px";
-      requestAnimationFrame(fitNow);
-    }
-    requestAnimationFrame(pinReadingLine);
-  }
-
-  function pinReadingLine() {
-    var stage = overlay.querySelector("[data-vp='stage']");
-    if (!stage) return;
-    var word = null;
-    var i;
-    for (i = index; i < words.length; i++) {
-      word = stage.querySelector('.mvi-prompter__now [data-wi="' + i + '"]');
-      if (word) break;
-    }
-    if (!word) return;
-    var topGap = word.getBoundingClientRect().top - stage.getBoundingClientRect().top;
-    var line = Math.max(word.getBoundingClientRect().height, fontSize * 0.8);
-    if (topGap > line * 0.45) stage.scrollTop += topGap - 6;
+    if (shownSent !== si) shownSent = si;
+    nowBox.style.fontSize = fontSize + "px";
+    requestAnimationFrame(fitNow);
   }
 
   function fitNow() {
+    var stage = overlay.querySelector("[data-vp='stage']");
     var box = overlay.querySelector("[data-vp='now']");
-    if (!box) return;
-    box.style.fontSize = fontSize + "px";
+    if (!stage || !box) return;
+    var size = fontSize;
+    var min = 22;
+    var guard = 0;
+    stage.scrollTop = 0;
+    box.style.fontSize = size + "px";
+    while (box.scrollHeight > stage.clientHeight - 8 && size > min && guard < 24) {
+      size = Math.max(min, Math.floor(size * 0.9));
+      box.style.fontSize = size + "px";
+      guard += 1;
+    }
   }
 
   function jumpTo(i) {
