@@ -154,6 +154,15 @@ const STATIC_PAGES = [
   { loc: "/estados/texas.html", priority: "0.84" },
   { loc: "/estados/michigan.html", priority: "0.84" },
   { loc: "/estados/virginia.html", priority: "0.84" },
+  { loc: "/estados/florida.html", priority: "0.84" },
+  { loc: "/estados/florida/jacksonville.html", priority: "0.86" },
+  { loc: "/estados/florida/miami.html", priority: "0.86" },
+  { loc: "/estados/florida/tampa.html", priority: "0.86" },
+  { loc: "/estados/florida/orlando.html", priority: "0.86" },
+  { loc: "/estados/florida/st-petersburg.html", priority: "0.86" },
+  { loc: "/estados/florida/fort-lauderdale.html", priority: "0.86" },
+  { loc: "/estados/florida/tallahassee.html", priority: "0.86" },
+  { loc: "/estados/florida/west-palm-beach.html", priority: "0.86" },
 ];
 
 /** Standalone July articles redirect to the weekly digest — omit from sitemap. */

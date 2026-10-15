@@ -1,0 +1,85 @@
+{
+  "city": "tallahassee",
+  "checked": "2026-10-15",
+  "checkedLabelEs": "15 oct. 2026",
+  "checkedLabelEn": "15 Oct 2026",
+  "noteEs": "Anuncios de particulares. No son precios de Mejor Vida Seguros ni la lista oficial del cementerio. La oficina debe transferir la escritura. Revise si el anuncio sigue activo.",
+  "noteEn": "Private-party ads. These are not Mejor Vida Insurance prices or the cemetery’s official list. The office must transfer the deed. Check that the listing is still active.",
+  "boards": [
+    {
+      "id": "grave-solutions-city",
+      "name": "Grave Solutions",
+      "url": "https://www.gravesolutions.com/search?SiteState=FL&SiteCity=Tallahassee",
+      "labelEs": "Tablero en vivo · Tallahassee",
+      "labelEn": "Live board · Tallahassee"
+    },
+    {
+      "id": "grave-solutions",
+      "name": "Grave Solutions",
+      "url": "https://www.gravesolutions.com/for-sale/cemetery-properties/florida",
+      "labelEs": "Tablero en vivo · Florida",
+      "labelEn": "Live board · Florida"
+    }
+  ],
+  "cemeterySignals": [
+    {
+      "cemetery": "MeadowWood Memorial Park",
+      "citedListLow": 6995,
+      "citedListHigh": 6995,
+      "typical": 5995,
+      "phone": "(850) 877-8191",
+      "noteEs": "Reventa ~$5,995; lista citada ~$6,995. Paquetes con bóvedas hasta ~$16,000.",
+      "noteEn": "Resale about $5,995; cited list about $6,995. Packages with vaults up to about $16,000."
+    },
+    {
+      "cemetery": "Tallahassee Memory Gardens",
+      "citedListLow": null,
+      "citedListHigh": null,
+      "typical": 1200,
+      "phone": "",
+      "noteEs": "Garden of Devotion ~$1,200 por espacio / $2,400 el par.",
+      "noteEn": "Garden of Devotion about $1,200 per space / $2,400 for the pair."
+    }
+  ],
+  "listings": [
+    {
+      "id": "gs-memory-gardens-1200",
+      "status": "listed",
+      "cemetery": "Tallahassee Memory Gardens",
+      "spaces": 1,
+      "asking": 1200,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": null,
+      "url": "https://www.gravesolutions.com/search?SiteState=FL&SiteCity=Tallahassee",
+      "titleEs": "Grave Solutions · Garden of Devotion",
+      "titleEn": "Grave Solutions · Garden of Devotion"
+    },
+    {
+      "id": "gs-meadowwood-5995",
+      "status": "listed",
+      "cemetery": "MeadowWood Memorial Park",
+      "spaces": 1,
+      "asking": 5995,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": 6995,
+      "url": "https://www.gravesolutions.com/search?SiteState=FL&SiteCity=Tallahassee",
+      "titleEs": "Grave Solutions · Garden of Memories",
+      "titleEn": "Grave Solutions · Garden of Memories"
+    },
+    {
+      "id": "gs-meadowwood-16000",
+      "status": "listed",
+      "cemetery": "MeadowWood Memorial Park",
+      "spaces": 2,
+      "asking": 16000,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": null,
+      "url": "https://www.gravesolutions.com/search?SiteState=FL&SiteCity=Tallahassee",
+      "titleEs": "Grave Solutions · paquete con bóvedas",
+      "titleEn": "Grave Solutions · package with vaults"
+    }
+  ]
+}

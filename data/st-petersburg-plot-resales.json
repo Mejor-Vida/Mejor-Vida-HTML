@@ -1,0 +1,85 @@
+{
+  "city": "st-petersburg",
+  "checked": "2026-10-15",
+  "checkedLabelEs": "15 oct. 2026",
+  "checkedLabelEn": "15 Oct 2026",
+  "noteEs": "Anuncios de particulares. No son precios de Mejor Vida Seguros ni la lista oficial del cementerio. La oficina debe transferir la escritura. Revise si el anuncio sigue activo.",
+  "noteEn": "Private-party ads. These are not Mejor Vida Insurance prices or the cemetery’s official list. The office must transfer the deed. Check that the listing is still active.",
+  "boards": [
+    {
+      "id": "grave-solutions-city",
+      "name": "Grave Solutions",
+      "url": "https://www.gravesolutions.com/search?SiteState=FL&SiteCity=St.%20Petersburg",
+      "labelEs": "Tablero en vivo · St. Petersburg",
+      "labelEn": "Live board · St. Petersburg"
+    },
+    {
+      "id": "grave-solutions",
+      "name": "Grave Solutions",
+      "url": "https://www.gravesolutions.com/for-sale/cemetery-properties/florida",
+      "labelEs": "Tablero en vivo · Florida",
+      "labelEn": "Live board · Florida"
+    }
+  ],
+  "cemeterySignals": [
+    {
+      "cemetery": "Memorial Park",
+      "citedListLow": null,
+      "citedListHigh": null,
+      "typical": 2500,
+      "phone": "",
+      "noteEs": "Reventa ~$2,500 por espacio (dos lado a lado).",
+      "noteEn": "Resale about $2,500 per space (two side by side)."
+    },
+    {
+      "cemetery": "Royal Palm North Cemetery",
+      "citedListLow": null,
+      "citedListHigh": null,
+      "typical": 3000,
+      "phone": "",
+      "noteEs": "Paquete con bóvedas ~$3,000; cripta de mausoleo ~$8,000.",
+      "noteEn": "Vault package about $3,000; mausoleum crypt about $8,000."
+    }
+  ],
+  "listings": [
+    {
+      "id": "gs-memorial-park-2500",
+      "status": "listed",
+      "cemetery": "Memorial Park",
+      "spaces": 1,
+      "asking": 2500,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": null,
+      "url": "https://www.gravesolutions.com/search?SiteState=FL&SiteCity=St.%20Petersburg",
+      "titleEs": "Grave Solutions · por espacio",
+      "titleEn": "Grave Solutions · per space"
+    },
+    {
+      "id": "gs-royal-palm-3000",
+      "status": "listed",
+      "cemetery": "Royal Palm North Cemetery",
+      "spaces": 2,
+      "asking": 3000,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": null,
+      "url": "https://www.gravesolutions.com/search?SiteState=FL&SiteCity=St.%20Petersburg",
+      "titleEs": "Grave Solutions · dos espacios con bóvedas",
+      "titleEn": "Grave Solutions · two spaces with vaults"
+    },
+    {
+      "id": "gs-royal-palm-8000",
+      "status": "listed",
+      "cemetery": "Royal Palm North Cemetery",
+      "spaces": 1,
+      "asking": 8000,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": null,
+      "url": "https://www.gravesolutions.com/search?SiteState=FL&SiteCity=St.%20Petersburg",
+      "titleEs": "Grave Solutions · cripta de mausoleo",
+      "titleEn": "Grave Solutions · mausoleum crypt"
+    }
+  ]
+}

@@ -1,0 +1,120 @@
+{
+  "city": "jacksonville",
+  "checked": "2026-10-15",
+  "checkedLabelEs": "15 oct. 2026",
+  "checkedLabelEn": "15 Oct 2026",
+  "noteEs": "Anuncios de particulares. No son precios de Mejor Vida Seguros ni la lista oficial del cementerio. La oficina debe transferir la escritura. Revise si el anuncio sigue activo.",
+  "noteEn": "Private-party ads. These are not Mejor Vida Insurance prices or the cemetery’s official list. The office must transfer the deed. Check that the listing is still active.",
+  "boards": [
+    {
+      "id": "grave-solutions-city",
+      "name": "Grave Solutions",
+      "url": "https://www.gravesolutions.com/search?SiteState=FL&SiteCity=Jacksonville",
+      "labelEs": "Tablero en vivo · Jacksonville",
+      "labelEn": "Live board · Jacksonville"
+    },
+    {
+      "id": "grave-solutions",
+      "name": "Grave Solutions",
+      "url": "https://www.gravesolutions.com/for-sale/cemetery-properties/florida",
+      "labelEs": "Tablero en vivo · Florida",
+      "labelEn": "Live board · Florida"
+    }
+  ],
+  "cemeterySignals": [
+    {
+      "cemetery": "Chapel Hill Memory Gardens",
+      "citedListLow": 5995,
+      "citedListHigh": 5995,
+      "typical": 5995,
+      "phone": "(904) 641-9755",
+      "noteEs": "Anuncios citaron ~$5,995 en lista; reventa ~$2,000 por espacio.",
+      "noteEn": "Ads cited about $5,995 on the list; resale about $2,000 per space."
+    },
+    {
+      "cemetery": "Arlington Memorial Park",
+      "citedListLow": null,
+      "citedListHigh": null,
+      "typical": 4000,
+      "phone": "(904) 724-6384",
+      "noteEs": "Reventa: espacio doble profundidad con bóvedas, pedido ~$4,000.",
+      "noteEn": "Resale: double-depth space with vaults, asking about $4,000."
+    },
+    {
+      "cemetery": "Hardage-Giddens Oaklawn",
+      "citedListLow": null,
+      "citedListHigh": null,
+      "typical": 8000,
+      "phone": "(904) 737-7171",
+      "noteEs": "Reventa: espacio en sección histórica pedido ~$8,000.",
+      "noteEn": "Resale: historic-section space asking about $8,000."
+    }
+  ],
+  "listings": [
+    {
+      "id": "gs-chapel-hill-jax-2000",
+      "status": "listed",
+      "cemetery": "Chapel Hill Memory Gardens",
+      "spaces": 1,
+      "asking": 2000,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": 5995,
+      "url": "https://www.gravesolutions.com/search?SiteState=FL&SiteCity=Jacksonville",
+      "titleEs": "Grave Solutions · Sermon on the Mount (~$2,000; lista citada $5,995)",
+      "titleEn": "Grave Solutions · Sermon on the Mount (~$2,000; cited list $5,995)"
+    },
+    {
+      "id": "gs-evergreen-3200",
+      "status": "listed",
+      "cemetery": "Evergreen Cemetery",
+      "spaces": 2,
+      "asking": 3200,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": null,
+      "url": "https://www.gravesolutions.com/search?SiteState=FL&SiteCity=Jacksonville",
+      "titleEs": "Grave Solutions · dos espacios (~$3,200 el par)",
+      "titleEn": "Grave Solutions · two spaces (~$3,200 for the pair)"
+    },
+    {
+      "id": "gs-arlington-4000",
+      "status": "listed",
+      "cemetery": "Arlington Memorial Park",
+      "spaces": 1,
+      "asking": 4000,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": null,
+      "url": "https://www.gravesolutions.com/search?SiteState=FL&SiteCity=Jacksonville",
+      "titleEs": "Grave Solutions · Veterans Garden (doble profundidad + bóvedas)",
+      "titleEn": "Grave Solutions · Veterans Garden (double depth + vaults)"
+    },
+    {
+      "id": "gs-oaklawn-8000",
+      "status": "listed",
+      "cemetery": "Hardage-Giddens Oaklawn Cemetery",
+      "spaces": 1,
+      "asking": 8000,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": null,
+      "url": "https://www.gravesolutions.com/search?SiteState=FL&SiteCity=Jacksonville",
+      "titleEs": "Grave Solutions · sección histórica (~$8,000)",
+      "titleEn": "Grave Solutions · historic section (~$8,000)"
+    },
+    {
+      "id": "gs-greenlawn-10000",
+      "status": "listed",
+      "cemetery": "Greenlawn Cemetery",
+      "spaces": 2,
+      "asking": 10000,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": null,
+      "url": "https://www.gravesolutions.com/search?SiteState=FL&SiteCity=Jacksonville",
+      "titleEs": "Grave Solutions · ST MARK dos espacios (~$10,000 el par)",
+      "titleEn": "Grave Solutions · ST MARK two spaces (~$10,000 for the pair)"
+    }
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "city": "fort-lauderdale",
+  "checked": "2026-10-15",
+  "checkedLabelEs": "15 oct. 2026",
+  "checkedLabelEn": "15 Oct 2026",
+  "noteEs": "Anuncios de particulares. No son precios de Mejor Vida Seguros ni la lista oficial del cementerio. La oficina debe transferir la escritura. Revise si el anuncio sigue activo.",
+  "noteEn": "Private-party ads. These are not Mejor Vida Insurance prices or the cemetery’s official list. The office must transfer the deed. Check that the listing is still active.",
+  "boards": [
+    {
+      "id": "grave-solutions-city",
+      "name": "Grave Solutions",
+      "url": "https://www.gravesolutions.com/search?SiteState=FL&SiteCity=Fort%20Lauderdale",
+      "labelEs": "Tablero en vivo · Fort Lauderdale",
+      "labelEn": "Live board · Fort Lauderdale"
+    },
+    {
+      "id": "grave-solutions",
+      "name": "Grave Solutions",
+      "url": "https://www.gravesolutions.com/for-sale/cemetery-properties/florida",
+      "labelEs": "Tablero en vivo · Florida",
+      "labelEn": "Live board · Florida"
+    }
+  ],
+  "cemeterySignals": [
+    {
+      "cemetery": "Evergreen Cemetery",
+      "citedListLow": 8745,
+      "citedListHigh": 8745,
+      "typical": 8745,
+      "phone": "",
+      "noteEs": "Anuncio citó ~$8,745 por espacio nuevo en el borde; dos interiores a $16,000.",
+      "noteEn": "Ad cited about $8,745 per new edge space; two interiors at $16,000."
+    },
+    {
+      "cemetery": "Lauderdale Memorial Park",
+      "citedListLow": null,
+      "citedListHigh": null,
+      "typical": 4000,
+      "phone": "",
+      "noteEs": "Reventa ~$4,000 por espacio.",
+      "noteEn": "Resale about $4,000 per space."
+    }
+  ],
+  "listings": [
+    {
+      "id": "gs-sunset-3000",
+      "status": "listed",
+      "cemetery": "Sunset Memorial Gardens",
+      "spaces": 1,
+      "asking": 3000,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": null,
+      "url": "https://www.gravesolutions.com/search?SiteState=FL&SiteCity=Fort%20Lauderdale",
+      "titleEs": "Grave Solutions · un espacio",
+      "titleEn": "Grave Solutions · one space"
+    },
+    {
+      "id": "gs-lauderdale-memorial-4000",
+      "status": "listed",
+      "cemetery": "Lauderdale Memorial Park",
+      "spaces": 1,
+      "asking": 4000,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": null,
+      "url": "https://www.gravesolutions.com/search?SiteState=FL&SiteCity=Fort%20Lauderdale",
+      "titleEs": "Grave Solutions · por espacio",
+      "titleEn": "Grave Solutions · per space"
+    },
+    {
+      "id": "gs-evergreen-16000",
+      "status": "listed",
+      "cemetery": "Evergreen Cemetery",
+      "spaces": 2,
+      "asking": 16000,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": 8745,
+      "url": "https://www.gravesolutions.com/search?SiteState=FL&SiteCity=Fort%20Lauderdale",
+      "titleEs": "Grave Solutions · dos espacios interiores",
+      "titleEn": "Grave Solutions · two interior spaces"
+    },
+    {
+      "id": "gs-forest-lawn-9900",
+      "status": "listed",
+      "cemetery": "Forest Lawn Memorial Gardens",
+      "spaces": 1,
+      "asking": 9900,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": null,
+      "url": "https://www.gravesolutions.com/search?SiteState=FL&SiteCity=Fort%20Lauderdale",
+      "titleEs": "Grave Solutions · cripta Pyramid Mausoleum",
+      "titleEn": "Grave Solutions · Pyramid Mausoleum crypt"
+    }
+  ]
+}

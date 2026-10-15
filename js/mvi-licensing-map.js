@@ -117,12 +117,35 @@
       nameEs: "Virginia",
       typeEn: "Non-resident producer",
       typeEs: "Productora no residente",
-      number: "21695431",
-      pdfPending: true,
+      number: "1618111",
+      pdf: "julie-license-va.pdf?v=20261015",
       verifyUrl:
         "https://www.scc.virginia.gov/boi/consumerinquiry/search.aspx?searchType=agent",
       verifyLabelEn: "Verify in Virginia (SCC)",
       verifyLabelEs: "Verificar en Virginia (SCC)",
+    },
+    FL: {
+      nameEn: "Florida",
+      nameEs: "Florida",
+      typeEn: "Non-resident producer",
+      typeEs: "Productora no residente",
+      number: "G389071",
+      pdf: "julie-license-fl.pdf?v=20261015",
+      verifyUrl: "https://licenseesearch.fldfs.com/",
+      verifyLabelEn: "Verify in Florida (DFS)",
+      verifyLabelEs: "Verificar en Florida (DFS)",
+    },
+    NC: {
+      nameEn: "North Carolina",
+      nameEs: "Carolina del Norte",
+      typeEn: "Non-resident producer",
+      typeEs: "Productora no residente",
+      number: "21695431",
+      pdf: "julie-license-nc.pdf?v=20261015-biz",
+      verifyUrl:
+        "https://external-lookup-web.prod.naic.org/lookup?jurisdiction=NC&searchType=Licensee&entityType=IND&npn=21695431",
+      verifyLabelEn: "Verify in North Carolina (NAIC)",
+      verifyLabelEs: "Verificar en Carolina del Norte (NAIC)",
     },
   };
 

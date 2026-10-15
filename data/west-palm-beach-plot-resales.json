@@ -1,0 +1,98 @@
+{
+  "city": "west-palm-beach",
+  "checked": "2026-10-15",
+  "checkedLabelEs": "15 oct. 2026",
+  "checkedLabelEn": "15 Oct 2026",
+  "noteEs": "Anuncios de particulares. No son precios de Mejor Vida Seguros ni la lista oficial del cementerio. La oficina debe transferir la escritura. Revise si el anuncio sigue activo.",
+  "noteEn": "Private-party ads. These are not Mejor Vida Insurance prices or the cemetery’s official list. The office must transfer the deed. Check that the listing is still active.",
+  "boards": [
+    {
+      "id": "grave-solutions-city",
+      "name": "Grave Solutions",
+      "url": "https://www.gravesolutions.com/search?SiteState=FL&SiteCity=West%20Palm%20Beach",
+      "labelEs": "Tablero en vivo · West Palm Beach",
+      "labelEn": "Live board · West Palm Beach"
+    },
+    {
+      "id": "grave-solutions",
+      "name": "Grave Solutions",
+      "url": "https://www.gravesolutions.com/for-sale/cemetery-properties/florida",
+      "labelEs": "Tablero en vivo · Florida",
+      "labelEn": "Live board · Florida"
+    }
+  ],
+  "cemeterySignals": [
+    {
+      "cemetery": "Hillcrest Memorial Park",
+      "citedListLow": 5410,
+      "citedListHigh": 5410,
+      "typical": 5410,
+      "phone": "(561) 833-4061",
+      "noteEs": "Reventa desde ~$1,500; lista citada ~$5,410. Dos espacios juntos ~$7,000.",
+      "noteEn": "Resale from about $1,500; cited list about $5,410. Two spaces together about $7,000."
+    },
+    {
+      "cemetery": "Memory Gardens",
+      "citedListLow": null,
+      "citedListHigh": null,
+      "typical": 1750,
+      "phone": "",
+      "noteEs": "Dos espacios (Christus Abbey) ~$3,500 el par.",
+      "noteEn": "Two spaces (Christus Abbey) about $3,500 for the pair."
+    }
+  ],
+  "listings": [
+    {
+      "id": "gs-hillcrest-1500",
+      "status": "listed",
+      "cemetery": "Hillcrest Memorial Park",
+      "spaces": 1,
+      "asking": 1500,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": null,
+      "url": "https://www.gravesolutions.com/search?SiteState=FL&SiteCity=West%20Palm%20Beach",
+      "titleEs": "Grave Solutions · lotes contiguos",
+      "titleEn": "Grave Solutions · adjoining lots"
+    },
+    {
+      "id": "gs-hillcrest-3500",
+      "status": "listed",
+      "cemetery": "Hillcrest Memorial Park",
+      "spaces": 1,
+      "asking": 3500,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": null,
+      "url": "https://www.gravesolutions.com/search?SiteState=FL&SiteCity=West%20Palm%20Beach",
+      "titleEs": "Grave Solutions · sección judía",
+      "titleEn": "Grave Solutions · Jewish section"
+    },
+    {
+      "id": "gs-hillcrest-7000",
+      "status": "listed",
+      "cemetery": "Hillcrest Memorial Park",
+      "spaces": 2,
+      "asking": 7000,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": 5410,
+      "url": "https://www.gravesolutions.com/search?SiteState=FL&SiteCity=West%20Palm%20Beach",
+      "titleEs": "Grave Solutions · dos espacios",
+      "titleEn": "Grave Solutions · two spaces"
+    },
+    {
+      "id": "gs-memory-gardens-3500",
+      "status": "listed",
+      "cemetery": "Memory Gardens",
+      "spaces": 2,
+      "asking": 3500,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": null,
+      "url": "https://www.gravesolutions.com/search?SiteState=FL&SiteCity=West%20Palm%20Beach",
+      "titleEs": "Grave Solutions · Christus Abbey",
+      "titleEn": "Grave Solutions · Christus Abbey"
+    }
+  ]
+}

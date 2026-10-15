@@ -3,7 +3,7 @@
  * Nebraska-style state hero: full-bleed county map (1400×900) + seal.
  * CSS mask on .sc-hero-visual fades the left edge into the headline column.
  *
- * Usage: node scripts/build-county-map-seal-hero.js arizona michigan virginia
+ * Usage: node scripts/build-county-map-seal-hero.js arizona michigan virginia florida north-carolina
  */
 const fs = require("fs");
 const path = require("path");
@@ -22,6 +22,20 @@ const STATES = {
     sealFile: "virginia-state-seal.svg",
     /** VA silhouette is wide east–west; county-centroid still sits west of the visual mass. */
     sealOffsetX: 72,
+    sealOffsetY: 0,
+  },
+  florida: {
+    fipsPrefix: "12",
+    sealFile: "florida-state-seal.svg",
+    /** Panhandle pulls the centroid west; nudge seal toward the peninsula. */
+    sealOffsetX: 90,
+    sealOffsetY: 20,
+  },
+  "north-carolina": {
+    fipsPrefix: "37",
+    sealFile: "north-carolina-state-seal.svg",
+    /** Outer Banks / east coast mass; slight east nudge. */
+    sealOffsetX: 40,
     sealOffsetY: 0,
   },
 };
@@ -192,7 +206,9 @@ async function writeHeroPng(slug, features) {
 async function main() {
   const slugs = process.argv.slice(2).filter((s) => STATES[s]);
   if (!slugs.length) {
-    console.error("Usage: node scripts/build-county-map-seal-hero.js arizona michigan virginia");
+    console.error(
+      "Usage: node scripts/build-county-map-seal-hero.js arizona michigan virginia florida north-carolina"
+    );
     process.exit(1);
   }
   for (const slug of slugs) {

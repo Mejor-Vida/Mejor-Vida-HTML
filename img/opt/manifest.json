@@ -45,6 +45,15 @@
     "keepPng": false
   },
   {
+    "src": "img/state-heroes/florida-hero.png",
+    "base": "florida-hero",
+    "width": 1400,
+    "height": 900,
+    "webp": "img/opt/florida-hero.webp",
+    "fallback": "img/opt/florida-hero.jpg",
+    "keepPng": false
+  },
+  {
     "src": "img/business-man.png",
     "base": "business-man",
     "width": 681,
@@ -603,12 +612,30 @@
     "keepPng": false
   },
   {
+    "src": "img/albuquerque-balloon-fiesta.jpg",
+    "base": "albuquerque-balloon-fiesta",
+    "width": 836,
+    "height": 477,
+    "webp": "img/opt/albuquerque-balloon-fiesta.webp",
+    "fallback": "img/opt/albuquerque-balloon-fiesta.jpg",
+    "keepPng": false
+  },
+  {
     "src": "img/las-cruces-organ-mountains.jpg",
     "base": "las-cruces-organ-mountains",
     "width": 1600,
     "height": 690,
     "webp": "img/opt/las-cruces-organ-mountains.webp",
     "fallback": "img/opt/las-cruces-organ-mountains.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/las-cruces-organ-mountains-hero.jpg",
+    "base": "las-cruces-organ-mountains-hero",
+    "width": 1024,
+    "height": 548,
+    "webp": "img/opt/las-cruces-organ-mountains-hero.webp",
+    "fallback": "img/opt/las-cruces-organ-mountains-hero.jpg",
     "keepPng": false
   },
   {
@@ -621,12 +648,30 @@
     "keepPng": false
   },
   {
+    "src": "img/rio-rancho-rio-grande.jpg",
+    "base": "rio-rancho-rio-grande",
+    "width": 774,
+    "height": 938,
+    "webp": "img/opt/rio-rancho-rio-grande.webp",
+    "fallback": "img/opt/rio-rancho-rio-grande.jpg",
+    "keepPng": false
+  },
+  {
     "src": "img/santa-fe-palace.jpg",
     "base": "santa-fe-palace",
     "width": 1448,
     "height": 900,
     "webp": "img/opt/santa-fe-palace.webp",
     "fallback": "img/opt/santa-fe-palace.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/santa-fe-skyline.jpg",
+    "base": "santa-fe-skyline",
+    "width": 1024,
+    "height": 590,
+    "webp": "img/opt/santa-fe-skyline.webp",
+    "fallback": "img/opt/santa-fe-skyline.jpg",
     "keepPng": false
   },
   {
@@ -792,12 +837,30 @@
     "keepPng": false
   },
   {
+    "src": "img/tucson-skyline.jpg",
+    "base": "tucson-skyline",
+    "width": 1600,
+    "height": 893,
+    "webp": "img/opt/tucson-skyline.webp",
+    "fallback": "img/opt/tucson-skyline.jpg",
+    "keepPng": false
+  },
+  {
     "src": "img/mesa-superstition.jpg",
     "base": "mesa-superstition",
     "width": 1024,
     "height": 682,
     "webp": "img/opt/mesa-superstition.webp",
     "fallback": "img/opt/mesa-superstition.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/mesa-monument-valley.jpg",
+    "base": "mesa-monument-valley",
+    "width": 1600,
+    "height": 893,
+    "webp": "img/opt/mesa-monument-valley.webp",
+    "fallback": "img/opt/mesa-monument-valley.jpg",
     "keepPng": false
   },
   {
@@ -810,12 +873,30 @@
     "keepPng": false
   },
   {
+    "src": "img/chandler-aerial.jpg",
+    "base": "chandler-aerial",
+    "width": 1600,
+    "height": 893,
+    "webp": "img/opt/chandler-aerial.webp",
+    "fallback": "img/opt/chandler-aerial.jpg",
+    "keepPng": false
+  },
+  {
     "src": "img/scottsdale-old-town.jpg",
     "base": "scottsdale-old-town",
     "width": 1024,
     "height": 682,
     "webp": "img/opt/scottsdale-old-town.webp",
     "fallback": "img/opt/scottsdale-old-town.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/scottsdale-horse-fountain.jpg",
+    "base": "scottsdale-horse-fountain",
+    "width": 1600,
+    "height": 893,
+    "webp": "img/opt/scottsdale-horse-fountain.webp",
+    "fallback": "img/opt/scottsdale-horse-fountain.jpg",
     "keepPng": false
   },
   {
@@ -828,6 +909,15 @@
     "keepPng": false
   },
   {
+    "src": "img/glendale-capitol.jpg",
+    "base": "glendale-capitol",
+    "width": 1600,
+    "height": 893,
+    "webp": "img/opt/glendale-capitol.webp",
+    "fallback": "img/opt/glendale-capitol.jpg",
+    "keepPng": false
+  },
+  {
     "src": "img/gilbert-water-tower.jpg",
     "base": "gilbert-water-tower",
     "width": 1024,
@@ -837,12 +927,30 @@
     "keepPng": false
   },
   {
+    "src": "img/gilbert-temple.jpg",
+    "base": "gilbert-temple",
+    "width": 1600,
+    "height": 893,
+    "webp": "img/opt/gilbert-temple.webp",
+    "fallback": "img/opt/gilbert-temple.jpg",
+    "keepPng": false
+  },
+  {
     "src": "img/tempe-town-lake.jpg",
     "base": "tempe-town-lake",
     "width": 682,
     "height": 212,
     "webp": "img/opt/tempe-town-lake.webp",
     "fallback": "img/opt/tempe-town-lake.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/tempe-mill-bridge.jpg",
+    "base": "tempe-mill-bridge",
+    "width": 1600,
+    "height": 893,
+    "webp": "img/opt/tempe-mill-bridge.webp",
+    "fallback": "img/opt/tempe-mill-bridge.jpg",
     "keepPng": false
   },
   {
@@ -2131,6 +2239,51 @@
     "webp": "img/opt/blog-generated/weekly-insurance-update-2026-10-04/story-3.webp",
     "fallback": "img/opt/blog-generated/weekly-insurance-update-2026-10-04/story-3.png",
     "keepPng": true
+  },
+  {
+    "src": "img/blog-generated/weekly-insurance-update-2026-10-11/hero.jpg",
+    "base": "hero",
+    "width": 864,
+    "height": 1152,
+    "webp": "img/opt/blog-generated/weekly-insurance-update-2026-10-11/hero.webp",
+    "fallback": "img/opt/blog-generated/weekly-insurance-update-2026-10-11/hero.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/blog-generated/weekly-insurance-update-2026-10-11/thumb.jpg",
+    "base": "thumb",
+    "width": 819,
+    "height": 545,
+    "webp": "img/opt/blog-generated/weekly-insurance-update-2026-10-11/thumb.webp",
+    "fallback": "img/opt/blog-generated/weekly-insurance-update-2026-10-11/thumb.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/blog-generated/weekly-insurance-update-2026-10-11/story-1.jpg",
+    "base": "story-1",
+    "width": 1024,
+    "height": 682,
+    "webp": "img/opt/blog-generated/weekly-insurance-update-2026-10-11/story-1.webp",
+    "fallback": "img/opt/blog-generated/weekly-insurance-update-2026-10-11/story-1.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/blog-generated/weekly-insurance-update-2026-10-11/story-2.jpg",
+    "base": "story-2",
+    "width": 1024,
+    "height": 682,
+    "webp": "img/opt/blog-generated/weekly-insurance-update-2026-10-11/story-2.webp",
+    "fallback": "img/opt/blog-generated/weekly-insurance-update-2026-10-11/story-2.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/blog-generated/weekly-insurance-update-2026-10-11/story-3.jpg",
+    "base": "story-3",
+    "width": 1024,
+    "height": 682,
+    "webp": "img/opt/blog-generated/weekly-insurance-update-2026-10-11/story-3.webp",
+    "fallback": "img/opt/blog-generated/weekly-insurance-update-2026-10-11/story-3.jpg",
+    "keepPng": false
   },
   {
     "src": "img/blog-generated/weekly-insurance-update-2026-03-08/clip1_firefighter.png",
@@ -3483,147 +3636,75 @@
     "keepPng": true
   },
   {
-    "src": "img/tucson-skyline.jpg",
-    "base": "tucson-skyline",
+    "src": "img/jacksonville-skyline.jpg",
+    "base": "jacksonville-skyline",
+    "width": 1440,
+    "height": 900,
+    "webp": "img/opt/jacksonville-skyline.webp",
+    "fallback": "img/opt/jacksonville-skyline.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/miami-skyline.jpg",
+    "base": "miami-skyline",
+    "width": 800,
+    "height": 482,
+    "webp": "img/opt/miami-skyline.webp",
+    "fallback": "img/opt/miami-skyline.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/tampa-skyline.jpg",
+    "base": "tampa-skyline",
+    "width": 1200,
+    "height": 900,
+    "webp": "img/opt/tampa-skyline.webp",
+    "fallback": "img/opt/tampa-skyline.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/orlando-skyline.jpg",
+    "base": "orlando-skyline",
+    "width": 1181,
+    "height": 900,
+    "webp": "img/opt/orlando-skyline.webp",
+    "fallback": "img/opt/orlando-skyline.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/st-petersburg-skyline.jpg",
+    "base": "st-petersburg-skyline",
     "width": 1600,
-    "height": 893,
-    "webp": "img/opt/tucson-skyline.webp",
-    "fallback": "img/opt/tucson-skyline.jpg",
+    "height": 899,
+    "webp": "img/opt/st-petersburg-skyline.webp",
+    "fallback": "img/opt/st-petersburg-skyline.jpg",
     "keepPng": false
   },
   {
-    "src": "img/mesa-monument-valley.jpg",
-    "base": "mesa-monument-valley",
+    "src": "img/fort-lauderdale-skyline.jpg",
+    "base": "fort-lauderdale-skyline",
+    "width": 1200,
+    "height": 900,
+    "webp": "img/opt/fort-lauderdale-skyline.webp",
+    "fallback": "img/opt/fort-lauderdale-skyline.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/tallahassee-capitol.jpg",
+    "base": "tallahassee-capitol",
+    "width": 1150,
+    "height": 900,
+    "webp": "img/opt/tallahassee-capitol.webp",
+    "fallback": "img/opt/tallahassee-capitol.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/west-palm-beach-skyline.jpg",
+    "base": "west-palm-beach-skyline",
     "width": 1600,
-    "height": 893,
-    "webp": "img/opt/mesa-monument-valley.webp",
-    "fallback": "img/opt/mesa-monument-valley.jpg",
-    "keepPng": false
-  },
-  {
-    "src": "img/chandler-aerial.jpg",
-    "base": "chandler-aerial",
-    "width": 1600,
-    "height": 893,
-    "webp": "img/opt/chandler-aerial.webp",
-    "fallback": "img/opt/chandler-aerial.jpg",
-    "keepPng": false
-  },
-  {
-    "src": "img/scottsdale-horse-fountain.jpg",
-    "base": "scottsdale-horse-fountain",
-    "width": 1600,
-    "height": 893,
-    "webp": "img/opt/scottsdale-horse-fountain.webp",
-    "fallback": "img/opt/scottsdale-horse-fountain.jpg",
-    "keepPng": false
-  },
-  {
-    "src": "img/glendale-capitol.jpg",
-    "base": "glendale-capitol",
-    "width": 1600,
-    "height": 893,
-    "webp": "img/opt/glendale-capitol.webp",
-    "fallback": "img/opt/glendale-capitol.jpg",
-    "keepPng": false
-  },
-  {
-    "src": "img/gilbert-temple.jpg",
-    "base": "gilbert-temple",
-    "width": 1600,
-    "height": 893,
-    "webp": "img/opt/gilbert-temple.webp",
-    "fallback": "img/opt/gilbert-temple.jpg",
-    "keepPng": false
-  },
-  {
-    "src": "img/tempe-mill-bridge.jpg",
-    "base": "tempe-mill-bridge",
-    "width": 1600,
-    "height": 893,
-    "webp": "img/opt/tempe-mill-bridge.webp",
-    "fallback": "img/opt/tempe-mill-bridge.jpg",
-    "keepPng": false
-  },
-  {
-    "src": "img/blog-generated/weekly-insurance-update-2026-10-11/story-1.jpg",
-    "base": "story-1",
-    "width": 1024,
-    "height": 682,
-    "webp": "img/opt/blog-generated/weekly-insurance-update-2026-10-11/story-1.webp",
-    "fallback": "img/opt/blog-generated/weekly-insurance-update-2026-10-11/story-1.jpg",
-    "keepPng": false
-  },
-  {
-    "src": "img/blog-generated/weekly-insurance-update-2026-10-11/story-2.jpg",
-    "base": "story-2",
-    "width": 1024,
-    "height": 682,
-    "webp": "img/opt/blog-generated/weekly-insurance-update-2026-10-11/story-2.webp",
-    "fallback": "img/opt/blog-generated/weekly-insurance-update-2026-10-11/story-2.jpg",
-    "keepPng": false
-  },
-  {
-    "src": "img/blog-generated/weekly-insurance-update-2026-10-11/thumb.jpg",
-    "base": "thumb",
-    "width": 819,
-    "height": 545,
-    "webp": "img/opt/blog-generated/weekly-insurance-update-2026-10-11/thumb.webp",
-    "fallback": "img/opt/blog-generated/weekly-insurance-update-2026-10-11/thumb.jpg",
-    "keepPng": false
-  },
-  {
-    "src": "img/blog-generated/weekly-insurance-update-2026-10-11/hero.jpg",
-    "base": "hero",
-    "width": 864,
-    "height": 1152,
-    "webp": "img/opt/blog-generated/weekly-insurance-update-2026-10-11/hero.webp",
-    "fallback": "img/opt/blog-generated/weekly-insurance-update-2026-10-11/hero.jpg",
-    "keepPng": false
-  },
-  {
-    "src": "img/blog-generated/weekly-insurance-update-2026-10-11/story-3.jpg",
-    "base": "story-3",
-    "width": 1024,
-    "height": 682,
-    "webp": "img/opt/blog-generated/weekly-insurance-update-2026-10-11/story-3.webp",
-    "fallback": "img/opt/blog-generated/weekly-insurance-update-2026-10-11/story-3.jpg",
-    "keepPng": false
-  },
-  {
-    "src": "img/albuquerque-balloon-fiesta.jpg",
-    "base": "albuquerque-balloon-fiesta",
-    "width": 836,
-    "height": 477,
-    "webp": "img/opt/albuquerque-balloon-fiesta.webp",
-    "fallback": "img/opt/albuquerque-balloon-fiesta.jpg",
-    "keepPng": false
-  },
-  {
-    "src": "img/las-cruces-organ-mountains-hero.jpg",
-    "base": "las-cruces-organ-mountains-hero",
-    "width": 1024,
-    "height": 548,
-    "webp": "img/opt/las-cruces-organ-mountains-hero.webp",
-    "fallback": "img/opt/las-cruces-organ-mountains-hero.jpg",
-    "keepPng": false
-  },
-  {
-    "src": "img/rio-rancho-rio-grande.jpg",
-    "base": "rio-rancho-rio-grande",
-    "width": 774,
-    "height": 938,
-    "webp": "img/opt/rio-rancho-rio-grande.webp",
-    "fallback": "img/opt/rio-rancho-rio-grande.jpg",
-    "keepPng": false
-  },
-  {
-    "src": "img/santa-fe-skyline.jpg",
-    "base": "santa-fe-skyline",
-    "width": 1024,
-    "height": 590,
-    "webp": "img/opt/santa-fe-skyline.webp",
-    "fallback": "img/opt/santa-fe-skyline.jpg",
+    "height": 427,
+    "webp": "img/opt/west-palm-beach-skyline.webp",
+    "fallback": "img/opt/west-palm-beach-skyline.jpg",
     "keepPng": false
   }
 ]

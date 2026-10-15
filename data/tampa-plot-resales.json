@@ -1,0 +1,85 @@
+{
+  "city": "tampa",
+  "checked": "2026-10-15",
+  "checkedLabelEs": "15 oct. 2026",
+  "checkedLabelEn": "15 Oct 2026",
+  "noteEs": "Anuncios de particulares. No son precios de Mejor Vida Seguros ni la lista oficial del cementerio. La oficina debe transferir la escritura. Revise si el anuncio sigue activo.",
+  "noteEn": "Private-party ads. These are not Mejor Vida Insurance prices or the cemetery’s official list. The office must transfer the deed. Check that the listing is still active.",
+  "boards": [
+    {
+      "id": "grave-solutions-city",
+      "name": "Grave Solutions",
+      "url": "https://www.gravesolutions.com/search?SiteState=FL&SiteCity=Tampa",
+      "labelEs": "Tablero en vivo · Tampa",
+      "labelEn": "Live board · Tampa"
+    },
+    {
+      "id": "grave-solutions",
+      "name": "Grave Solutions",
+      "url": "https://www.gravesolutions.com/for-sale/cemetery-properties/florida",
+      "labelEs": "Tablero en vivo · Florida",
+      "labelEn": "Live board · Florida"
+    }
+  ],
+  "cemeterySignals": [
+    {
+      "cemetery": "Hillsborough Memorial Gardens",
+      "citedListLow": 8000,
+      "citedListHigh": 8000,
+      "typical": 8000,
+      "phone": "",
+      "noteEs": "Anuncio citó ~$8,000 por espacio en lista; dos espacios a $3,700 de reventa.",
+      "noteEn": "Ad cited about $8,000 per space on the list; two spaces at $3,700 resale."
+    },
+    {
+      "cemetery": "Myrtle Hill Memorial Park",
+      "citedListLow": 18000,
+      "citedListHigh": 18000,
+      "typical": 3000,
+      "phone": "(800) 343-4464",
+      "noteEs": "Reventa ~$3,000 por espacio; dos juntos hasta ~$15,000 (lista citada ~$18,000 cada uno).",
+      "noteEn": "Resale about $3,000 per space; two together up to about $15,000 (cited list about $18,000 each)."
+    }
+  ],
+  "listings": [
+    {
+      "id": "gs-hillsborough-3700",
+      "status": "listed",
+      "cemetery": "Hillsborough Memorial Gardens",
+      "spaces": 2,
+      "asking": 3700,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": 8000,
+      "url": "https://www.gravesolutions.com/search?SiteState=FL&SiteCity=Brandon",
+      "titleEs": "Grave Solutions · Christus (Brandon)",
+      "titleEn": "Grave Solutions · Christus (Brandon)"
+    },
+    {
+      "id": "gs-myrtle-hill-3000",
+      "status": "listed",
+      "cemetery": "Myrtle Hill Memorial Park",
+      "spaces": 1,
+      "asking": 3000,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": null,
+      "url": "https://www.gravesolutions.com/search?SiteState=FL&SiteCity=Tampa",
+      "titleEs": "Grave Solutions · por espacio",
+      "titleEn": "Grave Solutions · per space"
+    },
+    {
+      "id": "gs-myrtle-hill-15000",
+      "status": "listed",
+      "cemetery": "Myrtle Hill Memorial Park",
+      "spaces": 2,
+      "asking": 15000,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": 18000,
+      "url": "https://www.gravesolutions.com/search?SiteState=FL&SiteCity=Tampa",
+      "titleEs": "Grave Solutions · dos espacios",
+      "titleEn": "Grave Solutions · two spaces"
+    }
+  ]
+}

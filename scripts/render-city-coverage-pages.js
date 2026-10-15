@@ -29,6 +29,7 @@ function loadCityGuides(rel) {
 const newMexicoCities = loadCityGuides("./city-guides/nm-cities");
 const southCarolinaCities = loadCityGuides("./city-guides/sc-cities");
 const southDakotaCities = loadCityGuides("./city-guides/sd-cities");
+const floridaCities = loadCityGuides("./city-guides/fl-cities");
 
 const ROOT = path.join(__dirname, "..");
 const HEADER_ES = path.join(ROOT, "includes/site-header-inner.html");
@@ -108,6 +109,14 @@ const LICENSE = {
       "https://external-lookup-web.prod.naic.org/lookup?jurisdiction=AZ&searchType=Licensee&entityType=IND&npn=21695431",
     verifyLabel: { es: "Verificar en Arizona (NAIC)", en: "Verify in Arizona (NAIC)" },
   },
+  FL: {
+    typeEs: "Productora no residente",
+    typeEn: "Non-resident producer",
+    number: "G389071",
+    code: "FL",
+    verifyUrl: "https://licenseesearch.fldfs.com/",
+    verifyLabel: { es: "Verificar en Florida (DFS)", en: "Verify in Florida (DFS)" },
+  },
 };
 
 const LICENSE_VERIFY_HINT = {
@@ -127,6 +136,12 @@ const LICENSE_VERIFY_HINT = {
     es:
       "En la búsqueda pública de la NAIC (no License Manager), jurisdicción Arizona · tipo Licensee · Individual. Use NPN 21695431 o apellido Braunsroth — no llene nombre, NPN y número de licencia a la vez.",
   },
+  FL: {
+    en:
+      "On Florida DFS Licensee Search, enter license number G389071 or NPN 21695431 (or last name Braunsroth).",
+    es:
+      "En la búsqueda de Florida DFS, ingrese el número de licencia G389071 o el NPN 21695431 (o el apellido Braunsroth).",
+  },
 };
 
 const CITIES = [
@@ -142,6 +157,7 @@ const CITIES = [
   ...southDakotaCities,
   ...californiaCities,
   ...arizonaCities,
+  ...floridaCities,
 ];
 
 function esc(s) {
@@ -368,7 +384,9 @@ function faqItems(lang, city) {
         ).toLowerCase()}, NPN #21695431. ${
           city.stateCode === "OH"
             ? "Puede ver la licencia de Ohio y verificarla en el Departamento de Seguros de Ohio."
-            : `Puede ver la licencia de ${city.stateNameEs} y verificarla en la NAIC.`
+            : city.stateCode === "FL"
+              ? "Puede ver la licencia de Florida (#G389071) y verificarla en Florida DFS Licensee Search."
+              : `Puede ver la licencia de ${city.stateNameEs} y verificarla en la NAIC.`
         }`,
       },
       {
@@ -399,15 +417,17 @@ function faqItems(lang, city) {
       ).toLowerCase()}, NPN #21695431. ${
         city.stateCode === "OH"
           ? "You can view the Ohio license and verify it with the Ohio Department of Insurance."
-          : `You can view the ${city.stateNameEn} license and verify it on the NAIC.`
+          : city.stateCode === "FL"
+            ? "You can view the Florida license (#G389071) and verify it on Florida DFS Licensee Search."
+            : `You can view the ${city.stateNameEn} license and verify it on the NAIC.`
       }`,
-    },
-    {
-      q: "Do you work in Spanish?",
-      a: "Yes. We work in Spanish. Official quotes are by phone.",
-    },
-  ];
-}
+      },
+      {
+        q: "Do you work in Spanish?",
+        a: "Yes. We work in Spanish. Official quotes are by phone.",
+      },
+    ];
+  }
 
 function faqHtml(lang, city) {
   return faqItems(lang, city)

@@ -263,10 +263,28 @@ const LICENSE = {
   VA: {
     typeEs: "Productora no residente",
     typeEn: "Non-resident producer",
-    number: "21695431",
+    number: "1618111",
+    pdf: "julie-license-va.pdf?v=20261015",
     verifyUrl:
       "https://www.scc.virginia.gov/boi/consumerinquiry/search.aspx?searchType=agent",
     verifyLabel: { es: "Verificar en Virginia (SCC)", en: "Verify in Virginia (SCC)" },
+  },
+  FL: {
+    typeEs: "Productora no residente",
+    typeEn: "Non-resident producer",
+    number: "G389071",
+    pdf: "julie-license-fl.pdf?v=20261015",
+    verifyUrl: "https://licenseesearch.fldfs.com/",
+    verifyLabel: { es: "Verificar en Florida (DFS)", en: "Verify in Florida (DFS)" },
+  },
+  NC: {
+    typeEs: "Productora no residente",
+    typeEn: "Non-resident producer",
+    number: "21695431",
+    pdf: "julie-license-nc.pdf?v=20261015-biz",
+    verifyUrl:
+      "https://external-lookup-web.prod.naic.org/lookup?jurisdiction=NC&searchType=Licensee&entityType=IND&npn=21695431",
+    verifyLabel: { es: "Verificar en Carolina del Norte (NAIC)", en: "Verify in North Carolina (NAIC)" },
   },
 };
 
@@ -299,8 +317,18 @@ const LICENSE_VERIFY_HINT = {
     es: "En DIFS de Michigan, busque Julie Braunsroth o el número de licencia 1507864.",
   },
   VA: {
-    en: "On Virginia SCC agent search, look up Julie Braunsroth or NPN 21695431.",
-    es: "En la búsqueda de agentes de Virginia (SCC), busque Julie Braunsroth o NPN 21695431.",
+    en: "On Virginia SCC agent search, look up Julie Braunsroth, license #1618111, or NPN 21695431.",
+    es: "En la búsqueda de agentes de Virginia (SCC), busque Julie Braunsroth, licencia #1618111 o NPN 21695431.",
+  },
+  FL: {
+    en: "On Florida DFS Licensee Search, enter license number G389071 or NPN 21695431 (or last name Braunsroth).",
+    es: "En la búsqueda de Florida DFS, ingrese el número de licencia G389071 o el NPN 21695431 (o el apellido Braunsroth).",
+  },
+  NC: {
+    en:
+      "On NAIC’s public lookup (not License Manager), jurisdiction North Carolina · Search type Licensee · Individual. Use NPN 21695431 or last name Braunsroth — do not fill name, NPN, and license number all at once.",
+    es:
+      "En la búsqueda pública de la NAIC (no License Manager), jurisdicción Carolina del Norte · tipo Licensee · Individual. Use NPN 21695431 o apellido Braunsroth — no llene nombre, NPN y número de licencia a la vez.",
   },
 };
 
@@ -318,12 +346,15 @@ const SLUGS = {
   AZ: "arizona",
   MI: "michigan",
   VA: "virginia",
+  FL: "florida",
+  // NC paused (mailing-address privacy on certificate) — keep LICENSE/verify data; do not add to SLUGS until the public PDF is cleared.
 };
 
 const NAME_ES = {
   NM: "Nuevo México",
   SC: "Carolina del Sur",
   SD: "Dakota del Sur",
+  NC: "Carolina del Norte",
 };
 
 function stateName(code, lang) {
@@ -339,6 +370,8 @@ function heroVersion(slug) {
   if (slug === "arizona") return "map-seal-v5";
   if (slug === "michigan") return "map-seal-v3";
   if (slug === "virginia") return "map-seal-v4";
+  if (slug === "florida") return "map-seal-v1";
+  if (slug === "north-carolina") return "map-seal-v1";
   return "map-seal-v11";
 }
 
@@ -1511,6 +1544,44 @@ ${costDefModal(lang)}`;
 }
 
 function citiesSection(code, lang) {
+  if (code === "FL") {
+    if (lang === "es") {
+      return `<section class="py-5 bg-light border-bottom" id="ciudades">
+  <div class="container" style="max-width:60rem;">
+    <h2 class="h4 fw-bold mb-3" style="color:#1a365d;">Ciudades en Florida</h2>
+    <p class="text-body-secondary mb-3">Guías locales de seguro de gastos finales y de entierro para las ciudades más grandes del estado.</p>
+    <ul class="mb-0">
+      <li class="mb-2"><a href="florida/jacksonville.html">Jacksonville</a> — seguro de gastos finales y de entierro, funerarias y lotes.</li>
+      <li class="mb-2"><a href="florida/miami.html">Miami</a> — seguro de gastos finales y de entierro, funerarias y lotes.</li>
+      <li class="mb-2"><a href="florida/tampa.html">Tampa</a> — seguro de gastos finales y de entierro, funerarias y lotes.</li>
+      <li class="mb-2"><a href="florida/orlando.html">Orlando</a> — seguro de gastos finales y de entierro, funerarias y lotes.</li>
+      <li class="mb-2"><a href="florida/st-petersburg.html">St. Petersburg</a> — seguro de gastos finales y de entierro, funerarias y lotes.</li>
+      <li class="mb-2"><a href="florida/fort-lauderdale.html">Fort Lauderdale</a> — seguro de gastos finales y de entierro, funerarias y lotes.</li>
+      <li class="mb-2"><a href="florida/tallahassee.html">Tallahassee</a> — seguro de gastos finales y de entierro, funerarias y lotes.</li>
+      <li class="mb-2"><a href="florida/west-palm-beach.html">West Palm Beach</a> — seguro de gastos finales y de entierro, funerarias y lotes.</li>
+    </ul>
+  </div>
+</section>
+`;
+    }
+    return `<section class="py-5 bg-light border-bottom" id="cities">
+  <div class="container" style="max-width:60rem;">
+    <h2 class="h4 fw-bold mb-3" style="color:#1a365d;">Cities in Florida</h2>
+    <p class="text-body-secondary mb-3">Local final expense and burial insurance guides for Florida’s largest cities.</p>
+    <ul class="mb-0">
+      <li class="mb-2"><a href="florida/jacksonville.html">Jacksonville</a> — final expense and burial insurance, funeral homes, and plots.</li>
+      <li class="mb-2"><a href="florida/miami.html">Miami</a> — final expense and burial insurance, funeral homes, and plots.</li>
+      <li class="mb-2"><a href="florida/tampa.html">Tampa</a> — final expense and burial insurance, funeral homes, and plots.</li>
+      <li class="mb-2"><a href="florida/orlando.html">Orlando</a> — final expense and burial insurance, funeral homes, and plots.</li>
+      <li class="mb-2"><a href="florida/st-petersburg.html">St. Petersburg</a> — final expense and burial insurance, funeral homes, and plots.</li>
+      <li class="mb-2"><a href="florida/fort-lauderdale.html">Fort Lauderdale</a> — final expense and burial insurance, funeral homes, and plots.</li>
+      <li class="mb-2"><a href="florida/tallahassee.html">Tallahassee</a> — final expense and burial insurance, funeral homes, and plots.</li>
+      <li class="mb-2"><a href="florida/west-palm-beach.html">West Palm Beach</a> — final expense and burial insurance, funeral homes, and plots.</li>
+    </ul>
+  </div>
+</section>
+`;
+  }
   if (code === "AZ") {
     if (lang === "es") {
       return `<section class="py-5 bg-light border-bottom" id="ciudades">

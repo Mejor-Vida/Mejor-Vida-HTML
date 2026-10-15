@@ -150,6 +150,28 @@
       fullCremation: 6128,
       directCremation: 2515,
     },
+    FL: {
+      code: "FL",
+      slug: "florida",
+      nameEn: "Florida",
+      nameEs: "Florida",
+      sourceUrl: "https://www.funeralocity.com/average-funeral-price/fl",
+      fullBurial: 8399,
+      immediateBurial: 5252,
+      fullCremation: 5971,
+      directCremation: 1708,
+    },
+    NC: {
+      code: "NC",
+      slug: "north-carolina",
+      nameEn: "North Carolina",
+      nameEs: "Carolina del Norte",
+      sourceUrl: "https://www.funeralocity.com/average-funeral-price/nc",
+      fullBurial: 8136,
+      immediateBurial: 4840,
+      fullCremation: 5888,
+      directCremation: 1933,
+    },
   };
 
   var LICENSE = {
@@ -227,7 +249,20 @@
     VA: {
       typeEn: "Non-resident producer",
       typeEs: "Productora no residente",
+      number: "1618111",
+      pdf: "julie-license-va.pdf?v=20261015",
+    },
+    FL: {
+      typeEn: "Non-resident producer",
+      typeEs: "Productora no residente",
+      number: "G389071",
+      pdf: "julie-license-fl.pdf?v=20261015",
+    },
+    NC: {
+      typeEn: "Non-resident producer",
+      typeEs: "Productora no residente",
       number: "21695431",
+      pdf: "julie-license-nc.pdf?v=20261015-biz",
     },
   };
 

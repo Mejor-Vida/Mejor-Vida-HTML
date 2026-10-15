@@ -93,4 +93,13 @@ module.exports = {
     detailEs:
       "Pida una copia certificada del certificado de defunción de California en CDPH Vital Records. La tarifa vigente está en esa página. La funeraria suele presentar el certificado.",
   },
+  FL: {
+    officeEn: "Florida Department of Health, Bureau of Vital Statistics",
+    officeEs: "Departamento de Salud de Florida, Bureau of Vital Statistics",
+    url: "https://www.floridahealth.gov/certificates-records/death-certificates/",
+    detailEn:
+      "Order a certified Florida death certificate from the state Bureau of Vital Statistics or a county health department. State mail orders include a $5 search fee for the first certified copy and $4 for each additional copy; county fees vary. Online orders through VitalChek add vendor fees. Phone 904-359-6900. The funeral home usually files the certificate.",
+    detailEs:
+      "Pida una copia certificada del certificado de defunción de Florida en la oficina estatal o en el departamento de salud del condado. Por correo estatal, la búsqueda cuesta $5 e incluye la primera copia certificada; cada copia adicional cuesta $4; las tarifas del condado varían. Pedidos en línea por VitalChek agregan cargos del proveedor. Teléfono 904-359-6900. La funeraria suele presentar el certificado.",
+  },
 };

@@ -366,6 +366,14 @@
         "Max": 5480,
         "Rank": 15
       }
+    },
+    "FL": {
+      "name": "Florida",
+      "sourceUrl": "https://www.funeralocity.com/average-funeral-price/fl",
+      "fullBurial": 8399,
+      "immediateBurial": 5252,
+      "fullCremation": 5971,
+      "directCremation": 1708
     }
   }
 }

@@ -1,0 +1,98 @@
+{
+  "city": "orlando",
+  "checked": "2026-10-15",
+  "checkedLabelEs": "15 oct. 2026",
+  "checkedLabelEn": "15 Oct 2026",
+  "noteEs": "Anuncios de particulares. No son precios de Mejor Vida Seguros ni la lista oficial del cementerio. La oficina debe transferir la escritura. Revise si el anuncio sigue activo.",
+  "noteEn": "Private-party ads. These are not Mejor Vida Insurance prices or the cemetery’s official list. The office must transfer the deed. Check that the listing is still active.",
+  "boards": [
+    {
+      "id": "grave-solutions-city",
+      "name": "Grave Solutions",
+      "url": "https://www.gravesolutions.com/search?SiteState=FL&SiteCity=Orlando",
+      "labelEs": "Tablero en vivo · Orlando",
+      "labelEn": "Live board · Orlando"
+    },
+    {
+      "id": "grave-solutions",
+      "name": "Grave Solutions",
+      "url": "https://www.gravesolutions.com/for-sale/cemetery-properties/florida",
+      "labelEs": "Tablero en vivo · Florida",
+      "labelEn": "Live board · Florida"
+    }
+  ],
+  "cemeterySignals": [
+    {
+      "cemetery": "Chapel Hill Cemetery",
+      "citedListLow": null,
+      "citedListHigh": null,
+      "typical": 6000,
+      "phone": "",
+      "noteEs": "Pares desde ~$4,800; dos lotes con bóvedas $12,000.",
+      "noteEn": "Pairs from about $4,800; two lots with vaults $12,000."
+    },
+    {
+      "cemetery": "Highland Memory Gardens",
+      "citedListLow": 4900,
+      "citedListHigh": 4900,
+      "typical": 5500,
+      "phone": "",
+      "noteEs": "Paquetes de dos espacios ~$5,500; anuncios citan ~$4,900 en lista por lote.",
+      "noteEn": "Two-space packages about $5,500; ads cite about $4,900 on the list per lot."
+    }
+  ],
+  "listings": [
+    {
+      "id": "gs-chapel-hill-4800",
+      "status": "listed",
+      "cemetery": "Chapel Hill Cemetery",
+      "spaces": 2,
+      "asking": 4800,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": null,
+      "url": "https://www.gravesolutions.com/search?SiteState=FL&SiteCity=Orlando",
+      "titleEs": "Grave Solutions · Garden of Love",
+      "titleEn": "Grave Solutions · Garden of Love"
+    },
+    {
+      "id": "gs-chapel-hill-12000",
+      "status": "listed",
+      "cemetery": "Chapel Hill Cemetery",
+      "spaces": 2,
+      "asking": 12000,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": null,
+      "url": "https://www.gravesolutions.com/search?SiteState=FL&SiteCity=Orlando",
+      "titleEs": "Grave Solutions · dos lotes con bóvedas",
+      "titleEn": "Grave Solutions · two lots with vaults"
+    },
+    {
+      "id": "gs-highland-5500",
+      "status": "listed",
+      "cemetery": "Highland Memory Gardens",
+      "spaces": 2,
+      "asking": 5500,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": null,
+      "url": "https://www.gravesolutions.com/search?SiteState=FL&SiteCity=Apopka",
+      "titleEs": "Grave Solutions · Garden of Peace",
+      "titleEn": "Grave Solutions · Garden of Peace"
+    },
+    {
+      "id": "gs-woodlawn-6250",
+      "status": "listed",
+      "cemetery": "Woodlawn Memorial Park",
+      "spaces": 1,
+      "asking": 6250,
+      "obo": false,
+      "transferFee": null,
+      "citedListEach": null,
+      "url": "https://www.gravesolutions.com/search?SiteState=FL&SiteCity=Orlando",
+      "titleEs": "Grave Solutions · un espacio",
+      "titleEn": "Grave Solutions · one space"
+    }
+  ]
+}
