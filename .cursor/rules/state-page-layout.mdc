@@ -17,8 +17,8 @@ Do not invent a denser hero, put package totals above the charts, widen the cost
 3. **Funeral / final expense costs** — one H2 with **four expense buckets** (see below)
 4. **Carriers** Mejor Vida can compare in that state
 5. **How final expense works** (short bullets)
-6. **Navy quote band**
-7. **Other state / city links** when present
+6. **Quote band** — use `.sc-city-quote-band` (lighter navy gradient + gold bottom edge), **not** the same solid `#1a365d` as the site footer
+7. **City links** when present (`bg-light`); if the state has no city guides yet, still emit a **white spacer** section after the quote band so the CTA never sits flush against the dark footer
 
 ## Hero (locked)
 

@@ -1888,7 +1888,12 @@ function citiesSection(code, lang) {
 </section>
 `;
   }
-  if (code !== "NE") return "";
+  if (code !== "NE") {
+    // White gap so the quote band never sits flush against the dark footer.
+    const id = lang === "es" ? "ciudades" : "cities";
+    return `<section class="py-5 bg-white" id="${id}" aria-hidden="true"></section>
+`;
+  }
   if (lang === "es") {
     return `<section class="py-5 bg-light border-bottom" id="ciudades">
   <div class="container" style="max-width:60rem;">
@@ -1992,13 +1997,13 @@ ${expenseCostSections(code, "es", prefix)}
   </div>
 </section>
 
-<section class="py-5 text-white" style="background:#1a365d;">
-  <div class="container text-center" style="max-width:60rem;">
-    <h2 class="h3 fw-bold mb-3">Cotice gastos finales en ${esc(name)}</h2>
-    <p class="mb-4 text-white-50">Cotización gratuita. Mejor Vida Seguros compara opciones según su edad, salud y presupuesto.</p>
+<section class="py-5 text-white sc-city-quote-band" aria-labelledby="sc-state-quote-heading-es">
+  <div class="container text-center sc-city-quote-band__inner">
+    <h2 class="h3 fw-bold mb-3" id="sc-state-quote-heading-es">Cotice gastos finales en ${esc(name)}</h2>
+    <p class="mb-4 sc-city-quote-band__lead">Cotización gratuita. Mejor Vida Seguros compara opciones según su edad, salud y presupuesto.</p>
     <div class="d-flex flex-column flex-sm-row justify-content-center gap-2">
       <a class="btn btn-primary-gold px-4 py-3 rounded fw-bold" href="${prefix}quote.html">Cotización gratuita</a>
-      <a class="btn px-4 py-3 rounded fw-bold text-white" style="background:#0b3a7a;" href="/schedule-julie.html">Agendar una llamada</a>
+      <a class="btn px-4 py-3 rounded fw-bold sc-city-quote-band__btn-secondary" href="/schedule-julie.html">Agendar una llamada</a>
     </div>
   </div>
 </section>
@@ -2093,13 +2098,13 @@ ${expenseCostSections(code, "en", en)}
   </div>
 </section>
 
-<section class="py-5 text-white" style="background:#1a365d;">
-  <div class="container text-center" style="max-width:60rem;">
-    <h2 class="h3 fw-bold mb-3">Get a final expense quote in ${esc(name)}</h2>
-    <p class="mb-4 text-white-50">Free quote. Mejor Vida Insurance compares options based on your age, health, and budget.</p>
+<section class="py-5 text-white sc-city-quote-band" aria-labelledby="sc-state-quote-heading-en">
+  <div class="container text-center sc-city-quote-band__inner">
+    <h2 class="h3 fw-bold mb-3" id="sc-state-quote-heading-en">Get a final expense quote in ${esc(name)}</h2>
+    <p class="mb-4 sc-city-quote-band__lead">Free quote. Mejor Vida Insurance compares options based on your age, health, and budget.</p>
     <div class="d-flex flex-column flex-sm-row justify-content-center gap-2">
       <a class="btn btn-primary-gold px-4 py-3 rounded fw-bold" href="${en}quote.html">Free quote</a>
-      <a class="btn px-4 py-3 rounded fw-bold text-white" style="background:#0b3a7a;" href="/en/schedule-julie.html">Schedule a call</a>
+      <a class="btn px-4 py-3 rounded fw-bold sc-city-quote-band__btn-secondary" href="/en/schedule-julie.html">Schedule a call</a>
     </div>
   </div>
 </section>

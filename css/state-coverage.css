@@ -2084,7 +2084,7 @@
   color: #4a5568;
 }
 
-/* City guide — quote band above footer (not the same block as site footer #1a365d) */
+/* State + city guide — quote band above footer (not the same solid #1a365d as site footer) */
 .sc-city-quote-band {
   background: linear-gradient(168deg, #2563a8 0%, #1a4d7c 38%, #153a5c 100%);
   color: #fff;
