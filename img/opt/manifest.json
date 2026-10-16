@@ -54,6 +54,15 @@
     "keepPng": false
   },
   {
+    "src": "img/state-heroes/north-carolina-hero.png",
+    "base": "north-carolina-hero",
+    "width": 1400,
+    "height": 900,
+    "webp": "img/opt/north-carolina-hero.webp",
+    "fallback": "img/opt/north-carolina-hero.jpg",
+    "keepPng": false
+  },
+  {
     "src": "img/business-man.png",
     "base": "business-man",
     "width": 681,
@@ -951,6 +960,78 @@
     "height": 893,
     "webp": "img/opt/tempe-mill-bridge.webp",
     "fallback": "img/opt/tempe-mill-bridge.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/jacksonville-skyline.jpg",
+    "base": "jacksonville-skyline",
+    "width": 1440,
+    "height": 900,
+    "webp": "img/opt/jacksonville-skyline.webp",
+    "fallback": "img/opt/jacksonville-skyline.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/miami-skyline.jpg",
+    "base": "miami-skyline",
+    "width": 800,
+    "height": 482,
+    "webp": "img/opt/miami-skyline.webp",
+    "fallback": "img/opt/miami-skyline.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/tampa-skyline.jpg",
+    "base": "tampa-skyline",
+    "width": 1200,
+    "height": 900,
+    "webp": "img/opt/tampa-skyline.webp",
+    "fallback": "img/opt/tampa-skyline.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/orlando-skyline.jpg",
+    "base": "orlando-skyline",
+    "width": 1181,
+    "height": 900,
+    "webp": "img/opt/orlando-skyline.webp",
+    "fallback": "img/opt/orlando-skyline.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/st-petersburg-skyline.jpg",
+    "base": "st-petersburg-skyline",
+    "width": 1600,
+    "height": 899,
+    "webp": "img/opt/st-petersburg-skyline.webp",
+    "fallback": "img/opt/st-petersburg-skyline.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/fort-lauderdale-skyline.jpg",
+    "base": "fort-lauderdale-skyline",
+    "width": 1200,
+    "height": 900,
+    "webp": "img/opt/fort-lauderdale-skyline.webp",
+    "fallback": "img/opt/fort-lauderdale-skyline.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/tallahassee-capitol.jpg",
+    "base": "tallahassee-capitol",
+    "width": 1150,
+    "height": 900,
+    "webp": "img/opt/tallahassee-capitol.webp",
+    "fallback": "img/opt/tallahassee-capitol.jpg",
+    "keepPng": false
+  },
+  {
+    "src": "img/west-palm-beach-skyline.jpg",
+    "base": "west-palm-beach-skyline",
+    "width": 1600,
+    "height": 427,
+    "webp": "img/opt/west-palm-beach-skyline.webp",
+    "fallback": "img/opt/west-palm-beach-skyline.jpg",
     "keepPng": false
   },
   {
@@ -3634,77 +3715,5 @@
     "webp": "img/opt/blog-generated/weekly-insurance-update-2026-09-20/hero.webp",
     "fallback": "img/opt/blog-generated/weekly-insurance-update-2026-09-20/hero.png",
     "keepPng": true
-  },
-  {
-    "src": "img/jacksonville-skyline.jpg",
-    "base": "jacksonville-skyline",
-    "width": 1440,
-    "height": 900,
-    "webp": "img/opt/jacksonville-skyline.webp",
-    "fallback": "img/opt/jacksonville-skyline.jpg",
-    "keepPng": false
-  },
-  {
-    "src": "img/miami-skyline.jpg",
-    "base": "miami-skyline",
-    "width": 800,
-    "height": 482,
-    "webp": "img/opt/miami-skyline.webp",
-    "fallback": "img/opt/miami-skyline.jpg",
-    "keepPng": false
-  },
-  {
-    "src": "img/tampa-skyline.jpg",
-    "base": "tampa-skyline",
-    "width": 1200,
-    "height": 900,
-    "webp": "img/opt/tampa-skyline.webp",
-    "fallback": "img/opt/tampa-skyline.jpg",
-    "keepPng": false
-  },
-  {
-    "src": "img/orlando-skyline.jpg",
-    "base": "orlando-skyline",
-    "width": 1181,
-    "height": 900,
-    "webp": "img/opt/orlando-skyline.webp",
-    "fallback": "img/opt/orlando-skyline.jpg",
-    "keepPng": false
-  },
-  {
-    "src": "img/st-petersburg-skyline.jpg",
-    "base": "st-petersburg-skyline",
-    "width": 1600,
-    "height": 899,
-    "webp": "img/opt/st-petersburg-skyline.webp",
-    "fallback": "img/opt/st-petersburg-skyline.jpg",
-    "keepPng": false
-  },
-  {
-    "src": "img/fort-lauderdale-skyline.jpg",
-    "base": "fort-lauderdale-skyline",
-    "width": 1200,
-    "height": 900,
-    "webp": "img/opt/fort-lauderdale-skyline.webp",
-    "fallback": "img/opt/fort-lauderdale-skyline.jpg",
-    "keepPng": false
-  },
-  {
-    "src": "img/tallahassee-capitol.jpg",
-    "base": "tallahassee-capitol",
-    "width": 1150,
-    "height": 900,
-    "webp": "img/opt/tallahassee-capitol.webp",
-    "fallback": "img/opt/tallahassee-capitol.jpg",
-    "keepPng": false
-  },
-  {
-    "src": "img/west-palm-beach-skyline.jpg",
-    "base": "west-palm-beach-skyline",
-    "width": 1600,
-    "height": 427,
-    "webp": "img/opt/west-palm-beach-skyline.webp",
-    "fallback": "img/opt/west-palm-beach-skyline.jpg",
-    "keepPng": false
   }
 ]

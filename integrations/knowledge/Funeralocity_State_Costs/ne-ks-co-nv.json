@@ -227,6 +227,34 @@
         "Rank": 37
       }
     },
+    "NC": {
+      "name": "North Carolina",
+      "sourceUrl": "https://www.funeralocity.com/average-funeral-price/nc",
+      "fullBurial": {
+        "Average": 8136,
+        "Min": 4850,
+        "Max": 14155,
+        "Rank": 37
+      },
+      "immediateBurial": {
+        "Average": 4840,
+        "Min": 2850,
+        "Max": 9890,
+        "Rank": 39
+      },
+      "fullCremation": {
+        "Average": 5888,
+        "Min": 2685,
+        "Max": 11210,
+        "Rank": 37
+      },
+      "directCremation": {
+        "Average": 1933,
+        "Min": 500,
+        "Max": 4900,
+        "Rank": 38
+      }
+    },
     "OH": {
       "name": "Ohio",
       "sourceUrl": "https://www.funeralocity.com/average-funeral-price/oh",

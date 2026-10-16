@@ -155,6 +155,7 @@ const STATIC_PAGES = [
   { loc: "/estados/michigan.html", priority: "0.84" },
   { loc: "/estados/virginia.html", priority: "0.84" },
   { loc: "/estados/florida.html", priority: "0.84" },
+  { loc: "/estados/north-carolina.html", priority: "0.84" },
   { loc: "/estados/florida/jacksonville.html", priority: "0.86" },
   { loc: "/estados/florida/miami.html", priority: "0.86" },
   { loc: "/estados/florida/tampa.html", priority: "0.86" },

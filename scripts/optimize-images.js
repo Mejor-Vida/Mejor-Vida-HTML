@@ -47,6 +47,13 @@ const JOBS = [
     keepPng: false,
     outBase: "florida-hero",
   },
+  {
+    src: "img/state-heroes/north-carolina-hero.png",
+    maxWidth: 1400,
+    maxHeight: 900,
+    keepPng: false,
+    outBase: "north-carolina-hero",
+  },
   { src: "img/business-man.png", maxWidth: 681, maxHeight: 1024, keepPng: true },
   { src: "img/nav-life-rana.jpg", maxWidth: 1024, maxHeight: 819, outBase: "nav-life-rana" },
   { src: "img/nav-life-tejo.jpg", maxWidth: 1024, maxHeight: 768, outBase: "nav-life-tejo" },

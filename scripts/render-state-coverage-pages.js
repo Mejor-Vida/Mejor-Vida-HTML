@@ -347,7 +347,7 @@ const SLUGS = {
   MI: "michigan",
   VA: "virginia",
   FL: "florida",
-  // NC paused (mailing-address privacy on certificate) — keep LICENSE/verify data; do not add to SLUGS until the public PDF is cleared.
+  NC: "north-carolina",
 };
 
 const NAME_ES = {
