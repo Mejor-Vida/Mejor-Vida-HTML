@@ -123,14 +123,18 @@ const cfg = { supabaseUrl: "https://example.supabase.co", serviceKey: "test-key"
 
   const r1 = await processIntentLead(cfg, {
     phone: "+15550008888",
-    estado: "Topeka KS",
+    estado: "Kansas",
     meta_ad_id: "120299988877766655",
   });
   assert(r1.ok && !r1.intent_lead_duplicate, "first intent lead");
   assert(capiCalls === 1, "capi sent once");
   const c1 = store.contacts.get("+15550008888");
-  assert(c1.estado_response === "Topeka KS", "raw estado preserved");
+  assert(c1.estado_response === "Kansas", "raw estado preserved");
+  assert(c1.us_state === "KS", "normalized state on contacts");
   assert(c1.meta_ad_id === "120299988877766655", "meta ad id set");
+  const ls1 = store.lead_state.get(c1.id);
+  assert(ls1 && ls1.intent_lead_at, "intent_lead_at set");
+  assert(!Object.prototype.hasOwnProperty.call(ls1, "us_state"), "lead_state has no us_state");
 
   const r2 = await processIntentLead(cfg, {
     phone: "+15550008888",
