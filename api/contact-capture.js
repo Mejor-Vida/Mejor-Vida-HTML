@@ -428,18 +428,32 @@ async function handleIntentLead(body, supabaseUrl, supabaseKey, res) {
   });
 
   const cfg = { supabaseUrl, serviceKey: supabaseKey };
-  const result = await processIntentLead(cfg, {
-    phone,
-    estado,
-    estado_response: estado,
-    first_name: cleanManychatNameField(body.first_name || body.firstName || ""),
-    last_name: cleanManychatNameField(body.last_name || body.lastName || ""),
-    whatsapp_id: resolveManyChat(String(body.whatsapp_id || "").trim()) || null,
-    subscriber_id: resolveManyChat(String(body.subscriber_id || body.manychat_id || "").trim()) || null,
-    email: resolveManyChat(String(body.email || "").trim().toLowerCase()) || null,
-    meta_ad_id: resolveManyChat(String(body.meta_ad_id || "").trim()) || null,
-    meta_ctwa_clid: resolveManyChat(String(body.meta_ctwa_clid || "").trim()) || null,
-  });
+  let result;
+  try {
+    result = await processIntentLead(cfg, {
+      phone,
+      estado,
+      estado_response: estado,
+      first_name: cleanManychatNameField(body.first_name || body.firstName || ""),
+      last_name: cleanManychatNameField(body.last_name || body.lastName || ""),
+      whatsapp_id: resolveManyChat(String(body.whatsapp_id || "").trim()) || null,
+      subscriber_id: resolveManyChat(String(body.subscriber_id || body.manychat_id || "").trim()) || null,
+      email: resolveManyChat(String(body.email || "").trim().toLowerCase()) || null,
+      meta_ad_id: resolveManyChat(String(body.meta_ad_id || "").trim()) || null,
+      meta_ctwa_clid: resolveManyChat(String(body.meta_ctwa_clid || "").trim()) || null,
+    });
+  } catch (e) {
+    const message = (e && e.message) || String(e);
+    console.error("[contact-capture] intent_lead threw", message);
+    await logIntegrationAudit(supabaseUrl, supabaseKey, {
+      stage: "contact_capture_intent_lead_complete",
+      endpoint: "/api/contact-capture",
+      outcome: "error",
+      phone,
+      message,
+    });
+    return json(res, 500, { success: false, error: "intent_lead failed" });
+  }
 
   await logIntegrationAudit(supabaseUrl, supabaseKey, {
     stage: "contact_capture_intent_lead_complete",
